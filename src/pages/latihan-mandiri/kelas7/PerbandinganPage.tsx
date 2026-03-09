@@ -5,10 +5,10 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO",
-  "PERBANDINGAN SENILAI DAN BERBALIK NILAI",
-  "PERBANDINGAN CAMPURAN",
-  "SKALA",
+  { name: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/latihan-mandiri/kelas-7/perbandingan/umum" },
+  { name: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/latihan-mandiri/kelas-7/perbandingan/senilai" },
+  { name: "PERBANDINGAN CAMPURAN", path: "/latihan-mandiri/kelas-7/perbandingan/campuran" },
+  { name: "SKALA", path: "/latihan-mandiri/kelas-7/perbandingan/skala" },
 ];
 
 const PerbandinganPage = () => {
@@ -28,15 +28,15 @@ const PerbandinganPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => playPopSound()}
+              key={subtopic.name}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.name}</span>
             </button>
           ))}
         </div>

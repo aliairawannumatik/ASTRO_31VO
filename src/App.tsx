@@ -37,6 +37,10 @@ import BilanganRasionalK7Page from "./pages/latihan-mandiri/kelas7/BilanganRasio
 import AljabarK7Page from "./pages/latihan-mandiri/kelas7/AljabarPage";
 import PLSVPtLSVK7Page from "./pages/latihan-mandiri/kelas7/PLSVPtLSVPage";
 import PerbandinganK7Page from "./pages/latihan-mandiri/kelas7/PerbandinganPage";
+import PerbandinganUmumK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganUmumPage";
+import PerbandinganSenilaiK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSenilaiPage";
+import PerbandinganCampuranK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganCampuranPage";
+import PerbandinganSkalaK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSkalaPage";
 import AritmetikaSosialK7Page from "./pages/latihan-mandiri/kelas7/AritmetikaSosialPage";
 import GarisDanSudutK7Page from "./pages/latihan-mandiri/kelas7/GarisDanSudutPage";
 import SegitigaSegiempatK7Page from "./pages/latihan-mandiri/kelas7/SegitigaSegiempatPage";
@@ -184,6 +188,10 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-7/aljabar" element={<AljabarK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv" element={<PLSVPtLSVK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/perbandingan" element={<PerbandinganK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/perbandingan/umum" element={<PerbandinganUmumK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/perbandingan/skala" element={<PerbandinganSkalaK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial" element={<AritmetikaSosialK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut" element={<GarisDanSudutK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatK7Page />} />
