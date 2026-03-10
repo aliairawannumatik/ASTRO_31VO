@@ -177,7 +177,7 @@ const KalkulatorScientificPage = () => {
     playPopSound();
     if (expression.length > 0) {
       // Check if we're deleting a function
-      const funcs = ["sin(", "cos(", "tan(", "log₁₀(", "ln(", "√(", "∛(", "asin(", "acos(", "atan(", "sinh(", "cosh(", "tanh(", "asinh(", "acosh(", "atanh(", "abs(", "Exp(", "10^(", "e^("];
+      const funcs = ["sin(", "cos(", "tan(", "log₁₀(", "ln(", "√(", "∛(", "asin(", "acos(", "atan(", "sinh(", "cosh(", "tanh(", "asinh(", "acosh(", "atanh(", "abs(", "Exp(", "10^(", "e^(", "^(", "^(1/"];
       let deleted = false;
       
       for (const func of funcs) {
@@ -315,8 +315,8 @@ const KalkulatorScientificPage = () => {
       if (parts.length === 2) {
         return (
           <div className="inline-flex flex-col items-center justify-center mx-1">
-            <span className="text-lg border-b border-cyan-400/60 px-1 leading-tight">{parts[0]}</span>
-            <span className="text-lg px-1 leading-tight">{parts[1]}</span>
+            <span className="text-2xl border-b border-cyan-400/60 px-1 leading-tight">{parts[0]}</span>
+            <span className="text-2xl px-1 leading-tight">{parts[1]}</span>
           </div>
         );
       }
@@ -403,17 +403,17 @@ const KalkulatorScientificPage = () => {
         </div>
 
         {/* Display */}
-        <div className="mx-2 mb-3 rounded-xl bg-gradient-to-b from-cyan-900/20 to-slate-900/40 border border-cyan-500/20 p-3 shadow-[inset_0_2px_15px_rgba(0,0,0,0.5)]">
+        <div className="mx-2 mb-3 rounded-xl bg-gradient-to-b from-cyan-900/20 to-slate-900/40 border border-cyan-500/20 p-4 shadow-[inset_0_2px_15px_rgba(0,0,0,0.5)]">
           <div 
             ref={displayRef}
-            className="min-h-[80px] flex flex-col justify-end text-right font-mono"
+            className="min-h-[100px] flex flex-col justify-end text-right font-mono"
           >
             {/* Expression */}
-            <div className="text-sm text-cyan-300/70 break-all leading-relaxed mb-1 overflow-x-auto">
+            <div className="text-xl text-cyan-300/90 break-all leading-relaxed mb-2 overflow-x-auto tracking-wide">
               {expression || " "}
             </div>
             {/* Result */}
-            <div className="text-2xl text-white font-semibold flex items-center justify-end gap-1">
+            <div className="text-4xl text-white font-bold flex items-center justify-end gap-1">
               {displayMode === "FRAC" && result.includes("/") ? (
                 <>
                   <span className="text-white/50 mr-1">=</span>
@@ -559,7 +559,7 @@ const KalkulatorScientificPage = () => {
               {shiftMode ? "x³" : "x²"}
             </CalcButton>
             <CalcButton
-              onClick={() => handleInput("^")}
+              onClick={() => shiftMode ? handleInput("^(1/") : handleInput("^(")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
               subLabel={shiftMode ? "" : "ʸ√x"}
               subLabelColor="text-purple-400"
