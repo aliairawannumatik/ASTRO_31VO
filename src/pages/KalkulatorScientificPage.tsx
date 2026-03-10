@@ -34,9 +34,17 @@ const toMathJsExpression = (expr: string, angleMode: AngleMode): string => {
   mathExpr = mathExpr.replace(/π/g, "(pi)");
   mathExpr = mathExpr.replace(/√\(/g, "sqrt(");
   mathExpr = mathExpr.replace(/∛\(/g, "cbrt(");
+  // Convert superscript numbers to ^ notation
+  mathExpr = mathExpr.replace(/²/g, "^2");
+  mathExpr = mathExpr.replace(/³/g, "^3");
+  mathExpr = mathExpr.replace(/⁻¹/g, "^(-1)");
   mathExpr = mathExpr.replace(/\^/g, "^");
   mathExpr = mathExpr.replace(/(\d+)!/g, "factorial($1)");
   mathExpr = mathExpr.replace(/Ans/g, "0"); // Will be replaced with actual answer
+  // Replace log display with mathjs functions
+  mathExpr = mathExpr.replace(/log₁₀\(/g, "log10(");
+  mathExpr = mathExpr.replace(/10\^/g, "10^");
+  mathExpr = mathExpr.replace(/e\^/g, "exp(");
   
   // Handle angle conversions for trig functions
   if (angleMode === "DEG") {
@@ -169,7 +177,7 @@ const KalkulatorScientificPage = () => {
     playPopSound();
     if (expression.length > 0) {
       // Check if we're deleting a function
-      const funcs = ["sin(", "cos(", "tan(", "log(", "ln(", "sqrt(", "asin(", "acos(", "atan(", "sinh(", "cosh(", "tanh(", "abs(", "Exp("];
+      const funcs = ["sin(", "cos(", "tan(", "log₁₀(", "ln(", "√(", "∛(", "asin(", "acos(", "atan(", "sinh(", "cosh(", "tanh(", "asinh(", "acosh(", "atanh(", "abs(", "Exp(", "10^(", "e^("];
       let deleted = false;
       
       for (const func of funcs) {
@@ -193,9 +201,10 @@ const KalkulatorScientificPage = () => {
     setAlphaMode(false);
   }, []);
 
-  const handleFunction = useCallback((func: string) => {
+  const handleFunction = useCallback((func: string, displayFunc?: string) => {
     playPopSound();
-    setExpression(prev => prev + func + "(");
+    const displayText = displayFunc || func;
+    setExpression(prev => prev + displayText + "(");
     setShiftMode(false);
     setAlphaMode(false);
   }, []);
@@ -508,23 +517,23 @@ const KalkulatorScientificPage = () => {
               {shiftMode ? "tan⁻¹" : "tan"}
             </CalcButton>
             <CalcButton
-              onClick={() => handleFunction("log10")}
+              onClick={() => shiftMode ? handleInput("10^(") : handleFunction("log10", "log₁₀")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel="10ˣ"
+              subLabel={shiftMode ? "" : "10ˣ"}
               subLabelColor="text-purple-400"
             >
-              log
+              {shiftMode ? "10ˣ" : "log"}
             </CalcButton>
             <CalcButton
-              onClick={() => handleFunction("log")}
+              onClick={() => shiftMode ? handleInput("e^(") : handleFunction("log", "ln")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel="eˣ"
+              subLabel={shiftMode ? "" : "eˣ"}
               subLabelColor="text-purple-400"
             >
-              ln
+              {shiftMode ? "eˣ" : "ln"}
             </CalcButton>
             <CalcButton
-              onClick={() => handleInput("^(-1)")}
+              onClick={() => handleInput("⁻¹")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
             >
               x⁻¹
@@ -534,42 +543,44 @@ const KalkulatorScientificPage = () => {
           {/* Row 3: More scientific */}
           <div className="grid grid-cols-6 gap-1">
             <CalcButton
-              onClick={() => handleFunction("sqrt")}
+              onClick={() => shiftMode ? handleFunction("cbrt", "∛") : handleFunction("sqrt", "√")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel="∛"
+              subLabel={shiftMode ? "" : "∛"}
               subLabelColor="text-purple-400"
             >
-              √
+              {shiftMode ? "∛" : "√"}
             </CalcButton>
             <CalcButton
-              onClick={() => handleInput("^2")}
+              onClick={() => shiftMode ? handleInput("³") : handleInput("²")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel="x³"
+              subLabel={shiftMode ? "" : "x³"}
               subLabelColor="text-purple-400"
             >
-              x²
+              {shiftMode ? "x³" : "x²"}
             </CalcButton>
             <CalcButton
               onClick={() => handleInput("^")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel="ʸ√x"
+              subLabel={shiftMode ? "" : "ʸ√x"}
               subLabelColor="text-purple-400"
             >
-              xʸ
+              {shiftMode ? "ʸ√x" : "xʸ"}
             </CalcButton>
             <CalcButton
               onClick={() => handleFunction("abs")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "Pol"}
+              subLabelColor="text-purple-400"
             >
-              |x|
+              {shiftMode ? "Pol" : "|x|"}
             </CalcButton>
             <CalcButton
-              onClick={() => handleInput("π")}
+              onClick={() => shiftMode ? handleInput("e") : handleInput("π")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel="e"
+              subLabel={shiftMode ? "" : "e"}
               subLabelColor="text-amber-400"
             >
-              π
+              {shiftMode ? "e" : "π"}
             </CalcButton>
             <CalcButton
               onClick={() => handleFunction("exp")}
@@ -584,18 +595,24 @@ const KalkulatorScientificPage = () => {
             <CalcButton
               onClick={() => shiftMode ? handleFunction("asinh") : handleFunction("sinh")}
               className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "sinh⁻¹"}
+              subLabelColor="text-purple-400"
             >
               {shiftMode ? "sinh⁻¹" : "sinh"}
             </CalcButton>
             <CalcButton
               onClick={() => shiftMode ? handleFunction("acosh") : handleFunction("cosh")}
               className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "cosh⁻¹"}
+              subLabelColor="text-purple-400"
             >
               {shiftMode ? "cosh⁻¹" : "cosh"}
             </CalcButton>
             <CalcButton
               onClick={() => shiftMode ? handleFunction("atanh") : handleFunction("tanh")}
               className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "tanh⁻¹"}
+              subLabelColor="text-purple-400"
             >
               {shiftMode ? "tanh⁻¹" : "tanh"}
             </CalcButton>
@@ -612,24 +629,24 @@ const KalkulatorScientificPage = () => {
               )
             </CalcButton>
             <CalcButton
-              onClick={() => handleInput("!")}
+              onClick={() => shiftMode ? handleInput("nPr") : handleInput("!")}
               className="h-10 text-sm bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel="nPr"
+              subLabel={shiftMode ? "" : "nPr"}
               subLabelColor="text-amber-400"
             >
-              x!
+              {shiftMode ? "nPr" : "x!"}
             </CalcButton>
           </div>
 
           {/* Row 5: Memory and numbers */}
           <div className="grid grid-cols-6 gap-1">
             <CalcButton
-              onClick={handleMemoryRecall}
+              onClick={() => shiftMode ? handleMemoryClear() : handleMemoryRecall()}
               className="h-11 text-xs bg-slate-800/70 text-emerald-400 border border-emerald-500/30 hover:bg-slate-700/70"
-              subLabel="STO"
+              subLabel={shiftMode ? "" : "STO"}
               subLabelColor="text-purple-400"
             >
-              RCL
+              {shiftMode ? "STO" : "RCL"}
             </CalcButton>
             <CalcButton
               onClick={() => handleInput("7")}
@@ -672,12 +689,12 @@ const KalkulatorScientificPage = () => {
           {/* Row 6 */}
           <div className="grid grid-cols-6 gap-1">
             <CalcButton
-              onClick={handleMemoryPlus}
+              onClick={() => shiftMode ? handleMemoryMinus() : handleMemoryPlus()}
               className="h-11 text-xs bg-slate-800/70 text-emerald-400 border border-emerald-500/30 hover:bg-slate-700/70"
-              subLabel="M-"
+              subLabel={shiftMode ? "" : "M-"}
               subLabelColor="text-purple-400"
             >
-              M+
+              {shiftMode ? "M-" : "M+"}
             </CalcButton>
             <CalcButton
               onClick={() => handleInput("4")}
@@ -788,12 +805,12 @@ const KalkulatorScientificPage = () => {
               Exp
             </CalcButton>
             <CalcButton
-              onClick={handleAns}
+              onClick={() => { playPopSound(); shiftMode ? setExpression(prev => prev + lastAnswer.toString()) : handleAns(); setShiftMode(false); }}
               className="h-11 text-sm bg-slate-800/80 text-amber-400 border border-amber-500/30 hover:bg-slate-700/80"
-              subLabel="PreAns"
+              subLabel={shiftMode ? "" : "PreAns"}
               subLabelColor="text-purple-400"
             >
-              Ans
+              {shiftMode ? "PreAns" : "Ans"}
             </CalcButton>
             <CalcButton
               onClick={handleEqual}
