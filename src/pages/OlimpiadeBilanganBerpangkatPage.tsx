@@ -5,7 +5,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -131,121 +131,126 @@ const latihanOlimpiade = [
 
 const OlimpiadeBilanganBerpangkatPage = () => {
   const navigate = useNavigate();
-  const [expandedMateri, setExpandedMateri] = useState(true);
-  const [expandedLatihan, setExpandedLatihan] = useState(false);
-  const [expandedOlimpiade, setExpandedOlimpiade] = useState(false);
+  const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
+  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+
+  const toggleSection = (idx: number) => {
+    playPopSound();
+    setExpandedSections(prev =>
+      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <Trophy className="w-12 h-12 text-accent mx-auto mb-4" />
-        <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          BILANGAN BERPANGKAT
+        <Trophy className="w-10 h-10 text-accent mx-auto mb-3" />
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
+          OLIMPIADE - BILANGAN BERPANGKAT
         </h1>
-        <p className="text-white/60 text-sm text-center mb-4 font-body">
-          Olimpiade Matematika - Intensif 3
-        </p>
-        <p className="text-white/40 text-xs text-center mb-8 font-body italic">
-          Irawan Sutiawan, M.Pd
-        </p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Irawan Sutiawan, M.Pd</p>
 
-        {/* MATERI SECTION */}
-        <div className="mb-6 bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-          <button
-            className="w-full flex items-center justify-between px-5 py-4 text-left"
-            onClick={() => { playPopSound(); setExpandedMateri(!expandedMateri); }}
-          >
-            <span className="font-display text-lg text-accent">{materiSection.title}</span>
-            {expandedMateri ? <ChevronUp className="w-5 h-5 text-accent" /> : <ChevronDown className="w-5 h-5 text-accent" />}
-          </button>
-          {expandedMateri && (
-            <div className="px-5 pb-5 space-y-6">
-              {materiSection.sections.map((section, idx) => (
-                <div key={idx}>
-                  <h3 className="font-display text-primary mb-3">{section.heading}</h3>
-                  <div className="text-white/80 font-body text-sm whitespace-pre-line leading-relaxed">
-                    {section.content.split('\n').map((line, lineIdx) => (
-                      <div key={lineIdx} className="mb-1">
-                        {renderWithLatex(line)}
+        {/* Tabs */}
+        <div className="flex gap-2 justify-center mb-6">
+          {[
+            { key: "materi" as const, label: "Materi" },
+            { key: "dasar" as const, label: "Latihan Dasar" },
+            { key: "olimpiade" as const, label: "Latihan Olimpiade" },
+          ].map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => { playPopSound(); setActiveTab(tab.key); }}
+              className={`font-display text-xs px-4 py-2 rounded-lg border cursor-pointer transition-all ${
+                activeTab === tab.key
+                  ? "bg-accent text-accent-foreground border-accent"
+                  : "bg-card/80 text-white/70 border-border hover:border-accent/40"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Materi Tab */}
+        {activeTab === "materi" && (
+          <div className="space-y-3 animate-slide-up">
+            {materiSection.sections.map((section, idx) => (
+              <div key={idx} className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+                <button
+                  onClick={() => toggleSection(idx)}
+                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
+                >
+                  <span className="font-display text-sm text-accent font-bold">{section.heading}</span>
+                  {expandedSections.includes(idx) ? (
+                    <ChevronUp className="w-4 h-4 text-accent shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-white/50 shrink-0" />
+                  )}
+                </button>
+                {expandedSections.includes(idx) && (
+                  <div className="px-5 pb-4">
+                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
+                      {section.content.split('\n').map((line, i) => (
+                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Latihan Dasar Tab */}
+        {activeTab === "dasar" && (
+          <div className="space-y-4 animate-slide-up">
+            {latihanDasar.map((soal) => (
+              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                  <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
+                </div>
+                {soal.options.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {soal.options.map((opt, j) => (
+                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                        {renderWithLatex(opt)}
                       </div>
                     ))}
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
 
-        {/* LATIHAN DASAR SECTION */}
-        <div className="mb-6 bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-          <button
-            className="w-full flex items-center justify-between px-5 py-4 text-left"
-            onClick={() => { playPopSound(); setExpandedLatihan(!expandedLatihan); }}
-          >
-            <span className="font-display text-lg text-accent">LATIHAN DASAR</span>
-            {expandedLatihan ? <ChevronUp className="w-5 h-5 text-accent" /> : <ChevronDown className="w-5 h-5 text-accent" />}
-          </button>
-          {expandedLatihan && (
-            <div className="px-5 pb-5 space-y-6">
-              {latihanDasar.map((item) => (
-                <div key={item.no} className="border-b border-border/30 pb-4 last:border-0">
-                  <div className="font-body text-sm text-white/90 mb-2">
-                    <span className="text-accent font-display mr-2">{item.no}.</span>
-                    {renderWithLatex(item.soal)}
-                  </div>
-                  {item.options.length > 0 && (
-                    <div className="ml-6 space-y-1">
-                      {item.options.map((opt, optIdx) => (
-                        <div key={optIdx} className="text-white/70 text-sm font-body">
-                          {renderWithLatex(opt)}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+        {/* Latihan Olimpiade Tab */}
+        {activeTab === "olimpiade" && (
+          <div className="space-y-4 animate-slide-up">
+            {latihanOlimpiade.map((soal) => (
+              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                    <span key={lineIdx}>
+                      {lineIdx > 0 && <br />}
+                      {renderWithLatex(line)}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* SOAL OLIMPIADE SECTION */}
-        <div className="mb-6 bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-          <button
-            className="w-full flex items-center justify-between px-5 py-4 text-left"
-            onClick={() => { playPopSound(); setExpandedOlimpiade(!expandedOlimpiade); }}
-          >
-            <span className="font-display text-lg text-accent">SOAL OLIMPIADE</span>
-            {expandedOlimpiade ? <ChevronUp className="w-5 h-5 text-accent" /> : <ChevronDown className="w-5 h-5 text-accent" />}
-          </button>
-          {expandedOlimpiade && (
-            <div className="px-5 pb-5 space-y-6">
-              {latihanOlimpiade.map((item) => (
-                <div key={item.no} className="border-b border-border/30 pb-4 last:border-0">
-                  <div className="font-body text-sm text-white/90 mb-2 whitespace-pre-line">
-                    <span className="text-accent font-display mr-2">{item.no}.</span>
-                    {item.soal.split('\n').map((line, lineIdx) => (
-                      <span key={lineIdx}>
-                        {lineIdx > 0 && <br />}
-                        {renderWithLatex(line)}
-                      </span>
+                {soal.options.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {soal.options.map((opt, j) => (
+                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                        {renderWithLatex(opt)}
+                      </div>
                     ))}
                   </div>
-                  {item.options.length > 0 && (
-                    <div className="ml-6 space-y-1">
-                      {item.options.map((opt, optIdx) => (
-                        <div key={optIdx} className="text-white/70 text-sm font-body">
-                          {renderWithLatex(opt)}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="mt-8 text-center">
           <button
