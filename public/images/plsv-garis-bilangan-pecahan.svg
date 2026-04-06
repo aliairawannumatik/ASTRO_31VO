@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="65" viewBox="0 0 420 65">
+  <!-- Number line -->
+  <line x1="30" y1="45" x2="390" y2="45" stroke="#facc15" stroke-width="2"/>
+  <!-- Left arrow -->
+  <polygon points="18,45 30,39 30,51" fill="#facc15"/>
+  <!-- Right arrow -->
+  <polygon points="402,45 390,39 390,51" fill="#facc15"/>
+
+  <!-- Rectangle ABOVE the line (between -3 and 2) -->
+  <rect x="140" y="22" width="140" height="23" fill="none" stroke="#facc15" stroke-width="1.5" rx="2"/>
+
+  <!-- Open circle at x=-3 (dikecualikan) -->
+  <circle cx="140" cy="45" r="5" fill="#0f172a" stroke="#facc15" stroke-width="2"/>
+  <!-- Closed circle at x=2 (termasuk, karena ≥) -->
+  <circle cx="280" cy="45" r="5" fill="#facc15" stroke="#facc15" stroke-width="2"/>
+
+  <!-- +++ left -->
+  <text x="75" y="38" font-size="14" text-anchor="middle" fill="#facc15" font-family="monospace">+ + +</text>
+  <!-- - - - middle -->
+  <text x="210" y="38" font-size="14" text-anchor="middle" fill="#facc15" font-family="monospace">- - -</text>
+  <!-- +++ right -->
+  <text x="345" y="38" font-size="14" text-anchor="middle" fill="#facc15" font-family="monospace">+ + +</text>
+
+  <!-- Labels -3 and 2 -->
+  <text x="140" y="62" font-size="13" text-anchor="middle" fill="#facc15" font-family="Arial">-3</text>
+  <text x="280" y="62" font-size="13" text-anchor="middle" fill="#facc15" font-family="Arial">2</text>
+</svg>

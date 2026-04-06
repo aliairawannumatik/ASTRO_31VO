@@ -1,0 +1,732 @@
+import { useNavigate } from "react-router-dom";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
+import { playPopSound } from "@/hooks/useAudio";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
+import { MapPin } from "lucide-react";
+import CoordPlane from "./CoordPlane";
+
+const accent = "sky";
+const accentHex = "#38bdf8";
+const accentDim = "rgba(56,189,248,0.15)";
+
+type Part = { label: string; math?: string; text?: string };
+type Diagram = Parameters<typeof CoordPlane>[0];
+type Q = {
+  n: number; title: string;
+  content?: string; math?: string;
+  parts?: Part[]; diagram?: Diagram;
+  type: "essay" | "mixed" | "diagram-only";
+};
+
+const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
+
+const questions: Q[] = [
+  Q(1, "Membaca Koordinat Titik", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 4, y: 3, label: "A(?,?)", color: "#f472b6", labelPos: "tr" },
+        { x: -3, y: 5, label: "B(?,?)", color: "#fb923c", labelPos: "tl" },
+        { x: -4, y: -2, label: "C(?,?)", color: "#a78bfa", labelPos: "bl" },
+        { x: 2, y: -4, label: "D(?,?)", color: "#34d399", labelPos: "br" },
+        { x: 0, y: 3, label: "E(?,?)", color: "#facc15", labelPos: "tr" },
+        { x: -5, y: 0, label: "F(?,?)", color: "#f87171", labelPos: "top" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Nyatakan koordinat titik A, B, C, D, E, dan F dari diagram di atas." },
+      { label: "b.", text: "Titik mana yang terletak pada sumbu-x? Titik mana yang pada sumbu-y?" },
+      { label: "c.", text: "Titik mana yang memiliki nilai absis (x) negatif?" },
+    ],
+  }),
+
+  Q(2, "Menentukan Kuadran", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6, quadrantLabels: true,
+      pts: [
+        { x: 3, y: 4, label: "P", color: "#f472b6", labelPos: "tr" },
+        { x: -2, y: 3, label: "Q", color: "#fb923c", labelPos: "tl" },
+        { x: -4, y: -3, label: "R", color: "#a78bfa", labelPos: "bl" },
+        { x: 5, y: -2, label: "S", color: "#34d399", labelPos: "br" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tentukan kuadran dari titik P, Q, R, dan S." },
+      { label: "b.", text: "Jelaskan tanda koordinat (positif/negatif) untuk setiap kuadran." },
+    ],
+  }),
+
+  Q(3, "Tanda Koordinat Setiap Kuadran", {
+    type: "mixed",
+    content: "Lengkapi tabel berikut tentang tanda koordinat di setiap kuadran:",
+    parts: [
+      { label: "Kuadran I:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
+      { label: "Kuadran II:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
+      { label: "Kuadran III:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
+      { label: "Kuadran IV:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
+    ],
+  }),
+
+  Q(4, "Identifikasi Kuadran dari Koordinat", {
+    type: "mixed",
+    content: "Tentukan di kuadran mana atau pada sumbu mana setiap titik berikut berada:",
+    parts: [
+      { label: "a.", math: "A(5,\\ 3)" },
+      { label: "b.", math: "B(-2,\\ 4)" },
+      { label: "c.", math: "C(-3,\\ -1)" },
+      { label: "d.", math: "D(4,\\ -5)" },
+      { label: "e.", math: "E(0,\\ 7)" },
+      { label: "f.", math: "F(-6,\\ 0)" },
+      { label: "g.", math: "G(0,\\ -4)" },
+      { label: "h.", math: "H(0,\\ 0)" },
+    ],
+  }),
+
+  Q(5, "Titik pada Sumbu Koordinat", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 4, y: 0, label: "K", color: "#facc15", labelPos: "top" },
+        { x: 0, y: 3, label: "L", color: "#60a5fa", labelPos: "tr" },
+        { x: -3, y: 0, label: "M", color: "#f472b6", labelPos: "top" },
+        { x: 0, y: -4, label: "N", color: "#34d399", labelPos: "tr" },
+        { x: 3, y: 2, label: "P", color: "#fb923c", labelPos: "tr" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tuliskan koordinat titik K, L, M, N, dan P." },
+      { label: "b.", text: "Titik mana yang terletak pada sumbu-x? Sumbu-y?" },
+      { label: "c.", text: "Titik mana yang TIDAK berada pada kuadran manapun? Mengapa?" },
+    ],
+  }),
+
+  Q(6, "Koordinat pada Sumbu-x", {
+    type: "mixed",
+    content: "Jika titik P(-3, y) terletak pada sumbu-x:",
+    parts: [
+      { label: "a.", text: "Tentukan nilai y." },
+      { label: "b.", text: "Tuliskan koordinat lengkap titik P." },
+      { label: "c.", text: "Di mana posisi titik P relatif terhadap titik asal?" },
+    ],
+  }),
+
+  Q(7, "Koordinat pada Sumbu-y", {
+    type: "mixed",
+    content: "Jika titik Q(x, 4) terletak pada sumbu-y:",
+    parts: [
+      { label: "a.", text: "Tentukan nilai x." },
+      { label: "b.", text: "Tuliskan koordinat lengkap titik Q." },
+      { label: "c.", text: "Di mana posisi titik Q relatif terhadap titik asal O?" },
+    ],
+  }),
+
+  Q(8, "Membaca Diagram - Titik Beragam Posisi", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 2, y: 5, label: "A", color: "#f472b6", labelPos: "tr" },
+        { x: -3, y: 4, label: "B", color: "#60a5fa", labelPos: "tl" },
+        { x: 5, y: -1, label: "C", color: "#34d399", labelPos: "br" },
+        { x: -4, y: -3, label: "D", color: "#fb923c", labelPos: "bl" },
+        { x: 1, y: 0, label: "E", color: "#facc15", labelPos: "top" },
+        { x: 0, y: -5, label: "F", color: "#a78bfa", labelPos: "tr" },
+        { x: -5, y: 0, label: "G", color: "#f87171", labelPos: "top" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tuliskan koordinat semua titik di atas." },
+      { label: "b.", text: "Sebutkan titik-titik yang berada di kuadran II." },
+      { label: "c.", text: "Sebutkan titik-titik yang berada pada sumbu koordinat." },
+    ],
+  }),
+
+  Q(9, "Pencerminan terhadap Sumbu-x", {
+    type: "mixed",
+    content: "Titik A(3, -4) dicerminkan terhadap sumbu-x menghasilkan titik A'.",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 3, y: -4, label: "A(3,−4)", color: "#f472b6", labelPos: "br" },
+        { x: 3, y: 4, label: "A'(?,?)", color: "#60a5fa", labelPos: "tr" },
+      ],
+      segs: [{ x1: 3, y1: -4, x2: 3, y2: 4, color: "rgba(255,255,255,0.2)", dashed: true }],
+    },
+    parts: [
+      { label: "a.", text: "Tentukan koordinat titik A'." },
+      { label: "b.", text: "Apa aturan umum pencerminan suatu titik (x, y) terhadap sumbu-x?" },
+    ],
+  }),
+
+  Q(10, "Pencerminan terhadap Sumbu-y", {
+    type: "mixed",
+    content: "Titik B(-2, 5) dicerminkan terhadap sumbu-y menghasilkan titik B'.",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: -2, y: 5, label: "B(−2,5)", color: "#fb923c", labelPos: "tl" },
+        { x: 2, y: 5, label: "B'(?,?)", color: "#34d399", labelPos: "tr" },
+      ],
+      segs: [{ x1: -2, y1: 5, x2: 2, y2: 5, color: "rgba(255,255,255,0.2)", dashed: true }],
+    },
+    parts: [
+      { label: "a.", text: "Tentukan koordinat titik B'." },
+      { label: "b.", text: "Apa aturan umum pencerminan suatu titik (x, y) terhadap sumbu-y?" },
+    ],
+  }),
+
+  Q(11, "Pencerminan terhadap Titik Asal O", {
+    type: "mixed",
+    content: "Titik C(4, 3) dicerminkan terhadap titik asal O(0, 0) menghasilkan C'.",
+    parts: [
+      { label: "a.", text: "Tentukan koordinat titik C'." },
+      { label: "b.", text: "Di kuadran berapa C berada? Di kuadran berapa C' berada?" },
+      { label: "c.", text: "Apa aturan umum pencerminan titik (x, y) terhadap titik asal?" },
+    ],
+  }),
+
+  Q(12, "Mengenali Pencerminan dari Diagram", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 4, y: 2, label: "P", color: "#f472b6", labelPos: "tr" },
+        { x: -4, y: 2, label: "P'", color: "#60a5fa", labelPos: "tl" },
+        { x: 3, y: -3, label: "Q", color: "#34d399", labelPos: "br" },
+        { x: 3, y: 3, label: "Q'", color: "#facc15", labelPos: "tr" },
+      ],
+      segs: [
+        { x1: 4, y1: 2, x2: -4, y2: 2, color: "rgba(255,255,255,0.15)", dashed: true },
+        { x1: 3, y1: -3, x2: 3, y2: 3, color: "rgba(255,255,255,0.15)", dashed: true },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "P' adalah hasil pencerminan P terhadap sumbu mana?" },
+      { label: "b.", text: "Q' adalah hasil pencerminan Q terhadap sumbu mana?" },
+      { label: "c.", text: "Jelaskan cara menentukan cerminan titik dari diagram." },
+    ],
+  }),
+
+  Q(13, "Titik Tengah Segmen", {
+    type: "mixed",
+    content: "Tentukan koordinat titik tengah dari setiap segmen berikut:",
+    parts: [
+      { label: "a.", math: "A(2,\\ 4) \\text{ dan } B(6,\\ 8)" },
+      { label: "b.", math: "C(-3,\\ 5) \\text{ dan } D(7,\\ -1)" },
+      { label: "c.", math: "E(0,\\ 0) \\text{ dan } F(-4,\\ -6)" },
+    ],
+  }),
+
+  Q(14, "Mencari Ujung Segmen dari Titik Tengah", {
+    type: "mixed",
+    content: "Titik M adalah titik tengah segmen PQ. Tentukan koordinat Q jika:",
+    parts: [
+      { label: "a.", math: "P(1,\\ 2),\\ M(3,\\ 5)" },
+      { label: "b.", math: "P(-4,\\ 6),\\ M(0,\\ 2)" },
+      { label: "c.", math: "P(3,\\ -5),\\ M(-1,\\ 1)" },
+    ],
+  }),
+
+  Q(15, "Jarak Titik ke Sumbu-x", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 4, y: 3, label: "A(4,3)", color: "#f472b6", labelPos: "tr" },
+        { x: 4, y: 0, label: "", color: "#f472b6" },
+      ],
+      segs: [
+        { x1: 4, y1: 3, x2: 4, y2: 0, color: "#f472b6", dashed: true, label: "?" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Berapa jarak titik A(4, 3) ke sumbu-x? Jelaskan caramu." },
+      { label: "b.", math: "\\text{Jika } P(x,\\ y) \\text{, rumus jarak ke sumbu-x adalah } ..." },
+      { label: "c.", text: "Tentukan jarak titik B(−5, 7) ke sumbu-x." },
+    ],
+  }),
+
+  Q(16, "Jarak Titik ke Sumbu-y", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: -4, y: 3, label: "B(−4,3)", color: "#60a5fa", labelPos: "tl" },
+        { x: 0, y: 3, label: "", color: "#60a5fa" },
+      ],
+      segs: [
+        { x1: -4, y1: 3, x2: 0, y2: 3, color: "#60a5fa", dashed: true, label: "?" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Berapa jarak titik B(−4, 3) ke sumbu-y?" },
+      { label: "b.", math: "\\text{Jika } P(x,\\ y) \\text{, rumus jarak ke sumbu-y adalah } ..." },
+      { label: "c.", text: "Tentukan jarak titik C(3, −6) ke sumbu-y." },
+    ],
+  }),
+
+  Q(17, "Titik Paling Jauh dari Sumbu", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 2, y: 5, label: "A", color: "#f472b6", labelPos: "tr" },
+        { x: -4, y: 2, label: "B", color: "#fb923c", labelPos: "tl" },
+        { x: 1, y: -3, label: "C", color: "#34d399", labelPos: "br" },
+        { x: -3, y: -1, label: "D", color: "#facc15", labelPos: "bl" },
+      ],
+    },
+    content: "Koordinat: A(2,5), B(−4,2), C(1,−3), D(−3,−1)",
+    parts: [
+      { label: "a.", text: "Titik mana yang paling jauh dari sumbu-x? Jelaskan!" },
+      { label: "b.", text: "Titik mana yang paling dekat dengan sumbu-y?" },
+    ],
+  }),
+
+  Q(18, "Garis Sejajar Sumbu-x", {
+    type: "mixed",
+    content: "Perhatikan semua titik yang memiliki ordinat (y) = −3.",
+    diagram: {
+      size: 260, range: 6,
+      segs: [{ x1: -5.5, y1: -3, x2: 5.5, y2: -3, color: "#facc15", label: "y = −3" }],
+      pts: [
+        { x: -4, y: -3, label: "P", color: "#f472b6", labelPos: "top" },
+        { x: 0, y: -3, label: "Q", color: "#60a5fa", labelPos: "top" },
+        { x: 3, y: -3, label: "R", color: "#34d399", labelPos: "top" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Apa yang dapat kamu simpulkan tentang semua titik dengan y = −3?" },
+      { label: "b.", text: "Garis y = −3 sejajar dengan sumbu mana?" },
+      { label: "c.", text: "Berapa jarak garis y = −3 dari sumbu-x?" },
+    ],
+  }),
+
+  Q(19, "Garis Sejajar Sumbu-y", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      segs: [{ x1: 4, y1: -5.5, x2: 4, y2: 5.5, color: "#a78bfa", label: "x=4" }],
+      pts: [
+        { x: 4, y: 3, label: "A", color: "#f472b6", labelPos: "tr" },
+        { x: 4, y: -2, label: "B", color: "#fb923c", labelPos: "tr" },
+        { x: 4, y: 0, label: "C", color: "#facc15", labelPos: "tr" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Apa yang sama dari koordinat semua titik pada garis x = 4?" },
+      { label: "b.", text: "Garis x = 4 sejajar dengan sumbu mana?" },
+      { label: "c.", text: "Berapa jarak garis x = 4 dari sumbu-y?" },
+    ],
+  }),
+
+  Q(20, "Titik ke-4 Persegi Panjang", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 1, y: 1, label: "A(1,1)", color: "#f472b6", labelPos: "bl" },
+        { x: 5, y: 1, label: "B(5,1)", color: "#fb923c", labelPos: "br" },
+        { x: 5, y: 4, label: "C(5,4)", color: "#34d399", labelPos: "tr" },
+        { x: 1, y: 4, label: "D(?,?)", color: "#facc15", labelPos: "tl" },
+      ],
+      segs: [
+        { x1: 1, y1: 1, x2: 5, y2: 1, color: "rgba(255,255,255,0.3)" },
+        { x1: 5, y1: 1, x2: 5, y2: 4, color: "rgba(255,255,255,0.3)" },
+        { x1: 5, y1: 4, x2: 1, y2: 4, color: "rgba(255,255,255,0.3)" },
+        { x1: 1, y1: 4, x2: 1, y2: 1, color: "rgba(255,255,255,0.3)", dashed: true },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tentukan koordinat titik D." },
+      { label: "b.", text: "Hitung keliling persegi panjang ABCD." },
+      { label: "c.", text: "Hitung luas persegi panjang ABCD." },
+    ],
+  }),
+
+  Q(21, "Segitiga dari Koordinat", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: -3, y: -2, label: "A", color: "#f472b6", labelPos: "bl" },
+        { x: 4, y: -2, label: "B", color: "#fb923c", labelPos: "br" },
+        { x: 1, y: 4, label: "C", color: "#34d399", labelPos: "top" },
+      ],
+      segs: [
+        { x1: -3, y1: -2, x2: 4, y2: -2, color: "#60a5fa" },
+        { x1: 4, y1: -2, x2: 1, y2: 4, color: "#60a5fa" },
+        { x1: 1, y1: 4, x2: -3, y2: -2, color: "#60a5fa" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tuliskan koordinat semua titik dari diagram." },
+      { label: "b.", text: "Apakah segitiga ABC siku-siku? Jelaskan berdasarkan posisi titik A dan B." },
+      { label: "c.", text: "Titik manakah yang paling tinggi posisinya?" },
+    ],
+  }),
+
+  Q(22, "Translasi (Pergeseran) Titik", {
+    type: "mixed",
+    content: "Titik P(2, 3) digeser (ditranslasi) dengan vektor T(−1, 4) menghasilkan P'.",
+    parts: [
+      { label: "a.", text: "Tentukan koordinat P'." },
+      { label: "b.", text: "Di kuadran mana P berada? Di kuadran mana P' berada?" },
+      { label: "c.", text: "Translasi A(−4, −2) dengan vektor (3, 5). Tentukan A'." },
+    ],
+  }),
+
+  Q(23, "Koordinat Titik dengan Syarat", {
+    type: "mixed",
+    content: "Tentukan koordinat titik yang memenuhi syarat-syarat berikut:",
+    parts: [
+      { label: "a.", text: "Berjarak 5 satuan dari sumbu-x dan berada di atas sumbu-x, dengan x = 3." },
+      { label: "b.", text: "Berjarak 4 satuan dari sumbu-y dan berada di sebelah kiri sumbu-y, dengan y = −2." },
+      { label: "c.", text: "Terletak tepat di sumbu-x dan berjarak 6 satuan dari titik asal O, di sebelah kiri O." },
+    ],
+  }),
+
+  Q(24, "Soal ANBK - Evaluasi Pernyataan", {
+    type: "mixed",
+    content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:",
+    parts: [
+      { label: "(1)", text: "Titik (0, 0) berada di Kuadran I." },
+      { label: "(2)", text: "Titik yang berada di Kuadran II memiliki x < 0 dan y > 0." },
+      { label: "(3)", text: "Titik (5, 0) terletak pada sumbu-x." },
+      { label: "(4)", text: "Jika x = 0 dan y ≠ 0, titik tersebut terletak pada sumbu-y." },
+    ],
+  }),
+
+  Q(25, "Diagram 6 Titik — Baca dan Analisis", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 7,
+      pts: [
+        { x: 5, y: 2, label: "K", color: "#f472b6", labelPos: "tr" },
+        { x: -4, y: 5, label: "L", color: "#fb923c", labelPos: "tl" },
+        { x: -6, y: -3, label: "M", color: "#a78bfa", labelPos: "bl" },
+        { x: 3, y: -5, label: "N", color: "#34d399", labelPos: "br" },
+        { x: 0, y: 6, label: "P", color: "#facc15", labelPos: "tr" },
+        { x: -2, y: 0, label: "Q", color: "#60a5fa", labelPos: "top" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Baca dan tuliskan koordinat semua titik K, L, M, N, P, Q." },
+      { label: "b.", text: "Urutkan titik berdasarkan jaraknya dari sumbu-x (dari dekat ke jauh)." },
+      { label: "c.", text: "Urutkan titik berdasarkan jaraknya dari sumbu-y (dari dekat ke jauh)." },
+    ],
+  }),
+
+  Q(26, "Titik pada Berbagai Kuadran", {
+    type: "mixed",
+    content: "Setiap titik berikut dinyatakan dalam bentuk aljabar. Tentukan kuadrannya jika a > 0 dan b > 0:",
+    parts: [
+      { label: "a.", math: "P(a,\\ b)" },
+      { label: "b.", math: "Q(-a,\\ b)" },
+      { label: "c.", math: "R(-a,\\ -b)" },
+      { label: "d.", math: "S(a,\\ -b)" },
+      { label: "e.", math: "T(-b,\\ a)" },
+    ],
+  }),
+
+  Q(27, "Titik dengan Kondisi Aljabar", {
+    type: "mixed",
+    content: "Tentukan kuadran titik P(2k+1, 3) agar berada di Kuadran I.",
+    parts: [
+      { label: "a.", text: "Syarat apa yang harus dipenuhi oleh absis dan ordinat untuk berada di Kuadran I?" },
+      { label: "b.", math: "\\text{Tentukan nilai } k \\text{ agar } P(2k+1,\\ 3) \\text{ berada di Kuadran I.}" },
+    ],
+  }),
+
+  Q(28, "Titik pada Sumbu dari Kondisi Aljabar", {
+    type: "mixed",
+    content: "Tentukan nilai m agar:",
+    parts: [
+      { label: "a.", math: "Q(4,\\ 2m-5) \\text{ terletak pada sumbu-x.}" },
+      { label: "b.", math: "R(3n+6,\\ 2) \\text{ terletak pada sumbu-y.}" },
+    ],
+  }),
+
+  Q(29, "Diagram Titik dan Bayangan", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 3, y: 4, label: "T(3,4)", color: "#f472b6", labelPos: "tr" },
+        { x: -3, y: 4, label: "T₁", color: "#60a5fa", labelPos: "tl" },
+        { x: 3, y: -4, label: "T₂", color: "#34d399", labelPos: "br" },
+        { x: -3, y: -4, label: "T₃", color: "#facc15", labelPos: "bl" },
+      ],
+      segs: [
+        { x1: 3, y1: 4, x2: -3, y2: 4, color: "rgba(255,255,255,0.12)", dashed: true },
+        { x1: 3, y1: 4, x2: 3, y2: -4, color: "rgba(255,255,255,0.12)", dashed: true },
+        { x1: 3, y1: 4, x2: -3, y2: -4, color: "rgba(255,255,255,0.12)", dashed: true },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "T₁ adalah hasil pencerminan T terhadap sumbu mana?" },
+      { label: "b.", text: "T₂ adalah hasil pencerminan T terhadap sumbu mana?" },
+      { label: "c.", text: "T₃ adalah hasil pencerminan T terhadap apa?" },
+    ],
+  }),
+
+  Q(30, "Membaca Koordinat — 5 Titik Baru", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: -1, y: 4, label: "W", color: "#f472b6", labelPos: "tl" },
+        { x: 3, y: -2, label: "X", color: "#fb923c", labelPos: "br" },
+        { x: -4, y: -4, label: "Y", color: "#a78bfa", labelPos: "bl" },
+        { x: 5, y: 3, label: "Z", color: "#34d399", labelPos: "tr" },
+        { x: 0, y: -3, label: "V", color: "#facc15", labelPos: "tr" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tuliskan koordinat titik W, X, Y, Z, dan V." },
+      { label: "b.", text: "Titik mana yang berada di kuadran III?" },
+      { label: "c.", text: "Titik mana yang berada pada sumbu koordinat?" },
+    ],
+  }),
+
+  Q(31, "Kontekstual — Peta Kota", {
+    type: "mixed",
+    content: "Sebuah peta kota menggunakan sistem koordinat kartesius. Posisi beberapa tempat adalah:\nRumah: A(3, 2), Sekolah: B(−4, 5), Pasar: C(−2, −3), Kantor Polisi: D(4, −4), Taman: E(0, 3)",
+    parts: [
+      { label: "a.", text: "Di kuadran mana masing-masing tempat berada?" },
+      { label: "b.", text: "Tempat mana yang berada paling jauh dari sumbu-x?" },
+      { label: "c.", text: "Tempat mana yang berada paling dekat dengan sumbu-y?" },
+    ],
+  }),
+
+  Q(32, "Diagram — Titik Simetris", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 4, y: 3, label: "A", color: "#f472b6", labelPos: "tr" },
+        { x: -4, y: 3, label: "A'", color: "#f472b6", labelPos: "tl" },
+        { x: 2, y: -4, label: "B", color: "#60a5fa", labelPos: "br" },
+        { x: 2, y: 4, label: "B'", color: "#60a5fa", labelPos: "tr" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "A dan A' simetris terhadap sumbu mana?" },
+      { label: "b.", text: "B dan B' simetris terhadap sumbu mana?" },
+      { label: "c.", text: "Tuliskan koordinat cerminan titik C(5, −2) terhadap sumbu-y." },
+    ],
+  }),
+
+  Q(33, "Persegi dari Koordinat", {
+    type: "mixed",
+    content: "Tiga titik sudut persegi adalah A(0, 0), B(4, 0), C(4, 4).",
+    parts: [
+      { label: "a.", text: "Tentukan koordinat titik sudut ke-4 yaitu D." },
+      { label: "b.", text: "Hitung keliling persegi tersebut." },
+      { label: "c.", text: "Hitung luas persegi tersebut." },
+    ],
+  }),
+
+  Q(34, "Mencari Koordinat dari Jarak", {
+    type: "mixed",
+    content: "Tentukan nilai yang belum diketahui:",
+    parts: [
+      { label: "a.", math: "P(?,\\ 3) \\text{ berjarak 5 satuan dari sumbu-y. Tentukan } x." },
+      { label: "b.", math: "Q(-6,\\ ?) \\text{ berjarak 4 satuan dari sumbu-x (di bawah). Tentukan } y." },
+      { label: "c.", math: "R(?,\\ ?) \\text{ berjarak 3 dari sumbu-x dan 4 dari sumbu-y di Kuadran IV.}" },
+    ],
+  }),
+
+  Q(35, "ANBK — Pasangkan Titik dengan Kuadran", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6, quadrantLabels: true,
+      pts: [
+        { x: 3, y: 2, label: "1", color: "#f472b6", labelPos: "tr" },
+        { x: -4, y: 3, label: "2", color: "#fb923c", labelPos: "tl" },
+        { x: -2, y: -4, label: "3", color: "#a78bfa", labelPos: "bl" },
+        { x: 5, y: -1, label: "4", color: "#34d399", labelPos: "br" },
+        { x: 0, y: 4, label: "5", color: "#facc15", labelPos: "tr" },
+        { x: -3, y: 0, label: "6", color: "#60a5fa", labelPos: "top" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Pasangkan nomor titik (1–6) dengan lokasinya: Kuadran I, II, III, IV, Sumbu-x, atau Sumbu-y." },
+      { label: "b.", text: "Tuliskan koordinat masing-masing titik." },
+    ],
+  }),
+
+  Q(36, "Titik Istimewa pada Sistem Koordinat", {
+    type: "mixed",
+    content: "Jawab pertanyaan tentang titik-titik istimewa berikut:",
+    parts: [
+      { label: "a.", text: "Di mana titik (0, 0) berada? Apa namanya?" },
+      { label: "b.", text: "Titik (1, 0) berada pada sumbu apa? Berapa jaraknya dari O?" },
+      { label: "c.", text: "Titik (0, 1) berada pada sumbu apa? Berapa jaraknya dari O?" },
+      { label: "d.", text: "Apakah (0, 0) berada di salah satu kuadran? Jelaskan!" },
+    ],
+  }),
+
+  Q(37, "Menemukan Pola Koordinat", {
+    type: "mixed",
+    content: "Perhatikan deretan titik: A(1, 2), B(2, 4), C(3, 6), D(4, 8)",
+    parts: [
+      { label: "a.", text: "Apa pola hubungan antara absis dan ordinat?" },
+      { label: "b.", text: "Tuliskan koordinat titik E dan F pada pola yang sama." },
+      { label: "c.", math: "\\text{Jika } y = 2x \\text{, apakah titik } (5,\\ 10) \\text{ mengikuti pola ini?}" },
+    ],
+  }),
+
+  Q(38, "Diagram — Jarak ke Kedua Sumbu", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [{ x: 4, y: 3, label: "P(4,3)", color: "#f472b6", labelPos: "tr" }],
+      segs: [
+        { x1: 4, y1: 3, x2: 4, y2: 0, color: "#f472b6", dashed: true, label: "3" },
+        { x1: 4, y1: 3, x2: 0, y2: 3, color: "#60a5fa", dashed: true, label: "4" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Berapa jarak P ke sumbu-x?" },
+      { label: "b.", text: "Berapa jarak P ke sumbu-y?" },
+      { label: "c.", text: "Jika P(−3, −5), berapa jaraknya ke sumbu-x? ke sumbu-y?" },
+    ],
+  }),
+
+  Q(39, "Soal UN — Koordinat dalam Konteks", {
+    type: "mixed",
+    content: "Seorang navigator kapal mencatat posisinya di peta koordinat:\nMulai: A(2, −3)\nBergerak 5 satuan ke kanan dan 4 satuan ke atas → posisi B.",
+    parts: [
+      { label: "a.", text: "Tentukan koordinat posisi B." },
+      { label: "b.", text: "Di kuadran mana posisi A berada? Posisi B?" },
+      { label: "c.", text: "Dari B, kapal bergerak 3 satuan ke kiri dan 7 satuan ke bawah. Tentukan posisi C." },
+    ],
+  }),
+
+  Q(40, "Soal ANBK — Gabungan Konsep Unsur Koordinat", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 3, y: 4, label: "A", color: "#f472b6", labelPos: "tr" },
+        { x: -3, y: 4, label: "B", color: "#60a5fa", labelPos: "tl" },
+        { x: -3, y: -4, label: "C", color: "#34d399", labelPos: "bl" },
+        { x: 3, y: -4, label: "D", color: "#facc15", labelPos: "br" },
+      ],
+      segs: [
+        { x1: 3, y1: 4, x2: -3, y2: 4, color: "rgba(255,255,255,0.25)" },
+        { x1: -3, y1: 4, x2: -3, y2: -4, color: "rgba(255,255,255,0.25)" },
+        { x1: -3, y1: -4, x2: 3, y2: -4, color: "rgba(255,255,255,0.25)" },
+        { x1: 3, y1: -4, x2: 3, y2: 4, color: "rgba(255,255,255,0.25)" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tuliskan koordinat A, B, C, D dan tentukan kuadrannya." },
+      { label: "b.", text: "Bangun apa yang dibentuk oleh titik A, B, C, D? Hitung kelilingnya." },
+      { label: "c.", text: "Tentukan koordinat titik tengah diagonal AC dan diagonal BD." },
+      { label: "d.", text: "Apa yang bisa kamu simpulkan dari titik tengah kedua diagonal?" },
+    ],
+  }),
+];
+
+const UnsurUnsurPage = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+
+        <div className="flex flex-col items-center mb-6">
+          <div className="w-14 h-14 rounded-full bg-sky-500/20 border-2 border-sky-400/60 flex items-center justify-center mb-3">
+            <MapPin className="w-7 h-7 text-sky-400" />
+          </div>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-sky-300 text-center mb-1"
+            style={{ textShadow: '0 0 20px rgba(56,189,248,0.7)' }}>
+            UNSUR-UNSUR DIAGRAM CARTESIUS
+          </h1>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Cartesius · Latihan Mandiri</p>
+          <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
+            <span className="text-sky-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-white/30 text-xs">·</span>
+            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+          </div>
+        </div>
+
+        <div className="mb-5 bg-sky-900/20 border border-sky-500/20 rounded-xl p-4">
+          <p className="text-sky-300 text-xs font-bold mb-2">📌 Keterangan Sumbu &amp; Kuadran</p>
+          <div className="grid grid-cols-2 gap-2 text-xs font-body">
+            {[
+              { q: "Kuadran I", c: "x > 0, y > 0", col: "text-yellow-400" },
+              { q: "Kuadran II", c: "x < 0, y > 0", col: "text-violet-400" },
+              { q: "Kuadran III", c: "x < 0, y < 0", col: "text-emerald-400" },
+              { q: "Kuadran IV", c: "x > 0, y < 0", col: "text-rose-400" },
+            ].map(r => (
+              <div key={r.q} className="bg-white/5 rounded-lg px-3 py-2">
+                <span className={`font-bold ${r.col}`}>{r.q}: </span>
+                <span className="text-white/60">{r.c}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 animate-slide-up">
+          {questions.map((q, i) => (
+            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
+              style={{ animationDelay: `${i * 0.03}s` }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
+              <div className="absolute inset-0 border border-sky-500/20 rounded-2xl" />
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-sky-400 to-blue-500 rounded-l-2xl" />
+              <div className="relative px-5 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-sky-500/20 border border-sky-400/50 flex items-center justify-center shrink-0">
+                    <span className="text-sky-300 text-xs font-bold">{q.n}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-sky-400 text-[10px] font-bold uppercase tracking-wider bg-sky-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                      {q.title}
+                    </span>
+                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.diagram && (
+                      <div className="mb-3 flex justify-center">
+                        <CoordPlane {...q.diagram} />
+                      </div>
+                    )}
+                    {q.parts && (
+                      <div className="flex flex-col gap-2">
+                        {q.parts.map((p, pi) => (
+                          <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
+                            <span className="text-sky-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
+                            {p.math
+                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
+                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
+                            }
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/koordinat-cartesius"); }}
+            className="text-sm text-muted-foreground hover:text-sky-400 transition-colors cursor-pointer font-body">
+            ← Kembali ke Koordinat Cartesius
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UnsurUnsurPage;

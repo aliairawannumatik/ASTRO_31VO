@@ -1,0 +1,314 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
+import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
+import { playPopSound } from "@/hooks/useAudio";
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
+
+// Helper function to render text with LaTeX
+const renderWithLatex = (text: string) => {
+  const parts = text.split(/(\$[^$]+\$)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('$') && part.endsWith('$')) {
+      const latex = part.slice(1, -1);
+      return <InlineMath key={index} math={latex} />;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
+const materiSection = {
+  title: "MATERI - TEOREMA PYTHAGORAS",
+  sections: [
+    {
+      heading: "A. Konsep Dasar Pythagoras",
+      content: `1. Kuadrat bilangan
+$a^2 = a \\times a$ atau $a^2 = (-a) \\times (-a)$
+
+2. Akar dari bilangan pada konsep Teorema Pythagoras diambil yang hasilnya positif karena sisi pada segitiga adalah bilangan positif.
+$x^2 = p^2$ maka $x = p$
+$x^2 = p$ maka $x = \\sqrt{p}$
+$\\sqrt{a^2p} = a\\sqrt{p}$
+
+3. Jika a, b, c merupakan sisi segitiga dan c merupakan sisi yang paling panjang, maka untuk membuat suatu segitiga harus dipenuhi syarat:
+$c < a + b$
+
+4. Jika a, b, c merupakan sisi segitiga dan c paling panjang:
+$c^2 > a^2 + b^2$ : segitiga tumpul di C
+$c^2 = a^2 + b^2$ : segitiga siku-siku di C
+$c^2 < a^2 + b^2$ : segitiga lancip di C`
+    },
+    {
+      heading: "B. Teorema Pythagoras",
+      content: `Diketahui segitiga siku-siku dengan sisi terpanjang c (sisi miring yang berhadapan dengan sudut siku-siku), sisi tegak a dan b, maka berlaku:
+
+"Sisi terpanjang (sisi miring) kuadrat sama dengan jumlah kuadrat sisi-sisi lainnya."
+
+$c^2 = a^2 + b^2$`
+    },
+    {
+      heading: "C. Jarak Antara 2 Titik Koordinat",
+      content: `$|PQ| = \\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}$
+
+$|PQ|$: jarak titik P dan Q`
+    },
+    {
+      heading: "D. Sudut Khusus pada Segitiga Siku-siku",
+      content: `1. Sudut $30°$ dan $60°$
+Pada segitiga siku-siku dengan sudut $30°$, $60°$, dan $90°$:
+- Sisi di depan sudut $30°$ = $\\frac{1}{2}$ sisi miring
+- Sisi di depan sudut $60°$ = $\\frac{\\sqrt{3}}{2}$ sisi miring
+
+2. Sudut $45°$
+Pada segitiga siku-siku sama kaki dengan sudut $45°$, $45°$, dan $90°$:
+- Kedua sisi tegak sama panjang
+- Sisi miring = $\\sqrt{2}$ kali sisi tegak`
+    },
+    {
+      heading: "E. Aplikasi pada Kehidupan",
+      content: `Teorema Pythagoras diperlukan dalam menghitung keliling atau luas suatu bangun datar dan aplikasinya; panjang kerangka, luas permukaan, dan volume bangun ruang dan aplikasinya; serta digunakan juga dalam beberapa perhitungan dalam bidang fisika.`
+    },
+    {
+      heading: "F. Tripel Pythagoras",
+      content: `Tripel Pythagoras adalah 3 bilangan asli yang memenuhi teorema Pythagoras. Artinya, jika terdapat 3 bilangan asli maka kuadrat bilangan terbesar sama dengan jumlah kuadrat dua bilangan lainnya.
+
+Berikut ini adalah 5 tipe tripel Pythagoras yang sering digunakan dalam perhitungan beserta kelipatannya:
+
+Tipe 1: 3, 4, 5 | 6, 8, 10 | 9, 12, 15 | ... kelipatannya
+Tipe 2: 5, 12, 13 | 10, 24, 26 | 15, 36, 39 | ... kelipatannya
+Tipe 3: 7, 24, 25 | 14, 48, 50 | 21, 72, 75 | ... kelipatannya
+Tipe 4: 8, 15, 17 | 16, 30, 34 | 24, 45, 51 | ... kelipatannya
+Tipe 5: 9, 40, 41 | 18, 80, 82 | 27, 120, 123 | ... kelipatannya`
+    }
+  ]
+};
+
+const latihanDasar = [
+  { no: 1, soal: "Diketahui ukuran segitiga:\ni. 1 cm, 1 cm, 1 cm\nii. 8 cm, 10 cm, 18 cm\niii. 12 cm, 21 cm, 8 cm\niv. 5 cm, 12 cm, 15 cm\nYang dapat membentuk suatu segitiga adalah ....", options: ["A. i dan iii", "B. iii dan iv", "C. i, iii dan iv", "D. i dan iv"] },
+  { no: 2, soal: "Diketahui ukuran berikut:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 15 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan sisi pada segitiga adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
+  { no: 3, soal: "Perhatikan gambar! Dari pernyataan berikut yang benar adalah ....", options: ["A. $p = \\sqrt{r^2 + q^2}$", "B. $q = \\sqrt{r^2 - p^2}$", "C. $p = \\sqrt{q^2 - r^2}$", "D. $q = \\sqrt{r^2 + p^2}$"] },
+  { no: 4, soal: "Panjang AC adalah..", options: ["A. 24 cm", "B. 28 cm", "C. 30 cm", "D. 32 cm"] },
+  { no: 5, soal: "Perhatikan gambar! Panjang AD adalah....", options: ["A. 15 cm", "B. 17 cm", "C. 24 cm", "D. 25 cm"] },
+  { no: 6, soal: "Perhatikan gambar berikut! Panjang BD adalah....", options: ["A. 12 cm", "B. 18 cm", "C. 18 cm", "D. 40 cm"] },
+  { no: 7, soal: "Perhatikan gambar berikut! Keliling bangun ABCDE adalah....", options: ["A. 56 cm", "B. 74 cm", "C. 59 cm", "D. 86 cm"] },
+  { no: 8, soal: "Perhatikan sisi-sisi segitiga di bawah\ni. 8, 15, dan 18\nii. 7, 24, dan 25\niii. 12, 15, dan 20\niv. 9, 12, dan 15\nYang merupakan tripel Pythagoras pada sisi-sisi segitiga diatas adalah...", options: ["A. i dan ii", "B. ii dan iii", "C. ii dan iv", "D. i dan iv"] },
+  { no: 9, soal: "Besar kedua sudut segitiga $40°$ dan $70°$. Ditinjau dari panjang sisi dan besar sudutnya, jenis segitiga tersebut adalah....", options: ["A. segitiga lancip sama kaki", "B. segitiga siku-siku sama kaki", "C. segitiga tumpul sama kaki", "D. segitiga tumpul sembarang"] },
+  { no: 10, soal: "Diketahui panjang sisi-sisi pada segitiga sebagai berikut:\n(1). 3 cm, 4 cm, 5 cm\n(2). 6 cm, 7 cm, 10 cm\n(3). 4 cm, 5 cm, 6 cm\n(4). 6 cm, 8 cm, 12 cm\nPanjang sisi-sisi diatas yang dapat membentuk segitiga tumpul adalah ...", options: ["A. (1) dan (2)", "B. (2) dan (3)", "C. (3) dan (4)", "D. (2) dan (4)"] },
+  { no: 11, soal: "Perhatikan tabel berikut:\n$\\triangle ABC$: 3, 10, 12\n$\\triangle DEF$: 3, 4, 6\n$\\triangle KLM$: 10, 24, 26\n$\\triangle PQR$: 6, 8, 9\nPada tabel tersebut, segitiga yang merupakan segitiga siku-siku adalah .......", options: ["A. $\\triangle ABC$", "B. $\\triangle DEF$", "C. $\\triangle KLM$", "D. $\\triangle PQR$"] },
+  { no: 12, soal: "Suatu segitiga mempunyai ukuran sisi-sisinya 8 cm, 15 cm, dan 20 cm. Segitiga tersebut merupakan jenis segitiga ....", options: ["A. lancip", "B. tumpul", "C. siku-siku", "D. sama kaki"] },
+  { no: 13, soal: "Diketahui ukuran segitiga:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 24 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan segitiga tumpul adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
+  { no: 14, soal: "Diketahui sebuah segitiga memiliki sudut $45°$ dan $100°$, maka jika ditinjau dari sisinya dan sudut segitiga tersebut adalah......", options: ["A. Segitiga tumpul sama kaki", "B. Segitiga tumpul sebarang", "C. Segitiga lancip sama sisi", "D. Segitiga siku-siku sama kaki"] },
+  { no: 15, soal: "Pernyataan yang benar untuk gambar di bawah adalah ...", options: ["A. $x = 6$ cm", "B. $x = 7$ cm", "C. luas segitiga $= 48$ cm$^2$", "D. keliling segitiga $= 21$ cm"] },
+  { no: 16, soal: "Diketahui keliling belah ketupat 52 cm dan salah satu diagonalnya 24 cm. Luas belah ketupat ABCD adalah....", options: ["A. 312 cm$^2$", "B. 274 cm$^2$", "C. 240 cm$^2$", "D. 120 cm$^2$"] },
+  { no: 17, soal: "Panjang diagonal dan lebar sebuah persegi panjang berturut-turut adalah 15 cm dan 9 cm. Panjang persegi panjang tersebut adalah ......", options: ["A. 8 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm"] },
+  { no: 18, soal: "Perhatikan gambar berikut.\nDari gambar diatas, berapa kira-kira panjang tali layar dari layang-layang agar layar tersebut menarik kapal pada sudut $45°$ dan berada pada ketinggian vertikal 150 m, seperti diperlihatkan pada gambar?", options: ["A. 175 m", "B. 212 m", "C. 285 m", "D. 300 m"] },
+  { no: 19, soal: "Sebuah kapal berlayar dari pelabuhan Ambu menuju arah barat sejauh 100 mil ke pelabuhan Beta. Dari Beta ke arah selatan sejauh 50 mil menuju pelabuhan Cinta. Dari Cinta ke arah timur sejauh 170 mil ke pelabuhan Delta. Dari Delta ke arah utara sejauh 290 mil menuju pelabuhan Eco. Jarak terdekat dari pelabuhan Ambu ke pelabuhan Eco adalah...", options: ["A. 130 mil", "B. 170 mil", "C. 250 mil", "D. 260 mil"] },
+  { no: 20, soal: "Perhatikan gambar.\nDiketahui AB = 15 cm, AF = 10 cm, BD = 12 cm. Luas bangun tersebut adalah ...", options: ["A. 140 cm$^2$", "B. 216 cm$^2$", "C. 250 cm$^2$", "D. 302 cm$^2$"] },
+  { no: 21, soal: "Perhatikan gambar berikut.\nLuas daerah di atas adalah", options: ["A. 48 cm$^2$", "B. 98 cm$^2$", "C. 120 cm$^2$", "D. 144 cm$^2$"] },
+  { no: 22, soal: "Kebun berbentuk belah ketupat dengan panjang masing-masing diagonalnya 12 m dan 16 m. Di sekeliling kebun akan ditanami pohon dengan jarak antar pohon 2 m.\nBanyaknya seluruh pohon adalah", options: ["A. 14 pohon", "B. 20 pohon", "C. 28 pohon", "D. 56 pohon"] },
+  { no: 23, soal: "Perhatikan gambar layang-layang ABCD di bawah ini.\nJika panjang AC = 24 cm, panjang AB = 13 cm dan panjang AD = 20 cm. Hitunglah luas bangun layang-layang di atas!", options: [] },
+  { no: 24, soal: "Perhatikan bangun datar jajargenjang ABCD di bawah ini.\nJika diketahui panjang AD = 13 cm, CD = 20 cm, dan BE = 15 cm. Hitunglah luas jajargenjang ABCD tersebut.", options: [] },
+  { no: 25, soal: "Sebidang tanah berbentuk trapesium sama kaki, panjang sisi sejajarnya 24 m dan 14 m, dan jarak sisi sejajar 12 m. Jika sekeliling tanah tersebut dibuat pagar, panjang pagar seluruhnya adalah...", options: ["A. 50 m", "B. 51 m", "C. 62 m", "D. 64 m"] },
+  { no: 26, soal: "Seseorang berada di atas gedung yang tingginya 12 m. Dia melihat dua buah benda A dan benda B di tanah dengan arah yang sama. Jika jarak pandang orang tersebut dengan benda A adalah 15 m dan dengan benda B adalah 20 m, maka jarak benda A dan benda B di tanah adalah...", options: ["A. 7 m", "B. 9 m", "C. 12 m", "D. 16 m"] },
+  { no: 27, soal: "Pada gambar di bawah, jika panjang PR = 12 cm maka panjang QR dan PQ adalah ...", options: [] },
+  { no: 28, soal: "Sebuah Helikopter terbang pada ketinggian 500 m di atas permukaan tanah. Helikopter tersebut melihat tiga titik di atas permukaan tanah, yaitu titik A, titik B, dan titik C.\nTentukanlah:\n1. jarak OA\n2. jarak AB\n3. jarak BC", options: [] },
+  { no: 29, soal: "Perhatikan gambar berikut.\nTentukanlah panjang sisi AB, AC, dan CD", options: [] },
+  { no: 30, soal: "Hitunglah jarak antara titik $A(3, -2)$ dan titik $B(-5, 4)$ pada bidang koordinat Kartesius.", options: ["A. 8", "B. 10", "C. $10\\sqrt{2}$", "D. $\\sqrt{52}$"] },
+  { no: 31, soal: "Jarak antara titik $P(k, 5)$ dan titik $Q(1, 1)$ adalah 5 satuan. Berapakah nilai k yang mungkin?", options: ["A. $k = 5$", "B. $k = 3$", "C. $k = -2$", "D. $k = 6$"] },
+  { no: 32, soal: "Tiga titik di bidang koordinat adalah $K(2, 5)$, $L(6, 1)$, dan $M(10, 5)$. Tentukan jenis segitiga $\\triangle KLM$ dilihat dari panjang sisi-sisinya.", options: ["A. Segitiga Sembarang", "B. Segitiga Sama Kaki", "C. Segitiga Siku-siku", "D. Segitiga Sama Sisi"] },
+  { no: 33, soal: "Titik $R(x, 0)$ terletak pada sumbu-x dan berjarak sama dari titik $A(2, 3)$ dan titik $B(5, -2)$. Berapakah koordinat titik R?", options: ["A. $R(4, 0)$", "B. $R(2, 0)$", "C. $R(3, 0)$", "D. $R\\left(\\frac{8}{3}, 0\\right)$"] },
+];
+
+const latihanOlimpiade = [
+  { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nPerhatikan gambar berikut. Panjang CP adalah ...", options: [] },
+  { no: 2, soal: "OSN Matematika 2006 Tingkat Kota\nJika panjang diagonal suatu persegi adalah 4 cm, maka luas persegi itu (dalam cm$^2$) adalah", options: ["A. 2", "B. 4", "C. 6", "D. 8", "E. 16"] },
+  { no: 3, soal: "OSN Matematika 2006 Tingkat Kota\nMisalkan a, b dan c adalah panjang sisi-sisi suatu segitiga dengan a, b dan c berupa bilangan asli berurutan yang rata-rata hitungnya 6. Jika ditarik garis tinggi terhadap sisi yang panjangnya b, maka panjang garis tinggi tersebut adalah ...", options: ["A. $\\sqrt{66}$", "B. $\\sqrt{46}$", "C. $\\sqrt{26}$", "D. $\\sqrt{42}$", "E. $\\sqrt{22}$"] },
+  { no: 4, soal: "OSN Matematika 2006 Tingkat Kota\nPerhatikan gambar di bawah ini. Jika panjang AB = 2 cm, panjang CD = 3 cm dan panjang AC = 9 cm, maka panjang BC adalah ...", options: [] },
+  { no: 5, soal: "OSN Matematika 2006 Tingkat Kota\nPerhatikan gambar di bawah ini. Jika panjang AB = 3 cm, panjang AD = 8 cm, panjang CD = 5 cm dan titik E terletak pada ruas garis BC, maka panjang minimal dari $AE + ED$ adalah ...", options: [] },
+  { no: 6, soal: "OSN Matematika 2007 Tingkat Kota\nKota A terletak 50 km di sebelah utara kota B, dan kota C terletak 120 km di sebelah timur kota B dan kota D terletak di tengah antara kota A dan C. Jarak kota D dari kota A adalah ...", options: [] },
+  { no: 7, soal: "OSN Matematika 2009 Tingkat Kota\nDiketahui koordinat segi empat ABCD adalah $A(0,0)$, $B(30,0)$, $C(0,40)$, $D(30,40)$. Titik E dan F masing-masing membagi sisi CD dan AC menjadi dua bagian sama panjang. Jika pada segitiga CEG dibuat lingkaran dalam, koordinat titik pusat lingkaran adalah", options: ["A. $(5, 35)$", "B. $(35, 5)$", "C. $(7\\frac{1}{2}, 10)$", "D. $(10, 7\\frac{1}{2})$"] },
+  { no: 8, soal: "OSN Matematika 2010 Tingkat Kota\nSebuah perahu motor meninggalkan kapal induk ke arah utara menuju suatu target dengan kecepatan tetap 80 km/jam. Kapal induk bergerak ke arah timur dengan kecepatan tetap 40 km/jam. Apabila perahu motor tersebut hanya mempunyai bahan bakar yang cukup untuk berjalan 4 jam saja, tentukan jarak maksimum target yang dapat ditujunya agar ia dapat kembali ke kapal induk tanpa masalah ... km", options: [] },
+  { no: 9, soal: "OSN Matematika 2012 Tingkat Kota\nJika segitiga ABC siku-siku di B, AB = 6, AC = 10 dan AD adalah garis bagi sudut BAC, maka panjang AD adalah ...", options: [] },
+  { no: 10, soal: "OSN Matematika 2015 Tingkat Kota\nDiketahui ABCD adalah trapesium, AB sejajar CD, dan $AB + CD = BC$. Jika panjang AD = 12, maka nilai $AB \\times CD$ adalah ...", options: ["A. 46", "B. 42", "C. 38", "D. 36"] },
+  { no: 11, soal: "OSN Matematika 2021 Tingkat Kota\nPerbandingan panjang kaki sudut siku-siku sebuah segitiga siku-siku adalah 2 : 3. Jika panjang sisi miring segitiga tersebut $5\\sqrt{13}$, maka luas segitiga siku-siku tersebut adalah ...", options: ["A. 12", "B. 27", "C. 48", "D. 75"] },
+  { no: 12, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui segitiga ABC dengan panjang sisi AB = 20 cm. Titik P berada pada sisi AB sehingga AP = BP = CP. Luas daerah segitiga APC adalah 30 cm$^2$. Jika jarak titik P ke sisi BC adalah d cm, maka nilai terbesar dari $d^2$ yang mungkin adalah ...", options: [] },
+];
+
+const OlimpiadeTeoremaPage = () => {
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
+  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+
+  const toggleSection = (idx: number) => {
+    playPopSound();
+    setExpandedSections(prev =>
+      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
+
+  return (
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+        <Trophy className="w-10 h-10 text-accent mx-auto mb-3" />
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
+          OLIMPIADE - TEOREMA PYTHAGORAS
+        </h1>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Irawan Sutiawan, M.Pd</p>
+
+        {/* Tabs */}
+        <div className="flex gap-2 justify-center mb-6">
+          {[
+            { key: "materi" as const, label: "Materi" },
+            { key: "dasar" as const, label: "Latihan Dasar" },
+            { key: "olimpiade" as const, label: "Latihan Olimpiade" },
+          ].map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => { playPopSound(); setActiveTab(tab.key); }}
+              className={`font-display text-xs px-4 py-2 rounded-lg border cursor-pointer transition-all ${
+                activeTab === tab.key
+                  ? "bg-accent text-accent-foreground border-accent"
+                  : "bg-card/80 text-white/70 border-border hover:border-accent/40"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Materi Tab */}
+        {activeTab === "materi" && (
+          <div className="space-y-3 animate-slide-up">
+            {materiSection.sections.map((section, idx) => (
+              <div
+                key={idx}
+                className="backdrop-blur border rounded-xl overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, rgba(30,41,59,0.75) 0%, rgba(15,23,42,0.85) 100%)",
+                  borderColor: expandedSections.includes(idx) ? "rgba(251,191,36,0.4)" : "rgba(255,255,255,0.1)",
+                  boxShadow: expandedSections.includes(idx)
+                    ? "0 0 24px rgba(251,191,36,0.08), inset 0 1px 0 rgba(255,255,255,0.05)"
+                    : "inset 0 1px 0 rgba(255,255,255,0.04)",
+                }}
+              >
+                <button
+                  onClick={() => toggleSection(idx)}
+                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left group"
+                >
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold"
+                      style={{ background: "rgba(251,191,36,0.15)", color: "#fbbf24", border: "1px solid rgba(251,191,36,0.35)" }}
+                    >
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className="font-display text-sm text-accent font-bold group-hover:text-yellow-300 transition-colors">
+                      {section.heading}
+                    </span>
+                  </div>
+                  {expandedSections.includes(idx)
+                    ? <ChevronUp className="w-4 h-4 text-accent shrink-0" />
+                    : <ChevronDown className="w-4 h-4 text-white/40 shrink-0" />}
+                </button>
+                {expandedSections.includes(idx) && (
+                  <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
+                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
+                      {section.content.split('\n').map((line, i) => {
+                        const trimmed = line.trim();
+                        if (/^\d+\. [A-Z]/.test(trimmed)) {
+                          return <div key={i} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{trimmed}</div>;
+                        }
+                        if (/^Rumus/.test(trimmed)) {
+                          return <div key={i} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">{renderWithLatex(trimmed)}</div>;
+                        }
+                        if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
+                          return (
+                            <div key={i} className="my-3 px-4 py-3 rounded-xl border-2 border-cyan-400/60 bg-cyan-950/40 text-center font-bold text-white text-base shadow-lg shadow-cyan-900/30">
+                              <span className="block text-[10px] text-cyan-400 font-semibold uppercase tracking-widest mb-1">Rumus Penting</span>
+                              {renderWithLatex(trimmed)}
+                            </div>
+                          );
+                        }
+                        if (trimmed === '') return <div key={i} className="h-2" />;
+                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Latihan Dasar Tab */}
+        {activeTab === "dasar" && (
+          <div className="space-y-4 animate-slide-up">
+            {latihanDasar.map((soal) => (
+              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                    <span key={lineIdx}>
+                      {lineIdx > 0 && <br />}
+                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                    </span>
+                  ))}
+                </div>
+                {soal.options.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {soal.options.map((opt, j) => (
+                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                        {renderWithLatex(opt)}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Latihan Olimpiade Tab */}
+        {activeTab === "olimpiade" && (
+          <div className="space-y-4 animate-slide-up">
+            {latihanOlimpiade.map((soal) => (
+              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                    <span key={lineIdx}>
+                      {lineIdx > 0 && <br />}
+                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                    </span>
+                  ))}
+                </div>
+                {soal.options.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {soal.options.map((opt, j) => (
+                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                        {renderWithLatex(opt)}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-8 text-center">
+          <button
+            onClick={() => { playPopSound(); navigate("/olimpiade"); }}
+            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+          >
+            ← Kembali ke Olimpiade
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OlimpiadeTeoremaPage;

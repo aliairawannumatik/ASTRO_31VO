@@ -1,0 +1,410 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from "lucide-react";
+import { playPopSound } from "@/hooks/useAudio";
+import "katex/dist/katex.min.css";
+import { InlineMath, BlockMath } from "react-katex";
+import SimilarityAnimation from "@/components/SimilarityAnimation";
+
+/* ── DIAGRAMS ── */
+
+const DiagramSebangun = () => (
+  <svg viewBox="0 0 340 160" className="w-full max-w-sm mx-auto">
+    {/* Rectangle 1 */}
+    <rect x="20" y="40" width="80" height="50" fill="#3b82f6" fillOpacity="0.25" stroke="#60a5fa" strokeWidth="2" rx="2" />
+    <text x="60" y="72" textAnchor="middle" fontSize="9" fill="#93c5fd">ABCD</text>
+    <text x="60" y="105" textAnchor="middle" fontSize="8" fill="#64748b">4 cm × 2,5 cm</text>
+    {/* Arrow */}
+    <text x="120" y="70" fontSize="18" fill="#facc15">~</text>
+    {/* Rectangle 2 */}
+    <rect x="150" y="25" width="120" height="75" fill="#22c55e" fillOpacity="0.25" stroke="#4ade80" strokeWidth="2" rx="2" />
+    <text x="210" y="65" textAnchor="middle" fontSize="9" fill="#86efac">EFGH</text>
+    <text x="210" y="115" textAnchor="middle" fontSize="8" fill="#64748b">6 cm × 3,75 cm</text>
+    {/* Ratio labels */}
+    <text x="170" y="15" fontSize="8" fill="#fde68a">AB/EF = BC/FG = 2/3</text>
+    {/* Angle indicators */}
+    <path d="M20,40 Q30,40 30,50" fill="none" stroke="#f97316" strokeWidth="1.5" />
+    <path d="M150,25 Q162,25 162,37" fill="none" stroke="#f97316" strokeWidth="1.5" />
+    <text x="22" y="58" fontSize="7" fill="#f97316">90°</text>
+    <text x="152" y="43" fontSize="7" fill="#f97316">90°</text>
+    <text x="60" y="20" textAnchor="middle" fontSize="9" fill="#facc15" fontWeight="bold">SEBANGUN (∼)</text>
+    <text x="230" y="20" textAnchor="middle" fontSize="9" fill="#facc15" fontWeight="bold">sudut sama, rusuk sebanding</text>
+  </svg>
+);
+
+const DiagramKongruen = () => (
+  <svg viewBox="0 0 340 160" className="w-full max-w-sm mx-auto">
+    {/* Triangle 1 */}
+    <polygon points="30,130 110,130 70,50" fill="#a855f7" fillOpacity="0.3" stroke="#c084fc" strokeWidth="2" />
+    <text x="70" y="145" textAnchor="middle" fontSize="9" fill="#e9d5ff">△ABC</text>
+    <text x="70" y="158" textAnchor="middle" fontSize="8" fill="#64748b">sisi = 5, 6, 7 cm</text>
+    {/* Equals */}
+    <text x="135" y="95" fontSize="20" fill="#facc15">≅</text>
+    {/* Triangle 2 */}
+    <polygon points="165,130 245,130 205,50" fill="#a855f7" fillOpacity="0.3" stroke="#c084fc" strokeWidth="2" />
+    <text x="205" y="145" textAnchor="middle" fontSize="9" fill="#e9d5ff">△DEF</text>
+    <text x="205" y="158" textAnchor="middle" fontSize="8" fill="#64748b">sisi = 5, 6, 7 cm</text>
+    {/* Labels */}
+    <text x="170" y="20" textAnchor="middle" fontSize="9" fill="#facc15" fontWeight="bold">KONGRUEN (≅)</text>
+    <text x="170" y="35" textAnchor="middle" fontSize="8" fill="#fde68a">bentuk SAMA, ukuran SAMA</text>
+    {/* tick marks */}
+    <line x1="70" y1="130" x2="70" y2="50" stroke="#f97316" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="205" y1="130" x2="205" y2="50" stroke="#f97316" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="30" y1="130" x2="70" y2="130" stroke="#22c55e" strokeWidth="2.5" />
+    <line x1="165" y1="130" x2="205" y2="130" stroke="#22c55e" strokeWidth="2.5" />
+    <text x="50" y="127" fontSize="8" fill="#22c55e">|</text>
+    <text x="185" y="127" fontSize="8" fill="#22c55e">|</text>
+  </svg>
+);
+
+const DiagramHubungan = () => (
+  <svg viewBox="0 0 320 130" className="w-full max-w-sm mx-auto">
+    <ellipse cx="160" cy="65" rx="150" ry="55" fill="#3b82f6" fillOpacity="0.1" stroke="#60a5fa" strokeWidth="1.5" />
+    <text x="160" y="18" textAnchor="middle" fontSize="10" fill="#93c5fd" fontWeight="bold">SEBANGUN (∼)</text>
+    <text x="160" y="32" textAnchor="middle" fontSize="8" fill="#64748b">sudut bersesuaian sama besar</text>
+    <text x="160" y="44" textAnchor="middle" fontSize="8" fill="#64748b">rusuk bersesuaian sebanding</text>
+    <ellipse cx="160" cy="85" rx="90" ry="33" fill="#22c55e" fillOpacity="0.15" stroke="#4ade80" strokeWidth="1.5" />
+    <text x="160" y="80" textAnchor="middle" fontSize="10" fill="#86efac" fontWeight="bold">KONGRUEN (≅)</text>
+    <text x="160" y="93" textAnchor="middle" fontSize="8" fill="#64748b">seperti sebangun, PLUS</text>
+    <text x="160" y="105" textAnchor="middle" fontSize="8" fill="#64748b">ukuran (rusuk) juga SAMA</text>
+    <text x="12" y="65" fontSize="8" fill="#fde68a">Kongruen ⊂ Sebangun</text>
+  </svg>
+);
+
+const DefinisiPage = () => {
+  const navigate = useNavigate();
+  const [expandedSections, setExpandedSections] = useState<string[]>([
+    "intro", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3",
+  ]);
+  const toggleSection = (s: string) => {
+    playPopSound();
+    setExpandedSections(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
+  };
+  const Header = ({ id, icon, color, label }: { id: string; icon: React.ReactNode; color: string; label: string }) => (
+    <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+      <div className="flex items-center gap-3"><span style={{ color }}>{icon}</span><span className="font-body font-semibold text-white">{label}</span></div>
+      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+    </button>
+  );
+
+  return (
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+        <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">DEFINISI KESEBANGUNAN DAN KEKONGRUENAN</h1>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Kesebangunan dan Kekongruenan · Materi Matematika</p>
+
+        <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* INTRO */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Header id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label="🏙️ Dari Maket Gedung sampai Ubin Lantai" />
+            {expandedSections.includes("intro") && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Pernah lihat maket gedung atau miniatur rumah di kantor arsitek? Miniatur itu punya bentuk persis sama dengan bangunan aslinya, hanya skalanya lebih kecil — itulah <strong className="text-cyan-300">kesebangunan</strong> dalam kehidupan nyata!
+                </p>
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-cyan-200 leading-relaxed">
+                    Sebaliknya, coba perhatikan ubin-ubin di lantai ruang kelasmu. Semua ubin punya bentuk <em>dan</em> ukuran yang persis sama, bukan hanya mirip bentuknya saja. Nah, itu namanya <strong>kekongruenan</strong>! 🧱
+                  </p>
+                </div>
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200">
+                    <strong>Perbedaan Kunci:</strong> Dua bangun <strong className="text-yellow-300">sebangun</strong> jika bentuknya sama (ukuran boleh beda). Dua bangun <strong className="text-green-300">kongruen</strong> jika bentuk DAN ukurannya sama persis.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* SUB-BAB 1: KESEBANGUNAN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Header id="konsep1" icon={<Target className="w-5 h-5" />} color="#4ade80" label="📘 Sub-Bab 1: Definisi Kesebangunan" />
+            {expandedSections.includes("konsep1") && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Dua bangun datar disebut <strong className="text-green-300">sebangun</strong> jika keduanya memenuhi dua syarat secara bersamaan:
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-2 font-body text-sm text-white/80">
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 font-bold shrink-0">①</span>
+                      <p><strong className="text-green-300">Sudut-sudut yang bersesuaian sama besar</strong> — setiap sudut di bangun pertama punya pasangan sudut yang sama besar di bangun kedua.</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 font-bold shrink-0">②</span>
+                      <p><strong className="text-green-300">Rusuk-rusuk yang bersesuaian sebanding</strong> — panjang sisi-sisinya membentuk perbandingan yang sama.</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+                    <BlockMath math="\frac{AB}{EF} = \frac{BC}{FG} = \frac{CD}{GH} = \frac{DA}{HE} = k" />
+                    <p className="font-body text-xs text-white/50 mt-1">k = faktor skala (rasio kesebangunan)</p>
+                  </div>
+                </div>
+                {/* Interactive Similarity Animation */}
+                <SimilarityAnimation />
+
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI DUA BANGUN SEBANGUN:</p>
+                  <DiagramSebangun />
+                  <p className="font-body text-xs text-white/50 text-center mt-2">Persegi panjang ABCD ~ EFGH karena sudut sama dan rusuk sebanding</p>
+                </div>
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200">
+                    <strong>Tips:</strong> Penulisan dua bangun sebangun menggunakan simbol "<InlineMath math="\sim" />". Contoh: ABCD <InlineMath math="\sim" /> EFGH. Urutan huruf menunjukkan titik-titik yang saling bersesuaian, jadi jangan sampai keliru urutannya!
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* CONTOH SOAL 1 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Header id="contoh1" icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label="📝 Contoh Soal — Kesebangunan Bangun Datar" />
+            {expandedSections.includes("contoh1") && (
+              <div className="px-5 pb-5 space-y-6">
+                {/* MUDAH */}
+                <div className="border-l-4 border-green-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
+                    <span className="font-body font-semibold text-white">Contoh 1</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">Persegi panjang ABCD dengan panjang <InlineMath math="AB = 10" /> cm dan lebar <InlineMath math="BC = 6" /> cm sebangun dengan persegi panjang PQRS. Jika <InlineMath math="PQ = 15" /> cm, tentukan panjang <InlineMath math="QR" />!</p>
+                  </div>
+                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Karena sebangun, rusuk-rusuk yang bersesuaian sebanding:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR}" />
+                        <BlockMath math="\frac{10}{15} = \frac{6}{QR}" />
+                      </div>
+                      <p><strong>Langkah 2:</strong> Selesaikan dengan perkalian silang:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="10 \times QR = 15 \times 6 = 90" />
+                        <BlockMath math="QR = \frac{90}{10} = 9 \text{ cm}" />
+                      </div>
+                      <p><strong className="text-green-300">Panjang QR = 9 cm.</strong></p>
+                    </div>
+                  </div>
+                </div>
+                {/* SEDANG */}
+                <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
+                    <span className="font-body font-semibold text-white">Contoh 2</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">Segiempat ABCD <InlineMath math="\sim" /> EFGH. Diketahui <InlineMath math="\angle A = 80°" />, <InlineMath math="\angle B = 95°" />, <InlineMath math="\angle C = 100°" />. Tentukan besar <InlineMath math="\angle E" />, <InlineMath math="\angle F" />, <InlineMath math="\angle G" />, dan <InlineMath math="\angle H" />!</p>
+                  </div>
+                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Cari <InlineMath math="\angle D" /> dari jumlah sudut segiempat = 360°:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\angle D = 360° - 80° - 95° - 100° = 85°" />
+                      </div>
+                      <p><strong>Langkah 2:</strong> Karena sebangun, sudut yang bersesuaian sama besar:</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1 text-sm">
+                        <p><InlineMath math="\angle E = \angle A = 80°" /></p>
+                        <p><InlineMath math="\angle F = \angle B = 95°" /></p>
+                        <p><InlineMath math="\angle G = \angle C = 100°" /></p>
+                        <p><InlineMath math="\angle H = \angle D = 85°" /></p>
+                      </div>
+                      <p><strong className="text-yellow-300">∠E = 80°, ∠F = 95°, ∠G = 100°, ∠H = 85°.</strong></p>
+                    </div>
+                  </div>
+                </div>
+                {/* SULIT */}
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="font-body font-semibold text-white">Contoh 3</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">Segitiga ABC <InlineMath math="\sim" /> segitiga PQR dengan <InlineMath math="AB = 8" /> cm, <InlineMath math="BC = 12" /> cm, <InlineMath math="AC = 10" /> cm. Jika keliling segitiga PQR = 45 cm, tentukan panjang PQ, QR, dan PR!</p>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Hitung keliling △ABC:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="K_{ABC} = 8 + 12 + 10 = 30 \text{ cm}" />
+                      </div>
+                      <p><strong>Langkah 2:</strong> Faktor skala dari ABC ke PQR:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="k = \frac{K_{PQR}}{K_{ABC}} = \frac{45}{30} = \frac{3}{2}" />
+                      </div>
+                      <p><strong>Langkah 3:</strong> Hitung setiap sisi △PQR:</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <BlockMath math="PQ = \frac{3}{2} \times 8 = 12 \text{ cm}" />
+                        <BlockMath math="QR = \frac{3}{2} \times 12 = 18 \text{ cm}" />
+                        <BlockMath math="PR = \frac{3}{2} \times 10 = 15 \text{ cm}" />
+                      </div>
+                      <p><strong className="text-primary">PQ = 12 cm, QR = 18 cm, PR = 15 cm.</strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* SUB-BAB 2: KEKONGRUENAN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Header id="konsep2" icon={<Target className="w-5 h-5" />} color="#c084fc" label="📘 Sub-Bab 2: Definisi Kekongruenan" />
+            {expandedSections.includes("konsep2") && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    <strong className="text-purple-300">Kekongruenan</strong> adalah "kesebangunan spesial" — dua bangun datar disebut <strong>kongruen</strong> jika memenuhi:
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-2 font-body text-sm text-white/80">
+                    <div className="flex items-start gap-2">
+                      <span className="text-purple-400 font-bold shrink-0">①</span>
+                      <p><strong className="text-purple-300">Sudut-sudut yang bersesuaian sama besar</strong></p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-purple-400 font-bold shrink-0">②</span>
+                      <p><strong className="text-purple-300">Rusuk-rusuk yang bersesuaian sama panjang</strong> (bukan hanya sebanding, tapi SAMA!)</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+                    <BlockMath math="AB = PQ,\; BC = QR,\; AC = PR" />
+                    <p className="font-body text-xs text-white/50 mt-1">Simbol kongruen: ≅ (sama dan sebangun)</p>
+                  </div>
+                </div>
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI DUA SEGITIGA KONGRUEN:</p>
+                  <DiagramKongruen />
+                </div>
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 HUBUNGAN SEBANGUN DAN KONGRUEN:</p>
+                  <DiagramHubungan />
+                </div>
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200">
+                    <strong>Kunci Hubungan:</strong> Bangun yang <strong className="text-purple-300">kongruen</strong> sudah pasti <strong className="text-green-300">sebangun</strong>, tapi bangun yang sebangun belum tentu kongruen (kecuali faktor skalanya <InlineMath math="k = 1" />).
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* CONTOH SOAL 2 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Header id="contoh2" icon={<Calculator className="w-5 h-5" />} color="#c084fc" label="📝 Contoh Soal — Kekongruenan Bangun Datar" />
+            {expandedSections.includes("contoh2") && (
+              <div className="px-5 pb-5 space-y-6">
+                {/* MUDAH */}
+                <div className="border-l-4 border-green-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
+                    <span className="font-body font-semibold text-white">Contoh 1</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">Diketahui △ABC ≅ △PQR dengan <InlineMath math="AB = 12" /> cm, <InlineMath math="AC = 5" /> cm, dan <InlineMath math="\angle A = 90°" />. Tentukan panjang PQ, PR, dan QR!</p>
+                  </div>
+                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p>Karena kongruen, sisi yang bersesuaian SAMA PANJANG:</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <p><InlineMath math="PQ = AB = 12 \text{ cm}" /></p>
+                        <p><InlineMath math="PR = AC = 5 \text{ cm}" /></p>
+                        <p><InlineMath math="\angle P = \angle A = 90°" /></p>
+                      </div>
+                      <p>Cari QR dengan Teorema Pythagoras:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="QR = \sqrt{PQ^2 + PR^2} = \sqrt{144 + 25} = \sqrt{169} = 13 \text{ cm}" />
+                      </div>
+                      <p><strong className="text-green-300">PQ = 12 cm, PR = 5 cm, QR = 13 cm.</strong></p>
+                    </div>
+                  </div>
+                </div>
+                {/* SEDANG */}
+                <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
+                    <span className="font-body font-semibold text-white">Contoh 2</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">Apakah pasangan berikut sebangun, kongruen, atau keduanya? Segitiga P dengan sisi 3, 4, 5 cm dan Segitiga Q dengan sisi 6, 8, 10 cm. Jelaskan!</p>
+                  </div>
+                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p><strong>Cek perbandingan rusuk:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{3}{6} = \frac{4}{8} = \frac{5}{10} = \frac{1}{2}" />
+                      </div>
+                      <p>Perbandingan sama → <strong className="text-green-300">Sebangun ✓</strong></p>
+                      <p><strong>Cek ukuran:</strong> Sisi-sisi tidak sama panjang (3 ≠ 6, dst.) → <strong className="text-red-300">Tidak kongruen ✗</strong></p>
+                      <p><strong className="text-yellow-300">Kesimpulan: Kedua segitiga SEBANGUN, tapi TIDAK KONGRUEN.</strong></p>
+                    </div>
+                  </div>
+                </div>
+                {/* SULIT */}
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="font-body font-semibold text-white">Contoh 3</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">Diketahui segi-6 beraturan ABCDEF dan segi-6 beraturan PQRSTU. Sisi ABCDEF = 5 cm dan sisi PQRSTU = 5 cm. Apakah kedua bangun tersebut sebangun? Kongruen? Berikan alasannya!</p>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p><strong>Cek sudut:</strong> Setiap segi-6 beraturan memiliki sudut dalam <InlineMath math="= \frac{(6-2) \times 180°}{6} = 120°" /> → sudut bersesuaian sama besar ✓</p>
+                      <p><strong>Cek rusuk:</strong> Perbandingan = <InlineMath math="\frac{5}{5} = 1" /> → Rusuk sebanding dengan rasio 1 ✓, dan sama panjang ✓</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <p className="text-sm text-white/80">Karena rasio = 1, artinya rusuk-rusuknya sama panjang:</p>
+                        <BlockMath math="k = \frac{5}{5} = 1 \Rightarrow \text{Kongruen!}" />
+                      </div>
+                      <p><strong className="text-primary">Kedua segi-6 beraturan tersebut SEBANGUN dan KONGRUEN.</strong></p>
+                      <p className="text-xs text-white/60">Catatan: Dua bangun beraturan yang sejenis (n-gon beraturan) selalu sebangun. Jika sisinya juga sama panjang, maka kongruen.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* RANGKUMAN */}
+          <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-5 space-y-3">
+            <p className="font-body text-sm font-semibold text-cyan-300">🌟 Rangkuman Definisi</p>
+            <div className="overflow-x-auto">
+              <table className="w-full font-body text-xs text-white/80">
+                <thead><tr className="border-b border-cyan-500/30">
+                  <th className="text-left py-2 text-cyan-300">Konsep</th>
+                  <th className="text-left py-2 text-cyan-300">Sudut</th>
+                  <th className="text-left py-2 text-cyan-300">Rusuk</th>
+                  <th className="text-left py-2 text-cyan-300">Simbol</th>
+                </tr></thead>
+                <tbody className="divide-y divide-slate-700">
+                  <tr><td className="py-2 text-green-300">Sebangun</td><td className="py-2">Sama besar</td><td className="py-2">Sebanding (k)</td><td className="py-2"><InlineMath math="\sim" /></td></tr>
+                  <tr><td className="py-2 text-purple-300">Kongruen</td><td className="py-2">Sama besar</td><td className="py-2">Sama panjang (k=1)</td><td className="py-2"><InlineMath math="\cong" /></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        <div className="mt-8 text-center">
+          <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/kesebangunan-kekongruenan"); }} className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
+            ← Kembali ke Kesebangunan dan Kekongruenan
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default DefinisiPage;

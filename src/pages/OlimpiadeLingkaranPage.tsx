@@ -1,0 +1,810 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
+import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
+import { playPopSound } from "@/hooks/useAudio";
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
+
+const M = ({ math }: { math: string }) => <InlineMath math={math} />;
+
+const renderWithLatex = (text: string) => {
+  const parts = text.split(/(\$[^$]+\$)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('$') && part.endsWith('$')) {
+      return <InlineMath key={index} math={part.slice(1, -1)} />;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
+/* ─────────────────────────────────────────────────────────
+   SVG DIAGRAM COMPONENTS
+───────────────────────────────────────────────────────── */
+
+const UnsurLingkaranSVG = () => (
+  <svg viewBox="0 0 340 310" className="w-full max-w-xs mx-auto">
+    <defs>
+      <radialGradient id="circFill" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#1e1b4b" />
+        <stop offset="100%" stopColor="#0f172a" />
+      </radialGradient>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#818cf8" />
+      </marker>
+    </defs>
+
+    {/* Main circle */}
+    <circle cx="170" cy="155" r="110" fill="url(#circFill)" stroke="#6366f1" strokeWidth="2.5" />
+
+    {/* Juring (sector) – shaded slice 0°–70° */}
+    <path d="M170,155 L170,45 A110,110 0,0,1 273,113 Z"
+      fill="#7c3aed" fillOpacity="0.35" stroke="#a78bfa" strokeWidth="1.5" />
+
+    {/* Tembereng (segment) between chord C–D */}
+    <path d="M95,95 A110,110 0,0,1 95,215 Z"
+      fill="#0ea5e9" fillOpacity="0.20" stroke="#38bdf8" strokeWidth="1" strokeDasharray="4,3" />
+
+    {/* Diameter */}
+    <line x1="60" y1="155" x2="280" y2="155" stroke="#f59e0b" strokeWidth="2" strokeDasharray="6,3" />
+
+    {/* Radius to top */}
+    <line x1="170" y1="155" x2="170" y2="45" stroke="#818cf8" strokeWidth="2" />
+
+    {/* Tali busur (chord) */}
+    <line x1="95" y1="95" x2="95" y2="215" stroke="#34d399" strokeWidth="2" />
+
+    {/* Center point */}
+    <circle cx="170" cy="155" r="4" fill="#f8fafc" />
+
+    {/* Arc arrow for busur */}
+    <path d="M 270,113 A 110,110 0 0,1 238,235" fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
+
+    {/* Labels */}
+    <text x="178" y="150" fill="#e2e8f0" fontSize="13" fontWeight="bold">O</text>
+    <text x="175" y="92" fill="#818cf8" fontSize="11">r</text>
+    <text x="158" y="28" fill="#818cf8" fontSize="11" fontWeight="bold">A</text>
+    <text x="285" y="158" fill="#f59e0b" fontSize="11" fontWeight="bold">B</text>
+    <text x="45" y="158" fill="#f59e0b" fontSize="11" fontWeight="bold">C</text>
+    <text x="77" y="90" fill="#34d399" fontSize="11" fontWeight="bold">D</text>
+    <text x="77" y="223" fill="#34d399" fontSize="11" fontWeight="bold">E</text>
+    <text x="245" y="100" fill="#f472b6" fontSize="11" fontWeight="bold">F</text>
+    <text x="225" y="245" fill="#f472b6" fontSize="11" fontWeight="bold">G</text>
+
+    {/* Legend */}
+    <rect x="10" y="270" width="10" height="10" fill="#818cf8" rx="2" />
+    <text x="25" y="280" fill="#c4b5fd" fontSize="10">Jari-jari (OA)</text>
+    <rect x="110" y="270" width="10" height="10" fill="#f59e0b" rx="2" />
+    <text x="125" y="280" fill="#fcd34d" fontSize="10">Diameter (CB)</text>
+    <rect x="10" y="288" width="10" height="10" fill="#34d399" rx="2" />
+    <text x="25" y="298" fill="#6ee7b7" fontSize="10">Tali busur (DE)</text>
+    <rect x="110" y="288" width="10" height="10" fill="#f472b6" rx="2" />
+    <text x="125" y="298" fill="#f9a8d4" fontSize="10">Busur FG</text>
+    <rect x="218" y="270" width="10" height="10" fill="#7c3aed" rx="2" />
+    <text x="232" y="280" fill="#c4b5fd" fontSize="10">Juring</text>
+    <rect x="218" y="288" width="10" height="10" fill="#0ea5e9" rx="2" />
+    <text x="232" y="298" fill="#7dd3fc" fontSize="10">Tembereng</text>
+  </svg>
+);
+
+const BusurJuringSVG = () => (
+  <svg viewBox="0 0 280 220" className="w-full max-w-[240px] mx-auto">
+    <defs>
+      <radialGradient id="sectorGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#1e1b4b" />
+        <stop offset="100%" stopColor="#0f172a" />
+      </radialGradient>
+    </defs>
+    {/* full circle faint */}
+    <circle cx="100" cy="130" r="90" fill="none" stroke="#334155" strokeWidth="1" strokeDasharray="4,3" />
+    {/* juring sector ~110 degrees */}
+    <path d="M100,130 L100,40 A90,90 0,0,1 185,195 Z"
+      fill="#7c3aed" fillOpacity="0.4" stroke="#a78bfa" strokeWidth="2" />
+    {/* arc highlight */}
+    <path d="M100,40 A90,90 0,0,1 185,195"
+      fill="none" stroke="#f472b6" strokeWidth="3" strokeLinecap="round" />
+    {/* center */}
+    <circle cx="100" cy="130" r="4" fill="#f8fafc" />
+    {/* angle arc */}
+    <path d="M100,110 A20,20 0,0,1 116,122" fill="none" stroke="#fbbf24" strokeWidth="2" />
+
+    {/* Labels */}
+    <text x="108" y="126" fill="#e2e8f0" fontSize="13" fontWeight="bold">O</text>
+    <text x="85" y="30" fill="#e2e8f0" fontSize="12" fontWeight="bold">A</text>
+    <text x="192" y="198" fill="#e2e8f0" fontSize="12" fontWeight="bold">B</text>
+    <text x="100" y="88" fill="#818cf8" fontSize="12">r</text>
+    <text x="117" y="116" fill="#fbbf24" fontSize="10">α</text>
+
+    {/* Formulas block */}
+    <rect x="170" y="20" width="108" height="90" rx="8" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1.2" />
+    <text x="224" y="38" fill="#a5b4fc" fontSize="9" textAnchor="middle" fontWeight="bold">RUMUS</text>
+    <text x="178" y="55" fill="#c4b5fd" fontSize="9">Busur AB =</text>
+    <text x="178" y="68" fill="#f9a8d4" fontSize="9">α/360° × 2πr</text>
+    <line x1="178" y1="74" x2="270" y2="74" stroke="#4338ca" strokeWidth="0.8" />
+    <text x="178" y="85" fill="#c4b5fd" fontSize="9">Juring OAB =</text>
+    <text x="178" y="98" fill="#f9a8d4" fontSize="9">α/360° × πr²</text>
+
+    {/* Tembereng note */}
+    <rect x="0" y="195" width="278" height="25" rx="6" fill="#1e1b4b" stroke="#0e7490" strokeWidth="1" />
+    <text x="139" y="211" fill="#7dd3fc" fontSize="9" textAnchor="middle">
+      Tembereng = Juring OAB − Segitiga OAB
+    </text>
+  </svg>
+);
+
+const PerbandinganSVG = () => (
+  <svg viewBox="0 0 280 180" className="w-full max-w-[240px] mx-auto">
+    <circle cx="140" cy="95" r="78" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+    {/* sector 1 – angle ~80° */}
+    <path d="M140,95 L140,17 A78,78 0,0,1 212,65 Z"
+      fill="#7c3aed" fillOpacity="0.45" stroke="#a78bfa" strokeWidth="1.8" />
+    {/* sector 2 – angle ~120° */}
+    <path d="M140,95 L212,65 A78,78 0,0,1 140,173 Z"
+      fill="#0ea5e9" fillOpacity="0.35" stroke="#38bdf8" strokeWidth="1.8" />
+    {/* center */}
+    <circle cx="140" cy="95" r="3.5" fill="#f8fafc" />
+
+    {/* Angle arcs */}
+    <path d="M140,75 A20,20 0,0,1 155,85" fill="none" stroke="#a78bfa" strokeWidth="1.8" />
+    <path d="M155,85 A20,20 0,0,1 155,107" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+
+    {/* Labels */}
+    <text x="148" y="91" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
+    <text x="133" y="9" fill="#e2e8f0" fontSize="11">A</text>
+    <text x="218" y="66" fill="#e2e8f0" fontSize="11">B</text>
+    <text x="133" y="181" fill="#e2e8f0" fontSize="11">C</text>
+    <text x="157" y="79" fill="#c4b5fd" fontSize="10">α</text>
+    <text x="157" y="101" fill="#7dd3fc" fontSize="10">β</text>
+
+    {/* Formula */}
+    <rect x="0" y="4" width="115" height="50" rx="7" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
+    <text x="57" y="20" fill="#a5b4fc" fontSize="8.5" textAnchor="middle" fontWeight="bold">PERBANDINGAN</text>
+    <text x="10" y="34" fill="#c4b5fd" fontSize="8">∠AOB   arc AB   Juring AOB</text>
+    <text x="10" y="46" fill="#f9a8d4" fontSize="8">——— = ——— = ——————</text>
+    <text x="10" y="58" fill="#c4b5fd" fontSize="8">∠BOC   arc BC   Juring BOC</text>
+  </svg>
+);
+
+const SudutPusatKelilingSVG = () => (
+  <svg viewBox="0 0 280 220" className="w-full max-w-[240px] mx-auto">
+    <circle cx="140" cy="120" r="90" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+    {/* arc AB highlighted */}
+    <path d="M86,48 A90,90 0,0,1 194,48" fill="none" stroke="#f472b6" strokeWidth="3" strokeLinecap="round" />
+    {/* central angle AOB */}
+    <line x1="140" y1="120" x2="86" y2="48" stroke="#818cf8" strokeWidth="1.8" />
+    <line x1="140" y1="120" x2="194" y2="48" stroke="#818cf8" strokeWidth="1.8" />
+    {/* inscribed angle ACB from bottom */}
+    <line x1="140" y1="210" x2="86" y2="48" stroke="#34d399" strokeWidth="1.8" strokeDasharray="5,3" />
+    <line x1="140" y1="210" x2="194" y2="48" stroke="#34d399" strokeWidth="1.8" strokeDasharray="5,3" />
+    {/* angle arc at O */}
+    <path d="M125,109 A18,18 0,0,1 155,109" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    {/* angle arc at C */}
+    <path d="M132,194 A18,18 0,0,1 148,194" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    {/* Points */}
+    <circle cx="140" cy="120" r="3.5" fill="#f8fafc" />
+    <circle cx="86" cy="48" r="3" fill="#f8fafc" />
+    <circle cx="194" cy="48" r="3" fill="#f8fafc" />
+    <circle cx="140" cy="210" r="3" fill="#f8fafc" />
+    {/* Labels */}
+    <text x="148" y="116" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
+    <text x="72" y="42" fill="#e2e8f0" fontSize="12" fontWeight="bold">A</text>
+    <text x="198" y="42" fill="#e2e8f0" fontSize="12" fontWeight="bold">B</text>
+    <text x="133" y="222" fill="#e2e8f0" fontSize="12" fontWeight="bold">C</text>
+    <text x="133" y="104" fill="#fbbf24" fontSize="10">2α</text>
+    <text x="133" y="190" fill="#fbbf24" fontSize="10">α</text>
+
+    {/* Rule box */}
+    <rect x="0" y="0" width="128" height="36" rx="7" fill="#1e1b4b" stroke="#a16207" strokeWidth="1" />
+    <text x="64" y="13" fill="#fcd34d" fontSize="9" textAnchor="middle" fontWeight="bold">Sudut Pusat & Keliling</text>
+    <text x="64" y="27" fill="#fbbf24" fontSize="9" textAnchor="middle">∠AOB = 2 × ∠ACB</text>
+  </svg>
+);
+
+const SudutDiameterSVG = () => (
+  <svg viewBox="0 0 200 160" className="w-full max-w-[180px] mx-auto">
+    <circle cx="100" cy="85" r="70" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+    {/* diameter AB */}
+    <line x1="30" y1="85" x2="170" y2="85" stroke="#f59e0b" strokeWidth="2" strokeDasharray="5,3" />
+    {/* lines from C */}
+    <line x1="100" y1="15" x2="30" y2="85" stroke="#818cf8" strokeWidth="1.8" />
+    <line x1="100" y1="15" x2="170" y2="85" stroke="#818cf8" strokeWidth="1.8" />
+    {/* right angle mark at C */}
+    <rect x="94" y="21" width="9" height="9" fill="none" stroke="#34d399" strokeWidth="1.5" />
+    {/* Points */}
+    <circle cx="100" cy="15" r="3" fill="#f8fafc" />
+    <circle cx="30" cy="85" r="3" fill="#f8fafc" />
+    <circle cx="170" cy="85" r="3" fill="#f8fafc" />
+    <circle cx="100" cy="85" r="3" fill="#f8fafc" />
+    <text x="96" y="9" fill="#e2e8f0" fontSize="12" fontWeight="bold">C</text>
+    <text x="16" y="88" fill="#f59e0b" fontSize="12" fontWeight="bold">A</text>
+    <text x="174" y="88" fill="#f59e0b" fontSize="12" fontWeight="bold">B</text>
+    <text x="104" y="82" fill="#e2e8f0" fontSize="11" fontWeight="bold">O</text>
+    <text x="30" y="140" fill="#34d399" fontSize="10">∠BAC = 90° (menghadap diameter)</text>
+  </svg>
+);
+
+const SegiempatTaliBusurSVG = () => (
+  <svg viewBox="0 0 200 180" className="w-full max-w-[180px] mx-auto">
+    <circle cx="100" cy="90" r="72" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+    {/* Cyclic quadrilateral ABCD */}
+    <polygon points="100,18 164,135 55,152 45,48"
+      fill="#7c3aed" fillOpacity="0.18" stroke="#a78bfa" strokeWidth="2" />
+    <circle cx="100" cy="18" r="3" fill="#f8fafc" />
+    <circle cx="164" cy="135" r="3" fill="#f8fafc" />
+    <circle cx="55" cy="152" r="3" fill="#f8fafc" />
+    <circle cx="45" cy="48" r="3" fill="#f8fafc" />
+    <text x="96" y="12" fill="#e2e8f0" fontSize="11" fontWeight="bold">A</text>
+    <text x="169" y="138" fill="#e2e8f0" fontSize="11" fontWeight="bold">B</text>
+    <text x="48" y="165" fill="#e2e8f0" fontSize="11" fontWeight="bold">C</text>
+    <text x="29" y="50" fill="#e2e8f0" fontSize="11" fontWeight="bold">D</text>
+    {/* Labels */}
+    <text x="30" y="108" fill="#f472b6" fontSize="10">∠A + ∠C = 180°</text>
+    <text x="30" y="122" fill="#f472b6" fontSize="10">∠B + ∠D = 180°</text>
+  </svg>
+);
+
+const GarisSinggungSVG = () => (
+  <svg viewBox="0 0 280 180" className="w-full max-w-[260px] mx-auto">
+    {/* Circle */}
+    <circle cx="100" cy="90" r="65" fill="#0f172a" stroke="#6366f1" strokeWidth="2" />
+    {/* Tangent line */}
+    <line x1="100" y1="25" x2="100" y2="160" stroke="#34d399" strokeWidth="2.5" />
+    {/* Radius to tangent point */}
+    <line x1="100" y1="90" x2="100" y2="25" stroke="#818cf8" strokeWidth="2" />
+    {/* External point and tangent */}
+    <line x1="200" y1="90" x2="100" y2="25" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
+    <line x1="200" y1="90" x2="100" y2="155" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
+    {/* Right angle marks */}
+    <rect x="100" y="25" width="9" height="9" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+    <rect x="100" y="146" width="9" height="9" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+    {/* Points */}
+    <circle cx="100" cy="90" r="3.5" fill="#f8fafc" />
+    <circle cx="100" cy="25" r="3" fill="#f8fafc" />
+    <circle cx="100" cy="155" r="3" fill="#f8fafc" />
+    <circle cx="200" cy="90" r="3" fill="#f8fafc" />
+    <text x="106" y="87" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
+    <text x="86" y="19" fill="#e2e8f0" fontSize="11" fontWeight="bold">A</text>
+    <text x="86" y="168" fill="#e2e8f0" fontSize="11" fontWeight="bold">C</text>
+    <text x="205" y="93" fill="#e2e8f0" fontSize="11" fontWeight="bold">B</text>
+    <text x="103" y="58" fill="#818cf8" fontSize="11">r</text>
+
+    {/* Formula box */}
+    <rect x="152" y="20" width="128" height="50" rx="7" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
+    <text x="216" y="35" fill="#a5b4fc" fontSize="9" textAnchor="middle" fontWeight="bold">OA ⊥ Garis Singgung</text>
+    <text x="216" y="49" fill="#c4b5fd" fontSize="9" textAnchor="middle">AB² = OB² − r²</text>
+    <text x="216" y="63" fill="#f9a8d4" fontSize="9" textAnchor="middle">AB = AC (dari titik B)</text>
+  </svg>
+);
+
+const GSPersekutuanSVG = () => (
+  <svg viewBox="0 0 300 170" className="w-full max-w-[280px] mx-auto">
+    {/* Two circles */}
+    <circle cx="75" cy="90" r="55" fill="#0f172a" stroke="#7c3aed" strokeWidth="2" />
+    <circle cx="220" cy="90" r="35" fill="#0f172a" stroke="#0ea5e9" strokeWidth="2" />
+    {/* Center line */}
+    <line x1="75" y1="90" x2="220" y2="90" stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3" />
+    {/* GSPD (internal) */}
+    <line x1="140" y1="52" x2="175" y2="120" stroke="#f472b6" strokeWidth="2.2" />
+    <text x="148" y="45" fill="#f9a8d4" fontSize="10" fontWeight="bold">GSPD</text>
+    {/* GSPL (external upper) */}
+    <line x1="40" y1="42" x2="245" y2="58" stroke="#34d399" strokeWidth="2.2" />
+    <text x="50" y="34" fill="#6ee7b7" fontSize="10" fontWeight="bold">GSPL</text>
+    {/* Labels */}
+    <circle cx="75" cy="90" r="3" fill="#f8fafc" />
+    <circle cx="220" cy="90" r="3" fill="#f8fafc" />
+    <text x="79" y="87" fill="#c4b5fd" fontSize="11">O₁</text>
+    <text x="224" y="87" fill="#7dd3fc" fontSize="11">O₂</text>
+    <text x="40" y="88" fill="#c4b5fd" fontSize="10">R</text>
+    <text x="218" y="64" fill="#7dd3fc" fontSize="10">r</text>
+    <text x="130" y="100" fill="#94a3b8" fontSize="9">p</text>
+
+    {/* Formula boxes */}
+    <rect x="0" y="130" width="145" height="38" rx="6" fill="#1e1b4b" stroke="#7c3aed" strokeWidth="1" />
+    <text x="72" y="145" fill="#c4b5fd" fontSize="9" textAnchor="middle" fontWeight="bold">GSPD (dalam)</text>
+    <text x="72" y="161" fill="#f9a8d4" fontSize="9" textAnchor="middle">d² = p² − (R + r)²</text>
+
+    <rect x="152" y="130" width="145" height="38" rx="6" fill="#1e1b4b" stroke="#0e7490" strokeWidth="1" />
+    <text x="224" y="145" fill="#7dd3fc" fontSize="9" textAnchor="middle" fontWeight="bold">GSPL (luar)</text>
+    <text x="224" y="161" fill="#6ee7b7" fontSize="9" textAnchor="middle">l² = p² − (R − r)²</text>
+  </svg>
+);
+
+/* ─────────────────────────────────────────────────────────
+   MATERI SECTIONS (rich content)
+───────────────────────────────────────────────────────── */
+
+type MateriSection = {
+  heading: string;
+  color: string;
+  borderColor: string;
+  content: React.ReactNode;
+};
+
+const materiSections: MateriSection[] = [
+  {
+    heading: "A. Unsur-Unsur Lingkaran",
+    color: "from-indigo-900/40 to-violet-900/30",
+    borderColor: "border-indigo-500/30",
+    content: (
+      <div className="space-y-4">
+        <UnsurLingkaranSVG />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {[
+            { name: "Titik Pusat", desc: "Titik O di tengah lingkaran, berjarak sama ke semua titik pada lingkaran.", color: "border-indigo-400/40 bg-indigo-500/5", dot: "bg-indigo-400" },
+            { name: "Jari-jari (r)", desc: "Ruas garis dari titik pusat ke titik pada lingkaran.", color: "border-violet-400/40 bg-violet-500/5", dot: "bg-violet-400" },
+            { name: "Diameter (d)", desc: "Tali busur yang melewati pusat lingkaran. d = 2r.", color: "border-amber-400/40 bg-amber-500/5", dot: "bg-amber-400" },
+            { name: "Busur", desc: "Bagian dari lengkung lingkaran, dibatasi dua titik.", color: "border-pink-400/40 bg-pink-500/5", dot: "bg-pink-400" },
+            { name: "Tali Busur", desc: "Ruas garis yang menghubungkan dua titik pada lingkaran (tidak melalui pusat).", color: "border-emerald-400/40 bg-emerald-500/5", dot: "bg-emerald-400" },
+            { name: "Juring", desc: "Daerah yang dibatasi dua jari-jari dan busur di antara keduanya.", color: "border-purple-400/40 bg-purple-500/5", dot: "bg-purple-400" },
+            { name: "Tembereng", desc: "Daerah yang dibatasi tali busur dan busur di antara keduanya.", color: "border-sky-400/40 bg-sky-500/5", dot: "bg-sky-400" },
+            { name: "Apotema", desc: "Jarak terpendek dari pusat lingkaran ke sebuah tali busur.", color: "border-rose-400/40 bg-rose-500/5", dot: "bg-rose-400" },
+          ].map(({ name, desc, color, dot }) => (
+            <div key={name} className={`border rounded-xl px-3 py-2.5 ${color}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className={`w-2 h-2 rounded-full shrink-0 ${dot}`} />
+                <span className="font-body text-xs font-bold text-white/90">{name}</span>
+              </div>
+              <p className="font-body text-xs text-white/60 leading-relaxed">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+  {
+    heading: "B. Luas dan Keliling Lingkaran",
+    color: "from-violet-900/40 to-purple-900/30",
+    borderColor: "border-violet-500/30",
+    content: (
+      <div className="space-y-4">
+        <div className="flex justify-center">
+          <svg viewBox="0 0 200 200" className="w-40 h-40">
+            <circle cx="100" cy="100" r="75" fill="#1e1b4b" stroke="#818cf8" strokeWidth="2.5" />
+            <line x1="100" y1="100" x2="175" y2="100" stroke="#f472b6" strokeWidth="2.5" />
+            <line x1="25" y1="100" x2="175" y2="100" stroke="#f59e0b" strokeWidth="1.8" strokeDasharray="5,3" opacity="0.5" />
+            <circle cx="100" cy="100" r="4" fill="#f8fafc" />
+            <text x="133" y="96" fill="#f472b6" fontSize="14" fontWeight="bold">r</text>
+            <text x="106" y="96" fill="#e2e8f0" fontSize="13" fontWeight="bold">O</text>
+            <path d="M175,100 A75,75 0,0,1 100,25" fill="none" stroke="#34d399" strokeWidth="3" strokeLinecap="round" />
+            <text x="158" y="64" fill="#34d399" fontSize="10">s</text>
+          </svg>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="bg-pink-500/10 border border-pink-500/30 rounded-2xl px-4 py-4 text-center">
+            <p className="font-body text-xs text-pink-300/70 uppercase tracking-wider mb-2">Luas Lingkaran</p>
+            <div className="text-2xl font-bold text-pink-300">
+              <M math="L = \pi r^2" />
+            </div>
+            <p className="font-body text-xs text-white/40 mt-2">atau <M math="L = \frac{1}{4}\pi d^2" /></p>
+          </div>
+          <div className="bg-violet-500/10 border border-violet-500/30 rounded-2xl px-4 py-4 text-center">
+            <p className="font-body text-xs text-violet-300/70 uppercase tracking-wider mb-2">Keliling Lingkaran</p>
+            <div className="text-2xl font-bold text-violet-300">
+              <M math="K = 2\pi r" />
+            </div>
+            <p className="font-body text-xs text-white/40 mt-2">atau <M math="K = \pi d" /></p>
+          </div>
+        </div>
+        <div className="bg-amber-500/10 border border-amber-500/25 rounded-xl px-4 py-3">
+          <p className="font-body text-xs text-amber-300 font-bold mb-1">📌 Nilai π</p>
+          <p className="font-body text-xs text-white/70 leading-relaxed">
+            Gunakan <M math="\pi = 3{,}14" /> atau <M math="\pi = \dfrac{22}{7}" /> (jika jari-jari kelipatan 7).
+          </p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    heading: "C. Panjang Busur dan Luas Juring",
+    color: "from-fuchsia-900/40 to-pink-900/30",
+    borderColor: "border-fuchsia-500/30",
+    content: (
+      <div className="space-y-4">
+        <BusurJuringSVG />
+        <div className="space-y-3">
+          <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl px-4 py-3">
+            <p className="font-body text-xs text-purple-300 font-bold mb-2">Panjang Busur AB</p>
+            <div className="text-center">
+              <M math="\text{Busur } AB = \dfrac{\alpha}{360°} \times 2\pi r" />
+            </div>
+          </div>
+          <div className="bg-fuchsia-500/10 border border-fuchsia-500/25 rounded-2xl px-4 py-3">
+            <p className="font-body text-xs text-fuchsia-300 font-bold mb-2">Luas Juring OAB</p>
+            <div className="text-center">
+              <M math="\text{Juring OAB} = \dfrac{\alpha}{360°} \times \pi r^2" />
+            </div>
+          </div>
+          <div className="bg-pink-500/10 border border-pink-500/25 rounded-2xl px-4 py-3">
+            <p className="font-body text-xs text-pink-300 font-bold mb-2">Luas Tembereng</p>
+            <div className="text-center">
+              <M math="\text{Tembereng} = \text{Juring OAB} - \Delta OAB" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-2">
+          <p className="font-body text-xs text-white/60 leading-relaxed">
+            <span className="text-fuchsia-300 font-semibold">Keterangan:</span> α = sudut pusat (°), r = jari-jari.
+            Pastikan sudut dalam derajat, bukan radian.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    heading: "D. Perbandingan Busur dan Juring",
+    color: "from-sky-900/40 to-cyan-900/30",
+    borderColor: "border-sky-500/30",
+    content: (
+      <div className="space-y-4">
+        <PerbandinganSVG />
+        <div className="bg-sky-500/10 border border-sky-500/25 rounded-2xl px-4 py-4">
+          <p className="font-body text-xs text-sky-300 font-bold mb-3 text-center">
+            Dalam satu lingkaran yang sama berlaku:
+          </p>
+          <div className="text-center mb-3">
+            <M math="\dfrac{\angle AOB}{\angle COD} = \dfrac{\widehat{AB}}{\widehat{CD}} = \dfrac{L_{\text{juring AOB}}}{L_{\text{juring COD}}}" />
+          </div>
+        </div>
+        <div className="bg-cyan-500/10 border border-cyan-500/25 rounded-xl px-3 py-3">
+          <p className="font-body text-xs text-cyan-300 font-bold mb-1">💡 Cara Menggunakan</p>
+          <p className="font-body text-xs text-white/65 leading-relaxed">
+            Jika diketahui dua sudut pusat dan salah satu busur/juring, gunakan perbandingan untuk mencari yang lain.
+            Contoh: jika <M math="\angle AOB = 40°" />, <M math="\angle COD = 80°" />, dan busur AB = 14 cm,
+            maka busur CD = 28 cm.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    heading: "E. Sudut-Sudut pada Lingkaran",
+    color: "from-emerald-900/40 to-teal-900/30",
+    borderColor: "border-emerald-500/30",
+    content: (
+      <div className="space-y-5">
+        {/* Rule 1 */}
+        <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl px-4 py-3 space-y-3">
+          <p className="font-body text-xs text-emerald-300 font-bold">1. Sudut Pusat & Sudut Keliling (busur sama)</p>
+          <SudutPusatKelilingSVG />
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs">
+              <M math="\angle AOB = 2 \angle ACB" />
+            </div>
+            <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs">
+              <M math="\angle ACB = \tfrac{1}{2} \angle AOB" />
+            </div>
+          </div>
+        </div>
+        {/* Rule 2 */}
+        <div className="bg-teal-500/10 border border-teal-500/25 rounded-2xl px-4 py-3 space-y-3">
+          <p className="font-body text-xs text-teal-300 font-bold">2. Sudut Keliling yang Menghadap Diameter</p>
+          <SudutDiameterSVG />
+          <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs">
+            <M math="\angle BAC = 90°" /> (sudut siku-siku)
+          </div>
+        </div>
+        {/* Rule 3 */}
+        <div className="bg-green-500/10 border border-green-500/25 rounded-2xl px-4 py-3">
+          <p className="font-body text-xs text-green-300 font-bold mb-2">3. Sudut Keliling di Busur yang Sama</p>
+          <p className="font-body text-xs text-white/70 leading-relaxed mb-2">
+            Semua sudut keliling yang menghadap busur yang sama adalah sama besar.
+          </p>
+          <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs">
+            <M math="\angle ACB = \angle ADB = \angle AEB" />
+          </div>
+        </div>
+        {/* Rule 4 */}
+        <div className="bg-lime-500/10 border border-lime-500/25 rounded-2xl px-4 py-3 space-y-3">
+          <p className="font-body text-xs text-lime-300 font-bold">4. Sudut pada Segiempat Tali Busur</p>
+          <SegiempatTaliBusurSVG />
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs">
+              <M math="\angle A + \angle C = 180°" />
+            </div>
+            <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs">
+              <M math="\angle B + \angle D = 180°" />
+            </div>
+          </div>
+          <p className="font-body text-xs text-white/50 text-center">
+            Sudut-sudut yang berhadapan bersuplemen (jumlah 180°)
+          </p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    heading: "F. Garis Singgung Lingkaran",
+    color: "from-rose-900/40 to-red-900/30",
+    borderColor: "border-rose-500/30",
+    content: (
+      <div className="space-y-4">
+        {/* Definition */}
+        <div className="bg-rose-500/10 border border-rose-500/25 rounded-2xl px-4 py-3">
+          <p className="font-body text-xs text-rose-300 font-bold mb-2">Definisi</p>
+          <p className="font-body text-xs text-white/70 leading-relaxed">
+            Garis singgung lingkaran adalah garis yang menyentuh lingkaran tepat di satu titik
+            (titik singgung). Garis singgung <span className="text-rose-300 font-semibold">selalu tegak lurus</span> terhadap
+            jari-jari yang melalui titik singgung tersebut.
+          </p>
+        </div>
+        <GarisSinggungSVG />
+        <div className="bg-pink-500/10 border border-pink-500/25 rounded-2xl px-4 py-3">
+          <p className="font-body text-xs text-pink-300 font-bold mb-2">Panjang Garis Singgung dari Titik Luar</p>
+          <div className="text-center mb-2">
+            <M math="AB^2 = OB^2 - r^2" />
+          </div>
+          <p className="font-body text-xs text-white/50 text-center">
+            Dari titik B di luar lingkaran: AB = AC (panjang garis singgung sama)
+          </p>
+        </div>
+
+        {/* GSPD & GSPL */}
+        <p className="font-body text-xs text-white/70 font-semibold pt-1">Garis Singgung Persekutuan Dua Lingkaran</p>
+        <GSPersekutuanSVG />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl px-4 py-3">
+            <p className="font-body text-xs text-purple-300 font-bold mb-2">GSPD (Dalam)</p>
+            <div className="text-center mb-2">
+              <M math="d^2 = p^2 - (R + r)^2" />
+            </div>
+            <p className="font-body text-xs text-white/50">p = jarak pusat, R & r = jari-jari</p>
+          </div>
+          <div className="bg-cyan-500/10 border border-cyan-500/25 rounded-2xl px-4 py-3">
+            <p className="font-body text-xs text-cyan-300 font-bold mb-2">GSPL (Luar)</p>
+            <div className="text-center mb-2">
+              <M math="l^2 = p^2 - (R - r)^2" />
+            </div>
+            <p className="font-body text-xs text-white/50">p = jarak pusat, R & r = jari-jari</p>
+          </div>
+        </div>
+        <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-2">
+          <p className="font-body text-xs text-white/55 leading-relaxed">
+            <span className="text-amber-300 font-semibold">Ingat:</span> GSPD memotong ruas garis antara dua pusat,
+            sedangkan GSPL tidak memotongnya.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+/* ─────────────────────────────────────────────────────────
+   LATIHAN DATA (unchanged)
+───────────────────────────────────────────────────────── */
+
+const latihanDasar = [
+  { no: 1, soal: "Perhatikan gambar!\nJika O adalah pusat lingkaran, jika r = 21 cm dan $\\pi = \\frac{22}{7}$, maka luas daerah yang diarsir adalah ...", options: ["A. 77 $cm^2$", "B. 154 $cm^2$", "C. 231 $cm^2$", "D. 308 $cm^2$"] },
+  { no: 2, soal: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran, dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah.... ($\\pi = \\frac{22}{7}$)\nLuas juring dengan sudut pusat $120^0$ dan panjang jari-jari 7 cm adalah ... ($\\pi = \\frac{22}{7}$)", options: ["A. 77 $cm^2$", "B. 51,33 $cm^2$", "C. 38,50 $cm^2$", "D. 14,67 $cm^2$"] },
+  { no: 3, soal: "Perhatikanlah gambar berikut.\nDiketahui O adalah titik pusat lingkaran. Jika panjang busur QR = 60 cm, panjang busur PQ adalah...", options: ["A. 40 cm", "B. 45 cm", "C. 50 cm", "D. 55 cm"] },
+  { no: 4, soal: "Perhatikan gambar!\nJika luas juring ORS = 60 $cm^2$, luas juring OPQ adalah...", options: ["A. 40 $cm^2$", "B. 75 $cm^2$", "C. 90 $cm^2$", "D. 105 $cm^2$"] },
+  { no: 5, soal: "Pada suatu lingkaran dengan pusat O diketahui titik A, B, C, dan D pada keliling lingkaran, sehingga $\\angle AOB = 35°$ dan $\\angle COD = 140°$. Jika panjang busur AB = 14 cm, hitunglah panjang busur CD.", options: ["A. 28 cm", "B. 42 cm", "C. 56 cm", "D. 70 cm"] },
+  { no: 6, soal: "Luas daerah yang diarsir pada gambar berikut adalah ...", options: ["A. 496,44 $cm^2$", "B. 718,2 $cm^2$", "C. 992,88 $cm^2$", "D. 1827 $cm^2$"] },
+  { no: 7, soal: "Luas daerah yang diarsir pada gambar berikut adalah ...", options: ["A. 59,5 $cm^2$", "B. 112 $cm^2$", "C. 119 $cm^2$", "D. 224 $cm^2$"] },
+  { no: 8, soal: "Keliling daerah yang diarsir pada gambar berikut adalah ...", options: ["A. 47,1 cm", "B. 62,8 cm", "C. 78,5 cm", "D. 94,2 cm"] },
+  { no: 9, soal: "Keliling daerah yang diarsir pada gambar berikut adalah ...", options: [] },
+  { no: 10, soal: "Luas daerah yang diarsir pada gambar berikut adalah ...", options: [] },
+  { no: 11, soal: "Perhatikan gambar berikut!\nKeliling bangun tersebut adalah ...", options: ["A. 213,6 cm", "B. 221,2 cm", "C. 253,6 cm.", "D. 267,6 cm"] },
+  { no: 12, soal: "Perhatikan gambar berikut\nJika total luas bangun di atas 480 $cm^2$, maka luas daerah persegi adalah ...", options: ["A. 24 $cm^2$", "B. 56 $cm^2$", "C. 72 $cm^2$", "D. 84 $cm^2$"] },
+  { no: 13, soal: "Perhatikan gambar persegipanjang dan lingkaran berikut!\nDiketahui A dan B adalah pusat dua lingkaran yang kongruen dan saling bersinggungan luar. ABQP adalah persegi panjang. Luas daerah yang diarsir seluruhnya adalah 1.316 $cm^2$. Luas persegi panjang ABQP adalah....($\\pi = \\frac{22}{7}$)", options: ["A. 196 $cm^2$", "B. 392 $cm^2$", "C. 492 $cm^2$", "D. 512 $cm^2$"] },
+  { no: 14, soal: "Perhatikan gambar di samping ini!\nDiketahui O adalah titik pusat lingkaran. Besar sudut AOB adalah ....", options: ["A. 15°", "B. 30°", "C. 45°", "D. 60°"] },
+  { no: 15, soal: "Perhatikan gambar!\nTitik O adalah pusat lingkaran. Diketahui $\\angle ABE + \\angle ACE + \\angle ADE = 96°$ Besar $\\angle AOE$ adalah....", options: ["A. 32°", "B. 48°", "C. 64°", "D. 84°"] },
+  { no: 16, soal: "Perhatikan gambar di bawah ini!,\nBesar $\\angle OAD = 20^0$, besar $\\angle OBD = 30^0$, maka besar sudut BOC adalah ....", options: ["A. $50^0$", "B. $70^0$", "C. $80^0$", "D. $100^0$"] },
+  { no: 17, soal: "Pada gambar di bawah ini diketahui besar $\\angle AOC = 82^0$.\nBesar sudut $\\angle BDC$ adalah ...", options: ["A. $41^0$", "B. $49^0$", "C. $82^0$", "D. $98^0$"] },
+  { no: 18, soal: "Perhatikan gambar berikut!\nJika besar sudut AOC = $112^0$, maka besar sudut ABC adalah ....", options: ["A. $124^0$", "B. $114^0$", "C. $68^0$", "D. $56^0$"] },
+  { no: 19, soal: "Perhatikanlah gambar di bawah.\nHitunglah besar sudut $\\angle BAC$, $\\angle ADC$, $\\angle DAC$.", options: [] },
+  { no: 20, soal: "Perhatikanlah gambar di bawah,\nHitunglah besar $\\angle DCB$, $\\angle BAD$, $\\angle ADC$", options: [] },
+  { no: 21, soal: "Perhatikan gambar berikut!\nJika besar sudut COD = $48^0$, maka besar sudut ABC adalah ....", options: ["A. $132^0$", "B. $124^0$", "C. $122^0$", "D. $114^0$"] },
+  { no: 22, soal: "Ayah akan membuat taman berbentuk lingkaran dengan jari-jari 35 m. Di sekeliling taman akan ditanami pohon cemara dengan jarak 1 m. Jika satu pohon memerlukan biaya Rp 25.000,00, seluruh biaya penanaman pohon cemara adalah....", options: ["A. Rp 5.900.000,00", "B. Rp 5.700.000,00", "C. Rp 5.500.000,00", "D. Rp 5.200.000,00"] },
+  { no: 23, soal: "Sebuah roda yang berdiameter 50 cm berputar 60 kali. Jika $\\pi = 3,14$, maka jarak yang ditempuh adalah ....", options: ["A. 94,2 m", "B. 942 m", "C. 47,1 m", "D. 471 m"] },
+  { no: 24, soal: "Sebuah roda berputar 40 kali menempuh jarak 52,8 m. Jika $\\pi = 22/7$, maka jari-jari roda tersebut adalah ....", options: ["A. 14 cm", "B. 21 cm", "C. 28 cm", "D. 42 cm"] },
+  { no: 25, soal: "Seorang pengusaha akan membuat bianglala seperti yang ada di Dufan.\nJika tempat duduk pada bianglala sebanyak 44 buah dan masing-masing tempat duduk berjarak 3 m, berapakah panjang jari-jari bianglala?", options: ["A. 7 m", "B. 10,5 m", "C. 14 m", "D. 21 m"] },
+  { no: 26, soal: "Perhatikan gambar berikut!\nKolam ikan Pak Arvin tampak seperti gambar di atas. Jika di sekeliling akan dipagari dengan kawat berduri dua kali putaran, maka dibutuhkan kawat berduri minimum sepanjang......", options: ["A. 72 m", "B. 86 m", "C. 144 m", "D. 172 m"] },
+  { no: 27, soal: "Sebuah tonggak ditengah lapangan rumput berbentuk persegipanjang berukuran 15 m x 20 m. Seekor kambing diikat di tonggak dengan tali yang panjangnya 7 m. Berapa luas lapangan yang rumputnya tidak termakan kambing?", options: ["A. 100 $m^2$", "B. 146 $m^2$", "C. 154 $m^2$", "D. 300 $m^2$"] },
+  { no: 28, soal: "Perhatikan gambar berikut!\nKolam pak Tedi bentuk dan ukuran Nampak seperti gambar.\nJika keliling kolam diberi pagar kawat dua kali putaran, maka dibutuhkan kawat minimum sepanjang ....", options: ["A. 66 m", "B. 88 m", "C. 132 m", "D. 180 m"] },
+  { no: 29, soal: "Perhatikan gambar berikut.\nPanjang OP adalah ....", options: ["A. 16 cm", "B. 26 cm", "C. 34 cm", "D. 36 cm"] },
+  { no: 30, soal: "Panjang jari-jari dua lingkaran masing-masing adalah 2 cm dan 10 cm. Panjang garis singgung persekutuan luarnya adalah 15 cm. Jarak kedua titik pusat lingkaran adalah ....", options: ["A. 13 cm", "B. 17 cm", "C. 23 cm", "D. 17 cm"] },
+  { no: 31, soal: "Perhatikan gambar berikut.\nPada gambar tersebut, panjang jari-jari AD = 8 cm, panjang jari-jari BC = 3 cm, dan jarak AB = 13 cm. Luas trapesium ABCD adalah ....", options: ["A. 46 $cm^2$", "B. 56 $cm^2$", "C. 66 $cm^2$", "D. 76 $cm^2$"] },
+  { no: 32, soal: "Perhatikan gambar berikut.\nPanjang garis singgung persekutuan dalam adalah ...", options: ["A. 12 cm", "B. 14 cm", "C. 16 cm", "D. 18 cm"] },
+  { no: 33, soal: "Perbandingan jari-jari dua lingkaran adalah 1 : 2. Panjang garis singgung persekutuan dalam kedua lingkaran tersebut adalah 12 cm dan jarak antara kedua pusatnya 15 cm. Panjang jari-jari masing masing lingkaran adalah ....", options: ["A. 2 cm dan 4 cm", "B. 3 cm dan 6 cm", "C. 4 cm dan 8 cm", "D. 5 cm dan 10 cm"] },
+  { no: 34, soal: "Perhatikan gambar di bawah ini.\nPanjang AD = 3,5 cm, panjang BE = 1,5 cm, dan jarak AB = 8 cm. Luas $\\triangle ABC$ adalah ....", options: ["A. $5\\sqrt{39}$", "B. $\\frac{1}{2}\\sqrt{39}$", "C. $\\frac{5}{2}\\sqrt{39}$", "D. $\\frac{3}{2}\\sqrt{39}$"] },
+  { no: 35, soal: "Gambar berikut ini adalah penampang 6 buah kaleng cat yang berbentuk tabung dan berjari-jari 14 cm. Panjang tali terpendek yang dibutuhkan untuk mengikat keenam kaleng cat tersebut adalah ....", options: ["A. 256 cm", "B. 258 cm", "C. 260 cm", "D. 262 cm"] },
+  { no: 36, soal: "Gambar di bawah ini adalah penampang 10 buah gelas berbentuk tabung dengan jari-jari 10 cm. Panjang tali minimal yang diperlukan untuk mengikat gelas-gelas tersebut dengan susunan seperti dalam gambar adalah ....", options: ["A. 261,8 cm", "B. 262,8 cm", "C. 261,6 cm", "D. 262,6 cm"] },
+];
+
+const latihanOlimpiade = [
+  { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nDi dalam suatu lingkaran yang berjari-jari 4 cm dibuat persegi ABCD, sehingga titik sudut persegi tersebut berada pada lingkaran. Luas persgi ABCD adalah ...", options: ["A. 64 $cm^2$", "B. 32 $cm^2$", "C. 16 $cm^2$", "D. 8 $cm^2$", "E. 4 $cm^2$"] },
+  { no: 2, soal: "OSN Matematika 2005 Tingkat Kota\nMisalkan a dan b menyatakan luas daerah yang diarsir pada gambar di bawah. Kelima lingkaran kecil berjari-jari r. titik-titik pusat empat lingkaran kecil yang menyinggung lingkaran besar merupakan titik-titik sudut persegi. Jika a sama dengan 10 $cm^2$, maka b = ...", options: [] },
+  { no: 3, soal: "OSN Matematika 2006 Tingkat Kota\nLuas daerah yang diarsir setengah dari luas daerah yang tidak diarsir. Panjang AB dibagi panjang AC adalah ...", options: ["A. $\\frac{1}{2}\\sqrt{2}$", "B. $\\frac{1}{3}\\sqrt{3}$", "C. $\\frac{1}{5}\\sqrt{5}$", "D. $\\frac{1}{7}\\sqrt{7}$", "E. $\\frac{1}{5}\\sqrt{7}$"] },
+  { no: 4, soal: "OSN Matematika 2007 Tingkat Kota\nDiketahui suatu segitiga sama sisi dan setengah lingkaran seperti pada gambar berikut.\nJika panjang sisi segitiga tersebut 14 cm, maka luas daerah di dalam segitiga dan di luar setengah lingkaran adalah ... $cm^2$", options: ["A. $49\\sqrt{3} - 14\\pi$", "B. $49\\sqrt{3} - \\frac{1}{2}(24\\pi)$", "C. $49\\sqrt{3} - \\frac{3}{8}(18\\pi)$", "D. $98\\sqrt{3} - \\frac{3}{4}(36\\pi)$", "E. $98\\sqrt{3} - \\frac{1}{2}(24\\pi)$"] },
+  { no: 5, soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan dua lingkaran konsentrik (memiliki titik pusat sama) seperti gambar berikut.\nJika keliling lingkaran besar lebih panjang 4 meter dari keliling lingkaran kecil, maka jarak d adalah ... meter", options: [] },
+  { no: 6, soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan gambar berikut. Luas daerah yang diarsir adalah ... $cm^2$", options: [] },
+  { no: 7, soal: "OSN Matematika 2008 Tingkat Kota\nPerhatikan gambar berikut.\nJika QT garis singgung lingkaran yang berpusat di O dan $\\angle TOR = 112^0$, maka besar $\\angle PQT = ...$", options: ["A. $56^0$", "B. $44^0$", "C. $34^0$", "D. $26^0$", "E. $24^0$"] },
+  { no: 8, soal: "OSN Matematika 2008 Tingkat Kota\nPerhatikan dua lingkaran pada gambar berikut.\nDiketahui panjang talibusur AB = 24 cm dan MO = ON. Maka luas daerah yang diarsir adalah ...", options: ["A. $24\\pi$ $cm^2$", "B. $72\\pi$ $cm^2$", "C. $104\\pi$ $cm^2$", "D. $144\\pi$ $cm^2$", "E. $152\\pi$ $cm^2$"] },
+  { no: 9, soal: "OSN Matematika 2008 Tingkat Kota\nPerhatikan gambar berikut.\nPada segiempat ABCD dibuat setengah lingkaran pada sisi AD dengan pusat E dan segitiga sama sisi BEC. Jika BC = 20 cm, maka luas daerah yang diarsir adalah ...", options: ["A. $(100\\sqrt{3} - 50\\pi)$ $cm^2$", "B. $(100\\sqrt{3} - \\frac{50\\pi}{3})$ $cm^2$", "C. $(100\\sqrt{3} - \\frac{50\\pi}{6})$ $cm^2$", "D. $(100\\sqrt{3} - \\frac{100\\pi}{3})$ $cm^2$", "E. $(100\\sqrt{3} - \\frac{100}{3}\\pi)$ $cm^2$"] },
+  { no: 10, soal: "OSN Matematika 2010 Tingkat Kota\nRoda A dengan jari-jari 40 cm dan roda B dengan jari-jari 10 cm dihubungkan dengan sebuah tali yang melingkar keduanya. Jika jarak pusat kedua roda adalah 60 cm, maka panjang tali yang dibutuhkan adalah ... cm", options: ["A. $60(\\pi + \\sqrt{3})$", "B. $56(\\pi + \\sqrt{3})$", "C. $50(\\pi + \\sqrt{3})$", "D. $40(\\pi + \\sqrt{3})$", "E. $38(\\pi + \\sqrt{3})$"] },
+  { no: 11, soal: "OSN Matematika 2011 Tingkat Kota\nSembilan lingkaran kongruen terletak di dalam persegi seperti terlihat pada gambar. Jika keliling sebuah lingkaran 62,8 cm dengan $\\pi = 3,14$, maka luas daerah yang diarsir adalah ... $cm^2$", options: ["A. 344", "B. 364", "C. 484", "D. 688", "E. 728"] },
+  { no: 12, soal: "OSN Matematika 2011 Tingkat Kota\nPerhatikan gambar di atas, persegi ABCD dengan panjang sisi 14 cm menyinggung Lingkaran. Masing-masing sisi persegi dibuat setengah lingkaran dengan diameter sisi persegi tersebut. Jika $\\pi = 3,14$, maka luas daerah yang diarsir adalah ... $cm^2$", options: ["A. 49", "B. 56", "C. 112", "D. 178", "E. 196"] },
+  { no: 13, soal: "OSN Matematika 2011 Tingkat Kota\nSebuah bingkai foto yang berbentuk persegi diputar $45^0$ dengan sumbu putar titik perpotongan diagonal-diagonalnya. Jika panjang sisi persegi adalah 1 cm. luas irisan antara bingkai foto sebelum dan sesudah diputar adalah ... $cm^2$", options: ["A. $1 + 2\\sqrt{2}$", "B. $2 + 2\\sqrt{2}$", "C. 2", "D. $2 - 2\\sqrt{2}$", "E. $2\\sqrt{2} - 2$"] },
+  { no: 14, soal: "OSN Matematika 2011 Tingkat Kota\nPerhatikan gambar berikut. ABCD persegi dengan panjang sisi-sisinya adalah 2 cm. E adalah titik Tengah CD dan F adalah titik Tengah AD. Luas daerah EDFGH adalah ...", options: [] },
+  { no: 15, soal: "OSN Matematika 2012 Tingkat Kota\nPerhatikan gambar di bawah ini. Jika lingkaran besar berjari-jari 4 dan lingkaran kecil berjari-jari 2, serta luas daerah yang diarsir adalah 5/12 luas lingkaran besar, maka besar $\\angle RPQ$ adalah ...", options: ["A. $60^0$", "B. $90^0$", "C. $120^0$", "D. $135^0$", "E. $150^0$"] },
+  { no: 16, soal: "OSN Matematika 2012 Tingkat Kota\nEmpat titik ditempatkan pada lingkaran berjari-jari $\\frac{1}{2}$ satuan. Jika keempat titik tersebut dihubungkan sehingga membentuk persegi panjang, maka luas terbesar (maksimum) yang mungkin bagi persegi panjang tersebut adalah ...", options: [] },
+  { no: 17, soal: "OSN Matematika 2015 Tingkat Kota\nDiketahui lingkaran dengan pusat O dan mempunyai diameter AB. Segitiga CDE siku-siku di D, DE pada diameter AB sehingga DO = OE dan CD = DE untuk suatu titik C pada lingkaran. Jika jari-jari lingkaran adalah 1 cm, maka luas segitiga CDE = ... $cm^2$", options: ["A. 3/5", "B. 2/5", "C. 2/3", "D. 1/2"] },
+  { no: 18, soal: "OSN Matematika 2015 Tingkat Kota\nSuatu taman kota dibatasi oleh lintasan lari berbentuk lingkaran dan tepat di titik pusat taman dibuat tugu (T) yang dihiasi lampu. Di sepanjang tepai bagian dalam taman diletakkan 12 bangku permanen (B) secara berurutan, sebut $B_1$, $B_2$, ..., $B_{12}$. Jarak antara dua bangku yang berurutan dibuat sama. Jarak tugu ke lintasan lari adalah 50 meter. Bakri, Bima dan Budi berlari pada lintasan lari mulai di depan bangku $B_1$. Berlari mengambil arah yang berlawanan. Jika setelah 20 menit posisi Bakri di depan bangku $B_7$, Bima di depan bangku $B_6$, Budi di depan bangku $B_4$, maka jarak total yang telah ditempuh tiga orang ini mendekati ... meter ($\\pi = 3,14$).", options: ["A. 549", "B. 523", "C. 471", "D. 392"] },
+  { no: 19, soal: "OSN Matematika 2015 Tingkat Kota\nPerhatikan gambar berikut.\nTitik P, Q dan R masing-masing adalah titik singgung lingkaran pada sisi-sisi $\\triangle ACD$. Diketahui $\\angle SDR = 60^0$, panjang SR = panjang SQ = 1 cm dan panjang RD = $\\frac{\\sqrt{3}}{3}$ cm. Jika $\\triangle ABC$ sama kaki, maka luas $\\triangle ABC$ adalah ... $cm^2$", options: [] },
+  { no: 20, soal: "OSN Matematika 2017 Tingkat Kota\nLingkaran pada gambar berikut mempunyai radius 1 satuan panjang dan $\\angle DAB = 30^0$. Luas daerah trapesium ABCD yang diarsir adalah ...", options: ["A. $\\frac{1}{2}$", "B. 1", "C. $\\frac{\\sqrt{3}}{2}$", "D. $\\frac{1 + \\sqrt{3}}{2}$"] },
+  { no: 21, soal: "OSN Matematika 2018 Tingkat Kota\nPerhatikan $\\triangle ABC$ dan lingkaran dalam pada gambar di bawah.\nJika $\\triangle ABC$ sama sisi dengan CD = 6 cm, maka luas daerah lingkaran dalam adalah ... $cm^2$", options: ["A. $16\\pi$", "B. $12\\pi$", "C. $9\\pi$", "D. $4\\pi$"] },
+  { no: 22, soal: "OSN Matematika 2019 Tingkat Kota\nPerhatikan gambar. Jika $\\angle ABE + \\angle ACE + \\angle ADE = 96^0$, maka besar $\\angle AOE$ adalah ...", options: ["A. $32^0$", "B. $48^0$", "C. $64^0$", "D. $84^0$"] },
+  { no: 23, soal: "OSN Matematika 2020 Tingkat Kota\nPerhatikan bangun setengah lingkaran berikut. Jika CA = 6 cm dan ED + DF = 8 cm, maka keliling bangun yang diarsir adalah ...", options: ["A. $\\pi + 36$", "B. $6\\pi + 12$", "C. $3\\pi + 36$", "D. $3\\pi + 12$"] },
+  { no: 24, soal: "OSN Matematika 2022 Tingkat Kota\nPerhatikan setengah lingkaran pusat O dan diameter AB berikut.\nTitik C terletak pada busur AB dan P adalah pusat lingkaran dalam ABC. Titik P dilalui DE yang tegak lurus AO, jika DE = 4 cm, maka luas daerah $\\triangle PBC$ adalah ... $cm^2$", options: ["A. 2", "B. 4", "C. 8", "D. 16"] },
+  { no: 25, soal: "OSN Matematika 2022 Tingkat Kota\nTiga puluh koin dengan jari-jari 3,5 cm ditumpuk menjadi 4 tingkat sehingga menyerupai limas tegak segi empat beraturan dengan sisi angka menghadap ke atas. Tingkat pertama (paling bawah) terdiri dari 16 koin, tingkat kedua terdiri dari 9 koin, tingkat ketiga terdiri dari 4 koin dan tingkat keempat terdiri dari 1 koin. Pada setiap tingkat, koin akan disusun menyerupai persegi dengan setiap koin yang berdekatan saling bersinggungan. Jika dilihat dari atas, total luas sisi angka yang tertutup oleh koin lainnya adalah... $cm^2$.", options: ["A. 381,5", "B. 444,5", "C. 539", "D. 1155"] },
+  { no: 26, soal: "OSN Matematika 2022 Tingkat Kota\nPerhatikan gambar setengah lingkaran dengan pusat O.\nJika $\\angle BOR = 48^0$ dan $\\angle OPA = 80^0$, maka besar $\\angle PQR = ...^o$", options: ["A. 92", "B. 104", "C. 118", "D. 125"] },
+  { no: 27, soal: "OSN Matematika 2023 Tingkat Kota\nPerhatikan gambar berikut!\nDi dalam persegi ABCD terdapat dua setengah lingkaran dengan diameter AD dan BC. Ruas garis EF dan GH sejajar AB. Jika EK = 3 cm, LH = 6 cm dan EG = 9 cm, maka luas daerah persegi ABCD adalah ... $cm^2$", options: ["A. 180", "B. 360", "C. 90", "D. 150"] },
+  { no: 28, soal: "OSN Matematika 2023 Tingkat Kota\nEmpat titik berbeda A, B, C dan D terletak pada lingkaran berjari-jari 7 cm. Diketahui AB : BC = 3 : 4, AB = AD dan BC = CD. Titik E adalah perpotongan AC dan BD, melalui titik E dibuat garis k dan l. Garis k tegak lurus BC dan memotong AD di P. Sementara, garis l tegak lurus AD dan memotong BC di Q. Perbandingan luas daerah segitiga AQP dan PDQ adalah 1 : ...", options: [] },
+  { no: 29, soal: "OSN Matematika 2025 Tingkat Kota\nDalam suatu lingkaran berpusat di O berjari-jari 7, dibuat segitiga ABC dengan titik A, B dan C terletak pada lingkaran, AC merupakan diameter lingkaran dengan $\\angle ACB = 60^0$.\nMelalui C dan titik Tengah AB, dibuat garis memotong lingkaran di titik D. Panjang CD sama dengan ...", options: ["A. $3\\sqrt{7}$", "B. $5\\sqrt{7}$", "C. $6\\sqrt{7}$", "D. $7\\sqrt{7}$"] },
+];
+
+/* ─────────────────────────────────────────────────────────
+   PAGE COMPONENT
+───────────────────────────────────────────────────────── */
+
+const OlimpiadeLingkaranPage = () => {
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
+  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+
+  const toggleSection = (idx: number) => {
+    playPopSound();
+    setExpandedSections(prev =>
+      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
+
+  return (
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+
+        {/* Header */}
+        <div className="flex flex-col items-center mb-7">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-400/30 flex items-center justify-center mb-4 shadow-lg">
+            <Trophy className="w-7 h-7 text-cyan-400" />
+          </div>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-white text-center mb-1"
+            style={{ textShadow: '0 0 32px rgba(34,211,238,0.45)' }}>
+            OLIMPIADE — LINGKARAN
+          </h1>
+          <p className="text-white/40 text-xs text-center font-body">Irawan Sutiawan, M.Pd</p>
+          <div className="flex items-center gap-2 mt-3">
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 font-body">6 Topik Materi</span>
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">65 Soal</span>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex gap-2 justify-center mb-6">
+          {[
+            { key: "materi" as const, label: "📘 Materi" },
+            { key: "dasar" as const, label: "✏️ Latihan Dasar" },
+            { key: "olimpiade" as const, label: "🏆 Latihan Olimpiade" },
+          ].map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => { playPopSound(); setActiveTab(tab.key); }}
+              className={`font-display text-xs px-4 py-2 rounded-xl border cursor-pointer transition-all ${
+                activeTab === tab.key
+                  ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50 shadow-[0_0_12px_rgba(34,211,238,0.15)]"
+                  : "bg-card/80 text-white/60 border-border hover:border-cyan-400/30 hover:text-white/80"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* MATERI TAB */}
+        {activeTab === "materi" && (
+          <div className="space-y-3 animate-slide-up">
+            {materiSections.map((section, idx) => (
+              <div key={idx}
+                className={`relative rounded-2xl overflow-hidden border ${section.borderColor}`}>
+                <div className={`absolute inset-0 bg-gradient-to-br ${section.color} backdrop-blur`} />
+                <button
+                  onClick={() => toggleSection(idx)}
+                  className="relative w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
+                >
+                  <span className="font-display text-sm text-white font-bold">{section.heading}</span>
+                  {expandedSections.includes(idx)
+                    ? <ChevronUp className="w-4 h-4 text-white/60 shrink-0" />
+                    : <ChevronDown className="w-4 h-4 text-white/40 shrink-0" />}
+                </button>
+                {expandedSections.includes(idx) && (
+                  <div className="relative px-5 pb-5">
+                    {section.content}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* LATIHAN DASAR TAB */}
+        {activeTab === "dasar" && (
+          <div className="space-y-4 animate-slide-up">
+            {latihanDasar.map((soal) => (
+              <div key={soal.no}
+                className="relative rounded-2xl overflow-hidden border border-indigo-500/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 to-slate-900/60 backdrop-blur" />
+                <div className="relative px-5 py-4">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/30 text-indigo-300 text-xs font-bold mr-2 shrink-0">{soal.no}</span>
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {renderWithLatex(line)}
+                      </span>
+                    ))}
+                  </div>
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* LATIHAN OLIMPIADE TAB */}
+        {activeTab === "olimpiade" && (
+          <div className="space-y-4 animate-slide-up">
+            {latihanOlimpiade.map((soal) => (
+              <div key={soal.no}
+                className="relative rounded-2xl overflow-hidden border border-amber-500/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 to-slate-900/60 backdrop-blur" />
+                <div className="relative px-5 py-4">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/30 text-amber-300 text-xs font-bold mr-2 shrink-0">{soal.no}</span>
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN')
+                          ? <span className="text-yellow-400 font-semibold">{line}</span>
+                          : renderWithLatex(line)}
+                      </span>
+                    ))}
+                  </div>
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Back button */}
+        <div className="mt-10 text-center">
+          <button onClick={() => { playPopSound(); navigate("/olimpiade"); }}
+            className="text-sm text-white/30 hover:text-cyan-400 transition-colors cursor-pointer font-body">
+            ← Kembali ke Olimpiade
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OlimpiadeLingkaranPage;

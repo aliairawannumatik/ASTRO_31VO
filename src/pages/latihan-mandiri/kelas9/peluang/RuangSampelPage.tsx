@@ -1,0 +1,743 @@
+import { useNavigate } from "react-router-dom";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
+import { playPopSound } from "@/hooks/useAudio";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
+import { Dices } from "lucide-react";
+
+const accentColor = "cyan";
+const accentHex = "#22d3ee";
+
+const FreqTable = ({ headers, rows, caption }: { headers: string[]; rows: (string | number)[][]; caption?: string }) => (
+  <div className="overflow-x-auto rounded-xl border border-cyan-500/30 my-2">
+    {caption && <div className="text-[10px] text-cyan-300/70 font-bold text-center pt-2 px-2">{caption}</div>}
+    <table className="min-w-full text-xs font-body">
+      <thead>
+        <tr className="bg-cyan-900/40">
+          {headers.map((h, i) => (
+            <th key={i} className="px-3 py-2 text-cyan-200 font-bold text-center border-b border-cyan-500/30">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, ri) => (
+          <tr key={ri} className={ri % 2 === 0 ? "bg-white/3" : "bg-cyan-900/10"}>
+            {row.map((cell, ci) => (
+              <td key={ci} className="px-3 py-2 text-center text-white/80 border-b border-white/5">{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+const DiceGrid = ({ highlight }: { highlight?: (i: number, j: number) => boolean }) => (
+  <div className="overflow-x-auto rounded-xl border border-cyan-500/30 my-2">
+    <table className="text-[10px] font-body">
+      <thead>
+        <tr className="bg-cyan-900/50">
+          <th className="px-2 py-1 text-cyan-300 border border-cyan-500/20 w-10">🎲₁\🎲₂</th>
+          {[1,2,3,4,5,6].map(n => (
+            <th key={n} className="px-2 py-1 text-cyan-300 border border-cyan-500/20 w-10">{n}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {[1,2,3,4,5,6].map(i => (
+          <tr key={i}>
+            <td className="px-2 py-1 text-cyan-300 font-bold bg-cyan-900/40 border border-cyan-500/20 text-center">{i}</td>
+            {[1,2,3,4,5,6].map(j => (
+              <td key={j} className={`px-1 py-1 border border-cyan-500/10 text-center transition-colors ${highlight && highlight(i,j) ? 'bg-cyan-400/30 text-cyan-200 font-bold' : 'text-white/60'}`}>
+                ({i},{j})
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+const TreeDiagram = ({ title, branches }: { title: string; branches: { label: string; children: string[] }[] }) => (
+  <svg viewBox={`0 0 320 ${branches.reduce((s,b) => s + b.children.length * 30, 0) + 40}`} className="w-full max-w-xs mx-auto" style={{maxHeight:220}}>
+    <text x="10" y="20" fill="#22d3ee" fontSize="11" fontWeight="bold">{title}</text>
+    {(() => {
+      const items: React.ReactNode[] = [];
+      let y = 45;
+      const startY = (branches.reduce((s,b) => s + b.children.length * 30, 0) + 40) / 2;
+      let branchStart = 45;
+      branches.forEach((b, bi) => {
+        const mid = branchStart + (b.children.length * 30) / 2 - 10;
+        items.push(
+          <line key={`l${bi}`} x1={60} y1={startY} x2={110} y2={mid} stroke="#22d3ee" strokeWidth={1.5} opacity={0.7} />,
+          <text key={`t${bi}`} x={115} y={mid+4} fill="#67e8f9" fontSize={10} fontWeight="bold">{b.label}</text>
+        );
+        b.children.forEach((c, ci) => {
+          const cy = branchStart + ci * 30 + 10;
+          items.push(
+            <line key={`l${bi}${ci}`} x1={165} y1={mid} x2={195} y2={cy} stroke="#0e7490" strokeWidth={1} opacity={0.8} />,
+            <text key={`t${bi}${ci}`} x={200} y={cy+4} fill="#e2e8f0" fontSize={9}>{c}</text>
+          );
+        });
+        branchStart += b.children.length * 30;
+      });
+      items.push(<circle key="root" cx={60} cy={startY} r={5} fill="#22d3ee" />);
+      return items;
+    })()}
+  </svg>
+);
+
+const SpinnerDiagram = ({ sectors }: { sectors: { label: string; color: string; angle: number }[] }) => {
+  let currentAngle = 0;
+  const cx = 80, cy = 80, r = 65;
+  const paths: React.ReactNode[] = [];
+  sectors.forEach((s, i) => {
+    const start = currentAngle;
+    const end = currentAngle + s.angle;
+    const startRad = (start - 90) * Math.PI / 180;
+    const endRad = (end - 90) * Math.PI / 180;
+    const x1 = cx + r * Math.cos(startRad);
+    const y1 = cy + r * Math.sin(startRad);
+    const x2 = cx + r * Math.cos(endRad);
+    const y2 = cy + r * Math.sin(endRad);
+    const largeArc = s.angle > 180 ? 1 : 0;
+    const midRad = ((start + end) / 2 - 90) * Math.PI / 180;
+    const tx = cx + (r * 0.62) * Math.cos(midRad);
+    const ty = cy + (r * 0.62) * Math.sin(midRad);
+    paths.push(
+      <path key={i} d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} Z`} fill={s.color} stroke="#0f172a" strokeWidth={2} />,
+      <text key={`t${i}`} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize={10} fontWeight="bold">{s.label}</text>
+    );
+    currentAngle = end;
+  });
+  return (
+    <svg viewBox="0 0 160 160" className="w-32 h-32 mx-auto">
+      {paths}
+      <circle cx={cx} cy={cy} r={5} fill="white" />
+    </svg>
+  );
+};
+
+type Part = { label: string; math?: string; text?: string };
+type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay" | "mixed" | "diagram-only" };
+const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
+
+const questions: Q[] = [
+  Qn(1, "Ruang Sampel Koin Tunggal", {
+    type: "mixed",
+    content: "Sebuah koin dilempar satu kali. Sisi koin adalah Angka (A) dan Gambar (G).",
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan tersebut." },
+      { label: "b.", text: "Berapa banyak titik sampel n(S)?" },
+      { label: "c.", text: "Apa yang dimaksud dengan titik sampel? Sebutkan contohnya." },
+    ],
+  }),
+  Qn(2, "Ruang Sampel Dadu Tunggal", {
+    type: "mixed",
+    content: "Sebuah dadu bersisi enam dilempar satu kali.",
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan tersebut." },
+      { label: "b.", text: "Berapa nilai n(S)?" },
+      { label: "c.", text: "Sebutkan titik sampel yang merupakan bilangan prima." },
+      { label: "d.", text: "Sebutkan titik sampel yang merupakan bilangan ganjil." },
+    ],
+  }),
+  Qn(3, "Ruang Sampel Dua Koin", {
+    type: "mixed",
+    diagram: (
+      <TreeDiagram
+        title="Percobaan 2 Koin"
+        branches={[
+          { label: "A", children: ["(A,A)", "(A,G)"] },
+          { label: "G", children: ["(G,A)", "(G,G)"] },
+        ]}
+      />
+    ),
+    content: "Dua koin dilempar bersamaan. Gunakan diagram pohon di atas.",
+    parts: [
+      { label: "a.", text: "Tuliskan semua anggota ruang sampel S." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Sebutkan titik sampel yang menghasilkan tepat satu sisi Angka." },
+    ],
+  }),
+  Qn(4, "Diagram Pohon – Koin dan Dadu", {
+    type: "mixed",
+    diagram: (
+      <TreeDiagram
+        title="Koin + Dadu"
+        branches={[
+          { label: "A", children: ["(A,1)", "(A,2)", "(A,3)", "(A,4)", "(A,5)", "(A,6)"] },
+          { label: "G", children: ["(G,1)", "(G,2)", "(G,3)", "(G,4)", "(G,5)", "(G,6)"] },
+        ]}
+      />
+    ),
+    content: "Sebuah koin dan sebuah dadu dilempar bersamaan.",
+    parts: [
+      { label: "a.", text: "Tentukan n(S) dari percobaan ini." },
+      { label: "b.", text: "Sebutkan titik sampel dengan sisi Gambar dan angka genap pada dadu." },
+      { label: "c.", text: "Berapa banyak titik sampel yang memuat sisi Angka?" },
+    ],
+  }),
+  Qn(5, "Tabel Ruang Sampel Dua Dadu", {
+    type: "mixed",
+    diagram: <DiceGrid />,
+    content: "Dua buah dadu dilempar bersamaan. Perhatikan tabel ruang sampel di atas.",
+    parts: [
+      { label: "a.", text: "Tentukan n(S)." },
+      { label: "b.", text: "Berapa banyak titik sampel dengan jumlah kedua dadu sama dengan 7?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan kedua dadu menunjukkan angka yang sama?" },
+    ],
+  }),
+  Qn(6, "Dua Dadu – Jumlah Tertentu", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => i+j === 9} />,
+    content: "Dua dadu dilempar. Sel yang diarsir menunjukkan titik sampel dengan jumlah = 9.",
+    parts: [
+      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah = 9." },
+      { label: "b.", text: "Berapa banyak titik sampel dengan jumlah = 9?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan jumlah ≤ 4?" },
+    ],
+  }),
+  Qn(7, "Tiga Koin – Diagram Pohon", {
+    type: "mixed",
+    diagram: (
+      <TreeDiagram
+        title="Percobaan 3 Koin"
+        branches={[
+          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
+          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
+          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
+          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
+        ]}
+      />
+    ),
+    content: "Tiga koin dilempar bersamaan.",
+    parts: [
+      { label: "a.", text: "Tentukan n(S) dari diagram pohon di atas." },
+      { label: "b.", text: "Sebutkan titik sampel dengan tepat dua sisi Angka." },
+      { label: "c.", text: "Berapa banyak titik sampel dengan paling sedikit satu Gambar?" },
+    ],
+  }),
+  Qn(8, "Mengambil Bola dari Kotak", {
+    type: "mixed",
+    content: "Sebuah kotak berisi 3 bola: Merah (M), Biru (B), dan Kuning (K). Satu bola diambil secara acak.",
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Jika kotak ditambah 1 bola Hijau (H), berapa n(S) yang baru?" },
+    ],
+  }),
+  Qn(9, "Membuat Bilangan Dua Digit", {
+    type: "mixed",
+    content: "Dari angka-angka 1, 2, 3 akan dibuat bilangan dua digit. Setiap angka hanya boleh digunakan sekali.",
+    diagram: (
+      <FreqTable
+        caption="Bilangan 2 digit dari {1, 2, 3}"
+        headers={["Digit Pertama", "Digit Kedua", "Bilangan"]}
+        rows={[
+          ["1", "2", "12"],
+          ["1", "3", "13"],
+          ["2", "1", "21"],
+          ["2", "3", "23"],
+          ["3", "1", "31"],
+          ["3", "2", "32"],
+        ]}
+      />
+    ),
+    parts: [
+      { label: "a.", text: "Lengkapi tabel di atas dan tuliskan ruang sampelnya." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Berapa banyak bilangan yang terbentuk yang nilainya lebih dari 20?" },
+    ],
+  }),
+  Qn(10, "Spinner Tiga Sektor", {
+    type: "mixed",
+    diagram: (
+      <SpinnerDiagram
+        sectors={[
+          { label: "Merah", color: "#ef4444", angle: 120 },
+          { label: "Biru", color: "#3b82f6", angle: 120 },
+          { label: "Hijau", color: "#22c55e", angle: 120 },
+        ]}
+      />
+    ),
+    content: "Sebuah spinner dibagi menjadi 3 sektor sama besar: Merah, Biru, Hijau. Spinner diputar sekali.",
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan ini." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Apakah setiap titik sampel memiliki kesempatan yang sama? Jelaskan." },
+    ],
+  }),
+  Qn(11, "Pengambilan Dua Bola Sekaligus", {
+    type: "mixed",
+    content: "Kotak berisi 4 bola berbeda: Merah (M), Biru (B), Kuning (K), Putih (P). Dua bola diambil sekaligus.",
+    diagram: (
+      <FreqTable
+        caption="Pasangan bola yang mungkin"
+        headers={["Pasangan ke-", "Bola 1", "Bola 2"]}
+        rows={[
+          [1,"M","B"],[2,"M","K"],[3,"M","P"],[4,"B","K"],[5,"B","P"],[6,"K","P"],
+        ]}
+      />
+    ),
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan pengambilan 2 bola." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", math: "\\text{Jika ada } n \\text{ bola diambil 2, rumus } n(S) = \\frac{n(n-1)}{2}. \\text{ Verifikasi untuk } n=4." },
+    ],
+  }),
+  Qn(12, "Kartu dari 1 sampai 10", {
+    type: "mixed",
+    content: "Sebuah kotak berisi kartu bernomor 1 sampai 10. Satu kartu diambil secara acak.",
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Sebutkan titik sampel yang merupakan bilangan prima." },
+      { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
+    ],
+  }),
+  Qn(13, "Ruang Sampel – Huruf Vokal", {
+    type: "mixed",
+    content: "Dari huruf-huruf vokal {A, I, U, E, O} dipilih satu huruf secara acak.",
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Jika dari huruf S = {A, I, U, E, O} dipilih 2 huruf sekaligus, berapa n(S) yang baru?" },
+    ],
+  }),
+  Qn(14, "Dua Dadu – Selisih Tertentu", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
+    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan selisih = 2.",
+    parts: [
+      { label: "a.", text: "Sebutkan semua titik sampel dengan selisih kedua dadu = 2." },
+      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
+    ],
+  }),
+  Qn(15, "Ruang Sampel – Satu Dadu dan Kartu", {
+    type: "mixed",
+    content: "Sebuah dadu dilempar dan satu kartu diambil dari kartu bernomor {1, 2, 3}.",
+    parts: [
+      { label: "a.", math: "n(S) = n(\\text{dadu}) \\times n(\\text{kartu}) = \\ldots \\times \\ldots = \\ldots" },
+      { label: "b.", text: "Tuliskan 6 anggota ruang sampel (cukup 6 contoh dengan dadu angka 1)." },
+      { label: "c.", text: "Berapa banyak titik sampel dengan angka dadu sama dengan angka kartu?" },
+    ],
+  }),
+  Qn(16, "Memilih Ketua dan Wakil", {
+    type: "mixed",
+    content: "Dari 4 siswa: Adi (A), Budi (B), Citra (C), Deni (D) akan dipilih ketua dan wakil ketua. Ketua dan wakil tidak boleh orang yang sama.",
+    diagram: (
+      <FreqTable
+        caption="Pasangan (Ketua, Wakil)"
+        headers={["Ketua", "Wakil"]}
+        rows={[
+          ["A","B"],["A","C"],["A","D"],
+          ["B","A"],["B","C"],["B","D"],
+          ["C","A"],["C","B"],["C","D"],
+          ["D","A"],["D","B"],["D","C"],
+        ]}
+      />
+    ),
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel lengkap dari percobaan ini." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", math: "n(S) = n \\times (n-1) = 4 \\times 3 = \\ldots \\text{ Verifikasi!}" },
+    ],
+  }),
+  Qn(17, "Spinner Empat Sektor Tidak Sama", {
+    type: "mixed",
+    diagram: (
+      <SpinnerDiagram
+        sectors={[
+          { label: "1", color: "#ef4444", angle: 90 },
+          { label: "2", color: "#f59e0b", angle: 90 },
+          { label: "3", color: "#22c55e", angle: 90 },
+          { label: "4", color: "#3b82f6", angle: 90 },
+        ]}
+      />
+    ),
+    content: "Spinner di atas memiliki 4 sektor sama besar bernomor 1, 2, 3, dan 4. Spinner diputar dua kali.",
+    parts: [
+      { label: "a.", math: "n(S) = 4 \\times 4 = \\ldots" },
+      { label: "b.", text: "Tuliskan ruang sampel dalam bentuk tabel 4×4 (cukup baris pertama)." },
+      { label: "c.", text: "Berapa banyak titik sampel dengan jumlah kedua putaran = 5?" },
+    ],
+  }),
+  Qn(18, "Dua Dadu – Hasil Kali Tertentu", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => i*j === 12} />,
+    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan hasil kali = 12.",
+    parts: [
+      { label: "a.", text: "Sebutkan semua titik sampel dengan hasil kali kedua dadu = 12." },
+      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
+    ],
+  }),
+  Qn(19, "Kartu Remi – Ruang Sampel", {
+    type: "mixed",
+    content: "Satu set kartu remi terdiri dari 52 kartu: 4 jenis (♠ ♥ ♦ ♣), masing-masing 13 nilai (A,2,3,...,10,J,Q,K). Satu kartu diambil.",
+    parts: [
+      { label: "a.", text: "Tentukan n(S)." },
+      { label: "b.", text: "Berapa banyak titik sampel kartu berwarna merah (♥ dan ♦)?" },
+      { label: "c.", text: "Berapa banyak titik sampel kartu gambar (J, Q, K)?" },
+      { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
+    ],
+  }),
+  Qn(20, "Membuat Bilangan Tiga Digit", {
+    type: "mixed",
+    content: "Dari angka 1, 2, 3 dibuat bilangan tiga digit (tanpa pengulangan).",
+    parts: [
+      { label: "a.", text: "Tuliskan semua bilangan yang mungkin terbentuk." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", math: "n(S) = 3! = 3 \\times 2 \\times 1 = \\ldots \\text{ Verifikasi!}" },
+      { label: "d.", text: "Berapa banyak bilangan yang habis dibagi 2?" },
+    ],
+  }),
+  Qn(21, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
+    type: "mixed",
+    content: "Sebuah koin dilempar tiga kali secara berurutan. Catat urutan Angka (A) dan Gambar (G).",
+    parts: [
+      { label: "a.", math: "n(S) = 2^3 = \\ldots" },
+      { label: "b.", text: "Tuliskan semua 8 anggota ruang sampel." },
+      { label: "c.", text: "Sebutkan titik sampel dengan jumlah Angka lebih banyak dari Gambar." },
+    ],
+  }),
+  Qn(22, "Tabel – Dadu dan Koin", {
+    type: "mixed",
+    diagram: (
+      <FreqTable
+        caption="Tabel ruang sampel: Dadu + Koin"
+        headers={["Dadu", "Koin A", "Koin G"]}
+        rows={[
+          [1,"(1,A)","(1,G)"],
+          [2,"(2,A)","(2,G)"],
+          [3,"(3,A)","(3,G)"],
+          [4,"(4,A)","(4,G)"],
+          [5,"(5,A)","(5,G)"],
+          [6,"(6,A)","(6,G)"],
+        ]}
+      />
+    ),
+    content: "Sebuah dadu dan sebuah koin dilempar bersama.",
+    parts: [
+      { label: "a.", text: "Berapa n(S) berdasarkan tabel?" },
+      { label: "b.", text: "Sebutkan titik sampel dengan dadu genap dan koin Angka." },
+      { label: "c.", text: "Sebutkan titik sampel dengan dadu prima dan koin Gambar." },
+    ],
+  }),
+  Qn(23, "Pengambilan Kartu Bernomor", {
+    type: "mixed",
+    content: "Kotak berisi kartu bernomor 1, 2, 3, 4, 5. Dua kartu diambil berurutan (tanpa pengembalian).",
+    parts: [
+      { label: "a.", math: "n(S) = 5 \\times 4 = \\ldots" },
+      { label: "b.", text: "Berapa banyak titik sampel di mana kedua kartu bernomor ganjil?" },
+      { label: "c.", text: "Berapa banyak titik sampel di mana jumlah kedua kartu = 6?" },
+    ],
+  }),
+  Qn(24, "Dua Dadu – Titik Sampel Bilangan Prima", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => [2,3,5,7,11].includes(i+j)} />,
+    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan jumlah prima.",
+    parts: [
+      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah berupa bilangan prima." },
+      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
+      { label: "c.", text: "Jumlah prima yang mungkin dari dua dadu adalah: 2, 3, 5, 7, 11. Mana yang tidak mungkin?" },
+    ],
+  }),
+  Qn(25, "Ruang Sampel Percobaan Campuran", {
+    type: "mixed",
+    content: "Dari kantong A diambil 1 huruf dari {P, Q} dan dari kantong B diambil 1 huruf dari {X, Y, Z}.",
+    diagram: (
+      <FreqTable
+        caption="Ruang sampel (Kantong A × Kantong B)"
+        headers={["A\\B", "X", "Y", "Z"]}
+        rows={[
+          ["P","(P,X)","(P,Y)","(P,Z)"],
+          ["Q","(Q,X)","(Q,Y)","(Q,Z)"],
+        ]}
+      />
+    ),
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan ini." },
+      { label: "b.", math: "n(S) = n(A) \\times n(B) = 2 \\times 3 = \\ldots" },
+      { label: "c.", text: "Berapa banyak titik sampel yang memuat huruf Y?" },
+    ],
+  }),
+  Qn(26, "Aturan Perkalian – Menghitung n(S)", {
+    type: "mixed",
+    content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
+    parts: [
+      { label: "a.", math: "n(S) = 3 \\times 2 \\times 4 = \\ldots" },
+      { label: "b.", text: "Apakah semua kombinasi merupakan titik sampel yang valid? Mengapa?" },
+      { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
+    ],
+  }),
+  Qn(27, "Dua Dadu – Angka Lebih Besar", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => i > j} />,
+    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel di mana dadu pertama > dadu kedua.",
+    parts: [
+      { label: "a.", text: "Berapa banyak titik sampel dengan dadu pertama lebih besar dari dadu kedua?" },
+      { label: "b.", text: "Berapa banyak titik sampel dengan dadu pertama sama dengan dadu kedua?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan dadu pertama lebih kecil dari dadu kedua?" },
+      { label: "d.", text: "Verifikasi: jumlah ketiga jawaban = n(S) = 36." },
+    ],
+  }),
+  Qn(28, "Ruang Sampel dengan Pengembalian", {
+    type: "mixed",
+    content: "Kotak berisi bola M (Merah) dan B (Biru). Satu bola diambil, dicatat, dikembalikan, lalu diambil lagi.",
+    diagram: (
+      <FreqTable
+        caption="Ruang sampel (dengan pengembalian)"
+        headers={["Ambil 1", "Ambil 2", "Hasil"]}
+        rows={[["M","M","(M,M)"],["M","B","(M,B)"],["B","M","(B,M)"],["B","B","(B,B)"]]}
+      />
+    ),
+    parts: [
+      { label: "a.", text: "Tentukan n(S)." },
+      { label: "b.", text: "Berapa banyak titik sampel dengan kedua bola warna berbeda?" },
+      { label: "c.", text: "Jika ada 3 bola (M, B, K) dengan pengembalian, berapa n(S)?" },
+    ],
+  }),
+  Qn(29, "Percobaan Melempar Koin 4 Kali", {
+    type: "mixed",
+    content: "Sebuah koin dilempar 4 kali berturut-turut.",
+    parts: [
+      { label: "a.", math: "n(S) = 2^4 = \\ldots" },
+      { label: "b.", text: "Berapa banyak titik sampel dengan tepat 2 Angka?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan semua Gambar?" },
+      { label: "d.", text: "Berapa banyak titik sampel dengan paling banyak 1 Angka?" },
+    ],
+  }),
+  Qn(30, "Permutasi – Urutan Podium", {
+    type: "mixed",
+    content: "Dari 5 pelari (A, B, C, D, E) akan dipilih juara 1, 2, dan 3.",
+    parts: [
+      { label: "a.", math: "n(S) = 5 \\times 4 \\times 3 = \\ldots" },
+      { label: "b.", text: "Berapa banyak kemungkinan podium yang memuat pelari A di posisi mana pun?" },
+      { label: "c.", text: "Berapa banyak kemungkinan podium jika A harus di posisi pertama?" },
+    ],
+  }),
+  Qn(31, "Ruang Sampel – Warna Kartu", {
+    type: "mixed",
+    diagram: (
+      <FreqTable
+        caption="Kartu berwarna dalam kotak"
+        headers={["Warna", "Jumlah"]}
+        rows={[["Merah",5],["Biru",3],["Kuning",2],["Total",10]]}
+      />
+    ),
+    content: "Sebuah kotak berisi 10 kartu berwarna seperti pada tabel. Satu kartu diambil.",
+    parts: [
+      { label: "a.", text: "Tuliskan ruang sampel jika setiap kartu diberi nomor (M1,...,M5,B1,...,B3,K1,K2)." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Berapa banyak titik sampel yang bukan berwarna merah?" },
+    ],
+  }),
+  Qn(32, "Dua Dadu – Jumlah Genap", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => (i+j) % 2 === 0} />,
+    content: "Dua dadu dilempar. Sel diarsir menunjukkan jumlah genap.",
+    parts: [
+      { label: "a.", text: "Berapa banyak titik sampel dengan jumlah genap?" },
+      { label: "b.", text: "Berapa banyak titik sampel dengan jumlah ganjil?" },
+      { label: "c.", text: "Apakah kedua jumlah sama banyak? Mengapa?" },
+    ],
+  }),
+  Qn(33, "Ruang Sampel – Lotre Tiga Angka", {
+    type: "mixed",
+    content: "Sebuah lotre menggunakan tiga roda angka, masing-masing bertuliskan 0 sampai 9.",
+    parts: [
+      { label: "a.", math: "n(S) = 10 \\times 10 \\times 10 = \\ldots" },
+      { label: "b.", text: "Berapa banyak kode yang semua digitnya sama (misal: 000, 111, ...)?" },
+      { label: "c.", text: "Berapa banyak kode yang diawali angka 5?" },
+    ],
+  }),
+  Qn(34, "Percobaan Melempar Satu Dadu Dua Kali", {
+    type: "mixed",
+    content: "Satu dadu dilempar dua kali. Hasilnya ditulis sebagai pasangan terurut (hasil 1, hasil 2).",
+    diagram: <DiceGrid highlight={(i,j) => i === j} />,
+    parts: [
+      { label: "a.", text: "Tentukan n(S)." },
+      { label: "b.", text: "Berapa banyak titik sampel dengan hasil kedua lemparan sama (diarsir)?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan hasil kedua lemparan berbeda?" },
+    ],
+  }),
+  Qn(35, "Pengambilan Tanpa Pengembalian", {
+    type: "mixed",
+    content: "Kotak berisi 3 bola: Merah (M), Biru (B), Hijau (H). Dua bola diambil satu per satu tanpa pengembalian.",
+    diagram: (
+      <FreqTable
+        caption="Ruang sampel (tanpa pengembalian)"
+        headers={["Ambil ke-1", "Ambil ke-2", "Titik Sampel"]}
+        rows={[
+          ["M","B","(M,B)"],["M","H","(M,H)"],
+          ["B","M","(B,M)"],["B","H","(B,H)"],
+          ["H","M","(H,M)"],["H","B","(H,B)"],
+        ]}
+      />
+    ),
+    parts: [
+      { label: "a.", text: "Tentukan n(S)." },
+      { label: "b.", text: "Berapa banyak titik sampel yang mengandung bola Merah?" },
+      { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
+    ],
+  }),
+  Qn(36, "Soal UN – Ruang Sampel Dua Dadu", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => i+j > 9} />,
+    content: "Dua dadu dilempar bersamaan. Tentukan banyak titik sampel dengan jumlah lebih dari 9.",
+    parts: [
+      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah > 9." },
+      { label: "b.", text: "Berapa n(A) di mana A = kejadian jumlah > 9?" },
+      { label: "c.", text: "Berapa n(S)?" },
+    ],
+  }),
+  Qn(37, "Soal UN – Kartu Bernomor 1–20", {
+    type: "mixed",
+    content: "Sebuah kotak berisi kartu bernomor 1 sampai 20. Satu kartu diambil secara acak.",
+    parts: [
+      { label: "a.", text: "Tentukan n(S)." },
+      { label: "b.", text: "Berapa banyak titik sampel yang merupakan bilangan prima?" },
+      { label: "c.", text: "Berapa banyak titik sampel yang merupakan bilangan kelipatan 4?" },
+      { label: "d.", text: "Berapa banyak titik sampel yang merupakan bilangan kuadrat sempurna?" },
+    ],
+  }),
+  Qn(38, "Soal TKA – Pengambilan Kelereng", {
+    type: "mixed",
+    content: "Kantong berisi 4 kelereng: 2 merah (M1, M2) dan 2 putih (P1, P2). Dua kelereng diambil bersamaan.",
+    diagram: (
+      <FreqTable
+        caption="Semua pasangan yang mungkin"
+        headers={["Pasangan", "Warna"]}
+        rows={[
+          ["(M1,M2)","Merah-Merah"],
+          ["(M1,P1)","Merah-Putih"],
+          ["(M1,P2)","Merah-Putih"],
+          ["(M2,P1)","Merah-Putih"],
+          ["(M2,P2)","Merah-Putih"],
+          ["(P1,P2)","Putih-Putih"],
+        ]}
+      />
+    ),
+    parts: [
+      { label: "a.", text: "Tentukan n(S)." },
+      { label: "b.", text: "Berapa banyak titik sampel dengan kedua kelereng berwarna sama?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan kedua kelereng berwarna berbeda?" },
+    ],
+  }),
+  Qn(39, "Soal ANBK – Dua Dadu, Jumlah 8", {
+    type: "mixed",
+    diagram: <DiceGrid highlight={(i,j) => i+j === 8} />,
+    content: "Dua dadu dilempar. Berapa banyak titik sampel dengan jumlah = 8?",
+    parts: [
+      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah = 8." },
+      { label: "b.", text: "Berapa n(A) untuk A = {jumlah = 8}?" },
+      { label: "c.", text: "Bandingkan: lebih banyak mana antara {jumlah = 7} dan {jumlah = 8}?" },
+    ],
+  }),
+  Qn(40, "Soal UN Level Tinggi – Ruang Sampel Kompleks", {
+    type: "mixed",
+    content: "Dari angka {1, 2, 3, 4, 5} dipilih dua angka berbeda untuk membentuk pecahan p/q (p ≠ q).",
+    parts: [
+      { label: "a.", math: "n(S) = 5 \\times 4 = \\ldots \\text{ (urutan penting karena } \\frac{1}{2} \\neq \\frac{2}{1})" },
+      { label: "b.", text: "Berapa banyak pecahan yang nilainya lebih dari 1?" },
+      { label: "c.", text: "Berapa banyak pecahan yang nilainya kurang dari 1?" },
+      { label: "d.", text: "Apakah n(p/q > 1) = n(p/q < 1)? Mengapa?" },
+    ],
+  }),
+];
+
+const RuangSampelPage = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+        <div className="flex flex-col items-center mb-6">
+          <div className="w-14 h-14 rounded-full bg-cyan-500/20 border-2 border-cyan-400/60 flex items-center justify-center mb-3">
+            <Dices className="w-7 h-7 text-cyan-400" />
+          </div>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-cyan-300 text-center mb-1"
+            style={{ textShadow: `0 0 20px rgba(34,211,238,0.7)` }}>
+            RUANG SAMPEL DAN TITIK SAMPEL
+          </h1>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
+          <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
+            <span className="text-cyan-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-white/30 text-xs">·</span>
+            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+          </div>
+        </div>
+
+        <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
+          <p className="text-cyan-300 text-xs font-bold mb-2">📌 Ingat — Konsep Utama</p>
+          <div className="grid grid-cols-3 gap-2 text-xs font-body">
+            {[
+              { name: "Ruang Sampel (S)", emoji: "🎯" },
+              { name: "Titik Sampel", emoji: "🔵" },
+              { name: "n(S) = Banyak Sampel", emoji: "🔢" },
+            ].map(r => (
+              <div key={r.name} className="bg-white/5 rounded-lg px-2 py-2 text-center">
+                <div className="text-lg mb-1">{r.emoji}</div>
+                <span className="text-white/60 text-[10px]">{r.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 animate-slide-up">
+          {questions.map((q, i) => (
+            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
+              style={{ animationDelay: `${i * 0.02}s` }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
+              <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-teal-500 rounded-l-2xl" />
+              <div className="relative px-5 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center shrink-0">
+                    <span className="text-cyan-300 text-xs font-bold">{q.n}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-cyan-400 text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                      {q.title}
+                    </span>
+                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.math && <div className="mb-3 text-white overflow-x-auto"><BlockMath math={q.math} /></div>}
+                    {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
+                    {q.parts && (
+                      <div className="flex flex-col gap-2">
+                        {q.parts.map((p, pi) => (
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? "bg-white/5" : "bg-transparent px-0"}`}>
+                            {p.label && <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
+                            {p.math
+                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
+                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
+                            }
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/peluang"); }}
+            className="text-sm text-muted-foreground hover:text-cyan-400 transition-colors cursor-pointer font-body">
+            ← Kembali ke Peluang
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RuangSampelPage;

@@ -1,0 +1,54 @@
+Role: Kamu adalah seorang Instructional Designer dan Ahli Materi Pendidikan yang mahir membuat konten aplikasi pembelajaran yang interaktif.
+​Tugas: buat konten yang orisinal untuk aplikasi saya di menu MATERI MATEMATIKA- KELAS 7 - PERSAMAAN DAN PERTIDAKSAMAAN SATU VARIABEL -
+dimana isinya mencangkup:
+
+KALIMAT TERBUKA DAN TERTUTUP (PERNYATAAN)
+
+Definisi kalimat terbuka dan contohnya
+Penyelesaian kalimat terbuka (penggati variabel (peubah) sehingga kalimat terbuka menjadi kalimat benar
+Definisi kalimat tertutup (pernyataan dan contohnya)
+Tips menentukan kalimat terbuka dan tertutup (pernyataan)
+PENGERTIAN PLSV, KESAMAAN DAN PERNYATAAN EKUIVALEN
+
+pengertian persamaan linear variabel
+akar atau penyelesaian
+kesamaan
+persamaan yang ekuivalen
+PENYELESAIAN PERSAMAAN LINEAR SATU VARIABEL
+
+menyelesaikan Persamaan dengan metode substitusi
+Menambah atau Mengurang Kedua Ruas dengan Bilangan yang Sama (Sisipan tambah kurang)
+Mengali atau Membagl kedua Ruas dengan Bilangan yang Sama (sisipan kali dan bagi)
+Metode pindah ruas
+Menyelesaikan Persamaan Bentuk Pecahan
+MODEL MATEMATIKA DAN PENERAPAN PERSAMAAN PADA SOAL CERITA
+
+model matematika
+Penerapan Persamaan Linear Satu Variabel ( PLSV)
+PENGERTIAN KETIDAKSAMAAN, PERTIDAKSAMAAN DAN PtLSV
+
+Pengertian Ketidaksamaan
+Penuertian Pertidaksamaan Unear Satu Variabel (P1LSV)
+PENYELESAIAN PERTIDAKSAMAAN LINEAR SATU VARIABEL
+
+Menambah atau Mengurang Kedua Ruas dengan Bilangan yang Sama (Sisipan tambah kurang)
+Mengali atau Membagl kedua Ruas dengan Bilangan positif yang Sama (sisipan kali dan bagi)
+Mengali atau Membagl kedua Ruas dengan Bilangan negatif yang Sama (sisipan kali dan bagi)
+Metode pindah ruas
+Menyelesaikan Pertidaksamaan Bentuk Pecahan
+MODEL MATEMATIKA DAN PENERAPAN PERSAMAAN PADA SOAL CERITA
+
+model matematika
+Penerapan Pertidaksamaan Linear Satu Variabel ( PtLSV)
+dengan Aturan Penulisan & Struktur:
+​Parafrase Total: Tulis ulang materi menggunakan bahasa yang lebih segar, mudah dipahami, dan kasual namun tetap profesional. Hindari struktur kalimat yang sama persis dengan buku sumber.
+​Struktur Sub-bab: Setiap sub-bab wajib memiliki:
+​Ringkasan Intisari: Penjelasan singkat konsep utama.
+​3 Contoh Soal Berbeda: Buat 3 contoh soal yang tingkat kesulitannya bertahap (Mudah, Sedang, Sulit).
+​Pembahasan Detail: Setiap contoh soal wajib disertai langkah-langkah penyelesaian.
+​Format Matematika & Sains: Gunakan sintaks LaTeX (gunakan tanda $...$) untuk semua rumus, variabel, simbol, dan persamaan matematika.
+​Visual & Warna (Sangat Penting): Gunakan blok warna terpisah (menggunakan format Markdown) untuk membedakan elemen agar nyaman dibaca di layar aplikasi:
+​Gunakan Bold untuk istilah penting.
+​Gunakan blok Quote (>) untuk Tips atau Catatan Penting.
+​Gunakan blok Code (``) atau tabel untuk memisahkan Pembahasan dari Soal.
+.jika bergambar buat oleh kamu yang jelas dan warnanya berbeda dengan background agar jelas
