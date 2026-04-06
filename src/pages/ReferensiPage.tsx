@@ -5,9 +5,9 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Globe, Youtube } from "lucide-react";
 
 const bukuRefs = [
-  "As'ari A, R, dkk. 2017. Matematika SMP/MTs Kelas VIII Semester I. Edisi Revisi. Jakarta: Kementerian Pendidikan dan Kebudayaan RI.",
   "Adinawan, M. C. 2017. Matematika Untuk SMP/MTs Kelas VII Semester 1. Jakarta: Erlangga.",
   "Adinawan, M. C. 2017. Matematika Untuk SMP/MTs Kelas VIII Semester 2. Jakarta: Erlangga.",
+  "As'ari A, R, dkk. 2017. Matematika SMP/MTs Kelas VIII Semester I. Edisi Revisi. Jakarta: Kementerian Pendidikan dan Kebudayaan RI.",
   "B.K. Noormandiri. 2018. Matematika untuk SMA/MA Kelas XII Kelompok Wajib. Jakarta: Erlangga.",
   "MKKS SMP/MTs DIY. 2025. Naskah Pemantapan dan Persiapan Tes Kemampuan Akademik (TKA) MKKS SMP/MTs DIY Tahun Pelajaran 2025/2026 Paket A.",
   "Pemerintah Kota Yogyakarta Dinas Pendidikan. 2025. Naskah Persiapan Pemantapan Tes Kemampuan Akademik (TKA) Kota Yogyakarta Tahap 1 Tahun Pelajaran 2025/2026.",
