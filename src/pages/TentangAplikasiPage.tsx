@@ -143,7 +143,7 @@ const TentangAplikasiPage = () => {
                   <div className="flex justify-center">
                     <div className="flex items-center gap-2.5 bg-orange-500/10 border border-orange-400/25 rounded-xl px-4 py-2">
                       <span className="text-orange-400 text-base shrink-0">⭐</span>
-                      <span className="text-white/90 font-body text-xs font-bold">Dina Suciati, M.Pd</span>
+                      <span className="text-white/90 font-body text-xs font-bold">Ibu Dina Suciati, M.Pd</span>
                     </div>
                   </div>
                 </div>
