@@ -135,6 +135,19 @@ const TentangAplikasiPage = () => {
                 </h3>
                 <p className="text-white/50 font-body text-xs mt-0.5 text-center">Angkatan 10 · Kota Bandung</p>
 
+                {/* Fasilitator */}
+                <div className="w-full mt-4 mb-2">
+                  <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">
+                    Fasilitator
+                  </p>
+                  <div className="flex justify-center">
+                    <div className="flex items-center gap-2.5 bg-orange-500/10 border border-orange-400/25 rounded-xl px-4 py-2">
+                      <span className="text-orange-400 text-base shrink-0">⭐</span>
+                      <span className="text-white/90 font-body text-xs font-bold">Dina Suciati, M.Pd</span>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Pembimbing */}
                 <div className="w-full mt-4 mb-2">
                   <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">
