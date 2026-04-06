@@ -433,9 +433,7 @@ const PenjumlahanBilanganBulatPage = () => {
                       className="w-full max-w-xl rounded-lg shadow-lg border border-white/10"
                     />
                     <figcaption className="font-body text-xs text-cyan-200/60 text-center italic max-w-xl">
-                      <a href="https://gemini.google.com/app/d3c60af4ffbee066?hl=id" target="_blank" rel="noopener noreferrer" className="text-primary/70 hover:text-primary underline">
-                        https://gemini.google.com/app/d3c60af4ffbee066?hl=id
-                      </a>
+                      Sumber: Ilustrasi garis bilangan
                     </figcaption>
                   </figure>
                 </div>

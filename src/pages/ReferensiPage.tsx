@@ -21,8 +21,6 @@ const internetRefs = [
   { label: "Bing.com/images/create", url: "https://bing.com/images/create", akses: "Januari 2026" },
   { label: "Defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", url: "https://defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", akses: "Desember 2025" },
   { label: "Emporioarchitect.com/img/blog/siap-membangun-rumah-ketahui-dulu-masalah-umum-dalam-proses-pembangunan-rumah", url: "https://www.emporioarchitect.com/img/blog/siap-membangun-rumah-ketahui-dulu-masalah-umum-dalam-proses-pembangunan-rumah-dan-solusi-mengatasinya-070222103548184287.jpg", akses: "April 2026" },
-  { label: "Gemini.google.com/app/5eb5a48656083a32", url: "https://gemini.google.com/app/5eb5a48656083a32?hl=id", akses: "Maret 2026" },
-  { label: "Gemini.google.com/app/d3c60af4ffbee066", url: "https://gemini.google.com/app/d3c60af4ffbee066?hl=id", akses: "Maret 2026" },
   { label: "Imgx.gridoto.com/crop/0x0:0x0/700x0/filters:watermark(file/2017/gridoto", url: "https://imgx.gridoto.com/crop/0x0:0x0/700x0/filters:watermark(file/2017/gridoto/img/watermark.png,5,5,60)/photo/gridoto/2017/10/20/292677212.jpg", akses: "April 2026" },
   { label: "Konsep-matematika.com/2022/07/prinsip-teleskopik-olim-matik-sma.html", url: "https://konsep-matematika.com/2022/07/prinsip-teleskopik-olim-matik-sma.html", akses: "Desember 2025" },
   { label: "M4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", url: "https://m4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", akses: "November 2025" },

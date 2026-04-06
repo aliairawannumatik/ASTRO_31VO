@@ -619,9 +619,7 @@ const PenguranganBilanganBulatPage = () => {
                           className="w-full max-w-xl rounded-lg shadow-lg border border-white/10"
                         />
                         <figcaption className="font-body text-xs text-white/60 text-center italic max-w-xl">
-                          <a href="https://gemini.google.com/app/5eb5a48656083a32?hl=id" target="_blank" rel="noopener noreferrer" className="text-primary/70 hover:text-primary underline">
-                            https://gemini.google.com/app/5eb5a48656083a32?hl=id
-                          </a>
+                          Sumber: Ilustrasi garis bilangan
                         </figcaption>
                       </figure>
 
