@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
+import { Trophy, ChevronDown, ChevronUp, BookOpen, Dumbbell, Star } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
@@ -22,6 +22,18 @@ const renderLines = (text: string) =>
   text.split('\n').map((line, i) => (
     <div key={i} className="mb-1">{renderWithLatex(line)}</div>
   ));
+
+const FormulaBox = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <div className="my-3 rounded-xl overflow-hidden border border-cyan-400/30 shadow-[0_0_18px_rgba(6,182,212,0.15)]">
+    <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/25 to-purple-500/15 px-4 py-2 border-b border-cyan-400/20">
+      <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400 shrink-0" />
+      <span className="font-display text-[11px] font-bold tracking-widest uppercase text-yellow-300">{title}</span>
+    </div>
+    <div className="bg-[#0a1628]/70 backdrop-blur px-4 py-3 text-sm space-y-1.5">
+      {children}
+    </div>
+  </div>
+);
 
 const TabelFrekuensiNilai = () => (
   <div className="overflow-x-auto my-3">
@@ -376,12 +388,12 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
         <div>
           <div className="text-accent font-bold mb-1">4. Diagram Lingkaran (Pie Chart)</div>
           <p className="mb-2">Digunakan untuk menunjukkan proporsi atau bagian dari keseluruhan. Setiap sektor lingkaran mewakili persentase dari total data.</p>
-          <div className="bg-muted/20 rounded-lg px-3 py-2 text-xs space-y-1 mb-2">
-            <div className="text-white/60">Rumus Besar Sudut Sektor:</div>
-            <div>{renderWithLatex('$\\frac{\\text{Frekuensi Kategori}}{\\text{Total Frekuensi}} \\times 360°$')}</div>
-            <div className="text-white/60 mt-1">Rumus Persentase Sektor:</div>
-            <div>{renderWithLatex('$\\frac{\\text{Frekuensi Kategori}}{\\text{Total Frekuensi}} \\times 100\\%$')}</div>
-          </div>
+          <FormulaBox title="Rumus Penting — Diagram Lingkaran">
+            <div className="text-white/60 text-xs">Besar Sudut Sektor:</div>
+            <div className="text-white">{renderWithLatex('$\\dfrac{\\text{Frekuensi Kategori}}{\\text{Total Frekuensi}} \\times 360°$')}</div>
+            <div className="text-white/60 text-xs mt-1">Persentase Sektor:</div>
+            <div className="text-white">{renderWithLatex('$\\dfrac{\\text{Frekuensi Kategori}}{\\text{Total Frekuensi}} \\times 100\\%$')}</div>
+          </FormulaBox>
           <div className="text-xs text-white/60 mb-2 space-y-1">
             <div>Nilai 6: Sudut = {renderWithLatex('$\\dfrac{3}{20} \\times 360°$')} = <b className="text-white">54°</b>, Persentase = <b className="text-white">15%</b></div>
             <div>Nilai 7: Sudut = {renderWithLatex('$\\dfrac{8}{20} \\times 360°$')} = <b className="text-white">144°</b>, Persentase = <b className="text-white">40%</b></div>
@@ -398,12 +410,12 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
     renderContent: () => (
       <div className="font-body text-sm text-white/80 leading-relaxed space-y-3">
         <p>Mean atau rata-rata adalah jumlah semua nilai data dibagi dengan banyaknya data.</p>
-        <div className="bg-muted/20 rounded-lg px-3 py-2 text-xs space-y-1">
-          <div className="text-white/60">Rumus (Data Tunggal):</div>
-          <div>{renderWithLatex('$\\bar{x} = \\frac{x_1 + x_2 + ... + x_n}{n}$')}</div>
-          <div className="text-white/60 mt-2">Rumus (Data Frekuensi):</div>
-          <div>{renderWithLatex('$\\bar{x} = \\frac{\\sum f_i \\cdot x_i}{\\sum f_i}$')}</div>
-        </div>
+        <FormulaBox title="Rumus Penting — Mean (Rata-rata)">
+          <div className="text-white/60 text-xs">Data Tunggal:</div>
+          <div className="text-white">{renderWithLatex('$\\bar{x} = \\dfrac{x_1 + x_2 + \\cdots + x_n}{n}$')}</div>
+          <div className="text-white/60 text-xs mt-2">Data dengan Frekuensi:</div>
+          <div className="text-white">{renderWithLatex('$\\bar{x} = \\dfrac{\\sum f_i \\cdot x_i}{\\sum f_i}$')}</div>
+        </FormulaBox>
 
         <div>
           <div className="text-accent font-bold text-xs mb-1">Contoh 1 (Data Tunggal):</div>
@@ -429,12 +441,11 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
     renderContent: () => (
       <div className="font-body text-sm text-white/80 leading-relaxed space-y-3">
         <p>Rata-rata gabungan adalah rata-rata yang dihitung dari gabungan beberapa kelompok data, di mana setiap kelompok memiliki rata-rata dan jumlah anggota (bobot) yang berbeda.</p>
-        <div className="bg-muted/20 rounded-lg px-3 py-2 text-xs space-y-1">
-          <div className="text-white/60">Rumus Rata-rata Gabungan:</div>
-          <div>{renderWithLatex('$\\bar{x}_{gab} = \\frac{n_1 \\cdot \\bar{x}_1 + n_2 \\cdot \\bar{x}_2 + ... + n_k \\cdot \\bar{x}_k}{n_1 + n_2 + ... + n_k}$')}</div>
-          <div className="text-white/60 mt-1">Atau dengan notasi sigma:</div>
-          <div>{renderWithLatex('$\\bar{x}_{gab} = \\frac{\\sum_{i=1}^{k} n_i \\cdot \\bar{x}_i}{\\sum_{i=1}^{k} n_i}$')}</div>
-        </div>
+        <FormulaBox title="Rumus Penting — Rata-rata Gabungan">
+          <div className="text-white">{renderWithLatex('$\\bar{x}_{gab} = \\dfrac{n_1 \\cdot \\bar{x}_1 + n_2 \\cdot \\bar{x}_2 + \\cdots + n_k \\cdot \\bar{x}_k}{n_1 + n_2 + \\cdots + n_k}$')}</div>
+          <div className="text-white/60 text-xs mt-1">Dengan notasi sigma:</div>
+          <div className="text-white">{renderWithLatex('$\\bar{x}_{gab} = \\dfrac{\\sum_{i=1}^{k} n_i \\cdot \\bar{x}_i}{\\sum_{i=1}^{k} n_i}$')}</div>
+        </FormulaBox>
 
         <div>
           <div className="text-accent font-bold text-xs mb-1">Contoh 1:</div>
@@ -480,12 +491,11 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
     renderContent: () => (
       <div className="font-body text-sm text-white/80 leading-relaxed space-y-3">
         <p>Median adalah nilai tengah dari kumpulan data yang telah diurutkan dari yang terkecil hingga terbesar (atau sebaliknya).</p>
-        <div className="bg-muted/20 rounded-lg px-3 py-2 text-xs space-y-1">
-          <div className="text-white/60">Langkah menentukan median:</div>
-          <div>1. Urutkan data dari yang terkecil ke terbesar.</div>
-          <div>2. Jika n ganjil → median = data ke {renderWithLatex('$\\frac{n+1}{2}$')}</div>
-          <div>3. Jika n genap → median = rata-rata data ke {renderWithLatex('$\\frac{n}{2}$')} dan {renderWithLatex('$\\frac{n}{2}+1$')}</div>
-        </div>
+        <FormulaBox title="Rumus Penting — Median">
+          <div className="text-white/70 text-xs mb-1">Urutkan data terlebih dahulu, lalu:</div>
+          <div className="text-white">n ganjil → Median = data ke {renderWithLatex('$\\dfrac{n+1}{2}$')}</div>
+          <div className="text-white">n genap → Median = rata-rata data ke {renderWithLatex('$\\dfrac{n}{2}$')} dan {renderWithLatex('$\\dfrac{n}{2}+1$')}</div>
+        </FormulaBox>
 
         <div>
           <div className="text-accent font-bold text-xs mb-1">Contoh 1 (Data Ganjil):</div>
@@ -557,11 +567,11 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
     renderContent: () => (
       <div className="font-body text-sm text-white/80 leading-relaxed space-y-3">
         <p>Kuartil adalah ukuran yang membagi data menjadi empat kelompok yang sama banyak setelah diurutkan. Dilambangkan dengan Q.</p>
-        <div className="bg-muted/20 rounded px-3 py-2 text-xs space-y-1">
-          <div>{renderWithLatex('$Q_1$')} = Kuartil bawah (membatasi 25% data terkecil)</div>
-          <div>{renderWithLatex('$Q_2$')} = Kuartil tengah (median)</div>
-          <div>{renderWithLatex('$Q_3$')} = Kuartil atas (membatasi 75% data terkecil)</div>
-        </div>
+        <FormulaBox title="Rumus Penting — Kuartil">
+          <div className="text-white">{renderWithLatex('$Q_1$')} <span className="text-white/70">= Kuartil bawah (25% data terkecil)</span></div>
+          <div className="text-white">{renderWithLatex('$Q_2$')} <span className="text-white/70">= Kuartil tengah = Median</span></div>
+          <div className="text-white">{renderWithLatex('$Q_3$')} <span className="text-white/70">= Kuartil atas (75% data terkecil)</span></div>
+        </FormulaBox>
 
         <div>
           <div className="text-accent font-bold text-xs mb-1">Contoh 1 (n = 9 data ganjil):</div>
@@ -588,21 +598,22 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
 
         <div className="space-y-2">
           <div className="text-accent font-bold text-xs">Ukuran Penyebaran Data:</div>
-          <div className="bg-muted/20 rounded px-3 py-2 text-xs space-y-2">
-            <div>
-              <div className="text-yellow-400 font-bold">A. Jangkauan (Range):</div>
-              <div>{renderWithLatex('$R = X_{maks} - X_{min}$')}</div>
-              <div className="text-white/60 mt-1">Contoh: Data 3,6,10,5,8,9,6,4,7,5,6,9,5,2,4,7,8 → R = 10 – 2 = <span className="text-accent font-bold">8</span></div>
+          <FormulaBox title="Rumus Penting — Ukuran Penyebaran Data">
+            <div className="space-y-2">
+              <div>
+                <div className="text-yellow-300 font-bold text-xs">A. Jangkauan (Range)</div>
+                <div className="text-white">{renderWithLatex('$R = X_{maks} - X_{min}$')}</div>
+              </div>
+              <div>
+                <div className="text-yellow-300 font-bold text-xs">B. Jangkauan Interkuartil (QR)</div>
+                <div className="text-white">{renderWithLatex('$Q_R = Q_3 - Q_1$')}</div>
+              </div>
+              <div>
+                <div className="text-yellow-300 font-bold text-xs">C. Simpangan Kuartil (QD)</div>
+                <div className="text-white">{renderWithLatex('$Q_D = \\dfrac{1}{2}(Q_3 - Q_1)$')}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-yellow-400 font-bold">B. Jangkauan Interkuartil (QR):</div>
-              <div>{renderWithLatex('$Q_R = Q_3 - Q_1$')}</div>
-            </div>
-            <div>
-              <div className="text-yellow-400 font-bold">C. Simpangan Kuartil (QD):</div>
-              <div>{renderWithLatex('$Q_D = \\frac{1}{2}(Q_3 - Q_1)$')}</div>
-            </div>
-          </div>
+          </FormulaBox>
           <div className="bg-muted/20 rounded px-3 py-2 text-xs space-y-1">
             <div className="text-white/60">Contoh: Data: 20, 35, 50, 45, 30, 30, 25, 40, 45, 30, 35</div>
             <div>Diurutkan: 20, 25, 30, 30, <span className="text-yellow-400">30</span>, 35, 35, <span className="text-purple-400">40</span>, 45, 45, 50</div>
@@ -691,73 +702,110 @@ const OlimpiadeStatistikaPage = () => {
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <Trophy className="w-10 h-10 text-accent mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          OLIMPIADE - STATISTIKA
-        </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Irawan Sutiawan, M.Pd</p>
 
+        {/* Hero Header */}
+        <div className="relative mb-8 rounded-2xl overflow-hidden border border-cyan-400/20 shadow-[0_0_40px_rgba(6,182,212,0.12)]">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/40 via-purple-900/30 to-[#0a1628]/80" />
+          <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-400/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/8 rounded-full blur-2xl" />
+          <div className="relative z-10 flex flex-col items-center py-8 px-6">
+            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/30 to-purple-500/20 border border-cyan-400/30 mb-4 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+              <Trophy className="w-7 h-7 text-cyan-300" />
+            </div>
+            <div className="text-xs font-display tracking-widest text-cyan-400/70 uppercase mb-1">Olimpiade Matematika</div>
+            <h1 className="font-display text-2xl md:text-3xl font-black text-white text-center drop-shadow-[0_0_20px_rgba(6,182,212,0.5)] mb-1">
+              STATISTIKA
+            </h1>
+            <p className="text-white/40 text-xs font-body">Irawan Sutiawan, M.Pd</p>
+          </div>
+        </div>
+
+        {/* Tabs */}
         <div className="flex gap-2 justify-center mb-6">
           {[
-            { key: "materi" as const, label: "Materi" },
-            { key: "dasar" as const, label: "Latihan Dasar" },
-            { key: "olimpiade" as const, label: "Latihan Olimpiade" },
-          ].map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => { playPopSound(); setActiveTab(tab.key); }}
-              className={`font-display text-xs px-4 py-2 rounded-lg border cursor-pointer transition-all ${
-                activeTab === tab.key
-                  ? "bg-accent text-accent-foreground border-accent"
-                  : "bg-card/80 text-white/70 border-border hover:border-accent/40"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+            { key: "materi" as const, label: "Materi", icon: BookOpen },
+            { key: "dasar" as const, label: "Latihan Dasar", icon: Dumbbell },
+            { key: "olimpiade" as const, label: "Latihan Olimpiade", icon: Trophy },
+          ].map(tab => {
+            const Icon = tab.icon;
+            const active = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => { playPopSound(); setActiveTab(tab.key); }}
+                className={`font-display text-xs px-4 py-2 rounded-xl border cursor-pointer transition-all flex items-center gap-1.5 ${
+                  active
+                    ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white border-cyan-400 shadow-[0_0_14px_rgba(6,182,212,0.35)]"
+                    : "bg-card/60 text-white/60 border-border hover:border-cyan-400/40 hover:text-white/80"
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
 
         {activeTab === "materi" && (
-          <div className="space-y-3 animate-slide-up">
-            {materiSections.map((section, idx) => (
-              <div key={idx} className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-                <button
-                  onClick={() => toggleSection(idx)}
-                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
+          <div className="space-y-2.5 animate-slide-up">
+            {materiSections.map((section, idx) => {
+              const isOpen = expandedSections.includes(idx);
+              return (
+                <div
+                  key={idx}
+                  className={`rounded-xl overflow-hidden border transition-all ${
+                    isOpen
+                      ? "border-cyan-400/30 shadow-[0_0_16px_rgba(6,182,212,0.1)]"
+                      : "border-border/60 hover:border-cyan-400/20"
+                  }`}
                 >
-                  <span className="font-display text-sm text-accent font-bold">{section.heading}</span>
-                  {expandedSections.includes(idx) ? (
-                    <ChevronUp className="w-4 h-4 text-accent shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 text-white/50 shrink-0" />
+                  <button
+                    onClick={() => toggleSection(idx)}
+                    className={`w-full flex items-center justify-between px-5 py-3.5 cursor-pointer text-left transition-all ${
+                      isOpen
+                        ? "bg-gradient-to-r from-cyan-900/40 to-purple-900/20"
+                        : "bg-card/70 hover:bg-card/90"
+                    }`}
+                  >
+                    <span className={`font-display text-sm font-bold transition-colors ${isOpen ? "text-cyan-300" : "text-white/80"}`}>
+                      {section.heading}
+                    </span>
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all ${
+                      isOpen ? "bg-cyan-500/20 border border-cyan-400/40" : "bg-white/5 border border-white/10"
+                    }`}>
+                      {isOpen
+                        ? <ChevronUp className="w-3.5 h-3.5 text-cyan-400" />
+                        : <ChevronDown className="w-3.5 h-3.5 text-white/40" />
+                      }
+                    </div>
+                  </button>
+                  {isOpen && (
+                    <div className="bg-[#0b1628]/80 backdrop-blur px-5 pb-5 pt-3 border-t border-cyan-400/10">
+                      {'renderContent' in section && section.renderContent ? (
+                        section.renderContent()
+                      ) : (
+                        <div className="font-body text-sm text-white/80 leading-relaxed">
+                          {'content' in section && section.content
+                            ? section.content.split('\n').map((line, i) => (
+                                <div key={i} className="mb-1">{renderWithLatex(line)}</div>
+                              ))
+                            : null}
+                        </div>
+                      )}
+                    </div>
                   )}
-                </button>
-                {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
-                    {'renderContent' in section && section.renderContent ? (
-                      section.renderContent()
-                    ) : (
-                      <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                        {'content' in section && section.content
-                          ? section.content.split('\n').map((line, i) => (
-                              <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                            ))
-                          : null}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         )}
 
         {activeTab === "dasar" && (
-          <div className="space-y-4 animate-slide-up">
+          <div className="space-y-3 animate-slide-up">
             {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+              <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-cyan-400/20 transition-colors">
                 <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span>{' '}
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 font-display font-bold text-xs mr-2">{soal.no}</span>
                   {soal.soal.split('\n').map((line, lineIdx) => (
                     <span key={lineIdx}>
                       {lineIdx > 0 && <br />}
@@ -768,7 +816,7 @@ const OlimpiadeStatistikaPage = () => {
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                      <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/8 rounded-lg px-3 py-2 hover:bg-white/8 transition-colors">
                         {renderWithLatex(opt)}
                       </div>
                     ))}
@@ -780,22 +828,24 @@ const OlimpiadeStatistikaPage = () => {
         )}
 
         {activeTab === "olimpiade" && (
-          <div className="space-y-4 animate-slide-up">
+          <div className="space-y-3 animate-slide-up">
             {latihanOlimpiade.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+              <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-yellow-400/20 transition-colors">
                 <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span>{' '}
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500/20 border border-yellow-400/30 text-yellow-300 font-display font-bold text-xs mr-2">{soal.no}</span>
                   {soal.soal.split('\n').map((line, lineIdx) => (
                     <span key={lineIdx}>
                       {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      {lineIdx === 0 && line.startsWith('OSN') ? (
+                        <span className="inline-block bg-yellow-500/10 border border-yellow-400/20 rounded px-2 py-0.5 text-yellow-300 font-semibold text-xs mb-1">{line}</span>
+                      ) : renderWithLatex(line)}
                     </span>
                   ))}
                 </div>
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                      <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/8 rounded-lg px-3 py-2 hover:bg-white/8 transition-colors">
                         {renderWithLatex(opt)}
                       </div>
                     ))}
@@ -806,12 +856,12 @@ const OlimpiadeStatistikaPage = () => {
           </div>
         )}
 
-        <div className="mt-8 text-center">
+        <div className="mt-10 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/olimpiade"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+            className="text-sm text-white/40 hover:text-cyan-400 transition-colors cursor-pointer font-body"
           >
-            &larr; Kembali ke Olimpiade
+            ← Kembali ke Olimpiade
           </button>
         </div>
       </div>
