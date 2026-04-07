@@ -461,7 +461,7 @@ const examples: Example[] = [
 ];
 
 const AccordionSection = ({ section, idx }: { section: Section; idx: number }) => {
-  const [open, setOpen] = useState(idx === 0);
+  const [open, setOpen] = useState(true);
   return (
     <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
       <button
@@ -479,7 +479,7 @@ const AccordionSection = ({ section, idx }: { section: Section; idx: number }) =
 };
 
 const ExampleCard = ({ example, idx }: { example: Example; idx: number }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={`rounded-xl border ${example.border} ${example.bg} overflow-hidden`}>
       <button

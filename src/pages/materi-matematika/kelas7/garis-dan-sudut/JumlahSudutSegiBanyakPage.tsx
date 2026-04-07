@@ -430,12 +430,12 @@ const examples: Example[] = [
 ────────────────────────────────────────── */
 const JumlahSudutSegiBanyakPage = () => {
   const navigate = useNavigate();
-  const [openSection, setOpenSection] = useState<number | null>(0);
-  const [openExample, setOpenExample] = useState<number | null>(null);
+  const [openSection, setOpenSection] = useState<number[]>([0,1,2,3,4,5,6,7,8,9]);
+  const [openExample, setOpenExample] = useState<number[]>([0,1,2,3,4,5,6,7,8,9]);
 
-  const toggle = (i: number, setter: React.Dispatch<React.SetStateAction<number | null>>, cur: number | null) => {
+  const toggle = (i: number, setter: React.Dispatch<React.SetStateAction<number[]>>, cur: number[]) => {
     playPopSound();
-    setter(cur === i ? null : i);
+    setter(cur.includes(i) ? cur.filter(x => x !== i) : [...cur, i]);
   };
 
   return (
@@ -480,11 +480,11 @@ const JumlahSudutSegiBanyakPage = () => {
                 <span className="font-body text-sm font-semibold text-white flex items-center gap-2">
                   <span className="text-base">{sec.icon}</span> {sec.title}
                 </span>
-                {openSection === i
+                {openSection.includes(i)
                   ? <ChevronUp className="w-4 h-4 text-primary shrink-0" />
                   : <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />}
               </button>
-              {openSection === i && (
+              {openSection.includes(i) && (
                 <div className="px-4 pb-4 pt-1 border-t border-border/50 animate-slide-up">
                   {sec.content}
                 </div>
@@ -505,11 +505,11 @@ const JumlahSudutSegiBanyakPage = () => {
                 <span className={`font-display text-xs font-bold ${ex.color}`}>
                   ⭐ CONTOH {i + 1} — {ex.level}
                 </span>
-                {openExample === i
+                {openExample.includes(i)
                   ? <ChevronUp className="w-4 h-4 shrink-0 text-white/60" />
                   : <ChevronDown className="w-4 h-4 shrink-0 text-white/60" />}
               </button>
-              {openExample === i && (
+              {openExample.includes(i) && (
                 <div className="px-4 pb-4 pt-1 border-t border-white/10 space-y-3 animate-slide-up">
                   <div className="bg-slate-900/60 rounded-lg p-3">{ex.question}</div>
                   <p className={`text-xs font-semibold font-body ${ex.color}`}>💡 Pembahasan:</p>
