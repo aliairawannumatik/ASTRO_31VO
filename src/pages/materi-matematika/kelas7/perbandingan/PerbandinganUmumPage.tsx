@@ -10,7 +10,7 @@ import imgPerbandingan from "@assets/image_1775450115091.png";
 
 const PerbandinganUmumPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "bertingkat", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -131,42 +131,6 @@ const PerbandinganUmumPage = () => {
                   <div className="bg-slate-900/50 rounded p-3 mt-2">
                     <BlockMath math="\text{Bagian}_x = \frac{\text{angka rasio}_x}{\text{total rasio}} \times \text{total nilai}" />
                   </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* SECTION: PERBANDINGAN BERTINGKAT */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("bertingkat")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <Star className="w-5 h-5 text-cyan-400" />
-                <span className="font-body font-semibold text-white">Konsep Khusus: Perbandingan Bertingkat</span>
-              </div>
-              {expandedSections.includes("bertingkat") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
-            </button>
-            {expandedSections.includes("bertingkat") && (
-              <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">
-                  <strong className="text-primary">Perbandingan bertingkat</strong> muncul saat kita punya dua perbandingan terpisah yang terhubung melalui satu variabel perantara.
-                  Trik utamanya: samakan nilai variabel perantara menggunakan <strong className="text-cyan-300">KPK</strong>.
-                </p>
-                <div className="bg-slate-800/50 rounded-lg p-4">
-                  <p className="font-body text-xs font-semibold text-white/60 mb-3">LANGKAH-LANGKAH:</p>
-                  <div className="space-y-2 font-body text-sm text-white/80">
-                    <p><strong className="text-cyan-300">Langkah 1:</strong> Temukan variabel perantara (variabel yang muncul di kedua perbandingan).</p>
-                    <p><strong className="text-cyan-300">Langkah 2:</strong> Cari KPK dari angka variabel perantara di kedua perbandingan.</p>
-                    <p><strong className="text-cyan-300">Langkah 3:</strong> Kalikan masing-masing perbandingan agar variabel perantara nilainya sama (= KPK).</p>
-                    <p><strong className="text-cyan-300">Langkah 4:</strong> Gabungkan menjadi satu rasio <InlineMath math="A : B : C" /> lalu hitung.</p>
-                  </div>
-                </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Tips:</strong> Jika soal menyebutkan <strong>jumlah total</strong>, gunakan total rasio untuk membagi. Jika soal menyebutkan <strong>selisih</strong>, gunakan selisih angka rasio untuk membagi.
-                  </p>
                 </div>
               </div>
             )}
