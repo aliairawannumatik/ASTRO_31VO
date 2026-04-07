@@ -40,7 +40,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">1.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Garis a // b dipotong oleh garis c. Pada titik A dan B terbentuk sudut-sudut bernomor 1, 2, 3, 4. Pernyataan berikut yang benar adalah …</p>
-                <img src={imgNo1} alt="Soal 1" className="my-3 max-w-xs" />
+                <img src={imgNo1} alt="Soal 1" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. ∠A₁ sehadap dengan ∠B₃</p>
                   <p>B. ∠A₂ berseberangan luar dengan ∠B₃</p>
@@ -55,7 +55,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">2.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut! Dua garis sejajar dipotong oleh dua garis transversal sehingga terbentuk sudut 1 sampai 8. Perhatikan pernyataan berikut!</p>
-                <img src={imgNo2} alt="Soal 2" className="my-3 max-w-xs" />
+                <img src={imgNo2} alt="Soal 2" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 mb-2 space-y-1 text-white/70">
                   <p>(i) Sudut 1 dan sudut 7, sudut luar berseberangan</p>
                   <p>(ii) Sudut 1 dan sudut 6, sudut luar sepihak</p>
@@ -77,7 +77,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">3.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar. Diketahui ∠A₁ = 103°, maka besar ∠B₄ dan ∠A₃ berturut-turut adalah …</p>
-                <img src={imgNo3} alt="Soal 3" className="my-3 max-w-xs" />
+                <img src={imgNo3} alt="Soal 3" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 130° dan 90°</p>
                   <p>B. 90° dan 130°</p>
@@ -92,7 +92,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">4.</span>
               <div>
                 <p className="mb-2">Pada gambar berikut, garis p // q dipotong garis r secara transversal. Perbandingan sudut P₁ : Q₄ adalah 4 : 5. Besar sudut Q₁ adalah …</p>
-                <img src={imgNo4} alt="Soal 4" className="my-3 max-w-xs" />
+                <img src={imgNo4} alt="Soal 4" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 40°</p>
                   <p>B. 80°</p>
@@ -107,7 +107,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">5.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Garis AB // CD dan besar ∠DAB dan ∠BCD diketahui dari gambar. Besar ∠ABC adalah …</p>
-                <img src={imgNo5} alt="Soal 5" className="my-3 max-w-xs" />
+                <img src={imgNo5} alt="Soal 5" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 16°</p>
                   <p>B. 26°</p>
@@ -122,7 +122,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">6.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar. Besar ∠BCF adalah ….</p>
-                <img src={imgNo6} alt="Soal 6" className="my-3 max-w-xs" />
+                <img src={imgNo6} alt="Soal 6" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 35°</p>
                   <p>B. 45°</p>
@@ -137,7 +137,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">7.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Jika garis l₁ dan l₂ adalah dua garis yang sejajar, maka nilai x adalah ...</p>
-                <img src={imgNo7} alt="Soal 7" className="my-3 max-w-xs" />
+                <img src={imgNo7} alt="Soal 7" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 13°</p>
                   <p>B. 39°</p>
@@ -152,7 +152,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">8.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Besar sudut a adalah ...</p>
-                <img src={imgNo8} alt="Soal 8" className="my-3 max-w-xs" />
+                <img src={imgNo8} alt="Soal 8" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 30°</p>
                   <p>B. 50°</p>
@@ -167,7 +167,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">9.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Diketahui garis EG // AC, besar ∠FEG = 50° dan besar ∠EDB = 108°. Besar ∠DBC adalah …</p>
-                <img src={imgNo9} alt="Soal 9" className="my-3 max-w-xs" />
+                <img src={imgNo9} alt="Soal 9" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 58°</p>
                   <p>B. 61°</p>
@@ -182,7 +182,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
               <span className="font-semibold text-accent shrink-0">10.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Sebuah tangga rumah terbuat dari kayu dan pagar pengaman dari besi. Besar sudut antara tiang besi dan pagar dengan pegangan tangan terdapat pada gambar. Besar sudut kemiringan tangga adalah …</p>
-                <img src={imgNo10} alt="Soal 10" className="my-3 max-w-xs" />
+                <img src={imgNo10} alt="Soal 10" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 60°</p>
                   <p>B. 50°</p>

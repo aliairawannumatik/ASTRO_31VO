@@ -167,32 +167,34 @@ const HubunganDuaGarisPage = () => {
 
           <div className="space-y-8 text-white/90 font-body text-sm leading-relaxed">
             {questions.map((q) => (
-              <div key={q.id} className="border-l-2 border-accent/50 pl-4">
-                <p className="font-semibold text-accent mb-3">{q.id}.</p>
+              <div key={q.id} className="border-l-2 border-accent/50 pl-4 flex gap-3">
+                <span className="font-semibold text-accent shrink-0 w-6">{q.id}.</span>
 
-                {q.image && (
-                  <div className="mb-4 flex justify-center">
-                    <div className="bg-white rounded-lg p-3 inline-block">
-                      <img
-                        src={q.image}
-                        alt={q.imageAlt}
-                        className="max-w-full h-auto max-h-44 object-contain"
-                      />
+                <div className="flex-1 min-w-0">
+                  {q.image && (
+                    <div className="mb-4">
+                      <div className="bg-white rounded-lg p-3 inline-block max-w-full">
+                        <img
+                          src={q.image}
+                          alt={q.imageAlt}
+                          className="w-full max-w-xs h-auto object-contain block"
+                        />
+                      </div>
                     </div>
+                  )}
+
+                  <div className="mb-4">{q.content}</div>
+
+                  <div className="grid grid-cols-1 gap-2">
+                    {q.options.map((opt, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-white/80">
+                        <span className="font-semibold text-white/60 shrink-0 w-5">
+                          {OPTION_LABELS[idx]}.
+                        </span>
+                        <span>{opt}</span>
+                      </div>
+                    ))}
                   </div>
-                )}
-
-                <div className="mb-4">{q.content}</div>
-
-                <div className="grid grid-cols-1 gap-2 pl-2">
-                  {q.options.map((opt, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-white/80">
-                      <span className="font-semibold text-white/60 shrink-0 w-5">
-                        {OPTION_LABELS[idx]}.
-                      </span>
-                      <span>{opt}</span>
-                    </div>
-                  ))}
                 </div>
               </div>
             ))}
