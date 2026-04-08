@@ -1,4 +1,5 @@
 import { useState } from "react";
+import jualBeliImg from "@assets/image_1775640587265.png";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -47,6 +48,8 @@ const JualBeliUntungRugiPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu membeli sepasang sepatu seharga Rp150.000, lalu menjualnya ke temanmu Rp180.000. Apakah kamu untung atau rugi? Dari warung kelontong, toko online, hingga perusahaan besar — semua transaksi jual beli selalu berpusat pada dua angka kunci:
                 </p>
+
+                <img src={jualBeliImg} alt="Ilustrasi Jual Beli" className="w-full rounded-xl object-cover" />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
