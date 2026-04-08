@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Tag } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Tag, AlertCircle, Star } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 const DiskonPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "ganda", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "ganda", "kesalahan", "contoh", "rangkuman"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -45,15 +45,33 @@ const DiskonPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Saat belanja online atau ke mal, kita sering melihat tag harga dicoret dan ada angka baru di bawahnya. Itulah <strong className="text-primary">diskon</strong> — potongan harga yang diberikan penjual dalam bentuk persentase dari harga asli.
+                  Saat belanja online atau ke mal, kita sering melihat tag harga dicoret dan ada angka baru di bawahnya. Itulah <strong className="text-primary">diskon</strong> — potongan harga yang diberikan penjual dalam bentuk persentase dari harga asli (harga sebelum diskon).
                 </p>
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
-                  <div className="flex items-start gap-3">
-                    <Tag className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
-                    <p className="font-body text-sm text-cyan-200">
-                      <strong>Contoh nyata:</strong> Baju seharga Rp200.000 mendapat diskon 25% artinya kamu hemat Rp50.000 dan hanya perlu membayar Rp150.000.
-                    </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <Tag className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-body text-sm font-semibold text-cyan-300 mb-1">Mengapa ada Diskon?</p>
+                        <p className="font-body text-xs text-white/60 leading-relaxed">Untuk menarik pembeli, menghabiskan stok lama, atau bersaing dengan toko lain. Penjual tetap bisa untung meski memberikan diskon besar.</p>
+                      </div>
+                    </div>
                   </div>
+                  <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <Tag className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-body text-sm font-semibold text-purple-300 mb-1">Contoh Nyata</p>
+                        <p className="font-body text-xs text-white/60 leading-relaxed">Baju Rp200.000, diskon 25% → hemat Rp50.000 → bayar hanya Rp150.000.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-white/70 mb-2">🔑 Kunci Utama Diskon:</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Diskon selalu dihitung dari <strong className="text-cyan-300">harga awal (harga sebelum diskon)</strong>, bukan dari harga bayar. Ini penting untuk mencegah kesalahan menghitung.
+                  </p>
                 </div>
               </div>
             )}
@@ -70,19 +88,29 @@ const DiskonPage = () => {
             </button>
             {expandedSections.includes("konsep") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-green-300">Besar Diskon (dalam Rupiah):</p>
-                  <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="\text{Besar Diskon} = \%\text{Diskon} \times \text{Harga Awal}" />
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-4">
+                  <div>
+                    <p className="font-body text-sm font-semibold text-green-300 mb-2">Besar Diskon (dalam Rupiah):</p>
+                    <div className="bg-slate-900/50 rounded p-3">
+                      <BlockMath math="\boxed{\text{Besar Diskon} = \%\text{Diskon} \times \text{Harga Awal}}" />
+                    </div>
                   </div>
-                  <p className="font-body text-sm font-semibold text-green-300 mt-2">Harga Bayar Setelah Diskon:</p>
-                  <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="\text{Harga Bayar} = \text{Harga Awal} \times (100\% - \%\text{Diskon})" />
+                  <div>
+                    <p className="font-body text-sm font-semibold text-green-300 mb-2">Harga Bayar Setelah Diskon:</p>
+                    <div className="bg-slate-900/50 rounded p-3">
+                      <BlockMath math="\boxed{\text{Harga Bayar} = \text{Harga Awal} \times (100\% - \%\text{Diskon})}" />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-body text-sm font-semibold text-green-300 mb-2">Mencari Harga Awal (jika Harga Bayar diketahui):</p>
+                    <div className="bg-slate-900/50 rounded p-3">
+                      <BlockMath math="\boxed{\text{Harga Awal} = \frac{\text{Harga Bayar}}{(100\% - \%\text{Diskon})}}" />
+                    </div>
                   </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Tips Cepat:</strong> Diskon 30% berarti kamu membayar <strong>70%</strong> dari harga asli. Diskon 15% berarti kamu membayar <strong>85%</strong>. Langsung kalikan saja!
+                    <strong>Tips Cepat:</strong> Diskon 30% → bayar <strong>70%</strong> dari harga asli. Diskon 15% → bayar <strong>85%</strong>. Cukup kalikan langsung dengan sisa persennya!
                   </p>
                 </div>
               </div>
@@ -106,18 +134,62 @@ const DiskonPage = () => {
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-orange-300 mb-3">Rumus Diskon Ganda (Cara Cepat):</p>
                   <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="\text{Harga Bayar} = \frac{(100 - d_1)}{100} \times \frac{(100 - d_2)}{100} \times \text{Harga Awal}" />
+                    <BlockMath math="\boxed{\text{Harga Bayar} = \frac{(100 - d_1)}{100} \times \frac{(100 - d_2)}{100} \times \text{Harga Awal}}" />
                   </div>
                   <p className="font-body text-xs text-white/60 mt-2">Di mana <InlineMath math="d_1" /> = diskon pertama (%), <InlineMath math="d_2" /> = diskon kedua (%)</p>
                 </div>
                 <div className="bg-slate-800/50 rounded-lg p-4">
-                  <p className="font-body text-xs font-semibold text-white/60 mb-2">ILUSTRASI: Diskon 20% + 10% dari Rp100.000</p>
-                  <div className="space-y-1 font-body text-sm text-white/80">
-                    <p>Diskon 20%: bayar <InlineMath math="80\% \times 100.000 = \text{Rp}80.000" /></p>
-                    <p>Diskon 10% dari Rp80.000: bayar <InlineMath math="90\% \times 80.000 = \text{Rp}72.000" /></p>
-                    <p className="text-orange-300 font-semibold">Total diskon efektif = 28%, BUKAN 30%!</p>
+                  <p className="font-body text-xs font-semibold text-white/60 mb-3">ILUSTRASI: Diskon 20% + 10% dari Rp100.000</p>
+                  <div className="space-y-2 font-body text-sm text-white/80">
+                    <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                      <p className="text-xs text-white/60">Setelah diskon pertama 20%:</p>
+                      <BlockMath math="80\% \times 100.000 = \text{Rp}80.000" />
+                      <p className="text-xs text-white/60">Setelah diskon kedua 10% dari Rp80.000:</p>
+                      <BlockMath math="90\% \times 80.000 = \text{Rp}72.000" />
+                    </div>
+                    <p className="text-orange-300 font-semibold text-sm">Total diskon efektif = 28%, BUKAN 30%!</p>
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* KESALAHAN UMUM */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("kesalahan")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400" />
+                <span className="font-body font-semibold text-white">Kesalahan Umum & Tips Penting</span>
+              </div>
+              {expandedSections.includes("kesalahan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("kesalahan") && (
+              <div className="px-5 pb-5 space-y-3">
+                {[
+                  {
+                    salah: "Menganggap diskon 20%+10% = diskon 30%",
+                    benar: "Diskon ganda TIDAK dijumlahkan. Hitung bertahap: diskon kedua dari harga setelah diskon pertama.",
+                  },
+                  {
+                    salah: "Menghitung diskon dari harga bayar, bukan harga asli",
+                    benar: "Diskon selalu dihitung berdasarkan harga AWAL (sebelum diskon), bukan dari harga yang sudah dipotong.",
+                  },
+                  {
+                    salah: "Lupa mengonversi % ke desimal saat menghitung",
+                    benar: "Diskon 25% = 0,25 dalam perkalian. Pastikan selalu konversi dengan membagi 100.",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-red-400 text-xs font-bold shrink-0 mt-0.5">✗ SALAH:</span>
+                      <p className="font-body text-xs text-red-300">{item.salah}</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 text-xs font-bold shrink-0 mt-0.5">✓ BENAR:</span>
+                      <p className="font-body text-xs text-green-300">{item.benar}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -147,6 +219,7 @@ const DiskonPage = () => {
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p className="text-xs text-white/60">✦ Diketahui: Harga awal = Rp350.000, Diskon = 40%</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="\text{Harga Bayar} = (100\% - 40\%) \times 350.000" />
                         <BlockMath math="= 60\% \times 350.000 = \frac{60}{100} \times 350.000 = \text{Rp}210.000" />
@@ -169,7 +242,7 @@ const DiskonPage = () => {
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Setelah diskon 30%, harga yang dibayar = 70% dari harga asli.</p>
+                      <p className="text-xs text-white/60">✦ Setelah diskon 30%, harga yang dibayar = 70% dari harga asli.</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="70\% \times \text{Harga Asli} = 280.000" />
                         <BlockMath math="\text{Harga Asli} = \frac{280.000}{70\%} = \frac{280.000}{0{,}7} = \text{Rp}400.000" />
@@ -206,6 +279,40 @@ const DiskonPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* RANGKUMAN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("rangkuman")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <Star className="w-5 h-5 text-yellow-400" />
+                <span className="font-body font-semibold text-white">Rangkuman Materi Diskon</span>
+              </div>
+              {expandedSections.includes("rangkuman") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("rangkuman") && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4 space-y-3">
+                  {[
+                    { no: "1", poin: "Diskon = potongan harga dinyatakan dalam persen dari harga awal." },
+                    { no: "2", poin: "Harga Bayar = Harga Awal × (100% − %Diskon)." },
+                    { no: "3", poin: "Untuk mencari harga asal: Harga Awal = Harga Bayar ÷ (100% − %Diskon)." },
+                    { no: "4", poin: "Diskon ganda (misal 20%+10%) TIDAK sama dengan 30%. Hitung bertahap, bukan dijumlahkan." },
+                    { no: "5", poin: "Diskon efektif gabungan selalu lebih kecil dari jumlah keduanya." },
+                  ].map((item) => (
+                    <div key={item.no} className="flex items-start gap-3">
+                      <span className="bg-primary/20 text-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5">{item.no}</span>
+                      <p className="font-body text-sm text-white/80">{item.poin}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+                  <p className="font-body text-xs text-cyan-200 leading-relaxed">
+                    <strong>Koneksi ke Materi Lain:</strong> Diskon sering dikombinasikan dengan PPN (diskon dulu, baru PPN dihitung dari harga setelah diskon) dan Untung-Rugi (pedagang memberikan diskon tetapi harus memastikan harga jual akhir masih lebih tinggi dari modal).
+                  </p>
+                </div>
               </div>
             )}
           </div>

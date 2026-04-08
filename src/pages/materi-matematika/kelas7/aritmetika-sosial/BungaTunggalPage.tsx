@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, DollarSign } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, DollarSign, AlertCircle, Star } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 const BungaTunggalPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "satuan", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "satuan", "kesalahan", "contoh", "rangkuman"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -51,17 +51,18 @@ const BungaTunggalPage = () => {
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                     <DollarSign className="w-5 h-5 text-green-400 mb-2" />
                     <p className="font-body text-sm font-semibold text-green-300 mb-1">Jika Menabung</p>
-                    <p className="font-body text-xs text-white/60">Bunga = tambahan uang dari bank atas tabunganmu. Kamu diuntungkan.</p>
+                    <p className="font-body text-xs text-white/60 leading-relaxed">Bunga = tambahan uang dari bank atas tabunganmu. Kamu diuntungkan karena uangmu bertambah setiap periode.</p>
                   </div>
                   <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
                     <DollarSign className="w-5 h-5 text-red-400 mb-2" />
                     <p className="font-body text-sm font-semibold text-red-300 mb-1">Jika Meminjam</p>
-                    <p className="font-body text-xs text-white/60">Bunga = biaya tambahan yang harus kamu bayar ke bank atas pinjaman.</p>
+                    <p className="font-body text-xs text-white/60 leading-relaxed">Bunga = biaya tambahan yang harus kamu bayar ke bank atas pinjaman. Makin lama pinjam, makin besar total bunganya.</p>
                   </div>
                 </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Kunci Bunga Tunggal:</strong> Setiap periode, bunga dihitung dari <strong>modal awal yang sama</strong>. Tidak ada "bunga berbunga" di sini — itulah yang membedakannya dari bunga majemuk.
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-white/70 mb-2">🔑 Ciri Khas Bunga Tunggal:</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Setiap periode, bunga dihitung dari <strong className="text-yellow-300">modal awal yang sama</strong>. Tidak ada "bunga berbunga" — itulah yang membedakannya dari bunga majemuk yang lebih kompleks.
                   </p>
                 </div>
               </div>
@@ -79,24 +80,40 @@ const BungaTunggalPage = () => {
             </button>
             {expandedSections.includes("konsep") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-green-300 mb-3">Rumus Besar Bunga:</p>
-                  <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="B = M \times W \times P" />
-                  </div>
-                  <div className="mt-3 space-y-1 font-body text-sm text-white/70">
-                    <p><InlineMath math="B" /> = Besar bunga yang diperoleh/dibayar</p>
-                    <p><InlineMath math="M" /> = Modal awal (pokok tabungan/pinjaman)</p>
-                    <p><InlineMath math="W" /> = Waktu (dalam satuan yang sama dengan periode bunga)</p>
-                    <p><InlineMath math="P" /> = Persentase bunga per periode (dalam bentuk desimal)</p>
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-4">
+                  <div>
+                    <p className="font-body text-sm font-semibold text-green-300 mb-2">Rumus Besar Bunga:</p>
+                    <div className="bg-slate-900/50 rounded p-3">
+                      <BlockMath math="\boxed{B = M \times W \times P}" />
+                    </div>
+                    <div className="mt-3 space-y-1 font-body text-sm text-white/70">
+                      <p><InlineMath math="B" /> = Besar bunga yang diperoleh/dibayar</p>
+                      <p><InlineMath math="M" /> = Modal awal (pokok tabungan/pinjaman)</p>
+                      <p><InlineMath math="W" /> = Waktu (dalam satuan yang sama dengan periode bunga)</p>
+                      <p><InlineMath math="P" /> = Persentase bunga per periode (dalam bentuk desimal)</p>
+                    </div>
                   </div>
                 </div>
-                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-blue-300 mb-3">Modal Akhir setelah W periode:</p>
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-blue-300">Modal Akhir setelah W periode:</p>
                   <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="M_1 = M + B = M \times (1 + W \times P)" />
+                    <BlockMath math="\boxed{M_1 = M + B = M \times (1 + W \times P)}" />
                   </div>
-                  <p className="font-body text-xs text-white/60 mt-2"><InlineMath math="M_1" /> = Modal akhir setelah dikenakan bunga</p>
+                  <p className="font-body text-xs text-white/60"><InlineMath math="M_1" /> = Modal akhir setelah dikenakan bunga</p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-purple-300 mb-2">Mencari Modal Awal:</p>
+                    <div className="bg-slate-900/50 rounded p-2">
+                      <BlockMath math="M = \frac{M_1}{1 + W \times P}" />
+                    </div>
+                  </div>
+                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-orange-300 mb-2">Mencari Waktu:</p>
+                    <div className="bg-slate-900/50 rounded p-2">
+                      <BlockMath math="W = \frac{B}{M \times P}" />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -129,12 +146,17 @@ const BungaTunggalPage = () => {
                       <tr className="border border-orange-500/20">
                         <td className="px-3 py-2">Tahun</td>
                         <td className="px-3 py-2">Tahun</td>
-                        <td className="px-3 py-2">Bulan ÷ 12, atau Hari ÷ 365</td>
+                        <td className="px-3 py-2">Bulan ÷ 12 &nbsp;|&nbsp; Hari ÷ 365</td>
                       </tr>
                       <tr className="border border-orange-500/20 bg-slate-800/30">
                         <td className="px-3 py-2">Bulan</td>
                         <td className="px-3 py-2">Bulan</td>
-                        <td className="px-3 py-2">Tahun × 12</td>
+                        <td className="px-3 py-2">Tahun × 12 &nbsp;|&nbsp; Hari ÷ 30</td>
+                      </tr>
+                      <tr className="border border-orange-500/20">
+                        <td className="px-3 py-2">Hari</td>
+                        <td className="px-3 py-2">Hari</td>
+                        <td className="px-3 py-2">Tahun × 365 &nbsp;|&nbsp; Bulan × 30</td>
                       </tr>
                     </tbody>
                   </table>
@@ -144,6 +166,46 @@ const BungaTunggalPage = () => {
                     <strong>Contoh konversi:</strong> Bunga 12% per tahun selama 9 bulan → <InlineMath math="W = \frac{9}{12} = \frac{3}{4}" /> tahun, <InlineMath math="P = 12\% = 0{,}12" />
                   </p>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* KESALAHAN UMUM */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("kesalahan")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400" />
+                <span className="font-body font-semibold text-white">Kesalahan Umum & Tips Penting</span>
+              </div>
+              {expandedSections.includes("kesalahan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("kesalahan") && (
+              <div className="px-5 pb-5 space-y-3">
+                {[
+                  {
+                    salah: "Tidak mengonversi satuan waktu — langsung pakai angka bulan padahal bunga per tahun",
+                    benar: "Selalu samakan satuan waktu W dengan periode bunga P. Jika P per tahun dan W diberikan dalam bulan, konversi W ke tahun (÷12).",
+                  },
+                  {
+                    salah: "Menghitung bunga majemuk (bunga berbunga) saat soal meminta bunga tunggal",
+                    benar: "Bunga tunggal: setiap periode bunga dihitung dari modal AWAL yang tetap, bukan dari total saldo sebelumnya.",
+                  },
+                  {
+                    salah: "Lupa menambahkan bunga ke modal saat mencari modal akhir",
+                    benar: "Modal Akhir = Modal + Bunga. Jangan lupa jumlahkan keduanya di langkah terakhir.",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-red-400 text-xs font-bold shrink-0 mt-0.5">✗ SALAH:</span>
+                      <p className="font-body text-xs text-red-300">{item.salah}</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 text-xs font-bold shrink-0 mt-0.5">✓ BENAR:</span>
+                      <p className="font-body text-xs text-green-300">{item.benar}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -173,7 +235,7 @@ const BungaTunggalPage = () => {
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Diketahui: <InlineMath math="M = 2.000.000" />, <InlineMath math="P = 6\% = 0{,}06" />, <InlineMath math="W = 2 \text{ tahun}" /></p>
+                      <p className="text-xs text-white/60">✦ Diketahui: <InlineMath math="M = 2.000.000" />, <InlineMath math="P = 6\% = 0{,}06" />, <InlineMath math="W = 2 \text{ tahun}" /></p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="B = M \times W \times P = 2.000.000 \times 2 \times 0{,}06 = \text{Rp}240.000" />
                         <BlockMath math="M_1 = M + B = 2.000.000 + 240.000 = \text{Rp}2.240.000" />
@@ -196,7 +258,7 @@ const BungaTunggalPage = () => {
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Bunga per tahun → <InlineMath math="W = \frac{8}{12} = \frac{2}{3}" /> tahun</p>
+                      <p className="text-xs text-white/60">✦ Bunga per tahun → konversi waktu: <InlineMath math="W = \frac{8}{12} = \frac{2}{3}" /> tahun</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="B = 5.000.000 \times \frac{2}{3} \times 0{,}18 = 5.000.000 \times 0{,}12 = \text{Rp}600.000" />
                         <BlockMath math="M_1 = 5.000.000 + 600.000 = \text{Rp}5.600.000" />
@@ -219,11 +281,11 @@ const BungaTunggalPage = () => {
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p>Diketahui: <InlineMath math="M_1 = 3.600.000" />, <InlineMath math="P = 8\% = 0{,}08" />, <InlineMath math="W = 2{,}5" /> tahun</p>
-                      <p>Gunakan rumus <InlineMath math="M_1 = M \times (1 + W \times P)" /> dan balikkan:</p>
+                      <p className="text-xs text-white/60">✦ Diketahui: <InlineMath math="M_1 = 3.600.000" />, <InlineMath math="P = 8\% = 0{,}08" />, <InlineMath math="W = 2{,}5" /> tahun. Cari M.</p>
                       <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="M_1 = M \times (1 + W \times P)" />
                         <BlockMath math="3.600.000 = M \times (1 + 2{,}5 \times 0{,}08)" />
-                        <BlockMath math="3.600.000 = M \times (1 + 0{,}2) = M \times 1{,}2" />
+                        <BlockMath math="3.600.000 = M \times 1{,}2" />
                         <BlockMath math="M = \frac{3.600.000}{1{,}2} = \text{Rp}3.000.000" />
                       </div>
                       <p className="text-primary font-semibold">Modal awal yang ditabung = <strong>Rp3.000.000</strong></p>
@@ -231,6 +293,40 @@ const BungaTunggalPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* RANGKUMAN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("rangkuman")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <Star className="w-5 h-5 text-yellow-400" />
+                <span className="font-body font-semibold text-white">Rangkuman Materi Bunga Tunggal</span>
+              </div>
+              {expandedSections.includes("rangkuman") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("rangkuman") && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4 space-y-3">
+                  {[
+                    { no: "1", poin: "Bunga tunggal dihitung dari modal awal yang tetap setiap periodenya." },
+                    { no: "2", poin: "Rumus: B = M × W × P. Modal akhir: M₁ = M + B = M(1 + W × P)." },
+                    { no: "3", poin: "Satuan waktu W harus selalu disesuaikan dengan periode bunga P." },
+                    { no: "4", poin: "Untuk mencari modal awal: M = M₁ ÷ (1 + W × P)." },
+                    { no: "5", poin: "Bunga tunggal berbeda dengan bunga majemuk — tidak ada 'bunga dari bunga'." },
+                  ].map((item) => (
+                    <div key={item.no} className="flex items-start gap-3">
+                      <span className="bg-primary/20 text-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5">{item.no}</span>
+                      <p className="font-body text-sm text-white/80">{item.poin}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="font-body text-xs text-green-200 leading-relaxed">
+                    <strong>Koneksi ke Kehidupan Nyata:</strong> Bunga tunggal dipakai pada tabungan jangka pendek, koperasi simpan pinjam, dan pinjaman informal. Kreditur (pemberi pinjaman) dan debitur (peminjam) sama-sama perlu memahami cara kerja bunga ini.
+                  </p>
+                </div>
               </div>
             )}
           </div>

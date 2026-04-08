@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Briefcase } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Briefcase, AlertCircle, Star } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 const PPhPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "cara", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "cara", "kesalahan", "contoh", "rangkuman"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -47,16 +47,35 @@ const PPhPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Berbeda dengan PPN yang dikenakan saat kamu <em>membeli</em> sesuatu, <strong className="text-primary">Pajak Penghasilan (PPh)</strong> dikenakan atas uang yang kamu <em>dapatkan</em> — baik dari gaji, usaha, atau penghasilan lainnya. Ini adalah kontribusi wajib setiap warga negara yang penghasilannya melampaui batas tertentu.
                 </p>
-                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-                  <div className="flex items-start gap-3">
-                    <Briefcase className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-body text-sm font-semibold text-blue-300 mb-2">Konsep Kunci: PTKP (Penghasilan Tidak Kena Pajak)</p>
-                      <p className="font-body text-sm text-white/70">
-                        Pemerintah menetapkan batas penghasilan yang <strong className="text-blue-200">tidak dikenakan pajak sama sekali</strong>. Penghasilan di bawah PTKP? Bebas pajak! Penghasilan di atas PTKP? Hanya selisihnya yang dikenai pajak.
-                      </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <Briefcase className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-body text-sm font-semibold text-blue-300 mb-1">Apa itu PTKP?</p>
+                        <p className="font-body text-xs text-white/60 leading-relaxed">
+                          <strong className="text-blue-200">Penghasilan Tidak Kena Pajak</strong> — batas penghasilan yang sama sekali tidak dikenai pajak. Di bawah PTKP? Bebas pajak!
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <Briefcase className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-body text-sm font-semibold text-green-300 mb-1">Apa itu PKP?</p>
+                        <p className="font-body text-xs text-white/60 leading-relaxed">
+                          <strong className="text-green-200">Penghasilan Kena Pajak</strong> = Penghasilan Bruto − PTKP. Inilah dasar perhitungan besar PPh yang harus dibayar.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-white/70 mb-2">🔑 Kunci Utama PPh:</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    PPh dihitung dari <strong className="text-yellow-300">PKP (setelah dikurangi PTKP)</strong>, bukan dari penghasilan bruto keseluruhan. Ini membuat PPh yang dibayar lebih kecil dari yang dibayangkan kebanyakan orang.
+                  </p>
                 </div>
               </div>
             )}
@@ -77,27 +96,28 @@ const PPhPage = () => {
                   <div>
                     <p className="font-body text-sm font-semibold text-green-300 mb-2">Langkah 1 — Hitung Penghasilan Kena Pajak (PKP):</p>
                     <div className="bg-slate-900/50 rounded p-3">
-                      <BlockMath math="PKP = \text{Penghasilan Bruto} - PTKP" />
+                      <BlockMath math="\boxed{PKP = \text{Penghasilan Bruto} - PTKP}" />
                     </div>
-                    <p className="font-body text-xs text-white/60 mt-1">Jika PKP ≤ 0, maka tidak ada pajak yang dibayar.</p>
+                    <p className="font-body text-xs text-white/60 mt-1">Jika PKP ≤ 0, maka tidak ada pajak yang dibayar (penghasilan di bawah PTKP).</p>
                   </div>
                   <div>
                     <p className="font-body text-sm font-semibold text-green-300 mb-2">Langkah 2 — Hitung Besar PPh:</p>
                     <div className="bg-slate-900/50 rounded p-3">
-                      <BlockMath math="\text{Besar PPh} = \%\text{PPh} \times PKP" />
+                      <BlockMath math="\boxed{\text{Besar PPh} = \%\text{PPh} \times PKP}" />
                     </div>
                   </div>
                   <div>
-                    <p className="font-body text-sm font-semibold text-green-300 mb-2">Langkah 3 — Hitung Penghasilan Bersih (Netto):</p>
+                    <p className="font-body text-sm font-semibold text-green-300 mb-2">Langkah 3 — Hitung Penghasilan Bersih (Gaji Bersih/Netto):</p>
                     <div className="bg-slate-900/50 rounded p-3">
-                      <BlockMath math="\text{Penghasilan Bersih} = \text{Penghasilan Bruto} - \text{Besar PPh}" />
+                      <BlockMath math="\boxed{\text{Penghasilan Bersih} = \text{Penghasilan Bruto} - \text{Besar PPh}}" />
                     </div>
                   </div>
                 </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Ingat:</strong> PPh dihitung dari <strong>PKP</strong> (setelah dikurangi PTKP), bukan dari penghasilan bruto secara keseluruhan. Ini yang bikin tagihannya lebih kecil dari yang dibayangkan.
-                  </p>
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-blue-300 mb-2">Cara Lengkap dalam Satu Persamaan:</p>
+                  <div className="bg-slate-900/50 rounded p-3">
+                    <BlockMath math="\text{Gaji Bersih} = \text{Bruto} - \%PPh \times (\text{Bruto} - PTKP)" />
+                  </div>
                 </div>
               </div>
             )}
@@ -144,9 +164,54 @@ const PPhPage = () => {
                         <td className="px-3 py-2">Tidak</td>
                         <td className="px-3 py-2">Ya — ada batas bebas pajak</td>
                       </tr>
+                      <tr className="border border-purple-500/20">
+                        <td className="px-3 py-2 font-semibold text-white/80">Kapan terjadi</td>
+                        <td className="px-3 py-2">Saat transaksi jual-beli</td>
+                        <td className="px-3 py-2">Setiap periode gajian/penghasilan</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* KESALAHAN UMUM */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("kesalahan")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400" />
+                <span className="font-body font-semibold text-white">Kesalahan Umum & Tips Penting</span>
+              </div>
+              {expandedSections.includes("kesalahan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("kesalahan") && (
+              <div className="px-5 pb-5 space-y-3">
+                {[
+                  {
+                    salah: "Menghitung PPh dari penghasilan bruto, bukan dari PKP",
+                    benar: "PPh = %PPh × PKP. PKP = Penghasilan Bruto − PTKP. Kurangi PTKP dulu sebelum menghitung pajak.",
+                  },
+                  {
+                    salah: "Menganggap penghasilan di bawah PTKP tetap kena pajak (walaupun kecil)",
+                    benar: "Jika PKP ≤ 0 (penghasilan bruto ≤ PTKP), maka PPh = 0. Tidak ada pajak yang perlu dibayar sama sekali.",
+                  },
+                  {
+                    salah: "Mengurangi PTKP dari gaji bersih, bukan dari gaji bruto",
+                    benar: "PKP = Gaji Bruto − PTKP. Gaji Bersih = Gaji Bruto − PPh. Urutan ini tidak boleh tertukar.",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-red-400 text-xs font-bold shrink-0 mt-0.5">✗ SALAH:</span>
+                      <p className="font-body text-xs text-red-300">{item.salah}</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 text-xs font-bold shrink-0 mt-0.5">✓ BENAR:</span>
+                      <p className="font-body text-xs text-green-300">{item.benar}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -176,6 +241,7 @@ const PPhPage = () => {
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p className="text-xs text-white/60">✦ Diketahui: Bruto = Rp5.000.000, PTKP = Rp3.000.000, tarif PPh = 5%</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
                         <BlockMath math="PKP = 5.000.000 - 3.000.000 = \text{Rp}2.000.000" />
                         <BlockMath math="\text{Besar PPh} = 5\% \times 2.000.000 = \text{Rp}100.000" />
@@ -199,6 +265,7 @@ const PPhPage = () => {
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p className="text-xs text-white/60">✦ Hitung PKP terlebih dahulu</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="PKP = 2.200.000 - 2.500.000 = -300.000" />
                       </div>
@@ -224,7 +291,7 @@ const PPhPage = () => {
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p>Misalkan penghasilan bruto = <InlineMath math="B" /></p>
+                      <p className="text-xs text-white/60">✦ Misalkan penghasilan bruto = <InlineMath math="B" /></p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
                         <BlockMath math="PKP = B - 2.500.000" />
                         <BlockMath math="\text{PPh} = 5\% \times (B - 2.500.000)" />
@@ -239,6 +306,40 @@ const PPhPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* RANGKUMAN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("rangkuman")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <Star className="w-5 h-5 text-yellow-400" />
+                <span className="font-body font-semibold text-white">Rangkuman Materi PPh</span>
+              </div>
+              {expandedSections.includes("rangkuman") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("rangkuman") && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4 space-y-3">
+                  {[
+                    { no: "1", poin: "PPh dikenakan atas penghasilan (gaji/usaha), bukan atas pembelian seperti PPN." },
+                    { no: "2", poin: "PKP = Penghasilan Bruto − PTKP. Jika PKP ≤ 0, tidak ada pajak yang dibayar." },
+                    { no: "3", poin: "PPh = %PPh × PKP. Gaji Bersih = Gaji Bruto − PPh." },
+                    { no: "4", poin: "PTKP melindungi penghasilan rendah dari pajak — semakin tinggi PTKP, semakin sedikit yang wajib bayar pajak." },
+                    { no: "5", poin: "Untuk mencari gaji bruto dari gaji bersih: bentuk persamaan aljabar dan selesaikan." },
+                  ].map((item) => (
+                    <div key={item.no} className="flex items-start gap-3">
+                      <span className="bg-primary/20 text-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5">{item.no}</span>
+                      <p className="font-body text-sm text-white/80">{item.poin}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                  <p className="font-body text-xs text-blue-200 leading-relaxed">
+                    <strong>Koneksi ke Kehidupan Nyata:</strong> Ketika orang tua atau saudara menerima slip gaji, ada baris "Potongan PPh" yang tertera. Itulah pajak yang langsung dipotong oleh perusahaan sebelum gaji diterima karyawan — disebut sistem <em>withholding tax</em>.
+                  </p>
+                </div>
               </div>
             )}
           </div>

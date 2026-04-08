@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Package } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Package, AlertCircle, Star } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 const BrutoNettoTaraPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "persen", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "persen", "kesalahan", "contoh", "rangkuman"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -53,22 +53,31 @@ const BrutoNettoTaraPage = () => {
                       <Package className="w-4 h-4 text-orange-400" />
                       <p className="font-body text-sm font-bold text-orange-300">BRUTO</p>
                     </div>
-                    <p className="font-body text-xs text-white/60">Berat kotor = isi + kemasan. Ini yang ditimbang saat pertama kali ditimbang.</p>
+                    <p className="font-body text-xs text-white/60 leading-relaxed">Berat <strong>kotor</strong> = isi + kemasan. Ini yang pertama kali ditimbang sebelum kemasan dilepas.</p>
                   </div>
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <Package className="w-4 h-4 text-green-400" />
                       <p className="font-body text-sm font-bold text-green-300">NETTO</p>
                     </div>
-                    <p className="font-body text-xs text-white/60">Berat bersih = isi saja. Inilah yang benar-benar kamu beli/konsumsi.</p>
+                    <p className="font-body text-xs text-white/60 leading-relaxed">Berat <strong>bersih</strong> = isi saja. Inilah yang benar-benar kamu beli dan konsumsi.</p>
                   </div>
                   <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <Package className="w-4 h-4 text-blue-400" />
                       <p className="font-body text-sm font-bold text-blue-300">TARA</p>
                     </div>
-                    <p className="font-body text-xs text-white/60">Berat kemasan = kardus, botol, karung, dll. yang membungkus isi.</p>
+                    <p className="font-body text-xs text-white/60 leading-relaxed">Berat <strong>kemasan</strong> = kardus, botol, karung, plastik yang membungkus isi.</p>
                   </div>
+                </div>
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-white/70 mb-2">🎯 Analogi Mudah:</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Bayangkan sekarung beras 40 kg. Berat karungnya 2 kg. Maka:
+                    <br /><strong className="text-orange-300">Bruto</strong> = 40 kg (karung + beras),&nbsp;
+                    <strong className="text-blue-300">Tara</strong> = 2 kg (karung saja),&nbsp;
+                    <strong className="text-green-300">Netto</strong> = 38 kg (beras saja).
+                  </p>
                 </div>
               </div>
             )}
@@ -88,27 +97,34 @@ const BrutoNettoTaraPage = () => {
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-purple-300 mb-3">Hubungan Dasar (Rumus Utama):</p>
                   <div className="bg-slate-900/50 rounded p-3 text-center">
-                    <BlockMath math="\text{Bruto} = \text{Netto} + \text{Tara}" />
+                    <BlockMath math="\boxed{\text{Bruto} = \text{Netto} + \text{Tara}}" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
                     <p className="font-body text-xs font-semibold text-green-300 mb-2">Mencari Netto:</p>
                     <div className="bg-slate-900/50 rounded p-2">
-                      <BlockMath math="\text{Netto} = \text{Bruto} - \text{Tara}" />
+                      <BlockMath math="\boxed{\text{Netto} = \text{Bruto} - \text{Tara}}" />
                     </div>
                   </div>
                   <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
                     <p className="font-body text-xs font-semibold text-blue-300 mb-2">Mencari Tara:</p>
                     <div className="bg-slate-900/50 rounded p-2">
-                      <BlockMath math="\text{Tara} = \text{Bruto} - \text{Netto}" />
+                      <BlockMath math="\boxed{\text{Tara} = \text{Bruto} - \text{Netto}}" />
                     </div>
                   </div>
-                </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Analogi Mudah:</strong> Bruto = sekarung beras (40 kg). Tara = karungnya (2 kg). Netto = berasnya saja (38 kg). Selalu berlaku: <strong>Bruto = Netto + Tara</strong>.
-                  </p>
+                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-orange-300 mb-2">Mencari Bruto:</p>
+                    <div className="bg-slate-900/50 rounded p-2">
+                      <BlockMath math="\boxed{\text{Bruto} = \text{Netto} + \text{Tara}}" />
+                    </div>
+                  </div>
+                  <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-cyan-300 mb-2">% Tara dari Bruto:</p>
+                    <div className="bg-slate-900/50 rounded p-2">
+                      <BlockMath math="\boxed{\%\text{Tara} = \frac{\text{Tara}}{\text{Bruto}} \times 100\%}" />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -134,14 +150,61 @@ const BrutoNettoTaraPage = () => {
                     <div className="bg-slate-900/50 rounded p-2">
                       <BlockMath math="\text{Tara} = \%\text{Tara} \times \text{Bruto}" />
                     </div>
+                    <p className="font-body text-xs text-white/50 mt-2 leading-relaxed">Gunakan rumus ini ketika tara dinyatakan dalam % dan kamu perlu tahu nilai beratnya.</p>
                   </div>
                   <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-cyan-300 mb-2">% Tara dari nilai Tara & Bruto:</p>
                     <div className="bg-slate-900/50 rounded p-2">
                       <BlockMath math="\%\text{Tara} = \frac{\text{Tara}}{\text{Bruto}} \times 100\%" />
                     </div>
+                    <p className="font-body text-xs text-white/50 mt-2 leading-relaxed">Gunakan rumus ini ketika berat Tara dan Bruto diketahui, dan kamu perlu mencari persennya.</p>
                   </div>
                 </div>
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200">
+                    <strong>Contoh:</strong> Tara 5% dari Bruto 60 kg → Tara = 5% × 60 = 3 kg → Netto = 60 − 3 = <strong>57 kg</strong>.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* KESALAHAN UMUM */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("kesalahan")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400" />
+                <span className="font-body font-semibold text-white">Kesalahan Umum & Tips Penting</span>
+              </div>
+              {expandedSections.includes("kesalahan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("kesalahan") && (
+              <div className="px-5 pb-5 space-y-3">
+                {[
+                  {
+                    salah: "Menghitung % Tara dari Netto, bukan dari Bruto",
+                    benar: "% Tara selalu dihitung dari BRUTO. Rumus: %Tara = (Tara ÷ Bruto) × 100%",
+                  },
+                  {
+                    salah: "Menjumlahkan Bruto beberapa karung tanpa memisahkan tara masing-masing",
+                    benar: "Hitung tara dan netto per satuan (per karung/peti) dulu, baru dikalikan jumlahnya.",
+                  },
+                  {
+                    salah: "Bingung membedakan Bruto, Netto, dan Tara",
+                    benar: "Ingat: Bruto = paling berat (semua), Netto = isi saja (yang dibeli), Tara = kemasan saja (yang dibuang).",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-red-400 text-xs font-bold shrink-0 mt-0.5">✗ SALAH:</span>
+                      <p className="font-body text-xs text-red-300">{item.salah}</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 text-xs font-bold shrink-0 mt-0.5">✓ BENAR:</span>
+                      <p className="font-body text-xs text-green-300">{item.benar}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -171,6 +234,7 @@ const BrutoNettoTaraPage = () => {
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p className="text-xs text-white/60">✦ Diketahui: Bruto = 750 g, Tara = 150 g</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="\text{Netto} = \text{Bruto} - \text{Tara} = 750 - 150 = 600 \text{ gram}" />
                       </div>
@@ -192,6 +256,7 @@ const BrutoNettoTaraPage = () => {
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p className="text-xs text-white/60">✦ % Tara dihitung dari Bruto</p>
                       <p><strong>Langkah 1:</strong> Hitung nilai Tara:</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="\text{Tara} = 8\% \times 25 = \frac{8}{100} \times 25 = 2 \text{ kg}" />
@@ -218,7 +283,7 @@ const BrutoNettoTaraPage = () => {
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Tara per karung:</p>
+                      <p><strong>Langkah 1:</strong> Tara dan Netto per karung:</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="\text{Tara} = 4\% \times 20 = 0{,}8 \text{ kg/karung}" />
                         <BlockMath math="\text{Netto/karung} = 20 - 0{,}8 = 19{,}2 \text{ kg}" />
@@ -238,6 +303,40 @@ const BrutoNettoTaraPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* RANGKUMAN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button onClick={() => toggleSection("rangkuman")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+              <div className="flex items-center gap-3">
+                <Star className="w-5 h-5 text-yellow-400" />
+                <span className="font-body font-semibold text-white">Rangkuman Materi Bruto, Netto, Tara</span>
+              </div>
+              {expandedSections.includes("rangkuman") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("rangkuman") && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="bg-slate-800/60 border border-border rounded-lg p-4 space-y-3">
+                  {[
+                    { no: "1", poin: "Bruto = berat kotor (isi + kemasan). Netto = berat bersih (isi saja). Tara = berat kemasan." },
+                    { no: "2", poin: "Rumus utama: Bruto = Netto + Tara. Dua lainnya diturunkan dari sini." },
+                    { no: "3", poin: "% Tara dihitung terhadap Bruto: %Tara = (Tara ÷ Bruto) × 100%." },
+                    { no: "4", poin: "Dalam soal jual beli, harga biasanya per kg Netto — jadi hitung Netto dulu sebelum mengitung untung/rugi." },
+                    { no: "5", poin: "Untuk banyak kemasan: hitung Netto per kemasan dulu, baru kalikan jumlahnya." },
+                  ].map((item) => (
+                    <div key={item.no} className="flex items-start gap-3">
+                      <span className="bg-primary/20 text-primary text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5">{item.no}</span>
+                      <p className="font-body text-sm text-white/80">{item.poin}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
+                  <p className="font-body text-xs text-orange-200 leading-relaxed">
+                    <strong>Koneksi ke Kehidupan Nyata:</strong> Label "Berat Bersih" pada produk makanan adalah Netto. Ketika kamu membeli buah di pasar, penjual biasanya menimbang semuanya (Bruto) lalu mengurangi berat wadahnya (Tara) untuk mendapat harga yang adil.
+                  </p>
+                </div>
               </div>
             )}
           </div>
