@@ -495,6 +495,19 @@ const BrutoNettoTaraPage = () => {
                 ketiganya membentuk sistem penimbangan yang adil dalam dunia perdagangan.
               </p>
 
+              <figure className="rounded-xl overflow-hidden border border-border">
+                <img
+                  src="/image_bruto_netto_tara.png"
+                  alt="Ilustrasi Bruto, Netto, dan Tara pada kemasan snack Chitato"
+                  className="w-full object-contain bg-white"
+                />
+                <figcaption className="bg-slate-900/70 px-4 py-2 text-center">
+                  <span className="font-body text-xs text-white/40">
+                    Ilustrasi: Bruto (kemasan + isi), Netto (isi), dan Tara (kemasan) pada produk nyata
+                  </span>
+                </figcaption>
+              </figure>
+
               {/* Label Produk Simulasi */}
               <div className="bg-slate-900/80 border border-white/10 rounded-2xl p-5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-orange-500/5 rounded-full -translate-y-4 translate-x-4" />
