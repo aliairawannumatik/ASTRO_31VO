@@ -49,7 +49,12 @@ const JualBeliUntungRugiPage = () => {
                   Bayangkan kamu membeli sepasang sepatu seharga Rp150.000, lalu menjualnya ke temanmu Rp180.000. Apakah kamu untung atau rugi? Dari warung kelontong, toko online, hingga perusahaan besar — semua transaksi jual beli selalu berpusat pada dua angka kunci:
                 </p>
 
-                <img src={jualBeliImg} alt="Ilustrasi Jual Beli" className="w-full rounded-xl object-cover" />
+                <figure>
+                  <img src={jualBeliImg} alt="Ilustrasi Jual Beli" className="w-full rounded-xl object-cover" />
+                  <figcaption className="font-body text-xs text-white/50 text-center mt-2">
+                    <a href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">https://www.bing.com/images/create</a>
+                  </figcaption>
+                </figure>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
