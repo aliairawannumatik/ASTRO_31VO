@@ -547,6 +547,23 @@ const DiskonPage = () => {
                 Itulah <strong className="text-primary">diskon</strong> — potongan harga yang diberikan penjual,
                 dinyatakan dalam <strong className="text-cyan-300">bentuk persen dari harga asli</strong>.
               </p>
+              <figure className="rounded-xl overflow-hidden border border-border">
+                <img
+                  src="/image_diskon.png"
+                  alt="Papan diskon 20% di toko pakaian"
+                  className="w-full object-cover max-h-64"
+                />
+                <figcaption className="bg-slate-900/70 px-4 py-2 text-center">
+                  <a
+                    href="https://tirto.id/jenis-jenis-diskon-dan-cara-menghitungnya-dari-harga-jual-f9Ld"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-xs text-white/40 hover:text-primary transition-colors"
+                  >
+                    Sumber: tirto.id — Jenis-Jenis Diskon dan Cara Menghitungnya dari Harga Jual
+                  </a>
+                </figcaption>
+              </figure>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   { icon: <ShoppingBag className="w-5 h-5 text-cyan-400" />, judul: "Harga Awal", desc: "Harga sebelum ada potongan (biasanya dicoret)", warna: "cyan" },
