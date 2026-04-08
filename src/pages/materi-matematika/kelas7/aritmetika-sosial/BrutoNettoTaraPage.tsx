@@ -497,9 +497,9 @@ const BrutoNettoTaraPage = () => {
 
               <figure className="rounded-xl overflow-hidden border border-border">
                 <img
-                  src="/image_bruto_netto_tara.png"
+                  src="/image_bruto_netto_tara_transparent.png"
                   alt="Ilustrasi Bruto, Netto, dan Tara pada kemasan snack Chitato"
-                  className="w-full object-contain bg-white max-h-56"
+                  className="w-full object-contain max-h-56"
                 />
                 <figcaption className="bg-slate-900/70 px-4 py-2 text-center">
                   <span className="font-body text-xs text-white/40">
