@@ -1,5 +1,6 @@
 import { useState } from "react";
 import jualBeliImg from "@assets/image_1775640587265.png";
+import berasImg from "@assets/image_1775640978525.png";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -355,6 +356,7 @@ const JualBeliUntungRugiPage = () => {
                       Seorang pedagang membeli 1 karung beras seharga <strong>Rp180.000</strong> lalu menjualnya seharga <strong>Rp225.000</strong>. Hitunglah besar untung dan persentase keuntungannya!
                     </p>
                   </div>
+                  <img src={berasImg} alt="Pedagang beras di pasar" className="w-full rounded-xl object-cover" />
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
