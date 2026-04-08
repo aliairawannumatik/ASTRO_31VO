@@ -356,7 +356,12 @@ const JualBeliUntungRugiPage = () => {
                       Seorang pedagang membeli 1 karung beras seharga <strong>Rp180.000</strong> lalu menjualnya seharga <strong>Rp225.000</strong>. Hitunglah besar untung dan persentase keuntungannya!
                     </p>
                   </div>
-                  <img src={berasImg} alt="Pedagang beras di pasar" className="w-full rounded-xl object-cover" />
+                  <figure>
+                    <img src={berasImg} alt="Pedagang beras di pasar" className="w-full rounded-xl object-cover" />
+                    <figcaption className="font-body text-xs text-white/50 text-center mt-2">
+                      <a href="https://infoburuh.com/wp-content/uploads/2022/12/Harga_Beras_Indonesia_Disebut_Bank_Dunia_Paling_Mahal_di_Asia_Tenggara.jpg" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">https://infoburuh.com/wp-content/uploads/2022/12/Harga_Beras_Indonesia_Disebut_Bank_Dunia_Paling_Mahal_di_Asia_Tenggara.jpg</a>
+                    </figcaption>
+                  </figure>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
