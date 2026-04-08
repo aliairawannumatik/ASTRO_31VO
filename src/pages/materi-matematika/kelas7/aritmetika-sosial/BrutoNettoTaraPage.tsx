@@ -508,32 +508,6 @@ const BrutoNettoTaraPage = () => {
                 </figcaption>
               </figure>
 
-              {/* Label Produk Simulasi */}
-              <div className="bg-slate-900/80 border border-white/10 rounded-2xl p-5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-orange-500/5 rounded-full -translate-y-4 translate-x-4" />
-                <p className="font-body text-xs text-white/40 mb-3 uppercase tracking-widest">Simulasi Label Kemasan Produk</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-20 bg-gradient-to-b from-orange-500/30 to-orange-600/10 border border-orange-500/30 rounded-xl flex items-center justify-center shrink-0">
-                    <Package className="w-8 h-8 text-orange-400" />
-                  </div>
-                  <div className="space-y-2 flex-1">
-                    <p className="font-display text-sm font-bold text-white">Produk Makanan XYZ</p>
-                    <div className="grid grid-cols-1 gap-1.5">
-                      {[
-                        { label: "Berat Bersih (Netto)", nilai: "500 g", warna: "green" },
-                        { label: "Berat Kemasan (Tara)", nilai: "50 g", warna: "blue" },
-                        { label: "Berat Kotor (Bruto)", nilai: "550 g", warna: "orange" },
-                      ].map((r) => (
-                        <div key={r.label} className={`flex justify-between items-center bg-${r.warna}-500/10 border border-${r.warna}-500/20 rounded-lg px-3 py-1.5`}>
-                          <span className={`font-body text-xs text-${r.warna}-400`}>{r.label}</span>
-                          <span className={`font-body text-sm font-bold text-${r.warna}-300`}>{r.nilai}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   { icon: <Package className="w-5 h-5 text-orange-400" />, judul: "BRUTO", sub: "Berat Kotor", desc: "Berat TOTAL: isi + kemasan. Yang pertama ditimbang sebelum kemasan dilepas.", warna: "orange" },
