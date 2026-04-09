@@ -65,6 +65,17 @@ const BungaTunggalPage = () => {
                     Setiap periode, bunga dihitung dari <strong className="text-yellow-300">modal awal yang sama</strong>. Tidak ada "bunga berbunga" — itulah yang membedakannya dari bunga majemuk yang lebih kompleks.
                   </p>
                 </div>
+                <div className="rounded-xl overflow-hidden border border-border/60">
+                  <img
+                    src="/image_bunga_tunggal_menabung.png"
+                    alt="Anak-anak menabung di bank"
+                    className="w-full object-cover max-h-72"
+                  />
+                  <p className="font-body text-[11px] text-white/40 text-center py-2 px-3 bg-slate-900/60">
+                    Menabung di bank sejak dini adalah kebiasaan positif yang menghasilkan bunga sebagai imbalan.
+                    <span className="ml-1 opacity-60">(Sumber: kompasiana.com)</span>
+                  </p>
+                </div>
               </div>
             )}
           </div>
