@@ -148,6 +148,17 @@ const BungaTunggalPage = () => {
             </button>
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
+                <div className="rounded-xl overflow-hidden border border-border/60">
+                  <img
+                    src="/image_bunga_tunggal_menabung.png"
+                    alt="Anak-anak menabung di bank"
+                    className="w-full object-cover max-h-64"
+                  />
+                  <p className="font-body text-[11px] text-white/40 text-center py-2 px-3 bg-slate-900/60">
+                    Menabung sejak dini menghasilkan bunga sebagai imbalan dari bank.
+                  </p>
+                </div>
+
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu menaruh uang di celengan babi — uang itu tidak bertambah. Tapi ketika kamu
                   <strong className="text-yellow-300"> menabung di bank</strong>, bank memberikan "hadiah" bernama <strong className="text-primary">bunga</strong>.
@@ -200,16 +211,6 @@ const BungaTunggalPage = () => {
                   </div>
                 </div>
 
-                <div className="rounded-xl overflow-hidden border border-border/60">
-                  <img
-                    src="/image_bunga_tunggal_menabung.png"
-                    alt="Anak-anak menabung di bank"
-                    className="w-full object-cover max-h-64"
-                  />
-                  <p className="font-body text-[11px] text-white/40 text-center py-2 px-3 bg-slate-900/60">
-                    Menabung sejak dini menghasilkan bunga sebagai imbalan dari bank.
-                  </p>
-                </div>
               </div>
             )}
           </div>
