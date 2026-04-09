@@ -60,21 +60,21 @@ const KalkulatorBNT = () => {
   const persenTara = b > 0 ? (t / b) * 100 : 0;
 
   const modes = [
-    { id: "netto", label: "Cari Netto", icon: "🟢" },
-    { id: "tara", label: "Cari Tara", icon: "🔵" },
-    { id: "bruto", label: "Cari Bruto", icon: "🟠" },
-    { id: "persen", label: "Cari % Tara", icon: "%" },
+    { id: "netto", label: "Cari Netto", icon: "🟢", activeClass: "bg-gradient-to-r from-green-600 to-emerald-500 border-green-400 text-white shadow-lg shadow-green-500/30", inactiveClass: "bg-slate-800/80 border-slate-600 text-white/60 hover:border-green-400/50 hover:text-green-300" },
+    { id: "tara",  label: "Cari Tara",  icon: "🔵", activeClass: "bg-gradient-to-r from-blue-600 to-cyan-500 border-blue-400 text-white shadow-lg shadow-blue-500/30",  inactiveClass: "bg-slate-800/80 border-slate-600 text-white/60 hover:border-blue-400/50 hover:text-blue-300" },
+    { id: "bruto", label: "Cari Bruto", icon: "🟠", activeClass: "bg-gradient-to-r from-orange-500 to-amber-400 border-orange-300 text-white shadow-lg shadow-orange-500/30", inactiveClass: "bg-slate-800/80 border-slate-600 text-white/60 hover:border-orange-400/50 hover:text-orange-300" },
+    { id: "persen",label: "% Tara",    icon: "✦",  activeClass: "bg-gradient-to-r from-purple-600 to-violet-500 border-purple-400 text-white shadow-lg shadow-purple-500/30", inactiveClass: "bg-slate-800/80 border-slate-600 text-white/60 hover:border-purple-400/50 hover:text-purple-300" },
   ] as const;
 
-  const inp = (label: string, val: string, set: (v: string) => void, ph: string) => (
+  const inp = (label: string, val: string, set: (v: string) => void, ph: string, accent: string) => (
     <div>
-      <label className="font-body text-xs text-white/60 mb-1 block">{label}</label>
+      <label className={`font-body text-xs font-semibold mb-1.5 block ${accent}`}>{label}</label>
       <input
         type="number"
         value={val}
         onChange={(e) => set(e.target.value)}
         placeholder={ph}
-        className="w-full bg-slate-900/70 border border-border rounded-lg px-3 py-2 text-sm text-white font-body focus:outline-none focus:border-primary"
+        className="w-full bg-slate-900/80 border border-white/20 rounded-xl px-4 py-3 text-sm text-white font-body focus:outline-none focus:border-white/50 focus:bg-slate-900 transition-all"
       />
     </div>
   );
@@ -84,39 +84,39 @@ const KalkulatorBNT = () => {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {modes.map((m) => (
           <button key={m.id} onClick={() => { playPopSound(); setMode(m.id); }}
-            className={`px-2 py-2 rounded-lg text-xs font-semibold font-body transition-all border ${mode === m.id ? "bg-primary/20 border-primary text-primary" : "bg-slate-800/60 border-border text-white/60 hover:border-primary/50"}`}>
-            {m.icon} {m.label}
+            className={`px-2 py-2.5 rounded-xl text-xs font-bold font-body transition-all border ${mode === m.id ? m.activeClass : m.inactiveClass}`}>
+            <span className="mr-1">{m.icon}</span>{m.label}
           </button>
         ))}
       </div>
 
       {mode === "netto" && (
-        <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-          <p className="font-body text-xs text-white/50">Masukkan Bruto dan Tara untuk mencari Netto (berat bersih isi).</p>
+        <div className="bg-gradient-to-br from-green-950/60 to-emerald-900/40 border border-green-500/40 rounded-2xl p-5 space-y-4">
+          <p className="font-body text-xs text-green-300/70">Masukkan Bruto dan Tara untuk mencari Netto (berat bersih isi).</p>
           <div className="grid grid-cols-2 gap-3">
-            {inp("Bruto (kg/g)", bruto, setBruto, "Contoh: 25")}
-            {inp("Tara (kg/g)", tara, setTara, "Contoh: 2")}
+            {inp("🟠 Bruto (kg/g)", bruto, setBruto, "Contoh: 25", "text-orange-300")}
+            {inp("🔵 Tara (kg/g)", tara, setTara, "Contoh: 2", "text-blue-300")}
           </div>
           {b > 0 && t > 0 && (
-            <div className="space-y-3 pt-1">
+            <div className="space-y-3">
               <DiagramBNT bruto={b} netto={b - t} tara={t} />
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-orange-400 mb-1">Bruto</p>
-                  <p className="font-body text-sm font-bold text-orange-300">{fmt(b)}</p>
+                <div className="bg-gradient-to-b from-orange-500/30 to-orange-600/10 border border-orange-400/50 rounded-xl p-3">
+                  <p className="font-body text-[10px] text-orange-300 mb-1 font-semibold uppercase tracking-wide">Bruto</p>
+                  <p className="font-body text-lg font-bold text-orange-200">{fmt(b)}</p>
                 </div>
-                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-blue-400 mb-1">Tara</p>
-                  <p className="font-body text-sm font-bold text-blue-300">{fmt(t)}</p>
+                <div className="bg-gradient-to-b from-blue-500/30 to-blue-600/10 border border-blue-400/50 rounded-xl p-3">
+                  <p className="font-body text-[10px] text-blue-300 mb-1 font-semibold uppercase tracking-wide">Tara</p>
+                  <p className="font-body text-lg font-bold text-blue-200">{fmt(t)}</p>
                 </div>
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-green-400 mb-1">Netto</p>
-                  <p className="font-body text-sm font-bold text-green-300">{fmt(b - t)}</p>
+                <div className="bg-gradient-to-b from-green-500/40 to-green-600/15 border border-green-400/60 rounded-xl p-3 ring-1 ring-green-400/30">
+                  <p className="font-body text-[10px] text-green-300 mb-1 font-semibold uppercase tracking-wide">✅ Netto</p>
+                  <p className="font-body text-lg font-bold text-green-200">{fmt(b - t)}</p>
                 </div>
               </div>
-              <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-center">
-                <p className="font-body text-sm text-primary font-semibold">
-                  Netto = {fmt(b)} − {fmt(t)} = <strong>{fmt(b - t)}</strong>
+              <div className="bg-green-500/15 border border-green-400/40 rounded-xl p-3 text-center">
+                <p className="font-body text-sm text-green-200 font-semibold">
+                  Netto = {fmt(b)} − {fmt(t)} = <span className="text-green-300 text-base font-bold">{fmt(b - t)}</span>
                 </p>
               </div>
             </div>
@@ -125,41 +125,69 @@ const KalkulatorBNT = () => {
       )}
 
       {mode === "tara" && (
-        <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-          <p className="font-body text-xs text-white/50">Masukkan Bruto dan Netto untuk mencari Tara (berat kemasan).</p>
+        <div className="bg-gradient-to-br from-blue-950/60 to-cyan-900/40 border border-blue-500/40 rounded-2xl p-5 space-y-4">
+          <p className="font-body text-xs text-blue-300/70">Masukkan Bruto dan Netto untuk mencari Tara (berat kemasan).</p>
           <div className="grid grid-cols-2 gap-3">
-            {inp("Bruto (kg/g)", bruto, setBruto, "Contoh: 50")}
-            {inp("Netto (kg/g)", netto, setNetto, "Contoh: 47")}
+            {inp("🟠 Bruto (kg/g)", bruto, setBruto, "Contoh: 50", "text-orange-300")}
+            {inp("🟢 Netto (kg/g)", netto, setNetto, "Contoh: 47", "text-green-300")}
           </div>
           {b > 0 && n > 0 && b > n && (
-            <div className="space-y-3 pt-1">
+            <div className="space-y-3">
               <DiagramBNT bruto={b} netto={n} tara={b - n} />
-              <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-center">
-                <p className="font-body text-sm text-primary font-semibold">
-                  Tara = {fmt(b)} − {fmt(n)} = <strong>{fmt(b - n)}</strong>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="bg-gradient-to-b from-orange-500/30 to-orange-600/10 border border-orange-400/50 rounded-xl p-3">
+                  <p className="font-body text-[10px] text-orange-300 mb-1 font-semibold uppercase tracking-wide">Bruto</p>
+                  <p className="font-body text-lg font-bold text-orange-200">{fmt(b)}</p>
+                </div>
+                <div className="bg-gradient-to-b from-green-500/30 to-green-600/10 border border-green-400/50 rounded-xl p-3">
+                  <p className="font-body text-[10px] text-green-300 mb-1 font-semibold uppercase tracking-wide">Netto</p>
+                  <p className="font-body text-lg font-bold text-green-200">{fmt(n)}</p>
+                </div>
+                <div className="bg-gradient-to-b from-blue-500/40 to-blue-600/15 border border-blue-400/60 rounded-xl p-3 ring-1 ring-blue-400/30">
+                  <p className="font-body text-[10px] text-blue-300 mb-1 font-semibold uppercase tracking-wide">✅ Tara</p>
+                  <p className="font-body text-lg font-bold text-blue-200">{fmt(b - n)}</p>
+                </div>
+              </div>
+              <div className="bg-blue-500/15 border border-blue-400/40 rounded-xl p-3 text-center">
+                <p className="font-body text-sm text-blue-200 font-semibold">
+                  Tara = {fmt(b)} − {fmt(n)} = <span className="text-blue-300 text-base font-bold">{fmt(b - n)}</span>
                 </p>
               </div>
             </div>
           )}
           {b > 0 && n > 0 && b <= n && (
-            <p className="font-body text-xs text-red-400">Netto tidak boleh lebih besar atau sama dengan Bruto.</p>
+            <p className="font-body text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-xl p-3">⚠️ Netto tidak boleh lebih besar atau sama dengan Bruto.</p>
           )}
         </div>
       )}
 
       {mode === "bruto" && (
-        <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-          <p className="font-body text-xs text-white/50">Masukkan Netto dan Tara untuk mencari Bruto (berat kotor total).</p>
+        <div className="bg-gradient-to-br from-orange-950/60 to-amber-900/40 border border-orange-500/40 rounded-2xl p-5 space-y-4">
+          <p className="font-body text-xs text-orange-300/70">Masukkan Netto dan Tara untuk mencari Bruto (berat kotor total).</p>
           <div className="grid grid-cols-2 gap-3">
-            {inp("Netto (kg/g)", netto, setNetto, "Contoh: 38")}
-            {inp("Tara (kg/g)", tara, setTara, "Contoh: 2")}
+            {inp("🟢 Netto (kg/g)", netto, setNetto, "Contoh: 38", "text-green-300")}
+            {inp("🔵 Tara (kg/g)", tara, setTara, "Contoh: 2", "text-blue-300")}
           </div>
           {n > 0 && t > 0 && (
-            <div className="space-y-3 pt-1">
+            <div className="space-y-3">
               <DiagramBNT bruto={n + t} netto={n} tara={t} />
-              <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-center">
-                <p className="font-body text-sm text-primary font-semibold">
-                  Bruto = {fmt(n)} + {fmt(t)} = <strong>{fmt(n + t)}</strong>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="bg-gradient-to-b from-green-500/30 to-green-600/10 border border-green-400/50 rounded-xl p-3">
+                  <p className="font-body text-[10px] text-green-300 mb-1 font-semibold uppercase tracking-wide">Netto</p>
+                  <p className="font-body text-lg font-bold text-green-200">{fmt(n)}</p>
+                </div>
+                <div className="bg-gradient-to-b from-blue-500/30 to-blue-600/10 border border-blue-400/50 rounded-xl p-3">
+                  <p className="font-body text-[10px] text-blue-300 mb-1 font-semibold uppercase tracking-wide">Tara</p>
+                  <p className="font-body text-lg font-bold text-blue-200">{fmt(t)}</p>
+                </div>
+                <div className="bg-gradient-to-b from-orange-500/40 to-orange-600/15 border border-orange-400/60 rounded-xl p-3 ring-1 ring-orange-400/30">
+                  <p className="font-body text-[10px] text-orange-300 mb-1 font-semibold uppercase tracking-wide">✅ Bruto</p>
+                  <p className="font-body text-lg font-bold text-orange-200">{fmt(n + t)}</p>
+                </div>
+              </div>
+              <div className="bg-orange-500/15 border border-orange-400/40 rounded-xl p-3 text-center">
+                <p className="font-body text-sm text-orange-200 font-semibold">
+                  Bruto = {fmt(n)} + {fmt(t)} = <span className="text-orange-300 text-base font-bold">{fmt(n + t)}</span>
                 </p>
               </div>
             </div>
@@ -168,39 +196,48 @@ const KalkulatorBNT = () => {
       )}
 
       {mode === "persen" && (
-        <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-          <p className="font-body text-xs text-white/50">
-            Dua opsi: (A) hitung % Tara dari Bruto+Tara yang diketahui, atau (B) cari Netto bila % Tara diketahui.
+        <div className="bg-gradient-to-br from-purple-950/60 to-violet-900/40 border border-purple-500/40 rounded-2xl p-5 space-y-4">
+          <p className="font-body text-xs text-purple-300/70">
+            Dua opsi: (A) hitung % Tara dari Bruto & Tara yang diketahui, atau (B) cari Netto bila % Tara diketahui.
           </p>
           <div className="space-y-4">
-            <div className="border border-cyan-500/30 rounded-xl p-3 space-y-3">
-              <p className="font-body text-xs font-semibold text-cyan-300">A — Cari % Tara (Bruto & Tara diketahui)</p>
+            <div className="bg-cyan-500/10 border border-cyan-400/30 rounded-xl p-4 space-y-3">
+              <p className="font-body text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+                <span className="bg-cyan-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]">A</span>
+                Cari % Tara (Bruto & Tara diketahui)
+              </p>
               <div className="grid grid-cols-2 gap-3">
-                {inp("Bruto (kg/g)", bruto, setBruto, "Contoh: 25")}
-                {inp("Tara (kg/g)", tara, setTara, "Contoh: 2")}
+                {inp("🟠 Bruto (kg/g)", bruto, setBruto, "Contoh: 25", "text-orange-300")}
+                {inp("🔵 Tara (kg/g)", tara, setTara, "Contoh: 2", "text-blue-300")}
               </div>
               {b > 0 && t > 0 && (
-                <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-center">
-                  <p className="font-body text-sm text-primary font-semibold">
-                    %Tara = {fmt(t)} ÷ {fmt(b)} × 100% = <strong>{fmt(persenTara)}%</strong>
-                  </p>
+                <div className="bg-cyan-500/20 border border-cyan-400/50 rounded-xl p-3 text-center">
+                  <p className="font-body text-xs text-cyan-300/70 mb-1">%Tara = {fmt(t)} ÷ {fmt(b)} × 100%</p>
+                  <p className="font-body text-xl font-bold text-cyan-200">{fmt(persenTara)}%</p>
                 </div>
               )}
             </div>
-            <div className="border border-purple-500/30 rounded-xl p-3 space-y-3">
-              <p className="font-body text-xs font-semibold text-purple-300">B — Cari Netto dari % Tara & Bruto</p>
+            <div className="bg-purple-500/10 border border-purple-400/30 rounded-xl p-4 space-y-3">
+              <p className="font-body text-xs font-bold text-purple-300 flex items-center gap-1.5">
+                <span className="bg-purple-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]">B</span>
+                Cari Netto dari % Tara & Bruto
+              </p>
               <div className="grid grid-cols-2 gap-3">
-                {inp("Bruto (kg/g)", bruto, setBruto, "Contoh: 60")}
-                {inp("% Tara (%)", pTara, setPTara, "Contoh: 5")}
+                {inp("🟠 Bruto (kg/g)", bruto, setBruto, "Contoh: 60", "text-orange-300")}
+                {inp("✦ % Tara (%)", pTara, setPTara, "Contoh: 5", "text-purple-300")}
               </div>
               {b > 0 && p > 0 && (
                 <div className="space-y-2">
                   <DiagramBNT bruto={b} netto={nettoFromPersen} tara={taraVal} />
-                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-center space-y-1">
-                    <p className="font-body text-xs text-white/60">Tara = {p}% × {fmt(b)} = {fmt(taraVal)}</p>
-                    <p className="font-body text-sm text-primary font-semibold">
-                      Netto = {fmt(b)} − {fmt(taraVal)} = <strong>{fmt(nettoFromPersen)}</strong>
-                    </p>
+                  <div className="grid grid-cols-2 gap-2 text-center">
+                    <div className="bg-blue-500/20 border border-blue-400/40 rounded-xl p-3">
+                      <p className="font-body text-[10px] text-blue-300 mb-1">Tara</p>
+                      <p className="font-body text-base font-bold text-blue-200">{fmt(taraVal)}</p>
+                    </div>
+                    <div className="bg-green-500/20 border border-green-400/40 rounded-xl p-3 ring-1 ring-green-400/20">
+                      <p className="font-body text-[10px] text-green-300 mb-1">✅ Netto</p>
+                      <p className="font-body text-base font-bold text-green-200">{fmt(nettoFromPersen)}</p>
+                    </div>
                   </div>
                 </div>
               )}
@@ -230,62 +267,60 @@ const SimulasiMultiKemasan = () => {
   const totalNetto = j * nettoPerKemasan;
   const totalHarga = totalNetto * h;
 
+  const fields = [
+    { label: "📦 Jumlah Kemasan", val: jumlah, set: setJumlah, ph: "Contoh: 5", accent: "text-indigo-300" },
+    { label: "🟠 Bruto per Kemasan (kg)", val: brutoPerKemasan, set: setBrutoPerKemasan, ph: "Contoh: 20", accent: "text-orange-300" },
+    { label: "✦ % Tara", val: pTara, set: setPTara, ph: "Contoh: 4", accent: "text-purple-300" },
+    { label: "💰 Harga per kg Netto (Rp)", val: hargaPerKg, set: setHargaPerKg, ph: "Contoh: 80000", accent: "text-yellow-300" },
+  ];
+
   return (
     <div className="space-y-4">
       <p className="font-body text-xs text-white/50">Simulasi pembelian banyak kemasan sekaligus — cukup isi data satu kemasan.</p>
-      <div className="grid grid-cols-2 gap-3">
-        {[
-          { label: "Jumlah Kemasan", val: jumlah, set: setJumlah, ph: "Contoh: 5" },
-          { label: "Bruto per Kemasan (kg)", val: brutoPerKemasan, set: setBrutoPerKemasan, ph: "Contoh: 20" },
-          { label: "% Tara", val: pTara, set: setPTara, ph: "Contoh: 4" },
-          { label: "Harga per kg Netto (Rp)", val: hargaPerKg, set: setHargaPerKg, ph: "Contoh: 80000" },
-        ].map((f, i) => (
-          <div key={i}>
-            <label className="font-body text-xs text-white/60 mb-1 block">{f.label}</label>
-            <input type="number" value={f.val} onChange={(e) => f.set(e.target.value)}
-              placeholder={f.ph}
-              className="w-full bg-slate-900/70 border border-border rounded-lg px-3 py-2 text-sm text-white font-body focus:outline-none focus:border-primary" />
-          </div>
-        ))}
-      </div>
-      {j > 0 && b > 0 && p > 0 && (
-        <div className="space-y-3 pt-1">
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs font-body">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-2 px-3 text-white/50 font-medium">Per Kemasan</th>
-                  <th className="text-right py-2 px-3 text-orange-400">Bruto</th>
-                  <th className="text-right py-2 px-3 text-blue-400">Tara</th>
-                  <th className="text-right py-2 px-3 text-green-400">Netto</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-3 text-white/70">1 kemasan</td>
-                  <td className="text-right py-2 px-3 text-orange-300">{fmt(b)} kg</td>
-                  <td className="text-right py-2 px-3 text-blue-300">{fmt(taraPerKemasan)} kg</td>
-                  <td className="text-right py-2 px-3 text-green-300">{fmt(nettoPerKemasan)} kg</td>
-                </tr>
-                <tr className="bg-white/5">
-                  <td className="py-2 px-3 text-white/70 font-semibold">× {j} kemasan (total)</td>
-                  <td className="text-right py-2 px-3 text-orange-300 font-bold">{fmt(totalBruto)} kg</td>
-                  <td className="text-right py-2 px-3 text-blue-300 font-bold">{fmt(totalTara)} kg</td>
-                  <td className="text-right py-2 px-3 text-green-300 font-bold">{fmt(totalNetto)} kg</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          {h > 0 && (
-            <div className="bg-primary/10 border border-primary/30 rounded-xl p-4 text-center space-y-1">
-              <p className="font-body text-xs text-white/50">Total harga ({fmt(totalNetto)} kg × Rp{h.toLocaleString("id-ID")}/kg)</p>
-              <p className="font-body text-lg font-bold text-primary">
-                Rp{Math.round(totalHarga).toLocaleString("id-ID")}
-              </p>
+
+      <div className="bg-gradient-to-br from-indigo-950/60 to-violet-900/40 border border-indigo-500/40 rounded-2xl p-5 space-y-4">
+        <div className="grid grid-cols-2 gap-3">
+          {fields.map((f, i) => (
+            <div key={i}>
+              <label className={`font-body text-xs font-semibold mb-1.5 block ${f.accent}`}>{f.label}</label>
+              <input type="number" value={f.val} onChange={(e) => f.set(e.target.value)}
+                placeholder={f.ph}
+                className="w-full bg-slate-900/80 border border-white/20 rounded-xl px-4 py-3 text-sm text-white font-body focus:outline-none focus:border-white/50 transition-all" />
             </div>
-          )}
+          ))}
         </div>
-      )}
+
+        {j > 0 && b > 0 && p > 0 && (
+          <div className="space-y-4">
+            <DiagramBNT bruto={totalBruto} netto={totalNetto} tara={totalTara} />
+
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { label: "Total Bruto", val: `${fmt(totalBruto)} kg`, sub: `${j} × ${fmt(b)} kg`, grad: "from-orange-500/30 to-orange-600/10", border: "border-orange-400/50", text: "text-orange-200", sub_text: "text-orange-400/70" },
+                { label: "Total Tara", val: `${fmt(totalTara)} kg`, sub: `${j} × ${fmt(taraPerKemasan)} kg`, grad: "from-blue-500/30 to-blue-600/10", border: "border-blue-400/50", text: "text-blue-200", sub_text: "text-blue-400/70" },
+                { label: "✅ Total Netto", val: `${fmt(totalNetto)} kg`, sub: `${j} × ${fmt(nettoPerKemasan)} kg`, grad: "from-green-500/40 to-green-600/15", border: "border-green-400/60 ring-1 ring-green-400/30", text: "text-green-200", sub_text: "text-green-400/70" },
+              ].map((card, i) => (
+                <div key={i} className={`bg-gradient-to-b ${card.grad} border ${card.border} rounded-xl p-3 text-center`}>
+                  <p className={`font-body text-[10px] font-semibold uppercase tracking-wide mb-1 ${card.sub_text}`}>{card.label}</p>
+                  <p className={`font-body text-base font-bold ${card.text}`}>{card.val}</p>
+                  <p className={`font-body text-[10px] mt-0.5 ${card.sub_text}`}>{card.sub}</p>
+                </div>
+              ))}
+            </div>
+
+            {h > 0 && (
+              <div className="bg-gradient-to-r from-yellow-500/20 to-amber-500/15 border border-yellow-400/50 rounded-2xl p-4 text-center space-y-1">
+                <p className="font-body text-xs text-yellow-300/70">
+                  Total Harga = {fmt(totalNetto)} kg × Rp{h.toLocaleString("id-ID")}/kg
+                </p>
+                <p className="font-body text-2xl font-bold text-yellow-200">
+                  Rp{Math.round(totalHarga).toLocaleString("id-ID")}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -457,7 +492,7 @@ const Section = ({ id, expanded, onToggle, icon, title, children }: {
 const BrutoNettoTaraPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "visual", "kalkulator", "persen", "konteks", "multikemasan", "contoh", "kesalahan", "kuis", "rangkuman"
+    "intro", "konsep", "kalkulator", "persen", "konteks", "multikemasan", "contoh", "kesalahan", "kuis", "rangkuman"
   ]);
 
   const toggleSection = (section: string) => {
@@ -523,22 +558,6 @@ const BrutoNettoTaraPage = () => {
                 ))}
               </div>
 
-              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4">
-                <p className="font-body text-xs font-semibold text-yellow-300 mb-2">🎯 Analogi Mudah — Sekarung Beras:</p>
-                <div className="flex items-center gap-3 flex-wrap">
-                  {[
-                    { label: "Bruto", nilai: "40 kg", sub: "karung + beras", warna: "orange" },
-                    { label: "−  Tara", nilai: "2 kg", sub: "karung saja", warna: "blue" },
-                    { label: "= Netto", nilai: "38 kg", sub: "beras saja", warna: "green" },
-                  ].map((r, i) => (
-                    <div key={i} className={`bg-${r.warna}-500/10 border border-${r.warna}-500/30 rounded-lg px-3 py-2 text-center`}>
-                      <p className={`font-body text-xs text-${r.warna}-400`}>{r.label}</p>
-                      <p className={`font-body text-sm font-bold text-${r.warna}-300`}>{r.nilai}</p>
-                      <p className="font-body text-xs text-white/40">{r.sub}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </Section>
 
@@ -582,33 +601,6 @@ const BrutoNettoTaraPage = () => {
                   <BlockMath math={String.raw`\text{Netto} = \text{Bruto} \times \left(1 - \frac{\%\text{Tara}}{100}\right)`} />
                 </div>
                 <p className="font-body text-xs text-white/50">Contoh: Bruto 60 kg, %Tara 5% → Tara = 3 kg → Netto = 57 kg</p>
-              </div>
-            </div>
-          </Section>
-
-          {/* 3. VISUALISASI */}
-          <Section id="visual" expanded={expandedSections.includes("visual")} onToggle={toggleSection}
-            icon={<Scale className="w-5 h-5 text-purple-400" />}
-            title="Visualisasi: Memahami Bruto = Netto + Tara"
-          >
-            <div className="space-y-5">
-              <p className="font-body text-sm text-white/70">Bar hijau = Netto (isi), bar biru = Tara (kemasan). Totalnya selalu = Bruto (100%).</p>
-              {[
-                { label: "Sekarung beras 40 kg, tara 2 kg", b: 40, t: 2 },
-                { label: "Peti jeruk 25 kg, tara 8% (2 kg)", b: 25, t: 2 },
-                { label: "Kaleng susu 550 g, tara 50 g", b: 550, t: 50 },
-                { label: "Kotak kopi 200 g, tara 10%", b: 200, t: 20 },
-              ].map((ex, i) => (
-                <div key={i} className="space-y-1">
-                  <p className="font-body text-xs text-white/50">{ex.label}</p>
-                  <DiagramBNT bruto={ex.b} netto={ex.b - ex.t} tara={ex.t} />
-                </div>
-              ))}
-              <div className="bg-slate-800/60 rounded-xl p-4">
-                <p className="font-body text-xs text-white/60 leading-relaxed">
-                  <strong className="text-white">Perhatikan:</strong> Semakin besar tara (biru), semakin sedikit netto (hijau) yang kamu dapatkan.
-                  Penting untuk memahami ini saat membandingkan harga antar produk dengan kemasan berbeda.
-                </p>
               </div>
             </div>
           </Section>
