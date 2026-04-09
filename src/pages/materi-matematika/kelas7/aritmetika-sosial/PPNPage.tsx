@@ -47,7 +47,7 @@ const PPNPage = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl overflow-hidden border border-border/60">
                     <img
-                      src="/image_ppn_kfc_makan.png"
+                      src="/image_ppn_kfc_makan2.png"
                       alt="Makan di KFC - contoh konsumsi yang dikenai PPN"
                       className="w-full h-auto object-contain"
                     />
