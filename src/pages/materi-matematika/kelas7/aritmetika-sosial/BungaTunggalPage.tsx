@@ -152,7 +152,7 @@ const BungaTunggalPage = () => {
                   <img
                     src="/image_bunga_tunggal_menabung.png"
                     alt="Anak-anak menabung di bank"
-                    className="w-full object-cover max-h-64"
+                    className="w-full h-auto object-contain"
                   />
                   <p className="font-body text-[11px] text-white/40 text-center py-2 px-3 bg-slate-900/60">
                     Menabung sejak dini menghasilkan bunga sebagai imbalan dari bank.
