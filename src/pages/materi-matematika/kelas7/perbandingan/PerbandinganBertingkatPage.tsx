@@ -229,7 +229,7 @@ const PerbandinganBertingkatPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Modal usaha Adi : Budi = <InlineMath math="3 : 4" /> dan modal Budi : Candra = <InlineMath math="2 : 5" />.
+                      Modal usaha Adi : Budi = <InlineMath math="3 : 4" /> dan modal Budi : Candra = <InlineMath math="6 : 5" />.
                       Jika selisih modal Adi dan Candra adalah Rp35.000, tentukan:
                     </p>
                     <ul className="list-disc list-inside font-body text-sm text-white/80 mt-2 space-y-1">
@@ -240,28 +240,28 @@ const PerbandinganBertingkatPage = () => {
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Variabel perantara = Budi. Nilai Budi: <InlineMath math="4" /> dan <InlineMath math="2" />. KPK(4, 2) = 4.</p>
-                      <p><strong>Langkah 2:</strong> Sesuaikan perbandingan:</p>
+                      <p><strong>Langkah 1:</strong> Variabel perantara = Budi. Nilai Budi: <InlineMath math="4" /> dan <InlineMath math="6" />. KPK(4, 6) = 12.</p>
+                      <p><strong>Langkah 2:</strong> Sesuaikan perbandingan agar nilai Budi menjadi 12:</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <p className="text-white/60 text-xs mb-1">Adi : Budi = 3 : 4 (tetap)</p>
-                        <p className="text-white/60 text-xs mb-1">Budi : Candra = 2 : 5 → dikali 2 → 4 : 10</p>
-                        <BlockMath math="\text{Adi} : \text{Budi} : \text{Candra} = 3 : 4 : 10" />
+                        <p className="text-white/60 text-xs mb-1">Adi : Budi = 3 : 4 → dikali 3 → 9 : 12</p>
+                        <p className="text-white/60 text-xs mb-1">Budi : Candra = 6 : 5 → dikali 2 → 12 : 10</p>
+                        <BlockMath math="\text{Adi} : \text{Budi} : \text{Candra} = 9 : 12 : 10" />
                       </div>
-                      <p><strong>Langkah 3:</strong> Selisih Candra – Adi: <InlineMath math="10 - 3 = 7" /> bagian = Rp35.000.</p>
+                      <p><strong>Langkah 3:</strong> Selisih Candra – Adi: <InlineMath math="10 - 9 = 1" /> bagian = Rp35.000.</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="1 \text{ bagian} = \frac{35.000}{7} = \text{Rp5.000}" />
+                        <BlockMath math="1 \text{ bagian} = \text{Rp35.000}" />
                       </div>
                       <p><strong>Langkah 4:</strong> Modal masing-masing:</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\text{Adi} = 3 \times 5.000 = \text{Rp15.000}" />
-                        <BlockMath math="\text{Budi} = 4 \times 5.000 = \text{Rp20.000}" />
-                        <BlockMath math="\text{Candra} = 10 \times 5.000 = \text{Rp50.000}" />
+                        <BlockMath math="\text{Adi} = 9 \times 35.000 = \text{Rp315.000}" />
+                        <BlockMath math="\text{Budi} = 12 \times 35.000 = \text{Rp420.000}" />
+                        <BlockMath math="\text{Candra} = 10 \times 35.000 = \text{Rp350.000}" />
                       </div>
                       <p><strong>Langkah 5:</strong> Total modal:</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\text{Total} = (3+4+10) \times 5.000 = 17 \times 5.000 = \text{Rp85.000}" />
+                        <BlockMath math="\text{Total} = (9+12+10) \times 35.000 = 31 \times 35.000 = \text{Rp1.085.000}" />
                       </div>
-                      <p className="text-primary font-semibold">Cek selisih: <InlineMath math="50.000 - 15.000 = 35.000" /> ✓</p>
+                      <p className="text-primary font-semibold">Cek selisih: <InlineMath math="350.000 - 315.000 = 35.000" /> ✓</p>
                     </div>
                   </div>
                 </div>
