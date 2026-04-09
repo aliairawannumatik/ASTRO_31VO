@@ -44,12 +44,12 @@ const PPNPage = () => {
             </button>
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl overflow-hidden border border-border/60">
+                <div className="grid grid-cols-2 gap-3 items-start">
+                  <div className="rounded-xl overflow-hidden border border-border/60 flex flex-col">
                     <img
                       src="/image_ppn_kfc_makan2.png"
                       alt="Makan di KFC - contoh konsumsi yang dikenai PPN"
-                      className="w-full h-auto object-contain"
+                      className="w-full object-cover object-center h-64"
                     />
                     <p className="font-body text-[10px] text-white/40 text-center py-1.5 px-2 bg-slate-900/60">
                       Sumber: <a href="https://www.lemon8-app.com/@riskaayunanda913/7560353431749034504?region=id" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/60 transition-colors">lemon8-app.com</a>
@@ -59,7 +59,7 @@ const PPNPage = () => {
                     <img
                       src="/image_ppn_struk2.png"
                       alt="Struk KFC yang menampilkan PPN 10%"
-                      className="w-full h-auto object-contain"
+                      className="w-full object-cover object-bottom h-64"
                     />
                   </div>
                 </div>
