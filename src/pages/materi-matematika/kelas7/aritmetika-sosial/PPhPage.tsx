@@ -87,7 +87,8 @@ const PPhPage = () => {
                       className="w-full object-cover object-center h-52"
                     />
                     <p className="font-body text-[10px] text-white/40 text-center py-1.5 px-2 bg-slate-900/60">
-                      Kantor Pelayanan Pajak Pratama
+                      Sumber:{" "}
+                      <a href="https://kabarbisnis.com/read/2874840/batas-akhir-penyampaian-spt-pajak-diundur-jadi-21-april" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/60 transition-colors">kabarbisnis.com</a>
                     </p>
                   </div>
                   <div className="rounded-xl overflow-hidden border border-border/60 flex flex-col">
