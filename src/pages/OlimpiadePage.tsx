@@ -230,7 +230,7 @@ const OlimpiadePage = () => {
               </div>
 
               {/* Topic grid */}
-              <div className="relative px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="relative px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {cat.topics.map((topic, ti) => {
                   const hasRoute = !!routes[topic.name];
                   return (
@@ -238,29 +238,29 @@ const OlimpiadePage = () => {
                       key={topic.name}
                       onClick={() => handleClick(topic.name)}
                       disabled={!hasRoute}
-                      className={`group flex items-center gap-3 rounded-xl px-3.5 py-3 text-left transition-all duration-200
+                      className={`group flex items-center gap-3 rounded-xl px-4 py-3.5 text-left transition-all duration-200 shadow-md
                         ${hasRoute
-                          ? "bg-black/30 hover:bg-black/45 border border-white/15 hover:border-white/30 cursor-pointer"
-                          : "bg-black/20 border border-white/8 cursor-not-allowed opacity-40"}`}
+                          ? "bg-white/10 hover:bg-white/18 border border-white/25 hover:border-white/50 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                          : "bg-white/5 border border-white/10 cursor-not-allowed opacity-40"}`}
                       style={{ animationDelay: `${(ci * 0.06) + (ti * 0.025)}s` }}
                     >
                       {/* Colored left indicator */}
-                      <div className={`w-1 h-8 rounded-full shrink-0 ${cat.bar} opacity-70 group-hover:opacity-100 transition-opacity`} />
+                      <div className={`w-1.5 h-9 rounded-full shrink-0 ${cat.bar} opacity-80 group-hover:opacity-100 transition-opacity`} />
 
                       {/* Emoji badge */}
-                      <div className="w-8 h-8 rounded-lg bg-black/40 flex items-center justify-center shrink-0 text-sm
-                        group-hover:scale-105 transition-transform">
+                      <div className="w-9 h-9 rounded-lg bg-black/40 border border-white/10 flex items-center justify-center shrink-0 text-base
+                        group-hover:scale-110 transition-transform">
                         {topic.emoji}
                       </div>
 
                       {/* Name */}
-                      <span className="font-body text-xs text-white/80 group-hover:text-white leading-snug flex-1 transition-colors">
+                      <span className="font-body text-sm text-white/90 group-hover:text-white leading-snug flex-1 transition-colors font-medium">
                         {topic.name}
                       </span>
 
                       {/* Arrow */}
                       {hasRoute && (
-                        <svg className="w-3.5 h-3.5 text-white/20 group-hover:text-white/60 shrink-0 transition-colors group-hover:translate-x-0.5 duration-200"
+                        <svg className="w-4 h-4 text-white/40 group-hover:text-white/80 shrink-0 transition-all group-hover:translate-x-1 duration-200"
                           fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
