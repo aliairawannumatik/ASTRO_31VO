@@ -336,21 +336,26 @@ const BungaTunggalPage = () => {
           </div>
 
           {/* ─── KALKULATOR INTERAKTIF ─── */}
-          <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-xl overflow-hidden">
-            <button onClick={() => toggleSection("kalkulator")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+          <div className="rounded-xl overflow-hidden shadow-lg shadow-amber-500/10" style={{background: "linear-gradient(135deg, #1a1200 0%, #2a1a00 40%, #1a1200 100%)", border: "2px solid rgba(251,191,36,0.5)"}}>
+            <button onClick={() => toggleSection("kalkulator")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer" style={{background: "linear-gradient(90deg, rgba(251,191,36,0.18) 0%, rgba(251,191,36,0.07) 100%)"}}>
               <div className="flex items-center gap-3">
-                <Calculator className="w-5 h-5 text-cyan-400" />
-                <span className="font-body font-semibold text-white">Kalkulator Bunga Tunggal Interaktif</span>
-                <span className="bg-cyan-500/20 text-cyan-300 text-[10px] font-bold px-2 py-0.5 rounded-full">COBA SENDIRI!</span>
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{background: "rgba(251,191,36,0.2)", border: "1px solid rgba(251,191,36,0.4)"}}>
+                  <Calculator className="w-5 h-5 text-amber-300" />
+                </div>
+                <div>
+                  <span className="font-body font-bold text-amber-200 block leading-tight">🧮 Kalkulator Bunga Tunggal</span>
+                  <span className="font-body text-[10px] text-amber-400/70">Interaktif — Masukkan nilai, hitung otomatis!</span>
+                </div>
+                <span className="ml-1 bg-amber-400 text-black text-[10px] font-black px-2 py-0.5 rounded-full tracking-wide">COBA!</span>
               </div>
-              {expandedSections.includes("kalkulator") ? <ChevronUp className="w-5 h-5 text-cyan-400" /> : <ChevronDown className="w-5 h-5 text-cyan-400" />}
+              {expandedSections.includes("kalkulator") ? <ChevronUp className="w-5 h-5 text-amber-400" /> : <ChevronDown className="w-5 h-5 text-amber-400" />}
             </button>
             {expandedSections.includes("kalkulator") && (
-              <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-xs text-white/60">Masukkan nilai-nilai di bawah ini untuk menghitung bunga tunggal secara otomatis.</p>
+              <div className="px-5 pb-5 space-y-4 pt-2">
+                <p className="font-body text-xs text-amber-200/60">Isi kolom di bawah ini, lalu tekan tombol hitung untuk mendapat hasil secara langsung.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="font-body text-xs text-white/70 flex items-center gap-1">
+                    <label className="font-body text-xs text-amber-300/80 flex items-center gap-1 font-semibold">
                       <DollarSign className="w-3 h-3" /> Modal Awal (Rp)
                     </label>
                     <input
@@ -358,11 +363,12 @@ const BungaTunggalPage = () => {
                       value={modal}
                       onChange={(e) => { setModal(e.target.value); setKalcResult(null); }}
                       placeholder="contoh: 2000000"
-                      className="w-full bg-slate-800/60 border border-border rounded-lg px-3 py-2 text-sm text-white font-body focus:outline-none focus:border-cyan-500 transition-colors"
+                      className="w-full rounded-lg px-3 py-2.5 text-sm text-white font-body focus:outline-none transition-colors"
+                      style={{background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.3)"}}
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-body text-xs text-white/70 flex items-center gap-1">
+                    <label className="font-body text-xs text-amber-300/80 flex items-center gap-1 font-semibold">
                       <Percent className="w-3 h-3" /> Bunga (% per tahun/bulan)
                     </label>
                     <input
@@ -370,11 +376,12 @@ const BungaTunggalPage = () => {
                       value={bunga}
                       onChange={(e) => { setBunga(e.target.value); setKalcResult(null); }}
                       placeholder="contoh: 6"
-                      className="w-full bg-slate-800/60 border border-border rounded-lg px-3 py-2 text-sm text-white font-body focus:outline-none focus:border-cyan-500 transition-colors"
+                      className="w-full rounded-lg px-3 py-2.5 text-sm text-white font-body focus:outline-none transition-colors"
+                      style={{background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.3)"}}
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-body text-xs text-white/70 flex items-center gap-1">
+                    <label className="font-body text-xs text-amber-300/80 flex items-center gap-1 font-semibold">
                       <Clock className="w-3 h-3" /> Waktu (angka saja)
                     </label>
                     <input
@@ -382,17 +389,21 @@ const BungaTunggalPage = () => {
                       value={waktu}
                       onChange={(e) => { setWaktu(e.target.value); setKalcResult(null); }}
                       placeholder="contoh: 2"
-                      className="w-full bg-slate-800/60 border border-border rounded-lg px-3 py-2 text-sm text-white font-body focus:outline-none focus:border-cyan-500 transition-colors"
+                      className="w-full rounded-lg px-3 py-2.5 text-sm text-white font-body focus:outline-none transition-colors"
+                      style={{background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.3)"}}
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-body text-xs text-white/70">Satuan Waktu</label>
+                    <label className="font-body text-xs text-amber-300/80 font-semibold">Satuan Waktu</label>
                     <div className="flex gap-2">
                       {(["tahun", "bulan"] as const).map((s) => (
                         <button
                           key={s}
                           onClick={() => { setSatuanWaktu(s); setKalcResult(null); playPopSound(); }}
-                          className={`flex-1 py-2 rounded-lg text-xs font-body font-semibold transition-colors border ${satuanWaktu === s ? "bg-cyan-500/20 border-cyan-500 text-cyan-300" : "bg-slate-800/60 border-border text-white/50 hover:text-white"}`}
+                          className="flex-1 py-2.5 rounded-lg text-xs font-body font-bold transition-all"
+                          style={satuanWaktu === s
+                            ? {background: "rgba(251,191,36,0.25)", border: "1.5px solid rgba(251,191,36,0.8)", color: "#fbbf24"}
+                            : {background: "rgba(251,191,36,0.05)", border: "1px solid rgba(251,191,36,0.2)", color: "rgba(251,191,36,0.4)"}}
                         >
                           {s.charAt(0).toUpperCase() + s.slice(1)}
                         </button>
@@ -403,37 +414,39 @@ const BungaTunggalPage = () => {
                 <div className="flex gap-3">
                   <button
                     onClick={hitungBunga}
-                    className="flex-1 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 text-cyan-300 font-body font-semibold text-sm py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 font-body font-bold text-sm py-3 rounded-lg transition-all flex items-center justify-center gap-2 hover:opacity-90 active:scale-95"
+                    style={{background: "linear-gradient(90deg, #d97706, #f59e0b)", color: "#1a1200"}}
                   >
                     <Zap className="w-4 h-4" /> Hitung Sekarang
                   </button>
                   <button
                     onClick={resetKalkulator}
-                    className="px-4 bg-slate-700/60 hover:bg-slate-700 border border-border text-white/50 hover:text-white font-body text-sm py-2.5 rounded-lg transition-colors"
+                    className="px-4 rounded-lg font-body text-sm py-3 transition-colors hover:opacity-80"
+                    style={{background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.2)", color: "rgba(251,191,36,0.5)"}}
                   >
                     <RotateCcw className="w-4 h-4" />
                   </button>
                 </div>
 
                 {kalcResult && (
-                  <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 space-y-3 animate-slide-up">
-                    <p className="font-body text-xs font-semibold text-cyan-300">✅ Hasil Perhitungan:</p>
+                  <div className="rounded-xl p-4 space-y-3 animate-slide-up" style={{background: "rgba(251,191,36,0.07)", border: "1.5px solid rgba(251,191,36,0.35)"}}>
+                    <p className="font-body text-xs font-bold text-amber-300">✅ Hasil Perhitungan:</p>
                     <div className="space-y-2">
-                      <div className="bg-slate-800/60 rounded-lg px-4 py-3 flex justify-between items-center">
-                        <span className="font-body text-xs text-white/60">Modal Awal</span>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "rgba(0,0,0,0.3)"}}>
+                        <span className="font-body text-xs text-amber-200/60">Modal Awal</span>
                         <span className="font-body text-sm font-bold text-white">{formatRupiah(parseFloat(modal.replace(/[^0-9.]/g, "")) || 0)}</span>
                       </div>
-                      <div className="bg-slate-800/60 rounded-lg px-4 py-3 flex justify-between items-center">
-                        <span className="font-body text-xs text-white/60">Bunga yang Diperoleh</span>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "rgba(0,0,0,0.3)"}}>
+                        <span className="font-body text-xs text-amber-200/60">Bunga yang Diperoleh</span>
                         <span className="font-body text-sm font-bold text-green-400">+{formatRupiah(kalcResult.bungaRp)}</span>
                       </div>
-                      <div className="bg-cyan-500/20 border border-cyan-500/40 rounded-lg px-4 py-3 flex justify-between items-center">
-                        <span className="font-body text-sm font-semibold text-cyan-200">Total Akhir</span>
-                        <span className="font-body text-base font-bold text-cyan-300">{formatRupiah(kalcResult.totalRp)}</span>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "linear-gradient(90deg, rgba(251,191,36,0.2), rgba(251,191,36,0.1))", border: "1px solid rgba(251,191,36,0.4)"}}>
+                        <span className="font-body text-sm font-bold text-amber-200">Total Akhir</span>
+                        <span className="font-body text-lg font-black text-amber-300">{formatRupiah(kalcResult.totalRp)}</span>
                       </div>
                     </div>
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                      <p className="font-body text-xs text-white/50 text-center">
+                    <div className="rounded-lg p-3" style={{background: "rgba(0,0,0,0.3)", border: "1px dashed rgba(251,191,36,0.2)"}}>
+                      <p className="font-body text-xs text-amber-300/60 text-center">
                         Cara hitung: B = {formatRupiah(parseFloat(modal.replace(/[^0-9.]/g, "")) || 0)} × {kalcResult.waktuTahun} × {(bungaNum).toFixed(2)} = {formatRupiah(kalcResult.bungaRp)}
                       </p>
                     </div>
