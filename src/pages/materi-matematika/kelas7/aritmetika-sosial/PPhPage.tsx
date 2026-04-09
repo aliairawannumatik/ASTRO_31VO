@@ -44,6 +44,13 @@ const PPhPage = () => {
             </button>
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
+                <div className="rounded-xl overflow-hidden border border-border/60">
+                  <img
+                    src="/image_pph_kantor_pajak.png"
+                    alt="Kantor Pelayanan Pajak Pratama - Bangga Bayar Pajak"
+                    className="w-full object-cover object-center h-52"
+                  />
+                </div>
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Berbeda dengan PPN yang dikenakan saat kamu <em>membeli</em> sesuatu, <strong className="text-primary">Pajak Penghasilan (PPh)</strong> dikenakan atas uang yang kamu <em>dapatkan</em> — baik dari gaji, usaha, atau penghasilan lainnya. Ini adalah kontribusi wajib setiap warga negara yang penghasilannya melampaui batas tertentu.
                 </p>
