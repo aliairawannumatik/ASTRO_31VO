@@ -57,7 +57,7 @@ const PPNPage = () => {
                   </div>
                   <div className="rounded-xl overflow-hidden border border-border/60 bg-white">
                     <img
-                      src="/image_ppn_struk.png"
+                      src="/image_ppn_struk2.png"
                       alt="Struk KFC yang menampilkan PPN 10%"
                       className="w-full h-auto object-contain"
                     />
