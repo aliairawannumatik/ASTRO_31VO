@@ -51,6 +51,24 @@ const PPhPage = () => {
                     className="w-full object-cover object-center h-52"
                   />
                 </div>
+                <div className="rounded-xl overflow-hidden border border-border/60">
+                  <img
+                    src="/image_pph_slip_gaji.png"
+                    alt="Contoh Slip Gaji dengan Potongan PPh 21 - Hilton International"
+                    className="w-full object-contain"
+                  />
+                  <p className="font-body text-xs text-white/50 text-center px-3 py-2 bg-slate-900/50">
+                    Contoh slip gaji yang memuat potongan PPh 21. Sumber:{" "}
+                    <a
+                      href="https://www.pajak.net/payroll.htm"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      pajak.net/payroll.htm
+                    </a>
+                  </p>
+                </div>
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Berbeda dengan PPN yang dikenakan saat kamu <em>membeli</em> sesuatu, <strong className="text-primary">Pajak Penghasilan (PPh)</strong> dikenakan atas uang yang kamu <em>dapatkan</em> — baik dari gaji, usaha, atau penghasilan lainnya. Ini adalah kontribusi wajib setiap warga negara yang penghasilannya melampaui batas tertentu.
                 </p>
