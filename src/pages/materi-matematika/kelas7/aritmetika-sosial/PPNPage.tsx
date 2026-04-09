@@ -5,7 +5,7 @@ import PageNavigation from "@/components/PageNavigation";
 import {
   BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator,
   Target, Receipt, AlertCircle, Star, Zap, RotateCcw,
-  CheckCircle, XCircle, Trophy, ArrowRight, Percent, ShoppingCart
+  CheckCircle, XCircle, Percent, ShoppingCart
 } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
@@ -14,55 +14,16 @@ import { InlineMath, BlockMath } from "react-katex";
 const formatRupiah = (num: number) =>
   "Rp" + Math.round(num).toLocaleString("id-ID");
 
-const quizData = [
-  {
-    soal: "Sebuah buku dijual Rp100.000 belum termasuk PPN 11%. Berapa total yang harus dibayar?",
-    pilihan: ["Rp110.000", "Rp111.000", "Rp101.100", "Rp115.000"],
-    jawaban: 1,
-    pembahasan: "Total Bayar = 100.000 × 1,11 = Rp111.000",
-  },
-  {
-    soal: "Dani membayar Rp333.000 untuk sepatu termasuk PPN 11%. Berapa harga sepatu sebelum PPN?",
-    pilihan: ["Rp300.000", "Rp310.000", "Rp290.000", "Rp320.000"],
-    jawaban: 0,
-    pembahasan: "Harga Asli = 333.000 ÷ 1,11 = Rp300.000",
-  },
-  {
-    soal: "Makanan seharga Rp80.000 mendapat diskon 25%, lalu dikenakan PPN 11%. Berapa total bayar?",
-    pilihan: ["Rp73.260", "Rp66.600", "Rp75.000", "Rp71.000"],
-    jawaban: 1,
-    pembahasan: "Setelah diskon 25%: 80.000 × 75% = Rp60.000. Total dengan PPN: 60.000 × 1,11 = Rp66.600.",
-  },
-  {
-    soal: "PPN dihitung dari...",
-    pilihan: [
-      "Harga barang setelah termasuk PPN",
-      "Harga barang sebelum PPN (harga asli)",
-      "Keuntungan penjual",
-      "Harga barang dikurangi ongkos kirim",
-    ],
-    jawaban: 1,
-    pembahasan: "PPN = %PPN × Harga Asli (sebelum PPN). Jangan hitung PPN dari total yang sudah termasuk PPN.",
-  },
-];
-
 const PPNPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "kapan", "kalkulator", "kesalahan", "contoh", "quiz", "rangkuman",
+    "intro", "konsep", "kapan", "kalkulator", "kesalahan", "contoh", "rangkuman",
   ]);
 
   const [harga, setHarga] = useState("");
   const [persen, setPersen] = useState("11");
   const [mode, setMode] = useState<"tambah" | "cari">("tambah");
   const [kalcResult, setKalcResult] = useState<null | { ppn: number; total: number; asli: number }>(null);
-
-  const [quizIndex, setQuizIndex] = useState(0);
-  const [quizPilihan, setQuizPilihan] = useState<number | null>(null);
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
-  const [quizScore, setQuizScore] = useState(0);
-  const [quizSelesai, setQuizSelesai] = useState(false);
-  const [quizAnswers, setQuizAnswers] = useState<boolean[]>([]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -88,31 +49,6 @@ const PPNPage = () => {
 
   const resetKalkulator = () => {
     setHarga(""); setKalcResult(null); playPopSound();
-  };
-
-  const handlePilih = (i: number) => {
-    if (!quizSubmitted) { setQuizPilihan(i); playPopSound(); }
-  };
-
-  const handleSubmitQuiz = () => {
-    if (quizPilihan === null) return;
-    const benar = quizPilihan === quizData[quizIndex].jawaban;
-    setQuizSubmitted(true);
-    if (benar) setQuizScore((s) => s + 1);
-    setQuizAnswers((prev) => [...prev, benar]);
-    playPopSound();
-  };
-
-  const handleNextQuiz = () => {
-    if (quizIndex + 1 >= quizData.length) setQuizSelesai(true);
-    else { setQuizIndex((i) => i + 1); setQuizPilihan(null); setQuizSubmitted(false); }
-    playPopSound();
-  };
-
-  const resetQuiz = () => {
-    setQuizIndex(0); setQuizPilihan(null); setQuizSubmitted(false);
-    setQuizScore(0); setQuizSelesai(false); setQuizAnswers([]);
-    playPopSound();
   };
 
   return (
@@ -589,95 +525,6 @@ const PPNPage = () => {
                   </div>
                 </div>
 
-              </div>
-            )}
-          </div>
-
-          {/* ─── MINI QUIZ ─── */}
-          <div className="bg-card/80 backdrop-blur border border-purple-500/40 rounded-xl overflow-hidden">
-            <button onClick={() => toggleSection("quiz")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
-              <div className="flex items-center gap-3">
-                <Trophy className="w-5 h-5 text-purple-400" />
-                <span className="font-body font-semibold text-white">Uji Pemahamanmu — Mini Quiz</span>
-                <span className="bg-purple-500/20 text-purple-300 text-[10px] font-bold px-2 py-0.5 rounded-full">{quizData.length} SOAL</span>
-              </div>
-              {expandedSections.includes("quiz") ? <ChevronUp className="w-5 h-5 text-purple-400" /> : <ChevronDown className="w-5 h-5 text-purple-400" />}
-            </button>
-            {expandedSections.includes("quiz") && (
-              <div className="px-5 pb-5 space-y-4">
-                {!quizSelesai ? (
-                  <>
-                    <div className="flex items-center justify-between">
-                      <p className="font-body text-xs text-white/50">Soal {quizIndex + 1} dari {quizData.length}</p>
-                      <div className="flex gap-1">
-                        {quizData.map((_, i) => (
-                          <div key={i} className={`w-2 h-2 rounded-full ${i < quizIndex ? (quizAnswers[i] ? "bg-green-400" : "bg-red-400") : i === quizIndex ? "bg-purple-400" : "bg-slate-600"}`} />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="bg-slate-800/60 rounded-xl p-4">
-                      <p className="font-body text-sm text-white leading-relaxed">{quizData[quizIndex].soal}</p>
-                    </div>
-                    <div className="space-y-2">
-                      {quizData[quizIndex].pilihan.map((p, i) => {
-                        let style = "bg-slate-800/40 border-border text-white/80 hover:border-purple-400/50 hover:bg-purple-500/10";
-                        if (quizPilihan === i && !quizSubmitted) style = "bg-purple-500/20 border-purple-400 text-purple-200";
-                        if (quizSubmitted) {
-                          if (i === quizData[quizIndex].jawaban) style = "bg-green-500/20 border-green-400 text-green-300";
-                          else if (i === quizPilihan) style = "bg-red-500/20 border-red-400 text-red-300";
-                          else style = "bg-slate-800/40 border-border text-white/40";
-                        }
-                        return (
-                          <button key={i} onClick={() => handlePilih(i)} className={`w-full text-left px-4 py-3 rounded-lg border font-body text-sm transition-colors ${style}`}>
-                            <span className="font-bold mr-2">{["A","B","C","D"][i]}.</span>{p}
-                          </button>
-                        );
-                      })}
-                    </div>
-                    {quizSubmitted && (
-                      <div className={`rounded-lg p-3 text-xs font-body ${quizPilihan === quizData[quizIndex].jawaban ? "bg-green-500/10 border border-green-500/30 text-green-300" : "bg-red-500/10 border border-red-500/30 text-red-300"}`}>
-                        {quizPilihan === quizData[quizIndex].jawaban ? "✅ Benar! " : "❌ Salah. "}
-                        <span className="text-white/70">{quizData[quizIndex].pembahasan}</span>
-                      </div>
-                    )}
-                    <div className="flex gap-3">
-                      {!quizSubmitted ? (
-                        <button onClick={handleSubmitQuiz} disabled={quizPilihan === null}
-                          className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/50 text-purple-300 disabled:opacity-40 disabled:cursor-not-allowed font-body font-semibold text-sm py-2.5 rounded-lg transition-colors">
-                          Kunci Jawaban
-                        </button>
-                      ) : (
-                        <button onClick={handleNextQuiz}
-                          className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/50 text-purple-300 font-body font-semibold text-sm py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
-                          {quizIndex + 1 >= quizData.length ? "Lihat Skor" : "Soal Berikutnya"} <ArrowRight className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-center space-y-4 py-4">
-                    <Trophy className={`w-16 h-16 mx-auto ${quizScore >= 3 ? "text-yellow-400" : quizScore >= 2 ? "text-blue-400" : "text-slate-400"}`} />
-                    <div>
-                      <p className="font-display text-4xl font-bold text-white">{quizScore}<span className="text-white/40 text-2xl">/{quizData.length}</span></p>
-                      <p className="font-body text-sm text-white/60 mt-1">
-                        {quizScore === quizData.length ? "🏆 Sempurna! Kamu sudah sangat paham PPN!" :
-                         quizScore >= 3 ? "⭐ Bagus sekali! Hampir sempurna." :
-                         quizScore >= 2 ? "👍 Lumayan! Pelajari lagi bagian yang salah." :
-                         "💪 Jangan menyerah! Baca materi lagi dan coba ulang."}
-                      </p>
-                    </div>
-                    <div className="flex gap-2 justify-center">
-                      {quizAnswers.map((benar, i) => (
-                        <div key={i} className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${benar ? "bg-green-500/20 text-green-400 border border-green-500/40" : "bg-red-500/20 text-red-400 border border-red-500/40"}`}>
-                          {i + 1}
-                        </div>
-                      ))}
-                    </div>
-                    <button onClick={resetQuiz} className="bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/50 text-purple-300 font-body font-semibold text-sm px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2 mx-auto">
-                      <RotateCcw className="w-4 h-4" /> Ulangi Quiz
-                    </button>
-                  </div>
-                )}
               </div>
             )}
           </div>
