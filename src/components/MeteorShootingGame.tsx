@@ -453,7 +453,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
       </div>
 
       <div className="relative flex-1 min-h-0">
-        <div className="absolute top-[3%] left-0 right-0 h-[45%] z-10">
+        <div className={`absolute ${isLandscape ? "top-[1%] h-[28%]" : "top-[3%] h-[45%]"} left-0 right-0 z-10`}>
           {meteors.map((m) => (
             <button key={m.id} onClick={() => handleMeteorClick(m)} disabled={m.hit || locked}
               className="absolute transition-all duration-500 cursor-pointer disabled:cursor-default"
@@ -464,7 +464,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
                 transition: m.hit ? "all 0.3s ease-out" : "transform 0.5s ease",
               }}>
               <div className="relative">
-                <img src={meteorImg} alt="meteor" className={`${isLandscape ? "w-10 h-10" : "w-16 h-16 md:w-20 md:h-20"} drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]`} style={{ mixBlendMode: "screen", background: "transparent" }} />
+                <img src={meteorImg} alt="meteor" className={`${isLandscape ? "w-8 h-8" : "w-16 h-16 md:w-20 md:h-20"} drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]`} style={{ mixBlendMode: "screen", background: "transparent" }} />
                 <span className="absolute inset-0 flex items-center justify-center font-display text-[8px] md:text-[9px] font-bold text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 text-center leading-tight">{m.label}</span>
               </div>
               {m.hit && (
@@ -486,9 +486,9 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
           }} />
         )}
 
-        <div className={`absolute ${isLandscape ? "bottom-[10%]" : "bottom-[18%]"} z-20 transition-all duration-500 ease-out`} style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
+        <div className={`absolute ${isLandscape ? "bottom-[2%]" : "bottom-[18%]"} z-20 transition-all duration-500 ease-out`} style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
           <div className="relative flex flex-col items-center">
-            <img src={spaceshipImg} alt="spaceship" className={`${isLandscape ? "w-10 h-12" : "w-14 h-16 md:w-20 md:h-24"} drop-shadow-[0_0_20px_rgba(0,200,255,0.5)]`} />
+            <img src={spaceshipImg} alt="spaceship" className={`${isLandscape ? "w-8 h-10" : "w-14 h-16 md:w-20 md:h-24"} drop-shadow-[0_0_20px_rgba(0,200,255,0.5)]`} />
             <div className="absolute -bottom-1 w-4 h-6 md:w-5 md:h-7 animate-flame" style={{ left: "40%", transform: "translateX(-50%)" }}>
               <div className="w-full h-full flex flex-col items-center">
                 <div className="w-1.5 md:w-2 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[1px] opacity-90" />
