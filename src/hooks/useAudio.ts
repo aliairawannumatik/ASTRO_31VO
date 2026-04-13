@@ -21,58 +21,13 @@ export const useAudio = () => {
   const bgMusicRef = useRef<{ osc1: OscillatorNode; osc2: OscillatorNode; osc3: OscillatorNode; gain: GainNode; lfo: OscillatorNode } | null>(null);
   const engineRef = useRef<{ osc: OscillatorNode; noise: AudioBufferSourceNode; gain: GainNode } | null>(null);
 
-  // Realistic laser sound - pew pew style
+  // Laser sound — plays the uploaded soundreality-laser-133063 MP3
   const playLaser = useCallback(() => {
     if (!_soundEnabled) return;
     try {
-      const ctx = getAudioCtx();
-      
-      // Main laser tone - high to low sweep
-      const osc1 = ctx.createOscillator();
-      const gain1 = ctx.createGain();
-      osc1.type = "sawtooth";
-      osc1.frequency.setValueAtTime(1200, ctx.currentTime);
-      osc1.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.15);
-      gain1.gain.setValueAtTime(0.12, ctx.currentTime);
-      gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      
-      // Secondary harmonic
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      osc2.type = "square";
-      osc2.frequency.setValueAtTime(2400, ctx.currentTime);
-      osc2.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.12);
-      gain2.gain.setValueAtTime(0.05, ctx.currentTime);
-      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
-      
-      // Add some noise for texture
-      const noiseBuffer = ctx.createBuffer(1, ctx.sampleRate * 0.1, ctx.sampleRate);
-      const noiseData = noiseBuffer.getChannelData(0);
-      for (let i = 0; i < noiseData.length; i++) {
-        noiseData[i] = (Math.random() * 2 - 1) * 0.3;
-      }
-      const noiseSource = ctx.createBufferSource();
-      noiseSource.buffer = noiseBuffer;
-      const noiseGain = ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.08, ctx.currentTime);
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-      const noiseFilter = ctx.createBiquadFilter();
-      noiseFilter.type = "highpass";
-      noiseFilter.frequency.value = 3000;
-      
-      osc1.connect(gain1);
-      osc2.connect(gain2);
-      noiseSource.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      gain1.connect(ctx.destination);
-      gain2.connect(ctx.destination);
-      noiseGain.connect(ctx.destination);
-      
-      osc1.start();
-      osc2.start();
-      noiseSource.start();
-      osc1.stop(ctx.currentTime + 0.15);
-      osc2.stop(ctx.currentTime + 0.12);
+      const audio = new Audio("/music/laser-shoot.mp3");
+      audio.volume = 0.8;
+      audio.play().catch(() => {});
     } catch {}
   }, []);
 
