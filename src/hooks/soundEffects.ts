@@ -232,8 +232,17 @@ const SFX_MAP: Record<string, () => void> = {
   "robot":      robot,
 };
 
+export const triggerVibration = (pattern: number | number[] = 30) => {
+  try {
+    const saved = localStorage.getItem("numatik-vibration");
+    const enabled = saved === null ? true : saved === "true";
+    if (enabled && navigator.vibrate) navigator.vibrate(pattern);
+  } catch {}
+};
+
 export const playSfxById = (id: string) => {
   try {
     (SFX_MAP[id] ?? popKlasik)();
+    triggerVibration(30);
   } catch {}
 };

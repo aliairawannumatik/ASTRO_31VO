@@ -111,7 +111,22 @@
   }
 }
 
+@keyframes numatik-shake-anim {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(-5px) rotate(-1.5deg); }
+  30%  { transform: translateX(5px) rotate(1.5deg); }
+  45%  { transform: translateX(-4px) rotate(-1deg); }
+  60%  { transform: translateX(4px) rotate(1deg); }
+  75%  { transform: translateX(-2px); }
+  90%  { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
 @layer utilities {
+  .numatik-shake {
+    animation: numatik-shake-anim 0.4s ease;
+  }
+
   .font-display {
     font-family: var(--font-display), sans-serif;
   }
