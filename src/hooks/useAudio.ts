@@ -4,6 +4,7 @@ import { playSfxById, getCurrentSfxId } from "@/hooks/soundEffects";
 let audioCtx: AudioContext | null = null;
 const getAudioCtx = () => {
   if (!audioCtx) audioCtx = new AudioContext();
+  if (audioCtx.state === "suspended") audioCtx.resume();
   return audioCtx;
 };
 
