@@ -39,7 +39,7 @@ const PerbandinganBertingkatPage = () => {
               <span className="font-semibold text-accent shrink-0">2.</span>
               <p>
                 Perbandingan bola merah : bola biru = <InlineMath math="2 : 5" />, dan perbandingan bola biru : bola hijau = <InlineMath math="4 : 3" />.
-                Jika selisih bola merah dan bola hijau adalah 6 butir, tentukan banyak bola biru!
+                Jika selisih bola merah dan bola hijau adalah 14 butir, tentukan banyak bola biru!
               </p>
             </div>
 

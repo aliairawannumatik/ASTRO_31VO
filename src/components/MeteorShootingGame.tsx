@@ -40,17 +40,16 @@ interface LaserState {
 
 const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kembali" }: MeteorShootingGameProps) => {
   const navigate = useNavigate();
-  const { playExplosion, playCorrect, startBgMusic, stopBgMusic } = useAudio();
+  const { playExplosion, playCorrect, playLaser, startBgMusic, stopBgMusic } = useAudio();
   const { soundOn } = useSound();
 
-  const playLaser = useCallback(() => {
-    if (!soundOn) return;
-    try {
-      const audio = new Audio("/music/laser-shoot.mp3");
-      audio.volume = 0.65;
-      audio.play().catch(() => {});
-    } catch {}
-  }, [soundOn]);
+  const [isLandscape, setIsLandscape] = useState(false);
+  useEffect(() => {
+    const check = () => setIsLandscape(window.innerWidth > window.innerHeight && window.innerHeight < 500);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const [started, setStarted] = useState(false);
   const [currentQ, setCurrentQ] = useState(0);
@@ -444,7 +443,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         {backLabel}
       </button>
 
-      <div className="relative z-20 shrink-0 flex flex-col items-center px-4 pt-10 md:pt-14 pb-1">
+      <div className={`relative z-20 shrink-0 flex flex-col items-center px-4 ${isLandscape ? "pt-4" : "pt-10 md:pt-14"} pb-1`}>
         <div className="font-display text-xs text-muted-foreground mb-0.5">
           SOAL {currentQ + 1}/{questions.length}
         </div>
@@ -465,7 +464,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
                 transition: m.hit ? "all 0.3s ease-out" : "transform 0.5s ease",
               }}>
               <div className="relative">
-                <img src={meteorImg} alt="meteor" className="w-16 h-16 md:w-20 md:h-20 drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]" style={{ mixBlendMode: "screen", background: "transparent" }} />
+                <img src={meteorImg} alt="meteor" className={`${isLandscape ? "w-10 h-10" : "w-16 h-16 md:w-20 md:h-20"} drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]`} style={{ mixBlendMode: "screen", background: "transparent" }} />
                 <span className="absolute inset-0 flex items-center justify-center font-display text-[8px] md:text-[9px] font-bold text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 text-center leading-tight">{m.label}</span>
               </div>
               {m.hit && (
@@ -487,9 +486,9 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
           }} />
         )}
 
-        <div className="absolute bottom-[18%] z-20 transition-all duration-500 ease-out" style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
+        <div className={`absolute ${isLandscape ? "bottom-[10%]" : "bottom-[18%]"} z-20 transition-all duration-500 ease-out`} style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
           <div className="relative flex flex-col items-center">
-            <img src={spaceshipImg} alt="spaceship" className="w-14 h-16 md:w-20 md:h-24 drop-shadow-[0_0_20px_rgba(0,200,255,0.5)]" />
+            <img src={spaceshipImg} alt="spaceship" className={`${isLandscape ? "w-10 h-12" : "w-14 h-16 md:w-20 md:h-24"} drop-shadow-[0_0_20px_rgba(0,200,255,0.5)]`} />
             <div className="absolute -bottom-1 w-4 h-6 md:w-5 md:h-7 animate-flame" style={{ left: "40%", transform: "translateX(-50%)" }}>
               <div className="w-full h-full flex flex-col items-center">
                 <div className="w-1.5 md:w-2 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[1px] opacity-90" />

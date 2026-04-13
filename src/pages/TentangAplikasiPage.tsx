@@ -91,6 +91,29 @@ const TentangAplikasiPage = () => {
           </div>
         </div>
 
+        {/* Versi Aplikasi */}
+        <div className="animate-slide-up mb-6" style={{ animationDelay: '0.35s' }}>
+          <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-500 shadow-[0_0_30px_rgba(0,200,255,0.2)]">
+            <div className="rounded-2xl bg-[#0d0d2b] px-6 py-4 flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center shrink-0">
+                <span className="text-2xl">🚀</span>
+              </div>
+              <div className="flex-1">
+                <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">Versi Aplikasi</p>
+                <p className="font-display text-lg font-black text-white">
+                  NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.1</span>
+                </p>
+                <p className="text-white/50 font-body text-xs mt-0.5">Pembaruan konten, fitur, dan tampilan antarmuka</p>
+              </div>
+              <div className="shrink-0">
+                <span className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 font-display tracking-wide">
+                  TERBARU
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Ucapan Terima Kasih — Kelompok A2 Guru Penggerak */}
         <div className="animate-slide-up mb-6" style={{ animationDelay: '0.40s' }}>
           {/* Section Header */}
