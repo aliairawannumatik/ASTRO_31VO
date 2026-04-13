@@ -489,7 +489,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         <div className={`absolute ${isLandscape ? "bottom-[2%]" : "bottom-[18%]"} z-20 transition-all duration-500 ease-out`} style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
           <div className="relative flex flex-col items-center">
             <img src={spaceshipImg} alt="spaceship" className={`${isLandscape ? "w-14 h-16" : "w-14 h-16 md:w-20 md:h-24"} drop-shadow-[0_0_20px_rgba(0,200,255,0.5)]`} />
-            <div className="absolute -bottom-1 w-4 h-6 md:w-5 md:h-7 animate-flame" style={{ left: "50%", transform: "translateX(-50%)" }}>
+            <div className="absolute -bottom-1 w-4 h-6 md:w-5 md:h-7 animate-flame" style={{ left: "30%", transform: "translateX(-50%)" }}>
               <div className="w-full h-full flex flex-col items-center">
                 <div className="w-1.5 md:w-2 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[1px] opacity-90" />
                 <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-orange-500/80 via-red-500/40 to-transparent blur-sm" />
