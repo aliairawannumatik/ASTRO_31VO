@@ -54,6 +54,13 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; answer?: string } | null>(null);
   const [locked, setLocked] = useState(false);
   const animRef = useRef<number>(0);
+  const [isLandscape, setIsLandscape] = useState(() => window.innerWidth > window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => setIsLandscape(window.innerWidth > window.innerHeight);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const setupMeteors = useCallback((qIndex: number) => {
     const q = questions[qIndex];
