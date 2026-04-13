@@ -43,13 +43,6 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
   const { playExplosion, playCorrect, playLaser, startBgMusic, stopBgMusic } = useAudio();
   const { soundOn } = useSound();
 
-  const [isLandscape, setIsLandscape] = useState(false);
-  useEffect(() => {
-    const check = () => setIsLandscape(window.innerWidth > window.innerHeight && window.innerHeight < 620);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   const [started, setStarted] = useState(false);
   const [currentQ, setCurrentQ] = useState(0);
