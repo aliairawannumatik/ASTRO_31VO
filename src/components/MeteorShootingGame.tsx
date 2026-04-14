@@ -511,7 +511,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         )}
       </div>
 
-      <div className="relative z-20 shrink-0 bg-card/80 backdrop-blur-md border-t border-border px-4 py-2 md:py-4">
+      <div className="relative z-20 shrink-0 bg-card/80 backdrop-blur-md border-t border-border px-4 pt-2 pb-6 md:pt-4 md:pb-6">
         <p className="font-body text-xs md:text-sm text-center text-foreground/90 leading-snug max-w-2xl mx-auto line-clamp-4">
           {q.question}
         </p>
