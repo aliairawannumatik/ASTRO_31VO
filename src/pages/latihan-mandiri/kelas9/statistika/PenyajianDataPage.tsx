@@ -360,6 +360,7 @@ const PenyajianDataPage = () => {
               { name: "Diagram Garis", desc: "Tren data dari waktu ke waktu" },
               { name: "Diagram Lingkaran", desc: "Proporsi dari keseluruhan" },
               { name: "Tabel Frekuensi", desc: "Menyajikan data dalam bentuk tabel" },
+              { name: "Diagram Batang Daun", desc: "Menampilkan data asli secara terurut" },
             ].map(r => (
               <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
                 <div className="text-teal-400 text-[9px] uppercase font-bold mb-0.5">{r.name}</div>
