@@ -327,43 +327,6 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sudut sektor} = \\frac{\\%}{100} \\times 360^\\circ" },
     ],
   }),
-  Qn(8, "Perbandingan Diagram – ANBK", {
-    type: "mixed",
-    content: "Kapan sebaiknya menggunakan jenis-jenis diagram berikut?",
-    parts: [
-      { label: "a.", text: "Diagram batang: digunakan untuk membandingkan apa?" },
-      { label: "b.", text: "Diagram garis: digunakan untuk menampilkan apa?" },
-      { label: "c.", text: "Diagram lingkaran: digunakan untuk menampilkan apa?" },
-    ],
-  }),
-  Qn(9, "Mengubah Persentase ke Derajat – TKA", {
-    type: "mixed",
-    mathContent: "\\text{Sudut} = \\frac{\\%}{100} \\times 360^\\circ",
-    content: "Pengeluaran keluarga: Makanan 40%, Pendidikan 25%, Transportasi 20%, Lainnya 15%.",
-    parts: [
-      { label: "a.", math: "\\text{Sudut Makanan} = \\frac{40}{100} \\times 360^\\circ = \\ldots ^\\circ" },
-      { label: "b.", math: "\\text{Sudut Pendidikan} = \\frac{25}{100} \\times 360^\\circ = \\ldots ^\\circ" },
-      { label: "c.", text: "Verifikasi bahwa jumlah semua sudut = 360°." },
-    ],
-  }),
-  Qn(10, "Data dari Diagram Lingkaran – ANBK", {
-    type: "mixed",
-    content: "Dari diagram lingkaran diketahui sudut untuk masing-masing bagian: A=90°, B=120°, C=72°, D=78°.",
-    parts: [
-      { label: "a.", math: "\\text{Persentase A} = \\frac{90}{360} \\times 100\\% = \\ldots" },
-      { label: "b.", math: "\\text{Persentase B} = \\frac{120}{360} \\times 100\\% = \\ldots" },
-      { label: "c.", text: "Jika total responden 200 orang, berapa orang pada bagian C?" },
-    ],
-  }),
-  Qn(11, "Hubungan Data Nyata – TKA", {
-    type: "mixed",
-    content: "Peneliti mengumpulkan data penjualan es krim dan suhu udara harian selama 7 hari.",
-    parts: [
-      { label: "a.", text: "Jenis diagram apa yang tepat untuk melihat hubungan dua variabel tersebut?" },
-      { label: "b.", text: "Jika suhu naik, bagaimana prediksimu tentang penjualan es krim?" },
-      { label: "c.", text: "Apa nama diagram yang menampilkan pasangan data (x, y) sebagai titik-titik?" },
-    ],
-  }),
 ];
 
 const PenyajianDataPage = () => {
@@ -383,7 +346,7 @@ const PenyajianDataPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 11 Soal</span>
+            <span className="text-teal-400 text-xs font-bold">📋 7 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
