@@ -177,6 +177,36 @@ const DiagramGarisPanen = () => {
   );
 };
 
+const TabelDistribusiIPA = () => {
+  const rows = [["55","3"],["60","5"],["65","8"],["70","6"],["75","4"],["80","2"],["85","2"]];
+  const rowH = 22, headerH = 28, padX = 20, col1W = 90, col2W = 90;
+  const totalW = padX * 2 + col1W + col2W;
+  const totalH = headerH + rows.length * rowH + 16;
+  return (
+    <svg width={totalW} height={totalH} viewBox={`0 0 ${totalW} ${totalH}`} className="mx-auto">
+      <rect x="2" y="2" width={totalW - 4} height={totalH - 4} rx="8" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+      <rect x="2" y="2" width={totalW - 4} height={headerH} rx="8" fill="#0d9488" fillOpacity="0.4" />
+      <rect x="2" y="2" width={totalW - 4} height={headerH - 4} fill="#0d9488" fillOpacity="0.4" />
+      <text x={padX + col1W / 2} y={headerH / 2 + 5} fill="white" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai</text>
+      <line x1={padX + col1W} y1="2" x2={padX + col1W} y2={totalH - 2} stroke="#2dd4bf" strokeWidth="1" />
+      <text x={padX + col1W + col2W / 2} y={headerH / 2 + 5} fill="white" fontSize="10" textAnchor="middle" fontWeight="bold">Frekuensi</text>
+      <line x1="2" y1={headerH} x2={totalW - 2} y2={headerH} stroke="#2dd4bf" strokeWidth="1" />
+      {rows.map(([val, freq], i) => {
+        const y = headerH + i * rowH;
+        const isEven = i % 2 === 0;
+        return (
+          <g key={i}>
+            {isEven && <rect x="3" y={y} width={totalW - 6} height={rowH} fill="white" fillOpacity="0.03" />}
+            <line x1="2" y1={y + rowH} x2={totalW - 2} y2={y + rowH} stroke="#2dd4bf" strokeWidth="0.5" opacity="0.4" />
+            <text x={padX + col1W / 2} y={y + rowH / 2 + 4} fill="white" fontSize="10" textAnchor="middle">{val}</text>
+            <text x={padX + col1W + col2W / 2} y={y + rowH / 2 + 4} fill="white" fontSize="10" textAnchor="middle">{freq}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 const questions: Q[] = [
   Qn(1, "Nilai Tertinggi dan Terendah – Dasar", {
     type: "essay",
@@ -193,7 +223,8 @@ const questions: Q[] = [
   }),
   Qn(3, "Membaca Tabel Distribusi Frekuensi – UN", {
     type: "mixed",
-    content: "Hasil ulangan IPA siswa kelas 9 disajikan pada tabel distribusi frekuensi berikut.\n\nNilai | Frekuensi\n  55  |     3\n  60  |     5\n  65  |     8\n  70  |     6\n  75  |     4\n  80  |     2\n  85  |     2",
+    diagram: <TabelDistribusiIPA />,
+    content: "Hasil ulangan IPA siswa kelas 9 disajikan pada tabel distribusi frekuensi berikut.",
     parts: [
       { label: "a.", text: "Nilai berapakah yang paling banyak diperoleh siswa?" },
       { label: "b.", text: "Berapa banyak siswa yang memperoleh nilai lebih dari 65?" },
