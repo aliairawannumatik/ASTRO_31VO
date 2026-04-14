@@ -283,8 +283,8 @@ const questions: Q[] = [
       { label: "a.", text: "Buatlah tabel distribusi frekuensi dari data di atas!" },
       { label: "b.", text: "Buatlah diagram batang dari data di atas!" },
       { label: "c.", text: "Buatlah diagram garis dari data di atas!" },
-      { label: "d.", text: "Buatlah diagram lingkaran dari data di atas dengan satuan persen!" },
-      { label: "e.", text: "Buatlah diagram lingkaran dari data di atas dengan satuan derajat!" },
+      { label: "d.", text: "Buatlah diagram lingkaran dari data di atas!" },
+      { label: "e.", text: "Buatlah diagram batang-daun dari data di atas!" },
     ],
   }),
   Qn(4, "Membaca Tabel Distribusi Frekuensi – UN", {
