@@ -207,6 +207,55 @@ const TabelDistribusiIPA = () => {
   );
 };
 
+const DiagramBatangPeminjaman = () => {
+  const bars = [
+    { label: "VIII A", value: 80, color: "#0891b2" },
+    { label: "VIII B", value: 95, color: "#06b6d4" },
+    { label: "VIII C", value: 60, color: "#22d3ee" },
+    { label: "VIII D", value: 75, color: "#67e8f9" },
+  ];
+  const x1 = 55, y1 = 20, y2 = 165;
+  const chartH = y2 - y1;
+  const scale = chartH / 100;
+  const groupW = 62.5;
+  const barW = 40;
+  const margin = (groupW - barW) / 2;
+  const gridVals = [0, 20, 40, 60, 80, 100];
+  return (
+    <svg width="320" height="200" viewBox="0 0 320 200" className="mx-auto">
+      <rect x="2" y="2" width="316" height="196" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="160" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Data Peminjaman Buku</text>
+      {gridVals.map(v => {
+        const gy = y2 - v * scale;
+        return (
+          <g key={v}>
+            <line x1={x1} y1={gy} x2={305} y2={gy} stroke="#2dd4bf" strokeWidth="0.4" strokeDasharray="3,3" opacity="0.4" />
+            <line x1={x1 - 4} y1={gy} x2={x1} y2={gy} stroke="#2dd4bf" strokeWidth="1" />
+            <text x={x1 - 6} y={gy + 3} fill="#94a3b8" fontSize="8" textAnchor="end">{v}</text>
+          </g>
+        );
+      })}
+      <line x1={x1} y1={y1} x2={x1} y2={y2} stroke="#2dd4bf" strokeWidth="1.5" />
+      <line x1={x1} y1={y2} x2={305} y2={y2} stroke="#2dd4bf" strokeWidth="1.5" />
+      {bars.map((b, i) => {
+        const bx = x1 + i * groupW + margin;
+        const bh = b.value * scale;
+        const by = y2 - bh;
+        const cx = bx + barW / 2;
+        return (
+          <g key={i}>
+            <rect x={bx} y={by} width={barW} height={bh} fill={b.color} fillOpacity="0.85" rx="3" />
+            <text x={cx} y={by - 3} fill="#e0f2fe" fontSize="8" textAnchor="middle" fontWeight="bold">{b.value}</text>
+            <text x={cx} y={y2 + 10} fill="#94a3b8" fontSize="7.5" textAnchor="middle">{b.label}</text>
+          </g>
+        );
+      })}
+      <text x="160" y="192" fill="#64748b" fontSize="8" textAnchor="middle">Kelas</text>
+      <text x="10" y="100" fill="#64748b" fontSize="8" textAnchor="middle" transform="rotate(-90, 10, 100)">Banyak Siswa</text>
+    </svg>
+  );
+};
+
 const questions: Q[] = [
   Qn(1, "Nilai Tertinggi dan Terendah – Dasar", {
     type: "essay",
@@ -427,6 +476,16 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa sudut untuk sektor Bahasa dalam diagram lingkaran?" },
     ],
   }),
+  Qn(25, "Data Peminjaman Buku – Diagram Batang", {
+    type: "mixed",
+    diagram: <DiagramBatangPeminjaman />,
+    content: "Data peminjaman buku dari setiap kelas VIII adalah sebagai berikut.",
+    parts: [
+      { label: "a.", text: "Kelas mana yang meminjam buku paling banyak?" },
+      { label: "b.", text: "Kelas mana yang meminjam buku paling sedikit?" },
+      { label: "c.", text: "Tentukan selisih banyak siswa yang meminjam buku antara kelas VIII A dan VIII D!" },
+    ],
+  }),
 ];
 
 const PenyajianDataPage = () => {
@@ -446,7 +505,7 @@ const PenyajianDataPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 24 Soal</span>
+            <span className="text-teal-400 text-xs font-bold">📋 25 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
