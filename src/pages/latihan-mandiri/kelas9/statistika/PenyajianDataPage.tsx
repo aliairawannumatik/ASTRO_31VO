@@ -289,7 +289,17 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa banyak siswa yang memperoleh nilai lebih dari 65?" },
     ],
   }),
-  Qn(5, "Distribusi Frekuensi Data Kategori – ANBK", {
+  Qn(5, "Data Peminjaman Buku – Diagram Batang", {
+    type: "mixed",
+    diagram: <DiagramBatangPeminjaman />,
+    content: "Data peminjaman buku dari setiap kelas VIII adalah sebagai berikut.",
+    parts: [
+      { label: "a.", text: "Kelas mana yang meminjam buku paling banyak?" },
+      { label: "b.", text: "Kelas mana yang meminjam buku paling sedikit?" },
+      { label: "c.", text: "Tentukan selisih banyak siswa yang meminjam buku antara kelas VIII A dan VIII D!" },
+    ],
+  }),
+  Qn(6, "Distribusi Frekuensi Data Kategori – ANBK", {
     type: "essay",
     content: "Data berikut merupakan catatan jumlah buku yang dimiliki siswa di suatu kelas.\n2 4 3 2 5 1 3\n3 1 2 4 2 5 4 1 2 4\n4 3 5 1 4 3 5 4 2 3\n1 3 1 4 3 2 2 1 4 2",
     parts: [
@@ -297,7 +307,7 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa banyak siswa yang memiliki lebih dari 3 buku?" },
     ],
   }),
-  Qn(6, "Diagram Batang – UN", {
+  Qn(7, "Diagram Batang – UN", {
     type: "mixed",
     diagram: <DiagramBatang />,
     content: "Perhatikan diagram batang nilai ulangan kelas 9A di atas.",
@@ -307,7 +317,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa persen siswa yang mendapat nilai di atas 70?" },
     ],
   }),
-  Qn(7, "Diagram Lingkaran – ANBK", {
+  Qn(8, "Diagram Lingkaran – ANBK", {
     type: "mixed",
     diagram: <DiagramLingkaran />,
     content: "Diagram lingkaran menunjukkan moda transportasi 200 siswa ke sekolah.",
@@ -317,7 +327,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sudut sektor} = \\frac{\\%}{100} \\times 360^\\circ" },
     ],
   }),
-  Qn(8, "Histogram – TKA", {
+  Qn(9, "Histogram – TKA", {
     type: "mixed",
     diagram: <Histogram />,
     content: "Perhatikan histogram berat badan siswa di atas.",
@@ -327,7 +337,7 @@ const questions: Q[] = [
       { label: "c.", text: "Buat tabel distribusi frekuensi dari histogram tersebut." },
     ],
   }),
-  Qn(9, "Membuat Diagram Batang – TKA", {
+  Qn(10, "Membuat Diagram Batang – TKA", {
     type: "mixed",
     content: "Data jumlah buku yang dibaca siswa per bulan: 1 buku (5 siswa), 2 buku (8 siswa), 3 buku (12 siswa), 4 buku (7 siswa), 5 buku (3 siswa).",
     parts: [
@@ -336,7 +346,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Persen siswa membaca 3 buku} = \\frac{12}{35} \\times 100\\% = \\ldots" },
     ],
   }),
-  Qn(10, "Membuat Diagram Lingkaran – ANBK", {
+  Qn(11, "Membuat Diagram Lingkaran – ANBK", {
     type: "mixed",
     mathContent: "\\text{Besar sudut} = \\frac{f_i}{n} \\times 360^\\circ",
     content: "Hobi siswa kelas 9: Olahraga (12), Musik (8), Membaca (6), Menggambar (4). Total = 30 siswa.",
@@ -346,7 +356,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sudut 'Membaca'} = \\frac{6}{30} \\times 360^\\circ = \\ldots ^\\circ" },
     ],
   }),
-  Qn(11, "Diagram Garis – Hasil Panen Padi", {
+  Qn(12, "Diagram Garis – Hasil Panen Padi", {
     type: "mixed",
     diagram: <DiagramGarisPanen />,
     content: "Perhatikan diagram garis hasil panen padi (ton) di atas.",
@@ -356,7 +366,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bagaimana tren hasil panen dari tahun 2002 hingga 2006?" },
     ],
   }),
-  Qn(12, "Membaca Tabel Distribusi – ANBK", {
+  Qn(13, "Membaca Tabel Distribusi – ANBK", {
     type: "mixed",
     content: "Tabel distribusi frekuensi nilai matematika:\n50–59: f=3, 60–69: f=7, 70–79: f=15, 80–89: f=10, 90–99: f=5. Total n=40.",
     parts: [
@@ -365,7 +375,7 @@ const questions: Q[] = [
       { label: "c.", text: "Kelas interval mana yang memiliki frekuensi terbesar (kelas modus)?" },
     ],
   }),
-  Qn(13, "Sudut Diagram Lingkaran – ANBK", {
+  Qn(14, "Sudut Diagram Lingkaran – ANBK", {
     type: "mixed",
     mathContent: "\\text{Besar sudut} = \\frac{f}{n} \\times 360^\\circ",
     content: "Dari 60 siswa: A (18), B (15), C (12), D (9), E (6). Hitung sudut tiap bagian:",
@@ -375,7 +385,7 @@ const questions: Q[] = [
       { label: "c.", math: "C: \\frac{12}{60} \\times 360^\\circ = \\ldots ^\\circ" },
     ],
   }),
-  Qn(14, "Mengubah Diagram ke Tabel – TKA", {
+  Qn(15, "Mengubah Diagram ke Tabel – TKA", {
     type: "mixed",
     content: "Dari diagram lingkaran diketahui: Sepeda motor = 120°, Mobil = 90°, Angkot = 72°, Sepeda = 48°, Jalan kaki = 30°.",
     parts: [
@@ -384,7 +394,7 @@ const questions: Q[] = [
       { label: "c.", text: "Buat tabel frekuensi dari data diagram lingkaran tersebut." },
     ],
   }),
-  Qn(15, "Stem-and-Leaf Plot – ANBK", {
+  Qn(16, "Stem-and-Leaf Plot – ANBK", {
     type: "mixed",
     content: "Data nilai 20 siswa: 72, 85, 68, 91, 74, 83, 79, 66, 87, 93, 71, 88, 76, 62, 84, 95, 77, 89, 64, 90",
     parts: [
@@ -393,7 +403,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa keunggulan diagram stem-and-leaf dibanding tabel distribusi biasa?" },
     ],
   }),
-  Qn(16, "Membandingkan Dua Kelompok Data – UN", {
+  Qn(17, "Membandingkan Dua Kelompok Data – UN", {
     type: "mixed",
     content: "Nilai matematika kelas A dan B selama 5 ujian:\nKelas A: 70, 75, 80, 78, 82\nKelas B: 65, 72, 85, 90, 68",
     parts: [
@@ -402,7 +412,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa kesimpulan yang dapat diambil dari perbandingan dua kelas tersebut?" },
     ],
   }),
-  Qn(17, "Penyajian Data Kategori – TKA", {
+  Qn(18, "Penyajian Data Kategori – TKA", {
     type: "mixed",
     content: "Warna favorit 50 siswa: Merah (15), Biru (18), Hijau (10), Kuning (7).",
     parts: [
@@ -411,7 +421,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Persen 'Merah'} = \\frac{15}{50} \\times 100\\% = \\ldots \\%" },
     ],
   }),
-  Qn(18, "Membaca Diagram Batang – ANBK", {
+  Qn(19, "Membaca Diagram Batang – ANBK", {
     type: "mixed",
     content: "Diagram batang menunjukkan produksi padi (ton) di 4 desa:\nDesa A=80, Desa B=120, Desa C=95, Desa D=105.",
     parts: [
@@ -420,7 +430,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa persen produksi Desa B dari total produksi?" },
     ],
   }),
-  Qn(19, "Perbandingan Diagram – ANBK", {
+  Qn(20, "Perbandingan Diagram – ANBK", {
     type: "mixed",
     content: "Kapan sebaiknya menggunakan jenis-jenis diagram berikut?",
     parts: [
@@ -429,7 +439,7 @@ const questions: Q[] = [
       { label: "c.", text: "Diagram lingkaran: digunakan untuk menampilkan apa?" },
     ],
   }),
-  Qn(20, "Mengubah Persentase ke Derajat – TKA", {
+  Qn(21, "Mengubah Persentase ke Derajat – TKA", {
     type: "mixed",
     mathContent: "\\text{Sudut} = \\frac{\\%}{100} \\times 360^\\circ",
     content: "Pengeluaran keluarga: Makanan 40%, Pendidikan 25%, Transportasi 20%, Lainnya 15%.",
@@ -439,7 +449,7 @@ const questions: Q[] = [
       { label: "c.", text: "Verifikasi bahwa jumlah semua sudut = 360°." },
     ],
   }),
-  Qn(21, "Data dari Diagram Lingkaran – ANBK", {
+  Qn(22, "Data dari Diagram Lingkaran – ANBK", {
     type: "mixed",
     content: "Dari diagram lingkaran diketahui sudut untuk masing-masing bagian: A=90°, B=120°, C=72°, D=78°.",
     parts: [
@@ -448,7 +458,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika total responden 200 orang, berapa orang pada bagian C?" },
     ],
   }),
-  Qn(22, "Tabel Data Dua Arah – UN", {
+  Qn(23, "Tabel Data Dua Arah – UN", {
     type: "mixed",
     content: "Tabel silang jenis kelamin dan aktivitas olahraga:\n           | Olahraga | Tidak |\n Laki-laki |    18    |  12   |\n Perempuan |    10    |  20   |",
     parts: [
@@ -457,7 +467,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa persen semua siswa yang berolahraga?" },
     ],
   }),
-  Qn(23, "Hubungan Data Nyata – TKA", {
+  Qn(24, "Hubungan Data Nyata – TKA", {
     type: "mixed",
     content: "Peneliti mengumpulkan data penjualan es krim dan suhu udara harian selama 7 hari.",
     parts: [
@@ -466,23 +476,13 @@ const questions: Q[] = [
       { label: "c.", text: "Apa nama diagram yang menampilkan pasangan data (x, y) sebagai titik-titik?" },
     ],
   }),
-  Qn(24, "Soal UN – Membaca Diagram Lingkaran", {
+  Qn(25, "Soal UN – Membaca Diagram Lingkaran", {
     type: "mixed",
     content: "Dari 600 siswa, diagram lingkaran menunjukkan: IPA = 30%, IPS = 25%, Bahasa = 20%, Kejuruan = 15%, Lainnya = 10%.",
     parts: [
       { label: "a.", math: "\\text{Siswa IPA} = 30\\% \\times 600 = \\ldots \\text{ siswa}" },
       { label: "b.", math: "\\text{Siswa IPS} = 25\\% \\times 600 = \\ldots \\text{ siswa}" },
       { label: "c.", text: "Berapa sudut untuk sektor Bahasa dalam diagram lingkaran?" },
-    ],
-  }),
-  Qn(25, "Data Peminjaman Buku – Diagram Batang", {
-    type: "mixed",
-    diagram: <DiagramBatangPeminjaman />,
-    content: "Data peminjaman buku dari setiap kelas VIII adalah sebagai berikut.",
-    parts: [
-      { label: "a.", text: "Kelas mana yang meminjam buku paling banyak?" },
-      { label: "b.", text: "Kelas mana yang meminjam buku paling sedikit?" },
-      { label: "c.", text: "Tentukan selisih banyak siswa yang meminjam buku antara kelas VIII A dan VIII D!" },
     ],
   }),
 ];
