@@ -214,16 +214,16 @@ const DiagramBatangPeminjaman = () => {
     { label: "VIII C", value: 60, color: "#22d3ee" },
     { label: "VIII D", value: 75, color: "#67e8f9" },
   ];
-  const x1 = 55, y1 = 20, y2 = 165;
+  const x1 = 55, y1 = 20, y2 = 210;
   const chartH = y2 - y1;
   const scale = chartH / 100;
   const groupW = 62.5;
   const barW = 40;
   const margin = (groupW - barW) / 2;
-  const gridVals = [0, 20, 40, 60, 80, 100];
+  const gridVals = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
   return (
-    <svg width="320" height="200" viewBox="0 0 320 200" className="mx-auto">
-      <rect x="2" y="2" width="316" height="196" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+    <svg width="320" height="250" viewBox="0 0 320 250" className="mx-auto">
+      <rect x="2" y="2" width="316" height="246" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
       <text x="160" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Data Peminjaman Buku</text>
       {gridVals.map(v => {
         const gy = y2 - v * scale;
@@ -231,7 +231,7 @@ const DiagramBatangPeminjaman = () => {
           <g key={v}>
             <line x1={x1} y1={gy} x2={305} y2={gy} stroke="#2dd4bf" strokeWidth="0.4" strokeDasharray="3,3" opacity="0.4" />
             <line x1={x1 - 4} y1={gy} x2={x1} y2={gy} stroke="#2dd4bf" strokeWidth="1" />
-            <text x={x1 - 6} y={gy + 3} fill="#94a3b8" fontSize="8" textAnchor="end">{v}</text>
+            <text x={x1 - 6} y={gy + 3} fill="#94a3b8" fontSize="7" textAnchor="end">{v}</text>
           </g>
         );
       })}
@@ -245,13 +245,12 @@ const DiagramBatangPeminjaman = () => {
         return (
           <g key={i}>
             <rect x={bx} y={by} width={barW} height={bh} fill={b.color} fillOpacity="0.85" rx="3" />
-            <text x={cx} y={by - 3} fill="#e0f2fe" fontSize="8" textAnchor="middle" fontWeight="bold">{b.value}</text>
-            <text x={cx} y={y2 + 10} fill="#94a3b8" fontSize="7.5" textAnchor="middle">{b.label}</text>
+            <text x={cx} y={y2 + 11} fill="#94a3b8" fontSize="7.5" textAnchor="middle">{b.label}</text>
           </g>
         );
       })}
-      <text x="160" y="192" fill="#64748b" fontSize="8" textAnchor="middle">Kelas</text>
-      <text x="10" y="100" fill="#64748b" fontSize="8" textAnchor="middle" transform="rotate(-90, 10, 100)">Banyak Siswa</text>
+      <text x="160" y="242" fill="#64748b" fontSize="8" textAnchor="middle">Kelas</text>
+      <text x="10" y="115" fill="#64748b" fontSize="8" textAnchor="middle" transform="rotate(-90, 10, 115)">Banyak Siswa</text>
     </svg>
   );
 };
