@@ -42,34 +42,41 @@ const DiagramBatang = () => (
   </svg>
 );
 
-const DiagramLingkaran = () => (
-  <svg width="260" height="180" viewBox="0 0 260 180" className="mx-auto">
-    <rect x="4" y="4" width="252" height="172" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
-    <text x="130" y="18" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Transportasi Siswa</text>
-    <circle cx="100" cy="100" r="60" fill="none" stroke="#0e7490" strokeWidth="1" />
-    {[
-      { start: 0, end: 144, color: "#0e7490", label: "Motor 40%" },
-      { start: 144, end: 252, color: "#0891b2", label: "Angkot 30%" },
-      { start: 252, end: 324, color: "#06b6d4", label: "Sepeda 20%" },
-      { start: 324, end: 360, color: "#22d3ee", label: "Jalan 10%" },
-    ].map((seg, i) => {
-      const startRad = (seg.start - 90) * Math.PI / 180;
-      const endRad = (seg.end - 90) * Math.PI / 180;
-      const x1 = 100 + 60 * Math.cos(startRad);
-      const y1 = 100 + 60 * Math.sin(startRad);
-      const x2 = 100 + 60 * Math.cos(endRad);
-      const y2 = 100 + 60 * Math.sin(endRad);
-      const large = (seg.end - seg.start) > 180 ? 1 : 0;
-      return (
-        <g key={i}>
-          <path d={`M100,100 L${x1},${y1} A60,60 0 ${large},1 ${x2},${y2} Z`} fill={seg.color} fillOpacity="0.8" stroke="#0f172a" strokeWidth="1" />
-          <rect x="175" y={20 + i * 22} width="10" height="10" fill={seg.color} rx="2" />
-          <text x="190" y={30 + i * 22} fill="#e0f2fe" fontSize="8">{seg.label}</text>
-        </g>
-      );
-    })}
-  </svg>
-);
+const DiagramLingkaran = () => {
+  const cx = 110, cy = 108, r = 75, lr = 45;
+  const segs = [
+    { start: 0,   end: 144, color: "#0e7490", line1: "Motor",  line2: "40%" },
+    { start: 144, end: 252, color: "#0891b2", line1: "Angkot", line2: "30%" },
+    { start: 252, end: 324, color: "#06b6d4", line1: "Sepeda", line2: "20%" },
+    { start: 324, end: 360, color: "#22d3ee", line1: "Jalan",  line2: "10%" },
+  ];
+  return (
+    <svg width="220" height="205" viewBox="0 0 220 205" className="mx-auto">
+      <rect x="2" y="2" width="216" height="201" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="110" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Transportasi Siswa</text>
+      {segs.map((seg, i) => {
+        const startRad = (seg.start - 90) * Math.PI / 180;
+        const endRad   = (seg.end   - 90) * Math.PI / 180;
+        const x1 = cx + r * Math.cos(startRad);
+        const y1 = cy + r * Math.sin(startRad);
+        const x2 = cx + r * Math.cos(endRad);
+        const y2 = cy + r * Math.sin(endRad);
+        const large = (seg.end - seg.start) > 180 ? 1 : 0;
+        const midRad = ((seg.start + seg.end) / 2 - 90) * Math.PI / 180;
+        const lx = cx + lr * Math.cos(midRad);
+        const ly = cy + lr * Math.sin(midRad);
+        return (
+          <g key={i}>
+            <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
+              fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
+            <text x={lx} y={ly - 3} fill="white" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="white" fontSize="8" textAnchor="middle">{seg.line2}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
 
 const Histogram = () => (
   <svg width="300" height="180" viewBox="0 0 300 180" className="mx-auto">
