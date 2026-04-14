@@ -262,6 +262,40 @@ const DiagramBatangPeminjaman = () => {
   );
 };
 
+const DiagramBatangDaun = () => {
+  const stems = [
+    { stem: "5", leaves: ["4", "7", "8", "9"] },
+    { stem: "6", leaves: ["2", "5", "6", "8"] },
+    { stem: "7", leaves: ["0", "3", "5", "7", "9"] },
+    { stem: "8", leaves: ["1", "4", "6", "8"] },
+    { stem: "9", leaves: ["0", "2", "5"] },
+  ];
+  const rowH = 24, startY = 58, divX = 58;
+  return (
+    <svg width="280" height="195" viewBox="0 0 280 195" className="mx-auto">
+      <rect x="2" y="2" width="276" height="191" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="140" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ulangan 20 Siswa</text>
+      <rect x="10" y="22" width="260" height="22" rx="4" fill="#0d9488" fillOpacity="0.35" />
+      <text x={divX / 2 + 10} y="37" fill="#e0f2fe" fontSize="9" textAnchor="middle" fontWeight="bold">Batang</text>
+      <text x={divX + 20} y="37" fill="#e0f2fe" fontSize="9" textAnchor="start" fontWeight="bold">Daun</text>
+      <line x1={divX} y1="22" x2={divX} y2={startY + stems.length * rowH - 2} stroke="#2dd4bf" strokeWidth="1" />
+      {stems.map((row, i) => {
+        const y = startY + i * rowH;
+        return (
+          <g key={i}>
+            <rect x="10" y={y - rowH + 4} width="260" height={rowH} fill={i % 2 === 0 ? "#ffffff08" : "transparent"} />
+            <text x={divX - 10} y={y} fill="#22d3ee" fontSize="11" textAnchor="middle" fontWeight="bold">{row.stem}</text>
+            {row.leaves.map((leaf, j) => (
+              <text key={j} x={divX + 14 + j * 20} y={y} fill="#e0f2fe" fontSize="11">{leaf}</text>
+            ))}
+          </g>
+        );
+      })}
+      <text x="140" y={startY + stems.length * rowH + 12} fill="#64748b" fontSize="8" textAnchor="middle">Ket: 5 | 4 artinya nilai 54</text>
+    </svg>
+  );
+};
+
 const questions: Q[] = [
   Qn(1, "Nilai Tertinggi dan Terendah – Dasar", {
     type: "essay",
@@ -327,6 +361,16 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sudut sektor} = \\frac{\\%}{100} \\times 360^\\circ" },
     ],
   }),
+  Qn(8, "Membaca Diagram Batang Daun – UN", {
+    type: "mixed",
+    diagram: <DiagramBatangDaun />,
+    content: "Perhatikan diagram batang daun nilai ulangan 20 siswa berikut.",
+    parts: [
+      { label: "a.", text: "Berapa banyak siswa yang mendapat nilai 70-an?" },
+      { label: "b.", text: "Tentukan nilai tertinggi dan nilai terendah dari data tersebut!" },
+      { label: "c.", text: "Berapa banyak siswa yang mendapat nilai di atas 80?" },
+    ],
+  }),
 ];
 
 const PenyajianDataPage = () => {
@@ -346,7 +390,7 @@ const PenyajianDataPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 7 Soal</span>
+            <span className="text-teal-400 text-xs font-bold">📋 8 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
