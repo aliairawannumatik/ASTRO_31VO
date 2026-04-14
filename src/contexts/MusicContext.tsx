@@ -14,7 +14,7 @@ interface MusicContextType {
 const MusicContext = createContext<MusicContextType | undefined>(undefined);
 
 const ALL_IDS = [...TRACKS.map(t => t.id), ...MP3_TRACKS.map(t => t.id)];
-const DEFAULT_TRACK = MP3_TRACKS[0].id;
+const DEFAULT_TRACK = "mp3-dreams";
 
 const isMp3Id = (id: string) => id.startsWith("mp3-");
 

@@ -115,7 +115,7 @@ const FontContext = createContext<FontContextType | undefined>(undefined);
 export const FontProvider = ({ children }: { children: ReactNode }) => {
   const [fontKey, setFontKey] = useState<FontKey>(() => {
     const saved = localStorage.getItem("numatik-font");
-    return (saved as FontKey) || "space-classic";
+    return (saved as FontKey) || "nunito";
   });
 
   const currentFont = FONT_OPTIONS.find(f => f.key === fontKey) || FONT_OPTIONS[0];
