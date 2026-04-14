@@ -184,40 +184,6 @@ const DiagramGarisPanen = () => {
   );
 };
 
-const DiagramLingkaranABCDE = () => {
-  const segs = [
-    { start: 0,   end: 108, color: "#0e7490", label: "A – 30%" },
-    { start: 108, end: 198, color: "#0891b2", label: "B – 25%" },
-    { start: 198, end: 270, color: "#06b6d4", label: "C – 20%" },
-    { start: 270, end: 324, color: "#22d3ee", label: "D – 15%" },
-    { start: 324, end: 360, color: "#67e8f9", label: "E – 10%" },
-  ];
-  const cx = 90, cy = 100, r = 65;
-  return (
-    <svg width="260" height="200" viewBox="0 0 260 200" className="mx-auto">
-      <rect x="2" y="2" width="256" height="196" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
-      <text x="130" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Distribusi 60 Siswa</text>
-      {segs.map((seg, i) => {
-        const startRad = (seg.start - 90) * Math.PI / 180;
-        const endRad   = (seg.end   - 90) * Math.PI / 180;
-        const x1 = cx + r * Math.cos(startRad);
-        const y1 = cy + r * Math.sin(startRad);
-        const x2 = cx + r * Math.cos(endRad);
-        const y2 = cy + r * Math.sin(endRad);
-        const large = (seg.end - seg.start) > 180 ? 1 : 0;
-        return (
-          <g key={i}>
-            <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
-              fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <rect x="175" y={22 + i * 34} width="11" height="11" fill={seg.color} rx="2" />
-            <text x="191" y={32 + i * 34} fill="#e0f2fe" fontSize="9">{seg.label}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-};
-
 const TabelDistribusiIPA = () => {
   const rows = [["55","3"],["60","5"],["65","8"],["70","6"],["75","4"],["80","2"],["85","2"]];
   const rowH = 22, headerH = 28, padX = 20, col1W = 90, col2W = 90;
@@ -370,73 +336,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sudut sektor} = \\frac{\\%}{100} \\times 360^\\circ" },
     ],
   }),
-  Qn(9, "Membuat Diagram Lingkaran – ANBK", {
-    type: "mixed",
-    mathContent: "\\text{Besar sudut} = \\frac{f_i}{n} \\times 360^\\circ",
-    content: "Hobi siswa kelas 9: Olahraga (12), Musik (8), Membaca (6), Menggambar (4). Total = 30 siswa.",
-    parts: [
-      { label: "a.", math: "\\text{Sudut 'Olahraga'} = \\frac{12}{30} \\times 360^\\circ = \\ldots ^\\circ" },
-      { label: "b.", math: "\\text{Sudut 'Musik'} = \\frac{8}{30} \\times 360^\\circ = \\ldots ^\\circ" },
-      { label: "c.", math: "\\text{Sudut 'Membaca'} = \\frac{6}{30} \\times 360^\\circ = \\ldots ^\\circ" },
-    ],
-  }),
-  Qn(10, "Sudut Diagram Lingkaran – ANBK", {
-    type: "mixed",
-    diagram: <DiagramLingkaranABCDE />,
-    mathContent: "\\text{Besar sudut} = \\frac{f}{n} \\times 360^\\circ",
-    content: "Dari 60 siswa: A (18), B (15), C (12), D (9), E (6). Hitung sudut tiap bagian:",
-    parts: [
-      { label: "a.", math: "A: \\frac{18}{60} \\times 360^\\circ = \\ldots ^\\circ" },
-      { label: "b.", math: "B: \\frac{15}{60} \\times 360^\\circ = \\ldots ^\\circ" },
-      { label: "c.", math: "C: \\frac{12}{60} \\times 360^\\circ = \\ldots ^\\circ" },
-    ],
-  }),
-  Qn(11, "Mengubah Diagram ke Tabel – TKA", {
-    type: "mixed",
-    content: "Dari diagram lingkaran diketahui: Sepeda motor = 120°, Mobil = 90°, Angkot = 72°, Sepeda = 48°, Jalan kaki = 30°.",
-    parts: [
-      { label: "a.", math: "\\text{Jika total 360 siswa, persentase sepeda motor} = \\frac{120}{360} \\times 100\\% = \\ldots" },
-      { label: "b.", text: "Berapa siswa yang menggunakan mobil?" },
-      { label: "c.", text: "Buat tabel frekuensi dari data diagram lingkaran tersebut." },
-    ],
-  }),
-  Qn(12, "Stem-and-Leaf Plot – ANBK", {
-    type: "mixed",
-    content: "Data nilai 20 siswa: 72, 85, 68, 91, 74, 83, 79, 66, 87, 93, 71, 88, 76, 62, 84, 95, 77, 89, 64, 90",
-    parts: [
-      { label: "a.", text: "Buat diagram stem-and-leaf (batang daun) dari data tersebut." },
-      { label: "b.", text: "Berapa banyak siswa yang mendapat nilai 70-an?" },
-      { label: "c.", text: "Apa keunggulan diagram stem-and-leaf dibanding tabel distribusi biasa?" },
-    ],
-  }),
-  Qn(13, "Membandingkan Dua Kelompok Data – UN", {
-    type: "mixed",
-    content: "Nilai matematika kelas A dan B selama 5 ujian:\nKelas A: 70, 75, 80, 78, 82\nKelas B: 65, 72, 85, 90, 68",
-    parts: [
-      { label: "a.", text: "Buat diagram garis untuk kedua kelas dalam satu grafik." },
-      { label: "b.", text: "Kelas mana yang memiliki nilai lebih stabil (konsisten)?" },
-      { label: "c.", text: "Apa kesimpulan yang dapat diambil dari perbandingan dua kelas tersebut?" },
-    ],
-  }),
-  Qn(14, "Penyajian Data Kategori – TKA", {
-    type: "mixed",
-    content: "Warna favorit 50 siswa: Merah (15), Biru (18), Hijau (10), Kuning (7).",
-    parts: [
-      { label: "a.", math: "\\text{Sudut 'Biru'} = \\frac{18}{50} \\times 360^\\circ = \\ldots ^\\circ" },
-      { label: "b.", text: "Jenis diagram apa yang paling tepat untuk data ini: batang, lingkaran, atau garis?" },
-      { label: "c.", math: "\\text{Persen 'Merah'} = \\frac{15}{50} \\times 100\\% = \\ldots \\%" },
-    ],
-  }),
-  Qn(15, "Membaca Diagram Batang – ANBK", {
-    type: "mixed",
-    content: "Diagram batang menunjukkan produksi padi (ton) di 4 desa:\nDesa A=80, Desa B=120, Desa C=95, Desa D=105.",
-    parts: [
-      { label: "a.", text: "Desa mana yang produksi padinya tertinggi?" },
-      { label: "b.", math: "\\text{Rata-rata produksi} = \\frac{80+120+95+105}{4} = \\ldots \\text{ ton}" },
-      { label: "c.", text: "Berapa persen produksi Desa B dari total produksi?" },
-    ],
-  }),
-  Qn(16, "Perbandingan Diagram – ANBK", {
+  Qn(9, "Perbandingan Diagram – ANBK", {
     type: "mixed",
     content: "Kapan sebaiknya menggunakan jenis-jenis diagram berikut?",
     parts: [
@@ -445,7 +345,7 @@ const questions: Q[] = [
       { label: "c.", text: "Diagram lingkaran: digunakan untuk menampilkan apa?" },
     ],
   }),
-  Qn(17, "Mengubah Persentase ke Derajat – TKA", {
+  Qn(10, "Mengubah Persentase ke Derajat – TKA", {
     type: "mixed",
     mathContent: "\\text{Sudut} = \\frac{\\%}{100} \\times 360^\\circ",
     content: "Pengeluaran keluarga: Makanan 40%, Pendidikan 25%, Transportasi 20%, Lainnya 15%.",
@@ -455,7 +355,7 @@ const questions: Q[] = [
       { label: "c.", text: "Verifikasi bahwa jumlah semua sudut = 360°." },
     ],
   }),
-  Qn(18, "Data dari Diagram Lingkaran – ANBK", {
+  Qn(11, "Data dari Diagram Lingkaran – ANBK", {
     type: "mixed",
     content: "Dari diagram lingkaran diketahui sudut untuk masing-masing bagian: A=90°, B=120°, C=72°, D=78°.",
     parts: [
@@ -464,7 +364,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika total responden 200 orang, berapa orang pada bagian C?" },
     ],
   }),
-  Qn(19, "Hubungan Data Nyata – TKA", {
+  Qn(12, "Hubungan Data Nyata – TKA", {
     type: "mixed",
     content: "Peneliti mengumpulkan data penjualan es krim dan suhu udara harian selama 7 hari.",
     parts: [
@@ -492,7 +392,7 @@ const PenyajianDataPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 19 Soal</span>
+            <span className="text-teal-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
