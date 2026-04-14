@@ -69,7 +69,8 @@ const DiagramLingkaran = () => {
           <g key={i}>
             <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
               fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <text x={lx} y={ly + 3} fill="white" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly - 3} fill="white" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="white" fontSize="8" textAnchor="middle">{seg.line2}</text>
           </g>
         );
       })}
