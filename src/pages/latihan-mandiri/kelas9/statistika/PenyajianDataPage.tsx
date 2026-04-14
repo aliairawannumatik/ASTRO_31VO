@@ -269,16 +269,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak nilai yang lebih dari 80?" },
     ],
   }),
-  Qn(3, "Membaca Tabel Distribusi Frekuensi – UN", {
-    type: "mixed",
-    diagram: <TabelDistribusiIPA />,
-    content: "Hasil ulangan IPA siswa kelas 9 disajikan pada tabel distribusi frekuensi berikut.",
-    parts: [
-      { label: "a.", text: "Nilai berapakah yang paling banyak diperoleh siswa?" },
-      { label: "b.", text: "Berapa banyak siswa yang memperoleh nilai lebih dari 65?" },
-    ],
-  }),
-  Qn(4, "Membuat Tabel Distribusi Frekuensi – TKA", {
+  Qn(3, "Membuat Tabel Distribusi Frekuensi – TKA", {
     type: "essay",
     content: "Data nilai ujian matematika sekelompok siswa adalah sebagai berikut:\n65 80 70 90 75 85 70 95 80 65\n75 85 70 80 60 70 90 75 80 65\n90 95 65 85 70 75 80 60 65 75",
     parts: [
@@ -287,6 +278,15 @@ const questions: Q[] = [
       { label: "c.", text: "Buatlah diagram garis dari data di atas!" },
       { label: "d.", text: "Buatlah diagram lingkaran dari data di atas dengan satuan persen!" },
       { label: "e.", text: "Buatlah diagram lingkaran dari data di atas dengan satuan derajat!" },
+    ],
+  }),
+  Qn(4, "Membaca Tabel Distribusi Frekuensi – UN", {
+    type: "mixed",
+    diagram: <TabelDistribusiIPA />,
+    content: "Hasil ulangan IPA siswa kelas 9 disajikan pada tabel distribusi frekuensi berikut.",
+    parts: [
+      { label: "a.", text: "Nilai berapakah yang paling banyak diperoleh siswa?" },
+      { label: "b.", text: "Berapa banyak siswa yang memperoleh nilai lebih dari 65?" },
     ],
   }),
   Qn(5, "Distribusi Frekuensi Data Kategori – ANBK", {
