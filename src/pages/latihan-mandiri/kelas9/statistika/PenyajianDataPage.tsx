@@ -46,9 +46,9 @@ const DiagramLingkaran = () => {
   const cx = 110, cy = 108, r = 75, lr = 45;
   const segs = [
     { start: 0,   end: 144, color: "#0e7490", line1: "Motor",  line2: "40%" },
-    { start: 144, end: 252, color: "#0891b2", line1: "Angkot", line2: "30%" },
-    { start: 252, end: 324, color: "#06b6d4", line1: "Sepeda", line2: "20%" },
-    { start: 324, end: 360, color: "#22d3ee", line1: "Jalan",  line2: "10%" },
+    { start: 144, end: 252, color: "#b45309", line1: "Angkot", line2: "30%" },
+    { start: 252, end: 324, color: "#7c3aed", line1: "Sepeda", line2: "20%" },
+    { start: 324, end: 360, color: "#be185d", line1: "Jalan",  line2: "10%" },
   ];
   return (
     <svg width="220" height="205" viewBox="0 0 220 205" className="mx-auto">
