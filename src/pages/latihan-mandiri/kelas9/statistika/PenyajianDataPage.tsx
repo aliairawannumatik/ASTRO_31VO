@@ -267,16 +267,7 @@ const questions: Q[] = [
     type: "essay",
     content: "Hitunglah nilai tertinggi dan terendah dari setiap kelompok data berikut:\na. 3, 6, 5, 7, 7, 9, 6, 8, 10, 4, 12\nb. 6, 8, 5, 9, 3, 7, 4, 6, 8, 11, 9, 7, 5\nc. 45, 42, 36, 51, 47, 44, 50, 41, 38",
   }),
-  Qn(2, "Diagram Batang Daun – UN", {
-    type: "essay",
-    content: "Perhatikan data nilai ujian 36 siswa berikut!\n72 58 84 67 91 75\n63 88 79 55 69 83\n74 96 61 77 85 66\n92 70 81 54 76 89\n73 60 87 95 68 78\n90 64 71 82 57 93",
-    parts: [
-      { label: "a.", text: "Buatlah diagram batang-daun dari data di atas!" },
-      { label: "b.", text: "Tentukan nilai terbesar dan terkecil!" },
-      { label: "c.", text: "Berapa banyak nilai yang lebih dari 80?" },
-    ],
-  }),
-  Qn(3, "Membuat Tabel Distribusi Frekuensi – TKA", {
+  Qn(2, "Membuat Tabel Distribusi Frekuensi – TKA", {
     type: "essay",
     content: "Data nilai ujian matematika sekelompok siswa adalah sebagai berikut:\n65 80 70 90 75 85 70 95 80 65\n75 85 70 80 60 70 90 75 80 65\n90 95 65 85 70 75 80 60 65 75",
     parts: [
@@ -287,7 +278,7 @@ const questions: Q[] = [
       { label: "e.", text: "Buatlah diagram batang-daun dari data di atas!" },
     ],
   }),
-  Qn(4, "Membaca Tabel Distribusi Frekuensi – UN", {
+  Qn(3, "Membaca Tabel Distribusi Frekuensi – UN", {
     type: "mixed",
     diagram: <TabelDistribusiIPA />,
     content: "Hasil ulangan IPA siswa kelas 9 disajikan pada tabel distribusi frekuensi berikut.",
@@ -296,7 +287,7 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa banyak siswa yang memperoleh nilai lebih dari 65?" },
     ],
   }),
-  Qn(5, "Data Peminjaman Buku – Diagram Batang", {
+  Qn(4, "Data Peminjaman Buku – Diagram Batang", {
     type: "mixed",
     diagram: <DiagramBatangPeminjaman />,
     content: "Data peminjaman buku dari setiap kelas VIII adalah sebagai berikut.",
@@ -306,7 +297,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan selisih banyak siswa yang meminjam buku antara kelas VIII A dan VIII D!" },
     ],
   }),
-  Qn(6, "Diagram Garis – Hasil Panen Padi", {
+  Qn(5, "Diagram Garis – Hasil Panen Padi", {
     type: "mixed",
     diagram: <DiagramGarisPanen />,
     content: "Perhatikan diagram garis hasil panen padi (ton) di atas.",
@@ -316,7 +307,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bagaimana tren hasil panen dari tahun 2002 hingga 2006?" },
     ],
   }),
-  Qn(7, "Diagram Batang – UN", {
+  Qn(6, "Diagram Batang – UN", {
     type: "mixed",
     diagram: <DiagramBatang />,
     content: "Perhatikan diagram batang nilai ulangan kelas 9A di atas.",
@@ -326,7 +317,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa persen siswa yang mendapat nilai di atas 70?" },
     ],
   }),
-  Qn(8, "Diagram Lingkaran – ANBK", {
+  Qn(7, "Diagram Lingkaran – ANBK", {
     type: "mixed",
     diagram: <DiagramLingkaran />,
     content: "Diagram lingkaran menunjukkan moda transportasi 200 siswa ke sekolah.",
@@ -336,7 +327,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sudut sektor} = \\frac{\\%}{100} \\times 360^\\circ" },
     ],
   }),
-  Qn(9, "Perbandingan Diagram – ANBK", {
+  Qn(8, "Perbandingan Diagram – ANBK", {
     type: "mixed",
     content: "Kapan sebaiknya menggunakan jenis-jenis diagram berikut?",
     parts: [
@@ -345,7 +336,7 @@ const questions: Q[] = [
       { label: "c.", text: "Diagram lingkaran: digunakan untuk menampilkan apa?" },
     ],
   }),
-  Qn(10, "Mengubah Persentase ke Derajat – TKA", {
+  Qn(9, "Mengubah Persentase ke Derajat – TKA", {
     type: "mixed",
     mathContent: "\\text{Sudut} = \\frac{\\%}{100} \\times 360^\\circ",
     content: "Pengeluaran keluarga: Makanan 40%, Pendidikan 25%, Transportasi 20%, Lainnya 15%.",
@@ -355,7 +346,7 @@ const questions: Q[] = [
       { label: "c.", text: "Verifikasi bahwa jumlah semua sudut = 360°." },
     ],
   }),
-  Qn(11, "Data dari Diagram Lingkaran – ANBK", {
+  Qn(10, "Data dari Diagram Lingkaran – ANBK", {
     type: "mixed",
     content: "Dari diagram lingkaran diketahui sudut untuk masing-masing bagian: A=90°, B=120°, C=72°, D=78°.",
     parts: [
@@ -364,7 +355,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika total responden 200 orang, berapa orang pada bagian C?" },
     ],
   }),
-  Qn(12, "Hubungan Data Nyata – TKA", {
+  Qn(11, "Hubungan Data Nyata – TKA", {
     type: "mixed",
     content: "Peneliti mengumpulkan data penjualan es krim dan suhu udara harian selama 7 hari.",
     parts: [
@@ -392,7 +383,7 @@ const PenyajianDataPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 12 Soal</span>
+            <span className="text-teal-400 text-xs font-bold">📋 11 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
