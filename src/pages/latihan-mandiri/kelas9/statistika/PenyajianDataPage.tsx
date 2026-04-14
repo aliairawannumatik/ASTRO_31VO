@@ -232,7 +232,7 @@ const questions: Q[] = [
   }),
   Qn(12, "Diagram Garis – Hasil Panen Padi", {
     type: "mixed",
-    diagram: <img src="/Picture1_1776145490530.png" alt="Diagram Garis Hasil Panen Padi" className="mx-auto max-w-full rounded-lg" />,
+    diagram: <img src="/Picture1_1776145490530.png" alt="Diagram Garis Hasil Panen Padi" className="mx-auto rounded-lg" style={{ maxWidth: "220px" }} />,
     content: "Perhatikan diagram garis hasil panen padi (ton) di atas.",
     parts: [
       { label: "a.", text: "Hasil panen pada tahun 2005 adalah … ton" },
