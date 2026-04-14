@@ -235,7 +235,10 @@ const questions: Q[] = [
     content: "Data nilai ujian matematika sekelompok siswa adalah sebagai berikut:\n65 80 70 90 75 85 70 95 80 65\n75 85 70 80 60 70 90 75 80 65\n90 95 65 85 70 75 80 60 65 75",
     parts: [
       { label: "a.", text: "Buatlah tabel distribusi frekuensi dari data di atas!" },
-      { label: "b.", text: "Berapa banyak siswa yang memperoleh nilai kurang dari 75?" },
+      { label: "b.", text: "Buatlah diagram batang dari data di atas!" },
+      { label: "c.", text: "Buatlah diagram garis dari data di atas!" },
+      { label: "d.", text: "Buatlah diagram lingkaran dari data di atas dengan satuan persen!" },
+      { label: "e.", text: "Buatlah diagram lingkaran dari data di atas dengan satuan derajat!" },
     ],
   }),
   Qn(5, "Distribusi Frekuensi Data Kategori – ANBK", {
