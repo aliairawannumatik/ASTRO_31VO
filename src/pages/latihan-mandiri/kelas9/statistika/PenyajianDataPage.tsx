@@ -135,7 +135,7 @@ const PoligonFrekuensi = () => (
 );
 
 const DiagramGarisPanen = () => {
-  const pts: [number, number][] = [[65,125],[110,95],[155,125],[200,65],[245,47]];
+  const pts: [number, number][] = [[65,125],[110,95],[155,125],[200,74],[245,47]];
   const years = ["2002","2003","2004","2005","2006"];
   const yVals = [10,20,30,40,50];
   return (
