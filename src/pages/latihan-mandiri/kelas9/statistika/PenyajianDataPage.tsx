@@ -134,6 +134,49 @@ const PoligonFrekuensi = () => (
   </svg>
 );
 
+const DiagramGarisPanen = () => {
+  const pts: [number, number][] = [[65,125],[110,95],[155,125],[200,65],[245,47]];
+  const years = ["2002","2003","2004","2005","2006"];
+  const yVals = [10,20,30,40,50];
+  return (
+    <svg width="260" height="190" viewBox="0 0 260 190" className="mx-auto">
+      <rect x="4" y="4" width="252" height="182" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+      <line x1="42" y1="20" x2="42" y2="155" stroke="white" strokeWidth="1.5" />
+      <line x1="42" y1="155" x2="255" y2="155" stroke="white" strokeWidth="1.5" />
+      <line x1="255" y1="155" x2="261" y2="155" stroke="white" strokeWidth="2" markerEnd="url(#arrowX)" />
+      {yVals.map((v, i) => {
+        const y = 155 - i * 27;
+        return (
+          <g key={v}>
+            <line x1="39" y1={y} x2="42" y2={y} stroke="white" strokeWidth="1" />
+            <text x="36" y={y + 4} fill="white" fontSize="8" textAnchor="end">{v}</text>
+            <line x1="42" y1={y} x2="250" y2={y} stroke="white" strokeWidth="0.4" strokeDasharray="3,3" opacity="0.4" />
+          </g>
+        );
+      })}
+      {years.map((yr, i) => {
+        const x = pts[i][0];
+        return (
+          <g key={yr}>
+            <line x1={x} y1="155" x2={x} y2="158" stroke="white" strokeWidth="1" />
+            <text x={x} y="172" fill="white" fontSize="7.5" textAnchor="middle" transform={`rotate(-45, ${x}, 172)`}>{yr}</text>
+          </g>
+        );
+      })}
+      {pts.map(([x,y], i, arr) => {
+        if (i === 0) return null;
+        const [px, py] = arr[i-1];
+        return <line key={i} x1={px} y1={py} x2={x} y2={y} stroke="#22d3ee" strokeWidth="2" />;
+      })}
+      {pts.map(([x,y], i) => (
+        <circle key={i} cx={x} cy={y} r="3.5" fill="#22d3ee" stroke="white" strokeWidth="1" />
+      ))}
+      <text x="22" y="90" fill="white" fontSize="7" textAnchor="middle" transform="rotate(-90, 22, 90)">Hasil Panen Padi (ton)</text>
+      <text x="255" y="150" fill="white" fontSize="7.5" textAnchor="start">Tahun</text>
+    </svg>
+  );
+};
+
 const questions: Q[] = [
   Qn(1, "Nilai Tertinggi dan Terendah – Dasar", {
     type: "essay",
@@ -232,7 +275,7 @@ const questions: Q[] = [
   }),
   Qn(12, "Diagram Garis – Hasil Panen Padi", {
     type: "mixed",
-    diagram: <img src="/Picture1_1776145490530.png" alt="Diagram Garis Hasil Panen Padi" className="mx-auto rounded-lg" style={{ maxWidth: "220px" }} />,
+    diagram: <DiagramGarisPanen />,
     content: "Perhatikan diagram garis hasil panen padi (ton) di atas.",
     parts: [
       { label: "a.", text: "Hasil panen pada tahun 2005 adalah … ton" },
