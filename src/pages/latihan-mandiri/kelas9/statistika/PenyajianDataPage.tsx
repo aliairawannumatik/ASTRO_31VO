@@ -358,7 +358,6 @@ const questions: Q[] = [
     parts: [
       { label: "a.", text: "Berapa siswa yang menggunakan motor?" },
       { label: "b.", text: "Berapa derajat sudut sektor untuk 'Angkot 30%'?" },
-      { label: "c.", math: "\\text{Sudut sektor} = \\frac{\\%}{100} \\times 360^\\circ" },
     ],
   }),
   Qn(8, "Membaca Diagram Batang Daun – UN", {
