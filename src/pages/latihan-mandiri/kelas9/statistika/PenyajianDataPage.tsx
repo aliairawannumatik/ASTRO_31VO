@@ -138,11 +138,6 @@ const questions: Q[] = [
   Qn(1, "Nilai Tertinggi dan Terendah – Dasar", {
     type: "essay",
     content: "Hitunglah nilai tertinggi dan terendah dari setiap kelompok data berikut:\na. 3, 6, 5, 7, 7, 9, 6, 8, 10, 4, 12\nb. 6, 8, 5, 9, 3, 7, 4, 6, 8, 11, 9, 7, 5\nc. 45, 42, 36, 51, 47, 44, 50, 41, 38",
-    parts: [
-      { label: "a.", text: "Tentukan nilai tertinggi dan terendah dari data (a)." },
-      { label: "b.", text: "Tentukan nilai tertinggi dan terendah dari data (b)." },
-      { label: "c.", text: "Tentukan nilai tertinggi dan terendah dari data (c)." },
-    ],
   }),
   Qn(2, "Diagram Batang Daun – UN", {
     type: "essay",
