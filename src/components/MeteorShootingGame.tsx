@@ -443,7 +443,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         {backLabel}
       </button>
 
-      <div className={`relative z-20 shrink-0 flex flex-col items-center px-4 ${isLandscape ? "pt-4" : "pt-10 md:pt-14"} pb-1`}>
+      <div className={`relative z-20 shrink-0 flex flex-col items-center px-4 ${isLandscape ? "pt-4" : "pt-8 md:pt-14"} pb-1`}>
         <div className="font-display text-xs text-muted-foreground mb-0.5">
           SOAL {currentQ + 1}/{questions.length}
         </div>
@@ -453,7 +453,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
       </div>
 
       <div className="relative flex-1 min-h-0">
-        <div className={`absolute ${isLandscape ? "top-[1%] h-[28%]" : "top-[3%] h-[45%]"} left-0 right-0 z-10`}>
+        <div className={`absolute ${isLandscape ? "top-[1%] h-[28%]" : "top-[1%] h-[38%]"} left-0 right-0 z-10`}>
           {meteors.map((m) => (
             <button key={m.id} onClick={() => handleMeteorClick(m)} disabled={m.hit || locked}
               className="absolute transition-all duration-500 cursor-pointer disabled:cursor-default"
@@ -478,7 +478,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
 
         {laser && laser.active && (
           <div className="absolute z-10 pointer-events-none" style={{
-            left: `${laser.fromX}%`, bottom: "20%", transform: "translateX(-50%)",
+            left: `${laser.fromX}%`, bottom: isLandscape ? "12%" : "27%", transform: "translateX(-50%)",
             height: `${laser.progress * 80}%`, width: 12,
             background: "linear-gradient(to top, hsl(50, 100%, 60%), hsl(50, 100%, 85%), hsl(50, 100%, 90%, 0.4))",
             boxShadow: "0 0 20px hsl(50, 100%, 60%), 0 0 40px hsl(50, 100%, 55%), 0 0 60px hsl(50, 100%, 50%, 0.4)",
@@ -486,7 +486,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
           }} />
         )}
 
-        <div className={`absolute ${isLandscape ? "bottom-[2%]" : "bottom-[18%]"} z-20 transition-all duration-500 ease-out`} style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
+        <div className={`absolute ${isLandscape ? "bottom-[2%]" : "bottom-[24%]"} z-20 transition-all duration-500 ease-out`} style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
           <div className="relative flex flex-col items-center">
             <img src={spaceshipImg} alt="spaceship" className={`${isLandscape ? "w-14 h-16" : "w-14 h-16 md:w-20 md:h-24"} drop-shadow-[0_0_20px_rgba(0,200,255,0.5)]`} />
             <div className="absolute -bottom-1 w-4 h-6 md:w-5 md:h-7 animate-flame" style={{ left: "30%", transform: "translateX(-50%)" }}>
@@ -511,8 +511,8 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         )}
       </div>
 
-      <div className="relative z-20 shrink-0 bg-card/80 backdrop-blur-md border-t border-border px-4 py-3 md:py-4">
-        <p className="font-body text-xs md:text-sm text-center text-foreground/90 leading-relaxed max-w-2xl mx-auto">
+      <div className="relative z-20 shrink-0 bg-card/80 backdrop-blur-md border-t border-border px-4 py-2 md:py-4">
+        <p className="font-body text-xs md:text-sm text-center text-foreground/90 leading-snug max-w-2xl mx-auto line-clamp-4">
           {q.question}
         </p>
       </div>
