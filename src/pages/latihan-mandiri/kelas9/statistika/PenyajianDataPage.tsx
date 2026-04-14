@@ -299,7 +299,17 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan selisih banyak siswa yang meminjam buku antara kelas VIII A dan VIII D!" },
     ],
   }),
-  Qn(6, "Distribusi Frekuensi Data Kategori – ANBK", {
+  Qn(6, "Diagram Garis – Hasil Panen Padi", {
+    type: "mixed",
+    diagram: <DiagramGarisPanen />,
+    content: "Perhatikan diagram garis hasil panen padi (ton) di atas.",
+    parts: [
+      { label: "a.", text: "Hasil panen pada tahun 2005 adalah … ton" },
+      { label: "b.", text: "Pada tahun berapa hasil panen mencapai nilai tertinggi?" },
+      { label: "c.", text: "Bagaimana tren hasil panen dari tahun 2002 hingga 2006?" },
+    ],
+  }),
+  Qn(7, "Distribusi Frekuensi Data Kategori – ANBK", {
     type: "essay",
     content: "Data berikut merupakan catatan jumlah buku yang dimiliki siswa di suatu kelas.\n2 4 3 2 5 1 3\n3 1 2 4 2 5 4 1 2 4\n4 3 5 1 4 3 5 4 2 3\n1 3 1 4 3 2 2 1 4 2",
     parts: [
@@ -307,7 +317,7 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa banyak siswa yang memiliki lebih dari 3 buku?" },
     ],
   }),
-  Qn(7, "Diagram Batang – UN", {
+  Qn(8, "Diagram Batang – UN", {
     type: "mixed",
     diagram: <DiagramBatang />,
     content: "Perhatikan diagram batang nilai ulangan kelas 9A di atas.",
@@ -317,7 +327,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa persen siswa yang mendapat nilai di atas 70?" },
     ],
   }),
-  Qn(8, "Diagram Lingkaran – ANBK", {
+  Qn(9, "Diagram Lingkaran – ANBK", {
     type: "mixed",
     diagram: <DiagramLingkaran />,
     content: "Diagram lingkaran menunjukkan moda transportasi 200 siswa ke sekolah.",
@@ -327,7 +337,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sudut sektor} = \\frac{\\%}{100} \\times 360^\\circ" },
     ],
   }),
-  Qn(9, "Histogram – TKA", {
+  Qn(10, "Histogram – TKA", {
     type: "mixed",
     diagram: <Histogram />,
     content: "Perhatikan histogram berat badan siswa di atas.",
@@ -337,7 +347,7 @@ const questions: Q[] = [
       { label: "c.", text: "Buat tabel distribusi frekuensi dari histogram tersebut." },
     ],
   }),
-  Qn(10, "Membuat Diagram Batang – TKA", {
+  Qn(11, "Membuat Diagram Batang – TKA", {
     type: "mixed",
     content: "Data jumlah buku yang dibaca siswa per bulan: 1 buku (5 siswa), 2 buku (8 siswa), 3 buku (12 siswa), 4 buku (7 siswa), 5 buku (3 siswa).",
     parts: [
@@ -346,7 +356,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Persen siswa membaca 3 buku} = \\frac{12}{35} \\times 100\\% = \\ldots" },
     ],
   }),
-  Qn(11, "Membuat Diagram Lingkaran – ANBK", {
+  Qn(12, "Membuat Diagram Lingkaran – ANBK", {
     type: "mixed",
     mathContent: "\\text{Besar sudut} = \\frac{f_i}{n} \\times 360^\\circ",
     content: "Hobi siswa kelas 9: Olahraga (12), Musik (8), Membaca (6), Menggambar (4). Total = 30 siswa.",
@@ -354,16 +364,6 @@ const questions: Q[] = [
       { label: "a.", math: "\\text{Sudut 'Olahraga'} = \\frac{12}{30} \\times 360^\\circ = \\ldots ^\\circ" },
       { label: "b.", math: "\\text{Sudut 'Musik'} = \\frac{8}{30} \\times 360^\\circ = \\ldots ^\\circ" },
       { label: "c.", math: "\\text{Sudut 'Membaca'} = \\frac{6}{30} \\times 360^\\circ = \\ldots ^\\circ" },
-    ],
-  }),
-  Qn(12, "Diagram Garis – Hasil Panen Padi", {
-    type: "mixed",
-    diagram: <DiagramGarisPanen />,
-    content: "Perhatikan diagram garis hasil panen padi (ton) di atas.",
-    parts: [
-      { label: "a.", text: "Hasil panen pada tahun 2005 adalah … ton" },
-      { label: "b.", text: "Pada tahun berapa hasil panen mencapai nilai tertinggi?" },
-      { label: "c.", text: "Bagaimana tren hasil panen dari tahun 2002 hingga 2006?" },
     ],
   }),
   Qn(13, "Membaca Tabel Distribusi – ANBK", {
