@@ -177,6 +177,40 @@ const DiagramGarisPanen = () => {
   );
 };
 
+const DiagramLingkaranABCDE = () => {
+  const segs = [
+    { start: 0,   end: 108, color: "#0e7490", label: "A – 30%" },
+    { start: 108, end: 198, color: "#0891b2", label: "B – 25%" },
+    { start: 198, end: 270, color: "#06b6d4", label: "C – 20%" },
+    { start: 270, end: 324, color: "#22d3ee", label: "D – 15%" },
+    { start: 324, end: 360, color: "#67e8f9", label: "E – 10%" },
+  ];
+  const cx = 90, cy = 100, r = 65;
+  return (
+    <svg width="260" height="200" viewBox="0 0 260 200" className="mx-auto">
+      <rect x="2" y="2" width="256" height="196" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="130" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Distribusi 60 Siswa</text>
+      {segs.map((seg, i) => {
+        const startRad = (seg.start - 90) * Math.PI / 180;
+        const endRad   = (seg.end   - 90) * Math.PI / 180;
+        const x1 = cx + r * Math.cos(startRad);
+        const y1 = cy + r * Math.sin(startRad);
+        const x2 = cx + r * Math.cos(endRad);
+        const y2 = cy + r * Math.sin(endRad);
+        const large = (seg.end - seg.start) > 180 ? 1 : 0;
+        return (
+          <g key={i}>
+            <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
+              fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
+            <rect x="175" y={22 + i * 34} width="11" height="11" fill={seg.color} rx="2" />
+            <text x="191" y={32 + i * 34} fill="#e0f2fe" fontSize="9">{seg.label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 const TabelDistribusiIPA = () => {
   const rows = [["55","3"],["60","5"],["65","8"],["70","6"],["75","4"],["80","2"],["85","2"]];
   const rowH = 22, headerH = 28, padX = 20, col1W = 90, col2W = 90;
@@ -341,6 +375,7 @@ const questions: Q[] = [
   }),
   Qn(10, "Sudut Diagram Lingkaran – ANBK", {
     type: "mixed",
+    diagram: <DiagramLingkaranABCDE />,
     mathContent: "\\text{Besar sudut} = \\frac{f}{n} \\times 360^\\circ",
     content: "Dari 60 siswa: A (18), B (15), C (12), D (9), E (6). Hitung sudut tiap bagian:",
     parts: [
