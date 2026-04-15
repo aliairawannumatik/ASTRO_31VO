@@ -162,25 +162,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel yang menghasilkan tepat satu sisi Angka." },
     ],
   }),
-  Qn(4, "Diagram Pohon – Koin dan Dadu", {
-    type: "mixed",
-    diagram: (
-      <TreeDiagram
-        title="Koin + Dadu"
-        branches={[
-          { label: "A", children: ["(A,1)", "(A,2)", "(A,3)", "(A,4)", "(A,5)", "(A,6)"] },
-          { label: "G", children: ["(G,1)", "(G,2)", "(G,3)", "(G,4)", "(G,5)", "(G,6)"] },
-        ]}
-      />
-    ),
-    content: "Sebuah koin dan sebuah dadu dilempar bersamaan.",
-    parts: [
-      { label: "a.", text: "Tentukan n(S) dari percobaan ini." },
-      { label: "b.", text: "Sebutkan titik sampel dengan sisi Gambar dan angka genap pada dadu." },
-      { label: "c.", text: "Berapa banyak titik sampel yang memuat sisi Angka?" },
-    ],
-  }),
-  Qn(5, "Tabel Ruang Sampel Dua Dadu", {
+  Qn(4, "Tabel Ruang Sampel Dua Dadu", {
     type: "mixed",
     diagram: <DiceGrid />,
     content: "Dua buah dadu dilempar bersamaan. Perhatikan tabel ruang sampel di atas.",
@@ -190,7 +172,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan kedua dadu menunjukkan angka yang sama?" },
     ],
   }),
-  Qn(6, "Dua Dadu – Selisih Tertentu", {
+  Qn(5, "Dua Dadu – Selisih Tertentu", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
     content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan selisih = 2.",
@@ -200,7 +182,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
     ],
   }),
-  Qn(7, "Dua Dadu – Hasil Kali Tertentu", {
+  Qn(6, "Dua Dadu – Hasil Kali Tertentu", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => i*j === 12} />,
     content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan hasil kali = 12.",
@@ -210,7 +192,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
     ],
   }),
-  Qn(8, "Kartu dari 1 sampai 10", {
+  Qn(7, "Kartu dari 1 sampai 10", {
     type: "mixed",
     content: "Sebuah kotak berisi kartu bernomor 1 sampai 10. Satu kartu diambil secara acak.",
     parts: [
@@ -220,7 +202,7 @@ const questions: Q[] = [
       { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
     ],
   }),
-  Qn(9, "Tiga Koin – Diagram Pohon", {
+  Qn(8, "Tiga Koin – Diagram Pohon", {
     type: "mixed",
     diagram: (
       <TreeDiagram
@@ -240,7 +222,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan paling sedikit satu Gambar?" },
     ],
   }),
-  Qn(10, "Kartu Remi – Ruang Sampel", {
+  Qn(9, "Kartu Remi – Ruang Sampel", {
     type: "mixed",
     content: "Satu set kartu remi terdiri dari 52 kartu: 4 jenis (♠ ♥ ♦ ♣), masing-masing 13 nilai (A,2,3,...,10,J,Q,K). Satu kartu diambil.",
     parts: [
@@ -250,13 +232,31 @@ const questions: Q[] = [
       { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
     ],
   }),
-  Qn(11, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
+  Qn(10, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
     type: "mixed",
     content: "Sebuah koin dilempar tiga kali secara berurutan. Catat urutan Angka (A) dan Gambar (G).",
     parts: [
       { label: "a.", math: "n(S) = 2^3 = \\ldots" },
       { label: "b.", text: "Tuliskan semua 8 anggota ruang sampel." },
       { label: "c.", text: "Sebutkan titik sampel dengan jumlah Angka lebih banyak dari Gambar." },
+    ],
+  }),
+  Qn(11, "Diagram Pohon – Koin dan Dadu", {
+    type: "mixed",
+    diagram: (
+      <TreeDiagram
+        title="Koin + Dadu"
+        branches={[
+          { label: "A", children: ["(A,1)", "(A,2)", "(A,3)", "(A,4)", "(A,5)", "(A,6)"] },
+          { label: "G", children: ["(G,1)", "(G,2)", "(G,3)", "(G,4)", "(G,5)", "(G,6)"] },
+        ]}
+      />
+    ),
+    content: "Sebuah koin dan sebuah dadu dilempar bersamaan.",
+    parts: [
+      { label: "a.", text: "Tentukan n(S) dari percobaan ini." },
+      { label: "b.", text: "Sebutkan titik sampel dengan sisi Gambar dan angka genap pada dadu." },
+      { label: "c.", text: "Berapa banyak titik sampel yang memuat sisi Angka?" },
     ],
   }),
   Qn(12, "Tabel – Dadu dan Koin", {
