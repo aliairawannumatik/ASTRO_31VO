@@ -190,17 +190,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan kedua dadu menunjukkan angka yang sama?" },
     ],
   }),
-  Qn(6, "Dua Dadu – Jumlah Tertentu", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i+j === 9} />,
-    content: "Dua dadu dilempar. Sel yang diarsir menunjukkan titik sampel dengan jumlah = 9.",
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah = 9." },
-      { label: "b.", text: "Berapa banyak titik sampel dengan jumlah = 9?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan jumlah ≤ 4?" },
-    ],
-  }),
-  Qn(7, "Dua Dadu – Selisih Tertentu", {
+  Qn(6, "Dua Dadu – Selisih Tertentu", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
     content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan selisih = 2.",
@@ -210,7 +200,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
     ],
   }),
-  Qn(8, "Dua Dadu – Hasil Kali Tertentu", {
+  Qn(7, "Dua Dadu – Hasil Kali Tertentu", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => i*j === 12} />,
     content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan hasil kali = 12.",
@@ -220,7 +210,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
     ],
   }),
-  Qn(9, "Kartu dari 1 sampai 10", {
+  Qn(8, "Kartu dari 1 sampai 10", {
     type: "mixed",
     content: "Sebuah kotak berisi kartu bernomor 1 sampai 10. Satu kartu diambil secara acak.",
     parts: [
@@ -230,7 +220,7 @@ const questions: Q[] = [
       { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
     ],
   }),
-  Qn(10, "Tiga Koin – Diagram Pohon", {
+  Qn(9, "Tiga Koin – Diagram Pohon", {
     type: "mixed",
     diagram: (
       <TreeDiagram
@@ -250,7 +240,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan paling sedikit satu Gambar?" },
     ],
   }),
-  Qn(11, "Kartu Remi – Ruang Sampel", {
+  Qn(10, "Kartu Remi – Ruang Sampel", {
     type: "mixed",
     content: "Satu set kartu remi terdiri dari 52 kartu: 4 jenis (♠ ♥ ♦ ♣), masing-masing 13 nilai (A,2,3,...,10,J,Q,K). Satu kartu diambil.",
     parts: [
@@ -260,7 +250,7 @@ const questions: Q[] = [
       { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
     ],
   }),
-  Qn(12, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
+  Qn(11, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
     type: "mixed",
     content: "Sebuah koin dilempar tiga kali secara berurutan. Catat urutan Angka (A) dan Gambar (G).",
     parts: [
@@ -269,7 +259,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan jumlah Angka lebih banyak dari Gambar." },
     ],
   }),
-  Qn(13, "Tabel – Dadu dan Koin", {
+  Qn(12, "Tabel – Dadu dan Koin", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -292,7 +282,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan dadu prima dan koin Gambar." },
     ],
   }),
-  Qn(14, "Aturan Perkalian – Menghitung n(S)", {
+  Qn(13, "Aturan Perkalian – Menghitung n(S)", {
     type: "mixed",
     content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
     parts: [
@@ -301,7 +291,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
     ],
   }),
-  Qn(15, "Pengambilan Tanpa Pengembalian", {
+  Qn(14, "Pengambilan Tanpa Pengembalian", {
     type: "mixed",
     content: "Kotak berisi 3 bola: Merah (M), Biru (B), Hijau (H). Dua bola diambil satu per satu tanpa pengembalian.",
     diagram: (
@@ -321,7 +311,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
     ],
   }),
-  Qn(16, "Soal TKA – Pengambilan Kelereng", {
+  Qn(15, "Soal TKA – Pengambilan Kelereng", {
     type: "mixed",
     content: "Kantong berisi 4 kelereng: 2 merah (M1, M2) dan 2 putih (P1, P2). Dua kelereng diambil bersamaan.",
     diagram: (
@@ -363,7 +353,7 @@ const RuangSampelPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 16 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
