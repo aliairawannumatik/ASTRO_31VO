@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import heroImage from "@assets/image_1776223164069.png";
+import coinImage from "@assets/image_1776223467875.png";
 
 const RuangSampelPage = () => {
   const navigate = useNavigate();
@@ -149,6 +150,9 @@ const RuangSampelPage = () => {
                 {/* UANG KOIN */}
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🪙 a. Uang Koin</p>
+                  <div className="flex justify-center">
+                    <img src={coinImage} alt="Uang koin Rp1.000" className="w-36 rounded-lg" />
+                  </div>
                   <div className="flex gap-3 justify-center">
                     {[
                       { sisi: "A", label: "Angka", color: "bg-yellow-600/60 border-yellow-400/60 text-yellow-200" },
