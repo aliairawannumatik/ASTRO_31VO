@@ -229,7 +229,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kotak ditambah 1 bola Hijau (H), berapa n(S) yang baru?" },
     ],
   }),
-  Qn(10, "Spinner Tiga Sektor", {
+  Qn(9, "Spinner Tiga Sektor", {
     type: "mixed",
     diagram: (
       <SpinnerDiagram
@@ -247,7 +247,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah setiap titik sampel memiliki kesempatan yang sama? Jelaskan." },
     ],
   }),
-  Qn(12, "Kartu dari 1 sampai 10", {
+  Qn(10, "Kartu dari 1 sampai 10", {
     type: "mixed",
     content: "Sebuah kotak berisi kartu bernomor 1 sampai 10. Satu kartu diambil secara acak.",
     parts: [
@@ -257,7 +257,7 @@ const questions: Q[] = [
       { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
     ],
   }),
-  Qn(14, "Dua Dadu – Selisih Tertentu", {
+  Qn(11, "Dua Dadu – Selisih Tertentu", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
     content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan selisih = 2.",
@@ -267,7 +267,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
     ],
   }),
-  Qn(18, "Dua Dadu – Hasil Kali Tertentu", {
+  Qn(12, "Dua Dadu – Hasil Kali Tertentu", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => i*j === 12} />,
     content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan hasil kali = 12.",
@@ -277,7 +277,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
     ],
   }),
-  Qn(19, "Kartu Remi – Ruang Sampel", {
+  Qn(13, "Kartu Remi – Ruang Sampel", {
     type: "mixed",
     content: "Satu set kartu remi terdiri dari 52 kartu: 4 jenis (♠ ♥ ♦ ♣), masing-masing 13 nilai (A,2,3,...,10,J,Q,K). Satu kartu diambil.",
     parts: [
@@ -287,7 +287,7 @@ const questions: Q[] = [
       { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
     ],
   }),
-  Qn(21, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
+  Qn(14, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
     type: "mixed",
     content: "Sebuah koin dilempar tiga kali secara berurutan. Catat urutan Angka (A) dan Gambar (G).",
     parts: [
@@ -296,7 +296,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan jumlah Angka lebih banyak dari Gambar." },
     ],
   }),
-  Qn(22, "Tabel – Dadu dan Koin", {
+  Qn(15, "Tabel – Dadu dan Koin", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -319,7 +319,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan dadu prima dan koin Gambar." },
     ],
   }),
-  Qn(23, "Pengambilan Kartu Bernomor", {
+  Qn(16, "Pengambilan Kartu Bernomor", {
     type: "mixed",
     content: "Kotak berisi kartu bernomor 1, 2, 3, 4, 5. Dua kartu diambil berurutan (tanpa pengembalian).",
     parts: [
@@ -328,7 +328,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel di mana jumlah kedua kartu = 6?" },
     ],
   }),
-  Qn(26, "Aturan Perkalian – Menghitung n(S)", {
+  Qn(17, "Aturan Perkalian – Menghitung n(S)", {
     type: "mixed",
     content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
     parts: [
@@ -337,7 +337,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
     ],
   }),
-  Qn(35, "Pengambilan Tanpa Pengembalian", {
+  Qn(18, "Pengambilan Tanpa Pengembalian", {
     type: "mixed",
     content: "Kotak berisi 3 bola: Merah (M), Biru (B), Hijau (H). Dua bola diambil satu per satu tanpa pengembalian.",
     diagram: (
@@ -357,7 +357,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
     ],
   }),
-  Qn(38, "Soal TKA – Pengambilan Kelereng", {
+  Qn(19, "Soal TKA – Pengambilan Kelereng", {
     type: "mixed",
     content: "Kantong berisi 4 kelereng: 2 merah (M1, M2) dan 2 putih (P1, P2). Dua kelereng diambil bersamaan.",
     diagram: (
