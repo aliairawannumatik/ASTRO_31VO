@@ -200,33 +200,24 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan jumlah ≤ 4?" },
     ],
   }),
-  Qn(7, "Tiga Koin – Diagram Pohon", {
+  Qn(7, "Dua Dadu – Selisih Tertentu", {
     type: "mixed",
-    diagram: (
-      <TreeDiagram
-        title="Percobaan 3 Koin"
-        branches={[
-          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
-          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
-          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
-          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
-        ]}
-      />
-    ),
-    content: "Tiga koin dilempar bersamaan.",
+    diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
+    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan selisih = 2.",
     parts: [
-      { label: "a.", text: "Tentukan n(S) dari diagram pohon di atas." },
-      { label: "b.", text: "Sebutkan titik sampel dengan tepat dua sisi Angka." },
-      { label: "c.", text: "Berapa banyak titik sampel dengan paling sedikit satu Gambar?" },
+      { label: "a.", text: "Sebutkan semua titik sampel dengan selisih kedua dadu = 2." },
+      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
     ],
   }),
-  Qn(8, "Mengambil Bola dari Kotak", {
+  Qn(8, "Dua Dadu – Hasil Kali Tertentu", {
     type: "mixed",
-    content: "Sebuah kotak berisi 3 bola: Merah (M), Biru (B), dan Kuning (K). Satu bola diambil secara acak.",
+    diagram: <DiceGrid highlight={(i,j) => i*j === 12} />,
+    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan hasil kali = 12.",
     parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Jika kotak ditambah 1 bola Hijau (H), berapa n(S) yang baru?" },
+      { label: "a.", text: "Sebutkan semua titik sampel dengan hasil kali kedua dadu = 12." },
+      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
+      { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
     ],
   }),
   Qn(9, "Spinner Tiga Sektor", {
@@ -257,24 +248,33 @@ const questions: Q[] = [
       { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
     ],
   }),
-  Qn(11, "Dua Dadu – Selisih Tertentu", {
+  Qn(11, "Tiga Koin – Diagram Pohon", {
     type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
-    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan selisih = 2.",
+    diagram: (
+      <TreeDiagram
+        title="Percobaan 3 Koin"
+        branches={[
+          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
+          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
+          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
+          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
+        ]}
+      />
+    ),
+    content: "Tiga koin dilempar bersamaan.",
     parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan selisih kedua dadu = 2." },
-      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
+      { label: "a.", text: "Tentukan n(S) dari diagram pohon di atas." },
+      { label: "b.", text: "Sebutkan titik sampel dengan tepat dua sisi Angka." },
+      { label: "c.", text: "Berapa banyak titik sampel dengan paling sedikit satu Gambar?" },
     ],
   }),
-  Qn(12, "Dua Dadu – Hasil Kali Tertentu", {
+  Qn(12, "Mengambil Bola dari Kotak", {
     type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i*j === 12} />,
-    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan hasil kali = 12.",
+    content: "Sebuah kotak berisi 3 bola: Merah (M), Biru (B), dan Kuning (K). Satu bola diambil secara acak.",
     parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan hasil kali kedua dadu = 12." },
-      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
+      { label: "a.", text: "Tuliskan ruang sampel S." },
+      { label: "b.", text: "Tentukan n(S)." },
+      { label: "c.", text: "Jika kotak ditambah 1 bola Hijau (H), berapa n(S) yang baru?" },
     ],
   }),
   Qn(13, "Kartu Remi – Ruang Sampel", {
