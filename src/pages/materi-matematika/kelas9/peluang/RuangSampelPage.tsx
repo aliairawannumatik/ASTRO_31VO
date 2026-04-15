@@ -7,7 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import heroImage from "@assets/image_1776223164069.png";
-import coinImage from "@assets/image_1776223467875.png";
+import coinImage from "@assets/koin_fix_1776223721630.png";
 import diceImage from "@assets/image_1776223510131.png";
 
 const RuangSampelPage = () => {
