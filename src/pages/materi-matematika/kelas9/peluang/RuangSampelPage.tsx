@@ -9,7 +9,7 @@ import { InlineMath, BlockMath } from "react-katex";
 import heroImage from "@assets/image_1776223164069.png";
 import coinImage from "@assets/koin_fix_1776223721630.png";
 import diceImage from "@assets/image_1776223510131.png";
-import cardImage from "@assets/kartu_bridge_fix_1776223956952.png";
+import cardImage from "@assets/image_1776224003366.png";
 
 const RuangSampelPage = () => {
   const navigate = useNavigate();
