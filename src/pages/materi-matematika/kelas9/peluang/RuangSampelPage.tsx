@@ -177,7 +177,7 @@ const RuangSampelPage = () => {
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🎲 b. Dadu Bermuka Enam</p>
                   <div className="flex justify-center">
-                    <img src={diceImage} alt="Dadu bermuka enam" className="w-48 rounded-lg" />
+                    <img src={diceImage} alt="Dadu bermuka enam" className="w-60 rounded-lg" />
                   </div>
                   <div className="flex gap-2 justify-center flex-wrap">
                     {[1, 2, 3, 4, 5, 6].map((n) => (
