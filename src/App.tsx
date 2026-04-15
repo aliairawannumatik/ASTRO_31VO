@@ -252,6 +252,7 @@ import PeluangEmpirikLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/Pelua
 import PeluangTeoretikLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/PeluangTeoretikPage";
 import FrekuensiHarapanLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/FrekuensiHarapanPage";
 import KomplementLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/KomplementPage";
+import PeluangKejadianMajemukLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/PeluangKejadianMajemukPage";
 import PersamaanKuadratK9Page from "./pages/latihan-mandiri/kelas9/PersamaanKuadratPage";
 import FungsiKuadratK9Page from "./pages/latihan-mandiri/kelas9/FungsiKuadratPage";
 import FKBentukUmumKarakteristikPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/BentukUmumKarakteristikPage";
@@ -462,6 +463,7 @@ import PeluangEmpirikMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/
 import PeluangTeoretikMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/PeluangTeoretikGamePage";
 import FrekuensiHarapanMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/FrekuensiHarapanGamePage";
 import KomplemenMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/KomplemenGamePage";
+import PeluangKejadianMajemukMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/PeluangKejadianMajemukGamePage";
 // Math Game Arena - Kelas 9 Game Pages - Persamaan Kuadrat
 import BentukUmumPKMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/BentukUmumGamePage";
 import PemfaktoranMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/PemfaktoranGamePage";
@@ -937,6 +939,7 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/peluang/komplemen" element={<KomplementLMK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKBentukUmumPage />} />
       <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKPemfaktoranPage />} />
@@ -1147,6 +1150,7 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikMGAK9GamePage />} />
       <Route path="/math-game-arena/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanMGAK9GamePage />} />
       <Route path="/math-game-arena/kelas-9/peluang/komplemen" element={<KomplemenMGAK9GamePage />} />
+      <Route path="/math-game-arena/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukMGAK9GamePage />} />
       {/* Math Game Arena - Kelas 9 Game Routes - Persamaan Kuadrat */}
       <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/bentuk-umum" element={<BentukUmumPKMGAK9GamePage />} />
       <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PemfaktoranMGAK9GamePage />} />

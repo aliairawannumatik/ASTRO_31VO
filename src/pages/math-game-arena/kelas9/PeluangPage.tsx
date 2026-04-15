@@ -6,6 +6,7 @@ const subtopics = [
   { name: "PELUANG TEORETIK", path: "/math-game-arena/kelas-9/peluang/peluang-teoretik" },
   { name: "FREKUENSI HARAPAN", path: "/math-game-arena/kelas-9/peluang/frekuensi-harapan" },
   { name: "KOMPLEMEN SUATU KEJADIAN", path: "/math-game-arena/kelas-9/peluang/komplemen" },
+  { name: "PELUANG KEJADIAN MAJEMUK", path: "/math-game-arena/kelas-9/peluang/kejadian-majemuk" },
 ];
 
 const PeluangPage = () => (

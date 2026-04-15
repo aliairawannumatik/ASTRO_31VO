@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { Dices, BarChart3, Calculator, Target, FlipHorizontal2, ChevronRight } from "lucide-react";
+import { Dices, BarChart3, Calculator, Target, FlipHorizontal2, Layers, ChevronRight } from "lucide-react";
 
 const subtopics = [
   {
@@ -69,6 +69,19 @@ const subtopics = [
     iconColor: "text-rose-400",
     leftBar: "from-rose-400 to-pink-500",
     desc: "P(A') = 1 − P(A), diagram Venn, penerapan komplemen",
+  },
+  {
+    label: "PELUANG KEJADIAN MAJEMUK",
+    path: "/latihan-mandiri/kelas-9/peluang/kejadian-majemuk",
+    soal: 40,
+    icon: Layers,
+    gradient: "from-indigo-900/40 to-violet-900/30",
+    border: "border-indigo-500/30",
+    badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",
+    iconBg: "bg-indigo-500/20",
+    iconColor: "text-indigo-400",
+    leftBar: "from-indigo-400 to-violet-500",
+    desc: "P(A∪B), P(A∩B), saling lepas, saling bebas, peluang bersyarat",
   },
 ];
 
