@@ -131,98 +131,6 @@ const questions: Q[] = [
       { label: "c.", text: "Hasil wawancara langsung antara peneliti dan narasumber." },
     ],
   }),
-  Qn(6, "Teknik Pengumpulan Data – ANBK", {
-    type: "mixed",
-    diagram: <TeknikSamplingDiagram />,
-    content: "Perhatikan diagram teknik pengambilan sampel di atas, kemudian jawab pertanyaan berikut:",
-    parts: [
-      { label: "a.", text: "Jelaskan apa yang dimaksud dengan teknik observasi dalam pengumpulan data. Berikan satu contoh." },
-      { label: "b.", text: "Jelaskan perbedaan antara wawancara terstruktur dan wawancara tidak terstruktur." },
-      { label: "c.", text: "Apa kelebihan penggunaan angket/kuesioner dibandingkan wawancara langsung?" },
-    ],
-  }),
-  Qn(7, "Sensus vs Sampling – UN", {
-    type: "mixed",
-    content: "Suatu kota memiliki 500.000 penduduk. Pemerintah ingin mengetahui tingkat pendidikan warganya.",
-    parts: [
-      { label: "a.", text: "Jelaskan apa yang dimaksud dengan sensus dan berikan contohnya." },
-      { label: "b.", text: "Apa keuntungan menggunakan metode sampling dibandingkan sensus?" },
-      { label: "c.", text: "Dalam situasi di atas, metode mana yang lebih praktis digunakan? Jelaskan alasanmu." },
-    ],
-  }),
-  Qn(8, "Sampling Acak Sederhana – TKA", {
-    type: "mixed",
-    content: "Dalam kelas 9A terdapat 30 siswa. Akan dipilih 6 siswa sebagai sampel secara acak sederhana.",
-    parts: [
-      { label: "a.", text: "Jelaskan langkah-langkah melakukan sampling acak sederhana dengan cara undian." },
-      { label: "b.", math: "\\text{Berapa peluang setiap siswa terpilih sebagai sampel? } P = \\frac{6}{30} = \\ldots" },
-      { label: "c.", text: "Apa kelebihan dan kelemahan metode sampling acak sederhana?" },
-    ],
-  }),
-  Qn(9, "Tabel Distribusi Frekuensi Data Tunggal – UN", {
-    type: "mixed",
-    content: "Nilai ulangan matematika 15 siswa: 7, 8, 6, 9, 7, 8, 10, 6, 7, 9, 8, 7, 6, 8, 9",
-    parts: [
-      { label: "a.", text: "Urutkan data dari nilai terkecil ke terbesar." },
-      { label: "b.", text: "Buat tabel distribusi frekuensi dari data di atas (nilai | frekuensi)." },
-      { label: "c.", text: "Nilai berapa yang memiliki frekuensi paling tinggi (modus)?" },
-    ],
-  }),
-  Qn(10, "Frekuensi Relatif – ANBK", {
-    type: "mixed",
-    mathContent: "f_r = \\frac{f_i}{n} \\times 100\\%",
-    content: "Dari 40 siswa, hasil ulangan dikelompokkan: Nilai 60 (8 siswa), Nilai 70 (12 siswa), Nilai 80 (10 siswa), Nilai 90 (10 siswa).",
-    parts: [
-      { label: "a.", math: "f_r \\text{ nilai 60} = \\frac{8}{40} \\times 100\\% = \\ldots \\%" },
-      { label: "b.", math: "f_r \\text{ nilai 70} = \\frac{12}{40} \\times 100\\% = \\ldots \\%" },
-      { label: "c.", text: "Verifikasi bahwa jumlah semua frekuensi relatif sama dengan 100%." },
-    ],
-  }),
-  Qn(11, "Rentang Data – TKA", {
-    type: "mixed",
-    content: "Data tinggi badan 10 siswa (cm): 145, 150, 148, 162, 155, 158, 145, 160, 155, 150",
-    parts: [
-      { label: "a.", math: "\\text{Rentang} = \\text{nilai terbesar} - \\text{nilai terkecil} = \\ldots - \\ldots = \\ldots \\text{ cm}" },
-      { label: "b.", text: "Tentukan nilai minimum dan maksimum dari data tersebut." },
-      { label: "c.", text: "Berapa banyak siswa yang memiliki tinggi badan di atas 155 cm?" },
-    ],
-  }),
-  Qn(12, "Pengertian Variabel Penelitian – UN", {
-    type: "mixed",
-    content: "Seorang siswa meneliti pengaruh durasi belajar terhadap nilai ujian.",
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan variabel bebas (independen)? Sebutkan variabel bebas dari penelitian di atas." },
-      { label: "b.", text: "Apa yang dimaksud dengan variabel terikat (dependen)? Sebutkan variabel terikat dari penelitian di atas." },
-      { label: "c.", text: "Mengapa penting untuk mengidentifikasi variabel sebelum memulai penelitian?" },
-    ],
-  }),
-  Qn(13, "Identifikasi Populasi dan Sampel – ANBK", {
-    type: "mixed",
-    content: "Seorang guru ingin meneliti kebiasaan membaca siswa SMP di kota Bandung. Terdapat 20 sekolah dengan total 6.000 siswa.",
-    parts: [
-      { label: "a.", text: "Tentukan populasi dari penelitian tersebut." },
-      { label: "b.", math: "\\text{Dengan rumus Slovin, } e=5\\%: n = \\frac{6000}{1+6000(0{,}05)^2} = \\ldots" },
-      { label: "c.", text: "Teknik sampling apa yang tepat agar semua sekolah terwakili? Jelaskan alasanmu." },
-    ],
-  }),
-  Qn(14, "Membaca Tabel Distribusi Frekuensi – TKA", {
-    type: "mixed",
-    content: "Tabel distribusi frekuensi tinggi badan siswa:\nKelas: 150–154 (f=3), 155–159 (f=7), 160–164 (f=12), 165–169 (f=8), 170–174 (f=5). Total = 35 siswa.",
-    parts: [
-      { label: "a.", text: "Berapa banyak siswa yang memiliki tinggi badan kurang dari 160 cm?" },
-      { label: "b.", math: "\\text{Persentase siswa dengan tinggi 160–169 cm} = \\frac{12+8}{35} \\times 100\\% = \\ldots" },
-      { label: "c.", text: "Kelas interval mana yang memiliki frekuensi tertinggi?" },
-    ],
-  }),
-  Qn(15, "Analisis Data dan Penarikan Kesimpulan – UN", {
-    type: "mixed",
-    content: "Hasil survei penggunaan transportasi 50 siswa SMP: Sepeda motor (20), Mobil (10), Angkot (12), Jalan kaki (8).",
-    parts: [
-      { label: "a.", math: "\\text{Persentase siswa yang naik sepeda motor} = \\frac{20}{50} \\times 100\\% = \\ldots \\%" },
-      { label: "b.", text: "Moda transportasi apa yang paling sedikit digunakan? Berapa persentasenya?" },
-      { label: "c.", text: "Berdasarkan data di atas, simpulkan jenis transportasi yang paling populer dan berikan satu alasan mengapa hal itu bisa terjadi." },
-    ],
-  }),
 ];
 
 const PengantarStatistikaPage = () => {
@@ -242,7 +150,7 @@ const PengantarStatistikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 15 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 5 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
