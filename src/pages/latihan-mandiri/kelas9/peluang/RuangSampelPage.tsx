@@ -229,29 +229,6 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kotak ditambah 1 bola Hijau (H), berapa n(S) yang baru?" },
     ],
   }),
-  Qn(9, "Membuat Bilangan Dua Digit", {
-    type: "mixed",
-    content: "Dari angka-angka 1, 2, 3 akan dibuat bilangan dua digit. Setiap angka hanya boleh digunakan sekali.",
-    diagram: (
-      <FreqTable
-        caption="Bilangan 2 digit dari {1, 2, 3}"
-        headers={["Digit Pertama", "Digit Kedua", "Bilangan"]}
-        rows={[
-          ["1", "2", "12"],
-          ["1", "3", "13"],
-          ["2", "1", "21"],
-          ["2", "3", "23"],
-          ["3", "1", "31"],
-          ["3", "2", "32"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Lengkapi tabel di atas dan tuliskan ruang sampelnya." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Berapa banyak bilangan yang terbentuk yang nilainya lebih dari 20?" },
-    ],
-  }),
   Qn(10, "Spinner Tiga Sektor", {
     type: "mixed",
     diagram: (
@@ -270,24 +247,6 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah setiap titik sampel memiliki kesempatan yang sama? Jelaskan." },
     ],
   }),
-  Qn(11, "Pengambilan Dua Bola Sekaligus", {
-    type: "mixed",
-    content: "Kotak berisi 4 bola berbeda: Merah (M), Biru (B), Kuning (K), Putih (P). Dua bola diambil sekaligus.",
-    diagram: (
-      <FreqTable
-        caption="Pasangan bola yang mungkin"
-        headers={["Pasangan ke-", "Bola 1", "Bola 2"]}
-        rows={[
-          [1,"M","B"],[2,"M","K"],[3,"M","P"],[4,"B","K"],[5,"B","P"],[6,"K","P"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan pengambilan 2 bola." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", math: "\\text{Jika ada } n \\text{ bola diambil 2, rumus } n(S) = \\frac{n(n-1)}{2}. \\text{ Verifikasi untuk } n=4." },
-    ],
-  }),
   Qn(12, "Kartu dari 1 sampai 10", {
     type: "mixed",
     content: "Sebuah kotak berisi kartu bernomor 1 sampai 10. Satu kartu diambil secara acak.",
@@ -298,15 +257,6 @@ const questions: Q[] = [
       { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
     ],
   }),
-  Qn(13, "Ruang Sampel – Huruf Vokal", {
-    type: "mixed",
-    content: "Dari huruf-huruf vokal {A, I, U, E, O} dipilih satu huruf secara acak.",
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Jika dari huruf S = {A, I, U, E, O} dipilih 2 huruf sekaligus, berapa n(S) yang baru?" },
-    ],
-  }),
   Qn(14, "Dua Dadu – Selisih Tertentu", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
@@ -315,55 +265,6 @@ const questions: Q[] = [
       { label: "a.", text: "Sebutkan semua titik sampel dengan selisih kedua dadu = 2." },
       { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
       { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
-    ],
-  }),
-  Qn(15, "Ruang Sampel – Satu Dadu dan Kartu", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar dan satu kartu diambil dari kartu bernomor {1, 2, 3}.",
-    parts: [
-      { label: "a.", math: "n(S) = n(\\text{dadu}) \\times n(\\text{kartu}) = \\ldots \\times \\ldots = \\ldots" },
-      { label: "b.", text: "Tuliskan 6 anggota ruang sampel (cukup 6 contoh dengan dadu angka 1)." },
-      { label: "c.", text: "Berapa banyak titik sampel dengan angka dadu sama dengan angka kartu?" },
-    ],
-  }),
-  Qn(16, "Memilih Ketua dan Wakil", {
-    type: "mixed",
-    content: "Dari 4 siswa: Adi (A), Budi (B), Citra (C), Deni (D) akan dipilih ketua dan wakil ketua. Ketua dan wakil tidak boleh orang yang sama.",
-    diagram: (
-      <FreqTable
-        caption="Pasangan (Ketua, Wakil)"
-        headers={["Ketua", "Wakil"]}
-        rows={[
-          ["A","B"],["A","C"],["A","D"],
-          ["B","A"],["B","C"],["B","D"],
-          ["C","A"],["C","B"],["C","D"],
-          ["D","A"],["D","B"],["D","C"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel lengkap dari percobaan ini." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", math: "n(S) = n \\times (n-1) = 4 \\times 3 = \\ldots \\text{ Verifikasi!}" },
-    ],
-  }),
-  Qn(17, "Spinner Empat Sektor Tidak Sama", {
-    type: "mixed",
-    diagram: (
-      <SpinnerDiagram
-        sectors={[
-          { label: "1", color: "#ef4444", angle: 90 },
-          { label: "2", color: "#f59e0b", angle: 90 },
-          { label: "3", color: "#22c55e", angle: 90 },
-          { label: "4", color: "#3b82f6", angle: 90 },
-        ]}
-      />
-    ),
-    content: "Spinner di atas memiliki 4 sektor sama besar bernomor 1, 2, 3, dan 4. Spinner diputar dua kali.",
-    parts: [
-      { label: "a.", math: "n(S) = 4 \\times 4 = \\ldots" },
-      { label: "b.", text: "Tuliskan ruang sampel dalam bentuk tabel 4×4 (cukup baris pertama)." },
-      { label: "c.", text: "Berapa banyak titik sampel dengan jumlah kedua putaran = 5?" },
     ],
   }),
   Qn(18, "Dua Dadu – Hasil Kali Tertentu", {
@@ -384,16 +285,6 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa banyak titik sampel kartu berwarna merah (♥ dan ♦)?" },
       { label: "c.", text: "Berapa banyak titik sampel kartu gambar (J, Q, K)?" },
       { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
-    ],
-  }),
-  Qn(20, "Membuat Bilangan Tiga Digit", {
-    type: "mixed",
-    content: "Dari angka 1, 2, 3 dibuat bilangan tiga digit (tanpa pengulangan).",
-    parts: [
-      { label: "a.", text: "Tuliskan semua bilangan yang mungkin terbentuk." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", math: "n(S) = 3! = 3 \\times 2 \\times 1 = \\ldots \\text{ Verifikasi!}" },
-      { label: "d.", text: "Berapa banyak bilangan yang habis dibagi 2?" },
     ],
   }),
   Qn(21, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
@@ -437,35 +328,6 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel di mana jumlah kedua kartu = 6?" },
     ],
   }),
-  Qn(24, "Dua Dadu – Titik Sampel Bilangan Prima", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => [2,3,5,7,11].includes(i+j)} />,
-    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan jumlah prima.",
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah berupa bilangan prima." },
-      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
-      { label: "c.", text: "Jumlah prima yang mungkin dari dua dadu adalah: 2, 3, 5, 7, 11. Mana yang tidak mungkin?" },
-    ],
-  }),
-  Qn(25, "Ruang Sampel Percobaan Campuran", {
-    type: "mixed",
-    content: "Dari kantong A diambil 1 huruf dari {P, Q} dan dari kantong B diambil 1 huruf dari {X, Y, Z}.",
-    diagram: (
-      <FreqTable
-        caption="Ruang sampel (Kantong A × Kantong B)"
-        headers={["A\\B", "X", "Y", "Z"]}
-        rows={[
-          ["P","(P,X)","(P,Y)","(P,Z)"],
-          ["Q","(Q,X)","(Q,Y)","(Q,Z)"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan ini." },
-      { label: "b.", math: "n(S) = n(A) \\times n(B) = 2 \\times 3 = \\ldots" },
-      { label: "c.", text: "Berapa banyak titik sampel yang memuat huruf Y?" },
-    ],
-  }),
   Qn(26, "Aturan Perkalian – Menghitung n(S)", {
     type: "mixed",
     content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
@@ -473,97 +335,6 @@ const questions: Q[] = [
       { label: "a.", math: "n(S) = 3 \\times 2 \\times 4 = \\ldots" },
       { label: "b.", text: "Apakah semua kombinasi merupakan titik sampel yang valid? Mengapa?" },
       { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
-    ],
-  }),
-  Qn(27, "Dua Dadu – Angka Lebih Besar", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i > j} />,
-    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel di mana dadu pertama > dadu kedua.",
-    parts: [
-      { label: "a.", text: "Berapa banyak titik sampel dengan dadu pertama lebih besar dari dadu kedua?" },
-      { label: "b.", text: "Berapa banyak titik sampel dengan dadu pertama sama dengan dadu kedua?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan dadu pertama lebih kecil dari dadu kedua?" },
-      { label: "d.", text: "Verifikasi: jumlah ketiga jawaban = n(S) = 36." },
-    ],
-  }),
-  Qn(28, "Ruang Sampel dengan Pengembalian", {
-    type: "mixed",
-    content: "Kotak berisi bola M (Merah) dan B (Biru). Satu bola diambil, dicatat, dikembalikan, lalu diambil lagi.",
-    diagram: (
-      <FreqTable
-        caption="Ruang sampel (dengan pengembalian)"
-        headers={["Ambil 1", "Ambil 2", "Hasil"]}
-        rows={[["M","M","(M,M)"],["M","B","(M,B)"],["B","M","(B,M)"],["B","B","(B,B)"]]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Tentukan n(S)." },
-      { label: "b.", text: "Berapa banyak titik sampel dengan kedua bola warna berbeda?" },
-      { label: "c.", text: "Jika ada 3 bola (M, B, K) dengan pengembalian, berapa n(S)?" },
-    ],
-  }),
-  Qn(29, "Percobaan Melempar Koin 4 Kali", {
-    type: "mixed",
-    content: "Sebuah koin dilempar 4 kali berturut-turut.",
-    parts: [
-      { label: "a.", math: "n(S) = 2^4 = \\ldots" },
-      { label: "b.", text: "Berapa banyak titik sampel dengan tepat 2 Angka?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan semua Gambar?" },
-      { label: "d.", text: "Berapa banyak titik sampel dengan paling banyak 1 Angka?" },
-    ],
-  }),
-  Qn(30, "Permutasi – Urutan Podium", {
-    type: "mixed",
-    content: "Dari 5 pelari (A, B, C, D, E) akan dipilih juara 1, 2, dan 3.",
-    parts: [
-      { label: "a.", math: "n(S) = 5 \\times 4 \\times 3 = \\ldots" },
-      { label: "b.", text: "Berapa banyak kemungkinan podium yang memuat pelari A di posisi mana pun?" },
-      { label: "c.", text: "Berapa banyak kemungkinan podium jika A harus di posisi pertama?" },
-    ],
-  }),
-  Qn(31, "Ruang Sampel – Warna Kartu", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Kartu berwarna dalam kotak"
-        headers={["Warna", "Jumlah"]}
-        rows={[["Merah",5],["Biru",3],["Kuning",2],["Total",10]]}
-      />
-    ),
-    content: "Sebuah kotak berisi 10 kartu berwarna seperti pada tabel. Satu kartu diambil.",
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel jika setiap kartu diberi nomor (M1,...,M5,B1,...,B3,K1,K2)." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Berapa banyak titik sampel yang bukan berwarna merah?" },
-    ],
-  }),
-  Qn(32, "Dua Dadu – Jumlah Genap", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => (i+j) % 2 === 0} />,
-    content: "Dua dadu dilempar. Sel diarsir menunjukkan jumlah genap.",
-    parts: [
-      { label: "a.", text: "Berapa banyak titik sampel dengan jumlah genap?" },
-      { label: "b.", text: "Berapa banyak titik sampel dengan jumlah ganjil?" },
-      { label: "c.", text: "Apakah kedua jumlah sama banyak? Mengapa?" },
-    ],
-  }),
-  Qn(33, "Ruang Sampel – Lotre Tiga Angka", {
-    type: "mixed",
-    content: "Sebuah lotre menggunakan tiga roda angka, masing-masing bertuliskan 0 sampai 9.",
-    parts: [
-      { label: "a.", math: "n(S) = 10 \\times 10 \\times 10 = \\ldots" },
-      { label: "b.", text: "Berapa banyak kode yang semua digitnya sama (misal: 000, 111, ...)?" },
-      { label: "c.", text: "Berapa banyak kode yang diawali angka 5?" },
-    ],
-  }),
-  Qn(34, "Percobaan Melempar Satu Dadu Dua Kali", {
-    type: "mixed",
-    content: "Satu dadu dilempar dua kali. Hasilnya ditulis sebagai pasangan terurut (hasil 1, hasil 2).",
-    diagram: <DiceGrid highlight={(i,j) => i === j} />,
-    parts: [
-      { label: "a.", text: "Tentukan n(S)." },
-      { label: "b.", text: "Berapa banyak titik sampel dengan hasil kedua lemparan sama (diarsir)?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan hasil kedua lemparan berbeda?" },
     ],
   }),
   Qn(35, "Pengambilan Tanpa Pengembalian", {
@@ -584,26 +355,6 @@ const questions: Q[] = [
       { label: "a.", text: "Tentukan n(S)." },
       { label: "b.", text: "Berapa banyak titik sampel yang mengandung bola Merah?" },
       { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
-    ],
-  }),
-  Qn(36, "Soal UN – Ruang Sampel Dua Dadu", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i+j > 9} />,
-    content: "Dua dadu dilempar bersamaan. Tentukan banyak titik sampel dengan jumlah lebih dari 9.",
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah > 9." },
-      { label: "b.", text: "Berapa n(A) di mana A = kejadian jumlah > 9?" },
-      { label: "c.", text: "Berapa n(S)?" },
-    ],
-  }),
-  Qn(37, "Soal UN – Kartu Bernomor 1–20", {
-    type: "mixed",
-    content: "Sebuah kotak berisi kartu bernomor 1 sampai 20. Satu kartu diambil secara acak.",
-    parts: [
-      { label: "a.", text: "Tentukan n(S)." },
-      { label: "b.", text: "Berapa banyak titik sampel yang merupakan bilangan prima?" },
-      { label: "c.", text: "Berapa banyak titik sampel yang merupakan bilangan kelipatan 4?" },
-      { label: "d.", text: "Berapa banyak titik sampel yang merupakan bilangan kuadrat sempurna?" },
     ],
   }),
   Qn(38, "Soal TKA – Pengambilan Kelereng", {
@@ -629,26 +380,6 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan kedua kelereng berwarna berbeda?" },
     ],
   }),
-  Qn(39, "Soal ANBK – Dua Dadu, Jumlah 8", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i+j === 8} />,
-    content: "Dua dadu dilempar. Berapa banyak titik sampel dengan jumlah = 8?",
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah = 8." },
-      { label: "b.", text: "Berapa n(A) untuk A = {jumlah = 8}?" },
-      { label: "c.", text: "Bandingkan: lebih banyak mana antara {jumlah = 7} dan {jumlah = 8}?" },
-    ],
-  }),
-  Qn(40, "Soal UN Level Tinggi – Ruang Sampel Kompleks", {
-    type: "mixed",
-    content: "Dari angka {1, 2, 3, 4, 5} dipilih dua angka berbeda untuk membentuk pecahan p/q (p ≠ q).",
-    parts: [
-      { label: "a.", math: "n(S) = 5 \\times 4 = \\ldots \\text{ (urutan penting karena } \\frac{1}{2} \\neq \\frac{2}{1})" },
-      { label: "b.", text: "Berapa banyak pecahan yang nilainya lebih dari 1?" },
-      { label: "c.", text: "Berapa banyak pecahan yang nilainya kurang dari 1?" },
-      { label: "d.", text: "Apakah n(p/q > 1) = n(p/q < 1)? Mengapa?" },
-    ],
-  }),
 ];
 
 const RuangSampelPage = () => {
@@ -668,7 +399,7 @@ const RuangSampelPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 19 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
