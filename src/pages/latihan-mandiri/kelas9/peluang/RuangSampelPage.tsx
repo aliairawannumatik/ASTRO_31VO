@@ -220,25 +220,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
     ],
   }),
-  Qn(9, "Spinner Tiga Sektor", {
-    type: "mixed",
-    diagram: (
-      <SpinnerDiagram
-        sectors={[
-          { label: "Merah", color: "#ef4444", angle: 120 },
-          { label: "Biru", color: "#3b82f6", angle: 120 },
-          { label: "Hijau", color: "#22c55e", angle: 120 },
-        ]}
-      />
-    ),
-    content: "Sebuah spinner dibagi menjadi 3 sektor sama besar: Merah, Biru, Hijau. Spinner diputar sekali.",
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan ini." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Apakah setiap titik sampel memiliki kesempatan yang sama? Jelaskan." },
-    ],
-  }),
-  Qn(10, "Kartu dari 1 sampai 10", {
+  Qn(9, "Kartu dari 1 sampai 10", {
     type: "mixed",
     content: "Sebuah kotak berisi kartu bernomor 1 sampai 10. Satu kartu diambil secara acak.",
     parts: [
@@ -248,7 +230,7 @@ const questions: Q[] = [
       { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
     ],
   }),
-  Qn(11, "Tiga Koin – Diagram Pohon", {
+  Qn(10, "Tiga Koin – Diagram Pohon", {
     type: "mixed",
     diagram: (
       <TreeDiagram
@@ -268,16 +250,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel dengan paling sedikit satu Gambar?" },
     ],
   }),
-  Qn(12, "Mengambil Bola dari Kotak", {
-    type: "mixed",
-    content: "Sebuah kotak berisi 3 bola: Merah (M), Biru (B), dan Kuning (K). Satu bola diambil secara acak.",
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Jika kotak ditambah 1 bola Hijau (H), berapa n(S) yang baru?" },
-    ],
-  }),
-  Qn(13, "Kartu Remi – Ruang Sampel", {
+  Qn(11, "Kartu Remi – Ruang Sampel", {
     type: "mixed",
     content: "Satu set kartu remi terdiri dari 52 kartu: 4 jenis (♠ ♥ ♦ ♣), masing-masing 13 nilai (A,2,3,...,10,J,Q,K). Satu kartu diambil.",
     parts: [
@@ -287,7 +260,7 @@ const questions: Q[] = [
       { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
     ],
   }),
-  Qn(14, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
+  Qn(12, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
     type: "mixed",
     content: "Sebuah koin dilempar tiga kali secara berurutan. Catat urutan Angka (A) dan Gambar (G).",
     parts: [
@@ -296,7 +269,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan jumlah Angka lebih banyak dari Gambar." },
     ],
   }),
-  Qn(15, "Tabel – Dadu dan Koin", {
+  Qn(13, "Tabel – Dadu dan Koin", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -319,16 +292,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan dadu prima dan koin Gambar." },
     ],
   }),
-  Qn(16, "Pengambilan Kartu Bernomor", {
-    type: "mixed",
-    content: "Kotak berisi kartu bernomor 1, 2, 3, 4, 5. Dua kartu diambil berurutan (tanpa pengembalian).",
-    parts: [
-      { label: "a.", math: "n(S) = 5 \\times 4 = \\ldots" },
-      { label: "b.", text: "Berapa banyak titik sampel di mana kedua kartu bernomor ganjil?" },
-      { label: "c.", text: "Berapa banyak titik sampel di mana jumlah kedua kartu = 6?" },
-    ],
-  }),
-  Qn(17, "Aturan Perkalian – Menghitung n(S)", {
+  Qn(14, "Aturan Perkalian – Menghitung n(S)", {
     type: "mixed",
     content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
     parts: [
@@ -337,7 +301,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
     ],
   }),
-  Qn(18, "Pengambilan Tanpa Pengembalian", {
+  Qn(15, "Pengambilan Tanpa Pengembalian", {
     type: "mixed",
     content: "Kotak berisi 3 bola: Merah (M), Biru (B), Hijau (H). Dua bola diambil satu per satu tanpa pengembalian.",
     diagram: (
@@ -357,7 +321,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
     ],
   }),
-  Qn(19, "Soal TKA – Pengambilan Kelereng", {
+  Qn(16, "Soal TKA – Pengambilan Kelereng", {
     type: "mixed",
     content: "Kantong berisi 4 kelereng: 2 merah (M1, M2) dan 2 putih (P1, P2). Dua kelereng diambil bersamaan.",
     diagram: (
@@ -399,7 +363,7 @@ const RuangSampelPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 19 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 16 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
