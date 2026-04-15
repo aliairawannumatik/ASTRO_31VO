@@ -152,7 +152,7 @@ const RuangSampelPage = () => {
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🪙 a. Uang Koin</p>
                   <div className="flex justify-center">
-                    <img src={coinImage} alt="Uang koin Rp1.000" className="w-36 rounded-lg" />
+                    <img src={coinImage} alt="Uang koin Rp1.000" className="w-52 rounded-lg" />
                   </div>
                   <div className="flex gap-3 justify-center">
                     {[
