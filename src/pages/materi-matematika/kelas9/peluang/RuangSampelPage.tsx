@@ -9,6 +9,7 @@ import { InlineMath, BlockMath } from "react-katex";
 import heroImage from "@assets/image_1776223164069.png";
 import coinImage from "@assets/koin_fix_1776223721630.png";
 import diceImage from "@assets/image_1776223510131.png";
+import cardImage from "@assets/kartu_bridge_fix_1776223956952.png";
 
 const RuangSampelPage = () => {
   const navigate = useNavigate();
@@ -225,6 +226,9 @@ const RuangSampelPage = () => {
                 {/* KARTU BRIDGE */}
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🃏 c. Kartu Bridge</p>
+                  <div className="flex justify-center">
+                    <img src={cardImage} alt="Simbol kartu bridge" className="w-44 rounded-lg" />
+                  </div>
                   <p className="font-body text-xs text-white/70 leading-relaxed">
                     Satu set kartu bridge terdiri dari <strong className="text-white">52 kartu</strong> yang dibagi menjadi 4 jenis (suit), masing-masing berisi 13 kartu bernomor A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K.
                   </p>
