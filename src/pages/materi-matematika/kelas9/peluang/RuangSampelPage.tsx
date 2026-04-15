@@ -235,8 +235,8 @@ const RuangSampelPage = () => {
                   <div className="grid grid-cols-2 gap-2">
                     {[
                       { suit: "♠ Sekop", color: "bg-slate-700/70 border-slate-400/40 text-white", count: 13, note: "Hitam" },
-                      { suit: "♣ Keriting", color: "bg-slate-700/70 border-slate-400/40 text-white", count: 13, note: "Hitam" },
                       { suit: "♥ Hati", color: "bg-red-900/50 border-red-400/40 text-red-200", count: 13, note: "Merah" },
+                      { suit: "♣ Keriting", color: "bg-slate-700/70 border-slate-400/40 text-white", count: 13, note: "Hitam" },
                       { suit: "♦ Wajik", color: "bg-red-900/50 border-red-400/40 text-red-200", count: 13, note: "Merah" },
                     ].map(({ suit, color, count, note }) => (
                       <div key={suit} className={`border ${color} rounded-xl p-3 text-center`}>
