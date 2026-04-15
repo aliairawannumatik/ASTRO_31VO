@@ -103,266 +103,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Dengan rumus Slovin } n = \\frac{N}{1+Ne^2}, \\text{ jika } e=10\\%, \\text{ tentukan } n" },
     ],
   }),
-  Qn(3, "Jenis-Jenis Data – UN", {
-    type: "mixed",
-    diagram: <TableJenisData />,
-    content: "Klasifikasikan data berikut berdasarkan jenisnya:",
-    parts: [
-      { label: "a.", text: "Jumlah siswa dalam kelas (diskrit / kontinu?)" },
-      { label: "b.", text: "Berat badan siswa (diskrit / kontinu?)" },
-      { label: "c.", text: "Peringkat ujian: sangat baik, baik, cukup, kurang (data apa?)" },
-    ],
-  }),
-  Qn(4, "Data Primer dan Sekunder – TKA", {
-    type: "mixed",
-    content: "Tentukan apakah data berikut termasuk data primer atau data sekunder:",
-    parts: [
-      { label: "a.", text: "Hasil kuesioner yang disebarkan langsung kepada responden." },
-      { label: "b.", text: "Data Badan Pusat Statistik (BPS) tentang jumlah penduduk." },
-      { label: "c.", text: "Wawancara langsung dengan narasumber." },
-    ],
-  }),
-  Qn(5, "Teknik Pengumpulan Data – ANBK", {
-    type: "mixed",
-    diagram: <TeknikSamplingDiagram />,
-    content: "Sebutkan dan jelaskan 4 teknik pengumpulan data:",
-    parts: [
-      { label: "a.", text: "Observasi: pengamatan langsung terhadap objek penelitian." },
-      { label: "b.", text: "Wawancara: pengumpulan data melalui tanya jawab." },
-      { label: "c.", text: "Angket/kuesioner: daftar pertanyaan tertulis yang dikirim kepada responden." },
-    ],
-  }),
-  Qn(6, "Sensus vs Sampling – UN", {
-    type: "mixed",
-    content: "Suatu kota memiliki 500.000 penduduk. Pemerintah ingin mengetahui tingkat pendidikan warganya.",
-    parts: [
-      { label: "a.", text: "Apa keuntungan menggunakan metode sensus dalam penelitian ini?" },
-      { label: "b.", text: "Apa keuntungan menggunakan metode sampling?" },
-      { label: "c.", text: "Metode mana yang lebih praktis? Jelaskan alasanmu." },
-    ],
-  }),
-  Qn(7, "Teknik Sampling Acak Sederhana – TKA", {
-    type: "mixed",
-    content: "Dalam kelas 9A terdapat 30 siswa. Akan dipilih 6 siswa sebagai sampel secara acak.",
-    parts: [
-      { label: "a.", text: "Jelaskan cara melakukan sampling acak sederhana dengan undian." },
-      { label: "b.", math: "\\text{Berapa peluang setiap siswa terpilih? } P = \\frac{6}{30} = \\ldots" },
-      { label: "c.", text: "Apa kelebihan metode acak sederhana?" },
-    ],
-  }),
-  Qn(8, "Sampling Sistematis – ANBK", {
-    type: "mixed",
-    content: "Dari 120 anggota koperasi akan diambil 12 orang sampel secara sistematis.",
-    parts: [
-      { label: "a.", math: "\\text{Interval sampling: } k = \\frac{N}{n} = \\frac{120}{12} = \\ldots" },
-      { label: "b.", text: "Jika nomor pertama yang dipilih adalah 5, sebutkan nomor sampel berikutnya (3 nomor)." },
-      { label: "c.", text: "Kapan sampling sistematis lebih baik dari sampling acak sederhana?" },
-    ],
-  }),
-  Qn(9, "Sampling Stratifikasi – UN", {
-    type: "mixed",
-    content: "Sebuah sekolah terdiri dari 200 siswa kelas 7, 150 siswa kelas 8, dan 150 siswa kelas 9. Akan diambil 50 sampel secara proporsional.",
-    parts: [
-      { label: "a.", math: "\\text{Sampel kelas 7: } \\frac{200}{500} \\times 50 = \\ldots \\text{ siswa}" },
-      { label: "b.", math: "\\text{Sampel kelas 8: } \\frac{150}{500} \\times 50 = \\ldots \\text{ siswa}" },
-      { label: "c.", math: "\\text{Sampel kelas 9: } \\frac{150}{500} \\times 50 = \\ldots \\text{ siswa}" },
-    ],
-  }),
-  Qn(10, "Membuat Tabel Frekuensi – UN", {
-    type: "mixed",
-    content: "Data nilai ulangan 20 siswa: 65, 70, 75, 80, 65, 75, 80, 90, 70, 65, 80, 75, 90, 65, 70, 80, 75, 90, 70, 65",
-    parts: [
-      { label: "a.", text: "Urutkan data tersebut dari terkecil ke terbesar." },
-      { label: "b.", text: "Buat tabel frekuensi dari data di atas." },
-      { label: "c.", text: "Nilai berapa yang paling sering muncul?" },
-    ],
-  }),
-  Qn(11, "Rentang Data – TKA", {
-    type: "mixed",
-    content: "Data tinggi badan 10 siswa (cm): 145, 150, 148, 162, 155, 158, 145, 160, 155, 150",
-    parts: [
-      { label: "a.", math: "\\text{Rentang} = \\text{data terbesar} - \\text{data terkecil} = \\ldots" },
-      { label: "b.", text: "Tentukan nilai minimum dan maksimum data tersebut." },
-      { label: "c.", text: "Berapa banyak data yang berada di atas 155 cm?" },
-    ],
-  }),
-  Qn(12, "Tabel Frekuensi Bergolong – UN", {
-    type: "mixed",
-    content: "Data berat badan 30 siswa (kg): nilai terkecil 40 kg, terbesar 69 kg. Buat tabel dengan 6 kelas interval.",
-    parts: [
-      { label: "a.", math: "\\text{Panjang interval: } \\frac{69-40}{6} = \\frac{29}{6} \\approx 5" },
-      { label: "b.", text: "Tentukan batas-batas kelas: 40–44, 45–49, 50–54, 55–59, 60–64, 65–69" },
-      { label: "c.", text: "Apa yang dimaksud dengan batas bawah dan batas atas kelas?" },
-    ],
-  }),
-  Qn(13, "Titik Tengah Kelas – ANBK", {
-    type: "mixed",
-    mathContent: "\\text{Titik tengah} = \\frac{\\text{batas bawah} + \\text{batas atas}}{2}",
-    content: "Tentukan titik tengah dari masing-masing kelas berikut:",
-    parts: [
-      { label: "a.", math: "\\text{Kelas } 40-49: \\frac{40+49}{2} = \\ldots" },
-      { label: "b.", math: "\\text{Kelas } 50-59: \\frac{50+59}{2} = \\ldots" },
-      { label: "c.", math: "\\text{Kelas } 60-69: \\frac{60+69}{2} = \\ldots" },
-    ],
-  }),
-  Qn(14, "Frekuensi Relatif – UN", {
-    type: "mixed",
-    mathContent: "f_r = \\frac{f_i}{n} \\times 100\\%",
-    content: "Dari 40 data, suatu kelas memiliki frekuensi sebagai berikut: 8, 12, 10, 6, 4",
-    parts: [
-      { label: "a.", math: "f_r \\text{ kelas pertama} = \\frac{8}{40} \\times 100\\% = \\ldots \\%" },
-      { label: "b.", math: "f_r \\text{ kelas kedua} = \\frac{12}{40} \\times 100\\% = \\ldots \\%" },
-      { label: "c.", text: "Verifikasi bahwa jumlah semua frekuensi relatif = 100%." },
-    ],
-  }),
-  Qn(15, "Frekuensi Kumulatif – TKA", {
-    type: "mixed",
-    content: "Data nilai (frekuensi): 60–69 (5), 70–79 (10), 80–89 (12), 90–99 (3). Hitung frekuensi kumulatif.",
-    parts: [
-      { label: "a.", text: "F.kum s/d 69 = 5" },
-      { label: "b.", text: "F.kum s/d 79 = 5 + 10 = ?" },
-      { label: "c.", text: "F.kum s/d 89 = ?" },
-    ],
-  }),
-  Qn(16, "Menentukan Banyak Kelas – ANBK", {
-    type: "mixed",
-    mathContent: "k = 1 + 3{,}322 \\log n \\quad \\text{(Aturan Sturges)}",
-    content: "Tentukan banyak kelas yang ideal untuk data berikut:",
-    parts: [
-      { label: "a.", math: "n = 30: k = 1 + 3{,}322 \\log 30 = 1 + 3{,}322 \\times 1{,}477 = \\ldots" },
-      { label: "b.", math: "n = 50: k = 1 + 3{,}322 \\log 50 = \\ldots" },
-      { label: "c.", math: "n = 100: k = 1 + 3{,}322 \\log 100 = \\ldots" },
-    ],
-  }),
-  Qn(17, "Pengertian Variabel – UN", {
-    type: "mixed",
-    content: "Jelaskan konsep variabel dalam statistika:",
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan variabel bebas (independen)?" },
-      { label: "b.", text: "Apa yang dimaksud dengan variabel terikat (dependen)?" },
-      { label: "c.", text: "Dalam penelitian 'pengaruh jam belajar terhadap nilai ujian', identifikasikan variabel bebas dan variabel terikatnya." },
-    ],
-  }),
-  Qn(18, "Skala Pengukuran – TKA", {
-    type: "mixed",
-    content: "Tentukan skala pengukuran dari variabel-variabel berikut:",
-    parts: [
-      { label: "a.", text: "Jenis kelamin (Laki-laki/Perempuan) → Skala apa?" },
-      { label: "b.", text: "Suhu dalam derajat Celcius → Skala apa?" },
-      { label: "c.", text: "Peringkat kelas (1, 2, 3, dst.) → Skala apa?" },
-    ],
-  }),
-  Qn(19, "Menyusun Data Tunggal – ANBK", {
-    type: "mixed",
-    content: "Nilai ulangan matematika 15 siswa: 7, 8, 6, 9, 7, 8, 10, 6, 7, 9, 8, 7, 6, 8, 9",
-    parts: [
-      { label: "a.", text: "Urutkan data dari kecil ke besar." },
-      { label: "b.", text: "Buat tabel distribusi frekuensi tunggal." },
-      { label: "c.", text: "Nilai berapa yang memiliki frekuensi terbanyak?" },
-    ],
-  }),
-  Qn(20, "Pengumpulan Data dengan Observasi – UN", {
-    type: "mixed",
-    content: "Peneliti ingin mengumpulkan data jumlah kendaraan yang melintas di suatu jalan dalam 1 jam.",
-    parts: [
-      { label: "a.", text: "Teknik pengumpulan data apa yang paling tepat? Jelaskan." },
-      { label: "b.", text: "Bagaimana cara mencatat data agar akurat?" },
-      { label: "c.", text: "Apa kelemahan metode observasi langsung?" },
-    ],
-  }),
-  Qn(21, "Data Berkelompok – ANBK", {
-    type: "mixed",
-    content: "Dari 40 siswa, nilai ulangan dikelompokkan: 50–59 (4 siswa), 60–69 (8 siswa), 70–79 (14 siswa), 80–89 (10 siswa), 90–99 (4 siswa).",
-    parts: [
-      { label: "a.", text: "Berapa persen siswa yang mendapat nilai 70 ke atas?" },
-      { label: "b.", math: "\\frac{14+10+4}{40} \\times 100\\% = \\ldots \\%" },
-      { label: "c.", text: "Kelas mana yang memiliki frekuensi tertinggi?" },
-    ],
-  }),
-  Qn(22, "Panjang Kelas Interval – UN", {
-    type: "mixed",
-    mathContent: "p = \\frac{\\text{rentang}}{k} = \\frac{x_{\\max} - x_{\\min}}{k}",
-    content: "Tentukan panjang kelas interval untuk data berikut:",
-    parts: [
-      { label: "a.", math: "x_{\\max}=95, x_{\\min}=45, k=5: p = \\frac{95-45}{5} = \\ldots" },
-      { label: "b.", math: "x_{\\max}=100, x_{\\min}=40, k=6: p = \\frac{100-40}{6} = \\ldots" },
-      { label: "c.", math: "x_{\\max}=80, x_{\\min}=20, k=6: p = \\ldots" },
-    ],
-  }),
-  Qn(23, "Membaca Tabel Distribusi – TKA", {
-    type: "mixed",
-    content: "Tabel distribusi frekuensi tinggi badan siswa:\nKelas: 150–154 (f=3), 155–159 (f=7), 160–164 (f=12), 165–169 (f=8), 170–174 (f=5). Total = 35.",
-    parts: [
-      { label: "a.", text: "Berapa banyak siswa yang tingginya kurang dari 160 cm?" },
-      { label: "b.", text: "Berapa persen siswa yang tingginya antara 160–169 cm?" },
-      { label: "c.", text: "Kelas interval mana yang memiliki frekuensi terbanyak?" },
-    ],
-  }),
-  Qn(24, "Kuesioner dalam Penelitian – ANBK", {
-    type: "mixed",
-    content: "Seorang peneliti membuat kuesioner untuk mengetahui minat belajar siswa.",
-    parts: [
-      { label: "a.", text: "Apa perbedaan kuesioner terbuka dan kuesioner tertutup?" },
-      { label: "b.", text: "Berikan contoh pertanyaan kuesioner tertutup tentang minat belajar." },
-      { label: "c.", text: "Apa keunggulan kuesioner dibanding wawancara?" },
-    ],
-  }),
-  Qn(25, "Soal Cerita – Populasi Penelitian – UN", {
-    type: "mixed",
-    content: "Seorang guru ingin meneliti kebiasaan belajar siswa SMP di kotanya. Terdapat 15 sekolah dengan total 4.500 siswa.",
-    parts: [
-      { label: "a.", text: "Tentukan populasi penelitian tersebut." },
-      { label: "b.", math: "\\text{Dengan } e=5\\%, n = \\frac{4500}{1+4500(0{,}05)^2} = \\ldots" },
-      { label: "c.", text: "Teknik sampling apa yang tepat jika ingin mewakili semua sekolah?" },
-    ],
-  }),
-  Qn(26, "Validitas dan Reliabilitas – TKA", {
-    type: "mixed",
-    content: "Dalam penelitian statistika, instrumen pengumpulan data harus valid dan reliabel.",
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan validitas suatu instrumen?" },
-      { label: "b.", text: "Apa yang dimaksud dengan reliabilitas suatu instrumen?" },
-      { label: "c.", text: "Apakah suatu instrumen bisa reliabel tapi tidak valid? Jelaskan." },
-    ],
-  }),
-  Qn(27, "Data Numerik dan Kategorik – ANBK", {
-    type: "mixed",
-    content: "Dari hasil survei berikut, identifikasi jenis data:",
-    parts: [
-      { label: "a.", text: "Nilai ujian: 75, 80, 65, 90, 85 → data apa?" },
-      { label: "b.", text: "Warna favorit: merah, biru, hijau → data apa?" },
-      { label: "c.", text: "Indeks prestasi: 3.5, 3.0, 2.8 → data apa?" },
-    ],
-  }),
-  Qn(28, "Menghitung Batas Kelas – UN", {
-    type: "mixed",
-    mathContent: "\\text{Batas bawah nyata} = \\text{batas bawah} - 0{,}5",
-    content: "Hitung batas nyata untuk kelas interval berikut:",
-    parts: [
-      { label: "a.", math: "\\text{Kelas } 60-69: \\text{ batas bawah nyata} = 60 - 0{,}5 = \\ldots" },
-      { label: "b.", math: "\\text{Kelas } 70-79: \\text{ batas atas nyata} = 79 + 0{,}5 = \\ldots" },
-      { label: "c.", text: "Mengapa batas nyata digunakan dalam histogram?" },
-    ],
-  }),
-  Qn(29, "Sampling Cluster – TKA", {
-    type: "mixed",
-    content: "Suatu kota terbagi menjadi 20 kelurahan. Untuk survei, dipilih 4 kelurahan secara acak, lalu seluruh warga kelurahan terpilih diwawancarai.",
-    parts: [
-      { label: "a.", text: "Metode sampling apa yang digunakan?" },
-      { label: "b.", text: "Apa keunggulan sampling cluster dibanding sampling acak biasa?" },
-      { label: "c.", text: "Apa kelemahan sampling cluster?" },
-    ],
-  }),
-  Qn(30, "Analisis Tabel Frekuensi – ANBK", {
-    type: "mixed",
-    content: "Tabel nilai IPA kelas 9: 50–59 (f=2), 60–69 (f=5), 70–79 (f=13), 80–89 (f=8), 90–99 (f=2). n=30.",
-    parts: [
-      { label: "a.", math: "f_r \\text{ kelas 70–79} = \\frac{13}{30} \\times 100\\% = \\ldots" },
-      { label: "b.", text: "Berapa siswa yang nilainya kurang dari 70?" },
-      { label: "c.", text: "Berapa persen siswa yang nilainya di atas 80?" },
-    ],
-  }),
-  Qn(31, "Penyajian Data dan Kesimpulan – UN", {
+  Qn(3, "Penyajian Data dan Kesimpulan – UN", {
     type: "mixed",
     content: "Dari 25 siswa yang disurvei mengenai hobi: Membaca (8), Olahraga (7), Bermain Game (6), Menggambar (4).",
     parts: [
@@ -371,87 +112,115 @@ const questions: Q[] = [
       { label: "c.", text: "Sajikan data ini dalam bentuk tabel frekuensi lengkap dengan frekuensi relatif." },
     ],
   }),
-  Qn(32, "Identifikasi Datum dan Data – TKA", {
+  Qn(4, "Jenis-Jenis Data – UN", {
     type: "mixed",
-    content: "Dalam statistika, data adalah kumpulan fakta atau informasi, sedangkan datum adalah satu nilai tunggal.",
+    diagram: <TableJenisData />,
+    content: "Perhatikan tabel jenis data di atas, kemudian jawab pertanyaan berikut:",
     parts: [
-      { label: "a.", text: "Contoh data: nilai ulangan semua siswa kelas 9A. Apa yang dimaksud datum dari contoh ini?" },
-      { label: "b.", text: "Sebutkan 3 sumber data sekunder yang sering digunakan dalam penelitian." },
-      { label: "c.", text: "Apakah data yang dikumpulkan dari internet termasuk data primer atau sekunder?" },
+      { label: "a.", text: "Sebutkan perbedaan antara data kualitatif dan data kuantitatif. Berikan masing-masing dua contoh." },
+      { label: "b.", text: "Apakah 'jumlah siswa dalam kelas' termasuk data diskrit atau kontinu? Jelaskan." },
+      { label: "c.", text: "Apakah 'berat badan siswa' termasuk data diskrit atau kontinu? Jelaskan." },
     ],
   }),
-  Qn(33, "Ukuran Sampel Ideal – ANBK", {
+  Qn(5, "Data Primer dan Sekunder", {
     type: "mixed",
-    mathContent: "n = \\frac{N}{1 + Ne^2}",
-    content: "Gunakan rumus Slovin untuk menentukan ukuran sampel:",
+    content: "Tentukan apakah data berikut termasuk data primer atau data sekunder, kemudian jelaskan alasannya:",
     parts: [
-      { label: "a.", math: "N = 200, e = 10\\%: n = \\frac{200}{1 + 200(0{,}1)^2} = \\frac{200}{1+2} = \\ldots" },
-      { label: "b.", math: "N = 500, e = 5\\%: n = \\frac{500}{1+500(0{,}05)^2} = \\ldots" },
-      { label: "c.", math: "N = 1000, e = 5\\%: n = \\ldots" },
+      { label: "a.", text: "Hasil kuesioner yang disebarkan langsung oleh peneliti kepada responden." },
+      { label: "b.", text: "Data jumlah penduduk dari Badan Pusat Statistik (BPS)." },
+      { label: "c.", text: "Hasil wawancara langsung antara peneliti dan narasumber." },
     ],
   }),
-  Qn(34, "Pengertian Datum Pencilan – UN", {
+  Qn(6, "Teknik Pengumpulan Data – ANBK", {
     type: "mixed",
-    content: "Data IPK mahasiswa: 2.5, 3.0, 3.2, 3.1, 2.8, 3.5, 1.0, 3.3, 3.0, 2.9",
+    diagram: <TeknikSamplingDiagram />,
+    content: "Perhatikan diagram teknik pengambilan sampel di atas, kemudian jawab pertanyaan berikut:",
     parts: [
-      { label: "a.", text: "Identifikasi datum yang terlihat berbeda jauh dari yang lain (pencilan/outlier)." },
-      { label: "b.", text: "Apa pengaruh adanya pencilan terhadap rata-rata data?" },
-      { label: "c.", text: "Bagaimana cara menangani data pencilan dalam analisis statistika?" },
+      { label: "a.", text: "Jelaskan apa yang dimaksud dengan teknik observasi dalam pengumpulan data. Berikan satu contoh." },
+      { label: "b.", text: "Jelaskan perbedaan antara wawancara terstruktur dan wawancara tidak terstruktur." },
+      { label: "c.", text: "Apa kelebihan penggunaan angket/kuesioner dibandingkan wawancara langsung?" },
     ],
   }),
-  Qn(35, "Tabel Distribusi Frekuensi Kumulatif – TKA", {
+  Qn(7, "Sensus vs Sampling – UN", {
     type: "mixed",
-    content: "Data berat badan (frekuensi): 40–44 (3), 45–49 (6), 50–54 (11), 55–59 (8), 60–64 (2).",
+    content: "Suatu kota memiliki 500.000 penduduk. Pemerintah ingin mengetahui tingkat pendidikan warganya.",
     parts: [
-      { label: "a.", text: "Buat tabel frekuensi kumulatif kurang dari (fk<)." },
-      { label: "b.", text: "Buat tabel frekuensi kumulatif lebih dari (fk>)." },
-      { label: "c.", text: "Berapa banyak data yang beratnya kurang dari 55 kg?" },
+      { label: "a.", text: "Jelaskan apa yang dimaksud dengan sensus dan berikan contohnya." },
+      { label: "b.", text: "Apa keuntungan menggunakan metode sampling dibandingkan sensus?" },
+      { label: "c.", text: "Dalam situasi di atas, metode mana yang lebih praktis digunakan? Jelaskan alasanmu." },
     ],
   }),
-  Qn(36, "Soal UN – Memilih Teknik Sampling yang Tepat", {
+  Qn(8, "Sampling Acak Sederhana – TKA", {
     type: "mixed",
-    content: "Pilih teknik sampling yang paling tepat untuk situasi berikut:",
+    content: "Dalam kelas 9A terdapat 30 siswa. Akan dipilih 6 siswa sebagai sampel secara acak sederhana.",
     parts: [
-      { label: "a.", text: "Memilih 10 siswa dari 30 siswa satu kelas secara acak." },
-      { label: "b.", text: "Meneliti kepuasan pelanggan dari berbagai kota di Indonesia." },
-      { label: "c.", text: "Mengambil sampel dari daftar pelanggan yang sudah diurutkan." },
+      { label: "a.", text: "Jelaskan langkah-langkah melakukan sampling acak sederhana dengan cara undian." },
+      { label: "b.", math: "\\text{Berapa peluang setiap siswa terpilih sebagai sampel? } P = \\frac{6}{30} = \\ldots" },
+      { label: "c.", text: "Apa kelebihan dan kelemahan metode sampling acak sederhana?" },
     ],
   }),
-  Qn(37, "Soal ANBK – Menyusun Pertanyaan Penelitian", {
+  Qn(9, "Tabel Distribusi Frekuensi Data Tunggal – UN", {
     type: "mixed",
-    content: "Seorang siswa ingin meneliti hubungan antara durasi tidur dan konsentrasi belajar.",
+    content: "Nilai ulangan matematika 15 siswa: 7, 8, 6, 9, 7, 8, 10, 6, 7, 9, 8, 7, 6, 8, 9",
     parts: [
-      { label: "a.", text: "Rumuskan judul penelitian yang tepat." },
-      { label: "b.", text: "Tentukan variabel bebas dan variabel terikat." },
-      { label: "c.", text: "Teknik pengumpulan data apa yang paling sesuai? Jelaskan." },
+      { label: "a.", text: "Urutkan data dari nilai terkecil ke terbesar." },
+      { label: "b.", text: "Buat tabel distribusi frekuensi dari data di atas (nilai | frekuensi)." },
+      { label: "c.", text: "Nilai berapa yang memiliki frekuensi paling tinggi (modus)?" },
     ],
   }),
-  Qn(38, "Soal TKA – Frekuensi dan Persentase", {
+  Qn(10, "Frekuensi Relatif – ANBK", {
     type: "mixed",
-    content: "Survei transportasi 50 siswa: Sepeda motor (20), Mobil (10), Angkot (12), Jalan kaki (8).",
+    mathContent: "f_r = \\frac{f_i}{n} \\times 100\\%",
+    content: "Dari 40 siswa, hasil ulangan dikelompokkan: Nilai 60 (8 siswa), Nilai 70 (12 siswa), Nilai 80 (10 siswa), Nilai 90 (10 siswa).",
     parts: [
-      { label: "a.", math: "\\text{Persen sepeda motor} = \\frac{20}{50} \\times 100\\% = \\ldots" },
-      { label: "b.", math: "\\text{Persen mobil} = \\frac{10}{50} \\times 100\\% = \\ldots" },
-      { label: "c.", text: "Moda transportasi apa yang paling sedikit digunakan?" },
+      { label: "a.", math: "f_r \\text{ nilai 60} = \\frac{8}{40} \\times 100\\% = \\ldots \\%" },
+      { label: "b.", math: "f_r \\text{ nilai 70} = \\frac{12}{40} \\times 100\\% = \\ldots \\%" },
+      { label: "c.", text: "Verifikasi bahwa jumlah semua frekuensi relatif sama dengan 100%." },
     ],
   }),
-  Qn(39, "Soal ANBK – Interpretasi Data", {
+  Qn(11, "Rentang Data – TKA", {
     type: "mixed",
-    content: "Nilai rata-rata ujian 3 sekolah: Sekolah A = 75, Sekolah B = 82, Sekolah C = 68.",
+    content: "Data tinggi badan 10 siswa (cm): 145, 150, 148, 162, 155, 158, 145, 160, 155, 150",
     parts: [
-      { label: "a.", text: "Sekolah mana yang memiliki rata-rata tertinggi dan terendah?" },
-      { label: "b.", text: "Apakah nilai rata-rata yang tinggi selalu berarti semua siswa pandai? Jelaskan." },
-      { label: "c.", text: "Informasi tambahan apa yang kamu butuhkan untuk membandingkan ketiga sekolah tersebut secara adil?" },
+      { label: "a.", math: "\\text{Rentang} = \\text{nilai terbesar} - \\text{nilai terkecil} = \\ldots - \\ldots = \\ldots \\text{ cm}" },
+      { label: "b.", text: "Tentukan nilai minimum dan maksimum dari data tersebut." },
+      { label: "c.", text: "Berapa banyak siswa yang memiliki tinggi badan di atas 155 cm?" },
     ],
   }),
-  Qn(40, "Soal UN/ANBK/TKA – Gabungan Pengantar Statistika", {
+  Qn(12, "Pengertian Variabel Penelitian – UN", {
     type: "mixed",
-    content: "Penelitian tentang nilai matematika 100 siswa SMP menggunakan sampling stratifikasi proporsional dari 3 kelas (Kelas A: 40 siswa, Kelas B: 35 siswa, Kelas C: 25 siswa).",
+    content: "Seorang siswa meneliti pengaruh durasi belajar terhadap nilai ujian.",
     parts: [
-      { label: "a.", math: "\\text{Sampel kelas A jika total sampel 20: } \\frac{40}{100} \\times 20 = \\ldots" },
-      { label: "b.", math: "\\text{Sampel kelas B: } \\frac{35}{100} \\times 20 = \\ldots" },
-      { label: "c.", math: "\\text{Sampel kelas C: } \\frac{25}{100} \\times 20 = \\ldots" },
-      { label: "d.", text: "Apakah hasil penjumlahan sampel dari ketiga kelas = 20? Verifikasi." },
+      { label: "a.", text: "Apa yang dimaksud dengan variabel bebas (independen)? Sebutkan variabel bebas dari penelitian di atas." },
+      { label: "b.", text: "Apa yang dimaksud dengan variabel terikat (dependen)? Sebutkan variabel terikat dari penelitian di atas." },
+      { label: "c.", text: "Mengapa penting untuk mengidentifikasi variabel sebelum memulai penelitian?" },
+    ],
+  }),
+  Qn(13, "Identifikasi Populasi dan Sampel – ANBK", {
+    type: "mixed",
+    content: "Seorang guru ingin meneliti kebiasaan membaca siswa SMP di kota Bandung. Terdapat 20 sekolah dengan total 6.000 siswa.",
+    parts: [
+      { label: "a.", text: "Tentukan populasi dari penelitian tersebut." },
+      { label: "b.", math: "\\text{Dengan rumus Slovin, } e=5\\%: n = \\frac{6000}{1+6000(0{,}05)^2} = \\ldots" },
+      { label: "c.", text: "Teknik sampling apa yang tepat agar semua sekolah terwakili? Jelaskan alasanmu." },
+    ],
+  }),
+  Qn(14, "Membaca Tabel Distribusi Frekuensi – TKA", {
+    type: "mixed",
+    content: "Tabel distribusi frekuensi tinggi badan siswa:\nKelas: 150–154 (f=3), 155–159 (f=7), 160–164 (f=12), 165–169 (f=8), 170–174 (f=5). Total = 35 siswa.",
+    parts: [
+      { label: "a.", text: "Berapa banyak siswa yang memiliki tinggi badan kurang dari 160 cm?" },
+      { label: "b.", math: "\\text{Persentase siswa dengan tinggi 160–169 cm} = \\frac{12+8}{35} \\times 100\\% = \\ldots" },
+      { label: "c.", text: "Kelas interval mana yang memiliki frekuensi tertinggi?" },
+    ],
+  }),
+  Qn(15, "Analisis Data dan Penarikan Kesimpulan – UN", {
+    type: "mixed",
+    content: "Hasil survei penggunaan transportasi 50 siswa SMP: Sepeda motor (20), Mobil (10), Angkot (12), Jalan kaki (8).",
+    parts: [
+      { label: "a.", math: "\\text{Persentase siswa yang naik sepeda motor} = \\frac{20}{50} \\times 100\\% = \\ldots \\%" },
+      { label: "b.", text: "Moda transportasi apa yang paling sedikit digunakan? Berapa persentasenya?" },
+      { label: "c.", text: "Berdasarkan data di atas, simpulkan jenis transportasi yang paling populer dan berikan satu alasan mengapa hal itu bisa terjadi." },
     ],
   }),
 ];
@@ -473,7 +242,7 @@ const PengantarStatistikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
