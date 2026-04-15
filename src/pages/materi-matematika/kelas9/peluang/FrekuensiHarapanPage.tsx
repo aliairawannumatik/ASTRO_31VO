@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, TrendingUp } from 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import heroImage from "@assets/Gemini_Generated_Image_vtcobhvtcobhvtco_1776224453788.png";
 
 const FrekuensiHarapanPage = () => {
   const navigate = useNavigate();
@@ -53,9 +54,13 @@ const FrekuensiHarapanPage = () => {
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Prediksi Berapa Kali Suatu Kejadian Akan Terjadi
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">
+        <p className="text-white/50 text-xs text-center mb-4 font-body">
           Kelas 9 · Peluang · Materi Matematika
         </p>
+
+        <div className="flex justify-center mb-6">
+          <img src={heroImage} alt="Melempar dadu – ilustrasi frekuensi harapan" className="w-56 rounded-xl shadow-lg shadow-cyan-900/30 border border-cyan-500/20" />
+        </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
