@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers } from "luc
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import heroImage from "@assets/image_1776223164069.png";
 
 const RuangSampelPage = () => {
   const navigate = useNavigate();
@@ -59,6 +60,14 @@ const RuangSampelPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">
           Kelas 9 · Peluang · Materi Matematika
         </p>
+
+        <div className="mb-6 rounded-2xl overflow-hidden border border-cyan-500/20 shadow-lg shadow-cyan-900/30">
+          <img
+            src={heroImage}
+            alt="Melempar koin – ilustrasi ruang sampel"
+            className="w-full object-cover max-h-64"
+          />
+        </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
