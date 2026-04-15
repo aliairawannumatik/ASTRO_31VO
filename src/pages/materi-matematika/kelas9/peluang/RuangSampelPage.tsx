@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import heroImage from "@assets/image_1776223164069.png";
 import coinImage from "@assets/image_1776223467875.png";
+import diceImage from "@assets/image_1776223510131.png";
 
 const RuangSampelPage = () => {
   const navigate = useNavigate();
@@ -175,6 +176,9 @@ const RuangSampelPage = () => {
                 {/* DADU */}
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🎲 b. Dadu Bermuka Enam</p>
+                  <div className="flex justify-center">
+                    <img src={diceImage} alt="Dadu bermuka enam" className="w-48 rounded-lg" />
+                  </div>
                   <div className="flex gap-2 justify-center flex-wrap">
                     {[1, 2, 3, 4, 5, 6].map((n) => (
                       <div key={n} className="w-12 h-12 bg-white/10 border border-white/30 rounded-xl flex items-center justify-center">
