@@ -61,11 +61,11 @@ const RuangSampelPage = () => {
           Kelas 9 · Peluang · Materi Matematika
         </p>
 
-        <div className="mb-6 rounded-2xl overflow-hidden border border-cyan-500/20 shadow-lg shadow-cyan-900/30">
+        <div className="mb-6 rounded-xl overflow-hidden border border-cyan-500/20 shadow-lg shadow-cyan-900/30 mx-auto w-28">
           <img
             src={heroImage}
             alt="Melempar koin – ilustrasi ruang sampel"
-            className="w-full object-cover max-h-64"
+            className="w-full object-cover"
           />
         </div>
 
