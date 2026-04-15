@@ -650,6 +650,7 @@ import PeluangEmpirikMMK9Page from "./pages/materi-matematika/kelas9/peluang/Pel
 import PeluangTeoretikMMK9Page from "./pages/materi-matematika/kelas9/peluang/PeluangTeoretikPage";
 import FrekuensiHarapanMMK9Page from "./pages/materi-matematika/kelas9/peluang/FrekuensiHarapanPage";
 import KomplementMMK9Page from "./pages/materi-matematika/kelas9/peluang/KomplementPage";
+import PeluangKejadianMajemukMMK9Page from "./pages/materi-matematika/kelas9/peluang/PeluangKejadianMajemukPage";
 import PersamaanKuadratMMK9Page from "./pages/materi-matematika/kelas9/PersamaanKuadratPage";
 import PKMMBentukUmumPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/BentukUmumPage";
 import PKMMPemfaktoranPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PemfaktoranPage";
@@ -1328,6 +1329,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/peluang/komplemen" element={<KomplementMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKMMBentukUmumPage />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKMMPemfaktoranPage />} />

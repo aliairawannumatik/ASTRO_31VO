@@ -6,6 +6,7 @@ const subtopics = [
   { label: "PELUANG TEORETIK", path: "/materi-matematika/kelas-9/peluang/peluang-teoretik", icon: "🎲" },
   { label: "FREKUENSI HARAPAN", path: "/materi-matematika/kelas-9/peluang/frekuensi-harapan", icon: "📈" },
   { label: "KOMPLEMEN SUATU KEJADIAN", path: "/materi-matematika/kelas-9/peluang/komplemen", icon: "🔄" },
+  { label: "PELUANG KEJADIAN MAJEMUK", path: "/materi-matematika/kelas-9/peluang/kejadian-majemuk", icon: "🔗" },
 ];
 
 const PeluangPage = () => (
