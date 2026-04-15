@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical } fro
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import heroImage from "@assets/image_1776224212212.png";
 
 const PeluangEmpirikPage = () => {
   const navigate = useNavigate();
@@ -53,9 +54,13 @@ const PeluangEmpirikPage = () => {
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Peluang Berbasis Data Nyata dari Percobaan
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">
+        <p className="text-white/50 text-xs text-center mb-4 font-body">
           Kelas 9 · Peluang · Materi Matematika
         </p>
+
+        <div className="flex justify-center mb-6">
+          <img src={heroImage} alt="Melempar koin – ilustrasi peluang empirik" className="w-40 rounded-xl shadow-lg shadow-cyan-900/30 border border-cyan-500/20" />
+        </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
