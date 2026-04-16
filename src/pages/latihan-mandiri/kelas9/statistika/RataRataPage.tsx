@@ -322,6 +322,144 @@ const questions: Q[] = [
       { label: "c.", math: "6n+30 = 114 \\Rightarrow n = \\ldots" },
     ],
   }),
+  Qn(23, "Mean dari Diagram Batang – UN", {
+    type: "mixed",
+    diagram: (() => (
+      <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
+        <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
+        <text x="150" y="18" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Nilai Ulangan IPA – 20 Siswa</text>
+        {[0,15,30,45,60,75,90].map((h,i) => (
+          <g key={i}>
+            <line x1="38" y1={145-h} x2="285" y2={145-h} stroke="#1d4ed8" strokeWidth="0.5" strokeOpacity="0.4"/>
+            <text x="35" y={148-h} fill="#94a3b8" fontSize="7" textAnchor="end">{i}</text>
+          </g>
+        ))}
+        {[["5",2,"#60a5fa"],["6",4,"#3b82f6"],["7",6,"#2563eb"],["8",5,"#1d4ed8"],["9",2,"#60a5fa"],["10",1,"#93c5fd"]].map(([val,freq,color],i) => (
+          <g key={i}>
+            <rect x={48+i*38} y={145-Number(freq)*15} width="28" height={Number(freq)*15} fill={color as string} fillOpacity="0.8" rx="3"/>
+            <text x={62+i*38} y={142-Number(freq)*15} fill="#dbeafe" fontSize="8" textAnchor="middle">{freq}</text>
+            <text x={62+i*38} y="158" fill="#93c5fd" fontSize="8" textAnchor="middle">{val}</text>
+          </g>
+        ))}
+        <line x1="40" y1="145" x2="285" y2="145" stroke="#3b82f6" strokeWidth="1.5"/>
+        <line x1="40" y1="25" x2="40" y2="145" stroke="#3b82f6" strokeWidth="1.5"/>
+        <text x="162" y="170" fill="#94a3b8" fontSize="8" textAnchor="middle">Nilai</text>
+      </svg>
+    ))(),
+    content: "Diagram batang di atas menunjukkan nilai ulangan IPA dari 20 siswa.",
+    parts: [
+      { label: "a.", math: "\\sum f_i x_i = 5(2)+6(4)+7(6)+8(5)+9(2)+10(1) = \\ldots" },
+      { label: "b.", math: "\\bar{x} = \\frac{\\ldots}{20} = \\ldots" },
+      { label: "c.", text: "Berapa banyak siswa yang mendapat nilai di bawah rata-rata?" },
+    ],
+  }),
+  Qn(24, "Perbandingan Jumlah Siswa dari Mean – UN", {
+    type: "mixed",
+    content: "Dalam suatu kelas, rata-rata nilai ujian siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 8,1. Rata-rata nilai seluruh kelas adalah 7,5.",
+    parts: [
+      { label: "a.", text: "Misalkan banyak siswa laki-laki = L dan perempuan = P. Tuliskan persamaan rata-rata gabungannya!" },
+      { label: "b.", math: "7{,}2L + 8{,}1P = 7{,}5(L+P) \\Rightarrow 0{,}6P = 0{,}3L" },
+      { label: "c.", math: "\\frac{L}{P} = \\frac{0{,}6}{0{,}3} = \\ldots \\Rightarrow L : P = \\ldots" },
+    ],
+  }),
+  Qn(25, "Mencari Jumlah Siswa dari Mean Gabungan – TKA", {
+    type: "mixed",
+    content: "Rata-rata nilai ulangan matematika siswa perempuan adalah 75 dan siswa laki-laki adalah 66. Rata-rata nilai seluruh kelas adalah 72. Jumlah siswa dalam kelas adalah 36 orang.",
+    parts: [
+      { label: "a.", text: "Misalkan banyak siswa laki-laki = L dan perempuan = P, maka L + P = 36." },
+      { label: "b.", math: "75P + 66L = 72 \\times 36 = 2592" },
+      { label: "c.", math: "75(36-L)+66L = 2592 \\Rightarrow 2700-9L = 2592 \\Rightarrow L = \\ldots" },
+    ],
+  }),
+  Qn(26, "Selisih Siswa dari Data Remedial – ANBK", {
+    type: "mixed",
+    content: "Sebanyak 20 siswa mengikuti remedial matematika. Rata-rata nilai mereka adalah 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5.",
+    parts: [
+      { label: "a.", text: "Misalkan banyak siswa laki-laki = L. Tuliskan persamaan jumlah nilai seluruh siswa!" },
+      { label: "b.", math: "6L + 8{,}5(20-L) = 7 \\times 20 \\Rightarrow 170-2{,}5L = 140 \\Rightarrow L = \\ldots" },
+      { label: "c.", text: "Berapa selisih banyak siswa laki-laki dan perempuan?" },
+    ],
+  }),
+  Qn(27, "Banyak Siswa di Atas Rata-Rata – UN", {
+    type: "mixed",
+    diagram: (() => (
+      <svg width="300" height="115" viewBox="0 0 300 115" className="mx-auto">
+        <rect x="4" y="4" width="292" height="107" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
+        <text x="150" y="18" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Tabel Nilai Ulangan Harian</text>
+        <rect x="10" y="23" width="280" height="16" rx="3" fill="#1d4ed8" fillOpacity="0.35"/>
+        <text x="80" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">Nilai</text>
+        <text x="130" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">3</text>
+        <text x="157" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">4</text>
+        <text x="184" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">5</text>
+        <text x="211" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">6</text>
+        <text x="238" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">7</text>
+        <text x="262" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">8</text>
+        <text x="284" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">9</text>
+        <rect x="10" y="39" width="280" height="16" fill="#1e3a5f" fillOpacity="0.25"/>
+        <text x="80" y="50" fill="#bfdbfe" fontSize="8" textAnchor="middle">Frekuensi</text>
+        {[["130","2"],["157","3"],["184","4"],["211","5"],["238","3"],["262","2"],["284","1"]].map(([cx,f],i) => (
+          <text key={i} x={Number(cx)} y="50" fill="#60a5fa" fontSize="8" textAnchor="middle">{f}</text>
+        ))}
+        <rect x="10" y="55" width="280" height="14" fill="#1d4ed8" fillOpacity="0.2"/>
+        <text x="150" y="65" fill="#94a3b8" fontSize="7" textAnchor="middle">n = 20 siswa</text>
+        <text x="150" y="85" fill="#fbbf24" fontSize="8" textAnchor="middle" fontWeight="bold">Σfᵢxᵢ = 3(2)+4(3)+5(4)+6(5)+7(3)+8(2)+9(1) = 114</text>
+        <text x="150" y="100" fill="#34d399" fontSize="8" textAnchor="middle">Rata-rata = 114 ÷ 20 = 5,7</text>
+      </svg>
+    ))(),
+    content: "Dari tabel nilai ulangan harian di atas:",
+    parts: [
+      { label: "a.", math: "\\bar{x} = \\frac{3(2)+4(3)+5(4)+6(5)+7(3)+8(2)+9(1)}{20} = \\frac{114}{20} = \\ldots" },
+      { label: "b.", text: "Siswa yang mendapat nilai lebih dari rata-rata adalah yang mendapat nilai 6, 7, 8, atau 9." },
+      { label: "c.", math: "n_{>\\bar{x}} = f_6+f_7+f_8+f_9 = 5+3+2+1 = \\ldots \\text{ siswa}" },
+    ],
+  }),
+  Qn(28, "Mean dan Data Tidak Diketahui – ANBK", {
+    type: "mixed",
+    diagram: (() => (
+      <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
+        <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
+        <text x="150" y="18" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Pengunjung Perpustakaan (5 Hari)</text>
+        {[0,10,20,30,40,50].map((h,i) => (
+          <g key={i}>
+            <line x1="45" y1={145-h*2} x2="285" y2={145-h*2} stroke="#1d4ed8" strokeWidth="0.5" strokeOpacity="0.4"/>
+            <text x="42" y={148-h*2} fill="#94a3b8" fontSize="7" textAnchor="end">{h}</text>
+          </g>
+        ))}
+        {[["Sen",35,"#3b82f6"],["Sel",40,"#2563eb"],["Rab",0,"#64748b"],["Kam",50,"#1d4ed8"],["Jum",45,"#3b82f6"]].map(([day,val,color],i) => (
+          <g key={i}>
+            {Number(val) > 0
+              ? <rect x={52+i*44} y={145-Number(val)*2} width="30" height={Number(val)*2} fill={color as string} fillOpacity="0.8" rx="3"/>
+              : <>
+                  <rect x={52+i*44} y={85} width="30" height={60} fill="#334155" fillOpacity="0.5" rx="3" strokeDasharray="4,3" stroke="#fbbf24" strokeWidth="1"/>
+                  <text x={67+i*44} y="118" fill="#fbbf24" fontSize="11" textAnchor="middle" fontWeight="bold">?</text>
+                </>
+            }
+            {Number(val) > 0 && <text x={67+i*44} y={140-Number(val)*2} fill="#dbeafe" fontSize="7" textAnchor="middle">{val}</text>}
+            <text x={67+i*44} y="158" fill="#93c5fd" fontSize="8" textAnchor="middle">{day as string}</text>
+          </g>
+        ))}
+        <line x1="45" y1="145" x2="285" y2="145" stroke="#3b82f6" strokeWidth="1.5"/>
+        <line x1="45" y1="25" x2="45" y2="145" stroke="#3b82f6" strokeWidth="1.5"/>
+        <text x="60" y="170" fill="#fbbf24" fontSize="7" textAnchor="start">Rata-rata = 41 orang/hari</text>
+      </svg>
+    ))(),
+    content: "Diagram batang di atas menunjukkan data pengunjung perpustakaan sekolah selama 5 hari. Data hari Rabu tidak terbaca. Diketahui rata-rata pengunjung adalah 41 orang per hari.",
+    parts: [
+      { label: "a.", math: "\\text{Total} = 41 \\times 5 = \\ldots \\text{ orang}" },
+      { label: "b.", math: "35 + 40 + R + 50 + 45 = \\ldots \\Rightarrow R = \\ldots \\text{ orang}" },
+      { label: "c.", text: "Hari apa saja pengunjungnya di atas rata-rata?" },
+    ],
+  }),
+  Qn(29, "Interpretasi Nilai Rata-Rata – TKA", {
+    type: "mixed",
+    content: "Sebuah kelas memiliki 25 siswi. Rata-rata tinggi badan mereka adalah 130 cm.\nPeriksa setiap pernyataan berikut: BENAR atau SALAH?",
+    parts: [
+      { label: "A.", text: "Jika ada siswi dengan tinggi 132 cm, maka pasti ada siswi lain yang tingginya 128 cm." },
+      { label: "B.", text: "Jika 23 siswi masing-masing tingginya 130 cm dan satu siswi tingginya 133 cm, maka siswi ke-25 tingginya 127 cm." },
+      { label: "C.", text: "Jika diurutkan dari terpendek ke tertinggi, siswi urutan ke-13 (tengah) pasti tingginya 130 cm." },
+      { label: "D.", text: "Setengah dari siswi di kelas pasti lebih pendek dari 130 cm dan setengahnya lagi pasti lebih tinggi." },
+    ],
+  }),
 ];
 
 const RataRataPage = () => {
@@ -342,7 +480,7 @@ const RataRataPage = () => {
           <p className="text-blue-200/70 text-sm text-center font-body mb-1">Rata-Rata dan Rata-Rata Gabungan</p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-2">
-            <span className="text-blue-400 text-xs font-bold">📋 22 Soal</span>
+            <span className="text-blue-400 text-xs font-bold">📋 29 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
