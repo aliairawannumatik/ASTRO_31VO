@@ -60,7 +60,7 @@ const subtopics = [
   {
     label: "KOMPLEMEN SUATU KEJADIAN",
     path: "/latihan-mandiri/kelas-9/peluang/komplemen",
-    soal: 40,
+    soal: 24,
     icon: FlipHorizontal2,
     gradient: "from-rose-900/40 to-pink-900/30",
     border: "border-rose-500/30",
@@ -104,7 +104,7 @@ const PeluangPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">149 Soal Total · Diagram Pohon, Tabel & Venn</span>
+            <span className="text-white/70 text-xs font-body">133 Soal Total · Diagram Pohon, Tabel & Venn</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>

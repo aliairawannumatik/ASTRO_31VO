@@ -153,23 +153,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika besok P(hujan) = 0,4, berapa P(tidak hujan) besok?" },
     ],
   }),
-  Qn(9, "Komplemen – Kartu Bernomor", {
-    type: "mixed",
-    content: "Kartu bernomor 1–10 diacak. Satu kartu diambil. A = kartu bernomor ganjil.",
-    diagram: (
-      <FreqTable
-        caption="Kartu bernomor 1–10"
-        headers={["Jenis","Ganjil (A)","Genap (A')","Total"]}
-        rows={[["Kartu",5,5,10]]}
-      />
-    ),
-    parts: [
-      { label: "a.", math: "P(A) = \\frac{5}{10} = \\frac{1}{2}" },
-      { label: "b.", math: "P(A') = 1 - \\frac{1}{2} = \\frac{1}{2}" },
-      { label: "c.", text: "A' (genap) = {2, 4, 6, 8, 10}. Verifikasi P(A') = 5/10." },
-    ],
-  }),
-  Qn(10, "Komplemen – Soal Cerita Ujian", {
+  Qn(9, "Komplemen – Soal Cerita Ujian", {
     type: "mixed",
     content: "Peluang seorang siswa lulus ujian adalah 4/5. Berapa peluang siswa tersebut tidak lulus?",
     parts: [
@@ -178,27 +162,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika ada 200 siswa mengikuti ujian, berapa frekuensi harapan yang tidak lulus?" },
     ],
   }),
-  Qn(11, "Komplemen Dua Dadu – Tidak Sama", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i===j} />,
-    content: "Dua dadu dilempar. A = kedua dadu sama (doublet, diarsir).",
-    parts: [
-      { label: "a.", math: "P(\\text{doublet}) = \\frac{6}{36} = \\frac{1}{6}" },
-      { label: "b.", math: "P(\\text{bukan doublet}) = 1 - \\frac{1}{6} = \\frac{5}{6}" },
-      { label: "c.", math: "n(\\text{bukan doublet}) = 36 - 6 = \\ldots" },
-    ],
-  }),
-  Qn(12, "Soal UN – Komplemen dan Banyak Titik Sampel", {
-    type: "mixed",
-    content: "Dua dadu dilempar. A = jumlah kedua dadu lebih dari 9.",
-    diagram: <DiceGrid highlight={(i,j) => i+j>9} />,
-    parts: [
-      { label: "a.", text: "Tentukan n(A) dari tabel." },
-      { label: "b.", math: "P(A) = \\frac{\\ldots}{36}" },
-      { label: "c.", math: "P(A') = P(\\text{jumlah} \\leq 9) = 1 - \\frac{\\ldots}{36} = \\ldots" },
-    ],
-  }),
-  Qn(13, "Memilih Mana yang Lebih Mudah – Komplemen", {
+  Qn(10, "Memilih Mana yang Lebih Mudah – Komplemen", {
     type: "mixed",
     content: "Kartu bernomor 1–20 diacak. A = angka bukan prima.",
     parts: [
@@ -207,7 +171,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(A) = 1 - \\frac{2}{5} = \\frac{3}{5}" },
     ],
   }),
-  Qn(14, "Komplemen – Spinner", {
+  Qn(11, "Komplemen – Spinner", {
     type: "mixed",
     content: "Sebuah spinner dengan 8 sektor sama besar bernomor 1–8. A = angka lebih dari 5.",
     parts: [
@@ -216,7 +180,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(A) + P(A') = \\frac{3}{8} + \\frac{5}{8} = 1 \\checkmark" },
     ],
   }),
-  Qn(15, "Soal UN – Mencari P(A) dari P(A')", {
+  Qn(12, "Soal UN – Mencari P(A) dari P(A')", {
     type: "mixed",
     content: "Peluang tidak terpilihnya kelereng merah dari suatu kantong adalah 5/8. Berapa peluang terpilihnya kelereng merah?",
     parts: [
@@ -225,7 +189,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika ada 40 kelereng, berapa kelereng merah dan berapa kelereng bukan merah?" },
     ],
   }),
-  Qn(16, "Komplemen – Dua Koin", {
+  Qn(13, "Komplemen – Dua Koin", {
     type: "mixed",
     content: "Dua koin dilempar. A = paling sedikit satu muncul Angka.",
     diagram: <VennDiagram label="S (4 titik sampel)" aLabel="A: AA,AG,GA" aCompLabel="A': GG" pa="3/4" pac="1/4" />,
@@ -235,7 +199,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(A) = 1 - \\frac{1}{4} = \\frac{3}{4}" },
     ],
   }),
-  Qn(17, "Komplemen – Kartu Gambar Remi", {
+  Qn(14, "Komplemen – Kartu Gambar Remi", {
     type: "mixed",
     content: "Satu kartu diambil dari 52 kartu remi. A = kartu gambar (J, Q, K).",
     parts: [
@@ -244,7 +208,7 @@ const questions: Q[] = [
       { label: "c.", text: "Kartu apa saja yang termasuk A' (bukan kartu gambar)?" },
     ],
   }),
-  Qn(18, "Soal TKA – Komplemen Kompleks", {
+  Qn(15, "Soal TKA – Komplemen Kompleks", {
     type: "mixed",
     content: "Sebuah kantong berisi 3 merah, 4 biru, 5 hijau. A = tidak terambil bola hijau.",
     parts: [
@@ -253,16 +217,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(A) = \\frac{3+4}{12} = \\frac{7}{12} \\checkmark \\text{ (verifikasi langsung)}" },
     ],
   }),
-  Qn(19, "Komplemen – Bilangan 1–50", {
-    type: "mixed",
-    content: "Satu bilangan dipilih acak dari 1–50. A = bukan bilangan prima.",
-    parts: [
-      { label: "a.", text: "Bilangan prima dari 1–50: {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47} → 15 bilangan." },
-      { label: "b.", math: "P(A') = P(\\text{prima}) = \\frac{15}{50} = \\frac{3}{10}" },
-      { label: "c.", math: "P(A) = 1 - \\frac{3}{10} = \\frac{7}{10}" },
-    ],
-  }),
-  Qn(20, "Soal UN – Komplemen dalam Konteks", {
+  Qn(16, "Soal UN – Komplemen dalam Konteks", {
     type: "mixed",
     content: "Di kelas 9 terdapat 36 siswa. 15 siswa suka matematika, 12 suka IPA, 9 suka keduanya.",
     diagram: (
@@ -278,7 +233,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{tidak keduanya}) = 1 - P(\\text{suka setidaknya satu})" },
     ],
   }),
-  Qn(21, "Komplemen – Soal Cuaca Lanjutan", {
+  Qn(17, "Komplemen – Soal Cuaca Lanjutan", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -293,37 +248,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa hari yang peluang hujannya lebih dari 0,4?" },
     ],
   }),
-  Qn(22, "Soal ANBK – Komplemen dengan Tabel", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Peluang hasil lemparan dadu"
-        headers={["Kejadian A","P(A)","P(A')"]}
-        rows={[
-          ["Angka 1","1/6","?"],
-          ["Angka genap","1/2","?"],
-          ["Angka > 4","1/3","?"],
-          ["Angka prima","1/2","?"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Lengkapi kolom P(A') menggunakan P(A') = 1 − P(A)." },
-      { label: "b.", math: "P(\\text{angka} \\leq 4) = 1 - P(\\text{angka} > 4) = \\ldots" },
-      { label: "c.", text: "Kejadian mana yang P(A) = P(A')? Mengapa?" },
-    ],
-  }),
-  Qn(23, "Komplemen – Dua Dadu, Jumlah Lebih dari 4", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i+j<=4} />,
-    content: "Sel diarsir adalah A' (jumlah ≤ 4).",
-    parts: [
-      { label: "a.", text: "Hitung n(A') dari tabel." },
-      { label: "b.", math: "P(A') = \\frac{\\ldots}{36}" },
-      { label: "c.", math: "P(A) = P(\\text{jumlah} > 4) = 1 - \\frac{\\ldots}{36} = \\ldots" },
-    ],
-  }),
-  Qn(24, "Soal UN – Komplemen Berganda", {
+  Qn(18, "Soal UN – Komplemen Berganda", {
     type: "mixed",
     content: "Dalam sebuah kantong terdapat bola berwarna. P(merah) = 0,3 dan P(biru) = 0,25. Sisanya bola hijau.",
     parts: [
@@ -332,16 +257,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika ada 40 bola, berapa bola hijau?" },
     ],
   }),
-  Qn(25, "Soal TKA – Mencari P Asal dari Komplemen", {
-    type: "mixed",
-    content: "P(A') = 7/12. Tentukan P(A) dan berapa fh jika n = 120.",
-    parts: [
-      { label: "a.", math: "P(A) = 1 - \\frac{7}{12} = \\frac{5}{12}" },
-      { label: "b.", math: "f_h(A) = 120 \\times \\frac{5}{12} = \\ldots" },
-      { label: "c.", math: "f_h(A') = 120 \\times \\frac{7}{12} = \\ldots" },
-    ],
-  }),
-  Qn(26, "Komplemen – Kartu Bernomor 1–25", {
+  Qn(19, "Komplemen – Kartu Bernomor 1–25", {
     type: "mixed",
     content: "Kartu bernomor 1–25 diacak. Satu kartu diambil. A = bukan kelipatan 5.",
     parts: [
@@ -350,25 +266,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(A) = 1 - \\frac{1}{5} = \\frac{4}{5}" },
     ],
   }),
-  Qn(27, "Soal UN – Hubungan P(A) dan P(A')", {
-    type: "mixed",
-    content: "Pada sebuah percobaan, P(A) = p. Jika P(A') = 3p − 1/4, tentukan nilai p.",
-    parts: [
-      { label: "a.", math: "P(A) + P(A') = 1 \\Rightarrow p + (3p - \\frac{1}{4}) = 1" },
-      { label: "b.", math: "4p - \\frac{1}{4} = 1 \\Rightarrow 4p = \\frac{5}{4} \\Rightarrow p = \\frac{5}{16}" },
-      { label: "c.", math: "P(A') = 3 \\times \\frac{5}{16} - \\frac{1}{4} = \\frac{15}{16} - \\frac{4}{16} = \\frac{11}{16}" },
-    ],
-  }),
-  Qn(28, "Komplemen – Tiga Koin", {
-    type: "mixed",
-    content: "Tiga koin dilempar. A = semua sisi sama (AAA atau GGG).",
-    parts: [
-      { label: "a.", math: "n(S) = 2^3 = 8" },
-      { label: "b.", math: "A = \\{\\text{AAA}, \\text{GGG}\\} \\Rightarrow P(A) = \\frac{2}{8} = \\frac{1}{4}" },
-      { label: "c.", math: "P(A') = P(\\text{tidak semua sama}) = 1 - \\frac{1}{4} = \\frac{3}{4}" },
-    ],
-  }),
-  Qn(29, "Soal ANBK – Komplemen Sederhana", {
+  Qn(20, "Soal ANBK – Komplemen Sederhana", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -383,17 +281,7 @@ const questions: Q[] = [
       { label: "c.", text: "Verifikasi: P(Membaca) + P(Musik) = P(bukan Olahraga)?" },
     ],
   }),
-  Qn(30, "Komplemen – Dua Dadu, Jumlah Ganjil", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => (i+j)%2===1} />,
-    content: "Sel diarsir menunjukkan A = jumlah ganjil.",
-    parts: [
-      { label: "a.", math: "n(A) = \\ldots" },
-      { label: "b.", math: "P(A) = \\frac{18}{36} = \\frac{1}{2}" },
-      { label: "c.", math: "P(A') = P(\\text{jumlah genap}) = 1 - \\frac{1}{2} = \\frac{1}{2}" },
-    ],
-  }),
-  Qn(31, "Soal UN – Aplikasi Komplemen dalam Kehidupan", {
+  Qn(21, "Soal UN – Aplikasi Komplemen dalam Kehidupan", {
     type: "mixed",
     content: "Peluang sebuah pesawat tiba tepat waktu adalah 0,92. Berapa peluang pesawat terlambat atau dibatalkan?",
     parts: [
@@ -402,7 +290,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika ada 250 penerbangan, berapa frekuensi harapan penerbangan yang tidak tepat waktu?" },
     ],
   }),
-  Qn(32, "Komplemen – Soal Pabrik", {
+  Qn(22, "Komplemen – Soal Pabrik", {
     type: "mixed",
     content: "Peluang produk tidak cacat adalah 0,96. Pabrik memproduksi 5.000 unit.",
     parts: [
@@ -411,41 +299,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa unit yang diharapkan tidak cacat?" },
     ],
   }),
-  Qn(33, "Soal TKA – Komplemen dengan Variabel", {
-    type: "mixed",
-    content: "Dalam sebuah kantong, P(Merah) = 2x, P(Biru) = x, P(Hijau) = 3x.",
-    parts: [
-      { label: "a.", math: "P(\\text{Merah}) + P(\\text{Biru}) + P(\\text{Hijau}) = 1 \\Rightarrow 6x = 1 \\Rightarrow x = \\frac{1}{6}" },
-      { label: "b.", math: "P(\\text{Merah}) = 2x = \\frac{2}{6} = \\frac{1}{3}" },
-      { label: "c.", math: "P(\\text{bukan Merah}) = 1 - \\frac{1}{3} = \\frac{2}{3}" },
-    ],
-  }),
-  Qn(34, "Soal UN Level Tinggi – Komplemen Gabungan", {
-    type: "mixed",
-    content: "Satu kartu diambil dari 52 kartu remi. A = kartu merah. B = kartu gambar (J,Q,K).",
-    diagram: (
-      <FreqTable
-        caption="Distribusi kartu remi"
-        headers={["","Kartu Gambar","Bukan Gambar","Total"]}
-        rows={[["Merah",6,20,26],["Hitam",6,20,26],["Total",12,40,52]]}
-      />
-    ),
-    parts: [
-      { label: "a.", math: "P(A \\cup B) = \\frac{26+6}{52} = \\frac{32}{52} = \\frac{8}{13}" },
-      { label: "b.", math: "P((A \\cup B)') = 1 - \\frac{8}{13} = \\frac{5}{13}" },
-      { label: "c.", text: "Kartu apa saja yang termasuk (A ∪ B)' (bukan merah dan bukan gambar)?" },
-    ],
-  }),
-  Qn(35, "Soal ANBK – Komplemen Kompleks", {
-    type: "mixed",
-    content: "Dadu dilempar sekali. Tentukan P(angka ≤ 4) menggunakan konsep komplemen.",
-    parts: [
-      { label: "a.", math: "A' = \\text{angka} > 4 = \\{5, 6\\} \\Rightarrow P(A') = \\frac{2}{6} = \\frac{1}{3}" },
-      { label: "b.", math: "P(A) = P(\\text{angka} \\leq 4) = 1 - \\frac{1}{3} = \\frac{2}{3}" },
-      { label: "c.", text: "Verifikasi: hitung langsung P(angka ≤ 4) = n({1,2,3,4})/6." },
-    ],
-  }),
-  Qn(36, "Soal UN – Komplemen dan fh", {
+  Qn(23, "Soal UN – Komplemen dan fh", {
     type: "mixed",
     content: "Peluang siswa tidak membawa tugas adalah 1/8. Dalam 1 semester ada 64 pertemuan.",
     parts: [
@@ -454,48 +308,13 @@ const questions: Q[] = [
       { label: "c.", math: "f_h(\\text{bawa tugas}) = 64 \\times \\frac{7}{8} = \\ldots" },
     ],
   }),
-  Qn(37, "Komplemen – Pengambilan dari Dua Jenis", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Kantong berisi kelereng dua warna"
-        headers={["Warna","Merah","Tidak Merah","Total"]}
-        rows={[["Banyak","m","40 - m",40]]}
-      />
-    ),
-    content: "Kantong berisi 40 kelereng. Peluang terambil merah = 3/8.",
-    parts: [
-      { label: "a.", math: "m = \\frac{3}{8} \\times 40 = \\ldots" },
-      { label: "b.", math: "P(\\text{tidak merah}) = 1 - \\frac{3}{8} = \\frac{5}{8}" },
-      { label: "c.", math: "n(\\text{tidak merah}) = 40 - m = \\ldots" },
-    ],
-  }),
-  Qn(38, "Komplemen – Dua Dadu, Setidaknya Satu 5", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i!==5 && j!==5} />,
-    content: "Sel diarsir adalah A' (tidak ada dadu bernilai 5).",
-    parts: [
-      { label: "a.", math: "n(A') = 5 \\times 5 = 25" },
-      { label: "b.", math: "P(A') = \\frac{25}{36}" },
-      { label: "c.", math: "P(A) = P(\\text{setidaknya satu 5}) = 1 - \\frac{25}{36} = \\frac{11}{36}" },
-    ],
-  }),
-  Qn(39, "Soal TKA – P(A') Lebih Mudah dari P(A)", {
+  Qn(24, "Soal TKA – P(A') Lebih Mudah dari P(A)", {
     type: "mixed",
     content: "Tiga koin dilempar. A = paling sedikit satu Angka.",
     parts: [
       { label: "a.", math: "A' = \\text{tidak ada Angka} = \\{\\text{GGG}\\} \\Rightarrow P(A') = \\frac{1}{8}" },
       { label: "b.", math: "P(A) = 1 - \\frac{1}{8} = \\frac{7}{8}" },
       { label: "c.", text: "Mengapa lebih mudah menghitung P(A) menggunakan komplemen?" },
-    ],
-  }),
-  Qn(40, "Soal UN Level Tinggi – Komplemen Total", {
-    type: "mixed",
-    content: "Dari sebuah kantong, peluang terambil bola merah adalah (x+2)/15 dan peluang terambil bola bukan merah adalah (2x+1)/15.",
-    parts: [
-      { label: "a.", math: "\\frac{x+2}{15} + \\frac{2x+1}{15} = 1 \\Rightarrow 3x + 3 = 15 \\Rightarrow x = \\ldots" },
-      { label: "b.", math: "P(\\text{merah}) = \\frac{x+2}{15} = \\ldots" },
-      { label: "c.", math: "P(\\text{bukan merah}) = 1 - P(\\text{merah}) = \\ldots" },
     ],
   }),
 ];
@@ -517,7 +336,7 @@ const KomplementPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 24 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
