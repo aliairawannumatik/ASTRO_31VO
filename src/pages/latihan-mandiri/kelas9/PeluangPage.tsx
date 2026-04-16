@@ -21,7 +21,7 @@ const subtopics = [
   {
     label: "PELUANG EMPIRIK DAN FREKUENSI RELATIF",
     path: "/latihan-mandiri/kelas-9/peluang/peluang-empirik",
-    soal: 40,
+    soal: 23,
     icon: BarChart3,
     gradient: "from-amber-900/40 to-orange-900/30",
     border: "border-amber-500/30",
@@ -104,7 +104,7 @@ const PeluangPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">200 Soal Total · Diagram Pohon, Tabel & Venn</span>
+            <span className="text-white/70 text-xs font-body">183 Soal Total · Diagram Pohon, Tabel & Venn</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
