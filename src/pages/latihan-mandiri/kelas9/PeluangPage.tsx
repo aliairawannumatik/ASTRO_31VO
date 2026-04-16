@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "RUANG SAMPEL DAN TITIK SAMPEL",
     path: "/latihan-mandiri/kelas-9/peluang/ruang-sampel",
-    soal: 40,
+    soal: 15,
     icon: Dices,
     gradient: "from-cyan-900/40 to-teal-900/30",
     border: "border-cyan-500/30",
@@ -104,7 +104,7 @@ const PeluangPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">111 Soal Total · Diagram Pohon, Tabel & Venn</span>
+            <span className="text-white/70 text-xs font-body">86 Soal Total · Diagram Pohon, Tabel & Venn</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
