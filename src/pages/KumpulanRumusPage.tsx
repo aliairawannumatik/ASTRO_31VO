@@ -407,6 +407,131 @@ const rumusData: RumusCategory[] = [
 
 const totalRumus = rumusData.reduce((sum, cat) => sum + cat.rumus.length, 0);
 
+type GroupSection = {
+  label: string;
+  emoji: string;
+  color: string;
+  bg: string;
+  border: string;
+  categoryIds: string[];
+};
+
+const groupSections: GroupSection[] = [
+  {
+    label: "Bilangan & Operasi",
+    emoji: "🔢",
+    color: "text-cyan-300",
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-500/30",
+    categoryIds: ["bilangan", "fpb-kpk", "pecahan", "perbandingan"],
+  },
+  {
+    label: "Aljabar & Fungsi",
+    emoji: "📐",
+    color: "text-violet-300",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/30",
+    categoryIds: ["aljabar", "plsv", "fungsi", "persamaan-garis", "aritmetika-sosial", "pola-bilangan", "persamaan-kuadrat"],
+  },
+  {
+    label: "Geometri & Pengukuran",
+    emoji: "📏",
+    color: "text-emerald-300",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/30",
+    categoryIds: ["sudut-garis", "segitiga", "segiempat", "lingkaran", "brsd", "brsl", "kesebangunan", "transformasi"],
+  },
+  {
+    label: "Statistika & Peluang",
+    emoji: "📊",
+    color: "text-orange-300",
+    bg: "bg-orange-500/10",
+    border: "border-orange-500/30",
+    categoryIds: ["statistika", "peluang"],
+  },
+];
+
+const renderCategoryCard = (
+  category: RumusCategory,
+  isOpen: boolean,
+  toggleCategory: (id: string) => void
+) => (
+  <div
+    key={category.id}
+    id={`cat-${category.id}`}
+    className={`rounded-2xl overflow-hidden border transition-all duration-300 ${
+      isOpen
+        ? `${category.border} ${category.bg} shadow-lg ${category.glow}`
+        : "border-white/8 bg-white/3 hover:bg-white/5 hover:border-white/15"
+    }`}
+  >
+    <button
+      onClick={() => toggleCategory(category.id)}
+      className="w-full flex items-center justify-between px-5 py-4 transition-colors"
+    >
+      <div className="flex items-center gap-3">
+        <div className={`w-9 h-9 rounded-xl flex items-center justify-center border transition-all ${
+          isOpen ? `${category.bg} ${category.border} ${category.color}` : "bg-white/5 border-white/10 text-white/50"
+        }`}>
+          {category.icon}
+        </div>
+        <div className="text-left">
+          <span className={`font-display text-sm font-bold transition-colors ${
+            isOpen ? category.color : "text-white/80"
+          }`}>
+            {category.title}
+          </span>
+        </div>
+        <span className={`text-xs px-2 py-0.5 rounded-full border transition-all ${
+          isOpen
+            ? `${category.bg} ${category.border} ${category.color}`
+            : "bg-white/5 border-white/10 text-white/40"
+        }`}>
+          {category.rumus.length}
+        </span>
+      </div>
+      <div className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all ${
+        isOpen ? `${category.bg} ${category.border}` : "bg-white/5"
+      }`}>
+        {isOpen
+          ? <ChevronUp className={`w-4 h-4 ${category.color}`} />
+          : <ChevronDown className="w-4 h-4 text-white/40" />
+        }
+      </div>
+    </button>
+
+    {isOpen && (
+      <div className="px-4 pb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {category.rumus.map((rumus, idx) => (
+            <div
+              key={idx}
+              className="relative rounded-xl overflow-hidden bg-black/20 border border-white/5 hover:border-white/15 transition-all"
+            >
+              <div className={`absolute left-0 top-0 bottom-0 w-0.5 ${category.color.replace("text-", "bg-")}`} />
+              <div className="pl-4 pr-3 py-3">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <span className={`text-xs font-semibold font-display ${category.color}`}>
+                    {rumus.name}
+                  </span>
+                  {rumus.description && (
+                    <span className="text-xs text-white/35 text-right leading-tight max-w-[150px]">
+                      {rumus.description}
+                    </span>
+                  )}
+                </div>
+                <div className="rounded-lg bg-black/30 px-2 py-2 text-white text-center overflow-x-auto border border-white/5">
+                  <BlockMath math={rumus.formula} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+);
+
 const KumpulanRumusPage = () => {
   const navigate = useNavigate();
   const [expandedCategory, setExpandedCategory] = useState<string | null>("bilangan");
@@ -520,7 +645,7 @@ const KumpulanRumusPage = () => {
         )}
 
         {/* ── Category Cards ── */}
-        <div className="space-y-3">
+        <div className="space-y-6">
           {filteredData.length === 0 && (
             <div className="text-center py-16 text-white/30">
               <Search className="w-10 h-10 mx-auto mb-3 opacity-30" />
@@ -528,91 +653,40 @@ const KumpulanRumusPage = () => {
             </div>
           )}
 
-          {filteredData.map((category) => {
-            const isOpen = expandedCategory === category.id;
-            return (
-              <div
-                key={category.id}
-                id={`cat-${category.id}`}
-                className={`rounded-2xl overflow-hidden border transition-all duration-300 ${
-                  isOpen
-                    ? `${category.border} ${category.bg} shadow-lg ${category.glow}`
-                    : "border-white/8 bg-white/3 hover:bg-white/5 hover:border-white/15"
-                }`}
-              >
-                {/* Category Header */}
-                <button
-                  onClick={() => toggleCategory(category.id)}
-                  className="w-full flex items-center justify-between px-5 py-4 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center border transition-all ${
-                      isOpen ? `${category.bg} ${category.border} ${category.color}` : "bg-white/5 border-white/10 text-white/50"
-                    }`}>
-                      {category.icon}
-                    </div>
-                    <div className="text-left">
-                      <span className={`font-display text-sm font-bold transition-colors ${
-                        isOpen ? category.color : "text-white/80"
-                      }`}>
-                        {category.title}
+          {searchQuery ? (
+            <div className="space-y-3">
+              {filteredData.map((category) => {
+                const isOpen = expandedCategory === category.id;
+                return renderCategoryCard(category, isOpen, toggleCategory);
+              })}
+            </div>
+          ) : (
+            groupSections.map((group) => {
+              const groupCategories = rumusData.filter(c => group.categoryIds.includes(c.id));
+              const groupFiltered = groupCategories;
+              if (groupFiltered.length === 0) return null;
+              return (
+                <div key={group.label}>
+                  <div className={`flex items-center gap-2 mb-3 px-1`}>
+                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl ${group.bg} border ${group.border}`}>
+                      <span className="text-base leading-none">{group.emoji}</span>
+                      <span className={`font-display text-xs font-bold tracking-wider uppercase ${group.color}`}>{group.label}</span>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${group.bg} border ${group.border} ${group.color} ml-1`}>
+                        {groupFiltered.reduce((s, c) => s + c.rumus.length, 0)} rumus
                       </span>
                     </div>
-                    <span className={`text-xs px-2 py-0.5 rounded-full border transition-all ${
-                      isOpen
-                        ? `${category.bg} ${category.border} ${category.color}`
-                        : "bg-white/5 border-white/10 text-white/40"
-                    }`}>
-                      {category.rumus.length}
-                    </span>
+                    <div className={`flex-1 h-px bg-gradient-to-r from-white/10 to-transparent`} />
                   </div>
-                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all ${
-                    isOpen ? `${category.bg} ${category.border}` : "bg-white/5"
-                  }`}>
-                    {isOpen
-                      ? <ChevronUp className={`w-4 h-4 ${category.color}`} />
-                      : <ChevronDown className="w-4 h-4 text-white/40" />
-                    }
+                  <div className="space-y-2">
+                    {groupFiltered.map((category) => {
+                      const isOpen = expandedCategory === category.id;
+                      return renderCategoryCard(category, isOpen, toggleCategory);
+                    })}
                   </div>
-                </button>
-
-                {/* Formula Cards */}
-                {isOpen && (
-                  <div className="px-4 pb-4">
-                    <div className="grid grid-cols-1 gap-2">
-                      {category.rumus.map((rumus, idx) => (
-                        <div
-                          key={idx}
-                          className="group/card relative rounded-xl overflow-hidden bg-black/20 border border-white/5 hover:border-white/15 transition-all"
-                        >
-                          {/* Colored left accent bar */}
-                          <div className={`absolute left-0 top-0 bottom-0 w-0.5 ${category.color.replace("text-", "bg-")}`} />
-
-                          <div className="pl-4 pr-3 py-3">
-                            {/* Name + description row */}
-                            <div className="flex items-start justify-between gap-2 mb-2">
-                              <span className={`text-xs font-semibold font-display ${category.color}`}>
-                                {rumus.name}
-                              </span>
-                              {rumus.description && (
-                                <span className="text-xs text-white/35 text-right leading-tight max-w-[180px]">
-                                  {rumus.description}
-                                </span>
-                              )}
-                            </div>
-                            {/* Formula */}
-                            <div className="rounded-lg bg-black/30 px-3 py-2 text-white text-center overflow-x-auto border border-white/5">
-                              <BlockMath math={rumus.formula} />
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+                </div>
+              );
+            })
+          )}
         </div>
 
         {/* ── Footer ── */}

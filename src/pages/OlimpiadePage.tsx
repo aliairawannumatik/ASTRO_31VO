@@ -240,7 +240,7 @@ const OlimpiadePage = () => {
                       disabled={!hasRoute}
                       className={`group flex items-center gap-3 rounded-xl px-4 py-3.5 text-left transition-all duration-200 shadow-md
                         ${hasRoute
-                          ? "bg-white/10 hover:bg-white/18 border border-white/25 hover:border-white/50 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                          ? "bg-white/20 hover:bg-white/30 border border-white/40 hover:border-white/70 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
                           : "bg-white/5 border border-white/10 cursor-not-allowed opacity-40"}`}
                       style={{ animationDelay: `${(ci * 0.06) + (ti * 0.025)}s` }}
                     >
