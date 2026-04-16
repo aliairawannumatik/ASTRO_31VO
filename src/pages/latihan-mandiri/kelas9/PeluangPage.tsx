@@ -34,7 +34,7 @@ const subtopics = [
   {
     label: "PELUANG TEORETIK",
     path: "/latihan-mandiri/kelas-9/peluang/peluang-teoretik",
-    soal: 40,
+    soal: 22,
     icon: Calculator,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -104,7 +104,7 @@ const PeluangPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">183 Soal Total · Diagram Pohon, Tabel & Venn</span>
+            <span className="text-white/70 text-xs font-body">165 Soal Total · Diagram Pohon, Tabel & Venn</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>

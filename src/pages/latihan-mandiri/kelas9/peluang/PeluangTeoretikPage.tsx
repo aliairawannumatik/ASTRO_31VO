@@ -91,16 +91,7 @@ type Q = { n: number; title: string; content?: string; math?: string; parts?: Pa
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Konsep Dasar Peluang Teoretik", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar sekali. Tentukan peluang muncul angka 3.",
-    parts: [
-      { label: "a.", math: "S = \\{1,2,3,4,5,6\\}, \\quad n(S) = \\ldots" },
-      { label: "b.", math: "A = \\{3\\}, \\quad n(A) = \\ldots" },
-      { label: "c.", math: "P(A) = \\frac{n(A)}{n(S)} = \\frac{\\ldots}{\\ldots} = \\ldots" },
-    ],
-  }),
-  Qn(2, "Peluang – Dadu Angka Prima", {
+  Qn(1, "Peluang – Dadu Angka Prima", {
     type: "mixed",
     content: "Sebuah dadu dilempar sekali. Tentukan peluang muncul angka prima.",
     parts: [
@@ -109,7 +100,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{prima}) = \\frac{n(A)}{n(S)} = \\ldots" },
     ],
   }),
-  Qn(3, "Peluang – Koin Tunggal", {
+  Qn(2, "Peluang – Koin Tunggal", {
     type: "mixed",
     content: "Sebuah koin dilempar sekali. Hitunglah:",
     parts: [
@@ -118,7 +109,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{Angka}) + P(\\text{Gambar}) = \\ldots \\text{ (harus = 1)}" },
     ],
   }),
-  Qn(4, "Peluang – Dua Koin", {
+  Qn(3, "Peluang – Dua Koin", {
     type: "mixed",
     content: "Dua koin dilempar bersamaan. Ruang sampel: {AA, AG, GA, GG}.",
     parts: [
@@ -127,7 +118,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{paling sedikit 1 Gambar}) = \\frac{\\ldots}{4} = \\ldots" },
     ],
   }),
-  Qn(5, "Peluang – Dua Dadu, Jumlah 7", {
+  Qn(4, "Peluang – Dua Dadu, Jumlah 7", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => i+j===7} />,
     content: "Dua dadu dilempar bersamaan.",
@@ -137,7 +128,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{jumlah} \\neq 7) = 1 - \\frac{6}{36} = \\ldots" },
     ],
   }),
-  Qn(6, "Peluang Kartu – As dari Remi", {
+  Qn(5, "Peluang Kartu – As dari Remi", {
     type: "mixed",
     diagram: <CardDeck highlight={(s,v) => v==="A"} />,
     content: "Satu kartu diambil dari 52 kartu remi. Kartu As ditandai.",
@@ -147,7 +138,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{bukan As}) = 1 - \\frac{1}{13} = \\ldots" },
     ],
   }),
-  Qn(7, "Peluang Kartu – Kartu Merah", {
+  Qn(6, "Peluang Kartu – Kartu Merah", {
     type: "mixed",
     diagram: <CardDeck highlight={(s,v) => s==="♥"||s==="♦"} />,
     content: "Satu kartu diambil dari 52 kartu remi. Kartu merah (♥ dan ♦) ditandai.",
@@ -157,17 +148,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{hitam}) = \\frac{\\ldots}{52} = \\frac{1}{\\ldots}" },
     ],
   }),
-  Qn(8, "Peluang Kartu – Kartu Gambar", {
-    type: "mixed",
-    diagram: <CardDeck highlight={(s,v) => ["J","Q","K"].includes(v)} />,
-    content: "Satu kartu diambil dari 52 kartu remi. Kartu gambar (J, Q, K) ditandai.",
-    parts: [
-      { label: "a.", math: "n(\\text{kartu gambar}) = 4 \\times 3 = \\ldots" },
-      { label: "b.", math: "P(\\text{kartu gambar}) = \\frac{\\ldots}{52} = \\frac{3}{\\ldots}" },
-      { label: "c.", text: "Berapa peluang terambilnya kartu gambar merah (J♥, Q♥, K♥, J♦, Q♦, K♦)?" },
-    ],
-  }),
-  Qn(9, "Peluang – Bola dalam Kantong", {
+  Qn(7, "Peluang – Bola dalam Kantong", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -183,7 +164,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{bukan Kuning}) = \\frac{6+4}{12} = \\ldots" },
     ],
   }),
-  Qn(10, "Peluang – Kartu Bernomor 1–20", {
+  Qn(8, "Peluang – Kartu Bernomor 1–20", {
     type: "mixed",
     content: "Kartu bernomor 1–20 disimpan dalam kotak. Satu kartu diambil acak.",
     parts: [
@@ -192,7 +173,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{bilangan kuadrat}) = \\frac{\\ldots}{20}" },
     ],
   }),
-  Qn(11, "Peluang Dua Dadu – Jumlah Genap", {
+  Qn(9, "Peluang Dua Dadu – Jumlah Genap", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => (i+j)%2===0} />,
     parts: [
@@ -201,16 +182,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{jumlah genap}) = \\frac{\\ldots}{36} = \\ldots" },
     ],
   }),
-  Qn(12, "Peluang Dua Dadu – Minimal Satu 6", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i===6||j===6} />,
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan setidaknya satu dadu menunjukkan 6." },
-      { label: "b.", math: "n(\\text{minimal satu 6}) = \\ldots" },
-      { label: "c.", math: "P(\\text{minimal satu 6}) = \\frac{11}{36}" },
-    ],
-  }),
-  Qn(13, "Peluang – Spinner", {
+  Qn(10, "Peluang – Spinner", {
     type: "mixed",
     content: "Sebuah spinner dibagi menjadi 8 sektor sama besar bernomor 1 sampai 8. Spinner diputar sekali.",
     parts: [
@@ -219,7 +191,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{angka} > 5) = \\frac{\\ldots}{8}" },
     ],
   }),
-  Qn(14, "Peluang – Kelereng Campuran", {
+  Qn(11, "Peluang – Kelereng Campuran", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -234,16 +206,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{bukan Putih}) = \\frac{20-3}{20} = \\ldots" },
     ],
   }),
-  Qn(15, "Peluang Teoretik – Sifat-Sifat", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar sekali. Tentukan peluang kejadian berikut:",
-    parts: [
-      { label: "a.", math: "P(\\text{angka} < 7) = \\frac{6}{6} = \\ldots \\text{ (kejadian pasti)}" },
-      { label: "b.", math: "P(\\text{angka} = 7) = \\frac{0}{6} = \\ldots \\text{ (kejadian mustahil)}" },
-      { label: "c.", text: "Nyatakan: nilai peluang selalu berada pada rentang ... sampai ..." },
-    ],
-  }),
-  Qn(16, "Soal UN – Peluang Bola", {
+  Qn(12, "Soal UN – Peluang Bola", {
     type: "mixed",
     content: "Dalam sebuah kantong terdapat 5 bola merah, 3 bola putih, dan 2 bola kuning. Satu bola diambil secara acak.",
     parts: [
@@ -252,7 +215,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{bukan Merah}) = 1 - \\frac{5}{10} = \\ldots" },
     ],
   }),
-  Qn(17, "Peluang – Dua Dadu, Hasil Kali 12", {
+  Qn(13, "Peluang – Dua Dadu, Hasil Kali 12", {
     type: "mixed",
     diagram: <DiceGrid highlight={(i,j) => i*j===12} />,
     parts: [
@@ -261,7 +224,7 @@ const questions: Q[] = [
       { label: "c.", text: "Lebih besar mana: P(hasil kali = 6) atau P(hasil kali = 12)?" },
     ],
   }),
-  Qn(18, "Peluang – Kartu As Merah", {
+  Qn(14, "Peluang – Kartu As Merah", {
     type: "mixed",
     diagram: <CardDeck highlight={(s,v) => v==="A" && (s==="♥"||s==="♦")} />,
     parts: [
@@ -270,50 +233,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa peluang terambil kartu As hitam?" },
     ],
   }),
-  Qn(19, "Peluang – Bilangan Bulat Acak", {
-    type: "mixed",
-    content: "Satu bilangan dipilih secara acak dari 1 sampai 30.",
-    parts: [
-      { label: "a.", math: "P(\\text{kelipatan 5}) = \\frac{\\ldots}{30} = \\ldots" },
-      { label: "b.", math: "P(\\text{kelipatan 3 atau 5}) = \\frac{\\ldots}{30}" },
-      { label: "c.", math: "P(\\text{bilangan prima}) = \\frac{10}{30} = \\ldots \\text{ (ada 10 prima dari 1–30)}" },
-    ],
-  }),
-  Qn(20, "Peluang – Satu Dadu, Dua Kondisi", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar. Hitunglah peluang berikut:",
-    parts: [
-      { label: "a.", math: "P(\\text{angka} \\geq 4) = \\frac{\\ldots}{6}" },
-      { label: "b.", math: "P(\\text{angka ganjil dan} > 3) = \\frac{\\ldots}{6}" },
-      { label: "c.", math: "P(\\text{angka prima dan genap}) = \\frac{\\ldots}{6}" },
-    ],
-  }),
-  Qn(21, "Soal UN – Peluang Kartu Bernomor", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Kartu bernomor dalam kotak"
-        headers={["Jenis","Ganjil","Genap","Prima","Kelipatan 3"]}
-        rows={[["Dari 1–15",8,7,6,5]]}
-      />
-    ),
-    content: "Kartu bernomor 1–15 diacak. Satu diambil.",
-    parts: [
-      { label: "a.", math: "P(\\text{ganjil}) = \\frac{8}{15}" },
-      { label: "b.", math: "P(\\text{prima}) = \\frac{6}{15} = \\frac{2}{5}" },
-      { label: "c.", math: "P(\\text{kelipatan 3}) = \\frac{5}{15} = \\frac{1}{3}" },
-    ],
-  }),
-  Qn(22, "Peluang – Dua Dadu, Dadu Sama", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i===j} />,
-    parts: [
-      { label: "a.", text: "Sebutkan titik sampel dengan dadu sama (doublet)." },
-      { label: "b.", math: "P(\\text{doublet}) = \\frac{6}{36} = \\frac{1}{6}" },
-      { label: "c.", math: "P(\\text{bukan doublet}) = 1 - \\frac{1}{6} = \\ldots" },
-    ],
-  }),
-  Qn(23, "Peluang – Soal Cerita (Undi Nama)", {
+  Qn(15, "Peluang – Soal Cerita (Undi Nama)", {
     type: "mixed",
     content: "Kelas 9A terdiri dari 15 perempuan dan 10 laki-laki. Satu siswa dipilih sebagai pembawa bendera.",
     parts: [
@@ -322,17 +242,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah peluang terpilihnya perempuan lebih besar? Berapa kali lebih besar?" },
     ],
   }),
-  Qn(24, "Peluang Gabungan – Dua Dadu, Prima atau Genap", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => [2,3,5,7,11].includes(i+j)||(i+j)%2===0} />,
-    content: "Dua dadu dilempar. Tentukan P(jumlah prima atau jumlah genap).",
-    parts: [
-      { label: "a.", text: "Jumlah prima yang mungkin: 2, 3, 5, 7, 11. Hitung masing-masing n." },
-      { label: "b.", text: "Berapa banyak titik sampel dengan jumlah genap?" },
-      { label: "c.", math: "P(\\text{prima} \\cup \\text{genap}) = \\frac{n(\\text{prima} \\cup \\text{genap})}{36}" },
-    ],
-  }),
-  Qn(25, "Soal TKA – Peluang dari Proporsi", {
+  Qn(16, "Soal TKA – Peluang dari Proporsi", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -347,34 +257,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hobi mana yang paling mungkin dimiliki siswa terpilih?" },
     ],
   }),
-  Qn(26, "Peluang – Dua Dadu, Jumlah Lebih dari 10", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i+j>10} />,
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan jumlah > 10." },
-      { label: "b.", math: "P(\\text{jumlah} > 10) = \\frac{\\ldots}{36}" },
-      { label: "c.", math: "P(\\text{jumlah} \\leq 10) = 1 - \\frac{\\ldots}{36} = \\ldots" },
-    ],
-  }),
-  Qn(27, "Peluang Kartu – Kelipatan Suit", {
-    type: "mixed",
-    diagram: <CardDeck highlight={(s,v) => s==="♠"&&["2","4","6","8","10"].includes(v)} />,
-    parts: [
-      { label: "a.", text: "Kartu yang ditandai adalah kartu ♠ bernomor genap. Berapa banyaknya?" },
-      { label: "b.", math: "P(\\text{♠ genap}) = \\frac{\\ldots}{52}" },
-      { label: "c.", text: "Berapa peluang terambil kartu merah bernomor ganjil (angka 1,3,5,7,9)?" },
-    ],
-  }),
-  Qn(28, "Peluang – Lotre Sederhana", {
-    type: "mixed",
-    content: "Dari 100 tiket lotre yang dijual, 5 tiket menang hadiah pertama, 10 tiket menang hadiah kedua.",
-    parts: [
-      { label: "a.", math: "P(\\text{menang hadiah pertama}) = \\frac{5}{100} = \\ldots" },
-      { label: "b.", math: "P(\\text{menang hadiah pertama atau kedua}) = \\frac{5+10}{100} = \\ldots" },
-      { label: "c.", math: "P(\\text{tidak menang}) = 1 - \\frac{15}{100} = \\ldots" },
-    ],
-  }),
-  Qn(29, "Soal UN – Peluang Berapa Bola", {
+  Qn(17, "Soal UN – Peluang Berapa Bola", {
     type: "mixed",
     content: "Sebuah kantong berisi bola merah dan biru. Peluang terambil bola merah adalah 3/7. Jika ada 21 bola, berapa bola merah dan berapa bola biru?",
     parts: [
@@ -383,50 +266,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{Biru}) = \\frac{\\ldots}{21} = \\ldots" },
     ],
   }),
-  Qn(30, "Peluang – Dua Dadu, Satu Dadu Lebih Besar", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i > j} />,
-    parts: [
-      { label: "a.", math: "n(\\text{dadu 1 > dadu 2}) = \\ldots" },
-      { label: "b.", math: "P(\\text{dadu 1 > dadu 2}) = \\frac{15}{36} = \\frac{5}{\\ldots}" },
-      { label: "c.", text: "Mengapa P(dadu 1 > dadu 2) = P(dadu 1 < dadu 2)?" },
-    ],
-  }),
-  Qn(31, "Soal ANBK – Peluang dari Tabel Distribusi", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Produk dalam gudang"
-        headers={["Jenis","Elektronik","Pakaian","Makanan","Lainnya","Total"]}
-        rows={[["Jumlah",150,200,100,50,500]]}
-      />
-    ),
-    parts: [
-      { label: "a.", math: "P(\\text{Elektronik}) = \\frac{150}{500} = \\ldots" },
-      { label: "b.", math: "P(\\text{Pakaian atau Makanan}) = \\frac{200+100}{500} = \\ldots" },
-      { label: "c.", math: "P(\\text{bukan Lainnya}) = \\frac{500-50}{500} = \\ldots" },
-    ],
-  }),
-  Qn(32, "Soal UN – Menemukan n(A) dari P(A)", {
-    type: "mixed",
-    content: "Peluang terambilnya kelereng putih dari sebuah kantong adalah 2/5. Dalam kantong ada 35 kelereng.",
-    parts: [
-      { label: "a.", math: "n(\\text{putih}) = \\frac{2}{5} \\times 35 = \\ldots" },
-      { label: "b.", math: "n(\\text{bukan putih}) = 35 - \\ldots = \\ldots" },
-      { label: "c.", math: "P(\\text{bukan putih}) = \\frac{\\ldots}{35} = \\frac{3}{5}" },
-    ],
-  }),
-  Qn(33, "Peluang – Kartu Spesifik", {
-    type: "mixed",
-    diagram: <CardDeck highlight={(s,v) => ["J","Q","K"].includes(v) && (s==="♥"||s==="♦")} />,
-    content: "Kartu ditandai: kartu gambar (J,Q,K) berwarna merah.",
-    parts: [
-      { label: "a.", math: "n(\\text{gambar merah}) = \\ldots" },
-      { label: "b.", math: "P(\\text{gambar merah}) = \\frac{6}{52} = \\frac{3}{\\ldots}" },
-      { label: "c.", text: "Berapa peluang kartu gambar hitam?" },
-    ],
-  }),
-  Qn(34, "Soal TKA – Peluang Dua Kejadian", {
+  Qn(18, "Soal TKA – Peluang Dua Kejadian", {
     type: "mixed",
     content: "Dalam satu set kartu remi 52 lembar, satu kartu diambil acak. Tentukan:",
     parts: [
@@ -435,7 +275,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{kartu bernilai} \\leq 3) = \\frac{\\ldots}{52} \\quad \\text{(A,2,3 masing-masing 4)}" },
     ],
   }),
-  Qn(35, "Soal UN Level Tinggi – Peluang Kondisional Sederhana", {
+  Qn(19, "Soal UN Level Tinggi – Peluang Kondisional Sederhana", {
     type: "mixed",
     content: "Kantong A berisi 3 merah dan 2 biru. Kantong B berisi 4 merah dan 1 biru. Satu kantong dipilih acak, lalu satu bola diambil.",
     parts: [
@@ -444,25 +284,7 @@ const questions: Q[] = [
       { label: "c.", text: "Kantong mana yang lebih mungkin menghasilkan bola merah?" },
     ],
   }),
-  Qn(36, "Soal UN – Peluang Dadu Genap dan Prima", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar sekali.",
-    parts: [
-      { label: "a.", math: "A = \\text{genap} = \\{2,4,6\\} \\Rightarrow P(A) = \\frac{3}{6} = \\frac{1}{2}" },
-      { label: "b.", math: "B = \\text{prima} = \\{2,3,5\\} \\Rightarrow P(B) = \\frac{3}{6} = \\frac{1}{2}" },
-      { label: "c.", math: "A \\cap B = \\{2\\} \\Rightarrow P(A \\cap B) = \\frac{1}{6}" },
-    ],
-  }),
-  Qn(37, "Soal ANBK – Nilai Peluang Tertentu", {
-    type: "mixed",
-    content: "Sebuah kantong berisi bola merah (r), biru (b), dan hijau (h). Diketahui P(merah) = 1/3 dan P(biru) = 5/12.",
-    parts: [
-      { label: "a.", math: "P(\\text{hijau}) = 1 - \\frac{1}{3} - \\frac{5}{12} = \\ldots" },
-      { label: "b.", text: "Jika ada 24 bola, berapa banyak bola hijau?" },
-      { label: "c.", math: "P(\\text{merah atau biru}) = \\frac{1}{3} + \\frac{5}{12} = \\frac{3}{4}" },
-    ],
-  }),
-  Qn(38, "Soal TKA – Peluang Menggunakan Perbandingan", {
+  Qn(20, "Soal TKA – Peluang Menggunakan Perbandingan", {
     type: "mixed",
     content: "Perbandingan banyak bola merah : biru : hijau dalam kotak adalah 2 : 3 : 5. Satu bola diambil.",
     parts: [
@@ -471,7 +293,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{Hijau}) = \\frac{5}{10} = \\frac{1}{2}" },
     ],
   }),
-  Qn(39, "Soal UN – Koin, Dadu, Kartu", {
+  Qn(21, "Soal UN – Koin, Dadu, Kartu", {
     type: "mixed",
     content: "Sebuah koin dilempar, sebuah dadu dilempar, dan satu kartu diambil dari 4 kartu (1,2,3,4).",
     parts: [
@@ -480,7 +302,7 @@ const questions: Q[] = [
       { label: "c.", math: "P = \\frac{1}{2} \\times \\frac{3}{6} \\times \\frac{1}{4} = \\ldots \\text{ (kejadian bebas)}" },
     ],
   }),
-  Qn(40, "Soal UN Level Tinggi – Mencari Jumlah Bola", {
+  Qn(22, "Soal UN Level Tinggi – Mencari Jumlah Bola", {
     type: "mixed",
     content: "Kantong berisi bola merah (m) dan biru. Jika 1 bola merah ditambahkan, peluang merah menjadi 1/2. Semula ada 10 bola.",
     parts: [
@@ -508,7 +330,7 @@ const PeluangTeoretikPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 22 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
