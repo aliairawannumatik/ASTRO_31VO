@@ -9,28 +9,6 @@ type Part = { label: string; math?: string; text?: string };
 type Q = { n: number; title: string; content?: string; mathContent?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay" | "mixed" };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const JangkauanDiagram = () => (
-  <svg width="310" height="110" viewBox="0 0 310 110" className="mx-auto">
-    <rect x="4" y="4" width="302" height="102" rx="10" fill="#7c2d12" fillOpacity="0.25" stroke="#fb923c" strokeWidth="1.5" />
-    <text x="155" y="20" fill="#fb923c" fontSize="10" textAnchor="middle" fontWeight="bold">Jangkauan (Range) dan IQR</text>
-    <line x1="30" y1="55" x2="280" y2="55" stroke="#fb923c" strokeWidth="1.5" />
-    {[[30,"Min\n=40"],[100,"Q₁\n=55"],[155,"Q₂\n=70"],[210,"Q₃\n=80"],[280,"Max\n=95"]].map(([x,label],i) => (
-      <g key={i}>
-        <circle cx={Number(x)} cy={55} r={i===0||i===4?4:5}
-          fill={["#7c2d12","#c2410c","#ea580c","#c2410c","#7c2d12"][i]}
-          stroke={["#fb923c","#fb923c","#fdba74","#fb923c","#fb923c"][i]} strokeWidth="1.5"/>
-        <text x={Number(x)} y={73} fill="#fed7aa" fontSize="7" textAnchor="middle">{String(label).split("\n")[0]}</text>
-        <text x={Number(x)} y={83} fill="#fb923c" fontSize="8" textAnchor="middle">{String(label).split("\n")[1]}</text>
-      </g>
-    ))}
-    <line x1="30" y1="40" x2="280" y2="40" stroke="#fdba74" strokeWidth="1" strokeDasharray="4,3" />
-    <text x="155" y="37" fill="#fdba74" fontSize="8" textAnchor="middle">Jangkauan = Max − Min = 95 − 40 = 55</text>
-    <rect x="97" y="43" width="116" height="24" fill="#ea580c" fillOpacity="0.2" stroke="#fb923c" strokeWidth="1" rx="3"/>
-    <text x="155" y="58" fill="#fed7aa" fontSize="7" textAnchor="middle">IQR = Q₃ − Q₁ = 80 − 55 = 25</text>
-    <text x="155" y="100" fill="#7c2d12" fontSize="8" textAnchor="middle" fill="#fdba74">SQ = IQR/2 = 12,5</text>
-  </svg>
-);
-
 const VariansSimpanganDiagram = () => (
   <svg width="310" height="145" viewBox="0 0 310 145" className="mx-auto">
     <rect x="4" y="4" width="302" height="137" rx="10" fill="#7c2d12" fillOpacity="0.2" stroke="#fb923c" strokeWidth="1.5" />
@@ -85,17 +63,7 @@ const TableSimpangan = () => (
 );
 
 const questions: Q[] = [
-  Qn(1, "Pengertian Ukuran Penyebaran – UN", {
-    type: "mixed",
-    diagram: <JangkauanDiagram />,
-    content: "Ukuran penyebaran menggambarkan seberapa jauh data menyebar dari pusat data.",
-    parts: [
-      { label: "a.", text: "Sebutkan tiga ukuran penyebaran data yang kamu ketahui." },
-      { label: "b.", text: "Mengapa ukuran penyebaran penting selain ukuran pemusatan?" },
-      { label: "c.", text: "Jika dua kelompok data memiliki rata-rata sama, apa yang membedakan keduanya?" },
-    ],
-  }),
-  Qn(2, "Jangkauan (Range) – ANBK", {
+  Qn(1, "Jangkauan (Range) – ANBK", {
     type: "mixed",
     mathContent: "J = x_{\\max} - x_{\\min}",
     content: "Hitung jangkauan dari data berikut:",
@@ -105,7 +73,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa kelemahan menggunakan jangkauan sebagai ukuran penyebaran?" },
     ],
   }),
-  Qn(3, "Jangkauan Interkuartil (IQR) – UN", {
+  Qn(2, "Jangkauan Interkuartil (IQR) – UN", {
     type: "mixed",
     mathContent: "\\text{IQR} = Q_3 - Q_1",
     content: "Hitung IQR dari data berikut:",
@@ -115,7 +83,7 @@ const questions: Q[] = [
       { label: "c.", text: "Mengapa IQR lebih tahan terhadap data pencilan dibandingkan jangkauan?" },
     ],
   }),
-  Qn(4, "Simpangan Kuartil (SQ) – TKA", {
+  Qn(3, "Simpangan Kuartil (SQ) – TKA", {
     type: "mixed",
     mathContent: "SQ = \\frac{Q_3 - Q_1}{2} = \\frac{\\text{IQR}}{2}",
     content: "Hitung simpangan kuartil dari data berikut:",
@@ -125,7 +93,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa yang dimaksud dengan simpangan kuartil? Apa kegunaannya?" },
     ],
   }),
-  Qn(5, "Menghitung IQR dari Data Terurut – ANBK", {
+  Qn(4, "Menghitung IQR dari Data Terurut – ANBK", {
     type: "mixed",
     content: "Data nilai 10 siswa (sudah urut): 55, 60, 65, 70, 72, 75, 80, 82, 88, 95.",
     parts: [
@@ -134,7 +102,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{IQR} = 83{,}5 - 63{,}75 = \\ldots, \\quad SQ = \\frac{\\text{IQR}}{2} = \\ldots" },
     ],
   }),
-  Qn(6, "Simpangan Rata-Rata – UN", {
+  Qn(5, "Simpangan Rata-Rata – UN", {
     type: "mixed",
     diagram: <TableSimpangan />,
     mathContent: "SR = \\frac{\\sum |x_i - \\bar{x}|}{n}",
@@ -145,7 +113,7 @@ const questions: Q[] = [
       { label: "c.", math: "SR = \\frac{10}{5} = \\ldots" },
     ],
   }),
-  Qn(7, "Varians Data Tunggal – TKA", {
+  Qn(6, "Varians Data Tunggal – TKA", {
     type: "mixed",
     mathContent: "s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n}",
     content: "Data: 4, 5, 7, 8, 11. Rata-rata = 7.",
@@ -155,7 +123,7 @@ const questions: Q[] = [
       { label: "c.", math: "s = \\sqrt{s^2} = \\sqrt{6} \\approx \\ldots" },
     ],
   }),
-  Qn(8, "Simpangan Baku – ANBK", {
+  Qn(7, "Simpangan Baku – ANBK", {
     type: "mixed",
     mathContent: "s = \\sqrt{\\frac{\\sum (x_i - \\bar{x})^2}{n}}",
     content: "Data nilai: 6, 7, 8, 9, 10.",
@@ -165,25 +133,7 @@ const questions: Q[] = [
       { label: "c.", math: "s = \\sqrt{2} \\approx \\ldots" },
     ],
   }),
-  Qn(9, "Jangkauan Data Berkelompok – UN", {
-    type: "mixed",
-    content: "Tabel distribusi: kelas pertama 40–49 (f=3) dan kelas terakhir 80–89 (f=4).",
-    parts: [
-      { label: "a.", text: "Nilai terkecil perkiraan = batas bawah kelas pertama = 40." },
-      { label: "b.", text: "Nilai terbesar perkiraan = batas atas kelas terakhir = 89." },
-      { label: "c.", math: "J \\approx 89 - 40 = \\ldots" },
-    ],
-  }),
-  Qn(10, "IQR dari Tabel Distribusi – TKA", {
-    type: "mixed",
-    content: "Data: 50–59 (f=4), 60–69 (f=8), 70–79 (f=14), 80–89 (f=10), 90–99 (f=4). n=40.",
-    parts: [
-      { label: "a.", math: "Q_1 = 59{,}5+10\\cdot\\frac{10-4}{8} = 59{,}5+7{,}5 = 67 \\text{ (dihitung sebelumnya)}" },
-      { label: "b.", math: "Q_3 = 79{,}5+10\\cdot\\frac{30-26}{10} = 79{,}5+4 = 83{,}5" },
-      { label: "c.", math: "\\text{IQR} = 83{,}5-67 = \\ldots, \\quad SQ = \\frac{\\text{IQR}}{2} = \\ldots" },
-    ],
-  }),
-  Qn(11, "Varians dan Simpangan Baku Berbobot – UN", {
+  Qn(8, "Varians dan Simpangan Baku Berbobot – UN", {
     type: "mixed",
     mathContent: "s^2 = \\frac{\\sum f_i(x_i - \\bar{x})^2}{\\sum f_i}",
     content: "Nilai (frekuensi): 6 (2), 7 (5), 8 (8), 9 (4), 10 (1). x̄ = 7,75.",
@@ -193,7 +143,7 @@ const questions: Q[] = [
       { label: "c.", math: "s^2 = \\frac{\\ldots}{20} = \\ldots, \\quad s = \\ldots" },
     ],
   }),
-  Qn(12, "Perbandingan Penyebaran Dua Data – ANBK", {
+  Qn(9, "Perbandingan Penyebaran Dua Data – ANBK", {
     type: "mixed",
     content: "Kelas A: nilai 70, 72, 74, 76, 78 (rata-rata=74)\nKelas B: nilai 60, 68, 74, 80, 88 (rata-rata=74)",
     parts: [
@@ -202,7 +152,7 @@ const questions: Q[] = [
       { label: "c.", text: "Kelas mana yang datanya lebih seragam? Jelaskan." },
     ],
   }),
-  Qn(13, "Soal Cerita Jangkauan – UN", {
+  Qn(10, "Soal Cerita Jangkauan – UN", {
     type: "mixed",
     content: "Suhu udara selama 7 hari: 28, 30, 27, 32, 29, 31, 26 °C.",
     parts: [
@@ -211,17 +161,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa arti jangkauan dalam konteks suhu udara ini?" },
     ],
   }),
-  Qn(14, "Koefisien Variasi – TKA", {
-    type: "mixed",
-    mathContent: "KV = \\frac{s}{\\bar{x}} \\times 100\\%",
-    content: "Dua kelompok data: A (x̄=50, s=5) dan B (x̄=100, s=8).",
-    parts: [
-      { label: "a.", math: "KV_A = \\frac{5}{50} \\times 100\\% = \\ldots \\%" },
-      { label: "b.", math: "KV_B = \\frac{8}{100} \\times 100\\% = \\ldots \\%" },
-      { label: "c.", text: "Kelompok mana yang lebih homogen? Jelaskan." },
-    ],
-  }),
-  Qn(15, "Jangkauan Interkuartil dari Data – ANBK", {
+  Qn(11, "Jangkauan Interkuartil dari Data – ANBK", {
     type: "mixed",
     content: "Data (sudah urut): 10, 15, 20, 25, 30, 35, 40, 45, 50.",
     parts: [
@@ -230,7 +170,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{IQR} = 42{,}5 - 17{,}5 = \\ldots, \\quad SQ = \\frac{\\text{IQR}}{2} = \\ldots" },
     ],
   }),
-  Qn(16, "Simpangan Rata-Rata Berbobot – UN", {
+  Qn(12, "Simpangan Rata-Rata Berbobot – UN", {
     type: "mixed",
     mathContent: "SR = \\frac{\\sum f_i |x_i - \\bar{x}|}{\\sum f_i}",
     content: "Nilai (frekuensi): 5 (3), 7 (5), 9 (2). Hitung simpangan rata-rata.",
@@ -240,7 +180,7 @@ const questions: Q[] = [
       { label: "c.", math: "SR = \\frac{\\ldots}{10} = \\ldots" },
     ],
   }),
-  Qn(17, "Deteksi Pencilan dari IQR – TKA", {
+  Qn(13, "Deteksi Pencilan dari IQR – TKA", {
     type: "mixed",
     content: "Data: 20, 22, 24, 26, 28, 30, 32, 34, 36, 80. Q₁=23, Q₃=33.",
     parts: [
@@ -249,17 +189,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah nilai 80 merupakan pencilan? Jelaskan." },
     ],
   }),
-  Qn(18, "Varians dengan Rumus Alternatif – ANBK", {
-    type: "mixed",
-    mathContent: "s^2 = \\frac{\\sum x_i^2}{n} - \\bar{x}^2",
-    content: "Data: 3, 4, 5, 6, 7.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = 5, \\quad \\sum x_i^2 = 9+16+25+36+49 = 135" },
-      { label: "b.", math: "s^2 = \\frac{135}{5} - 5^2 = 27 - 25 = \\ldots" },
-      { label: "c.", math: "s = \\sqrt{2} \\approx \\ldots" },
-    ],
-  }),
-  Qn(19, "Simpangan Baku Data Berbobot – UN", {
+  Qn(14, "Simpangan Baku Data Berbobot – UN", {
     type: "mixed",
     content: "Nilai (frekuensi): 60 (4), 70 (8), 80 (12), 90 (6). x̄ = 77.",
     parts: [
@@ -268,7 +198,7 @@ const questions: Q[] = [
       { label: "c.", math: "s^2 = \\frac{2670}{30} = 89, \\quad s = \\sqrt{89} \\approx \\ldots" },
     ],
   }),
-  Qn(20, "Membandingkan Tiga Ukuran Penyebaran – TKA", {
+  Qn(15, "Membandingkan Tiga Ukuran Penyebaran – TKA", {
     type: "mixed",
     content: "Data A: 4, 6, 8, 10, 12. Data B: 2, 4, 8, 12, 14.",
     parts: [
@@ -277,25 +207,7 @@ const questions: Q[] = [
       { label: "c.", text: "Data mana yang lebih bervariasi? Jelaskan dengan menggunakan jangkauan dan IQR." },
     ],
   }),
-  Qn(21, "Ukuran Penyebaran dalam Kehidupan – ANBK", {
-    type: "mixed",
-    content: "Investasi A: rata-rata keuntungan 10% per tahun, simpangan baku 2%.\nInvestasi B: rata-rata keuntungan 12% per tahun, simpangan baku 5%.",
-    parts: [
-      { label: "a.", text: "Investasi mana yang lebih stabil?" },
-      { label: "b.", math: "KV_A = \\frac{2}{10}\\times100\\% = 20\\%, \\quad KV_B = \\frac{5}{12}\\times100\\% = \\ldots \\%" },
-      { label: "c.", text: "Jika kamu menghindari risiko, investasi mana yang kamu pilih? Jelaskan." },
-    ],
-  }),
-  Qn(22, "Simpangan Kuartil dari Tabel – UN", {
-    type: "mixed",
-    content: "Tabel: 30–39 (f=4), 40–49 (f=10), 50–59 (f=16), 60–69 (f=12), 70–79 (f=8). n=50.",
-    parts: [
-      { label: "a.", math: "Q_1: \\frac{n}{4}=12{,}5 \\Rightarrow \\text{kelas 40–49} \\Rightarrow Q_1 = 39{,}5+10\\cdot\\frac{12{,}5-4}{10} = \\ldots" },
-      { label: "b.", math: "Q_3: \\frac{3n}{4}=37{,}5 \\Rightarrow \\text{kelas 60–69} \\Rightarrow Q_3 = 59{,}5+10\\cdot\\frac{37{,}5-30}{12} = \\ldots" },
-      { label: "c.", math: "SQ = \\frac{Q_3-Q_1}{2} = \\ldots" },
-    ],
-  }),
-  Qn(23, "Hubungan Varians dan Simpangan Baku – TKA", {
+  Qn(16, "Hubungan Varians dan Simpangan Baku – TKA", {
     type: "mixed",
     content: "Jika varians suatu data adalah 25:",
     parts: [
@@ -304,7 +216,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika semua nilai data dikali 2, bagaimana perubahan varians?" },
     ],
   }),
-  Qn(24, "Soal Cerita Simpangan Baku – ANBK", {
+  Qn(17, "Soal Cerita Simpangan Baku – ANBK", {
     type: "mixed",
     content: "Produksi harian pabrik selama 5 hari (unit): 100, 105, 98, 103, 104.",
     parts: [
@@ -313,16 +225,7 @@ const questions: Q[] = [
       { label: "c.", math: "s = \\sqrt{\\frac{34}{5}} = \\sqrt{6{,}8} \\approx \\ldots" },
     ],
   }),
-  Qn(25, "Sifat Simpangan Baku – UN", {
-    type: "mixed",
-    content: "Data: 5, 5, 5, 5, 5 (semua nilai sama).",
-    parts: [
-      { label: "a.", math: "\\bar{x} = 5, \\quad \\sum(x_i-\\bar{x})^2 = 0 \\Rightarrow s = \\ldots" },
-      { label: "b.", text: "Apa arti simpangan baku = 0?" },
-      { label: "c.", text: "Data seperti apa yang memiliki simpangan baku yang sangat besar?" },
-    ],
-  }),
-  Qn(26, "IQR dan Penyebaran Distribusi – TKA", {
+  Qn(18, "IQR dan Penyebaran Distribusi – TKA", {
     type: "mixed",
     content: "Dua distribusi: A memiliki IQR=10, B memiliki IQR=30. Keduanya memiliki median yang sama.",
     parts: [
@@ -331,17 +234,7 @@ const questions: Q[] = [
       { label: "c.", math: "SQ_A = \\frac{10}{2} = 5, \\quad SQ_B = \\frac{30}{2} = \\ldots" },
     ],
   }),
-  Qn(27, "Varians Data Berkelompok – ANBK", {
-    type: "mixed",
-    mathContent: "s^2 = \\frac{\\sum f_i x_i^2}{n} - \\bar{x}^2",
-    content: "Data: 60 (f=3,x²=3600), 70 (f=5,x²=4900), 80 (f=8,x²=6400), 90 (f=4,x²=8100).",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{3(60)+5(70)+8(80)+4(90)}{20} = \\frac{1560}{20} = 78" },
-      { label: "b.", math: "\\frac{\\sum f_i x_i^2}{n} = \\frac{3(3600)+5(4900)+8(6400)+4(8100)}{20} = \\frac{124500}{20} = \\ldots" },
-      { label: "c.", math: "s^2 = 6225 - 78^2 = 6225 - 6084 = \\ldots, \\quad s = \\sqrt{141} \\approx \\ldots" },
-    ],
-  }),
-  Qn(28, "Soal UN – Lengkap Semua Ukuran Penyebaran", {
+  Qn(19, "Soal UN – Lengkap Semua Ukuran Penyebaran", {
     type: "mixed",
     content: "Data: 10, 14, 16, 18, 20, 22, 24, 26, 30.",
     parts: [
@@ -350,7 +243,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\bar{x}=20, \\sum(x_i-20)^2=200 \\Rightarrow s^2=\\frac{200}{9}\\approx 22{,}2, s\\approx \\ldots" },
     ],
   }),
-  Qn(29, "Soal ANBK – Memilih Ukuran Penyebaran", {
+  Qn(20, "Soal ANBK – Memilih Ukuran Penyebaran", {
     type: "mixed",
     content: "Tentukan ukuran penyebaran yang paling tepat untuk situasi berikut:",
     parts: [
@@ -359,7 +252,7 @@ const questions: Q[] = [
       { label: "c.", text: "Membandingkan variabilitas dua data yang berbeda skala → gunakan apa?" },
     ],
   }),
-  Qn(30, "Soal TKA – Efek Penambahan Konstanta", {
+  Qn(21, "Soal TKA – Efek Penambahan Konstanta", {
     type: "mixed",
     content: "Diketahui data dengan rata-rata 70 dan simpangan baku 8. Setiap nilai ditambah 10.",
     parts: [
@@ -368,61 +261,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jelaskan mengapa simpangan baku tidak berubah ketika semua data ditambah konstanta." },
     ],
   }),
-  Qn(31, "Soal UN – Efek Perkalian Konstanta", {
-    type: "mixed",
-    content: "Diketahui data dengan rata-rata 50 dan simpangan baku 6. Setiap nilai dikali 3.",
-    parts: [
-      { label: "a.", math: "\\bar{x}_{\\text{baru}} = 3 \\times 50 = \\ldots" },
-      { label: "b.", math: "s_{\\text{baru}} = 3 \\times 6 = \\ldots" },
-      { label: "c.", math: "s^2_{\\text{baru}} = 3^2 \\times s^2 = 9 \\times 36 = \\ldots" },
-    ],
-  }),
-  Qn(32, "Soal ANBK – Semua Ukuran Penyebaran", {
-    type: "mixed",
-    content: "Data nilai 8 siswa: 60, 65, 70, 72, 75, 80, 85, 93.",
-    parts: [
-      { label: "a.", math: "J = 93-60 = \\ldots" },
-      { label: "b.", math: "Q_1 = \\frac{65+70}{2} = 67{,}5, \\; Q_3 = \\frac{80+85}{2} = 82{,}5 \\Rightarrow \\text{IQR} = \\ldots" },
-      { label: "c.", math: "SQ = \\frac{\\text{IQR}}{2} = \\ldots" },
-    ],
-  }),
-  Qn(33, "Soal TKA – Simpangan Rata-Rata Lengkap", {
-    type: "mixed",
-    content: "Data: 2, 4, 6, 8, 10.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{2+4+6+8+10}{5} = 6" },
-      { label: "b.", math: "|2-6|+|4-6|+|6-6|+|8-6|+|10-6| = 4+2+0+2+4 = \\ldots" },
-      { label: "c.", math: "SR = \\frac{12}{5} = \\ldots" },
-    ],
-  }),
-  Qn(34, "Soal UN – Penyebaran dan Prestasi", {
-    type: "mixed",
-    content: "Nilai ujian Kelas A: rata-rata 80, simpangan baku 3.\nNilai ujian Kelas B: rata-rata 80, simpangan baku 10.",
-    parts: [
-      { label: "a.", text: "Kelas mana yang nilainya lebih seragam?" },
-      { label: "b.", text: "Di kelas mana lebih mungkin ada siswa dengan nilai sangat tinggi atau sangat rendah?" },
-      { label: "c.", text: "Kesimpulan apa yang dapat kamu buat tentang kualitas pembelajaran di dua kelas tersebut?" },
-    ],
-  }),
-  Qn(35, "Soal ANBK – Jangkauan dari Histogram", {
-    type: "mixed",
-    content: "Dari histogram: kelas terendah 30–39 (f=2) dan kelas tertinggi 80–89 (f=3).",
-    parts: [
-      { label: "a.", math: "J_{\\text{estimasi}} = \\text{batas atas kelas terakhir} - \\text{batas bawah kelas pertama}" },
-      { label: "b.", math: "J = 89 - 30 = \\ldots" },
-      { label: "c.", text: "Mengapa jangkauan dari data berkelompok hanya merupakan estimasi?" },
-    ],
-  }),
-  Qn(36, "Soal TKA – SQ dari Tabel Distribusi", {
-    type: "mixed",
-    content: "Data nilai: 50–59 (f=5), 60–69 (f=10), 70–79 (f=20), 80–89 (f=10), 90–99 (f=5). n=50.",
-    parts: [
-      { label: "a.", math: "Q_1: \\frac{50}{4}=12{,}5 \\Rightarrow \\text{kelas 60–69} \\Rightarrow Q_1 = 59{,}5+10\\cdot\\frac{12{,}5-5}{10} = \\ldots" },
-      { label: "b.", math: "Q_3: \\frac{150}{4}=37{,}5 \\Rightarrow \\text{kelas 80–89} \\Rightarrow Q_3 = 79{,}5+10\\cdot\\frac{37{,}5-35}{10} = \\ldots" },
-      { label: "c.", math: "SQ = \\frac{Q_3-Q_1}{2} = \\ldots" },
-    ],
-  }),
-  Qn(37, "Soal UN – Interpretasi Penyebaran", {
+  Qn(22, "Soal UN – Interpretasi Penyebaran", {
     type: "mixed",
     diagram: <VariansSimpanganDiagram />,
     content: "Jelaskan perbedaan antara ketiga ukuran penyebaran ini:",
@@ -430,34 +269,6 @@ const questions: Q[] = [
       { label: "a.", text: "Jangkauan: mudah dihitung tapi tidak mempertimbangkan semua data." },
       { label: "b.", text: "IQR/Simpangan Kuartil: lebih tahan terhadap pencilan karena hanya memakai 50% data tengah." },
       { label: "c.", text: "Simpangan Baku: mempertimbangkan semua data, paling informatif untuk distribusi normal." },
-    ],
-  }),
-  Qn(38, "Soal ANBK – Rangkuman Ukuran Penyebaran", {
-    type: "mixed",
-    content: "Data nilai 6 siswa: 70, 75, 80, 85, 90, 100.",
-    parts: [
-      { label: "a.", math: "J = 100-70 = \\ldots" },
-      { label: "b.", math: "Q_1=\\frac{75+80}{2}=77{,}5, Q_3=\\frac{90+100}{2}=95 \\Rightarrow \\text{IQR}=\\ldots, SQ=\\ldots" },
-      { label: "c.", math: "\\bar{x}=\\frac{500}{6}\\approx83{,}3 \\Rightarrow s^2=\\frac{(70-83{,}3)^2+...}{6}=\\ldots" },
-    ],
-  }),
-  Qn(39, "Soal TKA – Analisis Distribusi", {
-    type: "mixed",
-    content: "Data A: min=10, Q₁=30, Q₂=50, Q₃=70, max=90\nData B: min=20, Q₁=45, Q₂=50, Q₃=55, max=80",
-    parts: [
-      { label: "a.", math: "\\text{IQR}_A = 70-30=40, \\quad \\text{IQR}_B = 55-45=10" },
-      { label: "b.", math: "J_A = 90-10=80, \\quad J_B = 80-20=60" },
-      { label: "c.", text: "Dari hasil perhitungan IQR dan Jangkauan, data mana yang lebih homogen? Jelaskan." },
-    ],
-  }),
-  Qn(40, "Soal UN/ANBK/TKA – Gabungan Ukuran Penyebaran", {
-    type: "mixed",
-    content: "Data nilai ujian 30 siswa:\n50–59: f=3, 60–69: f=5, 70–79: f=12, 80–89: f=7, 90–99: f=3",
-    parts: [
-      { label: "a.", math: "J_{\\text{estimasi}} = 99-50 = \\ldots" },
-      { label: "b.", math: "Q_1: \\frac{30}{4}=7{,}5, \\text{kelas 60–69}, Q_1=59{,}5+10\\cdot\\frac{7{,}5-3}{5}=59{,}5+9=\\ldots" },
-      { label: "c.", math: "Q_3: \\frac{90}{4}=22{,}5, \\text{kelas 80–89}, Q_3=79{,}5+10\\cdot\\frac{22{,}5-20}{7}=79{,}5+3{,}57=\\ldots" },
-      { label: "d.", math: "\\text{IQR}=Q_3-Q_1=\\ldots, \\quad SQ=\\frac{\\text{IQR}}{2}=\\ldots" },
     ],
   }),
 ];
@@ -480,7 +291,7 @@ const PenyebaranDataPage = () => {
           <p className="text-orange-200/70 text-sm text-center font-body mb-1">Jangkauan, IQR, dan Simpangan Kuartil</p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 22 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
