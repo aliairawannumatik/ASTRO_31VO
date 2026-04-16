@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "PENGANTAR STATISTIKA DAN PENGUMPULAN DATA",
     path: "/latihan-mandiri/kelas-9/statistika/pengantar",
-    soal: 40,
+    soal: 5,
     icon: BookOpen,
     desc: "Populasi, sampel, jenis data, teknik pengumpulan, tabel distribusi",
     color: "cyan",
@@ -23,7 +23,7 @@ const subtopics = [
   {
     label: "PENYAJIAN DATA",
     path: "/latihan-mandiri/kelas-9/statistika/penyajian-data",
-    soal: 40,
+    soal: 8,
     icon: BarChart2,
     desc: "Diagram batang, garis, lingkaran, histogram, ogive, poligon frekuensi",
     color: "teal",
@@ -38,7 +38,7 @@ const subtopics = [
   {
     label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)",
     path: "/latihan-mandiri/kelas-9/statistika/rata-rata",
-    soal: 40,
+    soal: 29,
     icon: PieChart,
     desc: "Mean tunggal, berbobot, berkelompok, rata-rata gabungan",
     color: "blue",
@@ -53,7 +53,7 @@ const subtopics = [
   {
     label: "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)",
     path: "/latihan-mandiri/kelas-9/statistika/median-modus",
-    soal: 40,
+    soal: 16,
     icon: Target,
     desc: "Median dan modus data tunggal dan berkelompok, interpretasi",
     color: "violet",
@@ -68,7 +68,7 @@ const subtopics = [
   {
     label: "UKURAN LETAK DATA (KUARTIL)",
     path: "/latihan-mandiri/kelas-9/statistika/kuartil",
-    soal: 40,
+    soal: 12,
     icon: BoxSelect,
     desc: "Q₁, Q₂, Q₃, IQR, box plot, persentil, desil, deteksi pencilan",
     color: "green",
@@ -83,7 +83,7 @@ const subtopics = [
   {
     label: "UKURAN PENYEBARAN DATA (JANGKAUAN, JANGKAUAN INTERKUARTIL, SIMPANGAN KUARTIL)",
     path: "/latihan-mandiri/kelas-9/statistika/penyebaran-data",
-    soal: 40,
+    soal: 22,
     icon: TrendingDown,
     desc: "Jangkauan, IQR, SQ, simpangan rata-rata, varians, simpangan baku",
     color: "orange",
@@ -117,7 +117,7 @@ const StatistikaPage = () => {
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-white/70 text-xs font-body">6 Sub Topik</span>
             <span className="text-white/20">·</span>
-            <span className="text-cyan-400 text-xs font-bold">240 Soal Total</span>
+            <span className="text-cyan-400 text-xs font-bold">92 Soal Total</span>
             <span className="text-white/20">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
