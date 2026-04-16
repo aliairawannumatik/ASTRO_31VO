@@ -44,31 +44,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah frekuensi harapan sama dengan frekuensi yang pasti terjadi? Jelaskan." },
     ],
   }),
-  Qn(2, "Frekuensi Harapan – Dadu Tunggal", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar 120 kali. Tentukan frekuensi harapan untuk setiap angka.",
-    diagram: (
-      <FreqTable
-        caption="Frekuensi harapan 120 lemparan dadu"
-        headers={["Angka","P(angka)","fh = n × P"]}
-        rows={[
-          [1,"1/6","?"],
-          [2,"1/6","?"],
-          [3,"1/6","?"],
-          [4,"1/6","?"],
-          [5,"1/6","?"],
-          [6,"1/6","?"],
-          ["Total","1","120"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", math: "f_h(\\text{tiap angka}) = 120 \\times \\frac{1}{6} = \\ldots" },
-      { label: "b.", text: "Berapa fh angka genap?" },
-      { label: "c.", text: "Berapa fh angka prima?" },
-    ],
-  }),
-  Qn(3, "Frekuensi Harapan – Dua Koin", {
+  Qn(2, "Frekuensi Harapan – Dua Koin", {
     type: "mixed",
     content: "Dua koin dilempar sebanyak 200 kali. S = {AA, AG, GA, GG}.",
     parts: [
@@ -77,7 +53,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{GG}) = \\frac{1}{4} \\Rightarrow f_h(\\text{GG}) = \\ldots" },
     ],
   }),
-  Qn(4, "Frekuensi Harapan – Bola Berwarna", {
+  Qn(3, "Frekuensi Harapan – Bola Berwarna", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -93,7 +69,7 @@ const questions: Q[] = [
       { label: "c.", math: "f_h(\\text{bukan Merah}) = 50 \\times \\frac{6}{10} = \\ldots" },
     ],
   }),
-  Qn(5, "Frekuensi Harapan – Kartu Remi", {
+  Qn(4, "Frekuensi Harapan – Kartu Remi", {
     type: "mixed",
     content: "Satu kartu diambil dari 52 kartu remi lalu dikembalikan. Percobaan dilakukan 260 kali.",
     parts: [
@@ -102,7 +78,7 @@ const questions: Q[] = [
       { label: "c.", math: "f_h(\\text{kartu gambar}) = 260 \\times \\frac{12}{52} = \\ldots" },
     ],
   }),
-  Qn(6, "Soal UN – Mencari n dari fh", {
+  Qn(5, "Soal UN – Mencari n dari fh", {
     type: "mixed",
     content: "Sebuah dadu dilempar beberapa kali. Frekuensi harapan muncul angka 6 adalah 25.",
     parts: [
@@ -111,7 +87,7 @@ const questions: Q[] = [
       { label: "c.", math: "f_h(\\text{bukan 6}) = n - 25 = \\ldots" },
     ],
   }),
-  Qn(7, "Frekuensi Harapan – Soal Cerita Produksi", {
+  Qn(6, "Frekuensi Harapan – Soal Cerita Produksi", {
     type: "mixed",
     content: "Sebuah mesin memproduksi barang dengan peluang cacat 0,04. Jika mesin beroperasi menghasilkan 2500 barang, berapa frekuensi harapan barang cacat?",
     parts: [
@@ -120,16 +96,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa persen barang yang diharapkan tidak cacat?" },
     ],
   }),
-  Qn(8, "Frekuensi Harapan – Dua Dadu, Jumlah 7", {
-    type: "mixed",
-    content: "Dua dadu dilempar 360 kali.",
-    parts: [
-      { label: "a.", math: "P(\\text{jumlah} = 7) = \\frac{6}{36} = \\frac{1}{6}" },
-      { label: "b.", math: "f_h(\\text{jumlah} = 7) = 360 \\times \\frac{1}{6} = \\ldots" },
-      { label: "c.", math: "f_h(\\text{jumlah} \\neq 7) = 360 - \\ldots = \\ldots" },
-    ],
-  }),
-  Qn(9, "Frekuensi Harapan – Spinner 4 Bagian", {
+  Qn(7, "Frekuensi Harapan – Spinner 4 Bagian", {
     type: "mixed",
     content: "Sebuah spinner dibagi 4 sektor: Merah (1/4), Biru (1/4), Kuning (3/8), Hijau (1/8). Spinner diputar 800 kali.",
     diagram: (
@@ -151,25 +118,7 @@ const questions: Q[] = [
       { label: "c.", text: "Verifikasi: jumlah semua fh = 800." },
     ],
   }),
-  Qn(10, "Mencari P(A) dari fh", {
-    type: "mixed",
-    content: "Suatu percobaan dilakukan 240 kali. Frekuensi harapan kejadian A adalah 60.",
-    parts: [
-      { label: "a.", math: "f_h = n \\times P(A) \\Rightarrow P(A) = \\frac{f_h}{n} = \\frac{60}{240} = \\ldots" },
-      { label: "b.", math: "P(A') = 1 - P(A) = \\ldots" },
-      { label: "c.", math: "f_h(A') = 240 \\times P(A') = \\ldots" },
-    ],
-  }),
-  Qn(11, "Soal UN – Frekuensi Harapan Bilangan", {
-    type: "mixed",
-    content: "Kartu bernomor 1 sampai 20 diacak. Satu kartu diambil dan dikembalikan. Percobaan dilakukan 100 kali.",
-    parts: [
-      { label: "a.", math: "f_h(\\text{bilangan prima}) = 100 \\times \\frac{8}{20} = \\ldots" },
-      { label: "b.", math: "f_h(\\text{kelipatan 4}) = 100 \\times \\frac{5}{20} = \\ldots" },
-      { label: "c.", math: "f_h(\\text{bilangan kuadrat}) = 100 \\times \\frac{4}{20} = \\ldots" },
-    ],
-  }),
-  Qn(12, "Soal TKA – Frekuensi Harapan Kompleks", {
+  Qn(8, "Soal TKA – Frekuensi Harapan Kompleks", {
     type: "mixed",
     content: "Dalam kantong terdapat 6 bola merah, 4 biru, 5 kuning, dan 5 putih. Pengambilan (dengan pengembalian) dilakukan 100 kali.",
     diagram: (
@@ -185,7 +134,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa fh untuk bola berwarna selain merah?" },
     ],
   }),
-  Qn(13, "Frekuensi Harapan – Ulangan Harian", {
+  Qn(9, "Frekuensi Harapan – Ulangan Harian", {
     type: "mixed",
     content: "Peluang seorang siswa mendapat nilai ≥ 80 pada ulangan adalah 0,6. Jika ada 5 ulangan dalam semester, berapa kali frekuensi harapan siswa mendapat nilai ≥ 80?",
     parts: [
@@ -194,7 +143,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah ini berarti siswa pasti mendapat nilai ≥ 80 sebanyak 3 kali? Jelaskan." },
     ],
   }),
-  Qn(14, "Soal UN – Menentukan n dari fh", {
+  Qn(10, "Soal UN – Menentukan n dari fh", {
     type: "mixed",
     content: "Peluang sebuah lampu cacat adalah 1/50. Frekuensi harapan lampu cacat adalah 30.",
     parts: [
@@ -203,16 +152,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa frekuensi harapan lampu tidak cacat?" },
     ],
   }),
-  Qn(15, "Frekuensi Harapan – Dua Dadu Ganda", {
-    type: "mixed",
-    content: "Dua dadu dilempar 180 kali. Tentukan frekuensi harapan untuk kejadian berikut:",
-    parts: [
-      { label: "a.", math: "f_h(\\text{jumlah} = 2) = 180 \\times \\frac{1}{36} = \\ldots" },
-      { label: "b.", math: "f_h(\\text{jumlah} = 12) = 180 \\times \\frac{1}{36} = \\ldots" },
-      { label: "c.", math: "f_h(\\text{jumlah genap}) = 180 \\times \\frac{18}{36} = \\ldots" },
-    ],
-  }),
-  Qn(16, "Soal UN – Frekuensi Harapan Kartu", {
+  Qn(11, "Soal UN – Frekuensi Harapan Kartu", {
     type: "mixed",
     content: "Satu kartu diambil dari 52 kartu remi (dengan pengembalian), 104 kali.",
     parts: [
@@ -221,7 +161,7 @@ const questions: Q[] = [
       { label: "c.", math: "f_h(\\text{kartu merah gambar}) = 104 \\times \\frac{6}{52} = \\ldots" },
     ],
   }),
-  Qn(17, "Soal ANBK – Interpretasi fh", {
+  Qn(12, "Soal ANBK – Interpretasi fh", {
     type: "mixed",
     content: "Sebuah kotak berisi 3 bola merah dan 7 bola putih. Pengambilan (dengan pengembalian) dilakukan n kali. Diharapkan bola merah muncul 24 kali.",
     parts: [
@@ -230,7 +170,7 @@ const questions: Q[] = [
       { label: "c.", math: "f_h(\\text{Putih}) = n - 24 = \\ldots" },
     ],
   }),
-  Qn(18, "Frekuensi Harapan – Kelahiran Bayi", {
+  Qn(13, "Frekuensi Harapan – Kelahiran Bayi", {
     type: "mixed",
     content: "Peluang lahirnya bayi laki-laki adalah 0,52. Di suatu desa diperkirakan akan ada 250 kelahiran dalam setahun.",
     parts: [
@@ -239,7 +179,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah jumlah bayi laki-laki dan perempuan pasti sesuai fh? Jelaskan." },
     ],
   }),
-  Qn(19, "Soal UN – fh dengan Peluang Pecahan", {
+  Qn(14, "Soal UN – fh dengan Peluang Pecahan", {
     type: "mixed",
     content: "Peluang tim A menang dalam setiap pertandingan adalah 3/5. Tim A akan bermain 20 pertandingan.",
     parts: [
@@ -248,25 +188,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika seri diabaikan (hanya menang/kalah), berapa fh kalah?" },
     ],
   }),
-  Qn(20, "Frekuensi Harapan – Dadu dan Koin", {
-    type: "mixed",
-    content: "Sebuah dadu dan sebuah koin dilempar bersamaan sebanyak 120 kali.",
-    parts: [
-      { label: "a.", math: "P(\\text{dadu 6 dan Angka}) = \\frac{1}{6} \\times \\frac{1}{2} = \\frac{1}{12}" },
-      { label: "b.", math: "f_h = 120 \\times \\frac{1}{12} = \\ldots" },
-      { label: "c.", math: "f_h(\\text{dadu prima dan Gambar}) = 120 \\times \\frac{3}{6} \\times \\frac{1}{2} = \\ldots" },
-    ],
-  }),
-  Qn(21, "Soal Kontekstual – Pertanian", {
-    type: "mixed",
-    content: "Dari pengamatan, peluang sebuah benih jagung tumbuh adalah 0,85. Seorang petani menanam 400 benih.",
-    parts: [
-      { label: "a.", math: "f_h(\\text{tumbuh}) = 400 \\times 0{,}85 = \\ldots" },
-      { label: "b.", math: "f_h(\\text{tidak tumbuh}) = 400 \\times 0{,}15 = \\ldots" },
-      { label: "c.", text: "Jika petani ingin panen 350 pohon, minimal berapa benih yang harus ditanam?" },
-    ],
-  }),
-  Qn(22, "Soal UN – fh dari Rasio Bola", {
+  Qn(15, "Soal UN – fh dari Rasio Bola", {
     type: "mixed",
     content: "Kantong berisi bola merah dan biru dengan rasio 2:3. Satu bola diambil (dengan pengembalian) 150 kali.",
     parts: [
@@ -275,22 +197,7 @@ const questions: Q[] = [
       { label: "c.", math: "f_h(\\text{Biru}) = 150 - \\ldots = \\ldots" },
     ],
   }),
-  Qn(23, "Soal ANBK – Memeriksa Kewajaran Data", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Data percobaan koin 500 kali"
-        headers={["Hasil","Frekuensi Aktual","Frekuensi Harapan"]}
-        rows={[["Angka",248,250],["Gambar",252,250]]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Berapa perbedaan antara frekuensi aktual dan frekuensi harapan?" },
-      { label: "b.", text: "Apakah koin tersebut dapat dianggap seimbang? Jelaskan." },
-      { label: "c.", text: "Apa yang terjadi jika percobaan dilanjutkan hingga 10.000 kali?" },
-    ],
-  }),
-  Qn(24, "Frekuensi Harapan – Soal Obat", {
+  Qn(16, "Frekuensi Harapan – Soal Obat", {
     type: "mixed",
     content: "Peluang suatu obat berhasil menyembuhkan adalah 0,9. Obat diberikan kepada 300 pasien.",
     parts: [
@@ -299,16 +206,7 @@ const questions: Q[] = [
       { label: "c.", text: "Dokter menargetkan 280 pasien sembuh. Apakah obat ini cukup efektif?" },
     ],
   }),
-  Qn(25, "Soal TKA – Mencari P dari fh dan n", {
-    type: "mixed",
-    content: "Dalam 200 percobaan, frekuensi harapan kejadian A adalah 75.",
-    parts: [
-      { label: "a.", math: "P(A) = \\frac{f_h}{n} = \\frac{75}{200} = \\ldots" },
-      { label: "b.", math: "P(A') = 1 - \\frac{75}{200} = \\ldots" },
-      { label: "c.", math: "f_h(A') = 200 - 75 = \\ldots" },
-    ],
-  }),
-  Qn(26, "Frekuensi Harapan – Turnamen Basket", {
+  Qn(17, "Frekuensi Harapan – Turnamen Basket", {
     type: "mixed",
     content: "Tim basket A memiliki peluang menang 2/3 per pertandingan. Dalam satu musim, mereka bermain 36 pertandingan.",
     parts: [
@@ -317,47 +215,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika setiap kemenangan mendapat 3 poin, berapa total poin yang diharapkan?" },
     ],
   }),
-  Qn(27, "Soal UN – Tabel fh Lengkap", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Peluang munculnya sisi dadu (n = 300)"
-        headers={["Angka","1","2","3","4","5","6","Total"]}
-        rows={[["P","1/6","1/6","1/6","1/6","1/6","1/6","1"],["fh","?","?","?","?","?","?","300"]]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Lengkapi baris fh pada tabel." },
-      { label: "b.", math: "f_h(\\text{angka} \\leq 3) = \\ldots" },
-      { label: "c.", math: "f_h(\\text{angka genap}) = \\ldots" },
-    ],
-  }),
-  Qn(28, "Frekuensi Harapan – Transportasi", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Moda transportasi 200 responden"
-        headers={["Moda","Motor","Angkot","Bus","Mobil"]}
-        rows={[["Jumlah",100,50,30,20]]}
-      />
-    ),
-    content: "Berdasarkan survei 200 orang, tentukan frekuensi harapan jika 1.000 orang disurvei.",
-    parts: [
-      { label: "a.", math: "P(\\text{Motor}) = \\frac{100}{200} = \\frac{1}{2} \\Rightarrow f_h = 1000 \\times \\frac{1}{2} = \\ldots" },
-      { label: "b.", math: "f_h(\\text{Bus}) = 1000 \\times \\frac{30}{200} = \\ldots" },
-      { label: "c.", text: "Berapa frekuensi harapan pengguna Angkot dalam 1.000 responden?" },
-    ],
-  }),
-  Qn(29, "Soal UN – Dua Kejadian, Mana Lebih Besar?", {
-    type: "mixed",
-    content: "Dua dadu dilempar 720 kali. Bandingkan frekuensi harapan:",
-    parts: [
-      { label: "a.", math: "f_h(\\text{jumlah} = 6) = 720 \\times \\frac{5}{36} = \\ldots" },
-      { label: "b.", math: "f_h(\\text{jumlah} = 7) = 720 \\times \\frac{6}{36} = \\ldots" },
-      { label: "c.", text: "Kejadian mana yang memiliki fh lebih besar? Mengapa?" },
-    ],
-  }),
-  Qn(30, "Soal ANBK – Konteks Nyata", {
+  Qn(18, "Soal ANBK – Konteks Nyata", {
     type: "mixed",
     content: "Sebuah perusahaan asuransi mencatat bahwa peluang seseorang mengalami kecelakaan dalam setahun adalah 0,02. Perusahaan memiliki 5.000 nasabah.",
     parts: [
@@ -366,16 +224,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika premi asuransi Rp500.000/orang, berapa estimasi total klaim yang harus disiapkan?" },
     ],
   }),
-  Qn(31, "Frekuensi Harapan – Kartu Bernomor", {
-    type: "mixed",
-    content: "Kartu bernomor 1–40 dikocok. Satu kartu diambil (dengan pengembalian) 200 kali.",
-    parts: [
-      { label: "a.", math: "f_h(\\text{bilangan prima}) = 200 \\times \\frac{12}{40} = \\ldots" },
-      { label: "b.", math: "f_h(\\text{kelipatan 8}) = 200 \\times \\frac{5}{40} = \\ldots" },
-      { label: "c.", math: "f_h(\\text{bilangan kuadrat sempurna}) = 200 \\times \\frac{6}{40} = \\ldots" },
-    ],
-  }),
-  Qn(32, "Soal TKA – Frekuensi Harapan Acara TV", {
+  Qn(19, "Soal TKA – Frekuensi Harapan Acara TV", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -391,16 +240,7 @@ const questions: Q[] = [
       { label: "c.", text: "Verifikasi: jumlah semua fh = 1000." },
     ],
   }),
-  Qn(33, "Soal UN – Mencari P dan n Sekaligus", {
-    type: "mixed",
-    content: "Frekuensi harapan muncul bilangan ganjil saat melempar dadu adalah 45.",
-    parts: [
-      { label: "a.", math: "P(\\text{ganjil}) = \\frac{3}{6} = \\frac{1}{2}" },
-      { label: "b.", math: "n = \\frac{f_h}{P} = \\frac{45}{\\frac{1}{2}} = \\ldots" },
-      { label: "c.", math: "f_h(\\text{genap}) = n - 45 = \\ldots" },
-    ],
-  }),
-  Qn(34, "Konteks Nyata – Kondisi Cuaca", {
+  Qn(20, "Konteks Nyata – Kondisi Cuaca", {
     type: "mixed",
     content: "Berdasarkan data 10 tahun, peluang hujan pada bulan Juli di suatu kota adalah 0,3. Bulan Juli memiliki 31 hari.",
     parts: [
@@ -409,7 +249,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa frekuensi harapan hujan dalam 10 tahun (10 × 31 hari)?" },
     ],
   }),
-  Qn(35, "Soal TKA – Dua Peristiwa Bebas", {
+  Qn(21, "Soal TKA – Dua Peristiwa Bebas", {
     type: "mixed",
     content: "Peluang siswa A lulus ujian = 0,8 dan peluang siswa B lulus = 0,75. Keduanya ikut 20 ujian.",
     parts: [
@@ -418,7 +258,7 @@ const questions: Q[] = [
       { label: "c.", text: "Siapa yang diharapkan lebih banyak lulus? Berapa selisihnya?" },
     ],
   }),
-  Qn(36, "Frekuensi Harapan – Soal Kehamilan", {
+  Qn(22, "Frekuensi Harapan – Soal Kehamilan", {
     type: "mixed",
     content: "Peluang seorang ibu melahirkan bayi kembar adalah 1/80. Di suatu kota terdapat 4.000 ibu hamil dalam setahun.",
     parts: [
@@ -427,23 +267,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kehamilan kembar memerlukan perawatan khusus, berapa ruang khusus yang perlu disiapkan?" },
     ],
   }),
-  Qn(37, "Soal UN – fh dari Data Campuran", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Komposisi bola dalam kotak"
-        headers={["Warna","Merah","Kuning","Hijau","Total"]}
-        rows={[["Banyak",12,8,5,25]]}
-      />
-    ),
-    content: "Satu bola diambil dan dikembalikan sebanyak 500 kali.",
-    parts: [
-      { label: "a.", math: "f_h(\\text{Merah}) = 500 \\times \\frac{12}{25} = \\ldots" },
-      { label: "b.", math: "f_h(\\text{Kuning}) = 500 \\times \\frac{8}{25} = \\ldots" },
-      { label: "c.", math: "f_h(\\text{bukan Hijau}) = 500 \\times \\frac{20}{25} = \\ldots" },
-    ],
-  }),
-  Qn(38, "Soal ANBK – Tingkat Keberhasilan", {
+  Qn(23, "Soal ANBK – Tingkat Keberhasilan", {
     type: "mixed",
     content: "Sebuah penembak memiliki peluang mengenai sasaran 4/5. Ia menembak 50 kali.",
     parts: [
@@ -452,22 +276,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika penembak ingin mengenai sasaran minimal 100 kali, berapa kali ia perlu menembak?" },
     ],
   }),
-  Qn(39, "Soal UN – Verifikasi fh", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="fh percobaan koin 400 kali"
-        headers={["Hasil","P","fh (teoritis)","fh (aktual)"]}
-        rows={[["Angka","0,5",200,195],["Gambar","0,5",200,205]]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Berapa selisih fh teoritis dan aktual untuk Angka?" },
-      { label: "b.", text: "Apakah koin ini seimbang berdasarkan data? Jelaskan." },
-      { label: "c.", text: "Apa sifat frekuensi harapan yang perlu dipahami siswa?" },
-    ],
-  }),
-  Qn(40, "Soal UN Level Tinggi – Semua Konsep", {
+  Qn(24, "Soal UN Level Tinggi – Semua Konsep", {
     type: "mixed",
     content: "Sebuah kantong berisi bola dengan perbandingan merah : biru : hijau = 3 : 4 : 5. Percobaan pengambilan (dengan pengembalian) dilakukan sebanyak 480 kali.",
     parts: [
@@ -496,7 +305,7 @@ const FrekuensiHarapanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 24 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -508,17 +317,7 @@ const FrekuensiHarapanPage = () => {
             <div className="bg-white/5 rounded-lg px-3 py-2 text-center">
               <BlockMath math="f_h = n \times P(A)" />
             </div>
-            <div className="grid grid-cols-2 gap-2 text-xs font-body">
-              {[
-                { label: "n = banyak percobaan", val: "fh = frekuensi harapan" },
-                { label: "P(A) = peluang kejadian", val: "fh bukan kepastian!" },
-              ].map(r => (
-                <div key={r.label} className="bg-white/5 rounded-lg px-2 py-2 text-center">
-                  <div className="text-emerald-300 text-[10px] font-bold">{r.label}</div>
-                  <div className="text-white/50 text-[10px]">{r.val}</div>
-                </div>
-              ))}
-            </div>
+            <p className="text-white/50 text-xs font-body text-center">fh = frekuensi harapan · n = banyak percobaan · P(A) = peluang kejadian</p>
           </div>
         </div>
 
@@ -526,9 +325,9 @@ const FrekuensiHarapanPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-green-900/30 backdrop-blur" />
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
               <div className="absolute inset-0 border border-emerald-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-green-500 rounded-l-2xl" />
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-teal-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center shrink-0">
