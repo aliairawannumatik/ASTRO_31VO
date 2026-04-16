@@ -72,7 +72,7 @@ const TentangAplikasiPage = () => {
               Diluncurkan pertama kali pada tahun <strong className="text-primary">2026</strong>, Numatik dikembangkan sepenuhnya selaras dengan <strong className="text-accent">Kurikulum Merdeka</strong>. Aplikasi ini mengintegrasikan pendekatan <strong className="text-secondary">Deep Learning</strong> untuk memastikan siswa tidak sekadar menghafal rumus, melainkan memahami konsep secara mendalam, kritis, dan kontekstual.
             </p>
             <p className="text-white/80 font-body text-sm md:text-base leading-relaxed text-justify">
-              Walaupun awalnya didedikasikan untuk siswa-siswi <strong className="text-primary">SMPN 28 Bandung</strong>, Numatik dipersiapkan untuk menjadi sahabat belajar bagi seluruh siswa SMP di pelosok Nusantara.
+              Numatik dipersiapkan untuk menjadi sahabat belajar bagi seluruh siswa SMP di pelosok Nusantara.
             </p>
           </div>
         </div>
