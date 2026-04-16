@@ -151,25 +151,7 @@ const questions: Q[] = [
       { label: "c.", text: "Verifikasi: hitung langsung n(A∩B)/n(S) dari tabel." },
     ],
   }),
-  Qn(8, "Peluang Bersyarat – Pengertian", {
-    type: "mixed",
-    content: "Peluang bersyarat P(A|B) adalah peluang terjadinya A dengan syarat B sudah terjadi.",
-    parts: [
-      { label: "a.", math: "P(A|B) = \\frac{P(A \\cap B)}{P(B)},\\; P(B) \\neq 0" },
-      { label: "b.", text: "Jika P(A∩B) = 1/12 dan P(B) = 1/4, hitung P(A|B)." },
-      { label: "c.", math: "P(A|B) = \\frac{1/12}{1/4} = \\frac{1}{12} \\times \\frac{4}{1} = \\frac{4}{12} = \\frac{1}{3}" },
-    ],
-  }),
-  Qn(9, "Aturan Perkalian Umum – Tidak Saling Bebas", {
-    type: "mixed",
-    content: "Dua bola diambil dari kotak berisi 5 merah dan 3 biru tanpa pengembalian.",
-    parts: [
-      { label: "a.", math: "P(M_1) = \\frac{5}{8}" },
-      { label: "b.", math: "P(M_2 | M_1) = \\frac{4}{7} \\quad \\text{(merah berkurang 1)}" },
-      { label: "c.", math: "P(M_1 \\cap M_2) = \\frac{5}{8} \\times \\frac{4}{7} = \\frac{20}{56} = \\frac{5}{14}" },
-    ],
-  }),
-  Qn(10, "Soal UN – Menentukan Jenis Kejadian", {
+  Qn(8, "Soal UN – Menentukan Jenis Kejadian", {
     type: "mixed",
     content: "Dari 52 kartu bridge, satu kartu diambil. A = kartu As, B = kartu hitam.",
     diagram: (
@@ -185,35 +167,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah A dan B saling bebas? Cek: P(A|B) = P(A)?" },
     ],
   }),
-  Qn(11, "Dua Dadu – Jumlah Tertentu", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i+j===7} />,
-    content: "Dua dadu dilempar. A = jumlah = 7 (sel diarsir). B = dadu pertama = 3.",
-    parts: [
-      { label: "a.", math: "A = \\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\\} \\Rightarrow P(A) = \\frac{6}{36} = \\frac{1}{6}" },
-      { label: "b.", math: "A \\cap B = \\{(3,4)\\} \\Rightarrow P(A \\cap B) = \\frac{1}{36}" },
-      { label: "c.", math: "P(A|B) = \\frac{P(A \\cap B)}{P(B)} = \\frac{1/36}{1/6} = \\frac{1}{6}" },
-    ],
-  }),
-  Qn(12, "Soal UN – Kartu Bridge Bertingkat", {
-    type: "mixed",
-    content: "Dari 52 kartu bridge, satu kartu diambil. A = kartu merah, B = kartu As.",
-    parts: [
-      { label: "a.", math: "P(A) = \\frac{26}{52} = \\frac{1}{2},\\; P(B) = \\frac{4}{52} = \\frac{1}{13}" },
-      { label: "b.", math: "P(A|B) = \\frac{P(A \\cap B)}{P(B)} = \\frac{2/52}{4/52} = \\frac{2}{4} = \\frac{1}{2}" },
-      { label: "c.", text: "Apakah A dan B saling bebas? (Bandingkan P(A|B) dan P(A))" },
-    ],
-  }),
-  Qn(13, "Koin dan Dadu – Kejadian Majemuk", {
-    type: "mixed",
-    content: "Sebuah koin dan sebuah dadu dilempar. A = koin Gambar, B = dadu angka ganjil.",
-    parts: [
-      { label: "a.", math: "P(A) = \\frac{1}{2},\\; P(B) = \\frac{3}{6} = \\frac{1}{2}" },
-      { label: "b.", math: "P(A \\cap B) = \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4} \\quad \\text{(saling bebas)}" },
-      { label: "c.", math: "P(A \\cup B) = \\frac{1}{2} + \\frac{1}{2} - \\frac{1}{4} = \\frac{3}{4}" },
-    ],
-  }),
-  Qn(14, "Pengambilan Tanpa Pengembalian – Dua Tahap", {
+  Qn(9, "Pengambilan Tanpa Pengembalian – Dua Tahap", {
     type: "mixed",
     content: "Kotak berisi 4 bola merah (M) dan 6 bola biru (B). Dua bola diambil tanpa pengembalian.",
     diagram: (
@@ -234,7 +188,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{setidaknya 1 M}) = 1 - P(\\text{BB}) = 1 - \\frac{1}{3} = \\frac{2}{3}" },
     ],
   }),
-  Qn(15, "Soal ANBK – Gabungan Kartu", {
+  Qn(10, "Soal ANBK – Gabungan Kartu", {
     type: "mixed",
     content: "Dari 52 kartu bridge, satu kartu diambil. Tentukan peluang kartu merah atau kartu bernomor 7.",
     parts: [
@@ -243,7 +197,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(\\text{merah} \\cup \\text{angka 7}) = \\frac{26+4-2}{52} = \\frac{28}{52} = \\frac{7}{13}" },
     ],
   }),
-  Qn(16, "Pengambilan Dengan Pengembalian – Saling Bebas", {
+  Qn(11, "Pengambilan Dengan Pengembalian – Saling Bebas", {
     type: "mixed",
     content: "Kotak berisi 3 merah dan 7 biru. Dua bola diambil satu per satu dengan pengembalian.",
     parts: [
@@ -252,7 +206,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bandingkan dengan pengambilan tanpa pengembalian. Mana yang lebih besar P(berbeda warna)?" },
     ],
   }),
-  Qn(17, "Soal UN – P(A∪B) diketahui P(A), P(B), P(A∩B)", {
+  Qn(12, "Soal UN – P(A∪B) diketahui P(A), P(B), P(A∩B)", {
     type: "mixed",
     content: "P(A) = 0,4, P(B) = 0,5, P(A∩B) = 0,2. Tentukan P(A∪B) dan P((A∪B)').",
     parts: [
@@ -261,35 +215,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa arti P((A∪B)') dalam konteks soal?" },
     ],
   }),
-  Qn(18, "Dua Dadu – Aturan Penjumlahan", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => (i+j===5) || (i+j===9)} />,
-    content: "Dua dadu dilempar. A = jumlah 5 (diarsir atas), B = jumlah 9. Apakah saling lepas?",
-    parts: [
-      { label: "a.", math: "A = \\{(1,4),(2,3),(3,2),(4,1)\\} \\Rightarrow n(A)=4" },
-      { label: "b.", math: "B = \\{(3,6),(4,5),(5,4),(6,3)\\} \\Rightarrow n(B)=4" },
-      { label: "c.", math: "A \\cap B = \\emptyset \\Rightarrow P(A \\cup B) = \\frac{4}{36} + \\frac{4}{36} = \\frac{8}{36} = \\frac{2}{9}" },
-    ],
-  }),
-  Qn(19, "Soal TKA – Mencari P(A∩B) dari P(A|B)", {
-    type: "mixed",
-    content: "P(B) = 1/5 dan P(A|B) = 3/4. Tentukan P(A∩B).",
-    parts: [
-      { label: "a.", math: "P(A|B) = \\frac{P(A \\cap B)}{P(B)}" },
-      { label: "b.", math: "P(A \\cap B) = P(A|B) \\times P(B) = \\frac{3}{4} \\times \\frac{1}{5} = \\frac{3}{20}" },
-      { label: "c.", text: "Jika P(A) = 1/2, apakah A dan B saling bebas? (Cek P(A∩B) = P(A)×P(B))" },
-    ],
-  }),
-  Qn(20, "Kejadian Majemuk – Tiga Koin", {
-    type: "mixed",
-    content: "Tiga koin dilempar. A = koin pertama Angka, B = setidaknya dua Angka.",
-    parts: [
-      { label: "a.", math: "n(S) = 2^3 = 8 \\Rightarrow S = \\{AAA,AAG,AGA,AGG,GAA,GAG,GGA,GGG\\}" },
-      { label: "b.", math: "B = \\{AAA,AAG,AGA,GAA\\} \\Rightarrow P(B) = \\frac{4}{8} = \\frac{1}{2}" },
-      { label: "c.", math: "A \\cap B = \\{AAA,AAG,AGA\\} \\Rightarrow P(A \\cap B) = \\frac{3}{8}" },
-    ],
-  }),
-  Qn(21, "Soal UN – Spinner Dua Warna", {
+  Qn(13, "Soal UN – Spinner Dua Warna", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -305,7 +231,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa peluang merah di putaran 1 dan kuning di putaran 2?" },
     ],
   }),
-  Qn(22, "Soal ANBK – Himpunan dan Peluang Gabungan", {
+  Qn(14, "Soal ANBK – Himpunan dan Peluang Gabungan", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -321,25 +247,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa peluang siswa tidak suka keduanya (sepak bola maupun basket)?" },
     ],
   }),
-  Qn(23, "Soal UN – Setidaknya Satu Kejadian", {
-    type: "mixed",
-    content: "Dua dadu dilempar. Tentukan peluang setidaknya satu dadu menunjukkan angka 6.",
-    parts: [
-      { label: "a.", text: "Gunakan komplemen: A' = tidak ada satupun yang 6." },
-      { label: "b.", math: "P(\\text{tidak ada 6}) = \\frac{5}{6} \\times \\frac{5}{6} = \\frac{25}{36}" },
-      { label: "c.", math: "P(\\text{setidaknya satu 6}) = 1 - \\frac{25}{36} = \\frac{11}{36}" },
-    ],
-  }),
-  Qn(24, "Kartu Bernomor 1–20 – Kejadian Majemuk", {
-    type: "mixed",
-    content: "Satu kartu dipilih dari kartu bernomor 1–20. A = bilangan prima, B = bilangan ganjil.",
-    parts: [
-      { label: "a.", math: "A = \\{2,3,5,7,11,13,17,19\\},\\; n(A)=8 \\Rightarrow P(A)=\\frac{8}{20}=\\frac{2}{5}" },
-      { label: "b.", math: "A \\cap B = \\{3,5,7,11,13,17,19\\} \\Rightarrow n(A\\cap B)=7 \\Rightarrow P=\\frac{7}{20}" },
-      { label: "c.", math: "P(A \\cup B) = \\frac{8}{20} + \\frac{10}{20} - \\frac{7}{20} = \\frac{11}{20}" },
-    ],
-  }),
-  Qn(25, "Soal TKA – Aturan Perkalian Berantai", {
+  Qn(15, "Soal TKA – Aturan Perkalian Berantai", {
     type: "mixed",
     content: "Kotak berisi 6 bola: 3 merah (M), 2 biru (B), 1 hijau (H). Tiga bola diambil tanpa pengembalian.",
     parts: [
@@ -348,16 +256,7 @@ const questions: Q[] = [
       { label: "c.", text: "Ada berapa urutan berbeda untuk mengambil 1M, 1B, dan 1H? Apa total peluang semua urutan itu?" },
     ],
   }),
-  Qn(26, "Soal UN – Menentukan P(B) dari Kejadian Majemuk", {
-    type: "mixed",
-    content: "A dan B saling bebas. P(A) = 0,4 dan P(A∩B) = 0,12. Tentukan P(B).",
-    parts: [
-      { label: "a.", math: "P(A \\cap B) = P(A) \\times P(B) \\Rightarrow 0{,}12 = 0{,}4 \\times P(B)" },
-      { label: "b.", math: "P(B) = \\frac{0{,}12}{0{,}4} = 0{,}3" },
-      { label: "c.", math: "P(A \\cup B) = 0{,}4 + 0{,}3 - 0{,}12 = 0{,}58" },
-    ],
-  }),
-  Qn(27, "Soal ANBK – Membuktikan Saling Bebas", {
+  Qn(16, "Soal ANBK – Membuktikan Saling Bebas", {
     type: "mixed",
     content: "Dari 52 kartu bridge, satu kartu diambil. A = kartu As, B = kartu merah.",
     parts: [
@@ -366,17 +265,7 @@ const questions: Q[] = [
       { label: "c.", math: "P(A) \\times P(B) = \\frac{1}{13} \\times \\frac{1}{2} = \\frac{1}{26} = P(A \\cap B) \\checkmark \\Rightarrow \\text{Saling Bebas!}" },
     ],
   }),
-  Qn(28, "Dua Dadu – Salah Satu Syarat", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i+j===8} />,
-    content: "Dua dadu dilempar. Diketahui jumlah = 8. Berapa peluang salah satu dadu menunjukkan angka 3?",
-    parts: [
-      { label: "a.", math: "A = \\text{jumlah 8} = \\{(2,6),(3,5),(4,4),(5,3),(6,2)\\} \\Rightarrow n(A)=5" },
-      { label: "b.", math: "B = \\text{ada angka 3}: \\{(3,5),(5,3)\\} \\cap A \\Rightarrow n(B|A)=2" },
-      { label: "c.", math: "P(B|A) = \\frac{2}{5}" },
-    ],
-  }),
-  Qn(29, "Soal UN – P(A∩B) dari P(A|B)", {
+  Qn(17, "Soal UN – P(A∩B) dari P(A|B)", {
     type: "mixed",
     content: "Dalam sebuah kotak terdapat 10 kelereng. P(merah|terambil ganjil) = 3/6. Jika P(ganjil) = 3/5, hitung P(merah ∩ ganjil).",
     parts: [
@@ -385,25 +274,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa arti P(merah ∩ ganjil) = 3/10 dalam konteks kelereng?" },
     ],
   }),
-  Qn(30, "Soal TKA – Tiga Kejadian Saling Bebas", {
-    type: "mixed",
-    content: "Tiga koin dilempar. A = koin 1 Angka, B = koin 2 Angka, C = koin 3 Angka.",
-    parts: [
-      { label: "a.", math: "P(A \\cap B \\cap C) = P(A) \\times P(B) \\times P(C) = \\frac{1}{2} \\times \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{8}" },
-      { label: "b.", math: "P(A \\cup B \\cup C) = 1 - P(A' \\cap B' \\cap C') = 1 - \\frac{1}{8} = \\frac{7}{8}" },
-      { label: "c.", text: "Mengapa P(A∪B∪C) dihitung dengan komplemen lebih mudah?" },
-    ],
-  }),
-  Qn(31, "Soal UN – P Setidaknya Satu dari Dua", {
-    type: "mixed",
-    content: "Peluang siswa A naik kelas = 0,8. Peluang siswa B naik kelas = 0,7. A dan B saling bebas.",
-    parts: [
-      { label: "a.", math: "P(\\text{A tidak naik}) = 0{,}2,\\; P(\\text{B tidak naik}) = 0{,}3" },
-      { label: "b.", math: "P(\\text{keduanya tidak naik}) = 0{,}2 \\times 0{,}3 = 0{,}06" },
-      { label: "c.", math: "P(\\text{setidaknya satu naik}) = 1 - 0{,}06 = 0{,}94" },
-    ],
-  }),
-  Qn(32, "Soal ANBK – Peluang Bersyarat dari Tabel", {
+  Qn(18, "Soal ANBK – Peluang Bersyarat dari Tabel", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -417,78 +288,6 @@ const questions: Q[] = [
       { label: "a.", math: "P(\\text{laki-laki}) = \\frac{100}{200} = \\frac{1}{2}" },
       { label: "b.", math: "P(\\text{suka Mat} \\cap \\text{laki}) = \\frac{70}{200} = \\frac{7}{20}" },
       { label: "c.", math: "P(\\text{suka Mat}|\\text{laki}) = \\frac{7/20}{1/2} = \\frac{7}{10}" },
-    ],
-  }),
-  Qn(33, "Soal TKA – Mencari P(A) dari Kejadian Majemuk", {
-    type: "mixed",
-    content: "A dan B saling bebas. P(A∪B) = 0,72 dan P(B) = 0,4. Tentukan P(A).",
-    parts: [
-      { label: "a.", math: "P(A \\cup B) = P(A) + P(B) - P(A) \\times P(B)" },
-      { label: "b.", math: "0{,}72 = P(A) + 0{,}4 - 0{,}4 \\cdot P(A) = 0{,}6 \\cdot P(A) + 0{,}4" },
-      { label: "c.", math: "0{,}6 \\cdot P(A) = 0{,}32 \\Rightarrow P(A) = \\frac{0{,}32}{0{,}6} = \\frac{8}{15}" },
-    ],
-  }),
-  Qn(34, "Soal UN Level Tinggi – Dua Tahap Bersyarat", {
-    type: "mixed",
-    content: "Kotak I: 3M 2B. Kotak II: 4M 1B. Sebuah kotak dipilih acak, lalu 1 bola diambil. Tentukan P(bola merah).",
-    parts: [
-      { label: "a.", math: "P(\\text{Kotak I}) = P(\\text{Kotak II}) = \\frac{1}{2}" },
-      { label: "b.", math: "P(M|\\text{I}) = \\frac{3}{5},\\; P(M|\\text{II}) = \\frac{4}{5}" },
-      { label: "c.", math: "P(M) = \\frac{1}{2} \\cdot \\frac{3}{5} + \\frac{1}{2} \\cdot \\frac{4}{5} = \\frac{3}{10} + \\frac{4}{10} = \\frac{7}{10}" },
-    ],
-  }),
-  Qn(35, "Soal ANBK – Membuktikan Tidak Saling Lepas", {
-    type: "mixed",
-    content: "Dari bilangan 1–12, satu bilangan dipilih acak. A = kelipatan 3, B = kelipatan 4.",
-    parts: [
-      { label: "a.", math: "A = \\{3,6,9,12\\},\\; B = \\{4,8,12\\}" },
-      { label: "b.", math: "A \\cap B = \\{12\\} \\neq \\emptyset \\Rightarrow \\text{tidak saling lepas}" },
-      { label: "c.", math: "P(A \\cup B) = \\frac{4}{12} + \\frac{3}{12} - \\frac{1}{12} = \\frac{6}{12} = \\frac{1}{2}" },
-    ],
-  }),
-  Qn(36, "Soal UN – P Tepat Satu dari Dua Kejadian", {
-    type: "mixed",
-    content: "A dan B saling bebas. P(A) = 0,3, P(B) = 0,5. Tentukan P(tepat salah satu terjadi).",
-    parts: [
-      { label: "a.", math: "P(A \\cap B') = P(A) \\times P(B') = 0{,}3 \\times 0{,}5 = 0{,}15" },
-      { label: "b.", math: "P(A' \\cap B) = P(A') \\times P(B) = 0{,}7 \\times 0{,}5 = 0{,}35" },
-      { label: "c.", math: "P(\\text{tepat satu}) = 0{,}15 + 0{,}35 = 0{,}5" },
-    ],
-  }),
-  Qn(37, "Soal TKA – Tiga Koin, Komplemen Bersyarat", {
-    type: "mixed",
-    content: "Tiga koin dilempar. Diketahui koin pertama Angka. Berapa P(setidaknya dua Angka)?",
-    parts: [
-      { label: "a.", text: "Ruang sampel bersyarat (koin 1 = A): {AAA, AAG, AGA, AGG} → 4 titik sampel." },
-      { label: "b.", text: "Kejadian ≥ 2 Angka dalam ruang bersyarat: {AAA, AAG, AGA} → 3 titik." },
-      { label: "c.", math: "P(\\geq 2A | A_1) = \\frac{3}{4}" },
-    ],
-  }),
-  Qn(38, "Soal UN – Peluang Keduanya Berbeda", {
-    type: "mixed",
-    content: "Dua kartu diambil berturut-turut tanpa pengembalian dari kartu bernomor 1–5.",
-    parts: [
-      { label: "a.", math: "P(\\text{sama}) = \\frac{5}{5} \\times \\frac{1}{4} = \\frac{1}{4}" },
-      { label: "b.", math: "P(\\text{berbeda}) = 1 - \\frac{1}{4} = \\frac{3}{4}" },
-      { label: "c.", text: "Hitung langsung P(berbeda): angka pertama bebas (5/5), lalu angka kedua berbeda (4/4)." },
-    ],
-  }),
-  Qn(39, "Soal TKA – P(A∪B) dari P(A|B) dan Informasi Lain", {
-    type: "mixed",
-    content: "P(B) = 0,4 dan P(A|B) = 0,5 dan P(A) = 0,3. Tentukan P(A∪B).",
-    parts: [
-      { label: "a.", math: "P(A \\cap B) = P(A|B) \\times P(B) = 0{,}5 \\times 0{,}4 = 0{,}2" },
-      { label: "b.", math: "P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0{,}3 + 0{,}4 - 0{,}2 = 0{,}5" },
-      { label: "c.", text: "Apakah A dan B saling bebas? (Cek: P(A)×P(B) = 0,3×0,4 = 0,12 ≠ 0,2 → Tidak saling bebas)" },
-    ],
-  }),
-  Qn(40, "Soal UN Level Tinggi – Kejadian Majemuk Kompleks", {
-    type: "mixed",
-    content: "Dalam kotak A terdapat 5 bola merah dan 3 bola putih. Dalam kotak B terdapat 2 bola merah dan 6 bola putih. Satu bola diambil dari masing-masing kotak. Tentukan peluang setidaknya satu bola merah.",
-    parts: [
-      { label: "a.", math: "P(\\text{keduanya putih}) = \\frac{3}{8} \\times \\frac{6}{8} = \\frac{18}{64} = \\frac{9}{32}" },
-      { label: "b.", math: "P(\\text{setidaknya 1 merah}) = 1 - \\frac{9}{32} = \\frac{23}{32}" },
-      { label: "c.", text: "Verifikasi dengan cara langsung: P(MM) + P(MP) + P(PM) = 10/64 + 30/64 + 6/64 = 46/64 = 23/32 ✓" },
     ],
   }),
 ];
@@ -510,7 +309,7 @@ const PeluangKejadianMajemukPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-2">
-            <span className="text-indigo-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-indigo-400 text-xs font-bold">📋 18 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
