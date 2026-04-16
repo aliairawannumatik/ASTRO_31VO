@@ -56,35 +56,6 @@ const TabelModusFreq = () => (
   </svg>
 );
 
-const MedianBerkelompokDiagram = () => (
-  <svg width="310" height="140" viewBox="0 0 310 140" className="mx-auto">
-    <rect x="4" y="4" width="302" height="132" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
-    <text x="155" y="18" fill="#a78bfa" fontSize="10" textAnchor="middle" fontWeight="bold">Rumus Median Data Berkelompok</text>
-    <rect x="20" y="24" width="270" height="50" rx="6" fill="#3b0764" fillOpacity="0.4" />
-    <text x="155" y="40" fill="#c4b5fd" fontSize="10" textAnchor="middle">Me = L + p · ( ½n − F ) / f</text>
-    <text x="35" y="56" fill="#94a3b8" fontSize="8">L = batas bawah kelas median</text>
-    <text x="35" y="68" fill="#94a3b8" fontSize="8">p = panjang kelas · n = total frekuensi</text>
-    <text x="35" y="80" fill="#94a3b8" fontSize="8">F = frekuensi kumulatif sebelum kelas median</text>
-    <text x="35" y="93" fill="#94a3b8" fontSize="8">f = frekuensi kelas median</text>
-    <text x="155" y="110" fill="#7c3aed" fontSize="9" textAnchor="middle" fontWeight="bold">Kelas Median: kelas dimana frekuensi kumulatif ≥ ½n</text>
-    <text x="155" y="128" fill="#ddd6fe" fontSize="9" textAnchor="middle">Contoh: n=40 → ½n=20 → cari kelas dimana fk≥20</text>
-  </svg>
-);
-
-const ModusBerkelompokDiagram = () => (
-  <svg width="310" height="120" viewBox="0 0 310 120" className="mx-auto">
-    <rect x="4" y="4" width="302" height="112" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
-    <text x="155" y="18" fill="#a78bfa" fontSize="10" textAnchor="middle" fontWeight="bold">Rumus Modus Data Berkelompok</text>
-    <rect x="20" y="24" width="270" height="34" rx="6" fill="#3b0764" fillOpacity="0.4" />
-    <text x="155" y="36" fill="#c4b5fd" fontSize="10" textAnchor="middle">Mo = L + p · d₁ / (d₁ + d₂)</text>
-    <text x="155" y="50" fill="#94a3b8" fontSize="8" textAnchor="middle">L = batas bawah kelas modus (frekuensi terbesar)</text>
-    <text x="155" y="65" fill="#94a3b8" fontSize="8" textAnchor="middle">d₁ = selisih frekuensi kelas modus dengan kelas sebelumnya</text>
-    <text x="155" y="78" fill="#94a3b8" fontSize="8" textAnchor="middle">d₂ = selisih frekuensi kelas modus dengan kelas sesudahnya</text>
-    <text x="155" y="93" fill="#94a3b8" fontSize="8" textAnchor="middle">p = panjang kelas interval</text>
-    <text x="155" y="110" fill="#7c3aed" fontSize="9" textAnchor="middle" fontWeight="bold">Kelas Modus = kelas dengan frekuensi TERBESAR</text>
-  </svg>
-);
-
 const questions: Q[] = [
   Qn(1, "Median Data Ganjil – UN", {
     type: "mixed",
@@ -126,27 +97,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jadi median = ?" },
     ],
   }),
-  Qn(5, "Median Data Berkelompok – UN", {
-    type: "mixed",
-    diagram: <MedianBerkelompokDiagram />,
-    content: "Data nilai: 50–59 (f=4), 60–69 (f=8), 70–79 (f=14, kelas median), 80–89 (f=10), 90–99 (f=4). n=40.",
-    parts: [
-      { label: "a.", math: "L = 69{,}5, \\; p = 10, \\; \\frac{n}{2} = 20, \\; F = 4+8 = 12, \\; f = 14" },
-      { label: "b.", math: "Me = 69{,}5 + 10 \\cdot \\frac{20-12}{14} = 69{,}5 + 10 \\cdot \\frac{8}{14}" },
-      { label: "c.", math: "Me = 69{,}5 + \\frac{80}{14} = 69{,}5 + 5{,}71 \\approx \\ldots" },
-    ],
-  }),
-  Qn(6, "Modus Data Berkelompok – ANBK", {
-    type: "mixed",
-    diagram: <ModusBerkelompokDiagram />,
-    content: "Data: 60–69 (f=5), 70–79 (f=18, kelas modus), 80–89 (f=12). Panjang kelas = 10.",
-    parts: [
-      { label: "a.", math: "L = 69{,}5, \\; d_1 = 18-5 = 13, \\; d_2 = 18-12 = 6" },
-      { label: "b.", math: "Mo = 69{,}5 + 10 \\cdot \\frac{13}{13+6} = 69{,}5 + 10 \\cdot \\frac{13}{19}" },
-      { label: "c.", math: "Mo = 69{,}5 + \\frac{130}{19} \\approx 69{,}5 + 6{,}84 \\approx \\ldots" },
-    ],
-  }),
-  Qn(7, "Menentukan Nilai Data dari Median – UN", {
+  Qn(5, "Menentukan Nilai Data dari Median – UN", {
     type: "mixed",
     content: "Median dari 5 data yang sudah diurutkan adalah 8. Data tersebut: 4, 6, a, 10, 12.",
     parts: [
@@ -155,7 +106,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika data bertambah satu lagi yaitu 14, berapa median baru (n=6)?" },
     ],
   }),
-  Qn(8, "Modus dan Median Bersamaan – TKA", {
+  Qn(6, "Modus dan Median Bersamaan – TKA", {
     type: "mixed",
     content: "Data nilai ujian: 7, 7, 8, 8, 8, 9, 9, 10.",
     parts: [
@@ -164,63 +115,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\bar{x} = \\frac{7+7+8+8+8+9+9+10}{8} = \\ldots" },
     ],
   }),
-  Qn(9, "Median dan Rata-Rata Berbeda – ANBK", {
-    type: "mixed",
-    content: "Data pendapatan bulanan (jutaan rupiah): 3, 4, 4, 5, 5, 6, 50.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{3+4+4+5+5+6+50}{7} = \\frac{77}{7} = \\ldots" },
-      { label: "b.", math: "Me = x_4 = \\ldots" },
-      { label: "c.", text: "Nilai mana yang lebih representatif untuk data ini? Mean atau median? Mengapa?" },
-    ],
-  }),
-  Qn(10, "Mencari Kelas Median – UN", {
-    type: "mixed",
-    content: "Tabel: 40–49 (f=3), 50–59 (f=7), 60–69 (f=15), 70–79 (f=12), 80–89 (f=8). n=45.",
-    parts: [
-      { label: "a.", math: "\\frac{n}{2} = \\frac{45}{2} = 22{,}5" },
-      { label: "b.", text: "Frekuensi kumulatif: 3, 10, 25, 37, 45. Kelas median = kelas dimana fk ≥ 22,5." },
-      { label: "c.", text: "Kelas mana yang menjadi kelas median?" },
-    ],
-  }),
-  Qn(11, "Menghitung Median Berkelompok – TKA", {
-    type: "mixed",
-    mathContent: "Me = L + p \\cdot \\frac{\\frac{n}{2} - F}{f}",
-    content: "Data: 50–59 (3), 60–69 (7), 70–79 (15, kelas median), 80–89 (12), 90–99 (8). n=45.",
-    parts: [
-      { label: "a.", math: "L = 69{,}5, \\; p = 10, \\; \\frac{n}{2} = 22{,}5, \\; F = 3+7 = 10, \\; f = 15" },
-      { label: "b.", math: "Me = 69{,}5 + 10 \\cdot \\frac{22{,}5-10}{15} = 69{,}5 + 10 \\cdot \\frac{12{,}5}{15}" },
-      { label: "c.", math: "Me = 69{,}5 + \\frac{125}{15} = 69{,}5 + 8{,}33 = \\ldots" },
-    ],
-  }),
-  Qn(12, "Modus dan Distribusi Data – ANBK", {
-    type: "mixed",
-    content: "Identifikasi jenis distribusi data berdasarkan hubungan mean, median, dan modus:",
-    parts: [
-      { label: "a.", math: "\\text{Jika } \\bar{x} = Me = Mo \\Rightarrow \\text{ distribusi } \\ldots" },
-      { label: "b.", math: "\\text{Jika } \\bar{x} > Me > Mo \\Rightarrow \\text{ condong ke } \\ldots" },
-      { label: "c.", math: "\\text{Jika } \\bar{x} < Me < Mo \\Rightarrow \\text{ condong ke } \\ldots" },
-    ],
-  }),
-  Qn(13, "Soal Cerita Median – UN", {
-    type: "mixed",
-    content: "Harga 9 rumah di suatu daerah (juta rupiah): 450, 500, 520, 550, 600, 650, 700, 800, 2500.",
-    parts: [
-      { label: "a.", math: "Me = x_5 = \\ldots \\text{ juta rupiah}" },
-      { label: "b.", math: "\\bar{x} = \\frac{450+500+520+550+600+650+700+800+2500}{9} = \\ldots" },
-      { label: "c.", text: "Nilai mana yang lebih mencerminkan harga 'khas' rumah di daerah tersebut?" },
-    ],
-  }),
-  Qn(14, "Hubungan Mean-Median-Modus – TKA", {
-    type: "mixed",
-    mathContent: "Mo \\approx 3 \\cdot Me - 2 \\cdot \\bar{x} \\quad \\text{(Hubungan Empiris Pearson)}",
-    content: "Gunakan rumus empiris Pearson untuk memperkirakan modus:",
-    parts: [
-      { label: "a.", math: "\\bar{x} = 72, Me = 70 \\Rightarrow Mo \\approx 3(70) - 2(72) = 210 - 144 = \\ldots" },
-      { label: "b.", math: "\\bar{x} = 80, Me = 78 \\Rightarrow Mo \\approx 3(78) - 2(80) = \\ldots" },
-      { label: "c.", text: "Kapan rumus ini digunakan? Apakah hasilnya selalu tepat?" },
-    ],
-  }),
-  Qn(15, "Modus Data Tidak Bergolong – ANBK", {
+  Qn(7, "Modus Data Tidak Bergolong – ANBK", {
     type: "mixed",
     content: "Dari hasil survei warna favorit siswa: Merah(12), Biru(18), Hijau(15), Kuning(8), Ungu(7).",
     parts: [
@@ -229,16 +124,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah modus selalu satu? Beri contoh bila tidak." },
     ],
   }),
-  Qn(16, "Median dari Ogive – UN", {
-    type: "mixed",
-    content: "Dari ogive diketahui: frekuensi kumulatif ½n = 20 jatuh pada nilai 74,5 berdasarkan grafik.",
-    parts: [
-      { label: "a.", text: "Apakah artinya median = 74,5?" },
-      { label: "b.", text: "Bagaimana cara membaca median dari ogive secara akurat?" },
-      { label: "c.", text: "Mengapa ogive berguna untuk menentukan median data berkelompok?" },
-    ],
-  }),
-  Qn(17, "Menentukan Data Hilang dari Median – TKA", {
+  Qn(8, "Menentukan Data Hilang dari Median – TKA", {
     type: "mixed",
     content: "Enam data yang sudah diurutkan: 5, 7, x, 10, 13, 15. Median = 9.",
     parts: [
@@ -247,25 +133,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah nilai x yang diperoleh valid dalam urutan yang ada?" },
     ],
   }),
-  Qn(18, "Soal Modus Berkelompok – ANBK", {
-    type: "mixed",
-    content: "Data nilai: 40–49 (f=4), 50–59 (f=8), 60–69 (f=20, kelas modus), 70–79 (f=14), 80–89 (f=4).",
-    parts: [
-      { label: "a.", math: "d_1 = 20-8 = 12, \\; d_2 = 20-14 = 6, \\; L = 59{,}5, \\; p = 10" },
-      { label: "b.", math: "Mo = 59{,}5 + 10 \\cdot \\frac{12}{12+6} = 59{,}5 + \\frac{120}{18}" },
-      { label: "c.", math: "Mo = 59{,}5 + 6{,}67 \\approx \\ldots" },
-    ],
-  }),
-  Qn(19, "Perbandingan Tiga Ukuran Pemusatan – UN", {
-    type: "mixed",
-    content: "Data: 10, 20, 20, 30, 40, 50, 60.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{10+20+20+30+40+50+60}{7} = \\ldots" },
-      { label: "b.", math: "Me = x_4 = \\ldots, \\quad Mo = \\ldots" },
-      { label: "c.", text: "Apakah data ini condong ke kanan atau ke kiri? Jelaskan." },
-    ],
-  }),
-  Qn(20, "Aplikasi Modus dalam Kehidupan – TKA", {
+  Qn(9, "Aplikasi Modus dalam Kehidupan – TKA", {
     type: "mixed",
     content: "Seorang penjual sepatu mencatat ukuran sepatu yang terjual: 39 (5), 40 (12), 41 (20), 42 (15), 43 (8).",
     parts: [
@@ -274,7 +142,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\bar{x} = \\frac{39(5)+40(12)+41(20)+42(15)+43(8)}{60} = \\ldots" },
     ],
   }),
-  Qn(21, "Median Nilai Ujian – ANBK", {
+  Qn(10, "Median Nilai Ujian – ANBK", {
     type: "mixed",
     content: "Nilai ujian 10 siswa (belum diurutkan): 78, 65, 92, 85, 71, 88, 76, 69, 83, 90.",
     parts: [
@@ -283,16 +151,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak siswa yang nilainya di atas median?" },
     ],
   }),
-  Qn(22, "Menentukan Kelas Modus – UN", {
-    type: "mixed",
-    content: "Tabel: 30–39 (f=2), 40–49 (f=5), 50–59 (f=18), 60–69 (f=14), 70–79 (f=11). Tentukan kelas modus dan hitunglah modus.",
-    parts: [
-      { label: "a.", text: "Kelas dengan frekuensi terbesar adalah kelas modus = ?" },
-      { label: "b.", math: "d_1 = 18-5 = \\ldots, \\; d_2 = 18-14 = \\ldots" },
-      { label: "c.", math: "Mo = 49{,}5 + 10 \\cdot \\frac{d_1}{d_1+d_2} = \\ldots" },
-    ],
-  }),
-  Qn(23, "Nilai Tengah Data – TKA", {
+  Qn(11, "Nilai Tengah Data – TKA", {
     type: "mixed",
     content: "Data nilai rapor 12 siswa: 68, 72, 74, 75, 76, 78, 79, 80, 82, 85, 88, 92.",
     parts: [
@@ -301,7 +160,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\bar{x} = \\frac{68+72+...+92}{12} = \\frac{949}{12} \\approx \\ldots" },
     ],
   }),
-  Qn(24, "Soal Modus dan Median – ANBK", {
+  Qn(12, "Soal Modus dan Median – ANBK", {
     type: "mixed",
     content: "Data berat badan (kg): 45, 48, 50, 50, 52, 55, 55, 55, 58, 60.",
     parts: [
@@ -310,34 +169,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\bar{x} = \\frac{45+48+50+50+52+55+55+55+58+60}{10} = \\ldots" },
     ],
   }),
-  Qn(25, "Pengaruh Data Ekstrem pada Median – UN", {
-    type: "mixed",
-    content: "Data gaji (ribu rupiah): 2000, 2500, 3000, 3500, 4000, 50000.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{2000+2500+3000+3500+4000+50000}{6} = \\ldots" },
-      { label: "b.", math: "Me = \\frac{x_3+x_4}{2} = \\frac{3000+3500}{2} = \\ldots" },
-      { label: "c.", text: "Mengapa median tidak terpengaruh data ekstrem sebesar mean?" },
-    ],
-  }),
-  Qn(26, "Median Data Berkelompok Lanjutan – TKA", {
-    type: "mixed",
-    content: "Tabel tinggi badan: 145–149 (f=3), 150–154 (f=7), 155–159 (f=12), 160–164 (f=10), 165–169 (f=8). n=40.",
-    parts: [
-      { label: "a.", math: "\\frac{n}{2} = 20 \\Rightarrow \\text{fk: 3, 10, 22, 32, 40} \\Rightarrow \\text{kelas median: } 155-159" },
-      { label: "b.", math: "L=154{,}5, p=5, F=10, f=12: Me = 154{,}5 + 5 \\cdot \\frac{20-10}{12} = \\ldots" },
-      { label: "c.", math: "Me = 154{,}5 + \\frac{50}{12} = 154{,}5 + 4{,}17 \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(27, "Hubungan Modus dan Histogram – ANBK", {
-    type: "mixed",
-    content: "Dari histogram, kelas dengan balok tertinggi adalah kelas 70–79 dengan frekuensi 20. Kelas sebelumnya 60–69 (f=12) dan sesudahnya 80–89 (f=15).",
-    parts: [
-      { label: "a.", math: "d_1 = 20-12 = 8, \\; d_2 = 20-15 = 5" },
-      { label: "b.", math: "Mo = 69{,}5 + 10 \\cdot \\frac{8}{8+5} = 69{,}5 + \\frac{80}{13} \\approx \\ldots" },
-      { label: "c.", text: "Mengapa kelas dengan frekuensi terbesar disebut kelas modus?" },
-    ],
-  }),
-  Qn(28, "Soal Cerita Modus – UN", {
+  Qn(13, "Soal Cerita Modus – UN", {
     type: "mixed",
     content: "Dari 25 siswa yang disurvei, nilai ujian adalah:\n7 (3), 8 (7), 9 (10), 10 (5).",
     parts: [
@@ -346,16 +178,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\bar{x} = \\frac{7(3)+8(7)+9(10)+10(5)}{25} = \\frac{21+56+90+50}{25} = \\ldots" },
     ],
   }),
-  Qn(29, "Kelas Median dan Modus Sama – TKA", {
-    type: "mixed",
-    content: "Data: 60–69 (f=5), 70–79 (f=20, kelas dengan frekuensi terbesar dan kelas median), 80–89 (f=15). n=40.",
-    parts: [
-      { label: "a.", math: "\\text{Median: } L=69{,}5, p=10, F=5, f=20, \\frac{n}{2}=20" },
-      { label: "b.", math: "Me = 69{,}5 + 10 \\cdot \\frac{20-5}{20} = 69{,}5 + 7{,}5 = \\ldots" },
-      { label: "c.", math: "\\text{Modus: } d_1=20-5=15, d_2=20-15=5; Mo = 69{,}5 + 10\\cdot\\frac{15}{20} = \\ldots" },
-    ],
-  }),
-  Qn(30, "Soal ANBK – Menentukan Data", {
+  Qn(14, "Soal ANBK – Menentukan Data", {
     type: "mixed",
     content: "Lima data berurutan: a, 5, 8, b, 12. Median = 8 dan rata-rata = 8.",
     parts: [
@@ -364,7 +187,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika a < 5, tentukan nilai a dan b." },
     ],
   }),
-  Qn(31, "Soal UN – Mencari Nilai dari Modus", {
+  Qn(15, "Soal UN – Mencari Nilai dari Modus", {
     type: "mixed",
     content: "Data: 3, 5, 7, 8, k, 8, 10, 12. Modus = 8.",
     parts: [
@@ -373,87 +196,13 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah mungkin ada modus lain jika k = 5? Jelaskan." },
     ],
   }),
-  Qn(32, "Soal TKA – Estimasi Modus dari Rumus Pearson", {
-    type: "mixed",
-    mathContent: "Mo \\approx 3 \\cdot Me - 2 \\cdot \\bar{x}",
-    content: "Gunakan rumus Pearson untuk mengestimasi modus:",
-    parts: [
-      { label: "a.", math: "\\bar{x} = 75, Me = 74 \\Rightarrow Mo \\approx 3(74) - 2(75) = \\ldots" },
-      { label: "b.", math: "\\bar{x} = 68, Me = 70 \\Rightarrow Mo \\approx 3(70) - 2(68) = \\ldots" },
-      { label: "c.", text: "Kapan rumus empiris Pearson berlaku dengan baik?" },
-    ],
-  }),
-  Qn(33, "Soal ANBK – Modus Data Berkelompok 2", {
-    type: "mixed",
-    content: "Tabel: 20–29 (f=3), 30–39 (f=6), 40–49 (f=14), 50–59 (f=10), 60–69 (f=7). Kelas modus = 40–49.",
-    parts: [
-      { label: "a.", math: "d_1 = 14-6 = 8, \\; d_2 = 14-10 = 4" },
-      { label: "b.", math: "Mo = 39{,}5 + 10 \\cdot \\frac{8}{8+4} = 39{,}5 + \\frac{80}{12} = \\ldots" },
-      { label: "c.", math: "Mo = 39{,}5 + 6{,}67 \\approx \\ldots" },
-    ],
-  }),
-  Qn(34, "Soal UN – Ketiganya Sekaligus", {
-    type: "mixed",
-    content: "Data nilai 9 siswa: 60, 70, 70, 75, 80, 80, 80, 85, 90.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{60+70+70+75+80+80+80+85+90}{9} = \\ldots" },
-      { label: "b.", math: "Me = x_5 = \\ldots, \\quad Mo = \\ldots" },
-      { label: "c.", text: "Bandingkan ketiga nilai. Apakah data condong ke kanan, kiri, atau simetris?" },
-    ],
-  }),
-  Qn(35, "Soal TKA – Median Berkelompok Lanjutan", {
-    type: "mixed",
-    content: "Data: 10–19 (f=4), 20–29 (f=6), 30–39 (f=12), 40–49 (f=10), 50–59 (f=8). n=40.",
-    parts: [
-      { label: "a.", math: "\\frac{n}{2} = 20, \\text{ fk}: 4, 10, 22, 32, 40 \\Rightarrow \\text{kelas median: } 30-39" },
-      { label: "b.", math: "L=29{,}5, p=10, F=10, f=12: Me = 29{,}5 + 10 \\cdot \\frac{20-10}{12}" },
-      { label: "c.", math: "Me = 29{,}5 + \\frac{100}{12} = 29{,}5 + 8{,}33 \\approx \\ldots" },
-    ],
-  }),
-  Qn(36, "Soal UN – Modus dari Diagram Batang", {
+  Qn(16, "Soal UN – Modus dari Diagram Batang", {
     type: "mixed",
     content: "Dari diagram batang, tinggi batang masing-masing: A=8, B=12, C=20, D=15, E=5.",
     parts: [
       { label: "a.", text: "Kategori mana yang menjadi modus?" },
       { label: "b.", text: "Berapa total frekuensi semua kategori?" },
       { label: "c.", math: "\\text{Persentase kategori C} = \\frac{20}{60} \\times 100\\% = \\ldots" },
-    ],
-  }),
-  Qn(37, "Soal ANBK – Interpretasi Modus dan Median", {
-    type: "mixed",
-    content: "Data nilai kelas (30 siswa): Sebagian besar mendapat nilai 75. Modus = 75, Median = 73, Mean = 74.",
-    parts: [
-      { label: "a.", text: "Apa yang ditunjukkan oleh modus = 75?" },
-      { label: "b.", text: "Mengapa mean sedikit di bawah modus pada kasus ini?" },
-      { label: "c.", text: "Apakah distribusi ini condong ke kanan atau ke kiri? Jelaskan berdasarkan posisi mean, median, modus." },
-    ],
-  }),
-  Qn(38, "Soal TKA – Median dan Frekuensi Tidak Diketahui", {
-    type: "mixed",
-    content: "Dari 5 kelas, frekuensinya adalah: 5, f₂, 15, 10, 5. Total n = 40. Median jatuh di kelas ketiga.",
-    parts: [
-      { label: "a.", math: "f_2 = 40 - 5 - 15 - 10 - 5 = \\ldots" },
-      { label: "b.", math: "\\frac{n}{2} = 20, \\text{ fk sebelum kelas 3: } 5 + f_2 = 5 + 5 = 10 < 20 \\checkmark" },
-      { label: "c.", text: "Verifikasi bahwa kelas median memang kelas ketiga." },
-    ],
-  }),
-  Qn(39, "Soal UN/ANBK – Lengkap", {
-    type: "mixed",
-    content: "Data nilai 40 siswa berkelompok:\n50–59: 4, 60–69: 8, 70–79: 16, 80–89: 8, 90–99: 4",
-    parts: [
-      { label: "a.", math: "Me: L=69{,}5, p=10, \\frac{n}{2}=20, F=12, f=16 \\Rightarrow Me = 69{,}5+10\\cdot\\frac{8}{16} = \\ldots" },
-      { label: "b.", math: "Mo: d_1=16-8=8, d_2=16-8=8 \\Rightarrow Mo = 69{,}5+10\\cdot\\frac{8}{16} = \\ldots" },
-      { label: "c.", text: "Apakah Me = Mo? Apa artinya secara statistik?" },
-    ],
-  }),
-  Qn(40, "Soal UN/ANBK/TKA – Gabungan Median dan Modus", {
-    type: "mixed",
-    content: "Data nilai ujian 30 siswa:\n60–64: 3, 65–69: 5, 70–74: 10, 75–79: 8, 80–84: 4",
-    parts: [
-      { label: "a.", math: "\\text{Median: } \\frac{n}{2}=15, \\text{fk}: 3,8,18,26,30 \\Rightarrow \\text{kelas median: } 70-74" },
-      { label: "b.", math: "Me = 69{,}5+5\\cdot\\frac{15-8}{10} = 69{,}5+3{,}5 = \\ldots" },
-      { label: "c.", math: "Mo: d_1=10-5=5, d_2=10-8=2 \\Rightarrow Mo = 69{,}5+5\\cdot\\frac{5}{7} = 69{,}5+3{,}57 \\approx \\ldots" },
-      { label: "d.", text: "Bandingkan median dan modus. Apa kesimpulanmu?" },
     ],
   }),
 ];
@@ -476,7 +225,7 @@ const MedianModusPage = () => {
           <p className="text-violet-200/70 text-sm text-center font-body mb-1">Median dan Modus</p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 16 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
