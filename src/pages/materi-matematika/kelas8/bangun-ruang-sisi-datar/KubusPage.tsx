@@ -2332,6 +2332,53 @@ const KubusPage = () => {
               <BlockMath math="L_{\text{bidang diag}} = s \times s\sqrt{2} = s^2\sqrt{2}" />
             </div>
           </div>
+
+          {/* Penjelasan rumus L = p × l */}
+          <div className="bg-slate-900/70 border border-violet-600/40 rounded-lg p-4 space-y-3">
+            <p className="text-violet-300 font-semibold text-xs">🔲 Mengapa L = s × s√2 ? — Karena Bidang Diagonal Berbentuk Persegi Panjang</p>
+            <p className="text-xs text-white/65">
+              Ambil contoh bidang diagonal <strong className="text-violet-300">ABGH</strong>. Bidang ini terbentuk dari empat titik sudut kubus dan memiliki dua pasang sisi sejajar yang berbeda ukuran, yaitu:
+            </p>
+
+            {/* Rectangle diagram */}
+            <div className="flex justify-center">
+              <svg width="220" height="120" viewBox="0 0 220 120">
+                {/* Rectangle ABGH */}
+                <rect x="20" y="20" width="180" height="80" fill="#4c1d9522" stroke="#a855f7" strokeWidth="2" rx="3"/>
+                {/* Labels vertices */}
+                <text x="8"  y="18"  fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
+                <text x="200" y="18" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
+                <text x="200" y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">G</text>
+                <text x="8"  y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">H</text>
+                {/* panjang label (top — s√2, diagonal bidang) */}
+                <text x="110" y="14" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">p = s√2  (diagonal bidang)</text>
+                {/* lebar label (right — s, rusuk tegak) */}
+                <text x="216" y="62" fill="#a855f7" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(90,213,62)">l = s  (rusuk)</text>
+                {/* right angle marks */}
+                <rect x="20" y="20" width="10" height="10" fill="none" stroke="#ffffff44" strokeWidth="1"/>
+                <rect x="190" y="20" width="10" height="10" fill="none" stroke="#ffffff44" strokeWidth="1"/>
+                <rect x="190" y="90" width="10" height="10" fill="none" stroke="#ffffff44" strokeWidth="1"/>
+                <rect x="20" y="90" width="10" height="10" fill="none" stroke="#ffffff44" strokeWidth="1"/>
+              </svg>
+            </div>
+
+            {/* Step-by-step */}
+            <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs">
+              <p className="text-white/80 font-semibold">Penurunan rumus:</p>
+              <div className="space-y-1 text-white/70">
+                <p>① Bidang diagonal <strong className="text-violet-300">ABGH</strong> berbentuk <strong className="text-white/90">persegi panjang</strong></p>
+                <p>② Panjang (<InlineMath math="p"/>): sisi AB atau GH = diagonal bidang alas = <strong className="text-orange-400">s√2</strong></p>
+                <p>③ Lebar (<InlineMath math="l"/>): sisi AH atau BG = rusuk tegak kubus = <strong className="text-violet-400">s</strong></p>
+                <p>④ Terapkan rumus luas persegi panjang <InlineMath math="L = p \times l"/>:</p>
+              </div>
+              <div className="bg-slate-900/60 rounded p-2 text-center space-y-1">
+                <BlockMath math="L = p \times l"/>
+                <BlockMath math="L = s\sqrt{2} \times s"/>
+                <BlockMath math="\boxed{L = s^2\sqrt{2}}"/>
+              </div>
+              <p className="text-violet-300 text-xs">∴ Luas bidang diagonal = <InlineMath math="s^2\sqrt{2}"/>, berlaku untuk semua 6 bidang diagonal kubus.</p>
+            </div>
+          </div>
         </div>
       ),
     },
