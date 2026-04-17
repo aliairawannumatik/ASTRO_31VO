@@ -1814,6 +1814,100 @@ const volExamples: Ex[] = [
   },
 ];
 
+const kerangkaExamples: Ex[] = [
+  {
+    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah kerangka kubus dibuat dari kawat. Panjang rusuk kubus tersebut adalah <InlineMath math="9 \text{ cm}" />.</p>
+        <p>Berapa panjang kawat minimal yang dibutuhkan untuk membuat kerangka kubus itu?</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs text-white/70">
+          <p>Kubus memiliki <strong className="text-white">12 rusuk</strong>, semuanya sama panjang.</p>
+          <p>Kerangka kubus = jumlah panjang semua rusuk = <InlineMath math="12 \times s" /></p>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="K = 12 \times s = 12 \times 9 = 108 \text{ cm}" />
+        </div>
+        <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
+          <p className="text-green-300 font-semibold">✅ Panjang kawat = <InlineMath math="108 \text{ cm}" /></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Kerangka kubus dibuat menggunakan kawat sepanjang <InlineMath math="144 \text{ cm}" />.</p>
+        <p>Tentukan: (a) panjang rusuk kubus, (b) luas permukaan kubus, (c) volume kubus.</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-yellow-400 font-semibold">(a) Panjang rusuk:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="K = 12s \Rightarrow 144 = 12s \Rightarrow s = \frac{144}{12} = 12 \text{ cm}" />
+        </div>
+        <p className="text-yellow-400 font-semibold">(b) Luas permukaan:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="L = 6s^2 = 6 \times 12^2 = 6 \times 144 = 864 \text{ cm}^2" />
+        </div>
+        <p className="text-yellow-400 font-semibold">(c) Volume:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="V = s^3 = 12^3 = 1.728 \text{ cm}^3" />
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs text-white/80 space-y-0.5">
+          <p className="text-yellow-300 font-semibold">✅ Jawaban:</p>
+          <p>• Rusuk = <InlineMath math="12 \text{ cm}" /></p>
+          <p>• Luas permukaan = <InlineMath math="864 \text{ cm}^2" /></p>
+          <p>• Volume = <InlineMath math="1.728 \text{ cm}^3" /></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Kerangka kubus terbuat dari kawat besi sepanjang <InlineMath math="180 \text{ cm}" />.</p>
+        <p>Di dalam kubus dimasukkan sebuah bola yang tepat menyentuh semua sisi kubus (bola paling besar yang muat).</p>
+        <p>Hitunglah luas permukaan bola tersebut! <InlineMath math="(\pi = 3{,}14)" /></p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-red-400 font-semibold">Langkah 1 — Cari panjang rusuk dari panjang kerangka:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="K = 12s \Rightarrow 180 = 12s \Rightarrow s = 15 \text{ cm}" />
+        </div>
+        <p className="text-red-400 font-semibold">Langkah 2 — Tentukan jari-jari bola:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs text-white/70">
+          <p>Bola menyentuh semua sisi → diameter bola = panjang rusuk kubus</p>
+          <BlockMath math="d = s = 15 \text{ cm} \Rightarrow r = \frac{15}{2} = 7{,}5 \text{ cm}" />
+        </div>
+        <p className="text-red-400 font-semibold">Langkah 3 — Hitung luas permukaan bola:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="L_{\text{bola}} = 4\pi r^2 = 4 \times 3{,}14 \times (7{,}5)^2" />
+          <BlockMath math="= 4 \times 3{,}14 \times 56{,}25 = 706{,}5 \text{ cm}^2" />
+        </div>
+        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+          <p className="text-white/80">• Rusuk kubus = 15 cm</p>
+          <p className="text-white/80">• Jari-jari bola = 7,5 cm</p>
+          <p className="text-white/80">• Luas permukaan bola = <strong className="text-yellow-300">706,5 cm²</strong></p>
+        </div>
+        <div className="bg-cyan-950/40 border border-cyan-700/30 rounded p-2 text-xs text-cyan-200">
+          💡 <strong>Ingat:</strong> Bola yang muat dalam kubus memiliki diameter = rusuk kubus, sehingga <InlineMath math="r = \frac{s}{2}" />.
+        </div>
+      </div>
+    ),
+  },
+];
+
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────── */
@@ -2438,6 +2532,39 @@ const KubusPage = () => {
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
           {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
+        </div>
+      ),
+    },
+    {
+      title: "Contoh Soal — Kerangka",
+      icon: "🪡",
+      content: (
+        <div className="space-y-4">
+          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+            <p className="text-cyan-300 font-semibold text-sm font-display">🪡 Kerangka Kubus</p>
+            <p className="text-white/70 text-xs font-body leading-relaxed">
+              Kerangka kubus adalah rangka/tulang kubus yang terbentuk dari semua rusuknya.
+              Kubus memiliki <strong className="text-white">12 rusuk</strong> yang sama panjang, sehingga:
+            </p>
+            <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+              <BlockMath math="K_{\text{kerangka}} = 12 \times s" />
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-center text-xs font-body">
+              <div className="bg-blue-950/50 border border-blue-700/40 rounded p-2">
+                <p className="text-blue-300 font-semibold">4 rusuk alas</p>
+                <p className="text-white/60">bawah</p>
+              </div>
+              <div className="bg-purple-950/50 border border-purple-700/40 rounded p-2">
+                <p className="text-purple-300 font-semibold">4 rusuk tegak</p>
+                <p className="text-white/60">samping</p>
+              </div>
+              <div className="bg-teal-950/50 border border-teal-700/40 rounded p-2">
+                <p className="text-teal-300 font-semibold">4 rusuk atas</p>
+                <p className="text-white/60">atas</p>
+              </div>
+            </div>
+          </div>
+          {kerangkaExamples.map((ex, i) => <ExampleCard key={`k${i}`} ex={ex} idx={i} prefix="KERANGKA"/>)}
         </div>
       ),
     },
