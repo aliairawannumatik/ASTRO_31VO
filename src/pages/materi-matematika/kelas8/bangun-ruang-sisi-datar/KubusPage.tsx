@@ -1005,6 +1005,13 @@ type BidangDiagonalVariant = {
 
 const bidangDiagonalVariants: BidangDiagonalVariant[] = [
   {
+    title: "Bidang DAFG",
+    points: "40,160 40,60 200,30 200,130",
+    color: "#a78bfa",
+    label: "DAFG",
+    note: "sejajar dengan bidang CBEH",
+  },
+  {
     title: "Bidang CBEH",
     points: "160,60 160,160 80,130 80,30",
     color: "#22d3ee",
@@ -1088,7 +1095,7 @@ const BidangDiagonalVariasiGallery = () => (
   <div className="space-y-3">
     <div className="rounded-lg bg-slate-900/60 border border-violet-700/30 p-3">
       <p className="text-xs text-violet-200">
-        Contoh lain bidang diagonal pada kubus. Setiap warna menunjukkan satu bidang diagonal yang berbeda.
+        Keenam (6) bidang diagonal pada kubus ABCD.EFGH. Setiap warna menunjukkan satu bidang diagonal yang berbeda.
       </p>
     </div>
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -2462,7 +2469,6 @@ const KubusPage = () => {
           <div className="bg-violet-950/40 border border-violet-700/40 rounded-lg p-4 space-y-2">
             <p className="text-violet-300 font-semibold">⑥ Bidang Diagonal (6 buah)</p>
             <p className="text-xs text-white/70">Bidang diagonal adalah <strong>bidang yang memotong melalui empat titik sudut dan dua diagonal ruang</strong>. Berbentuk persegi panjang (diagonal bidang × sisi).</p>
-            <BidangDiagonalSVG />
             <BidangDiagonalVariasiGallery />
             <div className="bg-violet-950/60 rounded p-2 text-center">
               <BlockMath math="L_{\text{bidang diag}} = s \times s\sqrt{2} = s^2\sqrt{2}" />
