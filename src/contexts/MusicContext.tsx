@@ -31,7 +31,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
 
   const [musicVolumeState, setMusicVolumeState] = useState<number>(() => {
     const saved = localStorage.getItem("numatik-music-volume");
-    return saved !== null ? Number(saved) : 30;
+    return saved !== null ? Number(saved) : 15;
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
