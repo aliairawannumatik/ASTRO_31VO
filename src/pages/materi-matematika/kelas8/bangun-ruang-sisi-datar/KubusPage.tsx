@@ -2246,7 +2246,8 @@ const KubusPage = () => {
             {/* 1. AG — merah */}
             <div className="bg-slate-900/70 border border-red-700/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-red-400 font-bold text-xs font-body">Diagonal AG</p>
-              <svg width="100" height="108" viewBox="0 0 100 108">
+              <svg width="155" height="167" viewBox="0 0 100 108">
+                <defs><style>{`@keyframes drGlow1{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
@@ -2254,8 +2255,8 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
-                {/* AG diagonal — red */}
-                <line x1="8" y1="95" x2="84" y2="26" stroke="#ef4444" strokeWidth="2.2"/>
+                <line x1="8" y1="95" x2="84" y2="26" stroke="#ef4444" strokeWidth="2.2"
+                  style={{filter:"drop-shadow(0 0 6px #ef4444)",animation:"drGlow1 1.5s ease-in-out infinite"}}/>
                 <circle cx="8"  cy="95" r="3" fill="#ef4444"/>
                 <circle cx="84" cy="26" r="3" fill="#ef4444"/>
                 <text x="1"  y="106" fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">A</text>
@@ -2269,10 +2270,11 @@ const KubusPage = () => {
               </svg>
             </div>
 
-            {/* 2. BH — kuning/amber */}
+            {/* 2. BH — amber */}
             <div className="bg-slate-900/70 border border-amber-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-amber-400 font-bold text-xs font-body">Diagonal BH</p>
-              <svg width="100" height="108" viewBox="0 0 100 108">
+              <svg width="155" height="167" viewBox="0 0 100 108">
+                <defs><style>{`@keyframes drGlow2{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
@@ -2280,8 +2282,8 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
-                {/* BH diagonal — amber */}
-                <line x1="62" y1="95" x2="30" y2="26" stroke="#f59e0b" strokeWidth="2.2"/>
+                <line x1="62" y1="95" x2="30" y2="26" stroke="#f59e0b" strokeWidth="2.2"
+                  style={{filter:"drop-shadow(0 0 6px #f59e0b)",animation:"drGlow2 1.5s ease-in-out infinite 0.37s"}}/>
                 <circle cx="62" cy="95" r="3" fill="#f59e0b"/>
                 <circle cx="30" cy="26" r="3" fill="#f59e0b"/>
                 <text x="63" y="106" fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">B</text>
@@ -2298,7 +2300,8 @@ const KubusPage = () => {
             {/* 3. CE — hijau */}
             <div className="bg-slate-900/70 border border-green-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-green-400 font-bold text-xs font-body">Diagonal CE</p>
-              <svg width="100" height="108" viewBox="0 0 100 108">
+              <svg width="155" height="167" viewBox="0 0 100 108">
+                <defs><style>{`@keyframes drGlow3{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
@@ -2306,8 +2309,8 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
-                {/* CE diagonal — green */}
-                <line x1="84" y1="77" x2="8" y2="44" stroke="#22c55e" strokeWidth="2.2"/>
+                <line x1="84" y1="77" x2="8" y2="44" stroke="#22c55e" strokeWidth="2.2"
+                  style={{filter:"drop-shadow(0 0 6px #22c55e)",animation:"drGlow3 1.5s ease-in-out infinite 0.74s"}}/>
                 <circle cx="84" cy="77" r="3" fill="#22c55e"/>
                 <circle cx="8"  cy="44" r="3" fill="#22c55e"/>
                 <text x="85" y="80"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">C</text>
@@ -2321,10 +2324,11 @@ const KubusPage = () => {
               </svg>
             </div>
 
-            {/* 4. DF — biru/ungu */}
+            {/* 4. DF — violet */}
             <div className="bg-slate-900/70 border border-violet-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-violet-400 font-bold text-xs font-body">Diagonal DF</p>
-              <svg width="100" height="108" viewBox="0 0 100 108">
+              <svg width="155" height="167" viewBox="0 0 100 108">
+                <defs><style>{`@keyframes drGlow4{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
@@ -2332,8 +2336,8 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
-                {/* DF diagonal — violet */}
-                <line x1="30" y1="77" x2="62" y2="44" stroke="#a855f7" strokeWidth="2.2"/>
+                <line x1="30" y1="77" x2="62" y2="44" stroke="#a855f7" strokeWidth="2.2"
+                  style={{filter:"drop-shadow(0 0 6px #a855f7)",animation:"drGlow4 1.5s ease-in-out infinite 1.11s"}}/>
                 <circle cx="30" cy="77" r="3" fill="#a855f7"/>
                 <circle cx="62" cy="44" r="3" fill="#a855f7"/>
                 <text x="22" y="80"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">D</text>
