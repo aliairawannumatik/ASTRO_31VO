@@ -875,6 +875,62 @@ const DiagonalRuangSVG = () => (
   </svg>
 );
 
+const AllDiagonalRuangSVG = () => {
+  const diags = [
+    { x1:40,  y1:160, x2:200, y2:30,  color:"#f44336", key:"AG", desc:"A → G" },
+    { x1:160, y1:160, x2:80,  y2:30,  color:"#4caf50", key:"BH", desc:"B → H" },
+    { x1:160, y1:60,  x2:80,  y2:130, color:"#2196f3", key:"CE", desc:"C → E" },
+    { x1:40,  y1:60,  x2:200, y2:130, color:"#ffeb3b", key:"DF", desc:"D → F" },
+  ];
+  const verts: [number,number,string,number,number][] = [
+    [40,60,"D",-10,-5],[160,60,"C",5,-5],[160,160,"B",5,10],[40,160,"A",-10,10],
+    [80,30,"H",-2,-7],[200,30,"G",5,-5],[200,130,"F",6,4],[80,130,"E",-13,4],
+  ];
+  return (
+    <svg viewBox="0 0 280 218" className="w-full max-w-xs mx-auto my-2" aria-label="4 diagonal ruang kubus">
+      <defs>
+        <style>{`@keyframes drPls{0%,100%{opacity:1}50%{opacity:0.35}}` +
+          diags.map((_,i)=>`.dr${i}{animation:drPls 2s ease-in-out infinite;animation-delay:${(i*0.4).toFixed(1)}s}`).join("")
+        }</style>
+      </defs>
+      <polygon points="40,60 160,60 160,160 40,160" fill="rgba(20,30,50,0.75)" stroke="#334155" strokeWidth="1.5"/>
+      <polygon points="80,30 200,30 200,130 80,130" fill="rgba(20,30,50,0.4)"  stroke="#334155" strokeWidth="1.5"/>
+      <line x1="40"  y1="60"  x2="80"  y2="30"  stroke="#334155" strokeWidth="1.5"/>
+      <line x1="160" y1="60"  x2="200" y2="30"  stroke="#334155" strokeWidth="1.5"/>
+      <line x1="40"  y1="160" x2="80"  y2="130" stroke="#334155" strokeWidth="1.5"/>
+      <line x1="160" y1="160" x2="200" y2="130" stroke="#334155" strokeWidth="1.5"/>
+      {diags.map((d,i)=>(
+        <line key={i} x1={d.x1} y1={d.y1} x2={d.x2} y2={d.y2}
+          stroke={d.color} strokeWidth="2.5"
+          className={`dr${i}`} style={{filter:`drop-shadow(0 0 5px ${d.color})`}}/>
+      ))}
+      {verts.map(([x,y,lbl,dx,dy],i)=>(
+        <g key={i}>
+          <circle cx={x} cy={y} r="3.5" fill="#94a3b8"/>
+          <text x={x+dx} y={y+dy} fill="#e2e8f0" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+        </g>
+      ))}
+      <text x="10" y="178" fill="#94a3b8" fontSize="9" fontFamily="monospace">Keterangan (4 diagonal ruang):</text>
+      {diags.map((d,i)=>{
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const x = 14 + col * 136;
+        const y = 191 + row * 19;
+        return (
+          <g key={i}>
+            <line x1={x} y1={y+3} x2={x+18} y2={y+3} stroke={d.color} strokeWidth="2.5"/>
+            <circle cx={x} cy={y+3} r="3" fill={d.color}/>
+            <circle cx={x+18} cy={y+3} r="3" fill={d.color}/>
+            <text x={x+24} y={y+7} fill={d.color} fontSize="9" fontFamily="monospace" fontWeight="bold">
+              {`${d.key}  (${d.desc})`}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 const BidangDiagonalSVG = () => (
   <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2" aria-label="Bidang diagonal kubus">
     <defs>
@@ -1757,7 +1813,7 @@ const KubusPage = () => {
           <div className="bg-red-950/40 border border-red-700/40 rounded-lg p-4 space-y-2">
             <p className="text-red-300 font-semibold">⑤ Diagonal Ruang (4 buah)</p>
             <p className="text-xs text-white/70">Diagonal ruang adalah <strong>ruas garis yang menghubungkan dua titik sudut yang berhadapan dan melewati bagian dalam kubus</strong>.</p>
-            <DiagonalRuangSVG />
+            <AllDiagonalRuangSVG />
             <div className="bg-red-950/60 rounded p-2 text-center">
               <BlockMath math="d_r = s\sqrt{3}" />
             </div>
