@@ -903,52 +903,66 @@ const DiagonalRuangSVG = () => (
 );
 
 const AllDiagonalRuangSVG = () => {
+  // Larger cube vertices (scaled up ~1.4×)
+  // Front face: D(20,52) C(195,52) B(195,195) A(20,195)
+  // Back face:  H(75,10) G(250,10) F(250,153) E(75,153)
   const diags = [
-    { x1:40,  y1:160, x2:200, y2:30,  color:"#f44336", key:"AG", desc:"A → G" },
-    { x1:160, y1:160, x2:80,  y2:30,  color:"#4caf50", key:"BH", desc:"B → H" },
-    { x1:160, y1:60,  x2:80,  y2:130, color:"#2196f3", key:"CE", desc:"C → E" },
-    { x1:40,  y1:60,  x2:200, y2:130, color:"#ffeb3b", key:"DF", desc:"D → F" },
+    { x1:20,  y1:195, x2:250, y2:10,  color:"#f44336", key:"AG", desc:"A → G" },
+    { x1:195, y1:195, x2:75,  y2:10,  color:"#4caf50", key:"BH", desc:"B → H" },
+    { x1:195, y1:52,  x2:75,  y2:153, color:"#38bdf8", key:"CE", desc:"C → E" },
+    { x1:20,  y1:52,  x2:250, y2:153, color:"#facc15", key:"DF", desc:"D → F" },
   ];
   const verts: [number,number,string,number,number][] = [
-    [40,60,"D",-10,-5],[160,60,"C",5,-5],[160,160,"B",5,10],[40,160,"A",-10,10],
-    [80,30,"H",-2,-7],[200,30,"G",5,-5],[200,130,"F",6,4],[80,130,"E",-13,4],
+    [20,52,  "D",-14,-4],
+    [195,52, "C",  6,-4],
+    [195,195,"B",  6, 12],
+    [20,195, "A",-14, 12],
+    [75,10,  "H", -5,-6],
+    [250,10, "G",  5,-6],
+    [250,153,"F",  6,  5],
+    [75,153, "E",-16,  5],
   ];
   return (
-    <svg viewBox="0 0 280 218" className="w-full max-w-xs mx-auto my-2" aria-label="4 diagonal ruang kubus">
+    <svg viewBox="0 0 278 255" className="w-full max-w-sm mx-auto my-2" aria-label="4 diagonal ruang kubus">
       <defs>
-        <style>{`@keyframes drPls{0%,100%{opacity:1}50%{opacity:0.35}}` +
-          diags.map((_,i)=>`.dr${i}{animation:drPls 2s ease-in-out infinite;animation-delay:${(i*0.4).toFixed(1)}s}`).join("")
-        }</style>
+        <style>{`@keyframes drGlow{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style>
       </defs>
-      <polygon points="40,60 160,60 160,160 40,160" fill="rgba(20,30,50,0.75)" stroke="#334155" strokeWidth="1.5"/>
-      <polygon points="80,30 200,30 200,130 80,130" fill="rgba(20,30,50,0.4)"  stroke="#334155" strokeWidth="1.5"/>
-      <line x1="40"  y1="60"  x2="80"  y2="30"  stroke="#334155" strokeWidth="1.5"/>
-      <line x1="160" y1="60"  x2="200" y2="30"  stroke="#334155" strokeWidth="1.5"/>
-      <line x1="40"  y1="160" x2="80"  y2="130" stroke="#334155" strokeWidth="1.5"/>
-      <line x1="160" y1="160" x2="200" y2="130" stroke="#334155" strokeWidth="1.5"/>
+      {/* Wireframe */}
+      <polygon points="20,52 195,52 195,195 20,195"   fill="rgba(20,30,50,0.75)" stroke="#334155" strokeWidth="1.8"/>
+      <polygon points="75,10 250,10 250,153 75,153"   fill="rgba(20,30,50,0.4)"  stroke="#334155" strokeWidth="1.8"/>
+      <line x1="20"  y1="52"  x2="75"  y2="10"  stroke="#334155" strokeWidth="1.8"/>
+      <line x1="195" y1="52"  x2="250" y2="10"  stroke="#334155" strokeWidth="1.8"/>
+      <line x1="20"  y1="195" x2="75"  y2="153" stroke="#334155" strokeWidth="1.8"/>
+      <line x1="195" y1="195" x2="250" y2="153" stroke="#334155" strokeWidth="1.8"/>
+      {/* Diagonal ruang — redup nyala */}
       {diags.map((d,i)=>(
         <line key={i} x1={d.x1} y1={d.y1} x2={d.x2} y2={d.y2}
-          stroke={d.color} strokeWidth="2.5"
-          className={`dr${i}`} style={{filter:`drop-shadow(0 0 5px ${d.color})`}}/>
+          stroke={d.color} strokeWidth="3.5" strokeLinecap="round"
+          style={{
+            filter:`drop-shadow(0 0 8px ${d.color})`,
+            animation:`drGlow 1.5s ease-in-out infinite ${(i*0.37).toFixed(2)}s`,
+          }}/>
       ))}
+      {/* Vertex dots & labels */}
       {verts.map(([x,y,lbl,dx,dy],i)=>(
         <g key={i}>
-          <circle cx={x} cy={y} r="3.5" fill="#94a3b8"/>
-          <text x={x+dx} y={y+dy} fill="#e2e8f0" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+          <circle cx={x} cy={y} r="4" fill="#94a3b8"/>
+          <text x={x+dx} y={y+dy} fill="#f1f5f9" fontSize="11" fontFamily="monospace" fontWeight="bold">{lbl}</text>
         </g>
       ))}
-      <text x="10" y="178" fill="#94a3b8" fontSize="9" fontFamily="monospace">Keterangan (4 diagonal ruang):</text>
+      {/* Legend */}
+      <text x="10" y="215" fill="#94a3b8" fontSize="9" fontFamily="monospace">Keterangan (4 diagonal ruang):</text>
       {diags.map((d,i)=>{
         const col = i % 2;
         const row = Math.floor(i / 2);
-        const x = 14 + col * 136;
-        const y = 191 + row * 19;
+        const x = 14 + col * 140;
+        const y = 228 + row * 20;
         return (
           <g key={i}>
-            <line x1={x} y1={y+3} x2={x+18} y2={y+3} stroke={d.color} strokeWidth="2.5"/>
-            <circle cx={x} cy={y+3} r="3" fill={d.color}/>
-            <circle cx={x+18} cy={y+3} r="3" fill={d.color}/>
-            <text x={x+24} y={y+7} fill={d.color} fontSize="9" fontFamily="monospace" fontWeight="bold">
+            <line x1={x} y1={y+3} x2={x+20} y2={y+3} stroke={d.color} strokeWidth="2.5"/>
+            <circle cx={x}    cy={y+3} r="3.5" fill={d.color}/>
+            <circle cx={x+20} cy={y+3} r="3.5" fill={d.color}/>
+            <text x={x+26} y={y+7} fill={d.color} fontSize="9" fontFamily="monospace" fontWeight="bold">
               {`${d.key}  (${d.desc})`}
             </text>
           </g>
