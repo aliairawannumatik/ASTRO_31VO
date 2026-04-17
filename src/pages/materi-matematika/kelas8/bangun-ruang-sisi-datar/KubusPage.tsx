@@ -1048,9 +1048,18 @@ const bidangDiagonalVariants: BidangDiagonalVariant[] = [
   },
 ];
 
-const BidangDiagonalVariantCube = ({ variant }: { variant: BidangDiagonalVariant }) => (
+const BidangDiagonalVariantCube = ({ variant, idx = 0 }: { variant: BidangDiagonalVariant; idx?: number }) => (
   <div className="rounded-lg border border-slate-700/70 bg-slate-900/55 p-3 space-y-2">
     <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={variant.title}>
+      <defs>
+        <style>{`
+          @keyframes bdPulse {
+            0%,100% { fill-opacity: 0.52; stroke-opacity: 1; }
+            50%      { fill-opacity: 0.08; stroke-opacity: 0.25; }
+          }
+          .bd-pulse { animation: bdPulse 2s ease-in-out infinite; }
+        `}</style>
+      </defs>
       <polygon points="40,55 150,55 150,145 40,145" fill="rgba(30,41,59,0.72)" stroke="#64748b" strokeWidth="1.4"/>
       <polygon points="75,28 185,28 185,118 75,118" fill="rgba(30,41,59,0.45)" stroke="#64748b" strokeWidth="1.4"/>
       <line x1="40" y1="55" x2="75" y2="28" stroke="#64748b" strokeWidth="1.4"/>
@@ -1065,11 +1074,11 @@ const BidangDiagonalVariantCube = ({ variant }: { variant: BidangDiagonalVariant
           .replaceAll("60", "55")
           .replaceAll("130", "118")}
         fill={variant.color}
-        fillOpacity="0.48"
         stroke={variant.color}
         strokeWidth="2.4"
         strokeLinejoin="round"
-        style={{ filter: `drop-shadow(0 0 7px ${variant.color})` }}
+        className="bd-pulse"
+        style={{ filter: `drop-shadow(0 0 9px ${variant.color})`, animationDelay: `${idx * 0.33}s` }}
       />
       {[
         [40,55,"D",-12,-5],[150,55,"C",5,-5],[150,145,"B",5,12],[40,145,"A",-12,12],
@@ -1099,8 +1108,8 @@ const BidangDiagonalVariasiGallery = () => (
       </p>
     </div>
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {bidangDiagonalVariants.map((variant) => (
-        <BidangDiagonalVariantCube key={variant.title} variant={variant} />
+      {bidangDiagonalVariants.map((variant, i) => (
+        <BidangDiagonalVariantCube key={variant.title} variant={variant} idx={i} />
       ))}
     </div>
   </div>
