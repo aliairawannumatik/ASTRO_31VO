@@ -1086,22 +1086,28 @@ const LuasPermukaanSVG = () => (
     {/* Cross net layout */}
     {/* Top */}
     <rect x="122" y="10" width="70" height="70" fill="#eab308" className="lp1" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="157" y="50" fill="#000" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ATAS</text>
+    <text x="157" y="44" fill="#000" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ATAS</text>
+    <text x="157" y="59" fill="#000" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Left */}
     <rect x="50" y="82" width="70" height="70" fill="#22c55e" className="lp2" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="85" y="122" fill="#000" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">KIRI</text>
+    <text x="85" y="115" fill="#000" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">KIRI</text>
+    <text x="85" y="130" fill="#000" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Front */}
     <rect x="122" y="82" width="70" height="70" fill="#3b82f6" className="lp3" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="157" y="122" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">DEPAN</text>
+    <text x="157" y="115" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">DEPAN</text>
+    <text x="157" y="130" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Right */}
     <rect x="194" y="82" width="70" height="70" fill="#f97316" className="lp4" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="229" y="122" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">KANAN</text>
+    <text x="229" y="115" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">KANAN</text>
+    <text x="229" y="130" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Back */}
     <rect x="266" y="82" width="70" height="70" fill="#8b5cf6" className="lp5" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="301" y="122" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BELAK.</text>
+    <text x="301" y="115" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BELAK.</text>
+    <text x="301" y="130" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Bottom */}
     <rect x="122" y="154" width="70" height="70" fill="#ef4444" className="lp6" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="157" y="194" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BAWAH</text>
+    <text x="157" y="187" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BAWAH</text>
+    <text x="157" y="202" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Formula */}
     <text x="170" y="215" fill="#facc15" fontSize="11" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = 6 × s²</text>
   </svg>
