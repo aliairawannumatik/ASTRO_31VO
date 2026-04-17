@@ -6,7 +6,7 @@ A React + Vite math tutoring app for Indonesian middle school students (SMP), po
 
 - **Frontend**: React 18, Vite, TypeScript, Tailwind CSS, shadcn/ui, react-router-dom
 - **Backend**: Express.js API server (`server.ts`) running on port 3001 (dev) / 5000 (prod)
-- **AI**: Google Gemini via `@ai-sdk/google` — streamed responses through `/api/chat`
+- **AI**: Google Gemini via server-side Express `/api/chat`
 - **Dev workflow**: Vite dev server on port 5000 proxies `/api/*` to Express on port 3001
 
 ## Running the App
@@ -19,7 +19,7 @@ npm start        # Run production server (Express serves built frontend on port 
 
 ## Required Environment Variables
 
-- `GOOGLE_GENERATIVE_AI_API_KEY` — Google AI Studio API key for Gemini access
+- `GOOGLE_GENERATIVE_AI_API_KEY` — Google AI Studio API key for Gemini access, read only by the server. `GEMINI_API_KEY` and `GOOGLE_API_KEY` are also accepted for compatibility.
 
 ## Math Game Arena - Kelas 7 Status
 
@@ -163,5 +163,6 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 - Merge conflicts from Vercel migration were resolved on 2026-03-12
 - Server binds to `0.0.0.0` for Replit compatibility
+- Chat AI requests now go through Express `/api/chat` so browser code does not expose external AI API keys
 - In production, Express serves the built frontend (`dist/`) and handles all routes
 - Content pages use accordion sections, react-katex for LaTeX, SVG diagrams, color-coded difficulty badges

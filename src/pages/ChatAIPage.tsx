@@ -6,10 +6,6 @@ import { Send, User, Rocket, RefreshCw, ChevronLeft } from "lucide-react";
 import "katex/dist/katex.min.css";
 
 
-const GROQ_API_KEY = "";
-
-const SYSTEM_PROMPT = "Kamu adalah NUMATIK AI, asisten matematika ceria dan bersemangat yang dibuat oleh Irawan Sutiawan, M.Pd. Panggil pengguna dengan 'Sobat Numatik'. Jawab langkah per langkah dengan emoji ceria. Di akhir jawaban tulis KESIMPULAN dan TIPS MATEMATIKA. Tutup dengan kalimat penyemangat. Hanya jawab pertanyaan matematika.";
-
 const QUICK_TOPICS = [
   { label: "Bilangan Pecahan 🍕", prompt: "Tolong jelaskan cara menjumlahkan bilangan pecahan dengan penyebut berbeda!" },
   { label: "Persamaan Linear 📐", prompt: "Bagaimana cara menyelesaikan persamaan linear satu variabel?" },
@@ -69,32 +65,20 @@ const ChatAIPage = () => {
     setLoading(true);
 
     try {
-      const groqMessages = [
-        { role: "system", content: SYSTEM_PROMPT },
-        ...updatedMessages.map((m) => ({
-          role: m.role === "model" ? "assistant" : "user",
-          content: m.text,
-        })),
-      ];
-
-      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${GROQ_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages: groqMessages,
-          max_tokens: 2048,
-          temperature: 0.7,
+          messages: updatedMessages,
         }),
       });
 
-      if (!res.ok) throw new Error(`Groq error: ${res.status}`);
+      if (!res.ok) throw new Error(`AI chat error: ${res.status}`);
 
       const data = await res.json();
-      const responseText = data.choices?.[0]?.message?.content ?? "Maaf, tidak ada respons dari server.";
+      const responseText = data.text ?? "Maaf, tidak ada respons dari server.";
 
       setMessages((prev) => [...prev, { role: "model", text: responseText }]);
     } catch {
