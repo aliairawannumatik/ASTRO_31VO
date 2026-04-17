@@ -779,6 +779,77 @@ const DiagonalBidangSVG = () => (
   </svg>
 );
 
+const AllDiagonalBidangSVG = () => {
+  const diags = [
+    { x1:40,  y1:160, x2:160, y2:60,  color:"#f44336", key:"AC", face:"Depan" },
+    { x1:160, y1:160, x2:40,  y2:60,  color:"#ff9800", key:"BD", face:"Depan" },
+    { x1:80,  y1:130, x2:200, y2:30,  color:"#ffeb3b", key:"EG", face:"Belakang" },
+    { x1:200, y1:130, x2:80,  y2:30,  color:"#4caf50", key:"FH", face:"Belakang" },
+    { x1:40,  y1:160, x2:80,  y2:30,  color:"#00bcd4", key:"AH", face:"Kiri" },
+    { x1:40,  y1:60,  x2:80,  y2:130, color:"#2196f3", key:"DE", face:"Kiri" },
+    { x1:160, y1:160, x2:200, y2:30,  color:"#9c27b0", key:"BG", face:"Kanan" },
+    { x1:160, y1:60,  x2:200, y2:130, color:"#ff4081", key:"CF", face:"Kanan" },
+    { x1:40,  y1:60,  x2:200, y2:30,  color:"#69f0ae", key:"DG", face:"Atas" },
+    { x1:160, y1:60,  x2:80,  y2:30,  color:"#40c4ff", key:"CH", face:"Atas" },
+    { x1:40,  y1:160, x2:200, y2:130, color:"#ea80fc", key:"AF", face:"Bawah" },
+    { x1:160, y1:160, x2:80,  y2:130, color:"#ffab40", key:"BE", face:"Bawah" },
+  ];
+  const verts: [number,number,string,number,number][] = [
+    [40,60,"D",-10,-5],[160,60,"C",5,-5],[160,160,"B",5,10],[40,160,"A",-10,10],
+    [80,30,"H",-2,-7],[200,30,"G",5,-5],[200,130,"F",6,4],[80,130,"E",-13,4],
+  ];
+  const faceGroups = [
+    { name:"Depan",    idx:[0,1] },
+    { name:"Belakang", idx:[2,3] },
+    { name:"Kiri",     idx:[4,5] },
+    { name:"Kanan",    idx:[6,7] },
+    { name:"Atas",     idx:[8,9] },
+    { name:"Bawah",    idx:[10,11] },
+  ];
+  return (
+    <svg viewBox="0 0 280 255" className="w-full max-w-xs mx-auto my-2" aria-label="12 diagonal bidang kubus">
+      <defs>
+        <style>{`@keyframes dbPls{0%,100%{opacity:1}50%{opacity:0.4}}` +
+          diags.map((_,i)=>`.db${i}{animation:dbPls 2.4s ease-in-out infinite;animation-delay:${(i*0.18).toFixed(2)}s}`).join("")
+        }</style>
+      </defs>
+      <polygon points="40,60 160,60 160,160 40,160" fill="rgba(20,30,50,0.75)" stroke="#334155" strokeWidth="1.5"/>
+      <polygon points="80,30 200,30 200,130 80,130" fill="rgba(20,30,50,0.4)"  stroke="#334155" strokeWidth="1.5"/>
+      <line x1="40"  y1="60"  x2="80"  y2="30"  stroke="#334155" strokeWidth="1.5"/>
+      <line x1="160" y1="60"  x2="200" y2="30"  stroke="#334155" strokeWidth="1.5"/>
+      <line x1="40"  y1="160" x2="80"  y2="130" stroke="#334155" strokeWidth="1.5"/>
+      <line x1="160" y1="160" x2="200" y2="130" stroke="#334155" strokeWidth="1.5"/>
+      {diags.map((d,i)=>(
+        <line key={i} x1={d.x1} y1={d.y1} x2={d.x2} y2={d.y2}
+          stroke={d.color} strokeWidth="2" strokeDasharray="6,3"
+          className={`db${i}`} style={{filter:`drop-shadow(0 0 3px ${d.color})`}}/>
+      ))}
+      {verts.map(([x,y,lbl,dx,dy],i)=>(
+        <g key={i}>
+          <circle cx={x} cy={y} r="3.5" fill="#94a3b8"/>
+          <text x={x+dx} y={y+dy} fill="#e2e8f0" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+        </g>
+      ))}
+      <text x="10" y="178" fill="#94a3b8" fontSize="9" fontFamily="monospace">Keterangan (tiap sisi = 2 diagonal):</text>
+      {faceGroups.map((fg,fi)=>{
+        const col = fi % 2;
+        const row = Math.floor(fi / 2);
+        const x = 10 + col * 138;
+        const y = 190 + row * 20;
+        return (
+          <g key={fi}>
+            <line x1={x} y1={y+4} x2={x+14} y2={y+4} stroke={diags[fg.idx[0]].color} strokeWidth="2.5" strokeDasharray="4,2"/>
+            <line x1={x+18} y1={y+4} x2={x+32} y2={y+4} stroke={diags[fg.idx[1]].color} strokeWidth="2.5" strokeDasharray="4,2"/>
+            <text x={x+36} y={y+8} fill="#cbd5e1" fontSize="8.5" fontFamily="monospace">
+              {`${fg.name} (${diags[fg.idx[0]].key}, ${diags[fg.idx[1]].key})`}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 const DiagonalRuangSVG = () => (
   <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2" aria-label="Diagonal ruang kubus">
     <defs>
@@ -1670,7 +1741,7 @@ const KubusPage = () => {
           <div className="bg-green-950/40 border border-green-700/40 rounded-lg p-4 space-y-2">
             <p className="text-green-300 font-semibold">④ Diagonal Bidang (12 buah)</p>
             <p className="text-xs text-white/70">Diagonal bidang adalah <strong>ruas garis yang menghubungkan dua titik sudut yang berhadapan dalam satu sisi</strong>. Setiap sisi memiliki 2 diagonal bidang → total 12.</p>
-            <DiagonalBidangSVG />
+            <AllDiagonalBidangSVG />
             <div className="bg-green-950/60 rounded p-2 text-center">
               <BlockMath math="d_b = s\sqrt{2}" />
             </div>
