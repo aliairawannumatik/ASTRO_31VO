@@ -2246,7 +2246,7 @@ const KubusPage = () => {
             {/* 1. AG — merah */}
             <div className="bg-slate-900/70 border border-red-700/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-red-400 font-bold text-xs font-body">Diagonal AG</p>
-              <svg width="155" height="167" viewBox="0 0 100 108">
+              <svg className="w-full" viewBox="0 0 100 108">
                 <defs><style>{`@keyframes drGlow1{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
@@ -2273,7 +2273,7 @@ const KubusPage = () => {
             {/* 2. BH — amber */}
             <div className="bg-slate-900/70 border border-amber-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-amber-400 font-bold text-xs font-body">Diagonal BH</p>
-              <svg width="155" height="167" viewBox="0 0 100 108">
+              <svg className="w-full" viewBox="0 0 100 108">
                 <defs><style>{`@keyframes drGlow2{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
@@ -2300,7 +2300,7 @@ const KubusPage = () => {
             {/* 3. CE — hijau */}
             <div className="bg-slate-900/70 border border-green-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-green-400 font-bold text-xs font-body">Diagonal CE</p>
-              <svg width="155" height="167" viewBox="0 0 100 108">
+              <svg className="w-full" viewBox="0 0 100 108">
                 <defs><style>{`@keyframes drGlow3{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
@@ -2327,7 +2327,7 @@ const KubusPage = () => {
             {/* 4. DF — violet */}
             <div className="bg-slate-900/70 border border-violet-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
               <p className="text-violet-400 font-bold text-xs font-body">Diagonal DF</p>
-              <svg width="155" height="167" viewBox="0 0 100 108">
+              <svg className="w-full" viewBox="0 0 100 108">
                 <defs><style>{`@keyframes drGlow4{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
                 <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
                 <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
