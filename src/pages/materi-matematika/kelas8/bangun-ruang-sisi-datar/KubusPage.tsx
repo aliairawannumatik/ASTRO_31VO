@@ -685,6 +685,16 @@ const RusukAnimSVG = () => (
     <line x1="40" y1="160" x2="80" y2="130" stroke="#22d3ee" strokeWidth="3.5" className="rusuk-a"/>
     <line x1="160" y1="160" x2="200" y2="130" stroke="#22d3ee" strokeWidth="3.5" className="rusuk-a"/>
     {/* Labels */}
+    {[
+      [40,60,"D",-14,-4],[160,60,"C",7,-4],[160,160,"B",7,13],[40,160,"A",-14,13],
+      [80,30,"H",-4,-8],[200,30,"G",7,-4],[200,130,"F",7,7],[80,130,"E",-16,7],
+    ].map(([x,y,lbl,dx,dy]) => (
+      <g key={lbl}>
+        <circle cx={x as number} cy={y as number} r="4" fill="#e0f2fe" stroke="#22d3ee" strokeWidth="1.5"/>
+        <text x={(x as number) + (dx as number)} y={(y as number) + (dy as number)} fill="#f8fafc" fontSize="11" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+      </g>
+    ))}
+    <text x="88" y="184" fill="#e0f2fe" fontSize="11" fontFamily="monospace" fontWeight="bold">Kubus ABCD.EFGH</text>
     <text x="98" y="46" fill="#22d3ee" fontSize="10" fontFamily="monospace">s</text>
     <text x="234" y="175" fill="#ffffff" fontSize="10" fontFamily="monospace">12 rusuk</text>
     <text x="234" y="188" fill="#22d3ee" fontSize="10" fontFamily="monospace">semua = s</text>
@@ -1855,8 +1865,25 @@ const KubusPage = () => {
         <div className="space-y-3 text-sm text-white/85 font-body">
           <div className="bg-cyan-950/40 border border-cyan-700/40 rounded-lg p-4 space-y-2">
             <p className="text-cyan-300 font-semibold">① Rusuk (12 buah)</p>
-            <p className="text-xs text-white/70">Rusuk adalah <strong>ruas garis yang merupakan pertemuan dua sisi</strong> kubus. Semua rusuk kubus sama panjang (<InlineMath math="= s" />).</p>
+            <p className="text-xs text-white/70">Rusuk adalah <strong>ruas garis yang merupakan pertemuan dua sisi</strong> kubus. Pada kubus <strong className="text-cyan-300">ABCD.EFGH</strong>, semua rusuk sama panjang (<InlineMath math="= s" />).</p>
             <RusukAnimSVG />
+          </div>
+          <div className="bg-cyan-950/30 border border-cyan-700/40 rounded-lg p-3 space-y-3">
+            <p className="text-xs text-cyan-200 font-semibold">Penamaan 12 rusuk pada kubus ABCD.EFGH:</p>
+            <div className="grid sm:grid-cols-3 gap-2 text-xs">
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-cyan-300 font-semibold mb-1">Rusuk alas ABCD</p>
+                <p className="text-white/75">AB, BC, CD, DA</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-cyan-300 font-semibold mb-1">Rusuk atas EFGH</p>
+                <p className="text-white/75">EF, FG, GH, HE</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-cyan-300 font-semibold mb-1">Rusuk tegak</p>
+                <p className="text-white/75">AE, BF, CG, DH</p>
+              </div>
+            </div>
           </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
             <p>🔑 <strong className="text-cyan-300">Jumlah rusuk kubus = 12</strong>, semuanya memiliki panjang yang sama yaitu <InlineMath math="s" />.</p>
