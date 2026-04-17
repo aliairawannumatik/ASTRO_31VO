@@ -1092,6 +1092,10 @@ const BidangDiagonalVariantCube = ({ variant, idx = 0 }: { variant: BidangDiagon
       <text x="112" y="90" fill={variant.color} fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
         {variant.label}
       </text>
+      {/* Alas label ABCD */}
+      <text x="95" y="178" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity="0.75">ABCD</text>
+      {/* Atap label EFGH */}
+      <text x="130" y="16" fill="#94a3b8" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity="0.75">EFGH</text>
     </svg>
     <div>
       <p className="text-xs font-semibold" style={{ color: variant.color }}>{variant.title}</p>
@@ -1371,9 +1375,7 @@ const WaterKubusAnimation = () => {
       <text x={(FTR[0] + BkTR[0]) / 2 + 4} y={(FTR[1] + BkTR[1]) / 2 - 6}
         fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
 
-      {/* ALAS / TUTUP labels */}
-      <text x={(FL[0] + FR[0]) / 2} y={FL[1] + 24}
-        fill="#4ade80" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS (s²)</text>
+      {/* TUTUP label */}
       <text x={(FTL[0] + FTR[0]) / 2} y={FTL[1] - 6}
         fill="#c4b5fd" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
 
@@ -1681,9 +1683,9 @@ const sections: Sec[] = [
                 ["Keliling semua rusuk","K = 12s","12 rusuk × s"],
                 ["Luas 1 sisi","L₁ = s²","persegi"],
                 ["Luas permukaan","L = 6s²","6 sisi"],
-                ["Diagonal bidang","d_b = s√2","Pythagoras 2D"],
-                ["Diagonal ruang","d_r = s√3","Pythagoras 3D"],
-                ["Luas bidang diagonal","L_BD = s²√2","persegi panjang"],
+                ["Diagonal bidang","db = s√2","Pythagoras 2D"],
+                ["Diagonal ruang","dr = s√3","Pythagoras 3D"],
+                ["Luas bidang diagonal","Lbd = s²√2","persegi panjang"],
                 ["Volume","V = s³","pangkat tiga"],
               ].map(([b,r,c],i)=>(
                 <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
@@ -2271,6 +2273,7 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8" y1="95" x2="30" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8" y1="95" x2="84" y2="26" stroke="#ef4444" strokeWidth="2.2"
                   style={{filter:"drop-shadow(0 0 6px #ef4444)",animation:"drGlow1 1.5s ease-in-out infinite"}}/>
                 <circle cx="8"  cy="95" r="3" fill="#ef4444"/>
@@ -2298,6 +2301,7 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8" y1="95" x2="30" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="62" y1="95" x2="30" y2="26" stroke="#f59e0b" strokeWidth="2.2"
                   style={{filter:"drop-shadow(0 0 6px #f59e0b)",animation:"drGlow2 1.5s ease-in-out infinite 0.37s"}}/>
                 <circle cx="62" cy="95" r="3" fill="#f59e0b"/>
@@ -2325,6 +2329,7 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8" y1="95" x2="30" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="84" y1="77" x2="8" y2="44" stroke="#22c55e" strokeWidth="2.2"
                   style={{filter:"drop-shadow(0 0 6px #22c55e)",animation:"drGlow3 1.5s ease-in-out infinite 0.74s"}}/>
                 <circle cx="84" cy="77" r="3" fill="#22c55e"/>
@@ -2352,6 +2357,7 @@ const KubusPage = () => {
                 <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8" y1="95" x2="30" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
                 <line x1="30" y1="77" x2="62" y2="44" stroke="#a855f7" strokeWidth="2.2"
                   style={{filter:"drop-shadow(0 0 6px #a855f7)",animation:"drGlow4 1.5s ease-in-out infinite 1.11s"}}/>
                 <circle cx="30" cy="77" r="3" fill="#a855f7"/>
@@ -2533,7 +2539,6 @@ const KubusPage = () => {
         </div>
       ),
     },
-    { title: sections[2].title, icon: sections[2].icon, content: sections[2].content },
     {
       title: "Jaring-jaring Kubus — 3D Interaktif",
       icon: "🧊",
@@ -2567,26 +2572,6 @@ const KubusPage = () => {
     { title: sections[5].title, icon: sections[5].icon, content: sections[5].content },
     { title: sections[6].title, icon: sections[6].icon, content: sections[6].content },
     {
-      title: "Contoh Soal — Luas Permukaan",
-      icon: "🎨",
-      content: (
-        <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
-        </div>
-      ),
-    },
-    {
-      title: "Contoh Soal — Volume",
-      icon: "📦",
-      content: (
-        <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
-        </div>
-      ),
-    },
-    {
       title: "Contoh Soal — Kerangka",
       icon: "🪡",
       content: (
@@ -2616,6 +2601,26 @@ const KubusPage = () => {
             </div>
           </div>
           {kerangkaExamples.map((ex, i) => <ExampleCard key={`k${i}`} ex={ex} idx={i} prefix="KERANGKA"/>)}
+        </div>
+      ),
+    },
+    {
+      title: "Contoh Soal — Luas Permukaan",
+      icon: "🎨",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+        </div>
+      ),
+    },
+    {
+      title: "Contoh Soal — Volume",
+      icon: "📦",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
         </div>
       ),
     },
