@@ -781,72 +781,71 @@ const DiagonalBidangSVG = () => (
 
 const AllDiagonalBidangSVG = () => {
   const diags = [
-    { x1:40,  y1:160, x2:160, y2:60,  color:"#f44336", key:"AC", face:"Depan" },
-    { x1:160, y1:160, x2:40,  y2:60,  color:"#ff9800", key:"BD", face:"Depan" },
-    { x1:80,  y1:130, x2:200, y2:30,  color:"#ffeb3b", key:"EG", face:"Belakang" },
-    { x1:200, y1:130, x2:80,  y2:30,  color:"#4caf50", key:"FH", face:"Belakang" },
-    { x1:40,  y1:160, x2:80,  y2:30,  color:"#00bcd4", key:"AH", face:"Kiri" },
-    { x1:40,  y1:60,  x2:80,  y2:130, color:"#2196f3", key:"DE", face:"Kiri" },
-    { x1:160, y1:160, x2:200, y2:30,  color:"#9c27b0", key:"BG", face:"Kanan" },
-    { x1:160, y1:60,  x2:200, y2:130, color:"#ff4081", key:"CF", face:"Kanan" },
-    { x1:40,  y1:60,  x2:200, y2:30,  color:"#69f0ae", key:"DG", face:"Atas" },
-    { x1:160, y1:60,  x2:80,  y2:30,  color:"#40c4ff", key:"CH", face:"Atas" },
-    { x1:40,  y1:160, x2:200, y2:130, color:"#ea80fc", key:"AF", face:"Bawah" },
-    { x1:160, y1:160, x2:80,  y2:130, color:"#ffab40", key:"BE", face:"Bawah" },
+    { x1:40,  y1:160, x2:160, y2:60,  color:"#ef4444", key:"AC", face:"Depan" },
+    { x1:160, y1:160, x2:40,  y2:60,  color:"#f97316", key:"BD", face:"Depan" },
+    { x1:80,  y1:130, x2:200, y2:30,  color:"#eab308", key:"EG", face:"Belakang" },
+    { x1:200, y1:130, x2:80,  y2:30,  color:"#84cc16", key:"FH", face:"Belakang" },
+    { x1:40,  y1:160, x2:80,  y2:30,  color:"#22c55e", key:"AH", face:"Kiri" },
+    { x1:40,  y1:60,  x2:80,  y2:130, color:"#14b8a6", key:"DE", face:"Kiri" },
+    { x1:160, y1:160, x2:200, y2:30,  color:"#06b6d4", key:"BG", face:"Kanan" },
+    { x1:160, y1:60,  x2:200, y2:130, color:"#3b82f6", key:"CF", face:"Kanan" },
+    { x1:40,  y1:60,  x2:200, y2:30,  color:"#6366f1", key:"DG", face:"Atas" },
+    { x1:160, y1:60,  x2:80,  y2:30,  color:"#8b5cf6", key:"CH", face:"Atas" },
+    { x1:40,  y1:160, x2:200, y2:130, color:"#d946ef", key:"AF", face:"Bawah" },
+    { x1:160, y1:160, x2:80,  y2:130, color:"#f43f5e", key:"BE", face:"Bawah" },
   ];
   const verts: [number,number,string,number,number][] = [
     [40,60,"D",-10,-5],[160,60,"C",5,-5],[160,160,"B",5,10],[40,160,"A",-10,10],
     [80,30,"H",-2,-7],[200,30,"G",5,-5],[200,130,"F",6,4],[80,130,"E",-13,4],
   ];
-  const faceGroups = [
-    { name:"Depan",    idx:[0,1] },
-    { name:"Belakang", idx:[2,3] },
-    { name:"Kiri",     idx:[4,5] },
-    { name:"Kanan",    idx:[6,7] },
-    { name:"Atas",     idx:[8,9] },
-    { name:"Bawah",    idx:[10,11] },
-  ];
   return (
-    <svg viewBox="0 0 280 255" className="w-full max-w-xs mx-auto my-2" aria-label="12 diagonal bidang kubus">
-      <defs>
-        <style>{`@keyframes dbPls{0%,100%{opacity:1}50%{opacity:0.4}}` +
-          diags.map((_,i)=>`.db${i}{animation:dbPls 2.4s ease-in-out infinite;animation-delay:${(i*0.18).toFixed(2)}s}`).join("")
-        }</style>
-      </defs>
-      <polygon points="40,60 160,60 160,160 40,160" fill="rgba(20,30,50,0.75)" stroke="#334155" strokeWidth="1.5"/>
-      <polygon points="80,30 200,30 200,130 80,130" fill="rgba(20,30,50,0.4)"  stroke="#334155" strokeWidth="1.5"/>
-      <line x1="40"  y1="60"  x2="80"  y2="30"  stroke="#334155" strokeWidth="1.5"/>
-      <line x1="160" y1="60"  x2="200" y2="30"  stroke="#334155" strokeWidth="1.5"/>
-      <line x1="40"  y1="160" x2="80"  y2="130" stroke="#334155" strokeWidth="1.5"/>
-      <line x1="160" y1="160" x2="200" y2="130" stroke="#334155" strokeWidth="1.5"/>
-      {diags.map((d,i)=>(
-        <line key={i} x1={d.x1} y1={d.y1} x2={d.x2} y2={d.y2}
-          stroke={d.color} strokeWidth="2" strokeDasharray="6,3"
-          className={`db${i}`} style={{filter:`drop-shadow(0 0 3px ${d.color})`}}/>
-      ))}
-      {verts.map(([x,y,lbl,dx,dy],i)=>(
-        <g key={i}>
-          <circle cx={x} cy={y} r="3.5" fill="#94a3b8"/>
-          <text x={x+dx} y={y+dy} fill="#e2e8f0" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
-        </g>
-      ))}
-      <text x="10" y="178" fill="#94a3b8" fontSize="9" fontFamily="monospace">Keterangan (tiap sisi = 2 diagonal):</text>
-      {faceGroups.map((fg,fi)=>{
-        const col = fi % 2;
-        const row = Math.floor(fi / 2);
-        const x = 10 + col * 138;
-        const y = 190 + row * 20;
-        return (
-          <g key={fi}>
-            <line x1={x} y1={y+4} x2={x+14} y2={y+4} stroke={diags[fg.idx[0]].color} strokeWidth="2.5" strokeDasharray="4,2"/>
-            <line x1={x+18} y1={y+4} x2={x+32} y2={y+4} stroke={diags[fg.idx[1]].color} strokeWidth="2.5" strokeDasharray="4,2"/>
-            <text x={x+36} y={y+8} fill="#cbd5e1" fontSize="8.5" fontFamily="monospace">
-              {`${fg.name} (${diags[fg.idx[0]].key}, ${diags[fg.idx[1]].key})`}
-            </text>
-          </g>
-        );
-      })}
-    </svg>
+    <div className="space-y-3 my-3">
+      <p className="text-xs text-green-100/80 bg-green-950/50 border border-green-700/40 rounded-lg p-3">
+        Setiap kubus di bawah hanya menampilkan satu diagonal bidang. Karena ada 6 sisi dan setiap sisi punya 2 diagonal, totalnya ada 12 diagonal bidang.
+      </p>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {diags.map((d, i) => (
+          <div key={d.key} className="bg-slate-900/55 border border-slate-700/70 rounded-lg p-3 space-y-2">
+            <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={`Diagonal bidang ${d.key}`}>
+              <polygon points="40,55 150,55 150,145 40,145" fill="rgba(20,30,50,0.76)" stroke="#475569" strokeWidth="1.4"/>
+              <polygon points="75,28 185,28 185,118 75,118" fill="rgba(20,30,50,0.44)" stroke="#475569" strokeWidth="1.4"/>
+              <line x1="40" y1="55" x2="75" y2="28" stroke="#475569" strokeWidth="1.4"/>
+              <line x1="150" y1="55" x2="185" y2="28" stroke="#475569" strokeWidth="1.4"/>
+              <line x1="40" y1="145" x2="75" y2="118" stroke="#475569" strokeWidth="1.4"/>
+              <line x1="150" y1="145" x2="185" y2="118" stroke="#475569" strokeWidth="1.4"/>
+              <line
+                x1={d.x1 === 160 ? 150 : d.x1 === 200 ? 185 : d.x1 === 80 ? 75 : d.x1}
+                y1={d.y1 === 160 ? 145 : d.y1 === 60 ? 55 : d.y1 === 130 ? 118 : d.y1}
+                x2={d.x2 === 160 ? 150 : d.x2 === 200 ? 185 : d.x2 === 80 ? 75 : d.x2}
+                y2={d.y2 === 160 ? 145 : d.y2 === 60 ? 55 : d.y2 === 130 ? 118 : d.y2}
+                stroke={d.color}
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeDasharray="8,4"
+                style={{ filter: `drop-shadow(0 0 7px ${d.color})` }}
+              />
+              {verts.map(([x,y,lbl,dx,dy]) => {
+                const sx = x === 160 ? 150 : x === 200 ? 185 : x === 80 ? 75 : x;
+                const sy = y === 160 ? 145 : y === 60 ? 55 : y === 130 ? 118 : y;
+                return (
+                  <g key={lbl}>
+                    <circle cx={sx} cy={sy} r="3.2" fill="#e2e8f0"/>
+                    <text x={sx+dx} y={sy+dy} fill="#f8fafc" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+                  </g>
+                );
+              })}
+              <text x="112" y="175" fill={d.color} fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+                {d.key}
+              </text>
+            </svg>
+            <div>
+              <p className="text-xs font-semibold" style={{ color: d.color }}>{`${i + 1}. Diagonal ${d.key}`}</p>
+              <p className="text-[11px] text-white/55">{`Sisi ${d.face}`}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -1404,7 +1403,7 @@ const sections: Sec[] = [
         <div className="bg-green-950/40 border border-green-700/40 rounded-lg p-4 space-y-2">
           <p className="text-green-300 font-semibold">④ Diagonal Bidang (12 buah)</p>
           <p className="text-xs text-white/70">Diagonal bidang adalah <strong>ruas garis yang menghubungkan dua titik sudut yang berhadapan dalam satu sisi</strong>. Setiap sisi memiliki 2 diagonal bidang → total 12.</p>
-          <DiagonalBidangSVG />
+          <AllDiagonalBidangSVG />
           <div className="bg-green-950/60 rounded p-2 text-center">
             <BlockMath math="d_b = s\sqrt{2}" />
           </div>
