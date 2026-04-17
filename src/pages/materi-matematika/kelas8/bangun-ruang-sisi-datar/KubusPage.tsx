@@ -429,7 +429,7 @@ const InteractiveCube3D = () => {
               position: "absolute", top: 0, left: 0,
               width: S, height: S,
               transformStyle: "preserve-3d",
-              transform: "translate3d(0,0,0)",
+              transform: `translateZ(-${H}px)`,
               transition: TRANS,
             }}
           >
@@ -474,7 +474,7 @@ const InteractiveCube3D = () => {
               transformStyle: "preserve-3d",
               transformOrigin: "50% 0% 0",
               transform: isOpen("top")
-                ? "rotateX(0deg)"
+                ? `translateZ(-${H}px) rotateX(0deg)`
                 : `translateZ(-${H}px) rotateX(-90deg)`,
               transition: TRANS,
             }}
@@ -491,7 +491,7 @@ const InteractiveCube3D = () => {
               transformStyle: "preserve-3d",
               transformOrigin: "50% 0% 0",
               transform: isOpen("bottom")
-                ? "rotateX(0deg)"
+                ? `translateZ(-${H}px) rotateX(0deg)`
                 : `translateZ(-${H}px) rotateX(90deg)`,
               transition: TRANS,
             }}
@@ -528,7 +528,7 @@ const InteractiveCube3D = () => {
               transformStyle: "preserve-3d",
               transformOrigin: "0% 50% 0",
               transform: isOpen("left")
-                ? "rotateY(0deg)"
+                ? `translateZ(-${H}px) rotateY(0deg)`
                 : `translateZ(-${H}px) rotateY(90deg)`,
               transition: TRANS,
             }}
@@ -545,7 +545,7 @@ const InteractiveCube3D = () => {
               transformStyle: "preserve-3d",
               transformOrigin: "0% 50% 0",
               transform: isOpen("right")
-                ? "rotateY(0deg)"
+                ? `translateZ(-${H}px) rotateY(0deg)`
                 : `translateZ(-${H}px) rotateY(-90deg)`,
               transition: TRANS,
             }}
