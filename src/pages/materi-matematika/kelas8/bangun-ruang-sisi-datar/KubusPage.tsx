@@ -88,6 +88,7 @@ const SimpleRotatableCube = () => {
   };
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (!isDragRef.current) return;
+    e.preventDefault();
     const t = e.touches[0];
     const newY = dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55;
     const newX = dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55;
@@ -103,7 +104,7 @@ const SimpleRotatableCube = () => {
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd);
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
@@ -116,7 +117,7 @@ const SimpleRotatableCube = () => {
   return (
     <div
       className="bg-slate-900/70 border border-slate-700/50 rounded-xl select-none"
-      style={{ padding: "12px 0 8px", cursor: isDragging ? "grabbing" : "grab" }}
+      style={{ padding: "12px 0 8px", cursor: isDragging ? "grabbing" : "grab", touchAction: "none" }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
     >
@@ -349,6 +350,7 @@ const InteractiveCube3D = () => {
   };
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
+    e.preventDefault();
     const t = e.touches[0];
     setRotY(dragRef.current.baseRotY + (t.clientX - dragRef.current.startX) * 0.5);
     setRotX(dragRef.current.baseRotX - (t.clientY - dragRef.current.startY) * 0.5);
@@ -358,7 +360,7 @@ const InteractiveCube3D = () => {
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd);
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
@@ -407,7 +409,7 @@ const InteractiveCube3D = () => {
       {/* Scene */}
       <div
         className="relative mx-auto flex items-center justify-center select-none overflow-visible"
-        style={{ width: "100%", height: 360, cursor: isDragging ? "grabbing" : "grab" }}
+        style={{ width: "100%", height: 360, cursor: isDragging ? "grabbing" : "grab", touchAction: "none" }}
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
       >
