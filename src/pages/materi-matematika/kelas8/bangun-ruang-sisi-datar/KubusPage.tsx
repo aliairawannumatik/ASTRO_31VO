@@ -1365,6 +1365,9 @@ const sections: Sec[] = [
             <li>• Memiliki <strong className="text-yellow-300">6 sisi</strong> berbentuk persegi yang sama besar</li>
             <li>• Memiliki <strong className="text-yellow-300">12 rusuk</strong> yang sama panjang</li>
             <li>• Memiliki <strong className="text-yellow-300">8 titik sudut</strong></li>
+            <li>• Memiliki <strong className="text-yellow-300">12 diagonal bidang</strong></li>
+            <li>• Memiliki <strong className="text-yellow-300">4 diagonal ruang</strong></li>
+            <li>• Memiliki <strong className="text-yellow-300">6 bidang diagonal</strong></li>
             <li>• Setiap sudut pertemuannya selalu <strong className="text-yellow-300">90°</strong></li>
             <li>• Panjang, lebar, dan tingginya <strong className="text-yellow-300">selalu sama</strong> (= <InlineMath math="s" />)</li>
           </ul>
