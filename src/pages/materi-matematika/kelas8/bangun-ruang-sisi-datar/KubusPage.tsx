@@ -2103,10 +2103,216 @@ const KubusPage = () => {
         <div className="space-y-3 text-sm text-white/85 font-body">
           <div className="bg-red-950/40 border border-red-700/40 rounded-lg p-4 space-y-2">
             <p className="text-red-300 font-semibold">⑤ Diagonal Ruang (4 buah)</p>
-            <p className="text-xs text-white/70">Diagonal ruang adalah <strong>ruas garis yang menghubungkan dua titik sudut yang berhadapan dan melewati bagian dalam kubus</strong>.</p>
-            <AllDiagonalRuangSVG />
+            <p className="text-xs text-white/70">Diagonal ruang adalah <strong>ruas garis yang menghubungkan dua titik sudut yang berhadapan dan melewati bagian dalam kubus</strong>. Kubus ABCD.EFGH memiliki tepat <strong className="text-red-300">4 diagonal ruang</strong>:</p>
             <div className="bg-red-950/60 rounded p-2 text-center">
               <BlockMath math="d_r = s\sqrt{3}" />
+            </div>
+          </div>
+
+          {/* 4 individual cubes, one diagonal each */}
+          <div className="grid grid-cols-2 gap-3">
+            {/* 1. AG — merah */}
+            <div className="bg-slate-900/70 border border-red-700/50 rounded-xl p-3 flex flex-col items-center gap-1">
+              <p className="text-red-400 font-bold text-xs font-body">Diagonal AG</p>
+              <svg width="100" height="108" viewBox="0 0 100 108">
+                <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,44 62,44 84,26 30,26" fill="#1e293b" stroke="#475569" strokeWidth="0.8"/>
+                <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                {/* AG diagonal — red */}
+                <line x1="8" y1="95" x2="84" y2="26" stroke="#ef4444" strokeWidth="2.2"/>
+                <circle cx="8"  cy="95" r="3" fill="#ef4444"/>
+                <circle cx="84" cy="26" r="3" fill="#ef4444"/>
+                <text x="1"  y="106" fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">A</text>
+                <text x="86" y="24"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">G</text>
+                <text x="63" y="103" fill="#94a3b8" fontSize="7" fontFamily="monospace">B</text>
+                <text x="85" y="80"  fill="#94a3b8" fontSize="7" fontFamily="monospace">C</text>
+                <text x="24" y="80"  fill="#94a3b8" fontSize="7" fontFamily="monospace">D</text>
+                <text x="1"  y="42"  fill="#94a3b8" fontSize="7" fontFamily="monospace">E</text>
+                <text x="63" y="42"  fill="#94a3b8" fontSize="7" fontFamily="monospace">F</text>
+                <text x="24" y="24"  fill="#94a3b8" fontSize="7" fontFamily="monospace">H</text>
+              </svg>
+            </div>
+
+            {/* 2. BH — kuning/amber */}
+            <div className="bg-slate-900/70 border border-amber-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
+              <p className="text-amber-400 font-bold text-xs font-body">Diagonal BH</p>
+              <svg width="100" height="108" viewBox="0 0 100 108">
+                <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,44 62,44 84,26 30,26" fill="#1e293b" stroke="#475569" strokeWidth="0.8"/>
+                <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                {/* BH diagonal — amber */}
+                <line x1="62" y1="95" x2="30" y2="26" stroke="#f59e0b" strokeWidth="2.2"/>
+                <circle cx="62" cy="95" r="3" fill="#f59e0b"/>
+                <circle cx="30" cy="26" r="3" fill="#f59e0b"/>
+                <text x="63" y="106" fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">B</text>
+                <text x="22" y="24"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">H</text>
+                <text x="1"  y="106" fill="#94a3b8" fontSize="7" fontFamily="monospace">A</text>
+                <text x="85" y="80"  fill="#94a3b8" fontSize="7" fontFamily="monospace">C</text>
+                <text x="24" y="80"  fill="#94a3b8" fontSize="7" fontFamily="monospace">D</text>
+                <text x="1"  y="42"  fill="#94a3b8" fontSize="7" fontFamily="monospace">E</text>
+                <text x="63" y="42"  fill="#94a3b8" fontSize="7" fontFamily="monospace">F</text>
+                <text x="86" y="24"  fill="#94a3b8" fontSize="7" fontFamily="monospace">G</text>
+              </svg>
+            </div>
+
+            {/* 3. CE — hijau */}
+            <div className="bg-slate-900/70 border border-green-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
+              <p className="text-green-400 font-bold text-xs font-body">Diagonal CE</p>
+              <svg width="100" height="108" viewBox="0 0 100 108">
+                <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,44 62,44 84,26 30,26" fill="#1e293b" stroke="#475569" strokeWidth="0.8"/>
+                <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                {/* CE diagonal — green */}
+                <line x1="84" y1="77" x2="8" y2="44" stroke="#22c55e" strokeWidth="2.2"/>
+                <circle cx="84" cy="77" r="3" fill="#22c55e"/>
+                <circle cx="8"  cy="44" r="3" fill="#22c55e"/>
+                <text x="85" y="80"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">C</text>
+                <text x="1"  y="42"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">E</text>
+                <text x="1"  y="106" fill="#94a3b8" fontSize="7" fontFamily="monospace">A</text>
+                <text x="63" y="106" fill="#94a3b8" fontSize="7" fontFamily="monospace">B</text>
+                <text x="24" y="80"  fill="#94a3b8" fontSize="7" fontFamily="monospace">D</text>
+                <text x="63" y="42"  fill="#94a3b8" fontSize="7" fontFamily="monospace">F</text>
+                <text x="86" y="24"  fill="#94a3b8" fontSize="7" fontFamily="monospace">G</text>
+                <text x="24" y="24"  fill="#94a3b8" fontSize="7" fontFamily="monospace">H</text>
+              </svg>
+            </div>
+
+            {/* 4. DF — biru/ungu */}
+            <div className="bg-slate-900/70 border border-violet-600/50 rounded-xl p-3 flex flex-col items-center gap-1">
+              <p className="text-violet-400 font-bold text-xs font-body">Diagonal DF</p>
+              <svg width="100" height="108" viewBox="0 0 100 108">
+                <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,95 62,95 62,44 8,44"  fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
+                <polygon points="8,44 62,44 84,26 30,26" fill="#1e293b" stroke="#475569" strokeWidth="0.8"/>
+                <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                <line x1="8"  y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                {/* DF diagonal — violet */}
+                <line x1="30" y1="77" x2="62" y2="44" stroke="#a855f7" strokeWidth="2.2"/>
+                <circle cx="30" cy="77" r="3" fill="#a855f7"/>
+                <circle cx="62" cy="44" r="3" fill="#a855f7"/>
+                <text x="22" y="80"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">D</text>
+                <text x="63" y="42"  fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">F</text>
+                <text x="1"  y="106" fill="#94a3b8" fontSize="7" fontFamily="monospace">A</text>
+                <text x="63" y="106" fill="#94a3b8" fontSize="7" fontFamily="monospace">B</text>
+                <text x="85" y="80"  fill="#94a3b8" fontSize="7" fontFamily="monospace">C</text>
+                <text x="1"  y="42"  fill="#94a3b8" fontSize="7" fontFamily="monospace">E</text>
+                <text x="86" y="24"  fill="#94a3b8" fontSize="7" fontFamily="monospace">G</text>
+                <text x="24" y="24"  fill="#94a3b8" fontSize="7" fontFamily="monospace">H</text>
+              </svg>
+            </div>
+          </div>
+
+          {/* Pythagoras derivation for HB */}
+          <div className="bg-slate-900/70 border border-amber-600/40 rounded-lg p-4 space-y-3">
+            <p className="text-amber-300 font-semibold text-xs">📐 Mengapa diagonal ruang = <InlineMath math="s\sqrt{3}" /> ? — Pembuktian 2 langkah (sampel: BH)</p>
+            <p className="text-xs text-white/65">
+              Gunakan <strong className="text-amber-300">dua kali Teorema Pythagoras</strong>: pertama cari diagonal bidang BD pada sisi alas, lalu gunakan BD dan DH untuk mencari BH.
+            </p>
+
+            {/* Side-by-side: cube sketch + triangle */}
+            <div className="flex flex-wrap gap-4 justify-center items-end">
+
+              {/* Cube sketch highlighting BH and the helper triangle */}
+              <div className="flex flex-col items-center gap-1">
+                <p className="text-[10px] text-slate-400 font-body">Kubus — diagonal BH</p>
+                <svg width="155" height="175" viewBox="0 0 155 175">
+                  {/* Bottom face */}
+                  <polygon points="15,148 95,148 128,122 48,122" fill="#78350f22" stroke="#475569" strokeWidth="1"/>
+                  {/* Front face */}
+                  <polygon points="15,148 95,148 95,68 15,68" fill="#0f172a99" stroke="#334155" strokeWidth="1"/>
+                  {/* Right face */}
+                  <polygon points="95,148 128,122 128,42 95,68" fill="#0f172a66" stroke="#334155" strokeWidth="1"/>
+                  {/* Top face */}
+                  <polygon points="15,68 95,68 128,42 48,42" fill="#1e293b88" stroke="#334155" strokeWidth="1"/>
+                  {/* Hidden back edges */}
+                  <line x1="48" y1="122" x2="48" y2="42"  stroke="#475569" strokeWidth="0.8" strokeDasharray="3,3"/>
+                  <line x1="48" y1="122" x2="128" y2="122" stroke="#475569" strokeWidth="0.8" strokeDasharray="3,3"/>
+                  <line x1="15" y1="68"  x2="48" y2="42"  stroke="#334155" strokeWidth="0.8" strokeDasharray="3,3"/>
+                  {/* BD — diagonal bidang alas (orange, step 1) */}
+                  <line x1="95" y1="148" x2="48" y2="122" stroke="#f97316" strokeWidth="2" strokeDasharray="5,3"/>
+                  {/* DH — rusuk tegak (purple, step 2) */}
+                  <line x1="48" y1="122" x2="48" y2="42" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,3"/>
+                  {/* BH — diagonal ruang (amber, result) */}
+                  <line x1="95" y1="148" x2="48" y2="42" stroke="#f59e0b" strokeWidth="2.5"/>
+                  {/* Right angle at D */}
+                  <polyline points="48,109 56,112 55,122" fill="none" stroke="#ffffff55" strokeWidth="1.2"/>
+                  {/* Vertex labels */}
+                  <text x="4"  y="158" fill="#94a3b8" fontSize="10" fontFamily="monospace">A</text>
+                  <text x="97" y="158" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+                  <text x="130" y="130" fill="#94a3b8" fontSize="10" fontFamily="monospace">C</text>
+                  <text x="38" y="132" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
+                  <text x="4"  y="66"  fill="#94a3b8" fontSize="9" fontFamily="monospace">E</text>
+                  <text x="97" y="66"  fill="#94a3b8" fontSize="9" fontFamily="monospace">F</text>
+                  <text x="130" y="50" fill="#94a3b8" fontSize="9" fontFamily="monospace">G</text>
+                  <text x="38" y="40"  fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">H</text>
+                  {/* Labels on key segments */}
+                  <text x="68" y="143" fill="#f97316" fontSize="8" fontFamily="monospace" fontWeight="bold">BD=s√2</text>
+                  <text x="3"  y="88"  fill="#a855f7" fontSize="8" fontFamily="monospace" fontWeight="bold" transform="rotate(-90,20,90)">DH=s</text>
+                  <text x="58" y="100" fill="#f59e0b" fontSize="8" fontFamily="monospace" fontWeight="bold" transform="rotate(-50,75,108)">BH=s√3</text>
+                </svg>
+              </div>
+
+              {/* Right triangle BDH */}
+              <div className="flex flex-col items-center gap-1">
+                <p className="text-[10px] text-slate-400 font-body">Segitiga siku-siku BDH</p>
+                <svg width="130" height="175" viewBox="0 0 130 175">
+                  {/* Triangle fill */}
+                  <polygon points="10,148 110,148 10,48" fill="#78350f33"/>
+                  {/* BD — orange (bottom) */}
+                  <line x1="10" y1="148" x2="110" y2="148" stroke="#f97316" strokeWidth="2.5"/>
+                  {/* DH — purple (left vertical) */}
+                  <line x1="10" y1="148" x2="10"  y2="48"  stroke="#a855f7" strokeWidth="2.5"/>
+                  {/* BH — amber hypotenuse */}
+                  <line x1="110" y1="148" x2="10" y2="48"  stroke="#f59e0b" strokeWidth="2.5"/>
+                  {/* Right angle at D */}
+                  <rect x="10" y="136" width="12" height="12" fill="none" stroke="#ffffff66" strokeWidth="1.5"/>
+                  {/* Side labels */}
+                  <text x="60" y="163" fill="#f97316" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">BD = s√2</text>
+                  <text x="16" y="103" fill="#a855f7" fontSize="9" fontFamily="monospace" fontWeight="bold">DH = s</text>
+                  <text x="58" y="85"  fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" transform="rotate(-46,58,105)" textAnchor="middle">BH = s√3</text>
+                  {/* Vertex labels */}
+                  <text x="1"  y="162" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">D</text>
+                  <text x="113" y="162" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
+                  <text x="1"  y="46"  fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">H</text>
+                  {/* angle label */}
+                  <text x="60" y="20" fill="#ffffff44" fontSize="8" fontFamily="monospace" textAnchor="middle">∠D = 90°</text>
+                </svg>
+              </div>
+            </div>
+
+            {/* Step-by-step proof */}
+            <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs">
+              <p className="text-white/80 font-semibold">Langkah pembuktian (2 tahap):</p>
+              <div className="space-y-1 text-white/70">
+                <p><strong className="text-orange-400">Tahap 1</strong> — Cari diagonal bidang BD (pada sisi alas ABCD):</p>
+              </div>
+              <div className="bg-slate-900/60 rounded p-2 text-center space-y-1">
+                <BlockMath math="BD^2 = AB^2 + AD^2 = s^2 + s^2 = 2s^2"/>
+                <BlockMath math="BD = s\sqrt{2}"/>
+              </div>
+              <div className="space-y-1 text-white/70">
+                <p><strong className="text-purple-400">Tahap 2</strong> — Cari diagonal ruang BH dengan segitiga BDH siku-siku di D:</p>
+              </div>
+              <div className="bg-slate-900/60 rounded p-2 text-center space-y-1">
+                <BlockMath math="BH^2 = BD^2 + DH^2"/>
+                <BlockMath math="BH^2 = (s\sqrt{2})^2 + s^2 = 2s^2 + s^2 = 3s^2"/>
+                <BlockMath math="\boxed{BH = s\sqrt{3}}"/>
+              </div>
+              <p className="text-amber-300 text-xs">∴ Panjang diagonal ruang BH = <InlineMath math="s\sqrt{3}"/>, berlaku untuk semua 4 diagonal ruang kubus.</p>
             </div>
           </div>
         </div>
