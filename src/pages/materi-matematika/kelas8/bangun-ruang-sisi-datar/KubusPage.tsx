@@ -954,6 +954,110 @@ const BidangDiagonalSVG = () => (
   </svg>
 );
 
+type BidangDiagonalVariant = {
+  title: string;
+  points: string;
+  color: string;
+  label: string;
+  note: string;
+};
+
+const bidangDiagonalVariants: BidangDiagonalVariant[] = [
+  {
+    title: "Bidang CBEH",
+    points: "160,60 160,160 80,130 80,30",
+    color: "#22d3ee",
+    label: "CBEH",
+    note: "sejajar dengan bidang DAFG",
+  },
+  {
+    title: "Bidang CDEF",
+    points: "160,60 40,60 80,130 200,130",
+    color: "#34d399",
+    label: "CDEF",
+    note: "melalui rusuk DC dan EF",
+  },
+  {
+    title: "Bidang ABGH",
+    points: "40,160 160,160 200,30 80,30",
+    color: "#facc15",
+    label: "ABGH",
+    note: "melalui rusuk AB dan GH",
+  },
+  {
+    title: "Bidang DHFB",
+    points: "40,60 80,30 200,130 160,160",
+    color: "#fb7185",
+    label: "DHFB",
+    note: "melalui rusuk DH dan BF",
+  },
+  {
+    title: "Bidang CGEA",
+    points: "160,60 200,30 80,130 40,160",
+    color: "#a78bfa",
+    label: "CGEA",
+    note: "melalui rusuk CG dan AE",
+  },
+];
+
+const BidangDiagonalVariantCube = ({ variant }: { variant: BidangDiagonalVariant }) => (
+  <div className="rounded-lg border border-slate-700/70 bg-slate-900/55 p-3 space-y-2">
+    <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={variant.title}>
+      <polygon points="40,55 150,55 150,145 40,145" fill="rgba(30,41,59,0.72)" stroke="#64748b" strokeWidth="1.4"/>
+      <polygon points="75,28 185,28 185,118 75,118" fill="rgba(30,41,59,0.45)" stroke="#64748b" strokeWidth="1.4"/>
+      <line x1="40" y1="55" x2="75" y2="28" stroke="#64748b" strokeWidth="1.4"/>
+      <line x1="150" y1="55" x2="185" y2="28" stroke="#64748b" strokeWidth="1.4"/>
+      <line x1="40" y1="145" x2="75" y2="118" stroke="#64748b" strokeWidth="1.4"/>
+      <line x1="150" y1="145" x2="185" y2="118" stroke="#64748b" strokeWidth="1.4"/>
+      <polygon
+        points={variant.points
+          .replaceAll("160", "150")
+          .replaceAll("200", "185")
+          .replaceAll("80", "75")
+          .replaceAll("60", "55")
+          .replaceAll("130", "118")}
+        fill={variant.color}
+        fillOpacity="0.48"
+        stroke={variant.color}
+        strokeWidth="2.4"
+        strokeLinejoin="round"
+        style={{ filter: `drop-shadow(0 0 7px ${variant.color})` }}
+      />
+      {[
+        [40,55,"D",-12,-5],[150,55,"C",5,-5],[150,145,"B",5,12],[40,145,"A",-12,12],
+        [75,28,"H",-3,-8],[185,28,"G",5,-5],[185,118,"F",6,4],[75,118,"E",-14,5],
+      ].map(([x,y,lbl,dx,dy]) => (
+        <g key={lbl}>
+          <circle cx={x as number} cy={y as number} r="3" fill="#e2e8f0"/>
+          <text x={(x as number) + (dx as number)} y={(y as number) + (dy as number)} fill="#f8fafc" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+        </g>
+      ))}
+      <text x="112" y="90" fill={variant.color} fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        {variant.label}
+      </text>
+    </svg>
+    <div>
+      <p className="text-xs font-semibold" style={{ color: variant.color }}>{variant.title}</p>
+      <p className="text-[11px] text-white/55">{variant.note}</p>
+    </div>
+  </div>
+);
+
+const BidangDiagonalVariasiGallery = () => (
+  <div className="space-y-3">
+    <div className="rounded-lg bg-slate-900/60 border border-violet-700/30 p-3">
+      <p className="text-xs text-violet-200">
+        Contoh lain bidang diagonal pada kubus. Setiap warna menunjukkan satu bidang diagonal yang berbeda.
+      </p>
+    </div>
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {bidangDiagonalVariants.map((variant) => (
+        <BidangDiagonalVariantCube key={variant.title} variant={variant} />
+      ))}
+    </div>
+  </div>
+);
+
 /* ─────────────────────────────────────────────────────────────
    LUAS PERMUKAAN ANIMATION
 ───────────────────────────────────────────────────────────── */
@@ -1319,6 +1423,7 @@ const sections: Sec[] = [
           <p className="text-violet-300 font-semibold">⑥ Bidang Diagonal (6 buah)</p>
           <p className="text-xs text-white/70">Bidang diagonal adalah <strong>bidang yang memotong melalui empat titik sudut dan dua diagonal ruang</strong>. Berbentuk persegi panjang (diagonal bidang × sisi).</p>
           <BidangDiagonalSVG />
+          <BidangDiagonalVariasiGallery />
           <div className="bg-violet-950/60 rounded p-2 text-center">
             <BlockMath math="L_{\text{bidang diag}} = s \times s\sqrt{2} = s^2\sqrt{2}" />
           </div>
@@ -1830,6 +1935,7 @@ const KubusPage = () => {
             <p className="text-violet-300 font-semibold">⑥ Bidang Diagonal (6 buah)</p>
             <p className="text-xs text-white/70">Bidang diagonal adalah <strong>bidang yang memotong melalui empat titik sudut dan dua diagonal ruang</strong>. Berbentuk persegi panjang (diagonal bidang × sisi).</p>
             <BidangDiagonalSVG />
+            <BidangDiagonalVariasiGallery />
             <div className="bg-violet-950/60 rounded p-2 text-center">
               <BlockMath math="L_{\text{bidang diag}} = s \times s\sqrt{2} = s^2\sqrt{2}" />
             </div>
