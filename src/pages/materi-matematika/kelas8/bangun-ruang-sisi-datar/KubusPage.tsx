@@ -829,6 +829,9 @@ const AllDiagonalBidangSVG = () => {
         {diags.map((d, i) => (
           <div key={d.key} className="bg-slate-900/55 border border-slate-700/70 rounded-lg p-3 space-y-2">
             <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={`Diagonal bidang ${d.key}`}>
+              <defs>
+                <style>{`@keyframes diagBidangGlow{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style>
+              </defs>
               <polygon points="40,55 150,55 150,145 40,145" fill="rgba(20,30,50,0.76)" stroke="#475569" strokeWidth="1.4"/>
               <polygon points="75,28 185,28 185,118 75,118" fill="rgba(20,30,50,0.44)" stroke="#475569" strokeWidth="1.4"/>
               <line x1="40" y1="55" x2="75" y2="28" stroke="#475569" strokeWidth="1.4"/>
@@ -844,7 +847,10 @@ const AllDiagonalBidangSVG = () => {
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray="8,4"
-                style={{ filter: `drop-shadow(0 0 7px ${d.color})` }}
+                style={{
+                  filter: `drop-shadow(0 0 8px ${d.color})`,
+                  animation: `diagBidangGlow 1.5s ease-in-out infinite ${(i * 0.13).toFixed(2)}s`,
+                }}
               />
               {verts.map(([x,y,lbl,dx,dy]) => {
                 const sx = x === 160 ? 150 : x === 200 ? 185 : x === 80 ? 75 : x;
