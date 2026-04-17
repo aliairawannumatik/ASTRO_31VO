@@ -1356,6 +1356,21 @@ const sections: Sec[] = [
     icon: "📊",
     content: (
       <div className="space-y-3 font-body">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {[
+            { icon: "🔷", label: "8 Titik Sudut", color: "text-yellow-300" },
+            { icon: "📏", label: "12 Rusuk", color: "text-cyan-300" },
+            { icon: "🟦", label: "6 Sisi", color: "text-blue-300" },
+            { icon: "📐", label: "12 Diagonal Bidang", color: "text-green-300" },
+            { icon: "🔀", label: "4 Diagonal Ruang", color: "text-red-300" },
+            { icon: "🔲", label: "6 Bidang Diagonal", color: "text-violet-300" },
+          ].map(({ icon, label, color }) => (
+            <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-1">
+              <span className="text-2xl">{icon}</span>
+              <span className={`text-xs font-semibold font-body text-center ${color}`}>{label}</span>
+            </div>
+          ))}
+        </div>
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
@@ -1594,21 +1609,6 @@ const KubusPage = () => {
               <strong className="text-cyan-300"> kubus</strong> — mulai dari unsur-unsurnya, jaring-jaring interaktif 3D,
               hingga cara menghitung <strong className="text-yellow-300">luas permukaan</strong> dan <strong className="text-green-300">volume</strong>-nya.
             </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {[
-              { icon: "🔷", label: "8 Titik Sudut", color: "text-yellow-300" },
-              { icon: "📏", label: "12 Rusuk", color: "text-cyan-300" },
-              { icon: "🟦", label: "6 Sisi", color: "text-blue-300" },
-              { icon: "📐", label: "12 Diagonal Bidang", color: "text-green-300" },
-              { icon: "🔀", label: "4 Diagonal Ruang", color: "text-red-300" },
-              { icon: "🔲", label: "6 Bidang Diagonal", color: "text-violet-300" },
-            ].map(({ icon, label, color }) => (
-              <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-1">
-                <span className="text-2xl">{icon}</span>
-                <span className={`text-xs font-semibold font-body text-center ${color}`}>{label}</span>
-              </div>
-            ))}
           </div>
         </div>
       ),
