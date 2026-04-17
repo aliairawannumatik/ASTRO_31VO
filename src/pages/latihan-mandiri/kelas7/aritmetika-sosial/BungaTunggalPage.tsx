@@ -330,52 +330,6 @@ const BungaTunggalPage = () => {
               </div>
             </div>
 
-            {/* Game Quiz Section */}
-            <div className="border-t border-white/20 pt-6 mt-6">
-              <h3 className="text-lg font-bold text-accent mb-4 font-display">Game Quiz</h3>
-            </div>
-
-            {/* Soal 23 */}
-            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
-              <span className="font-semibold text-accent shrink-0">23.</span>
-              <div>
-                <p className="mb-2">Budi menabung di bank sebesar Rp1.000.000,00 dengan suku bunga tunggal 10% per tahun. Besar bunga yang diperoleh Budi setelah menabung selama 1 tahun adalah ...</p>
-                <div className="ml-4 space-y-1">
-                  <p>A. Rp100.000,00</p>
-                  <p>B. Rp10.000,00</p>
-                  <p>C. Rp110.000,00</p>
-                  <p>D. Rp50.000,00</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Soal 24 */}
-            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
-              <span className="font-semibold text-accent shrink-0">24.</span>
-              <div>
-                <p className="mb-2">Pak Joko menyimpan uang di bank sebesar Rp1.500.000,00 dengan bunga tunggal 10% per tahun. Jumlah tabungan Pak Joko setelah 9 bulan adalah ...</p>
-                <div className="ml-4 space-y-1">
-                  <p>A. Rp1.700.000,00</p>
-                  <p>B. Rp1.612.500,00</p>
-                  <p>C. Rp1.650.000,00</p>
-                  <p>D. Rp1.512.500,00</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Soal 25 */}
-            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
-              <span className="font-semibold text-accent shrink-0">25.</span>
-              <div>
-                <p className="mb-2">Ibu meminjam uang dengan sistem bunga tunggal 12% per tahun. Setelah 8 bulan, total pinjaman yang harus dikembalikan adalah Rp3.240.000,00. Besar pinjaman awal Ibu adalah ...</p>
-                <div className="ml-4 space-y-1">
-                  <p>A. Rp3.000.000,00</p>
-                  <p>B. Rp3.100.000,00</p>
-                  <p>C. Rp2.900.000,00</p>
-                  <p>D. Rp2.800.000,00</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
