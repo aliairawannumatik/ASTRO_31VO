@@ -702,7 +702,7 @@ const RusukAnimSVG = () => (
 );
 
 const SisiAnimSVG = () => (
-  <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2" aria-label="Sisi kubus beranimasi">
+  <svg viewBox="0 0 280 210" className="w-full max-w-xs mx-auto my-2" aria-label="Sisi kubus beranimasi">
     <defs>
       <style>{`
         @keyframes sisiGlow{0%,100%{fill-opacity:0.7;}50%{fill-opacity:0.1;}}
@@ -711,6 +711,7 @@ const SisiAnimSVG = () => (
         .sisi-c{animation:sisiGlow 1.6s ease-in-out infinite 0.6s;}
       `}</style>
     </defs>
+    {/* Colored faces */}
     <polygon points="40,60 160,60 160,160 40,160" fill="#3b82f6" className="sisi-a"/>
     <polygon points="80,30 200,30 200,130 80,130" fill="#8b5cf6" className="sisi-b"/>
     <polygon points="40,60 80,30 200,30 160,60" fill="#eab308" className="sisi-c"/>
@@ -724,9 +725,25 @@ const SisiAnimSVG = () => (
     <line x1="160" y1="60" x2="200" y2="30" stroke="#ffffff" strokeWidth="1.5"/>
     <line x1="40" y1="160" x2="80" y2="130" stroke="#ffffff" strokeWidth="1.5"/>
     <line x1="160" y1="160" x2="200" y2="130" stroke="#ffffff" strokeWidth="1.5"/>
-    <text x="90" y="115" fill="#fff" fontSize="10" fontFamily="monospace" fontWeight="bold">DEPAN</text>
-    <text x="230" y="175" fill="#fff" fontSize="10" fontFamily="monospace">6 sisi</text>
-    <text x="230" y="188" fill="#facc15" fontSize="10" fontFamily="monospace">= s²</text>
+    {/* Vertex dots */}
+    {([[40,160],[160,160],[200,130],[80,130],[40,60],[160,60],[200,30],[80,30]] as [number,number][]).map(([x,y],i)=>(
+      <circle key={i} cx={x} cy={y} r={3} fill="#facc15" opacity={0.9}/>
+    ))}
+    {/* Vertex labels — alas ABCD */}
+    <text x="25"  y="177" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="163" y="177" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="204" y="134" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="63"  y="144" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
+    {/* Vertex labels — atas EFGH */}
+    <text x="25"  y="56"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">E</text>
+    <text x="163" y="56"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">F</text>
+    <text x="204" y="28"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">G</text>
+    <text x="65"  y="25"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">H</text>
+    {/* Face label & legend */}
+    <text x="84" y="115" fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold">DEPAN</text>
+    <text x="228" y="170" fill="#facc15" fontSize="9" fontFamily="monospace">alas</text>
+    <text x="228" y="182" fill="#38bdf8" fontSize="9" fontFamily="monospace">atas</text>
+    <text x="228" y="196" fill="#fff" fontSize="9" fontFamily="monospace">6 sisi</text>
   </svg>
 );
 
