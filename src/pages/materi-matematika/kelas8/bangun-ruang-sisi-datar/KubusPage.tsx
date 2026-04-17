@@ -739,11 +739,6 @@ const SisiAnimSVG = () => (
     <text x="163" y="56"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">F</text>
     <text x="204" y="28"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">G</text>
     <text x="65"  y="25"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">H</text>
-    {/* Face label & legend */}
-    <text x="84" y="115" fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold">DEPAN</text>
-    <text x="228" y="170" fill="#facc15" fontSize="9" fontFamily="monospace">alas</text>
-    <text x="228" y="182" fill="#38bdf8" fontSize="9" fontFamily="monospace">atas</text>
-    <text x="228" y="196" fill="#fff" fontSize="9" fontFamily="monospace">6 sisi</text>
   </svg>
 );
 
