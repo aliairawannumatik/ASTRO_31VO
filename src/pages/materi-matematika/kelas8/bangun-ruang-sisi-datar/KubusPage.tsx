@@ -686,8 +686,8 @@ const RusukAnimSVG = () => (
     <line x1="160" y1="160" x2="200" y2="130" stroke="#22d3ee" strokeWidth="3.5" className="rusuk-a"/>
     {/* Labels */}
     {[
-      [40,60,"D",-14,-4],[160,60,"C",7,-4],[160,160,"B",7,13],[40,160,"A",-14,13],
-      [80,30,"H",-4,-8],[200,30,"G",7,-4],[200,130,"F",7,7],[80,130,"E",-16,7],
+      [40,60,"E",-14,-4],[160,60,"F",7,-4],[160,160,"B",7,13],[40,160,"A",-14,13],
+      [80,30,"H",-4,-8],[200,30,"G",7,-4],[200,130,"C",7,7],[80,130,"D",-16,7],
     ].map(([x,y,lbl,dx,dy]) => (
       <g key={lbl}>
         <circle cx={x as number} cy={y as number} r="4" fill="#e0f2fe" stroke="#22d3ee" strokeWidth="1.5"/>
@@ -763,14 +763,14 @@ const TitikSudutAnimSVG = () => (
         style={{animationDelay:`${i*0.15}s`}} r={6}/>
     ))}
     {/* Vertex labels */}
-    <text x="22" y="58" fill="#facc15" fontSize="10" fontFamily="monospace">A</text>
-    <text x="164" y="58" fill="#facc15" fontSize="10" fontFamily="monospace">B</text>
-    <text x="164" y="172" fill="#facc15" fontSize="10" fontFamily="monospace">C</text>
-    <text x="22" y="172" fill="#facc15" fontSize="10" fontFamily="monospace">D</text>
-    <text x="64" y="26" fill="#facc15" fontSize="10" fontFamily="monospace">E</text>
-    <text x="202" y="26" fill="#facc15" fontSize="10" fontFamily="monospace">F</text>
-    <text x="202" y="142" fill="#facc15" fontSize="10" fontFamily="monospace">G</text>
-    <text x="64" y="142" fill="#facc15" fontSize="10" fontFamily="monospace">H</text>
+    <text x="22" y="58" fill="#facc15" fontSize="10" fontFamily="monospace">E</text>
+    <text x="164" y="58" fill="#facc15" fontSize="10" fontFamily="monospace">F</text>
+    <text x="164" y="172" fill="#facc15" fontSize="10" fontFamily="monospace">B</text>
+    <text x="22" y="172" fill="#facc15" fontSize="10" fontFamily="monospace">A</text>
+    <text x="64" y="26" fill="#facc15" fontSize="10" fontFamily="monospace">H</text>
+    <text x="202" y="26" fill="#facc15" fontSize="10" fontFamily="monospace">G</text>
+    <text x="202" y="142" fill="#facc15" fontSize="10" fontFamily="monospace">C</text>
+    <text x="64" y="142" fill="#facc15" fontSize="10" fontFamily="monospace">D</text>
     <text x="210" y="175" fill="#fff" fontSize="10" fontFamily="monospace">8 titik sudut</text>
   </svg>
 );
@@ -803,22 +803,22 @@ const DiagonalBidangSVG = () => (
 
 const AllDiagonalBidangSVG = () => {
   const diags = [
-    { x1:40,  y1:160, x2:160, y2:60,  color:"#ef4444", key:"AC", face:"Depan" },
-    { x1:160, y1:160, x2:40,  y2:60,  color:"#f97316", key:"BD", face:"Depan" },
-    { x1:80,  y1:130, x2:200, y2:30,  color:"#eab308", key:"EG", face:"Belakang" },
-    { x1:200, y1:130, x2:80,  y2:30,  color:"#84cc16", key:"FH", face:"Belakang" },
+    { x1:40,  y1:160, x2:160, y2:60,  color:"#ef4444", key:"AF", face:"Depan" },
+    { x1:160, y1:160, x2:40,  y2:60,  color:"#f97316", key:"BE", face:"Depan" },
+    { x1:80,  y1:130, x2:200, y2:30,  color:"#eab308", key:"DG", face:"Belakang" },
+    { x1:200, y1:130, x2:80,  y2:30,  color:"#84cc16", key:"CH", face:"Belakang" },
     { x1:40,  y1:160, x2:80,  y2:30,  color:"#22c55e", key:"AH", face:"Kiri" },
     { x1:40,  y1:60,  x2:80,  y2:130, color:"#14b8a6", key:"DE", face:"Kiri" },
     { x1:160, y1:160, x2:200, y2:30,  color:"#06b6d4", key:"BG", face:"Kanan" },
     { x1:160, y1:60,  x2:200, y2:130, color:"#3b82f6", key:"CF", face:"Kanan" },
-    { x1:40,  y1:60,  x2:200, y2:30,  color:"#6366f1", key:"DG", face:"Atas" },
-    { x1:160, y1:60,  x2:80,  y2:30,  color:"#8b5cf6", key:"CH", face:"Atas" },
-    { x1:40,  y1:160, x2:200, y2:130, color:"#d946ef", key:"AF", face:"Bawah" },
-    { x1:160, y1:160, x2:80,  y2:130, color:"#f43f5e", key:"BE", face:"Bawah" },
+    { x1:40,  y1:60,  x2:200, y2:30,  color:"#6366f1", key:"EG", face:"Atas" },
+    { x1:160, y1:60,  x2:80,  y2:30,  color:"#8b5cf6", key:"FH", face:"Atas" },
+    { x1:40,  y1:160, x2:200, y2:130, color:"#d946ef", key:"AC", face:"Alas" },
+    { x1:160, y1:160, x2:80,  y2:130, color:"#f43f5e", key:"BD", face:"Alas" },
   ];
   const verts: [number,number,string,number,number][] = [
-    [40,60,"D",-10,-5],[160,60,"C",5,-5],[160,160,"B",5,10],[40,160,"A",-10,10],
-    [80,30,"H",-2,-7],[200,30,"G",5,-5],[200,130,"F",6,4],[80,130,"E",-13,4],
+    [40,60,"E",-10,-5],[160,60,"F",5,-5],[160,160,"B",5,10],[40,160,"A",-10,10],
+    [80,30,"H",-2,-7],[200,30,"G",5,-5],[200,130,"C",6,4],[80,130,"D",-13,4],
   ];
   return (
     <div className="space-y-3 my-3">
@@ -904,23 +904,23 @@ const DiagonalRuangSVG = () => (
 
 const AllDiagonalRuangSVG = () => {
   // Larger cube vertices (scaled up ~1.4×)
-  // Front face: D(20,52) C(195,52) B(195,195) A(20,195)
-  // Back face:  H(75,10) G(250,10) F(250,153) E(75,153)
+  // Front face: E(20,52) F(195,52) B(195,195) A(20,195)
+  // Back face:  H(75,10) G(250,10) C(250,153) D(75,153)
   const diags = [
     { x1:20,  y1:195, x2:250, y2:10,  color:"#f44336", key:"AG", desc:"A → G" },
     { x1:195, y1:195, x2:75,  y2:10,  color:"#4caf50", key:"BH", desc:"B → H" },
-    { x1:195, y1:52,  x2:75,  y2:153, color:"#38bdf8", key:"CE", desc:"C → E" },
-    { x1:20,  y1:52,  x2:250, y2:153, color:"#facc15", key:"DF", desc:"D → F" },
+    { x1:195, y1:52,  x2:75,  y2:153, color:"#38bdf8", key:"DF", desc:"D → F" },
+    { x1:20,  y1:52,  x2:250, y2:153, color:"#facc15", key:"CE", desc:"C → E" },
   ];
   const verts: [number,number,string,number,number][] = [
-    [20,52,  "D",-14,-4],
-    [195,52, "C",  6,-4],
+    [20,52,  "E",-14,-4],
+    [195,52, "F",  6,-4],
     [195,195,"B",  6, 12],
     [20,195, "A",-14, 12],
     [75,10,  "H", -5,-6],
     [250,10, "G",  5,-6],
-    [250,153,"F",  6,  5],
-    [75,153, "E",-16,  5],
+    [250,153,"C",  6,  5],
+    [75,153, "D",-16,  5],
   ];
   return (
     <svg viewBox="0 0 278 255" className="w-full max-w-sm mx-auto my-2" aria-label="4 diagonal ruang kubus">
@@ -989,7 +989,7 @@ const BidangDiagonalSVG = () => (
     {/* Bidang diagonal (rect through cube) */}
     <polygon points="40,60 200,30 200,130 40,160" fill="#a78bfa" className="bd-a"/>
     <polygon points="40,60 200,30 200,130 40,160" fill="none" stroke="#a78bfa" strokeWidth="2"/>
-    <text x="95" y="105" fill="#a78bfa" fontSize="11" fontFamily="monospace" fontWeight="bold">BD</text>
+    <text x="95" y="105" fill="#a78bfa" fontSize="11" fontFamily="monospace" fontWeight="bold">EACG</text>
     <text x="170" y="175" fill="#fff" fontSize="10" fontFamily="monospace">6 bidang</text>
     <text x="170" y="188" fill="#a78bfa" fontSize="10" fontFamily="monospace">diagonal</text>
   </svg>
@@ -1005,24 +1005,24 @@ type BidangDiagonalVariant = {
 
 const bidangDiagonalVariants: BidangDiagonalVariant[] = [
   {
-    title: "Bidang DAFG",
+    title: "Bidang EACG",
     points: "40,160 40,60 200,30 200,130",
     color: "#a78bfa",
-    label: "DAFG",
-    note: "sejajar dengan bidang CBEH",
+    label: "EACG",
+    note: "sejajar dengan bidang FBDH",
   },
   {
-    title: "Bidang CBEH",
+    title: "Bidang FBDH",
     points: "160,60 160,160 80,130 80,30",
     color: "#22d3ee",
-    label: "CBEH",
-    note: "sejajar dengan bidang DAFG",
+    label: "FBDH",
+    note: "sejajar dengan bidang EACG",
   },
   {
-    title: "Bidang CDEF",
+    title: "Bidang DCEF",
     points: "160,60 40,60 80,130 200,130",
     color: "#34d399",
-    label: "CDEF",
+    label: "DCEF",
     note: "melalui rusuk DC dan EF",
   },
   {
@@ -1033,18 +1033,18 @@ const bidangDiagonalVariants: BidangDiagonalVariant[] = [
     note: "melalui rusuk AB dan GH",
   },
   {
-    title: "Bidang DHFB",
+    title: "Bidang EHCB",
     points: "40,60 80,30 200,130 160,160",
     color: "#fb7185",
-    label: "DHFB",
-    note: "melalui rusuk DH dan BF",
+    label: "EHCB",
+    note: "melalui rusuk EH dan BC",
   },
   {
-    title: "Bidang CGEA",
+    title: "Bidang FGDA",
     points: "160,60 200,30 80,130 40,160",
     color: "#a78bfa",
-    label: "CGEA",
-    note: "melalui rusuk CG dan AE",
+    label: "FGDA",
+    note: "melalui rusuk FG dan AD",
   },
 ];
 
@@ -2501,10 +2501,10 @@ const KubusPage = () => {
                 <text x="200" y="18" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
                 <text x="200" y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">G</text>
                 <text x="8"  y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">H</text>
-                {/* panjang label (top — s√2, diagonal bidang) */}
-                <text x="110" y="14" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">p = s√2  (diagonal bidang)</text>
-                {/* lebar label (right — s, rusuk tegak) */}
-                <text x="216" y="62" fill="#a855f7" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(90,213,62)">l = s  (rusuk)</text>
+                {/* lebar label (top — s, rusuk alas/atas) */}
+                <text x="110" y="14" fill="#a855f7" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">l = s  (rusuk)</text>
+                {/* panjang label (right — s√2, diagonal bidang) */}
+                <text x="216" y="62" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(90,213,62)">p = s√2  (diagonal bidang)</text>
                 {/* right angle marks */}
                 <rect x="20" y="20" width="10" height="10" fill="none" stroke="#ffffff44" strokeWidth="1"/>
                 <rect x="190" y="20" width="10" height="10" fill="none" stroke="#ffffff44" strokeWidth="1"/>
@@ -2518,8 +2518,8 @@ const KubusPage = () => {
               <p className="text-white/80 font-semibold">Penurunan rumus:</p>
               <div className="space-y-1 text-white/70">
                 <p>① Bidang diagonal <strong className="text-violet-300">ABGH</strong> berbentuk <strong className="text-white/90">persegi panjang</strong></p>
-                <p>② Panjang (<InlineMath math="p"/>): sisi AB atau GH = diagonal bidang alas = <strong className="text-orange-400">s√2</strong></p>
-                <p>③ Lebar (<InlineMath math="l"/>): sisi AH atau BG = rusuk tegak kubus = <strong className="text-violet-400">s</strong></p>
+                <p>② Panjang (<InlineMath math="p"/>): sisi AH atau BG = diagonal bidang = <strong className="text-orange-400">s√2</strong></p>
+                <p>③ Lebar (<InlineMath math="l"/>): sisi AB atau GH = rusuk kubus = <strong className="text-violet-400">s</strong></p>
                 <p>④ Terapkan rumus luas persegi panjang <InlineMath math="L = p \times l"/>:</p>
               </div>
               <div className="bg-slate-900/60 rounded p-2 text-center space-y-1">
