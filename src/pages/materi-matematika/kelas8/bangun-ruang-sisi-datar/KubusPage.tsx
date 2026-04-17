@@ -1943,8 +1943,45 @@ const KubusPage = () => {
         <div className="space-y-3 text-sm text-white/85 font-body">
           <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-4 space-y-2">
             <p className="text-yellow-300 font-semibold">③ Titik Sudut (8 buah)</p>
-            <p className="text-xs text-white/70">Titik sudut adalah <strong>titik pertemuan tiga rusuk</strong>. Diberi nama dengan huruf kapital (A, B, C, D, E, F, G, H).</p>
+            <p className="text-xs text-white/70">Titik sudut adalah <strong>titik pertemuan tiga rusuk</strong>. Pada kubus <strong className="text-yellow-300">ABCD.EFGH</strong>, terdapat 8 titik sudut:</p>
             <TitikSudutAnimSVG />
+          </div>
+          <div className="bg-yellow-950/30 border border-yellow-700/40 rounded-lg p-3 space-y-2">
+            <p className="text-xs text-yellow-200 font-semibold">8 Titik Sudut pada kubus ABCD.EFGH:</p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut A</p>
+                <p className="text-white/65">Alas — depan kiri</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut B</p>
+                <p className="text-white/65">Alas — depan kanan</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut C</p>
+                <p className="text-white/65">Alas — belakang kanan</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut D</p>
+                <p className="text-white/65">Alas — belakang kiri</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut E</p>
+                <p className="text-white/65">Atas — depan kiri</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut F</p>
+                <p className="text-white/65">Atas — depan kanan</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut G</p>
+                <p className="text-white/65">Atas — belakang kanan</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-yellow-300 font-semibold mb-1">Titik Sudut H</p>
+                <p className="text-white/65">Atas — belakang kiri</p>
+              </div>
+            </div>
           </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
             <p>🔑 <strong className="text-yellow-300">Jumlah titik sudut kubus = 8</strong>, setiap titik merupakan pertemuan tiga rusuk.</p>
