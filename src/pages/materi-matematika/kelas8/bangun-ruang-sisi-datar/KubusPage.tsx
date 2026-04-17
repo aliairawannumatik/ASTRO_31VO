@@ -2002,6 +2002,97 @@ const KubusPage = () => {
               <BlockMath math="d_b = s\sqrt{2}" />
             </div>
           </div>
+
+          {/* Pythagoras derivation */}
+          <div className="bg-slate-900/70 border border-cyan-700/40 rounded-lg p-4 space-y-3">
+            <p className="text-cyan-300 font-semibold text-xs">📐 Mengapa diagonal bidang = <InlineMath math="s\sqrt{2}" /> ? — Pembuktian dengan Pythagoras</p>
+            <p className="text-xs text-white/65">Ambil contoh diagonal bidang <strong className="text-cyan-300">AC</strong> pada sisi alas ABCD. Karena ABCD adalah persegi, segitiga ABC siku-siku di B.</p>
+
+            {/* Side-by-side diagrams */}
+            <div className="flex flex-wrap gap-4 justify-center items-end">
+
+              {/* Cube sketch with AC highlighted */}
+              <div className="flex flex-col items-center gap-1">
+                <p className="text-[10px] text-slate-400 font-body">Kubus ABCD.EFGH</p>
+                <svg width="155" height="175" viewBox="0 0 155 175">
+                  {/* Bottom face ABCD – green fill to highlight */}
+                  <polygon points="15,148 95,148 128,122 48,122" fill="#14532d55" stroke="#16a34a" strokeWidth="1.5"/>
+                  {/* Front face ABFE */}
+                  <polygon points="15,148 95,148 95,68 15,68" fill="#0f172a99" stroke="#334155" strokeWidth="1"/>
+                  {/* Right face BCGF */}
+                  <polygon points="95,148 128,122 128,42 95,68" fill="#0f172a66" stroke="#334155" strokeWidth="1"/>
+                  {/* Top face EFGH */}
+                  <polygon points="15,68 95,68 128,42 48,42" fill="#1e293b88" stroke="#334155" strokeWidth="1"/>
+                  {/* Hidden back edges dashed */}
+                  <line x1="48" y1="122" x2="48" y2="42" stroke="#475569" strokeWidth="0.8" strokeDasharray="3,3"/>
+                  <line x1="48" y1="122" x2="128" y2="122" stroke="#16a34a" strokeWidth="1" strokeDasharray="3,3"/>
+                  <line x1="15" y1="68" x2="48" y2="42" stroke="#334155" strokeWidth="0.8" strokeDasharray="3,3"/>
+                  {/* Diagonal AC – bright cyan */}
+                  <line x1="15" y1="148" x2="128" y2="122" stroke="#22d3ee" strokeWidth="2.5"/>
+                  {/* Right-angle marker at B on bottom face */}
+                  <polyline points="95,135 84,132 87,121" fill="none" stroke="#ffffff55" strokeWidth="1.2"/>
+                  {/* s labels on visible edges */}
+                  <text x="50" y="162" fill="#86efac" fontSize="8" fontFamily="monospace" textAnchor="middle">s</text>
+                  <text x="113" y="142" fill="#86efac" fontSize="8" fontFamily="monospace">s</text>
+                  {/* AC label */}
+                  <text x="58" y="140" fill="#22d3ee" fontSize="9" fontFamily="monospace" fontWeight="bold" transform="rotate(-13,58,140)">AC</text>
+                  {/* Vertex labels bottom face */}
+                  <text x="4"  y="158" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+                  <text x="97" y="158" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+                  <text x="130" y="130" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+                  <text x="42" y="132" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
+                  {/* Vertex labels top face */}
+                  <text x="4"  y="66" fill="#94a3b8" fontSize="9" fontFamily="monospace">E</text>
+                  <text x="97" y="66" fill="#94a3b8" fontSize="9" fontFamily="monospace">F</text>
+                  <text x="130" y="50" fill="#94a3b8" fontSize="9" fontFamily="monospace">G</text>
+                  <text x="42" y="50" fill="#94a3b8" fontSize="9" fontFamily="monospace">H</text>
+                </svg>
+              </div>
+
+              {/* Right triangle ABC */}
+              <div className="flex flex-col items-center gap-1">
+                <p className="text-[10px] text-slate-400 font-body">Segitiga siku-siku ABC</p>
+                <svg width="130" height="175" viewBox="0 0 130 175">
+                  {/* Triangle fill */}
+                  <polygon points="10,148 110,148 110,48" fill="#0c4a6e44"/>
+                  {/* Side AB – orange */}
+                  <line x1="10" y1="148" x2="110" y2="148" stroke="#f97316" strokeWidth="2.5"/>
+                  {/* Side BC – purple */}
+                  <line x1="110" y1="148" x2="110" y2="48" stroke="#a855f7" strokeWidth="2.5"/>
+                  {/* Hypotenuse AC – cyan */}
+                  <line x1="10" y1="148" x2="110" y2="48" stroke="#22d3ee" strokeWidth="2.5"/>
+                  {/* Right angle box at B */}
+                  <rect x="98" y="136" width="12" height="12" fill="none" stroke="#ffffff66" strokeWidth="1.5"/>
+                  {/* Labels sides */}
+                  <text x="60" y="163" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">AB = s</text>
+                  <text x="116" y="103" fill="#a855f7" fontSize="10" fontFamily="monospace" fontWeight="bold">BC = s</text>
+                  <text x="34" y="93" fill="#22d3ee" fontSize="9" fontFamily="monospace" fontWeight="bold" transform="rotate(-45,54,98)" textAnchor="middle">AC = s√2</text>
+                  {/* Vertex labels */}
+                  <text x="1"  y="162" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
+                  <text x="113" y="162" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
+                  <text x="113" y="47"  fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">C</text>
+                  {/* Siku-siku label */}
+                  <text x="55" y="20" fill="#ffffff44" fontSize="8" fontFamily="monospace" textAnchor="middle">∠B = 90°</text>
+                </svg>
+              </div>
+            </div>
+
+            {/* Step-by-step Pythagoras */}
+            <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs">
+              <p className="text-white/80 font-semibold">Langkah pembuktian:</p>
+              <div className="space-y-1 text-white/70">
+                <p>① Sisi ABCD adalah persegi dengan sisi <InlineMath math="s"/>, sehingga <InlineMath math="AB = BC = s"/></p>
+                <p>② Sudut di titik B adalah <strong className="text-white/90">90°</strong> (sudut kubus)</p>
+                <p>③ Terapkan Teorema Pythagoras pada segitiga ABC:</p>
+              </div>
+              <div className="bg-slate-900/60 rounded p-2 text-center space-y-1">
+                <BlockMath math="AC^2 = AB^2 + BC^2"/>
+                <BlockMath math="AC^2 = s^2 + s^2 = 2s^2"/>
+                <BlockMath math="\boxed{AC = s\sqrt{2}}"/>
+              </div>
+              <p className="text-green-300 text-xs">∴ Panjang diagonal bidang AC = <InlineMath math="s\sqrt{2}"/>, berlaku untuk semua 12 diagonal bidang kubus.</p>
+            </div>
+          </div>
         </div>
       ),
     },
