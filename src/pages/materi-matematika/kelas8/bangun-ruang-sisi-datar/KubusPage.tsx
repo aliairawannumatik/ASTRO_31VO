@@ -1898,8 +1898,37 @@ const KubusPage = () => {
         <div className="space-y-3 text-sm text-white/85 font-body">
           <div className="bg-blue-950/40 border border-blue-700/40 rounded-lg p-4 space-y-2">
             <p className="text-blue-300 font-semibold">② Sisi / Bidang (6 buah)</p>
-            <p className="text-xs text-white/70">Sisi adalah <strong>bidang yang membatasi</strong> kubus. Setiap sisi berbentuk persegi dengan luas <InlineMath math="s^2" />. Ada 6 sisi: depan, belakang, kiri, kanan, atas, bawah.</p>
+            <p className="text-xs text-white/70">Sisi adalah <strong>bidang yang membatasi</strong> kubus. Setiap sisi berbentuk persegi dengan luas <InlineMath math="s^2" />. Pada kubus <strong className="text-blue-300">ABCD.EFGH</strong>, terdapat 6 sisi:</p>
             <SisiAnimSVG />
+          </div>
+          <div className="bg-blue-950/30 border border-blue-700/40 rounded-lg p-3 space-y-2">
+            <p className="text-xs text-blue-200 font-semibold">Penamaan 6 sisi pada kubus ABCD.EFGH:</p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-blue-300 font-semibold mb-1">Sisi Alas</p>
+                <p className="text-white/75">ABCD</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-blue-300 font-semibold mb-1">Sisi Atas</p>
+                <p className="text-white/75">EFGH</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-blue-300 font-semibold mb-1">Sisi Depan</p>
+                <p className="text-white/75">ABFE</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-blue-300 font-semibold mb-1">Sisi Belakang</p>
+                <p className="text-white/75">DCGH</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-blue-300 font-semibold mb-1">Sisi Kiri</p>
+                <p className="text-white/75">ADHE</p>
+              </div>
+              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <p className="text-blue-300 font-semibold mb-1">Sisi Kanan</p>
+                <p className="text-white/75">BCGF</p>
+              </div>
+            </div>
           </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
             <p>🔑 <strong className="text-blue-300">Jumlah sisi kubus = 6</strong>, setiap sisi berbentuk persegi dengan luas <InlineMath math="s^2" />.</p>
