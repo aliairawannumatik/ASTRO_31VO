@@ -1577,7 +1577,7 @@ const sections: Sec[] = [
             🌊 Kubus diisi air — dari kosong hingga penuh
           </p>
           <WaterKubusAnimation />
-          <p className="text-white/45 text-[10px] font-body text-center">
+          <p className="text-white/45 text-[10px] font-body text-center mt-4">
             Persentase menunjukkan proporsi volume terisi terhadap volume total
           </p>
         </div>
