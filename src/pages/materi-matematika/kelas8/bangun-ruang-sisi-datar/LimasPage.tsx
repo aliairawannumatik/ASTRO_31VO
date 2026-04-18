@@ -996,7 +996,7 @@ const PythagorasLimasSegitigaOverview = () => (
 const PythagorasLimasSegiempatOverview = () => (
     <div className="bg-slate-900/70 border border-orange-700/40 rounded-xl p-3 space-y-3">
       <div>
-        <p className="text-orange-300 font-semibold text-xs">Limas Segiempat Beraturan — Pythagoras Sisi Tegak Kanan</p>
+        <p className="text-orange-300 font-semibold text-xs">Gambar 3 — Tinggi limas &amp; Tinggi Sisi Tegak pada limas segiempat</p>
         <p className="text-white/45 text-[11px]">Alas persegi dengan sisi <InlineMath math="s" />. Sisi tegak <strong>kanan</strong> T–B–C disorot: apotema <InlineMath math="l" /> turun ke titik tengah <InlineMath math="M" /> rusuk kanan.</p>
       </div>
       <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras pada limas segiempat sisi tegak kanan">
@@ -1055,7 +1055,7 @@ const PythagorasLimasSegiempatOverview = () => (
 const PythagorasLimasSegiempatDiagonalSVG = () => (
   <div className="bg-slate-900/70 border border-pink-700/40 rounded-xl p-3 space-y-3">
     <div>
-      <p className="text-pink-300 font-semibold text-xs">Limas Segiempat Beraturan — Pythagoras: Setengah Diagonal, Tinggi, dan Rusuk Tegak</p>
+      <p className="text-pink-300 font-semibold text-xs">Gambar 4 — Setengah Diagonal, Tinggi, dan Rusuk Tegak pada limas segiempat</p>
       <p className="text-white/45 text-[11px]">
         Segitiga siku-siku T–O–A: tinggi limas <InlineMath math="t" />, setengah diagonal alas <InlineMath math="\tfrac{d}{2}=\tfrac{s\sqrt{2}}{2}" />, dan rusuk tegak <InlineMath math="e" />.
         Sudut siku-siku berada di <strong className="text-sky-300">O</strong> (pusat alas).
