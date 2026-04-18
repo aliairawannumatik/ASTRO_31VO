@@ -2046,6 +2046,12 @@ const KubusPage = () => {
                 </div>
               ))}
             </div>
+            <p className="text-[10px] text-white/40 text-center mt-2">
+              Sumber:{" "}
+              <a href="https://salamadian.com/benda-berbentuk-kubus/" target="_blank" rel="noopener noreferrer" className="text-cyan-400/70 underline hover:text-cyan-300 transition-colors">
+                salamadian.com/benda-berbentuk-kubus
+              </a>
+            </p>
           </div>
         </div>
       ),
