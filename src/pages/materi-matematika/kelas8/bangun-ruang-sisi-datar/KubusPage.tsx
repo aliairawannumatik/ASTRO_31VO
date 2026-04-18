@@ -729,16 +729,15 @@ const SisiAnimSVG = () => (
     {([[40,160],[160,160],[200,130],[80,130],[40,60],[160,60],[200,30],[80,30]] as [number,number][]).map(([x,y],i)=>(
       <circle key={i} cx={x} cy={y} r={3} fill="#facc15" opacity={0.9}/>
     ))}
-    {/* Vertex labels — alas ABCD */}
-    <text x="25"  y="177" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="163" y="177" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="204" y="134" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="62"  y="127" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
-    {/* Vertex labels — atas EFGH */}
-    <text x="25"  y="56"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">E</text>
-    <text x="163" y="56"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">F</text>
-    <text x="204" y="28"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">G</text>
-    <text x="65"  y="25"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">H</text>
+    {/* Vertex labels */}
+    <text x="25"  y="177" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="163" y="177" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="204" y="134" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="62"  y="127" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="25"  y="56"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">E</text>
+    <text x="163" y="56"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">F</text>
+    <text x="204" y="28"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">G</text>
+    <text x="65"  y="25"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">H</text>
   </svg>
 );
 
