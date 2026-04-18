@@ -852,7 +852,7 @@ const PythagorasLimasSurfaceGuide = () => (
         {/* RIGHT face T-B-C highlighted */}
         <polygon points="162,166 214,126 132,42" fill="#f97316" fillOpacity="0.30" stroke="#fdba74" strokeWidth="1.8" />
         {/* t: height T→O */}
-        <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#quadGlow)" />
+        <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4" />
         {/* l: apotema T→M_right(188,146) midpoint of BC */}
         <line x1="132" y1="42" x2="188" y2="146" stroke="#fb923c" strokeWidth="3" filter="url(#quadGlow)" />
         {/* s/2: O→M_right */}
@@ -912,7 +912,7 @@ const PythagorasLimasSegiempatDiagonalSVG = () => (
       {/* full diagonal A–C for context */}
       <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3" />
       {/* t: height T→O, blue dashed */}
-      <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#diagGlow)" />
+      <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4" />
       {/* d/2: O→A, pink solid */}
       <line x1="132" y1="146" x2="48" y2="166" stroke="#f472b6" strokeWidth="3" filter="url(#diagGlow)" />
       {/* e: rusuk tegak T→A, orange */}
