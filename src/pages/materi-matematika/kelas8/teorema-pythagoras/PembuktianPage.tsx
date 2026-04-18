@@ -97,7 +97,7 @@ const SegitigaSikuSVG = () => (
 
 const PembuktianPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "animasi", "rearrangement", "pembuktian", "contoh1", "contoh2", "contoh3", "rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["intro", "animasi", "rearrangement", "pembuktian", "contoh1", "contoh2", "contoh3", "rangkuman", "kuadrat"]);
 
   const toggle = (id: string) => {
     playPopSound();
@@ -362,6 +362,87 @@ const PembuktianPage = () => {
                     🚀 <strong>Tips Astronot:</strong> Teorema Pythagoras digunakan bahkan dalam navigasi satelit dan GPS! Tanpa Pythagoras, kita tidak bisa menghitung jarak antar titik di ruang angkasa.
                   </p>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* HAFAL BILANGAN KUADRAT 1–30 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="kuadrat" icon={<Target className="w-5 h-5"/>} iconColor="text-yellow-400" title="⚡ Hafal Bilangan Kuadrat 1–30"/>
+            {open.includes("kuadrat") && (
+              <div className="px-5 pb-5 space-y-4">
+
+                {/* Mengapa penting */}
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-bold text-yellow-300">🎯 Mengapa Harus Dihafal?</p>
+                  <p className="font-body text-sm text-white/80">
+                    Dalam soal Teorema Pythagoras, kita sering harus <strong className="text-cyan-300">mencari sisi yang tidak diketahui</strong> dengan cara mengakarkan bilangan.
+                    Jika kamu hafal bilangan kuadrat 1–30, kamu bisa langsung tahu hasil akarnya <strong className="text-yellow-300">tanpa kalkulator</strong>!
+                  </p>
+                  <p className="font-body text-sm text-white/80">
+                    Contoh: jika <InlineMath math="c^2 = 169"/>, kamu langsung tahu <InlineMath math="c = 13"/> karena hafal <InlineMath math="13^2 = 169"/>. ✅
+                  </p>
+                  <p className="font-body text-sm text-white/80">
+                    Manfaat lain: mempercepat perhitungan <strong className="text-pink-300">Triple Pythagoras</strong>, soal ANBK, UN, dan olimpiade matematika.
+                  </p>
+                </div>
+
+                {/* Tabel 1–10 */}
+                <div className="space-y-1">
+                  <p className="font-body text-xs font-bold text-sky-300 mb-2">🔵 Kelompok 1 — Bilangan 1 sampai 10</p>
+                  <div className="grid grid-cols-5 gap-1.5">
+                    {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                      <div key={n} className="bg-sky-900/40 border border-sky-600/40 rounded-lg p-2 text-center">
+                        <p className="text-sky-300 font-bold font-mono text-xs">{n}²</p>
+                        <p className="text-white font-bold font-mono text-sm">{n*n}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tabel 11–20 */}
+                <div className="space-y-1">
+                  <p className="font-body text-xs font-bold text-emerald-300 mb-2">🟢 Kelompok 2 — Bilangan 11 sampai 20</p>
+                  <div className="grid grid-cols-5 gap-1.5">
+                    {[11,12,13,14,15,16,17,18,19,20].map(n => (
+                      <div key={n} className="bg-emerald-900/40 border border-emerald-600/40 rounded-lg p-2 text-center">
+                        <p className="text-emerald-300 font-bold font-mono text-xs">{n}²</p>
+                        <p className="text-white font-bold font-mono text-sm">{n*n}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tabel 21–30 */}
+                <div className="space-y-1">
+                  <p className="font-body text-xs font-bold text-orange-300 mb-2">🟠 Kelompok 3 — Bilangan 21 sampai 30</p>
+                  <div className="grid grid-cols-5 gap-1.5">
+                    {[21,22,23,24,25,26,27,28,29,30].map(n => (
+                      <div key={n} className="bg-orange-900/40 border border-orange-600/40 rounded-lg p-2 text-center">
+                        <p className="text-orange-300 font-bold font-mono text-xs">{n}²</p>
+                        <p className="text-white font-bold font-mono text-sm">{n*n}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Pola menarik */}
+                <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-bold text-violet-300">🔍 Pola Menarik Bilangan Kuadrat</p>
+                  <ul className="space-y-1.5 font-body text-sm text-white/80">
+                    <li>• Bilangan kuadrat <strong className="text-yellow-300">hanya berakhiran 0, 1, 4, 5, 6, atau 9</strong> — tidak pernah 2, 3, 7, atau 8.</li>
+                    <li>• Bilangan yang berakhiran <strong className="text-sky-300">5</strong>, kuadratnya selalu berakhiran <strong className="text-sky-300">25</strong>. Contoh: 5²=25, 15²=225, 25²=625.</li>
+                    <li>• Selisih dua bilangan kuadrat berurutan selalu ganjil: <InlineMath math="(n+1)^2 - n^2 = 2n+1"/>.</li>
+                    <li>• Contoh: 10²=100, 11²=121, selisihnya = 21 = 2×10+1. ✅</li>
+                  </ul>
+                </div>
+
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
+                  <p className="font-body text-sm text-cyan-200">
+                    🚀 <strong>Tips Hafal Cepat:</strong> Mulai dari kelompok 1 (1–10), hafalkan dulu sampai lancar. Lanjut kelompok 2 (11–20), perhatikan polanya. Kelompok 3 (21–30) lebih mudah jika kamu sudah paham pola selisihnya.
+                  </p>
+                </div>
+
               </div>
             )}
           </div>
