@@ -940,6 +940,12 @@ const sections: Sec[] = [
         <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-sm text-white/85">
           <p>Luas permukaan limas = jumlah seluruh luas bidang yang membungkusnya.</p>
         </div>
+        <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3 text-xs space-y-2 text-white/75">
+          <p className="text-orange-300 font-semibold">Apotema sisi tegak dipakai untuk menghitung luas sisi segitiga.</p>
+          <ApotemaLimasSVG />
+          <BlockMath math="l = \sqrt{t^2 + \left(\frac{s}{2}\right)^2}" />
+          <p className="text-white/50">di mana <InlineMath math="t" /> = tinggi limas dan <InlineMath math="s" /> = panjang sisi alas.</p>
+        </div>
 
         <div className="space-y-3 text-sm">
           <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2">
@@ -1285,6 +1291,14 @@ const slides: Slide[] = [
           <strong className="text-yellow-300">luas permukaan</strong> dan{" "}
           <strong className="text-green-300">volume</strong>-nya.
         </p>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
+          <p className="text-violet-300 font-semibold mb-1">📋 Materi dalam bab ini:</p>
+          <p>• Pengertian &amp; jenis-jenis limas</p>
+          <p>• Unsur-unsur: rusuk, sisi, titik sudut</p>
+          <p>• Jaring-jaring interaktif</p>
+          <p>• Luas permukaan dan volume</p>
+          <p>• Contoh soal bertingkat</p>
+        </div>
       </div>
     ),
   },
@@ -1294,36 +1308,20 @@ const slides: Slide[] = [
     content: sections[0].content,
   },
   {
-    icon: "●",
-    title: "Unsur — Titik Sudut",
+    icon: "⬛",
+    title: "Unsur — Rusuk Limas",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body">
         <p className="text-white/65 text-xs">Fokus pada <strong className="text-white">Limas Segiempat T.ABCD</strong> sebagai model utama.</p>
-        <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3">
-          <p className="text-orange-300 font-semibold text-xs mb-2">1. Titik Sudut (5 buah)</p>
-          <TitikSudutLimasSVG />
-          <p className="text-white/65 text-xs">Empat titik sudut alas (A, B, C, D) dan satu <strong className="text-yellow-300">titik puncak T</strong>.</p>
-        </div>
-        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 text-xs text-white/70 space-y-1">
-          <p className="text-cyan-300 font-semibold">📐 Pola umum limas segi-n:</p>
-          <p>• Titik sudut = <InlineMath math="n + 1" /></p>
-          <p>• Rusuk = <InlineMath math="2n" /></p>
-          <p>• Sisi = <InlineMath math="n + 1" /></p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    icon: "⬛",
-    title: "Unsur — Rusuk",
-    content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3">
-          <p className="text-cyan-300 font-semibold text-xs mb-2">2. Rusuk (8 buah)</p>
+          <p className="text-cyan-300 font-semibold text-xs mb-2">1. Rusuk (8 buah)</p>
           <RusukLimasSVG />
           <div className="mt-2 space-y-1 text-xs text-white/70">
             <p>• <strong className="text-cyan-300">Rusuk alas (4):</strong> AB, BC, CD, DA — membentuk persegi/persegi panjang</p>
             <p>• <strong className="text-orange-300">Rusuk tegak (4):</strong> TA, TB, TC, TD — menghubungkan alas ke puncak</p>
+            <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <BlockMath math="\text{Jumlah rusuk} = 2n = 2 \times 4 = 8" />
+            </div>
           </div>
         </div>
       </div>
@@ -1331,24 +1329,62 @@ const slides: Slide[] = [
   },
   {
     icon: "⬜",
-    title: "Unsur — Sisi",
+    title: "Unsur — Sisi Limas",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body">
         <div className="bg-slate-800/60 border border-green-700/30 rounded-lg p-3">
-          <p className="text-green-300 font-semibold text-xs mb-2">3. Sisi / Bidang (5 buah)</p>
+          <p className="text-green-300 font-semibold text-xs mb-2">2. Sisi / Bidang (5 buah)</p>
           <SisiLimasSVG />
           <div className="mt-2 space-y-1 text-xs text-white/70">
             <p>• <strong className="text-blue-300">Sisi alas (1):</strong> ABCD — berbentuk persegi/persegi panjang</p>
             <p>• <strong className="text-purple-300">Sisi tegak (4):</strong> TAB, TBC, TCD, TDA — semuanya berbentuk segitiga</p>
+            <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <BlockMath math="\text{Jumlah sisi} = n + 1 = 4 + 1 = 5" />
+            </div>
           </div>
         </div>
       </div>
     ),
   },
   {
-    icon: "📏",
-    title: "Tinggi Limas & Apotema",
-    content: sections[2].content,
+    icon: "●",
+    title: "Unsur — Titik Sudut & Tabel",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3">
+          <p className="text-orange-300 font-semibold text-xs mb-2">3. Titik Sudut (5 buah)</p>
+          <TitikSudutLimasSVG />
+          <p className="text-white/65 text-xs">Empat titik sudut alas (A, B, C, D) dan satu <strong className="text-yellow-300">titik puncak T</strong>.</p>
+          <div className="bg-slate-700/60 rounded p-2 mt-2">
+            <BlockMath math="\text{Titik sudut} = n + 1 = 4 + 1 = 5" />
+          </div>
+        </div>
+        <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs text-violet-200 space-y-1">
+          <p className="text-violet-300 font-semibold">📋 Tabel Unsur Limas Segi-n:</p>
+          <div className="overflow-x-auto mt-2">
+            <table className="w-full text-xs text-center">
+              <thead><tr className="border-b border-violet-800">
+                <th className="px-2 py-1 text-left">Jenis</th>
+                <th className="px-2 py-1">Sisi</th>
+                <th className="px-2 py-1">Rusuk</th>
+                <th className="px-2 py-1">T. Sudut</th>
+              </tr></thead>
+              <tbody>
+                {[["Segitiga (n=3)", 4, 6, 4], ["Segiempat (n=4)", 5, 8, 5],
+                  ["Segilima (n=5)", 6, 10, 6], ["Segienam (n=6)", 7, 12, 7]].map(([n, s, r, ts], i) => (
+                  <tr key={i} className={`border-t border-violet-900 ${i%2===0?"bg-violet-950/30":""}`}>
+                    <td className="px-2 py-1 text-left">{n}</td>
+                    <td className="px-2 py-1 text-yellow-300">{s}</td>
+                    <td className="px-2 py-1 text-yellow-300">{r}</td>
+                    <td className="px-2 py-1 text-yellow-300">{ts}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
     icon: "📐",
@@ -1375,7 +1411,7 @@ const slides: Slide[] = [
     title: "Contoh Soal — Luas Permukaan",
     content: (
       <div className="flex flex-col gap-3">
-        {luasExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="LUAS" />)}
+        {luasExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal LP" />)}
       </div>
     ),
   },
@@ -1384,7 +1420,7 @@ const slides: Slide[] = [
     title: "Contoh Soal — Volume",
     content: (
       <div className="flex flex-col gap-3">
-        {volExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="VOLUME" />)}
+        {volExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal Vol" />)}
       </div>
     ),
   },
