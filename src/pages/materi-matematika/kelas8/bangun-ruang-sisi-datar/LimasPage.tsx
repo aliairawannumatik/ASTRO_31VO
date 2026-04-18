@@ -785,6 +785,99 @@ const ApotemaLimasSVG = () => (
   </svg>
 );
 
+const PythagorasLimasSurfaceGuide = () => (
+  <div className="grid md:grid-cols-2 gap-3">
+    <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-3">
+      <div>
+        <p className="text-emerald-300 font-semibold text-xs">Limas Segitiga Beraturan</p>
+        <p className="text-white/45 text-[11px]">Alas segitiga sama sisi dengan sisi <InlineMath math="a" />. Gambar dibuat miring agar pusat alas, titik tengah sisi, dan rusuk tegak terlihat.</p>
+      </div>
+      <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras pada limas segitiga">
+        <defs>
+          <filter id="triGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2.2" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+        <polygon points="56,156 174,168 130,105" fill="#10b981" fillOpacity="0.22" stroke="#34d399" strokeWidth="2" />
+        <polygon points="56,156 174,168 128,42" fill="#8b5cf6" fillOpacity="0.26" stroke="#c4b5fd" strokeWidth="1.4" />
+        <polygon points="174,168 130,105 128,42" fill="#f97316" fillOpacity="0.2" stroke="#fdba74" strokeWidth="1.2" />
+        <polygon points="130,105 56,156 128,42" fill="#22d3ee" fillOpacity="0.16" stroke="#67e8f9" strokeWidth="1.2" />
+        <line x1="128" y1="42" x2="120" y2="143" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#triGlow)" />
+        <line x1="128" y1="42" x2="115" y2="162" stroke="#fb923c" strokeWidth="3" filter="url(#triGlow)" />
+        <line x1="120" y1="143" x2="115" y2="162" stroke="#facc15" strokeWidth="2.5" />
+        <line x1="120" y1="143" x2="56" y2="156" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
+        <line x1="128" y1="42" x2="56" y2="156" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
+        <line x1="128" y1="42" x2="174" y2="168" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
+        <circle cx="128" cy="42" r="4" fill="#facc15" />
+        <circle cx="120" cy="143" r="3.5" fill="#38bdf8" />
+        <circle cx="115" cy="162" r="3.5" fill="#fb923c" />
+        <circle cx="56" cy="156" r="3" fill="#f472b6" />
+        <text x="133" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
+        <text x="124" y="144" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
+        <text x="103" y="176" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
+        <text x="43" y="154" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
+        <text x="138" y="96" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
+        <text x="119" y="105" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
+        <text x="91" y="150" fill="#facc15" fontSize="10" fontFamily="monospace">r</text>
+        <text x="82" y="90" fill="#f472b6" fontSize="10" fontFamily="monospace">e</text>
+      </svg>
+      <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
+        <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak, <span className="text-pink-300 font-semibold">e</span> rusuk tegak.</p>
+        <BlockMath math="r_{\text{alas}}=\frac{a\sqrt{3}}{6},\quad R_{\text{alas}}=\frac{a\sqrt{3}}{3}" />
+        <BlockMath math="l^2=t^2+r_{\text{alas}}^2=t^2+\left(\frac{a\sqrt{3}}{6}\right)^2" />
+        <BlockMath math="e^2=t^2+R_{\text{alas}}^2=t^2+\left(\frac{a\sqrt{3}}{3}\right)^2" />
+        <BlockMath math="e^2=l^2+\left(\frac{a}{2}\right)^2" />
+      </div>
+    </div>
+
+    <div className="bg-slate-900/70 border border-orange-700/40 rounded-xl p-3 space-y-3">
+      <div>
+        <p className="text-orange-300 font-semibold text-xs">Limas Segiempat Beraturan</p>
+        <p className="text-white/45 text-[11px]">Alas persegi dengan sisi <InlineMath math="s" />. Posisi limas dimiringkan agar tinggi, apotema, diagonal alas, dan rusuk tegak tampak jelas.</p>
+      </div>
+      <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras pada limas segiempat">
+        <defs>
+          <filter id="quadGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2.2" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+        <polygon points="55,158 163,174 210,135 102,119" fill="#3b82f6" fillOpacity="0.22" stroke="#60a5fa" strokeWidth="2" />
+        <polygon points="55,158 163,174 132,42" fill="#8b5cf6" fillOpacity="0.24" stroke="#c4b5fd" strokeWidth="1.3" />
+        <polygon points="163,174 210,135 132,42" fill="#f97316" fillOpacity="0.22" stroke="#fdba74" strokeWidth="1.3" />
+        <polygon points="210,135 102,119 132,42" fill="#22c55e" fillOpacity="0.16" stroke="#86efac" strokeWidth="1.1" />
+        <polygon points="102,119 55,158 132,42" fill="#eab308" fillOpacity="0.14" stroke="#fde047" strokeWidth="1.1" />
+        <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#quadGlow)" />
+        <line x1="132" y1="42" x2="109" y2="166" stroke="#fb923c" strokeWidth="3" filter="url(#quadGlow)" />
+        <line x1="132" y1="146" x2="109" y2="166" stroke="#facc15" strokeWidth="2.5" />
+        <line x1="132" y1="146" x2="55" y2="158" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
+        <line x1="132" y1="42" x2="55" y2="158" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
+        <line x1="55" y1="158" x2="210" y2="135" stroke="#a78bfa" strokeWidth="1.8" strokeDasharray="5,3" />
+        <circle cx="132" cy="42" r="4" fill="#facc15" />
+        <circle cx="132" cy="146" r="3.5" fill="#38bdf8" />
+        <circle cx="109" cy="166" r="3.5" fill="#fb923c" />
+        <circle cx="55" cy="158" r="3" fill="#f472b6" />
+        <text x="137" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
+        <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
+        <text x="100" y="181" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
+        <text x="42" y="156" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
+        <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
+        <text x="113" y="107" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
+        <text x="118" y="162" fill="#facc15" fontSize="10" fontFamily="monospace">s/2</text>
+        <text x="84" y="91" fill="#f472b6" fontSize="10" fontFamily="monospace">e</text>
+      </svg>
+      <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
+        <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak, <span className="text-pink-300 font-semibold">e</span> rusuk tegak.</p>
+        <BlockMath math="OM=\frac{s}{2},\quad OA=\frac{s\sqrt{2}}{2}" />
+        <BlockMath math="l^2=t^2+\left(\frac{s}{2}\right)^2" />
+        <BlockMath math="e^2=t^2+\left(\frac{s\sqrt{2}}{2}\right)^2=t^2+\frac{s^2}{2}" />
+        <BlockMath math="e^2=l^2+\left(\frac{s}{2}\right)^2" />
+      </div>
+    </div>
+  </div>
+);
+
 /* ─────────────────────────────────────────────────────────────
    JARING-JARING LIMAS — beberapa variasi
 ───────────────────────────────────────────────────────────── */
@@ -1250,6 +1343,14 @@ const sections: Sec[] = [
           <ApotemaLimasSVG />
           <BlockMath math="l = \sqrt{t^2 + \left(\frac{s}{2}\right)^2}" />
           <p className="text-white/50">di mana <InlineMath math="t" /> = tinggi limas dan <InlineMath math="s" /> = panjang sisi alas.</p>
+        </div>
+
+        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
+          <div>
+            <p className="text-cyan-300 font-semibold text-xs">Pythagoras yang dipakai pada luas permukaan</p>
+            <p className="text-white/55 text-xs">Gunakan gambar miring berikut untuk melihat segitiga siku-siku yang muncul sebelum menghitung luas sisi tegak.</p>
+          </div>
+          <PythagorasLimasSurfaceGuide />
         </div>
 
         <div className="space-y-3 text-sm">
