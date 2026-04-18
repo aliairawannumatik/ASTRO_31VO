@@ -657,9 +657,11 @@ const SisiBalokSVG = () => (
    ALL 12 DIAGONAL BIDANG BALOK — mini cards with glowing diags
 ───────────────────────────────────────────────────────────── */
 type DBVKey = "A"|"B"|"C"|"D"|"E"|"F"|"G"|"H";
+/* Balok vertex coords — wider (p=120) than tall (t=70), depth 32px
+   Format: [cx, cy, label-offset-x, label-offset-y]               */
 const DB_VERTS: Record<DBVKey,[number,number,number,number]> = {
-  A:[22,138,-11,11], B:[132,138,4,11], C:[164,106,4,4], D:[54,106,-12,4],
-  E:[22,52,-11,-4],  F:[132,52,4,-4],  G:[164,16,4,-3], H:[54,16,-12,-3],
+  A:[14,126,-10,11], B:[134,126,4,11], C:[166,96,4,4],  D:[46,96,-12,4],
+  E:[14,56,-10,-4],  F:[134,56,4,-4],  G:[166,22,4,-3], H:[46,22,-12,-3],
 };
 const ALL_DB_DIAGS: {key:string;v1:DBVKey;v2:DBVKey;color:string;face:string}[] = [
   {key:"AF",v1:"A",v2:"F",color:"#f97316",face:"Depan (p×t)"},
@@ -681,7 +683,6 @@ const BalokDiagCard = ({d,idx}:{d:typeof ALL_DB_DIAGS[0];idx:number}) => {
   const aCls = `dbc${idx}`;
   const [x1,y1] = DB_VERTS[d.v1];
   const [x2,y2] = DB_VERTS[d.v2];
-  const endKeys: DBVKey[] = [d.v1, d.v2];
   return (
     <div className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-2 flex flex-col items-center gap-0.5">
       <svg viewBox="0 0 200 154" className="w-full" aria-label={`Diagonal ${d.key}`}>
@@ -691,12 +692,12 @@ const BalokDiagCard = ({d,idx}:{d:typeof ALL_DB_DIAGS[0];idx:number}) => {
             .${aCls}{animation:${aId} 1.8s ease-in-out infinite ${(idx*0.15).toFixed(2)}s;}
           `}</style>
         </defs>
-        <polygon points="22,138 132,138 132,52 22,52" fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
-        <polygon points="54,106 164,106 164,16 54,16"  fill="rgba(15,23,42,0.5)"  stroke="#475569" strokeWidth="1"/>
-        <line x1="22"  y1="138" x2="54"  y2="106" stroke="#475569" strokeWidth="1"/>
-        <line x1="132" y1="138" x2="164" y2="106" stroke="#475569" strokeWidth="1"/>
-        <line x1="22"  y1="52"  x2="54"  y2="16"  stroke="#475569" strokeWidth="1"/>
-        <line x1="132" y1="52"  x2="164" y2="16"  stroke="#475569" strokeWidth="1"/>
+        <polygon points="14,126 134,126 134,56 14,56"  fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
+        <polygon points="46,96 166,96 166,22 46,22"   fill="rgba(15,23,42,0.5)"  stroke="#475569" strokeWidth="1"/>
+        <line x1="14"  y1="126" x2="46"  y2="96"  stroke="#475569" strokeWidth="1"/>
+        <line x1="134" y1="126" x2="166" y2="96"  stroke="#475569" strokeWidth="1"/>
+        <line x1="14"  y1="56"  x2="46"  y2="22"  stroke="#475569" strokeWidth="1"/>
+        <line x1="134" y1="56"  x2="166" y2="22"  stroke="#475569" strokeWidth="1"/>
         <line x1={x1} y1={y1} x2={x2} y2={y2}
           stroke={d.color} strokeWidth="2.8" strokeLinecap="round"
           strokeDasharray="6,3" className={aCls}/>
@@ -706,12 +707,15 @@ const BalokDiagCard = ({d,idx}:{d:typeof ALL_DB_DIAGS[0];idx:number}) => {
           return <circle key={k} cx={cx} cy={cy} r={isEnd?3.5:1.8}
             fill={isEnd?d.color:"#64748b"} opacity={isEnd?1:0.4}/>;
         })}
-        {endKeys.map(k => {
+        {DB_ALL_KEYS.map(k => {
           const [cx,cy,lx,ly] = DB_VERTS[k];
-          return <text key={k} x={cx+lx} y={cy+ly} fill={d.color}
-            fontSize="9" fontFamily="monospace" fontWeight="bold">{k}</text>;
+          const isEnd = k===d.v1||k===d.v2;
+          return <text key={k} x={cx+lx} y={cy+ly}
+            fill={isEnd ? d.color : "rgba(255,255,255,0.3)"}
+            fontSize={isEnd ? "9.5" : "8"} fontFamily="monospace"
+            fontWeight={isEnd ? "bold" : "normal"}>{k}</text>;
         })}
-        <text x="100" y="151" fill={d.color} fontSize="10" fontFamily="monospace"
+        <text x="90" y="148" fill={d.color} fontSize="9.5" fontFamily="monospace"
           fontWeight="bold" textAnchor="middle">{d.key}</text>
       </svg>
       <p className="text-[9px] text-white/40 text-center leading-tight font-body">{d.face}</p>
@@ -773,7 +777,6 @@ const BalokRuangCard = ({d,idx}:{d:typeof ALL_DR_DIAGS[0];idx:number}) => {
   const aCls = `drc${idx}`;
   const [x1,y1] = DB_VERTS[d.v1];
   const [x2,y2] = DB_VERTS[d.v2];
-  const endKeys: DBVKey[] = [d.v1, d.v2];
   return (
     <div className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-3 flex flex-col items-center gap-1">
       <svg viewBox="0 0 200 154" className="w-full" aria-label={`Diagonal ruang ${d.key}`}>
@@ -783,12 +786,12 @@ const BalokRuangCard = ({d,idx}:{d:typeof ALL_DR_DIAGS[0];idx:number}) => {
             .${aCls}{animation:${aId} 1.8s ease-in-out infinite ${(idx*0.4).toFixed(1)}s;}
           `}</style>
         </defs>
-        <polygon points="22,138 132,138 132,52 22,52" fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
-        <polygon points="54,106 164,106 164,16 54,16"  fill="rgba(15,23,42,0.5)"  stroke="#475569" strokeWidth="1"/>
-        <line x1="22"  y1="138" x2="54"  y2="106" stroke="#475569" strokeWidth="1"/>
-        <line x1="132" y1="138" x2="164" y2="106" stroke="#475569" strokeWidth="1"/>
-        <line x1="22"  y1="52"  x2="54"  y2="16"  stroke="#475569" strokeWidth="1"/>
-        <line x1="132" y1="52"  x2="164" y2="16"  stroke="#475569" strokeWidth="1"/>
+        <polygon points="14,126 134,126 134,56 14,56"  fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
+        <polygon points="46,96 166,96 166,22 46,22"   fill="rgba(15,23,42,0.5)"  stroke="#475569" strokeWidth="1"/>
+        <line x1="14"  y1="126" x2="46"  y2="96"  stroke="#475569" strokeWidth="1"/>
+        <line x1="134" y1="126" x2="166" y2="96"  stroke="#475569" strokeWidth="1"/>
+        <line x1="14"  y1="56"  x2="46"  y2="22"  stroke="#475569" strokeWidth="1"/>
+        <line x1="134" y1="56"  x2="166" y2="22"  stroke="#475569" strokeWidth="1"/>
         <line x1={x1} y1={y1} x2={x2} y2={y2}
           stroke={d.color} strokeWidth="3.2" strokeLinecap="round"
           className={aCls}/>
@@ -798,12 +801,15 @@ const BalokRuangCard = ({d,idx}:{d:typeof ALL_DR_DIAGS[0];idx:number}) => {
           return <circle key={k} cx={cx} cy={cy} r={isEnd?4:2}
             fill={isEnd?d.color:"#64748b"} opacity={isEnd?1:0.4}/>;
         })}
-        {endKeys.map(k => {
+        {DB_ALL_KEYS.map(k => {
           const [cx,cy,lx,ly] = DB_VERTS[k];
-          return <text key={k} x={cx+lx} y={cy+ly} fill={d.color}
-            fontSize="10" fontFamily="monospace" fontWeight="bold">{k}</text>;
+          const isEnd = k===d.v1||k===d.v2;
+          return <text key={k} x={cx+lx} y={cy+ly}
+            fill={isEnd ? d.color : "rgba(255,255,255,0.3)"}
+            fontSize={isEnd ? "10" : "8.5"} fontFamily="monospace"
+            fontWeight={isEnd ? "bold" : "normal"}>{k}</text>;
         })}
-        <text x="100" y="151" fill={d.color} fontSize="11" fontFamily="monospace"
+        <text x="90" y="148" fill={d.color} fontSize="10.5" fontFamily="monospace"
           fontWeight="bold" textAnchor="middle">{d.key}</text>
       </svg>
       <p className="text-[9px] text-white/45 text-center leading-tight font-body">{d.label}</p>
