@@ -825,7 +825,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
     <div className="space-y-3">
       <div>
         <p className="text-cyan-300 font-semibold text-xs">Dua Pythagoras Limas Segitiga Beraturan</p>
-        <p className="text-white/50 text-[11px]">Kedua segitiga siku-siku terbentuk di pusat alas <span className="text-sky-300 font-semibold">E</span> tempat tinggi tegak lurus bidang alas.</p>
+        <p className="text-white/50 text-[11px]">Kedua segitiga siku-siku terbentuk di pusat alas <span className="text-sky-300 font-semibold">O</span> tempat tinggi tegak lurus bidang alas.</p>
       </div>
       <div className="grid md:grid-cols-2 gap-3">
 
@@ -865,7 +865,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <text x={A.x - 16} y={A.y + 6} fill="#e5e7eb" fontSize="9" fontFamily="monospace">A</text>
             <text x={B.x - 14} y={B.y + 4} fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
             <text x={C.x + 4} y={C.y + 4} fill="#f472b6" fontSize="9" fontFamily="monospace">C</text>
-            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">E</text>
+            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
             <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
             <text x={(O.x + C.x) / 2 - 2} y={(O.y + C.y) / 2 - 6} fill="#f472b6" fontSize="10" fontFamily="monospace">R</text>
             <text x={(T.x + C.x) / 2 + 4} y={(T.y + C.y) / 2} fill="#fb923c" fontSize="10" fontFamily="monospace">e</text>
@@ -914,7 +914,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <text x={A.x - 16} y={A.y + 6} fill="#e5e7eb" fontSize="9" fontFamily="monospace">A</text>
             <text x={B.x - 14} y={B.y + 4} fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
             <text x={C.x + 4} y={C.y + 4} fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
-            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">E</text>
+            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
             <text x={M.x + 4} y={M.y + 4} fill="#facc15" fontSize="9" fontFamily="monospace">F</text>
             <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
             <text x={(O.x + M.x) / 2 + 2} y={(O.y + M.y) / 2 + 8} fill="#facc15" fontSize="10" fontFamily="monospace">r</text>
@@ -1042,7 +1042,7 @@ const PythagorasLimasSegiempatOverview = () => (
         <text x="163" y="178" fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
         <text x="217" y="126" fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
         <text x="83" y="123" fill="#e5e7eb" fontSize="9" fontFamily="monospace">D</text>
-        <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">E</text>
+        <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
         <text x="192" y="144" fill="#fb923c" fontSize="9" fontFamily="monospace">F</text>
         <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
         <text x="164" y="90" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
@@ -1051,7 +1051,7 @@ const PythagorasLimasSegiempatOverview = () => (
       </svg>
       <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
         <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak (kanan), <span className="text-white/60 font-semibold">e</span> rusuk tegak T–C.</p>
-        <BlockMath math="EF=\frac{s}{2},\quad EC=\frac{s\sqrt{2}}{2}" />
+        <BlockMath math="OF=\frac{s}{2},\quad OC=\frac{s\sqrt{2}}{2}" />
         <BlockMath math="l^2=t^2+\left(\frac{s}{2}\right)^2" />
         <BlockMath math="e^2=t^2+\left(\frac{s\sqrt{2}}{2}\right)^2=t^2+\frac{s^2}{2}" />
         <BlockMath math="e^2=l^2+\left(\frac{s}{2}\right)^2" />
@@ -1064,8 +1064,8 @@ const PythagorasLimasSegiempatDiagonalSVG = () => (
     <div>
       <p className="text-pink-300 font-semibold text-xs">Limas Segiempat Beraturan — Pythagoras: Setengah Diagonal, Tinggi, dan Rusuk Tegak</p>
       <p className="text-white/45 text-[11px]">
-        Segitiga siku-siku T–E–A: tinggi limas <InlineMath math="t" />, setengah diagonal alas <InlineMath math="\tfrac{d}{2}=\tfrac{s\sqrt{2}}{2}" />, dan rusuk tegak <InlineMath math="e" />.
-        Sudut siku-siku berada di <strong className="text-sky-300">E</strong> (pusat alas).
+        Segitiga siku-siku T–O–A: tinggi limas <InlineMath math="t" />, setengah diagonal alas <InlineMath math="\tfrac{d}{2}=\tfrac{s\sqrt{2}}{2}" />, dan rusuk tegak <InlineMath math="e" />.
+        Sudut siku-siku berada di <strong className="text-sky-300">O</strong> (pusat alas).
       </p>
     </div>
     <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras setengah diagonal limas segiempat">
@@ -1104,7 +1104,7 @@ const PythagorasLimasSegiempatDiagonalSVG = () => (
       <text x="163" y="178" fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
       <text x="218" y="126" fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
       <text x="83" y="123" fill="#e5e7eb" fontSize="9" fontFamily="monospace">D</text>
-      <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">E</text>
+      <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
       <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
       <text x="70" y="163" fill="#f472b6" fontSize="10" fontFamily="monospace">d/2</text>
       <text x="76" y="95" fill="#fb923c" fontSize="10" fontFamily="monospace">e</text>
