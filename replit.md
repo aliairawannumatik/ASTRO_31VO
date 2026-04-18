@@ -161,6 +161,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ## Notes
 
+- Limas material updated on 2026-04-18: slides 3–5 now mirror Prisma's comparison format, showing interactive Limas Segitiga, Segiempat, and Segilima views for rusuk, sisi, and titik sudut.
 - Balok material updated on 2026-04-18: slide 10 now shows 10 larger net variations for cuboid nets.
 - Balok material updated on 2026-04-18: slide 1 uses uploaded real-object images with source attribution, and slide 8 now shows 6 separate ABCD.EFGH cuboids for the six diagonal planes with distinct colors and pulsing highlights.
 - Replit migration completed on 2026-04-18: dependencies installed and `.npmrc` set to `legacy-peer-deps=true` so npm preserves the app's existing React 18 dependency tree despite optional peer dependencies from transitive packages.

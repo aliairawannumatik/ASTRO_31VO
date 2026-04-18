@@ -163,6 +163,311 @@ const ThreeLimas = () => (
   </div>
 );
 
+const LIMAS_COMPARISON_COLORS = {
+  alas: "#22d3ee",
+  tegak: "#f97316",
+  sisiAlas: "#3b82f6",
+  sisiTegak: "#8b5cf6",
+  puncak: "#facc15",
+};
+
+type Limas2DPoint = [number, number];
+
+const limasNgon = (cx: number, cy: number, rx: number, ry: number, n: number): Limas2DPoint[] =>
+  Array.from({ length: n }, (_, i) => {
+    const start = n === 4 ? -Math.PI / 4 : -Math.PI / 2;
+    const a = start + (2 * Math.PI * i) / n;
+    return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)];
+  });
+
+const limasPoly = (pts: Limas2DPoint[]) => pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+
+const LIMAS_ITEMS = [
+  { n: 3, cx: 57, name: "Limas Segitiga", rusukLabel: "2×3 = 6 rusuk", sisiLabel: "3+1 = 4 sisi", titikLabel: "3+1 = 4 titik" },
+  { n: 4, cx: 170, name: "Limas Segiempat", rusukLabel: "2×4 = 8 rusuk", sisiLabel: "4+1 = 5 sisi", titikLabel: "4+1 = 5 titik" },
+  { n: 5, cx: 283, name: "Limas Segilima", rusukLabel: "2×5 = 10 rusuk", sisiLabel: "5+1 = 6 sisi", titikLabel: "5+1 = 6 titik" },
+];
+
+const StandingLimasRusuk = ({ n, cx, name, rusukLabel, phase }: { n: number; cx: number; name: string; rusukLabel: string; phase: number }) => {
+  const base = limasNgon(cx, 148, 31, 13, n);
+  const apex: Limas2DPoint = [cx, 42];
+  const showAlas = phase === 0 || phase === 2;
+  const showTegak = phase === 1 || phase === 2;
+  const opAlas = showAlas ? 1 : 0.18;
+  const opTegak = showTegak ? 1 : 0.18;
+  const swAlas = showAlas ? 3.2 : 1.4;
+  const swTegak = showTegak ? 3.2 : 1.4;
+
+  return (
+    <g>
+      {base.map((p, i) => {
+        const p2 = base[(i + 1) % n];
+        const fill = i % 2 === 0 ? "rgba(139,92,246,0.20)" : "rgba(59,130,246,0.16)";
+        return <polygon key={`face-${i}`} points={limasPoly([p, p2, apex])} fill={fill} stroke="rgba(100,116,139,0.35)" strokeWidth="0.6" />;
+      })}
+      <polygon points={limasPoly(base)} fill="rgba(15,23,42,0.65)" stroke="rgba(100,116,139,0.3)" strokeWidth="0.7" />
+      {base.map((p, i) => {
+        const p2 = base[(i + 1) % n];
+        return (
+          <line
+            key={`alas-${i}`}
+            x1={p[0].toFixed(1)} y1={p[1].toFixed(1)}
+            x2={p2[0].toFixed(1)} y2={p2[1].toFixed(1)}
+            stroke={LIMAS_COMPARISON_COLORS.alas}
+            strokeWidth={swAlas}
+            strokeOpacity={opAlas}
+            strokeLinecap="round"
+            className={showAlas ? "limas-rusuk-glow-alas" : ""}
+          />
+        );
+      })}
+      {base.map((p, i) => (
+        <line
+          key={`tegak-${i}`}
+          x1={p[0].toFixed(1)} y1={p[1].toFixed(1)}
+          x2={apex[0].toFixed(1)} y2={apex[1].toFixed(1)}
+          stroke={LIMAS_COMPARISON_COLORS.tegak}
+          strokeWidth={swTegak}
+          strokeOpacity={opTegak}
+          strokeLinecap="round"
+          className={showTegak ? "limas-rusuk-glow-tegak" : ""}
+        />
+      ))}
+      {[...base, apex].map(([x, y], i) => <circle key={`v-${i}`} cx={x.toFixed(1)} cy={y.toFixed(1)} r="2.2" fill="#cbd5e1" opacity="0.7" />)}
+      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0" fontFamily="sans-serif" fontWeight="bold">{name}</text>
+      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="monospace">{rusukLabel}</text>
+    </g>
+  );
+};
+
+const StandingLimasSisi = ({ n, cx, name, sisiLabel, phase }: { n: number; cx: number; name: string; sisiLabel: string; phase: number }) => {
+  const base = limasNgon(cx, 148, 31, 13, n);
+  const apex: Limas2DPoint = [cx, 42];
+  const showAlas = phase === 0 || phase === 2;
+  const showTegak = phase === 1 || phase === 2;
+  const opAlas = showAlas ? 0.85 : 0.10;
+  const opTegak = showTegak ? 0.72 : 0.10;
+  const strokeAlas = showAlas ? LIMAS_COMPARISON_COLORS.sisiAlas : "#334155";
+  const strokeTegak = showTegak ? LIMAS_COMPARISON_COLORS.sisiTegak : "#334155";
+
+  return (
+    <g>
+      {base.map((p, i) => {
+        const p2 = base[(i + 1) % n];
+        return (
+          <polygon
+            key={`tegak-${i}`}
+            points={limasPoly([p, p2, apex])}
+            fill={LIMAS_COMPARISON_COLORS.sisiTegak}
+            fillOpacity={opTegak}
+            stroke={strokeTegak}
+            strokeWidth={showTegak ? 1.3 : 0.6}
+            className={showTegak ? "limas-sisi-glow-tegak" : ""}
+          />
+        );
+      })}
+      <polygon
+        points={limasPoly(base)}
+        fill={LIMAS_COMPARISON_COLORS.sisiAlas}
+        fillOpacity={opAlas}
+        stroke={strokeAlas}
+        strokeWidth={showAlas ? 1.5 : 0.6}
+        className={showAlas ? "limas-sisi-glow-alas" : ""}
+      />
+      {[...base, apex].map(([x, y], i) => <circle key={`v-${i}`} cx={x.toFixed(1)} cy={y.toFixed(1)} r="2" fill="#cbd5e1" opacity="0.6" />)}
+      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0" fontFamily="sans-serif" fontWeight="bold">{name}</text>
+      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="monospace">{sisiLabel}</text>
+    </g>
+  );
+};
+
+const StandingLimasTitik = ({ n, cx, name, titikLabel, phase }: { n: number; cx: number; name: string; titikLabel: string; phase: number }) => {
+  const base = limasNgon(cx, 148, 31, 13, n);
+  const apex: Limas2DPoint = [cx, 42];
+  const showAlas = phase === 0 || phase === 2;
+  const showPuncak = phase === 1 || phase === 2;
+
+  return (
+    <g>
+      {base.map((p, i) => <polygon key={`face-${i}`} points={limasPoly([p, base[(i + 1) % n], apex])} fill="rgba(51,65,85,0.30)" stroke="rgba(100,116,139,0.28)" strokeWidth="0.5" />)}
+      <polygon points={limasPoly(base)} fill="rgba(15,23,42,0.55)" stroke="#334155" strokeWidth="0.8" />
+      {base.map((p, i) => (
+        <line key={`e-${i}`} x1={p[0].toFixed(1)} y1={p[1].toFixed(1)} x2={apex[0].toFixed(1)} y2={apex[1].toFixed(1)} stroke="#334155" strokeWidth="0.8" />
+      ))}
+      {base.map(([x, y], i) => (
+        <circle
+          key={`alas-${i}`}
+          cx={x.toFixed(1)}
+          cy={y.toFixed(1)}
+          r={showAlas ? 5.5 : 2.5}
+          fill={LIMAS_COMPARISON_COLORS.alas}
+          opacity={showAlas ? 1 : 0.18}
+          className={showAlas ? "limas-titik-glow-alas" : ""}
+          style={{ animationDelay: `${i * 0.12}s` }}
+        />
+      ))}
+      <circle
+        cx={apex[0].toFixed(1)}
+        cy={apex[1].toFixed(1)}
+        r={showPuncak ? 6 : 2.8}
+        fill={LIMAS_COMPARISON_COLORS.puncak}
+        opacity={showPuncak ? 1 : 0.18}
+        className={showPuncak ? "limas-titik-glow-puncak" : ""}
+      />
+      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0" fontFamily="sans-serif" fontWeight="bold">{name}</text>
+      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="monospace">{titikLabel}</text>
+    </g>
+  );
+};
+
+const LimasComparisonFrame = ({
+  phases,
+  phase,
+  setPhase,
+  auto,
+  setAuto,
+  children,
+  caption,
+}: {
+  phases: { key: string; label: string; color: string; desc: string }[];
+  phase: number;
+  setPhase: (phase: number) => void;
+  auto: boolean;
+  setAuto: (auto: boolean) => void;
+  children: React.ReactNode;
+  caption: string;
+}) => {
+  const current = phases[phase];
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-1.5 justify-center">
+        {phases.map((p, i) => (
+          <button
+            key={p.key}
+            onClick={() => { setPhase(i); setAuto(false); }}
+            className="text-xs font-bold py-1.5 px-2.5 rounded-lg border transition-all duration-200 font-body"
+            style={{
+              borderColor: p.color,
+              color: phase === i ? "#0f172a" : p.color,
+              backgroundColor: phase === i ? p.color : "transparent",
+              opacity: phase === i ? 1 : 0.55,
+            }}
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
+        <svg viewBox="0 0 340 218" className="w-full" style={{ maxHeight: 245 }}>
+          <defs>
+            <style>{`
+              @keyframes limasRusukAlas{0%,100%{filter:drop-shadow(0 0 5px ${LIMAS_COMPARISON_COLORS.alas}) drop-shadow(0 0 10px ${LIMAS_COMPARISON_COLORS.alas});}50%{filter:drop-shadow(0 0 1px ${LIMAS_COMPARISON_COLORS.alas});}}
+              @keyframes limasRusukTegak{0%,100%{filter:drop-shadow(0 0 5px ${LIMAS_COMPARISON_COLORS.tegak}) drop-shadow(0 0 10px ${LIMAS_COMPARISON_COLORS.tegak});}50%{filter:drop-shadow(0 0 1px ${LIMAS_COMPARISON_COLORS.tegak});}}
+              @keyframes limasSisiAlas{0%,100%{filter:drop-shadow(0 0 6px ${LIMAS_COMPARISON_COLORS.sisiAlas}) drop-shadow(0 0 12px ${LIMAS_COMPARISON_COLORS.sisiAlas});}50%{filter:drop-shadow(0 0 1px ${LIMAS_COMPARISON_COLORS.sisiAlas});}}
+              @keyframes limasSisiTegak{0%,100%{filter:drop-shadow(0 0 6px ${LIMAS_COMPARISON_COLORS.sisiTegak}) drop-shadow(0 0 12px ${LIMAS_COMPARISON_COLORS.sisiTegak});}50%{filter:drop-shadow(0 0 1px ${LIMAS_COMPARISON_COLORS.sisiTegak});}}
+              @keyframes limasTitikAlas{0%,100%{filter:drop-shadow(0 0 5px ${LIMAS_COMPARISON_COLORS.alas}) drop-shadow(0 0 10px ${LIMAS_COMPARISON_COLORS.alas});}50%{filter:drop-shadow(0 0 1px ${LIMAS_COMPARISON_COLORS.alas});}}
+              @keyframes limasTitikPuncak{0%,100%{filter:drop-shadow(0 0 5px ${LIMAS_COMPARISON_COLORS.puncak}) drop-shadow(0 0 10px ${LIMAS_COMPARISON_COLORS.puncak});}50%{filter:drop-shadow(0 0 1px ${LIMAS_COMPARISON_COLORS.puncak});}}
+              .limas-rusuk-glow-alas{animation:limasRusukAlas 1.6s ease-in-out infinite;}
+              .limas-rusuk-glow-tegak{animation:limasRusukTegak 1.6s ease-in-out infinite 0.3s;}
+              .limas-sisi-glow-alas{animation:limasSisiAlas 1.8s ease-in-out infinite;}
+              .limas-sisi-glow-tegak{animation:limasSisiTegak 1.8s ease-in-out infinite 0.4s;}
+              .limas-titik-glow-alas{animation:limasTitikAlas 1.6s ease-in-out infinite;}
+              .limas-titik-glow-puncak{animation:limasTitikPuncak 1.6s ease-in-out infinite 0.5s;}
+            `}</style>
+          </defs>
+          <line x1="113.5" y1="5" x2="113.5" y2="160" stroke="#1e293b" strokeWidth="1" />
+          <line x1="226.5" y1="5" x2="226.5" y2="160" stroke="#1e293b" strokeWidth="1" />
+          {children}
+          <text x="170" y="213" textAnchor="middle" fontSize="8" fill="#facc15" fontFamily="monospace">
+            {caption}
+          </text>
+        </svg>
+      </div>
+      <div
+        className="rounded-lg px-4 py-2.5 text-xs font-body border flex items-start gap-2"
+        style={{ borderColor: `${current.color}50`, backgroundColor: `${current.color}12` }}
+      >
+        <span className="font-bold whitespace-nowrap mt-0.5" style={{ color: current.color }}>
+          {current.label}
+        </span>
+        <span className="text-white/60">— {current.desc}</span>
+      </div>
+      <button
+        onClick={() => setAuto(!auto)}
+        className="w-full text-xs font-body py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all"
+      >
+        {auto ? "⏸ Berhenti otomatis" : "▶ Putar otomatis"}
+      </button>
+    </div>
+  );
+};
+
+const RusukTigaLimasAnimation = () => {
+  const phases = [
+    { key: "alas", label: "Rusuk Alas", color: LIMAS_COMPARISON_COLORS.alas, desc: "rusuk-rusuk yang membentuk alas limas" },
+    { key: "tegak", label: "Rusuk Tegak", color: LIMAS_COMPARISON_COLORS.tegak, desc: "rusuk dari setiap titik alas menuju satu titik puncak" },
+    { key: "all", label: "Semua Rusuk", color: "#a78bfa", desc: "total rusuk limas = 2 × n  (n = banyak sisi alas)" },
+  ];
+  const [phase, setPhase] = useState(0);
+  const [auto, setAuto] = useState(true);
+
+  useEffect(() => {
+    if (!auto) return;
+    const id = setInterval(() => setPhase(p => (p + 1) % phases.length), 2000);
+    return () => clearInterval(id);
+  }, [auto, phases.length]);
+
+  return (
+    <LimasComparisonFrame phases={phases} phase={phase} setPhase={setPhase} auto={auto} setAuto={setAuto} caption="Tidak ada rusuk atas/tutup  ·  Rusuk Limas = 2n">
+      {LIMAS_ITEMS.map(item => <StandingLimasRusuk key={item.n} {...item} phase={phase} />)}
+    </LimasComparisonFrame>
+  );
+};
+
+const SisiTigaLimasAnimation = () => {
+  const phases = [
+    { key: "alas", label: "Sisi Alas", color: LIMAS_COMPARISON_COLORS.sisiAlas, desc: "satu bidang alas berbentuk segi-n" },
+    { key: "tegak", label: "Sisi Tegak Segitiga", color: LIMAS_COMPARISON_COLORS.sisiTegak, desc: "n sisi tegak berbentuk segitiga yang bertemu di puncak" },
+    { key: "all", label: "Semua Sisi", color: "#a78bfa", desc: "total sisi limas = n + 1  (1 alas + n segitiga)" },
+  ];
+  const [phase, setPhase] = useState(0);
+  const [auto, setAuto] = useState(true);
+
+  useEffect(() => {
+    if (!auto) return;
+    const id = setInterval(() => setPhase(p => (p + 1) % phases.length), 2200);
+    return () => clearInterval(id);
+  }, [auto, phases.length]);
+
+  return (
+    <LimasComparisonFrame phases={phases} phase={phase} setPhase={setPhase} auto={auto} setAuto={setAuto} caption="1 alas + n sisi segitiga  ·  Sisi Limas = n + 1">
+      {LIMAS_ITEMS.map(item => <StandingLimasSisi key={item.n} {...item} phase={phase} />)}
+    </LimasComparisonFrame>
+  );
+};
+
+const TitikSudutTigaLimasAnimation = () => {
+  const phases = [
+    { key: "alas", label: "Titik Sudut Alas", color: LIMAS_COMPARISON_COLORS.alas, desc: "titik-titik sudut yang membentuk alas" },
+    { key: "puncak", label: "Titik Puncak", color: LIMAS_COMPARISON_COLORS.puncak, desc: "satu titik tempat semua sisi tegak bertemu" },
+    { key: "all", label: "Semua Titik Sudut", color: "#a78bfa", desc: "total titik sudut limas = n + 1" },
+  ];
+  const [phase, setPhase] = useState(0);
+  const [auto, setAuto] = useState(true);
+
+  useEffect(() => {
+    if (!auto) return;
+    const id = setInterval(() => setPhase(p => (p + 1) % phases.length), 2200);
+    return () => clearInterval(id);
+  }, [auto, phases.length]);
+
+  return (
+    <LimasComparisonFrame phases={phases} phase={phase} setPhase={setPhase} auto={auto} setAuto={setAuto} caption="n titik alas + 1 titik puncak  ·  T. Sudut Limas = n + 1">
+      {LIMAS_ITEMS.map(item => <StandingLimasTitik key={item.n} {...item} phase={phase} />)}
+    </LimasComparisonFrame>
+  );
+};
+
 /* ─────────────────────────────────────────────────────────────
    INTERACTIVE LIMAS 3D — drag to rotate, click net button
 ───────────────────────────────────────────────────────────── */
@@ -1311,18 +1616,14 @@ const slides: Slide[] = [
     icon: "⬛",
     title: "Unsur — Rusuk Limas",
     content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <p className="text-white/65 text-xs">Fokus pada <strong className="text-white">Limas Segiempat T.ABCD</strong> sebagai model utama.</p>
-        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3">
-          <p className="text-cyan-300 font-semibold text-xs mb-2">1. Rusuk (8 buah)</p>
-          <RusukLimasSVG />
-          <div className="mt-2 space-y-1 text-xs text-white/70">
-            <p>• <strong className="text-cyan-300">Rusuk alas (4):</strong> AB, BC, CD, DA — membentuk persegi/persegi panjang</p>
-            <p>• <strong className="text-orange-300">Rusuk tegak (4):</strong> TA, TB, TC, TD — menghubungkan alas ke puncak</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
-              <BlockMath math="\text{Jumlah rusuk} = 2n = 2 \times 4 = 8" />
-            </div>
-          </div>
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-4">
+          <p className="text-cyan-300 font-semibold mb-1">🎬 Perbandingan Rusuk — 3 Jenis Limas</p>
+          <p className="text-xs text-white/55 mb-3 font-body">
+            Perhatikan: limas hanya memiliki <strong className="text-cyan-300">rusuk alas</strong> dan <strong className="text-orange-300">rusuk tegak</strong>.
+            Tidak ada rusuk atas/tutup seperti pada prisma karena semua rusuk tegak bertemu di satu puncak.
+          </p>
+          <RusukTigaLimasAnimation />
         </div>
       </div>
     ),
@@ -1331,16 +1632,20 @@ const slides: Slide[] = [
     icon: "⬜",
     title: "Unsur — Sisi Limas",
     content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-green-700/30 rounded-lg p-3">
-          <p className="text-green-300 font-semibold text-xs mb-2">2. Sisi / Bidang (5 buah)</p>
-          <SisiLimasSVG />
-          <div className="mt-2 space-y-1 text-xs text-white/70">
-            <p>• <strong className="text-blue-300">Sisi alas (1):</strong> ABCD — berbentuk persegi/persegi panjang</p>
-            <p>• <strong className="text-purple-300">Sisi tegak (4):</strong> TAB, TBC, TCD, TDA — semuanya berbentuk segitiga</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
-              <BlockMath math="\text{Jumlah sisi} = n + 1 = 4 + 1 = 5" />
-            </div>
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-green-700/40 rounded-xl p-4">
+          <p className="text-green-300 font-semibold mb-1">🎬 Perbandingan Sisi — 3 Jenis Limas</p>
+          <p className="text-xs text-white/55 mb-3 font-body">
+            Perhatikan kelompok sisi pada tiap limas.
+            Tekan tombol untuk melihat <strong className="text-blue-300">Sisi Alas</strong> atau <strong className="text-violet-300">Sisi Tegak Segitiga</strong>!
+          </p>
+          <SisiTigaLimasAnimation />
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4 text-xs text-white/70 space-y-1">
+          <p>• <strong className="text-blue-300">1 sisi alas</strong>: bentuknya mengikuti nama limas</p>
+          <p>• <strong className="text-violet-300">n sisi tegak</strong>: semuanya berbentuk segitiga dan bertemu di puncak</p>
+          <div className="bg-slate-700/60 rounded p-2 mt-2">
+            <BlockMath math="\text{Jumlah sisi} = n + 1" />
           </div>
         </div>
       </div>
@@ -1351,12 +1656,19 @@ const slides: Slide[] = [
     title: "Unsur — Titik Sudut & Tabel",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3">
-          <p className="text-orange-300 font-semibold text-xs mb-2">3. Titik Sudut (5 buah)</p>
-          <TitikSudutLimasSVG />
-          <p className="text-white/65 text-xs">Empat titik sudut alas (A, B, C, D) dan satu <strong className="text-yellow-300">titik puncak T</strong>.</p>
+        <div className="bg-slate-800/60 border border-yellow-700/40 rounded-xl p-4">
+          <p className="text-yellow-300 font-semibold mb-1">🎬 Perbandingan Titik Sudut — 3 Jenis Limas</p>
+          <p className="text-xs text-white/55 mb-3 font-body">
+            Perhatikan titik sudut pada tiap limas.
+            Tekan tombol untuk melihat <strong className="text-cyan-300">Titik Sudut Alas</strong> atau <strong className="text-yellow-300">Titik Puncak</strong>!
+          </p>
+          <TitikSudutTigaLimasAnimation />
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <p>• <strong className="text-cyan-300">n titik sudut alas</strong> membentuk bangun alas</p>
+          <p>• <strong className="text-yellow-300">1 titik puncak</strong> menjadi tempat semua sisi tegak bertemu</p>
           <div className="bg-slate-700/60 rounded p-2 mt-2">
-            <BlockMath math="\text{Titik sudut} = n + 1 = 4 + 1 = 5" />
+            <BlockMath math="\text{Titik sudut} = n + 1" />
           </div>
         </div>
         <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs text-violet-200 space-y-1">
