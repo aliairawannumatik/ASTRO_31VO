@@ -1441,56 +1441,85 @@ const slides: Slide[] = [
 ───────────────────────────────────────────────────────────── */
 export default function GabunganPage() {
   const navigate = useNavigate();
-  const [slide, setSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const total = slides.length;
 
+  const goNext = () => { playPopSound(); setCurrentSlide(s => Math.min(s + 1, total - 1)); };
+  const goPrev = () => { playPopSound(); setCurrentSlide(s => Math.max(s - 1, 0)); };
+
+  const slide = slides[currentSlide];
+
   return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
-      <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Header */}
-        <header className="px-4 pt-6 pb-2 flex items-center gap-3">
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+
+        {/* Title */}
+        <Layers className="w-10 h-10 text-violet-400 mx-auto mb-3" />
+        <h1 className="font-display text-lg md:text-2xl font-bold text-violet-300 text-glow-cyan mb-1 text-center">
+          BANGUN RUANG GABUNGAN
+        </h1>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Bangun Ruang Sisi Datar</p>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { playPopSound(); setCurrentSlide(i); }}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                i === currentSlide
+                  ? "w-6 h-2.5 bg-violet-400"
+                  : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Slide card */}
+        <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+            <span className="text-2xl">{slide.icon}</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+                Slide {currentSlide + 1} / {total}
+              </p>
+              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+            </div>
+          </div>
+          <div className="px-5 py-5">{slide.content}</div>
+        </div>
+
+        {/* Navigation buttons */}
+        <div className="flex items-center justify-between gap-3 mb-6">
           <button
-            onClick={() => navigate(-1)}
-            className="p-2 rounded-full bg-card/60 border border-border hover:bg-card transition-colors cursor-pointer"
+            onClick={goPrev}
+            disabled={currentSlide === 0}
+            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display
+              text-white/70 hover:text-white hover:border-violet-400/60 hover:bg-violet-400/10
+              disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
           >
-            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
+            ← Sebelumnya
           </button>
-          <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-violet-500/20 border border-violet-500/30">
-              <Layers className="w-5 h-5 text-violet-400" />
-            </div>
-            <div>
-              <h1 className="text-base font-bold font-display text-white leading-tight">Bangun Ruang Gabungan</h1>
-              <p className="text-xs text-muted-foreground font-body">Kelas 8 · Bangun Ruang Sisi Datar</p>
-            </div>
-          </div>
-        </header>
+          <button
+            onClick={goNext}
+            disabled={currentSlide === total - 1}
+            className="flex-1 py-2.5 rounded-lg border border-violet-400/60 bg-violet-400/15 text-sm font-semibold font-display
+              text-violet-300 hover:bg-violet-400/25 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+          >
+            Selanjutnya →
+          </button>
+        </div>
 
-        {/* Slide area */}
-        <main className="flex-1 px-4 py-3 flex flex-col gap-3">
-          {/* Slide card */}
-          <div className="bg-card/70 border border-border rounded-2xl overflow-hidden shadow-xl">
-            <div className="px-5 py-3 border-b border-border/50 flex items-center gap-2 bg-slate-800/60">
-              <span className="text-xl">{slides[slide].icon}</span>
-              <h2 className="text-sm font-bold font-display text-white">{slides[slide].title}</h2>
-              <span className="ml-auto text-xs text-muted-foreground font-body">{slide + 1}/{total}</span>
-            </div>
-            <div className="px-5 py-4 overflow-y-auto max-h-[60vh]">
-              {slides[slide].content}
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <PageNavigation
-            current={slide}
-            total={total}
-            onPrev={() => { playPopSound(); setSlide(s => Math.max(0, s - 1)); }}
-            onNext={() => { playPopSound(); setSlide(s => Math.min(total - 1, s + 1)); }}
-          />
-        </main>
+        <div className="mt-2 text-center">
+          <button
+            onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/bangun-ruang-sisi-datar"); }}
+            className="text-sm text-muted-foreground hover:text-violet-300 transition-colors cursor-pointer font-body"
+          >
+            ← Kembali ke Bangun Ruang Sisi Datar
+          </button>
+        </div>
       </div>
     </div>
   );
