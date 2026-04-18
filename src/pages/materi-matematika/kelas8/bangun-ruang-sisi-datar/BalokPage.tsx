@@ -653,6 +653,38 @@ const DiagBidangSVG = () => (
   </svg>
 );
 
+const TitikSudutBalokSVG = () => (
+  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Titik sudut balok ABCD.EFGH">
+    <defs>
+      <style>{`@keyframes tsB{0%,100%{r:4;opacity:0.9;}50%{r:6;opacity:0.5;}} .tsb{animation:tsB 1.8s ease-in-out infinite;}`}</style>
+    </defs>
+    {/* Wireframe */}
+    <polygon points="30,70 170,70 170,170 30,170" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1.2"/>
+    <polygon points="70,30 210,30 210,130 70,130" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="30" y1="70" x2="70" y2="30" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="170" y1="70" x2="210" y2="30" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="30" y1="170" x2="70" y2="130" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="170" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
+    {/* Dashed hidden edges */}
+    <line x1="70" y1="130" x2="70" y2="30"  stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
+    <line x1="70" y1="130" x2="210" y2="130" stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
+    <line x1="70" y1="30"  x2="30" y2="70"  stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
+    {/* Vertex dots */}
+    {([[30,170],[170,170],[210,130],[70,130],[30,70],[170,70],[210,30],[70,30]] as [number,number][]).map(([x,y],i)=>(
+      <circle key={i} cx={x} cy={y} r={4} fill="#facc15" className="tsb" style={{animationDelay:`${i*0.22}s`}}/>
+    ))}
+    {/* Labels */}
+    <text x="16"  y="182" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="173" y="182" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="213" y="135" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="55"  y="135" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="16"  y="65"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">E</text>
+    <text x="173" y="65"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">F</text>
+    <text x="213" y="28"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">G</text>
+    <text x="55"  y="28"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">H</text>
+  </svg>
+);
+
 const DiagRuangSVG = () => (
   <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Diagonal ruang balok">
     <defs>
@@ -835,6 +867,48 @@ const VolumeBalokSVG = () => {
     </svg>
   );
 };
+
+/* ─────────────────────────────────────────────────────────────
+   BIDANG DIAGONAL BALOK — 3 types, 2 each = 6 total
+───────────────────────────────────────────────────────────── */
+const BidangDiagonalBalokSVG = () => (
+  <div className="grid grid-cols-1 gap-3">
+    {[
+      { label:"Tipe 1: ABGH & DCEF", color:"#22d3ee", dims:"p × √(l²+t²)", count:"2 buah",
+        pts:"30,170 170,170 210,30 70,30", stroke:"#22d3ee" },
+      { label:"Tipe 2: ADFG & BCEH", color:"#4ade80", dims:"l × √(p²+t²)", count:"2 buah",
+        pts:"30,170 70,130 210,30 170,70", stroke:"#4ade80" },
+      { label:"Tipe 3: ACGE & BDHF", color:"#f97316", dims:"t × √(p²+l²)", count:"2 buah",
+        pts:"30,70 170,170 210,130 70,30", stroke:"#f97316" },
+    ].map(({ label, color, dims, count, pts, stroke }) => (
+      <div key={label} className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-3">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-semibold" style={{ color }}>{label}</span>
+          <span className="text-[10px] text-white/50 font-body">{count}</span>
+        </div>
+        <div className="flex gap-4 items-center">
+          <svg viewBox="0 0 240 175" className="w-32 flex-shrink-0">
+            {/* Wireframe */}
+            <polygon points="30,70 170,70 170,170 30,170" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1"/>
+            <polygon points="70,30 210,30 210,130 70,130" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1"/>
+            <line x1="30" y1="70" x2="70" y2="30" stroke="#334155" strokeWidth="1"/>
+            <line x1="170" y1="70" x2="210" y2="30" stroke="#334155" strokeWidth="1"/>
+            <line x1="30" y1="170" x2="70" y2="130" stroke="#334155" strokeWidth="1"/>
+            <line x1="170" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1"/>
+            <line x1="70" y1="130" x2="70" y2="30" stroke="#475569" strokeWidth="0.7" strokeDasharray="3,2"/>
+            <line x1="70" y1="130" x2="210" y2="130" stroke="#475569" strokeWidth="0.7" strokeDasharray="3,2"/>
+            {/* Diagonal plane highlight */}
+            <polygon points={pts} fill={stroke} fillOpacity={0.18} stroke={stroke} strokeWidth="1.8" strokeDasharray="5,3"/>
+          </svg>
+          <div className="text-xs text-white/70 space-y-1">
+            <p>Luas bidang:</p>
+            <p className="font-mono" style={{ color }}>{dims}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
 /* ─────────────────────────────────────────────────────────────
    VOLUME BALOK — animated water-fill visualization
@@ -1387,6 +1461,98 @@ const volExamples: Ex[] = [
   },
 ];
 
+const kerangkaExamples: Ex[] = [
+  {
+    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah kerangka balok dibuat dari kawat dengan ukuran panjang <InlineMath math="12\text{ cm}" />, lebar <InlineMath math="8\text{ cm}" />, dan tinggi <InlineMath math="5\text{ cm}" />.</p>
+        <p>Berapa total panjang kawat yang diperlukan?</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-2 text-sm font-body">
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs">
+          <BlockMath math="K = 4(p + l + t)" />
+          <BlockMath math="K = 4(12 + 8 + 5) = 4 \times 25 = 100\text{ cm}" />
+        </div>
+        <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+          <p className="text-green-300 font-semibold text-xs">✅ Panjang kawat = <strong className="text-yellow-300">100 cm</strong></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah kerangka balok dibuat dari kawat sepanjang <InlineMath math="120\text{ cm}" />.</p>
+        <p>Diketahui panjang <InlineMath math="= 15\text{ cm}" /> dan lebar <InlineMath math="= 8\text{ cm}" />.</p>
+        <p>Tentukan tinggi balok dan luas permukaannya!</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-yellow-400 font-semibold text-xs">Langkah 1 — Cari tinggi dari panjang kawat:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs">
+          <BlockMath math="4(15 + 8 + t) = 120" />
+          <BlockMath math="23 + t = 30 \Rightarrow t = 7\text{ cm}" />
+        </div>
+        <p className="text-yellow-400 font-semibold text-xs">Langkah 2 — Hitung luas permukaan:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="L = 2(pl + pt + lt) = 2(15\times8 + 15\times7 + 8\times7)" />
+          <BlockMath math="= 2(120 + 105 + 56) = 2 \times 281 = 562\text{ cm}^2" />
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs space-y-0.5">
+          <p className="text-yellow-300 font-semibold">✅ Jawaban:</p>
+          <p className="text-white/80">• t = <strong className="text-yellow-300">7 cm</strong></p>
+          <p className="text-white/80">• L = <strong className="text-yellow-300">562 cm²</strong></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Ukuran panjang, lebar, dan tinggi sebuah balok berbanding <InlineMath math="3 : 2 : 1" />.</p>
+        <p>Jika total panjang kawat untuk kerangkanya adalah <InlineMath math="144\text{ cm}" />, tentukan:</p>
+        <p>(a) Panjang, lebar, dan tinggi balok</p>
+        <p>(b) Luas permukaan dan volume balok</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-red-400 font-semibold text-xs">Langkah 1 — Misalkan p=3x, l=2x, t=x:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="4(3x + 2x + x) = 144" />
+          <BlockMath math="4 \times 6x = 144 \Rightarrow 24x = 144 \Rightarrow x = 6" />
+        </div>
+        <p className="text-red-400 font-semibold text-xs">(a) Dimensi balok:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-0.5">
+          <p className="text-white/80">• p = 3 × 6 = <strong className="text-yellow-300">18 cm</strong></p>
+          <p className="text-white/80">• l = 2 × 6 = <strong className="text-yellow-300">12 cm</strong></p>
+          <p className="text-white/80">• t = 1 × 6 = <strong className="text-yellow-300">6 cm</strong></p>
+        </div>
+        <p className="text-red-400 font-semibold text-xs">(b) Luas permukaan dan volume:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="L = 2(18\times12 + 18\times6 + 12\times6) = 2(216+108+72) = 792\text{ cm}^2" />
+          <BlockMath math="V = 18 \times 12 \times 6 = 1.296\text{ cm}^3" />
+        </div>
+        <div className="bg-red-950/60 border border-red-700/40 rounded p-2 text-xs space-y-0.5">
+          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+          <p className="text-white/80">• Dimensi: <strong className="text-yellow-300">18 cm × 12 cm × 6 cm</strong></p>
+          <p className="text-white/80">• Luas permukaan: <strong className="text-yellow-300">792 cm²</strong></p>
+          <p className="text-white/80">• Volume: <strong className="text-yellow-300">1.296 cm³</strong></p>
+        </div>
+        <div className="bg-cyan-950/40 border border-cyan-700/30 rounded p-2 text-xs text-cyan-200">
+          💡 <strong>Cek:</strong> <InlineMath math="4(18+12+6) = 4 \times 36 = 144\text{ cm}" /> ✓
+        </div>
+      </div>
+    ),
+  },
+];
+
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD
 ───────────────────────────────────────────────────────────── */
@@ -1413,157 +1579,284 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 };
 
 /* ─────────────────────────────────────────────────────────────
-   SLIDES DATA
+   SLIDES DATA — 16 slides
 ───────────────────────────────────────────────────────────── */
 type Slide = { icon: string; title: string; content: React.ReactNode };
 
 const slides: Slide[] = [
+  /* ── 1. PENGANTAR ─────────────────────────────── */
   {
-    icon: "📦",
+    icon: "🎯",
     title: "Pengantar",
     content: (
-      <div className="text-sm font-body text-white/75 leading-relaxed space-y-3">
+      <div className="space-y-4 font-body">
         <SimpleRotatingBalok />
-        <p>
-          Dari kotak sepatu hingga lemari, kulkas, dan aquarium — balok ada di mana-mana dalam kehidupan kita!
-          Pelajari semua tentang <strong className="text-cyan-300">balok</strong> — mulai dari unsur-unsurnya,
-          jaring-jaring interaktif 3D, hingga cara menghitung{" "}
-          <strong className="text-yellow-300">luas permukaan</strong> dan{" "}
-          <strong className="text-green-300">volume</strong>-nya.
-        </p>
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
-          <p className="text-cyan-300 font-semibold mb-1">📋 Materi dalam bab ini:</p>
-          <p>• Definisi &amp; sifat balok</p>
-          <p>• Unsur-unsur: rusuk, sisi, titik sudut, diagonal</p>
-          <p>• Jaring-jaring interaktif 3D</p>
-          <p>• Luas permukaan dan volume</p>
-          <p>• Contoh soal bertingkat</p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    icon: "📦",
-    title: "Definisi Balok",
-    content: sections[0].content,
-  },
-  {
-    icon: "⬛",
-    title: "Unsur — Rusuk Balok",
-    content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-cyan-300 font-semibold mb-2">⬛ Rusuk Balok (12 rusuk)</p>
-          <RusukBalokSVG />
-          <div className="text-xs text-white/70 space-y-1 mt-2">
-            <p>• <strong className="text-cyan-300">4 rusuk panjang (p):</strong> rusuk sejajar arah panjang</p>
-            <p>• <strong className="text-orange-300">4 rusuk lebar (l):</strong> rusuk sejajar arah lebar</p>
-            <p>• <strong className="text-yellow-300">4 rusuk tinggi (t):</strong> rusuk sejajar arah tinggi</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
-              <BlockMath math="K = 4(p + l + t)" />
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    icon: "⬜",
-    title: "Unsur — Sisi Balok",
-    content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-green-300 font-semibold mb-2">⬜ Sisi Balok (6 sisi, 3 pasang)</p>
-          <SisiBalokSVG />
-          <div className="text-xs text-white/70 space-y-1 mt-2">
-            <p>• 2 sisi <strong className="text-blue-300">DEPAN &amp; BELAKANG</strong>: berukuran p × t</p>
-            <p>• 2 sisi <strong className="text-green-300">KIRI &amp; KANAN</strong>: berukuran l × t</p>
-            <p>• 2 sisi <strong className="text-yellow-300">ATAS &amp; BAWAH</strong>: berukuran p × l</p>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    icon: "●",
-    title: "Unsur — Titik Sudut",
-    content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-yellow-300 font-semibold mb-2">● Titik Sudut (8 titik)</p>
-          <p className="text-xs text-white/70">
-            Setiap sudut balok adalah pertemuan 3 rusuk yang saling tegak lurus. Total 8 titik sudut — sama seperti kubus.
+        <div className="bg-card/60 border border-border rounded-xl p-4 text-sm text-white/75 leading-relaxed">
+          <p>
+            Dari lemari hingga kulkas, buku, dan bata — balok ada di mana-mana!
+            Pelajari semua tentang <strong className="text-cyan-300">balok</strong> — mulai dari unsur-unsurnya,
+            jaring-jaring interaktif 3D, hingga cara menghitung{" "}
+            <strong className="text-yellow-300">luas permukaan</strong> dan{" "}
+            <strong className="text-green-300">volume</strong>-nya.
           </p>
         </div>
-        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p className="text-cyan-300 font-semibold">📋 Ringkasan Unsur Balok:</p>
-          <p>• Rusuk: <strong className="text-yellow-300">12</strong> (3 kelompok × 4)</p>
-          <p>• Sisi: <strong className="text-yellow-300">6</strong> (3 pasang)</p>
-          <p>• Titik sudut: <strong className="text-yellow-300">8</strong></p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    icon: "↗",
-    title: "Unsur — Diagonal Bidang",
-    content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-orange-300 font-semibold mb-2">↗ Diagonal Bidang (12 diagonal)</p>
-          <DiagBidangSVG />
-          <div className="text-xs text-white/70 space-y-1 mt-2">
-            <p>• Sisi depan/belakang: <InlineMath math="d = \sqrt{p^2 + t^2}" /> (× 4)</p>
-            <p>• Sisi atas/bawah: <InlineMath math="d = \sqrt{p^2 + l^2}" /> (× 4)</p>
-            <p>• Sisi kiri/kanan: <InlineMath math="d = \sqrt{l^2 + t^2}" /> (× 4)</p>
+        <div className="bg-slate-800/50 border border-slate-600/40 rounded-xl p-3">
+          <p className="text-xs text-cyan-300 font-semibold mb-2 text-center">📦 Contoh Benda Berbentuk Balok dalam Kehidupan Sehari-hari</p>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { emoji:"🪵", label:"Batu Bata" },
+              { emoji:"📚", label:"Buku Tulis" },
+              { emoji:"🧊", label:"Kulkas" },
+              { emoji:"🛏️", label:"Kasur" },
+              { emoji:"📦", label:"Kardus" },
+              { emoji:"📱", label:"Smartphone" },
+              { emoji:"🚚", label:"Bak Truk" },
+              { emoji:"🪟", label:"Lemari" },
+              { emoji:"🐟", label:"Akuarium" },
+            ].map(({ emoji, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1 bg-slate-900/40 rounded-lg border border-slate-600/30 p-2">
+                <span className="text-2xl">{emoji}</span>
+                <span className="text-[10px] text-white/65 text-center leading-tight">{label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     ),
   },
+  /* ── 2. DEFINISI ──────────────────────────────── */
+  { icon: "📦", title: "Definisi Balok", content: sections[0].content },
+  /* ── 3. RUSUK ─────────────────────────────────── */
   {
-    icon: "⟋",
-    title: "Unsur — Diagonal Ruang",
+    icon: "📏",
+    title: "Unsur Balok — Rusuk",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-yellow-300 font-semibold mb-2">⟋ Diagonal Ruang (4 diagonal)</p>
-          <DiagRuangSVG />
-          <div className="text-xs text-white/70 mt-2">
-            <div className="bg-slate-700/60 rounded p-2">
-              <BlockMath math="d_r = \sqrt{p^2 + l^2 + t^2}" />
+        <div className="bg-cyan-950/40 border border-cyan-700/40 rounded-lg p-4 space-y-2">
+          <p className="text-cyan-300 font-semibold">① Rusuk (12 buah)</p>
+          <p className="text-xs text-white/70">Rusuk adalah <strong>ruas garis pertemuan dua sisi</strong>. Balok <strong className="text-cyan-300">ABCD.EFGH</strong> memiliki 3 kelompok rusuk berbeda panjang: <InlineMath math="p,\ l,\ t" />.</p>
+          <RusukBalokSVG />
+        </div>
+        <div className="bg-cyan-950/30 border border-cyan-700/40 rounded-lg p-3 space-y-3">
+          <p className="text-xs text-cyan-200 font-semibold">Penamaan 12 rusuk pada balok ABCD.EFGH:</p>
+          <div className="grid sm:grid-cols-3 gap-2 text-xs">
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-cyan-300 font-semibold mb-1">4 Rusuk Panjang (p)</p>
+              <p className="text-white/75">AB, CD, EF, GH</p>
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-orange-300 font-semibold mb-1">4 Rusuk Lebar (l)</p>
+              <p className="text-white/75">BC, AD, FG, EH</p>
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-yellow-300 font-semibold mb-1">4 Rusuk Tinggi (t)</p>
+              <p className="text-white/75">AE, BF, CG, DH</p>
             </div>
           </div>
         </div>
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
-          <p className="text-orange-300 font-semibold">💡 Perbedaan Diagonal:</p>
-          <p>• <strong className="text-orange-300">Diagonal Bidang</strong>: hanya melintasi 1 sisi (2D)</p>
-          <p>• <strong className="text-yellow-300">Diagonal Ruang</strong>: menembus tengah balok (3D)</p>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <p>🔑 <strong className="text-cyan-300">Jumlah rusuk = 12</strong>. Kerangka balok: <InlineMath math="K = 4(p + l + t)" /></p>
         </div>
       </div>
     ),
   },
+  /* ── 4. SISI ──────────────────────────────────── */
+  {
+    icon: "🟦",
+    title: "Unsur Balok — Sisi / Bidang",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-blue-950/40 border border-blue-700/40 rounded-lg p-4 space-y-2">
+          <p className="text-blue-300 font-semibold">② Sisi / Bidang (6 buah — 3 pasang)</p>
+          <p className="text-xs text-white/70">Sisi adalah <strong>bidang yang membatasi</strong> balok. Setiap pasang sisi berhadapan memiliki ukuran dan bentuk yang sama.</p>
+          <SisiBalokSVG />
+        </div>
+        <div className="bg-blue-950/30 border border-blue-700/40 rounded-lg p-3 space-y-2">
+          <p className="text-xs text-blue-200 font-semibold">6 Sisi pada balok ABCD.EFGH:</p>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-blue-300 font-semibold mb-1">Sisi Depan</p>
+              <p className="text-white/75">ABFE &nbsp;(p × t)</p>
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-blue-300 font-semibold mb-1">Sisi Belakang</p>
+              <p className="text-white/75">DCGH &nbsp;(p × t)</p>
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-blue-300 font-semibold mb-1">Sisi Kiri</p>
+              <p className="text-white/75">ADHE &nbsp;(l × t)</p>
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-blue-300 font-semibold mb-1">Sisi Kanan</p>
+              <p className="text-white/75">BCGF &nbsp;(l × t)</p>
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-blue-300 font-semibold mb-1">Sisi Atas</p>
+              <p className="text-white/75">EFGH &nbsp;(p × l)</p>
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-blue-300 font-semibold mb-1">Sisi Bawah (Alas)</p>
+              <p className="text-white/75">ABCD &nbsp;(p × l)</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <p>🔑 <strong className="text-blue-300">3 pasang sisi</strong> → tiap pasang kongruen dan sejajar. Luas total = <InlineMath math="2(pl+pt+lt)" /></p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 5. TITIK SUDUT ───────────────────────────── */
+  {
+    icon: "🔷",
+    title: "Unsur Balok — Titik Sudut",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-4 space-y-2">
+          <p className="text-yellow-300 font-semibold">③ Titik Sudut (8 buah)</p>
+          <p className="text-xs text-white/70">Titik sudut adalah <strong>titik pertemuan tiga rusuk</strong> yang saling tegak lurus.</p>
+          <TitikSudutBalokSVG />
+        </div>
+        <div className="bg-yellow-950/30 border border-yellow-700/40 rounded-lg p-3 space-y-2">
+          <p className="text-xs text-yellow-200 font-semibold">8 Titik Sudut pada balok ABCD.EFGH:</p>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            {[
+              ["A","Alas — depan kiri"],["B","Alas — depan kanan"],
+              ["C","Alas — belakang kanan"],["D","Alas — belakang kiri"],
+              ["E","Atas — depan kiri"],["F","Atas — depan kanan"],
+              ["G","Atas — belakang kanan"],["H","Atas — belakang kiri"],
+            ].map(([v,desc])=>(
+              <div key={v} className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-2">
+                <p className="text-yellow-300 font-semibold mb-0.5">Titik {v}</p>
+                <p className="text-white/65">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <p>🔑 <strong className="text-yellow-300">Jumlah titik sudut = 8</strong>, setiap titik merupakan pertemuan tiga rusuk saling tegak lurus.</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 6. DIAGONAL BIDANG ───────────────────────── */
+  {
+    icon: "📐",
+    title: "Unsur Balok — Diagonal Bidang",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-4 space-y-2">
+          <p className="text-orange-300 font-semibold">④ Diagonal Bidang (12 buah — 3 jenis)</p>
+          <p className="text-xs text-white/70">Diagonal bidang menghubungkan dua titik sudut berhadapan dalam <strong>satu sisi</strong>. Karena ada 3 jenis sisi, ada 3 jenis rumus:</p>
+          <DiagBidangSVG />
+        </div>
+        <div className="bg-orange-950/30 border border-orange-700/40 rounded-lg p-3 space-y-2">
+          <p className="text-xs text-orange-200 font-semibold">Rumus diagonal bidang (Pythagoras):</p>
+          <div className="grid gap-2 text-xs">
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-blue-300 font-semibold mb-1">Sisi Depan/Belakang (p × t) — 4 buah</p>
+              <BlockMath math="d_1 = \sqrt{p^2 + t^2}" />
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-yellow-300 font-semibold mb-1">Sisi Atas/Bawah (p × l) — 4 buah</p>
+              <BlockMath math="d_2 = \sqrt{p^2 + l^2}" />
+            </div>
+            <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <p className="text-green-300 font-semibold mb-1">Sisi Kiri/Kanan (l × t) — 4 buah</p>
+              <BlockMath math="d_3 = \sqrt{l^2 + t^2}" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <p>🔑 <strong className="text-orange-300">Total diagonal bidang = 12</strong> (setiap sisi memiliki 2 diagonal × 6 sisi).</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 7. DIAGONAL RUANG ────────────────────────── */
+  {
+    icon: "🔀",
+    title: "Unsur Balok — Diagonal Ruang",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-4 space-y-2">
+          <p className="text-yellow-300 font-semibold">⑤ Diagonal Ruang (4 buah)</p>
+          <p className="text-xs text-white/70">Diagonal ruang menghubungkan dua titik sudut berhadapan dan <strong>melewati bagian dalam balok</strong>. Semua 4 diagonal ruang pada balok memiliki panjang yang sama.</p>
+          <DiagRuangSVG />
+          <div className="bg-yellow-950/60 rounded p-2 text-center">
+            <BlockMath math="d_r = \sqrt{p^2 + l^2 + t^2}" />
+          </div>
+        </div>
+        <div className="bg-slate-900/70 border border-amber-600/40 rounded-lg p-4 space-y-3">
+          <p className="text-amber-300 font-semibold text-xs">📐 Pembuktian dengan 2 langkah Pythagoras:</p>
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs">
+            <p className="text-white/80 font-semibold">Contoh: cari AG pada balok ABCD.EFGH</p>
+            <div className="space-y-1 text-white/70">
+              <p><strong className="text-orange-400">Tahap 1</strong> — Diagonal bidang alas AC:</p>
+            </div>
+            <div className="bg-slate-900/60 rounded p-2 text-center">
+              <BlockMath math="AC = \sqrt{p^2 + l^2}"/>
+            </div>
+            <div className="space-y-1 text-white/70">
+              <p><strong className="text-purple-400">Tahap 2</strong> — Diagonal ruang AG (siku-siku di C):</p>
+            </div>
+            <div className="bg-slate-900/60 rounded p-2 text-center">
+              <BlockMath math="AG^2 = AC^2 + CG^2 = (p^2+l^2) + t^2"/>
+              <BlockMath math="\boxed{AG = \sqrt{p^2 + l^2 + t^2}}"/>
+            </div>
+            <p className="text-amber-300 text-xs">∴ Berlaku untuk semua 4 diagonal ruang balok.</p>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <p>💡 <strong className="text-orange-300">Diagonal Bidang</strong> = 2D (dalam satu sisi) · <strong className="text-yellow-300">Diagonal Ruang</strong> = 3D (menembus balok)</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 8. BIDANG DIAGONAL ───────────────────────── */
   {
     icon: "🔲",
-    title: "Jaring-jaring Balok 3D",
+    title: "Unsur Balok — Bidang Diagonal",
     content: (
-      <div className="space-y-4 text-sm text-white/85 font-body">
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-violet-950/40 border border-violet-700/40 rounded-lg p-4 space-y-2">
+          <p className="text-violet-300 font-semibold">⑥ Bidang Diagonal (6 buah — 3 jenis)</p>
+          <p className="text-xs text-white/70">Bidang diagonal melewati <strong>4 titik sudut dan 2 diagonal ruang</strong> balok. Setiap bidang diagonal berbentuk <strong>persegi panjang</strong>. Karena ada 3 arah irisan, ada 3 jenis rumus luas:</p>
+        </div>
+        <BidangDiagonalBalokSVG />
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
+          <p>🔑 <strong className="text-violet-300">Total bidang diagonal = 6</strong> (3 jenis × 2 bidang per jenis).</p>
+          <p>Berbeda dengan kubus yang semua bidang diagonalnya kongruen, bidang diagonal balok memiliki 3 ukuran berbeda.</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 9. JARING-JARING 3D ──────────────────────── */
+  {
+    icon: "🧊",
+    title: "Jaring-jaring Balok — 3D Interaktif",
+    content: (
+      <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
         <p>
-          Jaring-jaring balok adalah <strong className="text-cyan-300">bentuk 2D yang jika dilipat akan membentuk balok</strong>.
-          Setiap jaring-jaring balok terdiri dari 6 persegi panjang — 3 pasang ukuran berbeda.
+          <strong className="text-cyan-300">Jaring-jaring balok</strong> adalah pola 2D yang jika dilipat akan membentuk balok.
+          Setiap jaring terdiri dari <strong>6 persegi panjang dalam 3 pasang ukuran</strong>.
           Sisi <strong className="text-violet-300">BELAKANG (ungu)</strong> adalah tumpuan tetap.
         </p>
         <InteractiveBalok3D />
       </div>
     ),
   },
+  /* ── 10. CONTOH POLA JARING ───────────────────── */
   {
-    icon: "🔲",
-    title: "Contoh Pola Jaring-jaring",
+    icon: "🗂️",
+    title: "Contoh Pola Jaring-jaring Balok",
     content: (
       <div className="space-y-4 text-sm text-white/85 font-body">
+        <p className="text-white/70 text-xs text-center">
+          Ada <strong className="text-yellow-300">54 pola jaring-jaring</strong> berbeda yang valid untuk sebuah balok:
+        </p>
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-cyan-300 font-semibold mb-3 text-xs">📐 Contoh Pola Jaring-jaring Balok:</p>
+          <p className="text-cyan-300 font-semibold mb-3 text-xs">📐 Contoh 4 Pola Jaring-jaring Balok:</p>
           <NetGallery />
           <div className="mt-3 flex flex-wrap gap-2">
             {(["p×t","l×t","p×l"] as const).map((label, i) => (
@@ -1574,42 +1867,109 @@ const slides: Slide[] = [
             ))}
           </div>
         </div>
-        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200">
-          <p>💡 Ada <strong className="text-yellow-300">54 jenis</strong> jaring-jaring balok berbeda yang bisa dibuat!</p>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <p>🔑 <strong className="text-white">Cara verifikasi:</strong> Bayangkan melipat. Jika 6 sisi menutup semua permukaan balok tanpa tumpang tindih → jaring-jaring valid.</p>
         </div>
       </div>
     ),
   },
+  /* ── 11. LUAS PERMUKAAN ───────────────────────── */
+  { icon: "🎨", title: sections[3].title, content: sections[3].content },
+  /* ── 12. VOLUME ───────────────────────────────── */
+  { icon: "📦", title: sections[4].title, content: sections[4].content },
+  /* ── 13. KERANGKA BALOK ───────────────────────── */
   {
-    icon: "🎨",
-    title: "Luas Permukaan Balok",
-    content: sections[3].content,
-  },
-  {
-    icon: "📦",
-    title: "Volume Balok",
-    content: sections[4].content,
-  },
-  {
-    icon: "📊",
-    title: "Kesimpulan — Rumus Lengkap",
-    content: sections[5].content,
-  },
-  {
-    icon: "📝",
-    title: "Contoh Soal — Luas Permukaan",
+    icon: "🪡",
+    title: "Kerangka Balok",
     content: (
-      <div className="flex flex-col gap-3">
-        {luasExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal LP" />)}
+      <div className="space-y-4">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+          <p className="text-cyan-300 font-semibold text-sm font-display">🪡 Kerangka Balok</p>
+          <p className="text-white/70 text-xs font-body leading-relaxed">
+            Kerangka balok adalah rangka yang terbentuk dari semua rusuknya.
+            Balok memiliki <strong className="text-white">12 rusuk</strong> dalam 3 kelompok berbeda panjang:
+          </p>
+          <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+            <BlockMath math="K_{\text{kerangka}} = 4(p + l + t)" />
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center text-xs font-body">
+            <div className="bg-cyan-950/50 border border-cyan-700/40 rounded p-2">
+              <p className="text-cyan-300 font-semibold">4 rusuk p</p>
+              <p className="text-white/60">arah panjang</p>
+            </div>
+            <div className="bg-orange-950/50 border border-orange-700/40 rounded p-2">
+              <p className="text-orange-300 font-semibold">4 rusuk l</p>
+              <p className="text-white/60">arah lebar</p>
+            </div>
+            <div className="bg-yellow-950/50 border border-yellow-700/40 rounded p-2">
+              <p className="text-yellow-300 font-semibold">4 rusuk t</p>
+              <p className="text-white/60">arah tinggi</p>
+            </div>
+          </div>
+        </div>
+        <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <table className="w-full text-xs text-center">
+            <thead>
+              <tr className="bg-slate-800">
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Besaran</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Rumus</th>
+                <th className="px-3 py-2 text-cyan-300">Catatan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Kerangka","K = 4(p+l+t)","12 rusuk, 3 kelompok"],
+                ["Luas permukaan","L = 2(pl+pt+lt)","6 sisi, 3 pasang"],
+                ["Diagonal bidang","√(p²+t²), √(p²+l²), √(l²+t²)","3 jenis"],
+                ["Diagonal ruang","d = √(p²+l²+t²)","4 buah"],
+                ["Volume","V = p×l×t","isi balok"],
+              ].map(([b,r,c],i)=>(
+                <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
+                  <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
+                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
+                  <td className="px-3 py-2 text-white/55 text-left">{c}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+          <p>🚀 <strong>Kunci utama balok:</strong> Identifikasi <strong className="text-yellow-300">p, l, dan t</strong> terlebih dahulu — lalu gunakan rumus yang sesuai.</p>
+          <p>Geser ke slide berikutnya untuk <strong className="text-white">contoh soal kerangka</strong>!</p>
+        </div>
       </div>
     ),
   },
+  /* ── 14. CONTOH SOAL KERANGKA ─────────────────── */
   {
     icon: "📝",
+    title: "Contoh Soal — Kerangka",
+    content: (
+      <div className="space-y-4">
+        <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+        {kerangkaExamples.map((ex, i) => <ExampleCard key={`k${i}`} ex={ex} idx={i} prefix="KERANGKA"/>)}
+      </div>
+    ),
+  },
+  /* ── 15. CONTOH SOAL LUAS ─────────────────────── */
+  {
+    icon: "🎨",
+    title: "Contoh Soal — Luas Permukaan",
+    content: (
+      <div className="space-y-4">
+        <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+        {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+      </div>
+    ),
+  },
+  /* ── 16. CONTOH SOAL VOLUME ───────────────────── */
+  {
+    icon: "📦",
     title: "Contoh Soal — Volume",
     content: (
-      <div className="flex flex-col gap-3">
-        {volExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal Vol" />)}
+      <div className="space-y-4">
+        <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+        {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
       </div>
     ),
   },
