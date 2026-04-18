@@ -89,6 +89,15 @@ import VideoPembelajaranPage from "./pages/VideoPembelajaranPage";
 import KumpulanRumusPage from "./pages/KumpulanRumusPage";
 import KonversiSatuanPage from "./pages/KonversiSatuanPage";
 import NotFound from "./pages/NotFound";
+import MenghitungCepatPage from "./pages/MenghitungCepatPage";
+import PerkalianDengan11Page from "./pages/menghitung-cepat/PerkalianDengan11Page";
+import KuadratBerakhiran5Page from "./pages/menghitung-cepat/KuadratBerakhiran5Page";
+import KuadratCepatPage from "./pages/menghitung-cepat/KuadratCepatPage";
+import PerkalianDekat100Page from "./pages/menghitung-cepat/PerkalianDekat100Page";
+import PersentaseCepatPage from "./pages/menghitung-cepat/PersentaseCepatPage";
+import PenjumlahanPenguranganCepatPage from "./pages/menghitung-cepat/PenjumlahanPenguranganPage";
+import PerkalianDuaDigitPage from "./pages/menghitung-cepat/PerkalianDuaDigitPage";
+import PembagianCepatPage from "./pages/menghitung-cepat/PembagianCepatPage";
 
 // Latihan Mandiri Pages
 import LatihanMandiriPage from "./pages/LatihanMandiriPage";
@@ -1349,6 +1358,17 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMMMenggambarGrafikPage />} />
       <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMMMenyusunFungsiPage />} />
       <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" element={<FKMMPenerapanNilaiMaksMinPage />} />
+
+      {/* Menghitung Cepat Routes */}
+      <Route path="/menghitung-cepat" element={<MenghitungCepatPage />} />
+      <Route path="/menghitung-cepat/perkalian-11" element={<PerkalianDengan11Page />} />
+      <Route path="/menghitung-cepat/kuadrat-berakhiran-5" element={<KuadratBerakhiran5Page />} />
+      <Route path="/menghitung-cepat/kuadrat-cepat" element={<KuadratCepatPage />} />
+      <Route path="/menghitung-cepat/perkalian-dekat-100" element={<PerkalianDekat100Page />} />
+      <Route path="/menghitung-cepat/persentase-cepat" element={<PersentaseCepatPage />} />
+      <Route path="/menghitung-cepat/penjumlahan-pengurangan" element={<PenjumlahanPenguranganCepatPage />} />
+      <Route path="/menghitung-cepat/perkalian-dua-digit" element={<PerkalianDuaDigitPage />} />
+      <Route path="/menghitung-cepat/pembagian-cepat" element={<PembagianCepatPage />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

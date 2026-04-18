@@ -18,6 +18,7 @@ import {
   ArrowLeftRight,
   Sigma,
   Rocket,
+  Zap,
 } from "lucide-react";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -27,6 +28,7 @@ const menuItems = [
   { label: "MATERI MATEMATIKA", icon: BookOpen, path: "/materi-matematika", desc: "Pelajari materi matematika lengkap" },
   { label: "LATIHAN MANDIRI", icon: ClipboardList, path: "/latihan-mandiri", desc: "Latihan soal per topik" },
   { label: "MATH GAME ARENA", icon: Gamepad2, path: "/math-game-arena", desc: "Bermain game matematika interaktif" },
+  { label: "MENGHITUNG CEPAT", icon: Zap, path: "/menghitung-cepat", desc: "Trik mental math tanpa kalkulator" },
   { label: "KALKULATOR SCIENTIFIC", icon: Calculator, path: "/kalkulator-scientific", desc: "Hitung cepat dengan kalkulator scientific" },
   { label: "OLIMPIADE MATEMATIKA", icon: Trophy, path: "/olimpiade", desc: "Untuk yang suka tantangan" },
   { label: "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", icon: Bot, path: "/chat-ai", desc: "Tanya jawab dengan AI matematika" },
