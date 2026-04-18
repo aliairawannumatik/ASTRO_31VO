@@ -161,6 +161,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ## Notes
 
+- Replit migration completed on 2026-04-18: dependencies installed and `.npmrc` set to `legacy-peer-deps=true` so npm preserves the app's existing React 18 dependency tree despite optional peer dependencies from transitive packages.
 - Merge conflicts from Vercel migration were resolved on 2026-03-12
 - Server binds to `0.0.0.0` for Replit compatibility
 - Chat AI requests now go through Express `/api/chat` so browser code does not expose external AI API keys
