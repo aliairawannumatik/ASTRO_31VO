@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -45,6 +45,14 @@ const games = [
     path: "/math-game-arena/umum/tangkap-benda",
     desc: "Gerakkan keranjang kiri-kanan! Tangkap semua benda, jangan ada yang terlewat!",
     icon: <ShoppingBasket className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Snake Matematika",
+    emoji: "🐍",
+    path: "/math-game-arena/umum/snake-math",
+    desc: "Arahkan ular ke jawaban yang benar! Salah → memendek, makin benar → makin cepat!",
+    icon: <Worm className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];
