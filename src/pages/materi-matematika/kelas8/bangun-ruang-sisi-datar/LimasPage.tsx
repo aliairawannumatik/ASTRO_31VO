@@ -1013,6 +1013,8 @@ const PythagorasLimasSurfaceGuide = () => (
         <line x1="132" y1="42" x2="214" y2="126" stroke="#e5e7eb" strokeWidth="1.8" strokeDasharray="4,3" />
         {/* diagonal for context */}
         <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3" />
+        {/* right angle mark at O: t is vertical, s/2 is horizontal */}
+        <path d="M 132 138 L 140 138 L 140 146" stroke="white" fill="none" strokeWidth="1.5" />
         <circle cx="132" cy="42" r="4" fill="#facc15" />
         <circle cx="132" cy="146" r="3.5" fill="#38bdf8" />
         <circle cx="188" cy="146" r="3.5" fill="#fb923c" />
