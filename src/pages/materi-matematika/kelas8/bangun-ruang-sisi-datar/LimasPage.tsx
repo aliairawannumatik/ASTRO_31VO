@@ -790,7 +790,7 @@ const PythagorasLimasSurfaceGuide = () => (
     <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-3">
       <div>
         <p className="text-emerald-300 font-semibold text-xs">Limas Segitiga Beraturan</p>
-        <p className="text-white/45 text-[11px]">Alas segitiga sama sisi dengan sisi <InlineMath math="a" />. Gambar dibuat miring agar pusat alas, titik tengah sisi, dan rusuk tegak terlihat.</p>
+        <p className="text-white/45 text-[11px]">Alas segitiga sama sisi dengan sisi <InlineMath math="a" />. Sisi depan AB dibuat horizontal. Apotema <InlineMath math="l" /> turun ke titik tengah M rusuk kanan BC.</p>
       </div>
       <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras pada limas segitiga">
         <defs>
@@ -799,31 +799,43 @@ const PythagorasLimasSurfaceGuide = () => (
             <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
         </defs>
-        <polygon points="56,156 174,168 130,105" fill="#10b981" fillOpacity="0.22" stroke="#34d399" strokeWidth="2" />
-        <polygon points="56,156 174,168 128,42" fill="#8b5cf6" fillOpacity="0.26" stroke="#c4b5fd" strokeWidth="1.4" />
-        <polygon points="174,168 130,105 128,42" fill="#f97316" fillOpacity="0.2" stroke="#fdba74" strokeWidth="1.2" />
-        <polygon points="130,105 56,156 128,42" fill="#22d3ee" fillOpacity="0.16" stroke="#67e8f9" strokeWidth="1.2" />
-        <line x1="128" y1="42" x2="120" y2="143" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#triGlow)" />
-        <line x1="128" y1="42" x2="115" y2="162" stroke="#fb923c" strokeWidth="3" filter="url(#triGlow)" />
-        <line x1="120" y1="143" x2="115" y2="162" stroke="#facc15" strokeWidth="2.5" />
-        <line x1="120" y1="143" x2="56" y2="156" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
-        <line x1="128" y1="42" x2="56" y2="156" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
-        <line x1="128" y1="42" x2="174" y2="168" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
-        <circle cx="128" cy="42" r="4" fill="#facc15" />
-        <circle cx="120" cy="143" r="3.5" fill="#38bdf8" />
-        <circle cx="115" cy="162" r="3.5" fill="#fb923c" />
-        <circle cx="56" cy="156" r="3" fill="#f472b6" />
-        <text x="133" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
-        <text x="124" y="144" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
-        <text x="103" y="176" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
-        <text x="43" y="154" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
-        <text x="138" y="96" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
-        <text x="119" y="105" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
-        <text x="91" y="150" fill="#facc15" fontSize="10" fontFamily="monospace">r</text>
-        <text x="82" y="90" fill="#f472b6" fontSize="10" fontFamily="monospace">e</text>
+        {/* Base A(52,168) B(195,168) C(148,112) — AB is horizontal */}
+        <polygon points="52,168 195,168 148,112" fill="#10b981" fillOpacity="0.22" stroke="#34d399" strokeWidth="2" />
+        {/* Left face T-A-C */}
+        <polygon points="130,40 52,168 148,112" fill="#22d3ee" fillOpacity="0.14" stroke="#67e8f9" strokeWidth="1.2" />
+        {/* Right face T-B-C — highlighted, apotema lands here */}
+        <polygon points="130,40 195,168 148,112" fill="#f97316" fillOpacity="0.24" stroke="#fdba74" strokeWidth="1.5" />
+        {/* Front face T-A-B — semi-transparent so interior lines show */}
+        <polygon points="130,40 52,168 195,168" fill="#8b5cf6" fillOpacity="0.14" stroke="#c4b5fd" strokeWidth="1.4" />
+        {/* t: height T(130,40)→O(132,149) — blue dashed, no glow */}
+        <line x1="130" y1="40" x2="132" y2="149" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4" />
+        {/* l: apotema T→M(172,140) midpoint of BC */}
+        <line x1="130" y1="40" x2="172" y2="140" stroke="#fb923c" strokeWidth="3" filter="url(#triGlow)" />
+        {/* r: inradius O(132,149)→M(172,140) */}
+        <line x1="132" y1="149" x2="172" y2="140" stroke="#facc15" strokeWidth="2.5" />
+        {/* R: circumradius O→B(195,168) dashed for context */}
+        <line x1="132" y1="149" x2="195" y2="168" stroke="#f472b6" strokeWidth="1.8" strokeDasharray="5,3" />
+        {/* e: rusuk tegak T→B(195,168) gray dashed */}
+        <line x1="130" y1="40" x2="195" y2="168" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
+        {/* T→A for context */}
+        <line x1="130" y1="40" x2="52" y2="168" stroke="#e5e7eb" strokeWidth="1.2" strokeDasharray="4,3" strokeOpacity="0.5" />
+        {/* right angle mark at O between t (up) and r (→M) */}
+        <path d="M 132 141 L 140 139 L 140 149" stroke="white" fill="none" strokeWidth="1.5" />
+        <circle cx="130" cy="40" r="4" fill="#facc15" />
+        <circle cx="132" cy="149" r="3.5" fill="#38bdf8" />
+        <circle cx="172" cy="140" r="3.5" fill="#fb923c" />
+        <circle cx="195" cy="168" r="3" fill="#e5e7eb" />
+        <text x="134" y="38" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
+        <text x="118" y="152" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
+        <text x="175" y="138" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
+        <text x="198" y="172" fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
+        <text x="136" y="98" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
+        <text x="153" y="85" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
+        <text x="147" y="148" fill="#facc15" fontSize="10" fontFamily="monospace">r</text>
+        <text x="170" y="100" fill="#e5e7eb" fontSize="10" fontFamily="monospace">e</text>
       </svg>
       <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
-        <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak, <span className="text-pink-300 font-semibold">e</span> rusuk tegak.</p>
+        <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak, <span className="text-yellow-300 font-semibold">r</span> jari-jari dalam alas, <span className="text-white/60 font-semibold">e</span> rusuk tegak.</p>
         <BlockMath math="r_{\text{alas}}=\frac{a\sqrt{3}}{6},\quad R_{\text{alas}}=\frac{a\sqrt{3}}{3}" />
         <BlockMath math="l^2=t^2+r_{\text{alas}}^2=t^2+\left(\frac{a\sqrt{3}}{6}\right)^2" />
         <BlockMath math="e^2=t^2+R_{\text{alas}}^2=t^2+\left(\frac{a\sqrt{3}}{3}\right)^2" />
