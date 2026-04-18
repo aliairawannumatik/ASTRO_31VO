@@ -917,16 +917,16 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <text x={B.x - 16} y={B.y + 4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
             <text x={C.x + 4} y={C.y + 4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
             <text x={O.x - 17} y={O.y + 4} fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
-            <text x={M.x + 4} y={M.y + 4} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">F</text>
+            <text x={M.x + 4} y={M.y + 4} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">E</text>
             <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
           </svg>
           <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-1">
-            <p className="font-semibold text-emerald-300">Segitiga siku-siku T–O–F</p>
+            <p className="font-semibold text-emerald-300">Segitiga siku-siku T–O–E</p>
             <p>• <span className="text-sky-300 font-semibold">TO = t</span> — tinggi limas, tegak lurus bidang alas di titik <span className="text-sky-300 font-semibold">O</span></p>
-            <p>• <span className="text-yellow-300 font-semibold">OF</span> — jari-jari dalam alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
-            <p>• <span className="text-orange-300 font-semibold">TF</span> — tinggi sisi tegak (apotema), dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
-            <BlockMath math="TF^2 = TO^2 + OF^2" />
-            <BlockMath math="\boxed{TF^2 = t^2 + \left(\frac{a\sqrt{3}}{6}\right)^2}" />
+            <p>• <span className="text-yellow-300 font-semibold">OE</span> — jari-jari dalam alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">E</span></p>
+            <p>• <span className="text-orange-300 font-semibold">TE</span> — tinggi sisi tegak (apotema), dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">E</span></p>
+            <BlockMath math="TE^2 = TO^2 + OE^2" />
+            <BlockMath math="\boxed{TE^2 = t^2 + \left(\frac{a\sqrt{3}}{6}\right)^2}" />
           </div>
         </div>
 
@@ -1046,18 +1046,18 @@ const PythagorasLimasSegiempatOverview = () => (
         <text x="163" y="181" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
         <text x="217" y="126" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
         <text x="126" y="148" fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
-        <text x="192" y="144" fill="#fb923c" fontSize="13" fontFamily="monospace" fontWeight="bold">F</text>
+        <text x="192" y="144" fill="#fb923c" fontSize="13" fontFamily="monospace" fontWeight="bold">E</text>
         <text x="140" y="95" fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
         <text x="150" y="141" fill="#facc15" fontSize="12" fontFamily="monospace">s/2</text>
       </svg>
       <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
-        <p className="font-semibold text-orange-300">Segitiga siku-siku T–O–F</p>
+        <p className="font-semibold text-orange-300">Segitiga siku-siku T–O–E</p>
         <p>• <span className="text-sky-300 font-semibold">TO = t</span> — tinggi limas, tegak lurus bidang alas di titik <span className="text-sky-300 font-semibold">O</span></p>
-        <p>• <span className="text-yellow-300 font-semibold">OF = s/2</span> — setengah sisi alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
-        <p>• <span className="text-orange-300 font-semibold">TF</span> — tinggi sisi tegak (apotema), dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
-        <BlockMath math="TF^2 = TO^2 + OF^2" />
-        <BlockMath math="\boxed{TF^2 = t^2 + \left(\frac{s}{2}\right)^2}" />
-        <BlockMath math="OF=\frac{s}{2},\quad OC=\frac{s\sqrt{2}}{2}" />
+        <p>• <span className="text-yellow-300 font-semibold">OE = s/2</span> — setengah sisi alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">E</span></p>
+        <p>• <span className="text-orange-300 font-semibold">TE</span> — tinggi sisi tegak (apotema), dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">E</span></p>
+        <BlockMath math="TE^2 = TO^2 + OE^2" />
+        <BlockMath math="\boxed{TE^2 = t^2 + \left(\frac{s}{2}\right)^2}" />
+        <BlockMath math="OE=\frac{s}{2},\quad OA=\frac{s\sqrt{2}}{2}" />
       </div>
     </div>
 );
