@@ -931,8 +931,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
   );
 };
 
-const PythagorasLimasSurfaceGuide = () => (
-  <div className="grid md:grid-cols-2 gap-3">
+const PythagorasLimasSegitigaOverview = () => (
     <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-3">
       <div>
         <p className="text-emerald-300 font-semibold text-xs">Limas Segitiga Beraturan</p>
@@ -996,7 +995,9 @@ const PythagorasLimasSurfaceGuide = () => (
         <BlockMath math="e^2=l^2+\left(\frac{a}{2}\right)^2" />
       </div>
     </div>
+);
 
+const PythagorasLimasSegiempatOverview = () => (
     <div className="bg-slate-900/70 border border-orange-700/40 rounded-xl p-3 space-y-3">
       <div>
         <p className="text-orange-300 font-semibold text-xs">Limas Segiempat Beraturan — Pythagoras Sisi Tegak Kanan</p>
@@ -1056,7 +1057,6 @@ const PythagorasLimasSurfaceGuide = () => (
         <BlockMath math="e^2=l^2+\left(\frac{s}{2}\right)^2" />
       </div>
     </div>
-  </div>
 );
 
 const PythagorasLimasSegiempatDiagonalSVG = () => (
@@ -1761,12 +1761,14 @@ const sections: Sec[] = [
             <p className="text-cyan-300 font-semibold text-xs">Semua hubungan Pythagoras penting pada limas</p>
             <p className="text-white/55 text-xs">Gunakan gambar miring berikut untuk melihat hubungan antara pusat alas, titik tengah sisi alas, titik sudut alas, puncak, apotema, dan rusuk tegak.</p>
           </div>
-          <PythagorasLimasSurfaceGuide />
+          <PythagorasLimasSegitigaOverview />
         </div>
 
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
           <PythagorasLimasSegitigaDetailSVG />
         </div>
+
+        <PythagorasLimasSegiempatOverview />
 
         <PythagorasLimasSegiempatDiagonalSVG />
 
