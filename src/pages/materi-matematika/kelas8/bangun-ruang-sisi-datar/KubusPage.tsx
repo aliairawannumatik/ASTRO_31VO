@@ -1081,8 +1081,8 @@ const BidangDiagonalVariantCube = ({ variant, idx = 0 }: { variant: BidangDiagon
         style={{ filter: `drop-shadow(0 0 9px ${variant.color})`, animationDelay: `${idx * 0.33}s` }}
       />
       {[
-        [40,55,"D",-12,-5],[150,55,"C",5,-5],[150,145,"B",5,12],[40,145,"A",-12,12],
-        [75,28,"H",-3,-8],[185,28,"G",5,-5],[185,118,"F",6,4],[75,118,"E",-14,5],
+        [40,55,"E",-12,-5],[150,55,"F",5,-5],[150,145,"B",5,12],[40,145,"A",-12,12],
+        [75,28,"H",-3,-8],[185,28,"G",5,-5],[185,118,"C",6,4],[75,118,"D",-14,5],
       ].map(([x,y,lbl,dx,dy]) => (
         <g key={lbl}>
           <circle cx={x as number} cy={y as number} r="3" fill="#e2e8f0"/>
