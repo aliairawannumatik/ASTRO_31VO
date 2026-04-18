@@ -653,30 +653,80 @@ const SisiBalokSVG = () => (
   </svg>
 );
 
-const DiagBidangSVG = () => (
-  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Diagonal bidang balok">
-    <defs>
-      <style>{`
-        @keyframes diagB{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 6px #f97316);}50%{stroke-opacity:0.3;filter:drop-shadow(0 0 1px #f97316);}}
-        .db-a{animation:diagB 1.8s ease-in-out infinite;}
-      `}</style>
-    </defs>
-    <polygon points="30,70 170,70 170,170 30,170" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1.2"/>
-    <polygon points="70,30 210,30 210,130 70,130" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="30" y1="70" x2="70" y2="30" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="170" y1="70" x2="210" y2="30" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="30" y1="170" x2="70" y2="130" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="170" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
-    {/* Diagonal sisi depan */}
-    <line x1="30" y1="170" x2="170" y2="70" stroke="#f97316" strokeWidth="2.5" className="db-a" strokeDasharray="6,3"/>
-    {/* Diagonal sisi atas */}
-    <line x1="30" y1="70" x2="210" y2="30" stroke="#22d3ee" strokeWidth="2.5" className="db-a" strokeDasharray="6,3"/>
-    {/* Diagonal sisi kanan */}
-    <line x1="170" y1="70" x2="210" y2="130" stroke="#4ade80" strokeWidth="2.5" className="db-a" strokeDasharray="6,3"/>
-    <text x="10" y="200" fill="#f97316" fontSize="8" fontFamily="monospace">d_b = √(p²+t²), √(p²+l²), √(l²+t²)</text>
-  </svg>
+/* ─────────────────────────────────────────────────────────────
+   ALL 12 DIAGONAL BIDANG BALOK — mini cards with glowing diags
+───────────────────────────────────────────────────────────── */
+type DBVKey = "A"|"B"|"C"|"D"|"E"|"F"|"G"|"H";
+const DB_VERTS: Record<DBVKey,[number,number,number,number]> = {
+  A:[22,138,-11,11], B:[132,138,4,11], C:[164,106,4,4], D:[54,106,-12,4],
+  E:[22,52,-11,-4],  F:[132,52,4,-4],  G:[164,16,4,-3], H:[54,16,-12,-3],
+};
+const ALL_DB_DIAGS: {key:string;v1:DBVKey;v2:DBVKey;color:string;face:string}[] = [
+  {key:"AF",v1:"A",v2:"F",color:"#f97316",face:"Depan (p×t)"},
+  {key:"BE",v1:"B",v2:"E",color:"#ef4444",face:"Depan (p×t)"},
+  {key:"DG",v1:"D",v2:"G",color:"#f59e0b",face:"Belakang (p×t)"},
+  {key:"CH",v1:"C",v2:"H",color:"#eab308",face:"Belakang (p×t)"},
+  {key:"EG",v1:"E",v2:"G",color:"#22d3ee",face:"Atas (p×l)"},
+  {key:"FH",v1:"F",v2:"H",color:"#38bdf8",face:"Atas (p×l)"},
+  {key:"AC",v1:"A",v2:"C",color:"#3b82f6",face:"Bawah (p×l)"},
+  {key:"BD",v1:"B",v2:"D",color:"#6366f1",face:"Bawah (p×l)"},
+  {key:"AH",v1:"A",v2:"H",color:"#4ade80",face:"Kiri (l×t)"},
+  {key:"DE",v1:"D",v2:"E",color:"#34d399",face:"Kiri (l×t)"},
+  {key:"BG",v1:"B",v2:"G",color:"#f472b6",face:"Kanan (l×t)"},
+  {key:"CF",v1:"C",v2:"F",color:"#a78bfa",face:"Kanan (l×t)"},
+];
+const DB_ALL_KEYS: DBVKey[] = ["A","B","C","D","E","F","G","H"];
+const BalokDiagCard = ({d,idx}:{d:typeof ALL_DB_DIAGS[0];idx:number}) => {
+  const aId = `dbg${idx}`;
+  const aCls = `dbc${idx}`;
+  const [x1,y1] = DB_VERTS[d.v1];
+  const [x2,y2] = DB_VERTS[d.v2];
+  const endKeys: DBVKey[] = [d.v1, d.v2];
+  return (
+    <div className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-2 flex flex-col items-center gap-0.5">
+      <svg viewBox="0 0 200 154" className="w-full" aria-label={`Diagonal ${d.key}`}>
+        <defs>
+          <style>{`
+            @keyframes ${aId}{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 6px ${d.color});}50%{stroke-opacity:0.08;filter:none;}}
+            .${aCls}{animation:${aId} 1.8s ease-in-out infinite ${(idx*0.15).toFixed(2)}s;}
+          `}</style>
+        </defs>
+        <polygon points="22,138 132,138 132,52 22,52" fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
+        <polygon points="54,106 164,106 164,16 54,16"  fill="rgba(15,23,42,0.5)"  stroke="#475569" strokeWidth="1"/>
+        <line x1="22"  y1="138" x2="54"  y2="106" stroke="#475569" strokeWidth="1"/>
+        <line x1="132" y1="138" x2="164" y2="106" stroke="#475569" strokeWidth="1"/>
+        <line x1="22"  y1="52"  x2="54"  y2="16"  stroke="#475569" strokeWidth="1"/>
+        <line x1="132" y1="52"  x2="164" y2="16"  stroke="#475569" strokeWidth="1"/>
+        <line x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke={d.color} strokeWidth="2.8" strokeLinecap="round"
+          strokeDasharray="6,3" className={aCls}/>
+        {DB_ALL_KEYS.map(k => {
+          const [cx,cy] = DB_VERTS[k];
+          const isEnd = k===d.v1||k===d.v2;
+          return <circle key={k} cx={cx} cy={cy} r={isEnd?3.5:1.8}
+            fill={isEnd?d.color:"#64748b"} opacity={isEnd?1:0.4}/>;
+        })}
+        {endKeys.map(k => {
+          const [cx,cy,lx,ly] = DB_VERTS[k];
+          return <text key={k} x={cx+lx} y={cy+ly} fill={d.color}
+            fontSize="9" fontFamily="monospace" fontWeight="bold">{k}</text>;
+        })}
+        <text x="100" y="151" fill={d.color} fontSize="10" fontFamily="monospace"
+          fontWeight="bold" textAnchor="middle">{d.key}</text>
+      </svg>
+      <p className="text-[9px] text-white/40 text-center leading-tight font-body">{d.face}</p>
+    </div>
+  );
+};
+const AllDiagonalBidangBalok = () => (
+  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+    {ALL_DB_DIAGS.map((d,i) => <BalokDiagCard key={d.key} d={d} idx={i}/>)}
+  </div>
 );
 
+const TS_BALOK_VERTS: [number,number][] = [
+  [30,170],[170,170],[210,130],[70,130],[30,70],[170,70],[210,30],[70,30]
+];
 const TitikSudutBalokSVG = () => (
   <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Titik sudut balok ABCD.EFGH">
     <defs>
@@ -694,7 +744,7 @@ const TitikSudutBalokSVG = () => (
     <line x1="70" y1="130" x2="210" y2="130" stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
     <line x1="70" y1="30"  x2="30" y2="70"  stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
     {/* Vertex dots */}
-    {([[30,170],[170,170],[210,130],[70,130],[30,70],[170,70],[210,30],[70,30]] as [number,number][]).map(([x,y],i)=>(
+    {TS_BALOK_VERTS.map(([x,y],i)=>(
       <circle key={i} cx={x} cy={y} r={4} fill="#facc15" className="tsb" style={{animationDelay:`${i*0.22}s`}}/>
     ))}
     {/* Labels */}
@@ -1170,7 +1220,7 @@ const sections: Sec[] = [
         {/* Diagonal bidang */}
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
           <p className="text-orange-300 font-semibold mb-2">↗ Diagonal Bidang (12 diagonal)</p>
-          <DiagBidangSVG />
+          <AllDiagonalBidangBalok />
           <div className="text-xs text-white/70 space-y-1 mt-2">
             <p>• Sisi depan/belakang: <InlineMath math="d = \sqrt{p^2 + t^2}" /> (× 4)</p>
             <p>• Sisi atas/bawah: <InlineMath math="d = \sqrt{p^2 + l^2}" /> (× 4)</p>
@@ -1771,8 +1821,8 @@ const slides: Slide[] = [
       <div className="space-y-3 text-sm text-white/85 font-body">
         <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-4 space-y-2">
           <p className="text-orange-300 font-semibold">④ Diagonal Bidang (12 buah — 3 jenis)</p>
-          <p className="text-xs text-white/70">Diagonal bidang menghubungkan dua titik sudut berhadapan dalam <strong>satu sisi</strong>. Karena ada 3 jenis sisi, ada 3 jenis rumus:</p>
-          <DiagBidangSVG />
+          <p className="text-xs text-white/70">Diagonal bidang menghubungkan dua titik sudut berhadapan dalam <strong>satu sisi</strong>. Karena ada 3 jenis sisi, ada 3 jenis rumus. Setiap balok di bawah menampilkan <strong>satu diagonal bidang</strong>:</p>
+          <AllDiagonalBidangBalok />
         </div>
         <div className="bg-orange-950/30 border border-orange-700/40 rounded-lg p-3 space-y-2">
           <p className="text-xs text-orange-200 font-semibold">Rumus diagonal bidang (Pythagoras):</p>
