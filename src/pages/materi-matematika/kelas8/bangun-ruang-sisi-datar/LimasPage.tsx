@@ -843,28 +843,28 @@ const PythagorasLimasSurfaceGuide = () => (
             <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
         </defs>
-        <polygon points="55,158 163,174 210,135 102,119" fill="#3b82f6" fillOpacity="0.22" stroke="#60a5fa" strokeWidth="2" />
-        <polygon points="55,158 163,174 132,42" fill="#8b5cf6" fillOpacity="0.24" stroke="#c4b5fd" strokeWidth="1.3" />
-        <polygon points="163,174 210,135 132,42" fill="#f97316" fillOpacity="0.22" stroke="#fdba74" strokeWidth="1.3" />
-        <polygon points="210,135 102,119 132,42" fill="#22c55e" fillOpacity="0.16" stroke="#86efac" strokeWidth="1.1" />
-        <polygon points="102,119 55,158 132,42" fill="#eab308" fillOpacity="0.14" stroke="#fde047" strokeWidth="1.1" />
+        <polygon points="48,166 162,166 214,126 100,126" fill="#3b82f6" fillOpacity="0.22" stroke="#60a5fa" strokeWidth="2" />
+        <polygon points="48,166 162,166 132,42" fill="#8b5cf6" fillOpacity="0.24" stroke="#c4b5fd" strokeWidth="1.3" />
+        <polygon points="162,166 214,126 132,42" fill="#f97316" fillOpacity="0.22" stroke="#fdba74" strokeWidth="1.3" />
+        <polygon points="214,126 100,126 132,42" fill="#22c55e" fillOpacity="0.16" stroke="#86efac" strokeWidth="1.1" />
+        <polygon points="100,126 48,166 132,42" fill="#eab308" fillOpacity="0.14" stroke="#fde047" strokeWidth="1.1" />
         <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#quadGlow)" />
-        <line x1="132" y1="42" x2="109" y2="166" stroke="#fb923c" strokeWidth="3" filter="url(#quadGlow)" />
-        <line x1="132" y1="146" x2="109" y2="166" stroke="#facc15" strokeWidth="2.5" />
-        <line x1="132" y1="146" x2="55" y2="158" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
-        <line x1="132" y1="42" x2="55" y2="158" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
-        <line x1="55" y1="158" x2="210" y2="135" stroke="#a78bfa" strokeWidth="1.8" strokeDasharray="5,3" />
+        <line x1="132" y1="42" x2="105" y2="166" stroke="#fb923c" strokeWidth="3" filter="url(#quadGlow)" />
+        <line x1="132" y1="146" x2="105" y2="166" stroke="#facc15" strokeWidth="2.5" />
+        <line x1="132" y1="146" x2="48" y2="166" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
+        <line x1="132" y1="42" x2="48" y2="166" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
+        <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.8" strokeDasharray="5,3" />
         <circle cx="132" cy="42" r="4" fill="#facc15" />
         <circle cx="132" cy="146" r="3.5" fill="#38bdf8" />
-        <circle cx="109" cy="166" r="3.5" fill="#fb923c" />
-        <circle cx="55" cy="158" r="3" fill="#f472b6" />
+        <circle cx="105" cy="166" r="3.5" fill="#fb923c" />
+        <circle cx="48" cy="166" r="3" fill="#f472b6" />
         <text x="137" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
         <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
-        <text x="100" y="181" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
-        <text x="42" y="156" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
+        <text x="96" y="181" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
+        <text x="35" y="166" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
         <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
         <text x="113" y="107" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
-        <text x="118" y="162" fill="#facc15" fontSize="10" fontFamily="monospace">s/2</text>
+        <text x="116" y="163" fill="#facc15" fontSize="10" fontFamily="monospace">s/2</text>
         <text x="84" y="91" fill="#f472b6" fontSize="10" fontFamily="monospace">e</text>
       </svg>
       <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
