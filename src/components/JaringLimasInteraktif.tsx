@@ -191,6 +191,9 @@ export default function JaringLimasInteraktif() {
   };
 
   /* ── Drag (3-D rotation — only when fully assembled) ── */
+  const dragXDirection = activeN === 5 ? -1 : 1;
+  const dragYDirection = activeN === 5 ? 1 : -1;
+
   const onMouseDown = (e: React.MouseEvent) => {
     if (progress > 0.05 || isAnimating) return;
     setIsDragging(true);
@@ -198,9 +201,9 @@ export default function JaringLimasInteraktif() {
   };
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragging) return;
-    setRotY(dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55);
-  }, [isDragging]);
+    setRotY(dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55 * dragXDirection);
+    setRotX(dragRef.current.bx + (e.clientY - dragRef.current.sy) * 0.55 * dragYDirection);
+  }, [dragXDirection, dragYDirection, isDragging]);
   const onMouseUp = useCallback(() => setIsDragging(false), []);
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -212,9 +215,9 @@ export default function JaringLimasInteraktif() {
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
     const t = e.touches[0];
-    setRotY(dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55);
-  }, [isDragging]);
+    setRotY(dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55 * dragXDirection);
+    setRotX(dragRef.current.bx + (t.clientY - dragRef.current.sy) * 0.55 * dragYDirection);
+  }, [dragXDirection, dragYDirection, isDragging]);
   const onTouchEnd = useCallback(() => setIsDragging(false), []);
 
   useEffect(() => {
