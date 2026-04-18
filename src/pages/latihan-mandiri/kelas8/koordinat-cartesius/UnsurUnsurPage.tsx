@@ -60,18 +60,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Tanda Koordinat Setiap Kuadran", {
-    type: "mixed",
-    content: "Lengkapi tabel berikut tentang tanda koordinat di setiap kuadran:",
-    parts: [
-      { label: "Kuadran I:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
-      { label: "Kuadran II:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
-      { label: "Kuadran III:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
-      { label: "Kuadran IV:", text: "x ... (positif/negatif), y ... (positif/negatif)" },
-    ],
-  }),
-
-  Q(4, "Identifikasi Kuadran dari Koordinat", {
+  Q(3, "Identifikasi Kuadran dari Koordinat", {
     type: "mixed",
     content: "Tentukan di kuadran mana atau pada sumbu mana setiap titik berikut berada:",
     parts: [
@@ -86,7 +75,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(5, "Titik pada Sumbu Koordinat", {
+  Q(4, "Titik pada Sumbu Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -105,7 +94,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Koordinat pada Sumbu-x", {
+  Q(5, "Koordinat pada Sumbu-x", {
     type: "mixed",
     content: "Jika titik P(-3, y) terletak pada sumbu-x:",
     parts: [
@@ -115,7 +104,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Koordinat pada Sumbu-y", {
+  Q(6, "Koordinat pada Sumbu-y", {
     type: "mixed",
     content: "Jika titik Q(x, 4) terletak pada sumbu-y:",
     parts: [
@@ -125,7 +114,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Membaca Diagram - Titik Beragam Posisi", {
+  Q(7, "Membaca Diagram - Titik Beragam Posisi", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -146,73 +135,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Pencerminan terhadap Sumbu-x", {
-    type: "mixed",
-    content: "Titik A(3, -4) dicerminkan terhadap sumbu-x menghasilkan titik A'.",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 3, y: -4, label: "A(3,−4)", color: "#f472b6", labelPos: "br" },
-        { x: 3, y: 4, label: "A'(?,?)", color: "#60a5fa", labelPos: "tr" },
-      ],
-      segs: [{ x1: 3, y1: -4, x2: 3, y2: 4, color: "rgba(255,255,255,0.2)", dashed: true }],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik A'." },
-      { label: "b.", text: "Apa aturan umum pencerminan suatu titik (x, y) terhadap sumbu-x?" },
-    ],
-  }),
-
-  Q(10, "Pencerminan terhadap Sumbu-y", {
-    type: "mixed",
-    content: "Titik B(-2, 5) dicerminkan terhadap sumbu-y menghasilkan titik B'.",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: -2, y: 5, label: "B(−2,5)", color: "#fb923c", labelPos: "tl" },
-        { x: 2, y: 5, label: "B'(?,?)", color: "#34d399", labelPos: "tr" },
-      ],
-      segs: [{ x1: -2, y1: 5, x2: 2, y2: 5, color: "rgba(255,255,255,0.2)", dashed: true }],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik B'." },
-      { label: "b.", text: "Apa aturan umum pencerminan suatu titik (x, y) terhadap sumbu-y?" },
-    ],
-  }),
-
-  Q(11, "Pencerminan terhadap Titik Asal O", {
-    type: "mixed",
-    content: "Titik C(4, 3) dicerminkan terhadap titik asal O(0, 0) menghasilkan C'.",
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik C'." },
-      { label: "b.", text: "Di kuadran berapa C berada? Di kuadran berapa C' berada?" },
-      { label: "c.", text: "Apa aturan umum pencerminan titik (x, y) terhadap titik asal?" },
-    ],
-  }),
-
-  Q(12, "Mengenali Pencerminan dari Diagram", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 4, y: 2, label: "P", color: "#f472b6", labelPos: "tr" },
-        { x: -4, y: 2, label: "P'", color: "#60a5fa", labelPos: "tl" },
-        { x: 3, y: -3, label: "Q", color: "#34d399", labelPos: "br" },
-        { x: 3, y: 3, label: "Q'", color: "#facc15", labelPos: "tr" },
-      ],
-      segs: [
-        { x1: 4, y1: 2, x2: -4, y2: 2, color: "rgba(255,255,255,0.15)", dashed: true },
-        { x1: 3, y1: -3, x2: 3, y2: 3, color: "rgba(255,255,255,0.15)", dashed: true },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "P' adalah hasil pencerminan P terhadap sumbu mana?" },
-      { label: "b.", text: "Q' adalah hasil pencerminan Q terhadap sumbu mana?" },
-      { label: "c.", text: "Jelaskan cara menentukan cerminan titik dari diagram." },
-    ],
-  }),
-
-  Q(13, "Titik Tengah Segmen", {
+  Q(8, "Titik Tengah Segmen", {
     type: "mixed",
     content: "Tentukan koordinat titik tengah dari setiap segmen berikut:",
     parts: [
@@ -222,7 +145,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(14, "Mencari Ujung Segmen dari Titik Tengah", {
+  Q(9, "Mencari Ujung Segmen dari Titik Tengah", {
     type: "mixed",
     content: "Titik M adalah titik tengah segmen PQ. Tentukan koordinat Q jika:",
     parts: [
@@ -232,7 +155,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Jarak Titik ke Sumbu-x", {
+  Q(10, "Jarak Titik ke Sumbu-x", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -251,7 +174,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(16, "Jarak Titik ke Sumbu-y", {
+  Q(11, "Jarak Titik ke Sumbu-y", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -270,7 +193,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(17, "Titik Paling Jauh dari Sumbu", {
+  Q(12, "Titik Paling Jauh dari Sumbu", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -288,7 +211,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(18, "Garis Sejajar Sumbu-x", {
+  Q(13, "Garis Sejajar Sumbu-x", {
     type: "mixed",
     content: "Perhatikan semua titik yang memiliki ordinat (y) = −3.",
     diagram: {
@@ -307,7 +230,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "Garis Sejajar Sumbu-y", {
+  Q(14, "Garis Sejajar Sumbu-y", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -325,7 +248,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(20, "Titik ke-4 Persegi Panjang", {
+  Q(15, "Titik ke-4 Persegi Panjang", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -349,7 +272,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(21, "Segitiga dari Koordinat", {
+  Q(16, "Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -371,17 +294,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(22, "Translasi (Pergeseran) Titik", {
-    type: "mixed",
-    content: "Titik P(2, 3) digeser (ditranslasi) dengan vektor T(−1, 4) menghasilkan P'.",
-    parts: [
-      { label: "a.", text: "Tentukan koordinat P'." },
-      { label: "b.", text: "Di kuadran mana P berada? Di kuadran mana P' berada?" },
-      { label: "c.", text: "Translasi A(−4, −2) dengan vektor (3, 5). Tentukan A'." },
-    ],
-  }),
-
-  Q(23, "Koordinat Titik dengan Syarat", {
+  Q(17, "Koordinat Titik dengan Syarat", {
     type: "mixed",
     content: "Tentukan koordinat titik yang memenuhi syarat-syarat berikut:",
     parts: [
@@ -391,7 +304,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(24, "Soal ANBK - Evaluasi Pernyataan", {
+  Q(18, "Soal ANBK - Evaluasi Pernyataan", {
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:",
     parts: [
@@ -402,7 +315,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(25, "Diagram 6 Titik — Baca dan Analisis", {
+  Q(19, "Diagram 6 Titik — Baca dan Analisis", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -422,19 +335,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(26, "Titik pada Berbagai Kuadran", {
-    type: "mixed",
-    content: "Setiap titik berikut dinyatakan dalam bentuk aljabar. Tentukan kuadrannya jika a > 0 dan b > 0:",
-    parts: [
-      { label: "a.", math: "P(a,\\ b)" },
-      { label: "b.", math: "Q(-a,\\ b)" },
-      { label: "c.", math: "R(-a,\\ -b)" },
-      { label: "d.", math: "S(a,\\ -b)" },
-      { label: "e.", math: "T(-b,\\ a)" },
-    ],
-  }),
-
-  Q(27, "Titik dengan Kondisi Aljabar", {
+  Q(20, "Titik dengan Kondisi Aljabar", {
     type: "mixed",
     content: "Tentukan kuadran titik P(2k+1, 3) agar berada di Kuadran I.",
     parts: [
@@ -443,7 +344,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(28, "Titik pada Sumbu dari Kondisi Aljabar", {
+  Q(21, "Titik pada Sumbu dari Kondisi Aljabar", {
     type: "mixed",
     content: "Tentukan nilai m agar:",
     parts: [
@@ -452,30 +353,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(29, "Diagram Titik dan Bayangan", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 3, y: 4, label: "T(3,4)", color: "#f472b6", labelPos: "tr" },
-        { x: -3, y: 4, label: "T₁", color: "#60a5fa", labelPos: "tl" },
-        { x: 3, y: -4, label: "T₂", color: "#34d399", labelPos: "br" },
-        { x: -3, y: -4, label: "T₃", color: "#facc15", labelPos: "bl" },
-      ],
-      segs: [
-        { x1: 3, y1: 4, x2: -3, y2: 4, color: "rgba(255,255,255,0.12)", dashed: true },
-        { x1: 3, y1: 4, x2: 3, y2: -4, color: "rgba(255,255,255,0.12)", dashed: true },
-        { x1: 3, y1: 4, x2: -3, y2: -4, color: "rgba(255,255,255,0.12)", dashed: true },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "T₁ adalah hasil pencerminan T terhadap sumbu mana?" },
-      { label: "b.", text: "T₂ adalah hasil pencerminan T terhadap sumbu mana?" },
-      { label: "c.", text: "T₃ adalah hasil pencerminan T terhadap apa?" },
-    ],
-  }),
-
-  Q(30, "Membaca Koordinat — 5 Titik Baru", {
+  Q(22, "Membaca Koordinat — 5 Titik Baru", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -494,7 +372,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(31, "Kontekstual — Peta Kota", {
+  Q(23, "Kontekstual — Peta Kota", {
     type: "mixed",
     content: "Sebuah peta kota menggunakan sistem koordinat kartesius. Posisi beberapa tempat adalah:\nRumah: A(3, 2), Sekolah: B(−4, 5), Pasar: C(−2, −3), Kantor Polisi: D(4, −4), Taman: E(0, 3)",
     parts: [
@@ -504,25 +382,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(32, "Diagram — Titik Simetris", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 4, y: 3, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -4, y: 3, label: "A'", color: "#f472b6", labelPos: "tl" },
-        { x: 2, y: -4, label: "B", color: "#60a5fa", labelPos: "br" },
-        { x: 2, y: 4, label: "B'", color: "#60a5fa", labelPos: "tr" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "A dan A' simetris terhadap sumbu mana?" },
-      { label: "b.", text: "B dan B' simetris terhadap sumbu mana?" },
-      { label: "c.", text: "Tuliskan koordinat cerminan titik C(5, −2) terhadap sumbu-y." },
-    ],
-  }),
-
-  Q(33, "Persegi dari Koordinat", {
+  Q(24, "Persegi dari Koordinat", {
     type: "mixed",
     content: "Tiga titik sudut persegi adalah A(0, 0), B(4, 0), C(4, 4).",
     parts: [
@@ -532,7 +392,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(34, "Mencari Koordinat dari Jarak", {
+  Q(25, "Mencari Koordinat dari Jarak", {
     type: "mixed",
     content: "Tentukan nilai yang belum diketahui:",
     parts: [
@@ -542,7 +402,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(35, "ANBK — Pasangkan Titik dengan Kuadran", {
+  Q(26, "ANBK — Pasangkan Titik dengan Kuadran", {
     type: "mixed",
     diagram: {
       size: 260, range: 6, quadrantLabels: true,
@@ -561,7 +421,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(36, "Titik Istimewa pada Sistem Koordinat", {
+  Q(27, "Titik Istimewa pada Sistem Koordinat", {
     type: "mixed",
     content: "Jawab pertanyaan tentang titik-titik istimewa berikut:",
     parts: [
@@ -572,7 +432,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(37, "Menemukan Pola Koordinat", {
+  Q(28, "Menemukan Pola Koordinat", {
     type: "mixed",
     content: "Perhatikan deretan titik: A(1, 2), B(2, 4), C(3, 6), D(4, 8)",
     parts: [
@@ -582,7 +442,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(38, "Diagram — Jarak ke Kedua Sumbu", {
+  Q(29, "Diagram — Jarak ke Kedua Sumbu", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -599,7 +459,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(39, "Soal UN — Koordinat dalam Konteks", {
+  Q(30, "Soal UN — Koordinat dalam Konteks", {
     type: "mixed",
     content: "Seorang navigator kapal mencatat posisinya di peta koordinat:\nMulai: A(2, −3)\nBergerak 5 satuan ke kanan dan 4 satuan ke atas → posisi B.",
     parts: [
@@ -609,7 +469,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(40, "Soal ANBK — Gabungan Konsep Unsur Koordinat", {
+  Q(31, "Soal ANBK — Gabungan Konsep Unsur Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -653,7 +513,7 @@ const UnsurUnsurPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Cartesius · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-sky-400 text-xs font-bold">📋 31 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
