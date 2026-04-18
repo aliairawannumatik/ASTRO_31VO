@@ -598,6 +598,19 @@ const RusukBalokSVG = () => (
     <rect x="220" y="174" width="8" height="4" fill="#facc15"/>
     <text x="232" y="179" fill="#facc15" fontSize="8" fontFamily="monospace">4 rusuk t</text>
     <text x="220" y="195" fill="#fff" fontSize="8" fontFamily="monospace">= 12 rusuk</text>
+    {/* Vertex labels — ALAS (A B C D) */}
+    <text x="13"  y="183" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="173" y="183" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="213" y="134" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="53"  y="143" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
+    {/* Vertex labels — ATAP (E F G H) */}
+    <text x="13"  y="66"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">E</text>
+    <text x="173" y="66"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">F</text>
+    <text x="213" y="27"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">G</text>
+    <text x="53"  y="27"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">H</text>
+    {/* Group label hints */}
+    <text x="85"  y="200" fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">ALAS: ABCD</text>
+    <text x="130" y="20"  fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">ATAP: EFGH</text>
   </svg>
 );
 
