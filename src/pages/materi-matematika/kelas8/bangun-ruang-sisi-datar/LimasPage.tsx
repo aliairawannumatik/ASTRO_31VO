@@ -1756,16 +1756,6 @@ const sections: Sec[] = [
             Hubungan inilah yang membuat Teorema Pythagoras sangat penting sebelum menghitung luas permukaan.
           </p>
         </div>
-        <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3 text-xs space-y-2 text-white/75">
-          <p className="text-orange-300 font-semibold">Hubungan utama: tinggi limas, jarak pusat alas ke sisi, dan apotema sisi tegak.</p>
-          <ApotemaLimasSVG />
-          <BlockMath math="l = \sqrt{t^2 + \left(\frac{s}{2}\right)^2}" />
-          <p className="text-white/50">
-            Rumus ini muncul dari segitiga siku-siku yang dibentuk oleh tinggi limas <InlineMath math="t" />,
-            setengah sisi alas <InlineMath math="\frac{s}{2}" />, dan apotema <InlineMath math="l" />.
-          </p>
-        </div>
-
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
           <div>
             <p className="text-cyan-300 font-semibold text-xs">Semua hubungan Pythagoras penting pada limas</p>
