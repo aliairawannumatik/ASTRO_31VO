@@ -614,8 +614,12 @@ const RusukBalokSVG = () => (
   </svg>
 );
 
+const SISI_VERTS: [number, number, string, number, number][] = [
+  [30,170,"A",-14,13],[170,170,"B",5,13],[210,130,"C",5,5],[70,130,"D",-15,5],
+  [30,70,"E",-14,-4],[170,70,"F",5,-4],[210,30,"G",5,-3],[70,30,"H",-15,-3],
+];
 const SisiBalokSVG = () => (
-  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Sisi balok beranimasi">
+  <svg viewBox="-5 5 310 210" className="w-full max-w-xs mx-auto my-2" aria-label="Sisi balok beranimasi ABCD.EFGH">
     <defs>
       <style>{`
         @keyframes sisiB{0%,100%{fill-opacity:0.75;}50%{fill-opacity:0.1;}}
@@ -636,6 +640,13 @@ const SisiBalokSVG = () => (
     <line x1="170" y1="70" x2="210" y2="30" stroke="#fff" strokeWidth="1.2"/>
     <line x1="30" y1="170" x2="70" y2="130" stroke="#fff" strokeWidth="1.2"/>
     <line x1="170" y1="170" x2="210" y2="130" stroke="#fff" strokeWidth="1.2"/>
+    {SISI_VERTS.map(([x,y,lbl,dx,dy]) => (
+      <g key={lbl}>
+        <circle cx={x} cy={y} r="3" fill="#facc15" opacity="0.95"/>
+        <text x={x+dx} y={y+dy} fill="#f8fafc" fontSize="10" fontFamily="monospace" fontWeight="bold"
+          style={{ pointerEvents:"none" }}>{lbl}</text>
+      </g>
+    ))}
     <text x="80" y="125" fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold">DEPAN</text>
     <text x="220" y="185" fill="#fff" fontSize="9" fontFamily="monospace">6 sisi</text>
     <text x="220" y="198" fill="#facc15" fontSize="9" fontFamily="monospace">3 pasang</text>
