@@ -1920,35 +1920,48 @@ const kerangkaExamples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Kerangka kubus terbuat dari kawat besi sepanjang <InlineMath math="180 \text{ cm}" />.</p>
-        <p>Di dalam kubus dimasukkan sebuah bola yang tepat menyentuh semua sisi kubus (bola paling besar yang muat).</p>
-        <p>Hitunglah luas permukaan bola tersebut! <InlineMath math="(\pi = 3{,}14)" /></p>
+        <p>Tiga kerangka kubus dibuat dari kawat. Panjang rusuk ketiga kubus merupakan tiga bilangan bulat berurutan (dalam cm).</p>
+        <p>Jika total panjang kawat untuk ketiga kerangka tersebut adalah <InlineMath math="432 \text{ cm}" />, tentukan:</p>
+        <p>(a) Panjang rusuk masing-masing kubus</p>
+        <p>(b) Volume kubus yang terbesar</p>
+        <p>(c) Luas permukaan kubus yang terkecil</p>
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Cari panjang rusuk dari panjang kerangka:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-          <BlockMath math="K = 12s \Rightarrow 180 = 12s \Rightarrow s = 15 \text{ cm}" />
-        </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Tentukan jari-jari bola:</p>
+        <p className="text-red-400 font-semibold">Langkah 1 — Misalkan rusuk ketiga kubus:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs text-white/70">
-          <p>Bola menyentuh semua sisi → diameter bola = panjang rusuk kubus</p>
-          <BlockMath math="d = s = 15 \text{ cm} \Rightarrow r = \frac{15}{2} = 7{,}5 \text{ cm}" />
+          <p>Misalkan rusuk ketiga kubus: <InlineMath math="n,\ n+1,\ n+2" /> (cm)</p>
+          <p>Total kerangka = jumlah panjang semua kawat ketiga kubus</p>
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Hitung luas permukaan bola:</p>
+        <p className="text-red-400 font-semibold">Langkah 2 — Buat persamaan dan selesaikan:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-          <BlockMath math="L_{\text{bola}} = 4\pi r^2 = 4 \times 3{,}14 \times (7{,}5)^2" />
-          <BlockMath math="= 4 \times 3{,}14 \times 56{,}25 = 706{,}5 \text{ cm}^2" />
+          <BlockMath math="12n + 12(n+1) + 12(n+2) = 432" />
+          <BlockMath math="12(3n + 3) = 432" />
+          <BlockMath math="3n + 3 = 36 \Rightarrow n = 11" />
+        </div>
+        <p className="text-red-400 font-semibold">(a) Panjang rusuk:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs text-white/80 space-y-0.5">
+          <p>• Kubus 1: <InlineMath math="s_1 = 11 \text{ cm}" /></p>
+          <p>• Kubus 2: <InlineMath math="s_2 = 12 \text{ cm}" /></p>
+          <p>• Kubus 3: <InlineMath math="s_3 = 13 \text{ cm}" /></p>
+        </div>
+        <p className="text-red-400 font-semibold">(b) Volume kubus terbesar (<InlineMath math="s = 13" /> cm):</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="V = s^3 = 13^3 = 2.197 \text{ cm}^3" />
+        </div>
+        <p className="text-red-400 font-semibold">(c) Luas permukaan kubus terkecil (<InlineMath math="s = 11" /> cm):</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <BlockMath math="L = 6s^2 = 6 \times 11^2 = 6 \times 121 = 726 \text{ cm}^2" />
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
           <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Rusuk kubus = 15 cm</p>
-          <p className="text-white/80">• Jari-jari bola = 7,5 cm</p>
-          <p className="text-white/80">• Luas permukaan bola = <strong className="text-yellow-300">706,5 cm²</strong></p>
+          <p className="text-white/80">• Rusuk: <strong className="text-yellow-300">11 cm, 12 cm, 13 cm</strong></p>
+          <p className="text-white/80">• Volume terbesar: <strong className="text-yellow-300">2.197 cm³</strong></p>
+          <p className="text-white/80">• Luas permukaan terkecil: <strong className="text-yellow-300">726 cm²</strong></p>
         </div>
         <div className="bg-cyan-950/40 border border-cyan-700/30 rounded p-2 text-xs text-cyan-200">
-          💡 <strong>Ingat:</strong> Bola yang muat dalam kubus memiliki diameter = rusuk kubus, sehingga <InlineMath math="r = \frac{s}{2}" />.
+          💡 <strong>Cek:</strong> <InlineMath math="12(11+12+13) = 12 \times 36 = 432 \text{ cm}" /> ✓
         </div>
       </div>
     ),
