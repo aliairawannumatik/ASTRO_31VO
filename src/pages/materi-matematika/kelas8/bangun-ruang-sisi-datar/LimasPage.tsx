@@ -861,14 +861,12 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <circle cx={B.x} cy={B.y} r="3" fill="#e5e7eb" />
             <circle cx={C.x} cy={C.y} r="3.5" fill="#f472b6" />
             <circle cx={O.x} cy={O.y} r="3.5" fill="#38bdf8" />
-            <text x={T.x + 4} y={T.y - 2} fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
-            <text x={A.x - 16} y={A.y + 6} fill="#e5e7eb" fontSize="9" fontFamily="monospace">A</text>
-            <text x={B.x - 14} y={B.y + 4} fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
-            <text x={C.x + 4} y={C.y + 4} fill="#f472b6" fontSize="9" fontFamily="monospace">C</text>
-            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
-            <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
-            <text x={(O.x + C.x) / 2 - 2} y={(O.y + C.y) / 2 - 6} fill="#f472b6" fontSize="10" fontFamily="monospace">R</text>
-            <text x={(T.x + C.x) / 2 + 4} y={(T.y + C.y) / 2} fill="#fb923c" fontSize="10" fontFamily="monospace">e</text>
+            <text x={T.x + 4} y={T.y - 2} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">T</text>
+            <text x={A.x - 18} y={A.y + 6} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+            <text x={B.x - 16} y={B.y + 4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+            <text x={C.x + 4} y={C.y + 4} fill="#f472b6" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+            <text x={O.x - 17} y={O.y + 4} fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
+            <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
           </svg>
           <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-0.5">
             <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-pink-300 font-semibold">R</span> jari-jari luar alas, <span className="text-orange-300 font-semibold">e</span> rusuk tegak.</p>
@@ -910,15 +908,13 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <circle cx={C.x} cy={C.y} r="3" fill="#e5e7eb" />
             <circle cx={O.x} cy={O.y} r="3.5" fill="#38bdf8" />
             <circle cx={M.x} cy={M.y} r="3.5" fill="#facc15" />
-            <text x={T.x + 4} y={T.y - 2} fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
-            <text x={A.x - 16} y={A.y + 6} fill="#e5e7eb" fontSize="9" fontFamily="monospace">A</text>
-            <text x={B.x - 14} y={B.y + 4} fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
-            <text x={C.x + 4} y={C.y + 4} fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
-            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
-            <text x={M.x + 4} y={M.y + 4} fill="#facc15" fontSize="9" fontFamily="monospace">F</text>
-            <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
-            <text x={(O.x + M.x) / 2 + 2} y={(O.y + M.y) / 2 + 8} fill="#facc15" fontSize="10" fontFamily="monospace">r</text>
-            <text x={(T.x + M.x) / 2 + 6} y={(T.y + M.y) / 2} fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
+            <text x={T.x + 4} y={T.y - 2} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">T</text>
+            <text x={A.x - 18} y={A.y + 6} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+            <text x={B.x - 16} y={B.y + 4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+            <text x={C.x + 4} y={C.y + 4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+            <text x={O.x - 17} y={O.y + 4} fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
+            <text x={M.x + 4} y={M.y + 4} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">F</text>
+            <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
           </svg>
           <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-0.5">
             <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-yellow-300 font-semibold">r</span> jari-jari dalam alas, <span className="text-orange-300 font-semibold">l</span> tinggi sisi tegak.</p>
@@ -1037,17 +1033,14 @@ const PythagorasLimasSegiempatOverview = () => (
         <circle cx="100" cy="126" r="3" fill="#e5e7eb" />
         <circle cx="132" cy="146" r="3.5" fill="#38bdf8" />
         <circle cx="188" cy="146" r="3.5" fill="#fb923c" />
-        <text x="137" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
-        <text x="33" y="172" fill="#e5e7eb" fontSize="9" fontFamily="monospace">A</text>
-        <text x="163" y="178" fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
-        <text x="217" y="126" fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
-        <text x="83" y="123" fill="#e5e7eb" fontSize="9" fontFamily="monospace">D</text>
-        <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
-        <text x="192" y="144" fill="#fb923c" fontSize="9" fontFamily="monospace">F</text>
-        <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
-        <text x="164" y="90" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
-        <text x="150" y="141" fill="#facc15" fontSize="10" fontFamily="monospace">s/2</text>
-        <text x="180" y="78" fill="#e5e7eb" fontSize="10" fontFamily="monospace">e</text>
+        <text x="137" y="39" fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">T</text>
+        <text x="20" y="172" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+        <text x="163" y="181" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+        <text x="217" y="126" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+        <text x="126" y="148" fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
+        <text x="192" y="144" fill="#fb923c" fontSize="13" fontFamily="monospace" fontWeight="bold">F</text>
+        <text x="140" y="95" fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
+        <text x="150" y="141" fill="#facc15" fontSize="12" fontFamily="monospace">s/2</text>
       </svg>
       <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
         <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak (kanan), <span className="text-white/60 font-semibold">e</span> rusuk tegak T–C.</p>
@@ -1099,15 +1092,13 @@ const PythagorasLimasSegiempatDiagonalSVG = () => (
       <circle cx="214" cy="126" r="3" fill="#e5e7eb" />
       <circle cx="100" cy="126" r="3" fill="#e5e7eb" />
       <circle cx="132" cy="146" r="3.5" fill="#38bdf8" />
-      <text x="137" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
-      <text x="33" y="172" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
-      <text x="163" y="178" fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
-      <text x="218" y="126" fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
-      <text x="83" y="123" fill="#e5e7eb" fontSize="9" fontFamily="monospace">D</text>
-      <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
-      <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
-      <text x="70" y="163" fill="#f472b6" fontSize="10" fontFamily="monospace">d/2</text>
-      <text x="76" y="95" fill="#fb923c" fontSize="10" fontFamily="monospace">e</text>
+      <text x="137" y="39" fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">T</text>
+      <text x="18" y="172" fill="#f472b6" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+      <text x="163" y="181" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+      <text x="218" y="126" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+      <text x="126" y="148" fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
+      <text x="140" y="95" fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
+      <text x="57" y="163" fill="#f472b6" fontSize="12" fontFamily="monospace">d/2</text>
     </svg>
     <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
       <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-pink-300 font-semibold">d/2</span> setengah diagonal alas, <span className="text-orange-300 font-semibold">e</span> rusuk tegak.</p>
