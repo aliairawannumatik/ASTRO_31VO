@@ -283,6 +283,8 @@ import MathGameArenaPage from "./pages/MathGameArenaPage";
 import MathGameArenaKelas7Page from "./pages/MathGameArenaKelas7Page";
 import MathGameArenaKelas8Page from "./pages/MathGameArenaKelas8Page";
 import MathGameArenaKelas9Page from "./pages/MathGameArenaKelas9Page";
+import MathGameArenaUmumPage from "./pages/MathGameArenaUmumPage";
+import CarRacingGamePage from "./pages/math-game-arena/umum/CarRacingGamePage";
 
 // Math Game Arena - Kelas 7 Topic Pages
 import BilanganBulatMGAK7Page from "./pages/math-game-arena/kelas7/BilanganBulatPage";
@@ -970,6 +972,8 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-7" element={<MathGameArenaKelas7Page />} />
       <Route path="/math-game-arena/kelas-8" element={<MathGameArenaKelas8Page />} />
       <Route path="/math-game-arena/kelas-9" element={<MathGameArenaKelas9Page />} />
+      <Route path="/math-game-arena/umum" element={<MathGameArenaUmumPage />} />
+      <Route path="/math-game-arena/umum/balap-mobil" element={<CarRacingGamePage />} />
       
       {/* Math Game Arena - Kelas 7 Topic Routes */}
       <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
