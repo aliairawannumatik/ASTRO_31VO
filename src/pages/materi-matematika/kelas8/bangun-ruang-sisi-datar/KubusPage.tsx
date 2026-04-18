@@ -6,6 +6,15 @@ import { BookOpen, ChevronDown, ChevronUp, RotateCcw, Layers } from "lucide-reac
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import imgRubik    from "@assets/image_1776472007597.png";
+import imgDadu     from "@assets/image_1776472028361.png";
+import imgAkuarium from "@assets/image_1776472052129.png";
+import imgBrankas  from "@assets/image_1776472077288.png";
+import imgHadiah   from "@assets/image_1776472112355.png";
+import imgEsBatu   from "@assets/image_1776472132317.png";
+import imgJam      from "@assets/image_1776472148527.png";
+import imgSpeaker  from "@assets/image_1776472171497.png";
+import imgBak      from "@assets/image_1776472196508.png";
 
 /* ─────────────────────────────────────────────────────────────
    SIMPLE ROTATABLE CUBE — drag to rotate, no unfolding
@@ -2013,6 +2022,30 @@ const KubusPage = () => {
               <strong className="text-cyan-300"> kubus</strong> — mulai dari unsur-unsurnya, jaring-jaring interaktif 3D,
               hingga cara menghitung <strong className="text-yellow-300">luas permukaan</strong> dan <strong className="text-green-300">volume</strong>-nya.
             </p>
+          </div>
+          {/* Contoh benda berbentuk kubus */}
+          <div className="bg-slate-800/50 border border-slate-600/40 rounded-xl p-3">
+            <p className="text-xs text-cyan-300 font-semibold mb-2 text-center">📦 Contoh Benda Berbentuk Kubus dalam Kehidupan Sehari-hari</p>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { src: imgRubik,    label: "Rubik's Cube" },
+                { src: imgDadu,     label: "Dadu" },
+                { src: imgAkuarium, label: "Akuarium Kubus" },
+                { src: imgBrankas,  label: "Brankas" },
+                { src: imgHadiah,   label: "Kotak Hadiah" },
+                { src: imgEsBatu,   label: "Es Batu" },
+                { src: imgJam,      label: "Jam Digital" },
+                { src: imgSpeaker,  label: "Speaker Bluetooth" },
+                { src: imgBak,      label: "Bak Mandi" },
+              ].map(({ src, label }) => (
+                <div key={label} className="flex flex-col items-center gap-1">
+                  <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/50 bg-slate-900/40">
+                    <img src={src} alt={label} className="w-full h-full object-cover" />
+                  </div>
+                  <span className="text-[10px] text-white/65 text-center leading-tight">{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ),
