@@ -833,47 +833,107 @@ const PythagorasLimasSurfaceGuide = () => (
 
     <div className="bg-slate-900/70 border border-orange-700/40 rounded-xl p-3 space-y-3">
       <div>
-        <p className="text-orange-300 font-semibold text-xs">Limas Segiempat Beraturan</p>
-        <p className="text-white/45 text-[11px]">Alas persegi dengan sisi <InlineMath math="s" />. Posisi limas dimiringkan agar tinggi, apotema, diagonal alas, dan rusuk tegak tampak jelas.</p>
+        <p className="text-orange-300 font-semibold text-xs">Limas Segiempat Beraturan — Pythagoras Sisi Tegak Kanan</p>
+        <p className="text-white/45 text-[11px]">Alas persegi dengan sisi <InlineMath math="s" />. Sisi tegak <strong>kanan</strong> T–B–C disorot: apotema <InlineMath math="l" /> turun ke titik tengah <InlineMath math="M" /> rusuk kanan.</p>
       </div>
-      <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras pada limas segiempat">
+      <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras pada limas segiempat sisi tegak kanan">
         <defs>
           <filter id="quadGlow" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur stdDeviation="2.2" result="blur" />
             <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
         </defs>
+        {/* base */}
         <polygon points="48,166 162,166 214,126 100,126" fill="#3b82f6" fillOpacity="0.22" stroke="#60a5fa" strokeWidth="2" />
-        <polygon points="48,166 162,166 132,42" fill="#8b5cf6" fillOpacity="0.24" stroke="#c4b5fd" strokeWidth="1.3" />
-        <polygon points="162,166 214,126 132,42" fill="#f97316" fillOpacity="0.22" stroke="#fdba74" strokeWidth="1.3" />
-        <polygon points="214,126 100,126 132,42" fill="#22c55e" fillOpacity="0.16" stroke="#86efac" strokeWidth="1.1" />
-        <polygon points="100,126 48,166 132,42" fill="#eab308" fillOpacity="0.14" stroke="#fde047" strokeWidth="1.1" />
+        {/* dimmed faces */}
+        <polygon points="48,166 162,166 132,42" fill="#8b5cf6" fillOpacity="0.10" stroke="#c4b5fd" strokeWidth="0.9" strokeOpacity="0.5" />
+        <polygon points="214,126 100,126 132,42" fill="#22c55e" fillOpacity="0.10" stroke="#86efac" strokeWidth="0.9" strokeOpacity="0.5" />
+        <polygon points="100,126 48,166 132,42" fill="#eab308" fillOpacity="0.10" stroke="#fde047" strokeWidth="0.9" strokeOpacity="0.5" />
+        {/* RIGHT face T-B-C highlighted */}
+        <polygon points="162,166 214,126 132,42" fill="#f97316" fillOpacity="0.30" stroke="#fdba74" strokeWidth="1.8" />
+        {/* t: height T→O */}
         <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#quadGlow)" />
-        <line x1="132" y1="42" x2="105" y2="166" stroke="#fb923c" strokeWidth="3" filter="url(#quadGlow)" />
-        <line x1="132" y1="146" x2="105" y2="166" stroke="#facc15" strokeWidth="2.5" />
-        <line x1="132" y1="146" x2="48" y2="166" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
-        <line x1="132" y1="42" x2="48" y2="166" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3" />
-        <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.8" strokeDasharray="5,3" />
+        {/* l: apotema T→M_right(188,146) midpoint of BC */}
+        <line x1="132" y1="42" x2="188" y2="146" stroke="#fb923c" strokeWidth="3" filter="url(#quadGlow)" />
+        {/* s/2: O→M_right */}
+        <line x1="132" y1="146" x2="188" y2="146" stroke="#facc15" strokeWidth="2.5" />
+        {/* rusuk tegak e: T→C(214,126) */}
+        <line x1="132" y1="42" x2="214" y2="126" stroke="#e5e7eb" strokeWidth="1.8" strokeDasharray="4,3" />
+        {/* diagonal for context */}
+        <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3" />
         <circle cx="132" cy="42" r="4" fill="#facc15" />
         <circle cx="132" cy="146" r="3.5" fill="#38bdf8" />
-        <circle cx="105" cy="166" r="3.5" fill="#fb923c" />
-        <circle cx="48" cy="166" r="3" fill="#f472b6" />
+        <circle cx="188" cy="146" r="3.5" fill="#fb923c" />
+        <circle cx="214" cy="126" r="3" fill="#e5e7eb" />
         <text x="137" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
         <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
-        <text x="96" y="181" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
-        <text x="35" y="166" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
+        <text x="192" y="144" fill="#fb923c" fontSize="9" fontFamily="monospace">M</text>
+        <text x="217" y="126" fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
         <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
-        <text x="113" y="107" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
-        <text x="116" y="163" fill="#facc15" fontSize="10" fontFamily="monospace">s/2</text>
-        <text x="84" y="91" fill="#f472b6" fontSize="10" fontFamily="monospace">e</text>
+        <text x="164" y="90" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
+        <text x="150" y="141" fill="#facc15" fontSize="10" fontFamily="monospace">s/2</text>
+        <text x="180" y="78" fill="#e5e7eb" fontSize="10" fontFamily="monospace">e</text>
       </svg>
       <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
-        <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak, <span className="text-pink-300 font-semibold">e</span> rusuk tegak.</p>
-        <BlockMath math="OM=\frac{s}{2},\quad OA=\frac{s\sqrt{2}}{2}" />
+        <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak (kanan), <span className="text-white/60 font-semibold">e</span> rusuk tegak T–C.</p>
+        <BlockMath math="OM=\frac{s}{2},\quad OC=\frac{s\sqrt{2}}{2}" />
         <BlockMath math="l^2=t^2+\left(\frac{s}{2}\right)^2" />
         <BlockMath math="e^2=t^2+\left(\frac{s\sqrt{2}}{2}\right)^2=t^2+\frac{s^2}{2}" />
         <BlockMath math="e^2=l^2+\left(\frac{s}{2}\right)^2" />
       </div>
+    </div>
+  </div>
+);
+
+const PythagorasLimasSegiempatDiagonalSVG = () => (
+  <div className="bg-slate-900/70 border border-pink-700/40 rounded-xl p-3 space-y-3">
+    <div>
+      <p className="text-pink-300 font-semibold text-xs">Limas Segiempat Beraturan — Pythagoras: Setengah Diagonal, Tinggi, dan Rusuk Tegak</p>
+      <p className="text-white/45 text-[11px]">
+        Segitiga siku-siku T–O–A: tinggi limas <InlineMath math="t" />, setengah diagonal alas <InlineMath math="\tfrac{d}{2}=\tfrac{s\sqrt{2}}{2}" />, dan rusuk tegak <InlineMath math="e" />.
+        Sudut siku-siku berada di <strong className="text-sky-300">O</strong> (pusat alas).
+      </p>
+    </div>
+    <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras setengah diagonal limas segiempat">
+      <defs>
+        <filter id="diagGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2.2" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      {/* base */}
+      <polygon points="48,166 162,166 214,126 100,126" fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="1.5" />
+      {/* all lateral faces dimmed */}
+      <polygon points="48,166 162,166 132,42" fill="#8b5cf6" fillOpacity="0.10" stroke="#c4b5fd" strokeWidth="0.9" strokeOpacity="0.4" />
+      <polygon points="162,166 214,126 132,42" fill="#f97316" fillOpacity="0.10" stroke="#fdba74" strokeWidth="0.9" strokeOpacity="0.4" />
+      <polygon points="214,126 100,126 132,42" fill="#22c55e" fillOpacity="0.10" stroke="#86efac" strokeWidth="0.9" strokeOpacity="0.4" />
+      {/* face T-D-A highlighted as the plane of the right triangle */}
+      <polygon points="100,126 48,166 132,42" fill="#f472b6" fillOpacity="0.15" stroke="#f9a8d4" strokeWidth="1.2" />
+      {/* full diagonal A–C for context */}
+      <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3" />
+      {/* t: height T→O, blue dashed */}
+      <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="3" strokeDasharray="7,4" filter="url(#diagGlow)" />
+      {/* d/2: O→A, pink solid */}
+      <line x1="132" y1="146" x2="48" y2="166" stroke="#f472b6" strokeWidth="3" filter="url(#diagGlow)" />
+      {/* e: rusuk tegak T→A, orange */}
+      <line x1="132" y1="42" x2="48" y2="166" stroke="#fb923c" strokeWidth="3" filter="url(#diagGlow)" />
+      {/* right angle mark at O */}
+      <path d="M 132 136 L 124 138 L 124 146" stroke="white" fill="none" strokeWidth="1.6" />
+      <circle cx="132" cy="42" r="4" fill="#facc15" />
+      <circle cx="132" cy="146" r="3.5" fill="#38bdf8" />
+      <circle cx="48" cy="166" r="3.5" fill="#f472b6" />
+      <text x="137" y="39" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
+      <text x="136" y="148" fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
+      <text x="33" y="166" fill="#f472b6" fontSize="9" fontFamily="monospace">A</text>
+      <text x="140" y="95" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
+      <text x="70" y="163" fill="#f472b6" fontSize="10" fontFamily="monospace">d/2</text>
+      <text x="76" y="95" fill="#fb923c" fontSize="10" fontFamily="monospace">e</text>
+    </svg>
+    <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
+      <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-pink-300 font-semibold">d/2</span> setengah diagonal alas, <span className="text-orange-300 font-semibold">e</span> rusuk tegak.</p>
+      <BlockMath math="d = s\sqrt{2},\quad \frac{d}{2} = \frac{s\sqrt{2}}{2}" />
+      <BlockMath math="\boxed{e^2 = t^2 + \left(\frac{d}{2}\right)^2 = t^2 + \frac{s^2}{2}}" />
+      <BlockMath math="e = \sqrt{t^2 + \frac{s^2}{2}}" />
     </div>
   </div>
 );
@@ -1534,11 +1594,14 @@ const sections: Sec[] = [
           <PythagorasLimasSurfaceGuide />
         </div>
 
+        <PythagorasLimasSegiempatDiagonalSVG />
+
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1.5">
           <p className="text-white font-semibold">Ringkasan hubungan unsur:</p>
           <p>• <strong className="text-cyan-300">t</strong> selalu tegak lurus bidang alas.</p>
           <p>• <strong className="text-orange-300">l</strong> menghubungkan puncak ke titik tengah rusuk alas pada sisi tegak.</p>
           <p>• <strong className="text-pink-300">e</strong> adalah rusuk tegak dari puncak ke titik sudut alas.</p>
+          <p>• <strong className="text-pink-300">e</strong> juga dapat dicari langsung dari setengah diagonal alas: <InlineMath math="e=\sqrt{t^2+\frac{s^2}{2}}" />.</p>
           <p>• Ketiganya dapat dicari dari segitiga siku-siku, sehingga Teorema Pythagoras menjadi alat utama.</p>
         </div>
       </div>
