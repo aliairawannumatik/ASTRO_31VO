@@ -248,8 +248,8 @@ const RotatingPrisma3D = ({ n, label, r = 38, h = 60 }: { n: number; label: stri
   };
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragRef.current) return;
-    const ny = dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55;
-    const nx = dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55;
+    const ny = dragRef.current.by - (e.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx + (e.clientY - dragRef.current.sy) * 0.55;
     rotYRef.current = ny; setRotY(ny); setRotX(nx);
   }, []);
   const onMouseUp = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
@@ -260,8 +260,8 @@ const RotatingPrisma3D = ({ n, label, r = 38, h = 60 }: { n: number; label: stri
   const onTouchMove = useCallback((ev: TouchEvent) => {
     if (!isDragRef.current) return;
     const t = ev.touches[0];
-    const ny = dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55;
-    const nx = dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55;
+    const ny = dragRef.current.by - (t.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx + (t.clientY - dragRef.current.sy) * 0.55;
     rotYRef.current = ny; setRotY(ny); setRotX(nx);
   }, []);
   const onTouchEnd = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);

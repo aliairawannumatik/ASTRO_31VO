@@ -6,6 +6,14 @@ import { BookOpen, ChevronDown, ChevronUp, Box } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import batuBataImg from "@assets/image_1776495090791.png";
+import bukuImg from "@assets/image_1776495176110.png";
+import kulkasImg from "@assets/image_1776495260274.png";
+import kasurImg from "@assets/image_1776495365955.png";
+import kardusImg from "@assets/image_1776495417623.png";
+import smartphoneImg from "@assets/image_1776495514155.png";
+import lemariImg from "@assets/image_1776495591763.png";
+import akuariumImg from "@assets/image_1776495641319.png";
 
 /* ─────────────────────────────────────────────────────────────
    SVG 3D MATH UTILITIES
@@ -147,6 +155,17 @@ const SimpleRotatingBalok = () => {
     </div>
   );
 };
+
+const balokObjectExamples = [
+  { src: batuBataImg, label: "Batu Bata" },
+  { src: bukuImg, label: "Buku Tulis" },
+  { src: kulkasImg, label: "Kulkas" },
+  { src: kasurImg, label: "Kasur" },
+  { src: kardusImg, label: "Kardus" },
+  { src: smartphoneImg, label: "Smartphone" },
+  { src: lemariImg, label: "Lemari" },
+  { src: akuariumImg, label: "Akuarium" },
+];
 
 /* ─────────────────────────────────────────────────────────────
    INTERACTIVE 3D BALOK — hinge-based folding, back = tumpuan
@@ -984,44 +1003,78 @@ const VolumeBalokSVG = () => {
 /* ─────────────────────────────────────────────────────────────
    BIDANG DIAGONAL BALOK — 3 types, 2 each = 6 total
 ───────────────────────────────────────────────────────────── */
-const BidangDiagonalBalokSVG = () => (
-  <div className="grid grid-cols-1 gap-3">
-    {[
-      { label:"Tipe 1: ABGH & DCEF", color:"#22d3ee", dims:"p × √(l²+t²)", count:"2 buah",
-        pts:"30,170 170,170 210,30 70,30", stroke:"#22d3ee" },
-      { label:"Tipe 2: ADFG & BCEH", color:"#4ade80", dims:"l × √(p²+t²)", count:"2 buah",
-        pts:"30,170 70,130 210,30 170,70", stroke:"#4ade80" },
-      { label:"Tipe 3: ACGE & BDHF", color:"#f97316", dims:"t × √(p²+l²)", count:"2 buah",
-        pts:"30,70 170,170 210,130 70,30", stroke:"#f97316" },
-    ].map(({ label, color, dims, count, pts, stroke }) => (
-      <div key={label} className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-3">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-semibold" style={{ color }}>{label}</span>
-          <span className="text-[10px] text-white/50 font-body">{count}</span>
-        </div>
-        <div className="flex gap-4 items-center">
-          <svg viewBox="0 0 240 175" className="w-32 flex-shrink-0">
-            {/* Wireframe */}
-            <polygon points="30,70 170,70 170,170 30,170" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1"/>
-            <polygon points="70,30 210,30 210,130 70,130" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1"/>
-            <line x1="30" y1="70" x2="70" y2="30" stroke="#334155" strokeWidth="1"/>
-            <line x1="170" y1="70" x2="210" y2="30" stroke="#334155" strokeWidth="1"/>
-            <line x1="30" y1="170" x2="70" y2="130" stroke="#334155" strokeWidth="1"/>
-            <line x1="170" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1"/>
-            <line x1="70" y1="130" x2="70" y2="30" stroke="#475569" strokeWidth="0.7" strokeDasharray="3,2"/>
-            <line x1="70" y1="130" x2="210" y2="130" stroke="#475569" strokeWidth="0.7" strokeDasharray="3,2"/>
-            {/* Diagonal plane highlight */}
-            <polygon points={pts} fill={stroke} fillOpacity={0.18} stroke={stroke} strokeWidth="1.8" strokeDasharray="5,3"/>
-          </svg>
-          <div className="text-xs text-white/70 space-y-1">
-            <p>Luas bidang:</p>
-            <p className="font-mono" style={{ color }}>{dims}</p>
+const BidangDiagonalBalokSVG = () => {
+  const planes: { key: string; verts: DBVKey[]; color: string; dims: string; type: string }[] = [
+    { key: "ABGH", verts: ["A", "B", "G", "H"], color: "#22d3ee", dims: "p × √(l²+t²)", type: "Tipe 1" },
+    { key: "DCEF", verts: ["D", "C", "F", "E"], color: "#a78bfa", dims: "p × √(l²+t²)", type: "Tipe 1" },
+    { key: "ADGF", verts: ["A", "D", "G", "F"], color: "#4ade80", dims: "l × √(p²+t²)", type: "Tipe 2" },
+    { key: "BCEH", verts: ["B", "C", "H", "E"], color: "#f472b6", dims: "l × √(p²+t²)", type: "Tipe 2" },
+    { key: "ACGE", verts: ["A", "C", "G", "E"], color: "#f97316", dims: "t × √(p²+l²)", type: "Tipe 3" },
+    { key: "BDHF", verts: ["B", "D", "H", "F"], color: "#facc15", dims: "t × √(p²+l²)", type: "Tipe 3" },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {planes.map((plane, idx) => {
+        const aId = `bdp${idx}`;
+        const aCls = `bdpc${idx}`;
+        const points = plane.verts.map(v => {
+          const [x, y] = DB_VERTS[v];
+          return `${x},${y}`;
+        }).join(" ");
+
+        return (
+          <div key={plane.key} className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-3">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-semibold" style={{ color: plane.color }}>Bidang {plane.key}</span>
+              <span className="text-[10px] text-white/50 font-body">{plane.type}</span>
+            </div>
+            <svg viewBox="0 0 200 154" className="w-full" aria-label={`Bidang diagonal ${plane.key}`}>
+              <defs>
+                <style>{`
+                  @keyframes ${aId}{0%,100%{fill-opacity:0.48;stroke-opacity:1;filter:drop-shadow(0 0 9px ${plane.color});}50%{fill-opacity:0.10;stroke-opacity:0.35;filter:none;}}
+                  .${aCls}{animation:${aId} 2s ease-in-out infinite ${(idx * 0.22).toFixed(2)}s;}
+                `}</style>
+              </defs>
+              <polygon points="14,126 134,126 134,56 14,56" fill="rgba(15,23,42,0.82)" stroke="#475569" strokeWidth="1"/>
+              <polygon points="46,96 166,96 166,22 46,22" fill="rgba(15,23,42,0.42)" stroke="#475569" strokeWidth="1"/>
+              <line x1="14" y1="126" x2="46" y2="96" stroke="#475569" strokeWidth="1"/>
+              <line x1="134" y1="126" x2="166" y2="96" stroke="#475569" strokeWidth="1"/>
+              <line x1="14" y1="56" x2="46" y2="22" stroke="#475569" strokeWidth="1"/>
+              <line x1="134" y1="56" x2="166" y2="22" stroke="#475569" strokeWidth="1"/>
+              <line x1="46" y1="96" x2="46" y2="22" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
+              <line x1="46" y1="96" x2="166" y2="96" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
+              <polygon points={points} fill={plane.color} stroke={plane.color} strokeWidth="2" strokeLinejoin="round" className={aCls}/>
+              {DB_ALL_KEYS.map(k => {
+                const [cx, cy] = DB_VERTS[k];
+                const active = plane.verts.includes(k);
+                return <circle key={k} cx={cx} cy={cy} r={active ? 3.5 : 2} fill={active ? plane.color : "#64748b"} opacity={active ? 1 : 0.55}/>;
+              })}
+              {DB_ALL_KEYS.map(k => {
+                const [cx, cy, lx, ly] = DB_VERTS[k];
+                const active = plane.verts.includes(k);
+                return (
+                  <text key={k} x={cx + lx} y={cy + ly}
+                    fill={active ? plane.color : "rgba(255,255,255,0.6)"}
+                    fontSize={active ? "10" : "8.5"} fontFamily="monospace" fontWeight="bold">
+                    {k}
+                  </text>
+                );
+              })}
+              <text x="100" y="148" fill={plane.color} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+                ABCD.EFGH
+              </text>
+            </svg>
+            <div className="mt-2 rounded-lg bg-slate-950/50 border border-slate-700/50 px-3 py-2 text-xs">
+              <p className="font-semibold" style={{ color: plane.color }}>Luas bidang: <span className="font-mono">{plane.dims}</span></p>
+              <p className="text-white/45 text-[10px]">Bidang diagonal melewati titik {plane.verts.join(", ")}.</p>
+            </div>
           </div>
-        </div>
-      </div>
-    ))}
-  </div>
-);
+        );
+      })}
+    </div>
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    VOLUME BALOK — animated water-fill visualization
@@ -1715,24 +1768,22 @@ const slides: Slide[] = [
         </div>
         <div className="bg-slate-800/50 border border-slate-600/40 rounded-xl p-3">
           <p className="text-xs text-cyan-300 font-semibold mb-2 text-center">📦 Contoh Benda Berbentuk Balok dalam Kehidupan Sehari-hari</p>
-          <div className="grid grid-cols-3 gap-2">
-            {[
-              { emoji:"🪵", label:"Batu Bata" },
-              { emoji:"📚", label:"Buku Tulis" },
-              { emoji:"🧊", label:"Kulkas" },
-              { emoji:"🛏️", label:"Kasur" },
-              { emoji:"📦", label:"Kardus" },
-              { emoji:"📱", label:"Smartphone" },
-              { emoji:"🚚", label:"Bak Truk" },
-              { emoji:"🪟", label:"Lemari" },
-              { emoji:"🐟", label:"Akuarium" },
-            ].map(({ emoji, label }) => (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {balokObjectExamples.map(({ src, label }) => (
               <div key={label} className="flex flex-col items-center gap-1 bg-slate-900/40 rounded-lg border border-slate-600/30 p-2">
-                <span className="text-2xl">{emoji}</span>
+                <div className="w-full h-20 rounded-md overflow-hidden bg-white flex items-center justify-center">
+                  <img src={src} alt={`Contoh benda berbentuk balok: ${label}`} className="w-full h-full object-contain" />
+                </div>
                 <span className="text-[10px] text-white/65 text-center leading-tight">{label}</span>
               </div>
             ))}
           </div>
+          <p className="mt-2 text-[10px] text-white/45 text-center">
+            Sumber gambar:{" "}
+            <a href="https://salamadian.com/benda-berbentuk-balok/" target="_blank" rel="noreferrer" className="text-cyan-300 hover:text-cyan-200 underline">
+              https://salamadian.com/benda-berbentuk-balok/
+            </a>
+          </p>
         </div>
       </div>
     ),
