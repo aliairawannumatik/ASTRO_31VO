@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -21,6 +21,14 @@ const games = [
     path: "/math-game-arena/umum/tetris",
     desc: "Susun blok warna-warni, kumpulkan skor tertinggi dan naiki level!",
     icon: <Layers className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Lari Matematika",
+    emoji: "🦕",
+    path: "/math-game-arena/umum/dino-run",
+    desc: "Loncat dan tiarap hindari rintangan! Jawab soal untuk bonus skor!",
+    icon: <Zap className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];

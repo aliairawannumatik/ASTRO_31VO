@@ -286,6 +286,7 @@ import MathGameArenaKelas9Page from "./pages/MathGameArenaKelas9Page";
 import MathGameArenaUmumPage from "./pages/MathGameArenaUmumPage";
 import CarRacingGamePage from "./pages/math-game-arena/umum/CarRacingGamePage";
 import TetrisGamePage from "./pages/math-game-arena/umum/TetrisGamePage";
+import DinoRunGamePage from "./pages/math-game-arena/umum/DinoRunGamePage";
 
 // Math Game Arena - Kelas 7 Topic Pages
 import BilanganBulatMGAK7Page from "./pages/math-game-arena/kelas7/BilanganBulatPage";
@@ -976,6 +977,7 @@ const AppInner = () => {
       <Route path="/math-game-arena/umum" element={<MathGameArenaUmumPage />} />
       <Route path="/math-game-arena/umum/balap-mobil" element={<CarRacingGamePage />} />
       <Route path="/math-game-arena/umum/tetris" element={<TetrisGamePage />} />
+      <Route path="/math-game-arena/umum/dino-run" element={<DinoRunGamePage />} />
       
       {/* Math Game Arena - Kelas 7 Topic Routes */}
       <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
