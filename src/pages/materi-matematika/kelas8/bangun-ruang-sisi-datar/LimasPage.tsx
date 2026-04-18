@@ -868,9 +868,13 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <text x={O.x - 17} y={O.y + 4} fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
             <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
           </svg>
-          <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-0.5">
-            <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-pink-300 font-semibold">R</span> jari-jari luar alas, <span className="text-orange-300 font-semibold">e</span> rusuk tegak.</p>
-            <BlockMath math="\boxed{e^2 = t^2 + R_{\text{alas}}^2},\quad R_{\text{alas}}=\frac{a\sqrt{3}}{3}" />
+          <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-1">
+            <p className="font-semibold text-pink-300">Segitiga siku-siku T–O–C</p>
+            <p>• <span className="text-sky-300 font-semibold">TO = t</span> — tinggi limas, tegak lurus bidang alas di titik <span className="text-sky-300 font-semibold">O</span></p>
+            <p>• <span className="text-pink-300 font-semibold">OC</span> — jari-jari luar alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik sudut <span className="text-pink-300 font-semibold">C</span></p>
+            <p>• <span className="text-orange-300 font-semibold">TC</span> — rusuk tegak dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik sudut <span className="text-pink-300 font-semibold">C</span></p>
+            <BlockMath math="TC^2 = TO^2 + OC^2" />
+            <BlockMath math="\boxed{TC^2 = t^2 + \left(\frac{a\sqrt{3}}{3}\right)^2}" />
           </div>
         </div>
 
@@ -916,9 +920,13 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <text x={M.x + 4} y={M.y + 4} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">F</text>
             <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
           </svg>
-          <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-0.5">
-            <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-yellow-300 font-semibold">r</span> jari-jari dalam alas, <span className="text-orange-300 font-semibold">l</span> tinggi sisi tegak.</p>
-            <BlockMath math="\boxed{l^2 = t^2 + r_{\text{alas}}^2},\quad r_{\text{alas}}=\frac{a\sqrt{3}}{6}" />
+          <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-1">
+            <p className="font-semibold text-emerald-300">Segitiga siku-siku T–O–F</p>
+            <p>• <span className="text-sky-300 font-semibold">TO = t</span> — tinggi limas, tegak lurus bidang alas di titik <span className="text-sky-300 font-semibold">O</span></p>
+            <p>• <span className="text-yellow-300 font-semibold">OF</span> — jari-jari dalam alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
+            <p>• <span className="text-orange-300 font-semibold">TF</span> — tinggi sisi tegak (apotema), dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
+            <BlockMath math="TF^2 = TO^2 + OF^2" />
+            <BlockMath math="\boxed{TF^2 = t^2 + \left(\frac{a\sqrt{3}}{6}\right)^2}" />
           </div>
         </div>
 
@@ -1043,11 +1051,13 @@ const PythagorasLimasSegiempatOverview = () => (
         <text x="150" y="141" fill="#facc15" fontSize="12" fontFamily="monospace">s/2</text>
       </svg>
       <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
-        <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-orange-300 font-semibold">l</span> apotema sisi tegak (kanan), <span className="text-white/60 font-semibold">e</span> rusuk tegak T–C.</p>
+        <p className="font-semibold text-orange-300">Segitiga siku-siku T–O–F</p>
+        <p>• <span className="text-sky-300 font-semibold">TO = t</span> — tinggi limas, tegak lurus bidang alas di titik <span className="text-sky-300 font-semibold">O</span></p>
+        <p>• <span className="text-yellow-300 font-semibold">OF = s/2</span> — setengah sisi alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
+        <p>• <span className="text-orange-300 font-semibold">TF</span> — tinggi sisi tegak (apotema), dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik tengah rusuk <span className="text-yellow-300 font-semibold">F</span></p>
+        <BlockMath math="TF^2 = TO^2 + OF^2" />
+        <BlockMath math="\boxed{TF^2 = t^2 + \left(\frac{s}{2}\right)^2}" />
         <BlockMath math="OF=\frac{s}{2},\quad OC=\frac{s\sqrt{2}}{2}" />
-        <BlockMath math="l^2=t^2+\left(\frac{s}{2}\right)^2" />
-        <BlockMath math="e^2=t^2+\left(\frac{s\sqrt{2}}{2}\right)^2=t^2+\frac{s^2}{2}" />
-        <BlockMath math="e^2=l^2+\left(\frac{s}{2}\right)^2" />
       </div>
     </div>
 );
@@ -1101,10 +1111,14 @@ const PythagorasLimasSegiempatDiagonalSVG = () => (
       <text x="57" y="163" fill="#f472b6" fontSize="12" fontFamily="monospace">d/2</text>
     </svg>
     <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
-      <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-pink-300 font-semibold">d/2</span> setengah diagonal alas, <span className="text-orange-300 font-semibold">e</span> rusuk tegak.</p>
-      <BlockMath math="d = s\sqrt{2},\quad \frac{d}{2} = \frac{s\sqrt{2}}{2}" />
-      <BlockMath math="\boxed{e^2 = t^2 + \left(\frac{d}{2}\right)^2 = t^2 + \frac{s^2}{2}}" />
-      <BlockMath math="e = \sqrt{t^2 + \frac{s^2}{2}}" />
+      <p className="font-semibold text-pink-300">Segitiga siku-siku T–O–A</p>
+      <p>• <span className="text-sky-300 font-semibold">TO = t</span> — tinggi limas, tegak lurus bidang alas di titik <span className="text-sky-300 font-semibold">O</span></p>
+      <p>• <span className="text-pink-300 font-semibold">OA = d/2</span> — setengah diagonal alas, dari pusat <span className="text-sky-300 font-semibold">O</span> ke titik sudut <span className="text-pink-300 font-semibold">A</span></p>
+      <p>• <span className="text-orange-300 font-semibold">TA</span> — rusuk tegak dari puncak <span className="text-yellow-300 font-semibold">T</span> ke titik sudut <span className="text-pink-300 font-semibold">A</span></p>
+      <BlockMath math="TA^2 = TO^2 + OA^2" />
+      <BlockMath math="d = s\sqrt{2},\quad OA = \frac{d}{2} = \frac{s\sqrt{2}}{2}" />
+      <BlockMath math="\boxed{TA^2 = t^2 + \left(\frac{d}{2}\right)^2 = t^2 + \frac{s^2}{2}}" />
+      <BlockMath math="TA = \sqrt{t^2 + \frac{s^2}{2}}" />
     </div>
   </div>
 );
