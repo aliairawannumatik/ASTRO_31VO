@@ -733,7 +733,7 @@ const SisiAnimSVG = () => (
     <text x="25"  y="177" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
     <text x="163" y="177" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
     <text x="204" y="134" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="63"  y="144" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="62"  y="127" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
     {/* Vertex labels — atas EFGH */}
     <text x="25"  y="56"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">E</text>
     <text x="163" y="56"  fill="#38bdf8" fontSize="10" fontFamily="monospace" fontWeight="bold">F</text>
