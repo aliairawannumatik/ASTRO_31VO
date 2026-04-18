@@ -1757,14 +1757,6 @@ const sections: Sec[] = [
           </p>
         </div>
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
-          <div>
-            <p className="text-cyan-300 font-semibold text-xs">Semua hubungan Pythagoras penting pada limas</p>
-            <p className="text-white/55 text-xs">Gunakan gambar miring berikut untuk melihat hubungan antara pusat alas, titik tengah sisi alas, titik sudut alas, puncak, apotema, dan rusuk tegak.</p>
-          </div>
-          <PythagorasLimasSegitigaOverview />
-        </div>
-
-        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
           <PythagorasLimasSegitigaDetailSVG />
         </div>
 
