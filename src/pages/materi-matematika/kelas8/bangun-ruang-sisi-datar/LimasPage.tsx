@@ -878,6 +878,180 @@ const PythagorasLimasSurfaceGuide = () => (
   </div>
 );
 
+const LimasNetSegitigaSVG = () => (
+  <svg viewBox="0 0 260 220" className="w-full max-w-sm mx-auto my-2" aria-label="Jaring-jaring limas segitiga">
+    <defs>
+      <style>{`
+        @keyframes lnetA{0%,100%{fill-opacity:.9;filter:drop-shadow(0 0 9px #38bdf8);}50%{fill-opacity:.35;filter:none;}}
+        @keyframes lnetB{0%,100%{fill-opacity:.9;filter:drop-shadow(0 0 9px #f97316);}50%{fill-opacity:.35;filter:none;}}
+        .lnet-a{animation:lnetA 2.2s ease-in-out infinite;}
+        .lnet-b{animation:lnetB 2.2s ease-in-out infinite .55s;}
+      `}</style>
+    </defs>
+    <polygon points="130,92 78,168 182,168" fill="#3b82f6" stroke="white" strokeWidth="1.6" className="lnet-a" />
+    <polygon points="130,92 78,168 62,72" fill="#8b5cf6" stroke="white" strokeWidth="1.5" className="lnet-b" />
+    <polygon points="130,92 182,168 198,72" fill="#22c55e" stroke="white" strokeWidth="1.5" className="lnet-b" />
+    <polygon points="78,168 182,168 130,214" fill="#f97316" stroke="white" strokeWidth="1.5" className="lnet-b" />
+    <text x="130" y="145" fill="white" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+    <text x="85" y="104" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 1</text>
+    <text x="176" y="104" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 2</text>
+    <text x="130" y="188" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 3</text>
+    <text x="130" y="24" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 3 × L△tegak</text>
+  </svg>
+);
+
+const LimasNetSegiempatSVG = () => (
+  <svg viewBox="0 0 260 230" className="w-full max-w-sm mx-auto my-2" aria-label="Jaring-jaring limas segiempat">
+    <defs>
+      <style>{`
+        @keyframes lnetC{0%,100%{fill-opacity:.9;filter:drop-shadow(0 0 9px #38bdf8);}50%{fill-opacity:.35;filter:none;}}
+        @keyframes lnetD{0%,100%{fill-opacity:.9;filter:drop-shadow(0 0 9px #f97316);}50%{fill-opacity:.35;filter:none;}}
+        .lnet-c{animation:lnetC 2.2s ease-in-out infinite;}
+        .lnet-d{animation:lnetD 2.2s ease-in-out infinite .55s;}
+      `}</style>
+    </defs>
+    <rect x="90" y="88" width="80" height="80" rx="3" fill="#3b82f6" stroke="white" strokeWidth="1.6" className="lnet-c" />
+    <polygon points="90,88 170,88 130,30" fill="#8b5cf6" stroke="white" strokeWidth="1.5" className="lnet-d" />
+    <polygon points="170,88 170,168 226,128" fill="#22c55e" stroke="white" strokeWidth="1.5" className="lnet-d" />
+    <polygon points="90,168 170,168 130,220" fill="#f97316" stroke="white" strokeWidth="1.5" className="lnet-d" />
+    <polygon points="90,88 90,168 34,128" fill="#ec4899" stroke="white" strokeWidth="1.5" className="lnet-d" />
+    <text x="130" y="132" fill="white" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+    <text x="130" y="70" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 1</text>
+    <text x="188" y="130" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 2</text>
+    <text x="130" y="190" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 3</text>
+    <text x="72" y="130" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 4</text>
+    <text x="130" y="18" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 4 × L△tegak</text>
+  </svg>
+);
+
+const LimasNetSegilimaSVG = () => {
+  const penta = (cx: number, cy: number, r: number, startDeg: number) =>
+    Array.from({ length: 5 }, (_, i) => {
+      const angle = ((startDeg + i * 72) * Math.PI) / 180;
+      return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)] as const;
+    });
+  const pts = penta(130, 120, 48, -90);
+  const pointString = pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  const colors = ["#8b5cf6", "#22c55e", "#f97316", "#ec4899", "#eab308"];
+
+  return (
+    <svg viewBox="0 0 260 250" className="w-full max-w-sm mx-auto my-2" aria-label="Jaring-jaring limas segilima">
+      <defs>
+        <style>{`
+          @keyframes lnetE{0%,100%{fill-opacity:.9;filter:drop-shadow(0 0 9px #38bdf8);}50%{fill-opacity:.35;filter:none;}}
+          @keyframes lnetF{0%,100%{fill-opacity:.9;filter:drop-shadow(0 0 9px #f97316);}50%{fill-opacity:.35;filter:none;}}
+          .lnet-e{animation:lnetE 2.2s ease-in-out infinite;}
+          .lnet-f{animation:lnetF 2.2s ease-in-out infinite .55s;}
+        `}</style>
+      </defs>
+      {pts.map(([x1, y1], i) => {
+        const [x2, y2] = pts[(i + 1) % pts.length];
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2;
+        const dx = mx - 130;
+        const dy = my - 120;
+        const len = Math.hypot(dx, dy) || 1;
+        const tx = mx + (dx / len) * 48;
+        const ty = my + (dy / len) * 48;
+        return (
+          <g key={i}>
+            <polygon points={`${x1.toFixed(1)},${y1.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)} ${tx.toFixed(1)},${ty.toFixed(1)}`} fill={colors[i]} stroke="white" strokeWidth="1.5" className="lnet-f" />
+            <text x={tx} y={ty + 3} fill="white" fontSize="6.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle">S{i + 1}</text>
+          </g>
+        );
+      })}
+      <polygon points={pointString} fill="#3b82f6" stroke="white" strokeWidth="1.6" className="lnet-e" />
+      <text x="130" y="124" fill="white" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+      <text x="130" y="20" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 5 × L△tegak</text>
+    </svg>
+  );
+};
+
+const LimasSurfaceNetSelector = () => {
+  const [tab, setTab] = useState<"segitiga" | "segiempat" | "segilima">("segitiga");
+  const tabs = [
+    { id: "segitiga", label: "Segitiga" },
+    { id: "segiempat", label: "Segiempat" },
+    { id: "segilima", label: "Segilima" },
+  ] as const;
+
+  return (
+    <div className="space-y-3">
+      <div className="flex rounded-lg overflow-hidden border border-slate-600 w-full">
+        {tabs.map(t => (
+          <button key={t.id}
+            onClick={() => { playPopSound(); setTab(t.id); }}
+            className={`flex-1 py-1.5 text-xs font-bold font-body transition-colors cursor-pointer
+              ${tab === t.id
+                ? "bg-cyan-800/80 text-cyan-200 border-b-2 border-cyan-400"
+                : "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60"}`}>
+            {t.label}
+          </button>
+        ))}
+      </div>
+      {tab === "segitiga" && (
+        <div>
+          <LimasNetSegitigaSVG />
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+            <p className="text-cyan-300 font-semibold">Rumus — Limas Segitiga:</p>
+            <p>• Luas alas: <span className="text-yellow-300">Lₐ = luas segitiga alas</span></p>
+            <p>• Sisi tegak: <span className="text-yellow-300">3 segitiga tegak</span></p>
+            <p className="text-white/90 font-semibold font-mono">Lp = La + 3 × (½ × a × l)</p>
+          </div>
+        </div>
+      )}
+      {tab === "segiempat" && (
+        <div>
+          <LimasNetSegiempatSVG />
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+            <p className="text-cyan-300 font-semibold">Rumus — Limas Segiempat:</p>
+            <p>• Luas alas: <span className="text-yellow-300">Lₐ = s²</span></p>
+            <p>• Sisi tegak: <span className="text-yellow-300">4 segitiga tegak</span></p>
+            <p className="text-white/90 font-semibold font-mono">Lp = La + 4 × (½ × s × l)</p>
+          </div>
+        </div>
+      )}
+      {tab === "segilima" && (
+        <div>
+          <LimasNetSegilimaSVG />
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+            <p className="text-cyan-300 font-semibold">Rumus — Limas Segilima:</p>
+            <p>• Luas alas: <span className="text-yellow-300">Lₐ = luas segilima alas</span></p>
+            <p>• Sisi tegak: <span className="text-yellow-300">5 segitiga tegak</span></p>
+            <p className="text-white/90 font-semibold font-mono">Lp = La + 5 × (½ × a × l)</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const LimasSurfaceAreaSection = () => (
+  <div className="space-y-3 text-sm text-white/85 font-body">
+    <p>
+      <strong className="text-blue-300">Luas permukaan limas</strong> adalah jumlah luas bidang yang membungkus limas:
+      satu sisi alas ditambah semua sisi tegak berbentuk segitiga.
+    </p>
+    <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
+      <div className="bg-slate-900/60 rounded p-3 space-y-2">
+        <BlockMath math="L_p = L_a + \sum L_{\text{sisi tegak}}" />
+        <BlockMath math="L_{\text{satu sisi tegak}} = \frac{1}{2} \times \text{rusuk alas} \times l" />
+      </div>
+      <p className="text-xs text-white/55">
+        <InlineMath math="L_a" /> adalah luas alas, sedangkan <InlineMath math="l" /> adalah apotema sisi tegak yang dapat dicari dengan Teorema Pythagoras.
+      </p>
+    </div>
+    <p className="text-xs text-white/60 text-center">Pilih jenis limas untuk melihat jaring-jaring dan rumus luas permukaannya:</p>
+    <LimasSurfaceNetSelector />
+    <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+      <p><strong>Kunci:</strong> <span className="text-yellow-300">Lp = La + sisi tegak</span></p>
+      <p>• Limas segitiga: <span className="text-yellow-300">Lp = La + 3 × L△tegak</span></p>
+      <p>• Limas segiempat: <span className="text-yellow-300">Lp = La + 4 × L△tegak</span></p>
+      <p>• Limas segilima: <span className="text-yellow-300">Lp = La + 5 × L△tegak</span></p>
+    </div>
+  </div>
+);
+
 /* ─────────────────────────────────────────────────────────────
    JARING-JARING LIMAS — beberapa variasi
 ───────────────────────────────────────────────────────────── */
@@ -1331,58 +1505,41 @@ const sections: Sec[] = [
     ),
   },
   {
-    title: "Luas Permukaan Limas",
-    icon: "🎨",
+    title: "Hubungan Antar-Unsur pada Limas dan Kaitannya dengan Teorema Pythagoras",
+    icon: "📏",
     content: (
       <div className="space-y-4 font-body">
         <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-sm text-white/85">
-          <p>Luas permukaan limas = jumlah seluruh luas bidang yang membungkusnya.</p>
+          <p>
+            Pada limas, <strong className="text-cyan-300">tinggi limas</strong>, <strong className="text-orange-300">apotema sisi tegak</strong>,
+            <strong className="text-pink-300"> rusuk tegak</strong>, dan ukuran alas saling terhubung melalui segitiga siku-siku.
+            Hubungan inilah yang membuat Teorema Pythagoras sangat penting sebelum menghitung luas permukaan.
+          </p>
         </div>
         <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3 text-xs space-y-2 text-white/75">
-          <p className="text-orange-300 font-semibold">Apotema sisi tegak dipakai untuk menghitung luas sisi segitiga.</p>
+          <p className="text-orange-300 font-semibold">Hubungan utama: tinggi limas, jarak pusat alas ke sisi, dan apotema sisi tegak.</p>
           <ApotemaLimasSVG />
           <BlockMath math="l = \sqrt{t^2 + \left(\frac{s}{2}\right)^2}" />
-          <p className="text-white/50">di mana <InlineMath math="t" /> = tinggi limas dan <InlineMath math="s" /> = panjang sisi alas.</p>
+          <p className="text-white/50">
+            Rumus ini muncul dari segitiga siku-siku yang dibentuk oleh tinggi limas <InlineMath math="t" />,
+            setengah sisi alas <InlineMath math="\frac{s}{2}" />, dan apotema <InlineMath math="l" />.
+          </p>
         </div>
 
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
           <div>
-            <p className="text-cyan-300 font-semibold text-xs">Pythagoras yang dipakai pada luas permukaan</p>
-            <p className="text-white/55 text-xs">Gunakan gambar miring berikut untuk melihat segitiga siku-siku yang muncul sebelum menghitung luas sisi tegak.</p>
+            <p className="text-cyan-300 font-semibold text-xs">Semua hubungan Pythagoras penting pada limas</p>
+            <p className="text-white/55 text-xs">Gunakan gambar miring berikut untuk melihat hubungan antara pusat alas, titik tengah sisi alas, titik sudut alas, puncak, apotema, dan rusuk tegak.</p>
           </div>
           <PythagorasLimasSurfaceGuide />
         </div>
 
-        <div className="space-y-3 text-sm">
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2">
-            <p className="text-cyan-300 font-semibold text-xs">Rumus Umum:</p>
-            <BlockMath math="L = L_{\text{alas}} + \Sigma L_{\text{segitiga}}" />
-            <p className="text-white/50 text-xs">= Luas alas + jumlah seluruh luas bidang tegak</p>
-          </div>
-
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2">
-            <p className="text-orange-300 font-semibold text-xs">Untuk Limas Segiempat Beraturan (alas persegi, s × s):</p>
-            <BlockMath math="L_{\text{alas}} = s^2" />
-            <BlockMath math="L_{\text{satu segitiga}} = \frac{1}{2} \times s \times l" />
-            <BlockMath math="L = s^2 + 4 \times \frac{1}{2} \times s \times l = s^2 + 2sl" />
-            <div className="bg-orange-950/50 border border-orange-700/40 rounded p-2">
-              <BlockMath math="\boxed{L = s^2 + 2sl}" />
-            </div>
-            <p className="text-white/50 text-xs">dengan <InlineMath math="l" /> = apotema sisi tegak = <InlineMath math="\sqrt{t^2 + \left(\frac{s}{2}\right)^2}" /></p>
-          </div>
-
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2">
-            <p className="text-green-300 font-semibold text-xs">Untuk Limas Segitiga Sama Sisi (alas segitiga sama sisi, sisi a):</p>
-            <BlockMath math="L_{\text{alas}} = \frac{1}{4}a^2\sqrt{3}" />
-            <BlockMath math="L_{\text{satu segitiga}} = \frac{1}{2} \times a \times l" />
-            <BlockMath math="L = \frac{1}{4}a^2\sqrt{3} + \frac{3}{2}al" />
-          </div>
-
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p>🎯 <strong className="text-white">Satuan luas:</strong></p>
-            <p>• Jika <InlineMath math="s" /> dalam cm → Luas dalam <InlineMath math="\text{cm}^2" /></p>
-            <p>• Jika <InlineMath math="s" /> dalam m → Luas dalam <InlineMath math="\text{m}^2" /></p>
-          </div>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1.5">
+          <p className="text-white font-semibold">Ringkasan hubungan unsur:</p>
+          <p>• <strong className="text-cyan-300">t</strong> selalu tegak lurus bidang alas.</p>
+          <p>• <strong className="text-orange-300">l</strong> menghubungkan puncak ke titik tengah rusuk alas pada sisi tegak.</p>
+          <p>• <strong className="text-pink-300">e</strong> adalah rusuk tegak dari puncak ke titik sudut alas.</p>
+          <p>• Ketiganya dapat dicari dari segitiga siku-siku, sehingga Teorema Pythagoras menjadi alat utama.</p>
         </div>
       </div>
     ),
@@ -1805,9 +1962,14 @@ const slides: Slide[] = [
     content: sections[3].content,
   },
   {
+    icon: "📏",
+    title: "Hubungan Antar-Unsur pada Limas dan Kaitannya dengan Teorema Pythagoras",
+    content: sections[4].content,
+  },
+  {
     icon: "🎨",
     title: "Luas Permukaan Limas",
-    content: sections[4].content,
+    content: <LimasSurfaceAreaSection />,
   },
   {
     icon: "📦",

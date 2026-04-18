@@ -161,6 +161,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ## Notes
 
+- Limas material updated on 2026-04-18: slide 7 renamed and refocused as "Hubungan Antar-Unsur pada Limas dan Kaitannya dengan Teorema Pythagoras"; slide 8 now covers Luas Permukaan Limas with tabbed jaring-jaring for limas segitiga, segiempat, and segilima plus `Lp = La + sisi tegak` formulas.
 - Limas material updated on 2026-04-18: slide 7 now includes tilted Limas Segitiga and Limas Segiempat diagrams with Pythagorean relationships for apothem, lateral edge, and side-face triangles.
 - Limas material updated on 2026-04-18: slides 3–5 now mirror Prisma's comparison format, showing interactive Limas Segitiga, Segiempat, and Segilima views for rusuk, sisi, and titik sudut.
 - Balok material updated on 2026-04-18: slide 10 now shows 10 larger net variations for cuboid nets.
