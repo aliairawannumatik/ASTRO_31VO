@@ -1159,8 +1159,6 @@ const LuasPermukaanSVG = () => (
     <rect x="122" y="154" width="70" height="70" fill="#ef4444" className="lp6" rx="3" stroke="white" strokeWidth="1.5"/>
     <text x="157" y="187" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BAWAH</text>
     <text x="157" y="202" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
-    {/* Formula */}
-    <text x="170" y="215" fill="#facc15" fontSize="11" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = 6 × s²</text>
   </svg>
 );
 
