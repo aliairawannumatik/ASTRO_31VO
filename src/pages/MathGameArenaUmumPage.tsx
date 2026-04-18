@@ -2,16 +2,25 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car } from "lucide-react";
+import { Gamepad2, Car, Layers } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const games = [
   {
-    label: "🏎️ Balap Mobil Matematika",
+    label: "Balap Mobil Matematika",
+    emoji: "🏎️",
     path: "/math-game-arena/umum/balap-mobil",
     desc: "Jawab soal untuk mendapatkan turbo boost dan menangkan balapan!",
     icon: <Car className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Tetris Numatik",
+    emoji: "🧩",
+    path: "/math-game-arena/umum/tetris",
+    desc: "Susun blok warna-warni, kumpulkan skor tertinggi dan naiki level!",
+    icon: <Layers className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];
@@ -31,13 +40,13 @@ const MathGameArenaUmumPage = () => {
           GAME ARENA — UMUM
         </h1>
         <p className="text-white/60 text-sm text-center mb-8 font-body">
-          Game matematika seru untuk semua tingkatan!
+          Game seru untuk semua tingkatan!
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
           {games.map((game, i) => (
             <button
-              key={game.label}
+              key={game.path}
               onClick={() => {
                 playPopSound();
                 navigate(game.path);
@@ -49,7 +58,7 @@ const MathGameArenaUmumPage = () => {
             >
               {game.icon}
               <div className="flex flex-col flex-1">
-                <span className="font-display text-lg text-white">{game.label}</span>
+                <span className="font-display text-lg text-white">{game.emoji} {game.label}</span>
                 <span className="font-body text-xs text-white/50 mt-1">{game.desc}</span>
               </div>
               {game.badge && (
