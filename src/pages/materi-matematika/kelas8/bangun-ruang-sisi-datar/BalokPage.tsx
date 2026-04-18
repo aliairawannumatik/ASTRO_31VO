@@ -474,9 +474,9 @@ const InteractiveBalok3D = () => {
 /* ─────────────────────────────────────────────────────────────
    JARING-JARING BALOK SVG PATTERNS
 ───────────────────────────────────────────────────────────── */
-const CP = 34;
-const CL = 22;
-const CT = 25;
+const CP = 38;
+const CL = 25;
+const CT = 28;
 
 type BalokCell = { x: number; y: number; w: number; h: number; color: string; label: string };
 
@@ -577,13 +577,13 @@ const BalokNetSVG = ({ cells }: { cells: BalokCell[] }) => {
   return (
     <svg viewBox={`${minX - pad} ${minY - pad} ${W + pad * 2} ${H + pad * 2}`}
       width={W + pad * 2} height={H + pad * 2}
-      style={{ width: "100%", maxWidth: 240, maxHeight: 175 }}>
+      style={{ width: "100%", maxWidth: 280, maxHeight: 205 }}>
       {cells.map((c, i) => (
         <g key={i}>
           <rect x={c.x + 1} y={c.y + 1} width={c.w - 2} height={c.h - 2}
             fill={c.color} fillOpacity={0.85} rx={2} stroke="white" strokeWidth={1.2} />
           <text x={c.x + c.w / 2} y={c.y + c.h / 2 + 3}
-            fill="white" fontSize={6.5} fontFamily="monospace" fontWeight="bold"
+            fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold"
             textAnchor="middle" dominantBaseline="middle">{c.label}</text>
         </g>
       ))}
@@ -596,7 +596,7 @@ const NetGallery = () => (
     {cleanNets.map((cells, i) => (
       <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 flex flex-col items-center gap-3">
         <span className="text-white/55 text-xs font-body font-bold">Jaring #{i + 1}</span>
-        <div className="flex w-full items-center justify-center" style={{ minHeight: 150 }}>
+        <div className="flex w-full items-center justify-center" style={{ minHeight: 175 }}>
           <BalokNetSVG cells={cells} />
         </div>
       </div>
