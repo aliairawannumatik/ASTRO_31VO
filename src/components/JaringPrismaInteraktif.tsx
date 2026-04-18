@@ -268,8 +268,8 @@ export default function JaringPrismaInteraktif() {
   };
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragging) return;
-    setRotY(dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55);
+    setRotY(dragRef.current.by - (e.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.bx + (e.clientY - dragRef.current.sy) * 0.55);
   }, [isDragging]);
   const onMouseUp = useCallback(() => setIsDragging(false), []);
 
@@ -282,8 +282,8 @@ export default function JaringPrismaInteraktif() {
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
     const t = e.touches[0];
-    setRotY(dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55);
+    setRotY(dragRef.current.by - (t.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.bx + (t.clientY - dragRef.current.sy) * 0.55);
   }, [isDragging]);
   const onTouchEnd = useCallback(() => setIsDragging(false), []);
 
