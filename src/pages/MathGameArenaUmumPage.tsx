@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -55,6 +55,14 @@ const games = [
     icon: <Worm className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
+  {
+    label: "Asteroid Blaster",
+    emoji: "🌌",
+    path: "/math-game-arena/umum/asteroid-blaster",
+    desc: "Tembak asteroid yang membawa jawaban benar! Jangan sampai lolos ke bawah!",
+    icon: <Crosshair className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
 ];
 
 const MathGameArenaUmumPage = () => {
@@ -86,7 +94,7 @@ const MathGameArenaUmumPage = () => {
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-6 py-5
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up relative overflow-hidden"
-              style={{ animationDelay: `${i * 0.1}s` }}
+              style={{ animationDelay: `${i * 0.08}s` }}
             >
               {game.icon}
               <div className="flex flex-col flex-1">
