@@ -474,14 +474,13 @@ const InteractiveBalok3D = () => {
 /* ─────────────────────────────────────────────────────────────
    JARING-JARING BALOK SVG PATTERNS
 ───────────────────────────────────────────────────────────── */
-const CP = 22; // cell size for panjang unit
-const CL = 14; // cell size for lebar unit
-const CT = 16; // cell size for tinggi unit
+const CP = 34;
+const CL = 22;
+const CT = 25;
 
 type BalokCell = { x: number; y: number; w: number; h: number; color: string; label: string };
 
 const balokNets: BalokCell[][] = [
-  // Net 1 — cross/salib (tumpuan = back p×t at center)
   [
     { x: CP,    y: 0,      w: CP, h: CL, color: "#eab308", label: "p×l" },   // top
     { x: 0,     y: CL,     w: CL, h: CT, color: "#22c55e", label: "l×t" },   // left
@@ -490,7 +489,6 @@ const balokNets: BalokCell[][] = [
     { x: CP,    y: CL+CT,  w: CP, h: CL, color: "#ef4444", label: "p×l" },   // bottom
     { x: CP,    y: CL+CT+CL, w: CP, h: CT, color: "#3b82f6", label: "p×t" }, // front
   ],
-  // Net 2 — T-shape top
   [
     { x: 0,     y: 0,      w: CP, h: CL, color: "#eab308", label: "p×l" },
     { x: 0,     y: CL,     w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
@@ -499,7 +497,6 @@ const balokNets: BalokCell[][] = [
     { x: CP,    y: CL,     w: CL, h: CT, color: "#f97316", label: "l×t" },
     { x: -CL,   y: CL,     w: CL, h: CT, color: "#22c55e", label: "l×t" },
   ],
-  // Net 3 — L-shape
   [
     { x: 0,     y: 0,      w: CL, h: CT, color: "#22c55e", label: "l×t" },
     { x: CL,    y: 0,      w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
@@ -508,7 +505,6 @@ const balokNets: BalokCell[][] = [
     { x: CL,    y: -CL,    w: CP, h: CL, color: "#eab308", label: "p×l" },
     { x: CL,    y: CT,     w: CP, h: CL, color: "#ef4444", label: "p×l" },
   ],
-  // Net 4 — zigzag
   [
     { x: 0,     y: 0,      w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
     { x: 0,     y: CT,     w: CP, h: CL, color: "#eab308", label: "p×l" },
@@ -517,21 +513,57 @@ const balokNets: BalokCell[][] = [
     { x: -CL,   y: CT,     w: CL, h: CT, color: "#22c55e", label: "l×t" },
     { x: CP,    y: CT+CL,  w: CL, h: CT, color: "#f97316", label: "l×t" },
   ],
-  // Net 5 — long strip
   [
-    { x: 0,     y: CT,     w: CP, h: CL, color: "#eab308", label: "p×l" },
-    { x: CP,    y: CT,     w: CL, h: CL, color: "#22c55e", label: "l×l?" },
-    { x: CP,    y: 0,      w: CL, h: CT, color: "#22c55e", label: "l×t" },
-    { x: CP,    y: CT,     w: CL, h: CL, color: "#22c55e", label: "l×l" },
-    { x: 0,     y: 0,      w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
-    { x: 0,     y: CT+CL,  w: CP, h: CT, color: "#3b82f6", label: "p×t" },
-    { x: -CL,   y: 0,      w: CL, h: CT, color: "#f97316", label: "l×t" },
-    { x: 0,     y: CT+CL+CT, w: CP, h: CL, color: "#ef4444", label: "p×l" },
+    { x: 0,       y: 0,   w: CL, h: CT, color: "#22c55e", label: "l×t" },
+    { x: CL,      y: 0,   w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
+    { x: CL+CP,   y: 0,   w: CL, h: CT, color: "#f97316", label: "l×t" },
+    { x: CL+CP+CL,y: 0,   w: CP, h: CT, color: "#3b82f6", label: "p×t" },
+    { x: CL,      y: CT,  w: CP, h: CL, color: "#ef4444", label: "p×l" },
+    { x: CL+CP+CL,y: -CL, w: CP, h: CL, color: "#eab308", label: "p×l" },
+  ],
+  [
+    { x: 0,     y: CL,          w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
+    { x: CP,    y: CL,          w: CL, h: CT, color: "#f97316", label: "l×t" },
+    { x: CP+CL, y: CL,          w: CP, h: CT, color: "#3b82f6", label: "p×t" },
+    { x: CP+CL+CP, y: CL,       w: CL, h: CT, color: "#22c55e", label: "l×t" },
+    { x: 0,     y: 0,           w: CP, h: CL, color: "#eab308", label: "p×l" },
+    { x: CP+CL, y: CL+CT,       w: CP, h: CL, color: "#ef4444", label: "p×l" },
+  ],
+  [
+    { x: CP,    y: 0,           w: CP, h: CL, color: "#eab308", label: "p×l" },
+    { x: CP,    y: CL,          w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
+    { x: CP,    y: CL+CT,       w: CP, h: CL, color: "#ef4444", label: "p×l" },
+    { x: CP,    y: CL+CT+CL,    w: CP, h: CT, color: "#3b82f6", label: "p×t" },
+    { x: CP-CL, y: CL+CT+CL,    w: CL, h: CT, color: "#22c55e", label: "l×t" },
+    { x: CP+CP, y: CL+CT+CL,    w: CL, h: CT, color: "#f97316", label: "l×t" },
+  ],
+  [
+    { x: 0,     y: 0,           w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
+    { x: 0,     y: CT,          w: CP, h: CL, color: "#ef4444", label: "p×l" },
+    { x: 0,     y: CT+CL,       w: CP, h: CT, color: "#3b82f6", label: "p×t" },
+    { x: CP,    y: 0,           w: CL, h: CT, color: "#f97316", label: "l×t" },
+    { x: -CL,   y: CT+CL,       w: CL, h: CT, color: "#22c55e", label: "l×t" },
+    { x: 0,     y: CT+CL+CT,    w: CP, h: CL, color: "#eab308", label: "p×l" },
+  ],
+  [
+    { x: CL,    y: 0,           w: CP, h: CL, color: "#eab308", label: "p×l" },
+    { x: 0,     y: CL,          w: CL, h: CT, color: "#22c55e", label: "l×t" },
+    { x: CL,    y: CL,          w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
+    { x: CL+CP, y: CL,          w: CL, h: CT, color: "#f97316", label: "l×t" },
+    { x: CL+CP+CL, y: CL,       w: CP, h: CT, color: "#3b82f6", label: "p×t" },
+    { x: CL+CP+CL, y: CL+CT,    w: CP, h: CL, color: "#ef4444", label: "p×l" },
+  ],
+  [
+    { x: 0,     y: CL,          w: CL, h: CT, color: "#22c55e", label: "l×t" },
+    { x: CL,    y: CL,          w: CP, h: CT, color: "#8b5cf6", label: "p×t" },
+    { x: CL+CP, y: CL,          w: CL, h: CT, color: "#f97316", label: "l×t" },
+    { x: CL+CP+CL, y: CL,       w: CP, h: CT, color: "#3b82f6", label: "p×t" },
+    { x: CL,    y: 0,           w: CP, h: CL, color: "#eab308", label: "p×l" },
+    { x: CL,    y: CL+CT,       w: CP, h: CL, color: "#ef4444", label: "p×l" },
   ],
 ];
 
-// Use only first 4 (cleaner nets)
-const cleanNets = balokNets.slice(0, 4);
+const cleanNets = balokNets.slice(0, 10);
 
 const BalokNetSVG = ({ cells }: { cells: BalokCell[] }) => {
   const xs = cells.map(c => c.x);
@@ -545,13 +577,13 @@ const BalokNetSVG = ({ cells }: { cells: BalokCell[] }) => {
   return (
     <svg viewBox={`${minX - pad} ${minY - pad} ${W + pad * 2} ${H + pad * 2}`}
       width={W + pad * 2} height={H + pad * 2}
-      style={{ maxWidth: "100%", maxHeight: 110 }}>
+      style={{ width: "100%", maxWidth: 240, maxHeight: 175 }}>
       {cells.map((c, i) => (
         <g key={i}>
           <rect x={c.x + 1} y={c.y + 1} width={c.w - 2} height={c.h - 2}
             fill={c.color} fillOpacity={0.85} rx={2} stroke="white" strokeWidth={1.2} />
           <text x={c.x + c.w / 2} y={c.y + c.h / 2 + 3}
-            fill="white" fontSize={5.5} fontFamily="monospace" fontWeight="bold"
+            fill="white" fontSize={6.5} fontFamily="monospace" fontWeight="bold"
             textAnchor="middle" dominantBaseline="middle">{c.label}</text>
         </g>
       ))}
@@ -560,11 +592,11 @@ const BalokNetSVG = ({ cells }: { cells: BalokCell[] }) => {
 };
 
 const NetGallery = () => (
-  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
     {cleanNets.map((cells, i) => (
-      <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-2">
-        <span className="text-white/50 text-[10px] font-body font-bold">Jaring #{i + 1}</span>
-        <div className="flex items-center justify-center" style={{ minHeight: 80 }}>
+      <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 flex flex-col items-center gap-3">
+        <span className="text-white/55 text-xs font-body font-bold">Jaring #{i + 1}</span>
+        <div className="flex w-full items-center justify-center" style={{ minHeight: 150 }}>
           <BalokNetSVG cells={cells} />
         </div>
       </div>
@@ -2020,7 +2052,7 @@ const slides: Slide[] = [
           Ada <strong className="text-yellow-300">54 pola jaring-jaring</strong> berbeda yang valid untuk sebuah balok:
         </p>
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-cyan-300 font-semibold mb-3 text-xs">📐 Contoh 4 Pola Jaring-jaring Balok:</p>
+          <p className="text-cyan-300 font-semibold mb-3 text-xs">📐 Contoh 10 Pola Jaring-jaring Balok:</p>
           <NetGallery />
           <div className="mt-3 flex flex-wrap gap-2">
             {(["p×t","l×t","p×l"] as const).map((label, i) => (
