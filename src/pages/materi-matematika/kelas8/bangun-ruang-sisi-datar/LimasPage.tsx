@@ -832,7 +832,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
         {/* ── Gambar 1: e² = t² + R² ── */}
         <div className="bg-slate-900/70 border border-pink-700/40 rounded-xl p-3 space-y-2">
           <p className="text-pink-300 font-semibold text-[11px]">Gambar 1 — Tinggi limas &amp; Rusuk Tegak</p>
-          <svg viewBox="0 0 260 210" className="w-full max-w-xs mx-auto" aria-label="Pythagoras e pada limas segitiga">
+          <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras e pada limas segitiga">
             <defs>
               <filter id="triGlow1" x="-30%" y="-30%" width="160%" height="160%">
                 <feGaussianBlur stdDeviation="2" result="blur" />
@@ -879,7 +879,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
         {/* ── Gambar 2: l² = t² + r² ── */}
         <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-2">
           <p className="text-emerald-300 font-semibold text-[11px]">Gambar 2 — Tinggi limas &amp; Tinggi Sisi Tegak</p>
-          <svg viewBox="0 0 260 210" className="w-full max-w-xs mx-auto" aria-label="Pythagoras l pada limas segitiga">
+          <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras l pada limas segitiga">
             <defs>
               <filter id="triGlow2" x="-30%" y="-30%" width="160%" height="160%">
                 <feGaussianBlur stdDeviation="2" result="blur" />
