@@ -785,6 +785,142 @@ const ApotemaLimasSVG = () => (
   </svg>
 );
 
+const PythagorasLimasSegitigaDetailSVG = () => {
+  /*
+    Shared base: A(100,175) B(62,112) C(196,112) — BC horizontal at top
+    T(130,32) apex, O(119,133) centroid
+    M_AC(148,143) midpoint of edge AC (inradius foot)
+    R = O→C (circumradius), r = O→M_AC (inradius)
+  */
+  const T = { x: 130, y: 32 };
+  const A = { x: 100, y: 175 };
+  const B = { x: 62,  y: 112 };
+  const C = { x: 196, y: 112 };
+  const O = { x: 119, y: 133 };
+  const M = { x: 148, y: 143 }; // midpoint of AC
+
+  // right angle path builder: at vertex V, from dir1 unit to dir2 unit, size px
+  const raMark = (Vx: number, Vy: number, d1x: number, d1y: number, d2x: number, d2y: number, sz = 8) => {
+    const p1x = Vx + sz * d1x, p1y = Vy + sz * d1y;
+    const cx  = p1x + sz * d2x, cy  = p1y + sz * d2y;
+    const p2x = Vx + sz * d2x, p2y = Vy + sz * d2y;
+    return `M ${p1x.toFixed(1)} ${p1y.toFixed(1)} L ${cx.toFixed(1)} ${cy.toFixed(1)} L ${p2x.toFixed(1)} ${p2y.toFixed(1)}`;
+  };
+
+  // unit vector from O toward T (t direction)
+  const tLen = Math.hypot(T.x - O.x, T.y - O.y);
+  const tu = { x: (T.x - O.x) / tLen, y: (T.y - O.y) / tLen };
+
+  // unit vector from O toward C (R direction)
+  const RLen = Math.hypot(C.x - O.x, C.y - O.y);
+  const Ru = { x: (C.x - O.x) / RLen, y: (C.y - O.y) / RLen };
+
+  // unit vector from O toward M_AC (r direction)
+  const rLen = Math.hypot(M.x - O.x, M.y - O.y);
+  const ru = { x: (M.x - O.x) / rLen, y: (M.y - O.y) / rLen };
+
+  const basePts = `${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`;
+
+  return (
+    <div className="space-y-3">
+      <div>
+        <p className="text-cyan-300 font-semibold text-xs">Dua Pythagoras Limas Segitiga Beraturan</p>
+        <p className="text-white/50 text-[11px]">Kedua segitiga siku-siku terbentuk di pusat alas <span className="text-sky-300 font-semibold">O</span> tempat tinggi tegak lurus bidang alas.</p>
+      </div>
+      <div className="grid md:grid-cols-2 gap-3">
+
+        {/* ── Gambar 1: e² = t² + R² ── */}
+        <div className="bg-slate-900/70 border border-pink-700/40 rounded-xl p-3 space-y-2">
+          <p className="text-pink-300 font-semibold text-[11px]">Gambar 1 — Tinggi limas &amp; Rusuk Tegak</p>
+          <svg viewBox="0 0 260 210" className="w-full max-w-xs mx-auto" aria-label="Pythagoras e pada limas segitiga">
+            <defs>
+              <filter id="triGlow1" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="2" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+            {/* faces dim */}
+            <polygon points={basePts} fill="#10b981" fillOpacity="0.14" stroke="#34d399" strokeWidth="1.5" />
+            <polygon points={`${T.x},${T.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#22d3ee" fillOpacity="0.10" stroke="#67e8f9" strokeWidth="1" />
+            <polygon points={`${T.x},${T.y} ${A.x},${A.y} ${B.x},${B.y}`} fill="#8b5cf6" fillOpacity="0.10" stroke="#c4b5fd" strokeWidth="1" />
+            {/* right face T-A-C dimmed */}
+            <polygon points={`${T.x},${T.y} ${A.x},${A.y} ${C.x},${C.y}`} fill="#f97316" fillOpacity="0.10" stroke="#fdba74" strokeWidth="1" />
+            {/* R: O→C circumradius — pink */}
+            <line x1={O.x} y1={O.y} x2={C.x} y2={C.y} stroke="#f472b6" strokeWidth="2.6" filter="url(#triGlow1)" />
+            {/* e: T→C rusuk tegak — orange */}
+            <line x1={T.x} y1={T.y} x2={C.x} y2={C.y} stroke="#fb923c" strokeWidth="3" filter="url(#triGlow1)" />
+            {/* t: height T→O — blue dashed */}
+            <line x1={T.x} y1={T.y} x2={O.x} y2={O.y} stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4" />
+            {/* context edges */}
+            <line x1={T.x} y1={T.y} x2={A.x} y2={A.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
+            <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
+            {/* right angle mark at O between t and R */}
+            <path d={raMark(O.x, O.y, tu.x, tu.y, Ru.x, Ru.y, 9)} stroke="white" fill="none" strokeWidth="1.5" />
+            <circle cx={T.x} cy={T.y} r="4" fill="#facc15" />
+            <circle cx={O.x} cy={O.y} r="3.5" fill="#38bdf8" />
+            <circle cx={C.x} cy={C.y} r="3.5" fill="#f472b6" />
+            <text x={T.x + 4} y={T.y - 2} fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
+            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
+            <text x={C.x + 4} y={C.y + 4} fill="#f472b6" fontSize="9" fontFamily="monospace">C</text>
+            <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
+            <text x={(O.x + C.x) / 2 - 2} y={(O.y + C.y) / 2 - 6} fill="#f472b6" fontSize="10" fontFamily="monospace">R</text>
+            <text x={(T.x + C.x) / 2 + 4} y={(T.y + C.y) / 2} fill="#fb923c" fontSize="10" fontFamily="monospace">e</text>
+          </svg>
+          <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-0.5">
+            <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-pink-300 font-semibold">R</span> jari-jari luar alas, <span className="text-orange-300 font-semibold">e</span> rusuk tegak.</p>
+            <BlockMath math="\boxed{e^2 = t^2 + R_{\text{alas}}^2},\quad R_{\text{alas}}=\frac{a\sqrt{3}}{3}" />
+          </div>
+        </div>
+
+        {/* ── Gambar 2: l² = t² + r² ── */}
+        <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-2">
+          <p className="text-emerald-300 font-semibold text-[11px]">Gambar 2 — Tinggi limas &amp; Tinggi Sisi Tegak</p>
+          <svg viewBox="0 0 260 210" className="w-full max-w-xs mx-auto" aria-label="Pythagoras l pada limas segitiga">
+            <defs>
+              <filter id="triGlow2" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="2" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+            {/* faces dim */}
+            <polygon points={basePts} fill="#10b981" fillOpacity="0.14" stroke="#34d399" strokeWidth="1.5" />
+            <polygon points={`${T.x},${T.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#22d3ee" fillOpacity="0.10" stroke="#67e8f9" strokeWidth="1" />
+            <polygon points={`${T.x},${T.y} ${A.x},${A.y} ${B.x},${B.y}`} fill="#8b5cf6" fillOpacity="0.10" stroke="#c4b5fd" strokeWidth="1" />
+            {/* right face T-A-C highlighted */}
+            <polygon points={`${T.x},${T.y} ${A.x},${A.y} ${C.x},${C.y}`} fill="#f97316" fillOpacity="0.22" stroke="#fdba74" strokeWidth="1.5" />
+            {/* r: O→M inradius — yellow */}
+            <line x1={O.x} y1={O.y} x2={M.x} y2={M.y} stroke="#facc15" strokeWidth="2.6" filter="url(#triGlow2)" />
+            {/* l: T→M apotema — orange */}
+            <line x1={T.x} y1={T.y} x2={M.x} y2={M.y} stroke="#fb923c" strokeWidth="3" filter="url(#triGlow2)" />
+            {/* t: height T→O — blue dashed */}
+            <line x1={T.x} y1={T.y} x2={O.x} y2={O.y} stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4" />
+            {/* context edges */}
+            <line x1={T.x} y1={T.y} x2={A.x} y2={A.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
+            <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
+            <line x1={T.x} y1={T.y} x2={C.x} y2={C.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
+            {/* right angle mark at O between t and r */}
+            <path d={raMark(O.x, O.y, tu.x, tu.y, ru.x, ru.y, 9)} stroke="white" fill="none" strokeWidth="1.5" />
+            <circle cx={T.x} cy={T.y} r="4" fill="#facc15" />
+            <circle cx={O.x} cy={O.y} r="3.5" fill="#38bdf8" />
+            <circle cx={M.x} cy={M.y} r="3.5" fill="#facc15" />
+            <text x={T.x + 4} y={T.y - 2} fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
+            <text x={O.x - 14} y={O.y + 4} fill="#38bdf8" fontSize="9" fontFamily="monospace">O</text>
+            <text x={M.x + 4} y={M.y + 4} fill="#facc15" fontSize="9" fontFamily="monospace">M</text>
+            <text x={T.x + 5} y={(T.y + O.y) / 2} fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
+            <text x={(O.x + M.x) / 2 + 2} y={(O.y + M.y) / 2 + 8} fill="#facc15" fontSize="10" fontFamily="monospace">r</text>
+            <text x={(T.x + M.x) / 2 + 6} y={(T.y + M.y) / 2} fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
+          </svg>
+          <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-0.5">
+            <p><span className="text-sky-300 font-semibold">t</span> tinggi limas, <span className="text-yellow-300 font-semibold">r</span> jari-jari dalam alas, <span className="text-orange-300 font-semibold">l</span> tinggi sisi tegak.</p>
+            <BlockMath math="\boxed{l^2 = t^2 + r_{\text{alas}}^2},\quad r_{\text{alas}}=\frac{a\sqrt{3}}{6}" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
 const PythagorasLimasSurfaceGuide = () => (
   <div className="grid md:grid-cols-2 gap-3">
     <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-3">
@@ -1608,6 +1744,10 @@ const sections: Sec[] = [
             <p className="text-white/55 text-xs">Gunakan gambar miring berikut untuk melihat hubungan antara pusat alas, titik tengah sisi alas, titik sudut alas, puncak, apotema, dan rusuk tegak.</p>
           </div>
           <PythagorasLimasSurfaceGuide />
+        </div>
+
+        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
+          <PythagorasLimasSegitigaDetailSVG />
         </div>
 
         <PythagorasLimasSegiempatDiagonalSVG />
