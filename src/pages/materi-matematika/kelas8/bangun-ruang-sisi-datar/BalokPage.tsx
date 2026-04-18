@@ -759,28 +759,61 @@ const TitikSudutBalokSVG = () => (
   </svg>
 );
 
-const DiagRuangSVG = () => (
-  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Diagonal ruang balok">
-    <defs>
-      <style>{`
-        @keyframes diagR{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 8px #facc15);}50%{stroke-opacity:0.2;filter:drop-shadow(0 0 0 #facc15);}}
-        .dr-a{animation:diagR 1.6s ease-in-out infinite;}
-      `}</style>
-    </defs>
-    <polygon points="30,70 170,70 170,170 30,170" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1.2"/>
-    <polygon points="70,30 210,30 210,130 70,130" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="30" y1="70" x2="70" y2="30" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="170" y1="70" x2="210" y2="30" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="30" y1="170" x2="70" y2="130" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="170" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
-    {/* 4 diagonal ruang */}
-    <line x1="30" y1="170" x2="210" y2="30" stroke="#facc15" strokeWidth="3" className="dr-a"/>
-    <line x1="170" y1="170" x2="70" y2="30" stroke="#facc15" strokeWidth="1.5" className="dr-a" strokeDasharray="4,4" opacity="0.5"/>
-    <circle cx="30" cy="170" r="4" fill="#facc15" opacity="0.9"/>
-    <circle cx="210" cy="30" r="4" fill="#facc15" opacity="0.9"/>
-    <text x="10" y="200" fill="#facc15" fontSize="9" fontFamily="monospace">d_r = √(p² + l² + t²)</text>
-    <text x="10" y="210" fill="#fff" fontSize="8" fontFamily="monospace">4 diagonal ruang</text>
-  </svg>
+/* ─────────────────────────────────────────────────────────────
+   ALL 4 DIAGONAL RUANG BALOK — 2×2 glowing glow-pulse cards
+───────────────────────────────────────────────────────────── */
+const ALL_DR_DIAGS: {key:string;v1:DBVKey;v2:DBVKey;color:string;label:string}[] = [
+  {key:"AG",v1:"A",v2:"G",color:"#facc15",label:"A → G (depan-bawah ke belakang-atas)"},
+  {key:"BH",v1:"B",v2:"H",color:"#f97316",label:"B → H (depan-bawah ke belakang-atas)"},
+  {key:"CE",v1:"C",v2:"E",color:"#f472b6",label:"C → E (belakang-bawah ke depan-atas)"},
+  {key:"DF",v1:"D",v2:"F",color:"#22d3ee",label:"D → F (belakang-bawah ke depan-atas)"},
+];
+const BalokRuangCard = ({d,idx}:{d:typeof ALL_DR_DIAGS[0];idx:number}) => {
+  const aId = `drg${idx}`;
+  const aCls = `drc${idx}`;
+  const [x1,y1] = DB_VERTS[d.v1];
+  const [x2,y2] = DB_VERTS[d.v2];
+  const endKeys: DBVKey[] = [d.v1, d.v2];
+  return (
+    <div className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-3 flex flex-col items-center gap-1">
+      <svg viewBox="0 0 200 154" className="w-full" aria-label={`Diagonal ruang ${d.key}`}>
+        <defs>
+          <style>{`
+            @keyframes ${aId}{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 9px ${d.color});}50%{stroke-opacity:0.08;filter:none;}}
+            .${aCls}{animation:${aId} 1.8s ease-in-out infinite ${(idx*0.4).toFixed(1)}s;}
+          `}</style>
+        </defs>
+        <polygon points="22,138 132,138 132,52 22,52" fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
+        <polygon points="54,106 164,106 164,16 54,16"  fill="rgba(15,23,42,0.5)"  stroke="#475569" strokeWidth="1"/>
+        <line x1="22"  y1="138" x2="54"  y2="106" stroke="#475569" strokeWidth="1"/>
+        <line x1="132" y1="138" x2="164" y2="106" stroke="#475569" strokeWidth="1"/>
+        <line x1="22"  y1="52"  x2="54"  y2="16"  stroke="#475569" strokeWidth="1"/>
+        <line x1="132" y1="52"  x2="164" y2="16"  stroke="#475569" strokeWidth="1"/>
+        <line x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke={d.color} strokeWidth="3.2" strokeLinecap="round"
+          className={aCls}/>
+        {DB_ALL_KEYS.map(k => {
+          const [cx,cy] = DB_VERTS[k];
+          const isEnd = k===d.v1||k===d.v2;
+          return <circle key={k} cx={cx} cy={cy} r={isEnd?4:2}
+            fill={isEnd?d.color:"#64748b"} opacity={isEnd?1:0.4}/>;
+        })}
+        {endKeys.map(k => {
+          const [cx,cy,lx,ly] = DB_VERTS[k];
+          return <text key={k} x={cx+lx} y={cy+ly} fill={d.color}
+            fontSize="10" fontFamily="monospace" fontWeight="bold">{k}</text>;
+        })}
+        <text x="100" y="151" fill={d.color} fontSize="11" fontFamily="monospace"
+          fontWeight="bold" textAnchor="middle">{d.key}</text>
+      </svg>
+      <p className="text-[9px] text-white/45 text-center leading-tight font-body">{d.label}</p>
+    </div>
+  );
+};
+const AllDiagonalRuangBalok = () => (
+  <div className="grid grid-cols-2 gap-3">
+    {ALL_DR_DIAGS.map((d,i) => <BalokRuangCard key={d.key} d={d} idx={i}/>)}
+  </div>
 );
 
 const LuasSVG = () => {
@@ -1230,7 +1263,7 @@ const sections: Sec[] = [
         {/* Diagonal ruang */}
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
           <p className="text-yellow-300 font-semibold mb-2">⟋ Diagonal Ruang (4 diagonal)</p>
-          <DiagRuangSVG />
+          <AllDiagonalRuangBalok />
           <div className="text-xs text-white/70 mt-2">
             <div className="bg-slate-700/60 rounded p-2">
               <BlockMath math="d_r = \sqrt{p^2 + l^2 + t^2}" />
@@ -1856,7 +1889,7 @@ const slides: Slide[] = [
         <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-4 space-y-2">
           <p className="text-yellow-300 font-semibold">⑤ Diagonal Ruang (4 buah)</p>
           <p className="text-xs text-white/70">Diagonal ruang menghubungkan dua titik sudut berhadapan dan <strong>melewati bagian dalam balok</strong>. Semua 4 diagonal ruang pada balok memiliki panjang yang sama.</p>
-          <DiagRuangSVG />
+          <AllDiagonalRuangBalok />
           <div className="bg-yellow-950/60 rounded p-2 text-center">
             <BlockMath math="d_r = \sqrt{p^2 + l^2 + t^2}" />
           </div>
