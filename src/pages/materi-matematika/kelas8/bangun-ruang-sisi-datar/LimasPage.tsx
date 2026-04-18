@@ -1432,12 +1432,14 @@ const LimasPage = () => {
 
         {/* Slide card */}
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
-          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 bg-white/5">
-            <span className="flex items-center gap-2">
-              <span className="text-lg">{slide.icon}</span>
-              <span className="font-display text-sm font-semibold text-white">{slide.title}</span>
-            </span>
-            <span className="text-xs text-muted-foreground font-body">{currentSlide + 1} / {total}</span>
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+            <span className="text-2xl">{slide.icon}</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+                Slide {currentSlide + 1} / {total}
+              </p>
+              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+            </div>
           </div>
           <div className="px-5 py-5">{slide.content}</div>
         </div>
