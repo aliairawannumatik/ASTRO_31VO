@@ -1094,7 +1094,7 @@ const WaterSegiempatAnimation = () => {
       <text x="125" y="217"
         fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#wBloom2)">
-        V = p × l × t
+        V = L□ × t
       </text>
     </svg>
   );
@@ -1267,7 +1267,7 @@ const WaterSegilimAnimation = () => {
       <text x="113" y="217"
         fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#wBloom3)">
-        V = L△₅ × t
+        V = L⬟ × t
       </text>
     </svg>
   );
@@ -1313,7 +1313,7 @@ const VolumeTabSelector = () => {
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-1 text-xs text-white/70">
             <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segiempat (Balok):</p>
             <p>• Luas alas: <span className="text-yellow-300">L□ = p × l</span></p>
-            <p className="text-white/90 font-semibold font-mono">V = p × l × t</p>
+            <p className="text-white/90 font-semibold font-mono">V = L□ × t</p>
           </div>
         </div>
       )}
@@ -1322,8 +1322,8 @@ const VolumeTabSelector = () => {
           <WaterSegilimAnimation />
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-1 text-xs text-white/70">
             <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segilima:</p>
-            <p>• Luas alas segi-5: <span className="text-yellow-300">L△₅ = ½ × keliling × apotema</span></p>
-            <p className="text-white/90 font-semibold font-mono">V = L△₅ × t</p>
+            <p>• Luas alas segi-5: <span className="text-yellow-300">L⬟ = ½ × keliling × apotema</span></p>
+            <p className="text-white/90 font-semibold font-mono">V = L⬟ × t</p>
           </div>
         </div>
       )}
@@ -1507,7 +1507,7 @@ const sections: Sec[] = [
           <p className="text-xs text-white/70">Untuk berbagai jenis alas:</p>
           <div className="space-y-1 text-xs text-white/70">
             <p>• Alas segitiga: <InlineMath math="V = \frac{1}{2} \times a \times t_{\triangle} \times t" /></p>
-            <p>• Alas persegi panjang: <InlineMath math="V = p \times l \times t" /> (= Volume Balok)</p>
+            <p>• Alas persegi panjang: <span className="text-yellow-300 font-mono">V = L□ × t</span>, dengan <InlineMath math="L_{\square} = p \times l" /> (= Volume Balok)</p>
             <p>• Alas trapesium: <InlineMath math="V = \frac{1}{2}(a+b) \times t_{\text{trap}} \times t" /></p>
           </div>
         </div>
