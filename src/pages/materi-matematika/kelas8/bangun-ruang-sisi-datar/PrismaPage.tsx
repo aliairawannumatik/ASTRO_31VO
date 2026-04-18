@@ -1795,19 +1795,6 @@ const slides: Slide[] = [
           <RusukTigaPrismaAnimation />
         </div>
 
-        <p className="text-xs text-white/60">Detail untuk prisma segitiga (n = 3):</p>
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-cyan-300 font-semibold mb-2">⬛ Rusuk Prisma Segitiga — Animasi Detail (9 rusuk)</p>
-          <RusukPrismaSVG />
-          <div className="text-xs text-white/70 space-y-1 mt-2">
-            <p>• <strong className="text-cyan-300">3 rusuk alas:</strong> membentuk segitiga alas bawah</p>
-            <p>• <strong className="text-yellow-300">3 rusuk atas:</strong> membentuk segitiga alas atas</p>
-            <p>• <strong className="text-orange-300">3 rusuk tegak:</strong> menghubungkan alas atas dan bawah</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
-              <BlockMath math="\text{Jumlah rusuk} = 3n = 3 \times 3 = 9" />
-            </div>
-          </div>
-        </div>
       </div>
     ),
   },
