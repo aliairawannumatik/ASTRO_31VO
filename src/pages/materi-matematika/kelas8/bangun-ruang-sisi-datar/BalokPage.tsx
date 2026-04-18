@@ -1399,7 +1399,7 @@ const sections: Sec[] = [
           <strong className="text-blue-300">Luas permukaan balok</strong> adalah jumlah luas seluruh 6 sisi yang membungkus balok.
         </p>
         <LuasSVG />
-        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
+        <div className="mt-5 bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
           <p className="text-white/70 text-xs">Penjumlahan luas 3 pasang sisi:</p>
           <div className="bg-slate-900/60 rounded p-2 text-xs space-y-1">
             <BlockMath math="L = 2(p \times l) + 2(p \times t) + 2(l \times t)" />
@@ -1436,7 +1436,7 @@ const sections: Sec[] = [
             Persentase menunjukkan proporsi volume terisi terhadap volume total
           </p>
         </div>
-        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
+        <div className="mt-5 bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
           <div className="bg-slate-900/60 rounded p-2">
             <BlockMath math="V = p \times l \times t" />
           </div>
