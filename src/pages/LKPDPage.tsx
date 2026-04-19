@@ -32,60 +32,70 @@ const guidedItems = [
     label: "Jika ada 6 apel dan 4 jeruk, banyak seluruh buah adalah",
     suffix: "buah",
     answers: ["10"],
+    discussion: ["Jumlah seluruh buah diperoleh dengan menjumlahkan semua apel dan jeruk.", "6 apel + 4 jeruk = 10 buah.", "Jadi, banyak seluruh buah adalah 10 buah."],
   },
   {
     id: "a2",
     label: "Perbandingan apel terhadap jeruk adalah",
     suffix: "",
     answers: ["6:4", "6/4"],
+    discussion: ["Perbandingan apel terhadap jeruk berarti jumlah apel ditulis lebih dulu, lalu jumlah jeruk.", "Jumlah apel = 6 dan jumlah jeruk = 4.", "Maka perbandingannya adalah 6 : 4."],
   },
   {
     id: "a3",
     label: "Perbandingan 6 : 4 disederhanakan dengan membagi kedua bilangan oleh",
     suffix: "",
     answers: ["2"],
+    discussion: ["Untuk menyederhanakan rasio, cari bilangan terbesar yang dapat membagi 6 dan 4.", "6 dan 4 sama-sama dapat dibagi 2.", "Jadi, kedua bilangan dibagi oleh 2."],
   },
   {
     id: "a4",
     label: "Bentuk sederhana dari 6 : 4 adalah",
     suffix: "",
     answers: ["3:2", "3/2"],
+    discussion: ["Rasio awal adalah 6 : 4.", "Bagi kedua bilangan dengan 2: 6 ÷ 2 = 3 dan 4 ÷ 2 = 2.", "Jadi, bentuk sederhana dari 6 : 4 adalah 3 : 2."],
   },
   {
     id: "b1",
     label: "12 buku untuk 3 siswa berarti setiap 1 siswa mendapat",
     suffix: "buku",
     answers: ["4"],
+    discussion: ["Untuk mencari banyak buku tiap 1 siswa, jumlah buku dibagi jumlah siswa.", "12 ÷ 3 = 4.", "Jadi, setiap 1 siswa mendapat 4 buku."],
   },
   {
     id: "b2",
     label: "Satuan pembanding dari 12 buku : 3 siswa adalah",
     suffix: "",
     answers: ["4buku/siswa", "4 buku/siswa", "4buku per siswa", "4 buku per siswa"],
+    discussion: ["Satuan pembanding menyatakan nilai untuk setiap 1 satuan.", "12 buku untuk 3 siswa berarti 12 ÷ 3 = 4 buku untuk setiap siswa.", "Jadi, satuan pembandingnya adalah 4 buku/siswa."],
   },
   {
     id: "b3",
     label: "Jarak 150 km ditempuh dalam 3 jam. Kecepatan tiap 1 jam adalah",
     suffix: "km/jam",
     answers: ["50"],
+    discussion: ["Kecepatan tiap 1 jam diperoleh dari jarak dibagi waktu.", "150 km ÷ 3 jam = 50 km/jam.", "Jadi, kecepatannya adalah 50 km/jam."],
   },
   {
     id: "c1",
     label: "Rasio 8 laki-laki terhadap 12 perempuan adalah",
     suffix: "",
     answers: ["8:12", "8/12"],
+    discussion: ["Rasio laki-laki terhadap perempuan berarti banyak laki-laki ditulis lebih dulu.", "Banyak laki-laki = 8 dan banyak perempuan = 12.", "Jadi, rasionya adalah 8 : 12."],
   },
   {
     id: "c2",
     label: "Bentuk paling sederhana dari 8 : 12 adalah",
     suffix: "",
     answers: ["2:3", "2/3"],
+    discussion: ["Cari bilangan terbesar yang membagi 8 dan 12, yaitu 4.", "8 ÷ 4 = 2 dan 12 ÷ 4 = 3.", "Jadi, bentuk paling sederhana dari 8 : 12 adalah 2 : 3."],
   },
   {
     id: "c3",
     label: "Jika rasio merah : biru = 2 : 3 dan jumlah bagian 5, maka bagian merah adalah",
     suffix: "bagian",
     answers: ["2"],
+    discussion: ["Pada rasio merah : biru = 2 : 3, angka 2 menunjukkan bagian merah dan angka 3 menunjukkan bagian biru.", "Jumlah bagian adalah 2 + 3 = 5.", "Karena bagian merah diwakili angka 2, maka bagian merah adalah 2 bagian."],
   },
 ];
 
@@ -95,40 +105,59 @@ const practiceItems = [
     question: "Di kelas terdapat 18 siswa perempuan dan 12 siswa laki-laki. Rasio perempuan terhadap laki-laki dalam bentuk sederhana adalah ...",
     answers: ["3:2", "3/2"],
     hint: "Bagi 18 dan 12 dengan FPB-nya, yaitu 6.",
+    discussion: ["Rasio perempuan terhadap laki-laki adalah 18 : 12.", "FPB dari 18 dan 12 adalah 6.", "Bagi kedua bilangan dengan 6: 18 ÷ 6 = 3 dan 12 ÷ 6 = 2.", "Jadi, rasio sederhananya adalah 3 : 2."],
   },
   {
     id: "p2",
     question: "Sebuah resep memakai 250 gram tepung untuk 5 kue. Satuan pembanding tepung tiap 1 kue adalah ... gram/kue.",
     answers: ["50"],
     hint: "250 dibagi 5.",
+    discussion: ["Satuan pembanding gram/kue berarti banyak tepung untuk setiap 1 kue.", "Jumlah tepung 250 gram digunakan untuk 5 kue.", "250 ÷ 5 = 50.", "Jadi, tepung tiap 1 kue adalah 50 gram/kue."],
   },
   {
     id: "p3",
     question: "Harga 4 pensil adalah Rp12.000. Harga 1 pensil adalah Rp ...",
     answers: ["3000", "3.000", "rp3000", "rp3.000"],
     hint: "12.000 dibagi 4.",
+    discussion: ["Harga 4 pensil adalah Rp12.000.", "Untuk mencari harga 1 pensil, bagi harga total dengan banyak pensil.", "12.000 ÷ 4 = 3.000.", "Jadi, harga 1 pensil adalah Rp3.000."],
   },
   {
     id: "p4",
     question: "Rasio umur Kakak : Adik = 5 : 3. Jika jumlah umur mereka 32 tahun, umur Kakak adalah ... tahun.",
     answers: ["20"],
     hint: "Jumlah bagian 8, satu bagian 4 tahun, kakak 5 bagian.",
+    discussion: ["Rasio umur Kakak : Adik = 5 : 3.", "Jumlah bagian = 5 + 3 = 8 bagian.", "Jumlah umur mereka 32 tahun, maka 1 bagian = 32 ÷ 8 = 4 tahun.", "Umur Kakak = 5 bagian = 5 × 4 = 20 tahun."],
   },
   {
     id: "p5",
     question: "Jarak pada peta 6 cm mewakili jarak sebenarnya 24 km. Setiap 1 cm mewakili ... km.",
     answers: ["4"],
     hint: "24 dibagi 6.",
+    discussion: ["6 cm pada peta mewakili 24 km sebenarnya.", "Untuk mencari nilai tiap 1 cm, bagi jarak sebenarnya dengan jarak pada peta.", "24 ÷ 6 = 4.", "Jadi, setiap 1 cm mewakili 4 km."],
   },
   {
     id: "p6",
     question: "Perbandingan 45 menit terhadap 1 jam dalam satuan menit adalah ...",
     answers: ["3:4", "3/4", "45:60"],
     hint: "Ubah 1 jam menjadi 60 menit, lalu sederhanakan 45 : 60.",
+    discussion: ["Sebelum dibandingkan, satuan harus sama.", "1 jam = 60 menit, sehingga perbandingan menjadi 45 menit : 60 menit.", "Rasio 45 : 60 dapat dibagi 15.", "45 ÷ 15 = 3 dan 60 ÷ 15 = 4.", "Jadi, perbandingan sederhananya adalah 3 : 4."],
   },
 ];
 
 const allQuestions = [...guidedItems, ...practiceItems];
+
+const DiscussionBox = ({ steps }: { steps: string[] }) => (
+  <details className="mt-3 rounded-2xl border border-yellow-200/25 bg-yellow-400/10 px-4 py-3 text-sm text-white/80">
+    <summary className="cursor-pointer select-none font-semibold text-yellow-100 hover:text-yellow-200">
+      Lihat Pembahasan
+    </summary>
+    <ol className="mt-3 space-y-2 list-decimal pl-5 font-body">
+      {steps.map((step) => (
+        <li key={step}>{step}</li>
+      ))}
+    </ol>
+  </details>
+);
 
 const LKPDPage = () => {
   const navigate = useNavigate();
@@ -263,6 +292,7 @@ const LKPDPage = () => {
                     )}
                   </div>
                 </div>
+                <DiscussionBox steps={item.discussion} />
               </label>
             ))}
           </div>
@@ -319,6 +349,7 @@ const LKPDPage = () => {
                   )}
                 </div>
                 {hasAnswer(answers[item.id]) && !results[item.id] && <p className="mt-2 text-xs text-yellow-200/90 font-body">Petunjuk: {item.hint}</p>}
+                <DiscussionBox steps={item.discussion} />
               </div>
             ))}
           </div>
