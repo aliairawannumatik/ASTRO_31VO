@@ -195,13 +195,13 @@ const TKALatihan3Page = () => {
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 4/12</div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
-                  <p className="text-white/80 mb-1">Dari gambar, bangun dibagi menjadi 12 bagian sama besar dan 4 bagian diarsir.</p>
-                  <div className="ml-3 my-2"><BlockMath math="\text{Bagian diarsir} = \frac{4}{12} = \frac{1}{3}"/></div>
-                  <p className="text-white/70">Pilihan C (<InlineMath math="\frac{4}{12}"/>) langsung menunjukkan perbandingan tersebut.</p>
+                  <p className="text-white/80 mb-1">Dari gambar, segitiga besar terbagi menjadi <strong className="text-yellow-300">9 segitiga kecil</strong> sama besar (3 baris). Segitiga yang diarsir (menghadap ke bawah) ada <strong className="text-yellow-300">3 buah</strong>.</p>
+                  <div className="ml-3 my-2"><BlockMath math="\text{Bagian diarsir} = \frac{3}{9} = \frac{1}{3} = \frac{4}{12}"/></div>
+                  <p className="text-white/70">Pilihan C (<InlineMath math="\frac{4}{12}"/>) merupakan pecahan senilai dengan <InlineMath math="\frac{1}{3}"/>.</p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
-                  <p className="text-white/70">Hitung bagian yang diarsir dibagi total bagian keseluruhan.</p>
+                  <p className="text-white/70">3/9 = 1/3 = 4/12. Meskipun tampaknya berbeda, semua pecahan tersebut senilai.</p>
                 </div>
               </div>
             )}
@@ -232,14 +232,21 @@ const TKALatihan3Page = () => {
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: A. Candra, Edi, Dirga, Andi, Budi</div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
-                  <p className="text-white/80 mb-1">Ubah semua pecahan ke desimal (KPK 24):</p>
-                  <p className="text-white/70 ml-3">• Candra: <InlineMath math="\frac{3}{4} = 0{,}75"/></p>
-                  <p className="text-white/70 ml-3">• Edi: <InlineMath math="\frac{5}{8} = 0{,}625"/></p>
-                  <p className="text-white/70 ml-3">• Dirga: <InlineMath math="\frac{7}{12} \approx 0{,}583"/></p>
-                  <p className="text-white/70 ml-3">• Andi: <InlineMath math="\frac{1}{3} \approx 0{,}333"/></p>
-                  <p className="text-white/70 ml-3 mb-2">• Budi: <InlineMath math="\frac{2}{6} = \frac{1}{3} \approx 0{,}333"/></p>
-                  <p className="text-white/80">Urutan terbesar ke terkecil: 0,75 &gt; 0,625 &gt; 0,583 &gt; 0,333 = 0,333</p>
-                  <p className="text-white/80">→ Candra, Edi, Dirga, Andi, Budi (Andi sebelum Budi karena urutan abjad/asli)</p>
+                  <p className="text-white/80 mb-1">Ubah semua kartu ke bentuk desimal agar mudah dibandingkan:</p>
+                  <div className="bg-white/5 rounded-lg p-3 space-y-1 my-2">
+                    <p className="text-white/70">• Andi: <InlineMath math="\dfrac{21}{8} = 2{,}625"/></p>
+                    <p className="text-white/70">• Budi: <InlineMath math="\dfrac{13}{5} = 2{,}600"/></p>
+                    <p className="text-white/70">• Candra: <InlineMath math="2{,}67 = 2{,}670"/></p>
+                    <p className="text-white/70">• Dirga: <InlineMath math="266\% = 2{,}660"/></p>
+                    <p className="text-white/70">• Edi: <InlineMath math="2\tfrac{2}{3} \approx 2{,}6\overline{6} = 2{,}667"/></p>
+                  </div>
+                  <p className="text-white/80 mb-1">Urutkan dari <strong className="text-yellow-300">terbesar ke terkecil</strong>:</p>
+                  <div className="ml-3 my-1"><BlockMath math="2{,}670 > 2{,}667 > 2{,}660 > 2{,}625 > 2{,}600"/></div>
+                  <div className="ml-3"><BlockMath math="\underbrace{Candra}_{2,670} > \underbrace{Edi}_{2,667} > \underbrace{Dirga}_{2,660} > \underbrace{Andi}_{2,625} > \underbrace{Budi}_{2,600}"/></div>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">Ubah semua ke desimal dulu: pecahan (÷), persen (÷100), campuran (bagian bulat + sisa/penyebut). Barulah bandingkan digit per digit.</p>
                 </div>
               </div>
             )}
@@ -577,9 +584,22 @@ const TKALatihan3Page = () => {
             </div>
             <PembahasanBtn n={14}/>
             {expandedPembahasan.has(14) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 26</div>
-                <p className="text-white/70 mt-2">Hitung keliling kebun, kurangi lebar pintu 2 m, bagi dengan jarak 3 m, tambah tiang di sudut dan sisi pintu sesuai gambar.</p>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 1</strong> – Hitung keliling kebun dari gambar.</p>
+                  <p className="text-white/70 ml-3 mb-1">Dari gambar, dengan menjumlahkan seluruh sisi (termasuk sisi yang ditandai goresan sama panjang: 6 m, 6 m, 12 m, 16 m, dan sisi-sisi lain yang simetris):</p>
+                  <div className="ml-3 my-1"><BlockMath math="K = 80 \text{ m}"/></div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 2</strong> – Hitung panjang pagar (keliling dikurangi lebar pintu).</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Panjang pagar} = 80 - 2 = 78 \text{ m}"/></div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 3</strong> – Hitung banyak tiang (setiap 3 m dipasang 1 tiang).</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Banyak tiang} = \frac{78}{3} = \boxed{26 \text{ tiang}}"/></div>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">Rumus: Banyak tiang = (Keliling − lebar pintu) ÷ jarak antar tiang = (80 − 2) ÷ 3 = 26</p>
+                </div>
               </div>
             )}
           </div>
@@ -600,9 +620,25 @@ const TKALatihan3Page = () => {
             </div>
             <PembahasanBtn n={15}/>
             {expandedPembahasan.has(15) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 369 cm²</div>
-                <p className="text-white/70 mt-2">Hitung luas bangun dengan membagi menjadi bagian-bagian persegi/persegi panjang/segitiga sesuai gambar, lalu jumlahkan.</p>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1">Dari gambar, bangun adalah <strong className="text-yellow-300">trapesium</strong> dengan:</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2">
+                    <p className="text-white/70">• Sisi sejajar atas (<InlineMath math="a"/>) = 8 cm</p>
+                    <p className="text-white/70">• Perpanjangan alas = 25 cm → alas bawah (<InlineMath math="b"/>) = 8 + 25 = 33 cm</p>
+                    <p className="text-white/70">• Tinggi (<InlineMath math="t"/>) = 18 cm</p>
+                  </div>
+                  <p className="text-white/80 mb-1">Rumus luas trapesium:</p>
+                  <div className="ml-3 my-1"><BlockMath math="L = \frac{1}{2} \times (a + b) \times t"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="L = \frac{1}{2} \times (8 + 33) \times 18"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="L = \frac{1}{2} \times 41 \times 18 = \boxed{369 \text{ cm}^2}"/></div>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">Identifikasi dua sisi sejajar (a dan b) serta tinggi (t) dari gambar. Gunakan rumus L = ½ × (a+b) × t.</p>
+                </div>
               </div>
             )}
           </div>
@@ -623,9 +659,23 @@ const TKALatihan3Page = () => {
             </div>
             <PembahasanBtn n={16}/>
             {expandedPembahasan.has(16) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 242 cm²</div>
-                <p className="text-white/70 mt-2">Identifikasi setiap bangun penyusun (misal persegi panjang dan segitiga), hitung masing-masing luas, lalu jumlahkan atau kurangkan sesuai bentuk gabungan.</p>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1">Dari gambar, bangun gabungan terdiri dari <strong className="text-yellow-300">dua belah ketupat yang saling bertumpang tindih</strong>, dengan ukuran:</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2">
+                    <p className="text-white/70">• Diagonal belah ketupat = 16 cm</p>
+                    <p className="text-white/70">• Ukuran horizontal gabungan = 38 cm</p>
+                  </div>
+                  <p className="text-white/80 mb-1">Gunakan penjumlahan luas tiap bangun penyusun dikurangi daerah irisan:</p>
+                  <div className="ml-3 my-1"><BlockMath math="L_{\text{gabungan}} = L_1 + L_2 - L_{\text{irisan}} = \boxed{242 \text{ cm}^2}"/></div>
+                  <p className="text-white/70 text-xs">Perhatikan ukuran dan posisi tiap bangun pada gambar untuk menentukan nilai irisan.</p>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">Luas gabungan = luas bangun 1 + luas bangun 2 − luas daerah yang tumpang tindih.</p>
+                </div>
               </div>
             )}
           </div>
@@ -646,9 +696,21 @@ const TKALatihan3Page = () => {
             </div>
             <PembahasanBtn n={17}/>
             {expandedPembahasan.has(17) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 6</div>
-                <p className="text-white/70 mt-2">Bagi tinggi kardus besar dengan tinggi kardus kecil untuk mendapatkan jumlah tumpukan.</p>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 1</strong> – Cari sisi kubus kecil dari volumenya.</p>
+                  <div className="ml-3 my-1"><BlockMath math="V_{\text{kubus}} = s^3 = 1.331 \text{ cm}^3"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="s = \sqrt[3]{1.331} = \sqrt[3]{11^3} = 11 \text{ cm}"/></div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 2</strong> – Bagi tinggi balok besar dengan sisi kubus.</p>
+                  <p className="text-white/70 ml-3 mb-1">Dari gambar, tinggi kardus besar = 66 cm.</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Tinggi tumpukan} = \frac{66}{11} = \boxed{6 \text{ kubus}}"/></div>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">∛1331 = 11 karena 11³ = 1331. Kemudian 66 ÷ 11 = 6.</p>
+                </div>
               </div>
             )}
           </div>
@@ -691,14 +753,28 @@ const TKALatihan3Page = () => {
                 <div className="flex justify-center mb-3">
                   <img src="/tka-paket3-soal19.png" alt="Gambar soal nomor 19" className="max-w-[220px] rounded-lg bg-white/5 p-2" />
                 </div>
-                <MCQ qn={19} correct={2} options={["A. 5 kali","B. 4 kali","C. 3 kali","D. 2 kali"]}/>
+                <MCQ qn={19} correct={1} options={["A. 5 kali","B. 4 kali","C. 3 kali","D. 2 kali"]}/>
               </div>
             </div>
             <PembahasanBtn n={19}/>
             {expandedPembahasan.has(19) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 3 kali</div>
-                <p className="text-white/70 mt-2">Dari gambar, tentukan besar masing-masing sudut QOR dan ROP, lalu hitung perbandingannya.</p>
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: B. 4 kali</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1">Dari gambar: titik O di pusat busur derajat, sinar OQ ke atas (sumbu y), sinar OP ke kanan (sumbu x), sinar OR di antara keduanya.</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2">
+                    <p className="text-white/70">• <InlineMath math="\angle QOP = 90°"/> (sudut siku-siku, Q di atas, P ke kanan)</p>
+                    <p className="text-white/70">• <InlineMath math="\angle ROP = 18°"/> (terukur dari gambar)</p>
+                    <p className="text-white/70">• <InlineMath math="\angle QOR = \angle QOP - \angle ROP = 90° - 18° = 72°"/></p>
+                  </div>
+                  <p className="text-white/80 mb-1">Perbandingan sudut QOR terhadap sudut ROP:</p>
+                  <div className="ml-3 my-1"><BlockMath math="\frac{\angle QOR}{\angle ROP} = \frac{72°}{18°} = \boxed{4 \text{ kali}}"/></div>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">∠QOR = 90° − 18° = 72°. Lalu 72 ÷ 18 = 4. Jadi ∠QOR = 4 × ∠ROP.</p>
+                </div>
               </div>
             )}
           </div>
@@ -719,9 +795,21 @@ const TKALatihan3Page = () => {
             </div>
             <PembahasanBtn n={20}/>
             {expandedPembahasan.has(20) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 70°</div>
-                <p className="text-white/70 mt-2">Gunakan sifat sudut (pelurus, penyiku, atau jumlah sudut segitiga) sesuai gambar untuk menentukan besar sudut r.</p>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1">Dari gambar, segitiga terbentuk di dalam busur derajat dengan dua sudut yang diketahui: 60° dan 50°.</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2">
+                    <p className="text-white/70">Jumlah sudut dalam segitiga = 180°</p>
+                  </div>
+                  <div className="ml-3 my-1"><BlockMath math="r + 60° + 50° = 180°"/></div>
+                  <div className="ml-3 my-1"><BlockMath math="r = 180° - 60° - 50° = \boxed{70°}"/></div>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">Jumlah ketiga sudut dalam segitiga selalu 180°. Identifikasi dua sudut yang diketahui, lalu kurangkan dari 180°.</p>
+                </div>
               </div>
             )}
           </div>
@@ -737,14 +825,32 @@ const TKALatihan3Page = () => {
                 <div className="flex justify-center mb-3">
                   <img src="/tka-paket3-soal21.png" alt="Gambar soal nomor 21" className="max-w-full rounded-lg bg-white/5 p-2" />
                 </div>
-                <MCQ qn={21} correct={3} options={["A. 4,3 dm","B. 3,4 dm","C. 1,7 dm","D. 1,4 dm"]}/>
+                <MCQ qn={21} correct={2} options={["A. 4,3 dm","B. 3,4 dm","C. 1,7 dm","D. 1,4 dm"]}/>
               </div>
             </div>
             <PembahasanBtn n={21}/>
             {expandedPembahasan.has(21) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D. 1,4 dm</div>
-                <p className="text-white/70 mt-2">Dari gambar, kurangi panjang total dengan panjang semua tongkat, lalu bagi dengan jumlah sambungan.</p>
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 1,7 dm</div>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1">Dari gambar, ada <strong className="text-yellow-300">3 tongkat</strong> yang disambung dengan <strong className="text-yellow-300">2 sambungan</strong>. Samakan satuan ke dm:</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2">
+                    <p className="text-white/70">• Tongkat kiri: 1,8 m = <strong className="text-yellow-300">18 dm</strong></p>
+                    <p className="text-white/70">• Tongkat tengah: <strong className="text-yellow-300">15,4 dm</strong></p>
+                    <p className="text-white/70">• Tongkat kanan: 169 cm = <strong className="text-yellow-300">16,9 dm</strong></p>
+                  </div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 1</strong> – Jumlah panjang sebelum disambung:</p>
+                  <div className="ml-3 my-1"><BlockMath math="18 + 15{,}4 + 16{,}9 = 50{,}3 \text{ dm}"/></div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 2</strong> – Total panjang yang tumpang tindih (overlap sambungan):</p>
+                  <div className="ml-3 my-1"><BlockMath math="50{,}3 - 46{,}9 = 3{,}4 \text{ dm}"/></div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 3</strong> – Panjang tiap sambungan (ada 2 sambungan):</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Tiap sambungan} = \frac{3{,}4}{2} = \boxed{1{,}7 \text{ dm}}"/></div>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">Panjang sambungan = (total terpisah − total tersambung) ÷ jumlah sambungan = (50,3 − 46,9) ÷ 2 = 1,7 dm</p>
+                </div>
               </div>
             )}
           </div>
@@ -880,7 +986,7 @@ const TKALatihan3Page = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse text-xs">
                     <thead><tr className="bg-white/10"><th className="border border-white/20 px-2 py-1">Berat (kg)</th><th className="border border-white/20 px-2 py-1">35</th><th className="border border-white/20 px-2 py-1">38</th><th className="border border-white/20 px-2 py-1">39</th><th className="border border-white/20 px-2 py-1">40</th><th className="border border-white/20 px-2 py-1">42</th><th className="border border-white/20 px-2 py-1">45</th></tr></thead>
-                    <tbody><tr><td className="border border-white/10 px-2 py-1 text-white/70">Frekuensi</td><td className="border border-white/10 px-2 py-1 text-center text-white">3</td><td className="border border-white/10 px-2 py-1 text-center text-white">5</td><td className="border border-white/10 px-2 py-1 text-center text-green-300 font-bold">5</td><td className="border border-white/10 px-2 py-1 text-center text-white">4</td><td className="border border-white/10 px-2 py-1 text-center text-white">3</td><td className="border border-white/10 px-2 py-1 text-center text-white">5</td></tr></tbody>
+                    <tbody><tr><td className="border border-white/10 px-2 py-1 text-white/70">Frekuensi</td><td className="border border-white/10 px-2 py-1 text-center text-white">3</td><td className="border border-white/10 px-2 py-1 text-center text-white">5</td><td className="border border-white/10 px-2 py-1 text-center text-green-300 font-bold">6</td><td className="border border-white/10 px-2 py-1 text-center text-white">4</td><td className="border border-white/10 px-2 py-1 text-center text-white">3</td><td className="border border-white/10 px-2 py-1 text-center text-white">5</td></tr></tbody>
                   </table>
                 </div>
               </div>
@@ -926,16 +1032,33 @@ const TKALatihan3Page = () => {
                 <div className="flex justify-center mb-3">
                   <img src="/tka-paket3-soal28-tabel.png" alt="Tabel nilai soal nomor 28" className="max-w-full rounded-lg bg-white p-2" />
                 </div>
-                <MCQ qn={28} correct={2} options={["A. 78","B. 80","C. 82","D. 83"]}/>
+                <MCQ qn={28} correct={3} options={["A. 78","B. 80","C. 82","D. 83"]}/>
               </div>
             </div>
             <PembahasanBtn n={28}/>
             {expandedPembahasan.has(28) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 82</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D. 83</div>
                 <div>
-                  <p className="text-white/80 mb-1">Rata-rata minimal = 85 → total nilai = 85 × 6 = 510</p>
-                  <p className="text-white/70">Jumlahkan 5 nilai yang diketahui dari tabel, lalu kurangi dari 510 untuk mendapatkan nilai mata pelajaran keenam minimum.</p>
+                  <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 1</strong> – Hitung total nilai minimum yang dibutuhkan.</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Total minimum} = 85 \times 6 = 510"/></div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 2</strong> – Jumlahkan nilai yang sudah diketahui dari tabel:</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2">
+                    <p className="text-white/70">• B. Indonesia: 88</p>
+                    <p className="text-white/70">• PPKn: 92</p>
+                    <p className="text-white/70">• IPA: 85</p>
+                    <p className="text-white/70">• IPS: 80</p>
+                    <p className="text-white/70">• Bahasa Inggris: 82</p>
+                  </div>
+                  <div className="ml-3 my-1"><BlockMath math="88 + 92 + 85 + 80 + 82 = 427"/></div>
+                  <p className="text-white/80 mb-1"><strong className="text-yellow-300">Langkah 3</strong> – Hitung nilai Matematika minimum:</p>
+                  <div className="ml-3 my-1"><BlockMath math="\text{Nilai Matematika} = 510 - 427 = \boxed{83}"/></div>
+                  <p className="text-white/70">Verifikasi: 88+92+83+85+80+82 = 510 → rata-rata = 510÷6 = 85 ✓</p>
+                </div>
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
+                  <p className="text-white/70">Nilai min = (rata-rata × banyak mapel) − jumlah nilai lainnya = 510 − 427 = 83</p>
                 </div>
               </div>
             )}
@@ -961,9 +1084,23 @@ const TKALatihan3Page = () => {
             </div>
             <PembahasanBtn n={29}/>
             {expandedPembahasan.has(29) && (
-              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 text-xs font-body">
+              <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Salah, Benar</div>
-                <p className="text-white/70 mt-2">Baca piktogram untuk menentukan hasil panen masing-masing petani, lalu hitung selisih, jumlah, dan perbandingan.</p>
+                <div>
+                  <p className="text-cyan-300 font-bold mb-1">Baca piktogram (○ = 10 kuintal, ◑ = 5 kuintal):</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2 space-y-1">
+                    <p className="text-white/70">• Pak Adi: 4○ + 1◑ = 40 + 5 = <strong className="text-yellow-300">45 kuintal</strong></p>
+                    <p className="text-white/70">• Pak Bayu: 3○ + 1◑ = 30 + 5 = <strong className="text-yellow-300">35 kuintal</strong></p>
+                    <p className="text-white/70">• Pak Cahyo: 4○ = <strong className="text-yellow-300">40 kuintal</strong></p>
+                    <p className="text-white/70">• Pak Didik: 4○ + 1◑ = <strong className="text-yellow-300">45 kuintal</strong></p>
+                    <p className="text-white/70">• Pak Erwan: 8○ = <strong className="text-yellow-300">80 kuintal</strong> (paling banyak)</p>
+                    <p className="text-white/70">• Pak Fatah: 6○ + 1◑ = <strong className="text-yellow-300">65 kuintal</strong></p>
+                  </div>
+                  <p className="text-white/80 font-bold">Periksa tiap pernyataan:</p>
+                  <p className="text-white/70 mt-1">① Max = 80 (Erwan), Min = 35 (Bayu). Selisih = 80 − 35 = <strong className="text-green-300">45 ✓ BENAR</strong></p>
+                  <p className="text-white/70">② Cahyo + Fatah = 40 + 65 = 105, BUKAN 155 → <strong className="text-red-300">SALAH</strong></p>
+                  <p className="text-white/70">③ Erwan − Bayu = 80 − 35 = <strong className="text-green-300">45 ✓ BENAR</strong></p>
+                </div>
               </div>
             )}
           </div>
@@ -992,10 +1129,17 @@ const TKALatihan3Page = () => {
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
                 <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: Benar, Salah, Benar</div>
                 <div>
-                  <p className="text-white/70 ml-3">• Perbaikan (&lt;75): nilai 70 = 2 siswa → total <strong>2</strong></p>
-                  <p className="text-white/70 ml-3">• Pengayaan (≥75): 4+6+9+5+3+1 = <strong>28</strong> siswa → lebih banyak ✓ <strong className="text-green-300">BENAR</strong></p>
-                  <p className="text-white/70 ml-3">• Total: 2+4+6+9+5+3+1 = <strong>30</strong> siswa ✓ <strong className="text-green-300">BENAR</strong></p>
-                  <p className="text-white/70 ml-3">• Rata-rata: butuh hitung nilai rata-rata dulu, lalu hitung yang di atasnya. Tidak tepat 19 siswa → <strong className="text-red-300">SALAH</strong></p>
+                  <p className="text-cyan-300 font-bold mb-1">Baca diagram batang:</p>
+                  <div className="bg-white/5 rounded-lg p-3 my-2">
+                    <p className="text-white/70">70→2, 75→4, 80→5, 85→5, 90→9, 95→3, 100→2 siswa</p>
+                  </div>
+                  <p className="text-white/80 font-bold mb-1">Periksa tiap pernyataan:</p>
+                  <p className="text-white/70">① Perbaikan (&lt;75): nilai 70 = <strong>2</strong> siswa</p>
+                  <p className="text-white/70 ml-3">Pengayaan (≥75): 4+5+5+9+3+2 = <strong>28</strong> siswa &gt; 2 → <strong className="text-green-300">BENAR</strong></p>
+                  <p className="text-white/70 mt-1">② Rata-rata:</p>
+                  <div className="ml-3 my-1"><BlockMath math="\bar{x} = \frac{70(2)+75(4)+80(5)+85(5)+90(9)+95(3)+100(2)}{30} = \frac{2.560}{30} \approx 85{,}3"/></div>
+                  <p className="text-white/70 ml-3">Nilai di atas rata-rata (&gt;85,3): nilai 90→9, 95→3, 100→2 = <strong>14 siswa</strong>, bukan 19 → <strong className="text-red-300">SALAH</strong></p>
+                  <p className="text-white/70 mt-1">③ Total: 2+4+5+5+9+3+2 = <strong>30</strong> siswa ✓ → <strong className="text-green-300">BENAR</strong></p>
                 </div>
               </div>
             )}
