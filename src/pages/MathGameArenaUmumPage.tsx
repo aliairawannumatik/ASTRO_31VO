@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy, Waves, ChevronsUp, Sword } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy, Waves, ChevronsUp, Sword, Plane } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -149,6 +149,14 @@ const games = [
     path: "/math-game-arena/umum/ksatria-mat",
     desc: "RPG petualangan epik! Lawan slime, goblin, kerangka & naga boss lewat 3 lantai dengan jawab soal!",
     icon: <Sword className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Space Impact Math",
+    emoji: "🚀",
+    path: "/math-game-arena/umum/space-impact",
+    desc: "Tembak musuh yang membawa jawaban benar! Kumpulkan power-up, hadapi gelombang musuh luar angkasa!",
+    icon: <Plane className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];
