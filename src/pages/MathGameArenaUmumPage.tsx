@@ -159,6 +159,14 @@ const games = [
     icon: <Plane className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
+  {
+    label: "Zuma Math",
+    emoji: "🔮",
+    path: "/math-game-arena/umum/zuma-math",
+    desc: "Tembak bola warna dari meriam! Cocokkan 3+ bola warna yang sama. Warna jawaban benar = BONUS besar!",
+    icon: <Sparkles className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
 ];
 
 const MathGameArenaUmumPage = () => {
