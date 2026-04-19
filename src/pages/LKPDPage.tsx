@@ -24,6 +24,8 @@ const answerMatches = (value: string, accepted: string[]) => {
   return accepted.some((answer) => normalize(answer) === cleanValue);
 };
 
+const hasAnswer = (value?: string) => Boolean(value?.trim());
+
 const guidedItems = [
   {
     id: "a1",
@@ -190,7 +192,7 @@ const LKPDPage = () => {
           {[
             { icon: Compass, title: "Amati", text: "Perhatikan data dan samakan satuannya." },
             { icon: Lightbulb, title: "Temukan", text: "Tuliskan rasio, sederhanakan, dan cari nilai tiap satuan." },
-            { icon: Target, title: "Cek", text: "Isi titik-titik, tekan cek jawaban, lalu lihat skor akhir." },
+            { icon: Target, title: "Cek", text: "Benar/salah muncul langsung di samping isian." },
           ].map((item) => (
             <div key={item.title} className="bg-card/80 backdrop-blur border border-border rounded-2xl p-5 shadow-lg">
               <item.icon className="w-8 h-8 text-yellow-300 mb-3" />
@@ -253,7 +255,12 @@ const LKPDPage = () => {
                       className="w-full md:w-44 rounded-xl border border-cyan-200/30 bg-black/30 px-4 py-2 text-white outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
                       placeholder="isi jawaban"
                     />
-                    {checked && (results[item.id] ? <CheckCircle2 className="w-6 h-6 text-emerald-300" /> : <XCircle className="w-6 h-6 text-rose-300" />)}
+                    {hasAnswer(answers[item.id]) && (
+                      <span className={`inline-flex min-w-24 items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold ${results[item.id] ? "bg-emerald-500/15 text-emerald-200" : "bg-rose-500/15 text-rose-200"}`}>
+                        {results[item.id] ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                        {results[item.id] ? "Benar" : "Salah"}
+                      </span>
+                    )}
                   </div>
                 </div>
               </label>
@@ -304,14 +311,14 @@ const LKPDPage = () => {
                     className="flex-1 rounded-xl border border-fuchsia-200/30 bg-black/30 px-4 py-2 text-white outline-none focus:border-fuchsia-300 focus:ring-2 focus:ring-fuchsia-300/20"
                     placeholder="tulis jawabanmu"
                   />
-                  {checked && (
+                  {hasAnswer(answers[item.id]) && (
                     <div className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold ${results[item.id] ? "bg-emerald-500/15 text-emerald-200" : "bg-rose-500/15 text-rose-200"}`}>
                       {results[item.id] ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
-                      {results[item.id] ? "Benar" : "Coba lagi"}
+                      {results[item.id] ? "Benar" : "Salah"}
                     </div>
                   )}
                 </div>
-                {checked && !results[item.id] && <p className="mt-2 text-xs text-yellow-200/90 font-body">Petunjuk: {item.hint}</p>}
+                {hasAnswer(answers[item.id]) && !results[item.id] && <p className="mt-2 text-xs text-yellow-200/90 font-body">Petunjuk: {item.hint}</p>}
               </div>
             ))}
           </div>
@@ -327,7 +334,7 @@ const LKPDPage = () => {
               <p className="text-sm text-white/75 max-w-2xl mx-auto">{getMessage()}</p>
             </>
           ) : (
-            <p className="text-sm text-white/70">Skor akan muncul setelah kamu menekan tombol cek jawaban.</p>
+            <p className="text-sm text-white/70">Benar/salah terlihat langsung di setiap isian. Tekan tombol di bawah untuk melihat skor akhir.</p>
           )}
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
             <button
@@ -335,7 +342,7 @@ const LKPDPage = () => {
               className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground hover:scale-105 transition-transform"
             >
               <ClipboardCheck className="w-5 h-5" />
-              Cek Jawaban
+              Lihat Skor Akhir
             </button>
             <button
               onClick={resetAnswers}
