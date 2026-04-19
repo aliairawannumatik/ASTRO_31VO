@@ -111,6 +111,14 @@ const games = [
     icon: <Gem className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
+  {
+    label: "Ninja Buah Math",
+    emoji: "🍉",
+    path: "/math-game-arena/umum/ninja-buah-math",
+    desc: "Iris buah yang membawa jawaban benar sebelum jatuh, kumpulkan combo, dan jangan kena bom!",
+    icon: <Sparkles className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
 ];
 
 const MathGameArenaUmumPage = () => {

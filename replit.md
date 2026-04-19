@@ -8,7 +8,7 @@ A React + Vite math tutoring app for Indonesian middle school students (SMP), po
 - **Backend**: Express.js API server (`server.ts`) running on port 3001 (dev) / 5000 (prod)
 - **AI**: Google Gemini via server-side Express `/api/chat`
 - **Dev workflow**: Vite dev server on port 5000 proxies `/api/*` to Express on port 3001
-- **Math Game Arena Umum**: Includes full-color standalone canvas games under `/math-game-arena/umum/*`, including Kereta Koin Math.
+- **Math Game Arena Umum**: Includes full-color standalone canvas games under `/math-game-arena/umum/*`, including Kereta Koin Math and Ninja Buah Math.
 
 ## Running the App
 
@@ -165,6 +165,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 - Limas material updated on 2026-04-18: slide 7 renamed and refocused as "Hubungan Antar-Unsur pada Limas dan Kaitannya dengan Teorema Pythagoras"; slide 8 now covers Luas Permukaan Limas with tabbed jaring-jaring for limas segitiga, segiempat, and segilima plus `Lp = La + sisi tegak` formulas.
 - Replit migration verified on 2026-04-19: npm dependencies installed, workflow starts cleanly on the Replit web port, frontend loads successfully, `/api/chat` stays server-side and safely reports missing AI credentials without exposing keys, and duplicate-key Vite warnings in imported content data were resolved.
 - Math Game Arena Umum updated on 2026-04-19: added `Kereta Koin Math` at `/math-game-arena/umum/kereta-koin-math`, a full-color lane-switching canvas game with arithmetic questions, answer coins, bombs, combo scoring, levels, timer, and touch/keyboard controls.
+- Math Game Arena Umum updated on 2026-04-19: added `Ninja Buah Math` at `/math-game-arena/umum/ninja-buah-math`, a full-color fruit-slicing canvas game where players click/touch correct-answer fruits, avoid wrong fruits and bombs, and build combos under a timer.
 - Limas material updated on 2026-04-18: slide 7 now includes tilted Limas Segitiga and Limas Segiempat diagrams with Pythagorean relationships for apothem, lateral edge, and side-face triangles.
 - Limas material updated on 2026-04-18: slides 3–5 now mirror Prisma's comparison format, showing interactive Limas Segitiga, Segiempat, and Segilima views for rusuk, sisi, and titik sudut.
 - Balok material updated on 2026-04-18: slide 10 now shows 10 larger net variations for cuboid nets.
