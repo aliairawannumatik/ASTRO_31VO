@@ -8,7 +8,7 @@ A React + Vite math tutoring app for Indonesian middle school students (SMP), po
 - **Backend**: Express.js API server (`server.ts`) running on port 3001 (dev) / 5000 (prod)
 - **AI**: Google Gemini via server-side Express `/api/chat`
 - **Dev workflow**: Vite dev server on port 5000 proxies `/api/*` to Express on port 3001
-- **Math Game Arena Umum**: Includes full-color standalone canvas games under `/math-game-arena/umum/*`, including Kereta Koin Math, Ninja Buah Math, and Pulau Harta Math.
+- **Math Game Arena Umum**: Includes full-color standalone canvas games under `/math-game-arena/umum/*`, including Kereta Koin Math, Ninja Buah Math, Pulau Harta Math, and Kapal Selam Math Battle.
 
 ## Running the App
 
@@ -167,6 +167,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 - Math Game Arena Umum updated on 2026-04-19: added `Kereta Koin Math` at `/math-game-arena/umum/kereta-koin-math`, a full-color lane-switching canvas game with arithmetic questions, answer coins, bombs, combo scoring, levels, timer, and touch/keyboard controls.
 - Math Game Arena Umum updated on 2026-04-19: added `Ninja Buah Math` at `/math-game-arena/umum/ninja-buah-math`, a full-color fruit-slicing canvas game where players click/touch correct-answer fruits, avoid wrong fruits and bombs, and build combos under a timer.
 - Math Game Arena Umum updated on 2026-04-19: added `Pulau Harta Math` at `/math-game-arena/umum/pulau-harta-math`, a full-color treasure-island canvas game where players steer a ship to catch correct-answer treasure, avoid bombs/wrong answers, build combos, gain levels, and collect time bonuses with keyboard/touch controls.
+- Math Game Arena Umum updated on 2026-04-19: added `Kapal Selam Math Battle` at `/math-game-arena/umum/kapal-selam-math-battle`, a full-color submarine combat canvas game where players shoot bombing planes above, fire side torpedoes at enemy submarines from left/right, target matching numbers, build combos, and level up with keyboard/touch controls.
 - Limas material updated on 2026-04-18: slide 7 now includes tilted Limas Segitiga and Limas Segiempat diagrams with Pythagorean relationships for apothem, lateral edge, and side-face triangles.
 - Limas material updated on 2026-04-18: slides 3–5 now mirror Prisma's comparison format, showing interactive Limas Segitiga, Segiempat, and Segilima views for rusuk, sisi, and titik sudut.
 - Balok material updated on 2026-04-18: slide 10 now shows 10 larger net variations for cuboid nets.

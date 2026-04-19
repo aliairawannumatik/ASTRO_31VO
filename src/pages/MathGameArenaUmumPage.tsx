@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy, Waves } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -125,6 +125,14 @@ const games = [
     path: "/math-game-arena/umum/pulau-harta-math",
     desc: "Kemudikan kapal ke peti jawaban benar, kumpulkan harta, combo, dan hindari bom laut!",
     icon: <Trophy className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Kapal Selam Math Battle",
+    emoji: "🚢",
+    path: "/math-game-arena/umum/kapal-selam-math-battle",
+    desc: "Tembak pesawat pembom di atas dan kapal selam musuh dari kiri-kanan dengan torpedo!",
+    icon: <Waves className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];
