@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -117,6 +117,14 @@ const games = [
     path: "/math-game-arena/umum/ninja-buah-math",
     desc: "Iris buah yang membawa jawaban benar sebelum jatuh, kumpulkan combo, dan jangan kena bom!",
     icon: <Sparkles className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Pulau Harta Math",
+    emoji: "🏝️",
+    path: "/math-game-arena/umum/pulau-harta-math",
+    desc: "Kemudikan kapal ke peti jawaban benar, kumpulkan harta, combo, dan hindari bom laut!",
+    icon: <Trophy className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];
