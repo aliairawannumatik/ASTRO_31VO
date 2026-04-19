@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy, Waves, ChevronsUp, Sword, Plane, Circle, Target } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy, Waves, ChevronsUp, Sword, Plane, Circle, Target, Disc } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -189,6 +189,14 @@ const games = [
     path: "/math-game-arena/umum/western-bar",
     desc: "Tembak botol & kaleng di bar koboi! Bidik target dengan jawaban benar sebelum mereka kabur!",
     icon: <Target className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Pinball Math",
+    emoji: "🎰",
+    path: "/math-game-arena/umum/pinball-math",
+    desc: "Pinball neon seru! Pantulkan bola ke bumper jawaban benar, gunakan flipper kiri & kanan!",
+    icon: <Disc className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];
