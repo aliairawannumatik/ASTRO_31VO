@@ -121,9 +121,6 @@ const questions: Q[] = [
     type: "mixed",
     diagram: {
       size: 260, range: 7,
-      segs: [
-        { x1: -6.5, y1: 2, x2: 6.5, y2: 2, color: "#facc15", label: "y = 2" },
-      ],
       pts: [
         { x: 3, y: 6, label: "A(3,6)", color: "#f472b6", labelPos: "tr" },
         { x: 3, y: 2, label: "", color: "#f472b6" },
@@ -131,7 +128,7 @@ const questions: Q[] = [
         { x: -2, y: 2, label: "", color: "#60a5fa" },
       ],
       segs: [
-        { x1: -6.5, y1: 2, x2: 6.5, y2: 2, color: "#facc15" },
+        { x1: -6.5, y1: 2, x2: 6.5, y2: 2, color: "#facc15", label: "y = 2" },
         { x1: 3, y1: 6, x2: 3, y2: 2, color: "#f472b6", dashed: true, label: "?" },
         { x1: -2, y1: -1, x2: -2, y2: 2, color: "#60a5fa", dashed: true, label: "?" },
       ],
@@ -147,7 +144,6 @@ const questions: Q[] = [
     type: "mixed",
     diagram: {
       size: 260, range: 7,
-      segs: [{ x1: 3, y1: -6.5, x2: 3, y2: 6.5, color: "#a78bfa" }],
       pts: [
         { x: -2, y: 4, label: "P(−2,4)", color: "#f472b6", labelPos: "tl" },
         { x: -2, y: 4, label: "", color: "#f472b6" },

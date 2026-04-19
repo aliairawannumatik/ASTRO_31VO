@@ -675,7 +675,6 @@ const soalLingkaran: Question[] = [
   },
   {
     id: 39, type: "PG", difficulty: "Sedang", category: "ANBK",
-    question: "Perhatikan tabel berikut. Lingkaran mana yang memiliki luas terbesar?",
     question: "Perbandingan keliling dua lingkaran A dan B adalah 3 : 5. Perbandingan luas lingkaran A dan B adalah ...",
     options: ["A. 3 : 5", "B. 9 : 25", "C. 6 : 10", "D. 27 : 125"],
     correctAnswer: "B. 9 : 25",
