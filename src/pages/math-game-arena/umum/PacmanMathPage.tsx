@@ -89,8 +89,9 @@ function cellCenter(row: number, col: number): [number, number] {
   return [OX + col * CELL + CELL / 2, OY + row * CELL + CELL / 2];
 }
 function passable(maze: number[][], row: number, col: number): boolean {
-  if (row < 0 || row >= ROWS) return false;
+  if (!maze || row < 0 || row >= ROWS) return false;
   const nc = ((col % COLS) + COLS) % COLS; // wrap cols for tunnel
+  if (!maze[row]) return false;
   const v = maze[row][nc];
   return v !== 1;
 }
@@ -472,7 +473,9 @@ const PacmanMathPage = () => {
 
   // ── Draw helpers (defined outside loop for reuse) ─────────────────────
   function drawMaze(ctx: CanvasRenderingContext2D, maze: number[][]) {
+    if (!maze || maze.length < ROWS) return;
     for (let r = 0; r < ROWS; r++) {
+      if (!maze[r] || maze[r].length < COLS) continue;
       for (let c = 0; c < COLS; c++) {
         const v = maze[r][c];
         const x = OX + c * CELL, y = OY + r * CELL;
