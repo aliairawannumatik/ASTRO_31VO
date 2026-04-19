@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords } from "lucide-react";
+import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -93,6 +93,14 @@ const games = [
     path: "/math-game-arena/umum/pecah-jawaban",
     desc: "Game Breakout! Arahkan bola ke bata yang membawa jawaban benar untuk menghancurkannya!",
     icon: <Swords className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Tembak Tank!",
+    emoji: "🪖",
+    path: "/math-game-arena/umum/tembak-tank",
+    desc: "Tankmu vs tank-tank musuh! Tembak tank yang membawa jawaban benar, hindari serangan balik!",
+    icon: <Shield className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
 ];
