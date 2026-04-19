@@ -304,6 +304,7 @@ import PlatformJumpMathPage from "./pages/math-game-arena/umum/PlatformJumpMathP
 import KsatriaMatPage from "./pages/math-game-arena/umum/KsatriaMatPage";
 import SpaceImpactPage from "./pages/math-game-arena/umum/SpaceImpactPage";
 import ZumaMathPage from "./pages/math-game-arena/umum/ZumaMathPage";
+import PacmanMathPage from "./pages/math-game-arena/umum/PacmanMathPage";
 
 // Math Game Arena - Kelas 7 Topic Pages
 import BilanganBulatMGAK7Page from "./pages/math-game-arena/kelas7/BilanganBulatPage";
@@ -1012,6 +1013,7 @@ const AppInner = () => {
       <Route path="/math-game-arena/umum/ksatria-mat" element={<KsatriaMatPage />} />
       <Route path="/math-game-arena/umum/space-impact" element={<SpaceImpactPage />} />
       <Route path="/math-game-arena/umum/zuma-math" element={<ZumaMathPage />} />
+      <Route path="/math-game-arena/umum/pacman-math" element={<PacmanMathPage />} />
       
       {/* Math Game Arena - Kelas 7 Topic Routes */}
       <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
