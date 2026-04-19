@@ -292,6 +292,7 @@ import CatchItemsGamePage from "./pages/math-game-arena/umum/CatchItemsGamePage"
 import SnakeMathPage from "./pages/math-game-arena/umum/SnakeMathPage";
 import AsteroidBlasterPage from "./pages/math-game-arena/umum/AsteroidBlasterPage";
 import BubblePopPage from "./pages/math-game-arena/umum/BubblePopPage";
+import MolSmashPage from "./pages/math-game-arena/umum/MolSmashPage";
 
 // Math Game Arena - Kelas 7 Topic Pages
 import BilanganBulatMGAK7Page from "./pages/math-game-arena/kelas7/BilanganBulatPage";
@@ -988,6 +989,7 @@ const AppInner = () => {
       <Route path="/math-game-arena/umum/snake-math" element={<SnakeMathPage />} />
       <Route path="/math-game-arena/umum/asteroid-blaster" element={<AsteroidBlasterPage />} />
       <Route path="/math-game-arena/umum/bubble-pop" element={<BubblePopPage />} />
+      <Route path="/math-game-arena/umum/hajar-mol" element={<MolSmashPage />} />
       
       {/* Math Game Arena - Kelas 7 Topic Routes */}
       <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
