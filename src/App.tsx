@@ -14,6 +14,7 @@ import MenuPage from "./pages/MenuPage";
 import LKPDPage from "./pages/LKPDPage";
 import ATPPage from "./pages/ATPPage";
 import UlanganHarianPage from "./pages/UlanganHarianPage";
+import PesanKesanPage from "./pages/PesanKesanPage";
 import PetunjukPage from "./pages/PetunjukPage";
 import QuizPage from "./pages/QuizPage";
 import ReferensiPage from "./pages/ReferensiPage";
@@ -733,6 +734,7 @@ const AppInner = () => {
       <Route path="/lkpd" element={<LKPDPage />} />
       <Route path="/atp" element={<ATPPage />} />
       <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
+      <Route path="/pesan-kesan" element={<PesanKesanPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />
       <Route path="/quiz" element={<QuizPage />} />
       <Route path="/referensi" element={<ReferensiPage />} />

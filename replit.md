@@ -162,6 +162,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ## Notes
 
+- Pesan dan Kesan menu added on 2026-04-19: new main menu entry `/pesan-kesan` opens a feedback-style form for students to enter name, class, impressions, messages, and development suggestions, with local browser storage confirmation after submission.
 - Ulangan Harian menu added on 2026-04-19: new main menu entry `/ulangan-harian` opens a 5-question daily test in a fullscreen-first mode, hides normal navigation during the test, blocks copy/paste/context menu shortcuts where the browser allows, records fullscreen/tab/window-focus violations, requires all answers before submission, and shows score plus security notes after completion.
 - ATP menu added on 2026-04-19: new main menu entry `/atp` presents uploaded "Analisis Capaian Pembelajaran ke Tujuan Pembelajaran" content as a polished ATP page, including document identity, class-level flow summary, and collapsible CP-to-TP details for Bilangan, Aljabar, Pengukuran, Geometri, and Analisis Data dan Peluang.
 - LKPD menu added on 2026-04-19: new main menu entry `/lkpd` opens an interactive guided worksheet for "Perbandingan Umum, Satuan Pembanding, dan Rasio" with discovery prompts, fill-in answers, per-input instant correctness indicators beside each answer box, clickable detailed discussions under every question, hints, reset, and final score.
