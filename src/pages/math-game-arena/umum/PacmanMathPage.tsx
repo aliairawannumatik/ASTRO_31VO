@@ -121,7 +121,7 @@ const PacmanMathPage = () => {
 
   // Game refs
   const phaseRef = useRef<Phase>("idle");
-  const mazeRef = useRef<number[][]>([]);
+  const mazeRef = useRef<number[][]>(BASE_MAZE.map(r => [...r]));
   const pacRef = useRef<Entity & { ndx: number; ndy: number; mouthA: number }>({
     row: 15, col: 10, dx: 0, dy: 0, ndx: -1, ndy: 0, prog: 0, mouthA: 0.25
   });
