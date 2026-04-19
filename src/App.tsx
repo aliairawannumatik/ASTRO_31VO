@@ -300,6 +300,7 @@ import CoinTrainMathPage from "./pages/math-game-arena/umum/CoinTrainMathPage";
 import FruitNinjaMathPage from "./pages/math-game-arena/umum/FruitNinjaMathPage";
 import TreasureIslandMathPage from "./pages/math-game-arena/umum/TreasureIslandMathPage";
 import SubmarineBattleMathPage from "./pages/math-game-arena/umum/SubmarineBattleMathPage";
+import PlatformJumpMathPage from "./pages/math-game-arena/umum/PlatformJumpMathPage";
 
 // Math Game Arena - Kelas 7 Topic Pages
 import BilanganBulatMGAK7Page from "./pages/math-game-arena/kelas7/BilanganBulatPage";
@@ -1004,6 +1005,7 @@ const AppInner = () => {
       <Route path="/math-game-arena/umum/ninja-buah-math" element={<FruitNinjaMathPage />} />
       <Route path="/math-game-arena/umum/pulau-harta-math" element={<TreasureIslandMathPage />} />
       <Route path="/math-game-arena/umum/kapal-selam-math-battle" element={<SubmarineBattleMathPage />} />
+      <Route path="/math-game-arena/umum/lompat-jawaban" element={<PlatformJumpMathPage />} />
       
       {/* Math Game Arena - Kelas 7 Topic Routes */}
       <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
