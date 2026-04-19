@@ -11,6 +11,7 @@ import { MusicProvider } from "@/contexts/MusicContext";
 import { FontProvider } from "@/contexts/FontContext";
 import WelcomePage from "./pages/WelcomePage";
 import MenuPage from "./pages/MenuPage";
+import LKPDPage from "./pages/LKPDPage";
 import PetunjukPage from "./pages/PetunjukPage";
 import QuizPage from "./pages/QuizPage";
 import ReferensiPage from "./pages/ReferensiPage";
@@ -727,6 +728,7 @@ const AppInner = () => {
       <Routes>
       <Route path="/" element={<WelcomePage />} />
       <Route path="/menu" element={<MenuPage />} />
+      <Route path="/lkpd" element={<LKPDPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />
       <Route path="/quiz" element={<QuizPage />} />
       <Route path="/referensi" element={<ReferensiPage />} />
