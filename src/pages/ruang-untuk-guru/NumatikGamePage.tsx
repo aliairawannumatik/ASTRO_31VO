@@ -30,7 +30,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const games = [
   {
-    label: "Lari Matematika",
+    label: "Turtle Run Math",
     emoji: "🦕",
     path: "/math-game-arena/umum/dino-run",
     desc: "Loncat dan tiarap hindari rintangan! Jawab soal untuk bonus skor!",
@@ -44,7 +44,7 @@ const games = [
     icon: <Rocket className="w-7 h-7 text-cyan-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Tembak Tank",
+    label: "Shoot Tank",
     emoji: "💥",
     path: "/math-game-arena/umum/tembak-tank",
     desc: "Arahkan meriam dan hancurkan target dengan jawaban matematika!",
