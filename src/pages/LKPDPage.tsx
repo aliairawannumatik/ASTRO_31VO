@@ -188,6 +188,89 @@ const practiceItems = [
 
 const allQuestions = [...guidedItems, ...practiceItems];
 
+// ── Soal Penilaian (Pilihan Ganda) — tiap soal bernilai 20 poin ─────────────
+interface PenilaianItem {
+  id: string;
+  no: number;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  discussion: string[];
+}
+
+const penilaianItems: PenilaianItem[] = [
+  {
+    id: "pn1",
+    no: 1,
+    question: "Tinggi Gedung A adalah 120 meter dan tinggi Gedung B adalah 150 meter. Berapakah rasio tinggi Gedung B terhadap Gedung A dalam bentuk paling sederhana?",
+    options: ["4 : 5", "5 : 4", "3 : 4", "5 : 3"],
+    correctIndex: 1,
+    discussion: [
+      "Yang ditanyakan adalah Gedung B terhadap Gedung A, jadi urutannya 150 : 120.",
+      "FPB dari 150 dan 120 adalah 30.",
+      "150 ÷ 30 = 5 dan 120 ÷ 30 = 4.",
+      "Jadi, rasio tinggi Gedung B terhadap Gedung A = 5 : 4.",
+    ],
+  },
+  {
+    id: "pn2",
+    no: 2,
+    question: "Dalam sebuah keranjang buah terdapat 24 buah apel merah dan 16 buah apel hijau. Berapakah perbandingan jumlah apel merah terhadap total keseluruhan apel dalam bentuk paling sederhana?",
+    options: ["2 : 3", "3 : 5", "3 : 4", "2 : 5"],
+    correctIndex: 1,
+    discussion: [
+      "Total apel = 24 + 16 = 40 buah.",
+      "Perbandingan apel merah terhadap total = 24 : 40.",
+      "FPB dari 24 dan 40 adalah 8.",
+      "24 ÷ 8 = 3 dan 40 ÷ 8 = 5.",
+      "Jadi, perbandingannya adalah 3 : 5.",
+    ],
+  },
+  {
+    id: "pn3",
+    no: 3,
+    question: "Umur Ayah saat ini 45 tahun, sedangkan umur Budi 15 tahun. Berapakah perbandingan umur Ayah dan Budi pada 5 tahun yang lalu?",
+    options: ["3 : 1", "8 : 3", "4 : 1", "5 : 2"],
+    correctIndex: 2,
+    discussion: [
+      "Umur Ayah 5 tahun lalu = 45 − 5 = 40 tahun.",
+      "Umur Budi 5 tahun lalu = 15 − 5 = 10 tahun.",
+      "Perbandingan = 40 : 10.",
+      "FPB dari 40 dan 10 adalah 10.",
+      "40 ÷ 10 = 4 dan 10 ÷ 10 = 1.",
+      "Jadi, perbandingan umur Ayah : Budi = 4 : 1.",
+    ],
+  },
+  {
+    id: "pn4",
+    no: 4,
+    question: "Jarak rumah Ali ke sekolah adalah 2,5 km, sedangkan jarak rumah Cici ke sekolah hanya 500 meter. Berapakah perbandingan jarak rumah Ali dan Cici dalam bentuk paling sederhana?",
+    options: ["5 : 2", "4 : 1", "3 : 1", "5 : 1"],
+    correctIndex: 3,
+    discussion: [
+      "Satuan harus disamakan terlebih dahulu: 2,5 km = 2.500 meter.",
+      "Perbandingan jarak Ali : Cici = 2.500 : 500.",
+      "FPB dari 2.500 dan 500 adalah 500.",
+      "2.500 ÷ 500 = 5 dan 500 ÷ 500 = 1.",
+      "Jadi, perbandingannya adalah 5 : 1.",
+    ],
+  },
+  {
+    id: "pn5",
+    no: 5,
+    question: "Waktu yang dihabiskan Dika untuk belajar adalah 2 jam, sedangkan waktu bermain game adalah 45 menit. Berapakah rasio waktu belajar terhadap waktu bermain Dika?",
+    options: ["4 : 3", "3 : 8", "8 : 3", "5 : 3"],
+    correctIndex: 2,
+    discussion: [
+      "Satuan harus disamakan: 2 jam = 120 menit.",
+      "Rasio waktu belajar : bermain = 120 : 45.",
+      "FPB dari 120 dan 45 adalah 15.",
+      "120 ÷ 15 = 8 dan 45 ÷ 15 = 3.",
+      "Jadi, rasio waktu belajar terhadap bermain = 8 : 3.",
+    ],
+  },
+];
+
 const DiscussionBox = ({ steps }: { steps: string[] }) => (
   <details className="mt-3 rounded-2xl border border-yellow-200/25 bg-yellow-400/10 px-4 py-3 text-sm text-white/80">
     <summary className="cursor-pointer select-none font-semibold text-yellow-100 hover:text-yellow-200">
@@ -201,10 +284,14 @@ const DiscussionBox = ({ steps }: { steps: string[] }) => (
   </details>
 );
 
+const POIN_PER_SOAL = 20;
+
 const LKPDPage = () => {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(false);
+  const [mcAnswers, setMcAnswers] = useState<Record<string, number>>({});
+  const [mcChecked, setMcChecked] = useState(false);
 
   const results = useMemo(() => {
     return allQuestions.reduce<Record<string, boolean>>((acc, item) => {
@@ -221,9 +308,18 @@ const LKPDPage = () => {
     setAnswers((current) => ({ ...current, [id]: value }));
   };
 
+  const mcScore = useMemo(() => {
+    return penilaianItems.reduce((total, item) => {
+      return total + (mcAnswers[item.no] === item.correctIndex ? POIN_PER_SOAL : 0);
+    }, 0);
+  }, [mcAnswers]);
+
+  const mcTotalPoin = penilaianItems.length * POIN_PER_SOAL;
+
   const checkAnswers = () => {
     playPopSound();
     setChecked(true);
+    setMcChecked(true);
     setTimeout(() => document.getElementById("lkpd-score")?.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
   };
 
@@ -231,6 +327,8 @@ const LKPDPage = () => {
     playPopSound();
     setAnswers({});
     setChecked(false);
+    setMcAnswers({});
+    setMcChecked(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -394,6 +492,107 @@ const LKPDPage = () => {
                 {checked && <DiscussionBox steps={item.discussion} />}
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ── C. Soal Penilaian ── */}
+        <section className="bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-yellow-500/15 border border-amber-200/30 rounded-3xl p-5 md:p-7 mb-6 backdrop-blur">
+          <div className="flex items-start gap-3 mb-5">
+            <ClipboardCheck className="w-8 h-8 text-amber-200 shrink-0 mt-0.5" />
+            <div>
+              <h2 className="font-display text-2xl font-bold text-amber-100">C. Soal Penilaian</h2>
+              <p className="text-sm text-white/70 font-body mt-1">Pilih satu jawaban yang paling tepat. Setiap soal bernilai <span className="font-bold text-amber-200">20 poin</span> — total <span className="font-bold text-amber-200">100 poin</span>.</p>
+            </div>
+          </div>
+
+          <div className="space-y-5">
+            {penilaianItems.map((item) => {
+              const selected = mcAnswers[item.no];
+              const hasSelected = selected !== undefined;
+              const isCorrect = selected === item.correctIndex;
+              return (
+                <div key={item.id} className="rounded-2xl bg-card/80 border border-white/10 p-4">
+                  <p className="text-sm md:text-base text-white/90 font-body mb-4 leading-relaxed">
+                    <span className="font-bold text-amber-300 mr-2">{item.no}.</span>
+                    {item.question}
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
+                    {item.options.map((opt, idx) => {
+                      const optLabels = ["A", "B", "C", "D"];
+                      let btnClass = "flex items-center gap-3 w-full rounded-xl border px-4 py-2.5 text-sm font-body text-left transition-all ";
+                      if (!hasSelected) {
+                        btnClass += "border-white/15 bg-white/5 hover:bg-white/10 hover:border-amber-300/50 text-white/80 cursor-pointer";
+                      } else if (idx === item.correctIndex) {
+                        btnClass += "border-emerald-400/60 bg-emerald-500/20 text-emerald-200 cursor-default";
+                      } else if (idx === selected) {
+                        btnClass += "border-rose-400/60 bg-rose-500/20 text-rose-200 cursor-default";
+                      } else {
+                        btnClass += "border-white/10 bg-white/3 text-white/40 cursor-default";
+                      }
+
+                      return (
+                        <button
+                          key={idx}
+                          disabled={hasSelected}
+                          className={btnClass}
+                          onClick={() => {
+                            playPopSound();
+                            setMcAnswers((prev) => ({ ...prev, [item.no]: idx }));
+                          }}
+                        >
+                          <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border ${
+                            !hasSelected
+                              ? "border-amber-300/40 text-amber-200"
+                              : idx === item.correctIndex
+                              ? "border-emerald-400 text-emerald-200 bg-emerald-500/30"
+                              : idx === selected
+                              ? "border-rose-400 text-rose-200 bg-rose-500/30"
+                              : "border-white/10 text-white/30"
+                          }`}>
+                            {optLabels[idx]}
+                          </span>
+                          {opt}
+                          {hasSelected && idx === item.correctIndex && <CheckCircle2 className="w-4 h-4 text-emerald-300 ml-auto shrink-0" />}
+                          {hasSelected && idx === selected && idx !== item.correctIndex && <XCircle className="w-4 h-4 text-rose-300 ml-auto shrink-0" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {hasSelected && (
+                    <div className={`mt-2 flex items-center gap-2 text-xs font-semibold ${isCorrect ? "text-emerald-300" : "text-rose-300"}`}>
+                      {isCorrect ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                      {isCorrect ? `Benar! +${POIN_PER_SOAL} poin` : `Kurang tepat. +0 poin`}
+                    </div>
+                  )}
+
+                  {(mcChecked || hasSelected) && (
+                    <details className="mt-3 rounded-2xl border border-amber-200/25 bg-amber-400/10 px-4 py-3 text-sm text-white/80">
+                      <summary className="cursor-pointer select-none font-semibold text-amber-100 hover:text-amber-200">Lihat Pembahasan</summary>
+                      <ol className="mt-3 space-y-2 list-decimal pl-5 font-body">
+                        {item.discussion.map((step) => (<li key={step}>{step}</li>))}
+                      </ol>
+                    </details>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mini skor penilaian */}
+          <div className="mt-6 rounded-2xl border border-amber-200/30 bg-amber-500/10 p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <Award className="w-8 h-8 text-amber-300 shrink-0" />
+              <div>
+                <p className="font-display font-bold text-amber-100 text-lg leading-tight">Nilai Soal Penilaian</p>
+                <p className="text-xs text-white/60 font-body">{penilaianItems.filter(i => mcAnswers[i.no] !== undefined).length} dari {penilaianItems.length} soal telah dijawab</p>
+              </div>
+            </div>
+            <div className="text-center sm:text-right">
+              <p className="font-display text-4xl font-bold text-white">{mcScore}</p>
+              <p className="text-xs text-white/60 font-body">dari {mcTotalPoin} poin</p>
+            </div>
           </div>
         </section>
 
