@@ -202,7 +202,7 @@ const LKPDPage = () => {
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
-      <PageNavigation prevPath="/menu" />
+      <PageNavigation prevPath="/lkpd/kelas-7/perbandingan" />
       <div className="relative z-10 max-w-5xl mx-auto px-4 pt-20 pb-14">
         <div className="text-center mb-8 animate-slide-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
@@ -387,11 +387,11 @@ const LKPDPage = () => {
 
         <div className="text-center">
           <button
-            onClick={() => { playPopSound(); navigate("/menu"); }}
+            onClick={() => { playPopSound(); navigate("/lkpd/kelas-7/perbandingan"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"
           >
             <ArrowLeft className="w-4 h-4" />
-            Kembali ke Menu Utama
+            Kembali ke LKPD Perbandingan
           </button>
         </div>
       </div>

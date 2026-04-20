@@ -12,6 +12,9 @@ import { FontProvider } from "@/contexts/FontContext";
 import WelcomePage from "./pages/WelcomePage";
 import MenuPage from "./pages/MenuPage";
 import LKPDPage from "./pages/LKPDPage";
+import LKPDMenuPage from "./pages/LKPDMenuPage";
+import { LKPDKelas7Page, LKPDKelas8Page, LKPDKelas9Page } from "./pages/LKPDKelasPage";
+import LKPDPerbandinganPage from "./pages/LKPDPerbandinganPage";
 import ATPPage from "./pages/ATPPage";
 import UlanganHarianPage from "./pages/UlanganHarianPage";
 import PesanKesanPage from "./pages/PesanKesanPage";
@@ -731,7 +734,15 @@ const AppInner = () => {
       <Routes>
       <Route path="/" element={<WelcomePage />} />
       <Route path="/menu" element={<MenuPage />} />
-      <Route path="/lkpd" element={<LKPDPage />} />
+      <Route path="/lkpd" element={<LKPDMenuPage />} />
+      <Route path="/lkpd/kelas-7" element={<LKPDKelas7Page />} />
+      <Route path="/lkpd/kelas-8" element={<LKPDKelas8Page />} />
+      <Route path="/lkpd/kelas-9" element={<LKPDKelas9Page />} />
+      <Route path="/lkpd/kelas-7/perbandingan" element={<LKPDPerbandinganPage />} />
+      <Route path="/lkpd/kelas-7/perbandingan/umum" element={<LKPDPage />} />
+      <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
+      <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
+      <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
       <Route path="/atp" element={<ATPPage />} />
       <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
       <Route path="/pesan-kesan" element={<PesanKesanPage />} />
