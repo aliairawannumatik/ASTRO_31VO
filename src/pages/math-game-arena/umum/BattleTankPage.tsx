@@ -12,29 +12,25 @@ const BULLET_SPEED = 420;
 const ENEMY_BULLET_SPEED = 220;
 
 // ── Math ────────────────────────────────────────────────────────────────────
-interface MQ { q: string; ans: number }
-function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
+interface MQ { q: string; opts: string[]; ans: number; pts: number }
 
-const makeQ = (): MQ => {
-  const t = ~~(Math.random() * 8);
-  switch (t) {
-    case 0: { const a = 2 + ~~(Math.random() * 10), b = 2 + ~~(Math.random() * 10); return { q: `${a} × ${b}`, ans: a * b }; }
-    case 1: { const a = 10 + ~~(Math.random() * 80), b = 10 + ~~(Math.random() * 80); return { q: `${a} + ${b}`, ans: a + b }; }
-    case 2: { const b = 5 + ~~(Math.random() * 40), a = b + 5 + ~~(Math.random() * 50); return { q: `${a} − ${b}`, ans: a - b }; }
-    case 3: { const b = 2 + ~~(Math.random() * 9), a = b * (2 + ~~(Math.random() * 9)); return { q: `${a} ÷ ${b}`, ans: a / b }; }
-    case 4: { const sq = [4,9,16,25,36,49,64,81,100][~~(Math.random() * 9)]; return { q: `√${sq}`, ans: Math.round(Math.sqrt(sq)) }; }
-    case 5: { const a = 2 + ~~(Math.random() * 9); return { q: `${a}²`, ans: a * a }; }
-    case 6: { const a = 2 + ~~(Math.random() * 9), b = 2 + ~~(Math.random() * 9); return { q: `KPK(${a},${b})`, ans: (a * b) / gcd(a, b) }; }
-    default: { const a = 10 + ~~(Math.random() * 40), b = 2 + ~~(Math.random() * 8); return { q: `${a} mod ${b}`, ans: a % b }; }
-  }
-};
-
-const makeWrong = (ans: number, used: Set<number>): number => {
-  let v: number, tries = 0;
-  do { const d = 1 + ~~(Math.random() * 14); v = ans + (Math.random() < 0.5 ? d : -d); tries++; }
-  while ((used.has(v) || v < 0) && tries < 100);
-  return v < 0 ? ans + 1 + ~~(Math.random() * 8) : v;
-};
+const QUIZ: MQ[] = [
+  {
+    q: "Rumus baku: Rasio a terhadap b ditulis ...",
+    opts: ["a : b", "a × b", "a + b", "a − b"],
+    ans: 0, pts: 30,
+  },
+  {
+    q: "Rasio paling sederhana diperoleh dengan membagi kedua bilangan oleh ...",
+    opts: ["FPB", "KPK", "Jumlah", "Selisih"],
+    ans: 0, pts: 30,
+  },
+  {
+    q: "Nilai tiap 1 satuan diperoleh dari jumlah besaran dibagi ...",
+    opts: ["Banyak Satuan", "Setengahnya", "2", "KPK"],
+    ans: 0, pts: 40,
+  },
+];
 
 // ── Colors ───────────────────────────────────────────────────────────────────
 const ENEMY_PALETTES = [
@@ -52,7 +48,7 @@ const ENEMY_PALETTES = [
 interface EnemyTank {
   id: number; x: number; y: number;
   vx: number; baseVx: number;
-  value: number; correct: boolean;
+  label: string; correct: boolean;
   palette: typeof ENEMY_PALETTES[0];
   alive: boolean;
   turretAngle: number;
@@ -105,7 +101,8 @@ const BattleTankPage = () => {
   const playerRef = useRef({ x: CW / 2, targetX: CW / 2, turretAngle: -Math.PI / 2, invT: 0, shieldT: 0 });
   const mouseRef = useRef({ x: CW / 2, y: CH / 2 });
 
-  const currentQRef = useRef<MQ>(makeQ());
+  const currentQRef = useRef<MQ>(QUIZ[0]);
+  const quizIdxRef = useRef(0);
   const scoreRef = useRef(0);
   const livesRef = useRef(3);
   const bestRef = useRef(0);
@@ -122,24 +119,27 @@ const BattleTankPage = () => {
 
   // ── Spawn enemies ─────────────────────────────────────────────────────────
   const spawnEnemies = useCallback((q: MQ) => {
-    const ROWS = 2, COLS = 4 + Math.min(~~(levelRef.current / 2), 2);
+    const ROWS = 2, COLS = 4;
     const total = ROWS * COLS;
-    const used = new Set<number>([q.ans]);
-    const values: number[] = [q.ans];
-    while (values.length < total) { const w = makeWrong(q.ans, used); used.add(w); values.push(w); }
-    for (let i = values.length - 1; i > 0; i--) {
+    const correctLabel = q.opts[q.ans];
+    const wrongs = q.opts.filter((_, i) => i !== q.ans);
+    const labels: string[] = [correctLabel];
+    while (labels.length < total) {
+      labels.push(wrongs[(labels.length - 1) % wrongs.length]);
+    }
+    for (let i = labels.length - 1; i > 0; i--) {
       const j = ~~(Math.random() * (i + 1));
-      [values[i], values[j]] = [values[j], values[i]];
+      [labels[i], labels[j]] = [labels[j], labels[i]];
     }
 
     const enemies: EnemyTank[] = [];
-    let vi = 0;
+    let li = 0;
     const gapX = (CW - 80) / (COLS + 1);
     for (let r = 0; r < ROWS; r++) {
-      const baseSpd = 45 + levelRef.current * 8;
+      const baseSpd = 50;
       const rowDir = r % 2 === 0 ? 1 : -1;
       for (let c = 0; c < COLS; c++) {
-        const spd = baseSpd + Math.random() * 25;
+        const spd = baseSpd + Math.random() * 20;
         const pal = ENEMY_PALETTES[~~(Math.random() * ENEMY_PALETTES.length)];
         enemies.push({
           id: _id++,
@@ -147,7 +147,7 @@ const BattleTankPage = () => {
           y: 165 + r * 110,
           vx: rowDir * spd,
           baseVx: spd,
-          value: values[vi++],
+          label: labels[li++],
           correct: false,
           palette: pal,
           alive: true,
@@ -161,12 +161,8 @@ const BattleTankPage = () => {
         });
       }
     }
-    enemies.find(e => {
-      if (values.indexOf(q.ans) === enemies.indexOf(e)) return true;
-      return false;
-    });
     // mark correct one
-    const correctIdx = enemies.findIndex(e => e.value === q.ans);
+    const correctIdx = enemies.findIndex(e => e.label === correctLabel);
     if (correctIdx >= 0) enemies[correctIdx].correct = true;
     enemiesRef.current = enemies;
   }, []);
@@ -198,11 +194,11 @@ const BattleTankPage = () => {
   const startGame = useCallback(() => {
     scoreRef.current = 0; livesRef.current = 3; levelRef.current = 1;
     timerRef.current = 90; timerAccRef.current = 0;
-    comboRef.current = 0; shakeRef.current = 0;
+    comboRef.current = 0; shakeRef.current = 0; quizIdxRef.current = 0;
     bulletsRef.current = []; explosionsRef.current = [];
     floatTextsRef.current = []; groundMarksRef.current = [];
     playerRef.current = { x: CW / 2, targetX: CW / 2, turretAngle: -Math.PI / 2, invT: 0, shieldT: 0 };
-    const q = makeQ(); currentQRef.current = q;
+    const q = QUIZ[0]; currentQRef.current = q;
     spawnEnemies(q);
     phaseRef.current = "playing";
     rerender();
@@ -349,7 +345,7 @@ const BattleTankPage = () => {
       ctx.fillStyle = "#ffffff";
       ctx.shadowBlur = 10;
       ctx.shadowColor = glowColor;
-      ctx.font = `bold ${value.length > 3 ? 9 : 11}px 'Orbitron', monospace`;
+      ctx.font = `bold ${value.length > 10 ? 6 : value.length > 5 ? 7 : value.length > 3 ? 9 : 11}px 'Orbitron', monospace`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(value, 0, 0);
@@ -462,12 +458,10 @@ const BattleTankPage = () => {
               if (Math.sqrt(dx * dx + dy * dy) < 26) {
                 bulletsRef.current = bulletsRef.current.filter(bb => bb !== b);
                 if (e.correct) {
-                  comboRef.current++;
-                  const pts = 20 * comboRef.current * levelRef.current;
+                  const pts = currentQRef.current.pts;
                   scoreRef.current += pts;
                   if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
                   addExplosion(e.x, e.y, e.palette.glow, true);
-                  // scatter other enemies
                   for (const oe of enemiesRef.current) {
                     if (oe === e || !oe.alive) continue;
                     const adx = oe.x - e.x, ady = oe.y - e.y;
@@ -477,21 +471,23 @@ const BattleTankPage = () => {
                     oe.scatterT = 0.4;
                   }
                   e.alive = false;
-                  floatTextsRef.current.push({ x: e.x, y: e.y - 30, txt: `+${pts}${comboRef.current > 1 ? ` 🔥×${comboRef.current}` : ""}`, alpha: 1, vy: -90, good: true });
-                  levelRef.current = Math.floor(scoreRef.current / 200) + 1;
-                  timerRef.current = Math.min(timerRef.current + 8, 90);
+                  floatTextsRef.current.push({ x: e.x, y: e.y - 30, txt: `✅ +${pts}`, alpha: 1, vy: -90, good: true });
                   playPopSound();
+                  quizIdxRef.current++;
                   setTimeout(() => {
                     if (phaseRef.current !== "playing") return;
                     bulletsRef.current = bulletsRef.current.filter(bb => bb.fromPlayer);
-                    const q = makeQ(); currentQRef.current = q;
-                    spawnEnemies(q); rerender();
+                    if (quizIdxRef.current >= QUIZ.length) {
+                      phaseRef.current = "dead"; rerender();
+                    } else {
+                      const q = QUIZ[quizIdxRef.current]; currentQRef.current = q;
+                      spawnEnemies(q); rerender();
+                    }
                   }, 700);
                 } else {
-                  comboRef.current = 0;
                   e.flashT = 0.6; e.invT = 0.5;
                   addExplosion(e.x, e.y, "#ff3333", false);
-                  floatTextsRef.current.push({ x: e.x, y: e.y - 20, txt: "✗ Salah!", alpha: 1, vy: -70, good: false });
+                  floatTextsRef.current.push({ x: e.x, y: e.y - 20, txt: "❌ Salah!", alpha: 1, vy: -70, good: false });
                   shakeRef.current = 0.3;
                   livesRef.current--;
                   if (livesRef.current <= 0) { phaseRef.current = "dead"; rerender(); }
@@ -589,25 +585,32 @@ const BattleTankPage = () => {
 
       if (phase === "playing" || phase === "dead") {
         ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        ctx.font = "bold 12px 'Orbitron', monospace";
-        ctx.fillStyle = "rgba(255,255,255,0.65)";
-        ctx.fillText("Tembak tank yang membawa jawaban BENAR! 🎯", CW / 2, 16);
+        ctx.font = "bold 10px 'Orbitron', monospace";
+        ctx.fillStyle = "rgba(255,255,255,0.55)";
+        ctx.fillText(`Soal ${Math.min(quizIdxRef.current + 1, QUIZ.length)} / ${QUIZ.length}  •  Tembak tank dengan jawaban BENAR! 🎯`, CW / 2, 14);
 
-        ctx.shadowBlur = 26; ctx.shadowColor = `hsl(${hue}, 100%, 70%)`;
-        ctx.fillStyle = `hsl(${hue}, 100%, 82%)`;
-        ctx.font = "bold 30px 'Orbitron', monospace";
-        ctx.fillText(currentQRef.current.q, CW / 2, 55);
+        // Wrapped question text
+        ctx.shadowBlur = 22; ctx.shadowColor = `hsl(${hue}, 100%, 70%)`;
+        ctx.fillStyle = `hsl(${hue}, 100%, 86%)`;
+        ctx.font = "bold 11px 'Orbitron', monospace";
+        const qWords = currentQRef.current.q.split(" ");
+        const qLines: string[] = []; let qLine = "";
+        for (const w of qWords) {
+          const test = qLine ? qLine + " " + w : w;
+          if (ctx.measureText(test).width > CW - 24) { qLines.push(qLine); qLine = w; }
+          else qLine = test;
+        }
+        qLines.push(qLine);
+        const qStartY = qLines.length === 1 ? 52 : 44;
+        qLines.forEach((l, i) => ctx.fillText(l, CW / 2, qStartY + i * 16));
         ctx.shadowBlur = 0;
 
         ctx.textAlign = "left"; ctx.font = "bold 12px 'Orbitron', monospace";
         ctx.fillStyle = "#ffc94a"; ctx.shadowBlur = 10; ctx.shadowColor = "#ffc94a";
-        ctx.fillText(`⭐ ${scoreRef.current}`, 10, 86);
+        ctx.fillText(`⭐ ${scoreRef.current}`, 10, 92);
         ctx.textAlign = "right";
         ctx.fillStyle = "#ff5e87"; ctx.shadowColor = "#ff5e87";
-        ctx.fillText(`❤️ ${"♥".repeat(Math.max(0, livesRef.current))}`, CW - 10, 86);
-        ctx.textAlign = "center"; ctx.font = "bold 10px 'Orbitron', monospace";
-        ctx.fillStyle = `hsl(${(hue+60)%360}, 100%, 75%)`;
-        ctx.fillText(`LEVEL ${levelRef.current}`, CW / 2, 86);
+        ctx.fillText(`❤️ ${"♥".repeat(Math.max(0, livesRef.current))}`, CW - 10, 92);
         ctx.shadowBlur = 0;
 
         const tFrac = timerRef.current / 90;
@@ -678,7 +681,7 @@ const BattleTankPage = () => {
         const bodyAngle = e.vx > 0 ? 0 : Math.PI;
         drawTank(ctx, e.x, e.y, bodyAngle, e.turretAngle, 44, 22,
           e.palette.body, e.palette.track, e.palette.turret, e.palette.glow,
-          String(e.value), false, e.flashT, e.invT, ts);
+          e.label, false, e.flashT, e.invT, ts);
       }
 
       // Explosions
@@ -741,23 +744,37 @@ const BattleTankPage = () => {
 
       // ── Dead overlay ──────────────────────────────────────────────────────
       if (phase === "dead") {
-        ctx.fillStyle = "rgba(0,0,0,0.68)"; ctx.fillRect(0, 0, CW, CH);
+        ctx.fillStyle = "rgba(0,0,0,0.72)"; ctx.fillRect(0, 0, CW, CH);
         ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        ctx.font = "bold 32px 'Orbitron', monospace";
-        ctx.fillStyle = "#ff5e87"; ctx.shadowBlur = 30; ctx.shadowColor = "#ff5e87";
-        ctx.fillText("GAME OVER", CW / 2, CH / 2 - 90);
-        ctx.font = "bold 20px 'Orbitron', monospace";
+
+        const finalScore = scoreRef.current;
+        const category = finalScore >= 100 ? "HEBAT! 🌟" : finalScore >= 60 ? "BAGUS! 👍" : "COBA LAGI! 💪";
+        const catColor = finalScore >= 100 ? "#FFD700" : finalScore >= 60 ? "#72f572" : "#ff9040";
+
+        ctx.font = "bold 14px 'Orbitron', monospace";
+        ctx.fillStyle = "rgba(255,255,255,0.55)"; ctx.shadowBlur = 0;
+        ctx.fillText("— HASIL KUIS —", CW / 2, CH / 2 - 110);
+
+        ctx.font = `bold 36px 'Orbitron', monospace`;
+        ctx.fillStyle = catColor; ctx.shadowBlur = 36; ctx.shadowColor = catColor;
+        ctx.fillText(category, CW / 2, CH / 2 - 68);
+
+        ctx.font = "bold 22px 'Orbitron', monospace";
         ctx.fillStyle = "#ffc94a"; ctx.shadowColor = "#ffc94a"; ctx.shadowBlur = 16;
-        ctx.fillText(`Skor: ${scoreRef.current}`, CW / 2, CH / 2 - 38);
-        ctx.font = "bold 16px 'Orbitron', monospace";
-        ctx.fillStyle = "#72f572"; ctx.shadowColor = "#72f572"; ctx.shadowBlur = 12;
-        ctx.fillText(`Rekor: ${bestRef.current}`, CW / 2, CH / 2 + 4);
-        ctx.font = "13px 'Orbitron', monospace"; ctx.fillStyle = "rgba(255,255,255,0.6)"; ctx.shadowBlur = 0;
-        ctx.fillText("Kamu luar biasa! Terus semangat! 🌟", CW / 2, CH / 2 + 44);
+        ctx.fillText(`Skor: ${finalScore} / 100`, CW / 2, CH / 2 - 18);
+
+        ctx.font = "bold 14px 'Orbitron', monospace";
+        ctx.fillStyle = "#aaa"; ctx.shadowBlur = 0;
+        ctx.fillText("Q1: +30   Q2: +30   Q3: +40", CW / 2, CH / 2 + 22);
+
+        ctx.font = "13px 'Orbitron', monospace";
+        ctx.fillStyle = "rgba(255,255,255,0.55)";
+        ctx.fillText(finalScore >= 100 ? "Sempurna! Kamu menguasai semua soal! 🎉" : "Terus semangat belajar rasio! 💪", CW / 2, CH / 2 + 60);
+
         ctx.font = "bold 15px 'Orbitron', monospace";
         ctx.fillStyle = `hsl(${hue}, 100%, 80%)`; ctx.shadowBlur = 18; ctx.shadowColor = `hsl(${hue}, 100%, 60%)`;
         const p2 = 0.82 + 0.18 * Math.sin(ts / 310);
-        ctx.globalAlpha = p2; ctx.fillText("[ KLIK UNTUK MAIN LAGI ]", CW / 2, CH / 2 + 95); ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+        ctx.globalAlpha = p2; ctx.fillText("[ KLIK UNTUK MAIN LAGI ]", CW / 2, CH / 2 + 105); ctx.globalAlpha = 1; ctx.shadowBlur = 0;
       }
 
       ctx.restore();
