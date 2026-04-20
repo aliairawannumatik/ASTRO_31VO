@@ -19,26 +19,26 @@ const ROCKET_R = 16;
 // ── Math questions ────────────────────────────────────────────────────────────
 interface MQ { q: string; opts: string[]; ans: number }
 const QUESTIONS: MQ[] = [
-  { q: "9 × 7 = ?", opts: ["56","63","72","54"], ans: 1 },
-  { q: "√196 = ?", opts: ["12","13","14","15"], ans: 2 },
-  { q: "2⁸ = ?", opts: ["128","256","512","64"], ans: 1 },
-  { q: "FPB(36,24) = ?", opts: ["6","8","12","18"], ans: 2 },
-  { q: "30% × 200 = ?", opts: ["40","50","60","70"], ans: 2 },
-  { q: "(-9)×(-6) = ?", opts: ["-54","-15","15","54"], ans: 3 },
-  { q: "5x = 45, x = ?", opts: ["7","8","9","10"], ans: 2 },
-  { q: "KPK(6,8) = ?", opts: ["12","18","24","48"], ans: 2 },
-  { q: "Luas ling. r=5 (π≈3,14) = ?", opts: ["62,8","75,4","78,5","94,2"], ans: 2 },
-  { q: "3³ + 2² = ?", opts: ["29","31","33","35"], ans: 1 },
-  { q: "sin 45° = ?", opts: ["0","1/2","√2/2","1"], ans: 2 },
-  { q: "Median: 4,6,8,10,12 = ?", opts: ["6","7","8","10"], ans: 2 },
-  { q: "75% dari 80 = ?", opts: ["55","60","65","70"], ans: 1 },
-  { q: "a=5, b=3 → a²+b² = ?", opts: ["28","30","34","36"], ans: 2 },
-  { q: "4/5 − 1/10 = ?", opts: ["3/5","7/10","3/10","9/10"], ans: 1 },
-  { q: "Volume bola r=3 (4/3π) ≈ ?", opts: ["88,0","94,2","113,1","125,6"], ans: 2 },
-  { q: "0,125 = ?", opts: ["1/4","1/6","1/8","1/12"], ans: 2 },
-  { q: "Modus: 2,3,3,4,5,3,6 = ?", opts: ["2","3","4","5"], ans: 1 },
-  { q: "Sisi persegi luas 169 = ?", opts: ["11","12","13","14"], ans: 2 },
-  { q: "(-3)² − 4×2 = ?", opts: ["1","2","3","4"], ans: 0 },
+  {
+    q: "Bentuk sederhana dari\n45 : 60 adalah ...",
+    opts: ["1 : 2", "2 : 3", "3 : 4", "4 : 5"],
+    ans: 2,
+  },
+  {
+    q: "Jika 12 buku dibagikan kepada\n3 siswa, setiap 1 siswa\nmendapat ... buku",
+    opts: ["3", "4", "5", "6"],
+    ans: 1,
+  },
+  {
+    q: "Jarak 150 km ditempuh dalam\n3 jam. Satuan pembanding\nkecepatannya adalah ...",
+    opts: ["km", "jam", "km/jam", "m/s"],
+    ans: 2,
+  },
+  {
+    q: "Perbandingan digunakan untuk\nmembandingkan dua besaran.\nJika satuannya berbeda, satuan\nharus dibuat ... terlebih dahulu",
+    opts: ["lebih besar", "sama", "berbeda", "lebih kecil"],
+    ans: 1,
+  },
 ];
 
 // ── Particle ──────────────────────────────────────────────────────────────────
@@ -84,6 +84,7 @@ const FlappyRocketPage = () => {
   const particlesRef = useRef<Particle[]>([]);
   const flapRef = useRef(false);
   const usedQRef = useRef<Set<number>>(new Set());
+  const pipeCountRef = useRef(0);
   const shieldRef = useRef(0);
   const comboRef = useRef(0);
   const flashRef = useRef(0);          // flash alpha for wrong answer
@@ -106,7 +107,7 @@ const FlappyRocketPage = () => {
   const showFeedback = useCallback((txt: string, good: boolean) => {
     setFeedback({ txt, good });
     if (fbTimerRef.current) clearTimeout(fbTimerRef.current);
-    fbTimerRef.current = setTimeout(() => setFeedback(null), 1500);
+    fbTimerRef.current = setTimeout(() => setFeedback(null), 2200);
   }, []);
 
   const spawnParticles = useCallback((x: number, y: number, color: string, count = 14) => {
@@ -134,20 +135,24 @@ const FlappyRocketPage = () => {
   }, []);
 
   const spawnPipe = useCallback(() => {
+    pipeCountRef.current += 1;
     const gapY = 80 + Math.random() * (CH - PIPE_GAP - 160);
-    const special = Math.random() < 0.4;
-    const [q, qi] = getQuestion();
-    const PIPE_COLORS = ["#00E5FF", "#FF6B6B", "#FFD700", "#00FF88", "#AA77FF"];
+    // Question appears on every 4th pipe (pipe 4, 8, 12, 16 ...)
+    const special = pipeCountRef.current % 4 === 0;
+    const qIdx = special
+      ? ((pipeCountRef.current / 4 - 1) % QUESTIONS.length)
+      : -1;
+    const PIPE_COLORS = ["#00E5FF", "#FF6B6B", "#00FF88", "#AA77FF"];
     pipesRef.current.push({
       x: CW + 10,
       gapY,
       scored: false,
       special,
-      qIdx: qi,
+      qIdx,
       color: special ? "#FFD700" : PIPE_COLORS[Math.floor(Math.random() * PIPE_COLORS.length)],
       glowPhase: Math.random() * Math.PI * 2,
     });
-  }, [getQuestion]);
+  }, []);
 
   const initStatics = useCallback(() => {
     bgStarsRef.current = Array.from({ length: 120 }, () => ({
@@ -172,6 +177,7 @@ const FlappyRocketPage = () => {
     trailRef.current = [];
     scoreRef.current = 0;
     nextPipeRef.current = 900;
+    pipeCountRef.current = 0;
     usedQRef.current = new Set();
     shieldRef.current = 0;
     comboRef.current = 0;
@@ -633,21 +639,19 @@ const FlappyRocketPage = () => {
     if (!q) return;
     playPopSound();
     if (idx === q.ans) {
-      comboRef.current += 1;
-      const bonus = (1 + comboRef.current) * 3;
-      scoreRef.current += bonus;
+      scoreRef.current += 25;
       setScore(scoreRef.current);
-      setCombo(comboRef.current);
-      if (comboRef.current >= 2) shieldRef.current = 5;
-      spawnParticles(ROCKET_X, ryRef.current, "#FFD700", 20);
-      showFeedback(`🌟 BENAR! +${bonus} ${comboRef.current >= 2 ? "🛡️ Perisai!" : ""}`, true);
+      // Big golden burst + green overlay
+      spawnParticles(ROCKET_X, ryRef.current, "#FFD700", 28);
+      spawnParticles(ROCKET_X, ryRef.current, "#00FF88", 14);
+      showFeedback("✅ Jawaban Anda Benar! +25", true);
     } else {
-      comboRef.current = 0;
-      setCombo(0);
-      flashRef.current = 1;
-      shakeDurRef.current = 0.25;
-      shakeMagRef.current = 5;
-      showFeedback(`❌ Salah! Jawaban: ${q.opts[q.ans]}`, false);
+      // Red flash + shake
+      flashRef.current = 1.2;
+      shakeDurRef.current = 0.4;
+      shakeMagRef.current = 7;
+      spawnParticles(ROCKET_X, ryRef.current, "#FF4444", 18);
+      showFeedback(`❌ Jawaban Anda Salah! Jawaban: ${q.opts[q.ans]}`, false);
     }
     activeQRef.current = null;
     setActiveQ(null);
@@ -694,9 +698,8 @@ const FlappyRocketPage = () => {
 
         {/* best score strip */}
         <div className="flex gap-6 mb-2 text-xs font-display">
-          <span className="text-yellow-400">SKOR: <span className="font-bold text-sm">{score}</span></span>
-          <span className="text-white/50">REKOR: <span className="text-accent font-bold">{best}</span></span>
-          {combo >= 2 && <span className="text-pink-400 font-bold animate-pulse">COMBO ×{combo + 1}</span>}
+          <span className="text-yellow-400">⭐ SKOR: <span className="font-bold text-sm">{score}</span></span>
+          <span className="text-white/50">🏆 REKOR: <span className="text-accent font-bold">{best}</span></span>
         </div>
 
         {/* canvas */}
@@ -732,8 +735,8 @@ const FlappyRocketPage = () => {
                 </h2>
                 <p className="text-white/60 text-xs mb-5 leading-relaxed">
                   Tekan / ketuk layar untuk terbang 🚀<br />
-                  Gerbang <span className="text-yellow-400 font-bold">⚡ EMAS</span> = ada soal matematika!<br />
-                  Combo benar = dapat <span className="text-cyan-400 font-bold">🛡️ Perisai!</span>
+                  Gerbang <span className="text-yellow-400 font-bold">⚡ EMAS</span> muncul setiap <span className="text-cyan-400 font-bold">4 pipa</span> = ada soal!<br />
+                  Jawaban benar = <span className="text-yellow-300 font-bold">+25 skor</span> 🌟
                 </p>
                 <button
                   onClick={(e) => { e.stopPropagation(); startGame(); }}
@@ -772,7 +775,7 @@ const FlappyRocketPage = () => {
                 <div className="text-xs text-yellow-400 font-display mb-2 text-center tracking-widest">
                   ⚡ SOAL MATEMATIKA ⚡
                 </div>
-                <p className="text-white font-bold text-center text-base mb-4 leading-snug">
+                <p className="text-white font-bold text-center text-sm mb-4 leading-snug whitespace-pre-line">
                   {activeQ.q}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -786,14 +789,14 @@ const FlappyRocketPage = () => {
                     </button>
                   ))}
                 </div>
-                <p className="text-white/40 text-xs text-center mt-3">Jawab benar = skor bonus + perisai!</p>
+                <p className="text-white/40 text-xs text-center mt-3">Jawab benar = +25 skor 🌟</p>
               </div>
             </div>
           )}
         </div>
 
         <p className="mt-2 text-white/40 text-xs font-body text-center">
-          Ketuk layar / SPASI / ↑ untuk terbang &nbsp;·&nbsp; Gerbang emas = ada soal!
+          Ketuk layar / SPASI / ↑ untuk terbang &nbsp;·&nbsp; Gerbang emas setiap 4 pipa = ada soal! 📝
         </p>
       </div>
     </div>
