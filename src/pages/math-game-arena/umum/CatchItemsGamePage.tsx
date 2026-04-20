@@ -346,7 +346,9 @@ const CatchItemsGamePage = () => {
     }
 
     // ── Update items ─────────────────────────────────────────────
-    if (ph === "playing" || ph === "question") {
+    // During "question" phase the game is PAUSED — items freeze in place,
+    // no collision / miss logic runs so player cannot lose lives while answering.
+    if (ph === "playing") {
       itemsRef.current.forEach(item => {
         if (item.caught) {
           item.catchAnim = Math.max(0, item.catchAnim - dt * 3);
@@ -713,6 +715,9 @@ const CatchItemsGamePage = () => {
           {phase === "question" && activeQ && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/78 rounded-2xl">
               <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-5 mx-3 shadow-2xl w-full max-w-xs">
+                <div className="text-[10px] text-white/40 font-display text-center mb-1 tracking-widest">
+                  ⏸ GAME PAUSED
+                </div>
                 <div className="text-xs text-yellow-400 font-display mb-2 text-center tracking-widest">
                   ⚡ BONUS MULTIPLIER ⚡
                 </div>

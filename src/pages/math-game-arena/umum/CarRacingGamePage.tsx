@@ -578,6 +578,9 @@ const CarRacingGamePage = () => {
             {gameState === "question" && currentQuestion && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-card/95 backdrop-blur-md border-2 border-accent rounded-2xl p-5 mx-3 shadow-2xl max-w-sm w-full">
+                  <div className="text-[10px] text-white/40 font-display text-center mb-1 tracking-widest">
+                    ⏸ GAME PAUSED
+                  </div>
                   <div className="text-xs text-accent font-display mb-2 text-center tracking-wider">
                     ⚡ PERTANYAAN MATEMATIKA
                   </div>

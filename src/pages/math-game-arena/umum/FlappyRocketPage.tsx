@@ -772,6 +772,9 @@ const FlappyRocketPage = () => {
               <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-5 mx-3 shadow-2xl w-full max-w-xs"
                 onClick={(e) => e.stopPropagation()}
               >
+                <div className="text-[10px] text-white/40 font-display text-center mb-1 tracking-widest">
+                  ⏸ GAME PAUSED
+                </div>
                 <div className="text-xs text-yellow-400 font-display mb-2 text-center tracking-widest">
                   ⚡ SOAL MATEMATIKA ⚡
                 </div>
