@@ -19,7 +19,7 @@ const GRAVITY = 1600;
 const JUMP_VY = -540;
 
 // ── Obstacle constants ──────────────────────────────────────────────────────
-type ObstacleKind = "cactus" | "rock" | "bird";
+type ObstacleKind = "cactus" | "rock" | "bird" | "lowbar";
 interface Obstacle {
   kind: ObstacleKind;
   x: number;
@@ -122,15 +122,18 @@ const DinoRunGamePage = () => {
 
   // ── Spawn obstacle ──────────────────────────────────────────────────────
   const spawnObstacle = useCallback(() => {
-    // 30% chance bird, 40% cactus, 30% rock
+    // 25% bird, 35% cactus, 25% rock, 15% lowbar
     const roll = Math.random();
-    const kind: ObstacleKind = roll < 0.3 ? "bird" : roll < 0.7 ? "cactus" : "rock";
+    const kind: ObstacleKind = roll < 0.25 ? "bird" : roll < 0.60 ? "cactus" : roll < 0.85 ? "rock" : "lowbar";
 
     // Ground obstacles: small sizes, easy to jump over
     let w = 18, h = 36, y = GROUND_Y - 36;
     if (kind === "rock") { w = 24; h = 20; y = GROUND_Y - 20; }
     // Bird: flies at mid-body height — duck to avoid
     if (kind === "bird") { w = 38; h = 20; y = GROUND_Y - P_H_STAND + 6; }
+    // Lowbar: hanging beam from top — MUST duck, impossible to jump over
+    // Hangs from y=0 down to y=150; ducking player (hitbox starts at y=160) fits under it
+    if (kind === "lowbar") { w = 26; h = 150; y = 0; }
 
     const avail = QUESTIONS.map((_, i) => i).filter(i => !usedQRef.current.has(i));
     const hasQ = Math.random() < 0.45 && avail.length > 0;
@@ -599,7 +602,7 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     ctx.moveTo(cx - 2, cy - 4); ctx.lineTo(cx + 4, cy + 2);
     ctx.moveTo(cx - 5, cy + 1); ctx.lineTo(cx, cy + 5);
     ctx.stroke();
-  } else {
+  } else if (ob.kind === "bird") {
     // Bird — colourful flying bird with flapping wings
     const cx = ob.x + ob.w / 2;
     const cy = ob.y + ob.h / 2;
@@ -671,6 +674,70 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     ctx.textAlign = "center";
     ctx.fillText("↓ TIARAP!", ob.x + ob.w / 2, ob.y - 7);
     ctx.textAlign = "left";
+  } else {
+    // ── Lowbar: hanging concrete beam — MUST DUCK, impossible to jump ──
+    const bx = ob.x, bw = ob.w, by = ob.y, bh = ob.h;
+
+    // Main concrete block body
+    const grad = ctx.createLinearGradient(bx, by, bx + bw, by);
+    grad.addColorStop(0, "#7a6040");
+    grad.addColorStop(0.3, "#b08050");
+    grad.addColorStop(0.7, "#c89060");
+    grad.addColorStop(1, "#7a6040");
+    ctx.fillStyle = grad;
+    ctx.fillRect(bx, by, bw, bh - 18);
+
+    // Danger stripes on the beam
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(bx, by, bw, bh - 18);
+    ctx.clip();
+    for (let s = 0; s < bw + bh; s += 10) {
+      ctx.fillStyle = s % 20 === 0 ? "rgba(255,200,0,0.18)" : "rgba(0,0,0,0.12)";
+      ctx.beginPath();
+      ctx.moveTo(bx + s, by);
+      ctx.lineTo(bx + s + 10, by);
+      ctx.lineTo(bx + s - (bh - 18), by + bh - 18);
+      ctx.lineTo(bx + s - (bh - 18) - 10, by + bh - 18);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // Side edge highlights
+    ctx.fillStyle = "rgba(255,255,255,0.15)";
+    ctx.fillRect(bx, by, 3, bh - 18);
+    ctx.fillStyle = "rgba(0,0,0,0.25)";
+    ctx.fillRect(bx + bw - 3, by, 3, bh - 18);
+
+    // Stalactite spikes at the bottom
+    ctx.fillStyle = "#8a6535";
+    for (let si = 0; si < 3; si++) {
+      const sx = bx + 3 + si * (bw - 6) / 2;
+      const sLen = 12 + (si % 2) * 6;
+      ctx.beginPath();
+      ctx.moveTo(sx, by + bh - 18);
+      ctx.lineTo(sx + 5, by + bh - 18);
+      ctx.lineTo(sx + 2.5, by + bh - 18 + sLen);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // "↓ TIARAP!" warning label on the beam face
+    ctx.fillStyle = "rgba(0,0,0,0.65)";
+    ctx.beginPath();
+    ctx.roundRect(bx - 2, by + bh - 78, bw + 4, 28, 4);
+    ctx.fill();
+    ctx.fillStyle = "#FFD700";
+    ctx.font = "bold 9px monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("↓", bx + bw / 2, by + bh - 62);
+    ctx.fillText("TIARAP!", bx + bw / 2, by + bh - 52);
+    ctx.textAlign = "left";
+
+    // Bottom thick border
+    ctx.fillStyle = "#5a4025";
+    ctx.fillRect(bx - 2, by + bh - 18, bw + 4, 4);
   }
 
   // Question badge
@@ -678,7 +745,9 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     ctx.fillStyle = PALETTE.question_badge;
     ctx.font = "bold 14px monospace";
     ctx.textAlign = "center";
-    ctx.fillText("⚡?", ob.x + ob.w / 2, ob.y - 4);
+    // For lowbar, show badge near its bottom edge; for others, above
+    const badgeY = ob.kind === "lowbar" ? ob.y + ob.h - 22 : ob.y - 4;
+    ctx.fillText("⚡?", ob.x + ob.w / 2, badgeY);
     ctx.textAlign = "left";
   }
 }
