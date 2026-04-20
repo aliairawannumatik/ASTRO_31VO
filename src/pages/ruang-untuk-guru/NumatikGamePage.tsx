@@ -30,6 +30,34 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const games = [
   {
+    label: "Lari Matematika",
+    emoji: "🦕",
+    path: "/math-game-arena/umum/dino-run",
+    desc: "Loncat dan tiarap hindari rintangan! Jawab soal untuk bonus skor!",
+    icon: <Zap className="w-7 h-7 text-green-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
+    label: "Flappy Rocket",
+    emoji: "🚀",
+    path: "/math-game-arena/umum/flappy-rocket",
+    desc: "Terbangkan roket melewati gerbang neon! Gerbang emas = soal bonus!",
+    icon: <Rocket className="w-7 h-7 text-cyan-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
+    label: "Tembak Tank",
+    emoji: "💥",
+    path: "/math-game-arena/umum/tembak-tank",
+    desc: "Arahkan meriam dan hancurkan target dengan jawaban matematika!",
+    icon: <Swords className="w-7 h-7 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
+    label: "Space Impact Math",
+    emoji: "🛸",
+    path: "/math-game-arena/umum/space-impact",
+    desc: "Tembak alien yang membawa jawaban benar, kumpulkan power-up!",
+    icon: <Plane className="w-7 h-7 text-cyan-300 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
     label: "Ninja Buah Math",
     emoji: "🍉",
     path: "/math-game-arena/umum/ninja-buah-math",
@@ -49,20 +77,6 @@ const games = [
     path: "/math-game-arena/umum/tetris",
     desc: "Susun blok warna-warni, kumpulkan skor tertinggi dan naiki level!",
     icon: <Layers className="w-7 h-7 text-blue-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
-    label: "Lari Matematika",
-    emoji: "🦕",
-    path: "/math-game-arena/umum/dino-run",
-    desc: "Loncat dan tiarap hindari rintangan! Jawab soal untuk bonus skor!",
-    icon: <Zap className="w-7 h-7 text-green-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
-    label: "Flappy Rocket",
-    emoji: "🚀",
-    path: "/math-game-arena/umum/flappy-rocket",
-    desc: "Terbangkan roket melewati gerbang neon! Gerbang emas = soal bonus!",
-    icon: <Rocket className="w-7 h-7 text-cyan-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
     label: "Tangkap Benda!",
@@ -114,13 +128,6 @@ const games = [
     icon: <Disc className="w-7 h-7 text-red-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Tembak Tank",
-    emoji: "💥",
-    path: "/math-game-arena/umum/tembak-tank",
-    desc: "Arahkan meriam dan hancurkan target dengan jawaban matematika!",
-    icon: <Swords className="w-7 h-7 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
     label: "Kereta Koin Math",
     emoji: "🚂",
     path: "/math-game-arena/umum/kereta-koin-math",
@@ -154,13 +161,6 @@ const games = [
     path: "/math-game-arena/umum/ksatria-mat",
     desc: "Jadilah ksatria! Serang musuh dengan memilih jawaban yang benar!",
     icon: <Shield className="w-7 h-7 text-rose-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
-    label: "Space Impact Math",
-    emoji: "🛸",
-    path: "/math-game-arena/umum/space-impact",
-    desc: "Tembak alien yang membawa jawaban benar, kumpulkan power-up!",
-    icon: <Plane className="w-7 h-7 text-cyan-300 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
     label: "Zuma Math",
