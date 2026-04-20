@@ -18,6 +18,9 @@ const P_H_DUCK = 28;
 const GRAVITY = 1600;
 const JUMP_VY = -540;
 
+// ── Bonus question interval (seconds) ───────────────────────────────────────
+const QUESTION_INTERVAL = 40;
+
 // ── Obstacle constants ──────────────────────────────────────────────────────
 type ObstacleKind = "cactus" | "rock" | "bird" | "lowbar";
 interface Obstacle {
@@ -27,6 +30,32 @@ interface Obstacle {
   w: number;
   h: number;
 }
+
+// ── Math questions ───────────────────────────────────────────────────────────
+interface MQ {
+  q: string;
+  opts: string[];
+  correctIndex: number;
+  bonus: number;
+}
+
+const QUESTIONS: MQ[] = [
+  { q: "12 × 8 = ?",            opts: ["86","96","106","76"],    correctIndex: 1, bonus: 30 },
+  { q: "144 ÷ 12 = ?",          opts: ["10","11","12","13"],     correctIndex: 2, bonus: 30 },
+  { q: "√169 = ?",              opts: ["11","12","13","14"],     correctIndex: 2, bonus: 40 },
+  { q: "7² + 1 = ?",            opts: ["48","50","52","54"],     correctIndex: 1, bonus: 35 },
+  { q: "25% dari 200 = ?",      opts: ["40","50","60","70"],     correctIndex: 1, bonus: 30 },
+  { q: "3³ = ?",                opts: ["9","18","27","36"],      correctIndex: 2, bonus: 35 },
+  { q: "56 + 79 = ?",           opts: ["125","130","135","145"], correctIndex: 2, bonus: 25 },
+  { q: "180 − 97 = ?",          opts: ["73","83","93","63"],     correctIndex: 1, bonus: 25 },
+  { q: "15 × 15 = ?",           opts: ["205","215","225","235"], correctIndex: 2, bonus: 35 },
+  { q: "FPB dari 24 dan 36 = ?",opts: ["6","8","12","18"],       correctIndex: 2, bonus: 40 },
+  { q: "KPK dari 4 dan 6 = ?",  opts: ["8","12","16","24"],      correctIndex: 1, bonus: 35 },
+  { q: "2x + 6 = 20, x = ?",   opts: ["5","6","7","8"],         correctIndex: 2, bonus: 40 },
+  { q: "(-8) × (-5) = ?",       opts: ["-40","-13","13","40"],   correctIndex: 3, bonus: 35 },
+  { q: "2/3 + 1/6 = ?",         opts: ["3/9","5/6","1/2","7/6"],correctIndex: 1, bonus: 40 },
+  { q: "√64 = ?",               opts: ["6","7","8","9"],         correctIndex: 2, bonus: 30 },
+];
 
 // ── Colour palette ──────────────────────────────────────────────────────────
 const PALETTE = {
@@ -42,7 +71,7 @@ const PALETTE = {
 };
 
 // ── State machine ────────────────────────────────────────────────────────────
-type Phase = "idle" | "running" | "stunned" | "dead";
+type Phase = "idle" | "running" | "stunned" | "question" | "dead";
 
 // ── Component ────────────────────────────────────────────────────────────────
 const DinoRunGamePage = () => {
@@ -74,18 +103,33 @@ const DinoRunGamePage = () => {
   const timeRef = useRef(0);
   const distScoreRef = useRef(0);
 
+  // ── Question state ───────────────────────────────────────────────────────
+  const questionTimerRef = useRef(0);
+  const usedQRef = useRef<Set<number>>(new Set());
+  const activeQRef = useRef<MQ | null>(null);
+
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
   const [lives, setLives] = useState(3);
   const [highScore, setHighScore] = useState(0);
   const [feedback, setFeedback] = useState<{ txt: string; good: boolean } | null>(null);
+  const [activeQ, setActiveQ] = useState<MQ | null>(null);
   const feedbackRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showFeedback = useCallback((txt: string, good: boolean) => {
     setFeedback({ txt, good });
     if (feedbackRef.current) clearTimeout(feedbackRef.current);
     feedbackRef.current = setTimeout(() => setFeedback(null), 2200);
+  }, []);
+
+  // ── Pick random question ─────────────────────────────────────────────────
+  const pickQuestion = useCallback((): MQ => {
+    let avail = QUESTIONS.map((_, i) => i).filter(i => !usedQRef.current.has(i));
+    if (avail.length === 0) { usedQRef.current = new Set(); avail = QUESTIONS.map((_, i) => i); }
+    const idx = avail[Math.floor(Math.random() * avail.length)];
+    usedQRef.current.add(idx);
+    return QUESTIONS[idx];
   }, []);
 
   // ── Difficulty tier — based on internal distance score (every 1000) ──────
@@ -95,12 +139,6 @@ const DinoRunGamePage = () => {
   const spawnObstacle = useCallback(() => {
     const tier = getDiffTier();
 
-    // Obstacle type distribution per tier
-    // Tier 0 (normal)  : 25% bird · 35% cactus · 25% rock · 15% lowbar
-    // Tier 1 (1000+)   : 35% bird · 25% cactus · 15% rock · 25% lowbar
-    // Tier 2 (2000+)   : 40% bird · 20% cactus · 10% rock · 30% lowbar
-    // Tier 3 (3000+)   : 45% bird · 15% cactus · 10% rock · 30% lowbar
-    // Tier 4+ (4000+)  : 50% bird · 10% cactus · 10% rock · 30% lowbar
     const birdCut   = [0.25, 0.35, 0.40, 0.45, 0.50][tier];
     const cactusCut = [0.60, 0.60, 0.60, 0.60, 0.60][tier];
     const rockCut   = [0.85, 0.75, 0.70, 0.70, 0.70][tier];
@@ -110,19 +148,12 @@ const DinoRunGamePage = () => {
       roll < cactusCut ? "cactus" :
       roll < rockCut ? "rock" : "lowbar";
 
-    // Ground obstacles: small sizes, easy to jump over
     let w = 18, h = 36, y = GROUND_Y - 36;
     if (kind === "rock") { w = 24; h = 20; y = GROUND_Y - 20; }
-    // Bird: flies at mid-body height — duck to avoid
     if (kind === "bird") { w = 38; h = 20; y = GROUND_Y - P_H_STAND + 6; }
-    // Lowbar: hanging beam from top — MUST duck, impossible to jump over
-    // Hangs from y=0 down to y=150; ducking player (hitbox starts at y=160) fits under it
     if (kind === "lowbar") { w = 26; h = 150; y = 0; }
 
     obstaclesRef.current.push({ kind, x: CW + 20, y, w, h });
-    // Spawn gap per tier (milliseconds): min + random * range
-    // Tier 0: 3200–5500 ms  |  Tier 1: 1600–3000 ms  |  Tier 2: 1200–2400 ms
-    // Tier 3:  900–1800 ms  |  Tier 4+:  700–1300 ms
     const gapMin  = [3200, 1600, 1200,  900,  700][tier];
     const gapRng  = [2300, 1400, 1200,  900,  600][tier];
     nextObstRef.current = gapMin + Math.random() * gapRng;
@@ -146,11 +177,34 @@ const DinoRunGamePage = () => {
     bgOffRef.current = 0;
     jumpPressedRef.current = false;
     duckPressedRef.current = false;
+    questionTimerRef.current = 0;
+    usedQRef.current = new Set();
+    activeQRef.current = null;
     setScore(0);
     setTime(0);
     setLives(3);
     setFeedback(null);
+    setActiveQ(null);
   }, []);
+
+  // ── Handle answer ────────────────────────────────────────────────────────
+  const handleAnswer = useCallback((idx: number) => {
+    const q = activeQRef.current;
+    if (!q) return;
+    playPopSound();
+    if (idx === q.correctIndex) {
+      scoreRef.current += q.bonus;
+      setScore(scoreRef.current);
+      showFeedback(`🌟 BENAR! +${q.bonus} skor bonus!`, true);
+    } else {
+      showFeedback(`❌ Salah! Jawaban: ${q.opts[q.correctIndex]}`, false);
+    }
+    activeQRef.current = null;
+    setActiveQ(null);
+    questionTimerRef.current = 0;
+    phaseRef.current = "running";
+    setPhase("running");
+  }, [showFeedback]);
 
   // ── Main loop ───────────────────────────────────────────────────────────
   const loop = useCallback((ts: number) => {
@@ -175,7 +229,7 @@ const DinoRunGamePage = () => {
       }
     }
 
-    // clouds
+    // clouds — only move when running
     cloudXRef.current = cloudXRef.current.map((cx) => {
       const nx = ph === "running" ? cx - speedRef.current * 0.06 * dt : cx;
       return nx < -80 ? CW + 60 : nx;
@@ -204,15 +258,14 @@ const DinoRunGamePage = () => {
     }
 
     // ── Update & draw obstacles ─────────────────────────────────────
+    // Obstacles ONLY move and collide during "running" — they FREEZE during "question"
     if (ph === "running") {
-      // Decrement in real milliseconds for a predictable, generous gap
       nextObstRef.current -= dt * 1000;
       if (nextObstRef.current <= 0) spawnObstacle();
     }
 
     const playerH = isDuckRef.current ? P_H_DUCK : P_H_STAND;
     const playerY = pyRef.current;
-    // Generous hitbox padding so collisions feel fair
     const hitbox = { x: P_X + 10, y: playerY + 8, w: P_W - 18, h: playerH - 14 };
 
     obstaclesRef.current = obstaclesRef.current.filter(ob => ob.x + ob.w > -20);
@@ -222,7 +275,6 @@ const DinoRunGamePage = () => {
       drawObstacle(ctx, ob, isLight);
 
       if (ph === "running") {
-        // Generous obstacle hitbox padding too
         const ox = ob.x + 5, ow = ob.w - 10, oy = ob.y + 5, oh = ob.h - 8;
         const collide =
           hitbox.x < ox + ow &&
@@ -246,6 +298,7 @@ const DinoRunGamePage = () => {
     });
 
     // ── Update player ───────────────────────────────────────────────
+    // Player physics also FREEZE during "question"
     if (ph === "running") {
       if (jumpPressedRef.current && isOnGroundRef.current) {
         pvyRef.current = JUMP_VY;
@@ -271,7 +324,7 @@ const DinoRunGamePage = () => {
       timeRef.current += dt;
       distScoreRef.current = Math.floor(distRef.current / 10);
 
-      // Speed ramp & cap scale with difficulty tier (every 1000 dist-pts)
+      // Speed ramp
       {
         const spTier = getDiffTier();
         const ramp = [0.020, 0.035, 0.050, 0.065, 0.080][spTier];
@@ -280,6 +333,16 @@ const DinoRunGamePage = () => {
       }
 
       if (Math.floor(timeRef.current * 2) % 2 === 0) setTime(Math.floor(timeRef.current));
+
+      // ── Bonus question timer ─────────────────────────────────────
+      questionTimerRef.current += dt;
+      if (questionTimerRef.current >= QUESTION_INTERVAL) {
+        const q = pickQuestion();
+        activeQRef.current = q;
+        setActiveQ(q);
+        phaseRef.current = "question";
+        setPhase("question");
+      }
     }
 
     if (ph === "stunned") {
@@ -309,12 +372,26 @@ const DinoRunGamePage = () => {
       ctx.fillText("♥", CW - 28 - i * 22, 28);
     }
 
+    // ── Next question countdown badge ────────────────────────────────
+    if (ph === "running" || ph === "stunned") {
+      const remaining = Math.max(0, Math.ceil(QUESTION_INTERVAL - questionTimerRef.current));
+      ctx.fillStyle = "rgba(0,0,0,0.45)";
+      ctx.beginPath();
+      ctx.roundRect(CW / 2 - 52, 8, 104, 26, 7);
+      ctx.fill();
+      ctx.fillStyle = remaining <= 10 ? "#FFD700" : "#aaaaff";
+      ctx.font = `bold 11px monospace`;
+      ctx.textAlign = "center";
+      ctx.fillText(`❓ SOAL dalam ${remaining}s`, CW / 2, 25);
+      ctx.textAlign = "left";
+    }
+
     if (ph === "stunned") {
       ctx.fillStyle = `rgba(255,60,60,${0.15 + 0.1 * Math.sin(ts / 80)})`;
       ctx.fillRect(0, 0, CW, CH);
     }
 
-    // ── Difficulty tier badge (score ≥ 1000) ────────────────────────
+    // ── Difficulty tier badge ────────────────────────────────────────
     const badgeTier = getDiffTier();
     if (badgeTier >= 1 && (ph === "running" || ph === "stunned")) {
       const badgeLabels = ["", "🔥 HARD MODE!", "⚡ VERY HARD!", "💀 EXTREME!", "☠️ INSANE!"];
@@ -325,7 +402,7 @@ const DinoRunGamePage = () => {
       ctx.globalAlpha = pulse;
       ctx.fillStyle = badgeColors[badgeTier];
       ctx.beginPath();
-      ctx.roundRect(CW / 2 - 58, 8, 116, 24, 6);
+      ctx.roundRect(CW / 2 - 58, 38, 116, 24, 6);
       ctx.fill();
       if (badgeBorder[badgeTier]) {
         ctx.strokeStyle = badgeBorder[badgeTier];
@@ -336,13 +413,13 @@ const DinoRunGamePage = () => {
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 11px monospace";
       ctx.textAlign = "center";
-      ctx.fillText(badgeLabels[badgeTier], CW / 2, 24);
+      ctx.fillText(badgeLabels[badgeTier], CW / 2, 54);
       ctx.textAlign = "left";
       ctx.restore();
     }
 
     rafRef.current = requestAnimationFrame(loop);
-  }, [isLight, spawnObstacle, showFeedback]);
+  }, [isLight, spawnObstacle, showFeedback, pickQuestion]);
 
   // ── Start game ──────────────────────────────────────────────────────────
   const startGame = useCallback(() => {
@@ -467,6 +544,37 @@ const DinoRunGamePage = () => {
             </div>
           )}
 
+          {/* ── Bonus question popup — game is PAUSED while this is open ── */}
+          {phase === "question" && activeQ && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/75 rounded-xl z-20">
+              <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-5 mx-3 shadow-2xl w-full max-w-xs">
+                <div className="text-[10px] text-white/40 font-display text-center mb-1 tracking-widest">
+                  ⏸ GAME PAUSED
+                </div>
+                <div className="text-xs text-yellow-400 font-display mb-2 text-center tracking-widest">
+                  ⭐ SOAL BONUS ⭐
+                </div>
+                <p className="text-white font-bold text-center text-base mb-4 leading-snug">
+                  {activeQ.q}
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {activeQ.opts.map((opt, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handleAnswer(i)}
+                      className="bg-primary/20 hover:bg-yellow-400/20 border border-border hover:border-yellow-400 text-white font-bold py-3 px-2 rounded-xl text-sm transition-all cursor-pointer active:scale-95"
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-white/40 text-xs text-center mt-3">
+                  Benar = +{activeQ.bonus} skor bonus 🌟
+                </p>
+              </div>
+            </div>
+          )}
+
           {phase === "dead" && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/70 rounded-xl">
               <div className="text-center px-4">
@@ -512,32 +620,27 @@ const DinoRunGamePage = () => {
 // ── Helper: draw obstacle ──────────────────────────────────────────────────
 function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolean) {
   if (ob.kind === "cactus") {
-    // Cactus body (trunk)
     ctx.fillStyle = "#2eb82e";
     ctx.beginPath();
     ctx.roundRect(ob.x + ob.w / 2 - 4, ob.y, 8, ob.h, 3);
     ctx.fill();
-    // Left arm
     ctx.beginPath();
     ctx.roundRect(ob.x + 1, ob.y + ob.h * 0.3, ob.w / 2 - 2, 6, 2);
     ctx.fill();
     ctx.beginPath();
     ctx.roundRect(ob.x + 1, ob.y + 4, 6, ob.h * 0.32, 2);
     ctx.fill();
-    // Right arm
     ctx.beginPath();
     ctx.roundRect(ob.x + ob.w / 2 + 2, ob.y + ob.h * 0.42, ob.w / 2 - 2, 6, 2);
     ctx.fill();
     ctx.beginPath();
     ctx.roundRect(ob.x + ob.w - 7, ob.y + ob.h * 0.15, 6, ob.h * 0.32, 2);
     ctx.fill();
-    // Spines
     ctx.fillStyle = "#1a8c1a";
     for (let i = 0; i < 3; i++) {
       ctx.fillRect(ob.x + ob.w / 2 - 1, ob.y + i * 12, 2, 5);
     }
   } else if (ob.kind === "rock") {
-    // Rock — rounded with shading
     const cx = ob.x + ob.w / 2;
     const cy = ob.y + ob.h / 2;
     const grad = ctx.createRadialGradient(cx - 4, cy - 4, 2, cx, cy, ob.w / 2);
@@ -547,12 +650,10 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     ctx.beginPath();
     ctx.ellipse(cx, cy, ob.w / 2, ob.h / 2, -0.2, 0, Math.PI * 2);
     ctx.fill();
-    // Highlight
     ctx.fillStyle = "rgba(255,255,255,0.25)";
     ctx.beginPath();
     ctx.ellipse(cx - 4, cy - 5, ob.w / 5, ob.h / 5, -0.4, 0, Math.PI * 2);
     ctx.fill();
-    // Cracks
     ctx.strokeStyle = "rgba(0,0,0,0.18)";
     ctx.lineWidth = 1;
     ctx.beginPath();
@@ -560,332 +661,157 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     ctx.moveTo(cx - 5, cy + 1); ctx.lineTo(cx, cy + 5);
     ctx.stroke();
   } else if (ob.kind === "bird") {
-    // Bird — colourful flying bird with flapping wings
     const cx = ob.x + ob.w / 2;
     const cy = ob.y + ob.h / 2;
     const wingFlap = Math.sin(Date.now() / 110) * 8;
 
-    // Body
     ctx.fillStyle = "#E8622A";
     ctx.beginPath();
     ctx.ellipse(cx, cy, ob.w / 2 - 4, ob.h / 2 - 2, 0, 0, Math.PI * 2);
     ctx.fill();
-    // Belly
-    ctx.fillStyle = "#F4A460";
-    ctx.beginPath();
-    ctx.ellipse(cx + 4, cy + 2, ob.w / 5, ob.h / 4, 0, 0, Math.PI * 2);
-    ctx.fill();
 
-    // Upper wing (flapping up)
-    ctx.fillStyle = "#C0392B";
+    ctx.fillStyle = "#F0862A";
     ctx.beginPath();
-    ctx.moveTo(cx - 4, cy - 2);
-    ctx.quadraticCurveTo(cx - ob.w / 2, cy - 6 - wingFlap, cx - ob.w / 2 + 4, cy - 12 - wingFlap);
-    ctx.quadraticCurveTo(cx, cy - 8 - wingFlap * 0.5, cx + 4, cy - 2);
-    ctx.closePath();
-    ctx.fill();
-    // Wing tip highlight
-    ctx.fillStyle = "#E74C3C";
-    ctx.beginPath();
-    ctx.moveTo(cx - 6, cy - 4);
-    ctx.quadraticCurveTo(cx - ob.w / 2 + 2, cy - 4 - wingFlap, cx - ob.w / 2 + 8, cy - 10 - wingFlap);
-    ctx.quadraticCurveTo(cx - 4, cy - 6 - wingFlap * 0.5, cx - 2, cy - 3);
+    ctx.moveTo(cx - ob.w / 2 + 2, cy - 4);
+    ctx.quadraticCurveTo(cx - ob.w / 2 - 8, cy - 10 - wingFlap, cx - ob.w / 2 - 4, cy - 2);
     ctx.closePath();
     ctx.fill();
 
-    // Eye
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath(); ctx.arc(cx + ob.w / 2 - 8, cy - 2, 4, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#1a1a2e";
-    ctx.beginPath(); ctx.arc(cx + ob.w / 2 - 7, cy - 2, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath(); ctx.arc(cx + ob.w / 2 - 8, cy - 3, 1, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#F0862A";
+    ctx.beginPath();
+    ctx.moveTo(cx + ob.w / 2 - 2, cy - 4);
+    ctx.quadraticCurveTo(cx + ob.w / 2 + 8, cy - 10 + wingFlap, cx + ob.w / 2 + 4, cy - 2);
+    ctx.closePath();
+    ctx.fill();
 
-    // Beak
     ctx.fillStyle = "#FFD700";
     ctx.beginPath();
-    ctx.moveTo(cx + ob.w / 2 - 5, cy - 2);
-    ctx.lineTo(cx + ob.w / 2 + 6, cy);
-    ctx.lineTo(cx + ob.w / 2 - 5, cy + 3);
+    ctx.moveTo(cx + ob.w / 2 - 2, cy);
+    ctx.lineTo(cx + ob.w / 2 + 6, cy - 2);
+    ctx.lineTo(cx + ob.w / 2 + 6, cy + 2);
     ctx.closePath();
     ctx.fill();
 
-    // Tail feathers
-    ctx.fillStyle = "#C0392B";
+    ctx.fillStyle = "#111";
     ctx.beginPath();
-    ctx.moveTo(cx - ob.w / 2 + 3, cy - 1);
-    ctx.lineTo(cx - ob.w / 2 - 6, cy - 5);
-    ctx.lineTo(cx - ob.w / 2 + 1, cy + 3);
-    ctx.lineTo(cx - ob.w / 2 - 4, cy + 6);
-    ctx.lineTo(cx - ob.w / 2 + 5, cy + 4);
-    ctx.closePath();
+    ctx.arc(cx + ob.w / 2 - 6, cy - 3, 2.5, 0, Math.PI * 2);
     ctx.fill();
-
-    // "TIARAP!" label above bird so player knows to duck
-    ctx.fillStyle = "rgba(0,0,0,0.55)";
+    ctx.fillStyle = "#fff";
     ctx.beginPath();
-    ctx.roundRect(ob.x + ob.w / 2 - 24, ob.y - 18, 48, 14, 4);
+    ctx.arc(cx + ob.w / 2 - 5, cy - 4, 1, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = "#FFD700";
-    ctx.font = "bold 9px monospace";
-    ctx.textAlign = "center";
-    ctx.fillText("↓ TIARAP!", ob.x + ob.w / 2, ob.y - 7);
-    ctx.textAlign = "left";
-  } else {
-    // ── Lowbar: hanging concrete beam — MUST DUCK, impossible to jump ──
-    const bx = ob.x, bw = ob.w, by = ob.y, bh = ob.h;
-
-    // Main concrete block body
-    const grad = ctx.createLinearGradient(bx, by, bx + bw, by);
-    grad.addColorStop(0, "#7a6040");
-    grad.addColorStop(0.3, "#b08050");
-    grad.addColorStop(0.7, "#c89060");
-    grad.addColorStop(1, "#7a6040");
+  } else if (ob.kind === "lowbar") {
+    const grad = ctx.createLinearGradient(ob.x, 0, ob.x + ob.w, 0);
+    grad.addColorStop(0, "#8B0000");
+    grad.addColorStop(0.5, "#CC2200");
+    grad.addColorStop(1, "#8B0000");
     ctx.fillStyle = grad;
-    ctx.fillRect(bx, by, bw, bh - 18);
+    ctx.fillRect(ob.x, ob.y, ob.w, ob.h);
 
-    // Danger stripes on the beam
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(bx, by, bw, bh - 18);
-    ctx.clip();
-    for (let s = 0; s < bw + bh; s += 10) {
-      ctx.fillStyle = s % 20 === 0 ? "rgba(255,200,0,0.18)" : "rgba(0,0,0,0.12)";
+    ctx.strokeStyle = "#FF4444";
+    ctx.lineWidth = 1;
+    for (let ry = 0; ry < ob.h; ry += 16) {
       ctx.beginPath();
-      ctx.moveTo(bx + s, by);
-      ctx.lineTo(bx + s + 10, by);
-      ctx.lineTo(bx + s - (bh - 18), by + bh - 18);
-      ctx.lineTo(bx + s - (bh - 18) - 10, by + bh - 18);
-      ctx.closePath();
-      ctx.fill();
+      ctx.moveTo(ob.x, ob.y + ry);
+      ctx.lineTo(ob.x + ob.w, ob.y + ry);
+      ctx.stroke();
     }
-    ctx.restore();
 
-    // Side edge highlights
-    ctx.fillStyle = "rgba(255,255,255,0.15)";
-    ctx.fillRect(bx, by, 3, bh - 18);
-    ctx.fillStyle = "rgba(0,0,0,0.25)";
-    ctx.fillRect(bx + bw - 3, by, 3, bh - 18);
+    ctx.fillStyle = "#FF6600";
+    ctx.fillRect(ob.x - 4, ob.y, ob.w + 8, 6);
 
-    // Stalactite spikes at the bottom
-    ctx.fillStyle = "#8a6535";
-    for (let si = 0; si < 3; si++) {
-      const sx = bx + 3 + si * (bw - 6) / 2;
-      const sLen = 12 + (si % 2) * 6;
+    const spikeCount = 3;
+    const spikeW = ob.w / spikeCount;
+    ctx.fillStyle = "#FF2200";
+    for (let s = 0; s < spikeCount; s++) {
+      const sx = ob.x + s * spikeW;
       ctx.beginPath();
-      ctx.moveTo(sx, by + bh - 18);
-      ctx.lineTo(sx + 5, by + bh - 18);
-      ctx.lineTo(sx + 2.5, by + bh - 18 + sLen);
+      ctx.moveTo(sx, ob.y + ob.h);
+      ctx.lineTo(sx + spikeW / 2, ob.y + ob.h + 14);
+      ctx.lineTo(sx + spikeW, ob.y + ob.h);
       ctx.closePath();
       ctx.fill();
     }
 
-    // "↓ TIARAP!" warning label on the beam face
-    ctx.fillStyle = "rgba(0,0,0,0.65)";
-    ctx.beginPath();
-    ctx.roundRect(bx - 2, by + bh - 78, bw + 4, 28, 4);
-    ctx.fill();
-    ctx.fillStyle = "#FFD700";
-    ctx.font = "bold 9px monospace";
-    ctx.textAlign = "center";
-    ctx.fillText("↓", bx + bw / 2, by + bh - 62);
-    ctx.fillText("TIARAP!", bx + bw / 2, by + bh - 52);
-    ctx.textAlign = "left";
-
-    // Bottom thick border
-    ctx.fillStyle = "#5a4025";
-    ctx.fillRect(bx - 2, by + bh - 18, bw + 4, 4);
+    ctx.fillStyle = "rgba(255,50,0,0.12)";
+    ctx.fillRect(ob.x, ob.y, ob.w, ob.h);
   }
-
 }
 
-// ── Helper: draw T-Rex dino ────────────────────────────────────────────────
-function drawDino(
-  ctx: CanvasRenderingContext2D,
-  py: number,
-  duck: boolean,
-  phase: Phase,
-  ts: number
-) {
+// ── Helper: draw dino (turtle) ────────────────────────────────────────────
+function drawDino(ctx: CanvasRenderingContext2D, py: number, isDuck: boolean, phase: Phase, ts: number) {
   const x = P_X;
+  const h = isDuck ? P_H_DUCK : P_H_STAND;
+  const w = P_W;
   const y = py;
-  const h = duck ? P_H_DUCK : P_H_STAND;
 
-  const stunFlash = phase === "stunned" && Math.floor(ts / 120) % 2 === 0;
-  if (stunFlash) ctx.globalAlpha = 0.35;
+  const isStunned = phase === "stunned";
+  const flash = isStunned && Math.floor(ts / 120) % 2 === 0;
+  if (flash) return;
 
-  // Colors
-  const bodyCol = "#4a9e3f";
-  const darkCol = "#2d6b24";
-  const bellyCol = "#a8d8a0";
-  const eyeWhite = "#ffffff";
+  ctx.save();
 
-  if (duck) {
-    // ── Ducking T-Rex ──
-    // Low flat body
-    ctx.fillStyle = bodyCol;
+  const legAnim = Math.sin(ts / 120) * 5;
+
+  if (!isDuck) {
+    ctx.fillStyle = "#1a6b1a";
     ctx.beginPath();
-    ctx.ellipse(x + P_W / 2, y + h / 2 + 2, P_W / 2 + 2, h / 2, 0, 0, Math.PI * 2);
+    ctx.ellipse(x + w / 2, y + h * 0.45, w * 0.32, h * 0.28, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    // Tail (left)
-    ctx.fillStyle = darkCol;
+    ctx.fillStyle = "#228B22";
     ctx.beginPath();
-    ctx.moveTo(x + 4, y + h / 2 + 2);
-    ctx.quadraticCurveTo(x - 8, y + h / 2 - 4, x - 2, y + h - 4);
-    ctx.lineTo(x + 8, y + h / 2 + 4);
-    ctx.closePath();
+    ctx.roundRect(x + 4, y + 6, w - 8, h * 0.55, 8);
     ctx.fill();
 
-    // Head (right)
-    ctx.fillStyle = bodyCol;
+    ctx.fillStyle = "#2eb82e";
     ctx.beginPath();
-    ctx.roundRect(x + P_W - 2, y + 2, 18, 14, [5, 5, 3, 3]);
-    ctx.fill();
-    // Lower jaw
-    ctx.fillStyle = bellyCol;
-    ctx.beginPath();
-    ctx.roundRect(x + P_W, y + 11, 16, 7, [0, 0, 4, 4]);
-    ctx.fill();
-    // Eye
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W + 9, y + 7, 4, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#1a1a2e";
-    ctx.beginPath(); ctx.arc(x + P_W + 10, y + 8, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W + 9, y + 7, 1, 0, Math.PI * 2); ctx.fill();
-    // Nostril
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.arc(x + P_W + 15, y + 6, 1.2, 0, Math.PI * 2); ctx.fill();
-
-    // Legs (splayed)
-    const ls = Math.sin(ts / 90) * 5;
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.roundRect(x + 6, y + h - 6, 11, 7 + ls, 2); ctx.fill();
-    ctx.beginPath(); ctx.roundRect(x + 20, y + h - 6, 11, 7 - ls, 2); ctx.fill();
-    // Feet
-    ctx.fillStyle = "#1e4a1a";
-    ctx.beginPath(); ctx.roundRect(x + 3, y + h, 16, 4, 2); ctx.fill();
-    ctx.beginPath(); ctx.roundRect(x + 18, y + h, 16, 4, 2); ctx.fill();
-  } else {
-    // ── Standing T-Rex ──
-
-    // === TAIL ===
-    ctx.fillStyle = darkCol;
-    ctx.beginPath();
-    ctx.moveTo(x + 6, y + h - 18);
-    ctx.quadraticCurveTo(x - 12, y + h - 26, x - 5, y + h - 8);
-    ctx.lineTo(x + 12, y + h - 14);
-    ctx.closePath();
+    ctx.arc(x + w / 2, y + h * 0.28, h * 0.22, 0, Math.PI * 2);
     ctx.fill();
 
-    // === BODY ===
-    ctx.fillStyle = bodyCol;
+    ctx.fillStyle = "#1a1a1a";
     ctx.beginPath();
-    ctx.ellipse(x + P_W / 2, y + h * 0.57, P_W / 2 + 3, h * 0.32, 0, 0, Math.PI * 2);
+    ctx.arc(x + w / 2 + 5, y + h * 0.22, 4, 0, Math.PI * 2);
     ctx.fill();
-
-    // === BELLY ===
-    ctx.fillStyle = bellyCol;
-    ctx.beginPath();
-    ctx.ellipse(x + P_W / 2 + 4, y + h * 0.59, P_W * 0.26, h * 0.2, 0.1, 0, Math.PI * 2);
-    ctx.fill();
-
-    // === HEAD ===
-    // Upper jaw / head top
-    ctx.fillStyle = bodyCol;
-    ctx.beginPath();
-    ctx.roundRect(x + P_W / 2 - 2, y + 1, P_W / 2 + 10, 20, [7, 7, 2, 2]);
-    ctx.fill();
-    // Lower jaw
-    ctx.fillStyle = bellyCol;
-    ctx.beginPath();
-    ctx.roundRect(x + P_W / 2 + 1, y + 17, P_W / 2 + 7, 11, [2, 2, 6, 6]);
-    ctx.fill();
-    // Teeth
     ctx.fillStyle = "#ffffff";
-    for (let t = 0; t < 3; t++) {
-      ctx.beginPath();
-      ctx.moveTo(x + P_W / 2 + 6 + t * 5, y + 17);
-      ctx.lineTo(x + P_W / 2 + 4 + t * 5, y + 21);
-      ctx.lineTo(x + P_W / 2 + 8 + t * 5, y + 21);
-      ctx.closePath();
-      ctx.fill();
-    }
-    // Nostril
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.arc(x + P_W + 5, y + 7, 1.8, 0, Math.PI * 2); ctx.fill();
-
-    // === EYE ===
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W / 2 + 8, y + 9, 5.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#1a1a2e";
-    ctx.beginPath(); ctx.arc(x + P_W / 2 + 9, y + 10, 3.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W / 2 + 8, y + 9, 1.2, 0, Math.PI * 2); ctx.fill();
-    // Brow
-    ctx.strokeStyle = darkCol;
-    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.moveTo(x + P_W / 2 + 3, y + 5);
-    ctx.lineTo(x + P_W / 2 + 13, y + 4);
-    ctx.stroke();
+    ctx.arc(x + w / 2 + 6, y + h * 0.21, 1.5, 0, Math.PI * 2);
+    ctx.fill();
 
-    // === TINY ARMS ===
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.roundRect(x + P_W / 2 + 6, y + h * 0.42, 10, 6, 2); ctx.fill();
-    // Claws
-    for (let c = 0; c < 2; c++) {
-      ctx.beginPath();
-      ctx.moveTo(x + P_W / 2 + 14 + c * 3, y + h * 0.42 + 6);
-      ctx.lineTo(x + P_W / 2 + 13 + c * 3, y + h * 0.42 + 11);
-      ctx.lineTo(x + P_W / 2 + 16 + c * 3, y + h * 0.42 + 9);
-      ctx.closePath();
-      ctx.fillStyle = "#1e4a1a";
-      ctx.fill();
-    }
+    ctx.fillStyle = "#1a6b1a";
+    ctx.beginPath();
+    ctx.moveTo(x + w - 2, y + h * 0.28);
+    ctx.lineTo(x + w + 10, y + h * 0.22);
+    ctx.lineTo(x + w + 8, y + h * 0.32);
+    ctx.closePath();
+    ctx.fill();
 
-    // === LEGS ===
-    const ls = Math.sin(ts / 95) * 10;
-    ctx.fillStyle = darkCol;
-    // Back leg
-    ctx.beginPath(); ctx.roundRect(x + 4, y + h - 20, 13, 17 + ls, [4, 4, 2, 2]); ctx.fill();
-    // Front leg
-    ctx.beginPath(); ctx.roundRect(x + P_W / 2 - 1, y + h - 20, 13, 17 - ls, [4, 4, 2, 2]); ctx.fill();
-
-    // Feet / claws
-    ctx.fillStyle = "#1e4a1a";
-    ctx.beginPath(); ctx.roundRect(x + 1, y + h - 4, 18, 5, [0, 0, 3, 3]); ctx.fill();
-    ctx.beginPath(); ctx.roundRect(x + P_W / 2 - 4, y + h - 4, 18, 5, [0, 0, 3, 3]); ctx.fill();
-    // Toe claws
-    ctx.strokeStyle = "#0e2e0c";
-    ctx.lineWidth = 1;
-    for (let c = 0; c < 3; c++) {
-      ctx.beginPath();
-      ctx.moveTo(x + 2 + c * 5, y + h + 1);
-      ctx.lineTo(x + 1 + c * 5, y + h + 5);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(x + P_W / 2 - 3 + c * 5, y + h + 1);
-      ctx.lineTo(x + P_W / 2 - 4 + c * 5, y + h + 5);
-      ctx.stroke();
-    }
-
-    // === BACK SPINES ===
-    ctx.fillStyle = "#1e5c18";
-    const spineXs = [x + P_W / 2 - 4, x + P_W / 2, x + P_W / 2 + 4];
-    const spineHs = [7, 9, 6];
-    spineXs.forEach((sx, i) => {
-      ctx.beginPath();
-      ctx.moveTo(sx - 3, y + h * 0.38);
-      ctx.lineTo(sx, y + h * 0.38 - spineHs[i]);
-      ctx.lineTo(sx + 3, y + h * 0.38);
-      ctx.closePath();
-      ctx.fill();
-    });
+    ctx.fillStyle = "#228B22";
+    ctx.fillRect(x + 5, y + h * 0.75, 7, 14 + legAnim);
+    ctx.fillRect(x + w - 12, y + h * 0.75, 7, 14 - legAnim);
+  } else {
+    ctx.fillStyle = "#1a6b1a";
+    ctx.beginPath();
+    ctx.ellipse(x + w / 2, y + h * 0.5, w * 0.45, h * 0.35, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#2eb82e";
+    ctx.beginPath();
+    ctx.ellipse(x + w / 2, y + h * 0.45, w * 0.35, h * 0.28, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#1a1a1a";
+    ctx.beginPath();
+    ctx.arc(x + w - 4, y + h * 0.35, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#1a6b1a";
+    ctx.beginPath();
+    ctx.moveTo(x + w - 2, y + h * 0.32);
+    ctx.lineTo(x + w + 9, y + h * 0.27);
+    ctx.lineTo(x + w + 7, y + h * 0.37);
+    ctx.closePath();
+    ctx.fill();
   }
 
-  ctx.globalAlpha = 1;
+  ctx.restore();
 }
 
 export default DinoRunGamePage;
