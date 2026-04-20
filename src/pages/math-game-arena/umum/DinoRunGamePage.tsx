@@ -12,14 +12,14 @@ const GROUND_Y = CH - 40;
 
 // ── Player constants ────────────────────────────────────────────────────────
 const P_X = 70;
-const P_W = 34;
-const P_H_STAND = 48;
+const P_W = 36;
+const P_H_STAND = 52;
 const P_H_DUCK = 28;
-const GRAVITY = 1800;
-const JUMP_VY = -560;
+const GRAVITY = 1600;
+const JUMP_VY = -540;
 
 // ── Obstacle constants ──────────────────────────────────────────────────────
-type ObstacleKind = "cactus" | "rock" | "bird";
+type ObstacleKind = "cactus" | "rock";
 interface Obstacle {
   kind: ObstacleKind;
   x: number;
@@ -68,13 +68,8 @@ const PALETTE = {
   ground_light: "#a0855a",
   line_dark: "#2a2a55",
   line_light: "#8a6f47",
-  player: "#00FF88",
-  playerDark: "#00cc66",
   cactus: "#2eb82e",
   rock: "#9999bb",
-  bird: "#FF7B54",
-  star: "#ffffff",
-  cloud: "#ffffff",
   question_badge: "#FFD700",
 };
 
@@ -90,18 +85,17 @@ const DinoRunGamePage = () => {
   const rafRef = useRef(0);
   const lastTRef = useRef(0);
 
-  // game state (all in refs so the loop doesn't need closures to re-capture)
   const phaseRef = useRef<Phase>("idle");
   const pyRef = useRef(GROUND_Y - P_H_STAND);
   const pvyRef = useRef(0);
   const isDuckRef = useRef(false);
   const isOnGroundRef = useRef(true);
-  const speedRef = useRef(220);
+  const speedRef = useRef(190);
   const distRef = useRef(0);
   const scoreRef = useRef(0);
   const livesRef = useRef(3);
   const obstaclesRef = useRef<Obstacle[]>([]);
-  const nextObstRef = useRef(1400);
+  const nextObstRef = useRef(1800);
   const questionIdxRef = useRef(-1);
   const stunTimerRef = useRef(0);
   const usedQRef = useRef<Set<number>>(new Set());
@@ -112,7 +106,6 @@ const DinoRunGamePage = () => {
   const duckPressedRef = useRef(false);
   const highScoreRef = useRef(0);
 
-  // react state (for UI overlays only)
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
@@ -129,11 +122,13 @@ const DinoRunGamePage = () => {
 
   // ── Spawn obstacle ──────────────────────────────────────────────────────
   const spawnObstacle = useCallback(() => {
-    const kinds: ObstacleKind[] = ["cactus", "rock", "bird"];
+    // Only cactus and rock — both are ground obstacles, easy to jump over
+    const kinds: ObstacleKind[] = ["cactus", "rock"];
     const kind = kinds[Math.floor(Math.random() * kinds.length)];
-    let w = 22, h = 44, y = GROUND_Y - 44;
-    if (kind === "rock") { w = 30; h = 28; y = GROUND_Y - 28; }
-    if (kind === "bird") { w = 36; h = 22; y = GROUND_Y - P_H_STAND - 10; }
+
+    // Smaller sizes so they're easier to clear
+    let w = 18, h = 36, y = GROUND_Y - 36;
+    if (kind === "rock") { w = 24; h = 20; y = GROUND_Y - 20; }
 
     const avail = QUESTIONS.map((_, i) => i).filter(i => !usedQRef.current.has(i));
     const hasQ = Math.random() < 0.45 && avail.length > 0;
@@ -145,7 +140,8 @@ const DinoRunGamePage = () => {
     }
 
     obstaclesRef.current.push({ kind, x: CW + 20, y, w, h, hasQuestion: hasQ, questionIdx: qIdx });
-    nextObstRef.current = 700 + Math.random() * 800 - Math.min(speedRef.current * 1.2, 400);
+    // Larger, safer gap between obstacles
+    nextObstRef.current = 1600 + Math.random() * 900;
   }, []);
 
   // ── Reset / start ───────────────────────────────────────────────────────
@@ -154,12 +150,12 @@ const DinoRunGamePage = () => {
     pvyRef.current = 0;
     isDuckRef.current = false;
     isOnGroundRef.current = true;
-    speedRef.current = 220;
+    speedRef.current = 190;
     distRef.current = 0;
     scoreRef.current = 0;
     livesRef.current = 3;
     obstaclesRef.current = [];
-    nextObstRef.current = 1400;
+    nextObstRef.current = 1800;
     questionIdxRef.current = -1;
     stunTimerRef.current = 0;
     usedQRef.current = new Set();
@@ -186,7 +182,6 @@ const DinoRunGamePage = () => {
     ctx.fillStyle = isLight ? PALETTE.sky_light : PALETTE.sky_dark;
     ctx.fillRect(0, 0, CW, CH);
 
-    // stars (dark mode)
     if (!isLight) {
       ctx.fillStyle = "rgba(255,255,255,0.6)";
       for (let i = 0; i < 30; i++) {
@@ -197,10 +192,9 @@ const DinoRunGamePage = () => {
     }
 
     // clouds
-    cloudXRef.current = cloudXRef.current.map((cx, i) => {
+    cloudXRef.current = cloudXRef.current.map((cx) => {
       const nx = ph === "running" ? cx - speedRef.current * 0.06 * dt : cx;
-      const wrapped = nx < -80 ? CW + 60 : nx;
-      return wrapped;
+      return nx < -80 ? CW + 60 : nx;
     });
     ctx.fillStyle = isLight ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.12)";
     cloudXRef.current.forEach((cx, i) => {
@@ -218,7 +212,6 @@ const DinoRunGamePage = () => {
     ctx.fillStyle = isLight ? PALETTE.line_light : PALETTE.line_dark;
     ctx.fillRect(0, GROUND_Y, CW, 2);
 
-    // scrolling ground pattern
     if (ph === "running" || ph === "stunned") bgOffRef.current += speedRef.current * dt;
     for (let i = 0; i < 20; i++) {
       const lx = ((i * 52 - bgOffRef.current) % CW + CW) % CW;
@@ -234,18 +227,18 @@ const DinoRunGamePage = () => {
 
     const playerH = isDuckRef.current ? P_H_DUCK : P_H_STAND;
     const playerY = pyRef.current;
-    const hitbox = { x: P_X + 4, y: playerY + 4, w: P_W - 8, h: playerH - 8 };
+    // Generous hitbox padding so collisions feel fair
+    const hitbox = { x: P_X + 10, y: playerY + 8, w: P_W - 18, h: playerH - 14 };
 
     obstaclesRef.current = obstaclesRef.current.filter(ob => ob.x + ob.w > -20);
     obstaclesRef.current.forEach(ob => {
       if (ph === "running") ob.x -= speedRef.current * dt;
 
-      // draw obstacle
       drawObstacle(ctx, ob, isLight);
 
-      // collision check (only while running, not stunned)
       if (ph === "running") {
-        const ox = ob.x + 3, ow = ob.w - 6, oy = ob.y + 3, oh = ob.h - 6;
+        // Generous obstacle hitbox padding too
+        const ox = ob.x + 5, ow = ob.w - 10, oy = ob.y + 5, oh = ob.h - 8;
         const collide =
           hitbox.x < ox + ow &&
           hitbox.x + hitbox.w > ox &&
@@ -254,14 +247,12 @@ const DinoRunGamePage = () => {
 
         if (collide) {
           if (ob.hasQuestion && ob.questionIdx >= 0) {
-            // trigger question
             ob.hasQuestion = false;
             questionIdxRef.current = ob.questionIdx;
             phaseRef.current = "question";
             setPhase("question");
             setActiveQ(QUESTIONS[ob.questionIdx]);
           } else {
-            // direct hit
             livesRef.current = Math.max(0, livesRef.current - 1);
             setLives(livesRef.current);
             stunTimerRef.current = 1.2;
@@ -283,13 +274,11 @@ const DinoRunGamePage = () => {
 
     // ── Update player ───────────────────────────────────────────────
     if (ph === "running") {
-      // jump input
       if (jumpPressedRef.current && isOnGroundRef.current) {
         pvyRef.current = JUMP_VY;
         isOnGroundRef.current = false;
         jumpPressedRef.current = false;
       }
-      // apply gravity
       pvyRef.current += GRAVITY * dt;
       pyRef.current += pvyRef.current * dt;
       const groundLevel = GROUND_Y - (isDuckRef.current ? P_H_DUCK : P_H_STAND);
@@ -298,7 +287,6 @@ const DinoRunGamePage = () => {
         pvyRef.current = 0;
         isOnGroundRef.current = true;
       }
-      // duck
       if (duckPressedRef.current && isOnGroundRef.current) {
         isDuckRef.current = true;
       } else if (!duckPressedRef.current) {
@@ -306,10 +294,10 @@ const DinoRunGamePage = () => {
         if (isOnGroundRef.current) pyRef.current = GROUND_Y - P_H_STAND;
       }
 
-      // score & speed
       distRef.current += speedRef.current * dt;
       scoreRef.current = Math.floor(distRef.current / 10);
-      speedRef.current = Math.min(220 + distRef.current * 0.04, 520);
+      // Gentler speed ramp — slower increase, lower cap
+      speedRef.current = Math.min(190 + distRef.current * 0.02, 360);
       if (Math.floor(distRef.current) % 60 === 0) setScore(scoreRef.current);
     }
 
@@ -321,8 +309,8 @@ const DinoRunGamePage = () => {
       }
     }
 
-    // ── Draw player ─────────────────────────────────────────────────
-    drawPlayer(ctx, pyRef.current, isDuckRef.current, ph, ts, isLight);
+    // ── Draw player (dino) ──────────────────────────────────────────
+    drawDino(ctx, pyRef.current, isDuckRef.current, ph, ts);
 
     // ── HUD ─────────────────────────────────────────────────────────
     ctx.fillStyle = "rgba(0,0,0,0.45)";
@@ -332,14 +320,12 @@ const DinoRunGamePage = () => {
     ctx.fillStyle = "#FFD700";
     ctx.font = "bold 13px monospace";
     ctx.fillText(`SKOR: ${scoreRef.current}`, 18, 28);
-    // lives
     for (let i = 0; i < 3; i++) {
       ctx.fillStyle = i < livesRef.current ? "#FF4E4E" : "rgba(255,255,255,0.2)";
       ctx.font = "16px sans-serif";
       ctx.fillText("♥", CW - 28 - i * 22, 28);
     }
 
-    // stun overlay flash
     if (ph === "stunned") {
       ctx.fillStyle = `rgba(255,60,60,${0.15 + 0.1 * Math.sin(ts / 80)})`;
       ctx.fillRect(0, 0, CW, CH);
@@ -415,12 +401,9 @@ const DinoRunGamePage = () => {
   }, [loop]);
 
   useEffect(() => {
-    return () => {
-      if (feedbackRef.current) clearTimeout(feedbackRef.current);
-    };
+    return () => { if (feedbackRef.current) clearTimeout(feedbackRef.current); };
   }, []);
 
-  // ── Touch: tap = jump, hold bottom = duck ───────────────────────────────
   const touchRef = useRef<{ y: number; id: number } | null>(null);
   const onTouchStart = (e: React.TouchEvent) => {
     const t = e.changedTouches[0];
@@ -454,18 +437,16 @@ const DinoRunGamePage = () => {
             ← Kembali
           </button>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan text-center flex-1">
-            🦕 LARI MATEMATIKA
+            🦖 LARI MATEMATIKA
           </h1>
         </div>
 
-        {/* Score strip above canvas */}
         <div className="flex gap-6 mb-2 text-sm font-display">
           <span className="text-yellow-400">SKOR: <span className="font-bold">{score}</span></span>
           <span className="text-white/50">REKOR: <span className="text-accent font-bold">{highScore}</span></span>
           <span className="text-red-400">{"♥".repeat(lives)}{"🖤".repeat(Math.max(0, 3 - lives))}</span>
         </div>
 
-        {/* Canvas wrapper */}
         <div className="relative w-full" style={{ maxWidth: CW }}>
           <canvas
             ref={canvasRef}
@@ -480,7 +461,6 @@ const DinoRunGamePage = () => {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Feedback toast */}
           {feedback && (
             <div className={`absolute top-3 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl font-bold text-sm shadow-xl pointer-events-none z-30 animate-bounce ${
               feedback.good ? "bg-green-500/90 text-white" : "bg-red-500/90 text-white"
@@ -489,11 +469,10 @@ const DinoRunGamePage = () => {
             </div>
           )}
 
-          {/* Idle overlay */}
           {phase === "idle" && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/65 rounded-xl">
               <div className="text-center px-4">
-                <div className="text-5xl mb-2">🦕</div>
+                <div className="text-5xl mb-2">🦖</div>
                 <h2 className="font-display text-2xl font-bold text-accent mb-2">LARI MATEMATIKA</h2>
                 <p className="text-white/65 text-xs mb-4 leading-relaxed">
                   <span className="text-cyan-300 font-bold">SPASI / ↑</span> Loncat &nbsp;·&nbsp; <span className="text-cyan-300 font-bold">↓</span> Tiarap<br />
@@ -507,7 +486,6 @@ const DinoRunGamePage = () => {
             </div>
           )}
 
-          {/* Dead overlay */}
           {phase === "dead" && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/70 rounded-xl">
               <div className="text-center px-4">
@@ -522,7 +500,6 @@ const DinoRunGamePage = () => {
             </div>
           )}
 
-          {/* Question overlay */}
           {phase === "question" && activeQ && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/75 rounded-xl">
               <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-4 mx-3 shadow-2xl w-full max-w-xs">
@@ -544,7 +521,6 @@ const DinoRunGamePage = () => {
           )}
         </div>
 
-        {/* Mobile controls */}
         <div className="flex gap-3 mt-3">
           <button
             onPointerDown={() => { jumpPressedRef.current = true; }}
@@ -573,49 +549,56 @@ const DinoRunGamePage = () => {
 // ── Helper: draw obstacle ──────────────────────────────────────────────────
 function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolean) {
   if (ob.kind === "cactus") {
-    ctx.fillStyle = PALETTE.cactus;
-    // trunk
-    ctx.fillRect(ob.x + ob.w / 2 - 5, ob.y, 10, ob.h);
-    // arms
-    ctx.fillRect(ob.x + 2, ob.y + 10, ob.w / 2 - 3, 7);
-    ctx.fillRect(ob.x + ob.w / 2 + 3, ob.y + 16, ob.w / 2 - 3, 7);
-    ctx.fillRect(ob.x + 2, ob.y + 3, 7, 12);
-    ctx.fillRect(ob.x + ob.w - 9, ob.y + 9, 7, 12);
-  } else if (ob.kind === "rock") {
-    ctx.fillStyle = light ? "#8888aa" : PALETTE.rock;
+    // Cactus body (trunk)
+    ctx.fillStyle = "#2eb82e";
     ctx.beginPath();
-    ctx.ellipse(ob.x + ob.w / 2, ob.y + ob.h / 2, ob.w / 2, ob.h / 2, 0, 0, Math.PI * 2);
+    ctx.roundRect(ob.x + ob.w / 2 - 4, ob.y, 8, ob.h, 3);
     ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,0.15)";
+    // Left arm
     ctx.beginPath();
-    ctx.ellipse(ob.x + ob.w / 2 - 4, ob.y + ob.h / 2 - 4, ob.w / 4, ob.h / 5, -0.4, 0, Math.PI * 2);
+    ctx.roundRect(ob.x + 1, ob.y + ob.h * 0.3, ob.w / 2 - 2, 6, 2);
     ctx.fill();
+    ctx.beginPath();
+    ctx.roundRect(ob.x + 1, ob.y + 4, 6, ob.h * 0.32, 2);
+    ctx.fill();
+    // Right arm
+    ctx.beginPath();
+    ctx.roundRect(ob.x + ob.w / 2 + 2, ob.y + ob.h * 0.42, ob.w / 2 - 2, 6, 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.roundRect(ob.x + ob.w - 7, ob.y + ob.h * 0.15, 6, ob.h * 0.32, 2);
+    ctx.fill();
+    // Spines
+    ctx.fillStyle = "#1a8c1a";
+    for (let i = 0; i < 3; i++) {
+      ctx.fillRect(ob.x + ob.w / 2 - 1, ob.y + i * 12, 2, 5);
+    }
   } else {
-    // bird
-    ctx.fillStyle = PALETTE.bird;
+    // Rock — rounded with shading
+    const cx = ob.x + ob.w / 2;
+    const cy = ob.y + ob.h / 2;
+    const grad = ctx.createRadialGradient(cx - 4, cy - 4, 2, cx, cy, ob.w / 2);
+    grad.addColorStop(0, light ? "#b0b0cc" : "#c0c0dd");
+    grad.addColorStop(1, light ? "#6a6a88" : "#7a7a99");
+    ctx.fillStyle = grad;
     ctx.beginPath();
-    ctx.ellipse(ob.x + ob.w / 2, ob.y + ob.h / 2, ob.w / 2, ob.h / 3, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy, ob.w / 2, ob.h / 2, -0.2, 0, Math.PI * 2);
     ctx.fill();
-    // wings
-    ctx.fillStyle = "#ff9966";
-    const wingOff = Math.sin(Date.now() / 120) * 6;
+    // Highlight
+    ctx.fillStyle = "rgba(255,255,255,0.25)";
     ctx.beginPath();
-    ctx.moveTo(ob.x + ob.w / 2, ob.y + ob.h / 2);
-    ctx.lineTo(ob.x + ob.w / 2 - 14, ob.y - wingOff);
-    ctx.lineTo(ob.x + ob.w / 2 + 14, ob.y - wingOff);
-    ctx.closePath();
+    ctx.ellipse(cx - 4, cy - 5, ob.w / 5, ob.h / 5, -0.4, 0, Math.PI * 2);
     ctx.fill();
-    // beak
-    ctx.fillStyle = "#FFD700";
+    // Cracks
+    ctx.strokeStyle = "rgba(0,0,0,0.18)";
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(ob.x + ob.w - 2, ob.y + ob.h / 2 - 2);
-    ctx.lineTo(ob.x + ob.w + 10, ob.y + ob.h / 2);
-    ctx.lineTo(ob.x + ob.w - 2, ob.y + ob.h / 2 + 2);
-    ctx.closePath();
-    ctx.fill();
+    ctx.moveTo(cx - 2, cy - 4); ctx.lineTo(cx + 4, cy + 2);
+    ctx.moveTo(cx - 5, cy + 1); ctx.lineTo(cx, cy + 5);
+    ctx.stroke();
   }
 
-  // question badge
+  // Question badge
   if (ob.hasQuestion) {
     ctx.fillStyle = PALETTE.question_badge;
     ctx.font = "bold 14px monospace";
@@ -625,54 +608,190 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
   }
 }
 
-// ── Helper: draw player ────────────────────────────────────────────────────
-function drawPlayer(
+// ── Helper: draw T-Rex dino ────────────────────────────────────────────────
+function drawDino(
   ctx: CanvasRenderingContext2D,
   py: number,
   duck: boolean,
   phase: Phase,
-  ts: number,
-  _light: boolean
+  ts: number
 ) {
-  const ph = P_W;
-  const h = duck ? P_H_DUCK : P_H_STAND;
   const x = P_X;
   const y = py;
+  const h = duck ? P_H_DUCK : P_H_STAND;
 
   const stunFlash = phase === "stunned" && Math.floor(ts / 120) % 2 === 0;
-  if (stunFlash) { ctx.globalAlpha = 0.35; }
+  if (stunFlash) ctx.globalAlpha = 0.35;
 
-  // body
-  ctx.fillStyle = "#00DD77";
-  ctx.beginPath();
-  ctx.roundRect(x, y, ph, h, 6);
-  ctx.fill();
+  // Colors
+  const bodyCol = "#4a9e3f";
+  const darkCol = "#2d6b24";
+  const bellyCol = "#a8d8a0";
+  const eyeWhite = "#ffffff";
 
-  // visor / helmet top
-  ctx.fillStyle = "#00FFAA";
-  ctx.beginPath();
-  ctx.roundRect(x + 4, y + 2, ph - 8, duck ? 10 : 14, 4);
-  ctx.fill();
+  if (duck) {
+    // ── Ducking T-Rex ──
+    // Low flat body
+    ctx.fillStyle = bodyCol;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W / 2, y + h / 2 + 2, P_W / 2 + 2, h / 2, 0, 0, Math.PI * 2);
+    ctx.fill();
 
-  if (!duck) {
-    // eyes
-    ctx.fillStyle = "#0d0d1a";
-    ctx.beginPath(); ctx.arc(x + ph / 2 - 6, y + 18, 3, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(x + ph / 2 + 6, y + 18, 3, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath(); ctx.arc(x + ph / 2 - 7, y + 17, 1.2, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(x + ph / 2 + 5, y + 17, 1.2, 0, Math.PI * 2); ctx.fill();
+    // Tail (left)
+    ctx.fillStyle = darkCol;
+    ctx.beginPath();
+    ctx.moveTo(x + 4, y + h / 2 + 2);
+    ctx.quadraticCurveTo(x - 8, y + h / 2 - 4, x - 2, y + h - 4);
+    ctx.lineTo(x + 8, y + h / 2 + 4);
+    ctx.closePath();
+    ctx.fill();
 
-    // legs animation
-    const legSwing = Math.sin(ts / 100) * 7;
-    ctx.fillStyle = "#009955";
-    ctx.fillRect(x + 4, y + h - 14, 10, 12 + legSwing);
-    ctx.fillRect(x + ph - 14, y + h - 14, 10, 12 - legSwing);
+    // Head (right)
+    ctx.fillStyle = bodyCol;
+    ctx.beginPath();
+    ctx.roundRect(x + P_W - 2, y + 2, 18, 14, [5, 5, 3, 3]);
+    ctx.fill();
+    // Lower jaw
+    ctx.fillStyle = bellyCol;
+    ctx.beginPath();
+    ctx.roundRect(x + P_W, y + 11, 16, 7, [0, 0, 4, 4]);
+    ctx.fill();
+    // Eye
+    ctx.fillStyle = eyeWhite;
+    ctx.beginPath(); ctx.arc(x + P_W + 9, y + 7, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#1a1a2e";
+    ctx.beginPath(); ctx.arc(x + P_W + 10, y + 8, 2.5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = eyeWhite;
+    ctx.beginPath(); ctx.arc(x + P_W + 9, y + 7, 1, 0, Math.PI * 2); ctx.fill();
+    // Nostril
+    ctx.fillStyle = darkCol;
+    ctx.beginPath(); ctx.arc(x + P_W + 15, y + 6, 1.2, 0, Math.PI * 2); ctx.fill();
+
+    // Legs (splayed)
+    const ls = Math.sin(ts / 90) * 5;
+    ctx.fillStyle = darkCol;
+    ctx.beginPath(); ctx.roundRect(x + 6, y + h - 6, 11, 7 + ls, 2); ctx.fill();
+    ctx.beginPath(); ctx.roundRect(x + 20, y + h - 6, 11, 7 - ls, 2); ctx.fill();
+    // Feet
+    ctx.fillStyle = "#1e4a1a";
+    ctx.beginPath(); ctx.roundRect(x + 3, y + h, 16, 4, 2); ctx.fill();
+    ctx.beginPath(); ctx.roundRect(x + 18, y + h, 16, 4, 2); ctx.fill();
   } else {
-    // duck shape — legs splayed
-    ctx.fillStyle = "#009955";
-    ctx.fillRect(x + 2, y + h - 8, 10, 8);
-    ctx.fillRect(x + ph - 12, y + h - 8, 10, 8);
+    // ── Standing T-Rex ──
+
+    // === TAIL ===
+    ctx.fillStyle = darkCol;
+    ctx.beginPath();
+    ctx.moveTo(x + 6, y + h - 18);
+    ctx.quadraticCurveTo(x - 12, y + h - 26, x - 5, y + h - 8);
+    ctx.lineTo(x + 12, y + h - 14);
+    ctx.closePath();
+    ctx.fill();
+
+    // === BODY ===
+    ctx.fillStyle = bodyCol;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W / 2, y + h * 0.57, P_W / 2 + 3, h * 0.32, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // === BELLY ===
+    ctx.fillStyle = bellyCol;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W / 2 + 4, y + h * 0.59, P_W * 0.26, h * 0.2, 0.1, 0, Math.PI * 2);
+    ctx.fill();
+
+    // === HEAD ===
+    // Upper jaw / head top
+    ctx.fillStyle = bodyCol;
+    ctx.beginPath();
+    ctx.roundRect(x + P_W / 2 - 2, y + 1, P_W / 2 + 10, 20, [7, 7, 2, 2]);
+    ctx.fill();
+    // Lower jaw
+    ctx.fillStyle = bellyCol;
+    ctx.beginPath();
+    ctx.roundRect(x + P_W / 2 + 1, y + 17, P_W / 2 + 7, 11, [2, 2, 6, 6]);
+    ctx.fill();
+    // Teeth
+    ctx.fillStyle = "#ffffff";
+    for (let t = 0; t < 3; t++) {
+      ctx.beginPath();
+      ctx.moveTo(x + P_W / 2 + 6 + t * 5, y + 17);
+      ctx.lineTo(x + P_W / 2 + 4 + t * 5, y + 21);
+      ctx.lineTo(x + P_W / 2 + 8 + t * 5, y + 21);
+      ctx.closePath();
+      ctx.fill();
+    }
+    // Nostril
+    ctx.fillStyle = darkCol;
+    ctx.beginPath(); ctx.arc(x + P_W + 5, y + 7, 1.8, 0, Math.PI * 2); ctx.fill();
+
+    // === EYE ===
+    ctx.fillStyle = eyeWhite;
+    ctx.beginPath(); ctx.arc(x + P_W / 2 + 8, y + 9, 5.5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#1a1a2e";
+    ctx.beginPath(); ctx.arc(x + P_W / 2 + 9, y + 10, 3.5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = eyeWhite;
+    ctx.beginPath(); ctx.arc(x + P_W / 2 + 8, y + 9, 1.2, 0, Math.PI * 2); ctx.fill();
+    // Brow
+    ctx.strokeStyle = darkCol;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(x + P_W / 2 + 3, y + 5);
+    ctx.lineTo(x + P_W / 2 + 13, y + 4);
+    ctx.stroke();
+
+    // === TINY ARMS ===
+    ctx.fillStyle = darkCol;
+    ctx.beginPath(); ctx.roundRect(x + P_W / 2 + 6, y + h * 0.42, 10, 6, 2); ctx.fill();
+    // Claws
+    for (let c = 0; c < 2; c++) {
+      ctx.beginPath();
+      ctx.moveTo(x + P_W / 2 + 14 + c * 3, y + h * 0.42 + 6);
+      ctx.lineTo(x + P_W / 2 + 13 + c * 3, y + h * 0.42 + 11);
+      ctx.lineTo(x + P_W / 2 + 16 + c * 3, y + h * 0.42 + 9);
+      ctx.closePath();
+      ctx.fillStyle = "#1e4a1a";
+      ctx.fill();
+    }
+
+    // === LEGS ===
+    const ls = Math.sin(ts / 95) * 10;
+    ctx.fillStyle = darkCol;
+    // Back leg
+    ctx.beginPath(); ctx.roundRect(x + 4, y + h - 20, 13, 17 + ls, [4, 4, 2, 2]); ctx.fill();
+    // Front leg
+    ctx.beginPath(); ctx.roundRect(x + P_W / 2 - 1, y + h - 20, 13, 17 - ls, [4, 4, 2, 2]); ctx.fill();
+
+    // Feet / claws
+    ctx.fillStyle = "#1e4a1a";
+    ctx.beginPath(); ctx.roundRect(x + 1, y + h - 4, 18, 5, [0, 0, 3, 3]); ctx.fill();
+    ctx.beginPath(); ctx.roundRect(x + P_W / 2 - 4, y + h - 4, 18, 5, [0, 0, 3, 3]); ctx.fill();
+    // Toe claws
+    ctx.strokeStyle = "#0e2e0c";
+    ctx.lineWidth = 1;
+    for (let c = 0; c < 3; c++) {
+      ctx.beginPath();
+      ctx.moveTo(x + 2 + c * 5, y + h + 1);
+      ctx.lineTo(x + 1 + c * 5, y + h + 5);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + P_W / 2 - 3 + c * 5, y + h + 1);
+      ctx.lineTo(x + P_W / 2 - 4 + c * 5, y + h + 5);
+      ctx.stroke();
+    }
+
+    // === BACK SPINES ===
+    ctx.fillStyle = "#1e5c18";
+    const spineXs = [x + P_W / 2 - 4, x + P_W / 2, x + P_W / 2 + 4];
+    const spineHs = [7, 9, 6];
+    spineXs.forEach((sx, i) => {
+      ctx.beginPath();
+      ctx.moveTo(sx - 3, y + h * 0.38);
+      ctx.lineTo(sx, y + h * 0.38 - spineHs[i]);
+      ctx.lineTo(sx + 3, y + h * 0.38);
+      ctx.closePath();
+      ctx.fill();
+    });
   }
 
   ctx.globalAlpha = 1;
