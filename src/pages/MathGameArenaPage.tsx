@@ -10,7 +10,6 @@ const kelasOptions = [
   { label: "KELAS 7", path: "/math-game-arena/kelas-7", desc: "Game matematika kelas 7 SMP" },
   { label: "KELAS 8", path: "/math-game-arena/kelas-8", desc: "Game matematika kelas 8 SMP" },
   { label: "KELAS 9", path: "/math-game-arena/kelas-9", desc: "Game matematika kelas 9 SMP" },
-  { label: "UMUM", path: "/math-game-arena/umum", desc: "Game seru untuk semua tingkatan! 🏎️" },
 ];
 
 const MathGameArenaPage = () => {

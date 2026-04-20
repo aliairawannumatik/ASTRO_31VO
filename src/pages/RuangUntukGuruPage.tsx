@@ -7,6 +7,7 @@ import {
   ListChecks,
   ShieldCheck,
   MessageSquareHeart,
+  Gamepad2,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -36,6 +37,12 @@ const guruMenuItems = [
     icon: MessageSquareHeart,
     path: "/pesan-kesan",
     desc: "Form masukan penggunaan aplikasi",
+  },
+  {
+    label: "GAME MATH",
+    icon: Gamepad2,
+    path: "/math-game-arena/umum",
+    desc: "Game seru untuk semua tingkatan",
   },
 ];
 
@@ -91,7 +98,7 @@ const RuangUntukGuruPage = () => {
         </section>
 
         <h2 className="font-display text-xl font-bold text-white mb-4 text-center">Fitur untuk Guru</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
           {guruMenuItems.map((item, i) => (
             <button
               key={item.path}
