@@ -162,6 +162,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ## Notes
 
+- LKPD menu updated on 2026-04-20: `/lkpd/kelas-7/perbandingan/umum` is now a guided discovery LKPD. Bagian A uses interactive fill-in boxes from concept explanation through conclusion and standard formulas for ratio, unit comparison, and unit rate. Bagian B now contains 10 contextual practice problems with immediate answer checking and step-by-step discussions.
 - Replit migration verified on 2026-04-20: npm dependencies installed from the existing project configuration, workflow restarted successfully, frontend preview returned HTTP 200, browser console showed only normal Vite connection messages, and the Express `/api/chat` endpoint remains server-side for AI credential safety.
 - Pesan dan Kesan menu added on 2026-04-19: new main menu entry `/pesan-kesan` opens a feedback-style form for students to enter name, class, impressions, messages, and development suggestions, with local browser storage confirmation after submission.
 - Ulangan Harian menu added on 2026-04-19: new main menu entry `/ulangan-harian` opens a 5-question daily test in a fullscreen-first mode, hides normal navigation during the test, blocks copy/paste/context menu shortcuts where the browser allows, records fullscreen/tab/window-focus violations, requires all answers before submission, and shows score plus security notes after completion.

@@ -29,76 +29,160 @@ const hasAnswer = (value?: string) => Boolean(value?.trim());
 const guidedItems = [
   {
     id: "a1",
-    label: "Jika ada 6 apel dan 4 jeruk, banyak seluruh buah adalah",
-    suffix: "buah",
-    answers: ["10"],
-    discussion: ["Jumlah seluruh buah diperoleh dengan menjumlahkan semua apel dan jeruk.", "6 apel + 4 jeruk = 10 buah.", "Jadi, banyak seluruh buah adalah 10 buah."],
+    label: "Dari gambar 6 apel dan 4 jeruk, perbandingan apel terhadap jeruk ditulis",
+    suffix: "",
+    answers: ["6:4", "6/4"],
+    discussion: ["Perbandingan apel terhadap jeruk berarti banyak apel ditulis lebih dulu.", "Banyak apel = 6 dan banyak jeruk = 4.", "Jadi, perbandingan apel terhadap jeruk adalah 6 : 4."],
   },
   {
     id: "a2",
-    label: "Perbandingan apel terhadap jeruk adalah",
+    label: "Bilangan terbesar yang dapat membagi 6 dan 4 adalah",
     suffix: "",
-    answers: ["6:4", "6/4"],
-    discussion: ["Perbandingan apel terhadap jeruk berarti jumlah apel ditulis lebih dulu, lalu jumlah jeruk.", "Jumlah apel = 6 dan jumlah jeruk = 4.", "Maka perbandingannya adalah 6 : 4."],
+    answers: ["2"],
+    discussion: ["Untuk membuat rasio sederhana, gunakan pembagi terbesar yang sama.", "6 dan 4 sama-sama dapat dibagi 2.", "Jadi, pembagi terbesarnya adalah 2."],
   },
   {
     id: "a3",
-    label: "Perbandingan 6 : 4 disederhanakan dengan membagi kedua bilangan oleh",
+    label: "Bentuk paling sederhana dari 6 : 4 adalah",
     suffix: "",
-    answers: ["2"],
-    discussion: ["Untuk menyederhanakan rasio, cari bilangan terbesar yang dapat membagi 6 dan 4.", "6 dan 4 sama-sama dapat dibagi 2.", "Jadi, kedua bilangan dibagi oleh 2."],
+    answers: ["3:2", "3/2"],
+    discussion: ["Bagi kedua bilangan dengan 2.", "6 ÷ 2 = 3 dan 4 ÷ 2 = 2.", "Jadi, 6 : 4 = 3 : 2."],
   },
   {
     id: "a4",
-    label: "Bentuk sederhana dari 6 : 4 adalah",
+    label: "Sebelum membandingkan 45 menit dengan 1 jam, 1 jam harus diubah menjadi",
+    suffix: "menit",
+    answers: ["60"],
+    discussion: ["Perbandingan dua besaran sejenis harus memakai satuan yang sama.", "1 jam = 60 menit.", "Maka 45 menit dibandingkan dengan 60 menit."],
+  },
+  {
+    id: "a5",
+    label: "Perbandingan 45 menit terhadap 60 menit adalah",
     suffix: "",
-    answers: ["3:2", "3/2"],
-    discussion: ["Rasio awal adalah 6 : 4.", "Bagi kedua bilangan dengan 2: 6 ÷ 2 = 3 dan 4 ÷ 2 = 2.", "Jadi, bentuk sederhana dari 6 : 4 adalah 3 : 2."],
+    answers: ["45:60", "45/60"],
+    discussion: ["Setelah satuannya sama, tuliskan bilangan sesuai urutan yang ditanyakan.", "45 menit terhadap 60 menit ditulis 45 : 60.", "Rasio ini masih dapat disederhanakan."],
+  },
+  {
+    id: "a6",
+    label: "Bentuk sederhana dari 45 : 60 adalah",
+    suffix: "",
+    answers: ["3:4", "3/4"],
+    discussion: ["FPB dari 45 dan 60 adalah 15.", "45 ÷ 15 = 3 dan 60 ÷ 15 = 4.", "Jadi, bentuk sederhananya adalah 3 : 4."],
+  },
+  {
+    id: "a7",
+    label: "Jika 12 buku dibagikan kepada 3 siswa, setiap 1 siswa mendapat",
+    suffix: "buku",
+    answers: ["4"],
+    discussion: ["Nilai tiap 1 satuan diperoleh dengan pembagian.", "12 buku ÷ 3 siswa = 4 buku/siswa.", "Jadi, setiap siswa mendapat 4 buku."],
+  },
+  {
+    id: "a8",
+    label: "Jarak 150 km ditempuh dalam 3 jam. Satuan pembanding kecepatannya adalah",
+    suffix: "km/jam",
+    answers: ["50"],
+    discussion: ["Kecepatan menyatakan jarak tiap 1 jam.", "150 km ÷ 3 jam = 50 km/jam.", "Jadi, satuan pembandingnya adalah 50 km/jam."],
+  },
+  {
+    id: "a9",
+    label: "Kesimpulan: Perbandingan digunakan untuk membandingkan dua besaran. Jika satuannya berbeda, satuan harus dibuat",
+    suffix: "terlebih dahulu",
+    answers: ["sama"],
+    discussion: ["Contoh: 1 jam harus diubah menjadi 60 menit sebelum dibandingkan dengan 45 menit.", "Setelah satuan sama, barulah rasio dapat ditulis dan disederhanakan.", "Jadi, satuan harus dibuat sama terlebih dahulu."],
+  },
+  {
+    id: "a10",
+    label: "Rumus baku: Rasio a terhadap b ditulis",
+    suffix: "",
+    answers: ["a:b", "a/b"],
+    discussion: ["Urutan dalam rasio harus mengikuti urutan yang ditanyakan.", "Jika yang ditanyakan a terhadap b, maka a ditulis lebih dulu.", "Jadi, rasio a terhadap b ditulis a : b."],
+  },
+  {
+    id: "a11",
+    label: "Rumus baku: Rasio paling sederhana diperoleh dengan membagi kedua bilangan oleh",
+    suffix: "",
+    answers: ["fpb", "FPB"],
+    discussion: ["FPB adalah faktor persekutuan terbesar.", "Membagi kedua bilangan dengan FPB membuat rasio menjadi paling sederhana.", "Jadi, rasio paling sederhana diperoleh dengan membagi kedua bilangan oleh FPB."],
+  },
+  {
+    id: "a12",
+    label: "Rumus baku: Nilai tiap 1 satuan diperoleh dari jumlah besaran dibagi",
+    suffix: "",
+    answers: ["banyak satuan", "jumlah satuan", "banyaknya satuan"],
+    discussion: ["Satuan pembanding menyatakan nilai untuk setiap 1 satuan.", "Contoh: 150 km dalam 3 jam berarti 150 ÷ 3 = 50 km/jam.", "Jadi, nilai tiap 1 satuan diperoleh dari jumlah besaran dibagi banyak satuan."],
   },
 ];
 
 const practiceItems = [
   {
     id: "p1",
-    question: "Di kelas terdapat 18 siswa perempuan dan 12 siswa laki-laki. Rasio perempuan terhadap laki-laki dalam bentuk sederhana adalah ...",
-    answers: ["3:2", "3/2"],
-    hint: "Bagi 18 dan 12 dengan FPB-nya, yaitu 6.",
-    discussion: ["Rasio perempuan terhadap laki-laki adalah 18 : 12.", "FPB dari 18 dan 12 adalah 6.", "Bagi kedua bilangan dengan 6: 18 ÷ 6 = 3 dan 12 ÷ 6 = 2.", "Jadi, rasio sederhananya adalah 3 : 2."],
+    question: "Tinggi Menara P adalah 135 meter dan tinggi Menara Q adalah 180 meter. Tentukan rasio tinggi Menara Q terhadap Menara P dalam bentuk paling sederhana!",
+    answers: ["4:3", "4/3"],
+    hint: "Tuliskan 180 : 135, lalu bagi keduanya dengan 45.",
+    discussion: ["Yang ditanyakan adalah tinggi Menara Q terhadap Menara P, jadi urutannya 180 : 135.", "FPB dari 180 dan 135 adalah 45.", "180 ÷ 45 = 4 dan 135 ÷ 45 = 3.", "Jadi, rasionya adalah 4 : 3."],
   },
   {
     id: "p2",
-    question: "Sebuah resep memakai 250 gram tepung untuk 5 kue. Satuan pembanding tepung tiap 1 kue adalah ... gram/kue.",
-    answers: ["50"],
-    hint: "250 dibagi 5.",
-    discussion: ["Satuan pembanding gram/kue berarti banyak tepung untuk setiap 1 kue.", "Jumlah tepung 250 gram digunakan untuk 5 kue.", "250 ÷ 5 = 50.", "Jadi, tepung tiap 1 kue adalah 50 gram/kue."],
+    question: "Dalam sebuah kotak terdapat 30 kelereng merah dan 20 kelereng biru. Berapakah perbandingan kelereng merah terhadap seluruh kelereng dalam bentuk paling sederhana?",
+    answers: ["3:5", "3/5"],
+    hint: "Jumlah seluruh kelereng adalah 30 + 20 = 50.",
+    discussion: ["Jumlah seluruh kelereng = 30 + 20 = 50.", "Perbandingan merah terhadap seluruh kelereng adalah 30 : 50.", "Bagi keduanya dengan 10 sehingga menjadi 3 : 5.", "Jadi, jawabannya adalah 3 : 5."],
   },
   {
     id: "p3",
-    question: "Harga 4 pensil adalah Rp12.000. Harga 1 pensil adalah Rp ...",
-    answers: ["3000", "3.000", "rp3000", "rp3.000"],
-    hint: "12.000 dibagi 4.",
-    discussion: ["Harga 4 pensil adalah Rp12.000.", "Untuk mencari harga 1 pensil, bagi harga total dengan banyak pensil.", "12.000 ÷ 4 = 3.000.", "Jadi, harga 1 pensil adalah Rp3.000."],
+    question: "Umur Ibu saat ini adalah 48 tahun, sedangkan umur Rani 18 tahun. Tentukan perbandingan umur Ibu dan Rani pada 6 tahun yang lalu!",
+    answers: ["7:2", "7/2"],
+    hint: "Kurangi masing-masing umur dengan 6 terlebih dahulu.",
+    discussion: ["Umur Ibu 6 tahun lalu = 48 - 6 = 42 tahun.", "Umur Rani 6 tahun lalu = 18 - 6 = 12 tahun.", "Perbandingannya adalah 42 : 12.", "Bagi keduanya dengan 6 sehingga menjadi 7 : 2."],
   },
   {
     id: "p4",
-    question: "Rasio umur Kakak : Adik = 5 : 3. Jika jumlah umur mereka 32 tahun, umur Kakak adalah ... tahun.",
-    answers: ["20"],
-    hint: "Jumlah bagian 8, satu bagian 4 tahun, kakak 5 bagian.",
-    discussion: ["Rasio umur Kakak : Adik = 5 : 3.", "Jumlah bagian = 5 + 3 = 8 bagian.", "Jumlah umur mereka 32 tahun, maka 1 bagian = 32 ÷ 8 = 4 tahun.", "Umur Kakak = 5 bagian = 5 × 4 = 20 tahun."],
+    question: "Jarak rumah Rafi ke perpustakaan adalah 3 km, sedangkan jarak rumah Nia ke perpustakaan adalah 750 meter. Tentukan perbandingan jarak rumah Rafi dan Nia dalam bentuk paling sederhana!",
+    answers: ["4:1", "4/1"],
+    hint: "Ubah 3 km menjadi 3.000 meter.",
+    discussion: ["Satuan harus dibuat sama terlebih dahulu.", "3 km = 3.000 meter.", "Perbandingan jarak Rafi dan Nia adalah 3.000 : 750.", "Bagi keduanya dengan 750 sehingga menjadi 4 : 1."],
   },
   {
     id: "p5",
-    question: "Jarak pada peta 6 cm mewakili jarak sebenarnya 24 km. Setiap 1 cm mewakili ... km.",
-    answers: ["4"],
-    hint: "24 dibagi 6.",
-    discussion: ["6 cm pada peta mewakili 24 km sebenarnya.", "Untuk mencari nilai tiap 1 cm, bagi jarak sebenarnya dengan jarak pada peta.", "24 ÷ 6 = 4.", "Jadi, setiap 1 cm mewakili 4 km."],
+    question: "Waktu yang digunakan Sari untuk membaca adalah 1,5 jam, sedangkan waktu untuk menonton video adalah 36 menit. Tentukan rasio waktu membaca terhadap waktu menonton video!",
+    answers: ["5:2", "5/2"],
+    hint: "Ubah 1,5 jam menjadi 90 menit.",
+    discussion: ["1,5 jam = 90 menit.", "Rasio waktu membaca terhadap menonton video adalah 90 : 36.", "FPB dari 90 dan 36 adalah 18.", "90 ÷ 18 = 5 dan 36 ÷ 18 = 2, sehingga rasionya 5 : 2."],
   },
   {
     id: "p6",
-    question: "Perbandingan 45 menit terhadap 1 jam dalam satuan menit adalah ...",
-    answers: ["3:4", "3/4", "45:60"],
-    hint: "Ubah 1 jam menjadi 60 menit, lalu sederhanakan 45 : 60.",
-    discussion: ["Sebelum dibandingkan, satuan harus sama.", "1 jam = 60 menit, sehingga perbandingan menjadi 45 menit : 60 menit.", "Rasio 45 : 60 dapat dibagi 15.", "45 ÷ 15 = 3 dan 60 ÷ 15 = 4.", "Jadi, perbandingan sederhananya adalah 3 : 4."],
+    question: "Sebuah wadah air berisi 2 liter. Air tersebut dituangkan ke dalam gelas berkapasitas 250 ml. Berapa rasio volume air di wadah terhadap kapasitas gelas?",
+    answers: ["8:1", "8/1"],
+    hint: "Ubah 2 liter menjadi 2.000 ml.",
+    discussion: ["Satuan harus sama, maka 2 liter = 2.000 ml.", "Rasio volume wadah terhadap gelas adalah 2.000 : 250.", "2.000 ÷ 250 = 8 dan 250 ÷ 250 = 1.", "Jadi, rasionya adalah 8 : 1."],
+  },
+  {
+    id: "p7",
+    question: "Sebuah peternakan memiliki lahan 1,6 hektar dan menampung 48.000 ekor ayam. Tentukan rasio kepadatan ayam terhadap luas lahan dalam satuan ekor/m². Catatan: 1 hektar = 10.000 m².",
+    answers: ["3", "3ekor/m2", "3ekor/m²", "3 ekor/m2", "3 ekor/m²"],
+    hint: "Ubah 1,6 hektar menjadi 16.000 m², lalu bagi 48.000 dengan 16.000.",
+    discussion: ["1,6 hektar = 1,6 × 10.000 = 16.000 m².", "Kepadatan ayam = 48.000 ÷ 16.000.", "Hasilnya 3 ekor/m².", "Jadi, rasio kepadatannya adalah 3 ekor/m²."],
+  },
+  {
+    id: "p8",
+    question: "Perbandingan panjang dan lebar sebuah persegi panjang adalah 7 : 5. Jika kelilingnya 72 cm, tentukan luas persegi panjang tersebut!",
+    answers: ["315", "315cm2", "315cm²", "315 cm2", "315 cm²"],
+    hint: "Misalkan panjang 7x dan lebar 5x. Gunakan 2(p + l) = 72.",
+    discussion: ["Misalkan panjang = 7x dan lebar = 5x.", "Keliling = 2(7x + 5x) = 24x.", "24x = 72, maka x = 3.", "Panjang = 21 cm dan lebar = 15 cm.", "Luas = 21 × 15 = 315 cm²."],
+  },
+  {
+    id: "p9",
+    question: "Perbandingan panjang, lebar, dan tinggi sebuah balok adalah 3 : 2 : 1. Jika volume balok 162 cm³, tentukan luas permukaan balok tersebut!",
+    answers: ["198", "198cm2", "198cm²", "198 cm2", "198 cm²"],
+    hint: "Misalkan ukuran balok 3x, 2x, dan x. Volume = 3x × 2x × x.",
+    discussion: ["Misalkan panjang = 3x, lebar = 2x, dan tinggi = x.", "Volume = 3x × 2x × x = 6x³.", "6x³ = 162, maka x³ = 27 dan x = 3.", "Ukuran balok adalah 9 cm, 6 cm, dan 3 cm.", "Luas permukaan = 2(pl + pt + lt) = 2(54 + 27 + 18) = 198 cm²."],
+  },
+  {
+    id: "p10",
+    question: "Hasil panen rambutan, duku, dan salak memiliki perbandingan 3 : 5 : 8. Jika selisih berat salak dan rambutan adalah 250 kg, tentukan total seluruh hasil panen!",
+    answers: ["800", "800kg", "800 kg"],
+    hint: "Selisih salak dan rambutan adalah 8 bagian - 3 bagian = 5 bagian.",
+    discussion: ["Perbandingan rambutan : duku : salak = 3 : 5 : 8.", "Selisih salak dan rambutan = 8 - 3 = 5 bagian.", "5 bagian = 250 kg, maka 1 bagian = 50 kg.", "Jumlah seluruh bagian = 3 + 5 + 8 = 16 bagian.", "Total panen = 16 × 50 = 800 kg."],
   },
 ];
 
@@ -151,10 +235,10 @@ const LKPDPage = () => {
   };
 
   const getMessage = () => {
-    if (percentage === 100) return "Luar biasa! Kamu sudah memahami perbandingan, satuan pembanding, dan rasio dengan sangat baik.";
+    if (percentage === 100) return "Luar biasa! Kamu sudah memahami perbandingan, satuan pembanding, rasio, dan penerapannya dengan sangat baik.";
     if (percentage >= 75) return "Bagus! Pemahamanmu sudah kuat. Periksa kembali bagian yang masih merah agar makin mantap.";
-    if (percentage >= 50) return "Kamu sudah mulai paham. Baca lagi tuntunan penemuan, lalu coba perbaiki jawaban yang belum tepat.";
-    return "Tetap semangat. Ikuti langkah contoh dari awal, samakan satuan, lalu sederhanakan rasio perlahan.";
+    if (percentage >= 50) return "Kamu sudah mulai paham. Baca lagi penemuan terbimbing dan rumus bakunya, lalu coba perbaiki jawaban yang belum tepat.";
+    return "Tetap semangat. Ikuti langkah dari konsep, samakan satuan, sederhanakan rasio, lalu gunakan rumus bakunya perlahan.";
   };
 
   return (
@@ -171,15 +255,15 @@ const LKPDPage = () => {
             Perbandingan Umum, Satuan Pembanding, dan Rasio
           </h1>
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
-            Lembar kerja ini menuntun Sobat Numatik menemukan sendiri makna perbandingan melalui contoh dekat kehidupan sehari-hari, lalu mengecek jawaban dan skor secara langsung.
+            Lembar kerja ini menuntun Sobat Numatik menemukan konsep melalui isian kosong, menyusun kesimpulan, memahami rumus baku, lalu menerapkannya pada soal kontekstual.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 mb-6">
           {[
-            { icon: Compass, title: "Amati", text: "Perhatikan data dan samakan satuannya." },
-            { icon: Lightbulb, title: "Temukan", text: "Tuliskan rasio, sederhanakan, dan cari nilai tiap satuan." },
-            { icon: Target, title: "Cek", text: "Benar/salah muncul langsung di samping isian." },
+            { icon: Compass, title: "Amati", text: "Baca situasi, urutan besaran, dan satuannya." },
+            { icon: Lightbulb, title: "Temukan", text: "Isi bagian kosong untuk menemukan konsep dan rumus." },
+            { icon: Target, title: "Terapkan", text: "Gunakan kesimpulan pada soal kontekstual." },
           ].map((item) => (
             <div key={item.title} className="bg-card/80 backdrop-blur border border-border rounded-2xl p-5 shadow-lg">
               <item.icon className="w-8 h-8 text-yellow-300 mb-3" />
@@ -194,13 +278,13 @@ const LKPDPage = () => {
             <BookOpenCheck className="w-8 h-8 text-cyan-200 shrink-0" />
             <div>
               <h2 className="font-display text-2xl font-bold text-cyan-100">A. Penemuan Terbimbing</h2>
-              <p className="text-sm text-white/70 font-body mt-1">Ikuti alur pertanyaan berikut untuk menemukan konsep. Gunakan tanda titik dua, misalnya 3 : 2.</p>
+              <p className="text-sm text-white/70 font-body mt-1">Lengkapi kotak kosong dari pemaparan konsep sampai kesimpulan dan rumus baku. Untuk rasio, gunakan bentuk seperti 3 : 2.</p>
             </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-5 mb-6">
             <div className="rounded-2xl bg-black/20 border border-white/10 p-5">
-              <h3 className="font-display font-bold text-yellow-200 mb-3">Situasi 1: Apel dan Jeruk</h3>
+              <h3 className="font-display font-bold text-yellow-200 mb-3">Situasi 1: Membandingkan Banyak Benda</h3>
               <div className="flex items-center justify-center gap-4 rounded-xl bg-white/5 p-4 mb-4">
                 <div className="text-center">
                   <div className="text-4xl mb-2">🍎🍎🍎</div>
@@ -214,21 +298,21 @@ const LKPDPage = () => {
                   <p className="text-sm text-white/70 mt-2">4 jeruk</p>
                 </div>
               </div>
-              <p className="text-sm text-white/75 font-body">Perbandingan menyatakan hubungan dua besaran. Jika kedua bilangan dapat dibagi oleh bilangan yang sama, rasionya dapat disederhanakan.</p>
+              <p className="text-sm text-white/75 font-body">Perbandingan menyatakan hubungan dua besaran. Urutan rasio harus mengikuti urutan yang ditanyakan.</p>
             </div>
 
             <div className="rounded-2xl bg-black/20 border border-white/10 p-5">
-              <h3 className="font-display font-bold text-yellow-200 mb-3">Situasi 2: Nilai tiap 1 satuan</h3>
-              <div className="rounded-xl bg-white/5 p-4 mb-4 text-center">
-                <div className="text-4xl mb-3">📚 📚 📚 📚</div>
+              <h3 className="font-display font-bold text-yellow-200 mb-3">Situasi 2: Menyamakan Satuan dan Nilai Tiap Satuan</h3>
+              <div className="rounded-xl bg-white/5 p-4 mb-4 text-center space-y-2">
+                <p className="text-lg font-bold text-white">45 menit dibandingkan dengan 1 jam</p>
                 <p className="text-lg font-bold text-white">12 buku untuk 3 siswa</p>
-                <p className="text-sm text-white/65">Berapa buku untuk setiap 1 siswa?</p>
+                <p className="text-sm text-white/65">Apa yang harus dilakukan sebelum menulis rasio?</p>
               </div>
-              <p className="text-sm text-white/75 font-body">Satuan pembanding membantu kita membaca perbandingan sebagai nilai untuk setiap 1 satuan, misalnya buku/siswa atau km/jam.</p>
+              <p className="text-sm text-white/75 font-body">Jika satuan berbeda, samakan satuannya terlebih dahulu. Jika mencari nilai tiap 1 satuan, gunakan pembagian.</p>
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 mb-6">
             {guidedItems.map((item, index) => (
               <label key={item.id} className="block rounded-2xl bg-card/80 border border-white/10 p-4">
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
@@ -239,7 +323,7 @@ const LKPDPage = () => {
                     <input
                       value={answers[item.id] || ""}
                       onChange={(event) => updateAnswer(item.id, event.target.value)}
-                      className="w-full md:w-44 rounded-xl border border-cyan-200/30 bg-black/30 px-4 py-2 text-white outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
+                      className="w-full md:w-52 rounded-xl border border-cyan-200/30 bg-black/30 px-4 py-2 text-white outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
                       placeholder="isi jawaban"
                     />
                     {hasAnswer(answers[item.id]) && (
@@ -254,28 +338,28 @@ const LKPDPage = () => {
               </label>
             ))}
           </div>
-        </section>
 
-        <section className="bg-card/85 backdrop-blur border border-border rounded-3xl p-5 md:p-7 mb-6">
-          <div className="flex items-start gap-3 mb-5">
-            <Sparkles className="w-8 h-8 text-fuchsia-300 shrink-0" />
-            <div>
-              <h2 className="font-display text-2xl font-bold text-fuchsia-100">B. Kesimpulan Konsep</h2>
-              <p className="text-sm text-white/70 font-body mt-1">Lengkapi latihan setelah memahami ringkasan ini.</p>
+          <div className="rounded-3xl border border-fuchsia-200/25 bg-fuchsia-500/10 p-5">
+            <div className="flex items-start gap-3 mb-4">
+              <Sparkles className="w-7 h-7 text-fuchsia-200 shrink-0" />
+              <div>
+                <h3 className="font-display text-xl font-bold text-fuchsia-100">Kesimpulan dan Rumus Baku</h3>
+                <p className="text-sm text-white/70 font-body">Gunakan hasil isian di atas sebagai ringkasan sebelum mengerjakan soal.</p>
+              </div>
             </div>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="rounded-2xl bg-cyan-500/10 border border-cyan-200/20 p-4">
-              <h3 className="font-bold text-cyan-100 mb-2">Perbandingan Umum</h3>
-              <p className="text-sm text-white/70">Membandingkan dua besaran sejenis. Satuan harus sama sebelum dibandingkan.</p>
-            </div>
-            <div className="rounded-2xl bg-yellow-500/10 border border-yellow-200/20 p-4">
-              <h3 className="font-bold text-yellow-100 mb-2">Satuan Pembanding</h3>
-              <p className="text-sm text-white/70">Menentukan nilai untuk setiap 1 satuan, misalnya 50 km/jam atau 4 buku/siswa.</p>
-            </div>
-            <div className="rounded-2xl bg-fuchsia-500/10 border border-fuchsia-200/20 p-4">
-              <h3 className="font-bold text-fuchsia-100 mb-2">Rasio</h3>
-              <p className="text-sm text-white/70">Bentuk perbandingan seperti a : b. Rasio paling sederhana diperoleh dengan membagi FPB.</p>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="rounded-2xl bg-cyan-500/10 border border-cyan-200/20 p-4">
+                <h4 className="font-bold text-cyan-100 mb-2">Perbandingan Umum</h4>
+                <p className="text-sm text-white/70">Membandingkan dua besaran. Jika satuan berbeda, ubah dahulu agar satuannya sama.</p>
+              </div>
+              <div className="rounded-2xl bg-yellow-500/10 border border-yellow-200/20 p-4">
+                <h4 className="font-bold text-yellow-100 mb-2">Rasio</h4>
+                <p className="text-sm text-white/70">Rasio a terhadap b ditulis a : b. Bentuk sederhana diperoleh dengan membagi kedua bilangan oleh FPB.</p>
+              </div>
+              <div className="rounded-2xl bg-emerald-500/10 border border-emerald-200/20 p-4">
+                <h4 className="font-bold text-emerald-100 mb-2">Satuan Pembanding</h4>
+                <p className="text-sm text-white/70">Nilai tiap 1 satuan = jumlah besaran ÷ banyak satuan, misalnya km/jam, buku/siswa, atau ekor/m².</p>
+              </div>
             </div>
           </div>
         </section>
@@ -284,8 +368,8 @@ const LKPDPage = () => {
           <div className="flex items-start gap-3 mb-5">
             <Target className="w-8 h-8 text-rose-200 shrink-0" />
             <div>
-              <h2 className="font-display text-2xl font-bold text-rose-100">C. Latihan Isian Titik-titik</h2>
-              <p className="text-sm text-white/70 font-body mt-1">Isi jawaban singkat. Untuk rasio, gunakan bentuk seperti 3 : 2.</p>
+              <h2 className="font-display text-2xl font-bold text-rose-100">B. Soal Latihan</h2>
+              <p className="text-sm text-white/70 font-body mt-1">Kerjakan dengan langkah: tulis rasio sesuai urutan, samakan satuan jika perlu, lalu sederhanakan.</p>
             </div>
           </div>
           <div className="space-y-4">
