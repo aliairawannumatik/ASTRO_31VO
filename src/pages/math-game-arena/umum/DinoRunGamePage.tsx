@@ -122,9 +122,14 @@ const DinoRunGamePage = () => {
 
   // ── Spawn obstacle ──────────────────────────────────────────────────────
   const spawnObstacle = useCallback(() => {
-    // 25% bird, 35% cactus, 25% rock, 15% lowbar
+    const hardMode = scoreRef.current >= 1000;
+
+    // Normal: 25% bird, 35% cactus, 25% rock, 15% lowbar
+    // Hard (score≥1000): 35% bird, 25% cactus, 15% rock, 25% lowbar  — more aerial & ducking hazards
     const roll = Math.random();
-    const kind: ObstacleKind = roll < 0.25 ? "bird" : roll < 0.60 ? "cactus" : roll < 0.85 ? "rock" : "lowbar";
+    const kind: ObstacleKind = hardMode
+      ? (roll < 0.35 ? "bird" : roll < 0.60 ? "cactus" : roll < 0.75 ? "rock" : "lowbar")
+      : (roll < 0.25 ? "bird" : roll < 0.60 ? "cactus" : roll < 0.85 ? "rock" : "lowbar");
 
     // Ground obstacles: small sizes, easy to jump over
     let w = 18, h = 36, y = GROUND_Y - 36;
@@ -145,8 +150,11 @@ const DinoRunGamePage = () => {
     }
 
     obstaclesRef.current.push({ kind, x: CW + 20, y, w, h, hasQuestion: hasQ, questionIdx: qIdx });
-    // Gap stored in milliseconds — 3.2 to 5.5 seconds between obstacles
-    nextObstRef.current = 3200 + Math.random() * 2300;
+    // Hard mode (score≥1000): tighter gaps — 1.6 to 3.0 s
+    // Normal: generous 3.2 to 5.5 s between obstacles
+    nextObstRef.current = hardMode
+      ? 1600 + Math.random() * 1400
+      : 3200 + Math.random() * 2300;
   }, []);
 
   // ── Reset / start ───────────────────────────────────────────────────────
@@ -302,8 +310,13 @@ const DinoRunGamePage = () => {
 
       distRef.current += speedRef.current * dt;
       scoreRef.current = Math.floor(distRef.current / 10);
-      // Gentler speed ramp — slower increase, lower cap
-      speedRef.current = Math.min(190 + distRef.current * 0.02, 360);
+      // Score≥1000 (hard mode): faster ramp with a higher cap (430 px/s)
+      // Normal: gentler ramp, cap at 360 px/s
+      if (scoreRef.current >= 1000) {
+        speedRef.current = Math.min(190 + distRef.current * 0.035, 430);
+      } else {
+        speedRef.current = Math.min(190 + distRef.current * 0.02, 360);
+      }
       if (Math.floor(distRef.current) % 60 === 0) setScore(scoreRef.current);
     }
 
@@ -335,6 +348,24 @@ const DinoRunGamePage = () => {
     if (ph === "stunned") {
       ctx.fillStyle = `rgba(255,60,60,${0.15 + 0.1 * Math.sin(ts / 80)})`;
       ctx.fillRect(0, 0, CW, CH);
+    }
+
+    // ── Hard mode badge (score ≥ 1000) ──────────────────────────────
+    if (scoreRef.current >= 1000 && (ph === "running" || ph === "stunned")) {
+      const pulse = 0.7 + 0.3 * Math.sin(ts / 250);
+      ctx.save();
+      ctx.globalAlpha = pulse;
+      ctx.fillStyle = "#FF4500";
+      ctx.beginPath();
+      ctx.roundRect(CW / 2 - 54, 8, 108, 24, 6);
+      ctx.fill();
+      ctx.globalAlpha = pulse;
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 11px monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("🔥 HARD MODE!", CW / 2, 24);
+      ctx.textAlign = "left";
+      ctx.restore();
     }
 
     rafRef.current = requestAnimationFrame(loop);
