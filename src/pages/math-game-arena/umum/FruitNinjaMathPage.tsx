@@ -15,6 +15,14 @@ type FruitKind = "correct" | "wrong" | "bomb" | "bonus";
 interface Question {
   q: string;
   ans: number;
+  ansStr?: string;
+  lines?: string[];
+}
+
+interface SpecialQuestion {
+  lines: string[];
+  ansStr: string;
+  wrongOpts: string[];
 }
 
 interface Fruit {
@@ -25,6 +33,7 @@ interface Fruit {
   vy: number;
   r: number;
   value: number;
+  valueStr?: string;
   kind: FruitKind;
   color: string;
   glow: string;
@@ -69,6 +78,19 @@ const fruitPalettes = [
   { color: "#06b6d4", glow: "#a5f3fc", label: "🫐" },
   { color: "#a855f7", glow: "#e9d5ff", label: "🍇" },
   { color: "#ec4899", glow: "#fbcfe8", label: "🍑" },
+];
+
+const specialQPool: SpecialQuestion[] = [
+  {
+    lines: ["Menara P=135m, Q=180m.", "Rasio tinggi Q : P (paling sederhana)?"],
+    ansStr: "4:3",
+    wrongOpts: ["3:4", "5:3", "4:5"],
+  },
+  {
+    lines: ["30 kelereng merah, 20 biru.", "Rasio merah : semua (paling sederhana)?"],
+    ansStr: "3:5",
+    wrongOpts: ["2:5", "3:2", "1:2"],
+  },
 ];
 
 const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b));
@@ -159,6 +181,8 @@ const FruitNinjaMathPage = () => {
   const spawnAccRef = useRef(0);
   const hueRef = useRef(0);
   const shakeRef = useRef(0);
+  const specialTriggered = useRef<boolean[]>([false, false]);
+  const pendingSpecialQ = useRef<SpecialQuestion | null>(null);
   const [, forceRender] = useState(0);
 
   const rerender = useCallback(() => forceRender(n => n + 1), []);
@@ -176,6 +200,52 @@ const FruitNinjaMathPage = () => {
   };
 
   const spawnWave = useCallback(() => {
+    const specialQ = pendingSpecialQ.current;
+    pendingSpecialQ.current = null;
+
+    if (specialQ) {
+      const q: Question = {
+        q: specialQ.lines.join(" "),
+        ans: -9999,
+        ansStr: specialQ.ansStr,
+        lines: specialQ.lines,
+      };
+      qRef.current = q;
+
+      const allOpts = [specialQ.ansStr, ...specialQ.wrongOpts];
+      const shuffled = allOpts.sort(() => Math.random() - 0.5);
+      const fruits: Fruit[] = [];
+      const total = shuffled.length;
+      const baseX = 55 + Math.random() * (CW - 110);
+
+      for (let i = 0; i < total; i++) {
+        const pal = fruitPalettes[(Math.floor(Math.random() * fruitPalettes.length) + i) % fruitPalettes.length];
+        const isCorrect = shuffled[i] === specialQ.ansStr;
+        const kind: FruitKind = isCorrect ? "correct" : "wrong";
+        const spread = (i - (total - 1) / 2) * (50 + Math.random() * 10);
+        fruits.push({
+          id: uid++,
+          x: Math.max(45, Math.min(CW - 45, baseX + spread)),
+          y: CH + 35 + Math.random() * 30,
+          vx: (Math.random() - 0.5) * 92,
+          vy: -(510 + Math.random() * 165 + levelRef.current * 12),
+          r: 32 + Math.random() * 5,
+          value: 0,
+          valueStr: shuffled[i],
+          kind,
+          color: pal.color,
+          glow: pal.glow,
+          label: pal.label,
+          rot: Math.random() * Math.PI * 2,
+          spin: (Math.random() < 0.5 ? -1 : 1) * (1.6 + Math.random() * 3.3),
+          sliced: false,
+        });
+      }
+      fruitsRef.current.push(...fruits);
+      rerender();
+      return;
+    }
+
     const q = makeQuestion();
     qRef.current = q;
     const used = new Set<number>([q.ans]);
@@ -258,6 +328,8 @@ const FruitNinjaMathPage = () => {
     particlesRef.current = [];
     floatsRef.current = [];
     trailRef.current = [];
+    specialTriggered.current = [false, false];
+    pendingSpecialQ.current = specialQPool[0];
     qRef.current = makeQuestion();
     spawnWave();
     rerender();
@@ -397,7 +469,9 @@ const FruitNinjaMathPage = () => {
       ctx.ellipse(-9, -11, 7, 4, -0.7, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
-      drawText(String(fruit.value), fruit.x, fruit.y + 1, fruit.value > 99 ? 13 : 17, fruit.kind === "correct" ? "#0f172a" : "#ffffff");
+      const displayLabel = fruit.valueStr ?? String(fruit.value);
+      const fontSize = displayLabel.length > 3 ? 13 : (fruit.value > 99 ? 13 : 17);
+      drawText(displayLabel, fruit.x, fruit.y + 1, fontSize, fruit.kind === "correct" ? "#0f172a" : "#ffffff");
       drawText(fruit.label, fruit.x - 24, fruit.y - 24, 17, "#ffffff");
     };
 
@@ -416,6 +490,14 @@ const FruitNinjaMathPage = () => {
           phaseRef.current = "over";
           rerender();
         }
+
+        if (!specialTriggered.current[1] && timerRef.current <= 30) {
+          specialTriggered.current[1] = true;
+          pendingSpecialQ.current = specialQPool[1];
+          fruitsRef.current = [];
+          spawnAccRef.current = 999;
+        }
+
         const interval = Math.max(1.05, 2.25 - levelRef.current * 0.09);
         if (spawnAccRef.current >= interval) {
           spawnAccRef.current = 0;
@@ -486,7 +568,19 @@ const FruitNinjaMathPage = () => {
       ctx.lineTo(CW, 146);
       ctx.stroke();
       drawText("NINJA BUAH MATH", CW / 2, 27, 18, "#f9a8d4");
-      drawText(`Soal: ${qRef.current.q}`, CW / 2, 70, 28, "#ffffff");
+
+      const currentQ = qRef.current;
+      if (currentQ.lines && currentQ.lines.length > 0) {
+        const lineCount = currentQ.lines.length;
+        const startY = lineCount === 1 ? 70 : 55;
+        const lineGap = 26;
+        currentQ.lines.forEach((line, i) => {
+          drawText(line, CW / 2, startY + i * lineGap, 13, "#fde047");
+        });
+      } else {
+        drawText(`Soal: ${currentQ.q}`, CW / 2, 70, 28, "#ffffff");
+      }
+
       drawText(`Skor ${scoreRef.current}`, 27, 118, 13, "#bbf7d0", "left");
       drawText(`Nyawa ${"❤".repeat(livesRef.current)}`, CW / 2, 118, 13, "#fecaca");
       drawText(`Waktu ${Math.ceil(timerRef.current)}`, CW - 27, 118, 13, "#fde047", "right");
