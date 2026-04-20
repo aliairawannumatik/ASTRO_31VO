@@ -31,7 +31,7 @@ import { playPopSound } from "@/hooks/useAudio";
 const games = [
   {
     label: "Turtle Run Math",
-    emoji: "🦕",
+    emoji: "🐢",
     path: "/math-game-arena/umum/dino-run",
     desc: "Loncat dan tiarap hindari rintangan! Jawab soal untuk bonus skor!",
     icon: <Zap className="w-7 h-7 text-green-400 shrink-0 group-hover:scale-110 transition-transform" />,
