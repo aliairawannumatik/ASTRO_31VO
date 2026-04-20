@@ -334,7 +334,7 @@ const LKPDPage = () => {
                     )}
                   </div>
                 </div>
-                <DiscussionBox steps={item.discussion} />
+                {checked && <DiscussionBox steps={item.discussion} />}
               </label>
             ))}
           </div>
@@ -391,7 +391,7 @@ const LKPDPage = () => {
                   )}
                 </div>
                 {hasAnswer(answers[item.id]) && !results[item.id] && <p className="mt-2 text-xs text-yellow-200/90 font-body">Petunjuk: {item.hint}</p>}
-                <DiscussionBox steps={item.discussion} />
+                {checked && <DiscussionBox steps={item.discussion} />}
               </div>
             ))}
           </div>
