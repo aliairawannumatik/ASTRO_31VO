@@ -26,44 +26,7 @@ interface Obstacle {
   y: number;
   w: number;
   h: number;
-  hasQuestion: boolean;
-  questionIdx: number;
 }
-
-// ── Math questions ──────────────────────────────────────────────────────────
-interface MathQuestion {
-  q: string;
-  opts: string[];
-  ans: number;
-}
-
-const QUESTIONS: MathQuestion[] = [
-  {
-    q: "Diketahui 6 apel dan 4 jeruk.\nPerbandingan apel terhadap jeruk ditulis ...",
-    opts: ["6 : 4", "4 : 6", "2 : 3", "1 : 2"],
-    ans: 0,
-  },
-  {
-    q: "Bilangan terbesar yang dapat\nmembagi 6 dan 4 adalah ...",
-    opts: ["1", "2", "3", "4"],
-    ans: 1,
-  },
-  {
-    q: "Bentuk paling sederhana\ndari 6 : 4 adalah ...",
-    opts: ["2 : 3", "3 : 2", "6 : 4", "1 : 2"],
-    ans: 1,
-  },
-  {
-    q: "Sebelum membandingkan 45 menit\ndengan 1 jam, 1 jam harus diubah\nmenjadi ... menit",
-    opts: ["30 menit", "45 menit", "60 menit", "90 menit"],
-    ans: 2,
-  },
-  {
-    q: "Perbandingan 45 menit\nterhadap 60 menit adalah ...",
-    opts: ["1 : 2", "2 : 3", "3 : 4", "4 : 5"],
-    ans: 2,
-  },
-];
 
 // ── Colour palette ──────────────────────────────────────────────────────────
 const PALETTE = {
@@ -79,7 +42,7 @@ const PALETTE = {
 };
 
 // ── State machine ────────────────────────────────────────────────────────────
-type Phase = "idle" | "running" | "question" | "stunned" | "dead";
+type Phase = "idle" | "running" | "stunned" | "dead";
 
 // ── Component ────────────────────────────────────────────────────────────────
 const DinoRunGamePage = () => {
@@ -101,9 +64,7 @@ const DinoRunGamePage = () => {
   const livesRef = useRef(3);
   const obstaclesRef = useRef<Obstacle[]>([]);
   const nextObstRef = useRef(3500);
-  const questionIdxRef = useRef(-1);
   const stunTimerRef = useRef(0);
-  const usedQRef = useRef<Set<number>>(new Set());
   const bgOffRef = useRef(0);
   const cloudXRef = useRef([80, 260, 440]);
   const cloudYRef = useRef([30, 55, 20]);
@@ -112,14 +73,12 @@ const DinoRunGamePage = () => {
   const highScoreRef = useRef(0);
   const timeRef = useRef(0);
   const distScoreRef = useRef(0);
-  const nextQMilestoneRef = useRef(1);
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
   const [lives, setLives] = useState(3);
   const [highScore, setHighScore] = useState(0);
-  const [activeQ, setActiveQ] = useState<MathQuestion | null>(null);
   const [feedback, setFeedback] = useState<{ txt: string; good: boolean } | null>(null);
   const feedbackRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -160,7 +119,7 @@ const DinoRunGamePage = () => {
     // Hangs from y=0 down to y=150; ducking player (hitbox starts at y=160) fits under it
     if (kind === "lowbar") { w = 26; h = 150; y = 0; }
 
-    obstaclesRef.current.push({ kind, x: CW + 20, y, w, h, hasQuestion: false, questionIdx: -1 });
+    obstaclesRef.current.push({ kind, x: CW + 20, y, w, h });
     // Spawn gap per tier (milliseconds): min + random * range
     // Tier 0: 3200–5500 ms  |  Tier 1: 1600–3000 ms  |  Tier 2: 1200–2400 ms
     // Tier 3:  900–1800 ms  |  Tier 4+:  700–1300 ms
@@ -180,20 +139,16 @@ const DinoRunGamePage = () => {
     scoreRef.current = 0;
     distScoreRef.current = 0;
     timeRef.current = 0;
-    nextQMilestoneRef.current = 1;
     livesRef.current = 3;
     obstaclesRef.current = [];
     nextObstRef.current = 3500;
-    questionIdxRef.current = -1;
     stunTimerRef.current = 0;
-    usedQRef.current = new Set();
     bgOffRef.current = 0;
     jumpPressedRef.current = false;
     duckPressedRef.current = false;
     setScore(0);
     setTime(0);
     setLives(3);
-    setActiveQ(null);
     setFeedback(null);
   }, []);
 
@@ -276,23 +231,15 @@ const DinoRunGamePage = () => {
           hitbox.y + hitbox.h > oy;
 
         if (collide) {
-          if (ob.hasQuestion && ob.questionIdx >= 0) {
-            ob.hasQuestion = false;
-            questionIdxRef.current = ob.questionIdx;
-            phaseRef.current = "question";
-            setPhase("question");
-            setActiveQ(QUESTIONS[ob.questionIdx]);
-          } else {
-            livesRef.current = Math.max(0, livesRef.current - 1);
-            setLives(livesRef.current);
-            stunTimerRef.current = 1.2;
-            phaseRef.current = "stunned";
-            setPhase("stunned");
-            showFeedback("💥 Kena! Hati-hati!", false);
-            if (livesRef.current <= 0) {
-              phaseRef.current = "dead";
-              setPhase("dead");
-            }
+          livesRef.current = Math.max(0, livesRef.current - 1);
+          setLives(livesRef.current);
+          stunTimerRef.current = 1.2;
+          phaseRef.current = "stunned";
+          setPhase("stunned");
+          showFeedback("💥 Kena! Hati-hati!", false);
+          if (livesRef.current <= 0) {
+            phaseRef.current = "dead";
+            setPhase("dead");
           }
         }
       }
@@ -330,19 +277,6 @@ const DinoRunGamePage = () => {
         const ramp = [0.020, 0.035, 0.050, 0.065, 0.080][spTier];
         const cap  = [360,   430,   490,   540,   590  ][spTier];
         speedRef.current = Math.min(190 + distRef.current * ramp, cap);
-      }
-
-      // Milestone question trigger — at distScore 1000, 2000, 3000, 4000, 5000
-      const milestoneIdx = nextQMilestoneRef.current - 1;
-      if (
-        nextQMilestoneRef.current <= QUESTIONS.length &&
-        distScoreRef.current >= nextQMilestoneRef.current * 1000
-      ) {
-        nextQMilestoneRef.current += 1;
-        questionIdxRef.current = milestoneIdx;
-        phaseRef.current = "question";
-        setPhase("question");
-        setActiveQ(QUESTIONS[milestoneIdx]);
       }
 
       if (Math.floor(timeRef.current * 2) % 2 === 0) setTime(Math.floor(timeRef.current));
@@ -421,28 +355,6 @@ const DinoRunGamePage = () => {
     rafRef.current = requestAnimationFrame(loop);
   }, [resetGame, loop]);
 
-  // ── Answer question ─────────────────────────────────────────────────────
-  const handleAnswer = useCallback((idx: number) => {
-    const q = QUESTIONS[questionIdxRef.current];
-    if (!q) return;
-    playPopSound();
-    if (idx === q.ans) {
-      scoreRef.current += 20;
-      setScore(scoreRef.current);
-      if (scoreRef.current > highScoreRef.current) {
-        highScoreRef.current = scoreRef.current;
-        setHighScore(highScoreRef.current);
-      }
-      showFeedback("✅ Jawaban Anda Benar! +20", true);
-    } else {
-      showFeedback(`❌ Jawaban Anda Salah! Jawaban: ${q.opts[q.ans]}`, false);
-    }
-    questionIdxRef.current = -1;
-    phaseRef.current = "running";
-    setPhase("running");
-    setActiveQ(null);
-  }, [showFeedback]);
-
   // ── Input handling ──────────────────────────────────────────────────────
   useEffect(() => {
     const onDown = (e: KeyboardEvent) => {
@@ -505,7 +417,7 @@ const DinoRunGamePage = () => {
             ← Kembali
           </button>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan text-center flex-1">
-            🦖 LARI MATEMATIKA
+            🐢 Turtle Run Math
           </h1>
         </div>
 
@@ -541,12 +453,12 @@ const DinoRunGamePage = () => {
           {phase === "idle" && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/65 rounded-xl">
               <div className="text-center px-4">
-                <div className="text-5xl mb-2">🦖</div>
-                <h2 className="font-display text-2xl font-bold text-accent mb-2">LARI MATEMATIKA</h2>
+                <div className="text-5xl mb-2">🐢</div>
+                <h2 className="font-display text-2xl font-bold text-accent mb-2">TURTLE RUN MATH</h2>
                 <p className="text-white/65 text-xs mb-4 leading-relaxed">
                   <span className="text-cyan-300 font-bold">SPASI / ↑</span> Loncat &nbsp;·&nbsp; <span className="text-cyan-300 font-bold">↓</span> Tiarap<br />
-                  Soal muncul setiap kelipatan 1000 jarak! 📝<br />
-                  Jawaban benar = <span className="text-yellow-300 font-bold">+20 skor</span> · Kena rintangan = nyawa berkurang 💥
+                  Hindari semua rintangan — kena = kehilangan nyawa 💥<br />
+                  3 nyawa habis = permainan berakhir! &nbsp;·&nbsp; <span className="text-yellow-300 font-bold">Soal bonus tiap 40 detik!</span>
                 </p>
                 <button onClick={startGame} className="bg-accent text-black font-bold px-8 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
                   ▶ MULAI
@@ -570,25 +482,6 @@ const DinoRunGamePage = () => {
             </div>
           )}
 
-          {phase === "question" && activeQ && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/75 rounded-xl">
-              <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-4 mx-3 shadow-2xl w-full max-w-xs">
-                <div className="text-xs text-yellow-400 font-display mb-1 text-center tracking-wider">⚡ SOAL MATEMATIKA</div>
-                <p className="text-white font-bold text-center text-sm mb-3 leading-snug whitespace-pre-line">{activeQ.q}</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {activeQ.opts.map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleAnswer(i)}
-                      className="bg-primary/20 hover:bg-accent/30 border border-border hover:border-accent text-white font-bold py-3 px-2 rounded-xl text-sm transition-all duration-150 cursor-pointer active:scale-95"
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
         <div className="flex gap-3 mt-3">
@@ -609,7 +502,7 @@ const DinoRunGamePage = () => {
         </div>
 
         <div className="mt-2 text-center text-white/40 text-xs font-body">
-          Keyboard: SPASI / ↑ loncat &nbsp;·&nbsp; ↓ tiarap &nbsp;·&nbsp; Soal muncul setiap 1000 jarak 📝
+          Keyboard: SPASI / ↑ loncat &nbsp;·&nbsp; ↓ tiarap &nbsp;·&nbsp; Soal bonus otomatis tiap 40 detik ❓
         </div>
       </div>
     </div>
@@ -804,16 +697,6 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     ctx.fillRect(bx - 2, by + bh - 18, bw + 4, 4);
   }
 
-  // Question badge
-  if (ob.hasQuestion) {
-    ctx.fillStyle = PALETTE.question_badge;
-    ctx.font = "bold 14px monospace";
-    ctx.textAlign = "center";
-    // For lowbar, show badge near its bottom edge; for others, above
-    const badgeY = ob.kind === "lowbar" ? ob.y + ob.h - 22 : ob.y - 4;
-    ctx.fillText("⚡?", ob.x + ob.w / 2, badgeY);
-    ctx.textAlign = "left";
-  }
 }
 
 // ── Helper: draw T-Rex dino ────────────────────────────────────────────────
