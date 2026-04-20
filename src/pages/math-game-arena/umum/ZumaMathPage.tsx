@@ -696,7 +696,7 @@ const ZumaMathPage = () => {
               {score >= best && score > 0 && <p className="text-green-400 text-sm font-body">🏆 Rekor baru!</p>}
               <p className="text-white/50 text-xs font-body">Rekor: {best}</p>
               <button onClick={startGame} className="mt-2 px-8 py-3 bg-accent text-black font-display font-bold rounded-full hover:scale-105 transition-transform">MAIN LAGI</button>
-              <button onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }} className="text-white/40 text-xs hover:text-white font-body cursor-pointer">Kembali ke Menu</button>
+              <button onClick={() => { playPopSound(); navigate(-1); }} className="text-white/40 text-xs hover:text-white font-body cursor-pointer">Kembali ke Menu</button>
             </div>
           )}
 
@@ -709,7 +709,7 @@ const ZumaMathPage = () => {
               <p className="text-white font-body">Skor: <span className="text-yellow-400 font-bold">{score}</span></p>
               {score >= best && <p className="text-green-400 text-sm font-body">🏆 Rekor baru!</p>}
               <button onClick={startGame} className="mt-2 px-8 py-3 bg-accent text-black font-display font-bold rounded-full hover:scale-105 transition-transform">MAIN LAGI</button>
-              <button onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }} className="text-white/40 text-xs hover:text-white font-body cursor-pointer">Kembali ke Menu</button>
+              <button onClick={() => { playPopSound(); navigate(-1); }} className="text-white/40 text-xs hover:text-white font-body cursor-pointer">Kembali ke Menu</button>
             </div>
           )}
         </div>

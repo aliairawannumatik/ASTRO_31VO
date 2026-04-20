@@ -499,7 +499,7 @@ const DinoRunGamePage = () => {
       <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
         <div className="flex items-center gap-3 mb-3 w-full">
           <button
-            onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }}
+            onClick={() => { playPopSound(); navigate(-1); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors font-body cursor-pointer"
           >
             ← Kembali

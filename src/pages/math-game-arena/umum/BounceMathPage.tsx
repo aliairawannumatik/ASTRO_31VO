@@ -527,7 +527,7 @@ const BounceMathPage = () => {
       <div className="relative z-10 flex flex-col items-center gap-4 py-6">
         <div className="flex items-center gap-3 mb-1">
           <button
-            onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }}
+            onClick={() => { playPopSound(); navigate(-1); }}
             className="text-xs text-white/50 hover:text-white transition-colors font-body cursor-pointer"
           >
             ← Kembali

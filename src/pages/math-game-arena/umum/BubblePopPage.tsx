@@ -646,7 +646,7 @@ const BubblePopPage = () => {
         {/* header */}
         <div className="flex items-center justify-between w-full mb-3 px-1">
           <button
-            onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }}
+            onClick={() => { playPopSound(); navigate(-1); }}
             className="text-xs text-white/50 hover:text-white transition-colors font-mono cursor-pointer"
           >
             ← Kembali

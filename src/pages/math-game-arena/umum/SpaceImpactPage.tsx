@@ -843,7 +843,7 @@ const SpaceImpactPage = () => {
               <button onClick={startGame} className="mt-2 px-8 py-3 bg-accent text-black font-display font-bold rounded-full hover:scale-105 transition-transform">
                 MAIN LAGI
               </button>
-              <button onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
+              <button onClick={() => { playPopSound(); navigate(-1); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
                 Kembali ke Menu
               </button>
             </div>
@@ -860,7 +860,7 @@ const SpaceImpactPage = () => {
               <button onClick={startGame} className="mt-2 px-8 py-3 bg-accent text-black font-display font-bold rounded-full hover:scale-105 transition-transform">
                 MAIN LAGI
               </button>
-              <button onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
+              <button onClick={() => { playPopSound(); navigate(-1); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
                 Kembali ke Menu
               </button>
             </div>

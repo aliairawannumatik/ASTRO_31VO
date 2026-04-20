@@ -554,7 +554,7 @@ const TreasureIslandMathPage = () => {
             Mulai / Ulangi
           </button>
           <button
-            onClick={() => { playPopSound(); navigate("/math-game-arena/umum"); }}
+            onClick={() => { playPopSound(); navigate(-1); }}
             className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors"
           >
             Kembali ke Game Umum

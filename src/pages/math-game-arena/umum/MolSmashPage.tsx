@@ -804,7 +804,7 @@ const MolSmashPage = () => {
           }}
         />
         <button
-          onClick={() => navigate("/math-game-arena/umum")}
+          onClick={() => navigate(-1)}
           className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
         >
           ← Kembali ke Game Arena
