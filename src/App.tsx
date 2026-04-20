@@ -18,6 +18,7 @@ import LKPDPerbandinganPage from "./pages/LKPDPerbandinganPage";
 import ATPPage from "./pages/ATPPage";
 import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
+import QuizGameOverlay from "./components/QuizGameOverlay";
 import UlanganHarianPage from "./pages/UlanganHarianPage";
 import PesanKesanPage from "./pages/PesanKesanPage";
 import PetunjukPage from "./pages/PetunjukPage";
@@ -733,6 +734,7 @@ const AppInner = () => {
   return (
     <>
       <ScrollToTop />
+      <QuizGameOverlay />
       <Routes>
       <Route path="/" element={<WelcomePage />} />
       <Route path="/menu" element={<MenuPage />} />
