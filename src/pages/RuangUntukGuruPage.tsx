@@ -39,10 +39,10 @@ const guruMenuItems = [
     desc: "Form masukan penggunaan aplikasi",
   },
   {
-    label: "GAME MATH",
+    label: "NUMATIK GAME",
     icon: Gamepad2,
-    path: "/math-game-arena/umum",
-    desc: "Game seru untuk semua tingkatan",
+    path: "/ruang-untuk-guru/numatik-game",
+    desc: "Koleksi lengkap game matematika interaktif NUMATIK",
   },
 ];
 
