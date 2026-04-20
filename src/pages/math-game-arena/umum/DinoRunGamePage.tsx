@@ -107,6 +107,7 @@ const DinoRunGamePage = () => {
   const questionTimerRef = useRef(0);
   const usedQRef = useRef<Set<number>>(new Set());
   const activeQRef = useRef<MQ | null>(null);
+  const postQuestionGraceRef = useRef(0);
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
@@ -180,6 +181,7 @@ const DinoRunGamePage = () => {
     questionTimerRef.current = 0;
     usedQRef.current = new Set();
     activeQRef.current = null;
+    postQuestionGraceRef.current = 0;
     setScore(0);
     setTime(0);
     setLives(3);
@@ -202,6 +204,13 @@ const DinoRunGamePage = () => {
     activeQRef.current = null;
     setActiveQ(null);
     questionTimerRef.current = 0;
+    // Push any obstacle that's dangerously close to the player far left (past the player)
+    obstaclesRef.current = obstaclesRef.current.map(ob => {
+      const tooClose = ob.x < P_X + P_W + 60 && ob.x + ob.w > P_X - 20;
+      return tooClose ? { ...ob, x: P_X - ob.w - 30 } : ob;
+    });
+    // Grace period: collision disabled for 1.5s after answering
+    postQuestionGraceRef.current = 1.5;
     phaseRef.current = "running";
     setPhase("running");
   }, [showFeedback]);
@@ -282,7 +291,7 @@ const DinoRunGamePage = () => {
           hitbox.y < oy + oh &&
           hitbox.y + hitbox.h > oy;
 
-        if (collide) {
+        if (collide && postQuestionGraceRef.current <= 0) {
           livesRef.current = Math.max(0, livesRef.current - 1);
           setLives(livesRef.current);
           stunTimerRef.current = 1.2;
@@ -296,6 +305,9 @@ const DinoRunGamePage = () => {
         }
       }
     });
+
+    // ── Grace period countdown ──────────────────────────────────────
+    if (postQuestionGraceRef.current > 0) postQuestionGraceRef.current -= dt;
 
     // ── Update player ───────────────────────────────────────────────
     // Player physics also FREEZE during "question"

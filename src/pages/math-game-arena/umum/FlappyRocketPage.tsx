@@ -94,6 +94,7 @@ const FlappyRocketPage = () => {
   const activeQRef = useRef<MQ | null>(null);
   const shakeDurRef = useRef(0);
   const shakeMagRef = useRef(0);
+  const postQuestionGraceRef = useRef(0);
 
   // React state (UI overlay only)
   const [phase, setPhase] = useState<Phase>("idle");
@@ -185,6 +186,7 @@ const FlappyRocketPage = () => {
     shakeDurRef.current = 0;
     shakeMagRef.current = 0;
     activeQRef.current = null;
+    postQuestionGraceRef.current = 0;
     flapRef.current = false;
     setScore(0);
     setActiveQ(null);
@@ -451,7 +453,7 @@ const FlappyRocketPage = () => {
       }
 
       // collision
-      if (ph === "playing") {
+      if (ph === "playing" && postQuestionGraceRef.current <= 0) {
         const rx = ROCKET_X, ry = ryRef.current;
         const topOk = ry - ROCKET_R > p.gapY;
         const botOk = ry + ROCKET_R < p.gapY + PIPE_GAP;
@@ -493,6 +495,9 @@ const FlappyRocketPage = () => {
     ctx.fillStyle = "#5555ff";
     ctx.fillRect(0, CH - 8, CW, 2);
     ctx.shadowBlur = 0;
+
+    // ── Grace period countdown ─────────────────────────────────────────
+    if (postQuestionGraceRef.current > 0) postQuestionGraceRef.current -= dt;
 
     // ── Rocket physics ─────────────────────────────────────────────────
     if (ph === "playing") {
@@ -655,6 +660,8 @@ const FlappyRocketPage = () => {
     }
     activeQRef.current = null;
     setActiveQ(null);
+    // Grace period: collision disabled for 1.5s so rocket isn't immediately hit by frozen pipes
+    postQuestionGraceRef.current = 1.5;
     phaseRef.current = "playing";
     setPhase("playing");
   }, [spawnParticles, showFeedback]);

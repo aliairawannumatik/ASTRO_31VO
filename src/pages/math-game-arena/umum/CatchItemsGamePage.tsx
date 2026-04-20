@@ -113,6 +113,7 @@ const CatchItemsGamePage = () => {
   const missFlashRef = useRef(0);
   const particlesRef = useRef<Array<{ x: number; y: number; vx: number; vy: number; alpha: number; color: string; r: number }>>([]);
   const questionPendingRef = useRef(false);
+  const postQuestionGraceRef = useRef(0);
 
   // React state (UI only)
   const [phase, setPhase] = useState<Phase>("idle");
@@ -171,6 +172,7 @@ const CatchItemsGamePage = () => {
     catchFlashRef.current = 0;
     missFlashRef.current = 0;
     questionPendingRef.current = false;
+    postQuestionGraceRef.current = 0;
     keysRef.current = {};
     touchXRef.current = null;
     setScore(0);
@@ -346,6 +348,9 @@ const CatchItemsGamePage = () => {
     }
 
     // ── Update items ─────────────────────────────────────────────
+    // Grace period countdown after answering a question
+    if (postQuestionGraceRef.current > 0) postQuestionGraceRef.current -= dt;
+
     // During "question" phase the game is PAUSED — items freeze in place,
     // no collision / miss logic runs so player cannot lose lives while answering.
     if (ph === "playing") {
@@ -368,7 +373,7 @@ const CatchItemsGamePage = () => {
           item.caught = true;
           item.catchAnim = 1;
           spawnParticles(item.x, item.y, item.color, 10);
-          if (item.kind === "bomb") {
+          if (item.kind === "bomb" && postQuestionGraceRef.current <= 0) {
             livesRef.current = Math.max(0, livesRef.current - 1);
             setLives(livesRef.current);
             shakeDurRef.current = 0.4;
@@ -379,6 +384,8 @@ const CatchItemsGamePage = () => {
               setPhase("dead");
               if (scoreRef.current > bestRef.current) { bestRef.current = scoreRef.current; setBest(bestRef.current); }
             }
+          } else if (item.kind === "bomb") {
+            // grace period active — bomb caught but no damage
           } else {
             const pts = item.points * multiplierRef.current;
             scoreRef.current += pts;
@@ -405,7 +412,7 @@ const CatchItemsGamePage = () => {
 
         // miss check
         if (item.y - ITEM_R > CH) {
-          if (item.kind !== "bomb") {
+          if (item.kind !== "bomb" && postQuestionGraceRef.current <= 0) {
             item.missed = true;
             livesRef.current = Math.max(0, livesRef.current - 1);
             setLives(livesRef.current);
@@ -418,7 +425,7 @@ const CatchItemsGamePage = () => {
               if (scoreRef.current > bestRef.current) { bestRef.current = scoreRef.current; setBest(bestRef.current); }
             }
           } else {
-            item.missed = true; // bomb fell off safely
+            item.missed = true; // bomb fell off safely, or grace period active
           }
         }
       });
@@ -584,6 +591,8 @@ const CatchItemsGamePage = () => {
       missFlashRef.current = 0.7;
     }
     setActiveQ(null);
+    // Grace period: bomb/miss damage disabled for 1s so items near basket don't cause instant loss
+    postQuestionGraceRef.current = 1.0;
     phaseRef.current = "playing";
     setPhase("playing");
   }, [activeQ, spawnParticles, showFeedback]);
