@@ -55,48 +55,6 @@ const guidedItems = [
     answers: ["3:2", "3/2"],
     discussion: ["Rasio awal adalah 6 : 4.", "Bagi kedua bilangan dengan 2: 6 ÷ 2 = 3 dan 4 ÷ 2 = 2.", "Jadi, bentuk sederhana dari 6 : 4 adalah 3 : 2."],
   },
-  {
-    id: "b1",
-    label: "12 buku untuk 3 siswa berarti setiap 1 siswa mendapat",
-    suffix: "buku",
-    answers: ["4"],
-    discussion: ["Untuk mencari banyak buku tiap 1 siswa, jumlah buku dibagi jumlah siswa.", "12 ÷ 3 = 4.", "Jadi, setiap 1 siswa mendapat 4 buku."],
-  },
-  {
-    id: "b2",
-    label: "Satuan pembanding dari 12 buku : 3 siswa adalah",
-    suffix: "",
-    answers: ["4buku/siswa", "4 buku/siswa", "4buku per siswa", "4 buku per siswa"],
-    discussion: ["Satuan pembanding menyatakan nilai untuk setiap 1 satuan.", "12 buku untuk 3 siswa berarti 12 ÷ 3 = 4 buku untuk setiap siswa.", "Jadi, satuan pembandingnya adalah 4 buku/siswa."],
-  },
-  {
-    id: "b3",
-    label: "Jarak 150 km ditempuh dalam 3 jam. Kecepatan tiap 1 jam adalah",
-    suffix: "km/jam",
-    answers: ["50"],
-    discussion: ["Kecepatan tiap 1 jam diperoleh dari jarak dibagi waktu.", "150 km ÷ 3 jam = 50 km/jam.", "Jadi, kecepatannya adalah 50 km/jam."],
-  },
-  {
-    id: "c1",
-    label: "Rasio 8 laki-laki terhadap 12 perempuan adalah",
-    suffix: "",
-    answers: ["8:12", "8/12"],
-    discussion: ["Rasio laki-laki terhadap perempuan berarti banyak laki-laki ditulis lebih dulu.", "Banyak laki-laki = 8 dan banyak perempuan = 12.", "Jadi, rasionya adalah 8 : 12."],
-  },
-  {
-    id: "c2",
-    label: "Bentuk paling sederhana dari 8 : 12 adalah",
-    suffix: "",
-    answers: ["2:3", "2/3"],
-    discussion: ["Cari bilangan terbesar yang membagi 8 dan 12, yaitu 4.", "8 ÷ 4 = 2 dan 12 ÷ 4 = 3.", "Jadi, bentuk paling sederhana dari 8 : 12 adalah 2 : 3."],
-  },
-  {
-    id: "c3",
-    label: "Jika rasio merah : biru = 2 : 3 dan jumlah bagian 5, maka bagian merah adalah",
-    suffix: "bagian",
-    answers: ["2"],
-    discussion: ["Pada rasio merah : biru = 2 : 3, angka 2 menunjukkan bagian merah dan angka 3 menunjukkan bagian biru.", "Jumlah bagian adalah 2 + 3 = 5.", "Karena bagian merah diwakili angka 2, maka bagian merah adalah 2 bagian."],
-  },
 ];
 
 const practiceItems = [
