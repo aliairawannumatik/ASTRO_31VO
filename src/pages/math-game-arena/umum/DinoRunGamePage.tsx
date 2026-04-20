@@ -19,7 +19,7 @@ const GRAVITY = 1600;
 const JUMP_VY = -540;
 
 // ── Obstacle constants ──────────────────────────────────────────────────────
-type ObstacleKind = "cactus" | "rock";
+type ObstacleKind = "cactus" | "rock" | "bird";
 interface Obstacle {
   kind: ObstacleKind;
   x: number;
@@ -95,7 +95,7 @@ const DinoRunGamePage = () => {
   const scoreRef = useRef(0);
   const livesRef = useRef(3);
   const obstaclesRef = useRef<Obstacle[]>([]);
-  const nextObstRef = useRef(1800);
+  const nextObstRef = useRef(3500);
   const questionIdxRef = useRef(-1);
   const stunTimerRef = useRef(0);
   const usedQRef = useRef<Set<number>>(new Set());
@@ -122,13 +122,15 @@ const DinoRunGamePage = () => {
 
   // ── Spawn obstacle ──────────────────────────────────────────────────────
   const spawnObstacle = useCallback(() => {
-    // Only cactus and rock — both are ground obstacles, easy to jump over
-    const kinds: ObstacleKind[] = ["cactus", "rock"];
-    const kind = kinds[Math.floor(Math.random() * kinds.length)];
+    // 30% chance bird, 40% cactus, 30% rock
+    const roll = Math.random();
+    const kind: ObstacleKind = roll < 0.3 ? "bird" : roll < 0.7 ? "cactus" : "rock";
 
-    // Smaller sizes so they're easier to clear
+    // Ground obstacles: small sizes, easy to jump over
     let w = 18, h = 36, y = GROUND_Y - 36;
     if (kind === "rock") { w = 24; h = 20; y = GROUND_Y - 20; }
+    // Bird: flies at mid-body height — duck to avoid
+    if (kind === "bird") { w = 38; h = 20; y = GROUND_Y - P_H_STAND + 6; }
 
     const avail = QUESTIONS.map((_, i) => i).filter(i => !usedQRef.current.has(i));
     const hasQ = Math.random() < 0.45 && avail.length > 0;
@@ -140,8 +142,8 @@ const DinoRunGamePage = () => {
     }
 
     obstaclesRef.current.push({ kind, x: CW + 20, y, w, h, hasQuestion: hasQ, questionIdx: qIdx });
-    // Larger, safer gap between obstacles
-    nextObstRef.current = 1600 + Math.random() * 900;
+    // Gap stored in milliseconds — 3.2 to 5.5 seconds between obstacles
+    nextObstRef.current = 3200 + Math.random() * 2300;
   }, []);
 
   // ── Reset / start ───────────────────────────────────────────────────────
@@ -155,7 +157,7 @@ const DinoRunGamePage = () => {
     scoreRef.current = 0;
     livesRef.current = 3;
     obstaclesRef.current = [];
-    nextObstRef.current = 1800;
+    nextObstRef.current = 3500;
     questionIdxRef.current = -1;
     stunTimerRef.current = 0;
     usedQRef.current = new Set();
@@ -221,7 +223,8 @@ const DinoRunGamePage = () => {
 
     // ── Update & draw obstacles ─────────────────────────────────────
     if (ph === "running") {
-      nextObstRef.current -= speedRef.current * dt * 1000 * dt;
+      // Decrement in real milliseconds for a predictable, generous gap
+      nextObstRef.current -= dt * 1000;
       if (nextObstRef.current <= 0) spawnObstacle();
     }
 
@@ -573,7 +576,7 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     for (let i = 0; i < 3; i++) {
       ctx.fillRect(ob.x + ob.w / 2 - 1, ob.y + i * 12, 2, 5);
     }
-  } else {
+  } else if (ob.kind === "rock") {
     // Rock — rounded with shading
     const cx = ob.x + ob.w / 2;
     const cy = ob.y + ob.h / 2;
@@ -596,6 +599,78 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
     ctx.moveTo(cx - 2, cy - 4); ctx.lineTo(cx + 4, cy + 2);
     ctx.moveTo(cx - 5, cy + 1); ctx.lineTo(cx, cy + 5);
     ctx.stroke();
+  } else {
+    // Bird — colourful flying bird with flapping wings
+    const cx = ob.x + ob.w / 2;
+    const cy = ob.y + ob.h / 2;
+    const wingFlap = Math.sin(Date.now() / 110) * 8;
+
+    // Body
+    ctx.fillStyle = "#E8622A";
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, ob.w / 2 - 4, ob.h / 2 - 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Belly
+    ctx.fillStyle = "#F4A460";
+    ctx.beginPath();
+    ctx.ellipse(cx + 4, cy + 2, ob.w / 5, ob.h / 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Upper wing (flapping up)
+    ctx.fillStyle = "#C0392B";
+    ctx.beginPath();
+    ctx.moveTo(cx - 4, cy - 2);
+    ctx.quadraticCurveTo(cx - ob.w / 2, cy - 6 - wingFlap, cx - ob.w / 2 + 4, cy - 12 - wingFlap);
+    ctx.quadraticCurveTo(cx, cy - 8 - wingFlap * 0.5, cx + 4, cy - 2);
+    ctx.closePath();
+    ctx.fill();
+    // Wing tip highlight
+    ctx.fillStyle = "#E74C3C";
+    ctx.beginPath();
+    ctx.moveTo(cx - 6, cy - 4);
+    ctx.quadraticCurveTo(cx - ob.w / 2 + 2, cy - 4 - wingFlap, cx - ob.w / 2 + 8, cy - 10 - wingFlap);
+    ctx.quadraticCurveTo(cx - 4, cy - 6 - wingFlap * 0.5, cx - 2, cy - 3);
+    ctx.closePath();
+    ctx.fill();
+
+    // Eye
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath(); ctx.arc(cx + ob.w / 2 - 8, cy - 2, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#1a1a2e";
+    ctx.beginPath(); ctx.arc(cx + ob.w / 2 - 7, cy - 2, 2.5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath(); ctx.arc(cx + ob.w / 2 - 8, cy - 3, 1, 0, Math.PI * 2); ctx.fill();
+
+    // Beak
+    ctx.fillStyle = "#FFD700";
+    ctx.beginPath();
+    ctx.moveTo(cx + ob.w / 2 - 5, cy - 2);
+    ctx.lineTo(cx + ob.w / 2 + 6, cy);
+    ctx.lineTo(cx + ob.w / 2 - 5, cy + 3);
+    ctx.closePath();
+    ctx.fill();
+
+    // Tail feathers
+    ctx.fillStyle = "#C0392B";
+    ctx.beginPath();
+    ctx.moveTo(cx - ob.w / 2 + 3, cy - 1);
+    ctx.lineTo(cx - ob.w / 2 - 6, cy - 5);
+    ctx.lineTo(cx - ob.w / 2 + 1, cy + 3);
+    ctx.lineTo(cx - ob.w / 2 - 4, cy + 6);
+    ctx.lineTo(cx - ob.w / 2 + 5, cy + 4);
+    ctx.closePath();
+    ctx.fill();
+
+    // "TIARAP!" label above bird so player knows to duck
+    ctx.fillStyle = "rgba(0,0,0,0.55)";
+    ctx.beginPath();
+    ctx.roundRect(ob.x + ob.w / 2 - 24, ob.y - 18, 48, 14, 4);
+    ctx.fill();
+    ctx.fillStyle = "#FFD700";
+    ctx.font = "bold 9px monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("↓ TIARAP!", ob.x + ob.w / 2, ob.y - 7);
+    ctx.textAlign = "left";
   }
 
   // Question badge
