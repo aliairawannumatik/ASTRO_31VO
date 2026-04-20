@@ -16,7 +16,7 @@ import LKPDMenuPage from "./pages/LKPDMenuPage";
 import { LKPDKelas7Page, LKPDKelas8Page, LKPDKelas9Page } from "./pages/LKPDKelasPage";
 import LKPDPerbandinganPage from "./pages/LKPDPerbandinganPage";
 import ATPPage from "./pages/ATPPage";
-import SMPN28BandungPage from "./pages/SMPN28BandungPage";
+import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import UlanganHarianPage from "./pages/UlanganHarianPage";
 import PesanKesanPage from "./pages/PesanKesanPage";
 import PetunjukPage from "./pages/PetunjukPage";
@@ -745,7 +745,7 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
       <Route path="/atp" element={<ATPPage />} />
-      <Route path="/smpn-28-bandung" element={<SMPN28BandungPage />} />
+      <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
       <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
       <Route path="/pesan-kesan" element={<PesanKesanPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />
