@@ -38,26 +38,31 @@ interface MathQuestion {
 }
 
 const QUESTIONS: MathQuestion[] = [
-  { q: "7 × 8 = ?", opts: ["54", "56", "58", "64"], ans: 1 },
-  { q: "√144 = ?", opts: ["10", "11", "12", "13"], ans: 2 },
-  { q: "15² = ?", opts: ["205", "215", "225", "235"], ans: 2 },
-  { q: "360 ÷ 12 = ?", opts: ["25", "28", "30", "32"], ans: 2 },
-  { q: "2/5 + 3/10 = ?", opts: ["5/15", "7/10", "1/2", "9/10"], ans: 1 },
-  { q: "(-6) × (-7) = ?", opts: ["-42", "-13", "13", "42"], ans: 3 },
-  { q: "3x = 21, x = ?", opts: ["5", "6", "7", "8"], ans: 2 },
-  { q: "40% dari 150 = ?", opts: ["50", "55", "60", "65"], ans: 2 },
-  { q: "FPB(18, 24) = ?", opts: ["4", "6", "8", "12"], ans: 1 },
-  { q: "KPK(4, 6) = ?", opts: ["8", "12", "16", "24"], ans: 1 },
-  { q: "5³ = ?", opts: ["75", "100", "125", "150"], ans: 2 },
-  { q: "Luas segitiga alas 10, tinggi 6 = ?", opts: ["30", "40", "50", "60"], ans: 0 },
-  { q: "Keliling lingkaran r=7, π=22/7 = ?", opts: ["38", "40", "44", "48"], ans: 2 },
-  { q: "0,6 × 0,4 = ?", opts: ["0,024", "0,24", "2,4", "24"], ans: 1 },
-  { q: "2⁸ = ?", opts: ["128", "256", "512", "1024"], ans: 1 },
-  { q: "Median: 3,5,7,9,11 = ?", opts: ["5", "6", "7", "8"], ans: 2 },
-  { q: "sin 30° = ?", opts: ["0", "1/2", "√2/2", "1"], ans: 1 },
-  { q: "Persentase 45 dari 180 = ?", opts: ["20%", "25%", "30%", "35%"], ans: 1 },
-  { q: "a²−b²= ? (a=7, b=5)", opts: ["16", "24", "45", "74"], ans: 1 },
-  { q: "Volume kubus sisi 5 = ?", opts: ["75", "100", "125", "150"], ans: 2 },
+  {
+    q: "Diketahui 6 apel dan 4 jeruk.\nPerbandingan apel terhadap jeruk ditulis ...",
+    opts: ["6 : 4", "4 : 6", "2 : 3", "1 : 2"],
+    ans: 0,
+  },
+  {
+    q: "Bilangan terbesar yang dapat\nmembagi 6 dan 4 adalah ...",
+    opts: ["1", "2", "3", "4"],
+    ans: 1,
+  },
+  {
+    q: "Bentuk paling sederhana\ndari 6 : 4 adalah ...",
+    opts: ["2 : 3", "3 : 2", "6 : 4", "1 : 2"],
+    ans: 1,
+  },
+  {
+    q: "Sebelum membandingkan 45 menit\ndengan 1 jam, 1 jam harus diubah\nmenjadi ... menit",
+    opts: ["30 menit", "45 menit", "60 menit", "90 menit"],
+    ans: 2,
+  },
+  {
+    q: "Perbandingan 45 menit\nterhadap 60 menit adalah ...",
+    opts: ["1 : 2", "2 : 3", "3 : 4", "4 : 5"],
+    ans: 2,
+  },
 ];
 
 // ── Colour palette ──────────────────────────────────────────────────────────
@@ -105,9 +110,13 @@ const DinoRunGamePage = () => {
   const jumpPressedRef = useRef(false);
   const duckPressedRef = useRef(false);
   const highScoreRef = useRef(0);
+  const timeRef = useRef(0);
+  const distScoreRef = useRef(0);
+  const nextQMilestoneRef = useRef(1);
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
+  const [time, setTime] = useState(0);
   const [lives, setLives] = useState(3);
   const [highScore, setHighScore] = useState(0);
   const [activeQ, setActiveQ] = useState<MathQuestion | null>(null);
@@ -117,11 +126,11 @@ const DinoRunGamePage = () => {
   const showFeedback = useCallback((txt: string, good: boolean) => {
     setFeedback({ txt, good });
     if (feedbackRef.current) clearTimeout(feedbackRef.current);
-    feedbackRef.current = setTimeout(() => setFeedback(null), 1400);
+    feedbackRef.current = setTimeout(() => setFeedback(null), 2200);
   }, []);
 
-  // ── Difficulty tier (increases every 1000 pts) ──────────────────────────
-  const getDiffTier = () => Math.min(Math.floor(scoreRef.current / 1000), 4);
+  // ── Difficulty tier — based on internal distance score (every 1000) ──────
+  const getDiffTier = () => Math.min(Math.floor(distScoreRef.current / 1000), 4);
 
   // ── Spawn obstacle ──────────────────────────────────────────────────────
   const spawnObstacle = useCallback(() => {
@@ -151,16 +160,7 @@ const DinoRunGamePage = () => {
     // Hangs from y=0 down to y=150; ducking player (hitbox starts at y=160) fits under it
     if (kind === "lowbar") { w = 26; h = 150; y = 0; }
 
-    const avail = QUESTIONS.map((_, i) => i).filter(i => !usedQRef.current.has(i));
-    const hasQ = Math.random() < 0.45 && avail.length > 0;
-    let qIdx = -1;
-    if (hasQ) {
-      qIdx = avail[Math.floor(Math.random() * avail.length)];
-      usedQRef.current.add(qIdx);
-      if (usedQRef.current.size >= QUESTIONS.length) usedQRef.current = new Set();
-    }
-
-    obstaclesRef.current.push({ kind, x: CW + 20, y, w, h, hasQuestion: hasQ, questionIdx: qIdx });
+    obstaclesRef.current.push({ kind, x: CW + 20, y, w, h, hasQuestion: false, questionIdx: -1 });
     // Spawn gap per tier (milliseconds): min + random * range
     // Tier 0: 3200–5500 ms  |  Tier 1: 1600–3000 ms  |  Tier 2: 1200–2400 ms
     // Tier 3:  900–1800 ms  |  Tier 4+:  700–1300 ms
@@ -178,6 +178,9 @@ const DinoRunGamePage = () => {
     speedRef.current = 190;
     distRef.current = 0;
     scoreRef.current = 0;
+    distScoreRef.current = 0;
+    timeRef.current = 0;
+    nextQMilestoneRef.current = 1;
     livesRef.current = 3;
     obstaclesRef.current = [];
     nextObstRef.current = 3500;
@@ -188,6 +191,7 @@ const DinoRunGamePage = () => {
     jumpPressedRef.current = false;
     duckPressedRef.current = false;
     setScore(0);
+    setTime(0);
     setLives(3);
     setActiveQ(null);
     setFeedback(null);
@@ -288,10 +292,6 @@ const DinoRunGamePage = () => {
             if (livesRef.current <= 0) {
               phaseRef.current = "dead";
               setPhase("dead");
-              if (scoreRef.current > highScoreRef.current) {
-                highScoreRef.current = scoreRef.current;
-                setHighScore(highScoreRef.current);
-              }
             }
           }
         }
@@ -321,18 +321,31 @@ const DinoRunGamePage = () => {
       }
 
       distRef.current += speedRef.current * dt;
-      scoreRef.current = Math.floor(distRef.current / 10);
-      // Speed ramp & cap scale with difficulty tier (every 1000 pts)
-      // Tier 0: ramp 0.020, cap 360  |  Tier 1: ramp 0.035, cap 430
-      // Tier 2: ramp 0.050, cap 490  |  Tier 3: ramp 0.065, cap 540
-      // Tier 4+: ramp 0.080, cap 590
+      timeRef.current += dt;
+      distScoreRef.current = Math.floor(distRef.current / 10);
+
+      // Speed ramp & cap scale with difficulty tier (every 1000 dist-pts)
       {
         const spTier = getDiffTier();
         const ramp = [0.020, 0.035, 0.050, 0.065, 0.080][spTier];
         const cap  = [360,   430,   490,   540,   590  ][spTier];
         speedRef.current = Math.min(190 + distRef.current * ramp, cap);
       }
-      if (Math.floor(distRef.current) % 60 === 0) setScore(scoreRef.current);
+
+      // Milestone question trigger — at distScore 1000, 2000, 3000, 4000, 5000
+      const milestoneIdx = nextQMilestoneRef.current - 1;
+      if (
+        nextQMilestoneRef.current <= QUESTIONS.length &&
+        distScoreRef.current >= nextQMilestoneRef.current * 1000
+      ) {
+        nextQMilestoneRef.current += 1;
+        questionIdxRef.current = milestoneIdx;
+        phaseRef.current = "question";
+        setPhase("question");
+        setActiveQ(QUESTIONS[milestoneIdx]);
+      }
+
+      if (Math.floor(timeRef.current * 2) % 2 === 0) setTime(Math.floor(timeRef.current));
     }
 
     if (ph === "stunned") {
@@ -347,13 +360,15 @@ const DinoRunGamePage = () => {
     drawDino(ctx, pyRef.current, isDuckRef.current, ph, ts);
 
     // ── HUD ─────────────────────────────────────────────────────────
+    const mm = String(Math.floor(timeRef.current / 60)).padStart(2, "0");
+    const ss = String(Math.floor(timeRef.current % 60)).padStart(2, "0");
     ctx.fillStyle = "rgba(0,0,0,0.45)";
     ctx.beginPath();
-    ctx.roundRect(8, 8, 140, 36, 8);
+    ctx.roundRect(8, 8, 150, 36, 8);
     ctx.fill();
-    ctx.fillStyle = "#FFD700";
+    ctx.fillStyle = "#00FFCC";
     ctx.font = "bold 13px monospace";
-    ctx.fillText(`SKOR: ${scoreRef.current}`, 18, 28);
+    ctx.fillText(`WAKTU: ${mm}:${ss}`, 18, 28);
     for (let i = 0; i < 3; i++) {
       ctx.fillStyle = i < livesRef.current ? "#FF4E4E" : "rgba(255,255,255,0.2)";
       ctx.font = "16px sans-serif";
@@ -412,23 +427,15 @@ const DinoRunGamePage = () => {
     if (!q) return;
     playPopSound();
     if (idx === q.ans) {
-      scoreRef.current += 200;
+      scoreRef.current += 20;
       setScore(scoreRef.current);
-      showFeedback("🌟 BENAR! +200 Skor!", true);
-    } else {
-      livesRef.current = Math.max(0, livesRef.current - 1);
-      setLives(livesRef.current);
-      showFeedback(`❌ Salah! Jawaban: ${q.opts[q.ans]}`, false);
-      if (livesRef.current <= 0) {
-        phaseRef.current = "dead";
-        setPhase("dead");
-        if (scoreRef.current > highScoreRef.current) {
-          highScoreRef.current = scoreRef.current;
-          setHighScore(highScoreRef.current);
-        }
-        setActiveQ(null);
-        return;
+      if (scoreRef.current > highScoreRef.current) {
+        highScoreRef.current = scoreRef.current;
+        setHighScore(highScoreRef.current);
       }
+      showFeedback("✅ Jawaban Anda Benar! +20", true);
+    } else {
+      showFeedback(`❌ Jawaban Anda Salah! Jawaban: ${q.opts[q.ans]}`, false);
     }
     questionIdxRef.current = -1;
     phaseRef.current = "running";
@@ -502,9 +509,10 @@ const DinoRunGamePage = () => {
           </h1>
         </div>
 
-        <div className="flex gap-6 mb-2 text-sm font-display">
-          <span className="text-yellow-400">SKOR: <span className="font-bold">{score}</span></span>
-          <span className="text-white/50">REKOR: <span className="text-accent font-bold">{highScore}</span></span>
+        <div className="flex gap-5 mb-2 text-sm font-display flex-wrap justify-center">
+          <span className="text-cyan-400">⏱ WAKTU: <span className="font-bold">{String(Math.floor(time / 60)).padStart(2,"0")}:{String(time % 60).padStart(2,"0")}</span></span>
+          <span className="text-yellow-400">⭐ SKOR: <span className="font-bold">{score}</span></span>
+          <span className="text-white/50">🏆 REKOR: <span className="text-accent font-bold">{highScore}</span></span>
           <span className="text-red-400">{"♥".repeat(lives)}{"🖤".repeat(Math.max(0, 3 - lives))}</span>
         </div>
 
@@ -537,8 +545,8 @@ const DinoRunGamePage = () => {
                 <h2 className="font-display text-2xl font-bold text-accent mb-2">LARI MATEMATIKA</h2>
                 <p className="text-white/65 text-xs mb-4 leading-relaxed">
                   <span className="text-cyan-300 font-bold">SPASI / ↑</span> Loncat &nbsp;·&nbsp; <span className="text-cyan-300 font-bold">↓</span> Tiarap<br />
-                  Jawab soal untuk bonus skor!<br />
-                  Kena rintangan = nyawa berkurang 💥
+                  Soal muncul setiap kelipatan 1000 jarak! 📝<br />
+                  Jawaban benar = <span className="text-yellow-300 font-bold">+20 skor</span> · Kena rintangan = nyawa berkurang 💥
                 </p>
                 <button onClick={startGame} className="bg-accent text-black font-bold px-8 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
                   ▶ MULAI
@@ -552,8 +560,9 @@ const DinoRunGamePage = () => {
               <div className="text-center px-4">
                 <div className="text-4xl mb-2">💀</div>
                 <h2 className="font-display text-xl font-bold text-red-400 mb-1">GAME OVER</h2>
-                <p className="text-white text-sm mb-1">Skor: <span className="text-yellow-400 font-bold text-xl">{score}</span></p>
-                <p className="text-white/50 text-xs mb-4">Rekor: {highScore}</p>
+                <p className="text-cyan-300 text-xs mb-1">⏱ Waktu: <span className="font-bold">{String(Math.floor(time / 60)).padStart(2,"0")}:{String(time % 60).padStart(2,"0")}</span></p>
+                <p className="text-white text-sm mb-1">⭐ Skor: <span className="text-yellow-400 font-bold text-xl">{score}</span></p>
+                <p className="text-white/50 text-xs mb-4">🏆 Rekor: {highScore}</p>
                 <button onClick={startGame} className="bg-accent text-black font-bold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-lg">
                   Main Lagi
                 </button>
@@ -565,7 +574,7 @@ const DinoRunGamePage = () => {
             <div className="absolute inset-0 flex items-center justify-center bg-black/75 rounded-xl">
               <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-4 mx-3 shadow-2xl w-full max-w-xs">
                 <div className="text-xs text-yellow-400 font-display mb-1 text-center tracking-wider">⚡ SOAL MATEMATIKA</div>
-                <p className="text-white font-bold text-center text-base mb-3 leading-snug">{activeQ.q}</p>
+                <p className="text-white font-bold text-center text-sm mb-3 leading-snug whitespace-pre-line">{activeQ.q}</p>
                 <div className="grid grid-cols-2 gap-2">
                   {activeQ.opts.map((opt, i) => (
                     <button
@@ -600,7 +609,7 @@ const DinoRunGamePage = () => {
         </div>
 
         <div className="mt-2 text-center text-white/40 text-xs font-body">
-          Keyboard: SPASI / ↑ loncat &nbsp;·&nbsp; ↓ tiarap &nbsp;·&nbsp; Rintangan bertanda ⚡ = ada soal!
+          Keyboard: SPASI / ↑ loncat &nbsp;·&nbsp; ↓ tiarap &nbsp;·&nbsp; Soal muncul setiap 1000 jarak 📝
         </div>
       </div>
     </div>
