@@ -120,16 +120,27 @@ const DinoRunGamePage = () => {
     feedbackRef.current = setTimeout(() => setFeedback(null), 1400);
   }, []);
 
+  // ── Difficulty tier (increases every 1000 pts) ──────────────────────────
+  const getDiffTier = () => Math.min(Math.floor(scoreRef.current / 1000), 4);
+
   // ── Spawn obstacle ──────────────────────────────────────────────────────
   const spawnObstacle = useCallback(() => {
-    const hardMode = scoreRef.current >= 1000;
+    const tier = getDiffTier();
 
-    // Normal: 25% bird, 35% cactus, 25% rock, 15% lowbar
-    // Hard (score≥1000): 35% bird, 25% cactus, 15% rock, 25% lowbar  — more aerial & ducking hazards
+    // Obstacle type distribution per tier
+    // Tier 0 (normal)  : 25% bird · 35% cactus · 25% rock · 15% lowbar
+    // Tier 1 (1000+)   : 35% bird · 25% cactus · 15% rock · 25% lowbar
+    // Tier 2 (2000+)   : 40% bird · 20% cactus · 10% rock · 30% lowbar
+    // Tier 3 (3000+)   : 45% bird · 15% cactus · 10% rock · 30% lowbar
+    // Tier 4+ (4000+)  : 50% bird · 10% cactus · 10% rock · 30% lowbar
+    const birdCut   = [0.25, 0.35, 0.40, 0.45, 0.50][tier];
+    const cactusCut = [0.60, 0.60, 0.60, 0.60, 0.60][tier];
+    const rockCut   = [0.85, 0.75, 0.70, 0.70, 0.70][tier];
     const roll = Math.random();
-    const kind: ObstacleKind = hardMode
-      ? (roll < 0.35 ? "bird" : roll < 0.60 ? "cactus" : roll < 0.75 ? "rock" : "lowbar")
-      : (roll < 0.25 ? "bird" : roll < 0.60 ? "cactus" : roll < 0.85 ? "rock" : "lowbar");
+    const kind: ObstacleKind =
+      roll < birdCut ? "bird" :
+      roll < cactusCut ? "cactus" :
+      roll < rockCut ? "rock" : "lowbar";
 
     // Ground obstacles: small sizes, easy to jump over
     let w = 18, h = 36, y = GROUND_Y - 36;
@@ -150,11 +161,12 @@ const DinoRunGamePage = () => {
     }
 
     obstaclesRef.current.push({ kind, x: CW + 20, y, w, h, hasQuestion: hasQ, questionIdx: qIdx });
-    // Hard mode (score≥1000): tighter gaps — 1.6 to 3.0 s
-    // Normal: generous 3.2 to 5.5 s between obstacles
-    nextObstRef.current = hardMode
-      ? 1600 + Math.random() * 1400
-      : 3200 + Math.random() * 2300;
+    // Spawn gap per tier (milliseconds): min + random * range
+    // Tier 0: 3200–5500 ms  |  Tier 1: 1600–3000 ms  |  Tier 2: 1200–2400 ms
+    // Tier 3:  900–1800 ms  |  Tier 4+:  700–1300 ms
+    const gapMin  = [3200, 1600, 1200,  900,  700][tier];
+    const gapRng  = [2300, 1400, 1200,  900,  600][tier];
+    nextObstRef.current = gapMin + Math.random() * gapRng;
   }, []);
 
   // ── Reset / start ───────────────────────────────────────────────────────
@@ -310,12 +322,15 @@ const DinoRunGamePage = () => {
 
       distRef.current += speedRef.current * dt;
       scoreRef.current = Math.floor(distRef.current / 10);
-      // Score≥1000 (hard mode): faster ramp with a higher cap (430 px/s)
-      // Normal: gentler ramp, cap at 360 px/s
-      if (scoreRef.current >= 1000) {
-        speedRef.current = Math.min(190 + distRef.current * 0.035, 430);
-      } else {
-        speedRef.current = Math.min(190 + distRef.current * 0.02, 360);
+      // Speed ramp & cap scale with difficulty tier (every 1000 pts)
+      // Tier 0: ramp 0.020, cap 360  |  Tier 1: ramp 0.035, cap 430
+      // Tier 2: ramp 0.050, cap 490  |  Tier 3: ramp 0.065, cap 540
+      // Tier 4+: ramp 0.080, cap 590
+      {
+        const spTier = getDiffTier();
+        const ramp = [0.020, 0.035, 0.050, 0.065, 0.080][spTier];
+        const cap  = [360,   430,   490,   540,   590  ][spTier];
+        speedRef.current = Math.min(190 + distRef.current * ramp, cap);
       }
       if (Math.floor(distRef.current) % 60 === 0) setScore(scoreRef.current);
     }
@@ -350,20 +365,29 @@ const DinoRunGamePage = () => {
       ctx.fillRect(0, 0, CW, CH);
     }
 
-    // ── Hard mode badge (score ≥ 1000) ──────────────────────────────
-    if (scoreRef.current >= 1000 && (ph === "running" || ph === "stunned")) {
-      const pulse = 0.7 + 0.3 * Math.sin(ts / 250);
+    // ── Difficulty tier badge (score ≥ 1000) ────────────────────────
+    const badgeTier = getDiffTier();
+    if (badgeTier >= 1 && (ph === "running" || ph === "stunned")) {
+      const badgeLabels = ["", "🔥 HARD MODE!", "⚡ VERY HARD!", "💀 EXTREME!", "☠️ INSANE!"];
+      const badgeColors = ["", "#FF4500",      "#9400D3",      "#CC0000",    "#000000"  ];
+      const badgeBorder = ["", "",              "",              "",           "#FF0000"  ];
+      const pulse = 0.75 + 0.25 * Math.sin(ts / 220);
       ctx.save();
       ctx.globalAlpha = pulse;
-      ctx.fillStyle = "#FF4500";
+      ctx.fillStyle = badgeColors[badgeTier];
       ctx.beginPath();
-      ctx.roundRect(CW / 2 - 54, 8, 108, 24, 6);
+      ctx.roundRect(CW / 2 - 58, 8, 116, 24, 6);
       ctx.fill();
+      if (badgeBorder[badgeTier]) {
+        ctx.strokeStyle = badgeBorder[badgeTier];
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
       ctx.globalAlpha = pulse;
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 11px monospace";
       ctx.textAlign = "center";
-      ctx.fillText("🔥 HARD MODE!", CW / 2, 24);
+      ctx.fillText(badgeLabels[badgeTier], CW / 2, 24);
       ctx.textAlign = "left";
       ctx.restore();
     }
