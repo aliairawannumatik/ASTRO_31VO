@@ -65,13 +65,6 @@ const games = [
     icon: <Sword className="w-7 h-7 text-pink-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Balap Mobil Matematika",
-    emoji: "🏎️",
-    path: "/math-game-arena/umum/balap-mobil",
-    desc: "Jawab soal untuk mendapatkan turbo boost dan menangkan balapan!",
-    icon: <Car className="w-7 h-7 text-yellow-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
     label: "Tetris Numatik",
     emoji: "🧩",
     path: "/math-game-arena/umum/tetris",
@@ -175,6 +168,13 @@ const games = [
     path: "/math-game-arena/umum/pacman-math",
     desc: "Telan pelet jawaban benar, hindari hantu, dan kuasai labirin!",
     icon: <Target className="w-7 h-7 text-yellow-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
+    label: "Balap Mobil Matematika",
+    emoji: "🏎️",
+    path: "/math-game-arena/umum/balap-mobil",
+    desc: "Jawab soal untuk mendapatkan turbo boost dan menangkan balapan!",
+    icon: <Car className="w-7 h-7 text-yellow-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
     label: "Bounce Math",
