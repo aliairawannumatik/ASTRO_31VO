@@ -17,28 +17,22 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const guruMenuItems = [
   {
-    label: "LKPD",
-    icon: ClipboardCheck,
-    path: "/lkpd",
-    desc: "Lembar kerja interaktif dan berskor",
-  },
-  {
     label: "ATP",
     icon: ListChecks,
     path: "/atp",
     desc: "Alur tujuan pembelajaran",
   },
   {
-    label: "ULANGAN HARIAN",
-    icon: ShieldCheck,
-    path: "/ulangan-harian",
-    desc: "Mode ulangan fullscreen berskor",
+    label: "LKPD",
+    icon: ClipboardCheck,
+    path: "/lkpd",
+    desc: "Lembar kerja interaktif dan berskor",
   },
   {
-    label: "PESAN DAN KESAN",
-    icon: MessageSquareHeart,
-    path: "/pesan-kesan",
-    desc: "Form masukan penggunaan aplikasi",
+    label: "KEYAKINAN KELAS",
+    icon: HeartHandshake,
+    path: "/ruang-untuk-guru/keyakinan-kelas",
+    desc: "Nilai-nilai dan kesepakatan bersama di kelas",
   },
   {
     label: "NUMATIK GAME",
@@ -47,10 +41,16 @@ const guruMenuItems = [
     desc: "Koleksi lengkap game matematika interaktif NUMATIK",
   },
   {
-    label: "KEYAKINAN KELAS",
-    icon: HeartHandshake,
-    path: "/ruang-untuk-guru/keyakinan-kelas",
-    desc: "Nilai-nilai dan kesepakatan bersama di kelas",
+    label: "PESAN DAN KESAN",
+    icon: MessageSquareHeart,
+    path: "/pesan-kesan",
+    desc: "Form masukan penggunaan aplikasi",
+  },
+  {
+    label: "ULANGAN HARIAN",
+    icon: ShieldCheck,
+    path: "/ulangan-harian",
+    desc: "Mode ulangan fullscreen berskor",
   },
   {
     label: "PENILAIAN PEMBELAJARAN",
