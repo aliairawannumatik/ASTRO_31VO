@@ -9,6 +9,7 @@ import {
   MessageSquareHeart,
   Gamepad2,
   HeartHandshake,
+  ClipboardList,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -50,6 +51,12 @@ const guruMenuItems = [
     icon: HeartHandshake,
     path: "/ruang-untuk-guru/keyakinan-kelas",
     desc: "Nilai-nilai dan kesepakatan bersama di kelas",
+  },
+  {
+    label: "PENILAIAN PEMBELAJARAN",
+    icon: ClipboardList,
+    path: "/ruang-untuk-guru/penilaian-pembelajaran",
+    desc: "Aspek penilaian sikap dan capaian peserta didik",
   },
 ];
 
