@@ -774,15 +774,22 @@ const PinballMathPage = () => {
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 flex flex-col items-center gap-4 py-6">
-        <div className="flex items-center gap-3 mb-1">
+        <div className="flex items-center justify-between w-full max-w-sm px-1 mb-1">
+          <button
+            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+            title="Menu Utama"
+          >
+            🏠
+          </button>
+          <span className="font-display text-sm text-accent">🎰 Pinball Math</span>
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
-            className="text-xs text-white/50 hover:text-white transition-colors font-body cursor-pointer"
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+            title="Keluar"
           >
-            ← Kembali
+            ✕
           </button>
-          <span className="text-white/20">|</span>
-          <span className="font-display text-sm text-accent">🎰 Pinball Math</span>
         </div>
         <canvas
           ref={canvasRef}

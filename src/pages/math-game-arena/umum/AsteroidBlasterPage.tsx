@@ -654,16 +654,24 @@ const AsteroidBlasterPage = () => {
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 w-full max-w-lg px-2 py-4 flex flex-col items-center">
         {/* nav */}
-        <div className="flex items-center gap-3 mb-2 w-full">
+        <div className="flex items-center justify-between w-full mb-2">
           <button
-            onClick={() => { playPopSound(); navigate(-1); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors font-body cursor-pointer"
+            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+            title="Menu Utama"
           >
-            ← Kembali
+            🏠
           </button>
           <h1 className="font-display text-xl font-bold text-primary text-glow-cyan text-center flex-1">
             🌌 ASTEROID BLASTER
           </h1>
+          <button
+            onClick={() => { playPopSound(); navigate(-1); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+            title="Keluar"
+          >
+            ✕
+          </button>
         </div>
         <div className="flex gap-4 mb-2 text-xs font-display">
           <span className="text-cyan-400">SKOR: <span className="font-bold text-sm">{score}</span></span>

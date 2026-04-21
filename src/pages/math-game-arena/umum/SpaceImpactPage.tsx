@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
-import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
@@ -792,12 +791,26 @@ const SpaceImpactPage = () => {
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <PageNavigation prevPath="/math-game-arena/umum" />
-
-      <div className="relative z-10 flex flex-col items-center px-4 py-6 w-full max-w-lg">
-        <h1 className="font-display text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
-          🚀 SPACE IMPACT MATH
-        </h1>
+      <div className="relative z-10 flex flex-col items-center px-4 py-4 w-full max-w-lg">
+        <div className="flex items-center justify-between w-full mb-1">
+          <button
+            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+            title="Menu Utama"
+          >
+            🏠
+          </button>
+          <h1 className="font-display text-2xl font-bold text-primary text-glow-cyan mb-1 text-center flex-1">
+            🚀 SPACE IMPACT MATH
+          </h1>
+          <button
+            onClick={() => { playPopSound(); navigate(-1); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+            title="Keluar"
+          >
+            ✕
+          </button>
+        </div>
         <p className="text-white/50 text-xs font-body mb-4 text-center">
           Tembak musuh yang membawa jawaban benar!
         </p>

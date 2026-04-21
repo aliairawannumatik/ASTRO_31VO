@@ -792,7 +792,24 @@ const MolSmashPage = () => {
       style={{ height: '100dvh' }}
     >
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center gap-4 py-6 w-full">
+      <div className="relative z-10 flex flex-col items-center gap-4 py-2 w-full">
+        <div className="flex items-center justify-between w-full max-w-sm px-3">
+          <button
+            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+            title="Menu Utama"
+          >
+            🏠
+          </button>
+          <span className="font-display text-sm text-accent">🔨 Mol Smash Math</span>
+          <button
+            onClick={() => { playPopSound(); navigate(-1); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+            title="Keluar"
+          >
+            ✕
+          </button>
+        </div>
         <canvas
           ref={canvasRef}
           width={CW}
@@ -808,12 +825,6 @@ const MolSmashPage = () => {
             objectFit: "contain",
           }}
         />
-        <button
-          onClick={() => navigate(-1)}
-          className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
-        >
-          ← Kembali ke Game Arena
-        </button>
       <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>

@@ -493,9 +493,22 @@ const PlatformJumpMathPage = () => {
     <div className={`relative flex flex-col overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 flex flex-col h-full overflow-hidden">
-        <div className="shrink-0 px-3 pt-2 pb-1 flex items-center gap-2 justify-center">
-          <button onClick={() => { playPopSound(); navigate(-1); }} className="text-xs text-white/50 hover:text-white transition-colors font-body cursor-pointer">← Kembali</button>
+        <div className="shrink-0 px-3 pt-2 pb-1 flex items-center justify-between">
+          <button
+            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+            title="Menu Utama"
+          >
+            🏠
+          </button>
           <span className="font-display text-base font-bold text-primary text-glow-cyan">🪐 Lompat Jawaban</span>
+          <button
+            onClick={() => { playPopSound(); navigate(-1); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+            title="Keluar"
+          >
+            ✕
+          </button>
         </div>
 
         <div className="flex-1 min-h-0 flex items-center justify-center px-2">

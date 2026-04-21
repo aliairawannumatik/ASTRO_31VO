@@ -651,17 +651,23 @@ const BubblePopPage = () => {
         {/* header */}
         <div className="flex items-center justify-between w-full mb-3 px-1">
           <button
-            onClick={() => { playPopSound(); navigate(-1); }}
-            className="text-xs text-white/50 hover:text-white transition-colors font-mono cursor-pointer"
+            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+            title="Menu Utama"
           >
-            ← Kembali
+            🏠
           </button>
           <div className="text-center">
             <span className="font-display text-lg text-white text-glow-cyan">🫧 POP SOAL!</span>
+            <div className="text-xs font-mono text-yellow-400">🏆 {bestRef.current}</div>
           </div>
-          <div className="text-xs font-mono text-yellow-400">
-            🏆 {bestRef.current}
-          </div>
+          <button
+            onClick={() => { playPopSound(); navigate(-1); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+            title="Keluar"
+          >
+            ✕
+          </button>
         </div>
 
         {/* canvas */}
