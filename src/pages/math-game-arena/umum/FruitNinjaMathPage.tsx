@@ -169,10 +169,11 @@ const FruitNinjaMathPage = () => {
   const rafRef = useRef(0);
   const lastRef = useRef(0);
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25000);
+  const QUIZ_INTERVAL_S = 15 * 60;
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", QUIZ_INTERVAL_S * 1000);
   const sessionStartRef = useRef(0);
-  const nextQuizInRef = useRef(25);
-  const [, setNextQuizIn] = useState(25);
+  const nextQuizInRef = useRef(QUIZ_INTERVAL_S);
+  const [, setNextQuizIn] = useState(QUIZ_INTERVAL_S);
   const qRef = useRef<Question>(makeQuestion());
   const fruitsRef = useRef<Fruit[]>([]);
   const particlesRef = useRef<Particle[]>([]);
@@ -257,27 +258,32 @@ const FruitNinjaMathPage = () => {
     const used = new Set<number>([q.ans]);
     const total = 4 + Math.min(2, Math.floor(levelRef.current / 3));
     const correctIndex = Math.floor(Math.random() * total);
-    const baseX = 55 + Math.random() * (CW - 110);
     const fruits: Fruit[] = [];
+    // distribute fruits across the screen width, give each its own random launch position + delay
+    const slotW = (CW - 80) / total;
+    const order = Array.from({ length: total }, (_, i) => i).sort(() => Math.random() - 0.5);
     for (let i = 0; i < total; i++) {
       const pal = fruitPalettes[(Math.floor(Math.random() * fruitPalettes.length) + i) % fruitPalettes.length];
       const kind: FruitKind = i === correctIndex ? "correct" : "wrong";
       const value = kind === "correct" ? q.ans : wrongValue(q.ans, used);
-      const spread = (i - (total - 1) / 2) * (42 + Math.random() * 14);
+      const slot = order[i];
+      const x = 40 + slot * slotW + Math.random() * slotW * 0.6;
+      // staggered spawn: launch from below screen at varying depths so they appear at different times
+      const launchOffset = Math.random() * 360;
       fruits.push({
         id: uid++,
-        x: Math.max(40, Math.min(CW - 40, baseX + spread)),
-        y: CH + 35 + Math.random() * 30,
-        vx: (Math.random() - 0.5) * 92,
-        vy: -(510 + Math.random() * 165 + levelRef.current * 12),
-        r: 27 + Math.random() * 7,
+        x: Math.max(40, Math.min(CW - 40, x)),
+        y: CH + 35 + launchOffset,
+        vx: (Math.random() - 0.5) * 145,
+        vy: -(620 + Math.random() * 200 + levelRef.current * 18),
+        r: 22 + Math.random() * 5,
         value,
         kind,
         color: pal.color,
         glow: pal.glow,
         label: pal.label,
         rot: Math.random() * Math.PI * 2,
-        spin: (Math.random() < 0.5 ? -1 : 1) * (1.6 + Math.random() * 3.3),
+        spin: (Math.random() < 0.5 ? -1 : 1) * (2.6 + Math.random() * 4.5),
         sliced: false,
       });
     }
@@ -338,8 +344,8 @@ const FruitNinjaMathPage = () => {
     pendingSpecialQ.current = specialQPool[0];
     qRef.current = makeQuestion();
     sessionStartRef.current = Date.now();
-    nextQuizInRef.current = 25;
-    setNextQuizIn(25);
+    nextQuizInRef.current = QUIZ_INTERVAL_S;
+    setNextQuizIn(QUIZ_INTERVAL_S);
     spawnWave();
     rerender();
     playPopSound();
@@ -412,7 +418,7 @@ const FruitNinjaMathPage = () => {
     const id = setInterval(() => {
       if (phaseRef.current !== "playing" || sessionStartRef.current === 0) return;
       const elapsed = (Date.now() - sessionStartRef.current) / 1000;
-      const remaining = Math.max(0, Math.ceil(25 - (elapsed % 25)));
+      const remaining = Math.max(0, Math.ceil(QUIZ_INTERVAL_S - (elapsed % QUIZ_INTERVAL_S)));
       nextQuizInRef.current = remaining;
       setNextQuizIn(remaining);
     }, 250);
@@ -606,9 +612,11 @@ const FruitNinjaMathPage = () => {
       drawText(`Nyawa ${"❤".repeat(livesRef.current)}`, CW / 2, 110, 13, "#fecaca");
       drawText(`Waktu ${Math.ceil(timerRef.current)}`, CW - 27, 110, 13, "#fde047", "right");
       const quizSecs = nextQuizInRef.current;
-      const quizUrgent = quizSecs <= 5;
+      const mm = Math.floor(quizSecs / 60);
+      const ss = quizSecs % 60;
+      const quizUrgent = quizSecs <= 10;
       const pulse = quizUrgent ? 0.7 + Math.sin(ts * 0.012) * 0.3 : 1;
-      const pillW = 180;
+      const pillW = 200;
       const pillX = (CW - pillW) / 2;
       const pillY = 124;
       const pillH = 22;
@@ -622,7 +630,7 @@ const FruitNinjaMathPage = () => {
       ctx.fill();
       ctx.stroke();
       ctx.restore();
-      drawText(`⏱ SOAL DALAM ${quizSecs} DETIK`, CW / 2, pillY + 15, 12, quizUrgent ? "#fde047" : "#a5f3fc");
+      drawText(`⏱ SOAL DALAM ${mm}:${String(ss).padStart(2, "0")}`, CW / 2, pillY + 15, 12, quizUrgent ? "#fde047" : "#a5f3fc");
 
       ctx.fillStyle = "rgba(15,23,42,0.45)";
       ctx.fillRect(0, 146, CW, CH - 146);
