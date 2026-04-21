@@ -169,7 +169,10 @@ const FruitNinjaMathPage = () => {
   const rafRef = useRef(0);
   const lastRef = useRef(0);
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef);
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25000);
+  const sessionStartRef = useRef(0);
+  const nextQuizInRef = useRef(25);
+  const [, setNextQuizIn] = useState(25);
   const qRef = useRef<Question>(makeQuestion());
   const fruitsRef = useRef<Fruit[]>([]);
   const particlesRef = useRef<Particle[]>([]);
@@ -334,6 +337,9 @@ const FruitNinjaMathPage = () => {
     specialTriggered.current = [false, false];
     pendingSpecialQ.current = specialQPool[0];
     qRef.current = makeQuestion();
+    sessionStartRef.current = Date.now();
+    nextQuizInRef.current = 25;
+    setNextQuizIn(25);
     spawnWave();
     rerender();
     playPopSound();
@@ -401,6 +407,17 @@ const FruitNinjaMathPage = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [startGame]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (phaseRef.current !== "playing" || sessionStartRef.current === 0) return;
+      const elapsed = (Date.now() - sessionStartRef.current) / 1000;
+      const remaining = Math.max(0, Math.ceil(25 - (elapsed % 25)));
+      nextQuizInRef.current = remaining;
+      setNextQuizIn(remaining);
+    }, 250);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -588,6 +605,9 @@ const FruitNinjaMathPage = () => {
       drawText(`Skor ${scoreRef.current}`, 27, 118, 13, "#bbf7d0", "left");
       drawText(`Nyawa ${"❤".repeat(livesRef.current)}`, CW / 2, 118, 13, "#fecaca");
       drawText(`Waktu ${Math.ceil(timerRef.current)}`, CW - 27, 118, 13, "#fde047", "right");
+      const quizSecs = nextQuizInRef.current;
+      const quizColor = quizSecs <= 5 ? "#fde047" : "#67e8f9";
+      drawText(`⏱ Soal: ${quizSecs}s`, CW / 2, 138, 12, quizColor);
 
       ctx.fillStyle = "rgba(15,23,42,0.45)";
       ctx.fillRect(0, 146, CW, CH - 146);
