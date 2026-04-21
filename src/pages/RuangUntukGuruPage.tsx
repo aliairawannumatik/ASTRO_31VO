@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   MessageSquareHeart,
   Gamepad2,
+  HeartHandshake,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -43,6 +44,12 @@ const guruMenuItems = [
     icon: Gamepad2,
     path: "/ruang-untuk-guru/numatik-game",
     desc: "Koleksi lengkap game matematika interaktif NUMATIK",
+  },
+  {
+    label: "KEYAKINAN KELAS",
+    icon: HeartHandshake,
+    path: "/ruang-untuk-guru/keyakinan-kelas",
+    desc: "Nilai-nilai dan kesepakatan bersama di kelas",
   },
 ];
 

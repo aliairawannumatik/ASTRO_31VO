@@ -18,6 +18,7 @@ import LKPDPerbandinganPage from "./pages/LKPDPerbandinganPage";
 import ATPPage from "./pages/ATPPage";
 import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
+import KeyakinanKelasPage from "./pages/ruang-untuk-guru/KeyakinanKelasPage";
 import UlanganHarianPage from "./pages/UlanganHarianPage";
 import PesanKesanPage from "./pages/PesanKesanPage";
 import PetunjukPage from "./pages/PetunjukPage";
@@ -748,6 +749,7 @@ const AppInner = () => {
       <Route path="/atp" element={<ATPPage />} />
       <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
       <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
+      <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />
       <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
       <Route path="/pesan-kesan" element={<PesanKesanPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />
