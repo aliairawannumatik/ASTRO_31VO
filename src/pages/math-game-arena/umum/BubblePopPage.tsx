@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas dims ───────────────────────────────────────────────────────────────
 const CW = 420;
@@ -98,6 +100,7 @@ const BubblePopPage = () => {
   const lastRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const bubblesRef = useRef<Bubble[]>([]);
   const particlesRef = useRef<Particle[]>([]);
   const floatTextsRef = useRef<FloatText[]>([]);
@@ -332,6 +335,7 @@ const BubblePopPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       rainbowHueRef.current = (rainbowHueRef.current + dt * 30) % 360;
 
       // ── update bg bubbles ───────────────────────────────────────────────
@@ -683,6 +687,7 @@ const BubblePopPage = () => {
             ⭐ {score} poin &nbsp;|&nbsp; ❤️ {lives} nyawa &nbsp;|&nbsp; Level {levelRef.current}
           </div>
         )}
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

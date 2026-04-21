@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 interface Question {
   question: string;
@@ -75,6 +77,7 @@ const CarRacingGamePage = () => {
   const animFrameRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const stateRef = useRef<GameState>("idle");
+  const guruQuiz = useGuruQuiz(stateRef, "playing");
   const carsRef = useRef<Car[]>([]);
   const playerRef = useRef<Car | null>(null);
   const roadOffsetRef = useRef(0);
@@ -330,6 +333,7 @@ const CarRacingGamePage = () => {
   const gameLoop = useCallback((timestamp: number) => {
     const dt = Math.min(timestamp - (lastTimeRef.current || timestamp), 50);
     lastTimeRef.current = timestamp;
+    if (guruQuiz.isPausedRef.current) { animFrameRef.current = requestAnimationFrame(gameLoop); return; }
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -689,6 +693,7 @@ const CarRacingGamePage = () => {
         <div className="mt-3 text-center text-white/40 text-xs font-body">
           Keyboard: ← → untuk pindah jalur • Jawab soal untuk TURBO!
         </div>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

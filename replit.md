@@ -9,6 +9,7 @@ A React + Vite math tutoring app for Indonesian middle school students (SMP), po
 - **AI**: Google Gemini via server-side Express `/api/chat`
 - **Dev workflow**: Vite dev server on port 5000 proxies `/api/*` to Express on port 3001
 - **Math Game Arena Umum**: Includes full-color standalone canvas games under `/math-game-arena/umum/*`, including Kereta Koin Math, Ninja Buah Math, Pulau Harta Math, and Kapal Selam Math Battle.
+- **Ruang untuk Guru**: All 24 Game Arena Umum games feature a "teacher quiz" system — every 30 seconds (up to 5 times per session), gameplay freezes and a multiple-choice math question popup appears. Correct answers award 20 points. After all 5 questions, a celebration screen shows the accumulated score. Implemented via `src/hooks/useGuruQuiz.ts` (timer, pause logic, scoring) and `src/components/GuruQuizOverlay.tsx` (modal UI).
 
 ## Running the App
 

@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 420;
 const CH = 600;
@@ -132,6 +134,7 @@ const CoinTrainMathPage = () => {
   const rafRef = useRef(0);
   const lastRef = useRef(0);
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const qRef = useRef<Question>(makeQuestion());
   const laneRef = useRef(1);
   const playerYRef = useRef(LANES[1]);
@@ -431,6 +434,7 @@ const CoinTrainMathPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05) || 0;
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       hueRef.current = (hueRef.current + dt * 42) % 360;
       trackRef.current += dt * speedRef.current;
       if (shakeRef.current > 0) shakeRef.current = Math.max(0, shakeRef.current - dt * 2.8);
@@ -638,6 +642,7 @@ const CoinTrainMathPage = () => {
             Kembali ke Game Umum
           </button>
         </div>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

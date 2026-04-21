@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 420;
 const CH = 600;
@@ -85,6 +87,7 @@ const BrickBreakerPage = () => {
   const lastRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const bricksRef = useRef<Brick[]>([]);
   const floatTextsRef = useRef<FloatText[]>([]);
   const trailRef = useRef<Trail[]>([]);
@@ -244,6 +247,7 @@ const BrickBreakerPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       hueRef.current = (hueRef.current + dt * 22) % 360;
       const hue = hueRef.current;
 
@@ -753,6 +757,7 @@ const BrickBreakerPage = () => {
         >
           ← Kembali ke Game Arena
         </button>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

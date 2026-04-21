@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 460;
 const CH = 640;
@@ -72,6 +74,7 @@ const SubmarineBattleMathPage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const subXRef = useRef(CW / 2);
   const targetXRef = useRef(CW / 2);
   const keysRef = useRef({ left: false, right: false, up: false, down: false, shoot: false, torpedo: false });
@@ -403,6 +406,7 @@ const SubmarineBattleMathPage = () => {
     const loop = (now: number) => {
       const dt = Math.min(32, now - last) / 16.67;
       last = now;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
 
       const bg = ctx.createLinearGradient(0, 0, 0, CH);
       bg.addColorStop(0, "#1e1b4b");
@@ -664,6 +668,7 @@ const SubmarineBattleMathPage = () => {
             Kontrol: geser/sentuh untuk bergerak, klik untuk menembak atas, tombol Torpedo untuk tembak kiri/kanan, keyboard ← → / Spasi / Z.
           </p>
         )}
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

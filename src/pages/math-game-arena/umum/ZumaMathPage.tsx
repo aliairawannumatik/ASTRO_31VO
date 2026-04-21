@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas ─────────────────────────────────────────────────────────────────
 const CW = 480;
@@ -128,6 +130,7 @@ const ZumaMathPage = () => {
 
   // Refs
   const phaseRef = useRef<"idle"|"playing"|"dead"|"win">("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const chainRef = useRef<ChainBall[]>([]);
   const projRef = useRef<Projectile | null>(null);
   const particlesRef = useRef<Particle[]>([]);
@@ -311,6 +314,7 @@ const ZumaMathPage = () => {
 
   // ── Game loop ──────────────────────────────────────────────────────────
   const loop = useCallback(() => {
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
     rafRef.current = requestAnimationFrame(loop);
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -751,6 +755,7 @@ const ZumaMathPage = () => {
             </button>
           </div>
         )}
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

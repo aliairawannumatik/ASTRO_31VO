@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Layout ────────────────────────────────────────────────────────────────
 const COLS = 21;
@@ -122,6 +124,7 @@ const PacmanMathPage = () => {
 
   // Game refs
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const mazeRef = useRef<number[][]>(BASE_MAZE.map(r => [...r]));
   const pacRef = useRef<Entity & { ndx: number; ndy: number; mouthA: number }>({
     row: 15, col: 10, dx: 0, dy: 0, ndx: -1, ndy: 0, prog: 0, mouthA: 0.25
@@ -273,6 +276,7 @@ const PacmanMathPage = () => {
 
   // ── Game loop ─────────────────────────────────────────────────────────
   const loop = useCallback(() => {
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
     rafRef.current = requestAnimationFrame(loop);
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -735,6 +739,7 @@ const PacmanMathPage = () => {
             <div />
           </div>
         )}
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas dimensions ──────────────────────────────────────────────────────
 const CW = 560;
@@ -83,6 +85,7 @@ const DinoRunGamePage = () => {
   const lastTRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef, "running");
   const pyRef = useRef(GROUND_Y - P_H_STAND);
   const pvyRef = useRef(0);
   const isDuckRef = useRef(false);
@@ -222,6 +225,7 @@ const DinoRunGamePage = () => {
     const ctx = canvas.getContext("2d")!;
     const dt = Math.min((ts - (lastTRef.current || ts)) / 1000, 0.05);
     lastTRef.current = ts;
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
 
     const ph = phaseRef.current;
 
@@ -624,6 +628,7 @@ const DinoRunGamePage = () => {
         <div className="mt-2 text-center text-white/40 text-xs font-body">
           Keyboard: SPASI / ↑ loncat &nbsp;·&nbsp; ↓ tiarap &nbsp;·&nbsp; Soal bonus otomatis tiap 40 detik ❓
         </div>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

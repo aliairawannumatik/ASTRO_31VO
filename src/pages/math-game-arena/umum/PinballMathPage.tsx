@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas dimensions ──────────────────────────────────────────────────────
 const CW = 380;
@@ -129,6 +131,7 @@ const PinballMathPage = () => {
   const lastRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const bumpersRef = useRef<Bumper[]>([]);
   const particlesRef = useRef<Particle[]>([]);
   const floatTextsRef = useRef<FloatText[]>([]);
@@ -260,6 +263,7 @@ const PinballMathPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       hueRef.current = (hueRef.current + dt * 20) % 360;
       const hue = hueRef.current;
 
@@ -794,6 +798,7 @@ const PinballMathPage = () => {
         <p className="text-white/30 text-xs font-body text-center max-w-xs">
           Tahan SPACE untuk isi daya, lepas untuk launch! Z/← flipper kiri, X/→ flipper kanan.
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

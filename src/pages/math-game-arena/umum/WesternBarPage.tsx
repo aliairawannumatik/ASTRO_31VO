@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 440;
 const CH = 600;
@@ -101,6 +103,7 @@ const WesternBarPage = () => {
   const lastRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const targetsRef = useRef<Target[]>([]);
   const floatTextsRef = useRef<FloatText[]>([]);
   const crosshairsRef = useRef<Crosshair[]>([]);
@@ -303,6 +306,7 @@ const WesternBarPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
 
       const phase = phaseRef.current;
 
@@ -709,6 +713,7 @@ const WesternBarPage = () => {
         <p className="text-white/30 text-xs font-body text-center max-w-xs">
           Tembak target yang menampilkan jawaban benar! Jangan sampai target kabur!
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

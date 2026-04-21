@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas dims ──────────────────────────────────────────────────────────
 const CW = 420;
@@ -68,6 +70,7 @@ const AsteroidBlasterPage = () => {
 
   // refs
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const shipXRef = useRef(CW / 2 - SHIP_W / 2);
   const asteroidsRef = useRef<Asteroid[]>([]);
   const bulletsRef = useRef<Bullet[]>([]);
@@ -344,6 +347,7 @@ const AsteroidBlasterPage = () => {
   const loop = useCallback((ts: number) => {
     const dt = Math.min((ts - (lastRafRef.current || ts)) / 1000, 0.05);
     lastRafRef.current = ts;
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
@@ -753,6 +757,7 @@ const AsteroidBlasterPage = () => {
         <p className="mt-2 text-white/35 text-xs font-body text-center">
           Keyboard: ← → gerak · SPASI tembak &nbsp;·&nbsp; Mobile: sentuh & geser layar
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

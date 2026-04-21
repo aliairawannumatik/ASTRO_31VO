@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 420;
 const CH = 580;
@@ -71,6 +73,7 @@ const BounceMathPage = () => {
   const lastRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const ballsRef = useRef<Ball[]>([]);
   const floatTextsRef = useRef<FloatText[]>([]);
   const particlesRef = useRef<Particle[]>([]);
@@ -245,6 +248,7 @@ const BounceMathPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       hueRef.current = (hueRef.current + dt * 18) % 360;
       bgStarsTRef.current += dt;
 
@@ -547,6 +551,7 @@ const BounceMathPage = () => {
         <p className="text-white/30 text-xs font-body text-center max-w-xs">
           Klik bola yang menampilkan jawaban benar dari soal di atas!
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

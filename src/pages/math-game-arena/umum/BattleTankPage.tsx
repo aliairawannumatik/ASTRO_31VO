@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 420;
 const CH = 600;
@@ -111,6 +113,7 @@ const BattleTankPage = () => {
   const lastRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const enemiesRef = useRef<EnemyTank[]>([]);
   const bulletsRef = useRef<Bullet[]>([]);
   const explosionsRef = useRef<Explosion[]>([]);
@@ -368,6 +371,7 @@ const BattleTankPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       hueRef.current = (hueRef.current + dt * 18) % 360;
       tileOffsetRef.current = (tileOffsetRef.current + dt * 20) % TILE_SIZE;
       const hue = hueRef.current;
@@ -704,6 +708,7 @@ const BattleTankPage = () => {
           <p>📱 Sentuh layar untuk membidik & menembak</p>
           <p>❓ Soal bonus muncul tiap {QUIZ_INTERVAL} detik — jawab untuk poin ekstra!</p>
         </div>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

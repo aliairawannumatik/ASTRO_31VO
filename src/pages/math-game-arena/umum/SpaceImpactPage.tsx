@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas dimensions ─────────────────────────────────────────────────────
 const CW = 480;
@@ -296,6 +298,7 @@ const SpaceImpactPage = () => {
 
   // game refs
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const playerRef = useRef<Vec2>({ x: 60, y: CH / 2 - 15 });
   const bulletsRef = useRef<Bullet[]>([]);
   const enemiesRef = useRef<Enemy[]>([]);
@@ -415,6 +418,7 @@ const SpaceImpactPage = () => {
 
   // ── Game loop ─────────────────────────────────────────────────────────
   const loop = useCallback(() => {
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
     rafRef.current = requestAnimationFrame(loop);
     if (phaseRef.current !== "playing") return;
 
@@ -915,6 +919,7 @@ const SpaceImpactPage = () => {
         <p className="mt-6 text-white/30 text-xs font-body text-center">
           🛡️ Pelindung &nbsp;|&nbsp; ⚡ Rapid Fire &nbsp;|&nbsp; 🌟 Spread — item muncul saat musuh dihancurkan
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

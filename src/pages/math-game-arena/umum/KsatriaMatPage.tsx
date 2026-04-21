@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 420;
 const CH = 560;
@@ -88,6 +90,7 @@ const KsatriaMatPage = () => {
   const lastRef = useRef(0);
 
   const phaseRef     = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef, ["exploring", "battling"]);
   const floorRef     = useRef(0);
   const waveIdxRef   = useRef(0);
   const playerHpRef  = useRef(PLAYER_MAX_HP);
@@ -507,6 +510,7 @@ const KsatriaMatPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05) || 0;
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       hueRef.current = (hueRef.current + dt * 18) % 360;
       const phase = phaseRef.current;
       if (shakeRef.current > 0) shakeRef.current = Math.max(0, shakeRef.current - dt * 2.6);
@@ -622,6 +626,7 @@ const KsatriaMatPage = () => {
         <p className="mt-3 text-xs text-white/40 font-body text-center">
           Saat bertarung: klik jawaban atau tekan tombol 1 / 2 / 3 / 4 di keyboard
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

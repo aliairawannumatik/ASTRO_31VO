@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 440;
 const CH = 620;
@@ -131,6 +133,7 @@ const TreasureIslandMathPage = () => {
   const shipXRef = useRef(CW / 2);
   const targetXRef = useRef(CW / 2);
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const scoreRef = useRef(0);
   const livesRef = useRef(3);
   const comboRef = useRef(0);
@@ -309,6 +312,7 @@ const TreasureIslandMathPage = () => {
     const loop = (now: number) => {
       const dt = Math.min(32, now - last) / 16.67;
       last = now;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       const sky = ctx.createLinearGradient(0, 0, 0, CH);
       sky.addColorStop(0, "#0f172a");
       sky.addColorStop(0.24, "#312e81");
@@ -565,6 +569,7 @@ const TreasureIslandMathPage = () => {
             Kontrol: geser/sentuh layar, atau pakai tombol ← → / A D.
           </p>
         )}
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

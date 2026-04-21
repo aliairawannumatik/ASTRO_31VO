@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Grid ──────────────────────────────────────────────────────────────────
 const COLS = 20;
@@ -68,6 +70,7 @@ const SnakeMathPage = () => {
 
   // game state (refs for loop)
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const snakeRef = useRef<Array<{ x: number; y: number }>>([]);
   const dirRef = useRef<Dir>("R");
   const nextDirRef = useRef<Dir>("R");
@@ -541,6 +544,7 @@ const SnakeMathPage = () => {
   const loop = useCallback((ts: number) => {
     const dt = Math.min((ts - (lastRafRef.current || ts)) / 1000, 0.05);
     lastRafRef.current = ts;
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
 
     if (phaseRef.current === "playing") {
       const elapsed = ts - lastStepRef.current;
@@ -714,6 +718,7 @@ const SnakeMathPage = () => {
         <p className="mt-2 text-white/40 text-xs font-body text-center">
           Keyboard: ← ↑ → ↓ / WASD &nbsp;·&nbsp; Mobile: swipe atau D-pad
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const COLS = 10;
 const ROWS = 20;
@@ -112,6 +114,8 @@ const TetrisGamePage = () => {
   const levelRef = useRef(1);
   const gameOverRef = useRef(false);
   const pausedRef = useRef(false);
+  const tetrisPhaseRef = useRef<string>("idle");
+  const guruQuiz = useGuruQuiz(tetrisPhaseRef);
   const dropTimerRef = useRef(0);
   const animRef = useRef(0);
   const lastTimeRef = useRef(0);
@@ -221,13 +225,15 @@ const TetrisGamePage = () => {
 
     if (!isValid(clearedGrid, next)) {
       gameOverRef.current = true;
+      tetrisPhaseRef.current = "over";
       setGameOver(true);
       cancelAnimationFrame(animRef.current);
     }
   }, []);
 
   const gameLoop = useCallback((timestamp: number) => {
-    if (gameOverRef.current || pausedRef.current) return;
+    if (gameOverRef.current) return;
+    if (guruQuiz.isPausedRef.current || pausedRef.current) { animRef.current = requestAnimationFrame(gameLoop); return; }
     const dt = Math.min(timestamp - (lastTimeRef.current || timestamp), 100);
     lastTimeRef.current = timestamp;
     const speed = LEVEL_SPEEDS[Math.min(levelRef.current - 1, LEVEL_SPEEDS.length - 1)];
@@ -254,6 +260,7 @@ const TetrisGamePage = () => {
     levelRef.current = 1;
     gameOverRef.current = false;
     pausedRef.current = false;
+    tetrisPhaseRef.current = "playing";
     dropTimerRef.current = 0;
     lastTimeRef.current = 0;
     setScore(0);
@@ -500,6 +507,7 @@ const TetrisGamePage = () => {
         <div className="mt-3 text-center text-white/40 text-xs font-body">
           Keyboard: ← → geser &nbsp;·&nbsp; ↑ putar &nbsp;·&nbsp; ↓ turun &nbsp;·&nbsp; SPASI hard drop &nbsp;·&nbsp; P pause
         </div>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

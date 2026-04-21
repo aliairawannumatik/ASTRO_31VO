@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas ───────────────────────────────────────────────────────────────
 const CW = 420;
@@ -94,6 +96,7 @@ const CatchItemsGamePage = () => {
 
   // game state refs
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const bxRef = useRef(CW / 2 - BASKET_W / 2);
   const itemsRef = useRef<FallingItem[]>([]);
   const scoreRef = useRef(0);
@@ -284,6 +287,7 @@ const CatchItemsGamePage = () => {
     const ctx = canvas.getContext("2d")!;
     const dt = Math.min((ts - (lastTRef.current || ts)) / 1000, 0.05);
     lastTRef.current = ts;
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
     const ph = phaseRef.current;
 
     // ── Background ────────────────────────────────────────────────
@@ -771,6 +775,7 @@ const CatchItemsGamePage = () => {
         <p className="mt-2 text-white/40 text-xs font-body text-center">
           Keyboard: ← → pindah keranjang &nbsp;·&nbsp; Sentuh & geser di layar untuk mobile
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

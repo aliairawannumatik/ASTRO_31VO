@@ -4,6 +4,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 // ── Canvas ───────────────────────────────────────────────────────────────────
 const CW = 420;
@@ -74,6 +76,7 @@ const FlappyRocketPage = () => {
 
   // game refs
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const ryRef = useRef(CH / 2);
   const rvyRef = useRef(0);
   const rotRef = useRef(0);
@@ -366,6 +369,7 @@ const FlappyRocketPage = () => {
     const ctx = canvas.getContext("2d")!;
     const dt = Math.min((ts - (lastTRef.current || ts)) / 1000, 0.05);
     lastTRef.current = ts;
+    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
 
     const ph = phaseRef.current;
 
@@ -808,6 +812,7 @@ const FlappyRocketPage = () => {
         <p className="mt-2 text-white/40 text-xs font-body text-center">
           Ketuk layar / SPASI / ↑ untuk terbang &nbsp;·&nbsp; Gerbang emas setiap 4 pipa = ada soal! 📝
         </p>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

@@ -5,6 +5,8 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 
 const CW = 420;
 const CH = 580;
@@ -104,6 +106,7 @@ const PlatformJumpMathPage = () => {
   const rafRef = useRef(0);
   const lastRef = useRef(0);
   const phaseRef = useRef<Phase>("idle");
+  const guruQuiz = useGuruQuiz(phaseRef);
   const qRef = useRef<Question>(makeQuestion());
   const charRef = useRef<Char>(initChar());
   const platformsRef = useRef<Platform[]>([]);
@@ -297,6 +300,7 @@ const PlatformJumpMathPage = () => {
     const loop = (ts: number) => {
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05) || 0;
       lastRef.current = ts;
+      if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
       hueRef.current = (hueRef.current + dt * 20) % 360;
       const phase = phaseRef.current;
       if (shakeRef.current > 0) shakeRef.current = Math.max(0, shakeRef.current - dt * 3);
@@ -545,6 +549,7 @@ const PlatformJumpMathPage = () => {
             Kembali ke Game Umum
           </button>
         </div>
+      <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );
