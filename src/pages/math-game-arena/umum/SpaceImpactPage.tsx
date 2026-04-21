@@ -487,22 +487,9 @@ const SpaceImpactPage = () => {
         }
       }
 
-      // enemy exits left — lose a life
+      // enemy exits left — respawn from right (no penalty)
       if (e.x + e.w < -20) {
         e.x = CW + 80;
-        if (invincibleRef.current <= 0) {
-          livesRef.current--;
-          setLives(livesRef.current);
-          invincibleRef.current = 120;
-          explode(p.x + PW / 2, p.y + PH / 2, "#ff4444", false);
-          showFlash("💥 Musuh lolos!");
-          if (livesRef.current <= 0) {
-            phaseRef.current = "dead";
-            setPhase("dead");
-            if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
-            setBest(bestRef.current);
-          }
-        }
       }
     }
 
