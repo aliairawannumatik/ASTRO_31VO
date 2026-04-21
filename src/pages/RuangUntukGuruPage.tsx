@@ -14,6 +14,7 @@ import {
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import guruPhoto from "@assets/image_1776759767156.png";
 
 const guruMenuItems = [
   {
@@ -89,8 +90,12 @@ const RuangUntukGuruPage = () => {
         <section className="rounded-3xl border border-cyan-200/30 bg-gradient-to-br from-cyan-500/15 via-blue-500/10 to-violet-500/15 p-6 md:p-8 mb-8 backdrop-blur">
           <div className="grid md:grid-cols-[1fr_1.4fr] gap-6 items-center">
             <div className="rounded-3xl border border-white/10 bg-black/20 p-6 text-center">
-              <div className="w-28 h-28 mx-auto rounded-3xl border border-cyan-300/30 bg-cyan-500/10 flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(34,211,238,0.18)]">
-                <GraduationCap className="w-14 h-14 text-cyan-200" />
+              <div className="w-40 h-40 mx-auto rounded-3xl border border-cyan-300/30 bg-cyan-500/10 overflow-hidden mb-4 shadow-[0_0_30px_rgba(34,211,238,0.18)]">
+                <img
+                  src={guruPhoto}
+                  alt="Bapak/Ibu Guru"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h2 className="font-display text-2xl font-bold text-cyan-100">Untuk Bapak/Ibu Guru</h2>
               <div className="mt-3 inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
