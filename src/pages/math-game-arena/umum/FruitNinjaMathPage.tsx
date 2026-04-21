@@ -369,7 +369,6 @@ const FruitNinjaMathPage = () => {
           const pts = 30 * comboRef.current + levelRef.current * 10;
           scoreRef.current += pts;
           bestRef.current = Math.max(bestRef.current, scoreRef.current);
-          timerRef.current = Math.min(99, timerRef.current + 4);
           levelRef.current = Math.max(1, Math.floor(scoreRef.current / 220) + 1);
           addFloat(fruit.x, fruit.y - 10, `+${pts} ×${comboRef.current}`, "#bbf7d0");
           burst(fruit.x, fruit.y, fruit.glow, 34);
@@ -377,7 +376,6 @@ const FruitNinjaMathPage = () => {
           playPopSound();
         } else if (fruit.kind === "bonus") {
           scoreRef.current += 80;
-          timerRef.current = Math.min(99, timerRef.current + 6);
           addFloat(fruit.x, fruit.y - 10, "+BONUS", "#fde047");
           burst(fruit.x, fruit.y, "#fde047", 42);
           playPopSound();
