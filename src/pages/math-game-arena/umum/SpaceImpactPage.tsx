@@ -260,7 +260,7 @@ function spawnWave(level: number, q: MQ): Enemy[] {
     const row = Math.floor(Math.random() * 4);
     const w = shape === "bomber" ? 46 : 40;
     const h = shape === "bomber" ? 28 : 24;
-    const hp = shape === "bomber" ? 3 : shape === "fighter" ? 2 : 1;
+    const hp = 3;
     enemies.push({
       x: CW + 50 + col * 140 + Math.random() * 60,
       y: 60 + row * ((CH - 100) / 4) + Math.random() * 20,
@@ -268,8 +268,8 @@ function spawnWave(level: number, q: MQ): Enemy[] {
       vx: -(0.6 + level * 0.15 + Math.random() * 0.3),
       vy: (Math.random() - 0.5) * 0.5,
       value, correct: isCorrect,
-      color: isCorrect ? "#facc15" : color,
-      glowColor: isCorrect ? "#fde68a" : glow,
+      color,
+      glowColor: glow,
       shape, pulse: 0,
       shootTimer: 60 + Math.random() * 120,
     });
@@ -297,7 +297,7 @@ const SpaceImpactPage = () => {
 
   // game refs
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef);
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25000);
   const playerRef = useRef<Vec2>({ x: 60, y: CH / 2 - 15 });
   const bulletsRef = useRef<Bullet[]>([]);
   const enemiesRef = useRef<Enemy[]>([]);
@@ -527,36 +527,17 @@ const SpaceImpactPage = () => {
           if (e.hp <= 0) {
             explode(e.x + e.w / 2, e.y + e.h / 2, e.glowColor, true);
             enemiesRef.current.splice(i, 1);
-            if (e.correct) {
-              comboRef.current++;
-              const pts = (50 + levelRef.current * 20) * comboRef.current;
-              scoreRef.current += pts;
-              setScore(scoreRef.current);
-              setCombo(comboRef.current);
-              showFlash(`✅ BENAR! +${pts} (x${comboRef.current})`);
-              playPopSound();
-              // maybe drop power-up
-              if (Math.random() < 0.35) {
-                const types: Array<"shield" | "rapid" | "spread"> = ["shield", "rapid", "spread"];
-                powerUpsRef.current.push({ x: e.x + e.w / 2, y: e.y + e.h / 2, type: types[Math.floor(Math.random() * 3)] });
-              }
-            } else {
-              comboRef.current = 0;
-              setCombo(0);
-              if (!shieldRef.current) {
-                livesRef.current--;
-                setLives(livesRef.current);
-                invincibleRef.current = 100;
-                showFlash("❌ Jawaban salah! -1 nyawa");
-              } else {
-                showFlash("🛡️ Pelindung menahan serangan!");
-              }
-              if (livesRef.current <= 0) {
-                phaseRef.current = "dead";
-                setPhase("dead");
-                if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
-                setBest(bestRef.current);
-              }
+            comboRef.current++;
+            const pts = (50 + levelRef.current * 20) * comboRef.current;
+            scoreRef.current += pts;
+            setScore(scoreRef.current);
+            setCombo(comboRef.current);
+            showFlash(`💥 +${pts} (x${comboRef.current})`);
+            playPopSound();
+            // maybe drop power-up
+            if (Math.random() < 0.25) {
+              const types: Array<"shield" | "rapid" | "spread"> = ["shield", "rapid", "spread"];
+              powerUpsRef.current.push({ x: e.x + e.w / 2, y: e.y + e.h / 2, type: types[Math.floor(Math.random() * 3)] });
             }
           }
           hit = true;
@@ -656,12 +637,12 @@ const SpaceImpactPage = () => {
       ctx.shadowBlur = 0;
     }
 
-    // question display
+    // level display
     ctx.font = "bold 11px monospace";
     ctx.textAlign = "center";
     ctx.fillStyle = "#facc15";
     ctx.shadowColor = "#facc15"; ctx.shadowBlur = 8;
-    ctx.fillText(`❓ ${questionRef.current.q} = ?`, CW / 2, 23);
+    ctx.fillText(`LEVEL ${levelRef.current}`, CW / 2, 23);
     ctx.shadowBlur = 0;
 
     // score
@@ -703,14 +684,6 @@ const SpaceImpactPage = () => {
         ctx.fillRect(e.x, e.y - 5, (e.hp / e.maxHp) * e.w, 3);
       }
 
-      // value label
-      ctx.font = `bold ${e.correct ? 13 : 11}px monospace`;
-      ctx.textAlign = "center";
-      ctx.fillStyle = e.correct ? "#facc15" : "#ffffff";
-      ctx.shadowColor = e.correct ? "#facc15" : "transparent";
-      ctx.shadowBlur = e.correct ? 8 : 0;
-      ctx.fillText(String(e.value), e.x + e.w / 2, e.y + e.h + 13);
-      ctx.shadowBlur = 0;
     }
     ctx.textAlign = "left";
 
@@ -812,7 +785,7 @@ const SpaceImpactPage = () => {
           </button>
         </div>
         <p className="text-white/50 text-xs font-body mb-4 text-center">
-          Tembak musuh yang membawa jawaban benar!
+          Tembak musuh sebanyak-banyaknya! Setiap musuh perlu 3 tembakan.
         </p>
 
         {/* Canvas */}
@@ -831,9 +804,8 @@ const SpaceImpactPage = () => {
               <div className="text-5xl">🚀</div>
               <h2 className="font-display text-xl text-white text-glow-cyan">SPACE IMPACT MATH</h2>
               <p className="text-white/60 text-xs text-center max-w-xs font-body px-4">
-                Tembak musuh yang membawa angka jawaban dari soal di atas.<br />
-                Jawaban benar = poin! Jawaban salah = kehilangan nyawa.<br />
-                <span className="text-yellow-400">Musuh kuning</span> = jawaban BENAR!
+                Bebas menembak musuh manapun! Setiap musuh perlu <span className="text-yellow-400 font-bold">3 tembakan</span> untuk hancur.<br />
+                Setiap <span className="text-cyan-300 font-bold">25 detik</span> akan muncul soal matematika untuk dijawab!
               </p>
               <div className="text-white/50 text-xs font-body text-center">
                 🎮 WASD/Arrow = gerak &nbsp;|&nbsp; Space/Z = tembak<br />

@@ -35,7 +35,7 @@ const GURU_QUESTIONS: GuruQuestion[] = [
 ];
 
 const MAX_QUESTIONS = 5;
-const INTERVAL_MS = 30000;
+const DEFAULT_INTERVAL_MS = 30000;
 
 export interface UseGuruQuizReturn {
   isPausedRef: React.MutableRefObject<boolean>;
@@ -52,7 +52,8 @@ export interface UseGuruQuizReturn {
 
 export function useGuruQuiz(
   phaseRef: React.MutableRefObject<string>,
-  playingPhase: string | string[] = "playing"
+  playingPhase: string | string[] = "playing",
+  intervalMs: number = DEFAULT_INTERVAL_MS
 ): UseGuruQuizReturn {
   const isPausedRef = useRef(false);
 
@@ -117,7 +118,7 @@ export function useGuruQuiz(
 
       const elapsed = Date.now() - ref.sessionStart;
       for (let i = 0; i < MAX_QUESTIONS; i++) {
-        if (!ref.triggered[i] && elapsed >= (i + 1) * INTERVAL_MS) {
+        if (!ref.triggered[i] && elapsed >= (i + 1) * intervalMs) {
           ref.triggered[i] = true;
           ref.questionCount += 1;
           const q = pickQuestion();
