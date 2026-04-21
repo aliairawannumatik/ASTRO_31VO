@@ -22,8 +22,8 @@ const aspek = [
     text: "text-violet-100",
   },
   {
-    title: "Komunikatif",
-    desc: "Berpartisipasi aktif serta efektif dalam sesi diskusi dan presentasi.",
+    title: "Kolaborasi",
+    desc: "Bekerja sama secara aktif dan efektif dengan teman dalam diskusi maupun kerja kelompok.",
     icon: MessagesSquare,
     color: "from-cyan-500/20 to-sky-500/10",
     border: "border-cyan-300/40",
