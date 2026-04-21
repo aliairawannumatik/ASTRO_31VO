@@ -658,57 +658,54 @@ const FruitNinjaMathPage = () => {
   }, [rerender, spawnWave, startGame]);
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <PageNavigation prevPath="/math-game-arena/umum" />
-      <div className="relative z-10 w-full max-w-5xl px-4 py-6 flex flex-col items-center">
-        <div className="text-center mb-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-pink-300/40 bg-pink-950/40 px-4 py-2 text-pink-100 text-xs font-bold tracking-widest">
-            GAME BARU · FULL COLOR · AKSI CEPAT
+      <div className="relative z-10 flex flex-col h-full overflow-hidden">
+        <div className="shrink-0 px-3 pt-2 pb-1 flex flex-col items-center">
+          <div className="flex items-center gap-2">
+            <button onClick={() => { playPopSound(); navigate(-1); }} className="text-xs text-white/50 hover:text-white transition-colors font-body cursor-pointer">← Kembali</button>
+            <span className="font-display text-base font-bold text-primary text-glow-cyan">🍉 Ninja Buah Math</span>
           </div>
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-primary text-glow-cyan mt-3">
-            🍉 Ninja Buah Math
-          </h1>
-          <p className="font-body text-sm text-white/65 mt-2 max-w-xl mx-auto">
-            Iris buah jawaban benar sebelum jatuh, kejar combo, dan hindari bom warna-warni!
-          </p>
         </div>
 
-        <div className="relative rounded-[28px] p-3 bg-gradient-to-br from-pink-400 via-cyan-400 to-lime-300 shadow-[0_0_45px_rgba(244,114,182,0.35)]">
-          <canvas
-            ref={canvasRef}
-            width={CW}
-            height={CH}
-            onMouseDown={e => handlePointer(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect())}
-            onMouseMove={e => {
-              if (e.buttons === 1) handlePointer(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
-            }}
-            onTouchStart={e => {
-              e.preventDefault();
-              const t = e.touches[0];
-              handlePointer(t.clientX, t.clientY, e.currentTarget.getBoundingClientRect());
-            }}
-            onTouchMove={e => {
-              e.preventDefault();
-              const t = e.touches[0];
-              handlePointer(t.clientX, t.clientY, e.currentTarget.getBoundingClientRect());
-            }}
-            className="w-[min(420px,92vw)] h-auto rounded-[20px] bg-slate-950 cursor-crosshair select-none touch-none border-4 border-slate-900"
-          />
+        <div className="flex-1 min-h-0 flex items-center justify-center px-2">
+          <div className="relative rounded-[28px] p-2 bg-gradient-to-br from-pink-400 via-cyan-400 to-lime-300 shadow-[0_0_45px_rgba(244,114,182,0.35)]">
+            <canvas
+              ref={canvasRef}
+              width={CW}
+              height={CH}
+              onMouseDown={e => handlePointer(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect())}
+              onMouseMove={e => {
+                if (e.buttons === 1) handlePointer(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
+              }}
+              onTouchStart={e => {
+                e.preventDefault();
+                const t = e.touches[0];
+                handlePointer(t.clientX, t.clientY, e.currentTarget.getBoundingClientRect());
+              }}
+              onTouchMove={e => {
+                e.preventDefault();
+                const t = e.touches[0];
+                handlePointer(t.clientX, t.clientY, e.currentTarget.getBoundingClientRect());
+              }}
+              className="rounded-[20px] bg-slate-950 cursor-crosshair select-none touch-none border-4 border-slate-900"
+              style={{ width: 'auto', height: 'auto', maxWidth: '92vw', maxHeight: 'calc(100dvh - 110px)' }}
+            />
+          </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap justify-center gap-3">
+        <div className="shrink-0 px-3 pb-2 pt-1 flex flex-wrap justify-center gap-2">
           <button
             onClick={startGame}
-            className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30"
+            className="rounded-full bg-accent px-5 py-2 text-sm font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30"
           >
             Mulai / Ulangi
           </button>
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
-            className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors"
+            className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20 transition-colors"
           >
-            Kembali ke Game Umum
+            Kembali
           </button>
         </div>
       <GuruQuizOverlay {...guruQuiz} />

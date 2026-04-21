@@ -388,7 +388,7 @@ const TetrisGamePage = () => {
   };
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center justify-start overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
 
       <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
@@ -408,11 +408,11 @@ const TetrisGamePage = () => {
           <div className="flex flex-col gap-3">
             <div
               className="rounded-xl border border-border shadow-2xl overflow-hidden relative"
-              style={{ width: CANVAS_W, flexShrink: 0 }}
+              style={{ width: CANVAS_W, flexShrink: 0, maxHeight: 'calc(100dvh - 175px)', aspectRatio: `${CANVAS_W}/${CANVAS_H}` }}
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
             >
-              <canvas ref={canvasRef} width={CANVAS_W} height={CANVAS_H} style={{ display: "block" }} />
+              <canvas ref={canvasRef} width={CANVAS_W} height={CANVAS_H} style={{ display: "block", width: '100%', height: '100%' }} />
 
               {!started && !gameOver && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/70">

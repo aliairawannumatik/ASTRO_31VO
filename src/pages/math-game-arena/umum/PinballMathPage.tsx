@@ -771,7 +771,7 @@ const PinballMathPage = () => {
   }, [startGame]);
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 flex flex-col items-center gap-4 py-6">
         <div className="flex items-center gap-3 mb-1">
@@ -793,7 +793,7 @@ const PinballMathPage = () => {
           onTouchEnd={handleTouchEnd}
           onTouchMove={e => e.preventDefault()}
           className="rounded-2xl border border-white/10 shadow-2xl cursor-pointer"
-          style={{ maxWidth: "100%", maxHeight: "82vh", aspectRatio: `${CW}/${CH}` }}
+          style={{ maxWidth: "96vw", maxHeight: "calc(100dvh - 90px)", aspectRatio: `${CW}/${CH}` }}
         />
         <p className="text-white/30 text-xs font-body text-center max-w-xs">
           Tahan SPACE untuk isi daya, lepas untuk launch! Z/← flipper kiri, X/→ flipper kanan.

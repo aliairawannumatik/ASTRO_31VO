@@ -568,64 +568,58 @@ const KsatriaMatPage = () => {
   }, [rerender, startGame, handleAnswer, loadEnemy, startBattle]);
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <PageNavigation prevPath="/math-game-arena/umum" />
-      <div className="relative z-10 w-full max-w-5xl px-4 py-6 flex flex-col items-center">
-        <div className="text-center mb-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/40 bg-indigo-950/40 px-4 py-2 text-indigo-100 text-xs font-bold tracking-widest">
-            RPG PETUALANGAN · BOSS BATTLE · 3 LANTAI
+      <div className="relative z-10 flex flex-col h-full overflow-hidden">
+        <div className="shrink-0 px-3 pt-2 pb-1 flex flex-col items-center">
+          <div className="flex items-center gap-2">
+            <button onClick={() => { playPopSound(); navigate(-1); }} className="text-xs text-white/50 hover:text-white transition-colors font-body cursor-pointer">← Kembali</button>
+            <span className="font-display text-base font-bold text-primary text-glow-cyan">⚔️ Ksatria Matematika</span>
           </div>
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-primary text-glow-cyan mt-3">
-            ⚔️ Ksatria Matematika
-          </h1>
-          <p className="font-body text-sm text-white/65 mt-2 max-w-xl mx-auto">
-            Jadilah ksatria! Lawan slime, goblin, kerangka, dan naga boss raksasa lewat 3 lantai petualangan epik!
-          </p>
         </div>
 
-        <div className="relative rounded-[28px] p-3 bg-gradient-to-br from-indigo-500 via-purple-600 to-red-500 shadow-[0_0_55px_rgba(99,102,241,0.3)]">
-          <canvas
-            ref={canvasRef}
-            width={CW}
-            height={CH}
-            onClick={e => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              handleCanvasClick(
-                (e.clientX - rect.left) * (CW / rect.width),
-                (e.clientY - rect.top) * (CH / rect.height),
-              );
-            }}
-            onTouchStart={e => {
-              e.preventDefault();
-              const t = e.touches[0];
-              const rect = e.currentTarget.getBoundingClientRect();
-              handleCanvasClick(
-                (t.clientX - rect.left) * (CW / rect.width),
-                (t.clientY - rect.top) * (CH / rect.height),
-              );
-            }}
-            className="w-[min(420px,92vw)] h-auto rounded-[20px] bg-slate-950 select-none touch-none border-4 border-slate-900 cursor-pointer"
-          />
+        <div className="flex-1 min-h-0 flex items-center justify-center px-2">
+          <div className="relative rounded-[28px] p-2 bg-gradient-to-br from-indigo-500 via-purple-600 to-red-500 shadow-[0_0_55px_rgba(99,102,241,0.3)]">
+            <canvas
+              ref={canvasRef}
+              width={CW}
+              height={CH}
+              onClick={e => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                handleCanvasClick(
+                  (e.clientX - rect.left) * (CW / rect.width),
+                  (e.clientY - rect.top) * (CH / rect.height),
+                );
+              }}
+              onTouchStart={e => {
+                e.preventDefault();
+                const t = e.touches[0];
+                const rect = e.currentTarget.getBoundingClientRect();
+                handleCanvasClick(
+                  (t.clientX - rect.left) * (CW / rect.width),
+                  (t.clientY - rect.top) * (CH / rect.height),
+                );
+              }}
+              className="rounded-[20px] bg-slate-950 select-none touch-none border-4 border-slate-900 cursor-pointer"
+              style={{ width: 'auto', height: 'auto', maxWidth: '92vw', maxHeight: 'calc(100dvh - 110px)' }}
+            />
+          </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap justify-center gap-3">
+        <div className="shrink-0 px-3 pb-2 pt-1 flex flex-wrap justify-center gap-2">
           <button
             onClick={startGame}
-            className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-indigo-500/30"
+            className="rounded-full bg-accent px-5 py-2 text-sm font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-indigo-500/30"
           >
             Mulai / Ulangi
           </button>
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
-            className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors"
+            className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20 transition-colors"
           >
-            Kembali ke Game Umum
+            Kembali
           </button>
         </div>
-        <p className="mt-3 text-xs text-white/40 font-body text-center">
-          Saat bertarung: klik jawaban atau tekan tombol 1 / 2 / 3 / 4 di keyboard
-        </p>
       <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>

@@ -541,7 +541,7 @@ const CarRacingGamePage = () => {
   const playerPos = finishOrder.indexOf("Kamu") + 1 || carsRef.current.length;
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center justify-start overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
 
       <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
@@ -558,13 +558,12 @@ const CarRacingGamePage = () => {
         </div>
 
         <div className="relative w-full flex justify-center">
-          <div className="relative" style={{ width: CANVAS_W, maxWidth: "100%" }}>
+          <div className="relative" style={{ width: CANVAS_W, maxWidth: "100%", maxHeight: 'calc(100dvh - 185px)', aspectRatio: `${CANVAS_W}/${CANVAS_H}` }}>
             <canvas
               ref={canvasRef}
               width={CANVAS_W}
               height={CANVAS_H}
-              className="rounded-xl border border-border shadow-2xl"
-              style={{ maxWidth: "100%", height: "auto" }}
+              className="rounded-xl border border-border shadow-2xl w-full h-full"
             />
 
             {feedbackMsg && (

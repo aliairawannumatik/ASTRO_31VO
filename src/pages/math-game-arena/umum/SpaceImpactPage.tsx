@@ -790,7 +790,7 @@ const SpaceImpactPage = () => {
   const btnClass = "select-none active:opacity-70 bg-white/10 border border-white/20 rounded-lg font-bold text-white text-lg flex items-center justify-center cursor-pointer touch-none";
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
       <PageNavigation prevPath="/math-game-arena/umum" />
 
@@ -803,12 +803,12 @@ const SpaceImpactPage = () => {
         </p>
 
         {/* Canvas */}
-        <div className="relative" style={{ width: CW, maxWidth: "100%" }}>
+        <div className="relative" style={{ width: CW, maxWidth: "100%", maxHeight: 'calc(100dvh - 250px)', aspectRatio: `${CW}/${CH}` }}>
           <canvas
             ref={canvasRef}
             width={CW}
             height={CH}
-            className="rounded-xl border border-white/10 shadow-2xl w-full"
+            className="rounded-xl border border-white/10 shadow-2xl w-full h-full"
             style={{ imageRendering: "pixelated", touchAction: "none" }}
           />
 

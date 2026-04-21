@@ -526,10 +526,10 @@ const BounceMathPage = () => {
   }, [spawnBgStars, rerender]);
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center gap-4 py-6">
-        <div className="flex items-center gap-3 mb-1">
+      <div className="relative z-10 flex flex-col items-center gap-2 py-2 h-full justify-center">
+        <div className="shrink-0 flex items-center gap-3">
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
             className="text-xs text-white/50 hover:text-white transition-colors font-body cursor-pointer"
@@ -546,7 +546,7 @@ const BounceMathPage = () => {
           onClick={handleClick}
           onTouchStart={(e) => { e.preventDefault(); handleClick(e); }}
           className="rounded-2xl border border-white/10 shadow-2xl cursor-pointer"
-          style={{ maxWidth: "100%", maxHeight: "80vh", aspectRatio: `${CW}/${CH}` }}
+          style={{ maxWidth: "96vw", maxHeight: "calc(100dvh - 90px)", aspectRatio: `${CW}/${CH}` }}
         />
         <p className="text-white/30 text-xs font-body text-center max-w-xs">
           Klik bola yang menampilkan jawaban benar dari soal di atas!

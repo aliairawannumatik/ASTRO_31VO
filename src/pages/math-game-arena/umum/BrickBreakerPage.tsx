@@ -731,7 +731,7 @@ const BrickBreakerPage = () => {
   }, [buildBricks, resetBall, spawnBgStars, rerender]);
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 flex flex-col items-center gap-4 py-6 w-full">
         <canvas
@@ -747,7 +747,7 @@ const BrickBreakerPage = () => {
             borderRadius: 20,
             boxShadow: "0 0 40px rgba(130,80,255,0.45), 0 0 80px rgba(80,0,200,0.2)",
             maxWidth: "95vw",
-            maxHeight: "90vh",
+            maxHeight: "calc(100dvh - 80px)",
             objectFit: "contain",
           }}
         />

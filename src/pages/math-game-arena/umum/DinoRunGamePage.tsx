@@ -498,7 +498,7 @@ const DinoRunGamePage = () => {
   };
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center justify-start overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
 
       <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
@@ -521,12 +521,12 @@ const DinoRunGamePage = () => {
           <span className="text-red-400">{"♥".repeat(lives)}{"🖤".repeat(Math.max(0, 3 - lives))}</span>
         </div>
 
-        <div className="relative w-full" style={{ maxWidth: CW }}>
+        <div className="relative w-full" style={{ maxWidth: CW, maxHeight: 'calc(100dvh - 200px)', aspectRatio: `${CW}/${CH}` }}>
           <canvas
             ref={canvasRef}
             width={CW}
             height={CH}
-            className="rounded-xl border border-border shadow-2xl w-full"
+            className="rounded-xl border border-border shadow-2xl w-full h-full"
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
             onClick={() => {

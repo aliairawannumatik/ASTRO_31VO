@@ -650,7 +650,7 @@ const AsteroidBlasterPage = () => {
   const onTouchStart = (e: React.TouchEvent) => { onTouchMove(e); };
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 w-full max-w-lg px-2 py-4 flex flex-col items-center">
         {/* nav */}
@@ -673,7 +673,7 @@ const AsteroidBlasterPage = () => {
         {/* canvas */}
         <div
           className="relative w-full select-none"
-          style={{ maxWidth: CW }}
+          style={{ maxWidth: CW, maxHeight: 'calc(100dvh - 200px)', aspectRatio: `${CW}/${CH}` }}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -682,7 +682,7 @@ const AsteroidBlasterPage = () => {
             ref={canvasRef}
             width={CW}
             height={CH}
-            className="rounded-2xl border border-border shadow-2xl w-full"
+            className="rounded-2xl border border-border shadow-2xl w-full h-full"
           />
 
           {feedback && (

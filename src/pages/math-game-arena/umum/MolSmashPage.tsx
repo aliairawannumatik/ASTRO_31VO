@@ -788,7 +788,8 @@ const MolSmashPage = () => {
 
   return (
     <div
-      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}
+      className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}
+      style={{ height: '100dvh' }}
     >
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 flex flex-col items-center gap-4 py-6 w-full">
@@ -803,7 +804,7 @@ const MolSmashPage = () => {
             borderRadius: 20,
             boxShadow: "0 0 40px rgba(100,80,255,0.4), 0 0 80px rgba(80,200,255,0.15)",
             maxWidth: "95vw",
-            maxHeight: "90vh",
+            maxHeight: "calc(100dvh - 80px)",
             objectFit: "contain",
           }}
         />

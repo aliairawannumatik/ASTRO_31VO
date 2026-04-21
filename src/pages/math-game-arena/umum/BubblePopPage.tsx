@@ -640,9 +640,10 @@ const BubblePopPage = () => {
 
   return (
     <div
-      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${
+      className={`relative flex flex-col items-center overflow-hidden ${
         isLight ? "gradient-snow" : "gradient-space"
       }`}
+      style={{ height: '100dvh' }}
     >
       {isLight ? <Snowfall /> : <Starfield />}
 
@@ -670,8 +671,9 @@ const BubblePopPage = () => {
           height={CH}
           onClick={handleClick}
           style={{
-            width: "100%",
-            maxWidth: CW,
+            width: "auto",
+            maxWidth: "96vw",
+            maxHeight: "calc(100dvh - 100px)",
             aspectRatio: `${CW}/${CH}`,
             borderRadius: 16,
             cursor: "crosshair",

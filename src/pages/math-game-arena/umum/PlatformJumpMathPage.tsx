@@ -490,64 +490,52 @@ const PlatformJumpMathPage = () => {
   }, [rerender, nextRound, startGame]);
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div className={`relative flex flex-col overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <PageNavigation prevPath="/math-game-arena/umum" />
-      <div className="relative z-10 w-full max-w-5xl px-4 py-6 flex flex-col items-center">
-        <div className="text-center mb-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-950/40 px-4 py-2 text-cyan-100 text-xs font-bold tracking-widest">
-            PLATFORMER · DOUBLE JUMP · PETUALANGAN MATEMATIKA
+      <div className="relative z-10 flex flex-col h-full overflow-hidden">
+        <div className="shrink-0 px-3 pt-2 pb-1 flex items-center gap-2 justify-center">
+          <button onClick={() => { playPopSound(); navigate(-1); }} className="text-xs text-white/50 hover:text-white transition-colors font-body cursor-pointer">← Kembali</button>
+          <span className="font-display text-base font-bold text-primary text-glow-cyan">🪐 Lompat Jawaban</span>
+        </div>
+
+        <div className="flex-1 min-h-0 flex items-center justify-center px-2">
+          <div className="relative rounded-[28px] p-2 bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 shadow-[0_0_50px_rgba(103,232,249,0.28)]">
+            <canvas
+              ref={canvasRef}
+              width={CW}
+              height={CH}
+              onClick={handleCanvasClick}
+              className="rounded-[20px] bg-slate-950 select-none touch-none border-4 border-slate-900 cursor-pointer"
+              style={{ width: 'auto', height: 'auto', maxWidth: '92vw', maxHeight: 'calc(100dvh - 130px)' }}
+            />
           </div>
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-primary text-glow-cyan mt-3">
-            🪐 Lompat Jawaban
-          </h1>
-          <p className="font-body text-sm text-white/65 mt-2 max-w-xl mx-auto">
-            Kendalikan astronot neon! Lompat ke platform dengan jawaban yang benar. Double jump, kejar combo, raih skor tertinggi!
-          </p>
         </div>
 
-        <div className="relative rounded-[28px] p-3 bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 shadow-[0_0_50px_rgba(103,232,249,0.28)]">
-          <canvas
-            ref={canvasRef}
-            width={CW}
-            height={CH}
-            onClick={handleCanvasClick}
-            className="w-[min(420px,92vw)] h-auto rounded-[20px] bg-slate-950 select-none touch-none border-4 border-slate-900 cursor-pointer"
-          />
-        </div>
-
-        <div className="mt-4 flex items-center gap-3">
-          <button
-            onPointerDown={() => { touchRef.current.left = true; }}
-            onPointerUp={() => { touchRef.current.left = false; }}
-            onPointerLeave={() => { touchRef.current.left = false; }}
-            className="w-14 h-14 rounded-full bg-white/10 border border-white/25 text-2xl font-bold text-white active:bg-white/25 select-none touch-none"
-          >◀</button>
-          <button
-            onPointerDown={handleTouchJump}
-            className="w-16 h-16 rounded-full bg-cyan-500/30 border-2 border-cyan-400/60 text-2xl text-white active:bg-cyan-400/40 select-none touch-none flex items-center justify-center"
-          >⬆</button>
-          <button
-            onPointerDown={() => { touchRef.current.right = true; }}
-            onPointerUp={() => { touchRef.current.right = false; }}
-            onPointerLeave={() => { touchRef.current.right = false; }}
-            className="w-14 h-14 rounded-full bg-white/10 border border-white/25 text-2xl font-bold text-white active:bg-white/25 select-none touch-none"
-          >▶</button>
-        </div>
-
-        <div className="mt-3 flex flex-wrap justify-center gap-3">
-          <button
-            onClick={startGame}
-            className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30"
-          >
-            Mulai / Ulangi
-          </button>
-          <button
-            onClick={() => { playPopSound(); navigate(-1); }}
-            className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors"
-          >
-            Kembali ke Game Umum
-          </button>
+        <div className="shrink-0 px-3 pb-2 pt-1 flex flex-col items-center gap-1">
+          <div className="flex items-center gap-3">
+            <button
+              onPointerDown={() => { touchRef.current.left = true; }}
+              onPointerUp={() => { touchRef.current.left = false; }}
+              onPointerLeave={() => { touchRef.current.left = false; }}
+              className="w-12 h-12 rounded-full bg-white/10 border border-white/25 text-xl font-bold text-white active:bg-white/25 select-none touch-none"
+            >◀</button>
+            <button
+              onPointerDown={handleTouchJump}
+              className="w-14 h-14 rounded-full bg-cyan-500/30 border-2 border-cyan-400/60 text-xl text-white active:bg-cyan-400/40 select-none touch-none flex items-center justify-center"
+            >⬆</button>
+            <button
+              onPointerDown={() => { touchRef.current.right = true; }}
+              onPointerUp={() => { touchRef.current.right = false; }}
+              onPointerLeave={() => { touchRef.current.right = false; }}
+              className="w-12 h-12 rounded-full bg-white/10 border border-white/25 text-xl font-bold text-white active:bg-white/25 select-none touch-none"
+            >▶</button>
+            <button
+              onClick={startGame}
+              className="rounded-full bg-accent px-4 py-2 text-xs font-bold text-black hover:scale-105 transition-transform"
+            >
+              Mulai / Ulangi
+            </button>
+          </div>
         </div>
       <GuruQuizOverlay {...guruQuiz} />
       </div>
