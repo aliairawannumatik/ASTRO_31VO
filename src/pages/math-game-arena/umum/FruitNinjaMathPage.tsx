@@ -602,12 +602,27 @@ const FruitNinjaMathPage = () => {
         drawText(`Soal: ${currentQ.q}`, CW / 2, 70, 28, "#ffffff");
       }
 
-      drawText(`Skor ${scoreRef.current}`, 27, 118, 13, "#bbf7d0", "left");
-      drawText(`Nyawa ${"❤".repeat(livesRef.current)}`, CW / 2, 118, 13, "#fecaca");
-      drawText(`Waktu ${Math.ceil(timerRef.current)}`, CW - 27, 118, 13, "#fde047", "right");
+      drawText(`Skor ${scoreRef.current}`, 27, 110, 13, "#bbf7d0", "left");
+      drawText(`Nyawa ${"❤".repeat(livesRef.current)}`, CW / 2, 110, 13, "#fecaca");
+      drawText(`Waktu ${Math.ceil(timerRef.current)}`, CW - 27, 110, 13, "#fde047", "right");
       const quizSecs = nextQuizInRef.current;
-      const quizColor = quizSecs <= 5 ? "#fde047" : "#67e8f9";
-      drawText(`⏱ Soal: ${quizSecs}s`, CW / 2, 138, 12, quizColor);
+      const quizUrgent = quizSecs <= 5;
+      const pulse = quizUrgent ? 0.7 + Math.sin(ts * 0.012) * 0.3 : 1;
+      const pillW = 180;
+      const pillX = (CW - pillW) / 2;
+      const pillY = 124;
+      const pillH = 22;
+      ctx.save();
+      ctx.globalAlpha = pulse;
+      ctx.fillStyle = quizUrgent ? "rgba(253,224,71,0.25)" : "rgba(103,232,249,0.18)";
+      ctx.strokeStyle = quizUrgent ? "#fde047" : "#67e8f9";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(pillX, pillY, pillW, pillH, 11);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+      drawText(`⏱ SOAL DALAM ${quizSecs} DETIK`, CW / 2, pillY + 15, 12, quizUrgent ? "#fde047" : "#a5f3fc");
 
       ctx.fillStyle = "rgba(15,23,42,0.45)";
       ctx.fillRect(0, 146, CW, CH - 146);
