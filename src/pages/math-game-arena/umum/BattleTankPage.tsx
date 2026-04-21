@@ -630,33 +630,35 @@ const BattleTankPage = () => {
   }, [rerender, spawnWave, fireBullet, triggerQuiz]);
 
   return (
-    <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+    <div
+      className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}
+      style={{ height: '100dvh' }}
+    >
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 w-full max-w-5xl px-4 py-6 flex flex-col items-center">
-        <div className="text-center mb-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/40 bg-emerald-950/40 px-4 py-2 text-emerald-100 text-xs font-bold tracking-widest">
-            GAME AKSI · BEBAS TEMBAK · SOAL BONUS
-          </div>
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-primary text-glow-cyan mt-3">
-            💥 Shoot Tank
-          </h1>
-          <p className="font-body text-sm text-white/65 mt-2 max-w-xl mx-auto">
-            Tembak semua tank musuh secara bebas! Setiap 40 detik muncul soal bonus — jawab dengan benar untuk poin ekstra!
-          </p>
-        </div>
 
-        <div className="relative">
-          <div className="rounded-[28px] p-3 bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 shadow-[0_0_45px_rgba(0,240,255,0.35)]">
-            <canvas
-              ref={canvasRef}
-              width={CW} height={CH}
-              onMouseMove={handleMouseMove}
-              onClick={handleClick}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              className="w-[min(420px,92vw)] h-auto rounded-[20px] bg-slate-950 cursor-crosshair select-none touch-none border-4 border-slate-900"
-            />
-          </div>
+      {/* Header */}
+      <div className="relative z-10 w-full shrink-0 text-center pt-2 pb-1 px-4">
+        <h1 className="font-display text-lg sm:text-2xl font-bold text-primary text-glow-cyan leading-tight">
+          💥 Shoot Tank
+        </h1>
+        <p className="font-body text-[10px] text-white/50 mt-0.5">
+          🖱️ Mouse/sentuh untuk membidik · Klik/tap untuk menembak
+        </p>
+      </div>
+
+      {/* Canvas – fills remaining space */}
+      <div className="relative z-10 flex-1 min-h-0 w-full flex items-center justify-center px-2 py-1">
+        <div className="relative inline-flex rounded-[28px] p-2 bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 shadow-[0_0_45px_rgba(0,240,255,0.35)]">
+          <canvas
+            ref={canvasRef}
+            width={CW} height={CH}
+            onMouseMove={handleMouseMove}
+            onClick={handleClick}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            className="block rounded-[20px] bg-slate-950 cursor-crosshair select-none touch-none border-4 border-slate-900"
+            style={{ maxHeight: 'calc(100dvh - 120px)', width: 'auto', maxWidth: '96vw' }}
+          />
 
           {activeQuiz && (
             <div className="absolute inset-0 flex items-center justify-center z-20 rounded-[28px] p-3">
@@ -687,29 +689,25 @@ const BattleTankPage = () => {
             </div>
           )}
         </div>
-
-        <div className="mt-4 flex flex-wrap justify-center gap-3">
-          <button
-            onClick={startGame}
-            className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30"
-          >
-            Mulai / Ulangi
-          </button>
-          <button
-            onClick={() => { playPopSound(); navigate(-1); }}
-            className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors"
-          >
-            Kembali ke Game Umum
-          </button>
-        </div>
-
-        <div className="mt-4 text-center text-white/50 text-xs font-body space-y-1">
-          <p>🖱️ Gerakkan mouse untuk membidik · Klik untuk menembak</p>
-          <p>📱 Sentuh layar untuk membidik & menembak</p>
-          <p>❓ Soal bonus muncul tiap {QUIZ_INTERVAL} detik — jawab untuk poin ekstra!</p>
-        </div>
-      <GuruQuizOverlay {...guruQuiz} />
       </div>
+
+      {/* Buttons */}
+      <div className="relative z-10 w-full shrink-0 flex flex-wrap justify-center gap-2 pb-2 px-2">
+        <button
+          onClick={startGame}
+          className="rounded-full bg-accent px-5 py-2 text-xs font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30"
+        >
+          Mulai / Ulangi
+        </button>
+        <button
+          onClick={() => { playPopSound(); navigate(-1); }}
+          className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-bold text-white hover:bg-white/20 transition-colors"
+        >
+          Kembali
+        </button>
+      </div>
+
+      <GuruQuizOverlay {...guruQuiz} />
     </div>
   );
 };
