@@ -628,6 +628,7 @@ const InteractiveKerangkaBalok = () => {
           width: P, height: T,
           position: "relative",
           transformStyle: "preserve-3d",
+          transformOrigin: `50% 50% ${L / 2}px`,
           transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
           transition: isDragging ? "none" : "transform 1s ease",
         }}>
