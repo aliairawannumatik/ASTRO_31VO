@@ -119,69 +119,7 @@ const questions: Q[] = [
       { label: "c.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
     ],
   }),
-  Qn(10, "Skala Alam Semesta – Konteks Sains – ANBK", {
-    type: "mixed", diagram: <ScaleChartSVG />,
-    content: "Jarak Bumi ke Matahari ≈ 1,5 × 10⁸ km.",
-    parts: [
-      { label: "a.", text: "Nyatakan jarak ini dalam meter." },
-      { label: "b.", math: "\\text{Cahaya menempuh } 3 \\times 10^8 \\text{ m/s. Berapa waktu cahaya dari Matahari ke Bumi (dalam menit)?}" },
-      { label: "c.", text: "Nyatakan jawabanmu dalam notasi ilmiah." },
-    ],
-  }),
-  Qn(11, "Perbandingan dalam Notasi Ilmiah – TKA", {
-    type: "mixed",
-    content: "Bandingkan dengan >, <, atau =:",
-    parts: [
-      { label: "a.", math: "3{,}2 \\times 10^5 \\ldots 8 \\times 10^4" },
-      { label: "b.", math: "5{,}6 \\times 10^{-3} \\ldots 6{,}0 \\times 10^{-4}" },
-      { label: "c.", math: "7 \\times 10^6 \\ldots 7{,}01 \\times 10^6" },
-    ],
-  }),
-  Qn(12, "Mengurutkan Notasi Ilmiah – UN", {
-    type: "mixed",
-    content: "Urutkan dari terkecil ke terbesar:",
-    parts: [
-      { label: "a.", math: "4 \\times 10^5,\\; 3{,}2 \\times 10^6,\\; 8 \\times 10^4,\\; 1{,}2 \\times 10^6" },
-      { label: "b.", math: "5 \\times 10^{-3},\\; 2{,}5 \\times 10^{-4},\\; 8 \\times 10^{-3},\\; 1 \\times 10^{-2}" },
-      { label: "c.", text: "Jelaskan cara tercepat mengurutkan notasi ilmiah." },
-    ],
-  }),
-  Qn(13, "Notasi Ilmiah dalam Fisika – ANBK", {
-    type: "mixed",
-    content: "Muatan elektron = 1,6 × 10⁻¹⁹ Coulomb.",
-    parts: [
-      { label: "a.", text: "Tulis muatan tersebut dalam bentuk desimal biasa." },
-      { label: "b.", math: "\\text{Muatan } 5 \\text{ elektron} = 5 \\times 1{,}6 \\times 10^{-19} = \\ldots" },
-      { label: "c.", math: "\\text{Berapa elektron untuk total muatan } 1 \\text{ Coulomb?}" },
-    ],
-  }),
-  Qn(14, "Notasi Ilmiah dalam Kimia – TKA", {
-    type: "mixed",
-    content: "Bilangan Avogadro: N = 6,02 × 10²³ partikel/mol.",
-    parts: [
-      { label: "a.", math: "\\text{2 mol} = 2 \\times 6{,}02 \\times 10^{23} = \\ldots \\text{ partikel}" },
-      { label: "b.", math: "\\text{0,5 mol} = \\ldots \\text{ partikel}" },
-      { label: "c.", math: "\\text{Berapa mol jika ada } 3{,}01 \\times 10^{23} \\text{ partikel?}" },
-    ],
-  }),
-  Qn(15, "Notasi Ilmiah dalam Ekonomi – UN", {
-    type: "mixed",
-    content: "PDB Indonesia ≈ Rp 19.588.000.000.000.000",
-    parts: [
-      { label: "a.", text: "Tulis dalam notasi ilmiah." },
-      { label: "b.", math: "\\text{PDB per kapita jika penduduk } 2{,}7 \\times 10^8:" },
-      { label: "c.", text: "Nyatakan hasilnya dalam notasi ilmiah." },
-    ],
-  }),
-  Qn(16, "Perpangkatan Notasi Ilmiah – ANBK", {
-    type: "mixed", mathContent: "(a \\times 10^n)^m = a^m \\times 10^{nm}",
-    parts: [
-      { label: "a.", math: "(2 \\times 10^3)^2 = 4 \\times 10^6" },
-      { label: "b.", math: "(3 \\times 10^4)^2 = \\ldots" },
-      { label: "c.", math: "(5 \\times 10^{-2})^3 = \\ldots" },
-    ],
-  }),
-  Qn(17, "Memperbaiki Notasi yang Salah – TKA", {
+  Qn(10, "Memperbaiki Notasi yang Salah – TKA", {
     type: "mixed",
     content: "Perbaiki notasi ilmiah berikut ke bentuk baku:",
     parts: [
@@ -190,205 +128,12 @@ const questions: Q[] = [
       { label: "c.", math: "120 \\times 10^{-3} = \\ldots" },
     ],
   }),
-  Qn(18, "Luas dan Volume dalam Notasi Ilmiah – UN", {
-    type: "mixed",
-    content: "Permukaan Bumi ≈ 5,1 × 10⁸ km². Luas daratan ≈ 1,49 × 10⁸ km².",
-    parts: [
-      { label: "a.", math: "\\text{Luas lautan} = 5{,}1 \\times 10^8 - 1{,}49 \\times 10^8 = \\ldots" },
-      { label: "b.", math: "\\text{Persentase daratan} = \\frac{1{,}49}{5{,}1} \\times 100\\% \\approx \\ldots\\%" },
-      { label: "c.", text: "Nyatakan luas daratan dalam m²." },
-    ],
-  }),
-  Qn(19, "Populasi Dunia – ANBK", {
-    type: "mixed",
-    content: "Populasi dunia ≈ 8 × 10⁹ orang. Indonesia ≈ 2,75 × 10⁸ orang.",
-    parts: [
-      { label: "a.", math: "\\text{Persentase Indonesia} = \\frac{2{,}75 \\times 10^8}{8 \\times 10^9} \\times 100\\% \\approx \\ldots\\%" },
-      { label: "b.", math: "\\text{Populasi Asia } \\approx 4{,}7 \\times 10^9. \\text{ Selisih dengan dunia}?" },
-      { label: "c.", text: "Jika setiap orang memerlukan 2 L air/hari, berapa total kebutuhan air dunia per hari (dalam notasi ilmiah)?" },
-    ],
-  }),
-  Qn(20, "Operasi Campuran Notasi Ilmiah – TKA", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{(4 \\times 10^6)(3 \\times 10^4)}{6 \\times 10^5} = \\ldots" },
-      { label: "b.", math: "\\frac{(2 \\times 10^{-3})^2}{4 \\times 10^{-8}} = \\ldots" },
-      { label: "c.", math: "(3 \\times 10^5)^2 \\div (9 \\times 10^6) = \\ldots" },
-    ],
-  }),
-  Qn(21, "Kecepatan Cahaya – UN", {
-    type: "mixed",
-    content: "Kecepatan cahaya = 3 × 10⁸ m/s.",
-    parts: [
-      { label: "a.", math: "\\text{Jarak dalam 1 detik: } 3 \\times 10^8 \\text{ m} = \\ldots \\text{ km}" },
-      { label: "b.", math: "\\text{Jarak dalam 1 menit} = 60 \\times 3 \\times 10^8 = \\ldots \\text{ m}" },
-      { label: "c.", math: "\\text{Jarak dalam 1 jam} = \\ldots \\text{ km (dalam notasi ilmiah)}" },
-    ],
-  }),
-  Qn(22, "Satuan SI dengan Notasi Ilmiah – ANBK", {
-    type: "mixed",
-    content: "Hubungkan satuan dengan pangkat 10:",
-    parts: [
-      { label: "a.", math: "1 \\text{ km} = 10^3 \\text{ m. Nyatakan 5{,}6 km dalam meter.}" },
-      { label: "b.", math: "1 \\text{ mg} = 10^{-3} \\text{ g. Nyatakan 250 mg dalam gram.}" },
-      { label: "c.", math: "1 \\mu\\text{s} = 10^{-6} \\text{ s. Nyatakan 30 } \\mu\\text{s dalam sekon.}" },
-    ],
-  }),
-  Qn(23, "Massa Atom – TKA", {
-    type: "mixed",
-    content: "Massa proton = 1,67 × 10⁻²⁷ kg.",
-    parts: [
-      { label: "a.", math: "\\text{Massa 1000 proton} = 1000 \\times 1{,}67 \\times 10^{-27} = \\ldots \\text{ kg}" },
-      { label: "b.", math: "\\text{Massa elektron} = 9{,}11 \\times 10^{-31} \\text{ kg}. \\text{Berapa kali proton lebih berat?}" },
-      { label: "c.", text: "Nyatakan perbandingan dalam notasi ilmiah." },
-    ],
-  }),
-  Qn(24, "Penggunaan Kalkulator – UN", {
-    type: "mixed",
-    content: "Hitung tanpa kalkulator dengan menyederhanakan dahulu:",
-    parts: [
-      { label: "a.", math: "\\frac{6 \\times 10^{14}}{2 \\times 10^7} = \\ldots" },
-      { label: "b.", math: "(5 \\times 10^3) \\times (4 \\times 10^{-1}) = \\ldots" },
-      { label: "c.", math: "\\frac{(3 \\times 10^5)^2}{9 \\times 10^4} = \\ldots" },
-    ],
-  }),
-  Qn(25, "Diameter Atom – ANBK", {
-    type: "mixed",
-    content: "Diameter atom hidrogen ≈ 1 × 10⁻¹⁰ m.",
-    parts: [
-      { label: "a.", math: "\\text{Nyatakan dalam nm } (1 \\text{ nm} = 10^{-9} \\text{ m})" },
-      { label: "b.", math: "\\text{Berapa atom yang berjajar dalam 1 cm?}" },
-      { label: "c.", text: "Nyatakan jawabannya dalam notasi ilmiah." },
-    ],
-  }),
-  Qn(26, "Kecepatan dan Jarak – TKA", {
-    type: "mixed",
-    content: "Jarak Bumi–Bulan ≈ 3,84 × 10⁵ km.",
-    parts: [
-      { label: "a.", math: "\\text{Nyatakan dalam meter.}" },
-      { label: "b.", math: "\\text{Roket melaju } 4 \\times 10^4 \\text{ km/jam. Berapa jam menuju Bulan?}" },
-      { label: "c.", text: "Nyatakan waktu tempuh dalam notasi ilmiah." },
-    ],
-  }),
-  Qn(27, "Soal UN – Membandingkan Ekspresi", {
-    type: "mixed",
-    content: "Urutkan dari terbesar ke terkecil:",
-    parts: [
-      { label: "a.", math: "3{,}0 \\times 10^{-4},\\; 5 \\times 10^{-5},\\; 2{,}5 \\times 10^{-3}" },
-      { label: "b.", math: "7{,}8 \\times 10^{11},\\; 8 \\times 10^{10},\\; 1{,}2 \\times 10^{12}" },
-      { label: "c.", text: "Apa aturan urutan notasi ilmiah yang berlaku umum?" },
-    ],
-  }),
-  Qn(28, "Soal ANBK – Operasi Kombinasi", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(1{,}2 \\times 10^5) + (3{,}0 \\times 10^4) = \\ldots" },
-      { label: "b.", math: "(8{,}5 \\times 10^{-3}) - (2{,}5 \\times 10^{-4}) = \\ldots" },
-      { label: "c.", math: "(4 \\times 10^6) \\times (2{,}5 \\times 10^{-2}) = \\ldots" },
-    ],
-  }),
-  Qn(29, "Soal TKA – Luas Negara", {
-    type: "mixed",
-    content: "Luas Indonesia ≈ 1.919.440 km². Luas Australia ≈ 7.692.024 km².",
-    parts: [
-      { label: "a.", text: "Nyatakan luas Indonesia dalam notasi ilmiah." },
-      { label: "b.", text: "Nyatakan luas Australia dalam notasi ilmiah." },
-      { label: "c.", math: "\\text{Berapa kali lipat luas Australia dibanding Indonesia?}" },
-    ],
-  }),
-  Qn(30, "Soal UN – Perpangkatan Notasi Ilmiah", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(4 \\times 10^3)^2 = \\ldots" },
-      { label: "b.", math: "(2 \\times 10^{-4})^3 = \\ldots" },
-      { label: "c.", math: "\\sqrt{9 \\times 10^{10}} = \\ldots" },
-    ],
-  }),
-  Qn(31, "Soal ANBK – Akar dalam Notasi Ilmiah", {
+  Qn(11, "Soal ANBK – Akar dalam Notasi Ilmiah", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{4 \\times 10^6} = 2 \\times 10^3" },
       { label: "b.", math: "\\sqrt{25 \\times 10^8} = \\ldots" },
       { label: "c.", math: "\\sqrt{36 \\times 10^{-4}} = \\ldots" },
-    ],
-  }),
-  Qn(32, "Soal TKA – Massa Planet", {
-    type: "mixed",
-    content: "Massa Bumi ≈ 5,97 × 10²⁴ kg. Massa Bulan ≈ 7,34 × 10²² kg.",
-    parts: [
-      { label: "a.", math: "\\text{Perbandingan massa Bumi : Bulan} = \\frac{5{,}97 \\times 10^{24}}{7{,}34 \\times 10^{22}} \\approx \\ldots" },
-      { label: "b.", text: "Berapa kali Bumi lebih berat dari Bulan?" },
-      { label: "c.", math: "\\text{Total massa Bumi + Bulan} = \\ldots" },
-    ],
-  }),
-  Qn(33, "Soal UN – Konversi Satuan Lanjut", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "1{,}5 \\times 10^{-2} \\text{ km} = \\ldots \\text{ m}" },
-      { label: "b.", math: "2{,}4 \\times 10^4 \\text{ cm} = \\ldots \\text{ m}" },
-      { label: "c.", math: "6{,}0 \\times 10^9 \\text{ mm} = \\ldots \\text{ km}" },
-    ],
-  }),
-  Qn(34, "Soal ANBK – Estimasi dengan Notasi Ilmiah", {
-    type: "mixed",
-    content: "Estimasikan dalam notasi ilmiah:",
-    parts: [
-      { label: "a.", text: "Jumlah detik dalam 1 tahun (365 hari)." },
-      { label: "b.", text: "Jumlah sel dalam tubuh manusia (≈ 37 triliun sel)." },
-      { label: "c.", text: "Jumlah bintang di galaksi Bima Sakti (≈ 200-400 miliar)." },
-    ],
-  }),
-  Qn(35, "Soal TKA – Kepadatan Penduduk", {
-    type: "mixed",
-    content: "Penduduk Jawa ≈ 1,5 × 10⁸ orang. Luas Jawa ≈ 1,29 × 10⁵ km².",
-    parts: [
-      { label: "a.", math: "\\text{Kepadatan} = \\frac{1{,}5 \\times 10^8}{1{,}29 \\times 10^5} \\approx \\ldots \\text{ orang/km}^2" },
-      { label: "b.", text: "Nyatakan kepadatan dalam notasi ilmiah." },
-      { label: "c.", text: "Bandingkan dengan kepadatan dunia: 8×10⁹ / 1,5×10⁸ km²." },
-    ],
-  }),
-  Qn(36, "Soal UN – Gabungan Operasi", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{(6 \\times 10^5) \\times (3 \\times 10^{-2})}{(9 \\times 10^3)} = \\ldots" },
-      { label: "b.", math: "(5 \\times 10^4)^2 \\div (2{,}5 \\times 10^6) = \\ldots" },
-      { label: "c.", math: "\\frac{(4 \\times 10^3)(3 \\times 10^{-1})}{(6 \\times 10^{-2})} = \\ldots" },
-    ],
-  }),
-  Qn(37, "Soal ANBK – Energi Matahari", {
-    type: "mixed",
-    content: "Matahari memancarkan energi ≈ 3,8 × 10²⁶ J/s.",
-    parts: [
-      { label: "a.", math: "\\text{Energi dalam 1 menit} = 60 \\times 3{,}8 \\times 10^{26} = \\ldots \\text{ J}" },
-      { label: "b.", math: "\\text{Energi dalam 1 jam} = \\ldots \\text{ J}" },
-      { label: "c.", text: "Bumi menerima sekitar 1/2 miliar dari energi Matahari. Berapa J per detik yang diterima Bumi?" },
-    ],
-  }),
-  Qn(38, "Soal TKA – Memahami Notasi Ilmiah Negatif", {
-    type: "mixed",
-    content: "Tebal virus ≈ 1 × 10⁻⁷ m.",
-    parts: [
-      { label: "a.", math: "\\text{Nyatakan dalam nm } (1 \\text{ nm} = 10^{-9} \\text{ m})" },
-      { label: "b.", math: "\\text{Berapa virus yang berjajar sepanjang 1 mm?}" },
-      { label: "c.", text: "Nyatakan dalam notasi ilmiah." },
-    ],
-  }),
-  Qn(39, "Soal UN – Kedalaman Laut dan Tinggi Gunung", {
-    type: "mixed",
-    content: "Titik terdalam laut (Palung Mariana) ≈ 11.034 m. Puncak tertinggi (Everest) ≈ 8.849 m.",
-    parts: [
-      { label: "a.", text: "Nyatakan kedalaman dalam notasi ilmiah." },
-      { label: "b.", text: "Nyatakan ketinggian dalam notasi ilmiah." },
-      { label: "c.", math: "\\text{Selisih} = \\ldots \\text{ m (dalam notasi ilmiah)}" },
-    ],
-  }),
-  Qn(40, "Soal UN/ANBK/TKA – Gabungan Notasi Ilmiah", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(2{,}4 \\times 10^5) \\times (3{,}5 \\times 10^{-2}) = \\ldots" },
-      { label: "b.", math: "\\frac{8{,}1 \\times 10^{12}}{2{,}7 \\times 10^4} = \\ldots" },
-      { label: "c.", math: "(3 \\times 10^4)^3 \\div (9 \\times 10^8) = \\ldots" },
-      { label: "d.", math: "\\sqrt{1{,}6 \\times 10^{10}} = \\ldots" },
     ],
   }),
 ];
@@ -410,7 +155,7 @@ const NotasiIlmiahPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 11 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>

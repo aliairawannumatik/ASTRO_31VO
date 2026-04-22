@@ -131,16 +131,7 @@ const questions: Q[] = [
       { label: "c.", math: "9^{\\frac{3}{2}} = \\ldots" },
     ],
   }),
-  Qn(11, "Mengubah Pangkat Pecahan ↔ Bentuk Akar – UN", {
-    type: "mixed",
-    content: "Ubah ke bentuk pangkat pecahan atau sebaliknya:",
-    parts: [
-      { label: "a.", math: "\\sqrt[4]{x^3} = x^{\\square}" },
-      { label: "b.", math: "a^{\\frac{5}{6}} = \\sqrt[\\square]{a^\\square}" },
-      { label: "c.", math: "\\sqrt[3]{m^5} = m^{\\square}" },
-    ],
-  }),
-  Qn(12, "Sifat Pangkat Negatif – TKA", {
+  Qn(11, "Sifat Pangkat Negatif – TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "2^{-3} \\times 2^5 = 2^{\\square} = \\ldots" },
@@ -148,7 +139,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{5^3}{5^{-2}} = 5^{\\square} = \\ldots" },
     ],
   }),
-  Qn(13, "Pangkat Negatif Basis Pecahan – ANBK", {
+  Qn(12, "Pangkat Negatif Basis Pecahan – ANBK", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\left(\\frac{3}{4}\\right)^{-1} = \\frac{4}{3}" },
@@ -156,7 +147,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\frac{a}{b}\\right)^{-n} = \\left(\\frac{b}{a}\\right)^n" },
     ],
   }),
-  Qn(14, "Gabungan Pangkat Nol dan Negatif – UN", {
+  Qn(13, "Gabungan Pangkat Nol dan Negatif – UN", {
     type: "mixed",
     parts: [
       { label: "a.", math: "2^0 + 2^{-1} + 2^{-2} = \\ldots" },
@@ -164,7 +155,7 @@ const questions: Q[] = [
       { label: "c.", math: "5^{-1} + 5^0 + 5^1 = \\ldots" },
     ],
   }),
-  Qn(15, "Pangkat Pecahan Negatif – TKA", {
+  Qn(14, "Pangkat Pecahan Negatif – TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "4^{-\\frac{1}{2}} = \\frac{1}{4^{\\frac{1}{2}}} = \\ldots" },
@@ -172,7 +163,7 @@ const questions: Q[] = [
       { label: "c.", math: "27^{-\\frac{2}{3}} = \\ldots" },
     ],
   }),
-  Qn(16, "Soal UN – Nilai dari Ekspresi Campuran", {
+  Qn(15, "Soal UN – Nilai dari Ekspresi Campuran", {
     type: "mixed",
     parts: [
       { label: "a.", math: "4^{\\frac{1}{2}} + 9^{\\frac{1}{2}} = \\ldots" },
@@ -180,7 +171,7 @@ const questions: Q[] = [
       { label: "c.", math: "16^{\\frac{3}{4}} + 27^{\\frac{1}{3}} = \\ldots" },
     ],
   }),
-  Qn(17, "Soal ANBK – Hubungan Pangkat Pecahan dan Akar", {
+  Qn(16, "Soal ANBK – Hubungan Pangkat Pecahan dan Akar", {
     type: "mixed",
     content: "Nyatakan dalam bentuk akar lalu hitung:",
     parts: [
@@ -189,7 +180,7 @@ const questions: Q[] = [
       { label: "c.", math: "256^{\\frac{3}{4}} = \\ldots" },
     ],
   }),
-  Qn(18, "Soal TKA – Menentukan Nilai n", {
+  Qn(17, "Soal TKA – Menentukan Nilai n", {
     type: "mixed",
     content: "Tentukan nilai n:",
     parts: [
@@ -198,7 +189,7 @@ const questions: Q[] = [
       { label: "c.", math: "n^{-2} = \\frac{1}{25} \\Rightarrow n = \\ldots" },
     ],
   }),
-  Qn(19, "Soal UN – Sederhanakan Ekspresi dengan Pangkat Negatif", {
+  Qn(18, "Soal UN – Sederhanakan Ekspresi dengan Pangkat Negatif", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{a^3}{a^{-2}} = a^{\\square}" },
@@ -206,7 +197,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{m^{-2} \\cdot m^5}{m^0} = m^{\\square}" },
     ],
   }),
-  Qn(20, "Soal ANBK – Pangkat Desimal", {
+  Qn(19, "Soal ANBK – Pangkat Desimal", {
     type: "mixed",
     content: "Pangkat desimal sama dengan pangkat pecahan:",
     parts: [
@@ -215,7 +206,7 @@ const questions: Q[] = [
       { label: "c.", math: "16^{0.75} = 16^{\\frac{3}{4}} = \\ldots" },
     ],
   }),
-  Qn(21, "Soal TKA – Perkalian Pangkat Negatif dan Positif", {
+  Qn(20, "Soal TKA – Perkalian Pangkat Negatif dan Positif", {
     type: "mixed",
     parts: [
       { label: "a.", math: "2^3 \\times 2^{-5} = \\ldots" },
@@ -223,7 +214,7 @@ const questions: Q[] = [
       { label: "c.", math: "3^{-3} \\times 3^{-2} = \\ldots" },
     ],
   }),
-  Qn(22, "Soal UN – Bentuk Sederhana", {
+  Qn(21, "Soal UN – Bentuk Sederhana", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{1}{x^{-3}} = x^\\square" },
@@ -231,7 +222,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}" },
     ],
   }),
-  Qn(23, "Soal ANBK – Ekspresi Campuran Pangkat", {
+  Qn(22, "Soal ANBK – Ekspresi Campuran Pangkat", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(2^{-3})^{-2} = 2^{\\square} = \\ldots" },
@@ -239,15 +230,7 @@ const questions: Q[] = [
       { label: "c.", math: "(a^{-m})^{-n} = a^{\\square}" },
     ],
   }),
-  Qn(24, "Soal TKA – Pangkat Pecahan pada Angka Besar", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "1000000^{\\frac{1}{6}} = \\ldots" },
-      { label: "b.", math: "1024^{\\frac{1}{10}} = \\ldots" },
-      { label: "c.", math: "3125^{\\frac{2}{5}} = \\ldots" },
-    ],
-  }),
-  Qn(25, "Soal UN – Nilai Ekspresi dengan Tiga Jenis Pangkat", {
+  Qn(23, "Soal UN – Nilai Ekspresi dengan Tiga Jenis Pangkat", {
     type: "mixed",
     parts: [
       { label: "a.", math: "2^{-1} + 2^0 + 2^{\\frac{1}{2}} = \\ldots" },
@@ -255,16 +238,7 @@ const questions: Q[] = [
       { label: "c.", math: "27^{\\frac{1}{3}} - 3^0 + 3^{-1} = \\ldots" },
     ],
   }),
-  Qn(26, "Soal ANBK – Penerapan dalam Sains", {
-    type: "mixed",
-    content: "Dalam sains, pangkat negatif digunakan untuk bilangan kecil:",
-    parts: [
-      { label: "a.", math: "10^{-3} = 0{,}001 \\text{ (milimeter)} \\rightarrow \\text{berapa cm?}" },
-      { label: "b.", math: "10^{-6} = \\text{mikro (\\mu). Nyatakan 5 \\mu m dalam cm.}" },
-      { label: "c.", math: "\\text{1 nm} = 10^{-9} \\text{ m. Nyatakan dalam mm.}" },
-    ],
-  }),
-  Qn(27, "Soal TKA – Persamaan Pangkat Negatif", {
+  Qn(24, "Soal TKA – Persamaan Pangkat Negatif", {
     type: "mixed",
     content: "Tentukan nilai x:",
     parts: [
@@ -273,16 +247,7 @@ const questions: Q[] = [
       { label: "c.", math: "5^x = \\frac{1}{625} \\Rightarrow x = \\ldots" },
     ],
   }),
-  Qn(28, "Soal UN – Membandingkan Ekspresi", {
-    type: "mixed",
-    content: "Bandingkan (>, <, atau =):",
-    parts: [
-      { label: "a.", math: "2^{-3} \\ldots 3^{-2}" },
-      { label: "b.", math: "4^{-1} \\ldots 2^{-2}" },
-      { label: "c.", math: "10^{-2} \\ldots 5^{-2}" },
-    ],
-  }),
-  Qn(29, "Soal ANBK – Konversi Satuan dengan Pangkat Negatif", {
+  Qn(25, "Soal ANBK – Konversi Satuan dengan Pangkat Negatif", {
     type: "mixed",
     content: "Gunakan pangkat negatif untuk konversi:",
     parts: [
@@ -291,7 +256,7 @@ const questions: Q[] = [
       { label: "c.", text: "Nyatakan 0,0045 dalam bentuk pecahan dengan pangkat negatif." },
     ],
   }),
-  Qn(30, "Soal TKA – Pangkat Pecahan Negatif", {
+  Qn(26, "Soal TKA – Pangkat Pecahan Negatif", {
     type: "mixed",
     parts: [
       { label: "a.", math: "16^{-\\frac{3}{4}} = \\frac{1}{16^{\\frac{3}{4}}} = \\ldots" },
@@ -299,7 +264,7 @@ const questions: Q[] = [
       { label: "c.", math: "32^{-\\frac{3}{5}} = \\ldots" },
     ],
   }),
-  Qn(31, "Soal UN – Menyederhanakan Variabel", {
+  Qn(27, "Soal UN – Menyederhanakan Variabel", {
     type: "mixed",
     parts: [
       { label: "a.", math: "a^{\\frac{1}{2}} \\times a^{-\\frac{1}{2}} = a^{\\square}" },
@@ -307,7 +272,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{m^{\\frac{3}{4}}}{m^{\\frac{1}{4}}} = m^{\\square}" },
     ],
   }),
-  Qn(32, "Soal ANBK – Aplikasi Pangkat Pecahan", {
+  Qn(28, "Soal ANBK – Aplikasi Pangkat Pecahan", {
     type: "mixed",
     content: "Luas persegi = s². Jika luas = 169 cm², cari s menggunakan pangkat pecahan:",
     parts: [
@@ -316,7 +281,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika } V = 729 \\text{ cm}^3 \\Rightarrow s = \\ldots" },
     ],
   }),
-  Qn(33, "Soal TKA – Pangkat Nol dan Negatif Campuran", {
+  Qn(29, "Soal TKA – Pangkat Nol dan Negatif Campuran", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{5^3 \\times 5^{-2}}{5^0} = \\ldots" },
@@ -324,25 +289,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{a^0 \\times a^{-3}}{a^{-5}} = a^{\\square}" },
     ],
   }),
-  Qn(34, "Soal UN – Penalaran Pangkat", {
-    type: "mixed",
-    content: "Tentukan apakah pernyataan berikut benar atau salah:",
-    parts: [
-      { label: "a.", math: "0^0 = 1 \\text{ ?}" },
-      { label: "b.", math: "(-1)^0 = 1 \\text{ ?}" },
-      { label: "c.", math: "\\left(\\frac{1}{2}\\right)^{-1} = 2 \\text{ ?}" },
-    ],
-  }),
-  Qn(35, "Soal ANBK – Urutan Nilai", {
-    type: "mixed",
-    content: "Urutkan dari terkecil ke terbesar:",
-    parts: [
-      { label: "a.", math: "2^{-1},\\; 2^0,\\; 2^{\\frac{1}{2}},\\; 2^{-2}" },
-      { label: "b.", math: "3^{-2},\\; 3^0,\\; 3^{\\frac{1}{3}},\\; 3^{-1}" },
-      { label: "c.", text: "Jelaskan mengapa bilangan dengan pangkat lebih besar belum tentu nilainya lebih besar." },
-    ],
-  }),
-  Qn(36, "Soal TKA – Evaluasi Ekspresi Kompleks", {
+  Qn(30, "Soal TKA – Evaluasi Ekspresi Kompleks", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\left(\\frac{1}{4}\\right)^{-\\frac{3}{2}} = \\ldots" },
@@ -350,16 +297,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\frac{9}{25}\\right)^{-\\frac{1}{2}} = \\ldots" },
     ],
   }),
-  Qn(37, "Soal UN – Pangkat Pecahan dalam Geometri", {
-    type: "mixed",
-    content: "Gunakan pangkat pecahan untuk mencari sisi:",
-    parts: [
-      { label: "a.", math: "\\text{Luas} = 225 \\text{ cm}^2 \\Rightarrow s = 225^{\\frac{1}{2}} = \\ldots" },
-      { label: "b.", math: "\\text{Volume} = 343 \\text{ cm}^3 \\Rightarrow s = 343^{\\frac{1}{3}} = \\ldots" },
-      { label: "c.", math: "\\text{Volume} = 1728 \\text{ cm}^3 \\Rightarrow s = \\ldots" },
-    ],
-  }),
-  Qn(38, "Soal ANBK – Persamaan dengan Pangkat Pecahan", {
+  Qn(31, "Soal ANBK – Persamaan dengan Pangkat Pecahan", {
     type: "mixed",
     content: "Tentukan nilai x:",
     parts: [
@@ -368,7 +306,7 @@ const questions: Q[] = [
       { label: "c.", math: "x^{-\\frac{1}{2}} = \\frac{1}{5} \\Rightarrow x = \\ldots" },
     ],
   }),
-  Qn(39, "Soal TKA – Gabungan Semua Jenis Pangkat", {
+  Qn(32, "Soal TKA – Gabungan Semua Jenis Pangkat", {
     type: "mixed",
     parts: [
       { label: "a.", math: "2^{-2} \\times 4^{\\frac{3}{2}} + 3^0 = \\ldots" },
@@ -376,7 +314,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{8^{\\frac{2}{3}} \\times 2^{-1}}{4^0} = \\ldots" },
     ],
   }),
-  Qn(40, "Soal UN/ANBK/TKA – Gabungan Konsep", {
+  Qn(33, "Soal UN/ANBK/TKA – Gabungan Konsep", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\left(\\frac{1}{27}\\right)^{-\\frac{2}{3}} = \\ldots" },
@@ -404,7 +342,7 @@ const PangkatNolNegatifPecahanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 33 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
