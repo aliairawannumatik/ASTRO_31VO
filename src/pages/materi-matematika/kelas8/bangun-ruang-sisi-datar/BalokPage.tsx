@@ -321,6 +321,7 @@ const InteractiveBalok3D = () => {
   };
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
+    if (e.cancelable) e.preventDefault();
     const t = e.touches[0];
     setRotY(dragRef.current.baseRotY + (t.clientX - dragRef.current.startX) * 0.5);
     setRotX(dragRef.current.baseRotX - (t.clientY - dragRef.current.startY) * 0.5);
@@ -330,7 +331,7 @@ const InteractiveBalok3D = () => {
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd);
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
@@ -339,6 +340,18 @@ const InteractiveBalok3D = () => {
       window.removeEventListener("touchend", onTouchEnd);
     };
   }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const prevOverflow = document.body.style.overflow;
+    const prevOverscroll = document.body.style.overscrollBehavior;
+    document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "contain";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.overscrollBehavior = prevOverscroll;
+    };
+  }, [isDragging]);
 
   const nextFace = seqStep >= 0 ? OPEN_ORDER[seqStep] : null;
   const commonFaceProps = (face: FName) => ({
@@ -354,7 +367,7 @@ const InteractiveBalok3D = () => {
       </p>
 
       <div className="relative mx-auto flex items-center justify-center select-none overflow-visible"
-        style={{ width: "100%", height: 380, cursor: isDragging ? "grabbing" : "grab" }}
+        style={{ width: "100%", height: 380, cursor: isDragging ? "grabbing" : "grab", touchAction: "none" }}
         onMouseDown={onMouseDown} onTouchStart={onTouchStart}
       >
         <div style={{
@@ -392,7 +405,7 @@ const InteractiveBalok3D = () => {
           <div style={{
             position: "absolute", top: 0, left: 0, width: P, height: 0,
             transformStyle: "preserve-3d", transformOrigin: "50% 0% 0",
-            transform: isOpen("top") ? "rotateX(0deg)" : `translateZ(-${L / 2}px) rotateX(-90deg)`,
+            transform: isOpen("top") ? "rotateX(0deg)" : "rotateX(-90deg)",
             transition: TRANS,
           }}>
             <FaceRect {...commonFaceProps("top")} style={{ top: -L, left: 0 }} />
@@ -402,7 +415,7 @@ const InteractiveBalok3D = () => {
           <div style={{
             position: "absolute", top: T, left: 0, width: P, height: 0,
             transformStyle: "preserve-3d", transformOrigin: "50% 0% 0",
-            transform: isOpen("bottom") ? "rotateX(0deg)" : `translateZ(-${L / 2}px) rotateX(90deg)`,
+            transform: isOpen("bottom") ? "rotateX(0deg)" : "rotateX(90deg)",
             transition: TRANS,
           }}>
             <FaceRect {...commonFaceProps("bottom")} style={{ top: 0, left: 0 }} />
@@ -422,7 +435,7 @@ const InteractiveBalok3D = () => {
           <div style={{
             position: "absolute", top: 0, left: 0, width: 0, height: T,
             transformStyle: "preserve-3d", transformOrigin: "0% 50% 0",
-            transform: isOpen("left") ? "rotateY(0deg)" : `translateZ(-${L / 2}px) rotateY(90deg)`,
+            transform: isOpen("left") ? "rotateY(0deg)" : "rotateY(90deg)",
             transition: TRANS,
           }}>
             <FaceRect {...commonFaceProps("left")} style={{ top: 0, left: -L }} />
@@ -432,7 +445,7 @@ const InteractiveBalok3D = () => {
           <div style={{
             position: "absolute", top: 0, left: P, width: 0, height: T,
             transformStyle: "preserve-3d", transformOrigin: "0% 50% 0",
-            transform: isOpen("right") ? "rotateY(0deg)" : `translateZ(-${L / 2}px) rotateY(-90deg)`,
+            transform: isOpen("right") ? "rotateY(0deg)" : "rotateY(-90deg)",
             transition: TRANS,
           }}>
             <FaceRect {...commonFaceProps("right")} style={{ top: 0, left: 0 }} />
