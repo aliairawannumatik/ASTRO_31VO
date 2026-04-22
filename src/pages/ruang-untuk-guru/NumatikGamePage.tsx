@@ -23,6 +23,7 @@ import {
   Target,
   Disc,
   GraduationCap,
+  Goal,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -196,6 +197,13 @@ const games = [
     path: "/math-game-arena/umum/pinball-math",
     desc: "Pantulkan bola dengan flipper untuk mencetak skor tertinggi!",
     icon: <Gamepad2 className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
+    label: "Tendangan Penalti Math",
+    emoji: "⚽",
+    path: "/math-game-arena/umum/penalti-math",
+    desc: "Tendangan penalti! Pilih sudut gawang dengan jawaban benar — awas kiper!",
+    icon: <Goal className="w-7 h-7 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
 ];
 

@@ -319,6 +319,7 @@ import PacmanMathPage from "./pages/math-game-arena/umum/PacmanMathPage";
 import BounceMathPage from "./pages/math-game-arena/umum/BounceMathPage";
 import WesternBarPage from "./pages/math-game-arena/umum/WesternBarPage";
 import PinballMathPage from "./pages/math-game-arena/umum/PinballMathPage";
+import PenaltiMathPage from "./pages/math-game-arena/umum/PenaltiMathPage";
 
 // Math Game Arena - Kelas 7 Topic Pages
 import BilanganBulatMGAK7Page from "./pages/math-game-arena/kelas7/BilanganBulatPage";
@@ -1047,6 +1048,7 @@ const AppInner = () => {
       <Route path="/math-game-arena/umum/bounce-math" element={<BounceMathPage />} />
       <Route path="/math-game-arena/umum/western-bar" element={<WesternBarPage />} />
       <Route path="/math-game-arena/umum/pinball-math" element={<PinballMathPage />} />
+      <Route path="/math-game-arena/umum/penalti-math" element={<PenaltiMathPage />} />
       
       {/* Math Game Arena - Kelas 7 Topic Routes */}
       <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
