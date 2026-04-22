@@ -485,6 +485,206 @@ const InteractiveBalok3D = () => {
 };
 
 /* ─────────────────────────────────────────────────────────────
+   INTERACTIVE KERANGKA BALOK — 12 rusuk yang bisa dibongkar
+───────────────────────────────────────────────────────────── */
+type EdgeAxis = "p" | "l" | "t";
+type EdgeSpec = { axis: EdgeAxis; start: [number, number, number]; idx: number };
+
+const KERANGKA_EDGES: EdgeSpec[] = [
+  // 4 panjang (along x, length P)
+  { axis: "p", start: [0, 0, 0], idx: 0 },
+  { axis: "p", start: [0, T, 0], idx: 1 },
+  { axis: "p", start: [0, 0, L], idx: 2 },
+  { axis: "p", start: [0, T, L], idx: 3 },
+  // 4 lebar (along z, length L)
+  { axis: "l", start: [0, 0, 0], idx: 0 },
+  { axis: "l", start: [P, 0, 0], idx: 1 },
+  { axis: "l", start: [0, T, 0], idx: 2 },
+  { axis: "l", start: [P, T, 0], idx: 3 },
+  // 4 tinggi (along y, length T)
+  { axis: "t", start: [0, 0, 0], idx: 0 },
+  { axis: "t", start: [P, 0, 0], idx: 1 },
+  { axis: "t", start: [0, 0, L], idx: 2 },
+  { axis: "t", start: [P, 0, L], idx: 3 },
+];
+
+const KERANGKA_COLORS: Record<EdgeAxis, string> = {
+  p: "#22d3ee", // cyan
+  l: "#fb923c", // orange
+  t: "#facc15", // yellow
+};
+
+const InteractiveKerangkaBalok = () => {
+  const [bongkar, setBongkar] = useState(false);
+  const [rotX, setRotX] = useState(-18);
+  const [rotY, setRotY] = useState(28);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -18, baseRotY: 28 });
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    dragRef.current = { startX: e.clientX, startY: e.clientY, baseRotX: rotX, baseRotY: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    setRotY(dragRef.current.baseRotY + (e.clientX - dragRef.current.startX) * 0.5);
+    setRotX(dragRef.current.baseRotX - (e.clientY - dragRef.current.startY) * 0.5);
+  }, [isDragging]);
+  const onMouseUp = useCallback(() => setIsDragging(false), []);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setIsDragging(true);
+    dragRef.current = { startX: t.clientX, startY: t.clientY, baseRotX: rotX, baseRotY: rotY };
+  };
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    if (e.cancelable) e.preventDefault();
+    const t = e.touches[0];
+    setRotY(dragRef.current.baseRotY + (t.clientX - dragRef.current.startX) * 0.5);
+    setRotX(dragRef.current.baseRotX - (t.clientY - dragRef.current.startY) * 0.5);
+  }, [isDragging]);
+  const onTouchEnd = useCallback(() => setIsDragging(false), []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const prevOverflow = document.body.style.overflow;
+    const prevOverscroll = document.body.style.overscrollBehavior;
+    document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "contain";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.overscrollBehavior = prevOverscroll;
+    };
+  }, [isDragging]);
+
+  const handleToggle = () => {
+    playPopSound();
+    if (!bongkar) {
+      setRotX(0); setRotY(0);
+      setBongkar(true);
+    } else {
+      setBongkar(false);
+      setRotX(-18); setRotY(28);
+    }
+  };
+
+  const LEN: Record<EdgeAxis, number> = { p: P, l: L, t: T };
+  const THICK = 5;
+
+  const getEdgeTransform = (e: EdgeSpec) => {
+    if (!bongkar) {
+      const [x, y, z] = e.start;
+      let rot = "";
+      if (e.axis === "l") rot = " rotateY(-90deg)";
+      else if (e.axis === "t") rot = " rotateZ(90deg)";
+      return `translate3d(${x - (e.axis === "t" ? 0 : 0)}px, ${y - THICK / 2}px, ${z}px)${rot}`;
+    }
+    const gap = 6;
+    const rowGap = 18;
+    const baseRowY = T + 36;
+    const rowY =
+      e.axis === "p" ? baseRowY :
+      e.axis === "l" ? baseRowY + rowGap :
+      baseRowY + rowGap * 2;
+    const len = LEN[e.axis];
+    const totalW = 4 * len + 3 * gap;
+    const startX = (P - totalW) / 2;
+    const ex = startX + e.idx * (len + gap);
+    return `translate3d(${ex}px, ${rowY}px, 0px)`;
+  };
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
+      <p className="text-white/60 text-xs text-center font-body">
+        Drag untuk memutar · Klik tombol untuk membongkar 12 rusuk menjadi 4p + 4l + 4t
+      </p>
+
+      <div
+        className="relative mx-auto flex items-center justify-center select-none overflow-visible"
+        style={{
+          width: "100%",
+          height: bongkar ? 360 : 280,
+          cursor: isDragging ? "grabbing" : "grab",
+          touchAction: "none",
+          transition: "height 0.6s ease",
+        }}
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+      >
+        <div style={{
+          width: P, height: T,
+          position: "relative",
+          transformStyle: "preserve-3d",
+          transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+          transition: isDragging ? "none" : "transform 1s ease",
+        }}>
+          {KERANGKA_EDGES.map((e, i) => {
+            const len = LEN[e.axis];
+            const color = KERANGKA_COLORS[e.axis];
+            return (
+              <div key={i} style={{
+                position: "absolute", top: 0, left: 0,
+                width: len, height: THICK,
+                background: color,
+                borderRadius: 3,
+                transformStyle: "preserve-3d",
+                transformOrigin: "0% 50% 50%",
+                transform: getEdgeTransform(e),
+                transition: "transform 1.4s cubic-bezier(0.4,0,0.2,1)",
+                boxShadow: `0 0 6px ${color}cc, inset 0 0 2px rgba(255,255,255,0.4)`,
+              }} />
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 justify-center">
+        <button onClick={handleToggle}
+          className="px-3 py-1.5 text-xs font-bold bg-cyan-900/60 border border-cyan-600 text-cyan-300 rounded-lg hover:bg-cyan-800/60 transition-colors cursor-pointer font-body">
+          {bongkar ? "⊟ Susun Kembali Kerangka" : "⊞ Bongkar Kerangka"}
+        </button>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-body">
+        <div className="bg-slate-800/60 border border-cyan-700/40 rounded p-2 flex items-center justify-center gap-1.5">
+          <div className="w-3 h-3 rounded-sm" style={{ background: KERANGKA_COLORS.p, boxShadow: `0 0 4px ${KERANGKA_COLORS.p}` }} />
+          <span className="text-cyan-300 font-semibold">4 × p (panjang)</span>
+        </div>
+        <div className="bg-slate-800/60 border border-orange-700/40 rounded p-2 flex items-center justify-center gap-1.5">
+          <div className="w-3 h-3 rounded-sm" style={{ background: KERANGKA_COLORS.l, boxShadow: `0 0 4px ${KERANGKA_COLORS.l}` }} />
+          <span className="text-orange-300 font-semibold">4 × l (lebar)</span>
+        </div>
+        <div className="bg-slate-800/60 border border-yellow-700/40 rounded p-2 flex items-center justify-center gap-1.5">
+          <div className="w-3 h-3 rounded-sm" style={{ background: KERANGKA_COLORS.t, boxShadow: `0 0 4px ${KERANGKA_COLORS.t}` }} />
+          <span className="text-yellow-300 font-semibold">4 × t (tinggi)</span>
+        </div>
+      </div>
+
+      <div className="bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-center">
+        {bongkar ? (
+          <BlockMath math="K = \underbrace{4p}_{\text{panjang}} + \underbrace{4l}_{\text{lebar}} + \underbrace{4t}_{\text{tinggi}} = 4(p + l + t)" />
+        ) : (
+          <BlockMath math="K_{\text{kerangka}} = 4(p + l + t)" />
+        )}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    JARING-JARING BALOK SVG PATTERNS
 ───────────────────────────────────────────────────────────── */
 const CP = 38;
@@ -2050,26 +2250,13 @@ const slides: Slide[] = [
           <p className="text-cyan-300 font-semibold text-sm font-display">🪡 Kerangka Balok</p>
           <p className="text-white/70 text-xs font-body leading-relaxed">
             Kerangka balok adalah rangka yang terbentuk dari semua rusuknya.
-            Balok memiliki <strong className="text-white">12 rusuk</strong> dalam 3 kelompok berbeda panjang:
+            Balok memiliki <strong className="text-white">12 rusuk</strong> dalam 3 kelompok berbeda panjang.
+            Bongkar kerangka di bawah ini untuk membuktikan bahwa total panjang rusuk = <strong className="text-yellow-300">4(p + l + t)</strong>:
           </p>
-          <div className="bg-slate-900/60 rounded-lg p-3 text-center">
-            <BlockMath math="K_{\text{kerangka}} = 4(p + l + t)" />
-          </div>
-          <div className="grid grid-cols-3 gap-2 text-center text-xs font-body">
-            <div className="bg-cyan-950/50 border border-cyan-700/40 rounded p-2">
-              <p className="text-cyan-300 font-semibold">4 rusuk p</p>
-              <p className="text-white/60">arah panjang</p>
-            </div>
-            <div className="bg-orange-950/50 border border-orange-700/40 rounded p-2">
-              <p className="text-orange-300 font-semibold">4 rusuk l</p>
-              <p className="text-white/60">arah lebar</p>
-            </div>
-            <div className="bg-yellow-950/50 border border-yellow-700/40 rounded p-2">
-              <p className="text-yellow-300 font-semibold">4 rusuk t</p>
-              <p className="text-white/60">arah tinggi</p>
-            </div>
-          </div>
         </div>
+
+        <InteractiveKerangkaBalok />
+
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead>
@@ -2149,7 +2336,90 @@ const slides: Slide[] = [
   { icon: "🎨", title: sections[3].title, content: sections[3].content },
   /* ── 13. VOLUME ───────────────────────────────── */
   { icon: "📦", title: sections[4].title, content: sections[4].content },
-  /* ── 14. CONTOH SOAL KERANGKA ─────────────────── */
+  /* ── 14. RANGKUMAN LENGKAP ────────────────────── */
+  {
+    icon: "📋",
+    title: "Rangkuman Lengkap Rumus Balok",
+    content: (
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        <div className="bg-gradient-to-r from-cyan-950/60 to-violet-950/60 border border-cyan-700/40 rounded-xl p-4">
+          <p className="text-cyan-300 font-display font-bold text-sm mb-1">📋 Ringkasan Semua Rumus Balok</p>
+          <p className="text-white/70 text-xs leading-relaxed">
+            Dengan <InlineMath math="p" /> = panjang, <InlineMath math="l" /> = lebar, dan <InlineMath math="t" /> = tinggi.
+          </p>
+        </div>
+
+        {/* UNSUR-UNSUR */}
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3">
+          <p className="text-yellow-300 font-display font-bold text-xs mb-2">🔢 Unsur-Unsur Balok</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px]">
+            {[
+              ["Sisi", "6"],
+              ["Rusuk", "12"],
+              ["Titik sudut", "8"],
+              ["Diagonal bidang", "12"],
+              ["Diagonal ruang", "4"],
+              ["Bidang diagonal", "6"],
+            ].map(([n, v], i) => (
+              <div key={i} className="bg-slate-900/60 border border-slate-700/60 rounded p-2 flex items-center justify-between">
+                <span className="text-white/70">{n}</span>
+                <span className="text-cyan-300 font-bold font-mono">{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* RUMUS UTAMA */}
+        <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <table className="w-full text-[11px]">
+            <thead>
+              <tr className="bg-slate-800">
+                <th className="px-2 py-2 text-cyan-300 border-r border-slate-700 text-left">Besaran</th>
+                <th className="px-2 py-2 text-cyan-300 border-r border-slate-700">Rumus</th>
+                <th className="px-2 py-2 text-cyan-300 text-left">Keterangan</th>
+              </tr>
+            </thead>
+            <tbody className="font-mono">
+              {[
+                ["Volume", "V = p \\times l \\times t", "isi balok"],
+                ["Luas permukaan", "L = 2(pl + pt + lt)", "6 sisi, 3 pasang"],
+                ["Kerangka", "K = 4(p + l + t)", "12 rusuk"],
+                ["Diagonal bidang depan/belakang", "d_1 = \\sqrt{p^2 + t^2}", "4 buah"],
+                ["Diagonal bidang kiri/kanan", "d_2 = \\sqrt{l^2 + t^2}", "4 buah"],
+                ["Diagonal bidang atas/bawah", "d_3 = \\sqrt{p^2 + l^2}", "4 buah"],
+                ["Diagonal ruang", "d = \\sqrt{p^2 + l^2 + t^2}", "4 buah, sama panjang"],
+                ["Luas bidang diagonal 1", "L_{bd1} = p \\cdot \\sqrt{l^2 + t^2}", "2 buah"],
+                ["Luas bidang diagonal 2", "L_{bd2} = l \\cdot \\sqrt{p^2 + t^2}", "2 buah"],
+                ["Luas bidang diagonal 3", "L_{bd3} = t \\cdot \\sqrt{p^2 + l^2}", "2 buah"],
+              ].map(([besaran, rumus, ket], i) => (
+                <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
+                  <td className="px-2 py-2 text-white/85 font-sans border-r border-slate-700 text-left align-top">{besaran}</td>
+                  <td className="px-2 py-2 text-yellow-300 border-r border-slate-700 text-center align-middle">
+                    <InlineMath math={rumus as string} />
+                  </td>
+                  <td className="px-2 py-2 text-white/55 font-sans text-left align-top">{ket}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* TIPS */}
+        <div className="bg-emerald-950/40 border border-emerald-700/40 rounded-lg p-3 text-xs text-emerald-200 space-y-1">
+          <p>💡 <strong className="text-emerald-300">Tips menghafal:</strong></p>
+          <p>• <strong>Volume</strong> = perkalian 3 ukuran (p × l × t)</p>
+          <p>• <strong>Luas permukaan</strong> = 2 × (jumlah 3 perkalian dua-dua)</p>
+          <p>• <strong>Kerangka</strong> = 4 × (jumlah 3 ukuran)</p>
+          <p>• <strong>Diagonal ruang</strong> = akar dari jumlah kuadrat 3 ukuran (Pythagoras 3D)</p>
+        </div>
+
+        <div className="bg-cyan-950/40 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200">
+          <p>🎯 <strong>Strategi mengerjakan soal:</strong> Identifikasi <strong className="text-yellow-300">p, l, t</strong> dari soal — lalu pilih rumus yang sesuai dengan yang ditanyakan.</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 15. CONTOH SOAL KERANGKA ─────────────────── */
   {
     icon: "📝",
     title: "Contoh Soal — Kerangka",
@@ -2160,7 +2430,7 @@ const slides: Slide[] = [
       </div>
     ),
   },
-  /* ── 15. CONTOH SOAL LUAS ─────────────────────── */
+  /* ── 16. CONTOH SOAL LUAS ─────────────────────── */
   {
     icon: "🎨",
     title: "Contoh Soal — Luas Permukaan",
@@ -2171,7 +2441,7 @@ const slides: Slide[] = [
       </div>
     ),
   },
-  /* ── 16. CONTOH SOAL VOLUME ───────────────────── */
+  /* ── 17. CONTOH SOAL VOLUME ───────────────────── */
   {
     icon: "📦",
     title: "Contoh Soal — Volume",
