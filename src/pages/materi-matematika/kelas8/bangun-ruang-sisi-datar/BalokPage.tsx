@@ -2040,53 +2040,7 @@ const slides: Slide[] = [
       </div>
     ),
   },
-  /* ── 9. JARING-JARING 3D ──────────────────────── */
-  {
-    icon: "🧊",
-    title: "Jaring-jaring Balok — 3D Interaktif",
-    content: (
-      <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          <strong className="text-cyan-300">Jaring-jaring balok</strong> adalah pola 2D yang jika dilipat akan membentuk balok.
-          Setiap jaring terdiri dari <strong>6 persegi panjang dalam 3 pasang ukuran</strong>.
-          Sisi <strong className="text-violet-300">BELAKANG (ungu)</strong> adalah tumpuan tetap.
-        </p>
-        <InteractiveBalok3D />
-      </div>
-    ),
-  },
-  /* ── 10. CONTOH POLA JARING ───────────────────── */
-  {
-    icon: "🗂️",
-    title: "Contoh Pola Jaring-jaring Balok",
-    content: (
-      <div className="space-y-4 text-sm text-white/85 font-body">
-        <p className="text-white/70 text-xs text-center">
-          Ada <strong className="text-yellow-300">54 pola jaring-jaring</strong> berbeda yang valid untuk sebuah balok:
-        </p>
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-cyan-300 font-semibold mb-3 text-xs">📐 Contoh 10 Pola Jaring-jaring Balok:</p>
-          <NetGallery />
-          <div className="mt-3 flex flex-wrap gap-2">
-            {(["p×t","l×t","p×l"] as const).map((label, i) => (
-              <div key={i} className="flex items-center gap-1 text-[10px] text-white/60 font-body">
-                <div className="w-3 h-3 rounded-sm" style={{ background: ["#8b5cf6","#22c55e","#eab308"][i] }}/>
-                <span>{label === "p×t" ? "Depan/Belakang" : label === "l×t" ? "Kiri/Kanan" : "Atas/Bawah"} ({label})</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
-          <p>🔑 <strong className="text-white">Cara verifikasi:</strong> Bayangkan melipat. Jika 6 sisi menutup semua permukaan balok tanpa tumpang tindih → jaring-jaring valid.</p>
-        </div>
-      </div>
-    ),
-  },
-  /* ── 11. LUAS PERMUKAAN ───────────────────────── */
-  { icon: "🎨", title: sections[3].title, content: sections[3].content },
-  /* ── 12. VOLUME ───────────────────────────────── */
-  { icon: "📦", title: sections[4].title, content: sections[4].content },
-  /* ── 13. KERANGKA BALOK ───────────────────────── */
+  /* ── 9. KERANGKA BALOK ────────────────────────── */
   {
     icon: "🪡",
     title: "Kerangka Balok",
@@ -2149,6 +2103,52 @@ const slides: Slide[] = [
       </div>
     ),
   },
+  /* ── 10. JARING-JARING 3D ─────────────────────── */
+  {
+    icon: "🧊",
+    title: "Jaring-jaring Balok — 3D Interaktif",
+    content: (
+      <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
+        <p>
+          <strong className="text-cyan-300">Jaring-jaring balok</strong> adalah pola 2D yang jika dilipat akan membentuk balok.
+          Setiap jaring terdiri dari <strong>6 persegi panjang dalam 3 pasang ukuran</strong>.
+          Sisi <strong className="text-violet-300">BELAKANG (ungu)</strong> adalah tumpuan tetap.
+        </p>
+        <InteractiveBalok3D />
+      </div>
+    ),
+  },
+  /* ── 11. CONTOH POLA JARING ───────────────────── */
+  {
+    icon: "🗂️",
+    title: "Contoh Pola Jaring-jaring Balok",
+    content: (
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        <p className="text-white/70 text-xs text-center">
+          Ada <strong className="text-yellow-300">54 pola jaring-jaring</strong> berbeda yang valid untuk sebuah balok:
+        </p>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-cyan-300 font-semibold mb-3 text-xs">📐 Contoh 10 Pola Jaring-jaring Balok:</p>
+          <NetGallery />
+          <div className="mt-3 flex flex-wrap gap-2">
+            {(["p×t","l×t","p×l"] as const).map((label, i) => (
+              <div key={i} className="flex items-center gap-1 text-[10px] text-white/60 font-body">
+                <div className="w-3 h-3 rounded-sm" style={{ background: ["#8b5cf6","#22c55e","#eab308"][i] }}/>
+                <span>{label === "p×t" ? "Depan/Belakang" : label === "l×t" ? "Kiri/Kanan" : "Atas/Bawah"} ({label})</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <p>🔑 <strong className="text-white">Cara verifikasi:</strong> Bayangkan melipat. Jika 6 sisi menutup semua permukaan balok tanpa tumpang tindih → jaring-jaring valid.</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 12. LUAS PERMUKAAN ───────────────────────── */
+  { icon: "🎨", title: sections[3].title, content: sections[3].content },
+  /* ── 13. VOLUME ───────────────────────────────── */
+  { icon: "📦", title: sections[4].title, content: sections[4].content },
   /* ── 14. CONTOH SOAL KERANGKA ─────────────────── */
   {
     icon: "📝",
