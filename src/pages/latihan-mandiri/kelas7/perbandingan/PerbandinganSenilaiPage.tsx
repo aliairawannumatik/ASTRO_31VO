@@ -61,31 +61,31 @@ const PerbandinganSenilaiPage = () => {
             {/* Soal 5 */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">5.</span>
-              <p>Adi dapat menyelesaikan suatu pekerjaan selama 4 jam. Budi dapat menyelesaikan pekerjaan yang sama dalam waktu 6 jam. Jika pekerjaan tersebut dikerjakan adi dan budi bersama sama, maka pekerjaan tersebut akan selesai dalam waktu ...</p>
+              <p>Sebuah tempat penampungan hewan (shelter) memiliki persediaan makanan (dry food) yang cukup untuk 20 ekor kucing peliharaan selama 25 hari. Berapa hari persediaan makanan tersebut akan habis jika shelter tersebut menerima tambahan penghuni sebanyak 5 ekor kucing lagi?</p>
             </div>
 
             {/* Soal 6 */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">6.</span>
-              <p>Suatu perkajaan jika dikerjakan oleh Anto dan Dini dapat diselesaikan dalam waktu 6 jam. Jika pekerjaan itu dikerjakan oleh Dini sendirian akan selesai 5 jam lebih lambat dibandingkan Anto. Pekerjaan itu dapat diselesaikan Anto sendirian dalam waktu ... jam</p>
+              <p>Adi dapat menyelesaikan suatu pekerjaan selama 4 jam. Budi dapat menyelesaikan pekerjaan yang sama dalam waktu 6 jam. Jika pekerjaan tersebut dikerjakan adi dan budi bersama sama, maka pekerjaan tersebut akan selesai dalam waktu ...</p>
             </div>
 
             {/* Soal 7 */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">7.</span>
-              <p>Persiapan sebuah panggung festival budaya diperkirakan selesai dalam waktu 24 hari jika dikerjakan oleh 6 orang teknisi. Setelah dikerjakan selama 4 hari, pekerjaan terpaksa dihentikan selama 8 hari karena badai. Agar persiapan panggung selesai tepat waktu sesuai rencana awal, berapa banyak tambahan teknisi yang diperlukan?</p>
+              <p>Mesin P dapat mengisi tangki sampai penuh dalam 2 jam, mesin Q dalam 5 jam, dan mesin R dalam 10 jam. Jika ketiga mesin dinyalakan secara bersamaan, berapa waktu yang diperlukan hingga tangki terisi penuh?</p>
             </div>
 
             {/* Soal 8 */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">8.</span>
-              <p>Sebuah pesanan seragam sekolah dapat diselesaikan oleh 4 orang penjahit dalam waktu 20 hari. Setelah mereka bekerja selama 4 hari, pasokan listrik terputus sehingga pekerjaan terhenti total selama 12 hari. Berapa banyak tambahan penjahit yang dibutuhkan agar pesanan seragam tersebut dapat diselesaikan tepat waktu?</p>
+              <p>Persiapan sebuah panggung festival budaya diperkirakan selesai dalam waktu 24 hari jika dikerjakan oleh 6 orang teknisi. Setelah dikerjakan selama 4 hari, pekerjaan terpaksa dihentikan selama 8 hari karena badai. Agar persiapan panggung selesai tepat waktu sesuai rencana awal, berapa banyak tambahan teknisi yang diperlukan?</p>
             </div>
 
             {/* Soal 9 */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">9.</span>
-              <p>Sebuah tempat penampungan hewan (shelter) memiliki persediaan makanan (dry food) yang cukup untuk 20 ekor kucing peliharaan selama 25 hari. Berapa hari persediaan makanan tersebut akan habis jika shelter tersebut menerima tambahan penghuni sebanyak 5 ekor kucing lagi?</p>
+              <p>Sebuah pesanan seragam sekolah dapat diselesaikan oleh 4 orang penjahit dalam waktu 20 hari. Setelah mereka bekerja selama 4 hari, pasokan listrik terputus sehingga pekerjaan terhenti total selama 12 hari. Berapa banyak tambahan penjahit yang dibutuhkan agar pesanan seragam tersebut dapat diselesaikan tepat waktu?</p>
             </div>
 
             {/* Soal 10 */}
