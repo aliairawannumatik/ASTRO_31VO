@@ -7,6 +7,12 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import JaringLimasInteraktif from "@/components/JaringLimasInteraktif";
+import limasExRubikPyramid from "@assets/image_1776844211789.png";
+import limasExSantanKelapa from "@assets/image_1776844253335.png";
+import limasExBakcangKetan from "@assets/image_1776844303292.png";
+import limasExLouvre from "@assets/image_1776844334711.png";
+import limasExPiramidaMesir from "@assets/image_1776844359975.png";
+import limasExTendaPramuka from "@assets/image_1776844428389.png";
 
 /* ─────────────────────────────────────────────────────────────
    SVG 3D MATH UTILITIES
@@ -2097,6 +2103,36 @@ const slides: Slide[] = [
           <p>• Jaring-jaring interaktif</p>
           <p>• Luas permukaan dan volume</p>
           <p>• Contoh soal bertingkat</p>
+        </div>
+
+        {/* Contoh-contoh benda berbentuk limas */}
+        <div className="bg-slate-800/60 border border-violet-700/40 rounded-xl p-3">
+          <p className="text-violet-300 font-semibold text-xs mb-3 text-center">
+            📷 Contoh Benda Berbentuk Limas di Sekitar Kita
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {[
+              { src: limasExRubikPyramid, caption: "Rubik Pyramid (Limas Segitiga)" },
+              { src: limasExSantanKelapa, caption: "Kemasan Santan (Limas Segitiga)" },
+              { src: limasExBakcangKetan, caption: "Bakcang Ketan (Limas Segitiga)" },
+              { src: limasExLouvre, caption: "Piramida Louvre (Limas Segiempat)" },
+              { src: limasExPiramidaMesir, caption: "Piramida Mesir (Limas Segiempat)" },
+              { src: limasExTendaPramuka, caption: "Tenda Pramuka (Limas Segiempat)" },
+            ].map((item, i) => (
+              <div key={i} className="bg-white rounded-lg p-2 flex flex-col items-center">
+                <div className="w-full h-24 flex items-center justify-center overflow-hidden">
+                  <img
+                    src={item.src}
+                    alt={item.caption}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <p className="text-[10px] text-slate-700 text-center mt-1 font-semibold leading-tight">
+                  {item.caption}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     ),
