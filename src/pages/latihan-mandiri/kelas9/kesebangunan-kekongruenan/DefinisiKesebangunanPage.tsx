@@ -83,16 +83,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{L_{besar}}{L_{kecil}} = k^2 = \\ldots" },
     ],
   }),
-  Qn(7, "Gambar Peta dan Skala", {
-    type: "mixed",
-    content: "Sebuah taman berbentuk persegi panjang dengan panjang 120 m dan lebar 80 m digambar dalam peta berskala 1 : 400.",
-    parts: [
-      { label: "a.", text: "Berapa panjang gambar taman dalam peta (dalam cm)?" },
-      { label: "b.", text: "Berapa lebar gambar taman dalam peta (dalam cm)?" },
-      { label: "c.", text: "Apakah taman asli dan gambarnya sebangun? Jelaskan." },
-    ],
-  }),
-  Qn(8, "Foto dan Bayangan", {
+  Qn(7, "Foto dan Bayangan", {
     type: "mixed",
     content: "Sebuah foto berukuran 4 cm × 6 cm akan diperbesar menjadi 10 cm × 15 cm.",
     parts: [
@@ -102,7 +93,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\text{Rasio luas} = \\left(\\frac{4}{10}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(9, "Sudut-Sudut Bersesuaian", {
+  Qn(8, "Sudut-Sudut Bersesuaian", {
     type: "mixed",
     content: "Dua segitiga ABC dan PQR diketahui sebangun dengan ∠A = ∠P, ∠B = ∠Q, ∠C = ∠R.",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["P","Q","R"]} sideLabels1={["c","a","b"]} sideLabels2={["r","p","q"]} color1="#22d3ee" color2="#fb923c" type="scalene"/>,
@@ -112,7 +103,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika AB = 8, BC = 10, PQ = 4, tentukan QR." },
     ],
   }),
-  Qn(10, "Bangun Tidak Sebangun", {
+  Qn(9, "Bangun Tidak Sebangun", {
     type: "mixed",
     content: "Diketahui dua persegi panjang: ABCD dengan AB = 6 cm, BC = 4 cm; dan EFGH dengan EF = 9 cm, FG = 5 cm.",
     parts: [
@@ -121,7 +112,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapakah FG seharusnya agar ABCD dan EFGH sebangun?" },
     ],
   }),
-  Qn(11, "Kesebangunan Persegi", {
+  Qn(10, "Kesebangunan Persegi", {
     type: "mixed",
     content: "Dua buah persegi: persegi pertama bersisi 5 cm dan persegi kedua bersisi 8 cm.",
     parts: [
@@ -130,7 +121,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa rasio perbandingan luas kedua persegi tersebut?" },
     ],
   }),
-  Qn(12, "Kesebangunan Segitiga Sama Sisi", {
+  Qn(11, "Kesebangunan Segitiga Sama Sisi", {
     type: "mixed",
     content: "Dua buah segitiga sama sisi: yang pertama bersisi 6 cm dan yang kedua bersisi 9 cm.",
     parts: [
@@ -139,25 +130,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berikan contoh dua segitiga yang pasti sebangun." },
     ],
   }),
-  Qn(13, "Sifat Kesebangunan – Refleksif", {
-    type: "mixed",
-    content: "Sifat-sifat relasi kesebangunan:",
-    parts: [
-      { label: "a.", text: "Apakah setiap bangun sebangun dengan dirinya sendiri? (Refleksif)" },
-      { label: "b.", text: "Jika bangun A sebangun dengan B, apakah B sebangun dengan A? (Simetris)" },
-      { label: "c.", text: "Jika A sebangun B dan B sebangun C, apakah A sebangun C? (Transitif)" },
-    ],
-  }),
-  Qn(14, "Menentukan Kekongruenan dari Gambar", {
-    type: "mixed",
-    diagram: <CongruentTriangles vertices1={["A","B","C"]} vertices2={["P","Q","R"]} sides1={["5 cm","4 cm","6 cm"]} sides2={["5 cm","4 cm","6 cm"]} color1="#34d399" color2="#fb923c" shape="scalene" ticks={true}/>,
-    parts: [
-      { label: "a.", text: "Apakah △ABC ≅ △PQR? Berikan alasannya." },
-      { label: "b.", text: "Tuliskan semua pasangan sisi yang sama panjang." },
-      { label: "c.", text: "Tuliskan semua pasangan sudut yang sama besar." },
-    ],
-  }),
-  Qn(15, "Kesebangunan pada Foto Identitas", {
+  Qn(12, "Kesebangunan pada Foto Identitas", {
     type: "mixed",
     content: "Foto identitas standar berukuran 3×4 cm. Foto tersebut akan dicetak ulang dalam tiga ukuran: 4×6 cm, 6×9 cm, dan 9×12 cm.",
     parts: [
@@ -166,16 +139,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa rasio perbandingan antara foto 3×4 dengan foto 6×9?" },
     ],
   }),
-  Qn(16, "Syarat Kesebangunan Trapesium", {
-    type: "mixed",
-    content: "Trapesium ABCD memiliki AB ∥ CD dengan AB = 12 cm, CD = 6 cm, AD = 5 cm, BC = 5 cm. Trapesium PQRS memiliki PQ ∥ SR dengan PQ = 8 cm, SR = 4 cm, PS = 10/3 cm, QR = 10/3 cm.",
-    parts: [
-      { label: "a.", text: "Periksa apakah semua sudut yang bersesuaian sama besar." },
-      { label: "b.", text: "Periksa apakah semua sisi yang bersesuaian sebanding." },
-      { label: "c.", text: "Apakah kedua trapesium sebangun? Tentukan rasionya." },
-    ],
-  }),
-  Qn(17, "Faktor Skala dari Luas", {
+  Qn(13, "Faktor Skala dari Luas", {
     type: "mixed",
     content: "Dua bangun sebangun. Luas bangun pertama 36 cm² dan luas bangun kedua 81 cm².",
     parts: [
@@ -184,25 +148,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika sebuah sisi bangun pertama 6 cm, berapa sisi yang bersesuaian pada bangun kedua?" },
     ],
   }),
-  Qn(18, "Kekongruenan dari Refleksi", {
-    type: "mixed",
-    content: "Segitiga ABC dicerminkan terhadap sumbu-x menghasilkan segitiga A'B'C'.",
-    parts: [
-      { label: "a.", text: "Apakah △ABC ≅ △A'B'C'? Jelaskan mengapa pencerminan menghasilkan bangun yang kongruen." },
-      { label: "b.", text: "Apakah orientasi (arah putar) segitiga berubah setelah dicerminkan?" },
-      { label: "c.", text: "Sebutkan transformasi lain yang menghasilkan bangun kongruen." },
-    ],
-  }),
-  Qn(19, "Kesebangunan dari Dilatasi", {
-    type: "mixed",
-    content: "Segitiga KLM didilatasi dengan pusat O dan faktor skala k = 3 menghasilkan segitiga K'L'M'.",
-    parts: [
-      { label: "a.", text: "Apakah △KLM ~ △K'L'M'? Jelaskan." },
-      { label: "b.", text: "Jika KL = 4 cm, berapakah K'L'?" },
-      { label: "c.", math: "\\text{Jika Luas } \\triangle KLM = 10 \\text{ cm}^2, \\text{ berapakah Luas } \\triangle K'L'M'?" },
-    ],
-  }),
-  Qn(20, "Notasi Kesebangunan", {
+  Qn(14, "Notasi Kesebangunan", {
     type: "mixed",
     content: "Jika △ABC ~ △DEF, maka penulisan urutan titik sudut sangat penting.",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["c","a","b"]} sideLabels2={["f","d","e"]} color1="#22d3ee" color2="#a78bfa"/>,
@@ -212,7 +158,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah △BAC ~ △EDF juga benar? Jelaskan." },
     ],
   }),
-  Qn(21, "Kesebangunan Jajargenjang", {
+  Qn(15, "Kesebangunan Jajargenjang", {
     type: "mixed",
     content: "Dua jajargenjang ABCD dan EFGH. ABCD: AB = 10 cm, BC = 6 cm, ∠A = 70°. EFGH: EF = 15 cm, FG = 9 cm, ∠E = 70°.",
     parts: [
@@ -221,7 +167,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah kedua jajargenjang sebangun? Berapa faktor skalanya?" },
     ],
   }),
-  Qn(22, "Kekongruenan dan Luas", {
+  Qn(16, "Kekongruenan dan Luas", {
     type: "mixed",
     content: "Dua bangun yang kongruen selalu memiliki luas yang sama.",
     parts: [
@@ -230,7 +176,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bolehkah dua bangun yang luasnya sama langsung disebut kongruen? Berikan contoh kontra." },
     ],
   }),
-  Qn(23, "Menentukan Sudut yang Sama dari Perbandingan Sisi", {
+  Qn(17, "Menentukan Sudut yang Sama dari Perbandingan Sisi", {
     type: "mixed",
     content: "Diketahui △ABC ~ △PQR dengan AB = 6, BC = 8, AC = 10, PQ = 9, QR = 12, PR = 15.",
     parts: [
@@ -239,34 +185,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sudut manakah yang paling besar? Mengapa?" },
     ],
   }),
-  Qn(24, "Perbandingan Keliling", {
-    type: "mixed",
-    content: "Dua segitiga sebangun dengan rasio sisi 2 : 5.",
-    parts: [
-      { label: "a.", text: "Berapa rasio keliling kedua segitiga itu?" },
-      { label: "b.", text: "Berapa rasio luas kedua segitiga itu?" },
-      { label: "c.", math: "\\text{Jika keliling segitiga kecil } = 30 \\text{ cm, keliling segitiga besar} = \\ldots" },
-    ],
-  }),
-  Qn(25, "Bangun Sebangun dalam Kehidupan", {
-    type: "mixed",
-    content: "Sebuah papan nama berbentuk persegi panjang berukuran 40 cm × 25 cm. Miniaturnya berukuran 8 cm × 5 cm.",
-    parts: [
-      { label: "a.", text: "Apakah papan nama dan miniaturnya sebangun? Periksa." },
-      { label: "b.", text: "Berapa faktor skala dari miniatur ke papan asli?" },
-      { label: "c.", text: "Berapa rasio luas papan asli terhadap miniatur?" },
-    ],
-  }),
-  Qn(26, "Simbol Kongruen dan Sebangun", {
-    type: "mixed",
-    content: "Dalam matematika, simbol ~ menyatakan sebangun dan ≅ menyatakan kongruen.",
-    parts: [
-      { label: "a.", text: "Jika △ABC ≅ △DEF, apakah △ABC ~ △DEF juga berlaku? Jelaskan." },
-      { label: "b.", text: "Jika △ABC ~ △DEF, apakah △ABC ≅ △DEF berlaku? Jelaskan." },
-      { label: "c.", text: "Kapan dua bangun bisa disebut kongruen sekaligus sebangun?" },
-    ],
-  }),
-  Qn(27, "Kesebangunan Lingkaran", {
+  Qn(18, "Kesebangunan Lingkaran", {
     type: "mixed",
     content: "Dua lingkaran dengan jari-jari r₁ = 5 cm dan r₂ = 8 cm.",
     parts: [
@@ -275,34 +194,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa rasio luas kedua lingkaran itu?" },
     ],
   }),
-  Qn(28, "Mencari Sisi dari Kesebangunan", {
-    type: "mixed",
-    content: "Dua bangun sebangun dengan faktor skala k = 3/2. Bangun pertama memiliki sisi 8 cm, 10 cm, dan 12 cm.",
-    parts: [
-      { label: "a.", text: "Tentukan sisi-sisi bangun kedua." },
-      { label: "b.", text: "Jika keliling bangun pertama 30 cm, keliling bangun kedua berapa?" },
-      { label: "c.", math: "\\text{Jika Luas bangun pertama } = 24 \\text{ cm}^2, \\text{ Luas bangun kedua} = \\ldots" },
-    ],
-  }),
-  Qn(29, "Kekongruenan dari Rotasi", {
-    type: "mixed",
-    content: "Persegi panjang ABCD dirotasi 90° searah jarum jam terhadap titik O menghasilkan A'B'C'D'.",
-    parts: [
-      { label: "a.", text: "Apakah ABCD ≅ A'B'C'D'? Jelaskan." },
-      { label: "b.", text: "Apakah posisi/orientasi kedua bangun itu berbeda?" },
-      { label: "c.", text: "Apakah ukuran, bentuk, luas, dan keliling kedua bangun itu sama?" },
-    ],
-  }),
-  Qn(30, "Kekongruenan dari Translasi", {
-    type: "mixed",
-    content: "Segitiga ABC ditranslasi sejauh vektor (5, –3) menghasilkan segitiga A'B'C'.",
-    parts: [
-      { label: "a.", text: "Apakah △ABC ≅ △A'B'C'? Mengapa?" },
-      { label: "b.", text: "Apakah semua sisi dan sudut tetap sama setelah translasi?" },
-      { label: "c.", text: "Sebutkan tiga transformasi yang selalu menghasilkan bangun kongruen." },
-    ],
-  }),
-  Qn(31, "Identifikasi Pasangan Sebangun", {
+  Qn(19, "Identifikasi Pasangan Sebangun", {
     type: "mixed",
     content: "Tentukan pasangan bangun yang pasti sebangun:",
     parts: [
@@ -313,85 +205,13 @@ const questions: Q[] = [
       { label: "", text: "Dari pilihan A–D, mana yang pasti sebangun? Jelaskan alasan untuk setiap pilihan." },
     ],
   }),
-  Qn(32, "Rasio Kesebangunan dari Keliling", {
-    type: "mixed",
-    content: "Dua segitiga sebangun. Keliling segitiga pertama 45 cm dan keliling segitiga kedua 30 cm.",
-    parts: [
-      { label: "a.", text: "Tentukan rasio perbandingan sisi (faktor skala)." },
-      { label: "b.", text: "Jika salah satu sisi segitiga pertama 15 cm, berapa sisi yang bersesuaian pada segitiga kedua?" },
-      { label: "c.", math: "\\text{Rasio luas} = \\left(\\frac{45}{30}\\right)^2 = \\ldots" },
-    ],
-  }),
-  Qn(33, "Membandingkan Segitiga", {
+  Qn(20, "Membandingkan Segitiga", {
     type: "mixed",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["6","8","10"]} sideLabels2={["9","12","15"]} color1="#38bdf8" color2="#34d399" type="right"/>,
     parts: [
       { label: "a.", text: "Periksa apakah perbandingan sisi-sisi yang bersesuaian sama." },
       { label: "b.", text: "Apakah kedua segitiga sebangun? Berapa faktor skalanya?" },
       { label: "c.", text: "Apakah kedua segitiga itu merupakan segitiga siku-siku? Periksa dengan Teorema Pythagoras." },
-    ],
-  }),
-  Qn(34, "Bangun Sebangun – Contoh UN", {
-    type: "mixed",
-    content: "Pada ujian nasional, soal kesebangunan sering berbentuk: 'Dua segitiga sebangun dengan perbandingan sisi 2:3. Jika luas segitiga kecil 20 cm², berapakah luas segitiga besar?'",
-    parts: [
-      { label: "a.", math: "\\frac{L_{besar}}{L_{kecil}} = \\left(\\frac{3}{2}\\right)^2 = \\ldots" },
-      { label: "b.", text: "Hitunglah luas segitiga besar." },
-      { label: "c.", text: "Hitunglah selisih luas kedua segitiga." },
-    ],
-  }),
-  Qn(35, "Membedakan dengan Kekongruenan – Soal ANBK", {
-    type: "mixed",
-    content: "Perhatikan gambar dua segitiga. △ABC memiliki sudut 40°, 60°, 80° dan sisi 5 cm, 7 cm, 9 cm. △PQR memiliki sudut 40°, 60°, 80° dan sisi 10 cm, 14 cm, 18 cm.",
-    parts: [
-      { label: "a.", text: "Apakah △ABC ~ △PQR? Jelaskan." },
-      { label: "b.", text: "Apakah △ABC ≅ △PQR? Jelaskan." },
-      { label: "c.", text: "Berapakah rasio keliling △ABC terhadap △PQR?" },
-    ],
-  }),
-  Qn(36, "Menemukan Bangun Kongruen", {
-    type: "mixed",
-    diagram: <TwoShapesCongruent shape="triangle" color1="#22d3ee" color2="#f472b6" sides1={["6 cm","8 cm"]} sides2={["6 cm","8 cm"]} label1="△ABC" label2="△DEF"/>,
-    parts: [
-      { label: "a.", text: "Sebutkan pasangan sisi yang sama panjang." },
-      { label: "b.", text: "Sebutkan pasangan sudut yang sama besar." },
-      { label: "c.", text: "Gunakan syarat SSS (Sisi-Sisi-Sisi) untuk membuktikan kekongruenan." },
-    ],
-  }),
-  Qn(37, "Penerapan Skala pada Denah", {
-    type: "mixed",
-    content: "Denah rumah berskala 1 : 200 menunjukkan sebuah ruangan berbentuk persegi panjang berukuran 3 cm × 4 cm pada denah.",
-    parts: [
-      { label: "a.", text: "Berapa ukuran ruangan sesungguhnya dalam meter?" },
-      { label: "b.", text: "Apakah denah dan ruangan asli sebangun? Jelaskan." },
-      { label: "c.", text: "Berapa rasio luas denah terhadap luas ruangan asli?" },
-    ],
-  }),
-  Qn(38, "Soal Tipe TKA – Kesebangunan", {
-    type: "mixed",
-    content: "Dua bangun datar sebangun. Salah satu dimensi bangun pertama adalah 12 cm dan dimensi yang bersesuaian pada bangun kedua adalah 8 cm.",
-    parts: [
-      { label: "a.", text: "Tentukan faktor skala dari bangun kedua ke bangun pertama." },
-      { label: "b.", math: "\\text{Jika keliling bangun kedua} = 48 \\text{ cm, keliling bangun pertama} = \\ldots" },
-      { label: "c.", math: "\\text{Jika luas bangun pertama} = 108 \\text{ cm}^2, \\text{ luas bangun kedua} = \\ldots" },
-    ],
-  }),
-  Qn(39, "Kekongruenan dan Sudut", {
-    type: "mixed",
-    content: "Dua segitiga dikatakan kongruen jika memenuhi salah satu dari syarat: SSS, SAS, ASA, AAS.",
-    parts: [
-      { label: "a.", text: "Apa kepanjangan dari SSS, SAS, ASA, dan AAS dalam konteks kekongruenan segitiga?" },
-      { label: "b.", text: "Berikan ilustrasi atau gambar untuk syarat SAS (Sisi-Sudut-Sisi)." },
-      { label: "c.", text: "Mengapa syarat SSA (Sisi-Sisi-Sudut) tidak cukup untuk membuktikan kekongruenan?" },
-    ],
-  }),
-  Qn(40, "Soal Campuran – UN Tipe HOTS", {
-    type: "mixed",
-    content: "Dua trapesium sebangun ABCD dan EFGH. AB ∥ CD, EF ∥ GH. AB = 16 cm, CD = 10 cm, tinggi ABCD = 8 cm. Faktor skala dari EFGH ke ABCD adalah 3/2.",
-    parts: [
-      { label: "a.", text: "Tentukan AB, CD, dan tinggi trapesium EFGH." },
-      { label: "b.", math: "L_{ABCD} = \\frac{1}{2}(AB + CD) \\times t = \\ldots" },
-      { label: "c.", math: "L_{EFGH} = \\ldots \\quad (\\text{gunakan rasio luas})" },
     ],
   }),
 ];
@@ -413,7 +233,7 @@ const DefinisiKesebangunanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 20 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
