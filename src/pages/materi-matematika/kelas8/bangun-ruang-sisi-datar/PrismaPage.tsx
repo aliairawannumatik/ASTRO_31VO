@@ -10,6 +10,12 @@ import RusukTigaPrismaAnimation from "@/components/RusukTigaPrismaAnimation";
 import SisiTigaPrismaAnimation from "@/components/SisiTigaPrismaAnimation";
 import TitikSudutTigaPrismaAnimation from "@/components/TitikSudutTigaPrismaAnimation";
 import JaringPrismaInteraktif from "@/components/JaringPrismaInteraktif";
+import prismaExBoxStool from "@assets/image_1776843419238.png";
+import prismaExTenda from "@assets/image_1776843450997.png";
+import prismaExLemari from "@assets/image_1776843468055.png";
+import prismaExKotakTisu from "@assets/image_1776843489367.png";
+import prismaExToblerone from "@assets/image_1776843581521.png";
+import prismaExHelloPanda from "@assets/image_1776843677763.png";
 
 /* ─────────────────────────────────────────────────────────────
    SVG-BASED 3D INTERACTIVE PRISMA — rotate & net view
@@ -1771,6 +1777,36 @@ const slides: Slide[] = [
           <p>• Jaring-jaring interaktif 3D</p>
           <p>• Luas permukaan dan volume</p>
           <p>• Contoh soal bertingkat</p>
+        </div>
+
+        {/* Contoh-contoh benda berbentuk prisma */}
+        <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-3">
+          <p className="text-cyan-300 font-semibold text-xs mb-3 text-center">
+            📷 Contoh Benda Berbentuk Prisma di Sekitar Kita
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {[
+              { src: prismaExBoxStool, caption: "Box Stool (Prisma Trapesium)" },
+              { src: prismaExTenda, caption: "Tenda (Prisma Segitiga)" },
+              { src: prismaExLemari, caption: "Lemari (Prisma Segiempat)" },
+              { src: prismaExKotakTisu, caption: "Kotak Tisu (Prisma Segiempat)" },
+              { src: prismaExToblerone, caption: "Toblerone (Prisma Segitiga)" },
+              { src: prismaExHelloPanda, caption: "Hello Panda (Prisma Segienam)" },
+            ].map((item, i) => (
+              <div key={i} className="bg-white rounded-lg p-2 flex flex-col items-center">
+                <div className="w-full h-24 flex items-center justify-center overflow-hidden">
+                  <img
+                    src={item.src}
+                    alt={item.caption}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <p className="text-[10px] text-slate-700 text-center mt-1 font-semibold leading-tight">
+                  {item.caption}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     ),
