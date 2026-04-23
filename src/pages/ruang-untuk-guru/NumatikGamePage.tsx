@@ -59,6 +59,13 @@ const games = [
     icon: <Plane className="w-7 h-7 text-cyan-300 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
+    label: "Galaksi Defender Math",
+    emoji: "👽",
+    path: "/math-game-arena/umum/galaxy-defender",
+    desc: "Pertahankan Bumi! Tembak alien jawaban benar yang turun dari luar angkasa!",
+    icon: <Rocket className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
     label: "Ninja Buah Math",
     emoji: "🍉",
     path: "/math-game-arena/umum/ninja-buah-math",

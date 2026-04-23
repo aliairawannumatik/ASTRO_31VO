@@ -314,6 +314,7 @@ import SubmarineBattleMathPage from "./pages/math-game-arena/umum/SubmarineBattl
 import PlatformJumpMathPage from "./pages/math-game-arena/umum/PlatformJumpMathPage";
 import KsatriaMatPage from "./pages/math-game-arena/umum/KsatriaMatPage";
 import SpaceImpactPage from "./pages/math-game-arena/umum/SpaceImpactPage";
+import GalaxyDefenderPage from "./pages/math-game-arena/umum/GalaxyDefenderPage";
 import ZumaMathPage from "./pages/math-game-arena/umum/ZumaMathPage";
 import PacmanMathPage from "./pages/math-game-arena/umum/PacmanMathPage";
 import BounceMathPage from "./pages/math-game-arena/umum/BounceMathPage";
@@ -1043,6 +1044,7 @@ const AppInner = () => {
       <Route path="/math-game-arena/umum/lompat-jawaban" element={<PlatformJumpMathPage />} />
       <Route path="/math-game-arena/umum/ksatria-mat" element={<KsatriaMatPage />} />
       <Route path="/math-game-arena/umum/space-impact" element={<SpaceImpactPage />} />
+      <Route path="/math-game-arena/umum/galaxy-defender" element={<GalaxyDefenderPage />} />
       <Route path="/math-game-arena/umum/zuma-math" element={<ZumaMathPage />} />
       <Route path="/math-game-arena/umum/pacman-math" element={<PacmanMathPage />} />
       <Route path="/math-game-arena/umum/bounce-math" element={<BounceMathPage />} />
