@@ -66,6 +66,13 @@ const games = [
     icon: <Rocket className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
+    label: "Math Bros — Petualangan",
+    emoji: "🍄",
+    path: "/math-game-arena/umum/math-bros",
+    desc: "Petualangan platformer! Lompati musuh & ambil koin jawaban benar di 5 level!",
+    icon: <Gamepad2 className="w-7 h-7 text-rose-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
     label: "Ninja Buah Math",
     emoji: "🍉",
     path: "/math-game-arena/umum/ninja-buah-math",
