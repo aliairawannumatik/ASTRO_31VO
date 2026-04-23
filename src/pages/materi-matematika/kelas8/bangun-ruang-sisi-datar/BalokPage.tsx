@@ -584,13 +584,28 @@ const InteractiveKerangkaBalok = () => {
   const LEN: Record<EdgeAxis, number> = { p: P, l: L, t: T };
   const THICK = 5;
 
+  // Each bar's natural local box is (len) wide × (THICK) tall, lying along +x.
+  // We use the default transform-origin (center of the bar). Transform list applies
+  // right-to-left: rotation around the bar's center, then translation places that
+  // center at the desired point in the balok's local frame.
   const getEdgeTransform = (e: EdgeSpec) => {
+    const len = LEN[e.axis];
     if (!bongkar) {
-      const [x, y, z] = e.start;
-      let rot = "";
-      if (e.axis === "l") rot = " rotateY(-90deg)";
-      else if (e.axis === "t") rot = " rotateZ(90deg)";
-      return `translate3d(${x - (e.axis === "t" ? 0 : 0)}px, ${y - THICK / 2}px, ${z}px)${rot}`;
+      const [sx, sy, sz] = e.start;
+      let cx = 0, cy = 0, cz = 0, rot = "";
+      if (e.axis === "p") {
+        // edge runs along x; center at (P/2, sy, sz)
+        cx = P / 2; cy = sy; cz = sz;
+      } else if (e.axis === "l") {
+        // edge runs along z; after rotateY(-90) bar points +z; center at (sx, sy, L/2)
+        cx = sx; cy = sy; cz = L / 2; rot = " rotateY(-90deg)";
+      } else {
+        // edge runs along y; after rotateZ(90) bar points +y; center at (sx, T/2, sz)
+        cx = sx; cy = T / 2; cz = sz; rot = " rotateZ(90deg)";
+      }
+      // To place the bar's center at (cx, cy, cz), translate the top-left by
+      // (cx - len/2, cy - THICK/2, cz).
+      return `translate3d(${cx - len / 2}px, ${cy - THICK / 2}px, ${cz}px)${rot}`;
     }
     const gap = 6;
     const rowGap = 18;
@@ -599,11 +614,11 @@ const InteractiveKerangkaBalok = () => {
       e.axis === "p" ? baseRowY :
       e.axis === "l" ? baseRowY + rowGap :
       baseRowY + rowGap * 2;
-    const len = LEN[e.axis];
     const totalW = 4 * len + 3 * gap;
     const startX = (P - totalW) / 2;
     const ex = startX + e.idx * (len + gap);
-    return `translate3d(${ex}px, ${rowY}px, 0px)`;
+    // Same center-placement convention.
+    return `translate3d(${ex}px, ${rowY - THICK / 2}px, 0px)`;
   };
 
   return (
@@ -642,7 +657,6 @@ const InteractiveKerangkaBalok = () => {
                 background: color,
                 borderRadius: 3,
                 transformStyle: "preserve-3d",
-                transformOrigin: "0% 50% 50%",
                 transform: getEdgeTransform(e),
                 transition: "transform 1.4s cubic-bezier(0.4,0,0.2,1)",
                 boxShadow: `0 0 6px ${color}cc, inset 0 0 2px rgba(255,255,255,0.4)`,
