@@ -110,6 +110,7 @@ import PenjumlahanPenguranganCepatPage from "./pages/menghitung-cepat/Penjumlaha
 import PerkalianDuaDigitPage from "./pages/menghitung-cepat/PerkalianDuaDigitPage";
 import PembagianCepatPage from "./pages/menghitung-cepat/PembagianCepatPage";
 import TabelReferensiPage from "./pages/menghitung-cepat/TabelReferensiPage";
+import LatihanFlashcardPage from "./pages/menghitung-cepat/LatihanFlashcardPage";
 
 // Latihan Mandiri Pages
 import LatihanMandiriPage from "./pages/LatihanMandiriPage";
@@ -1454,6 +1455,7 @@ const AppInner = () => {
       <Route path="/menghitung-cepat/perkalian-dua-digit" element={<PerkalianDuaDigitPage />} />
       <Route path="/menghitung-cepat/pembagian-cepat" element={<PembagianCepatPage />} />
       <Route path="/menghitung-cepat/tabel-referensi" element={<TabelReferensiPage />} />
+      <Route path="/menghitung-cepat/latihan-flashcard" element={<LatihanFlashcardPage />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

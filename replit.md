@@ -163,6 +163,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ## Notes
 
+- Menghitung Cepat menu updated on 2026-04-23: added `Latihan Flashcard` page at `/menghitung-cepat/latihan-flashcard` — kuis kilat 10 soal dengan timer 60 detik, 5 mode (Perkalian 1–10, Kuadrat 1–30, Kubik 1–15, Akar Kuadrat, Pecahan ↔ Persen), pilihan ganda 4 opsi, skor + streak + ringkasan akhir, opsi ulang/ganti mode.
 - Menghitung Cepat menu updated on 2026-04-23: added `Tabel Referensi Cepat` page at `/menghitung-cepat/tabel-referensi` featuring tabel perkalian 1–10 (10×10 dengan diagonal kuadrat di-highlight), kuadrat 1–30, kubik 1–20, akar kuadrat sempurna, pangkat 2–5, daftar bilangan prima < 100, konversi pecahan ↔ desimal ↔ persen, dan konversi satuan (panjang, massa, waktu). Diakses via tombol fitur emas di atas grid menu Menghitung Cepat.
 - Main menu updated on 2026-04-20: added `SMPN 28 BANDUNG` as a main menu entry with route `/smpn-28-bandung`, presenting a simple school profile page and navigation back to the main menu.
 - LKPD menu updated on 2026-04-20: `/lkpd/kelas-7/perbandingan/umum` is now a guided discovery LKPD. Bagian A uses interactive fill-in boxes from concept explanation through conclusion and standard formulas for ratio, unit comparison, and unit rate. Bagian B now contains 10 contextual practice problems with immediate answer checking and step-by-step discussions.
