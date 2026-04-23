@@ -510,7 +510,7 @@ const KERANGKA_EDGES: EdgeSpec[] = [
 
 const KERANGKA_COLORS: Record<EdgeAxis, string> = {
   p: "#22d3ee", // cyan
-  l: "#fb923c", // orange
+  l: "#ef4444", // red
   t: "#facc15", // yellow
 };
 
