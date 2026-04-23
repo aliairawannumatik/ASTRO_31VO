@@ -17,6 +17,195 @@ import imgSpeaker  from "@assets/image_1776472171497.png";
 import imgBak      from "@assets/image_1776472196508.png";
 
 /* ─────────────────────────────────────────────────────────────
+   INTERACTIVE KERANGKA KUBUS — drag to rotate, click to unfold
+   into 12 equal edges
+───────────────────────────────────────────────────────────── */
+type KubusEdgeAxis = "x" | "y" | "z";
+type KubusEdgeSpec = { axis: KubusEdgeAxis; start: [number, number, number]; idx: number };
+
+const KK_S = 110;          // edge length
+const KK_THICK = 5;        // visual thickness of each edge bar
+const KK_COLOR = "#22d3ee"; // cyan — all edges equal
+
+const KK_EDGES: KubusEdgeSpec[] = [
+  // 4 edges along x (front/back of top/bottom)
+  { axis: "x", start: [0, 0,    0],    idx: 0 },
+  { axis: "x", start: [0, KK_S, 0],    idx: 1 },
+  { axis: "x", start: [0, 0,    KK_S], idx: 2 },
+  { axis: "x", start: [0, KK_S, KK_S], idx: 3 },
+  // 4 edges along z (depth)
+  { axis: "z", start: [0,    0,    0], idx: 0 },
+  { axis: "z", start: [KK_S, 0,    0], idx: 1 },
+  { axis: "z", start: [0,    KK_S, 0], idx: 2 },
+  { axis: "z", start: [KK_S, KK_S, 0], idx: 3 },
+  // 4 edges along y (vertical)
+  { axis: "y", start: [0,    0, 0],    idx: 0 },
+  { axis: "y", start: [KK_S, 0, 0],    idx: 1 },
+  { axis: "y", start: [0,    0, KK_S], idx: 2 },
+  { axis: "y", start: [KK_S, 0, KK_S], idx: 3 },
+];
+
+const InteractiveKerangkaKubus = () => {
+  const [bongkar, setBongkar] = useState(false);
+  const [rotX, setRotX] = useState(-18);
+  const [rotY, setRotY] = useState(28);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -18, baseRotY: 28 });
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    dragRef.current = { startX: e.clientX, startY: e.clientY, baseRotX: rotX, baseRotY: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    setRotY(dragRef.current.baseRotY + (e.clientX - dragRef.current.startX) * 0.5);
+    setRotX(dragRef.current.baseRotX - (e.clientY - dragRef.current.startY) * 0.5);
+  }, [isDragging]);
+  const onMouseUp = useCallback(() => setIsDragging(false), []);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setIsDragging(true);
+    dragRef.current = { startX: t.clientX, startY: t.clientY, baseRotX: rotX, baseRotY: rotY };
+  };
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    if (e.cancelable) e.preventDefault();
+    const t = e.touches[0];
+    setRotY(dragRef.current.baseRotY + (t.clientX - dragRef.current.startX) * 0.5);
+    setRotX(dragRef.current.baseRotX - (t.clientY - dragRef.current.startY) * 0.5);
+  }, [isDragging]);
+  const onTouchEnd = useCallback(() => setIsDragging(false), []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const prevOverflow = document.body.style.overflow;
+    const prevOverscroll = document.body.style.overscrollBehavior;
+    document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "contain";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.overscrollBehavior = prevOverscroll;
+    };
+  }, [isDragging]);
+
+  const handleToggle = () => {
+    playPopSound();
+    if (!bongkar) {
+      setRotX(0); setRotY(0);
+      setBongkar(true);
+    } else {
+      setBongkar(false);
+      setRotX(-18); setRotY(28);
+    }
+  };
+
+  // 12 edges arranged in 3 rows × 4 columns when "bongkar" is on.
+  // Each edge becomes a horizontal bar of length KK_S.
+  const flatIndex = (axis: KubusEdgeAxis, idx: number) => {
+    const row = axis === "x" ? 0 : axis === "z" ? 1 : 2;
+    return { row, col: idx };
+  };
+
+  const getEdgeTransform = (e: KubusEdgeSpec) => {
+    if (!bongkar) {
+      const [x, y, z] = e.start;
+      let rot = "";
+      if (e.axis === "z") rot = " rotateY(-90deg)";
+      else if (e.axis === "y") rot = " rotateZ(90deg)";
+      return `translate3d(${x}px, ${y - KK_THICK / 2}px, ${z}px)${rot}`;
+    }
+    const gap = 8;
+    const rowGap = 22;
+    const baseRowY = KK_S + 36;
+    const { row, col } = flatIndex(e.axis, e.idx);
+    const totalW = 4 * KK_S + 3 * gap;
+    const startX = (KK_S - totalW) / 2;
+    const ex = startX + col * (KK_S + gap);
+    const ey = baseRowY + row * rowGap;
+    return `translate3d(${ex}px, ${ey}px, 0px)`;
+  };
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
+      <p className="text-white/60 text-xs text-center font-body">
+        Drag untuk memutar · Klik tombol untuk membongkar 12 rusuk yang sama panjang
+      </p>
+
+      <div
+        className="relative mx-auto flex items-center justify-center select-none overflow-visible"
+        style={{
+          width: "100%",
+          height: bongkar ? 360 : 280,
+          cursor: isDragging ? "grabbing" : "grab",
+          touchAction: "none",
+          transition: "height 0.6s ease",
+        }}
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+      >
+        <div style={{
+          width: KK_S, height: KK_S,
+          position: "relative",
+          transformStyle: "preserve-3d",
+          transformOrigin: `50% 50% ${KK_S / 2}px`,
+          transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+          transition: isDragging ? "none" : "transform 1s ease",
+        }}>
+          {KK_EDGES.map((e, i) => (
+            <div key={i} style={{
+              position: "absolute", top: 0, left: 0,
+              width: KK_S, height: KK_THICK,
+              background: KK_COLOR,
+              borderRadius: 3,
+              transformStyle: "preserve-3d",
+              transformOrigin: "0% 50% 50%",
+              transform: getEdgeTransform(e),
+              transition: "transform 1.4s cubic-bezier(0.4,0,0.2,1)",
+              boxShadow: `0 0 6px ${KK_COLOR}cc, inset 0 0 2px rgba(255,255,255,0.4)`,
+            }} />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 justify-center">
+        <button onClick={handleToggle}
+          className="px-3 py-1.5 text-xs font-bold bg-cyan-900/60 border border-cyan-600 text-cyan-300 rounded-lg hover:bg-cyan-800/60 transition-colors cursor-pointer font-body">
+          {bongkar ? "⊟ Susun Kembali Kerangka" : "⊞ Bongkar Kerangka"}
+        </button>
+      </div>
+
+      <div className="bg-slate-800/60 border border-cyan-700/40 rounded p-2 text-center text-[11px] font-body">
+        <div className="inline-flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded-sm" style={{ background: KK_COLOR, boxShadow: `0 0 4px ${KK_COLOR}` }} />
+          <span className="text-cyan-300 font-semibold">12 rusuk · semua sama panjang (s)</span>
+        </div>
+      </div>
+
+      <div className="bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-center">
+        {bongkar ? (
+          <BlockMath math="K = \underbrace{s + s + \cdots + s}_{12 \text{ rusuk}} = 12 \times s" />
+        ) : (
+          <BlockMath math="K_{\text{kerangka}} = 12 \times s" />
+        )}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    SIMPLE ROTATABLE CUBE — drag to rotate, no unfolding
 ───────────────────────────────────────────────────────────── */
 const CUBE_S = 90;
@@ -2613,6 +2802,36 @@ const KubusPage = () => {
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
             <p>🔑 <strong className="text-white">Cara memverifikasi jaring-jaring:</strong></p>
             <p>Bayangkan melipat setiap kotak. Jika 6 kotak bisa menutup semua sisi kubus tanpa tumpang tindih dan tanpa celah, maka itu adalah jaring-jaring yang valid!</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Kerangka Kubus",
+      icon: "🪡",
+      content: (
+        <div className="space-y-4">
+          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+            <p className="text-cyan-300 font-semibold text-sm font-display">🪡 Kerangka Kubus</p>
+            <p className="text-white/70 text-xs font-body leading-relaxed">
+              Kerangka kubus adalah rangka yang terbentuk dari semua rusuknya.
+              Kubus memiliki <strong className="text-white">12 rusuk</strong> yang{" "}
+              <strong className="text-cyan-300">semuanya sama panjang</strong>.
+              Bongkar kerangka di bawah ini untuk membuktikan bahwa total panjang rusuk ={" "}
+              <strong className="text-yellow-300">12 × s</strong>:
+            </p>
+          </div>
+
+          <InteractiveKerangkaKubus />
+
+          <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+            <p>🚀 <strong>Kunci utama kubus:</strong> Karena semua rusuk{" "}
+              <strong className="text-yellow-300">sama panjang (s)</strong>, rumus kerangka cukup{" "}
+              <InlineMath math="K = 12s" />.
+            </p>
+            <p>Contoh: jika <InlineMath math="s = 8\text{ cm}" />, maka{" "}
+              <InlineMath math="K = 12 \times 8 = 96\text{ cm}" />.
+            </p>
           </div>
         </div>
       ),
