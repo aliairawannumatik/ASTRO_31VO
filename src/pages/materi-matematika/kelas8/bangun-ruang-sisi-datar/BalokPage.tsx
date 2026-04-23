@@ -2333,7 +2333,39 @@ const slides: Slide[] = [
       </div>
     ),
   },
-  /* ── 12. LUAS PERMUKAAN ───────────────────────── */
+  /* ── 12. KERANGKA BALOK — DEMO BONGKAR ────────── */
+  {
+    icon: "🪡",
+    title: "Kerangka Balok — Bongkar 12 Rusuk",
+    content: (
+      <div className="space-y-4">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+          <p className="text-cyan-300 font-semibold text-sm font-display">🪡 Kerangka Balok</p>
+          <p className="text-white/70 text-xs font-body leading-relaxed">
+            Mari bongkar kerangka balok untuk melihat <strong className="text-white">12 rusuk</strong>{" "}
+            yang terbagi dalam 3 kelompok:{" "}
+            <strong className="text-cyan-300">4 panjang (p)</strong>,{" "}
+            <strong className="text-orange-300">4 lebar (l)</strong>, dan{" "}
+            <strong className="text-yellow-300">4 tinggi (t)</strong>.
+            Sehingga total panjang kerangka = <strong className="text-yellow-300">4(p + l + t)</strong>.
+          </p>
+        </div>
+
+        <InteractiveKerangkaBalok />
+
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+          <p>🚀 <strong>Ingat:</strong> Berbeda dengan kubus yang semua rusuknya sama panjang{" "}
+            (<InlineMath math="K = 12s" />), balok memiliki 3 ukuran rusuk berbeda sehingga{" "}
+            <InlineMath math="K = 4(p + l + t)" />.
+          </p>
+          <p>Contoh: jika <InlineMath math="p = 8, l = 5, t = 4" /> cm, maka{" "}
+            <InlineMath math="K = 4(8+5+4) = 68\text{ cm}" />.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── 13. LUAS PERMUKAAN ───────────────────────── */
   { icon: "🎨", title: sections[3].title, content: sections[3].content },
   /* ── 13. VOLUME ───────────────────────────────── */
   { icon: "📦", title: sections[4].title, content: sections[4].content },
