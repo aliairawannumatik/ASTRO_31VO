@@ -2255,56 +2255,6 @@ const slides: Slide[] = [
       </div>
     ),
   },
-  /* ── 9. KERANGKA BALOK ────────────────────────── */
-  {
-    icon: "🪡",
-    title: "Kerangka Balok",
-    content: (
-      <div className="space-y-4">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
-          <p className="text-cyan-300 font-semibold text-sm font-display">🪡 Kerangka Balok</p>
-          <p className="text-white/70 text-xs font-body leading-relaxed">
-            Kerangka balok adalah rangka yang terbentuk dari semua rusuknya.
-            Balok memiliki <strong className="text-white">12 rusuk</strong> dalam 3 kelompok berbeda panjang.
-            Bongkar kerangka di bawah ini untuk membuktikan bahwa total panjang rusuk = <strong className="text-yellow-300">4(p + l + t)</strong>:
-          </p>
-        </div>
-
-        <InteractiveKerangkaBalok />
-
-        <div className="overflow-x-auto rounded-lg border border-slate-700">
-          <table className="w-full text-xs text-center">
-            <thead>
-              <tr className="bg-slate-800">
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Besaran</th>
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Rumus</th>
-                <th className="px-3 py-2 text-cyan-300">Catatan</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ["Kerangka","K = 4(p+l+t)","12 rusuk, 3 kelompok"],
-                ["Luas permukaan","L = 2(pl+pt+lt)","6 sisi, 3 pasang"],
-                ["Diagonal bidang","√(p²+t²), √(p²+l²), √(l²+t²)","3 jenis"],
-                ["Diagonal ruang","d = √(p²+l²+t²)","4 buah"],
-                ["Volume","V = p×l×t","isi balok"],
-              ].map(([b,r,c],i)=>(
-                <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
-                  <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
-                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
-                  <td className="px-3 py-2 text-white/55 text-left">{c}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p>🚀 <strong>Kunci utama balok:</strong> Identifikasi <strong className="text-yellow-300">p, l, dan t</strong> terlebih dahulu — lalu gunakan rumus yang sesuai.</p>
-          <p>Geser ke slide berikutnya untuk <strong className="text-white">contoh soal kerangka</strong>!</p>
-        </div>
-      </div>
-    ),
-  },
   /* ── 10. JARING-JARING 3D ─────────────────────── */
   {
     icon: "🧊",
