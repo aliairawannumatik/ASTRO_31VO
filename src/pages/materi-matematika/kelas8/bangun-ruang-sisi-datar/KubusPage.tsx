@@ -21,28 +21,30 @@ import imgBak      from "@assets/image_1776472196508.png";
    into 12 equal edges
 ───────────────────────────────────────────────────────────── */
 type KubusEdgeAxis = "x" | "y" | "z";
-type KubusEdgeSpec = { axis: KubusEdgeAxis; start: [number, number, number]; idx: number };
+// Each edge is described by (axis, "other-axis-1 corner", "other-axis-2 corner")
+// in cube-local coords where the cube spans 0..KK_S in each axis.
+type KubusEdgeSpec = { axis: KubusEdgeAxis; a: 0 | 1; b: 0 | 1; idx: number };
 
 const KK_S = 110;          // edge length
 const KK_THICK = 5;        // visual thickness of each edge bar
 const KK_COLOR = "#22d3ee"; // cyan — all edges equal
 
 const KK_EDGES: KubusEdgeSpec[] = [
-  // 4 edges along x (front/back of top/bottom)
-  { axis: "x", start: [0, 0,    0],    idx: 0 },
-  { axis: "x", start: [0, KK_S, 0],    idx: 1 },
-  { axis: "x", start: [0, 0,    KK_S], idx: 2 },
-  { axis: "x", start: [0, KK_S, KK_S], idx: 3 },
-  // 4 edges along z (depth)
-  { axis: "z", start: [0,    0,    0], idx: 0 },
-  { axis: "z", start: [KK_S, 0,    0], idx: 1 },
-  { axis: "z", start: [0,    KK_S, 0], idx: 2 },
-  { axis: "z", start: [KK_S, KK_S, 0], idx: 3 },
-  // 4 edges along y (vertical)
-  { axis: "y", start: [0,    0, 0],    idx: 0 },
-  { axis: "y", start: [KK_S, 0, 0],    idx: 1 },
-  { axis: "y", start: [0,    0, KK_S], idx: 2 },
-  { axis: "y", start: [KK_S, 0, KK_S], idx: 3 },
+  // 4 edges along x (vary y, z)
+  { axis: "x", a: 0, b: 0, idx: 0 },
+  { axis: "x", a: 1, b: 0, idx: 1 },
+  { axis: "x", a: 0, b: 1, idx: 2 },
+  { axis: "x", a: 1, b: 1, idx: 3 },
+  // 4 edges along z (vary x, y)
+  { axis: "z", a: 0, b: 0, idx: 0 },
+  { axis: "z", a: 1, b: 0, idx: 1 },
+  { axis: "z", a: 0, b: 1, idx: 2 },
+  { axis: "z", a: 1, b: 1, idx: 3 },
+  // 4 edges along y (vary x, z)
+  { axis: "y", a: 0, b: 0, idx: 0 },
+  { axis: "y", a: 1, b: 0, idx: 1 },
+  { axis: "y", a: 0, b: 1, idx: 2 },
+  { axis: "y", a: 1, b: 1, idx: 3 },
 ];
 
 const InteractiveKerangkaKubus = () => {
@@ -113,20 +115,37 @@ const InteractiveKerangkaKubus = () => {
   };
 
   // 12 edges arranged in 3 rows × 4 columns when "bongkar" is on.
-  // Each edge becomes a horizontal bar of length KK_S.
   const flatIndex = (axis: KubusEdgeAxis, idx: number) => {
     const row = axis === "x" ? 0 : axis === "z" ? 1 : 2;
     return { row, col: idx };
   };
 
+  // Each bar's NATURAL local box is (KK_S) wide × (KK_THICK) tall, lying along +x.
+  // We use default transform-origin (center of the bar). The transform list applies
+  // right-to-left: rotation happens around the bar's center, then translation places
+  // that center at the desired point in the cube's coordinate frame.
   const getEdgeTransform = (e: KubusEdgeSpec) => {
     if (!bongkar) {
-      const [x, y, z] = e.start;
-      let rot = "";
-      if (e.axis === "z") rot = " rotateY(-90deg)";
-      else if (e.axis === "y") rot = " rotateZ(90deg)";
-      return `translate3d(${x}px, ${y - KK_THICK / 2}px, ${z}px)${rot}`;
+      // Cube-local coords: each axis spans 0..KK_S. Edge endpoints are determined by
+      // its axis and which corner (a,b) of the perpendicular plane it sits at.
+      const A = e.a * KK_S;
+      const B = e.b * KK_S;
+      let cx = 0, cy = 0, cz = 0, rot = "";
+      if (e.axis === "x") {
+        // edge runs along x at corner (y=A, z=B); center at (S/2, A, B)
+        cx = KK_S / 2; cy = A; cz = B;
+      } else if (e.axis === "z") {
+        // edge runs along z at corner (x=A, y=B); after rotateY(-90) bar points +z; center at (A, B, S/2)
+        cx = A; cy = B; cz = KK_S / 2; rot = " rotateY(-90deg)";
+      } else {
+        // y axis: edge runs along y at corner (x=A, z=B); after rotateZ(90) bar points +y; center at (A, S/2, B)
+        cx = A; cy = KK_S / 2; cz = B; rot = " rotateZ(90deg)";
+      }
+      // Bar's natural top-left is (0,0); its center is (KK_S/2, KK_THICK/2).
+      // To place center at (cx, cy, cz), translate by (cx - KK_S/2, cy - KK_THICK/2, cz).
+      return `translate3d(${cx - KK_S / 2}px, ${cy - KK_THICK / 2}px, ${cz}px)${rot}`;
     }
+    // Unfolded layout: 3 rows × 4 columns of horizontal bars.
     const gap = 8;
     const rowGap = 22;
     const baseRowY = KK_S + 36;
@@ -135,7 +154,8 @@ const InteractiveKerangkaKubus = () => {
     const startX = (KK_S - totalW) / 2;
     const ex = startX + col * (KK_S + gap);
     const ey = baseRowY + row * rowGap;
-    return `translate3d(${ex}px, ${ey}px, 0px)`;
+    // Same convention: place bar's center at (ex + KK_S/2, ey, 0).
+    return `translate3d(${ex}px, ${ey - KK_THICK / 2}px, 0px)`;
   };
 
   return (
