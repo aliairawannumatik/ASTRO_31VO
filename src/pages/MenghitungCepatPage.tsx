@@ -10,6 +10,7 @@ import {
   Divide,
   Target,
   Calculator,
+  BookOpen,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
@@ -120,6 +121,23 @@ const MenghitungCepatPage = () => {
             🏆 Cocok untuk ANBK & UN
           </span>
         </div>
+
+        <button
+          onClick={() => handleClick("/menghitung-cepat/tabel-referensi")}
+          className="w-full mb-4 group bg-gradient-to-r from-yellow-500/15 via-amber-500/15 to-orange-500/15 backdrop-blur border border-yellow-500/40 hover:border-yellow-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
+        >
+          <div className="flex items-start gap-4">
+            <BookOpen className="w-8 h-8 text-yellow-300 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
+            <div>
+              <h3 className="font-display text-base font-bold text-yellow-200 mb-1 leading-tight">
+                ⭐ TABEL REFERENSI CEPAT
+              </h3>
+              <p className="text-xs text-white/70 font-body leading-relaxed">
+                Daftar perkalian 1–10, kuadrat 1–30, kubik, akar, pangkat, bilangan prima, pecahan ↔ desimal ↔ persen, dan konversi satuan — semua dalam satu halaman hafalan.
+              </p>
+            </div>
+          </div>
+        </button>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {topics.map((topic, i) => (
