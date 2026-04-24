@@ -81,11 +81,10 @@ const RuangUntukGuruPage = () => {
             RUANG UNTUK GURU
           </h1>
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
-            Ruang khusus bagi para pendidik untuk memaksimalkan penggunaan NUMATIK sebagai media pembelajaran matematika yang interaktif, inovatif, dan menyenangkan di kelas.
+            Wadah khusus bagi pendidik yang menyediakan berbagai perangkat bantu untuk optimalisasi kegiatan belajar mengajar.
           </p>
         </div>
 
-        <h2 className="font-display text-xl font-bold text-white mb-4 text-center">Fitur untuk Guru</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
           {guruMenuItems.map((item, i) => (
             <button
