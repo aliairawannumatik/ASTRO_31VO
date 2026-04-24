@@ -77,7 +77,7 @@ const RuangUntukGuruPage = () => {
             <GraduationCap className="w-4 h-4" />
             Ruang Pendidik
           </div>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-primary text-glow-cyan leading-tight">
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan leading-tight">
             RUANG UNTUK GURU
           </h1>
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
