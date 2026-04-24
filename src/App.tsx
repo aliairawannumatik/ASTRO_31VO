@@ -15,6 +15,10 @@ import LKPDPage from "./pages/LKPDPage";
 import LKPDMenuPage from "./pages/LKPDMenuPage";
 import { LKPDKelas7Page, LKPDKelas8Page, LKPDKelas9Page } from "./pages/LKPDKelasPage";
 import LKPDPerbandinganPage from "./pages/LKPDPerbandinganPage";
+import BertingkatLKPDPage from "./pages/lkpd/kelas7/perbandingan/BertingkatLKPDPage";
+import SenilaiLKPDPage from "./pages/lkpd/kelas7/perbandingan/SenilaiLKPDPage";
+import SkalaLKPDPage from "./pages/lkpd/kelas7/perbandingan/SkalaLKPDPage";
+import CampuranLKPDPage from "./pages/lkpd/kelas7/perbandingan/CampuranLKPDPage";
 import ATPPage from "./pages/ATPPage";
 import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
@@ -749,6 +753,10 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-9" element={<LKPDKelas9Page />} />
       <Route path="/lkpd/kelas-7/perbandingan" element={<LKPDPerbandinganPage />} />
       <Route path="/lkpd/kelas-7/perbandingan/umum" element={<LKPDPage />} />
+      <Route path="/lkpd/kelas-7/perbandingan/bertingkat" element={<BertingkatLKPDPage />} />
+      <Route path="/lkpd/kelas-7/perbandingan/senilai-berbalik" element={<SenilaiLKPDPage />} />
+      <Route path="/lkpd/kelas-7/perbandingan/skala" element={<SkalaLKPDPage />} />
+      <Route path="/lkpd/kelas-7/perbandingan/campuran" element={<CampuranLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
