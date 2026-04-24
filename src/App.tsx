@@ -28,6 +28,12 @@ import OperasiCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/OperasiC
 import KPKFPBLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/KPKFPBLKPDPage";
 import BilanganRasionalMenuPage from "./pages/lkpd/kelas7/BilanganRasionalMenuPage";
 import ArtiPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/ArtiPecahanLKPDPage";
+import AljabarMenuPage from "./pages/lkpd/kelas7/AljabarMenuPage";
+import PengertianUnsurAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/PengertianUnsurAljabarLKPDPage";
+import PenjumlahanPenguranganAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/PenjumlahanPenguranganAljabarLKPDPage";
+import PerkalianPembagianAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/PerkalianPembagianAljabarLKPDPage";
+import SubstitusiAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/SubstitusiAljabarLKPDPage";
+import FaktorisasiAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/FaktorisasiAljabarLKPDPage";
 import PecahanCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage";
 import PenjumlahanPenguranganPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PenjumlahanPenguranganPecahanLKPDPage";
 import PerkalianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PerkalianPecahanLKPDPage";
@@ -787,6 +793,12 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/bilangan-rasional/pembagian" element={<PembagianPecahanLKPDPage />} />
       <Route path="/lkpd/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalLKPDPage />} />
       <Route path="/lkpd/kelas-7/bilangan-rasional/operasi-desimal" element={<OperasiDesimalLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aljabar" element={<AljabarMenuPage />} />
+      <Route path="/lkpd/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurAljabarLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aljabar/perkalian-pembagian" element={<PerkalianPembagianAljabarLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />

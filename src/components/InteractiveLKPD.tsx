@@ -2,6 +2,7 @@ import { ReactNode, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
+import LKPDGameZone, { LKPDGame } from "@/components/LKPDGameZone";
 import { playPopSound } from "@/hooks/useAudio";
 import {
   ArrowDown,
@@ -61,6 +62,7 @@ type Props = {
   summaryCards: SummaryCard[];
   practiceIntro: string;
   practiceItems: PracticeItem[];
+  games?: LKPDGame[];
   prevPath: string;
   backLabel: string;
   scoreMessages?: { perfect: string; high: string; medium: string; low: string };
@@ -321,6 +323,7 @@ const InteractiveLKPD = ({
   summaryCards,
   practiceIntro,
   practiceItems,
+  games,
   prevPath,
   backLabel,
   scoreMessages,
@@ -549,11 +552,13 @@ const InteractiveLKPD = ({
           </div>
         </section>
 
+        {games && games.length > 0 && <LKPDGameZone games={games} />}
+
         <section className="bg-gradient-to-br from-violet-500/15 via-fuchsia-500/10 to-rose-500/15 border border-fuchsia-200/30 rounded-3xl p-5 md:p-7 mb-6 backdrop-blur">
           <div className="flex items-start gap-3 mb-5">
             <Target className="w-8 h-8 text-rose-200 shrink-0" />
             <div>
-              <h2 className="font-display text-2xl font-bold text-rose-100">B. Soal Latihan</h2>
+              <h2 className="font-display text-2xl font-bold text-rose-100">{games && games.length > 0 ? "D" : "B"}. Soal Latihan</h2>
               <p className="text-sm text-white/70 font-body mt-1">{practiceIntro}</p>
             </div>
           </div>
