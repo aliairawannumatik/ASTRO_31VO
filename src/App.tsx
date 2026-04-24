@@ -19,6 +19,13 @@ import BertingkatLKPDPage from "./pages/lkpd/kelas7/perbandingan/BertingkatLKPDP
 import SenilaiLKPDPage from "./pages/lkpd/kelas7/perbandingan/SenilaiLKPDPage";
 import SkalaLKPDPage from "./pages/lkpd/kelas7/perbandingan/SkalaLKPDPage";
 import CampuranLKPDPage from "./pages/lkpd/kelas7/perbandingan/CampuranLKPDPage";
+import BilanganBulatMenuPage from "./pages/lkpd/kelas7/BilanganBulatMenuPage";
+import PenjumlahanLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PenjumlahanLKPDPage";
+import PenguranganLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PenguranganLKPDPage";
+import PerkalianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PerkalianLKPDPage";
+import PembagianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PembagianLKPDPage";
+import OperasiCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/OperasiCampuranLKPDPage";
+import KPKFPBLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/KPKFPBLKPDPage";
 import ATPPage from "./pages/ATPPage";
 import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
@@ -757,6 +764,13 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/perbandingan/senilai-berbalik" element={<SenilaiLKPDPage />} />
       <Route path="/lkpd/kelas-7/perbandingan/skala" element={<SkalaLKPDPage />} />
       <Route path="/lkpd/kelas-7/perbandingan/campuran" element={<CampuranLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat" element={<BilanganBulatMenuPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat/perkalian" element={<PerkalianLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat/pembagian" element={<PembagianLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />

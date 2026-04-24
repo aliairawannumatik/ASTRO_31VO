@@ -4,7 +4,9 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import {
+  ArrowDown,
   ArrowLeft,
+  ArrowUp,
   Award,
   BookOpenCheck,
   CheckCircle2,
@@ -25,35 +27,28 @@ const answerMatches = (value: string, accepted: string[]) => {
   return accepted.some((answer) => normalize(answer) === cleanValue);
 };
 
-const hasAnswer = (value?: string) => Boolean(value?.trim());
+const hasText = (value?: string) => Boolean(value?.trim());
 
-export type GuidedItem = {
-  id: string;
-  label: string;
-  suffix?: string;
-  answers: string[];
-  discussion: string[];
-};
+type CommonGuided = { id: string; label: string; discussion: string[] };
+type CommonPractice = { id: string; question: string; hint: string; discussion: string[] };
 
-export type PracticeItem = {
-  id: string;
-  question: string;
-  answers: string[];
-  hint: string;
-  discussion: string[];
-};
+type FillGuided = CommonGuided & { kind?: "fill"; suffix?: string; answers: string[] };
+type ChoiceGuided = CommonGuided & { kind: "choice"; options: string[]; correctIndex: number };
+type TFGuided = CommonGuided & { kind: "truefalse"; correct: boolean };
+type MatchGuided = CommonGuided & { kind: "match"; pairs: { left: string; right: string }[] };
+type SortGuided = CommonGuided & { kind: "sort"; items: string[]; correctOrder: string[] };
 
-export type SummaryCard = {
-  title: string;
-  text: string;
-  tone?: "cyan" | "yellow" | "emerald" | "violet" | "rose";
-};
+type FillPractice = CommonPractice & { kind?: "fill"; answers: string[] };
+type ChoicePractice = CommonPractice & { kind: "choice"; options: string[]; correctIndex: number };
+type TFPractice = CommonPractice & { kind: "truefalse"; correct: boolean };
+type MatchPractice = CommonPractice & { kind: "match"; pairs: { left: string; right: string }[] };
+type SortPractice = CommonPractice & { kind: "sort"; items: string[]; correctOrder: string[] };
 
-export type SituationCard = {
-  title: string;
-  visual: ReactNode;
-  text: string;
-};
+export type GuidedItem = FillGuided | ChoiceGuided | TFGuided | MatchGuided | SortGuided;
+export type PracticeItem = FillPractice | ChoicePractice | TFPractice | MatchPractice | SortPractice;
+
+export type SummaryCard = { title: string; text: string; tone?: "cyan" | "yellow" | "emerald" | "violet" | "rose" };
+export type SituationCard = { title: string; visual: ReactNode; text: string };
 
 type Props = {
   badgeText: string;
@@ -68,20 +63,15 @@ type Props = {
   practiceItems: PracticeItem[];
   prevPath: string;
   backLabel: string;
-  scoreMessages?: {
-    perfect: string;
-    high: string;
-    medium: string;
-    low: string;
-  };
+  scoreMessages?: { perfect: string; high: string; medium: string; low: string };
 };
 
 const toneClass: Record<NonNullable<SummaryCard["tone"]>, string> = {
-  cyan: "bg-cyan-500/10 border-cyan-200/20 text-cyan-100",
-  yellow: "bg-yellow-500/10 border-yellow-200/20 text-yellow-100",
-  emerald: "bg-emerald-500/10 border-emerald-200/20 text-emerald-100",
-  violet: "bg-violet-500/10 border-violet-200/20 text-violet-100",
-  rose: "bg-rose-500/10 border-rose-200/20 text-rose-100",
+  cyan: "bg-cyan-500/10 border-cyan-200/20",
+  yellow: "bg-yellow-500/10 border-yellow-200/20",
+  emerald: "bg-emerald-500/10 border-emerald-200/20",
+  violet: "bg-violet-500/10 border-violet-200/20",
+  rose: "bg-rose-500/10 border-rose-200/20",
 };
 
 const stepIcons = { Compass, Lightbulb, Target };
@@ -99,13 +89,230 @@ const DiscussionBox = ({ steps }: { steps: string[] }) => (
   </details>
 );
 
+type ItemWithKind = GuidedItem | PracticeItem;
+
+const isAnswered = (item: ItemWithKind, value: unknown): boolean => {
+  const kind = item.kind ?? "fill";
+  if (kind === "fill") return hasText(value as string);
+  if (kind === "choice") return typeof value === "number";
+  if (kind === "truefalse") return value === true || value === false;
+  if (kind === "match") return value !== undefined && Object.values(value as Record<string, string>).some((v) => Boolean(v));
+  if (kind === "sort") return Array.isArray(value);
+  return false;
+};
+
+const isCorrect = (item: ItemWithKind, value: unknown): boolean => {
+  const kind = item.kind ?? "fill";
+  if (kind === "fill") {
+    return answerMatches((value as string) || "", (item as FillGuided | FillPractice).answers);
+  }
+  if (kind === "choice") {
+    return value === (item as ChoiceGuided | ChoicePractice).correctIndex;
+  }
+  if (kind === "truefalse") {
+    return value === (item as TFGuided | TFPractice).correct;
+  }
+  if (kind === "match") {
+    const pairs = (item as MatchGuided | MatchPractice).pairs;
+    const map = (value as Record<string, string>) || {};
+    return pairs.every((p) => map[p.left] === p.right);
+  }
+  if (kind === "sort") {
+    const correct = (item as SortGuided | SortPractice).correctOrder;
+    const arr = (value as string[]) || [];
+    return arr.length === correct.length && arr.every((v, i) => v === correct[i]);
+  }
+  return false;
+};
+
+const ResultBadge = ({ correct, size = "sm" }: { correct: boolean; size?: "sm" | "lg" }) => (
+  <span
+    className={`inline-flex ${size === "lg" ? "min-w-24" : "min-w-20"} items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold ${
+      correct ? "bg-emerald-500/15 text-emerald-200" : "bg-rose-500/15 text-rose-200"
+    }`}
+  >
+    {correct ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+    {correct ? "Benar" : "Salah"}
+  </span>
+);
+
+const ChoiceInput = ({
+  options,
+  value,
+  onChange,
+  correctIndex,
+  showResult,
+  variant,
+}: {
+  options: string[];
+  value: number | undefined;
+  onChange: (v: number) => void;
+  correctIndex: number;
+  showResult: boolean;
+  variant: "guided" | "practice";
+}) => {
+  const ring = variant === "guided" ? "focus:ring-cyan-300/30" : "focus:ring-fuchsia-300/30";
+  return (
+    <div className="grid sm:grid-cols-2 gap-2 mt-2">
+      {options.map((opt, i) => {
+        const selected = value === i;
+        const correct = i === correctIndex;
+        let cls = "border-white/15 bg-black/30 hover:bg-white/10";
+        if (selected && showResult) {
+          cls = correct ? "border-emerald-300 bg-emerald-500/20" : "border-rose-300 bg-rose-500/20";
+        } else if (selected) {
+          cls = "border-cyan-300 bg-cyan-500/20";
+        }
+        return (
+          <button
+            key={opt}
+            type="button"
+            onClick={() => onChange(i)}
+            className={`text-left rounded-xl border px-4 py-2 text-sm text-white transition-colors outline-none focus:ring-2 ${ring} ${cls}`}
+          >
+            <span className="font-semibold text-white/60 mr-2">{String.fromCharCode(65 + i)}.</span>
+            {opt}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
+const TrueFalseInput = ({
+  value,
+  onChange,
+}: {
+  value: boolean | undefined;
+  onChange: (v: boolean) => void;
+}) => (
+  <div className="flex gap-2 mt-2">
+    {[
+      { v: true, label: "Benar" },
+      { v: false, label: "Salah" },
+    ].map((o) => {
+      const selected = value === o.v;
+      return (
+        <button
+          key={o.label}
+          type="button"
+          onClick={() => onChange(o.v)}
+          className={`flex-1 rounded-xl border px-4 py-2 text-sm font-bold text-white transition-colors ${
+            selected ? "border-cyan-300 bg-cyan-500/20" : "border-white/15 bg-black/30 hover:bg-white/10"
+          }`}
+        >
+          {o.label}
+        </button>
+      );
+    })}
+  </div>
+);
+
+const MatchInput = ({
+  pairs,
+  value,
+  onChange,
+}: {
+  pairs: { left: string; right: string }[];
+  value: Record<string, string> | undefined;
+  onChange: (v: Record<string, string>) => void;
+}) => {
+  const rights = useMemo(() => pairs.map((p) => p.right), [pairs]);
+  const map = value || {};
+  return (
+    <div className="space-y-2 mt-2">
+      {pairs.map((p) => {
+        const selected = map[p.left] || "";
+        return (
+          <div key={p.left} className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <div className="flex-1 rounded-xl border border-white/15 bg-black/20 px-4 py-2 text-sm text-white/85">
+              {p.left}
+            </div>
+            <span className="text-white/40 text-center">↔</span>
+            <select
+              value={selected}
+              onChange={(e) => onChange({ ...map, [p.left]: e.target.value })}
+              className="flex-1 rounded-xl border border-cyan-200/30 bg-black/30 px-4 py-2 text-sm text-white outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
+            >
+              <option value="">— pilih pasangan —</option>
+              {rights.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
+            </select>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const SortInput = ({
+  items,
+  value,
+  onChange,
+}: {
+  items: string[];
+  value: string[] | undefined;
+  onChange: (v: string[]) => void;
+}) => {
+  const order = value && value.length === items.length ? value : items;
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= order.length) return;
+    const next = [...order];
+    [next[i], next[j]] = [next[j], next[i]];
+    onChange(next);
+  };
+  return (
+    <ul className="space-y-2 mt-2">
+      {order.map((it, i) => (
+        <li key={it} className="flex items-center gap-2 rounded-xl border border-white/15 bg-black/20 px-3 py-2">
+          <span className="text-xs font-bold text-cyan-200 w-6 text-center">{i + 1}</span>
+          <span className="flex-1 text-sm text-white/85">{it}</span>
+          <button
+            type="button"
+            onClick={() => move(i, -1)}
+            className="rounded-md border border-white/15 bg-white/5 p-1 text-white/70 hover:bg-white/10 disabled:opacity-30"
+            disabled={i === 0}
+            aria-label="Naikkan"
+          >
+            <ArrowUp className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => move(i, 1)}
+            className="rounded-md border border-white/15 bg-white/5 p-1 text-white/70 hover:bg-white/10 disabled:opacity-30"
+            disabled={i === order.length - 1}
+            aria-label="Turunkan"
+          >
+            <ArrowDown className="w-4 h-4" />
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const KindLabel = ({ kind }: { kind: NonNullable<ItemWithKind["kind"]> | "fill" }) => {
+  const map: Record<string, string> = {
+    fill: "Isian",
+    choice: "Pilihan Ganda",
+    truefalse: "Benar / Salah",
+    match: "Menjodohkan",
+    sort: "Mengurutkan",
+  };
+  return <span className="text-[10px] uppercase tracking-wider text-cyan-300/80 font-bold">{map[kind]}</span>;
+};
+
 const InteractiveLKPD = ({
   badgeText,
   title,
   intro,
   steps = [
     { icon: "Compass", title: "Amati", text: "Baca situasi dan informasi yang diberikan." },
-    { icon: "Lightbulb", title: "Temukan", text: "Isi bagian kosong untuk menemukan konsep dan rumus." },
+    { icon: "Lightbulb", title: "Temukan", text: "Selesaikan setiap soal untuk menemukan konsep." },
     { icon: "Target", title: "Terapkan", text: "Gunakan kesimpulan pada soal kontekstual." },
   ],
   situations,
@@ -119,24 +326,23 @@ const InteractiveLKPD = ({
   scoreMessages,
 }: Props) => {
   const navigate = useNavigate();
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [answers, setAnswers] = useState<Record<string, unknown>>({});
   const [checked, setChecked] = useState(false);
 
-  const allQuestions = useMemo(() => [...guidedItems, ...practiceItems], [guidedItems, practiceItems]);
+  const allItems = useMemo(() => [...guidedItems, ...practiceItems], [guidedItems, practiceItems]);
 
   const results = useMemo(() => {
-    return allQuestions.reduce<Record<string, boolean>>((acc, item) => {
-      acc[item.id] = answerMatches(answers[item.id] || "", item.answers);
+    return allItems.reduce<Record<string, boolean>>((acc, item) => {
+      acc[item.id] = isCorrect(item, answers[item.id]);
       return acc;
     }, {});
-  }, [answers, allQuestions]);
+  }, [answers, allItems]);
 
   const score = useMemo(() => Object.values(results).filter(Boolean).length, [results]);
-  const total = allQuestions.length;
+  const total = allItems.length;
   const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
 
-  const updateAnswer = (id: string, value: string) =>
-    setAnswers((current) => ({ ...current, [id]: value }));
+  const update = (id: string, value: unknown) => setAnswers((cur) => ({ ...cur, [id]: value }));
 
   const checkAnswers = () => {
     playPopSound();
@@ -166,6 +372,92 @@ const InteractiveLKPD = ({
     if (percentage >= 75) return messages.high;
     if (percentage >= 50) return messages.medium;
     return messages.low;
+  };
+
+  const renderInput = (item: ItemWithKind, variant: "guided" | "practice") => {
+    const kind = item.kind ?? "fill";
+    const value = answers[item.id];
+    if (kind === "fill") {
+      const f = item as FillGuided | FillPractice;
+      const suffix = "suffix" in f ? f.suffix : undefined;
+      const ring = variant === "guided" ? "focus:ring-cyan-300/20 focus:border-cyan-300 border-cyan-200/30" : "focus:ring-fuchsia-300/20 focus:border-fuchsia-300 border-fuchsia-200/30";
+      return (
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2">
+          <input
+            value={(value as string) || ""}
+            onChange={(e) => update(item.id, e.target.value)}
+            className={`flex-1 rounded-xl border bg-black/30 px-4 py-2 text-white outline-none focus:ring-2 ${ring}`}
+            placeholder="tulis jawabanmu"
+          />
+          {suffix && <span className="text-sm text-white/65">{suffix}</span>}
+          {isAnswered(item, value) && <ResultBadge correct={results[item.id]} />}
+        </div>
+      );
+    }
+    if (kind === "choice") {
+      const c = item as ChoiceGuided | ChoicePractice;
+      return (
+        <>
+          <ChoiceInput
+            options={c.options}
+            value={value as number | undefined}
+            onChange={(v) => update(item.id, v)}
+            correctIndex={c.correctIndex}
+            showResult={isAnswered(item, value)}
+            variant={variant}
+          />
+          {isAnswered(item, value) && (
+            <div className="mt-2">
+              <ResultBadge correct={results[item.id]} />
+            </div>
+          )}
+        </>
+      );
+    }
+    if (kind === "truefalse") {
+      return (
+        <>
+          <TrueFalseInput value={value as boolean | undefined} onChange={(v) => update(item.id, v)} />
+          {isAnswered(item, value) && (
+            <div className="mt-2">
+              <ResultBadge correct={results[item.id]} />
+            </div>
+          )}
+        </>
+      );
+    }
+    if (kind === "match") {
+      const m = item as MatchGuided | MatchPractice;
+      return (
+        <>
+          <MatchInput pairs={m.pairs} value={value as Record<string, string> | undefined} onChange={(v) => update(item.id, v)} />
+          {isAnswered(item, value) && (
+            <div className="mt-2">
+              <ResultBadge correct={results[item.id]} />
+            </div>
+          )}
+        </>
+      );
+    }
+    if (kind === "sort") {
+      const s = item as SortGuided | SortPractice;
+      return (
+        <>
+          <SortInput items={s.items} value={value as string[] | undefined} onChange={(v) => update(item.id, v)} />
+          <div className="mt-2 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => update(item.id, (value as string[] | undefined) ?? s.items)}
+              className="text-xs text-cyan-200/80 underline"
+            >
+              periksa urutanku
+            </button>
+            {isAnswered(item, value) && <ResultBadge correct={results[item.id]} />}
+          </div>
+        </>
+      );
+    }
+    return null;
   };
 
   return (
@@ -219,35 +511,21 @@ const InteractiveLKPD = ({
           )}
 
           <div className="space-y-3 mb-6">
-            {guidedItems.map((item, index) => (
-              <label key={item.id} className="block rounded-2xl bg-card/80 border border-white/10 p-4">
-                <div className="flex flex-col md:flex-row md:items-center gap-3">
-                  <span className="flex-1 text-sm md:text-base text-white/85 font-body">
-                    <span className="font-bold text-cyan-200">{index + 1}.</span> {item.label}{" "}
-                    <span className="text-cyan-200">...</span> {item.suffix ?? ""}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <input
-                      value={answers[item.id] || ""}
-                      onChange={(event) => updateAnswer(item.id, event.target.value)}
-                      className="w-full md:w-52 rounded-xl border border-cyan-200/30 bg-black/30 px-4 py-2 text-white outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
-                      placeholder="isi jawaban"
-                    />
-                    {hasAnswer(answers[item.id]) && (
-                      <span
-                        className={`inline-flex min-w-24 items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold ${
-                          results[item.id] ? "bg-emerald-500/15 text-emerald-200" : "bg-rose-500/15 text-rose-200"
-                        }`}
-                      >
-                        {results[item.id] ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
-                        {results[item.id] ? "Benar" : "Salah"}
-                      </span>
-                    )}
+            {guidedItems.map((item, index) => {
+              const kind = item.kind ?? "fill";
+              return (
+                <div key={item.id} className="rounded-2xl bg-card/80 border border-white/10 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="flex-1 text-sm md:text-base text-white/85 font-body">
+                      <span className="font-bold text-cyan-200">{index + 1}.</span> {item.label}
+                    </p>
+                    <KindLabel kind={kind} />
                   </div>
+                  {renderInput(item, "guided")}
+                  {checked && <DiscussionBox steps={item.discussion} />}
                 </div>
-                {checked && <DiscussionBox steps={item.discussion} />}
-              </label>
-            ))}
+              );
+            })}
           </div>
 
           <div className="rounded-3xl border border-fuchsia-200/25 bg-fuchsia-500/10 p-5">
@@ -262,7 +540,7 @@ const InteractiveLKPD = ({
             </div>
             <div className="grid md:grid-cols-3 gap-4">
               {summaryCards.map((card) => (
-                <div key={card.title} className={`rounded-2xl border p-4 ${toneClass[card.tone ?? "cyan"]}`}>
+                <div key={card.title} className={`rounded-2xl border p-4 text-white ${toneClass[card.tone ?? "cyan"]}`}>
                   <h4 className="font-bold mb-2">{card.title}</h4>
                   <p className="text-sm text-white/75">{card.text}</p>
                 </div>
@@ -280,35 +558,25 @@ const InteractiveLKPD = ({
             </div>
           </div>
           <div className="space-y-4">
-            {practiceItems.map((item, index) => (
-              <div key={item.id} className="rounded-2xl bg-card/80 border border-white/10 p-4">
-                <p className="text-sm md:text-base text-white/85 font-body mb-3">
-                  <span className="font-bold text-rose-200">{index + 1}.</span> {item.question}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-                  <input
-                    value={answers[item.id] || ""}
-                    onChange={(event) => updateAnswer(item.id, event.target.value)}
-                    className="flex-1 rounded-xl border border-fuchsia-200/30 bg-black/30 px-4 py-2 text-white outline-none focus:border-fuchsia-300 focus:ring-2 focus:ring-fuchsia-300/20"
-                    placeholder="tulis jawabanmu"
-                  />
-                  {hasAnswer(answers[item.id]) && (
-                    <div
-                      className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold ${
-                        results[item.id] ? "bg-emerald-500/15 text-emerald-200" : "bg-rose-500/15 text-rose-200"
-                      }`}
-                    >
-                      {results[item.id] ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
-                      {results[item.id] ? "Benar" : "Salah"}
-                    </div>
+            {practiceItems.map((item, index) => {
+              const kind = item.kind ?? "fill";
+              const value = answers[item.id];
+              return (
+                <div key={item.id} className="rounded-2xl bg-card/80 border border-white/10 p-4">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <p className="flex-1 text-sm md:text-base text-white/85 font-body">
+                      <span className="font-bold text-rose-200">{index + 1}.</span> {item.question}
+                    </p>
+                    <KindLabel kind={kind} />
+                  </div>
+                  {renderInput(item, "practice")}
+                  {isAnswered(item, value) && !results[item.id] && (
+                    <p className="mt-2 text-xs text-yellow-200/90 font-body">Petunjuk: {item.hint}</p>
                   )}
+                  {checked && <DiscussionBox steps={item.discussion} />}
                 </div>
-                {hasAnswer(answers[item.id]) && !results[item.id] && (
-                  <p className="mt-2 text-xs text-yellow-200/90 font-body">Petunjuk: {item.hint}</p>
-                )}
-                {checked && <DiscussionBox steps={item.discussion} />}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -328,7 +596,7 @@ const InteractiveLKPD = ({
             </>
           ) : (
             <p className="text-sm text-white/70">
-              Benar/salah terlihat langsung di setiap isian. Tekan tombol di bawah untuk melihat skor akhir.
+              Benar/salah terlihat langsung di setiap soal. Tekan tombol di bawah untuk melihat skor akhir.
             </p>
           )}
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
