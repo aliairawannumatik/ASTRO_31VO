@@ -157,7 +157,6 @@ const ATPPage = () => {
             <School className="w-8 h-8 text-cyan-200 mb-3" />
             <h2 className="font-display text-xl font-bold text-cyan-100 mb-3">Identitas Dokumen</h2>
             <div className="space-y-2 text-sm text-white/75 font-body">
-              <p><span className="text-white font-semibold">Satuan Pendidikan:</span> SMPN 28 Bandung</p>
               <p><span className="text-white font-semibold">Mata Pelajaran:</span> Matematika</p>
               <p><span className="text-white font-semibold">Fase:</span> D</p>
               <p><span className="text-white font-semibold">Tahun Pelajaran:</span> 2024 - 2025</p>
