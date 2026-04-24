@@ -26,6 +26,14 @@ import PerkalianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PerkalianLKPDP
 import PembagianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PembagianLKPDPage";
 import OperasiCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/OperasiCampuranLKPDPage";
 import KPKFPBLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/KPKFPBLKPDPage";
+import BilanganRasionalMenuPage from "./pages/lkpd/kelas7/BilanganRasionalMenuPage";
+import ArtiPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/ArtiPecahanLKPDPage";
+import PecahanCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage";
+import PenjumlahanPenguranganPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PenjumlahanPenguranganPecahanLKPDPage";
+import PerkalianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PerkalianPecahanLKPDPage";
+import PembagianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PembagianPecahanLKPDPage";
+import BentukDesimalLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/BentukDesimalLKPDPage";
+import OperasiDesimalLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/OperasiDesimalLKPDPage";
 import ATPPage from "./pages/ATPPage";
 import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
@@ -771,6 +779,14 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/bilangan-bulat/pembagian" element={<PembagianLKPDPage />} />
       <Route path="/lkpd/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranLKPDPage />} />
       <Route path="/lkpd/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional" element={<BilanganRasionalMenuPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional/penjumlahan-pengurangan" element={<PenjumlahanPenguranganPecahanLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional/perkalian" element={<PerkalianPecahanLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional/pembagian" element={<PembagianPecahanLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-rasional/operasi-desimal" element={<OperasiDesimalLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
