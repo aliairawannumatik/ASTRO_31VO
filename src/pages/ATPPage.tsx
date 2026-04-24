@@ -159,7 +159,7 @@ const ATPPage = () => {
             <div className="space-y-2 text-sm text-white/75 font-body">
               <p><span className="text-white font-semibold">Mata Pelajaran:</span> Matematika</p>
               <p><span className="text-white font-semibold">Fase:</span> D</p>
-              <p><span className="text-white font-semibold">Tahun Pelajaran:</span> 2024 - 2025</p>
+              <p><span className="text-white font-semibold">Tahun Pelajaran:</span> 2025 - 2026</p>
             </div>
           </div>
           <div className="rounded-2xl border border-yellow-200/25 bg-yellow-400/10 backdrop-blur p-5">
