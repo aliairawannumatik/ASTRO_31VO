@@ -789,26 +789,26 @@ const SpaceImpactPage = ({
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 flex flex-col items-center px-4 py-4 w-full max-w-lg">
         <div className="flex items-center justify-between w-full mb-1 gap-2">
+          <button
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Kembali ke pilihan game"
+          >
+            <span className="text-base leading-none">←</span>
+            <span className="hidden sm:inline">Kembali</span>
+          </button>
           <h1 className="font-display text-2xl font-bold text-primary text-glow-cyan mb-1 text-center flex-1">
             🚀 SPACE IMPACT MATH
             {topicLabel ? <span className="block text-xs md:text-sm text-cyan-300 font-body mt-0.5">{topicLabel}</span> : null}
           </h1>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => { playPopSound(); navigate(homePath); }}
-              className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
-              title="Menu Utama"
-            >
-              🏠
-            </button>
-            <button
-              onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-              className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
-              title="Keluar"
-            >
-              ✕
-            </button>
-          </div>
+          <button
+            onClick={() => { playPopSound(); navigate(homePath); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Menu Utama"
+          >
+            <span className="text-base leading-none">🏠</span>
+            <span className="hidden sm:inline">Home</span>
+          </button>
         </div>
         <p className="text-white/50 text-xs font-body mb-4 text-center">
           Tembak musuh sebanyak-banyaknya! Setiap musuh perlu 3 tembakan.

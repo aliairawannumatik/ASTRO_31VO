@@ -20,7 +20,7 @@ const PenjumlahanTembakTankGamePage = () => (
     questions={questions}
     topicLabel="PENJUMLAHAN BILANGAN BULAT · Tembak tank dengan jawaban benar!"
     backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
-    homePath="/math-game-arena"
+    homePath="/menu"
   />
 );
 

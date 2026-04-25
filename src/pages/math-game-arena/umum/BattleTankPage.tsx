@@ -651,6 +651,14 @@ const BattleTankPage = ({
 
       {/* Header */}
       <div className="relative z-10 w-full shrink-0 flex items-center justify-between pt-2 pb-1 px-3 gap-2">
+        <button
+          onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+          title="Kembali ke pilihan game"
+        >
+          <span className="text-base leading-none">←</span>
+          <span className="hidden sm:inline">Kembali</span>
+        </button>
         <div className="text-center flex-1">
           <h1 className="font-display text-lg sm:text-2xl font-bold text-primary text-glow-cyan leading-tight">
             💥 Shoot Tank
@@ -659,22 +667,14 @@ const BattleTankPage = ({
             {topicLabel ? topicLabel : "🖱️ Mouse/sentuh untuk membidik · Klik/tap untuk menembak"}
           </p>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={() => { playPopSound(); navigate(homePath); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
-            title="Menu Utama"
-          >
-            🏠
-          </button>
-          <button
-            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
-            title="Keluar"
-          >
-            ✕
-          </button>
-        </div>
+        <button
+          onClick={() => { playPopSound(); navigate(homePath); }}
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+          title="Menu Utama"
+        >
+          <span className="text-base leading-none">🏠</span>
+          <span className="hidden sm:inline">Home</span>
+        </button>
       </div>
 
       {/* Canvas – fills remaining space */}

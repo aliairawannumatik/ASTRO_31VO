@@ -20,7 +20,7 @@ const PenjumlahanSpaceImpactGamePage = () => (
     questions={questions}
     topicLabel="PENJUMLAHAN BILANGAN BULAT"
     backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
-    homePath="/math-game-arena"
+    homePath="/menu"
   />
 );
 
