@@ -34,7 +34,7 @@ interface PowerUp { x: number; y: number; type: "shield" | "rapid" | "spread" }
 type Phase = "idle" | "playing" | "dead" | "levelup" | "win";
 
 // ── Math question generator ───────────────────────────────────────────────
-interface MQ { q: string; ans: number }
+export interface MQ { q: string; ans: number }
 const makeQ = (level: number): MQ => {
   const difficulty = Math.min(level, 5);
   const type = Math.floor(Math.random() * (3 + difficulty));
@@ -86,8 +86,8 @@ const makeWrong = (ans: number, used: Set<number>): number => {
     const d = 1 + Math.floor(Math.random() * 20);
     v = ans + (Math.random() < 0.5 ? d : -d);
     tries++;
-  } while ((used.has(v) || v < 0 || v === ans) && tries < 100);
-  return Math.max(0, v);
+  } while ((used.has(v) || v === ans) && tries < 100);
+  return v;
 };
 
 // ── Enemy colors per shape ────────────────────────────────────────────────
@@ -278,7 +278,21 @@ function spawnWave(level: number, q: MQ): Enemy[] {
 }
 
 // ── Main component ────────────────────────────────────────────────────────
-const SpaceImpactPage = () => {
+interface SpaceImpactPageProps {
+  questions?: MQ[];
+  topicLabel?: string;
+  backPath?: string;
+  homePath?: string;
+}
+
+const SpaceImpactPage = ({
+  questions,
+  topicLabel,
+  backPath,
+  homePath = "/ruang-untuk-guru/numatik-game",
+}: SpaceImpactPageProps = {}) => {
+  const customQuestionsRef = useRef<MQ[] | undefined>(questions && questions.length > 0 ? questions : undefined);
+  const customQIdxRef = useRef(0);
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -342,7 +356,14 @@ const SpaceImpactPage = () => {
 
   // ── Spawn new question + wave ─────────────────────────────────────────
   const spawnQuestion = useCallback((lv: number) => {
-    const q = makeQ(lv);
+    let q: MQ;
+    const pool = customQuestionsRef.current;
+    if (pool && pool.length > 0) {
+      q = pool[customQIdxRef.current % pool.length];
+      customQIdxRef.current += 1;
+    } else {
+      q = makeQ(lv);
+    }
     questionRef.current = q;
     setQuestion(q.q);
     const wave = spawnWave(lv, q);
@@ -769,7 +790,7 @@ const SpaceImpactPage = () => {
       <div className="relative z-10 flex flex-col items-center px-4 py-4 w-full max-w-lg">
         <div className="flex items-center justify-between w-full mb-1">
           <button
-            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            onClick={() => { playPopSound(); navigate(homePath); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
             title="Menu Utama"
           >
@@ -777,9 +798,10 @@ const SpaceImpactPage = () => {
           </button>
           <h1 className="font-display text-2xl font-bold text-primary text-glow-cyan mb-1 text-center flex-1">
             🚀 SPACE IMPACT MATH
+            {topicLabel ? <span className="block text-xs md:text-sm text-cyan-300 font-body mt-0.5">{topicLabel}</span> : null}
           </h1>
           <button
-            onClick={() => { playPopSound(); navigate(-1); }}
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
             title="Keluar"
           >
@@ -834,7 +856,7 @@ const SpaceImpactPage = () => {
               <button onClick={startGame} className="mt-2 px-8 py-3 bg-accent text-black font-display font-bold rounded-full hover:scale-105 transition-transform">
                 MAIN LAGI
               </button>
-              <button onClick={() => { playPopSound(); navigate(-1); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
+              <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
                 Kembali ke Menu
               </button>
             </div>
@@ -851,7 +873,7 @@ const SpaceImpactPage = () => {
               <button onClick={startGame} className="mt-2 px-8 py-3 bg-accent text-black font-display font-bold rounded-full hover:scale-105 transition-transform">
                 MAIN LAGI
               </button>
-              <button onClick={() => { playPopSound(); navigate(-1); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
+              <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }} className="text-white/50 text-xs hover:text-white transition-colors font-body cursor-pointer">
                 Kembali ke Menu
               </button>
             </div>

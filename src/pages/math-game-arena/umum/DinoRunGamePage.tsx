@@ -34,14 +34,14 @@ interface Obstacle {
 }
 
 // ── Math questions ───────────────────────────────────────────────────────────
-interface MQ {
+export interface MQ {
   q: string;
   opts: string[];
   correctIndex: number;
   bonus: number;
 }
 
-const QUESTIONS: MQ[] = [
+const DEFAULT_QUESTIONS: MQ[] = [
   { q: "12 × 8 = ?",            opts: ["86","96","106","76"],    correctIndex: 1, bonus: 30 },
   { q: "144 ÷ 12 = ?",          opts: ["10","11","12","13"],     correctIndex: 2, bonus: 30 },
   { q: "√169 = ?",              opts: ["11","12","13","14"],     correctIndex: 2, bonus: 40 },
@@ -76,7 +76,20 @@ const PALETTE = {
 type Phase = "idle" | "running" | "stunned" | "question" | "dead";
 
 // ── Component ────────────────────────────────────────────────────────────────
-const DinoRunGamePage = () => {
+interface DinoRunGamePageProps {
+  questions?: MQ[];
+  topicLabel?: string;
+  backPath?: string;
+  homePath?: string;
+}
+
+const DinoRunGamePage = ({
+  questions,
+  topicLabel,
+  backPath,
+  homePath = "/ruang-untuk-guru/numatik-game",
+}: DinoRunGamePageProps = {}) => {
+  const QUESTIONS = questions && questions.length > 0 ? questions : DEFAULT_QUESTIONS;
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -504,17 +517,17 @@ const DinoRunGamePage = () => {
       <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
         <div className="flex items-center justify-between w-full mb-3">
           <button
-            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            onClick={() => { playPopSound(); navigate(homePath); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
             title="Menu Utama"
           >
             🏠
           </button>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan text-center flex-1">
-            🐢 Turtle Run Math
+            🐢 Turtle Run Math{topicLabel ? <span className="block text-xs md:text-sm text-cyan-300 font-body mt-0.5">{topicLabel}</span> : null}
           </h1>
           <button
-            onClick={() => { playPopSound(); navigate(-1); }}
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
             title="Keluar"
           >

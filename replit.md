@@ -134,6 +134,15 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 ### Kelas 9 - Transformasi Geometri
 - `/materi-matematika/kelas-9/transformasi-geometri/dilatasi` — Dilatasi (full content with SVG diagrams, 9 examples)
 
+### Math Game Arena - Kelas 7 - Bilangan Bulat - Penjumlahan (game variant hub, 5 games)
+- `/math-game-arena/kelas-7/bilangan-bulat/penjumlahan` — Hub page with 5 game cards
+- `/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/pesawat-tembak-meteor` — Meteor Shooting
+- `/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/turtle-run` — Turtle Run Math
+- `/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/flappy-rocket` — Flappy Rocket
+- `/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tembak-tank` — Shoot Tank
+- `/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/space-impact` — Space Impact Math
+- The 4 NUMATIK GAME components (`DinoRunGamePage`, `FlappyRocketPage`, `BattleTankPage`, `SpaceImpactPage` under `src/pages/math-game-arena/umum/`) accept optional props `{ questions, topicLabel, backPath, homePath }` so they can be reused as wrappers per topic. Each exports an `MQ` interface for typing the topic-specific question set.
+
 ### Math Game Arena - Kelas 7 - Aritmetika Sosial (5 games, meteor shooting)
 - `/math-game-arena/kelas-7/aritmetika-sosial/jual-beli-untung-rugi` — Jual Beli, Untung dan Rugi
 - `/math-game-arena/kelas-7/aritmetika-sosial/diskon` — Diskon

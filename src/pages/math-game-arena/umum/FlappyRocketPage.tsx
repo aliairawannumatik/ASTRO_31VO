@@ -19,8 +19,8 @@ const ROCKET_X = 80;
 const ROCKET_R = 16;
 
 // ── Math questions ────────────────────────────────────────────────────────────
-interface MQ { q: string; opts: string[]; ans: number }
-const QUESTIONS: MQ[] = [
+export interface MQ { q: string; opts: string[]; ans: number }
+const DEFAULT_QUESTIONS: MQ[] = [
   {
     q: "Bentuk sederhana dari\n45 : 60 adalah ...",
     opts: ["1 : 2", "2 : 3", "3 : 4", "4 : 5"],
@@ -66,7 +66,20 @@ type Phase = "idle" | "playing" | "question" | "dead";
 interface NebulaCloud { x: number; y: number; rx: number; ry: number; color: string; alpha: number; speed: number }
 
 // ── Component ─────────────────────────────────────────────────────────────────
-const FlappyRocketPage = () => {
+interface FlappyRocketPageProps {
+  questions?: MQ[];
+  topicLabel?: string;
+  backPath?: string;
+  homePath?: string;
+}
+
+const FlappyRocketPage = ({
+  questions,
+  topicLabel,
+  backPath,
+  homePath = "/ruang-untuk-guru/numatik-game",
+}: FlappyRocketPageProps = {}) => {
+  const QUESTIONS = questions && questions.length > 0 ? questions : DEFAULT_QUESTIONS;
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -697,7 +710,7 @@ const FlappyRocketPage = () => {
         {/* header */}
         <div className="flex items-center justify-between w-full mb-3">
           <button
-            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            onClick={() => { playPopSound(); navigate(homePath); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
             title="Menu Utama"
           >
@@ -707,7 +720,7 @@ const FlappyRocketPage = () => {
             🚀 FLAPPY ROCKET
           </h1>
           <button
-            onClick={() => { playPopSound(); navigate(-1); }}
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
             title="Keluar"
           >

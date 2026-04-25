@@ -18,9 +18,9 @@ const QUIZ_BONUS_TIME = 6;
 const TILE_SIZE = 40;
 
 // ── Quiz Pool ────────────────────────────────────────────────────────────────
-interface MQ { q: string; opts: string[]; ans: number }
+export interface MQ { q: string; opts: string[]; ans: number }
 
-const QUIZ_POOL: MQ[] = [
+const DEFAULT_QUIZ_POOL: MQ[] = [
   { q: "FPB dari 24 dan 36 adalah ...", opts: ["12", "6", "8", "18"], ans: 0 },
   { q: "KPK dari 6 dan 8 adalah ...", opts: ["24", "12", "48", "16"], ans: 0 },
   { q: "Hasil dari 5² + 3² = ...", opts: ["34", "64", "25", "16"], ans: 0 },
@@ -104,7 +104,20 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
   ctx.closePath();
 }
 
-const BattleTankPage = () => {
+interface BattleTankPageProps {
+  questions?: MQ[];
+  topicLabel?: string;
+  backPath?: string;
+  homePath?: string;
+}
+
+const BattleTankPage = ({
+  questions,
+  topicLabel,
+  backPath,
+  homePath = "/ruang-untuk-guru/numatik-game",
+}: BattleTankPageProps = {}) => {
+  const QUIZ_POOL = questions && questions.length > 0 ? questions : DEFAULT_QUIZ_POOL;
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -639,7 +652,7 @@ const BattleTankPage = () => {
       {/* Header */}
       <div className="relative z-10 w-full shrink-0 flex items-center justify-between pt-2 pb-1 px-3">
         <button
-          onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+          onClick={() => { playPopSound(); navigate(homePath); }}
           className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
           title="Menu Utama"
         >
@@ -650,11 +663,11 @@ const BattleTankPage = () => {
             💥 Shoot Tank
           </h1>
           <p className="font-body text-[10px] text-white/50 mt-0.5">
-            🖱️ Mouse/sentuh untuk membidik · Klik/tap untuk menembak
+            {topicLabel ? topicLabel : "🖱️ Mouse/sentuh untuk membidik · Klik/tap untuk menembak"}
           </p>
         </div>
         <button
-          onClick={() => { playPopSound(); navigate(-1); }}
+          onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
           className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
           title="Keluar"
         >
@@ -716,7 +729,7 @@ const BattleTankPage = () => {
           Mulai / Ulangi
         </button>
         <button
-          onClick={() => { playPopSound(); navigate(-1); }}
+          onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
           className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-bold text-white hover:bg-white/20 transition-colors"
         >
           Kembali
