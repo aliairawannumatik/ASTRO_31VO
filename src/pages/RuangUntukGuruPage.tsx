@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   GraduationCap,
-  ClipboardCheck,
   ListChecks,
   ShieldCheck,
   MessageSquareHeart,
@@ -20,12 +19,6 @@ const guruMenuItems = [
     icon: ListChecks,
     path: "/atp",
     desc: "Alur tujuan pembelajaran",
-  },
-  {
-    label: "LKPD",
-    icon: ClipboardCheck,
-    path: "/lkpd",
-    desc: "Lembar kerja interaktif dan berskor",
   },
   {
     label: "KEYAKINAN KELAS",
