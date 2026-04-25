@@ -127,6 +127,8 @@ const BattleTankPage = ({
   const lastRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
+  const [phase, setPhaseState] = useState<Phase>("idle");
+  const setPhase = useCallback((p: Phase) => { phaseRef.current = p; setPhaseState(p); }, []);
   const guruQuiz = useGuruQuiz(phaseRef);
   const enemiesRef = useRef<EnemyTank[]>([]);
   const bulletsRef = useRef<Bullet[]>([]);
@@ -265,9 +267,8 @@ const BattleTankPage = ({
     playerRef.current = { x: CW / 2, targetX: CW / 2, turretAngle: -Math.PI / 2, invT: 0 };
     setActiveQuiz(null);
     spawnWave();
-    phaseRef.current = "playing";
-    rerender();
-  }, [spawnWave, rerender]);
+    setPhase("playing");
+  }, [spawnWave, setPhase]);
 
   // ── Input ─────────────────────────────────────────────────────────────────
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -404,7 +405,7 @@ const BattleTankPage = ({
         if (timerAccRef.current >= 1) {
           timerAccRef.current -= 1;
           timerRef.current--;
-          if (timerRef.current <= 0) { timerRef.current = 0; phaseRef.current = "dead"; rerender(); }
+          if (timerRef.current <= 0) { timerRef.current = 0; setPhase("dead"); }
         }
 
         // ── Quiz countdown ─────────────────────────────────────────────────
@@ -490,7 +491,7 @@ const BattleTankPage = ({
                 shakeRef.current = 0.5; comboRef.current = 0; comboAccRef.current = 0;
                 addExplosion(player.x, PLAYER_Y, "#00f0ff", false);
                 floatTextsRef.current.push({ x: player.x, y: PLAYER_Y - 30, txt: "💥 Kena!", alpha: 1, vy: -70, good: false });
-                if (livesRef.current <= 0) { phaseRef.current = "dead"; rerender(); }
+                if (livesRef.current <= 0) { setPhase("dead"); }
               }
             }
           }
@@ -641,9 +642,9 @@ const BattleTankPage = ({
 
     rafRef.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [rerender, spawnWave, fireBullet, triggerQuiz]);
+  }, [rerender, spawnWave, fireBullet, triggerQuiz, phase]);
 
-  if (phaseRef.current === "idle") {
+  if (phase === "idle") {
     return (
       <MathGameIntro
         gameTitle="SHOOT TANK"
