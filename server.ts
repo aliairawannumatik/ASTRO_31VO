@@ -2,25 +2,32 @@ import express from 'express'
 import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GoogleGenAI } from '@google/genai'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express()
-const PORT = process.env.PORT || (process.env.NODE_ENV === 'production' ? 5000 : 3001)
+const PORT = Number(process.env.PORT) || (process.env.NODE_ENV === 'production' ? 5000 : 3001)
 const SYSTEM_PROMPT = "Kamu adalah NUMATIK AI, asisten matematika ceria dan bersemangat yang dibuat oleh Irawan Sutiawan, M.Pd. Panggil pengguna dengan 'Sobat Numatik'. Jawab langkah per langkah dengan emoji ceria. Di akhir jawaban tulis KESIMPULAN dan TIPS MATEMATIKA. Tutup dengan kalimat penyemangat. Hanya jawab pertanyaan matematika."
 
 app.use(cors())
 app.use(express.json())
 
+const ai = new GoogleGenAI({
+  apiKey: process.env.AI_INTEGRATIONS_GEMINI_API_KEY,
+  httpOptions: {
+    apiVersion: '',
+    baseUrl: process.env.AI_INTEGRATIONS_GEMINI_BASE_URL,
+  },
+})
+
 app.post('/api/chat', async (req, res) => {
   try {
-    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY
     const messages = req.body?.messages
 
-    if (!apiKey) {
-      return res.status(503).json({ error: 'Kunci API AI belum dikonfigurasi di server.' })
+    if (!process.env.AI_INTEGRATIONS_GEMINI_API_KEY || !process.env.AI_INTEGRATIONS_GEMINI_BASE_URL) {
+      return res.status(503).json({ error: 'Layanan AI belum dikonfigurasi di server.' })
     }
 
     if (!Array.isArray(messages) || messages.length === 0) {
@@ -38,13 +45,15 @@ app.post('/api/chat', async (req, res) => {
       return res.status(400).json({ error: 'Pesan tidak valid.' })
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey)
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-1.5-flash',
-      systemInstruction: SYSTEM_PROMPT,
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents,
+      config: {
+        systemInstruction: SYSTEM_PROMPT,
+      },
     })
-    const result = await model.generateContent({ contents })
-    const text = result.response.text()
+
+    const text = response.text || ''
 
     return res.json({ text })
   } catch (error) {
