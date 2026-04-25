@@ -40,6 +40,14 @@ import PerkalianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/Perk
 import PembagianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PembagianPecahanLKPDPage";
 import BentukDesimalLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/BentukDesimalLKPDPage";
 import OperasiDesimalLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/OperasiDesimalLKPDPage";
+import PLSVPtLSVMenuPage from "./pages/lkpd/kelas7/PLSVPtLSVMenuPage";
+import KalimatTerbukaTertutupLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/KalimatTerbukaTertutupLKPDPage";
+import PengertianPLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PengertianPLSVLKPDPage";
+import PenyelesaianPLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PenyelesaianPLSVLKPDPage";
+import ModelMatematikaPLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/ModelMatematikaPLSVLKPDPage";
+import PengertianPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PengertianPtLSVLKPDPage";
+import PenyelesaianPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PenyelesaianPtLSVLKPDPage";
+import ModelMatematikaPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/ModelMatematikaPtLSVLKPDPage";
 import ATPPage from "./pages/ATPPage";
 import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
@@ -799,6 +807,14 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/aljabar/perkalian-pembagian" element={<PerkalianPembagianAljabarLKPDPage />} />
       <Route path="/lkpd/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarLKPDPage />} />
       <Route path="/lkpd/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarLKPDPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMenuPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv/kalimat-terbuka-tertutup" element={<KalimatTerbukaTertutupLKPDPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVLKPDPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVLKPDPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVLKPDPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVLKPDPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVLKPDPage />} />
+      <Route path="/lkpd/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
