@@ -634,13 +634,15 @@ const DinoRunGamePage = ({
                   </div>
 
                   {/* MULAI button */}
-                  <button
-                    onClick={startGame}
-                    className="relative group mt-1 self-center inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-2 sm:py-2.5 rounded-full font-display font-black text-sm sm:text-base text-slate-900 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 shadow-[0_0_25px_rgba(250,204,21,0.6)] hover:shadow-[0_0_35px_rgba(250,204,21,0.9)] hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer animate-pulse-glow"
-                  >
-                    <span className="absolute inset-0 rounded-full bg-white/30 blur-md opacity-50 group-hover:opacity-80 transition-opacity" />
-                    <span className="relative tracking-wider">▶ MULAI PETUALANGAN</span>
-                  </button>
+                  <div className="relative mt-1 self-center">
+                    <span className="absolute -inset-1 rounded-full bg-yellow-400/60 blur-lg animate-pulse-glow pointer-events-none" />
+                    <button
+                      onClick={startGame}
+                      className="relative inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-2 sm:py-2.5 rounded-full font-display font-black text-sm sm:text-base text-slate-950 bg-gradient-to-b from-yellow-300 via-amber-400 to-orange-500 border-2 border-yellow-200 shadow-[0_4px_0_rgba(180,83,9,0.8),0_0_25px_rgba(250,204,21,0.7)] hover:shadow-[0_4px_0_rgba(180,83,9,0.8),0_0_40px_rgba(250,204,21,1)] hover:brightness-110 active:translate-y-0.5 active:shadow-[0_1px_0_rgba(180,83,9,0.8),0_0_20px_rgba(250,204,21,0.7)] transition-all duration-150 cursor-pointer"
+                    >
+                      <span className="tracking-wider drop-shadow-[0_1px_0_rgba(255,255,255,0.4)]">▶ MULAI PETUALANGAN</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
