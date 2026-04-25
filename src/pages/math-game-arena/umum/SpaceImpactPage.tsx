@@ -100,147 +100,526 @@ const ENEMY_COLORS: Record<string, { color: string; glow: string }> = {
 
 // ── Draw helpers ──────────────────────────────────────────────────────────
 function drawSaucer(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, color: string, glow: string, pulse: number) {
+  const cx = x + w / 2, cy = y + h / 2;
   ctx.save();
+
+  // Tractor beam below (pulsing)
+  ctx.globalAlpha = 0.25 + Math.abs(pulse) * 0.15;
+  const beamGrad = ctx.createLinearGradient(cx, cy + h / 3, cx, cy + h * 1.8);
+  beamGrad.addColorStop(0, glow);
+  beamGrad.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = beamGrad;
+  ctx.beginPath();
+  ctx.moveTo(cx - w * 0.32, cy + h / 3);
+  ctx.lineTo(cx - w * 0.6, cy + h * 1.8);
+  ctx.lineTo(cx + w * 0.6, cy + h * 1.8);
+  ctx.lineTo(cx + w * 0.32, cy + h / 3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Body disc - lower half
+  const discGrad = ctx.createLinearGradient(cx, cy - h * 0.4, cx, cy + h * 0.5);
+  discGrad.addColorStop(0, "#ffffff44");
+  discGrad.addColorStop(0.2, color);
+  discGrad.addColorStop(0.8, color);
+  discGrad.addColorStop(1, "#00000066");
   ctx.shadowColor = glow;
-  ctx.shadowBlur = 12 + pulse * 4;
-  // body ellipse
-  ctx.fillStyle = color;
+  ctx.shadowBlur = 16 + Math.abs(pulse) * 6;
+  ctx.fillStyle = discGrad;
   ctx.beginPath();
-  ctx.ellipse(x + w / 2, y + h / 2, w / 2, h / 3, 0, 0, Math.PI * 2);
+  ctx.ellipse(cx, cy + h * 0.1, w / 2, h / 3, 0, 0, Math.PI * 2);
   ctx.fill();
-  // dome
+  ctx.shadowBlur = 0;
+
+  // Spinning rim ring
+  ctx.strokeStyle = glow;
+  ctx.lineWidth = 2.5;
+  ctx.shadowColor = glow;
+  ctx.shadowBlur = 10;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy + h * 0.1, w / 2 + 2, h / 7, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Rim light dots (6 lights)
+  for (let i = 0; i < 6; i++) {
+    const angle = (i / 6) * Math.PI * 2 + pulse * 1.5;
+    const lx = cx + Math.cos(angle) * (w / 2);
+    const ly = (cy + h * 0.1) + Math.sin(angle) * (h / 7);
+    const litColor = i % 2 === 0 ? glow : "#ffffff";
+    ctx.fillStyle = litColor;
+    ctx.shadowColor = litColor;
+    ctx.shadowBlur = 9;
+    ctx.beginPath();
+    ctx.arc(lx, ly, 2.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Dome (top hemisphere)
+  const domeGrad = ctx.createRadialGradient(cx - w * 0.08, cy - h * 0.2, 0, cx, cy - h * 0.05, w / 3.5);
+  domeGrad.addColorStop(0, "rgba(220,255,255,0.98)");
+  domeGrad.addColorStop(0.45, "rgba(160,220,255,0.75)");
+  domeGrad.addColorStop(1, color + "aa");
+  ctx.fillStyle = domeGrad;
+  ctx.shadowColor = "#aaffff";
+  ctx.shadowBlur = 8;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy - h * 0.05, w / 3.5, h / 2.4, 0, Math.PI, 0);
+  ctx.fill();
+  // Dome highlight
+  ctx.fillStyle = "rgba(255,255,255,0.65)";
+  ctx.shadowBlur = 0;
+  ctx.beginPath();
+  ctx.ellipse(cx - w * 0.07, cy - h * 0.25, w / 10, h / 9, -0.3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Bottom hull underlight glow
+  ctx.globalAlpha = 0.4 + Math.abs(pulse) * 0.2;
   ctx.fillStyle = glow;
+  ctx.shadowColor = glow;
+  ctx.shadowBlur = 12;
   ctx.beginPath();
-  ctx.ellipse(x + w / 2, y + h / 2 - 2, w / 5, h / 5, 0, 0, Math.PI * 2);
+  ctx.ellipse(cx, cy + h * 0.38, w / 4, h / 10, 0, 0, Math.PI * 2);
   ctx.fill();
-  // underlight
-  ctx.fillStyle = "rgba(255,255,255,0.3)";
-  ctx.beginPath();
-  ctx.ellipse(x + w / 2, y + h / 2 + h / 4, w / 3, h / 8, 0, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.shadowBlur = 0;
   ctx.restore();
 }
 
 function drawFighter(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, color: string, glow: string, pulse: number) {
+  const cx = x + w / 2, cy = y + h / 2;
   ctx.save();
+
+  // Engine trails (left side, pointing left = coming from right)
+  const trailGrad = ctx.createLinearGradient(x - 14, cy, x + w * 0.2, cy);
+  trailGrad.addColorStop(0, "rgba(0,0,0,0)");
+  trailGrad.addColorStop(0.5, color + "55");
+  trailGrad.addColorStop(1, glow + "99");
+  ctx.fillStyle = trailGrad;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.2, cy - 5);
+  ctx.lineTo(x - 14, cy);
+  ctx.lineTo(x + w * 0.2, cy + 5);
+  ctx.closePath();
+  ctx.fill();
+
+  // Wing engine pods (mini trails)
+  const podTrailGrad = ctx.createLinearGradient(x - 8, cy - h * 0.35, x + w * 0.25, cy - h * 0.35);
+  podTrailGrad.addColorStop(0, "rgba(0,0,0,0)");
+  podTrailGrad.addColorStop(1, color + "66");
+  ctx.fillStyle = podTrailGrad;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.25, cy - h * 0.38);
+  ctx.lineTo(x - 8, cy - h * 0.35);
+  ctx.lineTo(x + w * 0.25, cy - h * 0.32);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.25, cy + h * 0.38);
+  ctx.lineTo(x - 8, cy + h * 0.35);
+  ctx.lineTo(x + w * 0.25, cy + h * 0.32);
+  ctx.closePath();
+  ctx.fill();
+
+  // Fuselage
+  const bodyGrad = ctx.createLinearGradient(x, y + h * 0.2, x, y + h * 0.8);
+  bodyGrad.addColorStop(0, "#ffffff44");
+  bodyGrad.addColorStop(0.3, color);
+  bodyGrad.addColorStop(0.7, color);
+  bodyGrad.addColorStop(1, "#00000055");
+  ctx.fillStyle = bodyGrad;
   ctx.shadowColor = glow;
-  ctx.shadowBlur = 10 + pulse * 3;
-  // body
-  ctx.fillStyle = color;
+  ctx.shadowBlur = 12 + Math.abs(pulse) * 4;
   ctx.beginPath();
-  ctx.moveTo(x + w, y + h / 2);
-  ctx.lineTo(x + w / 4, y);
-  ctx.lineTo(x, y + h / 2);
-  ctx.lineTo(x + w / 4, y + h);
+  ctx.moveTo(x + w, cy);
+  ctx.lineTo(x + w * 0.3, y + h * 0.08);
+  ctx.lineTo(x + w * 0.05, cy);
+  ctx.lineTo(x + w * 0.3, y + h * 0.92);
   ctx.closePath();
   ctx.fill();
-  // wings
-  ctx.fillStyle = glow;
+  ctx.shadowBlur = 0;
+
+  // Upper delta wing
+  const wingGrad = ctx.createLinearGradient(x + w * 0.3, y - 8, x + w * 0.3, cy);
+  wingGrad.addColorStop(0, glow);
+  wingGrad.addColorStop(1, color + "99");
+  ctx.fillStyle = wingGrad;
   ctx.beginPath();
-  ctx.moveTo(x + w / 2, y + h / 3);
-  ctx.lineTo(x + w / 4, y - 2);
-  ctx.lineTo(x + w / 5, y + h / 2);
+  ctx.moveTo(x + w * 0.62, cy - 3);
+  ctx.lineTo(x + w * 0.3, y - 8);
+  ctx.lineTo(x + w * 0.1, cy - 4);
+  ctx.lineTo(x + w * 0.28, cy - 2);
+  ctx.closePath();
+  ctx.fill();
+  // Wing edge glow
+  ctx.strokeStyle = glow;
+  ctx.lineWidth = 1.5;
+  ctx.shadowColor = glow;
+  ctx.shadowBlur = 8;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.58, cy - 3);
+  ctx.lineTo(x + w * 0.28, y - 5);
+  ctx.stroke();
+
+  // Lower delta wing
+  const wingGrad2 = ctx.createLinearGradient(x + w * 0.3, cy, x + w * 0.3, y + h + 8);
+  wingGrad2.addColorStop(0, color + "99");
+  wingGrad2.addColorStop(1, glow);
+  ctx.fillStyle = wingGrad2;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.62, cy + 3);
+  ctx.lineTo(x + w * 0.3, y + h + 8);
+  ctx.lineTo(x + w * 0.1, cy + 4);
+  ctx.lineTo(x + w * 0.28, cy + 2);
   ctx.closePath();
   ctx.fill();
   ctx.beginPath();
-  ctx.moveTo(x + w / 2, y + h * 2 / 3);
-  ctx.lineTo(x + w / 4, y + h + 2);
-  ctx.lineTo(x + w / 5, y + h / 2);
-  ctx.closePath();
+  ctx.moveTo(x + w * 0.58, cy + 3);
+  ctx.lineTo(x + w * 0.28, y + h + 5);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Cockpit pod
+  const cpGrad = ctx.createRadialGradient(x + w * 0.72, cy - 2, 0, x + w * 0.72, cy, w * 0.13);
+  cpGrad.addColorStop(0, "rgba(255,220,220,0.95)");
+  cpGrad.addColorStop(0.4, glow);
+  cpGrad.addColorStop(1, color + "88");
+  ctx.fillStyle = cpGrad;
+  ctx.shadowColor = glow;
+  ctx.shadowBlur = 12;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.72, cy, w * 0.12, h * 0.22, 0, 0, Math.PI * 2);
   ctx.fill();
+  ctx.fillStyle = "rgba(255,255,255,0.65)";
+  ctx.shadowBlur = 0;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.73, cy - 2, w * 0.05, h * 0.07, -0.3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Hull accent line
+  ctx.strokeStyle = "rgba(255,255,255,0.3)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.35, y + h * 0.35);
+  ctx.lineTo(x + w * 0.8, cy - 1);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.35, y + h * 0.65);
+  ctx.lineTo(x + w * 0.8, cy + 1);
+  ctx.stroke();
+
   ctx.restore();
 }
 
 function drawBomber(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, color: string, glow: string, pulse: number) {
+  const cx = x + w / 2, cy = y + h / 2;
   ctx.save();
+
+  // Dual engine exhaust plumes
+  const eng1Grad = ctx.createLinearGradient(x - 18, y + h * 0.28, x + w * 0.18, y + h * 0.28);
+  eng1Grad.addColorStop(0, "rgba(0,0,0,0)");
+  eng1Grad.addColorStop(0.5, "rgba(255,80,0,0.55)");
+  eng1Grad.addColorStop(1, "rgba(255,180,0,0.85)");
+  ctx.fillStyle = eng1Grad;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.18, y + h * 0.22);
+  ctx.lineTo(x - 18, y + h * 0.28);
+  ctx.lineTo(x + w * 0.18, y + h * 0.34);
+  ctx.closePath();
+  ctx.fill();
+  const eng2Grad = ctx.createLinearGradient(x - 18, y + h * 0.72, x + w * 0.18, y + h * 0.72);
+  eng2Grad.addColorStop(0, "rgba(0,0,0,0)");
+  eng2Grad.addColorStop(0.5, "rgba(255,80,0,0.55)");
+  eng2Grad.addColorStop(1, "rgba(255,180,0,0.85)");
+  ctx.fillStyle = eng2Grad;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.18, y + h * 0.66);
+  ctx.lineTo(x - 18, y + h * 0.72);
+  ctx.lineTo(x + w * 0.18, y + h * 0.78);
+  ctx.closePath();
+  ctx.fill();
+
+  // Main heavy fuselage
+  const bodyGrad = ctx.createLinearGradient(x, y + h * 0.1, x, y + h * 0.9);
+  bodyGrad.addColorStop(0, "#ffffff33");
+  bodyGrad.addColorStop(0.2, color);
+  bodyGrad.addColorStop(0.5, color);
+  bodyGrad.addColorStop(0.8, color);
+  bodyGrad.addColorStop(1, "#00000055");
+  ctx.fillStyle = bodyGrad;
   ctx.shadowColor = glow;
-  ctx.shadowBlur = 14 + pulse * 5;
-  // main body
-  ctx.fillStyle = color;
+  ctx.shadowBlur = 16 + Math.abs(pulse) * 6;
   ctx.beginPath();
-  ctx.roundRect(x + w * 0.1, y + h * 0.2, w * 0.8, h * 0.6, 6);
+  ctx.roundRect(x + w * 0.08, y + h * 0.12, w * 0.84, h * 0.76, 8);
   ctx.fill();
-  // cockpit
-  ctx.fillStyle = glow;
+  ctx.shadowBlur = 0;
+
+  // Hull armor plating lines
+  ctx.strokeStyle = "rgba(255,255,255,0.18)";
+  ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.ellipse(x + w * 0.75, y + h / 2, w * 0.12, h * 0.15, 0, 0, Math.PI * 2);
+  ctx.moveTo(x + w * 0.25, y + h * 0.12);
+  ctx.lineTo(x + w * 0.25, y + h * 0.88);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.5, y + h * 0.12);
+  ctx.lineTo(x + w * 0.5, y + h * 0.88);
+  ctx.stroke();
+
+  // Top wing slab
+  const wingTopGrad = ctx.createLinearGradient(cx, y - 8, cx, y + h * 0.12);
+  wingTopGrad.addColorStop(0, glow + "88");
+  wingTopGrad.addColorStop(1, color + "cc");
+  ctx.fillStyle = wingTopGrad;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.7, y + h * 0.12);
+  ctx.lineTo(x + w * 0.5, y - 8);
+  ctx.lineTo(x + w * 0.15, y + h * 0.12);
+  ctx.closePath();
   ctx.fill();
-  // engines
-  ctx.fillStyle = "#ff4400";
-  ctx.shadowColor = "#ff6600";
+  ctx.strokeStyle = glow;
+  ctx.lineWidth = 1.5;
+  ctx.shadowColor = glow;
   ctx.shadowBlur = 8;
   ctx.beginPath();
-  ctx.ellipse(x + w * 0.15, y + h * 0.35, w * 0.08, h * 0.1, 0, 0, Math.PI * 2);
+  ctx.moveTo(x + w * 0.65, y + h * 0.12);
+  ctx.lineTo(x + w * 0.47, y - 5);
+  ctx.stroke();
+
+  // Bottom wing slab
+  const wingBotGrad = ctx.createLinearGradient(cx, y + h * 0.88, cx, y + h + 8);
+  wingBotGrad.addColorStop(0, color + "cc");
+  wingBotGrad.addColorStop(1, glow + "88");
+  ctx.fillStyle = wingBotGrad;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.7, y + h * 0.88);
+  ctx.lineTo(x + w * 0.5, y + h + 8);
+  ctx.lineTo(x + w * 0.15, y + h * 0.88);
+  ctx.closePath();
   ctx.fill();
   ctx.beginPath();
-  ctx.ellipse(x + w * 0.15, y + h * 0.65, w * 0.08, h * 0.1, 0, 0, Math.PI * 2);
+  ctx.moveTo(x + w * 0.65, y + h * 0.88);
+  ctx.lineTo(x + w * 0.47, y + h + 5);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Bomb bay / undercarriage
+  ctx.fillStyle = "#00000044";
+  ctx.beginPath();
+  ctx.roundRect(x + w * 0.28, y + h * 0.35, w * 0.25, h * 0.3, 4);
   ctx.fill();
+  ctx.strokeStyle = glow + "77";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(x + w * 0.28, y + h * 0.35, w * 0.25, h * 0.3, 4);
+  ctx.stroke();
+
+  // Cockpit
+  const cpGrad = ctx.createRadialGradient(x + w * 0.76, cy - 2, 0, x + w * 0.76, cy, w * 0.115);
+  cpGrad.addColorStop(0, "rgba(255,230,200,0.98)");
+  cpGrad.addColorStop(0.4, glow);
+  cpGrad.addColorStop(1, color + "88");
+  ctx.fillStyle = cpGrad;
+  ctx.shadowColor = glow;
+  ctx.shadowBlur = 14;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.76, cy, w * 0.11, h * 0.2, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "rgba(255,255,255,0.6)";
+  ctx.shadowBlur = 0;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.77, cy - 2, w * 0.045, h * 0.07, -0.3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Engine pods
+  const podCol = "#ff5500";
+  ctx.fillStyle = podCol;
+  ctx.shadowColor = "#ff8800";
+  ctx.shadowBlur = 10 + Math.abs(pulse) * 4;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.14, y + h * 0.28, w * 0.09, h * 0.11, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.14, y + h * 0.72, w * 0.09, h * 0.11, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // Engine inner core
+  ctx.fillStyle = "#ffcc00";
+  ctx.shadowColor = "#ffcc00";
+  ctx.shadowBlur = 8;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.11, y + h * 0.28, w * 0.055, h * 0.07, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.11, y + h * 0.72, w * 0.055, h * 0.07, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
   ctx.restore();
 }
 
 function drawPlayerShip(ctx: CanvasRenderingContext2D, x: number, y: number, shield: boolean, rapid: boolean, spread: boolean) {
-  const w = 48, h = 30;
+  const w = 56, h = 34;
+  const cx = x + w / 2, cy = y + h / 2;
   ctx.save();
+
+  // Engine flames behind the ship
+  const flameLen = rapid ? 26 : 16;
+  const flameGrad = ctx.createLinearGradient(x - flameLen, cy, x + 10, cy);
+  flameGrad.addColorStop(0, "rgba(0,0,0,0)");
+  flameGrad.addColorStop(0.4, rapid ? "rgba(255,100,0,0.7)" : "rgba(255,70,0,0.6)");
+  flameGrad.addColorStop(1, rapid ? "rgba(255,220,60,0.95)" : "rgba(255,170,0,0.9)");
+  ctx.fillStyle = flameGrad;
+  ctx.beginPath();
+  ctx.moveTo(x + 10, cy - (rapid ? 9 : 7));
+  ctx.lineTo(x - flameLen, cy);
+  ctx.lineTo(x + 10, cy + (rapid ? 9 : 7));
+  ctx.closePath();
+  ctx.fill();
+
+  // Secondary thruster jets (top & bottom)
+  const jetGrad = ctx.createLinearGradient(x - flameLen * 0.55, cy, x + 8, cy);
+  jetGrad.addColorStop(0, "rgba(0,0,0,0)");
+  jetGrad.addColorStop(1, "rgba(100,200,255,0.75)");
+  ctx.fillStyle = jetGrad;
+  ctx.beginPath();
+  ctx.moveTo(x + 8, y + h * 0.22);
+  ctx.lineTo(x - flameLen * 0.55, y + h * 0.27);
+  ctx.lineTo(x + 8, y + h * 0.32);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(x + 8, y + h * 0.68);
+  ctx.lineTo(x - flameLen * 0.55, y + h * 0.73);
+  ctx.lineTo(x + 8, y + h * 0.78);
+  ctx.closePath();
+  ctx.fill();
+
+  // Shield bubble
   if (shield) {
+    const shieldGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, w * 0.72);
+    shieldGrad.addColorStop(0, "rgba(56,189,248,0)");
+    shieldGrad.addColorStop(0.75, "rgba(56,189,248,0.12)");
+    shieldGrad.addColorStop(1, "rgba(56,189,248,0.55)");
+    ctx.fillStyle = shieldGrad;
     ctx.strokeStyle = "#38bdf8";
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2.5;
     ctx.shadowColor = "#38bdf8";
-    ctx.shadowBlur = 15;
+    ctx.shadowBlur = 22;
     ctx.beginPath();
-    ctx.ellipse(x + w / 2, y + h / 2, w * 0.65, h * 0.9, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy, w * 0.72, h * 1.1, 0, 0, Math.PI * 2);
+    ctx.fill();
     ctx.stroke();
+    ctx.shadowBlur = 0;
   }
+
+  // Main fuselage (sleek arrow shape)
+  const bodyGrad = ctx.createLinearGradient(x, y + h * 0.15, x, y + h * 0.85);
+  bodyGrad.addColorStop(0, "#e0faff");
+  bodyGrad.addColorStop(0.25, "#7ee8ff");
+  bodyGrad.addColorStop(0.6, "#00c8a8");
+  bodyGrad.addColorStop(1, "#006644");
+  ctx.fillStyle = bodyGrad;
   ctx.shadowColor = "#00ff88";
-  ctx.shadowBlur = 12;
-  // fuselage
-  ctx.fillStyle = "#00ff88";
+  ctx.shadowBlur = 16;
   ctx.beginPath();
-  ctx.moveTo(x + w, y + h / 2);
-  ctx.lineTo(x + w / 5, y + 4);
-  ctx.lineTo(x + 4, y + h / 2);
-  ctx.lineTo(x + w / 5, y + h - 4);
+  ctx.moveTo(x + w, cy);
+  ctx.bezierCurveTo(x + w * 0.85, y + 2, x + w * 0.18, y + 1, x + 4, cy);
+  ctx.bezierCurveTo(x + w * 0.18, y + h - 1, x + w * 0.85, y + h - 2, x + w, cy);
   ctx.closePath();
   ctx.fill();
-  // wings
-  ctx.fillStyle = "#00cc66";
+  ctx.shadowBlur = 0;
+
+  // Hull highlight stripe
+  ctx.strokeStyle = "rgba(200,255,255,0.35)";
+  ctx.lineWidth = 1.5;
   ctx.beginPath();
-  ctx.moveTo(x + w * 0.55, y + h / 2 - 2);
-  ctx.lineTo(x + w * 0.35, y - 3);
-  ctx.lineTo(x + w * 0.2, y + h / 2 - 3);
+  ctx.moveTo(x + w * 0.28, y + h * 0.33);
+  ctx.bezierCurveTo(x + w * 0.55, y + h * 0.28, x + w * 0.8, y + h * 0.32, x + w * 0.95, cy - 1);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.28, y + h * 0.67);
+  ctx.bezierCurveTo(x + w * 0.55, y + h * 0.72, x + w * 0.8, y + h * 0.68, x + w * 0.95, cy + 1);
+  ctx.stroke();
+
+  // Upper swept wing
+  const wingGrad = ctx.createLinearGradient(x + w * 0.35, y - 10, x + w * 0.35, cy);
+  wingGrad.addColorStop(0, "#22ddbb");
+  wingGrad.addColorStop(1, "#008855");
+  ctx.fillStyle = wingGrad;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.68, cy - 5);
+  ctx.lineTo(x + w * 0.48, y - 10);
+  ctx.lineTo(x + w * 0.16, cy - 6);
+  ctx.closePath();
+  ctx.fill();
+  // Wing edge light
+  ctx.strokeStyle = "#44ffcc";
+  ctx.lineWidth = 1;
+  ctx.shadowColor = "#44ffcc";
+  ctx.shadowBlur = 6;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.62, cy - 4);
+  ctx.lineTo(x + w * 0.44, y - 7);
+  ctx.stroke();
+
+  // Lower swept wing
+  const wingGrad2 = ctx.createLinearGradient(x + w * 0.35, cy, x + w * 0.35, y + h + 10);
+  wingGrad2.addColorStop(0, "#008855");
+  wingGrad2.addColorStop(1, "#22ddbb");
+  ctx.fillStyle = wingGrad2;
+  ctx.beginPath();
+  ctx.moveTo(x + w * 0.68, cy + 5);
+  ctx.lineTo(x + w * 0.48, y + h + 10);
+  ctx.lineTo(x + w * 0.16, cy + 6);
   ctx.closePath();
   ctx.fill();
   ctx.beginPath();
-  ctx.moveTo(x + w * 0.55, y + h / 2 + 2);
-  ctx.lineTo(x + w * 0.35, y + h + 3);
-  ctx.lineTo(x + w * 0.2, y + h / 2 + 3);
+  ctx.moveTo(x + w * 0.62, cy + 4);
+  ctx.lineTo(x + w * 0.44, y + h + 7);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Cockpit canopy (gradient glass)
+  const cockpitGrad = ctx.createRadialGradient(x + w * 0.73, cy - 3, 0, x + w * 0.73, cy, w * 0.145);
+  cockpitGrad.addColorStop(0, "rgba(220,255,255,0.98)");
+  cockpitGrad.addColorStop(0.35, "#80ffee");
+  cockpitGrad.addColorStop(1, "#009999");
+  ctx.fillStyle = cockpitGrad;
+  ctx.shadowColor = "#00ffcc";
+  ctx.shadowBlur = 14;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.73, cy, w * 0.135, h * 0.28, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // Canopy highlight
+  ctx.fillStyle = "rgba(255,255,255,0.75)";
+  ctx.shadowBlur = 0;
+  ctx.beginPath();
+  ctx.ellipse(x + w * 0.74, cy - 3, w * 0.055, h * 0.1, -0.35, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Nose tip
+  ctx.fillStyle = "#c8f0ff";
+  ctx.beginPath();
+  ctx.moveTo(x + w, cy - 2);
+  ctx.lineTo(x + w + 9, cy);
+  ctx.lineTo(x + w, cy + 2);
   ctx.closePath();
   ctx.fill();
-  // cockpit
-  ctx.fillStyle = "#80ffcc";
-  ctx.shadowColor = "#80ffcc";
-  ctx.shadowBlur = 8;
-  ctx.beginPath();
-  ctx.ellipse(x + w * 0.65, y + h / 2, w * 0.12, h * 0.2, 0, 0, Math.PI * 2);
-  ctx.fill();
-  // engine glow
-  ctx.fillStyle = rapid ? "#ff6600" : "#ff4400";
-  ctx.shadowColor = rapid ? "#ff8800" : "#ff4400";
-  ctx.shadowBlur = 10;
-  ctx.beginPath();
-  ctx.ellipse(x + 5, y + h / 2, 5, rapid ? 9 : 6, 0, 0, Math.PI * 2);
-  ctx.fill();
-  // spread indicator
+
+  // Spread shot indicators
   if (spread) {
     ctx.fillStyle = "#facc15";
     ctx.shadowColor = "#facc15";
-    ctx.shadowBlur = 8;
+    ctx.shadowBlur = 12;
     ctx.beginPath();
-    ctx.arc(x + w * 0.4, y + 5, 3, 0, Math.PI * 2);
+    ctx.arc(x + w * 0.42, y + 4, 4, 0, Math.PI * 2);
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(x + w * 0.4, y + h - 5, 3, 0, Math.PI * 2);
+    ctx.arc(x + w * 0.42, y + h - 4, 4, 0, Math.PI * 2);
     ctx.fill();
+    ctx.shadowBlur = 0;
   }
+
   ctx.restore();
 }
 
@@ -798,13 +1177,7 @@ const SpaceImpactPage = ({
         onBack={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
         onHome={() => { playPopSound(); navigate(homePath); }}
         bestLabel={best > 0 ? `Rekor Tertinggi: ${best}` : undefined}
-        decorations={[
-          { src: "/pesawat.png", className: "absolute top-[12%] left-[6%] w-14 h-16 md:w-20 md:h-24 opacity-70 animate-float-slow", glowRgba: "rgba(168,85,247,0.5)" },
-          { src: "/meteor.png", className: "absolute top-[20%] right-[8%] w-12 h-12 md:w-16 md:h-16 opacity-65 animate-float-medium", glowRgba: "rgba(255,100,50,0.5)" },
-          { src: "/meteor.png", className: "absolute top-[55%] left-[5%] w-10 h-10 md:w-14 md:h-14 opacity-55 animate-float-fast", glowRgba: "rgba(255,80,40,0.45)" },
-          { src: "/pesawat.png", className: "absolute bottom-[18%] right-[10%] w-12 h-14 md:w-18 md:h-22 opacity-65 animate-float-medium", glowRgba: "rgba(168,85,247,0.45)" },
-          { src: "/meteor.png", className: "absolute bottom-[30%] left-[12%] w-9 h-9 md:w-12 md:h-12 opacity-50 animate-float-slow", glowRgba: "rgba(255,90,45,0.45)" },
-        ]}
+        decorations={[]}
         instructions={[
           { text: <>Pakai <strong className="text-yellow-300">WASD / ↑↓←→</strong> untuk gerak, <strong className="text-yellow-300">SPASI</strong> untuk tembak</> },
           { text: <>Tembak musuh — butuh <strong className="text-cyan-300">3x</strong> hit untuk hancurkan</> },

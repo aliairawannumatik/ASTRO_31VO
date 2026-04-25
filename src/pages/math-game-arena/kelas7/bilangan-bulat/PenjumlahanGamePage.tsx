@@ -27,15 +27,6 @@ const variants: GameVariant[] = [
     glow: "rgba(124,58,237,0.4)",
   },
   {
-    name: "Turtle Run Math",
-    emoji: "🐢",
-    description: "Lari, lompat, dan tiarap! Jawab soal bonus untuk skor tambahan.",
-    path: "/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/turtle-run",
-    from: "#10b981",
-    to: "#06b6d4",
-    glow: "rgba(16,185,129,0.4)",
-  },
-  {
     name: "Flappy Rocket",
     emoji: "🚀",
     description: "Terbangkan roket lewati gerbang. Tiap gerbang khusus = soal!",
@@ -61,6 +52,15 @@ const variants: GameVariant[] = [
     from: "#0ea5e9",
     to: "#8b5cf6",
     glow: "rgba(14,165,233,0.4)",
+  },
+  {
+    name: "Turtle Run Math",
+    emoji: "🐢",
+    description: "Lari, lompat, dan tiarap! Jawab soal bonus untuk skor tambahan.",
+    path: "/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/turtle-run",
+    from: "#10b981",
+    to: "#06b6d4",
+    glow: "rgba(16,185,129,0.4)",
   },
 ];
 
