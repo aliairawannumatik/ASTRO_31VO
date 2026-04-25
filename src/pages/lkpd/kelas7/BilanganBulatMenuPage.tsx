@@ -7,6 +7,7 @@ const subtopics = [
   { label: "PEMBAGIAN BILANGAN BULAT", path: "/lkpd/kelas-7/bilangan-bulat/pembagian", icon: "➗" },
   { label: "OPERASI HITUNG CAMPURAN", path: "/lkpd/kelas-7/bilangan-bulat/operasi-campuran", icon: "🔢" },
   { label: "KPK DAN FPB", path: "/lkpd/kelas-7/bilangan-bulat/kpk-fpb", icon: "🌐" },
+  { label: "GAME PESAWAT TEMBAK METEOR", path: "/lkpd/kelas-7/bilangan-bulat/pesawat-tembak-meteor", icon: "🚀" },
 ];
 
 const BilanganBulatMenuPage = () => (

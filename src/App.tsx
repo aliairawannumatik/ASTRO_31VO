@@ -21,6 +21,7 @@ import SkalaLKPDPage from "./pages/lkpd/kelas7/perbandingan/SkalaLKPDPage";
 import CampuranLKPDPage from "./pages/lkpd/kelas7/perbandingan/CampuranLKPDPage";
 import BilanganBulatMenuPage from "./pages/lkpd/kelas7/BilanganBulatMenuPage";
 import PenjumlahanLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PenjumlahanLKPDPage";
+import PesawatTembakMeteorPage from "./pages/lkpd/kelas7/bilangan-bulat/PesawatTembakMeteorPage";
 import PenguranganLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PenguranganLKPDPage";
 import PerkalianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PerkalianLKPDPage";
 import PembagianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PembagianLKPDPage";
@@ -793,6 +794,7 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/bilangan-bulat/pembagian" element={<PembagianLKPDPage />} />
       <Route path="/lkpd/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranLKPDPage />} />
       <Route path="/lkpd/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBLKPDPage />} />
+      <Route path="/lkpd/kelas-7/bilangan-bulat/pesawat-tembak-meteor" element={<PesawatTembakMeteorPage />} />
       <Route path="/lkpd/kelas-7/bilangan-rasional" element={<BilanganRasionalMenuPage />} />
       <Route path="/lkpd/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanLKPDPage />} />
       <Route path="/lkpd/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranLKPDPage />} />
