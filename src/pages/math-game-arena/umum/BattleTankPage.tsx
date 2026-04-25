@@ -650,14 +650,7 @@ const BattleTankPage = ({
       {isLight ? <Snowfall /> : <Starfield />}
 
       {/* Header */}
-      <div className="relative z-10 w-full shrink-0 flex items-center justify-between pt-2 pb-1 px-3">
-        <button
-          onClick={() => { playPopSound(); navigate(homePath); }}
-          className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
-          title="Menu Utama"
-        >
-          🏠
-        </button>
+      <div className="relative z-10 w-full shrink-0 flex items-center justify-between pt-2 pb-1 px-3 gap-2">
         <div className="text-center flex-1">
           <h1 className="font-display text-lg sm:text-2xl font-bold text-primary text-glow-cyan leading-tight">
             💥 Shoot Tank
@@ -666,13 +659,22 @@ const BattleTankPage = ({
             {topicLabel ? topicLabel : "🖱️ Mouse/sentuh untuk membidik · Klik/tap untuk menembak"}
           </p>
         </div>
-        <button
-          onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-          className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
-          title="Keluar"
-        >
-          ✕
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => { playPopSound(); navigate(homePath); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+            title="Menu Utama"
+          >
+            🏠
+          </button>
+          <button
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+            title="Keluar"
+          >
+            ✕
+          </button>
+        </div>
       </div>
 
       {/* Canvas – fills remaining space */}
