@@ -567,18 +567,81 @@ const DinoRunGamePage = ({
           )}
 
           {phase === "idle" && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/65 rounded-xl">
-              <div className="text-center px-4">
-                <div className="text-5xl mb-2">🐢</div>
-                <h2 className="font-display text-2xl font-bold text-accent mb-2">TURTLE RUN MATH</h2>
-                <p className="text-white/65 text-xs mb-4 leading-relaxed">
-                  <span className="text-cyan-300 font-bold">SPASI / ↑</span> Loncat &nbsp;·&nbsp; <span className="text-cyan-300 font-bold">↓</span> Tiarap<br />
-                  Hindari semua rintangan — kena = kehilangan nyawa 💥<br />
-                  3 nyawa habis = permainan berakhir! &nbsp;·&nbsp; <span className="text-yellow-300 font-bold">Soal bonus tiap 40 detik!</span>
-                </p>
-                <button onClick={startGame} className="bg-accent text-black font-bold px-8 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
-                  ▶ MULAI
-                </button>
+            <div className="absolute inset-0 rounded-xl overflow-hidden">
+              {/* Layered backgrounds */}
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.18),transparent_70%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(168,85,247,0.15),transparent_55%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(250,204,21,0.12),transparent_55%)]" />
+
+              {/* Decorative sparkles */}
+              <div className="absolute top-2 left-3 text-yellow-300 text-xs animate-twinkle">✦</div>
+              <div className="absolute top-4 right-4 text-cyan-300 text-sm animate-twinkle" style={{ animationDelay: "0.6s" }}>✦</div>
+              <div className="absolute bottom-3 left-6 text-pink-300 text-xs animate-twinkle" style={{ animationDelay: "1.2s" }}>✦</div>
+              <div className="absolute bottom-4 right-8 text-yellow-300 text-[10px] animate-twinkle" style={{ animationDelay: "0.3s" }}>✧</div>
+              <div className="absolute top-1/2 left-2 text-purple-300 text-[10px] animate-twinkle" style={{ animationDelay: "0.9s" }}>✧</div>
+
+              {/* Premium border frame */}
+              <div className="absolute inset-1 rounded-lg border border-cyan-400/30 shadow-[inset_0_0_30px_rgba(34,211,238,0.15)] pointer-events-none" />
+              <div className="absolute inset-2 rounded-md border border-yellow-300/20 pointer-events-none" />
+
+              {/* Corner accents */}
+              <div className="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-yellow-300/80 rounded-tl-lg" />
+              <div className="absolute top-1 right-1 w-4 h-4 border-t-2 border-r-2 border-yellow-300/80 rounded-tr-lg" />
+              <div className="absolute bottom-1 left-1 w-4 h-4 border-b-2 border-l-2 border-yellow-300/80 rounded-bl-lg" />
+              <div className="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-yellow-300/80 rounded-br-lg" />
+
+              {/* Content – 2-column premium layout */}
+              <div className="relative z-10 h-full w-full flex items-center justify-center px-3 sm:px-5 py-2 gap-3 sm:gap-5">
+                {/* Left: Hero */}
+                <div className="flex flex-col items-center justify-center text-center shrink-0">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-cyan-400/30 blur-2xl rounded-full animate-pulse-glow" />
+                    <div className="relative text-4xl sm:text-5xl animate-float">🐢</div>
+                  </div>
+                  <h2 className="font-display text-base sm:text-xl font-black mt-1 leading-none tracking-wide">
+                    <span className="bg-gradient-to-r from-cyan-300 via-emerald-300 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                      TURTLE RUN
+                    </span>
+                  </h2>
+                  <div className="font-display text-[9px] sm:text-[11px] text-yellow-300/90 tracking-[0.2em] font-bold mt-0.5">
+                    ⚡ MATH ADVENTURE ⚡
+                  </div>
+                </div>
+
+                {/* Vertical divider */}
+                <div className="hidden sm:block self-stretch w-px bg-gradient-to-b from-transparent via-cyan-400/40 to-transparent" />
+
+                {/* Right: Instructions + button */}
+                <div className="flex-1 flex flex-col items-stretch justify-center gap-1.5 min-w-0 max-w-[280px]">
+                  <div className="grid grid-cols-2 gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] leading-tight">
+                    <div className="rounded-md bg-cyan-500/10 border border-cyan-400/30 px-1.5 py-1 backdrop-blur-sm">
+                      <div className="font-display font-bold text-cyan-300 mb-0.5">⌨️ KONTROL</div>
+                      <div className="text-white/85"><span className="text-yellow-300 font-bold">SPASI/↑</span> Loncat · <span className="text-yellow-300 font-bold">↓</span> Tiarap</div>
+                    </div>
+                    <div className="rounded-md bg-emerald-500/10 border border-emerald-400/30 px-1.5 py-1 backdrop-blur-sm">
+                      <div className="font-display font-bold text-emerald-300 mb-0.5">🎯 TUJUAN</div>
+                      <div className="text-white/85">Hindari rintangan, kumpulkan skor!</div>
+                    </div>
+                    <div className="rounded-md bg-pink-500/10 border border-pink-400/30 px-1.5 py-1 backdrop-blur-sm">
+                      <div className="font-display font-bold text-pink-300 mb-0.5">💖 NYAWA</div>
+                      <div className="text-white/85">3 nyawa · kena = −1</div>
+                    </div>
+                    <div className="rounded-md bg-yellow-500/10 border border-yellow-400/30 px-1.5 py-1 backdrop-blur-sm">
+                      <div className="font-display font-bold text-yellow-300 mb-0.5">⭐ BONUS</div>
+                      <div className="text-white/85">Soal tiap 40 detik!</div>
+                    </div>
+                  </div>
+
+                  {/* MULAI button */}
+                  <button
+                    onClick={startGame}
+                    className="relative group mt-1 self-center inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-2 sm:py-2.5 rounded-full font-display font-black text-sm sm:text-base text-slate-900 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 shadow-[0_0_25px_rgba(250,204,21,0.6)] hover:shadow-[0_0_35px_rgba(250,204,21,0.9)] hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer animate-pulse-glow"
+                  >
+                    <span className="absolute inset-0 rounded-full bg-white/30 blur-md opacity-50 group-hover:opacity-80 transition-opacity" />
+                    <span className="relative tracking-wider">▶ MULAI PETUALANGAN</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
