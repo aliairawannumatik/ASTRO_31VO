@@ -6,6 +6,7 @@ import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
+import MathGameIntro from "@/components/MathGameIntro";
 
 // ── Canvas dimensions ─────────────────────────────────────────────────────
 const CW = 480;
@@ -784,6 +785,36 @@ const SpaceImpactPage = ({
 
   const btnClass = "select-none active:opacity-70 bg-white/10 border border-white/20 rounded-lg font-bold text-white text-lg flex items-center justify-center cursor-pointer touch-none";
 
+  if (phase === "idle") {
+    return (
+      <MathGameIntro
+        gameTitle="SPACE IMPACT MATH"
+        subtitle="⚔️ PERTEMPURAN GALAKSI ⚔️"
+        topicLabel={topicLabel}
+        heroEmoji="🚀"
+        startLabel="MULAI MISI"
+        theme="galaxy"
+        onStart={startGame}
+        onBack={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+        onHome={() => { playPopSound(); navigate(homePath); }}
+        bestLabel={best > 0 ? `Rekor Tertinggi: ${best}` : undefined}
+        decorations={[
+          { src: "/pesawat.png", className: "absolute top-[12%] left-[6%] w-14 h-16 md:w-20 md:h-24 opacity-70 animate-float-slow", glowRgba: "rgba(168,85,247,0.5)" },
+          { src: "/meteor.png", className: "absolute top-[20%] right-[8%] w-12 h-12 md:w-16 md:h-16 opacity-65 animate-float-medium", glowRgba: "rgba(255,100,50,0.5)" },
+          { src: "/meteor.png", className: "absolute top-[55%] left-[5%] w-10 h-10 md:w-14 md:h-14 opacity-55 animate-float-fast", glowRgba: "rgba(255,80,40,0.45)" },
+          { src: "/pesawat.png", className: "absolute bottom-[18%] right-[10%] w-12 h-14 md:w-18 md:h-22 opacity-65 animate-float-medium", glowRgba: "rgba(168,85,247,0.45)" },
+          { src: "/meteor.png", className: "absolute bottom-[30%] left-[12%] w-9 h-9 md:w-12 md:h-12 opacity-50 animate-float-slow", glowRgba: "rgba(255,90,45,0.45)" },
+        ]}
+        instructions={[
+          { text: <>Pakai <strong className="text-yellow-300">WASD / ↑↓←→</strong> untuk gerak, <strong className="text-yellow-300">SPASI</strong> untuk tembak</> },
+          { text: <>Tembak musuh — butuh <strong className="text-cyan-300">3x</strong> hit untuk hancurkan</> },
+          { text: <>Tiap <strong className="text-yellow-300">25 detik</strong> muncul soal bonus untuk skor besar</> },
+          { text: <>Kumpulkan power-up: shield, rapid fire, dan spread shot!</> },
+        ]}
+      />
+    );
+  }
+
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
@@ -823,87 +854,6 @@ const SpaceImpactPage = ({
             className="rounded-xl border border-white/10 shadow-2xl w-full h-full"
             style={{ imageRendering: "pixelated", touchAction: "none" }}
           />
-
-          {/* IDLE overlay */}
-          {phase === "idle" && (
-            <div className="absolute inset-0 rounded-xl overflow-hidden">
-              {/* Layered backgrounds */}
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-purple-950/60 to-slate-950" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(168,85,247,0.25),transparent_60%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(34,211,238,0.20),transparent_55%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(250,204,21,0.12),transparent_50%)]" />
-
-              {/* Sparkles */}
-              <div className="absolute top-3 left-4 text-yellow-300 text-xs animate-twinkle">✦</div>
-              <div className="absolute top-6 right-5 text-cyan-300 text-sm animate-twinkle" style={{ animationDelay: "0.6s" }}>✦</div>
-              <div className="absolute top-1/3 right-3 text-pink-300 text-xs animate-twinkle" style={{ animationDelay: "1.2s" }}>✧</div>
-              <div className="absolute bottom-1/3 left-3 text-yellow-300 text-[10px] animate-twinkle" style={{ animationDelay: "0.3s" }}>✧</div>
-              <div className="absolute bottom-6 right-6 text-cyan-300 text-xs animate-twinkle" style={{ animationDelay: "0.9s" }}>✦</div>
-              <div className="absolute bottom-4 left-5 text-purple-300 text-[10px] animate-twinkle" style={{ animationDelay: "1.5s" }}>✧</div>
-              <div className="absolute top-1/2 left-4 text-cyan-200 text-[10px] animate-twinkle" style={{ animationDelay: "1.8s" }}>✧</div>
-
-              {/* Premium frame */}
-              <div className="absolute inset-2 rounded-lg border border-cyan-400/30 shadow-[inset_0_0_40px_rgba(168,85,247,0.18)] pointer-events-none" />
-              <div className="absolute inset-3 rounded-md border border-yellow-300/20 pointer-events-none" />
-              <div className="absolute top-1.5 left-1.5 w-5 h-5 border-t-2 border-l-2 border-yellow-300/80 rounded-tl-lg" />
-              <div className="absolute top-1.5 right-1.5 w-5 h-5 border-t-2 border-r-2 border-yellow-300/80 rounded-tr-lg" />
-              <div className="absolute bottom-1.5 left-1.5 w-5 h-5 border-b-2 border-l-2 border-yellow-300/80 rounded-bl-lg" />
-              <div className="absolute bottom-1.5 right-1.5 w-5 h-5 border-b-2 border-r-2 border-yellow-300/80 rounded-br-lg" />
-
-              {/* Content */}
-              <div className="relative z-10 h-full w-full flex flex-col items-center justify-between px-5 py-6">
-                {/* Hero */}
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-purple-400/40 blur-2xl rounded-full animate-pulse-glow" />
-                    <div className="relative text-5xl sm:text-6xl animate-float">🚀</div>
-                  </div>
-                  <h2 className="font-display text-xl sm:text-2xl font-black mt-2 leading-none tracking-wider">
-                    <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]">
-                      SPACE IMPACT MATH
-                    </span>
-                  </h2>
-                  <div className="font-display text-[10px] sm:text-xs text-yellow-300/90 tracking-[0.25em] font-bold mt-1">
-                    ⚔️ PERTEMPURAN GALAKSI ⚔️
-                  </div>
-                </div>
-
-                {/* Instructions 2x2 */}
-                <div className="grid grid-cols-2 gap-2 w-full max-w-[300px] text-[10px] sm:text-xs leading-tight">
-                  <div className="rounded-lg bg-cyan-500/15 border border-cyan-400/40 px-2 py-1.5 backdrop-blur-sm">
-                    <div className="font-display font-bold text-cyan-300 mb-0.5">⌨️ KONTROL</div>
-                    <div className="text-white/85">WASD/↑↓←→ · SPASI tembak</div>
-                  </div>
-                  <div className="rounded-lg bg-emerald-500/15 border border-emerald-400/40 px-2 py-1.5 backdrop-blur-sm">
-                    <div className="font-display font-bold text-emerald-300 mb-0.5">🎯 TUJUAN</div>
-                    <div className="text-white/85">Tembak musuh, 3x per musuh!</div>
-                  </div>
-                  <div className="rounded-lg bg-yellow-500/15 border border-yellow-400/40 px-2 py-1.5 backdrop-blur-sm">
-                    <div className="font-display font-bold text-yellow-300 mb-0.5">⭐ SOAL BONUS</div>
-                    <div className="text-white/85">Muncul tiap 25 detik!</div>
-                  </div>
-                  <div className="rounded-lg bg-pink-500/15 border border-pink-400/40 px-2 py-1.5 backdrop-blur-sm">
-                    <div className="font-display font-bold text-pink-300 mb-0.5">📱 MOBILE</div>
-                    <div className="text-white/85">Pakai tombol di bawah</div>
-                  </div>
-                </div>
-
-                {/* MULAI button + best */}
-                <div className="flex flex-col items-center gap-2">
-                  <div className="relative">
-                    <span className="absolute -inset-1 rounded-full bg-yellow-400/60 blur-lg animate-pulse-glow pointer-events-none" />
-                    <button
-                      onClick={startGame}
-                      className="relative inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-2.5 sm:py-3 rounded-full font-display font-black text-base sm:text-lg text-slate-950 bg-gradient-to-b from-yellow-300 via-amber-400 to-orange-500 border-2 border-yellow-200 shadow-[0_4px_0_rgba(180,83,9,0.8),0_0_25px_rgba(250,204,21,0.7)] hover:shadow-[0_4px_0_rgba(180,83,9,0.8),0_0_40px_rgba(250,204,21,1)] hover:brightness-110 active:translate-y-0.5 active:shadow-[0_1px_0_rgba(180,83,9,0.8),0_0_20px_rgba(250,204,21,0.7)] transition-all duration-150 cursor-pointer"
-                    >
-                      <span className="tracking-wider drop-shadow-[0_1px_0_rgba(255,255,255,0.4)]">▶ MULAI MISI</span>
-                    </button>
-                  </div>
-                  {best > 0 && <p className="text-yellow-300 text-[11px] font-body font-bold drop-shadow-[0_0_6px_rgba(250,204,21,0.7)]">🏆 Rekor Tertinggi: {best}</p>}
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* GAME OVER overlay */}
           {phase === "dead" && (
