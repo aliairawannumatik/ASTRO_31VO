@@ -54,7 +54,15 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; answer?: string } | null>(null);
   const [locked, setLocked] = useState(false);
   const animRef = useRef<number>(0);
+  const moveIntervalRef = useRef<number | null>(null);
+  const lockedRef = useRef(false);
+  const meteorsRef = useRef<MeteorState[]>([]);
+  const shipXRef = useRef(50);
   const [isLandscape, setIsLandscape] = useState(() => window.innerWidth > window.innerHeight);
+
+  useEffect(() => { lockedRef.current = locked; }, [locked]);
+  useEffect(() => { meteorsRef.current = meteors; }, [meteors]);
+  useEffect(() => { shipXRef.current = shipX; }, [shipX]);
 
   useEffect(() => {
     const handleResize = () => setIsLandscape(window.innerWidth > window.innerHeight);
@@ -90,54 +98,131 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
     setupMeteors(0);
   };
 
-  const handleMeteorClick = useCallback(
-    (meteor: MeteorState) => {
-      if (locked || meteor.hit) return;
+  const engageMeteor = useCallback(
+    (meteor: MeteorState, fromX: number) => {
+      if (lockedRef.current || meteor.hit) return;
       setLocked(true);
-      setShipX(meteor.x);
+      lockedRef.current = true;
       playLaser();
 
-      setTimeout(() => {
-        setLaser({ fromX: meteor.x, toX: meteor.x, active: true, progress: 0 });
-        let p = 0;
-        const step = () => {
-          p += 0.03;
-          setLaser((prev) => prev ? { ...prev, progress: Math.min(p, 1) } : null);
-          if (p < 1) {
-            animRef.current = requestAnimationFrame(step);
+      setLaser({ fromX, toX: fromX, active: true, progress: 0 });
+      let p = 0;
+      const step = () => {
+        p += 0.04;
+        setLaser((prev) => prev ? { ...prev, progress: Math.min(p, 1) } : null);
+        if (p < 1) {
+          animRef.current = requestAnimationFrame(step);
+        } else {
+          playExplosion();
+          setMeteors((prev) => prev.map((m) => (m.id === meteor.id ? { ...m, hit: true } : m)));
+
+          if (meteor.correct) {
+            playCorrect();
+            setScore((s) => s + 20);
+            setFeedback({ type: "correct" });
           } else {
-            playExplosion();
-            setMeteors((prev) => prev.map((m) => (m.id === meteor.id ? { ...m, hit: true } : m)));
-
-            if (meteor.correct) {
-              playCorrect();
-              setScore((s) => s + 20);
-              setFeedback({ type: "correct" });
-            } else {
-              const correctAnswer = questions[currentQ].options[questions[currentQ].correctIndex];
-              setFeedback({ type: "wrong", answer: correctAnswer });
-            }
-
-            setTimeout(() => {
-              setLaser(null);
-              if (currentQ + 1 < questions.length) {
-                setCurrentQ((q) => {
-                  const next = q + 1;
-                  setupMeteors(next);
-                  return next;
-                });
-              } else {
-                setFinished(true);
-                stopBgMusic();
-              }
-            }, 1500);
+            const correctAnswer = questions[currentQ].options[questions[currentQ].correctIndex];
+            setFeedback({ type: "wrong", answer: correctAnswer });
           }
-        };
-        animRef.current = requestAnimationFrame(step);
-      }, 500);
+
+          setTimeout(() => {
+            setLaser(null);
+            if (currentQ + 1 < questions.length) {
+              setCurrentQ((q) => {
+                const next = q + 1;
+                setupMeteors(next);
+                return next;
+              });
+            } else {
+              setFinished(true);
+              stopBgMusic();
+            }
+          }, 1500);
+        }
+      };
+      animRef.current = requestAnimationFrame(step);
     },
-    [locked, currentQ, questions, playLaser, playExplosion, playCorrect, setupMeteors, stopBgMusic]
+    [currentQ, questions, playLaser, playExplosion, playCorrect, setupMeteors, stopBgMusic]
   );
+
+  const fireLaser = useCallback(() => {
+    if (lockedRef.current) return;
+    const tolerance = 8;
+    let target: MeteorState | null = null;
+    let bestD = tolerance;
+    for (const m of meteorsRef.current) {
+      if (m.hit) continue;
+      const d = Math.abs(m.x - shipXRef.current);
+      if (d < bestD) { bestD = d; target = m; }
+    }
+    if (target) {
+      engageMeteor(target, shipXRef.current);
+      return;
+    }
+    // Visual miss: fire laser without hitting anything
+    playLaser();
+    const fromX = shipXRef.current;
+    setLaser({ fromX, toX: fromX, active: true, progress: 0 });
+    let p = 0;
+    const step = () => {
+      p += 0.05;
+      setLaser((prev) => prev ? { ...prev, progress: Math.min(p, 1) } : null);
+      if (p < 1) {
+        animRef.current = requestAnimationFrame(step);
+      } else {
+        setTimeout(() => setLaser(null), 150);
+      }
+    };
+    animRef.current = requestAnimationFrame(step);
+  }, [engageMeteor, playLaser]);
+
+  const moveShip = useCallback((dir: -1 | 1) => {
+    if (lockedRef.current) return;
+    setShipX((x) => Math.max(8, Math.min(92, x + dir * 2.5)));
+  }, []);
+
+  const startMove = useCallback((dir: -1 | 1) => {
+    moveShip(dir);
+    if (moveIntervalRef.current) window.clearInterval(moveIntervalRef.current);
+    moveIntervalRef.current = window.setInterval(() => moveShip(dir), 35);
+  }, [moveShip]);
+
+  const stopMove = useCallback(() => {
+    if (moveIntervalRef.current) {
+      window.clearInterval(moveIntervalRef.current);
+      moveIntervalRef.current = null;
+    }
+  }, []);
+
+  // Keyboard support
+  useEffect(() => {
+    if (!started || finished) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return;
+      if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+        e.preventDefault();
+        startMove(-1);
+      } else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
+        e.preventDefault();
+        startMove(1);
+      } else if (e.key === " " || e.key === "ArrowUp" || e.key === "Enter") {
+        e.preventDefault();
+        fireLaser();
+      }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (["ArrowLeft", "ArrowRight", "a", "A", "d", "D"].includes(e.key)) {
+        stopMove();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      stopMove();
+    };
+  }, [started, finished, startMove, stopMove, fireLaser]);
 
   useEffect(() => {
     return () => {
@@ -236,15 +321,19 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
               </li>
               <li className="flex items-start gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">2</span>
-                <span>Cari jawaban yang <strong className="text-cyan-300">BENAR</strong> pada meteor yang jatuh</span>
+                <span>Gunakan tombol <strong className="text-cyan-300">◀ / ▶</strong> di kiri layar untuk menggeser pesawat</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">3</span>
-                <span><strong className="text-yellow-300">KLIK</strong> meteor tersebut untuk menembak!</span>
+                <span>Arahkan pesawat ke meteor berisi jawaban <strong className="text-cyan-300">BENAR</strong>, lalu tekan tombol <strong className="text-yellow-300">🔥 TEMBAK</strong> di kanan layar</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">4</span>
                 <span>Setiap jawaban benar mendapat <strong className="text-green-400">+20 poin</strong></span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">5</span>
+                <span className="text-xs">Di komputer: gunakan tombol <strong className="text-cyan-300">← →</strong> untuk bergerak dan <strong className="text-yellow-300">SPASI</strong> untuk menembak</span>
               </li>
             </ul>
           </div>
@@ -454,26 +543,32 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
 
       <div className="relative flex-1 min-h-0">
         <div className={`absolute ${isLandscape ? "top-[1%] h-[28%]" : "top-[1%] h-[38%]"} left-0 right-0 z-10`}>
-          {meteors.map((m) => (
-            <button key={m.id} onClick={() => handleMeteorClick(m)} disabled={m.hit || locked}
-              className="absolute transition-all duration-500 cursor-pointer disabled:cursor-default"
-              style={{
-                left: `${m.x}%`, top: "50%",
-                transform: `translate(-50%, ${-50 + floatOffset * (m.id % 2 === 0 ? 1 : -1)}%) ${m.hit ? "scale(0)" : "scale(1)"}`,
-                opacity: m.hit ? 0 : 1,
-                transition: m.hit ? "all 0.3s ease-out" : "transform 0.5s ease",
-              }}>
-              <div className="relative">
-                <img src={meteorImg} alt="meteor" className={`${isLandscape ? "w-14 h-14" : "w-16 h-16 md:w-20 md:h-20"} drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]`} style={{ mixBlendMode: "screen", background: "transparent" }} />
-                <span className="absolute inset-0 flex items-center justify-center font-display text-[8px] md:text-[9px] font-bold text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 text-center leading-tight">{m.label}</span>
-              </div>
-              {m.hit && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-20 h-20 rounded-full bg-accent/60 animate-ping" />
+          {meteors.map((m) => {
+            const aimed = !m.hit && !locked && Math.abs(m.x - shipX) < 8;
+            return (
+              <div key={m.id}
+                className="absolute transition-all duration-500 pointer-events-none"
+                style={{
+                  left: `${m.x}%`, top: "50%",
+                  transform: `translate(-50%, ${-50 + floatOffset * (m.id % 2 === 0 ? 1 : -1)}%) ${m.hit ? "scale(0)" : "scale(1)"}`,
+                  opacity: m.hit ? 0 : 1,
+                  transition: m.hit ? "all 0.3s ease-out" : "transform 0.5s ease",
+                }}>
+                <div className="relative">
+                  {aimed && (
+                    <div className="absolute -inset-2 rounded-full border-2 border-yellow-300/80 animate-pulse pointer-events-none" style={{ boxShadow: "0 0 18px rgba(250,200,0,0.55)" }} />
+                  )}
+                  <img src={meteorImg} alt="meteor" className={`${isLandscape ? "w-14 h-14" : "w-16 h-16 md:w-20 md:h-20"} drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]`} style={{ mixBlendMode: "screen", background: "transparent" }} />
+                  <span className="absolute inset-0 flex items-center justify-center font-display text-[8px] md:text-[9px] font-bold text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 text-center leading-tight">{m.label}</span>
                 </div>
-              )}
-            </button>
-          ))}
+                {m.hit && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-20 h-20 rounded-full bg-accent/60 animate-ping" />
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {laser && laser.active && (
@@ -509,6 +604,67 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
               : `❌ Jawaban: ${feedback.answer}`}
           </div>
         )}
+
+        {/* On-screen controls: left/right move on the left side, fire on the right side */}
+        <div
+          className="absolute left-0 bottom-0 z-40 flex items-end gap-2 p-3 md:p-4 select-none touch-none"
+          style={{ paddingLeft: "max(0.75rem, env(safe-area-inset-left, 0px))" }}
+        >
+          <button
+            type="button"
+            aria-label="Geser pesawat ke kiri"
+            disabled={locked}
+            onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); startMove(-1); }}
+            onPointerUp={stopMove}
+            onPointerCancel={stopMove}
+            onPointerLeave={stopMove}
+            onContextMenu={(e) => e.preventDefault()}
+            className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-black text-white border-2 backdrop-blur-md transition-all duration-150 active:scale-90 ${
+              locked
+                ? "bg-slate-700/50 border-slate-500/40 opacity-40 cursor-not-allowed"
+                : "bg-cyan-500/30 border-cyan-300/70 shadow-[0_0_20px_rgba(0,200,255,0.45)] hover:bg-cyan-500/50 cursor-pointer"
+            }`}
+          >
+            ◀
+          </button>
+          <button
+            type="button"
+            aria-label="Geser pesawat ke kanan"
+            disabled={locked}
+            onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); startMove(1); }}
+            onPointerUp={stopMove}
+            onPointerCancel={stopMove}
+            onPointerLeave={stopMove}
+            onContextMenu={(e) => e.preventDefault()}
+            className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-black text-white border-2 backdrop-blur-md transition-all duration-150 active:scale-90 ${
+              locked
+                ? "bg-slate-700/50 border-slate-500/40 opacity-40 cursor-not-allowed"
+                : "bg-cyan-500/30 border-cyan-300/70 shadow-[0_0_20px_rgba(0,200,255,0.45)] hover:bg-cyan-500/50 cursor-pointer"
+            }`}
+          >
+            ▶
+          </button>
+        </div>
+
+        <div
+          className="absolute right-0 bottom-0 z-40 flex items-end p-3 md:p-4 select-none touch-none"
+          style={{ paddingRight: "max(0.75rem, env(safe-area-inset-right, 0px))" }}
+        >
+          <button
+            type="button"
+            aria-label="Tembak"
+            disabled={locked}
+            onPointerDown={(e) => { e.preventDefault(); fireLaser(); }}
+            onContextMenu={(e) => e.preventDefault()}
+            className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-2xl md:text-3xl font-black text-white border-2 backdrop-blur-md transition-all duration-150 active:scale-90 ${
+              locked
+                ? "bg-slate-700/50 border-slate-500/40 opacity-40 cursor-not-allowed"
+                : "bg-gradient-to-br from-red-500/80 to-orange-500/80 border-yellow-300/80 shadow-[0_0_25px_rgba(255,140,0,0.6)] hover:from-red-500 hover:to-orange-500 cursor-pointer"
+            }`}
+          >
+            🔥
+          </button>
+        </div>
       </div>
 
       <div className="relative z-20 shrink-0 bg-card/80 backdrop-blur-md border-t border-border px-4 pt-2 pb-6 md:pt-4 md:pb-6">
