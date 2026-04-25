@@ -1,4 +1,5 @@
 import InteractiveLKPD, { GuidedItem, PracticeItem, SituationCard, SummaryCard } from "@/components/InteractiveLKPD";
+import type { LKPDGame } from "@/components/LKPDGameZone";
 
 const guidedItems: GuidedItem[] = [
   {
@@ -190,6 +191,19 @@ const situations: SituationCard[] = [
   },
 ];
 
+const games: LKPDGame[] = [
+  {
+    kind: "page-link",
+    id: "pesawat-tembak-meteor-penjumlahan",
+    title: "🚀 Pesawat Tembak Meteor — Penjumlahan",
+    description:
+      "Tembak meteor berisi jawaban yang TEPAT untuk soal penjumlahan bilangan bulat. Setiap jawaban benar mendapat 20 poin!",
+    path: "/lkpd/kelas-7/bilangan-bulat/penjumlahan/pesawat-tembak-meteor",
+    buttonLabel: "MULAI MAIN",
+    emoji: "🚀",
+  },
+];
+
 const summaryCards: SummaryCard[] = [
   { title: "Tanda Sama", text: "Jumlahkan nilai mutlak, tanda mengikuti tanda asli.", tone: "cyan" },
   { title: "Tanda Beda", text: "Kurangi nilai mutlak besar dengan kecil, tanda ikut yang besar.", tone: "yellow" },
@@ -207,6 +221,7 @@ const PenjumlahanLKPDPage = () => (
     summaryCards={summaryCards}
     practiceIntro="Terapkan aturan tanda dan strategi garis bilangan pada soal-soal di bawah ini."
     practiceItems={practiceItems}
+    games={games}
     prevPath="/lkpd/kelas-7/bilangan-bulat"
     backLabel="Kembali ke LKPD Bilangan Bulat"
   />

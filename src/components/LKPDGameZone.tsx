@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, Gamepad2, RotateCcw, Sparkles, Trophy } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ChevronLeft, ChevronRight, Gamepad2, RotateCcw, Sparkles, Trophy, Rocket } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 export type DragMatchGame = {
@@ -20,7 +21,17 @@ export type ArrowMatchGame = {
   pairs: { id: string; left: string; correctRight: string; emoji?: string }[];
 };
 
-export type LKPDGame = DragMatchGame | ArrowMatchGame;
+export type PageLinkGame = {
+  kind: "page-link";
+  id: string;
+  title: string;
+  description: string;
+  path: string;
+  buttonLabel?: string;
+  emoji?: string;
+};
+
+export type LKPDGame = DragMatchGame | ArrowMatchGame | PageLinkGame;
 
 const bucketTone: Record<NonNullable<DragMatchGame["buckets"][number]["color"]>, string> = {
   cyan: "from-cyan-500/30 to-cyan-700/20 border-cyan-300/40",
@@ -344,6 +355,30 @@ const ArrowMatchPlay = ({ game }: { game: ArrowMatchGame }) => {
   );
 };
 
+const PageLinkPlay = ({ game }: { game: PageLinkGame }) => {
+  const navigate = useNavigate();
+  const handleLaunch = () => {
+    playPopSound();
+    navigate(game.path);
+  };
+  return (
+    <div className="rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-500/15 via-blue-500/10 to-purple-500/15 p-5 text-center">
+      <div className="text-5xl mb-3">{game.emoji ?? "🚀"}</div>
+      <p className="text-sm text-white/75 font-body mb-4">
+        Klik tombol di bawah untuk membuka permainan dalam mode penuh layar.
+      </p>
+      <button
+        type="button"
+        onClick={handleLaunch}
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 px-6 py-3 font-display font-bold text-white shadow-[0_0_25px_rgba(0,200,255,0.45)] hover:shadow-[0_0_35px_rgba(0,200,255,0.65)] transition-shadow"
+      >
+        <Rocket className="w-5 h-5" />
+        {game.buttonLabel ?? "MAINKAN GAME"}
+      </button>
+    </div>
+  );
+};
+
 const LKPDGameZone = ({ games }: { games: LKPDGame[] }) => {
   if (!games || games.length === 0) return null;
   return (
@@ -364,7 +399,9 @@ const LKPDGameZone = ({ games }: { games: LKPDGame[] }) => {
               <h3 className="font-display font-bold text-white text-lg">{g.title}</h3>
               <p className="text-sm text-white/65 font-body">{g.description}</p>
             </div>
-            {g.kind === "drag-match" ? <DragMatchPlay game={g} /> : <ArrowMatchPlay game={g} />}
+            {g.kind === "drag-match" && <DragMatchPlay game={g} />}
+            {g.kind === "arrow-match" && <ArrowMatchPlay game={g} />}
+            {g.kind === "page-link" && <PageLinkPlay game={g} />}
           </div>
         ))}
       </div>
