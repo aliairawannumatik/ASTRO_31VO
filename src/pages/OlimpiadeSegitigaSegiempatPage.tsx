@@ -6,6 +6,9 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import PembahasanCard from "@/components/PembahasanCard";
+import { segitigaSegiempatDasarPembahasan } from "@/data/pembahasan/segitigaSegiempatDasar";
+import { segitigaSegiempatOlimpiadePembahasan } from "@/data/pembahasan/segitigaSegiempatOlimpiade";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -255,6 +258,9 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     ))}
                   </div>
                 )}
+                {segitigaSegiempatDasarPembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`segi-dasar-${soal.no}`} pembahasan={segitigaSegiempatDasarPembahasan[soal.no]} />
+                )}
               </div>
             ))}
           </div>
@@ -281,6 +287,9 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                       </div>
                     ))}
                   </div>
+                )}
+                {segitigaSegiempatOlimpiadePembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`segi-olim-${soal.no}`} pembahasan={segitigaSegiempatOlimpiadePembahasan[soal.no]} />
                 )}
               </div>
             ))}

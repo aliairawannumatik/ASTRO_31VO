@@ -6,6 +6,9 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import PembahasanCard from "@/components/PembahasanCard";
+import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPythagorasDasar";
+import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -266,6 +269,9 @@ const OlimpiadeTeoremaPage = () => {
                     ))}
                   </div>
                 )}
+                {teoremaPythagorasDasarPembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`pyth-dasar-${soal.no}`} pembahasan={teoremaPythagorasDasarPembahasan[soal.no]} />
+                )}
               </div>
             ))}
           </div>
@@ -292,6 +298,9 @@ const OlimpiadeTeoremaPage = () => {
                       </div>
                     ))}
                   </div>
+                )}
+                {teoremaPythagorasOlimpiadePembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`pyth-olim-${soal.no}`} pembahasan={teoremaPythagorasOlimpiadePembahasan[soal.no]} />
                 )}
               </div>
             ))}
