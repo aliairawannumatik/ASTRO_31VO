@@ -36,6 +36,13 @@ import PenjumlahanPenguranganAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/P
 import PerkalianPembagianAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/PerkalianPembagianAljabarLKPDPage";
 import SubstitusiAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/SubstitusiAljabarLKPDPage";
 import FaktorisasiAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/FaktorisasiAljabarLKPDPage";
+import AritmetikaSosialMenuPage from "./pages/lkpd/kelas7/AritmetikaSosialMenuPage";
+import JualBeliUntungRugiLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/JualBeliUntungRugiLKPDPage";
+import DiskonLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/DiskonLKPDPage";
+import BrutoNettoTaraLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/BrutoNettoTaraLKPDPage";
+import BungaTunggalLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/BungaTunggalLKPDPage";
+import PPNLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPNLKPDPage";
+import PPhLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPhLKPDPage";
 import PecahanCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage";
 import PenjumlahanPenguranganPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PenjumlahanPenguranganPecahanLKPDPage";
 import PerkalianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PerkalianPecahanLKPDPage";
@@ -829,6 +836,13 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVLKPDPage />} />
       <Route path="/lkpd/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVLKPDPage />} />
       <Route path="/lkpd/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMenuPage />} />
+      <Route path="/lkpd/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aritmetika-sosial/diskon" element={<DiskonLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aritmetika-sosial/ppn" element={<PPNLKPDPage />} />
+      <Route path="/lkpd/kelas-7/aritmetika-sosial/pph" element={<PPhLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
