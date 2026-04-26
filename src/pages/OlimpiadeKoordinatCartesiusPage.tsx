@@ -10,6 +10,80 @@ import PembahasanCard from "@/components/PembahasanCard";
 import { koordinatKartesiusDasarPembahasan } from "@/data/pembahasan/koordinatKartesiusDasar";
 import { koordinatKartesiusOlimpiadePembahasan } from "@/data/pembahasan/koordinatKartesiusOlimpiade";
 
+// SVG: Diagram Kartesius dengan 4 kuadran (K1, K2, K3, K4)
+const KoordinatKartesiusSVG = () => {
+  const unit = 28;
+  const xMin = -3, xMax = 4;
+  const yMin = -3, yMax = 4;
+  const padX = 36, padY = 24;
+  const width = (xMax - xMin) * unit + padX * 2;
+  const height = (yMax - yMin) * unit + padY * 2;
+  const ox = padX + (-xMin) * unit;
+  const oy = padY + yMax * unit;
+  const xPx = (x: number) => padX + (x - xMin) * unit;
+  const yPx = (y: number) => padY + (yMax - y) * unit;
+
+  const vlines = [];
+  for (let x = xMin; x <= xMax; x++) {
+    vlines.push(
+      <line key={`v${x}`} x1={xPx(x)} y1={padY} x2={xPx(x)} y2={padY + (yMax - yMin) * unit} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+    );
+  }
+  const hlines = [];
+  for (let y = yMin; y <= yMax; y++) {
+    hlines.push(
+      <line key={`h${y}`} x1={padX} y1={yPx(y)} x2={padX + (xMax - xMin) * unit} y2={yPx(y)} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+    );
+  }
+
+  const xLabels = [];
+  for (let x = xMin; x <= xMax; x++) {
+    if (x === 0) continue;
+    xLabels.push(
+      <text key={`xl${x}`} x={xPx(x)} y={oy + 14} fill="#e5e7eb" fontSize="10" textAnchor="middle">{x}</text>
+    );
+  }
+  const yLabels = [];
+  for (let y = yMin; y <= yMax; y++) {
+    if (y === 0) continue;
+    yLabels.push(
+      <text key={`yl${y}`} x={ox - 8} y={yPx(y) + 3} fill="#e5e7eb" fontSize="10" textAnchor="end">{y}</text>
+    );
+  }
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {vlines}
+        {hlines}
+        {/* Sumbu X */}
+        <line x1={padX - 8} y1={oy} x2={padX + (xMax - xMin) * unit + 12} y2={oy} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowX)" />
+        {/* Sumbu Y */}
+        <line x1={ox} y1={padY + (yMax - yMin) * unit + 8} x2={ox} y2={padY - 12} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowY)" />
+        <defs>
+          <marker id="arrowX" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L6,4 L0,8 Z" fill="#fbbf24" />
+          </marker>
+          <marker id="arrowY" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L6,4 L0,8 Z" fill="#fbbf24" />
+          </marker>
+        </defs>
+        {xLabels}
+        {yLabels}
+        <text x={ox - 8} y={oy + 14} fill="#e5e7eb" fontSize="10" textAnchor="end">0</text>
+        {/* Sumbu labels */}
+        <text x={padX + (xMax - xMin) * unit + 16} y={oy + 4} fill="#fbbf24" fontSize="11" fontStyle="italic">x</text>
+        <text x={ox + 6} y={padY - 6} fill="#fbbf24" fontSize="11" fontStyle="italic">y</text>
+        {/* Quadrant labels */}
+        <text x={xPx(-2.5)} y={yPx(3.5)} fill="#22d3ee" fontSize="11" fontWeight="bold" textAnchor="middle">K2</text>
+        <text x={xPx(3.5)} y={yPx(3.5)} fill="#22d3ee" fontSize="11" fontWeight="bold" textAnchor="middle">K1</text>
+        <text x={xPx(-2.5)} y={yPx(-2.5)} fill="#22d3ee" fontSize="11" fontWeight="bold" textAnchor="middle">K3</text>
+        <text x={xPx(3.5)} y={yPx(-2.5)} fill="#22d3ee" fontSize="11" fontWeight="bold" textAnchor="middle">K4</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -195,22 +269,33 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
                       {section.content.split('\n').map((line, i) => {
                         const trimmed = line.trim();
-                        if (/^\d+\. [A-Z]/.test(trimmed)) {
-                          return <div key={i} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{trimmed}</div>;
-                        }
-                        if (/^Rumus/.test(trimmed)) {
-                          return <div key={i} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">{renderWithLatex(trimmed)}</div>;
-                        }
-                        if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
+                        const renderedLine = (() => {
+                          if (/^\d+\. [A-Z]/.test(trimmed)) {
+                            return <div key={i} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{trimmed}</div>;
+                          }
+                          if (/^Rumus/.test(trimmed)) {
+                            return <div key={i} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">{renderWithLatex(trimmed)}</div>;
+                          }
+                          if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
+                            return (
+                              <div key={i} className="my-3 px-4 py-3 rounded-xl border-2 border-cyan-400/60 bg-cyan-950/40 text-center font-bold text-white text-base shadow-lg shadow-cyan-900/30">
+                                <span className="block text-[10px] text-cyan-400 font-semibold uppercase tracking-widest mb-1">Rumus Penting</span>
+                                {renderWithLatex(trimmed)}
+                              </div>
+                            );
+                          }
+                          if (trimmed === '') return <div key={i} className="h-2" />;
+                          return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                        })();
+                        if (idx === 0 && i === 0) {
                           return (
-                            <div key={i} className="my-3 px-4 py-3 rounded-xl border-2 border-cyan-400/60 bg-cyan-950/40 text-center font-bold text-white text-base shadow-lg shadow-cyan-900/30">
-                              <span className="block text-[10px] text-cyan-400 font-semibold uppercase tracking-widest mb-1">Rumus Penting</span>
-                              {renderWithLatex(trimmed)}
+                            <div key={`wrap-${i}`}>
+                              {renderedLine}
+                              <KoordinatKartesiusSVG />
                             </div>
                           );
                         }
-                        if (trimmed === '') return <div key={i} className="h-2" />;
-                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                        return renderedLine;
                       })}
                     </div>
                   </div>
