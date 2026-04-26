@@ -275,22 +275,31 @@ const SudutBusurSamaSVG = () => (
 );
 
 const SegiempatTaliBusurSVG = () => (
-  <svg viewBox="0 0 200 180" className="w-full max-w-[180px] mx-auto">
-    <circle cx="100" cy="90" r="72" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
-    {/* Cyclic quadrilateral ABCD */}
-    <polygon points="100,18 164,135 55,152 45,48"
-      fill="#7c3aed" fillOpacity="0.18" stroke="#a78bfa" strokeWidth="2" />
-    <circle cx="100" cy="18" r="3" fill="#f8fafc" />
-    <circle cx="164" cy="135" r="3" fill="#f8fafc" />
-    <circle cx="55" cy="152" r="3" fill="#f8fafc" />
-    <circle cx="45" cy="48" r="3" fill="#f8fafc" />
-    <text x="96" y="12" fill="#e2e8f0" fontSize="11" fontWeight="bold">A</text>
-    <text x="169" y="138" fill="#e2e8f0" fontSize="11" fontWeight="bold">B</text>
-    <text x="48" y="165" fill="#e2e8f0" fontSize="11" fontWeight="bold">C</text>
-    <text x="29" y="50" fill="#e2e8f0" fontSize="11" fontWeight="bold">D</text>
-    {/* Labels */}
-    <text x="30" y="108" fill="#f472b6" fontSize="10">∠A + ∠C = 180°</text>
-    <text x="30" y="122" fill="#f472b6" fontSize="10">∠B + ∠D = 180°</text>
+  <svg viewBox="0 0 320 290" className="w-full max-w-[300px] mx-auto">
+    <circle cx="160" cy="145" r="115" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+    {/* Cyclic quadrilateral ABCD inscribed in the circle (radius 115, center 160,145) */}
+    {/* A at 100°: (140, 31) */}
+    {/* B at  20°: (268, 105) */}
+    {/* C at 290°: (199, 253) */}
+    {/* D at 200°: ( 52, 106) */}
+    <polygon points="140,31 268,105 199,253 52,106"
+      fill="#7c3aed" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="2" />
+
+    {/* Vertex points */}
+    <circle cx="140" cy="31" r="3.5" fill="#f8fafc" />
+    <circle cx="268" cy="105" r="3.5" fill="#f8fafc" />
+    <circle cx="199" cy="253" r="3.5" fill="#f8fafc" />
+    <circle cx="52" cy="106" r="3.5" fill="#f8fafc" />
+
+    {/* Vertex labels */}
+    <text x="128" y="24" fill="#e2e8f0" fontSize="14" fontWeight="bold">A</text>
+    <text x="274" y="102" fill="#e2e8f0" fontSize="14" fontWeight="bold">B</text>
+    <text x="195" y="270" fill="#e2e8f0" fontSize="14" fontWeight="bold">C</text>
+    <text x="34" y="110" fill="#e2e8f0" fontSize="14" fontWeight="bold">D</text>
+
+    {/* Opposite-angle relationship labels */}
+    <text x="155" y="142" fill="#f472b6" fontSize="11" fontWeight="bold" textAnchor="middle">∠A + ∠C = 180°</text>
+    <text x="155" y="160" fill="#f472b6" fontSize="11" fontWeight="bold" textAnchor="middle">∠B + ∠D = 180°</text>
   </svg>
 );
 
