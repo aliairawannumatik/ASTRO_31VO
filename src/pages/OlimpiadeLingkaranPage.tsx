@@ -209,8 +209,8 @@ const SudutDiameterSVG = () => (
     {/* lines from C */}
     <line x1="100" y1="15" x2="30" y2="85" stroke="#818cf8" strokeWidth="1.8" />
     <line x1="100" y1="15" x2="170" y2="85" stroke="#818cf8" strokeWidth="1.8" />
-    {/* right angle mark at C */}
-    <rect x="94" y="21" width="9" height="9" fill="none" stroke="#34d399" strokeWidth="1.5" />
+    {/* right angle mark at C — aligned with CA and CB legs */}
+    <path d="M92.93,22.07 L100,29.14 L107.07,22.07" fill="none" stroke="#34d399" strokeWidth="1.6" />
     {/* Points */}
     <circle cx="100" cy="15" r="3" fill="#f8fafc" />
     <circle cx="30" cy="85" r="3" fill="#f8fafc" />
