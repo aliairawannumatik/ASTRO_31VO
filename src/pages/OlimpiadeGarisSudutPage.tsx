@@ -48,6 +48,7 @@ import gambar39 from "@/assets/Gambar_39_SOAL_1773290091440.png";
 import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
+import gambarOlimpiade5 from "@assets/image_1777195700263.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -553,7 +554,7 @@ const latihanOlimpiade = [
   {
     no: 5,
     soal: "OSN Matematika 2008 Tingkat Kota\n\nPerhatikan gambar berikut.\n\nSegitiga PQR merupakan segitiga sama sisi. Jika $\\angle SPQ = 20°$ dan $\\angle TQR = 35°$, maka $\\angle SUT = ...$",
-    image: null,
+    image: gambarOlimpiade5,
     options: ["A. $135°$", "B. $130°$", "C. $125°$", "D. $105°$", "E. $95°$"]
   },
   {
