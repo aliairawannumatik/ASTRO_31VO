@@ -459,71 +459,69 @@ const renderCategoryCard = (
   <div
     key={category.id}
     id={`cat-${category.id}`}
-    className={`rounded-2xl overflow-hidden border transition-all duration-300 ${
+    className={`rounded-xl overflow-hidden border transition-all duration-300 ${
       isOpen
-        ? `${category.border} ${category.bg} shadow-lg ${category.glow}`
-        : "border-white/8 bg-white/3 hover:bg-white/5 hover:border-white/15"
+        ? `${category.border} ${category.bg}`
+        : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20"
     }`}
   >
     <button
       onClick={() => toggleCategory(category.id)}
-      className="w-full flex items-center justify-between px-5 py-4 transition-colors"
+      className="w-full flex items-center justify-between gap-3 px-4 py-3.5 transition-colors"
     >
-      <div className="flex items-center gap-3">
-        <div className={`w-9 h-9 rounded-xl flex items-center justify-center border transition-all ${
-          isOpen ? `${category.bg} ${category.border} ${category.color}` : "bg-white/5 border-white/10 text-white/50"
+      <div className="flex items-center gap-3 min-w-0 flex-1">
+        <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border transition-all ${
+          isOpen ? `${category.bg} ${category.border} ${category.color}` : "bg-white/5 border-white/10 text-white/60"
         }`}>
           {category.icon}
         </div>
-        <div className="text-left">
-          <span className={`font-display text-sm font-bold transition-colors ${
-            isOpen ? category.color : "text-white/80"
+        <div className="min-w-0 text-left">
+          <div className={`font-display text-sm md:text-base font-bold transition-colors truncate ${
+            isOpen ? category.color : "text-white/90"
           }`}>
             {category.title}
-          </span>
+          </div>
+          <div className="text-[11px] text-white/40 mt-0.5">
+            {category.rumus.length} rumus
+          </div>
         </div>
-        <span className={`text-xs px-2 py-0.5 rounded-full border transition-all ${
-          isOpen
-            ? `${category.bg} ${category.border} ${category.color}`
-            : "bg-white/5 border-white/10 text-white/40"
-        }`}>
-          {category.rumus.length}
-        </span>
       </div>
-      <div className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all ${
-        isOpen ? `${category.bg} ${category.border}` : "bg-white/5"
+      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all ${
+        isOpen ? `${category.bg} border ${category.border}` : "bg-white/5 border border-white/10"
       }`}>
         {isOpen
           ? <ChevronUp className={`w-4 h-4 ${category.color}`} />
-          : <ChevronDown className="w-4 h-4 text-white/40" />
+          : <ChevronDown className="w-4 h-4 text-white/50" />
         }
       </div>
     </button>
 
     {isOpen && (
-      <div className="px-4 pb-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div className="px-3 pb-3">
+        <div className="rounded-xl overflow-hidden border border-white/5 bg-black/30 divide-y divide-white/5">
           {category.rumus.map((rumus, idx) => (
             <div
               key={idx}
-              className="relative rounded-xl overflow-hidden bg-black/20 border border-white/5 hover:border-white/15 transition-all"
+              className="px-4 py-3 hover:bg-white/[0.03] transition-colors"
             >
-              <div className={`absolute left-0 top-0 bottom-0 w-0.5 ${category.color.replace("text-", "bg-")}`} />
-              <div className="pl-4 pr-3 py-3">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <span className={`text-xs font-semibold font-display ${category.color}`}>
-                    {rumus.name}
-                  </span>
-                  {rumus.description && (
-                    <span className="text-xs text-white/35 text-right leading-tight max-w-[150px]">
-                      {rumus.description}
-                    </span>
-                  )}
-                </div>
-                <div className="rounded-lg bg-black/30 px-2 py-2 text-white text-center overflow-x-auto border border-white/5">
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className={`text-[10px] font-mono font-bold tabular-nums ${category.color} opacity-50 shrink-0`}>
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span className={`text-xs md:text-sm font-semibold font-display ${category.color}`}>
+                  {rumus.name}
+                </span>
+              </div>
+              <div className="rounded-lg bg-black/40 px-3 py-2.5 border border-white/5 overflow-x-auto mb-1.5">
+                <div className="text-white text-center min-w-fit">
                   <BlockMath math={rumus.formula} />
                 </div>
               </div>
+              {rumus.description && (
+                <p className="text-[11px] text-white/45 leading-snug pl-1">
+                  {rumus.description}
+                </p>
+              )}
             </div>
           ))}
         </div>
@@ -536,6 +534,7 @@ const KumpulanRumusPage = () => {
   const navigate = useNavigate();
   const [expandedCategory, setExpandedCategory] = useState<string | null>("bilangan");
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeGroup, setActiveGroup] = useState<string>("all");
   const tabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -547,13 +546,15 @@ const KumpulanRumusPage = () => {
     setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
   };
 
-  const jumpToCategory = (categoryId: string) => {
+  const jumpToGroup = (groupLabel: string) => {
     playPopSound();
-    setExpandedCategory(categoryId);
-    setTimeout(() => {
-      const el = document.getElementById(`cat-${categoryId}`);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
+    setActiveGroup(groupLabel);
+    if (groupLabel !== "all") {
+      setTimeout(() => {
+        const el = document.getElementById(`group-${groupLabel.replace(/\s+/g, "-")}`);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
   };
 
   const filteredData = rumusData.filter(category => {
@@ -618,34 +619,43 @@ const KumpulanRumusPage = () => {
           )}
         </div>
 
-        {/* ── Quick-Nav Tabs ── */}
+        {/* ── Group Filter Pills ── */}
         {!searchQuery && (
           <div
             ref={tabsRef}
-            className="flex gap-2 overflow-x-auto pb-3 mb-5 scrollbar-hide"
+            className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide"
             style={{ scrollbarWidth: "none" }}
           >
-            {rumusData.map((cat) => (
+            <button
+              onClick={() => jumpToGroup("all")}
+              className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-display font-bold border transition-all ${
+                activeGroup === "all"
+                  ? "bg-white/10 border-white/30 text-white"
+                  : "bg-white/[0.03] border-white/10 text-white/50 hover:text-white/80 hover:bg-white/8"
+              }`}
+            >
+              <span className="text-sm">📚</span>
+              <span className="tracking-wide uppercase">Semua</span>
+            </button>
+            {groupSections.map((group) => (
               <button
-                key={cat.id}
-                onClick={() => jumpToCategory(cat.id)}
-                className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all ${
-                  expandedCategory === cat.id
-                    ? `${cat.bg} ${cat.border} ${cat.color}`
-                    : "bg-white/5 border-white/10 text-white/50 hover:text-white/70 hover:bg-white/8"
+                key={group.label}
+                onClick={() => jumpToGroup(group.label)}
+                className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-display font-bold border transition-all ${
+                  activeGroup === group.label
+                    ? `${group.bg} ${group.border} ${group.color}`
+                    : "bg-white/[0.03] border-white/10 text-white/50 hover:text-white/80 hover:bg-white/8"
                 }`}
               >
-                <span className={expandedCategory === cat.id ? cat.color : "text-white/40"}>
-                  {cat.icon}
-                </span>
-                {cat.title}
+                <span className="text-sm">{group.emoji}</span>
+                <span className="tracking-wide uppercase">{group.label}</span>
               </button>
             ))}
           </div>
         )}
 
         {/* ── Category Cards ── */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {filteredData.length === 0 && (
             <div className="text-center py-16 text-white/30">
               <Search className="w-10 h-10 mx-auto mb-3 opacity-30" />
@@ -661,31 +671,42 @@ const KumpulanRumusPage = () => {
               })}
             </div>
           ) : (
-            groupSections.map((group) => {
-              const groupCategories = rumusData.filter(c => group.categoryIds.includes(c.id));
-              const groupFiltered = groupCategories;
-              if (groupFiltered.length === 0) return null;
-              return (
-                <div key={group.label}>
-                  <div className={`flex items-center gap-2 mb-3 px-1`}>
-                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl ${group.bg} border ${group.border}`}>
-                      <span className="text-base leading-none">{group.emoji}</span>
-                      <span className={`font-display text-xs font-bold tracking-wider uppercase ${group.color}`}>{group.label}</span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${group.bg} border ${group.border} ${group.color} ml-1`}>
-                        {groupFiltered.reduce((s, c) => s + c.rumus.length, 0)} rumus
-                      </span>
+            groupSections
+              .filter((group) => activeGroup === "all" || activeGroup === group.label)
+              .map((group) => {
+                const groupCategories = rumusData.filter(c => group.categoryIds.includes(c.id));
+                if (groupCategories.length === 0) return null;
+                const totalGroupRumus = groupCategories.reduce((s, c) => s + c.rumus.length, 0);
+                return (
+                  <section key={group.label} id={`group-${group.label.replace(/\s+/g, "-")}`}>
+                    {/* Section Banner */}
+                    <div className={`relative rounded-2xl overflow-hidden border ${group.border} ${group.bg} mb-4`}>
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/[0.03] to-transparent pointer-events-none" />
+                      <div className="relative flex items-center gap-3 px-5 py-4">
+                        <div className={`w-12 h-12 rounded-xl ${group.bg} border ${group.border} flex items-center justify-center text-2xl shrink-0`}>
+                          {group.emoji}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h2 className={`font-display text-base md:text-lg font-black tracking-wide ${group.color} leading-tight`}>
+                            {group.label}
+                          </h2>
+                          <p className="text-[11px] text-white/45 mt-0.5">
+                            {groupCategories.length} kategori &middot; {totalGroupRumus} rumus
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className={`flex-1 h-px bg-gradient-to-r from-white/10 to-transparent`} />
-                  </div>
-                  <div className="space-y-2">
-                    {groupFiltered.map((category) => {
-                      const isOpen = expandedCategory === category.id;
-                      return renderCategoryCard(category, isOpen, toggleCategory);
-                    })}
-                  </div>
-                </div>
-              );
-            })
+
+                    {/* Categories in this group */}
+                    <div className="space-y-2">
+                      {groupCategories.map((category) => {
+                        const isOpen = expandedCategory === category.id;
+                        return renderCategoryCard(category, isOpen, toggleCategory);
+                      })}
+                    </div>
+                  </section>
+                );
+              })
           )}
         </div>
 
