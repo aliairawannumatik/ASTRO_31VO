@@ -224,6 +224,56 @@ const SudutDiameterSVG = () => (
   </svg>
 );
 
+const SudutBusurSamaSVG = () => (
+  <svg viewBox="0 0 280 250" className="w-full max-w-[280px] mx-auto">
+    {/* main circle */}
+    <circle cx="140" cy="130" r="100" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+
+    {/* Highlighted arc AB (the common subtended arc) */}
+    <path d="M46,164.2 A100,100 0,0,1 234,164.2" fill="none" stroke="#f472b6" strokeWidth="3.5" strokeLinecap="round" />
+
+    {/* Chord AB (dashed) for reference */}
+    <line x1="46" y1="164.2" x2="234" y2="164.2" stroke="#f472b6" strokeWidth="1.2" strokeDasharray="4,3" opacity="0.55" />
+
+    {/* Inscribed angle from C (green) */}
+    <line x1="190" y1="43.4" x2="46" y2="164.2" stroke="#34d399" strokeWidth="1.7" />
+    <line x1="190" y1="43.4" x2="234" y2="164.2" stroke="#34d399" strokeWidth="1.7" />
+    {/* Inscribed angle from D (orange) */}
+    <line x1="140" y1="30" x2="46" y2="164.2" stroke="#fb923c" strokeWidth="1.7" />
+    <line x1="140" y1="30" x2="234" y2="164.2" stroke="#fb923c" strokeWidth="1.7" />
+    {/* Inscribed angle from E (cyan) */}
+    <line x1="90" y1="43.4" x2="46" y2="164.2" stroke="#38bdf8" strokeWidth="1.7" />
+    <line x1="90" y1="43.4" x2="234" y2="164.2" stroke="#38bdf8" strokeWidth="1.7" />
+
+    {/* Angle arcs at each vertex (all equal magnitude) */}
+    <path d="M176.2,55.0 A18,18 0,0,1 196.2,60.3" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    <path d="M129.7,44.7 A18,18 0,0,1 150.3,44.7" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    <path d="M83.8,60.3 A18,18 0,0,1 103.8,55.0" fill="none" stroke="#fbbf24" strokeWidth="2" />
+
+    {/* Vertex points */}
+    <circle cx="46" cy="164.2" r="3.5" fill="#f8fafc" />
+    <circle cx="234" cy="164.2" r="3.5" fill="#f8fafc" />
+    <circle cx="190" cy="43.4" r="3.5" fill="#f8fafc" />
+    <circle cx="140" cy="30" r="3.5" fill="#f8fafc" />
+    <circle cx="90" cy="43.4" r="3.5" fill="#f8fafc" />
+
+    {/* Vertex labels */}
+    <text x="30" y="170" fill="#f472b6" fontSize="13" fontWeight="bold">A</text>
+    <text x="240" y="170" fill="#f472b6" fontSize="13" fontWeight="bold">B</text>
+    <text x="195" y="38" fill="#34d399" fontSize="13" fontWeight="bold">C</text>
+    <text x="135" y="22" fill="#fb923c" fontSize="13" fontWeight="bold">D</text>
+    <text x="78" y="38" fill="#38bdf8" fontSize="13" fontWeight="bold">E</text>
+
+    {/* Angle value labels (α at each vertex) */}
+    <text x="183" y="74" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
+    <text x="135" y="60" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
+    <text x="86" y="74" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
+
+    {/* Arc AB caption */}
+    <text x="115" y="205" fill="#f472b6" fontSize="11" fontStyle="italic" fontWeight="bold">busur AB</text>
+  </svg>
+);
+
 const SegiempatTaliBusurSVG = () => (
   <svg viewBox="0 0 200 180" className="w-full max-w-[180px] mx-auto">
     <circle cx="100" cy="90" r="72" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
@@ -493,10 +543,11 @@ const materiSections: MateriSection[] = [
         {/* Rule 3 */}
         <div className="bg-green-500/10 border border-green-500/25 rounded-2xl px-4 py-3">
           <p className="font-body text-xs text-green-300 font-bold mb-2">3. Sudut Keliling di Busur yang Sama</p>
-          <p className="font-body text-xs text-white/70 leading-relaxed mb-2">
+          <p className="font-body text-xs text-white/70 leading-relaxed mb-3">
             Semua sudut keliling yang menghadap busur yang sama adalah sama besar.
           </p>
-          <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs">
+          <SudutBusurSamaSVG />
+          <div className="bg-white/5 rounded-lg px-3 py-2 text-center text-xs mt-3">
             <M math="\angle ACB = \angle ADB = \angle AEB" />
           </div>
         </div>
