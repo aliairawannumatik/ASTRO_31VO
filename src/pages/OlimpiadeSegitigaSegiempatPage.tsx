@@ -379,6 +379,69 @@ const BangunSoal7SegiSVG = () => (
   />
 );
 
+/* SVG soal Latihan Dasar No. 8
+   Segiempat A(0,0)–T(7,4)–E(7,12)–D(0,12) dengan dua diagonal AE dan DT.
+   Diagonal berpotongan di G(4.2,7.2). Arsir: ADG, ATG, TEG (kecuali DEG). */
+const BangunSoal8SegiSVG = () => {
+  const stroke = "#1e293b";
+  const s = 20;
+  const ox = 65, oy = 20;
+  const p = (x: number, y: number) => ({ x: ox + x * s, y: oy + y * s });
+
+  const A = p(0, 0);    // top-left
+  const B = p(0, 4);    // left mark at 4 cm
+  const C = p(0, 8);    // left mark at 8 cm
+  const D = p(0, 12);   // bottom-left
+  const E = p(7, 12);   // bottom-right
+  const T = p(7, 4);    // upper-right (dashed line endpoint)
+  const G = p(4.2, 7.2); // diagonal intersection
+
+  const fmt = (pt: { x: number; y: number }) => `${pt.x},${pt.y}`;
+
+  return (
+    <svg viewBox="0 0 310 285" className="w-full max-w-[320px]">
+      <defs>
+        <pattern id="hatch8a" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="7" stroke={stroke} strokeWidth="0.9" />
+        </pattern>
+      </defs>
+
+      {/* Hatched regions (drawn first, behind outlines) */}
+      <polygon points={`${fmt(A)} ${fmt(D)} ${fmt(G)}`} fill="url(#hatch8a)" />
+      <polygon points={`${fmt(A)} ${fmt(T)} ${fmt(G)}`} fill="url(#hatch8a)" />
+      <polygon points={`${fmt(T)} ${fmt(E)} ${fmt(G)}`} fill="url(#hatch8a)" />
+
+      {/* Outer quadrilateral boundary */}
+      <polygon
+        points={`${fmt(A)} ${fmt(T)} ${fmt(E)} ${fmt(D)}`}
+        fill="none"
+        stroke={stroke}
+        strokeWidth="1.8"
+      />
+
+      {/* Internal diagonals */}
+      <line x1={A.x} y1={A.y} x2={E.x} y2={E.y} stroke={stroke} strokeWidth="1.5" />
+      <line x1={D.x} y1={D.y} x2={T.x} y2={T.y} stroke={stroke} strokeWidth="1.5" />
+
+      {/* Dashed horizontal line B → T at the 4 cm level */}
+      <line x1={B.x} y1={B.y} x2={T.x} y2={T.y}
+        stroke={stroke} strokeWidth="1.2" strokeDasharray="5,4" />
+
+      {/* Tick marks on left edge */}
+      <line x1={B.x - 6} y1={B.y} x2={B.x + 6} y2={B.y} stroke={stroke} strokeWidth="1.5" />
+      <line x1={C.x - 6} y1={C.y} x2={C.x + 6} y2={C.y} stroke={stroke} strokeWidth="1.5" />
+
+      {/* Left edge labels */}
+      <text x={A.x - 30} y={(A.y + B.y) / 2 + 4} textAnchor="middle" fontSize="12" fill={stroke} fontWeight="600">4 cm</text>
+      <text x={B.x - 30} y={(B.y + C.y) / 2 + 4} textAnchor="middle" fontSize="12" fill={stroke} fontWeight="600">4 cm</text>
+      <text x={C.x - 30} y={(C.y + D.y) / 2 + 4} textAnchor="middle" fontSize="12" fill={stroke} fontWeight="600">4 cm</text>
+
+      {/* Bottom label */}
+      <text x={(D.x + E.x) / 2} y={D.y + 18} textAnchor="middle" fontSize="12" fill={stroke} fontWeight="600">7 cm</text>
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 6 — jajar genjang ADCB dengan dua segitiga (top apex H, bottom apex G)
    E adalah kaki tegak lurus dari D ke AB. */
 const BangunSoal6SegiSVG = () => {
@@ -879,6 +942,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Luas bangun di samping adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 8 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar di bawah!
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <BangunSoal8SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Luas daerah yang diarsir adalah ....
                     </div>
                   </>
                 ) : (
