@@ -377,8 +377,6 @@ const materiSections: MateriSection[] = [
             <circle cx="100" cy="100" r="4" fill="#f8fafc" />
             <text x="133" y="96" fill="#f472b6" fontSize="14" fontWeight="bold">r</text>
             <text x="106" y="96" fill="#e2e8f0" fontSize="13" fontWeight="bold">O</text>
-            <path d="M175,100 A75,75 0,0,1 100,25" fill="none" stroke="#34d399" strokeWidth="3" strokeLinecap="round" />
-            <text x="158" y="64" fill="#34d399" fontSize="10">s</text>
           </svg>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
