@@ -50,6 +50,7 @@ import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
 import gambarOlimpiade5 from "@assets/image_1777195700263.png";
 import gambarOlimpiade6 from "@assets/image_1777195719119.png";
+import gambarOlimpiade7 from "@assets/image_1777195731166.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -567,7 +568,7 @@ const latihanOlimpiade = [
   {
     no: 7,
     soal: "OSN Matematika 2018 Tingkat Kota\n\nNilai sudut x dan y pada gambar berikut adalah ...",
-    image: null,
+    image: gambarOlimpiade7,
     options: [
       "A. $x = 74°$; $y = 104°$",
       "B. $x = 37°$; $y = 104°$",
