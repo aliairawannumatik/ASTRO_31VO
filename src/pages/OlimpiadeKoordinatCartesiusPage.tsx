@@ -127,6 +127,49 @@ const KuadranAbsisOrdinatSVG = () => {
   );
 };
 
+// SVG: Jarak antara 2 titik koordinat - Titik P(x1, y1) dan Q(x2, y2)
+const JarakDuaTitikSVG = () => {
+  const W = 280, H = 220;
+  const ox = 50, oy = H - 30;
+  const x1Pos = 110, x2Pos = 220;
+  const y1Pos = oy - 60, y2Pos = oy - 130;
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        <defs>
+          <marker id="arrowJarak" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L6,4 L0,8 Z" fill="#fbbf24" />
+          </marker>
+        </defs>
+        {/* Sumbu Y */}
+        <line x1={ox} y1={oy + 4} x2={ox} y2={20} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowJarak)" />
+        {/* Sumbu X */}
+        <line x1={ox - 4} y1={oy} x2={W - 14} y2={oy} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowJarak)" />
+        {/* Garis diagonal dari origin melewati P dan Q */}
+        <line x1={ox} y1={oy} x2={x2Pos + 18} y2={y2Pos - 14} stroke="#e5e7eb" strokeWidth="1.2" />
+        {/* Persegi panjang putus-putus untuk Q (besar) */}
+        <line x1={ox} y1={y2Pos} x2={x2Pos} y2={y2Pos} stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="4 3" />
+        <line x1={x2Pos} y1={y2Pos} x2={x2Pos} y2={oy} stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="4 3" />
+        {/* Persegi panjang putus-putus untuk P (kecil) */}
+        <line x1={ox} y1={y1Pos} x2={x1Pos} y2={y1Pos} stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="4 3" />
+        <line x1={x1Pos} y1={y1Pos} x2={x1Pos} y2={oy} stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="4 3" />
+        {/* Titik P dan Q */}
+        <circle cx={x1Pos} cy={y1Pos} r="3.5" fill="#fbbf24" />
+        <circle cx={x2Pos} cy={y2Pos} r="3.5" fill="#fbbf24" />
+        {/* Label P dan Q */}
+        <text x={x1Pos + 6} y={y1Pos + 12} fill="#fbbf24" fontSize="12" fontWeight="bold">P</text>
+        <text x={x2Pos + 6} y={y2Pos + 4} fill="#fbbf24" fontSize="12" fontWeight="bold">Q</text>
+        {/* Label sumbu */}
+        <text x={x1Pos} y={oy + 14} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₁</text>
+        <text x={x2Pos} y={oy + 14} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₂</text>
+        <text x={ox - 8} y={y1Pos + 4} fill="#e5e7eb" fontSize="11" textAnchor="end">y₁</text>
+        <text x={ox - 8} y={y2Pos + 4} fill="#e5e7eb" fontSize="11" textAnchor="end">y₂</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -310,6 +353,7 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                 {expandedSections.includes(idx) && (
                   <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
+                      {idx === 2 && <JarakDuaTitikSVG />}
                       {section.content.split('\n').map((line, i) => {
                         const trimmed = line.trim();
                         const renderedLine = (() => {
