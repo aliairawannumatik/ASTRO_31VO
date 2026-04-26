@@ -102,7 +102,7 @@ const BiografiPage = () => {
 
               <div className="relative z-10 space-y-3 text-center px-2">
                 <p className="text-white/90 font-body text-sm leading-relaxed text-justify">
-                  Dengan penuh hormat, terima kasih yang tak terhingga saya haturkan kepada <strong className="text-amber-300">Ibu Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd.</strong> selaku <strong className="text-yellow-300">Kepala SMP Negeri 28 Bandung</strong> — yang telah memberikan <strong className="text-accent">motivasi</strong>, <strong className="text-accent">bimbingan</strong>, serta <strong className="text-accent">masukan-masukan berharga</strong> sehingga kami terus terdorong untuk berkarya hingga aplikasi <strong className="text-primary">NUMATIK</strong> ini tercipta.
+                  Dengan penuh hormat, terima kasih yang tak terhingga saya haturkan kepada <strong className="text-amber-300">Ibu Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd.</strong> selaku <strong className="text-yellow-300">Kepala SMP Negeri 28 Bandung</strong> — yang telah memberikan <strong className="text-accent">motivasi</strong>, <strong className="text-accent">bimbingan</strong>, serta <strong className="text-accent">masukan-masukan berharga</strong> sehingga saya terus terdorong untuk berkarya hingga aplikasi <strong className="text-primary">NUMATIK</strong> ini tercipta.
                 </p>
                 <p className="text-white/70 font-body text-sm leading-relaxed text-justify italic">
                   "Semoga setiap langkah kebaikan dan dedikasi Ibu menjadi inspirasi serta menuai keberkahan yang melimpah."
