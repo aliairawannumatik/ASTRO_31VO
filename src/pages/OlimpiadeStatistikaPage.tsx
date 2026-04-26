@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp, BookOpen, Dumbbell, Star } from "lucide-react";
+import { Trophy, ChevronDown, ChevronUp, BookOpen, Dumbbell, Star, Lightbulb } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import { pembahasanDasar } from "@/data/statistikaPembahasanDasar";
+import { pembahasanOlimpiade } from "@/data/statistikaPembahasanOlimpiade";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -689,12 +691,23 @@ const OlimpiadeStatistikaPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSections.length }, (_, i) => i));
+  const [openPembahasan, setOpenPembahasan] = useState<Set<string>>(new Set());
 
   const toggleSection = (idx: number) => {
     playPopSound();
     setExpandedSections(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
     );
+  };
+
+  const togglePembahasan = (key: string) => {
+    playPopSound();
+    setOpenPembahasan(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
   };
 
   return (
@@ -802,57 +815,101 @@ const OlimpiadeStatistikaPage = () => {
 
         {activeTab === "dasar" && (
           <div className="space-y-3 animate-slide-up">
-            {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-cyan-400/20 transition-colors">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 font-display font-bold text-xs mr-2">{soal.no}</span>
-                  {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/8 rounded-lg px-3 py-2 hover:bg-white/8 transition-colors">
-                        {renderWithLatex(opt)}
-                      </div>
+            {latihanDasar.map((soal) => {
+              const key = `d-${soal.no}`;
+              const open = openPembahasan.has(key);
+              const pembahasan = pembahasanDasar[soal.no];
+              return (
+                <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-cyan-400/20 transition-colors">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 font-display font-bold text-xs mr-2">{soal.no}</span>
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      </span>
                     ))}
                   </div>
-                )}
-              </div>
-            ))}
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/8 rounded-lg px-3 py-2 hover:bg-white/8 transition-colors">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {pembahasan && (
+                    <div className="pt-3">
+                      <button
+                        onClick={() => togglePembahasan(key)}
+                        className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
+                      >
+                        <Lightbulb className="w-3.5 h-3.5" />
+                        {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
+                        {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </button>
+                      {open && (
+                        <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2 space-y-1">
+                          {pembahasan}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
         {activeTab === "olimpiade" && (
           <div className="space-y-3 animate-slide-up">
-            {latihanOlimpiade.map((soal) => (
-              <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-yellow-400/20 transition-colors">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500/20 border border-yellow-400/30 text-yellow-300 font-display font-bold text-xs mr-2">{soal.no}</span>
-                  {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? (
-                        <span className="inline-block bg-yellow-500/10 border border-yellow-400/20 rounded px-2 py-0.5 text-yellow-300 font-semibold text-xs mb-1">{line}</span>
-                      ) : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/8 rounded-lg px-3 py-2 hover:bg-white/8 transition-colors">
-                        {renderWithLatex(opt)}
-                      </div>
+            {latihanOlimpiade.map((soal) => {
+              const key = `o-${soal.no}`;
+              const open = openPembahasan.has(key);
+              const pembahasan = pembahasanOlimpiade[soal.no];
+              return (
+                <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-yellow-400/20 transition-colors">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500/20 border border-yellow-400/30 text-yellow-300 font-display font-bold text-xs mr-2">{soal.no}</span>
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? (
+                          <span className="inline-block bg-yellow-500/10 border border-yellow-400/20 rounded px-2 py-0.5 text-yellow-300 font-semibold text-xs mb-1">{line}</span>
+                        ) : renderWithLatex(line)}
+                      </span>
                     ))}
                   </div>
-                )}
-              </div>
-            ))}
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/8 rounded-lg px-3 py-2 hover:bg-white/8 transition-colors">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {pembahasan && (
+                    <div className="pt-3">
+                      <button
+                        onClick={() => togglePembahasan(key)}
+                        className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
+                      >
+                        <Lightbulb className="w-3.5 h-3.5" />
+                        {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
+                        {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </button>
+                      {open && (
+                        <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2 space-y-1">
+                          {pembahasan}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
