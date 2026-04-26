@@ -660,6 +660,57 @@ const LayangLayangABCDSVG = () => {
   );
 };
 
+// SVG: Jajargenjang ABCD dengan tinggi DE untuk Soal No. 24
+const JajargenjangABCDSVG = () => {
+  const W = 320, H = 250;
+
+  const A = { x: 30, y: 210 };
+  const E = { x: 80, y: 210 };
+  const B = { x: 230, y: 210 };
+  const D = { x: 80, y: 90 };
+  const C = { x: 280, y: 90 };
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Jajargenjang ABCD */}
+        <polygon
+          points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`}
+          fill="rgba(34,211,238,0.06)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+
+        {/* Garis tinggi DE (putus-putus) */}
+        <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,4" />
+
+        {/* Tanda siku-siku di E */}
+        <rect x={E.x} y={E.y - 10} width="10" height="10" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+
+        {/* Titik sudut */}
+        {[A, B, C, D, E].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
+        ))}
+
+        {/* Label titik */}
+        <text x={A.x - 6} y={A.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x + 6} y={B.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
+        <text x={C.x + 6} y={C.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x - 6} y={D.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">D</text>
+        <text x={E.x} y={E.y + 16} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">E</text>
+
+        {/* Label sisi */}
+        {/* 20 cm di atas DC */}
+        <text x={(D.x + C.x) / 2} y={D.y - 8} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">20 cm</text>
+        {/* 13 cm di sisi AD */}
+        <text x={(A.x + D.x) / 2 - 8} y={(A.y + D.y) / 2} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">13 cm</text>
+        {/* 15 cm di bawah EB */}
+        <text x={(E.x + B.x) / 2} y={B.y + 22} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">15 cm</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -938,6 +989,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 20 && <BangunABEFCDSVG />}
                 {soal.no === 21 && <PentagonSoal21SVG />}
                 {soal.no === 23 && <LayangLayangABCDSVG />}
+                {soal.no === 24 && <JajargenjangABCDSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
