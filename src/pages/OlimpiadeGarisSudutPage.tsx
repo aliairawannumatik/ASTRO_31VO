@@ -105,7 +105,7 @@ const SudutPosNegSVG = () => (
 
 const MateriImage = ({ src, caption }: { src: string; caption: string }) => (
   <div className="my-3 flex flex-col items-center">
-    <img src={src} alt={caption} className="max-w-full rounded-lg border border-border/40 bg-white/5" />
+    <img src={src} alt={caption} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5" />
     <p className="text-xs text-white/40 mt-1 italic">{caption}</p>
   </div>
 );
