@@ -6,6 +6,9 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import PembahasanCard from "@/components/PembahasanCard";
+import { spldvDasarPembahasan } from "@/data/pembahasan/spldvDasar";
+import { spldvOlimpiadePembahasan } from "@/data/pembahasan/spldvOlimpiade";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -256,6 +259,9 @@ const OlimpiadeSPLDVPage = () => {
                     ))}
                   </div>
                 )}
+                {spldvDasarPembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`dasar-${soal.no}`} pembahasan={spldvDasarPembahasan[soal.no]} />
+                )}
               </div>
             ))}
           </div>
@@ -282,6 +288,9 @@ const OlimpiadeSPLDVPage = () => {
                       </div>
                     ))}
                   </div>
+                )}
+                {spldvOlimpiadePembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`olim-${soal.no}`} pembahasan={spldvOlimpiadePembahasan[soal.no]} />
                 )}
               </div>
             ))}

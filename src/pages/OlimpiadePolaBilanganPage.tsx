@@ -6,6 +6,9 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import PembahasanCard from "@/components/PembahasanCard";
+import { polaBilanganDasarPembahasan } from "@/data/pembahasan/polaBilanganDasar";
+import { polaBilanganOlimpiadePembahasan } from "@/data/pembahasan/polaBilanganOlimpiade";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -700,6 +703,9 @@ const OlimpiadePolaBilanganPage = () => {
                     ))}
                   </div>
                 )}
+                {polaBilanganDasarPembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`pb-dasar-${soal.no}`} pembahasan={polaBilanganDasarPembahasan[soal.no]} />
+                )}
               </div>
             ))}
           </div>
@@ -726,6 +732,9 @@ const OlimpiadePolaBilanganPage = () => {
                       </div>
                     ))}
                   </div>
+                )}
+                {polaBilanganOlimpiadePembahasan[soal.no] && (
+                  <PembahasanCard pembahasanKey={`pb-olim-${soal.no}`} pembahasan={polaBilanganOlimpiadePembahasan[soal.no]} />
                 )}
               </div>
             ))}
