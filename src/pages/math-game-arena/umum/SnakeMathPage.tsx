@@ -213,7 +213,7 @@ const SnakeMathPage = ({
       correctFlashRef.current = 0.45;
       intervalRef.current = Math.max(MIN_INTERVAL, intervalRef.current - 3);
       spawnParticles(nx, ny, "#FFE066", 12);
-      spawnParticles(nx, ny, "#00FF88", 8);
+      spawnParticles(nx, ny, "#FF8844", 8);
       showFeedback(`+${bonus} 🍎 NYAM!`, true);
       replaceEatenFood(eaten);
     } else {
@@ -313,7 +313,7 @@ const SnakeMathPage = ({
       t.alpha -= dt * 4;
       if (t.alpha <= 0) return;
       ctx.globalAlpha = t.alpha * 0.25;
-      ctx.fillStyle = "#22dd66";
+      ctx.fillStyle = "#FB923C";
       ctx.beginPath();
       ctx.arc(t.x * CELL + CELL / 2, t.y * CELL + CELL / 2, CELL * 0.32, 0, Math.PI * 2);
       ctx.fill();
@@ -334,26 +334,26 @@ const SnakeMathPage = ({
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
-      // 1) Outer dark outline (gives body silhouette + glow)
-      ctx.shadowColor = "rgba(0,255,136,0.55)";
+      // 1) Outer dark outline (gives body silhouette + warm glow)
+      ctx.shadowColor = "rgba(255,140,40,0.55)";
       ctx.shadowBlur = 16;
-      ctx.strokeStyle = "#0a4a23";
+      ctx.strokeStyle = "#5a1c08";
       ctx.lineWidth = CELL * 0.96;
       drawPath(); ctx.stroke();
       ctx.shadowBlur = 0;
 
-      // 2) Main body fill (rich green)
-      ctx.strokeStyle = "#21a854";
+      // 2) Main body fill (rich amber/orange)
+      ctx.strokeStyle = "#EA580C";
       ctx.lineWidth = CELL * 0.84;
       drawPath(); ctx.stroke();
 
-      // 3) Top highlight band (lighter green along the body)
-      ctx.strokeStyle = "rgba(160,255,190,0.45)";
+      // 3) Top highlight band (lighter cream-amber along the body)
+      ctx.strokeStyle = "rgba(255,220,150,0.55)";
       ctx.lineWidth = CELL * 0.38;
       drawPath(); ctx.stroke();
 
       // 4) Dorsal dark stripe down the middle
-      ctx.strokeStyle = "rgba(8,60,30,0.55)";
+      ctx.strokeStyle = "rgba(80,30,10,0.6)";
       ctx.lineWidth = CELL * 0.16;
       drawPath(); ctx.stroke();
 
@@ -362,12 +362,12 @@ const SnakeMathPage = ({
         const tailEnd = centers[centers.length - 1];
         const tailPrev = centers[centers.length - 2];
         // small rounded highlight on tail tip
-        ctx.fillStyle = "#0a3a1f";
+        ctx.fillStyle = "#7c2d12";
         ctx.beginPath();
         ctx.arc(tailEnd.x, tailEnd.y, CELL * 0.22, 0, Math.PI * 2);
         ctx.fill();
         // re-draw a smaller body stroke from tail-1 to tail to make tail taper
-        ctx.strokeStyle = "#21a854";
+        ctx.strokeStyle = "#EA580C";
         ctx.lineWidth = CELL * 0.55;
         ctx.beginPath();
         ctx.moveTo(tailPrev.x, tailPrev.y);
@@ -435,19 +435,19 @@ const SnakeMathPage = ({
       }
 
       // head outline (dark ring for definition)
-      ctx.fillStyle = "#073a1c";
+      ctx.fillStyle = "#5a1c08";
       ctx.beginPath();
       ctx.ellipse(headR * 0.15, 0, headR * 1.15, headR * 1.0, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // head shape — vivid green elongated ellipse with strong gradient
-      ctx.shadowColor = "rgba(0,255,136,0.8)";
+      // head shape — vivid amber/orange elongated ellipse with strong gradient
+      ctx.shadowColor = "rgba(255,140,40,0.8)";
       ctx.shadowBlur = 22;
       const hgrad = ctx.createRadialGradient(-headR * 0.25, -headR * 0.4, 0, 0, 0, headR * 1.2);
-      hgrad.addColorStop(0, "#B0FFD0");
-      hgrad.addColorStop(0.4, "#46F08C");
-      hgrad.addColorStop(0.8, "#22B85F");
-      hgrad.addColorStop(1, "#0F7A3D");
+      hgrad.addColorStop(0, "#FFE4B5");
+      hgrad.addColorStop(0.4, "#FFB347");
+      hgrad.addColorStop(0.8, "#EA580C");
+      hgrad.addColorStop(1, "#9A3412");
       ctx.fillStyle = hgrad;
       ctx.beginPath();
       ctx.ellipse(headR * 0.12, 0, headR * 1.05, headR * 0.92, 0, 0, Math.PI * 2);
@@ -455,7 +455,7 @@ const SnakeMathPage = ({
       ctx.shadowBlur = 0;
 
       // dorsal stripe on head
-      ctx.strokeStyle = "rgba(10,80,40,0.6)";
+      ctx.strokeStyle = "rgba(80,30,10,0.6)";
       ctx.lineWidth = headR * 0.18;
       ctx.beginPath();
       ctx.moveTo(-headR * 0.7, 0);
@@ -463,7 +463,7 @@ const SnakeMathPage = ({
       ctx.stroke();
 
       // nostrils
-      ctx.fillStyle = "rgba(0,30,15,0.7)";
+      ctx.fillStyle = "rgba(40,15,5,0.75)";
       [-1, 1].forEach(s => {
         ctx.beginPath();
         ctx.ellipse(headR * 0.92, s * headR * 0.18, headR * 0.05, headR * 0.08, 0, 0, Math.PI * 2);
