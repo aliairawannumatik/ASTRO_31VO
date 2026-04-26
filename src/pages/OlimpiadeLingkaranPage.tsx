@@ -331,7 +331,15 @@ const materiSections: MateriSection[] = [
     borderColor: "border-indigo-500/30",
     content: (
       <div className="space-y-4">
-        <UnsurLingkaranSVG />
+        <div className="flex justify-center">
+          <div className="bg-white rounded-lg p-2 shadow-md max-w-md w-full flex justify-center">
+            <img
+              src="/lingkaran-unsur.png"
+              alt="Unsur-unsur Lingkaran"
+              className="max-w-full h-auto object-contain rounded"
+            />
+          </div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {[
             { name: "Titik Pusat", desc: "Titik O di tengah lingkaran, berjarak sama ke semua titik pada lingkaran.", color: "border-indigo-400/40 bg-indigo-500/5", dot: "bg-indigo-400" },
