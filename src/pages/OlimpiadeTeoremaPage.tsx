@@ -11,6 +11,7 @@ import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPytha
 import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
 import bangunABCDESoal7Img from "@assets/image_1777204803383.png";
 import layangKapalSoal18Img from "@assets/image_1777205277003.png";
+import bangunABEFCDSoal20Img from "@assets/image_1777205316310.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1148,6 +1149,28 @@ const OlimpiadeTeoremaPage = () => {
                       ))}
                     </div>
                   </>
+                ) : soal.no === 20 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal.split('\n')[0])}
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <img
+                        src={bangunABEFCDSoal20Img}
+                        alt="Bangun ABEFCD soal nomor 20"
+                        className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                        data-testid="img-soal-pyth-dasar-20"
+                      />
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      {soal.soal.split('\n').slice(1).map((line, lineIdx) => (
+                        <span key={lineIdx}>
+                          {lineIdx > 0 && <br />}
+                          {renderWithLatex(line)}
+                        </span>
+                      ))}
+                    </div>
+                  </>
                 ) : (
                   <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                     <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
@@ -1174,7 +1197,6 @@ const OlimpiadeTeoremaPage = () => {
                 )}
                 {soal.no === 11 && <TabelSegitiga11 />}
                 {soal.no === 15 && <SegitigaXSVG />}
-                {soal.no === 20 && <BangunABEFCDSVG />}
                 {soal.no === 21 && <PentagonSoal21SVG />}
                 {soal.no === 23 && <LayangLayangABCDSVG />}
                 {soal.no === 24 && <JajargenjangABCDSVG />}
