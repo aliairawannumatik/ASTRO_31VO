@@ -84,6 +84,49 @@ const KoordinatKartesiusSVG = () => {
   );
 };
 
+// SVG: Kuadran I-IV dengan titik-titik (x, y), (-x, y), (-x, -y), (x, -y)
+const KuadranAbsisOrdinatSVG = () => {
+  const W = 320, H = 280;
+  const cx = W / 2, cy = H / 2;
+  const dx = 70, dy = 50;
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        <defs>
+          <marker id="arrowKuadran" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L6,4 L0,8 Z" fill="#fbbf24" />
+          </marker>
+        </defs>
+        {/* Sumbu Y */}
+        <line x1={cx} y1={H - 10} x2={cx} y2={14} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowKuadran)" />
+        {/* Sumbu X */}
+        <line x1={10} y1={cy} x2={W - 14} y2={cy} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowKuadran)" />
+        {/* Persegi panjang penghubung 4 titik */}
+        <rect x={cx - dx} y={cy - dy} width={dx * 2} height={dy * 2} fill="none" stroke="#22d3ee" strokeWidth="1.5" />
+        {/* Titik-titik sudut */}
+        <circle cx={cx + dx} cy={cy - dy} r="3" fill="#22d3ee" />
+        <circle cx={cx - dx} cy={cy - dy} r="3" fill="#22d3ee" />
+        <circle cx={cx - dx} cy={cy + dy} r="3" fill="#22d3ee" />
+        <circle cx={cx + dx} cy={cy + dy} r="3" fill="#22d3ee" />
+        {/* Label sumbu */}
+        <text x={cx + 8} y={18} fill="#fbbf24" fontSize="12" fontWeight="bold">Y</text>
+        <text x={W - 16} y={cy - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">X</text>
+        {/* Label kuadran */}
+        <text x={20} y={28} fill="#e5e7eb" fontSize="11" fontWeight="bold">Kuadran II</text>
+        <text x={W - 20} y={28} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">Kuadran I</text>
+        <text x={20} y={H - 10} fill="#e5e7eb" fontSize="11" fontWeight="bold">Kuadran III</text>
+        <text x={W - 20} y={H - 10} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">Kuadran IV</text>
+        {/* Label koordinat titik */}
+        <text x={cx - dx - 6} y={cy - dy - 6} fill="#22d3ee" fontSize="11" textAnchor="end">(-x, y)</text>
+        <text x={cx + dx + 6} y={cy - dy - 6} fill="#22d3ee" fontSize="11">(x, y)</text>
+        <text x={cx - dx - 6} y={cy + dy + 14} fill="#22d3ee" fontSize="11" textAnchor="end">(-x, -y)</text>
+        <text x={cx + dx + 6} y={cy + dy + 14} fill="#22d3ee" fontSize="11">(x, -y)</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -292,6 +335,14 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                             <div key={`wrap-${i}`}>
                               {renderedLine}
                               <KoordinatKartesiusSVG />
+                            </div>
+                          );
+                        }
+                        if (idx === 0 && trimmed.includes('(absis) dan koordinat y disebut (ordinat)')) {
+                          return (
+                            <div key={`wrap-abs-${i}`}>
+                              {renderedLine}
+                              <KuadranAbsisOrdinatSVG />
                             </div>
                           );
                         }
