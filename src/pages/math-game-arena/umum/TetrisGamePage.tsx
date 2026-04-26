@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
@@ -577,20 +576,28 @@ const TetrisGamePage = ({
         </div>
 
         <div
-          className="fixed left-0 bottom-0 z-50 p-4"
+          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-3 md:p-4 pointer-events-none"
           style={{
-            paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
-            paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
+            paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))",
+            paddingLeft: "max(0.75rem, env(safe-area-inset-left, 0px))",
+            paddingRight: "max(0.75rem, env(safe-area-inset-right, 0px))",
           }}
         >
           <button
-            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(homePath); }}
-            className="w-11 h-11 rounded-full bg-card/80 backdrop-blur border border-border 
-              flex items-center justify-center text-fuchsia-300 hover:border-fuchsia-400/60 
-              hover:shadow-[0_0_20px_rgba(217,70,239,0.5)] transition-all duration-300 cursor-pointer"
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+            className="pointer-events-auto shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(217,70,239,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
             title="Kembali"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <span className="text-base leading-none">←</span>
+            <span className="hidden sm:inline">Kembali</span>
+          </button>
+          <button
+            onClick={() => { playPopSound(); navigate(homePath); }}
+            className="pointer-events-auto shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(217,70,239,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Menu Utama"
+          >
+            <span className="text-base leading-none">🏠</span>
+            <span className="hidden sm:inline">Home</span>
           </button>
         </div>
       </>
@@ -602,28 +609,26 @@ const TetrisGamePage = ({
       {isLight ? <Snowfall /> : <Starfield />}
 
       <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
-        <div className="flex items-center justify-between w-full mb-3">
-          <button
-            onClick={() => { playPopSound(); navigate(homePath); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
-            title="Menu Utama"
-          >
-            🏠
-          </button>
-          <div className="flex-1 text-center">
-            <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan leading-tight">
-              🧩 TETRIS NUMATIK
-            </h1>
-            {topicLabel && (
-              <p className="font-body text-[10px] text-white/50 mt-0.5">{topicLabel}</p>
-            )}
-          </div>
+        <div className="flex items-center justify-between w-full mb-3 gap-2">
           <button
             onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
-            title="Keluar"
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(217,70,239,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Kembali ke pilihan game"
           >
-            ✕
+            <span className="text-base leading-none">←</span>
+            <span className="hidden sm:inline">Kembali</span>
+          </button>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan flex-1 text-center leading-tight">
+            🧩 TETRIS NUMATIK
+            {topicLabel ? <span className="block text-[10px] md:text-xs text-fuchsia-300 font-body mt-0.5">{topicLabel}</span> : null}
+          </h1>
+          <button
+            onClick={() => { playPopSound(); navigate(homePath); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(217,70,239,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Menu Utama"
+          >
+            <span className="text-base leading-none">🏠</span>
+            <span className="hidden sm:inline">Home</span>
           </button>
         </div>
 
