@@ -547,11 +547,11 @@ const TetrisGamePage = ({
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">2</span>
-                  <span>Gunakan tombol <strong className="text-fuchsia-300">◀ / ▶</strong> untuk menggeser balok dan <strong className="text-fuchsia-300">↑</strong> untuk memutarnya</span>
+                  <span>Gunakan tombol <strong className="text-fuchsia-300">◀ / ▶</strong> untuk menggeser balok dan <strong className="text-yellow-300">PUTAR</strong> (atau <strong className="text-fuchsia-300">↑</strong>) untuk mengubah posisi balok</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">3</span>
-                  <span>Tekan <strong className="text-yellow-300">DROP</strong> untuk menjatuhkan balok lebih cepat</span>
+                  <span>Tekan tombol <strong className="text-fuchsia-300">↓</strong> untuk menjatuhkan balok langsung ke bawah</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">4</span>
@@ -678,9 +678,9 @@ const TetrisGamePage = ({
             <div className="flex gap-2 justify-center">
               <button onPointerDown={moveLeft} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-lg">◀</button>
               <button onPointerDown={rotatePiece} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-sm">↑</button>
-              <button onPointerDown={moveDown} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-sm">↓</button>
+              <button onPointerDown={hardDrop} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-sm">↓</button>
               <button onPointerDown={moveRight} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-lg">▶</button>
-              <button onPointerDown={hardDrop} className="bg-accent/20 border border-accent text-accent font-bold w-12 h-12 rounded-xl hover:bg-accent/40 transition cursor-pointer select-none active:scale-95 text-xs leading-tight">DROP</button>
+              <button onPointerDown={rotatePiece} className="bg-accent/20 border border-accent text-accent font-bold w-12 h-12 rounded-xl hover:bg-accent/40 transition cursor-pointer select-none active:scale-95 text-xs leading-tight">PUTAR</button>
             </div>
           </div>
 
