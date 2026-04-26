@@ -813,6 +813,58 @@ const HelikopterOABCSVG = () => {
   );
 };
 
+// SVG: Segitiga ABC dengan titik D di AB untuk Soal No. 29
+// Siku-siku di B, BC = 5 cm, ∠A = 30°, ∠CDB = 45°
+const SegitigaABCD30_45_SVG = () => {
+  const W = 350, H = 240;
+
+  const A = { x: 30, y: 200 };
+  const B = { x: 310, y: 200 };
+  const C = { x: 310, y: 60 };
+  const D = { x: 170, y: 200 };
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm sm:max-w-md rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga ABC besar */}
+        <polygon
+          points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
+          fill="rgba(34,211,238,0.06)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+        {/* Garis bantu DC (di dalam segitiga, menghubungkan D ke C) */}
+        <line x1={D.x} y1={D.y} x2={C.x} y2={C.y} stroke="#22d3ee" strokeWidth="1.6" />
+
+        {/* Tanda siku-siku di B */}
+        <rect x={B.x - 12} y={B.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+
+        {/* Busur sudut 30° di A */}
+        <path d={`M ${A.x + 24} ${A.y} A 24 24 0 0 0 ${A.x + 20.78} ${A.y - 12}`} fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+        <text x={A.x + 26} y={A.y - 4} fill="#fbbf24" fontSize="12" fontWeight="bold">30°</text>
+
+        {/* Busur sudut 45° di D (antara DA→DC) */}
+        <path d={`M ${D.x - 22} ${D.y} A 22 22 0 0 0 ${D.x - 15.56} ${D.y - 15.56}`} fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+        <text x={D.x - 24} y={D.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">45°</text>
+
+        {/* Label "5 cm" di samping BC */}
+        <text x={B.x + 6} y={(B.y + C.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">5 cm</text>
+
+        {/* Titik sudut */}
+        {[A, B, C, D].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
+        ))}
+
+        {/* Label titik */}
+        <text x={A.x - 6} y={A.y + 6} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x + 6} y={B.y + 18} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
+        <text x={C.x + 6} y={C.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x} y={D.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -1094,6 +1146,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 24 && <JajargenjangABCDSVG />}
                 {soal.no === 27 && <SegitigaPQR30SVG />}
                 {soal.no === 28 && <HelikopterOABCSVG />}
+                {soal.no === 29 && <SegitigaABCD30_45_SVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
