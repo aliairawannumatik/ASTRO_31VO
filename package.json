@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"tsx watch server.ts\" \"vite\"",
+    "dev": "npx concurrently \"npx tsx watch server.ts\" \"npx vite\"",
     "server": "tsx watch server.ts",
     "build": "vite build",
     "build:dev": "vite build --mode development",
