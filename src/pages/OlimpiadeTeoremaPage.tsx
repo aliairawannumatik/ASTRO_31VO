@@ -162,6 +162,37 @@ const SegitigaPQRSVG = () => {
   );
 };
 
+// SVG: Segitiga siku-siku ABC untuk Soal No. 4 (kaki 18 dan 24, sisi miring AC)
+const SegitigaABC182430SVG = () => {
+  const W = 280, H = 200;
+  const Ax = 30, Ay = H - 30;          // kiri-bawah
+  const Bx = W - 30, By = H - 30;      // kanan-bawah (siku-siku)
+  const Cx = W - 30, Cy = 25;          // kanan-atas
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga */}
+        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
+        {/* Tanda siku-siku di B (kanan-bawah) */}
+        <rect x={Bx - 12} y={By - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+        {/* Titik sudut */}
+        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
+        <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
+        <circle cx={Cx} cy={Cy} r="3" fill="#22d3ee" />
+        {/* Label titik sudut */}
+        <text x={Ax - 10} y={Ay + 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={Bx + 8} y={By + 12} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
+        <text x={Cx + 8} y={Cy + 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+        {/* Label sisi: AB = 24 cm (alas), BC = 18 cm (kanan), AC = ? (miring) */}
+        <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">24 cm</text>
+        <text x={Bx - 8} y={(By + Cy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">18 cm</text>
+        <text x={(Ax + Cx) / 2 - 8} y={(Ay + Cy) / 2 - 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end" transform={`rotate(-36 ${(Ax + Cx) / 2 - 8} ${(Ay + Cy) / 2 - 4})`}>?</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -430,6 +461,7 @@ const OlimpiadeTeoremaPage = () => {
                   ))}
                 </div>
                 {soal.no === 3 && <SegitigaPQRSVG />}
+                {soal.no === 4 && <SegitigaABC182430SVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
