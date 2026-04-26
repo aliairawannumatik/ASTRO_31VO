@@ -344,6 +344,10 @@ const TetrisGamePage = ({
     dropTimerRef.current = 0;
     lastTimeRef.current = 0;
     slowDropRef.current = false;
+    if (hardDropAnimRef.current) {
+      clearInterval(hardDropAnimRef.current);
+      hardDropAnimRef.current = null;
+    }
     setScore(0);
     setLines(0);
     setLevel(1);
@@ -389,13 +393,38 @@ const TetrisGamePage = ({
     render();
   }, [started, render, lockPiece]);
 
+  // Slow-motion hard drop: instead of teleporting the piece to the bottom,
+  // animate it downward one row at a time so the user can see the descent.
+  const hardDropAnimRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const HARD_DROP_STEP_MS = 35; // ~28 rows/sec — fast slide but clearly visible
+
+  const stopHardDropAnim = useCallback(() => {
+    if (hardDropAnimRef.current) {
+      clearInterval(hardDropAnimRef.current);
+      hardDropAnimRef.current = null;
+    }
+  }, []);
+
   const hardDrop = useCallback(() => {
     if (!started || gameOverRef.current || pausedRef.current) return;
-    const ghost = getGhost(gridRef.current, pieceRef.current);
-    pieceRef.current = { ...pieceRef.current, y: ghost.y };
-    lockPiece();
-    render();
-  }, [started, render, lockPiece]);
+    if (hardDropAnimRef.current) return; // animation already in progress
+
+    hardDropAnimRef.current = setInterval(() => {
+      if (gameOverRef.current || pausedRef.current || guruQuiz.isPausedRef.current) {
+        stopHardDropAnim();
+        return;
+      }
+      if (isValid(gridRef.current, pieceRef.current, 0, 1)) {
+        pieceRef.current = { ...pieceRef.current, y: pieceRef.current.y + 1 };
+        dropTimerRef.current = 0;
+        render();
+      } else {
+        stopHardDropAnim();
+        lockPiece();
+        render();
+      }
+    }, HARD_DROP_STEP_MS);
+  }, [started, render, lockPiece, stopHardDropAnim, guruQuiz.isPausedRef]);
 
   const rotatePiece = useCallback(() => {
     if (!started || gameOverRef.current || pausedRef.current) return;
@@ -428,6 +457,10 @@ const TetrisGamePage = ({
     return () => {
       cancelAnimationFrame(animRef.current);
       if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+      if (hardDropAnimRef.current) {
+        clearInterval(hardDropAnimRef.current);
+        hardDropAnimRef.current = null;
+      }
     };
   }, []);
 
