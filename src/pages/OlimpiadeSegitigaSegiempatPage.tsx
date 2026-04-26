@@ -1081,7 +1081,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </span>
                   ))}
                 </div>
-                {([1,2,3,4,5,6,8,10,11,12,13,15,20,22,23,24,25] as number[]).includes(soal.no) && (
+                {([1,2,3,4,5,6,8,10,11,12,13,15,20,22,23,24,25,26,27,28,29,30,33,35,36,38,40,44,45,46,47] as number[]).includes(soal.no) && (
                   <div className="flex justify-center my-3">
                     <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                       <img
