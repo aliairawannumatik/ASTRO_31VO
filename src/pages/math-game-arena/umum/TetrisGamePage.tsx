@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
+import { spaceBg } from "@/assets/placeholder";
 
 const COLS = 10;
 const ROWS = 20;
@@ -397,6 +399,140 @@ const TetrisGamePage = ({
     }
   };
 
+  if (!started) {
+    const tetrominoBlocks: Array<{ pos: string; anim: string; cells: number[][]; color: string; glow: string; size: string }> = [
+      { pos: "top-[8%] left-[6%]", anim: "animate-float-slow", cells: [[1,1,1,1]], color: "bg-cyan-400", glow: "rgba(0,255,255,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
+      { pos: "top-[12%] right-[10%]", anim: "animate-float-medium", cells: [[1,1],[1,1]], color: "bg-yellow-400", glow: "rgba(255,215,0,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
+      { pos: "top-[40%] left-[4%]", anim: "animate-float-fast", cells: [[0,1,0],[1,1,1]], color: "bg-fuchsia-500", glow: "rgba(217,70,239,0.6)", size: "w-3 h-3 md:w-4 md:h-4" },
+      { pos: "top-[35%] right-[5%]", anim: "animate-float-slow", cells: [[1,0],[1,0],[1,1]], color: "bg-orange-400", glow: "rgba(255,140,0,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
+      { pos: "bottom-[18%] left-[8%]", anim: "animate-float-medium", cells: [[0,1],[0,1],[1,1]], color: "bg-blue-500", glow: "rgba(30,144,255,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
+      { pos: "bottom-[22%] right-[7%]", anim: "animate-float-fast", cells: [[0,1,1],[1,1,0]], color: "bg-emerald-400", glow: "rgba(0,255,136,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
+      { pos: "bottom-[8%] left-[14%]", anim: "animate-float-slow", cells: [[1,1,0],[0,1,1]], color: "bg-pink-500", glow: "rgba(255,68,68,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
+      { pos: "top-[55%] right-[14%]", anim: "animate-float-fast", cells: [[1,1],[1,1]], color: "bg-fuchsia-400", glow: "rgba(232,121,249,0.55)", size: "w-2.5 h-2.5 md:w-3.5 md:h-3.5" },
+    ];
+
+    return (
+      <>
+        <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+          <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-950/80 via-background/40 to-fuchsia-950/70" />
+          <Starfield />
+
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {tetrominoBlocks.map((t, i) => (
+              <div key={i} className={`absolute ${t.pos} ${t.anim}`}>
+                <div className="flex flex-col gap-[2px] opacity-70">
+                  {t.cells.map((row, r) => (
+                    <div key={r} className="flex gap-[2px]">
+                      {row.map((cell, c) =>
+                        cell ? (
+                          <div
+                            key={c}
+                            className={`${t.size} ${t.color} rounded-sm`}
+                            style={{ boxShadow: `0 0 12px ${t.glow}, inset 0 2px 0 rgba(255,255,255,0.35), inset 0 -2px 0 rgba(0,0,0,0.25)` }}
+                          />
+                        ) : (
+                          <div key={c} className={t.size} />
+                        )
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative z-10 text-center animate-slide-up px-4">
+            <div className="mb-2">
+              <h1 className="font-display text-3xl md:text-5xl font-black tracking-wider">
+                <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(217,70,239,0.55)]">
+                  MATH GAME ARENA
+                </span>
+              </h1>
+            </div>
+            <div className="mb-2">
+              <h2 className="font-display text-4xl md:text-6xl font-black tracking-[0.18em]">
+                <span className="bg-gradient-to-r from-fuchsia-300 via-pink-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(236,72,153,0.6)]">
+                  🧩 TETRIS
+                </span>
+              </h2>
+            </div>
+            <div className="mb-6">
+              <h3 className="font-display text-2xl md:text-4xl font-black tracking-[0.25em]">
+                <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(255,180,0,0.55)]">
+                  NUMATIK
+                </span>
+              </h3>
+            </div>
+
+            <div className="inline-block mb-8">
+              <div className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500/25 to-fuchsia-500/25 border border-fuchsia-400/40 backdrop-blur-sm">
+                <span className="font-display text-sm md:text-base font-bold text-fuchsia-200 tracking-wide">
+                  {topicLabel ?? "MATH GAME"}
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-card/70 backdrop-blur-md border border-fuchsia-500/30 rounded-2xl p-6 max-w-md mx-auto mb-8 shadow-[0_0_30px_rgba(217,70,239,0.15)]">
+              <h3 className="font-display text-lg font-bold text-fuchsia-300 mb-4 flex items-center justify-center gap-2">
+                <span className="text-xl">🧩</span> CARA BERMAIN <span className="text-xl">🧩</span>
+              </h3>
+              <ul className="text-left space-y-3 font-body text-sm text-foreground/90">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">1</span>
+                  <span>Susun balok yang jatuh agar membentuk <strong className="text-fuchsia-300">baris penuh</strong> tanpa celah</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">2</span>
+                  <span>Gunakan tombol <strong className="text-fuchsia-300">◀ / ▶</strong> untuk menggeser balok dan <strong className="text-fuchsia-300">↑</strong> untuk memutarnya</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">3</span>
+                  <span>Tekan <strong className="text-yellow-300">DROP</strong> untuk menjatuhkan balok lebih cepat</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">4</span>
+                  <span>Setiap baris yang penuh akan hilang dan menambah <strong className="text-green-400">skor</strong></span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">5</span>
+                  <span className="text-xs">Di komputer: <strong className="text-fuchsia-300">← →</strong> geser, <strong className="text-fuchsia-300">↑</strong> putar, <strong className="text-fuchsia-300">↓</strong> turun, <strong className="text-yellow-300">SPASI</strong> hard drop, <strong className="text-fuchsia-300">P</strong> pause</span>
+                </li>
+              </ul>
+            </div>
+
+            <button
+              onClick={startGame}
+              className="relative font-display text-xl md:text-2xl px-14 py-5 rounded-2xl bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-black tracking-wider cursor-pointer shadow-[0_0_40px_rgba(217,70,239,0.55)] hover:shadow-[0_0_60px_rgba(217,70,239,0.75)] transition-shadow duration-300 animate-pulse-scale"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                <span>&#9658;</span> MULAI GAME <span>&#9658;</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          className="fixed left-0 bottom-0 z-50 p-4"
+          style={{
+            paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
+            paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
+          }}
+        >
+          <button
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(homePath); }}
+            className="w-11 h-11 rounded-full bg-card/80 backdrop-blur border border-border 
+              flex items-center justify-center text-fuchsia-300 hover:border-fuchsia-400/60 
+              hover:shadow-[0_0_20px_rgba(217,70,239,0.5)] transition-all duration-300 cursor-pointer"
+            title="Kembali"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
@@ -436,26 +572,6 @@ const TetrisGamePage = ({
               onTouchEnd={onTouchEnd}
             >
               <canvas ref={canvasRef} width={CANVAS_W} height={CANVAS_H} style={{ display: "block", width: '100%', height: '100%' }} />
-
-              {!started && !gameOver && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-                  <div className="text-center px-4">
-                    <div className="text-5xl mb-3">🧩</div>
-                    <h2 className="font-display text-2xl font-bold text-accent mb-3">TETRIS</h2>
-                    <p className="text-white/60 text-xs mb-4 leading-relaxed">
-                      ← → Geser &nbsp;·&nbsp; ↑ Putar<br />
-                      ↓ Turun &nbsp;·&nbsp; SPASI Hard Drop<br />
-                      P / ESC Pause
-                    </p>
-                    <button
-                      onClick={startGame}
-                      className="bg-accent text-black font-bold px-8 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg"
-                    >
-                      ▶ MULAI
-                    </button>
-                  </div>
-                </div>
-              )}
 
               {gameOver && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/75">

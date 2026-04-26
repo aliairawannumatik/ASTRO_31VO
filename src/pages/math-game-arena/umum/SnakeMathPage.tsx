@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
+import { spaceBg } from "@/assets/placeholder";
 
 // ── Grid ──────────────────────────────────────────────────────────────────
 const COLS = 20;
@@ -616,6 +618,127 @@ const SnakeMathPage = ({
 
   useEffect(() => () => { if (fbTimerRef.current) clearTimeout(fbTimerRef.current); }, []);
 
+  if (phase === "idle") {
+    const decorations: Array<{ pos: string; anim: string; emoji: string; size: string; glow: string; opacity: string }> = [
+      { pos: "top-[8%] left-[7%]", anim: "animate-float-slow", emoji: "🍎", size: "text-3xl md:text-5xl", glow: "drop-shadow-[0_0_15px_rgba(255,80,80,0.55)]", opacity: "opacity-80" },
+      { pos: "top-[14%] right-[10%]", anim: "animate-float-medium", emoji: "🍏", size: "text-2xl md:text-4xl", glow: "drop-shadow-[0_0_15px_rgba(100,255,150,0.55)]", opacity: "opacity-75" },
+      { pos: "top-[42%] left-[4%]", anim: "animate-float-fast", emoji: "⭐", size: "text-2xl md:text-3xl", glow: "drop-shadow-[0_0_15px_rgba(255,215,0,0.55)]", opacity: "opacity-70" },
+      { pos: "top-[36%] right-[6%]", anim: "animate-float-slow", emoji: "🍒", size: "text-3xl md:text-4xl", glow: "drop-shadow-[0_0_15px_rgba(255,100,100,0.55)]", opacity: "opacity-75" },
+      { pos: "bottom-[18%] left-[8%]", anim: "animate-float-medium", emoji: "🍇", size: "text-3xl md:text-5xl", glow: "drop-shadow-[0_0_15px_rgba(180,100,255,0.55)]", opacity: "opacity-75" },
+      { pos: "bottom-[24%] right-[8%]", anim: "animate-float-fast", emoji: "🍊", size: "text-2xl md:text-4xl", glow: "drop-shadow-[0_0_15px_rgba(255,165,0,0.55)]", opacity: "opacity-75" },
+      { pos: "bottom-[10%] left-[18%]", anim: "animate-float-slow", emoji: "✨", size: "text-2xl md:text-3xl", glow: "drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]", opacity: "opacity-80" },
+      { pos: "top-[55%] right-[16%]", anim: "animate-float-fast", emoji: "🐍", size: "text-3xl md:text-5xl", glow: "drop-shadow-[0_0_18px_rgba(0,255,136,0.6)]", opacity: "opacity-80" },
+    ];
+
+    return (
+      <>
+        <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+          <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-background/40 to-teal-950/70" />
+          <Starfield />
+
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {decorations.map((d, i) => (
+              <div key={i} className={`absolute ${d.pos} ${d.anim}`}>
+                <span className={`${d.size} ${d.glow} ${d.opacity}`}>{d.emoji}</span>
+              </div>
+            ))}
+            <div className="absolute bottom-[6%] left-1/2 -translate-x-1/2 animate-hover-ship">
+              <span className="text-5xl md:text-7xl drop-shadow-[0_0_25px_rgba(0,255,136,0.6)]">🐍</span>
+            </div>
+          </div>
+
+          <div className="relative z-10 text-center animate-slide-up px-4">
+            <div className="mb-2">
+              <h1 className="font-display text-3xl md:text-5xl font-black tracking-wider">
+                <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,255,136,0.55)]">
+                  MATH GAME ARENA
+                </span>
+              </h1>
+            </div>
+            <div className="mb-2">
+              <h2 className="font-display text-4xl md:text-6xl font-black tracking-[0.18em]">
+                <span className="bg-gradient-to-r from-emerald-300 via-green-400 to-lime-400 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(0,255,136,0.6)]">
+                  🐍 SNAKE
+                </span>
+              </h2>
+            </div>
+            <div className="mb-6">
+              <h3 className="font-display text-2xl md:text-4xl font-black tracking-[0.25em]">
+                <span className="bg-gradient-to-r from-yellow-300 via-lime-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(190,255,80,0.55)]">
+                  MATEMATIKA
+                </span>
+              </h3>
+            </div>
+
+            <div className="inline-block mb-8">
+              <div className="px-6 py-2 rounded-full bg-gradient-to-r from-emerald-500/25 to-teal-500/25 border border-emerald-400/40 backdrop-blur-sm">
+                <span className="font-display text-sm md:text-base font-bold text-emerald-200 tracking-wide">
+                  {topicLabel ?? "MATH GAME"}
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-card/70 backdrop-blur-md border border-emerald-500/30 rounded-2xl p-6 max-w-md mx-auto mb-8 shadow-[0_0_30px_rgba(0,255,136,0.15)]">
+              <h3 className="font-display text-lg font-bold text-emerald-300 mb-4 flex items-center justify-center gap-2">
+                <span className="text-xl">🐍</span> CARA BERMAIN <span className="text-xl">🍎</span>
+              </h3>
+              <ul className="text-left space-y-3 font-body text-sm text-foreground/90">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">1</span>
+                  <span>Baca soal matematika di bagian atas layar</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">2</span>
+                  <span>Arahkan ular memakan angka <strong className="text-yellow-300">⭐ jawaban benar</strong> agar memanjang dan dapat skor</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">3</span>
+                  <span>Hindari angka <strong className="text-blue-300">🔷 salah</strong> — ular akan memendek!</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">4</span>
+                  <span>Jangan menabrak <strong className="text-red-400">tembok</strong> atau <strong className="text-red-400">tubuh sendiri</strong> — Game Over!</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">5</span>
+                  <span className="text-xs">Di komputer: gunakan <strong className="text-emerald-300">← ↑ → ↓</strong> atau <strong className="text-emerald-300">WASD</strong>. Di HP: swipe atau D-pad. Bonus <strong className="text-yellow-300">COMBO</strong> untuk benar berturut-turut!</span>
+                </li>
+              </ul>
+            </div>
+
+            <button
+              onClick={startGame}
+              className="relative font-display text-xl md:text-2xl px-14 py-5 rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-black tracking-wider cursor-pointer shadow-[0_0_40px_rgba(0,255,136,0.55)] hover:shadow-[0_0_60px_rgba(0,255,136,0.75)] transition-shadow duration-300 animate-pulse-scale"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                <span>&#9658;</span> MULAI GAME <span>&#9658;</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          className="fixed left-0 bottom-0 z-50 p-4"
+          style={{
+            paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
+            paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
+          }}
+        >
+          <button
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(homePath); }}
+            className="w-11 h-11 rounded-full bg-card/80 backdrop-blur border border-border 
+              flex items-center justify-center text-emerald-300 hover:border-emerald-400/60 
+              hover:shadow-[0_0_20px_rgba(0,255,136,0.5)] transition-all duration-300 cursor-pointer"
+            title="Kembali"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
@@ -674,29 +797,6 @@ const SnakeMathPage = ({
               feedback.good ? "bg-green-500/90 text-white" : "bg-red-500/90 text-white"
             }`}>
               {feedback.txt}
-            </div>
-          )}
-
-          {/* idle */}
-          {phase === "idle" && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/68">
-              <div className="text-center px-5 max-w-xs">
-                <div className="text-5xl mb-2">🐍</div>
-                <h2 className="font-display text-2xl font-bold text-accent mb-2">SNAKE MATEMATIKA</h2>
-                <p className="text-white/65 text-xs mb-4 leading-relaxed">
-                  Arahkan ular untuk memakan angka yang <span className="text-yellow-400 font-bold">⭐ benar</span> dari soal matematika!<br />
-                  Makan angka <span className="text-blue-400 font-bold">salah</span> → ular memendek<br />
-                  Tabrak tembok atau diri sendiri → Game Over!
-                </p>
-                <div className="flex justify-center gap-2 mb-4 text-xs flex-wrap">
-                  <span className="bg-yellow-500/20 border border-yellow-500/40 rounded-lg px-2 py-1">⭐ Jawaban Benar</span>
-                  <span className="bg-blue-500/20 border border-blue-500/40 rounded-lg px-2 py-1">🔷 Salah → Memendek</span>
-                </div>
-                <p className="text-white/40 text-xs mb-5">Makin banyak benar → makin cepat + COMBO bonus!</p>
-                <button onClick={startGame} className="bg-accent text-black font-bold px-10 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
-                  ▶ MULAI
-                </button>
-              </div>
             </div>
           )}
 
