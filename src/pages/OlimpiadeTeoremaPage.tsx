@@ -14,6 +14,7 @@ import layangKapalSoal18Img from "@assets/image_1777205277003.png";
 import bangunABEFCDSoal20Img from "@assets/image_1777205316310.png";
 import pentagonSoal21Img from "@assets/image_1777205396307.png";
 import segitigaABCD30_45_Soal29Img from "@assets/image_1777205490135.png";
+import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777205526814.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1269,14 +1270,36 @@ const OlimpiadeTeoremaPage = () => {
           <div className="space-y-4 animate-slide-up">
             {latihanOlimpiade.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
+                {soal.no === 1 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                      <span className="text-yellow-400 font-semibold">OSN Matematika 2003 Tingkat Kota</span>
+                      <br />
+                      Perhatikan gambar berikut.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <img
+                        src={persegiPanjangABCDSoalOlim1Img}
+                        alt="Persegi panjang ABCD dengan titik P di dalamnya soal olimpiade nomor 1"
+                        className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                        data-testid="img-soal-pyth-olim-1"
+                      />
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Panjang CP adalah ...
+                    </div>
+                  </>
+                ) : (
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
