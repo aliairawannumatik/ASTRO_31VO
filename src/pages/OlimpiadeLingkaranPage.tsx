@@ -123,35 +123,46 @@ const BusurJuringSVG = () => (
 );
 
 const PerbandinganSVG = () => (
-  <svg viewBox="0 0 280 180" className="w-full max-w-[240px] mx-auto">
-    <circle cx="140" cy="95" r="78" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
-    {/* sector 1 – angle ~80° */}
-    <path d="M140,95 L140,17 A78,78 0,0,1 212,65 Z"
-      fill="#7c3aed" fillOpacity="0.45" stroke="#a78bfa" strokeWidth="1.8" />
-    {/* sector 2 – angle ~120° */}
-    <path d="M140,95 L212,65 A78,78 0,0,1 140,173 Z"
-      fill="#0ea5e9" fillOpacity="0.35" stroke="#38bdf8" strokeWidth="1.8" />
-    {/* center */}
-    <circle cx="140" cy="95" r="3.5" fill="#f8fafc" />
+  <svg viewBox="0 0 320 290" className="w-full max-w-[320px] mx-auto">
+    {/* main circle */}
+    <circle cx="160" cy="145" r="115" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
 
-    {/* Angle arcs */}
-    <path d="M140,75 A20,20 0,0,1 155,85" fill="none" stroke="#a78bfa" strokeWidth="1.8" />
-    <path d="M155,85 A20,20 0,0,1 155,107" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    {/* Sector AOB (purple) — central angle α ≈ 40° (top) */}
+    <path d="M160,145 L140,31.7 A115,115 0,0,1 217.5,45.4 Z"
+      fill="#7c3aed" fillOpacity="0.45" stroke="#a78bfa" strokeWidth="2" />
 
-    {/* Labels */}
-    <text x="148" y="91" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
-    <text x="133" y="9" fill="#e2e8f0" fontSize="11">A</text>
-    <text x="218" y="66" fill="#e2e8f0" fontSize="11">B</text>
-    <text x="133" y="181" fill="#e2e8f0" fontSize="11">C</text>
-    <text x="157" y="79" fill="#c4b5fd" fontSize="10">α</text>
-    <text x="157" y="101" fill="#7dd3fc" fontSize="10">β</text>
+    {/* Sector COD (cyan) — central angle β ≈ 100° (lower-left) */}
+    <path d="M160,145 L199.3,253.1 A115,115 0,0,1 46.8,165 Z"
+      fill="#0ea5e9" fillOpacity="0.4" stroke="#38bdf8" strokeWidth="2" />
 
-    {/* Formula */}
-    <rect x="0" y="4" width="115" height="50" rx="7" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
-    <text x="57" y="20" fill="#a5b4fc" fontSize="8.5" textAnchor="middle" fontWeight="bold">PERBANDINGAN</text>
-    <text x="10" y="34" fill="#c4b5fd" fontSize="8">∠AOB   arc AB   Juring AOB</text>
-    <text x="10" y="46" fill="#f9a8d4" fontSize="8">——— = ——— = ——————</text>
-    <text x="10" y="58" fill="#c4b5fd" fontSize="8">∠BOC   arc BC   Juring BOC</text>
+    {/* center O */}
+    <circle cx="160" cy="145" r="4" fill="#f8fafc" />
+
+    {/* Angle arc α at O (between OA and OB) */}
+    <path d="M155.1,117.4 A28,28 0,0,1 174,120.7" fill="none" stroke="#fbbf24" strokeWidth="2.2" />
+    {/* Angle arc β at O (between OC and OD) */}
+    <path d="M169.6,171.3 A28,28 0,0,1 132.4,149.9" fill="none" stroke="#fbbf24" strokeWidth="2.2" />
+
+    {/* Point dots */}
+    <circle cx="140" cy="31.7" r="3" fill="#f8fafc" />
+    <circle cx="217.5" cy="45.4" r="3" fill="#f8fafc" />
+    <circle cx="199.3" cy="253.1" r="3" fill="#f8fafc" />
+    <circle cx="46.8" cy="165" r="3" fill="#f8fafc" />
+
+    {/* Vertex labels */}
+    <text x="135" y="155" fill="#e2e8f0" fontSize="13" fontWeight="bold">O</text>
+    <text x="125" y="24" fill="#e2e8f0" fontSize="13" fontWeight="bold">A</text>
+    <text x="222" y="40" fill="#e2e8f0" fontSize="13" fontWeight="bold">B</text>
+    <text x="204" y="270" fill="#e2e8f0" fontSize="13" fontWeight="bold">C</text>
+    <text x="30" y="170" fill="#e2e8f0" fontSize="13" fontWeight="bold">D</text>
+
+    {/* Angle labels */}
+    <text x="160" y="125" fill="#fbbf24" fontSize="14" fontWeight="bold">α</text>
+    <text x="142" y="167" fill="#fbbf24" fontSize="14" fontWeight="bold">β</text>
+
+    {/* Sector name labels */}
+    <text x="170" y="75" fill="#c4b5fd" fontSize="11" fontStyle="italic" fontWeight="bold">Juring AOB</text>
+    <text x="60" y="218" fill="#7dd3fc" fontSize="11" fontStyle="italic" fontWeight="bold">Juring COD</text>
   </svg>
 );
 
