@@ -108,6 +108,37 @@ const Segitiga306090SVG = () => {
   );
 };
 
+// SVG: Segitiga siku-siku sama kaki 45-45-90 dengan sisi 1, 1, √2
+const Segitiga454590SVG = () => {
+  const W = 220, H = 200;
+  // Vertices: kiri-bawah (45°), kanan-bawah (siku 90°), kanan-atas (45°)
+  const Ax = 30, Ay = H - 30;          // kiri-bawah
+  const Bx = W - 40, By = H - 30;      // kanan-bawah (siku-siku)
+  const Cx = W - 40, Cy = 30;          // kanan-atas
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga */}
+        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="none" stroke="#22d3ee" strokeWidth="2" />
+        {/* Tanda siku-siku di kanan-bawah */}
+        <rect x={Bx - 12} y={By - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1" />
+        {/* Busur sudut 45° di kiri-bawah */}
+        <path d={`M ${Ax + 24} ${Ay} A 24 24 0 0 0 ${Ax + 17} ${Ay - 17}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        {/* Busur sudut 45° di kanan-atas */}
+        <path d={`M ${Cx} ${Cy + 24} A 24 24 0 0 0 ${Cx - 17} ${Cy + 17}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        {/* Label sudut */}
+        <text x={Ax + 28} y={Ay - 4} fill="#fbbf24" fontSize="11" fontWeight="bold">45°</text>
+        <text x={Cx - 32} y={Cy + 18} fill="#fbbf24" fontSize="11" fontWeight="bold">45°</text>
+        {/* Label sisi: 1 (alas), 1 (vertikal), √2 (miring) */}
+        <text x={(Ax + Bx) / 2} y={By + 18} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">1</text>
+        <text x={Bx + 8} y={(By + Cy) / 2 + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold">1</text>
+        <text x={(Ax + Cx) / 2 - 4} y={(Ay + Cy) / 2 - 4} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">√2</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -327,6 +358,7 @@ const OlimpiadeTeoremaPage = () => {
                             <div key={i}>
                               <div className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{renderWithLatex(trimmed)}</div>
                               {idx === 3 && trimmed.startsWith('1.') && <Segitiga306090SVG />}
+                              {idx === 3 && trimmed.startsWith('2.') && <Segitiga454590SVG />}
                             </div>
                           );
                         }
