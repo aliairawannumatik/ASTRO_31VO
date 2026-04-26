@@ -378,6 +378,62 @@ const SegitigaXSVG = () => {
   );
 };
 
+// SVG: Layang-layang dan kapal untuk Soal No. 18
+// Segitiga siku-siku 45° - 90°, tinggi vertikal = 150 m, sisi miring (tali) = ?
+const LayangKapalSVG = () => {
+  const W = 320, H = 240;
+  // Posisi kapal (kiri-bawah) dan ujung vertikal (kanan-bawah)
+  const Kx = 50, Ky = H - 40;          // kapal
+  const Bx = W - 50, By = H - 40;      // titik kaki vertikal (sudut 90°)
+  const Tx = W - 50, Ty = 50;          // posisi layangan (atas)
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Permukaan air */}
+        <line x1="10" y1={Ky + 6} x2={W - 10} y2={Ky + 6} stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="3,3" opacity="0.6" />
+
+        {/* Segitiga */}
+        <polygon points={`${Kx},${Ky} ${Bx},${By} ${Tx},${Ty}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
+        {/* Tanda siku-siku */}
+        <rect x={Bx - 12} y={By - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+
+        {/* Kapal (perahu sederhana) */}
+        <g transform={`translate(${Kx - 30}, ${Ky - 18})`}>
+          {/* lambung */}
+          <path d="M 0 12 L 6 22 L 36 22 L 42 12 Z" fill="#7c3aed" stroke="#1e1b4b" strokeWidth="1" />
+          {/* tiang */}
+          <line x1="22" y1="12" x2="22" y2="-4" stroke="#fde68a" strokeWidth="1.5" />
+          {/* layar */}
+          <polygon points="22,0 38,12 22,12" fill="#fbbf24" />
+          <polygon points="22,0 8,12 22,12" fill="#f59e0b" />
+        </g>
+
+        {/* Layangan */}
+        <g transform={`translate(${Tx - 18}, ${Ty - 22})`}>
+          <polygon points="18,0 36,18 18,40 0,18" fill="#f472b6" stroke="#831843" strokeWidth="1.2" />
+          <line x1="18" y1="0" x2="18" y2="40" stroke="#831843" strokeWidth="0.8" />
+          <line x1="0" y1="18" x2="36" y2="18" stroke="#831843" strokeWidth="0.8" />
+          {/* ekor */}
+          <path d="M 18 40 Q 22 46 16 50 Q 22 54 16 58" fill="none" stroke="#831843" strokeWidth="1" />
+        </g>
+
+        {/* Label sudut 45° di kapal */}
+        <path d={`M ${Kx + 24} ${Ky} A 24 24 0 0 0 ${Kx + 17} ${Ky - 17}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        <text x={Kx + 28} y={Ky - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">45°</text>
+
+        {/* Label sudut 90° */}
+        <text x={Bx - 28} y={By - 16} fill="#fbbf24" fontSize="11" fontWeight="bold">90°</text>
+
+        {/* Label sisi */}
+        <text x={(Kx + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="middle">tanah</text>
+        <text x={Bx + 8} y={(By + Ty) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">150 m</text>
+        <text x={(Kx + Tx) / 2 - 4} y={(Ky + Ty) / 2 - 6} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end" transform={`rotate(-32 ${(Kx + Tx) / 2 - 4} ${(Ky + Ty) / 2 - 6})`}>Tali</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -652,6 +708,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 7 && <BangunABCDESVG />}
                 {soal.no === 11 && <TabelSegitiga11 />}
                 {soal.no === 15 && <SegitigaXSVG />}
+                {soal.no === 18 && <LayangKapalSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
