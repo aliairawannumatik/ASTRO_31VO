@@ -343,6 +343,33 @@ const materiSection = {
   ] as MateriSection[],
 };
 
+/* SVG soal Latihan Dasar No. 1 — bangun majemuk dengan 2 takik di atas & 1 takik kanan-bawah */
+const BangunSoal1SegiSVG = () => {
+  const stroke = "#1e293b";
+  const points = "20,20 100,20 100,60 140,60 140,20 180,20 180,60 220,60 220,20 300,20 300,160 260,160 260,220 20,220";
+  return (
+    <svg viewBox="0 0 320 240" className="w-full max-w-[300px]" data-testid="svg-soal-segi-dasar-1">
+      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      {/* label "4 cm" untuk segmen kiri-atas (20,20)-(100,20) panjang 4 cm */}
+      <text x="60" y="14" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="bold">4 cm</text>
+      {/* label "10 cm" untuk sisi kiri (20,20)-(20,220) panjang 10 cm */}
+      <text x="14" y="120" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="bold" transform="rotate(-90, 14, 120)">10 cm</text>
+      {/* Tanda strip pada segmen 2 cm yang sama panjang */}
+      {[
+        { x1: 118, y1: 56, x2: 122, y2: 64 },   // notch1 bottom (100,60)-(140,60)
+        { x1: 158, y1: 16, x2: 162, y2: 24 },   // top middle (140,20)-(180,20)
+        { x1: 198, y1: 56, x2: 202, y2: 64 },   // notch2 bottom (180,60)-(220,60)
+        { x1: 96,  y1: 38, x2: 104, y2: 42 },   // notch1 left wall (100,20)-(100,60)
+        { x1: 136, y1: 38, x2: 144, y2: 42 },   // notch1 right wall (140,20)-(140,60)
+        { x1: 176, y1: 38, x2: 184, y2: 42 },   // notch2 left wall (180,20)-(180,60)
+        { x1: 216, y1: 38, x2: 224, y2: 42 },   // notch2 right wall (220,20)-(220,60)
+      ].map((t, i) => (
+        <line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} stroke={stroke} strokeWidth="1.5" />
+      ))}
+    </svg>
+  );
+};
+
 const latihanDasar = [
   { no: 1, soal: "Perhatikan gambar berikut.\nKeliling bangun di atas adalah ...", options: ["A. 44 cm", "B. 48 cm", "C. 49 cm", "D. 52 cm"] },
   { no: 2, soal: "Perhatikan gambar berikut ini.\nKeliling bangun di atas adalah ...", options: ["A. 61 cm", "B. 84 cm", "C. 90 cm", "D. 94 cm"] },
@@ -506,14 +533,30 @@ const OlimpiadeSegitigaSegiempatPage = () => {
           <div className="space-y-4 animate-slide-up">
             {latihanDasar.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
+                {soal.no === 1 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar berikut.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
+                        <BangunSoal1SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Keliling bangun di atas adalah ...
+                    </div>
+                  </>
+                ) : (
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
