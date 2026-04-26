@@ -1077,6 +1077,17 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </span>
                   ))}
                 </div>
+                {([1,2,3,4,5,6,8,10,11,12,13,15,20,22,23,24,25] as number[]).includes(soal.no) && (
+                  <div className="flex justify-center my-3">
+                    <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                      <img
+                        src={`/olimpiade-soal-${soal.no}.png`}
+                        alt={`Gambar soal no. ${soal.no}`}
+                        className="max-w-full max-h-56 object-contain"
+                      />
+                    </div>
+                  </div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
