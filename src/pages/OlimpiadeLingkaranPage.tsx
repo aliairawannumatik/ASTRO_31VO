@@ -304,35 +304,42 @@ const SegiempatTaliBusurSVG = () => (
 );
 
 const GarisSinggungSVG = () => (
-  <svg viewBox="0 0 280 180" className="w-full max-w-[260px] mx-auto">
-    {/* Circle */}
-    <circle cx="100" cy="90" r="65" fill="#0f172a" stroke="#6366f1" strokeWidth="2" />
-    {/* Tangent line */}
-    <line x1="100" y1="25" x2="100" y2="160" stroke="#34d399" strokeWidth="2.5" />
-    {/* Radius to tangent point */}
-    <line x1="100" y1="90" x2="100" y2="25" stroke="#818cf8" strokeWidth="2" />
-    {/* External point and tangent */}
-    <line x1="200" y1="90" x2="100" y2="25" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
-    <line x1="200" y1="90" x2="100" y2="155" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,3" />
-    {/* Right angle marks */}
-    <rect x="100" y="25" width="9" height="9" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-    <rect x="100" y="146" width="9" height="9" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-    {/* Points */}
-    <circle cx="100" cy="90" r="3.5" fill="#f8fafc" />
-    <circle cx="100" cy="25" r="3" fill="#f8fafc" />
-    <circle cx="100" cy="155" r="3" fill="#f8fafc" />
-    <circle cx="200" cy="90" r="3" fill="#f8fafc" />
-    <text x="106" y="87" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
-    <text x="86" y="19" fill="#e2e8f0" fontSize="11" fontWeight="bold">A</text>
-    <text x="86" y="168" fill="#e2e8f0" fontSize="11" fontWeight="bold">C</text>
-    <text x="205" y="93" fill="#e2e8f0" fontSize="11" fontWeight="bold">B</text>
-    <text x="103" y="58" fill="#818cf8" fontSize="11">r</text>
+  <svg viewBox="0 0 300 220" className="w-full max-w-[300px] mx-auto">
+    {/* Circle: O(110,110), r=70 */}
+    <circle cx="110" cy="110" r="70" fill="#0f172a" stroke="#6366f1" strokeWidth="2" />
 
-    {/* Formula box */}
-    <rect x="152" y="20" width="128" height="50" rx="7" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
-    <text x="216" y="35" fill="#a5b4fc" fontSize="9" textAnchor="middle" fontWeight="bold">OA ⊥ Garis Singgung</text>
-    <text x="216" y="49" fill="#c4b5fd" fontSize="9" textAnchor="middle">AB² = OB² − r²</text>
-    <text x="216" y="63" fill="#f9a8d4" fontSize="9" textAnchor="middle">AB = AC (dari titik B)</text>
+    {/* Reference line OB (dashed) */}
+    <line x1="110" y1="110" x2="260" y2="110" stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3" />
+
+    {/* Radii to tangent points A and C (perpendicular to BA and BC respectively) */}
+    <line x1="110" y1="110" x2="142.67" y2="48.1" stroke="#818cf8" strokeWidth="2" />
+    <line x1="110" y1="110" x2="142.67" y2="171.9" stroke="#818cf8" strokeWidth="2" />
+
+    {/* Tangent lines from external point B to A and C */}
+    <line x1="142.67" y1="48.1" x2="260" y2="110" stroke="#34d399" strokeWidth="2.5" />
+    <line x1="142.67" y1="171.9" x2="260" y2="110" stroke="#34d399" strokeWidth="2.5" />
+
+    {/* Right-angle marks at A and C — aligned with the radius and tangent */}
+    <path d="M138,56.94 L146.84,61.61 L151.51,52.77" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    <path d="M138,163.06 L146.84,158.39 L151.51,167.23" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+
+    {/* Points */}
+    <circle cx="110" cy="110" r="4" fill="#f8fafc" />
+    <circle cx="142.67" cy="48.1" r="3.5" fill="#f8fafc" />
+    <circle cx="142.67" cy="171.9" r="3.5" fill="#f8fafc" />
+    <circle cx="260" cy="110" r="3.5" fill="#f8fafc" />
+
+    {/* Vertex labels */}
+    <text x="93" y="115" fill="#e2e8f0" fontSize="14" fontWeight="bold">O</text>
+    <text x="135" y="40" fill="#e2e8f0" fontSize="14" fontWeight="bold">A</text>
+    <text x="135" y="192" fill="#e2e8f0" fontSize="14" fontWeight="bold">C</text>
+    <text x="267" y="115" fill="#e2e8f0" fontSize="14" fontWeight="bold">B</text>
+
+    {/* r label on radius OA */}
+    <text x="115" y="82" fill="#818cf8" fontSize="13" fontStyle="italic" fontWeight="bold">r</text>
+
+    {/* Tangent length label */}
+    <text x="180" y="64" fill="#6ee7b7" fontSize="11" fontStyle="italic">garis singgung</text>
   </svg>
 );
 
