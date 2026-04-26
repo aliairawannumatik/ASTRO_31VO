@@ -371,6 +371,42 @@ const BangunSoal2SegiSVG = () => {
   );
 };
 
+/* SVG soal Latihan Dasar No. 3 — bangun tangga (staircase) 15 × 28 dengan 10 cm di kanan-atas */
+const BangunSoal3SegiSVG = () => {
+  const stroke = "#1e293b";
+  // Skala 1 cm = 10 px, padding kiri 40, padding atas 30. Bounding 15 × 28 cm.
+  // Path clockwise dari (0,0):
+  // (15,0) → (15,10) → (11,10) → (11,16) → (7,16) → (7,22) → (3,22) → (3,28) → (0,28)
+  const points = "40,30 190,30 190,130 150,130 150,190 110,190 110,250 70,250 70,310 40,310";
+  return (
+    <svg viewBox="0 0 240 340" className="w-full max-w-[260px]" data-testid="svg-soal-segi-dasar-3">
+      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      {/* Label 15 cm di atas */}
+      <text x="115" y="22" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold">15 cm</text>
+      {/* Label 10 cm di kanan-atas */}
+      <text x="200" y="84" textAnchor="start" fill={stroke} fontSize="13" fontWeight="bold">10 cm</text>
+      {/* Label 28 cm di kiri (rotasi) */}
+      <text x="28" y="170" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold" transform="rotate(-90, 28, 170)">28 cm</text>
+      {/* Tick mark pada segmen horizontal sama panjang (4 cm) */}
+      {[
+        { x: 170, y: 130 }, // midpoint (190,130)-(150,130)
+        { x: 130, y: 190 }, // midpoint (150,190)-(110,190)
+        { x: 90,  y: 250 }, // midpoint (110,250)-(70,250)
+      ].map((p, i) => (
+        <line key={`h${i}`} x1={p.x} y1={p.y - 4} x2={p.x} y2={p.y + 4} stroke={stroke} strokeWidth="1.5" />
+      ))}
+      {/* Tick mark pada segmen vertical sama panjang (6 cm) */}
+      {[
+        { x: 150, y: 160 }, // midpoint (150,130)-(150,190)
+        { x: 110, y: 220 }, // midpoint (110,190)-(110,250)
+        { x: 70,  y: 280 }, // midpoint (70,250)-(70,310)
+      ].map((p, i) => (
+        <line key={`v${i}`} x1={p.x - 4} y1={p.y} x2={p.x + 4} y2={p.y} stroke={stroke} strokeWidth="1.5" />
+      ))}
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 1 — bangun majemuk dengan 2 takik di atas & 1 takik kanan-bawah */
 const BangunSoal1SegiSVG = () => {
   const stroke = "#1e293b";
@@ -587,6 +623,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Keliling bangun di atas adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 3 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
+                        <BangunSoal3SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Luas gambar di samping adalah ...
                     </div>
                   </>
                 ) : (
