@@ -388,35 +388,35 @@ $y = ax^2 + bx + c$`
 };
 
 const latihanDasar: { no: number; soal: string; options: string[]; svgOptions?: ReactNode[] }[] = [
-  { no: 1, soal: "Fungsi $f(x) = 3(x - 1)^2 + 5$ dapat dinyatakan dalam bentuk $f(x) = ax^2 + bx + c$. Nilai b dan c berturut-turut adalah ...", options: ["A. -6 dan 8", "B. -6 dan 2", "C. -3 dan 8", "D. 3 dan 2"] },
-  { no: 2, soal: "Jika titik $(3, a)$ terletak pada kurva $f(x) = 2x^2 - x + 4$, maka nilai $a$ = ...", options: ["A. 19", "B. 17", "C. 16", "D. 13"] },
-  { no: 3, soal: "Grafik fungsi $f(x) = x^2 - 2x - 3$ dipotong oleh garis $y = 5$. Salah satu absis titik potongnya adalah ...", options: ["A. 1", "B. 2", "C. 4", "D. 5"] },
-  { no: 4, soal: "Fungsi $f(x) = x^2 - x - 12$ memotong sumbu X di titik $(p, 0)$ dan $(q, 0)$. Jika $p > q$, maka nilai p dan q berturut-turut adalah ...", options: ["A. 4 dan 3", "B. 4 dan -3", "C. 3 dan -4", "D. 3 dan 2"] },
-  { no: 5, soal: "Titik potong kurva $f(x) = x^2 + 4x + 7$ dengan sumbu Y adalah ...", options: ["A. (0, 7)", "B. (0, 3)", "C. (-2, 0)", "D. (-3, 3)"] },
-  { no: 6, soal: "Kurva yang mempunyai sumbu simetri di $x = 1$ adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [<img src="/no_6_opsi_A.png" alt="Opsi A" className="mt-1 block max-w-[165px] w-full" />, <img src="/no_6_opsi_B.png" alt="Opsi B" className="mt-1 block max-w-[165px] w-full" />, <img src="/no_6_opsi_C.png" alt="Opsi C" className="mt-1 block max-w-[165px] w-full" />, <img src="/no_6_opsi_D.png" alt="Opsi D" className="mt-1 block max-w-[165px] w-full" />] },
-  { no: 7, soal: "Sumbu simetri dari kurva $f(x) = x^2 + 6x + 5$ adalah ...", options: ["A. $x = -3$", "B. $x = -35$", "C. $x = 52$", "D. $x = 3$"] },
-  { no: 8, soal: "Sumbu simetri pada fungsi $f(x) = (x + 6)^2 - 5$ adalah ...", options: ["A. $x = 6$", "B. $x = 5$", "C. $x = -3$", "D. $x = -6$"] },
-  { no: 9, soal: "Nilai minimum fungsi $f(x) = 3(x + 2)^2 + 5$ adalah ...", options: ["A. 17", "B. 8", "C. 5", "D. -7"] },
-  { no: 10, soal: "Nilai maksimum fungsi $f(x) = -x^2 + 6x + 7$ adalah ...", options: ["A. 18", "B. 16", "C. 12", "D. 9"] },
-  { no: 11, soal: "Koordinat titik balik pada kurva $f(x) = x^2 - 10x + 29$ adalah ...", options: ["A. (-5, 5)", "B. (-5, 4)", "C. (5, -4)", "D. (5, 4)"] },
-  { no: 12, soal: "Diketahui fungsi $f(x) = -x^2 + bx + c$ mempunyai koordinat titik balik minimum $(-5, 11)$. Nilai b dan c berturut-turut adalah ...", options: ["A. -10 dan 14", "B. -10 dan 36", "C. 10 dan 14", "D. 10 dan 36"] },
-  { no: 13, soal: "Grafik dari fungsi $f(x) = x^2 - 2x - 15$ adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [q13Svg('A'), q13Svg('B'), q13Svg('C'), q13Svg('D')] },
-  { no: 14, soal: "Perhatikan gambar! Gambar tersebut adalah grafik fungsi kuadrat ...", options: ["A. $y = x^2 + 2x + 3$", "B. $y = x^2 - 2x - 3$", "C. $y = -x^2 + 2x - 3$", "D. $y = -x^2 - 2x + 3$", "E. $y = -x^2 + 2x + 3$"], svgQuestion: q14Svg() },
-  { no: 15, soal: "Perhatikan grafik $f(x) = ax^2 + bx + c$. Nilai a, b dan c yang mungkin adalah ...", options: ["A. $a < 0$, $b > 0$, $c > 0$", "B. $a < 0$, $b > 0$, $c < 0$", "C. $a < 0$, $b < 0$, $c > 0$", "D. $a > 0$, $b < 0$, $c < 0$"], svgQuestion: q15Svg() },
-  { no: 16, soal: "Fungsi $f(x) = ax^2 + bx + c$ mempunyai $a < 0$, $b > 0$ dan $c < 0$. Grafik yang sesuai adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [q16Svg('A'), q16Svg('B'), q16Svg('C'), q16Svg('D')] },
-  { no: 17, soal: "Nilai diskriminan pada fungsi $f(x) = -x^2 + 2x + 15$ adalah ...", options: ["A. 64", "B. 56", "C. 36", "D. 25"] },
-  { no: 18, soal: "Diantara fungsi kuadrat berikut yang grafiknya memotong sumbu x di dua titik adalah ...", options: ["A. $f(x) = x^2 + 6x + 9$", "B. $f(x) = x^2 - x + 3$", "C. $f(x) = x^2 + x - 20$", "D. $f(x) = x^2 - 2x + 1$"] },
-  { no: 19, soal: "Perhatikan fungsi kuadrat berikut:\n(i) $f(x) = x^2 - 16$\n(ii) $f(x) = x^2 - 25$\n(iii) $f(x) = x^2 + x - 20$\n(iv) $f(x) = x^2 - 10x + 25$\nFungsi kuadrat yang grafiknya menyinggung sumbu x adalah ...", options: ["A. (i)", "B. (ii)", "C. (iii)", "D. (iv)"] },
-  { no: 20, soal: "Supaya grafik fungsi $f(x) = x^2 + (m - 1)x - (m - 4) = 0$ menyinggung sumbu x, maka nilai $m$ = ...", options: ["A. 5", "B. 3", "C. 2", "D. -3"] },
-  { no: 21, soal: "Persamaan grafik fungsi kuadrat yang mempunyai titik balik maksimum $(1, 2)$ dan melalui titik $(2, 3)$ adalah ...", options: ["A. $y = x^2 - 2x + 1$", "B. $y = x^2 - 2x + 3$", "C. $y = x^2 + 2x - 1$", "D. $y = x^2 + 2x + 1$", "E. $y = x^2 - 2x - 3$"] },
-  { no: 22, soal: "Grafik $y = px^2 + (p + 2)x - p + 4$ memotong sumbu X di dua titik. Batas-batas nilai p yang memenuhi adalah ...", options: ["A. $p < -2$ atau $p > -\\frac{2}{5}$", "B. $p < \\frac{2}{5}$ atau $p > 2$", "C. $p < 2$ atau $p > 10$", "D. $\\frac{2}{5} < p < 2$", "E. $2 < p < 10$"] },
-  { no: 23, soal: "Fungsi kuadrat $f(x) = (k + 3)x^2 - 2kx + (k - 2)$ merupakan fungsi definit positif. Nilai k yang memenuhi adalah ...", options: ["A. $k > -3$", "B. $k < 6$", "C. $k < -3$", "D. $k > 6$", "E. $-3 < k < 6$"] },
-  { no: 24, soal: "Sebuah peluru ditembakkan vertikal memiliki rumus ketinggian per detik, $h(t) = (120t - t^2)$ meter. Tinggi tembakan maksimum peluru itu adalah ...", options: ["A. 4.800 m", "B. 4.500 m", "C. 3.600 m", "D. 3.000 m"] },
-  { no: 25, soal: "Sebuah bola digelindingkan pada bidang miring dari atas ke bawah. Tinggi bola tiap detiknya memiliki rumus $h(t) = 80 + 2t - t^2$ (dalam cm). Bola akan menyentuh tanah pada detik ke- ...", options: ["A. 5", "B. 8", "C. 10", "D. 16"] },
-  { no: 26, soal: "Sebuah persegi panjang mempunyai luas 42 cm² dan kelilingnya 34 cm. Lebar persegi panjang itu adalah ...", options: ["A. 2 cm", "B. 3 cm", "C. 5 cm", "D. 14 cm"] },
-  { no: 27, soal: "Perhatikan gambar berikut. Untuk $x \\in$ bilangan asli, luas maksimum bidang yang diarsir adalah ...", options: ["A. 30 cm²", "B. 36 cm²", "C. 41 cm²", "D. 48 cm²"], svgQuestion: q27Svg() },
-  { no: 28, soal: "Grafik fungsi $g(x) = x^2 + 3$ dapat diperoleh dari grafik $f(x) = x^2$. Cara yang tepat adalah ...", options: ["A. Menggeser $f(x)$ 3 satuan ke kanan", "B. Menggeser $f(x)$ 3 satuan ke kiri", "C. Menggeser $f(x)$ 3 satuan ke bawah", "D. Menggeser $f(x)$ 3 satuan ke atas"] },
-  { no: 29, soal: "Grafik fungsi $L(x) = x^2 + 2x - 3$ dapat diperoleh dari grafik $K(x) = (x + 1)^2$. Cara yang tepat adalah ...", options: ["A. Menggeser $K(x)$, 4 satuan ke kiri", "B. Menggeser $K(x)$, 3 satuan ke kiri", "C. Menggeser $K(x)$, 4 satuan ke bawah", "D. Menggeser $K(x)$, 3 satuan ke bawah"] },
+  { no: 1, soal: "Fungsi $f(x) = 3(x - 1)^2 + 5$ dapat dinyatakan dalam bentuk $f(x) = ax^2 + bx + c$. Nilai b dan c berturut-turut adalah ...", options: ["A. -6 dan 8", "B. -6 dan 2", "C. -3 dan 8", "D. 3 dan 2"] , jawaban: "A", pembahasan: "Jabarkan: $f(x) = 3(x-1)^2 + 5 = 3(x^2 - 2x + 1) + 5 = 3x^2 - 6x + 8$. Jadi $b = -6$, $c = 8$. Jawaban A." },
+  { no: 2, soal: "Jika titik $(3, a)$ terletak pada kurva $f(x) = 2x^2 - x + 4$, maka nilai $a$ = ...", options: ["A. 19", "B. 17", "C. 16", "D. 13"] , jawaban: "A", pembahasan: "Substitusi $x = 3$: $f(3) = 2(3)^2 - 3 + 4 = 18 - 3 + 4 = 19$. Jawaban A." },
+  { no: 3, soal: "Grafik fungsi $f(x) = x^2 - 2x - 3$ dipotong oleh garis $y = 5$. Salah satu absis titik potongnya adalah ...", options: ["A. 1", "B. 2", "C. 4", "D. 5"] , jawaban: "C", pembahasan: "$x^2 - 2x - 3 = 5 \\Rightarrow x^2 - 2x - 8 = 0 \\Rightarrow (x - 4)(x + 2) = 0$.\nAbsis titik potong: $x = 4$ atau $x = -2$. Jawaban C." },
+  { no: 4, soal: "Fungsi $f(x) = x^2 - x - 12$ memotong sumbu X di titik $(p, 0)$ dan $(q, 0)$. Jika $p > q$, maka nilai p dan q berturut-turut adalah ...", options: ["A. 4 dan 3", "B. 4 dan -3", "C. 3 dan -4", "D. 3 dan 2"] , jawaban: "B", pembahasan: "$x^2 - x - 12 = 0 \\Rightarrow (x - 4)(x + 3) = 0 \\Rightarrow x = 4$ atau $x = -3$.\nKarena $p > q$: $p = 4$, $q = -3$. Jawaban B." },
+  { no: 5, soal: "Titik potong kurva $f(x) = x^2 + 4x + 7$ dengan sumbu Y adalah ...", options: ["A. (0, 7)", "B. (0, 3)", "C. (-2, 0)", "D. (-3, 3)"] , jawaban: "A", pembahasan: "Titik potong sumbu Y diperoleh saat $x = 0$: $f(0) = 7$. Titik $(0, 7)$. Jawaban A." },
+  { no: 6, soal: "Kurva yang mempunyai sumbu simetri di $x = 1$ adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [<img src="/no_6_opsi_A.png" alt="Opsi A" className="mt-1 block max-w-[165px] w-full" />, <img src="/no_6_opsi_B.png" alt="Opsi B" className="mt-1 block max-w-[165px] w-full" />, <img src="/no_6_opsi_C.png" alt="Opsi C" className="mt-1 block max-w-[165px] w-full" />, <img src="/no_6_opsi_D.png" alt="Opsi D" className="mt-1 block max-w-[165px] w-full" />] , jawaban: "B", pembahasan: "Sumbu simetri parabola $y = ax^2 + bx + c$ adalah $x = -\\dfrac{b}{2a}$.\nPilih grafik yang sumbu simetri vertikalnya tepat berada pada garis $x = 1$. Jawaban B." },
+  { no: 7, soal: "Sumbu simetri dari kurva $f(x) = x^2 + 6x + 5$ adalah ...", options: ["A. $x = -3$", "B. $x = -35$", "C. $x = 52$", "D. $x = 3$"] , jawaban: "A", pembahasan: "$x_p = -\\dfrac{b}{2a} = -\\dfrac{6}{2(1)} = -3$. Jawaban A." },
+  { no: 8, soal: "Sumbu simetri pada fungsi $f(x) = (x + 6)^2 - 5$ adalah ...", options: ["A. $x = 6$", "B. $x = 5$", "C. $x = -3$", "D. $x = -6$"] , jawaban: "D", pembahasan: "Bentuk vertex $f(x) = (x + 6)^2 - 5$ memberikan puncak di $(-6, -5)$, sehingga sumbu simetri $x = -6$. Jawaban D." },
+  { no: 9, soal: "Nilai minimum fungsi $f(x) = 3(x + 2)^2 + 5$ adalah ...", options: ["A. 17", "B. 8", "C. 5", "D. -7"] , jawaban: "C", pembahasan: "Bentuk vertex $f(x) = 3(x + 2)^2 + 5$ dengan $a = 3 > 0$ membuka ke atas.\nNilai minimum saat $x = -2$: $f(-2) = 0 + 5 = 5$. Jawaban C." },
+  { no: 10, soal: "Nilai maksimum fungsi $f(x) = -x^2 + 6x + 7$ adalah ...", options: ["A. 18", "B. 16", "C. 12", "D. 9"] , jawaban: "B", pembahasan: "$a = -1 < 0$ ⇒ memiliki nilai maksimum.\n$x_p = -\\dfrac{b}{2a} = -\\dfrac{6}{-2} = 3$.\n$f(3) = -9 + 18 + 7 = 16$. Jawaban B." },
+  { no: 11, soal: "Koordinat titik balik pada kurva $f(x) = x^2 - 10x + 29$ adalah ...", options: ["A. (-5, 5)", "B. (-5, 4)", "C. (5, -4)", "D. (5, 4)"] , jawaban: "D", pembahasan: "$x_p = -\\dfrac{b}{2a} = \\dfrac{10}{2} = 5$.\n$y_p = 25 - 50 + 29 = 4$.\nTitik balik $(5, 4)$. Jawaban D." },
+  { no: 12, soal: "Diketahui fungsi $f(x) = -x^2 + bx + c$ mempunyai koordinat titik balik minimum $(-5, 11)$. Nilai b dan c berturut-turut adalah ...", options: ["A. -10 dan 14", "B. -10 dan 36", "C. 10 dan 14", "D. 10 dan 36"] , jawaban: "D", pembahasan: "Catatan: secara matematis $a = -1 < 0$ menghasilkan titik balik MAKSIMUM, bukan minimum (kemungkinan typo). Mengasumsikan $f(x) = x^2 + bx + c$ dengan titik puncak $(-5, 11)$:\n$x_p = -\\dfrac{b}{2} = -5 \\Rightarrow b = 10$.\n$f(-5) = 25 - 50 + c = 11 \\Rightarrow c = 36$.\nJawaban D ($b = 10$, $c = 36$)." },
+  { no: 13, soal: "Grafik dari fungsi $f(x) = x^2 - 2x - 15$ adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [q13Svg('A'), q13Svg('B'), q13Svg('C'), q13Svg('D')] , jawaban: "B", pembahasan: "$f(x) = x^2 - 2x - 15 = (x - 5)(x + 3)$ ⇒ akar $x = 5$ dan $x = -3$.\n$a = 1 > 0$ ⇒ membuka ke atas. Titik balik di $x_p = 1$, $y_p = -16$.\nGrafik yang sesuai: opsi B. Jawaban B." },
+  { no: 14, soal: "Perhatikan gambar! Gambar tersebut adalah grafik fungsi kuadrat ...", options: ["A. $y = x^2 + 2x + 3$", "B. $y = x^2 - 2x - 3$", "C. $y = -x^2 + 2x - 3$", "D. $y = -x^2 - 2x + 3$", "E. $y = -x^2 + 2x + 3$"], svgQuestion: q14Svg() , jawaban: "E", pembahasan: "Dari grafik: akar $x = -1$ dan $x = 3$, titik puncak $(1, 4)$ di atas sumbu X (parabola membuka ke bawah, $a < 0$).\n$y = a(x + 1)(x - 3)$. Substitusi puncak $(1,4)$: $4 = a(2)(-2) = -4a \\Rightarrow a = -1$.\n$y = -(x + 1)(x - 3) = -x^2 + 2x + 3$. Jawaban E." },
+  { no: 15, soal: "Perhatikan grafik $f(x) = ax^2 + bx + c$. Nilai a, b dan c yang mungkin adalah ...", options: ["A. $a < 0$, $b > 0$, $c > 0$", "B. $a < 0$, $b > 0$, $c < 0$", "C. $a < 0$, $b < 0$, $c > 0$", "D. $a > 0$, $b < 0$, $c < 0$"], svgQuestion: q15Svg() , jawaban: "C", pembahasan: "Grafik membuka ke bawah ⇒ $a < 0$.\nSumbu simetri di kiri sumbu Y ($x_p < 0$): $-\\dfrac{b}{2a} < 0$, dengan $a < 0$ maka $b < 0$.\nTitik potong sumbu Y di atas sumbu X ⇒ $c > 0$.\nJadi $a < 0$, $b < 0$, $c > 0$. Jawaban C." },
+  { no: 16, soal: "Fungsi $f(x) = ax^2 + bx + c$ mempunyai $a < 0$, $b > 0$ dan $c < 0$. Grafik yang sesuai adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [q16Svg('A'), q16Svg('B'), q16Svg('C'), q16Svg('D')] , jawaban: "B", pembahasan: "$a < 0$ ⇒ membuka ke bawah ($\\cap$).\n$x_p = -\\dfrac{b}{2a}$ dengan $b > 0, a < 0$ ⇒ $x_p > 0$ (puncak di kanan sumbu Y).\n$c < 0$ ⇒ memotong sumbu Y di bawah sumbu X.\nGrafik yang sesuai: opsi B. Jawaban B." },
+  { no: 17, soal: "Nilai diskriminan pada fungsi $f(x) = -x^2 + 2x + 15$ adalah ...", options: ["A. 64", "B. 56", "C. 36", "D. 25"] , jawaban: "A", pembahasan: "$D = b^2 - 4ac = 2^2 - 4(-1)(15) = 4 + 60 = 64$. Jawaban A." },
+  { no: 18, soal: "Diantara fungsi kuadrat berikut yang grafiknya memotong sumbu x di dua titik adalah ...", options: ["A. $f(x) = x^2 + 6x + 9$", "B. $f(x) = x^2 - x + 3$", "C. $f(x) = x^2 + x - 20$", "D. $f(x) = x^2 - 2x + 1$"] , jawaban: "C", pembahasan: "Memotong sumbu X di dua titik ⇒ $D > 0$.\nA: $D = 36 - 36 = 0$\nB: $D = 1 - 12 = -11 < 0$\nC: $D = 1 - 4(-20) = 81 > 0$ ✓\nD: $D = 4 - 4 = 0$\nJawaban C." },
+  { no: 19, soal: "Perhatikan fungsi kuadrat berikut:\n(i) $f(x) = x^2 - 16$\n(ii) $f(x) = x^2 - 25$\n(iii) $f(x) = x^2 + x - 20$\n(iv) $f(x) = x^2 - 10x + 25$\nFungsi kuadrat yang grafiknya menyinggung sumbu x adalah ...", options: ["A. (i)", "B. (ii)", "C. (iii)", "D. (iv)"] , jawaban: "D", pembahasan: "Menyinggung sumbu X ⇒ $D = 0$.\n(i) $D = 0 + 64 > 0$\n(ii) $D = 0 + 100 > 0$\n(iii) $D = 1 + 80 > 0$\n(iv) $D = 100 - 100 = 0$ ✓\nJawaban D." },
+  { no: 20, soal: "Supaya grafik fungsi $f(x) = x^2 + (m - 1)x - (m - 4) = 0$ menyinggung sumbu x, maka nilai $m$ = ...", options: ["A. 5", "B. 3", "C. 2", "D. -3"] , jawaban: "B", pembahasan: "Menyinggung sumbu X ⇒ $D = 0$.\n$D = (m-1)^2 - 4(1)(-(m-4)) = (m-1)^2 + 4(m-4)$\n$= m^2 + 2m - 15 = 0$\n$(m + 5)(m - 3) = 0 \\Rightarrow m = -5$ atau $m = 3$.\nDari pilihan, $m = 3$. Jawaban B." },
+  { no: 21, soal: "Persamaan grafik fungsi kuadrat yang mempunyai titik balik maksimum $(1, 2)$ dan melalui titik $(2, 3)$ adalah ...", options: ["A. $y = x^2 - 2x + 1$", "B. $y = x^2 - 2x + 3$", "C. $y = x^2 + 2x - 1$", "D. $y = x^2 + 2x + 1$", "E. $y = x^2 - 2x - 3$"] , jawaban: "B", pembahasan: "Bentuk vertex (puncak $(1,2)$): $y = a(x - 1)^2 + 2$.\nSubstitusi $(2, 3)$: $3 = a(1) + 2 \\Rightarrow a = 1$.\n$y = (x - 1)^2 + 2 = x^2 - 2x + 3$. Jawaban B." },
+  { no: 22, soal: "Grafik $y = px^2 + (p + 2)x - p + 4$ memotong sumbu X di dua titik. Batas-batas nilai p yang memenuhi adalah ...", options: ["A. $p < -2$ atau $p > -\\frac{2}{5}$", "B. $p < \\frac{2}{5}$ atau $p > 2$", "C. $p < 2$ atau $p > 10$", "D. $\\frac{2}{5} < p < 2$", "E. $2 < p < 10$"] , jawaban: "B", pembahasan: "Memotong sumbu X di dua titik ⇒ $D > 0$ dan $p \\neq 0$.\n$D = (p+2)^2 - 4p(-p+4) = 5p^2 - 12p + 4 > 0$\nAkar $5p^2 - 12p + 4 = 0$: $p = \\dfrac{12 \\pm 8}{10} = 2$ atau $\\dfrac{2}{5}$.\n$D > 0$ ⇔ $p < \\dfrac{2}{5}$ atau $p > 2$. Jawaban B." },
+  { no: 23, soal: "Fungsi kuadrat $f(x) = (k + 3)x^2 - 2kx + (k - 2)$ merupakan fungsi definit positif. Nilai k yang memenuhi adalah ...", options: ["A. $k > -3$", "B. $k < 6$", "C. $k < -3$", "D. $k > 6$", "E. $-3 < k < 6$"] , jawaban: "D", pembahasan: "Definit positif ⇒ $a > 0$ dan $D < 0$.\n$a = k + 3 > 0 \\Rightarrow k > -3$.\n$D = 4k^2 - 4(k+3)(k-2) = -4k + 24 < 0 \\Rightarrow k > 6$.\nGabungan: $k > 6$. Jawaban D." },
+  { no: 24, soal: "Sebuah peluru ditembakkan vertikal memiliki rumus ketinggian per detik, $h(t) = (120t - t^2)$ meter. Tinggi tembakan maksimum peluru itu adalah ...", options: ["A. 4.800 m", "B. 4.500 m", "C. 3.600 m", "D. 3.000 m"] , jawaban: "C", pembahasan: "$h(t) = 120t - t^2$, $a = -1 < 0$ ⇒ ada maksimum.\n$t_p = -\\dfrac{120}{-2} = 60$ detik.\n$h(60) = 7200 - 3600 = 3600$ m. Jawaban C." },
+  { no: 25, soal: "Sebuah bola digelindingkan pada bidang miring dari atas ke bawah. Tinggi bola tiap detiknya memiliki rumus $h(t) = 80 + 2t - t^2$ (dalam cm). Bola akan menyentuh tanah pada detik ke- ...", options: ["A. 5", "B. 8", "C. 10", "D. 16"] , jawaban: "C", pembahasan: "Bola menyentuh tanah ⇒ $h(t) = 0$.\n$80 + 2t - t^2 = 0 \\Rightarrow t^2 - 2t - 80 = 0 \\Rightarrow (t - 10)(t + 8) = 0$.\nAmbil $t = 10$ (positif). Jawaban C." },
+  { no: 26, soal: "Sebuah persegi panjang mempunyai luas 42 cm² dan kelilingnya 34 cm. Lebar persegi panjang itu adalah ...", options: ["A. 2 cm", "B. 3 cm", "C. 5 cm", "D. 14 cm"] , jawaban: "B", pembahasan: "Misal panjang $p$, lebar $l$. $pl = 42$, $2(p + l) = 34 \\Rightarrow p + l = 17$.\n$p, l$ akar persamaan $x^2 - 17x + 42 = 0 \\Rightarrow (x - 3)(x - 14) = 0$.\nLebar = 3 cm. Jawaban B." },
+  { no: 27, soal: "Perhatikan gambar berikut. Untuk $x \\in$ bilangan asli, luas maksimum bidang yang diarsir adalah ...", options: ["A. 30 cm²", "B. 36 cm²", "C. 41 cm²", "D. 48 cm²"], svgQuestion: q27Svg() , jawaban: "C", pembahasan: "Total luas = $(7 - x)(x + 1) + 5 \\times 5 = -x^2 + 6x + 7 + 25 = -x^2 + 6x + 32$.\nMaksimum di $x = 3$ (bilangan asli ✓): $-9 + 18 + 32 = 41$ cm². Jawaban C." },
+  { no: 28, soal: "Grafik fungsi $g(x) = x^2 + 3$ dapat diperoleh dari grafik $f(x) = x^2$. Cara yang tepat adalah ...", options: ["A. Menggeser $f(x)$ 3 satuan ke kanan", "B. Menggeser $f(x)$ 3 satuan ke kiri", "C. Menggeser $f(x)$ 3 satuan ke bawah", "D. Menggeser $f(x)$ 3 satuan ke atas"] , jawaban: "D", pembahasan: "$g(x) = x^2 + 3 = f(x) + 3$ ⇒ grafik $f(x)$ digeser 3 satuan ke ATAS. Jawaban D." },
+  { no: 29, soal: "Grafik fungsi $L(x) = x^2 + 2x - 3$ dapat diperoleh dari grafik $K(x) = (x + 1)^2$. Cara yang tepat adalah ...", options: ["A. Menggeser $K(x)$, 4 satuan ke kiri", "B. Menggeser $K(x)$, 3 satuan ke kiri", "C. Menggeser $K(x)$, 4 satuan ke bawah", "D. Menggeser $K(x)$, 3 satuan ke bawah"], jawaban: "C", pembahasan: "$L(x) = x^2 + 2x - 3 = (x + 1)^2 - 4 = K(x) - 4$ ⇒ grafik $K(x)$ digeser 4 satuan ke BAWAH. Jawaban C." },
 ];
 
 const olimpSoal1Svg = (): ReactNode => {
@@ -574,27 +574,76 @@ const olimp9Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
 };
 
 const latihanOlimpiade = [
-  { no: 1, soal: "OSN Matematika 2010 Tingkat Kota\nFungsi $f(x) = x^2 - ax$ mempunyai grafik berikut. Grafik fungsi $g(x) = x^2 + ax + 5$ adalah ...", options: ["A.", "B.", "C.", "D."], svgQuestion: <img src="/soal_olimp_no_1.png" alt="Grafik soal no 1" className="mt-1 block max-w-[140px] w-full" />, svgOptions: [<img src="/olimp_no_1_opsi_A.png" alt="Opsi A" className="mt-1 block max-w-[135px] w-full" />, <img src="/olimp_no_1_opsi_B.png" alt="Opsi B" className="mt-1 block max-w-[135px] w-full" />, <img src="/olimp_no_1_opsi_C.png" alt="Opsi C" className="mt-1 block max-w-[135px] w-full" />, <img src="/olimp_no_1_opsi_D.png" alt="Opsi D" className="mt-1 block max-w-[135px] w-full" />] },
-  { no: 2, soal: "OSN Matematika 2010 Tingkat Kota\nJika $P(x) = Q(x) \\cdot (x - a)$, Dimana $P(x)$ dan $Q(x)$ polinom, maka:", options: ["A. $P(a) \\neq 0$", "B. $x - a$ bukan faktor dari $P(x)$", "C. Kurva $y = P(x)$ memotong sumbu x di titik $(a, 0)$", "D. Kurva $y = P(x)$ memotong sumbu x di titik $(-a, 0)$", "E. Titik potong terhadap sumbu x tidak dapat ditentukan"] },
-  { no: 3, soal: "OSN Matematika 2014 Tingkat Kota\nDiketahui persamaan kurva $y = x^3 + 4x^2 + 5x + 1$ dan $y = x^2 + 2x - 1$. Jika kurva digambarkan pada bidang yang sama, maka banyak titik potong kedua kurva tersebut adalah ...", options: ["A. 0", "B. 1", "C. 2", "D. 3"] },
-  { no: 4, soal: "OSN Matematika 2015 Tingkat Kota\nParabola $y = ax^2 + bx + c$ melalui titik $(-2, 6)$ dan mempunyai sumbu simetri $x = -1$. Jika a, b dan c merupakan bilangan genap positif berurutan, maka nilai $a + b + c$ adalah ...", options: [] },
-  { no: 5, soal: "OSN Matematika 2016 Tingkat Kota\nBanyak bilangan bulat $k > -20$ sehingga parabola $y = x^2 + k$ tidak berpotongan dengan lingkaran $x^2 + y^2 = 9$ adalah ...", options: ["A. 20", "B. 19", "C. 11", "D. 10"] },
-  { no: 6, soal: "OSN Matematika 2018 Tingkat Kota\nJika $0 < a < 1$ dan grafik fungsi kuadrat $y = a(x - 1)^2 + 2a$ berada di bawah grafik fungsi $y = (a^2 + 2a)(x + 1) - 2a(2a + 1)$, maka nilai x yang memenuhi adalah ...", options: ["A. $0 < x < 3$", "B. $a < x < 3$", "C. $a + 1 < x < 3$", "D. $3 < x < 3 + a$"] },
-  { no: 7, soal: "OSN Matematika 2019 Tingkat Kota\nParabola $y = ax^2 + bx + c$ mempunyai puncak di $(p, p)$ dan titik potong dengan sumbu y di $(0, -p)$ jika $p \\neq 0$, maka nilai b adalah ...", options: ["A. 1", "B. 2", "C. 4", "D. 8"] },
-  { no: 8, soal: "OSN Matematika 2021 Tingkat Kota\nP adalah titik minimum grafik fungsi kuadrat yang melalui $(2a, 0)$, $(4a, 0)$, dan $(0, 3a)$ dengan $a > 0$. Agar jarak P ke sumbu-x lebih dari 3 satuan, maka nilai a adalah ...", options: ["A. $0 < a < 3$", "B. $0 < a < 8$", "C. $a > 3$", "D. $a > 8$"] },
-  { no: 9, soal: "OSN Matematika 2023 Tingkat Kota\nA bergerak mendekati B yang berjarak 55 km dengan kecepatan 5 km/jam. Satu jam kemudian, B bergerak menuju A dengan kecepatan x km/jam, dengan x adalah waktu (dalam jam) ketika B berangkat sampai ketemu A. Grafik yang menyatakan hubungan antara waktu (t) yang dibutuhkan A bertemu B dengan jarak (s) A dan B adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [<img src="/olimp_no_9_opsi_A.png" alt="Opsi A" className="mt-1 block max-w-[165px] w-full" />, <img src="/olimp_no_9_opsi_B.png" alt="Opsi B" className="mt-1 block max-w-[165px] w-full" />, <img src="/olimp_no_9_opsi_C.png" alt="Opsi C" className="mt-1 block max-w-[165px] w-full" />, <img src="/olimp_no_9_opsi_D.png" alt="Opsi D" className="mt-1 block max-w-[165px] w-full" />] },
-  { no: 10, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui suatu konstanta $k > 0$. Garis l dengan persamaan $y = 2kx + 3k^2$ memotong parabola dengan persamaan $y = x^2$ pada titik P di kuadran I dan titik Q di kuadran II. Jika koordinat O adalah $(0, 0)$ dan luas daerah segitiga POQ adalah 48 satuan luas, maka kemiringan garis l adalah ...", options: ["A. $\\frac{2}{3}$", "B. 2", "C. $\\frac{4}{3}$", "D. 4"] },
+  { no: 1, soal: "OSN Matematika 2010 Tingkat Kota\nFungsi $f(x) = x^2 - ax$ mempunyai grafik berikut. Grafik fungsi $g(x) = x^2 + ax + 5$ adalah ...", options: ["A.", "B.", "C.", "D."], svgQuestion: <img src="/soal_olimp_no_1.png" alt="Grafik soal no 1" className="mt-1 block max-w-[140px] w-full" />, svgOptions: [<img src="/olimp_no_1_opsi_A.png" alt="Opsi A" className="mt-1 block max-w-[135px] w-full" />, <img src="/olimp_no_1_opsi_B.png" alt="Opsi B" className="mt-1 block max-w-[135px] w-full" />, <img src="/olimp_no_1_opsi_C.png" alt="Opsi C" className="mt-1 block max-w-[135px] w-full" />, <img src="/olimp_no_1_opsi_D.png" alt="Opsi D" className="mt-1 block max-w-[135px] w-full" />] , jawaban: "A", pembahasan: "Dari grafik $f(x) = x^2 - ax$: parabola memotong sumbu X di $x = 0$ dan $x = a$ dengan $a > 0$.\nUntuk $g(x) = x^2 + ax + 5$: $D = a^2 - 20$. Sumbu simetri $x = -\\dfrac{a}{2} < 0$ (di kiri sumbu Y).\nJika $a^2 < 20$ (a kecil), $D < 0$ ⇒ $g$ tidak memotong sumbu X (definit positif), parabola membuka ke atas, sumbu simetri di kiri sumbu Y. Grafik yang sesuai: opsi A. Jawaban A." },
+  { no: 2, soal: "OSN Matematika 2010 Tingkat Kota\nJika $P(x) = Q(x) \\cdot (x - a)$, Dimana $P(x)$ dan $Q(x)$ polinom, maka:", options: ["A. $P(a) \\neq 0$", "B. $x - a$ bukan faktor dari $P(x)$", "C. Kurva $y = P(x)$ memotong sumbu x di titik $(a, 0)$", "D. Kurva $y = P(x)$ memotong sumbu x di titik $(-a, 0)$", "E. Titik potong terhadap sumbu x tidak dapat ditentukan"] , jawaban: "C", pembahasan: "Jika $P(x) = Q(x) \\cdot (x - a)$, maka $P(a) = Q(a) \\cdot 0 = 0$.\nJadi $(a, 0)$ adalah titik potong kurva $y = P(x)$ dengan sumbu X. Jawaban C." },
+  { no: 3, soal: "OSN Matematika 2014 Tingkat Kota\nDiketahui persamaan kurva $y = x^3 + 4x^2 + 5x + 1$ dan $y = x^2 + 2x - 1$. Jika kurva digambarkan pada bidang yang sama, maka banyak titik potong kedua kurva tersebut adalah ...", options: ["A. 0", "B. 1", "C. 2", "D. 3"] , jawaban: "B", pembahasan: "Titik potong: $x^3 + 4x^2 + 5x + 1 = x^2 + 2x - 1$\n$x^3 + 3x^2 + 3x + 2 = 0$\nUji $x = -2$: $-8 + 12 - 6 + 2 = 0$ ✓\nFaktorkan: $(x + 2)(x^2 + x + 1) = 0$.\nDiskriminan $x^2 + x + 1$: $1 - 4 = -3 < 0$ (tidak punya akar real).\nHanya 1 titik potong. Jawaban B." },
+  { no: 4, soal: "OSN Matematika 2015 Tingkat Kota\nParabola $y = ax^2 + bx + c$ melalui titik $(-2, 6)$ dan mempunyai sumbu simetri $x = -1$. Jika a, b dan c merupakan bilangan genap positif berurutan, maka nilai $a + b + c$ adalah ...", options: [] , jawaban: "$a + b + c = 12$", pembahasan: "Sumbu simetri $-\\dfrac{b}{2a} = -1 \\Rightarrow b = 2a$.\n$a, b, c$ bilangan genap positif berurutan ⇒ $b = a + 2$ dan $c = a + 4$.\nDari $b = 2a$ dan $b = a + 2$: $a = 2$, $b = 4$, $c = 6$.\nCek titik $(-2, 6)$: $2(4) + 4(-2) + 6 = 6$ ✓\n$a + b + c = 12$." },
+  { no: 5, soal: "OSN Matematika 2016 Tingkat Kota\nBanyak bilangan bulat $k > -20$ sehingga parabola $y = x^2 + k$ tidak berpotongan dengan lingkaran $x^2 + y^2 = 9$ adalah ...", options: ["A. 20", "B. 19", "C. 11", "D. 10"] , jawaban: "D", pembahasan: "Substitusi $x^2 = y - k$ ke $x^2 + y^2 = 9$:\n$y^2 + y - (k + 9) = 0$\nDiskriminan = 0 (tangen) saat $k = -\\dfrac{37}{4} \\approx -9.25$.\nUntuk $k > 3$: vertex parabola di atas lingkaran, tidak berpotongan (jangkauan tak terbatas).\nUntuk $k < -9.25$: parabola tidak mencapai lingkaran.\nBilangan bulat $k > -20$ dengan $k \\leq -10$ (tidak berpotongan): $k = -19, -18, \\ldots, -10$ ⇒ 10 nilai. Jawaban D." },
+  { no: 6, soal: "OSN Matematika 2018 Tingkat Kota\nJika $0 < a < 1$ dan grafik fungsi kuadrat $y = a(x - 1)^2 + 2a$ berada di bawah grafik fungsi $y = (a^2 + 2a)(x + 1) - 2a(2a + 1)$, maka nilai x yang memenuhi adalah ...", options: ["A. $0 < x < 3$", "B. $a < x < 3$", "C. $a + 1 < x < 3$", "D. $3 < x < 3 + a$"] , jawaban: "C", pembahasan: "Pertidaksamaan: $a(x-1)^2 + 2a < (a^2 + 2a)(x+1) - 2a(2a+1)$.\nBagi $a > 0$: $(x-1)^2 + 2 < (a+2)(x+1) - 2(2a+1)$\nSederhanakan: $x^2 - (a+4)x + 3(a+1) < 0$\nFaktorkan: $(x - 3)(x - (a+1)) < 0$.\nKarena $0 < a < 1$, $1 < a + 1 < 2 < 3$. Maka solusi: $a + 1 < x < 3$. Jawaban C." },
+  { no: 7, soal: "OSN Matematika 2019 Tingkat Kota\nParabola $y = ax^2 + bx + c$ mempunyai puncak di $(p, p)$ dan titik potong dengan sumbu y di $(0, -p)$ jika $p \\neq 0$, maka nilai b adalah ...", options: ["A. 1", "B. 2", "C. 4", "D. 8"] , jawaban: "C", pembahasan: "Bentuk vertex: $y = a(x - p)^2 + p$. Substitusi $(0, -p)$:\n$-p = ap^2 + p \\Rightarrow ap = -2 \\Rightarrow a = -\\dfrac{2}{p}$.\nBentuk umum: $y = ax^2 - 2apx + (ap^2 + p)$. $b = -2ap = -2(-2) = 4$. Jawaban C." },
+  { no: 8, soal: "OSN Matematika 2021 Tingkat Kota\nP adalah titik minimum grafik fungsi kuadrat yang melalui $(2a, 0)$, $(4a, 0)$, dan $(0, 3a)$ dengan $a > 0$. Agar jarak P ke sumbu-x lebih dari 3 satuan, maka nilai a adalah ...", options: ["A. $0 < a < 3$", "B. $0 < a < 8$", "C. $a > 3$", "D. $a > 8$"] , jawaban: "D", pembahasan: "Parabola: $y = k(x - 2a)(x - 4a)$. Substitusi $(0, 3a)$: $8ka^2 = 3a \\Rightarrow k = \\dfrac{3}{8a}$.\nTitik minimum di $x = 3a$: $y_{min} = k(a)(-a) = -\\dfrac{3a}{8}$.\nJarak ke sumbu X: $\\dfrac{3a}{8} > 3 \\Rightarrow a > 8$. Jawaban D." },
+  { no: 9, soal: "OSN Matematika 2023 Tingkat Kota\nA bergerak mendekati B yang berjarak 55 km dengan kecepatan 5 km/jam. Satu jam kemudian, B bergerak menuju A dengan kecepatan x km/jam, dengan x adalah waktu (dalam jam) ketika B berangkat sampai ketemu A. Grafik yang menyatakan hubungan antara waktu (t) yang dibutuhkan A bertemu B dengan jarak (s) A dan B adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [<img src="/olimp_no_9_opsi_A.png" alt="Opsi A" className="mt-1 block max-w-[165px] w-full" />, <img src="/olimp_no_9_opsi_B.png" alt="Opsi B" className="mt-1 block max-w-[165px] w-full" />, <img src="/olimp_no_9_opsi_C.png" alt="Opsi C" className="mt-1 block max-w-[165px] w-full" />, <img src="/olimp_no_9_opsi_D.png" alt="Opsi D" className="mt-1 block max-w-[165px] w-full" />] , jawaban: "B", pembahasan: "A bergerak 5 km/jam. Setelah 1 jam, jarak A-B = 50 km.\nSetelah B berangkat, kecepatan saling mendekat: $5 + \\tau$ km/jam ($\\tau$ = waktu sejak B berangkat).\n$\\dfrac{ds}{d\\tau} = -(5 + \\tau) \\Rightarrow s(\\tau) = 50 - 5\\tau - \\dfrac{\\tau^2}{2}$.\nKurva cekung ke bawah: turun lambat lalu makin curam, mencapai 0 sekitar $\\tau \\approx 6.18$ (total $t \\approx 7.18$ jam).\nGrafik yang sesuai: opsi B. Jawaban B." },
+  { no: 10, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui suatu konstanta $k > 0$. Garis l dengan persamaan $y = 2kx + 3k^2$ memotong parabola dengan persamaan $y = x^2$ pada titik P di kuadran I dan titik Q di kuadran II. Jika koordinat O adalah $(0, 0)$ dan luas daerah segitiga POQ adalah 48 satuan luas, maka kemiringan garis l adalah ...", options: ["A. $\\frac{2}{3}$", "B. 2", "C. $\\frac{4}{3}$", "D. 4"] , jawaban: "D", pembahasan: "Titik potong: $x^2 = 2kx + 3k^2 \\Rightarrow x^2 - 2kx - 3k^2 = 0 \\Rightarrow (x - 3k)(x + k) = 0$.\n$P = (3k, 9k^2)$ (kuadran I), $Q = (-k, k^2)$ (kuadran II).\nLuas $\\triangle POQ = \\dfrac{1}{2}|x_P y_Q - x_Q y_P| = \\dfrac{1}{2}|3k \\cdot k^2 - (-k)\\cdot 9k^2| = \\dfrac{1}{2}|12k^3| = 6k^3$.\n$6k^3 = 48 \\Rightarrow k^3 = 8 \\Rightarrow k = 2$.\nKemiringan garis l $= 2k = 4$. Jawaban D." },
 ];
 
 const OlimpiadeFungsiKuadratPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSection.sections.length }, (_, i) => i));
+  const [showPembahasan, setShowPembahasan] = useState<Set<string>>(new Set());
 
   const toggleSection = (idx: number) => {
     playPopSound();
     setExpandedSections(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const togglePembahasan = (key: string) => {
+    playPopSound();
+    setShowPembahasan(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  };
+
+  const renderPembahasan = (key: string, jawaban?: string, pembahasan?: string) => {
+    if (!jawaban || !pembahasan) return null;
+    const isOpen = showPembahasan.has(key);
+    return (
+      <div className="mt-3">
+        <button
+          onClick={() => togglePembahasan(key)}
+          className="flex items-center gap-2 text-xs font-display font-bold text-primary hover:text-cyan-300 transition-colors cursor-pointer px-3 py-2 rounded-lg border border-primary/40 bg-primary/10 hover:bg-primary/20"
+        >
+          {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+          {isOpen ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
+        </button>
+        {isOpen && (
+          <div className="mt-3 animate-slide-up space-y-2">
+            <div className="px-4 py-3 rounded-lg border border-emerald-400/50 bg-emerald-950/30">
+              <span className="block text-[10px] font-bold uppercase tracking-widest text-emerald-400 mb-1">Jawaban</span>
+              <div className="font-body text-sm text-emerald-100 font-bold">{renderWithLatex(jawaban)}</div>
+            </div>
+            <div
+              className="px-4 py-3 rounded-lg border border-primary/40"
+              style={{ background: "linear-gradient(135deg, rgba(34,211,238,0.08) 0%, rgba(168,85,247,0.08) 100%)" }}
+            >
+              <span className="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Pembahasan</span>
+              <div className="font-body text-xs text-white/85 leading-relaxed space-y-1">
+                {pembahasan.split('\n').map((line, i) => (
+                  <div key={i}>{renderWithLatex(line)}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -715,6 +764,7 @@ const OlimpiadeFungsiKuadratPage = () => {
                     ))}
                   </div>
                 )}
+                {renderPembahasan(`dasar-${soal.no}`, (soal as any).jawaban, (soal as any).pembahasan)}
               </div>
             ))}
           </div>
@@ -745,6 +795,7 @@ const OlimpiadeFungsiKuadratPage = () => {
                     ))}
                   </div>
                 )}
+                {renderPembahasan(`olim-${soal.no}`, (soal as any).jawaban, (soal as any).pembahasan)}
               </div>
             ))}
           </div>

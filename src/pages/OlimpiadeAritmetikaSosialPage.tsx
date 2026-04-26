@@ -161,14 +161,14 @@ Contoh: Pekerja dengan penghasilan bruto Rp5.000.000/bulan, PTKP Rp3.000.000/bul
 };
 
 const latihanDasar = [
-  { no: 1, soal: "Seorang pedagang membeli 60 kg mangga, kemudian dijual seharga Rp. 15.000,00 per kg. Jika pedagang tersebut mendapat keuntungan 20%, maka harga beli mangga tersebut adalah ...", options: ["A. Rp600.000,00", "B. Rp720.000,00", "C. Rp750.000,00", "D. Rp800.000,00"] },
-  { no: 2, soal: "Seorang pedagang membeli sepeda bekas. Setelah diperbaiki kembali dengan biaya Rp200.000,00, sepeda tersebut dijual dengan harga Rp1.040.000,00 sehingga mendapat untung 30%. Harga beli sepeda semula adalah ...", options: ["A. Rp500.000,00", "B. Rp600.000,00", "C. Rp700.000,00", "D. Rp800.000,00"] },
-  { no: 3, soal: "Pak Setya membeli sekarung beras seharga Rp.475.000,00. Beras itu akan dijual lagi dengan mengharapkan keuntungan sebesar 20%. Jika isi beras dalam karung adalah 50 kg, maka harga jual per kg dari beras adalah ...", options: ["A. Rp12.400,00", "B. Rp12.000,00", "C. Rp11.400,00", "D. Rp11.000,00"] },
-  { no: 4, soal: "Bima menyimpan uang sebesar Rp. 1.200.000,00 di sebuah bank dengan bunga tunggal 15% setahun. Setelah beberapa bulan ia mengambil seluruh tabungan beserta bunganya menjadi Rp.1.260.000,00. Lama Bima menabung adalah ...", options: ["A. 3 bulan", "B. 4 bulan", "C. 5 bulan", "D. 6 bulan"] },
-  { no: 5, soal: "Doni menyimpan uang di bank sebesar Rp. 800.000,00 dengan bunga tunggal 12% pertahun. Agar jumlah tabungannya menjadi Rp. 872.000,00, Doni harus menabung selama ...", options: ["A. 9 bulan", "B. 7 bulan", "C. 6 bulan", "D. 4 bulan"] },
-  { no: 6, soal: "Egi menabung Rp. 600.000,00 pada sebuah bank. Setelah 10 bulan tabungan Egi menjadi Rp. 640.000,00. Persentase bunga per tahun pada bank tersebut adalah ...", options: ["A. 6%", "B. 6,7%", "C. 8%", "D. 8,5%"] },
-  { no: 7, soal: "Nina menabung pada sebuah bank dengan bunga tunggal 16% setahun. Setelah 9 bulan uangnya menjadi Rp. 2.240.000,00. Tabungan awal Nina adalah ...", options: ["A. Rp. 1.800.000,00", "B. Rp. 1.900.000,00", "C. Rp. 2.000.000,00", "D. Rp. 2.100.000,00"] },
-  { no: 8, soal: "Pak Budi meminjam uang di koperasi sebesar Rp. 4.800.000,00. Ia dikenakan bunga 24% setahun. Ia berencana mengembalikan dalam 2 tahun. Besar cicilan yang harus dibayar tiap bulan adalah ...", options: ["A. Rp296.000,00", "B. Rp269.000,00", "C. Rp260.000,00", "D. Rp209.000,00"] },
+  { no: 1, soal: "Seorang pedagang membeli 60 kg mangga, kemudian dijual seharga Rp. 15.000,00 per kg. Jika pedagang tersebut mendapat keuntungan 20%, maka harga beli mangga tersebut adalah ...", options: ["A. Rp600.000,00", "B. Rp720.000,00", "C. Rp750.000,00", "D. Rp800.000,00"] , jawaban: "C", pembahasan: "Penjualan total = $60 \\times 15.000 = 900.000$. Untung 20\\% ⇒ HJ = 1.2 × HB.\n$\\text{HB} = \\dfrac{900.000}{1.2} = 750.000$. Jawaban C." },
+  { no: 2, soal: "Seorang pedagang membeli sepeda bekas. Setelah diperbaiki kembali dengan biaya Rp200.000,00, sepeda tersebut dijual dengan harga Rp1.040.000,00 sehingga mendapat untung 30%. Harga beli sepeda semula adalah ...", options: ["A. Rp500.000,00", "B. Rp600.000,00", "C. Rp700.000,00", "D. Rp800.000,00"] , jawaban: "B", pembahasan: "HB total (sepeda + perbaikan) = $\\dfrac{1.040.000}{1.3} = 800.000$.\nHB sepeda awal = $800.000 - 200.000 = 600.000$. Jawaban B." },
+  { no: 3, soal: "Pak Setya membeli sekarung beras seharga Rp.475.000,00. Beras itu akan dijual lagi dengan mengharapkan keuntungan sebesar 20%. Jika isi beras dalam karung adalah 50 kg, maka harga jual per kg dari beras adalah ...", options: ["A. Rp12.400,00", "B. Rp12.000,00", "C. Rp11.400,00", "D. Rp11.000,00"] , jawaban: "C", pembahasan: "HJ total = $475.000 \\times 1.2 = 570.000$. Per kg = $\\dfrac{570.000}{50} = 11.400$. Jawaban C." },
+  { no: 4, soal: "Bima menyimpan uang sebesar Rp. 1.200.000,00 di sebuah bank dengan bunga tunggal 15% setahun. Setelah beberapa bulan ia mengambil seluruh tabungan beserta bunganya menjadi Rp.1.260.000,00. Lama Bima menabung adalah ...", options: ["A. 3 bulan", "B. 4 bulan", "C. 5 bulan", "D. 6 bulan"] , jawaban: "B", pembahasan: "Bunga = $1.260.000 - 1.200.000 = 60.000$.\n$B = M \\cdot W \\cdot P$: $60.000 = 1.200.000 \\cdot W \\cdot 0.15 \\Rightarrow W = \\dfrac{1}{3}$ tahun = 4 bulan. Jawaban B." },
+  { no: 5, soal: "Doni menyimpan uang di bank sebesar Rp. 800.000,00 dengan bunga tunggal 12% pertahun. Agar jumlah tabungannya menjadi Rp. 872.000,00, Doni harus menabung selama ...", options: ["A. 9 bulan", "B. 7 bulan", "C. 6 bulan", "D. 4 bulan"] , jawaban: "A", pembahasan: "Bunga = $872.000 - 800.000 = 72.000$.\n$72.000 = 800.000 \\cdot W \\cdot 0.12 \\Rightarrow W = 0.75$ tahun = 9 bulan. Jawaban A." },
+  { no: 6, soal: "Egi menabung Rp. 600.000,00 pada sebuah bank. Setelah 10 bulan tabungan Egi menjadi Rp. 640.000,00. Persentase bunga per tahun pada bank tersebut adalah ...", options: ["A. 6%", "B. 6,7%", "C. 8%", "D. 8,5%"] , jawaban: "C", pembahasan: "Bunga = $640.000 - 600.000 = 40.000$.\n$40.000 = 600.000 \\cdot \\dfrac{10}{12} \\cdot P \\Rightarrow P = 0.08 = 8\\%$. Jawaban C." },
+  { no: 7, soal: "Nina menabung pada sebuah bank dengan bunga tunggal 16% setahun. Setelah 9 bulan uangnya menjadi Rp. 2.240.000,00. Tabungan awal Nina adalah ...", options: ["A. Rp. 1.800.000,00", "B. Rp. 1.900.000,00", "C. Rp. 2.000.000,00", "D. Rp. 2.100.000,00"] , jawaban: "C", pembahasan: "$M_1 = M(1 + W \\cdot P) = M\\left(1 + \\dfrac{9}{12} \\cdot 0.16\\right) = 1.12 M = 2.240.000$.\n$M = 2.000.000$. Jawaban C." },
+  { no: 8, soal: "Pak Budi meminjam uang di koperasi sebesar Rp. 4.800.000,00. Ia dikenakan bunga 24% setahun. Ia berencana mengembalikan dalam 2 tahun. Besar cicilan yang harus dibayar tiap bulan adalah ...", options: ["A. Rp296.000,00", "B. Rp269.000,00", "C. Rp260.000,00", "D. Rp209.000,00"] , jawaban: "A", pembahasan: "Total bunga 2 tahun = $4.800.000 \\times 0.24 \\times 2 = 2.304.000$.\nTotal pengembalian = $7.104.000$. Cicilan/bulan = $\\dfrac{7.104.000}{24} = 296.000$. Jawaban A." },
   { no: 9, soal: "Data harga dan diskon sepatu dan kaos dari ke-empat toko sebagai berikut. Jika Febian akan membeli sepatu dan kaos, maka toko yang dipilihnya adalah ...", options: ["A. Toko Damai", "B. Toko Tentram", "C. Toko Rukun", "D. Toko Sentosa"], svgQuestion: (
     <svg viewBox="0 0 400 86" width="100%" style={{maxWidth:"400px"}} className="my-2 block mx-auto">
       {/* Border colors */}
@@ -214,7 +214,7 @@ const latihanDasar = [
       <text x="305" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">30%</text>
       <text x="367" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
     </svg>
-  ) },
+  ) , jawaban: "D", pembahasan: "Total bayar per toko (sepatu 140.000, kaos 100.000):\nDamai (20\\%, 25\\%): $112.000 + 75.000 = 187.000$\nTentram (25\\%, 20\\%): $105.000 + 80.000 = 185.000$\nRukun (15\\%, 30\\%): $119.000 + 70.000 = 189.000$\nSentosa (30\\%, 15\\%): $98.000 + 85.000 = 183.000$\nTermurah: Sentosa. Jawaban D." },
   { no: 10, soal: "Perhatikan tabel berikut! Jika Rani akan membeli 3 tas, 2 sendal dan 1 sepatu, maka uang yang harus dibayarkan adalah ...", options: ["A. Rp.360.000,00", "B. Rp.365.000,00", "C. Rp.370.000,00", "D. Rp.375.000,00"], svgQuestion: (
     <svg viewBox="0 0 300 86" width="100%" style={{maxWidth:"300px"}} className="my-2 block mx-auto">
       <rect x="0.5" y="0.5" width="299" height="85" fill="none" stroke="#67e8f9" strokeWidth="1"/>
@@ -237,29 +237,29 @@ const latihanDasar = [
       <text x="142" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">Rp 120.000,00</text>
       <text x="254" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
     </svg>
-  ) },
-  { no: 11, soal: "Seorang pedagang membeli satu karung beras dengan Bruto 50 kg dan Tara 2%. Harga pembelian karung beras tersebut adalah Rp5.000,00. Pedagang itu kemudian menjual beras tersebut secara eceran dengan harga Rp12.000,00 per kg (netto).\nBerapakah total uang yang diperoleh pedagang tersebut dari penjualan satu karung beras?", options: ["A. Rp600.000,00", "B. Rp588.000,00", "C. Rp583.000,00", "D. Rp88.000,00"] },
-  { no: 12, soal: "Seorang pembeli ingin mendapatkan harga beras (netto) yang paling murah. Ia membandingkan dua penawaran:\n• Toko A: Menjual 1 karung dengan Bruto 100 kg, Tara 2%, seharga Rp1.000.000,00.\n• Toko B: Menjual 1 karung dengan Bruto 100 kg, Tara 3%, seharga Rp990.000,00.\nDi toko manakah pembeli tersebut seharusnya berbelanja untuk mendapatkan harga per kg netto termurah?", options: ["A. Toko A, karena harga per kg netto sekitar Rp10.204", "B. Toko B, karena harga per kg netto sekitar Rp10.206", "C. Toko B, karena harga karungnya lebih murah (Rp990.000)", "D. Sama saja, karena brutonya sama-sama 100 kg"] },
-  { no: 13, soal: "Seorang penjual mendapat keuntungan total Rp100.000,00 setelah berhasil menjual habis satu peti buah. Ia menjual buah tersebut dengan harga Rp15.000,00 per kg (netto). Peti buah yang ia beli memiliki Bruto 60 kg dan Tara (berat peti) 2 kg.\nBerapakah harga beli (modal) peti buah tersebut pada awalnya?", options: ["A. Rp900.000,00", "B. Rp870.000,00", "C. Rp800.000,00", "D. Rp770.000,00"] },
-  { no: 14, soal: "Sebuah kargo berisi 20 kaleng biskuit identik ditimbang dan berat kotor (Bruto) totalnya adalah 25 kg. Diketahui berat kardus kargo (Tara kargo) adalah 1 kg. Jika berat netto (biskuit) di setiap kaleng adalah 900 gram, berapakah berat tara (kemasan kaleng) dari satu kaleng biskuit?", options: ["A. 300 gram", "B. 500 gram", "C. 1.200 gram", "D. 1.150 gram"] },
-  { no: 15, soal: "Sebuah toko membeli satu drum minyak goreng dengan diskon tara (potongan berat) 3%. Setelah ditimbang, berat bersih (Netto) minyak yang diterima toko adalah 97 kg. Berapakah Bruto drum minyak tersebut sebelum dihitung diskon taranya?", options: ["A. 99,91 kg", "B. 94,09 kg", "C. 100 kg", "D. 103 kg"] },
-  { no: 16, soal: "Aris membeli sebuah lemari dengan harga Rp5.000.000,00. Jika Pajak Pertambahan Nilai (PPN) yang dikenakan adalah 11%, berapa total uang yang harus dibayar Budi?", options: ["A. Rp6.100.000,00", "B. Rp5.500.000,00", "C. Rp5.055.000,00", "D. Rp5.550.000,00"] },
-  { no: 17, soal: "Sebuah restoran mencantumkan harga makanan di menu sebesar Rp50.000,00. Di bagian bawah menu tertulis \"Harga belum termasuk PPN 11%\". Berapa yang harus dibayar pelanggan?", options: ["A. Rp50.000,00", "B. Rp55.500,00", "C. Rp44.500,00", "D. Rp55.000,00"] },
-  { no: 18, soal: "Seseorang membayar Rp2.220.000,00 untuk sebuah barang yang harganya sudah termasuk PPN 11%. Berapa harga barang tersebut sebelum dikenakan PPN?", options: ["A. Rp2.000.000,00", "B. Rp2.464.200,00", "C. Rp1.980.000,00", "D. Rp2.100.000,00"] },
-  { no: 19, soal: "Seorang karyawan memiliki penghasilan (gaji) sebesar Rp6.000.000,00 per bulan. Batas Penghasilan Tidak Kena Pajak (PTKP) ditetapkan sebesar Rp4.500.000,00 per bulan. Berapakah besar Penghasilan Kena Pajak (PKP) karyawan tersebut?", options: ["A. Rp10.500.000,00", "B. Rp1.500.000,00", "C. Rp6.000.000,00", "D. Rp4.500.000,00"] },
-  { no: 20, soal: "Pak Doni mendapat gaji Rp8.000.000,00 sebulan dengan Penghasilan Tidak Kena Pajak (PTKP) Rp5.000.000,00. Jika tarif Pajak Penghasilan (PPh) adalah 5% dari PKP, berapakah besar PPh yang harus dibayar Pak Doni?", options: ["A. Rp250.000,00", "B. Rp400.000,00", "C. Rp650.000,00", "D. Rp150.000,00"] },
-  { no: 21, soal: "Seorang pekerja lepas mendapat upah Rp10.000.000,00. PTKP untuknya adalah Rp6.000.000,00. Tarif PPh ditetapkan 10% dari PKP. Berapa penghasilan bersih (take-home pay) yang ia terima?", options: ["A. Rp9.600.000,00", "B. Rp9.400.000,00", "C. Rp9.000.000,00", "D. Rp5.400.000,00"] },
+  ) , jawaban: "D", pembahasan: "Tas: $80.000 \\times 0.85 = 68.000$, 3 tas = $204.000$.\nSendal: $50.000 \\times 0.75 = 37.500$, 2 sendal = $75.000$.\nSepatu: $120.000 \\times 0.8 = 96.000$.\nTotal = $204.000 + 75.000 + 96.000 = 375.000$. Jawaban D." },
+  { no: 11, soal: "Seorang pedagang membeli satu karung beras dengan Bruto 50 kg dan Tara 2%. Harga pembelian karung beras tersebut adalah Rp5.000,00. Pedagang itu kemudian menjual beras tersebut secara eceran dengan harga Rp12.000,00 per kg (netto).\nBerapakah total uang yang diperoleh pedagang tersebut dari penjualan satu karung beras?", options: ["A. Rp600.000,00", "B. Rp588.000,00", "C. Rp583.000,00", "D. Rp88.000,00"] , jawaban: "B", pembahasan: "Tara = $2\\% \\times 50 = 1$ kg. Netto = $50 - 1 = 49$ kg.\nPenjualan = $49 \\times 12.000 = 588.000$. Jawaban B." },
+  { no: 12, soal: "Seorang pembeli ingin mendapatkan harga beras (netto) yang paling murah. Ia membandingkan dua penawaran:\n• Toko A: Menjual 1 karung dengan Bruto 100 kg, Tara 2%, seharga Rp1.000.000,00.\n• Toko B: Menjual 1 karung dengan Bruto 100 kg, Tara 3%, seharga Rp990.000,00.\nDi toko manakah pembeli tersebut seharusnya berbelanja untuk mendapatkan harga per kg netto termurah?", options: ["A. Toko A, karena harga per kg netto sekitar Rp10.204", "B. Toko B, karena harga per kg netto sekitar Rp10.206", "C. Toko B, karena harga karungnya lebih murah (Rp990.000)", "D. Sama saja, karena brutonya sama-sama 100 kg"] , jawaban: "A", pembahasan: "Toko A: Netto = 98 kg, harga/kg = $\\dfrac{1.000.000}{98} \\approx 10.204$.\nToko B: Netto = 97 kg, harga/kg = $\\dfrac{990.000}{97} \\approx 10.206$.\nToko A lebih murah per kg netto. Jawaban A." },
+  { no: 13, soal: "Seorang penjual mendapat keuntungan total Rp100.000,00 setelah berhasil menjual habis satu peti buah. Ia menjual buah tersebut dengan harga Rp15.000,00 per kg (netto). Peti buah yang ia beli memiliki Bruto 60 kg dan Tara (berat peti) 2 kg.\nBerapakah harga beli (modal) peti buah tersebut pada awalnya?", options: ["A. Rp900.000,00", "B. Rp870.000,00", "C. Rp800.000,00", "D. Rp770.000,00"] , jawaban: "D", pembahasan: "Netto = $60 - 2 = 58$ kg. HJ total = $58 \\times 15.000 = 870.000$.\nHB = HJ - Untung = $870.000 - 100.000 = 770.000$. Jawaban D." },
+  { no: 14, soal: "Sebuah kargo berisi 20 kaleng biskuit identik ditimbang dan berat kotor (Bruto) totalnya adalah 25 kg. Diketahui berat kardus kargo (Tara kargo) adalah 1 kg. Jika berat netto (biskuit) di setiap kaleng adalah 900 gram, berapakah berat tara (kemasan kaleng) dari satu kaleng biskuit?", options: ["A. 300 gram", "B. 500 gram", "C. 1.200 gram", "D. 1.150 gram"] , jawaban: "A", pembahasan: "Berat 20 kaleng = $25 - 1 = 24$ kg = $24.000$ g. Per kaleng (kotor) = $1.200$ g.\nTara per kaleng = $1.200 - 900 = 300$ g. Jawaban A." },
+  { no: 15, soal: "Sebuah toko membeli satu drum minyak goreng dengan diskon tara (potongan berat) 3%. Setelah ditimbang, berat bersih (Netto) minyak yang diterima toko adalah 97 kg. Berapakah Bruto drum minyak tersebut sebelum dihitung diskon taranya?", options: ["A. 99,91 kg", "B. 94,09 kg", "C. 100 kg", "D. 103 kg"] , jawaban: "C", pembahasan: "Netto = $97\\% \\times \\text{Bruto} \\Rightarrow \\text{Bruto} = \\dfrac{97}{0.97} = 100$ kg. Jawaban C." },
+  { no: 16, soal: "Aris membeli sebuah lemari dengan harga Rp5.000.000,00. Jika Pajak Pertambahan Nilai (PPN) yang dikenakan adalah 11%, berapa total uang yang harus dibayar Budi?", options: ["A. Rp6.100.000,00", "B. Rp5.500.000,00", "C. Rp5.055.000,00", "D. Rp5.550.000,00"] , jawaban: "D", pembahasan: "Total = $5.000.000 \\times 1.11 = 5.550.000$. Jawaban D." },
+  { no: 17, soal: "Sebuah restoran mencantumkan harga makanan di menu sebesar Rp50.000,00. Di bagian bawah menu tertulis \"Harga belum termasuk PPN 11%\". Berapa yang harus dibayar pelanggan?", options: ["A. Rp50.000,00", "B. Rp55.500,00", "C. Rp44.500,00", "D. Rp55.000,00"] , jawaban: "B", pembahasan: "Total bayar = $50.000 \\times 1.11 = 55.500$. Jawaban B." },
+  { no: 18, soal: "Seseorang membayar Rp2.220.000,00 untuk sebuah barang yang harganya sudah termasuk PPN 11%. Berapa harga barang tersebut sebelum dikenakan PPN?", options: ["A. Rp2.000.000,00", "B. Rp2.464.200,00", "C. Rp1.980.000,00", "D. Rp2.100.000,00"] , jawaban: "A", pembahasan: "Harga sebelum PPN = $\\dfrac{2.220.000}{1.11} = 2.000.000$. Jawaban A." },
+  { no: 19, soal: "Seorang karyawan memiliki penghasilan (gaji) sebesar Rp6.000.000,00 per bulan. Batas Penghasilan Tidak Kena Pajak (PTKP) ditetapkan sebesar Rp4.500.000,00 per bulan. Berapakah besar Penghasilan Kena Pajak (PKP) karyawan tersebut?", options: ["A. Rp10.500.000,00", "B. Rp1.500.000,00", "C. Rp6.000.000,00", "D. Rp4.500.000,00"] , jawaban: "B", pembahasan: "PKP = Penghasilan - PTKP = $6.000.000 - 4.500.000 = 1.500.000$. Jawaban B." },
+  { no: 20, soal: "Pak Doni mendapat gaji Rp8.000.000,00 sebulan dengan Penghasilan Tidak Kena Pajak (PTKP) Rp5.000.000,00. Jika tarif Pajak Penghasilan (PPh) adalah 5% dari PKP, berapakah besar PPh yang harus dibayar Pak Doni?", options: ["A. Rp250.000,00", "B. Rp400.000,00", "C. Rp650.000,00", "D. Rp150.000,00"] , jawaban: "D", pembahasan: "PKP = $8.000.000 - 5.000.000 = 3.000.000$. PPh = $5\\% \\times 3.000.000 = 150.000$. Jawaban D." },
+  { no: 21, soal: "Seorang pekerja lepas mendapat upah Rp10.000.000,00. PTKP untuknya adalah Rp6.000.000,00. Tarif PPh ditetapkan 10% dari PKP. Berapa penghasilan bersih (take-home pay) yang ia terima?", options: ["A. Rp9.600.000,00", "B. Rp9.400.000,00", "C. Rp9.000.000,00", "D. Rp5.400.000,00"] , jawaban: "A", pembahasan: "PKP = Upah - PTKP = $10.000.000 - 6.000.000 = 4.000.000$.\nPPh = $10\\% \\times 4.000.000 = 400.000$.\nTake-home = $10.000.000 - 400.000 = 9.600.000$. Jawaban A." },
 ];
 
 const latihanOlimpiade = [
-  { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nHarga sepotong kue turun dari Rp250 menjadi Rp200. Dengan uang Rp4.000, berapa potong kue lebih banyak yang dapat dibeli.", options: ["A. 4", "B. 8", "C. 20", "D. 2", "E. 6"] },
-  { no: 2, soal: "OSN Matematika 2003 Tingkat Kota\nGabah hasil panen sawah mempunyai kadar air 25%. Setelah dijemur kadar airnya menyusut sebanyak 80%. Kadar gabah tersebut saat ini adalah ...", options: ["A. 2,5%", "B. 5%", "C. 10%", "D. 15%", "E. 2%"] },
-  { no: 3, soal: "OSN Matematika 2004 Tingkat Kota\n3% dari 81 sama dengan 9% dari ...", options: ["A. 27", "B. 54", "C. 72", "D. 90", "E. 243"] },
-  { no: 4, soal: "OSN Matematika 2005 Tingkat Kota\nDalam satu tahun harga suatu mobil berkurang 10% dari harga tahun sebelumnya. Paling sedikit berapa tahun sehingga harga mobil itu kurang dari setengah harga semula", options: [] },
-  { no: 5, soal: "OSN Matematika 2007 Tingkat Kota\nSeorang pedagang membeli 25 kg beras jenis A seharga Rp6.000 setiap kg dan 15 kg beras jenis B seharga Rp4.000 setiap kg. Kedua jenis beras tersebut dicampur. Agar mendapat untung 4% setiap beras tersebut dijual seharga Rp .../kg", options: ["A. 5.200", "B. 5.460", "C. 5.520", "D. 5.580", "E. 6.240"] },
-  { no: 6, soal: "OSN Matematika 2008 Tingkat Kota\nPada bulan Januari harga tas di toko Rima adalah Rp150.000. Pada bulan Februari harga tas naik 10%, tetapi bila yang membeli pelajar memperoleh potongan 10%. Pada bulan Maret potongan bagi pelajar tidak berlaku lagi, tetapi harga tas turun menjadi Rp135.000 dan pembeli dikenakan pajak pembelian 10%. Dua orang pelajar, Andi dan Anton membeli tas tersebut. Andi membeli pada bulan Februari, sedangkan Anton membeli pada bulan Maret. Pernyataan berikut yang benar adalah ...", options: ["A. Anton membayar sebesar Rp150.000 untuk tas yang dibelinya", "B. Andi membayar sebesar Rp150.000 untuk tas yang dibelinya", "C. Jumlah uang yang dibayarkan Andi sama dengan jumlah uang yang dibayarkan Anton", "D. Di antara tiga bulan yang disebut di atas, bulan Januari adalah bulan yang paling menguntungkan bagi pelajar untuk membeli tas"] },
-  { no: 7, soal: "OSN Matematika 2009 Tingkat Kota\nPada bulan Januari harga tas di Toko Asia adalah Rp 150.000. Pada bulan Februari harga tas naik 10%, tetapi bila yang membeli pelajar memperoleh potongan 10%. Pada bulan Maret harga tas tersebut menjadi Rp135.000 tetapi pembeli dibebani pajak pembelian sebesar 10% dan diskon bagi pelajar tidak berlaku lagi. Dua orang pelajar, Andi dan Anton membeli tas tersebut. Andi membeli pada bulan Februari, sedangkan Anton membeli pada bulan Maret. Pertanyaan berikut yang benar adalah ...", options: ["A. Jumlah uang yang dibayarkan Andi sama dengan jumlah uang yang dibayarkan Anton", "B. Anton membayar sebesar Rp150.000 untuk tas yang dibelinya", "C. Di antara tiga bulan yang disebut di atas, bulan Januari adalah bulan yang paling menguntungkan bagi pelajar untuk membeli tas", "D. Jumlah uang yang dibayarkan Andi lebih besar dari jumlah uang yang dibayarkan Anton"] },
-  { no: 8, soal: "OSN Matematika 2017 Tingkat Kota\nPenyedia jasa pengasuh bayi usia di bawah 3 tahun memberlakukan tarif upah pengasuh bayi sebagai berikut. Upah setiap jam sebesar Rp 40.000 untuk 3 jam pertama. Selanjutnya, diberlakukan aturan sebagai berikut. Untuk setiap 1 jam berikutnya di siang hari (mulai pukul 06.00 sampai dengan pukul 18.00), dikenakan upah sebesar 20% lebih banyak daripada upah 1 jam sebelumnya. Adapun upah untuk malam hari di atas 3 jam pertama dikenakan tetap sebesar Rp 30.000 setiap jam. Jika keluarga Adang menitipkan bayinya pada pukul 16.00 sampai pukul 09.00 hari berikutnya, maka keluarga Adang harus membayar biaya penitipan bayi tersebut sebesar Rp ...", options: ["A. 571.000", "B. 581.000", "C. 585.000", "D. 595.000"] },
+  { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nHarga sepotong kue turun dari Rp250 menjadi Rp200. Dengan uang Rp4.000, berapa potong kue lebih banyak yang dapat dibeli.", options: ["A. 4", "B. 8", "C. 20", "D. 2", "E. 6"] , jawaban: "A", pembahasan: "Sebelum: $\\dfrac{4.000}{250} = 16$ potong. Sesudah: $\\dfrac{4.000}{200} = 20$ potong.\nSelisih = 4 potong. Jawaban A." },
+  { no: 2, soal: "OSN Matematika 2003 Tingkat Kota\nGabah hasil panen sawah mempunyai kadar air 25%. Setelah dijemur kadar airnya menyusut sebanyak 80%. Kadar gabah tersebut saat ini adalah ...", options: ["A. 2,5%", "B. 5%", "C. 10%", "D. 15%", "E. 2%"] , jawaban: "B", pembahasan: "Kadar air berkurang 80\\% berarti tersisa 20\\% dari kadar awal.\nKadar air baru = $25\\% \\times 20\\% = 5\\%$. Jawaban B." },
+  { no: 3, soal: "OSN Matematika 2004 Tingkat Kota\n3% dari 81 sama dengan 9% dari ...", options: ["A. 27", "B. 54", "C. 72", "D. 90", "E. 243"] , jawaban: "A", pembahasan: "$3\\% \\times 81 = 2.43$. $9\\% \\times n = 2.43 \\Rightarrow n = 27$. Jawaban A." },
+  { no: 4, soal: "OSN Matematika 2005 Tingkat Kota\nDalam satu tahun harga suatu mobil berkurang 10% dari harga tahun sebelumnya. Paling sedikit berapa tahun sehingga harga mobil itu kurang dari setengah harga semula", options: [] , jawaban: "7 tahun", pembahasan: "Setelah $n$ tahun, harga = harga awal $\\times 0.9^n$.\nCari $n$ terkecil dengan $0.9^n < 0.5$:\n$0.9^6 \\approx 0.531$ (belum)\n$0.9^7 \\approx 0.478 < 0.5$ ✓\nJadi paling sedikit 7 tahun." },
+  { no: 5, soal: "OSN Matematika 2007 Tingkat Kota\nSeorang pedagang membeli 25 kg beras jenis A seharga Rp6.000 setiap kg dan 15 kg beras jenis B seharga Rp4.000 setiap kg. Kedua jenis beras tersebut dicampur. Agar mendapat untung 4% setiap beras tersebut dijual seharga Rp .../kg", options: ["A. 5.200", "B. 5.460", "C. 5.520", "D. 5.580", "E. 6.240"] , jawaban: "B", pembahasan: "Total HB = $25 \\times 6.000 + 15 \\times 4.000 = 210.000$ untuk 40 kg.\nUntung 4\\%: HJ total = $210.000 \\times 1.04 = 218.400$.\nPer kg = $\\dfrac{218.400}{40} = 5.460$. Jawaban B." },
+  { no: 6, soal: "OSN Matematika 2008 Tingkat Kota\nPada bulan Januari harga tas di toko Rima adalah Rp150.000. Pada bulan Februari harga tas naik 10%, tetapi bila yang membeli pelajar memperoleh potongan 10%. Pada bulan Maret potongan bagi pelajar tidak berlaku lagi, tetapi harga tas turun menjadi Rp135.000 dan pembeli dikenakan pajak pembelian 10%. Dua orang pelajar, Andi dan Anton membeli tas tersebut. Andi membeli pada bulan Februari, sedangkan Anton membeli pada bulan Maret. Pernyataan berikut yang benar adalah ...", options: ["A. Anton membayar sebesar Rp150.000 untuk tas yang dibelinya", "B. Andi membayar sebesar Rp150.000 untuk tas yang dibelinya", "C. Jumlah uang yang dibayarkan Andi sama dengan jumlah uang yang dibayarkan Anton", "D. Di antara tiga bulan yang disebut di atas, bulan Januari adalah bulan yang paling menguntungkan bagi pelajar untuk membeli tas"] , jawaban: "C", pembahasan: "Februari pelajar (Andi): $150.000 \\times 1.10 \\times 0.90 = 148.500$.\nMaret pelajar (Anton): $135.000 \\times 1.10 = 148.500$.\nKeduanya membayar sama. Jawaban C." },
+  { no: 7, soal: "OSN Matematika 2009 Tingkat Kota\nPada bulan Januari harga tas di Toko Asia adalah Rp 150.000. Pada bulan Februari harga tas naik 10%, tetapi bila yang membeli pelajar memperoleh potongan 10%. Pada bulan Maret harga tas tersebut menjadi Rp135.000 tetapi pembeli dibebani pajak pembelian sebesar 10% dan diskon bagi pelajar tidak berlaku lagi. Dua orang pelajar, Andi dan Anton membeli tas tersebut. Andi membeli pada bulan Februari, sedangkan Anton membeli pada bulan Maret. Pertanyaan berikut yang benar adalah ...", options: ["A. Jumlah uang yang dibayarkan Andi sama dengan jumlah uang yang dibayarkan Anton", "B. Anton membayar sebesar Rp150.000 untuk tas yang dibelinya", "C. Di antara tiga bulan yang disebut di atas, bulan Januari adalah bulan yang paling menguntungkan bagi pelajar untuk membeli tas", "D. Jumlah uang yang dibayarkan Andi lebih besar dari jumlah uang yang dibayarkan Anton"] , jawaban: "A", pembahasan: "Februari pelajar (Andi): $150.000 \\times 1.10 \\times 0.90 = 148.500$.\nMaret pelajar (Anton): $135.000 \\times 1.10 = 148.500$.\nAndi = Anton. Jawaban A." },
+  { no: 8, soal: "OSN Matematika 2017 Tingkat Kota\nPenyedia jasa pengasuh bayi usia di bawah 3 tahun memberlakukan tarif upah pengasuh bayi sebagai berikut. Upah setiap jam sebesar Rp 40.000 untuk 3 jam pertama. Selanjutnya, diberlakukan aturan sebagai berikut. Untuk setiap 1 jam berikutnya di siang hari (mulai pukul 06.00 sampai dengan pukul 18.00), dikenakan upah sebesar 20% lebih banyak daripada upah 1 jam sebelumnya. Adapun upah untuk malam hari di atas 3 jam pertama dikenakan tetap sebesar Rp 30.000 setiap jam. Jika keluarga Adang menitipkan bayinya pada pukul 16.00 sampai pukul 09.00 hari berikutnya, maka keluarga Adang harus membayar biaya penitipan bayi tersebut sebesar Rp ...", options: ["A. 571.000", "B. 581.000", "C. 585.000", "D. 595.000"] , jawaban: "B", pembahasan: "Penitipan dari 16:00 sampai 09:00 esok = 17 jam.\n3 jam pertama (16:00-19:00): $3 \\times 40.000 = 120.000$.\nMalam (19:00-06:00, 11 jam): $11 \\times 30.000 = 330.000$.\nSiang setelah 06:00, naik 20\\%/jam dari upah jam sebelumnya (30.000):\n• 06-07: $30.000 \\times 1.2 = 36.000$\n• 07-08: $36.000 \\times 1.2 = 43.200$\n• 08-09: $43.200 \\times 1.2 = 51.840$\nTotal siang: $131.040$. Grand total: $120.000 + 330.000 + 131.040 = 581.040 \\approx 581.000$. Jawaban B." },
   { no: 9, soal: "OSN Matematika 2018 Tingkat Kota\nMenjelang tahun baru, harga sebuah kacamata dipotong (didiskon) dua kali seperti dinyatakan pada tanda berikut. Seorang pembeli membayar Rp168.750 untuk kacamata tersebut. Berapa harga kacamata tersebut sebelum dipotong harganya?", options: ["A. Rp262.500", "B. Rp281.250", "C. Rp375.000", "D. Rp421.675"], svgQuestion: (
     <svg viewBox="0 0 110 52" width="110" height="52" className="my-2 block mx-auto">
       <rect x="0.5" y="0.5" width="109" height="51" fill="rgba(255,255,255,0.08)" stroke="#d1d5db" strokeWidth="1" rx="2"/>
@@ -267,8 +267,8 @@ const latihanOlimpiade = [
       <text x="55" y="14" fill="#ffffff" fontSize="10" fontWeight="bold" textAnchor="middle">Diskon</text>
       <text x="55" y="38" fill="#facc15" fontSize="16" fontWeight="bold" textAnchor="middle">50% + 10%</text>
     </svg>
-  ) },
-  { no: 10, soal: "OSN Matematika 2021 Tingkat Kota\nSuatu keluarga memiliki lima anak dengan anak sulung bernama Andy. Ayah memberi uang saku bulanan kepada kelima anaknya tersebut dengan ketentuan berikut. Uang saku Andy adalah dua kali lipat uang saku anak kedua, tiga kali lipat uang saku anak ketiga, empat kali lipat uang saku anak keempat, serta lima kali lipat uang saku anak kelima. Besaran uang saku anak-anak tersebut adalah bilangan bulat kelipatan ribuan rupiah. Bendy dan Cindy adalah adik dari Andy. Bendy mengeluh bahwa uang saku yang diterima adalah Rp20.000 lebih sedikit dibanding Cindy. Besaran terkecil uang saku Andy yang mungkin adalah ...", options: ["A. Rp60.000", "B. Rp80.000", "C. Rp120.000", "D. Rp240.000"] },
+  ) , jawaban: "C", pembahasan: "Faktor pengurang harga setelah dua diskon: $0.5 \\times 0.9 = 0.45$.\nHarga awal = $\\dfrac{168.750}{0.45} = 375.000$. Jawaban C." },
+  { no: 10, soal: "OSN Matematika 2021 Tingkat Kota\nSuatu keluarga memiliki lima anak dengan anak sulung bernama Andy. Ayah memberi uang saku bulanan kepada kelima anaknya tersebut dengan ketentuan berikut. Uang saku Andy adalah dua kali lipat uang saku anak kedua, tiga kali lipat uang saku anak ketiga, empat kali lipat uang saku anak keempat, serta lima kali lipat uang saku anak kelima. Besaran uang saku anak-anak tersebut adalah bilangan bulat kelipatan ribuan rupiah. Bendy dan Cindy adalah adik dari Andy. Bendy mengeluh bahwa uang saku yang diterima adalah Rp20.000 lebih sedikit dibanding Cindy. Besaran terkecil uang saku Andy yang mungkin adalah ...", options: ["A. Rp60.000", "B. Rp80.000", "C. Rp120.000", "D. Rp240.000"] , jawaban: "C", pembahasan: "Misal uang Andy = $A$. Anak ke-2 = $A/2$, ke-3 = $A/3$, ke-4 = $A/4$, ke-5 = $A/5$.\nAgar semua kelipatan ribuan, $A$ harus kelipatan KPK$(2,3,4,5) \\times 1.000 = 60.000$.\n$A = 60.000$: selisih maksimum $A/2 - A/3 = 10.000$ (belum 20.000).\n$A = 120.000$: $A/2 - A/3 = 60.000 - 40.000 = 20.000$ ✓\nNilai terkecil: Rp120.000. Jawaban C." },
   { no: 11, soal: "OSN Matematika 2021 Tingkat Kota\nBerikut adalah data penjualan lima perusahaan A, B, C, D, E dalam lima tahun (2010 hingga 2014). Data diberikan dalam persentase terhadap total penjualan A, B, C, D dan E serta hanya tiga perusahaan teratas yang disebutkan untuk setiap tahun yang ditentukan.", soalAfter: "Diketahui bahwa tidak ada perusahaan yang memiliki persentase yang sama dalam satu tahun dan setidaknya persentase masing-masing perusahaan 1% dari total penjualan kelima perusahaan di tahun tersebut. Jika total penjualan kelima perusahaan adalah sama setiap tahunnya, banyaknya perusahaan yang penjualannya pasti lebih besar dari perusahaan E selama lima tahun adalah ...", options: ["A. 1", "B. 2", "C. 3", "D. 4"], svgQuestion: (
     <svg viewBox="0 0 400 90" width="100%" style={{maxWidth:"400px"}} className="my-2 block mx-auto">
       <rect x="0.5" y="0.5" width="399" height="89" fill="none" stroke="#67e8f9" strokeWidth="1"/>
@@ -301,18 +301,67 @@ const latihanOlimpiade = [
       <text x="280" y="82" fill="#ffffff" fontSize="9" textAnchor="middle">C (21%)</text>
       <text x="360" y="82" fill="#ffffff" fontSize="9" textAnchor="middle">E (15%)</text>
     </svg>
-  ) },
+  ) , jawaban: "C", pembahasan: "Analisis tabel top-3 setiap tahun (asumsi semua perusahaan $\\geq 1\\%$, total = 100\\% per tahun):\n• 2010: B(35), E(25), D(18) ⇒ A,C masing-masing $\\leq 17\\%$, jadi E $>$ A, C, D.\n• 2011: A(30), C(28), B(18) ⇒ D, E $\\leq 17\\%$.\n• 2012: D(40), C(25), E(15) ⇒ A, B $< 15\\%$, jadi E $>$ A, B.\n• 2013: A(38), B(22), C(21) ⇒ D, E $\\leq 19\\%$.\n• 2014: A(42), D(18), E(15) ⇒ B, C $< 15\\%$, jadi E $>$ B, C.\nMembandingkan total 5 tahun, hanya A, B, C yang totalnya pasti lebih besar dari E.\nJawaban C = 3 perusahaan." },
 ];
 
 const OlimpiadeAritmetikaSosialPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSection.sections.length }, (_, i) => i));
+  const [showPembahasan, setShowPembahasan] = useState<Set<string>>(new Set());
 
   const toggleSection = (idx: number) => {
     playPopSound();
     setExpandedSections(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const togglePembahasan = (key: string) => {
+    playPopSound();
+    setShowPembahasan(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  };
+
+  const renderPembahasan = (key: string, jawaban?: string, pembahasan?: string) => {
+    if (!jawaban || !pembahasan) return null;
+    const isOpen = showPembahasan.has(key);
+    return (
+      <div className="mt-3">
+        <button
+          onClick={() => togglePembahasan(key)}
+          className="flex items-center gap-2 text-xs font-display font-bold text-primary hover:text-cyan-300 transition-colors cursor-pointer px-3 py-2 rounded-lg border border-primary/40 bg-primary/10 hover:bg-primary/20"
+        >
+          {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+          {isOpen ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
+        </button>
+        {isOpen && (
+          <div className="mt-3 animate-slide-up space-y-2">
+            <div className="px-4 py-3 rounded-lg border border-emerald-400/50 bg-emerald-950/30">
+              <span className="block text-[10px] font-bold uppercase tracking-widest text-emerald-400 mb-1">Jawaban</span>
+              <div className="font-body text-sm text-emerald-100 font-bold">{renderWithLatex(jawaban)}</div>
+            </div>
+            <div
+              className="px-4 py-3 rounded-lg border border-primary/40"
+              style={{ background: "linear-gradient(135deg, rgba(34,211,238,0.08) 0%, rgba(168,85,247,0.08) 100%)" }}
+            >
+              <span className="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Pembahasan</span>
+              <div className="font-body text-xs text-white/85 leading-relaxed space-y-1">
+                {pembahasan.split('\n').map((line, i) => (
+                  <div key={i}>{renderWithLatex(line)}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -429,6 +478,7 @@ const OlimpiadeAritmetikaSosialPage = () => {
                     ))}
                   </div>
                 )}
+                {renderPembahasan(`dasar-${soal.no}`, (soal as any).jawaban, (soal as any).pembahasan)}
               </div>
             ))}
           </div>
@@ -463,6 +513,7 @@ const OlimpiadeAritmetikaSosialPage = () => {
                     ))}
                   </div>
                 )}
+                {renderPembahasan(`olim-${soal.no}`, (soal as any).jawaban, (soal as any).pembahasan)}
               </div>
             ))}
           </div>
