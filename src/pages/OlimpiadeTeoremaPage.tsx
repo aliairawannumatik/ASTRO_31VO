@@ -613,6 +613,53 @@ const PentagonSoal21SVG = () => {
   );
 };
 
+// SVG: Layang-layang ABCD untuk Soal No. 23
+// B di atas, D di bawah (diagonal vertikal panjang), A kiri, C kanan (diagonal horizontal pendek)
+const LayangLayangABCDSVG = () => {
+  const W = 240, H = 300;
+  const cx = W / 2;
+  const cy = H / 2 - 10; // titik perpotongan diagonal sedikit di atas tengah (BO < OD)
+
+  const B = { x: cx, y: 30 };           // atas
+  const D = { x: cx, y: H - 20 };       // bawah
+  const A = { x: 30, y: cy };           // kiri
+  const C = { x: W - 30, y: cy };       // kanan
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-[200px] sm:max-w-[240px] rounded-lg border border-border/40 bg-white/5">
+        {/* Diagonal vertikal BD (putus-putus) */}
+        <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,4" />
+        {/* Diagonal horizontal AC (putus-putus) */}
+        <line x1={A.x} y1={A.y} x2={C.x} y2={C.y} stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,4" />
+
+        {/* Kontur layang-layang ABCD */}
+        <polygon
+          points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`}
+          fill="rgba(34,211,238,0.06)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+
+        {/* Tanda silang kecil di titik potong diagonal */}
+        <line x1={cx - 5} y1={cy} x2={cx + 5} y2={cy} stroke="#94a3b8" strokeWidth="1" />
+        <line x1={cx} y1={cy - 5} x2={cx} y2={cy + 5} stroke="#94a3b8" strokeWidth="1" />
+
+        {/* Titik sudut */}
+        {[A, B, C, D].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
+        ))}
+
+        {/* Label titik */}
+        <text x={B.x} y={B.y - 8} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">B</text>
+        <text x={D.x} y={D.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
+        <text x={A.x - 8} y={A.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={C.x + 8} y={C.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -890,6 +937,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 18 && <LayangKapalSVG />}
                 {soal.no === 20 && <BangunABEFCDSVG />}
                 {soal.no === 21 && <PentagonSoal21SVG />}
+                {soal.no === 23 && <LayangLayangABCDSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
