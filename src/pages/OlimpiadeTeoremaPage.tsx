@@ -77,6 +77,37 @@ const JarakDuaTitikSVG = () => {
   );
 };
 
+// SVG: Segitiga siku-siku 30-60-90 dengan sisi 1, √3, 2
+const Segitiga306090SVG = () => {
+  const W = 280, H = 160;
+  // Vertices: kiri-bawah (30°), kanan-bawah (siku 90°), kanan-atas (60°)
+  const Ax = 30, Ay = H - 30;          // kiri-bawah
+  const Bx = W - 40, By = H - 30;      // kanan-bawah (siku-siku)
+  const Cx = W - 40, Cy = 30;          // kanan-atas
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga */}
+        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="none" stroke="#22d3ee" strokeWidth="2" />
+        {/* Tanda siku-siku di kanan-bawah */}
+        <rect x={Bx - 12} y={By - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1" />
+        {/* Busur sudut 30° di kiri-bawah */}
+        <path d={`M ${Ax + 28} ${Ay} A 28 28 0 0 0 ${Ax + 26} ${Ay - 9}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        {/* Busur sudut 60° di kanan-atas */}
+        <path d={`M ${Cx} ${Cy + 22} A 22 22 0 0 0 ${Cx - 19} ${Cy + 11}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        {/* Label sudut */}
+        <text x={Ax + 36} y={Ay - 4} fill="#fbbf24" fontSize="11" fontWeight="bold">30°</text>
+        <text x={Cx - 30} y={Cy + 16} fill="#fbbf24" fontSize="11" fontWeight="bold">60°</text>
+        {/* Label sisi: √3 (alas), 1 (vertikal), 2 (miring) */}
+        <text x={(Ax + Bx) / 2} y={By + 18} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">√3</text>
+        <text x={Bx + 8} y={(By + Cy) / 2 + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold">1</text>
+        <text x={(Ax + Cx) / 2 - 6} y={(Ay + Cy) / 2 - 4} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">2</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -292,7 +323,12 @@ const OlimpiadeTeoremaPage = () => {
                       {section.content.split('\n').map((line, i) => {
                         const trimmed = line.trim();
                         if (/^\d+\. [A-Z]/.test(trimmed)) {
-                          return <div key={i} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{trimmed}</div>;
+                          return (
+                            <div key={i}>
+                              <div className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{renderWithLatex(trimmed)}</div>
+                              {idx === 3 && trimmed.startsWith('1.') && <Segitiga306090SVG />}
+                            </div>
+                          );
                         }
                         if (/^Rumus/.test(trimmed)) {
                           return <div key={i} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">{renderWithLatex(trimmed)}</div>;
