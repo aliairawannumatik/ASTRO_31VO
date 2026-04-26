@@ -8,6 +8,7 @@ import {
   Gamepad2,
   HeartHandshake,
   ClipboardList,
+  BookOpen,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -19,6 +20,12 @@ const guruMenuItems = [
     icon: ListChecks,
     path: "/atp",
     desc: "Alur tujuan pembelajaran",
+  },
+  {
+    label: "RPP",
+    icon: BookOpen,
+    path: "/ruang-untuk-guru/rpp",
+    desc: "Rencana pelaksanaan pembelajaran",
   },
   {
     label: "KEYAKINAN KELAS",

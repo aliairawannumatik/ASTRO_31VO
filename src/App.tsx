@@ -55,6 +55,7 @@ import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
 import KeyakinanKelasPage from "./pages/ruang-untuk-guru/KeyakinanKelasPage";
 import PenilaianPembelajaranPage from "./pages/ruang-untuk-guru/PenilaianPembelajaranPage";
+import RPPPage from "./pages/ruang-untuk-guru/RPPPage";
 import UlanganHarianPage from "./pages/UlanganHarianPage";
 import PesanKesanPage from "./pages/PesanKesanPage";
 import PetunjukPage from "./pages/PetunjukPage";
@@ -834,6 +835,7 @@ const AppInner = () => {
       <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
       <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />
       <Route path="/ruang-untuk-guru/penilaian-pembelajaran" element={<PenilaianPembelajaranPage />} />
+      <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
       <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
       <Route path="/pesan-kesan" element={<PesanKesanPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />
