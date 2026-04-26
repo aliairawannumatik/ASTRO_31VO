@@ -15,6 +15,7 @@ import bangunABEFCDSoal20Img from "@assets/image_1777205316310.png";
 import pentagonSoal21Img from "@assets/image_1777205396307.png";
 import segitigaABCD30_45_Soal29Img from "@assets/image_1777205490135.png";
 import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777205526814.png";
+import bangunABCDSoalOlim4Img from "@assets/image_1777205553203.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1288,6 +1289,26 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Panjang CP adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 4 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                      <span className="text-yellow-400 font-semibold">OSN Matematika 2006 Tingkat Kota</span>
+                      <br />
+                      Perhatikan gambar di bawah ini.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <img
+                        src={bangunABCDSoalOlim4Img}
+                        alt="Bangun ABCD dengan titik B, C, D, A soal olimpiade nomor 4"
+                        className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                        data-testid="img-soal-pyth-olim-4"
+                      />
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Jika panjang AB = 2 cm, panjang CD = 3 cm dan panjang AC = 9 cm, maka panjang BC adalah ...
                     </div>
                   </>
                 ) : (
