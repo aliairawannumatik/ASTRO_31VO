@@ -758,6 +758,16 @@ const dasarImages: Record<number, string> = {
   18: "/lingkaran-dasar-18.png",
   19: "/lingkaran-dasar-19.png",
   20: "/lingkaran-dasar-20.png",
+  21: "/lingkaran-dasar-21.png",
+  25: "/lingkaran-dasar-25.png",
+  26: "/lingkaran-dasar-26.png",
+  28: "/lingkaran-dasar-28.png",
+  29: "/lingkaran-dasar-29.png",
+  31: "/lingkaran-dasar-31.png",
+  32: "/lingkaran-dasar-32.png",
+  34: "/lingkaran-dasar-34.png",
+  35: "/lingkaran-dasar-35.png",
+  36: "/lingkaran-dasar-36.png",
 };
 
 const latihanOlimpiade = [
