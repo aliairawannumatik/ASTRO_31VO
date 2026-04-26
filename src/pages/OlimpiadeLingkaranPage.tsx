@@ -102,20 +102,20 @@ const BusurJuringSVG = () => (
     <path d="M120,30 A85,85 0,0,1 199.9,144.1"
       fill="none" stroke="#f472b6" strokeWidth="3.5" strokeLinecap="round" />
     {/* angle arc α at center O between OA and OB */}
-    <path d="M120,93 A22,22 0,0,1 140.7,122.5" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    <path d="M120,80 A35,35 0,0,1 153.0,127.0" fill="none" stroke="#fbbf24" strokeWidth="2" />
     {/* center O */}
     <circle cx="120" cy="115" r="3.5" fill="#f8fafc" />
 
     {/* Labels */}
-    <text x="127" y="118" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
+    <text x="105" y="119" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
     <text x="113" y="22" fill="#e2e8f0" fontSize="12" fontWeight="bold">A</text>
     <text x="205" y="148" fill="#e2e8f0" fontSize="12" fontWeight="bold">B</text>
     {/* r label on OA */}
     <text x="124" y="75" fill="#818cf8" fontSize="12" fontStyle="italic">r</text>
     {/* r label on OB */}
-    <text x="156" y="120" fill="#818cf8" fontSize="12" fontStyle="italic">r</text>
-    {/* α label */}
-    <text x="135" y="113" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
+    <text x="158" y="122" fill="#818cf8" fontSize="12" fontStyle="italic">r</text>
+    {/* α label inside the wedge */}
+    <text x="139" y="105" fill="#fbbf24" fontSize="14" fontWeight="bold">α</text>
     {/* Busur AB label near arc */}
     <text x="200" y="80" fill="#f472b6" fontSize="10" fontStyle="italic">busur</text>
     <text x="158" y="65" fill="#a78bfa" fontSize="10" fontStyle="italic">juring</text>
