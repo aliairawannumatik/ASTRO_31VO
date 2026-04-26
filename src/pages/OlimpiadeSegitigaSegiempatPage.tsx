@@ -371,6 +371,69 @@ const BangunSoal2SegiSVG = () => {
   );
 };
 
+/* SVG soal Latihan Dasar No. 7 — segi-enam dengan top 6 cm, kiri 8 cm, bawah 12 cm,
+   step kanan-atas 6 cm vertikal + 4 cm horizontal lalu diagonal pendek ke pojok kanan bawah. */
+const BangunSoal7SegiSVG = () => {
+  const stroke = "#1e293b";
+  const fill = "#cfe6f0";
+  const cm = 18;
+  const ox = 40, oy = 30;
+  const pt = (x: number, y: number) => ({ x: ox + x * cm, y: oy + y * cm });
+
+  const P1 = pt(0, 0);   // top-left
+  const P2 = pt(6, 0);   // top-right (akhir top edge 6 cm)
+  const P3 = pt(6, 6);   // ujung bawah inner vertical (turun 6 cm)
+  const P4 = pt(10, 6);  // ujung kanan inner horizontal (4 cm)
+  const P5 = pt(12, 8);  // pojok kanan bawah (diagonal pendek)
+  const P6 = pt(0, 8);   // pojok kiri bawah
+
+  const fmt = (p: { x: number; y: number }) => `${p.x},${p.y}`;
+  const poly = [P1, P2, P3, P4, P5, P6].map(fmt).join(" ");
+
+  const mTop = pt(3, 0);
+  const mLeft = pt(0, 4);
+  const mBot = pt(6, 8);
+  const mInV = pt(6, 3);
+  const mInH = pt(8, 6);
+
+  return (
+    <svg viewBox="0 0 290 210" className="w-full max-w-[320px]" data-testid="svg-soal-segi-dasar-7">
+      <polygon points={poly} fill={fill} stroke={stroke} strokeWidth="2" />
+
+      {/* 6 cm top */}
+      <text x={mTop.x} y={mTop.y - 8} textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">6 cm</text>
+      {/* 8 cm left (rotated) */}
+      <text
+        x={mLeft.x - 14}
+        y={mLeft.y}
+        textAnchor="middle"
+        fill={stroke}
+        fontSize="12"
+        fontWeight="600"
+        transform={`rotate(-90 ${mLeft.x - 14} ${mLeft.y})`}
+      >
+        8 cm
+      </text>
+      {/* 12 cm bottom */}
+      <text x={mBot.x} y={mBot.y + 16} textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">12 cm</text>
+      {/* 6 cm inner vertical (rotated, di area cut-out kanan) */}
+      <text
+        x={mInV.x + 16}
+        y={mInV.y}
+        textAnchor="middle"
+        fill={stroke}
+        fontSize="12"
+        fontWeight="600"
+        transform={`rotate(-90 ${mInV.x + 16} ${mInV.y})`}
+      >
+        6 cm
+      </text>
+      {/* 4 cm inner horizontal (di area cut-out atas) */}
+      <text x={mInH.x} y={mInH.y - 6} textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">4 cm</text>
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 6 — jajar genjang ADCB dengan dua segitiga (top apex H, bottom apex G)
    E adalah kaki tegak lurus dari D ke AB. */
 const BangunSoal6SegiSVG = () => {
@@ -857,6 +920,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Panjang AD = BE = 17 cm dan DE = 15 cm. Luas bangun AGBCHD adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 7 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar berikut.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <BangunSoal7SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Luas bangun di samping adalah ...
                     </div>
                   </>
                 ) : (
