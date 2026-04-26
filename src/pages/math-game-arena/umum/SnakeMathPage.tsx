@@ -61,7 +61,17 @@ const MIN_INTERVAL = 68;
 const GROW_ON_CORRECT = 3;
 const SHRINK_ON_WRONG = 2;
 
-const SnakeMathPage = () => {
+interface SnakeMathPageProps {
+  topicLabel?: string;
+  backPath?: string;
+  homePath?: string;
+}
+
+const SnakeMathPage = ({
+  topicLabel,
+  backPath,
+  homePath = "/ruang-untuk-guru/numatik-game",
+}: SnakeMathPageProps = {}) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -614,17 +624,22 @@ const SnakeMathPage = () => {
         {/* nav */}
         <div className="flex items-center justify-between w-full mb-2">
           <button
-            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            onClick={() => { playPopSound(); navigate(homePath); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
             title="Menu Utama"
           >
             🏠
           </button>
-          <h1 className="font-display text-xl font-bold text-primary text-glow-cyan text-center flex-1">
-            🐍 SNAKE MATEMATIKA
-          </h1>
+          <div className="flex-1 text-center">
+            <h1 className="font-display text-xl font-bold text-primary text-glow-cyan leading-tight">
+              🐍 SNAKE MATEMATIKA
+            </h1>
+            {topicLabel && (
+              <p className="font-body text-[10px] text-white/50 mt-0.5">{topicLabel}</p>
+            )}
+          </div>
           <button
-            onClick={() => { playPopSound(); navigate(-1); }}
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
             title="Keluar"
           >

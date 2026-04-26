@@ -100,7 +100,17 @@ function getGhost(grid: Grid, piece: Piece): Piece {
 const SCORES = [0, 100, 300, 500, 800];
 const LEVEL_SPEEDS = [800, 700, 600, 500, 400, 320, 250, 200, 160, 130];
 
-const TetrisGamePage = () => {
+interface TetrisGamePageProps {
+  topicLabel?: string;
+  backPath?: string;
+  homePath?: string;
+}
+
+const TetrisGamePage = ({
+  topicLabel,
+  backPath,
+  homePath = "/ruang-untuk-guru/numatik-game",
+}: TetrisGamePageProps = {}) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -394,17 +404,22 @@ const TetrisGamePage = () => {
       <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
         <div className="flex items-center justify-between w-full mb-3">
           <button
-            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            onClick={() => { playPopSound(); navigate(homePath); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
             title="Menu Utama"
           >
             🏠
           </button>
-          <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan text-center flex-1">
-            🧩 TETRIS NUMATIK
-          </h1>
+          <div className="flex-1 text-center">
+            <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan leading-tight">
+              🧩 TETRIS NUMATIK
+            </h1>
+            {topicLabel && (
+              <p className="font-body text-[10px] text-white/50 mt-0.5">{topicLabel}</p>
+            )}
+          </div>
           <button
-            onClick={() => { playPopSound(); navigate(-1); }}
+            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
             title="Keluar"
           >

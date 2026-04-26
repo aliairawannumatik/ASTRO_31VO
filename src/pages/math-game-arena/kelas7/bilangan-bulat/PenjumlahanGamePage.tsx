@@ -62,6 +62,24 @@ const variants: GameVariant[] = [
     to: "#06b6d4",
     glow: "rgba(16,185,129,0.4)",
   },
+  {
+    name: "Tetris Numatik",
+    emoji: "🧩",
+    description: "Susun blok agar tidak menumpuk! Jawab soal bonus untuk skor tambahan.",
+    path: "/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tetris",
+    from: "#06b6d4",
+    to: "#a855f7",
+    glow: "rgba(168,85,247,0.4)",
+  },
+  {
+    name: "Snake Matematika",
+    emoji: "🐍",
+    description: "Makan jawaban yang benar dan hindari jawaban salah!",
+    path: "/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/snake-math",
+    from: "#22c55e",
+    to: "#0ea5e9",
+    glow: "rgba(34,197,94,0.4)",
+  },
 ];
 
 const PenjumlahanGamePage = () => {

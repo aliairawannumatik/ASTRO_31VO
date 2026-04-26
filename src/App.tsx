@@ -507,6 +507,8 @@ import PenjumlahanTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bi
 import PenjumlahanFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanFlappyRocketGamePage";
 import PenjumlahanTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTembakTankGamePage";
 import PenjumlahanSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSpaceImpactGamePage";
+import PenjumlahanTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTetrisGamePage";
+import PenjumlahanSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSnakeMathGamePage";
 
 // Math Game Arena - Kelas 9 Topic Pages
 import BilanganBerpangkatMGAK9Page from "./pages/math-game-arena/kelas9/BilanganBerpangkatPage";
@@ -1139,6 +1141,8 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/flappy-rocket" element={<PenjumlahanFlappyRocketGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tembak-tank" element={<PenjumlahanTembakTankGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/space-impact" element={<PenjumlahanSpaceImpactGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tetris" element={<PenjumlahanTetrisGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/snake-math" element={<PenjumlahanSnakeMathGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatGameMGAK7Page />} />
