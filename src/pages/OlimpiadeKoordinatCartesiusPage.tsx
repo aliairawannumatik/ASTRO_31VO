@@ -373,6 +373,76 @@ const LatihanDasar2SVG = () => {
   );
 };
 
+// SVG: Latihan Dasar No 3 - Titik A(-2, 4), B(5, 5), C(6, -2), D(1, -4)
+const LatihanDasar3SVG = () => {
+  const unit = 22;
+  const xMin = -3, xMax = 6;
+  const yMin = -5, yMax = 5;
+  const padX = 22, padY = 22;
+  const W = (xMax - xMin) * unit + padX * 2;
+  const H = (yMax - yMin) * unit + padY * 2;
+  const xPx = (x: number) => padX + (x - xMin) * unit;
+  const yPx = (y: number) => padY + (yMax - y) * unit;
+  const ox = xPx(0);
+  const oy = yPx(0);
+
+  const vlines = [];
+  for (let x = xMin; x <= xMax; x++) {
+    if (x === 0) continue;
+    vlines.push(
+      <line key={`v${x}`} x1={xPx(x)} y1={padY} x2={xPx(x)} y2={H - padY} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+    );
+  }
+  const hlines = [];
+  for (let y = yMin; y <= yMax; y++) {
+    if (y === 0) continue;
+    hlines.push(
+      <line key={`h${y}`} x1={padX} y1={yPx(y)} x2={W - padX} y2={yPx(y)} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+    );
+  }
+
+  const points = [
+    { name: "A", x: -2, y: 4, lx: -8, ly: -4 },
+    { name: "B", x: 5, y: 5, lx: 8, ly: -2 },
+    { name: "C", x: 6, y: -2, lx: 8, ly: 4 },
+    { name: "D", x: 1, y: -4, lx: 8, ly: 12 },
+  ];
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {vlines}
+        {hlines}
+        {/* Sumbu X dan Y kuning tebal */}
+        <line x1={padX} y1={oy} x2={W - padX} y2={oy} stroke="#fbbf24" strokeWidth="3" />
+        <line x1={ox} y1={padY} x2={ox} y2={H - padY} stroke="#fbbf24" strokeWidth="3" />
+        {/* Tick labels sumbu X */}
+        {[-3, -2, -1, 1, 2, 3, 4, 5, 6].map(x => (
+          <text key={`xt${x}`} x={xPx(x)} y={oy + 14} fill="#e5e7eb" fontSize="9" fontWeight="bold" textAnchor="middle">{x}</text>
+        ))}
+        {/* Tick labels sumbu Y */}
+        {[5, 4, 3, 2, 1, -1, -2, -3, -4, -5].map(y => (
+          <text key={`yt${y}`} x={ox + 6} y={yPx(y) + 4} fill="#e5e7eb" fontSize="9" fontWeight="bold">{y}</text>
+        ))}
+        {/* Garis bantu putus-putus dari setiap titik ke sumbu */}
+        {points.map(p => (
+          <g key={`d-${p.name}`}>
+            <line x1={ox} y1={yPx(p.y)} x2={xPx(p.x)} y2={yPx(p.y)} stroke="#60a5fa" strokeWidth="1" strokeDasharray="3 2" opacity="0.85" />
+            <line x1={xPx(p.x)} y1={oy} x2={xPx(p.x)} y2={yPx(p.y)} stroke="#60a5fa" strokeWidth="1" strokeDasharray="3 2" opacity="0.85" />
+          </g>
+        ))}
+        {/* Titik dan label */}
+        {points.map(p => (
+          <g key={p.name}>
+            <circle cx={xPx(p.x)} cy={yPx(p.y)} r="3.5" fill="#22d3ee" />
+            <text x={xPx(p.x) + p.lx} y={yPx(p.y) + p.ly} fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor={p.lx < 0 ? "end" : "start"}>{p.name}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -620,6 +690,7 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                 </div>
                 {soal.no === 1 && <LatihanDasar1SVG />}
                 {soal.no === 2 && <LatihanDasar2SVG />}
+                {soal.no === 3 && <LatihanDasar3SVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
