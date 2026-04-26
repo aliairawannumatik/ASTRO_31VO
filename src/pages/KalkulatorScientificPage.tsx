@@ -3,7 +3,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { Calculator, ChevronLeft, ChevronRight, History, Settings2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, Fragment } from "react";
 import { evaluate, pi, e as eulerE, factorial, sqrt, log, log10, sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, asinh, acosh, atanh, abs, ceil, floor, round, gcd, lcm, mod, nthRoot, pow, exp, combinations, permutations } from "mathjs";
 
 type AngleMode = "DEG" | "RAD";
@@ -127,48 +127,113 @@ const formatResult = (value: number, displayMode: DisplayMode): string => {
   return Number.isInteger(rounded) ? rounded.toString() : rounded.toString();
 };
 
-// Render expression string with proper superscripts for ^(...) notation
-// Also handles incomplete exponents at end of string (no closing paren yet)
-const renderExpression = (expr: string): React.ReactNode => {
+// Cursor element shown between characters (blinking caret)
+const CursorCaret = () => (
+  <span
+    aria-hidden="true"
+    className="inline-block w-[2px] h-[1em] bg-cyan-300 align-middle mx-[1px] animate-pulse"
+  />
+);
+
+// Render expression string with proper superscripts for ^(...) notation,
+// with a clickable cursor and per-character click handlers for editing.
+const renderExpression = (
+  expr: string,
+  cursorPos: number,
+  onSetCursor: (pos: number) => void
+): React.ReactNode => {
   const elements: React.ReactNode[] = [];
   let i = 0;
-  let currentText = "";
   let key = 0;
 
+  const charSpan = (ch: string, idx: number) => (
+    <span
+      key={`c-${idx}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        onSetCursor(idx);
+      }}
+      className="cursor-text select-none"
+    >
+      {ch}
+    </span>
+  );
+
   while (i < expr.length) {
+    // Render cursor before this position if needed
+    if (i === cursorPos) {
+      elements.push(<CursorCaret key={`cur-${i}-${key++}`} />);
+    }
+
     if (expr[i] === "^" && i + 1 < expr.length && expr[i + 1] === "(") {
-      if (currentText) {
-        elements.push(<span key={key++}>{currentText}</span>);
-        currentText = "";
-      }
+      const caretIdx = i; // position of "^"
+      const openIdx = i + 1; // position of "("
       i += 2; // skip ^(
       let depth = 1;
-      let exponent = "";
+      const innerChars: { ch: string; idx: number }[] = [];
       while (i < expr.length) {
         if (expr[i] === "(") depth++;
         else if (expr[i] === ")") {
           depth--;
           if (depth === 0) break;
         }
-        exponent += expr[i];
+        innerChars.push({ ch: expr[i], idx: i });
         i++;
       }
-      if (i < expr.length) i++; // skip closing )
-      // Render as superscript — show ▮ cursor if exponent is still empty
+      const closeIdx = i; // position of ")" (or end)
+      const hasClose = i < expr.length;
+      if (hasClose) i++; // skip closing )
+
+      // Tiny invisible anchor so user can place cursor BEFORE the superscript by clicking the "^"
       elements.push(
-        <sup key={key++} className="text-[0.6em] leading-none text-yellow-200">
-          {exponent || "▮"}
+        <span
+          key={`hat-${caretIdx}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onSetCursor(caretIdx);
+          }}
+          className="cursor-text select-none text-cyan-300/30"
+        >
+          ^
+        </span>
+      );
+
+      // Superscript block — clickable per character, with cursor support inside
+      elements.push(
+        <sup
+          key={`sup-${key++}`}
+          className="text-[0.6em] leading-none text-yellow-200"
+          onClick={(e) => {
+            // clicking empty area inside the sup → place cursor at end of exponent
+            e.stopPropagation();
+            onSetCursor(closeIdx);
+          }}
+        >
+          {/* cursor at start of exponent */}
+          {cursorPos === openIdx + 1 && <CursorCaret />}
+          {innerChars.length === 0 && cursorPos !== openIdx + 1 && cursorPos !== closeIdx && (
+            <span className="text-yellow-200/60">▮</span>
+          )}
+          {innerChars.map(({ ch, idx }) => (
+            <Fragment key={`sc-${idx}`}>
+              {charSpan(ch, idx)}
+              {cursorPos === idx + 1 && <CursorCaret />}
+            </Fragment>
+          ))}
         </sup>
       );
     } else {
-      currentText += expr[i];
+      elements.push(charSpan(expr[i], i));
       i++;
     }
   }
 
-  if (currentText) elements.push(<span key={key++}>{currentText}</span>);
+  // Cursor at end of expression
+  if (cursorPos >= expr.length) {
+    elements.push(<CursorCaret key={`cur-end-${key++}`} />);
+  }
 
-  return elements.length > 0 ? <>{elements}</> : <span> </span>;
+  return elements.length > 0 ? <>{elements}</> : <CursorCaret />;
 };
 
 const KalkulatorScientificPage = () => {
@@ -185,9 +250,92 @@ const KalkulatorScientificPage = () => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [cursorPosition, setCursorPosition] = useState(0);
-  const [isInExponent, setIsInExponent] = useState(false);
-  const [exponentStr, setExponentStr] = useState("");
   const displayRef = useRef<HTMLDivElement>(null);
+
+  // Refs that always hold the latest values, used inside event handlers
+  // to avoid stale closures (so we don't have to re-attach the keyboard
+  // listener on every keystroke).
+  const expressionRef = useRef(expression);
+  const cursorRef = useRef(cursorPosition);
+  useEffect(() => {
+    expressionRef.current = expression;
+  }, [expression]);
+  useEffect(() => {
+    cursorRef.current = cursorPosition;
+  }, [cursorPosition]);
+
+  // Insert a string at the current cursor position and advance the cursor.
+  const insertAtCursor = useCallback((value: string) => {
+    const expr = expressionRef.current;
+    const pos = Math.min(Math.max(cursorRef.current, 0), expr.length);
+    const next = expr.slice(0, pos) + value + expr.slice(pos);
+    setExpression(next);
+    setCursorPosition(pos + value.length);
+  }, []);
+
+  // Funcs that we delete as a single token (e.g. "sin(")
+  const TOKEN_FUNCS = [
+    "asinh(", "acosh(", "atanh(",
+    "asin(", "acos(", "atan(",
+    "sinh(", "cosh(", "tanh(",
+    "log₁₀(", "ln(", "sin(", "cos(", "tan(",
+    "abs(", "Exp(", "exp(",
+    "10^(", "e^(", "^(1/", "√(", "∛(",
+  ];
+
+  const handleClearAll = () => {
+    playPopSound();
+    setExpression("");
+    setDisplayExpression("");
+    setResult("0");
+    setCursorPosition(0);
+  };
+
+  const handleDelete = () => {
+    playPopSound();
+    const expr = expressionRef.current;
+    const pos = cursorRef.current;
+    if (pos <= 0 || expr.length === 0) return;
+
+    // Try to delete a multi-character token immediately before the cursor
+    let deletedLen = 0;
+    for (const func of TOKEN_FUNCS) {
+      if (pos >= func.length && expr.slice(pos - func.length, pos) === func) {
+        deletedLen = func.length;
+        break;
+      }
+    }
+    if (deletedLen === 0) deletedLen = 1;
+
+    const next = expr.slice(0, pos - deletedLen) + expr.slice(pos);
+    setExpression(next);
+    setCursorPosition(pos - deletedLen);
+  };
+
+  const moveCursor = useCallback((delta: number) => {
+    const expr = expressionRef.current;
+    setCursorPosition((prev) => {
+      const next = prev + delta;
+      if (next < 0) return 0;
+      if (next > expr.length) return expr.length;
+      return next;
+    });
+  }, []);
+
+  const handleInput = useCallback((value: string) => {
+    playPopSound();
+    insertAtCursor(value);
+    setShiftMode(false);
+    setAlphaMode(false);
+  }, [insertAtCursor]);
+
+  const handleFunction = useCallback((func: string, displayFunc?: string) => {
+    playPopSound();
+    const displayText = displayFunc || func;
+    insertAtCursor(displayText + "(");
+    setShiftMode(false);
+    setAlphaMode(false);
+  }, [insertAtCursor]);
 
   // Handle keyboard input
   useEffect(() => {
@@ -208,6 +356,7 @@ const KalkulatorScientificPage = () => {
         e.preventDefault();
         handleEqual();
       } else if (e.key === "Backspace") {
+        e.preventDefault();
         handleDelete();
       } else if (e.key === "Escape") {
         handleClearAll();
@@ -215,63 +364,24 @@ const KalkulatorScientificPage = () => {
         handleInput("(");
       } else if (e.key === ")") {
         handleInput(")");
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        moveCursor(-1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        moveCursor(1);
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        setCursorPosition(0);
+      } else if (e.key === "End") {
+        e.preventDefault();
+        setCursorPosition(expressionRef.current.length);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [expression]);
-
-  const handleClearAll = () => {
-    playPopSound();
-    setExpression("");
-    setDisplayExpression("");
-    setResult("0");
-    setCursorPosition(0);
-    setIsInExponent(false);
-    setExponentStr("");
-  };
-
-  const handleDelete = () => {
-    playPopSound();
-    if (isInExponent) {
-      if (exponentStr.length > 0) {
-        setExponentStr(prev => prev.slice(0, -1));
-      } else {
-        setIsInExponent(false);
-      }
-      return;
-    }
-    if (expression.length > 0) {
-      const funcs = ["sin(", "cos(", "tan(", "log₁₀(", "ln(", "√(", "∛(", "asin(", "acos(", "atan(", "sinh(", "cosh(", "tanh(", "asinh(", "acosh(", "atanh(", "abs(", "Exp(", "10^(", "e^(", "^(1/"];
-      let deleted = false;
-      for (const func of funcs) {
-        if (expression.endsWith(func)) {
-          setExpression(expression.slice(0, -func.length));
-          deleted = true;
-          break;
-        }
-      }
-      if (!deleted) {
-        setExpression(expression.slice(0, -1));
-      }
-    }
-  };
-
-  const handleInput = useCallback((value: string) => {
-    playPopSound();
-    setExpression(prev => prev + value);
-    setShiftMode(false);
-    setAlphaMode(false);
-  }, []);
-
-  const handleFunction = useCallback((func: string, displayFunc?: string) => {
-    playPopSound();
-    const displayText = displayFunc || func;
-    setExpression(prev => prev + displayText + "(");
-    setShiftMode(false);
-    setAlphaMode(false);
-  }, []);
+  }, [handleInput, moveCursor]);
 
   const handleEqual = () => {
     playPopSound();
@@ -352,7 +462,7 @@ const KalkulatorScientificPage = () => {
 
   const handleMemoryRecall = () => {
     playPopSound();
-    setExpression(prev => prev + memory.toString());
+    insertAtCursor(memory.toString());
   };
 
   const handleMemoryClear = () => {
@@ -362,12 +472,13 @@ const KalkulatorScientificPage = () => {
 
   const handleAns = () => {
     playPopSound();
-    setExpression(prev => prev + "Ans");
+    insertAtCursor("Ans");
   };
 
   const handleHistorySelect = (item: HistoryItem) => {
     playPopSound();
     setExpression(item.expression);
+    setCursorPosition(item.expression.length);
     setResult(item.result);
     setShowHistory(false);
   };
@@ -482,13 +593,19 @@ const KalkulatorScientificPage = () => {
 
         {/* Display */}
         <div className="mx-2 mb-3 rounded-xl bg-gradient-to-b from-cyan-900/20 to-slate-900/40 border border-cyan-500/20 p-4 shadow-[inset_0_2px_15px_rgba(0,0,0,0.5)]">
-          <div 
+          <div
             ref={displayRef}
             className="min-h-[100px] flex flex-col justify-end text-right font-mono"
           >
-            {/* Expression */}
-            <div className="text-xl text-cyan-300/90 break-all leading-relaxed mb-2 overflow-x-auto tracking-wide">
-              {expression ? renderExpression(expression) : " "}
+            {/* Expression — tap anywhere to place cursor; tap a character to place
+                cursor before it. Empty area sets cursor at end. */}
+            <div
+              role="textbox"
+              aria-label="Expression editor — tap to position cursor"
+              onClick={() => setCursorPosition(expression.length)}
+              className="text-xl text-cyan-300/90 break-all leading-relaxed mb-2 overflow-x-auto tracking-wide cursor-text min-h-[1.75rem]"
+            >
+              {renderExpression(expression, cursorPosition, (pos) => setCursorPosition(pos))}
             </div>
             {/* Result */}
             <div className="text-4xl text-white font-bold flex items-center justify-end gap-1">
@@ -551,10 +668,10 @@ const KalkulatorScientificPage = () => {
             >
               ALPHA
             </CalcButton>
-            <CalcButton onClick={() => handleInput("")} className="h-9 text-white/60 bg-slate-700/50 border border-white/10">
+            <CalcButton onClick={() => { playPopSound(); moveCursor(-1); }} className="h-9 text-white/80 bg-slate-700/50 border border-white/10 hover:bg-slate-600/60">
               <ChevronLeft className="w-4 h-4" />
             </CalcButton>
-            <CalcButton onClick={() => handleInput("")} className="h-9 text-white/60 bg-slate-700/50 border border-white/10">
+            <CalcButton onClick={() => { playPopSound(); moveCursor(1); }} className="h-9 text-white/80 bg-slate-700/50 border border-white/10 hover:bg-slate-600/60">
               <ChevronRight className="w-4 h-4" />
             </CalcButton>
             <CalcButton onClick={toggleDisplayMode} className="h-9 text-xs text-white/80 bg-slate-700/50 border border-white/10">
@@ -883,7 +1000,7 @@ const KalkulatorScientificPage = () => {
               Exp
             </CalcButton>
             <CalcButton
-              onClick={() => { playPopSound(); shiftMode ? setExpression(prev => prev + lastAnswer.toString()) : handleAns(); setShiftMode(false); }}
+              onClick={() => { playPopSound(); if (shiftMode) { insertAtCursor(lastAnswer.toString()); } else { handleAns(); } setShiftMode(false); }}
               className="h-11 text-sm bg-slate-800/80 text-amber-400 border border-amber-500/30 hover:bg-slate-700/80"
               subLabel={shiftMode ? "" : "PreAns"}
               subLabelColor="text-purple-400"
