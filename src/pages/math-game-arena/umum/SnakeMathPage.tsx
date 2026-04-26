@@ -285,20 +285,20 @@ const SnakeMathPage = ({
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
 
-    // grass-meadow gradient background
+    // soft dark navy/indigo background — neutral so snake pops
     const bgGrad = ctx.createLinearGradient(0, 0, 0, CH);
-    bgGrad.addColorStop(0, "#0a3a1f");
-    bgGrad.addColorStop(0.5, "#0f4a2a");
-    bgGrad.addColorStop(1, "#0a2a18");
+    bgGrad.addColorStop(0, "#0d1424");
+    bgGrad.addColorStop(0.5, "#121a30");
+    bgGrad.addColorStop(1, "#0a1020");
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, CW, CH);
 
-    // soft floating "fireflies" (reused bg stars)
+    // soft floating dust (reused bg stars) in warm white
     bgStarsRef.current.forEach(s => {
       s.t += dt * s.s;
       const a = 0.18 + 0.55 * Math.abs(Math.sin(s.t));
       ctx.globalAlpha = a;
-      ctx.fillStyle = "#bff7c8";
+      ctx.fillStyle = "#ffe9b8";
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fill();
@@ -306,17 +306,17 @@ const SnakeMathPage = ({
     ctx.globalAlpha = 1;
 
     // checker tile pattern (very subtle for depth)
-    ctx.fillStyle = "rgba(255,255,255,0.018)";
+    ctx.fillStyle = "rgba(255,255,255,0.022)";
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
         if ((r + c) % 2 === 0) ctx.fillRect(c * CELL, r * CELL, CELL, CELL);
       }
     }
 
-    // border glow
-    ctx.shadowColor = "#00FFAA";
-    ctx.shadowBlur = 14;
-    ctx.strokeStyle = "rgba(0,255,170,0.45)";
+    // golden border glow — strong contrast against dark bg
+    ctx.shadowColor = "#FFC53D";
+    ctx.shadowBlur = 16;
+    ctx.strokeStyle = "rgba(255,197,61,0.65)";
     ctx.lineWidth = 3;
     ctx.strokeRect(1.5, 1.5, GW - 3, GH - 3);
     ctx.shadowBlur = 0;
@@ -844,9 +844,11 @@ const SnakeMathPage = ({
             <span className="text-base leading-none">←</span>
             <span className="hidden sm:inline">Kembali</span>
           </button>
-          <h1 className="font-display text-base sm:text-xl font-bold text-primary text-glow-cyan flex-1 text-center leading-tight">
-            🐍 SNAKE MATEMATIKA
-            {topicLabel ? <span className="block text-[10px] md:text-xs text-emerald-300 font-body mt-0.5">{topicLabel}</span> : null}
+          <h1 className="font-display text-base sm:text-xl font-bold flex-1 text-center leading-tight">
+            <span className="bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(255,215,0,0.45)]">
+              🐍 SNAKE MATEMATIKA
+            </span>
+            {topicLabel ? <span className="block text-[10px] md:text-xs text-cyan-200 font-body mt-0.5">{topicLabel}</span> : null}
           </h1>
           <button
             onClick={() => { playPopSound(); navigate(homePath); }}
@@ -860,22 +862,28 @@ const SnakeMathPage = ({
 
         {/* HUD: question + stats */}
         <div className="w-full max-w-6xl mb-2 flex flex-col gap-2 px-1">
-          <div className="rounded-xl border border-yellow-500/40 bg-yellow-500/10 px-4 py-2 text-center shadow-[0_0_18px_rgba(255,215,0,0.18)]">
-            <span className="font-display text-lg sm:text-2xl font-black text-yellow-300 tracking-wider drop-shadow-[0_0_8px_rgba(255,215,0,0.55)]">
+          <div className="rounded-xl border border-amber-400/50 bg-gradient-to-r from-amber-500/15 via-yellow-500/15 to-amber-500/15 px-4 py-2 text-center shadow-[0_0_18px_rgba(255,200,0,0.25)]">
+            <span className="font-display text-lg sm:text-2xl font-black text-amber-200 tracking-wider drop-shadow-[0_0_8px_rgba(255,215,0,0.65)]">
               {question || "..."} = ?
             </span>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs sm:text-sm font-display">
             <div className="flex flex-wrap gap-3">
-              <span className="text-emerald-300">⭐ SKOR: <span className="font-bold text-sm sm:text-base text-emerald-200">{score}</span></span>
-              <span className="text-cyan-300">🏆 REKOR: <span className="font-bold text-cyan-200">{best}</span></span>
-              <span className="text-lime-300">🐍 PANJANG: <span className="font-bold text-lime-200">{snakeLen}</span></span>
+              <span className="px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-400/40 text-amber-200">
+                ⭐ SKOR: <span className="font-bold text-sm sm:text-base text-amber-100">{score}</span>
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-400/40 text-cyan-200">
+                🏆 REKOR: <span className="font-bold text-cyan-100">{best}</span>
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-pink-500/15 border border-pink-400/40 text-pink-200">
+                🐍 PANJANG: <span className="font-bold text-pink-100">{snakeLen}</span>
+              </span>
             </div>
-            <div className="flex items-center gap-2 min-w-[140px]">
-              <span className="text-orange-300 text-[10px] sm:text-xs">⚡ KECEPATAN</span>
+            <div className="flex items-center gap-2 min-w-[160px]">
+              <span className="text-orange-300 text-[10px] sm:text-xs whitespace-nowrap">⚡ KECEPATAN</span>
               <div className="flex-1 h-2 rounded-full bg-white/10 overflow-hidden border border-white/10">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500 transition-[width] duration-300"
+                  className="h-full bg-gradient-to-r from-sky-400 via-orange-400 to-red-500 transition-[width] duration-300"
                   style={{ width: `${Math.max(0, Math.min(100, speedPct))}%` }}
                 />
               </div>
@@ -897,7 +905,7 @@ const SnakeMathPage = ({
               ref={canvasRef}
               width={CW}
               height={CH}
-              className="rounded-2xl border-2 border-emerald-500/30 shadow-[0_0_40px_rgba(0,255,136,0.25)] w-full h-full block"
+              className="rounded-2xl border-2 border-amber-400/40 shadow-[0_0_40px_rgba(255,200,80,0.28)] w-full h-full block"
             />
 
             {/* feedback toast */}
@@ -930,20 +938,20 @@ const SnakeMathPage = ({
         <div className="mt-2 mb-1 flex flex-col items-center gap-1 sm:hidden">
           <button
             onPointerDown={() => { if (nextDirRef.current !== "D") nextDirRef.current = "U"; }}
-            className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
+            className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
           >▲</button>
           <div className="flex gap-2">
             <button
               onPointerDown={() => { if (nextDirRef.current !== "R") nextDirRef.current = "L"; }}
-              className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
+              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
             >◀</button>
             <button
               onPointerDown={() => { if (nextDirRef.current !== "U") nextDirRef.current = "D"; }}
-              className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
+              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
             >▼</button>
             <button
               onPointerDown={() => { if (nextDirRef.current !== "L") nextDirRef.current = "R"; }}
-              className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
+              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
             >▶</button>
           </div>
         </div>
