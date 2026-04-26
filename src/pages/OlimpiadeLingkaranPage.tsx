@@ -6,6 +6,9 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import PembahasanCard from "@/components/PembahasanCard";
+import { lingkaranDasarPembahasan } from "@/data/pembahasan/lingkaranDasar";
+import { lingkaranOlimpiadePembahasan } from "@/data/pembahasan/lingkaranOlimpiade";
 
 const M = ({ math }: { math: string }) => <InlineMath math={math} />;
 
@@ -755,6 +758,9 @@ const OlimpiadeLingkaranPage = () => {
                       ))}
                     </div>
                   )}
+                  {lingkaranDasarPembahasan[soal.no] && (
+                    <PembahasanCard pembahasanKey={`ling-dasar-${soal.no}`} pembahasan={lingkaranDasarPembahasan[soal.no]} />
+                  )}
                 </div>
               </div>
             ))}
@@ -788,6 +794,9 @@ const OlimpiadeLingkaranPage = () => {
                         </div>
                       ))}
                     </div>
+                  )}
+                  {lingkaranOlimpiadePembahasan[soal.no] && (
+                    <PembahasanCard pembahasanKey={`ling-olim-${soal.no}`} pembahasan={lingkaranOlimpiadePembahasan[soal.no]} />
                   )}
                 </div>
               </div>
