@@ -361,7 +361,7 @@ const SegitigaXSVG = () => {
 
   return (
     <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-[180px] sm:max-w-[220px] rounded-lg border border-border/40 bg-white/5">
         {/* Segitiga */}
         <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
         {/* Tanda siku-siku di kiri-bawah */}
