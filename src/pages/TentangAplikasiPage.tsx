@@ -3,7 +3,6 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
-import kepalaSekolahImg from "@assets/image_1777175755334.png";
 
 const TentangAplikasiPage = () => {
   const navigate = useNavigate();
@@ -47,55 +46,6 @@ const TentangAplikasiPage = () => {
       <PageNavigation />
 
       <div className="relative z-10 max-w-4xl w-full px-4 py-10">
-        {/* Ucapan Terima Kasih kepada Kepala Sekolah */}
-        <div className="mb-8 animate-slide-up">
-          <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 shadow-[0_0_40px_rgba(251,191,36,0.25)]">
-            <div className="rounded-2xl bg-[#0d0d2b]/95 backdrop-blur p-6 md:p-8">
-              <div className="flex items-center justify-center gap-2 mb-5">
-                <span className="text-2xl">🌹</span>
-                <h2 className="font-display text-base md:text-lg font-black tracking-widest uppercase bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent">
-                  Ucapan Terima Kasih
-                </h2>
-                <span className="text-2xl">🌹</span>
-              </div>
-
-              <div className="flex flex-col md:flex-row items-center gap-6">
-                <div className="relative shrink-0">
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full opacity-30 blur-xl animate-pulse" />
-                  <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-amber-400/60 shadow-[0_0_25px_rgba(251,191,36,0.4)]">
-                    <img
-                      src={kepalaSekolahImg}
-                      alt="Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd"
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex-1 text-center md:text-left">
-                  <p className="font-body text-xs md:text-sm text-amber-200/80 mb-1 italic">
-                    Dengan penuh hormat dan apresiasi yang tulus kepada
-                  </p>
-                  <p className="font-display text-lg md:text-xl font-black text-amber-300 mb-1 leading-tight">
-                    Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd.
-                  </p>
-                  <p className="font-body text-xs md:text-sm text-amber-100/90 mb-4 italic">
-                    Kepala SMP Negeri 28 Bandung
-                  </p>
-                  <p className="font-body text-sm md:text-base text-white/90 leading-relaxed text-justify">
-                    Terima kasih yang tak terhingga atas <strong className="text-amber-300">motivasi</strong>, <strong className="text-amber-300">bimbingan</strong>, dan <strong className="text-amber-300">masukan-masukan berharga</strong> yang telah diberikan, sehingga kami terus terdorong untuk berkarya dan menghadirkan aplikasi <strong className="text-yellow-300">NUMATIK</strong> ini bagi dunia pendidikan. Semoga setiap langkah kebaikan dan dedikasi Ibu menjadi inspirasi serta menuai keberkahan yang melimpah.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-5 pt-4 border-t border-amber-400/20 text-center">
-                <p className="font-body text-xs text-amber-200/70 italic">
-                  "Pendidikan adalah senjata paling ampuh untuk mengubah dunia."
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="text-center mb-8 animate-scale-in">
           <div className="relative w-32 h-32 mx-auto mb-4">
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full opacity-20 blur-2xl animate-pulse" />

@@ -4,6 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
+import kepalaSekolahImg from "@assets/image_1777175755334.png";
 
 const BiografiPage = () => {
   const navigate = useNavigate();
@@ -65,6 +66,57 @@ const BiografiPage = () => {
             <span className="text-yellow-300 text-sm">✦</span>
             <p className="text-yellow-300 font-display text-xs font-bold tracking-widest uppercase">Ucapan Terima Kasih</p>
             <span className="text-yellow-300 text-sm">✦</span>
+          </div>
+        </div>
+
+        {/* Kepala Sekolah SMPN 28 Bandung */}
+        <div className="animate-slide-up mb-6">
+          <div className="relative rounded-2xl p-[2px] bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 shadow-[0_0_40px_rgba(251,191,36,0.3)]">
+            <div className="relative rounded-2xl bg-[#0d0d2b] p-6 overflow-hidden text-left">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-amber-600/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-4 left-4 text-amber-400/20 text-6xl font-serif pointer-events-none select-none">"</div>
+              <div className="absolute bottom-4 right-4 text-amber-400/20 text-6xl font-serif pointer-events-none select-none">"</div>
+
+              <div className="flex flex-col items-center mb-5 relative z-10">
+                <div className="relative mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full opacity-30 blur-xl animate-pulse" />
+                  <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-amber-400/60 shadow-[0_0_25px_rgba(251,191,36,0.4)]">
+                    <img
+                      src={kepalaSekolahImg}
+                      alt="Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/40 rounded-full px-4 py-0.5 mb-2">
+                  <p className="text-amber-300 font-body text-[10px] font-bold tracking-widest uppercase">Pemimpin · Motivator · Inspirator</p>
+                </div>
+                <h3 className="font-display text-xl font-black text-white text-center drop-shadow-[0_0_10px_rgba(251,191,36,0.6)] leading-tight">
+                  Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd.
+                </h3>
+                <p className="text-amber-200/80 font-body text-xs mt-1 text-center font-semibold">Kepala SMP Negeri 28 Bandung</p>
+              </div>
+
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-amber-400/40 to-transparent mb-5" />
+
+              <div className="relative z-10 space-y-3 text-center px-2">
+                <p className="text-white/90 font-body text-sm leading-relaxed text-justify">
+                  Dengan penuh hormat, terima kasih yang tak terhingga saya haturkan kepada <strong className="text-amber-300">Ibu Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd.</strong> selaku <strong className="text-yellow-300">Kepala SMP Negeri 28 Bandung</strong> — yang telah memberikan <strong className="text-accent">motivasi</strong>, <strong className="text-accent">bimbingan</strong>, serta <strong className="text-accent">masukan-masukan berharga</strong> sehingga kami terus terdorong untuk berkarya hingga aplikasi <strong className="text-primary">NUMATIK</strong> ini tercipta.
+                </p>
+                <p className="text-white/70 font-body text-sm leading-relaxed text-justify italic">
+                  "Semoga setiap langkah kebaikan dan dedikasi Ibu menjadi inspirasi serta menuai keberkahan yang melimpah."
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 pt-2">
+                  {["🌟 Pemimpin Visioner", "💛 Motivator Sejati", "📚 Pendidik Inspiratif", "🌹 Teladan"].map((item) => (
+                    <span key={item} className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/60 font-body text-[11px]">{item}</span>
+                  ))}
+                </div>
+                <div className="pt-3">
+                  <p className="text-amber-300/80 font-display text-xs font-bold tracking-widest">✦ &nbsp; TERIMA KASIH, IBU KEPALA SMPN 28 BANDUNG &nbsp; ✦</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
