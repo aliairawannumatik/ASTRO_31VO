@@ -713,7 +713,7 @@ const SnakeMathPage = ({
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">5</span>
-                  <span className="text-xs">Di komputer: gunakan <strong className="text-emerald-300">← ↑ → ↓</strong> atau <strong className="text-emerald-300">WASD</strong>. Di HP: swipe atau D-pad.</span>
+                  <span className="text-xs">Di komputer: gunakan <strong className="text-emerald-300">← ↑ → ↓</strong> atau <strong className="text-emerald-300">WASD</strong>. Di HP: swipe atau gunakan tombol arah di sebelah kiri layar.</span>
                 </li>
               </ul>
             </div>
@@ -833,12 +833,39 @@ const SnakeMathPage = ({
           </div>
         </div>
 
-        {/* canvas — fills the remaining viewport */}
+        {/* canvas + d-pad row — d-pad sits on the LEFT side of the playfield */}
         <div
-          className="relative w-full flex-1 min-h-0 flex items-center justify-center select-none"
+          className="relative w-full flex-1 min-h-0 flex items-center justify-center gap-2 sm:gap-4 select-none"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
+          {/* D-pad: ◀ | [▲ / ▼] | ▶ — always visible to the left of the canvas */}
+          <div className="shrink-0 flex items-center gap-1 sm:gap-2">
+            <button
+              onPointerDown={() => { if (nextDirRef.current !== "R") nextDirRef.current = "L"; }}
+              aria-label="Belok kiri"
+              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold w-10 h-10 sm:w-12 sm:h-12 rounded-xl active:scale-95 select-none flex items-center justify-center text-lg shadow-[0_0_10px_rgba(255,200,80,0.18)]"
+            >◀</button>
+            <div className="flex flex-col gap-1 sm:gap-2">
+              <button
+                onPointerDown={() => { if (nextDirRef.current !== "D") nextDirRef.current = "U"; }}
+                aria-label="Belok atas"
+                className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold w-10 h-10 sm:w-12 sm:h-10 rounded-xl active:scale-95 select-none flex items-center justify-center text-lg shadow-[0_0_10px_rgba(255,200,80,0.18)]"
+              >▲</button>
+              <button
+                onPointerDown={() => { if (nextDirRef.current !== "U") nextDirRef.current = "D"; }}
+                aria-label="Belok bawah"
+                className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold w-10 h-10 sm:w-12 sm:h-10 rounded-xl active:scale-95 select-none flex items-center justify-center text-lg shadow-[0_0_10px_rgba(255,200,80,0.18)]"
+              >▼</button>
+            </div>
+            <button
+              onPointerDown={() => { if (nextDirRef.current !== "L") nextDirRef.current = "R"; }}
+              aria-label="Belok kanan"
+              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold w-10 h-10 sm:w-12 sm:h-12 rounded-xl active:scale-95 select-none flex items-center justify-center text-lg shadow-[0_0_10px_rgba(255,200,80,0.18)]"
+            >▶</button>
+          </div>
+
+          {/* Snake playfield */}
           <div
             className="relative max-w-full max-h-full"
             style={{ aspectRatio: `${CW}/${CH}`, width: 'min(100%, calc((100dvh - 240px) * ' + (CW / CH).toFixed(4) + '))' }}
@@ -876,30 +903,9 @@ const SnakeMathPage = ({
           </div>
         </div>
 
-        {/* d-pad mobile */}
-        <div className="mt-2 mb-1 flex flex-col items-center gap-1 sm:hidden">
-          <button
-            onPointerDown={() => { if (nextDirRef.current !== "D") nextDirRef.current = "U"; }}
-            className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
-          >▲</button>
-          <div className="flex gap-2">
-            <button
-              onPointerDown={() => { if (nextDirRef.current !== "R") nextDirRef.current = "L"; }}
-              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
-            >◀</button>
-            <button
-              onPointerDown={() => { if (nextDirRef.current !== "U") nextDirRef.current = "D"; }}
-              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
-            >▼</button>
-            <button
-              onPointerDown={() => { if (nextDirRef.current !== "L") nextDirRef.current = "R"; }}
-              className="bg-card/80 border border-amber-400/40 text-amber-100 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
-            >▶</button>
-          </div>
-        </div>
-
-        <p className="hidden sm:block text-white/40 text-[10px] font-body text-center mt-1">
-          Keyboard: ← ↑ → ↓ / WASD &nbsp;·&nbsp; Mobile: swipe atau D-pad
+        <p className="text-white/40 text-[10px] font-body text-center mt-1">
+          <span className="hidden sm:inline">Keyboard: ← ↑ → ↓ / WASD &nbsp;·&nbsp; </span>
+          Mobile: swipe atau gunakan tombol di kiri
         </p>
         <GuruQuizOverlay {...guruQuiz} />
       </div>
