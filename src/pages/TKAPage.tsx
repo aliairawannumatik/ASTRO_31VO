@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Brain, ChevronRight, FileText, Lightbulb, BookOpen, Target } from "lucide-react";
+import { Brain, ChevronRight, FileText, Lightbulb, BookOpen, Target, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 
@@ -11,6 +11,14 @@ const packages = [
   { id: 3, label: "Paket 3", path: "/tka/paket-3", soal: 30 },
   { id: 4, label: "Paket 4", path: "/tka/paket-4", soal: 30 },
   { id: 5, label: "Paket 5", path: "/tka/paket-5", soal: 30 },
+];
+
+const indikator = [
+  { id: 1, label: "Uji Penguasaan Indikator 1", path: "/tka/indikator-1" },
+  { id: 2, label: "Uji Penguasaan Indikator 2", path: "/tka/indikator-2" },
+  { id: 3, label: "Uji Penguasaan Indikator 3", path: "/tka/indikator-3" },
+  { id: 4, label: "Uji Penguasaan Indikator 4", path: "/tka/indikator-4" },
+  { id: 5, label: "Uji Penguasaan Indikator 5", path: "/tka/indikator-5" },
 ];
 
 const TKAPage = () => {
@@ -101,8 +109,46 @@ const TKAPage = () => {
           </div>
         </div>
 
+        {/* Uji Penguasaan Indikator Section */}
+        <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.30s" }}>
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="text-violet-400/60 text-xs font-body font-semibold tracking-widest uppercase">Uji Penguasaan Indikator</span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+
+          <div className="flex flex-col gap-2.5">
+            {indikator.map((ind, i) => (
+              <button
+                key={ind.id}
+                onClick={() => { playPopSound(); navigate(ind.path); }}
+                className="group flex items-center gap-4 bg-white/5 backdrop-blur border border-white/10 rounded-xl px-4 py-3.5
+                  hover:bg-violet-500/8 hover:border-violet-400/40 hover:shadow-md hover:shadow-violet-500/5
+                  transition-all duration-250 cursor-pointer text-left animate-slide-up"
+                style={{ animationDelay: `${0.30 + i * 0.05}s` }}
+              >
+                {/* Number Badge */}
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0
+                  bg-gradient-to-br from-violet-500/20 to-purple-600/10 border border-violet-400/30 group-hover:border-violet-400/60 transition-colors">
+                  <CheckCircle2 className="w-5 h-5 text-violet-300" />
+                </div>
+
+                {/* Label */}
+                <div className="flex-1 min-w-0">
+                  <span className="text-[10px] text-white/30 font-body uppercase tracking-wider">Indikator {ind.id}</span>
+                  <p className="font-body text-sm font-semibold text-white group-hover:text-violet-100 transition-colors truncate">
+                    {ind.label}
+                  </p>
+                </div>
+
+                <ChevronRight className="w-4 h-4 shrink-0 text-white/30 group-hover:text-violet-400 group-hover:translate-x-0.5 transition-all" />
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Divider + Tips Section */}
-        <div className="animate-slide-up" style={{ animationDelay: "0.35s" }}>
+        <div className="animate-slide-up" style={{ animationDelay: "0.60s" }}>
           <div className="flex items-center gap-2 mb-3 px-1">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400/50 text-xs font-body font-semibold tracking-widest uppercase">Tips &amp; Panduan</span>
