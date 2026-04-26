@@ -263,6 +263,55 @@ const SegitigaCABD9_15_41_SVG = () => {
   );
 };
 
+// SVG: Bangun ABCDE (pentagon) untuk Soal No. 7
+// Sisi: AB = 20, BC = 9, CD = 17, DE = 15, EA = 13 → keliling = 74 cm
+const BangunABCDESVG = () => {
+  const W = 320, H = 240;
+  const s = 8;                          // skala (px per cm)
+  const offX = 60;                      // margin kiri
+  const baseY = H - 30;                 // garis dasar AB
+
+  const A = { x: offX, y: baseY };
+  const B = { x: offX + 20 * s, y: baseY };
+  const C = { x: B.x, y: baseY - 9 * s };
+  const E = { x: A.x, y: baseY - 13 * s };
+  // D dihitung dari sistem: |CD| = 17, |DE| = 15 → D ≈ (10.87, 23.35) dari A
+  const D = { x: offX + 10.87 * s, y: baseY - 23.35 * s };
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Bangun ABCDE */}
+        <polygon
+          points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y} ${E.x},${E.y}`}
+          fill="rgba(34,211,238,0.08)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+        {/* Tanda siku-siku di A dan B */}
+        <rect x={A.x} y={A.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+        <rect x={B.x - 12} y={B.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+        {/* Titik sudut */}
+        {[A, B, C, D, E].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
+        ))}
+        {/* Label titik */}
+        <text x={A.x - 8} y={A.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x + 8} y={B.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
+        <text x={C.x + 8} y={C.y + 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x} y={D.y - 8} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
+        <text x={E.x - 8} y={E.y + 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">E</text>
+        {/* Label sisi */}
+        <text x={(A.x + B.x) / 2} y={baseY + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">20 cm</text>
+        <text x={B.x + 8} y={(B.y + C.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">9 cm</text>
+        <text x={(C.x + D.x) / 2 + 6} y={(C.y + D.y) / 2 - 2} fill="#fbbf24" fontSize="13" fontWeight="bold">17 cm</text>
+        <text x={(D.x + E.x) / 2 - 6} y={(D.y + E.y) / 2 - 2} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">15 cm</text>
+        <text x={E.x - 8} y={(E.y + A.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">13 cm</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -534,6 +583,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 4 && <SegitigaABC182430SVG />}
                 {soal.no === 5 && <SegitigaABD72425SVG />}
                 {soal.no === 6 && <SegitigaCABD9_15_41_SVG />}
+                {soal.no === 7 && <BangunABCDESVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
