@@ -45,6 +45,7 @@ import gambar36 from "@/assets/Gambar_36_SOAL_1773290091438.png";
 import gambar37 from "@/assets/Gambar_37_SOAL_1773290091439.png";
 import gambar38 from "@/assets/Gambar_38_SOAL_1773290091440.png";
 import gambar39 from "@/assets/Gambar_39_SOAL_1773290091440.png";
+import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -526,7 +527,7 @@ const latihanOlimpiade = [
   {
     no: 1,
     soal: "OSN Matematika 2003 Tingkat Kota\n\nPada gambar disamping, ABCD adalah persegi dan ABE adalah segitiga sama sisi. Besar sudut DAE adalah ...",
-    image: null,
+    image: gambarOlimpiade1,
     options: ["A. $15°$", "B. $30°$", "C. $45°$", "D. $60°$", "E. $75°$"]
   },
   {
