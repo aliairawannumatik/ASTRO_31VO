@@ -11,6 +11,7 @@ import { polaBilanganDasarPembahasan } from "@/data/pembahasan/polaBilanganDasar
 import { polaBilanganOlimpiadePembahasan } from "@/data/pembahasan/polaBilanganOlimpiade";
 import imgSukuKenImg from "@assets/image_1777194887222.png";
 import imgPolaBuilatan from "@assets/image_1777194992479.png";
+import imgPolaSegilima from "@assets/image_1777195046863.png";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -747,14 +748,39 @@ const OlimpiadePolaBilanganPage = () => {
           <div className="space-y-4 animate-slide-up">
             {latihanOlimpiade.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
+                {soal.no === 37 ? (() => {
+                  const lines = soal.soal.split('\n');
+                  const splitIdx = lines[1]?.indexOf('. Bilangan segilima ke-0');
+                  const part1 = splitIdx !== -1 ? lines[1].slice(0, splitIdx + 1) : lines[1];
+                  const part2 = splitIdx !== -1 ? lines[1].slice(splitIdx + 1) : '';
+                  return (
+                    <div className="font-body text-sm text-white mb-3">
+                      <span className="text-accent font-bold">{soal.no}.</span>{' '}
+                      <span className="text-yellow-400 font-semibold">{lines[0]}</span>
+                      <div className="mt-1">{part1}</div>
+                      <div className="my-3 flex flex-col items-center gap-1">
+                        <div className="bg-white rounded-xl p-3 shadow-md max-w-sm w-full flex justify-center">
+                          <img
+                            src={imgPolaSegilima}
+                            alt="Pola segilima ke-1, ke-2, ke-3, ke-4"
+                            className="max-w-full h-auto object-contain"
+                          />
+                        </div>
+                        <div className="text-xs text-white/40 italic text-center">Pola titik yang membentuk segilima ke-1, ke-2, ke-3, dan ke-4</div>
+                      </div>
+                      <div>{part2}</div>
+                    </div>
+                  );
+                })() : (
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 {soal.no === 1 && (
                   <div className="my-3 flex flex-col items-center gap-1">
                     <div className="bg-white rounded-xl p-3 shadow-md max-w-xs w-full flex justify-center">
