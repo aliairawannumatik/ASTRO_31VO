@@ -46,6 +46,7 @@ import gambar37 from "@/assets/Gambar_37_SOAL_1773290091439.png";
 import gambar38 from "@/assets/Gambar_38_SOAL_1773290091440.png";
 import gambar39 from "@/assets/Gambar_39_SOAL_1773290091440.png";
 import gambarOlimpiade1 from "@assets/image_1777195619892.png";
+import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -533,7 +534,7 @@ const latihanOlimpiade = [
   {
     no: 2,
     soal: "OSN Matematika 2004 Tingkat Kota\n\nPada gambar berikut, garis PQ dan garis RS sejajar, demikian juga garis PS dan QT sejajar. Nilai x sama dengan ...",
-    image: null,
+    image: gambarOlimpiade2,
     options: []
   },
   {
