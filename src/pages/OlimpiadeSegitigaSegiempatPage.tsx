@@ -936,7 +936,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                        <BangunSoal2SegiSVG />
+                        <img
+                          src="/dasar-soal-2.png"
+                          alt="Soal No. 2 - Keliling bangun"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -950,7 +954,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
-                        <BangunSoal3SegiSVG />
+                        <img
+                          src="/dasar-soal-3.png"
+                          alt="Soal No. 3 - Luas gambar"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -964,7 +972,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
-                        <BangunSoal4SegiSVG />
+                        <img
+                          src="/dasar-soal-4.png"
+                          alt="Soal No. 4 - Luas huruf kapital"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -978,7 +990,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                        <BangunSoal5SegiSVG />
+                        <img
+                          src="/dasar-soal-5.png"
+                          alt="Soal No. 5 - Luas bangun"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -992,7 +1008,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                        <BangunSoal6SegiSVG />
+                        <img
+                          src="/dasar-soal-6.png"
+                          alt="Soal No. 6 - Luas bangun AGBCHD"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -1006,7 +1026,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                        <BangunSoal7SegiSVG />
+                        <img
+                          src="/dasar-soal-7.png"
+                          alt="Soal No. 7 - Luas bangun"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -1020,7 +1044,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                        <BangunSoal8SegiSVG />
+                        <img
+                          src="/dasar-soal-8.png"
+                          alt="Soal No. 8 - Luas daerah yang diarsir"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -1034,7 +1062,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                        <BangunSoal9SegiSVG />
+                        <img
+                          src="/dasar-soal-9.png"
+                          alt="Soal No. 9 - Persegi ABCD dan persegi panjang BEFG"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
