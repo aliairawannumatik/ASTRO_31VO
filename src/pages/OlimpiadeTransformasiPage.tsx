@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
+import { Trophy, ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import { pembahasanDasar } from "@/data/transformasiPembahasanDasar";
+import { pembahasanOlimpiade } from "@/data/transformasiPembahasanOlimpiade";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -169,6 +171,17 @@ const OlimpiadeTransformasiPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSection.sections.length }, (_, i) => i));
+  const [openPembahasan, setOpenPembahasan] = useState<Set<string>>(new Set());
+
+  const togglePembahasan = (key: string) => {
+    playPopSound();
+    setOpenPembahasan(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
 
   const toggleSection = (idx: number) => {
     playPopSound();
@@ -411,56 +424,100 @@ const OlimpiadeTransformasiPage = () => {
         {/* Latihan Dasar Tab */}
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span>{" "}
-                  {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
+            {latihanDasar.map((soal) => {
+              const key = `d-${soal.no}`;
+              const open = openPembahasan.has(key);
+              const pembahasan = pembahasanDasar[soal.no];
+              return (
+                <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      </span>
                     ))}
                   </div>
-                )}
-              </div>
-            ))}
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {pembahasan && (
+                    <div className="pt-3">
+                      <button
+                        onClick={() => togglePembahasan(key)}
+                        className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
+                      >
+                        <Lightbulb className="w-3.5 h-3.5" />
+                        {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
+                        {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </button>
+                      {open && (
+                        <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2 space-y-1">
+                          {pembahasan}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
         {/* Latihan Olimpiade Tab */}
         {activeTab === "olimpiade" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanOlimpiade.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span>{" "}
-                  {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
+            {latihanOlimpiade.map((soal) => {
+              const key = `o-${soal.no}`;
+              const open = openPembahasan.has(key);
+              const pembahasan = pembahasanOlimpiade[soal.no];
+              return (
+                <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      </span>
                     ))}
                   </div>
-                )}
-              </div>
-            ))}
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {pembahasan && (
+                    <div className="pt-3">
+                      <button
+                        onClick={() => togglePembahasan(key)}
+                        className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
+                      >
+                        <Lightbulb className="w-3.5 h-3.5" />
+                        {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
+                        {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </button>
+                      {open && (
+                        <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2 space-y-1">
+                          {pembahasan}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
