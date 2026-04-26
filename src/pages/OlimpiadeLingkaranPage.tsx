@@ -737,6 +737,29 @@ const latihanDasar = [
   { no: 36, soal: "Gambar di bawah ini adalah penampang 10 buah gelas berbentuk tabung dengan jari-jari 10 cm. Panjang tali minimal yang diperlukan untuk mengikat gelas-gelas tersebut dengan susunan seperti dalam gambar adalah ....", options: ["A. 261,8 cm", "B. 262,8 cm", "C. 261,6 cm", "D. 262,6 cm"] },
 ];
 
+const dasarImages: Record<number, string> = {
+  1: "/lingkaran-dasar-1.png",
+  2: "/lingkaran-dasar-2.png",
+  3: "/lingkaran-dasar-3.png",
+  4: "/lingkaran-dasar-4.png",
+  5: "/lingkaran-dasar-5.png",
+  6: "/lingkaran-dasar-6.png",
+  7: "/lingkaran-dasar-7.png",
+  8: "/lingkaran-dasar-8.png",
+  9: "/lingkaran-dasar-9.png",
+  10: "/lingkaran-dasar-10.jpg",
+  11: "/lingkaran-dasar-11.png",
+  12: "/lingkaran-dasar-12.png",
+  13: "/lingkaran-dasar-13.png",
+  14: "/lingkaran-dasar-14.png",
+  15: "/lingkaran-dasar-15.png",
+  16: "/lingkaran-dasar-16.png",
+  17: "/lingkaran-dasar-17.png",
+  18: "/lingkaran-dasar-18.png",
+  19: "/lingkaran-dasar-19.png",
+  20: "/lingkaran-dasar-20.png",
+};
+
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nDi dalam suatu lingkaran yang berjari-jari 4 cm dibuat persegi ABCD, sehingga titik sudut persegi tersebut berada pada lingkaran. Luas persgi ABCD adalah ...", options: ["A. 64 $cm^2$", "B. 32 $cm^2$", "C. 16 $cm^2$", "D. 8 $cm^2$", "E. 4 $cm^2$"] },
   { no: 2, soal: "OSN Matematika 2005 Tingkat Kota\nMisalkan a dan b menyatakan luas daerah yang diarsir pada gambar di bawah. Kelima lingkaran kecil berjari-jari r. titik-titik pusat empat lingkaran kecil yang menyinggung lingkaran besar merupakan titik-titik sudut persegi. Jika a sama dengan 10 $cm^2$, maka b = ...", options: [] },
@@ -871,6 +894,13 @@ const OlimpiadeLingkaranPage = () => {
                       </span>
                     ))}
                   </div>
+                  {dasarImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <img src={dasarImages[soal.no]} alt={`Gambar soal ${soal.no}`} className="max-w-full max-h-56 object-contain" />
+                      </div>
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                       {soal.options.map((opt, j) => (
