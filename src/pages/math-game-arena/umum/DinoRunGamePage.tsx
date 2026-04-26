@@ -859,6 +859,11 @@ function drawObstacle(ctx: CanvasRenderingContext2D, ob: Obstacle, light: boolea
 }
 
 // ── Helper: draw T-Rex dino ────────────────────────────────────────────────
+/**
+ * drawDino — actually renders a CUTE, friendly turtle character.
+ * (Function name preserved for backwards compatibility with the existing
+ * call-site; the visuals are 100% turtle.)
+ */
 function drawDino(
   ctx: CanvasRenderingContext2D,
   py: number,
@@ -873,175 +878,227 @@ function drawDino(
   const stunFlash = phase === "stunned" && Math.floor(ts / 120) % 2 === 0;
   if (stunFlash) ctx.globalAlpha = 0.35;
 
-  // Colors
-  const bodyCol = "#4a9e3f";
-  const darkCol = "#2d6b24";
-  const bellyCol = "#a8d8a0";
+  // ── Turtle palette ──────────────────────────────────────────────────
+  const skin = "#88c870";        // light spring-green skin
+  const skinShade = "#5fa050";   // darker shading on legs/head
+  const skinDeep = "#3d7a30";    // foot/toe edges
+  const shellRim = "#1f4a28";    // dark shell outline
+  const shellMid = "#4a9e3f";    // mid shell green
+  const shellHi = "#7dc878";     // shell highlight
+  const plastron = "#e8d68a";    // creamy belly band
   const eyeWhite = "#ffffff";
+  const pupil = "#1a1a2e";
+  const blush = "rgba(255,140,150,0.45)";
+
+  // Helper: hexagonal scute outline (squashed slightly to follow dome)
+  const drawHex = (hx: number, hy: number, r: number, squashY = 0.7) => {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a = (Math.PI / 3) * i - Math.PI / 2;
+      const px = hx + Math.cos(a) * r;
+      const py2 = hy + Math.sin(a) * r * squashY;
+      if (i === 0) ctx.moveTo(px, py2);
+      else ctx.lineTo(px, py2);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  };
 
   if (duck) {
-    // ── Ducking T-Rex ──
-    // Low flat body
-    ctx.fillStyle = bodyCol;
-    ctx.beginPath();
-    ctx.ellipse(x + P_W / 2, y + h / 2 + 2, P_W / 2 + 2, h / 2, 0, 0, Math.PI * 2);
-    ctx.fill();
+    // ── DUCKING / TUCKED TURTLE ───────────────────────────────────────
+    // Shell flattens against the ground, head & legs retract.
+    const cx = x + P_W / 2;
+    const cy = y + h / 2 + 1;
 
-    // Tail (left)
-    ctx.fillStyle = darkCol;
+    // Tail peeking out the back-left
+    ctx.fillStyle = skinShade;
     ctx.beginPath();
-    ctx.moveTo(x + 4, y + h / 2 + 2);
-    ctx.quadraticCurveTo(x - 8, y + h / 2 - 4, x - 2, y + h - 4);
-    ctx.lineTo(x + 8, y + h / 2 + 4);
+    ctx.moveTo(x - 1, cy + 1);
+    ctx.lineTo(x - 6, cy + 4);
+    ctx.lineTo(x + 3, cy + 5);
     ctx.closePath();
     ctx.fill();
 
-    // Head (right)
-    ctx.fillStyle = bodyCol;
-    ctx.beginPath();
-    ctx.roundRect(x + P_W - 2, y + 2, 18, 14, [5, 5, 3, 3]);
-    ctx.fill();
-    // Lower jaw
-    ctx.fillStyle = bellyCol;
-    ctx.beginPath();
-    ctx.roundRect(x + P_W, y + 11, 16, 7, [0, 0, 4, 4]);
-    ctx.fill();
-    // Eye
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W + 9, y + 7, 4, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#1a1a2e";
-    ctx.beginPath(); ctx.arc(x + P_W + 10, y + 8, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W + 9, y + 7, 1, 0, Math.PI * 2); ctx.fill();
-    // Nostril
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.arc(x + P_W + 15, y + 6, 1.2, 0, Math.PI * 2); ctx.fill();
+    // Tiny feet poking out at four corners
+    ctx.fillStyle = skinShade;
+    ctx.beginPath(); ctx.ellipse(x + 4, y + h - 1, 5.5, 2.6, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(x + P_W - 4, y + h - 1, 5.5, 2.6, 0, 0, Math.PI * 2); ctx.fill();
 
-    // Legs (splayed)
-    const ls = Math.sin(ts / 90) * 5;
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.roundRect(x + 6, y + h - 6, 11, 7 + ls, 2); ctx.fill();
-    ctx.beginPath(); ctx.roundRect(x + 20, y + h - 6, 11, 7 - ls, 2); ctx.fill();
-    // Feet
-    ctx.fillStyle = "#1e4a1a";
-    ctx.beginPath(); ctx.roundRect(x + 3, y + h, 16, 4, 2); ctx.fill();
-    ctx.beginPath(); ctx.roundRect(x + 18, y + h, 16, 4, 2); ctx.fill();
+    // Shell outline (rim)
+    ctx.fillStyle = shellRim;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, P_W / 2 + 6, h / 2 + 1, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Shell body with soft radial highlight
+    const shellGrad = ctx.createRadialGradient(cx - 4, cy - 5, 2, cx, cy + 1, P_W / 2 + 6);
+    shellGrad.addColorStop(0, shellHi);
+    shellGrad.addColorStop(0.55, shellMid);
+    shellGrad.addColorStop(1, "#2a6638");
+    ctx.fillStyle = shellGrad;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, P_W / 2 + 4, h / 2 - 1, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Plastron band along bottom edge
+    ctx.fillStyle = plastron;
+    ctx.beginPath();
+    ctx.ellipse(cx, y + h - 2, P_W / 2 + 2, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Hex scute pattern
+    ctx.strokeStyle = shellRim;
+    ctx.lineWidth = 1.2;
+    drawHex(cx, cy - 1, 5, 0.55);
+    drawHex(cx - 9, cy, 4, 0.55);
+    drawHex(cx + 9, cy, 4, 0.55);
+    drawHex(cx - 4, cy + 5, 3.5, 0.55);
+    drawHex(cx + 4, cy + 5, 3.5, 0.55);
+
+    // Tiny shy eyes peeking from front of shell
+    ctx.fillStyle = pupil;
+    ctx.beginPath(); ctx.arc(x + P_W - 4, cy + 1, 1.6, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x + P_W + 1, cy + 1, 1.6, 0, Math.PI * 2); ctx.fill();
+    // Eye shine
+    ctx.fillStyle = eyeWhite;
+    ctx.beginPath(); ctx.arc(x + P_W - 4.3, cy + 0.5, 0.5, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x + P_W + 0.7, cy + 0.5, 0.5, 0, Math.PI * 2); ctx.fill();
   } else {
-    // ── Standing T-Rex ──
+    // ── STANDING / RUNNING TURTLE ────────────────────────────────────
+    const legSwing = Math.sin(ts / 95) * 4;
+    const cx = x + P_W / 2;
 
-    // === TAIL ===
-    ctx.fillStyle = darkCol;
+    // === BACK LEG (left) — drawn first so it sits behind the shell ===
+    ctx.fillStyle = skinShade;
     ctx.beginPath();
-    ctx.moveTo(x + 6, y + h - 18);
-    ctx.quadraticCurveTo(x - 12, y + h - 26, x - 5, y + h - 8);
-    ctx.lineTo(x + 12, y + h - 14);
-    ctx.closePath();
+    ctx.ellipse(x + 5, y + h - 6 - legSwing, 6, 6, 0, 0, Math.PI * 2);
     ctx.fill();
-
-    // === BODY ===
-    ctx.fillStyle = bodyCol;
+    // Foot pad
+    ctx.fillStyle = skinDeep;
     ctx.beginPath();
-    ctx.ellipse(x + P_W / 2, y + h * 0.57, P_W / 2 + 3, h * 0.32, 0, 0, Math.PI * 2);
+    ctx.ellipse(x + 5 + legSwing * 0.6, y + h - 1, 6.5, 3, 0, 0, Math.PI * 2);
     ctx.fill();
-
-    // === BELLY ===
-    ctx.fillStyle = bellyCol;
-    ctx.beginPath();
-    ctx.ellipse(x + P_W / 2 + 4, y + h * 0.59, P_W * 0.26, h * 0.2, 0.1, 0, Math.PI * 2);
-    ctx.fill();
-
-    // === HEAD ===
-    // Upper jaw / head top
-    ctx.fillStyle = bodyCol;
-    ctx.beginPath();
-    ctx.roundRect(x + P_W / 2 - 2, y + 1, P_W / 2 + 10, 20, [7, 7, 2, 2]);
-    ctx.fill();
-    // Lower jaw
-    ctx.fillStyle = bellyCol;
-    ctx.beginPath();
-    ctx.roundRect(x + P_W / 2 + 1, y + 17, P_W / 2 + 7, 11, [2, 2, 6, 6]);
-    ctx.fill();
-    // Teeth
-    ctx.fillStyle = "#ffffff";
+    // Toe-nails
+    ctx.fillStyle = "#f5e6a8";
     for (let t = 0; t < 3; t++) {
       ctx.beginPath();
-      ctx.moveTo(x + P_W / 2 + 6 + t * 5, y + 17);
-      ctx.lineTo(x + P_W / 2 + 4 + t * 5, y + 21);
-      ctx.lineTo(x + P_W / 2 + 8 + t * 5, y + 21);
-      ctx.closePath();
+      ctx.arc(x + 2 + t * 3 + legSwing * 0.6, y + h - 1, 0.9, 0, Math.PI * 2);
       ctx.fill();
     }
-    // Nostril
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.arc(x + P_W + 5, y + 7, 1.8, 0, Math.PI * 2); ctx.fill();
 
-    // === EYE ===
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W / 2 + 8, y + 9, 5.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#1a1a2e";
-    ctx.beginPath(); ctx.arc(x + P_W / 2 + 9, y + 10, 3.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = eyeWhite;
-    ctx.beginPath(); ctx.arc(x + P_W / 2 + 8, y + 9, 1.2, 0, Math.PI * 2); ctx.fill();
-    // Brow
-    ctx.strokeStyle = darkCol;
-    ctx.lineWidth = 1.5;
+    // === TAIL ===
+    ctx.fillStyle = skinShade;
     ctx.beginPath();
-    ctx.moveTo(x + P_W / 2 + 3, y + 5);
-    ctx.lineTo(x + P_W / 2 + 13, y + 4);
+    ctx.moveTo(x + 4, y + h * 0.55);
+    ctx.quadraticCurveTo(x - 5, y + h * 0.6, x - 3, y + h * 0.7);
+    ctx.lineTo(x + 6, y + h * 0.66);
+    ctx.closePath();
+    ctx.fill();
+
+    // === HEAD & NECK (right) ===
+    // Neck (short tube)
+    ctx.fillStyle = skin;
+    ctx.beginPath();
+    ctx.roundRect(x + P_W - 6, y + 12, 14, 14, 6);
+    ctx.fill();
+    // Head — round and chubby
+    ctx.beginPath();
+    ctx.arc(x + P_W + 6, y + 16, 9, 0, Math.PI * 2);
+    ctx.fill();
+    // Subtle head shading underneath (chin area)
+    ctx.fillStyle = skinShade;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W + 6, y + 22, 7, 3, 0, 0, Math.PI);
+    ctx.fill();
+    // Cheek blush — cuteness
+    ctx.fillStyle = blush;
+    ctx.beginPath();
+    ctx.arc(x + P_W + 9, y + 21, 2.6, 0, Math.PI * 2);
+    ctx.fill();
+    // Eye white
+    ctx.fillStyle = eyeWhite;
+    ctx.beginPath();
+    ctx.arc(x + P_W + 7, y + 14, 4, 0, Math.PI * 2);
+    ctx.fill();
+    // Pupil
+    ctx.fillStyle = pupil;
+    ctx.beginPath();
+    ctx.arc(x + P_W + 8, y + 15, 2.6, 0, Math.PI * 2);
+    ctx.fill();
+    // Eye highlight (upper left)
+    ctx.fillStyle = eyeWhite;
+    ctx.beginPath();
+    ctx.arc(x + P_W + 7.2, y + 13.6, 1.1, 0, Math.PI * 2);
+    ctx.fill();
+    // Tiny lower highlight
+    ctx.beginPath();
+    ctx.arc(x + P_W + 9, y + 16.4, 0.55, 0, Math.PI * 2);
+    ctx.fill();
+    // Nostril
+    ctx.fillStyle = skinShade;
+    ctx.beginPath();
+    ctx.arc(x + P_W + 13, y + 17, 0.9, 0, Math.PI * 2);
+    ctx.fill();
+    // Smile
+    ctx.strokeStyle = "#2a4a1a";
+    ctx.lineWidth = 1.4;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.arc(x + P_W + 7, y + 19, 3, 0.15 * Math.PI, 0.85 * Math.PI);
     ctx.stroke();
 
-    // === TINY ARMS ===
-    ctx.fillStyle = darkCol;
-    ctx.beginPath(); ctx.roundRect(x + P_W / 2 + 6, y + h * 0.42, 10, 6, 2); ctx.fill();
-    // Claws
-    for (let c = 0; c < 2; c++) {
+    // === FRONT LEG (right) — opposite swing for running cycle ===
+    ctx.fillStyle = skinShade;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W - 5, y + h - 6 + legSwing, 6, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = skinDeep;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W - 5 - legSwing * 0.6, y + h - 1, 6.5, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#f5e6a8";
+    for (let t = 0; t < 3; t++) {
       ctx.beginPath();
-      ctx.moveTo(x + P_W / 2 + 14 + c * 3, y + h * 0.42 + 6);
-      ctx.lineTo(x + P_W / 2 + 13 + c * 3, y + h * 0.42 + 11);
-      ctx.lineTo(x + P_W / 2 + 16 + c * 3, y + h * 0.42 + 9);
-      ctx.closePath();
-      ctx.fillStyle = "#1e4a1a";
+      ctx.arc(x + P_W - 8 + t * 3 - legSwing * 0.6, y + h - 1, 0.9, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // === LEGS ===
-    const ls = Math.sin(ts / 95) * 10;
-    ctx.fillStyle = darkCol;
-    // Back leg
-    ctx.beginPath(); ctx.roundRect(x + 4, y + h - 20, 13, 17 + ls, [4, 4, 2, 2]); ctx.fill();
-    // Front leg
-    ctx.beginPath(); ctx.roundRect(x + P_W / 2 - 1, y + h - 20, 13, 17 - ls, [4, 4, 2, 2]); ctx.fill();
+    // === SHELL (drawn AFTER legs/head so it sits on top of body) ===
+    // Outer dark rim
+    ctx.fillStyle = shellRim;
+    ctx.beginPath();
+    ctx.ellipse(cx, y + 22, P_W / 2 + 6, 17, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Shell body with radial highlight (gives a 3-D dome look)
+    const shellGrad = ctx.createRadialGradient(cx - 5, y + 14, 2, cx, y + 22, P_W / 2 + 5);
+    shellGrad.addColorStop(0, shellHi);
+    shellGrad.addColorStop(0.5, shellMid);
+    shellGrad.addColorStop(1, "#2a6638");
+    ctx.fillStyle = shellGrad;
+    ctx.beginPath();
+    ctx.ellipse(cx, y + 22, P_W / 2 + 4, 15, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Plastron band along the lower rim of the shell
+    ctx.fillStyle = plastron;
+    ctx.beginPath();
+    ctx.ellipse(cx, y + 35, P_W / 2 + 2, 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Glossy specular highlight on top-left of dome
+    ctx.fillStyle = "rgba(255,255,255,0.22)";
+    ctx.beginPath();
+    ctx.ellipse(cx - 6, y + 14, 7, 3, -0.4, 0, Math.PI * 2);
+    ctx.fill();
 
-    // Feet / claws
-    ctx.fillStyle = "#1e4a1a";
-    ctx.beginPath(); ctx.roundRect(x + 1, y + h - 4, 18, 5, [0, 0, 3, 3]); ctx.fill();
-    ctx.beginPath(); ctx.roundRect(x + P_W / 2 - 4, y + h - 4, 18, 5, [0, 0, 3, 3]); ctx.fill();
-    // Toe claws
-    ctx.strokeStyle = "#0e2e0c";
-    ctx.lineWidth = 1;
-    for (let c = 0; c < 3; c++) {
-      ctx.beginPath();
-      ctx.moveTo(x + 2 + c * 5, y + h + 1);
-      ctx.lineTo(x + 1 + c * 5, y + h + 5);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(x + P_W / 2 - 3 + c * 5, y + h + 1);
-      ctx.lineTo(x + P_W / 2 - 4 + c * 5, y + h + 5);
-      ctx.stroke();
-    }
-
-    // === BACK SPINES ===
-    ctx.fillStyle = "#1e5c18";
-    const spineXs = [x + P_W / 2 - 4, x + P_W / 2, x + P_W / 2 + 4];
-    const spineHs = [7, 9, 6];
-    spineXs.forEach((sx, i) => {
-      ctx.beginPath();
-      ctx.moveTo(sx - 3, y + h * 0.38);
-      ctx.lineTo(sx, y + h * 0.38 - spineHs[i]);
-      ctx.lineTo(sx + 3, y + h * 0.38);
-      ctx.closePath();
-      ctx.fill();
-    });
+    // Hexagonal scute pattern
+    ctx.strokeStyle = shellRim;
+    ctx.lineWidth = 1.2;
+    const sy = y + 22;
+    drawHex(cx, sy - 2, 5);
+    drawHex(cx - 9, sy - 1, 4);
+    drawHex(cx + 9, sy - 1, 4);
+    drawHex(cx, sy - 10, 4);
+    drawHex(cx - 5, sy + 7, 4);
+    drawHex(cx + 5, sy + 7, 4);
   }
 
   ctx.globalAlpha = 1;
