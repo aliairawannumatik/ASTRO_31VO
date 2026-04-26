@@ -443,6 +443,46 @@ const LatihanDasar3SVG = () => {
   );
 };
 
+// SVG: Latihan Dasar No 4 - Persegi EFGH dengan E(0,0), F(a,0), G(a,a), H(0,a)
+const LatihanDasar4SVG = () => {
+  const W = 280, H = 220;
+  const ox = 70, oy = 180;
+  const side = 110;
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        <defs>
+          <marker id="arrowD4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L6,4 L0,8 Z" fill="#fbbf24" />
+          </marker>
+        </defs>
+        {/* Sumbu Y */}
+        <line x1={ox} y1={oy + 14} x2={ox} y2={20} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowD4)" />
+        {/* Sumbu X */}
+        <line x1={ox - 14} y1={oy} x2={W - 14} y2={oy} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowD4)" />
+        {/* Persegi EFGH */}
+        <rect x={ox} y={oy - side} width={side} height={side} fill="none" stroke="#22d3ee" strokeWidth="1.5" />
+        {/* Label sumbu */}
+        <text x={ox + 6} y={26} fill="#fbbf24" fontSize="12" fontStyle="italic">y</text>
+        <text x={W - 16} y={oy - 6} fill="#fbbf24" fontSize="12" fontStyle="italic">x</text>
+        {/* Titik E (origin) */}
+        <circle cx={ox} cy={oy} r="3" fill="#22d3ee" />
+        <text x={ox - 6} y={oy + 14} fill="#22d3ee" fontSize="12" fontWeight="bold" textAnchor="end">E</text>
+        {/* Titik F(a, 0) */}
+        <circle cx={ox + side} cy={oy} r="3" fill="#22d3ee" />
+        <text x={ox + side + 4} y={oy + 14} fill="#22d3ee" fontSize="12" fontWeight="bold">F(a, 0)</text>
+        {/* Titik G */}
+        <circle cx={ox + side} cy={oy - side} r="3" fill="#22d3ee" />
+        <text x={ox + side + 6} y={oy - side - 2} fill="#22d3ee" fontSize="12" fontWeight="bold">G</text>
+        {/* Titik H(0, a) */}
+        <circle cx={ox} cy={oy - side} r="3" fill="#22d3ee" />
+        <text x={ox - 6} y={oy - side + 4} fill="#22d3ee" fontSize="12" fontWeight="bold" textAnchor="end">H(0, a)</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -691,6 +731,7 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                 {soal.no === 1 && <LatihanDasar1SVG />}
                 {soal.no === 2 && <LatihanDasar2SVG />}
                 {soal.no === 3 && <LatihanDasar3SVG />}
+                {soal.no === 4 && <LatihanDasar4SVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
