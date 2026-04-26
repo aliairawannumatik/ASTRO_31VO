@@ -9,6 +9,7 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPythagorasDasar";
 import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
+import bangunABCDESoal7Img from "@assets/image_1777204803383.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1136,7 +1137,16 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 4 && <SegitigaABC182430SVG />}
                 {soal.no === 5 && <SegitigaABD72425SVG />}
                 {soal.no === 6 && <SegitigaCABD9_15_41_SVG />}
-                {soal.no === 7 && <BangunABCDESVG />}
+                {soal.no === 7 && (
+                  <div className="flex justify-center my-3">
+                    <img
+                      src={bangunABCDESoal7Img}
+                      alt="Bangun ABCDE soal nomor 7"
+                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                      data-testid="img-soal-pyth-dasar-7"
+                    />
+                  </div>
+                )}
                 {soal.no === 11 && <TabelSegitiga11 />}
                 {soal.no === 15 && <SegitigaXSVG />}
                 {soal.no === 18 && <LayangKapalSVG />}
