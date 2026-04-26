@@ -10,6 +10,7 @@ import PembahasanCard from "@/components/PembahasanCard";
 import { polaBilanganDasarPembahasan } from "@/data/pembahasan/polaBilanganDasar";
 import { polaBilanganOlimpiadePembahasan } from "@/data/pembahasan/polaBilanganOlimpiade";
 import imgSukuKenImg from "@assets/image_1777194887222.png";
+import imgPolaBuilatan from "@assets/image_1777194992479.png";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -754,6 +755,18 @@ const OlimpiadePolaBilanganPage = () => {
                     </span>
                   ))}
                 </div>
+                {soal.no === 1 && (
+                  <div className="my-3 flex flex-col items-center gap-1">
+                    <div className="bg-white rounded-xl p-3 shadow-md max-w-xs w-full flex justify-center">
+                      <img
+                        src={imgPolaBuilatan}
+                        alt="Pola bulatan hitam dan putih OSN 2003"
+                        className="max-w-full h-auto object-contain"
+                      />
+                    </div>
+                    <div className="text-xs text-white/40 italic text-center">Pola bulatan pada gambar ke-1, ke-2, ke-3, dan ke-4</div>
+                  </div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
