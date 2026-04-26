@@ -964,141 +964,205 @@ function drawDino(
     ctx.beginPath(); ctx.arc(x + P_W - 4.3, cy + 0.5, 0.5, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.arc(x + P_W + 0.7, cy + 0.5, 0.5, 0, Math.PI * 2); ctx.fill();
   } else {
-    // ── STANDING / RUNNING TURTLE ────────────────────────────────────
-    const legSwing = Math.sin(ts / 95) * 4;
+    // ── STANDING / RUNNING TURTLE — SIDE PROFILE facing RIGHT ────────
+    // Layout (left = behind, right = forward):
+    //   tail | back leg | body+plastron+shell-dome | front leg | head+eye
+    const legSwing = Math.sin(ts / 95) * 5;       // animation phase
     const cx = x + P_W / 2;
 
-    // === BACK LEG (left) — drawn first so it sits behind the shell ===
-    ctx.fillStyle = skinShade;
-    ctx.beginPath();
-    ctx.ellipse(x + 5, y + h - 6 - legSwing, 6, 6, 0, 0, Math.PI * 2);
-    ctx.fill();
-    // Foot pad
-    ctx.fillStyle = skinDeep;
-    ctx.beginPath();
-    ctx.ellipse(x + 5 + legSwing * 0.6, y + h - 1, 6.5, 3, 0, 0, Math.PI * 2);
-    ctx.fill();
-    // Toe-nails
-    ctx.fillStyle = "#f5e6a8";
-    for (let t = 0; t < 3; t++) {
-      ctx.beginPath();
-      ctx.arc(x + 2 + t * 3 + legSwing * 0.6, y + h - 1, 0.9, 0, Math.PI * 2);
-      ctx.fill();
-    }
+    // Shell footprint (dome that rests on the body line)
+    const shellLeft = x - 2;
+    const shellRight = x + P_W + 2;
+    const shellW = shellRight - shellLeft;
+    const plastronY = y + h - 12;                  // bottom edge of shell / top of body line
+    const shellTop = y + 4;
+    const shellH = plastronY - shellTop;
 
-    // === TAIL ===
+    // === TAIL (back-left, peeking under the shell rim) ===
     ctx.fillStyle = skinShade;
     ctx.beginPath();
-    ctx.moveTo(x + 4, y + h * 0.55);
-    ctx.quadraticCurveTo(x - 5, y + h * 0.6, x - 3, y + h * 0.7);
-    ctx.lineTo(x + 6, y + h * 0.66);
+    ctx.moveTo(shellLeft + 2, plastronY - 2);
+    ctx.lineTo(shellLeft - 6, plastronY + 1);
+    ctx.lineTo(shellLeft + 3, plastronY + 5);
     ctx.closePath();
     ctx.fill();
 
-    // === HEAD & NECK (right) ===
-    // Neck (short tube)
+    // === BACK LEG (rear) ===
+    // Both legs step to the RIGHT (forward). The animation alternates which one
+    // is in the air: back leg lifts when legSwing > 0, plants when legSwing < 0.
+    const backLift = Math.max(0, legSwing) * 1.1;        // 0..5  px lift off ground
+    const backStride = legSwing * 1.2;                   // -6..+6 px forward/backward swing
+    // Upper leg (rounded stub coming down from body)
+    ctx.fillStyle = skinShade;
+    ctx.beginPath();
+    ctx.roundRect(x + 4 + backStride * 0.25, plastronY + 1, 8, 10 - backLift, [3, 3, 2, 2]);
+    ctx.fill();
+    // Foot — oval pointing FORWARD (right)
+    ctx.fillStyle = skinDeep;
+    ctx.beginPath();
+    ctx.ellipse(x + 9 + backStride, y + h - 1 - backLift * 0.5, 7.5, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Toe claws — at the FRONT (right side) of the foot
+    ctx.fillStyle = "#f5e6a8";
+    for (let t = 0; t < 3; t++) {
+      ctx.beginPath();
+      ctx.arc(x + 13 + backStride - t * 1.6, y + h - 1 - backLift * 0.5, 0.95, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // === BODY (visible underbody between legs and shell) ===
     ctx.fillStyle = skin;
     ctx.beginPath();
-    ctx.roundRect(x + P_W - 6, y + 12, 14, 14, 6);
+    ctx.ellipse(cx + 1, plastronY + 1, P_W / 2 + 1, 5, 0, 0, Math.PI * 2);
     ctx.fill();
-    // Head — round and chubby
+    // Plastron — creamy belly strip (the underside scutes, visible in side view)
+    ctx.fillStyle = plastron;
     ctx.beginPath();
-    ctx.arc(x + P_W + 6, y + 16, 9, 0, Math.PI * 2);
+    ctx.ellipse(cx + 1, plastronY + 3.5, P_W / 2 - 2, 2.8, 0, 0, Math.PI * 2);
     ctx.fill();
-    // Subtle head shading underneath (chin area)
+    // Subtle plastron seam down the middle (a line of small marks)
+    ctx.fillStyle = "rgba(120,90,30,0.45)";
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+      ctx.arc(cx - 6 + i * 6, plastronY + 3.5, 0.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // === FRONT LEG (forward) ===
+    const frontLift = Math.max(0, -legSwing) * 1.1;
+    const frontStride = -legSwing * 1.2;
     ctx.fillStyle = skinShade;
     ctx.beginPath();
-    ctx.ellipse(x + P_W + 6, y + 22, 7, 3, 0, 0, Math.PI);
+    ctx.roundRect(x + P_W - 12 + frontStride * 0.25, plastronY + 1, 8, 10 - frontLift, [3, 3, 2, 2]);
     ctx.fill();
-    // Cheek blush — cuteness
+    // Foot pointing forward (right)
+    ctx.fillStyle = skinDeep;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W - 7 + frontStride, y + h - 1 - frontLift * 0.5, 7.5, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Toe claws on the leading edge
+    ctx.fillStyle = "#f5e6a8";
+    for (let t = 0; t < 3; t++) {
+      ctx.beginPath();
+      ctx.arc(x + P_W - 3 + frontStride - t * 1.6, y + h - 1 - frontLift * 0.5, 0.95, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // === SHELL DOME (drawn on top of the body) ===
+    // Outer dark rim — slightly larger than the inner shell
+    ctx.fillStyle = shellRim;
+    ctx.beginPath();
+    ctx.moveTo(shellLeft - 2, plastronY);
+    ctx.bezierCurveTo(
+      shellLeft - 2, shellTop - 2,
+      shellRight + 2, shellTop - 2,
+      shellRight + 2, plastronY
+    );
+    ctx.closePath();
+    ctx.fill();
+    // Inner shell with radial gradient (highlight upper-left for dome feel)
+    const shellGrad = ctx.createRadialGradient(
+      cx - 6, shellTop + 3, 2,
+      cx, plastronY, shellW / 2 + 3
+    );
+    shellGrad.addColorStop(0, shellHi);
+    shellGrad.addColorStop(0.55, shellMid);
+    shellGrad.addColorStop(1, "#2a6638");
+    ctx.fillStyle = shellGrad;
+    ctx.beginPath();
+    ctx.moveTo(shellLeft, plastronY);
+    ctx.bezierCurveTo(
+      shellLeft, shellTop,
+      shellRight, shellTop,
+      shellRight, plastronY
+    );
+    ctx.closePath();
+    ctx.fill();
+    // Glossy specular highlight on upper-left of dome
+    ctx.fillStyle = "rgba(255,255,255,0.28)";
+    ctx.beginPath();
+    ctx.ellipse(cx - 7, shellTop + 5, 6, 2.5, -0.4, 0, Math.PI * 2);
+    ctx.fill();
+    // Marginal scute — dark line where the dome meets the body
+    ctx.strokeStyle = "#1a3d20";
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(shellLeft, plastronY);
+    ctx.lineTo(shellRight, plastronY);
+    ctx.stroke();
+    // Vertical scute seams along the dome (4 seams = 5 visible panels)
+    ctx.strokeStyle = shellRim;
+    ctx.lineWidth = 1.1;
+    for (let i = 1; i < 5; i++) {
+      const t = i / 5;
+      const seamX = shellLeft + t * shellW;
+      // Approximate the dome's height at this x using a parabola fit
+      const yOnDome = plastronY - shellH * (1 - 4 * (t - 0.5) * (t - 0.5)) + 1;
+      ctx.beginPath();
+      ctx.moveTo(seamX, plastronY);
+      ctx.lineTo(seamX, yOnDome);
+      ctx.stroke();
+    }
+    // Top-of-dome ridge (separates the upper "vertebral" scutes from the side panels)
+    ctx.beginPath();
+    ctx.moveTo(shellLeft + 5, shellTop + 5);
+    ctx.bezierCurveTo(
+      shellLeft + 5, shellTop + 1,
+      shellRight - 5, shellTop + 1,
+      shellRight - 5, shellTop + 5
+    );
+    ctx.stroke();
+
+    // === HEAD & NECK (drawn LAST so it overlaps the right side of the shell) ===
+    // Neck — short stubby tube emerging from the front of the shell
+    ctx.fillStyle = skin;
+    ctx.beginPath();
+    ctx.roundRect(x + P_W - 4, plastronY - 11, 13, 13, [3, 6, 6, 3]);
+    ctx.fill();
+    // Head — round and chubby, extends to the right
+    ctx.beginPath();
+    ctx.arc(x + P_W + 8, plastronY - 7, 9, 0, Math.PI * 2);
+    ctx.fill();
+    // Underside head shading (jawline)
+    ctx.fillStyle = skinShade;
+    ctx.beginPath();
+    ctx.ellipse(x + P_W + 8, plastronY - 2, 7, 2.8, 0, 0, Math.PI);
+    ctx.fill();
+    // Cheek blush (front cheek, towards the direction of travel)
     ctx.fillStyle = blush;
     ctx.beginPath();
-    ctx.arc(x + P_W + 9, y + 21, 2.6, 0, Math.PI * 2);
+    ctx.arc(x + P_W + 12, plastronY - 4, 2.6, 0, Math.PI * 2);
     ctx.fill();
-    // Eye white
+    // Eye — clearly on the visible (near) side of the head, looking forward
     ctx.fillStyle = eyeWhite;
     ctx.beginPath();
-    ctx.arc(x + P_W + 7, y + 14, 4, 0, Math.PI * 2);
+    ctx.arc(x + P_W + 9, plastronY - 9, 4, 0, Math.PI * 2);
     ctx.fill();
-    // Pupil
     ctx.fillStyle = pupil;
     ctx.beginPath();
-    ctx.arc(x + P_W + 8, y + 15, 2.6, 0, Math.PI * 2);
+    ctx.arc(x + P_W + 10.2, plastronY - 8.4, 2.6, 0, Math.PI * 2);
     ctx.fill();
-    // Eye highlight (upper left)
+    // Eye highlights
     ctx.fillStyle = eyeWhite;
     ctx.beginPath();
-    ctx.arc(x + P_W + 7.2, y + 13.6, 1.1, 0, Math.PI * 2);
+    ctx.arc(x + P_W + 9.4, plastronY - 9.6, 1.1, 0, Math.PI * 2);
     ctx.fill();
-    // Tiny lower highlight
     ctx.beginPath();
-    ctx.arc(x + P_W + 9, y + 16.4, 0.55, 0, Math.PI * 2);
+    ctx.arc(x + P_W + 11.3, plastronY - 7.4, 0.55, 0, Math.PI * 2);
     ctx.fill();
-    // Nostril
+    // Nostril (front of the snout)
     ctx.fillStyle = skinShade;
     ctx.beginPath();
-    ctx.arc(x + P_W + 13, y + 17, 0.9, 0, Math.PI * 2);
+    ctx.arc(x + P_W + 16, plastronY - 5.5, 0.95, 0, Math.PI * 2);
     ctx.fill();
-    // Smile
+    // Smile — on the front of the snout (curving downward, facing right)
     ctx.strokeStyle = "#2a4a1a";
     ctx.lineWidth = 1.4;
     ctx.lineCap = "round";
     ctx.beginPath();
-    ctx.arc(x + P_W + 7, y + 19, 3, 0.15 * Math.PI, 0.85 * Math.PI);
+    ctx.moveTo(x + P_W + 12, plastronY - 3);
+    ctx.quadraticCurveTo(x + P_W + 14.5, plastronY - 1.5, x + P_W + 16, plastronY - 3.5);
     ctx.stroke();
-
-    // === FRONT LEG (right) — opposite swing for running cycle ===
-    ctx.fillStyle = skinShade;
-    ctx.beginPath();
-    ctx.ellipse(x + P_W - 5, y + h - 6 + legSwing, 6, 6, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = skinDeep;
-    ctx.beginPath();
-    ctx.ellipse(x + P_W - 5 - legSwing * 0.6, y + h - 1, 6.5, 3, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = "#f5e6a8";
-    for (let t = 0; t < 3; t++) {
-      ctx.beginPath();
-      ctx.arc(x + P_W - 8 + t * 3 - legSwing * 0.6, y + h - 1, 0.9, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // === SHELL (drawn AFTER legs/head so it sits on top of body) ===
-    // Outer dark rim
-    ctx.fillStyle = shellRim;
-    ctx.beginPath();
-    ctx.ellipse(cx, y + 22, P_W / 2 + 6, 17, 0, 0, Math.PI * 2);
-    ctx.fill();
-    // Shell body with radial highlight (gives a 3-D dome look)
-    const shellGrad = ctx.createRadialGradient(cx - 5, y + 14, 2, cx, y + 22, P_W / 2 + 5);
-    shellGrad.addColorStop(0, shellHi);
-    shellGrad.addColorStop(0.5, shellMid);
-    shellGrad.addColorStop(1, "#2a6638");
-    ctx.fillStyle = shellGrad;
-    ctx.beginPath();
-    ctx.ellipse(cx, y + 22, P_W / 2 + 4, 15, 0, 0, Math.PI * 2);
-    ctx.fill();
-    // Plastron band along the lower rim of the shell
-    ctx.fillStyle = plastron;
-    ctx.beginPath();
-    ctx.ellipse(cx, y + 35, P_W / 2 + 2, 4, 0, 0, Math.PI * 2);
-    ctx.fill();
-    // Glossy specular highlight on top-left of dome
-    ctx.fillStyle = "rgba(255,255,255,0.22)";
-    ctx.beginPath();
-    ctx.ellipse(cx - 6, y + 14, 7, 3, -0.4, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Hexagonal scute pattern
-    ctx.strokeStyle = shellRim;
-    ctx.lineWidth = 1.2;
-    const sy = y + 22;
-    drawHex(cx, sy - 2, 5);
-    drawHex(cx - 9, sy - 1, 4);
-    drawHex(cx + 9, sy - 1, 4);
-    drawHex(cx, sy - 10, 4);
-    drawHex(cx - 5, sy + 7, 4);
-    drawHex(cx + 5, sy + 7, 4);
   }
 
   ctx.globalAlpha = 1;
