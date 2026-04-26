@@ -526,6 +526,93 @@ const BangunABEFCDSVG = () => {
   );
 };
 
+// SVG: Bangun pentagon (trapesium + segitiga) untuk Soal No. 21
+// Trapesium: alas 12, kaki 5 (sama), tinggi 3 (top = 4)
+// Segitiga di atas dengan sisi miring 16 dan tanda siku-siku di pojok kanan-atas
+const PentagonSoal21SVG = () => {
+  const W = 320, H = 250;
+
+  // Trapesium
+  const V1 = { x: 50, y: 220 };  // bottom-left
+  const V5 = { x: 250, y: 220 }; // bottom-right
+  const V4 = { x: 210, y: 170 }; // top-right of trap
+  const V2 = { x: 90, y: 170 };  // top-left of trap (X tick on V1-V2)
+  // Puncak kanan-atas segitiga (siku-siku di sini)
+  const V3 = { x: 270, y: 80 };
+
+  // X-style tick (dua garis silang) di tengah ruas
+  const xTick = (
+    p1: { x: number; y: number },
+    p2: { x: number; y: number },
+    key: string
+  ) => {
+    const mx = (p1.x + p2.x) / 2;
+    const my = (p1.y + p2.y) / 2;
+    const s = 5;
+    return (
+      <g key={key} stroke="#fbbf24" strokeWidth="1.6">
+        <line x1={mx - s} y1={my - s} x2={mx + s} y2={my + s} />
+        <line x1={mx - s} y1={my + s} x2={mx + s} y2={my - s} />
+      </g>
+    );
+  };
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Outline pentagon: V1 → V5 → V4 → V3 → V2 → V1 */}
+        <polygon
+          points={`${V1.x},${V1.y} ${V5.x},${V5.y} ${V4.x},${V4.y} ${V3.x},${V3.y} ${V2.x},${V2.y}`}
+          fill="rgba(34,211,238,0.08)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+
+        {/* Garis pemisah trapesium dan segitiga (top trap horizontal) */}
+        <line x1={V2.x} y1={V2.y} x2={V4.x} y2={V4.y} stroke="#22d3ee" strokeWidth="1" strokeDasharray="3,3" opacity="0.5" />
+
+        {/* Garis vertikal "3 cm" di dalam trapesium */}
+        <line x1={150} y1={V2.y} x2={150} y2={V1.y} stroke="#60a5fa" strokeWidth="1.6" />
+        <text x={156} y={(V2.y + V1.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">3 cm</text>
+
+        {/* Tanda siku-siku di V3 (antara V3-V4 dan V3-V2). Square kecil rotasi mengikuti sudut */}
+        {(() => {
+          const v34 = { x: V4.x - V3.x, y: V4.y - V3.y };
+          const v32 = { x: V2.x - V3.x, y: V2.y - V3.y };
+          const n34 = Math.hypot(v34.x, v34.y);
+          const n32 = Math.hypot(v32.x, v32.y);
+          const u34 = { x: v34.x / n34, y: v34.y / n34 };
+          const u32 = { x: v32.x / n32, y: v32.y / n32 };
+          const sz = 10;
+          const A = { x: V3.x + u34.x * sz, y: V3.y + u34.y * sz };
+          const B = { x: V3.x + u32.x * sz, y: V3.y + u32.y * sz };
+          const C = { x: V3.x + (u34.x + u32.x) * sz, y: V3.y + (u34.y + u32.y) * sz };
+          return (
+            <polyline
+              points={`${A.x},${A.y} ${C.x},${C.y} ${B.x},${B.y}`}
+              fill="none"
+              stroke="#22d3ee"
+              strokeWidth="1.4"
+            />
+          );
+        })()}
+
+        {/* Tick X pada sisi miring trapesium (V1-V2 dan V5-V4) */}
+        {xTick(V1, V2, "tickL")}
+        {xTick(V5, V4, "tickR")}
+
+        {/* Label sisi */}
+        {/* 16 cm di tengah sisi V3-V2 */}
+        <text x={(V3.x + V2.x) / 2 - 6} y={(V3.y + V2.y) / 2 - 8} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">16 cm</text>
+        {/* 5 cm di sisi kanan trapesium */}
+        <text x={V5.x + 6} y={(V5.y + V4.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">5 cm</text>
+        {/* 12 cm di bawah */}
+        <text x={(V1.x + V5.x) / 2} y={V1.y + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">12 cm</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -802,6 +889,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 15 && <SegitigaXSVG />}
                 {soal.no === 18 && <LayangKapalSVG />}
                 {soal.no === 20 && <BangunABEFCDSVG />}
+                {soal.no === 21 && <PentagonSoal21SVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
