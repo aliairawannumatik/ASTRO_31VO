@@ -371,6 +371,85 @@ const BangunSoal2SegiSVG = () => {
   );
 };
 
+/* SVG soal Latihan Dasar No. 6 — jajar genjang ADCB dengan dua segitiga (top apex H, bottom apex G)
+   E adalah kaki tegak lurus dari D ke AB. */
+const BangunSoal6SegiSVG = () => {
+  const stroke = "#1e293b";
+  // Vertex coords
+  const A = { x: 60,  y: 220 };
+  const B = { x: 190, y: 220 };
+  const D = { x: 110, y: 130 };
+  const C = { x: 240, y: 130 };
+  const E = { x: 110, y: 220 };
+  const Cf = { x: 240, y: 220 }; // foot of perpendicular from C (extends past B)
+  const H = { x: 95,  y: 30  };  // top triangle apex
+  const G = { x: 270, y: 310 }; // bottom triangle apex
+
+  const tickAt = (
+    p1: { x: number; y: number },
+    p2: { x: number; y: number },
+    count = 1,
+    len = 6,
+    gap = 4,
+  ) => {
+    const dx = p2.x - p1.x, dy = p2.y - p1.y;
+    const norm = Math.sqrt(dx * dx + dy * dy);
+    const tx = dx / norm, ty = dy / norm;
+    const px = -ty,       py = tx;
+    const mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
+    return Array.from({ length: count }).map((_, i) => {
+      const offset = (i - (count - 1) / 2) * gap;
+      const cx = mx + tx * offset, cy = my + ty * offset;
+      return {
+        x1: cx - (px * len) / 2, y1: cy - (py * len) / 2,
+        x2: cx + (px * len) / 2, y2: cy + (py * len) / 2,
+      };
+    });
+  };
+
+  const ticks = [
+    ...tickAt(D, H, 2),  // DH double tick
+    ...tickAt(C, H, 1),  // CH single tick
+    ...tickAt(B, G, 2),  // BG double tick
+    ...tickAt(A, G, 1),  // AG single tick
+  ];
+
+  const fmt = (p: { x: number; y: number }) => `${p.x},${p.y}`;
+  const parallelogram = [A, D, C, B].map(fmt).join(" ");
+  const topTriangle = [D, C, H].map(fmt).join(" ");
+  const botTriangle = [A, B, G].map(fmt).join(" ");
+
+  return (
+    <svg viewBox="0 0 320 350" className="w-full max-w-[320px]" data-testid="svg-soal-segi-dasar-6">
+      {/* Triangles & parallelogram */}
+      <polygon points={topTriangle} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={botTriangle} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={parallelogram} fill="white" stroke={stroke} strokeWidth="2" />
+
+      {/* Dashed altitudes */}
+      <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke={stroke} strokeWidth="1" strokeDasharray="4 3" />
+      <line x1={C.x} y1={C.y} x2={Cf.x} y2={Cf.y} stroke={stroke} strokeWidth="1" strokeDasharray="4 3" />
+
+      {/* Right-angle marker at E */}
+      <polyline points={`${E.x + 8},${E.y} ${E.x + 8},${E.y - 8} ${E.x},${E.y - 8}`} fill="none" stroke={stroke} strokeWidth="1" />
+
+      {/* Tick marks */}
+      {ticks.map((t, i) => (
+        <line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} stroke={stroke} strokeWidth="1.5" />
+      ))}
+
+      {/* Vertex labels */}
+      <text x={A.x - 4}  y={A.y + 5}  textAnchor="end"    fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">A</text>
+      <text x={B.x + 4}  y={B.y + 5}  textAnchor="start"  fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">B</text>
+      <text x={D.x - 4}  y={D.y - 4}  textAnchor="end"    fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">D</text>
+      <text x={C.x + 4}  y={C.y - 4}  textAnchor="start"  fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">C</text>
+      <text x={E.x}      y={E.y + 14} textAnchor="middle" fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">E</text>
+      <text x={H.x - 6}  y={H.y - 4}  textAnchor="end"    fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">H</text>
+      <text x={G.x + 6}  y={G.y + 12} textAnchor="start"  fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">G</text>
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 5 — jajar genjang AFEB digabung belah ketupat BEDC
    Single tick pada AF, BE, ED, DC, CB.  Double tick pada AB, FE. */
 const BangunSoal5SegiSVG = () => {
@@ -764,6 +843,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Diketahui AB = 20 cm, AF = 13 cm dan BD = 10 cm. Luas bangun di samping adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 6 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar berikut.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <BangunSoal6SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Panjang AD = BE = 17 cm dan DE = 15 cm. Luas bangun AGBCHD adalah ...
                     </div>
                   </>
                 ) : (
