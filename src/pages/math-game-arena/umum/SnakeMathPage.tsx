@@ -4,7 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
-import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import { spaceBg } from "@/assets/placeholder";
 
@@ -26,33 +26,8 @@ type Dir = "U" | "D" | "L" | "R";
 const OPP: Record<Dir, Dir> = { U: "D", D: "U", L: "R", R: "L" };
 const DVEC: Record<Dir, [number, number]> = { U: [0, -1], D: [0, 1], L: [-1, 0], R: [1, 0] };
 
-// ── Math questions ────────────────────────────────────────────────────────
-interface MQ { q: string; ans: number }
-const makeQ = (): MQ => {
-  const type = Math.floor(Math.random() * 7);
-  switch (type) {
-    case 0: { const a = 2 + Math.floor(Math.random() * 11), b = 2 + Math.floor(Math.random() * 11); return { q: `${a} × ${b}`, ans: a * b }; }
-    case 1: { const a = 10 + Math.floor(Math.random() * 91), b = 10 + Math.floor(Math.random() * 91); return { q: `${a} + ${b}`, ans: a + b }; }
-    case 2: { const a = 20 + Math.floor(Math.random() * 81), b = 5 + Math.floor(Math.random() * 16); return { q: `${a + b} − ${b}`, ans: a }; }
-    case 3: { const b = 2 + Math.floor(Math.random() * 9), a = b * (2 + Math.floor(Math.random() * 9)); return { q: `${a} ÷ ${b}`, ans: a / b }; }
-    case 4: { const b = [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144][Math.floor(Math.random() * 11)]; return { q: `√${b}`, ans: Math.round(Math.sqrt(b)) }; }
-    case 5: { const a = 2 + Math.floor(Math.random() * 9), p = 2 + Math.floor(Math.random() * 3); return { q: `${a}^${p}`, ans: Math.pow(a, p) }; }
-    default: { const a = 2 + Math.floor(Math.random() * 13), b = 2 + Math.floor(Math.random() * 13); return { q: `FPB(${a * 2}, ${a * 3})`, ans: a }; }
-  }
-};
-const makeWrong = (ans: number, existing: Set<number>): number => {
-  let v: number;
-  let tries = 0;
-  do {
-    const delta = (1 + Math.floor(Math.random() * 15)) * (Math.random() < 0.5 ? 1 : -1);
-    v = ans + delta;
-    tries++;
-  } while ((existing.has(v) || v < 0 || v === ans) && tries < 80);
-  return v;
-};
-
 // ── Food ──────────────────────────────────────────────────────────────────
-interface Food { x: number; y: number; value: number; correct: boolean; pulse: number; fruit: string }
+interface Food { x: number; y: number; pulse: number; fruit: string }
 
 // ── Particle ─────────────────────────────────────────────────────────────
 interface Particle { x: number; y: number; vx: number; vy: number; alpha: number; color: string; r: number }
@@ -62,19 +37,24 @@ type Phase = "idle" | "playing" | "dead";
 const INIT_LENGTH = 5;
 const INIT_INTERVAL = 180;
 const MIN_INTERVAL = 68;
-const GROW_ON_CORRECT = 3;
-const SHRINK_ON_WRONG = 2;
+const GROW_PER_FOOD = 2;
+const FOOD_COUNT = 4;
+const QUIZ_INTERVAL_MS = 25_000;
 
 interface SnakeMathPageProps {
   topicLabel?: string;
   backPath?: string;
   homePath?: string;
+  quizQuestions?: GuruQuestion[];
+  quizIntervalMs?: number;
 }
 
 const SnakeMathPage = ({
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
+  quizQuestions,
+  quizIntervalMs = QUIZ_INTERVAL_MS,
 }: SnakeMathPageProps = {}) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -84,24 +64,24 @@ const SnakeMathPage = ({
 
   // game state (refs for loop)
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef);
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", quizIntervalMs, quizQuestions);
   const snakeRef = useRef<Array<{ x: number; y: number }>>([]);
   const dirRef = useRef<Dir>("R");
   const nextDirRef = useRef<Dir>("R");
-  const qRef = useRef<MQ>({ q: "", ans: 0 });
   const foodsRef = useRef<Food[]>([]);
   const scoreRef = useRef(0);
   const bestRef = useRef(0);
   const intervalRef = useRef(INIT_INTERVAL);
   const lastStepRef = useRef(0);
   const growPendRef = useRef(0);
-  const shrinkFlashRef = useRef(0);
   const correctFlashRef = useRef(0);
   const particlesRef = useRef<Particle[]>([]);
   const bgStarsRef = useRef<Array<{ x: number; y: number; r: number; t: number; s: number }>>([]);
   const trailRef = useRef<Array<{ x: number; y: number; alpha: number }>>([]);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
-  const combo = useRef(0);
+  const sessionStartRef = useRef(0);
+  const pausedAccumRef = useRef(0);
+  const pauseStartRef = useRef(0);
 
   // react state
   const [phase, setPhase] = useState<Phase>("idle");
@@ -109,7 +89,7 @@ const SnakeMathPage = ({
   const [best, setBest] = useState(0);
   const [snakeLen, setSnakeLen] = useState(INIT_LENGTH);
   const [feedback, setFeedback] = useState<{ txt: string; good: boolean } | null>(null);
-  const [question, setQuestion] = useState<string>("");
+  const [nextQuizIn, setNextQuizIn] = useState<number>(Math.ceil(quizIntervalMs / 1000));
   const fbTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showFeedback = (txt: string, good: boolean) => {
@@ -137,25 +117,17 @@ const SnakeMathPage = ({
   };
 
   const placeFoods = useCallback(() => {
-    const q = makeQ();
-    qRef.current = q;
-    setQuestion(q.q);
-    const usedVals = new Set<number>([q.ans]);
-    const wrong1 = makeWrong(q.ans, usedVals); usedVals.add(wrong1);
-    const wrong2 = makeWrong(q.ans, usedVals); usedVals.add(wrong2);
-    const wrong3 = makeWrong(q.ans, usedVals);
-
-    const values = [q.ans, wrong1, wrong2, wrong3];
-    // shuffle
-    for (let i = values.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [values[i], values[j]] = [values[j], values[i]];
-    }
-
-    foodsRef.current = values.map(v => {
+    foodsRef.current = Array.from({ length: FOOD_COUNT }, () => {
       const pos = randomCell();
-      return { ...pos, value: v, correct: v === q.ans, pulse: Math.random() * Math.PI * 2, fruit: pickFruit() };
+      return { ...pos, pulse: Math.random() * Math.PI * 2, fruit: pickFruit() };
     });
+  }, []);
+
+  const replaceEatenFood = useCallback((eaten: Food) => {
+    const pos = randomCell();
+    foodsRef.current = foodsRef.current.map(f =>
+      f === eaten ? { ...pos, pulse: Math.random() * Math.PI * 2, fruit: pickFruit() } : f
+    );
   }, []);
 
   const spawnParticles = (x: number, y: number, color: string, n = 12) => {
@@ -187,11 +159,13 @@ const SnakeMathPage = ({
     intervalRef.current = INIT_INTERVAL;
     lastStepRef.current = 0;
     growPendRef.current = 0;
-    shrinkFlashRef.current = 0;
     correctFlashRef.current = 0;
-    combo.current = 0;
+    sessionStartRef.current = 0;
+    pausedAccumRef.current = 0;
+    pauseStartRef.current = 0;
     setScore(0);
     setFeedback(null);
+    setNextQuizIn(Math.ceil(quizIntervalMs / 1000));
     bgStarsRef.current = Array.from({ length: 60 }, () => ({
       x: Math.random() * CW, y: Math.random() * CH, r: 0.5 + Math.random() * 1.2,
       t: Math.random() * Math.PI * 2, s: 0.8 + Math.random() * 1.5,
@@ -199,7 +173,7 @@ const SnakeMathPage = ({
     initSnake();
     placeFoods();
     setSnakeLen(INIT_LENGTH);
-  }, [initSnake, placeFoods]);
+  }, [initSnake, placeFoods, quizIntervalMs]);
 
   // ── Step ─────────────────────────────────────────────────────────────
   const step = useCallback(() => {
@@ -232,38 +206,16 @@ const SnakeMathPage = ({
     // check food
     const eaten = foodsRef.current.find(f => f.x === nx && f.y === ny);
     if (eaten) {
-      if (eaten.correct) {
-        combo.current += 1;
-        const bonus = 10 + combo.current * 5;
-        scoreRef.current += bonus;
-        setScore(scoreRef.current);
-        growPendRef.current += GROW_ON_CORRECT;
-        correctFlashRef.current = 0.6;
-        intervalRef.current = Math.max(MIN_INTERVAL, intervalRef.current - 6);
-        spawnParticles(nx, ny, "#00FF88", 14);
-        showFeedback(`✅ BENAR! +${bonus}${combo.current > 1 ? ` COMBO ×${combo.current}` : ""}`, true);
-        placeFoods();
-      } else {
-        combo.current = 0;
-        shrinkFlashRef.current = 0.8;
-        spawnParticles(nx, ny, "#FF4444", 10);
-        // remove tail cells
-        const remove = Math.min(SHRINK_ON_WRONG + 1, snakeRef.current.length - 2);
-        if (snakeRef.current.length - remove <= 1) {
-          phaseRef.current = "dead";
-          setPhase("dead");
-          if (scoreRef.current > bestRef.current) { bestRef.current = scoreRef.current; setBest(bestRef.current); }
-          return;
-        }
-        snakeRef.current = snakeRef.current.slice(0, snakeRef.current.length - remove);
-        showFeedback(`❌ Salah! Jawaban: ${qRef.current.ans}`, false);
-        // replace eaten wrong food
-        const pos = randomCell();
-        let newWrong: number;
-        const used = new Set<number>([qRef.current.ans, ...foodsRef.current.map(f => f.value)]);
-        newWrong = makeWrong(qRef.current.ans, used);
-        foodsRef.current = foodsRef.current.map(f => f === eaten ? { ...pos, value: newWrong, correct: false, pulse: Math.random() * Math.PI * 2, fruit: pickFruit() } : f);
-      }
+      const bonus = 10;
+      scoreRef.current += bonus;
+      setScore(scoreRef.current);
+      growPendRef.current += GROW_PER_FOOD;
+      correctFlashRef.current = 0.45;
+      intervalRef.current = Math.max(MIN_INTERVAL, intervalRef.current - 3);
+      spawnParticles(nx, ny, "#FFE066", 12);
+      spawnParticles(nx, ny, "#00FF88", 8);
+      showFeedback(`+${bonus} 🍎 NYAM!`, true);
+      replaceEatenFood(eaten);
     } else {
       // normal move: remove tail unless grow pending
       if (growPendRef.current > 0) {
@@ -277,7 +229,7 @@ const SnakeMathPage = ({
     // trail head
     trailRef.current.push({ x: nx, y: ny, alpha: 0.8 });
     if (trailRef.current.length > 12) trailRef.current.shift();
-  }, [placeFoods]);
+  }, [replaceEatenFood]);
 
   // ── Draw ─────────────────────────────────────────────────────────────
   const draw = useCallback((ts: number, dt: number) => {
@@ -321,7 +273,7 @@ const SnakeMathPage = ({
     ctx.strokeRect(1.5, 1.5, GW - 3, GH - 3);
     ctx.shadowBlur = 0;
 
-    // ── Foods (fruits with number badges) ─────────────────────────────
+    // ── Foods (fruits with sparkle halo — all foods grow the snake) ─────────
     foodsRef.current.forEach(f => {
       f.pulse += dt * 3;
       const px = f.x * CELL + CELL / 2;
@@ -334,32 +286,16 @@ const SnakeMathPage = ({
       ctx.ellipse(px, py + CELL * 0.38, CELL * 0.28, CELL * 0.07, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // glow halo for correct answer
-      if (f.correct) {
-        const haloR = CELL * (0.7 + 0.12 * Math.sin(f.pulse));
-        const halo = ctx.createRadialGradient(px, py, 0, px, py, haloR);
-        halo.addColorStop(0, "rgba(255,215,0,0.45)");
-        halo.addColorStop(0.6, "rgba(255,215,0,0.18)");
-        halo.addColorStop(1, "rgba(255,215,0,0)");
-        ctx.fillStyle = halo;
-        ctx.beginPath();
-        ctx.arc(px, py, haloR, 0, Math.PI * 2);
-        ctx.fill();
-        // sparkles orbiting
-        const sparkles = 5;
-        for (let i = 0; i < sparkles; i++) {
-          const a = (i / sparkles) * Math.PI * 2 + f.pulse * 0.6;
-          const sx = px + Math.cos(a) * CELL * 0.62;
-          const sy = py + Math.sin(a) * CELL * 0.62;
-          ctx.fillStyle = "rgba(255,240,140,0.95)";
-          ctx.shadowColor = "#FFE680";
-          ctx.shadowBlur = 6;
-          ctx.beginPath();
-          ctx.arc(sx, sy, 1.8, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.shadowBlur = 0;
-      }
+      // gentle warm halo so foods read as edible targets
+      const haloR = CELL * (0.62 + 0.08 * Math.sin(f.pulse));
+      const halo = ctx.createRadialGradient(px, py, 0, px, py, haloR);
+      halo.addColorStop(0, "rgba(255,215,0,0.30)");
+      halo.addColorStop(0.6, "rgba(255,215,0,0.10)");
+      halo.addColorStop(1, "rgba(255,215,0,0)");
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(px, py, haloR, 0, Math.PI * 2);
+      ctx.fill();
 
       // fruit emoji
       ctx.save();
@@ -370,38 +306,6 @@ const SnakeMathPage = ({
       ctx.textBaseline = "middle";
       ctx.fillText(f.fruit, 0, 1);
       ctx.restore();
-
-      // number badge top-right
-      const badgeR = CELL * 0.27;
-      const bx = px + CELL * 0.32;
-      const by = py - CELL * 0.34;
-      // badge ring shadow
-      ctx.shadowColor = f.correct ? "rgba(255,215,0,0.85)" : "rgba(0,0,0,0.55)";
-      ctx.shadowBlur = f.correct ? 10 : 4;
-      const bgGradB = ctx.createRadialGradient(bx - badgeR * 0.3, by - badgeR * 0.3, 0, bx, by, badgeR);
-      if (f.correct) {
-        bgGradB.addColorStop(0, "#FFF6B0");
-        bgGradB.addColorStop(1, "#E6A800");
-      } else {
-        bgGradB.addColorStop(0, "#FFFFFF");
-        bgGradB.addColorStop(1, "#D5DDE8");
-      }
-      ctx.fillStyle = bgGradB;
-      ctx.beginPath();
-      ctx.arc(bx, by, badgeR, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-      ctx.strokeStyle = f.correct ? "#7A5300" : "#3a4252";
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-
-      // number text
-      ctx.fillStyle = "#1a1a1a";
-      const sz = f.value > 99 ? 11 : f.value > 9 ? 13 : 15;
-      ctx.font = `bold ${sz}px sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(String(f.value), bx, by + 0.5);
     });
 
     // ── Snake trail (subtle motion blur) ──────────────────────────────
@@ -624,11 +528,6 @@ const SnakeMathPage = ({
       ctx.fillStyle = `rgba(0,255,136,${Math.max(0, correctFlashRef.current) * 0.12})`;
       ctx.fillRect(0, 0, CW, CH);
     }
-    if (shrinkFlashRef.current > 0) {
-      shrinkFlashRef.current -= dt * 2.5;
-      ctx.fillStyle = `rgba(255,60,60,${Math.max(0, shrinkFlashRef.current) * 0.22})`;
-      ctx.fillRect(0, 0, CW, CH);
-    }
   }, []);
 
   // ── Main RAF ─────────────────────────────────────────────────────────
@@ -636,7 +535,19 @@ const SnakeMathPage = ({
   const loop = useCallback((ts: number) => {
     const dt = Math.min((ts - (lastRafRef.current || ts)) / 1000, 0.05);
     lastRafRef.current = ts;
-    if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
+    if (guruQuiz.isPausedRef.current) {
+      // Track pause start so we can keep step timing & quiz countdown stable
+      if (pauseStartRef.current === 0) pauseStartRef.current = ts;
+      draw(ts, dt);
+      rafRef.current = requestAnimationFrame(loop);
+      return;
+    }
+    if (pauseStartRef.current !== 0) {
+      const pausedFor = ts - pauseStartRef.current;
+      pausedAccumRef.current += pausedFor;
+      lastStepRef.current += pausedFor;
+      pauseStartRef.current = 0;
+    }
 
     if (phaseRef.current === "playing") {
       const elapsed = ts - lastStepRef.current;
@@ -644,22 +555,42 @@ const SnakeMathPage = ({
         step();
         lastStepRef.current = ts;
       }
+
+      // Update quiz countdown chip
+      if (sessionStartRef.current > 0) {
+        const sessionElapsed = (performance.now() - sessionStartRef.current) - pausedAccumRef.current;
+        const totalQ = guruQuiz.totalQuestions;
+        const askedQ = guruQuiz.questionNumber;
+        if (askedQ < totalQ) {
+          const nextAtMs = (askedQ + 1) * quizIntervalMs;
+          const remainingMs = Math.max(0, nextAtMs - sessionElapsed);
+          const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000));
+          setNextQuizIn(prev => (prev !== remainingSec ? remainingSec : prev));
+        } else {
+          setNextQuizIn(prev => (prev !== 0 ? 0 : prev));
+        }
+      }
     }
 
     draw(ts, dt);
     rafRef.current = requestAnimationFrame(loop);
-  }, [step, draw]);
+  }, [step, draw, guruQuiz.isPausedRef, guruQuiz.questionNumber, guruQuiz.totalQuestions, quizIntervalMs]);
 
   const startGame = useCallback(() => {
     playPopSound();
     resetGame();
     phaseRef.current = "playing";
     setPhase("playing");
-    lastStepRef.current = performance.now();
+    const now = performance.now();
+    lastStepRef.current = now;
+    sessionStartRef.current = now;
+    pausedAccumRef.current = 0;
+    pauseStartRef.current = 0;
     lastRafRef.current = 0;
+    setNextQuizIn(Math.ceil(quizIntervalMs / 1000));
     cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(loop);
-  }, [resetGame, loop]);
+  }, [resetGame, loop, quizIntervalMs]);
 
   // keys
   useEffect(() => {
@@ -766,23 +697,23 @@ const SnakeMathPage = ({
               <ul className="text-left space-y-3 font-body text-sm text-foreground/90">
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">1</span>
-                  <span>Baca soal matematika di bagian atas layar</span>
+                  <span>Arahkan ular memakan <strong className="text-yellow-300">🍎 buah apa saja</strong> — ular akan <strong className="text-emerald-300">memanjang</strong> dan skor bertambah</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">2</span>
-                  <span>Arahkan ular memakan angka <strong className="text-yellow-300">⭐ jawaban benar</strong> agar memanjang dan dapat skor</span>
+                  <span>Jangan menabrak <strong className="text-red-400">bingkai/tembok</strong> atau <strong className="text-red-400">tubuh sendiri</strong> — kalau menabrak, Game Over!</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">3</span>
-                  <span>Hindari angka <strong className="text-blue-300">🔷 salah</strong> — ular akan memendek!</span>
+                  <span>Setiap <strong className="text-amber-300">25 detik</strong> akan muncul <strong className="text-amber-300">soal matematika</strong> dari Pak/Bu Guru — jawab dengan benar untuk bonus skor</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">4</span>
-                  <span>Jangan menabrak <strong className="text-red-400">tembok</strong> atau <strong className="text-red-400">tubuh sendiri</strong> — Game Over!</span>
+                  <span>Setelah <strong className="text-cyan-300">semua soal terjawab</strong>, permainan terus berjalan sampai ular mati</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">5</span>
-                  <span className="text-xs">Di komputer: gunakan <strong className="text-emerald-300">← ↑ → ↓</strong> atau <strong className="text-emerald-300">WASD</strong>. Di HP: swipe atau D-pad. Bonus <strong className="text-yellow-300">COMBO</strong> untuk benar berturut-turut!</span>
+                  <span className="text-xs">Di komputer: gunakan <strong className="text-emerald-300">← ↑ → ↓</strong> atau <strong className="text-emerald-300">WASD</strong>. Di HP: swipe atau D-pad.</span>
                 </li>
               </ul>
             </div>
@@ -860,12 +791,20 @@ const SnakeMathPage = ({
           </button>
         </div>
 
-        {/* HUD: question + stats */}
+        {/* HUD: stats + quiz countdown */}
         <div className="w-full max-w-6xl mb-2 flex flex-col gap-2 px-1">
-          <div className="rounded-xl border border-amber-400/50 bg-gradient-to-r from-amber-500/15 via-yellow-500/15 to-amber-500/15 px-4 py-2 text-center shadow-[0_0_18px_rgba(255,200,0,0.25)]">
-            <span className="font-display text-lg sm:text-2xl font-black text-amber-200 tracking-wider drop-shadow-[0_0_8px_rgba(255,215,0,0.65)]">
-              {question || "..."} = ?
+          <div className="rounded-xl border border-amber-400/50 bg-gradient-to-r from-amber-500/15 via-yellow-500/15 to-amber-500/15 px-4 py-2 flex items-center justify-center gap-3 shadow-[0_0_18px_rgba(255,200,0,0.25)]">
+            <span className="text-xl sm:text-2xl">👨‍🏫</span>
+            <span className="font-display text-sm sm:text-base font-bold text-amber-200 tracking-wide drop-shadow-[0_0_8px_rgba(255,215,0,0.55)]">
+              {guruQuiz.questionNumber >= guruQuiz.totalQuestions
+                ? `🎉 Semua soal selesai! Bertahan hidup selama mungkin!`
+                : `Soal Pak/Bu Guru ke-${guruQuiz.questionNumber + 1}/${guruQuiz.totalQuestions} muncul dalam`}
             </span>
+            {guruQuiz.questionNumber < guruQuiz.totalQuestions && (
+              <span className="font-display text-xl sm:text-2xl font-black text-amber-100 tabular-nums drop-shadow-[0_0_10px_rgba(255,215,0,0.75)]">
+                {nextQuizIn}s
+              </span>
+            )}
           </div>
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs sm:text-sm font-display">
             <div className="flex flex-wrap gap-3">
@@ -877,6 +816,9 @@ const SnakeMathPage = ({
               </span>
               <span className="px-2 py-0.5 rounded-md bg-pink-500/15 border border-pink-400/40 text-pink-200">
                 🐍 PANJANG: <span className="font-bold text-pink-100">{snakeLen}</span>
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-400/40 text-emerald-200">
+                📘 GURU: <span className="font-bold text-emerald-100">{guruQuiz.guruScore}</span>
               </span>
             </div>
             <div className="flex items-center gap-2 min-w-[160px]">

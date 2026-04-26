@@ -40,7 +40,8 @@ export interface UseGuruQuizReturn {
 export function useGuruQuiz(
   phaseRef: React.MutableRefObject<string>,
   playingPhase: string | string[] = "playing",
-  intervalMs: number = DEFAULT_INTERVAL_MS
+  intervalMs: number = DEFAULT_INTERVAL_MS,
+  customQuestions?: GuruQuestion[]
 ): UseGuruQuizReturn {
   const isPausedRef = useRef(false);
 
@@ -61,18 +62,20 @@ export function useGuruQuiz(
     active: false,
   });
 
+  const questionPool = customQuestions && customQuestions.length > 0 ? customQuestions : GURU_QUESTIONS;
+
   const pickQuestion = useCallback((): GuruQuestion => {
     const used = internal.current.usedIndices;
     let idx: number;
-    if (used.length >= GURU_QUESTIONS.length) {
+    if (used.length >= questionPool.length) {
       internal.current.usedIndices = [];
     }
     do {
-      idx = Math.floor(Math.random() * GURU_QUESTIONS.length);
+      idx = Math.floor(Math.random() * questionPool.length);
     } while (internal.current.usedIndices.includes(idx));
     internal.current.usedIndices.push(idx);
-    return GURU_QUESTIONS[idx];
-  }, []);
+    return questionPool[idx];
+  }, [questionPool]);
 
   useEffect(() => {
     const timer = setInterval(() => {
