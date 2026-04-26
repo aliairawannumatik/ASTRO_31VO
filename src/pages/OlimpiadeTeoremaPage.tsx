@@ -434,6 +434,98 @@ const LayangKapalSVG = () => {
   );
 };
 
+// SVG: Bangun gabungan jajargenjang ABEF + belah ketupat BCDE untuk Soal No. 20
+const BangunABEFCDSVG = () => {
+  const W = 360, H = 250;
+
+  // Koordinat titik (disesuaikan agar mirip gambar soal)
+  const A = { x: 40, y: 140 };
+  const B = { x: 190, y: 130 };
+  const E = { x: 250, y: 60 };
+  const F = { x: 100, y: 70 };
+  const C = { x: 240, y: 210 };
+  const D = { x: 300, y: 140 };
+
+  // Helper untuk menggambar tick mark di tengah sisi (perpendicular ke sisi)
+  const tickMarks = (
+    p1: { x: number; y: number },
+    p2: { x: number; y: number },
+    count: 1 | 2,
+    keyPrefix: string
+  ) => {
+    const mx = (p1.x + p2.x) / 2;
+    const my = (p1.y + p2.y) / 2;
+    const dx = p2.x - p1.x;
+    const dy = p2.y - p1.y;
+    const len = Math.hypot(dx, dy);
+    const ux = dx / len; // along
+    const uy = dy / len;
+    const nx = -uy;       // perpendicular
+    const ny = ux;
+    const tickLen = 6;
+    const sep = 4;
+    const offsets = count === 1 ? [0] : [-sep / 2, sep / 2];
+    return offsets.map((off, i) => {
+      const cx = mx + ux * off;
+      const cy = my + uy * off;
+      return (
+        <line
+          key={`${keyPrefix}-${i}`}
+          x1={cx - nx * tickLen / 2}
+          y1={cy - ny * tickLen / 2}
+          x2={cx + nx * tickLen / 2}
+          y2={cy + ny * tickLen / 2}
+          stroke="#fbbf24"
+          strokeWidth="1.6"
+        />
+      );
+    });
+  };
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Jajargenjang ABEF */}
+        <polygon
+          points={`${A.x},${A.y} ${B.x},${B.y} ${E.x},${E.y} ${F.x},${F.y}`}
+          fill="rgba(34,211,238,0.06)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+        {/* Belah ketupat BCDE */}
+        <polygon
+          points={`${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y} ${E.x},${E.y}`}
+          fill="rgba(244,114,182,0.06)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+
+        {/* Tick marks: AB & FE = double, AF, BE, BC, CD, DE = single */}
+        {tickMarks(A, B, 2, "AB")}
+        {tickMarks(F, E, 2, "FE")}
+        {tickMarks(A, F, 1, "AF")}
+        {tickMarks(B, E, 1, "BE")}
+        {tickMarks(B, C, 1, "BC")}
+        {tickMarks(C, D, 1, "CD")}
+        {tickMarks(D, E, 1, "DE")}
+
+        {/* Titik sudut */}
+        {[A, B, C, D, E, F].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
+        ))}
+
+        {/* Label titik */}
+        <text x={A.x - 8} y={A.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x - 8} y={B.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">B</text>
+        <text x={C.x + 4} y={C.y + 18} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x + 8} y={D.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold">D</text>
+        <text x={E.x + 8} y={E.y + 4} fill="#ffffff" fontSize="14" fontWeight="bold">E</text>
+        <text x={F.x - 4} y={F.y - 6} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">F</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -709,6 +801,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 11 && <TabelSegitiga11 />}
                 {soal.no === 15 && <SegitigaXSVG />}
                 {soal.no === 18 && <LayangKapalSVG />}
+                {soal.no === 20 && <BangunABEFCDSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
