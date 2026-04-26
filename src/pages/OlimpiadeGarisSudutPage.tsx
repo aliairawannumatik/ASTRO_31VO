@@ -49,6 +49,7 @@ import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
 import gambarOlimpiade5 from "@assets/image_1777195700263.png";
+import gambarOlimpiade6 from "@assets/image_1777195719119.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -559,8 +560,8 @@ const latihanOlimpiade = [
   },
   {
     no: 6,
-    soal: "OSN Matematika 2014 Tingkat Kota\n\nDiketahui gari $L_1$ sejajar garis $L_2$ dan garis $L_3$ sejajar garis $L_4$.\n\nBesar sudut $y - x$ adalah ...",
-    image: null,
+    soal: "OSN Matematika 2014 Tingkat Kota\n\nDiketahui garis $L_1$ sejajar garis $L_2$ dan garis $L_3$ sejajar garis $L_4$.\n\nBesar sudut $y - x$ adalah ...",
+    image: gambarOlimpiade6,
     options: ["A. $0°$", "B. $10°$", "C. $30°$", "D. $50°$"]
   },
   {
