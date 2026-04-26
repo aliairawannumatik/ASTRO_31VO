@@ -47,6 +47,7 @@ import gambar38 from "@/assets/Gambar_38_SOAL_1773290091440.png";
 import gambar39 from "@/assets/Gambar_39_SOAL_1773290091440.png";
 import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 import gambarOlimpiade2 from "@assets/image_1777195655690.png";
+import gambarOlimpiade4 from "@assets/image_1777195674151.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -546,7 +547,7 @@ const latihanOlimpiade = [
   {
     no: 4,
     soal: "OSN Matematika 2007 Tingkat Kota\n\nPerhatikan gambar berikut.\n\nNilai dari $a + b + c + d + e + f + g + h + i$ adalah ...",
-    image: null,
+    image: gambarOlimpiade4,
     options: ["A. 360", "B. 540", "C. 720", "D. 900", "E. 1.260"]
   },
   {
