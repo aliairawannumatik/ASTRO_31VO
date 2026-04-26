@@ -371,6 +371,81 @@ const BangunSoal2SegiSVG = () => {
   );
 };
 
+/* SVG soal Latihan Dasar No. 5 — jajar genjang AFEB digabung belah ketupat BEDC
+   Single tick pada AF, BE, ED, DC, CB.  Double tick pada AB, FE. */
+const BangunSoal5SegiSVG = () => {
+  const stroke = "#1e293b";
+  // Vertex coordinates
+  const A = { x: 20,  y: 100 };
+  const F = { x: 90,  y: 40  };
+  const E = { x: 190, y: 40  };
+  const B = { x: 120, y: 100 };
+  const D = { x: 260, y: 100 };
+  const C = { x: 190, y: 160 };
+
+  // Helper untuk membuat tick perpendicular pada midpoint segment
+  const tickAt = (
+    p1: { x: number; y: number },
+    p2: { x: number; y: number },
+    count = 1,
+    len = 6,
+    gap = 4,
+  ) => {
+    const dx = p2.x - p1.x;
+    const dy = p2.y - p1.y;
+    const norm = Math.sqrt(dx * dx + dy * dy);
+    const tx = dx / norm, ty = dy / norm;            // tangent
+    const px = -ty,       py = tx;                   // perpendicular
+    const mx = (p1.x + p2.x) / 2;
+    const my = (p1.y + p2.y) / 2;
+    return Array.from({ length: count }).map((_, i) => {
+      const offset = (i - (count - 1) / 2) * gap;
+      const cx = mx + tx * offset;
+      const cy = my + ty * offset;
+      return {
+        x1: cx - (px * len) / 2,
+        y1: cy - (py * len) / 2,
+        x2: cx + (px * len) / 2,
+        y2: cy + (py * len) / 2,
+      };
+    });
+  };
+
+  const ticks = [
+    ...tickAt(A, F, 1),
+    ...tickAt(F, E, 2),
+    ...tickAt(B, E, 1),
+    ...tickAt(A, B, 2),
+    ...tickAt(E, D, 1),
+    ...tickAt(D, C, 1),
+    ...tickAt(C, B, 1),
+  ];
+
+  const fmt = (p: { x: number; y: number }) => `${p.x},${p.y}`;
+  const parallelogram = [A, F, E, B].map(fmt).join(" ");
+  const rhombus = [B, E, D, C].map(fmt).join(" ");
+
+  return (
+    <svg viewBox="0 0 290 200" className="w-full max-w-[320px]" data-testid="svg-soal-segi-dasar-5">
+      {/* Jajar genjang AFEB */}
+      <polygon points={parallelogram} fill="white" stroke={stroke} strokeWidth="2" />
+      {/* Belah ketupat BEDC */}
+      <polygon points={rhombus} fill="white" stroke={stroke} strokeWidth="2" />
+      {/* Tick marks */}
+      {ticks.map((t, i) => (
+        <line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} stroke={stroke} strokeWidth="1.5" />
+      ))}
+      {/* Vertex labels */}
+      <text x={A.x - 4}  y={A.y + 5} textAnchor="end"    fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">A</text>
+      <text x={F.x - 4}  y={F.y - 4} textAnchor="end"    fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">F</text>
+      <text x={E.x + 4}  y={E.y - 4} textAnchor="start"  fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">E</text>
+      <text x={B.x + 2}  y={B.y + 14} textAnchor="middle" fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">B</text>
+      <text x={D.x + 6}  y={D.y + 5} textAnchor="start"  fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">D</text>
+      <text x={C.x}      y={C.y + 14} textAnchor="middle" fill={stroke} fontSize="13" fontStyle="italic" fontWeight="bold">C</text>
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 4 — huruf kapital "E" tinggi 45 cm dengan 3 arm dan 2 notch (15 cm) */
 const BangunSoal4SegiSVG = () => {
   const stroke = "#1e293b";
@@ -675,6 +750,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Luas huruf kapital di samping adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 5 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <BangunSoal5SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Diketahui AB = 20 cm, AF = 13 cm dan BD = 10 cm. Luas bangun di samping adalah ...
                     </div>
                   </>
                 ) : (
