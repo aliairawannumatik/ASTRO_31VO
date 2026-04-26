@@ -751,6 +751,68 @@ const SegitigaPQR30SVG = () => {
   );
 };
 
+// SVG: Helikopter mengamati 3 titik untuk Soal No. 28
+const HelikopterOABCSVG = () => {
+  const W = 380, H = 240;
+
+  const O = { x: 40, y: 200 };
+  const A = { x: 143, y: 200 };
+  const B = { x: 219, y: 200 };
+  const C = { x: 350, y: 200 };
+  const H_pt = { x: 40, y: 40 }; // posisi helikopter di atas O
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm sm:max-w-md rounded-lg border border-border/40 bg-white/5">
+        {/* Garis tanah O→C */}
+        <line x1={O.x} y1={O.y} x2={C.x} y2={C.y} stroke="#22d3ee" strokeWidth="2" />
+        {/* Garis vertikal H→O (ketinggian) */}
+        <line x1={H_pt.x} y1={H_pt.y} x2={O.x} y2={O.y} stroke="#22d3ee" strokeWidth="2" />
+
+        {/* Garis pandang dari helikopter ke A, B, C */}
+        <line x1={H_pt.x} y1={H_pt.y} x2={A.x} y2={A.y} stroke="#22d3ee" strokeWidth="1.6" />
+        <line x1={H_pt.x} y1={H_pt.y} x2={B.x} y2={B.y} stroke="#22d3ee" strokeWidth="1.6" />
+        <line x1={H_pt.x} y1={H_pt.y} x2={C.x} y2={C.y} stroke="#22d3ee" strokeWidth="1.6" />
+
+        {/* Tanda siku-siku di O */}
+        <rect x={O.x} y={O.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+
+        {/* Helikopter (siluet sederhana) */}
+        <g transform={`translate(${H_pt.x - 22}, ${H_pt.y - 18})`}>
+          {/* badan */}
+          <ellipse cx="14" cy="14" rx="14" ry="8" fill="#7c3aed" stroke="#1e1b4b" strokeWidth="1" />
+          {/* ekor */}
+          <rect x="22" y="12" width="20" height="3" fill="#7c3aed" stroke="#1e1b4b" strokeWidth="0.8" />
+          {/* baling-baling atas */}
+          <line x1="-4" y1="4" x2="32" y2="4" stroke="#1e1b4b" strokeWidth="1.6" />
+          <line x1="14" y1="4" x2="14" y2="6" stroke="#1e1b4b" strokeWidth="1" />
+          {/* baling-baling ekor */}
+          <line x1="42" y1="9" x2="42" y2="18" stroke="#1e1b4b" strokeWidth="1.2" />
+          {/* skid */}
+          <line x1="2" y1="22" x2="26" y2="22" stroke="#1e1b4b" strokeWidth="1" />
+        </g>
+
+        {/* Label sudut di A, B, C (di sebelah kanan masing-masing titik, sedikit di atas garis tanah) */}
+        <text x={A.x + 4} y={A.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">60°</text>
+        <text x={B.x + 4} y={B.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">45°</text>
+        <text x={C.x - 6} y={C.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">30°</text>
+
+        {/* Label "500 m" di samping garis tinggi */}
+        <text x={H_pt.x - 6} y={(H_pt.y + O.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">500 m</text>
+
+        {/* Titik & label O, A, B, C */}
+        {[O, A, B, C].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
+        ))}
+        <text x={O.x - 6} y={O.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="end">O</text>
+        <text x={A.x} y={A.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+        <text x={B.x} y={B.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+        <text x={C.x + 6} y={C.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold">C</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -1031,6 +1093,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 23 && <LayangLayangABCDSVG />}
                 {soal.no === 24 && <JajargenjangABCDSVG />}
                 {soal.no === 27 && <SegitigaPQR30SVG />}
+                {soal.no === 28 && <HelikopterOABCSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
