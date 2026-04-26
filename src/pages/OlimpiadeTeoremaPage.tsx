@@ -711,6 +711,46 @@ const JajargenjangABCDSVG = () => {
   );
 };
 
+// SVG: Segitiga siku-siku PQR untuk Soal No. 27 (siku di P, sudut 30° di Q)
+const SegitigaPQR30SVG = () => {
+  const W = 300, H = 200;
+
+  const P = { x: 40, y: 170 };
+  const Q = { x: 260, y: 170 };
+  const R = { x: 40, y: 40 };
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga PQR */}
+        <polygon
+          points={`${P.x},${P.y} ${Q.x},${Q.y} ${R.x},${R.y}`}
+          fill="rgba(34,211,238,0.08)"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+
+        {/* Tanda siku-siku di P */}
+        <rect x={P.x} y={P.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+
+        {/* Busur sudut 30° di Q */}
+        <path d={`M ${Q.x - 28} ${Q.y} A 28 28 0 0 0 ${Q.x - 24.2} ${Q.y - 14}`} fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+        <text x={Q.x - 30} y={Q.y - 6} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">30°</text>
+
+        {/* Titik sudut */}
+        {[P, Q, R].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
+        ))}
+
+        {/* Label titik */}
+        <text x={P.x - 6} y={P.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">P</text>
+        <text x={Q.x + 6} y={Q.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold">Q</text>
+        <text x={R.x - 6} y={R.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">R</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -990,6 +1030,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 21 && <PentagonSoal21SVG />}
                 {soal.no === 23 && <LayangLayangABCDSVG />}
                 {soal.no === 24 && <JajargenjangABCDSVG />}
+                {soal.no === 27 && <SegitigaPQR30SVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
