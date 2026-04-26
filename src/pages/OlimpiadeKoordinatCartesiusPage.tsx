@@ -170,6 +170,59 @@ const JarakDuaTitikSVG = () => {
   );
 };
 
+// SVG: Jarak titik A(x1, y1) ke garis ax + by + c = 0
+const JarakTitikGarisSVG = () => {
+  const W = 320, H = 200;
+  // Garis miring: dari kiri-bawah ke kanan-atas
+  const gx1 = 70, gy1 = 165;
+  const gx2 = 300, gy2 = 50;
+  // Titik A di kiri-atas
+  const Ax = 50, Ay = 35;
+  // Titik D = proyeksi tegak lurus dari A ke garis
+  const dx = gx2 - gx1;
+  const dy = gy2 - gy1;
+  const t = ((Ax - gx1) * dx + (Ay - gy1) * dy) / (dx * dx + dy * dy);
+  const Dx = gx1 + t * dx;
+  const Dy = gy1 + t * dy;
+  // Vektor satuan sepanjang garis & normal untuk membentuk siku-siku kecil
+  const len = Math.hypot(dx, dy);
+  const ux = dx / len, uy = dy / len;
+  const nx = -uy, ny = ux;
+  const s = 8;
+  const sq = [
+    `${Dx},${Dy}`,
+    `${Dx - s * ux},${Dy - s * uy}`,
+    `${Dx - s * ux + s * nx},${Dy - s * uy + s * ny}`,
+    `${Dx + s * nx},${Dy + s * ny}`,
+  ].join(' ');
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        <defs>
+          <marker id="arrowJTG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L6,4 L0,8 Z" fill="#fbbf24" />
+          </marker>
+        </defs>
+        {/* Garis ax + by + c = 0 dengan panah di kedua ujung */}
+        <line x1={gx1} y1={gy1} x2={gx2} y2={gy2} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowJTG)" />
+        <line x1={gx2} y1={gy2} x2={gx1} y2={gy1} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrowJTG)" />
+        {/* Garis tegak lurus dari A ke D */}
+        <line x1={Ax} y1={Ay} x2={Dx} y2={Dy} stroke="#e5e7eb" strokeWidth="1.2" />
+        {/* Persegi siku-siku di D */}
+        <polygon points={sq} fill="none" stroke="#e5e7eb" strokeWidth="1" />
+        {/* Titik A dan D */}
+        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
+        <circle cx={Dx} cy={Dy} r="3" fill="#22d3ee" />
+        {/* Label */}
+        <text x={Ax + 6} y={Ay - 4} fill="#22d3ee" fontSize="12" fontWeight="bold">A(x₁, y₁)</text>
+        <text x={Dx + 8} y={Dy + 18} fill="#22d3ee" fontSize="12" fontWeight="bold">D</text>
+        <text x={gx2 - 4} y={gy2 - 8} fill="#e5e7eb" fontSize="11" textAnchor="end">garis ax + by + c = 0</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -354,6 +407,7 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                   <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
                       {idx === 2 && <JarakDuaTitikSVG />}
+                      {idx === 4 && <JarakTitikGarisSVG />}
                       {section.content.split('\n').map((line, i) => {
                         const trimmed = line.trim();
                         const renderedLine = (() => {
