@@ -371,6 +371,30 @@ const BangunSoal2SegiSVG = () => {
   );
 };
 
+/* SVG soal Latihan Dasar No. 4 — huruf kapital "E" tinggi 45 cm dengan 3 arm dan 2 notch (15 cm) */
+const BangunSoal4SegiSVG = () => {
+  const stroke = "#1e293b";
+  // Skala 1 cm = 7 px, offset kiri 50, atas 30. Bounding 20 cm × 45 cm.
+  // Titik (clockwise dari (0,0)):
+  // (0,0)→(20,0)→(20,5)→(5,5)→(5,20)→(20,20)→(20,25)→(5,25)→(5,40)→(20,40)→(20,45)→(0,45)
+  const points = "50,30 190,30 190,65 85,65 85,170 190,170 190,205 85,205 85,310 190,310 190,345 50,345";
+  return (
+    <svg viewBox="0 0 230 380" className="w-full max-w-[260px]" data-testid="svg-soal-segi-dasar-4">
+      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      {/* Garis putus-putus penanda tinggi 45 cm di sebelah kiri */}
+      <line x1="42" y1="30" x2="42" y2="345" stroke={stroke} strokeWidth="1" strokeDasharray="4 4" />
+      {/* Label "45 cm" rotasi -90 di sebelah kiri */}
+      <text x="28" y="187" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold" transform="rotate(-90, 28, 187)">45 cm</text>
+      {/* Label "15 cm" di kanan untuk tinggi notch atas (y 65→170) */}
+      <text x="200" y="121" textAnchor="start" fill={stroke} fontSize="13" fontWeight="bold">15 cm</text>
+      {/* Label "15 cm" di tengah untuk lebar notch (segmen horizontal di y=170, x 85→190 = 15 cm) */}
+      <text x="137" y="163" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold">15 cm</text>
+      {/* Label "15 cm" di kanan untuk tinggi notch bawah (y 205→310) */}
+      <text x="200" y="261" textAnchor="start" fill={stroke} fontSize="13" fontWeight="bold">15 cm</text>
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 3 — bangun tangga (staircase) 15 × 28 dengan 10 cm di kanan-atas */
 const BangunSoal3SegiSVG = () => {
   const stroke = "#1e293b";
@@ -637,6 +661,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Luas gambar di samping adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 4 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar berikut.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
+                        <BangunSoal4SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Luas huruf kapital di samping adalah ...
                     </div>
                   </>
                 ) : (
