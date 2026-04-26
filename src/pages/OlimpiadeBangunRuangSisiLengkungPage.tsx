@@ -7,6 +7,9 @@ import { Trophy, BookOpen, Dumbbell, Star, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { BlockMath, InlineMath } from "react-katex";
+import PembahasanCard from "@/components/PembahasanCard";
+import { brslDasarPembahasan } from "@/data/pembahasan/brslDasar";
+import { brslOlimpiadePembahasan } from "@/data/pembahasan/brslOlimpiade";
 
 /* ─────────────── LaTeX helper ─────────────── */
 const renderWithLatex = (text: string) => {
@@ -570,6 +573,12 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                       ))}
                     </div>
                   )}
+                  {brslDasarPembahasan[soal.no] && (
+                    <PembahasanCard
+                      pembahasanKey={`brsl-dasar-${soal.no}`}
+                      pembahasan={brslDasarPembahasan[soal.no]}
+                    />
+                  )}
                 </div>
               ))}
             </motion.div>
@@ -599,6 +608,12 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         </div>
                       ))}
                     </div>
+                  )}
+                  {brslOlimpiadePembahasan[soal.no] && (
+                    <PembahasanCard
+                      pembahasanKey={`brsl-olim-${soal.no}`}
+                      pembahasan={brslOlimpiadePembahasan[soal.no]}
+                    />
                   )}
                 </div>
               ))}
