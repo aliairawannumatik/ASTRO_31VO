@@ -312,6 +312,45 @@ const BangunABCDESVG = () => {
   );
 };
 
+// Tabel informasi sisi-sisi segitiga untuk Soal No. 11
+const TabelSegitiga11 = () => {
+  const rows = [
+    { tri: "△ABC", sisi: ["3", "10", "12"] },
+    { tri: "△DEF", sisi: ["3", "4", "6"] },
+    { tri: "△KLM", sisi: ["10", "24", "26"] },
+    { tri: "△PQR", sisi: ["6", "8", "9"] },
+  ];
+
+  return (
+    <div className="my-3 flex justify-center">
+      <div className="w-full max-w-xs sm:max-w-sm overflow-hidden rounded-lg border border-cyan-400/40 bg-white/5">
+        <table className="w-full text-sm text-white">
+          <thead className="bg-cyan-500/20">
+            <tr>
+              <th className="px-3 py-2 text-left font-semibold border-b border-cyan-400/30">Segitiga</th>
+              <th className="px-3 py-2 text-center font-semibold border-b border-cyan-400/30">Sisi 1</th>
+              <th className="px-3 py-2 text-center font-semibold border-b border-cyan-400/30">Sisi 2</th>
+              <th className="px-3 py-2 text-center font-semibold border-b border-cyan-400/30">Sisi 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => (
+              <tr key={r.tri} className={i % 2 === 0 ? "bg-white/0" : "bg-white/5"}>
+                <td className="px-3 py-2 font-semibold text-cyan-300 border-t border-cyan-400/20">{r.tri}</td>
+                {r.sisi.map((s, j) => (
+                  <td key={j} className="px-3 py-2 text-center text-yellow-300 border-t border-cyan-400/20">
+                    {s}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -401,7 +440,7 @@ const latihanDasar = [
   { no: 8, soal: "Perhatikan sisi-sisi segitiga di bawah\ni. 8, 15, dan 18\nii. 7, 24, dan 25\niii. 12, 15, dan 20\niv. 9, 12, dan 15\nYang merupakan tripel Pythagoras pada sisi-sisi segitiga diatas adalah...", options: ["A. i dan ii", "B. ii dan iii", "C. ii dan iv", "D. i dan iv"] },
   { no: 9, soal: "Besar kedua sudut segitiga $40°$ dan $70°$. Ditinjau dari panjang sisi dan besar sudutnya, jenis segitiga tersebut adalah....", options: ["A. segitiga lancip sama kaki", "B. segitiga siku-siku sama kaki", "C. segitiga tumpul sama kaki", "D. segitiga tumpul sembarang"] },
   { no: 10, soal: "Diketahui panjang sisi-sisi pada segitiga sebagai berikut:\n(1). 3 cm, 4 cm, 5 cm\n(2). 6 cm, 7 cm, 10 cm\n(3). 4 cm, 5 cm, 6 cm\n(4). 6 cm, 8 cm, 12 cm\nPanjang sisi-sisi diatas yang dapat membentuk segitiga tumpul adalah ...", options: ["A. (1) dan (2)", "B. (2) dan (3)", "C. (3) dan (4)", "D. (2) dan (4)"] },
-  { no: 11, soal: "Perhatikan tabel berikut:\n$\\triangle ABC$: 3, 10, 12\n$\\triangle DEF$: 3, 4, 6\n$\\triangle KLM$: 10, 24, 26\n$\\triangle PQR$: 6, 8, 9\nPada tabel tersebut, segitiga yang merupakan segitiga siku-siku adalah .......", options: ["A. $\\triangle ABC$", "B. $\\triangle DEF$", "C. $\\triangle KLM$", "D. $\\triangle PQR$"] },
+  { no: 11, soal: "Perhatikan tabel berikut.\nPada tabel tersebut, segitiga yang merupakan segitiga siku-siku adalah .......", options: ["A. $\\triangle ABC$", "B. $\\triangle DEF$", "C. $\\triangle KLM$", "D. $\\triangle PQR$"] },
   { no: 12, soal: "Suatu segitiga mempunyai ukuran sisi-sisinya 8 cm, 15 cm, dan 20 cm. Segitiga tersebut merupakan jenis segitiga ....", options: ["A. lancip", "B. tumpul", "C. siku-siku", "D. sama kaki"] },
   { no: 13, soal: "Diketahui ukuran segitiga:\ni. 2 cm, 2 cm, 2 cm\nii. 6 cm, 8 cm, 14 cm\niii. 7 cm, 24 cm, 25 cm\niv. 5 cm, 12 cm, 15 cm\nYang merupakan segitiga tumpul adalah ..", options: ["A. i dan ii", "B. i dan iv", "C. ii dan iv", "D. iv saja"] },
   { no: 14, soal: "Diketahui sebuah segitiga memiliki sudut $45°$ dan $100°$, maka jika ditinjau dari sisinya dan sudut segitiga tersebut adalah......", options: ["A. Segitiga tumpul sama kaki", "B. Segitiga tumpul sebarang", "C. Segitiga lancip sama sisi", "D. Segitiga siku-siku sama kaki"] },
@@ -584,6 +623,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 5 && <SegitigaABD72425SVG />}
                 {soal.no === 6 && <SegitigaCABD9_15_41_SVG />}
                 {soal.no === 7 && <BangunABCDESVG />}
+                {soal.no === 11 && <TabelSegitiga11 />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
