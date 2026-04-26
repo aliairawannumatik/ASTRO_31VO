@@ -224,6 +224,45 @@ const SegitigaABD72425SVG = () => {
   );
 };
 
+// SVG: Segitiga siku-siku CAB dengan titik D pada AB untuk Soal No. 6
+// CA = 9 (vertikal kiri, siku-siku di A), CD = 15, CB = 41 → AD = 12, AB = 40, BD = 28
+const SegitigaCABD9_15_41_SVG = () => {
+  const W = 320, H = 200;
+  const Ax = 30, Ay = H - 30;          // kiri-bawah (siku-siku)
+  const Cx = 30, Cy = 30;              // kiri-atas
+  const Bx = W - 20, By = H - 30;      // kanan-bawah
+  // D pada AB, AD = 12 dari panjang AB = 40 → posisi D = Ax + (12/40)*(Bx-Ax)
+  const Dx = Ax + (12 / 40) * (Bx - Ax);
+  const Dy = Ay;
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga CAB */}
+        <polygon points={`${Cx},${Cy} ${Ax},${Ay} ${Bx},${By}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
+        {/* Garis CD */}
+        <line x1={Cx} y1={Cy} x2={Dx} y2={Dy} stroke="#22d3ee" strokeWidth="1.6" />
+        {/* Tanda siku-siku di A */}
+        <rect x={Ax} y={Ay - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+        {/* Titik sudut */}
+        <circle cx={Cx} cy={Cy} r="3" fill="#22d3ee" />
+        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
+        <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
+        <circle cx={Dx} cy={Dy} r="3" fill="#22d3ee" />
+        {/* Label titik */}
+        <text x={Cx - 8} y={Cy + 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">C</text>
+        <text x={Ax - 6} y={Ay + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={Bx + 6} y={By + 16} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
+        <text x={Dx} y={Dy + 18} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
+        {/* Label sisi: CA = 9 (kiri), CB = 41 (miring atas), CD = 15 (di dalam) */}
+        <text x={Cx - 6} y={(Cy + Ay) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">9</text>
+        <text x={(Cx + Bx) / 2 + 8} y={(Cy + By) / 2 - 4} fill="#fbbf24" fontSize="13" fontWeight="bold">41</text>
+        <text x={(Cx + Dx) / 2 + 10} y={(Cy + Dy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">15</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -494,6 +533,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 3 && <SegitigaPQRSVG />}
                 {soal.no === 4 && <SegitigaABC182430SVG />}
                 {soal.no === 5 && <SegitigaABD72425SVG />}
+                {soal.no === 6 && <SegitigaCABD9_15_41_SVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
