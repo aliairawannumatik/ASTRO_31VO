@@ -351,6 +351,33 @@ const TabelSegitiga11 = () => {
   );
 };
 
+// SVG: Segitiga siku-siku untuk Soal No. 15 — sisi (x-1), (x+1), hipotenusa (x+3)
+const SegitigaXSVG = () => {
+  const W = 280, H = 200;
+  const Ax = 50, Ay = H - 30;          // kiri-bawah (siku-siku)
+  const Bx = W - 40, By = H - 30;      // kanan-bawah
+  const Cx = 50, Cy = 25;              // kiri-atas
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga */}
+        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
+        {/* Tanda siku-siku di kiri-bawah */}
+        <rect x={Ax} y={Ay - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+        {/* Titik sudut */}
+        <circle cx={Ax} cy={Ay} r="3" fill="#22d3ee" />
+        <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
+        <circle cx={Cx} cy={Cy} r="3" fill="#22d3ee" />
+        {/* Label sisi: (x - 1) kiri, (x + 1) bawah, (x + 3) miring */}
+        <text x={Ax - 8} y={(Ay + Cy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">(x − 1) cm</text>
+        <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">(x + 1) cm</text>
+        <text x={(Bx + Cx) / 2 + 6} y={(By + Cy) / 2 - 6} fill="#fbbf24" fontSize="13" fontWeight="bold">(x + 3) cm</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -624,6 +651,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 6 && <SegitigaCABD9_15_41_SVG />}
                 {soal.no === 7 && <BangunABCDESVG />}
                 {soal.no === 11 && <TabelSegitiga11 />}
+                {soal.no === 15 && <SegitigaXSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
