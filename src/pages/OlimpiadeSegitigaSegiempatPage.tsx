@@ -442,6 +442,71 @@ const BangunSoal8SegiSVG = () => {
   );
 };
 
+/* SVG soal Latihan Dasar No. 9
+   Dua persegi panjang tumpang tindih: ABCD (8×8 cm, kiri-atas) dan BEFG (10×6 cm, kanan-bawah).
+   BEFG mulai di cm(1,4) dari sudut kiri-atas ABCD. Overlap (kotak hitam): cm(1,4)–cm(8,8) = 7×4 = 28 cm². */
+const BangunSoal9SegiSVG = () => {
+  const stroke = "#1e293b";
+  const s = 13;
+  const ox = 45, oy = 35;
+  const px = (x: number) => ox + x * s;
+  const py = (y: number) => oy + y * s;
+
+  // ABCD (upper-left rectangle, 8×8 cm)
+  const D = { x: px(0),  y: py(0) };
+  const C = { x: px(8),  y: py(0) };
+  const B = { x: px(8),  y: py(8) };
+  const A = { x: px(0),  y: py(8) };
+
+  // BEFG (lower-right rectangle, 10×6 cm, top-left at cm(1,4))
+  const bx = 1, by = 4;
+  const befgTL = { x: px(bx),      y: py(by)     };
+  const G      = { x: px(bx + 10), y: py(by)     };
+  const F      = { x: px(bx + 10), y: py(by + 6) };
+  const E      = { x: px(bx),      y: py(by + 6) };
+
+  return (
+    <svg viewBox="0 0 235 205" className="w-full max-w-[300px]">
+      {/* Black overlap rectangle: from cm(1,4) to cm(8,8) */}
+      <rect
+        x={befgTL.x} y={befgTL.y}
+        width={B.x - befgTL.x} height={B.y - befgTL.y}
+        fill="black"
+      />
+
+      {/* ABCD — upper-left rectangle */}
+      <rect
+        x={D.x} y={D.y}
+        width={C.x - D.x} height={A.y - D.y}
+        fill="none" stroke={stroke} strokeWidth="1.8"
+      />
+
+      {/* BEFG — lower-right rectangle */}
+      <rect
+        x={befgTL.x} y={befgTL.y}
+        width={G.x - befgTL.x} height={F.y - befgTL.y}
+        fill="none" stroke={stroke} strokeWidth="1.8"
+      />
+
+      {/* Vertex labels */}
+      <text x={D.x - 10} y={D.y + 5}  textAnchor="end"    fontSize="12" fill={stroke} fontWeight="700">D</text>
+      <text x={C.x + 4}  y={C.y + 5}  textAnchor="start"  fontSize="12" fill={stroke} fontWeight="700">C</text>
+      <text x={B.x + 4}  y={B.y + 5}  textAnchor="start"  fontSize="12" fill={stroke} fontWeight="700">B</text>
+      <text x={A.x - 10} y={A.y + 5}  textAnchor="end"    fontSize="12" fill={stroke} fontWeight="700">A</text>
+      <text x={G.x + 4}  y={G.y + 5}  textAnchor="start"  fontSize="12" fill={stroke} fontWeight="700">G</text>
+      <text x={F.x + 4}  y={F.y + 5}  textAnchor="start"  fontSize="12" fill={stroke} fontWeight="700">F</text>
+      <text x={E.x - 10} y={E.y + 5}  textAnchor="end"    fontSize="12" fill={stroke} fontWeight="700">E</text>
+
+      {/* 8 cm — top of ABCD */}
+      <text x={(D.x + C.x) / 2} y={D.y - 6} textAnchor="middle" fontSize="11" fill={stroke} fontWeight="600">8 cm</text>
+      {/* 6 cm — right edge of BEFG */}
+      <text x={G.x + 22} y={(G.y + F.y) / 2 + 4} textAnchor="middle" fontSize="11" fill={stroke} fontWeight="600">6 cm</text>
+      {/* 10 cm — bottom of BEFG */}
+      <text x={(E.x + F.x) / 2} y={F.y + 16} textAnchor="middle" fontSize="11" fill={stroke} fontWeight="600">10 cm</text>
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 6 — jajar genjang ADCB dengan dua segitiga (top apex H, bottom apex G)
    E adalah kaki tegak lurus dari D ke AB. */
 const BangunSoal6SegiSVG = () => {
@@ -956,6 +1021,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       Luas daerah yang diarsir adalah ....
+                    </div>
+                  </>
+                ) : soal.no === 9 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar persegi ABCD dan persegi panjang BEFG berikut!
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <BangunSoal9SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Jika luas daerah yang tidak diarsir 68 cm² luas daerah yang diarsir adalah ....
                     </div>
                   </>
                 ) : (
