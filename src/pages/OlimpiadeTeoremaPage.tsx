@@ -365,6 +365,15 @@ const OlimpiadeTeoremaPage = () => {
                         if (/^Rumus/.test(trimmed)) {
                           return <div key={i} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">{renderWithLatex(trimmed)}</div>;
                         }
+                        const tipeMatch = trimmed.match(/^(Tipe \d+):\s*(.*)$/);
+                        if (tipeMatch) {
+                          return (
+                            <div key={i} className="mt-3 mb-2">
+                              <div className="font-bold text-yellow-400 text-sm">{tipeMatch[1]}</div>
+                              <div className="mt-1 text-white/85 text-sm">{tipeMatch[2]}</div>
+                            </div>
+                          );
+                        }
                         if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
                           return (
                             <div key={i} className="my-3 px-4 py-3 rounded-xl border-2 border-cyan-400/60 bg-cyan-950/40 text-center font-bold text-white text-base shadow-lg shadow-cyan-900/30">
