@@ -79,9 +79,9 @@ const BiografiPage = () => {
               <div className="absolute bottom-4 right-4 text-amber-400/20 text-6xl font-serif pointer-events-none select-none">"</div>
 
               <div className="flex flex-col items-center mb-5 relative z-10">
-                <div className="relative mb-4">
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full opacity-30 blur-xl animate-pulse" />
-                  <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-amber-400/60 shadow-[0_0_25px_rgba(251,191,36,0.4)]">
+                <div className="relative mb-4 w-full max-w-sm">
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl opacity-30 blur-xl animate-pulse" />
+                  <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden border-4 border-amber-400/60 shadow-[0_0_30px_rgba(251,191,36,0.45)]">
                     <img
                       src={kepalaSekolahImg}
                       alt="Dr. Hj. Yuli Nurhayati, S.Pd., M.Pd"
