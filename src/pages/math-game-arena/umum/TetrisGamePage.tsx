@@ -19,14 +19,30 @@ type Color = string;
 type Grid = (Color | null)[][];
 
 const TETROMINOES = [
-  { shape: [[1,1,1,1]], color: "#00FFFF" },           // I
-  { shape: [[1,1],[1,1]], color: "#FFD700" },           // O
-  { shape: [[0,1,0],[1,1,1]], color: "#AA00FF" },       // T
-  { shape: [[1,0],[1,0],[1,1]], color: "#FF8C00" },     // L
-  { shape: [[0,1],[0,1],[1,1]], color: "#1E90FF" },     // J
-  { shape: [[0,1,1],[1,1,0]], color: "#00FF88" },       // S
-  { shape: [[1,1,0],[0,1,1]], color: "#FF4444" },       // Z
+  { shape: [[1,1,1,1]], color: "#00E5FF" },           // I — electric cyan
+  { shape: [[1,1],[1,1]], color: "#FFD93D" },           // O — sun gold
+  { shape: [[0,1,0],[1,1,1]], color: "#C147E9" },       // T — vibrant magenta
+  { shape: [[1,0],[1,0],[1,1]], color: "#FF8A3D" },     // L — bright orange
+  { shape: [[0,1],[0,1],[1,1]], color: "#2196F3" },     // J — royal blue
+  { shape: [[0,1,1],[1,1,0]], color: "#27E8A7" },       // S — lush green
+  { shape: [[1,1,0],[0,1,1]], color: "#FF3D6E" },       // Z — hot pink
 ];
+
+// Color helpers for vibrant 3D gem-style blocks
+function hexToRgb(hex: string): { r: number; g: number; b: number } {
+  const m = hex.replace("#", "").match(/.{2}/g);
+  if (!m) return { r: 0, g: 0, b: 0 };
+  return { r: parseInt(m[0], 16), g: parseInt(m[1], 16), b: parseInt(m[2], 16) };
+}
+function shiftColor(hex: string, amt: number): string {
+  const { r, g, b } = hexToRgb(hex);
+  const clamp = (v: number) => Math.max(0, Math.min(255, Math.round(v + amt * 255)));
+  return `rgb(${clamp(r)}, ${clamp(g)}, ${clamp(b)})`;
+}
+function rgbaFromHex(hex: string, a: number): string {
+  const { r, g, b } = hexToRgb(hex);
+  return `rgba(${r}, ${g}, ${b}, ${a})`;
+}
 
 function createGrid(): Grid {
   return Array.from({ length: ROWS }, () => Array(COLS).fill(null));
@@ -141,13 +157,61 @@ const TetrisGamePage = ({
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const drawBlock = useCallback((ctx: CanvasRenderingContext2D, x: number, y: number, color: Color, alpha = 1) => {
+    const px = x * BLOCK;
+    const py = y * BLOCK;
+    const inset = 1;
+    const size = BLOCK - inset * 2;
+    const bevel = Math.max(2, Math.floor(BLOCK * 0.18));
+
     ctx.globalAlpha = alpha;
+
+    // 1) Soft outer glow halo
+    ctx.shadowColor = rgbaFromHex(color, 0.55);
+    ctx.shadowBlur = 8;
     ctx.fillStyle = color;
-    ctx.fillRect(x * BLOCK + 1, y * BLOCK + 1, BLOCK - 2, BLOCK - 2);
-    ctx.fillStyle = "rgba(255,255,255,0.25)";
-    ctx.fillRect(x * BLOCK + 1, y * BLOCK + 1, BLOCK - 2, 5);
-    ctx.fillStyle = "rgba(0,0,0,0.25)";
-    ctx.fillRect(x * BLOCK + 1, y * BLOCK + BLOCK - 6, BLOCK - 2, 5);
+    ctx.fillRect(px + inset, py + inset, size, size);
+    ctx.shadowBlur = 0;
+    ctx.shadowColor = "transparent";
+
+    // 2) Diagonal gradient body for depth (light TL → deep BR)
+    const grad = ctx.createLinearGradient(px + inset, py + inset, px + inset + size, py + inset + size);
+    grad.addColorStop(0, shiftColor(color, 0.22));
+    grad.addColorStop(0.55, color);
+    grad.addColorStop(1, shiftColor(color, -0.28));
+    ctx.fillStyle = grad;
+    ctx.fillRect(px + inset, py + inset, size, size);
+
+    // 3) Inner radial sheen — glossy gem highlight in the top-left
+    const sheenR = size * 0.85;
+    const sheen = ctx.createRadialGradient(
+      px + inset + size * 0.32, py + inset + size * 0.28, 0,
+      px + inset + size * 0.32, py + inset + size * 0.28, sheenR
+    );
+    sheen.addColorStop(0, "rgba(255,255,255,0.55)");
+    sheen.addColorStop(0.4, "rgba(255,255,255,0.12)");
+    sheen.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = sheen;
+    ctx.fillRect(px + inset, py + inset, size, size);
+
+    // 4) Beveled edges — light on top/left
+    ctx.fillStyle = "rgba(255,255,255,0.55)";
+    ctx.fillRect(px + inset, py + inset, size, bevel);                 // top
+    ctx.fillRect(px + inset, py + inset, bevel, size);                 // left
+    // Corner highlight pop
+    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.fillRect(px + inset + 1, py + inset + 1, bevel - 1, 1);
+    ctx.fillRect(px + inset + 1, py + inset + 1, 1, bevel - 1);
+
+    // 5) Beveled edges — dark on bottom/right
+    ctx.fillStyle = "rgba(0,0,0,0.42)";
+    ctx.fillRect(px + inset, py + inset + size - bevel, size, bevel);  // bottom
+    ctx.fillRect(px + inset + size - bevel, py + inset, bevel, size);  // right
+
+    // 6) Crisp outline for definition
+    ctx.strokeStyle = rgbaFromHex(color, 0.95);
+    ctx.lineWidth = 1;
+    ctx.strokeRect(px + inset + 0.5, py + inset + 0.5, size - 1, size - 1);
+
     ctx.globalAlpha = 1;
   }, []);
 
