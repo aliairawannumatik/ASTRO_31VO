@@ -918,7 +918,11 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
-                        <BangunSoal1SegiSVG />
+                        <img
+                          src="/soal1-latihan-dasar.png"
+                          alt="Soal No. 1 - Keliling bangun"
+                          className="max-w-full max-h-56 object-contain"
+                        />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
