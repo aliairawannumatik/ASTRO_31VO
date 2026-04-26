@@ -229,8 +229,8 @@ const SudutBusurSamaSVG = () => (
     {/* main circle */}
     <circle cx="140" cy="130" r="100" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
 
-    {/* Highlighted arc AB (the common subtended arc) */}
-    <path d="M46,164.2 A100,100 0,0,1 234,164.2" fill="none" stroke="#f472b6" strokeWidth="3.5" strokeLinecap="round" />
+    {/* Highlighted minor arc AB (the common subtended arc, going through the bottom) */}
+    <path d="M46,164.2 A100,100 0,0,0 234,164.2" fill="none" stroke="#f472b6" strokeWidth="4" strokeLinecap="round" />
 
     {/* Chord AB (dashed) for reference */}
     <line x1="46" y1="164.2" x2="234" y2="164.2" stroke="#f472b6" strokeWidth="1.2" strokeDasharray="4,3" opacity="0.55" />
@@ -245,10 +245,10 @@ const SudutBusurSamaSVG = () => (
     <line x1="90" y1="43.4" x2="46" y2="164.2" stroke="#38bdf8" strokeWidth="1.7" />
     <line x1="90" y1="43.4" x2="234" y2="164.2" stroke="#38bdf8" strokeWidth="1.7" />
 
-    {/* Angle arcs at each vertex (all equal magnitude) */}
-    <path d="M176.2,55.0 A18,18 0,0,1 196.2,60.3" fill="none" stroke="#fbbf24" strokeWidth="2" />
-    <path d="M129.7,44.7 A18,18 0,0,1 150.3,44.7" fill="none" stroke="#fbbf24" strokeWidth="2" />
-    <path d="M83.8,60.3 A18,18 0,0,1 103.8,55.0" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    {/* Angle arcs at each vertex – sweep 0 to draw the inner side */}
+    <path d="M176.2,55.0 A18,18 0,0,0 196.2,60.3" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    <path d="M129.7,44.7 A18,18 0,0,0 150.3,44.7" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    <path d="M83.8,60.3 A18,18 0,0,0 103.8,55.0" fill="none" stroke="#fbbf24" strokeWidth="2" />
 
     {/* Vertex points */}
     <circle cx="46" cy="164.2" r="3.5" fill="#f8fafc" />
@@ -258,19 +258,19 @@ const SudutBusurSamaSVG = () => (
     <circle cx="90" cy="43.4" r="3.5" fill="#f8fafc" />
 
     {/* Vertex labels */}
-    <text x="30" y="170" fill="#f472b6" fontSize="13" fontWeight="bold">A</text>
-    <text x="240" y="170" fill="#f472b6" fontSize="13" fontWeight="bold">B</text>
-    <text x="195" y="38" fill="#34d399" fontSize="13" fontWeight="bold">C</text>
-    <text x="135" y="22" fill="#fb923c" fontSize="13" fontWeight="bold">D</text>
-    <text x="78" y="38" fill="#38bdf8" fontSize="13" fontWeight="bold">E</text>
+    <text x="28" y="160" fill="#f472b6" fontSize="14" fontWeight="bold">A</text>
+    <text x="240" y="160" fill="#f472b6" fontSize="14" fontWeight="bold">B</text>
+    <text x="196" y="38" fill="#34d399" fontSize="14" fontWeight="bold">C</text>
+    <text x="135" y="22" fill="#fb923c" fontSize="14" fontWeight="bold">D</text>
+    <text x="76" y="38" fill="#38bdf8" fontSize="14" fontWeight="bold">E</text>
 
     {/* Angle value labels (α at each vertex) */}
-    <text x="183" y="74" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
-    <text x="135" y="60" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
-    <text x="86" y="74" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
+    <text x="183" y="74" fill="#fbbf24" fontSize="12" fontWeight="bold">α</text>
+    <text x="135" y="62" fill="#fbbf24" fontSize="12" fontWeight="bold">α</text>
+    <text x="86" y="74" fill="#fbbf24" fontSize="12" fontWeight="bold">α</text>
 
-    {/* Arc AB caption */}
-    <text x="115" y="205" fill="#f472b6" fontSize="11" fontStyle="italic" fontWeight="bold">busur AB</text>
+    {/* Arc AB caption – placed inside the segment below the chord */}
+    <text x="113" y="222" fill="#f472b6" fontSize="11" fontStyle="italic" fontWeight="bold">busur AB</text>
   </svg>
 );
 
