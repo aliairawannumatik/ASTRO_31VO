@@ -10,6 +10,30 @@ import PembahasanCard from "@/components/PembahasanCard";
 import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPythagorasDasar";
 import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
 
+// SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
+const PythagorasSegitigaSVG = () => {
+  const W = 220, H = 160;
+  // Vertices: kanan-bawah (siku), kiri-bawah, kiri-atas
+  const Bx = W - 30, By = H - 30;   // kanan-bawah
+  const Ax = 40, Ay = H - 30;       // kiri-bawah
+  const Cx = 40, Cy = 30;           // kiri-atas
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga siku-siku */}
+        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="none" stroke="#22d3ee" strokeWidth="2" />
+        {/* Tanda siku-siku di kiri-bawah */}
+        <rect x={Ax} y={Ay - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1" />
+        {/* Label sisi */}
+        <text x={(Ax + Bx) / 2} y={By + 16} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold" textAnchor="middle">a</text>
+        <text x={Ax - 10} y={(Ay + Cy) / 2 + 4} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold" textAnchor="end">b</text>
+        <text x={(Bx + Cx) / 2 + 8} y={(By + Cy) / 2 + 2} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold">c</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -220,6 +244,7 @@ const OlimpiadeTeoremaPage = () => {
                 {expandedSections.includes(idx) && (
                   <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
+                      {idx === 1 && <PythagorasSegitigaSVG />}
                       {section.content.split('\n').map((line, i) => {
                         const trimmed = line.trim();
                         if (/^\d+\. [A-Z]/.test(trimmed)) {
