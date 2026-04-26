@@ -9,14 +9,17 @@ import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import { spaceBg } from "@/assets/placeholder";
 
 // ── Grid ──────────────────────────────────────────────────────────────────
-const COLS = 20;
-const ROWS = 20;
-const CELL = 21;
-const GW = COLS * CELL; // 420
-const GH = ROWS * CELL; // 420
-const HUD_H = 90;
-const CW = GW;          // 420
-const CH = GH + HUD_H;  // 510
+const COLS = 24;
+const ROWS = 16;
+const CELL = 36;
+const GW = COLS * CELL; // 864
+const GH = ROWS * CELL; // 576
+const CW = GW;
+const CH = GH;
+
+// ── Fruits ────────────────────────────────────────────────────────────────
+const FRUITS = ["🍎", "🍓", "🍒", "🍇", "🍊", "🍉", "🍑", "🥝", "🍌", "🍍", "🍐", "🥭"];
+const pickFruit = () => FRUITS[Math.floor(Math.random() * FRUITS.length)];
 
 // ── Directions ────────────────────────────────────────────────────────────
 type Dir = "U" | "D" | "L" | "R";
@@ -49,7 +52,7 @@ const makeWrong = (ans: number, existing: Set<number>): number => {
 };
 
 // ── Food ──────────────────────────────────────────────────────────────────
-interface Food { x: number; y: number; value: number; correct: boolean; pulse: number }
+interface Food { x: number; y: number; value: number; correct: boolean; pulse: number; fruit: string }
 
 // ── Particle ─────────────────────────────────────────────────────────────
 interface Particle { x: number; y: number; vx: number; vy: number; alpha: number; color: string; r: number }
@@ -106,6 +109,7 @@ const SnakeMathPage = ({
   const [best, setBest] = useState(0);
   const [snakeLen, setSnakeLen] = useState(INIT_LENGTH);
   const [feedback, setFeedback] = useState<{ txt: string; good: boolean } | null>(null);
+  const [question, setQuestion] = useState<string>("");
   const fbTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showFeedback = (txt: string, good: boolean) => {
@@ -135,6 +139,7 @@ const SnakeMathPage = ({
   const placeFoods = useCallback(() => {
     const q = makeQ();
     qRef.current = q;
+    setQuestion(q.q);
     const usedVals = new Set<number>([q.ans]);
     const wrong1 = makeWrong(q.ans, usedVals); usedVals.add(wrong1);
     const wrong2 = makeWrong(q.ans, usedVals); usedVals.add(wrong2);
@@ -149,13 +154,13 @@ const SnakeMathPage = ({
 
     foodsRef.current = values.map(v => {
       const pos = randomCell();
-      return { ...pos, value: v, correct: v === q.ans, pulse: Math.random() * Math.PI * 2 };
+      return { ...pos, value: v, correct: v === q.ans, pulse: Math.random() * Math.PI * 2, fruit: pickFruit() };
     });
   }, []);
 
   const spawnParticles = (x: number, y: number, color: string, n = 12) => {
     const px = x * CELL + CELL / 2;
-    const py = y * CELL + CELL / 2 + HUD_H;
+    const py = y * CELL + CELL / 2;
     for (let i = 0; i < n; i++) {
       const ang = (Math.PI * 2 * i) / n + Math.random();
       const spd = 40 + Math.random() * 120;
@@ -257,7 +262,7 @@ const SnakeMathPage = ({
         let newWrong: number;
         const used = new Set<number>([qRef.current.ans, ...foodsRef.current.map(f => f.value)]);
         newWrong = makeWrong(qRef.current.ans, used);
-        foodsRef.current = foodsRef.current.map(f => f === eaten ? { ...pos, value: newWrong, correct: false, pulse: Math.random() * Math.PI * 2 } : f);
+        foodsRef.current = foodsRef.current.map(f => f === eaten ? { ...pos, value: newWrong, correct: false, pulse: Math.random() * Math.PI * 2, fruit: pickFruit() } : f);
       }
     } else {
       // normal move: remove tail unless grow pending
@@ -280,198 +285,325 @@ const SnakeMathPage = ({
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
 
-    // bg
-    ctx.fillStyle = "#06060f";
+    // grass-meadow gradient background
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, CH);
+    bgGrad.addColorStop(0, "#0a3a1f");
+    bgGrad.addColorStop(0.5, "#0f4a2a");
+    bgGrad.addColorStop(1, "#0a2a18");
+    ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, CW, CH);
 
-    // HUD bg
-    const hudGrad = ctx.createLinearGradient(0, 0, 0, HUD_H);
-    hudGrad.addColorStop(0, "#0a0a1e");
-    hudGrad.addColorStop(1, "#060612");
-    ctx.fillStyle = hudGrad;
-    ctx.fillRect(0, 0, CW, HUD_H);
-
-    // grid bg
-    const gridGrad = ctx.createLinearGradient(0, HUD_H, 0, HUD_H + GH);
-    gridGrad.addColorStop(0, "#050510");
-    gridGrad.addColorStop(1, "#080820");
-    ctx.fillStyle = gridGrad;
-    ctx.fillRect(0, HUD_H, GW, GH);
-
-    // stars
+    // soft floating "fireflies" (reused bg stars)
     bgStarsRef.current.forEach(s => {
       s.t += dt * s.s;
-      const a = 0.25 + 0.75 * Math.abs(Math.sin(s.t));
+      const a = 0.18 + 0.55 * Math.abs(Math.sin(s.t));
       ctx.globalAlpha = a;
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = "#bff7c8";
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fill();
     });
     ctx.globalAlpha = 1;
 
-    // grid lines (subtle)
-    ctx.strokeStyle = "rgba(255,255,255,0.03)";
-    ctx.lineWidth = 0.5;
-    for (let c = 0; c <= COLS; c++) {
-      ctx.beginPath(); ctx.moveTo(c * CELL, HUD_H); ctx.lineTo(c * CELL, HUD_H + GH); ctx.stroke();
-    }
-    for (let r = 0; r <= ROWS; r++) {
-      ctx.beginPath(); ctx.moveTo(0, HUD_H + r * CELL); ctx.lineTo(GW, HUD_H + r * CELL); ctx.stroke();
+    // checker tile pattern (very subtle for depth)
+    ctx.fillStyle = "rgba(255,255,255,0.018)";
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        if ((r + c) % 2 === 0) ctx.fillRect(c * CELL, r * CELL, CELL, CELL);
+      }
     }
 
     // border glow
     ctx.shadowColor = "#00FFAA";
-    ctx.shadowBlur = 8;
-    ctx.strokeStyle = "#00FFAA44";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(1, HUD_H + 1, GW - 2, GH - 2);
+    ctx.shadowBlur = 14;
+    ctx.strokeStyle = "rgba(0,255,170,0.45)";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(1.5, 1.5, GW - 3, GH - 3);
     ctx.shadowBlur = 0;
 
-    // foods
+    // ── Foods (fruits with number badges) ─────────────────────────────
     foodsRef.current.forEach(f => {
       f.pulse += dt * 3;
       const px = f.x * CELL + CELL / 2;
-      const py = f.y * CELL + CELL / 2 + HUD_H;
-      const pulse = 0.8 + 0.2 * Math.sin(f.pulse);
-      const r = CELL / 2 - 2;
+      const py = f.y * CELL + CELL / 2;
+      const pulse = 0.94 + 0.08 * Math.sin(f.pulse);
 
+      // shadow under fruit
+      ctx.fillStyle = "rgba(0,0,0,0.35)";
+      ctx.beginPath();
+      ctx.ellipse(px, py + CELL * 0.38, CELL * 0.28, CELL * 0.07, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // glow halo for correct answer
       if (f.correct) {
-        // glowing circle
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, r * pulse);
-        grad.addColorStop(0, "#FFD700");
-        grad.addColorStop(0.6, "#FFA500");
-        grad.addColorStop(1, "transparent");
-        ctx.fillStyle = grad;
-        ctx.shadowColor = "#FFD700";
-        ctx.shadowBlur = 14 + 6 * Math.sin(f.pulse);
+        const haloR = CELL * (0.7 + 0.12 * Math.sin(f.pulse));
+        const halo = ctx.createRadialGradient(px, py, 0, px, py, haloR);
+        halo.addColorStop(0, "rgba(255,215,0,0.45)");
+        halo.addColorStop(0.6, "rgba(255,215,0,0.18)");
+        halo.addColorStop(1, "rgba(255,215,0,0)");
+        ctx.fillStyle = halo;
         ctx.beginPath();
-        ctx.arc(px, py, r * pulse, 0, Math.PI * 2);
+        ctx.arc(px, py, haloR, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0;
-        // star shape
-        ctx.save();
-        ctx.translate(px, py);
-        ctx.rotate(f.pulse * 0.3);
-        ctx.fillStyle = "#FFD700";
-        ctx.shadowColor = "#FFD700";
-        ctx.shadowBlur = 8;
-        const sp = 5;
-        const outer = r * pulse * 0.8;
-        const inner = outer * 0.45;
-        ctx.beginPath();
-        for (let i = 0; i < sp * 2; i++) {
-          const ang = (Math.PI / sp) * i - Math.PI / 2;
-          const rad = i % 2 === 0 ? outer : inner;
-          i === 0 ? ctx.moveTo(Math.cos(ang) * rad, Math.sin(ang) * rad) : ctx.lineTo(Math.cos(ang) * rad, Math.sin(ang) * rad);
+        // sparkles orbiting
+        const sparkles = 5;
+        for (let i = 0; i < sparkles; i++) {
+          const a = (i / sparkles) * Math.PI * 2 + f.pulse * 0.6;
+          const sx = px + Math.cos(a) * CELL * 0.62;
+          const sy = py + Math.sin(a) * CELL * 0.62;
+          ctx.fillStyle = "rgba(255,240,140,0.95)";
+          ctx.shadowColor = "#FFE680";
+          ctx.shadowBlur = 6;
+          ctx.beginPath();
+          ctx.arc(sx, sy, 1.8, 0, Math.PI * 2);
+          ctx.fill();
         }
-        ctx.closePath();
-        ctx.fill();
         ctx.shadowBlur = 0;
-        ctx.restore();
-      } else {
-        // wrong — blue hexagon
-        ctx.save();
-        ctx.translate(px, py);
-        ctx.rotate(f.pulse * 0.15);
-        const rh = r * 0.88;
-        ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-          const ang = (Math.PI / 3) * i;
-          i === 0 ? ctx.moveTo(Math.cos(ang) * rh, Math.sin(ang) * rh) : ctx.lineTo(Math.cos(ang) * rh, Math.sin(ang) * rh);
-        }
-        ctx.closePath();
-        ctx.fillStyle = "#1a1a55";
-        ctx.strokeStyle = "#4488FF";
-        ctx.lineWidth = 2;
-        ctx.shadowColor = "#4488FF";
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-        ctx.restore();
       }
 
-      // value label
-      ctx.fillStyle = f.correct ? "#111" : "#88AAFF";
-      ctx.font = `bold ${f.value > 99 ? 9 : f.value > 9 ? 11 : 13}px monospace`;
+      // fruit emoji
+      ctx.save();
+      ctx.translate(px, py);
+      ctx.scale(pulse, pulse);
+      ctx.font = `${Math.floor(CELL * 0.85)}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(String(f.value), px, py + (f.correct ? 0.5 : 0));
+      ctx.fillText(f.fruit, 0, 1);
+      ctx.restore();
+
+      // number badge top-right
+      const badgeR = CELL * 0.27;
+      const bx = px + CELL * 0.32;
+      const by = py - CELL * 0.34;
+      // badge ring shadow
+      ctx.shadowColor = f.correct ? "rgba(255,215,0,0.85)" : "rgba(0,0,0,0.55)";
+      ctx.shadowBlur = f.correct ? 10 : 4;
+      const bgGradB = ctx.createRadialGradient(bx - badgeR * 0.3, by - badgeR * 0.3, 0, bx, by, badgeR);
+      if (f.correct) {
+        bgGradB.addColorStop(0, "#FFF6B0");
+        bgGradB.addColorStop(1, "#E6A800");
+      } else {
+        bgGradB.addColorStop(0, "#FFFFFF");
+        bgGradB.addColorStop(1, "#D5DDE8");
+      }
+      ctx.fillStyle = bgGradB;
+      ctx.beginPath();
+      ctx.arc(bx, by, badgeR, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = f.correct ? "#7A5300" : "#3a4252";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // number text
+      ctx.fillStyle = "#1a1a1a";
+      const sz = f.value > 99 ? 11 : f.value > 9 ? 13 : 15;
+      ctx.font = `bold ${sz}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(String(f.value), bx, by + 0.5);
     });
 
-    // snake trail
+    // ── Snake trail (subtle motion blur) ──────────────────────────────
     trailRef.current.forEach(t => {
       t.alpha -= dt * 4;
       if (t.alpha <= 0) return;
-      ctx.globalAlpha = t.alpha * 0.35;
-      ctx.fillStyle = "#00FF88";
+      ctx.globalAlpha = t.alpha * 0.25;
+      ctx.fillStyle = "#22dd66";
       ctx.beginPath();
-      ctx.arc(t.x * CELL + CELL / 2, t.y * CELL + CELL / 2 + HUD_H, CELL / 2 - 4, 0, Math.PI * 2);
+      ctx.arc(t.x * CELL + CELL / 2, t.y * CELL + CELL / 2, CELL * 0.32, 0, Math.PI * 2);
       ctx.fill();
     });
     trailRef.current = trailRef.current.filter(t => t.alpha > 0);
     ctx.globalAlpha = 1;
 
-    // snake body
+    // ── Snake body (realistic, continuous) ────────────────────────────
     const snake = snakeRef.current;
-    snake.forEach((seg, i) => {
-      const px = seg.x * CELL;
-      const py = seg.y * CELL + HUD_H;
-      const isHead = i === 0;
-      const t = i / snake.length;
+    if (snake.length > 0) {
+      const centers = snake.map(s => ({ x: s.x * CELL + CELL / 2, y: s.y * CELL + CELL / 2 }));
 
-      const r = isHead ? CELL / 2 - 1 : CELL / 2 - 2;
-      const hue = 140 + t * 60;
-      const color = isHead ? `hsl(${hue},100%,60%)` : `hsl(${hue},90%,${50 - t * 15}%)`;
+      const drawPath = () => {
+        ctx.beginPath();
+        centers.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      };
 
-      ctx.shadowColor = isHead ? "#00FF88" : "#00CC66";
-      ctx.shadowBlur = isHead ? 14 : 5;
-      ctx.fillStyle = color;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      // 1) Outer dark outline (gives body silhouette + glow)
+      ctx.shadowColor = "rgba(0,255,136,0.55)";
+      ctx.shadowBlur = 16;
+      ctx.strokeStyle = "#0a4a23";
+      ctx.lineWidth = CELL * 0.96;
+      drawPath(); ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // 2) Main body fill (rich green)
+      ctx.strokeStyle = "#21a854";
+      ctx.lineWidth = CELL * 0.84;
+      drawPath(); ctx.stroke();
+
+      // 3) Top highlight band (lighter green along the body)
+      ctx.strokeStyle = "rgba(160,255,190,0.45)";
+      ctx.lineWidth = CELL * 0.38;
+      drawPath(); ctx.stroke();
+
+      // 4) Dorsal dark stripe down the middle
+      ctx.strokeStyle = "rgba(8,60,30,0.55)";
+      ctx.lineWidth = CELL * 0.16;
+      drawPath(); ctx.stroke();
+
+      // 5) Tail taper — overdraw last 3 segments with progressively thinner background-color stroke to fake a taper at the tail
+      if (snake.length > 3) {
+        const tailEnd = centers[centers.length - 1];
+        const tailPrev = centers[centers.length - 2];
+        // small rounded highlight on tail tip
+        ctx.fillStyle = "#0a3a1f";
+        ctx.beginPath();
+        ctx.arc(tailEnd.x, tailEnd.y, CELL * 0.22, 0, Math.PI * 2);
+        ctx.fill();
+        // re-draw a smaller body stroke from tail-1 to tail to make tail taper
+        ctx.strokeStyle = "#21a854";
+        ctx.lineWidth = CELL * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(tailPrev.x, tailPrev.y);
+        ctx.lineTo(tailEnd.x, tailEnd.y);
+        ctx.stroke();
+      }
+
+      // 6) Per-segment scale dots oriented perpendicular to body direction
+      for (let i = 1; i < snake.length - 1; i++) {
+        const c = centers[i];
+        const prev = centers[i - 1];
+        const next = centers[i + 1];
+        const dx = next.x - prev.x;
+        const dy = next.y - prev.y;
+        const angle = Math.atan2(dy, dx);
+
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        ctx.rotate(angle);
+
+        // three lighter scale dots in a row perpendicular to body
+        ctx.fillStyle = "rgba(225,255,225,0.55)";
+        [-1, 0, 1].forEach(s => {
+          ctx.beginPath();
+          ctx.arc(0, s * CELL * 0.18, CELL * 0.055, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.restore();
+      }
+
+      // 3) Head — bigger, oval, oriented in direction of travel, with detailed eyes/tongue
+      const head = snake[0];
+      const hx = head.x * CELL + CELL / 2;
+      const hy = head.y * CELL + CELL / 2;
+      const [edx, edy] = DVEC[dirRef.current];
+      const headR = CELL * 0.58;
+      const angle = Math.atan2(edy, edx);
+
+      ctx.save();
+      ctx.translate(hx, hy);
+      ctx.rotate(angle);
+
+      // forked tongue (animated, drawn first so head covers base)
+      const tongueOut = (Math.sin(ts / 180) + 1) * 0.5; // 0..1
+      if (tongueOut > 0.25) {
+        const tLen = headR * (0.8 + tongueOut * 0.8);
+        const tBaseX = headR * 0.95;
+        ctx.strokeStyle = "#FF2255";
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = "round";
+        ctx.shadowColor = "rgba(255,40,90,0.6)";
+        ctx.shadowBlur = 5;
+        ctx.beginPath();
+        ctx.moveTo(tBaseX, 0);
+        ctx.lineTo(tBaseX + tLen * 0.55, 0);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(tBaseX + tLen * 0.55, 0);
+        ctx.lineTo(tBaseX + tLen, -tLen * 0.25);
+        ctx.moveTo(tBaseX + tLen * 0.55, 0);
+        ctx.lineTo(tBaseX + tLen, tLen * 0.25);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+
+      // head outline (dark ring for definition)
+      ctx.fillStyle = "#073a1c";
       ctx.beginPath();
-      ctx.roundRect(px + 1, py + 1, CELL - 2, CELL - 2, r);
+      ctx.ellipse(headR * 0.15, 0, headR * 1.15, headR * 1.0, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // head shape — vivid green elongated ellipse with strong gradient
+      ctx.shadowColor = "rgba(0,255,136,0.8)";
+      ctx.shadowBlur = 22;
+      const hgrad = ctx.createRadialGradient(-headR * 0.25, -headR * 0.4, 0, 0, 0, headR * 1.2);
+      hgrad.addColorStop(0, "#B0FFD0");
+      hgrad.addColorStop(0.4, "#46F08C");
+      hgrad.addColorStop(0.8, "#22B85F");
+      hgrad.addColorStop(1, "#0F7A3D");
+      ctx.fillStyle = hgrad;
+      ctx.beginPath();
+      ctx.ellipse(headR * 0.12, 0, headR * 1.05, headR * 0.92, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      if (isHead) {
-        // eyes
-        const [edx, edy] = DVEC[dirRef.current];
-        const eyeR = 2.5;
-        const ex = px + CELL / 2 + edx * 4;
-        const ey = py + CELL / 2 + edy * 4;
-        const perp = Math.abs(edx) > 0 ? [0, 1] : [1, 0];
-        [[1], [-1]].forEach(([s]) => {
-          ctx.fillStyle = "#fff";
-          ctx.beginPath();
-          ctx.arc(ex + perp[0] * s * 4, ey + perp[1] * s * 4, eyeR, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.fillStyle = "#222";
-          ctx.beginPath();
-          ctx.arc(ex + perp[0] * s * 4 + edx, ey + perp[1] * s * 4 + edy, 1.5, 0, Math.PI * 2);
-          ctx.fill();
-        });
-        // tongue
-        if (Math.sin(ts / 200) > 0) {
-          ctx.strokeStyle = "#FF3366";
-          ctx.lineWidth = 1.5;
-          ctx.lineCap = "round";
-          ctx.beginPath();
-          ctx.moveTo(px + CELL / 2 + edx * (CELL / 2 - 1), py + CELL / 2 + edy * (CELL / 2 - 1));
-          ctx.lineTo(px + CELL / 2 + edx * (CELL / 2 + 5), py + CELL / 2 + edy * (CELL / 2 + 5));
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(px + CELL / 2 + edx * (CELL / 2 + 4), py + CELL / 2 + edy * (CELL / 2 + 4));
-          ctx.lineTo(px + CELL / 2 + edx * (CELL / 2 + 5) + perp[0] * 3, py + CELL / 2 + edy * (CELL / 2 + 5) + perp[1] * 3);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(px + CELL / 2 + edx * (CELL / 2 + 4), py + CELL / 2 + edy * (CELL / 2 + 4));
-          ctx.lineTo(px + CELL / 2 + edx * (CELL / 2 + 5) - perp[0] * 3, py + CELL / 2 + edy * (CELL / 2 + 5) - perp[1] * 3);
-          ctx.stroke();
-        }
-      }
-    });
+      // dorsal stripe on head
+      ctx.strokeStyle = "rgba(10,80,40,0.6)";
+      ctx.lineWidth = headR * 0.18;
+      ctx.beginPath();
+      ctx.moveTo(-headR * 0.7, 0);
+      ctx.lineTo(headR * 0.85, 0);
+      ctx.stroke();
 
-    // particles
+      // nostrils
+      ctx.fillStyle = "rgba(0,30,15,0.7)";
+      [-1, 1].forEach(s => {
+        ctx.beginPath();
+        ctx.ellipse(headR * 0.92, s * headR * 0.18, headR * 0.05, headR * 0.08, 0, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // eyes
+      const eyeOffX = headR * 0.42;
+      const eyeOffY = headR * 0.46;
+      [-1, 1].forEach(s => {
+        // eye socket shadow
+        ctx.fillStyle = "rgba(0,0,0,0.25)";
+        ctx.beginPath();
+        ctx.arc(eyeOffX, s * eyeOffY, headR * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+        // sclera
+        ctx.fillStyle = "#FFFFFF";
+        ctx.beginPath();
+        ctx.arc(eyeOffX, s * eyeOffY, headR * 0.24, 0, Math.PI * 2);
+        ctx.fill();
+        // iris (yellow-green)
+        ctx.fillStyle = "#FFD500";
+        ctx.beginPath();
+        ctx.arc(eyeOffX + headR * 0.04, s * eyeOffY, headR * 0.17, 0, Math.PI * 2);
+        ctx.fill();
+        // vertical slit pupil
+        ctx.fillStyle = "#0a0a0a";
+        ctx.beginPath();
+        ctx.ellipse(eyeOffX + headR * 0.06, s * eyeOffY, headR * 0.045, headR * 0.15, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // shine highlight
+        ctx.fillStyle = "rgba(255,255,255,0.95)";
+        ctx.beginPath();
+        ctx.arc(eyeOffX + headR * 0.1, s * eyeOffY - headR * 0.08, headR * 0.06, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(eyeOffX - headR * 0.02, s * eyeOffY + headR * 0.08, headR * 0.03, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.restore();
+    }
+
+    // ── Particles (sparkle on eat) ────────────────────────────────────
     particlesRef.current = particlesRef.current.filter(p => p.alpha > 0);
     particlesRef.current.forEach(p => {
       p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 150 * dt; p.alpha -= dt * 2.5;
@@ -486,68 +618,17 @@ const SnakeMathPage = ({
     ctx.globalAlpha = 1;
     ctx.shadowBlur = 0;
 
-    // flash overlays
+    // ── Flash overlays ────────────────────────────────────────────────
     if (correctFlashRef.current > 0) {
       correctFlashRef.current -= dt * 2.5;
       ctx.fillStyle = `rgba(0,255,136,${Math.max(0, correctFlashRef.current) * 0.12})`;
-      ctx.fillRect(0, HUD_H, CW, GH);
+      ctx.fillRect(0, 0, CW, CH);
     }
     if (shrinkFlashRef.current > 0) {
       shrinkFlashRef.current -= dt * 2.5;
       ctx.fillStyle = `rgba(255,60,60,${Math.max(0, shrinkFlashRef.current) * 0.22})`;
-      ctx.fillRect(0, HUD_H, CW, GH);
+      ctx.fillRect(0, 0, CW, CH);
     }
-
-    // ── HUD ──────────────────────────────────────────────────────────
-    // question box
-    ctx.fillStyle = "rgba(255,215,0,0.1)";
-    ctx.beginPath();
-    ctx.roundRect(8, 8, CW - 16, 46, 10);
-    ctx.fill();
-    ctx.strokeStyle = "#FFD70055";
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.fillStyle = "#FFD700";
-    ctx.shadowColor = "#FFD700";
-    ctx.shadowBlur = 8;
-    ctx.font = "bold 22px monospace";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(`${qRef.current.q} = ?`, CW / 2, 31);
-    ctx.shadowBlur = 0;
-
-    // score & length
-    ctx.textAlign = "left";
-    ctx.fillStyle = "#00FF88";
-    ctx.font = "bold 13px monospace";
-    ctx.fillText(`SKOR: ${scoreRef.current}`, 10, 70);
-    ctx.fillStyle = "rgba(255,255,255,0.4)";
-    ctx.font = "11px monospace";
-    ctx.fillText(`PANJANG: ${snakeRef.current.length}`, 10, 84);
-
-    // speed bar
-    const spd = (INIT_INTERVAL - intervalRef.current) / (INIT_INTERVAL - MIN_INTERVAL);
-    const spdColor = `hsl(${120 - spd * 120},100%,55%)`;
-    ctx.fillStyle = "rgba(255,255,255,0.1)";
-    ctx.beginPath();
-    ctx.roundRect(CW - 114, 60, 106, 10, 4);
-    ctx.fill();
-    ctx.fillStyle = spdColor;
-    ctx.beginPath();
-    ctx.roundRect(CW - 114, 60, 106 * spd, 10, 4);
-    ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,0.45)";
-    ctx.font = "10px monospace";
-    ctx.textAlign = "right";
-    ctx.fillText("⚡ KECEPATAN", CW - 10, 58);
-
-    // best
-    ctx.fillStyle = "#00EEFF";
-    ctx.font = "bold 13px monospace";
-    ctx.textAlign = "right";
-    ctx.fillText(`REKOR: ${bestRef.current}`, CW - 10, 84);
-    ctx.textAlign = "left";
   }, []);
 
   // ── Main RAF ─────────────────────────────────────────────────────────
@@ -746,13 +827,15 @@ const SnakeMathPage = ({
     );
   }
 
+  const speedPct = Math.round(((INIT_INTERVAL - intervalRef.current) / (INIT_INTERVAL - MIN_INTERVAL)) * 100);
+
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
 
-      <div className="relative z-10 w-full max-w-lg px-2 py-4 flex flex-col items-center">
+      <div className="relative z-10 w-full h-full px-2 py-2 flex flex-col items-center">
         {/* nav */}
-        <div className="flex items-center justify-between w-full mb-2 gap-2">
+        <div className="flex items-center justify-between w-full mb-2 gap-2 max-w-6xl">
           <button
             onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
             className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,255,136,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
@@ -761,7 +844,7 @@ const SnakeMathPage = ({
             <span className="text-base leading-none">←</span>
             <span className="hidden sm:inline">Kembali</span>
           </button>
-          <h1 className="font-display text-xl font-bold text-primary text-glow-cyan flex-1 text-center leading-tight">
+          <h1 className="font-display text-base sm:text-xl font-bold text-primary text-glow-cyan flex-1 text-center leading-tight">
             🐍 SNAKE MATEMATIKA
             {topicLabel ? <span className="block text-[10px] md:text-xs text-emerald-300 font-body mt-0.5">{topicLabel}</span> : null}
           </h1>
@@ -775,78 +858,100 @@ const SnakeMathPage = ({
           </button>
         </div>
 
-        {/* stat strip */}
-        <div className="flex gap-4 mb-2 text-xs font-display">
-          <span className="text-yellow-400">SKOR: <span className="font-bold text-sm">{score}</span></span>
-          <span className="text-white/50">REKOR: <span className="text-cyan-400 font-bold">{best}</span></span>
-          <span className="text-green-400">PANJANG: <span className="font-bold">{snakeLen}</span></span>
+        {/* HUD: question + stats */}
+        <div className="w-full max-w-6xl mb-2 flex flex-col gap-2 px-1">
+          <div className="rounded-xl border border-yellow-500/40 bg-yellow-500/10 px-4 py-2 text-center shadow-[0_0_18px_rgba(255,215,0,0.18)]">
+            <span className="font-display text-lg sm:text-2xl font-black text-yellow-300 tracking-wider drop-shadow-[0_0_8px_rgba(255,215,0,0.55)]">
+              {question || "..."} = ?
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-xs sm:text-sm font-display">
+            <div className="flex flex-wrap gap-3">
+              <span className="text-emerald-300">⭐ SKOR: <span className="font-bold text-sm sm:text-base text-emerald-200">{score}</span></span>
+              <span className="text-cyan-300">🏆 REKOR: <span className="font-bold text-cyan-200">{best}</span></span>
+              <span className="text-lime-300">🐍 PANJANG: <span className="font-bold text-lime-200">{snakeLen}</span></span>
+            </div>
+            <div className="flex items-center gap-2 min-w-[140px]">
+              <span className="text-orange-300 text-[10px] sm:text-xs">⚡ KECEPATAN</span>
+              <div className="flex-1 h-2 rounded-full bg-white/10 overflow-hidden border border-white/10">
+                <div
+                  className="h-full bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500 transition-[width] duration-300"
+                  style={{ width: `${Math.max(0, Math.min(100, speedPct))}%` }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* canvas */}
+        {/* canvas — fills the remaining viewport */}
         <div
-          className="relative w-full select-none"
-          style={{ maxWidth: CW, maxHeight: 'calc(100dvh - 195px)', aspectRatio: `${CW}/${CH}` }}
+          className="relative w-full flex-1 min-h-0 flex items-center justify-center select-none"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          <canvas
-            ref={canvasRef}
-            width={CW}
-            height={CH}
-            className="rounded-2xl border border-border shadow-2xl w-full h-full"
-          />
+          <div
+            className="relative max-w-full max-h-full"
+            style={{ aspectRatio: `${CW}/${CH}`, width: 'min(100%, calc((100dvh - 240px) * ' + (CW / CH).toFixed(4) + '))' }}
+          >
+            <canvas
+              ref={canvasRef}
+              width={CW}
+              height={CH}
+              className="rounded-2xl border-2 border-emerald-500/30 shadow-[0_0_40px_rgba(0,255,136,0.25)] w-full h-full block"
+            />
 
-          {/* feedback toast */}
-          {feedback && (
-            <div className={`absolute top-24 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl font-bold text-sm shadow-xl pointer-events-none z-30 whitespace-nowrap ${
-              feedback.good ? "bg-green-500/90 text-white" : "bg-red-500/90 text-white"
-            }`}>
-              {feedback.txt}
-            </div>
-          )}
-
-          {/* dead */}
-          {phase === "dead" && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/72">
-              <div className="text-center px-5">
-                <div className="text-4xl mb-2">💀</div>
-                <h2 className="font-display text-2xl font-bold text-red-400 mb-1">GAME OVER</h2>
-                <p className="text-white mb-1">Skor: <span className="text-yellow-400 font-bold text-2xl">{score}</span></p>
-                <p className="text-white/50 text-sm mb-5">Rekor: {best}</p>
-                <button onClick={startGame} className="bg-accent text-black font-bold px-8 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-lg">
-                  🐍 Main Lagi
-                </button>
+            {/* feedback toast */}
+            {feedback && (
+              <div className={`absolute top-3 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl font-bold text-sm shadow-xl pointer-events-none z-30 whitespace-nowrap animate-pulse ${
+                feedback.good ? "bg-green-500/95 text-white" : "bg-red-500/95 text-white"
+              }`}>
+                {feedback.txt}
               </div>
-            </div>
-          )}
+            )}
+
+            {/* dead */}
+            {phase === "dead" && (
+              <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/72 backdrop-blur-sm">
+                <div className="text-center px-5">
+                  <div className="text-5xl mb-2">💀</div>
+                  <h2 className="font-display text-3xl font-bold text-red-400 mb-2">GAME OVER</h2>
+                  <p className="text-white mb-1">Skor: <span className="text-yellow-400 font-bold text-2xl">{score}</span></p>
+                  <p className="text-white/50 text-sm mb-5">Rekor: {best}</p>
+                  <button onClick={startGame} className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-bold px-8 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-[0_0_20px_rgba(0,255,136,0.55)]">
+                    🐍 Main Lagi
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* d-pad mobile */}
-        <div className="mt-3 flex flex-col items-center gap-1">
+        <div className="mt-2 mb-1 flex flex-col items-center gap-1 sm:hidden">
           <button
             onPointerDown={() => { if (nextDirRef.current !== "D") nextDirRef.current = "U"; }}
-            className="bg-card/80 border border-border text-white font-bold px-6 py-3 rounded-xl hover:border-accent transition cursor-pointer active:scale-95 select-none"
+            className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
           >▲</button>
           <div className="flex gap-2">
             <button
               onPointerDown={() => { if (nextDirRef.current !== "R") nextDirRef.current = "L"; }}
-              className="bg-card/80 border border-border text-white font-bold px-6 py-3 rounded-xl hover:border-accent transition cursor-pointer active:scale-95 select-none"
+              className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
             >◀</button>
             <button
               onPointerDown={() => { if (nextDirRef.current !== "U") nextDirRef.current = "D"; }}
-              className="bg-card/80 border border-border text-white font-bold px-6 py-3 rounded-xl hover:border-accent transition cursor-pointer active:scale-95 select-none"
+              className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
             >▼</button>
             <button
               onPointerDown={() => { if (nextDirRef.current !== "L") nextDirRef.current = "R"; }}
-              className="bg-card/80 border border-border text-white font-bold px-6 py-3 rounded-xl hover:border-accent transition cursor-pointer active:scale-95 select-none"
+              className="bg-card/80 border border-emerald-500/40 text-emerald-200 font-bold px-5 py-2 rounded-xl active:scale-95 select-none"
             >▶</button>
           </div>
         </div>
 
-        <p className="mt-2 text-white/40 text-xs font-body text-center">
+        <p className="hidden sm:block text-white/40 text-[10px] font-body text-center mt-1">
           Keyboard: ← ↑ → ↓ / WASD &nbsp;·&nbsp; Mobile: swipe atau D-pad
         </p>
-      <GuruQuizOverlay {...guruQuiz} />
+        <GuruQuizOverlay {...guruQuiz} />
       </div>
     </div>
   );

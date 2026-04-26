@@ -14,6 +14,9 @@ The application follows a client-server architecture:
 - **Development Workflow**: A Vite development server proxies API requests to the Express backend.
 - **Content Structure**: Educational content is organized by grade level (Kelas 7, 8, 9) and topic, including "Materi Matematika" (learning materials), "Latihan Mandiri" (independent practice), "Bank Soal" (question bank), "Math Game Arena" (math games), and "Olimpiade" (olympiad-style questions).
 - **Game Mechanics**: The "Math Game Arena Umum" includes various full-color canvas games. A "teacher quiz" system is integrated into these games for evaluation, implemented via `useGuruQuiz.ts` and `GuruQuizOverlay.tsx`.
+  - **Snake Matematika** (`SnakeMathPage.tsx`): Full-screen play area (24×16 cells, 36px each) with grass-meadow gradient background. Realistic continuous snake (gradient body, dorsal stripe, scale dots, detailed head with iris/pupil eyes, animated forked tongue). Foods are fruit emojis (🍎🍓🍒🍇🍊🍉🍑🥝🍌🍍🍐🥭) with number badges; correct answer has golden halo + orbiting sparkles. HUD (question, score, length, speed bar) rendered as React HTML above the canvas.
+  - **Tetris**: Vibrant 3D gem-style blocks with gradient/sheen, plus grand-opening intro screen.
+  - All games share the consistent ← Kembali / 🏠 Home pill nav pattern.
 - **Content Features**: Content pages extensively use `react-katex` for LaTeX rendering, SVG diagrams for visual explanations, and interactive components like accordions and collapsible sections.
 - **Deployment**: The Express server is configured to serve the built frontend in production and binds to `0.0.0.0` for environment compatibility.
 
