@@ -1044,13 +1044,7 @@ const latihanOlimpiade = [
 export default function OlimpiadePeluangPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "latihan" | "olimpiade">("materi");
-  const [openSection, setOpenSection] = useState<number | null>(0);
   const [openPembahasan, setOpenPembahasan] = useState<Set<string>>(new Set());
-
-  const toggleSection = (i: number) => {
-    playPopSound();
-    setOpenSection(openSection === i ? null : i);
-  };
 
   const togglePembahasan = (key: string) => {
     playPopSound();
@@ -1101,20 +1095,12 @@ export default function OlimpiadePeluangPage() {
             <div className="space-y-2">
               {materiSections.map((sec, i) => (
                 <div key={i} className="bg-card/50 backdrop-blur border border-border/50 rounded-xl overflow-hidden">
-                  <button
-                    className="w-full flex items-center justify-between px-4 py-3 text-left"
-                    onClick={() => toggleSection(i)}
-                  >
+                  <div className="w-full flex items-center justify-between px-4 py-3 text-left">
                     <span className="font-semibold text-accent text-sm">{sec.heading}</span>
-                    {openSection === i
-                      ? <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                      : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
-                  </button>
-                  {openSection === i && (
-                    <div className="px-4 pb-4">
-                      {sec.renderContent()}
-                    </div>
-                  )}
+                  </div>
+                  <div className="px-4 pb-4">
+                    {sec.renderContent()}
+                  </div>
                 </div>
               ))}
             </div>

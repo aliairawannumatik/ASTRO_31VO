@@ -890,7 +890,7 @@ const PembahasanBlock = ({ data }: { data: Pembahasan }) => (
 const OlimpiadeGarisSudutPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSections.length }, (_, i) => i));
   const [openDasar, setOpenDasar] = useState<number[]>([]);
   const [openOlimpiade, setOpenOlimpiade] = useState<number[]>([]);
 

@@ -1156,7 +1156,7 @@ const latihanOlimpiade: OlimpiadeItem[] = [
 const OlimpiadeModuloPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSection.sections.length }, (_, i) => i));
   const [openPembahasan, setOpenPembahasan] = useState<number[]>([]);
 
   const toggleSection = (idx: number) => {

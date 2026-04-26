@@ -226,7 +226,7 @@ const latihanOlimpiade = [
 const OlimpiadeHimpunanPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSection.sections.length }, (_, i) => i));
   const [showPembahasan, setShowPembahasan] = useState<Set<string>>(new Set());
 
   const toggleSection = (idx: number) => {

@@ -688,7 +688,7 @@ const latihanOlimpiade = [
 const OlimpiadeStatistikaPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSections.length }, (_, i) => i));
 
   const toggleSection = (idx: number) => {
     playPopSound();
