@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath } from 'react-katex';
+import { InlineMath, BlockMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { segitigaSegiempatDasarPembahasan } from "@/data/pembahasan/segitigaSegiempatDasar";
 import { segitigaSegiempatOlimpiadePembahasan } from "@/data/pembahasan/segitigaSegiempatOlimpiade";
@@ -22,40 +22,325 @@ const renderWithLatex = (text: string) => {
   });
 };
 
+/* ============================================================
+   SVG MINI-DIAGRAMS untuk Materi Segitiga & Segiempat
+   ============================================================ */
+const fillCol = "rgba(34,211,238,0.15)";
+const strokeCol = "#22d3ee";
+const labCol = "#fbbf24";
+
+const PersegiSVG = () => (
+  <svg viewBox="0 0 130 110" className="w-full max-w-[130px]" data-testid="svg-persegi">
+    <rect x="25" y="20" width="80" height="80" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <text x="65" y="14" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">s</text>
+    <text x="112" y="64" textAnchor="start" fill={labCol} fontSize="11" fontWeight="bold">s</text>
+  </svg>
+);
+
+const PersegiPanjangSVG = () => (
+  <svg viewBox="0 0 160 110" className="w-full max-w-[160px]" data-testid="svg-persegi-panjang">
+    <rect x="20" y="25" width="120" height="65" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <text x="80" y="18" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">p</text>
+    <text x="146" y="60" textAnchor="start" fill={labCol} fontSize="11" fontWeight="bold">l</text>
+  </svg>
+);
+
+const JajarGenjangSVG = () => (
+  <svg viewBox="0 0 170 110" className="w-full max-w-[170px]" data-testid="svg-jajar-genjang">
+    <polygon points="35,90 135,90 145,25 45,25" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <line x1="135" y1="90" x2="135" y2="25" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" />
+    <text x="85" y="103" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">a</text>
+    <text x="142" y="60" textAnchor="start" fill={labCol} fontSize="11" fontWeight="bold">t</text>
+    <text x="155" y="60" textAnchor="start" fill={labCol} fontSize="11" fontWeight="bold">b</text>
+  </svg>
+);
+
+const BelahKetupatSVG = () => (
+  <svg viewBox="0 0 140 130" className="w-full max-w-[140px]" data-testid="svg-belah-ketupat">
+    <polygon points="70,15 125,65 70,115 15,65" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <line x1="15" y1="65" x2="125" y2="65" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" />
+    <line x1="70" y1="15" x2="70" y2="115" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" />
+    <text x="40" y="60" textAnchor="middle" fill={labCol} fontSize="10" fontWeight="bold">d₁</text>
+    <text x="78" y="40" textAnchor="start" fill={labCol} fontSize="10" fontWeight="bold">d₂</text>
+    <text x="100" y="35" textAnchor="middle" fill={labCol} fontSize="10" fontWeight="bold">s</text>
+  </svg>
+);
+
+const LayangLayangSVG = () => (
+  <svg viewBox="0 0 140 140" className="w-full max-w-[140px]" data-testid="svg-layang-layang">
+    <polygon points="70,10 120,50 70,130 20,50" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <line x1="20" y1="50" x2="120" y2="50" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" />
+    <line x1="70" y1="10" x2="70" y2="130" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" />
+    <text x="42" y="46" textAnchor="middle" fill={labCol} fontSize="10" fontWeight="bold">d₁</text>
+    <text x="78" y="32" textAnchor="start" fill={labCol} fontSize="10" fontWeight="bold">d₂</text>
+    <text x="100" y="28" textAnchor="middle" fill={labCol} fontSize="10" fontWeight="bold">a</text>
+    <text x="100" y="100" textAnchor="middle" fill={labCol} fontSize="10" fontWeight="bold">b</text>
+  </svg>
+);
+
+const TrapesiumSVG = () => (
+  <svg viewBox="0 0 180 120" className="w-full max-w-[180px]" data-testid="svg-trapesium">
+    <polygon points="40,95 140,95 115,25 65,25" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <line x1="115" y1="25" x2="115" y2="95" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" />
+    <text x="90" y="18" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">a</text>
+    <text x="90" y="110" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">b</text>
+    <text x="122" y="62" textAnchor="start" fill={labCol} fontSize="11" fontWeight="bold">t</text>
+    <text x="48" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">c</text>
+    <text x="138" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">d</text>
+  </svg>
+);
+
+const SegitigaSVG = () => (
+  <svg viewBox="0 0 160 130" className="w-full max-w-[160px]" data-testid="svg-segitiga">
+    <polygon points="20,110 140,110 95,20" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <line x1="95" y1="20" x2="95" y2="110" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3 3" />
+    <text x="80" y="124" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">a</text>
+    <text x="100" y="68" textAnchor="start" fill={labCol} fontSize="11" fontWeight="bold">t</text>
+    <text x="48" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">c</text>
+    <text x="124" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">b</text>
+  </svg>
+);
+
+const SegitigaSikuSVG = () => (
+  <svg viewBox="0 0 150 130" className="w-full max-w-[150px]" data-testid="svg-segitiga-siku">
+    <polygon points="25,110 130,110 25,25" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <rect x="25" y="100" width="10" height="10" fill="none" stroke="#94a3b8" strokeWidth="1" />
+    <text x="78" y="124" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">alas</text>
+    <text x="20" y="68" textAnchor="end" fill={labCol} fontSize="11" fontWeight="bold">tinggi</text>
+    <text x="90" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">miring</text>
+  </svg>
+);
+
+const SegitigaSamaSisiSVG = () => (
+  <svg viewBox="0 0 150 130" className="w-full max-w-[150px]" data-testid="svg-segitiga-sama-sisi">
+    <polygon points="25,110 125,110 75,25" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <text x="75" y="124" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">s</text>
+    <text x="40" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">s</text>
+    <text x="112" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">s</text>
+  </svg>
+);
+
+const SegitigaSamaKakiSVG = () => (
+  <svg viewBox="0 0 150 130" className="w-full max-w-[150px]" data-testid="svg-segitiga-sama-kaki">
+    <polygon points="30,110 120,110 75,20" fill={fillCol} stroke={strokeCol} strokeWidth="2" />
+    <text x="75" y="124" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">a</text>
+    <text x="42" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">b</text>
+    <text x="110" y="62" textAnchor="middle" fill={labCol} fontSize="11" fontWeight="bold">b</text>
+  </svg>
+);
+
+/* ============================================================
+   Reusable visual building blocks
+   ============================================================ */
+const FormulaBox = ({ label, latex }: { label: string; latex: string }) => (
+  <div className="rounded-lg border border-cyan-400/40 bg-cyan-950/30 px-3 py-2">
+    <div className="text-[10px] uppercase tracking-widest text-cyan-300/80 font-semibold mb-1">{label}</div>
+    <div className="text-white text-sm"><BlockMath math={latex} /></div>
+  </div>
+);
+
+const ShapeCard = ({
+  no, nama, svg, luas, keliling, ciri, testId,
+}: {
+  no: string; nama: string; svg: ReactNode; luas: string; keliling: string; ciri: string[]; testId: string;
+}) => (
+  <div className="rounded-xl border border-white/10 bg-slate-900/50 p-3 sm:p-4" data-testid={testId}>
+    <div className="flex items-start gap-3 mb-3">
+      <span className="flex-shrink-0 w-7 h-7 rounded-md bg-yellow-400/15 border border-yellow-400/40 text-yellow-300 text-xs font-bold flex items-center justify-center">
+        {no}
+      </span>
+      <div className="font-display text-sm text-yellow-300 font-bold pt-1">{nama}</div>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3 items-start">
+      <div className="flex justify-center bg-slate-950/60 rounded-lg p-2 border border-white/5">{svg}</div>
+      <div className="space-y-2">
+        <FormulaBox label="Luas" latex={luas} />
+        <FormulaBox label="Keliling" latex={keliling} />
+      </div>
+    </div>
+    <div className="mt-3">
+      <div className="text-[10px] uppercase tracking-widest text-yellow-300/70 font-semibold mb-1">Ciri-ciri</div>
+      <ul className="list-disc list-inside text-xs text-white/75 space-y-0.5">
+        {ciri.map((c, i) => <li key={i}>{c}</li>)}
+      </ul>
+    </div>
+  </div>
+);
+
+/* ============================================================
+   Materi sections (render-based)
+   ============================================================ */
+type MateriSection = { heading: string; render: () => ReactNode };
+
+const segiempatList: Array<{ no: string; nama: string; svg: ReactNode; luas: string; keliling: string; ciri: string[]; testId: string }> = [
+  {
+    no: "1", nama: "Persegi", svg: <PersegiSVG />, testId: "card-persegi",
+    luas: "L = s \\times s = s^{2}", keliling: "K = 4 \\times s",
+    ciri: ["Keempat sisinya sama panjang.", "Keempat sudutnya siku-siku (90°).", "Diagonalnya sama panjang dan saling tegak lurus."],
+  },
+  {
+    no: "2", nama: "Persegi Panjang", svg: <PersegiPanjangSVG />, testId: "card-persegi-panjang",
+    luas: "L = p \\times l", keliling: "K = 2(p + l)",
+    ciri: ["Sisi yang berhadapan sama panjang dan sejajar.", "Keempat sudutnya siku-siku.", "Kedua diagonalnya sama panjang dan saling membagi dua sama panjang."],
+  },
+  {
+    no: "3", nama: "Jajar Genjang", svg: <JajarGenjangSVG />, testId: "card-jajar-genjang",
+    luas: "L = a \\times t", keliling: "K = 2(a + b)",
+    ciri: ["Sisi yang berhadapan sama panjang dan sejajar.", "Sudut yang berhadapan sama besar.", "Diagonalnya saling membagi dua sama panjang."],
+  },
+  {
+    no: "4", nama: "Belah Ketupat", svg: <BelahKetupatSVG />, testId: "card-belah-ketupat",
+    luas: "L = \\tfrac{1}{2} \\times d_{1} \\times d_{2}", keliling: "K = 4 \\times s",
+    ciri: ["Keempat sisinya sama panjang.", "Sudut yang berhadapan sama besar.", "Diagonalnya saling tegak lurus dan membagi dua sama panjang."],
+  },
+  {
+    no: "5", nama: "Layang-layang", svg: <LayangLayangSVG />, testId: "card-layang-layang",
+    luas: "L = \\tfrac{1}{2} \\times d_{1} \\times d_{2}", keliling: "K = 2(a + b)",
+    ciri: ["Memiliki 2 pasang sisi sama panjang yang berdekatan.", "Sepasang sudut yang berhadapan sama besar.", "Diagonalnya saling tegak lurus, salah satunya membagi yang lain sama panjang."],
+  },
+  {
+    no: "6", nama: "Trapesium", svg: <TrapesiumSVG />, testId: "card-trapesium",
+    luas: "L = \\tfrac{1}{2} \\times (a + b) \\times t", keliling: "K = a + b + c + d",
+    ciri: ["Memiliki tepat sepasang sisi sejajar (a dan b).", "Jumlah sudut antara dua sisi sejajar adalah 180°.", "Jenis: trapesium sembarang, sama kaki, dan siku-siku."],
+  },
+];
+
+const segitigaList: Array<{ no: string; nama: string; svg: ReactNode; luas: string; keliling: string; ciri: string[]; testId: string }> = [
+  {
+    no: "1", nama: "Segitiga (Umum)", svg: <SegitigaSVG />, testId: "card-segitiga-umum",
+    luas: "L = \\tfrac{1}{2} \\times a \\times t", keliling: "K = a + b + c",
+    ciri: ["Memiliki 3 sisi dan 3 sudut.", "Jumlah ketiga sudutnya 180°.", "Tinggi (t) tegak lurus terhadap alas (a)."],
+  },
+  {
+    no: "2", nama: "Segitiga Siku-siku", svg: <SegitigaSikuSVG />, testId: "card-segitiga-siku",
+    luas: "L = \\tfrac{1}{2} \\times \\text{alas} \\times \\text{tinggi}", keliling: "K = a + b + c",
+    ciri: ["Salah satu sudutnya 90°.", "Sisi miring (hipotenusa) ada di depan sudut siku-siku.", "Berlaku Teorema Pythagoras: $a^2 + b^2 = c^2$."],
+  },
+  {
+    no: "3", nama: "Segitiga Sama Sisi", svg: <SegitigaSamaSisiSVG />, testId: "card-segitiga-sama-sisi",
+    luas: "L = \\tfrac{\\sqrt{3}}{4} \\times s^{2}", keliling: "K = 3 \\times s",
+    ciri: ["Ketiga sisinya sama panjang.", "Ketiga sudutnya sama besar (60°).", "Memiliki 3 sumbu simetri."],
+  },
+  {
+    no: "4", nama: "Segitiga Sama Kaki", svg: <SegitigaSamaKakiSVG />, testId: "card-segitiga-sama-kaki",
+    luas: "L = \\tfrac{1}{2} \\times a \\times t", keliling: "K = a + 2b",
+    ciri: ["Memiliki 2 sisi sama panjang (kaki).", "Dua sudut alas sama besar.", "Memiliki 1 sumbu simetri."],
+  },
+];
+
 const materiSection = {
   title: "MATERI - SEGITIGA DAN SEGIEMPAT",
   sections: [
     {
-      heading: "A. Luas dan Keliling Bangun Datar",
-      content: `1. Persegi
-   Rumus Luas: $S \\times S$
-   Rumus Keliling: $4S$
-
-2. Persegi Panjang
-   Rumus Luas: $p \\times l$
-   Rumus Keliling: $2(p + l)$
-
-3. Jajar Genjang
-   Rumus Luas: $a \\times t$
-   Rumus Keliling: $2(a + b)$
-
-4. Belah Ketupat
-   Rumus Luas: $\\frac{d_1 \\times d_2}{2}$
-   Rumus Keliling: $4s$
-
-5. Layang-layang
-   Rumus Luas: $\\frac{d_1 \\times d_2}{2}$
-   Rumus Keliling: $2(a + b)$
-
-6. Trapesium
-   Rumus Luas: $\\frac{(a + b) \\times t}{2}$
-   Rumus Keliling: $a + d + b + c$
-
-7. Segitiga
-   Rumus Luas: $\\frac{a \\times t}{2}$
-   Rumus Keliling: $a + b + c$`
+      heading: "A. Pengertian Segitiga dan Segiempat",
+      render: () => (
+        <div className="space-y-3 text-white/85 text-sm leading-relaxed">
+          <p>
+            <span className="text-yellow-300 font-semibold">Bangun datar</span> adalah bangun dua dimensi yang dibatasi oleh garis-garis lurus atau lengkung.
+            Pada bab ini kita fokus pada dua keluarga bangun datar:
+          </p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <div className="rounded-lg border border-white/10 bg-slate-900/50 p-3">
+              <div className="text-yellow-300 font-bold text-sm mb-1">Segitiga</div>
+              <p className="text-xs text-white/75">
+                Bangun datar yang dibentuk oleh tiga ruas garis yang saling bertemu pada tiga titik sudut.
+                Jumlah ketiga sudut dalamnya selalu <span className="text-cyan-300 font-semibold">180°</span>.
+              </p>
+            </div>
+            <div className="rounded-lg border border-white/10 bg-slate-900/50 p-3">
+              <div className="text-yellow-300 font-bold text-sm mb-1">Segiempat</div>
+              <p className="text-xs text-white/75">
+                Bangun datar yang memiliki empat sisi dan empat titik sudut.
+                Jumlah keempat sudut dalamnya selalu <span className="text-cyan-300 font-semibold">360°</span>.
+              </p>
+            </div>
+          </div>
+          <p className="text-xs text-white/70">
+            Setiap bangun datar memiliki dua besaran utama yang akan kita pelajari, yaitu
+            <span className="text-cyan-300 font-semibold"> Luas (L)</span> — ukuran daerah di dalam bangun, dan
+            <span className="text-cyan-300 font-semibold"> Keliling (K)</span> — total panjang seluruh sisinya.
+          </p>
+        </div>
+      ),
     },
-  ]
+    {
+      heading: "B. Bangun Datar Segiempat",
+      render: () => (
+        <div className="space-y-4">
+          <p className="text-xs text-white/70">
+            Berikut enam jenis segiempat beserta gambar, rumus luas, rumus keliling, dan ciri-cirinya.
+          </p>
+          {segiempatList.map((s) => (
+            <ShapeCard key={s.nama} {...s} />
+          ))}
+        </div>
+      ),
+    },
+    {
+      heading: "C. Bangun Datar Segitiga",
+      render: () => (
+        <div className="space-y-4">
+          <p className="text-xs text-white/70">
+            Segitiga dibedakan berdasarkan panjang sisi dan besar sudutnya. Berikut jenis-jenis utamanya
+            beserta rumus luas dan keliling.
+          </p>
+          {segitigaList.map((s) => (
+            <ShapeCard key={s.nama} {...s} />
+          ))}
+        </div>
+      ),
+    },
+    {
+      heading: "D. Rangkuman Rumus",
+      render: () => (
+        <div className="space-y-3">
+          <p className="text-xs text-white/70">
+            Tabel ringkas seluruh rumus luas dan keliling bangun segitiga dan segiempat.
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-white/10">
+            <table className="w-full text-xs text-left" data-testid="table-rangkuman-rumus">
+              <thead className="bg-yellow-400/10 text-yellow-300">
+                <tr>
+                  <th className="px-3 py-2 font-semibold">No</th>
+                  <th className="px-3 py-2 font-semibold">Bangun</th>
+                  <th className="px-3 py-2 font-semibold">Rumus Luas</th>
+                  <th className="px-3 py-2 font-semibold">Rumus Keliling</th>
+                </tr>
+              </thead>
+              <tbody className="text-white/85">
+                {[
+                  { n: 1, b: "Persegi", l: "s \\times s", k: "4 \\times s" },
+                  { n: 2, b: "Persegi Panjang", l: "p \\times l", k: "2(p + l)" },
+                  { n: 3, b: "Jajar Genjang", l: "a \\times t", k: "2(a + b)" },
+                  { n: 4, b: "Belah Ketupat", l: "\\tfrac{1}{2} \\, d_{1} \\, d_{2}", k: "4 \\times s" },
+                  { n: 5, b: "Layang-layang", l: "\\tfrac{1}{2} \\, d_{1} \\, d_{2}", k: "2(a + b)" },
+                  { n: 6, b: "Trapesium", l: "\\tfrac{1}{2}(a + b) \\, t", k: "a + b + c + d" },
+                  { n: 7, b: "Segitiga", l: "\\tfrac{1}{2} \\times a \\times t", k: "a + b + c" },
+                  { n: 8, b: "Segitiga Sama Sisi", l: "\\tfrac{\\sqrt{3}}{4} \\, s^{2}", k: "3 \\times s" },
+                ].map((r) => (
+                  <tr key={r.n} className="border-t border-white/10 hover:bg-white/5">
+                    <td className="px-3 py-2 align-top">{r.n}</td>
+                    <td className="px-3 py-2 align-top font-semibold text-yellow-200/90">{r.b}</td>
+                    <td className="px-3 py-2 align-top"><InlineMath math={r.l} /></td>
+                    <td className="px-3 py-2 align-top"><InlineMath math={r.k} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="rounded-lg border border-cyan-400/30 bg-cyan-950/20 p-3">
+            <div className="text-[10px] uppercase tracking-widest text-cyan-300/80 font-semibold mb-1">Tips Cepat</div>
+            <ul className="list-disc list-inside text-xs text-white/75 space-y-1">
+              <li>Belah ketupat & layang-layang punya rumus luas yang <span className="text-cyan-300">sama</span>: setengah hasil kali diagonal.</li>
+              <li>Persegi adalah kasus khusus persegi panjang (saat <InlineMath math="p = l" />).</li>
+              <li>Persegi panjang, jajar genjang, belah ketupat, dan persegi semuanya termasuk <span className="text-cyan-300">jajar genjang</span> bila sisi berhadapannya sejajar.</li>
+              <li>Pada segitiga siku-siku berlaku <span className="text-cyan-300">Teorema Pythagoras</span>: <InlineMath math="a^{2} + b^{2} = c^{2}" />.</li>
+            </ul>
+          </div>
+        </div>
+      ),
+    },
+  ] as MateriSection[],
 };
 
 const latihanDasar = [
@@ -208,27 +493,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                 </button>
                 {expandedSections.includes(idx) && (
                   <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => {
-                        const trimmed = line.trim();
-                        if (/^\d+\. [A-Z]/.test(trimmed)) {
-                          return <div key={i} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{trimmed}</div>;
-                        }
-                        if (/^Rumus/.test(trimmed)) {
-                          return <div key={i} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">{renderWithLatex(trimmed)}</div>;
-                        }
-                        if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
-                          return (
-                            <div key={i} className="my-3 px-4 py-3 rounded-xl border-2 border-cyan-400/60 bg-cyan-950/40 text-center font-bold text-white text-base shadow-lg shadow-cyan-900/30">
-                              <span className="block text-[10px] text-cyan-400 font-semibold uppercase tracking-widest mb-1">Rumus Penting</span>
-                              {renderWithLatex(trimmed)}
-                            </div>
-                          );
-                        }
-                        if (trimmed === '') return <div key={i} className="h-2" />;
-                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
-                      })}
-                    </div>
+                    {section.render()}
                   </div>
                 )}
               </div>
