@@ -139,6 +139,29 @@ const Segitiga454590SVG = () => {
   );
 };
 
+// SVG: Segitiga siku-siku dengan sisi p (vertikal kiri), q (alas), r (sisi miring) - sudut siku di kiri-bawah
+const SegitigaPQRSVG = () => {
+  const W = 260, H = 170;
+  const Ax = 30, Ay = H - 30;          // kiri-bawah (siku-siku)
+  const Bx = W - 30, By = H - 30;      // kanan-bawah
+  const Cx = 30, Cy = 25;              // kiri-atas
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Segitiga */}
+        <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="none" stroke="#22d3ee" strokeWidth="2" />
+        {/* Tanda siku-siku di kiri-bawah */}
+        <rect x={Ax} y={Ay - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1" />
+        {/* Label sisi: p (vertikal kiri), q (alas), r (miring) */}
+        <text x={Ax - 10} y={(Ay + Cy) / 2 + 4} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold" textAnchor="end">p</text>
+        <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold" textAnchor="middle">q</text>
+        <text x={(Bx + Cx) / 2 + 4} y={(By + Cy) / 2 - 4} fill="#fbbf24" fontSize="14" fontStyle="italic" fontWeight="bold">r</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -406,6 +429,7 @@ const OlimpiadeTeoremaPage = () => {
                     </span>
                   ))}
                 </div>
+                {soal.no === 3 && <SegitigaPQRSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
