@@ -10,6 +10,7 @@ import PembahasanCard from "@/components/PembahasanCard";
 import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPythagorasDasar";
 import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
 import bangunABCDESoal7Img from "@assets/image_1777204803383.png";
+import layangKapalSoal18Img from "@assets/image_1777205277003.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1125,14 +1126,38 @@ const OlimpiadeTeoremaPage = () => {
           <div className="space-y-4 animate-slide-up">
             {latihanDasar.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
+                {soal.no === 18 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal.split('\n')[0])}
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <img
+                        src={layangKapalSoal18Img}
+                        alt="Layang-layang menarik kapal pada sudut 45° dan ketinggian 150 m"
+                        className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                        data-testid="img-soal-pyth-dasar-18"
+                      />
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      {soal.soal.split('\n').slice(1).map((line, lineIdx) => (
+                        <span key={lineIdx}>
+                          {lineIdx > 0 && <br />}
+                          {renderWithLatex(line)}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 {soal.no === 3 && <SegitigaPQRSVG />}
                 {soal.no === 4 && <SegitigaABC182430SVG />}
                 {soal.no === 5 && <SegitigaABD72425SVG />}
@@ -1149,7 +1174,6 @@ const OlimpiadeTeoremaPage = () => {
                 )}
                 {soal.no === 11 && <TabelSegitiga11 />}
                 {soal.no === 15 && <SegitigaXSVG />}
-                {soal.no === 18 && <LayangKapalSVG />}
                 {soal.no === 20 && <BangunABEFCDSVG />}
                 {soal.no === 21 && <PentagonSoal21SVG />}
                 {soal.no === 23 && <LayangLayangABCDSVG />}
