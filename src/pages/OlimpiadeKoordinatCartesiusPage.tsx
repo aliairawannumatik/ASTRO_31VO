@@ -6,6 +6,9 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import PembahasanCard from "@/components/PembahasanCard";
+import { koordinatKartesiusDasarPembahasan } from "@/data/pembahasan/koordinatKartesiusDasar";
+import { koordinatKartesiusOlimpiadePembahasan } from "@/data/pembahasan/koordinatKartesiusOlimpiade";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -239,6 +242,12 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                     ))}
                   </div>
                 )}
+                {koordinatKartesiusDasarPembahasan[soal.no] && (
+                  <PembahasanCard
+                    pembahasanKey={`kk-dasar-${soal.no}`}
+                    pembahasan={koordinatKartesiusDasarPembahasan[soal.no]}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -265,6 +274,12 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                       </div>
                     ))}
                   </div>
+                )}
+                {koordinatKartesiusOlimpiadePembahasan[soal.no] && (
+                  <PembahasanCard
+                    pembahasanKey={`kk-olimpiade-${soal.no}`}
+                    pembahasan={koordinatKartesiusOlimpiadePembahasan[soal.no]}
+                  />
                 )}
               </div>
             ))}
