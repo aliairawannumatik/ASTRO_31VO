@@ -146,6 +146,10 @@ const TetrisGamePage = ({
   const dropTimerRef = useRef(0);
   const animRef = useRef(0);
   const lastTimeRef = useRef(0);
+  // When true (e.g. user holds the up button), the falling speed is slowed.
+  const slowDropRef = useRef(false);
+  // Multiplier applied to the per-level drop interval while slowDrop is on.
+  const SLOW_DROP_FACTOR = 4;
   const [score, setScore] = useState(0);
   const [lines, setLines] = useState(0);
   const [level, setLevel] = useState(1);
@@ -311,7 +315,8 @@ const TetrisGamePage = ({
     if (guruQuiz.isPausedRef.current || pausedRef.current) { animRef.current = requestAnimationFrame(gameLoop); return; }
     const dt = Math.min(timestamp - (lastTimeRef.current || timestamp), 100);
     lastTimeRef.current = timestamp;
-    const speed = LEVEL_SPEEDS[Math.min(levelRef.current - 1, LEVEL_SPEEDS.length - 1)];
+    const baseSpeed = LEVEL_SPEEDS[Math.min(levelRef.current - 1, LEVEL_SPEEDS.length - 1)];
+    const speed = slowDropRef.current ? baseSpeed * SLOW_DROP_FACTOR : baseSpeed;
     dropTimerRef.current += dt;
     if (dropTimerRef.current >= speed) {
       dropTimerRef.current = 0;
@@ -338,6 +343,7 @@ const TetrisGamePage = ({
     tetrisPhaseRef.current = "playing";
     dropTimerRef.current = 0;
     lastTimeRef.current = 0;
+    slowDropRef.current = false;
     setScore(0);
     setLines(0);
     setLevel(1);
@@ -547,11 +553,11 @@ const TetrisGamePage = ({
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">2</span>
-                  <span>Gunakan tombol <strong className="text-fuchsia-300">◀ / ▶</strong> untuk menggeser balok dan <strong className="text-yellow-300">PUTAR</strong> (atau <strong className="text-fuchsia-300">↑</strong>) untuk mengubah posisi balok</span>
+                  <span>Gunakan tombol <strong className="text-fuchsia-300">◀ / ▶</strong> untuk menggeser balok dan <strong className="text-yellow-300">PUTAR</strong> untuk mengubah posisi balok</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">3</span>
-                  <span>Tekan tombol <strong className="text-fuchsia-300">↓</strong> untuk menjatuhkan balok langsung ke bawah</span>
+                  <span><strong className="text-yellow-300">Tahan tombol ↑</strong> untuk memperlambat jatuhnya balok, atau tekan tombol <strong className="text-fuchsia-300">↓</strong> untuk menjatuhkannya langsung ke bawah</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">4</span>
@@ -675,12 +681,46 @@ const TetrisGamePage = ({
               )}
             </div>
 
-            <div className="flex gap-2 justify-center">
-              <button onPointerDown={moveLeft} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-lg">◀</button>
-              <button onPointerDown={rotatePiece} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-sm">↑</button>
-              <button onPointerDown={hardDrop} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-sm">↓</button>
-              <button onPointerDown={moveRight} className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-lg">▶</button>
-              <button onPointerDown={rotatePiece} className="bg-accent/20 border border-accent text-accent font-bold w-12 h-12 rounded-xl hover:bg-accent/40 transition cursor-pointer select-none active:scale-95 text-xs leading-tight">PUTAR</button>
+            <div className="flex gap-3 justify-center items-center">
+              {/* Left arrow */}
+              <button
+                onPointerDown={moveLeft}
+                aria-label="Geser kiri"
+                className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-lg"
+              >◀</button>
+
+              {/* Up / Down stacked (D-pad style) */}
+              <div className="flex flex-col gap-2 items-center">
+                <button
+                  onPointerDown={() => { slowDropRef.current = true; }}
+                  onPointerUp={() => { slowDropRef.current = false; }}
+                  onPointerLeave={() => { slowDropRef.current = false; }}
+                  onPointerCancel={() => { slowDropRef.current = false; }}
+                  onContextMenu={(e) => e.preventDefault()}
+                  aria-label="Tahan untuk perlambat balok"
+                  title="Tahan untuk memperlambat jatuhnya balok"
+                  className="bg-yellow-500/15 border border-yellow-400/60 text-yellow-200 font-bold w-12 h-10 rounded-xl hover:bg-yellow-500/30 transition cursor-pointer select-none active:scale-95 text-sm leading-none flex items-center justify-center"
+                >↑</button>
+                <button
+                  onPointerDown={hardDrop}
+                  aria-label="Jatuhkan balok ke bawah"
+                  className="bg-card/80 border border-border text-white font-bold w-12 h-10 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-sm leading-none flex items-center justify-center"
+                >↓</button>
+              </div>
+
+              {/* Right arrow */}
+              <button
+                onPointerDown={moveRight}
+                aria-label="Geser kanan"
+                className="bg-card/80 border border-border text-white font-bold w-12 h-12 rounded-xl hover:border-accent transition cursor-pointer select-none active:scale-95 text-lg"
+              >▶</button>
+
+              {/* Rotate piece */}
+              <button
+                onPointerDown={rotatePiece}
+                aria-label="Putar balok"
+                className="bg-accent/20 border border-accent text-accent font-bold w-12 h-12 rounded-xl hover:bg-accent/40 transition cursor-pointer select-none active:scale-95 text-xs leading-tight"
+              >PUTAR</button>
             </div>
           </div>
 
