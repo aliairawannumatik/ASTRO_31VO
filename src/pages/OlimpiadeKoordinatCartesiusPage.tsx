@@ -223,6 +223,46 @@ const JarakTitikGarisSVG = () => {
   );
 };
 
+// SVG: Titik tengah segmen - A(x1, y1), B titik tengah, C(x2, y2)
+const TitikTengahSVG = () => {
+  const W = 360, H = 110;
+  const y = 60;
+  const Ax = 30, Cx = W - 30;
+  const Bx = (Ax + Cx) / 2;
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5">
+        {/* Garis A-C */}
+        <line x1={Ax} y1={y} x2={Cx} y2={y} stroke="#fbbf24" strokeWidth="1.5" />
+        {/* Titik A, B, C */}
+        <circle cx={Ax} cy={y} r="3.5" fill="#22d3ee" />
+        <circle cx={Bx} cy={y} r="3.5" fill="#22d3ee" />
+        <circle cx={Cx} cy={y} r="3.5" fill="#22d3ee" />
+        {/* Label A */}
+        <text x={Ax - 6} y={y - 8} fill="#22d3ee" fontSize="12" fontWeight="bold" textAnchor="end">A</text>
+        <text x={Ax + 6} y={y - 8} fill="#e5e7eb" fontSize="11">(x₁, y₁)</text>
+        {/* Label B (titik tengah) */}
+        <text x={Bx - 4} y={y - 8} fill="#22d3ee" fontSize="12" fontWeight="bold" textAnchor="end">B</text>
+        <text x={Bx + 4} y={y - 12} fill="#e5e7eb" fontSize="10">(</text>
+        <text x={Bx + 10} y={y - 12} fill="#e5e7eb" fontSize="10">
+          <tspan>x₁ + x₂</tspan>
+        </text>
+        <text x={Bx + 48} y={y - 12} fill="#e5e7eb" fontSize="10">,</text>
+        <text x={Bx + 54} y={y - 12} fill="#e5e7eb" fontSize="10">y₁ + y₂</text>
+        <text x={Bx + 92} y={y - 12} fill="#e5e7eb" fontSize="10">)</text>
+        <line x1={Bx + 10} y1={y - 8} x2={Bx + 46} y2={y - 8} stroke="#e5e7eb" strokeWidth="0.8" />
+        <line x1={Bx + 54} y1={y - 8} x2={Bx + 90} y2={y - 8} stroke="#e5e7eb" strokeWidth="0.8" />
+        <text x={Bx + 26} y={y + 2} fill="#e5e7eb" fontSize="10" textAnchor="middle">2</text>
+        <text x={Bx + 70} y={y + 2} fill="#e5e7eb" fontSize="10" textAnchor="middle">2</text>
+        {/* Label C */}
+        <text x={Cx - 6} y={y - 8} fill="#22d3ee" fontSize="12" fontWeight="bold" textAnchor="end">C</text>
+        <text x={Cx + 6} y={y - 8} fill="#e5e7eb" fontSize="11">(x₂, y₂)</text>
+      </svg>
+    </div>
+  );
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -408,6 +448,7 @@ const OlimpiadeKoordinatCartesiusPage = () => {
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
                       {idx === 2 && <JarakDuaTitikSVG />}
                       {idx === 4 && <JarakTitikGarisSVG />}
+                      {idx === 5 && <TitikTengahSVG />}
                       {section.content.split('\n').map((line, i) => {
                         const trimmed = line.trim();
                         const renderedLine = (() => {
