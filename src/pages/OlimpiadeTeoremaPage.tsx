@@ -355,9 +355,9 @@ const TabelSegitiga11 = () => {
 // SVG: Segitiga siku-siku untuk Soal No. 15 — sisi (x-1), (x+1), hipotenusa (x+3)
 const SegitigaXSVG = () => {
   const W = 280, H = 200;
-  const Ax = 50, Ay = H - 30;          // kiri-bawah (siku-siku)
-  const Bx = W - 40, By = H - 30;      // kanan-bawah
-  const Cx = 50, Cy = 25;              // kiri-atas
+  const Ax = 90, Ay = H - 30;          // kiri-bawah (siku-siku)
+  const Bx = W - 30, By = H - 30;      // kanan-bawah
+  const Cx = 90, Cy = 25;              // kiri-atas
 
   return (
     <div className="my-3 flex justify-center">
