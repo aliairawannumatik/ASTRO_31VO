@@ -92,47 +92,33 @@ const UnsurLingkaranSVG = () => (
 );
 
 const BusurJuringSVG = () => (
-  <svg viewBox="0 0 280 220" className="w-full max-w-[240px] mx-auto">
-    <defs>
-      <radialGradient id="sectorGrad" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="#1e1b4b" />
-        <stop offset="100%" stopColor="#0f172a" />
-      </radialGradient>
-    </defs>
+  <svg viewBox="0 0 240 230" className="w-full max-w-[240px] mx-auto">
     {/* full circle faint */}
-    <circle cx="100" cy="130" r="90" fill="none" stroke="#334155" strokeWidth="1" strokeDasharray="4,3" />
-    {/* juring sector ~110 degrees */}
-    <path d="M100,130 L100,40 A90,90 0,0,1 185,195 Z"
+    <circle cx="120" cy="115" r="85" fill="#0f172a" stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3" />
+    {/* juring sector ~110 degrees: from A (top) clockwise to B */}
+    <path d="M120,115 L120,30 A85,85 0,0,1 199.9,144.1 Z"
       fill="#7c3aed" fillOpacity="0.4" stroke="#a78bfa" strokeWidth="2" />
-    {/* arc highlight */}
-    <path d="M100,40 A90,90 0,0,1 185,195"
-      fill="none" stroke="#f472b6" strokeWidth="3" strokeLinecap="round" />
-    {/* center */}
-    <circle cx="100" cy="130" r="4" fill="#f8fafc" />
-    {/* angle arc */}
-    <path d="M100,110 A20,20 0,0,1 116,122" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    {/* arc highlight: busur AB */}
+    <path d="M120,30 A85,85 0,0,1 199.9,144.1"
+      fill="none" stroke="#f472b6" strokeWidth="3.5" strokeLinecap="round" />
+    {/* angle arc α at center O between OA and OB */}
+    <path d="M120,93 A22,22 0,0,1 140.7,122.5" fill="none" stroke="#fbbf24" strokeWidth="2" />
+    {/* center O */}
+    <circle cx="120" cy="115" r="3.5" fill="#f8fafc" />
 
     {/* Labels */}
-    <text x="108" y="126" fill="#e2e8f0" fontSize="13" fontWeight="bold">O</text>
-    <text x="85" y="30" fill="#e2e8f0" fontSize="12" fontWeight="bold">A</text>
-    <text x="192" y="198" fill="#e2e8f0" fontSize="12" fontWeight="bold">B</text>
-    <text x="100" y="88" fill="#818cf8" fontSize="12">r</text>
-    <text x="117" y="116" fill="#fbbf24" fontSize="10">α</text>
-
-    {/* Formulas block */}
-    <rect x="170" y="20" width="108" height="90" rx="8" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1.2" />
-    <text x="224" y="38" fill="#a5b4fc" fontSize="9" textAnchor="middle" fontWeight="bold">RUMUS</text>
-    <text x="178" y="55" fill="#c4b5fd" fontSize="9">Busur AB =</text>
-    <text x="178" y="68" fill="#f9a8d4" fontSize="9">α/360° × 2πr</text>
-    <line x1="178" y1="74" x2="270" y2="74" stroke="#4338ca" strokeWidth="0.8" />
-    <text x="178" y="85" fill="#c4b5fd" fontSize="9">Juring OAB =</text>
-    <text x="178" y="98" fill="#f9a8d4" fontSize="9">α/360° × πr²</text>
-
-    {/* Tembereng note */}
-    <rect x="0" y="195" width="278" height="25" rx="6" fill="#1e1b4b" stroke="#0e7490" strokeWidth="1" />
-    <text x="139" y="211" fill="#7dd3fc" fontSize="9" textAnchor="middle">
-      Tembereng = Juring OAB − Segitiga OAB
-    </text>
+    <text x="127" y="118" fill="#e2e8f0" fontSize="12" fontWeight="bold">O</text>
+    <text x="113" y="22" fill="#e2e8f0" fontSize="12" fontWeight="bold">A</text>
+    <text x="205" y="148" fill="#e2e8f0" fontSize="12" fontWeight="bold">B</text>
+    {/* r label on OA */}
+    <text x="124" y="75" fill="#818cf8" fontSize="12" fontStyle="italic">r</text>
+    {/* r label on OB */}
+    <text x="156" y="120" fill="#818cf8" fontSize="12" fontStyle="italic">r</text>
+    {/* α label */}
+    <text x="135" y="113" fill="#fbbf24" fontSize="11" fontWeight="bold">α</text>
+    {/* Busur AB label near arc */}
+    <text x="200" y="80" fill="#f472b6" fontSize="10" fontStyle="italic">busur</text>
+    <text x="158" y="65" fill="#a78bfa" fontSize="10" fontStyle="italic">juring</text>
   </svg>
 );
 
