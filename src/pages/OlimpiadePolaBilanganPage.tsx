@@ -9,6 +9,7 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { polaBilanganDasarPembahasan } from "@/data/pembahasan/polaBilanganDasar";
 import { polaBilanganOlimpiadePembahasan } from "@/data/pembahasan/polaBilanganOlimpiade";
+import imgSukuKenImg from "@assets/image_1777194887222.png";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -621,7 +622,36 @@ const OlimpiadePolaBilanganPage = () => {
                 </button>
                 {expandedSections.includes(idx) && (
                   <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
-                    {idx === 3 ? (
+                    {idx === 4 ? (
+                      <div className="font-body text-sm text-white/80 leading-relaxed space-y-3">
+                        <div className="whitespace-pre-wrap">
+                          {section.content.split('\n').map((line, i) => {
+                            const trimmed = line.trim();
+                            if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
+                              return (
+                                <div key={i} className="my-3 px-4 py-3 rounded-xl border-2 border-cyan-400/60 bg-cyan-950/40 text-center font-bold text-white text-base shadow-lg shadow-cyan-900/30">
+                                  <span className="block text-[10px] text-cyan-400 font-semibold uppercase tracking-widest mb-1">Rumus Penting</span>
+                                  {renderWithLatex(trimmed)}
+                                </div>
+                              );
+                            }
+                            if (trimmed === '') return <div key={i} className="h-2" />;
+                            return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                          })}
+                        </div>
+                        <div className="mt-3 flex flex-col items-center gap-2">
+                          <div className="text-xs text-yellow-400 font-semibold uppercase tracking-widest mb-1">Ilustrasi Barisan</div>
+                          <div className="bg-white rounded-xl p-3 shadow-lg max-w-sm w-full flex justify-center">
+                            <img
+                              src={imgSukuKenImg}
+                              alt="Ilustrasi barisan U1, U2, U3,... dengan pola selisih"
+                              className="max-w-full h-auto object-contain"
+                            />
+                          </div>
+                          <div className="text-xs text-white/50 italic text-center">Ilustrasi pola selisih berurutan untuk menentukan rumus suku ke-n</div>
+                        </div>
+                      </div>
+                    ) : idx === 3 ? (
                       <div className="font-body text-sm text-white/80 leading-relaxed space-y-4">
                         <div>
                           <div className="mb-1 font-semibold text-yellow-400">1. Pola Bilangan Persegi</div>
