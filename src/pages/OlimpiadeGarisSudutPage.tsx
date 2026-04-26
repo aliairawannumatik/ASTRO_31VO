@@ -134,7 +134,7 @@ const materiSections: MateriSection[] = [
     items: [
       {
         type: "text",
-        value: `Sebuah sudut dibentuk ketika dua garis yang berbeda bertemu di satu titik. Sudut adalah besaran rotasi suatu ruas garis dari satu titik pangkalnya ke posisi yang lain". Selain itu, dalam bangun dua dimensi yang beraturan, sudut dapat pula diartikan sebagai ruang antara dua buah ruas garis lurus yang saling berpotongan.`
+        value: `Sebuah sudut dibentuk ketika dua garis yang berbeda bertemu di satu titik. Sudut adalah besaran rotasi suatu ruas garis dari satu titik pangkalnya ke posisi yang lain. Selain itu, dalam bangun dua dimensi yang beraturan, sudut dapat pula diartikan sebagai ruang antara dua buah ruas garis lurus yang saling berpotongan.`
       }
     ]
   },
@@ -143,7 +143,7 @@ const materiSections: MateriSection[] = [
     items: [
       {
         type: "text",
-        value: `Ruas garis OA diputar terhadap titik O ke garis OB sehingga diperoleh sudut AOB dan dapat ditulis dengan $\\angle AOB$.`
+        value: `Ruas garis $\\overline{OA}$ diputar terhadap titik $O$ ke garis $\\overline{OB}$ sehingga diperoleh sudut $AOB$ dan dapat ditulis dengan $\\angle AOB$.`
       },
       { type: "svg", component: <SudutPosNegSVG />, caption: "Gambar 1: Pengukuran Sudut Positif dan Sudut Negatif" },
       {
@@ -152,7 +152,7 @@ const materiSections: MateriSection[] = [
 
 Jadi besar sudut itu selalu positif, jika ada sudut yang dituliskan negatif, itu bukan besar sudut yang sebenarnya, hanya cara mengukurnya yang dilakukan berbeda.
 
-Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle AOB = 360° - 30° = 330°$.`
+Misalnya tertulis sudut $\\angle AOB = -30^\\circ$, sudut sebenarnya adalah $\\angle AOB = 360^\\circ - 30^\\circ = 330^\\circ$.`
       }
     ]
   },
@@ -163,13 +163,13 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
         type: "text",
         value: `Berdasarkan ukurannya, sudut dibagi dalam beberapa jenis yaitu:
 
-1. Sudut $0°$, pada sudut nol derajat tidak terdapat perputaran;
-2. Sudut $90°$ sering juga disebut dengan sudut siku-siku, sudut yang terbentuk dari seperempat putaran;
-3. Sudut $180°$, sudut yang terbentuk dari setengah putaran;
-4. Sudut $360°$, sudut yang terbentuk dari satu putaran penuh;
-5. Sudut lancip, sudut yang besarnya diantara $0°$ dan $90°$;
-6. Sudut tumpul, sudut yang besarnya diantara $90°$ dan $180°$;
-7. Sudut refleks, sudut yang besarnya diantara $180°$ dan $360°$;`
+1. Sudut $0^\\circ$, pada sudut nol derajat tidak terdapat perputaran;
+2. Sudut $90^\\circ$ sering juga disebut dengan sudut siku-siku, sudut yang terbentuk dari seperempat putaran;
+3. Sudut $180^\\circ$, sudut yang terbentuk dari setengah putaran;
+4. Sudut $360^\\circ$, sudut yang terbentuk dari satu putaran penuh;
+5. Sudut lancip, yaitu sudut yang besarnya $0^\\circ < \\theta < 90^\\circ$;
+6. Sudut tumpul, yaitu sudut yang besarnya $90^\\circ < \\theta < 180^\\circ$;
+7. Sudut refleks, yaitu sudut yang besarnya $180^\\circ < \\theta < 360^\\circ$.`
       }
     ]
   },
@@ -188,7 +188,7 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
     items: [
       {
         type: "text",
-        value: `Sudut pada satu titik adalah sudut yang terbentuk oleh beberapa garis (2 garis atau lebih) dan jumlah keseluruhan sudut (dalam 1 putaran) adalah $360°$.`
+        value: `Sudut pada satu titik adalah sudut yang terbentuk oleh beberapa garis (2 garis atau lebih) dan jumlah keseluruhan sudut (dalam 1 putaran) adalah $360^\\circ$.`
       },
       { type: "image", src: gambar3, caption: "Gambar 3: Jumlah Sudut Dalam 1 Putaran" }
     ]
@@ -198,17 +198,17 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
     items: [
       {
         type: "text",
-        value: `Sudut yang berpelurus adalah dua buah sudut yang membentuk sudut $180°$. Masing-masing sudut tersebut saling berpelurus satu dengan yang lainnya.`
+        value: `Sudut yang berpelurus adalah dua buah sudut yang membentuk sudut $180^\\circ$. Masing-masing sudut tersebut saling berpelurus satu dengan yang lainnya.`
       },
       { type: "image", src: gambar4, caption: "Gambar 4: Sudut Saling Berpelurus" },
       {
         type: "text",
-        value: `Pada gambar kedua ini sudut $a°$ dan sudut $c°$ atau sudut $b°$ dan sudut $d°$ adalah sudut-sudut yang berlawanan pada tali busur sebuah bangun segi empat dikatakan saling berpelurus, sehingga $a° + c° = 180°$ atau $b° + d° = 180°$.`
+        value: `Pada gambar kedua ini sudut $a^\\circ$ dan sudut $c^\\circ$ atau sudut $b^\\circ$ dan sudut $d^\\circ$ adalah sudut-sudut yang berlawanan pada tali busur sebuah bangun segi empat dikatakan saling berpelurus, sehingga $a^\\circ + c^\\circ = 180^\\circ$ atau $b^\\circ + d^\\circ = 180^\\circ$.`
       },
       { type: "image", src: gambar6, caption: "Gambar 6: Sudut Saling Berpelurus 3" },
       {
         type: "text",
-        value: `Pada gambar ketiga ini sudut $a°$ dan sudut $b°$ adalah sudut-sudut yang terletak di antara 2 garis sejajar yang berpotongan dengan garis transversal adalah sudut berpelurus, sehingga $a° + b° = 180°$.`
+        value: `Pada gambar ketiga ini sudut $a^\\circ$ dan sudut $b^\\circ$ adalah sudut-sudut yang terletak di antara 2 garis sejajar yang berpotongan dengan garis transversal adalah sudut berpelurus, sehingga $a^\\circ + b^\\circ = 180^\\circ$.`
       },
       { type: "image", src: gambar5, caption: "Gambar 5: Sudut Saling Berpelurus 2" }
     ]
@@ -218,7 +218,7 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
     items: [
       {
         type: "text",
-        value: `Sudut yang saling berpenyiku adalah dua buah sudut yang membentuk sudut $90°$. Masing-masing sudut tersebut saling berpenyiku satu dengan yang lainnya.`
+        value: `Sudut yang saling berpenyiku adalah dua buah sudut yang membentuk sudut $90^\\circ$. Masing-masing sudut tersebut saling berpenyiku satu dengan yang lainnya.`
       },
       { type: "image", src: gambar7, caption: "Gambar 7: Sudut Saling Berpenyiku" }
     ]
@@ -243,7 +243,7 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
     items: [
       {
         type: "text",
-        value: `Sudut yang bersebrangan adalah sudut yang terbentuk secara berlawanan pada suatu garis transversal yang berada di antara dua buah garis sejajar. Besar sudut yang berseberangan adalah sama.`
+        value: `Sudut yang berseberangan adalah sudut yang terbentuk secara berlawanan pada suatu garis transversal yang berada di antara dua buah garis sejajar. Besar sudut yang berseberangan adalah sama.`
       },
       { type: "image", src: gambar9, caption: "Gambar 9: Sudut Berseberangan" }
     ]
@@ -253,7 +253,7 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
     items: [
       {
         type: "text",
-        value: `Sudut Sehadap adalah sudut yang memilik posisi yang serupa (sama tetapi beda tempat) yang dihubungkan oleh sebuah garis transversal dan sepasang garis sejajar. Garis transversal yang memotong pasangan garis sejajar menghasilkan empat pasang sudut sehadap dan masing setiap pasang sudut itu besarnya adalah sama.`
+        value: `Sudut sehadap adalah sudut yang memiliki posisi yang serupa (sama tetapi beda tempat) yang dihubungkan oleh sebuah garis transversal dan sepasang garis sejajar. Garis transversal yang memotong pasangan garis sejajar menghasilkan empat pasang sudut sehadap dan setiap pasang sudut itu besarnya adalah sama.`
       },
       { type: "image", src: gambar10, caption: "Gambar 10: Sudut Saling Sehadap" }
     ]
@@ -263,7 +263,9 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
     items: [
       {
         type: "text",
-        value: `Saat dua garis sejajar dipotong garis ketiga dapat kita peroleh sudut sepihak. Ada dua jenis sudut sepihak yaitu sudut sepihak dalam dan sudut sepihak luar. Sudut luar sepihak adalah sudut yang berada di sisi luar dan berada pada sisi yang sama. Sedangkan sudut dalam sepihak adalah sudut yang berada di sisi dalam dan berada pada sisi yang sama.`
+        value: `Saat dua garis sejajar dipotong garis ketiga dapat kita peroleh sudut sepihak. Ada dua jenis sudut sepihak yaitu sudut sepihak dalam dan sudut sepihak luar. Sudut luar sepihak adalah sudut yang berada di sisi luar dan berada pada sisi yang sama. Sedangkan sudut dalam sepihak adalah sudut yang berada di sisi dalam dan berada pada sisi yang sama.
+
+Jumlah sepasang sudut sepihak (dalam atau luar) selalu $180^\\circ$, yaitu $\\angle_{\\text{dalam}} + \\angle_{\\text{dalam}} = 180^\\circ$.`
       },
       { type: "image", src: gambar12, caption: "Gambar 12: Sudut Saling Sepihak" }
     ]
@@ -275,12 +277,12 @@ Misalnya tertulis sudut $\\angle AOB = -30°$, sudut sebenarnya adalah $\\angle 
         type: "text",
         value: `Jumlah Total Sudut pada Segitiga
 
-Jumlah total sudut dalam sebuah segitiga adalah $180°$.`
+Jumlah total sudut dalam sebuah segitiga adalah $180^\\circ$, yaitu $\\angle A + \\angle B + \\angle C = 180^\\circ$.`
       },
       { type: "image", src: gambar13, caption: "Gambar 13: Jumlah Sudut pada Segitiga" },
       {
         type: "text",
-        value: `Sudut pada segitiga sama sisi, segitiga sama kaki dan segitiga sembarang.`
+        value: `Sudut pada segitiga sama sisi, segitiga sama kaki, dan segitiga sembarang.`
       },
       { type: "image", src: gambar14, caption: "Gambar 14: Sudut-sudut pada Segitiga" }
     ]
@@ -303,14 +305,14 @@ Jumlah sudut segi enam dihitung berdasarkan jumlah sudut segi lima, dan pola ini
         type: "text",
         value: `2. Rumus Umum Jumlah Sudut
 
-Dengan melihat pola yang terbentuk mulai dari segitiga, segi empat, segi lima, dan seterusnya, dapat ditarik sebuah kesimpulan rumus baku untuk mencari jumlah sudut segi banyak (segi-n):
+Dengan melihat pola yang terbentuk mulai dari segitiga, segi empat, segi lima, dan seterusnya, dapat ditarik sebuah kesimpulan rumus baku untuk mencari jumlah sudut segi banyak (segi-$n$):
 
-Jumlah sudut segi-n $= (n - 2) \\times 180°$, $n \\geq 3$, $n \\in \\mathbb{A}$ (himpunan bilangan asli)
+$S_n = (n - 2) \\times 180^\\circ, \\quad n \\geq 3, \\; n \\in \\mathbb{N}$
 
 Keterangan Variabel:
 - $n$ mewakili banyaknya sisi atau sudut pada bangun tersebut.
 - Syaratnya adalah $n \\geq 3$ (karena bangun datar minimal memiliki 3 sisi, yaitu segitiga).
-- $n \\in \\mathbb{A}$ adalah himpunan bilangan asli, yang berarti jumlah sisi harus berupa bilangan bulat positif utuh.`
+- $n \\in \\mathbb{N}$ adalah himpunan bilangan asli, yang berarti jumlah sisi harus berupa bilangan bulat positif utuh.`
       }
     ]
   }
