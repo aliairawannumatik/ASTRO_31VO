@@ -343,6 +343,34 @@ const materiSection = {
   ] as MateriSection[],
 };
 
+/* SVG soal Latihan Dasar No. 2 — bangun L dengan langkah di kiri-bawah (label 4 cm + tick mark) */
+const BangunSoal2SegiSVG = () => {
+  const stroke = "#1e293b";
+  // Skala 1 cm = 14 px, padding 30 px. Bounding 18 cm × 20 cm.
+  // Path titik (clockwise dari kiri-atas):
+  // A(30,30) -> B(282,30) -> C(282,310) -> D(156,310) -> E(156,198)
+  // -> F(100,198) -> G(100,254) -> H(30,254) -> back to A
+  const points = "30,30 282,30 282,310 156,310 156,198 100,198 100,254 30,254";
+  return (
+    <svg viewBox="0 0 320 350" className="w-full max-w-[320px]" data-testid="svg-soal-segi-dasar-2">
+      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      {/* Label 18 cm di atas */}
+      <text x="156" y="22" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold">18 cm</text>
+      {/* Label 20 cm di kanan */}
+      <text x="295" y="172" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold" transform="rotate(90, 295, 172)">20 cm</text>
+      {/* Label 9 cm di bawah segmen bottom-right */}
+      <text x="219" y="328" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold">9 cm</text>
+      {/* Label 4 cm di kiri segmen langkah (E→F horizontal di y=198) */}
+      <text x="78" y="217" textAnchor="end" fill={stroke} fontSize="13" fontWeight="bold">4 cm</text>
+      {/* Tanda strip pada segmen yang sama panjang (E-F dan F-G keduanya 4 cm) */}
+      {/* Tick di tengah E-F (horizontal, midpoint ≈ (128,198)) */}
+      <line x1="126" y1="194" x2="130" y2="202" stroke={stroke} strokeWidth="1.5" />
+      {/* Tick di tengah F-G (vertical, midpoint ≈ (100,226)) */}
+      <line x1="96" y1="224" x2="104" y2="228" stroke={stroke} strokeWidth="1.5" />
+    </svg>
+  );
+};
+
 /* SVG soal Latihan Dasar No. 1 — bangun majemuk dengan 2 takik di atas & 1 takik kanan-bawah */
 const BangunSoal1SegiSVG = () => {
   const stroke = "#1e293b";
@@ -541,6 +569,20 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
                         <BangunSoal1SegiSVG />
+                      </div>
+                    </div>
+                    <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                      Keliling bangun di atas adalah ...
+                    </div>
+                  </>
+                ) : soal.no === 2 ? (
+                  <>
+                    <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
+                      <span className="text-accent font-bold">{soal.no}.</span> Perhatikan gambar berikut ini.
+                    </div>
+                    <div className="flex justify-center my-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <BangunSoal2SegiSVG />
                       </div>
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
