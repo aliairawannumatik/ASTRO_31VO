@@ -17,6 +17,7 @@ import segitigaABCD30_45_Soal29Img from "@assets/image_1777205490135.png";
 import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777205526814.png";
 import bangunABCDSoalOlim4Img from "@assets/image_1777205553203.png";
 import bangunABCDSoalOlim5Img from "@assets/image_1777205569648.png";
+import segitigaABCSoalOlim6Img from "@assets/image_1777205589664.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1340,6 +1341,16 @@ const OlimpiadeTeoremaPage = () => {
                         {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
                       </span>
                     ))}
+                  </div>
+                )}
+                {soal.no === 6 && (
+                  <div className="flex justify-center my-3">
+                    <img
+                      src={segitigaABCSoalOlim6Img}
+                      alt="Segitiga ABC dengan sisi AB 50 km dan BC 120 km, titik D di tengah AC, soal olimpiade nomor 6"
+                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                      data-testid="img-soal-pyth-olim-6"
+                    />
                   </div>
                 )}
                 {soal.options.length > 0 && (
