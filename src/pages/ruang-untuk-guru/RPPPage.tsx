@@ -39,8 +39,8 @@ const komponenRPP = [
   },
 ];
 
-const daftarRPP = [
-  { kelas: "VII", topik: "Bilangan Bulat dan Pecahan" },
+const daftarRPP: { kelas: string; topik: string; path?: string }[] = [
+  { kelas: "VII", topik: "Bilangan Bulat", path: "/ruang-untuk-guru/rpp/bilangan-bulat" },
   { kelas: "VII", topik: "Bentuk Aljabar" },
   { kelas: "VII", topik: "Persamaan dan Pertidaksamaan Linear Satu Variabel" },
   { kelas: "VIII", topik: "Sistem Persamaan Linear Dua Variabel" },
@@ -95,17 +95,31 @@ const RPPPage = () => {
             Daftar RPP Matematika SMP
           </h2>
           <div className="space-y-2">
-            {daftarRPP.map((rpp, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-3 bg-muted/30 rounded-lg px-4 py-3 hover:bg-muted/50 transition-colors"
-              >
-                <span className="flex-shrink-0 w-12 h-8 rounded-md bg-primary/20 border border-primary/40 flex items-center justify-center font-display text-xs font-bold text-primary">
-                  {rpp.kelas}
-                </span>
-                <span className="font-body text-sm text-white/90">{rpp.topik}</span>
-              </div>
-            ))}
+            {daftarRPP.map((rpp, i) => {
+              const clickable = !!rpp.path;
+              return (
+                <button
+                  key={i}
+                  onClick={() => { if (clickable) { playPopSound(); navigate(rpp.path!); } }}
+                  disabled={!clickable}
+                  className={`w-full text-left flex items-center gap-3 rounded-lg px-4 py-3 transition-all ${
+                    clickable
+                      ? "bg-muted/30 hover:bg-cyan-500/10 hover:border-cyan-300/40 border border-transparent cursor-pointer"
+                      : "bg-muted/30 border border-transparent"
+                  }`}
+                >
+                  <span className="flex-shrink-0 w-12 h-8 rounded-md bg-primary/20 border border-primary/40 flex items-center justify-center font-display text-xs font-bold text-primary">
+                    {rpp.kelas}
+                  </span>
+                  <span className="flex-1 font-body text-sm text-white/90">{rpp.topik}</span>
+                  {clickable && (
+                    <span className="text-[10px] uppercase tracking-wider font-semibold text-cyan-300">
+                      Lihat →
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
           <p className="mt-4 text-xs text-muted-foreground font-body italic">
             Konten RPP lengkap dapat ditambahkan sesuai kurikulum yang berlaku.

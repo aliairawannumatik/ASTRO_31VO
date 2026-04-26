@@ -1,0 +1,588 @@
+import { useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  Plus,
+  School,
+  User,
+  Calendar,
+  Clock,
+  GraduationCap,
+  BookOpen,
+  Target,
+  Layers,
+  Users,
+  ClipboardCheck,
+  Lightbulb,
+  Heart,
+  Sparkles,
+  Globe,
+  Monitor,
+  Play,
+  Compass,
+  CheckSquare,
+} from "lucide-react";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
+import { playPopSound } from "@/hooks/useAudio";
+
+const identitas = [
+  { label: "Penyusun", value: "Irawan Sutiawan, M.Pd", icon: User },
+  { label: "Sekolah", value: "SMPN 28 Bandung", icon: School },
+  { label: "Kelas / Fase", value: "IX / D", icon: GraduationCap },
+  { label: "Tahun Ajaran", value: "2025 - 2026", icon: Calendar },
+  { label: "Alokasi Waktu", value: "2 x 40 JP", icon: Clock },
+  { label: "Topik", value: "Penjumlahan Bilangan Bulat", icon: Plus },
+];
+
+const jenisPengetahuan = [
+  {
+    label: "Faktual",
+    desc: "Definisi bilangan bulat, simbol, dan cara membacanya.",
+    color: "text-cyan-200",
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-300/40",
+  },
+  {
+    label: "Konseptual",
+    desc: "Konsep bilangan bulat positif, nol, dan negatif, serta konsep garis bilangan.",
+    color: "text-violet-200",
+    bg: "bg-violet-500/10",
+    border: "border-violet-300/40",
+  },
+  {
+    label: "Prosedural",
+    desc: "Langkah-langkah dalam operasi hitung (penjumlahan, pengurangan, perkalian, pembagian) bilangan bulat.",
+    color: "text-amber-200",
+    bg: "bg-amber-500/10",
+    border: "border-amber-300/40",
+  },
+];
+
+const dimensiProfil = [
+  {
+    title: "Beriman, Bertakwa kepada Tuhan YME, dan Berakhlak Mulia",
+    desc: "Melalui kegiatan berdoa di awal pembelajaran, bersyukur atas nikmat akal, dan refleksi terhadap keteraturan alam semesta.",
+  },
+  {
+    title: "Bernalar Kritis",
+    desc: "Melalui kegiatan mengamati, menanya, mencoba, menalar, dan menyimpulkan konsep operasi bilangan bulat, serta pemecahan masalah sehari-hari.",
+  },
+  {
+    title: "Kolaborasi",
+    desc: "Melalui pembentukan kelompok diskusi dan kerja sama dalam menyelesaikan tugas.",
+  },
+  {
+    title: "Mandiri",
+    desc: "Melalui penugasan individu dan refleksi mandiri terhadap proses belajar (dalam asesmen).",
+  },
+];
+
+const praktikPedagogis = [
+  { label: "Model", value: "Problem Based Learning (PBL)" },
+  { label: "Pendekatan", value: "Saintifik" },
+  { label: "Metode", value: "Tanya jawab, diskusi kelompok, presentasi, dan penugasan." },
+];
+
+const kemitraan = [
+  {
+    title: "Ilmu Pengetahuan Alam (IPA)",
+    desc: "Konsep suhu, ketinggian, dan kedalaman air digunakan sebagai konteks apersepsi yang kontekstual.",
+  },
+  {
+    title: "Ilmu Pengetahuan Sosial (IPS)",
+    desc: "Konsep utang piutang atau sejarah suhu di suatu tempat dapat digunakan sebagai contoh soal.",
+  },
+];
+
+const pemanfaatanDigital = [
+  "Penggunaan PowerPoint atau Google Slides untuk presentasi konsep dan contoh.",
+  "Potensi untuk mengintegrasikan video pembelajaran terkait aplikasi bilangan bulat di dunia nyata.",
+  "Penggunaan aplikasi penilaian digital seperti Quizizz atau Kahoot untuk memberikan umpan balik cepat (asesmen for learning).",
+];
+
+const langkahAwal = [
+  "Guru mengucapkan salam dan memimpin doa.",
+  "Guru mengecek kehadiran dan kesiapan fisik serta psikis murid.",
+  "Guru membuat kesepakatan kelas.",
+  "Guru menginformasikan tujuan pembelajaran dan kegiatan yang akan dilaksanakan.",
+  "Guru menginformasikan mengenai sistem penilaian selama pembelajaran.",
+  "Apersepsi Kontekstual: Guru memancing rasa ingin tahu murid dengan tanya jawab tentang suhu di Puncak Jaya atau ketinggian tempat di bawah permukaan laut. Guru mengarahkan murid pada kesadaran akan perlunya bilangan baru untuk menyatakan nilai di bawah nol.",
+];
+
+const langkahInti = [
+  {
+    fase: "Memahami (Konstruksi Pengetahuan Awal)",
+    color: "from-cyan-500/20 to-blue-500/10",
+    border: "border-cyan-300/40",
+    text: "text-cyan-100",
+    items: [
+      "Guru membagi murid ke dalam kelompok.",
+      "Murid melakukan diskusi untuk membedakan antara bilangan bulat positif, nol, dan negatif menggunakan contoh sehari-hari.",
+      "Murid memvisualisasikan bilangan bulat pada garis bilangan dan menentukan posisi relatifnya (menguatkan Kreatif, Bernalar Kritis).",
+    ],
+  },
+  {
+    fase: "Mengaplikasi (Penyelesaian Masalah)",
+    color: "from-emerald-500/20 to-teal-500/10",
+    border: "border-emerald-300/40",
+    text: "text-emerald-100",
+    items: [
+      "Murid menyelesaikan masalah kontekstual (misal: menghitung suhu setelah turun beberapa derajat) yang berkaitan dengan operasi bilangan bulat.",
+      "Murid mempresentasikan hasil diskusi kelompok di depan kelas dan melakukan tanya jawab dengan kelompok lain (menguatkan Bernalar Kritis, Kolaborasi).",
+    ],
+  },
+  {
+    fase: "Merefleksi (Refleksi Konseptual)",
+    color: "from-violet-500/20 to-purple-500/10",
+    border: "border-violet-300/40",
+    text: "text-violet-100",
+    items: [
+      "Murid membuat kesimpulan tentang cara membandingkan dan melakukan operasi hitung pada bilangan bulat.",
+      "Guru memberikan umpan balik, memperbaiki konsep yang masih salah, dan menegaskan kembali konsep yang sudah benar.",
+      "Guru bertanya kepada siswa tentang pesan/kesan dari pembelajaran hari ini untuk dilakukan perbaikan kedepannya pada Google Form yang sudah disediakan linknya.",
+    ],
+  },
+];
+
+const langkahPenutup = [
+  "Setiap kelompok diberikan penghargaan atas partisipasi mereka.",
+  "Guru memberikan postes untuk mengetahui ketercapaian tujuan pembelajaran.",
+  "Guru memberikan PR untuk penguatan konsep.",
+  "Guru menginformasikan materi yang akan dipelajari pada pertemuan berikutnya.",
+];
+
+const asesmen = [
+  {
+    title: "Asesmen sebagai Pembelajaran (Assessment as Learning)",
+    color: "from-emerald-500/20 to-teal-500/10",
+    border: "border-emerald-300/40",
+    text: "text-emerald-100",
+    items: [
+      "Penilaian Diri: Murid merefleksikan pemahaman mereka terhadap konsep operasi hitung bilangan bulat.",
+      "Penilaian Sejawat: Murid saling memberikan umpan balik dalam diskusi kelompok.",
+    ],
+  },
+  {
+    title: "Asesmen untuk Pembelajaran (Assessment for Learning)",
+    color: "from-amber-500/20 to-yellow-500/10",
+    border: "border-amber-300/40",
+    text: "text-amber-100",
+    items: [
+      "Observasi: Guru mengamati partisipasi murid dalam diskusi dan kerja kelompok.",
+      "Tanya Jawab: Guru mengajukan pertanyaan selama pembelajaran untuk mengecek pemahaman dan memberikan umpan balik langsung.",
+      "Penugasan (LKPD/PR): Hasil tugas digunakan guru untuk mengidentifikasi kesulitan dan memberikan intervensi.",
+    ],
+  },
+  {
+    title: "Asesmen Hasil Pembelajaran (Assessment of Learning)",
+    color: "from-pink-500/20 to-rose-500/10",
+    border: "border-pink-300/40",
+    text: "text-pink-100",
+    items: [
+      "Tes Tertulis: Dilaksanakan pada akhir bab untuk mengukur pencapaian tujuan pembelajaran secara keseluruhan.",
+      "Penilaian Proyek/Unjuk Kerja: Melalui kegiatan aplikasi konsep (misal: membuat cerita bergambar tentang operasi hitung bilangan bulat) yang menunjukkan kemampuan aplikasi dan pemecahan masalah.",
+    ],
+  },
+];
+
+const SectionCard = ({
+  icon: Icon,
+  title,
+  iconColor,
+  borderColor,
+  bgColor,
+  children,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  iconColor: string;
+  borderColor: string;
+  bgColor: string;
+  children: React.ReactNode;
+}) => (
+  <div className={`backdrop-blur border ${borderColor} rounded-2xl p-5 mb-5 animate-slide-up`} style={{ background: bgColor }}>
+    <div className="flex items-center gap-3 mb-4">
+      <div className={`w-10 h-10 rounded-xl ${iconColor} flex items-center justify-center flex-shrink-0`}>
+        <Icon className="w-5 h-5 text-white" />
+      </div>
+      <h2 className="font-display text-base md:text-lg font-bold text-white">{title}</h2>
+    </div>
+    {children}
+  </div>
+);
+
+const RPPPenjumlahanBilanganBulatPage = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
+      <Starfield />
+      <PageNavigation prevPath="/ruang-untuk-guru/rpp/bilangan-bulat" />
+      <div className="relative z-10 max-w-4xl mx-auto px-4 pt-20 pb-14">
+        {/* Header */}
+        <div className="text-center mb-8 animate-slide-up">
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/40 bg-emerald-500/10 px-4 py-2 text-xs font-semibold text-emerald-100 mb-4">
+            <Plus className="w-4 h-4" />
+            RPP - Penjumlahan Bilangan Bulat
+          </div>
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan leading-tight">
+            PERENCANAAN PEMBELAJARAN
+          </h1>
+          <p className="mt-3 text-base md:text-lg text-emerald-200 font-body font-semibold">
+            Penjumlahan Bilangan Bulat
+          </p>
+        </div>
+
+        {/* Identitas */}
+        <SectionCard
+          icon={School}
+          title="Identitas"
+          iconColor="bg-cyan-500"
+          borderColor="border-cyan-300/40"
+          bgColor="linear-gradient(135deg, rgba(6,182,212,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {identitas.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-white/10">
+                <item.icon className="w-4 h-4 text-cyan-300 mt-0.5 flex-shrink-0" />
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-white/50 font-semibold">{item.label}</div>
+                  <div className="text-sm text-white font-body">{item.value}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+
+        {/* Identifikasi */}
+        <SectionCard
+          icon={Compass}
+          title="Identifikasi"
+          iconColor="bg-violet-500"
+          borderColor="border-violet-300/40"
+          bgColor="linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <p className="text-sm text-white/85 font-body leading-relaxed">
+            Guru menyiapkan murid secara psikis dan fisik sebelum memulai pembelajaran sebagaimana sebelumnya guru telah mengidentifikasi peserta didik melalui kemampuan awal, minat dan latar belakang untuk mengakomodasi berbagai kebutuhan belajar melalui diskusi kelompok dan aktivitas praktis.
+          </p>
+        </SectionCard>
+
+        {/* Materi Pembelajaran */}
+        <SectionCard
+          icon={BookOpen}
+          title="Materi Pembelajaran"
+          iconColor="bg-emerald-500"
+          borderColor="border-emerald-300/40"
+          bgColor="linear-gradient(135deg, rgba(16,185,129,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <div className="mb-4">
+            <h3 className="font-display text-sm font-bold text-emerald-200 mb-2">Bilangan Bulat - Jenis Pengetahuan</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {jenisPengetahuan.map((jp, i) => (
+                <div key={i} className={`${jp.bg} ${jp.border} border rounded-xl p-3`}>
+                  <div className={`text-xs font-bold ${jp.color} uppercase tracking-wide mb-1`}>{jp.label}</div>
+                  <p className="text-xs text-white/80 font-body leading-relaxed">{jp.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-4 bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Relevansi dengan Kehidupan Nyata</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Materi ini relevan untuk menjelaskan fenomena sehari-hari, seperti suhu (suhu di bawah 0°C), kedalaman laut, utang piutang, dan ketinggian tempat. Hal ini membantu peserta didik memahami konsep abstrak bilangan bulat dalam konteks nyata.
+            </p>
+          </div>
+
+          <div className="mb-4 bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Tingkat Kesulitan</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Bervariasi, dimulai dari konsep dasar membandingkan dan mengurutkan, hingga aplikasi yang lebih kompleks pada operasi hitung campuran.
+            </p>
+          </div>
+
+          <div className="mb-4 bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Struktur Materi</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Progresif, dimulai dari pengenalan bilangan bulat, membandingkan dan mengurutkan, operasi penjumlahan dan pengurangan, operasi perkalian dan pembagian, hingga operasi hitung campuran.
+            </p>
+          </div>
+
+          <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Integrasi Nilai dan Karakter</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Selama pembelajaran, akan diintegrasikan nilai-nilai religius (bersyukur), kejujuran, disiplin, tanggung jawab, peduli, kolaborasi, santun, dan percaya diri yang akan secara langsung mendukung pengembangan dimensi profil lulusan.
+            </p>
+          </div>
+        </SectionCard>
+
+        {/* Dimensi Profil Lulusan */}
+        <SectionCard
+          icon={Heart}
+          title="Dimensi Profil Lulusan"
+          iconColor="bg-pink-500"
+          borderColor="border-pink-300/40"
+          bgColor="linear-gradient(135deg, rgba(236,72,153,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <ul className="space-y-3">
+            {dimensiProfil.map((d, i) => (
+              <li key={i} className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-white/10">
+                <Sparkles className="w-4 h-4 text-pink-300 mt-1 flex-shrink-0" />
+                <div>
+                  <div className="text-sm font-semibold text-pink-100 font-body mb-0.5">{d.title}</div>
+                  <p className="text-xs text-white/80 font-body leading-relaxed">{d.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+
+        {/* Capaian Pembelajaran & Tujuan */}
+        <SectionCard
+          icon={Target}
+          title="Capaian & Tujuan Pembelajaran"
+          iconColor="bg-amber-500"
+          borderColor="border-amber-300/40"
+          bgColor="linear-gradient(135deg, rgba(251,191,36,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <div className="mb-4 bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-amber-200 uppercase tracking-wide mb-2">Capaian Pembelajaran (Bilangan)</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Membaca, menulis, dan membandingkan bilangan bulat, bilangan rasional, bilangan desimal, bilangan berpangkat bulat dan akar, bilangan dalam notasi ilmiah; menerapkan operasi aritmatika pada bilangan real, dan memberikan estimasi/perkiraan dalam menyelesaikan masalah (termasuk berkaitan dengan literasi finansial). Murid dapat menggunakan rasio (skala, proporsi, dan laju perubahan) dalam penyelesaian masalah.
+            </p>
+          </div>
+
+          <div className="mb-4 bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-amber-200 uppercase tracking-wide mb-2">Tujuan Pembelajaran</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Peserta didik dapat membaca, menulis dan membandingkan bilangan bulat.
+            </p>
+          </div>
+
+          <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-amber-200 uppercase tracking-wide mb-2">Topik Pembelajaran</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Konsep Dasar Bilangan Bulat (Positif, Negatif, Nol), Garis Bilangan, Operasi Hitung (Penjumlahan, Pengurangan, Perkalian, Pembagian), Aplikasi Bilangan Bulat dalam Kehidupan Sehari-hari.
+            </p>
+          </div>
+        </SectionCard>
+
+        {/* Praktik Pedagogis */}
+        <SectionCard
+          icon={Layers}
+          title="Praktik Pedagogis"
+          iconColor="bg-cyan-500"
+          borderColor="border-cyan-300/40"
+          bgColor="linear-gradient(135deg, rgba(6,182,212,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+            {praktikPedagogis.map((p, i) => (
+              <div key={i} className="bg-white/5 rounded-lg p-3 border border-cyan-300/30">
+                <div className="text-xs font-bold text-cyan-200 uppercase tracking-wide mb-1">{p.label}</div>
+                <p className="text-sm text-white font-body">{p.value}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-white/70 italic font-body bg-white/5 rounded-lg px-3 py-2 border border-white/10">
+            Pembelajaran ini dirancang untuk memfasilitasi pengalaman belajar yang berkesadaran, bermakna, dan menggembirakan, mendorong peserta didik untuk aktif mengonstruksi pengetahuan dan mengaplikasikannya dalam konteks nyata.
+          </p>
+        </SectionCard>
+
+        {/* Kemitraan & Lintas Disiplin */}
+        <SectionCard
+          icon={Globe}
+          title="Kemitraan / Lintas Disiplin Ilmu"
+          iconColor="bg-teal-500"
+          borderColor="border-teal-300/40"
+          bgColor="linear-gradient(135deg, rgba(20,184,166,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <ul className="space-y-3">
+            {kemitraan.map((k, i) => (
+              <li key={i} className="bg-white/5 rounded-lg px-3 py-2.5 border border-white/10">
+                <div className="text-sm font-semibold text-teal-100 font-body mb-1">{k.title}</div>
+                <p className="text-xs text-white/80 font-body leading-relaxed">{k.desc}</p>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+
+        {/* Lingkungan Pembelajaran */}
+        <SectionCard
+          icon={Lightbulb}
+          title="Lingkungan Pembelajaran"
+          iconColor="bg-yellow-500"
+          borderColor="border-yellow-300/40"
+          bgColor="linear-gradient(135deg, rgba(234,179,8,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <div className="mb-3 bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-yellow-200 uppercase tracking-wide mb-1">Budaya Belajar</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Dikembangkan iklim belajar yang aman, nyaman, dan saling memuliakan. Peserta didik diberikan kesempatan untuk menyampaikan pendapat dan bertanya dalam ruang kelas, mendorong diskusi terbuka. Guru memfasilitasi interaksi positif antar peserta didik.
+            </p>
+          </div>
+          <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-xs font-bold text-yellow-200 uppercase tracking-wide mb-1">Ruang Fisik</div>
+            <p className="text-sm text-white/85 font-body leading-relaxed">
+              Kelas diatur untuk memfasilitasi kerja kelompok dan diskusi (pengaturan meja kelompok).
+            </p>
+          </div>
+        </SectionCard>
+
+        {/* Pemanfaatan Digital */}
+        <SectionCard
+          icon={Monitor}
+          title="Pemanfaatan Digital"
+          iconColor="bg-blue-500"
+          borderColor="border-blue-300/40"
+          bgColor="linear-gradient(135deg, rgba(59,130,246,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <ul className="space-y-2">
+            {pemanfaatanDigital.map((d, i) => (
+              <li key={i} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2 border border-white/10">
+                <Monitor className="w-4 h-4 text-blue-300 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-white/85 font-body leading-relaxed">{d}</p>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+
+        {/* Langkah-Langkah Pembelajaran */}
+        <SectionCard
+          icon={Play}
+          title="Langkah-Langkah Pembelajaran"
+          iconColor="bg-rose-500"
+          borderColor="border-rose-300/40"
+          bgColor="linear-gradient(135deg, rgba(244,63,94,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          {/* AWAL */}
+          <div className="mb-5">
+            <div className="inline-block bg-rose-500/30 text-rose-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md mb-3 border border-rose-300/50">
+              AWAL · Berkesadaran, Bermakna, Menggembirakan
+            </div>
+            <ol className="space-y-2">
+              {langkahAwal.map((l, i) => (
+                <li key={i} className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2 border border-white/10">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-rose-500/20 border border-rose-300/40 flex items-center justify-center text-xs font-bold text-rose-200">
+                    {i + 1}
+                  </span>
+                  <p className="text-sm text-white/85 font-body leading-relaxed">{l}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {/* INTI */}
+          <div className="mb-5">
+            <div className="inline-block bg-rose-500/30 text-rose-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md mb-3 border border-rose-300/50">
+              INTI · Berkesadaran, Bermakna, Menyenangkan
+            </div>
+            <p className="text-xs text-white/70 italic mb-3">
+              Pada tahap ini, murid aktif terlibat dalam pengalaman belajar Memahami, Mengaplikasi, dan Merefleksi.
+            </p>
+            <div className="space-y-3">
+              {langkahInti.map((fase, i) => (
+                <div key={i} className={`bg-gradient-to-br ${fase.color} ${fase.border} border rounded-xl p-4`}>
+                  <div className={`font-display text-sm font-bold ${fase.text} mb-2`}>{fase.fase}</div>
+                  <ul className="space-y-1.5">
+                    {fase.items.map((item, j) => (
+                      <li key={j} className="flex items-start gap-2 text-xs text-white/85 font-body leading-relaxed">
+                        <span className={`w-1.5 h-1.5 rounded-full ${fase.text.replace("text-", "bg-")} mt-1.5 flex-shrink-0`}></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* PENUTUP */}
+          <div>
+            <div className="inline-block bg-rose-500/30 text-rose-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md mb-3 border border-rose-300/50">
+              PENUTUP · Berkesadaran, Bermakna, Menggembirakan
+            </div>
+            <ol className="space-y-2">
+              {langkahPenutup.map((l, i) => (
+                <li key={i} className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2 border border-white/10">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-rose-500/20 border border-rose-300/40 flex items-center justify-center text-xs font-bold text-rose-200">
+                    {i + 1}
+                  </span>
+                  <p className="text-sm text-white/85 font-body leading-relaxed">{l}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </SectionCard>
+
+        {/* Asesmen Pembelajaran */}
+        <SectionCard
+          icon={ClipboardCheck}
+          title="Asesmen Pembelajaran"
+          iconColor="bg-purple-500"
+          borderColor="border-purple-300/40"
+          bgColor="linear-gradient(135deg, rgba(168,85,247,0.10) 0%, rgba(15,23,42,0.65) 100%)"
+        >
+          <p className="text-xs text-white/70 italic mb-4">
+            Asesmen dalam pembelajaran mendalam dilaksanakan melalui kombinasi teknik dan instrumen.
+          </p>
+          <div className="space-y-3">
+            {asesmen.map((a, i) => (
+              <div key={i} className={`bg-gradient-to-br ${a.color} ${a.border} border rounded-xl p-4`}>
+                <div className={`font-display text-sm font-bold ${a.text} mb-2 flex items-center gap-2`}>
+                  <CheckSquare className="w-4 h-4" />
+                  {a.title}
+                </div>
+                <ul className="space-y-1.5">
+                  {a.items.map((item, j) => (
+                    <li key={j} className="flex items-start gap-2 text-xs text-white/85 font-body leading-relaxed">
+                      <span className={`w-1.5 h-1.5 rounded-full ${a.text.replace("text-", "bg-")} mt-1.5 flex-shrink-0`}></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+
+        {/* Tanda Tangan */}
+        <div className="bg-card/80 backdrop-blur border border-border rounded-2xl p-6 mt-6 animate-slide-up">
+          <div className="text-right text-sm text-white/80 font-body mb-6">
+            Bandung, &nbsp; Juli 2025
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="text-center">
+              <div className="text-xs text-white/60 font-body mb-1">Mengetahui,</div>
+              <div className="text-sm font-semibold text-white font-body mb-16">Kepala SMPN 28 Bandung</div>
+              <div className="text-sm font-bold text-white font-body border-t border-white/20 pt-2">
+                Dr. Hj. Yuli Nurhayati, S.Pd, M.Pd
+              </div>
+              <div className="text-xs text-white/60 font-body mt-1">NIP. 196607071989032007</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xs text-white/60 font-body mb-1">&nbsp;</div>
+              <div className="text-sm font-semibold text-white font-body mb-16">Guru Mata Pelajaran</div>
+              <div className="text-sm font-bold text-white font-body border-t border-white/20 pt-2">
+                Irawan Sutiawan, M.Pd
+              </div>
+              <div className="text-xs text-white/60 font-body mt-1">NIP. 198902272023211010</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Nav */}
+        <div className="text-center mt-10">
+          <button
+            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/rpp/bilangan-bulat"); }}
+            className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Kembali ke RPP Bilangan Bulat
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RPPPenjumlahanBilanganBulatPage;
