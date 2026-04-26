@@ -24,6 +24,7 @@ interface Enemy {
   shape: "saucer" | "fighter" | "bomber";
   pulse: number;
   shootTimer: number;
+  isBoss: boolean;
 }
 interface Particle {
   x: number; y: number; vx: number; vy: number;
@@ -630,6 +631,10 @@ function spawnWave(level: number, q: MQ): Enemy[] {
   const totalEnemies = 4 + level;
   const correctIdx = Math.floor(Math.random() * totalEnemies);
 
+  // Sesekali keluarkan satu boss berukuran besar (mulai level 2, peluang naik per level)
+  const bossChance = level >= 2 ? Math.min(0.35 + (level - 2) * 0.05, 0.7) : 0;
+  const bossIdx = Math.random() < bossChance ? Math.floor(Math.random() * totalEnemies) : -1;
+
   for (let i = 0; i < totalEnemies; i++) {
     const shape = shapes[Math.floor(Math.random() * shapes.length)];
     const { color, glow } = ENEMY_COLORS[shape];
@@ -638,20 +643,25 @@ function spawnWave(level: number, q: MQ): Enemy[] {
     if (!isCorrect) used.add(value);
     const col = Math.floor(Math.random() * 3);
     const row = Math.floor(Math.random() * 4);
-    const w = shape === "bomber" ? 46 : 40;
-    const h = shape === "bomber" ? 28 : 24;
-    const hp = 3;
+    const isBoss = i === bossIdx;
+    const baseW = shape === "bomber" ? 46 : 40;
+    const baseH = shape === "bomber" ? 28 : 24;
+    const w = isBoss ? Math.round(baseW * 1.75) : baseW;
+    const h = isBoss ? Math.round(baseH * 1.75) : baseH;
+    // Musuh biasa: 1 kali tembak. Boss: 4-7 kali tembak tergantung level.
+    const hp = isBoss ? 4 + Math.floor(level / 2) : 1;
     enemies.push({
       x: CW + 50 + col * 140 + Math.random() * 60,
       y: 60 + row * ((CH - 100) / 4) + Math.random() * 20,
       w, h, hp, maxHp: hp,
-      vx: -(0.6 + level * 0.15 + Math.random() * 0.3),
+      vx: -(0.6 + level * 0.15 + Math.random() * 0.3) * (isBoss ? 0.6 : 1),
       vy: (Math.random() - 0.5) * 0.5,
       value, correct: isCorrect,
       color,
       glowColor: glow,
       shape, pulse: 0,
       shootTimer: 60 + Math.random() * 120,
+      isBoss,
     });
   }
   return enemies;
@@ -918,16 +928,24 @@ const SpaceImpactPage = ({
           explode(b.x, b.y, e.glowColor);
           if (e.hp <= 0) {
             explode(e.x + e.w / 2, e.y + e.h / 2, e.glowColor, true);
+            if (e.isBoss) {
+              // Ledakan ekstra untuk boss
+              explode(e.x + e.w / 2, e.y + e.h / 2, "#ffffff", true);
+              explode(e.x + e.w / 4, e.y + e.h / 2, e.glowColor, true);
+              explode(e.x + (e.w * 3) / 4, e.y + e.h / 2, e.glowColor, true);
+            }
             enemiesRef.current.splice(i, 1);
             comboRef.current++;
-            const pts = (50 + levelRef.current * 20) * comboRef.current;
+            const baseP = 50 + levelRef.current * 20;
+            const pts = (e.isBoss ? baseP * 5 : baseP) * comboRef.current;
             scoreRef.current += pts;
             setScore(scoreRef.current);
             setCombo(comboRef.current);
-            showFlash(`💥 +${pts} (x${comboRef.current})`);
+            showFlash(e.isBoss ? `👹 BOSS HANCUR! +${pts} (x${comboRef.current})` : `💥 +${pts} (x${comboRef.current})`);
             playPopSound();
-            // maybe drop power-up
-            if (Math.random() < 0.25) {
+            // boss selalu drop power-up; musuh biasa sesekali
+            const dropChance = e.isBoss ? 1 : 0.25;
+            if (Math.random() < dropChance) {
               const types: Array<"shield" | "rapid" | "spread"> = ["shield", "rapid", "spread"];
               powerUpsRef.current.push({ x: e.x + e.w / 2, y: e.y + e.h / 2, type: types[Math.floor(Math.random() * 3)] });
             }
