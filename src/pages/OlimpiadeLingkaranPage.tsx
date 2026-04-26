@@ -343,36 +343,79 @@ const GarisSinggungSVG = () => (
   </svg>
 );
 
-const GSPersekutuanSVG = () => (
-  <svg viewBox="0 0 300 170" className="w-full max-w-[280px] mx-auto">
-    {/* Two circles */}
-    <circle cx="75" cy="90" r="55" fill="#0f172a" stroke="#7c3aed" strokeWidth="2" />
-    <circle cx="220" cy="90" r="35" fill="#0f172a" stroke="#0ea5e9" strokeWidth="2" />
-    {/* Center line */}
-    <line x1="75" y1="90" x2="220" y2="90" stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3" />
-    {/* GSPD (internal) */}
-    <line x1="140" y1="52" x2="175" y2="120" stroke="#f472b6" strokeWidth="2.2" />
-    <text x="148" y="45" fill="#f9a8d4" fontSize="10" fontWeight="bold">GSPD</text>
-    {/* GSPL (external upper) */}
-    <line x1="40" y1="42" x2="245" y2="58" stroke="#34d399" strokeWidth="2.2" />
-    <text x="50" y="34" fill="#6ee7b7" fontSize="10" fontWeight="bold">GSPL</text>
+const GSPLuarSVG = () => (
+  <svg viewBox="0 0 340 210" className="w-full max-w-[320px] mx-auto">
+    {/* Big circle: O₁(80, 110), R = 50 */}
+    <circle cx="80" cy="110" r="50" fill="#0f172a" stroke="#7c3aed" strokeWidth="2" />
+    {/* Small circle: O₂(250, 110), r = 30 */}
+    <circle cx="250" cy="110" r="30" fill="#0f172a" stroke="#0ea5e9" strokeWidth="2" />
+
+    {/* Center line O₁O₂ (dashed) */}
+    <line x1="80" y1="110" x2="250" y2="110" stroke="#94a3b8" strokeWidth="1.3" strokeDasharray="5,4" />
+
+    {/* Radii to tangent points (both on the upper side) */}
+    <line x1="80" y1="110" x2="85.88" y2="60.34" stroke="#a78bfa" strokeWidth="1.8" />
+    <line x1="250" y1="110" x2="253.53" y2="80.21" stroke="#7dd3fc" strokeWidth="1.8" />
+
+    {/* External common tangent line (touches both circles on the same side) */}
+    <line x1="85.88" y1="60.34" x2="253.53" y2="80.21" stroke="#34d399" strokeWidth="2.6" />
+
+    {/* Right-angle marks at tangent points */}
+    <path d="M84.94,68.29 L92.88,69.23 L93.83,61.28" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+    <path d="M252.59,88.15 L244.65,87.21 L245.59,79.27" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+
+    {/* Center & tangent points */}
+    <circle cx="80" cy="110" r="3.5" fill="#f8fafc" />
+    <circle cx="250" cy="110" r="3.5" fill="#f8fafc" />
+    <circle cx="85.88" cy="60.34" r="3" fill="#f8fafc" />
+    <circle cx="253.53" cy="80.21" r="3" fill="#f8fafc" />
+
     {/* Labels */}
-    <circle cx="75" cy="90" r="3" fill="#f8fafc" />
-    <circle cx="220" cy="90" r="3" fill="#f8fafc" />
-    <text x="79" y="87" fill="#c4b5fd" fontSize="11">O₁</text>
-    <text x="224" y="87" fill="#7dd3fc" fontSize="11">O₂</text>
-    <text x="40" y="88" fill="#c4b5fd" fontSize="10">R</text>
-    <text x="218" y="64" fill="#7dd3fc" fontSize="10">r</text>
-    <text x="130" y="100" fill="#94a3b8" fontSize="9">p</text>
+    <text x="64" y="125" fill="#c4b5fd" fontSize="13" fontWeight="bold">O₁</text>
+    <text x="242" y="125" fill="#7dd3fc" fontSize="13" fontWeight="bold">O₂</text>
+    <text x="100" y="92" fill="#a78bfa" fontSize="12" fontStyle="italic" fontWeight="bold">R</text>
+    <text x="258" y="100" fill="#7dd3fc" fontSize="12" fontStyle="italic" fontWeight="bold">r</text>
+    <text x="160" y="125" fill="#94a3b8" fontSize="12" fontStyle="italic" fontWeight="bold">p</text>
+    <text x="160" y="55" fill="#6ee7b7" fontSize="12" fontStyle="italic" fontWeight="bold">l</text>
+    <text x="138" y="195" fill="#6ee7b7" fontSize="11" textAnchor="middle" fontStyle="italic">GSPL — Garis Singgung Persekutuan Luar</text>
+  </svg>
+);
 
-    {/* Formula boxes */}
-    <rect x="0" y="130" width="145" height="38" rx="6" fill="#1e1b4b" stroke="#7c3aed" strokeWidth="1" />
-    <text x="72" y="145" fill="#c4b5fd" fontSize="9" textAnchor="middle" fontWeight="bold">GSPD (dalam)</text>
-    <text x="72" y="161" fill="#f9a8d4" fontSize="9" textAnchor="middle">d² = p² − (R + r)²</text>
+const GSPDalamSVG = () => (
+  <svg viewBox="0 0 340 220" className="w-full max-w-[320px] mx-auto">
+    {/* Big circle: O₁(80, 110), R = 50 */}
+    <circle cx="80" cy="110" r="50" fill="#0f172a" stroke="#7c3aed" strokeWidth="2" />
+    {/* Small circle: O₂(250, 110), r = 30 */}
+    <circle cx="250" cy="110" r="30" fill="#0f172a" stroke="#0ea5e9" strokeWidth="2" />
 
-    <rect x="152" y="130" width="145" height="38" rx="6" fill="#1e1b4b" stroke="#0e7490" strokeWidth="1" />
-    <text x="224" y="145" fill="#7dd3fc" fontSize="9" textAnchor="middle" fontWeight="bold">GSPL (luar)</text>
-    <text x="224" y="161" fill="#6ee7b7" fontSize="9" textAnchor="middle">l² = p² − (R − r)²</text>
+    {/* Center line O₁O₂ (dashed) */}
+    <line x1="80" y1="110" x2="250" y2="110" stroke="#94a3b8" strokeWidth="1.3" strokeDasharray="5,4" />
+
+    {/* Radii to tangent points (opposite sides) */}
+    <line x1="80" y1="110" x2="103.53" y2="65.88" stroke="#a78bfa" strokeWidth="1.8" />
+    <line x1="250" y1="110" x2="235.88" y2="136.47" stroke="#7dd3fc" strokeWidth="1.8" />
+
+    {/* Internal common tangent line (crosses between the two circles) */}
+    <line x1="103.53" y1="65.88" x2="235.88" y2="136.47" stroke="#f472b6" strokeWidth="2.6" />
+
+    {/* Right-angle marks at tangent points */}
+    <path d="M99.77,72.94 L106.83,76.70 L110.59,69.64" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+    <path d="M239.64,129.41 L232.58,125.65 L228.82,132.71" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+
+    {/* Center & tangent points */}
+    <circle cx="80" cy="110" r="3.5" fill="#f8fafc" />
+    <circle cx="250" cy="110" r="3.5" fill="#f8fafc" />
+    <circle cx="103.53" cy="65.88" r="3" fill="#f8fafc" />
+    <circle cx="235.88" cy="136.47" r="3" fill="#f8fafc" />
+
+    {/* Labels */}
+    <text x="62" y="125" fill="#c4b5fd" fontSize="13" fontWeight="bold">O₁</text>
+    <text x="252" y="125" fill="#7dd3fc" fontSize="13" fontWeight="bold">O₂</text>
+    <text x="115" y="95" fill="#a78bfa" fontSize="12" fontStyle="italic" fontWeight="bold">R</text>
+    <text x="222" y="130" fill="#7dd3fc" fontSize="12" fontStyle="italic" fontWeight="bold">r</text>
+    <text x="160" y="125" fill="#94a3b8" fontSize="12" fontStyle="italic" fontWeight="bold">p</text>
+    <text x="175" y="108" fill="#f9a8d4" fontSize="12" fontStyle="italic" fontWeight="bold">d</text>
+    <text x="138" y="205" fill="#f9a8d4" fontSize="11" textAnchor="middle" fontStyle="italic">GSPD — Garis Singgung Persekutuan Dalam</text>
   </svg>
 );
 
@@ -614,22 +657,31 @@ const materiSections: MateriSection[] = [
 
         {/* GSPD & GSPL */}
         <p className="font-body text-xs text-white/70 font-semibold pt-1">Garis Singgung Persekutuan Dua Lingkaran</p>
-        <GSPersekutuanSVG />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl px-4 py-3">
-            <p className="font-body text-xs text-purple-300 font-bold mb-2">GSPD (Dalam)</p>
-            <div className="text-center mb-2">
-              <M math="d^2 = p^2 - (R + r)^2" />
-            </div>
-            <p className="font-body text-xs text-white/50">p = jarak pusat, R & r = jari-jari</p>
+
+        {/* GSPL — Luar */}
+        <div className="bg-cyan-500/10 border border-cyan-500/25 rounded-2xl px-4 py-3 space-y-3">
+          <p className="font-body text-xs text-cyan-300 font-bold">GSPL — Garis Singgung Persekutuan Luar</p>
+          <GSPLuarSVG />
+          <div className="text-center">
+            <M math="l^2 = p^2 - (R - r)^2" />
           </div>
-          <div className="bg-cyan-500/10 border border-cyan-500/25 rounded-2xl px-4 py-3">
-            <p className="font-body text-xs text-cyan-300 font-bold mb-2">GSPL (Luar)</p>
-            <div className="text-center mb-2">
-              <M math="l^2 = p^2 - (R - r)^2" />
-            </div>
-            <p className="font-body text-xs text-white/50">p = jarak pusat, R & r = jari-jari</p>
+          <p className="font-body text-xs text-white/55 leading-relaxed">
+            Garis singgung yang menyentuh kedua lingkaran pada sisi yang sama (tidak memotong ruas <em>O₁O₂</em>).
+            <span className="text-white/70"> p = jarak pusat, R & r = jari-jari.</span>
+          </p>
+        </div>
+
+        {/* GSPD — Dalam */}
+        <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl px-4 py-3 space-y-3">
+          <p className="font-body text-xs text-purple-300 font-bold">GSPD — Garis Singgung Persekutuan Dalam</p>
+          <GSPDalamSVG />
+          <div className="text-center">
+            <M math="d^2 = p^2 - (R + r)^2" />
           </div>
+          <p className="font-body text-xs text-white/55 leading-relaxed">
+            Garis singgung yang melintas di antara dua lingkaran (memotong ruas <em>O₁O₂</em>).
+            <span className="text-white/70"> p = jarak pusat, R & r = jari-jari.</span>
+          </p>
         </div>
         <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-2">
           <p className="font-body text-xs text-white/55 leading-relaxed">
