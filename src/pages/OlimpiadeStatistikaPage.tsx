@@ -25,6 +25,390 @@ const renderLines = (text: string) =>
     <div key={i} className="mb-1">{renderWithLatex(line)}</div>
   ));
 
+const FrequencyTable = ({
+  title,
+  headers,
+  rows,
+}: {
+  title: string;
+  headers: [string, string];
+  rows: { label: string | number; value: string | number }[];
+}) => {
+  const total = rows.reduce((s, r) => s + (typeof r.value === 'number' ? r.value : 0), 0);
+  return (
+    <div className="my-3 rounded-xl border border-cyan-400/30 bg-white/5 overflow-hidden">
+      <div className="px-3 py-2 bg-cyan-500/15 border-b border-cyan-400/20 text-center">
+        <span className="font-display text-xs text-cyan-200 font-bold">{title}</span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs font-body text-white/85">
+          <thead>
+            <tr className="bg-white/5 border-b border-white/10">
+              <th className="px-3 py-2 text-center font-display text-cyan-300 font-semibold">{headers[0]}</th>
+              <th className="px-3 py-2 text-center font-display text-cyan-300 font-semibold">{headers[1]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => (
+              <tr key={i} className="border-b border-white/5 last:border-b-0">
+                <td className="px-3 py-1.5 text-center">{r.label}</td>
+                <td className="px-3 py-1.5 text-center">{r.value}</td>
+              </tr>
+            ))}
+            {total > 0 && (
+              <tr className="bg-cyan-500/10 border-t border-cyan-400/20">
+                <td className="px-3 py-1.5 text-center font-display font-bold text-cyan-200">Jumlah</td>
+                <td className="px-3 py-1.5 text-center font-display font-bold text-cyan-200">{total}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+const BarChart = ({
+  title,
+  data,
+  xLabel,
+  yLabel,
+}: {
+  title: string;
+  data: { label: string | number; value: number }[];
+  xLabel?: string;
+  yLabel?: string;
+}) => {
+  const W = 320;
+  const H = 220;
+  const padL = 36;
+  const padR = 14;
+  const padT = 16;
+  const padB = 36;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const maxV = Math.max(...data.map(d => d.value));
+  const yMax = Math.ceil(maxV / 2) * 2 + 2;
+  const barW = chartW / data.length * 0.6;
+  const gap = chartW / data.length;
+
+  const yTicks = Array.from({ length: yMax + 1 }, (_, i) => i).filter(v => v % Math.max(1, Math.ceil(yMax / 6)) === 0);
+
+  return (
+    <div className="my-3 rounded-xl border border-cyan-400/30 bg-white/5 p-3">
+      <p className="text-xs text-center text-cyan-200 font-display font-bold mb-2">{title}</p>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm mx-auto block">
+        {/* Y axis */}
+        <line x1={padL} y1={padT} x2={padL} y2={H - padB} stroke="#94a3b8" strokeWidth="1" />
+        {/* X axis */}
+        <line x1={padL} y1={H - padB} x2={W - padR} y2={H - padB} stroke="#94a3b8" strokeWidth="1" />
+
+        {/* Y ticks + gridlines */}
+        {yTicks.map(t => {
+          const y = H - padB - (t / yMax) * chartH;
+          return (
+            <g key={t}>
+              <line x1={padL - 3} y1={y} x2={padL} y2={y} stroke="#94a3b8" strokeWidth="1" />
+              <line x1={padL} y1={y} x2={W - padR} y2={y} stroke="#475569" strokeWidth="0.4" strokeDasharray="2 3" />
+              <text x={padL - 6} y={y + 3} textAnchor="end" fontSize="9" fill="#cbd5e1">{t}</text>
+            </g>
+          );
+        })}
+
+        {/* Bars */}
+        {data.map((d, i) => {
+          const x = padL + gap * i + (gap - barW) / 2;
+          const h = (d.value / yMax) * chartH;
+          const y = H - padB - h;
+          return (
+            <g key={i}>
+              <rect x={x} y={y} width={barW} height={h} fill="#22d3ee" opacity="0.85" rx="2" />
+              <text x={x + barW / 2} y={y - 4} textAnchor="middle" fontSize="10" fill="#fbbf24" fontWeight="bold">{d.value}</text>
+              <text x={x + barW / 2} y={H - padB + 14} textAnchor="middle" fontSize="10" fill="#e2e8f0">{d.label}</text>
+            </g>
+          );
+        })}
+
+        {/* Axis labels */}
+        {xLabel && <text x={W / 2} y={H - 4} textAnchor="middle" fontSize="10" fill="#94a3b8">{xLabel}</text>}
+        {yLabel && (
+          <text x={10} y={H / 2} textAnchor="middle" fontSize="10" fill="#94a3b8" transform={`rotate(-90 10 ${H / 2})`}>{yLabel}</text>
+        )}
+      </svg>
+    </div>
+  );
+};
+
+const PIE_COLORS = ['#22d3ee', '#f59e0b', '#a78bfa', '#34d399', '#f472b6', '#60a5fa', '#fbbf24'];
+
+const polar = (cx: number, cy: number, r: number, deg: number) => {
+  const rad = ((deg - 90) * Math.PI) / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+};
+
+const PieChart = ({
+  title,
+  data,
+}: {
+  title: string;
+  data: { label: string; value: number; sub?: string }[];
+}) => {
+  const total = data.reduce((s, d) => s + d.value, 0);
+  const cx = 100;
+  const cy = 100;
+  const r = 80;
+  let startAngle = 0;
+
+  return (
+    <div className="my-3 rounded-xl border border-cyan-400/30 bg-white/5 p-3">
+      <p className="text-xs text-center text-cyan-200 font-display font-bold mb-2">{title}</p>
+      <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
+        <svg viewBox="0 0 200 200" className="w-44 h-44">
+          {data.map((d, i) => {
+            const angle = (d.value / total) * 360;
+            const endAngle = startAngle + angle;
+            const start = polar(cx, cy, r, startAngle);
+            const end = polar(cx, cy, r, endAngle);
+            const largeArc = angle > 180 ? 1 : 0;
+            const path = `M ${cx} ${cy} L ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} 1 ${end.x} ${end.y} Z`;
+            const labelAngle = startAngle + angle / 2;
+            const labelPos = polar(cx, cy, r * 0.6, labelAngle);
+            const result = (
+              <g key={i}>
+                <path d={path} fill={PIE_COLORS[i % PIE_COLORS.length]} stroke="#0f172a" strokeWidth="1" opacity="0.9" />
+                {angle >= 18 && (
+                  <text x={labelPos.x} y={labelPos.y + 3} textAnchor="middle" fontSize="10" fill="#0f172a" fontWeight="bold">
+                    {d.sub ?? `${d.value}`}
+                  </text>
+                )}
+              </g>
+            );
+            startAngle = endAngle;
+            return result;
+          })}
+        </svg>
+        <ul className="text-xs font-body text-white/85 space-y-1">
+          {data.map((d, i) => (
+            <li key={i} className="flex items-center gap-2">
+              <span className="inline-block w-3 h-3 rounded-sm" style={{ background: PIE_COLORS[i % PIE_COLORS.length] }} />
+              <span>{d.label}{d.sub ? ` (${d.sub})` : ''}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+const LineChart = ({
+  title,
+  data,
+  xLabel,
+  yLabel,
+  yFormatter,
+}: {
+  title: string;
+  data: { label: string | number; value: number }[];
+  xLabel?: string;
+  yLabel?: string;
+  yFormatter?: (v: number) => string;
+}) => {
+  const W = 340;
+  const H = 220;
+  const padL = 56;
+  const padR = 14;
+  const padT = 16;
+  const padB = 36;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const maxV = Math.max(...data.map(d => d.value));
+  const minV = Math.min(...data.map(d => d.value));
+  const range = maxV - minV || 1;
+  const yMin = Math.floor((minV - range * 0.15) / 1000000) * 1000000;
+  const yMax = Math.ceil((maxV + range * 0.15) / 1000000) * 1000000;
+  const yRange = yMax - yMin || 1;
+
+  const xStep = data.length > 1 ? chartW / (data.length - 1) : 0;
+  const points = data.map((d, i) => ({
+    x: padL + i * xStep,
+    y: padT + chartH - ((d.value - yMin) / yRange) * chartH,
+    ...d,
+  }));
+
+  const yTickCount = 5;
+  const yTicks = Array.from({ length: yTickCount + 1 }, (_, i) => yMin + (i * yRange) / yTickCount);
+
+  return (
+    <div className="my-3 rounded-xl border border-cyan-400/30 bg-white/5 p-3">
+      <p className="text-xs text-center text-cyan-200 font-display font-bold mb-2">{title}</p>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm mx-auto block">
+        {/* Axes */}
+        <line x1={padL} y1={padT} x2={padL} y2={H - padB} stroke="#94a3b8" strokeWidth="1" />
+        <line x1={padL} y1={H - padB} x2={W - padR} y2={H - padB} stroke="#94a3b8" strokeWidth="1" />
+
+        {/* Y ticks */}
+        {yTicks.map((t, i) => {
+          const y = H - padB - ((t - yMin) / yRange) * chartH;
+          return (
+            <g key={i}>
+              <line x1={padL - 3} y1={y} x2={padL} y2={y} stroke="#94a3b8" strokeWidth="1" />
+              <line x1={padL} y1={y} x2={W - padR} y2={y} stroke="#475569" strokeWidth="0.4" strokeDasharray="2 3" />
+              <text x={padL - 5} y={y + 3} textAnchor="end" fontSize="9" fill="#cbd5e1">
+                {yFormatter ? yFormatter(t) : t}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Line */}
+        <polyline
+          points={points.map(p => `${p.x},${p.y}`).join(' ')}
+          fill="none"
+          stroke="#22d3ee"
+          strokeWidth="2"
+        />
+
+        {/* Points + labels */}
+        {points.map((p, i) => (
+          <g key={i}>
+            <circle cx={p.x} cy={p.y} r="4" fill="#fbbf24" stroke="#0f172a" strokeWidth="1" />
+            <text x={p.x} y={p.y - 8} textAnchor="middle" fontSize="9" fill="#fbbf24" fontWeight="bold">
+              {yFormatter ? yFormatter(p.value) : p.value}
+            </text>
+            <text x={p.x} y={H - padB + 14} textAnchor="middle" fontSize="10" fill="#e2e8f0">{p.label}</text>
+          </g>
+        ))}
+
+        {/* Axis labels */}
+        {xLabel && <text x={(padL + W - padR) / 2} y={H - 4} textAnchor="middle" fontSize="10" fill="#94a3b8">{xLabel}</text>}
+        {yLabel && (
+          <text x={14} y={H / 2} textAnchor="middle" fontSize="9" fill="#94a3b8" transform={`rotate(-90 14 ${H / 2})`}>{yLabel}</text>
+        )}
+      </svg>
+    </div>
+  );
+};
+
+const formatRupiahShort = (v: number) => {
+  if (v >= 1_000_000_000) return `${(v / 1_000_000_000).toFixed(1)} M`;
+  if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(1)} jt`;
+  if (v >= 1_000) return `${(v / 1_000).toFixed(0)} rb`;
+  return `${v}`;
+};
+
+const renderDasarVisual = (no: number): React.ReactNode => {
+  switch (no) {
+    case 3:
+      return (
+        <FrequencyTable
+          title="Tabel Frekuensi Nilai Matematika Siswa"
+          headers={["Nilai", "Banyak Siswa"]}
+          rows={[
+            { label: 4, value: 2 },
+            { label: 5, value: 4 },
+            { label: 6, value: 5 },
+            { label: 7, value: 5 },
+            { label: 8, value: 9 },
+            { label: 9, value: 3 },
+            { label: 10, value: 4 },
+          ]}
+        />
+      );
+    case 4:
+      return (
+        <FrequencyTable
+          title="Tabel Frekuensi Nilai Siswa"
+          headers={["Nilai", "Frekuensi"]}
+          rows={[
+            { label: 3, value: 2 },
+            { label: 4, value: 5 },
+            { label: 5, value: 5 },
+            { label: 6, value: 3 },
+            { label: 7, value: 4 },
+            { label: 8, value: 4 },
+            { label: 9, value: 4 },
+            { label: 10, value: 3 },
+          ]}
+        />
+      );
+    case 5:
+      return (
+        <BarChart
+          title="Diagram Batang Nilai Ulangan Matematika 20 Siswa"
+          xLabel="Nilai"
+          yLabel="Banyak Siswa"
+          data={[
+            { label: 6, value: 2 },
+            { label: 7, value: 4 },
+            { label: 8, value: 6 },
+            { label: 9, value: 5 },
+            { label: 10, value: 3 },
+          ]}
+        />
+      );
+    case 9:
+      return (
+        <PieChart
+          title="Diagram Lingkaran Kegemaran Mata Pelajaran"
+          data={[
+            { label: 'Matematika', value: 30, sub: '30°' },
+            { label: 'IPA', value: 54, sub: '54°' },
+            { label: 'IPS', value: 48, sub: '48°' },
+            { label: 'Bahasa', value: 72, sub: '72°' },
+            { label: 'Penjas', value: 156, sub: 'X°' },
+          ]}
+        />
+      );
+    case 10:
+      return (
+        <PieChart
+          title="Diagram Lingkaran Koleksi Buku Perpustakaan"
+          data={[
+            { label: 'Kesenian', value: 20, sub: '20%' },
+            { label: 'Kesehatan', value: 18, sub: '18%' },
+            { label: 'Pertanian', value: 25, sub: '25%' },
+            { label: 'Teknologi', value: 22, sub: '22%' },
+            { label: 'Lainnya', value: 15, sub: '15%' },
+          ]}
+        />
+      );
+    case 11:
+      return (
+        <LineChart
+          title="Diagram Garis Penyusutan Harga Mobil (5 Tahun)"
+          xLabel="Tahun"
+          yLabel="Harga (Rupiah)"
+          yFormatter={formatRupiahShort}
+          data={[
+            { label: 2015, value: 110_000_000 },
+            { label: 2016, value: 102_500_000 },
+            { label: 2017, value: 95_000_000 },
+            { label: 2018, value: 87_500_000 },
+            { label: 2019, value: 80_000_000 },
+          ]}
+        />
+      );
+    case 12:
+      return (
+        <FrequencyTable
+          title="Tabel Perolehan Nilai Siswa"
+          headers={["Nilai", "Frekuensi"]}
+          rows={[
+            { label: 3, value: 2 },
+            { label: 4, value: 3 },
+            { label: 5, value: 4 },
+            { label: 6, value: 5 },
+            { label: 7, value: 3 },
+            { label: 8, value: 2 },
+            { label: 9, value: 1 },
+          ]}
+        />
+      );
+    default:
+      return null;
+  }
+};
+
 const FormulaBox = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="my-3 rounded-xl overflow-hidden border border-cyan-400/30 shadow-[0_0_18px_rgba(6,182,212,0.15)]">
     <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/25 to-purple-500/15 px-4 py-2 border-b border-cyan-400/20">
@@ -819,6 +1203,7 @@ const OlimpiadeStatistikaPage = () => {
               const key = `d-${soal.no}`;
               const open = openPembahasan.has(key);
               const pembahasan = pembahasanDasar[soal.no];
+              const visual = renderDasarVisual(soal.no);
               return (
                 <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-cyan-400/20 transition-colors">
                   <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -830,6 +1215,7 @@ const OlimpiadeStatistikaPage = () => {
                       </span>
                     ))}
                   </div>
+                  {visual}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {soal.options.map((opt, j) => (
