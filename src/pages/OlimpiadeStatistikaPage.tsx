@@ -9,9 +9,14 @@ import { InlineMath } from 'react-katex';
 import { pembahasanDasar } from "@/data/statistikaPembahasanDasar";
 import { pembahasanOlimpiade } from "@/data/statistikaPembahasanOlimpiade";
 import statistikaSoal13Img from "@assets/image_1777276565289.png";
+import statistikaOlimpiadeSoal15Img from "@assets/image_1777276641804.png";
 
 const dasarImages: Record<number, string> = {
   13: statistikaSoal13Img,
+};
+
+const olimpiadeImages: Record<number, string> = {
+  15: statistikaOlimpiadeSoal15Img,
 };
 
 const renderWithLatex = (text: string) => {
@@ -1306,6 +1311,15 @@ const OlimpiadeStatistikaPage = () => {
                       </span>
                     ))}
                   </div>
+                  {olimpiadeImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={olimpiadeImages[soal.no]}
+                        alt={`Gambar soal olimpiade ${soal.no}`}
+                        className="max-w-[420px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                      />
+                    </div>
+                  )}
                   {visual}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
