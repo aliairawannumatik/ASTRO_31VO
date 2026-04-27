@@ -7,6 +7,12 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { pembahasanDasar, pembahasanOlimpiade } from "@/data/bangunRuangSisiDatarPembahasan";
+import olimpiadeImg12 from "@assets/12_1777272725475.png";
+import olimpiadeImg14 from "@assets/14_1777272725476.png";
+import olimpiadeImg16 from "@assets/16_1777272725476.png";
+import olimpiadeImg20 from "@assets/20_1777272725477.png";
+import olimpiadeImg21 from "@assets/21_1777272725477.png";
+import olimpiadeImg22 from "@assets/22_1777272725478.png";
 
 const M = ({ math }: { math: string }) => <InlineMath math={math} />;
 
@@ -557,6 +563,15 @@ const dasarOptionImages: Record<number, Record<string, string>> = {
   },
 };
 
+const olimpiadeImages: Record<number, string> = {
+  12: olimpiadeImg12,
+  14: olimpiadeImg14,
+  16: olimpiadeImg16,
+  20: olimpiadeImg20,
+  21: olimpiadeImg21,
+  22: olimpiadeImg22,
+};
+
 /* ─────────────────────────────────────────────────────────
    LATIHAN DATA
 ───────────────────────────────────────────────────────── */
@@ -822,7 +837,9 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
         {/* LATIHAN OLIMPIADE TAB */}
         {activeTab === "olimpiade" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanOlimpiade.map((soal) => (
+            {latihanOlimpiade.map((soal) => {
+              const olimImg = olimpiadeImages[soal.no];
+              return (
               <div key={soal.no}
                 className="relative rounded-2xl overflow-hidden border border-amber-500/20">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 to-slate-900/60 backdrop-blur" />
@@ -838,6 +855,15 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                       </span>
                     ))}
                   </div>
+                  {olimImg && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={olimImg}
+                        alt={`Gambar soal olimpiade ${soal.no}`}
+                        className="max-w-[320px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                      />
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                       {soal.options.map((opt, j) => (
@@ -872,7 +898,8 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                   )}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
