@@ -81,6 +81,11 @@ import RefleksiTGLKPDPage from "./pages/lkpd/kelas9/transformasi-geometri/Reflek
 import RotasiTGLKPDPage from "./pages/lkpd/kelas9/transformasi-geometri/RotasiLKPDPage";
 import DilatasiTGLKPDPage from "./pages/lkpd/kelas9/transformasi-geometri/DilatasiLKPDPage";
 import BangunRuangSisiLengkungLKPDMenuPage from "./pages/lkpd/kelas9/BangunRuangSisiLengkungMenuPage";
+import TabungBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/TabungLKPDPage";
+import KerucutBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/KerucutLKPDPage";
+import BolaBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/BolaLKPDPage";
+import PerubahanLuasVolumeBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/PerubahanLuasVolumeLKPDPage";
+import GabunganBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/GabunganBRSLLKPDPage";
 import StatistikaLKPDMenuPage from "./pages/lkpd/kelas9/StatistikaMenuPage";
 import PeluangLKPDMenuPage from "./pages/lkpd/kelas9/PeluangMenuPage";
 import PersamaanKuadratLKPDMenuPage from "./pages/lkpd/kelas9/PersamaanKuadratMenuPage";
@@ -929,6 +934,11 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-9/transformasi-geometri/rotasi" element={<RotasiTGLKPDPage />} />
       <Route path="/lkpd/kelas-9/transformasi-geometri/dilatasi" element={<DilatasiTGLKPDPage />} />
       <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungBRSLLKPDPage />} />
+      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutBRSLLKPDPage />} />
+      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaBRSLLKPDPage />} />
+      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/perubahan-luas-volume" element={<PerubahanLuasVolumeBRSLLKPDPage />} />
+      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganBRSLLKPDPage />} />
       <Route path="/lkpd/kelas-9/statistika" element={<StatistikaLKPDMenuPage />} />
       <Route path="/lkpd/kelas-9/peluang" element={<PeluangLKPDMenuPage />} />
       <Route path="/lkpd/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratLKPDMenuPage />} />
