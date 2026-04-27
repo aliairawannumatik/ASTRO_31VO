@@ -10,13 +10,16 @@ import { pembahasanDasar } from "@/data/statistikaPembahasanDasar";
 import { pembahasanOlimpiade } from "@/data/statistikaPembahasanOlimpiade";
 import statistikaSoal13Img from "@assets/image_1777276565289.png";
 import statistikaOlimpiadeSoal15Img from "@assets/image_1777276641804.png";
+import statistikaOlimpiadeSoal18ImgA from "@assets/image_1777276668610.png";
+import statistikaOlimpiadeSoal18ImgB from "@assets/image_1777276672599.png";
 
 const dasarImages: Record<number, string> = {
   13: statistikaSoal13Img,
 };
 
-const olimpiadeImages: Record<number, string> = {
-  15: statistikaOlimpiadeSoal15Img,
+const olimpiadeImages: Record<number, string[]> = {
+  15: [statistikaOlimpiadeSoal15Img],
+  18: [statistikaOlimpiadeSoal18ImgA, statistikaOlimpiadeSoal18ImgB],
 };
 
 const renderWithLatex = (text: string) => {
@@ -1312,12 +1315,15 @@ const OlimpiadeStatistikaPage = () => {
                     ))}
                   </div>
                   {olimpiadeImages[soal.no] && (
-                    <div className="flex justify-center mb-3">
-                      <img
-                        src={olimpiadeImages[soal.no]}
-                        alt={`Gambar soal olimpiade ${soal.no}`}
-                        className="max-w-[420px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
-                      />
+                    <div className="flex flex-col items-center gap-3 mb-3">
+                      {olimpiadeImages[soal.no].map((src, i) => (
+                        <img
+                          key={i}
+                          src={src}
+                          alt={`Gambar soal olimpiade ${soal.no}${olimpiadeImages[soal.no].length > 1 ? ` (${i + 1})` : ''}`}
+                          className="max-w-[420px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                        />
+                      ))}
                     </div>
                   )}
                   {visual}
