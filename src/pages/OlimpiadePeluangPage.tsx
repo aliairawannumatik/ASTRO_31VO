@@ -884,11 +884,55 @@ const DiagramSurveiInvestasi = () => {
   );
 };
 
+const TabelTigaBaris8Kolom = () => {
+  const cols = 8;
+  const rows = 3;
+  const cellW = 40;
+  const cellH = 28;
+  const padX = 8;
+  const padY = 8;
+  const w = cols * cellW + padX * 2;
+  const h = rows * cellH + padY * 2;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[420px] mx-auto my-3 rounded-lg bg-white" xmlns="http://www.w3.org/2000/svg">
+      <rect x={0} y={0} width={w} height={h} fill="#ffffff" />
+      {Array.from({ length: rows }).map((_, r) =>
+        Array.from({ length: cols }).map((_, c) => (
+          <rect
+            key={`${r}-${c}`}
+            x={padX + c * cellW}
+            y={padY + r * cellH}
+            width={cellW}
+            height={cellH}
+            fill="none"
+            stroke="#1f2937"
+            strokeWidth={1}
+          />
+        ))
+      )}
+      {Array.from({ length: cols }).map((_, c) => (
+        <text
+          key={`n-${c}`}
+          x={padX + c * cellW + cellW / 2}
+          y={padY + cellH / 2 + 5}
+          textAnchor="middle"
+          fontSize={14}
+          fontFamily="serif"
+          fill="#0f172a"
+        >
+          {c + 1}
+        </text>
+      ))}
+    </svg>
+  );
+};
+
 const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
   4:  <img src="/peluang_fix_olimp.png" alt="Diagram Grid P ke Q" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
   10: <DiagramLingkaranAngka />,
   45: <DiagramTabelSMS />,
   70: <DiagramSurveiInvestasi />,
+  71: <TabelTigaBaris8Kolom />,
   87: <img src="/peluang_olimp_87.png" alt="Diagram Soal 87" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
 };
 
