@@ -50,6 +50,7 @@ import SegitigaDanSegiempatMenuPage from "./pages/lkpd/kelas7/SegitigaDanSegiemp
 import PolaBilanganLKPDPage from "./pages/lkpd/kelas8/pola-bilangan/PolaBilanganLKPDPage";
 import PolaBilanganMenuPage from "./pages/lkpd/kelas8/PolaBilanganMenuPage";
 import KoordinatCartesiusLKPDMenuPage from "./pages/lkpd/kelas8/KoordinatCartesiusMenuPage";
+import KoordinatCartesiusLKPDPage from "./pages/lkpd/kelas8/koordinat-cartesius/KoordinatCartesiusLKPDPage";
 import RelasiFungsiLKPDMenuPage from "./pages/lkpd/kelas8/RelasiFungsiMenuPage";
 import SPLDVLKPDMenuPage from "./pages/lkpd/kelas8/SPLDVMenuPage";
 import PersamaanGarisLurusLKPDMenuPage from "./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage";
@@ -877,6 +878,7 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-8/pola-bilangan" element={<PolaBilanganMenuPage />} />
       <Route path="/lkpd/kelas-8/pola-bilangan/lkpd" element={<PolaBilanganLKPDPage />} />
       <Route path="/lkpd/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/koordinat-cartesius/lkpd" element={<KoordinatCartesiusLKPDPage />} />
       <Route path="/lkpd/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/spldv" element={<SPLDVLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
