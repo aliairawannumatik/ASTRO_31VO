@@ -12,6 +12,11 @@ import statistikaSoal13Img from "@assets/image_1777276565289.png";
 import statistikaOlimpiadeSoal15Img from "@assets/image_1777276641804.png";
 import statistikaOlimpiadeSoal18ImgA from "@assets/image_1777276668610.png";
 import statistikaOlimpiadeSoal18ImgB from "@assets/image_1777276672599.png";
+import statistikaOlimpiadeSoal21Img from "@assets/21_1777276795043.png";
+import statistikaOlimpiadeSoal24Img from "@assets/24_1777276795043.png";
+import statistikaOlimpiadeSoal25Img from "@assets/25_1777276795044.png";
+import statistikaOlimpiadeSoal29Img from "@assets/29_1777276795044.png";
+import statistikaOlimpiadeSoal34Img from "@assets/34_1777276795044.png";
 
 const dasarImages: Record<number, string> = {
   13: statistikaSoal13Img,
@@ -20,6 +25,11 @@ const dasarImages: Record<number, string> = {
 const olimpiadeImages: Record<number, string[]> = {
   15: [statistikaOlimpiadeSoal15Img],
   18: [statistikaOlimpiadeSoal18ImgA, statistikaOlimpiadeSoal18ImgB],
+  21: [statistikaOlimpiadeSoal21Img],
+  24: [statistikaOlimpiadeSoal24Img],
+  25: [statistikaOlimpiadeSoal25Img],
+  29: [statistikaOlimpiadeSoal29Img],
+  34: [statistikaOlimpiadeSoal34Img],
 };
 
 const renderWithLatex = (text: string) => {
