@@ -34,12 +34,14 @@ const FrequencyTable = ({
   title,
   headers,
   rows,
+  showTotal = true,
 }: {
   title: string;
   headers: [string, string];
   rows: { label: string | number; value: string | number }[];
+  showTotal?: boolean;
 }) => {
-  const total = rows.reduce((s, r) => s + (typeof r.value === 'number' ? r.value : 0), 0);
+  const total = showTotal ? rows.reduce((s, r) => s + (typeof r.value === 'number' ? r.value : 0), 0) : 0;
   return (
     <div className="my-3 rounded-xl border border-cyan-400/30 bg-white/5 overflow-hidden">
       <div className="px-3 py-2 bg-cyan-500/15 border-b border-cyan-400/20 text-center">
@@ -406,6 +408,28 @@ const renderDasarVisual = (no: number): React.ReactNode => {
             { label: 7, value: 3 },
             { label: 8, value: 2 },
             { label: 9, value: 1 },
+          ]}
+        />
+      );
+    default:
+      return null;
+  }
+};
+
+const renderOlimpiadeVisual = (no: number): React.ReactNode => {
+  switch (no) {
+    case 3:
+      return (
+        <FrequencyTable
+          title="Daftar Umur Anggota Keluarga"
+          headers={["Anggota Keluarga", "Umur (tahun)"]}
+          showTotal={false}
+          rows={[
+            { label: "Ayah", value: 40 },
+            { label: "Ibu", value: 38 },
+            { label: "Anak 1", value: 15 },
+            { label: "Anak 2", value: 13 },
+            { label: "Anak 3", value: 9 },
           ]}
         />
       );
@@ -1268,6 +1292,7 @@ const OlimpiadeStatistikaPage = () => {
               const key = `o-${soal.no}`;
               const open = openPembahasan.has(key);
               const pembahasan = pembahasanOlimpiade[soal.no];
+              const visual = renderOlimpiadeVisual(soal.no);
               return (
                 <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-yellow-400/20 transition-colors">
                   <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
@@ -1281,6 +1306,7 @@ const OlimpiadeStatistikaPage = () => {
                       </span>
                     ))}
                   </div>
+                  {visual}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {soal.options.map((opt, j) => (
