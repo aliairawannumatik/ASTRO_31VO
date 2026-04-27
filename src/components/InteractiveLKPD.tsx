@@ -63,6 +63,7 @@ type Props = {
   practiceIntro: string;
   practiceItems: PracticeItem[];
   games?: LKPDGame[];
+  midSlot?: ReactNode;
   prevPath: string;
   backLabel: string;
   scoreMessages?: { perfect: string; high: string; medium: string; low: string };
@@ -324,6 +325,7 @@ const InteractiveLKPD = ({
   practiceIntro,
   practiceItems,
   games,
+  midSlot,
   prevPath,
   backLabel,
   scoreMessages,
@@ -551,6 +553,8 @@ const InteractiveLKPD = ({
             </div>
           </div>
         </section>
+
+        {midSlot}
 
         {games && games.length > 0 && <LKPDGameZone games={games} />}
 
