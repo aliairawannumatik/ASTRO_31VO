@@ -1,10 +1,10 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PENGERTIAN DAN NOTASI PANGKAT", path: "", icon: "📝" },
-  { label: "SIFAT-SIFAT OPERASI BILANGAN BERPANGKAT", path: "", icon: "⚡" },
-  { label: "BENTUK AKAR", path: "", icon: "🌱" },
-  { label: "NOTASI ILMIAH", path: "", icon: "🔬" },
+  { label: "PENGERTIAN DAN NOTASI PANGKAT", path: "/lkpd/kelas-9/bilangan-berpangkat/pengertian-notasi", icon: "📝" },
+  { label: "SIFAT-SIFAT OPERASI BILANGAN BERPANGKAT", path: "/lkpd/kelas-9/bilangan-berpangkat/sifat-operasi", icon: "⚡" },
+  { label: "BENTUK AKAR", path: "/lkpd/kelas-9/bilangan-berpangkat/bentuk-akar", icon: "🌱" },
+  { label: "NOTASI ILMIAH", path: "/lkpd/kelas-9/bilangan-berpangkat/notasi-ilmiah", icon: "🔬" },
 ];
 
 const BilanganBerpangkatMenuPage = () => (

@@ -70,6 +70,10 @@ import PrismaBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/Pris
 import LimasBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/LimasLKPDPage";
 import GabunganBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/GabunganBRSDLKPDPage";
 import BilanganBerpangkatLKPDMenuPage from "./pages/lkpd/kelas9/BilanganBerpangkatMenuPage";
+import PengertianNotasiPangkatLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/PengertianNotasiPangkatLKPDPage";
+import SifatOperasiPangkatLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/SifatOperasiPangkatLKPDPage";
+import BentukAkarLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/BentukAkarLKPDPage";
+import NotasiIlmiahLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/NotasiIlmiahLKPDPage";
 import KesebangunanKekongruenanLKPDMenuPage from "./pages/lkpd/kelas9/KesebangunanKekongruenanMenuPage";
 import TransformasiGeometriLKPDMenuPage from "./pages/lkpd/kelas9/TransformasiGeometriMenuPage";
 import BangunRuangSisiLengkungLKPDMenuPage from "./pages/lkpd/kelas9/BangunRuangSisiLengkungMenuPage";
@@ -910,6 +914,10 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/gabungan" element={<GabunganBRSDLKPDPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiPangkatLKPDPage />} />
+      <Route path="/lkpd/kelas-9/bilangan-berpangkat/sifat-operasi" element={<SifatOperasiPangkatLKPDPage />} />
+      <Route path="/lkpd/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarLKPDPage />} />
+      <Route path="/lkpd/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahLKPDPage />} />
       <Route path="/lkpd/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenanLKPDMenuPage />} />
       <Route path="/lkpd/kelas-9/transformasi-geometri" element={<TransformasiGeometriLKPDMenuPage />} />
       <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungLKPDMenuPage />} />
