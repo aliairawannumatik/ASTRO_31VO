@@ -64,6 +64,11 @@ import LingkaranLKPDPage from "./pages/lkpd/kelas8/lingkaran/LingkaranLKPDPage";
 import GarisSinggungLingkaranLKPDMenuPage from "./pages/lkpd/kelas8/GarisSinggungLingkaranMenuPage";
 import GarisSinggungLingkaranLKPDPage from "./pages/lkpd/kelas8/garis-singgung-lingkaran/GarisSinggungLingkaranLKPDPage";
 import BangunRuangSisiDatarLKPDMenuPage from "./pages/lkpd/kelas8/BangunRuangSisiDatarMenuPage";
+import KubusBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/KubusLKPDPage";
+import BalokBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/BalokLKPDPage";
+import PrismaBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/PrismaLKPDPage";
+import LimasBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/LimasLKPDPage";
+import GabunganBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/GabunganBRSDLKPDPage";
 import BilanganBerpangkatLKPDMenuPage from "./pages/lkpd/kelas9/BilanganBerpangkatMenuPage";
 import KesebangunanKekongruenanLKPDMenuPage from "./pages/lkpd/kelas9/KesebangunanKekongruenanMenuPage";
 import TransformasiGeometriLKPDMenuPage from "./pages/lkpd/kelas9/TransformasiGeometriMenuPage";
@@ -898,6 +903,11 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/garis-singgung-lingkaran/lkpd" element={<GarisSinggungLingkaranLKPDPage />} />
       <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusBRSDLKPDPage />} />
+      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokBRSDLKPDPage />} />
+      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaBRSDLKPDPage />} />
+      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasBRSDLKPDPage />} />
+      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/gabungan" element={<GabunganBRSDLKPDPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatLKPDMenuPage />} />
       <Route path="/lkpd/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenanLKPDMenuPage />} />

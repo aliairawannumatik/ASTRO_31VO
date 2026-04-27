@@ -1,11 +1,11 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "KUBUS", path: "", icon: "🎲" },
-  { label: "BALOK", path: "", icon: "📦" },
-  { label: "PRISMA", path: "", icon: "🔷" },
-  { label: "LIMAS", path: "", icon: "🔺" },
-  { label: "BANGUN RUANG SISI DATAR GABUNGAN", path: "", icon: "🔗" },
+  { label: "KUBUS", path: "/lkpd/kelas-8/bangun-ruang-sisi-datar/kubus", icon: "🎲" },
+  { label: "BALOK", path: "/lkpd/kelas-8/bangun-ruang-sisi-datar/balok", icon: "📦" },
+  { label: "PRISMA", path: "/lkpd/kelas-8/bangun-ruang-sisi-datar/prisma", icon: "🔷" },
+  { label: "LIMAS", path: "/lkpd/kelas-8/bangun-ruang-sisi-datar/limas", icon: "🔺" },
+  { label: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/lkpd/kelas-8/bangun-ruang-sisi-datar/gabungan", icon: "🔗" },
 ];
 
 const BangunRuangSisiDatarMenuPage = () => (
