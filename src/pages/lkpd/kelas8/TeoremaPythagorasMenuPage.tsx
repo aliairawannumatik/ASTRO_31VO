@@ -1,12 +1,12 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PEMBUKTIAN TEOREMA PYTHAGORAS", path: "", icon: "📐" },
-  { label: "MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU", path: "", icon: "📏" },
-  { label: "TRIPLE PYTHAGORAS", path: "", icon: "🔺" },
-  { label: "PYTHAGORAS DAN JENIS-JENIS SEGITIGA", path: "", icon: "🔶" },
-  { label: "PERBANDINGAN SISI SEGITIGA SIKU-SIKU SUDUT KHUSUS", path: "", icon: "⭐" },
-  { label: "PENERAPAN TEOREMA PYTHAGORAS PADA MASALAH KONTEKSTUAL", path: "", icon: "🏗️" },
+  { label: "PEMBUKTIAN TEOREMA PYTHAGORAS", path: "/lkpd/kelas-8/teorema-pythagoras/lkpd", icon: "📐" },
+  { label: "MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU", path: "/lkpd/kelas-8/teorema-pythagoras/lkpd", icon: "📏" },
+  { label: "TRIPLE PYTHAGORAS", path: "/lkpd/kelas-8/teorema-pythagoras/lkpd", icon: "🔺" },
+  { label: "PYTHAGORAS DAN JENIS-JENIS SEGITIGA", path: "/lkpd/kelas-8/teorema-pythagoras/lkpd", icon: "🔶" },
+  { label: "PERBANDINGAN SISI SEGITIGA SIKU-SIKU SUDUT KHUSUS", path: "/lkpd/kelas-8/teorema-pythagoras/lkpd", icon: "⭐" },
+  { label: "PENERAPAN TEOREMA PYTHAGORAS PADA MASALAH KONTEKSTUAL", path: "/lkpd/kelas-8/teorema-pythagoras/lkpd", icon: "🏗️" },
 ];
 
 const TeoremaPythagorasMenuPage = () => (

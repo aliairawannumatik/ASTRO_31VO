@@ -58,6 +58,7 @@ import SPLDVLKPDPage from "./pages/lkpd/kelas8/spldv/SPLDVLKPDPage";
 import PersamaanGarisLurusLKPDMenuPage from "./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage";
 import PersamaanGarisLurusLKPDPage from "./pages/lkpd/kelas8/persamaan-garis-lurus/PersamaanGarisLurusLKPDPage";
 import TeoremaPythagorasLKPDMenuPage from "./pages/lkpd/kelas8/TeoremaPythagorasMenuPage";
+import TeoremaPythagorasLKPDPage from "./pages/lkpd/kelas8/teorema-pythagoras/TeoremaPythagorasLKPDPage";
 import LingkaranLKPDMenuPage from "./pages/lkpd/kelas8/LingkaranMenuPage";
 import GarisSinggungLingkaranLKPDMenuPage from "./pages/lkpd/kelas8/GarisSinggungLingkaranMenuPage";
 import BangunRuangSisiDatarLKPDMenuPage from "./pages/lkpd/kelas8/BangunRuangSisiDatarMenuPage";
@@ -889,6 +890,7 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/persamaan-garis-lurus/lkpd" element={<PersamaanGarisLurusLKPDPage />} />
       <Route path="/lkpd/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/teorema-pythagoras/lkpd" element={<TeoremaPythagorasLKPDPage />} />
       <Route path="/lkpd/kelas-8/lingkaran" element={<LingkaranLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarLKPDMenuPage />} />
