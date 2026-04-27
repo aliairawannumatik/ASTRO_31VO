@@ -928,6 +928,33 @@ const TabelTigaBaris8Kolom = () => {
   );
 };
 
+const GridKosong5x5 = () => {
+  const n = 5;
+  const cell = 28;
+  const pad = 8;
+  const w = n * cell + pad * 2;
+  const h = n * cell + pad * 2;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[180px] mx-auto my-3 rounded-lg bg-white" xmlns="http://www.w3.org/2000/svg">
+      <rect x={0} y={0} width={w} height={h} fill="#ffffff" />
+      {Array.from({ length: n }).map((_, r) =>
+        Array.from({ length: n }).map((_, c) => (
+          <rect
+            key={`${r}-${c}`}
+            x={pad + c * cell}
+            y={pad + r * cell}
+            width={cell}
+            height={cell}
+            fill="none"
+            stroke="#1f2937"
+            strokeWidth={1.2}
+          />
+        ))
+      )}
+    </svg>
+  );
+};
+
 const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
   4:  <img src="/peluang_fix_olimp.png" alt="Diagram Grid P ke Q" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
   10: <DiagramLingkaranAngka />,
@@ -936,6 +963,7 @@ const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
   71: <TabelTigaBaris8Kolom />,
   73: <img src={peluangOlimpiadeSoal73Img} alt="Tabel 4x4 Soal 73" className="w-full max-w-[220px] mx-auto my-3 rounded-lg bg-white p-2" />,
   87: <img src="/peluang_olimp_87.png" alt="Diagram Soal 87" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
+  90: <GridKosong5x5 />,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
