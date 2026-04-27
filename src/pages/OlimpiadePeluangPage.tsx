@@ -8,6 +8,7 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { pembahasanDasar } from "@/data/peluangPembahasanDasar";
 import { pembahasanOlimpiade } from "@/data/peluangPembahasanOlimpiade";
+import peluangOlimpiadeSoal73Img from "@assets/image_1777291380623.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -933,6 +934,7 @@ const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
   45: <DiagramTabelSMS />,
   70: <DiagramSurveiInvestasi />,
   71: <TabelTigaBaris8Kolom />,
+  73: <img src={peluangOlimpiadeSoal73Img} alt="Tabel 4x4 Soal 73" className="w-full max-w-[220px] mx-auto my-3 rounded-lg bg-white p-2" />,
   87: <img src="/peluang_olimp_87.png" alt="Diagram Soal 87" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
 };
 
