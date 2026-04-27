@@ -1,32 +1,52 @@
-# Math Space - NUMATIK AI
+# NUMATIK
 
-## Overview
-Math Space is a React + Vite-based math tutoring application designed for Indonesian middle school students (SMP). It features interactive learning content, a variety of educational games, and a NUMATIK AI chatbot powered by Google Gemini to provide assistance and enhance the learning experience. The project aims to make math engaging and accessible, covering a wide range of topics from basic arithmetic to advanced geometry and algebra.
+**Numerasi Aktif dengan Teknologi Informasi dan Komunikasi**
 
-## User Preferences
-I want to work iteratively. Before making any major changes, please ask for confirmation. I prefer clear and concise communication. Ensure that any explanations are easy to understand for someone with a good grasp of software development but not necessarily an expert in the specific domain of this project. Do not make changes to files within the `server.ts` or `vite.config.ts` files without explicit instruction.
+An interactive multimedia educational app for junior high school (SMP) mathematics in Indonesia, created by Irawan Sutiawan, M.Pd.
 
-## System Architecture
-The application follows a client-server architecture:
-- **Frontend**: Built with React 18, Vite, TypeScript, Tailwind CSS, shadcn/ui, and react-router-dom. It provides a rich, interactive user interface. UI/UX elements include full-color standalone canvas games, animated SVGs for complex math concepts, LaTeX formulas, color-coded sections, and interactive tools.
-- **Backend**: An Express.js API server handles requests, primarily for the AI chatbot.
-- **AI Integration**: Google Gemini powers the NUMATIK AI chatbot, accessed server-side via the Express `/api/chat` endpoint to ensure API key security.
-- **Development Workflow**: A Vite development server proxies API requests to the Express backend.
-- **Content Structure**: Educational content is organized by grade level (Kelas 7, 8, 9) and topic, including "Materi Matematika" (learning materials), "Latihan Mandiri" (independent practice), "Bank Soal" (question bank), "Math Game Arena" (math games), and "Olimpiade" (olympiad-style questions).
-- **Game Mechanics**: The "Math Game Arena Umum" includes various full-color canvas games. A "teacher quiz" system is integrated into these games for evaluation, implemented via `useGuruQuiz.ts` and `GuruQuizOverlay.tsx`.
-  - **Snake Matematika** (`SnakeMathPage.tsx`): Full-screen play area (24×16 cells, 36px each) with grass-meadow gradient background. Realistic continuous snake (gradient body, dorsal stripe, scale dots, detailed head with iris/pupil eyes, animated forked tongue). Foods are fruit emojis (🍎🍓🍒🍇🍊🍉🍑🥝🍌🍍🍐🥭) with number badges; correct answer has golden halo + orbiting sparkles. HUD (question, score, length, speed bar) rendered as React HTML above the canvas.
-  - **Tetris**: Vibrant 3D gem-style blocks with gradient/sheen, plus grand-opening intro screen.
-  - All games share the consistent ← Kembali / 🏠 Home pill nav pattern.
-- **Content Features**: Content pages extensively use `react-katex` for LaTeX rendering, SVG diagrams for visual explanations, and interactive components like accordions and collapsible sections. The Olimpiade pages (Persamaan Kuadrat, Fungsi Kuadrat, Aritmetika Sosial) include per-question "Lihat Pembahasan" toggles that reveal the answer key (emerald box) and step-by-step LaTeX solution (cyan/purple box) on both Latihan Dasar and Latihan Olimpiade tabs. The newer Olimpiade pages (SPLDV, Pola Bilangan, Teorema Pythagoras, Segitiga & Segiempat, Lingkaran, Bangun Ruang Sisi Lengkung) use a richer 5-section colored discussion card (`PembahasanCard`): Jawaban (emerald), Konsep & Trik (violet), Step by Step (cyan), Tips (amber), Kesimpulan (rose). Pembahasan data is stored in `src/data/pembahasan/*.ts` keyed by question number. The `OlimpiadeBangunRuangSisiDatarPage` now includes full pembahasan for all 46 latihan dasar and 22 latihan olimpiade questions, stored in `src/data/bangunRuangSisiDatarPembahasan.tsx` with 5-section structured format (Jawaban, Konsep & Trik, Langkah-langkah, Tips, Kesimpulan) displayed via "Lihat Pembahasan" toggle buttons on each question card.
-- **Deployment**: The Express server is configured to serve the built frontend in production and binds to `0.0.0.0` for environment compatibility.
+## Tech Stack
 
-## External Dependencies
-- **Google Gemini**: Utilized for the NUMATIK AI chatbot through the `GOOGLE_GENERATIVE_AI_API_KEY`.
-- **React 18**: Frontend JavaScript library.
-- **Vite**: Frontend build tool.
-- **TypeScript**: Superset of JavaScript for type-safety.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **shadcn/ui**: UI component library.
-- **react-router-dom**: Declarative routing for React.
-- **Express.js**: Backend web framework for Node.js.
-- **react-katex**: React component for typesetting math with KaTeX.
+- **Frontend:** React 18 + TypeScript + Vite (port 5000)
+- **Backend:** Express (Node.js) on port 3001
+- **Styling:** Tailwind CSS + shadcn/ui + Framer Motion
+- **Math rendering:** KaTeX / react-katex
+- **AI:** Google Gemini via Replit AI Integrations (`@google/genai`)
+- **State:** TanStack Query, React Hook Form, Zod
+
+## Architecture
+
+- `src/` — React frontend source
+  - `components/` — UI and feature components (animations, games, LKPD)
+  - `pages/` — Routes for LKPD, Bank Soal, Olimpiade, Ruang Untuk Guru, Menghitung Cepat, AI Chat
+  - `contexts/` — Theme, Music, Sounds, Font global state
+  - `data/` — Static quiz, explanation, and curriculum data
+  - `hooks/` — Audio management and mobile responsiveness hooks
+- `server.ts` — Express server: serves static files in production, proxies AI requests via `/api/chat`
+- `api/` — Backend API handlers
+- `public/` — Static assets including background music
+
+## Running
+
+- **Development:** `npm run dev` — starts both Express (port 3001) and Vite (port 5000) concurrently
+- **Production build:** `npm run build` then `npm start`
+- Vite proxies `/api/*` requests to the Express server at port 3001
+
+## AI Integration
+
+Uses Replit's Gemini AI integration. The server uses:
+- `AI_INTEGRATIONS_GEMINI_API_KEY`
+- `AI_INTEGRATIONS_GEMINI_BASE_URL`
+
+These are automatically provided by Replit — no manual API key setup needed.
+
+## Key Features
+
+- Interactive LKPD (worksheets) for grades 7, 8, and 9
+- Bank Soal (question banks) with multiple difficulty levels
+- Olimpiade math competition preparation
+- Ruang Untuk Guru (teacher resources): RPP, assessments
+- Menghitung Cepat (speed calculation techniques)
+- NUMATIK AI — Gemini-powered math assistant chatbot
+- Gamification: meteor shooting game, flashcards
+- Background music and sound effects
+- Indonesian SMP curriculum alignment
