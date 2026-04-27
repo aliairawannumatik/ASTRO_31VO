@@ -44,7 +44,27 @@ import BungaTunggalLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/BungaTun
 import GarisDanSudutLKPDPage from "./pages/lkpd/kelas7/garis-sudut/GarisDanSudutLKPDPage";
 import SegitigaDanSegiempatLKPDPage from "./pages/lkpd/kelas7/segitiga-segiempat/SegitigaDanSegiempatLKPDPage";
 import HimpunanLKPDPage from "./pages/lkpd/kelas7/himpunan/HimpunanLKPDPage";
+import HimpunanMenuPage from "./pages/lkpd/kelas7/HimpunanMenuPage";
+import GarisDanSudutMenuPage from "./pages/lkpd/kelas7/GarisDanSudutMenuPage";
+import SegitigaDanSegiempatMenuPage from "./pages/lkpd/kelas7/SegitigaDanSegiempatMenuPage";
 import PolaBilanganLKPDPage from "./pages/lkpd/kelas8/pola-bilangan/PolaBilanganLKPDPage";
+import PolaBilanganMenuPage from "./pages/lkpd/kelas8/PolaBilanganMenuPage";
+import KoordinatCartesiusLKPDMenuPage from "./pages/lkpd/kelas8/KoordinatCartesiusMenuPage";
+import RelasiFungsiLKPDMenuPage from "./pages/lkpd/kelas8/RelasiFungsiMenuPage";
+import SPLDVLKPDMenuPage from "./pages/lkpd/kelas8/SPLDVMenuPage";
+import PersamaanGarisLurusLKPDMenuPage from "./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage";
+import TeoremaPythagorasLKPDMenuPage from "./pages/lkpd/kelas8/TeoremaPythagorasMenuPage";
+import LingkaranLKPDMenuPage from "./pages/lkpd/kelas8/LingkaranMenuPage";
+import GarisSinggungLingkaranLKPDMenuPage from "./pages/lkpd/kelas8/GarisSinggungLingkaranMenuPage";
+import BangunRuangSisiDatarLKPDMenuPage from "./pages/lkpd/kelas8/BangunRuangSisiDatarMenuPage";
+import BilanganBerpangkatLKPDMenuPage from "./pages/lkpd/kelas9/BilanganBerpangkatMenuPage";
+import KesebangunanKekongruenanLKPDMenuPage from "./pages/lkpd/kelas9/KesebangunanKekongruenanMenuPage";
+import TransformasiGeometriLKPDMenuPage from "./pages/lkpd/kelas9/TransformasiGeometriMenuPage";
+import BangunRuangSisiLengkungLKPDMenuPage from "./pages/lkpd/kelas9/BangunRuangSisiLengkungMenuPage";
+import StatistikaLKPDMenuPage from "./pages/lkpd/kelas9/StatistikaMenuPage";
+import PeluangLKPDMenuPage from "./pages/lkpd/kelas9/PeluangMenuPage";
+import PersamaanKuadratLKPDMenuPage from "./pages/lkpd/kelas9/PersamaanKuadratMenuPage";
+import FungsiKuadratLKPDMenuPage from "./pages/lkpd/kelas9/FungsiKuadratMenuPage";
 import PPNLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPNLKPDPage";
 import PPhLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPhLKPDPage";
 import PecahanCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage";
@@ -845,14 +865,34 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/aritmetika-sosial/diskon" element={<DiskonLKPDPage />} />
       <Route path="/lkpd/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraLKPDPage />} />
       <Route path="/lkpd/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalLKPDPage />} />
-      <Route path="/lkpd/kelas-7/garis-dan-sudut" element={<GarisDanSudutLKPDPage />} />
-      <Route path="/lkpd/kelas-7/segitiga-dan-segiempat" element={<SegitigaDanSegiempatLKPDPage />} />
+      <Route path="/lkpd/kelas-7/garis-dan-sudut" element={<GarisDanSudutMenuPage />} />
+      <Route path="/lkpd/kelas-7/garis-dan-sudut/lkpd" element={<GarisDanSudutLKPDPage />} />
+      <Route path="/lkpd/kelas-7/segitiga-dan-segiempat" element={<SegitigaDanSegiempatMenuPage />} />
+      <Route path="/lkpd/kelas-7/segitiga-dan-segiempat/lkpd" element={<SegitigaDanSegiempatLKPDPage />} />
       <Route path="/lkpd/kelas-7/aritmetika-sosial/ppn" element={<PPNLKPDPage />} />
       <Route path="/lkpd/kelas-7/aritmetika-sosial/pph" element={<PPhLKPDPage />} />
-      <Route path="/lkpd/kelas-7/himpunan" element={<HimpunanLKPDPage />} />
+      <Route path="/lkpd/kelas-7/himpunan" element={<HimpunanMenuPage />} />
+      <Route path="/lkpd/kelas-7/himpunan/lkpd" element={<HimpunanLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
-      <Route path="/lkpd/kelas-8/pola-bilangan" element={<PolaBilanganLKPDPage />} />
+      <Route path="/lkpd/kelas-8/pola-bilangan" element={<PolaBilanganMenuPage />} />
+      <Route path="/lkpd/kelas-8/pola-bilangan/lkpd" element={<PolaBilanganLKPDPage />} />
+      <Route path="/lkpd/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/spldv" element={<SPLDVLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/lingkaran" element={<LingkaranLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
+      <Route path="/lkpd/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenanLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/transformasi-geometri" element={<TransformasiGeometriLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/statistika" element={<StatistikaLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/peluang" element={<PeluangLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/fungsi-kuadrat" element={<FungsiKuadratLKPDMenuPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
       <Route path="/atp" element={<ATPPage />} />
       <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
