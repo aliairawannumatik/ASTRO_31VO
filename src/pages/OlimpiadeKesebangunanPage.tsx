@@ -6,6 +6,52 @@ import { Trophy, ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import kesDasarImg3 from "@assets/3_1777275265953.png";
+import kesDasarImg4 from "@assets/4_1777275265954.png";
+import kesDasarImg6 from "@assets/6_1777275265954.png";
+import kesDasarImg7 from "@assets/7_1777275265955.png";
+import kesDasarImg8 from "@assets/8_1777275265955.png";
+import kesDasarImg9 from "@assets/9_1777275265956.png";
+import kesDasarImg10 from "@assets/10_1777275265956.png";
+import kesDasarImg11 from "@assets/11_1777275265957.png";
+import kesDasarImg12 from "@assets/12_1777275265957.png";
+import kesDasarImg13 from "@assets/13_1777275265958.png";
+import kesDasarImg15 from "@assets/15_1777275265958.png";
+import kesDasarImg16 from "@assets/16_1777275265959.png";
+import kesDasarImg17 from "@assets/17_1777275265959.png";
+import kesDasarImg18 from "@assets/18_1777275265960.png";
+import kesDasarImg21 from "@assets/21_1777275265960.png";
+import kesDasarImg22 from "@assets/22_1777275265961.png";
+import kesDasarImg1i from "@assets/no_1_pernyataan_(i)_1777275265961.png";
+import kesDasarImg1ii from "@assets/no_1_pernyataan_(ii)_1777275265962.png";
+import kesDasarImg1iii from "@assets/no_1_pernyataan_(iii)_1777275265962.png";
+import kesDasarImg1iv from "@assets/no_1_pernyataan_(iv)_1777275265963.png";
+
+const kesDasarImages: Record<number, string> = {
+  3: kesDasarImg3,
+  4: kesDasarImg4,
+  6: kesDasarImg6,
+  7: kesDasarImg7,
+  8: kesDasarImg8,
+  9: kesDasarImg9,
+  10: kesDasarImg10,
+  11: kesDasarImg11,
+  12: kesDasarImg12,
+  13: kesDasarImg13,
+  15: kesDasarImg15,
+  16: kesDasarImg16,
+  17: kesDasarImg17,
+  18: kesDasarImg18,
+  21: kesDasarImg21,
+  22: kesDasarImg22,
+};
+
+const kesDasarSoal1Images: { label: string; src: string }[] = [
+  { label: "(i)", src: kesDasarImg1i },
+  { label: "(ii)", src: kesDasarImg1ii },
+  { label: "(iii)", src: kesDasarImg1iii },
+  { label: "(iv)", src: kesDasarImg1iv },
+];
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -555,6 +601,25 @@ const OlimpiadeKesebangunanPage = () => {
                       </span>
                     ))}
                   </div>
+                  {soal.no === 1 && (
+                    <div className="grid grid-cols-2 gap-3 mb-3">
+                      {kesDasarSoal1Images.map((item) => (
+                        <div key={item.label} className="flex flex-col items-center gap-1 bg-white/90 rounded-lg border border-white/10 p-2">
+                          <img src={item.src} alt={`Pernyataan ${item.label}`} className="max-h-24 w-auto object-contain" />
+                          <span className="font-display text-[10px] font-bold text-slate-700">{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {kesDasarImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={kesDasarImages[soal.no]}
+                        alt={`Gambar soal ${soal.no}`}
+                        className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                      />
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                       {soal.options.map((opt, j) => (
