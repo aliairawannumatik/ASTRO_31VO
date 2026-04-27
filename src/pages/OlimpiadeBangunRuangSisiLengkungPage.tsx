@@ -10,6 +10,33 @@ import { BlockMath, InlineMath } from "react-katex";
 import PembahasanCard from "@/components/PembahasanCard";
 import { brslDasarPembahasan } from "@/data/pembahasan/brslDasar";
 import { brslOlimpiadePembahasan } from "@/data/pembahasan/brslOlimpiade";
+import dasarImg3 from "@assets/3_1777273872295.png";
+import dasarImg5 from "@assets/5_1777273872296.png";
+import dasarImg6 from "@assets/6_1777273872296.png";
+import dasarImg13 from "@assets/13_1777273872297.png";
+import dasarImg30 from "@assets/30_1777273872297.png";
+import dasarImg31 from "@assets/31_1777273872298.png";
+import dasarImg32 from "@assets/32_1777273872298.png";
+import dasarImg33 from "@assets/33_1777273872299.png";
+import dasarImg34 from "@assets/34_1777273872299.png";
+import dasarImg35 from "@assets/35_1777273872299.png";
+import dasarImg36 from "@assets/36_1777273872300.png";
+import dasarImg37 from "@assets/37_1777273872301.png";
+
+const brslDasarImages: Record<number, string> = {
+  3: dasarImg3,
+  5: dasarImg5,
+  6: dasarImg6,
+  13: dasarImg13,
+  30: dasarImg30,
+  31: dasarImg31,
+  32: dasarImg32,
+  33: dasarImg33,
+  34: dasarImg34,
+  35: dasarImg35,
+  36: dasarImg36,
+  37: dasarImg37,
+};
 
 /* ─────────────── LaTeX helper ─────────────── */
 const renderWithLatex = (text: string) => {
@@ -564,6 +591,15 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                       <span key={li}>{li > 0 && <br />}{renderWithLatex(line)}</span>
                     ))}
                   </div>
+                  {brslDasarImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={brslDasarImages[soal.no]}
+                        alt={`Gambar soal ${soal.no}`}
+                        className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                      />
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {soal.options.map((opt, j) => (
