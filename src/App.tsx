@@ -44,6 +44,7 @@ import BungaTunggalLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/BungaTun
 import GarisDanSudutLKPDPage from "./pages/lkpd/kelas7/garis-sudut/GarisDanSudutLKPDPage";
 import SegitigaDanSegiempatLKPDPage from "./pages/lkpd/kelas7/segitiga-segiempat/SegitigaDanSegiempatLKPDPage";
 import HimpunanLKPDPage from "./pages/lkpd/kelas7/himpunan/HimpunanLKPDPage";
+import PolaBilanganLKPDPage from "./pages/lkpd/kelas8/pola-bilangan/PolaBilanganLKPDPage";
 import PPNLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPNLKPDPage";
 import PPhLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPhLKPDPage";
 import PecahanCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage";
@@ -850,6 +851,7 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-7/aritmetika-sosial/pph" element={<PPhLKPDPage />} />
       <Route path="/lkpd/kelas-7/himpunan" element={<HimpunanLKPDPage />} />
       <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
+      <Route path="/lkpd/kelas-8/pola-bilangan" element={<PolaBilanganLKPDPage />} />
       <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
       <Route path="/atp" element={<ATPPage />} />
