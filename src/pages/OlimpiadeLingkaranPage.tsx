@@ -770,6 +770,29 @@ const dasarImages: Record<number, string> = {
   36: "/lingkaran-dasar-36.png",
 };
 
+const olimpiadeImages: Record<number, string> = {
+  2: "/lingkaran-olimpiade-2.png",
+  3: "/lingkaran-olimpiade-3.png",
+  4: "/lingkaran-olimpiade-4.png",
+  5: "/lingkaran-olimpiade-5.png",
+  6: "/lingkaran-olimpiade-6.png",
+  7: "/lingkaran-olimpiade-7.png",
+  8: "/lingkaran-olimpiade-8.png",
+  9: "/lingkaran-olimpiade-9.png",
+  11: "/lingkaran-olimpiade-11.png",
+  12: "/lingkaran-olimpiade-12.png",
+  14: "/lingkaran-olimpiade-14.png",
+  15: "/lingkaran-olimpiade-15.png",
+  17: "/lingkaran-olimpiade-17.png",
+  18: "/lingkaran-olimpiade-18.png",
+  19: "/lingkaran-olimpiade-19.png",
+  20: "/lingkaran-olimpiade-20.png",
+  21: "/lingkaran-olimpiade-21.png",
+  22: "/lingkaran-olimpiade-22.png",
+  23: "/lingkaran-olimpiade-23.png",
+  24: "/lingkaran-olimpiade-24.png",
+};
+
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nDi dalam suatu lingkaran yang berjari-jari 4 cm dibuat persegi ABCD, sehingga titik sudut persegi tersebut berada pada lingkaran. Luas persgi ABCD adalah ...", options: ["A. 64 $cm^2$", "B. 32 $cm^2$", "C. 16 $cm^2$", "D. 8 $cm^2$", "E. 4 $cm^2$"] },
   { no: 2, soal: "OSN Matematika 2005 Tingkat Kota\nMisalkan a dan b menyatakan luas daerah yang diarsir pada gambar di bawah. Kelima lingkaran kecil berjari-jari r. titik-titik pusat empat lingkaran kecil yang menyinggung lingkaran besar merupakan titik-titik sudut persegi. Jika a sama dengan 10 $cm^2$, maka b = ...", options: [] },
@@ -948,6 +971,13 @@ const OlimpiadeLingkaranPage = () => {
                       </span>
                     ))}
                   </div>
+                  {olimpiadeImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                        <img src={olimpiadeImages[soal.no]} alt={`Gambar soal ${soal.no}`} className="max-w-full max-h-56 object-contain" />
+                      </div>
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                       {soal.options.map((opt, j) => (
