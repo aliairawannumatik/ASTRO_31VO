@@ -8,93 +8,530 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { pembahasanDasar, pembahasanOlimpiade } from "@/data/bangunRuangSisiDatarPembahasan";
 
-// Helper function to render text with LaTeX
+const M = ({ math }: { math: string }) => <InlineMath math={math} />;
+
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
   return parts.map((part, index) => {
     if (part.startsWith('$') && part.endsWith('$')) {
-      const latex = part.slice(1, -1);
-      return <InlineMath key={index} math={latex} />;
+      return <InlineMath key={index} math={part.slice(1, -1)} />;
     }
     return <span key={index}>{part}</span>;
   });
 };
 
-const materiSection = {
-  title: "MATERI - BANGUN RUANG SISI DATAR",
-  sections: [
-    {
-      heading: "A. Kubus",
-      content: `Kubus adalah bangun ruang yang semua sisinya berbentuk persegi dan semua rusuknya sama panjang.
+/* ─────────────────────────────────────────────────────────
+   CSS KEYFRAMES (injected via style tag)
+───────────────────────────────────────────────────────── */
+const ShapeStyles = () => (
+  <style>{`
+    @keyframes rotateCube {
+      0%   { transform: rotateX(-18deg) rotateY(0deg); }
+      100% { transform: rotateX(-18deg) rotateY(360deg); }
+    }
+    @keyframes rotateBalok {
+      0%   { transform: rotateX(-18deg) rotateY(0deg); }
+      100% { transform: rotateX(-18deg) rotateY(360deg); }
+    }
+    @keyframes rotateSVG {
+      0%   { transform: rotateY(-25deg); }
+      50%  { transform: rotateY(25deg); }
+      100% { transform: rotateY(-25deg); }
+    }
+    .shape-rotate-cube { animation: rotateCube 9s linear infinite; transform-style: preserve-3d; }
+    .shape-rotate-balok { animation: rotateBalok 10s linear infinite; transform-style: preserve-3d; }
+    .shape-rotate-svg { animation: rotateSVG 6s ease-in-out infinite; }
+    .face-3d { position: absolute; }
+  `}</style>
+);
 
-1. Unsur-Unsur Kubus
-a. Sisi/Bidang: Kubus memiliki 6 buah sisi yang semuanya berbentuk persegi
-b. Rusuk: Kubus memiliki 12 buah rusuk
-c. Titik Sudut: Kubus memiliki 8 buah titik sudut
-d. Diagonal Bidang: Kubus memiliki 12 diagonal bidang, panjang = $r\\sqrt{2}$
-e. Diagonal Ruang: Kubus memiliki 4 diagonal ruang, panjang = $r\\sqrt{3}$
-f. Bidang Diagonal: Kubus memiliki 6 buah bidang diagonal, luas = $r^2\\sqrt{2}$
+/* ─────────────────────────────────────────────────────────
+   3D ANIMATED SHAPE COMPONENTS
+───────────────────────────────────────────────────────── */
 
-2. Luas permukaan dan Volume Kubus
-Luas permukaan Kubus: $6r^2$
-Volume Kubus: $r^3$`
-    },
-    {
-      heading: "B. Balok",
-      content: `Balok adalah bangun ruang yang memiliki tiga pasang sisi berhadapan yang sama bentuk dan ukurannya, di mana setiap sisinya berbentuk persegi panjang.
-
-1. Diagonal bidang Balok
-- Pada bidang ABCD dan EFGH: $\\sqrt{p^2 + l^2}$
-- Pada bidang BCGF dan ADHE: $\\sqrt{l^2 + t^2}$
-- Pada bidang ABFE dan DCGH: $\\sqrt{p^2 + t^2}$
-
-2. Diagonal Ruang Balok: $\\sqrt{p^2 + l^2 + t^2}$
-
-3. Luas permukaan dan volume balok
-Luas permukaan Balok: $2[(p \\times l) + (l \\times t) + (p \\times t)]$
-Volume Balok: $p \\times l \\times t$
-
-4. Balok yang Dibentuk dari Kubus-Kubus Satuan
-- Banyaknya kubus yang terkena cat pada 3 sisi adalah 8 buah kubus
-- Banyaknya kubus yang terkena cat pada 2 sisi adalah $4[(p-2) + (l-2) + (t-2)]$
-- Banyaknya kubus yang terkena cat pada 1 sisi adalah $2[(p-2)(l-2) + (p-2)(t-2) + (l-2)(t-2)]$
-- Banyaknya kubus yang tidak terkena cat adalah $(p-2)(l-2)(t-2)$`
-    },
-    {
-      heading: "C. Prisma",
-      content: `Prisma adalah bangun ruang yang memiliki bentuk alas dan atap yang sama bentuk dan ukurannya. Semua sisi bagian samping berbentuk persegipanjang.
-
-Unsur-unsur Prisma segi-n:
-- Banyak sisi: n + 2
-- Banyak rusuk: 3n
-- Banyak titik sudut: 2n
-- Banyak diagonal bidang: n(n-1)
-- Banyak diagonal ruang: n(n-3)
-- Banyak bidang diagonal: $\\frac{n}{2}(n-1)$
-
-Luas permukaan prisma: $2L_a + K_a \\times t$
-Volume prisma: $L_a \\times t$
-
-Keterangan:
-$L_a$ = luas alas prisma
-$K_a$ = keliling alas prisma
-t = tinggi prisma`
-    },
-    {
-      heading: "D. Limas",
-      content: `Limas adalah bangun ruang yang memiliki satu bidang alas dan sisi-sisi tegak berbentuk segitiga yang bertemu di satu titik puncak.
-
-Unsur-unsur Limas segi-n:
-- Banyak sisi: n + 1
-- Banyak rusuk: 2n
-- Banyak titik sudut: n + 1
-
-Luas Permukaan = Luas Alas + Jumlah Luas sisi-sisi tegak
-
-Volume Limas = $\\frac{1}{3} \\times$ Luas alas $\\times$ tinggi`
-    },
-  ]
+const KubusShape3D = () => {
+  const s = 90;
+  const faceBase: React.CSSProperties = { position: 'absolute', width: s, height: s, border: '2px solid rgba(165,180,252,0.7)' };
+  return (
+    <div style={{ perspective: 380, width: 160, height: 160, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="shape-rotate-cube" style={{ width: s, height: s, position: 'relative' }}>
+        <div style={{ ...faceBase, background: 'rgba(99,102,241,0.55)', transform: `translateZ(${s / 2}px)` }} />
+        <div style={{ ...faceBase, background: 'rgba(79,70,229,0.35)', transform: `rotateY(180deg) translateZ(${s / 2}px)` }} />
+        <div style={{ ...faceBase, background: 'rgba(139,92,246,0.55)', transform: `rotateX(90deg) translateZ(${s / 2}px)` }} />
+        <div style={{ ...faceBase, background: 'rgba(109,40,217,0.35)', transform: `rotateX(-90deg) translateZ(${s / 2}px)` }} />
+        <div style={{ ...faceBase, background: 'rgba(67,56,202,0.55)', transform: `rotateY(90deg) translateZ(${s / 2}px)` }} />
+        <div style={{ ...faceBase, background: 'rgba(67,56,202,0.35)', transform: `rotateY(-90deg) translateZ(${s / 2}px)` }} />
+      </div>
+    </div>
+  );
 };
+
+const BalokShape3D = () => {
+  const p = 110, t = 70, l = 80;
+  const frontBack: React.CSSProperties = { position: 'absolute', width: p, height: t, border: '2px solid rgba(52,211,153,0.7)' };
+  const leftRight: React.CSSProperties = { position: 'absolute', width: l, height: t, border: '2px solid rgba(52,211,153,0.7)' };
+  const topBot: React.CSSProperties = { position: 'absolute', width: p, height: l, border: '2px solid rgba(52,211,153,0.7)' };
+  return (
+    <div style={{ perspective: 420, width: 180, height: 150, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="shape-rotate-balok" style={{ width: p, height: t, position: 'relative', marginTop: 20 }}>
+        <div style={{ ...frontBack, background: 'rgba(16,185,129,0.50)', transform: `translateZ(${l / 2}px)` }} />
+        <div style={{ ...frontBack, background: 'rgba(5,150,105,0.30)', transform: `rotateY(180deg) translateZ(${l / 2}px)` }} />
+        <div style={{ ...topBot, background: 'rgba(52,211,153,0.50)', transform: `rotateX(90deg) translateZ(${t / 2}px)` }} />
+        <div style={{ ...topBot, background: 'rgba(6,95,70,0.30)', transform: `rotateX(-90deg) translateZ(${t / 2}px)` }} />
+        <div style={{ ...leftRight, background: 'rgba(4,120,87,0.50)', left: p, transform: `translateX(-${l}px) rotateY(90deg) translateZ(${l / 2}px)` }} />
+        <div style={{ ...leftRight, background: 'rgba(4,120,87,0.30)', transform: `rotateY(-90deg) translateZ(${l / 2}px)` }} />
+      </div>
+    </div>
+  );
+};
+
+const PrismaShape3D = () => (
+  <div className="shape-rotate-svg" style={{ width: 160, margin: '0 auto' }}>
+    <svg viewBox="0 0 200 200" className="w-full max-w-[160px] mx-auto drop-shadow-lg">
+      <defs>
+        <linearGradient id="pg1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.7" />
+          <stop offset="100%" stopColor="#d97706" stopOpacity="0.4" />
+        </linearGradient>
+        <linearGradient id="pg2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.35" />
+        </linearGradient>
+        <linearGradient id="pg3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fde68a" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#fbbf24" stopOpacity="0.3" />
+        </linearGradient>
+      </defs>
+      {/* Front triangle face */}
+      <polygon points="100,20 170,150 30,150" fill="url(#pg1)" stroke="#fbbf24" strokeWidth="2" />
+      {/* Back triangle face (top/behind) */}
+      <polygon points="130,40 195,160 65,160" fill="url(#pg3)" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="4,2" />
+      {/* Left rectangular side */}
+      <polygon points="30,150 100,20 130,40 65,160" fill="url(#pg2)" stroke="#fbbf24" strokeWidth="1.5" />
+      {/* Right rectangular side */}
+      <polygon points="170,150 100,20 130,40 195,160" fill="url(#pg3)" stroke="#fbbf24" strokeWidth="1.5" />
+      {/* Bottom rectangular face */}
+      <polygon points="30,150 170,150 195,160 65,160" fill="rgba(251,191,36,0.25)" stroke="#f59e0b" strokeWidth="1.5" />
+      {/* Edges highlight */}
+      <line x1="100" y1="20" x2="130" y2="40" stroke="#fde68a" strokeWidth="1.5" strokeDasharray="4,2" />
+      {/* Labels */}
+      <text x="82" y="110" fill="#fde68a" fontSize="11" fontWeight="bold" fontFamily="sans-serif">sisi</text>
+      <text x="82" y="125" fill="#fde68a" fontSize="11" fontFamily="sans-serif">tegak</text>
+      <text x="85" y="170" fill="#fbbf24" fontSize="11" fontWeight="bold" fontFamily="sans-serif">alas △</text>
+    </svg>
+  </div>
+);
+
+const LimasShape3D = () => (
+  <div className="shape-rotate-svg" style={{ width: 160, margin: '0 auto' }}>
+    <svg viewBox="0 0 200 210" className="w-full max-w-[160px] mx-auto drop-shadow-lg">
+      <defs>
+        <linearGradient id="lp1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ec4899" stopOpacity="0.70" />
+          <stop offset="100%" stopColor="#be185d" stopOpacity="0.40" />
+        </linearGradient>
+        <linearGradient id="lp2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f472b6" stopOpacity="0.60" />
+          <stop offset="100%" stopColor="#ec4899" stopOpacity="0.35" />
+        </linearGradient>
+        <linearGradient id="lp3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fbcfe8" stopOpacity="0.50" />
+          <stop offset="100%" stopColor="#f9a8d4" stopOpacity="0.30" />
+        </linearGradient>
+        <linearGradient id="lp4" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f9a8d4" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#ec4899" stopOpacity="0.25" />
+        </linearGradient>
+      </defs>
+      {/* Apex */}
+      {/* Base square (isometric) */}
+      <polygon points="50,145 150,145 175,165 30,165" fill="rgba(236,72,153,0.20)" stroke="#f472b6" strokeWidth="1.5" />
+      {/* Front-left triangular face */}
+      <polygon points="100,25 50,145 150,145" fill="url(#lp1)" stroke="#ec4899" strokeWidth="2" />
+      {/* Front-right triangular face */}
+      <polygon points="100,25 150,145 175,165" fill="url(#lp2)" stroke="#f472b6" strokeWidth="1.5" />
+      {/* Back-left triangular face */}
+      <polygon points="100,25 50,145 30,165" fill="url(#lp3)" stroke="#f472b6" strokeWidth="1.5" />
+      {/* Back-right triangular face (dashed, barely visible) */}
+      <polygon points="100,25 175,165 30,165" fill="url(#lp4)" stroke="#f9a8d4" strokeWidth="1.2" strokeDasharray="4,3" />
+      {/* Apex dot */}
+      <circle cx="100" cy="25" r="4" fill="#fbcfe8" />
+      {/* Height line */}
+      <line x1="100" y1="25" x2="100" y2="155" stroke="#fce7f3" strokeWidth="1.2" strokeDasharray="5,3" />
+      {/* Labels */}
+      <text x="104" y="90" fill="#fbcfe8" fontSize="10" fontFamily="sans-serif">t</text>
+      <text x="72" y="140" fill="#fbcfe8" fontSize="10" fontFamily="sans-serif">sisi tegak</text>
+      <text x="75" y="175" fill="#f9a8d4" fontSize="10" fontWeight="bold" fontFamily="sans-serif">alas □</text>
+      <text x="93" y="18" fill="#fce7f3" fontSize="10" fontWeight="bold" fontFamily="sans-serif">T</text>
+    </svg>
+  </div>
+);
+
+/* ─────────────────────────────────────────────────────────
+   REUSABLE CONTENT BLOCKS
+───────────────────────────────────────────────────────── */
+
+const DefBox = ({ children }: { children: React.ReactNode }) => (
+  <div className="bg-indigo-500/10 border border-indigo-400/30 rounded-xl px-4 py-3 mb-4 font-body text-sm text-white/90 leading-relaxed">
+    <span className="text-indigo-300 font-bold text-xs uppercase tracking-wider block mb-1">📌 Definisi</span>
+    {children}
+  </div>
+);
+
+const UnsurGrid = ({ items }: { items: { label: string; value: React.ReactNode; color?: string }[] }) => (
+  <div className="mb-4">
+    <p className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2 font-body">🔹 Unsur-Unsur</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      {items.map((item, i) => (
+        <div key={i} className={`rounded-lg px-3 py-2 border ${item.color ?? 'bg-white/5 border-white/10'}`}>
+          <span className="text-xs font-bold text-white/70 font-body">{item.label}: </span>
+          <span className="text-xs text-white/80 font-body">{item.value}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const FormulaCards = ({ items }: { items: { label: string; formula: React.ReactNode; color: string }[] }) => (
+  <div className="mb-4">
+    <p className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2 font-body">📐 Rumus</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      {items.map((item, i) => (
+        <div key={i} className={`rounded-xl px-4 py-3 border text-center ${item.color}`}>
+          <p className="text-[10px] text-white/60 uppercase tracking-wider mb-1 font-body">{item.label}</p>
+          <div className="text-sm font-bold text-white font-body">{item.formula}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const Rangkuman = ({ children }: { children: React.ReactNode }) => (
+  <div className="bg-gradient-to-r from-yellow-900/30 to-amber-900/20 border border-yellow-500/30 rounded-xl px-4 py-3 font-body text-xs text-yellow-100/80 leading-relaxed">
+    <span className="text-yellow-300 font-bold text-xs uppercase tracking-wider block mb-2">⭐ Rangkuman</span>
+    {children}
+  </div>
+);
+
+/* ─────────────────────────────────────────────────────────
+   MATERI SECTIONS
+───────────────────────────────────────────────────────── */
+
+type MateriSection = { heading: string; shape: React.ReactNode; content: React.ReactNode; color: string; border: string };
+
+const materiSections: MateriSection[] = [
+  {
+    heading: "A. Kubus",
+    color: "from-indigo-900/40 to-violet-900/30",
+    border: "border-indigo-500/30",
+    shape: <KubusShape3D />,
+    content: (
+      <div className="space-y-3">
+        <DefBox>
+          <b>Kubus</b> adalah bangun ruang tiga dimensi yang dibentuk oleh <b>6 buah sisi berbentuk persegi yang kongruen</b> dengan semua rusuknya sama panjang. Kubus disebut juga <em>heksahedron beraturan</em>.
+        </DefBox>
+
+        <UnsurGrid items={[
+          { label: "Sisi / Bidang", value: "6 buah (semua berbentuk persegi)", color: "bg-indigo-500/10 border-indigo-400/20" },
+          { label: "Rusuk", value: "12 buah (semua sama panjang = r)", color: "bg-violet-500/10 border-violet-400/20" },
+          { label: "Titik Sudut", value: "8 buah", color: "bg-purple-500/10 border-purple-400/20" },
+          { label: "Diagonal Bidang", value: <span>12 buah, panjang = <M math="r\sqrt{2}" /></span>, color: "bg-fuchsia-500/10 border-fuchsia-400/20" },
+          { label: "Diagonal Ruang", value: <span>4 buah, panjang = <M math="r\sqrt{3}" /></span>, color: "bg-pink-500/10 border-pink-400/20" },
+          { label: "Bidang Diagonal", value: <span>6 buah, luas = <M math="r^2\sqrt{2}" /></span>, color: "bg-rose-500/10 border-rose-400/20" },
+        ]} />
+
+        <FormulaCards items={[
+          { label: "Luas Permukaan", formula: <M math="L = 6r^2" />, color: "bg-indigo-900/40 border-indigo-400/30" },
+          { label: "Volume", formula: <M math="V = r^3" />, color: "bg-violet-900/40 border-violet-400/30" },
+          { label: "Diagonal Bidang", formula: <M math="d_b = r\sqrt{2}" />, color: "bg-purple-900/40 border-purple-400/30" },
+          { label: "Diagonal Ruang", formula: <M math="d_r = r\sqrt{3}" />, color: "bg-fuchsia-900/40 border-fuchsia-400/30" },
+        ]} />
+
+        <Rangkuman>
+          <ul className="space-y-1 list-none">
+            <li>✦ Kubus = balok istimewa dengan p = l = t = r (semua rusuk sama)</li>
+            <li>✦ Jumlah panjang semua rusuk = 12r</li>
+            <li>✦ Jaring-jaring kubus: ada <b>11 jenis</b> jaring-jaring berbeda yang bisa membentuk kubus</li>
+            <li>✦ Simetri: kubus memiliki 48 simetri rotasi dan 3 sumbu simetri utama</li>
+          </ul>
+        </Rangkuman>
+      </div>
+    ),
+  },
+  {
+    heading: "B. Balok",
+    color: "from-emerald-900/40 to-teal-900/30",
+    border: "border-emerald-500/30",
+    shape: <BalokShape3D />,
+    content: (
+      <div className="space-y-3">
+        <DefBox>
+          <b>Balok</b> adalah bangun ruang tiga dimensi yang dibentuk oleh <b>3 pasang persegi panjang yang saling berhadapan dan kongruen</b>, dengan panjang (p), lebar (l), dan tinggi (t).
+        </DefBox>
+
+        <UnsurGrid items={[
+          { label: "Sisi", value: "6 buah (3 pasang persegi panjang berbeda)", color: "bg-emerald-500/10 border-emerald-400/20" },
+          { label: "Rusuk", value: "12 buah (4p + 4l + 4t)", color: "bg-teal-500/10 border-teal-400/20" },
+          { label: "Titik Sudut", value: "8 buah", color: "bg-green-500/10 border-green-400/20" },
+          { label: "Diagonal Bidang ABCD/EFGH", value: <M math="\sqrt{p^2+l^2}" />, color: "bg-cyan-500/10 border-cyan-400/20" },
+          { label: "Diagonal Bidang BCGF/ADHE", value: <M math="\sqrt{l^2+t^2}" />, color: "bg-cyan-500/10 border-cyan-400/20" },
+          { label: "Diagonal Bidang ABFE/DCGH", value: <M math="\sqrt{p^2+t^2}" />, color: "bg-cyan-500/10 border-cyan-400/20" },
+          { label: "Diagonal Ruang", value: <M math="\sqrt{p^2+l^2+t^2}" />, color: "bg-teal-500/10 border-teal-400/20" },
+          { label: "Bidang Diagonal", value: "6 buah berbentuk persegi panjang", color: "bg-emerald-500/10 border-emerald-400/20" },
+        ]} />
+
+        <FormulaCards items={[
+          { label: "Luas Permukaan", formula: <span>L = 2(<M math="pl + lt + pt" />)</span>, color: "bg-emerald-900/40 border-emerald-400/30" },
+          { label: "Volume", formula: <M math="V = p \times l \times t" />, color: "bg-teal-900/40 border-teal-400/30" },
+          { label: "Diagonal Ruang", formula: <M math="d = \sqrt{p^2+l^2+t^2}" />, color: "bg-green-900/40 border-green-400/30" },
+          { label: "Jml Panjang Rusuk", formula: <M math="4(p+l+t)" />, color: "bg-cyan-900/40 border-cyan-400/30" },
+        ]} />
+
+        <div className="mb-3">
+          <p className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2 font-body">🧊 Kubus-Kubus Satuan (Balok p×l×t)</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {[
+              { label: "Cat 3 sisi (sudut)", formula: "8 buah" },
+              { label: "Cat 2 sisi (rusuk)", formula: "4[(p–2)+(l–2)+(t–2)]" },
+              { label: "Cat 1 sisi (bidang)", formula: "2[(p–2)(l–2)+(p–2)(t–2)+(l–2)(t–2)]" },
+              { label: "Tidak terkena cat", formula: "(p–2)(l–2)(t–2)" },
+            ].map((item, i) => (
+              <div key={i} className="bg-teal-500/10 border border-teal-400/20 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-teal-300 font-bold font-body">{item.label}</p>
+                <p className="text-xs text-white/80 font-body font-mono">{item.formula}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Rangkuman>
+          <ul className="space-y-1">
+            <li>✦ Balok adalah generalisasi kubus: jika p = l = t maka menjadi kubus</li>
+            <li>✦ Jumlah panjang semua rusuk = 4(p + l + t)</li>
+            <li>✦ Balok memiliki 4 diagonal ruang dengan panjang sama</li>
+            <li>✦ Setiap bidang diagonal balok berbentuk persegi panjang</li>
+          </ul>
+        </Rangkuman>
+      </div>
+    ),
+  },
+  {
+    heading: "C. Prisma",
+    color: "from-amber-900/40 to-orange-900/30",
+    border: "border-amber-500/30",
+    shape: <PrismaShape3D />,
+    content: (
+      <div className="space-y-3">
+        <DefBox>
+          <b>Prisma</b> adalah bangun ruang yang memiliki <b>dua bidang alas yang sejajar, kongruen, dan berbentuk segi-n</b>. Sisi-sisi tegaknya berbentuk persegi panjang dan tegak lurus terhadap alas. Prisma dinamai berdasarkan bentuk alasnya.
+        </DefBox>
+
+        <UnsurGrid items={[
+          { label: "Sisi / Bidang", value: "n + 2 buah", color: "bg-amber-500/10 border-amber-400/20" },
+          { label: "Rusuk", value: "3n buah", color: "bg-orange-500/10 border-orange-400/20" },
+          { label: "Titik Sudut", value: "2n buah", color: "bg-yellow-500/10 border-yellow-400/20" },
+          { label: "Diagonal Bidang", value: "n(n–1) buah", color: "bg-amber-500/10 border-amber-400/20" },
+          { label: "Diagonal Ruang", value: "n(n–3) buah", color: "bg-orange-500/10 border-orange-400/20" },
+          { label: "Bidang Diagonal", value: <M math="\frac{n}{2}(n-1)" />, color: "bg-yellow-500/10 border-yellow-400/20" },
+        ]} />
+
+        <FormulaCards items={[
+          { label: "Luas Permukaan", formula: <span><M math="L = 2L_a + K_a \times t" /></span>, color: "bg-amber-900/40 border-amber-400/30" },
+          { label: "Volume", formula: <M math="V = L_a \times t" />, color: "bg-orange-900/40 border-orange-400/30" },
+        ]} />
+
+        <div className="bg-orange-500/10 border border-orange-400/20 rounded-xl px-4 py-3 mb-3 font-body text-xs text-white/80">
+          <p className="font-bold text-orange-300 mb-2">Keterangan:</p>
+          <ul className="space-y-1">
+            <li><M math="L_a" /> = luas alas prisma (bergantung bentuk segi-n)</li>
+            <li><M math="K_a" /> = keliling alas prisma</li>
+            <li>t = tinggi prisma (jarak antar bidang alas)</li>
+          </ul>
+        </div>
+
+        <div className="mb-3">
+          <p className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2 font-body">📊 Tabel Unsur Prisma Segi-n</p>
+          <div className="overflow-x-auto rounded-xl border border-amber-400/20">
+            <table className="w-full text-xs font-body text-white/80 text-center">
+              <thead className="bg-amber-900/40 text-amber-300">
+                <tr>
+                  <th className="px-3 py-2 text-left">Prisma</th>
+                  <th className="px-3 py-2">Sisi</th>
+                  <th className="px-3 py-2">Rusuk</th>
+                  <th className="px-3 py-2">Titik Sudut</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[["Segitiga (n=3)", 5, 9, 6], ["Segiempat (n=4)", 6, 12, 8], ["Segilima (n=5)", 7, 15, 10], ["Segienam (n=6)", 8, 18, 12]].map(([name, s, r, ts], i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-amber-900/10" : "bg-amber-900/20"}>
+                    <td className="px-3 py-2 text-left text-amber-200">{name}</td>
+                    <td className="px-3 py-2">{s}</td>
+                    <td className="px-3 py-2">{r}</td>
+                    <td className="px-3 py-2">{ts}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <Rangkuman>
+          <ul className="space-y-1">
+            <li>✦ Prisma segi-n memiliki n sisi tegak berbentuk persegi panjang</li>
+            <li>✦ Volume prisma = volume alas × tinggi (sama untuk semua bentuk alas)</li>
+            <li>✦ Balok adalah prisma segiempat khusus</li>
+            <li>✦ Luas permukaan = 2 × luas alas + keliling alas × tinggi</li>
+          </ul>
+        </Rangkuman>
+      </div>
+    ),
+  },
+  {
+    heading: "D. Limas",
+    color: "from-pink-900/40 to-rose-900/30",
+    border: "border-pink-500/30",
+    shape: <LimasShape3D />,
+    content: (
+      <div className="space-y-3">
+        <DefBox>
+          <b>Limas</b> adalah bangun ruang yang memiliki <b>satu bidang alas berbentuk segi-n</b> dan <b>sisi-sisi tegak berbentuk segitiga</b> yang bertemu di satu titik puncak (apex). Limas dinamai berdasarkan bentuk alasnya.
+        </DefBox>
+
+        <UnsurGrid items={[
+          { label: "Sisi / Bidang", value: "n + 1 buah", color: "bg-pink-500/10 border-pink-400/20" },
+          { label: "Rusuk", value: "2n buah", color: "bg-rose-500/10 border-rose-400/20" },
+          { label: "Titik Sudut", value: "n + 1 buah", color: "bg-fuchsia-500/10 border-fuchsia-400/20" },
+          { label: "Tinggi Limas (t)", value: "Jarak tegak dari puncak ke bidang alas", color: "bg-pink-500/10 border-pink-400/20" },
+          { label: "Tinggi Sisi Tegak (ts)", value: "Tinggi segitiga pada sisi tegak (apotema)", color: "bg-rose-500/10 border-rose-400/20" },
+          { label: "Apotema Alas (a)", value: "Jarak pusat alas ke tengah sisi alas", color: "bg-fuchsia-500/10 border-fuchsia-400/20" },
+        ]} />
+
+        <FormulaCards items={[
+          { label: "Luas Permukaan", formula: <span>L = <M math="L_a" /> + ΣLuas sisi tegak</span>, color: "bg-pink-900/40 border-pink-400/30" },
+          { label: "Volume", formula: <M math="V = \frac{1}{3} \times L_a \times t" />, color: "bg-rose-900/40 border-rose-400/30" },
+        ]} />
+
+        <div className="mb-3">
+          <p className="text-xs font-bold text-white/50 uppercase tracking-wider mb-2 font-body">📊 Tabel Unsur Limas Segi-n</p>
+          <div className="overflow-x-auto rounded-xl border border-pink-400/20">
+            <table className="w-full text-xs font-body text-white/80 text-center">
+              <thead className="bg-pink-900/40 text-pink-300">
+                <tr>
+                  <th className="px-3 py-2 text-left">Limas</th>
+                  <th className="px-3 py-2">Sisi</th>
+                  <th className="px-3 py-2">Rusuk</th>
+                  <th className="px-3 py-2">Titik Sudut</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[["Segitiga (n=3)", 4, 6, 4], ["Segiempat (n=4)", 5, 8, 5], ["Segilima (n=5)", 6, 10, 6], ["Segienam (n=6)", 7, 12, 7]].map(([name, s, r, ts], i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-pink-900/10" : "bg-pink-900/20"}>
+                    <td className="px-3 py-2 text-left text-pink-200">{name}</td>
+                    <td className="px-3 py-2">{s}</td>
+                    <td className="px-3 py-2">{r}</td>
+                    <td className="px-3 py-2">{ts}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="bg-rose-500/10 border border-rose-400/20 rounded-xl px-4 py-3 mb-3 font-body text-xs text-white/80">
+          <p className="font-bold text-rose-300 mb-2">🔑 Rumus Limas Segiempat Beraturan (sisi alas = a, tinggi = t)</p>
+          <ul className="space-y-1">
+            <li>• Tinggi sisi tegak: <M math="t_s = \sqrt{t^2 + \left(\frac{a}{2}\right)^2}" /></li>
+            <li>• Luas sisi tegak: <M math="\frac{1}{2} \times a \times t_s" /> (tiap segitiga)</li>
+            <li>• Luas permukaan: <M math="a^2 + 4 \times \frac{1}{2} \times a \times t_s" /></li>
+            <li>• Volume: <M math="\frac{1}{3} \times a^2 \times t" /></li>
+          </ul>
+        </div>
+
+        <Rangkuman>
+          <ul className="space-y-1">
+            <li>✦ Limas = bangun yang menyempit dari alas ke satu titik puncak</li>
+            <li>✦ Volume limas = ⅓ × volume prisma dengan alas dan tinggi sama</li>
+            <li>✦ Limas segiempat beraturan: semua rusuk tegak sama panjang</li>
+            <li>✦ Piramida Mesir adalah contoh limas segiempat di dunia nyata</li>
+            <li>✦ Hubungan: V_limas = ⅓ × V_prisma (alas & tinggi sama)</li>
+          </ul>
+        </Rangkuman>
+      </div>
+    ),
+  },
+  {
+    heading: "E. Rangkuman Perbandingan",
+    color: "from-sky-900/40 to-blue-900/30",
+    border: "border-sky-500/30",
+    shape: null,
+    content: (
+      <div className="space-y-3">
+        <div className="overflow-x-auto rounded-xl border border-sky-400/20">
+          <table className="w-full text-xs font-body text-white/80 text-center">
+            <thead className="bg-sky-900/40 text-sky-300">
+              <tr>
+                <th className="px-3 py-2 text-left">Bangun</th>
+                <th className="px-3 py-2">Sisi</th>
+                <th className="px-3 py-2">Rusuk</th>
+                <th className="px-3 py-2">Titik Sudut</th>
+                <th className="px-3 py-2">Rumus V</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Kubus", "6", "12", "8", "r³"],
+                ["Balok", "6", "12", "8", "p·l·t"],
+                ["Prisma-n", "n+2", "3n", "2n", "Lₐ·t"],
+                ["Limas-n", "n+1", "2n", "n+1", "⅓·Lₐ·t"],
+              ].map(([name, s, r, ts, v], i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-sky-900/10" : "bg-sky-900/20"}>
+                  <td className="px-3 py-2 text-left text-sky-200 font-bold">{name}</td>
+                  <td className="px-3 py-2">{s}</td>
+                  <td className="px-3 py-2">{r}</td>
+                  <td className="px-3 py-2">{ts}</td>
+                  <td className="px-3 py-2 text-sky-300 font-mono">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="bg-blue-900/30 border border-blue-400/25 rounded-xl px-4 py-3 font-body text-xs text-white/80">
+            <p className="text-blue-300 font-bold mb-2">💡 Rumus Euler</p>
+            <p className="mb-1">Untuk semua bangun ruang sisi datar:</p>
+            <div className="text-center text-sm font-bold text-blue-200 py-1">
+              <M math="S - R + V = 2" />
+            </div>
+            <p className="text-white/50 text-[10px] mt-1">S = banyak sisi, R = banyak rusuk, V = banyak titik sudut</p>
+          </div>
+          <div className="bg-indigo-900/30 border border-indigo-400/25 rounded-xl px-4 py-3 font-body text-xs text-white/80">
+            <p className="text-indigo-300 font-bold mb-2">🎯 Tips Olimpiade</p>
+            <ul className="space-y-1">
+              <li>• Diagonal ruang kubus: <M math="r\sqrt{3}" /></li>
+              <li>• Jarak titik ke bidang: pakai proyeksi + Pythagoras</li>
+              <li>• V limas = ⅓ V prisma (alas & tinggi sama)</li>
+              <li>• Hubungan rusuk-sisi: rumus Euler S – R + V = 2</li>
+            </ul>
+          </div>
+        </div>
+
+        <Rangkuman>
+          <ul className="space-y-1">
+            <li>✦ Bangun ruang sisi datar = bangun ruang yang dibatasi bidang-bidang datar (polygon)</li>
+            <li>✦ Semua memenuhi rumus Euler: S – R + V = 2</li>
+            <li>✦ Limas terpancung (frustum): V = ⅓ × h × (A₁ + A₂ + √(A₁·A₂))</li>
+            <li>✦ Jaring-jaring kubus: 11 jenis berbeda; balok: 54 jenis berbeda</li>
+          </ul>
+        </Rangkuman>
+      </div>
+    ),
+  },
+];
+
+/* ─────────────────────────────────────────────────────────
+   LATIHAN DATA (same as before)
+───────────────────────────────────────────────────────── */
 
 const latihanDasar = [
   { no: 1, soal: "Pada rangkaian persegi berikut yang merupakan jaring-jaring kubus adalah ...", options: ["A. Gambar A", "B. Gambar B", "C. Gambar C", "D. Gambar D"] },
@@ -170,10 +607,14 @@ const latihanOlimpiade = [
   { no: 22, soal: "OSN Matematika 2025 Tingkat Kota\nOktahendron adalah bilangan bangun ruang tiga dimensi dengan delapan bidang sisi datar. Berikut ini adalah jaring-jaring suatu octahedron beraturan yang memiliki delapan bidang sisi segitiga sama sisi yang kongruen.\nJika jaring-jaring tersebut dibentuk menjadi octahedron, maka angka pada setiap bidang sisi sama dengan penjumlahan semua bidang sisi yang berbagi rusuk dengan bidang sisi tersebut. (contoh : b = a + c + d). jika a = -4, c = 0 dan g = -10, maka nilai b adalah ...", options: ["A. -10", "B. -8", "C. 8", "D. 10"] },
 ];
 
+/* ─────────────────────────────────────────────────────────
+   PAGE COMPONENT
+───────────────────────────────────────────────────────── */
+
 const OlimpiadeBangunRuangSisiDatarPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSection.sections.length }, (_, i) => i));
+  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
   const [expandedDasarPembahasan, setExpandedDasarPembahasan] = useState<number[]>([]);
   const [expandedOlimpiadePembahasan, setExpandedOlimpiadePembahasan] = useState<number[]>([]);
 
@@ -200,29 +641,41 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <ShapeStyles />
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <Trophy className="w-10 h-10 text-accent mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          OLIMPIADE - BANGUN RUANG SISI DATAR
-        </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Irawan Sutiawan, M.Pd</p>
+
+        {/* Header */}
+        <div className="flex flex-col items-center mb-7">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500/20 to-indigo-500/10 border border-violet-400/30 flex items-center justify-center mb-4 shadow-lg">
+            <Trophy className="w-7 h-7 text-violet-400" />
+          </div>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-white text-center mb-1"
+            style={{ textShadow: '0 0 32px rgba(167,139,250,0.5)' }}>
+            OLIMPIADE — BANGUN RUANG SISI DATAR
+          </h1>
+          <p className="text-white/40 text-xs text-center font-body">Irawan Sutiawan, M.Pd</p>
+          <div className="flex items-center gap-2 mt-3">
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-violet-500/10 border border-violet-400/20 text-violet-400 font-body">4 Bangun Ruang</span>
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">68 Soal</span>
+          </div>
+        </div>
 
         {/* Tabs */}
         <div className="flex gap-2 justify-center mb-6">
           {[
-            { key: "materi" as const, label: "Materi" },
-            { key: "dasar" as const, label: "Latihan Dasar" },
-            { key: "olimpiade" as const, label: "Latihan Olimpiade" },
+            { key: "materi" as const, label: "📘 Materi" },
+            { key: "dasar" as const, label: "✏️ Latihan Dasar" },
+            { key: "olimpiade" as const, label: "🏆 Latihan Olimpiade" },
           ].map(tab => (
             <button
               key={tab.key}
               onClick={() => { playPopSound(); setActiveTab(tab.key); }}
-              className={`font-display text-xs px-4 py-2 rounded-lg border cursor-pointer transition-all ${
+              className={`font-display text-xs px-4 py-2 rounded-xl border cursor-pointer transition-all ${
                 activeTab === tab.key
-                  ? "bg-accent text-accent-foreground border-accent"
-                  : "bg-card/80 text-white/70 border-border hover:border-accent/40"
+                  ? "bg-violet-500/20 text-violet-300 border-violet-400/50 shadow-[0_0_12px_rgba(167,139,250,0.15)]"
+                  : "bg-card/80 text-white/60 border-border hover:border-violet-400/30 hover:text-white/80"
               }`}
             >
               {tab.label}
@@ -230,29 +683,30 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
           ))}
         </div>
 
-        {/* Materi Tab */}
+        {/* MATERI TAB */}
         {activeTab === "materi" && (
           <div className="space-y-3 animate-slide-up">
-            {materiSection.sections.map((section, idx) => (
-              <div key={idx} className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            {materiSections.map((section, idx) => (
+              <div key={idx}
+                className={`relative rounded-2xl overflow-hidden border ${section.border}`}>
+                <div className={`absolute inset-0 bg-gradient-to-br ${section.color} backdrop-blur`} />
                 <button
                   onClick={() => toggleSection(idx)}
-                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
+                  className="relative w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
                 >
-                  <span className="font-display text-sm text-accent font-bold">{section.heading}</span>
-                  {expandedSections.includes(idx) ? (
-                    <ChevronUp className="w-4 h-4 text-accent shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 text-white/50 shrink-0" />
-                  )}
+                  <span className="font-display text-sm text-white font-bold">{section.heading}</span>
+                  {expandedSections.includes(idx)
+                    ? <ChevronUp className="w-4 h-4 text-white/60 shrink-0" />
+                    : <ChevronDown className="w-4 h-4 text-white/40 shrink-0" />}
                 </button>
                 {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
-                    </div>
+                  <div className="relative px-5 pb-5">
+                    {section.shape && (
+                      <div className="py-4">
+                        {section.shape}
+                      </div>
+                    )}
+                    {section.content}
                   </div>
                 )}
               </div>
@@ -260,16 +714,17 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
           </div>
         )}
 
-        {/* Latihan Dasar Tab */}
+        {/* LATIHAN DASAR TAB */}
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
             {latihanDasar.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
                 <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                  <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                  {soal.soal.split('\n').map((line, lineIdx) => (
                     <span key={lineIdx}>
                       {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                      {renderWithLatex(line)}
                     </span>
                   ))}
                 </div>
@@ -296,8 +751,7 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                       {expandedDasarPembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
                       {expandedDasarPembahasan.includes(soal.no)
                         ? <ChevronUp className="w-3 h-3" />
-                        : <ChevronDown className="w-3 h-3" />
-                      }
+                        : <ChevronDown className="w-3 h-3" />}
                     </button>
                     {expandedDasarPembahasan.includes(soal.no) && (
                       <div className="mt-3 bg-muted/20 border border-border/60 rounded-xl px-4 py-3 space-y-1">
@@ -311,63 +765,69 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
           </div>
         )}
 
-        {/* Latihan Olimpiade Tab */}
+        {/* LATIHAN OLIMPIADE TAB */}
         {activeTab === "olimpiade" && (
           <div className="space-y-4 animate-slide-up">
             {latihanOlimpiade.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
+              <div key={soal.no}
+                className="relative rounded-2xl overflow-hidden border border-amber-500/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 to-slate-900/60 backdrop-blur" />
+                <div className="relative px-5 py-4">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/30 text-amber-300 text-xs font-bold mr-2 shrink-0">{soal.no}</span>
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {lineIdx === 0 && line.startsWith('OSN')
+                          ? <span className="text-yellow-400 font-semibold">{line}</span>
+                          : renderWithLatex(line)}
+                      </span>
                     ))}
                   </div>
-                )}
-                {pembahasanOlimpiade[soal.no] && (
-                  <div>
-                    <button
-                      onClick={() => toggleOlimpiadePembahasan(soal.no)}
-                      className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                        expandedOlimpiadePembahasan.includes(soal.no)
-                          ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                          : "bg-muted/30 border-border text-white/60 hover:border-emerald-500/40 hover:text-emerald-400"
-                      }`}
-                    >
-                      <BookOpen className="w-3 h-3" />
-                      {expandedOlimpiadePembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
-                      {expandedOlimpiadePembahasan.includes(soal.no)
-                        ? <ChevronUp className="w-3 h-3" />
-                        : <ChevronDown className="w-3 h-3" />
-                      }
-                    </button>
-                    {expandedOlimpiadePembahasan.includes(soal.no) && (
-                      <div className="mt-3 bg-muted/20 border border-border/60 rounded-xl px-4 py-3 space-y-1">
-                        {pembahasanOlimpiade[soal.no]}
-                      </div>
-                    )}
-                  </div>
-                )}
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {pembahasanOlimpiade[soal.no] && (
+                    <div>
+                      <button
+                        onClick={() => toggleOlimpiadePembahasan(soal.no)}
+                        className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                          expandedOlimpiadePembahasan.includes(soal.no)
+                            ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
+                            : "bg-white/5 border-white/10 text-white/60 hover:border-emerald-500/40 hover:text-emerald-400"
+                        }`}
+                      >
+                        <BookOpen className="w-3 h-3" />
+                        {expandedOlimpiadePembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                        {expandedOlimpiadePembahasan.includes(soal.no)
+                          ? <ChevronUp className="w-3 h-3" />
+                          : <ChevronDown className="w-3 h-3" />}
+                      </button>
+                      {expandedOlimpiadePembahasan.includes(soal.no) && (
+                        <div className="mt-3 bg-muted/20 border border-border/60 rounded-xl px-4 py-3 space-y-1">
+                          {pembahasanOlimpiade[soal.no]}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
         )}
 
-        <div className="mt-8 text-center">
+        <div className="mt-10 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/olimpiade"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+            className="text-sm text-white/30 hover:text-violet-400 transition-colors cursor-pointer font-body"
           >
-            Kembali ke Olimpiade
+            ← Kembali ke Olimpiade
           </button>
         </div>
       </div>
