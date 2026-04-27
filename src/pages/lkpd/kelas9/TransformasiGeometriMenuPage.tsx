@@ -1,10 +1,10 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "TRANSLASI (PERGESERAN)", path: "", icon: "➡️" },
-  { label: "REFLEKSI (PENCERMINAN)", path: "", icon: "🪞" },
-  { label: "ROTASI (PERPUTARAN)", path: "", icon: "🔄" },
-  { label: "DILATASI (PERKALIAN/PERUBAHAN UKURAN)", path: "", icon: "🔭" },
+  { label: "TRANSLASI (PERGESERAN)", path: "/lkpd/kelas-9/transformasi-geometri/translasi", icon: "➡️" },
+  { label: "REFLEKSI (PENCERMINAN)", path: "/lkpd/kelas-9/transformasi-geometri/refleksi", icon: "🪞" },
+  { label: "ROTASI (PERPUTARAN)", path: "/lkpd/kelas-9/transformasi-geometri/rotasi", icon: "🔄" },
+  { label: "DILATASI (PERKALIAN/PERUBAHAN UKURAN)", path: "/lkpd/kelas-9/transformasi-geometri/dilatasi", icon: "🔭" },
 ];
 
 const TransformasiGeometriMenuPage = () => (
