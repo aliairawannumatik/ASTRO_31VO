@@ -791,6 +791,9 @@ const olimpiadeImages: Record<number, string> = {
   22: "/lingkaran-olimpiade-22.png",
   23: "/lingkaran-olimpiade-23.png",
   24: "/lingkaran-olimpiade-24.png",
+  26: "/lingkaran-olimpiade-26.png",
+  27: "/lingkaran-olimpiade-27.png",
+  29: "/lingkaran-olimpiade-29.png",
 };
 
 const latihanOlimpiade = [
