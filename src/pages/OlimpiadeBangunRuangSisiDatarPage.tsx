@@ -530,7 +530,35 @@ const materiSections: MateriSection[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────
-   LATIHAN DATA (same as before)
+   LATIHAN DASAR IMAGES
+───────────────────────────────────────────────────────── */
+
+const dasarImages: Record<number, string> = {
+  2:  "/brsd-dasar-2.png",
+  3:  "/brsd-dasar-3.png",
+  9:  "/brsd-dasar-9.png",
+  10: "/brsd-dasar-10.jpg",
+  11: "/brsd-dasar-11.png",
+  17: "/brsd-dasar-17.png",
+  25: "/brsd-dasar-25.png",
+  26: "/brsd-dasar-26.png",
+  30: "/brsd-dasar-30.png",
+  36: "/brsd-dasar-36.png",
+  39: "/brsd-dasar-39.png",
+  43: "/brsd-dasar-43.png",
+};
+
+const dasarOptionImages: Record<number, Record<string, string>> = {
+  1: {
+    A: "/brsd-dasar-1-A.png",
+    B: "/brsd-dasar-1-B.png",
+    C: "/brsd-dasar-1-C.png",
+    D: "/brsd-dasar-1-D.png",
+  },
+};
+
+/* ─────────────────────────────────────────────────────────
+   LATIHAN DATA
 ───────────────────────────────────────────────────────── */
 
 const latihanDasar = [
@@ -717,51 +745,77 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
         {/* LATIHAN DASAR TAB */}
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span>{" "}
-                  {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
+            {latihanDasar.map((soal) => {
+              const soalImg = dasarImages[soal.no];
+              const optImgs = dasarOptionImages[soal.no];
+              return (
+                <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {renderWithLatex(line)}
+                      </span>
                     ))}
                   </div>
-                )}
-                {pembahasanDasar[soal.no] && (
-                  <div>
-                    <button
-                      onClick={() => toggleDasarPembahasan(soal.no)}
-                      className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                        expandedDasarPembahasan.includes(soal.no)
-                          ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                          : "bg-muted/30 border-border text-white/60 hover:border-emerald-500/40 hover:text-emerald-400"
-                      }`}
-                    >
-                      <BookOpen className="w-3 h-3" />
-                      {expandedDasarPembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
-                      {expandedDasarPembahasan.includes(soal.no)
-                        ? <ChevronUp className="w-3 h-3" />
-                        : <ChevronDown className="w-3 h-3" />}
-                    </button>
-                    {expandedDasarPembahasan.includes(soal.no) && (
-                      <div className="mt-3 bg-muted/20 border border-border/60 rounded-xl px-4 py-3 space-y-1">
-                        {pembahasanDasar[soal.no]}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+                  {soalImg && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={soalImg}
+                        alt={`Gambar soal ${soal.no}`}
+                        className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/5 p-2"
+                      />
+                    </div>
+                  )}
+                  {soal.options.length > 0 && (
+                    <div className={`grid gap-2 mb-3 ${optImgs ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`}>
+                      {soal.options.map((opt, j) => {
+                        const letter = opt.charAt(0);
+                        const optImg = optImgs?.[letter];
+                        return (
+                          <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                            {optImg ? (
+                              <div className="flex flex-col items-center gap-1">
+                                <span className="text-accent font-bold self-start">{letter}.</span>
+                                <img
+                                  src={optImg}
+                                  alt={`Opsi ${letter} soal ${soal.no}`}
+                                  className="max-w-full rounded border border-white/10 bg-white/90 p-1"
+                                />
+                              </div>
+                            ) : renderWithLatex(opt)}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                  {pembahasanDasar[soal.no] && (
+                    <div>
+                      <button
+                        onClick={() => toggleDasarPembahasan(soal.no)}
+                        className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                          expandedDasarPembahasan.includes(soal.no)
+                            ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
+                            : "bg-muted/30 border-border text-white/60 hover:border-emerald-500/40 hover:text-emerald-400"
+                        }`}
+                      >
+                        <BookOpen className="w-3 h-3" />
+                        {expandedDasarPembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                        {expandedDasarPembahasan.includes(soal.no)
+                          ? <ChevronUp className="w-3 h-3" />
+                          : <ChevronDown className="w-3 h-3" />}
+                      </button>
+                      {expandedDasarPembahasan.includes(soal.no) && (
+                        <div className="mt-3 bg-muted/20 border border-border/60 rounded-xl px-4 py-3 space-y-1">
+                          {pembahasanDasar[soal.no]}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
