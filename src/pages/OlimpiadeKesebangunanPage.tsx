@@ -26,6 +26,31 @@ import kesDasarImg1i from "@assets/no_1_pernyataan_(i)_1777275265961.png";
 import kesDasarImg1ii from "@assets/no_1_pernyataan_(ii)_1777275265962.png";
 import kesDasarImg1iii from "@assets/no_1_pernyataan_(iii)_1777275265962.png";
 import kesDasarImg1iv from "@assets/no_1_pernyataan_(iv)_1777275265963.png";
+import kesOlimpiadeImg2 from "@assets/2_1777275877424.png";
+import kesOlimpiadeImg3 from "@assets/3_1777275877425.png";
+import kesOlimpiadeImg4 from "@assets/4_1777275877425.png";
+import kesOlimpiadeImg7 from "@assets/7_1777275877426.png";
+import kesOlimpiadeImg8 from "@assets/8_1777275877426.png";
+import kesOlimpiadeImg9 from "@assets/9_1777275877426.png";
+import kesOlimpiadeImg11 from "@assets/11_1777275877427.png";
+import kesOlimpiadeImg13 from "@assets/13_1777275877427.png";
+import kesOlimpiadeImg14 from "@assets/14_1777275877428.png";
+import kesOlimpiadeImg16 from "@assets/16_1777275877428.png";
+import kesOlimpiadeImg17 from "@assets/17_1777275877429.png";
+
+const kesOlimpiadeImages: Record<number, string> = {
+  2: kesOlimpiadeImg2,
+  3: kesOlimpiadeImg3,
+  4: kesOlimpiadeImg4,
+  7: kesOlimpiadeImg7,
+  8: kesOlimpiadeImg8,
+  9: kesOlimpiadeImg9,
+  11: kesOlimpiadeImg11,
+  13: kesOlimpiadeImg13,
+  14: kesOlimpiadeImg14,
+  16: kesOlimpiadeImg16,
+  17: kesOlimpiadeImg17,
+};
 
 const kesDasarImages: Record<number, string> = {
   3: kesDasarImg3,
@@ -681,6 +706,15 @@ const OlimpiadeKesebangunanPage = () => {
                       </span>
                     ))}
                   </div>
+                  {kesOlimpiadeImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={kesOlimpiadeImages[soal.no]}
+                        alt={`Gambar soal olimpiade ${soal.no}`}
+                        className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                      />
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                       {soal.options.map((opt, j) => (
