@@ -52,6 +52,7 @@ import PolaBilanganMenuPage from "./pages/lkpd/kelas8/PolaBilanganMenuPage";
 import KoordinatCartesiusLKPDMenuPage from "./pages/lkpd/kelas8/KoordinatCartesiusMenuPage";
 import KoordinatCartesiusLKPDPage from "./pages/lkpd/kelas8/koordinat-cartesius/KoordinatCartesiusLKPDPage";
 import RelasiFungsiLKPDMenuPage from "./pages/lkpd/kelas8/RelasiFungsiMenuPage";
+import RelasiFungsiLKPDPage from "./pages/lkpd/kelas8/relasi-fungsi/RelasiFungsiLKPDPage";
 import SPLDVLKPDMenuPage from "./pages/lkpd/kelas8/SPLDVMenuPage";
 import PersamaanGarisLurusLKPDMenuPage from "./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage";
 import TeoremaPythagorasLKPDMenuPage from "./pages/lkpd/kelas8/TeoremaPythagorasMenuPage";
@@ -880,6 +881,7 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/koordinat-cartesius/lkpd" element={<KoordinatCartesiusLKPDPage />} />
       <Route path="/lkpd/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-8/relasi-dan-fungsi/lkpd" element={<RelasiFungsiLKPDPage />} />
       <Route path="/lkpd/kelas-8/spldv" element={<SPLDVLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
       <Route path="/lkpd/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasLKPDMenuPage />} />
