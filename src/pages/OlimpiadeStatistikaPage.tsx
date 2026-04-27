@@ -8,6 +8,11 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { pembahasanDasar } from "@/data/statistikaPembahasanDasar";
 import { pembahasanOlimpiade } from "@/data/statistikaPembahasanOlimpiade";
+import statistikaSoal13Img from "@assets/image_1777276565289.png";
+
+const dasarImages: Record<number, string> = {
+  13: statistikaSoal13Img,
+};
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -1215,6 +1220,15 @@ const OlimpiadeStatistikaPage = () => {
                       </span>
                     ))}
                   </div>
+                  {dasarImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={dasarImages[soal.no]}
+                        alt={`Gambar soal ${soal.no}`}
+                        className="max-w-[320px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                      />
+                    </div>
+                  )}
                   {visual}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
