@@ -22,6 +22,17 @@ import dasarImg34 from "@assets/34_1777273872299.png";
 import dasarImg35 from "@assets/35_1777273872299.png";
 import dasarImg36 from "@assets/36_1777273872300.png";
 import dasarImg37 from "@assets/37_1777273872301.png";
+import olimImg1 from "@assets/1_1777274776154.png";
+import olimImg5 from "@assets/5_1777274776155.png";
+import olimImg10 from "@assets/10_1777274776155.png";
+import olimImg15 from "@assets/15_1777274776155.png";
+
+const brslOlimpiadeImages: Record<number, string> = {
+  1: olimImg1,
+  5: olimImg5,
+  10: olimImg10,
+  15: olimImg15,
+};
 
 const brslDasarImages: Record<number, string> = {
   3: dasarImg3,
@@ -636,6 +647,15 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                       </span>
                     ))}
                   </div>
+                  {brslOlimpiadeImages[soal.no] && (
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={brslOlimpiadeImages[soal.no]}
+                        alt={`Gambar soal ${soal.no}`}
+                        className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                      />
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {soal.options.map((opt, j) => (
