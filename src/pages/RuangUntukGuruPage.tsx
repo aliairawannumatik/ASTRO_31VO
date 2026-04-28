@@ -11,6 +11,7 @@ import {
   BookOpen,
   Target,
   ClipboardCheck,
+  NotebookPen,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -70,6 +71,12 @@ const guruMenuItems = [
     icon: ClipboardCheck,
     path: "/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan",
     desc: "Rubrik 7 dimensi profil lulusan dan konversi nilai",
+  },
+  {
+    label: "JURNAL GURU",
+    icon: NotebookPen,
+    path: "/ruang-untuk-guru/jurnal-guru",
+    desc: "Buku jurnal kejadian dan tindak lanjut peserta didik",
   },
 ];
 
