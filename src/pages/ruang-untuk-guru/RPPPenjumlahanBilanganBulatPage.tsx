@@ -27,7 +27,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const identitas = [
   { label: "Penyusun", value: "Irawan Sutiawan, M.Pd", icon: User },
-  { label: "Sekolah", value: "SMPN 28 Bandung", icon: School },
+  { label: "Sekolah", value: "Sekolah Menengah Pertama", icon: School },
   { label: "Kelas / Fase", value: "IX / D", icon: GraduationCap },
   { label: "Tahun Ajaran", value: "2025 - 2026", icon: Calendar },
   { label: "Alokasi Waktu", value: "2 x 40 JP", icon: Clock },
@@ -95,9 +95,7 @@ const kemitraan = [
 ];
 
 const pemanfaatanDigital = [
-  "Penggunaan PowerPoint atau Google Slides untuk presentasi konsep dan contoh.",
-  "Potensi untuk mengintegrasikan video pembelajaran terkait aplikasi bilangan bulat di dunia nyata.",
-  "Penggunaan aplikasi penilaian digital seperti Quizizz atau Kahoot untuk memberikan umpan balik cepat (asesmen for learning).",
+  "Penggunaan aplikasi NUMATIK untuk presentasi konsep dan contoh, presentasi, video dan quiz.",
 ];
 
 const langkahAwal = [
@@ -553,7 +551,7 @@ const RPPPenjumlahanBilanganBulatPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="text-center">
               <div className="text-xs text-white/60 font-body mb-1">Mengetahui,</div>
-              <div className="text-sm font-semibold text-white font-body mb-16">Kepala SMPN 28 Bandung</div>
+              <div className="text-sm font-semibold text-white font-body mb-16">Kepala Sekolah Menengah Pertama</div>
               <div className="text-sm font-bold text-white font-body border-t border-white/20 pt-2">
                 Dr. Hj. Yuli Nurhayati, S.Pd, M.Pd
               </div>
