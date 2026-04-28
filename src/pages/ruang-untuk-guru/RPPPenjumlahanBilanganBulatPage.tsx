@@ -553,17 +553,17 @@ const RPPPenjumlahanBilanganBulatPage = () => {
               <div className="text-xs text-white/60 font-body mb-1">Mengetahui,</div>
               <div className="text-sm font-semibold text-white font-body mb-16">Kepala Sekolah Menengah Pertama</div>
               <div className="text-sm font-bold text-white font-body border-t border-white/20 pt-2">
-                Dr. Hj. Yuli Nurhayati, S.Pd, M.Pd
+                ..........................................................
               </div>
-              <div className="text-xs text-white/60 font-body mt-1">NIP. 196607071989032007</div>
+              <div className="text-xs text-white/60 font-body mt-1">NIP. ..........................................................</div>
             </div>
             <div className="text-center">
               <div className="text-xs text-white/60 font-body mb-1">&nbsp;</div>
               <div className="text-sm font-semibold text-white font-body mb-16">Guru Mata Pelajaran</div>
               <div className="text-sm font-bold text-white font-body border-t border-white/20 pt-2">
-                Irawan Sutiawan, M.Pd
+                ..........................................................
               </div>
-              <div className="text-xs text-white/60 font-body mt-1">NIP. 198902272023211010</div>
+              <div className="text-xs text-white/60 font-body mt-1">NIP. ..........................................................</div>
             </div>
           </div>
         </div>
