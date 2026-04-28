@@ -1,9 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ArrowLeft } from "lucide-react";
 import Starfield from "@/components/Starfield";
-import QuizNavigation from "@/components/QuizNavigation";
-import { useAudio } from "@/hooks/useAudio";
+import { useAudio, playPopSound } from "@/hooks/useAudio";
 import { useSound } from "@/contexts/SoundContext";
 import { spaceBg } from "@/assets/placeholder";
 
@@ -21,6 +19,7 @@ interface MeteorShootingGameProps {
   topicLabel: string;
   backPath: string;
   backLabel?: string;
+  homePath?: string;
 }
 
 interface MeteorState {
@@ -38,7 +37,7 @@ interface LaserState {
   progress: number;
 }
 
-const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kembali" }: MeteorShootingGameProps) => {
+const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kembali", homePath = "/menu" }: MeteorShootingGameProps) => {
   const navigate = useNavigate();
   const { playExplosion, playCorrect, playLaser, startBgMusic, stopBgMusic } = useAudio();
   const { soundOn } = useSound();
@@ -252,7 +251,32 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/80" />
         <Starfield />
-        <QuizNavigation />
+
+        <div
+          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3"
+          style={{
+            paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
+            paddingRight: "max(1rem, env(safe-area-inset-right, 0px))",
+            paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))",
+          }}
+        >
+          <button
+            onClick={() => { playPopSound(); stopBgMusic(); navigate(backPath); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title={backLabel}
+          >
+            <span className="text-base leading-none">←</span>
+            <span className="hidden sm:inline">Kembali</span>
+          </button>
+          <button
+            onClick={() => { playPopSound(); stopBgMusic(); navigate(homePath); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Menu Utama"
+          >
+            <span className="text-base leading-none">🏠</span>
+            <span className="hidden sm:inline">Home</span>
+          </button>
+        </div>
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[10%] left-[8%] animate-float-slow">
@@ -350,23 +374,6 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         </div>
       </div>
 
-      <div
-        className="fixed left-0 bottom-0 z-50 p-4"
-        style={{
-          paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
-          paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
-        }}
-      >
-        <button
-          onClick={() => { navigate(backPath); }}
-          className="w-11 h-11 rounded-full bg-card/80 backdrop-blur border border-border 
-            flex items-center justify-center text-primary hover:border-primary/60 
-            hover:box-glow-cyan transition-all duration-300 cursor-pointer"
-          title={backLabel}
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-      </div>
       </>
     );
   }
@@ -438,7 +445,32 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/80" />
         <Starfield />
-        <QuizNavigation />
+
+        <div
+          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3"
+          style={{
+            paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
+            paddingRight: "max(1rem, env(safe-area-inset-right, 0px))",
+            paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))",
+          }}
+        >
+          <button
+            onClick={() => { playPopSound(); navigate(backPath); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title={backLabel}
+          >
+            <span className="text-base leading-none">←</span>
+            <span className="hidden sm:inline">Kembali</span>
+          </button>
+          <button
+            onClick={() => { playPopSound(); navigate(homePath); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Menu Utama"
+          >
+            <span className="text-base leading-none">🏠</span>
+            <span className="hidden sm:inline">Home</span>
+          </button>
+        </div>
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[10%] left-[8%] animate-float-slow">
@@ -522,15 +554,32 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
     <div className="relative h-[100dvh] overflow-hidden select-none flex flex-col">
       <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
       <Starfield />
-      <QuizNavigation />
 
-      <button
-        onClick={() => { stopBgMusic(); navigate(backPath); }}
-        className="absolute top-4 left-4 z-30 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-card/70 backdrop-blur border border-border text-foreground/80 hover:text-foreground hover:bg-card transition-all duration-200 font-body text-xs cursor-pointer"
+      <div
+        className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-4 py-3"
+        style={{
+          paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
+          paddingRight: "max(1rem, env(safe-area-inset-right, 0px))",
+          paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))",
+        }}
       >
-        <ChevronLeft className="w-4 h-4" />
-        {backLabel}
-      </button>
+        <button
+          onClick={() => { playPopSound(); stopBgMusic(); navigate(backPath); }}
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+          title={backLabel}
+        >
+          <span className="text-base leading-none">←</span>
+          <span className="hidden sm:inline">Kembali</span>
+        </button>
+        <button
+          onClick={() => { playPopSound(); stopBgMusic(); navigate(homePath); }}
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+          title="Menu Utama"
+        >
+          <span className="text-base leading-none">🏠</span>
+          <span className="hidden sm:inline">Home</span>
+        </button>
+      </div>
 
       <div className={`relative z-20 shrink-0 flex flex-col items-center px-4 ${isLandscape ? "pt-4" : "pt-8 md:pt-14"} pb-1`}>
         <div className="font-display text-xs text-muted-foreground mb-0.5">

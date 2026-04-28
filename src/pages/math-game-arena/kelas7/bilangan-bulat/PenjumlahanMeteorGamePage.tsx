@@ -34,6 +34,7 @@ const PenjumlahanMeteorGamePage = () => (
     topicLabel="PENJUMLAHAN BILANGAN BULAT"
     backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
     backLabel="Kembali ke Pilihan Game"
+    homePath="/menu"
   />
 );
 
