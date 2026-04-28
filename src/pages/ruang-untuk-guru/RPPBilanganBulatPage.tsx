@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Plus, Minus, X, Divide, Hash } from "lucide-react";
+import { ArrowLeft, Plus, Minus, X, Divide, Hash, Search } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -14,6 +14,17 @@ const operasi = [
     border: "border-emerald-300/50",
     text: "text-emerald-100",
     iconBg: "bg-emerald-500/20",
+    available: true,
+  },
+  {
+    title: "Penjumlahan Bilangan Bulat (Discovery Learning)",
+    desc: "RPP untuk operasi penjumlahan bilangan bulat dengan model pembelajaran Discovery Learning (6 sintaks: Stimulation, Problem Statement, Data Collection, Data Processing, Verification, Generalization).",
+    icon: Search,
+    path: "/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan-discovery",
+    color: "from-violet-500/25 to-indigo-500/10",
+    border: "border-violet-300/50",
+    text: "text-violet-100",
+    iconBg: "bg-violet-500/20",
     available: true,
   },
   {
