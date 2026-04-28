@@ -136,6 +136,7 @@ import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
 import KeyakinanKelasPage from "./pages/ruang-untuk-guru/KeyakinanKelasPage";
 import PenilaianPembelajaranPage from "./pages/ruang-untuk-guru/PenilaianPembelajaranPage";
+import CapaianPembelajaranPage from "./pages/ruang-untuk-guru/CapaianPembelajaranPage";
 import RPPPage from "./pages/ruang-untuk-guru/RPPPage";
 import RPPBilanganBulatPage from "./pages/ruang-untuk-guru/RPPBilanganBulatPage";
 import RPPPenjumlahanBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPenjumlahanBilanganBulatPage";
@@ -999,6 +1000,7 @@ const AppInner = () => {
       <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
       <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />
       <Route path="/ruang-untuk-guru/penilaian-pembelajaran" element={<PenilaianPembelajaranPage />} />
+      <Route path="/ruang-untuk-guru/capaian-pembelajaran" element={<CapaianPembelajaranPage />} />
       <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat" element={<RPPBilanganBulatPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan" element={<RPPPenjumlahanBilanganBulatPage />} />

@@ -9,12 +9,19 @@ import {
   HeartHandshake,
   ClipboardList,
   BookOpen,
+  Target,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
 const guruMenuItems = [
+  {
+    label: "CAPAIAN PEMBELAJARAN",
+    icon: Target,
+    path: "/ruang-untuk-guru/capaian-pembelajaran",
+    desc: "Capaian pembelajaran matematika Fase D",
+  },
   {
     label: "ATP",
     icon: ListChecks,
