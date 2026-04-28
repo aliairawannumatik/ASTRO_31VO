@@ -604,57 +604,9 @@ import PeluangMGAK9Page from "./pages/math-game-arena/kelas9/PeluangPage";
 import PersamaanKuadratMGAK9Page from "./pages/math-game-arena/kelas9/PersamaanKuadratPage";
 import FungsiKuadratMGAK9Page from "./pages/math-game-arena/kelas9/FungsiKuadratPage";
 
-// Math Game Arena - Kelas 9 Game Pages - Bilangan Berpangkat
-import PengertianNotasiMGAK9GamePage from "./pages/math-game-arena/kelas9/bilangan-berpangkat/PengertianNotasiGamePage";
-import SifatOperasiMGAK9GamePage from "./pages/math-game-arena/kelas9/bilangan-berpangkat/SifatOperasiGamePage";
-import BentukAkarMGAK9GamePage from "./pages/math-game-arena/kelas9/bilangan-berpangkat/BentukAkarGamePage";
-import NotasiIlmiahMGAK9GamePage from "./pages/math-game-arena/kelas9/bilangan-berpangkat/NotasiIlmiahGamePage";
-// Math Game Arena - Kelas 9 Game Pages - Kesebangunan & Kekongruenan
-import DefinisiKesebangunanMGAK9GamePage from "./pages/math-game-arena/kelas9/kesebangunan-kekongruenan/DefinisiGamePage";
-import MenghitungRusukMGAK9GamePage from "./pages/math-game-arena/kelas9/kesebangunan-kekongruenan/MenghitungRusukGamePage";
-import SegitigaSebangunMGAK9GamePage from "./pages/math-game-arena/kelas9/kesebangunan-kekongruenan/SegitigaSebangunGamePage";
-import RasioRusukMGAK9GamePage from "./pages/math-game-arena/kelas9/kesebangunan-kekongruenan/RasioRusukGamePage";
-import KekongruenBangunDatarMGAK9GamePage from "./pages/math-game-arena/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarGamePage";
-// Math Game Arena - Kelas 9 Game Pages - Transformasi Geometri
-import TranslasiMGAK9GamePage from "./pages/math-game-arena/kelas9/transformasi-geometri/TranslasiGamePage";
-import RefleksiMGAK9GamePage from "./pages/math-game-arena/kelas9/transformasi-geometri/RefleksiGamePage";
-import RotasiMGAK9GamePage from "./pages/math-game-arena/kelas9/transformasi-geometri/RotasiGamePage";
-import DilatasiMGAK9GamePage from "./pages/math-game-arena/kelas9/transformasi-geometri/DilatasiGamePage";
-// Math Game Arena - Kelas 9 Game Pages - Bangun Ruang Sisi Lengkung
-import TabungMGAK9GamePage from "./pages/math-game-arena/kelas9/bangun-ruang-sisi-lengkung/TabungGamePage";
-import KerucutMGAK9GamePage from "./pages/math-game-arena/kelas9/bangun-ruang-sisi-lengkung/KerucutGamePage";
-import BolaMGAK9GamePage from "./pages/math-game-arena/kelas9/bangun-ruang-sisi-lengkung/BolaGamePage";
-import PerubahanLuasVolumeMGAK9GamePage from "./pages/math-game-arena/kelas9/bangun-ruang-sisi-lengkung/PerubahanLuasVolumeGamePage";
-import GabunganMGAK9GamePage from "./pages/math-game-arena/kelas9/bangun-ruang-sisi-lengkung/GabunganGamePage";
-// Math Game Arena - Kelas 9 Game Pages - Statistika
-import PengantarStatistikaMGAK9GamePage from "./pages/math-game-arena/kelas9/statistika/PengantarGamePage";
-import PenyajianDataMGAK9GamePage from "./pages/math-game-arena/kelas9/statistika/PenyajianDataGamePage";
-import RataRataMGAK9GamePage from "./pages/math-game-arena/kelas9/statistika/RataRataGamePage";
-import MedianModusMGAK9GamePage from "./pages/math-game-arena/kelas9/statistika/MedianModusGamePage";
-import KuartilMGAK9GamePage from "./pages/math-game-arena/kelas9/statistika/KuartilGamePage";
-import PenyebaranDataMGAK9GamePage from "./pages/math-game-arena/kelas9/statistika/PenyebaranDataGamePage";
-// Math Game Arena - Kelas 9 Game Pages - Peluang
-import RuangSampelMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/RuangSampelGamePage";
-import PeluangEmpirikMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/PeluangEmpirikGamePage";
-import PeluangTeoretikMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/PeluangTeoretikGamePage";
-import FrekuensiHarapanMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/FrekuensiHarapanGamePage";
-import KomplemenMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/KomplemenGamePage";
-import PeluangKejadianMajemukMGAK9GamePage from "./pages/math-game-arena/kelas9/peluang/PeluangKejadianMajemukGamePage";
-// Math Game Arena - Kelas 9 Game Pages - Persamaan Kuadrat
-import BentukUmumPKMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/BentukUmumGamePage";
-import PemfaktoranMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/PemfaktoranGamePage";
-import RumusKuadratikMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/RumusKuadratikGamePage";
-import PelengkapKuadratMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/PelengkapKuadratGamePage";
-import DiskriminanMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/DiskriminanGamePage";
-import MenyusunPersamaanMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/MenyusunPersamaanGamePage";
-import PenerapanPKMGAK9GamePage from "./pages/math-game-arena/kelas9/persamaan-kuadrat/PenerapanGamePage";
-// Math Game Arena - Kelas 9 Game Pages - Fungsi Kuadrat
-import BentukUmumKarakteristikMGAK9GamePage from "./pages/math-game-arena/kelas9/fungsi-kuadrat/BentukUmumKarakteristikGamePage";
-import TitikPotongMGAK9GamePage from "./pages/math-game-arena/kelas9/fungsi-kuadrat/TitikPotongGamePage";
-import SumbuSimetriMGAK9GamePage from "./pages/math-game-arena/kelas9/fungsi-kuadrat/SumbuSimetriGamePage";
-import MenggambarGrafikMGAK9GamePage from "./pages/math-game-arena/kelas9/fungsi-kuadrat/MenggambarGrafikGamePage";
-import MenyusunFungsiMGAK9GamePage from "./pages/math-game-arena/kelas9/fungsi-kuadrat/MenyusunFungsiGamePage";
-import PenerapanFKMGAK9GamePage from "./pages/math-game-arena/kelas9/fungsi-kuadrat/PenerapanFungsiGamePage";
+// Math Game Arena - Kelas 9 Catch-all chooser & dispatcher (7 game variants per submaterial)
+import SubmaterialGameVariantsChooserK9 from "./components/mga-k9/SubmaterialGameVariantsChooser";
+import SubmaterialGameDispatcherK9 from "./components/mga-k9/SubmaterialGameDispatcher";
 
 // Materi Matematika Pages
 import MateriMatematikaPage from "./pages/MateriMatematikaPage";
@@ -1448,57 +1400,9 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMGAK9Page />} />
       <Route path="/math-game-arena/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMGAK9Page />} />
 
-      {/* Math Game Arena - Kelas 9 Game Routes - Bilangan Berpangkat */}
-      <Route path="/math-game-arena/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/bilangan-berpangkat/sifat-operasi" element={<SifatOperasiMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahMGAK9GamePage />} />
-      {/* Math Game Arena - Kelas 9 Game Routes - Kesebangunan & Kekongruenan */}
-      <Route path="/math-game-arena/kelas-9/kesebangunan-kekongruenan/definisi" element={<DefinisiKesebangunanMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk" element={<MenghitungRusukMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" element={<SegitigaSebangunMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/kesebangunan-kekongruenan/rasio-rusuk" element={<RasioRusukMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar" element={<KekongruenBangunDatarMGAK9GamePage />} />
-      {/* Math Game Arena - Kelas 9 Game Routes - Transformasi Geometri */}
-      <Route path="/math-game-arena/kelas-9/transformasi-geometri/translasi" element={<TranslasiMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/transformasi-geometri/refleksi" element={<RefleksiMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/transformasi-geometri/rotasi" element={<RotasiMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/transformasi-geometri/dilatasi" element={<DilatasiMGAK9GamePage />} />
-      {/* Math Game Arena - Kelas 9 Game Routes - Bangun Ruang Sisi Lengkung */}
-      <Route path="/math-game-arena/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/bangun-ruang-sisi-lengkung/perubahan-luas-volume" element={<PerubahanLuasVolumeMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganMGAK9GamePage />} />
-      {/* Math Game Arena - Kelas 9 Game Routes - Statistika */}
-      <Route path="/math-game-arena/kelas-9/statistika/pengantar" element={<PengantarStatistikaMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/statistika/penyajian-data" element={<PenyajianDataMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/statistika/rata-rata" element={<RataRataMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/statistika/median-modus" element={<MedianModusMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/statistika/kuartil" element={<KuartilMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/statistika/penyebaran-data" element={<PenyebaranDataMGAK9GamePage />} />
-      {/* Math Game Arena - Kelas 9 Game Routes - Peluang */}
-      <Route path="/math-game-arena/kelas-9/peluang/ruang-sampel" element={<RuangSampelMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/peluang/peluang-empirik" element={<PeluangEmpirikMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/peluang/komplemen" element={<KomplemenMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukMGAK9GamePage />} />
-      {/* Math Game Arena - Kelas 9 Game Routes - Persamaan Kuadrat */}
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/bentuk-umum" element={<BentukUmumPKMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PemfaktoranMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<RumusKuadratikMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PelengkapKuadratMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/diskriminan" element={<DiskriminanMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/menyusun-persamaan" element={<MenyusunPersamaanMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat/penerapan" element={<PenerapanPKMGAK9GamePage />} />
-      {/* Math Game Arena - Kelas 9 Game Routes - Fungsi Kuadrat */}
-      <Route path="/math-game-arena/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<BentukUmumKarakteristikMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/fungsi-kuadrat/titik-potong" element={<TitikPotongMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/fungsi-kuadrat/sumbu-simetri" element={<SumbuSimetriMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<MenggambarGrafikMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<MenyusunFungsiMGAK9GamePage />} />
-      <Route path="/math-game-arena/kelas-9/fungsi-kuadrat/penerapan" element={<PenerapanFKMGAK9GamePage />} />
+      {/* Kelas 9 - Catch-all submaterial chooser & game dispatcher (7 game variants per submaterial) */}
+      <Route path="/math-game-arena/kelas-9/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK9 />} />
+      <Route path="/math-game-arena/kelas-9/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK9 />} />
 
       {/* Materi Matematika Routes */}
       <Route path="/materi-matematika" element={<MateriMatematikaPage />} />

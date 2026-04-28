@@ -54,6 +54,12 @@ These are automatically provided by Replit — no manual API key setup needed.
     - `src/components/mga-k8/SubmaterialGameVariantsChooser.tsx` — lists the 7 variants
     - `src/components/mga-k8/SubmaterialGameDispatcher.tsx` — dispatches `:variant` to the appropriate game with the correct question set
     - Catch-all routes in `App.tsx`: `/math-game-arena/kelas-8/:parentSlug/:slug` → chooser, `/math-game-arena/kelas-8/:parentSlug/:slug/:variant` → dispatcher
+  - **Kelas 9 — All 8 topics (43 sub-materi):** same centralized data + chooser/dispatcher pattern as Kelas 8
+    - `src/data/mga-k9/` — one file per topic (bilangan-berpangkat, kesebangunan-kekongruenan, transformasi-geometri, bangun-ruang-sisi-lengkung, statistika, peluang, persamaan-kuadrat, fungsi-kuadrat) + `registry.ts` + `_helpers.ts` (`expandPool` fans out a 12-question base pool into 6 game-specific question shapes with offsets 0/2/4/6/8/10 to ensure variety)
+    - `src/components/mga-k9/SubmaterialGameVariantsChooser.tsx` — lists the 7 variants
+    - `src/components/mga-k9/SubmaterialGameDispatcher.tsx` — dispatches `:variant` to the appropriate game with the correct question set
+    - Catch-all routes in `App.tsx`: `/math-game-arena/kelas-9/:parentSlug/:slug` → chooser, `/math-game-arena/kelas-9/:parentSlug/:slug/:variant` → dispatcher
+    - Old per-subtopic game wrapper files in `src/pages/math-game-arena/kelas9/**/` are orphaned (no longer imported); the 8 topic landing pages in `src/pages/math-game-arena/kelas9/` (e.g. `StatistikaPage.tsx`) are still used and link into the chooser flow
 - Flashcards
 - Background music and sound effects
 - Indonesian SMP curriculum alignment
