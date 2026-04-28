@@ -1,12 +1,12 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "RUANG SAMPEL DAN TITIK SAMPEL", path: "", icon: "🎯" },
-  { label: "PELUANG EMPIRIK DAN FREKUENSI RELATIF", path: "", icon: "📊" },
-  { label: "PELUANG TEORETIK", path: "", icon: "🎲" },
-  { label: "FREKUENSI HARAPAN", path: "", icon: "📈" },
-  { label: "KOMPLEMEN SUATU KEJADIAN", path: "", icon: "🔄" },
-  { label: "PELUANG KEJADIAN MAJEMUK", path: "", icon: "🔗" },
+  { label: "RUANG SAMPEL DAN TITIK SAMPEL", path: "/lkpd/kelas-9/peluang/ruang-sampel", icon: "🎯" },
+  { label: "PELUANG EMPIRIK DAN FREKUENSI RELATIF", path: "/lkpd/kelas-9/peluang/peluang-empirik", icon: "📊" },
+  { label: "PELUANG TEORETIK", path: "/lkpd/kelas-9/peluang/peluang-teoretik", icon: "🎲" },
+  { label: "FREKUENSI HARAPAN", path: "/lkpd/kelas-9/peluang/frekuensi-harapan", icon: "📈" },
+  { label: "KOMPLEMEN SUATU KEJADIAN", path: "/lkpd/kelas-9/peluang/komplemen", icon: "🔄" },
+  { label: "PELUANG KEJADIAN MAJEMUK", path: "/lkpd/kelas-9/peluang/kejadian-majemuk", icon: "🔗" },
 ];
 
 const PeluangMenuPage = () => (
