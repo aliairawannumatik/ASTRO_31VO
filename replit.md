@@ -47,6 +47,7 @@ These are automatically provided by Replit — no manual API key setup needed.
 - Ruang Untuk Guru (teacher resources): RPP, assessments
 - Menghitung Cepat (speed calculation techniques)
 - NUMATIK AI — Gemini-powered math assistant chatbot
-- Gamification: meteor shooting game, flashcards
+- Gamification: 7-game arena variants per Bilangan Bulat submenu (Meteor, Flappy Rocket, Shoot Tank, Space Impact, Turtle Run, Tetris, Snake) for Penjumlahan, Pengurangan, Perkalian, Pembagian, Operasi Campuran, dan KPK & FPB
+- Flashcards
 - Background music and sound effects
 - Indonesian SMP curriculum alignment

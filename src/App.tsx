@@ -598,6 +598,46 @@ import PenjumlahanTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/b
 import PenjumlahanSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSpaceImpactGamePage";
 import PenjumlahanTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTetrisGamePage";
 import PenjumlahanSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSnakeMathGamePage";
+// Pengurangan
+import PenguranganMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganMeteorGamePage";
+import PenguranganFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganFlappyRocketGamePage";
+import PenguranganTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTembakTankGamePage";
+import PenguranganSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganSpaceImpactGamePage";
+import PenguranganTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTurtleRunGamePage";
+import PenguranganTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTetrisGamePage";
+import PenguranganSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganSnakeMathGamePage";
+// Perkalian
+import PerkalianMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianMeteorGamePage";
+import PerkalianFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianFlappyRocketGamePage";
+import PerkalianTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTembakTankGamePage";
+import PerkalianSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianSpaceImpactGamePage";
+import PerkalianTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTurtleRunGamePage";
+import PerkalianTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTetrisGamePage";
+import PerkalianSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianSnakeMathGamePage";
+// Pembagian
+import PembagianMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianMeteorGamePage";
+import PembagianFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianFlappyRocketGamePage";
+import PembagianTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTembakTankGamePage";
+import PembagianSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianSpaceImpactGamePage";
+import PembagianTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTurtleRunGamePage";
+import PembagianTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTetrisGamePage";
+import PembagianSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianSnakeMathGamePage";
+// Operasi Campuran
+import OperasiCampuranMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranMeteorGamePage";
+import OperasiCampuranFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranFlappyRocketGamePage";
+import OperasiCampuranTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTembakTankGamePage";
+import OperasiCampuranSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranSpaceImpactGamePage";
+import OperasiCampuranTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTurtleRunGamePage";
+import OperasiCampuranTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTetrisGamePage";
+import OperasiCampuranSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranSnakeMathGamePage";
+// KPK & FPB
+import KPKFPBMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBMeteorGamePage";
+import KPKFPBFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBFlappyRocketGamePage";
+import KPKFPBTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTembakTankGamePage";
+import KPKFPBSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBSpaceImpactGamePage";
+import KPKFPBTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTurtleRunGamePage";
+import KPKFPBTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTetrisGamePage";
+import KPKFPBSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBSnakeMathGamePage";
 
 // Math Game Arena - Kelas 9 Topic Pages
 import BilanganBerpangkatMGAK9Page from "./pages/math-game-arena/kelas9/BilanganBerpangkatPage";
@@ -1322,10 +1362,45 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tetris" element={<PenjumlahanTetrisGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/snake-math" element={<PenjumlahanSnakeMathGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/pesawat-tembak-meteor" element={<PenguranganMeteorGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/flappy-rocket" element={<PenguranganFlappyRocketGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/tembak-tank" element={<PenguranganTembakTankGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/space-impact" element={<PenguranganSpaceImpactGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/turtle-run" element={<PenguranganTurtleRunGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/tetris" element={<PenguranganTetrisGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/snake-math" element={<PenguranganSnakeMathGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/pesawat-tembak-meteor" element={<PerkalianMeteorGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/flappy-rocket" element={<PerkalianFlappyRocketGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/tembak-tank" element={<PerkalianTembakTankGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/space-impact" element={<PerkalianSpaceImpactGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/turtle-run" element={<PerkalianTurtleRunGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/tetris" element={<PerkalianTetrisGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/snake-math" element={<PerkalianSnakeMathGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/pesawat-tembak-meteor" element={<PembagianMeteorGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/flappy-rocket" element={<PembagianFlappyRocketGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/tembak-tank" element={<PembagianTembakTankGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/space-impact" element={<PembagianSpaceImpactGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/turtle-run" element={<PembagianTurtleRunGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/tetris" element={<PembagianTetrisGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/snake-math" element={<PembagianSnakeMathGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/pesawat-tembak-meteor" element={<OperasiCampuranMeteorGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/flappy-rocket" element={<OperasiCampuranFlappyRocketGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tembak-tank" element={<OperasiCampuranTembakTankGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/space-impact" element={<OperasiCampuranSpaceImpactGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/turtle-run" element={<OperasiCampuranTurtleRunGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tetris" element={<OperasiCampuranTetrisGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/snake-math" element={<OperasiCampuranSnakeMathGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/pesawat-tembak-meteor" element={<KPKFPBMeteorGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/flappy-rocket" element={<KPKFPBFlappyRocketGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tembak-tank" element={<KPKFPBTembakTankGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/space-impact" element={<KPKFPBSpaceImpactGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/turtle-run" element={<KPKFPBTurtleRunGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tetris" element={<KPKFPBTetrisGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/snake-math" element={<KPKFPBSnakeMathGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />
