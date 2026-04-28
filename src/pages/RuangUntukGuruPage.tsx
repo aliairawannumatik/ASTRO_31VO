@@ -10,6 +10,7 @@ import {
   ClipboardList,
   BookOpen,
   Target,
+  ClipboardCheck,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -63,6 +64,12 @@ const guruMenuItems = [
     icon: ClipboardList,
     path: "/ruang-untuk-guru/penilaian-pembelajaran",
     desc: "Aspek penilaian sikap dan capaian peserta didik",
+  },
+  {
+    label: "RUBRIK PENILAIAN DIMENSI LULUSAN",
+    icon: ClipboardCheck,
+    path: "/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan",
+    desc: "Rubrik 7 dimensi profil lulusan dan konversi nilai",
   },
 ];
 
