@@ -39,16 +39,33 @@ const komponenRPP = [
   },
 ];
 
-const daftarRPP: { kelas: string; topik: string; path?: string }[] = [
-  { kelas: "VII", topik: "Bilangan Bulat", path: "/ruang-untuk-guru/rpp/bilangan-bulat" },
-  { kelas: "VII", topik: "Bentuk Aljabar" },
-  { kelas: "VII", topik: "Persamaan dan Pertidaksamaan Linear Satu Variabel" },
-  { kelas: "VIII", topik: "Sistem Persamaan Linear Dua Variabel" },
-  { kelas: "VIII", topik: "Teorema Pythagoras" },
-  { kelas: "VIII", topik: "Lingkaran" },
-  { kelas: "IX", topik: "Persamaan dan Fungsi Kuadrat" },
-  { kelas: "IX", topik: "Kesebangunan dan Kekongruenan" },
-  { kelas: "IX", topik: "Bangun Ruang Sisi Lengkung" },
+const materiRPP: { label: string; path: string; available: boolean }[] = [
+  { label: "BILANGAN BULAT", path: "/ruang-untuk-guru/rpp/bilangan-bulat", available: true },
+  { label: "PECAHAN", path: "/ruang-untuk-guru/rpp/pecahan", available: false },
+  { label: "BENTUK ALJABAR", path: "/ruang-untuk-guru/rpp/bentuk-aljabar", available: false },
+  { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", path: "/ruang-untuk-guru/rpp/plsv-ptlsv", available: false },
+  { label: "PERBANDINGAN", path: "/ruang-untuk-guru/rpp/perbandingan", available: false },
+  { label: "ARITMETIKA SOSIAL", path: "/ruang-untuk-guru/rpp/aritmetika-sosial", available: false },
+  { label: "GARIS DAN SUDUT", path: "/ruang-untuk-guru/rpp/garis-dan-sudut", available: false },
+  { label: "SEGITIGA DAN SEGIEMPAT", path: "/ruang-untuk-guru/rpp/segitiga-segiempat", available: false },
+  { label: "HIMPUNAN", path: "/ruang-untuk-guru/rpp/himpunan", available: false },
+  { label: "POLA BILANGAN", path: "/ruang-untuk-guru/rpp/pola-bilangan", available: false },
+  { label: "KOORDINAT CARTESIUS", path: "/ruang-untuk-guru/rpp/koordinat-cartesius", available: false },
+  { label: "RELASI DAN FUNGSI", path: "/ruang-untuk-guru/rpp/relasi-fungsi", available: false },
+  { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/ruang-untuk-guru/rpp/spldv", available: false },
+  { label: "PERSAMAAN GARIS LURUS", path: "/ruang-untuk-guru/rpp/persamaan-garis-lurus", available: false },
+  { label: "TEOREMA PYTHAGORAS", path: "/ruang-untuk-guru/rpp/teorema-pythagoras", available: false },
+  { label: "LINGKARAN", path: "/ruang-untuk-guru/rpp/lingkaran", available: false },
+  { label: "GARIS SINGGUNG LINGKARAN", path: "/ruang-untuk-guru/rpp/garis-singgung-lingkaran", available: false },
+  { label: "BANGUN RUANG SISI DATAR", path: "/ruang-untuk-guru/rpp/bangun-ruang-sisi-datar", available: false },
+  { label: "BILANGAN BERPANGKAT DAN BENTUK AKAR", path: "/ruang-untuk-guru/rpp/bilangan-berpangkat", available: false },
+  { label: "PERSAMAAN KUADRAT", path: "/ruang-untuk-guru/rpp/persamaan-kuadrat", available: false },
+  { label: "FUNGSI KUADRAT", path: "/ruang-untuk-guru/rpp/fungsi-kuadrat", available: false },
+  { label: "TRANSFORMASI GEOMETRI", path: "/ruang-untuk-guru/rpp/transformasi-geometri", available: false },
+  { label: "KESEBANGUNAN DAN KEKONGRUENAN", path: "/ruang-untuk-guru/rpp/kesebangunan-kekongruenan", available: false },
+  { label: "BANGUN RUANG SISI LENGKUNG", path: "/ruang-untuk-guru/rpp/bangun-ruang-sisi-lengkung", available: false },
+  { label: "STATISTIKA", path: "/ruang-untuk-guru/rpp/statistika", available: false },
+  { label: "PELUANG", path: "/ruang-untuk-guru/rpp/peluang", available: false },
 ];
 
 const RPPPage = () => {
@@ -89,39 +106,45 @@ const RPPPage = () => {
           </div>
         </div>
 
-        <div className="mb-8 bg-card/80 backdrop-blur border border-border rounded-xl p-5 animate-slide-up">
-          <h2 className="font-display text-lg font-bold text-accent mb-4 flex items-center gap-2">
+        <div className="mb-8">
+          <h2 className="font-display text-lg font-bold text-accent mb-4 flex items-center justify-center gap-2 text-center">
             <FileText className="w-5 h-5" />
-            Daftar RPP Matematika SMP
+            Daftar Materi RPP
           </h2>
-          <div className="space-y-2">
-            {daftarRPP.map((rpp, i) => {
-              const clickable = !!rpp.path;
-              return (
-                <button
-                  key={i}
-                  onClick={() => { if (clickable) { playPopSound(); navigate(rpp.path!); } }}
-                  disabled={!clickable}
-                  className={`w-full text-left flex items-center gap-3 rounded-lg px-4 py-3 transition-all ${
-                    clickable
-                      ? "bg-muted/30 hover:bg-cyan-500/10 hover:border-cyan-300/40 border border-transparent cursor-pointer"
-                      : "bg-muted/30 border border-transparent"
+          <p className="text-white/60 text-sm text-center mb-5 font-body">
+            Pilih materi untuk melihat sub-materi dan RPP lengkapnya
+          </p>
+
+          <div className="flex flex-col gap-3 animate-slide-up">
+            {materiRPP.map((materi, i) => (
+              <button
+                key={materi.label}
+                onClick={() => {
+                  if (!materi.available) return;
+                  playPopSound();
+                  navigate(materi.path);
+                }}
+                disabled={!materi.available}
+                className={`group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
+                  transition-all duration-300 text-left animate-slide-up ${
+                    materi.available
+                      ? "hover:border-primary/60 cursor-pointer"
+                      : "opacity-60 cursor-not-allowed"
                   }`}
-                >
-                  <span className="flex-shrink-0 w-12 h-8 rounded-md bg-primary/20 border border-primary/40 flex items-center justify-center font-display text-xs font-bold text-primary">
-                    {rpp.kelas}
-                  </span>
-                  <span className="flex-1 font-body text-sm text-white/90">{rpp.topik}</span>
-                  {clickable && (
-                    <span className="text-[10px] uppercase tracking-wider font-semibold text-cyan-300">
-                      Lihat →
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+                style={{ animationDelay: `${i * 0.03}s` }}
+              >
+                <BookOpen className={`w-5 h-5 shrink-0 ${materi.available ? "text-primary group-hover:scale-110 transition-transform" : "text-white/40"}`} />
+                <span className="font-body text-sm text-white flex-1">{materi.label}</span>
+                {materi.available ? (
+                  <span className="text-xs text-primary font-display">LIHAT</span>
+                ) : (
+                  <span className="text-[10px] uppercase tracking-wider text-white/50 font-semibold">Segera Hadir</span>
+                )}
+              </button>
+            ))}
           </div>
-          <p className="mt-4 text-xs text-muted-foreground font-body italic">
+
+          <p className="mt-5 text-xs text-muted-foreground font-body italic text-center">
             Konten RPP lengkap dapat ditambahkan sesuai kurikulum yang berlaku.
           </p>
         </div>
