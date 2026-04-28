@@ -44,12 +44,6 @@ const guruMenuItems = [
     desc: "Nilai-nilai dan kesepakatan bersama di kelas",
   },
   {
-    label: "NUMATIK GAME",
-    icon: Gamepad2,
-    path: "/ruang-untuk-guru/numatik-game",
-    desc: "Koleksi lengkap game matematika interaktif NUMATIK",
-  },
-  {
     label: "PESAN DAN KESAN",
     icon: MessageSquareHeart,
     path: "/pesan-kesan",
@@ -84,6 +78,12 @@ const guruMenuItems = [
     icon: CalendarClock,
     path: "/ruang-untuk-guru/agenda-guru",
     desc: "Agenda harian kegiatan pembelajaran dan kehadiran",
+  },
+  {
+    label: "NUMATIK GAME",
+    icon: Gamepad2,
+    path: "/ruang-untuk-guru/numatik-game",
+    desc: "Koleksi lengkap game matematika interaktif NUMATIK",
   },
 ];
 
