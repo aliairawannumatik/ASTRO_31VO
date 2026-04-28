@@ -109,6 +109,12 @@ import PKDiskriminanLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/Diskrim
 import PKMenyusunBaruLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/MenyusunPKBaruLKPDPage";
 import PKPenerapanKontekstualLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/PenerapanKontekstualLKPDPage";
 import FungsiKuadratLKPDMenuPage from "./pages/lkpd/kelas9/FungsiKuadratMenuPage";
+import FKBentukUmumKarakteristikLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/BentukUmumKarakteristikLKPDPage";
+import FKTitikPotongLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/TitikPotongLKPDPage";
+import FKSumbuSimetriPuncakLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/SumbuSimetriPuncakLKPDPage";
+import FKMenggambarGrafikLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/MenggambarGrafikLKPDPage";
+import FKMenyusunFungsiLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/MenyusunFungsiLKPDPage";
+import FKPenerapanMaksMinLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/PenerapanMaksMinLKPDPage";
 import PPNLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPNLKPDPage";
 import PPhLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPhLKPDPage";
 import PecahanCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage";
@@ -981,6 +987,12 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-9/persamaan-kuadrat/menyusun-baru" element={<PKMenyusunBaruLKPDPage />} />
       <Route path="/lkpd/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualLKPDPage />} />
       <Route path="/lkpd/kelas-9/fungsi-kuadrat" element={<FungsiKuadratLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKBentukUmumKarakteristikLKPDPage />} />
+      <Route path="/lkpd/kelas-9/fungsi-kuadrat/titik-potong" element={<FKTitikPotongLKPDPage />} />
+      <Route path="/lkpd/kelas-9/fungsi-kuadrat/sumbu-simetri-puncak" element={<FKSumbuSimetriPuncakLKPDPage />} />
+      <Route path="/lkpd/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMenggambarGrafikLKPDPage />} />
+      <Route path="/lkpd/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMenyusunFungsiLKPDPage />} />
+      <Route path="/lkpd/kelas-9/fungsi-kuadrat/penerapan-maks-min" element={<FKPenerapanMaksMinLKPDPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
       <Route path="/atp" element={<ATPPage />} />
       <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
