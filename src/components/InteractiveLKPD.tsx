@@ -220,7 +220,7 @@ const MatchInput = ({
   value: Record<string, string> | undefined;
   onChange: (v: Record<string, string>) => void;
 }) => {
-  const rights = useMemo(() => pairs.map((p) => p.right), [pairs]);
+  const rights = useMemo(() => Array.from(new Set(pairs.map((p) => p.right))), [pairs]);
   const map = value || {};
   return (
     <div className="space-y-2 mt-2">

@@ -101,6 +101,13 @@ import FrekuensiHarapanLKPDPage from "./pages/lkpd/kelas9/peluang/FrekuensiHarap
 import KomplemenLKPDPage from "./pages/lkpd/kelas9/peluang/KomplemenLKPDPage";
 import PeluangKejadianMajemukLKPDPage from "./pages/lkpd/kelas9/peluang/PeluangKejadianMajemukLKPDPage";
 import PersamaanKuadratLKPDMenuPage from "./pages/lkpd/kelas9/PersamaanKuadratMenuPage";
+import PKBentukUmumLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/BentukUmumLKPDPage";
+import PKPemfaktoranLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/PemfaktoranLKPDPage";
+import PKRumusKuadratikLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/RumusKuadratikLKPDPage";
+import PKPelengkapKuadratLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/PelengkapKuadratLKPDPage";
+import PKDiskriminanLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/DiskriminanLKPDPage";
+import PKMenyusunBaruLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/MenyusunPKBaruLKPDPage";
+import PKPenerapanKontekstualLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/PenerapanKontekstualLKPDPage";
 import FungsiKuadratLKPDMenuPage from "./pages/lkpd/kelas9/FungsiKuadratMenuPage";
 import PPNLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPNLKPDPage";
 import PPhLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPhLKPDPage";
@@ -966,6 +973,13 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-9/peluang/komplemen" element={<KomplemenLKPDPage />} />
       <Route path="/lkpd/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukLKPDPage />} />
       <Route path="/lkpd/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratLKPDMenuPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKBentukUmumLKPDPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKPemfaktoranLKPDPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKRumusKuadratikLKPDPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKPelengkapKuadratLKPDPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat/diskriminan" element={<PKDiskriminanLKPDPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat/menyusun-baru" element={<PKMenyusunBaruLKPDPage />} />
+      <Route path="/lkpd/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualLKPDPage />} />
       <Route path="/lkpd/kelas-9/fungsi-kuadrat" element={<FungsiKuadratLKPDMenuPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
       <Route path="/atp" element={<ATPPage />} />
