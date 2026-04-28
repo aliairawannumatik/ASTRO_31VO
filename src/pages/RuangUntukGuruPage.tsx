@@ -50,12 +50,6 @@ const guruMenuItems = [
     desc: "Form masukan penggunaan aplikasi",
   },
   {
-    label: "ULANGAN HARIAN",
-    icon: ShieldCheck,
-    path: "/ulangan-harian",
-    desc: "Mode ulangan fullscreen berskor",
-  },
-  {
     label: "PENILAIAN PEMBELAJARAN",
     icon: ClipboardList,
     path: "/ruang-untuk-guru/penilaian-pembelajaran",
