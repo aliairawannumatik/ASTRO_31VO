@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Plus, Minus, X, Divide, Hash, Search } from "lucide-react";
+import { ArrowLeft, Plus, Minus, X, Divide, Hash, Search, Calculator, Network } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -31,7 +31,7 @@ const operasi = [
     title: "Pengurangan Bilangan Bulat",
     desc: "RPP untuk operasi pengurangan pada bilangan bulat dengan pendekatan garis bilangan dan konteks nyata.",
     icon: Minus,
-    path: "#",
+    path: "/ruang-untuk-guru/rpp/bilangan-bulat/pengurangan",
     color: "from-cyan-500/25 to-blue-500/10",
     border: "border-cyan-300/50",
     text: "text-cyan-100",
@@ -42,7 +42,7 @@ const operasi = [
     title: "Perkalian Bilangan Bulat",
     desc: "RPP untuk operasi perkalian bilangan bulat termasuk aturan tanda dan sifat-sifat operasi.",
     icon: X,
-    path: "#",
+    path: "/ruang-untuk-guru/rpp/bilangan-bulat/perkalian",
     color: "from-amber-500/25 to-yellow-500/10",
     border: "border-amber-300/50",
     text: "text-amber-100",
@@ -53,11 +53,33 @@ const operasi = [
     title: "Pembagian Bilangan Bulat",
     desc: "RPP untuk operasi pembagian bilangan bulat dengan penekanan pada aturan tanda dan kebalikan dari perkalian.",
     icon: Divide,
-    path: "#",
+    path: "/ruang-untuk-guru/rpp/bilangan-bulat/pembagian",
     color: "from-pink-500/25 to-rose-500/10",
     border: "border-pink-300/50",
     text: "text-pink-100",
     iconBg: "bg-pink-500/20",
+    available: false,
+  },
+  {
+    title: "Operasi Hitung Campuran Bilangan Bulat",
+    desc: "RPP untuk operasi hitung campuran bilangan bulat dengan memperhatikan urutan operasi (penjumlahan, pengurangan, perkalian, pembagian) dan tanda kurung.",
+    icon: Calculator,
+    path: "/ruang-untuk-guru/rpp/bilangan-bulat/operasi-campuran",
+    color: "from-orange-500/25 to-red-500/10",
+    border: "border-orange-300/50",
+    text: "text-orange-100",
+    iconBg: "bg-orange-500/20",
+    available: false,
+  },
+  {
+    title: "KPK dan FPB",
+    desc: "RPP untuk Kelipatan Persekutuan Terkecil (KPK) dan Faktor Persekutuan Terbesar (FPB) beserta penerapannya dalam menyelesaikan masalah sehari-hari.",
+    icon: Network,
+    path: "/ruang-untuk-guru/rpp/bilangan-bulat/kpk-fpb",
+    color: "from-fuchsia-500/25 to-purple-500/10",
+    border: "border-fuchsia-300/50",
+    text: "text-fuchsia-100",
+    iconBg: "bg-fuchsia-500/20",
     available: false,
   },
 ];
@@ -84,7 +106,7 @@ const RPPBilanganBulatPage = () => {
             RPP - BILANGAN BULAT
           </h1>
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
-            Pilih sub-topik operasi bilangan bulat untuk melihat Rencana Pelaksanaan Pembelajaran (RPP) lengkap.
+            Pilih sub-topik bilangan bulat untuk melihat Rencana Pelaksanaan Pembelajaran (RPP) lengkap.
           </p>
         </div>
 
