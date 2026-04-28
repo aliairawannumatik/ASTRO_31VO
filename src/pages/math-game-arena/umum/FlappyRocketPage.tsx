@@ -211,55 +211,146 @@ const FlappyRocketPage = ({
     setCombo(0);
   }, []);
 
-  // ── Draw pipe (neon gate style) ────────────────────────────────────────────
+  // ── Draw asteroids (rocky obstacles) ───────────────────────────────────────
   const drawPipe = useCallback((ctx: CanvasRenderingContext2D, p: Pipe, ts: number) => {
-    const glow = 12 + 6 * Math.sin(ts / 600 + p.glowPhase);
-    const col = p.color;
+    const seed = p.glowPhase;
+    const rnd = (i: number) => {
+      const x = Math.sin(seed * 12.9898 + i * 78.233) * 43758.5453;
+      return x - Math.floor(x);
+    };
 
-    // shadow/glow
-    ctx.shadowColor = col;
-    ctx.shadowBlur = glow;
+    const isSpecial = p.special;
+    const baseColor = isSpecial ? "#C9A227" : "#8A7B6B";
+    const darkColor = isSpecial ? "#6B5512" : "#3F362E";
+    const lightColor = isSpecial ? "#F2D26B" : "#B8A896";
+    const glowCol = p.color;
 
-    // top pipe
+    const SIDE_STEPS = 6;
+    const FACE_BUMPS = 5;
+
+    // ── Top asteroid (hanging from above) ────────────────────────────────────
     const topH = p.gapY;
-    const grad1 = ctx.createLinearGradient(p.x, 0, p.x + PIPE_W, 0);
-    grad1.addColorStop(0, shadeColor(col, -30));
-    grad1.addColorStop(0.5, col);
-    grad1.addColorStop(1, shadeColor(col, -30));
-    ctx.fillStyle = grad1;
+    ctx.save();
+    ctx.shadowColor = glowCol;
+    ctx.shadowBlur = 14 + 4 * Math.sin(ts / 600 + seed);
+
     ctx.beginPath();
-    ctx.roundRect(p.x, 0, PIPE_W, topH - 4, [0, 0, 10, 10]);
-    ctx.fill();
-    // cap
-    ctx.beginPath();
-    ctx.roundRect(p.x - 5, topH - 22, PIPE_W + 10, 22, [0, 0, 8, 8]);
+    ctx.moveTo(p.x - 4, -10);
+    ctx.lineTo(p.x + PIPE_W + 4, -10);
+    // right edge — irregular
+    for (let i = 1; i <= SIDE_STEPS; i++) {
+      const y = (topH - 6) * (i / SIDE_STEPS);
+      const bulge = (rnd(i) - 0.5) * 8;
+      ctx.lineTo(p.x + PIPE_W + bulge, y);
+    }
+    // jagged bottom edge facing the gap
+    for (let i = FACE_BUMPS; i >= 0; i--) {
+      const t = i / FACE_BUMPS;
+      const x = p.x + PIPE_W * t;
+      const yOff = (rnd(20 + i) - 0.5) * 14 - 4;
+      ctx.lineTo(x, topH + yOff);
+    }
+    // left edge going back up
+    for (let i = SIDE_STEPS; i >= 1; i--) {
+      const y = (topH - 6) * (i / SIDE_STEPS);
+      const bulge = (rnd(40 + i) - 0.5) * 8;
+      ctx.lineTo(p.x + bulge, y);
+    }
+    ctx.closePath();
+
+    const gradT = ctx.createLinearGradient(p.x, 0, p.x + PIPE_W, 0);
+    gradT.addColorStop(0, darkColor);
+    gradT.addColorStop(0.5, baseColor);
+    gradT.addColorStop(1, darkColor);
+    ctx.fillStyle = gradT;
     ctx.fill();
 
-    // bottom pipe
+    // dark rim outline
+    ctx.shadowBlur = 0;
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "rgba(0,0,0,0.45)";
+    ctx.stroke();
+
+    // craters
+    for (let i = 0; i < 4; i++) {
+      const cy = 24 + rnd(60 + i) * Math.max(10, topH - 44);
+      const ccx = p.x + 10 + rnd(70 + i) * (PIPE_W - 20);
+      const cr = 3 + rnd(80 + i) * 5;
+      ctx.fillStyle = darkColor;
+      ctx.beginPath();
+      ctx.arc(ccx, cy, cr, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = lightColor;
+      ctx.beginPath();
+      ctx.arc(ccx - cr * 0.3, cy - cr * 0.3, cr * 0.4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // ── Bottom asteroid (rising from below) ──────────────────────────────────
     const botY = p.gapY + PIPE_GAP;
     const botH = CH - botY;
-    const grad2 = ctx.createLinearGradient(p.x, 0, p.x + PIPE_W, 0);
-    grad2.addColorStop(0, shadeColor(col, -30));
-    grad2.addColorStop(0.5, col);
-    grad2.addColorStop(1, shadeColor(col, -30));
-    ctx.fillStyle = grad2;
+    ctx.save();
+    ctx.shadowColor = glowCol;
+    ctx.shadowBlur = 14 + 4 * Math.sin(ts / 600 + seed + 1.7);
+
     ctx.beginPath();
-    ctx.roundRect(p.x, botY + 4, PIPE_W, botH, [8, 8, 0, 0]);
-    ctx.fill();
-    // cap
-    ctx.beginPath();
-    ctx.roundRect(p.x - 5, botY, PIPE_W + 10, 22, [8, 8, 0, 0]);
+    // jagged top edge facing the gap
+    ctx.moveTo(p.x, botY + 4);
+    for (let i = 0; i <= FACE_BUMPS; i++) {
+      const t = i / FACE_BUMPS;
+      const x = p.x + PIPE_W * t;
+      const yOff = (rnd(100 + i) - 0.5) * 14 + 4;
+      ctx.lineTo(x, botY + yOff);
+    }
+    // right edge going down
+    for (let i = 1; i <= SIDE_STEPS; i++) {
+      const y = botY + 6 + (botH - 6) * (i / SIDE_STEPS);
+      const bulge = (rnd(120 + i) - 0.5) * 8;
+      ctx.lineTo(p.x + PIPE_W + bulge, y);
+    }
+    ctx.lineTo(p.x + PIPE_W + 4, CH + 10);
+    ctx.lineTo(p.x - 4, CH + 10);
+    // left edge going up
+    for (let i = SIDE_STEPS; i >= 1; i--) {
+      const y = botY + 6 + (botH - 6) * (i / SIDE_STEPS);
+      const bulge = (rnd(140 + i) - 0.5) * 8;
+      ctx.lineTo(p.x + bulge, y);
+    }
+    ctx.closePath();
+
+    const gradB = ctx.createLinearGradient(p.x, 0, p.x + PIPE_W, 0);
+    gradB.addColorStop(0, darkColor);
+    gradB.addColorStop(0.5, baseColor);
+    gradB.addColorStop(1, darkColor);
+    ctx.fillStyle = gradB;
     ctx.fill();
 
-    // inner highlight stripe
     ctx.shadowBlur = 0;
-    ctx.fillStyle = "rgba(255,255,255,0.12)";
-    ctx.fillRect(p.x + 8, 0, 6, topH - 4);
-    ctx.fillRect(p.x + 8, botY + 4, 6, botH);
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "rgba(0,0,0,0.45)";
+    ctx.stroke();
 
-    // special badge
+    // craters
+    for (let i = 0; i < 4; i++) {
+      const cy = botY + 20 + rnd(160 + i) * Math.max(10, botH - 40);
+      const ccx = p.x + 10 + rnd(170 + i) * (PIPE_W - 20);
+      const cr = 3 + rnd(180 + i) * 5;
+      ctx.fillStyle = darkColor;
+      ctx.beginPath();
+      ctx.arc(ccx, cy, cr, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = lightColor;
+      ctx.beginPath();
+      ctx.arc(ccx - cr * 0.3, cy - cr * 0.3, cr * 0.4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // special "SOAL" badge in gap
     if (p.special) {
       const pulse = 0.7 + 0.3 * Math.sin(ts / 300);
+      ctx.save();
       ctx.globalAlpha = pulse;
       ctx.shadowColor = "#FFD700";
       ctx.shadowBlur = 14;
@@ -267,9 +358,8 @@ const FlappyRocketPage = ({
       ctx.font = "bold 15px monospace";
       ctx.textAlign = "center";
       ctx.fillText("⚡ SOAL", p.x + PIPE_W / 2, p.gapY + PIPE_GAP / 2 + 5);
-      ctx.globalAlpha = 1;
+      ctx.restore();
     }
-    ctx.shadowBlur = 0;
     ctx.textAlign = "left";
   }, []);
 
