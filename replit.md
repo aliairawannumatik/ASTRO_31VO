@@ -47,7 +47,13 @@ These are automatically provided by Replit — no manual API key setup needed.
 - Ruang Untuk Guru (teacher resources): RPP, assessments
 - Menghitung Cepat (speed calculation techniques)
 - NUMATIK AI — Gemini-powered math assistant chatbot
-- Gamification: 7-game arena variants per Bilangan Bulat submenu (Meteor, Flappy Rocket, Shoot Tank, Space Impact, Turtle Run, Tetris, Snake) for Penjumlahan, Pengurangan, Perkalian, Pembagian, Operasi Campuran, dan KPK & FPB
+- Gamification: 7-game arena variants per submenu (Meteor, Flappy Rocket, Shoot Tank, Space Impact, Turtle Run, Tetris, Snake)
+  - **Kelas 7 — Bilangan Bulat:** dedicated wrapper page per (subtopic × variant) under `src/pages/math-game-arena/kelas7/bilangan-bulat/`
+  - **Kelas 8 — All 9 topics (47 sub-materi):** centralized data + chooser/dispatcher pattern
+    - `src/data/mga-k8/` — one file per topic (pola-bilangan, koordinat-cartesius, relasi-fungsi, spldv, persamaan-garis-lurus, teorema-pythagoras, lingkaran, garis-singgung-lingkaran, bangun-ruang-sisi-datar) + `registry.ts` + `_helpers.ts` (`expandPool` fans out a 12-question base pool into 6 game-specific question shapes with offsets 0/2/4/6/8/10 to ensure variety)
+    - `src/components/mga-k8/SubmaterialGameVariantsChooser.tsx` — lists the 7 variants
+    - `src/components/mga-k8/SubmaterialGameDispatcher.tsx` — dispatches `:variant` to the appropriate game with the correct question set
+    - Catch-all routes in `App.tsx`: `/math-game-arena/kelas-8/:parentSlug/:slug` → chooser, `/math-game-arena/kelas-8/:parentSlug/:slug/:variant` → dispatcher
 - Flashcards
 - Background music and sound effects
 - Indonesian SMP curriculum alignment

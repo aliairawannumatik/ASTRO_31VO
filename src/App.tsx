@@ -542,54 +542,9 @@ import TeoremaPythagorasMGAK8Page from "./pages/math-game-arena/kelas8/TeoremaPy
 import LingkaranMGAK8Page from "./pages/math-game-arena/kelas8/LingkaranPage";
 import GarisSinggungLingkaranMGAK8Page from "./pages/math-game-arena/kelas8/GarisSinggungLingkaranPage";
 import BangunRuangSisiDatarMGAK8Page from "./pages/math-game-arena/kelas8/BangunRuangSisiDatarPage";
-import KubusGamePage from "./pages/math-game-arena/kelas8/KubusGamePage";
-// Math Game Arena - Kelas 8 Game Pages
-import PengertianPolaK8GamePage from "./pages/math-game-arena/kelas8/pola-bilangan/PengertianPolaGamePage";
-import PolaKhususK8GamePage from "./pages/math-game-arena/kelas8/pola-bilangan/PolaKhususGamePage";
-import PolaAritmetikaK8GamePage from "./pages/math-game-arena/kelas8/pola-bilangan/PolaAritmetikaGamePage";
-import PolaGeometriK8GamePage from "./pages/math-game-arena/kelas8/pola-bilangan/PolaGeometriGamePage";
-import UnsurUnsurCartesiusK8GamePage from "./pages/math-game-arena/kelas8/koordinat-cartesius/UnsurUnsurCartesiusGamePage";
-import JarakTitikK8GamePage from "./pages/math-game-arena/kelas8/koordinat-cartesius/JarakTitikGamePage";
-import PosisiRelatifK8GamePage from "./pages/math-game-arena/kelas8/koordinat-cartesius/PosisiRelatifGamePage";
-import PengertianRelasiK8GamePage from "./pages/math-game-arena/kelas8/relasi-dan-fungsi/PengertianRelasiGamePage";
-import PengertianFungsiK8GamePage from "./pages/math-game-arena/kelas8/relasi-dan-fungsi/PengertianFungsiGamePage";
-import BanyakFungsiK8GamePage from "./pages/math-game-arena/kelas8/relasi-dan-fungsi/BanyakFungsiGamePage";
-import NotasiRumusK8GamePage from "./pages/math-game-arena/kelas8/relasi-dan-fungsi/NotasiRumusGamePage";
-import GrafikFungsiK8GamePage from "./pages/math-game-arena/kelas8/relasi-dan-fungsi/GrafikFungsiGamePage";
-import DefinisiSPLDVK8GamePage from "./pages/math-game-arena/kelas8/spldv/DefinisiSPLDVGamePage";
-import MetodeGrafikK8GamePage from "./pages/math-game-arena/kelas8/spldv/MetodeGrafikGamePage";
-import MetodeSubstitusiK8GamePage from "./pages/math-game-arena/kelas8/spldv/MetodeSubstitusiGamePage";
-import MetodeEliminasiK8GamePage from "./pages/math-game-arena/kelas8/spldv/MetodeEliminasiGamePage";
-import MetodeCampuranK8GamePage from "./pages/math-game-arena/kelas8/spldv/MetodeCampuranGamePage";
-import ModelSPLDVK8GamePage from "./pages/math-game-arena/kelas8/spldv/ModelSPLDVGamePage";
-import PenyelesaianMasalahSPLDVK8GamePage from "./pages/math-game-arena/kelas8/spldv/PenyelesaianMasalahSPLDVGamePage";
-import GrafikPGLK8GamePage from "./pages/math-game-arena/kelas8/persamaan-garis-lurus/GrafikPGLGamePage";
-import GradienK8GamePage from "./pages/math-game-arena/kelas8/persamaan-garis-lurus/GradienGamePage";
-import MenentukanPGLK8GamePage from "./pages/math-game-arena/kelas8/persamaan-garis-lurus/MenentukanPGLGamePage";
-import Hubungan2GarisK8GamePage from "./pages/math-game-arena/kelas8/persamaan-garis-lurus/Hubungan2GarisGamePage";
-import AplikasiKontekstualPGLK8GamePage from "./pages/math-game-arena/kelas8/persamaan-garis-lurus/AplikasiKontekstualPGLGamePage";
-import PembuktianPythagorasK8GamePage from "./pages/math-game-arena/kelas8/teorema-pythagoras/PembuktianPythagorasGamePage";
-import MenghitungPanjangK8GamePage from "./pages/math-game-arena/kelas8/teorema-pythagoras/MenghitungPanjangGamePage";
-import TriplePythagorasK8GamePage from "./pages/math-game-arena/kelas8/teorema-pythagoras/TriplePythagorasGamePage";
-import JenisSegitigaK8GamePage from "./pages/math-game-arena/kelas8/teorema-pythagoras/JenisSegitigaGamePage";
-import SudutKhususK8GamePage from "./pages/math-game-arena/kelas8/teorema-pythagoras/SudutKhususGamePage";
-import PenerapanKontekstualPythagorasK8GamePage from "./pages/math-game-arena/kelas8/teorema-pythagoras/PenerapanKontekstualPythagorasGamePage";
-import UnsurUnsurLingkaranK8GamePage from "./pages/math-game-arena/kelas8/lingkaran/UnsurUnsurLingkaranGamePage";
-import KelilingLuasLingkaranK8GamePage from "./pages/math-game-arena/kelas8/lingkaran/KelilingLuasLingkaranGamePage";
-import KaitanBangunDatarK8GamePage from "./pages/math-game-arena/kelas8/lingkaran/KaitanBangunDatarGamePage";
-import BusurJuringK8GamePage from "./pages/math-game-arena/kelas8/lingkaran/BusurJuringGamePage";
-import SudutPusatKelilingK8GamePage from "./pages/math-game-arena/kelas8/lingkaran/SudutPusatKelilingGamePage";
-import PenerapanKontekstualLingkaranK8GamePage from "./pages/math-game-arena/kelas8/lingkaran/PenerapanKontekstualLingkaranGamePage";
-import PengertianSifatGSLK8GamePage from "./pages/math-game-arena/kelas8/garis-singgung-lingkaran/PengertianSifatGSLGamePage";
-import PanjangGarisSinggungK8GamePage from "./pages/math-game-arena/kelas8/garis-singgung-lingkaran/PanjangGarisSinggungGamePage";
-import GSPLK8GamePage from "./pages/math-game-arena/kelas8/garis-singgung-lingkaran/GSPLGamePage";
-import GSPDK8GamePage from "./pages/math-game-arena/kelas8/garis-singgung-lingkaran/GSPDGamePage";
-import SabukLilitanK8GamePage from "./pages/math-game-arena/kelas8/garis-singgung-lingkaran/SabukLilitanGamePage";
-import BalokK8GamePage from "./pages/math-game-arena/kelas8/bangun-ruang-sisi-datar/BalokGamePage";
-import PrismaK8GamePage from "./pages/math-game-arena/kelas8/bangun-ruang-sisi-datar/PrismaGamePage";
-import LimasK8GamePage from "./pages/math-game-arena/kelas8/bangun-ruang-sisi-datar/LimasGamePage";
-import GabunganBRSDK8GamePage from "./pages/math-game-arena/kelas8/bangun-ruang-sisi-datar/GabunganBRSDGamePage";
-import KontekstualBRSDK8GamePage from "./pages/math-game-arena/kelas8/bangun-ruang-sisi-datar/KontekstualBRSDGamePage";
+// Math Game Arena - Kelas 8 Submaterial Chooser & Dispatcher (catch-all for all 47 K8 sub-materi × 7 game variants)
+import SubmaterialGameVariantsChooserK8 from "./components/mga-k8/SubmaterialGameVariantsChooser";
+import SubmaterialGameDispatcherK8 from "./components/mga-k8/SubmaterialGameDispatcher";
 import PenjumlahanBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanGamePage";
 import PenjumlahanMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanMeteorGamePage";
 import PenjumlahanTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTurtleRunGamePage";
@@ -1479,62 +1434,9 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-8/lingkaran" element={<LingkaranMGAK8Page />} />
       <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMGAK8Page />} />
       <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar/kubus-game" element={<KubusGamePage />} />
-      {/* Kelas 8 - Pola Bilangan Games */}
-      <Route path="/math-game-arena/kelas-8/pola-bilangan/pengertian-pola" element={<PengertianPolaK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriK8GamePage />} />
-      {/* Kelas 8 - Koordinat Cartesius Games */}
-      <Route path="/math-game-arena/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/koordinat-cartesius/jarak-titik" element={<JarakTitikK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/koordinat-cartesius/posisi-relatif" element={<PosisiRelatifK8GamePage />} />
-      {/* Kelas 8 - Relasi dan Fungsi Games */}
-      <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi/notasi-rumus" element={<NotasiRumusK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiK8GamePage />} />
-      {/* Kelas 8 - SPLDV Games */}
-      <Route path="/math-game-arena/kelas-8/spldv/definisi-spldv" element={<DefinisiSPLDVK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/spldv/metode-grafik" element={<MetodeGrafikK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/spldv/metode-campuran" element={<MetodeCampuranK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/spldv/model-spldv" element={<ModelSPLDVK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVK8GamePage />} />
-      {/* Kelas 8 - Persamaan Garis Lurus Games */}
-      <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/grafik-pgl" element={<GrafikPGLK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/gradien" element={<GradienK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<MenentukanPGLK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualPGLK8GamePage />} />
-      {/* Kelas 8 - Teorema Pythagoras Games */}
-      <Route path="/math-game-arena/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/teorema-pythagoras/penerapan-kontekstual" element={<PenerapanKontekstualPythagorasK8GamePage />} />
-      {/* Kelas 8 - Lingkaran Games */}
-      <Route path="/math-game-arena/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/lingkaran/busur-juring" element={<BusurJuringK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranK8GamePage />} />
-      {/* Kelas 8 - Garis Singgung Lingkaran Games */}
-      <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran/pengertian-sifat" element={<PengertianSifatGSLK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran/panjang-garis-singgung" element={<PanjangGarisSinggungK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran/gspl" element={<GSPLK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanK8GamePage />} />
-      {/* Kelas 8 - Bangun Ruang Sisi Datar Games */}
-      <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar/balok-game" element={<BalokK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar/prisma-game" element={<PrismaK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar/limas-game" element={<LimasK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar/gabungan-game" element={<GabunganBRSDK8GamePage />} />
-      <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar/kontekstual-game" element={<KontekstualBRSDK8GamePage />} />
+      {/* Kelas 8 - Catch-all submaterial chooser & game dispatcher (7 game variants per submaterial) */}
+      <Route path="/math-game-arena/kelas-8/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK8 />} />
+      <Route path="/math-game-arena/kelas-8/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK8 />} />
 
       {/* Math Game Arena - Kelas 9 Topic Routes */}
       <Route path="/math-game-arena/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatMGAK9Page />} />
