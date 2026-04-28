@@ -12,6 +12,7 @@ import {
   Target,
   ClipboardCheck,
   NotebookPen,
+  CalendarClock,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -77,6 +78,12 @@ const guruMenuItems = [
     icon: NotebookPen,
     path: "/ruang-untuk-guru/jurnal-guru",
     desc: "Buku jurnal kejadian dan tindak lanjut peserta didik",
+  },
+  {
+    label: "AGENDA GURU",
+    icon: CalendarClock,
+    path: "/ruang-untuk-guru/agenda-guru",
+    desc: "Agenda harian kegiatan pembelajaran dan kehadiran",
   },
 ];
 

@@ -139,6 +139,7 @@ import PenilaianPembelajaranPage from "./pages/ruang-untuk-guru/PenilaianPembela
 import CapaianPembelajaranPage from "./pages/ruang-untuk-guru/CapaianPembelajaranPage";
 import RubrikPenilaianDimensiLulusanPage from "./pages/ruang-untuk-guru/RubrikPenilaianDimensiLulusanPage";
 import JurnalGuruPage from "./pages/ruang-untuk-guru/JurnalGuruPage";
+import AgendaGuruPage from "./pages/ruang-untuk-guru/AgendaGuruPage";
 import RPPPage from "./pages/ruang-untuk-guru/RPPPage";
 import RPPBilanganBulatPage from "./pages/ruang-untuk-guru/RPPBilanganBulatPage";
 import RPPPenjumlahanBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPenjumlahanBilanganBulatPage";
@@ -1005,6 +1006,7 @@ const AppInner = () => {
       <Route path="/ruang-untuk-guru/capaian-pembelajaran" element={<CapaianPembelajaranPage />} />
       <Route path="/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan" element={<RubrikPenilaianDimensiLulusanPage />} />
       <Route path="/ruang-untuk-guru/jurnal-guru" element={<JurnalGuruPage />} />
+      <Route path="/ruang-untuk-guru/agenda-guru" element={<AgendaGuruPage />} />
       <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat" element={<RPPBilanganBulatPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan" element={<RPPPenjumlahanBilanganBulatPage />} />
