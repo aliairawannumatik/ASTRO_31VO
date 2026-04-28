@@ -25,7 +25,7 @@ const operasi = [
     border: "border-cyan-300/50",
     text: "text-cyan-100",
     iconBg: "bg-cyan-500/20",
-    available: false,
+    available: true,
   },
   {
     title: "Perkalian Bilangan Bulat",
@@ -36,7 +36,7 @@ const operasi = [
     border: "border-amber-300/50",
     text: "text-amber-100",
     iconBg: "bg-amber-500/20",
-    available: false,
+    available: true,
   },
   {
     title: "Pembagian Bilangan Bulat",
@@ -47,7 +47,7 @@ const operasi = [
     border: "border-pink-300/50",
     text: "text-pink-100",
     iconBg: "bg-pink-500/20",
-    available: false,
+    available: true,
   },
   {
     title: "Operasi Hitung Campuran Bilangan Bulat",
@@ -58,7 +58,7 @@ const operasi = [
     border: "border-orange-300/50",
     text: "text-orange-100",
     iconBg: "bg-orange-500/20",
-    available: false,
+    available: true,
   },
   {
     title: "KPK dan FPB",
@@ -69,7 +69,7 @@ const operasi = [
     border: "border-fuchsia-300/50",
     text: "text-fuchsia-100",
     iconBg: "bg-fuchsia-500/20",
-    available: false,
+    available: true,
   },
 ];
 
