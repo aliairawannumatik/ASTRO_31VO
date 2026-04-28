@@ -50,12 +50,6 @@ const guruMenuItems = [
     desc: "Form masukan penggunaan aplikasi",
   },
   {
-    label: "PENILAIAN PEMBELAJARAN",
-    icon: ClipboardList,
-    path: "/ruang-untuk-guru/penilaian-pembelajaran",
-    desc: "Aspek penilaian sikap dan capaian peserta didik",
-  },
-  {
     label: "RUBRIK PENILAIAN DIMENSI LULUSAN",
     icon: ClipboardCheck,
     path: "/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan",
