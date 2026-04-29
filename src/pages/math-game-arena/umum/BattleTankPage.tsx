@@ -114,34 +114,85 @@ interface BattleTankPageProps {
   homePath?: string;
 }
 
-// ── On-screen D-Pad button (touch + mouse, with proper press/release) ───────
-interface PadButtonProps {
-  label: string;
-  held: boolean;
-  onPress: (held: boolean) => void;
+// ── On-screen analog joystick (touch + mouse) ───────────────────────────────
+interface AnalogStickProps {
+  size: number;
+  onChange: (x: number, y: number) => void; // values normalized to [-1, 1]
 }
-const PadButton = ({ label, held, onPress }: PadButtonProps) => (
-  <button
-    type="button"
-    onPointerDown={(e) => {
-      e.preventDefault();
-      (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId);
-      onPress(true);
-    }}
-    onPointerUp={(e) => { e.preventDefault(); onPress(false); }}
-    onPointerCancel={(e) => { e.preventDefault(); onPress(false); }}
-    onPointerLeave={() => onPress(false)}
-    onContextMenu={(e) => e.preventDefault()}
-    className={`flex items-center justify-center rounded-xl text-white font-display font-extrabold text-2xl border-2 transition-transform touch-none select-none ${
-      held
-        ? "bg-cyan-400 border-cyan-200 text-slate-900 scale-95 shadow-[0_0_18px_rgba(0,240,255,0.85)]"
-        : "bg-slate-800/90 border-cyan-400/60 shadow-[0_0_10px_rgba(0,240,255,0.35)] active:scale-95"
-    }`}
-    aria-label={label}
-  >
-    {label}
-  </button>
-);
+const AnalogStick = ({ size, onChange }: AnalogStickProps) => {
+  const baseRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(false);
+  const [knob, setKnob] = useState({ x: 0, y: 0 });
+  const [active, setActive] = useState(false);
+  const knobRadius = size * 0.32;
+  const maxDist = size / 2 - knobRadius * 0.85;
+
+  const updateFromPointer = (clientX: number, clientY: number) => {
+    const el = baseRef.current; if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    let dx = clientX - cx;
+    let dy = clientY - cy;
+    const dist = Math.hypot(dx, dy);
+    if (dist > maxDist) { dx = (dx / dist) * maxDist; dy = (dy / dist) * maxDist; }
+    setKnob({ x: dx, y: dy });
+    onChange(dx / maxDist, dy / maxDist);
+  };
+
+  const release = () => {
+    activeRef.current = false;
+    setActive(false);
+    setKnob({ x: 0, y: 0 });
+    onChange(0, 0);
+  };
+
+  return (
+    <div
+      ref={baseRef}
+      onPointerDown={(e) => {
+        e.preventDefault();
+        (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+        activeRef.current = true;
+        setActive(true);
+        updateFromPointer(e.clientX, e.clientY);
+      }}
+      onPointerMove={(e) => {
+        if (!activeRef.current) return;
+        e.preventDefault();
+        updateFromPointer(e.clientX, e.clientY);
+      }}
+      onPointerUp={(e) => { e.preventDefault(); release(); }}
+      onPointerCancel={(e) => { e.preventDefault(); release(); }}
+      onContextMenu={(e) => e.preventDefault()}
+      className="relative rounded-full bg-slate-900/75 border-2 border-cyan-400/60 shadow-[0_0_18px_rgba(0,240,255,0.35)] touch-none select-none"
+      style={{ width: size, height: size }}
+      aria-label="Stik analog"
+    >
+      {/* Center cross hint */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-1 h-6 bg-cyan-400/25 rounded" />
+        <div className="absolute w-6 h-1 bg-cyan-400/25 rounded" />
+      </div>
+      {/* Knob */}
+      <div
+        className={`absolute rounded-full pointer-events-none border-2 ${
+          active
+            ? "bg-gradient-to-br from-cyan-200 to-cyan-500 border-white/70 shadow-[0_0_18px_rgba(0,240,255,0.85)]"
+            : "bg-gradient-to-br from-cyan-400 to-cyan-700 border-white/40 shadow-[0_0_12px_rgba(0,240,255,0.55)]"
+        }`}
+        style={{
+          width: knobRadius * 2,
+          height: knobRadius * 2,
+          left: `calc(50% - ${knobRadius}px)`,
+          top: `calc(50% - ${knobRadius}px)`,
+          transform: `translate(${knob.x}px, ${knob.y}px)`,
+          transition: active ? "none" : "transform 0.12s ease-out",
+        }}
+      />
+    </div>
+  );
+};
 
 const BattleTankPage = ({
   questions,
@@ -197,10 +248,13 @@ const BattleTankPage = ({
   const playerRef = useRef({ x: dims.CW / 2, targetX: dims.CW / 2, turretAngle: -Math.PI / 2, invT: 0 });
   const mouseRef = useRef({ x: dims.CW / 2, y: dims.CH / 2 });
   const controlsRef = useRef({ left: false, right: false, up: false, down: false });
-  const [, forcePadRender] = useState(0);
+  const joyRef = useRef({ x: 0, y: 0 });
+  const setJoy = useCallback((x: number, y: number) => {
+    joyRef.current.x = x;
+    joyRef.current.y = y;
+  }, []);
   const setPadHeld = useCallback((key: "left" | "right" | "up" | "down", val: boolean) => {
     controlsRef.current[key] = val;
-    forcePadRender(n => n + 1);
   }, []);
 
   const scoreRef = useRef(0);
@@ -503,14 +557,19 @@ const BattleTankPage = ({
       const hue = hueRef.current;
       const phase = phaseRef.current;
 
-      // ── Apply on-screen / keyboard controls to aim target ────────────────
+      // ── Apply analog joystick + keyboard controls to aim target ──────────
       const ctrl = controlsRef.current;
-      if (ctrl.left || ctrl.right || ctrl.up || ctrl.down) {
-        const moveSpd = 320;
-        if (ctrl.left)  mouseRef.current.x -= moveSpd * dt;
-        if (ctrl.right) mouseRef.current.x += moveSpd * dt;
-        if (ctrl.up)    mouseRef.current.y -= moveSpd * dt;
-        if (ctrl.down)  mouseRef.current.y += moveSpd * dt;
+      const kx = (ctrl.right ? 1 : 0) - (ctrl.left ? 1 : 0);
+      const ky = (ctrl.down ? 1 : 0) - (ctrl.up ? 1 : 0);
+      const jx = joyRef.current.x;
+      const jy = joyRef.current.y;
+      // Pick whichever input has stronger magnitude per axis (so keyboard still works)
+      const ax = Math.abs(jx) >= Math.abs(kx) ? jx : kx;
+      const ay = Math.abs(jy) >= Math.abs(ky) ? jy : ky;
+      if (ax !== 0 || ay !== 0) {
+        const moveSpd = 360;
+        mouseRef.current.x += ax * moveSpd * dt;
+        mouseRef.current.y += ay * moveSpd * dt;
         mouseRef.current.x = Math.max(20, Math.min(CW - 20, mouseRef.current.x));
         mouseRef.current.y = Math.max(20, Math.min(CH - 20, mouseRef.current.y));
       }
@@ -786,7 +845,7 @@ const BattleTankPage = ({
           { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 72"><rect x="4" y="48" width="102" height="18" rx="9" fill="#2a1a08"/><rect x="4" y="50" width="102" height="14" rx="7" fill="#3a2210"/><circle cx="18" cy="57" r="7" fill="#5a3a18"/><circle cx="18" cy="57" r="3.5" fill="#1a0e04"/><circle cx="36" cy="57" r="7" fill="#5a3a18"/><circle cx="36" cy="57" r="3.5" fill="#1a0e04"/><circle cx="55" cy="57" r="7" fill="#5a3a18"/><circle cx="55" cy="57" r="3.5" fill="#1a0e04"/><circle cx="74" cy="57" r="7" fill="#5a3a18"/><circle cx="74" cy="57" r="3.5" fill="#1a0e04"/><circle cx="92" cy="57" r="7" fill="#5a3a18"/><circle cx="92" cy="57" r="3.5" fill="#1a0e04"/><rect x="8" y="32" width="82" height="22" rx="5" fill="#b88830"/><rect x="8" y="32" width="82" height="10" rx="5" fill="#d4a040"/><rect x="12" y="36" width="70" height="5" rx="2" fill="#eec055" opacity="0.4"/><ellipse cx="48" cy="30" rx="26" ry="16" fill="#a07020"/><ellipse cx="48" cy="28" rx="24" ry="12" fill="#ba8a2a"/><rect x="65" y="24" width="40" height="9" rx="4" fill="#7a5010"/><rect x="100" y="22" width="10" height="13" rx="2" fill="#4a3008"/><circle cx="40" cy="22" r="8" fill="#7a5010"/><circle cx="40" cy="22" r="5" fill="#4a3008"/><circle cx="40" cy="22" r="2" fill="#2a1804"/><rect x="10" y="34" width="12" height="18" rx="2" fill="#a07020" opacity="0.5"/><rect x="78" y="34" width="10" height="18" rx="2" fill="#a07020" opacity="0.5"/></svg>')}`, className: "absolute bottom-[14%] left-[5%] w-22 h-14 md:w-30 md:h-20 opacity-80 animate-float-fast", glowRgba: "rgba(200,150,40,0.5)" },
         ]}
         instructions={[
-          { text: <>Gunakan <strong className="text-yellow-300">tombol arah ← ↑ → ↓</strong> di bawah layar untuk membidik (atau gerakkan mouse / sentuh layar)</> },
+          { text: <>Gunakan <strong className="text-yellow-300">stik analog</strong> untuk membidik ke segala arah (atau gerakkan mouse / sentuh layar / tombol panah)</> },
           { text: <>Tekan tombol <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap layar / spasi) untuk menembakkan peluru</> },
           { text: <>Hancurkan semua tank musuh dan hindari peluru mereka — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
           { text: <>Tiap <strong className="text-yellow-300">{QUIZ_INTERVAL} detik</strong> muncul soal bonus = <strong className="text-green-400">+{QUIZ_BONUS_PTS} pts</strong></> },
@@ -836,18 +895,10 @@ const BattleTankPage = ({
           isLandscape ? "flex-row px-3 py-1" : "flex-col px-2 py-1"
         }`}
       >
-        {/* D-Pad – only visible here in landscape (flanking the canvas) */}
+        {/* Analog joystick – only visible here in landscape (flanking the canvas) */}
         {isLandscape && (
-          <div className="shrink-0 grid grid-cols-3 grid-rows-3 gap-1.5 select-none touch-none" style={{ width: 132, height: 132 }}>
-            <div />
-            <PadButton label="↑" held={controlsRef.current.up} onPress={(v) => setPadHeld("up", v)} />
-            <div />
-            <PadButton label="←" held={controlsRef.current.left} onPress={(v) => setPadHeld("left", v)} />
-            <div className="rounded-xl bg-slate-900/40 border border-white/5" />
-            <PadButton label="→" held={controlsRef.current.right} onPress={(v) => setPadHeld("right", v)} />
-            <div />
-            <PadButton label="↓" held={controlsRef.current.down} onPress={(v) => setPadHeld("down", v)} />
-            <div />
+          <div className="shrink-0">
+            <AnalogStick size={140} onChange={setJoy} />
           </div>
         )}
 
@@ -914,21 +965,11 @@ const BattleTankPage = ({
         )}
       </div>
 
-      {/* On-screen controls (portrait only): D-Pad (left) + Fire button (right) */}
+      {/* On-screen controls (portrait only): Joystick (left) + Fire button (right) */}
       {!isLandscape && (
         <div className="relative z-10 w-full shrink-0 flex items-center justify-between gap-3 px-4 pt-1 pb-1 select-none touch-none">
-          {/* D-Pad */}
-          <div className="grid grid-cols-3 grid-rows-3 gap-1.5" style={{ width: 150, height: 150 }}>
-            <div />
-            <PadButton label="↑" held={controlsRef.current.up} onPress={(v) => setPadHeld("up", v)} />
-            <div />
-            <PadButton label="←" held={controlsRef.current.left} onPress={(v) => setPadHeld("left", v)} />
-            <div className="rounded-xl bg-slate-900/40 border border-white/5" />
-            <PadButton label="→" held={controlsRef.current.right} onPress={(v) => setPadHeld("right", v)} />
-            <div />
-            <PadButton label="↓" held={controlsRef.current.down} onPress={(v) => setPadHeld("down", v)} />
-            <div />
-          </div>
+          {/* Analog joystick */}
+          <AnalogStick size={150} onChange={setJoy} />
 
           {/* Fire Button */}
           <button
