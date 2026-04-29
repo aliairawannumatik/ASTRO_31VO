@@ -121,9 +121,9 @@ const PerbandinganSkalaPage = () => {
                 </div>
                 <p className="mb-3">Jika skala denah rumah adalah 1 : 200, maka luas bangunan rumah sebenarnya adalah ...</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 46 m<sup>2</sup></p>
-                  <p>B. 92 m<sup>2</sup></p>
-                  <p>C. 184 m<sup>2</sup></p>
+                  <p>A. 252 m<sup>2</sup></p>
+                  <p>B. 342 m<sup>2</sup></p>
+                  <p>C. 352 m<sup>2</sup></p>
                   <p>D. 368 m<sup>2</sup></p>
                 </div>
               </div>
