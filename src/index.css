@@ -1079,3 +1079,303 @@
 
 /* ── KaTeX math text: light cyan-tinted on deep ocean bg ── */
 .theme-ocean .katex { color: #e0f7ff; }
+
+/* ════════════════════════════════════════════════
+   THEME FOREST — HUTAN HIJAU — GLOBAL OVERRIDES
+   (light-base theme; .light-mode is also active, so
+    these rules override its blue accents with a
+    cohesive green / emerald / lime forest palette)
+   ════════════════════════════════════════════════ */
+
+/* ── Base CSS variables: shift towards lush forest greens ── */
+.theme-forest {
+  --background: 138 60% 96%;
+  --foreground: 150 60% 12%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 150 60% 12%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 150 60% 12%;
+
+  --primary: 142 71% 35%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 152 50% 88%;
+  --secondary-foreground: 150 60% 12%;
+
+  --muted: 138 40% 92%;
+  --muted-foreground: 150 30% 30%;
+
+  --accent: 84 81% 35%;
+  --accent-foreground: 0 0% 100%;
+
+  --border: 142 50% 78%;
+  --input: 142 45% 88%;
+  --ring: 142 71% 35%;
+
+  --neon-cyan: 160 84% 32%;
+  --neon-magenta: 102 70% 38%;
+  --neon-green: 142 71% 35%;
+  --space-deep: 138 60% 96%;
+  --space-mid: 138 50% 92%;
+}
+
+/* ── Background gradient: every page that uses gradient-space
+       (the default galaxy bg) now shows the soft forest gradient ── */
+.theme-forest .gradient-space {
+  background: linear-gradient(180deg,
+    #bbf7d0 0%, #d1fae5 25%, #dcfce7 55%, #ecfdf5 80%, #f0fdf4 100%) !important;
+}
+.theme-forest body {
+  background: #ecfdf5;
+}
+
+/* ── Text glows: green-tinted soft shadows for forest mood ── */
+.theme-forest .text-glow-cyan {
+  text-shadow:
+    0 0 10px rgba(22,163,74,0.40),
+    0 1px 3px rgba(20,83,45,0.25) !important;
+}
+.theme-forest .text-glow-magenta {
+  text-shadow:
+    0 0 10px rgba(101,163,13,0.40),
+    0 1px 3px rgba(63,98,18,0.25) !important;
+}
+.theme-forest .text-glow-accent {
+  text-shadow:
+    0 0 8px rgba(101,163,13,0.40),
+    0 1px 3px rgba(20,83,45,0.20) !important;
+}
+
+/* ── Box-glow effects: green instead of cyan/magenta ── */
+.theme-forest .box-glow-cyan {
+  box-shadow:
+    0 0 12px rgba(22,163,74,0.30),
+    0 0 30px rgba(34,197,94,0.15),
+    0 4px 16px rgba(20,83,45,0.08) !important;
+}
+.theme-forest .box-glow-magenta {
+  box-shadow:
+    0 0 12px rgba(101,163,13,0.30),
+    0 0 30px rgba(132,204,22,0.15) !important;
+}
+
+/* ── Cool-blue text accents (already shifted by .light-mode) →
+       remap to green/emerald/lime so nothing reads as blue ── */
+.theme-forest .text-cyan-100,
+.theme-forest .text-cyan-200,
+.theme-forest .text-cyan-300,
+.theme-forest .text-cyan-400,
+.theme-forest .text-cyan-500   { color: #047857 !important; }
+.theme-forest .text-sky-100,
+.theme-forest .text-sky-200,
+.theme-forest .text-sky-300,
+.theme-forest .text-sky-400    { color: #15803d !important; }
+.theme-forest .text-blue-100,
+.theme-forest .text-blue-200,
+.theme-forest .text-blue-300,
+.theme-forest .text-blue-400,
+.theme-forest .text-blue-500   { color: #15803d !important; }
+.theme-forest .text-indigo-100,
+.theme-forest .text-indigo-200,
+.theme-forest .text-indigo-300,
+.theme-forest .text-indigo-400 { color: #166534 !important; }
+.theme-forest .text-violet-100,
+.theme-forest .text-violet-200,
+.theme-forest .text-violet-300,
+.theme-forest .text-violet-400 { color: #4d7c0f !important; }
+.theme-forest .text-purple-100,
+.theme-forest .text-purple-200,
+.theme-forest .text-purple-300,
+.theme-forest .text-purple-400 { color: #3f6212 !important; }
+.theme-forest .text-fuchsia-100,
+.theme-forest .text-fuchsia-200,
+.theme-forest .text-fuchsia-300,
+.theme-forest .text-fuchsia-400 { color: #4d7c0f !important; }
+.theme-forest .text-pink-100,
+.theme-forest .text-pink-200,
+.theme-forest .text-pink-300,
+.theme-forest .text-pink-400   { color: #65a30d !important; }
+.theme-forest .text-rose-100,
+.theme-forest .text-rose-200,
+.theme-forest .text-rose-300,
+.theme-forest .text-rose-400   { color: #84cc16 !important; }
+
+/* ── Warm tones (amber/orange/yellow/red) → earthy autumn-leaf
+       so they harmonize with the forest palette ── */
+.theme-forest .text-amber-200,
+.theme-forest .text-amber-300,
+.theme-forest .text-amber-400,
+.theme-forest .text-amber-500  { color: #854d0e !important; }
+.theme-forest .text-orange-200,
+.theme-forest .text-orange-300,
+.theme-forest .text-orange-400,
+.theme-forest .text-orange-500 { color: #9a3412 !important; }
+.theme-forest .text-yellow-200,
+.theme-forest .text-yellow-300,
+.theme-forest .text-yellow-400,
+.theme-forest .text-yellow-500 { color: #713f12 !important; }
+.theme-forest .text-red-300,
+.theme-forest .text-red-400,
+.theme-forest .text-red-500    { color: #b45309 !important; }
+
+/* ── Greens: deepen for legibility on light forest bg ── */
+.theme-forest .text-green-300,
+.theme-forest .text-green-400  { color: #15803d !important; }
+.theme-forest .text-green-500  { color: #166534 !important; }
+.theme-forest .text-emerald-300,
+.theme-forest .text-emerald-400 { color: #047857 !important; }
+.theme-forest .text-lime-300,
+.theme-forest .text-lime-400   { color: #4d7c0f !important; }
+.theme-forest .text-teal-300,
+.theme-forest .text-teal-400   { color: #0f766e !important; }
+
+/* ── Primary / accent / secondary semantic text ── */
+.theme-forest .text-primary           { color: #15803d !important; }
+.theme-forest .text-accent            { color: #4d7c0f !important; }
+.theme-forest .text-secondary         { color: #166534 !important; }
+.theme-forest .text-muted-foreground  { color: #3f6212 !important; }
+
+/* ── Card / container backgrounds: blue/violet/purple tinted
+       light-mode values → soft mint / sage / lime tints ── */
+.theme-forest .bg-cyan-950\/40,
+.theme-forest .bg-cyan-950\/50,
+.theme-forest .bg-cyan-950\/60,
+.theme-forest .bg-cyan-950\/70,
+.theme-forest .bg-cyan-950     { background-color: rgba(220,252,231,0.78) !important; }
+.theme-forest .bg-blue-950\/50,
+.theme-forest .bg-blue-950\/60 { background-color: rgba(220,252,231,0.78) !important; }
+.theme-forest .bg-violet-950,
+.theme-forest .bg-violet-950\/40,
+.theme-forest .bg-violet-950\/50,
+.theme-forest .bg-violet-950\/60,
+.theme-forest .bg-violet-950\/70 { background-color: rgba(236,253,245,0.85) !important; }
+.theme-forest .bg-purple-950\/40,
+.theme-forest .bg-purple-950\/50,
+.theme-forest .bg-purple-950\/60 { background-color: rgba(240,253,244,0.85) !important; }
+.theme-forest .bg-indigo-950\/50,
+.theme-forest .bg-indigo-950\/60 { background-color: rgba(220,252,231,0.85) !important; }
+.theme-forest .bg-orange-950\/40,
+.theme-forest .bg-orange-950\/50,
+.theme-forest .bg-orange-950\/60,
+.theme-forest .bg-orange-950\/70,
+.theme-forest .bg-orange-950   { background-color: rgba(254,243,199,0.78) !important; }
+.theme-forest .bg-amber-950\/50,
+.theme-forest .bg-amber-950\/60 { background-color: rgba(254,243,199,0.78) !important; }
+.theme-forest .bg-yellow-950\/50,
+.theme-forest .bg-yellow-950\/60 { background-color: rgba(254,252,232,0.85) !important; }
+.theme-forest .bg-red-950\/50,
+.theme-forest .bg-red-950\/60  { background-color: rgba(254,243,199,0.78) !important; }
+
+/* ── White / overlay tints: keep them white-on-mint to feel airy ── */
+.theme-forest .bg-card\/80     { background-color: rgba(247,254,231,0.92) !important; }
+.theme-forest .bg-card\/90     { background-color: rgba(247,254,231,0.96) !important; }
+.theme-forest .bg-\[#141d35\]  { background-color: #f7fee7 !important; }
+.theme-forest .bg-\[#141d35\]\/90 { background-color: rgba(247,254,231,0.92) !important; }
+.theme-forest .bg-\[#1a2040\]  { background-color: #ecfdf5 !important; }
+.theme-forest .bg-\[#252d50\]  { background-color: #d1fae5 !important; }
+.theme-forest .bg-background\/40 { background-color: rgba(236,253,245,0.55) !important; }
+.theme-forest .bg-background\/60 { background-color: rgba(236,253,245,0.78) !important; }
+
+/* ── Borders: blue / violet / pink → green family ── */
+.theme-forest .border-border        { border-color: #bbf7d0 !important; }
+.theme-forest .border-cyan-700\/50,
+.theme-forest .border-cyan-600\/40,
+.theme-forest .border-cyan-500\/30,
+.theme-forest .border-cyan-500      { border-color: rgba(22,163,74,0.45) !important; }
+.theme-forest .border-blue-500,
+.theme-forest .border-blue-500\/40,
+.theme-forest .border-blue-600\/40  { border-color: rgba(22,163,74,0.45) !important; }
+.theme-forest .border-violet-500,
+.theme-forest .border-violet-500\/30,
+.theme-forest .border-violet-500\/40,
+.theme-forest .border-violet-600\/30,
+.theme-forest .border-violet-600\/40,
+.theme-forest .border-violet-700\/50 { border-color: rgba(101,163,13,0.45) !important; }
+.theme-forest .border-purple-500,
+.theme-forest .border-purple-500\/40,
+.theme-forest .border-purple-600\/40 { border-color: rgba(101,163,13,0.45) !important; }
+.theme-forest .border-indigo-500\/40,
+.theme-forest .border-indigo-600\/40 { border-color: rgba(34,197,94,0.45) !important; }
+.theme-forest .border-fuchsia-500,
+.theme-forest .border-fuchsia-500\/40,
+.theme-forest .border-pink-500,
+.theme-forest .border-pink-500\/40,
+.theme-forest .border-rose-500\/40  { border-color: rgba(132,204,22,0.45) !important; }
+.theme-forest .border-orange-700\/40,
+.theme-forest .border-orange-600\/40,
+.theme-forest .border-amber-500\/40,
+.theme-forest .border-amber-500\/70,
+.theme-forest .border-yellow-600\/40 { border-color: rgba(180,83,9,0.40) !important; }
+.theme-forest .border-red-600\/40   { border-color: rgba(180,83,9,0.40) !important; }
+.theme-forest .border-cyan-500\/30  { border-color: rgba(22,163,74,0.30) !important; }
+.theme-forest .border-accent\/60    { border-color: rgba(101,163,13,0.55) !important; }
+.theme-forest .border-accent\/50    { border-color: rgba(101,163,13,0.45) !important; }
+.theme-forest .border-primary\/60   { border-color: rgba(22,163,74,0.55) !important; }
+
+/* ── Tailwind gradient color stops (from-/to-/via-) → green family
+       so colorful section headers / buttons follow the forest mood ── */
+.theme-forest .from-violet-500   { --tw-gradient-from: #65a30d var(--tw-gradient-from-position) !important; }
+.theme-forest .to-violet-500     { --tw-gradient-to: #65a30d var(--tw-gradient-to-position) !important; }
+.theme-forest .from-violet-600   { --tw-gradient-from: #4d7c0f var(--tw-gradient-from-position) !important; }
+.theme-forest .to-violet-600     { --tw-gradient-to: #4d7c0f var(--tw-gradient-to-position) !important; }
+.theme-forest .via-violet-500    { --tw-gradient-via: #65a30d var(--tw-gradient-via-position) !important; }
+.theme-forest .from-purple-500   { --tw-gradient-from: #16a34a var(--tw-gradient-from-position) !important; }
+.theme-forest .to-purple-500     { --tw-gradient-to: #16a34a var(--tw-gradient-to-position) !important; }
+.theme-forest .from-purple-600   { --tw-gradient-from: #15803d var(--tw-gradient-from-position) !important; }
+.theme-forest .to-purple-600     { --tw-gradient-to: #15803d var(--tw-gradient-to-position) !important; }
+.theme-forest .from-fuchsia-500  { --tw-gradient-from: #84cc16 var(--tw-gradient-from-position) !important; }
+.theme-forest .to-fuchsia-500    { --tw-gradient-to: #84cc16 var(--tw-gradient-to-position) !important; }
+.theme-forest .from-pink-500     { --tw-gradient-from: #65a30d var(--tw-gradient-from-position) !important; }
+.theme-forest .to-pink-500       { --tw-gradient-to: #65a30d var(--tw-gradient-to-position) !important; }
+.theme-forest .from-rose-500     { --tw-gradient-from: #84cc16 var(--tw-gradient-from-position) !important; }
+.theme-forest .to-rose-500       { --tw-gradient-to: #84cc16 var(--tw-gradient-to-position) !important; }
+.theme-forest .from-indigo-500   { --tw-gradient-from: #16a34a var(--tw-gradient-from-position) !important; }
+.theme-forest .to-indigo-500     { --tw-gradient-to: #16a34a var(--tw-gradient-to-position) !important; }
+.theme-forest .from-blue-500     { --tw-gradient-from: #16a34a var(--tw-gradient-from-position) !important; }
+.theme-forest .to-blue-500       { --tw-gradient-to: #16a34a var(--tw-gradient-to-position) !important; }
+.theme-forest .from-blue-600     { --tw-gradient-from: #15803d var(--tw-gradient-from-position) !important; }
+.theme-forest .to-blue-600       { --tw-gradient-to: #15803d var(--tw-gradient-to-position) !important; }
+.theme-forest .from-cyan-500     { --tw-gradient-from: #22c55e var(--tw-gradient-from-position) !important; }
+.theme-forest .to-cyan-500       { --tw-gradient-to: #22c55e var(--tw-gradient-to-position) !important; }
+
+/* ── Tinted shadow utilities used for floating cards ── */
+.theme-forest [class*="shadow-violet"],
+.theme-forest [class*="shadow-purple"],
+.theme-forest [class*="shadow-fuchsia"],
+.theme-forest [class*="shadow-pink"],
+.theme-forest [class*="shadow-indigo"],
+.theme-forest [class*="shadow-blue"],
+.theme-forest [class*="shadow-cyan"] {
+  --tw-shadow-color: rgba(22,163,74,0.30) !important;
+  --tw-shadow: var(--tw-shadow-colored) !important;
+}
+
+/* ── Animated CTA button pulse: green glow ── */
+.theme-forest .animate-button-pulse {
+  animation: button-pulse-grow-forest 1.2s ease-in-out infinite;
+}
+@keyframes button-pulse-grow-forest {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 20px hsl(142 71% 45% / 0.55); }
+  50%      { transform: scale(1.15); box-shadow: 0 0 40px hsl(142 71% 45% / 0.85); }
+}
+
+/* ── Page navigation bar: white-on-mint, green border ── */
+.theme-forest nav,
+.theme-forest [class*="PageNavigation"] {
+  background-color: rgba(247,254,231,0.92) !important;
+  border-color: rgba(34,197,94,0.30) !important;
+}
+
+/* ── Dividers ── */
+.theme-forest hr,
+.theme-forest .divide-white\/10 > * + * { border-color: #bbf7d0 !important; }
+
+/* ── Table headers in forest mode ── */
+.theme-forest thead tr   { background-color: #dcfce7 !important; }
+.theme-forest thead th   { color: #166534 !important; }
+.theme-forest tbody tr:nth-child(even) { background-color: rgba(220,252,231,0.55) !important; }
+
+/* ── KaTeX math text: deep forest green so formulas stand out ── */
+.theme-forest .katex { color: #14532d; }

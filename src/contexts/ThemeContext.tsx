@@ -24,7 +24,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     localStorage.setItem("numatik-theme", theme);
     // Apply CSS variable class
-    document.documentElement.classList.remove("light-mode", "theme-white", "theme-ocean");
+    document.documentElement.classList.remove("light-mode", "theme-white", "theme-ocean", "theme-forest");
     if (!DARK_THEMES.includes(theme)) {
       document.documentElement.classList.add("light-mode");
     }
@@ -33,6 +33,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     }
     if (theme === "ocean") {
       document.documentElement.classList.add("theme-ocean");
+    }
+    if (theme === "forest") {
+      document.documentElement.classList.add("theme-forest");
     }
   }, [theme]);
 
