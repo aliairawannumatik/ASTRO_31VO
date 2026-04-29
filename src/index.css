@@ -636,3 +636,132 @@
 .light-mode .border-cyan-500\/30 {
   border-color: rgba(14,165,233,0.25) !important;
 }
+
+/* ════════════════════════════════════════════════
+   THEME WHITE — PUTIH BERSIH — EXTRA OVERRIDES
+   (applied on top of .light-mode for the "white" theme only)
+   ════════════════════════════════════════════════ */
+
+/* ── Background: pure white gradient on every page ── */
+.theme-white .gradient-space {
+  background: linear-gradient(180deg,
+    #ffffff 0%, #fafbfc 50%, #f5f7fa 100%) !important;
+}
+.theme-white body,
+.theme-white .gradient-snow {
+  background: #ffffff !important;
+}
+
+/* ── Text glow effects: stronger so they remain visible on pure white ── */
+.theme-white .text-glow-cyan {
+  text-shadow:
+    0 0 8px rgba(2,132,199,0.55),
+    0 0 18px rgba(14,165,233,0.30),
+    0 1px 2px rgba(15,23,42,0.20) !important;
+}
+.theme-white .text-glow-magenta {
+  text-shadow:
+    0 0 8px rgba(124,58,237,0.55),
+    0 0 18px rgba(168,85,247,0.30),
+    0 1px 2px rgba(15,23,42,0.20) !important;
+}
+.theme-white .text-glow-accent {
+  text-shadow:
+    0 0 8px rgba(234,88,12,0.55),
+    0 1px 2px rgba(15,23,42,0.20) !important;
+}
+
+/* ── White semi-transparent overlays → slate (so they show on white) ── */
+.theme-white .bg-white\/5    { background-color: rgba(15,23,42,0.04) !important; }
+.theme-white .bg-white\/8    { background-color: rgba(15,23,42,0.05) !important; }
+.theme-white .bg-white\/10   { background-color: rgba(15,23,42,0.06) !important; }
+.theme-white .bg-white\/15   { background-color: rgba(15,23,42,0.08) !important; }
+.theme-white .bg-white\/20   { background-color: rgba(15,23,42,0.10) !important; }
+.theme-white .bg-white\/30   { background-color: rgba(15,23,42,0.13) !important; }
+.theme-white .bg-white\/40   { background-color: rgba(15,23,42,0.16) !important; }
+
+/* ── White-tinted borders → slate so cards/dividers are visible on white ── */
+.theme-white .border-white\/5   { border-color: rgba(15,23,42,0.08) !important; }
+.theme-white .border-white\/8   { border-color: rgba(15,23,42,0.10) !important; }
+.theme-white .border-white\/10  { border-color: rgba(15,23,42,0.12) !important; }
+.theme-white .border-white\/15  { border-color: rgba(15,23,42,0.14) !important; }
+.theme-white .border-white\/20  { border-color: rgba(15,23,42,0.16) !important; }
+.theme-white .border-white\/30  { border-color: rgba(15,23,42,0.20) !important; }
+
+/* ── Card background tweak: subtle off-white so cards stand out from page ── */
+.theme-white .bg-card\/80 { background-color: #f6f8fb !important; }
+.theme-white .bg-card\/90 { background-color: #f4f6fa !important; }
+
+/* ── Border-border (default card border) → visible slate on white ── */
+.theme-white .border-border { border-color: #cbd5e1 !important; }
+
+/* ── Text accents: slightly deeper than the snow-mode values for pure-white legibility ── */
+.theme-white .text-cyan-300    { color: #075985 !important; }
+.theme-white .text-cyan-400    { color: #075985 !important; }
+.theme-white .text-cyan-500    { color: #0c4a6e !important; }
+.theme-white .text-sky-300     { color: #075985 !important; }
+.theme-white .text-sky-400     { color: #075985 !important; }
+.theme-white .text-blue-300    { color: #1e3a8a !important; }
+.theme-white .text-blue-400    { color: #1e3a8a !important; }
+.theme-white .text-indigo-300  { color: #312e81 !important; }
+.theme-white .text-indigo-400  { color: #312e81 !important; }
+.theme-white .text-violet-300  { color: #5b21b6 !important; }
+.theme-white .text-violet-400  { color: #4c1d95 !important; }
+.theme-white .text-purple-300  { color: #6b21a8 !important; }
+.theme-white .text-purple-400  { color: #581c87 !important; }
+.theme-white .text-pink-300    { color: #9d174d !important; }
+.theme-white .text-pink-400    { color: #831843 !important; }
+.theme-white .text-rose-300    { color: #9f1239 !important; }
+.theme-white .text-orange-300  { color: #9a3412 !important; }
+.theme-white .text-orange-400  { color: #9a3412 !important; }
+.theme-white .text-amber-300   { color: #92400e !important; }
+.theme-white .text-amber-400   { color: #78350f !important; }
+.theme-white .text-yellow-300  { color: #854d0e !important; }
+.theme-white .text-yellow-400  { color: #713f12 !important; }
+.theme-white .text-green-300   { color: #166534 !important; }
+.theme-white .text-green-400   { color: #15803d !important; }
+.theme-white .text-emerald-400 { color: #047857 !important; }
+.theme-white .text-teal-300    { color: #115e59 !important; }
+.theme-white .text-teal-400    { color: #115e59 !important; }
+.theme-white .text-red-300     { color: #991b1b !important; }
+.theme-white .text-red-400     { color: #b91c1c !important; }
+.theme-white .text-fuchsia-300 { color: #701a75 !important; }
+.theme-white .text-fuchsia-400 { color: #701a75 !important; }
+
+/* ── Primary / accent / muted text on pure white ── */
+.theme-white .text-primary           { color: #1e3a8a !important; }
+.theme-white .text-accent            { color: #9a3412 !important; }
+.theme-white .text-secondary         { color: #5b21b6 !important; }
+.theme-white .text-muted-foreground  { color: #475569 !important; }
+
+/* ── Page navigation bar on pure white ── */
+.theme-white nav,
+.theme-white [class*="PageNavigation"] {
+  background-color: rgba(255,255,255,0.95) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 2px 12px rgba(15,23,42,0.05);
+}
+
+/* ── Dividers ── */
+.theme-white hr,
+.theme-white .divide-white\/10 > * + * { border-color: #e2e8f0 !important; }
+
+/* ── Backdrop blur cards on solid white: add subtle border + shadow lift ── */
+.theme-white .backdrop-blur,
+.theme-white .backdrop-blur-md,
+.theme-white .backdrop-blur-lg,
+.theme-white .backdrop-blur-xl {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Box-glow softer/darker on pure white so it's visible ── */
+.theme-white .box-glow-cyan {
+  box-shadow:
+    0 0 10px rgba(2,132,199,0.30),
+    0 0 24px rgba(14,165,233,0.12),
+    0 4px 16px rgba(15,23,42,0.06) !important;
+}
+
+/* ── KaTeX math text on pure white ── */
+.theme-white .katex { color: #0f172a; }
