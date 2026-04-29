@@ -637,7 +637,7 @@ const CatchItemsGamePage = () => {
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
 
-      <div className="relative z-10 w-full max-w-lg px-2 py-4 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-lg px-2 pt-7 pb-4 flex flex-col items-center">
         {/* header */}
         <div className="flex items-center justify-between w-full mb-2">
           <button

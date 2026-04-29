@@ -764,7 +764,7 @@ const SnakeMathPage = ({
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
 
-      <div className="relative z-10 w-full h-full px-2 py-2 flex flex-col items-center">
+      <div className="relative z-10 w-full h-full px-2 pt-5 pb-2 flex flex-col items-center">
         {/* nav */}
         <div className="flex items-center justify-between w-full mb-2 gap-2 max-w-6xl">
           <button

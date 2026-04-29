@@ -528,7 +528,7 @@ const BounceMathPage = () => {
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center gap-2 py-2 h-full justify-center">
+      <div className="relative z-10 flex flex-col items-center gap-2 pt-5 pb-2 h-full justify-center">
         <div className="shrink-0 flex items-center justify-between w-full max-w-sm px-1">
           <button
             onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}

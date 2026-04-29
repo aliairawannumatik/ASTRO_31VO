@@ -596,7 +596,7 @@ const SubmarineBattleMathPage = () => {
     <div className={`relative flex flex-col overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
       <div className="relative z-10 flex flex-col h-full overflow-hidden">
-        <div className="shrink-0 px-3 pt-2 pb-1 flex items-center justify-between">
+        <div className="shrink-0 px-3 pt-5 pb-1 flex items-center justify-between">
           <button
             onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"

@@ -543,7 +543,7 @@ const DinoRunGamePage = ({
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
 
-      <div className="relative z-10 w-full max-w-2xl px-2 py-4 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-2xl px-2 pt-7 pb-4 flex flex-col items-center">
         <div className="flex items-center justify-between w-full mb-3 gap-2">
           <button
             onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}

@@ -647,7 +647,7 @@ const BubblePopPage = () => {
     >
       {isLight ? <Snowfall /> : <Starfield />}
 
-      <div className="relative z-10 flex flex-col items-center w-full max-w-lg px-2 py-4">
+      <div className="relative z-10 flex flex-col items-center w-full max-w-lg px-2 pt-7 pb-4">
         {/* header */}
         <div className="flex items-center justify-between w-full mb-3 px-1">
           <button

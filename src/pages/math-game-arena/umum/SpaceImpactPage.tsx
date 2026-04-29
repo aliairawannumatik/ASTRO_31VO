@@ -1209,7 +1209,7 @@ const SpaceImpactPage = ({
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center px-4 py-4 w-full max-w-lg">
+      <div className="relative z-10 flex flex-col items-center px-4 pt-7 pb-4 w-full max-w-lg">
         <div className="flex items-center justify-between w-full mb-1 gap-2">
           <button
             onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}

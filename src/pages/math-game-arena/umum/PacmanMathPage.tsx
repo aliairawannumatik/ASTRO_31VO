@@ -634,7 +634,7 @@ const PacmanMathPage = () => {
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center px-2 py-4 w-full max-w-lg">
+      <div className="relative z-10 flex flex-col items-center px-2 pt-7 pb-4 w-full max-w-lg">
         <div className="flex items-center justify-between w-full mb-1">
           <button
             onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}

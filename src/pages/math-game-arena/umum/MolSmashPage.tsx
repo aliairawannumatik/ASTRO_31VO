@@ -792,7 +792,7 @@ const MolSmashPage = () => {
       style={{ height: '100dvh' }}
     >
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center gap-4 py-2 w-full">
+      <div className="relative z-10 flex flex-col items-center gap-4 pt-5 pb-2 w-full">
         <div className="flex items-center justify-between w-full max-w-sm px-3">
           <button
             onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
