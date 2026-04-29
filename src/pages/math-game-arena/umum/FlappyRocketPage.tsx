@@ -107,7 +107,7 @@ const FlappyRocketPage = ({
   const flashRef = useRef(0);          // flash alpha for wrong answer
   const nebulasRef = useRef<NebulaCloud[]>([]);
   const bgStarsRef = useRef<{ x: number; y: number; r: number; twinkle: number }[]>([]);
-  const trailRef = useRef<{ x: number; y: number; alpha: number }[]>([]);
+  const trailRef = useRef<{ x: number; y: number; vx: number; vy: number; r: number; alpha: number; hot: boolean }[]>([]);
   const activeQRef = useRef<MQ | null>(null);
   const shakeDurRef = useRef(0);
   const shakeMagRef = useRef(0);
@@ -363,12 +363,13 @@ const FlappyRocketPage = ({
     ctx.textAlign = "left";
   }, []);
 
-  // ── Draw rocket ────────────────────────────────────────────────────────────
+  // ── Draw rocket (cute & detailed, with animated multi-layer flame) ────────
   const drawRocket = useCallback((ctx: CanvasRenderingContext2D, y: number, rot: number, ts: number, shield: number) => {
     ctx.save();
     ctx.translate(ROCKET_X, y);
     ctx.rotate(rot);
 
+    // Shield bubble
     if (shield > 0) {
       const alpha = 0.3 + 0.2 * Math.sin(ts / 120);
       ctx.globalAlpha = alpha;
@@ -376,92 +377,210 @@ const FlappyRocketPage = ({
       ctx.shadowColor = "#00FFFF";
       ctx.shadowBlur = 20;
       ctx.beginPath();
-      ctx.arc(0, 0, ROCKET_R + 10, 0, Math.PI * 2);
+      ctx.arc(0, 0, ROCKET_R + 12, 0, Math.PI * 2);
       ctx.fill();
       ctx.globalAlpha = 1;
       ctx.shadowBlur = 0;
     }
 
-    // engine glow
-    const engGlow = ctx.createRadialGradient(-ROCKET_R - 4, 0, 1, -ROCKET_R - 4, 0, 16);
-    engGlow.addColorStop(0, "rgba(255,160,0,0.95)");
-    engGlow.addColorStop(0.4, "rgba(255,80,0,0.6)");
-    engGlow.addColorStop(1, "rgba(255,0,0,0)");
-    ctx.fillStyle = engGlow;
+    // ── Big animated FLAME (drawn first so the body sits on top) ─────────
+    const t = ts / 50;
+    const flick1 = 1 + 0.18 * Math.sin(t);
+    const flick2 = 1 + 0.22 * Math.sin(t * 1.7 + 1.1);
+    const len1 = (26 + 6 * Math.sin(t)) * flick1;       // outer flame length
+    const len2 = (16 + 4 * Math.sin(t * 1.3 + 1)) * flick2; // inner flame length
+    const wid  = 8.5 + 1.6 * Math.sin(t * 0.7);
+
+    // Outer warm halo glow
+    const haloGrad = ctx.createRadialGradient(-ROCKET_R - 8, 0, 2, -ROCKET_R - 8, 0, 36);
+    haloGrad.addColorStop(0, "rgba(255,180,60,0.55)");
+    haloGrad.addColorStop(0.45, "rgba(255,100,30,0.28)");
+    haloGrad.addColorStop(1, "rgba(255,60,0,0)");
+    ctx.fillStyle = haloGrad;
     ctx.beginPath();
-    ctx.arc(-ROCKET_R - 4, 0, 16, 0, Math.PI * 2);
+    ctx.arc(-ROCKET_R - 8, 0, 36, 0, Math.PI * 2);
     ctx.fill();
 
-    // flame flicker
-    const fl = 8 + 5 * Math.sin(ts / 60);
-    const flameGrad = ctx.createLinearGradient(-ROCKET_R - fl, 0, -ROCKET_R + 4, 0);
-    flameGrad.addColorStop(0, "rgba(255,200,0,0)");
-    flameGrad.addColorStop(0.5, "rgba(255,120,0,0.8)");
-    flameGrad.addColorStop(1, "rgba(255,220,0,0.95)");
-    ctx.fillStyle = flameGrad;
+    // Outer red→orange→yellow flame tongue
+    const flameOuter = ctx.createLinearGradient(-ROCKET_R - len1, 0, -ROCKET_R + 2, 0);
+    flameOuter.addColorStop(0, "rgba(255,40,0,0)");
+    flameOuter.addColorStop(0.25, "rgba(255,90,0,0.6)");
+    flameOuter.addColorStop(0.6, "rgba(255,170,30,0.92)");
+    flameOuter.addColorStop(1, "rgba(255,235,120,1)");
+    ctx.fillStyle = flameOuter;
     ctx.beginPath();
-    ctx.moveTo(-ROCKET_R, -6);
-    ctx.lineTo(-ROCKET_R - fl, 0);
-    ctx.lineTo(-ROCKET_R, 6);
+    ctx.moveTo(-ROCKET_R + 2, -wid);
+    ctx.quadraticCurveTo(-ROCKET_R - len1 * 0.45, -wid * 1.45, -ROCKET_R - len1, 0);
+    ctx.quadraticCurveTo(-ROCKET_R - len1 * 0.45, wid * 1.45, -ROCKET_R + 2, wid);
     ctx.closePath();
     ctx.fill();
 
-    // body
-    const bodyGrad = ctx.createLinearGradient(0, -ROCKET_R, 0, ROCKET_R);
-    bodyGrad.addColorStop(0, "#88CCFF");
-    bodyGrad.addColorStop(0.5, "#4499FF");
-    bodyGrad.addColorStop(1, "#2255CC");
+    // Inner white-hot flame core
+    const flameInner = ctx.createLinearGradient(-ROCKET_R - len2, 0, -ROCKET_R + 2, 0);
+    flameInner.addColorStop(0, "rgba(255,200,80,0)");
+    flameInner.addColorStop(0.5, "rgba(255,240,180,0.92)");
+    flameInner.addColorStop(1, "rgba(255,255,255,1)");
+    ctx.fillStyle = flameInner;
+    ctx.beginPath();
+    ctx.moveTo(-ROCKET_R + 2, -wid * 0.55);
+    ctx.quadraticCurveTo(-ROCKET_R - len2 * 0.5, -wid * 0.7, -ROCKET_R - len2, 0);
+    ctx.quadraticCurveTo(-ROCKET_R - len2 * 0.5, wid * 0.7, -ROCKET_R + 2, wid * 0.55);
+    ctx.closePath();
+    ctx.fill();
+
+    // ── Fins (red, with shading) – behind body ───────────────────────────
+    const FIN_COL = "#E63950";
+    const FIN_SHADE = "#A8202F";
+    // top fin
+    ctx.fillStyle = FIN_COL;
+    ctx.beginPath();
+    ctx.moveTo(-ROCKET_R + 4, -ROCKET_R * 0.5);
+    ctx.lineTo(-ROCKET_R - 6, -ROCKET_R - 5);
+    ctx.lineTo(-ROCKET_R - 6, -ROCKET_R * 0.55);
+    ctx.lineTo(-ROCKET_R + 8, -ROCKET_R * 0.45);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = FIN_SHADE;
+    ctx.beginPath();
+    ctx.moveTo(-ROCKET_R - 6, -ROCKET_R - 5);
+    ctx.lineTo(-ROCKET_R - 6, -ROCKET_R * 0.55);
+    ctx.lineTo(-ROCKET_R + 4, -ROCKET_R * 0.5);
+    ctx.closePath();
+    ctx.fill();
+    // bottom fin
+    ctx.fillStyle = FIN_COL;
+    ctx.beginPath();
+    ctx.moveTo(-ROCKET_R + 4, ROCKET_R * 0.5);
+    ctx.lineTo(-ROCKET_R - 6, ROCKET_R + 5);
+    ctx.lineTo(-ROCKET_R - 6, ROCKET_R * 0.55);
+    ctx.lineTo(-ROCKET_R + 8, ROCKET_R * 0.45);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = FIN_SHADE;
+    ctx.beginPath();
+    ctx.moveTo(-ROCKET_R - 6, ROCKET_R + 5);
+    ctx.lineTo(-ROCKET_R - 6, ROCKET_R * 0.55);
+    ctx.lineTo(-ROCKET_R + 4, ROCKET_R * 0.5);
+    ctx.closePath();
+    ctx.fill();
+
+    // ── Engine nozzle (dark, behind body) ────────────────────────────────
+    ctx.fillStyle = "#3A4555";
+    ctx.beginPath();
+    ctx.roundRect(-ROCKET_R - 1, -wid * 0.85, 5, wid * 1.7, 2);
+    ctx.fill();
+    ctx.strokeStyle = "#1A1F28";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // ── Body (rounded capsule, white/cream with subtle shading) ──────────
+    const bodyGrad = ctx.createLinearGradient(0, -ROCKET_R * 0.72, 0, ROCKET_R * 0.72);
+    bodyGrad.addColorStop(0, "#FFFFFF");
+    bodyGrad.addColorStop(0.45, "#F2F5FA");
+    bodyGrad.addColorStop(1, "#B3BECF");
     ctx.fillStyle = bodyGrad;
-    ctx.shadowColor = "#4499FF";
-    ctx.shadowBlur = 10;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, ROCKET_R, ROCKET_R * 0.65, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    // nose cone
-    ctx.fillStyle = "#FF4E4E";
-    ctx.beginPath();
-    ctx.moveTo(ROCKET_R, 0);
-    ctx.lineTo(ROCKET_R + 14, 0);
-    ctx.lineTo(ROCKET_R, -5);
-    ctx.closePath();
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(ROCKET_R, 0);
-    ctx.lineTo(ROCKET_R + 14, 0);
-    ctx.lineTo(ROCKET_R, 5);
-    ctx.closePath();
-    ctx.fill();
-
-    // fin top
-    ctx.fillStyle = "#3377EE";
-    ctx.beginPath();
-    ctx.moveTo(-ROCKET_R, -ROCKET_R * 0.5);
-    ctx.lineTo(-ROCKET_R - 8, -ROCKET_R - 4);
-    ctx.lineTo(-ROCKET_R + 6, -ROCKET_R * 0.5);
-    ctx.closePath();
-    ctx.fill();
-    // fin bot
-    ctx.beginPath();
-    ctx.moveTo(-ROCKET_R, ROCKET_R * 0.5);
-    ctx.lineTo(-ROCKET_R - 8, ROCKET_R + 4);
-    ctx.lineTo(-ROCKET_R + 6, ROCKET_R * 0.5);
-    ctx.closePath();
-    ctx.fill();
-
-    // porthole
-    ctx.fillStyle = "#00EEFF";
-    ctx.shadowColor = "#00FFFF";
+    ctx.shadowColor = "rgba(255,200,120,0.45)";
     ctx.shadowBlur = 8;
     ctx.beginPath();
-    ctx.arc(4, 0, 5, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.arc(3, -1, 2, 0, Math.PI * 2);
+    ctx.moveTo(-ROCKET_R + 2, -ROCKET_R * 0.72);
+    ctx.lineTo(ROCKET_R * 0.55, -ROCKET_R * 0.72);
+    ctx.quadraticCurveTo(ROCKET_R * 1.1, -ROCKET_R * 0.55, ROCKET_R * 1.1, 0);
+    ctx.quadraticCurveTo(ROCKET_R * 1.1, ROCKET_R * 0.55, ROCKET_R * 0.55, ROCKET_R * 0.72);
+    ctx.lineTo(-ROCKET_R + 2, ROCKET_R * 0.72);
+    ctx.quadraticCurveTo(-ROCKET_R - 1, ROCKET_R * 0.55, -ROCKET_R - 1, 0);
+    ctx.quadraticCurveTo(-ROCKET_R - 1, -ROCKET_R * 0.55, -ROCKET_R + 2, -ROCKET_R * 0.72);
+    ctx.closePath();
     ctx.fill();
     ctx.shadowBlur = 0;
+    ctx.strokeStyle = "#7A8294";
+    ctx.lineWidth = 1.1;
+    ctx.stroke();
+
+    // Bottom highlight strip (gives chubby/glossy feel)
+    ctx.globalAlpha = 0.35;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.beginPath();
+    ctx.ellipse(2, -ROCKET_R * 0.42, ROCKET_R * 0.55, 1.6, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Engine ring at back (red band)
+    ctx.fillStyle = "#E63950";
+    ctx.fillRect(-ROCKET_R + 2, -ROCKET_R * 0.72, 3, ROCKET_R * 1.44);
+
+    // Red stripe band near front
+    ctx.fillStyle = "#E63950";
+    ctx.fillRect(ROCKET_R * 0.32, -ROCKET_R * 0.72, 3.5, ROCKET_R * 1.44);
+
+    // ── Nose cone (red, rounded tip) ─────────────────────────────────────
+    const noseGrad = ctx.createLinearGradient(ROCKET_R * 0.55, 0, ROCKET_R + 14, 0);
+    noseGrad.addColorStop(0, "#FF7C8A");
+    noseGrad.addColorStop(0.6, "#E63950");
+    noseGrad.addColorStop(1, "#A8202F");
+    ctx.fillStyle = noseGrad;
+    ctx.beginPath();
+    ctx.moveTo(ROCKET_R * 0.55, -ROCKET_R * 0.72);
+    ctx.quadraticCurveTo(ROCKET_R + 14, -ROCKET_R * 0.32, ROCKET_R + 14, 0);
+    ctx.quadraticCurveTo(ROCKET_R + 14, ROCKET_R * 0.32, ROCKET_R * 0.55, ROCKET_R * 0.72);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = "#7A1820";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    // nose highlight
+    ctx.globalAlpha = 0.45;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.beginPath();
+    ctx.ellipse(ROCKET_R * 0.85, -ROCKET_R * 0.42, 3.2, 1.2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // ── Cute porthole window with reflection ─────────────────────────────
+    // Window outer ring (metallic)
+    ctx.fillStyle = "#2A3548";
+    ctx.beginPath();
+    ctx.arc(2, 0, 7, 0, Math.PI * 2);
+    ctx.fill();
+    // Inner ring (lighter)
+    ctx.fillStyle = "#5A6578";
+    ctx.beginPath();
+    ctx.arc(2, 0, 6.2, 0, Math.PI * 2);
+    ctx.fill();
+    // Window glass
+    const winGrad = ctx.createRadialGradient(0, -2, 1, 2, 0, 8);
+    winGrad.addColorStop(0, "#C8FAFF");
+    winGrad.addColorStop(0.55, "#3FCDFF");
+    winGrad.addColorStop(1, "#0E5A99");
+    ctx.fillStyle = winGrad;
+    ctx.shadowColor = "#3FCDFF";
+    ctx.shadowBlur = 6;
+    ctx.beginPath();
+    ctx.arc(2, 0, 5.4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    // Reflection highlight (crescent)
+    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.beginPath();
+    ctx.arc(0.7, -1.6, 1.9, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 0.45;
+    ctx.beginPath();
+    ctx.arc(3.5, 1.8, 0.9, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // ── Cute rivets along the body ───────────────────────────────────────
+    ctx.fillStyle = "#A8B0C0";
+    const rivetXs = [-ROCKET_R + 5, -ROCKET_R + 10, ROCKET_R * 0.5];
+    for (const rx of rivetXs) {
+      ctx.beginPath();
+      ctx.arc(rx, -ROCKET_R * 0.55, 0.95, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(rx, ROCKET_R * 0.55, 0.95, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
     ctx.restore();
   }, []);
@@ -644,22 +763,61 @@ const FlappyRocketPage = ({
     // shield timer
     if (shieldRef.current > 0) shieldRef.current -= dt;
 
-    // ── Rocket trail ───────────────────────────────────────────────────
+    // ── Rocket flame trail (sparks + smoke) ────────────────────────────
     if (ph === "playing") {
-      trailRef.current.push({ x: ROCKET_X - ROCKET_R, y: ryRef.current, alpha: 0.7 });
-    }
-    trailRef.current = trailRef.current.filter(t => t.alpha > 0);
-    trailRef.current.forEach((t, i) => {
-      t.alpha -= dt * 3.5;
-      const r = 3 * (t.alpha / 0.7);
-      if (r > 0.3) {
-        ctx.globalAlpha = t.alpha * 0.6;
-        ctx.fillStyle = i % 2 === 0 ? "#FF8800" : "#FFDD00";
-        ctx.beginPath();
-        ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
-        ctx.fill();
+      // Spawn 3 fresh particles per frame: 2 hot sparks + 1 smoke puff
+      for (let k = 0; k < 2; k++) {
+        trailRef.current.push({
+          x: ROCKET_X - ROCKET_R - 2,
+          y: ryRef.current + (Math.random() - 0.5) * 5,
+          vx: -90 - Math.random() * 80,
+          vy: (Math.random() - 0.5) * 50,
+          r: 1.8 + Math.random() * 1.6,
+          alpha: 1,
+          hot: true,
+        });
       }
-    });
+      trailRef.current.push({
+        x: ROCKET_X - ROCKET_R - 4,
+        y: ryRef.current + (Math.random() - 0.5) * 3,
+        vx: -50 - Math.random() * 30,
+        vy: (Math.random() - 0.5) * 18,
+        r: 3.5 + Math.random() * 2.2,
+        alpha: 0.55,
+        hot: false,
+      });
+    }
+    // Update + draw trail particles
+    trailRef.current = trailRef.current.filter(t => t.alpha > 0.04);
+    for (const t of trailRef.current) {
+      t.x += t.vx * dt;
+      t.y += t.vy * dt;
+      if (t.hot) {
+        t.alpha -= dt * 3.2;
+        t.r *= 0.97;
+        // hot particle: orange→yellow gradient
+        const hg = ctx.createRadialGradient(t.x, t.y, 0, t.x, t.y, Math.max(0.5, t.r * 1.4));
+        hg.addColorStop(0, `rgba(255,250,200,${Math.min(1, t.alpha)})`);
+        hg.addColorStop(0.5, `rgba(255,160,40,${Math.min(1, t.alpha) * 0.85})`);
+        hg.addColorStop(1, "rgba(255,80,0,0)");
+        ctx.fillStyle = hg;
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, Math.max(0.5, t.r * 1.4), 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        t.alpha -= dt * 1.1;
+        t.r += dt * 6; // smoke expands
+        ctx.globalAlpha = t.alpha * 0.55;
+        const sg = ctx.createRadialGradient(t.x, t.y, 0, t.x, t.y, t.r);
+        sg.addColorStop(0, "rgba(220,220,220,0.7)");
+        sg.addColorStop(1, "rgba(120,120,130,0)");
+        ctx.fillStyle = sg;
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, t.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
     ctx.globalAlpha = 1;
 
     // ── Particles ─────────────────────────────────────────────────────
