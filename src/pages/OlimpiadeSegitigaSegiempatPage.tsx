@@ -10,6 +10,30 @@ import PembahasanCard from "@/components/PembahasanCard";
 import { segitigaSegiempatDasarPembahasan } from "@/data/pembahasan/segitigaSegiempatDasar";
 import { segitigaSegiempatOlimpiadePembahasan } from "@/data/pembahasan/segitigaSegiempatOlimpiade";
 
+const OlimpiadeSoal1Pentagram = () => (
+  <svg
+    viewBox="0 0 240 200"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Bintang lima (pentagram) untuk menghitung banyaknya segitiga"
+    className="w-full h-auto"
+  >
+    {/* Pentagram drawn by connecting every other vertex of a regular pentagon.
+        Center (120, 110), radius 80. Vertices at -90°, -18°, 54°, 126°, 198°. */}
+    <polygon
+      points="120,30 167.02,174.72 43.92,85.28 196.08,85.28 72.98,174.72"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const olimpiadeFigures: Record<number, JSX.Element> = {
+  1: <OlimpiadeSoal1Pentagram />,
+};
+
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -1113,7 +1137,13 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </span>
                   ))}
                 </div>
-                {([1,2,3,4,5,6,8,10,11,12,13,15,20,22,23,24,25,26,27,28,29,30,33,35,36,38,40,44,45,46,47] as number[]).includes(soal.no) && (
+                {olimpiadeFigures[soal.no] ? (
+                  <div className="flex justify-center my-3">
+                    <div className="max-w-[280px] w-full text-white">
+                      {olimpiadeFigures[soal.no]}
+                    </div>
+                  </div>
+                ) : ([2,3,4,5,6,8,10,11,12,13,15,20,22,23,24,25,26,27,28,29,30,33,35,36,38,40,44,45,46,47] as number[]).includes(soal.no) && (
                   <div className="flex justify-center my-3">
                     <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                       <img
