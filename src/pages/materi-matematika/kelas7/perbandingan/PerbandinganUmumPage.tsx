@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Star } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Star, GitCompare } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -10,7 +10,7 @@ import imgPerbandingan from "@assets/image_1775450115091.png";
 
 const PerbandinganUmumPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "umum", "konsep", "contoh"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -86,6 +86,150 @@ const PerbandinganUmumPage = () => {
                     <strong>Catatan Penting:</strong> Dalam matematika, ketika soal meminta <strong>"perbandingan"</strong>, yang dimaksud hampir selalu adalah <strong>hasil bagi (rasio)</strong>, bukan selisih. Pastikan satuannya sama sebelum membandingkan!
                   </p>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* SECTION: PERBANDINGAN UMUM — DEFINISI, CONTOH & KAITANNYA */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("umum")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Star className="w-5 h-5 text-orange-400" />
+                <span className="font-body font-semibold text-white">Perbandingan Umum: Definisi, Contoh & Kaitannya</span>
+              </div>
+              {expandedSections.includes("umum") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+            </button>
+            {expandedSections.includes("umum") && (
+              <div className="px-5 pb-5 space-y-5">
+
+                {/* Definisi */}
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-2">
+                  <p className="font-body text-sm font-semibold text-orange-300">📖 Definisi Perbandingan Umum</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    <strong className="text-orange-300">Perbandingan umum</strong> adalah pernyataan yang membandingkan dua atau lebih besaran sejenis untuk melihat hubungan di antara keduanya — baik melalui <strong>selisih</strong> (cara 1) maupun <strong>hasil bagi</strong> (cara 2). Perbandingan umum merupakan <strong>konsep payung</strong> yang menaungi rasio dan satuan pembanding.
+                  </p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Syarat utama: kedua besaran yang dibandingkan harus <strong className="text-yellow-300">sejenis</strong> (misalnya panjang dengan panjang, berat dengan berat) dan memiliki <strong className="text-yellow-300">satuan yang sama</strong>.
+                  </p>
+                </div>
+
+                {/* Contoh Perbandingan Umum */}
+                <div className="bg-slate-800/50 border border-slate-600/40 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-cyan-300">💡 Contoh Perbandingan Umum dalam Kehidupan</p>
+
+                  <div className="space-y-2">
+                    <p className="font-body text-sm text-white/80"><strong>Contoh 1 (dengan selisih):</strong></p>
+                    <p className="font-body text-sm text-white/70 pl-3">
+                      Tinggi badan Bayu 160 cm dan tinggi Citra 150 cm. Kita bisa berkata <em>“Bayu lebih tinggi 10 cm dari Citra”</em>.
+                      Ini adalah perbandingan umum dengan <strong className="text-blue-300">cara selisih</strong>.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <p className="font-body text-sm text-white/80"><strong>Contoh 2 (dengan hasil bagi → rasio):</strong></p>
+                    <p className="font-body text-sm text-white/70 pl-3">
+                      Banyak siswa laki-laki di kelas 12 anak dan siswa perempuan 18 anak. Kita bisa berkata <em>“perbandingan laki-laki dan perempuan adalah <InlineMath math="12:18 = 2:3" />”</em>.
+                      Ini adalah perbandingan umum yang sudah diubah menjadi <strong className="text-purple-300">bentuk rasio</strong>.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <p className="font-body text-sm text-white/80"><strong>Contoh 3 (gabungan):</strong></p>
+                    <p className="font-body text-sm text-white/70 pl-3">
+                      Harga buku Rp15.000 dan harga pensil Rp5.000. Perbandingan umumnya:
+                    </p>
+                    <ul className="list-disc list-inside font-body text-sm text-white/70 pl-3 space-y-1">
+                      <li>Selisih: harga buku <strong>Rp10.000 lebih mahal</strong> dari pensil</li>
+                      <li>Rasio: harga buku : pensil = <InlineMath math="15.000 : 5.000 = 3 : 1" /></li>
+                      <li>Satuan pembanding: <strong className="text-green-300">5.000</strong> (FPB dari 15.000 dan 5.000)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Kaitan / Hubungan */}
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <GitCompare className="w-4 h-4 text-cyan-300" />
+                    <p className="font-body text-sm font-semibold text-cyan-300">🔗 Kaitan: Perbandingan Umum ↔ Rasio ↔ Satuan Pembanding</p>
+                  </div>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Ketiga konsep ini saling terkait dan membentuk satu rangkaian:
+                  </p>
+                  <div className="bg-slate-900/50 rounded-lg p-3 text-center">
+                    <p className="font-body text-sm text-white/90">
+                      <span className="text-orange-300 font-semibold">Perbandingan Umum</span>
+                      <span className="text-white/50 mx-2">→</span>
+                      <span className="text-purple-300 font-semibold">Rasio</span>
+                      <span className="text-white/50 mx-2">→</span>
+                      <span className="text-green-300 font-semibold">Satuan Pembanding</span>
+                    </p>
+                  </div>
+                  <ul className="list-disc list-inside font-body text-sm text-white/70 space-y-1">
+                    <li><strong className="text-orange-300">Perbandingan umum</strong> adalah ide besarnya — membandingkan dua besaran.</li>
+                    <li><strong className="text-purple-300">Rasio</strong> adalah <em>bentuk khusus</em> perbandingan umum yang menggunakan hasil bagi <InlineMath math="a:b" />.</li>
+                    <li><strong className="text-green-300">Satuan pembanding</strong> adalah <em>alat</em> yang dipakai untuk menyederhanakan rasio menjadi bentuk paling sederhana.</li>
+                  </ul>
+                </div>
+
+                {/* Perbedaan dalam tabel */}
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-yellow-300">📊 Perbedaan Ketiganya</p>
+                  <div className="overflow-x-auto -mx-1">
+                    <table className="w-full text-xs md:text-sm font-body border-collapse">
+                      <thead>
+                        <tr className="bg-slate-900/60">
+                          <th className="text-left text-white/80 font-semibold p-2 border border-slate-600/40">Aspek</th>
+                          <th className="text-left text-orange-300 font-semibold p-2 border border-slate-600/40">Perbandingan Umum</th>
+                          <th className="text-left text-purple-300 font-semibold p-2 border border-slate-600/40">Rasio</th>
+                          <th className="text-left text-green-300 font-semibold p-2 border border-slate-600/40">Satuan Pembanding</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-white/80">
+                        <tr>
+                          <td className="p-2 border border-slate-600/40 font-semibold">Pengertian</td>
+                          <td className="p-2 border border-slate-600/40">Konsep umum membandingkan 2 besaran</td>
+                          <td className="p-2 border border-slate-600/40">Bentuk khusus perbandingan dengan hasil bagi</td>
+                          <td className="p-2 border border-slate-600/40">Angka FPB untuk menyederhanakan rasio</td>
+                        </tr>
+                        <tr className="bg-slate-900/30">
+                          <td className="p-2 border border-slate-600/40 font-semibold">Cara penyajian</td>
+                          <td className="p-2 border border-slate-600/40">Selisih atau hasil bagi (kalimat bebas)</td>
+                          <td className="p-2 border border-slate-600/40">Tanda <InlineMath math=":" /> atau pecahan <InlineMath math="a/b" /></td>
+                          <td className="p-2 border border-slate-600/40">Bilangan tunggal (1 angka)</td>
+                        </tr>
+                        <tr>
+                          <td className="p-2 border border-slate-600/40 font-semibold">Syarat satuan</td>
+                          <td className="p-2 border border-slate-600/40">Sejenis & sama</td>
+                          <td className="p-2 border border-slate-600/40">Harus sama</td>
+                          <td className="p-2 border border-slate-600/40">Tanpa satuan</td>
+                        </tr>
+                        <tr className="bg-slate-900/30">
+                          <td className="p-2 border border-slate-600/40 font-semibold">Contoh</td>
+                          <td className="p-2 border border-slate-600/40">“Bayu lebih tinggi 10 cm dari Citra”</td>
+                          <td className="p-2 border border-slate-600/40"><InlineMath math="160 : 150 = 16 : 15" /></td>
+                          <td className="p-2 border border-slate-600/40"><strong>10</strong> (FPB dari 160 dan 150)</td>
+                        </tr>
+                        <tr>
+                          <td className="p-2 border border-slate-600/40 font-semibold">Peran</td>
+                          <td className="p-2 border border-slate-600/40">Konsep dasar / payung</td>
+                          <td className="p-2 border border-slate-600/40">Hasil akhir perbandingan</td>
+                          <td className="p-2 border border-slate-600/40">Alat penyederhana</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Penguatan */}
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200 leading-relaxed">
+                    <strong>💪 Penguatan:</strong> Setiap <span className="text-purple-300 font-semibold">rasio</span> adalah <span className="text-orange-300 font-semibold">perbandingan umum</span>, tetapi tidak setiap perbandingan umum berbentuk rasio (karena bisa juga berupa selisih). <span className="text-green-300 font-semibold">Satuan pembanding</span> selalu hadir saat kita menyederhanakan rasio. Jadi: pahami perbandingan umum dahulu, baru kuasai rasio dan satuan pembandingnya — semuanya saling melengkapi! 🚀
+                  </p>
+                </div>
+
               </div>
             )}
           </div>
