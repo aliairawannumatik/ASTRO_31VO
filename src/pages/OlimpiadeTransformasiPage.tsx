@@ -524,13 +524,15 @@ const OlimpiadeTransformasiPage = () => {
               const open = openPembahasan.has(key);
               const pembahasan = pembahasanOlimpiade[soal.no];
               return (
-                <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-yellow-400/20 transition-colors">
                   <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                    <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500/20 border border-yellow-400/30 text-yellow-300 font-display font-bold text-xs mr-2">{soal.no}</span>
                     {soal.soal.split('\n').map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {lineIdx > 0 && <br />}
-                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
+                        {lineIdx === 0 && line.startsWith('OSN') ? (
+                          <span className="inline-block bg-yellow-500/10 border border-yellow-400/20 rounded px-2 py-0.5 text-yellow-300 font-semibold text-xs mb-1">{line}</span>
+                        ) : renderWithLatex(line)}
                       </span>
                     ))}
                   </div>
