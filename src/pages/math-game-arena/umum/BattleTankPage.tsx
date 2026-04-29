@@ -478,7 +478,7 @@ const BattleTankPage = ({
     playPopSound();
   }, [startGame, fireBullet]);
 
-  // ── Draw tank (top-down) ──────────────────────────────────────────────────
+  // ── Draw tank (top-down, cute & detailed) ─────────────────────────────────
   const drawTank = (
     ctx: CanvasRenderingContext2D, x: number, y: number,
     bodyAngle: number, turretAngle: number,
@@ -488,46 +488,210 @@ const BattleTankPage = ({
   ) => {
     ctx.save();
     ctx.translate(x, y);
-    ctx.shadowBlur = isPlayer ? 22 : 18;
-    ctx.shadowColor = flashT > 0 ? "#ff3333" : glowColor;
+
+    // ── Soft drop shadow under whole tank ────────────────────────────────
+    ctx.save();
+    ctx.fillStyle = "rgba(0,0,0,0.32)";
+    ctx.beginPath();
+    ctx.ellipse(2, 4, bw * 0.62, bh * 0.65, 0, 0, Math.PI * 2);
+    ctx.filter = "blur(2px)";
+    ctx.fill();
+    ctx.restore();
+
+    // Outer ambient glow (kept like before but softer — drawn once, not on every shape)
+    ctx.shadowBlur = 0;
+
     ctx.rotate(bodyAngle);
 
-    ctx.fillStyle = trackColor;
-    ctx.beginPath(); roundRect(ctx, -bw / 2 - 5, -bh / 2 - 4, bw + 10, 7, 3); ctx.fill();
-    ctx.beginPath(); roundRect(ctx, -bw / 2 - 5, bh / 2 - 3, bw + 10, 7, 3); ctx.fill();
-    ctx.strokeStyle = "rgba(0,0,0,0.25)"; ctx.lineWidth = 1;
-    for (let i = -2; i <= 2; i++) {
-      ctx.beginPath(); ctx.moveTo(i * (bw / 5), -bh / 2 - 4); ctx.lineTo(i * (bw / 5), -bh / 2 + 3); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(i * (bw / 5), bh / 2 - 3); ctx.lineTo(i * (bw / 5), bh / 2 + 4); ctx.stroke();
+    // ── TRACKS (top + bottom strips) ─────────────────────────────────────
+    const trackXLeft = -bw / 2 - 6;
+    const trackLen = bw + 12;
+    const trackH = 8;
+    const drawTrack = (ty: number) => {
+      // Track base (dark with subtle gradient)
+      const tg = ctx.createLinearGradient(0, ty, 0, ty + trackH);
+      tg.addColorStop(0, "#1a1a1f");
+      tg.addColorStop(0.5, "#2a2a30");
+      tg.addColorStop(1, "#0a0a0e");
+      ctx.fillStyle = tg;
+      ctx.beginPath(); roundRect(ctx, trackXLeft, ty, trackLen, trackH, 3); ctx.fill();
+      // Tread segments (dark slats across the track)
+      ctx.fillStyle = "rgba(0,0,0,0.55)";
+      const segs = 9;
+      const seg = trackLen / segs;
+      for (let i = 0; i < segs; i++) {
+        ctx.beginPath();
+        roundRect(ctx, trackXLeft + i * seg + seg * 0.2, ty + 1, seg * 0.6, trackH - 2, 1);
+        ctx.fill();
+      }
+      // Road wheels (5 per track) – grey tinted with palette accent
+      const wheelCount = 5;
+      for (let i = 0; i < wheelCount; i++) {
+        const wx = trackXLeft + 5 + i * ((trackLen - 10) / (wheelCount - 1));
+        const wy = ty + trackH / 2;
+        // outer wheel
+        ctx.fillStyle = "#3a3a44";
+        ctx.beginPath(); ctx.arc(wx, wy, trackH * 0.5, 0, Math.PI * 2); ctx.fill();
+        // hub
+        ctx.fillStyle = "#15151b";
+        ctx.beginPath(); ctx.arc(wx, wy, trackH * 0.26, 0, Math.PI * 2); ctx.fill();
+        // hub highlight
+        ctx.fillStyle = "rgba(255,255,255,0.32)";
+        ctx.beginPath(); ctx.arc(wx - 0.6, wy - 0.6, trackH * 0.1, 0, Math.PI * 2); ctx.fill();
+      }
+    };
+    drawTrack(-bh / 2 - 5);
+    drawTrack(bh / 2 - 3);
+
+    // ── HULL (rounded body) ──────────────────────────────────────────────
+    const hullFill = flashT > 0 ? "#ff5555" : bodyColor;
+    ctx.fillStyle = hullFill;
+    ctx.beginPath(); roundRect(ctx, -bw / 2, -bh / 2, bw, bh, 6); ctx.fill();
+    // 3D top-light gradient (top half lighter, bottom half darker)
+    const hullGrad = ctx.createLinearGradient(0, -bh / 2, 0, bh / 2);
+    hullGrad.addColorStop(0, "rgba(255,255,255,0.36)");
+    hullGrad.addColorStop(0.5, "rgba(255,255,255,0.08)");
+    hullGrad.addColorStop(1, "rgba(0,0,0,0.28)");
+    ctx.fillStyle = hullGrad;
+    ctx.beginPath(); roundRect(ctx, -bw / 2, -bh / 2, bw, bh, 6); ctx.fill();
+    // Subtle outline
+    ctx.strokeStyle = "rgba(0,0,0,0.35)";
+    ctx.lineWidth = 1;
+    ctx.beginPath(); roundRect(ctx, -bw / 2, -bh / 2, bw, bh, 6); ctx.stroke();
+    // Front armor plate (slight darker panel near the front)
+    ctx.fillStyle = "rgba(0,0,0,0.18)";
+    ctx.beginPath();
+    roundRect(ctx, bw * 0.18, -bh / 2 + 3, bw * 0.3, bh - 6, 4);
+    ctx.fill();
+    // Rivets on hull corners
+    ctx.fillStyle = "rgba(0,0,0,0.6)";
+    for (const [rx, ry] of [
+      [-bw / 2 + 4, -bh / 2 + 4], [-bw / 2 + 4, bh / 2 - 4],
+      [bw / 2 - 4, -bh / 2 + 4],  [bw / 2 - 4, bh / 2 - 4],
+    ]) {
+      ctx.beginPath(); ctx.arc(rx, ry, 1.1, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,0.25)";
+      ctx.beginPath(); ctx.arc(rx - 0.3, ry - 0.3, 0.45, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(0,0,0,0.6)";
     }
 
-    ctx.fillStyle = flashT > 0 ? "#ff5555" : bodyColor;
+    // ── Cute "headlight eyes" at the front ───────────────────────────────
+    const eyeColor = isPlayer ? "#aaffff" : "#ffe680";
+    for (const ey of [-bh * 0.28, bh * 0.28]) {
+      ctx.fillStyle = "#1a1a1a";
+      ctx.beginPath(); ctx.arc(bw / 2 - 2.5, ey, 2.6, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowColor = eyeColor;
+      ctx.shadowBlur = 6;
+      ctx.fillStyle = eyeColor;
+      ctx.beginPath(); ctx.arc(bw / 2 - 2.5, ey, 1.8, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath(); ctx.arc(bw / 2 - 3, ey - 0.5, 0.7, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // ── Antenna at the back ──────────────────────────────────────────────
+    ctx.strokeStyle = "rgba(20,20,28,0.9)";
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(-bw / 2 + 4, -bh * 0.18);
+    ctx.lineTo(-bw / 2 - 7, -bh * 0.55);
+    ctx.stroke();
+    ctx.shadowColor = isPlayer ? "#00f0ff" : glowColor;
+    ctx.shadowBlur = 5;
+    ctx.fillStyle = isPlayer ? "#00f0ff" : glowColor;
+    ctx.beginPath(); ctx.arc(-bw / 2 - 7, -bh * 0.55, 1.6, 0, Math.PI * 2); ctx.fill();
     ctx.shadowBlur = 0;
-    ctx.beginPath(); roundRect(ctx, -bw / 2, -bh / 2, bw, bh, 5); ctx.fill();
-    const bg = ctx.createLinearGradient(-bw / 2, -bh / 2, -bw / 2, bh / 2);
-    bg.addColorStop(0, "rgba(255,255,255,0.22)"); bg.addColorStop(0.5, "rgba(255,255,255,0.06)"); bg.addColorStop(1, "rgba(0,0,0,0.15)");
-    ctx.fillStyle = bg;
-    ctx.beginPath(); roundRect(ctx, -bw / 2, -bh / 2, bw, bh, 5); ctx.fill();
+
     ctx.rotate(-bodyAngle);
 
+    // ── TURRET (rotates with the cannon) ─────────────────────────────────
     ctx.rotate(turretAngle);
-    ctx.shadowBlur = 14; ctx.shadowColor = flashT > 0 ? "#ff3333" : glowColor;
-    ctx.fillStyle = turretColor;
-    ctx.beginPath(); ctx.ellipse(0, 0, bh * 0.45, bh * 0.45, 0, 0, Math.PI * 2); ctx.fill();
+    const tr = bh * 0.5;
+
+    // Turret base shadow
+    ctx.fillStyle = "rgba(0,0,0,0.4)";
+    ctx.beginPath(); ctx.ellipse(1, 1.5, tr + 1, tr + 1, 0, 0, Math.PI * 2); ctx.fill();
+
+    // Cannon mantlet (trapezoid joining barrel to turret)
     ctx.fillStyle = trackColor;
-    ctx.beginPath(); roundRect(ctx, bh * 0.38, -3, bw * 0.48, 6, 3); ctx.fill();
-    ctx.shadowBlur = 12; ctx.shadowColor = isPlayer ? "#00f0ff" : glowColor;
-    ctx.fillStyle = isPlayer ? "#00f0ff" : glowColor;
-    ctx.beginPath(); ctx.arc(bh * 0.38 + bw * 0.48, 0, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(tr * 0.55, -tr * 0.55);
+    ctx.lineTo(tr * 1.05, -tr * 0.4);
+    ctx.lineTo(tr * 1.05, tr * 0.4);
+    ctx.lineTo(tr * 0.55, tr * 0.55);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = "rgba(0,0,0,0.4)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Turret dome
+    ctx.shadowColor = flashT > 0 ? "#ff3333" : glowColor;
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = flashT > 0 ? "#ff5555" : turretColor;
+    ctx.beginPath(); ctx.arc(0, 0, tr, 0, Math.PI * 2); ctx.fill();
     ctx.shadowBlur = 0;
+    // Turret rim shading (radial)
+    const turretGrad = ctx.createRadialGradient(-tr * 0.35, -tr * 0.35, 1, 0, 0, tr);
+    turretGrad.addColorStop(0, "rgba(255,255,255,0.45)");
+    turretGrad.addColorStop(0.5, "rgba(255,255,255,0.08)");
+    turretGrad.addColorStop(1, "rgba(0,0,0,0.32)");
+    ctx.fillStyle = turretGrad;
+    ctx.beginPath(); ctx.arc(0, 0, tr, 0, Math.PI * 2); ctx.fill();
+    // Turret outline
+    ctx.strokeStyle = "rgba(0,0,0,0.4)";
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(0, 0, tr, 0, Math.PI * 2); ctx.stroke();
+
+    // Hatch (small dark circle, slightly offset back)
+    ctx.fillStyle = "rgba(0,0,0,0.55)";
+    ctx.beginPath(); ctx.arc(-tr * 0.32, 0, tr * 0.32, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(0,0,0,0.85)";
+    ctx.beginPath(); ctx.arc(-tr * 0.32, 0, tr * 0.2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,0.18)";
+    ctx.beginPath(); ctx.arc(-tr * 0.36, -tr * 0.05, tr * 0.07, 0, Math.PI * 2); ctx.fill();
+
+    // ── Barrel (long, with muzzle brake) ─────────────────────────────────
+    const barLen = bw * 0.55;
+    const barW = 5.5;
+    // Barrel body
+    const barGrad = ctx.createLinearGradient(0, -barW / 2, 0, barW / 2);
+    barGrad.addColorStop(0, "#3a3a44");
+    barGrad.addColorStop(0.5, "#1f1f26");
+    barGrad.addColorStop(1, "#0a0a0e");
+    ctx.fillStyle = barGrad;
+    ctx.beginPath(); roundRect(ctx, tr * 0.95, -barW / 2, barLen, barW, 1.5); ctx.fill();
+    ctx.strokeStyle = "rgba(0,0,0,0.5)";
+    ctx.lineWidth = 0.8;
+    ctx.beginPath(); roundRect(ctx, tr * 0.95, -barW / 2, barLen, barW, 1.5); ctx.stroke();
+    // Top highlight on barrel
+    ctx.fillStyle = "rgba(255,255,255,0.28)";
+    ctx.fillRect(tr * 0.95 + 1, -barW / 2 + 0.6, barLen - 2, 0.9);
+    // Muzzle brake (slightly fatter tip)
+    ctx.fillStyle = "#15151b";
+    ctx.beginPath(); roundRect(ctx, tr * 0.95 + barLen - 4, -barW / 2 - 1.2, 4.5, barW + 2.4, 1); ctx.fill();
+    ctx.strokeStyle = "rgba(0,0,0,0.6)";
+    ctx.beginPath(); roundRect(ctx, tr * 0.95 + barLen - 4, -barW / 2 - 1.2, 4.5, barW + 2.4, 1); ctx.stroke();
+    // Muzzle glow
+    ctx.shadowColor = isPlayer ? "#00f0ff" : glowColor;
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = isPlayer ? "#00f0ff" : glowColor;
+    ctx.beginPath(); ctx.arc(tr * 0.95 + barLen - 0.5, 0, 2.2, 0, Math.PI * 2); ctx.fill();
+    ctx.shadowBlur = 0;
+
     ctx.rotate(-turretAngle);
 
+    // ── Player invincibility ring ────────────────────────────────────────
     if (isPlayer && invT > 0) {
       const sa = Math.min(1, invT * 2) * (0.5 + 0.5 * Math.sin(ts / 80));
-      ctx.globalAlpha = sa; ctx.strokeStyle = "#00f0ff"; ctx.lineWidth = 3;
-      ctx.shadowBlur = 20; ctx.shadowColor = "#00f0ff";
+      ctx.globalAlpha = sa;
+      ctx.strokeStyle = "#00f0ff";
+      ctx.lineWidth = 3;
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = "#00f0ff";
       ctx.beginPath(); ctx.arc(0, 0, bw * 0.75, 0, Math.PI * 2); ctx.stroke();
-      ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
     }
     ctx.restore();
   };
