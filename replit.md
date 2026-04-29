@@ -48,7 +48,13 @@ These are automatically provided by Replit — no manual API key setup needed.
 - Menghitung Cepat (speed calculation techniques)
 - NUMATIK AI — Gemini-powered math assistant chatbot
 - Gamification: 7-game arena variants per submenu (Meteor, Flappy Rocket, Shoot Tank, Space Impact, Turtle Run, Tetris, Snake)
-  - **Kelas 7 — Bilangan Bulat:** dedicated wrapper page per (subtopic × variant) under `src/pages/math-game-arena/kelas7/bilangan-bulat/`
+  - **Kelas 7 — Bilangan Bulat:** dedicated wrapper page per (subtopic × variant) under `src/pages/math-game-arena/kelas7/bilangan-bulat/` (kept as static routes; React Router v6 ranks them above the catch-all)
+  - **Kelas 7 — All other 8 topics (44 sub-materi):** centralized data + chooser/dispatcher pattern (same as K8/K9)
+    - `src/data/mga-k7/` — one file per topic (aritmetika-sosial, garis-dan-sudut, segitiga-segiempat, himpunan, bilangan-rasional, aljabar, plsv-ptlsv, perbandingan) + `registry.ts` + `types.ts`. Each sub-materi defines all 6 game-specific question shapes inline (meteor, flappyRocket, tembakTank, spaceImpact, turtleRun, snake)
+    - `src/components/mga-k7/SubmaterialGameVariantsChooser.tsx` — lists the 7 variants
+    - `src/components/mga-k7/SubmaterialGameDispatcher.tsx` — dispatches `:variant` to the appropriate game with the correct question set
+    - Catch-all routes in `App.tsx`: `/math-game-arena/kelas-7/:parentSlug/:slug` → chooser, `/math-game-arena/kelas-7/:parentSlug/:slug/:variant` → dispatcher
+    - Old per-sub-materi single-game wrapper files under `src/pages/math-game-arena/kelas7/{aritmetika-sosial,garis-dan-sudut,segitiga-segiempat,himpunan,bilangan-rasional,aljabar,plsv-ptlsv,perbandingan}/` are orphaned (no longer imported by routes); their parent landing pages still link via `/{parentSlug}/{slug}` which now hits the chooser
   - **Kelas 8 — All 9 topics (47 sub-materi):** centralized data + chooser/dispatcher pattern
     - `src/data/mga-k8/` — one file per topic (pola-bilangan, koordinat-cartesius, relasi-fungsi, spldv, persamaan-garis-lurus, teorema-pythagoras, lingkaran, garis-singgung-lingkaran, bangun-ruang-sisi-datar) + `registry.ts` + `_helpers.ts` (`expandPool` fans out a 12-question base pool into 6 game-specific question shapes with offsets 0/2/4/6/8/10 to ensure variety)
     - `src/components/mga-k8/SubmaterialGameVariantsChooser.tsx` — lists the 7 variants
