@@ -588,6 +588,11 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         <div className="font-display text-xl md:text-2xl font-bold text-accent text-glow-accent">
           SKOR: {score}
         </div>
+        <div className="mt-2 w-full max-w-2xl mx-auto bg-card/80 backdrop-blur-md border border-border rounded-xl px-4 py-2">
+          <p className="font-body text-xs md:text-sm text-center text-foreground/90 leading-snug line-clamp-3">
+            {q.question}
+          </p>
+        </div>
       </div>
 
       <div className="relative flex-1 min-h-0">
@@ -716,11 +721,6 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
         </div>
       </div>
 
-      <div className="relative z-20 shrink-0 bg-card/80 backdrop-blur-md border-t border-border px-4 pt-2 pb-6 md:pt-4 md:pb-6">
-        <p className="font-body text-xs md:text-sm text-center text-foreground/90 leading-snug max-w-2xl mx-auto line-clamp-4">
-          {q.question}
-        </p>
-      </div>
     </div>
   );
 };

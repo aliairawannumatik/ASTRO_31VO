@@ -736,6 +736,11 @@ const JaringTabSelector = () => {
       {tab === "segitiga" && (
         <div>
           <LuasPrismaSVG />
+          <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-400/40 rounded-lg p-3 my-2 text-center">
+            <p className="text-[11px] text-cyan-300 font-semibold mb-1">Rumus Umum Luas Permukaan Prisma</p>
+            <p className="font-mono text-sm md:text-base font-bold text-yellow-200">L permukaan = 2·L<sub>a</sub> + K<sub>a</sub> × t</p>
+            <p className="text-[10px] text-white/60 mt-1 italic">L<sub>a</sub> = Luas alas · K<sub>a</sub> = Keliling alas · t = tinggi prisma</p>
+          </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
             <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segitiga:</p>
             <p>• Luas alas/tutup: <span className="text-yellow-300">L△ = ½ × a × t△</span></p>
@@ -747,6 +752,11 @@ const JaringTabSelector = () => {
       {tab === "segiempat" && (
         <div>
           <JaringSegiempatSVG />
+          <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-400/40 rounded-lg p-3 my-2 text-center">
+            <p className="text-[11px] text-cyan-300 font-semibold mb-1">Rumus Umum Luas Permukaan Prisma</p>
+            <p className="font-mono text-sm md:text-base font-bold text-yellow-200">L permukaan = 2·L<sub>a</sub> + K<sub>a</sub> × t</p>
+            <p className="text-[10px] text-white/60 mt-1 italic">L<sub>a</sub> = Luas alas · K<sub>a</sub> = Keliling alas · t = tinggi prisma</p>
+          </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
             <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segiempat (Balok):</p>
             <p>• Luas alas/tutup: <span className="text-yellow-300">L□ = p × l</span></p>
@@ -758,6 +768,11 @@ const JaringTabSelector = () => {
       {tab === "segilima" && (
         <div>
           <JaringSegilimaSVG />
+          <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-400/40 rounded-lg p-3 my-2 text-center">
+            <p className="text-[11px] text-cyan-300 font-semibold mb-1">Rumus Umum Luas Permukaan Prisma</p>
+            <p className="font-mono text-sm md:text-base font-bold text-yellow-200">L permukaan = 2·L<sub>a</sub> + K<sub>a</sub> × t</p>
+            <p className="text-[10px] text-white/60 mt-1 italic">L<sub>a</sub> = Luas alas · K<sub>a</sub> = Keliling alas · t = tinggi prisma</p>
+          </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
             <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segilima (alas sama sisi a):</p>
             <p>• Luas segi-5: <span className="text-yellow-300">L△₅ = ½ × keliling × apotema</span></p>

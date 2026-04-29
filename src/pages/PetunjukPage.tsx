@@ -30,6 +30,8 @@ import {
   Star,
   CheckCircle2,
   Lightbulb,
+  GraduationCap,
+  ClipboardCheck,
 } from "lucide-react";
 
 interface Slide {
@@ -316,6 +318,50 @@ const PengaturanMockup = () => (
   </MockupFrame>
 );
 
+const RuangGuruMockup = () => (
+  <MockupFrame title="RUANG UNTUK GURU" accentColor="text-cyan-400">
+    <div className="p-2 space-y-1.5">
+      <p className="text-[8px] text-cyan-300 font-bold text-center">👨‍🏫 RUANG UNTUK GURU</p>
+      <div className="grid grid-cols-3 gap-1">
+        {[
+          { icon: "🎯", label: "CP" },
+          { icon: "📋", label: "ATP" },
+          { icon: "📖", label: "RPP" },
+          { icon: "🤝", label: "KEYAKINAN" },
+          { icon: "💌", label: "PESAN" },
+          { icon: "✅", label: "RUBRIK" },
+          { icon: "📓", label: "JURNAL" },
+          { icon: "📅", label: "AGENDA" },
+          { icon: "🎮", label: "GAME" },
+        ].map((item) => (
+          <div key={item.label} className="bg-white/5 border border-cyan-400/20 rounded p-1 text-center">
+            <div className="text-[9px] mb-0.5">{item.icon}</div>
+            <p className="text-[5px] text-white/60 leading-tight">{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </MockupFrame>
+);
+
+const LKPDMockup = () => (
+  <MockupFrame title="LKPD" accentColor="text-cyan-400">
+    <div className="p-3 space-y-2">
+      <p className="text-[8px] text-cyan-300 font-bold text-center">📋 LEMBAR KERJA PESERTA DIDIK</p>
+      {["KELAS 7", "KELAS 8", "KELAS 9"].map((k) => (
+        <div key={k} className="flex items-center gap-2 bg-white/5 border border-cyan-400/20 rounded px-2 py-1.5">
+          <div className="w-4 h-4 rounded bg-cyan-500/30 flex items-center justify-center text-[8px]">🎓</div>
+          <div className="flex-1">
+            <p className="text-[8px] text-white/80 font-semibold">{k}</p>
+            <p className="text-[5.5px] text-white/40">LKPD matematika SMP</p>
+          </div>
+          <span className="text-[6px] text-cyan-400 font-bold">BUKA</span>
+        </div>
+      ))}
+    </div>
+  </MockupFrame>
+);
+
 const NavPetunjukMockup = () => (
   <MockupFrame title="NAVIGASI APLIKASI" accentColor="text-cyan-400">
     <div className="p-3 space-y-2">
@@ -370,6 +416,33 @@ const slides: Slide[] = [
     mockup: <NavPetunjukMockup />,
   },
   {
+    id: 17,
+    title: "Ruang Untuk Guru",
+    icon: <GraduationCap className="w-8 h-8" />,
+    color: "text-cyan-400",
+    bgGradient: "from-cyan-900/30 to-blue-900/30",
+    description: "Wadah khusus bagi pendidik yang menyediakan berbagai perangkat bantu untuk optimalisasi kegiatan belajar mengajar — mulai dari Capaian Pembelajaran, ATP, RPP, Keyakinan Kelas, hingga Jurnal dan Agenda Guru.",
+    steps: [
+      "Pilih 'RUANG UNTUK GURU' dari Menu Utama",
+      "Pilih perangkat yang ingin diakses (CP, ATP, RPP, dll)",
+      "Pelajari atau gunakan dokumen sebagai panduan mengajar",
+      "Catat agenda harian dan jurnal kelas pada menu yang tersedia",
+      "Manfaatkan rubrik penilaian untuk evaluasi peserta didik",
+    ],
+    submenus: [
+      "CAPAIAN PEMBELAJARAN — CP matematika Fase D",
+      "ATP — Alur Tujuan Pembelajaran",
+      "RPP — Rencana Pelaksanaan Pembelajaran",
+      "KEYAKINAN KELAS — nilai dan kesepakatan bersama",
+      "PESAN DAN KESAN — masukan pengguna aplikasi",
+      "RUBRIK PENILAIAN DIMENSI LULUSAN — 7 dimensi profil lulusan",
+      "JURNAL GURU — kejadian dan tindak lanjut peserta didik",
+      "AGENDA GURU — agenda harian dan kehadiran",
+      "NUMATIK GAME — koleksi lengkap game matematika",
+    ],
+    mockup: <RuangGuruMockup />,
+  },
+  {
     id: 3,
     title: "Materi Matematika",
     icon: <BookOpen className="w-8 h-8" />,
@@ -404,6 +477,27 @@ const slides: Slide[] = [
     ],
     submenus: ["Kelas 7 — soal latihan tiap bab", "Kelas 8 — soal latihan tiap bab", "Kelas 9 — soal latihan tiap bab"],
     mockup: <LatihanMockup />,
+  },
+  {
+    id: 18,
+    title: "LKPD (Lembar Kerja Peserta Didik)",
+    icon: <ClipboardCheck className="w-8 h-8" />,
+    color: "text-cyan-400",
+    bgGradient: "from-cyan-900/30 to-teal-900/30",
+    description: "Lembar Kerja Peserta Didik (LKPD) interaktif yang dirancang untuk membantu siswa memahami konsep matematika melalui aktivitas belajar terstruktur. Setiap LKPD dilengkapi dengan kegiatan eksplorasi, latihan soal, serta refleksi pembelajaran.",
+    steps: [
+      "Pilih 'LKPD' dari Menu Utama",
+      "Pilih kelas (7, 8, atau 9) sesuai dengan jenjangmu",
+      "Pilih topik/materi LKPD yang ingin dikerjakan",
+      "Ikuti petunjuk dan kerjakan setiap aktivitas dengan seksama",
+      "Refleksikan hasil pembelajaran di bagian akhir LKPD",
+    ],
+    submenus: [
+      "LKPD Kelas 7 — sesuai materi kelas 7 SMP",
+      "LKPD Kelas 8 — sesuai materi kelas 8 SMP",
+      "LKPD Kelas 9 — sesuai materi kelas 9 SMP",
+    ],
+    mockup: <LKPDMockup />,
   },
   {
     id: 5,
