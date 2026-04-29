@@ -765,3 +765,317 @@
 
 /* ── KaTeX math text on pure white ── */
 .theme-white .katex { color: #0f172a; }
+
+/* ════════════════════════════════════════════════
+   THEME OCEAN — LAUTAN BIRU — GLOBAL OVERRIDES
+   (dark-base theme, but every accent is shifted to
+    a cyan / sky / teal ocean palette so the entire
+    app clearly reflects the underwater mood)
+   ════════════════════════════════════════════════ */
+
+/* ── Base CSS variables: shift towards deep ocean blue ── */
+.theme-ocean {
+  --background: 205 70% 8%;
+  --foreground: 195 100% 95%;
+
+  --card: 205 60% 14%;
+  --card-foreground: 195 100% 95%;
+
+  --popover: 205 60% 14%;
+  --popover-foreground: 195 100% 95%;
+
+  --primary: 190 100% 55%;
+  --primary-foreground: 205 70% 8%;
+
+  --secondary: 200 100% 60%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 205 50% 18%;
+  --muted-foreground: 195 60% 75%;
+
+  --accent: 180 100% 50%;
+  --accent-foreground: 205 70% 8%;
+
+  --border: 200 70% 28%;
+  --input: 200 70% 28%;
+  --ring: 190 100% 55%;
+
+  --neon-cyan: 190 100% 55%;
+  --neon-magenta: 200 100% 60%;
+  --neon-green: 175 90% 50%;
+  --space-deep: 210 80% 6%;
+  --space-mid: 205 70% 14%;
+}
+
+/* ── Background gradient: every page that uses gradient-space
+       now shows the deep ocean gradient ── */
+.theme-ocean .gradient-space {
+  background: linear-gradient(180deg,
+    #061f3a 0%, #0c2a4a 22%, #0d3d62 48%, #075985 78%, #0369a1 100%) !important;
+}
+.theme-ocean body {
+  background: #0c2a4a;
+}
+
+/* ── Text glows: tinted cyan/sky for ocean mood ── */
+.theme-ocean .text-glow-magenta {
+  text-shadow:
+    0 0 10px rgba(56,189,248,0.65),
+    0 0 30px rgba(14,165,233,0.35) !important;
+}
+.theme-ocean .text-glow-cyan {
+  text-shadow:
+    0 0 10px rgba(103,232,249,0.75),
+    0 0 30px rgba(56,189,248,0.40) !important;
+}
+.theme-ocean .text-glow-accent {
+  text-shadow:
+    0 0 10px rgba(125,211,252,0.6),
+    0 0 24px rgba(56,189,248,0.30) !important;
+}
+
+/* ── Box-glow effects: cyan/sky instead of magenta ── */
+.theme-ocean .box-glow-magenta {
+  box-shadow:
+    0 0 15px rgba(56,189,248,0.45),
+    0 0 40px rgba(14,165,233,0.20) !important;
+}
+.theme-ocean .box-glow-cyan {
+  box-shadow:
+    0 0 15px rgba(103,232,249,0.55),
+    0 0 40px rgba(56,189,248,0.25),
+    inset 0 0 15px rgba(103,232,249,0.12) !important;
+}
+
+/* ── Violet / purple / fuchsia / pink TEXT → cyan / sky family ── */
+.theme-ocean .text-violet-200,
+.theme-ocean .text-violet-300,
+.theme-ocean .text-violet-400,
+.theme-ocean .text-violet-500   { color: #7dd3fc !important; }
+.theme-ocean .text-purple-200,
+.theme-ocean .text-purple-300,
+.theme-ocean .text-purple-400,
+.theme-ocean .text-purple-500   { color: #67e8f9 !important; }
+.theme-ocean .text-indigo-200,
+.theme-ocean .text-indigo-300,
+.theme-ocean .text-indigo-400,
+.theme-ocean .text-indigo-500   { color: #93c5fd !important; }
+.theme-ocean .text-fuchsia-200,
+.theme-ocean .text-fuchsia-300,
+.theme-ocean .text-fuchsia-400,
+.theme-ocean .text-fuchsia-500  { color: #5eead4 !important; }
+.theme-ocean .text-pink-200,
+.theme-ocean .text-pink-300,
+.theme-ocean .text-pink-400,
+.theme-ocean .text-pink-500     { color: #67e8f9 !important; }
+.theme-ocean .text-rose-200,
+.theme-ocean .text-rose-300,
+.theme-ocean .text-rose-400,
+.theme-ocean .text-rose-500     { color: #5eead4 !important; }
+.theme-ocean .text-magenta      { color: #67e8f9 !important; }
+
+/* ── Warm tones (amber/orange/yellow/red) → softened to sandy gold
+       so they remain readable but don't fight the cool palette ── */
+.theme-ocean .text-amber-200,
+.theme-ocean .text-amber-300,
+.theme-ocean .text-amber-400,
+.theme-ocean .text-amber-500    { color: #fde68a !important; }
+.theme-ocean .text-orange-200,
+.theme-ocean .text-orange-300,
+.theme-ocean .text-orange-400,
+.theme-ocean .text-orange-500   { color: #fcd34d !important; }
+.theme-ocean .text-yellow-200,
+.theme-ocean .text-yellow-300,
+.theme-ocean .text-yellow-400,
+.theme-ocean .text-yellow-500   { color: #fde68a !important; }
+.theme-ocean .text-red-300,
+.theme-ocean .text-red-400,
+.theme-ocean .text-red-500      { color: #fca5a5 !important; }
+
+/* ── Cool greens stay but shift toward teal ── */
+.theme-ocean .text-green-300,
+.theme-ocean .text-green-400,
+.theme-ocean .text-green-500    { color: #5eead4 !important; }
+.theme-ocean .text-emerald-300,
+.theme-ocean .text-emerald-400  { color: #6ee7b7 !important; }
+.theme-ocean .text-lime-300,
+.theme-ocean .text-lime-400     { color: #a7f3d0 !important; }
+.theme-ocean .text-teal-300,
+.theme-ocean .text-teal-400     { color: #5eead4 !important; }
+
+/* ── Strong cyan/sky/blue TEXT: brighten for legibility on deep ocean bg ── */
+.theme-ocean .text-cyan-300,
+.theme-ocean .text-cyan-400     { color: #a5f3fc !important; }
+.theme-ocean .text-sky-300,
+.theme-ocean .text-sky-400      { color: #bae6fd !important; }
+.theme-ocean .text-blue-300,
+.theme-ocean .text-blue-400     { color: #93c5fd !important; }
+
+/* ── Primary / accent / secondary semantic text ── */
+.theme-ocean .text-primary      { color: #67e8f9 !important; }
+.theme-ocean .text-accent       { color: #5eead4 !important; }
+.theme-ocean .text-secondary    { color: #7dd3fc !important; }
+.theme-ocean .text-muted-foreground { color: #bae6fd !important; }
+
+/* ── Card / container BG: violet/purple/fuchsia/pink → cyan/sky/teal ── */
+.theme-ocean .bg-violet-500\/10,
+.theme-ocean .bg-violet-500\/20,
+.theme-ocean .bg-violet-600\/20,
+.theme-ocean .bg-violet-600\/30,
+.theme-ocean .bg-violet-700\/30,
+.theme-ocean .bg-violet-900\/30,
+.theme-ocean .bg-violet-950,
+.theme-ocean .bg-violet-950\/40,
+.theme-ocean .bg-violet-950\/50,
+.theme-ocean .bg-violet-950\/60,
+.theme-ocean .bg-violet-950\/70 { background-color: rgba(8,145,178,0.22) !important; }
+
+.theme-ocean .bg-purple-500\/10,
+.theme-ocean .bg-purple-500\/20,
+.theme-ocean .bg-purple-600\/20,
+.theme-ocean .bg-purple-700\/30,
+.theme-ocean .bg-purple-900\/30,
+.theme-ocean .bg-purple-950,
+.theme-ocean .bg-purple-950\/40,
+.theme-ocean .bg-purple-950\/50,
+.theme-ocean .bg-purple-950\/60 { background-color: rgba(14,165,233,0.22) !important; }
+
+.theme-ocean .bg-fuchsia-500\/10,
+.theme-ocean .bg-fuchsia-500\/20,
+.theme-ocean .bg-fuchsia-600\/20,
+.theme-ocean .bg-fuchsia-900\/30,
+.theme-ocean .bg-fuchsia-950\/40,
+.theme-ocean .bg-fuchsia-950\/50 { background-color: rgba(45,212,191,0.20) !important; }
+
+.theme-ocean .bg-pink-500\/10,
+.theme-ocean .bg-pink-500\/20,
+.theme-ocean .bg-pink-600\/20,
+.theme-ocean .bg-pink-900\/30,
+.theme-ocean .bg-pink-950\/40,
+.theme-ocean .bg-pink-950\/50 { background-color: rgba(56,189,248,0.20) !important; }
+
+.theme-ocean .bg-indigo-500\/10,
+.theme-ocean .bg-indigo-500\/20,
+.theme-ocean .bg-indigo-600\/20,
+.theme-ocean .bg-indigo-700\/30,
+.theme-ocean .bg-indigo-900\/30,
+.theme-ocean .bg-indigo-950,
+.theme-ocean .bg-indigo-950\/50,
+.theme-ocean .bg-indigo-950\/60 { background-color: rgba(37,99,235,0.22) !important; }
+
+/* ── Card / container BG: blue / cyan / sky family → unified ocean tones ── */
+.theme-ocean .bg-blue-900\/30,
+.theme-ocean .bg-blue-950,
+.theme-ocean .bg-blue-950\/40,
+.theme-ocean .bg-blue-950\/50,
+.theme-ocean .bg-blue-950\/60 { background-color: rgba(7,89,133,0.40) !important; }
+.theme-ocean .bg-cyan-900\/30,
+.theme-ocean .bg-cyan-950,
+.theme-ocean .bg-cyan-950\/40,
+.theme-ocean .bg-cyan-950\/50,
+.theme-ocean .bg-cyan-950\/60,
+.theme-ocean .bg-cyan-950\/70 { background-color: rgba(8,47,73,0.55) !important; }
+
+/* ── Slate (galaxy chrome) → deeper ocean navy ── */
+.theme-ocean .bg-slate-800,
+.theme-ocean .bg-slate-800\/40,
+.theme-ocean .bg-slate-800\/50,
+.theme-ocean .bg-slate-800\/60,
+.theme-ocean .bg-slate-800\/70 { background-color: rgba(7,42,74,0.65) !important; }
+.theme-ocean .bg-slate-900,
+.theme-ocean .bg-slate-900\/30,
+.theme-ocean .bg-slate-900\/50,
+.theme-ocean .bg-slate-900\/80 { background-color: rgba(4,28,53,0.75) !important; }
+.theme-ocean .bg-\[#141d35\],
+.theme-ocean .bg-\[#141d35\]\/90 { background-color: #0a2e4d !important; }
+.theme-ocean .bg-\[#1a2040\] { background-color: #0d3d62 !important; }
+.theme-ocean .bg-\[#252d50\] { background-color: #0f4d7a !important; }
+
+/* ── Borders: violet / purple / pink / fuchsia → cyan / sky ── */
+.theme-ocean .border-violet-500,
+.theme-ocean .border-violet-500\/30,
+.theme-ocean .border-violet-500\/40,
+.theme-ocean .border-violet-500\/50,
+.theme-ocean .border-violet-600\/30,
+.theme-ocean .border-violet-600\/40,
+.theme-ocean .border-violet-700\/50 { border-color: rgba(56,189,248,0.55) !important; }
+.theme-ocean .border-purple-500,
+.theme-ocean .border-purple-500\/30,
+.theme-ocean .border-purple-500\/40,
+.theme-ocean .border-purple-600\/40 { border-color: rgba(56,189,248,0.55) !important; }
+.theme-ocean .border-fuchsia-500,
+.theme-ocean .border-fuchsia-500\/40,
+.theme-ocean .border-pink-500,
+.theme-ocean .border-pink-500\/40,
+.theme-ocean .border-rose-500\/40 { border-color: rgba(45,212,191,0.55) !important; }
+.theme-ocean .border-indigo-500\/40,
+.theme-ocean .border-indigo-600\/40 { border-color: rgba(56,189,248,0.55) !important; }
+
+/* ── Borders: warm tones softened ── */
+.theme-ocean .border-orange-700\/40,
+.theme-ocean .border-orange-600\/40,
+.theme-ocean .border-amber-500\/40,
+.theme-ocean .border-amber-500\/70,
+.theme-ocean .border-yellow-600\/40 { border-color: rgba(125,211,252,0.45) !important; }
+.theme-ocean .border-red-600\/40    { border-color: rgba(254,202,202,0.40) !important; }
+
+/* ── Borders: blue family kept but unified ── */
+.theme-ocean .border-blue-500,
+.theme-ocean .border-blue-500\/40,
+.theme-ocean .border-blue-600\/40 { border-color: rgba(125,211,252,0.55) !important; }
+.theme-ocean .border-cyan-500\/30,
+.theme-ocean .border-cyan-500,
+.theme-ocean .border-cyan-600\/40,
+.theme-ocean .border-cyan-700\/50 { border-color: rgba(103,232,249,0.55) !important; }
+
+/* ── Page navigation bar: subtle deep-ocean translucent ── */
+.theme-ocean nav,
+.theme-ocean [class*="PageNavigation"] {
+  background-color: rgba(6,31,58,0.78) !important;
+  border-color: rgba(56,189,248,0.25) !important;
+}
+
+/* ── Gradient backgrounds inside cards: replace violet/purple/pink
+       gradient backgrounds with cyan/sky variants where they're
+       used as section accents ── */
+.theme-ocean .from-violet-500   { --tw-gradient-from: #38bdf8 var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-violet-500     { --tw-gradient-to: #38bdf8 var(--tw-gradient-to-position) !important; }
+.theme-ocean .from-violet-600   { --tw-gradient-from: #0284c7 var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-violet-600     { --tw-gradient-to: #0284c7 var(--tw-gradient-to-position) !important; }
+.theme-ocean .via-violet-500    { --tw-gradient-via: #38bdf8 var(--tw-gradient-via-position) !important; }
+
+.theme-ocean .from-purple-500   { --tw-gradient-from: #06b6d4 var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-purple-500     { --tw-gradient-to: #06b6d4 var(--tw-gradient-to-position) !important; }
+.theme-ocean .from-purple-600   { --tw-gradient-from: #0891b2 var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-purple-600     { --tw-gradient-to: #0891b2 var(--tw-gradient-to-position) !important; }
+
+.theme-ocean .from-fuchsia-500  { --tw-gradient-from: #2dd4bf var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-fuchsia-500    { --tw-gradient-to: #2dd4bf var(--tw-gradient-to-position) !important; }
+.theme-ocean .from-pink-500     { --tw-gradient-from: #38bdf8 var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-pink-500       { --tw-gradient-to: #38bdf8 var(--tw-gradient-to-position) !important; }
+.theme-ocean .from-rose-500     { --tw-gradient-from: #14b8a6 var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-rose-500       { --tw-gradient-to: #14b8a6 var(--tw-gradient-to-position) !important; }
+.theme-ocean .from-indigo-500   { --tw-gradient-from: #0ea5e9 var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-indigo-500     { --tw-gradient-to: #0ea5e9 var(--tw-gradient-to-position) !important; }
+
+/* ── Tinted shadow utilities used for floating cards ── */
+.theme-ocean [class*="shadow-violet"],
+.theme-ocean [class*="shadow-purple"],
+.theme-ocean [class*="shadow-fuchsia"],
+.theme-ocean [class*="shadow-pink"],
+.theme-ocean [class*="shadow-indigo"] {
+  --tw-shadow-color: rgba(56,189,248,0.45) !important;
+  --tw-shadow: var(--tw-shadow-colored) !important;
+}
+
+/* ── Animated button-pulse used in CTA buttons (cyan default) ── */
+.theme-ocean .animate-button-pulse {
+  animation: button-pulse-grow-ocean 1.2s ease-in-out infinite;
+}
+@keyframes button-pulse-grow-ocean {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 20px hsl(195 100% 60% / 0.55); }
+  50%      { transform: scale(1.15); box-shadow: 0 0 40px hsl(195 100% 60% / 0.85); }
+}
+
+/* ── KaTeX math text: light cyan-tinted on deep ocean bg ── */
+.theme-ocean .katex { color: #e0f7ff; }

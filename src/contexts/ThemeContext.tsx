@@ -24,12 +24,15 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     localStorage.setItem("numatik-theme", theme);
     // Apply CSS variable class
-    document.documentElement.classList.remove("light-mode", "theme-white");
+    document.documentElement.classList.remove("light-mode", "theme-white", "theme-ocean");
     if (!DARK_THEMES.includes(theme)) {
       document.documentElement.classList.add("light-mode");
     }
     if (theme === "white") {
       document.documentElement.classList.add("theme-white");
+    }
+    if (theme === "ocean") {
+      document.documentElement.classList.add("theme-ocean");
     }
   }, [theme]);
 
