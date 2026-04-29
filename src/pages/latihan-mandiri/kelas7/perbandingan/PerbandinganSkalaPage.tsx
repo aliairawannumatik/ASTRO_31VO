@@ -3,6 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import denahRumahImg from "@assets/image_1777478280088.png";
 
 const PerbandinganSkalaPage = () => {
   const navigate = useNavigate();
@@ -111,7 +112,13 @@ const PerbandinganSkalaPage = () => {
               <span className="font-semibold text-accent shrink-0">7.</span>
               <div>
                 <p className="mb-3">Perhatikan denah sebuah rumah berikut!</p>
-                <p className="mb-3 text-white/50 italic">[Gambar denah rumah]</p>
+                <div className="mb-3 flex justify-center">
+                  <img
+                    src={denahRumahImg}
+                    alt="Denah rumah"
+                    className="max-w-full md:max-w-md rounded-lg border border-border shadow-lg"
+                  />
+                </div>
                 <p className="mb-3">Jika skala denah rumah adalah 1 : 200, maka luas bangunan rumah sebenarnya adalah ...</p>
                 <div className="space-y-1 ml-4">
                   <p>A. 46 m<sup>2</sup></p>
