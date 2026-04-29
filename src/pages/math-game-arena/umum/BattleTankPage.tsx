@@ -8,9 +8,11 @@ import { useGuruQuiz } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import MathGameIntro from "@/components/MathGameIntro";
 
-const CW = 420;
-const CH = 600;
-const PLAYER_Y = CH - 80;
+// Canvas dimensions are orientation-aware: portrait keeps the original 420x600
+// playfield; landscape uses a wider/shorter playfield so tanks have more room.
+const PORTRAIT_DIMS = { CW: 420, CH: 600, PLAYER_Y: 520 };
+const LANDSCAPE_DIMS = { CW: 820, CH: 520, PLAYER_Y: 440 };
+type Dims = typeof PORTRAIT_DIMS;
 const BULLET_SPEED = 430;
 const ENEMY_BULLET_SPEED = 195;
 const QUIZ_INTERVAL = 40;
@@ -151,6 +153,33 @@ const BattleTankPage = ({
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
+
+  // ── Orientation-aware playfield dimensions ────────────────────────────────
+  const [isLandscape, setIsLandscape] = useState<boolean>(() =>
+    typeof window !== "undefined" && window.matchMedia("(orientation: landscape)").matches
+  );
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(orientation: landscape)");
+    const handler = (e: MediaQueryListEvent) => setIsLandscape(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  const dims: Dims = isLandscape ? LANDSCAPE_DIMS : PORTRAIT_DIMS;
+  const dimsRef = useRef<Dims>(dims);
+  dimsRef.current = dims;
+
+  // Re-clamp positions when orientation/dims change so entities stay in-bounds
+  useEffect(() => {
+    const { CW, CH } = dims;
+    const p = playerRef.current;
+    p.x = Math.max(30, Math.min(CW - 30, p.x));
+    p.targetX = Math.max(30, Math.min(CW - 30, p.targetX));
+    const m = mouseRef.current;
+    m.x = Math.max(20, Math.min(CW - 20, m.x));
+    m.y = Math.max(20, Math.min(CH - 20, m.y));
+  }, [dims]);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef(0);
   const lastRef = useRef(0);
@@ -165,8 +194,8 @@ const BattleTankPage = ({
   const floatTextsRef = useRef<FloatText[]>([]);
   const groundMarksRef = useRef<GroundMark[]>([]);
 
-  const playerRef = useRef({ x: CW / 2, targetX: CW / 2, turretAngle: -Math.PI / 2, invT: 0 });
-  const mouseRef = useRef({ x: CW / 2, y: CH / 2 });
+  const playerRef = useRef({ x: dims.CW / 2, targetX: dims.CW / 2, turretAngle: -Math.PI / 2, invT: 0 });
+  const mouseRef = useRef({ x: dims.CW / 2, y: dims.CH / 2 });
   const controlsRef = useRef({ left: false, right: false, up: false, down: false });
   const [, forcePadRender] = useState(0);
   const setPadHeld = useCallback((key: "left" | "right" | "up" | "down", val: boolean) => {
@@ -198,6 +227,7 @@ const BattleTankPage = ({
 
   // ── Spawn wave ────────────────────────────────────────────────────────────
   const spawnWave = useCallback(() => {
+    const { CW } = dimsRef.current;
     const wave = waveRef.current;
     const cols = Math.min(4, 2 + Math.floor(wave / 2));
     const rows = Math.min(3, 1 + Math.floor(wave / 3));
@@ -246,6 +276,7 @@ const BattleTankPage = ({
 
   const handleQuizAnswer = useCallback((optIdx: number) => {
     if (!quizActiveRef.current || !activeQuiz) return;
+    const { CW, CH } = dimsRef.current;
     if (optIdx === activeQuiz.ans) {
       scoreRef.current += QUIZ_BONUS_PTS;
       timerRef.current = Math.min(180, timerRef.current + QUIZ_BONUS_TIME);
@@ -290,6 +321,7 @@ const BattleTankPage = ({
 
   // ── Start / Reset ─────────────────────────────────────────────────────────
   const startGame = useCallback(() => {
+    const { CW } = dimsRef.current;
     scoreRef.current = 0; livesRef.current = 3; levelRef.current = 1;
     timerRef.current = 120; timerAccRef.current = 0;
     comboRef.current = 0; comboAccRef.current = 0;
@@ -309,6 +341,7 @@ const BattleTankPage = ({
   const fireNow = useCallback(() => {
     if (phaseRef.current === "idle" || phaseRef.current === "dead") { startGame(); return; }
     if (phaseRef.current !== "playing" || quizActiveRef.current) return;
+    const { PLAYER_Y } = dimsRef.current;
     const px = playerRef.current.x;
     const ang = playerRef.current.turretAngle;
     fireBullet(true, px + Math.cos(ang) * 28, PLAYER_Y + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
@@ -346,6 +379,7 @@ const BattleTankPage = ({
   // ── Input ─────────────────────────────────────────────────────────────────
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current; if (!canvas) return;
+    const { CW, CH } = dimsRef.current;
     const rect = canvas.getBoundingClientRect();
     mouseRef.current = {
       x: (e.clientX - rect.left) * (CW / rect.width),
@@ -358,6 +392,7 @@ const BattleTankPage = ({
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
     if (phaseRef.current !== "playing" || quizActiveRef.current) return;
+    const { CW, CH, PLAYER_Y } = dimsRef.current;
     const rect = canvas.getBoundingClientRect();
     const cx = (e.clientX - rect.left) * (CW / rect.width);
     const cy = (e.clientY - rect.top) * (CH / rect.height);
@@ -370,6 +405,7 @@ const BattleTankPage = ({
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current; if (!canvas) return;
     e.preventDefault();
+    const { CW, CH } = dimsRef.current;
     const rect = canvas.getBoundingClientRect();
     mouseRef.current = {
       x: (e.touches[0].clientX - rect.left) * (CW / rect.width),
@@ -382,6 +418,7 @@ const BattleTankPage = ({
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
     if (phaseRef.current !== "playing" || quizActiveRef.current) return;
+    const { PLAYER_Y } = dimsRef.current;
     const px = playerRef.current.x, ang = playerRef.current.turretAngle;
     fireBullet(true, px + Math.cos(ang) * 28, PLAYER_Y + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
     playPopSound();
@@ -457,6 +494,7 @@ const BattleTankPage = ({
     const ctx = canvas.getContext("2d")!;
 
     const loop = (ts: number) => {
+      const { CW, CH, PLAYER_Y } = dimsRef.current;
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
       if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
@@ -792,18 +830,42 @@ const BattleTankPage = ({
         </button>
       </div>
 
-      {/* Canvas – fills remaining space */}
-      <div className="relative z-10 flex-1 min-h-0 w-full flex items-center justify-center px-2 py-1">
+      {/* Middle area – canvas (and in landscape, controls flank it for a wider playfield) */}
+      <div
+        className={`relative z-10 flex-1 min-h-0 w-full flex items-center justify-center gap-2 ${
+          isLandscape ? "flex-row px-3 py-1" : "flex-col px-2 py-1"
+        }`}
+      >
+        {/* D-Pad – only visible here in landscape (flanking the canvas) */}
+        {isLandscape && (
+          <div className="shrink-0 grid grid-cols-3 grid-rows-3 gap-1.5 select-none touch-none" style={{ width: 132, height: 132 }}>
+            <div />
+            <PadButton label="↑" held={controlsRef.current.up} onPress={(v) => setPadHeld("up", v)} />
+            <div />
+            <PadButton label="←" held={controlsRef.current.left} onPress={(v) => setPadHeld("left", v)} />
+            <div className="rounded-xl bg-slate-900/40 border border-white/5" />
+            <PadButton label="→" held={controlsRef.current.right} onPress={(v) => setPadHeld("right", v)} />
+            <div />
+            <PadButton label="↓" held={controlsRef.current.down} onPress={(v) => setPadHeld("down", v)} />
+            <div />
+          </div>
+        )}
+
+        {/* Canvas wrapper */}
         <div className="relative inline-flex rounded-[28px] p-2 bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 shadow-[0_0_45px_rgba(0,240,255,0.35)]">
           <canvas
             ref={canvasRef}
-            width={CW} height={CH}
+            width={dims.CW} height={dims.CH}
             onMouseMove={handleMouseMove}
             onClick={handleClick}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             className="block rounded-[20px] bg-slate-950 cursor-crosshair select-none touch-none border-4 border-slate-900"
-            style={{ maxHeight: 'calc(100dvh - 260px)', width: 'auto', maxWidth: '96vw' }}
+            style={
+              isLandscape
+                ? { maxHeight: 'calc(100dvh - 130px)', height: 'auto', width: 'auto', maxWidth: 'calc(100vw - 320px)' }
+                : { maxHeight: 'calc(100dvh - 260px)', width: 'auto', maxWidth: '96vw' }
+            }
           />
 
           {activeQuiz && (
@@ -835,36 +897,53 @@ const BattleTankPage = ({
             </div>
           )}
         </div>
+
+        {/* Fire Button – only visible here in landscape (flanking the canvas) */}
+        {isLandscape && (
+          <button
+            type="button"
+            onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); fireNow(); }}
+            onContextMenu={(e) => e.preventDefault()}
+            className="shrink-0 flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-orange-500 text-white font-display font-extrabold border-4 border-white/30 shadow-[0_0_28px_rgba(255,80,80,0.6)] active:scale-90 active:shadow-[0_0_36px_rgba(255,140,80,0.85)] transition-transform touch-none select-none"
+            style={{ width: 100, height: 100 }}
+            aria-label="Tembak"
+          >
+            <span className="text-3xl leading-none">🔥</span>
+            <span className="text-[10px] tracking-widest mt-0.5">TEMBAK</span>
+          </button>
+        )}
       </div>
 
-      {/* On-screen controls: D-Pad (left) + Fire button (right) */}
-      <div className="relative z-10 w-full shrink-0 flex items-center justify-between gap-3 px-4 pt-1 pb-1 select-none touch-none">
-        {/* D-Pad */}
-        <div className="grid grid-cols-3 grid-rows-3 gap-1.5" style={{ width: 150, height: 150 }}>
-          <div />
-          <PadButton label="↑" held={controlsRef.current.up} onPress={(v) => setPadHeld("up", v)} />
-          <div />
-          <PadButton label="←" held={controlsRef.current.left} onPress={(v) => setPadHeld("left", v)} />
-          <div className="rounded-xl bg-slate-900/40 border border-white/5" />
-          <PadButton label="→" held={controlsRef.current.right} onPress={(v) => setPadHeld("right", v)} />
-          <div />
-          <PadButton label="↓" held={controlsRef.current.down} onPress={(v) => setPadHeld("down", v)} />
-          <div />
+      {/* On-screen controls (portrait only): D-Pad (left) + Fire button (right) */}
+      {!isLandscape && (
+        <div className="relative z-10 w-full shrink-0 flex items-center justify-between gap-3 px-4 pt-1 pb-1 select-none touch-none">
+          {/* D-Pad */}
+          <div className="grid grid-cols-3 grid-rows-3 gap-1.5" style={{ width: 150, height: 150 }}>
+            <div />
+            <PadButton label="↑" held={controlsRef.current.up} onPress={(v) => setPadHeld("up", v)} />
+            <div />
+            <PadButton label="←" held={controlsRef.current.left} onPress={(v) => setPadHeld("left", v)} />
+            <div className="rounded-xl bg-slate-900/40 border border-white/5" />
+            <PadButton label="→" held={controlsRef.current.right} onPress={(v) => setPadHeld("right", v)} />
+            <div />
+            <PadButton label="↓" held={controlsRef.current.down} onPress={(v) => setPadHeld("down", v)} />
+            <div />
+          </div>
+
+          {/* Fire Button */}
+          <button
+            type="button"
+            onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); fireNow(); }}
+            onContextMenu={(e) => e.preventDefault()}
+            className="shrink-0 flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-orange-500 text-white font-display font-extrabold border-4 border-white/30 shadow-[0_0_28px_rgba(255,80,80,0.6)] active:scale-90 active:shadow-[0_0_36px_rgba(255,140,80,0.85)] transition-transform touch-none"
+            style={{ width: 110, height: 110 }}
+            aria-label="Tembak"
+          >
+            <span className="text-3xl leading-none">🔥</span>
+            <span className="text-[11px] tracking-widest mt-1">TEMBAK</span>
+          </button>
         </div>
-
-        {/* Fire Button */}
-        <button
-          type="button"
-          onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); fireNow(); }}
-          onContextMenu={(e) => e.preventDefault()}
-          className="shrink-0 flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-orange-500 text-white font-display font-extrabold border-4 border-white/30 shadow-[0_0_28px_rgba(255,80,80,0.6)] active:scale-90 active:shadow-[0_0_36px_rgba(255,140,80,0.85)] transition-transform touch-none"
-          style={{ width: 110, height: 110 }}
-          aria-label="Tembak"
-        >
-          <span className="text-3xl leading-none">🔥</span>
-          <span className="text-[11px] tracking-widest mt-1">TEMBAK</span>
-        </button>
-      </div>
+      )}
 
       {/* Buttons */}
       <div className="relative z-10 w-full shrink-0 flex flex-wrap justify-center gap-2 pb-2 px-2">
