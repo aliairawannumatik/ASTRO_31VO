@@ -8,10 +8,50 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { pembahasanDasar } from "@/data/transformasiPembahasanDasar";
 import { pembahasanOlimpiade } from "@/data/transformasiPembahasanOlimpiade";
-import olimpiadeSoal2Img from "@assets/image_1777276133593.png";
 
-const olimpiadeImages: Record<number, string> = {
-  2: olimpiadeSoal2Img,
+const OlimpiadeSoal2GarisAB = () => (
+  <svg
+    viewBox="0 0 240 200"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Garis AB melalui titik A(0, 2) dan B(4, 4) pada bidang kartesius"
+    className="w-full h-auto"
+  >
+    {/* Axes */}
+    <defs>
+      <marker id="o2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    {/* y-axis (with arrow at top) */}
+    <line x1="60" y1="190" x2="60" y2="14" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#o2-arrow)" />
+    {/* x-axis (with arrow at right) */}
+    <line x1="10" y1="150" x2="226" y2="150" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#o2-arrow)" />
+
+    {/* Axis labels */}
+    <text x="46" y="22" fontFamily="serif" fontStyle="italic" fontSize="14" fill="currentColor">y</text>
+    <text x="222" y="166" fontFamily="serif" fontStyle="italic" fontSize="14" fill="currentColor">x</text>
+
+    {/* Line through A(0,2) and B(4,4): slope 1/2, extended both ways.
+        Origin pixel = (60, 150); 1 unit = 20 px.
+        At x=-2 (px 20) → y=1 (px 130). At x=8 (px 220) → y=6 (px 30). */}
+    <line x1="20" y1="130" x2="220" y2="30" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+
+    {/* Point A(0, 2) → pixel (60, 110) */}
+    <circle cx="60" cy="110" r="3.2" fill="currentColor" />
+    <text x="42" y="114" fontFamily="serif" fontStyle="italic" fontSize="13" fill="currentColor">A</text>
+    <text x="40" y="132" fontFamily="serif" fontSize="11" fill="currentColor">(0, 2)</text>
+
+    {/* Point B(4, 4) → pixel (140, 70) */}
+    <circle cx="140" cy="70" r="3.2" fill="currentColor" />
+    <text x="134" y="62" fontFamily="serif" fontStyle="italic" fontSize="13" fill="currentColor">B</text>
+    <text x="146" y="88" fontFamily="serif" fontSize="11" fill="currentColor">(4, 4)</text>
+  </svg>
+);
+
+const olimpiadeFigures: Record<number, JSX.Element> = {
+  2: <OlimpiadeSoal2GarisAB />,
 };
 
 const renderWithLatex = (text: string) => {
@@ -494,13 +534,11 @@ const OlimpiadeTransformasiPage = () => {
                       </span>
                     ))}
                   </div>
-                  {olimpiadeImages[soal.no] && (
+                  {olimpiadeFigures[soal.no] && (
                     <div className="flex justify-center mb-3">
-                      <img
-                        src={olimpiadeImages[soal.no]}
-                        alt={`Gambar soal olimpiade ${soal.no}`}
-                        className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
-                      />
+                      <div className="max-w-[280px] w-full text-white">
+                        {olimpiadeFigures[soal.no]}
+                      </div>
                     </div>
                   )}
                   {soal.options.length > 0 && (
