@@ -247,7 +247,7 @@ const MathGameIntro = ({
         <div
           className="fixed top-0 left-0 right-0 z-[110] flex items-center justify-between p-4"
           style={{
-            paddingTop: "max(1rem, env(safe-area-inset-top, 0px))",
+            paddingTop: "max(2.5rem, calc(env(safe-area-inset-top, 0px) + 1.25rem))",
             paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
             paddingRight: "max(1rem, env(safe-area-inset-right, 0px))",
           }}

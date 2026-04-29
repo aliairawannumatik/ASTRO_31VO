@@ -1026,7 +1026,7 @@ const BattleTankPage = ({
       {isLight ? <Snowfall /> : <Starfield />}
 
       {/* Header */}
-      <div className="relative z-10 w-full shrink-0 flex items-center justify-between pt-5 pb-1 px-3 gap-2">
+      <div className="relative z-10 w-full shrink-0 flex items-center justify-between pt-10 pb-1 px-3 gap-2">
         <button
           onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
           className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
