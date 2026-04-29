@@ -112,6 +112,35 @@ interface BattleTankPageProps {
   homePath?: string;
 }
 
+// ── On-screen D-Pad button (touch + mouse, with proper press/release) ───────
+interface PadButtonProps {
+  label: string;
+  held: boolean;
+  onPress: (held: boolean) => void;
+}
+const PadButton = ({ label, held, onPress }: PadButtonProps) => (
+  <button
+    type="button"
+    onPointerDown={(e) => {
+      e.preventDefault();
+      (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId);
+      onPress(true);
+    }}
+    onPointerUp={(e) => { e.preventDefault(); onPress(false); }}
+    onPointerCancel={(e) => { e.preventDefault(); onPress(false); }}
+    onPointerLeave={() => onPress(false)}
+    onContextMenu={(e) => e.preventDefault()}
+    className={`flex items-center justify-center rounded-xl text-white font-display font-extrabold text-2xl border-2 transition-transform touch-none select-none ${
+      held
+        ? "bg-cyan-400 border-cyan-200 text-slate-900 scale-95 shadow-[0_0_18px_rgba(0,240,255,0.85)]"
+        : "bg-slate-800/90 border-cyan-400/60 shadow-[0_0_10px_rgba(0,240,255,0.35)] active:scale-95"
+    }`}
+    aria-label={label}
+  >
+    {label}
+  </button>
+);
+
 const BattleTankPage = ({
   questions,
   topicLabel,
@@ -138,6 +167,12 @@ const BattleTankPage = ({
 
   const playerRef = useRef({ x: CW / 2, targetX: CW / 2, turretAngle: -Math.PI / 2, invT: 0 });
   const mouseRef = useRef({ x: CW / 2, y: CH / 2 });
+  const controlsRef = useRef({ left: false, right: false, up: false, down: false });
+  const [, forcePadRender] = useState(0);
+  const setPadHeld = useCallback((key: "left" | "right" | "up" | "down", val: boolean) => {
+    controlsRef.current[key] = val;
+    forcePadRender(n => n + 1);
+  }, []);
 
   const scoreRef = useRef(0);
   const livesRef = useRef(3);
@@ -270,6 +305,44 @@ const BattleTankPage = ({
     setPhase("playing");
   }, [spawnWave, setPhase]);
 
+  // ── Fire (shared by click/tap/fire button/keyboard) ───────────────────────
+  const fireNow = useCallback(() => {
+    if (phaseRef.current === "idle" || phaseRef.current === "dead") { startGame(); return; }
+    if (phaseRef.current !== "playing" || quizActiveRef.current) return;
+    const px = playerRef.current.x;
+    const ang = playerRef.current.turretAngle;
+    fireBullet(true, px + Math.cos(ang) * 28, PLAYER_Y + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
+    playPopSound();
+  }, [startGame, fireBullet]);
+
+  // ── Keyboard support (arrow keys + space to fire) ────────────────────────
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return;
+      switch (e.key) {
+        case "ArrowLeft": case "a": case "A": setPadHeld("left", true); e.preventDefault(); break;
+        case "ArrowRight": case "d": case "D": setPadHeld("right", true); e.preventDefault(); break;
+        case "ArrowUp": case "w": case "W": setPadHeld("up", true); e.preventDefault(); break;
+        case "ArrowDown": case "s": case "S": setPadHeld("down", true); e.preventDefault(); break;
+        case " ": case "Enter": fireNow(); e.preventDefault(); break;
+      }
+    };
+    const onKeyUp = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft": case "a": case "A": setPadHeld("left", false); break;
+        case "ArrowRight": case "d": case "D": setPadHeld("right", false); break;
+        case "ArrowUp": case "w": case "W": setPadHeld("up", false); break;
+        case "ArrowDown": case "s": case "S": setPadHeld("down", false); break;
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
+    };
+  }, [setPadHeld, fireNow]);
+
   // ── Input ─────────────────────────────────────────────────────────────────
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current; if (!canvas) return;
@@ -391,6 +464,18 @@ const BattleTankPage = ({
       tileOffsetRef.current = (tileOffsetRef.current + dt * 20) % TILE_SIZE;
       const hue = hueRef.current;
       const phase = phaseRef.current;
+
+      // ── Apply on-screen / keyboard controls to aim target ────────────────
+      const ctrl = controlsRef.current;
+      if (ctrl.left || ctrl.right || ctrl.up || ctrl.down) {
+        const moveSpd = 320;
+        if (ctrl.left)  mouseRef.current.x -= moveSpd * dt;
+        if (ctrl.right) mouseRef.current.x += moveSpd * dt;
+        if (ctrl.up)    mouseRef.current.y -= moveSpd * dt;
+        if (ctrl.down)  mouseRef.current.y += moveSpd * dt;
+        mouseRef.current.x = Math.max(20, Math.min(CW - 20, mouseRef.current.x));
+        mouseRef.current.y = Math.max(20, Math.min(CH - 20, mouseRef.current.y));
+      }
 
       // ── Player update ────────────────────────────────────────────────────
       const player = playerRef.current;
@@ -663,8 +748,8 @@ const BattleTankPage = ({
           { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 72"><rect x="4" y="48" width="102" height="18" rx="9" fill="#2a1a08"/><rect x="4" y="50" width="102" height="14" rx="7" fill="#3a2210"/><circle cx="18" cy="57" r="7" fill="#5a3a18"/><circle cx="18" cy="57" r="3.5" fill="#1a0e04"/><circle cx="36" cy="57" r="7" fill="#5a3a18"/><circle cx="36" cy="57" r="3.5" fill="#1a0e04"/><circle cx="55" cy="57" r="7" fill="#5a3a18"/><circle cx="55" cy="57" r="3.5" fill="#1a0e04"/><circle cx="74" cy="57" r="7" fill="#5a3a18"/><circle cx="74" cy="57" r="3.5" fill="#1a0e04"/><circle cx="92" cy="57" r="7" fill="#5a3a18"/><circle cx="92" cy="57" r="3.5" fill="#1a0e04"/><rect x="8" y="32" width="82" height="22" rx="5" fill="#b88830"/><rect x="8" y="32" width="82" height="10" rx="5" fill="#d4a040"/><rect x="12" y="36" width="70" height="5" rx="2" fill="#eec055" opacity="0.4"/><ellipse cx="48" cy="30" rx="26" ry="16" fill="#a07020"/><ellipse cx="48" cy="28" rx="24" ry="12" fill="#ba8a2a"/><rect x="65" y="24" width="40" height="9" rx="4" fill="#7a5010"/><rect x="100" y="22" width="10" height="13" rx="2" fill="#4a3008"/><circle cx="40" cy="22" r="8" fill="#7a5010"/><circle cx="40" cy="22" r="5" fill="#4a3008"/><circle cx="40" cy="22" r="2" fill="#2a1804"/><rect x="10" y="34" width="12" height="18" rx="2" fill="#a07020" opacity="0.5"/><rect x="78" y="34" width="10" height="18" rx="2" fill="#a07020" opacity="0.5"/></svg>')}`, className: "absolute bottom-[14%] left-[5%] w-22 h-14 md:w-30 md:h-20 opacity-80 animate-float-fast", glowRgba: "rgba(200,150,40,0.5)" },
         ]}
         instructions={[
-          { text: <>Gerakkan <strong className="text-yellow-300">mouse / sentuh</strong> layar untuk membidik</> },
-          { text: <><strong className="text-yellow-300">Klik / tap</strong> untuk menembakkan peluru ke arah bidikan</> },
+          { text: <>Gunakan <strong className="text-yellow-300">tombol arah ← ↑ → ↓</strong> di bawah layar untuk membidik (atau gerakkan mouse / sentuh layar)</> },
+          { text: <>Tekan tombol <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap layar / spasi) untuk menembakkan peluru</> },
           { text: <>Hancurkan semua tank musuh dan hindari peluru mereka — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
           { text: <>Tiap <strong className="text-yellow-300">{QUIZ_INTERVAL} detik</strong> muncul soal bonus = <strong className="text-green-400">+{QUIZ_BONUS_PTS} pts</strong></> },
         ]}
@@ -694,7 +779,7 @@ const BattleTankPage = ({
             💥 Shoot Tank
           </h1>
           <p className="font-body text-[10px] text-white/50 mt-0.5">
-            {topicLabel ? topicLabel : "🖱️ Mouse/sentuh untuk membidik · Klik/tap untuk menembak"}
+            {topicLabel ? topicLabel : "🎮 Tombol arah untuk membidik · 🔥 TEMBAK untuk menembak"}
           </p>
         </div>
         <button
@@ -718,7 +803,7 @@ const BattleTankPage = ({
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             className="block rounded-[20px] bg-slate-950 cursor-crosshair select-none touch-none border-4 border-slate-900"
-            style={{ maxHeight: 'calc(100dvh - 120px)', width: 'auto', maxWidth: '96vw' }}
+            style={{ maxHeight: 'calc(100dvh - 260px)', width: 'auto', maxWidth: '96vw' }}
           />
 
           {activeQuiz && (
@@ -750,6 +835,35 @@ const BattleTankPage = ({
             </div>
           )}
         </div>
+      </div>
+
+      {/* On-screen controls: D-Pad (left) + Fire button (right) */}
+      <div className="relative z-10 w-full shrink-0 flex items-center justify-between gap-3 px-4 pt-1 pb-1 select-none touch-none">
+        {/* D-Pad */}
+        <div className="grid grid-cols-3 grid-rows-3 gap-1.5" style={{ width: 150, height: 150 }}>
+          <div />
+          <PadButton label="↑" held={controlsRef.current.up} onPress={(v) => setPadHeld("up", v)} />
+          <div />
+          <PadButton label="←" held={controlsRef.current.left} onPress={(v) => setPadHeld("left", v)} />
+          <div className="rounded-xl bg-slate-900/40 border border-white/5" />
+          <PadButton label="→" held={controlsRef.current.right} onPress={(v) => setPadHeld("right", v)} />
+          <div />
+          <PadButton label="↓" held={controlsRef.current.down} onPress={(v) => setPadHeld("down", v)} />
+          <div />
+        </div>
+
+        {/* Fire Button */}
+        <button
+          type="button"
+          onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); fireNow(); }}
+          onContextMenu={(e) => e.preventDefault()}
+          className="shrink-0 flex flex-col items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-orange-500 text-white font-display font-extrabold border-4 border-white/30 shadow-[0_0_28px_rgba(255,80,80,0.6)] active:scale-90 active:shadow-[0_0_36px_rgba(255,140,80,0.85)] transition-transform touch-none"
+          style={{ width: 110, height: 110 }}
+          aria-label="Tembak"
+        >
+          <span className="text-3xl leading-none">🔥</span>
+          <span className="text-[11px] tracking-widest mt-1">TEMBAK</span>
+        </button>
       </div>
 
       {/* Buttons */}
