@@ -328,6 +328,7 @@ const renderDasarVisual = (no: number): React.ReactNode => {
         <FrequencyTable
           title="Tabel Frekuensi Nilai Matematika Siswa"
           headers={["Nilai", "Banyak Siswa"]}
+          showTotal={false}
           rows={[
             { label: 4, value: 2 },
             { label: 5, value: 4 },
@@ -344,6 +345,7 @@ const renderDasarVisual = (no: number): React.ReactNode => {
         <FrequencyTable
           title="Tabel Frekuensi Nilai Siswa"
           headers={["Nilai", "Frekuensi"]}
+          showTotal={false}
           rows={[
             { label: 3, value: 2 },
             { label: 4, value: 5 },
@@ -418,6 +420,7 @@ const renderDasarVisual = (no: number): React.ReactNode => {
         <FrequencyTable
           title="Tabel Perolehan Nilai Siswa"
           headers={["Nilai", "Frekuensi"]}
+          showTotal={false}
           rows={[
             { label: 3, value: 2 },
             { label: 4, value: 3 },
