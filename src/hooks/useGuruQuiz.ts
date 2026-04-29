@@ -22,7 +22,7 @@ const GURU_QUESTIONS: GuruQuestion[] = [
 ];
 
 const MAX_QUESTIONS = 5;
-const DEFAULT_INTERVAL_MS = 30000;
+const DEFAULT_INTERVAL_MS = 25000;
 
 export interface UseGuruQuizReturn {
   isPausedRef: React.MutableRefObject<boolean>;

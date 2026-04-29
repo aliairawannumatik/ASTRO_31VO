@@ -21,9 +21,6 @@ const P_H_DUCK = 28;
 const GRAVITY = 1600;
 const JUMP_VY = -540;
 
-// ── Bonus question interval (seconds) ───────────────────────────────────────
-const QUESTION_INTERVAL = 40;
-
 // ── Obstacle constants ──────────────────────────────────────────────────────
 type ObstacleKind = "cactus" | "rock" | "bird" | "lowbar";
 interface Obstacle {
@@ -74,7 +71,7 @@ const PALETTE = {
 };
 
 // ── State machine ────────────────────────────────────────────────────────────
-type Phase = "idle" | "running" | "stunned" | "question" | "dead";
+type Phase = "idle" | "running" | "stunned" | "dead";
 
 // ── Component ────────────────────────────────────────────────────────────────
 interface DinoRunGamePageProps {
@@ -120,34 +117,18 @@ const DinoRunGamePage = ({
   const timeRef = useRef(0);
   const distScoreRef = useRef(0);
 
-  // ── Question state ───────────────────────────────────────────────────────
-  const questionTimerRef = useRef(0);
-  const usedQRef = useRef<Set<number>>(new Set());
-  const activeQRef = useRef<MQ | null>(null);
-  const postQuestionGraceRef = useRef(0);
-
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(0);
   const [lives, setLives] = useState(3);
   const [highScore, setHighScore] = useState(0);
   const [feedback, setFeedback] = useState<{ txt: string; good: boolean } | null>(null);
-  const [activeQ, setActiveQ] = useState<MQ | null>(null);
   const feedbackRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showFeedback = useCallback((txt: string, good: boolean) => {
     setFeedback({ txt, good });
     if (feedbackRef.current) clearTimeout(feedbackRef.current);
     feedbackRef.current = setTimeout(() => setFeedback(null), 2200);
-  }, []);
-
-  // ── Pick random question ─────────────────────────────────────────────────
-  const pickQuestion = useCallback((): MQ => {
-    let avail = QUESTIONS.map((_, i) => i).filter(i => !usedQRef.current.has(i));
-    if (avail.length === 0) { usedQRef.current = new Set(); avail = QUESTIONS.map((_, i) => i); }
-    const idx = avail[Math.floor(Math.random() * avail.length)];
-    usedQRef.current.add(idx);
-    return QUESTIONS[idx];
   }, []);
 
   // ── Difficulty tier — based on internal distance score (every 1000) ──────
@@ -195,42 +176,11 @@ const DinoRunGamePage = ({
     bgOffRef.current = 0;
     jumpPressedRef.current = false;
     duckPressedRef.current = false;
-    questionTimerRef.current = 0;
-    usedQRef.current = new Set();
-    activeQRef.current = null;
-    postQuestionGraceRef.current = 0;
     setScore(0);
     setTime(0);
     setLives(3);
     setFeedback(null);
-    setActiveQ(null);
   }, []);
-
-  // ── Handle answer ────────────────────────────────────────────────────────
-  const handleAnswer = useCallback((idx: number) => {
-    const q = activeQRef.current;
-    if (!q) return;
-    playPopSound();
-    if (idx === q.correctIndex) {
-      scoreRef.current += q.bonus;
-      setScore(scoreRef.current);
-      showFeedback(`🌟 BENAR! +${q.bonus} skor bonus!`, true);
-    } else {
-      showFeedback(`❌ Salah! Jawaban: ${q.opts[q.correctIndex]}`, false);
-    }
-    activeQRef.current = null;
-    setActiveQ(null);
-    questionTimerRef.current = 0;
-    // Push any obstacle that's dangerously close to the player far left (past the player)
-    obstaclesRef.current = obstaclesRef.current.map(ob => {
-      const tooClose = ob.x < P_X + P_W + 60 && ob.x + ob.w > P_X - 20;
-      return tooClose ? { ...ob, x: P_X - ob.w - 30 } : ob;
-    });
-    // Grace period: collision disabled for 1.5s after answering
-    postQuestionGraceRef.current = 1.5;
-    phaseRef.current = "running";
-    setPhase("running");
-  }, [showFeedback]);
 
   // ── Main loop ───────────────────────────────────────────────────────────
   const loop = useCallback((ts: number) => {
@@ -309,7 +259,7 @@ const DinoRunGamePage = ({
           hitbox.y < oy + oh &&
           hitbox.y + hitbox.h > oy;
 
-        if (collide && postQuestionGraceRef.current <= 0) {
+        if (collide) {
           livesRef.current = Math.max(0, livesRef.current - 1);
           setLives(livesRef.current);
           stunTimerRef.current = 1.2;
@@ -324,11 +274,7 @@ const DinoRunGamePage = ({
       }
     });
 
-    // ── Grace period countdown ──────────────────────────────────────
-    if (postQuestionGraceRef.current > 0) postQuestionGraceRef.current -= dt;
-
     // ── Update player ───────────────────────────────────────────────
-    // Player physics also FREEZE during "question"
     if (ph === "running") {
       if (jumpPressedRef.current && isOnGroundRef.current) {
         pvyRef.current = JUMP_VY;
@@ -363,16 +309,6 @@ const DinoRunGamePage = ({
       }
 
       if (Math.floor(timeRef.current * 2) % 2 === 0) setTime(Math.floor(timeRef.current));
-
-      // ── Bonus question timer ─────────────────────────────────────
-      questionTimerRef.current += dt;
-      if (questionTimerRef.current >= QUESTION_INTERVAL) {
-        const q = pickQuestion();
-        activeQRef.current = q;
-        setActiveQ(q);
-        phaseRef.current = "question";
-        setPhase("question");
-      }
     }
 
     if (ph === "stunned") {
@@ -400,20 +336,6 @@ const DinoRunGamePage = ({
       ctx.fillStyle = i < livesRef.current ? "#FF4E4E" : "rgba(255,255,255,0.2)";
       ctx.font = "16px sans-serif";
       ctx.fillText("♥", CW - 28 - i * 22, 28);
-    }
-
-    // ── Next question countdown badge ────────────────────────────────
-    if (ph === "running" || ph === "stunned") {
-      const remaining = Math.max(0, Math.ceil(QUESTION_INTERVAL - questionTimerRef.current));
-      ctx.fillStyle = "rgba(0,0,0,0.45)";
-      ctx.beginPath();
-      ctx.roundRect(CW / 2 - 52, 8, 104, 26, 7);
-      ctx.fill();
-      ctx.fillStyle = remaining <= 10 ? "#FFD700" : "#aaaaff";
-      ctx.font = `bold 11px monospace`;
-      ctx.textAlign = "center";
-      ctx.fillText(`❓ SOAL dalam ${remaining}s`, CW / 2, 25);
-      ctx.textAlign = "left";
     }
 
     if (ph === "stunned") {
@@ -449,7 +371,7 @@ const DinoRunGamePage = ({
     }
 
     rafRef.current = requestAnimationFrame(loop);
-  }, [isLight, spawnObstacle, showFeedback, pickQuestion]);
+  }, [isLight, spawnObstacle, showFeedback, guruQuiz.isPausedRef]);
 
   // ── Start game ──────────────────────────────────────────────────────────
   const startGame = useCallback(() => {
@@ -533,7 +455,7 @@ const DinoRunGamePage = ({
           { text: <>Tekan <strong className="text-yellow-300">SPASI / ↑</strong> untuk loncat, <strong className="text-yellow-300">↓</strong> untuk tiarap</> },
           { text: <>Hindari kaktus, batu, burung, dan palang rendah</> },
           { text: <>Kamu punya <strong className="text-pink-300">3 nyawa</strong> — setiap kena rintangan kehilangan satu</> },
-          { text: <>Tiap <strong className="text-yellow-300">40 detik</strong> muncul soal bonus untuk menambah skor</> },
+          { text: <>Tiap <strong className="text-yellow-300">25 detik</strong> muncul soal dari guru (5 soal total)</> },
         ]}
       />
     );
@@ -595,37 +517,6 @@ const DinoRunGamePage = ({
             </div>
           )}
 
-          {/* ── Bonus question popup — game is PAUSED while this is open ── */}
-          {phase === "question" && activeQ && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/75 rounded-xl z-20">
-              <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-5 mx-3 shadow-2xl w-full max-w-xs">
-                <div className="text-[10px] text-white/40 font-display text-center mb-1 tracking-widest">
-                  ⏸ GAME PAUSED
-                </div>
-                <div className="text-xs text-yellow-400 font-display mb-2 text-center tracking-widest">
-                  ⭐ SOAL BONUS ⭐
-                </div>
-                <p className="text-white font-bold text-center text-base mb-4 leading-snug">
-                  {activeQ.q}
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {activeQ.opts.map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleAnswer(i)}
-                      className="bg-primary/20 hover:bg-yellow-400/20 border border-border hover:border-yellow-400 text-white font-bold py-3 px-2 rounded-xl text-sm transition-all cursor-pointer active:scale-95"
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-                <p className="text-white/40 text-xs text-center mt-3">
-                  Benar = +{activeQ.bonus} skor bonus 🌟
-                </p>
-              </div>
-            </div>
-          )}
-
           {phase === "dead" && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/70 rounded-xl">
               <div className="text-center px-4">
@@ -661,7 +552,7 @@ const DinoRunGamePage = ({
         </div>
 
         <div className="mt-2 text-center text-white/40 text-xs font-body">
-          Keyboard: SPASI / ↑ loncat &nbsp;·&nbsp; ↓ tiarap &nbsp;·&nbsp; Soal bonus otomatis tiap 40 detik ❓
+          Keyboard: SPASI / ↑ loncat &nbsp;·&nbsp; ↓ tiarap
         </div>
       <GuruQuizOverlay {...guruQuiz} />
       </div>

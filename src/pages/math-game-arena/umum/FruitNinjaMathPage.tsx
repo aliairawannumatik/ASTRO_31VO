@@ -169,7 +169,7 @@ const FruitNinjaMathPage = () => {
   const rafRef = useRef(0);
   const lastRef = useRef(0);
   const phaseRef = useRef<Phase>("idle");
-  const QUIZ_INTERVAL_S = 15 * 60;
+  const QUIZ_INTERVAL_S = 25;
   const guruQuiz = useGuruQuiz(phaseRef, "playing", QUIZ_INTERVAL_S * 1000);
   const sessionStartRef = useRef(0);
   const nextQuizInRef = useRef(QUIZ_INTERVAL_S);
