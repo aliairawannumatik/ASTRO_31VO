@@ -8,7 +8,6 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { pembahasanDasar } from "@/data/peluangPembahasanDasar";
 import { pembahasanOlimpiade } from "@/data/peluangPembahasanOlimpiade";
-import peluangOlimpiadeSoal73Img from "@assets/image_1777291380623.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -895,8 +894,7 @@ const TabelTigaBaris8Kolom = () => {
   const w = cols * cellW + padX * 2;
   const h = rows * cellH + padY * 2;
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[420px] mx-auto my-3 rounded-lg bg-white" xmlns="http://www.w3.org/2000/svg">
-      <rect x={0} y={0} width={w} height={h} fill="#ffffff" />
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[420px] mx-auto my-3" xmlns="http://www.w3.org/2000/svg">
       {Array.from({ length: rows }).map((_, r) =>
         Array.from({ length: cols }).map((_, c) => (
           <rect
@@ -906,8 +904,8 @@ const TabelTigaBaris8Kolom = () => {
             width={cellW}
             height={cellH}
             fill="none"
-            stroke="#1f2937"
-            strokeWidth={1}
+            stroke="#e2e8f0"
+            strokeWidth={1.2}
           />
         ))
       )}
@@ -919,11 +917,56 @@ const TabelTigaBaris8Kolom = () => {
           textAnchor="middle"
           fontSize={14}
           fontFamily="serif"
-          fill="#0f172a"
+          fill="#f8fafc"
         >
           {c + 1}
         </text>
       ))}
+    </svg>
+  );
+};
+
+const TabelLatinSoal73 = () => {
+  const n = 4;
+  const cellW = 40;
+  const cellH = 36;
+  const pad = 8;
+  const w = n * cellW + pad * 2;
+  const h = n * cellH + pad * 2;
+  const data = [
+    [1, 2, 3, 4],
+    [2, 3, 4, 1],
+    [3, 4, 1, 2],
+    [4, 1, 2, 3],
+  ];
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[220px] mx-auto my-3" xmlns="http://www.w3.org/2000/svg">
+      {data.map((row, r) =>
+        row.map((val, c) => (
+          <g key={`${r}-${c}`}>
+            <rect
+              x={pad + c * cellW}
+              y={pad + r * cellH}
+              width={cellW}
+              height={cellH}
+              fill="none"
+              stroke="#e2e8f0"
+              strokeWidth={1.4}
+            />
+            <text
+              x={pad + c * cellW + cellW / 2}
+              y={pad + r * cellH + cellH / 2 + 6}
+              textAnchor="middle"
+              fontSize={18}
+              fontFamily="serif"
+              fontWeight="bold"
+              fill="#f8fafc"
+            >
+              {val}
+            </text>
+          </g>
+        ))
+      )}
     </svg>
   );
 };
@@ -935,8 +978,7 @@ const GridKosong5x5 = () => {
   const w = n * cell + pad * 2;
   const h = n * cell + pad * 2;
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[180px] mx-auto my-3 rounded-lg bg-white" xmlns="http://www.w3.org/2000/svg">
-      <rect x={0} y={0} width={w} height={h} fill="#ffffff" />
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-[180px] mx-auto my-3" xmlns="http://www.w3.org/2000/svg">
       {Array.from({ length: n }).map((_, r) =>
         Array.from({ length: n }).map((_, c) => (
           <rect
@@ -946,8 +988,8 @@ const GridKosong5x5 = () => {
             width={cell}
             height={cell}
             fill="none"
-            stroke="#1f2937"
-            strokeWidth={1.2}
+            stroke="#e2e8f0"
+            strokeWidth={1.4}
           />
         ))
       )}
@@ -961,7 +1003,7 @@ const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
   45: <DiagramTabelSMS />,
   70: <DiagramSurveiInvestasi />,
   71: <TabelTigaBaris8Kolom />,
-  73: <img src={peluangOlimpiadeSoal73Img} alt="Tabel 4x4 Soal 73" className="w-full max-w-[220px] mx-auto my-3 rounded-lg bg-white p-2" />,
+  73: <TabelLatinSoal73 />,
   87: <img src="/peluang_olimp_87.png" alt="Diagram Soal 87" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
   90: <GridKosong5x5 />,
 };
