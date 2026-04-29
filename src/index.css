@@ -1379,3 +1379,310 @@
 
 /* ── KaTeX math text: deep forest green so formulas stand out ── */
 .theme-forest .katex { color: #14532d; }
+
+/* ════════════════════════════════════════════════
+   THEME SUNSET — SENJA MERAH — GLOBAL OVERRIDES
+   (light-base theme; .light-mode is also active.
+    These rules paint the entire app in a dramatic
+    purple → pink → orange → amber sunset palette)
+   ════════════════════════════════════════════════ */
+
+/* ── Base CSS variables: shift towards warm sunset tones ── */
+.theme-sunset {
+  --background: 24 96% 95%;
+  --foreground: 280 50% 12%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 280 50% 12%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 280 50% 12%;
+
+  --primary: 24 95% 53%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 350 80% 90%;
+  --secondary-foreground: 280 50% 12%;
+
+  --muted: 30 50% 92%;
+  --muted-foreground: 0 35% 28%;
+
+  --accent: 340 82% 52%;
+  --accent-foreground: 0 0% 100%;
+
+  --border: 24 90% 78%;
+  --input: 24 80% 88%;
+  --ring: 24 95% 53%;
+
+  --neon-cyan: 24 95% 50%;
+  --neon-magenta: 340 82% 52%;
+  --neon-green: 45 95% 55%;
+  --space-deep: 280 60% 10%;
+  --space-mid: 320 70% 25%;
+}
+
+/* ── Background gradient: every page that uses gradient-space
+       (the default galaxy bg) now shows the dramatic sunset gradient ── */
+.theme-sunset .gradient-space {
+  background: linear-gradient(180deg,
+    #1a0a2e 0%, #4c1d95 12%, #6b21a8 22%, #9d174d 38%,
+    #be185d 50%, #c2410c 65%, #ea580c 78%, #f97316 90%, #fbbf24 100%) !important;
+}
+.theme-sunset body {
+  background: #1a0a2e;
+}
+
+/* ── Text glows: warm pink/orange-tinted shadows for sunset mood ── */
+.theme-sunset .text-glow-cyan {
+  text-shadow:
+    0 0 10px rgba(249,115,22,0.55),
+    0 0 22px rgba(251,191,36,0.30),
+    0 1px 3px rgba(67,20,7,0.40) !important;
+}
+.theme-sunset .text-glow-magenta {
+  text-shadow:
+    0 0 10px rgba(236,72,153,0.55),
+    0 0 22px rgba(190,24,93,0.30),
+    0 1px 3px rgba(67,20,7,0.40) !important;
+}
+.theme-sunset .text-glow-accent {
+  text-shadow:
+    0 0 8px rgba(249,115,22,0.55),
+    0 0 18px rgba(251,191,36,0.30),
+    0 1px 3px rgba(67,20,7,0.40) !important;
+}
+
+/* ── Box-glow effects: warm pink/orange instead of cyan/magenta ── */
+.theme-sunset .box-glow-cyan {
+  box-shadow:
+    0 0 14px rgba(249,115,22,0.40),
+    0 0 36px rgba(251,191,36,0.18),
+    0 4px 16px rgba(67,20,7,0.10) !important;
+}
+.theme-sunset .box-glow-magenta {
+  box-shadow:
+    0 0 14px rgba(236,72,153,0.45),
+    0 0 36px rgba(190,24,93,0.20),
+    0 4px 16px rgba(67,20,7,0.10) !important;
+}
+
+/* ── Cool-blue text accents (already shifted by .light-mode) →
+       remap to warm sunset reds / oranges / pinks / ambers ── */
+.theme-sunset .text-cyan-100,
+.theme-sunset .text-cyan-200,
+.theme-sunset .text-cyan-300,
+.theme-sunset .text-cyan-400,
+.theme-sunset .text-cyan-500   { color: #c2410c !important; }
+.theme-sunset .text-sky-100,
+.theme-sunset .text-sky-200,
+.theme-sunset .text-sky-300,
+.theme-sunset .text-sky-400    { color: #c2410c !important; }
+.theme-sunset .text-blue-100,
+.theme-sunset .text-blue-200,
+.theme-sunset .text-blue-300,
+.theme-sunset .text-blue-400,
+.theme-sunset .text-blue-500   { color: #9a3412 !important; }
+.theme-sunset .text-indigo-100,
+.theme-sunset .text-indigo-200,
+.theme-sunset .text-indigo-300,
+.theme-sunset .text-indigo-400 { color: #831843 !important; }
+.theme-sunset .text-violet-100,
+.theme-sunset .text-violet-200,
+.theme-sunset .text-violet-300,
+.theme-sunset .text-violet-400 { color: #9d174d !important; }
+.theme-sunset .text-purple-100,
+.theme-sunset .text-purple-200,
+.theme-sunset .text-purple-300,
+.theme-sunset .text-purple-400 { color: #be185d !important; }
+.theme-sunset .text-fuchsia-100,
+.theme-sunset .text-fuchsia-200,
+.theme-sunset .text-fuchsia-300,
+.theme-sunset .text-fuchsia-400 { color: #be185d !important; }
+.theme-sunset .text-teal-300,
+.theme-sunset .text-teal-400   { color: #c2410c !important; }
+.theme-sunset .text-green-300,
+.theme-sunset .text-green-400  { color: #b45309 !important; }
+.theme-sunset .text-green-500  { color: #9a3412 !important; }
+.theme-sunset .text-emerald-300,
+.theme-sunset .text-emerald-400 { color: #92400e !important; }
+.theme-sunset .text-lime-300,
+.theme-sunset .text-lime-400   { color: #854d0e !important; }
+
+/* ── Already-warm tones: deepen for legibility ── */
+.theme-sunset .text-pink-200,
+.theme-sunset .text-pink-300,
+.theme-sunset .text-pink-400   { color: #be185d !important; }
+.theme-sunset .text-rose-200,
+.theme-sunset .text-rose-300,
+.theme-sunset .text-rose-400   { color: #be123c !important; }
+.theme-sunset .text-red-300,
+.theme-sunset .text-red-400,
+.theme-sunset .text-red-500    { color: #b91c1c !important; }
+.theme-sunset .text-orange-200,
+.theme-sunset .text-orange-300,
+.theme-sunset .text-orange-400,
+.theme-sunset .text-orange-500 { color: #c2410c !important; }
+.theme-sunset .text-amber-200,
+.theme-sunset .text-amber-300,
+.theme-sunset .text-amber-400,
+.theme-sunset .text-amber-500  { color: #b45309 !important; }
+.theme-sunset .text-yellow-200,
+.theme-sunset .text-yellow-300,
+.theme-sunset .text-yellow-400,
+.theme-sunset .text-yellow-500 { color: #854d0e !important; }
+
+/* ── Primary / accent / secondary semantic text ── */
+.theme-sunset .text-primary           { color: #c2410c !important; }
+.theme-sunset .text-accent            { color: #be185d !important; }
+.theme-sunset .text-secondary         { color: #9d174d !important; }
+.theme-sunset .text-muted-foreground  { color: #7c2d12 !important; }
+
+/* ── Card / container backgrounds: blue/violet/cool tints
+       light-mode values → warm peach / rose / amber tints ── */
+.theme-sunset .bg-cyan-950\/40,
+.theme-sunset .bg-cyan-950\/50,
+.theme-sunset .bg-cyan-950\/60,
+.theme-sunset .bg-cyan-950\/70,
+.theme-sunset .bg-cyan-950     { background-color: rgba(255,237,213,0.85) !important; }
+.theme-sunset .bg-blue-950\/50,
+.theme-sunset .bg-blue-950\/60 { background-color: rgba(255,228,230,0.85) !important; }
+.theme-sunset .bg-violet-950,
+.theme-sunset .bg-violet-950\/40,
+.theme-sunset .bg-violet-950\/50,
+.theme-sunset .bg-violet-950\/60,
+.theme-sunset .bg-violet-950\/70 { background-color: rgba(252,231,243,0.88) !important; }
+.theme-sunset .bg-purple-950\/40,
+.theme-sunset .bg-purple-950\/50,
+.theme-sunset .bg-purple-950\/60 { background-color: rgba(252,231,243,0.88) !important; }
+.theme-sunset .bg-indigo-950\/50,
+.theme-sunset .bg-indigo-950\/60 { background-color: rgba(255,228,230,0.85) !important; }
+
+/* ── Already-warm card BGs: deepen the saturation a touch ── */
+.theme-sunset .bg-orange-950\/40,
+.theme-sunset .bg-orange-950\/50,
+.theme-sunset .bg-orange-950\/60,
+.theme-sunset .bg-orange-950\/70,
+.theme-sunset .bg-orange-950   { background-color: rgba(255,237,213,0.92) !important; }
+.theme-sunset .bg-amber-950\/50,
+.theme-sunset .bg-amber-950\/60 { background-color: rgba(254,243,199,0.92) !important; }
+.theme-sunset .bg-yellow-950\/50,
+.theme-sunset .bg-yellow-950\/60 { background-color: rgba(254,249,195,0.92) !important; }
+.theme-sunset .bg-red-950\/50,
+.theme-sunset .bg-red-950\/60  { background-color: rgba(254,226,226,0.92) !important; }
+.theme-sunset .bg-green-950\/50,
+.theme-sunset .bg-green-950\/60 { background-color: rgba(255,237,213,0.85) !important; }
+
+/* ── White / overlay tints: cream-on-peach to feel sun-warmed ── */
+.theme-sunset .bg-card\/80     { background-color: rgba(255,247,237,0.92) !important; }
+.theme-sunset .bg-card\/90     { background-color: rgba(255,247,237,0.96) !important; }
+.theme-sunset .bg-\[#141d35\]  { background-color: #fff7ed !important; }
+.theme-sunset .bg-\[#141d35\]\/90 { background-color: rgba(255,247,237,0.92) !important; }
+.theme-sunset .bg-\[#1a2040\]  { background-color: #fef3c7 !important; }
+.theme-sunset .bg-\[#252d50\]  { background-color: #fde68a !important; }
+.theme-sunset .bg-background\/40 { background-color: rgba(255,247,237,0.55) !important; }
+.theme-sunset .bg-background\/60 { background-color: rgba(255,247,237,0.78) !important; }
+
+/* ── Borders: cool tones → warm sunset reds / oranges / pinks ── */
+.theme-sunset .border-border        { border-color: #fed7aa !important; }
+.theme-sunset .border-cyan-700\/50,
+.theme-sunset .border-cyan-600\/40,
+.theme-sunset .border-cyan-500\/30,
+.theme-sunset .border-cyan-500      { border-color: rgba(234,88,12,0.45) !important; }
+.theme-sunset .border-blue-500,
+.theme-sunset .border-blue-500\/40,
+.theme-sunset .border-blue-600\/40  { border-color: rgba(194,65,12,0.45) !important; }
+.theme-sunset .border-violet-500,
+.theme-sunset .border-violet-500\/30,
+.theme-sunset .border-violet-500\/40,
+.theme-sunset .border-violet-600\/30,
+.theme-sunset .border-violet-600\/40,
+.theme-sunset .border-violet-700\/50 { border-color: rgba(190,24,93,0.45) !important; }
+.theme-sunset .border-purple-500,
+.theme-sunset .border-purple-500\/40,
+.theme-sunset .border-purple-600\/40 { border-color: rgba(190,24,93,0.45) !important; }
+.theme-sunset .border-indigo-500\/40,
+.theme-sunset .border-indigo-600\/40 { border-color: rgba(157,23,77,0.45) !important; }
+.theme-sunset .border-fuchsia-500,
+.theme-sunset .border-fuchsia-500\/40,
+.theme-sunset .border-pink-500,
+.theme-sunset .border-pink-500\/40,
+.theme-sunset .border-rose-500\/40  { border-color: rgba(190,24,93,0.50) !important; }
+.theme-sunset .border-orange-700\/40,
+.theme-sunset .border-orange-600\/40,
+.theme-sunset .border-amber-500\/40,
+.theme-sunset .border-amber-500\/70,
+.theme-sunset .border-yellow-600\/40 { border-color: rgba(234,88,12,0.55) !important; }
+.theme-sunset .border-red-600\/40   { border-color: rgba(220,38,38,0.50) !important; }
+.theme-sunset .border-green-600\/40 { border-color: rgba(180,83,9,0.40) !important; }
+.theme-sunset .border-accent\/60    { border-color: rgba(190,24,93,0.55) !important; }
+.theme-sunset .border-accent\/50    { border-color: rgba(190,24,93,0.45) !important; }
+.theme-sunset .border-primary\/60   { border-color: rgba(234,88,12,0.55) !important; }
+
+/* ── Tailwind gradient color stops (from-/to-/via-) → warm sunset family
+       so colorful section headers / buttons follow the sunset mood ── */
+.theme-sunset .from-violet-500   { --tw-gradient-from: #be185d var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-violet-500     { --tw-gradient-to: #be185d var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-violet-600   { --tw-gradient-from: #9d174d var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-violet-600     { --tw-gradient-to: #9d174d var(--tw-gradient-to-position) !important; }
+.theme-sunset .via-violet-500    { --tw-gradient-via: #be185d var(--tw-gradient-via-position) !important; }
+.theme-sunset .from-purple-500   { --tw-gradient-from: #be185d var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-purple-500     { --tw-gradient-to: #be185d var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-purple-600   { --tw-gradient-from: #9d174d var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-purple-600     { --tw-gradient-to: #9d174d var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-fuchsia-500  { --tw-gradient-from: #ec4899 var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-fuchsia-500    { --tw-gradient-to: #ec4899 var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-pink-500     { --tw-gradient-from: #ec4899 var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-pink-500       { --tw-gradient-to: #ec4899 var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-rose-500     { --tw-gradient-from: #f43f5e var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-rose-500       { --tw-gradient-to: #f43f5e var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-indigo-500   { --tw-gradient-from: #be185d var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-indigo-500     { --tw-gradient-to: #be185d var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-blue-500     { --tw-gradient-from: #ea580c var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-blue-500       { --tw-gradient-to: #ea580c var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-blue-600     { --tw-gradient-from: #c2410c var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-blue-600       { --tw-gradient-to: #c2410c var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-cyan-500     { --tw-gradient-from: #f97316 var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-cyan-500       { --tw-gradient-to: #f97316 var(--tw-gradient-to-position) !important; }
+.theme-sunset .from-green-500    { --tw-gradient-from: #f59e0b var(--tw-gradient-from-position) !important; }
+.theme-sunset .to-green-500      { --tw-gradient-to: #f59e0b var(--tw-gradient-to-position) !important; }
+
+/* ── Tinted shadow utilities used for floating cards ── */
+.theme-sunset [class*="shadow-violet"],
+.theme-sunset [class*="shadow-purple"],
+.theme-sunset [class*="shadow-fuchsia"],
+.theme-sunset [class*="shadow-pink"],
+.theme-sunset [class*="shadow-indigo"],
+.theme-sunset [class*="shadow-blue"],
+.theme-sunset [class*="shadow-cyan"],
+.theme-sunset [class*="shadow-green"] {
+  --tw-shadow-color: rgba(234,88,12,0.40) !important;
+  --tw-shadow: var(--tw-shadow-colored) !important;
+}
+
+/* ── Animated CTA button pulse: warm orange/pink glow ── */
+.theme-sunset .animate-button-pulse {
+  animation: button-pulse-grow-sunset 1.2s ease-in-out infinite;
+}
+@keyframes button-pulse-grow-sunset {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 20px hsl(24 95% 55% / 0.55); }
+  50%      { transform: scale(1.15); box-shadow: 0 0 40px hsl(340 82% 55% / 0.85); }
+}
+
+/* ── Page navigation bar: cream-on-peach with rose border ── */
+.theme-sunset nav,
+.theme-sunset [class*="PageNavigation"] {
+  background-color: rgba(255,247,237,0.92) !important;
+  border-color: rgba(234,88,12,0.30) !important;
+}
+
+/* ── Dividers ── */
+.theme-sunset hr,
+.theme-sunset .divide-white\/10 > * + * { border-color: #fed7aa !important; }
+
+/* ── Table headers in sunset mode ── */
+.theme-sunset thead tr   { background-color: #ffedd5 !important; }
+.theme-sunset thead th   { color: #9a3412 !important; }
+.theme-sunset tbody tr:nth-child(even) { background-color: rgba(255,237,213,0.55) !important; }
+
+/* ── KaTeX math text: deep sunset burgundy so formulas stand out ── */
+.theme-sunset .katex { color: #7c2d12; }
