@@ -93,6 +93,44 @@ const FrequencyTable = ({
   );
 };
 
+const HorizontalFrequencyTable = ({
+  title,
+  rowLabels,
+  data,
+}: {
+  title?: string;
+  rowLabels: [string, string];
+  data: { col: string | number; freq: string | number }[];
+}) => {
+  return (
+    <div className="my-3 rounded-xl border border-cyan-400/30 bg-white/5 overflow-hidden">
+      {title && (
+        <div className="px-3 py-2 bg-cyan-500/15 border-b border-cyan-400/20 text-center">
+          <span className="font-display text-xs text-cyan-200 font-bold">{title}</span>
+        </div>
+      )}
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs font-body text-white/85 border-collapse">
+          <tbody>
+            <tr className="bg-white/5 border-b border-white/10">
+              <th className="px-3 py-2 text-center font-display text-cyan-300 font-semibold border-r border-white/10 whitespace-nowrap">{rowLabels[0]}</th>
+              {data.map((d, i) => (
+                <td key={i} className="px-3 py-2 text-center font-semibold border-r border-white/10 last:border-r-0">{d.col}</td>
+              ))}
+            </tr>
+            <tr>
+              <th className="px-3 py-2 text-center font-display text-cyan-300 font-semibold border-r border-white/10 whitespace-nowrap">{rowLabels[1]}</th>
+              {data.map((d, i) => (
+                <td key={i} className="px-3 py-2 text-center border-r border-white/10 last:border-r-0">{d.freq}</td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
 const BarChart = ({
   title,
   data,
@@ -342,19 +380,18 @@ const renderDasarVisual = (no: number): React.ReactNode => {
       );
     case 4:
       return (
-        <FrequencyTable
+        <HorizontalFrequencyTable
           title="Tabel Frekuensi Nilai Siswa"
-          headers={["Nilai", "Frekuensi"]}
-          showTotal={false}
-          rows={[
-            { label: 3, value: 2 },
-            { label: 4, value: 5 },
-            { label: 5, value: 5 },
-            { label: 6, value: 3 },
-            { label: 7, value: 4 },
-            { label: 8, value: 4 },
-            { label: 9, value: 4 },
-            { label: 10, value: 3 },
+          rowLabels={["Nilai", "Frekuensi"]}
+          data={[
+            { col: 3, freq: 2 },
+            { col: 4, freq: 5 },
+            { col: 5, freq: 5 },
+            { col: 6, freq: 3 },
+            { col: 7, freq: 4 },
+            { col: 8, freq: 4 },
+            { col: 9, freq: 4 },
+            { col: 10, freq: 3 },
           ]}
         />
       );
