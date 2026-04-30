@@ -1042,10 +1042,10 @@ const BrickBreakerPage = () => {
         ctx.shadowBlur = 14; ctx.shadowColor = `hsl(${hue}, 100%, 55%)`;
         ctx.fillText("MATH ARENA × NUMATIK AI", CW / 2, CH / 2 - 130);
 
-        ctx.font = "bold 34px 'Orbitron', monospace";
+        ctx.font = "bold 24px 'Orbitron', monospace";
         ctx.fillStyle = `hsl(${(hue + 60) % 360}, 100%, 80%)`;
         ctx.shadowBlur = 32; ctx.shadowColor = `hsl(${(hue + 60) % 360}, 100%, 60%)`;
-        ctx.fillText("☄️ PECAH JAWABAN!", CW / 2, CH / 2 - 72);
+        ctx.fillText("☄️ METEOR PANTUL NUMATIK", CW / 2, CH / 2 - 72);
 
         ctx.font = "13px 'Orbitron', monospace";
         ctx.fillStyle = "rgba(255,255,255,0.8)";
@@ -1119,7 +1119,7 @@ const BrickBreakerPage = () => {
         >
           🏠
         </button>
-        <span className="font-display text-sm text-accent">🧱 Pecah Jawaban</span>
+        <span className="font-display text-sm text-accent">☄️ Meteor Pantul NUMATIK</span>
         <button
           onClick={() => { playPopSound(); navigate(-1); }}
           className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"

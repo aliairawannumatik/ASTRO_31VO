@@ -108,10 +108,10 @@ const games = [
     icon: <Hammer className="w-7 h-7 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Pecah Jawaban",
-    emoji: "🧱",
+    label: "Meteor Pantul NUMATIK",
+    emoji: "☄️",
     path: "/math-game-arena/umum/pecah-jawaban",
-    desc: "Pantulkan bola untuk menghancurkan blok jawaban benar!",
+    desc: "Pantulkan meteor untuk menghancurkan kristal jawaban benar!",
     icon: <Disc className="w-7 h-7 text-red-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {

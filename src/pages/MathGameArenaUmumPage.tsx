@@ -88,10 +88,10 @@ const games = [
     badge: "BARU",
   },
   {
-    label: "Pecah Jawaban!",
-    emoji: "🧱",
+    label: "Meteor Pantul NUMATIK",
+    emoji: "☄️",
     path: "/math-game-arena/umum/pecah-jawaban",
-    desc: "Game Breakout! Arahkan bola ke bata yang membawa jawaban benar untuk menghancurkannya!",
+    desc: "Game Meteor! Pantulkan meteor ke kristal yang membawa jawaban benar untuk menghancurkannya!",
     icon: <Swords className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
