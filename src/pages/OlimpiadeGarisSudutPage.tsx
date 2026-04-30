@@ -21,7 +21,6 @@ import gambar12 from "@/assets/Gambar_12_Sudut_Saling_sepihak_1773289509182.png"
 import gambar13 from "@/assets/Gambar_13_Jumlah_sudut_pada_segitiga_1773289509182.png";
 import gambar14 from "@/assets/Gambar_14_Sudut-sudut_pada_segitiga_1773289509182.png";
 import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.png";
-import gambar16 from "@/assets/Gambar_16_SOAL_1773289509183.png";
 import gambar17 from "@/assets/Gambar_17_SOAL_1773289509183.png";
 import gambar18 from "@/assets/Gambar_18_SOAL_1773289509184.png";
 import gambar19 from "@/assets/Gambar_19_SOAL_1773289509184.png";
@@ -324,11 +323,70 @@ Keterangan Variabel:
   }
 ];
 
-const latihanDasar = [
+// ── Inline SVG illustration for Latihan Dasar Soal 1 ─────────────────────────
+// Transparent background; light strokes & text so it shows on the dark theme.
+const Soal1SVG = () => (
+  <svg
+    viewBox="0 0 420 220"
+    className="w-full max-w-md mx-auto"
+    style={{ background: "transparent" }}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Horizontal line passing through N – K – L */}
+    <line x1="20" y1="175" x2="400" y2="175" stroke="#ffffff" strokeWidth="2" />
+    {/* Triangle sides KM and ML */}
+    <line x1="140" y1="175" x2="240" y2="35" stroke="#ffffff" strokeWidth="2" />
+    <line x1="240" y1="35"  x2="380" y2="175" stroke="#ffffff" strokeWidth="2" />
+
+    {/* Angle arcs (small accents to show the 3 angles) */}
+    {/* Angle at M (apex) — opens downward, ~50° */}
+    <path d="M 226,55 A 22,22 0 0,0 254,55" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* Angle at K — opens to the upper-right */}
+    <path d="M 168,175 A 28,28 0 0,0 158,154" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* Angle at L — opens to the upper-left */}
+    <path d="M 352,175 A 28,28 0 0,0 358,154" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+
+    {/* Vertex dots (red) */}
+    <circle cx="40"  cy="175" r="3.5" fill="#ef4444" />
+    <circle cx="140" cy="175" r="3.5" fill="#ef4444" />
+    <circle cx="240" cy="35"  r="3.5" fill="#ef4444" />
+    <circle cx="380" cy="175" r="3.5" fill="#ef4444" />
+
+    {/* Vertex labels (cyan italic serif, like other figures in this file) */}
+    <text x="32"  y="168" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">N</text>
+    <text x="132" y="200" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">K</text>
+    <text x="385" y="200" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">L</text>
+    <text x="232" y="25"  fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">M</text>
+
+    {/* Angle measurements */}
+    {/* 50° at M (just below the apex, inside the triangle) */}
+    <text x="240" y="80" textAnchor="middle" fill="#fbbf24" fontSize="13" fontFamily="serif">
+      50°
+    </text>
+    {/* (6x + 20)° at K — inside, slightly up & right of K */}
+    <text x="186" y="167" fill="#fbbf24" fontSize="13" fontFamily="serif">
+      (6<tspan fontStyle="italic">x</tspan> + 20)°
+    </text>
+    {/* (4x)° at L — inside, slightly up & left of L */}
+    <text x="320" y="167" textAnchor="end" fill="#fbbf24" fontSize="13" fontFamily="serif">
+      (4<tspan fontStyle="italic">x</tspan>)°
+    </text>
+  </svg>
+);
+
+type SoalImage = string | ReactNode | null;
+
+const latihanDasar: {
+  no: number;
+  soal: string;
+  image: SoalImage;
+  imageCaption: string;
+  options: string[];
+}[] = [
   {
     no: 1,
     soal: "Perhatikan gambar.\n\nBesar $\\angle KLM$ adalah …",
-    image: gambar16,
+    image: <Soal1SVG />,
     imageCaption: "Gambar Soal 1",
     options: ["A. $15°$", "B. $30°$", "C. $42°$", "D. $60°$"]
   },
@@ -1045,11 +1103,15 @@ const OlimpiadeGarisSudutPage = () => {
                 </div>
                 {soal.image && (
                   <div className="my-3 flex flex-col items-center">
-                    <img
-                      src={soal.image}
-                      alt={soal.imageCaption}
-                      className="max-w-full rounded-lg border border-border/40 bg-white/5"
-                    />
+                    {typeof soal.image === "string" ? (
+                      <img
+                        src={soal.image}
+                        alt={soal.imageCaption}
+                        className="max-w-full rounded-lg border border-border/40 bg-white/5"
+                      />
+                    ) : (
+                      <div className="w-full max-w-md">{soal.image}</div>
+                    )}
                   </div>
                 )}
                 {soal.options.length > 0 && (
