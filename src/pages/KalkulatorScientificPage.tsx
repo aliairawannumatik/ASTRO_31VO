@@ -250,6 +250,7 @@ const KalkulatorScientificPage = () => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [cursorPosition, setCursorPosition] = useState(0);
+  const [isLivePreview, setIsLivePreview] = useState(false);
   const displayRef = useRef<HTMLDivElement>(null);
 
   // Refs that always hold the latest values, used inside event handlers
@@ -289,7 +290,30 @@ const KalkulatorScientificPage = () => {
     setDisplayExpression("");
     setResult("0");
     setCursorPosition(0);
+    setIsLivePreview(false);
   };
+
+  // Live evaluation: compute result as the user types, even before "=" is pressed.
+  // Errors from incomplete/invalid expressions are silenced — the previous result
+  // simply remains until the expression becomes valid again.
+  useEffect(() => {
+    if (!expression.trim()) {
+      setResult("0");
+      setIsLivePreview(false);
+      return;
+    }
+    try {
+      let mathExpr = toMathJsExpression(expression, angleMode);
+      mathExpr = mathExpr.replace(/Ans/g, lastAnswer.toString());
+      const value = evaluate(mathExpr);
+      const numValue = typeof value === "number" ? value : Number(value);
+      if (!Number.isFinite(numValue)) return;
+      setResult(formatResult(numValue, displayMode));
+      setIsLivePreview(true);
+    } catch {
+      // ignore — keep showing the last valid result while user is still typing
+    }
+  }, [expression, angleMode, displayMode, lastAnswer]);
 
   const handleDelete = () => {
     playPopSound();
@@ -402,6 +426,7 @@ const KalkulatorScientificPage = () => {
       const formatted = formatResult(numValue, displayMode);
       setResult(formatted);
       setLastAnswer(numValue);
+      setIsLivePreview(false);
       
       setHistory(prev => [
         { 
@@ -607,16 +632,16 @@ const KalkulatorScientificPage = () => {
             >
               {renderExpression(expression, cursorPosition, (pos) => setCursorPosition(pos))}
             </div>
-            {/* Result */}
-            <div className="text-4xl text-white font-bold flex items-center justify-end gap-1">
+            {/* Result — live preview shown in cyan while typing, white after "=" */}
+            <div className={`text-4xl font-bold flex items-center justify-end gap-1 ${isLivePreview ? "text-cyan-300/80" : "text-white"}`}>
               {displayMode === "FRAC" && result.includes("/") ? (
                 <>
-                  <span className="text-white/50 mr-1">=</span>
+                  <span className={`mr-1 ${isLivePreview ? "text-cyan-300/50" : "text-white/50"}`}>=</span>
                   {renderFractionDisplay(result)}
                 </>
               ) : (
                 <>
-                  {expression && <span className="text-white/50">=</span>}
+                  {expression && <span className={isLivePreview ? "text-cyan-300/50" : "text-white/50"}>=</span>}
                   <span className="ml-1">{result}</span>
                 </>
               )}
