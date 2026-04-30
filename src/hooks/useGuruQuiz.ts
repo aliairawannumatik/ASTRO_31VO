@@ -35,6 +35,9 @@ export interface UseGuruQuizReturn {
   showCelebration: boolean;
   onDismissCelebration: () => void;
   lastResult: "correct" | "wrong" | null;
+  /** Seconds remaining until the next question is shown. Frozen while a question
+   *  is open or the game is not in the playing phase. */
+  secondsUntilNext: number;
 }
 
 export function useGuruQuiz(
@@ -51,25 +54,34 @@ export function useGuruQuiz(
   const [questionNumber, setQuestionNumber] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
   const [lastResult, setLastResult] = useState<"correct" | "wrong" | null>(null);
+  const [secondsUntilNext, setSecondsUntilNext] = useState<number>(Math.ceil(intervalMs / 1000));
 
   const internal = useRef({
     questionCount: 0,
     guruScore: 0,
-    sessionStart: 0,
     prevPhase: "",
-    triggered: [false, false, false, false, false] as boolean[],
+    /** Timestamp (ms) at which the next question should fire. */
+    nextTriggerAt: 0,
+    /** Timestamp recorded when the game leaves the playing phase, so we can
+     *  shift `nextTriggerAt` forward by the paused duration on resume. */
+    pauseStart: 0,
     usedIndices: [] as number[],
     active: false,
   });
+
+  // Mirror `secondsUntilNext` into a ref so the interval doesn't need to
+  // re-subscribe on every change.
+  const secondsUntilNextRef = useRef(secondsUntilNext);
+  useEffect(() => { secondsUntilNextRef.current = secondsUntilNext; }, [secondsUntilNext]);
 
   const questionPool = customQuestions && customQuestions.length > 0 ? customQuestions : GURU_QUESTIONS;
 
   const pickQuestion = useCallback((): GuruQuestion => {
     const used = internal.current.usedIndices;
-    let idx: number;
     if (used.length >= questionPool.length) {
       internal.current.usedIndices = [];
     }
+    let idx: number;
     do {
       idx = Math.floor(Math.random() * questionPool.length);
     } while (internal.current.usedIndices.includes(idx));
@@ -81,16 +93,19 @@ export function useGuruQuiz(
     const timer = setInterval(() => {
       const phase = phaseRef.current;
       const ref = internal.current;
+      const now = Date.now();
 
       const isPlaying = Array.isArray(playingPhase) ? playingPhase.includes(phase) : phase === playingPhase;
       const wasPlaying = Array.isArray(playingPhase) ? playingPhase.includes(ref.prevPhase) : ref.prevPhase === playingPhase;
+
+      // Transition: idle → playing (game just started)
       if (!wasPlaying && isPlaying) {
         ref.questionCount = 0;
         ref.guruScore = 0;
-        ref.sessionStart = Date.now();
-        ref.triggered = [false, false, false, false, false];
         ref.usedIndices = [];
         ref.active = true;
+        ref.nextTriggerAt = now + intervalMs;
+        ref.pauseStart = 0;
         isPausedRef.current = false;
         setIsVisible(false);
         setCurrentQuestion(null);
@@ -98,32 +113,58 @@ export function useGuruQuiz(
         setQuestionNumber(0);
         setShowCelebration(false);
         setLastResult(null);
+        setSecondsUntilNext(Math.ceil(intervalMs / 1000));
       }
+
+      // Transition: playing → not playing (game paused or ended)
+      if (wasPlaying && !isPlaying && ref.pauseStart === 0) {
+        ref.pauseStart = now;
+      }
+
+      // Transition: not playing → playing again (game resumed) — shift the
+      // remaining countdown forward so the player gets the time they had left.
+      if (!wasPlaying && isPlaying && ref.pauseStart !== 0) {
+        const pausedDuration = now - ref.pauseStart;
+        ref.nextTriggerAt += pausedDuration;
+        ref.pauseStart = 0;
+      }
+
       ref.prevPhase = phase;
 
       if (!ref.active) return;
-      if (!isPlaying) return;
-      if (isPausedRef.current) return;
-      if (ref.questionCount >= MAX_QUESTIONS) return;
 
-      const elapsed = Date.now() - ref.sessionStart;
-      for (let i = 0; i < MAX_QUESTIONS; i++) {
-        if (!ref.triggered[i] && elapsed >= (i + 1) * intervalMs) {
-          ref.triggered[i] = true;
-          ref.questionCount += 1;
-          const q = pickQuestion();
-          isPausedRef.current = true;
-          setCurrentQuestion(q);
-          setQuestionNumber(ref.questionCount);
-          setLastResult(null);
-          setIsVisible(true);
-          break;
-        }
+      // While a question is on screen, freeze the countdown display.
+      if (isPausedRef.current) return;
+
+      // While the game is paused (not playing), don't decrement either.
+      if (!isPlaying) return;
+
+      // No more questions to fire this session.
+      if (ref.questionCount >= MAX_QUESTIONS) {
+        if (secondsUntilNextRef.current !== 0) setSecondsUntilNext(0);
+        return;
       }
-    }, 500);
+
+      const remainingMs = Math.max(0, ref.nextTriggerAt - now);
+      const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000));
+      if (secondsUntilNextRef.current !== remainingSec) {
+        setSecondsUntilNext(remainingSec);
+      }
+
+      // Time to fire the next question.
+      if (now >= ref.nextTriggerAt) {
+        ref.questionCount += 1;
+        const q = pickQuestion();
+        isPausedRef.current = true;
+        setCurrentQuestion(q);
+        setQuestionNumber(ref.questionCount);
+        setLastResult(null);
+        setIsVisible(true);
+      }
+    }, 250);
 
     return () => clearInterval(timer);
-  }, [phaseRef, playingPhase, pickQuestion]);
+  }, [phaseRef, playingPhase, pickQuestion, intervalMs]);
 
   const handleAnswer = useCallback(
     (idx: number) => {
@@ -137,6 +178,9 @@ export function useGuruQuiz(
       setTimeout(() => {
         setIsVisible(false);
         setCurrentQuestion(null);
+        // Restart the countdown only AFTER the player answered the question.
+        internal.current.nextTriggerAt = Date.now() + intervalMs;
+        setSecondsUntilNext(Math.ceil(intervalMs / 1000));
         isPausedRef.current = false;
         if (internal.current.questionCount >= MAX_QUESTIONS) {
           internal.current.active = false;
@@ -144,7 +188,7 @@ export function useGuruQuiz(
         }
       }, 1200);
     },
-    [currentQuestion]
+    [currentQuestion, intervalMs]
   );
 
   const onDismissCelebration = useCallback(() => {
@@ -162,5 +206,6 @@ export function useGuruQuiz(
     showCelebration,
     onDismissCelebration,
     lastResult,
+    secondsUntilNext,
   };
 }

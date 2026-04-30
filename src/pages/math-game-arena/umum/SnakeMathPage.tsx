@@ -89,7 +89,6 @@ const SnakeMathPage = ({
   const [best, setBest] = useState(0);
   const [snakeLen, setSnakeLen] = useState(INIT_LENGTH);
   const [feedback, setFeedback] = useState<{ txt: string; good: boolean } | null>(null);
-  const [nextQuizIn, setNextQuizIn] = useState<number>(Math.ceil(quizIntervalMs / 1000));
   const fbTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showFeedback = (txt: string, good: boolean) => {
@@ -165,7 +164,6 @@ const SnakeMathPage = ({
     pauseStartRef.current = 0;
     setScore(0);
     setFeedback(null);
-    setNextQuizIn(Math.ceil(quizIntervalMs / 1000));
     bgStarsRef.current = Array.from({ length: 60 }, () => ({
       x: Math.random() * CW, y: Math.random() * CH, r: 0.5 + Math.random() * 1.2,
       t: Math.random() * Math.PI * 2, s: 0.8 + Math.random() * 1.5,
@@ -173,7 +171,7 @@ const SnakeMathPage = ({
     initSnake();
     placeFoods();
     setSnakeLen(INIT_LENGTH);
-  }, [initSnake, placeFoods, quizIntervalMs]);
+  }, [initSnake, placeFoods]);
 
   // ── Step ─────────────────────────────────────────────────────────────
   const step = useCallback(() => {
@@ -556,25 +554,11 @@ const SnakeMathPage = ({
         lastStepRef.current = ts;
       }
 
-      // Update quiz countdown chip
-      if (sessionStartRef.current > 0) {
-        const sessionElapsed = (performance.now() - sessionStartRef.current) - pausedAccumRef.current;
-        const totalQ = guruQuiz.totalQuestions;
-        const askedQ = guruQuiz.questionNumber;
-        if (askedQ < totalQ) {
-          const nextAtMs = (askedQ + 1) * quizIntervalMs;
-          const remainingMs = Math.max(0, nextAtMs - sessionElapsed);
-          const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000));
-          setNextQuizIn(prev => (prev !== remainingSec ? remainingSec : prev));
-        } else {
-          setNextQuizIn(prev => (prev !== 0 ? 0 : prev));
-        }
-      }
     }
 
     draw(ts, dt);
     rafRef.current = requestAnimationFrame(loop);
-  }, [step, draw, guruQuiz.isPausedRef, guruQuiz.questionNumber, guruQuiz.totalQuestions, quizIntervalMs]);
+  }, [step, draw, guruQuiz.isPausedRef]);
 
   const startGame = useCallback(() => {
     playPopSound();
@@ -587,10 +571,9 @@ const SnakeMathPage = ({
     pausedAccumRef.current = 0;
     pauseStartRef.current = 0;
     lastRafRef.current = 0;
-    setNextQuizIn(Math.ceil(quizIntervalMs / 1000));
     cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(loop);
-  }, [resetGame, loop, quizIntervalMs]);
+  }, [resetGame, loop]);
 
   // keys
   useEffect(() => {
@@ -802,7 +785,7 @@ const SnakeMathPage = ({
             </span>
             {guruQuiz.questionNumber < guruQuiz.totalQuestions && (
               <span className="font-display text-xl sm:text-2xl font-black text-amber-100 tabular-nums drop-shadow-[0_0_10px_rgba(255,215,0,0.75)]">
-                {nextQuizIn}s
+                {guruQuiz.secondsUntilNext}s
               </span>
             )}
           </div>

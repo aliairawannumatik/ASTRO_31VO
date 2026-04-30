@@ -700,8 +700,6 @@ const SpaceImpactPage = ({
   const [question, setQuestion] = useState("");
   const [combo, setCombo] = useState(0);
   const [flashMsg, setFlashMsg] = useState("");
-  const [nextQuizIn, setNextQuizIn] = useState(25);
-  const sessionStartRef = useRef(0);
 
   // game refs
   const phaseRef = useRef<Phase>("idle");
@@ -786,8 +784,6 @@ const SpaceImpactPage = ({
     setLevel(1);
     setCombo(0);
     setFlashMsg("");
-    setNextQuizIn(25);
-    sessionStartRef.current = Date.now();
     phaseRef.current = "playing";
     setPhase("playing");
   }, [initStars, spawnQuestion]);
@@ -1157,17 +1153,6 @@ const SpaceImpactPage = ({
     return () => cancelAnimationFrame(rafRef.current);
   }, [loop, initStars]);
 
-  // ── Countdown to next quiz ────────────────────────────────────────────
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (phaseRef.current !== "playing" || sessionStartRef.current === 0) return;
-      const elapsed = (Date.now() - sessionStartRef.current) / 1000;
-      const remaining = Math.max(0, Math.ceil(25 - (elapsed % 25)));
-      setNextQuizIn(remaining);
-    }, 250);
-    return () => clearInterval(id);
-  }, []);
-
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       keysRef.current.add(e.key);
@@ -1290,8 +1275,8 @@ const SpaceImpactPage = ({
             <span>⭐ {score}</span>
             <span>🔥 Kombo x{combo}</span>
             <span>📶 Level {level}</span>
-            <span className={nextQuizIn <= 5 ? "text-yellow-300 font-bold animate-pulse" : "text-cyan-300"}>
-              ⏱️ Soal: {nextQuizIn}s
+            <span className={guruQuiz.secondsUntilNext <= 5 ? "text-yellow-300 font-bold animate-pulse" : "text-cyan-300"}>
+              ⏱️ Soal: {guruQuiz.secondsUntilNext}s
             </span>
           </div>
         )}
