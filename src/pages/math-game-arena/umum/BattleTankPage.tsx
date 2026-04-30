@@ -321,15 +321,32 @@ const BattleTankPage = ({
     setPhase("playing");
   }, [spawnWave, setPhase]);
 
+  // ── Helper: nearest living enemy to player ────────────────────────────────
+  const findNearestEnemy = useCallback(() => {
+    const { x: px, y: py } = playerRef.current;
+    let best: EnemyTank | null = null;
+    let bestD = Infinity;
+    for (const e of enemiesRef.current) {
+      if (!e.alive) continue;
+      const d = (e.x - px) * (e.x - px) + (e.y - py) * (e.y - py);
+      if (d < bestD) { bestD = d; best = e; }
+    }
+    return best;
+  }, []);
+
   // ── Fire (shared by click/tap/fire button/keyboard) ───────────────────────
   const fireNow = useCallback(() => {
     if (phaseRef.current === "idle" || phaseRef.current === "dead") { startGame(); return; }
     if (phaseRef.current !== "playing") return;
     const { x: px, y: py } = playerRef.current;
     const ang = playerRef.current.turretAngle;
-    fireBullet(true, px + Math.cos(ang) * 28, py + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
+    // Aim at locked-on enemy if any; otherwise shoot along the turret direction
+    const target = findNearestEnemy();
+    const tx = target ? target.x : px + Math.cos(ang) * 1000;
+    const ty = target ? target.y : py + Math.sin(ang) * 1000;
+    fireBullet(true, px + Math.cos(ang) * 28, py + Math.sin(ang) * 28, tx, ty, "#00f0ff", "#00f0ff");
     playPopSound();
-  }, [startGame, fireBullet]);
+  }, [startGame, fireBullet, findNearestEnemy]);
 
   // ── Keyboard support (arrow keys + space to fire) ────────────────────────
   useEffect(() => {
@@ -370,20 +387,12 @@ const BattleTankPage = ({
     };
   }, []);
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
+  const handleClick = useCallback((_e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current; if (!canvas) return;
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
-    if (phaseRef.current !== "playing") return;
-    const { CW, CH } = dimsRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const cx = (e.clientX - rect.left) * (CW / rect.width);
-    const cy = (e.clientY - rect.top) * (CH / rect.height);
-    const { x: px, y: py } = playerRef.current;
-    const ang = playerRef.current.turretAngle;
-    fireBullet(true, px + Math.cos(ang) * 28, py + Math.sin(ang) * 28, cx, cy, "#00f0ff", "#00f0ff");
-    playPopSound();
-  }, [startGame, fireBullet]);
+    fireNow();
+  }, [startGame, fireNow]);
 
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current; if (!canvas) return;
@@ -400,12 +409,8 @@ const BattleTankPage = ({
     e.preventDefault();
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
-    if (phaseRef.current !== "playing") return;
-    const { x: px, y: py } = playerRef.current;
-    const ang = playerRef.current.turretAngle;
-    fireBullet(true, px + Math.cos(ang) * 28, py + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
-    playPopSound();
-  }, [startGame, fireBullet]);
+    fireNow();
+  }, [startGame, fireNow]);
 
   // ── Draw tank (top-down, cute & detailed) ─────────────────────────────────
   const drawTank = (
@@ -659,7 +664,20 @@ const BattleTankPage = ({
         player.x = Math.max(30, Math.min(CW - 30, player.x));
         player.y = Math.max(140, Math.min(CH - 30, player.y));
       }
-      player.turretAngle = Math.atan2(mouseRef.current.y - player.y, mouseRef.current.x - player.x);
+      // Auto-aim: turret smoothly tracks the nearest living enemy.
+      // Falls back to movement direction (or current angle) when no enemies exist.
+      let targetAng = player.turretAngle;
+      const lockTarget = findNearestEnemy();
+      if (lockTarget) {
+        targetAng = Math.atan2(lockTarget.y - player.y, lockTarget.x - player.x);
+      } else if (ax !== 0 || ay !== 0) {
+        targetAng = Math.atan2(ay, ax);
+      }
+      let angDiff = targetAng - player.turretAngle;
+      while (angDiff > Math.PI) angDiff -= Math.PI * 2;
+      while (angDiff < -Math.PI) angDiff += Math.PI * 2;
+      const TURN_RATE = 12; // rad/s — fast snap, still smooth
+      player.turretAngle += angDiff * Math.min(1, dt * TURN_RATE);
       if (player.invT > 0) player.invT = Math.max(0, player.invT - dt);
       if (shakeRef.current > 0) shakeRef.current = Math.max(0, shakeRef.current - dt * 2.5);
 
@@ -921,7 +939,7 @@ const BattleTankPage = ({
         ]}
         instructions={[
           { text: <>Gunakan <strong className="text-yellow-300">stik analog</strong> atau <strong className="text-yellow-300">tombol panah</strong> untuk menggerakkan tank ke <strong className="text-cyan-300">atas, bawah, kiri, kanan</strong></> },
-          { text: <>Arahkan <strong className="text-yellow-300">mouse / sentuh layar</strong> untuk membidik, lalu tekan <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap / spasi) untuk menembak</> },
+          { text: <>Meriam tank <strong className="text-cyan-300">otomatis mengunci musuh terdekat</strong> — kamu cukup tekan <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap / spasi) dan peluru akan melesat tepat ke sasaran</> },
           { text: <>Hancurkan semua tank musuh yang juga bergerak ke segala arah — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
           { text: <>Setiap <strong className="text-yellow-300">25 detik</strong> akan muncul <strong className="text-pink-300">soal dari guru</strong> — game di-pause, jawab benar = <strong className="text-green-400">+20 poin</strong></> },
         ]}
