@@ -403,17 +403,19 @@ const Soal3SVG = () => (
     <text x="80" y="60" fill="#38bdf8" fontSize="16" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
     <text x="80" y="160" fill="#38bdf8" fontSize="16" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
 
-    {/* Top intersection numbers */}
-    <text x="142" y="73" fill="#fbbf24" fontSize="13" fontWeight="bold">1</text>
-    <text x="172" y="73" fill="#fbbf24" fontSize="13" fontWeight="bold">2</text>
-    <text x="172" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">3</text>
-    <text x="142" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">4</text>
+    {/* Top intersection numbers (~164, 80). Transversal slope = 1.375, so the
+        right-of-transversal positions need extra horizontal offset to clear
+        the line, especially the lower half (number 3). */}
+    <text x="138" y="70"  fill="#fbbf24" fontSize="13" fontWeight="bold">1</text>
+    <text x="180" y="70"  fill="#fbbf24" fontSize="13" fontWeight="bold">2</text>
+    <text x="192" y="102" fill="#fbbf24" fontSize="13" fontWeight="bold">3</text>
+    <text x="138" y="102" fill="#fbbf24" fontSize="13" fontWeight="bold">4</text>
 
-    {/* Bottom intersection numbers */}
-    <text x="214" y="173" fill="#fbbf24" fontSize="13" fontWeight="bold">1</text>
-    <text x="244" y="173" fill="#fbbf24" fontSize="13" fontWeight="bold">2</text>
-    <text x="244" y="198" fill="#fbbf24" fontSize="13" fontWeight="bold">3</text>
-    <text x="214" y="198" fill="#fbbf24" fontSize="13" fontWeight="bold">4</text>
+    {/* Bottom intersection numbers (~236, 180) */}
+    <text x="210" y="170" fill="#fbbf24" fontSize="13" fontWeight="bold">1</text>
+    <text x="252" y="170" fill="#fbbf24" fontSize="13" fontWeight="bold">2</text>
+    <text x="264" y="202" fill="#fbbf24" fontSize="13" fontWeight="bold">3</text>
+    <text x="210" y="202" fill="#fbbf24" fontSize="13" fontWeight="bold">4</text>
 
     <circle cx="164" cy="80" r="3" fill="#ef4444" />
     <circle cx="236" cy="180" r="3" fill="#ef4444" />
