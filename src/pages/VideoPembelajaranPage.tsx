@@ -27,6 +27,7 @@ import {
 const ALL_VIDEOS = [
   {
     id: "UVt4JZaGqwU",
+    playlistId: "PLxsvNQG_jS3lKhP69paEJ-f_BcwnY1_yU",
     title: "Statistika — Mean, Median, Modus, dan Penyajian Data",
     subject: "Statistika",
     kelas: "Kelas 8",
@@ -42,6 +43,63 @@ const ALL_VIDEOS = [
     emoji: "📊",
     description:
       "Video pembelajaran ini membahas materi Statistika untuk siswa SMP. Kamu akan belajar cara membaca dan menyajikan data, serta menghitung ukuran pemusatan data seperti Mean, Median, dan Modus dengan mudah dan menyenangkan.\n\nTopik yang dibahas:\n• Pengertian statistika dan data\n• Penyajian data dalam tabel dan diagram\n• Cara menghitung Mean (rata-rata)\n• Cara menentukan Median (nilai tengah)\n• Cara menentukan Modus (nilai yang sering muncul)\n• Contoh soal dan pembahasan lengkap",
+  },
+  {
+    id: "oCprYLAoDTw",
+    playlistId: "PLxsvNQG_jS3mDYiC97ma1OBb7hViYPVqr",
+    title: "Bangun Ruang Sisi Datar — Kubus, Balok, Prisma, dan Limas",
+    subject: "Bangun Ruang Sisi Datar",
+    kelas: "Kelas 8",
+    kelasNum: 8,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-emerald-500 via-teal-600 to-cyan-700",
+    colorAccent: "#10b981",
+    icon: "📦",
+    emoji: "📦",
+    description:
+      "Video pembelajaran ini membahas materi Bangun Ruang Sisi Datar untuk siswa SMP. Kamu akan belajar mengenal dan menghitung luas permukaan serta volume bangun ruang sisi datar dengan cara yang mudah dan menyenangkan.\n\nTopik yang dibahas:\n• Kubus — luas permukaan dan volume\n• Balok — luas permukaan dan volume\n• Prisma — jenis-jenis dan hitungannya\n• Limas — jenis-jenis dan hitungannya\n• Contoh soal dan pembahasan lengkap",
+  },
+  {
+    id: "2kgNqy5VTdA",
+    playlistId: "PLxsvNQG_jS3nWlr8-a66c9s4W0MlHH9Vj",
+    title: "Teorema Pythagoras — Konsep, Rumus, dan Penerapannya",
+    subject: "Teorema Pythagoras",
+    kelas: "Kelas 8",
+    kelasNum: 8,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-violet-500 via-purple-600 to-indigo-700",
+    colorAccent: "#8b5cf6",
+    icon: "📐",
+    emoji: "📐",
+    description:
+      "Video pembelajaran ini membahas materi Teorema Pythagoras untuk siswa SMP. Kamu akan belajar konsep dasar, rumus, dan berbagai penerapan Teorema Pythagoras dalam kehidupan sehari-hari.\n\nTopik yang dibahas:\n• Konsep dan bunyi Teorema Pythagoras\n• Rumus dasar: a² + b² = c²\n• Triple Pythagoras\n• Menentukan jenis segitiga\n• Penerapan dalam soal dan kehidupan nyata\n• Contoh soal dan pembahasan lengkap",
+  },
+  {
+    id: "",
+    playlistId: "PLxsvNQG_jS3kd8lcS8mWk0CjyquW2MN4p",
+    title: "SPLDV — Sistem Persamaan Linear Dua Variabel",
+    subject: "SPLDV",
+    kelas: "Kelas 8",
+    kelasNum: 8,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-amber-500 via-orange-500 to-yellow-600",
+    colorAccent: "#f59e0b",
+    icon: "🔣",
+    emoji: "🔣",
+    description:
+      "Video pembelajaran ini membahas materi Sistem Persamaan Linear Dua Variabel (SPLDV) untuk siswa SMP. Kamu akan belajar berbagai metode penyelesaian SPLDV dengan cara yang mudah dipahami.\n\nTopik yang dibahas:\n• Pengertian dan bentuk umum SPLDV\n• Metode substitusi\n• Metode eliminasi\n• Metode grafik\n• Metode campuran (substitusi + eliminasi)\n• Contoh soal dan pembahasan lengkap",
   },
 ];
 
@@ -95,7 +153,11 @@ const VideoPembelajaranPage = () => {
 
   const handleShare = () => {
     playPopSound();
-    navigator.clipboard?.writeText(`https://www.youtube.com/watch?v=${currentVideo.id}&list=PLxsvNQG_jS3lKhP69paEJ-f_BcwnY1_yU`);
+    navigator.clipboard?.writeText(
+      currentVideo.id
+        ? `https://www.youtube.com/watch?v=${currentVideo.id}&list=${currentVideo.playlistId}`
+        : `https://www.youtube.com/playlist?list=${currentVideo.playlistId}`
+    );
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -192,7 +254,7 @@ const VideoPembelajaranPage = () => {
 
             {/* ── CINEMATIC PLAYER ── */}
             <motion.div
-              key={currentVideo.id}
+              key={currentVideo.playlistId}
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
@@ -210,7 +272,11 @@ const VideoPembelajaranPage = () => {
                 <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                   <iframe
                     className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${currentVideo.id}?list=PLxsvNQG_jS3lKhP69paEJ-f_BcwnY1_yU&rel=0&modestbranding=1&color=white&iv_load_policy=3`}
+                    src={
+                      currentVideo.id
+                        ? `https://www.youtube.com/embed/${currentVideo.id}?list=${currentVideo.playlistId}&rel=0&modestbranding=1&color=white&iv_load_policy=3`
+                        : `https://www.youtube.com/embed/videoseries?list=${currentVideo.playlistId}&rel=0&modestbranding=1&color=white&iv_load_policy=3`
+                    }
                     title={currentVideo.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowFullScreen
@@ -236,7 +302,7 @@ const VideoPembelajaranPage = () => {
 
             {/* ── VIDEO INFO CARD ── */}
             <motion.div
-              key={`info-${currentVideo.id}`}
+              key={`info-${currentVideo.playlistId}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.1 }}
