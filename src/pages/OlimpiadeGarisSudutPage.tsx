@@ -605,27 +605,43 @@ const Soal14SVG = () => {
   );
 };
 
-// ── Soal 15: 2 horizontal parallels l₁, l₂ cut by vertical transversal ───────
+// ── Soal 15: 2 horizontal parallels l₁, l₂ cut by slanted transversal ────────
+// Transversal: from (212,10) to (150,250). Intersections:
+//   l₁ (y=85): t=0.3125 → x≈193   l₂ (y=185): t=0.729 → x≈167
+// Up-direction unit vector: (20,-75)/77.6 ≈ (0.258,-0.967)
 const Soal15SVG = () => (
-  <svg viewBox="0 0 360 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <defs><ArrowDef id="ar-s15" /></defs>
-    <line x1="40" y1="100" x2="320" y2="100" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s15)" />
-    <line x1="40" y1="200" x2="320" y2="200" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s15)" />
-    <line x1="180" y1="20" x2="180" y2="260" stroke="#ffffff" strokeWidth="2" />
+  <svg viewBox="0 0 380 265" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* l₁ and l₂ horizontal lines */}
+    <line x1="30"  y1="85"  x2="335" y2="85"  stroke="#ffffff" strokeWidth="2" />
+    <line x1="30"  y1="185" x2="335" y2="185" stroke="#ffffff" strokeWidth="2" />
+    {/* Transversal (slightly slanted, lower-left to upper-right) */}
+    <line x1="212" y1="10"  x2="150" y2="250" stroke="#ffffff" strokeWidth="2" />
 
-    <text x="328" y="106" fill="#fbbf24" fontSize="13" fontFamily="serif" fontStyle="italic">l₁</text>
-    <text x="328" y="206" fill="#fbbf24" fontSize="13" fontFamily="serif" fontStyle="italic">l₂</text>
+    {/* Labels */}
+    <text x="342" y="91"  fill="#fbbf24" fontSize="14" fontFamily="serif" fontStyle="italic">l₁</text>
+    <text x="342" y="191" fill="#fbbf24" fontSize="14" fontFamily="serif" fontStyle="italic">l₂</text>
 
-    {/* Arc and label for x+39 (top intersection, right side, below l₁) */}
-    <path d="M 200,100 A 20,20 0 0,1 180,120" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
-    <text x="190" y="124" fill="#fbbf24" fontSize="13" fontFamily="serif"><tspan fontStyle="italic">x</tspan> + 39</text>
+    {/* Top intersection ≈ (193, 85)
+        Arc: from l₁-right (215,85) sweeping clockwise to transversal-up (199,64) */}
+    <path d="M 215,85 A 22,22 0 0,1 199,64" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    <text x="208" y="62" fill="#fbbf24" fontSize="13" fontFamily="serif">
+      <tspan fontStyle="italic">x</tspan> + 39
+    </text>
 
-    {/* Arc and label for 2x (bottom intersection) */}
-    <path d="M 200,200 A 20,20 0 0,1 180,220" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
-    <text x="194" y="224" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan></text>
+    {/* Bottom intersection ≈ (167, 185)
+        Arc: from l₂-left (145,185) sweeping counter-clockwise to transversal-down (161,206) */}
+    <path d="M 145,185 A 22,22 0 0,0 161,206" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    <text x="105" y="218" fill="#fbbf24" fontSize="13" fontFamily="serif">
+      2<tspan fontStyle="italic">x</tspan>
+    </text>
 
-    <circle cx="180" cy="100" r="3" fill="#ef4444" />
-    <circle cx="180" cy="200" r="3" fill="#ef4444" />
+    {/* Red endpoint dots */}
+    <circle cx="212" cy="10"  r="4" fill="#ef4444" />
+    <circle cx="150" cy="250" r="4" fill="#ef4444" />
+    <circle cx="30"  cy="85"  r="4" fill="#ef4444" />
+    <circle cx="335" cy="85"  r="4" fill="#ef4444" />
+    <circle cx="30"  cy="185" r="4" fill="#ef4444" />
+    <circle cx="335" cy="185" r="4" fill="#ef4444" />
   </svg>
 );
 
