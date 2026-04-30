@@ -47,7 +47,8 @@ interface Brick {
 
 interface Sparkle { x: number; y: number; vx: number; vy: number; alpha: number; r: number; color: string }
 interface FloatText { x: number; y: number; txt: string; alpha: number; vy: number; good: boolean }
-interface Trail { x: number; y: number; alpha: number; r: number }
+// Flame particle for the ball's burning trail
+interface Trail { x: number; y: number; vx: number; vy: number; life: number; maxLife: number; r: number }
 
 type Phase = "idle" | "ready" | "playing" | "dead";
 
@@ -250,11 +251,43 @@ const BrickBreakerPage = () => {
           if (ball.x + BALL_R > CW) { ball.x = CW - BALL_R; ball.vx = -Math.abs(ball.vx); }
           if (ball.y - BALL_R < 0) { ball.y = BALL_R; ball.vy = Math.abs(ball.vy); }
 
-          // trail
-          trailRef.current.push({ x: ball.x, y: ball.y, alpha: 0.5, r: BALL_R });
-          if (trailRef.current.length > 18) trailRef.current.shift();
-          for (const t of trailRef.current) { t.alpha -= dt * 4; t.r *= 0.96; }
-          trailRef.current = trailRef.current.filter(t => t.alpha > 0);
+          // ── Fire trail ── spawn flame particles trailing behind the ball
+          // Direction *opposite* to motion (so flames stream behind it).
+          const speed = Math.hypot(ball.vx, ball.vy);
+          if (speed > 1) {
+            const dirX = -ball.vx / speed;
+            const dirY = -ball.vy / speed;
+            // emit 3 fresh flame particles per frame
+            for (let k = 0; k < 3; k++) {
+              const spread = 0.6;
+              const ang = Math.atan2(dirY, dirX) + (Math.random() - 0.5) * spread;
+              const sp = 30 + Math.random() * 70;
+              const offsetT = k * 0.35; // slight stagger so the tail looks long
+              trailRef.current.push({
+                x: ball.x + dirX * (BALL_R * 0.6) + (Math.random() - 0.5) * 4,
+                y: ball.y + dirY * (BALL_R * 0.6) + (Math.random() - 0.5) * 4,
+                vx: Math.cos(ang) * sp + ball.vx * 0.15,
+                vy: Math.sin(ang) * sp + ball.vy * 0.15 - 30, // buoyancy: flames rise
+                life: 0.55 - offsetT * 0.05,
+                maxLife: 0.55 - offsetT * 0.05,
+                r: BALL_R * (0.85 + Math.random() * 0.45),
+              });
+            }
+          }
+          // hard cap so the array doesn't grow without bound
+          if (trailRef.current.length > 220) {
+            trailRef.current.splice(0, trailRef.current.length - 220);
+          }
+          // tick existing flame particles: drift, rise, shrink, cool down
+          for (const t of trailRef.current) {
+            t.x += t.vx * dt;
+            t.y += t.vy * dt;
+            t.vy -= 90 * dt;       // continued upward acceleration (heat rises)
+            t.vx *= 0.94;          // air drag
+            t.life -= dt;
+            t.r *= 0.965;          // shrink as it cools
+          }
+          trailRef.current = trailRef.current.filter(t => t.life > 0 && t.r > 0.5);
 
           // paddle collision
           const halfW = paddle.w / 2;
@@ -613,67 +646,125 @@ const BrickBreakerPage = () => {
         ctx.restore();
       }
 
-      // ── Ball trail ───────────────────────────────────────────────────────
-      for (let i = 0; i < trailRef.current.length; i++) {
-        const t = trailRef.current[i];
-        const frac = i / trailRef.current.length;
-        ctx.globalAlpha = t.alpha * frac;
-        ctx.fillStyle = `hsl(${(hue + frac * 60) % 360}, 100%, 70%)`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = `hsl(${hue}, 100%, 60%)`;
+      // ── Fire trail ───────────────────────────────────────────────────────
+      // Use additive blending so overlapping flames build to white-hot cores.
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
+      for (const t of trailRef.current) {
+        // ratio: 1 = freshly spawned (hot), 0 = about to die (cool smoke)
+        const ratio = Math.max(0, Math.min(1, t.life / t.maxLife));
+
+        // Compute flame color (r,g,b) by interpolating along a hot→cool ramp:
+        //   ratio 1.00 → white-hot         (255, 250, 210)
+        //   ratio 0.70 → bright yellow     (255, 220,  80)
+        //   ratio 0.45 → vivid orange      (255, 130,   0)
+        //   ratio 0.20 → deep red          (220,  30,   0)
+        //   ratio 0.00 → dark smoke        ( 30,  15,  10)
+        let r: number, g: number, b: number;
+        if (ratio > 0.7) {
+          const k = (ratio - 0.7) / 0.3;       // 0..1 from yellow → white
+          r = 255;
+          g = Math.round(220 + 30 * k);
+          b = Math.round(80 + 130 * k);
+        } else if (ratio > 0.45) {
+          const k = (ratio - 0.45) / 0.25;     // orange → yellow
+          r = 255;
+          g = Math.round(130 + 90 * k);
+          b = Math.round(0 + 80 * k);
+        } else if (ratio > 0.2) {
+          const k = (ratio - 0.2) / 0.25;      // red → orange
+          r = Math.round(220 + 35 * k);
+          g = Math.round(30 + 100 * k);
+          b = 0;
+        } else {
+          const k = ratio / 0.2;               // smoke → red
+          r = Math.round(30 + 190 * k);
+          g = Math.round(15 + 15 * k);
+          b = Math.round(10 - 10 * k);
+        }
+
+        // Soft glow halo per particle
+        const glowR = t.r * (1.2 + ratio * 0.7);
+        const coreA = Math.min(1, ratio * 1.1 + 0.05);
+        const midA = coreA * 0.55;
+        const grad = ctx.createRadialGradient(t.x, t.y, 0, t.x, t.y, glowR);
+        grad.addColorStop(0,    `rgba(${r},${g},${b},${coreA})`);
+        grad.addColorStop(0.45, `rgba(${r},${g},${b},${midA})`);
+        grad.addColorStop(1,    `rgba(${r},${g},${b},0)`);
+
+        ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(t.x, t.y, Math.max(1, t.r * frac), 0, Math.PI * 2);
+        ctx.arc(t.x, t.y, glowR, 0, Math.PI * 2);
         ctx.fill();
       }
+      ctx.restore();
       ctx.globalAlpha = 1;
       ctx.shadowBlur = 0;
 
-      // ── Ball (chrome-glass marble) ────────────────────────────────────
+      // ── Ball (burning fireball) ───────────────────────────────────────
       if (phase === "playing" || phase === "ready") {
         const ball = ballRef.current;
 
-        // Soft contact shadow on the floor (always under the ball)
+        // Soft warm contact shadow on the floor (under the ball)
         ctx.save();
         ctx.globalAlpha = 0.35;
-        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.fillStyle = "rgba(40,0,0,0.6)";
         ctx.beginPath();
         ctx.ellipse(ball.x, ball.y + BALL_R + 1, BALL_R * 0.9, BALL_R * 0.35, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
-        // Glow halo
-        ctx.shadowBlur = 24;
-        ctx.shadowColor = `hsl(${hue}, 100%, 65%)`;
+        // Outer flickering aura (additive) — uses time for shimmer
+        const tSec = ts / 1000;
+        const flicker = 0.85 + Math.sin(tSec * 22) * 0.08 + Math.sin(tSec * 47) * 0.06;
+        ctx.save();
+        ctx.globalCompositeOperation = "lighter";
+        const auraR = BALL_R * (2.4 * flicker);
+        const aura = ctx.createRadialGradient(ball.x, ball.y, BALL_R * 0.4, ball.x, ball.y, auraR);
+        aura.addColorStop(0,   "rgba(255,230,140,0.85)");
+        aura.addColorStop(0.35, "rgba(255,140,30,0.55)");
+        aura.addColorStop(0.7, "rgba(255,60,0,0.25)");
+        aura.addColorStop(1,   "rgba(255,40,0,0)");
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, auraR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
 
-        // Base sphere with directional shading (light from upper-left)
+        // Drop-shadow glow under the sphere
+        ctx.shadowBlur = 28;
+        ctx.shadowColor = "rgba(255,140,30,0.95)";
+
+        // Fireball body — white-hot core fading out to deep red surface
         const ballGrad = ctx.createRadialGradient(
-          ball.x - BALL_R * 0.45, ball.y - BALL_R * 0.45, BALL_R * 0.1,
+          ball.x - BALL_R * 0.25, ball.y - BALL_R * 0.25, BALL_R * 0.05,
           ball.x, ball.y, BALL_R
         );
-        ballGrad.addColorStop(0, "#ffffff");
-        ballGrad.addColorStop(0.25, `hsl(${hue}, 100%, 88%)`);
-        ballGrad.addColorStop(0.65, `hsl(${hue}, 95%, 60%)`);
-        ballGrad.addColorStop(1, `hsl(${(hue + 30) % 360}, 90%, 28%)`);
+        ballGrad.addColorStop(0,    "#ffffff");
+        ballGrad.addColorStop(0.18, "#fff4c2");
+        ballGrad.addColorStop(0.45, "#ffb84d");
+        ballGrad.addColorStop(0.75, "#ff5a14");
+        ballGrad.addColorStop(1,    "#8a1100");
         ctx.fillStyle = ballGrad;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Specular highlight (small bright spot)
-        ctx.fillStyle = "rgba(255,255,255,0.95)";
+        // White-hot specular spot
+        ctx.fillStyle = "rgba(255,255,240,0.9)";
         ctx.beginPath();
-        ctx.ellipse(ball.x - BALL_R * 0.4, ball.y - BALL_R * 0.45, BALL_R * 0.3, BALL_R * 0.22, -0.6, 0, Math.PI * 2);
+        ctx.ellipse(ball.x - BALL_R * 0.35, ball.y - BALL_R * 0.4, BALL_R * 0.28, BALL_R * 0.2, -0.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Tiny secondary highlight
-        ctx.fillStyle = "rgba(255,255,255,0.55)";
+        // Tiny bright pinpoint
+        ctx.fillStyle = "rgba(255,255,255,0.85)";
         ctx.beginPath();
-        ctx.arc(ball.x - BALL_R * 0.55, ball.y - BALL_R * 0.15, BALL_R * 0.12, 0, Math.PI * 2);
+        ctx.arc(ball.x - BALL_R * 0.45, ball.y - BALL_R * 0.5, BALL_R * 0.1, 0, Math.PI * 2);
         ctx.fill();
 
-        // Bottom rim glow (ambient bounce light)
-        ctx.strokeStyle = `hsla(${(hue + 180) % 360}, 100%, 70%, 0.45)`;
+        // Bottom rim ember glow (ambient bounce light)
+        ctx.strokeStyle = "rgba(255,180,60,0.6)";
         ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, BALL_R - 0.5, Math.PI * 0.15, Math.PI * 0.85);
