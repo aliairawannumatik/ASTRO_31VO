@@ -749,48 +749,67 @@ const Soal18SVG = () => (
   </svg>
 );
 
-// ── Soal 19: Two diagonals crossing at P≈(219,84); horizontal at y=200 ────────
-// Left diag:  (0,244)→L(60,200)→P(219,84)→(280,40)   [extended below L]
-// Right diag: (370,257)→R(320,200)→P(219,84)→(180,40) [extended below R]
-// Angles:
-//   b  — upper angle at P (between left-diag-up-right & right-diag-up-left), label upper-right
-//   y  — exterior at L, lower-left (between horiz-left & left-diag-down-left)
-//   a  — interior at R (between right-diag-up-left & horiz-left, inside triangle)
-//   x  — exterior at R, lower-right (between horiz-right & right-diag-down-right)
+// ── Soal 19 ────────────────────────────────────────────────────────────────────
+// Geometry:
+//   P  = (220, 80)  — upper crossing of the two diagonals
+//   L  = (75, 200)  — left diagonal meets horizontal
+//   R  = (310, 200) — right diagonal meets horizontal
 //
-// Arc endpoints (r=20 from vertex):
-//   b:  P→left-diag-up (235,72)  & P→right-diag-up (206,69)  sweep=0 (CCW, through top)
-//   y:  L→horiz-left   (40,200)  & L→left-diag-down (44,212) sweep=1 (CW, lower-left)
-//   a:  R→right-diag-up(307,185) & R→horiz-left     (300,200) sweep=0 (CCW, upper-left)
-//   x:  R→horiz-right  (340,200) & R→right-diag-down(333,215) sweep=1 (CW, lower-right)
+//   Diag1 (lower-left ↔ upper-right): through L and P
+//     unit dir L→P = (145,-120)/188.3 = (0.770,-0.637)
+//     line: (0,262) → (299,15)
+//
+//   Diag2 (lower-right ↔ upper-left): through R and P
+//     unit dir R→P = (-90,-120)/150 = (-0.600,-0.800)
+//     line: (171,15) → (359,265)
+//
+// Angle sectors (r=22, filled pie slices):
+//   b  at P  — blue,   upper angle: Diag1-up-right → Diag2-up-left  sweep=0
+//   x  at L  — green,  lower-left:  horiz-left → Diag1-down-left    sweep=1
+//   a  at R  — pink,   upper-left:  Diag2-up-left → horiz-left      sweep=0
+//   y  at R  — purple, lower-right: horiz-right → Diag2-down-right  sweep=1
 const Soal19SVG = () => (
-  <svg viewBox="0 0 400 265" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 400 270" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* ── Filled angle sectors (drawn first, behind lines) ── */}
+
+    {/* b — blue sector at P(220,80): from Diag1-up-right(237,66) to Diag2-up-left(207,62) */}
+    <path d="M 237,66 A 22,22 0 0,0 207,62 L 220,80 Z"
+      fill="rgba(59,130,246,0.35)" stroke="#3b82f6" strokeWidth="1.5" />
+
+    {/* x — green sector at L(75,200): from horiz-left(53,200) to Diag1-down-left(58,214) */}
+    <path d="M 53,200 A 22,22 0 0,1 58,214 L 75,200 Z"
+      fill="rgba(34,197,94,0.35)" stroke="#22c55e" strokeWidth="1.5" />
+
+    {/* a — pink sector at R(310,200): from Diag2-up-left(297,182) to horiz-left(288,200) */}
+    <path d="M 297,182 A 22,22 0 0,0 288,200 L 310,200 Z"
+      fill="rgba(239,68,68,0.30)" stroke="#ef4444" strokeWidth="1.5" />
+
+    {/* y — purple sector at R(310,200): from horiz-right(332,200) to Diag2-down-right(323,218) */}
+    <path d="M 332,200 A 22,22 0 0,1 323,218 L 310,200 Z"
+      fill="rgba(168,85,247,0.35)" stroke="#a855f7" strokeWidth="1.5" />
+
+    {/* ── Lines ── */}
     {/* Horizontal baseline */}
-    <line x1="20"  y1="200" x2="380" y2="200" stroke="#ffffff" strokeWidth="2" />
-    {/* Left diagonal — extended below L toward lower-left */}
-    <line x1="0"   y1="244" x2="280" y2="40"  stroke="#ffffff" strokeWidth="2" />
-    {/* Right diagonal — extended below R toward lower-right */}
-    <line x1="370" y1="257" x2="180" y2="40"  stroke="#ffffff" strokeWidth="2" />
+    <line x1="15"  y1="200" x2="385" y2="200" stroke="#d1d5db" strokeWidth="2.2" />
+    {/* Diag1: lower-left (0,262) through L(75,200) through P(220,80) to upper-right (299,15) */}
+    <line x1="0"   y1="262" x2="299" y2="15"  stroke="#d1d5db" strokeWidth="2.2" />
+    {/* Diag2: upper-left (171,15) through P(220,80) through R(310,200) to lower-right (359,265) */}
+    <line x1="171" y1="15"  x2="359" y2="265" stroke="#d1d5db" strokeWidth="2.2" />
 
-    {/* Arc b — upper angle at crossing P(219,84), between both diagonals going up */}
-    <path d="M 235,72 A 20,20 0 0,0 206,69" fill="none" stroke="#22c55e" strokeWidth="1.8" />
-    {/* Arc y — exterior lower-left at L(60,200) */}
-    <path d="M 40,200 A 20,20 0 0,1 44,212" fill="none" stroke="#22c55e" strokeWidth="1.8" />
-    {/* Arc a — interior at R(320,200), upper-left inside triangle */}
-    <path d="M 307,185 A 20,20 0 0,0 300,200" fill="none" stroke="#22c55e" strokeWidth="1.8" />
-    {/* Arc x — exterior lower-right at R(320,200) */}
-    <path d="M 340,200 A 20,20 0 0,1 333,215" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    {/* ── Vertex dots ── */}
+    <circle cx="220" cy="80"  r="3.5" fill="#ef4444" />
+    <circle cx="75"  cy="200" r="3.5" fill="#ef4444" />
+    <circle cx="310" cy="200" r="3.5" fill="#ef4444" />
 
-    {/* Labels */}
-    <text x="228" y="58"  fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
-    <text x="22"  y="224" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
-    <text x="278" y="183" fill="#fbbf24" fontSize="13" fontStyle="italic" fontFamily="serif">a</text>
-    <text x="336" y="230" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
-
-    {/* Vertex dots */}
-    <circle cx="219" cy="84"  r="3.5" fill="#ef4444" />
-    <circle cx="60"  cy="200" r="3.5" fill="#ef4444" />
-    <circle cx="320" cy="200" r="3.5" fill="#ef4444" />
+    {/* ── Labels ── */}
+    {/* b: upper-right of sector at P */}
+    <text x="237" y="60" fill="#1d4ed8" fontSize="15" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">b</text>
+    {/* x: inside green sector at L */}
+    <text x="38"  y="220" fill="#15803d" fontSize="14" fontStyle="italic" fontFamily="'Times New Roman',serif">x</text>
+    {/* a: left of pink sector at R (interior label) */}
+    <text x="278" y="196" fill="#b91c1c" fontSize="13" fontStyle="italic" fontFamily="'Times New Roman',serif">a</text>
+    {/* y: inside purple sector at R */}
+    <text x="318" y="224" fill="#7e22ce" fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">y</text>
   </svg>
 );
 
