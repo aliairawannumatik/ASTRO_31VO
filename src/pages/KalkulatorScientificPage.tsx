@@ -910,12 +910,14 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "1/x" : "x⁻ⁿ"}
             </CalcButton>
-            {/* nCr (kombinasi) → combinations(n;k) */}
+            {/* nCr (kombinasi) | shift: nPr (permutasi) */}
             <CalcButton
-              onClick={() => handleFunction("combinations", "nCr")}
+              onClick={() => shiftMode ? handleFunction("permutations", "nPr") : handleFunction("combinations", "nCr")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "nPr"}
+              subLabelColor="text-purple-400"
             >
-              nCr
+              {shiftMode ? "nPr" : "nCr"}
             </CalcButton>
             {/* % : percent | shift: mod */}
             <CalcButton
@@ -939,12 +941,10 @@ const KalkulatorScientificPage = () => {
               )
             </CalcButton>
             <CalcButton
-              onClick={() => shiftMode ? handleInput("nPr") : handleInput("!")}
+              onClick={() => handleInput("!")}
               className="h-10 text-sm bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "nPr"}
-              subLabelColor="text-amber-400"
             >
-              {shiftMode ? "nPr" : "x!"}
+              x!
             </CalcButton>
           </div>
 
