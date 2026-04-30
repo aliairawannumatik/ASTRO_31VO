@@ -460,7 +460,7 @@ const Soal5SVG = () => (
     <text x="350" y="170" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
     <text x="294" y="38" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
 
-    <text x="120" y="142" fill="#fbbf24" fontSize="13" fontFamily="serif">(2<tspan fontStyle="italic">x</tspan>+5)°</text>
+    <text x="148" y="138" fill="#fbbf24" fontSize="13" fontFamily="serif">(2<tspan fontStyle="italic">x</tspan>+5)°</text>
     <text x="218" y="142" fill="#fbbf24" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>-25)°</text>
 
     <circle cx="200" cy="150" r="3" fill="#ef4444" />
