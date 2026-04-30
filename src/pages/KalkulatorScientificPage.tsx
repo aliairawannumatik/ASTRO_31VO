@@ -670,8 +670,11 @@ const KalkulatorScientificPage = () => {
             </div>
             <div>
               <h1 className="font-display text-sm font-bold text-cyan-400 text-glow-cyan tracking-wide">
-                SCIENTIFIC CALCULATOR
+                SCIENTIFIC CALCULATOR NUMATIK
               </h1>
+              <p className="text-[10px] text-white/50 tracking-wide mt-0.5">
+                Irawan Sutiawan, M.Pd
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
