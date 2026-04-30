@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { GraduationCap } from "lucide-react";
+import { Gamepad2, GraduationCap } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -22,7 +22,7 @@ const MathGameArenaPage = () => {
       {isLight ? <Snowfall /> : <Starfield />}
       <PageNavigation prevPath="/menu" />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <div className="text-6xl text-center mb-4 drop-shadow-[0_0_18px_rgba(34,211,238,0.6)]">🪨</div>
+        <Gamepad2 className="w-12 h-12 text-accent mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
           MATH GAME ARENA
         </h1>
