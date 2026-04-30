@@ -1234,7 +1234,7 @@ const BrickBreakerPage = () => {
         >
           🏠
         </button>
-        <span className="font-display text-sm text-accent">🪨 Meteor Pantul NUMATIK</span>
+        <span className="font-display text-sm text-accent">🛸 Meteor Pantul NUMATIK</span>
         <button
           onClick={() => { playPopSound(); navigate(-1); }}
           className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
