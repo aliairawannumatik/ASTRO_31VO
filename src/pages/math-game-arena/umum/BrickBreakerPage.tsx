@@ -4,9 +4,16 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
-import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import MathGameIntro from "@/components/MathGameIntro";
+
+interface BrickBreakerProps {
+  topicLabel?: string;
+  backPath?: string;
+  homePath?: string;
+  quizQuestions?: GuruQuestion[];
+}
 
 const CW = 420;
 const CH = 600;
@@ -63,7 +70,12 @@ interface Trail { x: number; y: number; vx: number; vy: number; life: number; ma
 
 type Phase = "idle" | "ready" | "playing" | "dead";
 
-const BrickBreakerPage = () => {
+const BrickBreakerPage = ({
+  topicLabel,
+  backPath,
+  homePath,
+  quizQuestions,
+}: BrickBreakerProps = {}) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -71,8 +83,12 @@ const BrickBreakerPage = () => {
   const rafRef = useRef(0);
   const lastRef = useRef(0);
 
+  const DEFAULT_HOME = "/ruang-untuk-guru/numatik-game";
+  const resolvedBackPath = backPath ?? null;
+  const resolvedHomePath = homePath ?? DEFAULT_HOME;
+
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef);
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25_000, quizQuestions);
   const bricksRef = useRef<Brick[]>([]);
   const floatTextsRef = useRef<FloatText[]>([]);
   const trailRef = useRef<Trail[]>([]);
@@ -1236,8 +1252,8 @@ const BrickBreakerPage = () => {
             startLabel="LUNCURKAN METEOR"
             theme="meteor"
             onStart={startGame}
-            onBack={() => { playPopSound(); navigate(-1); }}
-            onHome={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            onBack={() => { playPopSound(); resolvedBackPath ? navigate(resolvedBackPath) : navigate(-1); }}
+            onHome={() => { playPopSound(); navigate(resolvedHomePath); }}
             bestLabel={bestRef.current > 0 ? `Rekor Tertinggi: ${bestRef.current}` : undefined}
             extraOverlay={
               <>
@@ -1269,7 +1285,7 @@ const BrickBreakerPage = () => {
       {/* Top bar */}
       <div className="relative z-10 flex items-center justify-between w-full max-w-lg px-4 pt-4 pb-1 shrink-0 gap-2">
         <button
-          onClick={() => { playPopSound(); navigate(-1); }}
+          onClick={() => { playPopSound(); resolvedBackPath ? navigate(resolvedBackPath) : navigate(-1); }}
           className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
           title="Kembali ke pilihan game"
         >
@@ -1278,7 +1294,7 @@ const BrickBreakerPage = () => {
         </button>
         <span className="font-display text-sm text-accent text-center flex-1">🛸☄️ Meteor Pantul NUMATIK</span>
         <button
-          onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+          onClick={() => { playPopSound(); navigate(resolvedHomePath); }}
           className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
           title="Menu Utama"
         >
