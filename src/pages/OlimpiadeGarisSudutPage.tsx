@@ -544,20 +544,20 @@ const Soal13SVG = () => (
     {/* α: (30,140), θ: (203,50), δ: (243,178), β: (121,248) */}
     <polygon points="30,140 203,50 243,178 121,248" fill="none" stroke="#ffffff" strokeWidth="2" />
 
-    {/* Arcs at each vertex */}
-    {/* α */}
-    <path d="M 51,128 A 22,22 0 0,1 47,158" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
-    {/* θ at top-right */}
-    <path d="M 188,68 A 20,20 0 0,1 222,67" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
-    {/* δ at right */}
-    <path d="M 226,160 A 20,20 0 0,1 224,194" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
-    {/* β at bottom */}
-    <path d="M 102,234 A 22,22 0 0,1 142,233" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* Arcs at each vertex — span between the two adjacent polygon edges */}
+    {/* α(30,140): edges to θ(NE, -27.5°) and β(SE, 49.9°), interior opens east */}
+    <path d="M 49.5,129.9 A 22,22 0 0,1 44.2,156.8" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* θ(203,50): edges to δ(SE, 72.6°) and α(WSW, 152.5°), interior opens south-southwest */}
+    <path d="M 209,69 A 20,20 0 0,1 185.3,59.2" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* δ(243,178): edges to β(WSW, 150.2°) and θ(NW, 252.6°), interior opens west */}
+    <path d="M 225.6,188 A 20,20 0 0,1 237,158.9" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* β(121,248): edges to α(NW, 229.9°) and δ(NE, 330.2°), interior opens north */}
+    <path d="M 106.6,231.4 A 22,22 0 0,1 140,237" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
 
     <text x="56" y="148" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">α</text>
-    <text x="195" y="84" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">θ</text>
-    <text x="206" y="186" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">δ</text>
-    <text x="118" y="228" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">β</text>
+    <text x="184" y="86" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">θ</text>
+    <text x="212" y="174" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">δ</text>
+    <text x="120" y="224" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">β</text>
 
     <circle cx="30" cy="140" r="3" fill="#ef4444" />
     <circle cx="203" cy="50" r="3" fill="#ef4444" />
