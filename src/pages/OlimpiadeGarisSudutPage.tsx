@@ -606,32 +606,45 @@ const Soal14SVG = () => {
 };
 
 // ── Soal 15: 2 horizontal parallels l₁, l₂ cut by slanted transversal ────────
-// Transversal: from (212,10) to (150,250). Intersections:
-//   l₁ (y=85): t=0.3125 → x≈193   l₂ (y=185): t=0.729 → x≈167
-// Up-direction unit vector: (20,-75)/77.6 ≈ (0.258,-0.967)
+// Transversal: from (212,10) to (150,250). SVG y-down coordinates.
+// Intersections: l₁ y=85 → x≈193; l₂ y=185 → x≈167
+// Transversal up-unit from (193,85): toward (212,10) → (19,-75)/77.4 ≈ (0.245,-0.969)
+// Transversal up-unit from (167,185): toward (193,85) → (26,-100)/103.3 ≈ (0.252,-0.968)
+//
+// Arc sweep rules (SVG y-down):
+//   sweep=0 (CCW on screen) | sweep=1 (CW on screen)
+//
+// Top arc (x+39): centre≈(193,85), P1=(215,85) at 0°, P2≈(198,64) at 286° CW.
+//   Short path = CCW 74° → sweep=0
+// Bottom arc (2x – pelurus, upper-left): centre≈(167,185), P1=(145,185) at 180°,
+//   P2≈(173,164) at 286° CW.  Short path = CW 106° → sweep=1
 const Soal15SVG = () => (
   <svg viewBox="0 0 380 265" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* l₁ and l₂ horizontal lines */}
     <line x1="30"  y1="85"  x2="335" y2="85"  stroke="#ffffff" strokeWidth="2" />
     <line x1="30"  y1="185" x2="335" y2="185" stroke="#ffffff" strokeWidth="2" />
-    {/* Transversal (slightly slanted, lower-left to upper-right) */}
+    {/* Transversal (slanted: lower-left → upper-right) */}
     <line x1="212" y1="10"  x2="150" y2="250" stroke="#ffffff" strokeWidth="2" />
 
     {/* Labels */}
     <text x="342" y="91"  fill="#fbbf24" fontSize="14" fontFamily="serif" fontStyle="italic">l₁</text>
     <text x="342" y="191" fill="#fbbf24" fontSize="14" fontFamily="serif" fontStyle="italic">l₂</text>
 
-    {/* Top intersection ≈ (193, 85)
-        Arc: from l₁-right (215,85) sweeping clockwise to transversal-up (199,64) */}
-    <path d="M 215,85 A 22,22 0 0,1 199,64" fill="none" stroke="#22c55e" strokeWidth="1.8" />
-    <text x="208" y="62" fill="#fbbf24" fontSize="13" fontFamily="serif">
+    {/* Top intersection (193,85):
+        P1 = l₁-right  (215, 85)  [angle 0°]
+        P2 = transversal-up (198, 64)  [angle 286° CW ≡ 74° CCW]
+        Short arc = CCW 74° → sweep=0 → traces upper-right quadrant ✓ */}
+    <path d="M 215,85 A 22,22 0 0,0 198,64" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    <text x="208" y="60" fill="#fbbf24" fontSize="13" fontFamily="serif">
       <tspan fontStyle="italic">x</tspan> + 39
     </text>
 
-    {/* Bottom intersection ≈ (167, 185)
-        Arc: from l₂-left (145,185) sweeping counter-clockwise to transversal-down (161,206) */}
-    <path d="M 145,185 A 22,22 0 0,0 161,206" fill="none" stroke="#22c55e" strokeWidth="1.8" />
-    <text x="105" y="218" fill="#fbbf24" fontSize="13" fontFamily="serif">
+    {/* Bottom intersection (167,185) – pelurus (sudut dalam kiri atas):
+        P1 = l₂-left   (145,185)  [angle 180°]
+        P2 = transversal-up (173,164)  [angle 286° CW]
+        Short arc = CW 106° → sweep=1 → traces upper-left quadrant ✓ */}
+    <path d="M 145,185 A 22,22 0 0,1 173,164" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    <text x="120" y="170" fill="#fbbf24" fontSize="13" fontFamily="serif">
       2<tspan fontStyle="italic">x</tspan>
     </text>
 
