@@ -599,6 +599,12 @@ import KPKFPBSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilan
 import KPKFPBTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTurtleRunGamePage";
 import KPKFPBTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTetrisGamePage";
 import KPKFPBSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBSnakeMathGamePage";
+import PenjumlahanMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanMeteorPantulGamePage";
+import PenguranganMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganMeteorPantulGamePage";
+import PerkalianMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianMeteorPantulGamePage";
+import PembagianMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianMeteorPantulGamePage";
+import OperasiCampuranMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranMeteorPantulGamePage";
+import KPKFPBMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBMeteorPantulGamePage";
 
 // Math Game Arena - Kelas 9 Topic Pages
 import BilanganBerpangkatMGAK9Page from "./pages/math-game-arena/kelas9/BilanganBerpangkatPage";
@@ -1318,6 +1324,12 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/turtle-run" element={<KPKFPBTurtleRunGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tetris" element={<KPKFPBTetrisGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/snake-math" element={<KPKFPBSnakeMathGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/meteor-pantul" element={<PenjumlahanMeteorPantulGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/meteor-pantul" element={<PenguranganMeteorPantulGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/meteor-pantul" element={<PerkalianMeteorPantulGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/meteor-pantul" element={<PembagianMeteorPantulGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/meteor-pantul" element={<OperasiCampuranMeteorPantulGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/meteor-pantul" element={<KPKFPBMeteorPantulGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />

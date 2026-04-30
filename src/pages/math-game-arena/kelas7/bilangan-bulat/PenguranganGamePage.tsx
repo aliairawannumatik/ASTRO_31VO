@@ -80,6 +80,15 @@ import { useNavigate } from "react-router-dom";
       to: "#0ea5e9",
       glow: "rgba(34,197,94,0.4)",
     },
+    {
+      name: "Meteor Pantul NUMATIK",
+      emoji: "☄️",
+      description: "Pantulkan meteor dengan pesawatmu dan hancurkan kristal asteroid! Jawab soal bonus untuk skor besar.",
+      path: "/math-game-arena/kelas-7/bilangan-bulat/pengurangan/meteor-pantul",
+      from: "#f97316",
+      to: "#a855f7",
+      glow: "rgba(249,115,22,0.4)",
+    },
   ];
 
   const PenguranganGamePage = () => {
