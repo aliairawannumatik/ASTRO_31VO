@@ -52,6 +52,13 @@ const games = [
     icon: <Plane className="w-7 h-7 text-cyan-300 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
+    label: "Meteor Pantul NUMATIK",
+    emoji: "🛸",
+    path: "/math-game-arena/umum/pecah-jawaban",
+    desc: "Pantulkan meteor untuk menghancurkan kristal jawaban benar!",
+    icon: <Disc className="w-7 h-7 text-red-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
     label: "Galaksi Defender Math",
     emoji: "👽",
     path: "/math-game-arena/umum/galaxy-defender",
@@ -106,13 +113,6 @@ const games = [
     path: "/math-game-arena/umum/hajar-mol",
     desc: "Pukul mol yang muncul hanya ketika membawa jawaban yang benar!",
     icon: <Hammer className="w-7 h-7 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
-    label: "Meteor Pantul NUMATIK",
-    emoji: "🛸",
-    path: "/math-game-arena/umum/pecah-jawaban",
-    desc: "Pantulkan meteor untuk menghancurkan kristal jawaban benar!",
-    icon: <Disc className="w-7 h-7 text-red-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
     label: "Zuma Math",

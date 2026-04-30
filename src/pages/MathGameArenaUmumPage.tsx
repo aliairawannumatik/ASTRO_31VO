@@ -88,14 +88,6 @@ const games = [
     badge: "BARU",
   },
   {
-    label: "Meteor Pantul NUMATIK",
-    emoji: "🛸",
-    path: "/math-game-arena/umum/pecah-jawaban",
-    desc: "Game Meteor! Pantulkan meteor ke kristal yang membawa jawaban benar untuk menghancurkannya!",
-    icon: <Swords className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    badge: "BARU",
-  },
-  {
     label: "Tembak Tank!",
     emoji: "🪖",
     path: "/math-game-arena/umum/tembak-tank",
@@ -157,6 +149,14 @@ const games = [
     path: "/math-game-arena/umum/space-impact",
     desc: "Tembak musuh yang membawa jawaban benar! Kumpulkan power-up, hadapi gelombang musuh luar angkasa!",
     icon: <Plane className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
+    badge: "BARU",
+  },
+  {
+    label: "Meteor Pantul NUMATIK",
+    emoji: "🛸",
+    path: "/math-game-arena/umum/pecah-jawaban",
+    desc: "Game Meteor! Pantulkan meteor ke kristal yang membawa jawaban benar untuk menghancurkannya!",
+    icon: <Swords className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
   {
