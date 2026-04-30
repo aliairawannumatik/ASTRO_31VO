@@ -1,4 +1,4 @@
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -343,8 +343,8 @@ const Soal1SVG = () => (
     <path d="M 226,55 A 22,22 0 0,0 254,55" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
     {/* Angle at K — opens to the upper-right */}
     <path d="M 168,175 A 28,28 0 0,0 158,154" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
-    {/* Angle at L — opens to the upper-left */}
-    <path d="M 352,175 A 28,28 0 0,0 358,154" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* Angle at L — opens to the upper-left (sweep CW so it bulges into the triangle) */}
+    <path d="M 352,175 A 28,28 0 0,1 360,155" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
 
     {/* Vertex dots (red) */}
     <circle cx="40"  cy="175" r="3.5" fill="#ef4444" />
@@ -367,8 +367,8 @@ const Soal1SVG = () => (
     <text x="186" y="167" fill="#fbbf24" fontSize="13" fontFamily="serif">
       (6<tspan fontStyle="italic">x</tspan> + 20)°
     </text>
-    {/* (4x)° at L — inside, slightly up & left of L */}
-    <text x="320" y="167" textAnchor="end" fill="#fbbf24" fontSize="13" fontFamily="serif">
+    {/* (4x)° at L — closer to the L vertex, just left of the arc */}
+    <text x="348" y="170" textAnchor="end" fill="#fbbf24" fontSize="13" fontFamily="serif">
       (4<tspan fontStyle="italic">x</tspan>)°
     </text>
   </svg>
@@ -1092,28 +1092,41 @@ const OlimpiadeGarisSudutPage = () => {
           <div className="space-y-4 animate-slide-up">
             {latihanDasar.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3">
-                  <span className="text-accent font-bold">{soal.no}.</span>{" "}
-                  {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
-                    </span>
-                  ))}
+                <div className="space-y-2 mb-3">
+                  {(() => {
+                    const paragraphs = soal.soal.split('\n\n');
+                    return paragraphs.map((para, paraIdx) => (
+                      <Fragment key={paraIdx}>
+                        <div className="font-body text-sm text-white">
+                          {paraIdx === 0 && (
+                            <span className="text-accent font-bold">{soal.no}. </span>
+                          )}
+                          {para.split('\n').map((line, lineIdx) => (
+                            <span key={lineIdx}>
+                              {lineIdx > 0 && <br />}
+                              {paraIdx === 0 && lineIdx === 0 && line.startsWith('OSN')
+                                ? <span className="text-yellow-400 font-semibold">{line}</span>
+                                : renderWithLatex(line)}
+                            </span>
+                          ))}
+                        </div>
+                        {paraIdx === 0 && soal.image && (
+                          <div className="flex flex-col items-center">
+                            {typeof soal.image === "string" ? (
+                              <img
+                                src={soal.image}
+                                alt={soal.imageCaption}
+                                className="max-w-full rounded-lg border border-border/40 bg-white/5"
+                              />
+                            ) : (
+                              <div className="w-full max-w-md">{soal.image}</div>
+                            )}
+                          </div>
+                        )}
+                      </Fragment>
+                    ));
+                  })()}
                 </div>
-                {soal.image && (
-                  <div className="my-3 flex flex-col items-center">
-                    {typeof soal.image === "string" ? (
-                      <img
-                        src={soal.image}
-                        alt={soal.imageCaption}
-                        className="max-w-full rounded-lg border border-border/40 bg-white/5"
-                      />
-                    ) : (
-                      <div className="w-full max-w-md">{soal.image}</div>
-                    )}
-                  </div>
-                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
                     {soal.options.map((opt, j) => (
