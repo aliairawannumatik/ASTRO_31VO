@@ -716,25 +716,35 @@ const Soal17SVG = () => {
 };
 
 // ── Soal 18: Cross at O with right angle, 7x° between vertical-up & diag,2x° between horiz-left & diag ──
+// O = (200,140). Diagonal AB passes through O: A(40,180)→B(360,100).
+// Diagonal angle from horizontal ≈ 14° above (slope -80/320 = -0.25).
+// Quadrant I  (upper-right): 7x — between vertical-up and diagonal-toward-B
+// Quadrant II (upper-left) : right-angle marker — between vertical-up and horizontal-left
+// Quadrant III(lower-left) : 2x — between diagonal-toward-A and horizontal-left
 const Soal18SVG = () => (
   <svg viewBox="0 0 380 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <line x1="20" y1="140" x2="360" y2="140" stroke="#ffffff" strokeWidth="2" />
     <line x1="200" y1="20" x2="200" y2="220" stroke="#ffffff" strokeWidth="2" />
-    {/* Diagonal A(lower-left) -> upper-right */}
+    {/* Diagonal A(lower-left) → B(upper-right) through O(200,140) */}
     <line x1="40" y1="180" x2="360" y2="100" stroke="#ffffff" strokeWidth="2" />
 
-    {/* Right-angle marker at upper-right (between vertical-up and horizontal-right) */}
-    <polyline points="200,154 214,154 214,140" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+    {/* Right-angle marker in quadrant II (upper-left of O):
+        vertical-up point (200,126) → left (186,126) → horizontal-left point (186,140) */}
+    <polyline points="200,126 186,126 186,140" fill="none" stroke="#ffffff" strokeWidth="1.5" />
 
-    <text x="204" y="148" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">O</text>
-    <text x="44" y="200" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
-    <text x="346" y="134" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    {/* O label — slightly right and below intersection */}
+    <text x="204" y="155" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">O</text>
+    <text x="28"  y="198" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+    <text x="346" y="96"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
 
-    <text x="170" y="100" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan>°</text>
-    <text x="100" y="160" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan>°</text>
+    {/* 7x in quadrant I (upper-right): between vertical-up and diagonal toward B */}
+    <text x="210" y="105" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan>°</text>
+
+    {/* 2x in quadrant III (lower-left): between diagonal toward A and horizontal-left — raised up */}
+    <text x="108" y="152" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan>°</text>
 
     <circle cx="200" cy="140" r="3" fill="#ef4444" />
-    <circle cx="40" cy="180" r="3" fill="#ef4444" />
+    <circle cx="40"  cy="180" r="3" fill="#ef4444" />
     <circle cx="360" cy="100" r="3" fill="#ef4444" />
   </svg>
 );
