@@ -506,7 +506,7 @@ const Soal8SVG = () => (
     <text x="350" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
     <text x="194" y="34" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
 
-    <text x="170" y="110" fill="#fbbf24" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>-15)°</text>
+    <text x="158" y="78" fill="#fbbf24" fontSize="12" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>-15)°</text>
     <text x="208" y="162" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan></text>
     <text x="246" y="162" fill="#fbbf24" fontSize="13" fontFamily="serif">(5<tspan fontStyle="italic">x</tspan>+5)°</text>
   </svg>
