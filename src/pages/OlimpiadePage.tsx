@@ -187,10 +187,13 @@ const OlimpiadePage = () => {
           <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-amber-500/20 to-yellow-400/10 border border-amber-400/30 flex items-center justify-center mb-5 shadow-[0_0_32px_rgba(251,191,36,0.2)]">
             <TrophySVG />
           </div>
-          <h1 className="font-display text-2xl md:text-3xl font-bold text-white text-center mb-2"
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-white text-center mb-1"
             style={{ textShadow: '0 0 40px rgba(251,191,36,0.5)' }}>
             OLIMPIADE MATEMATIKA
           </h1>
+          <p className="text-white/40 text-xs text-center font-body mb-2">
+            Irawan Sutiawan, M.Pd
+          </p>
           <p className="text-white/50 text-sm text-center font-body mb-4">
             Latihan soal & materi tingkat olimpiade SMP
           </p>
