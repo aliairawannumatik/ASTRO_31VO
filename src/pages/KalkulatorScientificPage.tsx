@@ -40,9 +40,13 @@ const toMathJsExpression = (expr: string, angleMode: AngleMode): string => {
   // Percent: 50% → (50/100). Handles trailing % or % followed by an operator/paren.
   mathExpr = mathExpr.replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
   // Convert superscript numbers to ^ notation
+  // Negative-superscript variants must be handled BEFORE the plain ones,
+  // otherwise "²" inside "⁻²" would already be replaced and leave a stray "⁻".
+  mathExpr = mathExpr.replace(/⁻²/g, "^(-2)");
+  mathExpr = mathExpr.replace(/⁻³/g, "^(-3)");
+  mathExpr = mathExpr.replace(/⁻¹/g, "^(-1)");
   mathExpr = mathExpr.replace(/²/g, "^2");
   mathExpr = mathExpr.replace(/³/g, "^3");
-  mathExpr = mathExpr.replace(/⁻¹/g, "^(-1)");
   mathExpr = mathExpr.replace(/\^/g, "^");
   mathExpr = mathExpr.replace(/(\d+)!/g, "factorial($1)");
   mathExpr = mathExpr.replace(/Ans/g, "0"); // Will be replaced with actual answer
@@ -287,6 +291,7 @@ const KalkulatorScientificPage = () => {
     "FPB(", "KPK(",
     " mod ",
     "×10^(", "10^(", "e^(", "^(-", "^(1/", "1/(", "√(", "∛(",
+    "⁻²", "⁻³", "⁻¹",
   ];
 
   const handleClearAll = () => {
@@ -388,6 +393,43 @@ const KalkulatorScientificPage = () => {
     } else {
       insertAtCursor(value);
     }
+    setShiftMode(false);
+    setAlphaMode(false);
+  }, [insertAtCursor]);
+
+  // Toggle a minus sign in front of the superscript immediately preceding the cursor.
+  // ²  ↔ ⁻² ,  ³ ↔ ⁻³ ,  ¹ ↔ ⁻¹.  If no superscript precedes the cursor, just insert ⁻¹.
+  const handleToggleNegativeExponent = useCallback(() => {
+    playPopSound();
+    const expr = expressionRef.current;
+    const pos = Math.min(Math.max(cursorRef.current, 0), expr.length);
+
+    // Check 2-char negative superscripts first (⁻² , ⁻³ , ⁻¹)
+    const prev2 = expr.slice(Math.max(0, pos - 2), pos);
+    if (prev2 === "⁻²" || prev2 === "⁻³" || prev2 === "⁻¹") {
+      const positive = prev2.slice(1); // drop the leading ⁻
+      const next = expr.slice(0, pos - 2) + positive + expr.slice(pos);
+      setExpression(next);
+      setCursorPosition(pos - 2 + positive.length);
+      setShiftMode(false);
+      setAlphaMode(false);
+      return;
+    }
+
+    // Check 1-char positive superscripts (² , ³)
+    const prev1 = expr.slice(Math.max(0, pos - 1), pos);
+    if (prev1 === "²" || prev1 === "³") {
+      const negative = "⁻" + prev1;
+      const next = expr.slice(0, pos - 1) + negative + expr.slice(pos);
+      setExpression(next);
+      setCursorPosition(pos - 1 + negative.length);
+      setShiftMode(false);
+      setAlphaMode(false);
+      return;
+    }
+
+    // Default: just insert ⁻¹
+    insertAtCursor("⁻¹");
     setShiftMode(false);
     setAlphaMode(false);
   }, [insertAtCursor]);
@@ -864,7 +906,7 @@ const KalkulatorScientificPage = () => {
               {shiftMode ? "1/x" : "x⁻ⁿ"}
             </CalcButton>
             <CalcButton
-              onClick={() => handleInput("⁻¹")}
+              onClick={handleToggleNegativeExponent}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
             >
               x⁻¹
