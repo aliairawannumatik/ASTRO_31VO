@@ -37,6 +37,8 @@ const toMathJsExpression = (expr: string, angleMode: AngleMode): string => {
   // FPB (Faktor Persekutuan terBesar) → gcd (already replaced if user typed FPB(
   mathExpr = mathExpr.replace(/FPB\(/g, "gcd(");
   mathExpr = mathExpr.replace(/KPK\(/g, "lcm(");
+  mathExpr = mathExpr.replace(/nCr\(/g, "combinations(");
+  mathExpr = mathExpr.replace(/nPr\(/g, "permutations(");
   // Percent: 50% → (50/100). Handles trailing % or % followed by an operator/paren.
   mathExpr = mathExpr.replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
   // Indonesian-style argument separator: ";" → "," for mathjs (e.g. KPK(12;18))
@@ -290,7 +292,7 @@ const KalkulatorScientificPage = () => {
     "asin(", "acos(", "atan(",
     "log₁₀(", "ln(", "sin(", "cos(", "tan(",
     "abs(", "Exp(", "exp(",
-    "FPB(", "KPK(",
+    "FPB(", "KPK(", "nCr(", "nPr(",
     " mod ",
     "×10^(", "10^(", "e^(", "^(-", "^(1/", "1/(", "√(", "∛(",
     "⁻²", "⁻³", "⁻¹",
@@ -908,11 +910,12 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "1/x" : "x⁻ⁿ"}
             </CalcButton>
+            {/* nCr (kombinasi) → combinations(n;k) */}
             <CalcButton
-              onClick={handleToggleNegativeExponent}
+              onClick={() => handleFunction("combinations", "nCr")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
             >
-              x⁻¹
+              nCr
             </CalcButton>
             {/* % : percent | shift: mod */}
             <CalcButton
