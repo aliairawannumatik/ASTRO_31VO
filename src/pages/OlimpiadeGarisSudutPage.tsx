@@ -373,17 +373,19 @@ const Soal2SVG = () => (
     <text x="338" y="32" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
     <text x="406" y="116" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">c</text>
 
-    {/* Numbers around left intersection (120, 120) */}
-    <text x="100" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">1</text>
-    <text x="128" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">2</text>
-    <text x="128" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">3</text>
-    <text x="100" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">4</text>
+    {/* Numbers around left intersection (120, 120). The narrow wedges (NE, SW)
+        require pushing 2 and 4 further away so they don't sit on top of the
+        diagonal line. */}
+    <text x="94"  y="108" fill="#38bdf8" fontSize="13" fontWeight="bold">1</text>
+    <text x="158" y="108" fill="#38bdf8" fontSize="13" fontWeight="bold">2</text>
+    <text x="158" y="152" fill="#38bdf8" fontSize="13" fontWeight="bold">3</text>
+    <text x="76"  y="152" fill="#38bdf8" fontSize="13" fontWeight="bold">4</text>
 
     {/* Numbers around right intersection (280, 120) */}
-    <text x="260" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">5</text>
-    <text x="288" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">6</text>
-    <text x="288" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">7</text>
-    <text x="260" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">8</text>
+    <text x="254" y="108" fill="#38bdf8" fontSize="13" fontWeight="bold">5</text>
+    <text x="318" y="108" fill="#38bdf8" fontSize="13" fontWeight="bold">6</text>
+    <text x="318" y="152" fill="#38bdf8" fontSize="13" fontWeight="bold">7</text>
+    <text x="236" y="152" fill="#38bdf8" fontSize="13" fontWeight="bold">8</text>
 
     <circle cx="120" cy="120" r="3" fill="#ef4444" />
     <circle cx="280" cy="120" r="3" fill="#ef4444" />
