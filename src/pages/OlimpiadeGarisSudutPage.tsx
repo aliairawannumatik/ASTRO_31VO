@@ -440,9 +440,9 @@ const Soal4SVG = () => (
     <text x="174" y="240" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">F</text>
     <text x="208" y="294" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">H</text>
 
-    {/* Angle labels */}
-    <text x="200" y="120" fill="#fbbf24" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>)°</text>
-    <text x="208" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">(<tspan fontStyle="italic">x</tspan>+40)°</text>
+    {/* Angle labels — placed snug next to the vertices C and F */}
+    <text x="180" y="116" fill="#fbbf24" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>)°</text>
+    <text x="198" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">(<tspan fontStyle="italic">x</tspan>+40)°</text>
 
     <circle cx="172" cy="100" r="3" fill="#ef4444" />
     <circle cx="190" cy="220" r="3" fill="#ef4444" />
