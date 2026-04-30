@@ -61,8 +61,12 @@ export default function GuruQuizOverlay({
               : "0 0 14px rgba(129,140,248,0.35)",
           }}
         >
-          <span aria-hidden>👩‍🏫</span>
-          <span>SOAL GURU:</span>
+          <img
+            src="/numatik-ai-avatar.png"
+            alt="NUMATIK"
+            className="h-5 w-5 rounded-full object-cover ring-1 ring-cyan-300/60"
+          />
+          <span>SOAL NUMATIK:</span>
           <span
             className={urgent ? "animate-pulse" : ""}
             style={{
@@ -101,7 +105,7 @@ export default function GuruQuizOverlay({
         >
           <div className="text-5xl animate-bounce">🏆</div>
           <h2 className="text-2xl font-black text-yellow-300" style={{ textShadow: "0 0 20px #FFD700" }}>
-            TANTANGAN GURU SELESAI!
+            TANTANGAN NUMATIK SELESAI!
           </h2>
 
           <div className="flex gap-1 text-3xl">
@@ -114,7 +118,7 @@ export default function GuruQuizOverlay({
             className="rounded-2xl px-6 py-4 text-center"
             style={{ background: "rgba(255,215,0,0.15)", border: "2px solid rgba(255,215,0,0.4)" }}
           >
-            <p className="text-sm text-yellow-200 mb-1">Skor Tantangan Guru</p>
+            <p className="text-sm text-yellow-200 mb-1">Skor Tantangan NUMATIK</p>
             <p
               className="text-5xl font-black text-yellow-300"
               style={{ textShadow: "0 0 20px #FFD700" }}
@@ -178,10 +182,19 @@ export default function GuruQuizOverlay({
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">👩‍🏫</span>
+            <div className="relative h-11 w-11 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 to-blue-700 p-[2px] shadow-[0_0_18px_rgba(34,211,238,0.55)]">
+              <img
+                src="/numatik-ai-avatar.png"
+                alt="NUMATIK"
+                className="h-full w-full rounded-full object-cover"
+              />
+              <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-cyan-400 text-[8px] ring-2 ring-slate-900">
+                🤖
+              </span>
+            </div>
             <div>
-              <p className="text-xs font-bold text-indigo-300 uppercase tracking-widest">
-                Soal dari Guru
+              <p className="text-xs font-bold text-cyan-300 uppercase tracking-widest">
+                Soal dari NUMATIK
               </p>
               <p className="text-xs text-indigo-400">
                 Pertanyaan {questionNumber} / {totalQuestions}

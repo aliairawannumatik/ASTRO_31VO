@@ -797,7 +797,7 @@ const BrickBreakerPage = () => {
         [
           "Gerakkan paddle dengan mouse / sentuhan!",
           "Setiap bata pecah setelah 2× kena bola 🧱",
-          "Tiap 25 detik muncul Soal Pak/Bu Guru ⏱️",
+          "Tiap 25 detik muncul Soal NUMATIK 🤖",
           "Combo = poin berlipat! 🔥",
         ].forEach((l, i) => ctx.fillText(l, CW / 2, CH / 2 - 4 + i * 24));
 
@@ -875,14 +875,18 @@ const BrickBreakerPage = () => {
       {/* Countdown chip: reserve a fixed slot so the canvas size doesn't jump */}
       <div className="relative z-10 h-9 flex items-center justify-center w-full px-3 shrink-0">
         {guruQuiz.isCountdownActive && (
-          <div className="rounded-xl border border-amber-400/60 bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 px-3 py-1 flex items-center justify-center gap-2 shadow-[0_0_18px_rgba(255,200,0,0.35)]">
-            <span className="text-sm">👨‍🏫</span>
-            <span className="font-display text-[11px] sm:text-xs font-bold text-amber-200 tracking-wide drop-shadow-[0_0_6px_rgba(255,215,0,0.55)]">
-              SOAL GURU ke-{guruQuiz.questionNumber + 1}/{guruQuiz.totalQuestions} dalam
+          <div className="rounded-xl border border-cyan-400/60 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-cyan-500/20 px-3 py-1 flex items-center justify-center gap-2 shadow-[0_0_18px_rgba(34,211,238,0.45)]">
+            <img
+              src="/numatik-ai-avatar.png"
+              alt="NUMATIK"
+              className="h-5 w-5 rounded-full object-cover ring-1 ring-cyan-300/70"
+            />
+            <span className="font-display text-[11px] sm:text-xs font-bold text-cyan-200 tracking-wide drop-shadow-[0_0_6px_rgba(34,211,238,0.55)]">
+              SOAL NUMATIK ke-{guruQuiz.questionNumber + 1}/{guruQuiz.totalQuestions} dalam
             </span>
             <span
-              className={`font-display text-sm sm:text-base font-black tabular-nums drop-shadow-[0_0_8px_rgba(255,215,0,0.85)] ${
-                guruQuiz.secondsUntilNext <= 5 ? "text-red-300 animate-pulse" : "text-amber-100"
+              className={`font-display text-sm sm:text-base font-black tabular-nums drop-shadow-[0_0_8px_rgba(34,211,238,0.85)] ${
+                guruQuiz.secondsUntilNext <= 5 ? "text-red-300 animate-pulse" : "text-cyan-100"
               }`}
             >
               {guruQuiz.secondsUntilNext}s
