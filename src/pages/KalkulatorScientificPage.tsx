@@ -880,6 +880,13 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "FPB(" : "KPK"}
             </CalcButton>
+            {/* ; : separator for KPK / FPB / nPr arguments */}
+            <CalcButton
+              onClick={() => handleInput(";")}
+              className="h-10 text-base bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+            >
+              ;
+            </CalcButton>
             <CalcButton
               onClick={() => shiftMode ? handleInput("e") : handleInput("π")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
@@ -887,13 +894,6 @@ const KalkulatorScientificPage = () => {
               subLabelColor="text-amber-400"
             >
               {shiftMode ? "e" : "π"}
-            </CalcButton>
-            {/* ; : separator for KPK / FPB / nPr arguments */}
-            <CalcButton
-              onClick={() => handleInput(";")}
-              className="h-10 text-base bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-            >
-              ;
             </CalcButton>
           </div>
 
