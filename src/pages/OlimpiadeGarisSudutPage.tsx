@@ -749,27 +749,48 @@ const Soal18SVG = () => (
   </svg>
 );
 
-// ── Soal 19: Three lines with angles x, b, y, a (triangle config) ────────────
+// ── Soal 19: Two diagonals crossing at P≈(219,84); horizontal at y=200 ────────
+// Left diag:  (0,244)→L(60,200)→P(219,84)→(280,40)   [extended below L]
+// Right diag: (370,257)→R(320,200)→P(219,84)→(180,40) [extended below R]
+// Angles:
+//   b  — upper angle at P (between left-diag-up-right & right-diag-up-left), label upper-right
+//   y  — exterior at L, lower-left (between horiz-left & left-diag-down-left)
+//   a  — interior at R (between right-diag-up-left & horiz-left, inside triangle)
+//   x  — exterior at R, lower-right (between horiz-right & right-diag-down-right)
+//
+// Arc endpoints (r=20 from vertex):
+//   b:  P→left-diag-up (235,72)  & P→right-diag-up (206,69)  sweep=0 (CCW, through top)
+//   y:  L→horiz-left   (40,200)  & L→left-diag-down (44,212) sweep=1 (CW, lower-left)
+//   a:  R→right-diag-up(307,185) & R→horiz-left     (300,200) sweep=0 (CCW, upper-left)
+//   x:  R→horiz-right  (340,200) & R→right-diag-down(333,215) sweep=1 (CW, lower-right)
 const Soal19SVG = () => (
-  <svg viewBox="0 0 400 260" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Bottom horizontal */}
-    <line x1="20" y1="200" x2="380" y2="200" stroke="#ffffff" strokeWidth="2" />
-    {/* Diagonal from lower-left going up-right (creates x at left, b at top) */}
-    <line x1="60" y1="200" x2="280" y2="40" stroke="#ffffff" strokeWidth="2" />
-    {/* Diagonal from lower-right going up-left (creates y at right, b at top, a near y) */}
-    <line x1="320" y1="200" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" />
+  <svg viewBox="0 0 400 265" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Horizontal baseline */}
+    <line x1="20"  y1="200" x2="380" y2="200" stroke="#ffffff" strokeWidth="2" />
+    {/* Left diagonal — extended below L toward lower-left */}
+    <line x1="0"   y1="244" x2="280" y2="40"  stroke="#ffffff" strokeWidth="2" />
+    {/* Right diagonal — extended below R toward lower-right */}
+    <line x1="370" y1="257" x2="180" y2="40"  stroke="#ffffff" strokeWidth="2" />
 
-    {/* x at lower-left vertex (above horizontal, right of diagonal) */}
-    <text x="76" y="194" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
-    {/* b at top apex */}
-    <text x="226" y="118" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
-    {/* a small angle between bottom diagonal and horizontal at right vertex */}
-    <text x="290" y="192" fill="#fbbf24" fontSize="13" fontStyle="italic" fontFamily="serif">a</text>
-    {/* y exterior at right vertex */}
-    <text x="306" y="194" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
+    {/* Arc b — upper angle at crossing P(219,84), between both diagonals going up */}
+    <path d="M 235,72 A 20,20 0 0,0 206,69" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    {/* Arc y — exterior lower-left at L(60,200) */}
+    <path d="M 40,200 A 20,20 0 0,1 44,212" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    {/* Arc a — interior at R(320,200), upper-left inside triangle */}
+    <path d="M 307,185 A 20,20 0 0,0 300,200" fill="none" stroke="#22c55e" strokeWidth="1.8" />
+    {/* Arc x — exterior lower-right at R(320,200) */}
+    <path d="M 340,200 A 20,20 0 0,1 333,215" fill="none" stroke="#22c55e" strokeWidth="1.8" />
 
-    <circle cx="60" cy="200" r="3" fill="#ef4444" />
-    <circle cx="320" cy="200" r="3" fill="#ef4444" />
+    {/* Labels */}
+    <text x="228" y="58"  fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
+    <text x="22"  y="224" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
+    <text x="278" y="183" fill="#fbbf24" fontSize="13" fontStyle="italic" fontFamily="serif">a</text>
+    <text x="336" y="230" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+
+    {/* Vertex dots */}
+    <circle cx="219" cy="84"  r="3.5" fill="#ef4444" />
+    <circle cx="60"  cy="200" r="3.5" fill="#ef4444" />
+    <circle cx="320" cy="200" r="3.5" fill="#ef4444" />
   </svg>
 );
 
