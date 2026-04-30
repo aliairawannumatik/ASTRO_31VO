@@ -482,12 +482,12 @@ const Soal7SVG = () => (
     <text x="232" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
     <text x="184" y="38" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">R</text>
 
-    {/* 7x near R on side QR */}
-    <text x="142" y="78" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan></text>
+    {/* 7x at vertex R (interior angle of the triangle) */}
+    <text x="172" y="68" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan></text>
     {/* 72° at Q (interior, between QP and QR) */}
     <text x="208" y="162" fill="#fbbf24" fontSize="12" fontFamily="serif">72°</text>
-    {/* 6x exterior at Q (between QR and Q-extension) */}
-    <text x="262" y="162" fill="#fbbf24" fontSize="13" fontFamily="serif">6<tspan fontStyle="italic">x</tspan></text>
+    {/* 6x exterior at Q (between QR and Q-extension) — nudged left toward Q */}
+    <text x="246" y="162" fill="#fbbf24" fontSize="13" fontFamily="serif">6<tspan fontStyle="italic">x</tspan></text>
   </svg>
 );
 
