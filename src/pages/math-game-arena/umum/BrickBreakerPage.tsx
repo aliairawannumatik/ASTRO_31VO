@@ -20,57 +20,28 @@ const BRICK_COLS = 7;
 const BRICK_ROWS = 5;
 const BRICK_PAD = 5;
 const BRICK_START_X = 12;
-const BRICK_START_Y = 120;
+const BRICK_START_Y = 60;
 const BRICK_W = (CW - BRICK_START_X * 2 - BRICK_PAD * (BRICK_COLS - 1)) / BRICK_COLS;
 const BRICK_H = 26;
 
-// ── Math ────────────────────────────────────────────────────────────────────
-interface MQ { q: string; ans: number }
-function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
-
-const makeQ = (): MQ => {
-  const t = ~~(Math.random() * 8);
-  switch (t) {
-    case 0: { const a = 2 + ~~(Math.random() * 10), b = 2 + ~~(Math.random() * 10); return { q: `${a} × ${b}`, ans: a * b }; }
-    case 1: { const a = 10 + ~~(Math.random() * 80), b = 10 + ~~(Math.random() * 80); return { q: `${a} + ${b}`, ans: a + b }; }
-    case 2: { const b = 5 + ~~(Math.random() * 40), a = b + 5 + ~~(Math.random() * 50); return { q: `${a} − ${b}`, ans: a - b }; }
-    case 3: { const b = 2 + ~~(Math.random() * 9), a = b * (2 + ~~(Math.random() * 9)); return { q: `${a} ÷ ${b}`, ans: a / b }; }
-    case 4: { const sq = [4,9,16,25,36,49,64,81,100][~~(Math.random() * 9)]; return { q: `√${sq}`, ans: Math.round(Math.sqrt(sq)) }; }
-    case 5: { const a = 2 + ~~(Math.random() * 9); return { q: `${a}²`, ans: a * a }; }
-    case 6: { const a = 2 + ~~(Math.random() * 9), b = 2 + ~~(Math.random() * 9); return { q: `KPK(${a},${b})`, ans: (a * b) / gcd(a, b) }; }
-    default: { const a = 10 + ~~(Math.random() * 40), b = 2 + ~~(Math.random() * 8); return { q: `${a} mod ${b}`, ans: a % b }; }
-  }
-};
-
-const makeWrong = (ans: number, used: Set<number>): number => {
-  let v: number, tries = 0;
-  do {
-    const d = 1 + ~~(Math.random() * 14);
-    v = ans + (Math.random() < 0.5 ? d : -d);
-    tries++;
-  } while ((used.has(v) || v < 0) && tries < 100);
-  return v < 0 ? ans + 1 + ~~(Math.random() * 8) : v;
-};
-
 // ── Brick color palette ──────────────────────────────────────────────────────
 const ROW_COLORS = [
-  { fill: "#ff5e87", glow: "#ff5e87", text: "#fff" },
-  { fill: "#ff9040", glow: "#ff9040", text: "#fff" },
-  { fill: "#ffc94a", glow: "#ffc94a", text: "#111" },
-  { fill: "#72f572", glow: "#72f572", text: "#111" },
-  { fill: "#5ec8ff", glow: "#5ec8ff", text: "#111" },
+  { fill: "#ff5e87", glow: "#ff5e87" },
+  { fill: "#ff9040", glow: "#ff9040" },
+  { fill: "#ffc94a", glow: "#ffc94a" },
+  { fill: "#72f572", glow: "#72f572" },
+  { fill: "#5ec8ff", glow: "#5ec8ff" },
 ];
 
 interface Brick {
   col: number; row: number;
   x: number; y: number;
-  value: number; correct: boolean;
   color: typeof ROW_COLORS[0];
   alive: boolean;
   hits: number;     // number of times this brick has been hit by the ball
-  flashT: number;   // 0 = normal, >0 = wrong-hit flash
-  cracked: boolean; // becomes true after first correct hit (visual crack)
-  hitT: number;     // correct hit pop animation
+  cracked: boolean; // becomes true after first hit (visual crack)
+  hitT: number;     // hit pop animation
+  hitCooldown: number; // seconds remaining where the brick can't be re-hit
   sparkles: Sparkle[];
 }
 
@@ -98,7 +69,6 @@ const BrickBreakerPage = () => {
   const paddleRef = useRef({ x: CW / 2, w: PADDLE_W_BASE, powerT: 0 });
   const mouseTRef = useRef(CW / 2);
 
-  const currentQRef = useRef<MQ>(makeQ());
   const scoreRef = useRef(0);
   const livesRef = useRef(3);
   const bestRef = useRef(0);
@@ -113,38 +83,21 @@ const BrickBreakerPage = () => {
   const [, forceRender] = useState(0);
   const rerender = useCallback(() => forceRender(n => n + 1), []);
 
-  // ── Build brick grid ──────────────────────────────────────────────────────
-  const buildBricks = useCallback((q: MQ) => {
-    const total = BRICK_COLS * BRICK_ROWS;
-    const used = new Set<number>([q.ans]);
-    const values: number[] = [q.ans];
-    while (values.length < total) {
-      const w = makeWrong(q.ans, used);
-      used.add(w);
-      values.push(w);
-    }
-    // shuffle
-    for (let i = values.length - 1; i > 0; i--) {
-      const j = ~~(Math.random() * (i + 1));
-      [values[i], values[j]] = [values[j], values[i]];
-    }
+  // ── Build brick grid (color-only, no math) ────────────────────────────────
+  const buildBricks = useCallback(() => {
     const bricks: Brick[] = [];
-    let vi = 0;
     for (let row = 0; row < BRICK_ROWS; row++) {
       for (let col = 0; col < BRICK_COLS; col++) {
-        const val = values[vi++];
         bricks.push({
           col, row,
           x: BRICK_START_X + col * (BRICK_W + BRICK_PAD),
           y: BRICK_START_Y + row * (BRICK_H + BRICK_PAD),
-          value: val,
-          correct: val === q.ans,
           color: ROW_COLORS[row % ROW_COLORS.length],
           alive: true,
           hits: 0,
-          flashT: 0,
           cracked: false,
           hitT: 0,
+          hitCooldown: 0,
           sparkles: [],
         });
       }
@@ -188,9 +141,7 @@ const BrickBreakerPage = () => {
     trailRef.current = [];
     paddleRef.current = { x: CW / 2, w: PADDLE_W_BASE, powerT: 0 };
     mouseTRef.current = CW / 2;
-    const q = makeQ();
-    currentQRef.current = q;
-    buildBricks(q);
+    buildBricks();
     spawnBgStars();
     resetBall();
     rerender();
@@ -339,64 +290,69 @@ const BrickBreakerPage = () => {
             const dx = ball.x - nearX, dy = ball.y - nearY;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < BALL_R) {
-              // determine bounce axis
+              // determine bounce axis & push ball outside the brick
               const overlapX = ball.x < bx ? ball.x - bx : ball.x > bx + bw ? ball.x - (bx + bw) : 0;
               const overlapY = ball.y < by ? ball.y - by : ball.y > by + bh ? ball.y - (by + bh) : 0;
               if (Math.abs(overlapX) > Math.abs(overlapY)) {
                 ball.vx = -ball.vx;
-                ball.x += overlapX > 0 ? BALL_R - dist : -(BALL_R - dist);
+                ball.x += overlapX > 0 ? (BALL_R - Math.abs(dx)) : -(BALL_R - Math.abs(dx));
               } else {
                 ball.vy = -ball.vy;
-                ball.y += overlapY > 0 ? BALL_R - dist : -(BALL_R - dist);
+                ball.y += overlapY > 0 ? (BALL_R - Math.abs(dy)) : -(BALL_R - Math.abs(dy));
               }
 
-              if (b.correct) {
-                // CORRECT! Requires 2 hits to fully open.
-                b.hits++;
-                playPopSound();
-                b.hitT = 1;
-                if (b.hits < 2) {
-                  // First hit: crack the brick but don't break it yet.
-                  b.cracked = true;
+              // Skip the hit-counter logic if this brick was just hit a moment
+              // ago (avoids the ball registering 2 hits across consecutive frames
+              // while still inside the brick).
+              if (b.hitCooldown > 0) {
+                break;
+              }
+
+              b.hits++;
+              b.hitT = 1;
+              b.hitCooldown = 0.18;
+              playPopSound();
+
+              if (b.hits < 2) {
+                // First hit — brick cracks but stays alive.
+                b.cracked = true;
+                floatTextsRef.current.push({
+                  x: b.x + BRICK_W / 2, y: b.y,
+                  txt: "💥", alpha: 1, vy: -70, good: true,
+                });
+              } else {
+                // Second hit — brick opens / breaks.
+                comboRef.current++;
+                const pts = 10 * comboRef.current * levelRef.current;
+                scoreRef.current += pts;
+                if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
+                addSparkles(b);
+                b.alive = false;
+                levelRef.current = Math.floor(scoreRef.current / 200) + 1;
+                timerRef.current = Math.min(timerRef.current + 2, 90);
+                paddle.w = Math.min(PADDLE_W_BASE + 18, 140);
+                paddle.powerT = 2.5;
+                floatTextsRef.current.push({
+                  x: b.x + BRICK_W / 2, y: b.y,
+                  txt: `+${pts}${comboRef.current > 1 ? ` 🔥×${comboRef.current}` : ""}`,
+                  alpha: 1, vy: -90, good: true,
+                });
+                // If every brick is cleared, give a bonus and rebuild a fresh wall.
+                const remaining = bricksRef.current.filter(br => br.alive).length;
+                if (remaining === 0) {
+                  scoreRef.current += 200;
+                  timerRef.current = Math.min(timerRef.current + 15, 90);
                   floatTextsRef.current.push({
-                    x: b.x + BRICK_W / 2, y: b.y,
-                    txt: "💥 1/2", alpha: 1, vy: -70, good: true,
-                  });
-                } else {
-                  // Second hit: brick opens (broken).
-                  comboRef.current++;
-                  const pts = 20 * comboRef.current * levelRef.current;
-                  scoreRef.current += pts;
-                  if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
-                  addSparkles(b);
-                  b.alive = false;
-                  levelRef.current = Math.floor(scoreRef.current / 150) + 1;
-                  timerRef.current = Math.min(timerRef.current + 8, 90);
-                  // give wide paddle bonus
-                  paddle.w = Math.min(PADDLE_W_BASE + 30, 140);
-                  paddle.powerT = 4;
-                  floatTextsRef.current.push({
-                    x: b.x + BRICK_W / 2, y: b.y,
-                    txt: `+${pts}${comboRef.current > 1 ? ` 🔥×${comboRef.current}` : ""}`,
-                    alpha: 1, vy: -90, good: true,
+                    x: CW / 2, y: CH / 2,
+                    txt: "💎 BONUS LANTAI BERSIH +200!",
+                    alpha: 1, vy: -50, good: true,
                   });
                   setTimeout(() => {
                     if (phaseRef.current !== "playing" && phaseRef.current !== "ready") return;
-                    const q = makeQ();
-                    currentQRef.current = q;
-                    buildBricks(q);
+                    buildBricks();
                     rerender();
-                  }, 500);
+                  }, 600);
                 }
-              } else {
-                // wrong brick — blinks and revives quickly
-                b.flashT = 0.6;
-                comboRef.current = 0;
-                if (paddle.w > PADDLE_W_BASE) { paddle.w = PADDLE_W_BASE; paddle.powerT = 0; }
-                floatTextsRef.current.push({
-                  x: b.x + BRICK_W / 2, y: b.y,
-                  txt: "✗", alpha: 1, vy: -60, good: false,
-                });
               }
               break;
             }
@@ -411,8 +367,8 @@ const BrickBreakerPage = () => {
 
       // ── Update bricks ──────────────────────────────────────────────────
       for (const b of bricksRef.current) {
-        if (b.flashT > 0) b.flashT = Math.max(0, b.flashT - dt * 3);
         if (b.hitT > 0) b.hitT = Math.max(0, b.hitT - dt * 3);
+        if (b.hitCooldown > 0) b.hitCooldown = Math.max(0, b.hitCooldown - dt);
         for (const s of b.sparkles) {
           s.x += s.vx * dt; s.y += s.vy * dt;
           s.vy += 200 * dt;
@@ -464,49 +420,39 @@ const BrickBreakerPage = () => {
       }
       ctx.globalAlpha = 1;
 
-      // HUD bar
+      // HUD bar (compact — no math question, just stats)
+      const HUD_H = 44;
       const barGrad = ctx.createLinearGradient(0, 0, CW, 0);
       barGrad.addColorStop(0, "rgba(5,5,20,0.92)");
       barGrad.addColorStop(1, "rgba(10,3,30,0.92)");
       ctx.fillStyle = barGrad;
-      ctx.fillRect(0, 0, CW, 108);
+      ctx.fillRect(0, 0, CW, HUD_H);
 
       if (phase === "playing" || phase === "ready") {
-        ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        ctx.font = "bold 12px 'Orbitron', monospace";
-        ctx.fillStyle = "rgba(255,255,255,0.65)";
-        ctx.shadowBlur = 0;
-        ctx.fillText("Pecahkan bata yang membawa jawaban BENAR! 🧱", CW / 2, 16);
-
-        ctx.shadowBlur = 26;
-        ctx.shadowColor = `hsl(${hue}, 100%, 70%)`;
-        ctx.fillStyle = `hsl(${hue}, 100%, 82%)`;
-        ctx.font = "bold 30px 'Orbitron', monospace";
-        ctx.fillText(currentQRef.current.q, CW / 2, 55);
-        ctx.shadowBlur = 0;
+        ctx.textBaseline = "middle";
+        ctx.font = "bold 13px 'Orbitron', monospace";
 
         ctx.textAlign = "left";
-        ctx.font = "bold 12px 'Orbitron', monospace";
         ctx.fillStyle = "#ffc94a"; ctx.shadowBlur = 10; ctx.shadowColor = "#ffc94a";
-        ctx.fillText(`⭐ ${scoreRef.current}`, 10, 86);
+        ctx.fillText(`⭐ ${scoreRef.current}`, 10, 18);
+
+        ctx.textAlign = "center";
+        ctx.fillStyle = `hsl(${(hue + 60) % 360}, 100%, 75%)`;
+        ctx.shadowColor = `hsl(${(hue + 60) % 360}, 100%, 60%)`;
+        ctx.fillText(`LEVEL ${levelRef.current}`, CW / 2, 18);
 
         ctx.textAlign = "right";
         ctx.fillStyle = "#ff5e87"; ctx.shadowColor = "#ff5e87";
-        ctx.fillText(`❤️ ${"♥".repeat(Math.max(0, livesRef.current))}`, CW - 10, 86);
-
-        ctx.textAlign = "center";
-        ctx.font = "bold 10px 'Orbitron', monospace";
-        ctx.fillStyle = `hsl(${(hue + 60) % 360}, 100%, 75%)`;
-        ctx.fillText(`LEVEL ${levelRef.current}`, CW / 2, 86);
+        ctx.fillText(`❤️ ${"♥".repeat(Math.max(0, livesRef.current))}`, CW - 10, 18);
         ctx.shadowBlur = 0;
 
         // Timer bar
-        const tFrac = timerRef.current / 90;
+        const tFrac = Math.max(0, Math.min(1, timerRef.current / 90));
         const tCol = `hsl(${tFrac * 120}, 100%, 55%)`;
         ctx.fillStyle = "rgba(255,255,255,0.07)";
-        ctx.fillRect(0, 106, CW, 5);
+        ctx.fillRect(0, HUD_H - 5, CW, 5);
         ctx.fillStyle = tCol; ctx.shadowBlur = 8; ctx.shadowColor = tCol;
-        ctx.fillRect(0, 106, CW * tFrac, 5);
+        ctx.fillRect(0, HUD_H - 5, CW * tFrac, 5);
         ctx.shadowBlur = 0;
       }
 
@@ -526,26 +472,21 @@ const BrickBreakerPage = () => {
 
         if (!b.alive) continue;
 
-        const isCorrect = b.correct;
-        const flashOn = b.flashT > 0;
+        // hit pop scale animation
+        const scale = 1 + b.hitT * 0.08;
         const cx2 = b.x + BRICK_W / 2, cy2 = b.y + BRICK_H / 2;
 
-        // glow for correct brick
-        if (isCorrect) {
-          const pulse = 0.7 + 0.3 * Math.sin(ts / 300);
-          ctx.shadowBlur = 24 * pulse;
-          ctx.shadowColor = `hsl(${hue}, 100%, 75%)`;
-        } else if (flashOn) {
-          ctx.shadowBlur = 18;
-          ctx.shadowColor = "#ff3333";
-        } else {
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = b.color.glow;
-        }
+        ctx.save();
+        ctx.translate(cx2, cy2);
+        ctx.scale(scale, scale);
+        ctx.translate(-cx2, -cy2);
+
+        ctx.shadowBlur = 8 + b.hitT * 14;
+        ctx.shadowColor = b.color.glow;
 
         // brick body
         const brickGrad = ctx.createLinearGradient(b.x, b.y, b.x, b.y + BRICK_H);
-        const fillColor = flashOn ? "#ff3333" : (isCorrect ? `hsl(${hue}, 100%, 65%)` : b.color.fill);
+        const fillColor = b.color.fill;
         brickGrad.addColorStop(0, lightenColor(fillColor, 0.35));
         brickGrad.addColorStop(0.5, fillColor);
         brickGrad.addColorStop(1, darkenColor(fillColor, 0.3));
@@ -556,60 +497,35 @@ const BrickBreakerPage = () => {
 
         // top highlight
         ctx.shadowBlur = 0;
-        ctx.fillStyle = "rgba(255,255,255,0.2)";
+        ctx.fillStyle = "rgba(255,255,255,0.22)";
         ctx.beginPath();
         roundRect(ctx, b.x + 2, b.y + 2, BRICK_W - 4, BRICK_H * 0.4, 3);
         ctx.fill();
 
         // border
-        ctx.strokeStyle = isCorrect ? `hsl(${hue}, 100%, 80%)` : "rgba(255,255,255,0.25)";
-        ctx.lineWidth = isCorrect ? 2 : 1;
+        ctx.strokeStyle = "rgba(255,255,255,0.28)";
+        ctx.lineWidth = 1;
         ctx.beginPath();
         roundRect(ctx, b.x + 1, b.y + 1, BRICK_W - 2, BRICK_H - 2, 5);
         ctx.stroke();
 
-        // correct brick extra star indicator
-        if (isCorrect) {
-          const starPulse = 0.8 + 0.2 * Math.sin(ts / 200);
-          ctx.globalAlpha = starPulse;
-          ctx.fillStyle = "#fff";
-          ctx.font = "bold 9px 'Orbitron', monospace";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText("★", cx2 - BRICK_W * 0.3, cy2);
-          ctx.fillText("★", cx2 + BRICK_W * 0.3, cy2);
-          ctx.globalAlpha = 1;
-        }
-
-        // crack overlay if brick has been hit once (correct brick only)
-        if (b.cracked && b.alive) {
-          ctx.save();
-          ctx.strokeStyle = "rgba(0,0,0,0.85)";
-          ctx.lineWidth = 1.6;
-          ctx.shadowBlur = 0;
+        // crack overlay after first hit
+        if (b.cracked) {
+          ctx.strokeStyle = "rgba(0,0,0,0.7)";
+          ctx.lineWidth = 1.4;
           ctx.beginPath();
-          // jagged crack lines across the brick
-          ctx.moveTo(b.x + BRICK_W * 0.15, b.y + 2);
-          ctx.lineTo(b.x + BRICK_W * 0.32, b.y + BRICK_H * 0.45);
-          ctx.lineTo(b.x + BRICK_W * 0.22, b.y + BRICK_H * 0.7);
-          ctx.lineTo(b.x + BRICK_W * 0.4, b.y + BRICK_H - 2);
-          ctx.moveTo(b.x + BRICK_W * 0.7, b.y + 2);
-          ctx.lineTo(b.x + BRICK_W * 0.55, b.y + BRICK_H * 0.5);
-          ctx.lineTo(b.x + BRICK_W * 0.75, b.y + BRICK_H * 0.75);
-          ctx.lineTo(b.x + BRICK_W * 0.65, b.y + BRICK_H - 2);
+          ctx.moveTo(b.x + BRICK_W * 0.18, b.y + 3);
+          ctx.lineTo(b.x + BRICK_W * 0.34, b.y + BRICK_H * 0.45);
+          ctx.lineTo(b.x + BRICK_W * 0.24, b.y + BRICK_H * 0.7);
+          ctx.lineTo(b.x + BRICK_W * 0.42, b.y + BRICK_H - 3);
+          ctx.moveTo(b.x + BRICK_W * 0.7, b.y + 3);
+          ctx.lineTo(b.x + BRICK_W * 0.56, b.y + BRICK_H * 0.5);
+          ctx.lineTo(b.x + BRICK_W * 0.76, b.y + BRICK_H * 0.75);
+          ctx.lineTo(b.x + BRICK_W * 0.64, b.y + BRICK_H - 3);
           ctx.stroke();
-          ctx.restore();
         }
 
-        // value text
-        ctx.shadowBlur = isCorrect ? 12 : 0;
-        ctx.shadowColor = isCorrect ? "#fff" : "transparent";
-        ctx.fillStyle = isCorrect ? "#fff" : b.color.text;
-        const vStr = String(b.value);
-        ctx.font = `bold ${vStr.length > 3 ? 10 : 12}px 'Orbitron', monospace`;
-        ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        ctx.fillText(vStr, cx2, cy2);
-        ctx.shadowBlur = 0;
+        ctx.restore();
       }
 
       // ── Ball trail ───────────────────────────────────────────────────────
@@ -712,7 +628,7 @@ const BrickBreakerPage = () => {
         ctx.shadowBlur = 0;
         [
           "Gerakkan paddle dengan mouse / sentuhan!",
-          "Bata ★ = jawaban BENAR — kena 2× untuk pecah!",
+          "Setiap bata pecah setelah 2× kena bola 🧱",
           "Tiap 25 detik muncul Soal Pak/Bu Guru ⏱️",
           "Combo = poin berlipat! 🔥",
         ].forEach((l, i) => ctx.fillText(l, CW / 2, CH / 2 - 4 + i * 24));
@@ -768,34 +684,36 @@ const BrickBreakerPage = () => {
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center gap-4 pt-5 pb-2 w-full">
-        <div className="flex items-center justify-between w-full max-w-sm px-3">
-          <button
-            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
-            title="Menu Utama"
-          >
-            🏠
-          </button>
-          <span className="font-display text-sm text-accent">🧱 Pecah Jawaban</span>
-          <button
-            onClick={() => { playPopSound(); navigate(-1); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
-            title="Keluar"
-          >
-            ✕
-          </button>
-        </div>
 
-        {/* Countdown chip: shows when next "Soal Pak/Bu Guru" appears */}
+      {/* Top bar — always compact so portrait & landscape both fit */}
+      <div className="relative z-10 flex items-center justify-between w-full max-w-md px-3 pt-2 pb-1 shrink-0">
+        <button
+          onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+          className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
+          title="Menu Utama"
+        >
+          🏠
+        </button>
+        <span className="font-display text-sm text-accent">🧱 Pecah Jawaban</span>
+        <button
+          onClick={() => { playPopSound(); navigate(-1); }}
+          className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
+          title="Keluar"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Countdown chip: reserve a fixed slot so the canvas size doesn't jump */}
+      <div className="relative z-10 h-9 flex items-center justify-center w-full px-3 shrink-0">
         {guruQuiz.isCountdownActive && (
-          <div className="rounded-xl border border-amber-400/60 bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 px-3 py-1.5 flex items-center justify-center gap-2 shadow-[0_0_18px_rgba(255,200,0,0.35)] max-w-sm w-[95vw]">
-            <span className="text-base">👨‍🏫</span>
+          <div className="rounded-xl border border-amber-400/60 bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 px-3 py-1 flex items-center justify-center gap-2 shadow-[0_0_18px_rgba(255,200,0,0.35)]">
+            <span className="text-sm">👨‍🏫</span>
             <span className="font-display text-[11px] sm:text-xs font-bold text-amber-200 tracking-wide drop-shadow-[0_0_6px_rgba(255,215,0,0.55)]">
               SOAL GURU ke-{guruQuiz.questionNumber + 1}/{guruQuiz.totalQuestions} dalam
             </span>
             <span
-              className={`font-display text-base sm:text-lg font-black tabular-nums drop-shadow-[0_0_8px_rgba(255,215,0,0.85)] ${
+              className={`font-display text-sm sm:text-base font-black tabular-nums drop-shadow-[0_0_8px_rgba(255,215,0,0.85)] ${
                 guruQuiz.secondsUntilNext <= 5 ? "text-red-300 animate-pulse" : "text-amber-100"
               }`}
             >
@@ -803,7 +721,10 @@ const BrickBreakerPage = () => {
             </span>
           </div>
         )}
+      </div>
 
+      {/* Canvas area — fills remaining space; scales preserving 7:10 aspect */}
+      <div className="relative z-10 flex-1 min-h-0 w-full flex items-center justify-center px-2 pb-2">
         <canvas
           ref={canvasRef}
           width={CW}
@@ -816,13 +737,18 @@ const BrickBreakerPage = () => {
             cursor: "none",
             borderRadius: 20,
             boxShadow: "0 0 40px rgba(130,80,255,0.45), 0 0 80px rgba(80,0,200,0.2)",
-            maxWidth: "95vw",
-            maxHeight: "calc(100dvh - 80px)",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            width: "auto",
+            height: "100%",
+            aspectRatio: `${CW} / ${CH}`,
             objectFit: "contain",
+            touchAction: "none",
           }}
         />
-      <GuruQuizOverlay {...guruQuiz} />
       </div>
+
+      <GuruQuizOverlay {...guruQuiz} />
     </div>
   );
 };
