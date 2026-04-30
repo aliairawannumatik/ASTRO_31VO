@@ -101,6 +101,101 @@ const ALL_VIDEOS = [
     description:
       "Video pembelajaran ini membahas materi Sistem Persamaan Linear Dua Variabel (SPLDV) untuk siswa SMP. Kamu akan belajar berbagai metode penyelesaian SPLDV dengan cara yang mudah dipahami.\n\nTopik yang dibahas:\n• Pengertian dan bentuk umum SPLDV\n• Metode substitusi\n• Metode eliminasi\n• Metode grafik\n• Metode campuran (substitusi + eliminasi)\n• Contoh soal dan pembahasan lengkap",
   },
+  {
+    id: "",
+    playlistId: "PLxsvNQG_jS3lxc31fNfLO8RuMlR9IGo3W",
+    title: "Perbandingan — Perbandingan Senilai dan Berbalik Nilai",
+    subject: "Perbandingan",
+    kelas: "Kelas 7",
+    kelasNum: 7,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-sky-500 via-blue-600 to-indigo-600",
+    colorAccent: "#0ea5e9",
+    icon: "⚖️",
+    emoji: "⚖️",
+    description:
+      "Video pembelajaran ini membahas materi Perbandingan untuk siswa SMP Kelas 7. Kamu akan belajar konsep perbandingan senilai dan berbalik nilai beserta penerapannya dalam kehidupan sehari-hari.\n\nTopik yang dibahas:\n• Pengertian dan bentuk perbandingan\n• Perbandingan senilai\n• Perbandingan berbalik nilai\n• Skala dan peta\n• Contoh soal dan pembahasan lengkap",
+  },
+  {
+    id: "",
+    playlistId: "PLxsvNQG_jS3klHH173EnJ73jBI-ZUPpkt",
+    title: "Persamaan Garis Lurus — Gradien, Persamaan, dan Grafik",
+    subject: "Persamaan Garis Lurus",
+    kelas: "Kelas 8",
+    kelasNum: 8,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-teal-500 via-cyan-600 to-sky-700",
+    colorAccent: "#14b8a6",
+    icon: "📈",
+    emoji: "📈",
+    description:
+      "Video pembelajaran ini membahas materi Persamaan Garis Lurus untuk siswa SMP Kelas 8. Kamu akan belajar cara menentukan gradien, membuat persamaan garis, dan menggambar grafiknya.\n\nTopik yang dibahas:\n• Pengertian garis lurus dan gradien\n• Menentukan gradien dari dua titik\n• Persamaan garis lurus: y = mx + c\n• Menggambar grafik garis lurus\n• Kedudukan dua garis\n• Contoh soal dan pembahasan lengkap",
+  },
+  {
+    id: "",
+    playlistId: "PLxsvNQG_jS3noX9gSeiBd0M6UWJoEvuBk",
+    title: "Transformasi Geometri — Translasi, Refleksi, Rotasi, Dilatasi",
+    subject: "Transformasi Geometri",
+    kelas: "Kelas 9",
+    kelasNum: 9,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-fuchsia-500 via-purple-600 to-violet-700",
+    colorAccent: "#d946ef",
+    icon: "🔄",
+    emoji: "🔄",
+    description:
+      "Video pembelajaran ini membahas materi Transformasi Geometri untuk siswa SMP Kelas 9. Kamu akan belajar empat jenis transformasi geometri beserta sifat-sifatnya.\n\nTopik yang dibahas:\n• Translasi (pergeseran)\n• Refleksi (pencerminan)\n• Rotasi (perputaran)\n• Dilatasi (perbesaran/perkecilan)\n• Komposisi transformasi\n• Contoh soal dan pembahasan lengkap",
+  },
+  {
+    id: "",
+    playlistId: "PLxsvNQG_jS3kmotk-0DltUP6ljHUt4C3n",
+    title: "Kesebangunan dan Kekongruenan",
+    subject: "Kesebangunan & Kekongruenan",
+    kelas: "Kelas 9",
+    kelasNum: 9,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-lime-500 via-green-600 to-emerald-700",
+    colorAccent: "#84cc16",
+    icon: "🔷",
+    emoji: "🔷",
+    description:
+      "Video pembelajaran ini membahas materi Kesebangunan dan Kekongruenan untuk siswa SMP Kelas 9. Kamu akan belajar syarat, sifat, dan penerapan kedua konsep penting dalam geometri ini.\n\nTopik yang dibahas:\n• Pengertian kesebangunan bangun datar\n• Syarat dua bangun sebangun\n• Pengertian kekongruenan\n• Syarat dua segitiga kongruen (s-s-s, s-d-s, d-s-d)\n• Penerapan dalam soal dan kehidupan nyata\n• Contoh soal dan pembahasan lengkap",
+  },
+  {
+    id: "",
+    playlistId: "PLxsvNQG_jS3k0uck2lzDZLavkT2IZMMkr",
+    title: "Lingkaran — Unsur, Keliling, Luas, dan Sudut",
+    subject: "Lingkaran",
+    kelas: "Kelas 8",
+    kelasNum: 8,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
+    channel: "NUMATIK CHANNEL",
+    color: "from-orange-500 via-red-500 to-rose-600",
+    colorAccent: "#f97316",
+    icon: "⭕",
+    emoji: "⭕",
+    description:
+      "Video pembelajaran ini membahas materi Lingkaran untuk siswa SMP Kelas 8. Kamu akan belajar unsur-unsur lingkaran, cara menghitung keliling dan luas, serta konsep sudut dalam lingkaran.\n\nTopik yang dibahas:\n• Unsur-unsur lingkaran (jari-jari, diameter, busur, tali busur)\n• Keliling lingkaran\n• Luas lingkaran\n• Sudut pusat dan sudut keliling\n• Panjang busur dan luas juring\n• Contoh soal dan pembahasan lengkap",
+  },
 ];
 
 const COMING_SOON = [
@@ -427,7 +522,7 @@ const VideoPembelajaranPage = () => {
                 const isActive = i === activeIndex;
                 return (
                   <motion.div
-                    key={vid.id}
+                    key={vid.playlistId}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.06 }}
