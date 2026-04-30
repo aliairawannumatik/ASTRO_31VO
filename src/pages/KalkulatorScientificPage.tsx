@@ -34,6 +34,11 @@ const toMathJsExpression = (expr: string, angleMode: AngleMode): string => {
   mathExpr = mathExpr.replace(/π/g, "(pi)");
   mathExpr = mathExpr.replace(/√\(/g, "sqrt(");
   mathExpr = mathExpr.replace(/∛\(/g, "cbrt(");
+  // FPB (Faktor Persekutuan terBesar) → gcd (already replaced if user typed FPB(
+  mathExpr = mathExpr.replace(/FPB\(/g, "gcd(");
+  mathExpr = mathExpr.replace(/KPK\(/g, "lcm(");
+  // Percent: 50% → (50/100). Handles trailing % or % followed by an operator/paren.
+  mathExpr = mathExpr.replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
   // Convert superscript numbers to ^ notation
   mathExpr = mathExpr.replace(/²/g, "^2");
   mathExpr = mathExpr.replace(/³/g, "^3");
@@ -276,12 +281,12 @@ const KalkulatorScientificPage = () => {
 
   // Funcs that we delete as a single token (e.g. "sin(")
   const TOKEN_FUNCS = [
-    "asinh(", "acosh(", "atanh(",
     "asin(", "acos(", "atan(",
-    "sinh(", "cosh(", "tanh(",
     "log₁₀(", "ln(", "sin(", "cos(", "tan(",
     "abs(", "Exp(", "exp(",
-    "10^(", "e^(", "^(1/", "√(", "∛(",
+    "FPB(", "KPK(",
+    " mod ",
+    "×10^(", "10^(", "e^(", "^(-", "^(1/", "1/(", "√(", "∛(",
   ];
 
   const handleClearAll = () => {
@@ -810,31 +815,34 @@ const KalkulatorScientificPage = () => {
             </CalcButton>
           </div>
 
-          {/* Row 4: Hyperbolic / Special */}
+          {/* Row 4: Common math operations */}
           <div className="grid grid-cols-6 gap-1">
+            {/* x⁻ⁿ : negative power | shift: 1/x reciprocal */}
             <CalcButton
-              onClick={() => shiftMode ? handleFunction("asinh") : handleFunction("sinh")}
-              className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "sinh⁻¹"}
+              onClick={() => shiftMode ? handleInput("1/(") : handleInput("^(-")}
+              className="h-10 text-[11px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "1/x"}
               subLabelColor="text-purple-400"
             >
-              {shiftMode ? "sinh⁻¹" : "sinh"}
+              {shiftMode ? "1/x" : "x⁻ⁿ"}
             </CalcButton>
+            {/* % : percent | shift: mod */}
             <CalcButton
-              onClick={() => shiftMode ? handleFunction("acosh") : handleFunction("cosh")}
-              className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "cosh⁻¹"}
+              onClick={() => shiftMode ? handleInput(" mod ") : handleInput("%")}
+              className="h-10 text-[11px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "mod"}
               subLabelColor="text-purple-400"
             >
-              {shiftMode ? "cosh⁻¹" : "cosh"}
+              {shiftMode ? "mod" : "%"}
             </CalcButton>
+            {/* ×10ⁿ : scientific notation | shift: FPB/gcd */}
             <CalcButton
-              onClick={() => shiftMode ? handleFunction("atanh") : handleFunction("tanh")}
+              onClick={() => shiftMode ? handleFunction("gcd", "FPB") : handleInput("×10^(")}
               className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "tanh⁻¹"}
+              subLabel={shiftMode ? "" : "FPB"}
               subLabelColor="text-purple-400"
             >
-              {shiftMode ? "tanh⁻¹" : "tanh"}
+              {shiftMode ? "FPB(" : "×10ⁿ"}
             </CalcButton>
             <CalcButton
               onClick={() => handleInput("(")}
