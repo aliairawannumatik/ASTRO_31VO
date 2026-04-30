@@ -1222,45 +1222,48 @@ const BrickBreakerPage = () => {
     return () => cancelAnimationFrame(rafRef.current);
   }, [buildBricks, resetBall, spawnBgStars, rerender]);
 
-  if (phaseRef.current === "idle") {
-    return (
-      <MathGameIntro
-        gameTitle="METEOR PANTUL NUMATIK"
-        subtitle="☄️ HUJAN METEOR GALAKSI ☄️"
-        heroEmoji="🛸"
-        startLabel="LUNCURKAN METEOR"
-        theme="meteor"
-        onStart={startGame}
-        onBack={() => { playPopSound(); navigate(-1); }}
-        onHome={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
-        bestLabel={bestRef.current > 0 ? `Rekor Tertinggi: ${bestRef.current}` : undefined}
-        extraOverlay={
-          <>
-            {/* UFOs drifting back & forth */}
-            <div
-              className="absolute top-[18%] left-0 text-5xl animate-ufo-fly"
-              style={{ filter: "drop-shadow(0 0 18px rgba(34,211,238,0.85)) drop-shadow(0 0 28px rgba(168,85,247,0.55))" }}
-            >🛸</div>
-            <div
-              className="absolute top-[68%] left-0 text-4xl animate-ufo-fly"
-              style={{ filter: "drop-shadow(0 0 16px rgba(168,85,247,0.85)) drop-shadow(0 0 26px rgba(34,211,238,0.5))", animationDelay: "9s", animationDuration: "22s" }}
-            >🛸</div>
-          </>
-        }
-        instructions={[
-          { text: <>Kemudikan <strong className="text-orange-300">pesawat 🛸</strong> dengan mouse atau sentuhan layar</> },
-          { text: <>Pantulkan <strong className="text-amber-300">meteor ☄️</strong> untuk hancurkan kristal asteroid</> },
-          { text: <>Tiap asteroid pecah setelah <strong className="text-yellow-300">2× kena</strong> meteor</> },
-          { text: <>Tiap <strong className="text-orange-300">25 detik</strong> muncul Soal NUMATIK 🤖 untuk skor besar</> },
-          { text: <>Tiap <strong className="text-red-300">60 detik</strong>: NORMAL → HARD → VERY HARD ⚡</> },
-          { text: <>Bangun <strong className="text-amber-300">combo 🔥</strong> untuk poin berlipat!</> },
-        ]}
-      />
-    );
-  }
+  const isIdle = phaseRef.current === "idle";
 
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
+      {/* MathGameIntro shown as a full-screen overlay when idle */}
+      {isIdle && (
+        <div className="absolute inset-0 z-50">
+          <MathGameIntro
+            gameTitle="METEOR PANTUL NUMATIK"
+            subtitle="☄️ HUJAN METEOR GALAKSI ☄️"
+            heroEmoji="🛸"
+            startLabel="LUNCURKAN METEOR"
+            theme="meteor"
+            onStart={startGame}
+            onBack={() => { playPopSound(); navigate(-1); }}
+            onHome={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+            bestLabel={bestRef.current > 0 ? `Rekor Tertinggi: ${bestRef.current}` : undefined}
+            extraOverlay={
+              <>
+                {/* UFOs drifting back & forth */}
+                <div
+                  className="absolute top-[18%] left-0 text-5xl animate-ufo-fly"
+                  style={{ filter: "drop-shadow(0 0 18px rgba(34,211,238,0.85)) drop-shadow(0 0 28px rgba(168,85,247,0.55))" }}
+                >🛸</div>
+                <div
+                  className="absolute top-[68%] left-0 text-4xl animate-ufo-fly"
+                  style={{ filter: "drop-shadow(0 0 16px rgba(168,85,247,0.85)) drop-shadow(0 0 26px rgba(34,211,238,0.5))", animationDelay: "9s", animationDuration: "22s" }}
+                >🛸</div>
+              </>
+            }
+            instructions={[
+              { text: <>Kemudikan <strong className="text-orange-300">pesawat 🛸</strong> dengan mouse atau sentuhan layar</> },
+              { text: <>Pantulkan <strong className="text-amber-300">meteor ☄️</strong> untuk hancurkan kristal asteroid</> },
+              { text: <>Tiap asteroid pecah setelah <strong className="text-yellow-300">2× kena</strong> meteor</> },
+              { text: <>Tiap <strong className="text-orange-300">25 detik</strong> muncul Soal NUMATIK 🤖 untuk skor besar</> },
+              { text: <>Tiap <strong className="text-red-300">60 detik</strong>: NORMAL → HARD → VERY HARD ⚡</> },
+              { text: <>Bangun <strong className="text-amber-300">combo 🔥</strong> untuk poin berlipat!</> },
+            ]}
+          />
+        </div>
+      )}
+
       {isLight ? <Snowfall /> : <Starfield />}
 
       {/* Top bar — always compact so portrait & landscape both fit */}
@@ -1305,7 +1308,7 @@ const BrickBreakerPage = () => {
         )}
       </div>
 
-      {/* Canvas area — fills remaining space; scales preserving 7:10 aspect */}
+      {/* Canvas area — always in DOM so the animation loop can start on mount */}
       <div className="relative z-10 flex-1 min-h-0 w-full flex items-center justify-center px-2 pb-2">
         <canvas
           ref={canvasRef}
