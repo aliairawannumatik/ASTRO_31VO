@@ -1266,22 +1266,24 @@ const BrickBreakerPage = () => {
 
       {isLight ? <Snowfall /> : <Starfield />}
 
-      {/* Top bar — always compact so portrait & landscape both fit */}
-      <div className="relative z-10 flex items-center justify-between w-full max-w-md px-3 pt-2 pb-1 shrink-0">
-        <button
-          onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
-          className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
-          title="Menu Utama"
-        >
-          🏠
-        </button>
-        <span className="font-display text-sm text-accent">🛸☄️ Meteor Pantul NUMATIK</span>
+      {/* Top bar */}
+      <div className="relative z-10 flex items-center justify-between w-full max-w-lg px-4 pt-4 pb-1 shrink-0 gap-2">
         <button
           onClick={() => { playPopSound(); navigate(-1); }}
-          className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
-          title="Keluar"
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+          title="Kembali ke pilihan game"
         >
-          ✕
+          <span className="text-base leading-none">←</span>
+          <span className="hidden sm:inline">Kembali</span>
+        </button>
+        <span className="font-display text-sm text-accent text-center flex-1">🛸☄️ Meteor Pantul NUMATIK</span>
+        <button
+          onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+          className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+          title="Menu Utama"
+        >
+          <span className="text-base leading-none">🏠</span>
+          <span className="hidden sm:inline">Home</span>
         </button>
       </div>
 
