@@ -351,9 +351,43 @@ const KalkulatorScientificPage = () => {
     });
   }, []);
 
+  // Operators that should "exit" any open superscript "^(" group
+  // before being inserted, so e.g. typing 2 xʸ 3 + 5 yields 2^(3)+5
+  // instead of 2^(3+5).
+  const OPERATORS = new Set(["+", "−", "×", "÷", "^", "%"]);
+
   const handleInput = useCallback((value: string) => {
     playPopSound();
-    insertAtCursor(value);
+    if (OPERATORS.has(value)) {
+      const expr = expressionRef.current;
+      const pos = Math.min(Math.max(cursorRef.current, 0), expr.length);
+      const before = expr.slice(0, pos);
+
+      // Walk through and track which open parens are still unclosed at cursor
+      const openStack: number[] = [];
+      for (let i = 0; i < before.length; i++) {
+        if (before[i] === "(") openStack.push(i);
+        else if (before[i] === ")") openStack.pop();
+      }
+
+      // Find outermost open paren that originated from "^(" — close it (and
+      // any nested unclosed parens) before the operator
+      let closeCount = 0;
+      for (let i = openStack.length - 1; i >= 0; i--) {
+        const openIdx = openStack[i];
+        if (openIdx >= 1 && before[openIdx - 1] === "^") {
+          closeCount = openStack.length - i;
+          break;
+        }
+      }
+
+      const insertion = ")".repeat(closeCount) + value;
+      const next = expr.slice(0, pos) + insertion + expr.slice(pos);
+      setExpression(next);
+      setCursorPosition(pos + insertion.length);
+    } else {
+      insertAtCursor(value);
+    }
     setShiftMode(false);
     setAlphaMode(false);
   }, [insertAtCursor]);
