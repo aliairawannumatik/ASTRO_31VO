@@ -871,12 +871,14 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "ʸ√x" : "xʸ"}
             </CalcButton>
-            {/* ; : separator for KPK / FPB / nPr arguments */}
+            {/* KPK (lcm) | shift: FPB (gcd) */}
             <CalcButton
-              onClick={() => handleInput(";")}
-              className="h-10 text-base bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              onClick={() => shiftMode ? handleFunction("gcd", "FPB") : handleFunction("lcm", "KPK")}
+              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "FPB"}
+              subLabelColor="text-purple-400"
             >
-              ;
+              {shiftMode ? "FPB(" : "KPK"}
             </CalcButton>
             <CalcButton
               onClick={() => shiftMode ? handleInput("e") : handleInput("π")}
@@ -886,14 +888,12 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "e" : "π"}
             </CalcButton>
-            {/* KPK (lcm) | shift: FPB (gcd) */}
+            {/* ; : separator for KPK / FPB / nPr arguments */}
             <CalcButton
-              onClick={() => shiftMode ? handleFunction("gcd", "FPB") : handleFunction("lcm", "KPK")}
-              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "FPB"}
-              subLabelColor="text-purple-400"
+              onClick={() => handleInput(";")}
+              className="h-10 text-base bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
             >
-              {shiftMode ? "FPB(" : "KPK"}
+              ;
             </CalcButton>
           </div>
 
