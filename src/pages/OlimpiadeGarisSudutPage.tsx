@@ -530,7 +530,7 @@ const Soal9SVG = () => (
     <text x="206" y="30" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">E</text>
 
     <text x="60" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">40°</text>
-    <text x="100" y="92" fill="#fbbf24" fontSize="13" fontFamily="serif">(4<tspan fontStyle="italic">x</tspan>-5)°</text>
+    <text x="130" y="126" fill="#fbbf24" fontSize="13" fontFamily="serif">(4<tspan fontStyle="italic">x</tspan>-5)°</text>
     <text x="232" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">5<tspan fontStyle="italic">x</tspan>°</text>
   </svg>
 );
