@@ -517,24 +517,30 @@ const BrickBreakerPage = () => {
         const scale = 1 + b.hitT * 0.08;
         const cx2 = b.x + BRICK_W / 2, cy2 = b.y + BRICK_H / 2;
 
-        // Deterministic seeded random for this asteroid's irregular shape
+        // Deterministic seeded random for this asteroid (stable per cell)
         const seed = (b.col * 73 + b.row * 137 + 19) | 0;
         const rndA = (i: number) => {
           const v = Math.sin(seed * 9301 + i * 49297) * 233280;
           return v - Math.floor(v);
         };
 
-        // Build asteroid silhouette (irregular polygon) — points relative to center
-        const N = 14;
-        const halfBW = BRICK_W * 0.46;
-        const halfBH = BRICK_H * 0.46;
+        // ── Build smooth asteroid silhouette ─────────────────────────────
+        // Two-octave noise around an ellipse → natural-looking rocky shape
+        // (less jagged than a raw polygon). Drawn with quadratic curves
+        // through midpoints for a smooth continuous outline.
+        const N = 18;
+        const halfBW = BRICK_W * 0.47;
+        const halfBH = BRICK_H * 0.47;
         const points: { x: number; y: number }[] = [];
         for (let i = 0; i < N; i++) {
           const a = (i / N) * Math.PI * 2;
-          const jitter = 0.78 + rndA(i) * 0.34;
+          // Low-frequency wobble (large dents/bulges) + high-frequency grit
+          const lo = (rndA(i) - 0.5) * 0.18;
+          const hi = (rndA(i + 51) - 0.5) * 0.07;
+          const r = 1 + lo + hi;
           points.push({
-            x: Math.cos(a) * halfBW * jitter,
-            y: Math.sin(a) * halfBH * jitter,
+            x: Math.cos(a) * halfBW * r,
+            y: Math.sin(a) * halfBH * r,
           });
         }
 
@@ -542,111 +548,183 @@ const BrickBreakerPage = () => {
         ctx.translate(cx2, cy2);
         ctx.scale(scale, scale);
 
+        // Trace silhouette using quadratic curves through midpoints for
+        // a smooth, organic outline (no hard polygon corners).
         const tracePath = () => {
           ctx.beginPath();
+          const last = points[points.length - 1];
+          let mx = (last.x + points[0].x) / 2;
+          let my = (last.y + points[0].y) / 2;
+          ctx.moveTo(mx, my);
           for (let i = 0; i < points.length; i++) {
             const p = points[i];
-            if (i === 0) ctx.moveTo(p.x, p.y);
-            else ctx.lineTo(p.x, p.y);
+            const next = points[(i + 1) % points.length];
+            const nmx = (p.x + next.x) / 2;
+            const nmy = (p.y + next.y) / 2;
+            ctx.quadraticCurveTo(p.x, p.y, nmx, nmy);
+            mx = nmx; my = nmy;
           }
           ctx.closePath();
         };
 
-        // ── Drop shadow + colored aura under the asteroid ────────────────
+        // ── Soft drop shadow only (no candy aura) ────────────────────────
         ctx.save();
-        ctx.shadowBlur = 10 + b.hitT * 16;
-        ctx.shadowColor = b.cracked ? "rgba(255,90,30,0.9)" : b.color.glow;
-        ctx.shadowOffsetX = 1;
+        ctx.shadowBlur = 6 + b.hitT * 14;
+        ctx.shadowColor = b.cracked ? "rgba(255,90,30,0.7)" : "rgba(0,0,0,0.75)";
+        ctx.shadowOffsetX = 1.5;
         ctx.shadowOffsetY = 3;
 
-        // Rocky base — dark gray with row-color tint
+        // Realistic rocky base — natural gray-brown with a *very* subtle
+        // hint of the row color so the rows still read at a glance, but
+        // the overall impression is "real space rock".
         const baseGrad = ctx.createRadialGradient(
-          -halfBW * 0.35, -halfBH * 0.5, halfBW * 0.1,
-          0, 0, Math.max(halfBW, halfBH) * 1.4
+          -halfBW * 0.40, -halfBH * 0.55, halfBW * 0.05,
+          halfBW * 0.20, halfBH * 0.30, Math.max(halfBW, halfBH) * 1.45
         );
-        baseGrad.addColorStop(0, mixColor("#8a7d6e", b.color.fill, 0.22));
-        baseGrad.addColorStop(0.55, mixColor("#3f352c", b.color.fill, 0.12));
-        baseGrad.addColorStop(1, "#1a1410");
+        baseGrad.addColorStop(0,    mixColor("#a89989", b.color.fill, 0.10));
+        baseGrad.addColorStop(0.45, mixColor("#736554", b.color.fill, 0.08));
+        baseGrad.addColorStop(0.80, mixColor("#3a3024", b.color.fill, 0.05));
+        baseGrad.addColorStop(1,    "#15100b");
         ctx.fillStyle = baseGrad;
         tracePath();
         ctx.fill();
         ctx.restore();
 
-        // ── Inner shading + craters (clipped to asteroid) ────────────────
+        // ── Surface detail (clipped to asteroid silhouette) ──────────────
         ctx.save();
         tracePath();
         ctx.clip();
 
-        // Rim glow tinted by row color (preserves identity per row)
-        const rimGrad = ctx.createRadialGradient(0, 0, halfBW * 0.5, 0, 0, halfBW * 1.15);
-        rimGrad.addColorStop(0, "rgba(0,0,0,0)");
-        rimGrad.addColorStop(0.7, "rgba(0,0,0,0)");
-        rimGrad.addColorStop(1, hexToRgba(b.color.glow, 0.55));
-        ctx.fillStyle = rimGrad;
-        ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
-
-        // Specular highlight (light from upper-left)
+        // Soft warm specular near the lit edge (sun is upper-left)
         const hlGrad = ctx.createRadialGradient(
-          -halfBW * 0.45, -halfBH * 0.55, 0,
-          -halfBW * 0.45, -halfBH * 0.55, halfBW * 0.85
+          -halfBW * 0.55, -halfBH * 0.65, 0,
+          -halfBW * 0.55, -halfBH * 0.65, halfBW * 1.0
         );
-        hlGrad.addColorStop(0, "rgba(255,240,210,0.55)");
-        hlGrad.addColorStop(1, "rgba(255,240,210,0)");
+        hlGrad.addColorStop(0,   "rgba(255,235,200,0.55)");
+        hlGrad.addColorStop(0.4, "rgba(255,225,180,0.20)");
+        hlGrad.addColorStop(1,   "rgba(255,225,180,0)");
         ctx.fillStyle = hlGrad;
         ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
 
-        // Craters (deterministic positions)
-        const craterCount = 4;
+        // Terminator shadow on the unlit (lower-right) side — gives the
+        // illusion of a 3D sphere instead of a flat cutout.
+        const shGrad = ctx.createRadialGradient(
+          halfBW * 0.55, halfBH * 0.55, 0,
+          halfBW * 0.55, halfBH * 0.55, halfBW * 1.6
+        );
+        shGrad.addColorStop(0,   "rgba(0,0,0,0.55)");
+        shGrad.addColorStop(0.5, "rgba(0,0,0,0.18)");
+        shGrad.addColorStop(1,   "rgba(0,0,0,0)");
+        ctx.fillStyle = shGrad;
+        ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
+
+        // Tiny surface boulders (small light spots — bumps catching light)
+        for (let i = 0; i < 7; i++) {
+          const bx = (rndA(i + 23) - 0.5) * BRICK_W * 0.7;
+          const by = (rndA(i + 41) - 0.5) * BRICK_H * 0.7;
+          const br = 0.5 + rndA(i + 29) * 0.7;
+          ctx.fillStyle = "rgba(255,225,190,0.25)";
+          ctx.beginPath();
+          ctx.arc(bx, by, br, 0, Math.PI * 2);
+          ctx.fill();
+          // Tiny shadow on the dark side of the bump (lower-right)
+          ctx.fillStyle = "rgba(0,0,0,0.35)";
+          ctx.beginPath();
+          ctx.arc(bx + 0.6, by + 0.6, br * 0.7, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // ── Realistic craters with lit rim + cast shadow ─────────────────
+        const craterCount = 3 + Math.floor(rndA(7) * 2); // 3 or 4 craters
         for (let i = 0; i < craterCount; i++) {
           const cx = (rndA(i + 5) - 0.5) * BRICK_W * 0.55;
           const cy = (rndA(i + 11) - 0.5) * BRICK_H * 0.55;
-          const cr = 1.4 + rndA(i + 17) * 2.4;
-          const cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr);
-          cg.addColorStop(0, "rgba(0,0,0,0.6)");
-          cg.addColorStop(0.7, "rgba(0,0,0,0.25)");
-          cg.addColorStop(1, "rgba(0,0,0,0)");
-          ctx.fillStyle = cg;
+          const cr = 1.6 + rndA(i + 17) * 2.2;
+
+          // Bright rim on the side facing the light (upper-left)
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(cx, cy, cr + 0.6, 0, Math.PI * 2);
+          ctx.clip();
+          const rimLit = ctx.createRadialGradient(
+            cx - cr * 0.4, cy - cr * 0.4, cr * 0.2,
+            cx, cy, cr + 0.6
+          );
+          rimLit.addColorStop(0,   "rgba(255,235,210,0)");
+          rimLit.addColorStop(0.8, "rgba(255,235,210,0)");
+          rimLit.addColorStop(1,   "rgba(255,235,210,0.55)");
+          ctx.fillStyle = rimLit;
+          ctx.fillRect(cx - cr - 1, cy - cr - 1, cr * 2 + 2, cr * 2 + 2);
+          ctx.restore();
+
+          // Crater bowl — darker on the side opposite the light
+          const bowl = ctx.createRadialGradient(
+            cx + cr * 0.35, cy + cr * 0.35, 0,
+            cx, cy, cr
+          );
+          bowl.addColorStop(0,   "rgba(0,0,0,0.78)");
+          bowl.addColorStop(0.6, "rgba(0,0,0,0.45)");
+          bowl.addColorStop(1,   "rgba(0,0,0,0)");
+          ctx.fillStyle = bowl;
           ctx.beginPath();
           ctx.arc(cx, cy, cr, 0, Math.PI * 2);
           ctx.fill();
-          // Sun-lit crater rim
-          ctx.strokeStyle = "rgba(255,230,200,0.28)";
-          ctx.lineWidth = 0.8;
+
+          // Soft inner-floor light bounce on the lit side
+          ctx.fillStyle = "rgba(180,160,135,0.18)";
           ctx.beginPath();
-          ctx.arc(cx, cy, cr * 0.85, Math.PI * 0.25, Math.PI * 0.95);
-          ctx.stroke();
+          ctx.arc(cx - cr * 0.2, cy - cr * 0.2, cr * 0.45, 0, Math.PI * 2);
+          ctx.fill();
         }
 
-        // Crack overlay after first hit — fissures with hot embers
+        // Subtle dusty noise grain over the whole surface
+        ctx.fillStyle = "rgba(0,0,0,0.18)";
+        for (let i = 0; i < 14; i++) {
+          const dx = (rndA(i + 71) - 0.5) * BRICK_W * 0.85;
+          const dy = (rndA(i + 89) - 0.5) * BRICK_H * 0.85;
+          ctx.fillRect(dx, dy, 0.7, 0.7);
+        }
+        ctx.fillStyle = "rgba(255,235,210,0.10)";
+        for (let i = 0; i < 10; i++) {
+          const dx = (rndA(i + 113) - 0.5) * BRICK_W * 0.85;
+          const dy = (rndA(i + 131) - 0.5) * BRICK_H * 0.85;
+          ctx.fillRect(dx, dy, 0.7, 0.7);
+        }
+
+        // ── Crack overlay after first hit ────────────────────────────────
         if (b.cracked) {
-          ctx.strokeStyle = "rgba(20,5,0,0.9)";
-          ctx.lineWidth = 1.4;
+          ctx.strokeStyle = "rgba(15,5,0,0.92)";
+          ctx.lineWidth = 1.3;
           ctx.lineCap = "round";
+          ctx.lineJoin = "round";
           ctx.beginPath();
-          ctx.moveTo(-halfBW * 0.7, -halfBH * 0.6);
-          ctx.lineTo(-halfBW * 0.1, -halfBH * 0.1);
-          ctx.lineTo(-halfBW * 0.35, halfBH * 0.35);
-          ctx.lineTo(halfBW * 0.1, halfBH * 0.7);
-          ctx.moveTo(halfBW * 0.2, -halfBH * 0.65);
-          ctx.lineTo(halfBW * 0.45, -halfBH * 0.1);
-          ctx.lineTo(halfBW * 0.7, halfBH * 0.4);
+          ctx.moveTo(-halfBW * 0.65, -halfBH * 0.50);
+          ctx.lineTo(-halfBW * 0.25, -halfBH * 0.18);
+          ctx.lineTo(-halfBW * 0.05, halfBH * 0.05);
+          ctx.lineTo(-halfBW * 0.30, halfBH * 0.40);
+          ctx.lineTo(halfBW * 0.05, halfBH * 0.65);
+          ctx.moveTo(-halfBW * 0.05, halfBH * 0.05);
+          ctx.lineTo(halfBW * 0.30, -halfBH * 0.10);
+          ctx.lineTo(halfBW * 0.62, halfBH * 0.30);
           ctx.stroke();
-          // Hot ember glow seeping through cracks
-          ctx.fillStyle = "rgba(255,140,40,0.85)";
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = "rgba(255,90,20,0.9)";
+
+          // Hot ember glow seeping through the cracks
+          ctx.save();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(255,100,20,0.95)";
+          ctx.fillStyle = "rgba(255,160,60,0.9)";
           ctx.beginPath();
-          ctx.arc(-halfBW * 0.1, -halfBH * 0.1, 1.4, 0, Math.PI * 2);
-          ctx.arc(halfBW * 0.45, -halfBH * 0.1, 1.2, 0, Math.PI * 2);
-          ctx.arc(-halfBW * 0.35, halfBH * 0.35, 1, 0, Math.PI * 2);
+          ctx.arc(-halfBW * 0.05, halfBH * 0.05, 1.5, 0, Math.PI * 2);
+          ctx.arc(halfBW * 0.30, -halfBH * 0.10, 1.2, 0, Math.PI * 2);
+          ctx.arc(-halfBW * 0.25, -halfBH * 0.18, 1.0, 0, Math.PI * 2);
           ctx.fill();
-          ctx.shadowBlur = 0;
+          ctx.restore();
         }
         ctx.restore();
 
-        // ── Asteroid outline ─────────────────────────────────────────────
-        ctx.strokeStyle = "rgba(0,0,0,0.65)";
-        ctx.lineWidth = 1;
+        // ── Crisp dark outline for definition against the background ─────
+        ctx.strokeStyle = "rgba(0,0,0,0.55)";
+        ctx.lineWidth = 0.8;
         tracePath();
         ctx.stroke();
 
