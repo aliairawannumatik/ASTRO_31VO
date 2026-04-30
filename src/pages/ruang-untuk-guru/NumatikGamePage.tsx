@@ -46,7 +46,7 @@ const games = [
   },
   {
     label: "Space Impact Math",
-    emoji: "🚀",
+    emoji: "🛩️",
     path: "/math-game-arena/umum/space-impact",
     desc: "Tembak alien yang membawa jawaban benar, kumpulkan power-up!",
     icon: <Plane className="w-7 h-7 text-cyan-300 shrink-0 group-hover:scale-110 transition-transform" />,
