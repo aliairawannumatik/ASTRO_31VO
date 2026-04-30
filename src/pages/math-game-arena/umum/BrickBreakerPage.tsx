@@ -517,131 +517,138 @@ const BrickBreakerPage = () => {
         const scale = 1 + b.hitT * 0.08;
         const cx2 = b.x + BRICK_W / 2, cy2 = b.y + BRICK_H / 2;
 
+        // Deterministic seeded random for this asteroid's irregular shape
+        const seed = (b.col * 73 + b.row * 137 + 19) | 0;
+        const rndA = (i: number) => {
+          const v = Math.sin(seed * 9301 + i * 49297) * 233280;
+          return v - Math.floor(v);
+        };
+
+        // Build asteroid silhouette (irregular polygon) — points relative to center
+        const N = 14;
+        const halfBW = BRICK_W * 0.46;
+        const halfBH = BRICK_H * 0.46;
+        const points: { x: number; y: number }[] = [];
+        for (let i = 0; i < N; i++) {
+          const a = (i / N) * Math.PI * 2;
+          const jitter = 0.78 + rndA(i) * 0.34;
+          points.push({
+            x: Math.cos(a) * halfBW * jitter,
+            y: Math.sin(a) * halfBH * jitter,
+          });
+        }
+
         ctx.save();
         ctx.translate(cx2, cy2);
         ctx.scale(scale, scale);
-        ctx.translate(-cx2, -cy2);
 
-        // Drop shadow for depth
-        ctx.shadowBlur = 6 + b.hitT * 14;
-        ctx.shadowColor = b.cracked ? "rgba(0,0,0,0.85)" : b.color.glow;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 2;
+        const tracePath = () => {
+          ctx.beginPath();
+          for (let i = 0; i < points.length; i++) {
+            const p = points[i];
+            if (i === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+          }
+          ctx.closePath();
+        };
 
-        const fillColor = b.color.fill;
-        const r = 4;
-
-        // ── Base 3D body ─────────────────────────────────────────────────
-        const baseGrad = ctx.createLinearGradient(b.x, b.y, b.x, b.y + BRICK_H);
-        baseGrad.addColorStop(0, lightenColor(fillColor, 0.30));
-        baseGrad.addColorStop(0.45, fillColor);
-        baseGrad.addColorStop(1, darkenColor(fillColor, 0.45));
-        ctx.fillStyle = baseGrad;
-        ctx.beginPath();
-        roundRect(ctx, b.x, b.y, BRICK_W, BRICK_H, r);
-        ctx.fill();
-
-        ctx.shadowColor = "transparent";
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetY = 0;
-
-        // ── Realistic brick texture (mortar lines, offset rows) ─────────
+        // ── Drop shadow + colored aura under the asteroid ────────────────
         ctx.save();
-        ctx.beginPath();
-        roundRect(ctx, b.x, b.y, BRICK_W, BRICK_H, r);
-        ctx.clip();
+        ctx.shadowBlur = 10 + b.hitT * 16;
+        ctx.shadowColor = b.cracked ? "rgba(255,90,30,0.9)" : b.color.glow;
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 3;
 
-        // Mortar color (darker version of brick)
-        const mortarColor = darkenColor(fillColor, 0.55);
-        ctx.strokeStyle = mortarColor;
-        ctx.lineWidth = 1.4;
-        ctx.lineCap = "butt";
-
-        // Horizontal mortar line through the middle
-        const midY = b.y + BRICK_H / 2;
-        ctx.beginPath();
-        ctx.moveTo(b.x, midY);
-        ctx.lineTo(b.x + BRICK_W, midY);
-        ctx.stroke();
-
-        // Vertical mortar lines — staggered between top and bottom rows
-        ctx.beginPath();
-        // top row: vertical line near 1/3 and 2/3 width
-        ctx.moveTo(b.x + BRICK_W * 0.34, b.y);
-        ctx.lineTo(b.x + BRICK_W * 0.34, midY);
-        ctx.moveTo(b.x + BRICK_W * 0.68, b.y);
-        ctx.lineTo(b.x + BRICK_W * 0.68, midY);
-        // bottom row: offset vertical line at the half
-        ctx.moveTo(b.x + BRICK_W * 0.5, midY);
-        ctx.lineTo(b.x + BRICK_W * 0.5, b.y + BRICK_H);
-        ctx.stroke();
-
-        // Subtle highlight band on each sub-brick top edge (light from above)
-        ctx.strokeStyle = "rgba(255,255,255,0.28)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(b.x + 1, b.y + 0.5);
-        ctx.lineTo(b.x + BRICK_W - 1, b.y + 0.5);
-        ctx.moveTo(b.x + 1, midY + 0.5);
-        ctx.lineTo(b.x + BRICK_W - 1, midY + 0.5);
-        ctx.stroke();
-
-        // Soft shadow under each sub-brick (light from above)
-        ctx.strokeStyle = "rgba(0,0,0,0.22)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(b.x + 1, midY - 0.5);
-        ctx.lineTo(b.x + BRICK_W - 1, midY - 0.5);
-        ctx.moveTo(b.x + 1, b.y + BRICK_H - 0.5);
-        ctx.lineTo(b.x + BRICK_W - 1, b.y + BRICK_H - 0.5);
-        ctx.stroke();
-
-        // Tiny noise texture (random specks) for grit
-        ctx.fillStyle = "rgba(0,0,0,0.10)";
-        const seed = (b.col * 13 + b.row * 7) | 0;
-        for (let n = 0; n < 5; n++) {
-          const sx = b.x + ((seed * (n + 3) * 17) % BRICK_W);
-          const sy = b.y + ((seed * (n + 5) * 11) % BRICK_H);
-          ctx.fillRect(sx, sy, 1, 1);
-        }
-        ctx.fillStyle = "rgba(255,255,255,0.10)";
-        for (let n = 0; n < 4; n++) {
-          const sx = b.x + ((seed * (n + 9) * 19) % BRICK_W);
-          const sy = b.y + ((seed * (n + 11) * 13) % BRICK_H);
-          ctx.fillRect(sx, sy, 1, 1);
-        }
-
+        // Rocky base — dark gray with row-color tint
+        const baseGrad = ctx.createRadialGradient(
+          -halfBW * 0.35, -halfBH * 0.5, halfBW * 0.1,
+          0, 0, Math.max(halfBW, halfBH) * 1.4
+        );
+        baseGrad.addColorStop(0, mixColor("#8a7d6e", b.color.fill, 0.22));
+        baseGrad.addColorStop(0.55, mixColor("#3f352c", b.color.fill, 0.12));
+        baseGrad.addColorStop(1, "#1a1410");
+        ctx.fillStyle = baseGrad;
+        tracePath();
+        ctx.fill();
         ctx.restore();
 
-        // ── Outer bevel border (slight 3D rim) ──────────────────────────
-        ctx.strokeStyle = darkenColor(fillColor, 0.5);
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        roundRect(ctx, b.x + 0.5, b.y + 0.5, BRICK_W - 1, BRICK_H - 1, r);
-        ctx.stroke();
+        // ── Inner shading + craters (clipped to asteroid) ────────────────
+        ctx.save();
+        tracePath();
+        ctx.clip();
 
-        // ── Crack overlay after first hit ──────────────────────────────
+        // Rim glow tinted by row color (preserves identity per row)
+        const rimGrad = ctx.createRadialGradient(0, 0, halfBW * 0.5, 0, 0, halfBW * 1.15);
+        rimGrad.addColorStop(0, "rgba(0,0,0,0)");
+        rimGrad.addColorStop(0.7, "rgba(0,0,0,0)");
+        rimGrad.addColorStop(1, hexToRgba(b.color.glow, 0.55));
+        ctx.fillStyle = rimGrad;
+        ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
+
+        // Specular highlight (light from upper-left)
+        const hlGrad = ctx.createRadialGradient(
+          -halfBW * 0.45, -halfBH * 0.55, 0,
+          -halfBW * 0.45, -halfBH * 0.55, halfBW * 0.85
+        );
+        hlGrad.addColorStop(0, "rgba(255,240,210,0.55)");
+        hlGrad.addColorStop(1, "rgba(255,240,210,0)");
+        ctx.fillStyle = hlGrad;
+        ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
+
+        // Craters (deterministic positions)
+        const craterCount = 4;
+        for (let i = 0; i < craterCount; i++) {
+          const cx = (rndA(i + 5) - 0.5) * BRICK_W * 0.55;
+          const cy = (rndA(i + 11) - 0.5) * BRICK_H * 0.55;
+          const cr = 1.4 + rndA(i + 17) * 2.4;
+          const cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr);
+          cg.addColorStop(0, "rgba(0,0,0,0.6)");
+          cg.addColorStop(0.7, "rgba(0,0,0,0.25)");
+          cg.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = cg;
+          ctx.beginPath();
+          ctx.arc(cx, cy, cr, 0, Math.PI * 2);
+          ctx.fill();
+          // Sun-lit crater rim
+          ctx.strokeStyle = "rgba(255,230,200,0.28)";
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.arc(cx, cy, cr * 0.85, Math.PI * 0.25, Math.PI * 0.95);
+          ctx.stroke();
+        }
+
+        // Crack overlay after first hit — fissures with hot embers
         if (b.cracked) {
-          ctx.strokeStyle = "rgba(0,0,0,0.85)";
-          ctx.lineWidth = 1.6;
+          ctx.strokeStyle = "rgba(20,5,0,0.9)";
+          ctx.lineWidth = 1.4;
           ctx.lineCap = "round";
           ctx.beginPath();
-          ctx.moveTo(b.x + BRICK_W * 0.20, b.y + 3);
-          ctx.lineTo(b.x + BRICK_W * 0.36, b.y + BRICK_H * 0.42);
-          ctx.lineTo(b.x + BRICK_W * 0.26, b.y + BRICK_H * 0.68);
-          ctx.lineTo(b.x + BRICK_W * 0.44, b.y + BRICK_H - 3);
-          ctx.moveTo(b.x + BRICK_W * 0.72, b.y + 3);
-          ctx.lineTo(b.x + BRICK_W * 0.58, b.y + BRICK_H * 0.5);
-          ctx.lineTo(b.x + BRICK_W * 0.78, b.y + BRICK_H * 0.78);
-          ctx.lineTo(b.x + BRICK_W * 0.64, b.y + BRICK_H - 3);
+          ctx.moveTo(-halfBW * 0.7, -halfBH * 0.6);
+          ctx.lineTo(-halfBW * 0.1, -halfBH * 0.1);
+          ctx.lineTo(-halfBW * 0.35, halfBH * 0.35);
+          ctx.lineTo(halfBW * 0.1, halfBH * 0.7);
+          ctx.moveTo(halfBW * 0.2, -halfBH * 0.65);
+          ctx.lineTo(halfBW * 0.45, -halfBH * 0.1);
+          ctx.lineTo(halfBW * 0.7, halfBH * 0.4);
           ctx.stroke();
-          // Tiny chips
-          ctx.fillStyle = "rgba(0,0,0,0.55)";
+          // Hot ember glow seeping through cracks
+          ctx.fillStyle = "rgba(255,140,40,0.85)";
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = "rgba(255,90,20,0.9)";
           ctx.beginPath();
-          ctx.arc(b.x + BRICK_W * 0.30, b.y + BRICK_H * 0.55, 1.5, 0, Math.PI * 2);
-          ctx.arc(b.x + BRICK_W * 0.66, b.y + BRICK_H * 0.4, 1.2, 0, Math.PI * 2);
+          ctx.arc(-halfBW * 0.1, -halfBH * 0.1, 1.4, 0, Math.PI * 2);
+          ctx.arc(halfBW * 0.45, -halfBH * 0.1, 1.2, 0, Math.PI * 2);
+          ctx.arc(-halfBW * 0.35, halfBH * 0.35, 1, 0, Math.PI * 2);
           ctx.fill();
+          ctx.shadowBlur = 0;
         }
+        ctx.restore();
+
+        // ── Asteroid outline ─────────────────────────────────────────────
+        ctx.strokeStyle = "rgba(0,0,0,0.65)";
+        ctx.lineWidth = 1;
+        tracePath();
+        ctx.stroke();
 
         ctx.restore();
       }
@@ -735,21 +742,49 @@ const BrickBreakerPage = () => {
         ctx.shadowBlur = 28;
         ctx.shadowColor = "rgba(255,140,30,0.95)";
 
-        // Fireball body — white-hot core fading out to deep red surface
+        // Meteor body — molten rocky core wrapped in fire
         const ballGrad = ctx.createRadialGradient(
           ball.x - BALL_R * 0.25, ball.y - BALL_R * 0.25, BALL_R * 0.05,
           ball.x, ball.y, BALL_R
         );
-        ballGrad.addColorStop(0,    "#ffffff");
-        ballGrad.addColorStop(0.18, "#fff4c2");
-        ballGrad.addColorStop(0.45, "#ffb84d");
-        ballGrad.addColorStop(0.75, "#ff5a14");
-        ballGrad.addColorStop(1,    "#8a1100");
+        ballGrad.addColorStop(0,    "#fffbe8");
+        ballGrad.addColorStop(0.20, "#ffd06a");
+        ballGrad.addColorStop(0.45, "#ff8a30");
+        ballGrad.addColorStop(0.72, "#c43108");
+        ballGrad.addColorStop(1,    "#3a0a02");  // dark rocky rim
         ctx.fillStyle = ballGrad;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
+
+        // Rocky surface specks — small dark spots embedded in the meteor
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.fillStyle = "rgba(20,5,0,0.55)";
+        const speckPositions: [number, number, number][] = [
+          [0.20, 0.10, 1.4],
+          [-0.15, 0.35, 1.2],
+          [0.40, -0.20, 1.0],
+          [-0.30, -0.10, 0.9],
+          [0.10, 0.45, 0.8],
+        ];
+        for (const [dx, dy, sr] of speckPositions) {
+          ctx.beginPath();
+          ctx.arc(ball.x + BALL_R * dx, ball.y + BALL_R * dy, sr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        // Faint glowing fissures on the surface
+        ctx.strokeStyle = "rgba(255,180,60,0.55)";
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(ball.x - BALL_R * 0.55, ball.y + BALL_R * 0.05);
+        ctx.lineTo(ball.x - BALL_R * 0.10, ball.y + BALL_R * 0.30);
+        ctx.lineTo(ball.x + BALL_R * 0.30, ball.y + BALL_R * 0.55);
+        ctx.stroke();
+        ctx.restore();
 
         // White-hot specular spot
         ctx.fillStyle = "rgba(255,255,240,0.9)";
@@ -771,73 +806,142 @@ const BrickBreakerPage = () => {
         ctx.stroke();
       }
 
-      // ── Paddle (polished metallic bar) ─────────────────────────────────
+      // ── Paddle (sleek spaceship / alat luar angkasa) ──────────────────
       if (phase === "playing" || phase === "ready") {
         const paddle = paddleRef.current;
         const isPowered = paddle.powerT > 0;
-        const pHue = isPowered ? hue : (hue + 180) % 360;
-        const px = paddle.x - paddle.w / 2;
-        const py = PADDLE_Y - PADDLE_H / 2;
+        const pHue = isPowered ? (hue + 40) % 360 : 195; // cyan ship by default, shifts when powered
+        const cxS = paddle.x;
+        const cyS = PADDLE_Y;
+        const halfW = paddle.w / 2;
+        const noseY = cyS - PADDLE_H / 2 - 7;   // pointed bow extends above
+        const tailY = cyS + PADDLE_H / 2;       // engines exit at tail
+        const wingY = cyS + 1;
 
-        // Floor shadow
+        // ── Hover shadow under the ship ────────────────────────────────
         ctx.save();
-        ctx.globalAlpha = 0.3;
-        ctx.fillStyle = "rgba(0,0,0,0.7)";
+        ctx.globalAlpha = 0.32;
+        ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.beginPath();
-        ctx.ellipse(paddle.x, py + PADDLE_H + 3, paddle.w * 0.5, 3, 0, 0, Math.PI * 2);
+        ctx.ellipse(cxS, tailY + 5, halfW * 0.95, 3.5, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
-        // Glow
-        ctx.shadowBlur = isPowered ? 30 : 14;
+        // ── Twin engine thruster flames ─────────────────────────────────
+        const fT = ts / 1000;
+        const flameLen = 11 + Math.sin(fT * 14) * 2.5 + (isPowered ? 7 : 0);
+        ctx.save();
+        ctx.globalCompositeOperation = "lighter";
+        for (const offX of [-halfW * 0.45, halfW * 0.45]) {
+          const fx = cxS + offX;
+          const fy = tailY + flameLen * 0.45;
+          const grd = ctx.createRadialGradient(fx, fy, 0, fx, fy, flameLen);
+          grd.addColorStop(0,   "rgba(255,255,220,0.95)");
+          grd.addColorStop(0.35, `hsla(${pHue}, 100%, 70%, 0.75)`);
+          grd.addColorStop(1,   `hsla(${pHue}, 100%, 50%, 0)`);
+          ctx.fillStyle = grd;
+          ctx.beginPath();
+          ctx.ellipse(fx, fy, 4.2, flameLen, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Helper: trace the spaceship hull silhouette
+        const traceShip = () => {
+          ctx.beginPath();
+          ctx.moveTo(cxS, noseY);
+          ctx.quadraticCurveTo(cxS + halfW * 0.42, noseY + 4, cxS + halfW * 0.55, wingY);
+          ctx.lineTo(cxS + halfW, wingY + 2);                   // right wing tip
+          ctx.lineTo(cxS + halfW * 0.92, tailY);
+          ctx.lineTo(cxS + halfW * 0.55, tailY);                // right engine block
+          ctx.lineTo(cxS + halfW * 0.35, tailY - 1);
+          ctx.lineTo(cxS - halfW * 0.35, tailY - 1);
+          ctx.lineTo(cxS - halfW * 0.55, tailY);                // left engine block
+          ctx.lineTo(cxS - halfW * 0.92, tailY);
+          ctx.lineTo(cxS - halfW, wingY + 2);                   // left wing tip
+          ctx.lineTo(cxS - halfW * 0.55, wingY);
+          ctx.quadraticCurveTo(cxS - halfW * 0.42, noseY + 4, cxS, noseY);
+          ctx.closePath();
+        };
+
+        // ── Hull glow ───────────────────────────────────────────────────
+        ctx.shadowBlur = isPowered ? 26 : 14;
         ctx.shadowColor = `hsl(${pHue}, 100%, 60%)`;
 
-        // Metallic base — multi-stop vertical gradient
-        const pGrad = ctx.createLinearGradient(0, py, 0, py + PADDLE_H);
-        pGrad.addColorStop(0,    `hsl(${pHue}, 95%, 78%)`);
-        pGrad.addColorStop(0.18, `hsl(${pHue}, 95%, 92%)`);
-        pGrad.addColorStop(0.45, `hsl(${pHue}, 95%, 60%)`);
-        pGrad.addColorStop(0.62, `hsl(${pHue}, 95%, 40%)`);
-        pGrad.addColorStop(1,    `hsl(${pHue}, 90%, 22%)`);
-        ctx.fillStyle = pGrad;
-        ctx.beginPath();
-        roundRect(ctx, px, py, paddle.w, PADDLE_H, PADDLE_H / 2);
+        // Hull body — chrome blue/cyan with vertical gradient
+        const hullGrad = ctx.createLinearGradient(0, noseY, 0, tailY);
+        hullGrad.addColorStop(0,    `hsl(${pHue}, 50%, 92%)`);
+        hullGrad.addColorStop(0.35, `hsl(${pHue}, 70%, 65%)`);
+        hullGrad.addColorStop(0.7,  `hsl(${pHue}, 80%, 38%)`);
+        hullGrad.addColorStop(1,    `hsl(${pHue}, 85%, 22%)`);
+        ctx.fillStyle = hullGrad;
+        traceShip();
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Specular top highlight band
-        const hlGrad = ctx.createLinearGradient(0, py + 1, 0, py + PADDLE_H * 0.45);
-        hlGrad.addColorStop(0, "rgba(255,255,255,0.9)");
-        hlGrad.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = hlGrad;
-        ctx.beginPath();
-        roundRect(ctx, px + 4, py + 1.5, paddle.w - 8, PADDLE_H * 0.42, PADDLE_H * 0.3);
-        ctx.fill();
-
-        // Soft side falloff (light fades at the ends — gives a chrome cylinder feel)
-        const sideGrad = ctx.createLinearGradient(px, 0, px + paddle.w, 0);
-        sideGrad.addColorStop(0, "rgba(0,0,0,0.35)");
-        sideGrad.addColorStop(0.15, "rgba(0,0,0,0)");
-        sideGrad.addColorStop(0.85, "rgba(0,0,0,0)");
-        sideGrad.addColorStop(1, "rgba(0,0,0,0.35)");
+        // ── Side darkening (volumetric edge falloff) ───────────────────
+        ctx.save();
+        traceShip();
+        ctx.clip();
+        const sideGrad = ctx.createLinearGradient(cxS - halfW, 0, cxS + halfW, 0);
+        sideGrad.addColorStop(0,    "rgba(0,0,0,0.45)");
+        sideGrad.addColorStop(0.18, "rgba(0,0,0,0)");
+        sideGrad.addColorStop(0.82, "rgba(0,0,0,0)");
+        sideGrad.addColorStop(1,    "rgba(0,0,0,0.45)");
         ctx.fillStyle = sideGrad;
+        ctx.fillRect(cxS - halfW - 4, noseY - 4, paddle.w + 8, (tailY - noseY) + 8);
+
+        // Centerline highlight strip down the spine
+        const spineGrad = ctx.createLinearGradient(0, noseY, 0, tailY);
+        spineGrad.addColorStop(0, "rgba(255,255,255,0.85)");
+        spineGrad.addColorStop(0.6, "rgba(255,255,255,0.15)");
+        spineGrad.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = spineGrad;
         ctx.beginPath();
-        roundRect(ctx, px, py, paddle.w, PADDLE_H, PADDLE_H / 2);
+        ctx.moveTo(cxS, noseY);
+        ctx.quadraticCurveTo(cxS + 3.5, cyS, cxS + 1.5, tailY - 1);
+        ctx.lineTo(cxS - 1.5, tailY - 1);
+        ctx.quadraticCurveTo(cxS - 3.5, cyS, cxS, noseY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // ── Cockpit dome (glowing canopy) ──────────────────────────────
+        const cockpitR = PADDLE_H * 0.7;
+        const ckGrad = ctx.createRadialGradient(cxS - 1.5, cyS - 2, 1, cxS, cyS - 1, cockpitR);
+        ckGrad.addColorStop(0,   "rgba(230,255,255,0.95)");
+        ckGrad.addColorStop(0.45, `hsla(${(pHue + 25) % 360}, 100%, 75%, 0.85)`);
+        ckGrad.addColorStop(1,   `hsla(${pHue}, 100%, 28%, 0.95)`);
+        ctx.fillStyle = ckGrad;
+        ctx.beginPath();
+        ctx.ellipse(cxS, cyS - 1, cockpitR * 0.85, cockpitR * 0.65, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Cockpit reflection glint
+        ctx.fillStyle = "rgba(255,255,255,0.85)";
+        ctx.beginPath();
+        ctx.ellipse(cxS - cockpitR * 0.35, cyS - cockpitR * 0.35, cockpitR * 0.18, cockpitR * 0.1, -0.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Center seam
-        ctx.strokeStyle = "rgba(0,0,0,0.25)";
-        ctx.lineWidth = 0.6;
+        // ── Wing tip navigation lights (blink red ⇄ green) ─────────────
+        const blink = (Math.sin(ts / 200) + 1) * 0.5;
+        ctx.save();
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = "rgba(255,40,40,0.95)";
+        ctx.fillStyle = `rgba(255,90,90,${0.45 + blink * 0.55})`;
         ctx.beginPath();
-        ctx.moveTo(px + 6, py + PADDLE_H / 2);
-        ctx.lineTo(px + paddle.w - 6, py + PADDLE_H / 2);
-        ctx.stroke();
+        ctx.arc(cxS - halfW + 2, wingY + 2, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowColor = "rgba(40,255,80,0.95)";
+        ctx.fillStyle = `rgba(120,255,140,${0.45 + (1 - blink) * 0.55})`;
+        ctx.beginPath();
+        ctx.arc(cxS + halfW - 2, wingY + 2, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
 
-        // Outer rim
-        ctx.strokeStyle = `hsla(${pHue}, 90%, 18%, 0.65)`;
+        // ── Hull outline ───────────────────────────────────────────────
+        ctx.strokeStyle = `hsla(${pHue}, 90%, 14%, 0.85)`;
         ctx.lineWidth = 1;
-        ctx.beginPath();
-        roundRect(ctx, px + 0.5, py + 0.5, paddle.w - 1, PADDLE_H - 1, PADDLE_H / 2);
+        traceShip();
         ctx.stroke();
       }
 
@@ -880,17 +984,18 @@ const BrickBreakerPage = () => {
         ctx.font = "bold 34px 'Orbitron', monospace";
         ctx.fillStyle = `hsl(${(hue + 60) % 360}, 100%, 80%)`;
         ctx.shadowBlur = 32; ctx.shadowColor = `hsl(${(hue + 60) % 360}, 100%, 60%)`;
-        ctx.fillText("🧱 PECAH JAWABAN!", CW / 2, CH / 2 - 72);
+        ctx.fillText("☄️ PECAH JAWABAN!", CW / 2, CH / 2 - 72);
 
         ctx.font = "13px 'Orbitron', monospace";
         ctx.fillStyle = "rgba(255,255,255,0.8)";
         ctx.shadowBlur = 0;
         [
-          "Gerakkan paddle dengan mouse / sentuhan!",
-          "Setiap bata pecah setelah 2× kena bola 🧱",
+          "Kemudikan pesawat dengan mouse / sentuhan!",
+          "Pantulkan meteor untuk hancurkan asteroid 🌑",
+          "Setiap asteroid pecah setelah 2× kena meteor",
           "Tiap 25 detik muncul Soal NUMATIK 🤖",
           "Combo = poin berlipat! 🔥",
-        ].forEach((l, i) => ctx.fillText(l, CW / 2, CH / 2 - 4 + i * 24));
+        ].forEach((l, i) => ctx.fillText(l, CW / 2, CH / 2 - 4 + i * 22));
 
         ctx.font = "bold 17px 'Orbitron', monospace";
         ctx.fillStyle = `hsl(${hue}, 100%, 80%)`;
@@ -1063,34 +1168,27 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
   ctx.closePath();
 }
 
-function lightenColor(color: string, amt: number): string {
-  if (color.startsWith("hsl")) {
-    const m = color.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-    if (m) return `hsl(${m[1]}, ${m[2]}%, ${Math.min(100, Number(m[3]) + amt * 50)}%)`;
-  }
-  if (color.startsWith("#")) {
-    const n = parseInt(color.slice(1), 16);
-    const r = Math.min(255, (n >> 16) + Math.round(255 * amt));
-    const g = Math.min(255, ((n >> 8) & 0xff) + Math.round(255 * amt));
-    const b = Math.min(255, (n & 0xff) + Math.round(255 * amt));
-    return `rgb(${r},${g},${b})`;
-  }
-  return color;
+// Parse a hex color like "#ff5e87" into [r,g,b]
+function hexToRgb(hex: string): [number, number, number] {
+  const h = hex.replace("#", "");
+  const n = parseInt(h.length === 3 ? h.split("").map(c => c + c).join("") : h, 16);
+  return [(n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
 }
 
-function darkenColor(color: string, amt: number): string {
-  if (color.startsWith("hsl")) {
-    const m = color.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-    if (m) return `hsl(${m[1]}, ${m[2]}%, ${Math.max(0, Number(m[3]) - amt * 50)}%)`;
-  }
-  if (color.startsWith("#")) {
-    const n = parseInt(color.slice(1), 16);
-    const r = Math.max(0, (n >> 16) - Math.round(255 * amt));
-    const g = Math.max(0, ((n >> 8) & 0xff) - Math.round(255 * amt));
-    const b = Math.max(0, (n & 0xff) - Math.round(255 * amt));
-    return `rgb(${r},${g},${b})`;
-  }
-  return color;
+// Build a `rgba(...)` string from a hex color and alpha [0..1]
+function hexToRgba(hex: string, alpha: number): string {
+  const [r, g, b] = hexToRgb(hex);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// Linearly mix two hex colors. t = 0 returns base, t = 1 returns tint.
+function mixColor(base: string, tint: string, t: number): string {
+  const [r1, g1, b1] = hexToRgb(base);
+  const [r2, g2, b2] = hexToRgb(tint);
+  const r = Math.round(r1 + (r2 - r1) * t);
+  const g = Math.round(g1 + (g2 - g1) * t);
+  const b = Math.round(b1 + (b2 - b1) * t);
+  return `rgb(${r},${g},${b})`;
 }
 
 export default BrickBreakerPage;
