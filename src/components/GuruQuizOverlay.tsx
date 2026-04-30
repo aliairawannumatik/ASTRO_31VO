@@ -23,6 +23,8 @@ export default function GuruQuizOverlay({
   showCelebration,
   onDismissCelebration,
   lastResult,
+  secondsUntilNext,
+  isCountdownActive,
 }: Props) {
   const answeredRef = useRef(false);
 
@@ -38,7 +40,46 @@ export default function GuruQuizOverlay({
     handleAnswer(idx);
   };
 
-  if (!isVisible && !showCelebration) return null;
+  if (!isVisible && !showCelebration) {
+    if (!isCountdownActive) return null;
+    const urgent = secondsUntilNext <= 5;
+    return (
+      <div
+        className="pointer-events-none fixed left-1/2 z-40 -translate-x-1/2 select-none"
+        style={{ top: "calc(env(safe-area-inset-top, 0px) + 8px)" }}
+      >
+        <div
+          className="flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-extrabold tracking-wider shadow-lg backdrop-blur-md"
+          style={{
+            background: urgent
+              ? "rgba(239,68,68,0.22)"
+              : "rgba(15,23,42,0.65)",
+            borderColor: urgent ? "#FCA5A5" : "rgba(129,140,248,0.55)",
+            color: urgent ? "#FCA5A5" : "#C7D2FE",
+            boxShadow: urgent
+              ? "0 0 16px rgba(239,68,68,0.45)"
+              : "0 0 14px rgba(129,140,248,0.35)",
+          }}
+        >
+          <span aria-hidden>👩‍🏫</span>
+          <span>SOAL GURU:</span>
+          <span
+            className={urgent ? "animate-pulse" : ""}
+            style={{
+              minWidth: "2.2em",
+              textAlign: "center",
+              color: urgent ? "#FECACA" : "#FDE68A",
+              textShadow: urgent
+                ? "0 0 8px rgba(252,165,165,0.8)"
+                : "0 0 6px rgba(253,224,71,0.55)",
+            }}
+          >
+            {secondsUntilNext}s
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   if (showCelebration) {
     const stars = Math.round((guruScore / (totalQuestions * 20)) * 5);

@@ -19,30 +19,9 @@ const FLAP_VY = -380;
 const ROCKET_X = 80;
 const ROCKET_R = 16;
 
-// ── Math questions ────────────────────────────────────────────────────────────
+// ── Math question type (kept for backward compat with wrapper pages; gameplay
+//    no longer uses an in-game pipe quiz — only the 25-detik "Soal Guru"). ──
 export interface MQ { q: string; opts: string[]; ans: number }
-const DEFAULT_QUESTIONS: MQ[] = [
-  {
-    q: "Bentuk sederhana dari\n45 : 60 adalah ...",
-    opts: ["1 : 2", "2 : 3", "3 : 4", "4 : 5"],
-    ans: 2,
-  },
-  {
-    q: "Jika 12 buku dibagikan kepada\n3 siswa, setiap 1 siswa\nmendapat ... buku",
-    opts: ["3", "4", "5", "6"],
-    ans: 1,
-  },
-  {
-    q: "Jarak 150 km ditempuh dalam\n3 jam. Satuan pembanding\nkecepatannya adalah ...",
-    opts: ["km", "jam", "km/jam", "m/s"],
-    ans: 2,
-  },
-  {
-    q: "Perbandingan digunakan untuk\nmembandingkan dua besaran.\nJika satuannya berbeda, satuan\nharus dibuat ... terlebih dahulu",
-    opts: ["lebih besar", "sama", "berbeda", "lebih kecil"],
-    ans: 1,
-  },
-];
 
 // ── Particle ──────────────────────────────────────────────────────────────────
 interface Particle {
@@ -55,13 +34,11 @@ interface Pipe {
   x: number;
   gapY: number;        // top of gap
   scored: boolean;
-  special: boolean;    // triggers math question
-  qIdx: number;
   color: string;
   glowPhase: number;
 }
 
-type Phase = "idle" | "playing" | "question" | "dead";
+type Phase = "idle" | "playing" | "dead";
 
 // ── Nebula cloud ──────────────────────────────────────────────────────────────
 interface NebulaCloud { x: number; y: number; rx: number; ry: number; color: string; alpha: number; speed: number }
@@ -76,13 +53,11 @@ interface FlappyRocketPageProps {
 }
 
 const FlappyRocketPage = ({
-  questions,
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
   quizQuestions,
 }: FlappyRocketPageProps = {}) => {
-  const QUESTIONS = questions && questions.length > 0 ? questions : DEFAULT_QUESTIONS;
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -102,24 +77,19 @@ const FlappyRocketPage = ({
   const nextPipeRef = useRef(900);
   const particlesRef = useRef<Particle[]>([]);
   const flapRef = useRef(false);
-  const usedQRef = useRef<Set<number>>(new Set());
-  const pipeCountRef = useRef(0);
   const shieldRef = useRef(0);
   const comboRef = useRef(0);
   const flashRef = useRef(0);          // flash alpha for wrong answer
   const nebulasRef = useRef<NebulaCloud[]>([]);
   const bgStarsRef = useRef<{ x: number; y: number; r: number; twinkle: number }[]>([]);
   const trailRef = useRef<{ x: number; y: number; vx: number; vy: number; r: number; alpha: number; hot: boolean }[]>([]);
-  const activeQRef = useRef<MQ | null>(null);
   const shakeDurRef = useRef(0);
   const shakeMagRef = useRef(0);
-  const postQuestionGraceRef = useRef(0);
 
   // React state (UI overlay only)
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
-  const [activeQ, setActiveQ] = useState<MQ | null>(null);
   const [feedback, setFeedback] = useState<{ txt: string; good: boolean } | null>(null);
   const [combo, setCombo] = useState(0);
   const fbTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -146,30 +116,14 @@ const FlappyRocketPage = ({
     }
   }, []);
 
-  const getQuestion = useCallback((): [MQ, number] => {
-    const avail = QUESTIONS.map((_, i) => i).filter(i => !usedQRef.current.has(i));
-    if (avail.length === 0) { usedQRef.current = new Set(); return getQuestion(); }
-    const idx = avail[Math.floor(Math.random() * avail.length)];
-    usedQRef.current.add(idx);
-    return [QUESTIONS[idx], idx];
-  }, []);
-
   const spawnPipe = useCallback(() => {
-    pipeCountRef.current += 1;
     const gapY = 80 + Math.random() * (CH - PIPE_GAP - 160);
-    // Question appears on every 4th pipe (pipe 4, 8, 12, 16 ...)
-    const special = pipeCountRef.current % 4 === 0;
-    const qIdx = special
-      ? ((pipeCountRef.current / 4 - 1) % QUESTIONS.length)
-      : -1;
     const PIPE_COLORS = ["#00E5FF", "#FF6B6B", "#00FF88", "#AA77FF"];
     pipesRef.current.push({
       x: CW + 10,
       gapY,
       scored: false,
-      special,
-      qIdx,
-      color: special ? "#FFD700" : PIPE_COLORS[Math.floor(Math.random() * PIPE_COLORS.length)],
+      color: PIPE_COLORS[Math.floor(Math.random() * PIPE_COLORS.length)],
       glowPhase: Math.random() * Math.PI * 2,
     });
   }, []);
@@ -197,18 +151,13 @@ const FlappyRocketPage = ({
     trailRef.current = [];
     scoreRef.current = 0;
     nextPipeRef.current = 900;
-    pipeCountRef.current = 0;
-    usedQRef.current = new Set();
     shieldRef.current = 0;
     comboRef.current = 0;
     flashRef.current = 0;
     shakeDurRef.current = 0;
     shakeMagRef.current = 0;
-    activeQRef.current = null;
-    postQuestionGraceRef.current = 0;
     flapRef.current = false;
     setScore(0);
-    setActiveQ(null);
     setFeedback(null);
     setCombo(0);
   }, []);
@@ -221,10 +170,9 @@ const FlappyRocketPage = ({
       return x - Math.floor(x);
     };
 
-    const isSpecial = p.special;
-    const baseColor = isSpecial ? "#C9A227" : "#8A7B6B";
-    const darkColor = isSpecial ? "#6B5512" : "#3F362E";
-    const lightColor = isSpecial ? "#F2D26B" : "#B8A896";
+    const baseColor = "#8A7B6B";
+    const darkColor = "#3F362E";
+    const lightColor = "#B8A896";
     const glowCol = p.color;
 
     const SIDE_STEPS = 6;
@@ -348,20 +296,6 @@ const FlappyRocketPage = ({
       ctx.fill();
     }
     ctx.restore();
-
-    // special "SOAL" badge in gap
-    if (p.special) {
-      const pulse = 0.7 + 0.3 * Math.sin(ts / 300);
-      ctx.save();
-      ctx.globalAlpha = pulse;
-      ctx.shadowColor = "#FFD700";
-      ctx.shadowBlur = 14;
-      ctx.fillStyle = "#FFD700";
-      ctx.font = "bold 15px monospace";
-      ctx.textAlign = "center";
-      ctx.fillText("⚡ SOAL", p.x + PIPE_W / 2, p.gapY + PIPE_GAP / 2 + 5);
-      ctx.restore();
-    }
     ctx.textAlign = "left";
   }, []);
 
@@ -668,21 +602,13 @@ const FlappyRocketPage = ({
       // score
       if (ph === "playing" && !p.scored && p.x + PIPE_W < ROCKET_X - ROCKET_R) {
         p.scored = true;
-        if (p.special) {
-          // trigger question
-          phaseRef.current = "question";
-          setPhase("question");
-          activeQRef.current = QUESTIONS[p.qIdx];
-          setActiveQ(QUESTIONS[p.qIdx]);
-        } else {
-          scoreRef.current += 1 + comboRef.current;
-          setScore(scoreRef.current);
-          spawnParticles(ROCKET_X + 30, ryRef.current, "#00FF88", 10);
-        }
+        scoreRef.current += 1 + comboRef.current;
+        setScore(scoreRef.current);
+        spawnParticles(ROCKET_X + 30, ryRef.current, "#00FF88", 10);
       }
 
       // collision
-      if (ph === "playing" && postQuestionGraceRef.current <= 0) {
+      if (ph === "playing") {
         const rx = ROCKET_X, ry = ryRef.current;
         const topOk = ry - ROCKET_R > p.gapY;
         const botOk = ry + ROCKET_R < p.gapY + PIPE_GAP;
@@ -724,9 +650,6 @@ const FlappyRocketPage = ({
     ctx.fillStyle = "#5555ff";
     ctx.fillRect(0, CH - 8, CW, 2);
     ctx.shadowBlur = 0;
-
-    // ── Grace period countdown ─────────────────────────────────────────
-    if (postQuestionGraceRef.current > 0) postQuestionGraceRef.current -= dt;
 
     // ── Rocket physics ─────────────────────────────────────────────────
     if (ph === "playing") {
@@ -847,7 +770,7 @@ const FlappyRocketPage = ({
     }
 
     // ── HUD ───────────────────────────────────────────────────────────
-    if (ph === "playing" || ph === "question") {
+    if (ph === "playing") {
       ctx.fillStyle = "rgba(0,0,0,0.45)";
       ctx.beginPath();
       ctx.roundRect(CW / 2 - 60, 14, 120, 40, 10);
@@ -907,33 +830,6 @@ const FlappyRocketPage = ({
     }
   }, [startGame]);
 
-  const handleAnswer = useCallback((idx: number) => {
-    const q = activeQRef.current;
-    if (!q) return;
-    playPopSound();
-    if (idx === q.ans) {
-      scoreRef.current += 25;
-      setScore(scoreRef.current);
-      // Big golden burst + green overlay
-      spawnParticles(ROCKET_X, ryRef.current, "#FFD700", 28);
-      spawnParticles(ROCKET_X, ryRef.current, "#00FF88", 14);
-      showFeedback("✅ Jawaban Anda Benar! +25", true);
-    } else {
-      // Red flash + shake
-      flashRef.current = 1.2;
-      shakeDurRef.current = 0.4;
-      shakeMagRef.current = 7;
-      spawnParticles(ROCKET_X, ryRef.current, "#FF4444", 18);
-      showFeedback(`❌ Jawaban Anda Salah! Jawaban: ${q.opts[q.ans]}`, false);
-    }
-    activeQRef.current = null;
-    setActiveQ(null);
-    // Grace period: collision disabled for 1.5s so rocket isn't immediately hit by frozen pipes
-    postQuestionGraceRef.current = 1.5;
-    phaseRef.current = "playing";
-    setPhase("playing");
-  }, [spawnParticles, showFeedback]);
-
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === " " || e.key === "ArrowUp") { e.preventDefault(); flap(); }
@@ -974,8 +870,7 @@ const FlappyRocketPage = ({
         instructions={[
           { text: <>Tap layar atau tekan <strong className="text-yellow-300">SPASI</strong> untuk membuat roket terbang naik</> },
           { text: <>Hindari pipa dan terus terbang melewati setiap celah</> },
-          { text: <><strong className="text-yellow-300">Gerbang Emas</strong> muncul tiap 4 pipa — masuk untuk dapat soal bonus</> },
-          { text: <>Jawab benar dapat <strong className="text-green-400">+25 skor</strong></> },
+          { text: <>Setiap <strong className="text-yellow-300">25 detik</strong> akan muncul <strong className="text-pink-300">soal dari guru</strong> — game di-pause, jawab benar = <strong className="text-green-400">+20 poin</strong></> },
         ]}
       />
     );
@@ -1056,40 +951,10 @@ const FlappyRocketPage = ({
             </div>
           )}
 
-          {/* question */}
-          {phase === "question" && activeQ && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/75 rounded-2xl">
-              <div className="bg-card/95 backdrop-blur border-2 border-yellow-400 rounded-2xl p-5 mx-3 shadow-2xl w-full max-w-xs"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="text-[10px] text-white/40 font-display text-center mb-1 tracking-widest">
-                  ⏸ GAME PAUSED
-                </div>
-                <div className="text-xs text-yellow-400 font-display mb-2 text-center tracking-widest">
-                  ⚡ SOAL MATEMATIKA ⚡
-                </div>
-                <p className="text-white font-bold text-center text-sm mb-4 leading-snug whitespace-pre-line">
-                  {activeQ.q}
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {activeQ.opts.map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={(e) => { e.stopPropagation(); handleAnswer(i); }}
-                      className="bg-primary/20 hover:bg-yellow-400/20 border border-border hover:border-yellow-400 text-white font-bold py-3 px-2 rounded-xl text-sm transition-all cursor-pointer active:scale-95"
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-                <p className="text-white/40 text-xs text-center mt-3">Jawab benar = +25 skor 🌟</p>
-              </div>
-            </div>
-          )}
         </div>
 
         <p className="mt-2 text-white/40 text-xs font-body text-center">
-          Ketuk layar / SPASI / ↑ untuk terbang &nbsp;·&nbsp; Gerbang emas setiap 4 pipa = ada soal! 📝
+          Ketuk layar / SPASI / ↑ untuk terbang &nbsp;·&nbsp; Soal Guru muncul tiap 25 detik 📝
         </p>
       <GuruQuizOverlay {...guruQuiz} />
       </div>

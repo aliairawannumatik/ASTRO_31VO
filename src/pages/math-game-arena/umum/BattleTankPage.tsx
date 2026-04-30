@@ -15,41 +15,11 @@ const LANDSCAPE_DIMS = { CW: 820, CH: 520, PLAYER_Y: 440 };
 type Dims = typeof PORTRAIT_DIMS;
 const BULLET_SPEED = 430;
 const ENEMY_BULLET_SPEED = 195;
-const QUIZ_INTERVAL = 40;
-const QUIZ_BONUS_PTS = 150;
-const QUIZ_BONUS_TIME = 6;
 const TILE_SIZE = 40;
 
-// ── Quiz Pool ────────────────────────────────────────────────────────────────
+// ── Quiz type (kept for backward compat with wrapper pages; gameplay no longer
+//    uses an in-game bonus quiz — only the 25-detik "Soal Guru" pause-quiz). ──
 export interface MQ { q: string; opts: string[]; ans: number }
-
-const DEFAULT_QUIZ_POOL: MQ[] = [
-  { q: "FPB dari 24 dan 36 adalah ...", opts: ["12", "6", "8", "18"], ans: 0 },
-  { q: "KPK dari 6 dan 8 adalah ...", opts: ["24", "12", "48", "16"], ans: 0 },
-  { q: "Hasil dari 5² + 3² = ...", opts: ["34", "64", "25", "16"], ans: 0 },
-  { q: "√144 = ...", opts: ["12", "14", "11", "13"], ans: 0 },
-  { q: "Luas persegi sisi 9 cm = ... cm²", opts: ["81", "72", "36", "18"], ans: 0 },
-  { q: "Keliling persegi panjang P=10, L=5 adalah ...", opts: ["30", "50", "15", "20"], ans: 0 },
-  { q: "Nilai dari 3³ adalah ...", opts: ["27", "9", "81", "18"], ans: 0 },
-  { q: "Pecahan ³⁄₄ dalam persen = ...", opts: ["75%", "70%", "80%", "65%"], ans: 0 },
-  { q: "Rasio 12 : 8 dalam bentuk sederhana = ...", opts: ["3:2", "6:4", "4:3", "2:3"], ans: 0 },
-  { q: "Jika 2x + 5 = 13, maka x = ...", opts: ["4", "3", "5", "8"], ans: 0 },
-  { q: "Sudut dalam segitiga berjumlah ...", opts: ["180°", "90°", "360°", "270°"], ans: 0 },
-  { q: "Luas lingkaran dengan r = 7 (π=22/7) = ...", opts: ["154", "44", "49", "77"], ans: 0 },
-  { q: "Keliling lingkaran r = 14 (π=22/7) = ...", opts: ["88", "44", "28", "154"], ans: 0 },
-  { q: "Bilangan prima di antara 10 dan 20 = ...", opts: ["11,13,17,19", "10,12,14,16", "11,15,17,19", "13,15,17,19"], ans: 0 },
-  { q: "Volume kubus sisi 5 cm = ... cm³", opts: ["125", "25", "75", "150"], ans: 0 },
-  { q: "Harga setelah diskon 20% dari Rp50.000 = ...", opts: ["Rp40.000", "Rp45.000", "Rp30.000", "Rp35.000"], ans: 0 },
-  { q: "Persamaan garis y = 2x + 3, saat x=4, y = ...", opts: ["11", "10", "9", "14"], ans: 0 },
-  { q: "Nilai rata-rata dari 6, 8, 10, 12 = ...", opts: ["9", "8", "10", "7"], ans: 0 },
-  { q: "Peluang muncul angka 6 pada dadu = ...", opts: ["1/6", "1/3", "1/2", "1/4"], ans: 0 },
-  { q: "Sudut lancip memiliki besar antara ...", opts: ["0°–90°", "90°–180°", "0°–45°", "90°–360°"], ans: 0 },
-  { q: "Jika p = 3, nilai 4p² = ...", opts: ["36", "144", "12", "24"], ans: 0 },
-  { q: "Faktor dari 36 berjumlah ...", opts: ["9", "6", "8", "12"], ans: 0 },
-  { q: "0,75 dalam bentuk pecahan = ...", opts: ["3/4", "1/4", "7/10", "7/5"], ans: 0 },
-  { q: "Hasil 15% × 200 = ...", opts: ["30", "15", "45", "25"], ans: 0 },
-  { q: "Volume balok P=8, L=5, T=3 = ... cm³", opts: ["120", "80", "160", "240"], ans: 0 },
-];
 
 // ── Palettes ─────────────────────────────────────────────────────────────────
 const ENEMY_PALETTES = [
@@ -196,13 +166,11 @@ const AnalogStick = ({ size, onChange }: AnalogStickProps) => {
 };
 
 const BattleTankPage = ({
-  questions,
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
   quizQuestions,
 }: BattleTankPageProps = {}) => {
-  const QUIZ_POOL = questions && questions.length > 0 ? questions : DEFAULT_QUIZ_POOL;
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -272,14 +240,8 @@ const BattleTankPage = ({
   const tileOffsetRef = useRef(0);
   const waveRef = useRef(1);
 
-  const quizNextRef = useRef(QUIZ_INTERVAL);
-  const quizActiveRef = useRef(false);
-  const usedQuizRef = useRef<Set<number>>(new Set());
-
   const [, forceRender] = useState(0);
   const rerender = useCallback(() => forceRender(n => n + 1), []);
-  const [activeQuiz, setActiveQuiz] = useState<MQ | null>(null);
-  const [quizCountdown, setQuizCountdown] = useState(QUIZ_INTERVAL);
 
   // ── Spawn wave ────────────────────────────────────────────────────────────
   const spawnWave = useCallback(() => {
@@ -315,41 +277,6 @@ const BattleTankPage = ({
     void total;
   }, []);
 
-  // ── Quiz helpers ──────────────────────────────────────────────────────────
-  const triggerQuiz = useCallback(() => {
-    if (quizActiveRef.current) return;
-    quizActiveRef.current = true;
-    let idx = ~~(Math.random() * QUIZ_POOL.length);
-    if (usedQuizRef.current.size >= QUIZ_POOL.length) usedQuizRef.current.clear();
-    let guard = 0;
-    while (usedQuizRef.current.has(idx) && guard < 60) {
-      idx = ~~(Math.random() * QUIZ_POOL.length);
-      guard++;
-    }
-    usedQuizRef.current.add(idx);
-    setActiveQuiz(QUIZ_POOL[idx]);
-  }, []);
-
-  const handleQuizAnswer = useCallback((optIdx: number) => {
-    if (!quizActiveRef.current || !activeQuiz) return;
-    const { CW, CH } = dimsRef.current;
-    if (optIdx === activeQuiz.ans) {
-      scoreRef.current += QUIZ_BONUS_PTS;
-      timerRef.current = Math.min(180, timerRef.current + QUIZ_BONUS_TIME);
-      if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
-      floatTextsRef.current.push({ x: CW / 2, y: CH / 2 - 20, txt: `✅ BENAR! +${QUIZ_BONUS_PTS} pts`, alpha: 1, vy: -80, good: true });
-      playPopSound();
-    } else {
-      timerRef.current = Math.max(5, timerRef.current - 5);
-      floatTextsRef.current.push({ x: CW / 2, y: CH / 2 - 20, txt: "❌ Salah! −5 detik", alpha: 1, vy: -80, good: false });
-      shakeRef.current = 0.4;
-    }
-    quizActiveRef.current = false;
-    quizNextRef.current = QUIZ_INTERVAL;
-    setActiveQuiz(null);
-    rerender();
-  }, [activeQuiz, rerender]);
-
   // ── Explosions / Bullets ──────────────────────────────────────────────────
   const addExplosion = (x: number, y: number, color: string, big: boolean) => {
     const count = big ? 28 : 14;
@@ -382,13 +309,9 @@ const BattleTankPage = ({
     timerRef.current = 120; timerAccRef.current = 0;
     comboRef.current = 0; comboAccRef.current = 0;
     shakeRef.current = 0; waveRef.current = 1;
-    quizNextRef.current = QUIZ_INTERVAL;
-    quizActiveRef.current = false;
-    usedQuizRef.current.clear();
     bulletsRef.current = []; explosionsRef.current = [];
     floatTextsRef.current = []; groundMarksRef.current = [];
     playerRef.current = { x: CW / 2, targetX: CW / 2, turretAngle: -Math.PI / 2, invT: 0 };
-    setActiveQuiz(null);
     spawnWave();
     setPhase("playing");
   }, [spawnWave, setPhase]);
@@ -396,7 +319,7 @@ const BattleTankPage = ({
   // ── Fire (shared by click/tap/fire button/keyboard) ───────────────────────
   const fireNow = useCallback(() => {
     if (phaseRef.current === "idle" || phaseRef.current === "dead") { startGame(); return; }
-    if (phaseRef.current !== "playing" || quizActiveRef.current) return;
+    if (phaseRef.current !== "playing") return;
     const { PLAYER_Y } = dimsRef.current;
     const px = playerRef.current.x;
     const ang = playerRef.current.turretAngle;
@@ -447,7 +370,7 @@ const BattleTankPage = ({
     const canvas = canvasRef.current; if (!canvas) return;
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
-    if (phaseRef.current !== "playing" || quizActiveRef.current) return;
+    if (phaseRef.current !== "playing") return;
     const { CW, CH, PLAYER_Y } = dimsRef.current;
     const rect = canvas.getBoundingClientRect();
     const cx = (e.clientX - rect.left) * (CW / rect.width);
@@ -473,7 +396,7 @@ const BattleTankPage = ({
     e.preventDefault();
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
-    if (phaseRef.current !== "playing" || quizActiveRef.current) return;
+    if (phaseRef.current !== "playing") return;
     const { PLAYER_Y } = dimsRef.current;
     const px = playerRef.current.x, ang = playerRef.current.turretAngle;
     fireBullet(true, px + Math.cos(ang) * 28, PLAYER_Y + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
@@ -698,16 +621,6 @@ const BattleTankPage = ({
     ctx.restore();
   };
 
-  // ── Quiz countdown display sync ───────────────────────────────────────────
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (phaseRef.current === "playing" && !quizActiveRef.current) {
-        setQuizCountdown(Math.ceil(quizNextRef.current));
-      }
-    }, 500);
-    return () => clearInterval(id);
-  }, []);
-
   // ── Main loop ─────────────────────────────────────────────────────────────
   useEffect(() => {
     const canvas = canvasRef.current; if (!canvas) return;
@@ -747,7 +660,7 @@ const BattleTankPage = ({
       if (player.invT > 0) player.invT = Math.max(0, player.invT - dt);
       if (shakeRef.current > 0) shakeRef.current = Math.max(0, shakeRef.current - dt * 2.5);
 
-      if (phase === "playing" && !quizActiveRef.current) {
+      if (phase === "playing") {
         // ── Timer countdown ────────────────────────────────────────────────
         timerAccRef.current += dt;
         if (timerAccRef.current >= 1) {
@@ -755,10 +668,6 @@ const BattleTankPage = ({
           timerRef.current--;
           if (timerRef.current <= 0) { timerRef.current = 0; setPhase("dead"); }
         }
-
-        // ── Quiz countdown ─────────────────────────────────────────────────
-        quizNextRef.current -= dt;
-        if (quizNextRef.current <= 0) { quizNextRef.current = 0; triggerQuiz(); }
 
         // ── Combo decay ───────────────────────────────────────────────────
         if (comboRef.current > 0) {
@@ -908,10 +817,6 @@ const BattleTankPage = ({
       drawHUD(`LVL ${levelRef.current}`, CW / 2, 70, 11, "#c4b5fd", "center");
       const timer = timerRef.current;
       drawHUD(`⏱ ${timer}s`, CW - 12, 52, 13, timer <= 15 ? "#ff5e87" : "#fde047", "right");
-      if (!quizActiveRef.current && phase === "playing") {
-        const qNext = Math.ceil(quizNextRef.current);
-        drawHUD(`❓ ${qNext}s`, CW - 12, 70, 10, "#a5f3fc", "right");
-      }
 
       // Combo bar
       if (comboRef.current >= 2) {
@@ -990,7 +895,7 @@ const BattleTankPage = ({
 
     rafRef.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [rerender, spawnWave, fireBullet, triggerQuiz, phase]);
+  }, [rerender, spawnWave, fireBullet, phase]);
 
   if (phase === "idle") {
     return (
@@ -1014,7 +919,7 @@ const BattleTankPage = ({
           { text: <>Gunakan <strong className="text-yellow-300">stik analog</strong> untuk membidik ke segala arah (atau gerakkan mouse / sentuh layar / tombol panah)</> },
           { text: <>Tekan tombol <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap layar / spasi) untuk menembakkan peluru</> },
           { text: <>Hancurkan semua tank musuh dan hindari peluru mereka — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
-          { text: <>Tiap <strong className="text-yellow-300">{QUIZ_INTERVAL} detik</strong> muncul soal bonus = <strong className="text-green-400">+{QUIZ_BONUS_PTS} pts</strong></> },
+          { text: <>Setiap <strong className="text-yellow-300">25 detik</strong> akan muncul <strong className="text-pink-300">soal dari guru</strong> — game di-pause, jawab benar = <strong className="text-green-400">+20 poin</strong></> },
         ]}
       />
     );
@@ -1085,34 +990,6 @@ const BattleTankPage = ({
             }
           />
 
-          {activeQuiz && (
-            <div className="absolute inset-0 flex items-center justify-center z-20 rounded-[28px] p-3">
-              <div className="w-full max-w-[390px] mx-auto bg-slate-950/95 border-2 border-cyan-400 rounded-2xl p-5 shadow-[0_0_40px_rgba(0,240,255,0.4)]">
-                <div className="text-center mb-3">
-                  <span className="inline-flex items-center gap-1 bg-cyan-500/20 border border-cyan-400/50 rounded-full px-3 py-1 text-cyan-300 text-xs font-bold tracking-widest">
-                    ❓ SOAL BONUS +{QUIZ_BONUS_PTS} PTS
-                  </span>
-                </div>
-                <p className="text-white font-display text-sm font-bold text-center mb-4 leading-snug">
-                  {activeQuiz.q}
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {activeQuiz.opts.map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleQuizAnswer(i)}
-                      className="bg-slate-800 hover:bg-cyan-700/60 border border-slate-600 hover:border-cyan-400 rounded-xl py-3 px-2 text-white text-xs font-bold transition-all duration-150 active:scale-95 cursor-pointer"
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-                <p className="text-center text-white/40 text-[10px] mt-3 font-body">
-                  Benar = +{QUIZ_BONUS_PTS} pts & +{QUIZ_BONUS_TIME} detik · Salah = −5 detik
-                </p>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Fire Button – only visible here in landscape (flanking the canvas) */}

@@ -38,6 +38,9 @@ export interface UseGuruQuizReturn {
   /** Seconds remaining until the next question is shown. Frozen while a question
    *  is open or the game is not in the playing phase. */
   secondsUntilNext: number;
+  /** True when the countdown should be visible to the player (game is actively
+   *  running, no question on screen, and more questions are still scheduled). */
+  isCountdownActive: boolean;
 }
 
 export function useGuruQuiz(
@@ -55,6 +58,7 @@ export function useGuruQuiz(
   const [showCelebration, setShowCelebration] = useState(false);
   const [lastResult, setLastResult] = useState<"correct" | "wrong" | null>(null);
   const [secondsUntilNext, setSecondsUntilNext] = useState<number>(Math.ceil(intervalMs / 1000));
+  const [isCountdownActive, setIsCountdownActive] = useState<boolean>(false);
 
   const internal = useRef({
     questionCount: 0,
@@ -73,6 +77,8 @@ export function useGuruQuiz(
   // re-subscribe on every change.
   const secondsUntilNextRef = useRef(secondsUntilNext);
   useEffect(() => { secondsUntilNextRef.current = secondsUntilNext; }, [secondsUntilNext]);
+  const isCountdownActiveRef = useRef(isCountdownActive);
+  useEffect(() => { isCountdownActiveRef.current = isCountdownActive; }, [isCountdownActive]);
 
   const questionPool = customQuestions && customQuestions.length > 0 ? customQuestions : GURU_QUESTIONS;
 
@@ -114,6 +120,7 @@ export function useGuruQuiz(
         setShowCelebration(false);
         setLastResult(null);
         setSecondsUntilNext(Math.ceil(intervalMs / 1000));
+        setIsCountdownActive(true);
       }
 
       // Transition: playing → not playing (game paused or ended)
@@ -131,19 +138,31 @@ export function useGuruQuiz(
 
       ref.prevPhase = phase;
 
-      if (!ref.active) return;
+      if (!ref.active) {
+        if (isCountdownActiveRef.current) setIsCountdownActive(false);
+        return;
+      }
 
-      // While a question is on screen, freeze the countdown display.
-      if (isPausedRef.current) return;
+      // While a question is on screen, freeze the countdown display and hide chip.
+      if (isPausedRef.current) {
+        if (isCountdownActiveRef.current) setIsCountdownActive(false);
+        return;
+      }
 
       // While the game is paused (not playing), don't decrement either.
-      if (!isPlaying) return;
+      if (!isPlaying) {
+        if (isCountdownActiveRef.current) setIsCountdownActive(false);
+        return;
+      }
 
       // No more questions to fire this session.
       if (ref.questionCount >= MAX_QUESTIONS) {
         if (secondsUntilNextRef.current !== 0) setSecondsUntilNext(0);
+        if (isCountdownActiveRef.current) setIsCountdownActive(false);
         return;
       }
+
+      if (!isCountdownActiveRef.current) setIsCountdownActive(true);
 
       const remainingMs = Math.max(0, ref.nextTriggerAt - now);
       const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000));
@@ -207,5 +226,6 @@ export function useGuruQuiz(
     onDismissCelebration,
     lastResult,
     secondsUntilNext,
+    isCountdownActive,
   };
 }
