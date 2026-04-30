@@ -256,7 +256,7 @@ const FruitNinjaMathPage = () => {
     const q = makeQuestion();
     qRef.current = q;
     const used = new Set<number>([q.ans]);
-    const total = 4 + Math.min(2, Math.floor(levelRef.current / 3));
+    const total = 5 + Math.min(4, Math.floor(levelRef.current / 2));
     const correctIndex = Math.floor(Math.random() * total);
     const fruits: Fruit[] = [];
     // distribute fruits across the screen width, give each its own random launch position + delay
@@ -274,27 +274,31 @@ const FruitNinjaMathPage = () => {
         id: uid++,
         x: Math.max(40, Math.min(CW - 40, x)),
         y: CH + 35 + launchOffset,
-        vx: (Math.random() - 0.5) * 145,
-        vy: -(620 + Math.random() * 200 + levelRef.current * 18),
-        r: 22 + Math.random() * 5,
+        vx: (Math.random() - 0.5) * (200 + levelRef.current * 14),
+        vy: -(720 + Math.random() * 240 + levelRef.current * 28),
+        r: 18 + Math.random() * 4,
         value,
         kind,
         color: pal.color,
         glow: pal.glow,
         label: pal.label,
         rot: Math.random() * Math.PI * 2,
-        spin: (Math.random() < 0.5 ? -1 : 1) * (2.6 + Math.random() * 4.5),
+        spin: (Math.random() < 0.5 ? -1 : 1) * (3.5 + Math.random() * 5.5),
         sliced: false,
       });
     }
-    if (Math.random() < Math.min(0.65, 0.22 + levelRef.current * 0.04)) {
+    // Bombs: high chance, and multiple bombs at higher levels.
+    const bombCount = (Math.random() < Math.min(0.95, 0.5 + levelRef.current * 0.06) ? 1 : 0)
+      + (levelRef.current >= 3 && Math.random() < Math.min(0.7, 0.2 + (levelRef.current - 3) * 0.08) ? 1 : 0)
+      + (levelRef.current >= 5 && Math.random() < 0.35 ? 1 : 0);
+    for (let bi = 0; bi < bombCount; bi++) {
       fruits.push({
         id: uid++,
         x: 55 + Math.random() * (CW - 110),
-        y: CH + 50,
-        vx: (Math.random() - 0.5) * 125,
-        vy: -(470 + Math.random() * 135),
-        r: 27,
+        y: CH + 50 + Math.random() * 220,
+        vx: (Math.random() - 0.5) * (170 + levelRef.current * 10),
+        vy: -(560 + Math.random() * 165 + levelRef.current * 18),
+        r: 23,
         value: 0,
         kind: "bomb",
         color: "#111827",
@@ -330,10 +334,10 @@ const FruitNinjaMathPage = () => {
   const startGame = useCallback(() => {
     phaseRef.current = "playing";
     scoreRef.current = 0;
-    livesRef.current = 3;
+    livesRef.current = 2;
     comboRef.current = 0;
     levelRef.current = 1;
-    timerRef.current = 90;
+    timerRef.current = 70;
     spawnAccRef.current = 0;
     shakeRef.current = 0;
     fruitsRef.current = [];
@@ -361,7 +365,7 @@ const FruitNinjaMathPage = () => {
     for (const fruit of fruitsRef.current) {
       if (fruit.sliced) continue;
       const d = Math.hypot(x - fruit.x, y - fruit.y);
-      if (d <= fruit.r + 12) {
+      if (d <= fruit.r + 4) {
         hit = true;
         fruit.sliced = true;
         if (fruit.kind === "correct") {
@@ -369,7 +373,7 @@ const FruitNinjaMathPage = () => {
           const pts = 30 * comboRef.current + levelRef.current * 10;
           scoreRef.current += pts;
           bestRef.current = Math.max(bestRef.current, scoreRef.current);
-          levelRef.current = Math.max(1, Math.floor(scoreRef.current / 220) + 1);
+          levelRef.current = Math.max(1, Math.floor(scoreRef.current / 150) + 1);
           addFloat(fruit.x, fruit.y - 10, `+${pts} ×${comboRef.current}`, "#bbf7d0");
           burst(fruit.x, fruit.y, fruit.glow, 34);
           qRef.current = makeQuestion();
@@ -523,7 +527,7 @@ const FruitNinjaMathPage = () => {
           spawnAccRef.current = 999;
         }
 
-        const interval = Math.max(1.05, 2.25 - levelRef.current * 0.09);
+        const interval = Math.max(0.65, 1.7 - levelRef.current * 0.11);
         if (spawnAccRef.current >= interval) {
           spawnAccRef.current = 0;
           spawnWave();
@@ -531,7 +535,7 @@ const FruitNinjaMathPage = () => {
         for (const fruit of fruitsRef.current) {
           fruit.x += fruit.vx * dt;
           fruit.y += fruit.vy * dt;
-          fruit.vy += (540 + levelRef.current * 12) * dt;
+          fruit.vy += (700 + levelRef.current * 22) * dt;
           fruit.rot += fruit.spin * dt;
           if (!fruit.sliced && fruit.kind === "correct" && fruit.y > CH + 55 && fruit.vy > 0) {
             fruit.sliced = true;
