@@ -517,30 +517,27 @@ const BrickBreakerPage = () => {
         const scale = 1 + b.hitT * 0.08;
         const cx2 = b.x + BRICK_W / 2, cy2 = b.y + BRICK_H / 2;
 
-        // Deterministic seeded random for this asteroid (stable per cell)
+        // Deterministic seeded random for this crystal (stable per cell)
         const seed = (b.col * 73 + b.row * 137 + 19) | 0;
         const rndA = (i: number) => {
           const v = Math.sin(seed * 9301 + i * 49297) * 233280;
           return v - Math.floor(v);
         };
 
-        // ── Build smooth asteroid silhouette ─────────────────────────────
-        // Two-octave noise around an ellipse → natural-looking rocky shape
-        // (less jagged than a raw polygon). Drawn with quadratic curves
-        // through midpoints for a smooth continuous outline.
-        const N = 18;
-        const halfBW = BRICK_W * 0.47;
-        const halfBH = BRICK_H * 0.47;
+        // ── Build a faceted crystal silhouette ───────────────────────────
+        // Hexagonal-ish gem with subtle per-asteroid variation, slow
+        // rotation gives a gentle "floating crystal" feel.
+        const halfBW = BRICK_W * 0.48;
+        const halfBH = BRICK_H * 0.48;
+        const rotation = (rndA(3) - 0.5) * 0.6 + Math.sin(ts / 2400 + seed) * 0.04;
+        const N = 8;
         const points: { x: number; y: number }[] = [];
         for (let i = 0; i < N; i++) {
-          const a = (i / N) * Math.PI * 2;
-          // Low-frequency wobble (large dents/bulges) + high-frequency grit
-          const lo = (rndA(i) - 0.5) * 0.18;
-          const hi = (rndA(i + 51) - 0.5) * 0.07;
-          const r = 1 + lo + hi;
+          const a = (i / N) * Math.PI * 2 + rotation;
+          const jitter = 0.92 + rndA(i + 11) * 0.16;
           points.push({
-            x: Math.cos(a) * halfBW * r,
-            y: Math.sin(a) * halfBH * r,
+            x: Math.cos(a) * halfBW * jitter,
+            y: Math.sin(a) * halfBH * jitter,
           });
         }
 
@@ -548,185 +545,171 @@ const BrickBreakerPage = () => {
         ctx.translate(cx2, cy2);
         ctx.scale(scale, scale);
 
-        // Trace silhouette using quadratic curves through midpoints for
-        // a smooth, organic outline (no hard polygon corners).
+        // Crystal silhouette path (sharp facet edges — lines, not curves)
         const tracePath = () => {
           ctx.beginPath();
-          const last = points[points.length - 1];
-          let mx = (last.x + points[0].x) / 2;
-          let my = (last.y + points[0].y) / 2;
-          ctx.moveTo(mx, my);
           for (let i = 0; i < points.length; i++) {
             const p = points[i];
-            const next = points[(i + 1) % points.length];
-            const nmx = (p.x + next.x) / 2;
-            const nmy = (p.y + next.y) / 2;
-            ctx.quadraticCurveTo(p.x, p.y, nmx, nmy);
-            mx = nmx; my = nmy;
+            if (i === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
           }
           ctx.closePath();
         };
 
-        // ── Soft drop shadow only (no candy aura) ────────────────────────
+        // ── Outer halo glow (soft colored aura around the gem) ──────────
         ctx.save();
-        ctx.shadowBlur = 6 + b.hitT * 14;
-        ctx.shadowColor = b.cracked ? "rgba(255,90,30,0.7)" : "rgba(0,0,0,0.75)";
-        ctx.shadowOffsetX = 1.5;
+        const haloPulse = 0.85 + 0.15 * Math.sin(ts / 600 + seed);
+        const haloR = Math.max(halfBW, halfBH) * 1.55 * haloPulse;
+        const halo = ctx.createRadialGradient(0, 0, halfBW * 0.4, 0, 0, haloR);
+        halo.addColorStop(0,   hexToRgba(b.color.glow, 0.55));
+        halo.addColorStop(0.45, hexToRgba(b.color.glow, 0.20));
+        halo.addColorStop(1,   hexToRgba(b.color.glow, 0));
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(0, 0, haloR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // ── Drop shadow under the gem ───────────────────────────────────
+        ctx.save();
+        ctx.shadowBlur = 14 + b.hitT * 16;
+        ctx.shadowColor = hexToRgba(b.color.glow, 0.85);
         ctx.shadowOffsetY = 3;
 
-        // Realistic rocky base — natural gray-brown with a *very* subtle
-        // hint of the row color so the rows still read at a glance, but
-        // the overall impression is "real space rock".
-        const baseGrad = ctx.createRadialGradient(
-          -halfBW * 0.40, -halfBH * 0.55, halfBW * 0.05,
-          halfBW * 0.20, halfBH * 0.30, Math.max(halfBW, halfBH) * 1.45
+        // Vibrant gem body — bright color with deep saturated core
+        const bodyGrad = ctx.createRadialGradient(
+          -halfBW * 0.30, -halfBH * 0.45, halfBW * 0.05,
+          0, 0, Math.max(halfBW, halfBH) * 1.25
         );
-        baseGrad.addColorStop(0,    mixColor("#a89989", b.color.fill, 0.10));
-        baseGrad.addColorStop(0.45, mixColor("#736554", b.color.fill, 0.08));
-        baseGrad.addColorStop(0.80, mixColor("#3a3024", b.color.fill, 0.05));
-        baseGrad.addColorStop(1,    "#15100b");
-        ctx.fillStyle = baseGrad;
+        bodyGrad.addColorStop(0,    "#ffffff");
+        bodyGrad.addColorStop(0.18, mixColor("#ffffff", b.color.fill, 0.55));
+        bodyGrad.addColorStop(0.55, b.color.fill);
+        bodyGrad.addColorStop(1,    mixColor(b.color.fill, "#1a0030", 0.80));
+        ctx.fillStyle = bodyGrad;
         tracePath();
         ctx.fill();
         ctx.restore();
 
-        // ── Surface detail (clipped to asteroid silhouette) ──────────────
+        // ── Inner facets (clipped to crystal silhouette) ────────────────
         ctx.save();
         tracePath();
         ctx.clip();
 
-        // Soft warm specular near the lit edge (sun is upper-left)
-        const hlGrad = ctx.createRadialGradient(
-          -halfBW * 0.55, -halfBH * 0.65, 0,
-          -halfBW * 0.55, -halfBH * 0.65, halfBW * 1.0
-        );
-        hlGrad.addColorStop(0,   "rgba(255,235,200,0.55)");
-        hlGrad.addColorStop(0.4, "rgba(255,225,180,0.20)");
-        hlGrad.addColorStop(1,   "rgba(255,225,180,0)");
-        ctx.fillStyle = hlGrad;
-        ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
+        // Lit facets — connect adjacent vertices to the centre, then fill
+        // each triangle with a slight shading variation. This produces the
+        // gem-like faceted look.
+        for (let i = 0; i < points.length; i++) {
+          const p1 = points[i];
+          const p2 = points[(i + 1) % points.length];
+          const cxF = (p1.x + p2.x) / 3;
+          const cyF = (p1.y + p2.y) / 3;
+          // Brighter on facets pointing toward the upper-left light
+          const dirLight = (-cxF - cyF) / (halfBW + halfBH);
+          const lit = Math.max(0, Math.min(1, dirLight * 0.8 + 0.5));
 
-        // Terminator shadow on the unlit (lower-right) side — gives the
-        // illusion of a 3D sphere instead of a flat cutout.
-        const shGrad = ctx.createRadialGradient(
-          halfBW * 0.55, halfBH * 0.55, 0,
-          halfBW * 0.55, halfBH * 0.55, halfBW * 1.6
-        );
-        shGrad.addColorStop(0,   "rgba(0,0,0,0.55)");
-        shGrad.addColorStop(0.5, "rgba(0,0,0,0.18)");
-        shGrad.addColorStop(1,   "rgba(0,0,0,0)");
-        ctx.fillStyle = shGrad;
-        ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
+          const facetGrad = ctx.createLinearGradient(0, 0, cxF, cyF);
+          facetGrad.addColorStop(0, `rgba(255,255,255,${0.20 * lit})`);
+          facetGrad.addColorStop(1, `rgba(0,0,0,${0.18 * (1 - lit)})`);
+          ctx.fillStyle = facetGrad;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.closePath();
+          ctx.fill();
 
-        // Tiny surface boulders (small light spots — bumps catching light)
-        for (let i = 0; i < 7; i++) {
-          const bx = (rndA(i + 23) - 0.5) * BRICK_W * 0.7;
-          const by = (rndA(i + 41) - 0.5) * BRICK_H * 0.7;
-          const br = 0.5 + rndA(i + 29) * 0.7;
-          ctx.fillStyle = "rgba(255,225,190,0.25)";
+          // Crisp facet edge from center to vertex
+          ctx.strokeStyle = `rgba(255,255,255,${0.18 * lit + 0.05})`;
+          ctx.lineWidth = 0.7;
           ctx.beginPath();
-          ctx.arc(bx, by, br, 0, Math.PI * 2);
-          ctx.fill();
-          // Tiny shadow on the dark side of the bump (lower-right)
-          ctx.fillStyle = "rgba(0,0,0,0.35)";
-          ctx.beginPath();
-          ctx.arc(bx + 0.6, by + 0.6, br * 0.7, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(p1.x, p1.y);
+          ctx.stroke();
         }
 
-        // ── Realistic craters with lit rim + cast shadow ─────────────────
-        const craterCount = 3 + Math.floor(rndA(7) * 2); // 3 or 4 craters
-        for (let i = 0; i < craterCount; i++) {
-          const cx = (rndA(i + 5) - 0.5) * BRICK_W * 0.55;
-          const cy = (rndA(i + 11) - 0.5) * BRICK_H * 0.55;
-          const cr = 1.6 + rndA(i + 17) * 2.2;
+        // Bright specular wedge on the upper-left
+        const sparkleGrad = ctx.createRadialGradient(
+          -halfBW * 0.45, -halfBH * 0.55, 0,
+          -halfBW * 0.45, -halfBH * 0.55, halfBW * 0.85
+        );
+        sparkleGrad.addColorStop(0,   "rgba(255,255,255,0.85)");
+        sparkleGrad.addColorStop(0.45, "rgba(255,255,255,0.20)");
+        sparkleGrad.addColorStop(1,   "rgba(255,255,255,0)");
+        ctx.fillStyle = sparkleGrad;
+        ctx.fillRect(-BRICK_W, -BRICK_H, BRICK_W * 2, BRICK_H * 2);
 
-          // Bright rim on the side facing the light (upper-left)
+        // Twinkling 4-point sparkle stars on the surface
+        const twinkleT = ts / 1000;
+        const sparkles: [number, number, number, number][] = [
+          [-halfBW * 0.40, -halfBH * 0.45, 0.0, 1.6],
+          [ halfBW * 0.30, -halfBH * 0.15, 1.3, 1.0],
+          [-halfBW * 0.10,  halfBH * 0.30, 2.1, 1.2],
+        ];
+        for (const [sx, sy, phase2, sz] of sparkles) {
+          const a = 0.55 + 0.45 * Math.sin(twinkleT * 3 + phase2 + seed * 0.1);
+          if (a < 0.05) continue;
           ctx.save();
+          ctx.translate(sx, sy);
+          ctx.rotate(Math.PI / 4);
+          ctx.fillStyle = `rgba(255,255,255,${a})`;
           ctx.beginPath();
-          ctx.arc(cx, cy, cr + 0.6, 0, Math.PI * 2);
-          ctx.clip();
-          const rimLit = ctx.createRadialGradient(
-            cx - cr * 0.4, cy - cr * 0.4, cr * 0.2,
-            cx, cy, cr + 0.6
-          );
-          rimLit.addColorStop(0,   "rgba(255,235,210,0)");
-          rimLit.addColorStop(0.8, "rgba(255,235,210,0)");
-          rimLit.addColorStop(1,   "rgba(255,235,210,0.55)");
-          ctx.fillStyle = rimLit;
-          ctx.fillRect(cx - cr - 1, cy - cr - 1, cr * 2 + 2, cr * 2 + 2);
+          ctx.moveTo(0, -sz * 2.2);
+          ctx.lineTo(sz * 0.5, 0);
+          ctx.lineTo(0, sz * 2.2);
+          ctx.lineTo(-sz * 0.5, 0);
+          ctx.closePath();
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(-sz * 2.2, 0);
+          ctx.lineTo(0, sz * 0.5);
+          ctx.lineTo(sz * 2.2, 0);
+          ctx.lineTo(0, -sz * 0.5);
+          ctx.closePath();
+          ctx.fill();
           ctx.restore();
-
-          // Crater bowl — darker on the side opposite the light
-          const bowl = ctx.createRadialGradient(
-            cx + cr * 0.35, cy + cr * 0.35, 0,
-            cx, cy, cr
-          );
-          bowl.addColorStop(0,   "rgba(0,0,0,0.78)");
-          bowl.addColorStop(0.6, "rgba(0,0,0,0.45)");
-          bowl.addColorStop(1,   "rgba(0,0,0,0)");
-          ctx.fillStyle = bowl;
-          ctx.beginPath();
-          ctx.arc(cx, cy, cr, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Soft inner-floor light bounce on the lit side
-          ctx.fillStyle = "rgba(180,160,135,0.18)";
-          ctx.beginPath();
-          ctx.arc(cx - cr * 0.2, cy - cr * 0.2, cr * 0.45, 0, Math.PI * 2);
-          ctx.fill();
         }
 
-        // Subtle dusty noise grain over the whole surface
-        ctx.fillStyle = "rgba(0,0,0,0.18)";
-        for (let i = 0; i < 14; i++) {
-          const dx = (rndA(i + 71) - 0.5) * BRICK_W * 0.85;
-          const dy = (rndA(i + 89) - 0.5) * BRICK_H * 0.85;
-          ctx.fillRect(dx, dy, 0.7, 0.7);
-        }
-        ctx.fillStyle = "rgba(255,235,210,0.10)";
-        for (let i = 0; i < 10; i++) {
-          const dx = (rndA(i + 113) - 0.5) * BRICK_W * 0.85;
-          const dy = (rndA(i + 131) - 0.5) * BRICK_H * 0.85;
-          ctx.fillRect(dx, dy, 0.7, 0.7);
-        }
-
-        // ── Crack overlay after first hit ────────────────────────────────
+        // ── Cracked overlay after first hit ─────────────────────────────
+        // Inner light leaks out as a brighter, prismatic glow.
         if (b.cracked) {
-          ctx.strokeStyle = "rgba(15,5,0,0.92)";
-          ctx.lineWidth = 1.3;
+          ctx.save();
+          ctx.shadowBlur = 14;
+          ctx.shadowColor = hexToRgba(b.color.glow, 0.95);
+
+          ctx.strokeStyle = "rgba(255,255,255,0.85)";
+          ctx.lineWidth = 1.1;
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
           ctx.beginPath();
-          ctx.moveTo(-halfBW * 0.65, -halfBH * 0.50);
-          ctx.lineTo(-halfBW * 0.25, -halfBH * 0.18);
-          ctx.lineTo(-halfBW * 0.05, halfBH * 0.05);
-          ctx.lineTo(-halfBW * 0.30, halfBH * 0.40);
-          ctx.lineTo(halfBW * 0.05, halfBH * 0.65);
-          ctx.moveTo(-halfBW * 0.05, halfBH * 0.05);
-          ctx.lineTo(halfBW * 0.30, -halfBH * 0.10);
-          ctx.lineTo(halfBW * 0.62, halfBH * 0.30);
+          ctx.moveTo(-halfBW * 0.55, -halfBH * 0.40);
+          ctx.lineTo(-halfBW * 0.20, -halfBH * 0.10);
+          ctx.lineTo( halfBW * 0.05,  halfBH * 0.10);
+          ctx.lineTo(-halfBW * 0.20,  halfBH * 0.45);
+          ctx.lineTo( halfBW * 0.10,  halfBH * 0.65);
+          ctx.moveTo( halfBW * 0.05,  halfBH * 0.10);
+          ctx.lineTo( halfBW * 0.35, -halfBH * 0.05);
+          ctx.lineTo( halfBW * 0.60,  halfBH * 0.35);
           ctx.stroke();
 
-          // Hot ember glow seeping through the cracks
-          ctx.save();
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = "rgba(255,100,20,0.95)";
-          ctx.fillStyle = "rgba(255,160,60,0.9)";
+          // Bright spark at each crack junction
+          ctx.fillStyle = "rgba(255,255,255,0.95)";
           ctx.beginPath();
-          ctx.arc(-halfBW * 0.05, halfBH * 0.05, 1.5, 0, Math.PI * 2);
-          ctx.arc(halfBW * 0.30, -halfBH * 0.10, 1.2, 0, Math.PI * 2);
-          ctx.arc(-halfBW * 0.25, -halfBH * 0.18, 1.0, 0, Math.PI * 2);
+          ctx.arc( halfBW * 0.05, halfBH * 0.10, 1.6, 0, Math.PI * 2);
+          ctx.arc(-halfBW * 0.20, -halfBH * 0.10, 1.2, 0, Math.PI * 2);
+          ctx.arc( halfBW * 0.35, -halfBH * 0.05, 1.0, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
         }
         ctx.restore();
 
-        // ── Crisp dark outline for definition against the background ─────
-        ctx.strokeStyle = "rgba(0,0,0,0.55)";
-        ctx.lineWidth = 0.8;
+        // ── Crisp colored facet outline ─────────────────────────────────
+        ctx.strokeStyle = mixColor(b.color.fill, "#ffffff", 0.55);
+        ctx.lineWidth = 1.1;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = hexToRgba(b.color.glow, 0.9);
         tracePath();
         ctx.stroke();
+        ctx.shadowBlur = 0;
 
         ctx.restore();
       }
