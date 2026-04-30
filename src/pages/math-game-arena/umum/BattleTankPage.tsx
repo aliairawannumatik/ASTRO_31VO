@@ -37,6 +37,7 @@ const ENEMY_PALETTES = [
 interface EnemyTank {
   id: number; x: number; y: number;
   vx: number; baseVx: number;
+  vy: number; baseVy: number;
   palette: typeof ENEMY_PALETTES[0];
   alive: boolean;
   turretAngle: number;
@@ -195,7 +196,7 @@ const BattleTankPage = ({
     const { CW, CH } = dims;
     const p = playerRef.current;
     p.x = Math.max(30, Math.min(CW - 30, p.x));
-    p.targetX = Math.max(30, Math.min(CW - 30, p.targetX));
+    p.y = Math.max(140, Math.min(CH - 30, p.y));
     const m = mouseRef.current;
     m.x = Math.max(20, Math.min(CW - 20, m.x));
     m.y = Math.max(20, Math.min(CH - 20, m.y));
@@ -215,7 +216,7 @@ const BattleTankPage = ({
   const floatTextsRef = useRef<FloatText[]>([]);
   const groundMarksRef = useRef<GroundMark[]>([]);
 
-  const playerRef = useRef({ x: dims.CW / 2, targetX: dims.CW / 2, turretAngle: -Math.PI / 2, invT: 0 });
+  const playerRef = useRef({ x: dims.CW / 2, y: dims.PLAYER_Y, turretAngle: -Math.PI / 2, invT: 0 });
   const mouseRef = useRef({ x: dims.CW / 2, y: dims.CH / 2 });
   const controlsRef = useRef({ left: false, right: false, up: false, down: false });
   const joyRef = useRef({ x: 0, y: 0 });
@@ -255,14 +256,18 @@ const BattleTankPage = ({
     for (let r = 0; r < rows; r++) {
       const rowDir = r % 2 === 0 ? 1 : -1;
       const baseSpd = 40 + wave * 8;
+      const baseVSpd = 25 + wave * 5;
       for (let c = 0; c < cols; c++) {
         const spd = baseSpd + Math.random() * 20;
+        const vspd = baseVSpd + Math.random() * 18;
+        const colDir = c % 2 === 0 ? 1 : -1;
         const pal = ENEMY_PALETTES[~~(Math.random() * ENEMY_PALETTES.length)];
         enemies.push({
           id: _id++,
           x: 40 + gapX * (c + 1),
-          y: 150 + r * 105,
+          y: 150 + r * 95,
           vx: rowDir * spd, baseVx: spd,
+          vy: colDir * vspd, baseVy: vspd,
           palette: pal, alive: true,
           turretAngle: Math.PI / 2,
           flashT: 0, invT: 0,
@@ -304,14 +309,14 @@ const BattleTankPage = ({
 
   // ── Start / Reset ─────────────────────────────────────────────────────────
   const startGame = useCallback(() => {
-    const { CW } = dimsRef.current;
+    const { CW, PLAYER_Y } = dimsRef.current;
     scoreRef.current = 0; livesRef.current = 3; levelRef.current = 1;
     timerRef.current = 120; timerAccRef.current = 0;
     comboRef.current = 0; comboAccRef.current = 0;
     shakeRef.current = 0; waveRef.current = 1;
     bulletsRef.current = []; explosionsRef.current = [];
     floatTextsRef.current = []; groundMarksRef.current = [];
-    playerRef.current = { x: CW / 2, targetX: CW / 2, turretAngle: -Math.PI / 2, invT: 0 };
+    playerRef.current = { x: CW / 2, y: PLAYER_Y, turretAngle: -Math.PI / 2, invT: 0 };
     spawnWave();
     setPhase("playing");
   }, [spawnWave, setPhase]);
@@ -320,10 +325,9 @@ const BattleTankPage = ({
   const fireNow = useCallback(() => {
     if (phaseRef.current === "idle" || phaseRef.current === "dead") { startGame(); return; }
     if (phaseRef.current !== "playing") return;
-    const { PLAYER_Y } = dimsRef.current;
-    const px = playerRef.current.x;
+    const { x: px, y: py } = playerRef.current;
     const ang = playerRef.current.turretAngle;
-    fireBullet(true, px + Math.cos(ang) * 28, PLAYER_Y + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
+    fireBullet(true, px + Math.cos(ang) * 28, py + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
     playPopSound();
   }, [startGame, fireBullet]);
 
@@ -371,13 +375,13 @@ const BattleTankPage = ({
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
     if (phaseRef.current !== "playing") return;
-    const { CW, CH, PLAYER_Y } = dimsRef.current;
+    const { CW, CH } = dimsRef.current;
     const rect = canvas.getBoundingClientRect();
     const cx = (e.clientX - rect.left) * (CW / rect.width);
     const cy = (e.clientY - rect.top) * (CH / rect.height);
-    const px = playerRef.current.x;
+    const { x: px, y: py } = playerRef.current;
     const ang = playerRef.current.turretAngle;
-    fireBullet(true, px + Math.cos(ang) * 28, PLAYER_Y + Math.sin(ang) * 28, cx, cy, "#00f0ff", "#00f0ff");
+    fireBullet(true, px + Math.cos(ang) * 28, py + Math.sin(ang) * 28, cx, cy, "#00f0ff", "#00f0ff");
     playPopSound();
   }, [startGame, fireBullet]);
 
@@ -397,9 +401,9 @@ const BattleTankPage = ({
     if (phaseRef.current === "idle") { startGame(); return; }
     if (phaseRef.current === "dead") { startGame(); return; }
     if (phaseRef.current !== "playing") return;
-    const { PLAYER_Y } = dimsRef.current;
-    const px = playerRef.current.x, ang = playerRef.current.turretAngle;
-    fireBullet(true, px + Math.cos(ang) * 28, PLAYER_Y + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
+    const { x: px, y: py } = playerRef.current;
+    const ang = playerRef.current.turretAngle;
+    fireBullet(true, px + Math.cos(ang) * 28, py + Math.sin(ang) * 28, mouseRef.current.x, mouseRef.current.y, "#00f0ff", "#00f0ff");
     playPopSound();
   }, [startGame, fireBullet]);
 
@@ -627,7 +631,7 @@ const BattleTankPage = ({
     const ctx = canvas.getContext("2d")!;
 
     const loop = (ts: number) => {
-      const { CW, CH, PLAYER_Y } = dimsRef.current;
+      const { CW, CH } = dimsRef.current;
       const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
       lastRef.current = ts;
       if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
@@ -636,7 +640,7 @@ const BattleTankPage = ({
       const hue = hueRef.current;
       const phase = phaseRef.current;
 
-      // ── Apply analog joystick + keyboard controls to aim target ──────────
+      // ── Apply analog joystick + keyboard controls to MOVE player ─────────
       const ctrl = controlsRef.current;
       const kx = (ctrl.right ? 1 : 0) - (ctrl.left ? 1 : 0);
       const ky = (ctrl.down ? 1 : 0) - (ctrl.up ? 1 : 0);
@@ -645,18 +649,17 @@ const BattleTankPage = ({
       // Pick whichever input has stronger magnitude per axis (so keyboard still works)
       const ax = Math.abs(jx) >= Math.abs(kx) ? jx : kx;
       const ay = Math.abs(jy) >= Math.abs(ky) ? jy : ky;
-      if (ax !== 0 || ay !== 0) {
-        const moveSpd = 360;
-        mouseRef.current.x += ax * moveSpd * dt;
-        mouseRef.current.y += ay * moveSpd * dt;
-        mouseRef.current.x = Math.max(20, Math.min(CW - 20, mouseRef.current.x));
-        mouseRef.current.y = Math.max(20, Math.min(CH - 20, mouseRef.current.y));
-      }
 
       // ── Player update ────────────────────────────────────────────────────
       const player = playerRef.current;
-      player.x += (Math.max(30, Math.min(CW - 30, mouseRef.current.x)) - player.x) * Math.min(1, dt * 10);
-      player.turretAngle = Math.atan2(mouseRef.current.y - PLAYER_Y, mouseRef.current.x - player.x);
+      if (ax !== 0 || ay !== 0) {
+        const moveSpd = 220;
+        player.x += ax * moveSpd * dt;
+        player.y += ay * moveSpd * dt;
+        player.x = Math.max(30, Math.min(CW - 30, player.x));
+        player.y = Math.max(140, Math.min(CH - 30, player.y));
+      }
+      player.turretAngle = Math.atan2(mouseRef.current.y - player.y, mouseRef.current.x - player.x);
       if (player.invT > 0) player.invT = Math.max(0, player.invT - dt);
       if (shakeRef.current > 0) shakeRef.current = Math.max(0, shakeRef.current - dt * 2.5);
 
@@ -684,19 +687,20 @@ const BattleTankPage = ({
           if (e.scatterT > 0) {
             e.x += e.scatterVx * dt; e.y += e.scatterVy * dt;
             e.scatterT = Math.max(0, e.scatterT - dt);
-            e.x = Math.max(30, Math.min(CW - 30, e.x));
-            e.y = Math.max(130, Math.min(PLAYER_Y - 120, e.y));
           } else {
             e.x += e.vx * dt;
+            e.y += e.vy * dt;
           }
           if (e.x < 32) { e.x = 32; e.vx = Math.abs(e.vx); }
           if (e.x > CW - 32) { e.x = CW - 32; e.vx = -Math.abs(e.vx); }
-          e.turretAngle = Math.atan2(PLAYER_Y - e.y, player.x - e.x);
+          if (e.y < 130) { e.y = 130; e.vy = Math.abs(e.vy); }
+          if (e.y > CH - 80) { e.y = CH - 80; e.vy = -Math.abs(e.vy); }
+          e.turretAngle = Math.atan2(player.y - e.y, player.x - e.x);
           e.fireAcc += dt;
           if (e.fireAcc >= e.fireInterval) {
             e.fireAcc = 0; e.fireInterval = 3 + Math.random() * 4;
             const ang = e.turretAngle;
-            fireBullet(false, e.x + Math.cos(ang) * 26, e.y + Math.sin(ang) * 26, player.x, PLAYER_Y, e.palette.glow, e.palette.glow);
+            fireBullet(false, e.x + Math.cos(ang) * 26, e.y + Math.sin(ang) * 26, player.x, player.y, e.palette.glow, e.palette.glow);
           }
         }
 
@@ -741,13 +745,13 @@ const BattleTankPage = ({
             }
           } else {
             if (player.invT <= 0) {
-              const dx = b.x - player.x, dy = b.y - PLAYER_Y;
+              const dx = b.x - player.x, dy = b.y - player.y;
               if (Math.sqrt(dx * dx + dy * dy) < 22) {
                 bulletsRef.current = bulletsRef.current.filter(bb => bb !== b);
                 livesRef.current--; player.invT = 2;
                 shakeRef.current = 0.5; comboRef.current = 0; comboAccRef.current = 0;
-                addExplosion(player.x, PLAYER_Y, "#00f0ff", false);
-                floatTextsRef.current.push({ x: player.x, y: PLAYER_Y - 30, txt: "💥 Kena!", alpha: 1, vy: -70, good: false });
+                addExplosion(player.x, player.y, "#00f0ff", false);
+                floatTextsRef.current.push({ x: player.x, y: player.y - 30, txt: "💥 Kena!", alpha: 1, vy: -70, good: false });
                 if (livesRef.current <= 0) { setPhase("dead"); }
               }
             }
@@ -835,7 +839,7 @@ const BattleTankPage = ({
       }
 
       // Player tank
-      drawTank(ctx, player.x, PLAYER_Y, 0, player.turretAngle, 46, 32, "#00e6d2", "#005544", "#00bbaa", "#00f0ff", true, 0, player.invT, ts);
+      drawTank(ctx, player.x, player.y, 0, player.turretAngle, 46, 32, "#00e6d2", "#005544", "#00bbaa", "#00f0ff", true, 0, player.invT, ts);
 
       // Bullets & trails
       for (const b of bulletsRef.current) {
@@ -916,9 +920,9 @@ const BattleTankPage = ({
           { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 72"><rect x="4" y="48" width="102" height="18" rx="9" fill="#2a1a08"/><rect x="4" y="50" width="102" height="14" rx="7" fill="#3a2210"/><circle cx="18" cy="57" r="7" fill="#5a3a18"/><circle cx="18" cy="57" r="3.5" fill="#1a0e04"/><circle cx="36" cy="57" r="7" fill="#5a3a18"/><circle cx="36" cy="57" r="3.5" fill="#1a0e04"/><circle cx="55" cy="57" r="7" fill="#5a3a18"/><circle cx="55" cy="57" r="3.5" fill="#1a0e04"/><circle cx="74" cy="57" r="7" fill="#5a3a18"/><circle cx="74" cy="57" r="3.5" fill="#1a0e04"/><circle cx="92" cy="57" r="7" fill="#5a3a18"/><circle cx="92" cy="57" r="3.5" fill="#1a0e04"/><rect x="8" y="32" width="82" height="22" rx="5" fill="#b88830"/><rect x="8" y="32" width="82" height="10" rx="5" fill="#d4a040"/><rect x="12" y="36" width="70" height="5" rx="2" fill="#eec055" opacity="0.4"/><ellipse cx="48" cy="30" rx="26" ry="16" fill="#a07020"/><ellipse cx="48" cy="28" rx="24" ry="12" fill="#ba8a2a"/><rect x="65" y="24" width="40" height="9" rx="4" fill="#7a5010"/><rect x="100" y="22" width="10" height="13" rx="2" fill="#4a3008"/><circle cx="40" cy="22" r="8" fill="#7a5010"/><circle cx="40" cy="22" r="5" fill="#4a3008"/><circle cx="40" cy="22" r="2" fill="#2a1804"/><rect x="10" y="34" width="12" height="18" rx="2" fill="#a07020" opacity="0.5"/><rect x="78" y="34" width="10" height="18" rx="2" fill="#a07020" opacity="0.5"/></svg>')}`, className: "absolute bottom-[14%] left-[5%] w-22 h-14 md:w-30 md:h-20 opacity-80 animate-float-fast", glowRgba: "rgba(200,150,40,0.5)" },
         ]}
         instructions={[
-          { text: <>Gunakan <strong className="text-yellow-300">stik analog</strong> untuk membidik ke segala arah (atau gerakkan mouse / sentuh layar / tombol panah)</> },
-          { text: <>Tekan tombol <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap layar / spasi) untuk menembakkan peluru</> },
-          { text: <>Hancurkan semua tank musuh dan hindari peluru mereka — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
+          { text: <>Gunakan <strong className="text-yellow-300">stik analog</strong> atau <strong className="text-yellow-300">tombol panah</strong> untuk menggerakkan tank ke <strong className="text-cyan-300">atas, bawah, kiri, kanan</strong></> },
+          { text: <>Arahkan <strong className="text-yellow-300">mouse / sentuh layar</strong> untuk membidik, lalu tekan <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap / spasi) untuk menembak</> },
+          { text: <>Hancurkan semua tank musuh yang juga bergerak ke segala arah — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
           { text: <>Setiap <strong className="text-yellow-300">25 detik</strong> akan muncul <strong className="text-pink-300">soal dari guru</strong> — game di-pause, jawab benar = <strong className="text-green-400">+20 poin</strong></> },
         ]}
       />
