@@ -34,6 +34,8 @@ const toMathJsExpression = (expr: string, angleMode: AngleMode): string => {
   mathExpr = mathExpr.replace(/π/g, "(pi)");
   mathExpr = mathExpr.replace(/√\(/g, "sqrt(");
   mathExpr = mathExpr.replace(/∛\(/g, "cbrt(");
+  // Absolute value: |expr| → abs(expr). Handles multiple pairs left-to-right.
+  mathExpr = mathExpr.replace(/\|([^|]+)\|/g, "abs($1)");
   // FPB (Faktor Persekutuan terBesar) → gcd (already replaced if user typed FPB(
   mathExpr = mathExpr.replace(/FPB\(/g, "gcd(");
   mathExpr = mathExpr.replace(/KPK\(/g, "lcm(");
@@ -291,7 +293,7 @@ const KalkulatorScientificPage = () => {
   const TOKEN_FUNCS = [
     "asin(", "acos(", "atan(",
     "log₁₀(", "ln(", "sin(", "cos(", "tan(",
-    "abs(", "Exp(", "exp(",
+    "Exp(", "exp(",
     "FPB(", "KPK(", "nCr(", "nPr(",
     " mod ",
     "×10^(", "10^(", "e^(", "^(-", "^(1/", "1/(", "√(", "∛(",
@@ -837,8 +839,9 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "eˣ" : "ln"}
             </CalcButton>
+            {/* |x| : inserts "|" — user wraps value between two "|" to get absolute */}
             <CalcButton
-              onClick={() => handleFunction("abs")}
+              onClick={() => handleInput("|")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
               subLabel={shiftMode ? "" : "Pol"}
               subLabelColor="text-purple-400"
