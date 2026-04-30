@@ -1663,8 +1663,8 @@ const OlimpiadeGarisSudutPage = () => {
                         <div key={i} className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed mb-2">
                           {item.value.split('\n').map((line, li) => {
                             const trimmed = line.trim();
-                            if (/^\d+\. [A-Z]/.test(trimmed)) {
-                              return <div key={li} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{trimmed}</div>;
+                            if (/^\d+\. [A-Z]/.test(trimmed) && !trimmed.includes('$') && !trimmed.endsWith(';') && !trimmed.endsWith(',')) {
+                              return <div key={li} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">{renderWithLatex(trimmed)}</div>;
                             }
                             if (/^Rumus/.test(trimmed)) {
                               return <div key={li} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">{renderWithLatex(trimmed)}</div>;
