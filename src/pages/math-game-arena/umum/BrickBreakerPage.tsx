@@ -1234,6 +1234,37 @@ const BrickBreakerPage = () => {
         onBack={() => { playPopSound(); navigate(-1); }}
         onHome={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
         bestLabel={bestRef.current > 0 ? `Rekor Tertinggi: ${bestRef.current}` : undefined}
+        extraOverlay={
+          <>
+            {/* Burning meteors streaking diagonally */}
+            <div
+              className="absolute top-[6%] left-0 text-5xl animate-meteor-fly"
+              style={{ filter: "drop-shadow(0 0 18px rgba(251,113,36,0.95)) drop-shadow(0 0 32px rgba(239,68,68,0.7))" }}
+            >☄️</div>
+            <div
+              className="absolute top-[26%] left-0 text-4xl animate-meteor-fly"
+              style={{ filter: "drop-shadow(0 0 16px rgba(250,204,21,0.9)) drop-shadow(0 0 28px rgba(251,113,36,0.7))", animationDelay: "1.6s", animationDuration: "7s" }}
+            >☄️</div>
+            <div
+              className="absolute top-[52%] left-0 text-5xl animate-meteor-fly"
+              style={{ filter: "drop-shadow(0 0 18px rgba(239,68,68,0.95)) drop-shadow(0 0 30px rgba(251,113,36,0.7))", animationDelay: "3.4s", animationDuration: "6.5s" }}
+            >☄️</div>
+            <div
+              className="absolute top-[74%] left-0 text-3xl animate-meteor-fly"
+              style={{ filter: "drop-shadow(0 0 14px rgba(252,211,77,0.9))", animationDelay: "5.1s", animationDuration: "8s" }}
+            >☄️</div>
+
+            {/* UFOs drifting back & forth */}
+            <div
+              className="absolute top-[18%] left-0 text-5xl animate-ufo-fly"
+              style={{ filter: "drop-shadow(0 0 18px rgba(34,211,238,0.85)) drop-shadow(0 0 28px rgba(168,85,247,0.55))" }}
+            >🛸</div>
+            <div
+              className="absolute top-[68%] left-0 text-4xl animate-ufo-fly"
+              style={{ filter: "drop-shadow(0 0 16px rgba(168,85,247,0.85)) drop-shadow(0 0 26px rgba(34,211,238,0.5))", animationDelay: "9s", animationDuration: "22s" }}
+            >🛸</div>
+          </>
+        }
         instructions={[
           { text: <>Kemudikan <strong className="text-orange-300">pesawat 🛸</strong> dengan mouse atau sentuhan layar</> },
           { text: <>Pantulkan <strong className="text-amber-300">meteor ☄️</strong> untuk hancurkan kristal asteroid</> },

@@ -28,6 +28,7 @@ interface MathGameIntroProps {
   theme: IntroTheme;
   decorations?: DecorImage[];
   bestLabel?: string;
+  extraOverlay?: ReactNode;
 }
 
 const themePresets: Record<IntroTheme, {
@@ -165,6 +166,7 @@ const MathGameIntro = ({
   theme,
   decorations = [],
   bestLabel,
+  extraOverlay,
 }: MathGameIntroProps) => {
   const t = themePresets[theme];
 
@@ -197,6 +199,8 @@ const MathGameIntro = ({
         <div className="absolute bottom-[30%] right-[5%] text-yellow-300 text-lg animate-twinkle" style={{ animationDelay: "0.3s" }}>✧</div>
         <div className="absolute bottom-[15%] left-[10%] text-purple-300 text-xl animate-twinkle" style={{ animationDelay: "0.9s" }}>✦</div>
         <div className="absolute top-[55%] right-[12%] text-cyan-200 text-sm animate-twinkle" style={{ animationDelay: "1.5s" }}>✧</div>
+
+        {extraOverlay}
       </div>
 
       <div className="relative z-10 h-full w-full flex flex-col items-center justify-center px-4 py-6 overflow-y-auto">
