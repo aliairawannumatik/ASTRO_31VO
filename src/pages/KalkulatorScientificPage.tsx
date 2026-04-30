@@ -39,6 +39,8 @@ const toMathJsExpression = (expr: string, angleMode: AngleMode): string => {
   mathExpr = mathExpr.replace(/KPK\(/g, "lcm(");
   // Percent: 50% → (50/100). Handles trailing % or % followed by an operator/paren.
   mathExpr = mathExpr.replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
+  // Indonesian-style argument separator: ";" → "," for mathjs (e.g. KPK(12;18))
+  mathExpr = mathExpr.replace(/;/g, ",");
   // Convert superscript numbers to ^ notation
   // Negative-superscript variants must be handled BEFORE the plain ones,
   // otherwise "²" inside "⁻²" would already be replaced and leave a stray "⁻".
@@ -833,14 +835,12 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "eˣ" : "ln"}
             </CalcButton>
-            {/* ×10ⁿ : scientific notation | shift: FPB/gcd */}
+            {/* ; : separator for KPK / FPB / nPr arguments */}
             <CalcButton
-              onClick={() => shiftMode ? handleFunction("gcd", "FPB") : handleInput("×10^(")}
-              className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "FPB"}
-              subLabelColor="text-purple-400"
+              onClick={() => handleInput(";")}
+              className="h-10 text-base bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
             >
-              {shiftMode ? "FPB(" : "×10ⁿ"}
+              ;
             </CalcButton>
           </div>
 
@@ -929,14 +929,11 @@ const KalkulatorScientificPage = () => {
             >
               (
             </CalcButton>
-            {/* ) | shift: , (separator for KPK / FPB / nPr / etc.) */}
             <CalcButton
-              onClick={() => shiftMode ? handleInput(",") : handleInput(")")}
+              onClick={() => handleInput(")")}
               className="h-10 text-sm bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : ","}
-              subLabelColor="text-purple-400"
             >
-              {shiftMode ? "," : ")"}
+              )
             </CalcButton>
             <CalcButton
               onClick={() => shiftMode ? handleInput("nPr") : handleInput("!")}
