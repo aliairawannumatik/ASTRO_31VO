@@ -886,11 +886,14 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "e" : "π"}
             </CalcButton>
+            {/* KPK (lcm) | shift: FPB (gcd) */}
             <CalcButton
-              onClick={() => handleFunction("exp")}
+              onClick={() => shiftMode ? handleFunction("gcd", "FPB") : handleFunction("lcm", "KPK")}
               className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "FPB"}
+              subLabelColor="text-purple-400"
             >
-              Exp
+              {shiftMode ? "FPB(" : "KPK"}
             </CalcButton>
           </div>
 
