@@ -6,6 +6,7 @@ import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
+import MathGameIntro from "@/components/MathGameIntro";
 
 const CW = 420;
 const CH = 600;
@@ -1220,6 +1221,30 @@ const BrickBreakerPage = () => {
     rafRef.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(rafRef.current);
   }, [buildBricks, resetBall, spawnBgStars, rerender]);
+
+  if (phaseRef.current === "idle") {
+    return (
+      <MathGameIntro
+        gameTitle="METEOR PANTUL NUMATIK"
+        subtitle="☄️ HUJAN METEOR GALAKSI ☄️"
+        heroEmoji="🛸"
+        startLabel="LUNCURKAN METEOR"
+        theme="meteor"
+        onStart={startGame}
+        onBack={() => { playPopSound(); navigate(-1); }}
+        onHome={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+        bestLabel={bestRef.current > 0 ? `Rekor Tertinggi: ${bestRef.current}` : undefined}
+        instructions={[
+          { text: <>Kemudikan <strong className="text-orange-300">pesawat 🛸</strong> dengan mouse atau sentuhan layar</> },
+          { text: <>Pantulkan <strong className="text-amber-300">meteor ☄️</strong> untuk hancurkan kristal asteroid</> },
+          { text: <>Tiap asteroid pecah setelah <strong className="text-yellow-300">2× kena</strong> meteor</> },
+          { text: <>Tiap <strong className="text-orange-300">25 detik</strong> muncul Soal NUMATIK 🤖 untuk skor besar</> },
+          { text: <>Tiap <strong className="text-red-300">60 detik</strong>: NORMAL → HARD → VERY HARD ⚡</> },
+          { text: <>Bangun <strong className="text-amber-300">combo 🔥</strong> untuk poin berlipat!</> },
+        ]}
+      />
+    );
+  }
 
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>

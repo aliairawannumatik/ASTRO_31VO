@@ -3,7 +3,7 @@ import { ArrowLeft, Home } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import { spaceBg } from "@/assets/placeholder";
 
-export type IntroTheme = "ocean" | "space" | "galaxy" | "battle";
+export type IntroTheme = "ocean" | "space" | "galaxy" | "battle" | "meteor";
 
 interface DecorImage {
   src: string;
@@ -129,6 +129,26 @@ const themePresets: Record<IntroTheme, {
     startHoverShadow: "hover:shadow-[0_0_60px_rgba(34,197,94,0.8)]",
     cardTitleColor: "text-emerald-300",
     useSpaceBg: false,
+  },
+  meteor: {
+    baseGradient: "from-slate-950 via-red-950 to-orange-950",
+    radial1: "bg-[radial-gradient(ellipse_at_top,rgba(239,68,68,0.34),transparent_60%)]",
+    radial2: "bg-[radial-gradient(ellipse_at_bottom,rgba(251,146,60,0.28),transparent_55%)]",
+    radial3: "bg-[radial-gradient(circle_at_70%_30%,rgba(250,204,21,0.18),transparent_50%)]",
+    titleGradient: "from-amber-300 via-orange-400 to-red-500",
+    titleGlow: "drop-shadow-[0_0_32px_rgba(251,113,36,0.75)]",
+    pillBg: "from-red-500/20 to-orange-500/20",
+    pillBorder: "border-orange-400/40",
+    pillText: "text-orange-200",
+    cardBorder: "border-orange-500/30",
+    cardShadow: "shadow-[0_0_30px_rgba(251,113,36,0.25)]",
+    numberBg: "bg-orange-500/30",
+    numberText: "text-orange-200",
+    startBgGradient: "from-red-500 via-orange-500 to-amber-400",
+    startShadow: "shadow-[0_0_40px_rgba(251,113,36,0.6)]",
+    startHoverShadow: "hover:shadow-[0_0_60px_rgba(251,113,36,0.85)]",
+    cardTitleColor: "text-orange-300",
+    useSpaceBg: true,
   },
 };
 
