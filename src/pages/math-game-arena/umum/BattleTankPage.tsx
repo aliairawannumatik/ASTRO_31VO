@@ -65,6 +65,19 @@ interface Explosion {
 interface FloatText { x:number; y:number; txt:string; alpha:number; vy:number; good:boolean }
 interface GroundMark { x:number; y:number; alpha:number; r:number; color:string }
 
+// Boss tank ("raja") — much bigger, takes many hits, fires triple-shot bursts.
+interface Boss {
+  x: number; y: number;
+  vx: number; vy: number;
+  hp: number; maxHp: number;
+  alive: boolean;
+  turretAngle: number;
+  flashT: number;
+  fireAcc: number; fireInterval: number;
+  wobbleT: number;
+  spawnT: number;
+}
+
 type Phase = "idle" | "playing" | "dead";
 let _id = 0;
 
@@ -211,6 +224,10 @@ const BattleTankPage = ({
   const setPhase = useCallback((p: Phase) => { phaseRef.current = p; setPhaseState(p); }, []);
   const guruQuiz = useGuruQuiz(phaseRef, "playing", 25_000, quizQuestions);
   const enemiesRef = useRef<EnemyTank[]>([]);
+  const bossRef = useRef<Boss | null>(null);
+  const bossTimerAccRef = useRef(0);
+  const bossesDefeatedRef = useRef(0);
+  const BOSS_INTERVAL = 60; // seconds between boss spawns
   const bulletsRef = useRef<Bullet[]>([]);
   const explosionsRef = useRef<Explosion[]>([]);
   const floatTextsRef = useRef<FloatText[]>([]);
@@ -282,6 +299,28 @@ const BattleTankPage = ({
     void total;
   }, []);
 
+  // ── Spawn boss ("raja") ────────────────────────────────────────────────────
+  const spawnBoss = useCallback(() => {
+    const { CW } = dimsRef.current;
+    const stage = bossesDefeatedRef.current;
+    const maxHp = 8 + stage * 3;
+    bossRef.current = {
+      x: CW / 2, y: 170,
+      vx: 60 + stage * 8, vy: 35 + stage * 4,
+      hp: maxHp, maxHp,
+      alive: true,
+      turretAngle: Math.PI / 2,
+      flashT: 0,
+      fireAcc: 0, fireInterval: 1.6,
+      wobbleT: 0,
+      spawnT: 1.5,
+    };
+    floatTextsRef.current.push({
+      x: CW / 2, y: 90, txt: "👑 BOS RAKSASA DATANG!", alpha: 1, vy: -25, good: false,
+    });
+    shakeRef.current = 0.5;
+  }, []);
+
   // ── Explosions / Bullets ──────────────────────────────────────────────────
   const addExplosion = (x: number, y: number, color: string, big: boolean) => {
     const count = big ? 28 : 14;
@@ -316,20 +355,28 @@ const BattleTankPage = ({
     shakeRef.current = 0; waveRef.current = 1;
     bulletsRef.current = []; explosionsRef.current = [];
     floatTextsRef.current = []; groundMarksRef.current = [];
+    bossRef.current = null;
+    bossTimerAccRef.current = 0;
+    bossesDefeatedRef.current = 0;
     playerRef.current = { x: CW / 2, y: PLAYER_Y, turretAngle: -Math.PI / 2, invT: 0 };
     spawnWave();
     setPhase("playing");
   }, [spawnWave, setPhase]);
 
-  // ── Helper: nearest living enemy to player ────────────────────────────────
-  const findNearestEnemy = useCallback(() => {
+  // ── Helper: nearest living target (enemy or boss) to player ───────────────
+  const findNearestEnemy = useCallback((): { x: number; y: number } | null => {
     const { x: px, y: py } = playerRef.current;
-    let best: EnemyTank | null = null;
+    let best: { x: number; y: number } | null = null;
     let bestD = Infinity;
     for (const e of enemiesRef.current) {
       if (!e.alive) continue;
       const d = (e.x - px) * (e.x - px) + (e.y - py) * (e.y - py);
       if (d < bestD) { bestD = d; best = e; }
+    }
+    const boss = bossRef.current;
+    if (boss && boss.alive) {
+      const d = (boss.x - px) * (boss.x - px) + (boss.y - py) * (boss.y - py);
+      if (d < bestD) { bestD = d; best = boss; }
     }
     return best;
   }, []);
@@ -729,6 +776,42 @@ const BattleTankPage = ({
           spawnWave(); rerender();
         }
 
+        // ── Boss spawn timer (every BOSS_INTERVAL seconds) ────────────────
+        if (!bossRef.current) {
+          bossTimerAccRef.current += dt;
+          if (bossTimerAccRef.current >= BOSS_INTERVAL) {
+            bossTimerAccRef.current = 0;
+            spawnBoss();
+          }
+        }
+
+        // ── Boss update ───────────────────────────────────────────────────
+        const boss = bossRef.current;
+        if (boss && boss.alive) {
+          if (boss.flashT > 0) boss.flashT = Math.max(0, boss.flashT - dt * 3);
+          if (boss.spawnT > 0) boss.spawnT = Math.max(0, boss.spawnT - dt);
+          boss.wobbleT += dt * 1.5;
+          boss.x += boss.vx * dt;
+          boss.y += boss.vy * dt;
+          if (boss.x < 60) { boss.x = 60; boss.vx = Math.abs(boss.vx); }
+          if (boss.x > CW - 60) { boss.x = CW - 60; boss.vx = -Math.abs(boss.vx); }
+          if (boss.y < 130) { boss.y = 130; boss.vy = Math.abs(boss.vy); }
+          if (boss.y > CH * 0.5) { boss.y = CH * 0.5; boss.vy = -Math.abs(boss.vy); }
+          boss.turretAngle = Math.atan2(player.y - boss.y, player.x - boss.x);
+          boss.fireAcc += dt;
+          if (boss.fireAcc >= boss.fireInterval) {
+            boss.fireAcc = 0; boss.fireInterval = 1.4 + Math.random() * 0.7;
+            const ang = boss.turretAngle;
+            for (const off of [-0.22, 0, 0.22]) {
+              const a = ang + off;
+              fireBullet(false,
+                boss.x + Math.cos(a) * 50, boss.y + Math.sin(a) * 50,
+                boss.x + Math.cos(a) * 1000, boss.y + Math.sin(a) * 1000,
+                "#ffd700", "#ffd700");
+            }
+          }
+        }
+
         // ── Bullet update ─────────────────────────────────────────────────
         for (const b of bulletsRef.current) {
           b.trail.push({ x: b.x, y: b.y, alpha: 0.6 });
@@ -737,6 +820,39 @@ const BattleTankPage = ({
           b.x += b.vx * dt; b.y += b.vy * dt;
 
           if (b.fromPlayer) {
+            // Boss takes priority — if hit, consume the bullet and skip enemy check.
+            const bossHit = bossRef.current;
+            if (bossHit && bossHit.alive) {
+              const bdx = b.x - bossHit.x, bdy = b.y - bossHit.y;
+              if (Math.sqrt(bdx * bdx + bdy * bdy) < 50) {
+                bulletsRef.current = bulletsRef.current.filter(bb => bb !== b);
+                bossHit.hp = Math.max(0, bossHit.hp - 1);
+                bossHit.flashT = 0.25;
+                addExplosion(b.x, b.y, "#ffd700", false);
+                if (bossHit.hp <= 0) {
+                  bossHit.alive = false;
+                  addExplosion(bossHit.x, bossHit.y, "#ffd700", true);
+                  addExplosion(bossHit.x - 20, bossHit.y + 10, "#ff8800", true);
+                  addExplosion(bossHit.x + 20, bossHit.y - 10, "#ff44ff", true);
+                  shakeRef.current = 1.0;
+                  const bonus = 500 + bossesDefeatedRef.current * 200;
+                  scoreRef.current += bonus;
+                  if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
+                  floatTextsRef.current.push({
+                    x: bossHit.x, y: bossHit.y - 60,
+                    txt: `👑 BOS KALAH! +${bonus}`, alpha: 1, vy: -70, good: true,
+                  });
+                  bossesDefeatedRef.current++;
+                  bossRef.current = null;
+                } else {
+                  floatTextsRef.current.push({
+                    x: b.x, y: b.y - 18, txt: "-1 HP", alpha: 1, vy: -60, good: true,
+                  });
+                }
+                playPopSound();
+                continue;
+              }
+            }
             for (const e of enemiesRef.current) {
               if (!e.alive || e.invT > 0) continue;
               const dx = b.x - e.x, dy = b.y - e.y;
@@ -856,6 +972,49 @@ const BattleTankPage = ({
         drawTank(ctx, e.x, e.y, 0, e.turretAngle, 42, 30, e.palette.body, e.palette.track, e.palette.turret, e.palette.glow, false, e.flashT, e.invT, ts);
       }
 
+      // Boss tank ("raja") with HP bar + crown
+      const bossDraw = bossRef.current;
+      if (bossDraw && bossDraw.alive) {
+        // Pulsing aura ring
+        const auraR = 60 + Math.sin(bossDraw.wobbleT * 2) * 4;
+        const auraGrad = ctx.createRadialGradient(bossDraw.x, bossDraw.y, auraR * 0.4, bossDraw.x, bossDraw.y, auraR);
+        auraGrad.addColorStop(0, "rgba(255,215,0,0.0)");
+        auraGrad.addColorStop(0.7, "rgba(255,215,0,0.18)");
+        auraGrad.addColorStop(1, "rgba(255,215,0,0)");
+        ctx.fillStyle = auraGrad;
+        ctx.beginPath(); ctx.arc(bossDraw.x, bossDraw.y, auraR, 0, Math.PI * 2); ctx.fill();
+        // The big tank itself
+        drawTank(ctx, bossDraw.x, bossDraw.y, 0, bossDraw.turretAngle, 88, 64, "#4b0082", "#2a0640", "#d4af37", "#ffd700", false, bossDraw.flashT, 0, ts);
+        // Crown above the boss
+        ctx.font = "30px serif";
+        ctx.textAlign = "center";
+        ctx.shadowColor = "#ffd700"; ctx.shadowBlur = 14;
+        ctx.fillText("👑", bossDraw.x, bossDraw.y - 50);
+        ctx.shadowBlur = 0;
+        // HP bar
+        const barW = 110, barH = 9;
+        const bx = bossDraw.x - barW / 2, by = bossDraw.y - 78;
+        ctx.fillStyle = "rgba(0,0,0,0.7)";
+        ctx.fillRect(bx - 2, by - 2, barW + 4, barH + 4);
+        ctx.fillStyle = "#3a0a14";
+        ctx.fillRect(bx, by, barW, barH);
+        const hpFrac = bossDraw.hp / bossDraw.maxHp;
+        ctx.fillStyle = hpFrac > 0.5 ? "#4ade80" : hpFrac > 0.25 ? "#fbbf24" : "#ef4444";
+        ctx.fillRect(bx, by, barW * hpFrac, barH);
+        ctx.strokeStyle = "rgba(255,255,255,0.7)"; ctx.lineWidth = 1;
+        ctx.strokeRect(bx, by, barW, barH);
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 10px sans-serif";
+        ctx.fillText(`${bossDraw.hp}/${bossDraw.maxHp}`, bossDraw.x, by - 4);
+        // Spawn entrance flash
+        if (bossDraw.spawnT > 0) {
+          ctx.globalAlpha = bossDraw.spawnT / 1.5;
+          ctx.fillStyle = "rgba(255,215,0,0.35)";
+          ctx.beginPath(); ctx.arc(bossDraw.x, bossDraw.y, 80 + (1.5 - bossDraw.spawnT) * 60, 0, Math.PI * 2); ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+      }
+
       // Player tank
       drawTank(ctx, player.x, player.y, 0, player.turretAngle, 46, 32, "#00e6d2", "#005544", "#00bbaa", "#00f0ff", true, 0, player.invT, ts);
 
@@ -941,6 +1100,7 @@ const BattleTankPage = ({
           { text: <>Gunakan <strong className="text-yellow-300">stik analog</strong> atau <strong className="text-yellow-300">tombol panah</strong> untuk menggerakkan tank ke <strong className="text-cyan-300">atas, bawah, kiri, kanan</strong></> },
           { text: <>Meriam tank <strong className="text-cyan-300">otomatis mengunci musuh terdekat</strong> — kamu cukup tekan <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap / spasi) dan peluru akan melesat tepat ke sasaran</> },
           { text: <>Hancurkan semua tank musuh yang juga bergerak ke segala arah — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
+          { text: <>Setiap <strong className="text-yellow-300">60 detik</strong> akan muncul <strong className="text-amber-300">👑 BOS RAKSASA</strong> — tembak berkali-kali sampai HP-nya habis untuk dapat <strong className="text-green-400">bonus besar</strong>!</> },
           { text: <>Setiap <strong className="text-yellow-300">25 detik</strong> akan muncul <strong className="text-pink-300">soal dari guru</strong> — game di-pause, jawab benar = <strong className="text-green-400">+20 poin</strong></> },
         ]}
       />
