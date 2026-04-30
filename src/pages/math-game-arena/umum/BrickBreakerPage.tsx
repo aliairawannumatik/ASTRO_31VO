@@ -67,7 +67,9 @@ interface Brick {
   value: number; correct: boolean;
   color: typeof ROW_COLORS[0];
   alive: boolean;
+  hits: number;     // number of times this brick has been hit by the ball
   flashT: number;   // 0 = normal, >0 = wrong-hit flash
+  cracked: boolean; // becomes true after first correct hit (visual crack)
   hitT: number;     // correct hit pop animation
   sparkles: Sparkle[];
 }
@@ -139,7 +141,9 @@ const BrickBreakerPage = () => {
           correct: val === q.ans,
           color: ROW_COLORS[row % ROW_COLORS.length],
           alive: true,
+          hits: 0,
           flashT: 0,
+          cracked: false,
           hitT: 0,
           sparkles: [],
         });
@@ -347,32 +351,43 @@ const BrickBreakerPage = () => {
               }
 
               if (b.correct) {
-                // CORRECT!
+                // CORRECT! Requires 2 hits to fully open.
+                b.hits++;
                 playPopSound();
-                comboRef.current++;
-                const pts = 20 * comboRef.current * levelRef.current;
-                scoreRef.current += pts;
-                if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
-                addSparkles(b);
                 b.hitT = 1;
-                b.alive = false;
-                levelRef.current = Math.floor(scoreRef.current / 150) + 1;
-                timerRef.current = Math.min(timerRef.current + 8, 90);
-                // give wide paddle bonus
-                paddle.w = Math.min(PADDLE_W_BASE + 30, 140);
-                paddle.powerT = 4;
-                floatTextsRef.current.push({
-                  x: b.x + BRICK_W / 2, y: b.y,
-                  txt: `+${pts}${comboRef.current > 1 ? ` 🔥×${comboRef.current}` : ""}`,
-                  alpha: 1, vy: -90, good: true,
-                });
-                setTimeout(() => {
-                  if (phaseRef.current !== "playing" && phaseRef.current !== "ready") return;
-                  const q = makeQ();
-                  currentQRef.current = q;
-                  buildBricks(q);
-                  rerender();
-                }, 500);
+                if (b.hits < 2) {
+                  // First hit: crack the brick but don't break it yet.
+                  b.cracked = true;
+                  floatTextsRef.current.push({
+                    x: b.x + BRICK_W / 2, y: b.y,
+                    txt: "💥 1/2", alpha: 1, vy: -70, good: true,
+                  });
+                } else {
+                  // Second hit: brick opens (broken).
+                  comboRef.current++;
+                  const pts = 20 * comboRef.current * levelRef.current;
+                  scoreRef.current += pts;
+                  if (scoreRef.current > bestRef.current) bestRef.current = scoreRef.current;
+                  addSparkles(b);
+                  b.alive = false;
+                  levelRef.current = Math.floor(scoreRef.current / 150) + 1;
+                  timerRef.current = Math.min(timerRef.current + 8, 90);
+                  // give wide paddle bonus
+                  paddle.w = Math.min(PADDLE_W_BASE + 30, 140);
+                  paddle.powerT = 4;
+                  floatTextsRef.current.push({
+                    x: b.x + BRICK_W / 2, y: b.y,
+                    txt: `+${pts}${comboRef.current > 1 ? ` 🔥×${comboRef.current}` : ""}`,
+                    alpha: 1, vy: -90, good: true,
+                  });
+                  setTimeout(() => {
+                    if (phaseRef.current !== "playing" && phaseRef.current !== "ready") return;
+                    const q = makeQ();
+                    currentQRef.current = q;
+                    buildBricks(q);
+                    rerender();
+                  }, 500);
+                }
               } else {
                 // wrong brick — blinks and revives quickly
                 b.flashT = 0.6;
@@ -566,6 +581,26 @@ const BrickBreakerPage = () => {
           ctx.globalAlpha = 1;
         }
 
+        // crack overlay if brick has been hit once (correct brick only)
+        if (b.cracked && b.alive) {
+          ctx.save();
+          ctx.strokeStyle = "rgba(0,0,0,0.85)";
+          ctx.lineWidth = 1.6;
+          ctx.shadowBlur = 0;
+          ctx.beginPath();
+          // jagged crack lines across the brick
+          ctx.moveTo(b.x + BRICK_W * 0.15, b.y + 2);
+          ctx.lineTo(b.x + BRICK_W * 0.32, b.y + BRICK_H * 0.45);
+          ctx.lineTo(b.x + BRICK_W * 0.22, b.y + BRICK_H * 0.7);
+          ctx.lineTo(b.x + BRICK_W * 0.4, b.y + BRICK_H - 2);
+          ctx.moveTo(b.x + BRICK_W * 0.7, b.y + 2);
+          ctx.lineTo(b.x + BRICK_W * 0.55, b.y + BRICK_H * 0.5);
+          ctx.lineTo(b.x + BRICK_W * 0.75, b.y + BRICK_H * 0.75);
+          ctx.lineTo(b.x + BRICK_W * 0.65, b.y + BRICK_H - 2);
+          ctx.stroke();
+          ctx.restore();
+        }
+
         // value text
         ctx.shadowBlur = isCorrect ? 12 : 0;
         ctx.shadowColor = isCorrect ? "#fff" : "transparent";
@@ -677,8 +712,8 @@ const BrickBreakerPage = () => {
         ctx.shadowBlur = 0;
         [
           "Gerakkan paddle dengan mouse / sentuhan!",
-          "Arahkan bola ke bata yang benar!",
-          "Bata dengan ★ = jawaban BENAR (berkilau)!",
+          "Bata ★ = jawaban BENAR — kena 2× untuk pecah!",
+          "Tiap 25 detik muncul Soal Pak/Bu Guru ⏱️",
           "Combo = poin berlipat! 🔥",
         ].forEach((l, i) => ctx.fillText(l, CW / 2, CH / 2 - 4 + i * 24));
 
@@ -742,7 +777,7 @@ const BrickBreakerPage = () => {
           >
             🏠
           </button>
-          <span className="font-display text-sm text-accent">🧱 Brick Breaker Math</span>
+          <span className="font-display text-sm text-accent">🧱 Pecah Jawaban</span>
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
             className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
@@ -751,6 +786,24 @@ const BrickBreakerPage = () => {
             ✕
           </button>
         </div>
+
+        {/* Countdown chip: shows when next "Soal Pak/Bu Guru" appears */}
+        {guruQuiz.isCountdownActive && (
+          <div className="rounded-xl border border-amber-400/60 bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 px-3 py-1.5 flex items-center justify-center gap-2 shadow-[0_0_18px_rgba(255,200,0,0.35)] max-w-sm w-[95vw]">
+            <span className="text-base">👨‍🏫</span>
+            <span className="font-display text-[11px] sm:text-xs font-bold text-amber-200 tracking-wide drop-shadow-[0_0_6px_rgba(255,215,0,0.55)]">
+              SOAL GURU ke-{guruQuiz.questionNumber + 1}/{guruQuiz.totalQuestions} dalam
+            </span>
+            <span
+              className={`font-display text-base sm:text-lg font-black tabular-nums drop-shadow-[0_0_8px_rgba(255,215,0,0.85)] ${
+                guruQuiz.secondsUntilNext <= 5 ? "text-red-300 animate-pulse" : "text-amber-100"
+              }`}
+            >
+              {guruQuiz.secondsUntilNext}s
+            </span>
+          </div>
+        )}
+
         <canvas
           ref={canvasRef}
           width={CW}
