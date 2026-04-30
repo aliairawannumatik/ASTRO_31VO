@@ -737,11 +737,11 @@ const Soal18SVG = () => (
     <text x="28"  y="198" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
     <text x="346" y="96"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
 
-    {/* 7x in quadrant I (upper-right): between vertical-up and diagonal toward B */}
-    <text x="210" y="105" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan>°</text>
+    {/* 7x in quadrant I (upper-right): moved down closer to the angle */}
+    <text x="210" y="122" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan>°</text>
 
-    {/* 2x in quadrant III (lower-left): between diagonal toward A and horizontal-left — raised up */}
-    <text x="108" y="152" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan>°</text>
+    {/* 2x in quadrant III (lower-left): moved down away from the diagonal line above */}
+    <text x="108" y="158" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan>°</text>
 
     <circle cx="200" cy="140" r="3" fill="#ef4444" />
     <circle cx="40"  cy="180" r="3" fill="#ef4444" />
