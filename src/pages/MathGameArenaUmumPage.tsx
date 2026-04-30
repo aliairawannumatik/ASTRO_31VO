@@ -89,7 +89,7 @@ const games = [
   },
   {
     label: "Meteor Pantul NUMATIK",
-    emoji: "☄️",
+    emoji: "🚀",
     path: "/math-game-arena/umum/pecah-jawaban",
     desc: "Game Meteor! Pantulkan meteor ke kristal yang membawa jawaban benar untuk menghancurkannya!",
     icon: <Swords className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
