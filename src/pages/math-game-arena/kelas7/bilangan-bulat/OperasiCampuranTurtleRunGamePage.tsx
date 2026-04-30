@@ -1,5 +1,6 @@
 import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePage";
 
+import { OPERASI_CAMPURAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "4 + 2 × 3 = ?", opts: ["18", "10", "12", "9"], correctIndex: 1, bonus: 25 },
     { q: "(6 - 2) × 4 = ?", opts: ["10", "16", "12", "20"], correctIndex: 1, bonus: 30 },
@@ -17,6 +18,8 @@ import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePag
       topicLabel="OPERASI HITUNG CAMPURAN BILANGAN BULAT"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran"
       homePath="/menu"
+
+      quizQuestions={OPERASI_CAMPURAN_QUIZ}
     />
   );
 

@@ -58,6 +58,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
+          quizQuestions={q.snake}
         />
       );
     case "tembak-tank":
@@ -67,6 +68,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={`${topicLabel} · Tembak tank dengan jawaban benar!`}
           backPath={backPath}
           homePath={homePath}
+          quizQuestions={q.snake}
         />
       );
     case "space-impact":
@@ -76,6 +78,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
+          quizQuestions={q.snake}
         />
       );
     case "turtle-run":
@@ -85,6 +88,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
+          quizQuestions={q.snake}
         />
       );
     case "tetris":
@@ -93,6 +97,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
+          quizQuestions={q.snake}
         />
       );
     case "snake-math":

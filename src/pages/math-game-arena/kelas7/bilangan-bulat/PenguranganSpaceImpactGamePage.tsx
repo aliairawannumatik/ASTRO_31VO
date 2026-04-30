@@ -1,5 +1,6 @@
 import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPage";
 
+import { PENGURANGAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "8 - 3", ans: 5 },
     { q: "5 - 9", ans: -4 },
@@ -21,6 +22,8 @@ import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPag
       topicLabel="PENGURANGAN BILANGAN BULAT"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pengurangan"
       homePath="/menu"
+
+      quizQuestions={PENGURANGAN_QUIZ}
     />
   );
 

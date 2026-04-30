@@ -1,5 +1,6 @@
 import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPage";
 
+import { OPERASI_CAMPURAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "5 + 2 × 3", ans: 11 },
     { q: "(8 - 3) × 2", ans: 10 },
@@ -21,6 +22,8 @@ import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPag
       topicLabel="OPERASI HITUNG CAMPURAN BILANGAN BULAT"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran"
       homePath="/menu"
+
+      quizQuestions={OPERASI_CAMPURAN_QUIZ}
     />
   );
 

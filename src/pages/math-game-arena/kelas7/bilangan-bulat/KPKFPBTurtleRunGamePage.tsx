@@ -1,5 +1,6 @@
 import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePage";
 
+import { KPK_FPB_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "FPB(6, 9) = ?", opts: ["1", "2", "3", "6"], correctIndex: 2, bonus: 25 },
     { q: "KPK(3, 4) = ?", opts: ["7", "12", "6", "24"], correctIndex: 1, bonus: 30 },
@@ -17,6 +18,8 @@ import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePag
       topicLabel="KPK DAN FPB"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb"
       homePath="/menu"
+
+      quizQuestions={KPK_FPB_QUIZ}
     />
   );
 

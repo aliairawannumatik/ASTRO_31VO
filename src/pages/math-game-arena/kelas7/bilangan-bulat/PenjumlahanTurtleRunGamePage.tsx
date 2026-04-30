@@ -1,5 +1,6 @@
 import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePage";
 
+import { PENJUMLAHAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
 const questions: MQ[] = [
   { q: "(-8) + 5 = ?", opts: ["-13", "-3", "3", "13"], correctIndex: 1, bonus: 25 },
   { q: "12 + (-7) = ?", opts: ["19", "-5", "5", "-19"], correctIndex: 2, bonus: 25 },
@@ -17,6 +18,8 @@ const PenjumlahanTurtleRunGamePage = () => (
     topicLabel="PENJUMLAHAN BILANGAN BULAT"
     backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
     homePath="/menu"
+
+    quizQuestions={PENJUMLAHAN_QUIZ}
   />
 );
 

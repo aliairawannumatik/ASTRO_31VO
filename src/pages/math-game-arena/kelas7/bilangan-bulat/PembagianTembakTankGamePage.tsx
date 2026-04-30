@@ -1,5 +1,6 @@
 import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage";
 
+import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "8 ÷ 2 = ...", opts: ["4", "10", "-4", "-10"], ans: 0 },
     { q: "(-12) ÷ 4 = ...", opts: ["-3", "3", "-8", "8"], ans: 0 },
@@ -21,6 +22,8 @@ import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage"
       topicLabel="PEMBAGIAN BILANGAN BULAT · Tembak tank dengan jawaban benar!"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pembagian"
       homePath="/menu"
+
+      quizQuestions={PEMBAGIAN_QUIZ}
     />
   );
 

@@ -1,5 +1,6 @@
 import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage";
 
+import { PERKALIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "4 × 5 = ...", opts: ["20", "9", "-20", "-9"], ans: 0 },
     { q: "(-3) × 4 = ...", opts: ["-12", "12", "-7", "7"], ans: 0 },
@@ -21,6 +22,8 @@ import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage"
       topicLabel="PERKALIAN BILANGAN BULAT · Tembak tank dengan jawaban benar!"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/perkalian"
       homePath="/menu"
+
+      quizQuestions={PERKALIAN_QUIZ}
     />
   );
 

@@ -4,7 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
-import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import MathGameIntro from "@/components/MathGameIntro";
 
@@ -72,6 +72,7 @@ interface FlappyRocketPageProps {
   topicLabel?: string;
   backPath?: string;
   homePath?: string;
+  quizQuestions?: GuruQuestion[];
 }
 
 const FlappyRocketPage = ({
@@ -79,6 +80,7 @@ const FlappyRocketPage = ({
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
+  quizQuestions,
 }: FlappyRocketPageProps = {}) => {
   const QUESTIONS = questions && questions.length > 0 ? questions : DEFAULT_QUESTIONS;
   const navigate = useNavigate();
@@ -90,7 +92,7 @@ const FlappyRocketPage = ({
 
   // game refs
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef);
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25_000, quizQuestions);
   const ryRef = useRef(CH / 2);
   const rvyRef = useRef(0);
   const rotRef = useRef(0);

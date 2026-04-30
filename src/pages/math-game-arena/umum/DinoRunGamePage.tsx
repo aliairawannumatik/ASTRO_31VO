@@ -4,7 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
-import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import MathGameIntro from "@/components/MathGameIntro";
 
@@ -79,6 +79,7 @@ interface DinoRunGamePageProps {
   topicLabel?: string;
   backPath?: string;
   homePath?: string;
+  quizQuestions?: GuruQuestion[];
 }
 
 const DinoRunGamePage = ({
@@ -86,6 +87,7 @@ const DinoRunGamePage = ({
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
+  quizQuestions,
 }: DinoRunGamePageProps = {}) => {
   const QUESTIONS = questions && questions.length > 0 ? questions : DEFAULT_QUESTIONS;
   const navigate = useNavigate();
@@ -96,7 +98,7 @@ const DinoRunGamePage = ({
   const lastTRef = useRef(0);
 
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef, "running");
+  const guruQuiz = useGuruQuiz(phaseRef, "running", 25_000, quizQuestions);
   const pyRef = useRef(GROUND_Y - P_H_STAND);
   const pvyRef = useRef(0);
   const isDuckRef = useRef(false);

@@ -4,7 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
-import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import { spaceBg } from "@/assets/placeholder";
 
@@ -121,12 +121,14 @@ interface TetrisGamePageProps {
   topicLabel?: string;
   backPath?: string;
   homePath?: string;
+  quizQuestions?: GuruQuestion[];
 }
 
 const TetrisGamePage = ({
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
+  quizQuestions,
 }: TetrisGamePageProps = {}) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -142,7 +144,7 @@ const TetrisGamePage = ({
   const gameOverRef = useRef(false);
   const pausedRef = useRef(false);
   const tetrisPhaseRef = useRef<string>("idle");
-  const guruQuiz = useGuruQuiz(tetrisPhaseRef);
+  const guruQuiz = useGuruQuiz(tetrisPhaseRef, "playing", 25_000, quizQuestions);
   const dropTimerRef = useRef(0);
   const animRef = useRef(0);
   const lastTimeRef = useRef(0);

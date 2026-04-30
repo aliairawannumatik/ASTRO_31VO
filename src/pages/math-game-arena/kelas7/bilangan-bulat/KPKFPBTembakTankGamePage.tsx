@@ -1,5 +1,6 @@
 import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage";
 
+import { KPK_FPB_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "FPB(4, 8) = ...", opts: ["4", "2", "8", "1"], ans: 0 },
     { q: "KPK(2, 3) = ...", opts: ["6", "5", "9", "1"], ans: 0 },
@@ -21,6 +22,8 @@ import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage"
       topicLabel="KPK DAN FPB · Tembak tank dengan jawaban benar!"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb"
       homePath="/menu"
+
+      quizQuestions={KPK_FPB_QUIZ}
     />
   );
 

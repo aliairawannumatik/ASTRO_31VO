@@ -1,5 +1,6 @@
 import FlappyRocketPage, { MQ } from "@/pages/math-game-arena/umum/FlappyRocketPage";
 
+import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "10 ÷ 2 = ?", opts: ["12", "5", "-5", "-12"], ans: 1 },
     { q: "(-15) ÷ 5 = ?", opts: ["3", "-3", "10", "-10"], ans: 1 },
@@ -17,6 +18,8 @@ import FlappyRocketPage, { MQ } from "@/pages/math-game-arena/umum/FlappyRocketP
       topicLabel="PEMBAGIAN BILANGAN BULAT"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pembagian"
       homePath="/menu"
+
+      quizQuestions={PEMBAGIAN_QUIZ}
     />
   );
 

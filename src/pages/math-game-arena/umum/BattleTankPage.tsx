@@ -4,7 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
-import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import MathGameIntro from "@/components/MathGameIntro";
 
@@ -112,6 +112,7 @@ interface BattleTankPageProps {
   topicLabel?: string;
   backPath?: string;
   homePath?: string;
+  quizQuestions?: GuruQuestion[];
 }
 
 // ── On-screen analog joystick (touch + mouse) ───────────────────────────────
@@ -199,6 +200,7 @@ const BattleTankPage = ({
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
+  quizQuestions,
 }: BattleTankPageProps = {}) => {
   const QUIZ_POOL = questions && questions.length > 0 ? questions : DEFAULT_QUIZ_POOL;
   const navigate = useNavigate();
@@ -238,7 +240,7 @@ const BattleTankPage = ({
   const phaseRef = useRef<Phase>("idle");
   const [phase, setPhaseState] = useState<Phase>("idle");
   const setPhase = useCallback((p: Phase) => { phaseRef.current = p; setPhaseState(p); }, []);
-  const guruQuiz = useGuruQuiz(phaseRef);
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25_000, quizQuestions);
   const enemiesRef = useRef<EnemyTank[]>([]);
   const bulletsRef = useRef<Bullet[]>([]);
   const explosionsRef = useRef<Explosion[]>([]);

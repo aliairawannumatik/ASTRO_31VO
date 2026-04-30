@@ -4,7 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
-import { useGuruQuiz } from "@/hooks/useGuruQuiz";
+import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 import MathGameIntro from "@/components/MathGameIntro";
 
@@ -673,6 +673,7 @@ interface SpaceImpactPageProps {
   topicLabel?: string;
   backPath?: string;
   homePath?: string;
+  quizQuestions?: GuruQuestion[];
 }
 
 const SpaceImpactPage = ({
@@ -680,6 +681,7 @@ const SpaceImpactPage = ({
   topicLabel,
   backPath,
   homePath = "/ruang-untuk-guru/numatik-game",
+  quizQuestions,
 }: SpaceImpactPageProps = {}) => {
   const customQuestionsRef = useRef<MQ[] | undefined>(questions && questions.length > 0 ? questions : undefined);
   const customQIdxRef = useRef(0);
@@ -703,7 +705,7 @@ const SpaceImpactPage = ({
 
   // game refs
   const phaseRef = useRef<Phase>("idle");
-  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25000);
+  const guruQuiz = useGuruQuiz(phaseRef, "playing", 25000, quizQuestions);
   const playerRef = useRef<Vec2>({ x: 60, y: CH / 2 - 15 });
   const bulletsRef = useRef<Bullet[]>([]);
   const enemiesRef = useRef<Enemy[]>([]);

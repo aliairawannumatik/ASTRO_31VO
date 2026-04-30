@@ -1,5 +1,6 @@
 import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePage";
 
+import { PENGURANGAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "10 - 4 = ?", opts: ["14", "6", "-6", "-14"], correctIndex: 1, bonus: 25 },
     { q: "6 - 9 = ?", opts: ["3", "-3", "15", "-15"], correctIndex: 1, bonus: 25 },
@@ -17,6 +18,8 @@ import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePag
       topicLabel="PENGURANGAN BILANGAN BULAT"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pengurangan"
       homePath="/menu"
+
+      quizQuestions={PENGURANGAN_QUIZ}
     />
   );
 

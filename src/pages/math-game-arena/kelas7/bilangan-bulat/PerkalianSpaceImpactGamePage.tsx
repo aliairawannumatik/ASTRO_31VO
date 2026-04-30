@@ -1,5 +1,6 @@
 import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPage";
 
+import { PERKALIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "4 × 6", ans: 24 },
     { q: "(-2) × 7", ans: -14 },
@@ -21,6 +22,8 @@ import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPag
       topicLabel="PERKALIAN BILANGAN BULAT"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/perkalian"
       homePath="/menu"
+
+      quizQuestions={PERKALIAN_QUIZ}
     />
   );
 

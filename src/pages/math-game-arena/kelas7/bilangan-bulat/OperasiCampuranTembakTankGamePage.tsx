@@ -1,5 +1,6 @@
 import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage";
 
+import { OPERASI_CAMPURAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "5 + 4 × 2 = ...", opts: ["13", "18", "9", "20"], ans: 0 },
     { q: "(6 - 2) × 3 = ...", opts: ["12", "10", "0", "18"], ans: 0 },
@@ -21,6 +22,8 @@ import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage"
       topicLabel="OPERASI HITUNG CAMPURAN BILANGAN BULAT · Tembak tank dengan jawaban benar!"
       backPath="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran"
       homePath="/menu"
+
+      quizQuestions={OPERASI_CAMPURAN_QUIZ}
     />
   );
 
