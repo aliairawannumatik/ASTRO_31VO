@@ -26,48 +26,30 @@ import {
 
 const ALL_VIDEOS = [
   {
-    id: "mRy5nXHrHQk",
-    title: "Penjumlahan & Pengurangan Bilangan Bulat",
-    subject: "Bilangan Bulat",
-    kelas: "Kelas 7",
-    kelasNum: 7,
-    duration: "12:34",
-    views: "12.400",
-    likes: "847",
-    date: "Januari 2024",
+    id: "UVt4JZaGqwU",
+    title: "Statistika — Mean, Median, Modus, dan Penyajian Data",
+    subject: "Statistika",
+    kelas: "Kelas 8",
+    kelasNum: 8,
+    duration: "–",
+    views: "–",
+    likes: "0",
+    date: "2024",
     channel: "NUMATIK CHANNEL",
-    color: "from-cyan-500 via-blue-600 to-indigo-700",
-    colorAccent: "#06b6d4",
-    icon: "➕",
-    emoji: "🔢",
+    color: "from-rose-500 via-pink-600 to-red-700",
+    colorAccent: "#f43f5e",
+    icon: "📊",
+    emoji: "📊",
     description:
-      "Video pembelajaran ini membahas materi Penjumlahan dan Pengurangan Bilangan Bulat untuk siswa SMP Kelas 7. Kamu akan belajar cara menjumlahkan dan mengurangkan bilangan bulat positif dan negatif dengan mudah dan menyenangkan menggunakan garis bilangan dan teknik cepat.\n\nTopik yang dibahas:\n• Pengertian bilangan bulat positif dan negatif\n• Cara menjumlahkan bilangan bulat\n• Cara mengurangkan bilangan bulat\n• Contoh soal dan pembahasan lengkap",
-  },
-  {
-    id: "JrWic2SG_ts",
-    title: "Perkalian & Pembagian Bilangan Bulat",
-    subject: "Bilangan Bulat",
-    kelas: "Kelas 7",
-    kelasNum: 7,
-    duration: "14:20",
-    views: "8.200",
-    likes: "512",
-    date: "Februari 2024",
-    channel: "NUMATIK CHANNEL",
-    color: "from-blue-500 via-cyan-600 to-teal-700",
-    colorAccent: "#3b82f6",
-    icon: "✖️",
-    emoji: "✖️",
-    description:
-      "Video pembelajaran ini membahas materi Perkalian dan Pembagian pada Bilangan Bulat untuk siswa SMP Kelas 7. Kamu akan belajar cara mengalikan dan membagi bilangan bulat positif dan negatif dengan mudah dan menyenangkan.\n\nTopik yang dibahas:\n• Perkalian bilangan bulat positif dan negatif\n• Pembagian bilangan bulat positif dan negatif\n• Sifat-sifat perkalian dan pembagian bilangan bulat\n• Contoh soal dan pembahasan lengkap",
+      "Video pembelajaran ini membahas materi Statistika untuk siswa SMP. Kamu akan belajar cara membaca dan menyajikan data, serta menghitung ukuran pemusatan data seperti Mean, Median, dan Modus dengan mudah dan menyenangkan.\n\nTopik yang dibahas:\n• Pengertian statistika dan data\n• Penyajian data dalam tabel dan diagram\n• Cara menghitung Mean (rata-rata)\n• Cara menentukan Median (nilai tengah)\n• Cara menentukan Modus (nilai yang sering muncul)\n• Contoh soal dan pembahasan lengkap",
   },
 ];
 
 const COMING_SOON = [
-  { title: "Bilangan Pecahan & Operasinya", kelas: "Kelas 7", kelasNum: 7, duration: "18:05", views: "9.750", color: "from-violet-600 via-purple-600 to-fuchsia-700", colorAccent: "#8b5cf6", emoji: "➗" },
-  { title: "Persamaan Linier Satu Variabel", kelas: "Kelas 7", kelasNum: 7, duration: "20:15", views: "11.300", color: "from-orange-500 via-amber-500 to-yellow-600", colorAccent: "#f59e0b", emoji: "📐" },
-  { title: "Luas & Keliling Bangun Datar", kelas: "Kelas 8", kelasNum: 8, duration: "16:45", views: "7.890", color: "from-green-500 via-emerald-600 to-teal-700", colorAccent: "#10b981", emoji: "📏" },
-  { title: "Statistika Dasar — Mean, Median, Modus", kelas: "Kelas 8", kelasNum: 8, duration: "22:10", views: "6.400", color: "from-rose-500 via-pink-600 to-red-700", colorAccent: "#f43f5e", emoji: "📊" },
+  { title: "Bilangan Pecahan & Operasinya", kelas: "Kelas 7", kelasNum: 7, duration: "–", views: "–", color: "from-violet-600 via-purple-600 to-fuchsia-700", colorAccent: "#8b5cf6", emoji: "➗" },
+  { title: "Persamaan Linier Satu Variabel", kelas: "Kelas 7", kelasNum: 7, duration: "–", views: "–", color: "from-orange-500 via-amber-500 to-yellow-600", colorAccent: "#f59e0b", emoji: "📐" },
+  { title: "Luas & Keliling Bangun Datar", kelas: "Kelas 8", kelasNum: 8, duration: "–", views: "–", color: "from-green-500 via-emerald-600 to-teal-700", colorAccent: "#10b981", emoji: "📏" },
+  { title: "Bilangan Bulat & Operasinya", kelas: "Kelas 7", kelasNum: 7, duration: "–", views: "–", color: "from-cyan-500 via-blue-600 to-indigo-700", colorAccent: "#06b6d4", emoji: "🔢" },
 ];
 
 const KELAS_FILTERS = ["Semua", "Kelas 7", "Kelas 8", "Kelas 9"];
@@ -113,7 +95,7 @@ const VideoPembelajaranPage = () => {
 
   const handleShare = () => {
     playPopSound();
-    navigator.clipboard?.writeText(`https://www.youtube.com/watch?v=${currentVideo.id}`);
+    navigator.clipboard?.writeText(`https://www.youtube.com/watch?v=${currentVideo.id}&list=PLxsvNQG_jS3lKhP69paEJ-f_BcwnY1_yU`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -228,7 +210,7 @@ const VideoPembelajaranPage = () => {
                 <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                   <iframe
                     className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${currentVideo.id}?rel=0&modestbranding=1&color=white&iv_load_policy=3`}
+                    src={`https://www.youtube.com/embed/${currentVideo.id}?list=PLxsvNQG_jS3lKhP69paEJ-f_BcwnY1_yU&rel=0&modestbranding=1&color=white&iv_load_policy=3`}
                     title={currentVideo.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowFullScreen
