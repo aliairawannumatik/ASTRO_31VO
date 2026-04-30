@@ -158,7 +158,15 @@ const PenjumlahanGamePage = () => {
                 className="relative flex-shrink-0 flex items-center justify-center w-20 border-r border-white/10"
                 style={{ background: `linear-gradient(180deg, ${v.from}22, ${v.to}22)` }}
               >
-                <span className="text-4xl">{v.emoji}</span>
+                {v.path.endsWith("/pesawat-tembak-meteor") ? (
+                  <img
+                    src="/pesawat.png"
+                    alt="Pesawat"
+                    className="w-10 h-12 drop-shadow-[0_0_12px_rgba(0,200,255,0.6)]"
+                  />
+                ) : (
+                  <span className="text-4xl">{v.emoji}</span>
+                )}
               </div>
 
               <div className="relative flex-1 flex items-center gap-3 px-4 py-4 min-w-0">
