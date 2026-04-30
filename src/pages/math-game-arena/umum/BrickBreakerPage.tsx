@@ -68,6 +68,10 @@ const BrickBreakerPage = () => {
   const ballRef = useRef({ x: CW / 2, y: PADDLE_Y - BALL_R - 2, vx: 0, vy: 0, launched: false });
   const paddleRef = useRef({ x: CW / 2, w: PADDLE_W_BASE, powerT: 0 });
   const mouseTRef = useRef(CW / 2);
+  // On-screen control buttons (left side)
+  const holdLeftRef = useRef(false);
+  const holdRightRef = useRef(false);
+  const BUTTON_SPEED = 360; // px / second (in canvas coordinates)
 
   const scoreRef = useRef(0);
   const livesRef = useRef(3);
@@ -210,7 +214,11 @@ const BrickBreakerPage = () => {
 
       // ── Update paddle ──────────────────────────────────────────────────
       const paddle = paddleRef.current;
-      const targetX = Math.max(paddle.w / 2, Math.min(CW - paddle.w / 2, mouseTRef.current));
+      // Button hold: nudge target X smoothly while a control button is pressed.
+      if (holdLeftRef.current) mouseTRef.current -= BUTTON_SPEED * dt;
+      if (holdRightRef.current) mouseTRef.current += BUTTON_SPEED * dt;
+      mouseTRef.current = Math.max(paddle.w / 2, Math.min(CW - paddle.w / 2, mouseTRef.current));
+      const targetX = mouseTRef.current;
       paddle.x += (targetX - paddle.x) * Math.min(1, dt * 18);
       if (paddle.powerT > 0) paddle.powerT = Math.max(0, paddle.powerT - dt);
 
@@ -481,48 +489,125 @@ const BrickBreakerPage = () => {
         ctx.scale(scale, scale);
         ctx.translate(-cx2, -cy2);
 
-        ctx.shadowBlur = 8 + b.hitT * 14;
-        ctx.shadowColor = b.color.glow;
+        // Drop shadow for depth
+        ctx.shadowBlur = 6 + b.hitT * 14;
+        ctx.shadowColor = b.cracked ? "rgba(0,0,0,0.85)" : b.color.glow;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 2;
 
-        // brick body
-        const brickGrad = ctx.createLinearGradient(b.x, b.y, b.x, b.y + BRICK_H);
         const fillColor = b.color.fill;
-        brickGrad.addColorStop(0, lightenColor(fillColor, 0.35));
-        brickGrad.addColorStop(0.5, fillColor);
-        brickGrad.addColorStop(1, darkenColor(fillColor, 0.3));
-        ctx.fillStyle = brickGrad;
+        const r = 4;
+
+        // ── Base 3D body ─────────────────────────────────────────────────
+        const baseGrad = ctx.createLinearGradient(b.x, b.y, b.x, b.y + BRICK_H);
+        baseGrad.addColorStop(0, lightenColor(fillColor, 0.30));
+        baseGrad.addColorStop(0.45, fillColor);
+        baseGrad.addColorStop(1, darkenColor(fillColor, 0.45));
+        ctx.fillStyle = baseGrad;
         ctx.beginPath();
-        roundRect(ctx, b.x + 1, b.y + 1, BRICK_W - 2, BRICK_H - 2, 5);
+        roundRect(ctx, b.x, b.y, BRICK_W, BRICK_H, r);
         ctx.fill();
 
-        // top highlight
+        ctx.shadowColor = "transparent";
         ctx.shadowBlur = 0;
-        ctx.fillStyle = "rgba(255,255,255,0.22)";
-        ctx.beginPath();
-        roundRect(ctx, b.x + 2, b.y + 2, BRICK_W - 4, BRICK_H * 0.4, 3);
-        ctx.fill();
+        ctx.shadowOffsetY = 0;
 
-        // border
+        // ── Realistic brick texture (mortar lines, offset rows) ─────────
+        ctx.save();
+        ctx.beginPath();
+        roundRect(ctx, b.x, b.y, BRICK_W, BRICK_H, r);
+        ctx.clip();
+
+        // Mortar color (darker version of brick)
+        const mortarColor = darkenColor(fillColor, 0.55);
+        ctx.strokeStyle = mortarColor;
+        ctx.lineWidth = 1.4;
+        ctx.lineCap = "butt";
+
+        // Horizontal mortar line through the middle
+        const midY = b.y + BRICK_H / 2;
+        ctx.beginPath();
+        ctx.moveTo(b.x, midY);
+        ctx.lineTo(b.x + BRICK_W, midY);
+        ctx.stroke();
+
+        // Vertical mortar lines — staggered between top and bottom rows
+        ctx.beginPath();
+        // top row: vertical line near 1/3 and 2/3 width
+        ctx.moveTo(b.x + BRICK_W * 0.34, b.y);
+        ctx.lineTo(b.x + BRICK_W * 0.34, midY);
+        ctx.moveTo(b.x + BRICK_W * 0.68, b.y);
+        ctx.lineTo(b.x + BRICK_W * 0.68, midY);
+        // bottom row: offset vertical line at the half
+        ctx.moveTo(b.x + BRICK_W * 0.5, midY);
+        ctx.lineTo(b.x + BRICK_W * 0.5, b.y + BRICK_H);
+        ctx.stroke();
+
+        // Subtle highlight band on each sub-brick top edge (light from above)
         ctx.strokeStyle = "rgba(255,255,255,0.28)";
         ctx.lineWidth = 1;
         ctx.beginPath();
-        roundRect(ctx, b.x + 1, b.y + 1, BRICK_W - 2, BRICK_H - 2, 5);
+        ctx.moveTo(b.x + 1, b.y + 0.5);
+        ctx.lineTo(b.x + BRICK_W - 1, b.y + 0.5);
+        ctx.moveTo(b.x + 1, midY + 0.5);
+        ctx.lineTo(b.x + BRICK_W - 1, midY + 0.5);
         ctx.stroke();
 
-        // crack overlay after first hit
+        // Soft shadow under each sub-brick (light from above)
+        ctx.strokeStyle = "rgba(0,0,0,0.22)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(b.x + 1, midY - 0.5);
+        ctx.lineTo(b.x + BRICK_W - 1, midY - 0.5);
+        ctx.moveTo(b.x + 1, b.y + BRICK_H - 0.5);
+        ctx.lineTo(b.x + BRICK_W - 1, b.y + BRICK_H - 0.5);
+        ctx.stroke();
+
+        // Tiny noise texture (random specks) for grit
+        ctx.fillStyle = "rgba(0,0,0,0.10)";
+        const seed = (b.col * 13 + b.row * 7) | 0;
+        for (let n = 0; n < 5; n++) {
+          const sx = b.x + ((seed * (n + 3) * 17) % BRICK_W);
+          const sy = b.y + ((seed * (n + 5) * 11) % BRICK_H);
+          ctx.fillRect(sx, sy, 1, 1);
+        }
+        ctx.fillStyle = "rgba(255,255,255,0.10)";
+        for (let n = 0; n < 4; n++) {
+          const sx = b.x + ((seed * (n + 9) * 19) % BRICK_W);
+          const sy = b.y + ((seed * (n + 11) * 13) % BRICK_H);
+          ctx.fillRect(sx, sy, 1, 1);
+        }
+
+        ctx.restore();
+
+        // ── Outer bevel border (slight 3D rim) ──────────────────────────
+        ctx.strokeStyle = darkenColor(fillColor, 0.5);
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        roundRect(ctx, b.x + 0.5, b.y + 0.5, BRICK_W - 1, BRICK_H - 1, r);
+        ctx.stroke();
+
+        // ── Crack overlay after first hit ──────────────────────────────
         if (b.cracked) {
-          ctx.strokeStyle = "rgba(0,0,0,0.7)";
-          ctx.lineWidth = 1.4;
+          ctx.strokeStyle = "rgba(0,0,0,0.85)";
+          ctx.lineWidth = 1.6;
+          ctx.lineCap = "round";
           ctx.beginPath();
-          ctx.moveTo(b.x + BRICK_W * 0.18, b.y + 3);
-          ctx.lineTo(b.x + BRICK_W * 0.34, b.y + BRICK_H * 0.45);
-          ctx.lineTo(b.x + BRICK_W * 0.24, b.y + BRICK_H * 0.7);
-          ctx.lineTo(b.x + BRICK_W * 0.42, b.y + BRICK_H - 3);
-          ctx.moveTo(b.x + BRICK_W * 0.7, b.y + 3);
-          ctx.lineTo(b.x + BRICK_W * 0.56, b.y + BRICK_H * 0.5);
-          ctx.lineTo(b.x + BRICK_W * 0.76, b.y + BRICK_H * 0.75);
+          ctx.moveTo(b.x + BRICK_W * 0.20, b.y + 3);
+          ctx.lineTo(b.x + BRICK_W * 0.36, b.y + BRICK_H * 0.42);
+          ctx.lineTo(b.x + BRICK_W * 0.26, b.y + BRICK_H * 0.68);
+          ctx.lineTo(b.x + BRICK_W * 0.44, b.y + BRICK_H - 3);
+          ctx.moveTo(b.x + BRICK_W * 0.72, b.y + 3);
+          ctx.lineTo(b.x + BRICK_W * 0.58, b.y + BRICK_H * 0.5);
+          ctx.lineTo(b.x + BRICK_W * 0.78, b.y + BRICK_H * 0.78);
           ctx.lineTo(b.x + BRICK_W * 0.64, b.y + BRICK_H - 3);
           ctx.stroke();
+          // Tiny chips
+          ctx.fillStyle = "rgba(0,0,0,0.55)";
+          ctx.beginPath();
+          ctx.arc(b.x + BRICK_W * 0.30, b.y + BRICK_H * 0.55, 1.5, 0, Math.PI * 2);
+          ctx.arc(b.x + BRICK_W * 0.66, b.y + BRICK_H * 0.4, 1.2, 0, Math.PI * 2);
+          ctx.fill();
         }
 
         ctx.restore();
@@ -543,43 +628,126 @@ const BrickBreakerPage = () => {
       ctx.globalAlpha = 1;
       ctx.shadowBlur = 0;
 
-      // ── Ball ───────────────────────────────────────────────────────────
+      // ── Ball (chrome-glass marble) ────────────────────────────────────
       if (phase === "playing" || phase === "ready") {
         const ball = ballRef.current;
-        const ballGrad = ctx.createRadialGradient(ball.x - BALL_R * 0.3, ball.y - BALL_R * 0.3, 1, ball.x, ball.y, BALL_R);
+
+        // Soft contact shadow on the floor (always under the ball)
+        ctx.save();
+        ctx.globalAlpha = 0.35;
+        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.beginPath();
+        ctx.ellipse(ball.x, ball.y + BALL_R + 1, BALL_R * 0.9, BALL_R * 0.35, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Glow halo
+        ctx.shadowBlur = 24;
+        ctx.shadowColor = `hsl(${hue}, 100%, 65%)`;
+
+        // Base sphere with directional shading (light from upper-left)
+        const ballGrad = ctx.createRadialGradient(
+          ball.x - BALL_R * 0.45, ball.y - BALL_R * 0.45, BALL_R * 0.1,
+          ball.x, ball.y, BALL_R
+        );
         ballGrad.addColorStop(0, "#ffffff");
-        ballGrad.addColorStop(0.4, `hsl(${hue}, 100%, 75%)`);
-        ballGrad.addColorStop(1, `hsl(${(hue + 60) % 360}, 100%, 55%)`);
-        ctx.shadowBlur = 22;
-        ctx.shadowColor = `hsl(${hue}, 100%, 70%)`;
+        ballGrad.addColorStop(0.25, `hsl(${hue}, 100%, 88%)`);
+        ballGrad.addColorStop(0.65, `hsl(${hue}, 95%, 60%)`);
+        ballGrad.addColorStop(1, `hsl(${(hue + 30) % 360}, 90%, 28%)`);
         ctx.fillStyle = ballGrad;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
+
+        // Specular highlight (small bright spot)
+        ctx.fillStyle = "rgba(255,255,255,0.95)";
+        ctx.beginPath();
+        ctx.ellipse(ball.x - BALL_R * 0.4, ball.y - BALL_R * 0.45, BALL_R * 0.3, BALL_R * 0.22, -0.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tiny secondary highlight
+        ctx.fillStyle = "rgba(255,255,255,0.55)";
+        ctx.beginPath();
+        ctx.arc(ball.x - BALL_R * 0.55, ball.y - BALL_R * 0.15, BALL_R * 0.12, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Bottom rim glow (ambient bounce light)
+        ctx.strokeStyle = `hsla(${(hue + 180) % 360}, 100%, 70%, 0.45)`;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, BALL_R - 0.5, Math.PI * 0.15, Math.PI * 0.85);
+        ctx.stroke();
       }
 
-      // ── Paddle ─────────────────────────────────────────────────────────
+      // ── Paddle (polished metallic bar) ─────────────────────────────────
       if (phase === "playing" || phase === "ready") {
         const paddle = paddleRef.current;
         const isPowered = paddle.powerT > 0;
-        const pColor = isPowered ? `hsl(${hue}, 100%, 70%)` : `hsl(${(hue + 180) % 360}, 90%, 65%)`;
-        const paddleGrad = ctx.createLinearGradient(paddle.x - paddle.w / 2, PADDLE_Y - PADDLE_H / 2, paddle.x - paddle.w / 2, PADDLE_Y + PADDLE_H / 2);
-        paddleGrad.addColorStop(0, lightenColor(pColor, 0.4));
-        paddleGrad.addColorStop(0.4, pColor);
-        paddleGrad.addColorStop(1, darkenColor(pColor, 0.3));
-        ctx.shadowBlur = isPowered ? 30 : 16;
-        ctx.shadowColor = pColor;
-        ctx.fillStyle = paddleGrad;
+        const pHue = isPowered ? hue : (hue + 180) % 360;
+        const px = paddle.x - paddle.w / 2;
+        const py = PADDLE_Y - PADDLE_H / 2;
+
+        // Floor shadow
+        ctx.save();
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = "rgba(0,0,0,0.7)";
         ctx.beginPath();
-        roundRect(ctx, paddle.x - paddle.w / 2, PADDLE_Y - PADDLE_H / 2, paddle.w, PADDLE_H, 7);
+        ctx.ellipse(paddle.x, py + PADDLE_H + 3, paddle.w * 0.5, 3, 0, 0, Math.PI * 2);
         ctx.fill();
-        // highlight
+        ctx.restore();
+
+        // Glow
+        ctx.shadowBlur = isPowered ? 30 : 14;
+        ctx.shadowColor = `hsl(${pHue}, 100%, 60%)`;
+
+        // Metallic base — multi-stop vertical gradient
+        const pGrad = ctx.createLinearGradient(0, py, 0, py + PADDLE_H);
+        pGrad.addColorStop(0,    `hsl(${pHue}, 95%, 78%)`);
+        pGrad.addColorStop(0.18, `hsl(${pHue}, 95%, 92%)`);
+        pGrad.addColorStop(0.45, `hsl(${pHue}, 95%, 60%)`);
+        pGrad.addColorStop(0.62, `hsl(${pHue}, 95%, 40%)`);
+        pGrad.addColorStop(1,    `hsl(${pHue}, 90%, 22%)`);
+        ctx.fillStyle = pGrad;
+        ctx.beginPath();
+        roundRect(ctx, px, py, paddle.w, PADDLE_H, PADDLE_H / 2);
+        ctx.fill();
         ctx.shadowBlur = 0;
-        ctx.fillStyle = "rgba(255,255,255,0.28)";
+
+        // Specular top highlight band
+        const hlGrad = ctx.createLinearGradient(0, py + 1, 0, py + PADDLE_H * 0.45);
+        hlGrad.addColorStop(0, "rgba(255,255,255,0.9)");
+        hlGrad.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = hlGrad;
         ctx.beginPath();
-        roundRect(ctx, paddle.x - paddle.w / 2 + 3, PADDLE_Y - PADDLE_H / 2 + 2, paddle.w - 6, PADDLE_H * 0.38, 4);
+        roundRect(ctx, px + 4, py + 1.5, paddle.w - 8, PADDLE_H * 0.42, PADDLE_H * 0.3);
         ctx.fill();
+
+        // Soft side falloff (light fades at the ends — gives a chrome cylinder feel)
+        const sideGrad = ctx.createLinearGradient(px, 0, px + paddle.w, 0);
+        sideGrad.addColorStop(0, "rgba(0,0,0,0.35)");
+        sideGrad.addColorStop(0.15, "rgba(0,0,0,0)");
+        sideGrad.addColorStop(0.85, "rgba(0,0,0,0)");
+        sideGrad.addColorStop(1, "rgba(0,0,0,0.35)");
+        ctx.fillStyle = sideGrad;
+        ctx.beginPath();
+        roundRect(ctx, px, py, paddle.w, PADDLE_H, PADDLE_H / 2);
+        ctx.fill();
+
+        // Center seam
+        ctx.strokeStyle = "rgba(0,0,0,0.25)";
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(px + 6, py + PADDLE_H / 2);
+        ctx.lineTo(px + paddle.w - 6, py + PADDLE_H / 2);
+        ctx.stroke();
+
+        // Outer rim
+        ctx.strokeStyle = `hsla(${pHue}, 90%, 18%, 0.65)`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        roundRect(ctx, px + 0.5, py + 0.5, paddle.w - 1, PADDLE_H - 1, PADDLE_H / 2);
+        ctx.stroke();
       }
 
       // ── Float texts ─────────────────────────────────────────────────────
@@ -747,6 +915,39 @@ const BrickBreakerPage = () => {
           }}
         />
       </div>
+
+      {/* On-screen control buttons — fixed at bottom-left for one-hand play */}
+      {(phaseRef.current === "playing" || phaseRef.current === "ready") && (
+        <div
+          className="absolute z-20 bottom-3 left-3 flex items-center gap-2 select-none"
+          style={{ touchAction: "none" }}
+        >
+          <button
+            type="button"
+            aria-label="Geser kiri"
+            onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); holdLeftRef.current = true; }}
+            onPointerUp={(e) => { holdLeftRef.current = false; try { (e.currentTarget as HTMLButtonElement).releasePointerCapture(e.pointerId); } catch {} }}
+            onPointerCancel={() => { holdLeftRef.current = false; }}
+            onPointerLeave={() => { holdLeftRef.current = false; }}
+            onContextMenu={(e) => e.preventDefault()}
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-b from-white/30 to-white/10 backdrop-blur-md border-2 border-white/40 shadow-[0_4px_20px_rgba(130,80,255,0.5),inset_0_1px_0_rgba(255,255,255,0.5)] active:scale-95 active:from-white/50 active:to-white/20 transition-transform flex items-center justify-center text-white text-3xl font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+          >
+            ◀
+          </button>
+          <button
+            type="button"
+            aria-label="Geser kanan"
+            onPointerDown={(e) => { e.preventDefault(); (e.currentTarget as HTMLButtonElement).setPointerCapture(e.pointerId); holdRightRef.current = true; }}
+            onPointerUp={(e) => { holdRightRef.current = false; try { (e.currentTarget as HTMLButtonElement).releasePointerCapture(e.pointerId); } catch {} }}
+            onPointerCancel={() => { holdRightRef.current = false; }}
+            onPointerLeave={() => { holdRightRef.current = false; }}
+            onContextMenu={(e) => e.preventDefault()}
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-b from-white/30 to-white/10 backdrop-blur-md border-2 border-white/40 shadow-[0_4px_20px_rgba(130,80,255,0.5),inset_0_1px_0_rgba(255,255,255,0.5)] active:scale-95 active:from-white/50 active:to-white/20 transition-transform flex items-center justify-center text-white text-3xl font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+          >
+            ▶
+          </button>
+        </div>
+      )}
 
       <GuruQuizOverlay {...guruQuiz} />
     </div>
