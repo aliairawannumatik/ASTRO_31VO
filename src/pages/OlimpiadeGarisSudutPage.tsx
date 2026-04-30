@@ -566,28 +566,44 @@ const Soal13SVG = () => (
   </svg>
 );
 
-// ── Soal 14: Three crossing lines with angles a (top-left), b/y (lower-left), x (right) ──
-const Soal14SVG = () => (
-  <svg viewBox="0 0 420 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Line 1: from upper-left going down-right (steep) — passes (90,30) -> (210,260) */}
-    <line x1="90" y1="30" x2="210" y2="260" stroke="#ffffff" strokeWidth="2" />
-    {/* Line 2: from middle-left going up-right — passes (30,200) -> (400,90) */}
-    <line x1="30" y1="200" x2="400" y2="90" stroke="#ffffff" strokeWidth="2" />
-    {/* Line 3: from lower-left going up-right (gentle) — passes (40,250) -> (400,150) */}
-    <line x1="40" y1="250" x2="400" y2="150" stroke="#ffffff" strokeWidth="2" />
+// ── Soal 14: Three crossing lines (triangle) with angles a, b, y (left) and x (right) ──
+const Soal14SVG = () => {
+  // Endpoints (chosen so intersections are exact):
+  //   V (near-vertical): (177,25) → (125,270), passes (160,105) and (140,200)
+  //   B (upper-left to right vertex): (35,72) → (390,165), passes (160,105)
+  //   C (lower-left to right vertex): (30,215) → (390,165), passes (140,200)
+  return (
+    <svg viewBox="0 0 420 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+      {/* Pink shaded angle wedges (drawn first, beneath the lines) */}
+      {/* Angle a at (160,105) — between V going down and B going right */}
+      <path d="M 160 105 L 155.47 126.53 A 22 22 0 0 0 181.29 110.55 Z" fill="#fde2e2" stroke="none" />
+      {/* Angle b at (140,200) — between V going up and C going right */}
+      <path d="M 140 200 L 144.53 178.46 A 22 22 0 0 1 161.79 196.95 Z" fill="#fde2e2" stroke="none" />
+      {/* Angle y at (140,200) — between V going down and C going left */}
+      <path d="M 140 200 L 135.39 221.51 A 22 22 0 0 1 118.20 202.97 Z" fill="#fde2e2" stroke="none" />
+      {/* Angle x at (390,165) — between B going left-up and C going left-down */}
+      <path d="M 390 165 L 368.71 159.45 A 22 22 0 0 0 368.21 168.05 Z" fill="#fde2e2" stroke="none" />
 
-    {/* Approx intersection points: 1∩2 ≈ (132, 110); 1∩3 ≈ (170, 184); 2∩3 ≈ (350, 175 area) */}
-    <circle cx="132" cy="110" r="3" fill="#ef4444" />
-    <circle cx="170" cy="184" r="3" fill="#ef4444" />
-    <circle cx="350" cy="165" r="3" fill="#ef4444" />
+      {/* Lines (dark navy) */}
+      <line x1="177" y1="25"  x2="125" y2="270" stroke="#1e3a8a" strokeWidth="2.2" strokeLinecap="round" />
+      <line x1="35"  y1="72"  x2="390" y2="165" stroke="#1e3a8a" strokeWidth="2.2" strokeLinecap="round" />
+      <line x1="30"  y1="215" x2="390" y2="165" stroke="#1e3a8a" strokeWidth="2.2" strokeLinecap="round" />
 
-    {/* Angle labels */}
-    <text x="138" y="125" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">a</text>
-    <text x="166" y="172" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
-    <text x="158" y="208" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
-    <text x="334" y="180" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
-  </svg>
-);
+      {/* Endpoint dots (red) */}
+      <circle cx="177" cy="25"  r="3.5" fill="#b91c1c" />
+      <circle cx="125" cy="270" r="3.5" fill="#b91c1c" />
+      <circle cx="35"  cy="72"  r="3.5" fill="#b91c1c" />
+      <circle cx="30"  cy="215" r="3.5" fill="#b91c1c" />
+      <circle cx="390" cy="165" r="3.5" fill="#b91c1c" />
+
+      {/* Angle labels (italic serif, dark navy) */}
+      <text x="167" y="121" fill="#1e1b4b" fontSize="16" fontStyle="italic" fontFamily="'Times New Roman', serif">a</text>
+      <text x="148" y="195" fill="#1e1b4b" fontSize="16" fontStyle="italic" fontFamily="'Times New Roman', serif">b</text>
+      <text x="123" y="215" fill="#1e1b4b" fontSize="16" fontStyle="italic" fontFamily="'Times New Roman', serif">y</text>
+      <text x="372" y="169" fill="#1e1b4b" fontSize="16" fontStyle="italic" fontFamily="'Times New Roman', serif">x</text>
+    </svg>
+  );
+};
 
 // ── Soal 15: 2 horizontal parallels l₁, l₂ cut by vertical transversal ───────
 const Soal15SVG = () => (
