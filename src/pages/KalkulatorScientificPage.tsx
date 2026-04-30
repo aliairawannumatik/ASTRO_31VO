@@ -929,11 +929,14 @@ const KalkulatorScientificPage = () => {
             >
               (
             </CalcButton>
+            {/* ) | shift: , (separator for KPK / FPB / nPr / etc.) */}
             <CalcButton
-              onClick={() => handleInput(")")}
+              onClick={() => shiftMode ? handleInput(",") : handleInput(")")}
               className="h-10 text-sm bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : ","}
+              subLabelColor="text-purple-400"
             >
-              )
+              {shiftMode ? "," : ")"}
             </CalcButton>
             <CalcButton
               onClick={() => shiftMode ? handleInput("nPr") : handleInput("!")}
