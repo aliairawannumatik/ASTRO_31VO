@@ -184,7 +184,8 @@ const renderExpression = (
       const hasClose = i < expr.length;
       if (hasClose) i++; // skip closing )
 
-      // Tiny invisible anchor so user can place cursor BEFORE the superscript by clicking the "^"
+      // Tiny invisible anchor so user can place cursor BEFORE the superscript by clicking on it.
+      // Renders as a zero-width inline element — no visible "^" character.
       elements.push(
         <span
           key={`hat-${caretIdx}`}
@@ -192,10 +193,9 @@ const renderExpression = (
             e.stopPropagation();
             onSetCursor(caretIdx);
           }}
-          className="cursor-text select-none text-cyan-300/30"
-        >
-          ^
-        </span>
+          aria-hidden="true"
+          className="cursor-text select-none inline-block w-0 overflow-hidden"
+        />
       );
 
       // Superscript block — clickable per character, with cursor support inside
