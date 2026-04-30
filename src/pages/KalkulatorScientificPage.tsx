@@ -791,11 +791,14 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "eˣ" : "ln"}
             </CalcButton>
+            {/* ×10ⁿ : scientific notation | shift: FPB/gcd */}
             <CalcButton
-              onClick={() => handleInput("⁻¹")}
-              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              onClick={() => shiftMode ? handleFunction("gcd", "FPB") : handleInput("×10^(")}
+              className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "FPB"}
+              subLabelColor="text-purple-400"
             >
-              x⁻¹
+              {shiftMode ? "FPB(" : "×10ⁿ"}
             </CalcButton>
           </div>
 
@@ -869,14 +872,11 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "mod" : "%"}
             </CalcButton>
-            {/* ×10ⁿ : scientific notation | shift: FPB/gcd */}
             <CalcButton
-              onClick={() => shiftMode ? handleFunction("gcd", "FPB") : handleInput("×10^(")}
-              className="h-10 text-[10px] bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "FPB"}
-              subLabelColor="text-purple-400"
+              onClick={() => handleInput("⁻¹")}
+              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
             >
-              {shiftMode ? "FPB(" : "×10ⁿ"}
+              x⁻¹
             </CalcButton>
             <CalcButton
               onClick={() => handleInput("(")}
