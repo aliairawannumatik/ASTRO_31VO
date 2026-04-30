@@ -21,29 +21,6 @@ import gambar12 from "@/assets/Gambar_12_Sudut_Saling_sepihak_1773289509182.png"
 import gambar13 from "@/assets/Gambar_13_Jumlah_sudut_pada_segitiga_1773289509182.png";
 import gambar14 from "@/assets/Gambar_14_Sudut-sudut_pada_segitiga_1773289509182.png";
 import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.png";
-import gambar17 from "@/assets/Gambar_17_SOAL_1773289509183.png";
-import gambar18 from "@/assets/Gambar_18_SOAL_1773289509184.png";
-import gambar19 from "@/assets/Gambar_19_SOAL_1773289509184.png";
-import gambar20 from "@/assets/Gambar_20_SOAL_1773290091432.png";
-import gambar21 from "@/assets/Gambar_21_SOAL_1773290091432.png";
-import gambar22 from "@/assets/Gambar_22_SOAL_1773290091433.png";
-import gambar23 from "@/assets/Gambar_23_SOAL_1773290091433.png";
-import gambar24 from "@/assets/Gambar_24_SOAL_1773290091434.png";
-import gambar25 from "@/assets/Gambar_25_SOAL_1773290091434.png";
-import gambar26 from "@/assets/Gambar_26_SOAL_1773290091435.png";
-import gambar27 from "@/assets/Gambar_27_SOAL_1773290091435.png";
-import gambar28 from "@/assets/Gambar_28_SOAL_1773290091436.png";
-import gambar29 from "@/assets/Gambar_29_SOAL_1773290091436.png";
-import gambar30 from "@/assets/Gambar_30_SOAL_1773290091436.png";
-import gambar31 from "@/assets/Gambar_31_SOAL_1773290091437.png";
-import gambar32 from "@/assets/Gambar_32_SOAL_1773290091437.png";
-import gambar33 from "@/assets/Gambar_33_SOAL_1773290091437.png";
-import gambar34 from "@/assets/Gambar_34_SOAL_1773290091438.png";
-import gambar35 from "@/assets/Gambar_35_SOAL_1773290091438.png";
-import gambar36 from "@/assets/Gambar_36_SOAL_1773290091438.png";
-import gambar37 from "@/assets/Gambar_37_SOAL_1773290091439.png";
-import gambar38 from "@/assets/Gambar_38_SOAL_1773290091440.png";
-import gambar39 from "@/assets/Gambar_39_SOAL_1773290091440.png";
 import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
@@ -374,6 +351,612 @@ const Soal1SVG = () => (
   </svg>
 );
 
+// ── Shared marker definitions for arrows on soal SVGs ────────────────────────
+const ArrowDef = ({ id, color = "#ffffff" }: { id: string; color?: string }) => (
+  <marker id={id} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+    <path d="M 0 0 L 7 4 L 0 8 Z" fill={color} />
+  </marker>
+);
+
+// ── Soal 2: Two parallel lines a, b cut by horizontal transversal c ──────────
+const Soal2SVG = () => (
+  <svg viewBox="0 0 420 220" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s2" /></defs>
+    {/* Transversal c */}
+    <line x1="20" y1="120" x2="400" y2="120" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s2)" />
+    {/* Line a (left, ↗) */}
+    <line x1="60" y1="200" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s2)" />
+    {/* Line b (right, ↗, parallel to a) */}
+    <line x1="220" y1="200" x2="340" y2="40" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s2)" />
+
+    <text x="178" y="32" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">a</text>
+    <text x="338" y="32" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
+    <text x="406" y="116" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">c</text>
+
+    {/* Numbers around left intersection (120, 120) */}
+    <text x="100" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">1</text>
+    <text x="128" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">2</text>
+    <text x="128" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">3</text>
+    <text x="100" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">4</text>
+
+    {/* Numbers around right intersection (280, 120) */}
+    <text x="260" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">5</text>
+    <text x="288" y="113" fill="#38bdf8" fontSize="12" fontWeight="bold">6</text>
+    <text x="288" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">7</text>
+    <text x="260" y="138" fill="#38bdf8" fontSize="12" fontWeight="bold">8</text>
+
+    <circle cx="120" cy="120" r="3" fill="#ef4444" />
+    <circle cx="280" cy="120" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 3: Two parallel horizontal lines (A, B) cut by transversal ──────────
+const Soal3SVG = () => (
+  <svg viewBox="0 0 380 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="80" x2="360" y2="80" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="180" x2="360" y2="180" stroke="#ffffff" strokeWidth="2" />
+    {/* Transversal — slope 220/160 = 1.375; at y=80 x≈164, at y=180 x≈236 */}
+    <line x1="120" y1="20" x2="280" y2="240" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="80" y="60" fill="#38bdf8" fontSize="16" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
+    <text x="80" y="160" fill="#38bdf8" fontSize="16" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
+
+    {/* Top intersection numbers */}
+    <text x="142" y="73" fill="#fbbf24" fontSize="13" fontWeight="bold">1</text>
+    <text x="172" y="73" fill="#fbbf24" fontSize="13" fontWeight="bold">2</text>
+    <text x="172" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">3</text>
+    <text x="142" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">4</text>
+
+    {/* Bottom intersection numbers */}
+    <text x="214" y="173" fill="#fbbf24" fontSize="13" fontWeight="bold">1</text>
+    <text x="244" y="173" fill="#fbbf24" fontSize="13" fontWeight="bold">2</text>
+    <text x="244" y="198" fill="#fbbf24" fontSize="13" fontWeight="bold">3</text>
+    <text x="214" y="198" fill="#fbbf24" fontSize="13" fontWeight="bold">4</text>
+
+    <circle cx="164" cy="80" r="3" fill="#ef4444" />
+    <circle cx="236" cy="180" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 4: Two parallel lines BD, EG; transversal AH; angles (3x)°, (x+40)° ─
+const Soal4SVG = () => (
+  <svg viewBox="0 0 360 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="100" x2="320" y2="100" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="220" x2="320" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* Transversal AH near vertical, slight tilt */}
+    <line x1="160" y1="20" x2="200" y2="280" stroke="#ffffff" strokeWidth="2" />
+
+    {/* C ≈ (172, 100), F ≈ (190, 220) on the transversal */}
+    <text x="186" y="14" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
+    <text x="22" y="106" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
+    <text x="328" y="106" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
+    <text x="160" y="94" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
+    <text x="22" y="226" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">E</text>
+    <text x="328" y="226" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">G</text>
+    <text x="174" y="240" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">F</text>
+    <text x="208" y="294" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">H</text>
+
+    {/* Angle labels */}
+    <text x="200" y="120" fill="#fbbf24" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>)°</text>
+    <text x="208" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">(<tspan fontStyle="italic">x</tspan>+40)°</text>
+
+    <circle cx="172" cy="100" r="3" fill="#ef4444" />
+    <circle cx="190" cy="220" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 5: Line C-B-A horizontal, ray BD up; angles (2x+5)°, (3x-25)° ───────
+const Soal5SVG = () => (
+  <svg viewBox="0 0 380 200" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="150" x2="360" y2="150" stroke="#ffffff" strokeWidth="2" />
+    <line x1="200" y1="150" x2="290" y2="40" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="20" y="170" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
+    <text x="194" y="172" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
+    <text x="350" y="170" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
+    <text x="294" y="38" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
+
+    <text x="120" y="142" fill="#fbbf24" fontSize="13" fontFamily="serif">(2<tspan fontStyle="italic">x</tspan>+5)°</text>
+    <text x="218" y="142" fill="#fbbf24" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>-25)°</text>
+
+    <circle cx="200" cy="150" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 7: Triangle PQR with extension; ∠Q=72°, 7x at R, 6x exterior at Q ───
+const Soal7SVG = () => (
+  <svg viewBox="0 0 360 220" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s7" /></defs>
+    {/* Horizontal P-Q-extension */}
+    <line x1="40" y1="170" x2="340" y2="170" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s7)" />
+    {/* PR */}
+    <line x1="60" y1="170" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" />
+    {/* QR */}
+    <line x1="240" y1="170" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="44" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
+    <text x="232" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
+    <text x="184" y="38" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">R</text>
+
+    {/* 7x near R on side QR */}
+    <text x="142" y="78" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan></text>
+    {/* 72° at Q (interior, between QP and QR) */}
+    <text x="208" y="162" fill="#fbbf24" fontSize="12" fontFamily="serif">72°</text>
+    {/* 6x exterior at Q (between QR and Q-extension) */}
+    <text x="262" y="162" fill="#fbbf24" fontSize="13" fontFamily="serif">6<tspan fontStyle="italic">x</tspan></text>
+  </svg>
+);
+
+// ── Soal 8: Triangle ABC with D on extension of AB; (3x-15)° at C, 2x and (5x+5)° at B ──
+const Soal8SVG = () => (
+  <svg viewBox="0 0 380 220" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s8" /></defs>
+    <line x1="20" y1="170" x2="360" y2="170" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s8)" />
+    {/* AC */}
+    <line x1="40" y1="170" x2="200" y2="40" stroke="#ffffff" strokeWidth="2" />
+    {/* BC */}
+    <line x1="240" y1="170" x2="200" y2="40" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="32" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
+    <text x="232" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
+    <text x="350" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
+    <text x="194" y="34" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
+
+    <text x="170" y="110" fill="#fbbf24" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>-15)°</text>
+    <text x="208" y="162" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan></text>
+    <text x="246" y="162" fill="#fbbf24" fontSize="13" fontFamily="serif">(5<tspan fontStyle="italic">x</tspan>+5)°</text>
+  </svg>
+);
+
+// ── Soal 9: Triangle ABC, E above C, D right of B; ∠A=40°, (4x-5)° at C, 5x° exterior at B ──
+const Soal9SVG = () => (
+  <svg viewBox="0 0 380 260" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s9" /></defs>
+    {/* A-B-D horizontal */}
+    <line x1="20" y1="220" x2="360" y2="220" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s9)" />
+    {/* AC and CE collinear: A(40,220) -> C(160,80) -> E(200,33) */}
+    <line x1="40" y1="220" x2="200" y2="33" stroke="#ffffff" strokeWidth="2" />
+    {/* BC: B(220,220) -> C(160,80) */}
+    <line x1="220" y1="220" x2="160" y2="80" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="32" y="240" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
+    <text x="212" y="240" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
+    <text x="350" y="240" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
+    <text x="170" y="80" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
+    <text x="206" y="30" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">E</text>
+
+    <text x="60" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">40°</text>
+    <text x="100" y="92" fill="#fbbf24" fontSize="13" fontFamily="serif">(4<tspan fontStyle="italic">x</tspan>-5)°</text>
+    <text x="232" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">5<tspan fontStyle="italic">x</tspan>°</text>
+  </svg>
+);
+
+// ── Soal 13: Cyclic quadrilateral inscribed in a circle with α, β, δ, θ ──────
+const Soal13SVG = () => (
+  <svg viewBox="0 0 280 280" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <circle cx="140" cy="140" r="110" stroke="#ffffff" strokeWidth="2" fill="none" />
+    {/* Vertices on circle: α(left), θ(top-right), δ(right), β(bottom) */}
+    {/* Polar angles: α≈180°, θ≈55°, δ≈340°, β≈260° */}
+    {/* α: (30,140), θ: (203,50), δ: (243,178), β: (121,248) */}
+    <polygon points="30,140 203,50 243,178 121,248" fill="none" stroke="#ffffff" strokeWidth="2" />
+
+    {/* Arcs at each vertex */}
+    {/* α */}
+    <path d="M 51,128 A 22,22 0 0,1 47,158" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* θ at top-right */}
+    <path d="M 188,68 A 20,20 0 0,1 222,67" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* δ at right */}
+    <path d="M 226,160 A 20,20 0 0,1 224,194" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    {/* β at bottom */}
+    <path d="M 102,234 A 22,22 0 0,1 142,233" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+
+    <text x="56" y="148" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">α</text>
+    <text x="195" y="84" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">θ</text>
+    <text x="206" y="186" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">δ</text>
+    <text x="118" y="228" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">β</text>
+
+    <circle cx="30" cy="140" r="3" fill="#ef4444" />
+    <circle cx="203" cy="50" r="3" fill="#ef4444" />
+    <circle cx="243" cy="178" r="3" fill="#ef4444" />
+    <circle cx="121" cy="248" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 14: Three crossing lines with angles a (top-left), b/y (lower-left), x (right) ──
+const Soal14SVG = () => (
+  <svg viewBox="0 0 420 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Line 1: from upper-left going down-right (steep) — passes (90,30) -> (210,260) */}
+    <line x1="90" y1="30" x2="210" y2="260" stroke="#ffffff" strokeWidth="2" />
+    {/* Line 2: from middle-left going up-right — passes (30,200) -> (400,90) */}
+    <line x1="30" y1="200" x2="400" y2="90" stroke="#ffffff" strokeWidth="2" />
+    {/* Line 3: from lower-left going up-right (gentle) — passes (40,250) -> (400,150) */}
+    <line x1="40" y1="250" x2="400" y2="150" stroke="#ffffff" strokeWidth="2" />
+
+    {/* Approx intersection points: 1∩2 ≈ (132, 110); 1∩3 ≈ (170, 184); 2∩3 ≈ (350, 175 area) */}
+    <circle cx="132" cy="110" r="3" fill="#ef4444" />
+    <circle cx="170" cy="184" r="3" fill="#ef4444" />
+    <circle cx="350" cy="165" r="3" fill="#ef4444" />
+
+    {/* Angle labels */}
+    <text x="138" y="125" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">a</text>
+    <text x="166" y="172" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
+    <text x="158" y="208" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
+    <text x="334" y="180" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+  </svg>
+);
+
+// ── Soal 15: 2 horizontal parallels l₁, l₂ cut by vertical transversal ───────
+const Soal15SVG = () => (
+  <svg viewBox="0 0 360 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s15" /></defs>
+    <line x1="40" y1="100" x2="320" y2="100" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s15)" />
+    <line x1="40" y1="200" x2="320" y2="200" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s15)" />
+    <line x1="180" y1="20" x2="180" y2="260" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="328" y="106" fill="#fbbf24" fontSize="13" fontFamily="serif" fontStyle="italic">l₁</text>
+    <text x="328" y="206" fill="#fbbf24" fontSize="13" fontFamily="serif" fontStyle="italic">l₂</text>
+
+    {/* Arc and label for x+39 (top intersection, right side, below l₁) */}
+    <path d="M 200,100 A 20,20 0 0,1 180,120" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    <text x="190" y="124" fill="#fbbf24" fontSize="13" fontFamily="serif"><tspan fontStyle="italic">x</tspan> + 39</text>
+
+    {/* Arc and label for 2x (bottom intersection) */}
+    <path d="M 200,200 A 20,20 0 0,1 180,220" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    <text x="194" y="224" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan></text>
+
+    <circle cx="180" cy="100" r="3" fill="#ef4444" />
+    <circle cx="180" cy="200" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 16: Two intersecting lines forming X with p, q, r, s ────────────────
+const Soal16SVG = () => (
+  <svg viewBox="0 0 420 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="60" x2="400" y2="180" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="180" x2="400" y2="60" stroke="#ffffff" strokeWidth="2" />
+
+    {/* Center ≈ (210, 120) */}
+    <circle cx="210" cy="120" r="3.5" fill="#ef4444" />
+
+    <text x="206" y="100" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">p</text>
+    <text x="240" y="124" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">q</text>
+    <text x="206" y="148" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">r</text>
+    <text x="170" y="124" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">s</text>
+  </svg>
+);
+
+// ── Soal 17: Cube ABCD.EFGH with diagonals BG, GE, EB highlighted ────────────
+const Soal17SVG = () => {
+  // Cube vertices (front face A,B,F,E; back face D,C,G,H; depth offset = (-50,-40))
+  const A = [80, 220], B = [220, 220], C = [270, 180], D = [130, 180];
+  const E = [80, 100], F = [220, 100], G = [270, 60], H = [130, 60];
+  return (
+    <svg viewBox="0 0 320 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+      {/* Hidden edges (DA, DC, DH dashed) */}
+      <line x1={D[0]} y1={D[1]} x2={A[0]} y2={A[1]} stroke="#ffffff" strokeWidth="1.5" strokeDasharray="5,4" />
+      <line x1={D[0]} y1={D[1]} x2={C[0]} y2={C[1]} stroke="#ffffff" strokeWidth="1.5" strokeDasharray="5,4" />
+      <line x1={D[0]} y1={D[1]} x2={H[0]} y2={H[1]} stroke="#ffffff" strokeWidth="1.5" strokeDasharray="5,4" />
+
+      {/* Visible edges */}
+      <line x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={B[0]} y1={B[1]} x2={C[0]} y2={C[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={A[0]} y1={A[1]} x2={E[0]} y2={E[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={B[0]} y1={B[1]} x2={F[0]} y2={F[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={C[0]} y1={C[1]} x2={G[0]} y2={G[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={E[0]} y1={E[1]} x2={F[0]} y2={F[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={F[0]} y1={F[1]} x2={G[0]} y2={G[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={G[0]} y1={G[1]} x2={H[0]} y2={H[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={H[0]} y1={H[1]} x2={E[0]} y2={E[1]} stroke="#ffffff" strokeWidth="2" />
+
+      {/* Diagonals BG, GE, EB highlighted */}
+      <line x1={B[0]} y1={B[1]} x2={G[0]} y2={G[1]} stroke="#ef4444" strokeWidth="2.4" />
+      <line x1={G[0]} y1={G[1]} x2={E[0]} y2={E[1]} stroke="#ef4444" strokeWidth="2.4" />
+      <line x1={E[0]} y1={E[1]} x2={B[0]} y2={B[1]} stroke="#ef4444" strokeWidth="2.4" />
+
+      {/* Vertex labels */}
+      <text x={A[0] - 14} y={A[1] + 15} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+      <text x={B[0] + 4} y={B[1] + 15} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+      <text x={C[0] + 6} y={C[1] + 4} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+      <text x={D[0] - 4} y={D[1] - 4} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
+      <text x={E[0] - 14} y={E[1] - 4} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">E</text>
+      <text x={F[0] - 4} y={F[1] - 4} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">F</text>
+      <text x={G[0] + 4} y={G[1] - 2} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">G</text>
+      <text x={H[0] - 4} y={H[1] - 4} fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">H</text>
+    </svg>
+  );
+};
+
+// ── Soal 18: Cross at O with right angle, 7x° between vertical-up & diag,2x° between horiz-left & diag ──
+const Soal18SVG = () => (
+  <svg viewBox="0 0 380 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="140" x2="360" y2="140" stroke="#ffffff" strokeWidth="2" />
+    <line x1="200" y1="20" x2="200" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* Diagonal A(lower-left) -> upper-right */}
+    <line x1="40" y1="180" x2="360" y2="100" stroke="#ffffff" strokeWidth="2" />
+
+    {/* Right-angle marker at upper-right (between vertical-up and horizontal-right) */}
+    <polyline points="200,154 214,154 214,140" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+
+    <text x="204" y="148" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">O</text>
+    <text x="44" y="200" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+    <text x="346" y="134" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+
+    <text x="170" y="100" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan>°</text>
+    <text x="100" y="160" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan>°</text>
+
+    <circle cx="200" cy="140" r="3" fill="#ef4444" />
+    <circle cx="40" cy="180" r="3" fill="#ef4444" />
+    <circle cx="360" cy="100" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 19: Three lines with angles x, b, y, a (triangle config) ────────────
+const Soal19SVG = () => (
+  <svg viewBox="0 0 400 260" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Bottom horizontal */}
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#ffffff" strokeWidth="2" />
+    {/* Diagonal from lower-left going up-right (creates x at left, b at top) */}
+    <line x1="60" y1="200" x2="280" y2="40" stroke="#ffffff" strokeWidth="2" />
+    {/* Diagonal from lower-right going up-left (creates y at right, b at top, a near y) */}
+    <line x1="320" y1="200" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" />
+
+    {/* x at lower-left vertex (above horizontal, right of diagonal) */}
+    <text x="76" y="194" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+    {/* b at top apex */}
+    <text x="226" y="118" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
+    {/* a small angle between bottom diagonal and horizontal at right vertex */}
+    <text x="290" y="192" fill="#fbbf24" fontSize="13" fontStyle="italic" fontFamily="serif">a</text>
+    {/* y exterior at right vertex */}
+    <text x="306" y="194" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
+
+    <circle cx="60" cy="200" r="3" fill="#ef4444" />
+    <circle cx="320" cy="200" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 20: Trapezoid ABCD with extra ray; right angle at A, 2x° below A, 120° at C ──
+const Soal20SVG = () => (
+  <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Top side AB */}
+    <line x1="60" y1="80" x2="360" y2="80" stroke="#ffffff" strokeWidth="2" />
+    {/* Bottom side DC */}
+    <line x1="40" y1="220" x2="320" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* AD */}
+    <line x1="60" y1="80" x2="40" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* BC */}
+    <line x1="360" y1="80" x2="320" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* Inner triangle from A down to a point on DC */}
+    <line x1="60" y1="80" x2="180" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* Small ray going up from A creating x */}
+    <line x1="60" y1="80" x2="40" y2="20" stroke="#ffffff" strokeWidth="2" />
+
+    {/* Right angle marker at A (between AB and the ray going up) */}
+    <polyline points="60,68 72,68 72,80" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+
+    <text x="44" y="76" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+    <text x="364" y="76" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    <text x="22" y="240" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
+    <text x="324" y="240" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+
+    {/* x label near small ray */}
+    <text x="36" y="14" fill="#fbbf24" fontSize="13" fontStyle="italic" fontFamily="serif">x</text>
+    {/* 2x just below A */}
+    <text x="64" y="116" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan></text>
+    {/* 120° at C */}
+    <text x="270" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">120°</text>
+  </svg>
+);
+
+// ── Soal 21: Right angle at Q, ray QS between QP (up) and QR (right) ─────────
+const Soal21SVG = () => (
+  <svg viewBox="0 0 380 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Horizontal through Q (extends left and right) */}
+    <line x1="20" y1="240" x2="340" y2="240" stroke="#ffffff" strokeWidth="2" />
+    {/* Vertical PQ (going up from Q) */}
+    <line x1="120" y1="20" x2="120" y2="240" stroke="#ffffff" strokeWidth="2" />
+    {/* QS diagonal */}
+    <line x1="120" y1="240" x2="300" y2="100" stroke="#ffffff" strokeWidth="2" />
+
+    {/* Right-angle marker at lower-left of Q (between left-extension and vertical) */}
+    <polyline points="106,240 106,226 120,226" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+
+    <text x="114" y="14" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
+    <text x="116" y="266" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
+    <text x="320" y="244" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
+    <text x="306" y="98" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
+
+    {/* Arcs at Q showing the two angles */}
+    {/* (6x+4)° between PQ (up) and QS */}
+    <path d="M 120,180 A 60,60 0 0,1 168,204" fill="none" stroke="#ef4444" strokeWidth="1.6" />
+    <text x="138" y="178" fill="#ef4444" fontSize="13" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
+    {/* (3x+5)° between QS and QR (horizontal-right) */}
+    <path d="M 200,240 A 80,80 0 0,0 184,196" fill="none" stroke="#a855f7" strokeWidth="1.6" />
+    <text x="178" y="232" fill="#a855f7" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
+
+    <circle cx="120" cy="240" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 22: Two parallel lines l, m with diagonal & triangle (1..6 angles) ──
+const Soal22SVG = () => (
+  <svg viewBox="0 0 400 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s22" /></defs>
+    {/* Top horizontal l */}
+    <line x1="20" y1="80" x2="380" y2="80" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s22)" />
+    {/* Bottom horizontal m */}
+    <line x1="20" y1="240" x2="380" y2="240" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s22)" />
+    {/* Diagonal from upper-left going down-right, crossing both lines */}
+    <line x1="200" y1="20" x2="120" y2="290" stroke="#ffffff" strokeWidth="2" />
+    {/* Triangle: from (170, 130) on diagonal go to point on bottom line */}
+    <line x1="170" y1="130" x2="320" y2="240" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="364" y="74" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">l</text>
+    <text x="364" y="234" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">m</text>
+
+    {/* Numbers at top intersection ≈ (180, 80) */}
+    <text x="184" y="74" fill="#38bdf8" fontSize="13" fontWeight="bold">4</text>
+    <text x="156" y="98" fill="#38bdf8" fontSize="13" fontWeight="bold">1</text>
+
+    {/* Numbers at triangle apex (170, 130) */}
+    <text x="174" y="124" fill="#38bdf8" fontSize="13" fontWeight="bold">2</text>
+    <text x="174" y="148" fill="#38bdf8" fontSize="13" fontWeight="bold">6</text>
+
+    {/* Numbers at bottom intersection of diagonal & m ≈ (138, 240) */}
+    <text x="148" y="234" fill="#38bdf8" fontSize="13" fontWeight="bold">5</text>
+    {/* 3 inside triangle near bottom-right */}
+    <text x="282" y="234" fill="#38bdf8" fontSize="13" fontWeight="bold">3</text>
+
+    <circle cx="180" cy="80" r="3" fill="#ef4444" />
+    <circle cx="138" cy="240" r="3" fill="#ef4444" />
+    <circle cx="320" cy="240" r="3" fill="#ef4444" />
+    <circle cx="170" cy="130" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 23: Triangle ABC with D on extension of AC; ∠C=108° ext, ∠B=36° ────
+const Soal23SVG = () => (
+  <svg viewBox="0 0 380 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* AB horizontal */}
+    <line x1="40" y1="240" x2="340" y2="240" stroke="#ffffff" strokeWidth="2" />
+    {/* AD diagonal through C */}
+    <line x1="40" y1="240" x2="220" y2="20" stroke="#ffffff" strokeWidth="2" />
+    {/* BC: B(300,240) -> C(160,80) */}
+    <line x1="300" y1="240" x2="160" y2="80" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="32" y="262" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+    <text x="304" y="262" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    <text x="138" y="78" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+    <text x="226" y="22" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
+
+    {/* 108° at C between CD (up-right, going to D) and CB (down-right) */}
+    <text x="166" y="100" fill="#fbbf24" fontSize="13" fontFamily="serif">108°</text>
+    {/* 36° at B (interior) */}
+    <text x="262" y="232" fill="#fbbf24" fontSize="13" fontFamily="serif">36°</text>
+
+    <circle cx="160" cy="80" r="3" fill="#ef4444" />
+    <circle cx="40" cy="240" r="3" fill="#ef4444" />
+    <circle cx="300" cy="240" r="3" fill="#ef4444" />
+    <circle cx="220" cy="20" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 24: Parallelogram SPQR with PT (through U) and QT to T below; x at U ──
+const Soal24SVG = () => (
+  <svg viewBox="0 0 440 360" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Parallelogram S(40,180) - P(140,40) - Q(380,40) - R(280,180) */}
+    <polygon points="40,180 140,40 380,40 280,180" fill="none" stroke="#ffffff" strokeWidth="2" />
+    {/* PT line through U (on SR). U at (180,180). T at (220,320) */}
+    <line x1="140" y1="40" x2="220" y2="320" stroke="#ffffff" strokeWidth="2" />
+    {/* QT line from Q to T */}
+    <line x1="380" y1="40" x2="220" y2="320" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="22" y="194" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
+    <text x="130" y="34" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
+    <text x="384" y="34" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
+    <text x="288" y="194" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
+    <text x="174" y="198" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">U</text>
+    <text x="214" y="338" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">T</text>
+
+    {/* arc + x at U (between US going left and UP going up-left) */}
+    <path d="M 158,170 A 22,22 0 0,1 168,144" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+    <text x="158" y="160" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+
+    <circle cx="180" cy="180" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 25: Horizontal line with one ray going up; angles x (left) y (right) ──
+const Soal25SVG = () => (
+  <svg viewBox="0 0 400 200" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="160" x2="380" y2="160" stroke="#ffffff" strokeWidth="2" />
+    <line x1="220" y1="160" x2="170" y2="40" stroke="#ffffff" strokeWidth="2" />
+
+    {/* x arc (between ray and horizontal-left) */}
+    <path d="M 188,160 A 32,32 0 0,1 207,131" fill="none" stroke="#ef4444" strokeWidth="1.6" />
+    <text x="190" y="152" fill="#ef4444" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+
+    {/* y arc (between ray and horizontal-right) - larger */}
+    <path d="M 213,134 A 36,36 0 0,1 256,160" fill="none" stroke="#22c55e" strokeWidth="1.6" />
+    <text x="226" y="152" fill="#22c55e" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
+
+    <circle cx="220" cy="160" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 26: Two parallel lines AD (top), EG (bottom); triangle B-F-C ────────
+const Soal26SVG = () => (
+  <svg viewBox="0 0 400 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <ArrowDef id="ar-s26-l" color="#ffffff" />
+      <marker id="ar-s26-l-start" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
+        <path d="M 7 0 L 0 4 L 7 8 Z" fill="#ffffff" />
+      </marker>
+    </defs>
+    {/* Top line AD */}
+    <line x1="20" y1="60" x2="380" y2="60" stroke="#ffffff" strokeWidth="2" markerStart="url(#ar-s26-l-start)" markerEnd="url(#ar-s26-l)" />
+    {/* Bottom line EG */}
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#ffffff" strokeWidth="2" markerStart="url(#ar-s26-l-start)" markerEnd="url(#ar-s26-l)" />
+    {/* B-F */}
+    <line x1="120" y1="60" x2="200" y2="200" stroke="#ffffff" strokeWidth="2" />
+    {/* C-F */}
+    <line x1="280" y1="60" x2="200" y2="200" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="20" y="50" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+    <text x="116" y="50" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    <text x="276" y="50" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+    <text x="364" y="50" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
+    <text x="20" y="222" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">E</text>
+    <text x="194" y="222" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">F</text>
+    <text x="364" y="222" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">G</text>
+
+    <circle cx="120" cy="60" r="3" fill="#ef4444" />
+    <circle cx="280" cy="60" r="3" fill="#ef4444" />
+    <circle cx="200" cy="200" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 27: Two parallels with zigzag; 30° top, a° middle, 50° bottom ───────
+const Soal27SVG = () => (
+  <svg viewBox="0 0 380 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s27" /></defs>
+    <line x1="40" y1="40" x2="360" y2="40" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s27)" />
+    <line x1="40" y1="240" x2="360" y2="240" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s27)" />
+    {/* Zigzag: top point (90,40) -> middle vertex (240,140) -> bottom (90,240) */}
+    <line x1="90" y1="40" x2="240" y2="140" stroke="#ffffff" strokeWidth="2" />
+    <line x1="240" y1="140" x2="90" y2="240" stroke="#ffffff" strokeWidth="2" />
+
+    <text x="100" y="64" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
+    <text x="206" y="148" fill="#fbbf24" fontSize="13" fontFamily="serif"><tspan fontStyle="italic">a</tspan>°</text>
+    <text x="100" y="232" fill="#fbbf24" fontSize="13" fontFamily="serif">50°</text>
+
+    <circle cx="90" cy="40" r="3" fill="#ef4444" />
+    <circle cx="240" cy="140" r="3" fill="#ef4444" />
+    <circle cx="90" cy="240" r="3" fill="#ef4444" />
+  </svg>
+);
+
+// ── Soal 28: Two parallels with triangle apex; 30° top, x apex, 110° bottom ──
+const Soal28SVG = () => (
+  <svg viewBox="0 0 380 260" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    <defs><ArrowDef id="ar-s28" /></defs>
+    {/* Top horizontal */}
+    <line x1="40" y1="60" x2="360" y2="60" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s28)" />
+    {/* Bottom horizontal */}
+    <line x1="40" y1="220" x2="360" y2="220" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s28)" />
+    {/* Long diagonal from lower-left up-right (passes from (60,220) up to (300,40)) */}
+    <line x1="60" y1="220" x2="300" y2="40" stroke="#ffffff" strokeWidth="2" />
+    {/* Short top segment forming the small triangle: from (130, 60) down-right to apex (200, 130) */}
+    <line x1="130" y1="60" x2="200" y2="130" stroke="#ffffff" strokeWidth="2" />
+
+    {/* 30° at top (apex of small triangle on top line) */}
+    <text x="146" y="82" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
+    {/* x at apex */}
+    <text x="194" y="158" fill="#ffffff" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+    {/* 110° at bottom-left, between bottom horizontal and the diagonal */}
+    <text x="80" y="208" fill="#fbbf24" fontSize="13" fontFamily="serif">110°</text>
+  </svg>
+);
+
 type SoalImage = string | ReactNode | null;
 
 const latihanDasar: {
@@ -393,28 +976,28 @@ const latihanDasar: {
   {
     no: 2,
     soal: "Perhatikan gambar berikut!\n\nPerhatikan pernyataan berikut!\n(i) Sudut 1 dan sudut 7, sudut luar berseberangan\n(ii) Sudut 1 dan sudut 6, sudut luar sepihak\n(iii) Sudut 4 dan sudut 6, sudut bertolak belakang\n(iv) Sudut 3 dan sudut 7, sudut sehadap\n\nPernyataan yang benar adalah ….",
-    image: gambar17,
+    image: <Soal2SVG />,
     imageCaption: "Gambar Soal 2",
     options: ["A. (i) dan (ii) saja", "B. (ii) dan (iv) saja", "C. (i), (ii) dan (iii)", "D. (i), (ii) dan (iv)"]
   },
   {
     no: 3,
     soal: "Perhatikan gambar\n\n$\\angle A_1 = 103°$, maka besar $\\angle B_4$ dan $\\angle A_3$ berturut-turut adalah …",
-    image: gambar18,
+    image: <Soal3SVG />,
     imageCaption: "Gambar Soal 3",
     options: ["A. $13°$ dan $90°$", "B. $90°$ dan $130°$", "C. $77°$ dan $103°$", "D. $103°$ dan $77°$"]
   },
   {
     no: 4,
     soal: "Perhatikan gambar\n\nBesar $\\angle BCF$ adalah ….",
-    image: gambar19,
+    image: <Soal4SVG />,
     imageCaption: "Gambar Soal 4",
     options: ["A. $35°$", "B. $45°$", "C. $60°$", "D. $75°$"]
   },
   {
     no: 5,
     soal: "Perhatikan gambar\n\nDiketahui besar $\\angle CBD = (2x + 5)°$ dan $\\angle ABD = (3x - 25)°$. Besar pelurus sudut CBD adalah ...",
-    image: gambar20,
+    image: <Soal5SVG />,
     imageCaption: "Gambar Soal 5",
     options: ["A. $82°$", "B. $85°$", "C. $95°$", "D. $104°$"]
   },
@@ -428,21 +1011,21 @@ const latihanDasar: {
   {
     no: 7,
     soal: "Perhatikan gambar berikut.\n\nDari gambar di atas besar $\\angle QPR$ adalah ..",
-    image: gambar21,
+    image: <Soal7SVG />,
     imageCaption: "Gambar Soal 7",
     options: ["A. $18°$", "B. $36°$", "C. $45°$", "D. $54°$"]
   },
   {
     no: 8,
     soal: "Perhatikan gambar berikut\n\nBesar $\\angle BAC$ adalah …",
-    image: gambar22,
+    image: <Soal8SVG />,
     imageCaption: "Gambar Soal 8",
     options: ["A. $80°$", "B. $70°$", "C. $60°$", "D. $50°$"]
   },
   {
     no: 9,
     soal: "Perhatikan gambar berikut!\n\nBesar sudut ACB adalah ….",
-    image: gambar23,
+    image: <Soal9SVG />,
     imageCaption: "Gambar Soal 9",
     options: ["A. $55°$", "B. $85°$", "C. $95°$", "D. $125°$"]
   },
@@ -470,28 +1053,28 @@ const latihanDasar: {
   {
     no: 13,
     soal: "Perhatikan gambar berikut ini!\n\nJika $\\angle\\alpha = 3x° - y° - 15°$, $\\angle\\beta = 2y°$, $\\angle\\delta = y° - x° + 85°$, $\\angle\\theta = 2x° + y° - 20°$. Maka nilai dari $x + y = \\cdots$",
-    image: gambar24,
+    image: <Soal13SVG />,
     imageCaption: "Gambar Soal 13",
     options: ["A. 85", "B. 80", "C. 55", "D. 30"]
   },
   {
     no: 14,
     soal: "Perhatikan gambar berikut:\n\nJika besar $\\angle a = 95°$ dan $\\angle b = 70°$ maka selisih besar sudut x dan y adalah...",
-    image: gambar25,
+    image: <Soal14SVG />,
     imageCaption: "Gambar Soal 14",
     options: ["A. $25°$", "B. $45°$", "C. $65°$", "D. $85°$"]
   },
   {
     no: 15,
     soal: "Perhatikan gambar berikut:\n\nJika garis $l_1$ dan $l_2$ adalah dua garis yang sejajar, maka nilai x adalah...",
-    image: gambar26,
+    image: <Soal15SVG />,
     imageCaption: "Gambar Soal 15",
     options: ["A. $13°$", "B. $39°$", "C. $47°$", "D. $55°$"]
   },
   {
     no: 16,
     soal: "Empat sudut terbentuk oleh dua garis berpotongan seperti pada gambar berikut:\n\nBila diketahui $q° = 45°$ maka:",
-    image: gambar27,
+    image: <Soal16SVG />,
     imageCaption: "Gambar Soal 16",
     options: [
       "A. $p = 135°$; $s = 45°$; $r = 135°$",
@@ -503,84 +1086,84 @@ const latihanDasar: {
   {
     no: 17,
     soal: "Pada kubus ABCD.EFGH besar sudut BGE adalah...",
-    image: gambar28,
+    image: <Soal17SVG />,
     imageCaption: "Gambar Soal 17",
     options: ["A. $30°$", "B. $60°$", "C. $45°$", "D. $90°$"]
   },
   {
     no: 18,
     soal: "Perhatikan gambar.\n\nBesar sudut AOB adalah ...",
-    image: gambar29,
+    image: <Soal18SVG />,
     imageCaption: "Gambar Soal 18",
     options: ["A. $70°$", "B. $120°$", "C. $140°$", "D. $160°$"]
   },
   {
     no: 19,
     soal: "Perhatikan gambar berikut!\n\nJika besar $\\angle a = 35°$ dan $\\angle b = 45°$ maka jumlah besar sudut x dan y adalah ...",
-    image: gambar30,
+    image: <Soal19SVG />,
     imageCaption: "Gambar Soal 19",
     options: ["A. $285°$", "B. $300°$", "C. $315°$", "D. $330°$"]
   },
   {
     no: 20,
     soal: "Perhatikan gambar berikut!\n\nJika diketahui AB sejajar CD, maka nilai x adalah ...",
-    image: gambar31,
+    image: <Soal20SVG />,
     imageCaption: "Gambar Soal 20",
     options: ["A. $15°$", "B. $30°$", "C. $40°$", "D. $45°$"]
   },
   {
     no: 21,
     soal: "Perhatikan gambar berikut!\n\nBesar penyiku $\\angle SQR$ adalah ...",
-    image: gambar32,
+    image: <Soal21SVG />,
     imageCaption: "Gambar Soal 21",
     options: ["A. $9°$", "B. $32°$", "C. $48°$", "D. $58°$"]
   },
   {
     no: 22,
     soal: "Perhatikan gambar berikut!\n\nBesar sudut nomor 1 adalah $95°$, dan sudut nomor 2 adalah $110°$. Besar sudut nomor 3 adalah ...",
-    image: gambar33,
+    image: <Soal22SVG />,
     imageCaption: "Gambar Soal 22",
     options: ["A. $5°$", "B. $15°$", "C. $25°$", "D. $35°$"]
   },
   {
     no: 23,
     soal: "Perhatikan gambar berikut.\n\nBesar $\\angle BAC$ adalah...",
-    image: gambar34,
+    image: <Soal23SVG />,
     imageCaption: "Gambar Soal 23",
     options: ["A. $24°$", "B. $48°$", "C. $72°$", "D. $98°$"]
   },
   {
     no: 24,
     soal: "Perhatikan gambar di bawah ini.\n\nDiketahui sudut SPT $= 83°$ dan sudut PQT $= 41°$. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
-    image: gambar35,
+    image: <Soal24SVG />,
     imageCaption: "Gambar Soal 24",
     options: ["A. $41°$", "B. $82°$", "C. $124°$", "D. $139°$"]
   },
   {
     no: 25,
     soal: "Dari gambar berikut, diketahui perbandingan x:y adalah 2:7. Besar sudut x adalah ...",
-    image: gambar36,
+    image: <Soal25SVG />,
     imageCaption: "Gambar Soal 25",
     options: ["A. $120°$", "B. $60°$", "C. $40°$", "D. $20°$"]
   },
   {
     no: 26,
     soal: "Perhatikan gambar. Jika $\\angle EFB = 65°$ dan $\\angle FCD = 120°$, maka besar $\\angle BFC$ adalah...",
-    image: gambar37,
+    image: <Soal26SVG />,
     imageCaption: "Gambar Soal 26",
     options: ["A. $55°$", "B. $45°$", "C. $50°$", "D. $35°$"]
   },
   {
     no: 27,
     soal: "Perhatikan gambar berikut. Besar sudut a adalah ...",
-    image: gambar38,
+    image: <Soal27SVG />,
     imageCaption: "Gambar Soal 27",
     options: ["A. $30°$", "B. $50°$", "C. $80°$", "D. $100°$"]
   },
   {
     no: 28,
     soal: "Perhatikan gambar di bawah ini!\n\nNilai x adalah ...",
-    image: gambar39,
+    image: <Soal28SVG />,
     imageCaption: "Gambar Soal 28",
     options: ["A. $150°$", "B. $140°$", "C. $110°$", "D. $100°$"]
   },
