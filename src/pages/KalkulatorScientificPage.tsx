@@ -863,6 +863,12 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "1/x" : "x⁻ⁿ"}
             </CalcButton>
+            <CalcButton
+              onClick={() => handleInput("⁻¹")}
+              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+            >
+              x⁻¹
+            </CalcButton>
             {/* % : percent | shift: mod */}
             <CalcButton
               onClick={() => shiftMode ? handleInput(" mod ") : handleInput("%")}
@@ -871,12 +877,6 @@ const KalkulatorScientificPage = () => {
               subLabelColor="text-purple-400"
             >
               {shiftMode ? "mod" : "%"}
-            </CalcButton>
-            <CalcButton
-              onClick={() => handleInput("⁻¹")}
-              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-            >
-              x⁻¹
             </CalcButton>
             <CalcButton
               onClick={() => handleInput("(")}
