@@ -835,12 +835,13 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "eˣ" : "ln"}
             </CalcButton>
-            {/* ; : separator for KPK / FPB / nPr arguments */}
             <CalcButton
-              onClick={() => handleInput(";")}
-              className="h-10 text-base bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              onClick={() => handleFunction("abs")}
+              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
+              subLabel={shiftMode ? "" : "Pol"}
+              subLabelColor="text-purple-400"
             >
-              ;
+              {shiftMode ? "Pol" : "|x|"}
             </CalcButton>
           </div>
 
@@ -870,13 +871,12 @@ const KalkulatorScientificPage = () => {
             >
               {shiftMode ? "ʸ√x" : "xʸ"}
             </CalcButton>
+            {/* ; : separator for KPK / FPB / nPr arguments */}
             <CalcButton
-              onClick={() => handleFunction("abs")}
-              className="h-10 text-xs bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
-              subLabel={shiftMode ? "" : "Pol"}
-              subLabelColor="text-purple-400"
+              onClick={() => handleInput(";")}
+              className="h-10 text-base bg-slate-700/60 text-white border border-white/10 hover:bg-slate-600/60"
             >
-              {shiftMode ? "Pol" : "|x|"}
+              ;
             </CalcButton>
             <CalcButton
               onClick={() => shiftMode ? handleInput("e") : handleInput("π")}
