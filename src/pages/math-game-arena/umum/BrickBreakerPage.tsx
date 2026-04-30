@@ -16,6 +16,16 @@ const PADDLE_W_BASE = 96;
 const BALL_R = 9;
 const BALL_SPEED_BASE = 230;
 
+// ── Difficulty escalation ────────────────────────────────────────────────────
+// Every DIFFICULTY_INTERVAL seconds of active play, the game escalates one
+// notch (Normal → Hard → Very Hard) and ball speed increases by `mult`.
+const DIFFICULTY_INTERVAL = 60;
+const DIFFICULTY_LEVELS: { name: string; mult: number; color: string; glow: string }[] = [
+  { name: "NORMAL",    mult: 1.00, color: "#5eead4", glow: "#22d3ee" },
+  { name: "HARD",      mult: 1.30, color: "#fbbf24", glow: "#f59e0b" },
+  { name: "VERY HARD", mult: 1.65, color: "#ef4444", glow: "#dc2626" },
+];
+
 const BRICK_COLS = 7;
 const BRICK_ROWS = 5;
 const BRICK_PAD = 5;
@@ -85,6 +95,12 @@ const BrickBreakerPage = () => {
   const hueRef = useRef(0);
   const bgStarsRef = useRef<{ x: number; y: number; r: number; alpha: number; t: number }[]>([]);
 
+  // Difficulty escalation state
+  const gameTimeRef = useRef(0);          // seconds of active play since startGame
+  const difficultyRef = useRef(0);        // 0=Normal, 1=Hard, 2=Very Hard
+  const modeBannerRef = useRef<{ idx: number; t: number } | null>(null); // visible banner
+
+
   const [, forceRender] = useState(0);
   const rerender = useCallback(() => forceRender(n => n + 1), []);
 
@@ -117,7 +133,8 @@ const BrickBreakerPage = () => {
   }, []);
 
   const launchBall = useCallback(() => {
-    const speed = BALL_SPEED_BASE + levelRef.current * 18;
+    const baseSpeed = BALL_SPEED_BASE + levelRef.current * 18;
+    const speed = baseSpeed * DIFFICULTY_LEVELS[difficultyRef.current].mult;
     const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.6;
     ballRef.current.vx = Math.cos(angle) * speed;
     ballRef.current.vy = Math.sin(angle) * speed;
@@ -142,6 +159,9 @@ const BrickBreakerPage = () => {
     timerAccRef.current = 0;
     comboRef.current = 0;
     shakeRef.current = 0;
+    gameTimeRef.current = 0;
+    difficultyRef.current = 0;
+    modeBannerRef.current = null;
     floatTextsRef.current = [];
     trailRef.current = [];
     paddleRef.current = { x: CW / 2, w: PADDLE_W_BASE, powerT: 0 };
@@ -226,6 +246,22 @@ const BrickBreakerPage = () => {
       // ── Timer & update ─────────────────────────────────────────────────
       if (phase === "playing") {
         timerAccRef.current += dt;
+        // Track active play time for difficulty escalation
+        gameTimeRef.current += dt;
+        const targetDifficulty = Math.min(
+          DIFFICULTY_LEVELS.length - 1,
+          Math.floor(gameTimeRef.current / DIFFICULTY_INTERVAL)
+        );
+        if (targetDifficulty > difficultyRef.current) {
+          difficultyRef.current = targetDifficulty;
+          modeBannerRef.current = { idx: targetDifficulty, t: 2.6 };
+          shakeRef.current = Math.max(shakeRef.current, 0.6);
+          playPopSound();
+        }
+        if (modeBannerRef.current) {
+          modeBannerRef.current.t -= dt;
+          if (modeBannerRef.current.t <= 0) modeBannerRef.current = null;
+        }
         if (timerAccRef.current >= 1) {
           timerAccRef.current -= 1;
           timerRef.current--;
@@ -237,7 +273,7 @@ const BrickBreakerPage = () => {
         const ball = ballRef.current;
         if (ball.launched) {
           const spd = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);
-          const targetSpd = BALL_SPEED_BASE + levelRef.current * 18;
+          const targetSpd = (BALL_SPEED_BASE + levelRef.current * 18) * DIFFICULTY_LEVELS[difficultyRef.current].mult;
           if (spd < targetSpd * 0.95) {
             ball.vx *= targetSpd / spd;
             ball.vy *= targetSpd / spd;
@@ -477,12 +513,22 @@ const BrickBreakerPage = () => {
         ctx.fillStyle = "#ffc94a"; ctx.shadowBlur = 10; ctx.shadowColor = "#ffc94a";
         ctx.fillText(`⭐ ${scoreRef.current}`, 10, 18);
 
+        // Center: LEVEL + current difficulty mode
+        const diff = DIFFICULTY_LEVELS[difficultyRef.current];
         ctx.textAlign = "center";
+        ctx.font = "bold 12px 'Orbitron', monospace";
         ctx.fillStyle = `hsl(${(hue + 60) % 360}, 100%, 75%)`;
+        ctx.shadowBlur = 8;
         ctx.shadowColor = `hsl(${(hue + 60) % 360}, 100%, 60%)`;
-        ctx.fillText(`LEVEL ${levelRef.current}`, CW / 2, 18);
+        ctx.fillText(`LEVEL ${levelRef.current}`, CW / 2, 11);
+        ctx.font = "bold 11px 'Orbitron', monospace";
+        ctx.fillStyle = diff.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = diff.glow;
+        ctx.fillText(`⚡ ${diff.name}`, CW / 2, 27);
 
         ctx.textAlign = "right";
+        ctx.font = "bold 13px 'Orbitron', monospace";
         ctx.fillStyle = "#ff5e87"; ctx.shadowColor = "#ff5e87";
         ctx.fillText(`❤️ ${"♥".repeat(Math.max(0, livesRef.current))}`, CW - 10, 18);
         ctx.shadowBlur = 0;
@@ -495,6 +541,27 @@ const BrickBreakerPage = () => {
         ctx.fillStyle = tCol; ctx.shadowBlur = 8; ctx.shadowColor = tCol;
         ctx.fillRect(0, HUD_H - 5, CW * tFrac, 5);
         ctx.shadowBlur = 0;
+
+        // Difficulty progress tick on the timer bar (next mode bump position)
+        if (difficultyRef.current < DIFFICULTY_LEVELS.length - 1) {
+          const nextAt = (difficultyRef.current + 1) * DIFFICULTY_INTERVAL;
+          const progress = Math.max(0, Math.min(1,
+            (gameTimeRef.current - difficultyRef.current * DIFFICULTY_INTERVAL) / DIFFICULTY_INTERVAL
+          ));
+          const next = DIFFICULTY_LEVELS[difficultyRef.current + 1];
+          ctx.fillStyle = "rgba(255,255,255,0.05)";
+          ctx.fillRect(0, HUD_H - 9, CW, 3);
+          ctx.fillStyle = next.color;
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = next.glow;
+          ctx.fillRect(0, HUD_H - 9, CW * progress, 3);
+          ctx.shadowBlur = 0;
+          // tiny next-mode label
+          ctx.font = "8px 'Orbitron', monospace";
+          ctx.fillStyle = "rgba(255,255,255,0.45)";
+          ctx.textAlign = "right";
+          ctx.fillText(`NEXT: ${next.name} in ${Math.max(0, Math.ceil(nextAt - gameTimeRef.current))}s`, CW - 4, HUD_H - 13);
+        }
       }
 
       // ── Bricks ──────────────────────────────────────────────────────────
@@ -1019,6 +1086,53 @@ const BrickBreakerPage = () => {
         ctx.globalAlpha = 1;
       }
 
+      // ── Mode-change banner (Normal → Hard → Very Hard) ──────────────────
+      if (modeBannerRef.current) {
+        const mb = modeBannerRef.current;
+        const m = DIFFICULTY_LEVELS[mb.idx];
+        // Animate: slide-in (first 0.3s) → hold → fade-out (last 0.6s)
+        const totalT = 2.6;
+        const elapsed = totalT - mb.t;
+        const slideIn = Math.min(1, elapsed / 0.3);
+        const fadeOut = Math.min(1, mb.t / 0.6);
+        const a = Math.min(slideIn, fadeOut);
+        const yC = CH / 2 - 30;
+
+        ctx.save();
+        ctx.globalAlpha = a;
+        // Backdrop band
+        ctx.fillStyle = "rgba(0,0,0,0.55)";
+        ctx.fillRect(0, yC - 60, CW, 120);
+        // Color top/bottom strip
+        ctx.fillStyle = m.color;
+        ctx.shadowBlur = 18; ctx.shadowColor = m.glow;
+        ctx.fillRect(0, yC - 60, CW, 3);
+        ctx.fillRect(0, yC + 57, CW, 3);
+
+        // Subtitle
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = "bold 12px 'Orbitron', monospace";
+        ctx.fillStyle = "rgba(255,255,255,0.85)";
+        ctx.shadowBlur = 8; ctx.shadowColor = m.glow;
+        ctx.fillText("⚡ MODE BARU ⚡", CW / 2, yC - 28);
+
+        // Big mode name with pulsing glow
+        const pulse = 1 + 0.06 * Math.sin(ts / 90);
+        ctx.font = `bold ${Math.round(34 * pulse)}px 'Orbitron', monospace`;
+        ctx.fillStyle = m.color;
+        ctx.shadowBlur = 28; ctx.shadowColor = m.glow;
+        ctx.fillText(m.name, CW / 2, yC + 4);
+
+        // Speed multiplier callout
+        ctx.font = "bold 12px 'Orbitron', monospace";
+        ctx.fillStyle = "#fff";
+        ctx.shadowBlur = 6; ctx.shadowColor = m.glow;
+        ctx.fillText(`KECEPATAN ×${m.mult.toFixed(2)}`, CW / 2, yC + 38);
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      }
+
       // ── Ready hint ──────────────────────────────────────────────────────
       if (phase === "ready") {
         const pulse = 0.75 + 0.25 * Math.sin(ts / 350);
@@ -1055,8 +1169,9 @@ const BrickBreakerPage = () => {
           "Pantulkan meteor untuk hancurkan asteroid 🌑",
           "Setiap asteroid pecah setelah 2× kena meteor",
           "Tiap 25 detik muncul Soal NUMATIK 🤖",
+          "Tiap 60 detik: NORMAL → HARD → VERY HARD ⚡",
           "Combo = poin berlipat! 🔥",
-        ].forEach((l, i) => ctx.fillText(l, CW / 2, CH / 2 - 4 + i * 22));
+        ].forEach((l, i) => ctx.fillText(l, CW / 2, CH / 2 - 8 + i * 20));
 
         ctx.font = "bold 17px 'Orbitron', monospace";
         ctx.fillStyle = `hsl(${hue}, 100%, 80%)`;
