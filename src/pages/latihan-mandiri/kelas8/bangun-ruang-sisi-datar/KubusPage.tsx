@@ -74,7 +74,7 @@ const CubeSVG = ({ s = "s", label = true, color: c = "#38bdf8", labels = DEFAULT
 );
 
 const CubeNetSVG = () => (
-  <svg width="200" height="160" viewBox="0 0 200 160" className="mx-auto">
+  <svg width="250" height="160" viewBox="0 0 250 160" className="mx-auto">
     {[
       [60,0,60,55,"sky"],
       [0,55,60,55,"cyan"],
