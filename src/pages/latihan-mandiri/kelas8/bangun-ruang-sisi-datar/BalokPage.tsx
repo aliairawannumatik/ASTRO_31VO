@@ -57,10 +57,6 @@ const BalokSVG = ({ p = "p", l = "l", t = "t", wide = false }: { p?: string; l?:
       <text x={W+17}     y={D-2}    fill="white" fontSize="10" fontFamily="monospace">F</text>
       <text x={W+D+17}   y="8"      fill="white" fontSize="10" fontFamily="monospace">G</text>
       <text x={D+16}     y="8"      fill="white" fontSize="10" fontFamily="monospace">H</text>
-      {/* Dimension labels */}
-      <text x={(W/2)+8} y={H+D+14} fill="#34d399" fontSize="11" textAnchor="middle">{p}</text>
-      <text x={W+D+22} y={(H/2)+D-5} fill="#34d399" fontSize="11" textAnchor="middle">{t}</text>
-      <text x={W+D+18} y={H+15} fill="#34d399" fontSize="11" textAnchor="middle">{l}</text>
     </svg>
   );
 };
