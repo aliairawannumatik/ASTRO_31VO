@@ -23,6 +23,7 @@ import gambar14 from "@/assets/Gambar_14_Sudut-sudut_pada_segitiga_1773289509182
 import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.png";
 import gambarSoal19 from "@assets/image_1777593919772.png";
 import gambarSoal20 from "@assets/g_1777646456179.png";
+import gambarSoal21 from "@assets/image_1777674744629.png";
 import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
@@ -1220,7 +1221,7 @@ const latihanDasar: {
   {
     no: 21,
     soal: "Perhatikan gambar berikut!\n\nBesar penyiku $\\angle SQR$ adalah ...",
-    image: <Soal21SVG />,
+    image: <img src={gambarSoal21} alt="Gambar Soal 21" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
     imageCaption: "Gambar Soal 21",
     options: ["A. $9°$", "B. $32°$", "C. $48°$", "D. $58°$"]
   },
