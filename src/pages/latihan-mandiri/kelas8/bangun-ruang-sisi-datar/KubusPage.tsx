@@ -96,6 +96,58 @@ const CubeNetSVG = () => (
   </svg>
 );
 
+// Q3: cube with swapped labels (F↔C, E↔D) + one bidang diagonal highlighted
+const DiagonalBidangQ3SVG = () => {
+  const c = "#38bdf8";
+  const q3labels = ['A','B','F','E','H','G','C','D'];
+  // Vertex pixel positions (same as CubeSVG):
+  // [0](30,95) [1](110,95) [2](110,35) [3](30,35) [4](65,10) [5](145,10) [6](145,70) [7](65,70)
+  // Bidang diagonal sample: ABGH → A(30,95), B(110,95), G(145,10), H(65,10)
+  return (
+    <svg width="160" height="145" viewBox="0 0 160 145" className="mx-auto">
+      <defs>
+        <linearGradient id="cbF2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={c} stopOpacity="0.35" />
+          <stop offset="100%" stopColor={c} stopOpacity="0.15" />
+        </linearGradient>
+        <linearGradient id="cbT2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={c} stopOpacity="0.55" />
+          <stop offset="100%" stopColor={c} stopOpacity="0.3" />
+        </linearGradient>
+        <linearGradient id="cbR2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={c} stopOpacity="0.2" />
+          <stop offset="100%" stopColor={c} stopOpacity="0.08" />
+        </linearGradient>
+      </defs>
+      {/* Bidang diagonal ABGH filled bright */}
+      <polygon points="30,95 110,95 145,10 65,10" fill="#f59e0b" fillOpacity="0.35" stroke="#f59e0b" strokeWidth="2" strokeDasharray="5,3" />
+      {/* Cube faces */}
+      <polygon points="30,95 110,95 110,35 30,35" fill="url(#cbF2)" stroke={c} strokeWidth="1.8" />
+      <polygon points="30,35 110,35 145,10 65,10" fill="url(#cbT2)" stroke={c} strokeWidth="1.8" />
+      <polygon points="110,35 145,10 145,70 110,95" fill="url(#cbR2)" stroke={c} strokeWidth="1.8" />
+      {/* Hidden edges */}
+      <line x1="30" y1="95" x2="65" y2="70" stroke={c} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
+      <line x1="65" y1="70" x2="145" y2="70" stroke={c} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
+      <line x1="65" y1="70" x2="65" y2="10" stroke={c} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
+      {/* Vertices */}
+      {[[30,95],[110,95],[110,35],[30,35],[65,10],[145,10],[145,70],[65,70]].map(([x,y],i) => (
+        <circle key={i} cx={x} cy={y} r="2.5" fill={c} fillOpacity="0.9" />
+      ))}
+      {/* Labels */}
+      <text x="20"  y="100" fill="white" fontSize="11" fontFamily="monospace">{q3labels[0]}</text>
+      <text x="112" y="100" fill="white" fontSize="11" fontFamily="monospace">{q3labels[1]}</text>
+      <text x="112" y="33"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[2]}</text>
+      <text x="20"  y="33"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[3]}</text>
+      <text x="58"  y="8"   fill="white" fontSize="11" fontFamily="monospace">{q3labels[4]}</text>
+      <text x="148" y="8"   fill="white" fontSize="11" fontFamily="monospace">{q3labels[5]}</text>
+      <text x="148" y="72"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[6]}</text>
+      <text x="58"  y="72"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[7]}</text>
+      {/* Label bidang diagonal */}
+      <text x="80" y="135" fill="#f59e0b" fontSize="9" textAnchor="middle" fontFamily="sans-serif">bidang diagonal ABGH</text>
+    </svg>
+  );
+};
+
 const DiagonalCubeSVG = () => (
   <svg width="160" height="130" viewBox="0 0 160 130" className="mx-auto">
     <polygon points="30,95 110,95 110,35 30,35" fill="#0ea5e9" fillOpacity="0.25" stroke="#38bdf8" strokeWidth="1.5" />
@@ -146,7 +198,7 @@ const questions: Q[] = [
   Qn(1, "Unsur-Unsur Kubus", {
     type: "mixed",
     content: "Perhatikan kubus PQRS.TUVW berikut (PQRS = titik sudut alas, TUVW = titik sudut atap):",
-    diagram: <CubeSVG labels={['P','Q','R','S','W','V','U','T']} />,
+    diagram: <CubeSVG labels={['P','Q','U','T','W','V','R','S']} />,
     parts: [
       { label: "a.", text: "Sebutkan semua rusuk kubus PQRS.TUVW!" },
       { label: "b.", text: "Ada berapa banyak titik sudut pada kubus? Sebutkan semuanya." },
@@ -168,7 +220,7 @@ const questions: Q[] = [
   Qn(3, "Bidang Diagonal Kubus", {
     type: "mixed",
     content: "Perhatikan kubus ABCD.EFGH berikut (ABCD = sisi alas, EFGH = sisi atap):",
-    diagram: <CubeSVG />,
+    diagram: <DiagonalBidangQ3SVG />,
     parts: [
       { label: "a.", text: "Apa yang dimaksud dengan bidang diagonal kubus?" },
       { label: "b.", text: "Ada berapa banyak bidang diagonal pada sebuah kubus ABCD.EFGH? Sebutkan semuanya!" },
@@ -179,6 +231,7 @@ const questions: Q[] = [
     type: "mixed",
     content: "Rumus luas permukaan kubus dengan panjang rusuk s adalah:",
     mathContent: "L = 6s^2",
+    diagram: <CubeSVG label={false} />,
     parts: [
       { label: "a.", math: "\\text{Hitung luas permukaan kubus dengan } s = 5 \\text{ cm}" },
       { label: "b.", math: "\\text{Hitung luas permukaan kubus dengan } s = 10 \\text{ cm}" },
