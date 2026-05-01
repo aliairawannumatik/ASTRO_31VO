@@ -927,20 +927,20 @@ const Soal23SVG = () => (
     <line x1="40" y1="240" x2="340" y2="240" stroke="#ffffff" strokeWidth="2" />
     {/* AD diagonal through C */}
     <line x1="40" y1="240" x2="220" y2="20" stroke="#ffffff" strokeWidth="2" />
-    {/* BC: B(300,240) -> C(160,80) */}
-    <line x1="300" y1="240" x2="160" y2="80" stroke="#ffffff" strokeWidth="2" />
+    {/* BC: B(300,240) -> C at intersection with AD ≈ (166,87) */}
+    <line x1="300" y1="240" x2="166" y2="87" stroke="#ffffff" strokeWidth="2" />
 
     <text x="32" y="262" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
     <text x="304" y="262" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
-    <text x="138" y="78" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+    <text x="144" y="84" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
     <text x="226" y="22" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
 
-    {/* 108° at C between CD (up-right, going to D) and CB (down-right) */}
-    <text x="166" y="100" fill="#fbbf24" fontSize="13" fontFamily="serif">108°</text>
+    {/* 108° shifted to upper-right of C to avoid collision */}
+    <text x="182" y="90" fill="#fbbf24" fontSize="13" fontFamily="serif">108°</text>
     {/* 36° at B (interior) */}
     <text x="262" y="232" fill="#fbbf24" fontSize="13" fontFamily="serif">36°</text>
 
-    <circle cx="160" cy="80" r="3" fill="#ef4444" />
+    <circle cx="166" cy="87" r="3" fill="#ef4444" />
     <circle cx="40" cy="240" r="3" fill="#ef4444" />
     <circle cx="300" cy="240" r="3" fill="#ef4444" />
     <circle cx="220" cy="20" r="3" fill="#ef4444" />
