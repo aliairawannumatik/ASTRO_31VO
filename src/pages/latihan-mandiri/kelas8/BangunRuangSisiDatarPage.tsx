@@ -62,7 +62,7 @@ const subtopics = [
     emoji: "🔺",
   },
   {
-    label: "BANGUN RUANG GABUNGAN",
+    label: "BANGUN RUANG SISI DATAR GABUNGAN",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan",
     soal: 40,
     icon: Layers,
