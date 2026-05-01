@@ -901,12 +901,12 @@ const Soal22SVG = () => (
     <text x="364" y="234" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">m</text>
 
     {/* Numbers at top intersection ≈ (180, 80) */}
-    <text x="184" y="74" fill="#38bdf8" fontSize="13" fontWeight="bold">4</text>
+    <text x="192" y="74" fill="#38bdf8" fontSize="13" fontWeight="bold">4</text>
     <text x="156" y="98" fill="#38bdf8" fontSize="13" fontWeight="bold">1</text>
 
     {/* Numbers at triangle apex (170, 130) */}
     <text x="174" y="124" fill="#38bdf8" fontSize="13" fontWeight="bold">2</text>
-    <text x="174" y="148" fill="#38bdf8" fontSize="13" fontWeight="bold">6</text>
+    <text x="163" y="148" fill="#38bdf8" fontSize="13" fontWeight="bold">6</text>
 
     {/* Numbers at bottom intersection of diagonal & m ≈ (138, 240) */}
     <text x="148" y="234" fill="#38bdf8" fontSize="13" fontWeight="bold">5</text>
