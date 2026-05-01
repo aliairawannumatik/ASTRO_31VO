@@ -24,6 +24,7 @@ import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.
 import gambarSoal19 from "@assets/image_1777593919772.png";
 import gambarSoal20 from "@assets/g_1777646456179.png";
 import gambarSoal21 from "@assets/image_1777674744629.png";
+import gambarSoal24 from "@assets/image_1777675316904.png";
 import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
@@ -1242,7 +1243,7 @@ const latihanDasar: {
   {
     no: 24,
     soal: "Perhatikan gambar di bawah ini.\n\nDiketahui sudut SPT $= 83°$ dan sudut PQT $= 41°$. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
-    image: <Soal24SVG />,
+    image: <img src={gambarSoal24} alt="Soal 24" className="w-full max-w-md mx-auto" />,
     imageCaption: "Gambar Soal 24",
     options: ["A. $41°$", "B. $82°$", "C. $124°$", "D. $139°$"]
   },
