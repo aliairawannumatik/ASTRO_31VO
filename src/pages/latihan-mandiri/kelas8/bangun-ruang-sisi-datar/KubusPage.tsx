@@ -18,7 +18,14 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const CubeSVG = ({ s = "s", label = true, color: c = "#38bdf8" }: { s?: string; label?: boolean; color?: string }) => (
+// labels order matches vertex order: [front-left-bottom, front-right-bottom, back-right-bottom, back-left-bottom,
+//   back-left-top, back-right-top, front-right-top, front-left-top]
+// Default ABCD.EFGH: A=front-left-bottom(0), B=front-right-bottom(1), C=back-right-bottom(2), D=back-left-bottom(3),
+//   E=back-left-top(4), F=back-right-top(5), G=front-right-top(6), H=front-left-top(7)
+// For PQRS.TUVW: P(0),Q(1),R(2),S(3) bottom; T above P→index7, U above Q→index6, V above R→index5, W above S→index4
+//   so labels=['P','Q','R','S','W','V','U','T']
+const DEFAULT_CUBE_LABELS = ['A','B','C','D','E','F','G','H'];
+const CubeSVG = ({ s = "s", label = true, color: c = "#38bdf8", labels = DEFAULT_CUBE_LABELS }: { s?: string; label?: boolean; color?: string; labels?: string[] }) => (
   <svg width="160" height="130" viewBox="0 0 160 130" className="mx-auto">
     <defs>
       <linearGradient id="cubeFront" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -48,17 +55,17 @@ const CubeSVG = ({ s = "s", label = true, color: c = "#38bdf8" }: { s?: string; 
     {[[30,95],[110,95],[110,35],[30,35],[65,10],[145,10],[145,70],[65,70]].map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill={c} fillOpacity="0.9" />
     ))}
-    {/* Labels */}
+    {/* Labels: positions match vertex order above */}
     {label && <>
-      <text x="20" y="100" fill="white" fontSize="11" fontFamily="monospace">A</text>
-      <text x="112" y="100" fill="white" fontSize="11" fontFamily="monospace">B</text>
-      <text x="112" y="33" fill="white" fontSize="11" fontFamily="monospace">C</text>
-      <text x="20" y="33" fill="white" fontSize="11" fontFamily="monospace">D</text>
-      <text x="58" y="8" fill="white" fontSize="11" fontFamily="monospace">E</text>
-      <text x="148" y="8" fill="white" fontSize="11" fontFamily="monospace">F</text>
-      <text x="148" y="72" fill="white" fontSize="11" fontFamily="monospace">G</text>
-      <text x="58" y="72" fill="white" fontSize="11" fontFamily="monospace">H</text>
-      <text x="66" y="70" fill={c} fontSize="10" fontFamily="monospace">{s}</text>
+      <text x="20"  y="100" fill="white" fontSize="11" fontFamily="monospace">{labels[0]}</text>
+      <text x="112" y="100" fill="white" fontSize="11" fontFamily="monospace">{labels[1]}</text>
+      <text x="112" y="33"  fill="white" fontSize="11" fontFamily="monospace">{labels[2]}</text>
+      <text x="20"  y="33"  fill="white" fontSize="11" fontFamily="monospace">{labels[3]}</text>
+      <text x="58"  y="8"   fill="white" fontSize="11" fontFamily="monospace">{labels[4]}</text>
+      <text x="148" y="8"   fill="white" fontSize="11" fontFamily="monospace">{labels[5]}</text>
+      <text x="148" y="72"  fill="white" fontSize="11" fontFamily="monospace">{labels[6]}</text>
+      <text x="58"  y="72"  fill="white" fontSize="11" fontFamily="monospace">{labels[7]}</text>
+      <text x="66"  y="70"  fill={c} fontSize="10" fontFamily="monospace">{s}</text>
     </>}
   </svg>
 );
@@ -110,12 +117,15 @@ const DiagonalCubeSVG = () => (
 const questions: Q[] = [
   Qn(1, "Unsur-Unsur Kubus", {
     type: "mixed",
-    content: "Perhatikan kubus ABCD.EFGH berikut:",
-    diagram: <CubeSVG />,
+    content: "Perhatikan kubus PQRS.TUVW berikut (PQRS = titik sudut alas, TUVW = titik sudut atap):",
+    diagram: <CubeSVG labels={['P','Q','R','S','W','V','U','T']} />,
     parts: [
-      { label: "a.", text: "Sebutkan semua rusuk kubus ABCD.EFGH!" },
+      { label: "a.", text: "Sebutkan semua rusuk kubus PQRS.TUVW!" },
       { label: "b.", text: "Ada berapa banyak titik sudut pada kubus? Sebutkan semuanya." },
       { label: "c.", text: "Ada berapa banyak sisi (bidang) pada kubus? Sebutkan semuanya." },
+      { label: "d.", text: "Ada berapa banyak diagonal bidang (diagonal sisi) pada kubus PQRS.TUVW? Sebutkan semuanya!" },
+      { label: "e.", text: "Ada berapa banyak diagonal ruang pada kubus PQRS.TUVW? Sebutkan semuanya!" },
+      { label: "f.", text: "Ada berapa banyak bidang diagonal pada kubus PQRS.TUVW? Sebutkan semuanya!" },
     ],
   }),
   Qn(2, "Diagonal Sisi dan Diagonal Ruang Kubus", {
