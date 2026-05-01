@@ -1033,7 +1033,7 @@ const Soal27SVG = () => (
     <line x1="90" y1="40" x2="240" y2="140" stroke="#ffffff" strokeWidth="2" />
     <line x1="240" y1="140" x2="90" y2="240" stroke="#ffffff" strokeWidth="2" />
 
-    <text x="114" y="56" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
+    <text x="122" y="56" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
     <text x="206" y="148" fill="#fbbf24" fontSize="13" fontFamily="serif"><tspan fontStyle="italic">a</tspan>°</text>
     <text x="124" y="232" fill="#fbbf24" fontSize="13" fontFamily="serif">50°</text>
 
