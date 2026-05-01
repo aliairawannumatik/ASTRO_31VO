@@ -217,7 +217,16 @@ const questions: Q[] = [
       { label: "b.", text: "Tentukan panjang diagonal ruang kubus tersebut!" },
     ],
   }),
-  Qn(3, "Bidang Diagonal Kubus", {
+  Qn(3, "Rusuk Kubus dari Diagonal Ruang – UN", {
+    type: "mixed",
+    content: "Panjang diagonal ruang sebuah kubus adalah 6√3 cm.",
+    parts: [
+      { label: "a.", math: "\\text{Gunakan rumus diagonal ruang } d = s\\sqrt{3} \\text{ untuk mencari } s" },
+      { label: "b.", text: "Tentukan luas permukaan kubus tersebut." },
+      { label: "c.", text: "Tentukan volume kubus tersebut." },
+    ],
+  }),
+  Qn(4, "Bidang Diagonal Kubus", {
     type: "mixed",
     content: "Perhatikan kubus ABCD.EFGH berikut (ABCD = sisi alas, EFGH = sisi atap):",
     diagram: <DiagonalBidangQ3SVG />,
@@ -227,7 +236,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika rusuk kubus } s = 8 \\text{ cm, hitung luas bidang diagonal ABGH.}" },
     ],
   }),
-  Qn(4, "Luas Permukaan Kubus – Dasar", {
+  Qn(5, "Luas Permukaan Kubus – Dasar", {
     type: "mixed",
     content: "Rumus luas permukaan kubus dengan panjang rusuk s adalah:",
     mathContent: "L = 6s^2",
@@ -238,7 +247,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Hitung luas permukaan kubus dengan } s = \\frac{1}{2} \\text{ m}" },
     ],
   }),
-  Qn(5, "Mencari Rusuk dari Luas Permukaan", {
+  Qn(6, "Mencari Rusuk dari Luas Permukaan", {
     type: "mixed",
     content: "Luas permukaan sebuah kubus diketahui. Tentukan panjang rusuknya!",
     parts: [
@@ -247,7 +256,7 @@ const questions: Q[] = [
       { label: "c.", math: "L = 600 \\text{ cm}^2 \\Rightarrow s = \\ldots" },
     ],
   }),
-  Qn(6, "Volume Kubus – Dasar", {
+  Qn(7, "Volume Kubus – Dasar", {
     type: "mixed",
     content: "Rumus volume kubus dengan panjang rusuk s adalah:",
     mathContent: "V = s^3",
@@ -257,7 +266,7 @@ const questions: Q[] = [
       { label: "c.", math: "V = \\ldots \\text{ jika } s = 1{,}5 \\text{ m}" },
     ],
   }),
-  Qn(7, "Jaring-Jaring Kubus", {
+  Qn(8, "Jaring-Jaring Kubus", {
     type: "mixed",
     content: "Perhatikan jaring-jaring kubus berikut:",
     diagram: <CubeNetSVG />,
@@ -267,13 +276,13 @@ const questions: Q[] = [
       { label: "c.", text: "Ada berapa kemungkinan bentuk jaring-jaring kubus yang berbeda?" },
     ],
   }),
-  Qn(8, "Identifikasi Jaring-Jaring Kubus", {
+  Qn(9, "Identifikasi Jaring-Jaring Kubus", {
     type: "mixed",
     content: "Perhatikan gambar berbagai susunan enam persegi di bawah ini! Tentukan mana saja yang merupakan jaring-jaring kubus. Berikan alasanmu!",
     diagram: <JaringJaringSVG />,
     parts: [],
   }),
-  Qn(9, "Pengecatan Kubus", {
+  Qn(10, "Pengecatan Kubus", {
     type: "mixed",
     content: "Sebuah kubus dengan rusuk 12 m akan dicat seluruh permukaannya. Biaya pengecatan Rp2.500 per m².",
     parts: [
@@ -282,7 +291,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika hanya 4 sisi yang dicat (tanpa alas dan tutup), berapa biayanya?" },
     ],
   }),
-  Qn(10, "Kubus dari Kawat – Kontekstual", {
+  Qn(11, "Kubus dari Kawat – Kontekstual", {
     type: "mixed",
     content: "Sebuah kerangka kubus dibuat dari kawat dengan panjang rusuk 15 cm.",
     parts: [
@@ -291,22 +300,13 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kawat dijual per meter seharga Rp3.000, berapa biaya yang diperlukan?" },
     ],
   }),
-  Qn(11, "Volume Kubus – Soal Cerita ANBK", {
+  Qn(12, "Volume Kubus – Soal Cerita ANBK", {
     type: "mixed",
     content: "Sebuah bak mandi berbentuk kubus dengan panjang rusuk 80 cm diisi air hingga penuh.",
     parts: [
       { label: "a.", math: "\\text{Hitung volume bak dalam cm}^3" },
       { label: "b.", math: "\\text{Nyatakan volume dalam liter } (1 \\text{ liter} = 1000 \\text{ cm}^3)" },
       { label: "c.", text: "Jika air mengalir dengan kecepatan 8 liter/menit, berapa menit waktu yang dibutuhkan?" },
-    ],
-  }),
-  Qn(12, "Rusuk Kubus dari Diagonal Ruang – UN", {
-    type: "mixed",
-    content: "Panjang diagonal ruang sebuah kubus adalah 6√3 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Gunakan rumus diagonal ruang } d = s\\sqrt{3} \\text{ untuk mencari } s" },
-      { label: "b.", text: "Tentukan luas permukaan kubus tersebut." },
-      { label: "c.", text: "Tentukan volume kubus tersebut." },
     ],
   }),
   Qn(13, "Memotong Kubus – Soal ANBK", {
