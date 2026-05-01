@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { Box, Layers, Triangle, Mountain, BookOpen, ChevronRight } from "lucide-react";
+import { Box, Layers, Triangle, Mountain, ChevronRight } from "lucide-react";
 
 const subtopics = [
   {
@@ -74,20 +74,6 @@ const subtopics = [
     leftBar: "from-indigo-400 to-blue-500",
     desc: "Balok+Limas, Kubus+Prisma, benda gabungan, limas terpancung, benda berlubang",
     emoji: "🏗️",
-  },
-  {
-    label: "MASALAH KONTEKSTUAL",
-    path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/masalah-kontekstual",
-    soal: 40,
-    icon: BookOpen,
-    gradient: "from-orange-900/40 to-amber-900/30",
-    border: "border-orange-500/30",
-    badge: "bg-orange-500/20 text-orange-300 border-orange-400/40",
-    iconBg: "bg-orange-500/20",
-    iconColor: "text-orange-400",
-    leftBar: "from-orange-400 to-amber-500",
-    desc: "Soal cerita UN/ANBK/TKA: balok, kubus, prisma, limas dalam kehidupan nyata",
-    emoji: "📝",
   },
 ];
 
