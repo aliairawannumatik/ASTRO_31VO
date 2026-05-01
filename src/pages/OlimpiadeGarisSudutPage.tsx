@@ -850,32 +850,36 @@ const Soal20SVG = () => (
 
 // ── Soal 21: Right angle at Q, ray QS between QP (up) and QR (right) ─────────
 const Soal21SVG = () => (
-  <svg viewBox="0 0 400 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Horizontal line through Q: extends left and right */}
-    <line x1="20" y1="220" x2="375" y2="220" stroke="#ffffff" strokeWidth="2" />
-    {/* Vertical line PQ: goes up from Q */}
-    <line x1="190" y1="30" x2="190" y2="220" stroke="#ffffff" strokeWidth="2" />
-    {/* Diagonal QS: 32° above horizontal right */}
-    <line x1="190" y1="220" x2="320" y2="151" stroke="#ffffff" strokeWidth="2" />
+  <svg viewBox="0 0 400 290" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Horizontal line: full width, Q at center-left */}
+    <line x1="20" y1="180" x2="375" y2="180" stroke="#ffffff" strokeWidth="2" />
+    {/* Vertical PQ: from P above down to Q */}
+    <line x1="200" y1="20" x2="200" y2="180" stroke="#ffffff" strokeWidth="2" />
+    {/* Diagonal QS: exactly 32° above horizontal right — endpoint at Q+115·(cos32°,−sin32°) */}
+    <line x1="200" y1="180" x2="298" y2="119" stroke="#ffffff" strokeWidth="2" />
 
-    {/* Right-angle marker at Q — upper-right quadrant (between PQ-up and QR-right) */}
-    <polyline points="190,200 210,200 210,220" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+    {/* Right-angle marker at Q — upper-right (between QP-up and QR-right) */}
+    <polyline points="200,160 220,160 220,180" fill="none" stroke="#ffffff" strokeWidth="1.5" />
 
     {/* Labels */}
-    <text x="182" y="22" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
-    <text x="174" y="244" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
-    <text x="352" y="216" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
-    <text x="324" y="148" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
+    <text x="192" y="14" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
+    <text x="184" y="202" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
+    {/* R at the far right end of horizontal */}
+    <text x="358" y="174" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
+    <text x="302" y="113" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
 
-    {/* Arc: (3x+5)° from QR (right) sweeping up to QS */}
-    <path d="M 245,220 A 55,55 0 0,0 237,191" fill="none" stroke="#a855f7" strokeWidth="1.8" />
-    <text x="246" y="215" fill="#a855f7" fontSize="12" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
+    {/* Arc (3x+5)°: from QR right (0°) up to QS (~32°), radius 40 */}
+    {/* Start: Q+(40,0)=(240,180), End: Q+40·(cos32°,−sin32°)=(234,159) */}
+    <path d="M 240,180 A 40,40 0 0,0 234,159" fill="none" stroke="#a855f7" strokeWidth="1.8" />
+    <text x="242" y="177" fill="#a855f7" fontSize="11" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
 
-    {/* Arc: (6x+4)° from QS sweeping up to QP */}
-    <path d="M 254,180 A 75,75 0 0,0 190,145" fill="none" stroke="#ef4444" strokeWidth="1.8" />
-    <text x="220" y="160" fill="#ef4444" fontSize="12" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
+    {/* Arc (6x+4)°: from QS (~32°) up to QP (90°), radius 40 */}
+    {/* Start: Q+40·(cos32°,−sin32°)=(234,159), End: Q+(0,−40)=(200,140) */}
+    <path d="M 234,159 A 40,40 0 0,0 200,140" fill="none" stroke="#ef4444" strokeWidth="1.8" />
+    <text x="218" y="148" fill="#ef4444" fontSize="11" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
 
-    <circle cx="190" cy="220" r="3" fill="#facc15" />
+    {/* Dot at Q */}
+    <circle cx="200" cy="180" r="3" fill="#facc15" />
   </svg>
 );
 
