@@ -1872,7 +1872,7 @@ const OlimpiadeGarisSudutPage = () => {
                     <img
                       src={soal.image}
                       alt={`Gambar Soal Olimpiade ${soal.no}`}
-                      className="max-w-full rounded-lg border border-border/40 bg-white/5"
+                      className="max-w-xs rounded-lg border border-border/40 bg-white/5"
                     />
                   </div>
                 )}
