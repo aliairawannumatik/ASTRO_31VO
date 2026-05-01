@@ -850,31 +850,32 @@ const Soal20SVG = () => (
 
 // ── Soal 21: Right angle at Q, ray QS between QP (up) and QR (right) ─────────
 const Soal21SVG = () => (
-  <svg viewBox="0 0 380 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Horizontal through Q (extends left and right) */}
-    <line x1="20" y1="240" x2="340" y2="240" stroke="#ffffff" strokeWidth="2" />
-    {/* Vertical PQ (going up from Q) */}
-    <line x1="120" y1="20" x2="120" y2="240" stroke="#ffffff" strokeWidth="2" />
-    {/* QS diagonal */}
-    <line x1="120" y1="240" x2="300" y2="100" stroke="#ffffff" strokeWidth="2" />
+  <svg viewBox="0 0 400 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Horizontal line through Q: extends left and right */}
+    <line x1="20" y1="220" x2="375" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* Vertical line PQ: goes up from Q */}
+    <line x1="190" y1="30" x2="190" y2="220" stroke="#ffffff" strokeWidth="2" />
+    {/* Diagonal QS: 32° above horizontal right */}
+    <line x1="190" y1="220" x2="320" y2="151" stroke="#ffffff" strokeWidth="2" />
 
-    {/* Right-angle marker at lower-left of Q (between left-extension and vertical) */}
-    <polyline points="106,240 106,226 120,226" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+    {/* Right-angle marker at Q — upper-right quadrant (between PQ-up and QR-right) */}
+    <polyline points="190,200 210,200 210,220" fill="none" stroke="#ffffff" strokeWidth="1.5" />
 
-    <text x="114" y="14" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
-    <text x="116" y="266" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
-    <text x="320" y="244" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
-    <text x="306" y="98" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
+    {/* Labels */}
+    <text x="182" y="22" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
+    <text x="174" y="244" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
+    <text x="352" y="216" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
+    <text x="324" y="148" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
 
-    {/* Arcs at Q showing the two angles */}
-    {/* (6x+4)° between PQ (up) and QS */}
-    <path d="M 120,180 A 60,60 0 0,1 168,204" fill="none" stroke="#ef4444" strokeWidth="1.6" />
-    <text x="138" y="178" fill="#ef4444" fontSize="13" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
-    {/* (3x+5)° between QS and QR (horizontal-right) */}
-    <path d="M 200,240 A 80,80 0 0,0 184,196" fill="none" stroke="#a855f7" strokeWidth="1.6" />
-    <text x="178" y="232" fill="#a855f7" fontSize="13" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
+    {/* Arc: (3x+5)° from QR (right) sweeping up to QS */}
+    <path d="M 245,220 A 55,55 0 0,0 237,191" fill="none" stroke="#a855f7" strokeWidth="1.8" />
+    <text x="246" y="215" fill="#a855f7" fontSize="12" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
 
-    <circle cx="120" cy="240" r="3" fill="#ef4444" />
+    {/* Arc: (6x+4)° from QS sweeping up to QP */}
+    <path d="M 254,180 A 75,75 0 0,0 190,145" fill="none" stroke="#ef4444" strokeWidth="1.8" />
+    <text x="220" y="160" fill="#ef4444" fontSize="12" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
+
+    <circle cx="190" cy="220" r="3" fill="#facc15" />
   </svg>
 );
 
