@@ -397,6 +397,16 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Tinggi segitiga} = 4 \\text{ cm. Hitung volume prisma.}" },
     ],
   }),
+  Qn(15, "Soal Kawat – Membuat Prisma Segitiga Siku-Siku", {
+    type: "mixed",
+    content: "Tersedia kawat sepanjang 500 cm. Kawat tersebut akan digunakan untuk membuat kerangka prisma segitiga siku-siku. Panjang sisi siku-siku alasnya 8 cm dan 15 cm, serta tinggi prisma 20 cm.",
+    diagram: <PrismaSikuSVG />,
+    parts: [
+      { label: "a.", math: "\\text{Hitung sisi miring alas segitiga: } c = \\sqrt{8^2 + 15^2}" },
+      { label: "b.", math: "\\text{Hitung panjang kawat untuk 1 prisma (semua rusuk):} \\\\ \\text{rusuk alas + tutup} = 2 \\times (8 + 15 + 17) \\\\ \\text{rusuk tegak} = 3 \\times 20 \\\\ \\text{total} = \\ldots \\text{ cm}" },
+      { label: "c.", math: "\\text{Banyak prisma} = \\left\\lfloor \\frac{500}{140} \\right\\rfloor = \\ldots, \\quad \\text{sisa kawat} = 500 - (\\ldots \\times 140) = \\ldots \\text{ cm}" },
+    ],
+  }),
 ];
 
 const PrismaPage = () => {
@@ -416,7 +426,7 @@ const PrismaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 14 Soal</span>
+            <span className="text-amber-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
