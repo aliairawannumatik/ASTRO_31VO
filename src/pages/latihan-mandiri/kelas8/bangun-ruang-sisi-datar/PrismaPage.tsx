@@ -285,17 +285,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa jumlah sisi (bidang) pada prisma segitiga? Sebutkan nama masing-masing sisi." },
     ],
   }),
-  Qn(3, "Luas Permukaan Prisma Segitiga – Rumus", {
-    type: "mixed",
-    content: "Luas permukaan prisma = 2 × luas alas + luas selimut (seluruh sisi tegak).",
-    mathContent: "L = 2 \\times L_{alas} + (K_{alas} \\times t_{prisma})",
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan selimut prisma?" },
-      { label: "b.", math: "\\text{Jika alas segitiga sama sisi dengan sisi 6 cm dan tinggi prisma 10 cm, hitung } L" },
-      { label: "c.", math: "\\text{Gunakan } L_{\\triangle} = \\frac{\\sqrt{3}}{4} \\times 6^2 \\text{ untuk luas alas}" },
-    ],
-  }),
-  Qn(4, "Luas Permukaan Prisma Segitiga Siku-Siku", {
+  Qn(3, "Luas Permukaan Prisma Segitiga Siku-Siku", {
     type: "mixed",
     content: "Prisma segitiga siku-siku dengan alas segitiga siku-siku: sisi siku 3 cm dan 4 cm. Tinggi prisma 10 cm.",
     diagram: <PrismaSikuSVG />,
@@ -303,59 +293,10 @@ const questions: Q[] = [
       { label: "a.", math: "\\text{Hitung sisi miring alas segitiga: } c = \\sqrt{3^2 + 4^2}" },
       { label: "b.", math: "\\text{Hitung luas alas segitiga: } L_{\\triangle} = \\frac{1}{2} \\times 3 \\times 4" },
       { label: "c.", math: "\\text{Hitung luas permukaan prisma: } L = 2L_{\\triangle} + (3+4+5) \\times 10" },
+      { label: "d.", math: "\\text{Hitung volume prisma: } V = L_{\\triangle} \\times t" },
     ],
   }),
-  Qn(5, "Volume Prisma – Rumus", {
-    type: "mixed",
-    content: "Volume prisma dihitung dengan rumus:",
-    mathContent: "V = L_{alas} \\times t_{prisma}",
-    parts: [
-      { label: "a.", math: "\\text{Hitung V jika alas segitiga siku-siku } (3, 4, 5) \\text{ cm dan } t = 12 \\text{ cm}" },
-      { label: "b.", math: "\\text{Hitung V jika alas persegi dengan sisi 8 cm dan } t = 15 \\text{ cm}" },
-      { label: "c.", math: "\\text{Hitung V jika alas segitiga sama sisi sisi 6 cm dan } t = 10 \\text{ cm}" },
-    ],
-  }),
-  Qn(6, "Volume Prisma Segitiga Siku-Siku – UN Style", {
-    type: "mixed",
-    content: "Prisma segitiga siku-siku dengan alas: sisi siku-siku 6 cm dan 8 cm. Tinggi prisma 15 cm.",
-    diagram: <PrismaSikuSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas segitiga: } L = \\frac{1}{2} \\times 6 \\times 8" },
-      { label: "b.", math: "\\text{Hitung volume prisma: } V = L_{\\triangle} \\times 15" },
-      { label: "c.", math: "\\text{Hitung sisi miring segitiga alas}" },
-    ],
-  }),
-  Qn(7, "Jaring-Jaring Prisma Segitiga", {
-    type: "mixed",
-    content: "Perhatikan jaring-jaring prisma segitiga berikut:",
-    diagram: <PrismaNetSVG />,
-    parts: [
-      { label: "a.", text: "Ada berapa bangun datar yang menyusun jaring-jaring prisma segitiga?" },
-      { label: "b.", text: "Sebutkan jenis dan jumlah bangun datar penyusunnya." },
-      { label: "c.", text: "Untuk prisma dengan alas segitiga siku-siku (3,4,5) cm dan tinggi 8 cm, hitung luas jaring-jaringnya." },
-    ],
-  }),
-  Qn(8, "Unsur-Unsur Prisma Segiempat", {
-    type: "mixed",
-    content: "Perhatikan prisma segiempat (balok) ABCD.EFGH berikut:",
-    diagram: <PrismaSegiempatSVG />,
-    parts: [
-      { label: "a.", text: "Berapa jumlah sisi pada prisma segiempat? Sebutkan nama masing-masing sisi." },
-      { label: "b.", text: "Berapa jumlah rusuk dan titik sudut prisma segiempat?" },
-      { label: "c.", text: "Apakah kubus termasuk prisma segiempat? Jelaskan." },
-    ],
-  }),
-  Qn(9, "Luas Permukaan Prisma Segiempat – UN Style", {
-    type: "mixed",
-    content: "Sebuah prisma dengan alas persegi panjang 8 cm × 6 cm dan tinggi prisma 12 cm.",
-    diagram: <PrismaSegiempatSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas persegi panjang}" },
-      { label: "b.", math: "\\text{Hitung keliling alas: } K = 2(8 + 6)" },
-      { label: "c.", math: "\\text{Hitung luas permukaan: } L = 2(8 \\times 6) + (28 \\times 12)" },
-    ],
-  }),
-  Qn(10, "Volume Prisma Segiempat – UN Style", {
+  Qn(4, "Volume Prisma Segiempat – UN Style", {
     type: "mixed",
     content: "Sebuah prisma dengan alas persegi panjang 10 cm × 7 cm dan tinggi 9 cm.",
     parts: [
@@ -364,7 +305,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan prisma tersebut." },
     ],
   }),
-  Qn(11, "Luas Permukaan Prisma – Soal ANBK", {
+  Qn(5, "Luas Permukaan Prisma – Soal ANBK", {
     type: "mixed",
     content: "Sebuah tenda berbentuk prisma segitiga. Alas berbentuk segitiga sama kaki dengan sisi alas 4 m dan tinggi segitiga 3 m. Panjang tenda 6 m.",
     diagram: <PrismaSegitigaSVG t="6 m" />,
@@ -374,7 +315,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung total luas kain yang dibutuhkan untuk membuat tenda (tanpa alas)." },
     ],
   }),
-  Qn(12, "Soal Cerita – Atap Rumah", {
+  Qn(6, "Soal Cerita – Atap Rumah", {
     type: "mixed",
     content: "Atap sebuah rumah berbentuk prisma segitiga. Alas segitiga memiliki lebar 8 m dan tinggi 3 m. Panjang rumah 12 m.",
     parts: [
@@ -383,7 +324,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika seluruh bidang miring atap akan dipasang genteng, hitung luasnya. (Gunakan Pythagoras untuk sisi miring.)" },
     ],
   }),
-  Qn(13, "Mencari Tinggi Prisma dari Volume – UN", {
+  Qn(7, "Mencari Tinggi Prisma dari Volume – UN", {
     type: "mixed",
     content: "Sebuah prisma segitiga memiliki volume 360 cm³. Alasnya berbentuk segitiga siku-siku dengan sisi siku 6 cm dan 8 cm.",
     parts: [
@@ -392,17 +333,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan prisma tersebut." },
     ],
   }),
-  Qn(14, "Soal UN – Prisma Segitiga Sama Sisi", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan alas segitiga sama sisi bersisi 6 cm dan tinggi prisma 10 cm.",
-    diagram: <PrismaSegitigaSVG a="6" b="6" c="6" t="10" />,
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas: } L_{\\triangle} = \\frac{\\sqrt{3}}{4} \\times 6^2 = 9\\sqrt{3} \\approx 15{,}6 \\text{ cm}^2" },
-      { label: "b.", math: "\\text{Hitung volume: } V = 9\\sqrt{3} \\times 10 \\approx \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "\\text{Hitung luas permukaan: } L = 2 \\times 9\\sqrt{3} + 3 \\times (6 \\times 10)" },
-    ],
-  }),
-  Qn(15, "Soal Cerita – Tangki Penampung Prisma", {
+  Qn(8, "Soal Cerita – Tangki Penampung Prisma", {
     type: "mixed",
     content: "Sebuah tangki air berbentuk prisma segitiga siku-siku. Sisi siku alasnya 1 m dan 1,5 m. Panjang tangki 4 m.",
     parts: [
@@ -411,7 +342,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika tangki diisi 3/4 penuh, berapa liter air di dalamnya?" },
     ],
   }),
-  Qn(16, "Soal ANBK – Jenis Prisma Berdasarkan Alas", {
+  Qn(9, "Soal ANBK – Jenis Prisma Berdasarkan Alas", {
     type: "mixed",
     content: "Prisma dapat dinamai berdasarkan bentuk alasnya.",
     parts: [
@@ -420,7 +351,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika prisma memiliki } n \\text{ sisi pada alasnya, rumuskan jumlah total sisi prisma tersebut.}" },
     ],
   }),
-  Qn(17, "Soal TKA – Selimut Prisma", {
+  Qn(10, "Soal TKA – Selimut Prisma", {
     type: "mixed",
     content: "Luas selimut sebuah prisma segitiga adalah 180 cm². Tinggi prisma 12 cm. Alas prisma berbentuk segitiga sama kaki dengan sisi kaki 5 cm dan alas 6 cm.",
     parts: [
@@ -429,35 +360,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika tinggi segitiga alas} = 4 \\text{ cm, hitung luas permukaan total prisma}" },
     ],
   }),
-  Qn(18, "Soal UN – Membandingkan Volume Prisma", {
-    type: "mixed",
-    content: "Prisma A memiliki alas segitiga siku-siku (3,4,5) cm dan tinggi 10 cm. Prisma B memiliki alas persegi dengan sisi 5 cm dan tinggi 8 cm.",
-    parts: [
-      { label: "a.", text: "Hitung volume Prisma A." },
-      { label: "b.", text: "Hitung volume Prisma B." },
-      { label: "c.", math: "\\text{Manakah yang memiliki volume lebih besar? Berapa selisihnya?}" },
-    ],
-  }),
-  Qn(19, "Soal ANBK – Tinggi Alas Segitiga", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan volume 540 cm³. Tinggi prisma 15 cm. Alas berbentuk segitiga dengan panjang alas 12 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Dari } V = L_{\\triangle} \\times t_{prisma}, \\text{ hitung } L_{\\triangle}" },
-      { label: "b.", math: "\\text{Dari } L_{\\triangle} = \\frac{1}{2} \\times 12 \\times h, \\text{ hitung tinggi segitiga } h" },
-      { label: "c.", text: "Hitung luas permukaan prisma jika ketiga sisi segitiga sama panjang 12 cm." },
-    ],
-  }),
-  Qn(20, "Soal UN – Diagonal Bidang Prisma", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan alas persegi panjang 8 cm × 6 cm dan tinggi 10 cm.",
-    diagram: <PrismaSegiempatSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Hitung diagonal sisi pada bidang alas (persegi panjang 8×6)}" },
-      { label: "b.", math: "\\text{Hitung diagonal sisi pada bidang tegak (8×10)}" },
-      { label: "c.", math: "\\text{Hitung panjang diagonal ruang prisma: } d = \\sqrt{8^2 + 6^2 + 10^2}" },
-    ],
-  }),
-  Qn(21, "Soal Kontekstual – Coklat Berbentuk Prisma", {
+  Qn(11, "Soal Kontekstual – Coklat Berbentuk Prisma", {
     type: "mixed",
     content: "Sebuah coklat berbentuk prisma segitiga sama sisi dengan sisi alas 4 cm dan tinggi 15 cm.",
     parts: [
@@ -466,70 +369,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika coklat dipotong menjadi 3 bagian sama panjang, berapakah volume setiap potongan?" },
     ],
   }),
-  Qn(22, "Soal UN – Luas Permukaan dari Volume", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan alas segitiga siku-siku. Volume prisma 240 cm³ dan tinggi prisma 10 cm. Sisi siku alas 4 cm dan 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas segitiga}" },
-      { label: "b.", math: "\\text{Verifikasi volume: } 240 = L_{\\triangle} \\times 10" },
-      { label: "c.", math: "\\text{Hitung luas permukaan prisma} \\left(\\text{sisi miring alas} = \\sqrt{4^2 + 6^2}\\right)" },
-    ],
-  }),
-  Qn(23, "Soal TKA – Prisma Tegak vs. Miring", {
-    type: "mixed",
-    content: "Sebuah prisma tegak memiliki alas segitiga siku-siku (5, 12, 13) cm dan tinggi 20 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas: } L = \\frac{1}{2} \\times 5 \\times 12" },
-      { label: "b.", math: "\\text{Hitung volume prisma}" },
-      { label: "c.", math: "\\text{Hitung luas permukaan prisma}" },
-    ],
-  }),
-  Qn(24, "Soal ANBK – Pembagian Volume", {
-    type: "mixed",
-    content: "Sebuah kotak berbentuk balok (prisma segiempat) berukuran 24 cm × 18 cm × 10 cm dipotong diagonal pada bidang persegi panjangnya, menghasilkan dua prisma segitiga.",
-    parts: [
-      { label: "a.", text: "Hitung volume kotak asal." },
-      { label: "b.", text: "Hitung volume setiap prisma segitiga hasil potongan." },
-      { label: "c.", math: "\\text{Verifikasi: } V_{balok} = 2 \\times V_{prisma}" },
-    ],
-  }),
-  Qn(25, "Soal UN Terapan – Kolam Ikan Prisma", {
-    type: "mixed",
-    content: "Sebuah kolam ikan berbentuk prisma segitiga siku-siku. Alas segitiga memiliki sisi siku 1,2 m dan 0,9 m. Panjang kolam 3 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung volume kolam dalam m}^3" },
-      { label: "b.", math: "\\text{Konversikan ke liter}" },
-      { label: "c.", text: "Jika kolam diisi 5/6 penuh, berapa liter air yang dibutuhkan?" },
-    ],
-  }),
-  Qn(26, "Menentukan Luas Alas dari Luas Permukaan – UN", {
-    type: "mixed",
-    content: "Sebuah prisma segitiga sama sisi memiliki luas permukaan 216 cm². Tinggi prisma 8 cm dan sisi alas segitiga 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas 3 sisi tegak: } 3 \\times (6 \\times 8) = \\ldots" },
-      { label: "b.", math: "\\text{Dari } L_{total} = 2L_{\\triangle} + L_{tegak}, \\text{ hitung } L_{\\triangle}" },
-      { label: "c.", math: "\\text{Verifikasi dengan } L_{\\triangle} = \\frac{\\sqrt{3}}{4} \\times 6^2" },
-    ],
-  }),
-  Qn(27, "Soal Gabungan – Prisma di Atas Balok", {
-    type: "mixed",
-    content: "Sebuah bangunan terdiri dari sebuah balok berukuran 6 m × 4 m × 3 m dan sebuah prisma segitiga di atasnya. Alas prisma sama dengan alas balok (6×4 m) dan tinggi prisma 2 m.",
-    parts: [
-      { label: "a.", text: "Hitung volume balok." },
-      { label: "b.", text: "Hitung volume prisma." },
-      { label: "c.", text: "Hitung total volume bangunan tersebut." },
-    ],
-  }),
-  Qn(28, "Soal ANBK – Perbandingan Prisma dan Balok", {
-    type: "mixed",
-    content: "Sebuah prisma segitiga siku-siku (3, 4, 5) cm dengan tinggi 10 cm, dan sebuah balok dengan alas 3 × 4 cm dan tinggi 5 cm.",
-    parts: [
-      { label: "a.", text: "Hitung volume prisma segitiga." },
-      { label: "b.", text: "Hitung volume balok." },
-      { label: "c.", math: "\\text{Berapa perbandingan } V_{prisma} : V_{balok}?" },
-    ],
-  }),
-  Qn(29, "Soal UN – Jumlah Rusuk, Titik Sudut, Sisi Prisma n-gon", {
+  Qn(12, "Soal UN – Jumlah Rusuk, Titik Sudut, Sisi Prisma n-gon", {
     type: "mixed",
     content: "Sebuah prisma dengan alas segi-n (n sisi pada alasnya).",
     parts: [
@@ -538,7 +378,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Nyatakan dalam rumus: jumlah sisi} = n + \\ldots" },
     ],
   }),
-  Qn(30, "Soal TKA – Volume Prisma dari Jaring-Jaring", {
+  Qn(13, "Soal TKA – Volume Prisma dari Jaring-Jaring", {
     type: "mixed",
     content: "Sebuah jaring-jaring prisma segitiga terdiri dari 2 segitiga siku-siku (3, 4, 5) cm dan 3 persegi panjang.",
     diagram: <PrismaNetSVG />,
@@ -548,97 +388,13 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan total prisma." },
     ],
   }),
-  Qn(31, "Soal Cerita UN – Kotak Kado Prisma", {
-    type: "mixed",
-    content: "Sebuah kotak kado berbentuk prisma segitiga. Alas berbentuk segitiga sama sisi dengan sisi 8 cm. Tinggi prisma 20 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas: } L = \\frac{\\sqrt{3}}{4} \\times 8^2 = 16\\sqrt{3} \\approx 27{,}7 \\text{ cm}^2" },
-      { label: "b.", text: "Hitung volume kotak kado." },
-      { label: "c.", text: "Hitung luas kertas pembungkus minimum (luas permukaan)." },
-    ],
-  }),
-  Qn(32, "Soal Olimpiade – Prisma Segilima", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan alas segilima beraturan bersisi 4 cm. Tinggi segitiga dalam segilima = 2,75 cm. Tinggi prisma 10 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas segilima: } L = 5 \\times \\frac{1}{2} \\times 4 \\times 2{,}75" },
-      { label: "b.", math: "\\text{Hitung volume prisma}" },
-      { label: "c.", math: "\\text{Hitung luas permukaan: } L = 2L_{alas} + 5 \\times (4 \\times 10)" },
-    ],
-  }),
-  Qn(33, "Soal ANBK – Mengisi Prisma dengan Cairan", {
-    type: "mixed",
-    content: "Sebuah wadah berbentuk prisma segitiga dengan alas segitiga siku-siku (6, 8, 10) cm dan tinggi 30 cm.",
-    parts: [
-      { label: "a.", text: "Hitung volume total wadah." },
-      { label: "b.", text: "Wadah diisi minyak goreng hingga 2/3 penuh. Berapa cm³ minyak dalam wadah?" },
-      { label: "c.", text: "Berapa tinggi minyak dalam wadah tersebut?" },
-    ],
-  }),
-  Qn(34, "Soal UN – Panjang Rusuk Tegak dari Luas Selimut", {
+  Qn(14, "Soal UN – Panjang Rusuk Tegak dari Luas Selimut", {
     type: "mixed",
     content: "Sebuah prisma segitiga sama kaki. Alas segitiga: kaki 5 cm, alas 6 cm. Luas selimut prisma = 192 cm².",
     parts: [
       { label: "a.", math: "\\text{Hitung keliling alas segitiga: } K = 5 + 5 + 6 = \\ldots" },
       { label: "b.", math: "\\text{Dari } L_{selimut} = K \\times t, \\text{ tentukan } t_{prisma}" },
       { label: "c.", math: "\\text{Tinggi segitiga} = 4 \\text{ cm. Hitung volume prisma.}" },
-    ],
-  }),
-  Qn(35, "Soal TKA – Prisma Dalam Konteks Arsitektur", {
-    type: "mixed",
-    content: "Sebuah jembatan memiliki penopang berbentuk prisma segitiga. Alas segitiga isosceles dengan sisi kaki 5 m dan sisi alas 6 m (tinggi segitiga 4 m). Panjang penopang 50 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas penampang (alas segitiga)}" },
-      { label: "b.", math: "\\text{Hitung volume beton yang dibutuhkan (volume prisma) dalam m}^3" },
-      { label: "c.", math: "\\text{Hitung luas seluruh permukaan penopang (tanpa tutup di ujung)} \\text{ dalam m}^2" },
-    ],
-  }),
-  Qn(36, "Soal UN Variasi – Mencari Sisi Alas dari Volume", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan alas segitiga sama sisi. Volume prisma 216√3 cm³ dan tinggi prisma 12 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Dari } V = L_{\\triangle} \\times t, \\text{ hitung } L_{\\triangle}" },
-      { label: "b.", math: "\\text{Dari } L_{\\triangle} = \\frac{\\sqrt{3}}{4} s^2, \\text{ tentukan sisi } s" },
-      { label: "c.", text: "Hitung luas permukaan prisma tersebut." },
-    ],
-  }),
-  Qn(37, "Soal ANBK – Membandingkan Prisma Berbeda Alas", {
-    type: "mixed",
-    content: "Prisma I: alas segitiga siku-siku (6,8,10) cm, tinggi 12 cm. Prisma II: alas persegi sisi 7 cm, tinggi 6 cm.",
-    parts: [
-      { label: "a.", text: "Hitung volume Prisma I dan Prisma II." },
-      { label: "b.", text: "Hitung luas permukaan Prisma I dan Prisma II." },
-      { label: "c.", text: "Prisma mana yang lebih efisien untuk digunakan sebagai wadah? (volume terbesar dengan bahan terkecil)" },
-    ],
-  }),
-  Qn(38, "Soal UN – Prisma dan Pythagoras", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan alas segitiga siku-siku. Diketahui hypotenuse alas = 13 cm dan salah satu sisi siku = 5 cm. Tinggi prisma 18 cm.",
-    diagram: <PrismaSikuSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Gunakan Pythagoras untuk mencari sisi siku lainnya}" },
-      { label: "b.", math: "\\text{Hitung luas alas segitiga}" },
-      { label: "c.", math: "\\text{Hitung volume dan luas permukaan prisma}" },
-    ],
-  }),
-  Qn(39, "Soal Gabungan – Volume Benda Komposit", {
-    type: "mixed",
-    content: "Sebuah benda terdiri dari dua prisma segitiga siku-siku yang identik dengan alas (4, 3, 5) cm dan tinggi 10 cm, digabungkan pada sisi miring alasnya membentuk prisma segiempat.",
-    parts: [
-      { label: "a.", text: "Hitung volume satu prisma segitiga." },
-      { label: "b.", text: "Hitung volume total benda komposit (dua prisma)." },
-      { label: "c.", text: "Benda komposit ini berbentuk apa? Hitung dimensi dan verifikasi volumenya." },
-    ],
-  }),
-  Qn(40, "Soal UN/ANBK – Gabungan Konsep Prisma", {
-    type: "mixed",
-    content: "Sebuah prisma tegak dengan alas segitiga siku-siku bersisi 6 cm, 8 cm, dan 10 cm. Tinggi prisma 14 cm.",
-    diagram: <PrismaSikuSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas segitiga}" },
-      { label: "b.", math: "\\text{Hitung volume prisma}" },
-      { label: "c.", math: "\\text{Hitung luas permukaan prisma}" },
-      { label: "d.", math: "\\text{Hitung luas selimut (tanpa alas dan tutup)}" },
     ],
   }),
 ];
@@ -660,7 +416,7 @@ const PrismaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-amber-400 text-xs font-bold">📋 14 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
