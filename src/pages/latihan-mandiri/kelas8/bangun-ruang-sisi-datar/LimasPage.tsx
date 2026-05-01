@@ -240,17 +240,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan seluruh piramida." },
     ],
   }),
-  Qn(7, "Soal UN – Limas dan Pythagoras", {
-    type: "mixed",
-    content: "Limas segiempat beraturan T.ABCD memiliki sisi alas 10 cm dan rusuk tegak (TA = TB = TC = TD) = 13 cm.",
-    diagram: <LimasTinggiSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Diagonal alas: } d = s\\sqrt{2} = 10\\sqrt{2} \\text{ cm}" },
-      { label: "b.", math: "\\text{Tinggi limas: } t = \\sqrt{TA^2 - \\left(\\frac{d}{2}\\right)^2} = \\sqrt{169 - 50} = \\ldots" },
-      { label: "c.", text: "Hitung volume limas tersebut." },
-    ],
-  }),
-  Qn(8, "Soal Cerita – Atap Berbentuk Limas", {
+  Qn(7, "Soal Cerita – Atap Berbentuk Limas", {
     type: "mixed",
     content: "Atap sebuah rumah berbentuk limas segiempat beraturan dengan alas persegi 8 m × 8 m dan tinggi 3 m.",
     diagram: <LimasSegiempatSVG s="8m" t="3m" showHeight={true} />,
@@ -260,7 +250,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume ruang di bawah atap." },
     ],
   }),
-  Qn(9, "Soal ANBK – Biaya Material Atap Limas", {
+  Qn(8, "Soal ANBK – Biaya Material Atap Limas", {
     type: "mixed",
     content: "Atap berbentuk limas segiempat beraturan: alas 6 m × 6 m, tinggi 4 m. Genteng dijual Rp120.000 per m².",
     parts: [
@@ -269,7 +259,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung total biaya genteng untuk atap tersebut." },
     ],
   }),
-  Qn(10, "Soal UN – Volume Limas Segitiga", {
+  Qn(9, "Soal UN – Volume Limas Segitiga", {
     type: "mixed",
     content: "Sebuah limas segitiga T.ABC memiliki alas segitiga siku-siku dengan sisi siku 6 cm dan 8 cm. Tinggi limas 10 cm.",
     diagram: <LimasSegitigaSVG />,
@@ -279,7 +269,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Sisi miring alas} = \\sqrt{6^2 + 8^2} = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(11, "Soal UN – Luas Permukaan Limas Segitiga Sama Sisi", {
+  Qn(10, "Soal UN – Luas Permukaan Limas Segitiga Sama Sisi", {
     type: "mixed",
     content: "Sebuah limas segitiga sama sisi T.ABC. Alas segitiga sama sisi bersisi 10 cm. Rusuk tegak (TA=TB=TC) = 13 cm.",
     diagram: <LimasSegitigaSVG />,
@@ -289,16 +279,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Luas alas: } \\frac{\\sqrt{3}}{4} \\times 10^2 = 25\\sqrt{3} \\approx 43{,}3 \\text{ cm}^2" },
     ],
   }),
-  Qn(12, "Soal UN – Mencari Tinggi dari Luas Permukaan", {
-    type: "mixed",
-    content: "Limas segiempat beraturan T.ABCD memiliki sisi alas 6 cm. Luas selimutnya 120 cm².",
-    parts: [
-      { label: "a.", math: "\\text{Dari luas selimut} = 4 \\times \\frac{1}{2} \\times 6 \\times l = 120, \\text{ tentukan apotema } l" },
-      { label: "b.", math: "\\text{Dari apotema } l = \\sqrt{t^2 + 3^2}, \\text{ tentukan tinggi } t" },
-      { label: "c.", math: "\\text{Hitung volume limas}" },
-    ],
-  }),
-  Qn(13, "Soal Kontekstual – Topi Ulang Tahun", {
+  Qn(11, "Soal Kontekstual – Topi Ulang Tahun", {
     type: "mixed",
     content: "Sebuah topi ulang tahun berbentuk limas segitiga sama sisi. Sisi alas 12 cm, tinggi 16 cm.",
     diagram: <LimasSegitigaSVG />,
@@ -308,7 +289,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume topi." },
     ],
   }),
-  Qn(14, "Soal Cerita ANBK – Monumen Berbentuk Limas", {
+  Qn(12, "Soal Cerita ANBK – Monumen Berbentuk Limas", {
     type: "mixed",
     content: "Sebuah monumen berbentuk limas segiempat beraturan dengan sisi alas 6 m dan tinggi 8 m.",
     diagram: <LimasSegiempatSVG s="6m" t="8m" showHeight={true} />,
@@ -318,7 +299,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan monumen yang perlu dicat (tanpa alas)." },
     ],
   }),
-  Qn(15, "Soal TKA – Piramida Agung Giza (Kontekstual)", {
+  Qn(13, "Soal TKA – Piramida Agung Giza (Kontekstual)", {
     type: "mixed",
     content: "Piramida Agung Giza berbentuk limas segiempat dengan alas persegi sekitar 230 m × 230 m dan tinggi aslinya sekitar 146 m.",
     parts: [
@@ -327,7 +308,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Hitung luas permukaan 4 sisi miring piramida}" },
     ],
   }),
-  Qn(16, "Soal UN – Luas Permukaan dari Limas Segiempat Beraturan", {
+  Qn(14, "Soal UN – Luas Permukaan dari Limas Segiempat Beraturan", {
     type: "mixed",
     content: "Limas segiempat beraturan T.ABCD dengan sisi alas s = 10 cm dan tinggi t = 12 cm.",
     diagram: <LimasSegiempatSVG s="10" t="12" showHeight={true} />,
@@ -335,6 +316,16 @@ const questions: Q[] = [
       { label: "a.", math: "\\text{Hitung apotema: } l = \\sqrt{12^2 + 5^2} = \\ldots" },
       { label: "b.", math: "\\text{Hitung luas selimut: } 4 \\times \\frac{1}{2} \\times 10 \\times l" },
       { label: "c.", math: "\\text{Hitung luas permukaan total: } L = 10^2 + \\text{luas selimut}" },
+    ],
+  }),
+  Qn(15, "Soal Kontekstual – Kerangka Limas dari Kawat", {
+    type: "mixed",
+    content: "Terdapat kawat sepanjang 7,3 m. Kawat tersebut akan digunakan untuk membuat kerangka limas segiempat beraturan T.ABCD dengan panjang sisi alas 10 cm dan panjang rusuk tegak 15 cm.",
+    diagram: <LimasSegiempatSVG s="10" t="15" />,
+    parts: [
+      { label: "a.", math: "\\text{Hitung panjang kawat untuk 1 kerangka limas:}\\quad 4 \\times s_{alas} + 4 \\times r_{tegak} = 4 \\times 10 + 4 \\times 15 = \\ldots \\text{ cm}" },
+      { label: "b.", math: "\\text{Ubah panjang kawat ke cm: } 7{,}3 \\text{ m} = 730 \\text{ cm. Tentukan banyak kerangka yang dapat dibuat: } 730 \\div 100 = \\ldots" },
+      { label: "c.", math: "\\text{Tentukan sisa kawat: } 730 - (\\text{banyak kerangka} \\times 100) = \\ldots \\text{ cm}" },
     ],
   }),
 ];
@@ -356,7 +347,7 @@ const LimasPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 16 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
