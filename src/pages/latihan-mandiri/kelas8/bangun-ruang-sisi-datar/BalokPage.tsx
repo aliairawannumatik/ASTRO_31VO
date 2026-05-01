@@ -15,6 +15,9 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
+// ABCD.EFGH convention: ABCD = alas (bawah), EFGH = atap (atas)
+// A=front-left-bottom, B=front-right-bottom, C=back-right-bottom, D=back-left-bottom
+// E=front-left-top (above A), F=front-right-top (above B), G=back-right-top (above C), H=back-left-top (above D)
 const BalokSVG = ({ p = "p", l = "l", t = "t", wide = false }: { p?: string; l?: string; t?: string; wide?: boolean }) => {
   const W = wide ? 130 : 90;
   const H = 60;
@@ -45,15 +48,15 @@ const BalokSVG = ({ p = "p", l = "l", t = "t", wide = false }: { p?: string; l?:
       <line x1="15" y1={H+D} x2={D+15} y2={H+10} stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
       <line x1={D+15} y1={H+10} x2={W+D+15} y2={H+10} stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
       <line x1={D+15} y1={H+10} x2={D+15} y2="10" stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-      {/* Vertices labels */}
-      <text x="2" y={H+D+4} fill="white" fontSize="10" fontFamily="monospace">A</text>
-      <text x={W+17} y={H+D+4} fill="white" fontSize="10" fontFamily="monospace">B</text>
-      <text x={W+17} y={D-2} fill="white" fontSize="10" fontFamily="monospace">C</text>
-      <text x="2" y={D-2} fill="white" fontSize="10" fontFamily="monospace">D</text>
-      <text x={D+16} y="8" fill="white" fontSize="10" fontFamily="monospace">E</text>
-      <text x={W+D+17} y="8" fill="white" fontSize="10" fontFamily="monospace">F</text>
-      <text x={W+D+17} y={H+12} fill="white" fontSize="10" fontFamily="monospace">G</text>
-      <text x={D+16} y={H+12} fill="white" fontSize="10" fontFamily="monospace">H</text>
+      {/* Vertex labels — ABCD = alas (bawah), EFGH = atap (atas) */}
+      <text x="2"        y={H+D+4}  fill="white" fontSize="10" fontFamily="monospace">A</text>
+      <text x={W+17}     y={H+D+4}  fill="white" fontSize="10" fontFamily="monospace">B</text>
+      <text x={W+D+17}   y={H+12}   fill="white" fontSize="10" fontFamily="monospace">C</text>
+      <text x={D+16}     y={H+12}   fill="white" fontSize="10" fontFamily="monospace">D</text>
+      <text x="2"        y={D-2}    fill="white" fontSize="10" fontFamily="monospace">E</text>
+      <text x={W+17}     y={D-2}    fill="white" fontSize="10" fontFamily="monospace">F</text>
+      <text x={W+D+17}   y="8"      fill="white" fontSize="10" fontFamily="monospace">G</text>
+      <text x={D+16}     y="8"      fill="white" fontSize="10" fontFamily="monospace">H</text>
       {/* Dimension labels */}
       <text x={(W/2)+8} y={H+D+14} fill="#34d399" fontSize="11" textAnchor="middle">{p}</text>
       <text x={W+D+22} y={(H/2)+D-5} fill="#34d399" fontSize="11" textAnchor="middle">{t}</text>
@@ -87,6 +90,7 @@ const BalokNetSVG = ({ p = 8, l = 5, t = 3 }: { p?: number; l?: number; t?: numb
   );
 };
 
+// DiagonalBalokSVG — ABCD = alas (bawah), EFGH = atap (atas)
 const DiagonalBalokSVG = () => (
   <svg width="180" height="130" viewBox="0 0 180 130" className="mx-auto">
     <polygon points="15,105 115,105 115,45 15,45" fill="#10b981" fillOpacity="0.25" stroke="#34d399" strokeWidth="1.5" />
@@ -101,32 +105,35 @@ const DiagonalBalokSVG = () => (
     <line x1="15" y1="105" x2="115" y2="45" stroke="#f472b6" strokeWidth="1.5" />
     <text x="70" y="125" fill="#f59e0b" fontSize="9" textAnchor="middle">diagonal ruang</text>
     <text x="50" y="80" fill="#f472b6" fontSize="9" textAnchor="middle">d sisi</text>
-    {/* Labels */}
-    <text x="2" y="110" fill="white" fontSize="10" fontFamily="monospace">A</text>
+    {/* Labels — ABCD = alas (bawah), EFGH = atap (atas) */}
+    <text x="2"   y="110" fill="white" fontSize="10" fontFamily="monospace">A</text>
     <text x="117" y="110" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="117" y="43" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="2" y="43" fill="white" fontSize="10" fontFamily="monospace">D</text>
-    <text x="42" y="13" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="152" y="13" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="152" y="77" fill="white" fontSize="10" fontFamily="monospace">G</text>
-    <text x="42" y="77" fill="white" fontSize="10" fontFamily="monospace">H</text>
+    <text x="152" y="77"  fill="white" fontSize="10" fontFamily="monospace">C</text>
+    <text x="42"  y="77"  fill="white" fontSize="10" fontFamily="monospace">D</text>
+    <text x="2"   y="43"  fill="white" fontSize="10" fontFamily="monospace">E</text>
+    <text x="117" y="43"  fill="white" fontSize="10" fontFamily="monospace">F</text>
+    <text x="152" y="13"  fill="white" fontSize="10" fontFamily="monospace">G</text>
+    <text x="42"  y="13"  fill="white" fontSize="10" fontFamily="monospace">H</text>
   </svg>
 );
 
 const questions: Q[] = [
   Qn(1, "Unsur-Unsur Balok", {
     type: "mixed",
-    content: "Perhatikan balok ABCD.EFGH berikut:",
+    content: "Perhatikan balok ABCD.EFGH berikut (ABCD = sisi alas/bawah, EFGH = sisi atap/atas):",
     diagram: <BalokSVG p="p" l="l" t="t" />,
     parts: [
       { label: "a.", text: "Sebutkan semua rusuk balok ABCD.EFGH beserta jumlahnya!" },
       { label: "b.", text: "Ada berapa titik sudut dan sisi pada balok? Sebutkan semuanya." },
       { label: "c.", text: "Sebutkan pasangan-pasangan sisi yang sejajar pada balok." },
+      { label: "d.", text: "Sebutkan semua diagonal bidang (diagonal sisi) balok ABCD.EFGH beserta jumlahnya!" },
+      { label: "e.", text: "Sebutkan semua diagonal ruang balok ABCD.EFGH beserta jumlahnya!" },
+      { label: "f.", text: "Sebutkan semua bidang diagonal balok ABCD.EFGH beserta jumlahnya!" },
     ],
   }),
   Qn(2, "Perbedaan Balok dan Kubus", {
     type: "mixed",
-    content: "Balok ABCD.EFGH memiliki panjang p, lebar l, dan tinggi t.",
+    content: "Balok ABCD.EFGH memiliki panjang p, lebar l, dan tinggi t (ABCD = sisi alas/bawah, EFGH = sisi atap/atas).",
     diagram: <BalokSVG p="p" l="l" t="t" />,
     parts: [
       { label: "a.", text: "Apa perbedaan utama antara balok dan kubus?" },
@@ -136,8 +143,9 @@ const questions: Q[] = [
   }),
   Qn(3, "Luas Permukaan Balok – Dasar", {
     type: "mixed",
-    content: "Rumus luas permukaan balok dengan panjang p, lebar l, dan tinggi t:",
+    content: "Rumus luas permukaan balok ABCD.EFGH dengan panjang p, lebar l, dan tinggi t (ABCD = sisi alas/bawah, EFGH = sisi atap/atas):",
     mathContent: "L = 2(pl + pt + lt)",
+    diagram: <BalokSVG p="p" l="l" t="t" />,
     parts: [
       { label: "a.", math: "\\text{Hitung L jika } p=8, l=5, t=3 \\text{ (cm)}" },
       { label: "b.", math: "\\text{Hitung L jika } p=12, l=8, t=6 \\text{ (cm)}" },
@@ -161,7 +169,6 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "\\text{Hitung diagonal sisi pada bidang ABCD (diagonal } AC\\text{)}" },
       { label: "b.", math: "\\text{Hitung diagonal ruang } AG = \\sqrt{p^2 + l^2 + t^2}" },
-      { label: "c.", text: "Ada berapa banyak diagonal ruang pada balok?" },
     ],
   }),
   Qn(6, "Jaring-Jaring Balok", {
@@ -201,34 +208,15 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kolam hanya diisi setinggi 1,5 m, berapa volume air yang dibutuhkan?" },
     ],
   }),
-  Qn(10, "Soal Cerita – Bak Penampungan Air", {
-    type: "mixed",
-    content: "Sebuah bak air berbentuk balok berukuran panjang 80 cm, lebar 60 cm, dan tinggi 50 cm.",
-    parts: [
-      { label: "a.", text: "Hitung volume bak dalam cm³, lalu konversikan ke liter." },
-      { label: "b.", text: "Jika air mengalir dengan debit 4 liter/menit, berapa menit waktu yang dibutuhkan untuk memenuhi bak?" },
-      { label: "c.", text: "Hitung luas permukaan bagian dalam bak (tanpa tutup)." },
-    ],
-  }),
-  Qn(11, "Diagonal Ruang Balok – Soal UN", {
-    type: "mixed",
-    content: "Sebuah balok memiliki panjang 12 cm, lebar 9 cm, dan tinggi 8 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung panjang diagonal ruang: } d = \\sqrt{12^2 + 9^2 + 8^2}" },
-      { label: "b.", text: "Ada berapa diagonal ruang yang dimiliki balok tersebut?" },
-      { label: "c.", math: "\\text{Apakah semua diagonal ruang balok sama panjang?}" },
-    ],
-  }),
-  Qn(12, "Perbandingan Volume Dua Balok", {
+  Qn(10, "Perbandingan Volume Dua Balok", {
     type: "mixed",
     content: "Balok A berukuran 6×4×3 cm dan Balok B berukuran 12×8×6 cm.",
     parts: [
       { label: "a.", text: "Hitung volume Balok A dan Balok B." },
       { label: "b.", math: "\\text{Tentukan perbandingan volume A : B}" },
-      { label: "c.", text: "Berapa kali lipat dimensi Balok B dibanding Balok A?" },
     ],
   }),
-  Qn(13, "Soal Cerita – Dus Kardus", {
+  Qn(11, "Soal Cerita – Dus Kardus", {
     type: "mixed",
     content: "Sebuah pabrik membuat kardus berbentuk balok berukuran 30 cm × 20 cm × 15 cm.",
     parts: [
@@ -237,43 +225,15 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume setiap kardus." },
     ],
   }),
-  Qn(14, "Mengisi Balok dengan Kubus Kecil – TKA", {
+  Qn(12, "Mengisi Balok dengan Kubus Kecil – TKA", {
     type: "mixed",
     content: "Sebuah kotak berbentuk balok berukuran 30 cm × 20 cm × 15 cm akan diisi dengan kubus-kubus kecil berrusuk 5 cm.",
     parts: [
       { label: "a.", math: "\\text{Berapa kubus kecil yang muat di sepanjang panjang, lebar, dan tinggi?}" },
       { label: "b.", text: "Berapa total kubus kecil yang muat di dalam kotak tersebut?" },
-      { label: "c.", math: "\\text{Verifikasi dengan } \\frac{V_{balok}}{V_{kubus}} = \\frac{30\\times20\\times15}{5^3} = \\ldots" },
     ],
   }),
-  Qn(15, "Luas Permukaan – Menghitung Bahan", {
-    type: "mixed",
-    content: "Sebuah lemari berbentuk balok berukuran 1,2 m × 0,6 m × 2 m akan dilapisi kayu lapis pada seluruh permukaannya.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas permukaan lemari dalam m}^2" },
-      { label: "b.", math: "\\text{Jika kayu lapis dijual Rp150.000/m}^2\\text{, berapa total biayanya?}" },
-      { label: "c.", text: "Jika hanya 5 sisi yang dilapisi (tanpa alas), berapa biayanya?" },
-    ],
-  }),
-  Qn(16, "Diagonal Sisi Balok – Soal UN", {
-    type: "mixed",
-    content: "Balok ABCD.EFGH memiliki panjang 8 cm, lebar 6 cm, dan tinggi 5 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung diagonal sisi AC pada bidang ABCD}" },
-      { label: "b.", math: "\\text{Hitung diagonal sisi AE pada bidang ABFE}" },
-      { label: "c.", math: "\\text{Hitung diagonal sisi AF pada bidang ABGF}" },
-    ],
-  }),
-  Qn(17, "Bidang Diagonal Balok", {
-    type: "mixed",
-    diagram: <BalokSVG p="8" l="6" t="4" wide={true} />,
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan bidang diagonal pada balok?" },
-      { label: "b.", text: "Ada berapa bidang diagonal pada sebuah balok?" },
-      { label: "c.", math: "\\text{Hitung luas bidang diagonal ABGH jika } p=8, t=4 \\text{ cm}" },
-    ],
-  }),
-  Qn(18, "Soal Cerita – Aquarium", {
+  Qn(13, "Soal Cerita – Aquarium", {
     type: "mixed",
     content: "Sebuah aquarium berbentuk balok berukuran 60 cm × 30 cm × 40 cm diisi air hingga ¾ penuh.",
     parts: [
@@ -282,34 +242,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa tinggi air di dalam aquarium tersebut?" },
     ],
   }),
-  Qn(19, "Soal ANBK – Pengisian Pasir", {
-    type: "mixed",
-    content: "Sebuah bak pasir berbentuk balok berukuran 3 m × 2 m × 1,5 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung volume bak dalam m}^3" },
-      { label: "b.", text: "Jika 1 truk pasir berkapasitas 4,5 m³, berapa truk pasir yang dibutuhkan untuk memenuhi bak?" },
-      { label: "c.", text: "Jika harga pasir Rp200.000 per m³, berapa total biaya pasir?" },
-    ],
-  }),
-  Qn(20, "Soal Perbandingan Luas Permukaan – UN", {
-    type: "mixed",
-    content: "Balok P berukuran 6×4×3 cm. Balok Q berukuran 9×6×4 cm.",
-    parts: [
-      { label: "a.", text: "Hitung luas permukaan Balok P dan Q." },
-      { label: "b.", math: "\\text{Nyatakan perbandingan luas permukaan P : Q dalam bentuk sederhana}" },
-      { label: "c.", text: "Balok mana yang lebih efisien? (luas permukaan lebih kecil untuk volume yang lebih besar)" },
-    ],
-  }),
-  Qn(21, "Rusuk Terpanjang Balok – Soal Olimpiade", {
-    type: "mixed",
-    content: "Sebuah balok memiliki panjang rusuk-rusuknya 4 cm, 6 cm, dan 8 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung total panjang semua rusuk balok} (4(p + l + t))" },
-      { label: "b.", text: "Hitung luas permukaan balok." },
-      { label: "c.", text: "Hitung volume balok." },
-    ],
-  }),
-  Qn(22, "Mencari Dimensi dari Total Rusuk – UN", {
+  Qn(14, "Mencari Dimensi dari Total Rusuk – UN", {
     type: "mixed",
     content: "Total panjang semua rusuk sebuah balok adalah 72 cm. Perbandingan p : l : t = 3 : 2 : 1.",
     parts: [
@@ -318,16 +251,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume balok." },
     ],
   }),
-  Qn(23, "Soal Cerita – Buku dan Rak", {
-    type: "mixed",
-    content: "Sebuah rak buku berbentuk balok berukuran 1,5 m × 0,3 m × 2 m.",
-    parts: [
-      { label: "a.", text: "Hitung luas permukaan rak buku." },
-      { label: "b.", text: "Hitung volume rak buku." },
-      { label: "c.", text: "Jika rak dibagi 5 rak secara vertikal, berapakah tinggi setiap bagian rak?" },
-    ],
-  }),
-  Qn(24, "Luas Permukaan – Soal Cerita Tembok", {
+  Qn(15, "Luas Permukaan – Soal Cerita Tembok", {
     type: "mixed",
     content: "Sebuah ruangan berbentuk balok berukuran 8 m × 6 m × 3 m. Dindingnya akan dicat.",
     parts: [
@@ -336,7 +260,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume ruangan tersebut." },
     ],
   }),
-  Qn(25, "Soal ANBK – Melapisi Kotak", {
+  Qn(16, "Soal ANBK – Melapisi Kotak", {
     type: "mixed",
     content: "Sebuah kotak kayu berbentuk balok berukuran 40 cm × 25 cm × 20 cm akan dilapisi kertas kado.",
     parts: [
@@ -345,25 +269,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume kotak tersebut." },
     ],
   }),
-  Qn(26, "Tinggi Balok dari Luas Permukaan – UN", {
-    type: "mixed",
-    content: "Sebuah balok memiliki panjang 20 cm dan lebar 15 cm. Luas permukaannya adalah 1150 cm².",
-    parts: [
-      { label: "a.", math: "\\text{Buat persamaan: } 2(20 \\times 15 + 20t + 15t) = 1150" },
-      { label: "b.", math: "\\text{Selesaikan untuk mendapatkan } t" },
-      { label: "c.", text: "Hitung volume balok tersebut." },
-    ],
-  }),
-  Qn(27, "Tinggi Air dalam Balok – Soal ANBK", {
-    type: "mixed",
-    content: "Sebuah bak berbentuk balok berukuran 50 cm × 40 cm × 60 cm diisi 60 liter air.",
-    parts: [
-      { label: "a.", math: "\\text{Konversikan 60 liter ke cm}^3" },
-      { label: "b.", math: "\\text{Jika luas alas} = 50 \\times 40 \\text{, tentukan tinggi air: } h = \\frac{60000}{50 \\times 40}" },
-      { label: "c.", text: "Berapa persen ketinggian bak yang terisi air?" },
-    ],
-  }),
-  Qn(28, "Soal TKA – Biaya Pengecatan", {
+  Qn(17, "Soal TKA – Biaya Pengecatan", {
     type: "mixed",
     content: "Sebuah dinding berbentuk balok (kotak) berukuran 5 m × 3 m akan dicat. Biaya cat Rp35.000 per m².",
     parts: [
@@ -372,16 +278,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika dinding memiliki 2 jendela berukuran 1 m × 1,5 m, berapa biaya pengecatan sebenarnya?" },
     ],
   }),
-  Qn(29, "Diagonal Ruang – Soal UN Variasi", {
-    type: "mixed",
-    content: "Panjang diagonal ruang sebuah balok adalah 13 cm. Panjang balok 12 cm dan lebarnya 4 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Gunakan } d = \\sqrt{p^2 + l^2 + t^2} \\text{ untuk mencari } t" },
-      { label: "b.", text: "Hitung volume balok." },
-      { label: "c.", text: "Hitung luas permukaan balok." },
-    ],
-  }),
-  Qn(30, "Soal Penalaran – Balok Dalam Balok", {
+  Qn(18, "Soal Penalaran – Balok Dalam Balok", {
     type: "mixed",
     content: "Sebuah balok besar berukuran 60 cm × 40 cm × 30 cm diisi dengan balok-balok kecil berukuran 10 cm × 8 cm × 6 cm.",
     parts: [
@@ -390,25 +287,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Verifikasi: } \\frac{60}{10} \\times \\frac{40}{8} \\times \\frac{30}{6} = \\ldots" },
     ],
   }),
-  Qn(31, "Soal Cerita – Bak Mandi Keramik", {
-    type: "mixed",
-    content: "Sebuah bak mandi berbentuk balok berukuran 120 cm × 80 cm × 60 cm. Bagian dalam bak dipasangi keramik 20 cm × 20 cm.",
-    parts: [
-      { label: "a.", text: "Hitung luas permukaan bagian dalam bak (tanpa tutup)." },
-      { label: "b.", text: "Berapa banyak keramik yang dibutuhkan (tiap keramik 20×20 cm)?" },
-      { label: "c.", text: "Hitung volume bak dalam liter." },
-    ],
-  }),
-  Qn(32, "Soal Olimpiade – Rusuk dari Luas Permukaan dan Volume", {
-    type: "mixed",
-    content: "Sebuah balok dengan luas permukaan 94 cm² dan volume 60 cm³. Diketahui panjang = 5 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Dari volume: } 60 = 5 \\times l \\times t \\Rightarrow lt = 12" },
-      { label: "b.", math: "\\text{Dari luas permukaan: } 2(5l + 5t + lt) = 94" },
-      { label: "c.", text: "Selesaikan sistem persamaan untuk mendapatkan l dan t." },
-    ],
-  }),
-  Qn(33, "Soal UN – Luas Permukaan Tanpa Alas dan Tutup", {
+  Qn(19, "Soal UN – Luas Permukaan Tanpa Alas dan Tutup", {
     type: "mixed",
     content: "Sebuah aquarium berbentuk balok berukuran 50 cm × 30 cm × 40 cm tanpa tutup.",
     parts: [
@@ -417,7 +296,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas total 5 sisi (tanpa tutup saja)." },
     ],
   }),
-  Qn(34, "Soal ANBK – Volume dan Kepadatan", {
+  Qn(20, "Soal ANBK – Volume dan Kepadatan", {
     type: "mixed",
     content: "Sebuah kotak besi berbentuk balok berukuran 20 cm × 15 cm × 10 cm. Besi memiliki massa jenis 7,8 g/cm³.",
     parts: [
@@ -426,7 +305,7 @@ const questions: Q[] = [
       { label: "c.", text: "Nyatakan massa dalam kilogram." },
     ],
   }),
-  Qn(35, "Soal TKA – Penyimpanan Barang", {
+  Qn(21, "Soal TKA – Penyimpanan Barang", {
     type: "mixed",
     content: "Sebuah gudang berbentuk balok berukuran 10 m × 8 m × 5 m. Barang-barang disimpan dalam kardus berukuran 50 cm × 40 cm × 25 cm.",
     parts: [
@@ -435,16 +314,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika gudang hanya diisi hingga 80% kapasitasnya, berapa kardus yang bisa disimpan?" },
     ],
   }),
-  Qn(36, "Soal Kontekstual – Ember dan Air", {
-    type: "mixed",
-    content: "Sebuah ember berbentuk balok berukuran 30 cm × 20 cm × 25 cm.",
-    parts: [
-      { label: "a.", text: "Hitung volume ember dalam cm³ dan konversikan ke liter." },
-      { label: "b.", text: "Jika ember diisi 3/5 penuh, berapa liter air yang ada?" },
-      { label: "c.", text: "Berapa cm tinggi air dalam ember tersebut?" },
-    ],
-  }),
-  Qn(37, "Soal UN – Mengubah Dimensi Balok", {
+  Qn(22, "Soal UN – Mengubah Dimensi Balok", {
     type: "mixed",
     content: "Sebuah balok berukuran 6 cm × 4 cm × 3 cm. Panjang dan lebarnya diperbesar 2 kali, tingginya tetap.",
     parts: [
@@ -453,32 +323,13 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung perbandingan luas permukaan balok baru dan balok asal." },
     ],
   }),
-  Qn(38, "Soal Gabungan – Balok dan Perbandingan", {
+  Qn(23, "Soal Gabungan – Balok dan Perbandingan", {
     type: "mixed",
     content: "Sebuah balok memiliki perbandingan panjang : lebar : tinggi = 5 : 3 : 2. Luas permukaannya adalah 620 cm².",
     parts: [
       { label: "a.", math: "\\text{Misalkan } p = 5k, l = 3k, t = 2k. \\text{ Substitusikan ke rumus luas permukaan.}" },
       { label: "b.", math: "\\text{Selesaikan untuk } k, \\text{ lalu tentukan } p, l, t." },
       { label: "c.", text: "Hitung volume balok tersebut." },
-    ],
-  }),
-  Qn(39, "Soal Olimpiade – Luas Permukaan Maksimum", {
-    type: "mixed",
-    content: "Diketahui sebuah balok memiliki volume 120 cm³. Panjangnya 10 cm, lebarnya 4 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan tinggi balok dari } V = p \\times l \\times t" },
-      { label: "b.", text: "Hitung luas permukaan balok." },
-      { label: "c.", text: "Jika dimensi diubah menjadi 8 cm × 5 cm × 3 cm (volume hampir sama), mana yang memiliki luas permukaan lebih besar?" },
-    ],
-  }),
-  Qn(40, "Soal UN/ANBK – Gabungan Konsep Balok", {
-    type: "mixed",
-    content: "Sebuah balok memiliki panjang 15 cm, lebar 10 cm, dan tinggi 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas permukaan balok}" },
-      { label: "b.", math: "\\text{Hitung volume balok}" },
-      { label: "c.", math: "\\text{Hitung panjang diagonal ruang balok}" },
-      { label: "d.", math: "\\text{Hitung panjang diagonal sisi pada bidang terluas}" },
     ],
   }),
 ];
@@ -500,7 +351,7 @@ const BalokPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 23 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
