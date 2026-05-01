@@ -14,19 +14,22 @@ const SYSTEM_PROMPT = "Kamu adalah NUMATIK AI, asisten matematika ceria dan bers
 app.use(cors())
 app.use(express.json())
 
-const ai = new GoogleGenAI({
+const geminiOptions: ConstructorParameters<typeof GoogleGenAI>[0] = {
   apiKey: process.env.AI_INTEGRATIONS_GEMINI_API_KEY,
-  httpOptions: {
+}
+if (process.env.AI_INTEGRATIONS_GEMINI_BASE_URL) {
+  geminiOptions.httpOptions = {
     apiVersion: '',
     baseUrl: process.env.AI_INTEGRATIONS_GEMINI_BASE_URL,
-  },
-})
+  }
+}
+const ai = new GoogleGenAI(geminiOptions)
 
 app.post('/api/chat', async (req, res) => {
   try {
     const messages = req.body?.messages
 
-    if (!process.env.AI_INTEGRATIONS_GEMINI_API_KEY || !process.env.AI_INTEGRATIONS_GEMINI_BASE_URL) {
+    if (!process.env.AI_INTEGRATIONS_GEMINI_API_KEY) {
       return res.status(503).json({ error: 'Layanan AI belum dikonfigurasi di server.' })
     }
 
