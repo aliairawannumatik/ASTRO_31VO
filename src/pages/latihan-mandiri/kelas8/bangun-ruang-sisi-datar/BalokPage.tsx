@@ -233,7 +233,7 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Hitung diagonal ruang } AG = \\sqrt{p^2 + l^2 + t^2}" },
     ],
   }),
-  Qn(6, "Identifikasi Jaring-Jaring Balok", {
+  Qn(5, "Identifikasi Jaring-Jaring Balok", {
     type: "mixed",
     content: "Perhatikan empat susunan persegi panjang berikut. Tentukan mana saja yang merupakan jaring-jaring balok dan berikan alasanmu!",
     diagram: <IdentifikasiJaringBalokSVG />,
@@ -243,7 +243,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak sisi yang harus dimiliki jaring-jaring balok? Sebutkan ukuran setiap sisinya!" },
     ],
   }),
-  Qn(7, "Mencari Dimensi Balok dari Luas Permukaan – UN Style", {
+  Qn(6, "Mencari Dimensi Balok dari Luas Permukaan – UN Style", {
     type: "mixed",
     content: "Sebuah balok memiliki panjang 10 cm dan lebar 6 cm. Luas permukaannya adalah 376 cm².",
     parts: [
@@ -252,7 +252,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Hitung panjang diagonal ruang balok}" },
     ],
   }),
-  Qn(9, "Soal Cerita – Kolam Renang ANBK", {
+  Qn(7, "Soal Cerita – Kolam Renang ANBK", {
     type: "mixed",
     content: "Sebuah kolam renang berbentuk balok memiliki panjang 25 m, lebar 12 m, dan kedalaman 2 m.",
     parts: [
@@ -261,7 +261,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kolam hanya diisi setinggi 1,5 m, berapa volume air yang dibutuhkan?" },
     ],
   }),
-  Qn(10, "Perbandingan Volume dan Luas Permukaan Dua Balok", {
+  Qn(8, "Perbandingan Volume dan Luas Permukaan Dua Balok", {
     type: "mixed",
     content: "Balok A berukuran 6×4×3 cm dan Balok B berukuran 12×8×6 cm.",
     parts: [
@@ -270,7 +270,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Tentukan perbandingan luas permukaan A : B}" },
     ],
   }),
-  Qn(11, "Soal Cerita – Dus Kardus", {
+  Qn(9, "Soal Cerita – Dus Kardus", {
     type: "mixed",
     content: "Sebuah pabrik membuat kardus berbentuk balok berukuran 30 cm × 20 cm × 15 cm.",
     parts: [
@@ -279,7 +279,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume setiap kardus." },
     ],
   }),
-  Qn(12, "Mengisi Balok dengan Kubus Kecil – TKA", {
+  Qn(10, "Mengisi Balok dengan Kubus Kecil – TKA", {
     type: "mixed",
     content: "Sebuah kotak berbentuk balok berukuran 30 cm × 20 cm × 15 cm akan diisi dengan kubus-kubus kecil berrusuk 5 cm.",
     parts: [
@@ -287,7 +287,7 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa total kubus kecil yang muat di dalam kotak tersebut?" },
     ],
   }),
-  Qn(13, "Mencari Dimensi dari Total Rusuk – UN", {
+  Qn(11, "Mencari Dimensi dari Total Rusuk – UN", {
     type: "mixed",
     content: "Total panjang semua rusuk sebuah balok adalah 72 cm. Perbandingan p : l : t = 3 : 2 : 1.",
     parts: [
@@ -296,7 +296,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume balok." },
     ],
   }),
-  Qn(14, "Luas Permukaan – Soal Cerita Tembok", {
+  Qn(12, "Luas Permukaan – Soal Cerita Tembok", {
     type: "mixed",
     content: "Sebuah ruangan berbentuk balok berukuran 8 m × 6 m × 3 m. Dindingnya akan dicat.",
     parts: [
@@ -305,7 +305,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume ruangan tersebut." },
     ],
   }),
-  Qn(15, "Soal ANBK – Melapisi Kotak", {
+  Qn(13, "Soal ANBK – Melapisi Kotak", {
     type: "mixed",
     content: "Sebuah kotak kayu berbentuk balok berukuran 40 cm × 25 cm × 20 cm akan dilapisi kertas kado.",
     parts: [
@@ -314,7 +314,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume kotak tersebut." },
     ],
   }),
-  Qn(16, "Soal UN – Luas Permukaan Tanpa Alas dan Tutup", {
+  Qn(14, "Soal UN – Luas Permukaan Tanpa Alas dan Tutup", {
     type: "mixed",
     content: "Sebuah aquarium berbentuk balok berukuran 50 cm × 30 cm × 40 cm tanpa tutup.",
     parts: [
@@ -323,7 +323,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas total 5 sisi (tanpa tutup saja)." },
     ],
   }),
-  Qn(18, "Soal Gabungan – Balok dan Perbandingan", {
+  Qn(15, "Soal Gabungan – Balok dan Perbandingan", {
     type: "mixed",
     content: "Sebuah balok memiliki perbandingan panjang : lebar : tinggi = 5 : 3 : 2. Luas permukaannya adalah 620 cm².",
     parts: [
