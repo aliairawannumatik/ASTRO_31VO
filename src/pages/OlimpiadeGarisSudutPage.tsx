@@ -979,15 +979,15 @@ const Soal25SVG = () => (
     <line x1="20" y1="160" x2="380" y2="160" stroke="#ffffff" strokeWidth="2" />
     <line x1="220" y1="160" x2="170" y2="40" stroke="#ffffff" strokeWidth="2" />
 
-    {/* x arc (between ray and horizontal-left) */}
-    <path d="M 188,160 A 32,32 0 0,1 207,131" fill="none" stroke="#ef4444" strokeWidth="1.6" />
-    <text x="190" y="152" fill="#ef4444" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+    {/* x arc: from left-horizontal (185,160) clockwise up to ray direction (207,128); r=35 */}
+    <path d="M 185,160 A 35,35 0 0,1 207,128" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    <text x="191" y="153" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
 
-    {/* y arc (between ray and horizontal-right) - larger */}
-    <path d="M 213,134 A 36,36 0 0,1 256,160" fill="none" stroke="#22c55e" strokeWidth="1.6" />
-    <text x="226" y="152" fill="#22c55e" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
+    {/* y arc: from ray direction (207,128) clockwise down to right-horizontal (255,160); r=35 */}
+    <path d="M 207,128 A 35,35 0 0,1 255,160" fill="none" stroke="#fbbf24" strokeWidth="1.8" />
+    <text x="229" y="151" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
 
-    <circle cx="220" cy="160" r="3" fill="#ef4444" />
+    <circle cx="220" cy="160" r="3" fill="#ffffff" />
   </svg>
 );
 
