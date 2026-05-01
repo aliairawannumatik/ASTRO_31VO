@@ -26,7 +26,7 @@ import gambarSoal20 from "@assets/g_1777646456179.png";
 import gambarSoal21 from "@assets/image_1777674744629.png";
 import gambarSoal24 from "@assets/image_1777675316904.png";
 import gambarOlimpiade1 from "@assets/image_1777677600584.png";
-import gambarOlimpiade2 from "@assets/image_1777195655690.png";
+import gambarOlimpiade2 from "@assets/image_1777678514246.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
 import gambarOlimpiade5 from "@assets/image_1777195700263.png";
 import gambarOlimpiade6 from "@assets/image_1777195719119.png";
