@@ -886,17 +886,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan replika (kecuali alas) yang perlu dicat." },
     ],
   }),
-  Qn(17, "Soal TKA – Bentuk Pemotong Kue (Cookie Cutter)", {
-    type: "mixed",
-    content: "Cetakan kue: prisma segitiga (alas segitiga siku-siku 3-4-5 cm, tinggi 2 cm) + balok di bawah (10×8×2 cm). Hitung volume cetakan.",
-    diagram: <PrismaBalokSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Volume balok} = 10 \\times 8 \\times 2 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "\\text{Volume prisma} = \\frac{1}{2} \\times 3 \\times 4 \\times 2 = \\ldots \\text{ cm}^3" },
-      { label: "c.", text: "Hitung total volume bahan yang digunakan untuk membuat cetakan tersebut." },
-    ],
-  }),
-  Qn(18, "Soal UN – Cetakan Es Lilin Berbentuk Prisma + Limas", {
+  Qn(17, "Soal UN – Cetakan Es Lilin Berbentuk Prisma + Limas", {
     type: "mixed",
     content: "Cetakan es berbentuk prisma segitiga (panjang 10 cm, alas segitiga 3×4 cm) dengan limas segitiga di ujungnya (tinggi 3 cm).",
     diagram: <PrismaLimasSegitSVG />,
@@ -906,7 +896,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Volume total es lilin}" },
     ],
   }),
-  Qn(19, "Soal ANBK – Menara Kontrol Berbentuk 3 Bagian", {
+  Qn(18, "Soal ANBK – Menara Kontrol Berbentuk 3 Bagian", {
     type: "mixed",
     content: "Menara kontrol: Balok bawah (8×8×20 m) + Balok tengah (6×6×10 m) + Limas atas (alas 6×6 m, tinggi 4 m).",
     diagram: <TigaBalokLimasSVG />,
@@ -916,7 +906,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung total volume menara." },
     ],
   }),
-  Qn(20, "Soal Olimpiade – Volume Benda Simetris", {
+  Qn(19, "Soal Olimpiade – Volume Benda Simetris", {
     type: "mixed",
     content: "Benda simetris terdiri dari 2 limas segiempat yang saling bertolak belakang (ujung bertemu) dengan alas 8×8 cm dan masing-masing tinggi 5 cm.",
     diagram: <BipyramidSVG />,
@@ -926,7 +916,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Berapa luas permukaan total benda tersebut? (8 sisi segitiga)}" },
     ],
   }),
-  Qn(21, "Soal ANBK – Penalaran Volume Gabungan Tidak Beraturan", {
+  Qn(20, "Soal ANBK – Penalaran Volume Gabungan Tidak Beraturan", {
     type: "mixed",
     content: "Bangun gabungan: kubus (s = 6 cm) + balok (9×6×4 cm) disambung di sisi kanannya + limas (alas 6×4 cm, tinggi 3 cm) di atas balok.",
     diagram: <TigaBangunSVG />,
