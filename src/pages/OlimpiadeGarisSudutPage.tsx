@@ -1056,12 +1056,12 @@ const Soal28SVG = () => (
     {/* Short top segment forming the small triangle: from (130, 60) down-right to apex (200, 130) */}
     <line x1="130" y1="60" x2="200" y2="130" stroke="#ffffff" strokeWidth="2" />
 
-    {/* 30° at top (apex of small triangle on top line) */}
-    <text x="146" y="82" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
-    {/* x at apex */}
-    <text x="194" y="158" fill="#ffffff" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
-    {/* 110° at bottom-left, between bottom horizontal and the diagonal */}
-    <text x="80" y="208" fill="#fbbf24" fontSize="13" fontFamily="serif">110°</text>
+    {/* 30° at top - moved right to clear short segment line */}
+    <text x="156" y="78" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
+    {/* x at apex - moved up to sit near actual intersection (~191,121) */}
+    <text x="186" y="134" fill="#ffffff" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+    {/* 110° at bottom-left - moved right to clear diagonal line */}
+    <text x="92" y="208" fill="#fbbf24" fontSize="13" fontFamily="serif">110°</text>
   </svg>
 );
 
