@@ -305,13 +305,13 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume ruangan tersebut." },
     ],
   }),
-  Qn(13, "Soal ANBK – Melapisi Kotak", {
+  Qn(13, "Soal Kerangka Balok dari Kawat", {
     type: "mixed",
-    content: "Sebuah kotak kayu berbentuk balok berukuran 40 cm × 25 cm × 20 cm akan dilapisi kertas kado.",
+    content: "Seutas kawat sepanjang 10 m akan dibuat kerangka balok dengan ukuran panjang 12 cm, lebar 8 cm, dan tinggi 6 cm.",
     parts: [
-      { label: "a.", text: "Hitung luas permukaan kotak." },
-      { label: "b.", text: "Kertas kado tersedia dalam gulungan selebar 60 cm dan panjang 2 m. Apakah satu gulungan cukup?" },
-      { label: "c.", text: "Hitung volume kotak tersebut." },
+      { label: "a.", math: "\\text{Hitung panjang kawat yang dibutuhkan untuk satu kerangka balok: } 4(p + l + t)" },
+      { label: "b.", text: "Tentukan berapa banyak kerangka balok yang dapat dibuat dari kawat tersebut." },
+      { label: "c.", text: "Tentukan panjang sisa kawat yang tidak terpakai (dalam cm)." },
     ],
   }),
   Qn(14, "Soal UN – Luas Permukaan Tanpa Alas dan Tutup", {
