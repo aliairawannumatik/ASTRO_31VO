@@ -15,183 +15,298 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-/* ── SVG: Balok + Limas di atasnya ── */
+/* ── SVG: Balok + Limas di atasnya ──
+   Oblique projection: depth vector (+28, -20)
+   Balok vertices (bottom→top, front→back):
+     A(25,170) B(150,170) C(178,150) D(53,150)  ← alas
+     E(25,100) F(150,100) G(178,80)  H(53,80)   ← atas (= alas limas)
+   Limas apex T(102,35)
+*/
 const BalokLimasSVG = ({
   p = "p", l = "l", tb = "t₁", tl = "t₂"
 }: { p?: string; l?: string; tb?: string; tl?: string }) => (
-  <svg width="210" height="185" viewBox="0 0 210 185" className="mx-auto">
-    <defs>
-      <linearGradient id="gbBalok" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#6366f1" stopOpacity="0.4" />
-        <stop offset="100%" stopColor="#6366f1" stopOpacity="0.15" />
-      </linearGradient>
-      <linearGradient id="gbLimas" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.35" />
-        <stop offset="100%" stopColor="#f43f5e" stopOpacity="0.1" />
-      </linearGradient>
-    </defs>
-    {/* Balok bagian bawah */}
-    {/* Front face */}
-    <polygon points="30,150 130,150 130,95 30,95" fill="url(#gbBalok)" stroke="#818cf8" strokeWidth="1.5" />
-    {/* Right face */}
-    <polygon points="130,150 155,125 155,70 130,95" fill="#6366f1" fillOpacity="0.2" stroke="#818cf8" strokeWidth="1.5" />
-    {/* Top face */}
-    <polygon points="30,95 130,95 155,70 55,70" fill="#6366f1" fillOpacity="0.3" stroke="#818cf8" strokeWidth="1.5" />
-    {/* Hidden back edges */}
-    <line x1="30" y1="150" x2="55" y2="125" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="55" y1="125" x2="155" y2="125" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="55" y1="125" x2="55" y2="70" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Balok labels */}
-    <text x="20" y="155" fill="white" fontSize="9" fontFamily="monospace">A</text>
-    <text x="132" y="155" fill="white" fontSize="9" fontFamily="monospace">B</text>
-    <text x="157" y="128" fill="white" fontSize="9" fontFamily="monospace">C</text>
-    <text x="20" y="93" fill="white" fontSize="9" fontFamily="monospace">D</text>
-    <text x="132" y="93" fill="white" fontSize="9" fontFamily="monospace">E</text>
-    <text x="157" y="70" fill="white" fontSize="9" fontFamily="monospace">F</text>
-    <text x="47" y="70" fill="white" fontSize="9" fontFamily="monospace">G</text>
-    {/* Dim labels */}
-    <text x="75" y="165" fill="#818cf8" fontSize="9" textAnchor="middle">{p}</text>
-    <text x="155" y="112" fill="#818cf8" fontSize="9" textAnchor="middle">{l}</text>
-    <text x="12" y="125" fill="#818cf8" fontSize="9" textAnchor="middle">{tb}</text>
-    {/* Limas di atas balok */}
-    {/* Apex T */}
-    <line x1="92" y1="22" x2="30" y2="95" stroke="#f43f5e" strokeWidth="1.8" />
-    <line x1="92" y1="22" x2="130" y2="95" stroke="#f43f5e" strokeWidth="1.8" />
-    <line x1="92" y1="22" x2="155" y2="70" stroke="#f43f5e" strokeWidth="1.8" />
-    <line x1="92" y1="22" x2="55" y2="70" stroke="#f43f5e" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.7" />
-    <polygon points="30,95 130,95 92,22" fill="url(#gbLimas)" stroke="#f43f5e" strokeWidth="1.5" />
-    <polygon points="130,95 155,70 92,22" fill="#f43f5e" fillOpacity="0.2" stroke="#f43f5e" strokeWidth="1.5" />
-    <circle cx="92" cy="22" r="3" fill="#fb7185" />
-    <text x="88" y="16" fill="#fb7185" fontSize="9" fontFamily="monospace">T</text>
-    <text x="168" y="45" fill="#fb7185" fontSize="9">{tl}</text>
-    {/* Vertices */}
-    {[[30,150],[130,150],[155,125],[55,125],[30,95],[130,95],[155,70],[55,70]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2" fill="#818cf8" />
+  <svg width="260" height="215" viewBox="0 0 260 215" className="mx-auto">
+    {/* ── BALOK (biru) ── */}
+    {/* Rusuk tersembunyi (putus-putus) */}
+    <line x1="25" y1="170" x2="53" y2="150" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="53" y1="150" x2="178" y2="150" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="53" y1="150" x2="53" y2="80" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    {/* Sisi depan */}
+    <polygon points="25,170 150,170 150,100 25,100" fill="#6366f1" fillOpacity="0.30" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Sisi kanan */}
+    <polygon points="150,170 178,150 178,80 150,100" fill="#6366f1" fillOpacity="0.18" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Sisi atas (alas limas) */}
+    <polygon points="25,100 150,100 178,80 53,80" fill="#6366f1" fillOpacity="0.38" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Titik-titik balok */}
+    {([[25,170],[150,170],[178,150],[53,150],[25,100],[150,100],[178,80],[53,80]] as [number,number][]).map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    <text x="105" y="180" fill="#818cf8" fontSize="8" textAnchor="middle">Balok + Limas</text>
+    {/* Label titik balok */}
+    <text x="12" y="175" fill="white" fontSize="10" fontFamily="monospace">A</text>
+    <text x="153" y="175" fill="white" fontSize="10" fontFamily="monospace">B</text>
+    <text x="181" y="154" fill="white" fontSize="10" fontFamily="monospace">C</text>
+    <text x="38" y="154" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="10" y="98" fill="white" fontSize="10" fontFamily="monospace">E</text>
+    <text x="153" y="98" fill="white" fontSize="10" fontFamily="monospace">F</text>
+    <text x="181" y="78" fill="white" fontSize="10" fontFamily="monospace">G</text>
+    <text x="38" y="78" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+
+    {/* ── LIMAS (merah) ── */}
+    {/* Rusuk ke H tersembunyi */}
+    <line x1="102" y1="35" x2="53" y2="80" stroke="#f43f5e" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.65"/>
+    {/* Sisi kiri (tersembunyi sebagian) */}
+    <polygon points="53,80 25,100 102,35" fill="#f43f5e" fillOpacity="0.12" stroke="#f43f5e" strokeWidth="1" strokeDasharray="4,3"/>
+    {/* Sisi belakang */}
+    <polygon points="53,80 178,80 102,35" fill="#f43f5e" fillOpacity="0.15" stroke="#f43f5e" strokeWidth="1.3"/>
+    {/* Sisi kanan */}
+    <polygon points="150,100 178,80 102,35" fill="#f43f5e" fillOpacity="0.22" stroke="#f43f5e" strokeWidth="1.5"/>
+    {/* Sisi depan */}
+    <polygon points="25,100 150,100 102,35" fill="#f43f5e" fillOpacity="0.30" stroke="#f43f5e" strokeWidth="1.8"/>
+    {/* Titik puncak T */}
+    <circle cx="102" cy="35" r="3.5" fill="#fb7185"/>
+    <text x="96" y="26" fill="#fb7185" fontSize="11" fontFamily="monospace" fontWeight="bold">T</text>
+
+    {/* ── Label dimensi ── */}
+    <text x="87" y="192" fill="#818cf8" fontSize="10" textAnchor="middle">{p}</text>
+    <line x1="25" y1="186" x2="150" y2="186" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.5"/>
+    <text x="205" y="120" fill="#818cf8" fontSize="10" textAnchor="middle">{l}</text>
+    <line x1="195" y1="150" x2="195" y2="80" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.5" strokeDasharray="3,2"/>
+    <text x="8" y="138" fill="#818cf8" fontSize="10" textAnchor="middle">{tb}</text>
+    <text x="230" y="62" fill="#fb7185" fontSize="10" textAnchor="middle">{tl}</text>
+    <line x1="102" y1="35" x2="102" y2="90" stroke="#fb7185" strokeWidth="0.8" strokeOpacity="0.45" strokeDasharray="3,2"/>
+
+    <text x="130" y="208" fill="#818cf8" fontSize="8" textAnchor="middle">Balok + Limas Segiempat</text>
   </svg>
 );
 
-/* ── SVG: Kubus + Prisma Segitiga di atasnya ── */
+/* ── SVG: Kubus + Prisma Segitiga (Rumah) ──
+   Kubus: sisi s=75, depth (+28,-20)
+     A(25,165) B(100,165) C(128,145) D(53,145)  ← alas
+     E(25,90)  F(100,90)  G(128,70)  H(53,70)   ← atas
+   Prisma atap (amber):
+     Puncak depan P(62,42), puncak belakang Q(90,22)
+     Rusuk bubungan: P→Q
+*/
 const KubusPrismaSVG = () => (
-  <svg width="210" height="185" viewBox="0 0 210 185" className="mx-auto">
-    {/* Kubus bawah */}
-    <polygon points="30,155 110,155 110,95 30,95" fill="#6366f1" fillOpacity="0.35" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="110,155 135,130 135,70 110,95" fill="#6366f1" fillOpacity="0.2" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="30,95 110,95 135,70 55,70" fill="#6366f1" fillOpacity="0.3" stroke="#818cf8" strokeWidth="1.5" />
-    <line x1="30" y1="155" x2="55" y2="130" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="55" y1="130" x2="135" y2="130" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="55" y1="130" x2="55" y2="70" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Labels kubus */}
-    {[[30,155],[110,155],[135,130],[55,130]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2" fill="#818cf8" />
+  <svg width="240" height="215" viewBox="0 0 240 215" className="mx-auto">
+    {/* ── KUBUS (biru) ── */}
+    {/* Rusuk tersembunyi */}
+    <line x1="25" y1="165" x2="53" y2="145" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="53" y1="145" x2="128" y2="145" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="53" y1="145" x2="53" y2="70" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    {/* Sisi depan */}
+    <polygon points="25,165 100,165 100,90 25,90" fill="#6366f1" fillOpacity="0.30" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Sisi kanan */}
+    <polygon points="100,165 128,145 128,70 100,90" fill="#6366f1" fillOpacity="0.18" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Sisi atas */}
+    <polygon points="25,90 100,90 128,70 53,70" fill="#6366f1" fillOpacity="0.38" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Titik-titik kubus */}
+    {([[25,165],[100,165],[128,145],[53,145],[25,90],[100,90],[128,70],[53,70]] as [number,number][]).map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    <text x="20" y="160" fill="white" fontSize="9" fontFamily="monospace">A</text>
-    <text x="112" y="160" fill="white" fontSize="9" fontFamily="monospace">B</text>
-    <text x="137" y="133" fill="white" fontSize="9" fontFamily="monospace">C</text>
-    <text x="42" y="133" fill="white" fontSize="9" fontFamily="monospace">D</text>
-    {/* Prisma segitiga di atas */}
-    {/* Ridge line */}
-    <line x1="30" y1="95" x2="135" y2="70" stroke="#f59e0b" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
-    <line x1="55" y1="70" x2="30" y2="95" stroke="#f59e0b" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
-    {/* Peak ridge */}
-    <line x1="70" y1="45" x2="158" y2="45" stroke="#f59e0b" strokeWidth="1.8" />
-    {/* Lateral faces */}
-    <polygon points="30,95 110,95 158,45 70,45" fill="#f59e0b" fillOpacity="0.25" stroke="#f59e0b" strokeWidth="1.5" />
-    <polygon points="110,95 135,70 158,45" fill="#f59e0b" fillOpacity="0.15" stroke="#f59e0b" strokeWidth="1.5" />
-    <polygon points="30,95 55,70 70,45" fill="#f59e0b" fillOpacity="0.2" stroke="#f59e0b" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.7" />
-    {/* Front triangular face */}
-    <polygon points="30,95 110,95 70,45" fill="#f59e0b" fillOpacity="0.3" stroke="#f59e0b" strokeWidth="1.5" />
-    {/* Ridge vertices */}
-    {[[70,45],[158,45],[30,95],[110,95],[135,70],[55,70]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2" fill="#fcd34d" />
-    ))}
-    <text x="62" y="42" fill="#fcd34d" fontSize="9" fontFamily="monospace">P</text>
-    <text x="160" y="42" fill="#fcd34d" fontSize="9" fontFamily="monospace">Q</text>
-    <text x="105" y="180" fill="#818cf8" fontSize="8" textAnchor="middle">Kubus + Prisma</text>
+    {/* Label titik kubus (atas = alas prisma) */}
+    <text x="12" y="170" fill="white" fontSize="10" fontFamily="monospace">A</text>
+    <text x="103" y="170" fill="white" fontSize="10" fontFamily="monospace">B</text>
+    <text x="131" y="149" fill="white" fontSize="10" fontFamily="monospace">C</text>
+    <text x="39" y="149" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="10" y="88" fill="white" fontSize="10" fontFamily="monospace">E</text>
+    <text x="103" y="88" fill="white" fontSize="10" fontFamily="monospace">F</text>
+    <text x="131" y="68" fill="white" fontSize="10" fontFamily="monospace">G</text>
+    <text x="39" y="68" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+
+    {/* ── PRISMA SEGITIGA ATAP (kuning-amber) ── */}
+    {/* P depan=(62,42), Q belakang=(90,22) */}
+    {/* Sisi segitiga belakang (tersembunyi) */}
+    <polygon points="53,70 128,70 90,22" fill="#f59e0b" fillOpacity="0.12" stroke="#f59e0b" strokeWidth="1" strokeDasharray="4,3"/>
+    {/* Lereng kiri */}
+    <polygon points="25,90 53,70 90,22 62,42" fill="#f59e0b" fillOpacity="0.20" stroke="#f59e0b" strokeWidth="1.3"/>
+    {/* Lereng kanan */}
+    <polygon points="100,90 128,70 90,22 62,42" fill="#f59e0b" fillOpacity="0.28" stroke="#f59e0b" strokeWidth="1.5"/>
+    {/* Sisi segitiga depan */}
+    <polygon points="25,90 100,90 62,42" fill="#f59e0b" fillOpacity="0.38" stroke="#f59e0b" strokeWidth="1.8"/>
+    {/* Rusuk bubungan P→Q */}
+    <line x1="62" y1="42" x2="90" y2="22" stroke="#fcd34d" strokeWidth="2"/>
+    {/* Titik puncak */}
+    <circle cx="62" cy="42" r="3" fill="#fcd34d"/>
+    <circle cx="90" cy="22" r="3" fill="#fcd34d"/>
+    <text x="50" y="40" fill="#fcd34d" fontSize="10" fontFamily="monospace" fontWeight="bold">P</text>
+    <text x="93" y="20" fill="#fcd34d" fontSize="10" fontFamily="monospace" fontWeight="bold">Q</text>
+
+    {/* ── Label dimensi ── */}
+    <text x="62" y="188" fill="#818cf8" fontSize="10" textAnchor="middle">s</text>
+    <line x1="25" y1="182" x2="100" y2="182" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.5"/>
+    <text x="155" y="120" fill="#818cf8" fontSize="10" textAnchor="middle">s</text>
+    <text x="120" y="208" fill="#818cf8" fontSize="8" textAnchor="middle">Kubus + Prisma Segitiga (Rumah)</text>
   </svg>
 );
 
-/* ── SVG: Dua Balok Gabungan (L-shape / Anak Tangga) ── */
+/* ── SVG: Dua Balok Gabungan (Anak Tangga / L-shape) ──
+   Balok 1 (biru, bawah-kiri):  A–H, depth (+22,-16)
+     A(15,175) B(100,175) C(122,159) D(37,159)  ← alas
+     E(15,118) F(100,118) G(122,102) H(37,102)  ← atas
+   Balok 2 (merah, atas-kanan): I–P, depth (+22,-16)
+     I=F(100,118) J(185,118) K(207,102) L=G(122,102)  ← alas
+     M(100,63)  N(185,63)  O(207,47)  P(122,47)       ← atas
+*/
 const DuaBalokSVG = () => (
-  <svg width="215" height="175" viewBox="0 0 215 175" className="mx-auto">
-    {/* Balok kiri bawah (besar) */}
-    <polygon points="10,155 90,155 90,100 10,100" fill="#6366f1" fillOpacity="0.35" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="90,155 110,138 110,83 90,100" fill="#6366f1" fillOpacity="0.2" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="10,100 90,100 110,83 30,83" fill="#6366f1" fillOpacity="0.3" stroke="#818cf8" strokeWidth="1.5" />
-    <line x1="10" y1="155" x2="30" y2="138" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="30" y1="138" x2="110" y2="138" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="30" y1="138" x2="30" y2="83" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Balok kanan atas (kecil) */}
-    <polygon points="90,100 165,100 165,55 90,55" fill="#f43f5e" fillOpacity="0.35" stroke="#fb7185" strokeWidth="1.5" />
-    <polygon points="165,100 185,83 185,38 165,55" fill="#f43f5e" fillOpacity="0.2" stroke="#fb7185" strokeWidth="1.5" />
-    <polygon points="90,55 165,55 185,38 110,38" fill="#f43f5e" fillOpacity="0.3" stroke="#fb7185" strokeWidth="1.5" />
-    <line x1="90" y1="100" x2="110" y2="83" stroke="#fb7185" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="110" y1="83" x2="185" y2="83" stroke="#fb7185" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="110" y1="83" x2="110" y2="38" stroke="#fb7185" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Vertices */}
-    {[[10,155],[90,155],[110,138],[30,138],[10,100],[90,100],[110,83],[30,83]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2" fill="#818cf8" />
+  <svg width="260" height="215" viewBox="0 0 260 215" className="mx-auto">
+    {/* ── BALOK 1 (biru) ── */}
+    <line x1="15" y1="175" x2="37" y2="159" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="37" y1="159" x2="122" y2="159" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="37" y1="159" x2="37" y2="102" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <polygon points="15,175 100,175 100,118 15,118" fill="#6366f1" fillOpacity="0.35" stroke="#818cf8" strokeWidth="1.5"/>
+    <polygon points="100,175 122,159 122,102 100,118" fill="#6366f1" fillOpacity="0.20" stroke="#818cf8" strokeWidth="1.5"/>
+    <polygon points="15,118 100,118 122,102 37,102" fill="#6366f1" fillOpacity="0.38" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Titik balok 1 */}
+    {([[15,175],[100,175],[122,159],[37,159],[15,118],[100,118],[122,102],[37,102]] as [number,number][]).map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    {[[90,55],[165,55],[185,38],[110,38],[165,100],[185,83]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2" fill="#fb7185" />
+    <text x="3" y="180" fill="white" fontSize="9" fontFamily="monospace">A</text>
+    <text x="103" y="180" fill="white" fontSize="9" fontFamily="monospace">B</text>
+    <text x="125" y="163" fill="white" fontSize="9" fontFamily="monospace">C</text>
+    <text x="24" y="163" fill="white" fontSize="9" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="3" y="116" fill="white" fontSize="9" fontFamily="monospace">E</text>
+    <text x="87" y="115" fill="white" fontSize="9" fontFamily="monospace">F</text>
+    <text x="125" y="100" fill="white" fontSize="9" fontFamily="monospace">G</text>
+    <text x="24" y="100" fill="white" fontSize="9" fontFamily="monospace" opacity="0.6">H</text>
+
+    {/* ── BALOK 2 (merah muda, duduk di atas-kanan) ── */}
+    {/* Rusuk tersembunyi balok 2 */}
+    <line x1="100" y1="118" x2="122" y2="102" stroke="#fb7185" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="122" y1="102" x2="207" y2="102" stroke="#fb7185" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="122" y1="102" x2="122" y2="47" stroke="#fb7185" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    {/* Sisi depan */}
+    <polygon points="100,118 185,118 185,63 100,63" fill="#f43f5e" fillOpacity="0.32" stroke="#fb7185" strokeWidth="1.5"/>
+    {/* Sisi kanan */}
+    <polygon points="185,118 207,102 207,47 185,63" fill="#f43f5e" fillOpacity="0.18" stroke="#fb7185" strokeWidth="1.5"/>
+    {/* Sisi atas */}
+    <polygon points="100,63 185,63 207,47 122,47" fill="#f43f5e" fillOpacity="0.38" stroke="#fb7185" strokeWidth="1.5"/>
+    {/* Titik balok 2 */}
+    {([[185,118],[207,102],[100,63],[185,63],[207,47],[122,47]] as [number,number][]).map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r="2.5" fill="#fb7185"/>
     ))}
-    <text x="105" y="168" fill="#818cf8" fontSize="8" textAnchor="middle">Gabungan 2 Balok</text>
+    <text x="188" y="123" fill="#ffb3c1" fontSize="9" fontFamily="monospace">J</text>
+    <text x="210" y="106" fill="#ffb3c1" fontSize="9" fontFamily="monospace">K</text>
+    <text x="87" y="61" fill="#ffb3c1" fontSize="9" fontFamily="monospace">M</text>
+    <text x="188" y="61" fill="#ffb3c1" fontSize="9" fontFamily="monospace">N</text>
+    <text x="210" y="45" fill="#ffb3c1" fontSize="9" fontFamily="monospace">O</text>
+    <text x="110" y="45" fill="#ffb3c1" fontSize="9" fontFamily="monospace">P</text>
+
+    {/* Label dimensi Balok 1 */}
+    <text x="57" y="195" fill="#818cf8" fontSize="9" textAnchor="middle">p₁</text>
+    <line x1="15" y1="190" x2="100" y2="190" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.5"/>
+    <text x="3" y="150" fill="#818cf8" fontSize="9" textAnchor="middle">t₁</text>
+    {/* Label dimensi Balok 2 */}
+    <text x="142" y="138" fill="#fb7185" fontSize="9" textAnchor="middle">p₂</text>
+    <line x1="100" y1="133" x2="185" y2="133" stroke="#fb7185" strokeWidth="0.8" strokeOpacity="0.5"/>
+    <text x="237" y="85" fill="#fb7185" fontSize="9" textAnchor="middle">t₂</text>
+
+    <text x="130" y="208" fill="#818cf8" fontSize="8" textAnchor="middle">Gabungan 2 Balok (Undakan)</text>
   </svg>
 );
 
-/* ── SVG: Balok dengan Limas terpotong ── */
+/* ── SVG: Balok + Limas (untuk soal luas permukaan) ──
+   Balok: (20,165)–(155,165)–(183,145)–(48,145) alas
+          (20,95)–(155,95)–(183,75)–(48,75)  atas
+   Limas: apex T(101,30) di atas titik tengah alas limas
+*/
 const BalokLubanglSVG = () => (
-  <svg width="210" height="175" viewBox="0 0 210 175" className="mx-auto">
-    {/* Balok */}
-    <polygon points="20,150 130,150 130,90 20,90" fill="#6366f1" fillOpacity="0.3" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="130,150 155,125 155,65 130,90" fill="#6366f1" fillOpacity="0.15" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="20,90 130,90 155,65 45,65" fill="#6366f1" fillOpacity="0.25" stroke="#818cf8" strokeWidth="1.5" />
-    <line x1="20" y1="150" x2="45" y2="125" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="45" y1="125" x2="155" y2="125" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="45" y1="125" x2="45" y2="65" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Limas di atas (berbeda warna untuk menunjukkan gabungan) */}
-    <polygon points="20,90 130,90 87,30" fill="#f43f5e" fillOpacity="0.3" stroke="#fb7185" strokeWidth="1.8" />
-    <polygon points="130,90 155,65 87,30" fill="#f43f5e" fillOpacity="0.15" stroke="#fb7185" strokeWidth="1.8" />
-    <line x1="87" y1="30" x2="20" y2="90" stroke="#fb7185" strokeWidth="1.5" />
-    <line x1="87" y1="30" x2="45" y2="65" stroke="#fb7185" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
-    <circle cx="87" cy="30" r="3" fill="#fb7185" />
-    <text x="83" y="24" fill="#fb7185" fontSize="9" fontFamily="monospace">T</text>
-    {/* dimension labels */}
-    <text x="72" y="165" fill="#818cf8" fontSize="9" textAnchor="middle">p</text>
-    <text x="152" y="110" fill="#818cf8" fontSize="9" textAnchor="middle">l</text>
-    <text x="8" y="122" fill="#818cf8" fontSize="9" textAnchor="middle">t₁</text>
-    <text x="175" y="62" fill="#fb7185" fontSize="9" textAnchor="middle">t₂</text>
-    <text x="105" y="170" fill="#818cf8" fontSize="8" textAnchor="middle">Balok + Limas (gabungan)</text>
+  <svg width="260" height="215" viewBox="0 0 260 215" className="mx-auto">
+    {/* ── BALOK (biru) ── */}
+    <line x1="20" y1="165" x2="48" y2="145" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="48" y1="145" x2="183" y2="145" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="48" y1="145" x2="48" y2="75" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <polygon points="20,165 155,165 155,95 20,95" fill="#6366f1" fillOpacity="0.30" stroke="#818cf8" strokeWidth="1.5"/>
+    <polygon points="155,165 183,145 183,75 155,95" fill="#6366f1" fillOpacity="0.18" stroke="#818cf8" strokeWidth="1.5"/>
+    <polygon points="20,95 155,95 183,75 48,75" fill="#6366f1" fillOpacity="0.38" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Titik-titik balok */}
+    {([[20,165],[155,165],[183,145],[48,145],[20,95],[155,95],[183,75],[48,75]] as [number,number][]).map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
+    ))}
+    <text x="7" y="170" fill="white" fontSize="10" fontFamily="monospace">A</text>
+    <text x="158" y="170" fill="white" fontSize="10" fontFamily="monospace">B</text>
+    <text x="186" y="149" fill="white" fontSize="10" fontFamily="monospace">C</text>
+    <text x="34" y="149" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="5" y="93" fill="white" fontSize="10" fontFamily="monospace">E</text>
+    <text x="158" y="93" fill="white" fontSize="10" fontFamily="monospace">F</text>
+    <text x="186" y="73" fill="white" fontSize="10" fontFamily="monospace">G</text>
+    <text x="34" y="73" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+
+    {/* ── LIMAS (merah) ── */}
+    <line x1="101" y1="30" x2="48" y2="75" stroke="#f43f5e" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.65"/>
+    <polygon points="48,75 20,95 101,30" fill="#f43f5e" fillOpacity="0.12" stroke="#f43f5e" strokeWidth="1" strokeDasharray="4,3"/>
+    <polygon points="48,75 183,75 101,30" fill="#f43f5e" fillOpacity="0.15" stroke="#f43f5e" strokeWidth="1.3"/>
+    <polygon points="155,95 183,75 101,30" fill="#f43f5e" fillOpacity="0.22" stroke="#f43f5e" strokeWidth="1.5"/>
+    <polygon points="20,95 155,95 101,30" fill="#f43f5e" fillOpacity="0.30" stroke="#f43f5e" strokeWidth="1.8"/>
+    <circle cx="101" cy="30" r="3.5" fill="#fb7185"/>
+    <text x="95" y="21" fill="#fb7185" fontSize="11" fontFamily="monospace" fontWeight="bold">T</text>
+
+    {/* Label dimensi */}
+    <text x="87" y="185" fill="#818cf8" fontSize="10" textAnchor="middle">p</text>
+    <line x1="20" y1="180" x2="155" y2="180" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.5"/>
+    <text x="210" y="120" fill="#818cf8" fontSize="10" textAnchor="middle">l</text>
+    <text x="5" y="132" fill="#818cf8" fontSize="10" textAnchor="middle">t₁</text>
+    <text x="235" y="55" fill="#fb7185" fontSize="10" textAnchor="middle">t₂</text>
+    <line x1="101" y1="30" x2="101" y2="85" stroke="#fb7185" strokeWidth="0.8" strokeOpacity="0.45" strokeDasharray="3,2"/>
+
+    <text x="130" y="208" fill="#818cf8" fontSize="8" textAnchor="middle">Balok + Limas Segiempat</text>
   </svg>
 );
 
-/* ── SVG: Prisma Segitiga + Balok ── */
+/* ── SVG: Balok + Prisma Segitiga Atap ──
+   Balok: (15,165)–(145,165)–(172,146)–(42,146) alas
+          (15,105)–(145,105)–(172,86)–(42,86)  atas
+   Prisma atap: P depan=(80,50), Q belakang=(107,31)
+   Rusuk bubungan: P(80,50)→Q(107,31)
+*/
 const PrismaBalokSVG = () => (
-  <svg width="210" height="185" viewBox="0 0 210 185" className="mx-auto">
-    {/* Balok bawah */}
-    <polygon points="20,155 135,155 135,105 20,105" fill="#6366f1" fillOpacity="0.35" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="135,155 158,135 158,85 135,105" fill="#6366f1" fillOpacity="0.2" stroke="#818cf8" strokeWidth="1.5" />
-    <polygon points="20,105 135,105 158,85 43,85" fill="#6366f1" fillOpacity="0.3" stroke="#818cf8" strokeWidth="1.5" />
-    <line x1="20" y1="155" x2="43" y2="135" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="43" y1="135" x2="158" y2="135" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="43" y1="135" x2="43" y2="85" stroke="#818cf8" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Prisma segitiga di atas */}
-    {/* Ridge line */}
-    <line x1="77" y1="42" x2="200" y2="42" stroke="#f59e0b" strokeWidth="2" />
-    {/* Lateral top + side faces */}
-    <polygon points="20,105 135,105 200,42 77,42" fill="#f59e0b" fillOpacity="0.25" stroke="#f59e0b" strokeWidth="1.5" />
-    <polygon points="135,105 158,85 200,42" fill="#f59e0b" fillOpacity="0.15" stroke="#f59e0b" strokeWidth="1.5" />
-    <polygon points="20,105 43,85 77,42" fill="#f59e0b" fillOpacity="0.2" stroke="#f59e0b" strokeWidth="1" strokeDasharray="4,3" />
-    {/* Front triangular face */}
-    <polygon points="20,105 135,105 77,42" fill="#f59e0b" fillOpacity="0.35" stroke="#f59e0b" strokeWidth="1.8" />
-    {/* Ridge vertices */}
-    {[[77,42],[200,42]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2.5" fill="#fcd34d" />
+  <svg width="260" height="215" viewBox="0 0 260 215" className="mx-auto">
+    {/* ── BALOK (biru) ── */}
+    <line x1="15" y1="165" x2="42" y2="146" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="42" y1="146" x2="172" y2="146" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <line x1="42" y1="146" x2="42" y2="86" stroke="#818cf8" strokeWidth="1" strokeDasharray="5,3" strokeOpacity="0.55"/>
+    <polygon points="15,165 145,165 145,105 15,105" fill="#6366f1" fillOpacity="0.30" stroke="#818cf8" strokeWidth="1.5"/>
+    <polygon points="145,165 172,146 172,86 145,105" fill="#6366f1" fillOpacity="0.18" stroke="#818cf8" strokeWidth="1.5"/>
+    <polygon points="15,105 145,105 172,86 42,86" fill="#6366f1" fillOpacity="0.38" stroke="#818cf8" strokeWidth="1.5"/>
+    {/* Titik-titik balok */}
+    {([[15,165],[145,165],[172,146],[42,146],[15,105],[145,105],[172,86],[42,86]] as [number,number][]).map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    <text x="70" y="40" fill="#fcd34d" fontSize="9" fontFamily="monospace">P</text>
-    <text x="202" y="40" fill="#fcd34d" fontSize="9" fontFamily="monospace">Q</text>
-    <text x="105" y="177" fill="#818cf8" fontSize="8" textAnchor="middle">Balok + Prisma Segitiga</text>
+    <text x="2" y="170" fill="white" fontSize="10" fontFamily="monospace">A</text>
+    <text x="148" y="170" fill="white" fontSize="10" fontFamily="monospace">B</text>
+    <text x="175" y="150" fill="white" fontSize="10" fontFamily="monospace">C</text>
+    <text x="28" y="150" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="1" y="103" fill="white" fontSize="10" fontFamily="monospace">E</text>
+    <text x="148" y="103" fill="white" fontSize="10" fontFamily="monospace">F</text>
+    <text x="175" y="84" fill="white" fontSize="10" fontFamily="monospace">G</text>
+    <text x="28" y="84" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+
+    {/* ── PRISMA SEGITIGA ATAP (amber) ── */}
+    {/* P depan=(80,50), Q belakang=(107,31) */}
+    {/* Sisi segitiga belakang (tersembunyi) */}
+    <polygon points="42,86 172,86 107,31" fill="#f59e0b" fillOpacity="0.12" stroke="#f59e0b" strokeWidth="1" strokeDasharray="4,3"/>
+    {/* Lereng kiri */}
+    <polygon points="15,105 42,86 107,31 80,50" fill="#f59e0b" fillOpacity="0.20" stroke="#f59e0b" strokeWidth="1.3"/>
+    {/* Lereng kanan */}
+    <polygon points="145,105 172,86 107,31 80,50" fill="#f59e0b" fillOpacity="0.28" stroke="#f59e0b" strokeWidth="1.5"/>
+    {/* Sisi segitiga depan */}
+    <polygon points="15,105 145,105 80,50" fill="#f59e0b" fillOpacity="0.38" stroke="#f59e0b" strokeWidth="1.8"/>
+    {/* Rusuk bubungan */}
+    <line x1="80" y1="50" x2="107" y2="31" stroke="#fcd34d" strokeWidth="2"/>
+    {/* Titik puncak */}
+    <circle cx="80" cy="50" r="3" fill="#fcd34d"/>
+    <circle cx="107" cy="31" r="3" fill="#fcd34d"/>
+    <text x="66" y="48" fill="#fcd34d" fontSize="10" fontFamily="monospace" fontWeight="bold">P</text>
+    <text x="110" y="29" fill="#fcd34d" fontSize="10" fontFamily="monospace" fontWeight="bold">Q</text>
+
+    {/* Label dimensi */}
+    <text x="80" y="186" fill="#818cf8" fontSize="10" textAnchor="middle">p</text>
+    <line x1="15" y1="181" x2="145" y2="181" stroke="#818cf8" strokeWidth="0.8" strokeOpacity="0.5"/>
+    <text x="200" y="135" fill="#818cf8" fontSize="10" textAnchor="middle">l</text>
+    <text x="0" y="135" fill="#818cf8" fontSize="10" textAnchor="middle">t₁</text>
+    <text x="140" y="80" fill="#f59e0b" fontSize="10" textAnchor="middle">t₂</text>
+
+    <text x="130" y="208" fill="#818cf8" fontSize="8" textAnchor="middle">Balok + Prisma Segitiga</text>
   </svg>
 );
 
