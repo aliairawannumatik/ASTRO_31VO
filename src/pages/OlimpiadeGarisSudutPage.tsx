@@ -1058,8 +1058,8 @@ const Soal28SVG = () => (
 
     {/* 30° at top - moved right to clear short segment line */}
     <text x="156" y="78" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
-    {/* x at apex - moved up to sit near actual intersection (~191,121) */}
-    <text x="186" y="134" fill="#ffffff" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+    {/* x at left supplementary angle of apex (~191,121) */}
+    <text x="168" y="128" fill="#ffffff" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
     {/* 110° at bottom-left - moved right to clear diagonal line */}
     <text x="92" y="208" fill="#fbbf24" fontSize="13" fontFamily="serif">110°</text>
   </svg>
