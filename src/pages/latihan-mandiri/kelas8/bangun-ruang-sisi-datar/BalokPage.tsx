@@ -16,9 +16,7 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 // ABCD.EFGH convention: ABCD = alas (bawah), EFGH = atap (atas)
-// A=front-left-bottom, B=front-right-bottom, C=back-right-bottom, D=back-left-bottom
-// E=front-left-top (above A), F=front-right-top (above B), G=back-right-top (above C), H=back-left-top (above D)
-const BalokSVG = ({ p = "p", l = "l", t = "t", wide = false }: { p?: string; l?: string; t?: string; wide?: boolean }) => {
+const BalokSVG = ({ wide = false }: { wide?: boolean }) => {
   const W = wide ? 130 : 90;
   const H = 60;
   const D = 30;
@@ -38,17 +36,12 @@ const BalokSVG = ({ p = "p", l = "l", t = "t", wide = false }: { p?: string; l?:
           <stop offset="100%" stopColor="#10b981" stopOpacity="0.08" />
         </linearGradient>
       </defs>
-      {/* Front face */}
       <polygon points={`15,${H+D} ${W+15},${H+D} ${W+15},${D} 15,${D}`} fill="url(#bFront)" stroke="#34d399" strokeWidth="1.8" />
-      {/* Top face */}
       <polygon points={`15,${D} ${W+15},${D} ${W+D+15},10 ${D+15},10`} fill="url(#bTop)" stroke="#34d399" strokeWidth="1.8" />
-      {/* Right face */}
       <polygon points={`${W+15},${D} ${W+D+15},10 ${W+D+15},${H+10} ${W+15},${H+D}`} fill="url(#bRight)" stroke="#34d399" strokeWidth="1.8" />
-      {/* Hidden edges */}
       <line x1="15" y1={H+D} x2={D+15} y2={H+10} stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
       <line x1={D+15} y1={H+10} x2={W+D+15} y2={H+10} stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
       <line x1={D+15} y1={H+10} x2={D+15} y2="10" stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-      {/* Vertex labels — ABCD = alas (bawah), EFGH = atap (atas) */}
       <text x="2"        y={H+D+4}  fill="white" fontSize="10" fontFamily="monospace">A</text>
       <text x={W+17}     y={H+D+4}  fill="white" fontSize="10" fontFamily="monospace">B</text>
       <text x={W+D+17}   y={H+12}   fill="white" fontSize="10" fontFamily="monospace">C</text>
@@ -86,7 +79,6 @@ const BalokNetSVG = ({ p = 8, l = 5, t = 3 }: { p?: number; l?: number; t?: numb
   );
 };
 
-// DiagonalBalokSVG — ABCD = alas (bawah), EFGH = atap (atas)
 const DiagonalBalokSVG = () => (
   <svg width="180" height="130" viewBox="0 0 180 130" className="mx-auto">
     <polygon points="15,105 115,105 115,45 15,45" fill="#10b981" fillOpacity="0.25" stroke="#34d399" strokeWidth="1.5" />
@@ -95,13 +87,10 @@ const DiagonalBalokSVG = () => (
     <line x1="15" y1="105" x2="50" y2="75" stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
     <line x1="50" y1="75" x2="150" y2="75" stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
     <line x1="50" y1="75" x2="50" y2="15" stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Diagonal ruang */}
     <line x1="15" y1="105" x2="150" y2="15" stroke="#f59e0b" strokeWidth="2" strokeDasharray="6,3" />
-    {/* Diagonal sisi */}
     <line x1="15" y1="105" x2="115" y2="45" stroke="#f472b6" strokeWidth="1.5" />
     <text x="70" y="125" fill="#f59e0b" fontSize="9" textAnchor="middle">diagonal ruang</text>
     <text x="50" y="80" fill="#f472b6" fontSize="9" textAnchor="middle">d sisi</text>
-    {/* Labels — ABCD = alas (bawah), EFGH = atap (atas) */}
     <text x="2"   y="110" fill="white" fontSize="10" fontFamily="monospace">A</text>
     <text x="117" y="110" fill="white" fontSize="10" fontFamily="monospace">B</text>
     <text x="152" y="77"  fill="white" fontSize="10" fontFamily="monospace">C</text>
@@ -113,11 +102,98 @@ const DiagonalBalokSVG = () => (
   </svg>
 );
 
+// Jaring-jaring balok — 4 pola (2 valid, 2 invalid)
+// Dimensi: p=30, l=20, t=12 (piksel)
+const IdentifikasiJaringBalokSVG = () => {
+  const p = 30, l = 20, t = 12;
+  const R = (x: number, y: number, w: number, h: number, op: number, key: string) => (
+    <rect key={key} x={x} y={y} width={w} height={h}
+      fill="#10b981" fillOpacity={op} stroke="#34d399" strokeWidth="1.2" rx="1" />
+  );
+  // Panel offsets
+  const p1x = 5,   p1y = 20;
+  const p2x = 130, p2y = 20;
+  const p3x = 5,   p3y = 155;
+  const p4x = 130, p4y = 155;
+
+  return (
+    <svg viewBox="0 0 250 280" className="w-full max-w-xs mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {/* Panel labels */}
+      <text x="45"  y="14" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(1)</text>
+      <text x="175" y="14" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(2)</text>
+      <text x="45"  y="149" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(3)</text>
+      <text x="175" y="149" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(4)</text>
+
+      {/* Divider lines */}
+      <line x1="5" y1="132" x2="245" y2="132" stroke="#334155" strokeWidth="1" strokeDasharray="4,3" />
+      <line x1="120" y1="10" x2="120" y2="270" stroke="#334155" strokeWidth="1" strokeDasharray="4,3" />
+
+      {/* ── PANEL 1 (VALID) – Salib / cross ── */}
+      {/* depan p×t */}
+      {R(p1x+l, p1y,     p, t, 0.20, 'p1-depan')}
+      {/* kiri l×t */}
+      {R(p1x,   p1y+t,   l, t, 0.30, 'p1-kiri')}
+      {/* alas p×l */}
+      {R(p1x+l, p1y+t,   p, l, 0.45, 'p1-alas')}
+      {/* kanan l×t */}
+      {R(p1x+l+p, p1y+t, l, t, 0.30, 'p1-kanan')}
+      {/* tutup p×l */}
+      {R(p1x+l, p1y+t+l, p, l, 0.35, 'p1-tutup')}
+      {/* belakang p×t */}
+      {R(p1x+l, p1y+t+l+l, p, t, 0.20, 'p1-belakang')}
+
+      {/* ── PANEL 2 (VALID) – 4 sejajar + 2 di bawah ── */}
+      {/* kiri l×t */}
+      {R(p2x,       p2y,   l, t, 0.30, 'p2-kiri')}
+      {/* depan p×t */}
+      {R(p2x+l,     p2y,   p, t, 0.20, 'p2-depan')}
+      {/* kanan l×t */}
+      {R(p2x+l+p,   p2y,   l, t, 0.30, 'p2-kanan')}
+      {/* belakang p×t */}
+      {R(p2x+l+p+l, p2y,   p, t, 0.20, 'p2-belakang')}
+      {/* alas p×l */}
+      {R(p2x+l,     p2y+t, p, l, 0.45, 'p2-alas')}
+      {/* tutup p×l */}
+      {R(p2x+l,     p2y+t+l, p, l, 0.35, 'p2-tutup')}
+
+      {/* ── PANEL 3 (INVALID) – hanya 5 sisi, tutup tidak ada ── */}
+      {/* depan p×t */}
+      {R(p3x+l, p3y,     p, t, 0.20, 'p3-depan')}
+      {/* kiri l×t */}
+      {R(p3x,   p3y+t,   l, t, 0.30, 'p3-kiri')}
+      {/* alas p×l */}
+      {R(p3x+l, p3y+t,   p, l, 0.45, 'p3-alas')}
+      {/* kanan l×t */}
+      {R(p3x+l+p, p3y+t, l, t, 0.30, 'p3-kanan')}
+      {/* belakang p×t */}
+      {R(p3x+l, p3y+t+l, p, t, 0.20, 'p3-belakang')}
+      {/* tutup HILANG → hanya 5 sisi */}
+      <text x={p3x+l+p/2} y={p3y+t+l+t+12} fill="#f87171" fontSize="8" textAnchor="middle" fontFamily="sans-serif">?</text>
+
+      {/* ── PANEL 4 (INVALID) – satu sisi terpisah ── */}
+      {/* depan p×t */}
+      {R(p4x+l, p4y,     p, t, 0.20, 'p4-depan')}
+      {/* kiri l×t */}
+      {R(p4x,   p4y+t,   l, t, 0.30, 'p4-kiri')}
+      {/* alas p×l */}
+      {R(p4x+l, p4y+t,   p, l, 0.45, 'p4-alas')}
+      {/* kanan l×t */}
+      {R(p4x+l+p, p4y+t, l, t, 0.30, 'p4-kanan')}
+      {/* tutup p×l */}
+      {R(p4x+l, p4y+t+l, p, l, 0.35, 'p4-tutup')}
+      {/* belakang TERPISAH (tidak terhubung) */}
+      {R(p4x+l+p+l+6, p4y+t+l+l, p, t, 0.20, 'p4-belakang-separated')}
+      <line x1={p4x+l+p+l+2} y1={p4y+t+l+l+t/2} x2={p4x+l+p+l+5} y2={p4y+t+l+l+t/2}
+        stroke="#f87171" strokeWidth="1" strokeDasharray="2,2" />
+    </svg>
+  );
+};
+
 const questions: Q[] = [
   Qn(1, "Unsur-Unsur Balok", {
     type: "mixed",
     content: "Perhatikan balok ABCD.EFGH berikut (ABCD = sisi alas/bawah, EFGH = sisi atap/atas):",
-    diagram: <BalokSVG p="p" l="l" t="t" />,
+    diagram: <BalokSVG />,
     parts: [
       { label: "a.", text: "Sebutkan semua rusuk balok ABCD.EFGH beserta jumlahnya!" },
       { label: "b.", text: "Ada berapa titik sudut dan sisi pada balok? Sebutkan semuanya." },
@@ -130,7 +206,7 @@ const questions: Q[] = [
   Qn(2, "Perbedaan Balok dan Kubus", {
     type: "mixed",
     content: "Balok ABCD.EFGH memiliki panjang p, lebar l, dan tinggi t (ABCD = sisi alas/bawah, EFGH = sisi atap/atas).",
-    diagram: <BalokSVG p="p" l="l" t="t" />,
+    diagram: <BalokSVG />,
     parts: [
       { label: "a.", text: "Apa perbedaan utama antara balok dan kubus?" },
       { label: "b.", text: "Apakah kubus termasuk balok? Jelaskan alasanmu!" },
@@ -141,24 +217,14 @@ const questions: Q[] = [
     type: "mixed",
     content: "Rumus luas permukaan balok ABCD.EFGH dengan panjang p, lebar l, dan tinggi t (ABCD = sisi alas/bawah, EFGH = sisi atap/atas):",
     mathContent: "L = 2(pl + pt + lt)",
-    diagram: <BalokSVG p="p" l="l" t="t" />,
+    diagram: <BalokSVG />,
     parts: [
       { label: "a.", math: "\\text{Hitung L jika } p=8, l=5, t=3 \\text{ (cm)}" },
       { label: "b.", math: "\\text{Hitung L jika } p=12, l=8, t=6 \\text{ (cm)}" },
       { label: "c.", math: "\\text{Hitung L jika } p=10, l=10, t=5 \\text{ (cm)}" },
     ],
   }),
-  Qn(4, "Volume Balok – Dasar", {
-    type: "mixed",
-    content: "Rumus volume balok dengan panjang p, lebar l, dan tinggi t:",
-    mathContent: "V = p \\times l \\times t",
-    parts: [
-      { label: "a.", math: "\\text{Hitung V jika } p=10, l=6, t=4 \\text{ (cm)}" },
-      { label: "b.", math: "\\text{Hitung V jika } p=15, l=8, t=5 \\text{ (cm)}" },
-      { label: "c.", math: "\\text{Hitung V jika } p=20, l=12, t=9 \\text{ (cm)}" },
-    ],
-  }),
-  Qn(5, "Diagonal Sisi dan Diagonal Ruang Balok", {
+  Qn(4, "Diagonal Sisi dan Diagonal Ruang Balok", {
     type: "mixed",
     content: "Perhatikan balok ABCD.EFGH dengan panjang 12 cm, lebar 5 cm, dan tinggi 4 cm.",
     diagram: <DiagonalBalokSVG />,
@@ -167,7 +233,7 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Hitung diagonal ruang } AG = \\sqrt{p^2 + l^2 + t^2}" },
     ],
   }),
-  Qn(6, "Jaring-Jaring Balok", {
+  Qn(5, "Jaring-Jaring Balok", {
     type: "mixed",
     content: "Balok dengan panjang 8 cm, lebar 5 cm, dan tinggi 3 cm.",
     diagram: <BalokNetSVG p={8} l={5} t={3} />,
@@ -175,6 +241,16 @@ const questions: Q[] = [
       { label: "a.", text: "Pada jaring-jaring balok di atas, ada berapa sisi (persegi panjang)?" },
       { label: "b.", text: "Sebutkan ukuran masing-masing sisi pada jaring-jaring tersebut." },
       { label: "c.", math: "\\text{Verifikasi: total luas jaring-jaring} = L_{permukaan} = 2(8\\times5 + 8\\times3 + 5\\times3)" },
+    ],
+  }),
+  Qn(6, "Identifikasi Jaring-Jaring Balok", {
+    type: "mixed",
+    content: "Perhatikan empat susunan persegi panjang berikut. Tentukan mana saja yang merupakan jaring-jaring balok dan berikan alasanmu!",
+    diagram: <IdentifikasiJaringBalokSVG />,
+    parts: [
+      { label: "a.", text: "Manakah di antara pola (1), (2), (3), (4) yang merupakan jaring-jaring balok?" },
+      { label: "b.", text: "Jelaskan mengapa pola yang tidak valid bukan merupakan jaring-jaring balok!" },
+      { label: "c.", text: "Berapa banyak sisi yang harus dimiliki jaring-jaring balok? Sebutkan ukuran setiap sisinya!" },
     ],
   }),
   Qn(7, "Mencari Dimensi Balok dari Luas Permukaan – UN Style", {
@@ -204,12 +280,13 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kolam hanya diisi setinggi 1,5 m, berapa volume air yang dibutuhkan?" },
     ],
   }),
-  Qn(10, "Perbandingan Volume Dua Balok", {
+  Qn(10, "Perbandingan Volume dan Luas Permukaan Dua Balok", {
     type: "mixed",
     content: "Balok A berukuran 6×4×3 cm dan Balok B berukuran 12×8×6 cm.",
     parts: [
       { label: "a.", text: "Hitung volume Balok A dan Balok B." },
       { label: "b.", math: "\\text{Tentukan perbandingan volume A : B}" },
+      { label: "c.", math: "\\text{Tentukan perbandingan luas permukaan A : B}" },
     ],
   }),
   Qn(11, "Soal Cerita – Dus Kardus", {
@@ -229,16 +306,7 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa total kubus kecil yang muat di dalam kotak tersebut?" },
     ],
   }),
-  Qn(13, "Soal Cerita – Aquarium", {
-    type: "mixed",
-    content: "Sebuah aquarium berbentuk balok berukuran 60 cm × 30 cm × 40 cm diisi air hingga ¾ penuh.",
-    parts: [
-      { label: "a.", text: "Hitung volume total aquarium." },
-      { label: "b.", text: "Hitung volume air di dalam aquarium." },
-      { label: "c.", text: "Berapa tinggi air di dalam aquarium tersebut?" },
-    ],
-  }),
-  Qn(14, "Mencari Dimensi dari Total Rusuk – UN", {
+  Qn(13, "Mencari Dimensi dari Total Rusuk – UN", {
     type: "mixed",
     content: "Total panjang semua rusuk sebuah balok adalah 72 cm. Perbandingan p : l : t = 3 : 2 : 1.",
     parts: [
@@ -247,7 +315,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume balok." },
     ],
   }),
-  Qn(15, "Luas Permukaan – Soal Cerita Tembok", {
+  Qn(14, "Luas Permukaan – Soal Cerita Tembok", {
     type: "mixed",
     content: "Sebuah ruangan berbentuk balok berukuran 8 m × 6 m × 3 m. Dindingnya akan dicat.",
     parts: [
@@ -256,7 +324,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume ruangan tersebut." },
     ],
   }),
-  Qn(16, "Soal ANBK – Melapisi Kotak", {
+  Qn(15, "Soal ANBK – Melapisi Kotak", {
     type: "mixed",
     content: "Sebuah kotak kayu berbentuk balok berukuran 40 cm × 25 cm × 20 cm akan dilapisi kertas kado.",
     parts: [
@@ -265,25 +333,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung volume kotak tersebut." },
     ],
   }),
-  Qn(17, "Soal TKA – Biaya Pengecatan", {
-    type: "mixed",
-    content: "Sebuah dinding berbentuk balok (kotak) berukuran 5 m × 3 m akan dicat. Biaya cat Rp35.000 per m².",
-    parts: [
-      { label: "a.", text: "Hitung luas dinding yang akan dicat." },
-      { label: "b.", text: "Hitung total biaya pengecatan." },
-      { label: "c.", text: "Jika dinding memiliki 2 jendela berukuran 1 m × 1,5 m, berapa biaya pengecatan sebenarnya?" },
-    ],
-  }),
-  Qn(18, "Soal Penalaran – Balok Dalam Balok", {
-    type: "mixed",
-    content: "Sebuah balok besar berukuran 60 cm × 40 cm × 30 cm diisi dengan balok-balok kecil berukuran 10 cm × 8 cm × 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung volume balok besar dan balok kecil}" },
-      { label: "b.", text: "Berapa balok kecil yang bisa dimasukkan ke dalam balok besar?" },
-      { label: "c.", math: "\\text{Verifikasi: } \\frac{60}{10} \\times \\frac{40}{8} \\times \\frac{30}{6} = \\ldots" },
-    ],
-  }),
-  Qn(19, "Soal UN – Luas Permukaan Tanpa Alas dan Tutup", {
+  Qn(16, "Soal UN – Luas Permukaan Tanpa Alas dan Tutup", {
     type: "mixed",
     content: "Sebuah aquarium berbentuk balok berukuran 50 cm × 30 cm × 40 cm tanpa tutup.",
     parts: [
@@ -292,25 +342,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas total 5 sisi (tanpa tutup saja)." },
     ],
   }),
-  Qn(20, "Soal ANBK – Volume dan Kepadatan", {
-    type: "mixed",
-    content: "Sebuah kotak besi berbentuk balok berukuran 20 cm × 15 cm × 10 cm. Besi memiliki massa jenis 7,8 g/cm³.",
-    parts: [
-      { label: "a.", text: "Hitung volume kotak besi." },
-      { label: "b.", math: "\\text{Hitung massa kotak: } m = \\rho \\times V" },
-      { label: "c.", text: "Nyatakan massa dalam kilogram." },
-    ],
-  }),
-  Qn(21, "Soal TKA – Penyimpanan Barang", {
-    type: "mixed",
-    content: "Sebuah gudang berbentuk balok berukuran 10 m × 8 m × 5 m. Barang-barang disimpan dalam kardus berukuran 50 cm × 40 cm × 25 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Konversikan ukuran gudang ke cm}" },
-      { label: "b.", text: "Berapa maksimum kardus yang bisa disimpan di gudang?" },
-      { label: "c.", text: "Jika gudang hanya diisi hingga 80% kapasitasnya, berapa kardus yang bisa disimpan?" },
-    ],
-  }),
-  Qn(22, "Soal UN – Mengubah Dimensi Balok", {
+  Qn(17, "Soal UN – Mengubah Dimensi Balok", {
     type: "mixed",
     content: "Sebuah balok berukuran 6 cm × 4 cm × 3 cm. Panjang dan lebarnya diperbesar 2 kali, tingginya tetap.",
     parts: [
@@ -319,7 +351,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung perbandingan luas permukaan balok baru dan balok asal." },
     ],
   }),
-  Qn(23, "Soal Gabungan – Balok dan Perbandingan", {
+  Qn(18, "Soal Gabungan – Balok dan Perbandingan", {
     type: "mixed",
     content: "Sebuah balok memiliki perbandingan panjang : lebar : tinggi = 5 : 3 : 2. Luas permukaannya adalah 620 cm².",
     parts: [
@@ -347,7 +379,7 @@ const BalokPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 23 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 18 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
