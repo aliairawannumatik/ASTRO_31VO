@@ -21,6 +21,7 @@ import gambar12 from "@/assets/Gambar_12_Sudut_Saling_sepihak_1773289509182.png"
 import gambar13 from "@/assets/Gambar_13_Jumlah_sudut_pada_segitiga_1773289509182.png";
 import gambar14 from "@/assets/Gambar_14_Sudut-sudut_pada_segitiga_1773289509182.png";
 import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.png";
+import gambarSoal19 from "@assets/image_1777593919772.png";
 import gambarOlimpiade1 from "@assets/image_1777195619892.png";
 import gambarOlimpiade2 from "@assets/image_1777195655690.png";
 import gambarOlimpiade4 from "@assets/image_1777195674151.png";
@@ -1199,7 +1200,7 @@ const latihanDasar: {
   {
     no: 19,
     soal: "Perhatikan gambar berikut!\n\nJika besar $\\angle a = 35°$ dan $\\angle b = 45°$ maka jumlah besar sudut x dan y adalah ...",
-    image: <Soal19SVG />,
+    image: <img src={gambarSoal19} alt="Gambar Soal 19" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
     imageCaption: "Gambar Soal 19",
     options: ["A. $285°$", "B. $300°$", "C. $315°$", "D. $330°$"]
   },
