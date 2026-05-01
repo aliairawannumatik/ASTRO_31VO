@@ -906,7 +906,7 @@ const Soal22SVG = () => (
 
     {/* Numbers at triangle apex (170, 130) */}
     <text x="174" y="124" fill="#38bdf8" fontSize="13" fontWeight="bold">2</text>
-    <text x="163" y="148" fill="#38bdf8" fontSize="13" fontWeight="bold">6</text>
+    <text x="172" y="148" fill="#38bdf8" fontSize="13" fontWeight="bold">6</text>
 
     {/* Numbers at bottom intersection of diagonal & m ≈ (138, 240) */}
     <text x="148" y="234" fill="#38bdf8" fontSize="13" fontWeight="bold">5</text>
