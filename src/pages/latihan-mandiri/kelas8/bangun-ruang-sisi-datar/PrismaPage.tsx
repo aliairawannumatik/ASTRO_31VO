@@ -15,126 +15,255 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const PrismaSegitigaSVG = ({ a = "a", b = "b", c = "c", t = "t" }: { a?: string; b?: string; c?: string; t?: string }) => (
-  <svg width="190" height="140" viewBox="0 0 190 140" className="mx-auto">
-    <defs>
-      <linearGradient id="pFront" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.35" />
-        <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.15" />
-      </linearGradient>
-      <linearGradient id="pSide" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.2" />
-        <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.08" />
-      </linearGradient>
-      <linearGradient id="pTop" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.5" />
-        <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.3" />
-      </linearGradient>
-    </defs>
-    {/* Bottom triangle face (front) */}
-    <polygon points="20,120 100,120 60,80" fill="url(#pFront)" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Front rectangular face */}
-    <polygon points="20,120 100,120 140,95 60,95" fill="url(#pFront)" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Right rectangular face */}
-    <polygon points="100,120 140,95 120,55 80,80" fill="url(#pSide)" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Top triangle face */}
-    <polygon points="60,80 80,80 120,55" fill="url(#pTop)" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Left rectangular face - dashed */}
-    <line x1="20" y1="120" x2="60" y2="95" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
-    <line x1="60" y1="95" x2="60" y2="80" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
-    <line x1="60" y1="95" x2="140" y2="95" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
-    {/* Vertices */}
-    {[[20,120],[100,120],[60,80],[60,95],[140,95],[120,55],[80,80]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2.5" fill="#fbbf24" />
-    ))}
-    {/* Labels */}
-    <text x="8" y="126" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="102" y="126" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="54" y="78" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="50" y="96" fill="white" fontSize="10" fontFamily="monospace">D</text>
-    <text x="142" y="96" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="122" y="54" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    {/* Dimension labels */}
-    <text x="60" y="136" fill="#fbbf24" fontSize="10" textAnchor="middle">{a}</text>
-    <text x="155" y="80" fill="#fbbf24" fontSize="10" textAnchor="middle">{t}</text>
-  </svg>
-);
+/**
+ * Prisma segitiga ABC.DEF
+ * ABC = alas (segitiga depan, menghadap penonton)
+ * DEF = tutup (segitiga belakang)
+ * Korespondensi: A↔D, B↔E, C↔F (rusuk tegak)
+ * Rusuk tersembunyi: CF (digambar putus-putus)
+ */
+const PrismaSegitigaSVG = ({ a = "a", b = "b", c = "c", t = "t" }: { a?: string; b?: string; c?: string; t?: string }) => {
+  // Segitiga depan (ALAS = ABC)
+  const A = [20, 128], B = [97, 128], C = [58, 68];
+  // Segitiga belakang (TUTUP = DEF), offset +60, -22
+  const D = [80, 106], E = [157, 106], F = [118, 46];
+  return (
+    <svg width="200" height="155" viewBox="0 0 200 155" className="mx-auto">
+      <defs>
+        <linearGradient id="pstFront" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.40" />
+          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.20" />
+        </linearGradient>
+        <linearGradient id="pstBottom" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.20" />
+          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.08" />
+        </linearGradient>
+        <linearGradient id="pstRight" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.06" />
+        </linearGradient>
+        <linearGradient id="pstBack" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.18" />
+        </linearGradient>
+      </defs>
 
-const PrismaSikuSVG = () => (
-  <svg width="190" height="145" viewBox="0 0 190 145" className="mx-auto">
-    {/* Bottom right-triangle */}
-    <polygon points="15,125 95,125 15,65" fill="#f59e0b" fillOpacity="0.3" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Front rect (alas) */}
-    <polygon points="15,125 95,125 135,100 55,100" fill="#f59e0b" fillOpacity="0.25" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Right rect (sisi miring) */}
-    <polygon points="95,125 135,100 95,40 55,65" fill="#f59e0b" fillOpacity="0.15" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Top right-triangle */}
-    <polygon points="55,100 55,65 95,40" fill="#f59e0b" fillOpacity="0.45" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Hidden edges */}
-    <line x1="15" y1="125" x2="55" y2="100" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="55" y1="100" x2="55" y2="65" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="15" y1="65" x2="55" y2="40" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {/* Right angle marker */}
-    <polyline points="15,110 25,110 25,125" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-    {/* Vertices */}
-    {[[15,125],[95,125],[15,65],[55,100],[135,100],[95,40],[55,65],[55,40]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2.5" fill="#fbbf24" />
-    ))}
-    <text x="3" y="130" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="97" y="130" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="3" y="62" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="45" y="103" fill="white" fontSize="10" fontFamily="monospace">D</text>
-    <text x="137" y="103" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="97" y="38" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="57" y="62" fill="white" fontSize="10" fontFamily="monospace">G</text>
-    {/* Labels */}
-    <text x="55" y="140" fill="#fbbf24" fontSize="9" textAnchor="middle">alas</text>
-    <text x="7" y="95" fill="#fbbf24" fontSize="9" textAnchor="middle">t</text>
-    <text x="155" y="72" fill="#fbbf24" fontSize="9" textAnchor="middle">tinggi</text>
-    <text x="145" y="85" fill="#fbbf24" fontSize="8" textAnchor="middle">prisma</text>
-  </svg>
-);
+      {/* Sisi belakang (TUTUP = DEF) — digambar pertama (di belakang) */}
+      <polygon
+        points={`${D[0]},${D[1]} ${E[0]},${E[1]} ${F[0]},${F[1]}`}
+        fill="url(#pstBack)" stroke="#fbbf24" strokeWidth="1.6"
+      />
+      {/* Sisi bawah (ABDE) — bidang tegak bawah */}
+      <polygon
+        points={`${A[0]},${A[1]} ${B[0]},${B[1]} ${E[0]},${E[1]} ${D[0]},${D[1]}`}
+        fill="url(#pstBottom)" stroke="#fbbf24" strokeWidth="1.6"
+      />
+      {/* Sisi kanan (BCFE) — bidang tegak kanan */}
+      <polygon
+        points={`${B[0]},${B[1]} ${C[0]},${C[1]} ${F[0]},${F[1]} ${E[0]},${E[1]}`}
+        fill="url(#pstRight)" stroke="#fbbf24" strokeWidth="1.6"
+      />
+      {/* Sisi depan (ALAS = ABC) — segitiga depan */}
+      <polygon
+        points={`${A[0]},${A[1]} ${B[0]},${B[1]} ${C[0]},${C[1]}`}
+        fill="url(#pstFront)" stroke="#fbbf24" strokeWidth="1.8"
+      />
 
+      {/* Rusuk tersembunyi: CF (sisi kiri/atas, tidak terlihat) */}
+      <line x1={C[0]} y1={C[1]} x2={F[0]} y2={F[1]}
+        stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.65" />
+
+      {/* Titik sudut */}
+      {([A,B,C,D,E,F] as number[][]).map(([x,y],i) => (
+        <circle key={i} cx={x} cy={y} r="2.8" fill="#fbbf24" />
+      ))}
+
+      {/* Label titik sudut */}
+      <text x={A[0]-12} y={A[1]+4}  fill="white" fontSize="11" fontFamily="monospace">A</text>
+      <text x={B[0]+3}  y={B[1]+4}  fill="white" fontSize="11" fontFamily="monospace">B</text>
+      <text x={C[0]-13} y={C[1]+4}  fill="white" fontSize="11" fontFamily="monospace">C</text>
+      <text x={D[0]-4}  y={D[1]+12} fill="white" fontSize="11" fontFamily="monospace">D</text>
+      <text x={E[0]+3}  y={E[1]+4}  fill="white" fontSize="11" fontFamily="monospace">E</text>
+      <text x={F[0]+3}  y={F[1]+4}  fill="white" fontSize="11" fontFamily="monospace">F</text>
+
+      {/* Label dimensi */}
+      <text x={(A[0]+B[0])/2} y={A[1]+14} fill="#fbbf24" fontSize="10" textAnchor="middle">{a}</text>
+      <text x={(B[0]+E[0])/2+10} y={(B[1]+E[1])/2+4} fill="#fbbf24" fontSize="10" textAnchor="middle">{t}</text>
+    </svg>
+  );
+};
+
+/**
+ * Prisma segitiga siku-siku ABC.DEF
+ * ABC = alas (segitiga siku-siku depan, sudut siku di A)
+ * DEF = tutup (segitiga siku-siku belakang, sudut siku di D)
+ * Korespondensi: A↔D, B↔E, C↔F (rusuk tegak)
+ * Rusuk tersembunyi: CF (sisi tegak kiri atas)
+ * 6 titik sudut: A, B, C (depan), D, E, F (belakang)
+ */
+const PrismaSikuSVG = () => {
+  // Segitiga siku-siku depan (ALAS = ABC), sudut siku di A
+  const A = [20, 132], B = [107, 132], C = [20, 75];
+  // Segitiga siku-siku belakang (TUTUP = DEF), offset +48, -18, sudut siku di D
+  const D = [68, 114], E = [155, 114], F = [68, 57];
+  return (
+    <svg width="200" height="152" viewBox="0 0 200 152" className="mx-auto">
+      {/* Sisi belakang (TUTUP = DEF) */}
+      <polygon
+        points={`${D[0]},${D[1]} ${E[0]},${E[1]} ${F[0]},${F[1]}`}
+        fill="#f59e0b" fillOpacity="0.38" stroke="#fbbf24" strokeWidth="1.6"
+      />
+      {/* Sisi bawah (ABDE) — sisi kaki mendatar */}
+      <polygon
+        points={`${A[0]},${A[1]} ${B[0]},${B[1]} ${E[0]},${E[1]} ${D[0]},${D[1]}`}
+        fill="#f59e0b" fillOpacity="0.18" stroke="#fbbf24" strokeWidth="1.6"
+      />
+      {/* Sisi miring (BCFE) — sisi hipotenusa */}
+      <polygon
+        points={`${B[0]},${B[1]} ${C[0]},${C[1]} ${F[0]},${F[1]} ${E[0]},${E[1]}`}
+        fill="#f59e0b" fillOpacity="0.13" stroke="#fbbf24" strokeWidth="1.6"
+      />
+      {/* Sisi depan (ALAS = ABC) — segitiga siku-siku depan */}
+      <polygon
+        points={`${A[0]},${A[1]} ${B[0]},${B[1]} ${C[0]},${C[1]}`}
+        fill="#f59e0b" fillOpacity="0.30" stroke="#fbbf24" strokeWidth="1.8"
+      />
+
+      {/* Rusuk tersembunyi: CF (sisi kiri atas, tidak terlihat) */}
+      <line x1={C[0]} y1={C[1]} x2={F[0]} y2={F[1]}
+        stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.60" />
+
+      {/* Tanda sudut siku di A */}
+      <polyline points={`${A[0]},${A[1]-13} ${A[0]+13},${A[1]-13} ${A[0]+13},${A[1]}`}
+        fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+      {/* Tanda sudut siku di D (transparan karena tersembunyi) */}
+      <polyline points={`${D[0]},${D[1]-12} ${D[0]+12},${D[1]-12} ${D[0]+12},${D[1]}`}
+        fill="none" stroke="#fbbf24" strokeWidth="1.2" strokeOpacity="0.45" strokeDasharray="3,2" />
+
+      {/* Titik sudut (hanya 6) */}
+      {([A,B,C,D,E,F] as number[][]).map(([x,y],i) => (
+        <circle key={i} cx={x} cy={y} r="2.8" fill="#fbbf24" />
+      ))}
+
+      {/* Label titik sudut */}
+      <text x={A[0]-13} y={A[1]+5}  fill="white" fontSize="11" fontFamily="monospace">A</text>
+      <text x={B[0]+3}  y={B[1]+5}  fill="white" fontSize="11" fontFamily="monospace">B</text>
+      <text x={C[0]-13} y={C[1]+4}  fill="white" fontSize="11" fontFamily="monospace">C</text>
+      <text x={D[0]+3}  y={D[1]+12} fill="white" fontSize="11" fontFamily="monospace">D</text>
+      <text x={E[0]+3}  y={E[1]+5}  fill="white" fontSize="11" fontFamily="monospace">E</text>
+      <text x={F[0]+3}  y={F[1]+4}  fill="white" fontSize="11" fontFamily="monospace">F</text>
+
+      {/* Label dimensi */}
+      <text x={(A[0]+B[0])/2} y={A[1]+14} fill="#fbbf24" fontSize="9" textAnchor="middle">alas (AB)</text>
+      <text x={A[0]-9} y={(A[1]+C[1])/2+4} fill="#fbbf24" fontSize="9" textAnchor="middle">t</text>
+      <text x={(B[0]+E[0])/2+14} y={(B[1]+E[1])/2} fill="#fbbf24" fontSize="8" textAnchor="middle">tinggi prisma</text>
+    </svg>
+  );
+};
+
+/**
+ * Jaring-jaring prisma segitiga yang BENAR:
+ * Layout: segitiga atas + 3 persegi panjang (berjajar) + segitiga bawah
+ *
+ *        [△ segitiga ABC]       ← alas (atas)
+ *  [sisi AB] [sisi BC] [sisi CA]  ← 3 bidang tegak (berjajar)
+ *        [△ segitiga DEF]       ← tutup (bawah)
+ *
+ * Sisi tengah (lebar = AB = 60px) menghubungkan kedua segitiga.
+ * Sisi kiri (lebar = BC = 52px) dan kanan (lebar = CA = 52px) adalah sisi tegak lainnya.
+ */
 const PrismaNetSVG = () => (
-  <svg width="220" height="170" viewBox="0 0 220 170" className="mx-auto">
-    {/* Two triangles */}
-    <polygon points="10,85 70,85 40,40" fill="#f59e0b" fillOpacity="0.3" stroke="#fbbf24" strokeWidth="1.5" />
-    <polygon points="10,85 70,85 40,130" fill="#f59e0b" fillOpacity="0.3" stroke="#fbbf24" strokeWidth="1.5" />
-    {/* Three rectangles */}
-    <rect x="70" y="40" width="50" height="45" fill="#f59e0b" fillOpacity="0.2" stroke="#fbbf24" strokeWidth="1.5" rx="1" />
-    <rect x="120" y="40" width="50" height="45" fill="#f59e0b" fillOpacity="0.25" stroke="#fbbf24" strokeWidth="1.5" rx="1" />
-    <rect x="170" y="40" width="45" height="45" fill="#f59e0b" fillOpacity="0.3" stroke="#fbbf24" strokeWidth="1.5" rx="1" />
-    {/* Labels */}
-    <text x="40" y="88" fill="#fcd34d" fontSize="9" textAnchor="middle">segitiga</text>
-    <text x="95" y="66" fill="#fcd34d" fontSize="9" textAnchor="middle">sisi 1</text>
-    <text x="145" y="66" fill="#fcd34d" fontSize="9" textAnchor="middle">sisi 2</text>
-    <text x="192" y="66" fill="#fcd34d" fontSize="9" textAnchor="middle">sisi 3</text>
-    <text x="10" y="160" fill="#fcd34d" fontSize="9">Jaring-jaring prisma segitiga</text>
+  <svg width="230" height="192" viewBox="0 0 230 192" className="mx-auto">
+    {/* ── Segitiga atas (ALAS / ABC) — terhubung ke sisi AB (tengah) ── */}
+    <polygon points="80,55 140,55 110,10"
+      fill="#f59e0b" fillOpacity="0.35" stroke="#fbbf24" strokeWidth="1.5" />
+
+    {/* ── Persegi panjang kiri (bidang tegak BC, lebar 52) ── */}
+    <rect x="28" y="55" width="52" height="70"
+      fill="#f59e0b" fillOpacity="0.18" stroke="#fbbf24" strokeWidth="1.5" rx="1" />
+
+    {/* ── Persegi panjang tengah (bidang tegak AB, lebar 60) ── */}
+    <rect x="80" y="55" width="60" height="70"
+      fill="#f59e0b" fillOpacity="0.28" stroke="#fbbf24" strokeWidth="1.5" rx="1" />
+
+    {/* ── Persegi panjang kanan (bidang tegak CA, lebar 52) ── */}
+    <rect x="140" y="55" width="52" height="70"
+      fill="#f59e0b" fillOpacity="0.18" stroke="#fbbf24" strokeWidth="1.5" rx="1" />
+
+    {/* ── Segitiga bawah (TUTUP / DEF) — terhubung ke sisi AB (tengah) ── */}
+    <polygon points="80,125 140,125 110,170"
+      fill="#f59e0b" fillOpacity="0.35" stroke="#fbbf24" strokeWidth="1.5" />
+
+    {/* ── Label ── */}
+    <text x="110" y="36"  fill="#fcd34d" fontSize="9" textAnchor="middle">segitiga (alas)</text>
+    <text x="54"  y="93"  fill="#fcd34d" fontSize="9" textAnchor="middle">sisi BC</text>
+    <text x="110" y="93"  fill="#fcd34d" fontSize="9" textAnchor="middle">sisi AB</text>
+    <text x="166" y="93"  fill="#fcd34d" fontSize="9" textAnchor="middle">sisi CA</text>
+    <text x="110" y="155" fill="#fcd34d" fontSize="9" textAnchor="middle">segitiga (tutup)</text>
+
+    {/* ── Keterangan tinggi prisma (t) di sisi tengah ── */}
+    <line x1="76" y1="55" x2="76" y2="125" stroke="#fbbf24" strokeWidth="0.8" strokeDasharray="3,2" strokeOpacity="0.5" />
+    <text x="70" y="93" fill="#fbbf24" fontSize="8" textAnchor="middle">t</text>
   </svg>
 );
 
-const PrismaSegiempatSVG = () => (
-  <svg width="180" height="140" viewBox="0 0 180 140" className="mx-auto">
-    <polygon points="15,115 85,115 85,55 15,55" fill="#f59e0b" fillOpacity="0.3" stroke="#fbbf24" strokeWidth="1.8" />
-    <polygon points="15,55 85,55 120,30 50,30" fill="#f59e0b" fillOpacity="0.45" stroke="#fbbf24" strokeWidth="1.8" />
-    <polygon points="85,55 120,30 120,90 85,115" fill="#f59e0b" fillOpacity="0.2" stroke="#fbbf24" strokeWidth="1.8" />
-    <line x1="15" y1="115" x2="50" y2="90" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="50" y1="90" x2="120" y2="90" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    <line x1="50" y1="90" x2="50" y2="30" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-    {[[15,115],[85,115],[85,55],[15,55],[50,30],[120,30],[120,90],[50,90]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="2.5" fill="#fbbf24" />
-    ))}
-    <text x="3" y="120" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="87" y="120" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="87" y="53" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="3" y="53" fill="white" fontSize="10" fontFamily="monospace">D</text>
-    <text x="42" y="28" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="122" y="28" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="122" y="92" fill="white" fontSize="10" fontFamily="monospace">G</text>
-    <text x="42" y="92" fill="white" fontSize="10" fontFamily="monospace">H</text>
-    <text x="50" y="132" fill="#fbbf24" fontSize="10" textAnchor="middle">Prisma Segiempat (Balok)</text>
-  </svg>
-);
+/**
+ * Prisma segiempat ABCD.EFGH (konvensi buku teks Indonesia)
+ * ABCD = alas (bawah): A depan-kiri, B depan-kanan, C belakang-kanan, D belakang-kiri
+ * EFGH = atap (atas):  E atas A, F atas B, G atas C, H atas D
+ * Rusuk tegak: AE, BF, CG, DH
+ * Rusuk tersembunyi (putus-putus): AD, DC, DH (vertex D & H tersembunyi)
+ */
+const PrismaSegiempatSVG = () => {
+  // Alas bawah ABCD
+  const A = [18, 130], B = [108, 130], C = [143, 112], D = [53, 112]; // D tersembunyi
+  // Atap atas EFGH  (masing-masing tepat di atas A,B,C,D)
+  const E = [18, 45],  F = [108, 45],  G = [143, 27],  H = [53, 27];  // H tersembunyi
+  return (
+    <svg width="190" height="155" viewBox="0 0 190 155" className="mx-auto">
+      {/* Sisi atas (EFGH) — digambar pertama */}
+      <polygon
+        points={`${E[0]},${E[1]} ${F[0]},${F[1]} ${G[0]},${G[1]} ${H[0]},${H[1]}`}
+        fill="#f59e0b" fillOpacity="0.45" stroke="#fbbf24" strokeWidth="1.8"
+      />
+      {/* Sisi kanan (BCGF) */}
+      <polygon
+        points={`${B[0]},${B[1]} ${C[0]},${C[1]} ${G[0]},${G[1]} ${F[0]},${F[1]}`}
+        fill="#f59e0b" fillOpacity="0.20" stroke="#fbbf24" strokeWidth="1.8"
+      />
+      {/* Sisi depan (ABFE) */}
+      <polygon
+        points={`${A[0]},${A[1]} ${B[0]},${B[1]} ${F[0]},${F[1]} ${E[0]},${E[1]}`}
+        fill="#f59e0b" fillOpacity="0.32" stroke="#fbbf24" strokeWidth="1.8"
+      />
+
+      {/* Rusuk tersembunyi: AD, DC, DH */}
+      <line x1={A[0]} y1={A[1]} x2={D[0]} y2={D[1]}
+        stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.60" />
+      <line x1={D[0]} y1={D[1]} x2={C[0]} y2={C[1]}
+        stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.60" />
+      <line x1={D[0]} y1={D[1]} x2={H[0]} y2={H[1]}
+        stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.60" />
+
+      {/* Titik sudut */}
+      {([A,B,C,D,E,F,G,H] as number[][]).map(([x,y],i) => (
+        <circle key={i} cx={x} cy={y} r="2.5" fill="#fbbf24" />
+      ))}
+
+      {/* Label titik sudut — ABCD alas bawah, EFGH atap atas */}
+      <text x={A[0]-12} y={A[1]+5}  fill="white" fontSize="10" fontFamily="monospace">A</text>
+      <text x={B[0]+3}  y={B[1]+5}  fill="white" fontSize="10" fontFamily="monospace">B</text>
+      <text x={C[0]+3}  y={C[1]+5}  fill="white" fontSize="10" fontFamily="monospace">C</text>
+      <text x={D[0]-12} y={D[1]+10} fill="white" fontSize="10" fontFamily="monospace">D</text>
+      <text x={E[0]-12} y={E[1]+4}  fill="white" fontSize="10" fontFamily="monospace">E</text>
+      <text x={F[0]+3}  y={F[1]+4}  fill="white" fontSize="10" fontFamily="monospace">F</text>
+      <text x={G[0]+3}  y={G[1]+4}  fill="white" fontSize="10" fontFamily="monospace">G</text>
+      <text x={H[0]-12} y={H[1]+4}  fill="white" fontSize="10" fontFamily="monospace">H</text>
+
+      <text x="90" y="150" fill="#fbbf24" fontSize="10" textAnchor="middle">Prisma Segiempat (Balok)</text>
+    </svg>
+  );
+};
 
 const questions: Q[] = [
   Qn(1, "Pengertian dan Unsur-Unsur Prisma", {
