@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "KUBUS",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/kubus",
-    soal: 40,
+    soal: 15,
     icon: Box,
     gradient: "from-sky-900/40 to-cyan-900/30",
     border: "border-sky-500/30",
@@ -22,7 +22,7 @@ const subtopics = [
   {
     label: "BALOK",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/balok",
-    soal: 40,
+    soal: 15,
     icon: Layers,
     gradient: "from-emerald-900/40 to-teal-900/30",
     border: "border-emerald-500/30",
@@ -36,7 +36,7 @@ const subtopics = [
   {
     label: "PRISMA",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/prisma",
-    soal: 40,
+    soal: 15,
     icon: Triangle,
     gradient: "from-amber-900/40 to-orange-900/30",
     border: "border-amber-500/30",
@@ -50,7 +50,7 @@ const subtopics = [
   {
     label: "LIMAS",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/limas",
-    soal: 40,
+    soal: 15,
     icon: Mountain,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -64,7 +64,7 @@ const subtopics = [
   {
     label: "BANGUN RUANG SISI DATAR GABUNGAN",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan",
-    soal: 21,
+    soal: 20,
     icon: Layers,
     gradient: "from-indigo-900/40 to-blue-900/30",
     border: "border-indigo-500/30",
@@ -97,7 +97,7 @@ const BangunRuangSisiDatarPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">240 Soal Total · Gambar Diagram & LaTeX</span>
+            <span className="text-white/70 text-xs font-body">80 Soal Total · Gambar Diagram & LaTeX</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
