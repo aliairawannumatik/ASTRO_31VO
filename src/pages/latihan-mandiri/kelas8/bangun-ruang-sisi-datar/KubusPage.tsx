@@ -273,16 +273,7 @@ const questions: Q[] = [
     diagram: <JaringJaringSVG />,
     parts: [],
   }),
-  Qn(9, "Luas Permukaan – UN Style", {
-    type: "mixed",
-    content: "Sebuah kubus memiliki luas permukaan 294 cm².",
-    parts: [
-      { label: "a.", text: "Tentukan panjang rusuk kubus tersebut." },
-      { label: "b.", text: "Tentukan volume kubus tersebut." },
-      { label: "c.", text: "Tentukan panjang diagonal bidang dan diagonal ruang kubus tersebut." },
-    ],
-  }),
-  Qn(10, "Pengecatan Kubus", {
+  Qn(9, "Pengecatan Kubus", {
     type: "mixed",
     content: "Sebuah kubus dengan rusuk 12 m akan dicat seluruh permukaannya. Biaya pengecatan Rp2.500 per m².",
     parts: [
@@ -291,7 +282,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika hanya 4 sisi yang dicat (tanpa alas dan tutup), berapa biayanya?" },
     ],
   }),
-  Qn(11, "Kubus dari Kawat – Kontekstual", {
+  Qn(10, "Kubus dari Kawat – Kontekstual", {
     type: "mixed",
     content: "Sebuah kerangka kubus dibuat dari kawat dengan panjang rusuk 15 cm.",
     parts: [
@@ -300,7 +291,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kawat dijual per meter seharga Rp3.000, berapa biaya yang diperlukan?" },
     ],
   }),
-  Qn(12, "Volume Kubus – Soal Cerita ANBK", {
+  Qn(11, "Volume Kubus – Soal Cerita ANBK", {
     type: "mixed",
     content: "Sebuah bak mandi berbentuk kubus dengan panjang rusuk 80 cm diisi air hingga penuh.",
     parts: [
@@ -309,7 +300,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika air mengalir dengan kecepatan 8 liter/menit, berapa menit waktu yang dibutuhkan?" },
     ],
   }),
-  Qn(13, "Rusuk Kubus dari Diagonal Ruang – UN", {
+  Qn(12, "Rusuk Kubus dari Diagonal Ruang – UN", {
     type: "mixed",
     content: "Panjang diagonal ruang sebuah kubus adalah 6√3 cm.",
     parts: [
@@ -318,7 +309,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan volume kubus tersebut." },
     ],
   }),
-  Qn(14, "Memotong Kubus – Soal ANBK", {
+  Qn(13, "Memotong Kubus – Soal ANBK", {
     type: "mixed",
     content: "Sebuah kubus besar dengan rusuk 12 cm dipotong-potong menjadi kubus-kubus kecil dengan rusuk 3 cm.",
     parts: [
@@ -327,7 +318,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa kali total luas permukaan kubus kecil dibanding luas permukaan kubus besar?" },
     ],
   }),
-  Qn(15, "Luas Permukaan – Soal Cerita UN", {
+  Qn(14, "Luas Permukaan – Soal Cerita UN", {
     type: "mixed",
     content: "Sebuah dus berbentuk kubus terbuat dari karton. Panjang rusuknya 30 cm. Sebuah pabrik membuat 500 dus seperti itu.",
     parts: [
@@ -336,7 +327,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Nyatakan total luas dalam m}^2 \\text{ } (1 \\text{ m}^2 = 10.000 \\text{ cm}^2)" },
     ],
   }),
-  Qn(16, "Menghitung Volume – Soal UN Variasi", {
+  Qn(15, "Menghitung Volume – Soal UN Variasi", {
     type: "mixed",
     content: "Sebuah benda berbentuk kubus. Luas satu sisinya adalah 49 cm².",
     parts: [
@@ -345,7 +336,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan kubus tersebut." },
     ],
   }),
-  Qn(17, "Soal Kontekstual – Kubus dan Cat", {
+  Qn(16, "Soal Kontekstual – Kubus dan Cat", {
     type: "mixed",
     content: "Pak Budi memiliki kubus kayu dengan rusuk 20 cm. Ia ingin mengecat semua permukaannya kecuali atap. Setiap 400 cm² membutuhkan satu kaleng cat kecil seharga Rp5.000.",
     parts: [
@@ -354,7 +345,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa total biaya pengecatan?" },
     ],
   }),
-  Qn(18, "Soal UN – Mengubah Dimensi Kubus", {
+  Qn(17, "Soal UN – Mengubah Dimensi Kubus", {
     type: "mixed",
     content: "Panjang rusuk sebuah kubus diperbesar 3 kali lipat.",
     parts: [
@@ -382,7 +373,7 @@ const KubusPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 18 Soal</span>
+            <span className="text-sky-400 text-xs font-bold">📋 17 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
