@@ -24,7 +24,10 @@ const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, 
 //   E=back-left-top(4), F=back-right-top(5), G=front-right-top(6), H=front-left-top(7)
 // For PQRS.TUVW: P(0),Q(1),R(2),S(3) bottom; T above P→index7, U above Q→index6, V above R→index5, W above S→index4
 //   so labels=['P','Q','R','S','W','V','U','T']
-const DEFAULT_CUBE_LABELS = ['A','B','C','D','E','F','G','H'];
+// Correct ABCD.EFGH convention: A below E, B below F, C below G, D below H
+// Index order: [front-left-bot, front-right-bot, back-right-bot, back-left-bot,
+//               back-left-top(=H), back-right-top(=G), front-right-top(=F), front-left-top(=E)]
+const DEFAULT_CUBE_LABELS = ['A','B','C','D','H','G','F','E'];
 const CubeSVG = ({ s = "s", label = true, color: c = "#38bdf8", labels = DEFAULT_CUBE_LABELS }: { s?: string; label?: boolean; color?: string; labels?: string[] }) => (
   <svg width="160" height="130" viewBox="0 0 160 130" className="mx-auto">
     <defs>
@@ -114,6 +117,31 @@ const DiagonalCubeSVG = () => (
   </svg>
 );
 
+const JaringJaringSVG = () => {
+  const s = 26;
+  const pat = (cells: [number,number][], ox: number, oy: number) =>
+    cells.map(([c,r], i) => (
+      <rect key={`${ox}-${oy}-${i}`} x={ox+c*s} y={oy+r*s} width={s-1} height={s-1}
+        fill="rgba(56,189,248,0.2)" stroke="#38bdf8" strokeWidth="1.5" rx="2" />
+    ));
+  return (
+    <svg viewBox="0 0 240 400" className="w-full max-w-xs mx-auto" style={{background:'transparent'}} xmlns="http://www.w3.org/2000/svg">
+      <text x="62"  y="15"  fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(1)</text>
+      <text x="192" y="15"  fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(2)</text>
+      <text x="62"  y="147" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(3)</text>
+      <text x="192" y="147" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(4)</text>
+      <text x="62"  y="278" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(5)</text>
+      <text x="192" y="278" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="sans-serif">(6)</text>
+      {pat([[1,0],[0,1],[1,1],[2,1],[1,2],[1,3]], 23, 20)}
+      {pat([[0,0],[1,0],[2,0],[0,1],[1,1],[2,1]], 153, 43)}
+      {pat([[0,0],[1,0],[2,0],[1,1],[1,2],[1,3]], 23, 152)}
+      {pat([[0,0],[1,0],[0,1],[1,1],[1,2],[1,3]], 166, 152)}
+      {pat([[0,0],[1,0],[0,1],[0,2],[0,3],[1,3]], 36, 283)}
+      {pat([[0,0],[1,0],[2,0],[2,1],[1,1],[1,2]], 153, 283)}
+    </svg>
+  );
+};
+
 const questions: Q[] = [
   Qn(1, "Unsur-Unsur Kubus", {
     type: "mixed",
@@ -130,21 +158,20 @@ const questions: Q[] = [
   }),
   Qn(2, "Diagonal Sisi dan Diagonal Ruang Kubus", {
     type: "mixed",
-    content: "Perhatikan kubus ABCD.EFGH dengan panjang rusuk s.",
+    content: "Perhatikan kubus ABCD.EFGH dengan panjang rusuk 6 cm.",
     diagram: <DiagonalCubeSVG />,
     parts: [
-      { label: "a.", math: "\\text{Tentukan panjang diagonal sisi kubus jika } s = 6 \\text{ cm}" },
-      { label: "b.", math: "\\text{Tentukan panjang diagonal ruang kubus jika } s = 6 \\text{ cm}" },
-      { label: "c.", text: "Ada berapa banyak diagonal ruang pada sebuah kubus?" },
+      { label: "a.", text: "Tentukan panjang diagonal sisi (diagonal bidang) kubus tersebut!" },
+      { label: "b.", text: "Tentukan panjang diagonal ruang kubus tersebut!" },
     ],
   }),
   Qn(3, "Bidang Diagonal Kubus", {
     type: "mixed",
-    content: "Kubus ABCD.EFGH memiliki bidang diagonal.",
+    content: "Perhatikan kubus ABCD.EFGH berikut (ABCD = sisi alas, EFGH = sisi atap):",
     diagram: <CubeSVG />,
     parts: [
       { label: "a.", text: "Apa yang dimaksud dengan bidang diagonal kubus?" },
-      { label: "b.", text: "Ada berapa banyak bidang diagonal pada sebuah kubus? Sebutkan salah satunya." },
+      { label: "b.", text: "Ada berapa banyak bidang diagonal pada sebuah kubus ABCD.EFGH? Sebutkan semuanya!" },
       { label: "c.", math: "\\text{Jika rusuk kubus } s = 8 \\text{ cm, hitung luas bidang diagonal ABGH.}" },
     ],
   }),
@@ -177,15 +204,6 @@ const questions: Q[] = [
       { label: "c.", math: "V = \\ldots \\text{ jika } s = 1{,}5 \\text{ m}" },
     ],
   }),
-  Qn(7, "Mencari Rusuk dari Volume", {
-    type: "mixed",
-    content: "Volume sebuah kubus diketahui. Tentukan panjang rusuknya!",
-    parts: [
-      { label: "a.", math: "V = 125 \\text{ cm}^3 \\Rightarrow s = \\ldots" },
-      { label: "b.", math: "V = 512 \\text{ cm}^3 \\Rightarrow s = \\ldots" },
-      { label: "c.", math: "V = 1000 \\text{ cm}^3 \\Rightarrow s = \\ldots" },
-    ],
-  }),
   Qn(8, "Jaring-Jaring Kubus", {
     type: "mixed",
     content: "Perhatikan jaring-jaring kubus berikut:",
@@ -202,30 +220,12 @@ const questions: Q[] = [
     parts: [
       { label: "a.", text: "Tentukan panjang rusuk kubus tersebut." },
       { label: "b.", text: "Tentukan volume kubus tersebut." },
-      { label: "c.", text: "Tentukan panjang diagonal ruang kubus tersebut." },
-    ],
-  }),
-  Qn(10, "Perbandingan Volume Dua Kubus – UN Style", {
-    type: "mixed",
-    content: "Kubus A memiliki rusuk 4 cm dan Kubus B memiliki rusuk 8 cm.",
-    parts: [
-      { label: "a.", text: "Tentukan volume Kubus A dan Kubus B." },
-      { label: "b.", math: "\\text{Berapa kali volume Kubus B dibanding Kubus A? Nyatakan sebagai rasio.}" },
-      { label: "c.", text: "Jika rusuk dilipatduakan, berapa kali lipat volumenya?" },
-    ],
-  }),
-  Qn(11, "Diagonal Sisi Kubus – UN Style", {
-    type: "mixed",
-    content: "Kubus ABCD.EFGH memiliki panjang rusuk 9 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung panjang diagonal sisi AC}" },
-      { label: "b.", math: "\\text{Hitung panjang diagonal ruang AG}" },
-      { label: "c.", math: "\\text{Tentukan perbandingan diagonal sisi : diagonal ruang}" },
+      { label: "c.", text: "Tentukan panjang diagonal bidang dan diagonal ruang kubus tersebut." },
     ],
   }),
   Qn(12, "Pengecatan Kubus", {
     type: "mixed",
-    content: "Sebuah kubus dengan rusuk 12 cm akan dicat seluruh permukaannya. Biaya pengecatan Rp2.500 per cm².",
+    content: "Sebuah kubus dengan rusuk 12 m akan dicat seluruh permukaannya. Biaya pengecatan Rp2.500 per m².",
     parts: [
       { label: "a.", text: "Hitung luas permukaan kubus tersebut." },
       { label: "b.", text: "Hitung total biaya pengecatan." },
@@ -268,60 +268,6 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa kali total luas permukaan kubus kecil dibanding luas permukaan kubus besar?" },
     ],
   }),
-  Qn(17, "Menentukan Jumlah Diagonal Sisi", {
-    type: "mixed",
-    diagram: <CubeSVG />,
-    parts: [
-      { label: "a.", text: "Sebuah kubus memiliki berapa sisi (bidang)? Sebutkan semuanya." },
-      { label: "b.", text: "Berapa banyak diagonal pada setiap sisi persegi?" },
-      { label: "c.", text: "Berapa total diagonal sisi yang dimiliki sebuah kubus?" },
-    ],
-  }),
-  Qn(18, "Luas Permukaan – Soal UN Variasi", {
-    type: "mixed",
-    content: "Perhatikan kubus dengan rusuk 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas satu sisi kubus}" },
-      { label: "b.", math: "\\text{Hitung total luas 6 sisi kubus (luas permukaan)}" },
-      { label: "c.", math: "\\text{Jika rusuk bertambah 2 cm menjadi 8 cm, berapa pertambahan luas permukaannya?}" },
-    ],
-  }),
-  Qn(19, "Isi Kubus dengan Kubus Kecil – TKA", {
-    type: "mixed",
-    content: "Sebuah kotak berbentuk kubus dengan rusuk 24 cm akan diisi dengan dadu-dadu kecil berbentuk kubus dengan rusuk 2 cm.",
-    parts: [
-      { label: "a.", text: "Berapa banyak dadu yang bisa dimasukkan ke dalam kotak tersebut?" },
-      { label: "b.", math: "\\text{Verifikasi dengan perbandingan volume: } \\frac{V_{kotak}}{V_{dadu}} = \\ldots" },
-      { label: "c.", text: "Jika dadu berukuran 3 cm, berapa dadu yang muat?" },
-    ],
-  }),
-  Qn(20, "Diagonal Ruang – Soal UN Pilihan Ganda Style", {
-    type: "mixed",
-    content: "Diketahui kubus ABCD.EFGH dengan panjang rusuk 5 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitunglah panjang } AG" },
-      { label: "b.", math: "\\text{Hitunglah panjang } BH" },
-      { label: "c.", math: "\\text{Apakah } AG = BH? \\text{ Jelaskan mengapa.}" },
-    ],
-  }),
-  Qn(21, "Perbandingan Rusuk dan Luas Permukaan", {
-    type: "mixed",
-    content: "Rusuk kubus P adalah 4 cm dan rusuk kubus Q adalah 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas permukaan kubus P dan Q}" },
-      { label: "b.", math: "\\text{Tentukan perbandingan luas permukaan P : Q}" },
-      { label: "c.", math: "\\text{Apa hubungan perbandingan rusuk dengan perbandingan luas permukaan?}" },
-    ],
-  }),
-  Qn(22, "Perbandingan Rusuk dan Volume", {
-    type: "mixed",
-    content: "Rusuk kubus A adalah 3 cm dan rusuk kubus B adalah 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung volume kubus A dan B}" },
-      { label: "b.", math: "\\text{Tentukan perbandingan volume A : B}" },
-      { label: "c.", math: "\\text{Jika perbandingan rusuk 1:2, maka perbandingan volume adalah \\ldots : \\ldots}" },
-    ],
-  }),
   Qn(23, "Luas Permukaan – Soal Cerita UN", {
     type: "mixed",
     content: "Sebuah dus berbentuk kubus terbuat dari karton. Panjang rusuknya 30 cm. Sebuah pabrik membuat 500 dus seperti itu.",
@@ -329,53 +275,6 @@ const questions: Q[] = [
       { label: "a.", text: "Hitung luas permukaan satu dus." },
       { label: "b.", text: "Hitung total luas karton yang dibutuhkan untuk 500 dus." },
       { label: "c.", math: "\\text{Nyatakan total luas dalam m}^2 \\text{ } (1 \\text{ m}^2 = 10.000 \\text{ cm}^2)" },
-    ],
-  }),
-  Qn(24, "Menentukan Rusuk dari Informasi Volume – ANBK", {
-    type: "mixed",
-    content: "Volume sebuah aquarium berbentuk kubus adalah 27.000 cm³.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan panjang rusuk aquarium: } s = \\sqrt[3]{27000} = \\ldots" },
-      { label: "b.", text: "Hitung luas permukaan aquarium (6 sisi)." },
-      { label: "c.", text: "Jika aquarium diisi air hingga ¾ penuh, berapa volume air di dalamnya?" },
-    ],
-  }),
-  Qn(25, "Diagonal Sisi – Soal Olimpiade Style", {
-    type: "mixed",
-    content: "Kubus ABCD.EFGH memiliki panjang rusuk 10 cm.",
-    diagram: <DiagonalCubeSVG />,
-    parts: [
-      { label: "a.", math: "\\text{Hitung diagonal sisi pada bidang ABCD}" },
-      { label: "b.", math: "\\text{Hitung diagonal sisi pada bidang ABFE}" },
-      { label: "c.", math: "\\text{Apakah panjang semua diagonal sisi pada kubus sama? Buktikan!}" },
-    ],
-  }),
-  Qn(26, "Volume Kubus – Soal Cerita ANBK", {
-    type: "mixed",
-    content: "Sebuah tong sampah berbentuk kubus dengan volume 8.000 cm³.",
-    parts: [
-      { label: "a.", text: "Tentukan panjang rusuk tong sampah tersebut." },
-      { label: "b.", text: "Hitung luas permukaan tong sampah." },
-      { label: "c.", text: "Berapa liter kapasitas tong sampah tersebut?" },
-    ],
-  }),
-  Qn(27, "Jaring-Jaring Kubus – Menentukan Tutup", {
-    type: "mixed",
-    content: "Diketahui jaring-jaring kubus seperti gambar berikut (salib dengan satu kotak di setiap sisi).",
-    diagram: <CubeNetSVG />,
-    parts: [
-      { label: "a.", text: "Pada jaring-jaring di atas, persegi mana yang menjadi alas kubus?" },
-      { label: "b.", text: "Persegi mana yang akan bertemu setelah dilipat?" },
-      { label: "c.", text: "Apakah ada lebih dari satu cara memilih alas pada jaring-jaring ini? Jelaskan." },
-    ],
-  }),
-  Qn(28, "Soal Pemahaman – Bedakan Rusuk, Diagonal, Bidang", {
-    type: "mixed",
-    diagram: <CubeSVG />,
-    parts: [
-      { label: "a.", text: "Apakah AB termasuk rusuk, diagonal sisi, atau diagonal ruang? Jelaskan." },
-      { label: "b.", text: "Apakah AC termasuk rusuk, diagonal sisi, atau diagonal ruang? Jelaskan." },
-      { label: "c.", text: "Apakah AG termasuk rusuk, diagonal sisi, atau diagonal ruang? Jelaskan." },
     ],
   }),
   Qn(29, "Menghitung Volume – Soal UN Variasi", {
@@ -387,76 +286,13 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas permukaan kubus tersebut." },
     ],
   }),
-  Qn(30, "Soal ANBK – Volume Air dalam Kubus", {
-    type: "mixed",
-    content: "Sebuah kolam renang anak berbentuk kubus dengan panjang rusuk 1,5 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung volume kolam dalam m}^3" },
-      { label: "b.", math: "\\text{Konversikan ke liter } (1 \\text{ m}^3 = 1000 \\text{ liter})" },
-      { label: "c.", text: "Jika kolam hanya diisi hingga 2/3 kapasitasnya, berapa liter air yang digunakan?" },
-    ],
-  }),
-  Qn(31, "Kubus dan Persegi Panjang – Soal Gabungan", {
-    type: "mixed",
-    content: "Sebuah kubus memiliki luas permukaan 486 cm². Sebuah persegi panjang memiliki panjang sama dengan rusuk kubus dan lebar 5 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Dari luas permukaan, tentukan rusuk kubus: } 6s^2 = 486 \\Rightarrow s = \\ldots" },
-      { label: "b.", text: "Hitung luas persegi panjang tersebut." },
-      { label: "c.", text: "Hitung keliling persegi panjang tersebut." },
-    ],
-  }),
-  Qn(32, "Soal Cerita – Kubus Bertingkat", {
-    type: "mixed",
-    content: "Sebuah menara mainan tersusun dari 3 kubus yang ditumpuk. Kubus bawah berrusuk 6 cm, kubus tengah berrusuk 4 cm, dan kubus atas berrusuk 2 cm.",
-    parts: [
-      { label: "a.", text: "Hitung total volume ketiga kubus." },
-      { label: "b.", text: "Hitung total tinggi menara." },
-      { label: "c.", text: "Kubus mana yang memiliki luas permukaan paling besar? Hitung luas permukaannya." },
-    ],
-  }),
-  Qn(33, "Soal UN – Diagonal Ruang dan Bidang Diagonal", {
-    type: "mixed",
-    content: "Kubus PQRS.TUVW memiliki panjang rusuk 12 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung panjang diagonal ruang PV}" },
-      { label: "b.", math: "\\text{Hitung luas bidang diagonal PQVU}" },
-      { label: "c.", math: "\\text{Berbentuk apakah bidang diagonal PQVU?}" },
-    ],
-  }),
-  Qn(34, "Menentukan Rusuk dari Diagonal Sisi – ANBK", {
-    type: "mixed",
-    content: "Panjang diagonal sisi sebuah kubus adalah 10√2 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Gunakan } d_s = s\\sqrt{2} \\text{ untuk mencari rusuk } s" },
-      { label: "b.", text: "Hitung volume kubus tersebut." },
-      { label: "c.", text: "Hitung luas permukaan kubus tersebut." },
-    ],
-  }),
   Qn(35, "Soal Kontekstual – Kubus dan Cat", {
     type: "mixed",
-    content: "Pak Budi memiliki kubus kayu dengan rusuk 20 cm. Ia ingin mengecat semua permukaannya kecuali alas. Setiap 400 cm² membutuhkan satu kaleng cat kecil seharga Rp5.000.",
+    content: "Pak Budi memiliki kubus kayu dengan rusuk 20 cm. Ia ingin mengecat semua permukaannya kecuali atap. Setiap 400 cm² membutuhkan satu kaleng cat kecil seharga Rp5.000.",
     parts: [
       { label: "a.", text: "Hitung luas permukaan yang akan dicat (5 sisi)." },
       { label: "b.", text: "Berapa kaleng cat yang dibutuhkan?" },
       { label: "c.", text: "Berapa total biaya pengecatan?" },
-    ],
-  }),
-  Qn(36, "Soal TKA – Volume Kubus dan Satuan", {
-    type: "mixed",
-    content: "Sebuah peti berbentuk kubus dengan rusuk 50 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung volume dalam cm}^3" },
-      { label: "b.", math: "\\text{Konversikan ke dm}^3 \\text{ } (1 \\text{ dm} = 10 \\text{ cm})" },
-      { label: "c.", math: "\\text{Konversikan ke m}^3 \\text{ } (1 \\text{ m} = 100 \\text{ cm})" },
-    ],
-  }),
-  Qn(37, "Luas Permukaan – Aplikasi Kehidupan", {
-    type: "mixed",
-    content: "Sebuah lemari es berbentuk kubus (bagian dalam) dengan rusuk 60 cm. Semua dinding bagian dalamnya dilapisi styrofoam setebal 2 cm.",
-    parts: [
-      { label: "a.", text: "Hitung luas permukaan bagian dalam lemari es (sebelum dilapisi)." },
-      { label: "b.", text: "Berapa luas styrofoam yang dibutuhkan?" },
-      { label: "c.", text: "Setelah dilapisi, berapa panjang rusuk bagian dalam yang bisa digunakan?" },
     ],
   }),
   Qn(38, "Soal UN – Mengubah Dimensi Kubus", {
@@ -468,25 +304,11 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika rusuk awal 4 cm, tentukan luas permukaan dan volume kubus baru.}" },
     ],
   }),
-  Qn(39, "Jaring-Jaring Kubus – Analisis", {
+  Qn(39, "Identifikasi Jaring-Jaring Kubus", {
     type: "mixed",
-    content: "Ada 11 kemungkinan jaring-jaring kubus yang berbeda.",
-    diagram: <CubeNetSVG />,
-    parts: [
-      { label: "a.", text: "Bagaimana cara menentukan apakah suatu susunan 6 persegi merupakan jaring-jaring kubus?" },
-      { label: "b.", text: "Jika susunan 6 persegi membentuk suatu jaring-jaring, apakah ada persegi yang bertumpuk? Jelaskan." },
-      { label: "c.", text: "Gambarlah satu bentuk jaring-jaring kubus yang berbeda dari jaring-jaring bentuk salib." },
-    ],
-  }),
-  Qn(40, "Soal UN/ANBK – Gabungan Konsep Kubus", {
-    type: "mixed",
-    content: "Sebuah kubus dengan panjang rusuk 6 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas permukaan kubus}" },
-      { label: "b.", math: "\\text{Hitung volume kubus}" },
-      { label: "c.", math: "\\text{Hitung panjang diagonal ruang kubus}" },
-      { label: "d.", math: "\\text{Hitung luas bidang diagonal kubus}" },
-    ],
+    content: "Perhatikan gambar berbagai susunan enam persegi di bawah ini! Tentukan mana saja yang merupakan jaring-jaring kubus. Berikan alasanmu!",
+    diagram: <JaringJaringSVG />,
+    parts: [],
   }),
 ];
 
@@ -507,7 +329,7 @@ const KubusPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-sky-400 text-xs font-bold">📋 18 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
