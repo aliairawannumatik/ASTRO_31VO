@@ -291,7 +291,16 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kawat dijual per meter seharga Rp3.000, berapa biaya yang diperlukan?" },
     ],
   }),
-  Qn(11, "Volume Kubus – Soal Cerita ANBK", {
+  Qn(11, "Soal Kontekstual – Kubus dan Cat", {
+    type: "mixed",
+    content: "Pak Budi memiliki kubus kayu dengan rusuk 20 cm. Ia ingin mengecat semua permukaannya kecuali atap. Setiap 400 cm² membutuhkan satu kaleng cat kecil seharga Rp5.000.",
+    parts: [
+      { label: "a.", text: "Hitung luas permukaan yang akan dicat (5 sisi)." },
+      { label: "b.", text: "Berapa kaleng cat yang dibutuhkan?" },
+      { label: "c.", text: "Berapa total biaya pengecatan?" },
+    ],
+  }),
+  Qn(12, "Volume Kubus – Soal Cerita ANBK", {
     type: "mixed",
     content: "Sebuah bak mandi berbentuk kubus dengan panjang rusuk 80 cm diisi air hingga penuh.",
     parts: [
@@ -300,7 +309,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika air mengalir dengan kecepatan 8 liter/menit, berapa menit waktu yang dibutuhkan?" },
     ],
   }),
-  Qn(12, "Memotong Kubus – Soal ANBK", {
+  Qn(13, "Memotong Kubus – Soal ANBK", {
     type: "mixed",
     content: "Sebuah kubus besar dengan rusuk 12 cm dipotong-potong menjadi kubus-kubus kecil dengan rusuk 3 cm.",
     parts: [
@@ -309,22 +318,13 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa kali total luas permukaan kubus kecil dibanding luas permukaan kubus besar?" },
     ],
   }),
-  Qn(13, "Luas Permukaan – Soal Cerita UN", {
+  Qn(14, "Luas Permukaan – Soal Cerita UN", {
     type: "mixed",
     content: "Sebuah dus berbentuk kubus terbuat dari karton. Panjang rusuknya 30 cm. Sebuah pabrik membuat 500 dus seperti itu.",
     parts: [
       { label: "a.", text: "Hitung luas permukaan satu dus." },
       { label: "b.", text: "Hitung total luas karton yang dibutuhkan untuk 500 dus." },
       { label: "c.", math: "\\text{Nyatakan total luas dalam m}^2 \\text{ } (1 \\text{ m}^2 = 10.000 \\text{ cm}^2)" },
-    ],
-  }),
-  Qn(14, "Soal Kontekstual – Kubus dan Cat", {
-    type: "mixed",
-    content: "Pak Budi memiliki kubus kayu dengan rusuk 20 cm. Ia ingin mengecat semua permukaannya kecuali atap. Setiap 400 cm² membutuhkan satu kaleng cat kecil seharga Rp5.000.",
-    parts: [
-      { label: "a.", text: "Hitung luas permukaan yang akan dicat (5 sisi)." },
-      { label: "b.", text: "Berapa kaleng cat yang dibutuhkan?" },
-      { label: "c.", text: "Berapa total biaya pengecatan?" },
     ],
   }),
   Qn(15, "Soal UN – Mengubah Dimensi Kubus", {
