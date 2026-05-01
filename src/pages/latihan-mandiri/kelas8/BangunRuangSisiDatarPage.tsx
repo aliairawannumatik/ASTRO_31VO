@@ -64,7 +64,7 @@ const subtopics = [
   {
     label: "BANGUN RUANG SISI DATAR GABUNGAN",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan",
-    soal: 40,
+    soal: 21,
     icon: Layers,
     gradient: "from-indigo-900/40 to-blue-900/30",
     border: "border-indigo-500/30",
