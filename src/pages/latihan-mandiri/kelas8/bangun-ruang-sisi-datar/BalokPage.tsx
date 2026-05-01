@@ -233,16 +233,6 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Hitung diagonal ruang } AG = \\sqrt{p^2 + l^2 + t^2}" },
     ],
   }),
-  Qn(5, "Jaring-Jaring Balok", {
-    type: "mixed",
-    content: "Balok dengan panjang 8 cm, lebar 5 cm, dan tinggi 3 cm.",
-    diagram: <BalokNetSVG p={8} l={5} t={3} />,
-    parts: [
-      { label: "a.", text: "Pada jaring-jaring balok di atas, ada berapa sisi (persegi panjang)?" },
-      { label: "b.", text: "Sebutkan ukuran masing-masing sisi pada jaring-jaring tersebut." },
-      { label: "c.", math: "\\text{Verifikasi: total luas jaring-jaring} = L_{permukaan} = 2(8\\times5 + 8\\times3 + 5\\times3)" },
-    ],
-  }),
   Qn(6, "Identifikasi Jaring-Jaring Balok", {
     type: "mixed",
     content: "Perhatikan empat susunan persegi panjang berikut. Tentukan mana saja yang merupakan jaring-jaring balok dan berikan alasanmu!",
@@ -260,15 +250,6 @@ const questions: Q[] = [
       { label: "a.", math: "\\text{Gunakan } L = 2(pl + pt + lt) \\text{ untuk mencari tinggi } t" },
       { label: "b.", text: "Hitung volume balok tersebut." },
       { label: "c.", math: "\\text{Hitung panjang diagonal ruang balok}" },
-    ],
-  }),
-  Qn(8, "Mencari Dimensi dari Volume – UN Style", {
-    type: "mixed",
-    content: "Sebuah balok memiliki panjang 15 cm dan lebar 8 cm. Volumenya adalah 720 cm³.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan tinggi balok: } 720 = 15 \\times 8 \\times t" },
-      { label: "b.", text: "Hitung luas permukaan balok tersebut." },
-      { label: "c.", text: "Hitung panjang diagonal ruang balok." },
     ],
   }),
   Qn(9, "Soal Cerita – Kolam Renang ANBK", {
@@ -342,15 +323,6 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas total 5 sisi (tanpa tutup saja)." },
     ],
   }),
-  Qn(17, "Soal UN – Mengubah Dimensi Balok", {
-    type: "mixed",
-    content: "Sebuah balok berukuran 6 cm × 4 cm × 3 cm. Panjang dan lebarnya diperbesar 2 kali, tingginya tetap.",
-    parts: [
-      { label: "a.", text: "Tentukan ukuran balok baru." },
-      { label: "b.", text: "Hitung perbandingan volume balok baru dan balok asal." },
-      { label: "c.", text: "Hitung perbandingan luas permukaan balok baru dan balok asal." },
-    ],
-  }),
   Qn(18, "Soal Gabungan – Balok dan Perbandingan", {
     type: "mixed",
     content: "Sebuah balok memiliki perbandingan panjang : lebar : tinggi = 5 : 3 : 2. Luas permukaannya adalah 620 cm².",
@@ -379,7 +351,7 @@ const BalokPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Bangun Ruang Sisi Datar · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 18 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
