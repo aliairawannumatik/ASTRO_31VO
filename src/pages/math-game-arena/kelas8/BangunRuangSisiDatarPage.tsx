@@ -6,7 +6,6 @@ const subtopics = [
   { name: "PRISMA", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/prisma-game" },
   { name: "LIMAS", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/limas-game" },
   { name: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/gabungan-game" },
-  { name: "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/kontekstual-game" },
 ];
 
 const BangunRuangSisiDatarPage = () => (
