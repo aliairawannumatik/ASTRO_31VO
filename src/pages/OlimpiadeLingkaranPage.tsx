@@ -734,31 +734,31 @@ const LingkaranDasar2SVG = () => (
   <svg viewBox="0 0 260 250" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* Full circle */}
     <circle cx="120" cy="122" r="90" fill="none" stroke="#60a5fa" strokeWidth="2" />
-    {/* Shaded sector: 120° from -60° to +60° (pointing East) */}
-    {/* cos60°=0.5, sin60°≈0.866 */}
-    {/* Start (-60°): (120+90*0.5, 122-90*0.866) = (165, 44.1) */}
-    {/* End  (+60°): (165, 199.9) */}
-    <path d="M 120,122 L 165,44.1 A 90,90 0,0,1 165,199.9 Z"
+    {/* Shaded sector: 60° from -30° to +30° (pointing East) */}
+    {/* cos30°≈0.866, sin30°=0.5 */}
+    {/* Start (-30°): (120+90*0.866, 122-90*0.5) = (197.9, 77) */}
+    {/* End  (+30°): (197.9, 167) */}
+    <path d="M 120,122 L 197.9,77 A 90,90 0,0,1 197.9,167 Z"
       fill="#3b82f6" fillOpacity="0.45" stroke="#60a5fa" strokeWidth="1.5" />
     {/* Upper radius (OP) */}
-    <line x1="120" y1="122" x2="165" y2="44.1" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="120" y1="122" x2="197.9" y2="77" stroke="#93c5fd" strokeWidth="1.8" />
     {/* Lower radius (OQ) */}
-    <line x1="120" y1="122" x2="165" y2="199.9" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="120" y1="122" x2="197.9" y2="167" stroke="#93c5fd" strokeWidth="1.8" />
     {/* Angle arc at radius 32 */}
-    {/* (-60°): (120+32*0.5, 122-32*0.866) = (136, 94.3) */}
-    {/* (+60°): (136, 149.7) */}
-    <path d="M 136,94.3 A 32,32 0,0,1 136,149.7"
+    {/* (-30°): (120+32*0.866, 122-32*0.5) = (147.7, 106) */}
+    {/* (+30°): (147.7, 138) */}
+    <path d="M 147.7,106 A 32,32 0,0,1 147.7,138"
       fill="none" stroke="#fbbf24" strokeWidth="1.5" />
     {/* Center dot */}
     <circle cx="120" cy="122" r="3.5" fill="#f8fafc" />
     {/* Labels */}
     <text x="104" y="127" fill="#e2e8f0" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
-    <text x="168" y="40" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
-    <text x="168" y="208" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
-    {/* r = 7 cm label along upper radius */}
-    <text x="118" y="74" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">r = 7 cm</text>
-    {/* 120° label inside sector */}
-    <text x="168" y="127" fill="#fbbf24" fontSize="13" fontFamily="serif" fontWeight="bold" textAnchor="middle">120°</text>
+    <text x="201" y="74" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
+    <text x="201" y="175" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
+    {/* r = 21 cm label along upper radius */}
+    <text x="140" y="91" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">r = 21 cm</text>
+    {/* 60° label inside sector */}
+    <text x="172" y="127" fill="#fbbf24" fontSize="13" fontFamily="serif" fontWeight="bold" textAnchor="middle">60°</text>
     {/* Shaded label */}
     <text x="120" y="238" fill="#93c5fd" fontSize="10" fontFamily="sans-serif" textAnchor="middle" opacity="0.7">Daerah diarsir (juring)</text>
   </svg>
