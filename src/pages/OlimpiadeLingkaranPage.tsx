@@ -702,27 +702,29 @@ const LingkaranDasar1SVG = () => (
   <svg viewBox="0 0 260 250" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* Full circle */}
     <circle cx="120" cy="125" r="95" fill="none" stroke="#60a5fa" strokeWidth="2" />
-    {/* Shaded sector: 80° from -40° to +40° (pointing East) */}
-    {/* Start: -40° → (192.8, 63.9), End: +40° → (192.8, 186.1) */}
-    <path d="M 120,125 L 192.8,63.9 A 95,95 0,0,1 192.8,186.1 Z"
+    {/* Shaded sector: 40° from -20° to +20° (pointing East) */}
+    {/* cos20°≈0.940, sin20°≈0.342 */}
+    {/* Start (-20°): (120+95*0.940, 125+95*(-0.342)) = (209.3, 92.5) */}
+    {/* End  (+20°): (209.3, 157.5) */}
+    <path d="M 120,125 L 209.3,92.5 A 95,95 0,0,1 209.3,157.5 Z"
       fill="#3b82f6" fillOpacity="0.45" stroke="#60a5fa" strokeWidth="1.5" />
     {/* Upper radius line */}
-    <line x1="120" y1="125" x2="192.8" y2="63.9" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="120" y1="125" x2="209.3" y2="92.5" stroke="#93c5fd" strokeWidth="1.8" />
     {/* Lower radius line */}
-    <line x1="120" y1="125" x2="192.8" y2="186.1" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="120" y1="125" x2="209.3" y2="157.5" stroke="#93c5fd" strokeWidth="1.8" />
     {/* Small arc for angle indicator, radius 32 */}
-    {/* -40°: (120+32*0.766, 125+32*(-0.643)) = (144.5, 104.4) */}
-    {/* +40°: (144.5, 145.6) */}
-    <path d="M 144.5,104.4 A 32,32 0,0,1 144.5,145.6"
+    {/* (-20°): (120+32*0.940, 125+32*(-0.342)) = (150.1, 114.1) */}
+    {/* (+20°): (150.1, 135.9) */}
+    <path d="M 150.1,114.1 A 32,32 0,0,1 150.1,135.9"
       fill="none" stroke="#fbbf24" strokeWidth="1.5" />
     {/* Center dot */}
     <circle cx="120" cy="125" r="3.5" fill="#f8fafc" />
     {/* O label */}
     <text x="104" y="130" fill="#e2e8f0" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
-    {/* r = 21 cm label — along upper radius, shifted inward */}
-    <text x="140" y="86" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">r = 21 cm</text>
-    {/* 80° label inside sector */}
-    <text x="158" y="130" fill="#fbbf24" fontSize="13" fontFamily="serif" fontWeight="bold" textAnchor="middle">80°</text>
+    {/* r = 21 cm label — along upper radius */}
+    <text x="148" y="100" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">r = 21 cm</text>
+    {/* 40° label inside sector */}
+    <text x="170" y="130" fill="#fbbf24" fontSize="13" fontFamily="serif" fontWeight="bold" textAnchor="middle">40°</text>
     {/* Shaded label */}
     <text x="120" y="238" fill="#93c5fd" fontSize="10" fontFamily="sans-serif" textAnchor="middle" opacity="0.7">Daerah diarsir</text>
   </svg>
