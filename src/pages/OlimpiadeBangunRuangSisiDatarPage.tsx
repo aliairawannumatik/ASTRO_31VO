@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -25,6 +25,62 @@ const renderWithLatex = (text: string) => {
     return <span key={index}>{part}</span>;
   });
 };
+
+/* ─────────────────────────────────────────────────────────
+   CUBE NET SVG COMPONENTS (Soal No. 1 — Jaring-jaring Kubus)
+───────────────────────────────────────────────────────── */
+
+const cell = 60;
+const pad = 1;
+
+const CubeNetSVG = ({ squares, cols, rows }: { squares: [number, number][]; cols: number; rows: number }) => {
+  const w = pad * 2 + cols * cell;
+  const h = pad * 2 + rows * cell;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" style={{ maxWidth: cols * 56 }}>
+      {squares.map(([c, r]) => (
+        <rect
+          key={`${c}-${r}`}
+          x={pad + c * cell}
+          y={pad + r * cell}
+          width={cell}
+          height={cell}
+          fill="white"
+          stroke="#334155"
+          strokeWidth="2.5"
+        />
+      ))}
+    </svg>
+  );
+};
+
+const NetSVGA = () => (
+  <CubeNetSVG
+    squares={[[0,0],[1,0],[2,0],[1,1],[2,1],[3,1]]}
+    cols={4} rows={2}
+  />
+);
+
+const NetSVGB = () => (
+  <CubeNetSVG
+    squares={[[1,0],[0,1],[1,1],[2,1],[0,2],[0,3]]}
+    cols={3} rows={4}
+  />
+);
+
+const NetSVGC = () => (
+  <CubeNetSVG
+    squares={[[0,0],[1,0],[2,0],[0,1],[2,1],[3,1]]}
+    cols={4} rows={2}
+  />
+);
+
+const NetSVGD = () => (
+  <CubeNetSVG
+    squares={[[0,0],[0,1],[1,1],[1,2],[2,2],[2,3]]}
+    cols={3} rows={4}
+  />
+);
 
 /* ─────────────────────────────────────────────────────────
    CSS KEYFRAMES (injected via style tag)
@@ -554,12 +610,14 @@ const dasarImages: Record<number, string> = {
   43: "/brsd-dasar-43.png",
 };
 
-const dasarOptionImages: Record<number, Record<string, string>> = {
+const dasarOptionImages: Record<number, Record<string, string>> = {};
+
+const dasarOptionSVGComponents: Record<number, Record<string, React.ReactNode>> = {
   1: {
-    A: "/brsd-dasar-1-A.png",
-    B: "/brsd-dasar-1-B.png",
-    C: "/brsd-dasar-1-C.png",
-    D: "/brsd-dasar-1-D.png",
+    A: <NetSVGA />,
+    B: <NetSVGB />,
+    C: <NetSVGC />,
+    D: <NetSVGD />,
   },
 };
 
@@ -784,13 +842,21 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                     </div>
                   )}
                   {soal.options.length > 0 && (
-                    <div className={`grid gap-2 mb-3 ${optImgs ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`}>
+                    <div className={`grid gap-2 mb-3 ${optImgs || dasarOptionSVGComponents[soal.no] ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`}>
                       {soal.options.map((opt, j) => {
                         const letter = opt.charAt(0);
                         const optImg = optImgs?.[letter];
+                        const optSVG = dasarOptionSVGComponents[soal.no]?.[letter];
                         return (
                           <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                            {optImg ? (
+                            {optSVG ? (
+                              <div className="flex flex-col items-center gap-1">
+                                <span className="text-accent font-bold self-start">{letter}.</span>
+                                <div className="w-full flex justify-center py-1">
+                                  {optSVG}
+                                </div>
+                              </div>
+                            ) : optImg ? (
                               <div className="flex flex-col items-center gap-1">
                                 <span className="text-accent font-bold self-start">{letter}.</span>
                                 <img
