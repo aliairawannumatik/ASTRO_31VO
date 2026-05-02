@@ -10,7 +10,7 @@ import { pembahasanDasar, pembahasanOlimpiade } from "@/data/bangunRuangSisiData
 import olimpiadeImg12 from "@assets/image_1777741187388.png";
 import olimpiadeImg14 from "@assets/image_1777741593708.png";
 import olimpiadeImg16 from "@assets/Picture1_1777742388394_nobg.png";
-import olimpiadeImg20 from "@assets/20_1777272725477.png";
+import olimpiadeImg20 from "@assets/image_1777742649812.png";
 import olimpiadeImg21 from "@assets/21_1777272725477.png";
 import olimpiadeImg22 from "@assets/22_1777272725478.png";
 
