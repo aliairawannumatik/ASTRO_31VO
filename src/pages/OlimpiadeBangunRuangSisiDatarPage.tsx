@@ -7,7 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { pembahasanDasar, pembahasanOlimpiade } from "@/data/bangunRuangSisiDatarPembahasan";
-import olimpiadeImg12 from "@assets/12_1777272725475.png";
+import olimpiadeImg12 from "@assets/image_1777741187388.png";
 import olimpiadeImg14 from "@assets/14_1777272725476.png";
 import olimpiadeImg16 from "@assets/16_1777272725476.png";
 import olimpiadeImg20 from "@assets/20_1777272725477.png";
