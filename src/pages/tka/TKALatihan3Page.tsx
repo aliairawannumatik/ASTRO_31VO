@@ -181,7 +181,7 @@ const TKALatihan3Page = () => {
                 <div className="flex justify-center mb-3">
                   <img src="/tka-paket3-soal1.png" alt="Gambar soal nomor 1" className="max-w-[200px] rounded-lg bg-white/5 p-2" />
                 </div>
-                <MCQ qn={1} correct={2} options={[
+                <MCQ qn={1} correct={3} options={[
                   <span>A. <InlineMath math="\dfrac{3}{4}"/></span>,
                   <span>B. <InlineMath math="\dfrac{2}{5}"/></span>,
                   <span>C. <InlineMath math="\dfrac{4}{12}"/></span>,
@@ -192,16 +192,16 @@ const TKALatihan3Page = () => {
             <PembahasanBtn n={1}/>
             {expandedPembahasan.has(1) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
-                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: C. 4/12</div>
+                <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-2 text-green-300 font-bold">✓ Jawaban: D. 1/4</div>
                 <div>
                   <p className="text-cyan-300 font-bold mb-1">Langkah Penyelesaian:</p>
-                  <p className="text-white/80 mb-1">Dari gambar, segitiga besar terbagi menjadi <strong className="text-yellow-300">9 segitiga kecil</strong> sama besar (3 baris). Segitiga yang diarsir (menghadap ke bawah) ada <strong className="text-yellow-300">3 buah</strong>.</p>
-                  <div className="ml-3 my-2"><BlockMath math="\text{Bagian diarsir} = \frac{3}{9} = \frac{1}{3} = \frac{4}{12}"/></div>
-                  <p className="text-white/70">Pilihan C (<InlineMath math="\frac{4}{12}"/>) merupakan pecahan senilai dengan <InlineMath math="\frac{1}{3}"/>.</p>
+                  <p className="text-white/80 mb-1">Dari gambar, segitiga besar terbagi menjadi <strong className="text-yellow-300">16 segitiga kecil</strong> sama besar (4 baris). Segitiga yang diarsir (berwarna) ada <strong className="text-yellow-300">4 buah</strong>.</p>
+                  <div className="ml-3 my-2"><BlockMath math="\text{Bagian diarsir} = \frac{4}{16} = \frac{1}{4}"/></div>
+                  <p className="text-white/70">Pilihan D (<InlineMath math="\frac{1}{4}"/>) adalah hasil penyederhanaan dari <InlineMath math="\frac{4}{16}"/>.</p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-yellow-300 font-bold mb-1">📌 Kunci:</p>
-                  <p className="text-white/70">3/9 = 1/3 = 4/12. Meskipun tampaknya berbeda, semua pecahan tersebut senilai.</p>
+                  <p className="text-white/70">4 segitiga diarsir dari total 16 segitiga → 4/16 = 1/4.</p>
                 </div>
               </div>
             )}
