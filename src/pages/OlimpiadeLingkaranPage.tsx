@@ -765,35 +765,22 @@ const LingkaranDasar2SVG = () => (
 );
 
 const LingkaranDasar3SVG = () => (
-  <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Full circle */}
-    <circle cx="115" cy="130" r="88" fill="none" stroke="#60a5fa" strokeWidth="2" />
+  <svg viewBox="0 0 240 220" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Full circle — O at visual center (120, 112) */}
+    <circle cx="120" cy="112" r="88" fill="none" stroke="#60a5fa" strokeWidth="2" />
     {/* O at center */}
-    <circle cx="115" cy="130" r="3" fill="#f8fafc" />
-    {/* P at 0° (right) */}
-    {/* Q at 50° above horizontal */}
-    {/* R at 125° above horizontal */}
-    {/* cos50°≈0.643, sin50°≈0.766 */}
-    {/* cos125°≈-0.574, sin125°≈0.819 */}
-    {/* P: (203, 130), Q: (115+56.6, 130-67.4)=(171.6,62.6), R: (115-50.5,130-72.1)=(64.5,57.9) */}
-    <line x1="115" y1="130" x2="203" y2="130" stroke="#93c5fd" strokeWidth="1.8" />
-    <line x1="115" y1="130" x2="171.6" y2="62.6" stroke="#93c5fd" strokeWidth="1.8" />
-    <line x1="115" y1="130" x2="64.5" y2="57.9" stroke="#93c5fd" strokeWidth="1.8" />
-    {/* Arc for 75° between R(125°) and Q(50°), radius 30 */}
-    {/* Start Q dir: (115+30*cos50°, 130-30*sin50°)=(134.3,107.1) */}
-    {/* End R dir:   (115+30*cos125°,130-30*sin125°)=(97.8,105.4) */}
-    <path d="M 134.3,107.1 A 30,30 0 0 0 97.8,105.4" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
-    {/* Arc for 50° between P(0°) and Q(50°), radius 22 */}
-    {/* Start P dir: (137, 130) */}
-    {/* End Q dir:   (115+22*cos50°,130-22*sin50°)=(129.1,113.1) */}
-    <path d="M 137,130 A 22,22 0 0 0 129.1,113.1" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+    <circle cx="120" cy="112" r="3" fill="#f8fafc" />
+    {/* P at 0° (right): (208, 112) */}
+    {/* Q at 50°: (120+88*cos50°, 112-88*sin50°) = (120+56.6, 112-67.4) = (176.6, 44.6) */}
+    {/* R at 125°: (120+88*cos125°, 112-88*sin125°) = (120-50.5, 112-72.1) = (69.5, 39.9) */}
+    <line x1="120" y1="112" x2="208" y2="112" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="120" y1="112" x2="176.6" y2="44.6" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="120" y1="112" x2="69.5" y2="39.9" stroke="#93c5fd" strokeWidth="1.8" />
     {/* Labels */}
-    <text x="100" y="126" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
-    <text x="206" y="134" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
-    <text x="173" y="57" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
-    <text x="48" y="56" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">R</text>
-    <text x="107" y="104" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">75°</text>
-    <text x="133" y="121" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">50°</text>
+    <text x="105" y="108" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
+    <text x="211" y="116" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
+    <text x="178" y="40" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
+    <text x="53" y="38" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">R</text>
   </svg>
 );
 
