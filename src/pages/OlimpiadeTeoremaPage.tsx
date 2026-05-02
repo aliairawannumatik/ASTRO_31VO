@@ -71,17 +71,23 @@ const JarakDuaTitikSVG = () => {
         {/* Persegi panjang putus-putus untuk P */}
         <line x1={ox} y1={y1Pos} x2={x1Pos} y2={y1Pos} stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="4 3" />
         <line x1={x1Pos} y1={y1Pos} x2={x1Pos} y2={oy} stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="4 3" />
+        {/* Tick marks pada sumbu x */}
+        <line x1={x1Pos} y1={oy - 3} x2={x1Pos} y2={oy + 3} stroke="#e5e7eb" strokeWidth="1.2" />
+        <line x1={x2Pos} y1={oy - 3} x2={x2Pos} y2={oy + 3} stroke="#e5e7eb" strokeWidth="1.2" />
+        {/* Tick marks pada sumbu y */}
+        <line x1={ox - 3} y1={y1Pos} x2={ox + 3} y2={y1Pos} stroke="#e5e7eb" strokeWidth="1.2" />
+        <line x1={ox - 3} y1={y2Pos} x2={ox + 3} y2={y2Pos} stroke="#e5e7eb" strokeWidth="1.2" />
         {/* Titik P dan Q */}
         <circle cx={x1Pos} cy={y1Pos} r="3.5" fill="#fbbf24" />
         <circle cx={x2Pos} cy={y2Pos} r="3.5" fill="#fbbf24" />
         {/* Label P dan Q */}
-        <text x={x1Pos + 6} y={y1Pos + 12} fill="#fbbf24" fontSize="12" fontWeight="bold">P</text>
-        <text x={x2Pos + 6} y={y2Pos + 4} fill="#fbbf24" fontSize="12" fontWeight="bold">Q</text>
+        <text x={x1Pos + 14} y={y1Pos - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">P</text>
+        <text x={x2Pos + 8} y={y2Pos - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">Q</text>
         {/* Label sumbu */}
-        <text x={x1Pos} y={oy + 14} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₁</text>
-        <text x={x2Pos} y={oy + 14} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₂</text>
-        <text x={ox - 8} y={y1Pos + 4} fill="#e5e7eb" fontSize="11" textAnchor="end">y₁</text>
-        <text x={ox - 8} y={y2Pos + 4} fill="#e5e7eb" fontSize="11" textAnchor="end">y₂</text>
+        <text x={x1Pos} y={oy + 16} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₁</text>
+        <text x={x2Pos} y={oy + 16} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₂</text>
+        <text x={ox - 6} y={y1Pos + 4} fill="#e5e7eb" fontSize="11" textAnchor="end">y₁</text>
+        <text x={ox - 6} y={y2Pos + 4} fill="#e5e7eb" fontSize="11" textAnchor="end">y₂</text>
       </svg>
     </div>
   );
