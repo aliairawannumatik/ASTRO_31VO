@@ -796,36 +796,66 @@ const LingkaranDasar3SVG = () => (
   </svg>
 );
 
-const LingkaranDasar4SVG = () => (
-  <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Circle */}
-    <circle cx="110" cy="120" r="88" fill="none" stroke="#60a5fa" strokeWidth="2" />
-    {/* Three radii: up (90°), right (0°), lower-left (225°) */}
-    {/* Up: (110, 32) */}
-    {/* Right: (198, 120) */}
-    {/* 225°: cos225°=-0.707,sin225°=-0.707 => (110-62.2, 120+62.2)=(47.8,182.2) */}
-    <line x1="110" y1="120" x2="110" y2="32" stroke="#93c5fd" strokeWidth="1.8" />
-    <line x1="110" y1="120" x2="198" y2="120" stroke="#93c5fd" strokeWidth="1.8" />
-    <line x1="110" y1="120" x2="47.8" y2="182.2" stroke="#93c5fd" strokeWidth="1.8" />
-    {/* Sector ORS (90°, top-right): up to right, shaded */}
-    <path d="M 110,120 L 110,32 A 88,88 0 0 1 198,120 Z" fill="#3b82f6" fillOpacity="0.3" stroke="#60a5fa" strokeWidth="1" />
-    {/* Sector OPQ (135°, right to lower-left): shaded differently */}
-    <path d="M 110,120 L 198,120 A 88,88 0 0 1 47.8,182.2 Z" fill="#6366f1" fillOpacity="0.4" stroke="#60a5fa" strokeWidth="1" />
-    {/* Remaining sector (135°, lower-left to up): shaded */}
-    <path d="M 110,120 L 47.8,182.2 A 88,88 0 0 1 110,32 Z" fill="#3b82f6" fillOpacity="0.2" stroke="#60a5fa" strokeWidth="1" />
-    {/* Right angle marker in 90° sector */}
-    <path d="M 110,105 L 125,105 L 125,120" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
-    {/* 135° label in OPQ sector */}
-    <text x="165" y="165" fill="#fbbf24" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">135°</text>
-    {/* Labels */}
-    <circle cx="110" cy="120" r="3" fill="#f8fafc" />
-    <text x="95" y="118" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
-    <text x="112" y="28" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">S</text>
-    <text x="201" y="123" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">P</text>
-    <text x="35" y="188" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">Q</text>
-    <text x="40" y="75" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">R</text>
-  </svg>
-);
+const LingkaranDasar4SVG = () => {
+  /*
+   * O at (120,120), r=88
+   * Three radii (math angles, y-axis inverted for SVG):
+   *   P at   0° → (208, 120)
+   *   Q at 135° → (120+88*cos135°, 120-88*sin135°) = (57.8, 57.8)   upper-left
+   *   R at 225° → (120+88*cos225°, 120-88*sin225°) = (57.8, 182.2)  lower-left
+   *
+   * Sectors:
+   *   Upper  0°→135° CCW (through top):  135° — labeled "135°"
+   *   Left 135°→225° CW  (through left):  90° — right-angle marker
+   *   Lower 225°→360° CW (through bottom):135°
+   *
+   * Right-angle square at O (size 12) pointing into left (90°) sector:
+   *   dirQ = (-0.707,-0.707), dirR = (-0.707,+0.707)
+   *   A = O+12*dirQ = (111.5, 111.5)
+   *   B = O+12*dirR = (111.5, 128.5)
+   *   C = A+12*dirR = (103.0, 120.0)
+   */
+  return (
+    <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+      {/* Full circle */}
+      <circle cx="120" cy="120" r="88" fill="none" stroke="#60a5fa" strokeWidth="2" />
+
+      {/* Sector upper 135° (P→Q counter-clockwise through top): sweep=0 */}
+      <path d="M 120,120 L 208,120 A 88,88 0 0 0 57.8,57.8 Z"
+        fill="#3b82f6" fillOpacity="0.25" stroke="#60a5fa" strokeWidth="1" />
+
+      {/* Sector left 90° (Q→R clockwise through left): sweep=1 */}
+      <path d="M 120,120 L 57.8,57.8 A 88,88 0 0 1 57.8,182.2 Z"
+        fill="#6366f1" fillOpacity="0.35" stroke="#60a5fa" strokeWidth="1" />
+
+      {/* Sector lower 135° (R→P clockwise through bottom): sweep=1 */}
+      <path d="M 120,120 L 57.8,182.2 A 88,88 0 0 1 208,120 Z"
+        fill="#3b82f6" fillOpacity="0.25" stroke="#60a5fa" strokeWidth="1" />
+
+      {/* Three radii */}
+      <line x1="120" y1="120" x2="208" y2="120" stroke="#93c5fd" strokeWidth="1.8" />
+      <line x1="120" y1="120" x2="57.8" y2="57.8"  stroke="#93c5fd" strokeWidth="1.8" />
+      <line x1="120" y1="120" x2="57.8" y2="182.2" stroke="#93c5fd" strokeWidth="1.8" />
+
+      {/* Right-angle square marker at O inside 90° (left) sector */}
+      <path d="M 111.5,111.5 L 103.0,120.0 L 111.5,128.5"
+        fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+
+      {/* 135° label in upper sector — bisector at 67.5°, r≈52 */}
+      {/* pos: (120+52*cos67.5°, 120-52*sin67.5°) = (140,72) */}
+      <text x="148" y="76" fill="#fbbf24" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">135°</text>
+
+      {/* O at center */}
+      <circle cx="120" cy="120" r="3" fill="#f8fafc" />
+      <text x="123" y="136" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
+
+      {/* Point labels */}
+      <text x="211" y="124" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">P</text>
+      <text x="44"  y="57"  fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">Q</text>
+      <text x="44"  y="188" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">R</text>
+    </svg>
+  );
+};
 
 const LingkaranDasar5SVG = () => (
   <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
