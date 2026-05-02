@@ -764,6 +764,137 @@ const LingkaranDasar2SVG = () => (
   </svg>
 );
 
+const LingkaranDasar3SVG = () => (
+  <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Full circle */}
+    <circle cx="115" cy="130" r="88" fill="none" stroke="#60a5fa" strokeWidth="2" />
+    {/* O at center */}
+    <circle cx="115" cy="130" r="3" fill="#f8fafc" />
+    {/* P at 0° (right) */}
+    {/* Q at 50° above horizontal */}
+    {/* R at 125° above horizontal */}
+    {/* cos50°≈0.643, sin50°≈0.766 */}
+    {/* cos125°≈-0.574, sin125°≈0.819 */}
+    {/* P: (203, 130), Q: (115+56.6, 130-67.4)=(171.6,62.6), R: (115-50.5,130-72.1)=(64.5,57.9) */}
+    <line x1="115" y1="130" x2="203" y2="130" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="115" y1="130" x2="171.6" y2="62.6" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="115" y1="130" x2="64.5" y2="57.9" stroke="#93c5fd" strokeWidth="1.8" />
+    {/* Arc for 75° between R(125°) and Q(50°), radius 30 */}
+    {/* Start Q dir: (115+30*cos50°, 130-30*sin50°)=(134.3,107.1) */}
+    {/* End R dir:   (115+30*cos125°,130-30*sin125°)=(97.8,105.4) */}
+    <path d="M 134.3,107.1 A 30,30 0 0 0 97.8,105.4" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+    {/* Arc for 50° between P(0°) and Q(50°), radius 22 */}
+    {/* Start P dir: (137, 130) */}
+    {/* End Q dir:   (115+22*cos50°,130-22*sin50°)=(129.1,113.1) */}
+    <path d="M 137,130 A 22,22 0 0 0 129.1,113.1" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+    {/* Labels */}
+    <text x="100" y="126" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
+    <text x="206" y="134" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
+    <text x="173" y="57" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
+    <text x="48" y="56" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">R</text>
+    <text x="107" y="104" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">75°</text>
+    <text x="133" y="121" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">50°</text>
+  </svg>
+);
+
+const LingkaranDasar4SVG = () => (
+  <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Circle */}
+    <circle cx="110" cy="120" r="88" fill="none" stroke="#60a5fa" strokeWidth="2" />
+    {/* Three radii: up (90°), right (0°), lower-left (225°) */}
+    {/* Up: (110, 32) */}
+    {/* Right: (198, 120) */}
+    {/* 225°: cos225°=-0.707,sin225°=-0.707 => (110-62.2, 120+62.2)=(47.8,182.2) */}
+    <line x1="110" y1="120" x2="110" y2="32" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="110" y1="120" x2="198" y2="120" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="110" y1="120" x2="47.8" y2="182.2" stroke="#93c5fd" strokeWidth="1.8" />
+    {/* Sector ORS (90°, top-right): up to right, shaded */}
+    <path d="M 110,120 L 110,32 A 88,88 0 0 1 198,120 Z" fill="#3b82f6" fillOpacity="0.3" stroke="#60a5fa" strokeWidth="1" />
+    {/* Sector OPQ (135°, right to lower-left): shaded differently */}
+    <path d="M 110,120 L 198,120 A 88,88 0 0 1 47.8,182.2 Z" fill="#6366f1" fillOpacity="0.4" stroke="#60a5fa" strokeWidth="1" />
+    {/* Remaining sector (135°, lower-left to up): shaded */}
+    <path d="M 110,120 L 47.8,182.2 A 88,88 0 0 1 110,32 Z" fill="#3b82f6" fillOpacity="0.2" stroke="#60a5fa" strokeWidth="1" />
+    {/* Right angle marker in 90° sector */}
+    <path d="M 110,105 L 125,105 L 125,120" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+    {/* 135° label in OPQ sector */}
+    <text x="165" y="165" fill="#fbbf24" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">135°</text>
+    {/* Labels */}
+    <circle cx="110" cy="120" r="3" fill="#f8fafc" />
+    <text x="95" y="118" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
+    <text x="112" y="28" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">S</text>
+    <text x="201" y="123" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">P</text>
+    <text x="35" y="188" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">Q</text>
+    <text x="40" y="75" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">R</text>
+  </svg>
+);
+
+const LingkaranDasar5SVG = () => (
+  <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Full circle */}
+    <circle cx="115" cy="122" r="86" fill="none" stroke="#60a5fa" strokeWidth="2" />
+    <circle cx="115" cy="122" r="3" fill="#f8fafc" />
+    {/* Points: A at 110°, B at 75°, C at 0°, D at 220° */}
+    {/* cos110°=-0.342,sin110°=0.940 => A:(115-29.4,122-80.8)=(85.6,41.2) */}
+    {/* cos75°=0.259,sin75°=0.966  => B:(115+22.3,122-83.1)=(137.3,38.9) */}
+    {/* C: (201, 122) */}
+    {/* cos220°=-0.766,sin220°=-0.643 => D:(115-65.9,122+55.3)=(49.1,177.3) */}
+    {/* Radii */}
+    <line x1="115" y1="122" x2="85.6" y2="41.2" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="115" y1="122" x2="137.3" y2="38.9" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="115" y1="122" x2="201" y2="122" stroke="#93c5fd" strokeWidth="1.8" />
+    <line x1="115" y1="122" x2="49.1" y2="177.3" stroke="#93c5fd" strokeWidth="1.8" />
+    {/* Small sector AOB (35°) shaded */}
+    <path d="M 115,122 L 85.6,41.2 A 86,86 0 0 1 137.3,38.9 Z" fill="#3b82f6" fillOpacity="0.3" stroke="none" />
+    {/* Sector COD (140°) shaded: from C(0°) clockwise to D(220°) = large-arc=0, sweep=0 */}
+    <path d="M 115,122 L 201,122 A 86,86 0 0 0 49.1,177.3 Z" fill="#6366f1" fillOpacity="0.35" stroke="none" />
+    {/* Arc AB label: 14 cm, positioned above arc */}
+    <path d="M 85.6,41.2 A 86,86 0 0 1 137.3,38.9" fill="none" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4 2" />
+    <text x="111" y="25" fill="#34d399" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">14 cm</text>
+    {/* Angle arcs at O */}
+    {/* 35° arc between A and B dirs, radius 24 */}
+    {/* A dir start: (115+24*cos110°,122-24*sin110°)=(115-8.2,122-22.6)=(106.8,99.4) */}
+    {/* B dir end:   (115+24*cos75°, 122-24*sin75°) =(115+6.2,122-23.2) =(121.2,98.8) */}
+    <path d="M 106.8,99.4 A 24,24 0 0 1 121.2,98.8" fill="none" stroke="#fbbf24" strokeWidth="1.3" />
+    <text x="114" y="97" fill="#fbbf24" fontSize="10" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">35°</text>
+    {/* 140° arc between C and D dirs, radius 28 */}
+    {/* C dir start: (115+28,122)=(143,122) */}
+    {/* D dir end: (115+28*cos220°,122-28*sin220°)=(115-21.4,122+18.0)=(93.6,140.0) */}
+    <path d="M 143,122 A 28,28 0 0 0 93.6,140.0" fill="none" stroke="#fbbf24" strokeWidth="1.3" />
+    <text x="148" y="148" fill="#fbbf24" fontSize="10" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">140°</text>
+    {/* Labels */}
+    <text x="99" y="118" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
+    <text x="73" y="40" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
+    <text x="139" y="37" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
+    <text x="204" y="126" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
+    <text x="37" y="183" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
+  </svg>
+);
+
+const LingkaranDasar6SVG = () => (
+  <svg viewBox="0 0 260 185" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Shape: rectangle 21x21 + semicircle on right */}
+    {/* Scale: 21cm → 120px, so semicircle r = 60px */}
+    {/* Rectangle: x=45,y=22 to x=165,y=162 (120x140 → let's use 120x120) */}
+    {/* Rectangle from (45,22) to (165,162), semicircle center (165,92), r=70 */}
+    <path d="M 45,22 L 165,22 A 70,70 0 0 1 165,162 L 45,162 Z"
+      fill="#d4b896" fillOpacity="0.5" stroke="#94a3b8" strokeWidth="2" />
+    {/* Hatch lines for texture */}
+    {[30,40,50,60,70,80,90,100,110,120,130,140].map(y => (
+      <line key={y} x1="45" y1={y+2} x2="165" y2={y+2} stroke="#94a3b8" strokeWidth="0.6" strokeOpacity="0.4" />
+    ))}
+    {/* Left side label: 21 cm (vertical) */}
+    <text x="38" y="95" fill="#e2e8f0" fontSize="12" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle" transform="rotate(-90,38,92)">21 cm</text>
+    {/* Dimension lines */}
+    <line x1="42" y1="22" x2="42" y2="162" stroke="#94a3b8" strokeWidth="1" markerStart="url(#arr)" markerEnd="url(#arr)" />
+    {/* Bottom label: 21 cm */}
+    <text x="105" y="178" fill="#e2e8f0" fontSize="12" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">21 cm</text>
+    <line x1="45" y1="167" x2="165" y2="167" stroke="#94a3b8" strokeWidth="1" />
+    {/* Tick marks */}
+    <line x1="45" y1="164" x2="45" y2="170" stroke="#94a3b8" strokeWidth="1" />
+    <line x1="165" y1="164" x2="165" y2="170" stroke="#94a3b8" strokeWidth="1" />
+  </svg>
+);
+
 const latihanDasar = [
   { no: 1, soal: "Perhatikan gambar!\nJika O adalah pusat lingkaran, jika r = 21 cm dan $\\pi = \\frac{22}{7}$, maka luas daerah yang diarsir adalah ...", options: ["A. 77 $cm^2$", "B. 154 $cm^2$", "C. 231 $cm^2$", "D. 308 $cm^2$"] },
   { no: 2, soal: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran, dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah.... ($\\pi = \\frac{22}{7}$)\nLuas juring dengan sudut pusat $120^0$ dan panjang jari-jari 7 cm adalah ... ($\\pi = \\frac{22}{7}$)", options: ["A. 77 $cm^2$", "B. 51,33 $cm^2$", "C. 38,50 $cm^2$", "D. 14,67 $cm^2$"] },
@@ -992,14 +1123,19 @@ const OlimpiadeLingkaranPage = () => {
                     {(() => {
                       const lines = soal.soal.split('\n');
                       const imgIndex = lines.findIndex(l => /perhatikan(lah)?\s+gambar/i.test(l));
-                      const hasImage = soal.no === 1 || soal.no === 2 || !!dasarImages[soal.no];
-                      const imageEl = soal.no === 1 ? (
+                      const svgComponents: Record<number, React.ReactElement> = {
+                        1: <LingkaranDasar1SVG />,
+                        2: <LingkaranDasar2SVG />,
+                        3: <LingkaranDasar3SVG />,
+                        4: <LingkaranDasar4SVG />,
+                        5: <LingkaranDasar5SVG />,
+                        6: <LingkaranDasar6SVG />,
+                      };
+                      const hasSVG = soal.no in svgComponents;
+                      const hasImage = hasSVG || !!dasarImages[soal.no];
+                      const imageEl = hasSVG ? (
                         <div className="flex justify-center my-3">
-                          <LingkaranDasar1SVG />
-                        </div>
-                      ) : soal.no === 2 ? (
-                        <div className="flex justify-center my-3">
-                          <LingkaranDasar2SVG />
+                          {svgComponents[soal.no]}
                         </div>
                       ) : dasarImages[soal.no] ? (
                         <div className="flex justify-center my-3">
