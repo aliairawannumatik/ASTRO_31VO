@@ -30,7 +30,7 @@ import gambarOlimpiade2 from "@assets/image_1777686601334.png";
 import gambarOlimpiade4 from "@assets/image_1777686713928.png";
 import gambarOlimpiade5 from "@assets/image_1777687009906.png";
 import gambarOlimpiade6 from "@assets/image_1777687942709.png";
-import gambarOlimpiade7 from "@assets/image_1777195731166.png";
+import gambarOlimpiade7 from "@assets/image_1777688265821.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
