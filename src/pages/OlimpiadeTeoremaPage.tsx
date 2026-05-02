@@ -49,7 +49,7 @@ const JarakDuaTitikSVG = () => {
   const W = 280, H = 220;
   const ox = 50, oy = H - 30;
   const x1Pos = 110, x2Pos = 220;
-  const y1Pos = oy - 60, y2Pos = oy - 130;
+  const y1Pos = oy - 46, y2Pos = oy - 130;
 
   return (
     <div className="my-3 flex justify-center">
@@ -81,8 +81,8 @@ const JarakDuaTitikSVG = () => {
         <circle cx={x1Pos} cy={y1Pos} r="3.5" fill="#fbbf24" />
         <circle cx={x2Pos} cy={y2Pos} r="3.5" fill="#fbbf24" />
         {/* Label P dan Q */}
-        <text x={x1Pos + 14} y={y1Pos - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">P</text>
-        <text x={x2Pos + 8} y={y2Pos - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">Q</text>
+        <text x={x1Pos + 7} y={y1Pos - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">P</text>
+        <text x={x2Pos + 13} y={y2Pos + 4} fill="#fbbf24" fontSize="12" fontWeight="bold">Q</text>
         {/* Label sumbu */}
         <text x={x1Pos} y={oy + 16} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₁</text>
         <text x={x2Pos} y={oy + 16} fill="#e5e7eb" fontSize="11" textAnchor="middle">x₂</text>
