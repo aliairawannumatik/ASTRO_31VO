@@ -865,80 +865,9 @@ const LingkaranDasar4SVG = () => {
   );
 };
 
-const LingkaranDasar5SVG = () => {
-  /*
-   * O at (120,125), r=88
-   * A at 110°: (120+88*cos110°, 125-88*sin110°) = (89.9, 42.3)
-   * B at  75°: (120+88*cos75°,  125-88*sin75°)  = (142.8, 40.0)
-   * C at   0°: (208, 125)
-   * D at 220°: (120+88*cos220°, 125-88*sin220°) = (52.6, 181.6)
-   *
-   * Sectors (clockwise / sweep=1):
-   *   AOB 35°  gold:  A→B clockwise (short arc, large-arc=0)
-   *   COD 140° blue:  C→D clockwise (large-arc=0)
-   *
-   * Arc indicators at r=45:
-   *   35°  from A-dir to B-dir:  (104.6,82.7)→(131.6,81.5)
-   *   140° from C-dir to D-dir:  (165,125)→(85.5,153.9)
-   *
-   * 35°  label bisector 92.5°, r=32 → (119, 93)
-   * 140° label bisector 290°,  r=48 → (136, 170)
-   */
-  return (
-    <svg viewBox="0 0 240 248" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-      {/* Full circle */}
-      <circle cx="120" cy="125" r="88" fill="none" stroke="#1e40af" strokeWidth="2.5" />
-
-      {/* Gold sector AOB (35°, clockwise A→B, sweep=1, large-arc=0) */}
-      <path d="M 120,125 L 89.9,42.3 A 88,88 0 0 1 142.8,40.0 Z"
-        fill="#d97706" fillOpacity="0.85" stroke="#1e40af" strokeWidth="1.2" />
-
-      {/* Blue sector COD (140°, clockwise C→D, sweep=1, large-arc=0) */}
-      <path d="M 120,125 L 208,125 A 88,88 0 0 1 52.6,181.6 Z"
-        fill="#1d4ed8" fillOpacity="0.80" stroke="#1e40af" strokeWidth="1.2" />
-
-      {/* Radii */}
-      <line x1="120" y1="125" x2="89.9"  y2="42.3"  stroke="#1e40af" strokeWidth="1.8" />
-      <line x1="120" y1="125" x2="142.8" y2="40.0"  stroke="#1e40af" strokeWidth="1.8" />
-      <line x1="120" y1="125" x2="208"   y2="125"   stroke="#1e40af" strokeWidth="1.8" />
-      <line x1="120" y1="125" x2="52.6"  y2="181.6" stroke="#1e40af" strokeWidth="1.8" />
-
-      {/* Arc indicator 35° inside gold sector at r=45 */}
-      {/* A-dir: (120+45*cos110°,125-45*sin110°)=(104.6,82.7) */}
-      {/* B-dir: (120+45*cos75°, 125-45*sin75°) =(131.6,81.5) */}
-      <path d="M 104.6,82.7 A 45,45 0 0 1 131.6,81.5"
-        fill="none" stroke="#1e3a8a" strokeWidth="2" />
-
-      {/* Arc indicator 140° inside blue sector at r=45 */}
-      {/* C-dir: (165,125) */}
-      {/* D-dir: (120+45*cos220°,125-45*sin220°)=(85.5,153.9) */}
-      <path d="M 165,125 A 45,45 0 0 1 85.5,153.9"
-        fill="none" stroke="#ffffff" strokeWidth="2" />
-
-      {/* Tick mark above arc AB at topmost arc point (~90°, y=125-88=37) */}
-      <line x1="116" y1="37" x2="116" y2="27" stroke="#1e40af" strokeWidth="1.8" />
-
-      {/* 14 cm label above arc AB */}
-      <text x="122" y="23" fill="#1e40af" fontSize="12" fontFamily="sans-serif" fontWeight="bold">14 cm</text>
-
-      {/* 35° label inside gold sector */}
-      <text x="117" y="93" fill="#1e3a8a" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">35°</text>
-
-      {/* 140° label inside blue sector */}
-      <text x="134" y="170" fill="#ffffff" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">140°</text>
-
-      {/* O at center */}
-      <circle cx="120" cy="125" r="3" fill="#1e3a8a" />
-      <text x="104" y="122" fill="#1e40af" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
-
-      {/* Point labels */}
-      <text x="73"  y="38"  fill="#1e40af" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
-      <text x="146" y="35"  fill="#1e40af" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
-      <text x="212" y="129" fill="#1e40af" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
-      <text x="35"  y="192" fill="#1e40af" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
-    </svg>
-  );
-};
+const LingkaranDasar5SVG = () => (
+  <img src="/lingkaran-dasar-5.png" alt="Gambar soal 5" className="max-w-full max-h-64 object-contain mx-auto block" />
+);
 
 const LingkaranDasar6SVG = () => (
   <svg viewBox="0 0 260 185" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
