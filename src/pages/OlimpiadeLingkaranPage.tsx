@@ -987,30 +987,51 @@ const OlimpiadeLingkaranPage = () => {
                 className="relative rounded-2xl overflow-hidden border border-indigo-500/20">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 to-slate-900/60 backdrop-blur" />
                 <div className="relative px-5 py-4">
-                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                  <div className="font-body text-sm text-white mb-3 leading-relaxed">
                     <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/30 text-indigo-300 text-xs font-bold mr-2 shrink-0">{soal.no}</span>
-                    {soal.soal.split('\n').map((line, lineIdx) => (
-                      <span key={lineIdx}>
-                        {lineIdx > 0 && <br />}
-                        {renderWithLatex(line)}
-                      </span>
-                    ))}
+                    {(() => {
+                      const lines = soal.soal.split('\n');
+                      const imgIndex = lines.findIndex(l => /perhatikan(lah)?\s+gambar/i.test(l));
+                      const hasImage = soal.no === 1 || soal.no === 2 || !!dasarImages[soal.no];
+                      const imageEl = soal.no === 1 ? (
+                        <div className="flex justify-center my-3">
+                          <LingkaranDasar1SVG />
+                        </div>
+                      ) : soal.no === 2 ? (
+                        <div className="flex justify-center my-3">
+                          <LingkaranDasar2SVG />
+                        </div>
+                      ) : dasarImages[soal.no] ? (
+                        <div className="flex justify-center my-3">
+                          <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
+                            <img src={dasarImages[soal.no]} alt={`Gambar soal ${soal.no}`} className="max-w-full max-h-56 object-contain" />
+                          </div>
+                        </div>
+                      ) : null;
+
+                      if (hasImage && imgIndex !== -1) {
+                        return (
+                          <>
+                            {lines.slice(0, imgIndex + 1).map((line, i) => (
+                              <span key={i}>{i > 0 && <br />}{renderWithLatex(line)}</span>
+                            ))}
+                            {imageEl}
+                            {lines.slice(imgIndex + 1).map((line, i) => (
+                              <span key={i + imgIndex + 1}><br />{renderWithLatex(line)}</span>
+                            ))}
+                          </>
+                        );
+                      }
+                      return (
+                        <>
+                          {lines.map((line, i) => (
+                            <span key={i}>{i > 0 && <br />}{renderWithLatex(line)}</span>
+                          ))}
+                          {hasImage && <div className="mt-2">{imageEl}</div>}
+                        </>
+                      );
+                    })()}
                   </div>
-                  {soal.no === 1 ? (
-                    <div className="flex justify-center mb-3">
-                      <LingkaranDasar1SVG />
-                    </div>
-                  ) : soal.no === 2 ? (
-                    <div className="flex justify-center mb-3">
-                      <LingkaranDasar2SVG />
-                    </div>
-                  ) : dasarImages[soal.no] && (
-                    <div className="flex justify-center mb-3">
-                      <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                        <img src={dasarImages[soal.no]} alt={`Gambar soal ${soal.no}`} className="max-w-full max-h-56 object-contain" />
-                      </div>
-                    </div>
-                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                       {soal.options.map((opt, j) => (
