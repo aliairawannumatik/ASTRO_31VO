@@ -784,13 +784,15 @@ const LingkaranDasar3SVG = () => (
     {/* Start P dir: (142, 112) */}
     {/* End Q dir:   (120+22*cos50°,112-22*sin50°)=(134.1,95.1) */}
     <path d="M 142,112 A 22,22 0 0 0 134.1,95.1" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
-    {/* Labels */}
-    <text x="105" y="108" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
+    {/* Labels — O just below center dot, angles outside their arcs */}
+    <text x="123" y="130" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
     <text x="211" y="116" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
     <text x="178" y="40" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
     <text x="53" y="38" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">R</text>
-    <text x="110" y="86" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">75°</text>
-    <text x="137" y="103" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">50°</text>
+    {/* 75° — outside arc, toward midpoint angle ~87.5° from center */}
+    <text x="106" y="74" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">75°</text>
+    {/* 50° — outside arc, toward midpoint angle ~25° from center */}
+    <text x="145" y="97" fill="#fbbf24" fontSize="11" fontFamily="sans-serif" fontWeight="bold">50°</text>
   </svg>
 );
 
