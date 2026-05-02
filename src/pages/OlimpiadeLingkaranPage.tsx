@@ -798,61 +798,69 @@ const LingkaranDasar3SVG = () => (
 
 const LingkaranDasar4SVG = () => {
   /*
-   * O at (120,120), r=88
-   * Three radii (math angles, y-axis inverted for SVG):
-   *   P at   0° → (208, 120)
-   *   Q at 135° → (120+88*cos135°, 120-88*sin135°) = (57.8, 57.8)   upper-left
-   *   R at 225° → (120+88*cos225°, 120-88*sin225°) = (57.8, 182.2)  lower-left
+   * O at (120,120), r=85
+   * Four radii (math angles, SVG y-inverted):
+   *   P  at  90° → (120, 35)            top
+   *   Q  at -45° → (180.1, 180.1)       lower-right
+   *   R  at 270° → (120, 205)           bottom
+   *   S  at 180° → (35, 120)            left
    *
-   * Sectors:
-   *   Upper  0°→135° CCW (through top):  135° — labeled "135°"
-   *   Left 135°→225° CW  (through left):  90° — right-angle marker
-   *   Lower 225°→360° CW (through bottom):135°
+   * Four sectors (clockwise / sweep=1):
+   *   P→Q  135° maroon  (through right)
+   *   Q→R   45° white   (lower-right sliver)
+   *   R→S   90° gold    (lower-left, right-angle marker)
+   *   S→P   90° white   (upper-left)
    *
-   * Right-angle square at O (size 12) pointing into left (90°) sector:
-   *   dirQ = (-0.707,-0.707), dirR = (-0.707,+0.707)
-   *   A = O+12*dirQ = (111.5, 111.5)
-   *   B = O+12*dirR = (111.5, 128.5)
-   *   C = A+12*dirR = (103.0, 120.0)
+   * Right-angle □ at O (size 10) in gold sector (OR↓, OS←):
+   *   A=(120,130), B=(110,120), C=(110,130)
+   *   Path: M 120,130 L 110,130 L 110,120
+   *
+   * 135° label at bisector 22.5°, r=46:
+   *   (120+46·cos22.5°, 120−46·sin22.5°) ≈ (162.5, 102.5)
    */
   return (
     <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
       {/* Full circle */}
-      <circle cx="120" cy="120" r="88" fill="none" stroke="#60a5fa" strokeWidth="2" />
+      <circle cx="120" cy="120" r="85" fill="none" stroke="#60a5fa" strokeWidth="2.2" />
 
-      {/* Sector upper 135° (P→Q counter-clockwise through top): sweep=0 */}
-      <path d="M 120,120 L 208,120 A 88,88 0 0 0 57.8,57.8 Z"
-        fill="#3b82f6" fillOpacity="0.25" stroke="#60a5fa" strokeWidth="1" />
+      {/* Sector P→Q 135° maroon (clockwise through right, sweep=1, large-arc=0) */}
+      <path d="M 120,120 L 120,35 A 85,85 0 0 1 180.1,180.1 Z"
+        fill="#be123c" fillOpacity="0.55" stroke="#60a5fa" strokeWidth="1" />
 
-      {/* Sector left 90° (Q→R clockwise through left): sweep=1 */}
-      <path d="M 120,120 L 57.8,57.8 A 88,88 0 0 1 57.8,182.2 Z"
-        fill="#6366f1" fillOpacity="0.35" stroke="#60a5fa" strokeWidth="1" />
+      {/* Sector Q→R 45° white (clockwise, sweep=1, large-arc=0) */}
+      <path d="M 120,120 L 180.1,180.1 A 85,85 0 0 1 120,205 Z"
+        fill="#e2e8f0" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1" />
 
-      {/* Sector lower 135° (R→P clockwise through bottom): sweep=1 */}
-      <path d="M 120,120 L 57.8,182.2 A 88,88 0 0 1 208,120 Z"
-        fill="#3b82f6" fillOpacity="0.25" stroke="#60a5fa" strokeWidth="1" />
+      {/* Sector R→S 90° gold (clockwise, sweep=1, large-arc=0) */}
+      <path d="M 120,120 L 120,205 A 85,85 0 0 1 35,120 Z"
+        fill="#d97706" fillOpacity="0.55" stroke="#60a5fa" strokeWidth="1" />
 
-      {/* Three radii */}
-      <line x1="120" y1="120" x2="208" y2="120" stroke="#93c5fd" strokeWidth="1.8" />
-      <line x1="120" y1="120" x2="57.8" y2="57.8"  stroke="#93c5fd" strokeWidth="1.8" />
-      <line x1="120" y1="120" x2="57.8" y2="182.2" stroke="#93c5fd" strokeWidth="1.8" />
+      {/* Sector S→P 90° white (clockwise, sweep=1, large-arc=0) */}
+      <path d="M 120,120 L 35,120 A 85,85 0 0 1 120,35 Z"
+        fill="#e2e8f0" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1" />
 
-      {/* Right-angle square marker at O inside 90° (left) sector */}
-      <path d="M 111.5,111.5 L 103.0,120.0 L 111.5,128.5"
-        fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+      {/* Four radii */}
+      <line x1="120" y1="120" x2="120"   y2="35"   stroke="#93c5fd" strokeWidth="1.8" />
+      <line x1="120" y1="120" x2="180.1" y2="180.1" stroke="#93c5fd" strokeWidth="1.8" />
+      <line x1="120" y1="120" x2="120"   y2="205"  stroke="#93c5fd" strokeWidth="1.8" />
+      <line x1="120" y1="120" x2="35"    y2="120"  stroke="#93c5fd" strokeWidth="1.8" />
 
-      {/* 135° label in upper sector — bisector at 67.5°, r≈52 */}
-      {/* pos: (120+52*cos67.5°, 120-52*sin67.5°) = (140,72) */}
-      <text x="148" y="76" fill="#fbbf24" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">135°</text>
+      {/* Right-angle □ at O in gold sector (between OR↓ and OS←) */}
+      <path d="M 120,130 L 110,130 L 110,120"
+        fill="none" stroke="#fbbf24" strokeWidth="1.6" />
+
+      {/* 135° label — bisector of P→Q sector at ~22.5°, r=46 */}
+      <text x="162" y="106" fill="#fbbf24" fontSize="13" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">135°</text>
 
       {/* O at center */}
       <circle cx="120" cy="120" r="3" fill="#f8fafc" />
-      <text x="123" y="136" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
+      <text x="124" y="116" fill="#e2e8f0" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">O</text>
 
       {/* Point labels */}
-      <text x="211" y="124" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">P</text>
-      <text x="44"  y="57"  fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">Q</text>
-      <text x="44"  y="188" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">R</text>
+      <text x="120" y="24"  fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" textAnchor="middle">P</text>
+      <text x="186" y="190" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic">Q</text>
+      <text x="120" y="222" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic" textAnchor="middle">R</text>
+      <text x="20"  y="124" fill="#34d399" fontSize="13" fontFamily="serif" fontStyle="italic">S</text>
     </svg>
   );
 };
