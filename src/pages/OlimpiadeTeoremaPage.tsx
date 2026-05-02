@@ -49,7 +49,7 @@ const JarakDuaTitikSVG = () => {
   const W = 280, H = 220;
   const ox = 50, oy = H - 30;
   const x1Pos = 110, x2Pos = 220;
-  const y1Pos = oy - 32, y2Pos = oy - 130;
+  const y1Pos = oy - 60, y2Pos = oy - 130;
 
   return (
     <div className="my-3 flex justify-center">
