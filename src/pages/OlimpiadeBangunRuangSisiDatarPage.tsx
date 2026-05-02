@@ -796,7 +796,7 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                                 <img
                                   src={optImg}
                                   alt={`Opsi ${letter} soal ${soal.no}`}
-                                  className="w-full max-h-[110px] object-contain rounded border border-white/10 bg-white/90 p-1"
+                                  className="max-w-[160px] max-h-[110px] w-full object-contain rounded border border-white/10 bg-white/90 p-1 mx-auto"
                                 />
                               </div>
                             ) : renderWithLatex(opt)}
