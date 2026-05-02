@@ -191,9 +191,10 @@ const OlimpiadePage = () => {
             style={{ textShadow: '0 0 40px rgba(251,191,36,0.5)' }}>
             OLIMPIADE MATEMATIKA
           </h1>
-          <p className="text-white/40 text-xs text-center font-body mb-2">
-            Irawan Sutiawan, M.Pd
-          </p>
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-center mb-2"
+            style={{ color: '#facc15', textShadow: '0 0 40px rgba(251,191,36,0.5)' }}>
+            Oleh : Irawan Sutiawan, M.Pd
+          </h2>
           <p className="text-white/50 text-sm text-center font-body mb-4">
             Latihan soal & materi tingkat olimpiade SMP
           </p>
