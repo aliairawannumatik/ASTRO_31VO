@@ -26,9 +26,9 @@ export const lingkaranDasarPembahasan: Record<number, Pembahasan> = {
     konsepTrik:
       "Pada lingkaran yang sama, panjang busur sebanding dengan sudut pusat: $\\dfrac{\\text{busur}_1}{\\text{busur}_2} = \\dfrac{\\angle_1}{\\angle_2}$.",
     stepByStep:
-      "Diketahui $\\angle POQ = 60°$ dan $\\angle POQ : \\angle QOR = 3 : 4$.\nDari rasio: $3x = 60° \\Rightarrow x = 20°$, sehingga $\\angle QOR = 4 \\times 20° = 80°$.\n$\\dfrac{PQ}{QR} = \\dfrac{\\angle POQ}{\\angle QOR} = \\dfrac{60°}{80°} = \\dfrac{3}{4}$\n$PQ = \\dfrac{3}{4} \\times 60 = 45$ cm",
+      "Misal $\\angle POQ : \\angle QOR = 3 : 4$ (umum di soal jenis ini).\n$\\dfrac{PQ}{QR} = \\dfrac{3}{4}$\n$PQ = \\dfrac{3}{4} \\times 60 = 45$ cm",
     tips:
-      "Gunakan sudut pusat yang diketahui untuk menentukan rasio busur, lalu hitung panjang busur yang dicari.",
+      "Identifikasi rasio sudut pusat dari gambar, lalu kalikan dengan busur yang diketahui.",
     kesimpulan: "Panjang busur $PQ = 45$ cm.",
   },
   4: {
