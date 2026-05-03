@@ -4,7 +4,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 import { Circle, ChevronDown, ChevronUp } from "lucide-react";
 import CircleDiagram, { CircleDiagramProps } from "./CircleDiagram";
 
@@ -15,6 +15,7 @@ type Q = {
   n: number; title: string;
   content?: string; math?: string;
   parts?: Part[]; diagram?: CircleDiagramProps;
+  imageSrc?: string;
   answers?: Ans[];
   diff?: Diff;
   type: "essay" | "mixed" | "diagram-only";
@@ -28,8 +29,121 @@ const diffColor: Record<Diff, string> = {
   HOTS: "text-red-400 bg-red-500/10 border-red-500/30",
 };
 
+const SOAL_IMG = "/soal-lingkaran-unsur.png";
+
 const questions: Q[] = [
-  Q(8, "Sudut Pusat Lingkaran", {
+  Q(1, "Jari-Jari Lingkaran", {
+    type: "mixed", diff: "Mudah",
+    imageSrc: SOAL_IMG,
+    parts: [
+      { label: "1.", text: "Tentukanlah garis mana saja yang merupakan jari-jari?" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Jari-jari lingkaran adalah OA, OB, OC, dan OD (garis dari pusat O ke titik di lingkaran)." },
+    ],
+  }),
+
+  Q(2, "Diameter Lingkaran", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "2.", text: "Tentukanlah garis mana saja yang merupakan diameter?" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Diameter lingkaran adalah AB, karena garis AB melewati pusat O dan menghubungkan dua titik yang berhadapan (A dan B)." },
+    ],
+  }),
+
+  Q(3, "Tali Busur", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "3.", text: "Tentukanlah garis mana saja yang merupakan tali busur?" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Tali busur adalah AD dan CB. Keduanya menghubungkan dua titik pada lingkaran tetapi tidak melalui pusat O. (AB juga tali busur, namun sekaligus merupakan diameter.)" },
+    ],
+  }),
+
+  Q(4, "Busur Terpanjang", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "4.", text: "Garis manakah yang merupakan busur terpanjang?" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Busur terpanjang adalah busur CAD, yaitu busur yang membentang dari titik C melalui A hingga D (sisi kiri lingkaran), karena busur ini memiliki panjang busur terbesar di antara busur-busur yang ada pada gambar." },
+    ],
+  }),
+
+  Q(5, "Daerah I", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "5.", text: "Daerah I merupakan …" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Daerah I merupakan TEMBERENG, yaitu daerah yang dibatasi oleh tali busur CB dan busur minor CB." },
+    ],
+  }),
+
+  Q(6, "Daerah II", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "6.", text: "Daerah II merupakan …" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Daerah II merupakan JURING (sektor), yaitu daerah yang dibatasi oleh dua jari-jari OB dan OD serta busur BD." },
+    ],
+  }),
+
+  Q(7, "Juring Terbesar", {
+    type: "mixed", diff: "Sedang",
+    parts: [
+      { label: "7.", text: "Manakah yang merupakan juring terbesar?" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Juring terbesar adalah daerah kuning-hijau yang luas (bukan daerah I maupun II), yaitu juring yang dibatasi oleh OA, OC, dan busur CA yang lebih panjang. Juring ini memiliki sudut pusat terbesar sehingga luasnya paling besar." },
+    ],
+  }),
+
+  Q(8, "Garis OE", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "8.", text: "Garis OE adalah …" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Garis OE adalah APOTEMA, yaitu garis yang ditarik dari pusat O tegak lurus ke tali busur AD. OE ⊥ AD dan E merupakan titik kaki tegak lurus tersebut." },
+    ],
+  }),
+
+  Q(9, "Tali Busur Terpanjang", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "9.", text: "Tali busur terpanjang ditunjukkan oleh …" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Tali busur terpanjang adalah AB, karena AB merupakan diameter yang melewati pusat O. Diameter selalu menjadi tali busur terpanjang dalam suatu lingkaran." },
+    ],
+  }),
+
+  Q(10, "Sudut Pusat", {
+    type: "mixed", diff: "Mudah",
+    parts: [
+      { label: "10.", text: "Sebutkan salah satu sudut pusat!" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Contoh sudut pusat: ∠AOB, ∠BOD, ∠COB, ∠AOC, ∠COD, atau ∠AOD. Sudut pusat adalah sudut yang titik sudutnya berada di pusat lingkaran (O) dan kedua kakinya merupakan jari-jari." },
+    ],
+  }),
+
+  Q(11, "Sudut Keliling", {
+    type: "mixed", diff: "Sedang",
+    parts: [
+      { label: "11.", text: "Sebutkan salah satu sudut keliling!" },
+    ],
+    answers: [
+      { label: "Jawab:", text: "Contoh sudut keliling: ∠CAD (titik sudut di A), ∠CBD (titik sudut di C), atau ∠ACB (titik sudut di A). Sudut keliling adalah sudut yang titik sudutnya terletak pada lingkaran dan kedua kakinya adalah tali busur." },
+    ],
+  }),
+
+  Q(12, "Sudut Pusat Lingkaran", {
     type: "mixed", diff: "Sedang",
     diagram: {
       size: 250, r: 0.62,
@@ -55,7 +169,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Menghitung Jari-Jari dari Diameter", {
+  Q(13, "Menghitung Jari-Jari dari Diameter", {
     type: "mixed", diff: "Mudah",
     content: "Diketahui sebuah lingkaran dengan diameter-diameter berikut. Tentukan jari-jarinya!",
     parts: [
@@ -72,7 +186,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Unsur Lingkaran — Benar atau Salah", {
+  Q(14, "Unsur Lingkaran — Benar atau Salah", {
     type: "mixed", diff: "Sedang",
     content: "Tentukan pernyataan berikut BENAR (B) atau SALAH (S)!",
     parts: [
@@ -90,9 +204,7 @@ const questions: Q[] = [
       { label: "(5)", text: "SALAH — Panjang tali busur bergantung pada jaraknya ke pusat." },
     ],
   }),
-
 ];
-
 
 const UnsurUnsurLingkaranPage = () => {
   const navigate = useNavigate();
@@ -120,7 +232,7 @@ const UnsurUnsurLingkaranPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 3 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 14 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -144,6 +256,19 @@ const UnsurUnsurLingkaranPage = () => {
                 <span className="text-white/60">{r.d}</span>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="mb-4 rounded-2xl overflow-hidden border border-cyan-500/25">
+          <div className="bg-cyan-900/30 px-4 py-3 border-b border-cyan-500/20">
+            <p className="text-cyan-300 text-xs font-bold">📌 Untuk soal nomor 1 – 11, perhatikan gambar berikut.</p>
+          </div>
+          <div className="flex justify-center bg-white/95 p-4">
+            <img
+              src={SOAL_IMG}
+              alt="Gambar lingkaran dengan unsur-unsurnya"
+              className="max-w-xs w-full object-contain"
+            />
           </div>
         </div>
 
@@ -171,6 +296,11 @@ const UnsurUnsurLingkaranPage = () => {
                       )}
                     </div>
                     {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.imageSrc && (
+                      <div className="mb-3 flex justify-center rounded-xl overflow-hidden bg-white/95 p-3">
+                        <img src={q.imageSrc} alt="Gambar soal" className="max-w-[220px] w-full object-contain" />
+                      </div>
+                    )}
                     {q.diagram && (
                       <div className="mb-3 flex justify-center">
                         <CircleDiagram {...q.diagram} />
