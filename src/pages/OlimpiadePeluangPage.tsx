@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
+import { Trophy } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import { pembahasanDasar } from "@/data/peluangPembahasanDasar";
-import { pembahasanOlimpiade } from "@/data/peluangPembahasanOlimpiade";
+import PembahasanCard from "@/components/PembahasanCard";
+import { peluangDasarPembahasan } from "@/data/pembahasan/peluangDasar";
+import { peluangOlimpiadePembahasan } from "@/data/pembahasan/peluangOlimpiade";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -1160,18 +1161,6 @@ const latihanOlimpiade = [
 export default function OlimpiadePeluangPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "latihan" | "olimpiade">("materi");
-  const [openPembahasan, setOpenPembahasan] = useState<Set<string>>(new Set());
-
-  const togglePembahasan = (key: string) => {
-    playPopSound();
-    setOpenPembahasan((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    });
-  };
-
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
       <Starfield />
@@ -1227,8 +1216,6 @@ export default function OlimpiadePeluangPage() {
             <div className="space-y-3">
               {latihanDasar.map((q) => {
                 const key = `d-${q.no}`;
-                const open = openPembahasan.has(key);
-                const pembahasan = pembahasanDasar[q.no];
                 return (
                   <div key={q.no} className="bg-card/50 backdrop-blur border border-border/50 rounded-xl p-4">
                     <div className="flex items-start gap-3">
@@ -1259,22 +1246,8 @@ export default function OlimpiadePeluangPage() {
                             ))}
                           </div>
                         )}
-                        {pembahasan && (
-                          <div className="pt-2">
-                            <button
-                              onClick={() => togglePembahasan(key)}
-                              className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
-                            >
-                              <Lightbulb className="w-3.5 h-3.5" />
-                              {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
-                              {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                            </button>
-                            {open && (
-                              <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2">
-                                {pembahasan}
-                              </div>
-                            )}
-                          </div>
+                        {peluangDasarPembahasan[q.no] && (
+                          <PembahasanCard pembahasanKey={key} pembahasan={peluangDasarPembahasan[q.no]} />
                         )}
                       </div>
                     </div>
@@ -1289,8 +1262,6 @@ export default function OlimpiadePeluangPage() {
             <div className="space-y-3">
               {latihanOlimpiade.map((q) => {
                 const key = `o-${q.no}`;
-                const open = openPembahasan.has(key);
-                const pembahasan = pembahasanOlimpiade[q.no];
                 return (
                   <div key={q.no} className="bg-card/50 backdrop-blur border border-border/50 rounded-xl p-4">
                     <div className="flex items-start gap-3">
@@ -1321,22 +1292,8 @@ export default function OlimpiadePeluangPage() {
                             ))}
                           </div>
                         )}
-                        {pembahasan && (
-                          <div className="pt-2">
-                            <button
-                              onClick={() => togglePembahasan(key)}
-                              className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
-                            >
-                              <Lightbulb className="w-3.5 h-3.5" />
-                              {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
-                              {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                            </button>
-                            {open && (
-                              <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2">
-                                {pembahasan}
-                              </div>
-                            )}
-                          </div>
+                        {peluangOlimpiadePembahasan[q.no] && (
+                          <PembahasanCard pembahasanKey={key} pembahasan={peluangOlimpiadePembahasan[q.no]} />
                         )}
                       </div>
                     </div>

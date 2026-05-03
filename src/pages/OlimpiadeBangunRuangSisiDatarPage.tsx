@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp, BookOpen } from "lucide-react";
+import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import { pembahasanDasar, pembahasanOlimpiade } from "@/data/bangunRuangSisiDatarPembahasan";
+import PembahasanCard from "@/components/PembahasanCard";
+import { bangunRuangSisiDatarDasarPembahasan } from "@/data/pembahasan/bangunRuangSisiDatarDasar";
+import { bangunRuangSisiDatarOlimpiadePembahasan } from "@/data/pembahasan/bangunRuangSisiDatarOlimpiade";
 import olimpiadeImg12 from "@assets/image_1777741187388.png";
 import olimpiadeImg14 from "@assets/image_1777741593708.png";
 import olimpiadeImg16 from "@assets/Picture1_1777742388394_nobg.png";
@@ -658,27 +660,10 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>([0]);
-  const [expandedDasarPembahasan, setExpandedDasarPembahasan] = useState<number[]>([]);
-  const [expandedOlimpiadePembahasan, setExpandedOlimpiadePembahasan] = useState<number[]>([]);
-
   const toggleSection = (idx: number) => {
     playPopSound();
     setExpandedSections(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
-    );
-  };
-
-  const toggleDasarPembahasan = (no: number) => {
-    playPopSound();
-    setExpandedDasarPembahasan(prev =>
-      prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
-    );
-  };
-
-  const toggleOlimpiadePembahasan = (no: number) => {
-    playPopSound();
-    setExpandedOlimpiadePembahasan(prev =>
-      prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
     );
   };
 
@@ -805,28 +790,8 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                       })}
                     </div>
                   )}
-                  {pembahasanDasar[soal.no] && (
-                    <div>
-                      <button
-                        onClick={() => toggleDasarPembahasan(soal.no)}
-                        className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                          expandedDasarPembahasan.includes(soal.no)
-                            ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                            : "bg-muted/30 border-border text-white/60 hover:border-emerald-500/40 hover:text-emerald-400"
-                        }`}
-                      >
-                        <BookOpen className="w-3 h-3" />
-                        {expandedDasarPembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
-                        {expandedDasarPembahasan.includes(soal.no)
-                          ? <ChevronUp className="w-3 h-3" />
-                          : <ChevronDown className="w-3 h-3" />}
-                      </button>
-                      {expandedDasarPembahasan.includes(soal.no) && (
-                        <div className="mt-3 bg-muted/20 border border-border/60 rounded-xl px-4 py-3 space-y-1">
-                          {pembahasanDasar[soal.no]}
-                        </div>
-                      )}
-                    </div>
+                  {bangunRuangSisiDatarDasarPembahasan[soal.no] && (
+                    <PembahasanCard pembahasanKey={`d-${soal.no}`} pembahasan={bangunRuangSisiDatarDasarPembahasan[soal.no]} />
                   )}
                 </div>
               );
@@ -873,28 +838,8 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                       ))}
                     </div>
                   )}
-                  {pembahasanOlimpiade[soal.no] && (
-                    <div>
-                      <button
-                        onClick={() => toggleOlimpiadePembahasan(soal.no)}
-                        className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                          expandedOlimpiadePembahasan.includes(soal.no)
-                            ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                            : "bg-white/5 border-white/10 text-white/60 hover:border-emerald-500/40 hover:text-emerald-400"
-                        }`}
-                      >
-                        <BookOpen className="w-3 h-3" />
-                        {expandedOlimpiadePembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
-                        {expandedOlimpiadePembahasan.includes(soal.no)
-                          ? <ChevronUp className="w-3 h-3" />
-                          : <ChevronDown className="w-3 h-3" />}
-                      </button>
-                      {expandedOlimpiadePembahasan.includes(soal.no) && (
-                        <div className="mt-3 bg-muted/20 border border-border/60 rounded-xl px-4 py-3 space-y-1">
-                          {pembahasanOlimpiade[soal.no]}
-                        </div>
-                      )}
-                    </div>
+                  {bangunRuangSisiDatarOlimpiadePembahasan[soal.no] && (
+                    <PembahasanCard pembahasanKey={`o-${soal.no}`} pembahasan={bangunRuangSisiDatarOlimpiadePembahasan[soal.no]} />
                   )}
                 </div>
               </div>

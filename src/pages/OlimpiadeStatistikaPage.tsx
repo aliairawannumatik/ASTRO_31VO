@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp, BookOpen, Dumbbell, Star, Lightbulb } from "lucide-react";
+import { Trophy, ChevronDown, ChevronUp, BookOpen, Dumbbell, Star } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import { pembahasanDasar } from "@/data/statistikaPembahasanDasar";
-import { pembahasanOlimpiade } from "@/data/statistikaPembahasanOlimpiade";
+import PembahasanCard from "@/components/PembahasanCard";
+import { statistikaDasarPembahasan } from "@/data/pembahasan/statistikaDasar";
+import { statistikaOlimpiadePembahasan } from "@/data/pembahasan/statistikaOlimpiade";
 import statistikaSoal13Img from "@assets/image_1777276565289.png";
 import statistikaOlimpiadeSoal15Img from "@assets/image_1777276641804.png";
 import statistikaOlimpiadeSoal18ImgA from "@assets/image_1777276668610.png";
@@ -1162,23 +1163,11 @@ const OlimpiadeStatistikaPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSections.length }, (_, i) => i));
-  const [openPembahasan, setOpenPembahasan] = useState<Set<string>>(new Set());
-
   const toggleSection = (idx: number) => {
     playPopSound();
     setExpandedSections(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
     );
-  };
-
-  const togglePembahasan = (key: string) => {
-    playPopSound();
-    setOpenPembahasan(prev => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    });
   };
 
   return (
@@ -1288,8 +1277,6 @@ const OlimpiadeStatistikaPage = () => {
           <div className="space-y-3 animate-slide-up">
             {latihanDasar.map((soal) => {
               const key = `d-${soal.no}`;
-              const open = openPembahasan.has(key);
-              const pembahasan = pembahasanDasar[soal.no];
               const visual = renderDasarVisual(soal.no);
               return (
                 <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-cyan-400/20 transition-colors">
@@ -1321,22 +1308,8 @@ const OlimpiadeStatistikaPage = () => {
                       ))}
                     </div>
                   )}
-                  {pembahasan && (
-                    <div className="pt-3">
-                      <button
-                        onClick={() => togglePembahasan(key)}
-                        className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
-                      >
-                        <Lightbulb className="w-3.5 h-3.5" />
-                        {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
-                        {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                      </button>
-                      {open && (
-                        <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2 space-y-1">
-                          {pembahasan}
-                        </div>
-                      )}
-                    </div>
+                  {statistikaDasarPembahasan[soal.no] && (
+                    <PembahasanCard pembahasanKey={key} pembahasan={statistikaDasarPembahasan[soal.no]} />
                   )}
                 </div>
               );
@@ -1348,8 +1321,6 @@ const OlimpiadeStatistikaPage = () => {
           <div className="space-y-3 animate-slide-up">
             {latihanOlimpiade.map((soal) => {
               const key = `o-${soal.no}`;
-              const open = openPembahasan.has(key);
-              const pembahasan = pembahasanOlimpiade[soal.no];
               const visual = renderOlimpiadeVisual(soal.no);
               return (
                 <div key={soal.no} className="bg-card/70 backdrop-blur border border-border/60 rounded-xl px-5 py-4 hover:border-yellow-400/20 transition-colors">
@@ -1386,22 +1357,8 @@ const OlimpiadeStatistikaPage = () => {
                       ))}
                     </div>
                   )}
-                  {pembahasan && (
-                    <div className="pt-3">
-                      <button
-                        onClick={() => togglePembahasan(key)}
-                        className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/30 transition-colors"
-                      >
-                        <Lightbulb className="w-3.5 h-3.5" />
-                        {open ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
-                        {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                      </button>
-                      {open && (
-                        <div className="mt-2 bg-yellow-500/5 border-l-4 border-yellow-400 rounded-r-lg px-3 py-2 space-y-1">
-                          {pembahasan}
-                        </div>
-                      )}
-                    </div>
+                  {statistikaOlimpiadePembahasan[soal.no] && (
+                    <PembahasanCard pembahasanKey={key} pembahasan={statistikaOlimpiadePembahasan[soal.no]} />
                   )}
                 </div>
               );
