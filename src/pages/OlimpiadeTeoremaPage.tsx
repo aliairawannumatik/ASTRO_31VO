@@ -20,7 +20,7 @@ import bangunABCDSoalOlim4Img from "@assets/image_1777205553203.png";
 import bangunABCDSoalOlim5Img from "@assets/image_1777205569648.png";
 import segitigaABCSoalOlim6Img from "@assets/image_1777205589664.png";
 import trapesiumABCDSoalOlim10Img from "@assets/image_1777205607261.png";
-import helikopterSoalOlim28Img from "@assets/image_1777786323041.png";
+import helikopterSoalOlim28Img from "@assets/image_1777787086687.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
