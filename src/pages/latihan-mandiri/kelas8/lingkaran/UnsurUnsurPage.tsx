@@ -90,8 +90,6 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "d = 14 \\text{ cm}" },
       { label: "b.", math: "d = 10 \\text{ cm}" },
-      { label: "c.", math: "d = 28 \\text{ cm}" },
-      { label: "d.", math: "d = 35 \\text{ cm}" },
     ],
   }),
 ];
