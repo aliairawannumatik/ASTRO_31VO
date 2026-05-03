@@ -63,40 +63,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Menghitung Jari-Jari dari Diameter", {
-    type: "mixed", diff: "Mudah",
-    content: "Diketahui sebuah lingkaran dengan diameter-diameter berikut. Tentukan jari-jarinya!",
-    parts: [
-      { label: "a.", math: "d = 14 \\text{ cm}" },
-      { label: "b.", math: "d = 21 \\text{ cm}" },
-      { label: "c.", math: "d = 50 \\text{ cm}" },
-      { label: "d.", math: "d = 3{,}5 \\text{ cm}" },
-    ],
-  }),
-
-  Q(4, "Menghitung Diameter dari Jari-Jari", {
-    type: "mixed", diff: "Mudah",
-    content: "Diketahui sebuah lingkaran dengan jari-jari berikut. Tentukan diameternya!",
-    parts: [
-      { label: "a.", math: "r = 7 \\text{ cm}" },
-      { label: "b.", math: "r = 15 \\text{ cm}" },
-      { label: "c.", math: "r = 28 \\text{ cm}" },
-      { label: "d.", math: "r = 4{,}5 \\text{ cm}" },
-    ],
-  }),
-  Q(5, "Keliling dan Luas Lingkaran", {
-    type: "mixed", diff: "Sedang",
-    content: "Diketahui sebuah lingkaran dengan diameter berikut. Tentukan keliling dan luas lingkaran tersebut!",
-    parts: [
-      { label: "a.", math: "d = 14 \\text{ cm}" },
-      { label: "b.", math: "d = 10 \\text{ cm}" },
-    ],
-  }),
-
-  Q(6, "Luas dari Keliling Lingkaran", {
-    type: "essay", diff: "Sulit",
-    content: "Diketahui keliling sebuah lingkaran 44 cm, tentukanlah luas lingkaran tersebut!",
-  }),
 ];
 
 const UnsurUnsurLingkaranPage = () => {
@@ -117,7 +83,7 @@ const UnsurUnsurLingkaranPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 6 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 2 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
