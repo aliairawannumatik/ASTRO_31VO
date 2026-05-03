@@ -946,17 +946,47 @@ Pada segitiga siku-siku sama kaki dengan sudut $45°$, $45°$, dan $90°$:
     },
     {
       heading: "F. Tripel Pythagoras",
-      content: `Tripel Pythagoras adalah 3 bilangan asli yang memenuhi teorema Pythagoras. Artinya, jika terdapat 3 bilangan asli maka kuadrat bilangan terbesar sama dengan jumlah kuadrat dua bilangan lainnya.
-
-Berikut tabel tripel Pythagoras yang sering digunakan:
-
-| Tipe | Tripel dasar | Kelipatan |
-| --- | --- | --- |
-| 1 | 3, 4, 5 | 6, 8, 10; 9, 12, 15; ... |
-| 2 | 5, 12, 13 | 10, 24, 26; 15, 36, 39; ... |
-| 3 | 7, 24, 25 | 14, 48, 50; 21, 72, 75; ... |
-| 4 | 8, 15, 17 | 16, 30, 34; 24, 45, 51; ... |
-| 5 | 9, 40, 41 | 18, 80, 82; 27, 120, 123; ... |`
+      content: <div className="space-y-4">
+        <p>Tripel Pythagoras adalah 3 bilangan asli yang memenuhi teorema Pythagoras. Artinya, jika terdapat 3 bilangan asli maka kuadrat bilangan terbesar sama dengan jumlah kuadrat dua bilangan lainnya.</p>
+        <div className="overflow-hidden rounded-xl border border-cyan-400/30">
+          <table className="w-full border-collapse text-sm">
+            <thead className="bg-cyan-400/10 text-cyan-200">
+              <tr>
+                <th className="border border-cyan-400/20 px-3 py-2 text-left">Tipe</th>
+                <th className="border border-cyan-400/20 px-3 py-2 text-left">Tripel dasar</th>
+                <th className="border border-cyan-400/20 px-3 py-2 text-left">Kelipatan</th>
+              </tr>
+            </thead>
+            <tbody className="text-slate-100">
+              <tr className="odd:bg-white/5">
+                <td className="border border-cyan-400/20 px-3 py-2 font-semibold text-cyan-300">1</td>
+                <td className="border border-cyan-400/20 px-3 py-2">3, 4, 5</td>
+                <td className="border border-cyan-400/20 px-3 py-2">6, 8, 10; 9, 12, 15; ...</td>
+              </tr>
+              <tr className="odd:bg-white/5">
+                <td className="border border-cyan-400/20 px-3 py-2 font-semibold text-cyan-300">2</td>
+                <td className="border border-cyan-400/20 px-3 py-2">5, 12, 13</td>
+                <td className="border border-cyan-400/20 px-3 py-2">10, 24, 26; 15, 36, 39; ...</td>
+              </tr>
+              <tr className="odd:bg-white/5">
+                <td className="border border-cyan-400/20 px-3 py-2 font-semibold text-cyan-300">3</td>
+                <td className="border border-cyan-400/20 px-3 py-2">7, 24, 25</td>
+                <td className="border border-cyan-400/20 px-3 py-2">14, 48, 50; 21, 72, 75; ...</td>
+              </tr>
+              <tr className="odd:bg-white/5">
+                <td className="border border-cyan-400/20 px-3 py-2 font-semibold text-cyan-300">4</td>
+                <td className="border border-cyan-400/20 px-3 py-2">8, 15, 17</td>
+                <td className="border border-cyan-400/20 px-3 py-2">16, 30, 34; 24, 45, 51; ...</td>
+              </tr>
+              <tr className="odd:bg-white/5">
+                <td className="border border-cyan-400/20 px-3 py-2 font-semibold text-cyan-300">5</td>
+                <td className="border border-cyan-400/20 px-3 py-2">9, 40, 41</td>
+                <td className="border border-cyan-400/20 px-3 py-2">18, 80, 82; 27, 120, 123; ...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     }
   ]
 };
