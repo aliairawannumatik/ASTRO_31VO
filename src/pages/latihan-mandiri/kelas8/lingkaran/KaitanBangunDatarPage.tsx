@@ -68,7 +68,7 @@ const KaitanBangunDatarPage = () => {
                         <img
                           src={p.img}
                           alt={p.alt}
-                          className="max-w-xs w-full object-contain"
+                          className="max-w-xs [@media(orientation:landscape)]:max-w-[180px] w-full object-contain"
                         />
                       </div>
                     </div>
