@@ -1330,6 +1330,16 @@ const OlimpiadeTeoremaPage = () => {
                     ))}
                   </div>
                 )}
+                {soal.no === 28 && (
+                  <div className="flex justify-center my-3">
+                    <img
+                      src={helikopterSoalOlim28Img}
+                      alt="Helikopter dengan sudut 60, 45, dan 30 derajat soal olimpiade nomor 28"
+                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                      data-testid="img-soal-pyth-olim-28"
+                    />
+                  </div>
+                )}
                 {soal.no === 23 && (
                   <div className="flex justify-center my-3">
                     <img
