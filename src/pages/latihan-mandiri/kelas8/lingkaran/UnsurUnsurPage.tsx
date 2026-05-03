@@ -84,6 +84,16 @@ const questions: Q[] = [
       { label: "i.", text: "Semua tali busur dalam satu lingkaran memiliki panjang yang sama." },
     ],
   }),
+  Q(5, "Keliling dan Luas Lingkaran", {
+    type: "mixed", diff: "Sedang",
+    content: "Diketahui sebuah lingkaran dengan diameter berikut. Tentukan keliling dan luas lingkaran tersebut! (gunakan π = 22/7)",
+    parts: [
+      { label: "a.", math: "d = 14 \\text{ cm}" },
+      { label: "b.", math: "d = 21 \\text{ cm}" },
+      { label: "c.", math: "d = 28 \\text{ cm}" },
+      { label: "d.", math: "d = 35 \\text{ cm}" },
+    ],
+  }),
 ];
 
 const UnsurUnsurLingkaranPage = () => {
@@ -104,7 +114,7 @@ const UnsurUnsurLingkaranPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 4 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 5 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
