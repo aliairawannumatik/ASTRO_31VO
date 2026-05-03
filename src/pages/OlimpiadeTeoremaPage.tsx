@@ -20,7 +20,6 @@ import bangunABCDSoalOlim4Img from "@assets/image_1777205553203.png";
 import bangunABCDSoalOlim5Img from "@assets/image_1777205569648.png";
 import segitigaABCSoalOlim6Img from "@assets/image_1777205589664.png";
 import trapesiumABCDSoalOlim10Img from "@assets/image_1777205607261.png";
-import helikopterSoalOlim28Img from "@assets/Gemini_Generated_Image_d3k5v7d3k5v7d3k5_1777787386090.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1328,16 +1327,6 @@ const OlimpiadeTeoremaPage = () => {
                         {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
                       </span>
                     ))}
-                  </div>
-                )}
-                {soal.no === 28 && (
-                  <div className="flex justify-center my-3">
-                    <img
-                      src={helikopterSoalOlim28Img}
-                      alt="Helikopter dengan sudut 60, 45, dan 30 derajat soal olimpiade nomor 28"
-                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
-                      data-testid="img-soal-pyth-olim-28"
-                    />
                   </div>
                 )}
                 {soal.no === 23 && (
