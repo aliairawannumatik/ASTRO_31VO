@@ -11,7 +11,7 @@ import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPytha
 import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
 import bangunABCDESoal7Img from "@assets/image_1777785078317.png";
 import layangKapalSoal18Img from "@assets/image_1777205277003.png";
-import bangunABEFCDSoal20Img from "@assets/image_1777205316310.png";
+import bangunABCDSoalOlim20Img from "@assets/image_1777785299399.png";
 import pentagonSoal21Img from "@assets/image_1777205396307.png";
 import segitigaABCD30_45_Soal29Img from "@assets/image_1777205490135.png";
 import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777205526814.png";
@@ -1201,8 +1201,8 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={bangunABEFCDSoal20Img}
-                        alt="Bangun ABEFCD soal nomor 20"
+                        src={bangunABCDSoalOlim20Img}
+                        alt="Bangun gabungan soal olimpiade nomor 20"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-20"
                       />
