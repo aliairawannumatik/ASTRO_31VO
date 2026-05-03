@@ -90,14 +90,6 @@ const RPPPage = () => {
         </div>
 
         <div className="mb-8">
-          <h2 className="font-display text-lg font-bold text-accent mb-4 flex items-center justify-center gap-2 text-center">
-            <FileText className="w-5 h-5" />
-            Daftar Materi RPP
-          </h2>
-          <p className="text-white/60 text-sm text-center mb-5 font-body">
-            Pilih materi untuk melihat sub-materi dan RPP lengkapnya
-          </p>
-
           <div className="flex flex-col gap-3 animate-slide-up">
             {materiRPP.map((materi, i) => (
               <button
