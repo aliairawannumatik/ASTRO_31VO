@@ -64,7 +64,7 @@ const KaitanBangunDatarPage = () => {
                   {parts.map((p) => (
                     <div key={p.label} className="bg-white/5 rounded-xl p-3">
                       <span className="text-violet-300 text-xs font-bold mb-3 block">{p.label}</span>
-                      <div className="flex justify-center bg-white/95 rounded-lg p-3">
+                      <div className="flex justify-center bg-white/95 rounded-lg p-3 [@media(orientation:landscape)]:w-fit [@media(orientation:landscape)]:mx-auto">
                         <img
                           src={p.img}
                           alt={p.alt}
