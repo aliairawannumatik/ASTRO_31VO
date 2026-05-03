@@ -114,7 +114,7 @@ const Segitiga306090SVG = () => {
         <path d={`M ${Cx} ${Cy + 22} A 22 22 0 0 1 ${Cx - 20} ${Cy + 9}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
         {/* Label sudut */}
         <text x={Ax + 36} y={Ay - 4} fill="#fbbf24" fontSize="11" fontWeight="bold">30°</text>
-        <text x={Cx - 26} y={Cy + 20} fill="#fbbf24" fontSize="11" fontWeight="bold">60°</text>
+        <text x={Cx - 26} y={Cy + 32} fill="#fbbf24" fontSize="11" fontWeight="bold">60°</text>
         {/* Label sisi: √3 (alas), 1 (vertikal), 2 (miring) */}
         <text x={(Ax + Bx) / 2} y={By + 18} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">√3</text>
         <text x={Bx + 8} y={(By + Cy) / 2 + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold">1</text>
