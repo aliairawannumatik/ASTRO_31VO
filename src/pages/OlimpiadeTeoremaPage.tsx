@@ -1,4 +1,3 @@
-import latihanOlimpiadeSoalImg from "@assets/image_1777788009180.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
@@ -1328,16 +1327,6 @@ const OlimpiadeTeoremaPage = () => {
                         {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
                       </span>
                     ))}
-                  </div>
-                )}
-                {soal.no === 1 && (
-                  <div className="flex justify-center my-3">
-                    <img
-                      src={latihanOlimpiadeSoalImg}
-                      alt="Gambar latihan olimpiade nomor 1"
-                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
-                      data-testid="img-soal-pyth-olim-1"
-                    />
                   </div>
                 )}
                 {soal.no === 23 && (
