@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import gambarUnsurLingkaran from "@assets/image_1777796182226.png";
 
 const MathText = ({ text, className = "" }: { text: string; className?: string }) => {
   const elements = useMemo(() => {
@@ -209,6 +210,13 @@ const TableVisual = ({ headers, rows }: { headers: string[]; rows: string[][] })
 );
 
 const visualMap: Record<string, React.ReactNode> = {
+  "gambar-unsur-lingkaran": (
+    <img
+      src={gambarUnsurLingkaran}
+      alt="Unsur-unsur lingkaran"
+      className="w-full max-w-sm mx-auto my-3 rounded-lg border border-slate-600 bg-white p-1"
+    />
+  ),
   "unsur": <UnsurLingkaranSVG />,
   "keliling-7": <KelompokLingkaranSVG r={7} warna="6,182,212" />,
   "keliling-14": <KelompokLingkaranSVG r={14} warna="168,85,247" />,
@@ -228,7 +236,201 @@ const visualMap: Record<string, React.ReactNode> = {
 
 const soalLingkaran: Question[] = [
   /* ═══════════════════════════════════
-     MUDAH  (Q1 – Q35)
+     UNSUR-UNSUR LINGKARAN  (Q1 – Q11)
+     Perhatikan gambar berikut!
+  ═══════════════════════════════════ */
+  {
+    id: 1, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Untuk soal nomor 1–11, perhatikan gambar lingkaran berikut!\n\nTentukanlah garis mana saja yang merupakan jari-jari!",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. OA, OB", "B. OA, OB, OC, OD", "C. AB, OC, OD", "D. OC, OD, AB"],
+    correctAnswer: "B. OA, OB, OC, OD",
+    explanation: {
+      concept: "Jari-jari (radius) adalah ruas garis yang menghubungkan titik pusat lingkaran ke titik pada lingkaran.",
+      steps: [
+        "Titik pusat lingkaran adalah O",
+        "OA = garis dari O ke titik A (pada lingkaran) → jari-jari ✓",
+        "OB = garis dari O ke titik B (pada lingkaran) → jari-jari ✓",
+        "OC = garis dari O ke titik C (pada lingkaran) → jari-jari ✓",
+        "OD = garis dari O ke titik D (pada lingkaran) → jari-jari ✓",
+        "Jadi jari-jari: OA, OB, OC, OD"
+      ],
+      formula: "r = \\text{jarak dari titik pusat O ke tepi lingkaran}"
+    }
+  },
+  {
+    id: 2, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nTentukanlah garis mana saja yang merupakan diameter!",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. OA", "B. OB", "C. AB", "D. CB"],
+    correctAnswer: "C. AB",
+    explanation: {
+      concept: "Diameter adalah tali busur yang melalui titik pusat lingkaran. Diameter = 2 × jari-jari.",
+      steps: [
+        "Diameter harus menghubungkan dua titik di lingkaran dan melewati pusat O",
+        "Garis AB melewati O dan menghubungkan titik A dan B yang keduanya di lingkaran",
+        "AB adalah diameter lingkaran",
+        "OA dan OB masing-masing adalah jari-jari (bukan diameter)"
+      ],
+      formula: "d = 2r"
+    }
+  },
+  {
+    id: 3, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nTentukanlah garis mana saja yang merupakan tali busur!",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. OA, OB, OC", "B. CB, CD, AD", "C. OC, OD, AB", "D. AB, OC, OD"],
+    correctAnswer: "B. CB, CD, AD",
+    explanation: {
+      concept: "Tali busur adalah ruas garis yang menghubungkan dua titik pada lingkaran tetapi TIDAK melalui titik pusat.",
+      steps: [
+        "Tali busur menghubungkan dua titik di lingkaran tanpa melalui pusat O",
+        "CB = menghubungkan C dan B (keduanya di lingkaran), tidak melalui O → tali busur ✓",
+        "CD = menghubungkan C dan D (keduanya di lingkaran), tidak melalui O → tali busur ✓",
+        "AD = menghubungkan A dan D (keduanya di lingkaran), tidak melalui O → tali busur ✓",
+        "AB melewati O sehingga bukan tali busur melainkan diameter"
+      ],
+      formula: "\\text{Tali busur} \\neq \\text{diameter (tidak melalui pusat O)}"
+    }
+  },
+  {
+    id: 4, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nGaris manakah yang merupakan busur terpanjang?",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. Busur CB (busur kecil CB)", "B. Busur BD", "C. Busur AB (setengah lingkaran melalui C)", "D. Busur CD"],
+    correctAnswer: "C. Busur AB (setengah lingkaran melalui C)",
+    explanation: {
+      concept: "Busur adalah bagian dari keliling lingkaran. Busur terpanjang adalah busur yang memiliki panjang terbesar.",
+      steps: [
+        "Busur CB (busur kecil antara C dan B) relatif pendek",
+        "Busur BD (seperempat lingkaran bagian kanan bawah) lebih panjang dari busur CB",
+        "Busur AB melalui C adalah setengah lingkaran (180°), merupakan busur terpanjang di antara yang ada",
+        "Diameter AB membagi lingkaran menjadi dua busur setengah lingkaran yang sama"
+      ],
+      formula: "\\text{Panjang busur} = \\dfrac{\\alpha}{360°} \\times 2\\pi r"
+    }
+  },
+  {
+    id: 5, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nDaerah I (daerah berwarna biru kehijauan) merupakan ...",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. Juring", "B. Tembereng", "C. Diameter", "D. Apotema"],
+    correctAnswer: "B. Tembereng",
+    explanation: {
+      concept: "Tembereng adalah daerah yang dibatasi oleh tali busur dan busur yang bersesuaian.",
+      steps: [
+        "Daerah I dibatasi oleh tali busur CB dan busur CB di atasnya",
+        "Daerah yang dibatasi tali busur dan busur = tembereng",
+        "Juring dibatasi oleh dua jari-jari dan busur (seperti daerah II)",
+        "Daerah I bukan juring karena tidak dibatasi oleh jari-jari"
+      ],
+      formula: "L_{\\text{tembereng}} = L_{\\text{juring}} - L_{\\text{segitiga}}"
+    }
+  },
+  {
+    id: 6, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nDaerah II (daerah berwarna ungu) merupakan ...",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. Tembereng", "B. Busur", "C. Juring", "D. Diameter"],
+    correctAnswer: "C. Juring",
+    explanation: {
+      concept: "Juring (sektor) adalah daerah yang dibatasi oleh dua jari-jari dan busur yang diapit keduanya.",
+      steps: [
+        "Daerah II dibatasi oleh jari-jari OB, jari-jari OD, dan busur BD",
+        "Dua jari-jari + busur = juring (sektor lingkaran)",
+        "Daerah II adalah juring BOD",
+        "Berbeda dengan tembereng yang dibatasi tali busur (bukan jari-jari)"
+      ],
+      formula: "L_{\\text{juring}} = \\dfrac{\\alpha}{360°} \\times \\pi r^2"
+    }
+  },
+  {
+    id: 7, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nManakah yang merupakan juring terbesar?",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. Juring BOD (daerah ungu)", "B. Juring COB", "C. Juring AOC (daerah kuning/krem besar)", "D. Juring COD"],
+    correctAnswer: "C. Juring AOC (daerah kuning/krem besar)",
+    explanation: {
+      concept: "Juring terbesar adalah juring dengan sudut pusat terbesar (sudut yang paling lebar).",
+      steps: [
+        "Juring AOC adalah daerah besar berwarna kuning/krem",
+        "Sudut ∠AOC lebih besar dari sudut-sudut juring lainnya dalam gambar",
+        "Juring BOD (daerah ungu) lebih kecil dari juring AOC",
+        "Juring terbesar = Juring AOC"
+      ],
+      formula: "L_{\\text{juring}} \\propto \\alpha \\text{ (sudut pusat)}"
+    }
+  },
+  {
+    id: 8, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nGaris OE adalah ...",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. Jari-jari", "B. Diameter", "C. Tali busur", "D. Apotema"],
+    correctAnswer: "D. Apotema",
+    explanation: {
+      concept: "Apotema adalah garis dari titik pusat lingkaran yang tegak lurus ke suatu tali busur.",
+      steps: [
+        "Garis OE dimulai dari pusat O dan bertemu tali busur AD di titik E",
+        "Dari gambar, ada tanda sudut siku-siku di titik E, artinya OE ⊥ AD",
+        "Garis dari pusat yang tegak lurus ke tali busur disebut apotema",
+        "Apotema juga membagi tali busur menjadi dua bagian sama panjang"
+      ],
+      formula: "OE \\perp AD \\Rightarrow OE \\text{ adalah apotema}"
+    }
+  },
+  {
+    id: 9, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nTali busur terpanjang ditunjukkan oleh ...",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. CB", "B. CD", "C. AD", "D. AB"],
+    correctAnswer: "D. AB",
+    explanation: {
+      concept: "Tali busur terpanjang dalam suatu lingkaran adalah diameter.",
+      steps: [
+        "Tali busur adalah garis yang menghubungkan dua titik pada lingkaran",
+        "AB menghubungkan A dan B melalui pusat O → AB adalah diameter",
+        "Diameter adalah tali busur paling panjang dalam lingkaran mana pun",
+        "CB, CD, AD adalah tali busur yang lebih pendek dari diameter AB"
+      ],
+      formula: "d = 2r \\text{ (diameter = tali busur terpanjang)}"
+    }
+  },
+  {
+    id: 10, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nSebutkan salah satu sudut pusat yang terbentuk pada gambar!",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. ∠CAD", "B. ∠CBD", "C. ∠BOD", "D. ∠ADB"],
+    correctAnswer: "C. ∠BOD",
+    explanation: {
+      concept: "Sudut pusat adalah sudut yang titik sudutnya berada di pusat lingkaran (titik O).",
+      steps: [
+        "Sudut pusat = sudut yang titik puncaknya di pusat O",
+        "∠BOD: titik puncaknya O, kaki-kakinya adalah jari-jari OB dan OD → sudut pusat ✓",
+        "∠COB, ∠AOC, ∠COD juga merupakan sudut pusat lainnya",
+        "∠CAD, ∠CBD, ∠ADB titik puncaknya di tepi lingkaran → sudut keliling (bukan sudut pusat)"
+      ],
+      formula: "\\text{Sudut pusat: titik puncak di O}"
+    }
+  },
+  {
+    id: 11, type: "PG", difficulty: "Mudah", category: "Unsur Lingkaran",
+    question: "Perhatikan gambar lingkaran dengan titik pusat O!\n\nSebutkan salah satu sudut keliling yang terbentuk pada gambar!",
+    svgKey: "gambar-unsur-lingkaran",
+    options: ["A. ∠BOD", "B. ∠AOC", "C. ∠COB", "D. ∠CAD"],
+    correctAnswer: "D. ∠CAD",
+    explanation: {
+      concept: "Sudut keliling adalah sudut yang titik puncaknya berada pada lingkaran (di tepi lingkaran), dan kedua kaki sudutnya adalah tali busur.",
+      steps: [
+        "Sudut keliling = sudut yang titik puncaknya di tepi lingkaran",
+        "∠CAD: titik puncaknya A (berada di lingkaran), kaki-kakinya AC dan AD → sudut keliling ✓",
+        "∠CBD: titik puncaknya B (berada di lingkaran) → juga sudut keliling",
+        "∠BOD: titik puncaknya O (pusat) → sudut pusat, bukan sudut keliling"
+      ],
+      formula: "\\text{Sudut keliling: titik puncak di tepi lingkaran}"
+    }
+  },
+  /* ═══════════════════════════════════
+     MUDAH  (Q15, Q19, ...)
   ═══════════════════════════════════ */
   {
     id: 15, type: "PG", difficulty: "Mudah", category: "Kontekstual",
