@@ -47,29 +47,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(2, "Menghitung Jari-Jari dari Diameter", {
-    type: "mixed", diff: "Mudah",
-    content: "Diketahui sebuah lingkaran dengan diameter-diameter berikut. Tentukan jari-jarinya!",
-    parts: [
-      { label: "a.", math: "d = 14 \\text{ cm}" },
-      { label: "b.", math: "d = 21 \\text{ cm}" },
-      { label: "c.", math: "d = 50 \\text{ cm}" },
-      { label: "d.", math: "d = 3{,}5 \\text{ cm}" },
-    ],
-  }),
-
-  Q(3, "Menghitung Diameter dari Jari-Jari", {
-    type: "mixed", diff: "Mudah",
-    content: "Diketahui sebuah lingkaran dengan jari-jari berikut. Tentukan diameternya!",
-    parts: [
-      { label: "a.", math: "r = 7 \\text{ cm}" },
-      { label: "b.", math: "r = 15 \\text{ cm}" },
-      { label: "c.", math: "r = 28 \\text{ cm}" },
-      { label: "d.", math: "r = 4{,}5 \\text{ cm}" },
-    ],
-  }),
-
-  Q(4, "Unsur Lingkaran — Benar atau Salah", {
+  Q(2, "Unsur Lingkaran — Benar atau Salah", {
     type: "mixed", diff: "Sedang",
     content: "Tentukan pernyataan berikut BENAR (B) atau SALAH (S)!",
     parts: [
@@ -82,6 +60,28 @@ const questions: Q[] = [
       { label: "g.", text: "Juring dibatasi oleh dua jari-jari dan satu busur." },
       { label: "h.", text: "Tembereng dibatasi oleh dua jari-jari dan satu busur." },
       { label: "i.", text: "Semua tali busur dalam satu lingkaran memiliki panjang yang sama." },
+    ],
+  }),
+
+  Q(3, "Menghitung Jari-Jari dari Diameter", {
+    type: "mixed", diff: "Mudah",
+    content: "Diketahui sebuah lingkaran dengan diameter-diameter berikut. Tentukan jari-jarinya!",
+    parts: [
+      { label: "a.", math: "d = 14 \\text{ cm}" },
+      { label: "b.", math: "d = 21 \\text{ cm}" },
+      { label: "c.", math: "d = 50 \\text{ cm}" },
+      { label: "d.", math: "d = 3{,}5 \\text{ cm}" },
+    ],
+  }),
+
+  Q(4, "Menghitung Diameter dari Jari-Jari", {
+    type: "mixed", diff: "Mudah",
+    content: "Diketahui sebuah lingkaran dengan jari-jari berikut. Tentukan diameternya!",
+    parts: [
+      { label: "a.", math: "r = 7 \\text{ cm}" },
+      { label: "b.", math: "r = 15 \\text{ cm}" },
+      { label: "c.", math: "r = 28 \\text{ cm}" },
+      { label: "d.", math: "r = 4{,}5 \\text{ cm}" },
     ],
   }),
   Q(5, "Keliling dan Luas Lingkaran", {
