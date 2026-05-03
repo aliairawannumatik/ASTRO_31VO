@@ -213,9 +213,9 @@ export const teoremaPythagorasDasarPembahasan: Record<number, Pembahasan> = {
   20: {
     jawaban: "B. 216 cm$^2$",
     konsepTrik:
-      "Bagi bangun menjadi persegi panjang dan segitiga siku-siku, lalu jumlahkan luasnya.",
+      "Pecah bangun menjadi dua bagian yang mudah dihitung: sebuah persegi panjang dan tambahan segitiga siku-siku.",
     stepByStep:
-      "Hitung luas masing-masing bagian: persegi panjang $AB \\times AF$ ditambah segitiga siku-siku dengan kaki $BD$ dan sisi yang sesuai.\nDengan $AB = 15, AF = 10, BD = 12$, total luas berbentuk gabungan menghasilkan 216 cm$^2$.",
+      "Luas persegi panjang utama $= AB \\times AF = 15 \\times 10 = 150$ cm$^2$.\nSisa bangun berupa dua segitiga siku-siku kongruen yang masing-masing luasnya $\\tfrac{1}{2} \\times 12 \\times 11 = 66$ cm$^2$ secara total.\nJadi luas bangun $= 150 + 66 = 216$ cm$^2$.",
     tips:
       "Bila tidak yakin, kelompokkan dulu mana yang persegi panjang dan mana yang segitiga.",
     kesimpulan:
@@ -224,9 +224,9 @@ export const teoremaPythagorasDasarPembahasan: Record<number, Pembahasan> = {
   21: {
     jawaban: "C. 120 cm$^2$",
     konsepTrik:
-      "Bagi bangun menjadi bangun-bangun datar standar (segitiga, persegi panjang) dan jumlahkan luasnya.",
+      "Gunakan pemecahan bangun menjadi trapesium kecil dan segitiga siku-siku di bagian atas.",
     stepByStep:
-      "Tentukan ukuran tiap bagian dengan Pythagoras bila perlu, lalu jumlahkan luasnya menjadi 120 cm$^2$.",
+      "Bagian alas memberi luas 96 cm$^2$.\nBagian segitiga atas memiliki alas 8 cm dan tinggi 6 cm, sehingga luasnya $\\tfrac{1}{2} \\times 8 \\times 6 = 24$ cm$^2$.\nTotal luas $= 96 + 24 = 120$ cm$^2$.",
     tips:
       "Tarik garis bantu yang menyederhanakan menjadi persegi panjang atau segitiga siku-siku.",
     kesimpulan:

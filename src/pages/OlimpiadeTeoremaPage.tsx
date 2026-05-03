@@ -1125,7 +1125,7 @@ const OlimpiadeTeoremaPage = () => {
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
                       {idx === 1 && <PythagorasSegitigaSVG />}
                       {idx === 2 && <JarakDuaTitikSVG />}
-                      {section.content.split('\n').map((line, i) => {
+                      {typeof section.content === "string" ? section.content.split('\n').map((line, i) => {
                         const trimmed = line.trim();
                         if (/^\d+\. [A-Z]/.test(trimmed)) {
                           return (
@@ -1158,7 +1158,7 @@ const OlimpiadeTeoremaPage = () => {
                         }
                         if (trimmed === '') return <div key={i} className="h-2" />;
                         return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
-                      })}
+                      }) : section.content}
                     </div>
                   </div>
                 )}
