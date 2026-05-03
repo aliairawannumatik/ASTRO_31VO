@@ -22,10 +22,10 @@ const soalList: Soal[] = [
     img: "/soal-busur-5.png",
     imgAlt: "Lingkaran dengan juring sudut 60°, titik O dan P",
     choices: [
-      { label: "a.", text: "11 cm" },
-      { label: "b.", text: "22 cm" },
-      { label: "c.", text: "33 cm" },
-      { label: "d.", text: "44 cm" },
+      { label: "A.", text: "11 cm" },
+      { label: "B.", text: "22 cm" },
+      { label: "C.", text: "33 cm" },
+      { label: "D.", text: "44 cm" },
     ],
   },
   {
@@ -34,10 +34,10 @@ const soalList: Soal[] = [
     img: "/soal-busur-2.png",
     imgAlt: "Lingkaran dengan juring sudut 40° yang diarsir",
     choices: [
-      { label: "a.", text: "77 cm²" },
-      { label: "b.", text: "154 cm²" },
-      { label: "c.", text: "231 cm²" },
-      { label: "d.", text: "308 cm²" },
+      { label: "A.", text: "77 cm²" },
+      { label: "B.", text: "154 cm²" },
+      { label: "C.", text: "231 cm²" },
+      { label: "D.", text: "308 cm²" },
     ],
   },
   {
@@ -45,10 +45,10 @@ const soalList: Soal[] = [
     question: "Luas juring dengan sudut pusat 120° dan panjang jari-jari 7 cm adalah...",
     note: "(π = 22/7)",
     choices: [
-      { label: "a.", text: "77 cm²" },
-      { label: "b.", text: "51,33 cm²" },
-      { label: "c.", text: "38,50 cm²" },
-      { label: "d.", text: "14,67 cm²" },
+      { label: "A.", text: "77 cm²" },
+      { label: "B.", text: "51,33 cm²" },
+      { label: "C.", text: "38,50 cm²" },
+      { label: "D.", text: "14,67 cm²" },
     ],
   },
   {
@@ -57,10 +57,10 @@ const soalList: Soal[] = [
     img: "/soal-busur-1.png",
     imgAlt: "Lingkaran dengan juring ORS dan OPQ, sudut POQ = 135°",
     choices: [
-      { label: "a.", text: "40 cm²" },
-      { label: "b.", text: "75 cm²" },
-      { label: "c.", text: "90 cm²" },
-      { label: "d.", text: "105 cm²" },
+      { label: "A.", text: "40 cm²" },
+      { label: "B.", text: "75 cm²" },
+      { label: "C.", text: "90 cm²" },
+      { label: "D.", text: "105 cm²" },
     ],
   },
   {
@@ -69,10 +69,10 @@ const soalList: Soal[] = [
     img: "/soal-busur-3.png",
     imgAlt: "Lingkaran dengan juring OPQ sudut 50° dan juring OQR sudut 75°",
     choices: [
-      { label: "a.", text: "30 cm" },
-      { label: "b.", text: "40 cm" },
-      { label: "c.", text: "45 cm" },
-      { label: "d.", text: "80 cm" },
+      { label: "A.", text: "30 cm" },
+      { label: "B.", text: "40 cm" },
+      { label: "C.", text: "45 cm" },
+      { label: "D.", text: "80 cm" },
     ],
   },
   {
@@ -81,10 +81,10 @@ const soalList: Soal[] = [
     img: "/soal-busur-6.png",
     imgAlt: "Lingkaran dengan titik A, B, C, D; sudut AOB=35°, COD=140°, busur AB=14cm",
     choices: [
-      { label: "a.", text: "28 cm" },
-      { label: "b.", text: "42 cm" },
-      { label: "c.", text: "56 cm" },
-      { label: "d.", text: "70 cm" },
+      { label: "A.", text: "28 cm" },
+      { label: "B.", text: "42 cm" },
+      { label: "C.", text: "56 cm" },
+      { label: "D.", text: "70 cm" },
     ],
   },
 ];
