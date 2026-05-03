@@ -33,7 +33,7 @@ const questions: Q[] = [
     content: "Luas lingkaran dihitung dengan rumus L = πr².",
     parts: [
       { label: "a.", math: "\\text{Hitung luas lingkaran dengan } r = 7 \\text{ cm.}" },
-      { label: "b.", math: "\\text{Hitung luas lingkaran dengan } r = 14 \\text{ cm.}" },
+      { label: "b.", math: "\\text{Hitung luas lingkaran dengan } r = 3{,}5 \\text{ cm.}" },
       { label: "c.", math: "\\text{Hitung luas lingkaran dengan } d = 20 \\text{ cm.}" },
     ],
   }),
