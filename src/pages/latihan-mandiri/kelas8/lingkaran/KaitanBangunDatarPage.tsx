@@ -7,17 +7,17 @@ import { Circle } from "lucide-react";
 type SubPart = { label: string; img: string; alt: string };
 
 const parts: SubPart[] = [
-  { label: "a.", img: "/soal-kaitan-a.png", alt: "Lingkaran dengan jari-jari 10 cm dan tembereng yang diarsir" },
-  { label: "b.", img: "/soal-kaitan-b.png", alt: "Dua setengah lingkaran, diameter 26 cm dan 14 cm" },
-  { label: "c.", img: "/soal-kaitan-c.png", alt: "Persegi 14×14 cm dengan empat daun yang diarsir" },
-  { label: "d.", img: "/soal-kaitan-d.png", alt: "Persegi 7×7 cm dengan irisan dua lingkaran (daun) yang diarsir" },
-  { label: "e.", img: "/soal-kaitan-e.png", alt: "Persegi panjang 28×14 cm dengan setengah lingkaran besar dan dua setengah lingkaran kecil" },
+  { label: "a.", img: "/soal-kaitan-k.png", alt: "Persegi panjang 28×14 cm dengan dua setengah lingkaran terpotong di sisi kiri dan kanan" },
+  { label: "b.", img: "/soal-kaitan-j.png", alt: "Seperempat lingkaran, jari-jari 10 cm" },
+  { label: "c.", img: "/soal-kaitan-i.png", alt: "Persegi 14×14 cm dengan dua seperempat lingkaran di sudut" },
+  { label: "d.", img: "/soal-kaitan-h.png", alt: "Persegi panjang 21×21 cm dengan setengah lingkaran di ujung kanan" },
+  { label: "e.", img: "/soal-kaitan-g.png", alt: "Setengah lingkaran dan lingkaran penuh, jari-jari 10 cm" },
   { label: "f.", img: "/soal-kaitan-f.png", alt: "Persegi 14×14 cm dengan bintang empat sudut yang diarsir" },
-  { label: "g.", img: "/soal-kaitan-g.png", alt: "Setengah lingkaran dan lingkaran penuh, jari-jari 10 cm" },
-  { label: "h.", img: "/soal-kaitan-h.png", alt: "Persegi panjang 21×21 cm dengan setengah lingkaran di ujung kanan" },
-  { label: "i.", img: "/soal-kaitan-i.png", alt: "Persegi 14×14 cm dengan dua seperempat lingkaran di sudut" },
-  { label: "j.", img: "/soal-kaitan-j.png", alt: "Seperempat lingkaran, jari-jari 10 cm" },
-  { label: "k.", img: "/soal-kaitan-k.png", alt: "Persegi panjang 28×14 cm dengan dua setengah lingkaran terpotong di sisi kiri dan kanan" },
+  { label: "g.", img: "/soal-kaitan-e.png", alt: "Persegi panjang 28×14 cm dengan setengah lingkaran besar dan dua setengah lingkaran kecil" },
+  { label: "h.", img: "/soal-kaitan-d.png", alt: "Persegi 7×7 cm dengan irisan dua lingkaran (daun) yang diarsir" },
+  { label: "i.", img: "/soal-kaitan-c.png", alt: "Persegi 14×14 cm dengan empat daun yang diarsir" },
+  { label: "j.", img: "/soal-kaitan-b.png", alt: "Dua setengah lingkaran, diameter 26 cm dan 14 cm" },
+  { label: "k.", img: "/soal-kaitan-a.png", alt: "Lingkaran dengan jari-jari 10 cm dan tembereng yang diarsir" },
 ];
 
 const KaitanBangunDatarPage = () => {
