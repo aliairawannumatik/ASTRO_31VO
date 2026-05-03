@@ -52,9 +52,9 @@ const questions: Q[] = [
     type: "essay",
     content: "Tentukan jari-jari lingkaran jika diketahui luasnya!",
     parts: [
-      { label: "a.", math: "L = 154 \\text{ cm}^2, \\pi = \\tfrac{22}{7}" },
-      { label: "b.", math: "L = 314 \\text{ cm}^2, \\pi = 3{,}14" },
-      { label: "c.", math: "L = 616 \\text{ cm}^2, \\pi = \\tfrac{22}{7}" },
+      { label: "a.", math: "L = 154 \\text{ cm}^2" },
+      { label: "b.", math: "L = 314 \\text{ cm}^2" },
+      { label: "c.", math: "L = 616 \\text{ cm}^2" },
     ],
   }),
 
