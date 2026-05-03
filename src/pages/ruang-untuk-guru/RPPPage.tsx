@@ -90,23 +90,6 @@ const RPPPage = () => {
         </div>
 
         <div className="mb-8">
-          <h2 className="font-display text-lg font-bold text-accent mb-4 text-center">Komponen Utama RPP</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {komponenRPP.map((item, i) => (
-              <div
-                key={i}
-                className={`bg-gradient-to-br ${item.color} backdrop-blur border ${item.border} rounded-xl p-5 animate-slide-up`}
-                style={{ animationDelay: `${i * 0.08}s` }}
-              >
-                <item.icon className={`w-8 h-8 ${item.text} mb-3`} />
-                <h3 className={`font-display text-sm font-bold ${item.text} mb-2 leading-tight`}>{item.title}</h3>
-                <p className="text-xs text-white/75 font-body leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-8">
           <h2 className="font-display text-lg font-bold text-accent mb-4 flex items-center justify-center gap-2 text-center">
             <FileText className="w-5 h-5" />
             Daftar Materi RPP
