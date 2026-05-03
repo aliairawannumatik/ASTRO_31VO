@@ -89,7 +89,7 @@ const questions: Q[] = [
     content: "Diketahui sebuah lingkaran dengan diameter berikut. Tentukan keliling dan luas lingkaran tersebut! (gunakan π = 22/7)",
     parts: [
       { label: "a.", math: "d = 14 \\text{ cm}" },
-      { label: "b.", math: "d = 21 \\text{ cm}" },
+      { label: "b.", math: "d = 10 \\text{ cm}" },
       { label: "c.", math: "d = 28 \\text{ cm}" },
       { label: "d.", math: "d = 35 \\text{ cm}" },
     ],
