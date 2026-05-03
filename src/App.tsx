@@ -148,6 +148,8 @@ import RPPPerkalianBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPerkalian
 import RPPPembagianBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPembagianBilanganBulatPage";
 import RPPOperasiCampuranBilanganBulatPage from "./pages/ruang-untuk-guru/RPPOperasiCampuranBilanganBulatPage";
 import RPPKpkFpbPage from "./pages/ruang-untuk-guru/RPPKpkFpbPage";
+import RPPMateriDynamicPage from "./pages/ruang-untuk-guru/RPPMateriDynamicPage";
+import RPPDetailDynamicPage from "./pages/ruang-untuk-guru/RPPDetailDynamicPage";
 import UlanganHarianPage from "./pages/UlanganHarianPage";
 import PesanKesanPage from "./pages/PesanKesanPage";
 import PetunjukPage from "./pages/PetunjukPage";
@@ -975,6 +977,8 @@ const AppInner = () => {
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pembagian" element={<RPPPembagianBilanganBulatPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/operasi-campuran" element={<RPPOperasiCampuranBilanganBulatPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/kpk-fpb" element={<RPPKpkFpbPage />} />
+      <Route path="/ruang-untuk-guru/rpp/:materiSlug" element={<RPPMateriDynamicPage />} />
+      <Route path="/ruang-untuk-guru/rpp/:materiSlug/:subSlug" element={<RPPDetailDynamicPage />} />
       <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
       <Route path="/pesan-kesan" element={<PesanKesanPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />

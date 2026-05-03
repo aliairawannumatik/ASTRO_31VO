@@ -55,7 +55,7 @@ const materiRPP: { label: string; path: string; available: boolean }[] = [
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/ruang-untuk-guru/rpp/spldv", available: false },
   { label: "PERSAMAAN GARIS LURUS", path: "/ruang-untuk-guru/rpp/persamaan-garis-lurus", available: false },
   { label: "TEOREMA PYTHAGORAS", path: "/ruang-untuk-guru/rpp/teorema-pythagoras", available: false },
-  { label: "LINGKARAN", path: "/ruang-untuk-guru/rpp/lingkaran", available: false },
+  { label: "LINGKARAN", path: "/ruang-untuk-guru/rpp/lingkaran", available: true },
   { label: "GARIS SINGGUNG LINGKARAN", path: "/ruang-untuk-guru/rpp/garis-singgung-lingkaran", available: false },
   { label: "BANGUN RUANG SISI DATAR", path: "/ruang-untuk-guru/rpp/bangun-ruang-sisi-datar", available: false },
   { label: "BILANGAN BERPANGKAT DAN BENTUK AKAR", path: "/ruang-untuk-guru/rpp/bilangan-berpangkat", available: false },
