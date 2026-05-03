@@ -769,49 +769,6 @@ const SegitigaPQR30SVG = () => {
   );
 };
 
-// SVG: Helikopter mengamati 3 titik untuk Soal No. 28
-const HelikopterOABCSVG = () => {
-  const W = 420, H = 260;
-
-  const O = { x: 40, y: 200 };
-  const A = { x: 100, y: 200 };
-  const B = { x: 180, y: 200 };
-  const C = { x: 260, y: 200 };
-  const H_pt = { x: 40, y: 40 }; // posisi helikopter di atas O
-
-  return (
-    <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md sm:max-w-lg rounded-lg border border-border/40 bg-white/5">
-        <image
-          href={helikopterSoalOlim28Img}
-          x="0"
-          y="0"
-          width="420"
-          height="260"
-          preserveAspectRatio="xMidYMid meet"
-        />
-
-        {/* Label sudut di A, B, C (di sebelah kanan masing-masing titik, sedikit di atas garis tanah) */}
-        <text x={A.x - 8} y={A.y - 8} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">60°</text>
-        <text x={B.x - 12} y={B.y - 8} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">45°</text>
-        <text x={C.x - 8} y={C.y - 8} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">30°</text>
-
-        {/* Label "500 m" di samping garis tinggi */}
-        <text x={H_pt.x - 18} y={(H_pt.y + O.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">500 m</text>
-
-        {/* Titik & label O, A, B, C */}
-        {[O, A, B, C].map((p, i) => (
-          <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
-        ))}
-        <text x={O.x - 6} y={O.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="end">O</text>
-        <text x={A.x} y={A.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-        <text x={B.x} y={B.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-        <text x={C.x + 6} y={C.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold">C</text>
-      </svg>
-    </div>
-  );
-};
-
 // SVG: Segitiga ABC dengan titik D di AB untuk Soal No. 29
 // Siku-siku di B, BC = 5 cm, ∠A = 30°, ∠CDB = 45°
 const SegitigaABCD30_45_SVG = () => {
@@ -1281,7 +1238,6 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 23 && <LayangLayangABCDSVG />}
                 {soal.no === 24 && <JajargenjangABCDSVG />}
                 {soal.no === 27 && <SegitigaPQR30SVG />}
-                {soal.no === 28 && <HelikopterOABCSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
