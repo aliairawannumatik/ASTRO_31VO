@@ -815,7 +815,7 @@ const HelikopterOABCSVG = () => {
         <text x={C.x - 18} y={C.y + 12} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">30°</text>
 
         {/* Label "500 m" di samping garis tinggi */}
-        <text x={H_pt.x + 8} y={(H_pt.y + O.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="start">500 m</text>
+        <text x={H_pt.x - 18} y={(H_pt.y + O.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">500 m</text>
 
         {/* Titik & label O, A, B, C */}
         {[O, A, B, C].map((p, i) => (
