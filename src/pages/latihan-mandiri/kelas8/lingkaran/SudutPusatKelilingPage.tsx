@@ -17,33 +17,7 @@ type Q = {
 const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Q(1, "Pengertian Sudut Pusat dan Sudut Keliling", {
-    type: "mixed",
-    diagram: {
-      size: 240, r: 0.6,
-      pts: [
-        { angle: 150, label: "A", color: "#f472b6" },
-        { angle: 30, label: "B", color: "#f472b6" },
-        { angle: 270, label: "C", color: "#facc15" },
-      ],
-      radii: [{ angle: 150, color: "rgba(244,114,182,0.5)" }, { angle: 30, color: "rgba(244,114,182,0.5)" }],
-      chords: [
-        { angle1: 270, angle2: 150, color: "rgba(250,204,21,0.6)" },
-        { angle1: 270, angle2: 30, color: "rgba(250,204,21,0.6)" },
-      ],
-      angleArcs: [
-        { vertex: [120, 120], from: 30, to: 150, color: "#f472b6", label: "∠AOB", arcR: 28 },
-        { vertex: [120, 192], from: 60, to: 120, color: "#facc15", label: "∠ACB", arcR: 22 },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Apa perbedaan antara sudut pusat dan sudut keliling?" },
-      { label: "b.", text: "Titik sudut dari sudut pusat berada di mana? Titik sudut sudut keliling berada di mana?" },
-      { label: "c.", text: "Keduanya menghadap busur yang sama. Apa hubungan besar keduanya?" },
-    ],
-  }),
-
-  Q(2, "Teorema Sudut Pusat = 2 × Sudut Keliling", {
+  Q(1, "Teorema Sudut Pusat = 2 × Sudut Keliling", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -71,7 +45,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Sudut Keliling Menghadap Diameter = 90°", {
+  Q(2, "Sudut Keliling Menghadap Diameter = 90°", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -91,88 +65,12 @@ const questions: Q[] = [
       extraTexts: [{ x: 120, y: 18, text: "AB = diameter → ∠ACB = ∠ADB = 90°", color: "rgba(255,255,255,0.5)", size: 9, bold: true }],
     },
     parts: [
-      { label: "a.", text: "Mengapa sudut keliling yang menghadap diameter selalu 90°?" },
       { label: "b.", math: "\\text{Jika AB adalah diameter dan } \\angle CAB = 40°, \\text{ tentukan } \\angle ABC." },
       { label: "c.", math: "\\text{Jika AB adalah diameter dan } \\angle DAB = 30°, \\text{ tentukan } \\angle ABD." },
     ],
   }),
 
-  Q(4, "Sudut Keliling yang Menghadap Busur Sama", {
-    type: "mixed",
-    diagram: {
-      size: 240, r: 0.6,
-      pts: [
-        { angle: 160, label: "A", color: "#f472b6" },
-        { angle: 20, label: "B", color: "#f472b6" },
-        { angle: 260, label: "C", color: "#facc15" },
-        { angle: 310, label: "D", color: "#34d399" },
-      ],
-      chords: [
-        { angle1: 260, angle2: 160, color: "rgba(250,204,21,0.6)" },
-        { angle1: 260, angle2: 20, color: "rgba(250,204,21,0.6)" },
-        { angle1: 310, angle2: 160, color: "rgba(52,211,153,0.5)" },
-        { angle1: 310, angle2: 20, color: "rgba(52,211,153,0.5)" },
-      ],
-      arcs: [{ startAngle: 160, endAngle: 20, color: "#f472b6", width: 3 }],
-      angleArcs: [
-        { vertex: [108, 191], from: 50, to: 120, color: "#facc15", label: "∠ACB", arcR: 18 },
-        { vertex: [166, 175], from: 75, to: 145, color: "#34d399", label: "∠ADB", arcR: 18 },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "∠ACB dan ∠ADB keduanya menghadap busur AB. Apa yang bisa disimpulkan?" },
-      { label: "b.", math: "\\text{Jika } \\angle ACB = 50°, \\text{ tentukan } \\angle ADB." },
-      { label: "c.", text: "Apakah C dan D bisa di posisi mana saja sepanjang busur yang sama? Mengapa?" },
-    ],
-  }),
-
-  Q(5, "Menghitung Sudut Keliling", {
-    type: "mixed",
-    diagram: {
-      size: 240, r: 0.6,
-      pts: [
-        { angle: 110, label: "P", color: "#f472b6" },
-        { angle: 10, label: "Q", color: "#f472b6" },
-        { angle: 260, label: "R", color: "#facc15" },
-      ],
-      radii: [{ angle: 110, color: "rgba(244,114,182,0.4)" }, { angle: 10, color: "rgba(244,114,182,0.4)" }],
-      chords: [
-        { angle1: 260, angle2: 110, color: "rgba(250,204,21,0.6)" },
-        { angle1: 260, angle2: 10, color: "rgba(250,204,21,0.6)" },
-      ],
-      angleArcs: [{ vertex: [120, 120], from: 10, to: 110, color: "#f472b6", label: "∠POQ = 100°", arcR: 30 }],
-    },
-    content: "Sudut pusat ∠POQ = 100°. Titik R pada busur mayor PQ.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle PRQ \\text{ (sudut keliling menghadap busur PQ).}" },
-      { label: "b.", text: "Tentukan busur PQ (dalam derajat)." },
-      { label: "c.", math: "\\text{Tentukan busur mayor PQ (dalam derajat).}" },
-    ],
-  }),
-
-  Q(6, "Sudut Pusat dari Sudut Keliling", {
-    type: "essay",
-    content: "Tentukan besar sudut pusat dari setiap sudut keliling yang menghadap busur yang sama!",
-    parts: [
-      { label: "a.", math: "\\angle ACB = 35° \\Rightarrow \\angle AOB = ?" },
-      { label: "b.", math: "\\angle PQR = 47° \\Rightarrow \\angle POR = ?" },
-      { label: "c.", math: "\\angle XYZ = 90° \\Rightarrow \\angle XOZ = ?" },
-      { label: "d.", math: "\\angle KLM = 72° \\Rightarrow \\angle KOM = ?" },
-    ],
-  }),
-
-  Q(7, "Sudut Keliling dari Sudut Pusat", {
-    type: "essay",
-    content: "Tentukan besar sudut keliling dari setiap sudut pusat yang menghadap busur yang sama!",
-    parts: [
-      { label: "a.", math: "\\angle AOB = 80° \\Rightarrow \\angle ACB = ?" },
-      { label: "b.", math: "\\angle POQ = 140° \\Rightarrow \\angle PRQ = ?" },
-      { label: "c.", math: "\\angle XOZ = 60° \\Rightarrow \\angle XYZ = ?" },
-      { label: "d.", math: "\\angle MON = 108° \\Rightarrow \\angle MPN = ?" },
-    ],
-  }),
-
-  Q(8, "Soal UN — Menentukan Sudut yang Belum Diketahui", {
+  Q(3, "Soal UN — Menentukan Sudut yang Belum Diketahui", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -195,7 +93,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Sudut dalam Segitiga Berdasarkan Lingkaran", {
+  Q(4, "Sudut dalam Segitiga Berdasarkan Lingkaran", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -223,7 +121,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Soal ANBK — Mencari Sudut x", {
+  Q(5, "Soal ANBK — Mencari Sudut x", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -250,7 +148,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(11, "Segi Empat Tali Busur (Cyclic Quadrilateral)", {
+  Q(6, "Segi Empat Tali Busur (Cyclic Quadrilateral)", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -275,7 +173,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(12, "Soal UN — Sudut Keliling Dua Titik", {
+  Q(7, "Soal UN — Sudut Keliling Dua Titik", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -300,17 +198,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(13, "Mencari Sudut dengan Aljabar", {
-    type: "essay",
-    content: "Tentukan nilai x dari setiap soal berikut!",
-    parts: [
-      { label: "a.", math: "\\text{Sudut pusat} = (3x + 10)°, \\text{sudut keliling} = (x + 20)°." },
-      { label: "b.", math: "\\text{Sudut pusat} = (5x)°, \\text{sudut keliling} = (x + 30)°." },
-      { label: "c.", math: "\\text{Dua sudut keliling menghadap busur sama: } (2x + 5)° = (3x - 10)°." },
-    ],
-  }),
-
-  Q(14, "Sudut Keliling Menghadap Diameter", {
+  Q(8, "Sudut Keliling Menghadap Diameter", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -336,17 +224,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Soal TKA — Sudut dalam Lingkaran", {
-    type: "essay",
-    content: "Dalam lingkaran dengan pusat O. ∠AOB = 140°, titik C pada busur kecil AB.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle ACB \\text{ (sudut keliling menghadap busur mayor AB).}" },
-      { label: "b.", math: "\\text{Tentukan sudut keliling yang menghadap busur minor AB.}" },
-      { label: "c.", text: "Apakah ∠ACB + sudut keliling di busur kecil = 180°? Jelaskan!" },
-    ],
-  }),
-
-  Q(16, "Soal UN — Sudut Tembereng", {
+  Q(9, "Soal UN — Sudut Tembereng", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -370,27 +248,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(17, "Sifat Sudut Keliling — Pembuktian", {
-    type: "essay",
-    content: "Dalam lingkaran dengan pusat O, titik A, B, dan C pada lingkaran. ∠AOB = 2 × ∠ACB.",
-    parts: [
-      { label: "a.", text: "Jelaskan dengan kata-katamu sendiri mengapa sudut pusat dua kali sudut keliling yang menghadap busur yang sama." },
-      { label: "b.", math: "\\text{Jika } \\angle AOB = 2\\alpha, \\text{ nyatakan } \\angle ACB \\text{ dalam } \\alpha." },
-      { label: "c.", text: "Apakah sifat ini berlaku jika C berada di busur minor AB (sebelah berbeda)? Apa yang berubah?" },
-    ],
-  }),
-
-  Q(18, "Sudut Keliling dalam Konteks Soal Cerita", {
-    type: "essay",
-    content: "Tiga kota A, B, C terletak pada lingkaran jalan melingkar. Pusat lingkaran adalah O. Sudut ∠AOB = 80° dan ∠BOC = 60°.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle AOC." },
-      { label: "b.", math: "\\text{Jika D adalah kota lain di busur mayor AC, tentukan } \\angle ADC." },
-      { label: "c.", math: "\\text{Tentukan sudut keliling } \\angle ABC \\text{ yang menghadap busur AC.}" },
-    ],
-  }),
-
-  Q(19, "Soal ANBK — Mencari Semua Sudut", {
+  Q(10, "Soal ANBK — Mencari Semua Sudut", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -421,27 +279,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(20, "Soal TKA — Sudut Pusat Segi-n Beraturan", {
-    type: "essay",
-    content: "Segi-6 beraturan (hexagon) tertulis dalam lingkaran. Semua titik sudut pada lingkaran.",
-    parts: [
-      { label: "a.", math: "\\text{Berapakah sudut pusat setiap segitiga yang dibentuk dari pusat O ke dua titik sudut bersebelahan?}" },
-      { label: "b.", math: "\\text{Berapakah sudut keliling yang menghadap satu sisi hexagon?}" },
-      { label: "c.", text: "Apakah sisi hexagon sama panjang dengan jari-jari lingkaran? Jelaskan!" },
-    ],
-  }),
-
-  Q(21, "Mencari Sudut yang Belum Diketahui", {
-    type: "essay",
-    content: "Tentukan nilai sudut yang ditanyakan! (O = pusat lingkaran)",
-    parts: [
-      { label: "a.", math: "\\angle AOB = 110°. \\text{ Tentukan } \\angle ACB \\text{ (C di busur mayor).}" },
-      { label: "b.", math: "\\angle ACB = 65°. \\text{ Tentukan } \\angle AOB." },
-      { label: "c.", math: "\\angle ADB = 70° \\text{ (D di busur minor). Tentukan } \\angle ACB \\text{ (C di busur mayor).}" },
-    ],
-  }),
-
-  Q(22, "Soal UN — Segi Empat Tali Busur", {
+  Q(11, "Soal UN — Segi Empat Tali Busur", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -467,17 +305,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(23, "Sudut Keliling di Busur Minor", {
-    type: "essay",
-    content: "Dalam lingkaran O. Titik C berada di busur minor AB. Sudut pusat ∠AOB = 100°.",
-    parts: [
-      { label: "a.", text: "Busur mayor AB berapa derajat?" },
-      { label: "b.", math: "\\text{Jika C di busur minor AB, sudut keliling } \\angle ACB = \\frac{\\text{busur mayor AB}}{2}. \\text{ Hitung } \\angle ACB." },
-      { label: "c.", math: "\\text{Jika D di busur mayor AB, tentukan } \\angle ADB." },
-    ],
-  }),
-
-  Q(24, "Soal ANBK — Benar atau Salah", {
+  Q(12, "Soal ANBK — Benar atau Salah", {
     type: "essay",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S)!",
     parts: [
@@ -488,17 +316,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(25, "Soal TKA — Sudut dalam Lingkaran Berdiameter", {
-    type: "essay",
-    content: "Sebuah lingkaran berdiameter AB = 20 cm. Titik C pada lingkaran sehingga BC = 12 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle ACB." },
-      { label: "b.", math: "\\text{Hitung panjang AC menggunakan Teorema Pythagoras.}" },
-      { label: "c.", math: "\\text{Hitung luas segitiga ABC.}" },
-    ],
-  }),
-
-  Q(26, "Mencari Sudut dengan Sifat Segitiga Sama Kaki", {
+  Q(13, "Mencari Sudut dengan Sifat Segitiga Sama Kaki", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -522,67 +340,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(27, "Soal UN — Sudut Keliling dan Busur", {
-    type: "essay",
-    content: "Lingkaran r = 14 cm. Busur AB = 60° (dalam derajat). Titik C pada busur mayor AB.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan sudut pusat } \\angle AOB." },
-      { label: "b.", math: "\\text{Tentukan sudut keliling } \\angle ACB." },
-      { label: "c.", math: "\\text{Hitung panjang busur AB.}" },
-    ],
-  }),
-
-  Q(28, "Soal ANBK — Hubungan Dua Sudut Keliling", {
-    type: "essay",
-    content: "Titik A, B, C, D berada pada lingkaran. ∠ABD = 35° dan ∠CBD = 25°.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle ABD + \\angle CBD = \\angle ABC." },
-      { label: "b.", math: "\\text{Jika A, D di busur yang sama, } \\angle ACD = \\angle ABD = 35°. \\text{ Apa artinya?}" },
-      { label: "c.", math: "\\text{Tentukan } \\angle AOD \\text{ (sudut pusat menghadap busur AD).}" },
-    ],
-  }),
-
-  Q(29, "Soal TKA — Sudut dalam Segi Lima Beraturan", {
-    type: "essay",
-    content: "Segi lima beraturan tertulis dalam lingkaran. Semua titik sudut pada lingkaran.",
-    parts: [
-      { label: "a.", text: "Berapakah sudut pusat yang menghadap setiap sisi segi lima beraturan?" },
-      { label: "b.", text: "Berapakah sudut keliling yang menghadap satu sisi segi lima beraturan?" },
-      { label: "c.", text: "Berapakah besar sudut dalam segi lima beraturan?" },
-    ],
-  }),
-
-  Q(30, "Soal UN — Sudut Tangen dan Tali Busur", {
-    type: "essay",
-    content: "Garis AB adalah tangen di titik A pada lingkaran O. Tali busur AC memotong lingkaran. ∠BAC = 50°.",
-    parts: [
-      { label: "a.", text: "Sudut antara tangen dan tali busur = sudut keliling menghadap busur AC (sifat sudut tangent-chord). Berapakah ∠ADC (D di lingkaran)?" },
-      { label: "b.", math: "\\text{Tentukan busur AC (derajat).}" },
-      { label: "c.", math: "\\text{Tentukan sudut pusat } \\angle AOC." },
-    ],
-  }),
-
-  Q(31, "Soal ANBK — Nilai x pada Sudut Keliling", {
-    type: "essay",
-    content: "Tentukan nilai x pada setiap soal berikut!",
-    parts: [
-      { label: "a.", math: "\\text{Sudut pusat} = 6x, \\text{ sudut keliling menghadap busur sama} = (x + 15)°." },
-      { label: "b.", math: "\\text{Dua sudut keliling menghadap busur sama: } (3x + 5)° = (5x - 25)°." },
-      { label: "c.", math: "\\text{Segi empat tali busur: } \\angle A = (2x + 10)°, \\angle C = (3x - 5)°, \\angle A + \\angle C = 180°." },
-    ],
-  }),
-
-  Q(32, "Soal TKA — Segitiga dalam Lingkaran", {
-    type: "essay",
-    content: "Segitiga ABC tertulis dalam lingkaran. ∠BAC = 60°, ∠ABC = 80°.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle BCA." },
-      { label: "b.", math: "\\text{Tentukan busur BC (sudut pusat menghadap BC = 2 × } \\angle BAC)." },
-      { label: "c.", math: "\\text{Tentukan busur AC = 2 × } \\angle ABC." },
-    ],
-  }),
-
-  Q(33, "Soal UN — Sudut Keliling Tiga Titik", {
+  Q(14, "Soal UN — Sudut Keliling Tiga Titik", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -608,67 +366,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(34, "Soal ANBK — Hubungan Sudut dan Busur", {
-    type: "essay",
-    content: "Dalam lingkaran O, busur AB = 80°, busur BC = 100°, busur CA = 180°.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan sudut pusat } \\angle AOB, \\angle BOC, \\angle COA." },
-      { label: "b.", math: "\\text{Tentukan sudut keliling } \\angle ACB \\text{ (C di busur yang sesuai).}" },
-      { label: "c.", math: "\\text{Tentukan sudut keliling } \\angle BAC." },
-    ],
-  }),
-
-  Q(35, "Soal TKA — Lingkaran Sembilan Titik", {
-    type: "essay",
-    content: "Dalam segitiga sembarang ABC, terdapat 9 titik istimewa yang semua terletak pada satu lingkaran (lingkaran sembilan titik).",
-    parts: [
-      { label: "a.", text: "Sebutkan 3 titik tengah sisi segitiga ABC." },
-      { label: "b.", text: "Di mana kaki-kaki altitude segitiga ABC berada?" },
-      { label: "c.", text: "Apa hubungan lingkaran sembilan titik dengan konsep sudut keliling?" },
-    ],
-  }),
-
-  Q(36, "Soal UN — Mencari Sudut dalam Segitiga Lingkaran", {
-    type: "essay",
-    content: "Segitiga PQR tertulis dalam lingkaran berpusat O. OQ dan OR adalah jari-jari. ∠QPR = 50°.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle QOR \\text{ (sudut pusat).}" },
-      { label: "b.", math: "\\text{Karena OQ = OR, segitiga OQR sama kaki. Tentukan } \\angle OQR." },
-      { label: "c.", math: "\\text{Tentukan } \\angle PQR." },
-    ],
-  }),
-
-  Q(37, "Soal ANBK — Kombinasi Sudut", {
-    type: "essay",
-    content: "Dalam lingkaran O. ∠AOB = 100°, ∠BOC = 80°. Titik D di busur kecil AB.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan } \\angle AOC." },
-      { label: "b.", math: "\\text{Tentukan sudut keliling } \\angle ADC \\text{ yang menghadap busur AOC.}" },
-      { label: "c.", math: "\\text{Tentukan sudut keliling } \\angle DAB \\text{ jika D di lingkaran menghadap busur DB.}" },
-    ],
-  }),
-
-  Q(38, "Soal TKA — Sudut Tali Busur Berpotongan", {
-    type: "essay",
-    content: "Dua tali busur AC dan BD berpotongan di titik E di dalam lingkaran.",
-    parts: [
-      { label: "a.", text: "Apakah ∠AEB = ½(busur AB + busur CD)? (sifat sudut dua tali berpotongan)" },
-      { label: "b.", math: "\\text{Jika busur AB = 80° dan busur CD = 60°, tentukan } \\angle AEB." },
-      { label: "c.", math: "\\text{Tentukan } \\angle CEB \\text{ (sudut pelurus } \\angle AEB).}" },
-    ],
-  }),
-
-  Q(39, "Soal UN — Segitiga Siku-Siku dan Lingkaran", {
-    type: "essay",
-    content: "Segitiga siku-siku ABC dengan siku-siku di C. Hipotenusa AB = diameter lingkaran luar segitiga.",
-    parts: [
-      { label: "a.", text: "Tentukan besar sudut keliling ∠ACB yang menghadap diameter AB." },
-      { label: "b.", math: "\\text{Jika AB} = 26 \\text{ cm dan AC} = 10 \\text{ cm, hitung BC menggunakan Pythagoras.}" },
-      { label: "c.", math: "\\text{Hitung jari-jari lingkaran luar segitiga tersebut.}" },
-    ],
-  }),
-
-  Q(40, "Soal ANBK Gabungan — Sudut Pusat dan Keliling", {
+  Q(15, "Soal ANBK Gabungan — Sudut Pusat dan Keliling", {
     type: "mixed",
     diagram: {
       size: 240, r: 0.6,
@@ -719,7 +417,7 @@ const SudutPusatKelilingPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
