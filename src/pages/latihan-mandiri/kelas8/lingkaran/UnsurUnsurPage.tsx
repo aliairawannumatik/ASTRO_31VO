@@ -1,22 +1,19 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import { Circle, ChevronDown, ChevronUp } from "lucide-react";
+import { Circle } from "lucide-react";
 import CircleDiagram, { CircleDiagramProps } from "./CircleDiagram";
 
 type Part = { label: string; math?: string; text?: string };
-type Ans = { label: string; math?: string; text?: string };
 type Diff = "Mudah" | "Sedang" | "Sulit" | "HOTS";
 type Q = {
   n: number; title: string;
   content?: string; math?: string;
   parts?: Part[]; diagram?: CircleDiagramProps;
   imageSrc?: string;
-  answers?: Ans[];
   diff?: Diff;
   type: "essay" | "mixed" | "diagram-only";
 };
@@ -48,48 +45,9 @@ const questions: Q[] = [
       { label: "j.", text: "Sebutkan salah satu sudut pusat!" },
       { label: "k.", text: "Sebutkan salah satu sudut keliling!" },
     ],
-    answers: [
-      { label: "a.", text: "OA, OB, OC, dan OD (garis dari pusat O ke titik di lingkaran)." },
-      { label: "b.", text: "AB, karena garis AB melewati pusat O dan menghubungkan dua titik yang berhadapan (A dan B)." },
-      { label: "c.", text: "AD dan CB. Keduanya menghubungkan dua titik pada lingkaran tetapi tidak melalui pusat O. (AB juga tali busur, namun sekaligus merupakan diameter.)" },
-      { label: "d.", text: "Busur CAD, yaitu busur yang membentang dari titik C melalui A hingga D (sisi kiri lingkaran), karena busur ini memiliki panjang terbesar di antara busur-busur yang ada." },
-      { label: "e.", text: "Daerah I merupakan TEMBERENG, yaitu daerah yang dibatasi oleh tali busur CB dan busur minor CB." },
-      { label: "f.", text: "Daerah II merupakan JURING (sektor), yaitu daerah yang dibatasi oleh dua jari-jari OB dan OD serta busur BD." },
-      { label: "g.", text: "Juring terbesar adalah daerah kuning-hijau yang luas (bukan daerah I maupun II), dibatasi oleh OA, OC, dan busur CA yang lebih panjang. Juring ini memiliki sudut pusat terbesar sehingga luasnya paling besar." },
-      { label: "h.", text: "Garis OE adalah APOTEMA, yaitu garis yang ditarik dari pusat O tegak lurus ke tali busur AD. OE ⊥ AD dan E adalah titik kaki tegak lurus tersebut." },
-      { label: "i.", text: "AB, karena AB merupakan diameter yang melewati pusat O. Diameter selalu menjadi tali busur terpanjang dalam suatu lingkaran." },
-      { label: "j.", text: "Contoh sudut pusat: ∠AOB, ∠BOD, ∠COB, ∠AOC, ∠COD, atau ∠AOD. Sudut pusat adalah sudut yang titik sudutnya berada di pusat O dan kedua kakinya merupakan jari-jari." },
-      { label: "k.", text: "Contoh sudut keliling: ∠CAD (titik sudut di A), ∠CBD (titik sudut di C), atau ∠ACB (titik sudut di A). Sudut keliling adalah sudut yang titik sudutnya terletak pada lingkaran dan kedua kakinya adalah tali busur." },
-    ],
   }),
 
-  Q(2, "Sudut Pusat Lingkaran", {
-    type: "mixed", diff: "Sedang",
-    diagram: {
-      size: 250, r: 0.62,
-      pts: [
-        { angle: 70, label: "A", color: "#f472b6" },
-        { angle: 160, label: "B", color: "#f472b6" },
-      ],
-      radii: [
-        { angle: 70, color: "#f472b6" },
-        { angle: 160, color: "#f472b6" },
-      ],
-      angleArcs: [{ vertex: [125, 125], from: 70, to: 160, color: "#f472b6", label: "∠AOB", arcR: 28 }],
-    },
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan sudut pusat?" },
-      { label: "b.", text: "Titik sudut dari sudut pusat ∠AOB berada di mana?" },
-      { label: "c.", math: "\\text{Jika } \\angle AOB = 70°, \\text{ tentukan besar busur AB (dalam derajat).}" },
-    ],
-    answers: [
-      { label: "a.", text: "Sudut pusat adalah sudut yang titik sudutnya berada di pusat lingkaran dan kaki-kakinya adalah jari-jari lingkaran." },
-      { label: "b.", text: "Titik sudut ∠AOB berada di pusat lingkaran (titik O)." },
-      { label: "c.", math: "\\text{Besar busur AB} = \\angle AOB = 70°" },
-    ],
-  }),
-
-  Q(13, "Menghitung Jari-Jari dari Diameter", {
+  Q(2, "Menghitung Jari-Jari dari Diameter", {
     type: "mixed", diff: "Mudah",
     content: "Diketahui sebuah lingkaran dengan diameter-diameter berikut. Tentukan jari-jarinya!",
     parts: [
@@ -98,15 +56,9 @@ const questions: Q[] = [
       { label: "c.", math: "d = 50 \\text{ cm}" },
       { label: "d.", math: "d = 3{,}5 \\text{ cm}" },
     ],
-    answers: [
-      { label: "a.", math: "r = 14 \\div 2 = 7 \\text{ cm}" },
-      { label: "b.", math: "r = 21 \\div 2 = 10{,}5 \\text{ cm}" },
-      { label: "c.", math: "r = 50 \\div 2 = 25 \\text{ cm}" },
-      { label: "d.", math: "r = 3{,}5 \\div 2 = 1{,}75 \\text{ cm}" },
-    ],
   }),
 
-  Q(14, "Unsur Lingkaran — Benar atau Salah", {
+  Q(3, "Unsur Lingkaran — Benar atau Salah", {
     type: "mixed", diff: "Sedang",
     content: "Tentukan pernyataan berikut BENAR (B) atau SALAH (S)!",
     parts: [
@@ -116,26 +68,11 @@ const questions: Q[] = [
       { label: "(4)", text: "Tembereng dibatasi oleh dua jari-jari dan satu busur." },
       { label: "(5)", text: "Semua tali busur dalam satu lingkaran memiliki panjang yang sama." },
     ],
-    answers: [
-      { label: "(1)", text: "BENAR — Diameter melewati pusat sehingga merupakan tali busur terpanjang." },
-      { label: "(2)", text: "SALAH — Apotema LEBIH PENDEK dari jari-jari (apotema = kaki, jari-jari = hipotenusa)." },
-      { label: "(3)", text: "BENAR — Juring dibatasi 2 jari-jari + 1 busur." },
-      { label: "(4)", text: "SALAH — Tembereng dibatasi 1 tali busur + 1 busur (bukan 2 jari-jari)." },
-      { label: "(5)", text: "SALAH — Panjang tali busur bergantung pada jaraknya ke pusat." },
-    ],
   }),
 ];
 
 const UnsurUnsurLingkaranPage = () => {
   const navigate = useNavigate();
-  const [openAnswers, setOpenAnswers] = useState<Set<number>>(new Set());
-  const toggleAnswer = (n: number) => {
-    setOpenAnswers(prev => {
-      const next = new Set(prev);
-      if (next.has(n)) next.delete(n); else next.add(n);
-      return next;
-    });
-  };
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -152,7 +89,7 @@ const UnsurUnsurLingkaranPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 14 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 3 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -224,33 +161,6 @@ const UnsurUnsurLingkaranPage = () => {
                             }
                           </div>
                         ))}
-                      </div>
-                    )}
-                    {q.answers && (
-                      <div className="mt-3">
-                        <button
-                          onClick={() => { playPopSound(); toggleAnswer(q.n); }}
-                          className="flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-lg px-3 py-1.5 transition-all"
-                        >
-                          {openAnswers.has(q.n) ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                          {openAnswers.has(q.n) ? "Sembunyikan Kunci Jawaban" : "💡 Lihat Kunci Jawaban"}
-                        </button>
-                        {openAnswers.has(q.n) && (
-                          <div className="mt-2 bg-emerald-900/20 border border-emerald-500/25 rounded-xl p-3">
-                            <p className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-2">✅ Kunci Jawaban</p>
-                            <div className="flex flex-col gap-1.5">
-                              {q.answers.map((a, ai) => (
-                                <div key={ai} className="flex items-start gap-2">
-                                  <span className="text-emerald-300 text-xs font-bold shrink-0 min-w-[28px] mt-0.5">{a.label}</span>
-                                  {a.math
-                                    ? <div className="text-white/90 text-sm overflow-x-auto"><InlineMath math={a.math} /></div>
-                                    : <p className="font-body text-sm text-white/80 leading-relaxed">{a.text}</p>
-                                  }
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
                       </div>
                     )}
                   </div>
