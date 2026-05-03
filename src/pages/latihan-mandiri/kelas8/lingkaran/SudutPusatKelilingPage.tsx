@@ -33,7 +33,7 @@ const questions: Q[] = [
       ],
       angleArcs: [
         { vertex: [120, 120], from: 30, to: 150, color: "#f472b6", label: "∠AOB", arcR: 28 },
-        { vertex: [120, 218], from: 20, to: 160, color: "#facc15", label: "∠ACB", arcR: 22 },
+        { vertex: [120, 192], from: 60, to: 120, color: "#facc15", label: "∠ACB", arcR: 22 },
       ],
     },
     parts: [
@@ -59,7 +59,7 @@ const questions: Q[] = [
       ],
       angleArcs: [
         { vertex: [120, 120], from: 20, to: 160, color: "#f472b6", label: "∠AOB", arcR: 30 },
-        { vertex: [120, 213], from: 23, to: 157, color: "#facc15", label: "∠ACB", arcR: 22 },
+        { vertex: [120, 192], from: 55, to: 125, color: "#facc15", label: "∠ACB", arcR: 22 },
       ],
       extraTexts: [{ x: 120, y: 18, text: "∠AOB = 2 × ∠ACB", color: "rgba(255,255,255,0.5)", size: 10, bold: true }],
     },
@@ -114,6 +114,10 @@ const questions: Q[] = [
         { angle1: 310, angle2: 20, color: "rgba(52,211,153,0.5)" },
       ],
       arcs: [{ startAngle: 160, endAngle: 20, color: "#f472b6", width: 3 }],
+      angleArcs: [
+        { vertex: [108, 191], from: 50, to: 120, color: "#facc15", label: "∠ACB", arcR: 18 },
+        { vertex: [166, 175], from: 75, to: 145, color: "#34d399", label: "∠ADB", arcR: 18 },
+      ],
     },
     parts: [
       { label: "a.", text: "∠ACB dan ∠ADB keduanya menghadap busur AB. Apa yang bisa disimpulkan?" },
@@ -127,16 +131,16 @@ const questions: Q[] = [
     diagram: {
       size: 240, r: 0.6,
       pts: [
-        { angle: 130, label: "P", color: "#f472b6" },
+        { angle: 110, label: "P", color: "#f472b6" },
         { angle: 10, label: "Q", color: "#f472b6" },
         { angle: 260, label: "R", color: "#facc15" },
       ],
-      radii: [{ angle: 130, color: "rgba(244,114,182,0.4)" }, { angle: 10, color: "rgba(244,114,182,0.4)" }],
+      radii: [{ angle: 110, color: "rgba(244,114,182,0.4)" }, { angle: 10, color: "rgba(244,114,182,0.4)" }],
       chords: [
-        { angle1: 260, angle2: 130, color: "rgba(250,204,21,0.6)" },
+        { angle1: 260, angle2: 110, color: "rgba(250,204,21,0.6)" },
         { angle1: 260, angle2: 10, color: "rgba(250,204,21,0.6)" },
       ],
-      angleArcs: [{ vertex: [120, 120], from: 10, to: 130, color: "#f472b6", label: "∠POQ = 100°", arcR: 30 }],
+      angleArcs: [{ vertex: [120, 120], from: 10, to: 110, color: "#f472b6", label: "∠POQ = 100°", arcR: 30 }],
     },
     content: "Sudut pusat ∠POQ = 100°. Titik R pada busur mayor PQ.",
     parts: [
@@ -182,7 +186,7 @@ const questions: Q[] = [
         { angle1: 270, angle2: 145, color: "rgba(250,204,21,0.6)" },
         { angle1: 270, angle2: 35, color: "rgba(250,204,21,0.6)" },
       ],
-      angleArcs: [{ vertex: [120, 215], from: 30, to: 150, color: "#facc15", label: "∠ACB = 55°", arcR: 22 }],
+      angleArcs: [{ vertex: [120, 192], from: 63, to: 118, color: "#facc15", label: "∠ACB = 55°", arcR: 22 }],
     },
     parts: [
       { label: "a.", math: "\\text{Tentukan } \\angle AOB." },
@@ -235,7 +239,7 @@ const questions: Q[] = [
       ],
       angleArcs: [
         { vertex: [120, 120], from: 20, to: 160, color: "#f472b6", label: "4x", arcR: 28 },
-        { vertex: [120, 212], from: 22, to: 158, color: "#facc15", label: "x + 20°", arcR: 22 },
+        { vertex: [120, 192], from: 55, to: 125, color: "#facc15", label: "x+20°", arcR: 22 },
       ],
     },
     content: "Sudut pusat ∠POQ = 4x. Sudut keliling ∠PRQ = (x + 20°).",
@@ -356,7 +360,7 @@ const questions: Q[] = [
         { angle1: 270, angle2: 150, color: "rgba(250,204,21,0.5)" },
         { angle1: 270, angle2: 30, color: "rgba(250,204,21,0.5)" },
       ],
-      angleArcs: [{ vertex: [120, 213], from: 28, to: 152, color: "#facc15", label: "∠ACB = 40°", arcR: 22 }],
+      angleArcs: [{ vertex: [120, 192], from: 60, to: 120, color: "#facc15", label: "∠ACB = 40°", arcR: 22 }],
     },
     content: "∠ACB = 40°.",
     parts: [
