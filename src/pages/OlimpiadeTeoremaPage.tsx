@@ -1374,16 +1374,6 @@ const OlimpiadeTeoremaPage = () => {
                     ))}
                   </div>
                 )}
-                {soal.no === 6 && (
-                  <div className="flex justify-center my-3">
-                    <img
-                      src={segitigaABCSoalOlim6Img}
-                      alt="Segitiga ABC dengan sisi AB 50 km dan BC 120 km, titik D di tengah AC, soal olimpiade nomor 6"
-                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
-                      data-testid="img-soal-pyth-olim-6"
-                    />
-                  </div>
-                )}
                 {soal.no === 23 && (
                   <div className="flex justify-center my-3">
                     <img
@@ -1391,6 +1381,16 @@ const OlimpiadeTeoremaPage = () => {
                       alt="Layang-layang ABCD soal olimpiade nomor 23"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-23"
+                    />
+                  </div>
+                )}
+                {soal.no === 6 && (
+                  <div className="flex justify-center my-3">
+                    <img
+                      src={segitigaABCSoalOlim6Img}
+                      alt="Segitiga ABC dengan sisi AB 50 km dan BC 120 km, titik D di tengah AC, soal olimpiade nomor 6"
+                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                      data-testid="img-soal-pyth-olim-6"
                     />
                   </div>
                 )}
