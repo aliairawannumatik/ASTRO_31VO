@@ -1926,68 +1926,60 @@ const SoalCard = ({ soal }: { soal: Question }) => {
         <div className={`overflow-hidden transition-all duration-500 ease-out ${isOpen ? "max-h-[2000px] opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
           <div className="relative p-5 rounded-xl border border-primary/20"
             style={{ background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)" }}>
-            <h4 className="font-display text-sm font-bold text-primary mb-4">📐 Pembahasan</h4>
-
-            {soal.correctAnswer && (
-              <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/35">
-                <p className="text-[10px] font-semibold text-emerald-400 mb-1">✅ Kunci Jawaban</p>
-                <div className="text-sm text-emerald-300 font-body">
+            {/* ─── Jawaban ─── */}
+            <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20 mb-2.5">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+              {soal.correctAnswer && (
+                <div className="font-body text-sm text-emerald-50 font-bold">
                   <MathText text={Array.isArray(soal.correctAnswer) ? soal.correctAnswer.join(", ") : soal.correctAnswer} />
                 </div>
-              </div>
-            )}
-
-            {/* Konsep */}
-            <div className="mb-4">
-              <h5 className="text-[10px] font-semibold text-secondary mb-2 uppercase tracking-wide">Konsep</h5>
-              <div className="text-sm text-foreground/80 font-body leading-relaxed">
+              )}
+              {soal.statements && (
+                <div className="flex flex-wrap gap-1.5 mt-1">
+                  {soal.statements.map((s, i) => (
+                    <span key={i} className={`text-xs px-2 py-0.5 rounded font-body font-semibold ${s.isCorrect ? "bg-emerald-500/20 text-emerald-200" : "bg-rose-500/20 text-rose-300"}`}>
+                      ({i+1}) {s.isCorrect ? "✓ Benar" : "✗ Salah"}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+            {/* ─── Konsep & Trik ─── */}
+            <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20 mb-2.5" style={{background:"linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)"}}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+              <div className="font-body text-xs text-violet-50/90 leading-relaxed">
                 <MathText text={soal.explanation.concept} />
               </div>
             </div>
-
-            {/* Langkah */}
-            <div className="mb-4">
-              <h5 className="text-[10px] font-semibold text-secondary mb-2 uppercase tracking-wide">Langkah Penyelesaian</h5>
-              <div className="space-y-2">
-                {soal.explanation.steps.map((step, idx) => (
-                  <div key={idx} className="flex gap-3 items-start">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-[10px] font-bold flex items-center justify-center mt-0.5">
-                      {idx + 1}
-                    </span>
-                    <div className="text-sm text-foreground/80 font-body leading-relaxed">
-                      <MathText text={step} />
-                    </div>
+            {/* ─── Step by Step ─── */}
+            <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20 mb-2.5" style={{background:"linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)"}}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+              <div className="space-y-1.5">
+                {soal.explanation.steps.map((step, si) => (
+                  <div key={si} className="flex gap-2 items-start">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                    <p className="text-xs text-cyan-50/90 font-body leading-relaxed"><MathText text={step} /></p>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Rumus */}
-            {soal.explanation.formula && (
-              <div className="p-4 rounded-lg bg-muted/40 border border-border/50">
-                <h5 className="text-[10px] font-semibold text-accent mb-2 uppercase tracking-wide">Rumus</h5>
-                <div className="text-sm text-foreground font-body">
-                  <MathText text={soal.explanation.formula} />
-                </div>
+            {/* ─── Tips ─── */}
+            <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20 mb-2.5" style={{background:"linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)"}}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+              <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                {soal.explanation.formula ? <MathText text={soal.explanation.formula} /> : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
               </div>
-            )}
-
-            {/* Kunci Benar/Salah */}
-            {soal.type === "Benar/Salah" && soal.statements && (
-              <div className="mt-4 p-3 rounded-lg bg-muted/30 border border-border/40">
-                <p className="text-[10px] font-semibold text-secondary mb-2">🔑 Kunci Benar/Salah</p>
-                <div className="space-y-1">
-                  {soal.statements.map((stmt, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <span className="text-[10px] text-muted-foreground">({idx + 1})</span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${stmt.isCorrect ? "bg-emerald-500/20 text-emerald-300 border border-emerald-400/30" : "bg-rose-500/20 text-rose-300 border border-rose-400/30"}`}>
-                        {stmt.isCorrect ? "BENAR" : "SALAH"}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+            </div>
+            {/* ─── Kesimpulan ─── */}
+            <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20" style={{background:"linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)"}}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+              <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                Jadi, jawaban yang tepat adalah{" "}
+                <span className="font-bold text-rose-200">
+                  {soal.correctAnswer ? <MathText text={Array.isArray(soal.correctAnswer) ? soal.correctAnswer.join(", ") : soal.correctAnswer} /> : "lihat kunci jawaban di atas"}
+                </span>.
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>
