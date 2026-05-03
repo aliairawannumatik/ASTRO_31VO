@@ -86,7 +86,7 @@ const questions: Q[] = [
   }),
   Q(5, "Keliling dan Luas Lingkaran", {
     type: "mixed", diff: "Sedang",
-    content: "Diketahui sebuah lingkaran dengan diameter berikut. Tentukan keliling dan luas lingkaran tersebut! (gunakan π = 22/7)",
+    content: "Diketahui sebuah lingkaran dengan diameter berikut. Tentukan keliling dan luas lingkaran tersebut!",
     parts: [
       { label: "a.", math: "d = 14 \\text{ cm}" },
       { label: "b.", math: "d = 10 \\text{ cm}" },
