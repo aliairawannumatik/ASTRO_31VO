@@ -23,8 +23,8 @@ const questions: Q[] = [
     content: "Keliling lingkaran dihitung dengan rumus K = πd = 2πr, dengan π ≈ 22/7 atau π ≈ 3,14.",
     parts: [
       { label: "a.", math: "\\text{Hitung keliling lingkaran dengan } r = 7 \\text{ cm.}" },
-      { label: "b.", math: "\\text{Hitung keliling lingkaran dengan } d = 14 \\text{ cm.}" },
-      { label: "c.", math: "\\text{Hitung keliling lingkaran dengan } r = 21 \\text{ cm.}" },
+      { label: "b.", math: "\\text{Hitung keliling lingkaran dengan } r = 21 \\text{ cm.}" },
+      { label: "c.", math: "\\text{Hitung keliling lingkaran dengan } r = 10 \\text{ cm.}" },
     ],
   }),
 
