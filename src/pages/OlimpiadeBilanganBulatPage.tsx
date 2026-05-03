@@ -459,7 +459,7 @@ const latihanDasar: LatihanSoal[] = [
     no: 3, 
     soal: "Dalam kompetensi Bahasa Inggris yang terdiri dari 50 soal, peserta akan mendapatkan skor 4 untuk setiap jawaban benar, skor -2 untuk setiap jawaban salah, dan skor -1 untuk soal yang tidak dijawab. Jika Budi menjawab 44 soal dan yang benar 36 soal, maka skor yang diperoleh Budi adalah ...", 
     options: ["A. 134", "B. 126", "C. 122", "D. 120"],
-    jawaban: "B. 126",
+    jawaban: "C. 122",
     pembahasan: {
       konsep: "Soal cerita tentang sistem penskoran dengan bilangan bulat positif dan negatif.",
       langkah: [
@@ -558,7 +558,7 @@ const latihanDasar: LatihanSoal[] = [
     no: 9, 
     soal: "Operasi \"*\" artinya kalikan dua kali bilangan pertama dengan bilangan kedua, kemudian kurangkan hasilnya dengan tiga kali bilangan kedua. Hasil dari $-3 * (-2)$ adalah ...", 
     options: ["A. 18", "B. -18", "C. -6", "D. 6"],
-    jawaban: "D. 6",
+    jawaban: "A. 18",
     pembahasan: {
       konsep: "Operasi khusus dengan definisi: kalikan 2 kali bilangan pertama dengan bilangan kedua, lalu kurangi 3 kali bilangan kedua.",
       langkah: [
@@ -669,19 +669,18 @@ const latihanDasar: LatihanSoal[] = [
     no: 16, 
     soal: "Jika $a$, $b$, dan $c$ adalah tiga bilangan bulat berbeda sedemikian rupa sehingga $a \\times b \\times c = 16$, berapakah nilai terbesar yang mungkin untuk $a + b + c$?", 
     options: ["A. 11", "B. 8", "C. 10", "D. 13"],
-    jawaban: "D. 13",
+    jawaban: "A. 11",
     pembahasan: {
       konsep: "Faktorisasi 16 menjadi tiga faktor berbeda untuk memaksimalkan jumlah.",
       langkah: [
         "Faktorisasi 16: $16 = 2^4$",
-        "Kemungkinan kombinasi: $(1, 2, 8)$, $(1, 4, 4)$ tidak valid (sama), $(-1, -2, 8)$, $(-1, 2, -8)$, dll",
-        "Untuk maksimum positif: $(1, 2, 8)$ $\\rightarrow$ jumlah = $1+2+8 = 11$",
-        "Coba dengan negatif: $(-1) \\times (-2) \\times 8 = 16$ $\\rightarrow$ jumlah = $-1+(-2)+8 = 5$",
-        "Atau: $(-1) \\times (-4) \\times 4 = 16$ $\\rightarrow$ tidak valid (4 sama)",
-        "Coba: $(-2) \\times (-1) \\times 8 = 16$ $\\rightarrow$ jumlah = 5",
-        "Coba: $(1) \\times (-2) \\times (-8) = 16$ $\\rightarrow$ jumlah = $1-2-8 = -9$",
-        "Nilai terbesar dari $(1, 4, 4)$ tidak valid, gunakan $(-1, -1, -16)$ tidak valid",
-        "Jawaban: 11 atau perlu cek ulang apakah ada kombinasi lain"
+        "Cari semua kombinasi tiga bilangan bulat BERBEDA dengan hasil kali 16:",
+        "$(1, 2, 8)$: $1 \\times 2 \\times 8 = 16$ ✓, jumlah = $1+2+8 = 11$",
+        "$(1, 4, 4)$: angka 4 berulang ✗ (tidak valid)",
+        "$(2, 2, 4)$: angka 2 berulang ✗ (tidak valid)",
+        "$(-1, -2, 8)$: $(-1)(-2)(8)=16$ ✓, jumlah = $-1-2+8 = 5$",
+        "$(-1, -4, 4)$: $(-1)(-4)(4)=16$ ✓, jumlah = $-1-4+4 = -1$",
+        "Nilai jumlah terbesar dari semua kombinasi valid = 11, dari $(1, 2, 8)$"
       ],
       rumus: "Cari semua faktorisasi $a \\times b \\times c = 16$ dengan $a \\neq b \\neq c$"
     }
@@ -725,17 +724,17 @@ const latihanDasar: LatihanSoal[] = [
     no: 19, 
     soal: "Diberikan $a$ dan $b$ adalah bilangan bulat positif sedemikian sehingga $a^2 - b^2 = 2019$. Nilai terkecil yang mungkin untuk $a - b$ adalah ...", 
     options: ["A. 1", "B. 3", "C. 673", "D. 2019"],
-    jawaban: "B. 3",
+    jawaban: "A. 1",
     pembahasan: {
       konsep: "Mencari nilai $(a-b)$ terkecil dari faktorisasi selisih kuadrat.",
       langkah: [
         "Gunakan: $(a+b)(a-b) = 2019$",
-        "Faktorisasi 2019: $2019 = 3 \\times 673$",
-        "Faktor-faktor: $(1, 2019)$, $(3, 673)$",
-        "Untuk $(a-b)$ minimum, pilih faktor terkecil untuk $(a-b)$",
-        "Jika $(a-b) = 1$ dan $(a+b) = 2019$: $a = 1010$, $b = 1009$ (valid)",
-        "Tetapi 2019 = 3 × 673, jadi $(a-b) = 3$ dan $(a+b) = 673$: $a = 338$, $b = 335$",
-        "Periksa: $338^2 - 335^2 = (338+335)(338-335) = 673 \\times 3 = 2019$ ✓"
+        "Faktorisasi 2019: $2019 = 3 \\times 673 = 1 \\times 2019$",
+        "Faktor-faktor pasangan (keduanya harus ganjil agar $a, b$ bilangan bulat): $(1, 2019)$, $(3, 673)$",
+        "Jika $(a-b) = 1$ dan $(a+b) = 2019$: $a = \\frac{1+2019}{2} = 1010$, $b = 1009$ — keduanya bilangan bulat positif ✓",
+        "Ini memberikan $a - b = 1$ (minimum!)",
+        "Jika $(a-b) = 3$ dan $(a+b) = 673$: $a = 338$, $b = 335$, $a-b = 3$ (lebih besar)",
+        "Nilai terkecil $(a-b)$ adalah 1, dari pasangan $(a, b) = (1010, 1009)$"
       ],
       rumus: "$(a-b)$ minimum saat memilih faktor terkecil dari 2019"
     }
@@ -885,8 +884,8 @@ const latihanOlimpiade: LatihanOlimpiadeSoal[] = [
     jawaban: "A. 2017",
     pembahasan: { konsep: "Uji primalisasi masing-masing bilangan.", langkah: ["A. $2017$: $\\sqrt{2017} \\approx 44,9$; cek pembagi prima sampai 43 — tidak ada yang membagi habis → prima ✓", "B. $2019 = 3 \\times 673$ (bukan prima) ✗", "C. $2021 = 43 \\times 47$ (bukan prima) ✗", "D. $2023 = 7 \\times 17^2$ (bukan prima) ✗"], rumus: "Uji pembagi: cek semua prima $\\leq \\sqrt{n}$" } },
   { no: 48, soal: "OSN Matematika 2021 Tingkat Kota\nSuatu sistem pencatat kuantitas stok otomatis mengalami gagal desain yang cukup fatal, yaitu tidak terdefinisinya angka 4 dan 6 di sistem tersebut. Jadi, setelah menampilkan 3, sistem akan menampilkan 5 dan setelahnya 7. Hal ini terjadi untuk seluruh nilai tempat. Sehingga, setelah menampilkan 399, sistem akan menampilkan 500 sebagai nilai selanjutnya. Jika sistem tersebut menyampaikan bahwa tersedia stok tepung sebanyak 1578 bungkus, maka banyak stok tepung yang sesungguhnya tersedia adalah ... bungkus.", options: ["A. 814", "B. 896", "C. 1456", "D. 1467"],
-    jawaban: "B. 896",
-    pembahasan: { konsep: "Konversi bilangan dari sistem tanpa angka 4 dan 6 ke bilangan nyata.", langkah: ["Sistem hanya menggunakan digit: 0,1,2,3,5,7,8,9 (angka 4 dan 6 dilewati)", "Angka sistem → nilai nyata: 0→0, 1→1, 2→2, 3→3, 5→4, 7→5, 8→6, 9→7", "Konversi 1578:", "Digit 1 → 1; digit 5 → 4; digit 7 → 5; digit 8 → 6", "Bilangan nyata dalam basis 8: $1578_{\\text{sistem}} = 1456_8$? Tidak, perlu analisis lebih hati-hati", "Sistem = bilangan basis 8 (8 digit yang digunakan): urutan 0,1,2,3,5,7,8,9 adalah posisi 0-7 dalam basis 8", "1→1, 5→4, 7→5, 8→6 dalam basis 8: nilai = $1\\times8^3 + 4\\times8^2 + 5\\times8 + 6 = 512+256+40+6 = 814$... Hmm", "Sesuai kunci resmi: 896"], rumus: "Konversi sistem 8-digit ke desimal" } },
+    jawaban: "A. 814",
+    pembahasan: { konsep: "Konversi bilangan dari sistem tanpa angka 4 dan 6 ke bilangan nyata dengan menghitung banyak bilangan valid dari 1 sampai 1578 dalam sistem tersebut.", langkah: ["Sistem hanya menggunakan digit: 0,1,2,3,5,7,8,9 (angka 4 dan 6 tidak ada)", "Digit sistem dipetakan ke nilai: 0→0, 1→1, 2→2, 3→3, 5→4, 7→5, 8→6, 9→7 (efektif basis 8)", "Konversi '1578' sistem ke bilangan nyata:", "Digit ribuan: 1 → nilai 1, kontribusi = $1 \\times 8^3 = 512$", "Digit ratusan: 5 → nilai 4, kontribusi = $4 \\times 8^2 = 256$", "Digit puluhan: 7 → nilai 5, kontribusi = $5 \\times 8 = 40$", "Digit satuan: 8 → nilai 6, kontribusi = $6 \\times 1 = 6$", "Total nyata = $512 + 256 + 40 + 6 = 814$ bungkus"], rumus: "Sistem 8-digit: digit ke basis 8, konversi 0123→0123 dan 5789→4567" } },
   { no: 49, soal: "OSN Matematika 2022 Tingkat Kota\nBilangan \"primus\" dihasilkan dari bilangan 4 digit $\\overline{abcd}$ dengan $b = 0$ yang melalui 3 langkah berikut:\n(i) Kurangi $\\overline{abcd}$ dengan jumlah semua digitnya\n(ii) Bagilah hasil dari Langkah (i) dengan 9\n(iii) Kurangilah bilangan hasil dari Langkah (ii) dengan 99 kali digit pertama bilangan hasil dari langkah (ii)\nDiantara bilangan berikut, yang bukan merupakan bilangan \"primus\" adalah ...", options: ["A. 38", "B. 59", "C. 104", "D. 117"],
     jawaban: "C. 104",
     pembahasan: { konsep: "Ikuti 3 langkah yang diberikan dan periksa apakah setiap pilihan bisa dihasilkan.", langkah: ["Misal $\\overline{a0cd}$: Langkah (i): $\\overline{a0cd} - (a+0+c+d) = 1000a+cd - (a+c+d)$", "Langkah (ii): bagi 9 → hasilnya bilangan bulat karena $\\overline{abcd} - \\text{jumlah digit}$ selalu habis dibagi 9", "Langkah (iii): kurangi dengan 99 × digit pertama hasil langkah (ii)", "Analisis: untuk mengecek pilihan C. 104 apakah bisa dicapai atau tidak berdasarkan proses tersebut", "Setelah analisis: 104 tidak bisa dihasilkan dari proses 3 langkah untuk bilangan 4 digit $\\overline{a0cd}$ mana pun"], rumus: "$\\overline{a0cd} - (a+c+d)$ selalu habis dibagi 9" } },
@@ -906,8 +905,8 @@ const latihanOlimpiade: LatihanOlimpiadeSoal[] = [
     jawaban: "D. 6",
     pembahasan: { konsep: "Hasil kali semua elemen tabel dalam dua cara menghasilkan hubungan antara N dan hasil kali baris/kolom.", langkah: ["Hasil kali semua 9 angka = $1 \\times 2 \\times ... \\times 9 = 362880$", "Hasil kali semua bilangan di kanan tabel = hasil kali semua baris = $362880$", "Hasil kali semua bilangan di bawah tabel = hasil kali semua kolom = $362880$", "Nilai N muncul di sudut kanan-bawah tabel: $N = $ (hasil kali bilangan di kanan) / (beberapa baris) $=$ (kolom tertentu)", "Berdasarkan struktur soal dan kunci OSN 2024: $N = 6$"], rumus: "$\\prod_{\\text{semua elemen}} = \\prod_{\\text{baris}} = \\prod_{\\text{kolom}} = (1 \\times 2 \\times ... \\times 9)$" } },
   { no: 55, soal: "OSN Matematika 2024 Tingkat Kota\nJumlah semua bilangan ratusan yang ketiga digitnya berbeda dan tidak memuat 0 adalah ...", options: ["A. 359.640", "B. 279.720", "C. 277.200", "D. 252.000"],
-    jawaban: "A. 359.640",
-    pembahasan: { konsep: "Jumlahkan semua bilangan 3 digit (100-999) dengan 3 digit berbeda, tidak ada 0.", langkah: ["Digit yang tersedia: 1-9 (tanpa 0), pilih 3 digit berbeda dari 9 digit ini", "Banyak bilangan: $P(9,3) = 9 \\times 8 \\times 7 = 504$ bilangan", "Setiap digit (1-9) muncul di setiap posisi (ratusan, puluhan, satuan) sebanyak $\\frac{504}{9} \\times 1 = 56$ kali", "Jumlah semua digit 1-9 = 45", "Kontribusi posisi ratusan: $45 \\times 56 \\times 100 = 252.000$", "Kontribusi posisi puluhan: $45 \\times 56 \\times 10 = 25.200$", "Kontribusi posisi satuan: $45 \\times 56 \\times 1 = 2.520$", "Tapi ini untuk semua 3 posisi; perlu memperhitungkan pasangan yang berbeda: Total = $252.000 + 25.200 + 2.520$? Tidak tepat karena digit tidak berulang", "Dengan digit berbeda: setiap digit muncul di ratusan sebanyak $8 \\times 7 = 56$ kali; jumlah = $45 \\times 56 \\times 100 + 45 \\times 56 \\times 10 + 45 \\times 56 = 56 \\times 45 \\times 111 = 2520 \\times 111 = 279.720$", "Sesuai kunci: A. 359.640"], rumus: "Jumlah = (jumlah digit) × (frekuensi per posisi) × (nilai posisi)" } },
+    jawaban: "B. 279.720",
+    pembahasan: { konsep: "Jumlahkan semua bilangan 3 digit dengan 3 digit berbeda dan tidak ada 0.", langkah: ["Digit yang tersedia: 1-9 (tanpa 0), pilih 3 digit berbeda dari 9 digit ini", "Banyak bilangan: $P(9,3) = 9 \\times 8 \\times 7 = 504$ bilangan", "Setiap digit (1-9) muncul di tiap posisi (ratusan/puluhan/satuan) sebanyak $\\frac{504}{9} = 56$ kali", "Jumlah semua digit 1-9 = $1+2+...+9 = 45$", "Kontribusi posisi ratusan: $45 \\times 56 \\times 100 = 252.000$", "Kontribusi posisi puluhan: $45 \\times 56 \\times 10 = 25.200$", "Kontribusi posisi satuan: $45 \\times 56 \\times 1 = 2.520$", "Total jumlah = $252.000 + 25.200 + 2.520 = 279.720$", "Verifikasi: $45 \\times 56 \\times 111 = 2520 \\times 111 = 279.720$ ✓"], rumus: "Jumlah = (jumlah digit) $\\times$ (frekuensi per posisi) $\\times$ (nilai posisi) = $45 \\times 56 \\times 111$" } },
   { no: 56, soal: "OSN Matematika 2024 Tingkat Kota\nBilangan-bilangan 4, 5, 6, 9, 11, 12, 18, 20 dan 24 akan diletakkan pada lingkaran dan 5 persegi yang disusun dalam satu baris. Setiap bilangan harus digunakan tepat satu kali dan diletakkan di tempat yang berbeda. Selain itu bilangan pada setiap lingkaran harus merupakan hasil penjumlahan dari dua bilangan pada persegi yang berada tepat di sebelah kiri dan kanannya. Jika $x$ adalah bilangan pada persegi paling kiri dan $y$ adalah bilangan pada persegi paling kanan, maka nilai terbesar yang mungkin dari $x + y$ adalah ...", image: "/olimpiade-bb-no56.png", options: ["A. 32", "B. 38", "C. 42", "D. 44"],
     jawaban: "D. 44",
     pembahasan: { konsep: "Cari penempatan bilangan pada 5 persegi dan 4 lingkaran (di antara persegi) sedemikian hingga setiap lingkaran = jumlah dua persegi di kiri dan kanannya, memaksimalkan x + y.", langkah: ["Struktur: [x] ○ [p] ○ [q] ○ [r] ○ [y] dengan 4 lingkaran di antara persegi", "Lingkaran kiri = x+p; lingkaran ke-2 = p+q; lingkaran ke-3 = q+r; lingkaran kanan = r+y", "9 bilangan = {4,5,6,9,11,12,18,20,24}; 5 untuk persegi, 4 untuk lingkaran", "Untuk memaksimalkan x+y, inginkan x dan y sebesar mungkin", "Coba x=20, y=24 (terbesar): sisanya {4,5,6,9,11,12,18} untuk p,q,r dan 4 lingkaran", "Perlu lingkaran = x+p = 20+p; r+y = r+24; p+q; q+r → semua harus ada di sisa bilangan", "Dengan trial: coba x=20, y=24, p=18, q=6, r=12: lingkaran: 38(20+18=38 ✓), 24(18+6=24 ✓), 18(6+12=18 ✓), 36(12+24=36); tapi 36 tidak ada. Coba lagi.", "x=20, p=4, q=5, r=9, y=24: lingkaran: 24 ✓, 9 ✗... Kunci resmi: 44"], rumus: "Cari 5 persegi {x,p,q,r,y} dari bilangan yang diberikan sehingga lingkaran terpenuhi dan $x+y$ maksimum" } },
@@ -1081,56 +1080,37 @@ const OlimpiadeBilanganBulatPage = () => {
 
                   {/* Pembahasan Expandable */}
                   {expandedPembahasan.includes(soal.no) && (
-                    <div className="mt-4 relative overflow-hidden animate-slide-up">
-                      <div 
-                        className="p-4 rounded-xl border border-primary/30"
-                        style={{
-                          background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)",
-                        }}
-                      >
-                        {/* Jawaban */}
-                        <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                          <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
-                          <span className="text-sm text-emerald-300 font-body">
-                            {renderWithLatex(soal.jawaban)}
-                          </span>
+                    <div className="mt-4 space-y-2.5 animate-slide-up">
+                      <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+                        <div className="font-body text-sm text-emerald-50 font-bold">{renderWithLatex(soal.jawaban)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20" style={{background:"linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+                        <div className="font-body text-xs text-violet-50/90 leading-relaxed">{renderWithLatex(soal.pembahasan.konsep)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20" style={{background:"linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+                        <div className="space-y-1.5">
+                          {soal.pembahasan.langkah.map((step, si) => (
+                            <div key={si} className="flex gap-2 items-start">
+                              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                              <p className="text-xs text-cyan-50/90 font-body leading-relaxed">{renderWithLatex(step)}</p>
+                            </div>
+                          ))}
                         </div>
-
-                        {/* Konsep */}
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Konsep</h5>
-                          <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                            {renderWithLatex(soal.pembahasan.konsep)}
-                          </p>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20" style={{background:"linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+                        <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                          {soal.pembahasan.rumus ? renderWithLatex(soal.pembahasan.rumus) : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
                         </div>
-
-                        {/* Langkah-langkah */}
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Langkah Penyelesaian</h5>
-                          <div className="space-y-2">
-                            {soal.pembahasan.langkah.map((step, idx) => (
-                              <div key={idx} className="flex gap-3 items-start">
-                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary 
-                                  text-xs font-bold flex items-center justify-center mt-0.5">
-                                  {idx + 1}
-                                </span>
-                                <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                                  {renderWithLatex(step)}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20" style={{background:"linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+                        <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                          Jadi, jawaban yang tepat adalah <span className="font-bold text-rose-200">{renderWithLatex(soal.jawaban)}</span>.
                         </div>
-
-                        {/* Rumus */}
-                        {soal.pembahasan.rumus && (
-                          <div className="p-4 rounded-lg bg-muted/40 border border-border/50">
-                            <h5 className="text-xs font-semibold text-accent mb-2 uppercase tracking-wide">Rumus</h5>
-                            <p className="text-sm text-foreground font-body">
-                              {renderWithLatex(soal.pembahasan.rumus)}
-                            </p>
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
@@ -1213,56 +1193,37 @@ const OlimpiadeBilanganBulatPage = () => {
 
                   {/* Pembahasan Expandable */}
                   {expandedOlimpiadePembahasan.includes(soal.no) && (
-                    <div className="mt-4 relative overflow-hidden animate-slide-up">
-                      <div
-                        className="p-4 rounded-xl border border-primary/30"
-                        style={{
-                          background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)",
-                        }}
-                      >
-                        {/* Jawaban */}
-                        <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                          <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
-                          <span className="text-sm text-emerald-300 font-body">
-                            {renderWithLatex(soal.jawaban)}
-                          </span>
+                    <div className="mt-4 space-y-2.5 animate-slide-up">
+                      <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+                        <div className="font-body text-sm text-emerald-50 font-bold">{renderWithLatex(soal.jawaban)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20" style={{background:"linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+                        <div className="font-body text-xs text-violet-50/90 leading-relaxed">{renderWithLatex(soal.pembahasan.konsep)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20" style={{background:"linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+                        <div className="space-y-1.5">
+                          {soal.pembahasan.langkah.map((step, si) => (
+                            <div key={si} className="flex gap-2 items-start">
+                              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                              <p className="text-xs text-cyan-50/90 font-body leading-relaxed">{renderWithLatex(step)}</p>
+                            </div>
+                          ))}
                         </div>
-
-                        {/* Konsep */}
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Konsep</h5>
-                          <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                            {renderWithLatex(soal.pembahasan.konsep)}
-                          </p>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20" style={{background:"linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+                        <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                          {soal.pembahasan.rumus ? renderWithLatex(soal.pembahasan.rumus) : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
                         </div>
-
-                        {/* Langkah-langkah */}
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Langkah Penyelesaian</h5>
-                          <div className="space-y-2">
-                            {soal.pembahasan.langkah.map((step, idx) => (
-                              <div key={idx} className="flex gap-3 items-start">
-                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary
-                                  text-xs font-bold flex items-center justify-center mt-0.5">
-                                  {idx + 1}
-                                </span>
-                                <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                                  {renderWithLatex(step)}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20" style={{background:"linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+                        <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                          Jadi, jawaban yang tepat adalah <span className="font-bold text-rose-200">{renderWithLatex(soal.jawaban)}</span>.
                         </div>
-
-                        {/* Rumus */}
-                        {soal.pembahasan.rumus && (
-                          <div className="p-4 rounded-lg bg-muted/40 border border-border/50">
-                            <h5 className="text-xs font-semibold text-accent mb-2 uppercase tracking-wide">Rumus</h5>
-                            <p className="text-sm text-foreground font-body">
-                              {renderWithLatex(soal.pembahasan.rumus)}
-                            </p>
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}

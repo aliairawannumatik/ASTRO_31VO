@@ -1473,46 +1473,37 @@ const OlimpiadeKPKFPBPage = () => {
                     )}
                   </button>
                   {expandedDasarPembahasan.includes(soal.no) && (
-                    <div className="mt-4 relative overflow-hidden animate-slide-up">
-                      <div
-                        className="p-4 rounded-xl border border-primary/30"
-                        style={{ background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)" }}
-                      >
-                        <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                          <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
-                          <span className="text-sm text-emerald-300 font-body">
-                            {renderWithLatex(soal.jawaban)}
-                          </span>
+                    <div className="mt-4 space-y-2.5 animate-slide-up">
+                      <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+                        <div className="font-body text-sm text-emerald-50 font-bold">{renderWithLatex(soal.jawaban)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20" style={{background:"linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+                        <div className="font-body text-xs text-violet-50/90 leading-relaxed">{renderWithLatex(soal.pembahasan.konsep)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20" style={{background:"linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+                        <div className="space-y-1.5">
+                          {soal.pembahasan.langkah.map((step, si) => (
+                            <div key={si} className="flex gap-2 items-start">
+                              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                              <p className="text-xs text-cyan-50/90 font-body leading-relaxed">{renderWithLatex(step)}</p>
+                            </div>
+                          ))}
                         </div>
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Konsep</h5>
-                          <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                            {renderWithLatex(soal.pembahasan.konsep)}
-                          </p>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20" style={{background:"linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+                        <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                          {soal.pembahasan.rumus ? renderWithLatex(soal.pembahasan.rumus) : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
                         </div>
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Langkah Penyelesaian</h5>
-                          <div className="space-y-2">
-                            {soal.pembahasan.langkah.map((step, idx) => (
-                              <div key={idx} className="flex gap-3 items-start">
-                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary text-xs font-bold flex items-center justify-center mt-0.5">
-                                  {idx + 1}
-                                </span>
-                                <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                                  {renderWithLatex(step)}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20" style={{background:"linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+                        <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                          Jadi, jawaban yang tepat adalah <span className="font-bold text-rose-200">{renderWithLatex(soal.jawaban)}</span>.
                         </div>
-                        {soal.pembahasan.rumus && (
-                          <div className="p-4 rounded-lg bg-muted/40 border border-border/50">
-                            <h5 className="text-xs font-semibold text-accent mb-2 uppercase tracking-wide">Rumus</h5>
-                            <p className="text-sm text-foreground font-body">
-                              {renderWithLatex(soal.pembahasan.rumus)}
-                            </p>
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
@@ -1577,46 +1568,37 @@ const OlimpiadeKPKFPBPage = () => {
                     )}
                   </button>
                   {expandedOlimpiadePembahasan.includes(soal.no) && (
-                    <div className="mt-4 relative overflow-hidden animate-slide-up">
-                      <div
-                        className="p-4 rounded-xl border border-accent/30"
-                        style={{ background: "linear-gradient(135deg, rgba(234,179,8,0.05) 0%, rgba(139,92,246,0.05) 100%)" }}
-                      >
-                        <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                          <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
-                          <span className="text-sm text-emerald-300 font-body">
-                            {renderWithLatex(soal.jawaban)}
-                          </span>
+                    <div className="mt-4 space-y-2.5 animate-slide-up">
+                      <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+                        <div className="font-body text-sm text-emerald-50 font-bold">{renderWithLatex(soal.jawaban)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20" style={{background:"linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+                        <div className="font-body text-xs text-violet-50/90 leading-relaxed">{renderWithLatex(soal.pembahasan.konsep)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20" style={{background:"linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+                        <div className="space-y-1.5">
+                          {soal.pembahasan.langkah.map((step, si) => (
+                            <div key={si} className="flex gap-2 items-start">
+                              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                              <p className="text-xs text-cyan-50/90 font-body leading-relaxed">{renderWithLatex(step)}</p>
+                            </div>
+                          ))}
                         </div>
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Konsep</h5>
-                          <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                            {renderWithLatex(soal.pembahasan.konsep)}
-                          </p>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20" style={{background:"linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+                        <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                          {soal.pembahasan.rumus ? renderWithLatex(soal.pembahasan.rumus) : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
                         </div>
-                        <div className="mb-4">
-                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Langkah Penyelesaian</h5>
-                          <div className="space-y-2">
-                            {soal.pembahasan.langkah.map((step, idx) => (
-                              <div key={idx} className="flex gap-3 items-start">
-                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent text-xs font-bold flex items-center justify-center mt-0.5">
-                                  {idx + 1}
-                                </span>
-                                <p className="text-sm text-foreground/80 font-body leading-relaxed">
-                                  {renderWithLatex(step)}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20" style={{background:"linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+                        <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                          Jadi, jawaban yang tepat adalah <span className="font-bold text-rose-200">{renderWithLatex(soal.jawaban)}</span>.
                         </div>
-                        {soal.pembahasan.rumus && (
-                          <div className="p-4 rounded-lg bg-muted/40 border border-border/50">
-                            <h5 className="text-xs font-semibold text-accent mb-2 uppercase tracking-wide">Rumus Kunci</h5>
-                            <p className="text-sm text-foreground font-body">
-                              {renderWithLatex(soal.pembahasan.rumus)}
-                            </p>
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
