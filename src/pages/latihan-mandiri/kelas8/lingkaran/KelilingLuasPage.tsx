@@ -42,9 +42,9 @@ const questions: Q[] = [
     type: "essay",
     content: "Tentukan jari-jari lingkaran jika diketahui kelilingnya!",
     parts: [
-      { label: "a.", math: "K = 44 \\text{ cm, gunakan } \\pi = \\tfrac{22}{7}" },
-      { label: "b.", math: "K = 62{,}8 \\text{ cm, gunakan } \\pi = 3{,}14" },
-      { label: "c.", math: "K = 88 \\text{ cm, gunakan } \\pi = \\tfrac{22}{7}" },
+      { label: "a.", math: "K = 44 \\text{ cm}" },
+      { label: "b.", math: "K = 62{,}8 \\text{ cm}" },
+      { label: "c.", math: "K = 88 \\text{ cm}" },
     ],
   }),
 
