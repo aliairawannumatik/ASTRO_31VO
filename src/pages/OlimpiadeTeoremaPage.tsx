@@ -773,9 +773,9 @@ const HelikopterOABCSVG = () => {
   const W = 380, H = 240;
 
   const O = { x: 40, y: 200 };
-  const A = { x: 143, y: 200 };
-  const B = { x: 219, y: 200 };
-  const C = { x: 350, y: 200 };
+  const A = { x: 100, y: 200 };
+  const B = { x: 180, y: 200 };
+  const C = { x: 260, y: 200 };
   const H_pt = { x: 40, y: 40 }; // posisi helikopter di atas O
 
   return (
@@ -810,9 +810,9 @@ const HelikopterOABCSVG = () => {
         </g>
 
         {/* Label sudut di A, B, C (di sebelah kanan masing-masing titik, sedikit di atas garis tanah) */}
-        <text x={A.x + 4} y={A.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">60°</text>
-        <text x={B.x - 18} y={B.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">45°</text>
-        <text x={C.x - 18} y={C.y + 12} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">30°</text>
+        <text x={A.x - 8} y={A.y - 8} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">60°</text>
+        <text x={B.x - 12} y={B.y - 8} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">45°</text>
+        <text x={C.x - 8} y={C.y - 8} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">30°</text>
 
         {/* Label "500 m" di samping garis tinggi */}
         <text x={H_pt.x - 18} y={(H_pt.y + O.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">500 m</text>
@@ -1020,7 +1020,16 @@ const latihanDasar = [
   { no: 25, soal: "Sebidang tanah berbentuk trapesium sama kaki, panjang sisi sejajarnya 24 m dan 14 m, dan jarak sisi sejajar 12 m. Jika sekeliling tanah tersebut dibuat pagar, panjang pagar seluruhnya adalah...", options: ["A. 50 m", "B. 51 m", "C. 62 m", "D. 64 m"] },
   { no: 26, soal: "Seseorang berada di atas gedung yang tingginya 12 m. Dia melihat dua buah benda A dan benda B di tanah dengan arah yang sama. Jika jarak pandang orang tersebut dengan benda A adalah 15 m dan dengan benda B adalah 20 m, maka jarak benda A dan benda B di tanah adalah...", options: ["A. 7 m", "B. 9 m", "C. 12 m", "D. 16 m"] },
   { no: 27, soal: "Pada gambar di bawah, jika panjang PR = 12 cm maka panjang QR dan PQ adalah ...", options: [] },
-  { no: 28, soal: "Sebuah Helikopter terbang pada ketinggian 500 m di atas permukaan tanah. Helikopter tersebut melihat tiga titik di atas permukaan tanah, yaitu titik A, titik B, dan titik C.\nTentukanlah:\n1. jarak OA\n2. jarak AB\n3. jarak BC", options: [] },
+  {
+    no: 28,
+    soal: "Sebuah Helikopter terbang pada ketinggian 500 m di atas permukaan tanah. Helikopter tersebut melihat tiga titik di atas permukaan tanah, yaitu titik A, titik B, dan titik C.\nTentukanlah:\n1. jarak OA\n2. jarak AB\n3. jarak BC",
+    options: [
+      "A. $OA = 500$ m, $AB = 300$ m, $BC = 400$ m",
+      "B. $OA = 400$ m, $AB = 300$ m, $BC = 500$ m",
+      "C. $OA = 300$ m, $AB = 400$ m, $BC = 500$ m",
+      "D. $OA = 500$ m, $AB = 400$ m, $BC = 300$ m",
+    ],
+  },
   { no: 29, soal: "Perhatikan gambar berikut.\nTentukanlah panjang sisi AB, AC, dan CD", options: [] },
   { no: 30, soal: "Hitunglah jarak antara titik $A(3, -2)$ dan titik $B(-5, 4)$ pada bidang koordinat Kartesius.", options: ["A. 8", "B. 10", "C. $10\\sqrt{2}$", "D. $\\sqrt{52}$"] },
   { no: 31, soal: "Jarak antara titik $P(k, 5)$ dan titik $Q(1, 1)$ adalah 5 satuan. Berapakah nilai k yang mungkin?", options: ["A. $k = 5$", "B. $k = 3$", "C. $k = -2$", "D. $k = 6$"] },

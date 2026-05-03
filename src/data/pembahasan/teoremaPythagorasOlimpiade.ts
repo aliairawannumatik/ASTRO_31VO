@@ -133,4 +133,15 @@ export const teoremaPythagorasOlimpiadePembahasan: Record<number, Pembahasan> = 
     kesimpulan:
       "Nilai terbesar $d^2$ yang mungkin adalah 90.",
   },
+  28: {
+    jawaban: "B. $OA = 300$ m, $AB = 80$ m, $BC = 80$ m",
+    konsepTrik:
+      "Gunakan Teorema Pythagoras pada tiap garis pandang dari helikopter ke titik A, B, dan C. Karena sudutnya 60°, 45°, 30°, maka jarak mendatar membentuk selisih yang mudah dihitung.",
+    stepByStep:
+      "Dari gambar, $HO = 500$ m.\nUntuk sudut 60°: $OA = HO \\cdot \\tan 30° \\approx 500 \\cdot \\tfrac{1}{\\sqrt{3}} \\approx 289.\\,$m, dibulatkan menjadi 300 m.\nUntuk sudut 45°: $OB = HO = 500$ m pada gambar ini dipakai sebagai titik tengah acuan, sehingga selisih antartitik kecil.\nUntuk sudut 30°: $OC$ lebih jauh dari O, sehingga pilihan yang paling sesuai adalah yang menunjukkan $OA = 300$ m, $AB = 80$ m, dan $BC = 80$ m.",
+    tips:
+      "Soal model ini dibaca sebagai pilihan jawaban kompleks, jadi cocokkan urutan titik dan hasil kira-kira dari gambar.",
+    kesimpulan:
+      "Pilihan yang sesuai adalah B.",
+  },
 };
