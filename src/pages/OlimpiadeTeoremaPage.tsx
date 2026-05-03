@@ -948,13 +948,15 @@ Pada segitiga siku-siku sama kaki dengan sudut $45°$, $45°$, dan $90°$:
       heading: "F. Tripel Pythagoras",
       content: `Tripel Pythagoras adalah 3 bilangan asli yang memenuhi teorema Pythagoras. Artinya, jika terdapat 3 bilangan asli maka kuadrat bilangan terbesar sama dengan jumlah kuadrat dua bilangan lainnya.
 
-Berikut ini adalah 5 tipe tripel Pythagoras yang sering digunakan dalam perhitungan beserta kelipatannya:
+Berikut tabel tripel Pythagoras yang sering digunakan:
 
-Tipe 1: 3, 4, 5 | 6, 8, 10 | 9, 12, 15 | ... kelipatannya
-Tipe 2: 5, 12, 13 | 10, 24, 26 | 15, 36, 39 | ... kelipatannya
-Tipe 3: 7, 24, 25 | 14, 48, 50 | 21, 72, 75 | ... kelipatannya
-Tipe 4: 8, 15, 17 | 16, 30, 34 | 24, 45, 51 | ... kelipatannya
-Tipe 5: 9, 40, 41 | 18, 80, 82 | 27, 120, 123 | ... kelipatannya`
+| Tipe | Tripel dasar | Kelipatan |
+| --- | --- | --- |
+| 1 | 3, 4, 5 | 6, 8, 10; 9, 12, 15; ... |
+| 2 | 5, 12, 13 | 10, 24, 26; 15, 36, 39; ... |
+| 3 | 7, 24, 25 | 14, 48, 50; 21, 72, 75; ... |
+| 4 | 8, 15, 17 | 16, 30, 34; 24, 45, 51; ... |
+| 5 | 9, 40, 41 | 18, 80, 82; 27, 120, 123; ... |`
     }
   ]
 };
