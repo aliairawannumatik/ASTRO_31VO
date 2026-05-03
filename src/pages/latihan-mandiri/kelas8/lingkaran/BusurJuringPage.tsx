@@ -17,10 +17,16 @@ type Soal = {
 const soalList: Soal[] = [
   {
     n: 1,
-    question: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah....",
+    question: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah...",
     note: "(π = 22/7)",
     img: "/soal-busur-5.png",
     imgAlt: "Lingkaran dengan juring sudut 60°, titik O dan P",
+    choices: [
+      { label: "a.", text: "11 cm" },
+      { label: "b.", text: "22 cm" },
+      { label: "c.", text: "33 cm" },
+      { label: "d.", text: "44 cm" },
+    ],
   },
   {
     n: 2,
@@ -59,15 +65,27 @@ const soalList: Soal[] = [
   },
   {
     n: 5,
-    question: "Perhatikanlah gambar berikut. Diketahui O adalah titik pusat lingkaran. Jika panjang busur QR = 60 cm, panjang busur PQ adalah...",
+    question: "Perhatikanlah gambar berikut! Diketahui O adalah titik pusat lingkaran. Jika panjang busur QR = 60 cm, panjang busur PQ adalah...",
     img: "/soal-busur-3.png",
     imgAlt: "Lingkaran dengan juring OPQ sudut 50° dan juring OQR sudut 75°",
+    choices: [
+      { label: "a.", text: "30 cm" },
+      { label: "b.", text: "40 cm" },
+      { label: "c.", text: "45 cm" },
+      { label: "d.", text: "80 cm" },
+    ],
   },
   {
     n: 6,
-    question: "Pada suatu lingkaran dengan pusat O diketahui titik A, B, C, dan D pada keliling lingkaran, sehingga ∠AOB = 35° dan ∠COD = 140°. Jika panjang busur AB = 14 cm, hitunglah panjang busur CD.",
+    question: "Perhatikan gambar! Pada suatu lingkaran dengan pusat O, diketahui ∠AOB = 35° dan ∠COD = 140°. Jika panjang busur AB = 14 cm, panjang busur CD adalah...",
     img: "/soal-busur-6.png",
     imgAlt: "Lingkaran dengan titik A, B, C, D; sudut AOB=35°, COD=140°, busur AB=14cm",
+    choices: [
+      { label: "a.", text: "28 cm" },
+      { label: "b.", text: "42 cm" },
+      { label: "c.", text: "56 cm" },
+      { label: "d.", text: "70 cm" },
+    ],
   },
 ];
 
