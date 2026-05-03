@@ -108,10 +108,10 @@ const Segitiga306090SVG = () => {
         <polygon points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`} fill="none" stroke="#22d3ee" strokeWidth="2" />
         {/* Tanda siku-siku di kanan-bawah */}
         <rect x={Bx - 12} y={By - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1" />
-        {/* Busur sudut 30° di kiri-bawah (sweep=1 = CCW on screen, masuk ke dalam segitiga) */}
-        <path d={`M ${Ax + 28} ${Ay} A 28 28 0 0 1 ${Ax + 25} ${Ay - 12}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
-        {/* Busur sudut 60° di kanan-atas (sweep=0 = CW on screen, masuk ke dalam segitiga) */}
-        <path d={`M ${Cx} ${Cy + 22} A 22 22 0 0 0 ${Cx - 20} ${Cy + 9}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        {/* Busur sudut 30° di kiri-bawah */}
+        <path d={`M ${Ax + 28} ${Ay} A 28 28 0 0 0 ${Ax + 25} ${Ay - 12}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        {/* Busur sudut 60° di kanan-atas */}
+        <path d={`M ${Cx} ${Cy + 22} A 22 22 0 0 1 ${Cx - 20} ${Cy + 9}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
         {/* Label sudut */}
         <text x={Ax + 36} y={Ay - 4} fill="#fbbf24" fontSize="11" fontWeight="bold">30°</text>
         <text x={Cx - 26} y={Cy + 20} fill="#fbbf24" fontSize="11" fontWeight="bold">60°</text>
