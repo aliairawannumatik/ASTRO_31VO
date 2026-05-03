@@ -179,19 +179,6 @@ const UnsurUnsurLingkaranPage = () => {
           </div>
         </div>
 
-        <div className="mb-4 rounded-2xl overflow-hidden border border-cyan-500/25">
-          <div className="bg-cyan-900/30 px-4 py-3 border-b border-cyan-500/20">
-            <p className="text-cyan-300 text-xs font-bold">📌 Untuk soal nomor 1 – 11, perhatikan gambar berikut.</p>
-          </div>
-          <div className="flex justify-center bg-white/95 p-4">
-            <img
-              src={SOAL_IMG}
-              alt="Gambar lingkaran dengan unsur-unsurnya"
-              className="max-w-xs w-full object-contain"
-            />
-          </div>
-        </div>
-
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
