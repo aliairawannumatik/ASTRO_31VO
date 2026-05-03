@@ -812,10 +812,10 @@ const HelikopterOABCSVG = () => {
         {/* Label sudut di A, B, C (di sebelah kanan masing-masing titik, sedikit di atas garis tanah) */}
         <text x={A.x + 4} y={A.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">60°</text>
         <text x={B.x + 4} y={B.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold">45°</text>
-        <text x={C.x - 6} y={C.y - 6} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">30°</text>
+        <text x={C.x - 2} y={C.y - 10} fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">30°</text>
 
         {/* Label "500 m" di samping garis tinggi */}
-        <text x={H_pt.x - 6} y={(H_pt.y + O.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">500 m</text>
+        <text x={H_pt.x + 8} y={(H_pt.y + O.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="start">500 m</text>
 
         {/* Titik & label O, A, B, C */}
         {[O, A, B, C].map((p, i) => (
