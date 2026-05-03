@@ -9,7 +9,7 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPythagorasDasar";
 import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
-import bangunABCDESoal7Img from "@assets/image_1777204803383.png";
+import bangunABCDESoal7Img from "@assets/image_1777785078317.png";
 import layangKapalSoal18Img from "@assets/image_1777205277003.png";
 import bangunABEFCDSoal20Img from "@assets/image_1777205316310.png";
 import pentagonSoal21Img from "@assets/image_1777205396307.png";
