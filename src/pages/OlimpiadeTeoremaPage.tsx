@@ -142,10 +142,10 @@ const Segitiga454590SVG = () => {
         {/* Busur sudut 45° di kiri-bawah */}
         <path d={`M ${Ax + 24} ${Ay} A 24 24 0 0 0 ${Ax + 17} ${Ay - 17}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
         {/* Busur sudut 45° di kanan-atas */}
-        <path d={`M ${Cx} ${Cy + 24} A 24 24 0 0 0 ${Cx - 17} ${Cy + 17}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        <path d={`M ${Cx} ${Cy + 24} A 24 24 0 0 1 ${Cx - 17} ${Cy + 17}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
         {/* Label sudut */}
         <text x={Ax + 28} y={Ay - 4} fill="#fbbf24" fontSize="11" fontWeight="bold">45°</text>
-        <text x={Cx - 32} y={Cy + 18} fill="#fbbf24" fontSize="11" fontWeight="bold">45°</text>
+        <text x={Cx - 24} y={Cy + 28} fill="#fbbf24" fontSize="11" fontWeight="bold">45°</text>
         {/* Label sisi: 1 (alas), 1 (vertikal), √2 (miring) */}
         <text x={(Ax + Bx) / 2} y={By + 18} fill="#e5e7eb" fontSize="14" fontWeight="bold" textAnchor="middle">1</text>
         <text x={Bx + 8} y={(By + Cy) / 2 + 4} fill="#e5e7eb" fontSize="14" fontWeight="bold">1</text>
