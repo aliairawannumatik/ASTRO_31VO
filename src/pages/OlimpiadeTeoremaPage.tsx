@@ -794,19 +794,19 @@ const HelikopterOABCSVG = () => {
         {/* Tanda siku-siku di O */}
         <rect x={O.x} y={O.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
 
-        {/* Helikopter (siluet sederhana) */}
-        <g transform={`translate(${H_pt.x - 22}, ${H_pt.y - 18})`}>
-          {/* badan */}
-          <ellipse cx="14" cy="14" rx="14" ry="8" fill="#7c3aed" stroke="#1e1b4b" strokeWidth="1" />
-          {/* ekor */}
-          <rect x="22" y="12" width="20" height="3" fill="#7c3aed" stroke="#1e1b4b" strokeWidth="0.8" />
-          {/* baling-baling atas */}
-          <line x1="-4" y1="4" x2="32" y2="4" stroke="#1e1b4b" strokeWidth="1.6" />
-          <line x1="14" y1="4" x2="14" y2="6" stroke="#1e1b4b" strokeWidth="1" />
-          {/* baling-baling ekor */}
-          <line x1="42" y1="9" x2="42" y2="18" stroke="#1e1b4b" strokeWidth="1.2" />
-          {/* skid */}
-          <line x1="2" y1="22" x2="26" y2="22" stroke="#1e1b4b" strokeWidth="1" />
+        {/* Helikopter (lebih realistis) */}
+        <g transform={`translate(${H_pt.x - 30}, ${H_pt.y - 24})`}>
+          <ellipse cx="26" cy="24" rx="18" ry="10" fill="#64748b" stroke="#0f172a" strokeWidth="1.2" />
+          <path d="M 12 22 L 22 14 L 40 14 L 47 24 L 40 34 L 22 34 Z" fill="#94a3b8" stroke="#0f172a" strokeWidth="1.2" />
+          <rect x="34" y="22" width="26" height="5" rx="2" fill="#475569" stroke="#0f172a" strokeWidth="1" />
+          <rect x="56" y="23" width="10" height="3" rx="1.5" fill="#475569" stroke="#0f172a" strokeWidth="0.8" />
+          <circle cx="52" cy="24.5" r="4" fill="#1e293b" stroke="#0f172a" strokeWidth="0.8" />
+          <line x1="8" y1="10" x2="58" y2="10" stroke="#0f172a" strokeWidth="2" />
+          <line x1="33" y1="10" x2="33" y2="14" stroke="#0f172a" strokeWidth="1.2" />
+          <line x1="64" y1="20" x2="64" y2="29" stroke="#0f172a" strokeWidth="1.2" />
+          <path d="M 15 36 L 25 43" stroke="#0f172a" strokeWidth="1.4" />
+          <path d="M 38 36 L 31 43" stroke="#0f172a" strokeWidth="1.4" />
+          <rect x="18" y="18" width="8" height="7" rx="2" fill="#cbd5e1" opacity="0.85" />
         </g>
 
         {/* Label sudut di A, B, C (di sebelah kanan masing-masing titik, sedikit di atas garis tanah) */}
