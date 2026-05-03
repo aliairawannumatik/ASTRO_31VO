@@ -92,6 +92,11 @@ const questions: Q[] = [
       { label: "b.", math: "d = 10 \\text{ cm}" },
     ],
   }),
+
+  Q(6, "Luas dari Keliling Lingkaran", {
+    type: "essay", diff: "Sulit",
+    content: "Diketahui keliling sebuah lingkaran 44 cm, tentukanlah luas lingkaran tersebut!",
+  }),
 ];
 
 const UnsurUnsurLingkaranPage = () => {
@@ -112,7 +117,7 @@ const UnsurUnsurLingkaranPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 5 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 6 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
