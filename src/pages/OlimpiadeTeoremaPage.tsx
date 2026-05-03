@@ -13,6 +13,7 @@ import bangunABCDESoal7Img from "@assets/image_1777785078317.png";
 import layangKapalSoal18Img from "@assets/image_1777205277003.png";
 import bangunABCDSoalOlim20Img from "@assets/image_1777785299399.png";
 import pentagonSoal21Img from "@assets/image_1777785419675.png";
+import LayangLayangABCDSoalOlim23Img from "@assets/image_1777785419675.png";
 import segitigaABCD30_45_Soal29Img from "@assets/image_1777205490135.png";
 import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777205526814.png";
 import bangunABCDSoalOlim4Img from "@assets/image_1777205553203.png";
@@ -1389,6 +1390,16 @@ const OlimpiadeTeoremaPage = () => {
                       alt="Segitiga ABC dengan sisi AB 50 km dan BC 120 km, titik D di tengah AC, soal olimpiade nomor 6"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-6"
+                    />
+                  </div>
+                )}
+                {soal.no === 23 && (
+                  <div className="flex justify-center my-3">
+                    <img
+                      src={LayangLayangABCDSoalOlim23Img}
+                      alt="Layang-layang ABCD soal olimpiade nomor 23"
+                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
+                      data-testid="img-soal-pyth-olim-23"
                     />
                   </div>
                 )}
