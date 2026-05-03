@@ -36,6 +36,17 @@ const soalList: Soal[] = [
   },
   {
     n: 3,
+    question: "Luas juring dengan sudut pusat 120° dan panjang jari-jari 7 cm adalah...",
+    note: "(π = 22/7)",
+    choices: [
+      { label: "a.", text: "77 cm²" },
+      { label: "b.", text: "51,33 cm²" },
+      { label: "c.", text: "38,50 cm²" },
+      { label: "d.", text: "14,67 cm²" },
+    ],
+  },
+  {
+    n: 4,
     question: "Perhatikan gambar! Jika luas juring ORS = 60 cm², luas juring OPQ adalah...",
     img: "/soal-busur-1.png",
     imgAlt: "Lingkaran dengan juring ORS dan OPQ, sudut POQ = 135°",
@@ -44,17 +55,6 @@ const soalList: Soal[] = [
       { label: "b.", text: "75 cm²" },
       { label: "c.", text: "90 cm²" },
       { label: "d.", text: "105 cm²" },
-    ],
-  },
-  {
-    n: 4,
-    question: "Luas juring dengan sudut pusat 120° dan panjang jari-jari 7 cm adalah...",
-    note: "(π = 22/7)",
-    choices: [
-      { label: "a.", text: "77 cm²" },
-      { label: "b.", text: "51,33 cm²" },
-      { label: "c.", text: "38,50 cm²" },
-      { label: "d.", text: "14,67 cm²" },
     ],
   },
   {
