@@ -770,7 +770,7 @@ const SegitigaPQR30SVG = () => {
 
 // SVG: Helikopter mengamati 3 titik untuk Soal No. 28
 const HelikopterOABCSVG = () => {
-  const W = 380, H = 240;
+  const W = 420, H = 260;
 
   const O = { x: 40, y: 200 };
   const A = { x: 100, y: 200 };
@@ -780,7 +780,7 @@ const HelikopterOABCSVG = () => {
 
   return (
     <div className="my-3 flex justify-center">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm sm:max-w-md rounded-lg border border-border/40 bg-white/5">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md sm:max-w-lg rounded-lg border border-border/40 bg-white/5">
         {/* Garis tanah O→C */}
         <line x1={O.x} y1={O.y} x2={C.x} y2={C.y} stroke="#22d3ee" strokeWidth="2" />
         {/* Garis vertikal H→O (ketinggian) */}
