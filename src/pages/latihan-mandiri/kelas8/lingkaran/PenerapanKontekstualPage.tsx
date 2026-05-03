@@ -131,64 +131,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Selang Air Melingkar", {
-    type: "essay",
-    content: "Selang air berbentuk melingkar dipasang di kebun. Jari-jari lingkaran selang = 7 m. Air disemprotkan dari pusat lingkaran.",
-    parts: [
-      { label: "a.", text: "Berapakah luas kebun yang bisa disiram air?" },
-      { label: "b.", text: "Jika selang berputar membentuk sudut 270°, berapa luas kebun yang disiram?" },
-      { label: "c.", text: "Untuk menyiram seluruh kebun, selang harus berputar berapa derajat?" },
-    ],
-  }),
-
-  Q(9, "Target Panahan", {
-    type: "mixed",
-    diagram: {
-      size: 220,
-      extraCircles: [
-        { cx: 110, cy: 110, r: 18, color: "#f87171", fill: "rgba(239,68,68,0.3)" },
-        { cx: 110, cy: 110, r: 36, color: "#fb923c", fill: "rgba(251,146,60,0.15)" },
-        { cx: 110, cy: 110, r: 54, color: "#facc15", fill: "rgba(250,204,21,0.1)" },
-        { cx: 110, cy: 110, r: 72, color: "#34d399", fill: "rgba(52,211,153,0.08)" },
-        { cx: 110, cy: 110, r: 90, color: "#60a5fa", fill: "rgba(56,189,248,0.05)" },
-      ],
-      extraTexts: [
-        { x: 110, y: 113, text: "10", color: "#fff", size: 9, bold: true },
-        { x: 132, y: 110, text: "9", color: "#fb923c", size: 8, bold: true },
-        { x: 155, y: 110, text: "8", color: "#facc15", size: 8, bold: true },
-        { x: 175, y: 110, text: "7", color: "#34d399", size: 8, bold: true },
-        { x: 195, y: 110, text: "6", color: "#60a5fa", size: 8, bold: true },
-      ],
-      showCenter: false,
-    },
-    content: "Target panahan 5 cincin konsentris. Jari-jari dari dalam: 2, 4, 6, 8, 10 cm.",
-    parts: [
-      { label: "a.", text: "Hitung luas lingkaran terdalam (jari-jari 2 cm)." },
-      { label: "b.", text: "Hitung luas cincin kedua (antara r = 2 dan r = 4 cm)." },
-      { label: "c.", text: "Apakah setiap cincin memiliki luas yang sama? Jelaskan!" },
-    ],
-  }),
-
-  Q(10, "Roda Gigi (Gear)", {
-    type: "essay",
-    content: "Dua roda gigi saling berkaitan. Roda A berjari-jari 21 cm dan roda B berjari-jari 7 cm.",
-    parts: [
-      { label: "a.", text: "Hitung keliling roda A dan roda B." },
-      { label: "b.", text: "Jika roda A berputar 1 kali, berapa kali roda B berputar?" },
-      { label: "c.", text: "Jika roda A berputar 100 rpm (rotasi per menit), berapa rpm roda B?" },
-    ],
-  }),
-
-  Q(11, "Soal UN — Lintasan Atletik", {
-    type: "essay",
-    content: "Lintasan atletik berbentuk persegi panjang dengan dua setengah lingkaran di ujungnya. Panjang lurus = 100 m, diameter setengah lingkaran = 80 m.",
-    parts: [
-      { label: "a.", text: "Hitung panjang dua busur setengah lingkaran." },
-      { label: "b.", text: "Hitung total panjang satu putaran lintasan." },
-      { label: "c.", text: "Lintasan standar atletik = 400 m. Berapa persis panjang bagian lurusnya?" },
-    ],
-  }),
-
   Q(12, "Cat Dinding Melingkar", {
     type: "essay",
     content: "Dinding lingkaran gedung berjari-jari 7 m akan dicat. Satu kaleng cat cukup untuk 10 m². Harga 1 kaleng cat Rp 85.000.",
@@ -199,7 +141,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(13, "Soal ANBK — Proyek Taman", {
+  Q(12, "Cat Dinding Melingkar", {
     type: "essay",
     content: "Proyek pembangunan taman:\n• Taman berbentuk lingkaran r = 21 m\n• Jalan setapak lebar 3,5 m di sekeliling taman\n• Biaya jalan: Rp 150.000/m²\n• Biaya tanaman taman: Rp 30.000/m²",
     parts: [
@@ -209,7 +151,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(14, "Kincir Angin (Windmill)", {
+  Q(13, "Soal ANBK — Proyek Taman", {
     type: "essay",
     content: "Baling-baling kincir angin membentuk 3 juring sama besar dengan panjang baling-baling 7 m.",
     parts: [
@@ -219,7 +161,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Soal TKA — Pompa Air Melingkar", {
+  Q(14, "Kincir Angin (Windmill)", {
     type: "essay",
     content: "Sistem irigasi menggunakan pompa yang berputar melingkar dengan jangkauan 56 m. Pompa berputar 4 jam untuk mengairi seluruh area.",
     parts: [
@@ -229,7 +171,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(16, "Karpet Melingkar", {
+  Q(15, "Soal TKA — Pompa Air Melingkar", {
     type: "essay",
     content: "Sebuah ruangan berbentuk persegi panjang 7 m × 5 m. Di tengahnya diletakkan karpet melingkar berjari-jari 2 m.",
     parts: [
@@ -239,7 +181,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(17, "Soal UN — Drum Silinder", {
+  Q(16, "Karpet Melingkar", {
     type: "essay",
     content: "Sebuah drum minyak berbentuk silinder memiliki diameter 56 cm. Dinding samping drum akan diberi stiker melingkar setinggi 30 cm.",
     parts: [
@@ -249,7 +191,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(18, "Soal ANBK — Penangkap Ikan Jaring Melingkar", {
+  Q(17, "Soal UN — Drum Silinder", {
     type: "essay",
     content: "Jaring ikan berbentuk lingkaran. Jika diameter jaring 14 m, dan nelayan melempar jaring setiap 10 menit.",
     parts: [
@@ -259,7 +201,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "Meja Makan Melingkar", {
+  Q(18, "Soal ANBK — Penangkap Ikan Jaring Melingkar", {
     type: "essay",
     content: "Meja makan berbentuk lingkaran dengan diameter 1,4 m akan dilapisi taplak meja. Taplak menjuntai 20 cm di setiap sisi.",
     parts: [
@@ -269,7 +211,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(20, "Soal TKA — Satelit Mengorbit Bumi", {
+  Q(19, "Meja Makan Melingkar", {
     type: "essay",
     content: "Satelit mengorbit bumi pada ketinggian 7.000 km. Jari-jari bumi ≈ 6.400 km. Orbit dianggap melingkar.",
     parts: [
@@ -279,7 +221,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(21, "Soal UN — Ember Bundar", {
+  Q(20, "Soal TKA — Satelit Mengorbit Bumi", {
     type: "essay",
     content: "Sebuah ember berbentuk silinder (bagian atas saja) dengan diameter 28 cm. Akan dipasang cincin kawat di bibir ember.",
     parts: [
@@ -299,7 +241,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(23, "Soal ANBK — Lapangan Basket", {
+  Q(21, "Soal UN — Ember Bundar", {
     type: "essay",
     content: "Lapangan basket memiliki lingkaran tengah berjari-jari 1,8 m dan dua lingkaran luar berjari-jari 6,5 m.",
     parts: [
@@ -309,7 +251,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(24, "Tabung Kaleng", {
+  Q(22, "Ban Mobil", {
     type: "essay",
     content: "Sebuah kaleng berbentuk tabung dengan diameter 14 cm. Label kertas akan ditempel mengelilingi kaleng setinggi 10 cm.",
     parts: [
@@ -319,7 +261,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(25, "Soal TKA — Menghitung Laju Putaran", {
+  Q(23, "Soal ANBK — Lapangan Basket", {
     type: "essay",
     content: "Generator listrik memiliki roda dengan jari-jari 0,5 m yang berputar 60 kali per menit.",
     parts: [
@@ -329,7 +271,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(26, "Harga Cat Ruangan Melingkar", {
+  Q(24, "Tabung Kaleng", {
     type: "essay",
     content: "Sebuah ruangan berbentuk lingkaran berjari-jari 7 m. Lantainya akan dicat dengan harga Rp 45.000/m².",
     parts: [
@@ -349,7 +291,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(28, "Menara Air (Water Tower)", {
+  Q(25, "Soal TKA — Menghitung Laju Putaran", {
     type: "essay",
     content: "Menara air berbentuk tabung dengan diameter 7 m dan tinggi 10 m. Dinding luar akan dicat.",
     parts: [
@@ -359,7 +301,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(29, "Soal ANBK — Drainase Pipa", {
+  Q(26, "Harga Cat Ruangan Melingkar", {
     type: "essay",
     content: "Pipa air berbentuk silinder memiliki diameter dalam 14 cm. Air mengalir memenuhi seluruh luas penampang pipa.",
     parts: [
@@ -369,7 +311,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(30, "Soal TKA — Bumi dan Bulan", {
+  Q(27, "Soal UN — Kolam Ikan", {
     type: "essay",
     content: "Bulan mengelilingi bumi dengan orbit hampir melingkar berjari-jari ≈ 384.000 km. Satu putaran = 27 hari.",
     parts: [
@@ -379,7 +321,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(31, "Soal UN — Persyaratan Lahan", {
+  Q(28, "Menara Air (Water Tower)", {
     type: "essay",
     content: "Sebuah stadion membutuhkan lapangan sepak bola yang dikelilingi lintasan lari melingkar. Diameter total (lapangan + lintasan) = 224 m. Lintasan lebar 14 m.",
     parts: [
@@ -389,7 +331,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(32, "Kompas dan Arah", {
+  Q(29, "Soal ANBK — Drainase Pipa", {
     type: "essay",
     content: "Kompas menunjukkan arah dalam lingkaran penuh (360°). Kapal bergerak dari Utara (90°) searah jarum jam ke arah Timur Laut (45°).",
     parts: [
@@ -399,7 +341,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(33, "Soal ANBK — Lempar Cakram", {
+  Q(30, "Soal TKA — Bumi dan Bulan", {
     type: "essay",
     content: "Atlet lempar cakram melempar dari lingkaran berdiameter 2,5 m. Cakram mendarat 45 m dari pusat lingkaran.",
     parts: [
@@ -409,7 +351,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(34, "Kincir Ria (Ferris Wheel)", {
+  Q(31, "Soal UN — Persyaratan Lahan", {
     type: "essay",
     content: "Kincir ria memiliki diameter 42 m. Pusat kincir berada 21 m di atas tanah. Kincir berputar 1 kali setiap 3 menit.",
     parts: [
@@ -419,7 +361,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(35, "Soal TKA — Pengambilan Gambar Drone", {
+  Q(32, "Kompas dan Arah", {
     type: "essay",
     content: "Drone terbang melingkar dengan jari-jari 100 m dari menara pusat. Kamera mengambil gambar area di bawahnya.",
     parts: [
@@ -429,7 +371,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(36, "Soal UN — Memilih Produk", {
+  Q(33, "Soal ANBK — Lempar Cakram", {
     type: "essay",
     content: "Di toko terdapat dua jenis kue melingkar:\nKue A: diameter 28 cm, harga Rp 84.000\nKue B: diameter 14 cm, harga Rp 24.000",
     parts: [
@@ -439,7 +381,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(37, "Soal ANBK — Pembagian Warisan", {
+  Q(34, "Kincir Ria (Ferris Wheel)", {
     type: "essay",
     content: "Sebuah kebun berbentuk lingkaran berjari-jari 28 m akan diwariskan kepada 4 orang anak secara sama rata.",
     parts: [
@@ -449,7 +391,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(38, "Soal TKA — Jalur Pipa Melingkar", {
+  Q(35, "Soal TKA — Pengambilan Gambar Drone", {
     type: "essay",
     content: "Pipa berbentuk cincin dengan diameter luar 42 cm dan diameter dalam 28 cm akan digunakan sebagai saluran air.",
     parts: [
@@ -459,7 +401,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(39, "Soal UN — Perbandingan Efisiensi", {
+  Q(36, "Soal UN — Memilih Produk", {
     type: "essay",
     content: "Dua reaktor kimia berbentuk lingkaran: Reaktor P (r = 14 m) dan Reaktor Q (r = 7 m).",
     parts: [
@@ -469,6 +411,9 @@ const questions: Q[] = [
     ],
   }),
 
+  Q(37, "Soal ANBK — Pembagian Warisan", {
+  Q(38, "Soal TKA — Jalur Pipa Melingkar", {
+  Q(39, "Soal UN — Perbandingan Efisiensi", {
   Q(40, "Soal ANBK Gabungan — Desain Taman Terpadu", {
     type: "mixed",
     diagram: {
