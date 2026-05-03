@@ -412,8 +412,35 @@ const questions: Q[] = [
   }),
 
   Q(37, "Soal ANBK — Pembagian Warisan", {
+    type: "essay",
+    content: "Sebuah lahan berbentuk lingkaran dengan jari-jari 21 m akan dibagi menjadi 3 bagian sama besar.",
+    parts: [
+      { label: "a.", text: "Hitung luas total lahan. (π = 22/7)" },
+      { label: "b.", text: "Berapa luas masing-masing bagian?" },
+      { label: "c.", text: "Jika harga tanah Rp 500.000/m², berapa nilai setiap bagian?" },
+    ],
+  }),
+
   Q(38, "Soal TKA — Jalur Pipa Melingkar", {
+    type: "essay",
+    content: "Sebuah jalur pipa melingkar memiliki diameter luar 56 cm dan diameter dalam 42 cm.",
+    parts: [
+      { label: "a.", text: "Hitung luas penampang pipa. (π = 22/7)" },
+      { label: "b.", text: "Jika pipa sepanjang 10 m, berapa volume bahan pipa tersebut?" },
+      { label: "c.", text: "Jika berat jenis bahan = 2 kg/cm³, berapa berat total pipa?" },
+    ],
+  }),
+
   Q(39, "Soal UN — Perbandingan Efisiensi", {
+    type: "essay",
+    content: "Dua kipas angin berbentuk lingkaran: Kipas A berjari-jari 28 cm dan Kipas B berjari-jari 14 cm.",
+    parts: [
+      { label: "a.", text: "Berapa perbandingan luas Kipas A : Kipas B?" },
+      { label: "b.", text: "Jika 4 kipas B digunakan, apakah luasnya sama dengan 1 kipas A?" },
+      { label: "c.", text: "Manakah yang lebih efisien dari segi biaya jika harga sebanding luas?" },
+    ],
+  }),
+
   Q(40, "Soal ANBK Gabungan — Desain Taman Terpadu", {
     type: "mixed",
     diagram: {
