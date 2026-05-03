@@ -17,6 +17,13 @@ type Soal = {
 const soalList: Soal[] = [
   {
     n: 1,
+    question: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah....",
+    note: "(π = 22/7)",
+    img: "/soal-busur-5.png",
+    imgAlt: "Lingkaran dengan juring sudut 60°, titik O dan P",
+  },
+  {
+    n: 2,
     question: "Perhatikan gambar! Jika luas juring ORS = 60 cm², luas juring OPQ adalah...",
     img: "/soal-busur-1.png",
     imgAlt: "Lingkaran dengan juring ORS dan OPQ, sudut POQ = 135°",
@@ -28,7 +35,7 @@ const soalList: Soal[] = [
     ],
   },
   {
-    n: 2,
+    n: 3,
     question: "Perhatikan gambar! Jika O adalah pusat lingkaran, r = 21 cm dan π = 22/7, maka luas daerah yang diarsir adalah...",
     img: "/soal-busur-2.png",
     imgAlt: "Lingkaran dengan juring sudut 40° yang diarsir",
@@ -38,13 +45,6 @@ const soalList: Soal[] = [
       { label: "c.", text: "231 cm²" },
       { label: "d.", text: "308 cm²" },
     ],
-  },
-  {
-    n: 3,
-    question: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah....",
-    note: "(π = 22/7)",
-    img: "/soal-busur-5.png",
-    imgAlt: "Lingkaran dengan juring sudut 60°, titik O dan P",
   },
   {
     n: 4,
