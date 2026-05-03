@@ -751,7 +751,7 @@ const SegitigaPQR30SVG = () => {
         <rect x={P.x} y={P.y - 12} width="12" height="12" fill="none" stroke="#22d3ee" strokeWidth="1.2" />
 
         {/* Busur sudut 30° di Q */}
-        <path d={`M ${Q.x - 28} ${Q.y} A 28 28 0 0 0 ${Q.x - 24.2} ${Q.y - 14}`} fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+        <path d={`M ${Q.x - 28} ${Q.y} A 28 28 0 0 1 ${Q.x - 24.2} ${Q.y - 14}`} fill="none" stroke="#fbbf24" strokeWidth="1.4" />
         <text x={Q.x - 30} y={Q.y - 6} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">30°</text>
 
         {/* Titik sudut */}
