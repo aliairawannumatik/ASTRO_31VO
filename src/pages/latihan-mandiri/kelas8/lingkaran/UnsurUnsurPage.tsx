@@ -58,7 +58,18 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Unsur Lingkaran — Benar atau Salah", {
+  Q(3, "Menghitung Diameter dari Jari-Jari", {
+    type: "mixed", diff: "Mudah",
+    content: "Diketahui sebuah lingkaran dengan jari-jari berikut. Tentukan diameternya!",
+    parts: [
+      { label: "a.", math: "r = 7 \\text{ cm}" },
+      { label: "b.", math: "r = 15 \\text{ cm}" },
+      { label: "c.", math: "r = 28 \\text{ cm}" },
+      { label: "d.", math: "r = 4{,}5 \\text{ cm}" },
+    ],
+  }),
+
+  Q(4, "Unsur Lingkaran — Benar atau Salah", {
     type: "mixed", diff: "Sedang",
     content: "Tentukan pernyataan berikut BENAR (B) atau SALAH (S)!",
     parts: [
@@ -93,7 +104,7 @@ const UnsurUnsurLingkaranPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 3 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 4 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
