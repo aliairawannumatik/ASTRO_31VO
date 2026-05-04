@@ -66,7 +66,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 6, type: "mixed", title: "Kaki dengan Nilai Pecahan",
+    n: 3, type: "mixed", title: "Kaki dengan Nilai Pecahan",
     content: "Segitiga siku-siku dengan kaki 1,5 cm dan 2 cm.",
     parts: [
       { label: "a.", math: "c^2 = (1{,}5)^2 + 2^2 = 2{,}25 + 4 = ..." },
@@ -74,7 +74,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 9, type: "mixed", title: "Sisi Segitiga Sama Kaki Siku-Siku",
+    n: 4, type: "mixed", title: "Sisi Segitiga Sama Kaki Siku-Siku",
     content: "Segitiga sama kaki siku-siku dengan kaki 10 cm.",
     parts: [
       { label: "a.", math: "c = \\sqrt{10^2 + 10^2} = \\sqrt{200} = 10\\sqrt{2}" },
@@ -82,7 +82,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 15, type: "mixed", title: "Diagonal Persegi Panjang",
+    n: 5, type: "mixed", title: "Diagonal Persegi Panjang",
     content: "Persegi panjang dengan panjang 12 cm dan lebar 5 cm. Hitung panjang diagonalnya.",
     diagram: (
       <PythagorasDiagram
@@ -106,7 +106,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 16, type: "mixed", title: "Kaki dengan Ekspresi Aljabar",
+    n: 6, type: "mixed", title: "Kaki dengan Ekspresi Aljabar",
     content: "Segitiga siku-siku dengan kaki-kaki (2x) cm dan (x) cm. Hipotenusa 15 cm.",
     parts: [
       { label: "a.", math: "15^2 = (2x)^2 + x^2" },
@@ -115,7 +115,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 18, type: "mixed", title: "Kaki 28 dan 45",
+    n: 7, type: "mixed", title: "Kaki 28 dan 45",
     content: "Tentukan hipotenusa segitiga siku-siku dengan kaki 28 cm dan 45 cm.",
     parts: [
       { label: "a.", math: "c^2 = 28^2 + 45^2 = 784 + 2025 = ..." },
@@ -123,7 +123,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 21, type: "mixed", title: "Tinggi Segitiga Sama Kaki",
+    n: 8, type: "mixed", title: "Tinggi Segitiga Sama Kaki",
     content: "Segitiga sama kaki dengan sisi 13 cm dan alas 10 cm. Hitung tingginya dengan Pythagoras.",
     diagram: (
       <PythagorasDiagram

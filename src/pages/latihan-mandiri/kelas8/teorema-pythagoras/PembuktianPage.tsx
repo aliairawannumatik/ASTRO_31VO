@@ -25,7 +25,7 @@ const badge = (label: string, color: string) => (
 
 const questions: Q[] = [
   {
-    n: 16, type: "mixed", title: "ANBK — Pernyataan Benar/Salah",
+    n: 1, type: "mixed", title: "ANBK — Pernyataan Benar/Salah",
     content: "Tentukan BENAR (B) atau SALAH (S):",
     parts: [
       { label: "(1)", math: "\\text{Pada segitiga siku-siku, berlaku } a^2 + b^2 = c^2 \\text{ di mana } c \\text{ adalah hipotenusa.}" },
@@ -35,7 +35,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 19, type: "mixed", title: "Sisi-Sisi Segitiga dan Teorema Pythagoras",
+    n: 2, type: "mixed", title: "Sisi-Sisi Segitiga dan Teorema Pythagoras",
     content: "Diberikan tiga bilangan. Tentukan apakah dapat membentuk segitiga siku-siku:",
     parts: [
       { label: "a.", math: "\\{5,\\ 12,\\ 13\\}" },
@@ -45,7 +45,7 @@ const questions: Q[] = [
     ],
   },
   {
-    n: 31, type: "mixed", title: "ANBK — Pilihan Benar",
+    n: 3, type: "mixed", title: "ANBK — Pilihan Benar",
     content: "Pilih semua pernyataan yang BENAR tentang Teorema Pythagoras:",
     parts: [
       { label: "(A)", text: "Teorema Pythagoras hanya berlaku untuk segitiga yang semua sudutnya 60°." },

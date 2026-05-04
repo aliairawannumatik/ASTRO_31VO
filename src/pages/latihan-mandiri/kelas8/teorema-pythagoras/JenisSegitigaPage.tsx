@@ -36,7 +36,7 @@ const questions: Q[] = [
       { label: "Tanyakan:", text: "Sebutkan sisi mana yang selalu dijadikan c (sisi terbesar)." },
     ],
   },
-  { n: 16, type: "mixed", title: "TKA — Menentukan Jenis dari Angka",
+  { n: 2, type: "mixed", title: "TKA — Menentukan Jenis dari Angka",
     content: "Tanpa menggambar, tentukan jenis segitiga berikut:",
     parts: [
       { label: "a.", math: "\\{11,\\ 12,\\ 15\\}" },
@@ -45,7 +45,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\{6,\\ 6,\\ 6\\}" },
     ],
   },
-  { n: 20, type: "mixed", title: "Segitiga dengan Irasional",
+  { n: 3, type: "mixed", title: "Segitiga dengan Irasional",
     content: "Tentukan jenis segitiga dengan sisi 3, 5, dan √35.",
     parts: [
       { label: "a.", math: "3^2 + 5^2 = 9 + 25 = 34" },
@@ -53,7 +53,7 @@ const questions: Q[] = [
       { label: "c.", math: "34 < 35 \\Rightarrow \\text{segitiga } ..." },
     ],
   },
-  { n: 22, type: "mixed", title: "ANBK — Benar/Salah",
+  { n: 4, type: "mixed", title: "ANBK — Benar/Salah",
     content: "Tentukan BENAR (B) atau SALAH (S):",
     parts: [
       { label: "(1)", text: "Segitiga dengan sisi 6, 8, 10 adalah segitiga siku-siku." },
@@ -62,7 +62,7 @@ const questions: Q[] = [
       { label: "(4)", text: "Jika a² + b² = c², maka segitiga tersebut adalah segitiga lancip." },
     ],
   },
-  { n: 32, type: "mixed", title: "Menentukan Jenis 5 Segitiga",
+  { n: 5, type: "mixed", title: "Menentukan Jenis 5 Segitiga",
     content: "Tentukan jenis masing-masing segitiga:",
     parts: [
       { label: "a.", math: "\\{2,\\ 4,\\ 5\\}" },
@@ -72,7 +72,7 @@ const questions: Q[] = [
       { label: "e.", math: "\\{10,\\ 10,\\ 10\\sqrt{2}\\}" },
     ],
   },
-  { n: 39, type: "mixed", title: "Mengklasifikasi 5 Segitiga Sekaligus",
+  { n: 6, type: "mixed", title: "Mengklasifikasi 5 Segitiga Sekaligus",
     content: "Tentukan jenis kelima segitiga berikut:",
     parts: [
       { label: "1.", math: "\\{6,\\ 8,\\ 9\\}" },

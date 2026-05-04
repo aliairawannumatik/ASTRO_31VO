@@ -67,7 +67,7 @@ const questions: Q[] = [
       { label: "c.", text: "Konfirmasi bahwa 7, 24, 25 adalah triple Pythagoras." },
     ],
   },
-  { n: 7, type: "mixed", title: "Mengenali Triple Pythagoras",
+  { n: 5, type: "mixed", title: "Mengenali Triple Pythagoras",
     content: "Tentukan mana yang merupakan triple Pythagoras:",
     parts: [
       { label: "a.", math: "\\{6,\\ 8,\\ 10\\}" },
@@ -76,7 +76,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\{4,\\ 6,\\ 8\\}" },
     ],
   },
-  { n: 8, type: "mixed", title: "Melengkapi Triple Pythagoras",
+  { n: 6, type: "mixed", title: "Melengkapi Triple Pythagoras",
     content: "Temukan bilangan ketiga agar menjadi triple Pythagoras:",
     parts: [
       { label: "a.", math: "\\{3,\\ 4,\\ ?\\}" },
@@ -85,21 +85,21 @@ const questions: Q[] = [
       { label: "d.", math: "\\{8,\\ ?,\\ 17\\}" },
     ],
   },
-  { n: 9, type: "mixed", title: "Triple 9-40-41",
+  { n: 7, type: "mixed", title: "Triple 9-40-41",
     parts: [
       { label: "a.", math: "9^2 + 40^2 = 81 + 1600 = ..." },
       { label: "b.", math: "41^2 = ..." },
       { label: "c.", text: "Apakah 9, 40, 41 adalah triple Pythagoras?" },
     ],
   },
-  { n: 13, type: "mixed", title: "Triple 20-21-29",
+  { n: 8, type: "mixed", title: "Triple 20-21-29",
     parts: [
       { label: "a.", math: "20^2 + 21^2 = 400 + 441 = ..." },
       { label: "b.", math: "29^2 = ..." },
       { label: "c.", text: "Konfirmasi apakah 20, 21, 29 adalah triple Pythagoras." },
     ],
   },
-  { n: 15, type: "mixed", title: "Identifikasi Triple dari Kelipatan",
+  { n: 9, type: "mixed", title: "Identifikasi Triple dari Kelipatan",
     content: "Diketahui triple dasar 8-15-17. Tentukan apakah berikut ini juga triple Pythagoras:",
     parts: [
       { label: "a.", math: "\\{16,\\ 30,\\ 34\\}" },
@@ -107,7 +107,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\{40,\\ 75,\\ 85\\}" },
     ],
   },
-  { n: 16, type: "mixed", title: "ANBK — Pilih yang Merupakan Triple",
+  { n: 10, type: "mixed", title: "ANBK — Pilih yang Merupakan Triple",
     content: "Dari pilihan berikut, mana yang merupakan triple Pythagoras? (Pilih semua yang benar)",
     parts: [
       { label: "(A)", math: "3, 4, 5" },
@@ -116,7 +116,7 @@ const questions: Q[] = [
       { label: "(D)", math: "10, 24, 26" },
     ],
   },
-  { n: 24, type: "mixed", title: "Aplikasi Triple — Taman Kota",
+  { n: 11, type: "mixed", title: "Aplikasi Triple — Taman Kota",
     content: "Taman kota berbentuk segitiga siku-siku dengan sisi 30 m, 40 m, dan 50 m.",
     parts: [
       { label: "a.", text: "Apakah ini kelipatan triple 3-4-5?" },
