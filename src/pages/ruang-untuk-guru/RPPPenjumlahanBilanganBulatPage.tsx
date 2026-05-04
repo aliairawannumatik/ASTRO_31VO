@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -20,15 +21,15 @@ import {
   Play,
   Compass,
   CheckSquare,
+  Printer,
+  FileDown,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
-const identitas = [
-  { label: "Penyusun", value: "Irawan Sutiawan, M.Pd", icon: User },
-  { label: "Sekolah", value: "Sekolah Menengah Pertama", icon: School },
-  { label: "Kelas / Fase", value: "IX / D", icon: GraduationCap },
+const identitasStatis = [
+  { label: "Kelas / Fase", value: "VII / D", icon: GraduationCap },
   { label: "Tahun Ajaran", value: "2025 - 2026", icon: Calendar },
   { label: "Alokasi Waktu", value: "2 x 40 JP", icon: Clock },
   { label: "Topik", value: "Penjumlahan Bilangan Bulat", icon: Plus },
@@ -212,6 +213,68 @@ const SectionCard = ({
 const RPPPenjumlahanBilanganBulatPage = () => {
   const navigate = useNavigate();
 
+  const [penyusun, setPenyusun] = useState(() => localStorage.getItem("rpp_penyusun") ?? "");
+  const [sekolah, setSekolah] = useState(() => localStorage.getItem("rpp_sekolah") ?? "");
+
+  const handlePenyusun = (v: string) => { setPenyusun(v); localStorage.setItem("rpp_penyusun", v); };
+  const handleSekolah = (v: string) => { setSekolah(v); localStorage.setItem("rpp_sekolah", v); };
+
+  useEffect(() => {
+    const id = "rpp-print-styles";
+    if (!document.getElementById(id)) {
+      const style = document.createElement("style");
+      style.id = id;
+      style.textContent = `@media print { .no-print { display: none !important; } }`;
+      document.head.appendChild(style);
+    }
+    return () => { document.getElementById("rpp-print-styles")?.remove(); };
+  }, []);
+
+  const downloadWord = () => {
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+body{font-family:Calibri,Arial,sans-serif;font-size:11pt;color:#1a1a1a;margin:2cm}
+h1{text-align:center;font-size:14pt;font-weight:bold;margin:4pt 0}
+h2{font-size:12pt;font-weight:bold;color:#1a5276;border-bottom:1px solid #1a5276;margin-top:16pt;margin-bottom:6pt}
+table{width:100%;border-collapse:collapse;margin:8pt 0}
+td,th{border:1px solid #bbb;padding:5pt 8pt;font-size:10pt;vertical-align:top}
+th{background:#eaf4fb;font-weight:bold;width:25%}
+ul,ol{margin:4pt 0;padding-left:20pt}li{margin:2pt 0;font-size:10pt}
+.kop{text-align:center;border-bottom:2px solid #000;margin-bottom:12pt;padding-bottom:8pt}
+.fase{font-weight:bold;color:#1a5276;margin:8pt 0 4pt 0}
+</style></head><body>
+<div class="kop"><p style="font-size:13pt;font-weight:bold;margin:0">${sekolah || "SEKOLAH MENENGAH PERTAMA"}</p><p style="font-size:10pt;margin:4pt 0">Mata Pelajaran Matematika</p></div>
+<h1>RENCANA PELAKSANAAN PEMBELAJARAN (RPP)</h1><h1 style="font-size:12pt">Penjumlahan Bilangan Bulat</h1>
+<h2>A. IDENTITAS</h2><table>
+<tr><th>Penyusun</th><td>${penyusun || "____________________________"}</td><th>Sekolah</th><td>${sekolah || "____________________________"}</td></tr>
+<tr><th>Kelas / Fase</th><td>VII / D</td><th>Tahun Ajaran</th><td>2025 – 2026</td></tr>
+<tr><th>Alokasi Waktu</th><td>2 x 40 JP</td><th>Topik</th><td>Penjumlahan Bilangan Bulat</td></tr>
+</table>
+<h2>B. MATERI PEMBELAJARAN</h2>
+<p>Materi ini relevan untuk menjelaskan fenomena sehari-hari, seperti suhu (suhu di bawah 0°C), kedalaman laut, utang piutang, dan ketinggian tempat.</p>
+<h2>C. DIMENSI PROFIL LULUSAN</h2><ul>${dimensiProfil.map(d => `<li><strong>${d.title}:</strong> ${d.desc}</li>`).join("")}</ul>
+<h2>D. PRAKTIK PEDAGOGIS</h2>${praktikPedagogis.map(p => `<p><strong>${p.label}:</strong> ${p.value}</p>`).join("")}
+<h2>E. KEMITRAAN</h2><ul>${kemitraan.map(k => `<li><strong>${k.title}:</strong> ${k.desc}</li>`).join("")}</ul>
+<h2>F. LANGKAH-LANGKAH PEMBELAJARAN</h2>
+<p><strong>AWAL:</strong></p><ol>${langkahAwal.map(l => `<li>${l}</li>`).join("")}</ol>
+<p><strong>INTI:</strong></p>${langkahInti.map(f => `<div class="fase">${f.fase}</div><ul>${f.items.map(i => `<li>${i}</li>`).join("")}</ul>`).join("")}
+<p><strong>PENUTUP:</strong></p><ol>${langkahPenutup.map(l => `<li>${l}</li>`).join("")}</ol>
+<h2>G. ASESMEN PEMBELAJARAN</h2>${asesmen.map(a => `<p><strong>${a.title}:</strong></p><ul>${a.items.map(i => `<li>${i}</li>`).join("")}</ul>`).join("")}
+<br><br><table style="width:100%;border:none"><tr>
+<td style="border:none;text-align:center;width:50%"><p>Mengetahui,</p><p><strong>Kepala ${sekolah || "Sekolah Menengah Pertama"}</strong></p><br><br><br><br><p>.....................................................</p><p>NIP. .....................................................</p></td>
+<td style="border:none;text-align:center;width:50%"><p>&nbsp;</p><p><strong>Guru Mata Pelajaran</strong></p><br><br><br><br><p>.....................................................</p><p>NIP. .....................................................</p></td>
+</tr></table>
+</body></html>`;
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "RPP-Penjumlahan-Bilangan-Bulat.doc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
@@ -240,7 +303,36 @@ const RPPPenjumlahanBilanganBulatPage = () => {
           bgColor="linear-gradient(135deg, rgba(6,182,212,0.10) 0%, rgba(15,23,42,0.65) 100%)"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {identitas.map((item, i) => (
+            {/* Penyusun – editable */}
+            <div className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-cyan-400/40">
+              <User className="w-4 h-4 text-cyan-300 mt-2 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1">Penyusun</div>
+                <input
+                  type="text"
+                  value={penyusun}
+                  onChange={e => handlePenyusun(e.target.value)}
+                  placeholder="Ketik nama penyusun RPP..."
+                  className="w-full bg-transparent text-sm text-white font-body border-b border-white/20 focus:border-cyan-400 outline-none placeholder-white/30 pb-0.5 transition-colors"
+                />
+              </div>
+            </div>
+            {/* Sekolah – editable */}
+            <div className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-cyan-400/40">
+              <School className="w-4 h-4 text-cyan-300 mt-2 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1">Sekolah</div>
+                <input
+                  type="text"
+                  value={sekolah}
+                  onChange={e => handleSekolah(e.target.value)}
+                  placeholder="Ketik nama sekolah..."
+                  className="w-full bg-transparent text-sm text-white font-body border-b border-white/20 focus:border-cyan-400 outline-none placeholder-white/30 pb-0.5 transition-colors"
+                />
+              </div>
+            </div>
+            {/* Statis */}
+            {identitasStatis.map((item, i) => (
               <div key={i} className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-white/10">
                 <item.icon className="w-4 h-4 text-cyan-300 mt-0.5 flex-shrink-0" />
                 <div>
@@ -551,7 +643,7 @@ const RPPPenjumlahanBilanganBulatPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="text-center">
               <div className="text-xs text-white/60 font-body mb-1">Mengetahui,</div>
-              <div className="text-sm font-semibold text-white font-body mb-16">Kepala Sekolah Menengah Pertama</div>
+              <div className="text-sm font-semibold text-white font-body mb-16">Kepala {sekolah || "Sekolah Menengah Pertama"}</div>
               <div className="text-sm font-bold text-white font-body border-t border-white/20 pt-2">
                 ..........................................................
               </div>
@@ -568,8 +660,26 @@ const RPPPenjumlahanBilanganBulatPage = () => {
           </div>
         </div>
 
+        {/* Cetak & Unduh */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8 no-print">
+          <button
+            onClick={() => window.print()}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Cetak PDF
+          </button>
+          <button
+            onClick={downloadWord}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Unduh Word (.doc)
+          </button>
+        </div>
+
         {/* Footer Nav */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-6 no-print">
           <button
             onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/rpp/bilangan-bulat"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"

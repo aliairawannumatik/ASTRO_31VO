@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -18,6 +19,8 @@ import {
   Compass,
   CheckSquare,
   Lightbulb,
+  Printer,
+  FileDown,
   type LucideIcon,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
@@ -122,9 +125,24 @@ const RPPDetailPage = ({ data }: { data: RPPDetailData }) => {
   const navigate = useNavigate();
   const TopicIcon = data.topicIcon;
 
-  const identitas = [
-    { label: "Penyusun", value: "Irawan Sutiawan, M.Pd", icon: User },
-    { label: "Sekolah", value: "Sekolah Menengah Pertama", icon: School },
+  const [penyusun, setPenyusun] = useState(() => localStorage.getItem("rpp_penyusun") ?? "");
+  const [sekolah, setSekolah] = useState(() => localStorage.getItem("rpp_sekolah") ?? "");
+
+  const handlePenyusun = (v: string) => { setPenyusun(v); localStorage.setItem("rpp_penyusun", v); };
+  const handleSekolah = (v: string) => { setSekolah(v); localStorage.setItem("rpp_sekolah", v); };
+
+  useEffect(() => {
+    const id = "rpp-print-styles";
+    if (!document.getElementById(id)) {
+      const style = document.createElement("style");
+      style.id = id;
+      style.textContent = `@media print { .no-print { display: none !important; } }`;
+      document.head.appendChild(style);
+    }
+    return () => { document.getElementById("rpp-print-styles")?.remove(); };
+  }, []);
+
+  const identitasStatis = [
     { label: "Kelas / Fase", value: "VII / D", icon: GraduationCap },
     { label: "Tahun Ajaran", value: "2025 - 2026", icon: Calendar },
     { label: "Alokasi Waktu", value: data.alokasiWaktu, icon: Clock },
@@ -140,6 +158,61 @@ const RPPDetailPage = ({ data }: { data: RPPDetailData }) => {
     `Apersepsi Kontekstual: ${data.apersepsi}`,
     ...(data.langkahAwalExtra ?? []),
   ];
+
+  const downloadWord = () => {
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+body{font-family:Calibri,Arial,sans-serif;font-size:11pt;color:#1a1a1a;margin:2cm}
+h1{text-align:center;font-size:14pt;font-weight:bold;margin:4pt 0}
+h2{font-size:12pt;font-weight:bold;color:#1a5276;border-bottom:1px solid #1a5276;margin-top:16pt;margin-bottom:6pt}
+table{width:100%;border-collapse:collapse;margin:8pt 0}
+td,th{border:1px solid #bbb;padding:5pt 8pt;font-size:10pt;vertical-align:top}
+th{background:#eaf4fb;font-weight:bold;width:25%}
+ul,ol{margin:4pt 0;padding-left:20pt}li{margin:2pt 0;font-size:10pt}
+.kop{text-align:center;border-bottom:2px solid #000;margin-bottom:12pt;padding-bottom:8pt}
+.fase{font-weight:bold;color:#1a5276;margin:8pt 0 4pt 0}
+</style></head><body>
+<div class="kop"><p style="font-size:13pt;font-weight:bold;margin:0">${sekolah || "SEKOLAH MENENGAH PERTAMA"}</p><p style="font-size:10pt;margin:4pt 0">Mata Pelajaran Matematika</p></div>
+<h1>RENCANA PELAKSANAAN PEMBELAJARAN (RPP)</h1><h1 style="font-size:12pt">${data.topicTitle}</h1>
+<h2>A. IDENTITAS</h2><table>
+<tr><th>Penyusun</th><td>${penyusun || "____________________________"}</td><th>Sekolah</th><td>${sekolah || "____________________________"}</td></tr>
+<tr><th>Kelas / Fase</th><td>VII / D</td><th>Tahun Ajaran</th><td>2025 – 2026</td></tr>
+<tr><th>Alokasi Waktu</th><td>${data.alokasiWaktu}</td><th>Topik</th><td>${data.topicTitle}</td></tr>
+</table>
+<h2>B. IDENTIFIKASI</h2><p>${data.identifikasi}</p>
+<h2>C. MATERI PEMBELAJARAN</h2>
+<p><strong>Relevansi:</strong> ${data.relevansi}</p>
+<p><strong>Tingkat Kesulitan:</strong> ${data.tingkatKesulitan}</p>
+<p><strong>Struktur Materi:</strong> ${data.strukturMateri}</p>
+<p><strong>Integrasi Nilai:</strong> ${data.integrasiNilai}</p>
+<h2>D. DIMENSI PROFIL LULUSAN</h2><ul>${data.dimensiProfil.map(d => `<li><strong>${d.title}:</strong> ${d.desc}</li>`).join("")}</ul>
+<h2>E. CAPAIAN &amp; TUJUAN PEMBELAJARAN</h2>
+<p><strong>Capaian Pembelajaran:</strong> ${data.capaianPembelajaran}</p>
+<p><strong>Tujuan Pembelajaran:</strong> ${data.tujuanPembelajaran}</p>
+<p><strong>Topik Pembelajaran:</strong> ${data.topikPembelajaran}</p>
+<h2>F. PRAKTIK PEDAGOGIS</h2>${data.praktikPedagogis.map(p => `<p><strong>${p.label}:</strong> ${p.value}</p>`).join("")}<p><em>${data.praktikPedagogisCatatan}</em></p>
+<h2>G. KEMITRAAN / LINTAS DISIPLIN</h2><ul>${data.kemitraan.map(k => `<li><strong>${k.title}:</strong> ${k.desc}</li>`).join("")}</ul>
+<h2>H. LINGKUNGAN PEMBELAJARAN</h2><p><strong>Budaya Belajar:</strong> ${data.budayaBelajar}</p><p><strong>Ruang Fisik:</strong> ${data.ruangFisik}</p>
+<h2>I. PEMANFAATAN DIGITAL</h2><ul>${data.pemanfaatanDigital.map(d => `<li>${d}</li>`).join("")}</ul>
+<h2>J. LANGKAH-LANGKAH PEMBELAJARAN</h2>
+<p><strong>AWAL:</strong></p><ol>${langkahAwal.map(l => `<li>${l}</li>`).join("")}</ol>
+<p><strong>INTI:</strong></p>${data.langkahInti.map(f => `<div class="fase">${f.fase}</div><ul>${f.items.map(i => `<li>${i}</li>`).join("")}</ul>`).join("")}
+<p><strong>PENUTUP:</strong></p><ol>${data.langkahPenutup.map(l => `<li>${l}</li>`).join("")}</ol>
+<h2>K. ASESMEN PEMBELAJARAN</h2>${data.asesmen.map(a => `<p><strong>${a.title}:</strong></p><ul>${a.items.map(i => `<li>${i}</li>`).join("")}</ul>`).join("")}
+<br><br><table style="width:100%;border:none"><tr>
+<td style="border:none;text-align:center;width:50%"><p>Mengetahui,</p><p><strong>Kepala ${sekolah || "Sekolah Menengah Pertama"}</strong></p><br><br><br><br><p>.....................................................</p><p>NIP. .....................................................</p></td>
+<td style="border:none;text-align:center;width:50%"><p>&nbsp;</p><p><strong>Guru Mata Pelajaran</strong></p><br><br><br><br><p>.....................................................</p><p>NIP. .....................................................</p></td>
+</tr></table>
+</body></html>`;
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `RPP-${data.topicTitle.replace(/\s+/g, "-")}.doc`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
@@ -171,7 +244,36 @@ const RPPDetailPage = ({ data }: { data: RPPDetailData }) => {
           bgColor="linear-gradient(135deg, rgba(6,182,212,0.10) 0%, rgba(15,23,42,0.65) 100%)"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {identitas.map((item, i) => (
+            {/* Penyusun – editable */}
+            <div className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-cyan-400/40">
+              <User className="w-4 h-4 text-cyan-300 mt-2 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1">Penyusun</div>
+                <input
+                  type="text"
+                  value={penyusun}
+                  onChange={e => handlePenyusun(e.target.value)}
+                  placeholder="Ketik nama penyusun RPP..."
+                  className="w-full bg-transparent text-sm text-white font-body border-b border-white/20 focus:border-cyan-400 outline-none placeholder-white/30 pb-0.5 transition-colors"
+                />
+              </div>
+            </div>
+            {/* Sekolah – editable */}
+            <div className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-cyan-400/40">
+              <School className="w-4 h-4 text-cyan-300 mt-2 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1">Sekolah</div>
+                <input
+                  type="text"
+                  value={sekolah}
+                  onChange={e => handleSekolah(e.target.value)}
+                  placeholder="Ketik nama sekolah..."
+                  className="w-full bg-transparent text-sm text-white font-body border-b border-white/20 focus:border-cyan-400 outline-none placeholder-white/30 pb-0.5 transition-colors"
+                />
+              </div>
+            </div>
+            {/* Statis */}
+            {identitasStatis.map((item, i) => (
               <div key={i} className="flex items-start gap-3 bg-white/5 rounded-lg px-3 py-2.5 border border-white/10">
                 <item.icon className="w-4 h-4 text-cyan-300 mt-0.5 flex-shrink-0" />
                 <div>
@@ -460,7 +562,7 @@ const RPPDetailPage = ({ data }: { data: RPPDetailData }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="text-center">
               <div className="text-xs text-white/60 font-body mb-1">Mengetahui,</div>
-              <div className="text-sm font-semibold text-white font-body mb-16">Kepala Sekolah Menengah Pertama</div>
+              <div className="text-sm font-semibold text-white font-body mb-16">Kepala {sekolah || "Sekolah Menengah Pertama"}</div>
               <div className="text-sm font-bold text-white font-body border-t border-white/20 pt-2">
                 ..........................................................
               </div>
@@ -477,8 +579,26 @@ const RPPDetailPage = ({ data }: { data: RPPDetailData }) => {
           </div>
         </div>
 
+        {/* Cetak & Unduh */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8 no-print">
+          <button
+            onClick={() => window.print()}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Cetak PDF
+          </button>
+          <button
+            onClick={downloadWord}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Unduh Word (.doc)
+          </button>
+        </div>
+
         {/* Footer Nav */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-6 no-print">
           <button
             onClick={() => {
               playPopSound();

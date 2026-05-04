@@ -1711,3 +1711,18 @@
 
 /* ── KaTeX math text: deep sunset burgundy so formulas stand out ── */
 .theme-sunset .katex { color: #7c2d12; }
+
+/* ── RPP Print Styles ── */
+@media print {
+  .no-print { display: none !important; }
+  .gradient-space { background: white !important; min-height: auto !important; }
+  body { background: white !important; }
+  .backdrop-blur { backdrop-filter: none !important; }
+  canvas { display: none !important; }
+  .rpp-input-field {
+    border: none !important;
+    border-bottom: 1px solid #aaa !important;
+    background: transparent !important;
+    color: #1a1a1a !important;
+  }
+}
