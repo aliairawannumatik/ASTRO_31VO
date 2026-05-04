@@ -442,17 +442,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa selisih banyak siswa yang memilih Sains dan Bahasa?" },
     ],
   }),
-  Qn(9, "Membaca Diagram Batang Daun – UN", {
-    type: "mixed",
-    diagram: <DiagramBatangDaun />,
-    content: "Perhatikan diagram batang daun nilai ulangan 20 siswa berikut.",
-    parts: [
-      { label: "a.", text: "Berapa banyak siswa yang mendapat nilai 70-an?" },
-      { label: "b.", text: "Tentukan nilai tertinggi dan nilai terendah dari data tersebut!" },
-      { label: "c.", text: "Berapa banyak siswa yang mendapat nilai di atas 80?" },
-    ],
-  }),
-  Qn(10, "Diagram Lingkaran – Derajat (Unsur Diketahui)", {
+  Qn(9, "Diagram Lingkaran – Derajat (Unsur Diketahui)", {
     type: "mixed",
     diagram: <DiagramLingkaranDerajat />,
     content: "Diagram lingkaran menunjukkan hobi favorit sejumlah siswa. Besar sudut setiap sektor ditunjukkan dalam derajat. Diketahui 36 siswa menyukai Membaca.",
@@ -460,6 +450,16 @@ const questions: Q[] = [
       { label: "a.", text: "Berapa jumlah seluruh siswa?" },
       { label: "b.", text: "Berapa banyak siswa yang menyukai Olahraga?" },
       { label: "c.", text: "Berapa persen siswa yang menyukai Musik?" },
+    ],
+  }),
+  Qn(10, "Membaca Diagram Batang Daun – UN", {
+    type: "mixed",
+    diagram: <DiagramBatangDaun />,
+    content: "Perhatikan diagram batang daun nilai ulangan 20 siswa berikut.",
+    parts: [
+      { label: "a.", text: "Berapa banyak siswa yang mendapat nilai 70-an?" },
+      { label: "b.", text: "Tentukan nilai tertinggi dan nilai terendah dari data tersebut!" },
+      { label: "c.", text: "Berapa banyak siswa yang mendapat nilai di atas 80?" },
     ],
   }),
 ];
