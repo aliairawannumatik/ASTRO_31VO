@@ -262,6 +262,42 @@ const DiagramBatangPeminjaman = () => {
   );
 };
 
+const DiagramLingkaranDerajat = () => {
+  const cx = 110, cy = 108, r = 75, lr = 45;
+  const segs = [
+    { start: 0,   end: 144, color: "#0e7490", line1: "Olahraga", line2: "144°" },
+    { start: 144, end: 234, color: "#b45309", line1: "Musik",    line2: "90°"  },
+    { start: 234, end: 306, color: "#7c3aed", line1: "Membaca",  line2: "72°"  },
+    { start: 306, end: 360, color: "#be185d", line1: "Memasak",  line2: "54°"  },
+  ];
+  return (
+    <svg width="220" height="205" viewBox="0 0 220 205" className="mx-auto">
+      <rect x="2" y="2" width="216" height="201" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
+      <text x="110" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Hobi Favorit Siswa</text>
+      {segs.map((seg, i) => {
+        const startRad = (seg.start - 90) * Math.PI / 180;
+        const endRad   = (seg.end   - 90) * Math.PI / 180;
+        const x1 = cx + r * Math.cos(startRad);
+        const y1 = cy + r * Math.sin(startRad);
+        const x2 = cx + r * Math.cos(endRad);
+        const y2 = cy + r * Math.sin(endRad);
+        const large = (seg.end - seg.start) > 180 ? 1 : 0;
+        const midRad = ((seg.start + seg.end) / 2 - 90) * Math.PI / 180;
+        const lx = cx + lr * Math.cos(midRad);
+        const ly = cy + lr * Math.sin(midRad);
+        return (
+          <g key={i}>
+            <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
+              fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
+            <text x={lx} y={ly - 3} fill="white" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="white" fontSize="8" textAnchor="middle">{seg.line2}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 const DiagramBatangDaun = () => {
   const stems = [
     { stem: "5", leaves: ["4", "7", "8", "9"] },
@@ -360,7 +396,17 @@ const questions: Q[] = [
       { label: "b.", text: "Berapa derajat sudut sektor untuk 'Angkot 30%'?" },
     ],
   }),
-  Qn(8, "Membaca Diagram Batang Daun – UN", {
+  Qn(8, "Diagram Lingkaran – Sudut Derajat", {
+    type: "mixed",
+    diagram: <DiagramLingkaranDerajat />,
+    content: "Diagram lingkaran menunjukkan hobi favorit 180 siswa. Besar sudut setiap sektor ditunjukkan dalam derajat.",
+    parts: [
+      { label: "a.", text: "Berapa banyak siswa yang menyukai olahraga?" },
+      { label: "b.", text: "Berapa persen siswa yang menyukai membaca?" },
+      { label: "c.", text: "Berapa banyak siswa yang menyukai musik?" },
+    ],
+  }),
+  Qn(9, "Membaca Diagram Batang Daun – UN", {
     type: "mixed",
     diagram: <DiagramBatangDaun />,
     content: "Perhatikan diagram batang daun nilai ulangan 20 siswa berikut.",
@@ -389,7 +435,7 @@ const PenyajianDataPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 8 Soal</span>
+            <span className="text-teal-400 text-xs font-bold">📋 9 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
