@@ -16,6 +16,8 @@ import {
   CalendarDays,
   CalendarRange,
   BadgeCheck,
+  Users,
+  Star,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -57,6 +59,18 @@ const guruMenuItems = [
     icon: ClipboardCheck,
     path: "/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan",
     desc: "Rubrik 7 dimensi profil lulusan dan konversi nilai",
+  },
+  {
+    label: "ABSENSI SISWA",
+    icon: Users,
+    path: "/ruang-untuk-guru/absensi-siswa",
+    desc: "Daftar hadir peserta didik per pertemuan dengan rekapitulasi",
+  },
+  {
+    label: "PENILAIAN SISWA",
+    icon: Star,
+    path: "/ruang-untuk-guru/penilaian-siswa",
+    desc: "Input nilai, predikat, dan ketuntasan belajar peserta didik",
   },
   {
     label: "JURNAL GURU",
