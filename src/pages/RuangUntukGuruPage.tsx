@@ -18,6 +18,7 @@ import {
   BadgeCheck,
   Users,
   Star,
+  Trophy,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -101,6 +102,12 @@ const guruMenuItems = [
     icon: CalendarDays,
     path: "/ruang-untuk-guru/prosem",
     desc: "Program semester matematika SMP 2025-2026 & 2026-2027",
+  },
+  {
+    label: "KOKULIKULER",
+    icon: Trophy,
+    path: "/ruang-untuk-guru/kokulikuler",
+    desc: "Aktivitas kokulikuler matematika: proyek, olimpiade, eksplorasi, investigasi & permainan per materi",
   },
   {
     label: "NUMATIK GAME",
