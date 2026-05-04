@@ -13,6 +13,7 @@ import {
   ClipboardCheck,
   NotebookPen,
   CalendarClock,
+  CalendarDays,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -66,6 +67,12 @@ const guruMenuItems = [
     icon: CalendarClock,
     path: "/ruang-untuk-guru/agenda-guru",
     desc: "Agenda harian kegiatan pembelajaran dan kehadiran",
+  },
+  {
+    label: "PROSEM",
+    icon: CalendarDays,
+    path: "/ruang-untuk-guru/prosem",
+    desc: "Program semester matematika SMP 2025-2026 & 2026-2027",
   },
   {
     label: "NUMATIK GAME",
