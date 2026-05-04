@@ -15,6 +15,7 @@ import {
   CalendarClock,
   CalendarDays,
   CalendarRange,
+  BadgeCheck,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -68,6 +69,12 @@ const guruMenuItems = [
     icon: CalendarClock,
     path: "/ruang-untuk-guru/agenda-guru",
     desc: "Agenda harian kegiatan pembelajaran dan kehadiran",
+  },
+  {
+    label: "KKTP",
+    icon: BadgeCheck,
+    path: "/ruang-untuk-guru/kktp",
+    desc: "Kriteria Ketercapaian Tujuan Pembelajaran Kurikulum Merdeka",
   },
   {
     label: "PROTA",
