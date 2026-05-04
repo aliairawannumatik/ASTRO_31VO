@@ -12,7 +12,7 @@ const subtopics = [
     color: "#a78bfa",
     bg: "rgba(167,139,250,0.12)",
     border: "rgba(167,139,250,0.3)",
-    badge: "40 Soal",
+    badge: "21 Soal",
   },
   {
     label: "PENYELESAIAN SPLDV DENGAN METODE GRAFIK",
@@ -21,7 +21,7 @@ const subtopics = [
     color: "#34d399",
     bg: "rgba(52,211,153,0.12)",
     border: "rgba(52,211,153,0.3)",
-    badge: "40 Soal",
+    badge: "21 Soal",
   },
   {
     label: "PENYELESAIAN SPLDV DENGAN METODE SUBSTITUSI",
@@ -30,7 +30,7 @@ const subtopics = [
     color: "#60a5fa",
     bg: "rgba(96,165,250,0.12)",
     border: "rgba(96,165,250,0.3)",
-    badge: "40 Soal",
+    badge: "17 Soal",
   },
   {
     label: "PENYELESAIAN SPLDV DENGAN METODE ELIMINASI",
@@ -39,7 +39,7 @@ const subtopics = [
     color: "#fb923c",
     bg: "rgba(251,146,60,0.12)",
     border: "rgba(251,146,60,0.3)",
-    badge: "40 Soal",
+    badge: "15 Soal",
   },
   {
     label: "PENYELESAIAN SPLDV DENGAN METODE CAMPURAN",
@@ -48,7 +48,7 @@ const subtopics = [
     color: "#f472b6",
     bg: "rgba(244,114,182,0.12)",
     border: "rgba(244,114,182,0.3)",
-    badge: "40 Soal",
+    badge: "19 Soal",
   },
   {
     label: "MEMBUAT MODEL DARI PERMASALAHAN YANG BERKAITAN DENGAN SPLDV",
@@ -57,7 +57,7 @@ const subtopics = [
     color: "#facc15",
     bg: "rgba(250,204,21,0.10)",
     border: "rgba(250,204,21,0.3)",
-    badge: "40 Soal",
+    badge: "16 Soal",
   },
   {
     label: "PENYELESAIAN MASALAH YANG BERKAITAN DENGAN SPLDV",
@@ -66,7 +66,7 @@ const subtopics = [
     color: "#a78bfa",
     bg: "rgba(167,139,250,0.12)",
     border: "rgba(167,139,250,0.3)",
-    badge: "40 Soal",
+    badge: "19 Soal",
   },
 ];
 
@@ -87,7 +87,7 @@ const SPLDVPage = () => {
             style={{ color: "#a78bfa", textShadow: "0 0 24px #a78bfa88" }}>
             SISTEM PERSAMAAN LINEAR DUA VARIABEL
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 7 Sub Topik · 280 Soal UN/ANBK/TKA</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 7 Sub Topik · 128 Soal UN/ANBK/TKA</p>
         </div>
 
         <div className="flex flex-col gap-3 animate-slide-up">
