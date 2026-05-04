@@ -4,8 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
-import { TrendingUp } from "lucide-react";
-import CoordPlane from "../koordinat-cartesius/CoordPlane";
+import { LineChart } from "lucide-react";
 
 const accentColor = "#34d399";
 const accentDim = "rgba(52,211,153,0.12)";
@@ -18,8 +17,7 @@ type Q = {
   content?: string; math?: string; blockMath?: string;
   parts?: Part[];
   badge?: Badge;
-  diagram?: Parameters<typeof CoordPlane>[0];
-  type: "essay" | "mixed" | "diagram-only";
+  type: "essay" | "mixed";
 };
 
 const badgeStyle: Record<Badge, string> = {
@@ -33,491 +31,205 @@ const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, t
 
 const questions: Q[] = [
   Q(1, "Membuat Tabel Nilai — Garis Pertama", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Lengkapi tabel nilai untuk menggambar grafik persamaan berikut:",
-    blockMath: "x + y = 5",
+    badge: "ANBK", type: "mixed",
+    content: "Diketahui persamaan garis pertama:",
+    blockMath: "x + y = 6",
     parts: [
-      { label: "x =", text: "0 → y = ?   dan   x = 5 → y = ?" },
-      { label: "b.", text: "Gambarkan garis tersebut pada bidang koordinat." },
+      { label: "a.", text: "Buat tabel nilai: pilih x = 0, 2, 6 lalu hitung y masing-masing." },
+      { label: "b.", text: "Tentukan titik potong dengan sumbu-x (y = 0) dan sumbu-y (x = 0)." },
+      { label: "c.", text: "Gambarkan garis tersebut pada bidang koordinat." },
     ],
   }),
   Q(2, "Tabel Nilai Garis Kedua", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Buat tabel nilai untuk:",
-    blockMath: "x - y = 1",
+    badge: "UN", type: "mixed",
+    content: "Diketahui persamaan garis kedua:",
+    blockMath: "x - y = 2",
     parts: [
-      { label: "x =", text: "0 → y = ?   dan   x = 1 → y = ?" },
-      { label: "b.", text: "Gambar garis tersebut pada bidang koordinat yang sama dengan soal no. 1." },
-      { label: "c.", text: "Tentukan titik potong kedua garis tersebut." },
+      { label: "a.", text: "Buat tabel nilai untuk x = 0, 2, 4." },
+      { label: "b.", text: "Tentukan dua titik pada garis dan gambarkan." },
+      { label: "c.", text: "Apakah titik (3, 1) terletak pada garis ini? Verifikasi!" },
     ],
   }),
-  Q(3, "Grafik SPLDV — Satu Solusi", {
-    badge: "UN",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [
-        { x1: -7, y1: 12, x2: 7, y2: -2, color: "#34d399", label: "L₁" },
-        { x1: -7, y1: -5, x2: 7, y2: 9, color: "#f472b6", label: "L₂" },
-      ],
-      pts: [{ x: 3, y: 3, label: "(3,3)", color: "#facc15", labelPos: "tr" }],
-    },
-    content: "Dari grafik di samping, dua garis L₁ dan L₂ berpotongan:",
+  Q(3, "Garis Berimpit — Tak Hingga Solusi", {
+    badge: "AKM", type: "mixed",
+    content: "Perhatikan sistem:",
+    blockMath: "\\begin{cases} 2x + 4y = 8 \\\\ x + 2y = 4 \\end{cases}",
     parts: [
-      { label: "a.", text: "Baca koordinat titik potong kedua garis!" },
-      { label: "b.", text: "Apakah titik potong itu merupakan penyelesaian SPLDV? Mengapa?" },
+      { label: "a.", text: "Tunjukkan bahwa kedua garis ini sebenarnya sama (berimpit)." },
+      { label: "b.", text: "Apa artinya secara grafis jika dua garis berimpit?" },
+      { label: "c.", text: "Berapa banyak solusi yang dimiliki sistem ini?" },
     ],
   }),
-  Q(4, "Garis Sejajar — Tidak Ada Solusi", {
-    badge: "UN",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -6, y1: 2, x2: 6, y2: 2, color: "#34d399", label: "y=2" },
-        { x1: -6, y1: -2, x2: 6, y2: -2, color: "#f472b6", label: "y=−2" },
-      ],
-    },
+  Q(4, "Metode Grafik — Langkah Demi Langkah", {
+    badge: "UN", type: "mixed",
+    blockMath: "\\begin{cases} x + y = 5 \\\\ x - y = 1 \\end{cases}",
     parts: [
-      { label: "a.", text: "Apa yang dapat kamu simpulkan dari dua garis sejajar dalam SPLDV?" },
-      { label: "b.", text: "Berapa banyak penyelesaian SPLDV ini?" },
-      { label: "c.", math: "\\text{SPLDV: } \\begin{cases} x + 2y = 8 \\\\ x + 2y = 2 \\end{cases} \\text{ — ada solusi?}" },
+      { label: "Langkah 1:", text: "Tentukan dua titik pada garis pertama." },
+      { label: "Langkah 2:", text: "Tentukan dua titik pada garis kedua." },
+      { label: "Langkah 3:", text: "Gambarkan kedua garis dan tentukan titik perpotongannya." },
+      { label: "Langkah 4:", text: "Verifikasi titik perpotongan di kedua persamaan." },
     ],
   }),
-  Q(5, "Garis Berimpit — Tak Hingga Solusi", {
-    badge: "TKA",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -4, y1: 6, x2: 6, y2: -4, color: "#facc15", label: "L₁=L₂" }],
-    },
-    content: "Dua garis berimpit saat satu persamaan merupakan kelipatan persamaan lainnya.",
+  Q(5, "Titik Potong Sumbu", {
+    badge: "TKA", type: "mixed",
+    content: "Untuk setiap garis berikut, tentukan titik potong dengan sumbu-x dan sumbu-y:",
     parts: [
-      { label: "a.", math: "\\text{Contoh: } \\begin{cases} x + y = 3 \\\\ 2x + 2y = 6 \\end{cases}" },
-      { label: "b.", text: "Mengapa kedua persamaan menghasilkan garis yang sama?" },
-      { label: "c.", text: "Berapa banyak penyelesaiannya? Apa artinya?" },
+      { label: "a.", math: "2x + 3y = 12" },
+      { label: "b.", math: "4x - 2y = 8" },
+      { label: "c.", math: "x + 5y = 10" },
+      { label: "d.", math: "3x - y = 9" },
     ],
   }),
-  Q(6, "Metode Grafik — Langkah Demi Langkah", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} 2x + y = 7 \\\\ x - y = 2 \\end{cases}",
+  Q(6, "Menentukan Persamaan dari Grafik", {
+    badge: "ANBK", type: "mixed",
+    content: "Sebuah garis melewati titik-titik berikut. Tentukan persamaan garisnya:",
     parts: [
-      { label: "1.", text: "Tentukan dua titik pada persamaan 2x + y = 7 (gunakan x=0 dan y=0)." },
-      { label: "2.", text: "Tentukan dua titik pada persamaan x − y = 2 (gunakan x=0 dan y=0)." },
-      { label: "3.", text: "Gambar kedua garis pada satu bidang koordinat." },
-      { label: "4.", text: "Tentukan titik potong dan tulis penyelesaian SPLDV." },
+      { label: "a.", text: "Titik (0, 3) dan (6, 0)" },
+      { label: "b.", text: "Titik (0, -4) dan (2, 0)" },
+      { label: "c.", text: "Titik (1, 5) dan (3, 1)" },
     ],
   }),
-  Q(7, "Titik Potong Sumbu", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Tentukan titik potong garis dengan sumbu-x dan sumbu-y untuk setiap persamaan berikut:",
+  Q(7, "Mencari Himpunan Penyelesaian — Grafik", {
+    badge: "UN", type: "mixed",
+    blockMath: "\\begin{cases} 2x + y = 7 \\\\ x + 2y = 8 \\end{cases}",
     parts: [
-      { label: "a.", math: "3x + 2y = 12" },
-      { label: "b.", math: "x - 4y = 8" },
-      { label: "c.", math: "5x + 3y = 15" },
-      { label: "d.", math: "2x - y = 6" },
+      { label: "a.", text: "Tentukan titik potong sumbu masing-masing garis." },
+      { label: "b.", text: "Gambarkan dan tentukan titik perpotongan secara grafis." },
+      { label: "c.", text: "Verifikasi titik potong dengan substitusi ke kedua persamaan." },
     ],
   }),
-  Q(8, "Grafik — Baca Solusi", {
-    badge: "UN",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: 0, y1: 4, x2: 4, y2: 0, color: "#34d399", label: "x+y=4" },
-        { x1: 0, y1: -2, x2: 6, y2: 4, color: "#f472b6", label: "x−y=2" },
-      ],
-      pts: [{ x: 3, y: 1, label: "(3,1)", color: "#facc15", labelPos: "tr" }],
-    },
+  Q(8, "Persamaan Vertikal dalam Grafik", {
+    badge: "TKA", type: "mixed",
+    blockMath: "\\begin{cases} x = 3 \\\\ 2x + y = 10 \\end{cases}",
     parts: [
-      { label: "a.", text: "Baca koordinat titik potong kedua garis." },
-      { label: "b.", text: "Verifikasi solusi tersebut dengan mensubstitusikan ke kedua persamaan." },
+      { label: "a.", text: "Apa bentuk grafik dari persamaan x = 3?" },
+      { label: "b.", text: "Substitusikan x = 3 ke persamaan kedua untuk mencari y." },
+      { label: "c.", text: "Tuliskan HP = {(x, y)}." },
     ],
   }),
-  Q(9, "Menentukan Persamaan dari Grafik", {
-    badge: "TKA",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -2, y1: 4, x2: 4, y2: -2, color: "#a78bfa", label: "L₁" },
-        { x1: -2, y1: -4, x2: 4, y2: 2, color: "#fb923c", label: "L₂" },
-      ],
-      pts: [
-        { x: 1, y: 1, label: "P(1,1)", color: "#facc15", labelPos: "tr" },
-      ],
-    },
+  Q(9, "Grafik Tiga Garis", {
+    badge: "AKM", type: "mixed",
+    content: "Diketahui tiga persamaan. Tentukan titik potong dari setiap pasang garis:",
     parts: [
-      { label: "a.", text: "Baca titik potong kedua garis dari diagram." },
-      { label: "b.", text: "Jika L₁ melalui (0, 2) dan (2, 0), tentukan persamaan L₁." },
-      { label: "c.", text: "Jika L₂ melalui (0, −2) dan (2, 0), tentukan persamaan L₂." },
+      { label: "(i)", math: "x + y = 6" },
+      { label: "(ii)", math: "x - y = 2" },
+      { label: "(iii)", math: "2x + y = 9" },
+      { label: "a.", text: "Titik potong garis (i) dan (ii)." },
+      { label: "b.", text: "Titik potong garis (i) dan (iii)." },
+      { label: "c.", text: "Apakah ketiga garis bertemu di satu titik?" },
     ],
   }),
-  Q(10, "Soal SPLDV Metode Grafik", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + y = 6 \\\\ x - y = 2 \\end{cases}",
+  Q(10, "Mencari Solusi Grafik Lengkap", {
+    badge: "UN", type: "mixed",
+    blockMath: "\\begin{cases} 3x - y = 5 \\\\ x + y = 7 \\end{cases}",
     parts: [
-      { label: "a.", text: "Tentukan titik potong garis x + y = 6 dengan sumbu koordinat." },
-      { label: "b.", text: "Tentukan titik potong garis x − y = 2 dengan sumbu koordinat." },
-      { label: "c.", text: "Gambar kedua garis dan tentukan solusi SPLDV." },
+      { label: "a.", text: "Tentukan dua titik untuk setiap garis." },
+      { label: "b.", text: "Gambarkan kedua garis." },
+      { label: "c.", text: "Baca koordinat titik perpotongan dari grafik." },
+      { label: "d.", text: "Verifikasi solusi secara aljabar." },
     ],
   }),
-  Q(11, "Mencari Himpunan Penyelesaian — Grafik", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} 3x - y = 4 \\\\ x + y = 8 \\end{cases}",
+  Q(11, "Nilai Titik Potong", {
+    badge: "ANBK", type: "mixed",
+    content: "Dua garis berpotongan di titik (2, 5). Garis pertama melewati (0, 1) dan (2, 5). Garis kedua melewati (0, 9) dan (2, 5).",
     parts: [
-      { label: "a.", text: "Buat tabel nilai untuk persamaan 3x − y = 4." },
-      { label: "b.", text: "Buat tabel nilai untuk persamaan x + y = 8." },
-      { label: "c.", text: "Gambar kedua garis dan tentukan titik potongnya." },
+      { label: "a.", text: "Tentukan persamaan garis pertama." },
+      { label: "b.", text: "Tentukan persamaan garis kedua." },
+      { label: "c.", text: "Tuliskan SPLDV yang penyelesaiannya adalah (2, 5)." },
     ],
   }),
-  Q(12, "Grafik SPLDV — Persamaan Horizontal dan Miring", {
-    badge: "TKA",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -6, y1: 3, x2: 6, y2: 3, color: "#34d399", label: "y=3" },
-        { x1: -2, y1: -6, x2: 4, y2: 6, color: "#f472b6", label: "2x−y=1" },
-      ],
-      pts: [{ x: 2, y: 3, label: "(2,3)", color: "#facc15", labelPos: "tr" }],
-    },
+  Q(12, "Titik Potong dan Konteks", {
+    badge: "AKM", type: "mixed",
+    content: "Dua penjual: Penjual A menjual x buah jeruk dengan harga total y = 3.000x. Penjual B menjual dengan harga y = 2.000x + 10.000.",
     parts: [
-      { label: "a.", text: "Baca titik potong dari diagram." },
-      { label: "b.", text: "Verifikasi bahwa (2, 3) memenuhi y = 3 dan 2x − y = 1." },
+      { label: "a.", text: "Pada berapa buah jeruk harga keduanya sama?" },
+      { label: "b.", text: "Tentukan secara grafis dengan membuat tabel nilai." },
+      { label: "c.", text: "Verifikasi secara aljabar." },
     ],
   }),
-  Q(13, "Persamaan Vertikal dalam Grafik", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} x = 4 \\\\ 2x + y = 10 \\end{cases}",
+  Q(13, "SPLDV Dengan Desimal", {
+    badge: "TKA", type: "mixed",
+    blockMath: "\\begin{cases} 0.5x + y = 4 \\\\ x - 0.5y = 3 \\end{cases}",
     parts: [
-      { label: "a.", text: "Gambarkan garis x = 4 (vertikal) pada bidang koordinat." },
-      { label: "b.", text: "Gambarkan garis 2x + y = 10 dengan mencari titik potong sumbu." },
-      { label: "c.", text: "Baca titik potongnya dan verifikasi." },
+      { label: "a.", text: "Kalikan setiap persamaan dengan 2 untuk menghilangkan desimal." },
+      { label: "b.", text: "Tentukan titik potong sumbu untuk setiap garis." },
+      { label: "c.", text: "Tentukan solusi secara grafis atau aljabar." },
     ],
   }),
-  Q(14, "Gradien Garis", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Tentukan gradien (kemiringan) setiap garis berikut untuk menentukan apakah sejajar atau tidak:",
+  Q(14, "SPLDV Garis Berpotongan di Asal", {
+    badge: "ANBK", type: "mixed",
+    blockMath: "\\begin{cases} y = 2x \\\\ y = -x + 6 \\end{cases}",
     parts: [
-      { label: "a.", math: "2x + y = 5 \\text{ dan } 2x + y = 9" },
-      { label: "b.", math: "x - 3y = 6 \\text{ dan } 2x - 6y = 1" },
-      { label: "c.", math: "3x + 2y = 7 \\text{ dan } 2x - 3y = 4" },
+      { label: "a.", text: "Buat tabel nilai untuk y = 2x (x = 0, 1, 2)." },
+      { label: "b.", text: "Buat tabel nilai untuk y = -x + 6 (x = 0, 3, 6)." },
+      { label: "c.", text: "Tentukan titik perpotongan." },
     ],
   }),
-  Q(15, "Menentukan SPLDV dari Dua Garis", {
-    badge: "TKA",
-    type: "mixed",
-    content: "Dua garis diberikan sebagai berikut:",
-    blockMath: "L_1: y = 2x - 1 \\qquad L_2: y = -x + 5",
+  Q(15, "Kasus Khusus — Garis Berimpit", {
+    badge: "AKM", type: "mixed",
+    content: "Perhatikan SPLDV:",
+    blockMath: "\\begin{cases} 3x - y = 4 \\\\ 6x - 2y = 8 \\end{cases}",
     parts: [
-      { label: "a.", text: "Ubah L₁ dan L₂ ke bentuk standar ax + by = c." },
-      { label: "b.", text: "Tentukan titik potong kedua garis dengan menggunakan grafik." },
-      { label: "c.", text: "Verifikasi solusinya secara aljabar." },
+      { label: "a.", text: "Tunjukkan bahwa persamaan kedua adalah kelipatan dari persamaan pertama." },
+      { label: "b.", text: "Apa yang terjadi jika digambar pada grafik?" },
+      { label: "c.", text: "Berapa banyak solusinya? Jelaskan!" },
     ],
   }),
-  Q(16, "Grafik Tiga Garis", {
-    badge: "AKM",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [
-        { x1: 0, y1: 6, x2: 6, y2: 0, color: "#34d399", label: "L₁" },
-        { x1: 0, y1: 2, x2: 6, y2: 2, color: "#f472b6", label: "L₂" },
-        { x1: 4, y1: -7, x2: 4, y2: 7, color: "#a78bfa", label: "L₃" },
-      ],
-      pts: [
-        { x: 4, y: 2, label: "P", color: "#facc15", labelPos: "tr" },
-      ],
-    },
+  Q(16, "Baca Grafik — Pasangan Nilai", {
+    badge: "UN", type: "mixed",
+    content: "Dari grafik SPLDV berikut (dijelaskan secara deskriptif):",
     parts: [
-      { label: "a.", text: "Tentukan titik potong L₁ dan L₂." },
-      { label: "b.", text: "Tentukan titik potong L₁ dan L₃." },
-      { label: "c.", text: "Tentukan titik potong L₂ dan L₃." },
+      { label: "Garis 1:", text: "Memotong sumbu-x di (4, 0) dan sumbu-y di (0, 2)." },
+      { label: "Garis 2:", text: "Memotong sumbu-x di (6, 0) dan sumbu-y di (0, 6)." },
+      { label: "a.", text: "Tuliskan persamaan garis 1." },
+      { label: "b.", text: "Tuliskan persamaan garis 2." },
+      { label: "c.", text: "Tentukan titik perpotongan (solusi SPLDV)." },
     ],
   }),
-  Q(17, "Mencari Solusi Grafik Lengkap", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} y = x + 2 \\\\ y = -2x + 5 \\end{cases}",
+  Q(17, "Menentukan Solusi Grafik", {
+    badge: "UN", type: "mixed",
+    blockMath: "\\begin{cases} 4x + 2y = 16 \\\\ x - y = -1 \\end{cases}",
     parts: [
-      { label: "a.", text: "Gambar garis y = x + 2 dengan mencari minimal 2 titik." },
-      { label: "b.", text: "Gambar garis y = −2x + 5 dengan mencari minimal 2 titik." },
-      { label: "c.", text: "Tentukan titik potong kedua garis dari grafik." },
+      { label: "a.", text: "Tentukan titik potong sumbu untuk setiap garis." },
+      { label: "b.", text: "Gambarkan dan baca titik potongnya." },
+      { label: "c.", text: "Selesaikan secara aljabar dan bandingkan hasilnya." },
     ],
   }),
-  Q(18, "Nilai Titik Potong", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Dari grafik SPLDV yang diberikan, titik potong kedua garis berada di (2, 4). Manakah SPLDV yang penyelesaiannya adalah (2, 4)?",
+  Q(18, "Aplikasi Grafik — Masalah Ekonomi", {
+    badge: "AKM", type: "mixed",
+    content: "Biaya produksi: C = 500x + 2.000 (ribu rupiah). Pendapatan: R = 1.000x (ribu rupiah). x = jumlah unit produksi.",
     parts: [
-      { label: "A.", math: "\\begin{cases} x + y = 7 \\\\ x - y = 2 \\end{cases}" },
-      { label: "B.", math: "\\begin{cases} x + y = 6 \\\\ x - y = -2 \\end{cases}" },
-      { label: "C.", math: "\\begin{cases} 2x + y = 8 \\\\ x - y = -2 \\end{cases}" },
-      { label: "D.", math: "\\begin{cases} x + 2y = 10 \\\\ 2x - y = 0 \\end{cases}" },
+      { label: "a.", text: "Buat tabel nilai untuk C dan R (x = 0, 2, 4, 6, 8)." },
+      { label: "b.", text: "Pada nilai x berapa C = R (titik impas/BEP)?" },
+      { label: "c.", text: "Verifikasi secara aljabar." },
     ],
   }),
-  Q(19, "Titik Potong dan Konteks", {
-    badge: "UN",
-    type: "mixed",
-    content: "Jati menjual kue dan es. Grafiknya menunjukkan hubungan antara harga dan jumlah. Titik potong ada di (5, 3.000).",
+  Q(19, "Koordinat Perpotongan", {
+    badge: "TKA", type: "mixed",
+    blockMath: "\\begin{cases} 5x - 3y = 1 \\\\ 2x + y = 8 \\end{cases}",
     parts: [
-      { label: "a.", text: "Apa arti titik potong (5, 3.000) dalam konteks ini?" },
-      { label: "b.", text: "Apakah titik potong selalu merupakan solusi SPLDV? Jelaskan!" },
+      { label: "a.", text: "Tentukan dua titik pada setiap garis." },
+      { label: "b.", text: "Sketsa grafik dan baca titik perpotongan." },
+      { label: "c.", text: "Verifikasi dengan substitusi." },
     ],
   }),
-  Q(20, "SPLDV Dengan Desimal", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} 0.5x + y = 3 \\\\ x - 0.5y = 1 \\end{cases}",
+  Q(20, "Titik Potong — ANBK", {
+    badge: "ANBK", type: "mixed",
+    content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang metode grafik:",
     parts: [
-      { label: "a.", text: "Kalikan setiap persamaan agar koefisiennya bilangan bulat." },
-      { label: "b.", text: "Tentukan titik potong sumbu untuk masing-masing garis." },
-      { label: "c.", text: "Gambar kedua garis dan baca solusinya." },
+      { label: "(1)", text: "Titik perpotongan dua garis pada grafik SPLDV adalah solusi sistem tersebut." },
+      { label: "(2)", text: "Jika dua garis sejajar, mereka tidak berpotongan sehingga SPLDV tidak punya solusi." },
+      { label: "(3)", text: "Metode grafik selalu memberikan solusi yang tepat (eksak)." },
+      { label: "(4)", text: "Dua garis yang berimpit memiliki tak berhingga banyaknya titik potong." },
     ],
   }),
-  Q(21, "Mengecek Solusi dari Grafik", {
-    badge: "ANBK",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: 0, y1: 5, x2: 5, y2: 0, color: "#34d399", label: "x+y=5" },
-        { x1: 0, y1: 1, x2: 4, y2: 5, color: "#f472b6", label: "x−y=−1" },
-      ],
-      pts: [{ x: 2, y: 3, label: "(2,3)", color: "#facc15", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Dari grafik, baca solusi SPLDV." },
-      { label: "b.", text: "Verifikasi bahwa (2, 3) memenuhi x + y = 5." },
-      { label: "c.", text: "Verifikasi bahwa (2, 3) memenuhi x − y = −1." },
-    ],
-  }),
-  Q(22, "Penyelesaian Unik dari Grafik", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + 2y = 8 \\\\ 2x - y = 6 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Cari dua titik pada garis x + 2y = 8." },
-      { label: "b.", text: "Cari dua titik pada garis 2x − y = 6." },
-      { label: "c.", text: "Gambar dan temukan solusi SPLDV." },
-      { label: "d.", text: "Apakah kedua garis sejajar? Berapa solusinya?" },
-    ],
-  }),
-  Q(23, "SPLDV Garis Berpotongan di Asal", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} y = 2x \\\\ y = -x \\end{cases}",
-    parts: [
-      { label: "a.", text: "Gambar kedua garis." },
-      { label: "b.", text: "Di titik mana mereka berpotongan?" },
-      { label: "c.", text: "Apa penyelesaian SPLDV ini?" },
-    ],
-  }),
-  Q(24, "Kasus Khusus — SPLDV Paralel", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} 2x + 3y = 6 \\\\ 4x + 6y = 18 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tentukan gradien setiap garis." },
-      { label: "b.", text: "Apakah kedua garis sejajar?" },
-      { label: "c.", text: "Berapa penyelesaian SPLDV ini?" },
-    ],
-  }),
-  Q(25, "Kasus Khusus — Garis Berimpit", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + 2y = 4 \\\\ 3x + 6y = 12 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Sederhanakan persamaan kedua." },
-      { label: "b.", text: "Apa yang terjadi dengan kedua garis?" },
-      { label: "c.", text: "Berapa banyak penyelesaiannya?" },
-    ],
-  }),
-  Q(26, "Baca Grafik — Pasangan Nilai", {
-    badge: "AKM",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 8,
-      segs: [
-        { x1: 0, y1: 6, x2: 8, y2: -2, color: "#34d399", label: "L₁" },
-        { x1: 0, y1: -4, x2: 8, y2: 4, color: "#fb923c", label: "L₂" },
-      ],
-      pts: [{ x: 5, y: 1, label: "(5,1)", color: "#facc15", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Baca titik potong dari diagram." },
-      { label: "b.", text: "Tulis penyelesaian HP SPLDV tersebut." },
-    ],
-  }),
-  Q(27, "Menentukan Solusi Grafik", {
-    badge: "UN",
-    type: "mixed",
-    content: "Diketahui garis y = x + 1 dan y = 3.",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -4, y1: -3, x2: 6, y2: 7, color: "#34d399", label: "y=x+1" },
-        { x1: -6, y1: 3, x2: 6, y2: 3, color: "#f472b6", label: "y=3" },
-      ],
-      pts: [{ x: 2, y: 3, label: "(2,3)", color: "#facc15", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan titik potong y = x + 1 dengan y = 3 dari diagram." },
-      { label: "b.", text: "Verifikasi solusi tersebut secara aljabar." },
-    ],
-  }),
-  Q(28, "Aplikasi Grafik — Masalah Ekonomi", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Harga penawaran suatu barang: P = 2Q + 4. Harga permintaan: P = −Q + 10. (P = harga, Q = kuantitas)",
-    parts: [
-      { label: "a.", text: "Gambarkan kedua garis pada sistem koordinat P-Q." },
-      { label: "b.", text: "Tentukan titik keseimbangan (equilibrium) dari grafik." },
-      { label: "c.", text: "Verifikasi solusi tersebut." },
-    ],
-  }),
-  Q(29, "Koordinat Perpotongan", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} y = 3 \\\\ x + y = 7 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Gambar garis y = 3 (horizontal)." },
-      { label: "b.", text: "Gambar garis x + y = 7." },
-      { label: "c.", text: "Tentukan titik potong dari gambar." },
-    ],
-  }),
-  Q(30, "Metode Grafik — Rekap Prosedur", {
-    badge: "UN",
-    type: "mixed",
-    content: "Jelaskan langkah-langkah metode grafik untuk menyelesaikan SPLDV berikut:",
-    blockMath: "\\begin{cases} x + 3y = 9 \\\\ 2x - y = 4 \\end{cases}",
-    parts: [
-      { label: "Langkah 1:", text: "Buat tabel nilai (minimal 2 titik) untuk masing-masing persamaan." },
-      { label: "Langkah 2:", text: "Gambar kedua garis pada satu bidang koordinat." },
-      { label: "Langkah 3:", text: "Tentukan titik potong." },
-      { label: "Langkah 4:", text: "Tulis himpunan penyelesaian (HP)." },
-    ],
-  }),
-  Q(31, "Baca Titik dari Grafik — UN Style", {
-    badge: "UN",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: 0, y1: 4, x2: 4, y2: 0, color: "#a78bfa", label: "L₁: x+y=4" },
-        { x1: 0, y1: 0, x2: 4, y2: 4, color: "#fb923c", label: "L₂: y=x" },
-      ],
-      pts: [{ x: 2, y: 2, label: "(2,2)", color: "#facc15", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Baca titik potong dari grafik." },
-      { label: "b.", text: "Tuliskan HP dari SPLDV tersebut." },
-    ],
-  }),
-  Q(32, "Soal UN — Pilih Grafik yang Tepat", {
-    badge: "UN",
-    type: "mixed",
-    content: "SPLDV berikut memiliki penyelesaian (4, 1). Grafik manakah yang sesuai?",
-    blockMath: "\\begin{cases} x + y = 5 \\\\ x - y = 3 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tentukan titik potong sumbu untuk persamaan pertama." },
-      { label: "b.", text: "Tentukan titik potong sumbu untuk persamaan kedua." },
-      { label: "c.", text: "Verifikasi bahwa (4, 1) memenuhi kedua persamaan." },
-    ],
-  }),
-  Q(33, "Interpretasi Grafik Kontekstual", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Dua orang pelari berlari dengan kecepatan berbeda dari titik awal yang sama. Grafik menunjukkan posisi mereka terhadap waktu. Titik potong grafik berada di t = 4, s = 20.",
-    parts: [
-      { label: "a.", text: "Apa arti titik potong (4, 20) dalam konteks ini?" },
-      { label: "b.", text: "Siapa yang lebih cepat sebelum t = 4? Setelah t = 4?" },
-    ],
-  }),
-  Q(34, "Garis Melalui Titik Asal", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} y = 3x \\\\ 2x + y = 10 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Gambar garis y = 3x (melalui titik asal)." },
-      { label: "b.", text: "Gambar garis 2x + y = 10." },
-      { label: "c.", text: "Tentukan penyelesaian SPLDV dari grafik." },
-    ],
-  }),
-  Q(35, "Soal Grafik — Gradien Negatif", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} y = -2x + 8 \\\\ y = x - 1 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Buat tabel nilai untuk y = −2x + 8 (gunakan x = 0, 2, 4)." },
-      { label: "b.", text: "Buat tabel nilai untuk y = x − 1 (gunakan x = 0, 2, 4)." },
-      { label: "c.", text: "Gambar dan tentukan titik potong." },
-    ],
-  }),
-  Q(36, "Verifikasi Secara Grafik", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Seorang siswa mengklaim bahwa penyelesaian dari SPLDV:",
-    blockMath: "\\begin{cases} 3x + y = 11 \\\\ x + 2y = 7 \\end{cases}",
-    parts: [
-      { label: "a.", text: "adalah (3, 2). Periksa apakah klaimnya benar secara grafik." },
-      { label: "b.", text: "Verifikasi secara aljabar juga." },
-    ],
-  }),
-  Q(37, "Titik Potong — ANBK", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Tentukan pernyataan BENAR (B) atau SALAH (S) terkait metode grafik SPLDV:",
-    parts: [
-      { label: "(1)", text: "Setiap garis linear dapat digambar dengan minimal 2 titik." },
-      { label: "(2)", text: "Jika dua garis sejajar, titik potongnya ada di tak hingga." },
-      { label: "(3)", text: "Titik potong dua garis merupakan penyelesaian dari kedua persamaan." },
-      { label: "(4)", text: "Garis berimpit tidak memiliki solusi." },
-    ],
-  }),
-  Q(38, "Menentukan x dan y dari Grafik", {
-    badge: "UN",
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: 0, y1: 3, x2: 6, y2: 0, color: "#34d399", label: "2x+4y=12" },
-        { x1: 0, y1: -2, x2: 3, y2: 4, color: "#f472b6", label: "2x−y=−2" },
-      ],
-      pts: [{ x: 1, y: 2.5, label: "(1, 2.5)", color: "#facc15", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Baca nilai x dan y dari grafik." },
-      { label: "b.", text: "Verifikasi solusi pada persamaan pertama." },
-    ],
-  }),
-  Q(39, "Grafik Pecahan", {
-    badge: "TKA",
-    type: "mixed",
+  Q(21, "Grafik Pecahan", {
+    badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} \\frac{x}{3} + \\frac{y}{2} = 2 \\\\ x - y = 1 \\end{cases}",
     parts: [
-      { label: "a.", text: "Kalikan persamaan pertama agar bebas pecahan." },
-      { label: "b.", text: "Tentukan titik potong sumbu untuk masing-masing garis." },
-      { label: "c.", text: "Gambar kedua garis dan tentukan penyelesaiannya." },
-    ],
-  }),
-  Q(40, "Soal AKM — Interpretasi Grafik SPLDV", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Sebuah toko makanan memiliki dua menu paket: Paket A dan Paket B. Grafik penjualan menunjukkan bahwa pada hari ke-5, jumlah penjualan Paket A sama dengan Paket B yaitu 30 porsi.",
-    parts: [
-      { label: "a.", text: "Jika Paket A dijual 4 porsi/hari dan Paket B 2 porsi/hari, buat persamaan untuk setiap paket." },
-      { label: "b.", text: "Gambarkan kedua garis pada koordinat dengan sumbu x = hari dan sumbu y = porsi." },
-      { label: "c.", text: "Pada hari ke berapa jumlah penjualan keduanya sama? Berapa porsi masing-masing?" },
+      { label: "a.", text: "Kalikan persamaan pertama dengan 6 untuk menghilangkan pecahan." },
+      { label: "b.", text: "Tentukan titik potong sumbu untuk kedua garis." },
+      { label: "c.", text: "Tentukan solusi SPLDV secara grafis dan verifikasi secara aljabar." },
     ],
   }),
 ];
@@ -532,13 +244,13 @@ const MetodeGrafikPage = () => {
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
             style={{ background: accentDim, border: `1.5px solid ${borderColor}` }}>
-            <TrendingUp className="w-8 h-8" style={{ color: accentColor }} />
+            <LineChart className="w-8 h-8" style={{ color: accentColor }} />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             PENYELESAIAN SPLDV — METODE GRAFIK
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 40 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 21 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -570,11 +282,6 @@ const MetodeGrafikPage = () => {
                   <div className="rounded-xl px-4 py-3 text-white/90 overflow-x-auto"
                     style={{ background: "rgba(52,211,153,0.08)", border: `1px solid ${borderColor}` }}>
                     <BlockMath math={q.blockMath} />
-                  </div>
-                )}
-                {q.diagram && (
-                  <div className="flex justify-center my-1">
-                    <CoordPlane {...q.diagram} />
                   </div>
                 )}
                 {q.parts && (

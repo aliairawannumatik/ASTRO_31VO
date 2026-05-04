@@ -110,17 +110,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan umur Ayah dan Anak sekarang." },
     ],
   }),
-  Q(9, "Persamaan Linear Dua Variabel", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} 4x - 3y = 1 \\\\ 2x + y = 9 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan y dari persamaan kedua." },
-      { label: "b.", text: "Substitusikan ke persamaan pertama." },
-      { label: "c.", text: "Tentukan x dan y." },
-    ],
-  }),
-  Q(10, "Soal Harga Barang", {
+  Q(9, "Soal Harga Barang", {
     badge: "UN",
     type: "mixed",
     content: "Harga 3 buku dan 4 pensil = Rp 29.000. Harga 1 buku dan 2 pensil = Rp 11.000.",
@@ -130,85 +120,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga 5 buku dan 3 pensil?" },
     ],
   }),
-  Q(11, "Verifikasi Substitusi", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Seseorang menyelesaikan SPLDV berikut dengan substitusi dan mendapat x = 3, y = 2:",
-    blockMath: "\\begin{cases} x + 2y = 7 \\\\ 3x - y = 7 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Periksa apakah x = 3, y = 2 benar." },
-      { label: "b.", text: "Jika salah, temukan solusi yang benar dengan substitusi." },
-    ],
-  }),
-  Q(12, "Substitusi — Tanda Negatif", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} x - 2y = -3 \\\\ 3x + y = 5 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari persamaan pertama." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Tentukan x dan y." },
-    ],
-  }),
-  Q(13, "Substitusi — Koefisien Besar", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} 7x - 3y = 11 \\\\ x + 2y = 10 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari persamaan kedua." },
-      { label: "b.", text: "Substitusikan ke persamaan pertama." },
-      { label: "c.", text: "Tentukan x dan y. Verifikasi jawaban." },
-    ],
-  }),
-  Q(14, "Soal Kecepatan", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Dua kendaraan berangkat dari kota yang sama. Kendaraan A berkecepatan x km/jam dan B berkecepatan y km/jam. Selisih kecepatan = 20 km/jam. Dalam 3 jam, jumlah jarak yang ditempuh keduanya = 300 km.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Tentukan kecepatan masing-masing kendaraan." },
-    ],
-  }),
-  Q(15, "Substitusi — Dua Langkah", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} 2x + 5y = 19 \\\\ 3x - y = 7 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan y dari persamaan kedua." },
-      { label: "b.", text: "Substitusikan ke persamaan pertama." },
-      { label: "c.", text: "Tentukan HP = {(x, y)}." },
-    ],
-  }),
-  Q(16, "Menyederhanakan Dulu", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} 2(x + y) = 18 \\\\ 3x - y = 9 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Sederhanakan persamaan pertama terlebih dahulu." },
-      { label: "b.", text: "Selesaikan SPLDV dengan metode substitusi." },
-    ],
-  }),
-  Q(17, "Substitusi — Koefisien 1", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + 4y = 17 \\\\ 2x - 3y = 3 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Karena koefisien x pada persamaan pertama adalah 1, nyatakan x = ..." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua dan selesaikan." },
-    ],
-  }),
-  Q(18, "Soal Keliling Bangun Datar", {
-    badge: "UN",
-    type: "mixed",
-    content: "Keliling sebuah persegi panjang adalah 56 cm. Panjangnya 8 cm lebih dari lebarnya.",
-    parts: [
-      { label: "a.", text: "Misal panjang = p dan lebar = l. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Tentukan luas persegi panjang tersebut." },
-    ],
-  }),
-  Q(19, "Soal Tiket Masuk", {
+  Q(10, "Soal Tiket Masuk", {
     badge: "UN",
     type: "mixed",
     content: "Harga tiket dewasa = Rp 15.000 dan tiket anak = Rp 8.000. Sekelompok orang membeli 12 tiket seharga Rp 120.000.",
@@ -218,37 +130,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa tiket dewasa dan anak yang dibeli?" },
     ],
   }),
-  Q(20, "Substitusi — Semua Negatif", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} -x + 3y = 7 \\\\ 2x - y = 4 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari persamaan pertama (hati-hati tanda negatif)." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Tentukan x dan y." },
-    ],
-  }),
-  Q(21, "SPLDV Bilangan Bulat Negatif", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + y = -3 \\\\ x - y = 7 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari persamaan pertama." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua dan selesaikan." },
-      { label: "c.", text: "Verifikasi solusi." },
-    ],
-  }),
-  Q(22, "Substitusi — Koefisien Pecahan", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} \\frac{1}{2}x + y = 4 \\\\ x + \\frac{1}{3}y = 6 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan y dari persamaan pertama." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Tentukan x dan y." },
-    ],
-  }),
-  Q(23, "Soal Campuran — Berat", {
+  Q(11, "Soal Campuran — Berat", {
     badge: "AKM",
     type: "mixed",
     content: "1 kg apel dan 2 kg jeruk beratnya 2,5 kg. 3 kg apel dan 1 kg jeruk beratnya 4 kg.",
@@ -258,7 +140,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa berat 2 kg apel dan 3 kg jeruk?" },
     ],
   }),
-  Q(24, "Substitusi dari Persamaan Ke-2", {
+  Q(12, "Substitusi dari Persamaan Ke-2", {
     badge: "UN",
     type: "mixed",
     blockMath: "\\begin{cases} 4x + 3y = 23 \\\\ y = 5 - x \\end{cases}",
@@ -268,7 +150,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan y, lalu tulis HP." },
     ],
   }),
-  Q(25, "Soal Perbandingan Usia", {
+  Q(13, "Soal Perbandingan Usia", {
     badge: "UN",
     type: "mixed",
     content: "Lima tahun yang lalu, umur ibu dua kali umur putrinya. Sekarang, jumlah umur mereka adalah 55 tahun.",
@@ -277,17 +159,7 @@ const questions: Q[] = [
       { label: "b.", text: "Selesaikan dengan substitusi." },
     ],
   }),
-  Q(26, "Substitusi Ganda", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + 2y = 11 \\\\ 3x - y = 8 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari persamaan pertama: x = 11 − 2y." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Hitung y, lalu x. Verifikasi." },
-    ],
-  }),
-  Q(27, "Soal Makanan — ANBK", {
+  Q(14, "Soal Makanan — ANBK", {
     badge: "ANBK",
     type: "mixed",
     content: "Di kantin, 2 porsi nasi goreng dan 1 minuman = Rp 25.000. 1 porsi nasi goreng dan 3 minuman = Rp 23.000.",
@@ -297,7 +169,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga nasi goreng dan minuman masing-masing?" },
     ],
   }),
-  Q(28, "Substitusi — Kasus y = c", {
+  Q(15, "Substitusi — Kasus y = c", {
     badge: "ANBK",
     type: "mixed",
     blockMath: "\\begin{cases} y = 5 \\\\ 3x + 2y = 26 \\end{cases}",
@@ -307,7 +179,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tulis HP." },
     ],
   }),
-  Q(29, "Substitusi — Hasil Negatif", {
+  Q(16, "Substitusi — Hasil Negatif", {
     badge: "TKA",
     type: "mixed",
     blockMath: "\\begin{cases} x - 3y = -8 \\\\ 2x + y = 1 \\end{cases}",
@@ -317,77 +189,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x dan y (mungkin bernilai negatif)." },
     ],
   }),
-  Q(30, "Soal Tabungan", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Rini dan Sari menabung. Jumlah tabungan mereka = Rp 500.000. Tabungan Rini = 3 kali tabungan Sari.",
-    parts: [
-      { label: "a.", text: "Misal tabungan Rini = x dan Sari = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Tentukan tabungan masing-masing." },
-    ],
-  }),
-  Q(31, "Substitusi — Dua Pilihan Variabel", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + y = 12 \\\\ 2x - 3y = -6 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Cara 1: Nyatakan x dari persamaan pertama, lalu substitusikan." },
-      { label: "b.", text: "Cara 2: Nyatakan y dari persamaan pertama, lalu substitusikan." },
-      { label: "c.", text: "Bandingkan hasil dari kedua cara." },
-    ],
-  }),
-  Q(32, "Substitusi Persamaan Berpangkat Semu", {
-    badge: "TKA",
-    type: "mixed",
-    content: "Misal p = x + 1 dan q = y − 1. Selesaikan SPLDV:",
-    blockMath: "\\begin{cases} p + q = 8 \\\\ 2p - q = 4 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tentukan nilai p dan q dengan substitusi." },
-      { label: "b.", text: "Kembalikan ke variabel x dan y." },
-    ],
-  }),
-  Q(33, "Soal Uang Kembalian", {
-    badge: "UN",
-    type: "mixed",
-    content: "Seorang kasir mempunyai 30 lembar uang Rp 5.000 dan Rp 10.000. Total = Rp 210.000.",
-    parts: [
-      { label: "a.", text: "Misal banyak uang Rp 5.000 = x dan Rp 10.000 = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Berapa lembar masing-masing uang?" },
-    ],
-  }),
-  Q(34, "Soal Pertanian", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Luas kebun jagung dan sayur berjumlah 120 m². Luas kebun jagung = 4 kali luas kebun sayur.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Berapa luas masing-masing kebun?" },
-    ],
-  }),
-  Q(35, "Dari Persamaan Rumit", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} 3(x + y) = 21 \\\\ 2x - y = 1 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Sederhanakan persamaan pertama." },
-      { label: "b.", text: "Nyatakan y dari persamaan kedua." },
-      { label: "c.", text: "Substitusikan dan tentukan x dan y." },
-    ],
-  }),
-  Q(36, "Substitusi — Soal UN Klasik", {
-    badge: "UN",
-    type: "mixed",
-    content: "Harga 5 jeruk dan 2 apel = Rp 15.000. Harga 3 jeruk dan 4 apel = Rp 17.000.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV (x = harga jeruk, y = harga apel)." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Berapa harga 1 jeruk dan 1 apel?" },
-    ],
-  }),
-  Q(37, "ANBK — Pernyataan Benar/Salah", {
+  Q(17, "ANBK — Pernyataan Benar/Salah", {
     badge: "ANBK",
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang metode substitusi:",
@@ -396,38 +198,6 @@ const questions: Q[] = [
       { label: "(2)", text: "Hasil substitusi selalu menghasilkan persamaan satu variabel." },
       { label: "(3)", text: "Metode substitusi hanya berlaku jika koefisien variabelnya adalah 1." },
       { label: "(4)", text: "Setelah mendapat satu variabel, variabel lainnya diperoleh dengan mensubstitusikan kembali." },
-    ],
-  }),
-  Q(38, "Substitusi — Soal AKM Kontekstual", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Sebuah perusahaan membuat dua produk A dan B. Setiap produk A memerlukan 2 jam kerja dan produk B memerlukan 3 jam kerja. Total jam kerja tersedia = 36 jam. Jumlah produk A dan B yang diproduksi = 15 unit.",
-    parts: [
-      { label: "a.", text: "Misal jumlah produk A = x dan B = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Berapa unit A dan B yang diproduksi?" },
-    ],
-  }),
-  Q(39, "Substitusi Ganda Lanjut", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} \\frac{x+y}{2} = 5 \\\\ x - y = 2 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan persamaan pertama dengan 2." },
-      { label: "b.", text: "Nyatakan x dari persamaan kedua." },
-      { label: "c.", text: "Substitusikan dan tentukan x, y." },
-    ],
-  }),
-  Q(40, "Rekap — Pilihan Berganda UN", {
-    badge: "UN",
-    type: "mixed",
-    content: "Penyelesaian dari SPLDV berikut dengan metode substitusi adalah:",
-    blockMath: "\\begin{cases} x + 2y = 9 \\\\ 3x - y = 13 \\end{cases}",
-    parts: [
-      { label: "A.", math: "x = 5,\\ y = 2" },
-      { label: "B.", math: "x = 3,\\ y = 3" },
-      { label: "C.", math: "x = 7,\\ y = 1" },
-      { label: "D.", math: "x = 1,\\ y = 4" },
     ],
   }),
 ];
@@ -448,7 +218,7 @@ const MetodeSubstitusiPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             PENYELESAIAN SPLDV — METODE SUBSTITUSI
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 40 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 17 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
