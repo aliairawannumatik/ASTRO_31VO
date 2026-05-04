@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, FileText, Target, Layers, ClipboardCheck, Users } from "lucide-react";
+import { ArrowLeft, BookOpen, FileText, Target, Layers, ClipboardCheck, Users, Wand2, Sparkles } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -87,6 +87,42 @@ const RPPPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             Dokumen perencanaan pembelajaran yang memuat tujuan, langkah-langkah kegiatan, serta asesmen sebagai panduan guru menjalankan proses belajar mengajar di kelas.
           </p>
+        </div>
+
+        {/* ── RANCANG RPP OTOMATIS ── */}
+        <div className="mb-6 animate-slide-up">
+          <button
+            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/rpp/rancang"); }}
+            className="w-full group relative overflow-hidden rounded-2xl border border-teal-400/50 bg-gradient-to-br from-teal-500/20 via-cyan-500/10 to-indigo-500/10 p-5 text-left transition-all duration-300 hover:border-teal-300/70 hover:shadow-lg hover:shadow-teal-500/20 hover:scale-[1.01]"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-teal-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-500/20 border border-teal-400/40 shrink-0">
+                <Wand2 className="w-6 h-6 text-teal-300" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <h2 className="font-display text-base font-bold text-teal-200 tracking-wide">RANCANG RPP OTOMATIS</h2>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-400/20 border border-teal-400/40 text-teal-300">
+                    <Sparkles className="w-2.5 h-2.5" /> BARU
+                  </span>
+                </div>
+                <p className="text-xs text-white/60 font-body">
+                  Buat RPP lengkap Kurikulum Merdeka secara custom — pilih model pembelajaran, TP dari ATP, dimensi Profil Pelajar Pancasila, asesmen, dan lebih banyak lagi.
+                </p>
+              </div>
+              <div className="text-teal-300 font-bold text-xs shrink-0 group-hover:translate-x-1 transition-transform">
+                MULAI →
+              </div>
+            </div>
+          </button>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 mt-6 mb-4">
+            <div className="flex-1 h-px bg-white/10" />
+            <span className="text-[11px] text-white/30 font-semibold uppercase tracking-widest">Atau pilih template RPP per materi</span>
+            <div className="flex-1 h-px bg-white/10" />
+          </div>
         </div>
 
         <div className="mb-8">
