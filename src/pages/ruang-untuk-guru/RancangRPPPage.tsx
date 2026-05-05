@@ -260,6 +260,8 @@ const DIMENSI_PPP = [
   { id: "mandiri", label: "Mandiri", icon: "💪" },
   { id: "bernalar", label: "Bernalar Kritis", icon: "🧠" },
   { id: "kreatif", label: "Kreatif", icon: "✨" },
+  { id: "kebangsaan", label: "Berwawasan Kebangsaan & Cinta Tanah Air", icon: "🇮🇩" },
+  { id: "adaptif", label: "Adaptif, Inovatif & Melek Teknologi", icon: "💡" },
 ];
 
 const ASESMEN_FORMATIF = [
@@ -339,6 +341,14 @@ type RPPState = {
   pengayaan: string;
   remedial: string;
   refleksiGuru: string;
+  /* TTD */
+  kota: string;
+  tanggalTTD: string;
+  namaKepala: string;
+  nipKepala: string;
+  jabatanKepala: string;
+  namaGuru: string;
+  nipGuru: string;
 };
 
 const defaultState: RPPState = {
@@ -350,9 +360,9 @@ const defaultState: RPPState = {
   alokasi: "2 × 40 menit",
   pertemuanKe: "1",
   materi: "",
-  kompetensiAwal: "",
-  pertanyaanPemantik: "",
-  pemahamanBermakna: "",
+  kompetensiAwal: "Peserta didik telah memahami konsep bilangan bulat dan operasi dasarnya, serta mampu melakukan perhitungan aritmatika sederhana. Peserta didik juga memiliki kemampuan dasar dalam membaca dan menginterpretasikan informasi matematis.",
+  pertanyaanPemantik: "Pernahkah kamu melihat pola bilangan di sekitarmu? Bagaimana matematika membantu kita memahami dunia? Apakah ada masalah di kehidupanmu yang bisa diselesaikan dengan konsep yang akan kita pelajari hari ini?",
+  pemahamanBermakna: "Memahami konsep matematika membantu peserta didik dalam menyelesaikan masalah kehidupan sehari-hari, seperti menghitung keuangan, mengukur jarak, membaca data, dan membuat keputusan yang logis.",
   targetSiswa: "Peserta didik reguler/tipikal",
   modelId: "",
   selectedTP: [],
@@ -370,6 +380,13 @@ const defaultState: RPPState = {
   pengayaan: "",
   remedial: "",
   refleksiGuru: "",
+  kota: "",
+  tanggalTTD: "",
+  namaKepala: "",
+  nipKepala: "",
+  jabatanKepala: "Kepala Sekolah",
+  namaGuru: "",
+  nipGuru: "",
 };
 
 const buildPendahuluan = () =>
@@ -487,7 +504,7 @@ const buildPrintHTML = (s: RPPState): string => {
 <h3>B. KOMPETENSI AWAL</h3>
 <p>${s.kompetensiAwal || "-"}</p>
 
-<h3>C. PROFIL PELAJAR PANCASILA</h3>
+<h3>C. PROFIL LULUSAN 8 DIMENSI</h3>
 <p>${dimensi || "-"}</p>
 
 <h3>D. SARANA DAN PRASARANA</h3>
@@ -535,8 +552,8 @@ const buildPrintHTML = (s: RPPState): string => {
 <br/>
 <table class="sign">
   <tr>
-    <td style="width:50%;">Mengetahui,<br/>Kepala Sekolah<br/><br/><br/><br/>____________________________<br/>NIP. ________________________</td>
-    <td style="width:50%;">_____________, __________ 20__<br/>Guru Mata Pelajaran<br/><br/><br/><br/>____________________________<br/>NIP. ________________________</td>
+    <td style="width:50%;">Mengetahui,<br/>${s.jabatanKepala || "Kepala Sekolah"}<br/><br/><br/><br/>${s.namaKepala ? `<u>${s.namaKepala}</u>` : "____________________________"}<br/>NIP. ${s.nipKepala || "________________________"}</td>
+    <td style="width:50%;">${s.kota || "_____________"}, ${s.tanggalTTD || "__________ 20__"}<br/>Guru Mata Pelajaran<br/><br/><br/><br/>${s.namaGuru ? `<u>${s.namaGuru}</u>` : "____________________________"}<br/>NIP. ${s.nipGuru || "________________________"}</td>
   </tr>
 </table>
 </body></html>`;
@@ -741,8 +758,8 @@ const RancangRPPPage = () => {
           )}
         </Section>
 
-        {/* ── SECTION D: PROFIL PELAJAR PANCASILA ── */}
-        <Section title="D · Profil Pelajar Pancasila" icon={Star} accent="cyan">
+        {/* ── SECTION D: PROFIL LULUSAN 8 DIMENSI ── */}
+        <Section title="D · Profil Lulusan 8 Dimensi" icon={Star} accent="cyan">
           <p className="text-white/40 text-[11px] mt-3 mb-3">Pilih dimensi yang akan dikembangkan dalam pembelajaran ini (boleh lebih dari satu).</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {DIMENSI_PPP.map(d => {
@@ -868,6 +885,75 @@ const RancangRPPPage = () => {
             value={state.refleksiGuru} onChange={e => set("refleksiGuru", e.target.value)} />
         </Section>
 
+        {/* ── SECTION J: TANDA TANGAN ── */}
+        <Section title="J · Tanda Tangan" icon={CheckCircle} accent="teal">
+          <p className="text-white/40 text-[11px] mt-3 mb-1">Isi data untuk keperluan penandatanganan dokumen RPP.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+            <div>
+              <Label>Kota</Label>
+              <input className={inputCls} placeholder="Nama kota..."
+                value={state.kota} onChange={e => set("kota", e.target.value)} />
+            </div>
+            <div>
+              <Label>Tanggal</Label>
+              <input className={inputCls} placeholder="Contoh: 5 Mei 2026"
+                value={state.tanggalTTD} onChange={e => set("tanggalTTD", e.target.value)} />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 mt-4">
+            {/* Kepala Sekolah */}
+            <div className="border border-white/10 rounded-xl p-4 bg-white/3">
+              <p className="text-cyan-300 text-[11px] font-bold uppercase tracking-wide mb-2">Mengetahui</p>
+              <div>
+                <Label>Jabatan</Label>
+                <input className={inputCls} placeholder="Kepala Sekolah"
+                  value={state.jabatanKepala} onChange={e => set("jabatanKepala", e.target.value)} />
+              </div>
+              <div>
+                <Label>Nama Kepala Sekolah</Label>
+                <input className={inputCls} placeholder="Nama lengkap..."
+                  value={state.namaKepala} onChange={e => set("namaKepala", e.target.value)} />
+              </div>
+              <div>
+                <Label>NIP Kepala Sekolah</Label>
+                <input className={inputCls} placeholder="NIP..."
+                  value={state.nipKepala} onChange={e => set("nipKepala", e.target.value)} />
+              </div>
+            </div>
+            {/* Guru */}
+            <div className="border border-white/10 rounded-xl p-4 bg-white/3">
+              <p className="text-teal-300 text-[11px] font-bold uppercase tracking-wide mb-2">Guru Mata Pelajaran</p>
+              <div>
+                <Label>Nama Guru</Label>
+                <input className={inputCls} placeholder="Nama lengkap..."
+                  value={state.namaGuru} onChange={e => set("namaGuru", e.target.value)} />
+              </div>
+              <div>
+                <Label>NIP Guru</Label>
+                <input className={inputCls} placeholder="NIP..."
+                  value={state.nipGuru} onChange={e => set("nipGuru", e.target.value)} />
+              </div>
+            </div>
+          </div>
+          {/* Preview TTD */}
+          <div className="mt-5 grid grid-cols-2 gap-4 text-center text-xs text-white/60 border border-white/8 rounded-xl p-4 bg-black/20">
+            <div>
+              <p>Mengetahui,</p>
+              <p>{state.jabatanKepala || "Kepala Sekolah"}</p>
+              <div className="my-8" />
+              <p className="font-bold text-white/80">{state.namaKepala || "____________________________"}</p>
+              <p>NIP. {state.nipKepala || "________________________"}</p>
+            </div>
+            <div>
+              <p>{state.kota || "_____________"}, {state.tanggalTTD || "__________ 20__"}</p>
+              <p>Guru Mata Pelajaran</p>
+              <div className="my-8" />
+              <p className="font-bold text-white/80">{state.namaGuru || "____________________________"}</p>
+              <p>NIP. {state.nipGuru || "________________________"}</p>
+            </div>
+          </div>
+        </Section>
+
         {/* ── PREVIEW TOGGLE ── */}
         {isReady && (
           <div className="mb-4 animate-slide-up">
@@ -905,7 +991,7 @@ const RancangRPPPage = () => {
             <ul className="list-disc pl-5 text-xs text-gray-700 mb-3">
               {state.selectedTP.map((tp, i) => <li key={i}>{tp}</li>)}
             </ul>
-            <p className="font-bold text-teal-700 text-xs mb-1">PROFIL PELAJAR PANCASILA:</p>
+            <p className="font-bold text-teal-700 text-xs mb-1">PROFIL LULUSAN 8 DIMENSI:</p>
             <p className="text-xs text-gray-700 mb-3">{state.selectedDimensi.map(id => DIMENSI_PPP.find(d => d.id === id)?.label).join(" · ")}</p>
             <p className="font-bold text-teal-700 text-xs mb-1">KEGIATAN INTI ({selectedModel?.nama}):</p>
             <pre className="text-xs text-gray-700 whitespace-pre-wrap font-sans bg-gray-50 p-3 rounded border mb-3">{state.kegiatanInti}</pre>
