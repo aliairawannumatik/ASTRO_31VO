@@ -142,7 +142,8 @@ const buildDokumenBody = (
   label: string,
   kelas: KelasKey,
   kelasNum: string,
-  data: KelasProta
+  data: KelasProta,
+  identitas: { satuanPendidikan: string; mataPelajaran: string; alokasi: string; guru: string }
 ) => {
   const kelasRom = kelasNum === "7" ? "VII" : kelasNum === "8" ? "VIII" : "IX";
   const kelasNama = kelasNum === "7" ? "Tujuh" : kelasNum === "8" ? "Delapan" : "Sembilan";
@@ -179,14 +180,14 @@ const buildDokumenBody = (
     </div>
     <div class="identitas">
       <table>
-        <tr><td class="lbl">Satuan Pendidikan</td><td class="sep">:</td><td>SMP / MTs</td></tr>
-        <tr><td class="lbl">Mata Pelajaran</td><td class="sep">:</td><td>Matematika</td></tr>
+        <tr><td class="lbl">Satuan Pendidikan</td><td class="sep">:</td><td>${identitas.satuanPendidikan || "SMP / MTs"}</td></tr>
+        <tr><td class="lbl">Mata Pelajaran</td><td class="sep">:</td><td>${identitas.mataPelajaran || "Matematika"}</td></tr>
         <tr><td class="lbl">Kelas</td><td class="sep">:</td><td>${kelasRom} (${kelasNama})</td></tr>
         <tr><td class="lbl">Tahun Pelajaran</td><td class="sep">:</td><td>${label}</td></tr>
-        <tr><td class="lbl">Alokasi Waktu</td><td class="sep">:</td><td>5 JP / Minggu (1 JP = 40 menit)</td></tr>
+        <tr><td class="lbl">Alokasi Waktu</td><td class="sep">:</td><td>${identitas.alokasi || "5 JP / Minggu (1 JP = 40 menit)"}</td></tr>
         <tr><td class="lbl">Total JP Semester Ganjil</td><td class="sep">:</td><td>${data.totalSem1} Jam Pelajaran</td></tr>
         <tr><td class="lbl">Total JP Semester Genap</td><td class="sep">:</td><td>${data.totalSem2} Jam Pelajaran</td></tr>
-        <tr><td class="lbl">Guru Mata Pelajaran</td><td class="sep">:</td><td>___________________________</td></tr>
+        <tr><td class="lbl">Guru Mata Pelajaran</td><td class="sep">:</td><td>${identitas.guru || "___________________________"}</td></tr>
       </table>
     </div>
     <table class="prota">
@@ -240,7 +241,22 @@ const buildDokumenBody = (
   `;
 };
 
+type IdentitasData = {
+  satuanPendidikan: string;
+  mataPelajaran: string;
+  alokasi: string;
+  guru: string;
+};
+
+const defaultIdentitas: IdentitasData = {
+  satuanPendidikan: "SMP / MTs",
+  mataPelajaran: "Matematika",
+  alokasi: "5 JP / Minggu (1 JP = 40 menit)",
+  guru: "",
+};
+
 const STORAGE_KEY = (tahun: string) => `numatik_prota_${tahun}`;
+const IDENTITAS_KEY = (tahun: string) => `numatik_prota_identitas_${tahun}`;
 
 const ProtaTahunPage = () => {
   const { tahun } = useParams<{ tahun: string }>();
@@ -264,6 +280,18 @@ const ProtaTahunPage = () => {
       return saved ? JSON.parse(saved) : defaultData;
     } catch { return defaultData; }
   });
+
+  const [identitas, setIdentitas] = useState<IdentitasData>(() => {
+    try {
+      const saved = localStorage.getItem(IDENTITAS_KEY(tahun));
+      return saved ? JSON.parse(saved) : defaultIdentitas;
+    } catch { return defaultIdentitas; }
+  });
+
+  const updateIdentitas = (field: keyof IdentitasData, value: string) => {
+    setIdentitas(prev => ({ ...prev, [field]: value }));
+    setSavedOk(false);
+  };
 
   const data = allData[kelas];
   const kelasNum = kelas.replace("kelas", "");
@@ -298,13 +326,14 @@ const ProtaTahunPage = () => {
   const handleSave = () => {
     playPopSound();
     localStorage.setItem(STORAGE_KEY(tahun), JSON.stringify(allData));
+    localStorage.setItem(IDENTITAS_KEY(tahun), JSON.stringify(identitas));
     setSavedOk(true);
     setTimeout(() => setSavedOk(false), 2500);
   };
 
   const handlePrintWord = () => {
     playPopSound();
-    const body = buildDokumenBody(tahunAwal, tahunAkhir, label, kelas, kelasNum, data);
+    const body = buildDokumenBody(tahunAwal, tahunAkhir, label, kelas, kelasNum, data, identitas);
     const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>PROTA (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${body}</body></html>`;
     const blob = new Blob([html], { type: "application/msword" });
     const url = URL.createObjectURL(blob);
@@ -317,7 +346,7 @@ const ProtaTahunPage = () => {
 
   const handlePrintPDF = () => {
     playPopSound();
-    const body = buildDokumenBody(tahunAwal, tahunAkhir, label, kelas, kelasNum, data);
+    const body = buildDokumenBody(tahunAwal, tahunAkhir, label, kelas, kelasNum, data, identitas);
     const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>PROTA (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${body}</body></html>`;
     const win = window.open("", "_blank");
     if (win) {
@@ -435,23 +464,72 @@ const ProtaTahunPage = () => {
         {/* Identitas */}
         <div className="bg-teal-900/20 border border-teal-500/20 rounded-xl p-4 mb-5 animate-slide-up">
           <p className="text-teal-300 text-xs font-bold mb-3 uppercase tracking-wider">📄 Identitas Program Tahunan</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1.5 text-xs font-body">
-            {[
-              ["Satuan Pendidikan", "SMP / MTs"],
-              ["Mata Pelajaran", "Matematika"],
-              ["Kelas", `${kelasNum} (${kelasNum === "7" ? "Tujuh" : kelasNum === "8" ? "Delapan" : "Sembilan"})`],
-              ["Tahun Pelajaran", label],
-              ["Alokasi Waktu", "5 JP / Minggu (1 JP = 40 menit)"],
-              ["Total JP Semester Ganjil", `${data.totalSem1} Jam Pelajaran`],
-              ["Total JP Semester Genap", `${data.totalSem2} Jam Pelajaran`],
-              ["Guru Mata Pelajaran", "___________________________"],
-            ].map(([k, v]) => (
-              <div key={k} className="flex gap-2">
-                <span className="text-white/50 w-44 shrink-0">{k}</span>
-                <span className="text-white/20 shrink-0">:</span>
-                <span className="text-white/80">{v}</span>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-xs font-body">
+            {/* Satuan Pendidikan – editable */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Satuan Pendidikan</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <input
+                className="flex-1 bg-transparent border-b border-white/20 focus:border-cyan-400 outline-none text-white/85 text-xs py-0.5 transition-colors"
+                value={identitas.satuanPendidikan}
+                onChange={e => updateIdentitas("satuanPendidikan", e.target.value)}
+              />
+            </div>
+            {/* Mata Pelajaran – editable */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Mata Pelajaran</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <input
+                className="flex-1 bg-transparent border-b border-white/20 focus:border-cyan-400 outline-none text-white/85 text-xs py-0.5 transition-colors"
+                value={identitas.mataPelajaran}
+                onChange={e => updateIdentitas("mataPelajaran", e.target.value)}
+              />
+            </div>
+            {/* Kelas – auto derived */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Kelas</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <span className="text-white/60">{kelasNum} ({kelasNum === "7" ? "Tujuh" : kelasNum === "8" ? "Delapan" : "Sembilan"})</span>
+            </div>
+            {/* Tahun Pelajaran – auto derived */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Tahun Pelajaran</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <span className="text-white/60">{label}</span>
+            </div>
+            {/* Alokasi Waktu – editable */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Alokasi Waktu</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <input
+                className="flex-1 bg-transparent border-b border-white/20 focus:border-cyan-400 outline-none text-white/85 text-xs py-0.5 transition-colors"
+                value={identitas.alokasi}
+                onChange={e => updateIdentitas("alokasi", e.target.value)}
+              />
+            </div>
+            {/* Total JP Ganjil – auto dari totalSem1 */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Total JP Sem. Ganjil</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <span className="text-white/60">{data.totalSem1} Jam Pelajaran</span>
+            </div>
+            {/* Total JP Genap – auto dari totalSem2 */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Total JP Sem. Genap</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <span className="text-white/60">{data.totalSem2} Jam Pelajaran</span>
+            </div>
+            {/* Guru Mata Pelajaran – editable */}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-44 shrink-0">Guru Mata Pelajaran</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <input
+                className="flex-1 bg-transparent border-b border-white/20 focus:border-cyan-400 outline-none text-white/85 text-xs py-0.5 transition-colors"
+                placeholder="Nama Guru..."
+                value={identitas.guru}
+                onChange={e => updateIdentitas("guru", e.target.value)}
+              />
+            </div>
           </div>
         </div>
 
