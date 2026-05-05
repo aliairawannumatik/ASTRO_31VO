@@ -15,7 +15,7 @@ import bangunABCDSoalOlim20Img from "@assets/image_1777785299399.png";
 import pentagonSoal21Img from "@assets/image_1777785419675.png";
 import LayangLayangABCDSoalOlim23Img from "@assets/image_1777785419675.png";
 import segitigaABCD30_45_Soal29Img from "@assets/image_1777787261364.png";
-import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777205526814.png";
+import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777975339863.png";
 import bangunABCDSoalOlim4Img from "@assets/image_1777205553203.png";
 import bangunABCDSoalOlim5Img from "@assets/image_1777205569648.png";
 import segitigaABCSoalOlim6Img from "@assets/image_1777205589664.png";
