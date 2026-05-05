@@ -38,6 +38,12 @@ const guruMenuItems = [
     desc: "Alur tujuan pembelajaran",
   },
   {
+    label: "PROTA",
+    icon: CalendarRange,
+    path: "/ruang-untuk-guru/prota",
+    desc: "Program tahunan matematika SMP 2025-2026 & 2026-2027",
+  },
+  {
     label: "RPP",
     icon: BookOpen,
     path: "/ruang-untuk-guru/rpp",
@@ -90,12 +96,6 @@ const guruMenuItems = [
     icon: BadgeCheck,
     path: "/ruang-untuk-guru/kktp",
     desc: "Kriteria Ketercapaian Tujuan Pembelajaran Kurikulum Merdeka",
-  },
-  {
-    label: "PROTA",
-    icon: CalendarRange,
-    path: "/ruang-untuk-guru/prota",
-    desc: "Program tahunan matematika SMP 2025-2026 & 2026-2027",
   },
   {
     label: "PROSEM",
