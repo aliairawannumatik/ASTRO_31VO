@@ -16,10 +16,10 @@ import pentagonSoal21Img from "@assets/image_1777785419675.png";
 import LayangLayangABCDSoalOlim23Img from "@assets/image_1777785419675.png";
 import segitigaABCD30_45_Soal29Img from "@assets/image_1777787261364.png";
 import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777975339863.png";
-import bangunABCDSoalOlim4Img from "@assets/Gemini_Generated_Image_ot4vzot4vzot4vzo_1777975526535.png";
-import bangunABCDSoalOlim5Img from "@assets/Gemini_Generated_Image_rgyow7rgyow7rgyo_1777975526535.png";
-import segitigaABCSoalOlim6Img from "@assets/Gemini_Generated_Image_65hwer65hwer65hw_1777975526536.png";
-import trapesiumABCDSoalOlim10Img from "@assets/Gemini_Generated_Image_f8jg1rf8jg1rf8jg_1777975526537.png";
+import bangunABCDSoalOlim4Img from "@assets/Gemini_Generated_Image_f8jg1rf8jg1rf8jg_1777975526537.png";
+import bangunABCDSoalOlim5Img from "@assets/Gemini_Generated_Image_65hwer65hwer65hw_1777975526536.png";
+import segitigaABCSoalOlim6Img from "@assets/Gemini_Generated_Image_rgyow7rgyow7rgyo_1777975526535.png";
+import trapesiumABCDSoalOlim10Img from "@assets/Gemini_Generated_Image_ot4vzot4vzot4vzo_1777975526535.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
