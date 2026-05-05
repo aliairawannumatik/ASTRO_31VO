@@ -132,6 +132,7 @@ import PengertianPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PengertianPt
 import PenyelesaianPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PenyelesaianPtLSVLKPDPage";
 import ModelMatematikaPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/ModelMatematikaPtLSVLKPDPage";
 import ATPPage from "./pages/ATPPage";
+import GuruLayout from "./components/GuruLayout";
 import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
 import KeyakinanKelasPage from "./pages/ruang-untuk-guru/KeyakinanKelasPage";
@@ -971,34 +972,36 @@ const AppInner = () => {
       <Route path="/lkpd/kelas-9/fungsi-kuadrat/penerapan-maks-min" element={<FKPenerapanMaksMinLKPDPage />} />
       <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
       <Route path="/atp" element={<ATPPage />} />
-      <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
-      <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
-      <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />
-      <Route path="/ruang-untuk-guru/penilaian-pembelajaran" element={<PenilaianPembelajaranPage />} />
-      <Route path="/ruang-untuk-guru/capaian-pembelajaran" element={<CapaianPembelajaranPage />} />
-      <Route path="/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan" element={<RubrikPenilaianDimensiLulusanPage />} />
-      <Route path="/ruang-untuk-guru/jurnal-guru" element={<JurnalGuruPage />} />
-      <Route path="/ruang-untuk-guru/agenda-guru" element={<AgendaGuruPage />} />
-      <Route path="/ruang-untuk-guru/prosem" element={<ProsemPage />} />
-      <Route path="/ruang-untuk-guru/prosem/:tahun" element={<ProsemTahunPage />} />
-      <Route path="/ruang-untuk-guru/kktp" element={<KKTPPage />} />
-      <Route path="/ruang-untuk-guru/absensi-siswa" element={<AbsensiSiswaPage />} />
-      <Route path="/ruang-untuk-guru/penilaian-siswa" element={<PenilaianSiswaPage />} />
-      <Route path="/ruang-untuk-guru/rpp/rancang" element={<RancangRPPPage />} />
-      <Route path="/ruang-untuk-guru/kokulikuler" element={<KokulikulerPage />} />
-      <Route path="/ruang-untuk-guru/prota" element={<ProtaPage />} />
-      <Route path="/ruang-untuk-guru/prota/:tahun" element={<ProtaTahunPage />} />
-      <Route path="/ruang-untuk-guru/analisis-alokasi-waktu" element={<AnalisisAlokasiWaktuPage />} />
-      <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
-      <Route path="/ruang-untuk-guru/rpp/bilangan-bulat" element={<RPPBilanganBulatPage />} />
-      <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan" element={<RPPPenjumlahanBilanganBulatPage />} />
-      <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pengurangan" element={<RPPPenguranganBilanganBulatPage />} />
-      <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/perkalian" element={<RPPPerkalianBilanganBulatPage />} />
-      <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pembagian" element={<RPPPembagianBilanganBulatPage />} />
-      <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/operasi-campuran" element={<RPPOperasiCampuranBilanganBulatPage />} />
-      <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/kpk-fpb" element={<RPPKpkFpbPage />} />
-      <Route path="/ruang-untuk-guru/rpp/:materiSlug" element={<RPPMateriDynamicPage />} />
-      <Route path="/ruang-untuk-guru/rpp/:materiSlug/:subSlug" element={<RPPDetailDynamicPage />} />
+      <Route element={<GuruLayout />}>
+        <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
+        <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
+        <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />
+        <Route path="/ruang-untuk-guru/penilaian-pembelajaran" element={<PenilaianPembelajaranPage />} />
+        <Route path="/ruang-untuk-guru/capaian-pembelajaran" element={<CapaianPembelajaranPage />} />
+        <Route path="/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan" element={<RubrikPenilaianDimensiLulusanPage />} />
+        <Route path="/ruang-untuk-guru/jurnal-guru" element={<JurnalGuruPage />} />
+        <Route path="/ruang-untuk-guru/agenda-guru" element={<AgendaGuruPage />} />
+        <Route path="/ruang-untuk-guru/prosem" element={<ProsemPage />} />
+        <Route path="/ruang-untuk-guru/prosem/:tahun" element={<ProsemTahunPage />} />
+        <Route path="/ruang-untuk-guru/kktp" element={<KKTPPage />} />
+        <Route path="/ruang-untuk-guru/absensi-siswa" element={<AbsensiSiswaPage />} />
+        <Route path="/ruang-untuk-guru/penilaian-siswa" element={<PenilaianSiswaPage />} />
+        <Route path="/ruang-untuk-guru/rpp/rancang" element={<RancangRPPPage />} />
+        <Route path="/ruang-untuk-guru/kokulikuler" element={<KokulikulerPage />} />
+        <Route path="/ruang-untuk-guru/prota" element={<ProtaPage />} />
+        <Route path="/ruang-untuk-guru/prota/:tahun" element={<ProtaTahunPage />} />
+        <Route path="/ruang-untuk-guru/analisis-alokasi-waktu" element={<AnalisisAlokasiWaktuPage />} />
+        <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
+        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat" element={<RPPBilanganBulatPage />} />
+        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan" element={<RPPPenjumlahanBilanganBulatPage />} />
+        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pengurangan" element={<RPPPenguranganBilanganBulatPage />} />
+        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/perkalian" element={<RPPPerkalianBilanganBulatPage />} />
+        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pembagian" element={<RPPPembagianBilanganBulatPage />} />
+        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/operasi-campuran" element={<RPPOperasiCampuranBilanganBulatPage />} />
+        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/kpk-fpb" element={<RPPKpkFpbPage />} />
+        <Route path="/ruang-untuk-guru/rpp/:materiSlug" element={<RPPMateriDynamicPage />} />
+        <Route path="/ruang-untuk-guru/rpp/:materiSlug/:subSlug" element={<RPPDetailDynamicPage />} />
+      </Route>
       <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
       <Route path="/pesan-kesan" element={<PesanKesanPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />
