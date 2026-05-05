@@ -1,10 +1,23 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { ArrowLeft, BookOpenCheck, GraduationCap, Layers, ListChecks, School } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpenCheck,
+  GraduationCap,
+  Layers,
+  ListChecks,
+  School,
+  Save,
+  FileText,
+  FileDown,
+  Plus,
+  Trash2,
+} from "lucide-react";
 
-const atpElements = [
+const defaultAtpElements = [
   {
     no: "1",
     element: "Bilangan",
@@ -131,8 +144,135 @@ const classFlow = [
   },
 ];
 
+const STORAGE_KEY = "numatik_atp_data";
+
+const dokumenStyle = `
+  @page { size: 21.5cm 33cm; margin: 3cm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 12pt; line-height: 1.5; color: #000; background: #fff; margin: 0; padding: 0; }
+  h1 { text-align: center; font-size: 16pt; font-weight: bold; margin: 0 0 6pt 0; font-family: Arial, sans-serif; }
+  h2 { font-size: 13pt; font-weight: bold; margin: 14pt 0 6pt 0; font-family: Arial, sans-serif; }
+  h3 { font-size: 12pt; font-weight: bold; margin: 10pt 0 4pt 0; font-family: Arial, sans-serif; }
+  .header { text-align: center; margin-bottom: 18pt; border-bottom: 2px solid #000; padding-bottom: 10pt; }
+  .subtitle { font-size: 11pt; margin: 3pt 0; text-align: center; }
+  .identitas { border: 1px solid #aaa; padding: 10pt; margin-bottom: 14pt; }
+  .identitas p { margin: 4pt 0; text-align: left; }
+  .elemen { border: 1px solid #aaa; padding: 10pt 12pt; margin-bottom: 12pt; page-break-inside: avoid; }
+  .elemen-no { font-size: 10pt; color: #555; margin: 0 0 3pt 0; }
+  .elemen-judul { font-weight: bold; font-size: 13pt; margin: 0 0 8pt 0; }
+  .cp-box { background: #f9f9f9; border: 1px solid #ddd; padding: 8pt; margin-bottom: 8pt; text-align: justify; }
+  .cp-label { font-weight: bold; font-size: 10pt; margin: 0 0 4pt 0; }
+  .tp-label { font-weight: bold; font-size: 10pt; margin: 0 0 4pt 0; }
+  ol { margin: 0; padding-left: 18pt; }
+  ol li { text-align: justify; margin-bottom: 3pt; }
+  .footer { text-align: center; margin-top: 18pt; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 8pt; }
+`;
+
+type AtpElement = { no: string; element: string; cp: string; tp: string[] };
+
 const ATPPage = () => {
   const navigate = useNavigate();
+  const [atpData, setAtpData] = useState<AtpElement[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : defaultAtpElements;
+    } catch {
+      return defaultAtpElements;
+    }
+  });
+  const [saved, setSaved] = useState(false);
+
+  const totalTp = atpData.reduce((acc, el) => acc + el.tp.length, 0);
+
+  const handleTpChange = (elIdx: number, tpIdx: number, value: string) => {
+    setAtpData((prev) => {
+      const next = prev.map((el, i) =>
+        i === elIdx ? { ...el, tp: el.tp.map((t, j) => (j === tpIdx ? value : t)) } : el
+      );
+      return next;
+    });
+    setSaved(false);
+  };
+
+  const handleAddTp = (elIdx: number) => {
+    setAtpData((prev) =>
+      prev.map((el, i) =>
+        i === elIdx ? { ...el, tp: [...el.tp, ""] } : el
+      )
+    );
+    setSaved(false);
+  };
+
+  const handleDeleteTp = (elIdx: number, tpIdx: number) => {
+    setAtpData((prev) =>
+      prev.map((el, i) =>
+        i === elIdx ? { ...el, tp: el.tp.filter((_, j) => j !== tpIdx) } : el
+      )
+    );
+    setSaved(false);
+  };
+
+  const handleSave = () => {
+    playPopSound();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(atpData));
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
+
+  const buildDokumenBody = () => `
+    <div class="header">
+      <h1>ALUR TUJUAN PEMBELAJARAN MATEMATIKA</h1>
+      <p class="subtitle">Fase D — Kurikulum Merdeka dengan Pendekatan Deep Learning</p>
+      <p class="subtitle">SMP/MTs/Program Paket B</p>
+    </div>
+    <div class="identitas">
+      <h2 style="margin-top:0;">Identitas Dokumen</h2>
+      <p><strong>Mata Pelajaran:</strong> Matematika</p>
+      <p><strong>Fase:</strong> D</p>
+      <p><strong>Tahun Pelajaran:</strong> 2025 - 2026</p>
+      <p><strong>Jumlah Elemen:</strong> ${atpData.length} elemen pembelajaran</p>
+      <p><strong>Jumlah TP:</strong> ${totalTp} tujuan pembelajaran</p>
+    </div>
+    ${atpData.map((item) => `
+      <div class="elemen">
+        <p class="elemen-no">Elemen ${item.no}</p>
+        <p class="elemen-judul">${item.element}</p>
+        <div class="cp-box">
+          <p class="cp-label">Capaian Pembelajaran:</p>
+          <p style="margin:0;text-align:justify;">${item.cp}</p>
+        </div>
+        <p class="tp-label">Tujuan Pembelajaran (${item.tp.length} TP):</p>
+        <ol>${item.tp.map((tp) => `<li>${tp}</li>`).join("")}</ol>
+      </div>
+    `).join("")}
+    <div class="footer">
+      <p>Dokumen ini dicetak dari Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
+    </div>
+  `;
+
+  const handlePrintPDF = () => {
+    playPopSound();
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
+    const win = window.open("", "_blank");
+    if (win) {
+      win.document.write(html);
+      win.document.close();
+      win.focus();
+      setTimeout(() => { win.print(); win.close(); }, 500);
+    }
+  };
+
+  const handlePrintWord = () => {
+    playPopSound();
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
+    const blob = new Blob([html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Alur_Tujuan_Pembelajaran_Matematika.doc";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
@@ -150,6 +290,29 @@ const ATPPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             Konten ATP ini disusun dari dokumen Analisis Capaian Pembelajaran ke Tujuan Pembelajaran Matematika SMPN 28 Bandung.
           </p>
+          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${saved ? "bg-emerald-600 border-emerald-400/40" : "bg-emerald-700/80 hover:bg-emerald-600 border-emerald-400/40"}`}
+            >
+              <Save className="w-4 h-4" />
+              {saved ? "Tersimpan!" : "Simpan"}
+            </button>
+            <button
+              onClick={handlePrintWord}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileText className="w-4 h-4" />
+              Cetak Word
+            </button>
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-500 border border-red-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Cetak PDF
+            </button>
+          </div>
         </div>
 
         <section className="grid md:grid-cols-4 gap-4 mb-6">
@@ -164,12 +327,12 @@ const ATPPage = () => {
           </div>
           <div className="rounded-2xl border border-yellow-200/25 bg-yellow-400/10 backdrop-blur p-5">
             <Layers className="w-8 h-8 text-yellow-200 mb-3" />
-            <p className="text-3xl font-display font-bold text-white">5</p>
+            <p className="text-3xl font-display font-bold text-white">{atpData.length}</p>
             <p className="text-sm text-white/70">Elemen pembelajaran</p>
           </div>
           <div className="rounded-2xl border border-fuchsia-200/25 bg-fuchsia-400/10 backdrop-blur p-5">
             <ListChecks className="w-8 h-8 text-fuchsia-200 mb-3" />
-            <p className="text-3xl font-display font-bold text-white">71</p>
+            <p className="text-3xl font-display font-bold text-white">{totalTp}</p>
             <p className="text-sm text-white/70">Tujuan pembelajaran</p>
           </div>
         </section>
@@ -198,9 +361,9 @@ const ATPPage = () => {
         <section className="space-y-4 mb-8">
           <div className="text-center mb-4">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-cyan-100">Analisis CP ke TP</h2>
-            <p className="text-sm text-white/65 mt-2">Klik setiap elemen untuk membuka capaian pembelajaran dan daftar tujuan pembelajarannya.</p>
+            <p className="text-sm text-white/65 mt-2">Klik setiap elemen untuk membuka dan mengedit tujuan pembelajaran.</p>
           </div>
-          {atpElements.map((item) => (
+          {atpData.map((item, elIdx) => (
             <details key={item.element} className="group rounded-3xl border border-cyan-200/25 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-violet-500/10 backdrop-blur p-5 md:p-6">
               <summary className="cursor-pointer list-none">
                 <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5">
@@ -223,9 +386,34 @@ const ATPPage = () => {
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
                   <h4 className="font-display font-bold text-emerald-100 mb-3">Tujuan Pembelajaran</h4>
-                  <ol className="space-y-2 list-decimal pl-5 text-sm leading-relaxed text-white/75 font-body">
-                    {item.tp.map((tp) => <li key={tp}>{tp}</li>)}
+                  <ol className="space-y-2 list-decimal pl-5">
+                    {item.tp.map((tp, tpIdx) => (
+                      <li key={tpIdx} className="text-sm text-white/75 font-body">
+                        <div className="flex items-start gap-2">
+                          <textarea
+                            value={tp}
+                            onChange={(e) => handleTpChange(elIdx, tpIdx, e.target.value)}
+                            rows={2}
+                            className="flex-1 bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-sm text-white/90 font-body leading-relaxed resize-none focus:outline-none focus:border-cyan-400/60 focus:bg-white/10 transition-all"
+                          />
+                          <button
+                            onClick={() => handleDeleteTp(elIdx, tpIdx)}
+                            className="mt-1 p-1.5 rounded-lg text-red-400/70 hover:text-red-400 hover:bg-red-400/10 transition-colors shrink-0"
+                            title="Hapus TP"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </li>
+                    ))}
                   </ol>
+                  <button
+                    onClick={() => handleAddTp(elIdx)}
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs text-cyan-300/80 hover:text-cyan-200 transition-colors"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    Tambah Tujuan Pembelajaran
+                  </button>
                 </div>
               </div>
             </details>
