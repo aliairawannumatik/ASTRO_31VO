@@ -14,7 +14,6 @@ import {
   School,
   Layers,
   FileText,
-  FileDown,
 } from "lucide-react";
 
 const faseInfo = {
@@ -167,28 +166,6 @@ const CapaianPembelajaranPage = () => {
     </div>
   `;
 
-  const handlePrintPDF = () => {
-    playPopSound();
-    const style = document.createElement("style");
-    style.id = "__numatik_print_style__";
-    style.innerHTML = `
-      ${dokumenStyle}
-      @media print {
-        body > *:not(#__numatik_print_root__) { display: none !important; }
-        #__numatik_print_root__ { display: block !important; }
-      }
-    `;
-    const root = document.createElement("div");
-    root.id = "__numatik_print_root__";
-    root.style.display = "none";
-    root.innerHTML = dokumenBody;
-    document.head.appendChild(style);
-    document.body.appendChild(root);
-    window.print();
-    document.head.removeChild(style);
-    document.body.removeChild(root);
-  };
-
   const handlePrintWord = () => {
     playPopSound();
     const htmlContent = `<!DOCTYPE html>
@@ -236,13 +213,6 @@ const CapaianPembelajaranPage = () => {
             >
               <FileText className="w-4 h-4" />
               Cetak Word
-            </button>
-            <button
-              onClick={handlePrintPDF}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-500 border border-red-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
-            >
-              <FileDown className="w-4 h-4" />
-              Cetak PDF
             </button>
           </div>
         </div>
