@@ -144,6 +144,7 @@ import ProsemPage from "./pages/ruang-untuk-guru/ProsemPage";
 import ProsemTahunPage from "./pages/ruang-untuk-guru/ProsemTahunPage";
 import ProtaPage from "./pages/ruang-untuk-guru/ProtaPage";
 import ProtaTahunPage from "./pages/ruang-untuk-guru/ProtaTahunPage";
+import AnalisisAlokasiWaktuPage from "./pages/ruang-untuk-guru/AnalisisAlokasiWaktuPage";
 import KKTPPage from "./pages/ruang-untuk-guru/KKTPPage";
 import AbsensiSiswaPage from "./pages/ruang-untuk-guru/AbsensiSiswaPage";
 import PenilaianSiswaPage from "./pages/ruang-untuk-guru/PenilaianSiswaPage";
@@ -987,6 +988,7 @@ const AppInner = () => {
       <Route path="/ruang-untuk-guru/kokulikuler" element={<KokulikulerPage />} />
       <Route path="/ruang-untuk-guru/prota" element={<ProtaPage />} />
       <Route path="/ruang-untuk-guru/prota/:tahun" element={<ProtaTahunPage />} />
+      <Route path="/ruang-untuk-guru/analisis-alokasi-waktu" element={<AnalisisAlokasiWaktuPage />} />
       <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat" element={<RPPBilanganBulatPage />} />
       <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan" element={<RPPPenjumlahanBilanganBulatPage />} />

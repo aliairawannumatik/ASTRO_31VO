@@ -19,6 +19,7 @@ import {
   Users,
   Star,
   Trophy,
+  Clock,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -42,6 +43,12 @@ const guruMenuItems = [
     icon: CalendarRange,
     path: "/ruang-untuk-guru/prota",
     desc: "Program tahunan matematika SMP 2025-2026 & 2026-2027",
+  },
+  {
+    label: "ANALISIS ALOKASI WAKTU",
+    icon: Clock,
+    path: "/ruang-untuk-guru/analisis-alokasi-waktu",
+    desc: "Perhitungan minggu efektif dan distribusi alokasi waktu per semester",
   },
   {
     label: "RPP",
