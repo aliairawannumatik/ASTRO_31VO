@@ -143,7 +143,7 @@ const CapaianPembelajaranPage = () => {
   const dokumenBody = `
     <div class="header">
       <h1>CAPAIAN PEMBELAJARAN MATEMATIKA</h1>
-      <p class="subtitle">Fase D — Kurikulum Merdeka</p>
+      <p class="subtitle">Fase D — Kurikulum Merdeka dengan Pendekatan Deep Learning</p>
       <p class="subtitle">SMP/MTs/Program Paket B</p>
     </div>
     <div class="identitas">
