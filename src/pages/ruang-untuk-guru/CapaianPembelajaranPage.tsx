@@ -14,6 +14,7 @@ import {
   School,
   Layers,
   FileText,
+  FileDown,
 } from "lucide-react";
 
 const faseInfo = {
@@ -166,6 +167,33 @@ const CapaianPembelajaranPage = () => {
     </div>
   `;
 
+  const handlePrintPDF = () => {
+    playPopSound();
+    const htmlContent = `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Capaian Pembelajaran (NUMATIK)</title>
+  <style>
+    ${dokumenStyle}
+  </style>
+</head>
+<body>
+  ${dokumenBody}
+</body>
+</html>`;
+    const win = window.open("", "_blank");
+    if (win) {
+      win.document.write(htmlContent);
+      win.document.close();
+      win.focus();
+      setTimeout(() => {
+        win.print();
+        win.close();
+      }, 500);
+    }
+  };
+
   const handlePrintWord = () => {
     playPopSound();
     const htmlContent = `<!DOCTYPE html>
@@ -213,6 +241,13 @@ const CapaianPembelajaranPage = () => {
             >
               <FileText className="w-4 h-4" />
               Cetak Word
+            </button>
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-500 border border-red-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Cetak PDF
             </button>
           </div>
         </div>
