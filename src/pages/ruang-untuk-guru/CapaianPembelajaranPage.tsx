@@ -75,63 +75,135 @@ const cpElements = [
 const CapaianPembelajaranPage = () => {
   const navigate = useNavigate();
 
+  const dokumenStyle = `
+    @page {
+      size: 21.5cm 33cm;
+      margin: 3cm;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #000;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: justify;
+    }
+    h1 {
+      text-align: center;
+      font-size: 16pt;
+      font-weight: bold;
+      margin: 0 0 6pt 0;
+      font-family: Arial, sans-serif;
+    }
+    h2 {
+      font-size: 13pt;
+      font-weight: bold;
+      margin: 14pt 0 6pt 0;
+      font-family: Arial, sans-serif;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 18pt;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10pt;
+    }
+    .subtitle {
+      font-size: 11pt;
+      margin: 3pt 0;
+      text-align: center;
+    }
+    .identitas {
+      border: 1px solid #aaa;
+      padding: 10pt;
+      margin-bottom: 14pt;
+    }
+    .identitas p { margin: 4pt 0; text-align: left; }
+    .pengantar { margin-bottom: 14pt; text-align: justify; }
+    .elemen {
+      border: 1px solid #aaa;
+      padding: 10pt 12pt;
+      margin-bottom: 10pt;
+    }
+    .elemen-no { font-size: 10pt; color: #555; margin: 0 0 3pt 0; }
+    .elemen-judul { font-weight: bold; font-size: 12pt; margin: 0 0 6pt 0; }
+    .cp-text { text-align: justify; margin: 0; }
+    .footer {
+      text-align: center;
+      margin-top: 18pt;
+      font-size: 9pt;
+      color: #666;
+      border-top: 1px solid #ccc;
+      padding-top: 8pt;
+    }
+  `;
+
+  const dokumenBody = `
+    <div class="header">
+      <h1>CAPAIAN PEMBELAJARAN MATEMATIKA</h1>
+      <p class="subtitle">Fase D — Kurikulum Merdeka</p>
+      <p class="subtitle">SMP/MTs/Program Paket B</p>
+    </div>
+    <div class="identitas">
+      <h2 style="margin-top:0;">Identitas Fase</h2>
+      <p><strong>Mata Pelajaran:</strong> Matematika</p>
+      <p><strong>Fase:</strong> ${faseInfo.fase}</p>
+      <p><strong>Jenjang:</strong> ${faseInfo.jenjang}</p>
+      <p><strong>Jumlah Elemen:</strong> ${cpElements.length} elemen capaian pembelajaran</p>
+    </div>
+    <p class="pengantar">${faseInfo.pengantar}</p>
+    <h2>Rincian Capaian Pembelajaran</h2>
+    ${cpElements.map((item) => `
+      <div class="elemen">
+        <p class="elemen-no">Elemen ${item.no}</p>
+        <p class="elemen-judul">${item.element}</p>
+        <p class="cp-text">${item.cp}</p>
+      </div>
+    `).join("")}
+    <div class="footer">
+      <p>Dokumen ini dicetak dari Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
+    </div>
+  `;
+
   const handlePrintPDF = () => {
     playPopSound();
+    const style = document.createElement("style");
+    style.id = "__numatik_print_style__";
+    style.innerHTML = `
+      ${dokumenStyle}
+      @media print {
+        body > *:not(#__numatik_print_root__) { display: none !important; }
+        #__numatik_print_root__ { display: block !important; }
+      }
+    `;
+    const root = document.createElement("div");
+    root.id = "__numatik_print_root__";
+    root.style.display = "none";
+    root.innerHTML = dokumenBody;
+    document.head.appendChild(style);
+    document.body.appendChild(root);
     window.print();
+    document.head.removeChild(style);
+    document.body.removeChild(root);
   };
 
   const handlePrintWord = () => {
     playPopSound();
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html lang="id">
-      <head>
-        <meta charset="UTF-8">
-        <title>Capaian Pembelajaran Matematika Fase D</title>
-        <style>
-          body { font-family: Arial, sans-serif; margin: 2cm; color: #000; font-size: 12pt; line-height: 1.6; }
-          h1 { text-align: center; font-size: 18pt; font-weight: bold; margin-bottom: 8pt; }
-          h2 { font-size: 14pt; font-weight: bold; margin-top: 16pt; margin-bottom: 6pt; }
-          h3 { font-size: 12pt; font-weight: bold; margin-top: 12pt; margin-bottom: 4pt; }
-          .header { text-align: center; margin-bottom: 20pt; border-bottom: 2px solid #000; padding-bottom: 10pt; }
-          .subtitle { font-size: 11pt; color: #333; }
-          .identitas { border: 1px solid #ccc; padding: 10pt; margin-bottom: 16pt; border-radius: 4px; }
-          .identitas p { margin: 4pt 0; }
-          .elemen { border: 1px solid #ccc; padding: 12pt; margin-bottom: 12pt; border-radius: 4px; }
-          .elemen-judul { font-weight: bold; font-size: 13pt; margin-bottom: 6pt; }
-          .elemen-no { color: #555; font-size: 10pt; margin-bottom: 4pt; }
-          .cp-text { text-align: justify; }
-          .footer { text-align: center; margin-top: 20pt; font-size: 10pt; color: #666; border-top: 1px solid #ccc; padding-top: 8pt; }
-        </style>
-      </head>
-      <body>
-        <div class="header">
-          <h1>CAPAIAN PEMBELAJARAN MATEMATIKA</h1>
-          <p class="subtitle">Fase D — Kurikulum Merdeka</p>
-          <p class="subtitle">SMP/MTs/Program Paket B</p>
-        </div>
-        <div class="identitas">
-          <h2>Identitas Fase</h2>
-          <p><strong>Mata Pelajaran:</strong> Matematika</p>
-          <p><strong>Fase:</strong> ${faseInfo.fase}</p>
-          <p><strong>Jenjang:</strong> ${faseInfo.jenjang}</p>
-          <p><strong>Jumlah Elemen:</strong> ${cpElements.length} elemen capaian pembelajaran</p>
-        </div>
-        <p style="margin-bottom:14pt;">${faseInfo.pengantar}</p>
-        <h2>Rincian Capaian Pembelajaran</h2>
-        ${cpElements.map((item) => `
-          <div class="elemen">
-            <p class="elemen-no">Elemen ${item.no}</p>
-            <p class="elemen-judul">${item.element}</p>
-            <p class="cp-text">${item.cp}</p>
-          </div>
-        `).join("")}
-        <div class="footer">
-          <p>Dokumen ini dicetak dari Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
-        </div>
-      </body>
-      </html>
-    `;
+    const htmlContent = `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Capaian Pembelajaran Matematika Fase D</title>
+  <style>
+    ${dokumenStyle}
+  </style>
+</head>
+<body>
+  ${dokumenBody}
+</body>
+</html>`;
     const blob = new Blob([htmlContent], { type: "application/msword" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
