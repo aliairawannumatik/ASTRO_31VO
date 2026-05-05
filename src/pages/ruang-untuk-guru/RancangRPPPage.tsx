@@ -626,7 +626,7 @@ const RancangRPPPage = () => {
   const isReady = state.modelId && state.selectedTP.length > 0 && state.materi;
 
   return (
-    <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
+    <div className="guru-editable relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
       <PageNavigation prevPath="/ruang-untuk-guru/rpp" />
       <div className="relative z-10 max-w-4xl mx-auto px-4 pt-20 pb-14">

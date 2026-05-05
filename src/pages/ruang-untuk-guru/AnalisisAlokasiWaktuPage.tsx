@@ -424,7 +424,7 @@ const AnalisisAlokasiWaktuPage = () => {
   const inpId = "flex-1 bg-transparent border-b border-white/20 focus:border-cyan-400 outline-none text-white/85 text-xs py-0.5 transition-colors";
 
   return (
-    <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
+    <div className="guru-editable relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
       <PageNavigation prevPath="/ruang-untuk-guru" />
       <div className="relative z-10 max-w-6xl mx-auto px-4 pt-20 pb-14">

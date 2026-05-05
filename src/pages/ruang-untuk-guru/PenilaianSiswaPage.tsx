@@ -260,7 +260,7 @@ const PenilaianSiswaPage = () => {
   const totalBobot = state.kolomList.reduce((s, k) => s + k.bobot, 0);
 
   return (
-    <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
+    <div className="guru-editable relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
       <PageNavigation prevPath="/ruang-untuk-guru" />
       <div className="relative z-10 max-w-full px-4 pt-20 pb-14">
@@ -447,7 +447,7 @@ const PenilaianSiswaPage = () => {
                             <td key={k.id} className="p-1 border-r border-white/10">
                               <input
                                 type="number" min={0} max={100}
-                                className={`w-full rounded-lg px-2 py-1.5 text-sm text-center font-bold focus:outline-none transition-colors ${
+                                className={`nilai-input w-full rounded-lg px-2 py-1.5 text-sm text-center font-bold focus:outline-none transition-colors ${
                                   v === ""
                                     ? "bg-white/5 border border-white/10 text-white/40"
                                     : isBelow

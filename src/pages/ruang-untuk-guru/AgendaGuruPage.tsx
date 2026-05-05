@@ -120,7 +120,7 @@ const AgendaGuruPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen gradient-space overflow-x-hidden text-white print:bg-white print:text-black">
+    <div className="guru-editable relative min-h-screen gradient-space overflow-x-hidden text-white print:bg-white print:text-black">
       <div className="print:hidden">
         <Starfield />
         <PageNavigation prevPath="/ruang-untuk-guru" />

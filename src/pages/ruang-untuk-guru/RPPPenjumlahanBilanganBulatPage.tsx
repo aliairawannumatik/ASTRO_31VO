@@ -276,7 +276,7 @@ ul,ol{margin:4pt 0;padding-left:20pt}li{margin:2pt 0;font-size:10pt}
   };
 
   return (
-    <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
+    <div className="guru-editable relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
       <PageNavigation prevPath="/ruang-untuk-guru/rpp/bilangan-bulat" />
       <div className="relative z-10 max-w-4xl mx-auto px-4 pt-20 pb-14">

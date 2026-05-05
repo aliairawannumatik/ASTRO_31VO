@@ -1726,3 +1726,62 @@
     color: #1a1a1a !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   RUANG UNTUK GURU — Editable Field Indicators
+   Makes all inputs / textareas / selects visually clear
+   as editable fields inside .guru-editable wrappers.
+   ═══════════════════════════════════════════════════════ */
+
+/* All editable fields except .nilai-input (which has semantic color coding) */
+.guru-editable input:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not(:disabled):not(.nilai-input),
+.guru-editable textarea:not(:disabled),
+.guru-editable select:not(:disabled) {
+  border: 1.5px dashed rgba(34, 211, 238, 0.45) !important;
+  border-radius: 6px !important;
+  background-color: rgba(34, 211, 238, 0.04) !important;
+  cursor: text !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.guru-editable input:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not(:disabled):not(.nilai-input):hover,
+.guru-editable textarea:not(:disabled):hover,
+.guru-editable select:not(:disabled):hover {
+  border-color: rgba(34, 211, 238, 0.72) !important;
+  background-color: rgba(34, 211, 238, 0.08) !important;
+}
+
+.guru-editable input:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not(:disabled):not(.nilai-input):focus,
+.guru-editable textarea:not(:disabled):focus,
+.guru-editable select:not(:disabled):focus {
+  border-color: rgba(34, 211, 238, 1) !important;
+  background-color: rgba(34, 211, 238, 0.10) !important;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16), 0 0 14px rgba(34, 211, 238, 0.12) !important;
+  outline: none !important;
+}
+
+.guru-editable input:not([type="hidden"]):not(.nilai-input)::placeholder,
+.guru-editable textarea::placeholder {
+  color: rgba(34, 211, 238, 0.40) !important;
+  font-style: italic;
+}
+
+/* Nilai inputs keep semantic red/green color coding, only get glow on focus */
+.guru-editable .nilai-input:focus {
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16), 0 0 14px rgba(34, 211, 238, 0.12) !important;
+  outline: none !important;
+}
+
+/* Print: strip all edit indicators */
+@media print {
+  .guru-editable input,
+  .guru-editable textarea,
+  .guru-editable select {
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    cursor: auto !important;
+  }
+}

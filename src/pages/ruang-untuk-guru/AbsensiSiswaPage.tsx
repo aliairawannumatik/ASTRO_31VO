@@ -242,7 +242,7 @@ ${signBlock}
   const inputCls = "w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/30 focus:outline-none focus:border-teal-400/60 focus:bg-white/8 transition-colors";
 
   return (
-    <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
+    <div className="guru-editable relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
       <PageNavigation prevPath="/ruang-untuk-guru" />
       <div className="relative z-10 max-w-full px-4 pt-20 pb-14">
