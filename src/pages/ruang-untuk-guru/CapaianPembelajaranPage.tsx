@@ -13,6 +13,8 @@ import {
   BarChart3,
   School,
   Layers,
+  FileText,
+  FileDown,
 } from "lucide-react";
 
 const faseInfo = {
@@ -73,6 +75,72 @@ const cpElements = [
 const CapaianPembelajaranPage = () => {
   const navigate = useNavigate();
 
+  const handlePrintPDF = () => {
+    playPopSound();
+    window.print();
+  };
+
+  const handlePrintWord = () => {
+    playPopSound();
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html lang="id">
+      <head>
+        <meta charset="UTF-8">
+        <title>Capaian Pembelajaran Matematika Fase D</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 2cm; color: #000; font-size: 12pt; line-height: 1.6; }
+          h1 { text-align: center; font-size: 18pt; font-weight: bold; margin-bottom: 8pt; }
+          h2 { font-size: 14pt; font-weight: bold; margin-top: 16pt; margin-bottom: 6pt; }
+          h3 { font-size: 12pt; font-weight: bold; margin-top: 12pt; margin-bottom: 4pt; }
+          .header { text-align: center; margin-bottom: 20pt; border-bottom: 2px solid #000; padding-bottom: 10pt; }
+          .subtitle { font-size: 11pt; color: #333; }
+          .identitas { border: 1px solid #ccc; padding: 10pt; margin-bottom: 16pt; border-radius: 4px; }
+          .identitas p { margin: 4pt 0; }
+          .elemen { border: 1px solid #ccc; padding: 12pt; margin-bottom: 12pt; border-radius: 4px; }
+          .elemen-judul { font-weight: bold; font-size: 13pt; margin-bottom: 6pt; }
+          .elemen-no { color: #555; font-size: 10pt; margin-bottom: 4pt; }
+          .cp-text { text-align: justify; }
+          .footer { text-align: center; margin-top: 20pt; font-size: 10pt; color: #666; border-top: 1px solid #ccc; padding-top: 8pt; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>CAPAIAN PEMBELAJARAN MATEMATIKA</h1>
+          <p class="subtitle">Fase D — Kurikulum Merdeka</p>
+          <p class="subtitle">SMP/MTs/Program Paket B</p>
+        </div>
+        <div class="identitas">
+          <h2>Identitas Fase</h2>
+          <p><strong>Mata Pelajaran:</strong> Matematika</p>
+          <p><strong>Fase:</strong> ${faseInfo.fase}</p>
+          <p><strong>Jenjang:</strong> ${faseInfo.jenjang}</p>
+          <p><strong>Jumlah Elemen:</strong> ${cpElements.length} elemen capaian pembelajaran</p>
+        </div>
+        <p style="margin-bottom:14pt;">${faseInfo.pengantar}</p>
+        <h2>Rincian Capaian Pembelajaran</h2>
+        ${cpElements.map((item) => `
+          <div class="elemen">
+            <p class="elemen-no">Elemen ${item.no}</p>
+            <p class="elemen-judul">${item.element}</p>
+            <p class="cp-text">${item.cp}</p>
+          </div>
+        `).join("")}
+        <div class="footer">
+          <p>Dokumen ini dicetak dari Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
+        </div>
+      </body>
+      </html>
+    `;
+    const blob = new Blob([htmlContent], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Capaian_Pembelajaran_Matematika_Fase_D.doc";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
@@ -89,6 +157,22 @@ const CapaianPembelajaranPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             {faseInfo.pengantar}
           </p>
+          <div className="flex items-center justify-center gap-3 mt-6">
+            <button
+              onClick={handlePrintWord}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileText className="w-4 h-4" />
+              Cetak Word
+            </button>
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-500 border border-red-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Cetak PDF
+            </button>
+          </div>
         </div>
 
         <section className="grid md:grid-cols-3 gap-4 mb-8">
