@@ -10,6 +10,7 @@ import PembahasanCard from "@/components/PembahasanCard";
 import { segitigaSegiempatDasarPembahasan } from "@/data/pembahasan/segitigaSegiempatDasar";
 import { segitigaSegiempatOlimpiadePembahasan } from "@/data/pembahasan/segitigaSegiempatOlimpiade";
 import bangunSoal1DasarImg from "@assets/Gemini_Generated_Image_vhhsq3vhhsq3vhhs_1777975910347.png";
+import bangunSoal2DasarImg from "@assets/image_1777975962884.png";
 
 const OlimpiadeSoal1Pentagram = () => (
   <svg
@@ -962,7 +963,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src="/dasar-soal-2.png"
+                          src={bangunSoal2DasarImg}
                           alt="Soal No. 2 - Keliling bangun"
                           className="max-w-full max-h-56 object-contain"
                         />
