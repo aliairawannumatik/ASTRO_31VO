@@ -11,6 +11,7 @@ import { segitigaSegiempatDasarPembahasan } from "@/data/pembahasan/segitigaSegi
 import { segitigaSegiempatOlimpiadePembahasan } from "@/data/pembahasan/segitigaSegiempatOlimpiade";
 import bangunSoal1DasarImg from "@assets/Gemini_Generated_Image_vhhsq3vhhsq3vhhs_1777975910347.png";
 import bangunSoal2DasarImg from "@assets/image_1777975962884.png";
+import pentagramOlim1Img from "@assets/image_1777978368698.png";
 
 const OlimpiadeSoal1Pentagram = () => (
   <svg
@@ -33,7 +34,7 @@ const OlimpiadeSoal1Pentagram = () => (
 );
 
 const olimpiadeFigures: Record<number, JSX.Element> = {
-  1: <OlimpiadeSoal1Pentagram />,
+  1: <img src={pentagramOlim1Img} alt="Gambar bintang pentagram soal olimpiade no. 1" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
 };
 
 // Helper function to render text with LaTeX
