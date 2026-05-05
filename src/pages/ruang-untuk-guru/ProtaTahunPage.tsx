@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, CalendarRange, Printer, FileText } from "lucide-react";
+import { ArrowLeft, CalendarRange, FileText, FileDown, Save } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -21,71 +21,71 @@ type KelasProta = {
   totalSem2: number;
 };
 
-const makeProtaData = (tahunAwal: string, tahunAkhir: string): Record<"kelas7" | "kelas8" | "kelas9", KelasProta> => {
-  return {
-    kelas7: {
-      totalSem1: 80,
-      totalSem2: 85,
-      rows: [
-        { no: "1", materi: "Bilangan Bulat", kompetensiDasar: "Memahami dan melakukan operasi hitung bilangan bulat beserta sifat-sifatnya, serta menerapkannya dalam kehidupan sehari-hari", semester: 1, jp: 20, bulan: `Jul – Ags ${tahunAwal}` },
-        { no: "2", materi: "Bilangan Rasional (Pecahan)", kompetensiDasar: "Memahami bilangan rasional (pecahan), melakukan operasi hitung, dan menyelesaikan masalah sehari-hari", semester: 1, jp: 15, bulan: `Ags – Sep ${tahunAwal}` },
-        { no: "3", materi: "Bentuk Aljabar", kompetensiDasar: "Mengenal unsur-unsur bentuk aljabar, melakukan operasi hitung (penjumlahan, pengurangan, perkalian, pembagian) pada bentuk aljabar", semester: 1, jp: 15, bulan: `Sep – Okt ${tahunAwal}` },
-        { no: "4", materi: "PLSV & PTLSV", kompetensiDasar: "Menyelesaikan persamaan dan pertidaksamaan linear satu variabel dalam kehidupan sehari-hari", semester: 1, jp: 20, bulan: `Okt – Nov ${tahunAwal}` },
-        { no: "–", materi: "Penilaian Tengah Semester (PTS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Sep ${tahunAwal}`, type: "pts" },
-        { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 1, jp: 10, bulan: `Nov ${tahunAwal}`, type: "cadangan" },
-        { no: "–", materi: "Penilaian Akhir Semester (PAS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Des ${tahunAwal}`, type: "pas" },
-        { no: "5", materi: "Perbandingan", kompetensiDasar: "Memahami konsep perbandingan senilai, berbalik nilai, skala, dan menerapkannya dalam pemecahan masalah sehari-hari", semester: 2, jp: 15, bulan: `Jan ${tahunAkhir}` },
-        { no: "6", materi: "Aritmetika Sosial", kompetensiDasar: "Menyelesaikan masalah jual-beli (untung/rugi), diskon, pajak, bruto-netto-tara, dan bunga tunggal", semester: 2, jp: 15, bulan: `Jan – Feb ${tahunAkhir}` },
-        { no: "7", materi: "Garis dan Sudut", kompetensiDasar: "Memahami jenis-jenis sudut, hubungan antar-garis, dan sifat-sifat garis sejajar yang dipotong garis transversal", semester: 2, jp: 15, bulan: `Feb – Mar ${tahunAkhir}` },
-        { no: "8", materi: "Segitiga dan Segiempat", kompetensiDasar: "Memahami sifat, jenis, keliling, dan luas segitiga serta berbagai jenis segiempat dan penerapannya", semester: 2, jp: 20, bulan: `Apr – Mei ${tahunAkhir}` },
-        { no: "9", materi: "Himpunan", kompetensiDasar: "Memahami konsep himpunan, operasi himpunan (irisan, gabungan, selisih, komplemen), dan menerapkannya dalam masalah sehari-hari", semester: 2, jp: 15, bulan: `Mei ${tahunAkhir}` },
-        { no: "–", materi: "Penilaian Tengah Semester (PTS) 2", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Mar ${tahunAkhir}`, type: "pts" },
-        { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 2, jp: 5, bulan: `Mei ${tahunAkhir}`, type: "cadangan" },
-        { no: "–", materi: "Penilaian Akhir Tahun (PAT)", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Jun ${tahunAkhir}`, type: "pat" },
-      ],
-    },
-    kelas8: {
-      totalSem1: 80,
-      totalSem2: 85,
-      rows: [
-        { no: "1", materi: "Pola Bilangan", kompetensiDasar: "Mengenal pola bilangan, barisan aritmetika dan geometri, serta menentukan suku ke-n suatu barisan bilangan", semester: 1, jp: 15, bulan: `Jul – Ags ${tahunAwal}` },
-        { no: "2", materi: "Koordinat Kartesius", kompetensiDasar: "Memahami posisi titik dalam bidang koordinat Kartesius dan penerapannya dalam kehidupan sehari-hari", semester: 1, jp: 15, bulan: `Ags ${tahunAwal}` },
-        { no: "3", materi: "Relasi dan Fungsi", kompetensiDasar: "Memahami relasi, fungsi, notasi fungsi, nilai fungsi, dan grafik fungsi pada bidang koordinat Kartesius", semester: 1, jp: 15, bulan: `Sep – Okt ${tahunAwal}` },
-        { no: "4", materi: "Persamaan Garis Lurus", kompetensiDasar: "Memahami persamaan garis lurus, gradien, hubungan dua garis sejajar dan tegak lurus, serta penerapannya", semester: 1, jp: 20, bulan: `Okt – Nov ${tahunAwal}` },
-        { no: "–", materi: "Penilaian Tengah Semester (PTS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Sep ${tahunAwal}`, type: "pts" },
-        { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 1, jp: 15, bulan: `Nov ${tahunAwal}`, type: "cadangan" },
-        { no: "–", materi: "Penilaian Akhir Semester (PAS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Des ${tahunAwal}`, type: "pas" },
-        { no: "5", materi: "SPLDV", kompetensiDasar: "Menyelesaikan sistem persamaan linear dua variabel dengan metode grafik, substitusi, eliminasi, dan gabungan", semester: 2, jp: 20, bulan: `Jan – Feb ${tahunAkhir}` },
-        { no: "6", materi: "Teorema Pythagoras", kompetensiDasar: "Memahami dan menggunakan teorema Pythagoras, triple Pythagoras, dan penerapannya dalam pemecahan masalah", semester: 2, jp: 15, bulan: `Feb ${tahunAkhir}` },
-        { no: "7", materi: "Lingkaran", kompetensiDasar: "Memahami unsur lingkaran, keliling, luas, busur, juring, tali busur, dan hubungan sudut pusat dengan sudut keliling", semester: 2, jp: 20, bulan: `Mar – Apr ${tahunAkhir}` },
-        { no: "8", materi: "Bangun Ruang Sisi Datar", kompetensiDasar: "Memahami sifat, luas permukaan, dan volume kubus, balok, prisma, limas, dan gabungannya", semester: 2, jp: 15, bulan: `Apr – Mei ${tahunAkhir}` },
-        { no: "–", materi: "Penilaian Tengah Semester (PTS) 2", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Mar ${tahunAkhir}`, type: "pts" },
-        { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 2, jp: 15, bulan: `Mei ${tahunAkhir}`, type: "cadangan" },
-        { no: "–", materi: "Penilaian Akhir Tahun (PAT)", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Jun ${tahunAkhir}`, type: "pat" },
-      ],
-    },
-    kelas9: {
-      totalSem1: 80,
-      totalSem2: 60,
-      rows: [
-        { no: "1", materi: "Bilangan Berpangkat & Bentuk Akar", kompetensiDasar: "Memahami bilangan berpangkat (bulat dan pecahan), sifat operasinya, bentuk akar, dan notasi ilmiah", semester: 1, jp: 20, bulan: `Jul – Ags ${tahunAwal}` },
-        { no: "2", materi: "Persamaan Kuadrat", kompetensiDasar: "Menentukan akar persamaan kuadrat dengan pemfaktoran, melengkapi kuadrat sempurna, dan rumus kuadratik", semester: 1, jp: 20, bulan: `Ags – Sep ${tahunAwal}` },
-        { no: "3", materi: "Fungsi Kuadrat", kompetensiDasar: "Memahami grafik fungsi kuadrat, sumbu simetri, titik puncak (maksimum/minimum), dan penerapannya", semester: 1, jp: 15, bulan: `Okt ${tahunAwal}` },
-        { no: "4", materi: "Transformasi Geometri", kompetensiDasar: "Memahami translasi, refleksi, rotasi, dan dilatasi serta komposisi transformasi pada bidang koordinat", semester: 1, jp: 15, bulan: `Okt – Nov ${tahunAwal}` },
-        { no: "–", materi: "Penilaian Tengah Semester (PTS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Sep ${tahunAwal}`, type: "pts" },
-        { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 1, jp: 10, bulan: `Nov ${tahunAwal}`, type: "cadangan" },
-        { no: "–", materi: "Penilaian Akhir Semester (PAS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Des ${tahunAwal}`, type: "pas" },
-        { no: "5", materi: "Kesebangunan & Kekongruenan", kompetensiDasar: "Memahami konsep kesebangunan dan kekongruenan bangun datar serta penerapannya dalam pemecahan masalah", semester: 2, jp: 15, bulan: `Jan ${tahunAkhir}` },
-        { no: "6", materi: "Bangun Ruang Sisi Lengkung", kompetensiDasar: "Memahami luas permukaan dan volume tabung, kerucut, bola, dan gabungannya serta penerapannya", semester: 2, jp: 20, bulan: `Jan – Feb ${tahunAkhir}` },
-        { no: "7", materi: "Statistika", kompetensiDasar: "Memahami penyajian data (tabel, diagram), ukuran pemusatan (mean, median, modus), dan ukuran penyebaran data", semester: 2, jp: 15, bulan: `Mar ${tahunAkhir}` },
-        { no: "8", materi: "Peluang", kompetensiDasar: "Memahami ruang sampel, peluang empiris dan teoritis, frekuensi harapan, dan peluang kejadian majemuk", semester: 2, jp: 10, bulan: `Mei ${tahunAkhir}` },
-        { no: "–", materi: "Penilaian Tengah Semester (PTS) 2", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Mar ${tahunAkhir}`, type: "pts" },
-        { no: "–", materi: "Ujian Sekolah (Kelas 9)", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Apr ${tahunAkhir}`, type: "ujian" },
-        { no: "–", materi: "PAT / Kelulusan Kelas 9", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Jun ${tahunAkhir}`, type: "pat" },
-      ],
-    },
-  };
-};
+type AllData = Record<"kelas7" | "kelas8" | "kelas9", KelasProta>;
+
+const makeProtaData = (tahunAwal: string, tahunAkhir: string): AllData => ({
+  kelas7: {
+    totalSem1: 80,
+    totalSem2: 85,
+    rows: [
+      { no: "1", materi: "Bilangan Bulat", kompetensiDasar: "Memahami dan melakukan operasi hitung bilangan bulat beserta sifat-sifatnya, serta menerapkannya dalam kehidupan sehari-hari", semester: 1, jp: 20, bulan: `Jul – Ags ${tahunAwal}` },
+      { no: "2", materi: "Bilangan Rasional (Pecahan)", kompetensiDasar: "Memahami bilangan rasional (pecahan), melakukan operasi hitung, dan menyelesaikan masalah sehari-hari", semester: 1, jp: 15, bulan: `Ags – Sep ${tahunAwal}` },
+      { no: "3", materi: "Bentuk Aljabar", kompetensiDasar: "Mengenal unsur-unsur bentuk aljabar, melakukan operasi hitung (penjumlahan, pengurangan, perkalian, pembagian) pada bentuk aljabar", semester: 1, jp: 15, bulan: `Sep – Okt ${tahunAwal}` },
+      { no: "4", materi: "PLSV & PTLSV", kompetensiDasar: "Menyelesaikan persamaan dan pertidaksamaan linear satu variabel dalam kehidupan sehari-hari", semester: 1, jp: 20, bulan: `Okt – Nov ${tahunAwal}` },
+      { no: "–", materi: "Penilaian Tengah Semester (PTS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Sep ${tahunAwal}`, type: "pts" },
+      { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 1, jp: 10, bulan: `Nov ${tahunAwal}`, type: "cadangan" },
+      { no: "–", materi: "Penilaian Akhir Semester (PAS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Des ${tahunAwal}`, type: "pas" },
+      { no: "5", materi: "Perbandingan", kompetensiDasar: "Memahami konsep perbandingan senilai, berbalik nilai, skala, dan menerapkannya dalam pemecahan masalah sehari-hari", semester: 2, jp: 15, bulan: `Jan ${tahunAkhir}` },
+      { no: "6", materi: "Aritmetika Sosial", kompetensiDasar: "Menyelesaikan masalah jual-beli (untung/rugi), diskon, pajak, bruto-netto-tara, dan bunga tunggal", semester: 2, jp: 15, bulan: `Jan – Feb ${tahunAkhir}` },
+      { no: "7", materi: "Garis dan Sudut", kompetensiDasar: "Memahami jenis-jenis sudut, hubungan antar-garis, dan sifat-sifat garis sejajar yang dipotong garis transversal", semester: 2, jp: 15, bulan: `Feb – Mar ${tahunAkhir}` },
+      { no: "8", materi: "Segitiga dan Segiempat", kompetensiDasar: "Memahami sifat, jenis, keliling, dan luas segitiga serta berbagai jenis segiempat dan penerapannya", semester: 2, jp: 20, bulan: `Apr – Mei ${tahunAkhir}` },
+      { no: "9", materi: "Himpunan", kompetensiDasar: "Memahami konsep himpunan, operasi himpunan (irisan, gabungan, selisih, komplemen), dan menerapkannya dalam masalah sehari-hari", semester: 2, jp: 15, bulan: `Mei ${tahunAkhir}` },
+      { no: "–", materi: "Penilaian Tengah Semester (PTS) 2", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Mar ${tahunAkhir}`, type: "pts" },
+      { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 2, jp: 5, bulan: `Mei ${tahunAkhir}`, type: "cadangan" },
+      { no: "–", materi: "Penilaian Akhir Tahun (PAT)", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Jun ${tahunAkhir}`, type: "pat" },
+    ],
+  },
+  kelas8: {
+    totalSem1: 80,
+    totalSem2: 85,
+    rows: [
+      { no: "1", materi: "Pola Bilangan", kompetensiDasar: "Mengenal pola bilangan, barisan aritmetika dan geometri, serta menentukan suku ke-n suatu barisan bilangan", semester: 1, jp: 15, bulan: `Jul – Ags ${tahunAwal}` },
+      { no: "2", materi: "Koordinat Kartesius", kompetensiDasar: "Memahami posisi titik dalam bidang koordinat Kartesius dan penerapannya dalam kehidupan sehari-hari", semester: 1, jp: 15, bulan: `Ags ${tahunAwal}` },
+      { no: "3", materi: "Relasi dan Fungsi", kompetensiDasar: "Memahami relasi, fungsi, notasi fungsi, nilai fungsi, dan grafik fungsi pada bidang koordinat Kartesius", semester: 1, jp: 15, bulan: `Sep – Okt ${tahunAwal}` },
+      { no: "4", materi: "Persamaan Garis Lurus", kompetensiDasar: "Memahami persamaan garis lurus, gradien, hubungan dua garis sejajar dan tegak lurus, serta penerapannya", semester: 1, jp: 20, bulan: `Okt – Nov ${tahunAwal}` },
+      { no: "–", materi: "Penilaian Tengah Semester (PTS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Sep ${tahunAwal}`, type: "pts" },
+      { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 1, jp: 15, bulan: `Nov ${tahunAwal}`, type: "cadangan" },
+      { no: "–", materi: "Penilaian Akhir Semester (PAS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Des ${tahunAwal}`, type: "pas" },
+      { no: "5", materi: "SPLDV", kompetensiDasar: "Menyelesaikan sistem persamaan linear dua variabel dengan metode grafik, substitusi, eliminasi, dan gabungan", semester: 2, jp: 20, bulan: `Jan – Feb ${tahunAkhir}` },
+      { no: "6", materi: "Teorema Pythagoras", kompetensiDasar: "Memahami dan menggunakan teorema Pythagoras, triple Pythagoras, dan penerapannya dalam pemecahan masalah", semester: 2, jp: 15, bulan: `Feb ${tahunAkhir}` },
+      { no: "7", materi: "Lingkaran", kompetensiDasar: "Memahami unsur lingkaran, keliling, luas, busur, juring, tali busur, dan hubungan sudut pusat dengan sudut keliling", semester: 2, jp: 20, bulan: `Mar – Apr ${tahunAkhir}` },
+      { no: "8", materi: "Bangun Ruang Sisi Datar", kompetensiDasar: "Memahami sifat, luas permukaan, dan volume kubus, balok, prisma, limas, dan gabungannya", semester: 2, jp: 15, bulan: `Apr – Mei ${tahunAkhir}` },
+      { no: "–", materi: "Penilaian Tengah Semester (PTS) 2", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Mar ${tahunAkhir}`, type: "pts" },
+      { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 2, jp: 15, bulan: `Mei ${tahunAkhir}`, type: "cadangan" },
+      { no: "–", materi: "Penilaian Akhir Tahun (PAT)", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Jun ${tahunAkhir}`, type: "pat" },
+    ],
+  },
+  kelas9: {
+    totalSem1: 80,
+    totalSem2: 60,
+    rows: [
+      { no: "1", materi: "Bilangan Berpangkat & Bentuk Akar", kompetensiDasar: "Memahami bilangan berpangkat (bulat dan pecahan), sifat operasinya, bentuk akar, dan notasi ilmiah", semester: 1, jp: 20, bulan: `Jul – Ags ${tahunAwal}` },
+      { no: "2", materi: "Persamaan Kuadrat", kompetensiDasar: "Menentukan akar persamaan kuadrat dengan pemfaktoran, melengkapi kuadrat sempurna, dan rumus kuadratik", semester: 1, jp: 20, bulan: `Ags – Sep ${tahunAwal}` },
+      { no: "3", materi: "Fungsi Kuadrat", kompetensiDasar: "Memahami grafik fungsi kuadrat, sumbu simetri, titik puncak (maksimum/minimum), dan penerapannya", semester: 1, jp: 15, bulan: `Okt ${tahunAwal}` },
+      { no: "4", materi: "Transformasi Geometri", kompetensiDasar: "Memahami translasi, refleksi, rotasi, dan dilatasi serta komposisi transformasi pada bidang koordinat", semester: 1, jp: 15, bulan: `Okt – Nov ${tahunAwal}` },
+      { no: "–", materi: "Penilaian Tengah Semester (PTS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Sep ${tahunAwal}`, type: "pts" },
+      { no: "–", materi: "Cadangan / Pengayaan / Remedial", kompetensiDasar: "Remedial, pengayaan, dan penilaian harian", semester: 1, jp: 10, bulan: `Nov ${tahunAwal}`, type: "cadangan" },
+      { no: "–", materi: "Penilaian Akhir Semester (PAS) 1", kompetensiDasar: "", semester: 1, jp: 0, bulan: `Des ${tahunAwal}`, type: "pas" },
+      { no: "5", materi: "Kesebangunan & Kekongruenan", kompetensiDasar: "Memahami konsep kesebangunan dan kekongruenan bangun datar serta penerapannya dalam pemecahan masalah", semester: 2, jp: 15, bulan: `Jan ${tahunAkhir}` },
+      { no: "6", materi: "Bangun Ruang Sisi Lengkung", kompetensiDasar: "Memahami luas permukaan dan volume tabung, kerucut, bola, dan gabungannya serta penerapannya", semester: 2, jp: 20, bulan: `Jan – Feb ${tahunAkhir}` },
+      { no: "7", materi: "Statistika", kompetensiDasar: "Memahami penyajian data (tabel, diagram), ukuran pemusatan (mean, median, modus), dan ukuran penyebaran data", semester: 2, jp: 15, bulan: `Mar ${tahunAkhir}` },
+      { no: "8", materi: "Peluang", kompetensiDasar: "Memahami ruang sampel, peluang empiris dan teoritis, frekuensi harapan, dan peluang kejadian majemuk", semester: 2, jp: 10, bulan: `Mei ${tahunAkhir}` },
+      { no: "–", materi: "Penilaian Tengah Semester (PTS) 2", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Mar ${tahunAkhir}`, type: "pts" },
+      { no: "–", materi: "Ujian Sekolah (Kelas 9)", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Apr ${tahunAkhir}`, type: "ujian" },
+      { no: "–", materi: "PAT / Kelulusan Kelas 9", kompetensiDasar: "", semester: 2, jp: 0, bulan: `Jun ${tahunAkhir}`, type: "pat" },
+    ],
+  },
+});
 
 const rowColor: Record<string, string> = {
   pts: "bg-amber-500/15 text-amber-200",
@@ -106,7 +106,37 @@ const specialIcon: Record<string, string> = {
 
 type KelasKey = "kelas7" | "kelas8" | "kelas9";
 
-const buildWordContent = (
+const dokumenStyle = `
+  @page { size: 21.5cm 33cm; margin: 3cm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; margin: 0; padding: 0; }
+  h1 { text-align: center; font-size: 16pt; font-weight: bold; margin: 0 0 4pt 0; }
+  h2 { text-align: center; font-size: 13pt; font-weight: bold; margin: 0 0 16pt 0; }
+  .header { text-align: center; margin-bottom: 16pt; border-bottom: 2px solid #000; padding-bottom: 10pt; }
+  .identitas { border: 1px solid #aaa; padding: 8pt 10pt; margin-bottom: 12pt; }
+  .identitas table { width: 100%; border: none; border-collapse: collapse; }
+  .identitas td { border: none; padding: 2pt 4pt; font-size: 10pt; }
+  .identitas .lbl { width: 38%; font-weight: bold; }
+  .identitas .sep { width: 4pt; }
+  table.prota { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 8pt; }
+  table.prota th { background: #1a5f7a; color: #fff; border: 1px solid #aaa; padding: 5pt 6pt; text-align: center; font-size: 10pt; }
+  table.prota td { border: 1px solid #aaa; padding: 4pt 6pt; vertical-align: top; text-align: justify; }
+  table.prota td.center { text-align: center; }
+  .row-pts { background: #fff3cd; }
+  .row-pas { background: #f8d7da; }
+  .row-cadangan { background: #f0f0f0; }
+  .row-ujian { background: #e8d5f5; }
+  .row-total-ganjil { background: #d1ecf1; font-weight: bold; }
+  .row-total-genap { background: #e8d5f5; font-weight: bold; }
+  .row-total-all { background: #d4edda; font-weight: bold; }
+  .footer { text-align: center; margin-top: 16pt; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 8pt; }
+  .ttd { width: 100%; margin-top: 24pt; border-collapse: collapse; }
+  .ttd td { border: none; text-align: center; width: 50%; padding: 4pt; font-size: 10pt; }
+  .notes { font-size: 9pt; color: #444; margin-top: 10pt; line-height: 1.5; }
+  .notes p { margin: 2pt 0; }
+`;
+
+const buildDokumenBody = (
   tahunAwal: string,
   tahunAkhir: string,
   label: string,
@@ -115,106 +145,126 @@ const buildWordContent = (
   data: KelasProta
 ) => {
   const kelasRom = kelasNum === "7" ? "VII" : kelasNum === "8" ? "VIII" : "IX";
-  const rows = data.rows
-    .map((r, i) => {
-      const sem = r.semester === 1
-        ? `Ganjil (${tahunAwal})`
-        : `Genap (${tahunAkhir})`;
-      const isSpecial = r.type && r.type !== "cadangan";
-      return `<tr style="background:${isSpecial ? "#fff3cd" : i % 2 === 0 ? "#f8f9fa" : "white"}">
-        <td style="border:1px solid #dee2e6;padding:6px 8px;text-align:center;">${r.no}</td>
-        <td style="border:1px solid #dee2e6;padding:6px 8px;font-weight:${isSpecial ? "bold" : "normal"};">${isSpecial ? (specialIcon[r.type!] ?? "") + " " : ""}${r.materi}</td>
-        <td style="border:1px solid #dee2e6;padding:6px 8px;">${r.kompetensiDasar}</td>
-        <td style="border:1px solid #dee2e6;padding:6px 8px;text-align:center;">${sem}</td>
-        <td style="border:1px solid #dee2e6;padding:6px 8px;text-align:center;">${r.jp > 0 ? r.jp : "–"}</td>
-        <td style="border:1px solid #dee2e6;padding:6px 8px;text-align:center;">${r.bulan}</td>
-      </tr>`;
-    })
-    .join("\n");
+  const kelasNama = kelasNum === "7" ? "Tujuh" : kelasNum === "8" ? "Delapan" : "Sembilan";
 
-  return `<html><head><meta charset="UTF-8">
-<style>
-  body { font-family: Arial, sans-serif; font-size: 11pt; margin: 2cm; }
-  h2 { text-align: center; font-size: 14pt; margin-bottom: 4px; }
-  h3 { text-align: center; font-size: 12pt; margin-bottom: 16px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 10pt; }
-  th { background: #1a7a6e; color: white; border: 1px solid #dee2e6; padding: 8px; }
-  .info-table td { border: none; padding: 3px 8px; }
-  .info-table .label { width: 180px; font-weight: bold; }
-</style>
-</head><body>
-<h2>PROGRAM TAHUNAN (PROTA)</h2>
-<h3>Matematika SMP Kelas ${kelasRom} · Tahun Pelajaran ${label}</h3>
-<table class="info-table" style="margin-bottom:12px;">
-  <tr><td class="label">Satuan Pendidikan</td><td>:</td><td>SMP / MTs</td></tr>
-  <tr><td class="label">Mata Pelajaran</td><td>:</td><td>Matematika</td></tr>
-  <tr><td class="label">Kelas</td><td>:</td><td>${kelasRom} (${kelasNum === "7" ? "Tujuh" : kelasNum === "8" ? "Delapan" : "Sembilan"})</td></tr>
-  <tr><td class="label">Tahun Pelajaran</td><td>:</td><td>${label}</td></tr>
-  <tr><td class="label">Alokasi Waktu</td><td>:</td><td>5 JP / Minggu (1 JP = 40 menit)</td></tr>
-  <tr><td class="label">Total JP Sem. Ganjil</td><td>:</td><td>${data.totalSem1} Jam Pelajaran</td></tr>
-  <tr><td class="label">Total JP Sem. Genap</td><td>:</td><td>${data.totalSem2} Jam Pelajaran</td></tr>
-  <tr><td class="label">Guru Mata Pelajaran</td><td>:</td><td>___________________________</td></tr>
-</table>
-<table>
-  <thead>
-    <tr>
-      <th style="width:40px;">No</th>
-      <th>Materi Pokok</th>
-      <th>Kompetensi Dasar / Tujuan Pembelajaran</th>
-      <th style="width:100px;">Semester</th>
-      <th style="width:50px;">JP</th>
-      <th style="width:110px;">Alokasi Waktu</th>
-    </tr>
-  </thead>
-  <tbody>${rows}</tbody>
-  <tfoot>
-    <tr style="background:#d4edda;font-weight:bold;">
-      <td colspan="4" style="border:1px solid #dee2e6;padding:6px 8px;text-align:right;">Total JP Semester Ganjil:</td>
-      <td style="border:1px solid #dee2e6;padding:6px 8px;text-align:center;">${data.totalSem1}</td>
-      <td style="border:1px solid #dee2e6;padding:6px 8px;"></td>
-    </tr>
-    <tr style="background:#d4edda;font-weight:bold;">
-      <td colspan="4" style="border:1px solid #dee2e6;padding:6px 8px;text-align:right;">Total JP Semester Genap:</td>
-      <td style="border:1px solid #dee2e6;padding:6px 8px;text-align:center;">${data.totalSem2}</td>
-      <td style="border:1px solid #dee2e6;padding:6px 8px;"></td>
-    </tr>
-  </tfoot>
-</table>
-<br/>
-<p style="font-size:10pt;color:#555;">Catatan: JP = Jam Pelajaran (1 JP = 40 menit). Alokasi waktu bersifat fleksibel dan dapat disesuaikan dengan kondisi sekolah. Kalender mengacu pada Kemendikbudristek ${label}.</p>
-<br/><br/>
-<table style="width:100%;margin-top:24px;border:none;">
-  <tr>
-    <td style="width:50%;text-align:center;border:none;">
-      <p>Mengetahui,<br/>Kepala Sekolah</p><br/><br/><br/>
-      <p>____________________________<br/>NIP. ________________________</p>
-    </td>
-    <td style="width:50%;text-align:center;border:none;">
-      <p>_____________, __________ 20__<br/>Guru Mata Pelajaran Matematika</p><br/><br/><br/>
-      <p>____________________________<br/>NIP. ________________________</p>
-    </td>
-  </tr>
-</table>
-</body></html>`;
+  const rowsHtml = data.rows.map((r) => {
+    const t = r.type ?? "normal";
+    const isSpecial = t !== "normal" && t !== "cadangan";
+    const semLabel = r.semester === 1 ? `Ganjil (${tahunAwal})` : `Genap (${tahunAkhir})`;
+    const rowClass = t === "pts" ? "row-pts" : t === "pas" || t === "pat" ? "row-pas" : t === "cadangan" ? "row-cadangan" : t === "ujian" ? "row-ujian" : "";
+    const icon = isSpecial ? (specialIcon[t] ?? "") + " " : t === "cadangan" ? "🔄 " : "";
+    if (isSpecial) {
+      return `<tr class="${rowClass}">
+        <td class="center">${r.no}</td>
+        <td colspan="2" style="font-weight:bold;">${icon}${r.materi}</td>
+        <td class="center">${semLabel}</td>
+        <td class="center">–</td>
+        <td class="center">${r.bulan}</td>
+      </tr>`;
+    }
+    return `<tr class="${rowClass}">
+      <td class="center">${r.no}</td>
+      <td>${icon}${r.materi}</td>
+      <td>${r.kompetensiDasar}</td>
+      <td class="center">${semLabel}</td>
+      <td class="center">${r.jp > 0 ? r.jp : "–"}</td>
+      <td class="center">${r.bulan}</td>
+    </tr>`;
+  }).join("\n");
+
+  return `
+    <div class="header">
+      <h1>PROGRAM TAHUNAN (PROTA)</h1>
+      <h2>Matematika SMP Kelas ${kelasRom} &middot; Tahun Pelajaran ${label}</h2>
+    </div>
+    <div class="identitas">
+      <table>
+        <tr><td class="lbl">Satuan Pendidikan</td><td class="sep">:</td><td>SMP / MTs</td></tr>
+        <tr><td class="lbl">Mata Pelajaran</td><td class="sep">:</td><td>Matematika</td></tr>
+        <tr><td class="lbl">Kelas</td><td class="sep">:</td><td>${kelasRom} (${kelasNama})</td></tr>
+        <tr><td class="lbl">Tahun Pelajaran</td><td class="sep">:</td><td>${label}</td></tr>
+        <tr><td class="lbl">Alokasi Waktu</td><td class="sep">:</td><td>5 JP / Minggu (1 JP = 40 menit)</td></tr>
+        <tr><td class="lbl">Total JP Semester Ganjil</td><td class="sep">:</td><td>${data.totalSem1} Jam Pelajaran</td></tr>
+        <tr><td class="lbl">Total JP Semester Genap</td><td class="sep">:</td><td>${data.totalSem2} Jam Pelajaran</td></tr>
+        <tr><td class="lbl">Guru Mata Pelajaran</td><td class="sep">:</td><td>___________________________</td></tr>
+      </table>
+    </div>
+    <table class="prota">
+      <thead>
+        <tr>
+          <th style="width:30pt;">No</th>
+          <th style="width:110pt;">Materi Pokok</th>
+          <th>Kompetensi Dasar / Tujuan Pembelajaran</th>
+          <th style="width:70pt;">Semester</th>
+          <th style="width:28pt;">JP</th>
+          <th style="width:80pt;">Alokasi Waktu</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+      </tbody>
+      <tfoot>
+        <tr class="row-total-ganjil">
+          <td colspan="4" style="text-align:right;">Total JP Semester Ganjil:</td>
+          <td class="center">${data.totalSem1}</td>
+          <td class="center">Juli – Des ${tahunAwal}</td>
+        </tr>
+        <tr class="row-total-genap">
+          <td colspan="4" style="text-align:right;">Total JP Semester Genap:</td>
+          <td class="center">${data.totalSem2}</td>
+          <td class="center">Jan – Jun ${tahunAkhir}</td>
+        </tr>
+        <tr class="row-total-all">
+          <td colspan="4" style="text-align:right;">Total JP Keseluruhan:</td>
+          <td class="center">${data.totalSem1 + data.totalSem2}</td>
+          <td class="center">1 Tahun Pelajaran</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="notes">
+      <p>Catatan:</p>
+      <p>• JP = Jam Pelajaran (1 JP = 40 menit). Matematika SMP dialokasikan 5 JP per minggu.</p>
+      <p>• Minggu non-efektif meliputi: MPLS, PTS, PAS/PAT, Ujian Sekolah, libur nasional, dan libur semester.</p>
+      <p>• Alokasi waktu bersifat fleksibel dan dapat disesuaikan dengan kondisi sekolah masing-masing.</p>
+      <p>• Tanggal kegiatan mengacu pada kalender pendidikan Kemendikbudristek tahun pelajaran ${label}.</p>
+    </div>
+    <table class="ttd">
+      <tr>
+        <td>Mengetahui,<br/>Kepala Sekolah<br/><br/><br/><br/>____________________________<br/>NIP. ________________________</td>
+        <td>_____________, __________ 20__<br/>Guru Mata Pelajaran Matematika<br/><br/><br/><br/>____________________________<br/>NIP. ________________________</td>
+      </tr>
+    </table>
+    <div class="footer">
+      <p>Dokumen ini dicetak dari Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
+    </div>
+  `;
 };
+
+const STORAGE_KEY = (tahun: string) => `numatik_prota_${tahun}`;
 
 const ProtaTahunPage = () => {
   const { tahun } = useParams<{ tahun: string }>();
   const navigate = useNavigate();
   const [kelas, setKelas] = useState<KelasKey>("kelas7");
   const [filterSem, setFilterSem] = useState<"semua" | "1" | "2">("semua");
+  const [savedOk, setSavedOk] = useState(false);
 
   const isValid = tahun === "2025-2026" || tahun === "2026-2027";
-  if (!isValid) {
-    navigate("/ruang-untuk-guru/prota");
-    return null;
-  }
+  if (!isValid) { navigate("/ruang-untuk-guru/prota"); return null; }
 
   const tahunAwal = tahun.split("-")[0];
   const tahunAkhir = tahun.split("-")[1];
   const label = `${tahunAwal} / ${tahunAkhir}`;
 
-  const allData = makeProtaData(tahunAwal, tahunAkhir);
+  const defaultData = makeProtaData(tahunAwal, tahunAkhir);
+
+  const [allData, setAllData] = useState<AllData>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY(tahun));
+      return saved ? JSON.parse(saved) : defaultData;
+    } catch { return defaultData; }
+  });
+
   const data = allData[kelas];
   const kelasNum = kelas.replace("kelas", "");
   const kelasRom = kelasNum === "7" ? "VII" : kelasNum === "8" ? "VIII" : "IX";
@@ -229,22 +279,34 @@ const ProtaTahunPage = () => {
     filterSem === "semua" ? true : r.semester === parseInt(filterSem)
   );
 
-  const handlePrintPDF = () => {
-    playPopSound();
-    const printContent = buildWordContent(tahunAwal, tahunAkhir, label, kelas, kelasNum, data);
-    const win = window.open("", "_blank");
-    if (win) {
-      win.document.write(printContent);
-      win.document.close();
-      win.focus();
-      setTimeout(() => { win.print(); }, 400);
-    }
+  const updateRow = (rowIdx: number, field: keyof ProtaRow, value: string | number) => {
+    const actualIdx = data.rows.indexOf(filteredRows[rowIdx]);
+    setAllData(prev => {
+      const newRows = prev[kelas].rows.map((r, i) =>
+        i === actualIdx ? { ...r, [field]: value } : r
+      );
+      return { ...prev, [kelas]: { ...prev[kelas], rows: newRows } };
+    });
+    setSavedOk(false);
   };
 
-  const handleDownloadWord = () => {
+  const updateTotal = (field: "totalSem1" | "totalSem2", value: number) => {
+    setAllData(prev => ({ ...prev, [kelas]: { ...prev[kelas], [field]: value } }));
+    setSavedOk(false);
+  };
+
+  const handleSave = () => {
     playPopSound();
-    const content = buildWordContent(tahunAwal, tahunAkhir, label, kelas, kelasNum, data);
-    const blob = new Blob(["\ufeff", content], { type: "application/msword" });
+    localStorage.setItem(STORAGE_KEY(tahun), JSON.stringify(allData));
+    setSavedOk(true);
+    setTimeout(() => setSavedOk(false), 2500);
+  };
+
+  const handlePrintWord = () => {
+    playPopSound();
+    const body = buildDokumenBody(tahunAwal, tahunAkhir, label, kelas, kelasNum, data);
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>PROTA (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${body}</body></html>`;
+    const blob = new Blob([html], { type: "application/msword" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -253,10 +315,25 @@ const ProtaTahunPage = () => {
     URL.revokeObjectURL(url);
   };
 
+  const handlePrintPDF = () => {
+    playPopSound();
+    const body = buildDokumenBody(tahunAwal, tahunAkhir, label, kelas, kelasNum, data);
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>PROTA (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${body}</body></html>`;
+    const win = window.open("", "_blank");
+    if (win) {
+      win.document.write(html);
+      win.document.close();
+      win.focus();
+      setTimeout(() => { win.print(); win.close(); }, 500);
+    }
+  };
+
   const sem1Rows = data.rows.filter(r => r.semester === 1 && (!r.type || r.type === "cadangan"));
   const sem2Rows = data.rows.filter(r => r.semester === 2 && (!r.type || r.type === "cadangan"));
-  const totalSem1 = sem1Rows.reduce((s, r) => s + r.jp, 0);
-  const totalSem2 = sem2Rows.reduce((s, r) => s + r.jp, 0);
+  const totalSem1Calc = sem1Rows.reduce((s, r) => s + r.jp, 0);
+  const totalSem2Calc = sem2Rows.reduce((s, r) => s + r.jp, 0);
+
+  const inputCls = "w-full bg-transparent border-b border-white/20 focus:border-cyan-400 outline-none text-white/85 text-xs py-0.5 resize-none transition-colors";
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
@@ -264,7 +341,6 @@ const ProtaTahunPage = () => {
       <PageNavigation prevPath="/ruang-untuk-guru/prota" />
       <div className="relative z-10 max-w-6xl mx-auto px-4 pt-20 pb-14">
 
-        {/* Header */}
         <div className="text-center mb-6 animate-slide-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
             <CalendarRange className="w-4 h-4" />
@@ -274,24 +350,31 @@ const ProtaTahunPage = () => {
             PROTA TAHUN PELAJARAN {label}
           </h1>
           <p className="mt-3 text-sm text-white/60 font-body max-w-2xl mx-auto">
-            Distribusi materi pembelajaran Matematika SMP selama satu tahun berdasarkan Kurikulum Merdeka (Fase D) sesuai kalender pendidikan Kemendikbudristek.
+            Distribusi materi pembelajaran Matematika SMP selama satu tahun berdasarkan Kurikulum Merdeka dengan Pendekatan Deep Learning (Fase D).
           </p>
         </div>
 
-        {/* Print Buttons - top right */}
-        <div className="flex justify-end gap-2 mb-5 animate-slide-up">
+        {/* Action Buttons */}
+        <div className="flex justify-center gap-3 mb-6 flex-wrap animate-slide-up">
           <button
-            onClick={handleDownloadWord}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-xs font-bold transition-all duration-200 hover:scale-[1.03]"
+            onClick={handleSave}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${savedOk ? "bg-emerald-600 border-emerald-400/40" : "bg-emerald-700/80 hover:bg-emerald-600 border-emerald-400/40"}`}
+          >
+            <Save className="w-4 h-4" />
+            {savedOk ? "Tersimpan!" : "Simpan"}
+          </button>
+          <button
+            onClick={handlePrintWord}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
           >
             <FileText className="w-4 h-4" />
             Cetak Word
           </button>
           <button
             onClick={handlePrintPDF}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600/80 hover:bg-rose-500 border border-rose-400/40 text-white text-xs font-bold transition-all duration-200 hover:scale-[1.03]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-500 border border-red-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
           >
-            <Printer className="w-4 h-4" />
+            <FileDown className="w-4 h-4" />
             Cetak PDF
           </button>
         </div>
@@ -314,7 +397,7 @@ const ProtaTahunPage = () => {
         </div>
 
         {/* Semester Filter */}
-        <div className="flex justify-center gap-2 mb-7 animate-slide-up">
+        <div className="flex justify-center gap-2 mb-6 animate-slide-up">
           {([
             { value: "semua", label: "Semua Semester" },
             { value: "1", label: "Semester Ganjil" },
@@ -335,7 +418,7 @@ const ProtaTahunPage = () => {
         </div>
 
         {/* Info Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 animate-slide-up">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5 animate-slide-up">
           {[
             { label: "Mata Pelajaran", value: "Matematika" },
             { label: "Kelas", value: `Kelas ${kelasNum} (${kelasRom})` },
@@ -378,17 +461,22 @@ const ProtaTahunPage = () => {
             <p className="text-cyan-300 text-xs font-bold mb-2 uppercase tracking-wider">📚 Semester Ganjil ({tahunAwal})</p>
             <p className="text-white/60 text-xs font-body">Juli – Desember {tahunAwal}</p>
             <p className="text-white font-bold text-sm mt-1">
-              {sem1Rows.filter(r => !r.type).length} Materi Pokok &nbsp;·&nbsp; {totalSem1} JP Efektif
+              {sem1Rows.filter(r => !r.type).length} Materi Pokok &nbsp;·&nbsp; {totalSem1Calc} JP Efektif
             </p>
           </div>
           <div className="bg-violet-900/20 border border-violet-500/20 rounded-xl p-4">
             <p className="text-violet-300 text-xs font-bold mb-2 uppercase tracking-wider">📚 Semester Genap ({tahunAkhir})</p>
             <p className="text-white/60 text-xs font-body">Januari – Juni {tahunAkhir}</p>
             <p className="text-white font-bold text-sm mt-1">
-              {sem2Rows.filter(r => !r.type).length} Materi Pokok &nbsp;·&nbsp; {totalSem2} JP Efektif
+              {sem2Rows.filter(r => !r.type).length} Materi Pokok &nbsp;·&nbsp; {totalSem2Calc} JP Efektif
             </p>
           </div>
         </div>
+
+        {/* Edit hint */}
+        <p className="text-xs text-cyan-300/60 mb-3 animate-slide-up">
+          ✏️ Semua kolom dalam tabel dapat diklik dan diedit langsung. Jangan lupa klik <strong>Simpan</strong> setelah selesai mengedit.
+        </p>
 
         {/* Table */}
         <div className="animate-slide-up mb-8">
@@ -419,13 +507,18 @@ const ProtaTahunPage = () => {
                     const icon = specialIcon[t] ?? "📌";
                     return (
                       <tr key={ri} className={`border ${rowColor[t]}`}>
-                        <td className="border border-white/10 px-2 py-2 text-center opacity-60">{row.no}</td>
+                        <td className="border border-white/10 px-2 py-2 text-center opacity-60">
+                          <input className={inputCls} value={row.no} onChange={e => updateRow(ri, "no", e.target.value)} />
+                        </td>
                         <td colSpan={2} className="border border-white/10 px-3 py-2 font-semibold">
-                          {icon} {row.materi}
+                          {icon}{" "}
+                          <input className={inputCls + " font-semibold"} value={row.materi} onChange={e => updateRow(ri, "materi", e.target.value)} />
                         </td>
                         <td className="border border-white/10 px-2 py-2 text-center">{semLabel}</td>
                         <td className="border border-white/10 px-2 py-2 text-center opacity-50">–</td>
-                        <td className="border border-white/10 px-2 py-2 text-center text-[10px] opacity-70">{row.bulan}</td>
+                        <td className="border border-white/10 px-2 py-2 text-center text-[10px] opacity-70">
+                          <input className={inputCls + " text-center"} value={row.bulan} onChange={e => updateRow(ri, "bulan", e.target.value)} />
+                        </td>
                       </tr>
                     );
                   }
@@ -433,22 +526,38 @@ const ProtaTahunPage = () => {
                   const cadStyle = t === "cadangan" ? "bg-slate-500/10" : ri % 2 === 0 ? "bg-white/3" : "bg-white/0";
                   return (
                     <tr key={ri} className={`border ${cadStyle} hover:bg-white/8 transition-colors`}>
-                      <td className="border border-white/10 px-2 py-2 text-center text-white/60">{row.no}</td>
-                      <td className="border border-white/10 px-3 py-2 font-semibold text-white">
-                        {t === "cadangan" ? <span className="text-slate-300">🔄 {row.materi}</span> : row.materi}
+                      <td className="border border-white/10 px-2 py-2 text-center text-white/60">
+                        <input className={inputCls + " text-center"} value={row.no} onChange={e => updateRow(ri, "no", e.target.value)} />
                       </td>
-                      <td className="border border-white/10 px-3 py-2 text-white/70 leading-relaxed">{row.kompetensiDasar}</td>
+                      <td className="border border-white/10 px-3 py-2 font-semibold text-white">
+                        <textarea
+                          className={inputCls + " font-semibold"}
+                          value={row.materi}
+                          rows={2}
+                          onChange={e => updateRow(ri, "materi", e.target.value)}
+                        />
+                      </td>
+                      <td className="border border-white/10 px-3 py-2 text-white/70 leading-relaxed">
+                        <textarea
+                          className={inputCls}
+                          value={row.kompetensiDasar}
+                          rows={3}
+                          onChange={e => updateRow(ri, "kompetensiDasar", e.target.value)}
+                        />
+                      </td>
                       <td className="border border-white/10 px-2 py-2 text-center">{semLabel}</td>
                       <td className="border border-white/10 px-2 py-2 text-center font-bold">
-                        {row.jp > 0 ? (
-                          <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-[11px] ${
-                            t === "cadangan" ? "bg-slate-500/40 text-slate-200" : "bg-teal-500/30 text-teal-200"
-                          }`}>{row.jp}</span>
-                        ) : (
-                          <span className="text-white/20">–</span>
-                        )}
+                        <input
+                          type="number"
+                          className={inputCls + " text-center w-12"}
+                          value={row.jp}
+                          min={0}
+                          onChange={e => updateRow(ri, "jp", parseInt(e.target.value) || 0)}
+                        />
                       </td>
-                      <td className="border border-white/10 px-2 py-2 text-center text-[10px] text-white/60">{row.bulan}</td>
+                      <td className="border border-white/10 px-2 py-2 text-center text-[10px] text-white/60">
+                        <input className={inputCls + " text-center"} value={row.bulan} onChange={e => updateRow(ri, "bulan", e.target.value)} />
+                      </td>
                     </tr>
                   );
                 })}
@@ -459,7 +568,9 @@ const ProtaTahunPage = () => {
                     <td className="border border-white/10 px-2 py-2" colSpan={4}>
                       <span className="text-cyan-300">TOTAL JP SEMESTER GANJIL</span>
                     </td>
-                    <td className="border border-white/10 px-2 py-2 text-center text-cyan-300">{data.totalSem1}</td>
+                    <td className="border border-white/10 px-2 py-2 text-center">
+                      <input type="number" className={inputCls + " text-center text-cyan-300 font-bold w-12"} value={data.totalSem1} min={0} onChange={e => updateTotal("totalSem1", parseInt(e.target.value) || 0)} />
+                    </td>
                     <td className="border border-white/10 px-2 py-2 text-center text-cyan-200 text-[10px]">Juli – Des {tahunAwal}</td>
                   </tr>
                 )}
@@ -468,7 +579,9 @@ const ProtaTahunPage = () => {
                     <td className="border border-white/10 px-2 py-2" colSpan={4}>
                       <span className="text-violet-300">TOTAL JP SEMESTER GENAP</span>
                     </td>
-                    <td className="border border-white/10 px-2 py-2 text-center text-violet-300">{data.totalSem2}</td>
+                    <td className="border border-white/10 px-2 py-2 text-center">
+                      <input type="number" className={inputCls + " text-center text-violet-300 font-bold w-12"} value={data.totalSem2} min={0} onChange={e => updateTotal("totalSem2", parseInt(e.target.value) || 0)} />
+                    </td>
                     <td className="border border-white/10 px-2 py-2 text-center text-violet-200 text-[10px]">Jan – Jun {tahunAkhir}</td>
                   </tr>
                 )}
@@ -510,7 +623,7 @@ const ProtaTahunPage = () => {
           <p>• Tanggal kegiatan mengacu pada kalender pendidikan Kemendikbudristek tahun pelajaran {label}.</p>
           <p>• Kolom "Cadangan" digunakan untuk remedial, pengayaan, penilaian harian, dan kegiatan insidental.</p>
           {kelas === "kelas9" && (
-            <p>• Kelas 9 Semester Genap: JP lebih sedikit karena Ujian Sekolah berlangsung di bulan April. Materi diprioritaskan selesai sebelum ujian.</p>
+            <p>• Kelas 9 Semester Genap: JP lebih sedikit karena Ujian Sekolah berlangsung di bulan April.</p>
           )}
         </div>
 
