@@ -1241,13 +1241,14 @@ const slides: Slide[] = [
     title: "Volume Gabungan",
     content: (
       <div className="space-y-3 text-sm font-body text-white/85">
+        {/* Cara 1: Penjumlahan */}
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs space-y-2">
-          <p className="text-cyan-300 font-semibold">💡 Prinsip Utama:</p>
-          <p className="text-white/75">Volume bangun gabungan = <strong className="text-yellow-300">jumlah volume semua bagian</strong>. Tidak ada yang dikurangi karena volume adalah isi ruang, bukan permukaan.</p>
+          <p className="text-cyan-300 font-semibold">💡 Cara 1 — Penjumlahan (Penggabungan):</p>
+          <p className="text-white/75">Bangun terbentuk dari <strong className="text-yellow-300">beberapa bagian yang disatukan</strong>. Volume total = jumlah semua bagian.</p>
           <BlockMath math="V_{\text{gabungan}} = V_1 + V_2 + V_3 + \ldots" />
         </div>
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-3">
-          <p className="text-cyan-300 font-semibold">Rumus kombinasi populer:</p>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-cyan-300 font-semibold">Contoh kombinasi populer:</p>
           <div className="space-y-2">
             <div className="flex items-start gap-2 bg-indigo-950/40 rounded p-2">
               <span className="text-indigo-300 font-bold text-[11px] min-w-fit">Balok + Limas:</span>
@@ -1261,18 +1262,72 @@ const slides: Slide[] = [
               <span className="text-emerald-300 font-bold text-[11px] min-w-fit">2 Balok:</span>
               <BlockMath math="V = p_1 l_1 t_1 + p_2 l_2 t_2" />
             </div>
-            <div className="flex items-start gap-2 bg-rose-950/40 rounded p-2">
-              <span className="text-rose-300 font-bold text-[11px] min-w-fit">Balok dikurangi:</span>
-              <BlockMath math="V = V_{\text{besar}} - V_{\text{yang dipotong}}" />
-            </div>
           </div>
         </div>
+
+        {/* Cara 2: Pengurangan */}
+        <div className="bg-rose-950/50 border border-rose-700/40 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-rose-300 font-semibold">✂️ Cara 2 — Pengurangan (Pemotongan):</p>
+          <p className="text-white/75">
+            Kadang lebih mudah membayangkan bangun sebagai <strong className="text-yellow-300">benda utuh yang sudah diambil sebagian</strong>.
+            Volume gabungan = Volume benda utuh <strong className="text-rose-300">dikurangi</strong> bagian yang diambil.
+          </p>
+          <BlockMath math="V_{\text{gabungan}} = V_{\text{utuh}} - V_{\text{yang diambil}}" />
+        </div>
+
+        {/* SVG Ilustrasi Pengurangan */}
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
-          <p className="text-yellow-300 font-semibold">🔢 Langkah-langkah Menghitung:</p>
-          <p className="text-white/75">1. <strong className="text-cyan-300">Identifikasi</strong> setiap bangun dasar penyusun</p>
-          <p className="text-white/75">2. <strong className="text-cyan-300">Tentukan dimensi</strong> masing-masing bangun</p>
-          <p className="text-white/75">3. <strong className="text-cyan-300">Hitung volume</strong> tiap bangun secara terpisah</p>
-          <p className="text-white/75">4. <strong className="text-cyan-300">Jumlahkan</strong> semua volume</p>
+          <p className="text-rose-300 font-semibold text-center">Ilustrasi: Balok utuh − Balok kecil yang diambil</p>
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {/* Balok utuh */}
+            <div className="flex flex-col items-center gap-1">
+              <svg viewBox="0 0 110 90" className="w-24 h-20">
+                <polygon points="10,70 80,70 80,20 10,20" fill="#6366f1" fillOpacity="0.7" stroke="#818cf8" strokeWidth="1.5"/>
+                <polygon points="80,20 110,5 110,55 80,70" fill="#4f46e5" fillOpacity="0.85" stroke="#818cf8" strokeWidth="1.5"/>
+                <polygon points="10,20 80,20 110,5 40,5" fill="#818cf8" fillOpacity="0.9" stroke="#a5b4fc" strokeWidth="1.5"/>
+                <text x="45" y="50" fill="white" fontSize="8" fontWeight="bold" textAnchor="middle">V utuh</text>
+                <text x="45" y="82" fill="#818cf8" fontSize="7" textAnchor="middle">p × l × t</text>
+              </svg>
+              <span className="text-indigo-300 font-bold text-[10px]">Balok Utuh</span>
+            </div>
+            <span className="text-white/60 text-lg font-bold">−</span>
+            {/* Potongan kecil */}
+            <div className="flex flex-col items-center gap-1">
+              <svg viewBox="0 0 80 70" className="w-16 h-14">
+                <polygon points="10,55 50,55 50,20 10,20" fill="#f43f5e" fillOpacity="0.7" stroke="#fb7185" strokeWidth="1.5"/>
+                <polygon points="50,20 70,10 70,45 50,55" fill="#e11d48" fillOpacity="0.85" stroke="#fb7185" strokeWidth="1.5"/>
+                <polygon points="10,20 50,20 70,10 30,10" fill="#fb7185" fillOpacity="0.9" stroke="#fda4af" strokeWidth="1.5"/>
+                <text x="35" y="40" fill="white" fontSize="7" fontWeight="bold" textAnchor="middle">V ambil</text>
+              </svg>
+              <span className="text-rose-300 font-bold text-[10px]">Bagian Diambil</span>
+            </div>
+            <span className="text-white/60 text-lg font-bold">=</span>
+            {/* Hasil */}
+            <div className="flex flex-col items-center gap-1">
+              <svg viewBox="0 0 110 90" className="w-24 h-20">
+                {/* Balok besar */}
+                <polygon points="10,70 80,70 80,20 10,20" fill="#6366f1" fillOpacity="0.7" stroke="#818cf8" strokeWidth="1.5"/>
+                <polygon points="80,20 110,5 110,55 80,70" fill="#4f46e5" fillOpacity="0.85" stroke="#818cf8" strokeWidth="1.5"/>
+                <polygon points="10,20 80,20 110,5 40,5" fill="#818cf8" fillOpacity="0.9" stroke="#a5b4fc" strokeWidth="1.5"/>
+                {/* Lubang/potongan */}
+                <polygon points="10,70 35,70 35,45 10,45" fill="#0f172a" fillOpacity="0.95" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="3,2"/>
+                <text x="55" y="50" fill="white" fontSize="7" fontWeight="bold" textAnchor="middle">V hasil</text>
+              </svg>
+              <span className="text-green-300 font-bold text-[10px]">Hasil Gabungan</span>
+            </div>
+          </div>
+          <div className="mt-2 bg-rose-950/30 border border-rose-700/30 rounded p-2 space-y-1">
+            <p className="text-white/80"><strong className="text-rose-300">Contoh nyata:</strong> Balok besar (20×15×10 cm) dengan lubang balok kecil (5×5×10 cm)</p>
+            <BlockMath math="V = (20 \times 15 \times 10) - (5 \times 5 \times 10) = 3000 - 250 = 2750 \text{ cm}^3" />
+          </div>
+        </div>
+
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-yellow-300 font-semibold">🔢 Kapan Menggunakan Cara Mana?</p>
+          <div className="space-y-1">
+            <p className="text-white/75">✅ <strong className="text-cyan-300">Penjumlahan</strong> → bangun terbentuk dari beberapa bagian yang <em>ditumpuk/disatukan</em></p>
+            <p className="text-white/75">✅ <strong className="text-rose-300">Pengurangan</strong> → benda utuh yang sudah <em>dilubangi/dipotong</em> bagiannya</p>
+          </div>
         </div>
         <div className="bg-yellow-950/40 border border-yellow-700/30 rounded-lg p-3 text-xs text-yellow-200 space-y-1">
           <p className="font-semibold">⚠️ Perhatian:</p>
