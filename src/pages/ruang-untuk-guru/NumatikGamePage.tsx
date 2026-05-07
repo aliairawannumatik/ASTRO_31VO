@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
-  Gamepad2,
   Layers,
   Zap,
   Rocket,
@@ -10,13 +9,11 @@ import {
   Sparkles,
   Hammer,
   Swords,
-  Sword,
   Plane,
   Circle,
   Target,
   Disc,
   GraduationCap,
-  Goal,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -66,20 +63,6 @@ const games = [
     icon: <Rocket className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Math Bros — Petualangan",
-    emoji: "🍄",
-    path: "/math-game-arena/umum/math-bros",
-    desc: "Petualangan platformer! Lompati musuh & ambil koin jawaban benar di 5 level!",
-    icon: <Gamepad2 className="w-7 h-7 text-rose-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
-    label: "Ninja Buah Math",
-    emoji: "🍉",
-    path: "/math-game-arena/umum/ninja-buah-math",
-    desc: "Iris buah jawaban benar sebelum jatuh, hindari bom, dan bangun combo!",
-    icon: <Sword className="w-7 h-7 text-pink-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
     label: "Tetris Numatik",
     emoji: "🧩",
     path: "/math-game-arena/umum/tetris",
@@ -127,13 +110,6 @@ const games = [
     path: "/math-game-arena/umum/pacman-math",
     desc: "Telan pelet jawaban benar, hindari hantu, dan kuasai labirin!",
     icon: <Target className="w-7 h-7 text-yellow-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
-    label: "Tendangan Penalti Math",
-    emoji: "⚽",
-    path: "/math-game-arena/umum/penalti-math",
-    desc: "Tendangan penalti! Pilih sudut gawang dengan jawaban benar — awas kiper!",
-    icon: <Goal className="w-7 h-7 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
 ];
 
