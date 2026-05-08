@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "PENGERTIAN DAN NOTASI PANGKAT",
     path: "/latihan-mandiri/kelas-9/bilangan-berpangkat/pengertian-notasi",
-    soal: 40,
+    soal: 11,
     gradient: "from-sky-900/40 to-cyan-900/30",
     border: "border-sky-500/30",
     badge: "bg-sky-500/20 text-sky-300 border-sky-400/40",
@@ -20,7 +20,7 @@ const subtopics = [
   {
     label: "SIFAT-SIFAT OPERASI BILANGAN BERPANGKAT",
     path: "/latihan-mandiri/kelas-9/bilangan-berpangkat/sifat-sifat",
-    soal: 40,
+    soal: 31,
     gradient: "from-emerald-900/40 to-teal-900/30",
     border: "border-emerald-500/30",
     badge: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
@@ -32,7 +32,7 @@ const subtopics = [
   {
     label: "PANGKAT NOL, NEGATIF & PECAHAN",
     path: "/latihan-mandiri/kelas-9/bilangan-berpangkat/pangkat-nol-negatif-pecahan",
-    soal: 40,
+    soal: 33,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
     badge: "bg-violet-500/20 text-violet-300 border-violet-400/40",
@@ -44,7 +44,7 @@ const subtopics = [
   {
     label: "BENTUK AKAR",
     path: "/latihan-mandiri/kelas-9/bilangan-berpangkat/bentuk-akar",
-    soal: 40,
+    soal: 33,
     gradient: "from-amber-900/40 to-yellow-900/30",
     border: "border-amber-500/30",
     badge: "bg-amber-500/20 text-amber-300 border-amber-400/40",
@@ -56,7 +56,7 @@ const subtopics = [
   {
     label: "NOTASI ILMIAH",
     path: "/latihan-mandiri/kelas-9/bilangan-berpangkat/notasi-ilmiah",
-    soal: 40,
+    soal: 11,
     gradient: "from-rose-900/40 to-pink-900/30",
     border: "border-rose-500/30",
     badge: "bg-rose-500/20 text-rose-300 border-rose-400/40",
@@ -85,7 +85,7 @@ const BilanganBerpangkatPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">200 Soal Total · LaTeX & Diagram</span>
+            <span className="text-white/70 text-xs font-body">119 Soal Total · LaTeX & Diagram</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
