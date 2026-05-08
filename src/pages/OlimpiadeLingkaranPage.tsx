@@ -9,6 +9,21 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { lingkaranDasarPembahasan } from "@/data/pembahasan/lingkaranDasar";
 import { lingkaranOlimpiadePembahasan } from "@/data/pembahasan/lingkaranOlimpiade";
+import img16 from "@assets/16_1778278243308.png";
+import img17 from "@assets/17_1778278243308.png";
+import img18 from "@assets/18_1778278243307.png";
+import img19 from "@assets/19_1778278243308.png";
+import img20 from "@assets/20_1778278243307.png";
+import img21 from "@assets/21_1778278243306.png";
+import img25 from "@assets/25_1778278243303.png";
+import img26 from "@assets/26_1778278243306.png";
+import img28 from "@assets/28_1778278243305.png";
+import img29 from "@assets/29_1778278243305.png";
+import img31 from "@assets/31_1778278243303.png";
+import img32 from "@assets/32_1778278243304.png";
+import img34 from "@assets/34_1778278243304.png";
+import img35 from "@assets/35_1778278243305.jpg";
+import img36 from "@assets/36_1778278243302.png";
 
 const M = ({ math }: { math: string }) => <InlineMath math={math} />;
 
@@ -949,21 +964,21 @@ const dasarImages: Record<number, string> = {
   13: "/lingkaran-dasar-13.png",
   14: "/lingkaran-dasar-14.png",
   15: "/lingkaran-dasar-15.png",
-  16: "/lingkaran-dasar-16.png",
-  17: "/lingkaran-dasar-17.png",
-  18: "/lingkaran-dasar-18.png",
-  19: "/lingkaran-dasar-19.png",
-  20: "/lingkaran-dasar-20.png",
-  21: "/lingkaran-dasar-21.png",
-  25: "/lingkaran-dasar-25.png",
-  26: "/lingkaran-dasar-26.png",
-  28: "/lingkaran-dasar-28.png",
-  29: "/lingkaran-dasar-29.png",
-  31: "/lingkaran-dasar-31.png",
-  32: "/lingkaran-dasar-32.png",
-  34: "/lingkaran-dasar-34.png",
-  35: "/lingkaran-dasar-35.png",
-  36: "/lingkaran-dasar-36.png",
+  16: img16,
+  17: img17,
+  18: img18,
+  19: img19,
+  20: img20,
+  21: img21,
+  25: img25,
+  26: img26,
+  28: img28,
+  29: img29,
+  31: img31,
+  32: img32,
+  34: img34,
+  35: img35,
+  36: img36,
 };
 
 const olimpiadeImages: Record<number, string> = {
