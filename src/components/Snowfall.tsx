@@ -83,7 +83,7 @@ const Snowfall = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    const flakes = Array.from({ length: 90 }, (_, i) => ({
+    const flakes = Array.from({ length: 55 }, (_, i) => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       size: Math.random() * 10 + 5,
@@ -95,10 +95,16 @@ const Snowfall = () => {
       colorIdx: i % 5,
     }));
 
-    let animId: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const interval = 1000 / 60 - 1;
+    let rafId: number;
+    let last = 0;
 
+    const loop = (t: number) => {
+      rafId = requestAnimationFrame(loop);
+      if (t - last < interval) return;
+      last = t;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       flakes.forEach((flake) => {
         flake.y += flake.speed;
         flake.x += flake.drift;
@@ -111,23 +117,24 @@ const Snowfall = () => {
         if (flake.x > canvas.width + flake.size) flake.x = -flake.size;
         if (flake.x < -flake.size) flake.x = canvas.width + flake.size;
 
-        drawCrystalFlake(
-          ctx,
-          flake.x,
-          flake.y,
-          flake.size,
-          flake.rotation,
-          flake.opacity,
-          flake.colorIdx
-        );
+        drawCrystalFlake(ctx, flake.x, flake.y, flake.size, flake.rotation, flake.opacity, flake.colorIdx);
       });
-
-      animId = requestAnimationFrame(animate);
     };
-    animate();
+    rafId = requestAnimationFrame(loop);
+
+    const onVis = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        last = 0;
+        rafId = requestAnimationFrame(loop);
+      }
+    };
+    document.addEventListener("visibilitychange", onVis);
 
     return () => {
-      cancelAnimationFrame(animId);
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("visibilitychange", onVis);
       window.removeEventListener("resize", resize);
     };
   }, []);

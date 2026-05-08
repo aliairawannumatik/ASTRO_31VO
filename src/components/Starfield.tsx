@@ -1,6 +1,33 @@
 import { useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
+// ── Shared RAF loop: 60fps cap + visibility pause ─────────────
+function startLoop(render: () => void, fps = 60): () => void {
+  const interval = 1000 / fps - 1;
+  let rafId: number;
+  let last = 0;
+  const loop = (t: number) => {
+    rafId = requestAnimationFrame(loop);
+    if (t - last < interval) return;
+    last = t;
+    render();
+  };
+  rafId = requestAnimationFrame(loop);
+  const onVis = () => {
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+    } else {
+      last = 0;
+      rafId = requestAnimationFrame(loop);
+    }
+  };
+  document.addEventListener("visibilitychange", onVis);
+  return () => {
+    cancelAnimationFrame(rafId);
+    document.removeEventListener("visibilitychange", onVis);
+  };
+}
+
 // ── Shared: crystal snowflake drawing ─────────────────────────
 function drawCrystalFlake(
   ctx: CanvasRenderingContext2D,
@@ -51,8 +78,7 @@ const StarCanvas = () => {
       size: Math.random() * 2 + 0.5, speed: Math.random() * 0.5 + 0.1,
       opacity: Math.random(), twinkleSpeed: Math.random() * 0.02 + 0.005,
     }));
-    let animId: number;
-    const animate = () => {
+    const stop = startLoop(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       stars.forEach((star) => {
         star.opacity += star.twinkleSpeed;
@@ -64,10 +90,8 @@ const StarCanvas = () => {
         ctx.fillStyle = `rgba(200,230,255,${star.opacity})`;
         ctx.fill();
       });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+    });
+    return () => { stop(); window.removeEventListener("resize", resize); };
   }, []);
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };
@@ -81,15 +105,14 @@ const SnowCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const flakes = Array.from({ length: 90 }, (_, i) => ({
+    const flakes = Array.from({ length: 60 }, (_, i) => ({
       x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
       size: Math.random() * 10 + 5, speed: Math.random() * 0.8 + 0.3,
       drift: Math.random() * 0.4 - 0.2, opacity: Math.random() * 0.55 + 0.3,
       rotation: Math.random() * Math.PI * 2, rotSpeed: (Math.random() - 0.5) * 0.008,
       colorIdx: i % 5,
     }));
-    let animId: number;
-    const animate = () => {
+    const stop = startLoop(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       flakes.forEach((flake) => {
         flake.y += flake.speed; flake.x += flake.drift; flake.rotation += flake.rotSpeed;
@@ -98,10 +121,8 @@ const SnowCanvas = () => {
         if (flake.x < -flake.size) flake.x = canvas.width + flake.size;
         drawCrystalFlake(ctx, flake.x, flake.y, flake.size, flake.rotation, flake.opacity, flake.colorIdx);
       });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+    });
+    return () => { stop(); window.removeEventListener("resize", resize); };
   }, []);
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };
@@ -115,7 +136,7 @@ const WhiteCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const dots = Array.from({ length: 55 }, () => ({
+    const dots = Array.from({ length: 45 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight + window.innerHeight,
       r: Math.random() * 18 + 6,
@@ -125,8 +146,8 @@ const WhiteCanvas = () => {
       phase: Math.random() * Math.PI * 2,
       wobble: Math.random() * 0.01 + 0.005,
     }));
-    let animId: number; let frame = 0;
-    const animate = () => {
+    let frame = 0;
+    const stop = startLoop(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       frame++;
       dots.forEach((d) => {
@@ -140,10 +161,8 @@ const WhiteCanvas = () => {
         ctx.fillStyle = `rgba(148,163,184,${d.opacity})`;
         ctx.fill();
       });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+    });
+    return () => { stop(); window.removeEventListener("resize", resize); };
   }, []);
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };
@@ -158,7 +177,7 @@ const ForestCanvas = () => {
     resize();
     window.addEventListener("resize", resize);
     const colors = ["#4ade80","#22c55e","#16a34a","#86efac","#bbf7d0","#a3e635","#84cc16","#65a30d","#d9f99d"];
-    const leaves = Array.from({ length: 65 }, () => ({
+    const leaves = Array.from({ length: 45 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight - window.innerHeight * 0.3,
       size: Math.random() * 13 + 6,
@@ -172,8 +191,8 @@ const ForestCanvas = () => {
       swayAmt: Math.random() * 1.8 + 0.5,
       phase: Math.random() * Math.PI * 2,
     }));
-    let animId: number; let frame = 0;
-    const animate = () => {
+    let frame = 0;
+    const stop = startLoop(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       frame++;
       leaves.forEach((leaf) => {
@@ -202,10 +221,8 @@ const ForestCanvas = () => {
         ctx.globalAlpha = 1;
         ctx.restore();
       });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+    });
+    return () => { stop(); window.removeEventListener("resize", resize); };
   }, []);
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };
@@ -219,7 +236,7 @@ const OceanCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const bubbles = Array.from({ length: 85 }, () => ({
+    const bubbles = Array.from({ length: 55 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight + window.innerHeight,
       r: Math.random() * 14 + 2,
@@ -230,8 +247,8 @@ const OceanCanvas = () => {
       wobbleSpeed: Math.random() * 0.028 + 0.01,
       wobbleAmt: Math.random() * 1.4 + 0.4,
     }));
-    let animId: number; let frame = 0;
-    const animate = () => {
+    let frame = 0;
+    const stop = startLoop(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       frame++;
       bubbles.forEach((b) => {
@@ -254,15 +271,15 @@ const OceanCanvas = () => {
         ctx.globalAlpha = 1;
         ctx.restore();
       });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+    });
+    return () => { stop(); window.removeEventListener("resize", resize); };
   }, []);
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };
 
 // ── 6. Sunset: floating embers / fireflies ─────────────────────
+// Note: gradient creation moved out of per-frame loop to avoid GC pressure.
+// Each ember uses a simple solid circle instead of createRadialGradient per frame.
 const SunsetCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
@@ -272,10 +289,10 @@ const SunsetCanvas = () => {
     resize();
     window.addEventListener("resize", resize);
     const colors = ["#fbbf24","#f97316","#ef4444","#fcd34d","#fb923c","#f87171","#fde68a","#fdba74"];
-    const embers = Array.from({ length: 110 }, () => ({
+    const embers = Array.from({ length: 60 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight + window.innerHeight * 0.2,
-      r: Math.random() * 2.8 + 0.5,
+      r: Math.random() * 3 + 1,
       speed: Math.random() * 1.4 + 0.4,
       drift: Math.random() * 1.4 - 0.7,
       opacity: Math.random() * 0.75 + 0.20,
@@ -285,8 +302,8 @@ const SunsetCanvas = () => {
       phase: Math.random() * Math.PI * 2,
       wobbleSpeed: Math.random() * 0.018 + 0.008,
     }));
-    let animId: number; let frame = 0;
-    const animate = () => {
+    let frame = 0;
+    const stop = startLoop(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       frame++;
       embers.forEach((e) => {
@@ -298,25 +315,21 @@ const SunsetCanvas = () => {
         if (e.x > canvas.width + 12) e.x = -12;
         if (e.x < -12) e.x = canvas.width + 12;
         ctx.save();
-        ctx.globalAlpha = e.opacity;
-        const grd = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, e.r * 3);
-        grd.addColorStop(0, e.color);
-        grd.addColorStop(1, "transparent");
+        ctx.globalAlpha = e.opacity * 0.4;
         ctx.beginPath();
-        ctx.arc(e.x, e.y, e.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = grd;
+        ctx.arc(e.x, e.y, e.r * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = e.color;
         ctx.fill();
+        ctx.globalAlpha = e.opacity;
         ctx.beginPath();
-        ctx.arc(e.x, e.y, e.r * 0.85, 0, Math.PI * 2);
+        ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
         ctx.fillStyle = "#fff";
         ctx.fill();
         ctx.globalAlpha = 1;
         ctx.restore();
       });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+    });
+    return () => { stop(); window.removeEventListener("resize", resize); };
   }, []);
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };

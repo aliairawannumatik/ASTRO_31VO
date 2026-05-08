@@ -230,19 +230,6 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
     };
   }, [stopBgMusic]);
 
-  const [floatOffset, setFloatOffset] = useState(0);
-  useEffect(() => {
-    if (!started || finished) return;
-    let id: number;
-    let t = 0;
-    const anim = () => {
-      t += 0.02;
-      setFloatOffset(Math.sin(t) * 8);
-      id = requestAnimationFrame(anim);
-    };
-    id = requestAnimationFrame(anim);
-    return () => cancelAnimationFrame(id);
-  }, [started, finished]);
 
   if (!started) {
     return (
@@ -601,13 +588,15 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
             const aimed = !m.hit && !locked && Math.abs(m.x - shipX) < 8;
             return (
               <div key={m.id}
-                className="absolute transition-all duration-500 pointer-events-none"
-                style={{
-                  left: `${m.x}%`, top: "50%",
-                  transform: `translate(-50%, ${-50 + floatOffset * (m.id % 2 === 0 ? 1 : -1)}%) ${m.hit ? "scale(0)" : "scale(1)"}`,
-                  opacity: m.hit ? 0 : 1,
-                  transition: m.hit ? "all 0.3s ease-out" : "transform 0.5s ease",
-                }}>
+                className="absolute pointer-events-none"
+                style={{ left: `${m.x}%`, top: "50%", transform: "translate(-50%, -50%)" }}>
+                <div
+                  className={m.hit ? "" : (m.id % 2 === 0 ? "meteor-float-up" : "meteor-float-down")}
+                  style={{
+                    transform: m.hit ? "scale(0)" : undefined,
+                    opacity: m.hit ? 0 : 1,
+                    transition: m.hit ? "transform 0.3s ease-out, opacity 0.3s ease-out" : undefined,
+                  }}>
                 <div className="relative">
                   {aimed && (
                     <div className="absolute -inset-2 rounded-full border-2 border-yellow-300/80 animate-pulse pointer-events-none" style={{ boxShadow: "0 0 18px rgba(250,200,0,0.55)" }} />
@@ -620,6 +609,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
                     <div className="w-20 h-20 rounded-full bg-accent/60 animate-ping" />
                   </div>
                 )}
+              </div>
               </div>
             );
           })}
