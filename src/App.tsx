@@ -1,828 +1,832 @@
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import { startGlobalAmbient } from "@/hooks/useAudio";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { SoundProvider } from "@/contexts/SoundContext";
 import { MusicProvider } from "@/contexts/MusicContext";
 import { FontProvider } from "@/contexts/FontContext";
-import WelcomePage from "./pages/WelcomePage";
-import MenuPage from "./pages/MenuPage";
-import LKPDPage from "./pages/LKPDPage";
-import LKPDMenuPage from "./pages/LKPDMenuPage";
-import { LKPDKelas7Page, LKPDKelas8Page, LKPDKelas9Page } from "./pages/LKPDKelasPage";
-import LKPDPerbandinganPage from "./pages/LKPDPerbandinganPage";
-import BertingkatLKPDPage from "./pages/lkpd/kelas7/perbandingan/BertingkatLKPDPage";
-import SenilaiLKPDPage from "./pages/lkpd/kelas7/perbandingan/SenilaiLKPDPage";
-import SkalaLKPDPage from "./pages/lkpd/kelas7/perbandingan/SkalaLKPDPage";
-import CampuranLKPDPage from "./pages/lkpd/kelas7/perbandingan/CampuranLKPDPage";
-import BilanganBulatMenuPage from "./pages/lkpd/kelas7/BilanganBulatMenuPage";
-import PenjumlahanLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PenjumlahanLKPDPage";
-import PesawatTembakMeteorPage from "./pages/lkpd/kelas7/bilangan-bulat/PesawatTembakMeteorPage";
-import PesawatTembakMeteorPenjumlahanPage from "./pages/lkpd/kelas7/bilangan-bulat/PesawatTembakMeteorPenjumlahanPage";
-import PenguranganLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PenguranganLKPDPage";
-import PerkalianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PerkalianLKPDPage";
-import PembagianLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/PembagianLKPDPage";
-import OperasiCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/OperasiCampuranLKPDPage";
-import KPKFPBLKPDPage from "./pages/lkpd/kelas7/bilangan-bulat/KPKFPBLKPDPage";
-import BilanganRasionalMenuPage from "./pages/lkpd/kelas7/BilanganRasionalMenuPage";
-import ArtiPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/ArtiPecahanLKPDPage";
-import AljabarMenuPage from "./pages/lkpd/kelas7/AljabarMenuPage";
-import PengertianUnsurAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/PengertianUnsurAljabarLKPDPage";
-import PenjumlahanPenguranganAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/PenjumlahanPenguranganAljabarLKPDPage";
-import PerkalianPembagianAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/PerkalianPembagianAljabarLKPDPage";
-import SubstitusiAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/SubstitusiAljabarLKPDPage";
-import FaktorisasiAljabarLKPDPage from "./pages/lkpd/kelas7/aljabar/FaktorisasiAljabarLKPDPage";
-import AritmetikaSosialMenuPage from "./pages/lkpd/kelas7/AritmetikaSosialMenuPage";
-import JualBeliUntungRugiLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/JualBeliUntungRugiLKPDPage";
-import DiskonLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/DiskonLKPDPage";
-import BrutoNettoTaraLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/BrutoNettoTaraLKPDPage";
-import BungaTunggalLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/BungaTunggalLKPDPage";
-import GarisDanSudutLKPDPage from "./pages/lkpd/kelas7/garis-sudut/GarisDanSudutLKPDPage";
-import SegitigaDanSegiempatLKPDPage from "./pages/lkpd/kelas7/segitiga-segiempat/SegitigaDanSegiempatLKPDPage";
-import HimpunanLKPDPage from "./pages/lkpd/kelas7/himpunan/HimpunanLKPDPage";
-import HimpunanMenuPage from "./pages/lkpd/kelas7/HimpunanMenuPage";
-import GarisDanSudutMenuPage from "./pages/lkpd/kelas7/GarisDanSudutMenuPage";
-import SegitigaDanSegiempatMenuPage from "./pages/lkpd/kelas7/SegitigaDanSegiempatMenuPage";
-import PolaBilanganLKPDPage from "./pages/lkpd/kelas8/pola-bilangan/PolaBilanganLKPDPage";
-import PolaBilanganMenuPage from "./pages/lkpd/kelas8/PolaBilanganMenuPage";
-import KoordinatCartesiusLKPDMenuPage from "./pages/lkpd/kelas8/KoordinatCartesiusMenuPage";
-import KoordinatCartesiusLKPDPage from "./pages/lkpd/kelas8/koordinat-cartesius/KoordinatCartesiusLKPDPage";
-import RelasiFungsiLKPDMenuPage from "./pages/lkpd/kelas8/RelasiFungsiMenuPage";
-import RelasiFungsiLKPDPage from "./pages/lkpd/kelas8/relasi-fungsi/RelasiFungsiLKPDPage";
-import SPLDVLKPDMenuPage from "./pages/lkpd/kelas8/SPLDVMenuPage";
-import SPLDVLKPDPage from "./pages/lkpd/kelas8/spldv/SPLDVLKPDPage";
-import PersamaanGarisLurusLKPDMenuPage from "./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage";
-import PersamaanGarisLurusLKPDPage from "./pages/lkpd/kelas8/persamaan-garis-lurus/PersamaanGarisLurusLKPDPage";
-import TeoremaPythagorasLKPDMenuPage from "./pages/lkpd/kelas8/TeoremaPythagorasMenuPage";
-import TeoremaPythagorasLKPDPage from "./pages/lkpd/kelas8/teorema-pythagoras/TeoremaPythagorasLKPDPage";
-import LingkaranLKPDMenuPage from "./pages/lkpd/kelas8/LingkaranMenuPage";
-import LingkaranLKPDPage from "./pages/lkpd/kelas8/lingkaran/LingkaranLKPDPage";
-import GarisSinggungLingkaranLKPDMenuPage from "./pages/lkpd/kelas8/GarisSinggungLingkaranMenuPage";
-import GarisSinggungLingkaranLKPDPage from "./pages/lkpd/kelas8/garis-singgung-lingkaran/GarisSinggungLingkaranLKPDPage";
-import BangunRuangSisiDatarLKPDMenuPage from "./pages/lkpd/kelas8/BangunRuangSisiDatarMenuPage";
-import KubusBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/KubusLKPDPage";
-import BalokBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/BalokLKPDPage";
-import PrismaBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/PrismaLKPDPage";
-import LimasBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/LimasLKPDPage";
-import GabunganBRSDLKPDPage from "./pages/lkpd/kelas8/bangun-ruang-sisi-datar/GabunganBRSDLKPDPage";
-import BilanganBerpangkatLKPDMenuPage from "./pages/lkpd/kelas9/BilanganBerpangkatMenuPage";
-import PengertianNotasiPangkatLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/PengertianNotasiPangkatLKPDPage";
-import SifatOperasiPangkatLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/SifatOperasiPangkatLKPDPage";
-import BentukAkarLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/BentukAkarLKPDPage";
-import NotasiIlmiahLKPDPage from "./pages/lkpd/kelas9/bilangan-berpangkat/NotasiIlmiahLKPDPage";
-import KesebangunanKekongruenanLKPDMenuPage from "./pages/lkpd/kelas9/KesebangunanKekongruenanMenuPage";
-import TransformasiGeometriLKPDMenuPage from "./pages/lkpd/kelas9/TransformasiGeometriMenuPage";
-import TranslasiTGLKPDPage from "./pages/lkpd/kelas9/transformasi-geometri/TranslasiLKPDPage";
-import RefleksiTGLKPDPage from "./pages/lkpd/kelas9/transformasi-geometri/RefleksiLKPDPage";
-import RotasiTGLKPDPage from "./pages/lkpd/kelas9/transformasi-geometri/RotasiLKPDPage";
-import DilatasiTGLKPDPage from "./pages/lkpd/kelas9/transformasi-geometri/DilatasiLKPDPage";
-import BangunRuangSisiLengkungLKPDMenuPage from "./pages/lkpd/kelas9/BangunRuangSisiLengkungMenuPage";
-import TabungBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/TabungLKPDPage";
-import KerucutBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/KerucutLKPDPage";
-import BolaBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/BolaLKPDPage";
-import PerubahanLuasVolumeBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/PerubahanLuasVolumeLKPDPage";
-import GabunganBRSLLKPDPage from "./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/GabunganBRSLLKPDPage";
-import StatistikaLKPDMenuPage from "./pages/lkpd/kelas9/StatistikaMenuPage";
-import PengantarStatistikaLKPDPage from "./pages/lkpd/kelas9/statistika/PengantarStatistikaLKPDPage";
-import PenyajianDataLKPDPage from "./pages/lkpd/kelas9/statistika/PenyajianDataLKPDPage";
-import RataRataStatistikaLKPDPage from "./pages/lkpd/kelas9/statistika/RataRataLKPDPage";
-import MedianModusLKPDPage from "./pages/lkpd/kelas9/statistika/MedianModusLKPDPage";
-import KuartilLKPDPage from "./pages/lkpd/kelas9/statistika/KuartilLKPDPage";
-import JangkauanSimpanganLKPDPage from "./pages/lkpd/kelas9/statistika/JangkauanSimpanganLKPDPage";
-import PeluangLKPDMenuPage from "./pages/lkpd/kelas9/PeluangMenuPage";
-import RuangSampelLKPDPage from "./pages/lkpd/kelas9/peluang/RuangSampelLKPDPage";
-import PeluangEmpirikLKPDPage from "./pages/lkpd/kelas9/peluang/PeluangEmpirikLKPDPage";
-import PeluangTeoretikLKPDPage from "./pages/lkpd/kelas9/peluang/PeluangTeoretikLKPDPage";
-import FrekuensiHarapanLKPDPage from "./pages/lkpd/kelas9/peluang/FrekuensiHarapanLKPDPage";
-import KomplemenLKPDPage from "./pages/lkpd/kelas9/peluang/KomplemenLKPDPage";
-import PeluangKejadianMajemukLKPDPage from "./pages/lkpd/kelas9/peluang/PeluangKejadianMajemukLKPDPage";
-import PersamaanKuadratLKPDMenuPage from "./pages/lkpd/kelas9/PersamaanKuadratMenuPage";
-import PKBentukUmumLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/BentukUmumLKPDPage";
-import PKPemfaktoranLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/PemfaktoranLKPDPage";
-import PKRumusKuadratikLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/RumusKuadratikLKPDPage";
-import PKPelengkapKuadratLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/PelengkapKuadratLKPDPage";
-import PKDiskriminanLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/DiskriminanLKPDPage";
-import PKMenyusunBaruLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/MenyusunPKBaruLKPDPage";
-import PKPenerapanKontekstualLKPDPage from "./pages/lkpd/kelas9/persamaan-kuadrat/PenerapanKontekstualLKPDPage";
-import FungsiKuadratLKPDMenuPage from "./pages/lkpd/kelas9/FungsiKuadratMenuPage";
-import FKBentukUmumKarakteristikLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/BentukUmumKarakteristikLKPDPage";
-import FKTitikPotongLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/TitikPotongLKPDPage";
-import FKSumbuSimetriPuncakLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/SumbuSimetriPuncakLKPDPage";
-import FKMenggambarGrafikLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/MenggambarGrafikLKPDPage";
-import FKMenyusunFungsiLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/MenyusunFungsiLKPDPage";
-import FKPenerapanMaksMinLKPDPage from "./pages/lkpd/kelas9/fungsi-kuadrat/PenerapanMaksMinLKPDPage";
-import PPNLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPNLKPDPage";
-import PPhLKPDPage from "./pages/lkpd/kelas7/aritmetika-sosial/PPhLKPDPage";
-import PecahanCampuranLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage";
-import PenjumlahanPenguranganPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PenjumlahanPenguranganPecahanLKPDPage";
-import PerkalianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PerkalianPecahanLKPDPage";
-import PembagianPecahanLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/PembagianPecahanLKPDPage";
-import BentukDesimalLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/BentukDesimalLKPDPage";
-import OperasiDesimalLKPDPage from "./pages/lkpd/kelas7/bilangan-rasional/OperasiDesimalLKPDPage";
-import PLSVPtLSVMenuPage from "./pages/lkpd/kelas7/PLSVPtLSVMenuPage";
-import KalimatTerbukaTertutupLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/KalimatTerbukaTertutupLKPDPage";
-import PengertianPLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PengertianPLSVLKPDPage";
-import PenyelesaianPLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PenyelesaianPLSVLKPDPage";
-import ModelMatematikaPLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/ModelMatematikaPLSVLKPDPage";
-import PengertianPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PengertianPtLSVLKPDPage";
-import PenyelesaianPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/PenyelesaianPtLSVLKPDPage";
-import ModelMatematikaPtLSVLKPDPage from "./pages/lkpd/kelas7/plsv-ptlsv/ModelMatematikaPtLSVLKPDPage";
-import ATPPage from "./pages/ATPPage";
-import GuruLayout from "./components/GuruLayout";
-import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
-import NumatikGamePage from "./pages/ruang-untuk-guru/NumatikGamePage";
-import KeyakinanKelasPage from "./pages/ruang-untuk-guru/KeyakinanKelasPage";
-import PenilaianPembelajaranPage from "./pages/ruang-untuk-guru/PenilaianPembelajaranPage";
-import CapaianPembelajaranPage from "./pages/ruang-untuk-guru/CapaianPembelajaranPage";
-import RubrikPenilaianDimensiLulusanPage from "./pages/ruang-untuk-guru/RubrikPenilaianDimensiLulusanPage";
-import JurnalGuruPage from "./pages/ruang-untuk-guru/JurnalGuruPage";
-import AgendaGuruPage from "./pages/ruang-untuk-guru/AgendaGuruPage";
-import ProsemPage from "./pages/ruang-untuk-guru/ProsemPage";
-import ProsemTahunPage from "./pages/ruang-untuk-guru/ProsemTahunPage";
-import ProtaPage from "./pages/ruang-untuk-guru/ProtaPage";
-import ProtaTahunPage from "./pages/ruang-untuk-guru/ProtaTahunPage";
-import AnalisisAlokasiWaktuPage from "./pages/ruang-untuk-guru/AnalisisAlokasiWaktuPage";
-import KKTPPage from "./pages/ruang-untuk-guru/KKTPPage";
-import AbsensiSiswaPage from "./pages/ruang-untuk-guru/AbsensiSiswaPage";
-import PenilaianSiswaPage from "./pages/ruang-untuk-guru/PenilaianSiswaPage";
-import RancangRPPPage from "./pages/ruang-untuk-guru/RancangRPPPage";
-import KokulikulerPage from "./pages/ruang-untuk-guru/KokulikulerPage";
-import RPPPage from "./pages/ruang-untuk-guru/RPPPage";
-import RPPBilanganBulatPage from "./pages/ruang-untuk-guru/RPPBilanganBulatPage";
-import RPPPenjumlahanBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPenjumlahanBilanganBulatPage";
-import RPPPenguranganBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPenguranganBilanganBulatPage";
-import RPPPerkalianBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPerkalianBilanganBulatPage";
-import RPPPembagianBilanganBulatPage from "./pages/ruang-untuk-guru/RPPPembagianBilanganBulatPage";
-import RPPOperasiCampuranBilanganBulatPage from "./pages/ruang-untuk-guru/RPPOperasiCampuranBilanganBulatPage";
-import RPPKpkFpbPage from "./pages/ruang-untuk-guru/RPPKpkFpbPage";
-import RPPMateriDynamicPage from "./pages/ruang-untuk-guru/RPPMateriDynamicPage";
-import RPPDetailDynamicPage from "./pages/ruang-untuk-guru/RPPDetailDynamicPage";
-import UlanganHarianPage from "./pages/UlanganHarianPage";
-import PesanKesanPage from "./pages/PesanKesanPage";
-import PetunjukPage from "./pages/PetunjukPage";
-import QuizPage from "./pages/QuizPage";
-import ReferensiPage from "./pages/ReferensiPage";
-import DonasiPage from "./pages/DonasiPage";
-import BiografiPage from "./pages/BiografiPage";
-import OlimpiadePage from "./pages/OlimpiadePage";
-import OlimpiadeBilanganBulatPage from "./pages/OlimpiadeBilanganBulatPage";
-import OlimpiadeBilanganRasionalPage from "./pages/OlimpiadeBilanganRasionalPage";
-import OlimpiadeBilanganBerpangkatPage from "./pages/OlimpiadeBilanganBerpangkatPage";
-import OlimpiadeStatistikaPage from "./pages/OlimpiadeStatistikaPage";
-import OlimpiadeBilanganIrasionalPage from "./pages/OlimpiadeBilanganIrasionalPage";
-import OlimpiadeKPKFPBPage from "./pages/OlimpiadeKPKFPBPage";
-import OlimpiadeModuloPage from "./pages/OlimpiadeModuloPage";
-import OlimpiadeHimpunanPage from "./pages/OlimpiadeHimpunanPage";
-import OlimpiadeRelasiFungsiPage from "./pages/OlimpiadeRelasiFungsiPage";
-import OlimpiadePerbandinganPage from "./pages/OlimpiadePerbandinganPage";
-import OlimpiadeAljabarPage from "./pages/OlimpiadeAljabarPage";
-import OlimpiadePolaBilanganPage from "./pages/OlimpiadePolaBilanganPage";
-import OlimpiadeSPLDVPage from "./pages/OlimpiadeSPLDVPage";
-import OlimpiadeGarisSudutPage from "./pages/OlimpiadeGarisSudutPage";
-import OlimpiadeKoordinatCartesiusPage from "./pages/OlimpiadeKoordinatCartesiusPage";
-import OlimpiadeTeoremaPage from "./pages/OlimpiadeTeoremaPage";
-import OlimpiadeSegitigaSegiempatPage from "./pages/OlimpiadeSegitigaSegiempatPage";
-import OlimpiadeLingkaranPage from "./pages/OlimpiadeLingkaranPage";
-import OlimpiadeBangunRuangSisiDatarPage from "./pages/OlimpiadeBangunRuangSisiDatarPage";
-import OlimpiadeBangunRuangSisiLengkungPage from "./pages/OlimpiadeBangunRuangSisiLengkungPage";
-import OlimpiadePLSVPage from "./pages/OlimpiadePLSVPage";
-import OlimpiadePersamaanGarisPage from "./pages/OlimpiadePersamaanGarisPage";
-import OlimpiadePersamaanKuadratPage from "./pages/OlimpiadePersamaanKuadratPage";
-import OlimpiadeFungsiKuadratPage from "./pages/OlimpiadeFungsiKuadratPage";
-import OlimpiadeAritmetikaSosialPage from "./pages/OlimpiadeAritmetikaSosialPage";
-import OlimpiadeKesebangunanPage from "./pages/OlimpiadeKesebangunanPage";
-import OlimpiadeTransformasiPage from "./pages/OlimpiadeTransformasiPage";
-import OlimpiadePeluangPage from "./pages/OlimpiadePeluangPage";
-import TKAPage from "./pages/TKAPage";
-import TKALatihan1Page from "./pages/tka/TKALatihan1Page";
-import TKALatihan2Page from "./pages/tka/TKALatihan2Page";
-import TKALatihan3Page from "./pages/tka/TKALatihan3Page";
-import TKALatihan4Page from "./pages/tka/TKALatihan4Page";
-import TKALatihan5Page from "./pages/tka/TKALatihan5Page";
-import TKATipsPage from "./pages/tka/TKATipsPage";
-import PapanPeringkatPage from "./pages/PapanPeringkatPage";
-import BankSoalPage from "./pages/BankSoalPage";
-import BankSoalBilanganBulatPage from "./pages/bank-soal/BilanganBulatPage";
-import BankSoalBilanganRasionalPage from "./pages/bank-soal/BilanganRasionalPage";
-import BankSoalSegitigaSegiempatPage from "./pages/bank-soal/SegitigaSegiempatPage";
-import BankSoalHimpunanPage from "./pages/bank-soal/HimpunanPage";
-import BankSoalKoordinatCartesiusPage from "./pages/bank-soal/KoordinatCartesiusPage";
-import BankSoalAljabarPage from "./pages/bank-soal/AljabarPage";
-import BankSoalPLSVPage from "./pages/bank-soal/PLSVPage";
-import BankSoalPerbandinganPage from "./pages/bank-soal/PerbandinganPage";
-import BankSoalAritmetikaSosialPage from "./pages/bank-soal/AritmetikaSosialPage";
-import BankSoalPolaBilanganPage from "./pages/bank-soal/PolaBilanganPage";
-import BankSoalRelasiFungsiPage from "./pages/bank-soal/RelasiFungsiPage";
-import BankSoalGarisSudutPage from "./pages/bank-soal/GarisSudutPage";
-import BankSoalSPLDVPage from "./pages/bank-soal/SPLDVPage";
-import BankSoalPersamaanGarisLurusPage from "./pages/bank-soal/PersamaanGarisLurusPage";
-import BankSoalPeluangPage from "./pages/bank-soal/PeluangPage";
-import BankSoalTeoremaPythagorasPage from "./pages/bank-soal/TeoremaPythagorasPage";
-import BankSoalLingkaranPage from "./pages/bank-soal/LingkaranPage";
-import BankSoalBangunRuangSisiDatarPage from "./pages/bank-soal/BangunRuangSisiDatarPage";
-import BankSoalBangunRuangSisiLengkungPage from "./pages/bank-soal/BangunRuangSisiLengkungPage";
-import BankSoalBilanganBerpangkatPage from "./pages/bank-soal/BilanganBerpangkatPage";
-import BankSoalPersamaanKuadratPage from "./pages/bank-soal/PersamaanKuadratPage";
-import BankSoalFungsiKuadratPage from "./pages/bank-soal/FungsiKuadratPage";
-import BankSoalStatistikaPage from "./pages/bank-soal/StatistikaPage";
-import BankSoalGarisSinggungLingkaranPage from "./pages/bank-soal/GarisSinggungLingkaranPage";
-import BankSoalKesebangunanPage from "./pages/bank-soal/KesebangunanPage";
-import BankSoalTransformasiGeometriPage from "./pages/bank-soal/TransformasiGeometriPage";
-import ChatAIPage from "./pages/ChatAIPage";
-import PengaturanPage from "./pages/PengaturanPage";
-import TentangAplikasiPage from "./pages/TentangAplikasiPage";
-import ComingSoonPage from "./pages/ComingSoonPage";
-import KalkulatorScientificPage from "./pages/KalkulatorScientificPage";
-import VideoPembelajaranPage from "./pages/VideoPembelajaranPage";
-import KumpulanRumusPage from "./pages/KumpulanRumusPage";
-import KonversiSatuanPage from "./pages/KonversiSatuanPage";
-import NotFound from "./pages/NotFound";
-import MenghitungCepatPage from "./pages/MenghitungCepatPage";
-import PerkalianDengan11Page from "./pages/menghitung-cepat/PerkalianDengan11Page";
-import KuadratBerakhiran5Page from "./pages/menghitung-cepat/KuadratBerakhiran5Page";
-import KuadratCepatPage from "./pages/menghitung-cepat/KuadratCepatPage";
-import PerkalianDekat100Page from "./pages/menghitung-cepat/PerkalianDekat100Page";
-import PersentaseCepatPage from "./pages/menghitung-cepat/PersentaseCepatPage";
-import PenjumlahanPenguranganCepatPage from "./pages/menghitung-cepat/PenjumlahanPenguranganPage";
-import PerkalianDuaDigitPage from "./pages/menghitung-cepat/PerkalianDuaDigitPage";
-import PembagianCepatPage from "./pages/menghitung-cepat/PembagianCepatPage";
-import TabelReferensiPage from "./pages/menghitung-cepat/TabelReferensiPage";
-import LatihanFlashcardPage from "./pages/menghitung-cepat/LatihanFlashcardPage";
+import PageLoader from "@/components/PageLoader";
 
-// Latihan Mandiri Pages
-import LatihanMandiriPage from "./pages/LatihanMandiriPage";
-import LatihanMandiriKelas7Page from "./pages/LatihanMandiriKelas7Page";
-import LatihanMandiriKelas8Page from "./pages/LatihanMandiriKelas8Page";
-import LatihanMandiriKelas9Page from "./pages/LatihanMandiriKelas9Page";
+// ── Lazy-loaded pages ──────────────────────────────────────────────────────
+const WelcomePage = lazy(() => import("./pages/WelcomePage"));
+const MenuPage = lazy(() => import("./pages/MenuPage"));
+const LKPDPage = lazy(() => import("./pages/LKPDPage"));
+const LKPDMenuPage = lazy(() => import("./pages/LKPDMenuPage"));
+const LKPDKelas7Page = lazy(() => import("./pages/LKPDKelasPage").then(m => ({ default: m.LKPDKelas7Page })));
+const LKPDKelas8Page = lazy(() => import("./pages/LKPDKelasPage").then(m => ({ default: m.LKPDKelas8Page })));
+const LKPDKelas9Page = lazy(() => import("./pages/LKPDKelasPage").then(m => ({ default: m.LKPDKelas9Page })));
+const LKPDPerbandinganPage = lazy(() => import("./pages/LKPDPerbandinganPage"));
+const BertingkatLKPDPage = lazy(() => import("./pages/lkpd/kelas7/perbandingan/BertingkatLKPDPage"));
+const SenilaiLKPDPage = lazy(() => import("./pages/lkpd/kelas7/perbandingan/SenilaiLKPDPage"));
+const SkalaLKPDPage = lazy(() => import("./pages/lkpd/kelas7/perbandingan/SkalaLKPDPage"));
+const CampuranLKPDPage = lazy(() => import("./pages/lkpd/kelas7/perbandingan/CampuranLKPDPage"));
+const BilanganBulatMenuPage = lazy(() => import("./pages/lkpd/kelas7/BilanganBulatMenuPage"));
+const PenjumlahanLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/PenjumlahanLKPDPage"));
+const PesawatTembakMeteorPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/PesawatTembakMeteorPage"));
+const PesawatTembakMeteorPenjumlahanPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/PesawatTembakMeteorPenjumlahanPage"));
+const PenguranganLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/PenguranganLKPDPage"));
+const PerkalianLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/PerkalianLKPDPage"));
+const PembagianLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/PembagianLKPDPage"));
+const OperasiCampuranLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/OperasiCampuranLKPDPage"));
+const KPKFPBLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-bulat/KPKFPBLKPDPage"));
+const BilanganRasionalMenuPage = lazy(() => import("./pages/lkpd/kelas7/BilanganRasionalMenuPage"));
+const ArtiPecahanLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-rasional/ArtiPecahanLKPDPage"));
+const AljabarMenuPage = lazy(() => import("./pages/lkpd/kelas7/AljabarMenuPage"));
+const PengertianUnsurAljabarLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aljabar/PengertianUnsurAljabarLKPDPage"));
+const PenjumlahanPenguranganAljabarLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aljabar/PenjumlahanPenguranganAljabarLKPDPage"));
+const PerkalianPembagianAljabarLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aljabar/PerkalianPembagianAljabarLKPDPage"));
+const SubstitusiAljabarLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aljabar/SubstitusiAljabarLKPDPage"));
+const FaktorisasiAljabarLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aljabar/FaktorisasiAljabarLKPDPage"));
+const AritmetikaSosialMenuPage = lazy(() => import("./pages/lkpd/kelas7/AritmetikaSosialMenuPage"));
+const JualBeliUntungRugiLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aritmetika-sosial/JualBeliUntungRugiLKPDPage"));
+const DiskonLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aritmetika-sosial/DiskonLKPDPage"));
+const BrutoNettoTaraLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aritmetika-sosial/BrutoNettoTaraLKPDPage"));
+const BungaTunggalLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aritmetika-sosial/BungaTunggalLKPDPage"));
+const GarisDanSudutLKPDPage = lazy(() => import("./pages/lkpd/kelas7/garis-sudut/GarisDanSudutLKPDPage"));
+const SegitigaDanSegiempatLKPDPage = lazy(() => import("./pages/lkpd/kelas7/segitiga-segiempat/SegitigaDanSegiempatLKPDPage"));
+const HimpunanLKPDPage = lazy(() => import("./pages/lkpd/kelas7/himpunan/HimpunanLKPDPage"));
+const HimpunanMenuPage = lazy(() => import("./pages/lkpd/kelas7/HimpunanMenuPage"));
+const GarisDanSudutMenuPage = lazy(() => import("./pages/lkpd/kelas7/GarisDanSudutMenuPage"));
+const SegitigaDanSegiempatMenuPage = lazy(() => import("./pages/lkpd/kelas7/SegitigaDanSegiempatMenuPage"));
+const PolaBilanganLKPDPage = lazy(() => import("./pages/lkpd/kelas8/pola-bilangan/PolaBilanganLKPDPage"));
+const PolaBilanganMenuPage = lazy(() => import("./pages/lkpd/kelas8/PolaBilanganMenuPage"));
+const KoordinatCartesiusLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/KoordinatCartesiusMenuPage"));
+const KoordinatCartesiusLKPDPage = lazy(() => import("./pages/lkpd/kelas8/koordinat-cartesius/KoordinatCartesiusLKPDPage"));
+const RelasiFungsiLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/RelasiFungsiMenuPage"));
+const RelasiFungsiLKPDPage = lazy(() => import("./pages/lkpd/kelas8/relasi-fungsi/RelasiFungsiLKPDPage"));
+const SPLDVLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/SPLDVMenuPage"));
+const SPLDVLKPDPage = lazy(() => import("./pages/lkpd/kelas8/spldv/SPLDVLKPDPage"));
+const PersamaanGarisLurusLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage"));
+const PersamaanGarisLurusLKPDPage = lazy(() => import("./pages/lkpd/kelas8/persamaan-garis-lurus/PersamaanGarisLurusLKPDPage"));
+const TeoremaPythagorasLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/TeoremaPythagorasMenuPage"));
+const TeoremaPythagorasLKPDPage = lazy(() => import("./pages/lkpd/kelas8/teorema-pythagoras/TeoremaPythagorasLKPDPage"));
+const LingkaranLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/LingkaranMenuPage"));
+const LingkaranLKPDPage = lazy(() => import("./pages/lkpd/kelas8/lingkaran/LingkaranLKPDPage"));
+const GarisSinggungLingkaranLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/GarisSinggungLingkaranMenuPage"));
+const GarisSinggungLingkaranLKPDPage = lazy(() => import("./pages/lkpd/kelas8/garis-singgung-lingkaran/GarisSinggungLingkaranLKPDPage"));
+const BangunRuangSisiDatarLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/BangunRuangSisiDatarMenuPage"));
+const KubusBRSDLKPDPage = lazy(() => import("./pages/lkpd/kelas8/bangun-ruang-sisi-datar/KubusLKPDPage"));
+const BalokBRSDLKPDPage = lazy(() => import("./pages/lkpd/kelas8/bangun-ruang-sisi-datar/BalokLKPDPage"));
+const PrismaBRSDLKPDPage = lazy(() => import("./pages/lkpd/kelas8/bangun-ruang-sisi-datar/PrismaLKPDPage"));
+const LimasBRSDLKPDPage = lazy(() => import("./pages/lkpd/kelas8/bangun-ruang-sisi-datar/LimasLKPDPage"));
+const GabunganBRSDLKPDPage = lazy(() => import("./pages/lkpd/kelas8/bangun-ruang-sisi-datar/GabunganBRSDLKPDPage"));
+const BilanganBerpangkatLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/BilanganBerpangkatMenuPage"));
+const PengertianNotasiPangkatLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/PengertianNotasiPangkatLKPDPage"));
+const SifatOperasiPangkatLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/SifatOperasiPangkatLKPDPage"));
+const BentukAkarLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/BentukAkarLKPDPage"));
+const NotasiIlmiahLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/NotasiIlmiahLKPDPage"));
+const KesebangunanKekongruenanLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/KesebangunanKekongruenanMenuPage"));
+const TransformasiGeometriLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/TransformasiGeometriMenuPage"));
+const TranslasiTGLKPDPage = lazy(() => import("./pages/lkpd/kelas9/transformasi-geometri/TranslasiLKPDPage"));
+const RefleksiTGLKPDPage = lazy(() => import("./pages/lkpd/kelas9/transformasi-geometri/RefleksiLKPDPage"));
+const RotasiTGLKPDPage = lazy(() => import("./pages/lkpd/kelas9/transformasi-geometri/RotasiLKPDPage"));
+const DilatasiTGLKPDPage = lazy(() => import("./pages/lkpd/kelas9/transformasi-geometri/DilatasiLKPDPage"));
+const BangunRuangSisiLengkungLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/BangunRuangSisiLengkungMenuPage"));
+const TabungBRSLLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/TabungLKPDPage"));
+const KerucutBRSLLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/KerucutLKPDPage"));
+const BolaBRSLLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/BolaLKPDPage"));
+const PerubahanLuasVolumeBRSLLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/PerubahanLuasVolumeLKPDPage"));
+const GabunganBRSLLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bangun-ruang-sisi-lengkung/GabunganBRSLLKPDPage"));
+const StatistikaLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/StatistikaMenuPage"));
+const PengantarStatistikaLKPDPage = lazy(() => import("./pages/lkpd/kelas9/statistika/PengantarStatistikaLKPDPage"));
+const PenyajianDataLKPDPage = lazy(() => import("./pages/lkpd/kelas9/statistika/PenyajianDataLKPDPage"));
+const RataRataStatistikaLKPDPage = lazy(() => import("./pages/lkpd/kelas9/statistika/RataRataLKPDPage"));
+const MedianModusLKPDPage = lazy(() => import("./pages/lkpd/kelas9/statistika/MedianModusLKPDPage"));
+const KuartilLKPDPage = lazy(() => import("./pages/lkpd/kelas9/statistika/KuartilLKPDPage"));
+const JangkauanSimpanganLKPDPage = lazy(() => import("./pages/lkpd/kelas9/statistika/JangkauanSimpanganLKPDPage"));
+const PeluangLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/PeluangMenuPage"));
+const RuangSampelLKPDPage = lazy(() => import("./pages/lkpd/kelas9/peluang/RuangSampelLKPDPage"));
+const PeluangEmpirikLKPDPage = lazy(() => import("./pages/lkpd/kelas9/peluang/PeluangEmpirikLKPDPage"));
+const PeluangTeoretikLKPDPage = lazy(() => import("./pages/lkpd/kelas9/peluang/PeluangTeoretikLKPDPage"));
+const FrekuensiHarapanLKPDPage = lazy(() => import("./pages/lkpd/kelas9/peluang/FrekuensiHarapanLKPDPage"));
+const KomplemenLKPDPage = lazy(() => import("./pages/lkpd/kelas9/peluang/KomplemenLKPDPage"));
+const PeluangKejadianMajemukLKPDPage = lazy(() => import("./pages/lkpd/kelas9/peluang/PeluangKejadianMajemukLKPDPage"));
+const PersamaanKuadratLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/PersamaanKuadratMenuPage"));
+const PKBentukUmumLKPDPage = lazy(() => import("./pages/lkpd/kelas9/persamaan-kuadrat/BentukUmumLKPDPage"));
+const PKPemfaktoranLKPDPage = lazy(() => import("./pages/lkpd/kelas9/persamaan-kuadrat/PemfaktoranLKPDPage"));
+const PKRumusKuadratikLKPDPage = lazy(() => import("./pages/lkpd/kelas9/persamaan-kuadrat/RumusKuadratikLKPDPage"));
+const PKPelengkapKuadratLKPDPage = lazy(() => import("./pages/lkpd/kelas9/persamaan-kuadrat/PelengkapKuadratLKPDPage"));
+const PKDiskriminanLKPDPage = lazy(() => import("./pages/lkpd/kelas9/persamaan-kuadrat/DiskriminanLKPDPage"));
+const PKMenyusunBaruLKPDPage = lazy(() => import("./pages/lkpd/kelas9/persamaan-kuadrat/MenyusunPKBaruLKPDPage"));
+const PKPenerapanKontekstualLKPDPage = lazy(() => import("./pages/lkpd/kelas9/persamaan-kuadrat/PenerapanKontekstualLKPDPage"));
+const FungsiKuadratLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/FungsiKuadratMenuPage"));
+const FKBentukUmumKarakteristikLKPDPage = lazy(() => import("./pages/lkpd/kelas9/fungsi-kuadrat/BentukUmumKarakteristikLKPDPage"));
+const FKTitikPotongLKPDPage = lazy(() => import("./pages/lkpd/kelas9/fungsi-kuadrat/TitikPotongLKPDPage"));
+const FKSumbuSimetriPuncakLKPDPage = lazy(() => import("./pages/lkpd/kelas9/fungsi-kuadrat/SumbuSimetriPuncakLKPDPage"));
+const FKMenggambarGrafikLKPDPage = lazy(() => import("./pages/lkpd/kelas9/fungsi-kuadrat/MenggambarGrafikLKPDPage"));
+const FKMenyusunFungsiLKPDPage = lazy(() => import("./pages/lkpd/kelas9/fungsi-kuadrat/MenyusunFungsiLKPDPage"));
+const FKPenerapanMaksMinLKPDPage = lazy(() => import("./pages/lkpd/kelas9/fungsi-kuadrat/PenerapanMaksMinLKPDPage"));
+const PPNLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aritmetika-sosial/PPNLKPDPage"));
+const PPhLKPDPage = lazy(() => import("./pages/lkpd/kelas7/aritmetika-sosial/PPhLKPDPage"));
+const PecahanCampuranLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-rasional/PecahanCampuranLKPDPage"));
+const PenjumlahanPenguranganPecahanLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-rasional/PenjumlahanPenguranganPecahanLKPDPage"));
+const PerkalianPecahanLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-rasional/PerkalianPecahanLKPDPage"));
+const PembagianPecahanLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-rasional/PembagianPecahanLKPDPage"));
+const BentukDesimalLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-rasional/BentukDesimalLKPDPage"));
+const OperasiDesimalLKPDPage = lazy(() => import("./pages/lkpd/kelas7/bilangan-rasional/OperasiDesimalLKPDPage"));
+const PLSVPtLSVMenuPage = lazy(() => import("./pages/lkpd/kelas7/PLSVPtLSVMenuPage"));
+const KalimatTerbukaTertutupLKPDPage = lazy(() => import("./pages/lkpd/kelas7/plsv-ptlsv/KalimatTerbukaTertutupLKPDPage"));
+const PengertianPLSVLKPDPage = lazy(() => import("./pages/lkpd/kelas7/plsv-ptlsv/PengertianPLSVLKPDPage"));
+const PenyelesaianPLSVLKPDPage = lazy(() => import("./pages/lkpd/kelas7/plsv-ptlsv/PenyelesaianPLSVLKPDPage"));
+const ModelMatematikaPLSVLKPDPage = lazy(() => import("./pages/lkpd/kelas7/plsv-ptlsv/ModelMatematikaPLSVLKPDPage"));
+const PengertianPtLSVLKPDPage = lazy(() => import("./pages/lkpd/kelas7/plsv-ptlsv/PengertianPtLSVLKPDPage"));
+const PenyelesaianPtLSVLKPDPage = lazy(() => import("./pages/lkpd/kelas7/plsv-ptlsv/PenyelesaianPtLSVLKPDPage"));
+const ModelMatematikaPtLSVLKPDPage = lazy(() => import("./pages/lkpd/kelas7/plsv-ptlsv/ModelMatematikaPtLSVLKPDPage"));
+const ATPPage = lazy(() => import("./pages/ATPPage"));
+const GuruLayout = lazy(() => import("./components/GuruLayout"));
+const RuangUntukGuruPage = lazy(() => import("./pages/RuangUntukGuruPage"));
+const NumatikGamePage = lazy(() => import("./pages/ruang-untuk-guru/NumatikGamePage"));
+const KeyakinanKelasPage = lazy(() => import("./pages/ruang-untuk-guru/KeyakinanKelasPage"));
+const PenilaianPembelajaranPage = lazy(() => import("./pages/ruang-untuk-guru/PenilaianPembelajaranPage"));
+const CapaianPembelajaranPage = lazy(() => import("./pages/ruang-untuk-guru/CapaianPembelajaranPage"));
+const RubrikPenilaianDimensiLulusanPage = lazy(() => import("./pages/ruang-untuk-guru/RubrikPenilaianDimensiLulusanPage"));
+const JurnalGuruPage = lazy(() => import("./pages/ruang-untuk-guru/JurnalGuruPage"));
+const AgendaGuruPage = lazy(() => import("./pages/ruang-untuk-guru/AgendaGuruPage"));
+const ProsemPage = lazy(() => import("./pages/ruang-untuk-guru/ProsemPage"));
+const ProsemTahunPage = lazy(() => import("./pages/ruang-untuk-guru/ProsemTahunPage"));
+const ProtaPage = lazy(() => import("./pages/ruang-untuk-guru/ProtaPage"));
+const ProtaTahunPage = lazy(() => import("./pages/ruang-untuk-guru/ProtaTahunPage"));
+const AnalisisAlokasiWaktuPage = lazy(() => import("./pages/ruang-untuk-guru/AnalisisAlokasiWaktuPage"));
+const KKTPPage = lazy(() => import("./pages/ruang-untuk-guru/KKTPPage"));
+const AbsensiSiswaPage = lazy(() => import("./pages/ruang-untuk-guru/AbsensiSiswaPage"));
+const PenilaianSiswaPage = lazy(() => import("./pages/ruang-untuk-guru/PenilaianSiswaPage"));
+const RancangRPPPage = lazy(() => import("./pages/ruang-untuk-guru/RancangRPPPage"));
+const KokulikulerPage = lazy(() => import("./pages/ruang-untuk-guru/KokulikulerPage"));
+const RPPPage = lazy(() => import("./pages/ruang-untuk-guru/RPPPage"));
+const RPPBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPBilanganBulatPage"));
+const RPPPenjumlahanBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPPenjumlahanBilanganBulatPage"));
+const RPPPenguranganBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPPenguranganBilanganBulatPage"));
+const RPPPerkalianBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPPerkalianBilanganBulatPage"));
+const RPPPembagianBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPPembagianBilanganBulatPage"));
+const RPPOperasiCampuranBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPOperasiCampuranBilanganBulatPage"));
+const RPPKpkFpbPage = lazy(() => import("./pages/ruang-untuk-guru/RPPKpkFpbPage"));
+const RPPMateriDynamicPage = lazy(() => import("./pages/ruang-untuk-guru/RPPMateriDynamicPage"));
+const RPPDetailDynamicPage = lazy(() => import("./pages/ruang-untuk-guru/RPPDetailDynamicPage"));
+const UlanganHarianPage = lazy(() => import("./pages/UlanganHarianPage"));
+const PesanKesanPage = lazy(() => import("./pages/PesanKesanPage"));
+const PetunjukPage = lazy(() => import("./pages/PetunjukPage"));
+const QuizPage = lazy(() => import("./pages/QuizPage"));
+const ReferensiPage = lazy(() => import("./pages/ReferensiPage"));
+const DonasiPage = lazy(() => import("./pages/DonasiPage"));
+const BiografiPage = lazy(() => import("./pages/BiografiPage"));
+const OlimpiadePage = lazy(() => import("./pages/OlimpiadePage"));
+const OlimpiadeBilanganBulatPage = lazy(() => import("./pages/OlimpiadeBilanganBulatPage"));
+const OlimpiadeBilanganRasionalPage = lazy(() => import("./pages/OlimpiadeBilanganRasionalPage"));
+const OlimpiadeBilanganBerpangkatPage = lazy(() => import("./pages/OlimpiadeBilanganBerpangkatPage"));
+const OlimpiadeStatistikaPage = lazy(() => import("./pages/OlimpiadeStatistikaPage"));
+const OlimpiadeBilanganIrasionalPage = lazy(() => import("./pages/OlimpiadeBilanganIrasionalPage"));
+const OlimpiadeKPKFPBPage = lazy(() => import("./pages/OlimpiadeKPKFPBPage"));
+const OlimpiadeModuloPage = lazy(() => import("./pages/OlimpiadeModuloPage"));
+const OlimpiadeHimpunanPage = lazy(() => import("./pages/OlimpiadeHimpunanPage"));
+const OlimpiadeRelasiFungsiPage = lazy(() => import("./pages/OlimpiadeRelasiFungsiPage"));
+const OlimpiadePerbandinganPage = lazy(() => import("./pages/OlimpiadePerbandinganPage"));
+const OlimpiadeAljabarPage = lazy(() => import("./pages/OlimpiadeAljabarPage"));
+const OlimpiadePolaBilanganPage = lazy(() => import("./pages/OlimpiadePolaBilanganPage"));
+const OlimpiadeSPLDVPage = lazy(() => import("./pages/OlimpiadeSPLDVPage"));
+const OlimpiadeGarisSudutPage = lazy(() => import("./pages/OlimpiadeGarisSudutPage"));
+const OlimpiadeKoordinatCartesiusPage = lazy(() => import("./pages/OlimpiadeKoordinatCartesiusPage"));
+const OlimpiadeTeoremaPage = lazy(() => import("./pages/OlimpiadeTeoremaPage"));
+const OlimpiadeSegitigaSegiempatPage = lazy(() => import("./pages/OlimpiadeSegitigaSegiempatPage"));
+const OlimpiadeLingkaranPage = lazy(() => import("./pages/OlimpiadeLingkaranPage"));
+const OlimpiadeBangunRuangSisiDatarPage = lazy(() => import("./pages/OlimpiadeBangunRuangSisiDatarPage"));
+const OlimpiadeBangunRuangSisiLengkungPage = lazy(() => import("./pages/OlimpiadeBangunRuangSisiLengkungPage"));
+const OlimpiadePLSVPage = lazy(() => import("./pages/OlimpiadePLSVPage"));
+const OlimpiadePersamaanGarisPage = lazy(() => import("./pages/OlimpiadePersamaanGarisPage"));
+const OlimpiadePersamaanKuadratPage = lazy(() => import("./pages/OlimpiadePersamaanKuadratPage"));
+const OlimpiadeFungsiKuadratPage = lazy(() => import("./pages/OlimpiadeFungsiKuadratPage"));
+const OlimpiadeAritmetikaSosialPage = lazy(() => import("./pages/OlimpiadeAritmetikaSosialPage"));
+const OlimpiadeKesebangunanPage = lazy(() => import("./pages/OlimpiadeKesebangunanPage"));
+const OlimpiadeTransformasiPage = lazy(() => import("./pages/OlimpiadeTransformasiPage"));
+const OlimpiadePeluangPage = lazy(() => import("./pages/OlimpiadePeluangPage"));
+const TKAPage = lazy(() => import("./pages/TKAPage"));
+const TKALatihan1Page = lazy(() => import("./pages/tka/TKALatihan1Page"));
+const TKALatihan2Page = lazy(() => import("./pages/tka/TKALatihan2Page"));
+const TKALatihan3Page = lazy(() => import("./pages/tka/TKALatihan3Page"));
+const TKALatihan4Page = lazy(() => import("./pages/tka/TKALatihan4Page"));
+const TKALatihan5Page = lazy(() => import("./pages/tka/TKALatihan5Page"));
+const TKATipsPage = lazy(() => import("./pages/tka/TKATipsPage"));
+const PapanPeringkatPage = lazy(() => import("./pages/PapanPeringkatPage"));
+const BankSoalPage = lazy(() => import("./pages/BankSoalPage"));
+const BankSoalBilanganBulatPage = lazy(() => import("./pages/bank-soal/BilanganBulatPage"));
+const BankSoalBilanganRasionalPage = lazy(() => import("./pages/bank-soal/BilanganRasionalPage"));
+const BankSoalSegitigaSegiempatPage = lazy(() => import("./pages/bank-soal/SegitigaSegiempatPage"));
+const BankSoalHimpunanPage = lazy(() => import("./pages/bank-soal/HimpunanPage"));
+const BankSoalKoordinatCartesiusPage = lazy(() => import("./pages/bank-soal/KoordinatCartesiusPage"));
+const BankSoalAljabarPage = lazy(() => import("./pages/bank-soal/AljabarPage"));
+const BankSoalPLSVPage = lazy(() => import("./pages/bank-soal/PLSVPage"));
+const BankSoalPerbandinganPage = lazy(() => import("./pages/bank-soal/PerbandinganPage"));
+const BankSoalAritmetikaSosialPage = lazy(() => import("./pages/bank-soal/AritmetikaSosialPage"));
+const BankSoalPolaBilanganPage = lazy(() => import("./pages/bank-soal/PolaBilanganPage"));
+const BankSoalRelasiFungsiPage = lazy(() => import("./pages/bank-soal/RelasiFungsiPage"));
+const BankSoalGarisSudutPage = lazy(() => import("./pages/bank-soal/GarisSudutPage"));
+const BankSoalSPLDVPage = lazy(() => import("./pages/bank-soal/SPLDVPage"));
+const BankSoalPersamaanGarisLurusPage = lazy(() => import("./pages/bank-soal/PersamaanGarisLurusPage"));
+const BankSoalPeluangPage = lazy(() => import("./pages/bank-soal/PeluangPage"));
+const BankSoalTeoremaPythagorasPage = lazy(() => import("./pages/bank-soal/TeoremaPythagorasPage"));
+const BankSoalLingkaranPage = lazy(() => import("./pages/bank-soal/LingkaranPage"));
+const BankSoalBangunRuangSisiDatarPage = lazy(() => import("./pages/bank-soal/BangunRuangSisiDatarPage"));
+const BankSoalBangunRuangSisiLengkungPage = lazy(() => import("./pages/bank-soal/BangunRuangSisiLengkungPage"));
+const BankSoalBilanganBerpangkatPage = lazy(() => import("./pages/bank-soal/BilanganBerpangkatPage"));
+const BankSoalPersamaanKuadratPage = lazy(() => import("./pages/bank-soal/PersamaanKuadratPage"));
+const BankSoalFungsiKuadratPage = lazy(() => import("./pages/bank-soal/FungsiKuadratPage"));
+const BankSoalStatistikaPage = lazy(() => import("./pages/bank-soal/StatistikaPage"));
+const BankSoalGarisSinggungLingkaranPage = lazy(() => import("./pages/bank-soal/GarisSinggungLingkaranPage"));
+const BankSoalKesebangunanPage = lazy(() => import("./pages/bank-soal/KesebangunanPage"));
+const BankSoalTransformasiGeometriPage = lazy(() => import("./pages/bank-soal/TransformasiGeometriPage"));
+const ChatAIPage = lazy(() => import("./pages/ChatAIPage"));
+const PengaturanPage = lazy(() => import("./pages/PengaturanPage"));
+const TentangAplikasiPage = lazy(() => import("./pages/TentangAplikasiPage"));
+const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
+const KalkulatorScientificPage = lazy(() => import("./pages/KalkulatorScientificPage"));
+const VideoPembelajaranPage = lazy(() => import("./pages/VideoPembelajaranPage"));
+const KumpulanRumusPage = lazy(() => import("./pages/KumpulanRumusPage"));
+const KonversiSatuanPage = lazy(() => import("./pages/KonversiSatuanPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const MenghitungCepatPage = lazy(() => import("./pages/MenghitungCepatPage"));
+const PerkalianDengan11Page = lazy(() => import("./pages/menghitung-cepat/PerkalianDengan11Page"));
+const KuadratBerakhiran5Page = lazy(() => import("./pages/menghitung-cepat/KuadratBerakhiran5Page"));
+const KuadratCepatPage = lazy(() => import("./pages/menghitung-cepat/KuadratCepatPage"));
+const PerkalianDekat100Page = lazy(() => import("./pages/menghitung-cepat/PerkalianDekat100Page"));
+const PersentaseCepatPage = lazy(() => import("./pages/menghitung-cepat/PersentaseCepatPage"));
+const PenjumlahanPenguranganCepatPage = lazy(() => import("./pages/menghitung-cepat/PenjumlahanPenguranganPage"));
+const PerkalianDuaDigitPage = lazy(() => import("./pages/menghitung-cepat/PerkalianDuaDigitPage"));
+const PembagianCepatPage = lazy(() => import("./pages/menghitung-cepat/PembagianCepatPage"));
+const TabelReferensiPage = lazy(() => import("./pages/menghitung-cepat/TabelReferensiPage"));
+const LatihanFlashcardPage = lazy(() => import("./pages/menghitung-cepat/LatihanFlashcardPage"));
+
+// Latihan Mandiri
+const LatihanMandiriPage = lazy(() => import("./pages/LatihanMandiriPage"));
+const LatihanMandiriKelas7Page = lazy(() => import("./pages/LatihanMandiriKelas7Page"));
+const LatihanMandiriKelas8Page = lazy(() => import("./pages/LatihanMandiriKelas8Page"));
+const LatihanMandiriKelas9Page = lazy(() => import("./pages/LatihanMandiriKelas9Page"));
 
 // Kelas 7 Topic Pages
-import BilanganBulatK7Page from "./pages/latihan-mandiri/kelas7/BilanganBulatPage";
-import PenjumlahanBilanganBulatK7Page from "./pages/latihan-mandiri/kelas7/bilangan-bulat/PenjumlahanPage";
-import PenguranganBilanganBulatK7Page from "./pages/latihan-mandiri/kelas7/bilangan-bulat/PenguranganPage";
-import PerkalianBilanganBulatK7Page from "./pages/latihan-mandiri/kelas7/bilangan-bulat/PerkalianPage";
-import PembagianBilanganBulatK7Page from "./pages/latihan-mandiri/kelas7/bilangan-bulat/PembagianPage";
-import OperasiCampuranBilanganBulatK7Page from "./pages/latihan-mandiri/kelas7/bilangan-bulat/OperasiCampuranPage";
-import KPKFPBBilanganBulatK7Page from "./pages/latihan-mandiri/kelas7/bilangan-bulat/KPKFPBPage";
-import BilanganRasionalK7Page from "./pages/latihan-mandiri/kelas7/BilanganRasionalPage";
-import ArtiPecahanSenilaiMembandingkanK7Page from "./pages/latihan-mandiri/kelas7/pecahan/ArtiPecahanSenilaiMembandingkanPage";
-import PecahanCampuranPersenK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PecahanCampuranPersenPage";
-import PenjumlahanPecahanK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PenjumlahanPecahanPage";
-import PerkalianPecahanK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PerkalianPecahanPage";
-import PembagianPecahanK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PembagianPecahanPage";
-import BentukDesimalK7Page from "./pages/latihan-mandiri/kelas7/pecahan/BentukDesimalPage";
-import PenjumlahanPenguranganDesimalK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PenjumlahanPenguranganDesimalPage";
-import PerkalianDesimalK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PerkalianDesimalPage";
-import PembagianDesimalK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PembagianDesimalPage";
-import PembulatanDesimalK7Page from "./pages/latihan-mandiri/kelas7/pecahan/PembulatanDesimalPage";
-import PengertianUnsurAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/PengertianUnsurAljabarPage";
-import PenjumlahanPenguranganAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/PenjumlahanPenguranganAljabarPage";
-import PerkalianAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/PerkalianAljabarPage";
-import PembagianAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/PembagianAljabarPage";
-import PemangkatanAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/PemangkatanAljabarPage";
-import SubstitusiBilanganAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/SubstitusiBilanganAljabarPage";
-import FaktorisasiAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/FaktorisasiAljabarPage";
-import MenyederhanakanPecahanAljabarK7Page from "./pages/latihan-mandiri/kelas7/aljabar/MenyederhanakanPecahanAljabarPage";
-import AljabarK7Page from "./pages/latihan-mandiri/kelas7/AljabarPage";
-import PLSVPtLSVK7Page from "./pages/latihan-mandiri/kelas7/PLSVPtLSVPage";
-import KalimatTerbukaTertutupK7Page from "./pages/latihan-mandiri/kelas7/plsv-ptlsv/KalimatTerbukaTertutupPage";
-import PengertianPLSVK7Page from "./pages/latihan-mandiri/kelas7/plsv-ptlsv/PengertianPLSVPage";
-import PenyelesaianPLSVK7Page from "./pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPLSVPage";
-import ModelMatematikaPLSVK7Page from "./pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPLSVPage";
-import PenyelesaianPtLSVK7Page from "./pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPtLSVPage";
-import ModelMatematikaPtLSVK7Page from "./pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPtLSVPage";
-import PerbandinganK7Page from "./pages/latihan-mandiri/kelas7/PerbandinganPage";
-import PerbandinganUmumK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganUmumPage";
-import PerbandinganSenilaiK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSenilaiPage";
-import PerbandinganCampuranK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganCampuranPage";
-import PerbandinganBertingkatK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganBertingkatPage";
-import PerbandinganSkalaK7Page from "./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSkalaPage";
-import AritmetikaSosialK7Page from "./pages/latihan-mandiri/kelas7/AritmetikaSosialPage";
-import JualBeliUntungRugiK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/JualBeliUntungRugiPage";
-import DiskonK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/DiskonPage";
-import BrutoNettoTaraK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/BrutoNettoTaraPage";
-import BungaTunggalK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/BungaTunggalPage";
-import PPNK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPNPage";
-import PPhK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPhPage";
-import GarisDanSudutK7Page from "./pages/latihan-mandiri/kelas7/GarisDanSudutPage";
-import HubunganDuaGarisK7Page from "./pages/latihan-mandiri/kelas7/garis-dan-sudut/HubunganDuaGarisPage";
-import SudutPelurusPenyikuBertolakK7Page from "./pages/latihan-mandiri/kelas7/garis-dan-sudut/SudutPelurusPenyikuBertolakPage";
-import SifatSudutDuaGarisSejajarK7Page from "./pages/latihan-mandiri/kelas7/garis-dan-sudut/SifatSudutDuaGarisSejajarPage";
-import JumlahSudutSegiBanyakK7Page from "./pages/latihan-mandiri/kelas7/garis-dan-sudut/JumlahSudutPadaSegiBanyakPage";
-import SegitigaSegiempatK7Page from "./pages/latihan-mandiri/kelas7/SegitigaSegiempatPage";
-import GarisBeratBagiTinggiLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/GarisBeratBagiTinggiPage";
-import KelilingSegitigaSegiempatLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/KelilingSegitigaSegiempatPage";
-import LuasSegitigaLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegitigaPage";
-import LuasSegiempatLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegiempatPage";
-import KelilingLuasBangunTakBeraturanLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/KelilingLuasBangunTakBeraturanPage";
-import PengertianKeanggotaanHimpunanLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/PengertianKeanggotaanPage";
-import MenyatakanHimpunanLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/MenyatakanHimpunanPage";
-import DiagramVennLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/DiagramVennPage";
-import HimpunanBagianLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/HimpunanBagianPage";
-import OperasiHimpunanLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/OperasiHimpunanPage";
-import HimpunanK7Page from "./pages/latihan-mandiri/kelas7/HimpunanPage";
+const BilanganBulatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/BilanganBulatPage"));
+const PenjumlahanBilanganBulatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/bilangan-bulat/PenjumlahanPage"));
+const PenguranganBilanganBulatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/bilangan-bulat/PenguranganPage"));
+const PerkalianBilanganBulatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/bilangan-bulat/PerkalianPage"));
+const PembagianBilanganBulatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/bilangan-bulat/PembagianPage"));
+const OperasiCampuranBilanganBulatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/bilangan-bulat/OperasiCampuranPage"));
+const KPKFPBBilanganBulatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/bilangan-bulat/KPKFPBPage"));
+const BilanganRasionalK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/BilanganRasionalPage"));
+const ArtiPecahanSenilaiMembandingkanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/ArtiPecahanSenilaiMembandingkanPage"));
+const PecahanCampuranPersenK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PecahanCampuranPersenPage"));
+const PenjumlahanPecahanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PenjumlahanPecahanPage"));
+const PerkalianPecahanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PerkalianPecahanPage"));
+const PembagianPecahanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PembagianPecahanPage"));
+const BentukDesimalK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/BentukDesimalPage"));
+const PenjumlahanPenguranganDesimalK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PenjumlahanPenguranganDesimalPage"));
+const PerkalianDesimalK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PerkalianDesimalPage"));
+const PembagianDesimalK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PembagianDesimalPage"));
+const PembulatanDesimalK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/pecahan/PembulatanDesimalPage"));
+const PengertianUnsurAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/PengertianUnsurAljabarPage"));
+const PenjumlahanPenguranganAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/PenjumlahanPenguranganAljabarPage"));
+const PerkalianAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/PerkalianAljabarPage"));
+const PembagianAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/PembagianAljabarPage"));
+const PemangkatanAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/PemangkatanAljabarPage"));
+const SubstitusiBilanganAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/SubstitusiBilanganAljabarPage"));
+const FaktorisasiAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/FaktorisasiAljabarPage"));
+const MenyederhanakanPecahanAljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aljabar/MenyederhanakanPecahanAljabarPage"));
+const AljabarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/AljabarPage"));
+const PLSVPtLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/PLSVPtLSVPage"));
+const KalimatTerbukaTertutupK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/KalimatTerbukaTertutupPage"));
+const PengertianPLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/PengertianPLSVPage"));
+const PenyelesaianPLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPLSVPage"));
+const ModelMatematikaPLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPLSVPage"));
+const PenyelesaianPtLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPtLSVPage"));
+const ModelMatematikaPtLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPtLSVPage"));
+const PerbandinganK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/PerbandinganPage"));
+const PerbandinganUmumK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganUmumPage"));
+const PerbandinganSenilaiK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSenilaiPage"));
+const PerbandinganCampuranK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganCampuranPage"));
+const PerbandinganBertingkatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganBertingkatPage"));
+const PerbandinganSkalaK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSkalaPage"));
+const AritmetikaSosialK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/AritmetikaSosialPage"));
+const JualBeliUntungRugiK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aritmetika-sosial/JualBeliUntungRugiPage"));
+const DiskonK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aritmetika-sosial/DiskonPage"));
+const BrutoNettoTaraK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aritmetika-sosial/BrutoNettoTaraPage"));
+const BungaTunggalK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aritmetika-sosial/BungaTunggalPage"));
+const PPNK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPNPage"));
+const PPhK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPhPage"));
+const GarisDanSudutK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/GarisDanSudutPage"));
+const HubunganDuaGarisK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/garis-dan-sudut/HubunganDuaGarisPage"));
+const SudutPelurusPenyikuBertolakK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/garis-dan-sudut/SudutPelurusPenyikuBertolakPage"));
+const SifatSudutDuaGarisSejajarK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/garis-dan-sudut/SifatSudutDuaGarisSejajarPage"));
+const JumlahSudutSegiBanyakK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/garis-dan-sudut/JumlahSudutPadaSegiBanyakPage"));
+const SegitigaSegiempatK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/SegitigaSegiempatPage"));
+const GarisBeratBagiTinggiLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/segitiga-segiempat/GarisBeratBagiTinggiPage"));
+const KelilingSegitigaSegiempatLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/segitiga-segiempat/KelilingSegitigaSegiempatPage"));
+const LuasSegitigaLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegitigaPage"));
+const LuasSegiempatLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegiempatPage"));
+const KelilingLuasBangunTakBeraturanLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/segitiga-segiempat/KelilingLuasBangunTakBeraturanPage"));
+const PengertianKeanggotaanHimpunanLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/himpunan/PengertianKeanggotaanPage"));
+const MenyatakanHimpunanLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/himpunan/MenyatakanHimpunanPage"));
+const DiagramVennLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/himpunan/DiagramVennPage"));
+const HimpunanBagianLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/himpunan/HimpunanBagianPage"));
+const OperasiHimpunanLatihanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/himpunan/OperasiHimpunanPage"));
+const HimpunanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/HimpunanPage"));
 
 // Kelas 8 Topic Pages
-import PolaBilanganK8Page from "./pages/latihan-mandiri/kelas8/PolaBilanganPage";
-import PengertianPolaK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PengertianPolaPage";
-import PolaKhususK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaKhususPage";
-import PolaAritmetikaK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaAritmetikaPage";
-import PolaGeometriK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaGeometriPage";
-import KoordinatCartesiusK8Page from "./pages/latihan-mandiri/kelas8/KoordinatCartesiusPage";
-import UnsurUnsurCartesiusK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/UnsurUnsurPage";
-import PosisiRelatifTitikAcuanK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage";
-import JarakTitikGarisK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/JarakTitikGarisPage";
-import PosisiRelatifGarisK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifPage";
-import RelasiFungsiK8Page from "./pages/latihan-mandiri/kelas8/RelasiFungsiPage";
-import PengertianRelasiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianRelasiPage";
-import PengertianFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianFungsiPage";
-import BanyakFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/BanyakFungsiPage";
-import NotasiFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/NotasiFungsiPage";
-import GrafikFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/GrafikFungsiPage";
-import SPLDVK8Page from "./pages/latihan-mandiri/kelas8/SPLDVPage";
-import DefinisiSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/DefinisiSPLDVPage";
-import MetodeGrafikSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeGrafikPage";
-import MetodeSubstitusiSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeSubstitusiPage";
-import MetodeEliminasiSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeEliminasiPage";
-import MetodeCampuranSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeCampuranPage";
-import ModelSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/ModelSPLDVPage";
-import PenyelesaianMasalahSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/PenyelesaianMasalahPage";
-import PersamaanGarisLurusK8Page from "./pages/latihan-mandiri/kelas8/PersamaanGarisLurusPage";
-import GrafikPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/GrafikPGLPage";
-import GradienK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/GradienPage";
-import MenentukanPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/MenentukanPGLPage";
-import Hubungan2GarisK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/Hubungan2GarisPage";
-import AplikasiKontekstualPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/AplikasiKontekstualPage";
-import TeoremaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/TeoremaPythagorasPage";
-import PembuktianPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/PembuktianPage";
-import MenghitungPanjangPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/MenghitungPanjangPage";
-import TriplePythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/TriplePythagorasPage";
-import JenisSegitigaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/JenisSegitigaPage";
-import SudutKhususPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/SudutKhususPage";
-import MasalahKontekstualPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/MasalahKontekstualPage";
-import LingkaranK8Page from "./pages/latihan-mandiri/kelas8/LingkaranPage";
-import UnsurUnsurLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/UnsurUnsurPage";
-import KelilingLuasLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/KelilingLuasPage";
-import KaitanBangunDatarLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/KaitanBangunDatarPage";
-import BusurJuringLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/BusurJuringPage";
-import SudutPusatKelilingLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/SudutPusatKelilingPage";
-import PenerapanKontekstualLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/PenerapanKontekstualPage";
-import GarisSinggungLingkaranK8Page from "./pages/latihan-mandiri/kelas8/GarisSinggungLingkaranPage";
-import PengertianGSLK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/PengertianPage";
-import MenghitungPanjangGSLK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/MenghitungPanjangPage";
-import GSPLK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/GSPLPage";
-import GSPDK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/GSPDPage";
-import SabukLilitanK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/SabukLilitanPage";
-import BangunRuangSisiDatarK8Page from "./pages/latihan-mandiri/kelas8/BangunRuangSisiDatarPage";
+const PolaBilanganK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/PolaBilanganPage"));
+const PengertianPolaK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PengertianPolaPage"));
+const PolaKhususK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaKhususPage"));
+const PolaAritmetikaK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaAritmetikaPage"));
+const PolaGeometriK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaGeometriPage"));
+const KoordinatCartesiusK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/KoordinatCartesiusPage"));
+const UnsurUnsurCartesiusK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/UnsurUnsurPage"));
+const PosisiRelatifTitikAcuanK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage"));
+const JarakTitikGarisK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/JarakTitikGarisPage"));
+const PosisiRelatifGarisK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifPage"));
+const RelasiFungsiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/RelasiFungsiPage"));
+const PengertianRelasiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianRelasiPage"));
+const PengertianFungsiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianFungsiPage"));
+const BanyakFungsiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/relasi-fungsi/BanyakFungsiPage"));
+const NotasiFungsiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/relasi-fungsi/NotasiFungsiPage"));
+const GrafikFungsiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/relasi-fungsi/GrafikFungsiPage"));
+const SPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/SPLDVPage"));
+const DefinisiSPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/spldv/DefinisiSPLDVPage"));
+const MetodeGrafikSPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/spldv/MetodeGrafikPage"));
+const MetodeSubstitusiSPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/spldv/MetodeSubstitusiPage"));
+const MetodeEliminasiSPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/spldv/MetodeEliminasiPage"));
+const MetodeCampuranSPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/spldv/MetodeCampuranPage"));
+const ModelSPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/spldv/ModelSPLDVPage"));
+const PenyelesaianMasalahSPLDVK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/spldv/PenyelesaianMasalahPage"));
+const PersamaanGarisLurusK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/PersamaanGarisLurusPage"));
+const GrafikPGLK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/GrafikPGLPage"));
+const GradienK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/GradienPage"));
+const MenentukanPGLK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/MenentukanPGLPage"));
+const Hubungan2GarisK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/Hubungan2GarisPage"));
+const AplikasiKontekstualPGLK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/AplikasiKontekstualPage"));
+const TeoremaPythagorasK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/TeoremaPythagorasPage"));
+const PembuktianPythagorasK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/teorema-pythagoras/PembuktianPage"));
+const MenghitungPanjangPythagorasK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/teorema-pythagoras/MenghitungPanjangPage"));
+const TriplePythagorasK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/teorema-pythagoras/TriplePythagorasPage"));
+const JenisSegitigaPythagorasK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/teorema-pythagoras/JenisSegitigaPage"));
+const SudutKhususPythagorasK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/teorema-pythagoras/SudutKhususPage"));
+const MasalahKontekstualPythagorasK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/teorema-pythagoras/MasalahKontekstualPage"));
+const LingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/LingkaranPage"));
+const UnsurUnsurLingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/lingkaran/UnsurUnsurPage"));
+const KelilingLuasLingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/lingkaran/KelilingLuasPage"));
+const KaitanBangunDatarLingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/lingkaran/KaitanBangunDatarPage"));
+const BusurJuringLingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/lingkaran/BusurJuringPage"));
+const SudutPusatKelilingLingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/lingkaran/SudutPusatKelilingPage"));
+const PenerapanKontekstualLingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/lingkaran/PenerapanKontekstualPage"));
+const GarisSinggungLingkaranK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/GarisSinggungLingkaranPage"));
+const PengertianGSLK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/PengertianPage"));
+const MenghitungPanjangGSLK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/MenghitungPanjangPage"));
+const GSPLK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/GSPLPage"));
+const GSPDK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/GSPDPage"));
+const SabukLilitanK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/SabukLilitanPage"));
+const BangunRuangSisiDatarK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/BangunRuangSisiDatarPage"));
+const KubusLMK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/KubusPage"));
+const BalokLMK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/BalokPage"));
+const PrismaLMK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/PrismaPage"));
+const LimasLMK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/LimasPage"));
+const MasalahKontekstualBRSDLMK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/MasalahKontekstualPage"));
+const BRSDGabunganLMK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar-gabungan/GabunganPage"));
 
 // Kelas 9 Topic Pages
-import BilanganBerpangkatK9Page from "./pages/latihan-mandiri/kelas9/BilanganBerpangkatPage";
-import PengertianNotasiK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/PengertianNotasiPage";
-import SifatSifatK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/SifatSifatPage";
-import PangkatNolNegatifPecahanK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/PangkatNolNegatifPecahanPage";
-import BentukAkarK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/BentukAkarPage";
-import NotasiIlmiahK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/NotasiIlmiahPage";
-import KesebangunanKekongruenK9Page from "./pages/latihan-mandiri/kelas9/KesebangunanKekongruenPage";
-import DefinisiKesebangunanK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/DefinisiKesebangunanPage";
-import MenghitungRusukK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/MenghitungRusukPage";
-import SegitigaSebangunK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/SegitigaSebangunPage";
-import RasioRusukK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/RasioRusukPage";
-import KekongruenBangunDatarK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage";
-import TransformasiGeometriK9Page from "./pages/latihan-mandiri/kelas9/TransformasiGeometriPage";
-import TranslasiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/TranslasiPage";
-import RefleksiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/RefleksiPage";
-import RotasiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/RotasiPage";
-import DilatsiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/DilatsiPage";
-import BangunRuangSisiLengkungK9Page from "./pages/latihan-mandiri/kelas9/BangunRuangSisiLengkungPage";
-import TabungLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/TabungPage";
-import KerucutLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/KerucutPage";
-import BolaLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/BolaPage";
-import PerubahanVolumeLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/PerubahanVolumePage";
-import GabunganLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/GabunganPage";
-import StatistikaK9Page from "./pages/latihan-mandiri/kelas9/StatistikaPage";
-import PengantarStatistikaLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/PengantarStatistikaPage";
-import PenyajianDataLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/PenyajianDataPage";
-import RataRataLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/RataRataPage";
-import MedianModusLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/MedianModusPage";
-import KuartilLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/KuartilPage";
-import PenyebaranDataLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/PenyebaranDataPage";
-import PeluangK9Page from "./pages/latihan-mandiri/kelas9/PeluangPage";
-import RuangSampelLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/RuangSampelPage";
-import PeluangEmpirikLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/PeluangEmpirikPage";
-import PeluangTeoretikLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/PeluangTeoretikPage";
-import FrekuensiHarapanLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/FrekuensiHarapanPage";
-import KomplementLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/KomplementPage";
-import PeluangKejadianMajemukLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/PeluangKejadianMajemukPage";
-import PersamaanKuadratK9Page from "./pages/latihan-mandiri/kelas9/PersamaanKuadratPage";
-import FungsiKuadratK9Page from "./pages/latihan-mandiri/kelas9/FungsiKuadratPage";
-import FKBentukUmumKarakteristikPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/BentukUmumKarakteristikPage";
-import FKTitikPotongPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/TitikPotongPage";
-import FKSumbuSimetriPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/SumbuSimetriPage";
-import FKMenggambarGrafikPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/MenggambarGrafikPage";
-import FKMenyusunFungsiPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/MenyusunFungsiPage";
-import FKPenerapanNilaiMaksMinPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/PenerapanNilaiMaksMinPage";
-import PKBentukUmumPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/BentukUmumPage";
-import PKPemfaktoranPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PemfaktoranPage";
-import PKRumusKuadratikPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/RumusKuadratikPage";
-import PKPelengkapKuadratPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PelengkapKuadratPage";
-import PKDiskriminanPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/DiskriminanPage";
-import PKMenyusunBaruPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/MenyusunPKBaruPage";
-import PKPenerapanKontekstualPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PenerapanKontekstualPage";
+const BilanganBerpangkatK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/BilanganBerpangkatPage"));
+const PengertianNotasiK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bilangan-berpangkat/PengertianNotasiPage"));
+const SifatSifatK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bilangan-berpangkat/SifatSifatPage"));
+const PangkatNolNegatifPecahanK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bilangan-berpangkat/PangkatNolNegatifPecahanPage"));
+const BentukAkarK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bilangan-berpangkat/BentukAkarPage"));
+const NotasiIlmiahK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bilangan-berpangkat/NotasiIlmiahPage"));
+const KesebangunanKekongruenK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/KesebangunanKekongruenPage"));
+const DefinisiKesebangunanK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/DefinisiKesebangunanPage"));
+const MenghitungRusukK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/MenghitungRusukPage"));
+const SegitigaSebangunK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/SegitigaSebangunPage"));
+const RasioRusukK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/RasioRusukPage"));
+const KekongruenBangunDatarK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage"));
+const TransformasiGeometriK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/TransformasiGeometriPage"));
+const TranslasiK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/transformasi-geometri/TranslasiPage"));
+const RefleksiK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/transformasi-geometri/RefleksiPage"));
+const RotasiK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/transformasi-geometri/RotasiPage"));
+const DilatsiK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/transformasi-geometri/DilatsiPage"));
+const BangunRuangSisiLengkungK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/BangunRuangSisiLengkungPage"));
+const TabungLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/TabungPage"));
+const KerucutLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/KerucutPage"));
+const BolaLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/BolaPage"));
+const PerubahanVolumeLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/PerubahanVolumePage"));
+const GabunganLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/GabunganPage"));
+const StatistikaK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/StatistikaPage"));
+const PengantarStatistikaLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/statistika/PengantarStatistikaPage"));
+const PenyajianDataLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/statistika/PenyajianDataPage"));
+const RataRataLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/statistika/RataRataPage"));
+const MedianModusLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/statistika/MedianModusPage"));
+const KuartilLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/statistika/KuartilPage"));
+const PenyebaranDataLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/statistika/PenyebaranDataPage"));
+const PeluangK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/PeluangPage"));
+const RuangSampelLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/peluang/RuangSampelPage"));
+const PeluangEmpirikLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/peluang/PeluangEmpirikPage"));
+const PeluangTeoretikLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/peluang/PeluangTeoretikPage"));
+const FrekuensiHarapanLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/peluang/FrekuensiHarapanPage"));
+const KomplementLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/peluang/KomplementPage"));
+const PeluangKejadianMajemukLMK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/peluang/PeluangKejadianMajemukPage"));
+const PersamaanKuadratK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/PersamaanKuadratPage"));
+const FungsiKuadratK9Page = lazy(() => import("./pages/latihan-mandiri/kelas9/FungsiKuadratPage"));
+const FKBentukUmumKarakteristikPage = lazy(() => import("./pages/latihan-mandiri/kelas9/fungsi-kuadrat/BentukUmumKarakteristikPage"));
+const FKTitikPotongPage = lazy(() => import("./pages/latihan-mandiri/kelas9/fungsi-kuadrat/TitikPotongPage"));
+const FKSumbuSimetriPage = lazy(() => import("./pages/latihan-mandiri/kelas9/fungsi-kuadrat/SumbuSimetriPage"));
+const FKMenggambarGrafikPage = lazy(() => import("./pages/latihan-mandiri/kelas9/fungsi-kuadrat/MenggambarGrafikPage"));
+const FKMenyusunFungsiPage = lazy(() => import("./pages/latihan-mandiri/kelas9/fungsi-kuadrat/MenyusunFungsiPage"));
+const FKPenerapanNilaiMaksMinPage = lazy(() => import("./pages/latihan-mandiri/kelas9/fungsi-kuadrat/PenerapanNilaiMaksMinPage"));
+const PKBentukUmumPage = lazy(() => import("./pages/latihan-mandiri/kelas9/persamaan-kuadrat/BentukUmumPage"));
+const PKPemfaktoranPage = lazy(() => import("./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PemfaktoranPage"));
+const PKRumusKuadratikPage = lazy(() => import("./pages/latihan-mandiri/kelas9/persamaan-kuadrat/RumusKuadratikPage"));
+const PKPelengkapKuadratPage = lazy(() => import("./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PelengkapKuadratPage"));
+const PKDiskriminanPage = lazy(() => import("./pages/latihan-mandiri/kelas9/persamaan-kuadrat/DiskriminanPage"));
+const PKMenyusunBaruPage = lazy(() => import("./pages/latihan-mandiri/kelas9/persamaan-kuadrat/MenyusunPKBaruPage"));
+const PKPenerapanKontekstualPage = lazy(() => import("./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PenerapanKontekstualPage"));
 
 // Math Game Arena Pages
-import MathGameArenaPage from "./pages/MathGameArenaPage";
-import MathGameArenaKelas7Page from "./pages/MathGameArenaKelas7Page";
-import MathGameArenaKelas8Page from "./pages/MathGameArenaKelas8Page";
-import MathGameArenaKelas9Page from "./pages/MathGameArenaKelas9Page";
-import MathGameArenaUmumPage from "./pages/MathGameArenaUmumPage";
-import CarRacingGamePage from "./pages/math-game-arena/umum/CarRacingGamePage";
-import TetrisGamePage from "./pages/math-game-arena/umum/TetrisGamePage";
-import DinoRunGamePage from "./pages/math-game-arena/umum/DinoRunGamePage";
-import FlappyRocketPage from "./pages/math-game-arena/umum/FlappyRocketPage";
-import CatchItemsGamePage from "./pages/math-game-arena/umum/CatchItemsGamePage";
-import SnakeMathPage from "./pages/math-game-arena/umum/SnakeMathPage";
-import AsteroidBlasterPage from "./pages/math-game-arena/umum/AsteroidBlasterPage";
-import BubblePopPage from "./pages/math-game-arena/umum/BubblePopPage";
-import MolSmashPage from "./pages/math-game-arena/umum/MolSmashPage";
-import FishingMathPage from "./pages/math-game-arena/umum/FishingMathPage";
-import BrickBreakerPage from "./pages/math-game-arena/umum/BrickBreakerPage";
-import BattleTankPage from "./pages/math-game-arena/umum/BattleTankPage";
-import CoinTrainMathPage from "./pages/math-game-arena/umum/CoinTrainMathPage";
-import FruitNinjaMathPage from "./pages/math-game-arena/umum/FruitNinjaMathPage";
-import TreasureIslandMathPage from "./pages/math-game-arena/umum/TreasureIslandMathPage";
-import SubmarineBattleMathPage from "./pages/math-game-arena/umum/SubmarineBattleMathPage";
-import PlatformJumpMathPage from "./pages/math-game-arena/umum/PlatformJumpMathPage";
-import KsatriaMatPage from "./pages/math-game-arena/umum/KsatriaMatPage";
-import SpaceImpactPage from "./pages/math-game-arena/umum/SpaceImpactPage";
-import GalaxyDefenderPage from "./pages/math-game-arena/umum/GalaxyDefenderPage";
-import MathBrosPage from "./pages/math-game-arena/umum/MathBrosPage";
-import ZumaMathPage from "./pages/math-game-arena/umum/ZumaMathPage";
-import PacmanMathPage from "./pages/math-game-arena/umum/PacmanMathPage";
-import BounceMathPage from "./pages/math-game-arena/umum/BounceMathPage";
-import WesternBarPage from "./pages/math-game-arena/umum/WesternBarPage";
-import PinballMathPage from "./pages/math-game-arena/umum/PinballMathPage";
-import PenaltiMathPage from "./pages/math-game-arena/umum/PenaltiMathPage";
+const MathGameArenaPage = lazy(() => import("./pages/MathGameArenaPage"));
+const MathGameArenaKelas7Page = lazy(() => import("./pages/MathGameArenaKelas7Page"));
+const MathGameArenaKelas8Page = lazy(() => import("./pages/MathGameArenaKelas8Page"));
+const MathGameArenaKelas9Page = lazy(() => import("./pages/MathGameArenaKelas9Page"));
+const MathGameArenaUmumPage = lazy(() => import("./pages/MathGameArenaUmumPage"));
+const CarRacingGamePage = lazy(() => import("./pages/math-game-arena/umum/CarRacingGamePage"));
+const TetrisGamePage = lazy(() => import("./pages/math-game-arena/umum/TetrisGamePage"));
+const DinoRunGamePage = lazy(() => import("./pages/math-game-arena/umum/DinoRunGamePage"));
+const FlappyRocketPage = lazy(() => import("./pages/math-game-arena/umum/FlappyRocketPage"));
+const CatchItemsGamePage = lazy(() => import("./pages/math-game-arena/umum/CatchItemsGamePage"));
+const SnakeMathPage = lazy(() => import("./pages/math-game-arena/umum/SnakeMathPage"));
+const AsteroidBlasterPage = lazy(() => import("./pages/math-game-arena/umum/AsteroidBlasterPage"));
+const BubblePopPage = lazy(() => import("./pages/math-game-arena/umum/BubblePopPage"));
+const MolSmashPage = lazy(() => import("./pages/math-game-arena/umum/MolSmashPage"));
+const FishingMathPage = lazy(() => import("./pages/math-game-arena/umum/FishingMathPage"));
+const BrickBreakerPage = lazy(() => import("./pages/math-game-arena/umum/BrickBreakerPage"));
+const BattleTankPage = lazy(() => import("./pages/math-game-arena/umum/BattleTankPage"));
+const CoinTrainMathPage = lazy(() => import("./pages/math-game-arena/umum/CoinTrainMathPage"));
+const FruitNinjaMathPage = lazy(() => import("./pages/math-game-arena/umum/FruitNinjaMathPage"));
+const TreasureIslandMathPage = lazy(() => import("./pages/math-game-arena/umum/TreasureIslandMathPage"));
+const SubmarineBattleMathPage = lazy(() => import("./pages/math-game-arena/umum/SubmarineBattleMathPage"));
+const PlatformJumpMathPage = lazy(() => import("./pages/math-game-arena/umum/PlatformJumpMathPage"));
+const KsatriaMatPage = lazy(() => import("./pages/math-game-arena/umum/KsatriaMatPage"));
+const SpaceImpactPage = lazy(() => import("./pages/math-game-arena/umum/SpaceImpactPage"));
+const GalaxyDefenderPage = lazy(() => import("./pages/math-game-arena/umum/GalaxyDefenderPage"));
+const MathBrosPage = lazy(() => import("./pages/math-game-arena/umum/MathBrosPage"));
+const ZumaMathPage = lazy(() => import("./pages/math-game-arena/umum/ZumaMathPage"));
+const PacmanMathPage = lazy(() => import("./pages/math-game-arena/umum/PacmanMathPage"));
+const BounceMathPage = lazy(() => import("./pages/math-game-arena/umum/BounceMathPage"));
+const WesternBarPage = lazy(() => import("./pages/math-game-arena/umum/WesternBarPage"));
+const PinballMathPage = lazy(() => import("./pages/math-game-arena/umum/PinballMathPage"));
+const PenaltiMathPage = lazy(() => import("./pages/math-game-arena/umum/PenaltiMathPage"));
 
-// Math Game Arena - Kelas 7 Topic Pages
-import BilanganBulatMGAK7Page from "./pages/math-game-arena/kelas7/BilanganBulatPage";
-import BilanganRasionalMGAK7Page from "./pages/math-game-arena/kelas7/BilanganRasionalPage";
-import AljabarMGAK7Page from "./pages/math-game-arena/kelas7/AljabarPage";
-import PLSVPtLSVMGAK7Page from "./pages/math-game-arena/kelas7/PLSVPtLSVPage";
-import PerbandinganMGAK7Page from "./pages/math-game-arena/kelas7/PerbandinganPage";
-import PenguranganBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganGamePage";
-import PerkalianBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianGamePage";
-import PembagianBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianGamePage";
-import OperasiCampuranBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranGamePage";
-import KPKFPBGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBGamePage";
-import AritmetikaSosialMGAK7Page from "./pages/math-game-arena/kelas7/AritmetikaSosialPage";
-import JualBeliUntungRugiGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/JualBeliUntungRugiGamePage";
-import DiskonGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/DiskonGamePage";
-import BrutoNettoTaraGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/BrutoNettoTaraGamePage";
-import PPNGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/PPNGamePage";
-import PPhGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/PPhGamePage";
-import GarisDanSudutMGAK7Page from "./pages/math-game-arena/kelas7/GarisDanSudutPage";
-import SegitigaSegiempatMGAK7Page from "./pages/math-game-arena/kelas7/SegitigaSegiempatPage";
-import HimpunanMGAK7Page from "./pages/math-game-arena/kelas7/HimpunanPage";
+// MGA - Kelas 7
+const BilanganBulatMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/BilanganBulatPage"));
+const BilanganRasionalMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/BilanganRasionalPage"));
+const AljabarMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/AljabarPage"));
+const PLSVPtLSVMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/PLSVPtLSVPage"));
+const PerbandinganMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/PerbandinganPage"));
+const PenguranganBilanganBulatGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganGamePage"));
+const PerkalianBilanganBulatGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianGamePage"));
+const PembagianBilanganBulatGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianGamePage"));
+const OperasiCampuranBilanganBulatGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranGamePage"));
+const KPKFPBGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBGamePage"));
+const AritmetikaSosialMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/AritmetikaSosialPage"));
+const JualBeliUntungRugiGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/aritmetika-sosial/JualBeliUntungRugiGamePage"));
+const DiskonGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/aritmetika-sosial/DiskonGamePage"));
+const BrutoNettoTaraGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/aritmetika-sosial/BrutoNettoTaraGamePage"));
+const PPNGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/aritmetika-sosial/PPNGamePage"));
+const PPhGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/aritmetika-sosial/PPhGamePage"));
+const GarisDanSudutMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/GarisDanSudutPage"));
+const SegitigaSegiempatMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/SegitigaSegiempatPage"));
+const HimpunanMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/HimpunanPage"));
 
-// Math Game Arena - Kelas 7 Pecahan Game Pages
-import ArtiPecahanGamePage from "./pages/math-game-arena/kelas7/pecahan/ArtiPecahanGamePage";
-import PecahanCampuranGamePage from "./pages/math-game-arena/kelas7/pecahan/PecahanCampuranGamePage";
-import PenjumlahanPecahanGamePage from "./pages/math-game-arena/kelas7/pecahan/PenjumlahanPecahanGamePage";
-import PenguranganPecahanGamePage from "./pages/math-game-arena/kelas7/pecahan/PenguranganPecahanGamePage";
-import PerkalianPecahanGamePage from "./pages/math-game-arena/kelas7/pecahan/PerkalianPecahanGamePage";
-import PembagianPecahanGamePage from "./pages/math-game-arena/kelas7/pecahan/PembagianPecahanGamePage";
-import BentukDesimalGamePage from "./pages/math-game-arena/kelas7/pecahan/BentukDesimalGamePage";
-import PenjumlahanDesimalGamePage from "./pages/math-game-arena/kelas7/pecahan/PenjumlahanDesimalGamePage";
-import PenguranganDesimalGamePage from "./pages/math-game-arena/kelas7/pecahan/PenguranganDesimalGamePage";
-import PerkalianDesimalGamePage from "./pages/math-game-arena/kelas7/pecahan/PerkalianDesimalGamePage";
-import PembagianDesimalGamePage from "./pages/math-game-arena/kelas7/pecahan/PembagianDesimalGamePage";
-import PembulatanDesimalGamePage from "./pages/math-game-arena/kelas7/pecahan/PembulatanDesimalGamePage";
+// MGA - Kelas 7 Pecahan
+const ArtiPecahanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/ArtiPecahanGamePage"));
+const PecahanCampuranGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PecahanCampuranGamePage"));
+const PenjumlahanPecahanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PenjumlahanPecahanGamePage"));
+const PenguranganPecahanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PenguranganPecahanGamePage"));
+const PerkalianPecahanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PerkalianPecahanGamePage"));
+const PembagianPecahanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PembagianPecahanGamePage"));
+const BentukDesimalGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/BentukDesimalGamePage"));
+const PenjumlahanDesimalGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PenjumlahanDesimalGamePage"));
+const PenguranganDesimalGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PenguranganDesimalGamePage"));
+const PerkalianDesimalGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PerkalianDesimalGamePage"));
+const PembagianDesimalGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PembagianDesimalGamePage"));
+const PembulatanDesimalGamePage = lazy(() => import("./pages/math-game-arena/kelas7/pecahan/PembulatanDesimalGamePage"));
 
-// Math Game Arena - Kelas 7 Aljabar Game Pages
-import PengertianUnsurAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/PengertianUnsurGamePage";
-import PenjumlahanPenguranganAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/PenjumlahanPenguranganAljabarGamePage";
-import PerkalianAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/PerkalianAljabarGamePage";
-import PembagianAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/PembagianAljabarGamePage";
-import PemangkatanAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/PemangkatanAljabarGamePage";
-import SubstitusiAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/SubstitusiAljabarGamePage";
-import FaktorisasiAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/FaktorisasiAljabarGamePage";
-import OperasiPecahanAljabarGamePage from "./pages/math-game-arena/kelas7/aljabar/OperasiPecahanAljabarGamePage";
+// MGA - Kelas 7 Aljabar
+const PengertianUnsurAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/PengertianUnsurGamePage"));
+const PenjumlahanPenguranganAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/PenjumlahanPenguranganAljabarGamePage"));
+const PerkalianAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/PerkalianAljabarGamePage"));
+const PembagianAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/PembagianAljabarGamePage"));
+const PemangkatanAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/PemangkatanAljabarGamePage"));
+const SubstitusiAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/SubstitusiAljabarGamePage"));
+const FaktorisasiAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/FaktorisasiAljabarGamePage"));
+const OperasiPecahanAljabarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aljabar/OperasiPecahanAljabarGamePage"));
 
-// Math Game Arena - Kelas 7 PLSV Game Pages
-import KalimatTerbukaGamePage from "./pages/math-game-arena/kelas7/plsv/KalimatTerbukaGamePage";
-import PengertianPLSVGamePage from "./pages/math-game-arena/kelas7/plsv/PengertianPLSVGamePage";
-import PenyelesaianPLSVGamePage from "./pages/math-game-arena/kelas7/plsv/PenyelesaianPLSVGamePage";
-import ModelMatematikaPLSVGamePage from "./pages/math-game-arena/kelas7/plsv/ModelMatematikaPLSVGamePage";
-import PengertianPtLSVGamePage from "./pages/math-game-arena/kelas7/plsv/PengertianPtLSVGamePage";
-import PenyelesaianPtLSVGamePage from "./pages/math-game-arena/kelas7/plsv/PenyelesaianPtLSVGamePage";
-import ModelMatematikaPtLSVGamePage from "./pages/math-game-arena/kelas7/plsv/ModelMatematikaPtLSVGamePage";
+// MGA - Kelas 7 PLSV
+const KalimatTerbukaGamePage = lazy(() => import("./pages/math-game-arena/kelas7/plsv/KalimatTerbukaGamePage"));
+const PengertianPLSVGamePage = lazy(() => import("./pages/math-game-arena/kelas7/plsv/PengertianPLSVGamePage"));
+const PenyelesaianPLSVGamePage = lazy(() => import("./pages/math-game-arena/kelas7/plsv/PenyelesaianPLSVGamePage"));
+const ModelMatematikaPLSVGamePage = lazy(() => import("./pages/math-game-arena/kelas7/plsv/ModelMatematikaPLSVGamePage"));
+const PengertianPtLSVGamePage = lazy(() => import("./pages/math-game-arena/kelas7/plsv/PengertianPtLSVGamePage"));
+const PenyelesaianPtLSVGamePage = lazy(() => import("./pages/math-game-arena/kelas7/plsv/PenyelesaianPtLSVGamePage"));
+const ModelMatematikaPtLSVGamePage = lazy(() => import("./pages/math-game-arena/kelas7/plsv/ModelMatematikaPtLSVGamePage"));
 
-// Math Game Arena - Kelas 7 Perbandingan Game Pages
-import PerbandinganUmumGamePage from "./pages/math-game-arena/kelas7/perbandingan/PerbandinganUmumGamePage";
-import PerbandinganSenilaiGamePage from "./pages/math-game-arena/kelas7/perbandingan/PerbandinganSenilaiGamePage";
-import PerbandinganCampuranGamePage from "./pages/math-game-arena/kelas7/perbandingan/PerbandinganCampuranGamePage";
-import PerbandinganBertingkatGamePage from "./pages/math-game-arena/kelas7/perbandingan/PerbandinganBertingkatGamePage";
-import SkalaGamePage from "./pages/math-game-arena/kelas7/perbandingan/SkalaGamePage";
+// MGA - Kelas 7 Perbandingan
+const PerbandinganUmumGamePage = lazy(() => import("./pages/math-game-arena/kelas7/perbandingan/PerbandinganUmumGamePage"));
+const PerbandinganSenilaiGamePage = lazy(() => import("./pages/math-game-arena/kelas7/perbandingan/PerbandinganSenilaiGamePage"));
+const PerbandinganCampuranGamePage = lazy(() => import("./pages/math-game-arena/kelas7/perbandingan/PerbandinganCampuranGamePage"));
+const PerbandinganBertingkatGamePage = lazy(() => import("./pages/math-game-arena/kelas7/perbandingan/PerbandinganBertingkatGamePage"));
+const SkalaGamePage = lazy(() => import("./pages/math-game-arena/kelas7/perbandingan/SkalaGamePage"));
 
-// Math Game Arena - Kelas 7 Garis Dan Sudut Game Pages
-import HubunganDuaGarisGamePage from "./pages/math-game-arena/kelas7/garis-dan-sudut/HubunganDuaGarisGamePage";
-import SudutPelurusGamePage from "./pages/math-game-arena/kelas7/garis-dan-sudut/SudutPelurusGamePage";
-import SifatSudutSejajarGamePage from "./pages/math-game-arena/kelas7/garis-dan-sudut/SifatSudutSejajarGamePage";
-import JumlahSudutSegibanyakGamePage from "./pages/math-game-arena/kelas7/garis-dan-sudut/JumlahSudutSegibanyakGamePage";
+// MGA - Kelas 7 Garis Dan Sudut
+const HubunganDuaGarisGamePage = lazy(() => import("./pages/math-game-arena/kelas7/garis-dan-sudut/HubunganDuaGarisGamePage"));
+const SudutPelurusGamePage = lazy(() => import("./pages/math-game-arena/kelas7/garis-dan-sudut/SudutPelurusGamePage"));
+const SifatSudutSejajarGamePage = lazy(() => import("./pages/math-game-arena/kelas7/garis-dan-sudut/SifatSudutSejajarGamePage"));
+const JumlahSudutSegibanyakGamePage = lazy(() => import("./pages/math-game-arena/kelas7/garis-dan-sudut/JumlahSudutSegibanyakGamePage"));
 
-// Math Game Arena - Kelas 7 Segitiga Segiempat Game Pages
-import GarisBeratBagiTinggiGamePage from "./pages/math-game-arena/kelas7/segitiga-segiempat/GarisBeratBagiTinggiGamePage";
-import KelilingSegitigaSegiempatGamePage from "./pages/math-game-arena/kelas7/segitiga-segiempat/KelilingGamePage";
-import LuasSegitigaGamePage from "./pages/math-game-arena/kelas7/segitiga-segiempat/LuasSegitigaGamePage";
-import LuasSegiempatGamePage from "./pages/math-game-arena/kelas7/segitiga-segiempat/LuasSegiempatGamePage";
-import BangunTakBeraturanGamePage from "./pages/math-game-arena/kelas7/segitiga-segiempat/BangunTakBeraturanGamePage";
+// MGA - Kelas 7 Segitiga Segiempat
+const GarisBeratBagiTinggiGamePage = lazy(() => import("./pages/math-game-arena/kelas7/segitiga-segiempat/GarisBeratBagiTinggiGamePage"));
+const KelilingSegitigaSegiempatGamePage = lazy(() => import("./pages/math-game-arena/kelas7/segitiga-segiempat/KelilingGamePage"));
+const LuasSegitigaGamePage = lazy(() => import("./pages/math-game-arena/kelas7/segitiga-segiempat/LuasSegitigaGamePage"));
+const LuasSegiempatGamePage = lazy(() => import("./pages/math-game-arena/kelas7/segitiga-segiempat/LuasSegiempatGamePage"));
+const BangunTakBeraturanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/segitiga-segiempat/BangunTakBeraturanGamePage"));
 
-// Math Game Arena - Kelas 7 Himpunan Game Pages
-import PengertianKeanggotaanHimpunanGamePage from "./pages/math-game-arena/kelas7/himpunan/PengertianKeanggotaanGamePage";
-import HimpunanBerhingaKosongGamePage from "./pages/math-game-arena/kelas7/himpunan/HimpunanBerhingaKosongGamePage";
-import DiagramVennGamePage from "./pages/math-game-arena/kelas7/himpunan/DiagramVennGamePage";
-import PemecahanMasalahHimpunanGamePage from "./pages/math-game-arena/kelas7/himpunan/PemecahanMasalahHimpunanGamePage";
+// MGA - Kelas 7 Himpunan
+const PengertianKeanggotaanHimpunanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/himpunan/PengertianKeanggotaanGamePage"));
+const HimpunanBerhingaKosongGamePage = lazy(() => import("./pages/math-game-arena/kelas7/himpunan/HimpunanBerhingaKosongGamePage"));
+const DiagramVennGamePage = lazy(() => import("./pages/math-game-arena/kelas7/himpunan/DiagramVennGamePage"));
+const PemecahanMasalahHimpunanGamePage = lazy(() => import("./pages/math-game-arena/kelas7/himpunan/PemecahanMasalahHimpunanGamePage"));
+const BungaTunggalGamePage = lazy(() => import("./pages/math-game-arena/kelas7/aritmetika-sosial/BungaTunggalGamePage"));
 
-// Math Game Arena - Kelas 7 Aritmetika Sosial Bunga Tunggal
-import BungaTunggalGamePage from "./pages/math-game-arena/kelas7/aritmetika-sosial/BungaTunggalGamePage";
+// MGA - Kelas 7 Bilangan Bulat game variants
+const PenjumlahanBilanganBulatGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanGamePage"));
+const PenjumlahanMeteorGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanMeteorGamePage"));
+const PenjumlahanTurtleRunGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTurtleRunGamePage"));
+const PenjumlahanFlappyRocketGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanFlappyRocketGamePage"));
+const PenjumlahanTembakTankGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTembakTankGamePage"));
+const PenjumlahanSpaceImpactGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSpaceImpactGamePage"));
+const PenjumlahanTetrisGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTetrisGamePage"));
+const PenjumlahanSnakeMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSnakeMathGamePage"));
+const PenguranganMeteorGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganMeteorGamePage"));
+const PenguranganFlappyRocketGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganFlappyRocketGamePage"));
+const PenguranganTembakTankGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTembakTankGamePage"));
+const PenguranganSpaceImpactGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganSpaceImpactGamePage"));
+const PenguranganTurtleRunGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTurtleRunGamePage"));
+const PenguranganTetrisGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTetrisGamePage"));
+const PenguranganSnakeMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganSnakeMathGamePage"));
+const PerkalianMeteorGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianMeteorGamePage"));
+const PerkalianFlappyRocketGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianFlappyRocketGamePage"));
+const PerkalianTembakTankGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTembakTankGamePage"));
+const PerkalianSpaceImpactGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianSpaceImpactGamePage"));
+const PerkalianTurtleRunGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTurtleRunGamePage"));
+const PerkalianTetrisGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTetrisGamePage"));
+const PerkalianSnakeMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianSnakeMathGamePage"));
+const PembagianMeteorGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianMeteorGamePage"));
+const PembagianFlappyRocketGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianFlappyRocketGamePage"));
+const PembagianTembakTankGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTembakTankGamePage"));
+const PembagianSpaceImpactGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianSpaceImpactGamePage"));
+const PembagianTurtleRunGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTurtleRunGamePage"));
+const PembagianTetrisGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTetrisGamePage"));
+const PembagianSnakeMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianSnakeMathGamePage"));
+const OperasiCampuranMeteorGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranMeteorGamePage"));
+const OperasiCampuranFlappyRocketGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranFlappyRocketGamePage"));
+const OperasiCampuranTembakTankGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTembakTankGamePage"));
+const OperasiCampuranSpaceImpactGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranSpaceImpactGamePage"));
+const OperasiCampuranTurtleRunGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTurtleRunGamePage"));
+const OperasiCampuranTetrisGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTetrisGamePage"));
+const OperasiCampuranSnakeMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranSnakeMathGamePage"));
+const KPKFPBMeteorGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBMeteorGamePage"));
+const KPKFPBFlappyRocketGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBFlappyRocketGamePage"));
+const KPKFPBTembakTankGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTembakTankGamePage"));
+const KPKFPBSpaceImpactGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBSpaceImpactGamePage"));
+const KPKFPBTurtleRunGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTurtleRunGamePage"));
+const KPKFPBTetrisGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTetrisGamePage"));
+const KPKFPBSnakeMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBSnakeMathGamePage"));
+const PenjumlahanMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanMeteorPantulGamePage"));
+const PenguranganMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganMeteorPantulGamePage"));
+const PerkalianMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianMeteorPantulGamePage"));
+const PembagianMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianMeteorPantulGamePage"));
+const OperasiCampuranMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranMeteorPantulGamePage"));
+const KPKFPBMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBMeteorPantulGamePage"));
 
-// Math Game Arena - Kelas 8 Topic Pages
-import PolaBilanganMGAK8Page from "./pages/math-game-arena/kelas8/PolaBilanganPage";
-import KoordinatCartesiusMGAK8Page from "./pages/math-game-arena/kelas8/KoordinatCartesiusPage";
-import RelasiFungsiMGAK8Page from "./pages/math-game-arena/kelas8/RelasiFungsiPage";
-import SPLDVMGAK8Page from "./pages/math-game-arena/kelas8/SPLDVPage";
-import PersamaanGarisLurusMGAK8Page from "./pages/math-game-arena/kelas8/PersamaanGarisLurusPage";
-import TeoremaPythagorasMGAK8Page from "./pages/math-game-arena/kelas8/TeoremaPythagorasPage";
-import LingkaranMGAK8Page from "./pages/math-game-arena/kelas8/LingkaranPage";
-import GarisSinggungLingkaranMGAK8Page from "./pages/math-game-arena/kelas8/GarisSinggungLingkaranPage";
-import BangunRuangSisiDatarMGAK8Page from "./pages/math-game-arena/kelas8/BangunRuangSisiDatarPage";
-// Math Game Arena - Kelas 8 Submaterial Chooser & Dispatcher (catch-all for all 47 K8 sub-materi × 7 game variants)
-import SubmaterialGameVariantsChooserK7 from "./components/mga-k7/SubmaterialGameVariantsChooser";
-import SubmaterialGameDispatcherK7 from "./components/mga-k7/SubmaterialGameDispatcher";
-import SubmaterialGameVariantsChooserK8 from "./components/mga-k8/SubmaterialGameVariantsChooser";
-import SubmaterialGameDispatcherK8 from "./components/mga-k8/SubmaterialGameDispatcher";
-import PenjumlahanBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanGamePage";
-import PenjumlahanMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanMeteorGamePage";
-import PenjumlahanTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTurtleRunGamePage";
-import PenjumlahanFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanFlappyRocketGamePage";
-import PenjumlahanTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTembakTankGamePage";
-import PenjumlahanSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSpaceImpactGamePage";
-import PenjumlahanTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanTetrisGamePage";
-import PenjumlahanSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanSnakeMathGamePage";
-// Pengurangan
-import PenguranganMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganMeteorGamePage";
-import PenguranganFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganFlappyRocketGamePage";
-import PenguranganTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTembakTankGamePage";
-import PenguranganSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganSpaceImpactGamePage";
-import PenguranganTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTurtleRunGamePage";
-import PenguranganTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganTetrisGamePage";
-import PenguranganSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganSnakeMathGamePage";
-// Perkalian
-import PerkalianMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianMeteorGamePage";
-import PerkalianFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianFlappyRocketGamePage";
-import PerkalianTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTembakTankGamePage";
-import PerkalianSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianSpaceImpactGamePage";
-import PerkalianTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTurtleRunGamePage";
-import PerkalianTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianTetrisGamePage";
-import PerkalianSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianSnakeMathGamePage";
-// Pembagian
-import PembagianMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianMeteorGamePage";
-import PembagianFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianFlappyRocketGamePage";
-import PembagianTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTembakTankGamePage";
-import PembagianSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianSpaceImpactGamePage";
-import PembagianTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTurtleRunGamePage";
-import PembagianTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianTetrisGamePage";
-import PembagianSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianSnakeMathGamePage";
-// Operasi Campuran
-import OperasiCampuranMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranMeteorGamePage";
-import OperasiCampuranFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranFlappyRocketGamePage";
-import OperasiCampuranTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTembakTankGamePage";
-import OperasiCampuranSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranSpaceImpactGamePage";
-import OperasiCampuranTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTurtleRunGamePage";
-import OperasiCampuranTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranTetrisGamePage";
-import OperasiCampuranSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranSnakeMathGamePage";
-// KPK & FPB
-import KPKFPBMeteorGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBMeteorGamePage";
-import KPKFPBFlappyRocketGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBFlappyRocketGamePage";
-import KPKFPBTembakTankGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTembakTankGamePage";
-import KPKFPBSpaceImpactGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBSpaceImpactGamePage";
-import KPKFPBTurtleRunGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTurtleRunGamePage";
-import KPKFPBTetrisGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBTetrisGamePage";
-import KPKFPBSnakeMathGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBSnakeMathGamePage";
-import PenjumlahanMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanMeteorPantulGamePage";
-import PenguranganMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganMeteorPantulGamePage";
-import PerkalianMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianMeteorPantulGamePage";
-import PembagianMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianMeteorPantulGamePage";
-import OperasiCampuranMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranMeteorPantulGamePage";
-import KPKFPBMeteorPantulGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBMeteorPantulGamePage";
+// MGA - Kelas 8 Topic Pages
+const PolaBilanganMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/PolaBilanganPage"));
+const KoordinatCartesiusMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/KoordinatCartesiusPage"));
+const RelasiFungsiMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/RelasiFungsiPage"));
+const SPLDVMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/SPLDVPage"));
+const PersamaanGarisLurusMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/PersamaanGarisLurusPage"));
+const TeoremaPythagorasMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/TeoremaPythagorasPage"));
+const LingkaranMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/LingkaranPage"));
+const GarisSinggungLingkaranMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/GarisSinggungLingkaranPage"));
+const BangunRuangSisiDatarMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/BangunRuangSisiDatarPage"));
+const SubmaterialGameVariantsChooserK7 = lazy(() => import("./components/mga-k7/SubmaterialGameVariantsChooser"));
+const SubmaterialGameDispatcherK7 = lazy(() => import("./components/mga-k7/SubmaterialGameDispatcher"));
+const SubmaterialGameVariantsChooserK8 = lazy(() => import("./components/mga-k8/SubmaterialGameVariantsChooser"));
+const SubmaterialGameDispatcherK8 = lazy(() => import("./components/mga-k8/SubmaterialGameDispatcher"));
 
-// Math Game Arena - Kelas 9 Topic Pages
-import BilanganBerpangkatMGAK9Page from "./pages/math-game-arena/kelas9/BilanganBerpangkatPage";
-import KesebangunanKekongruenMGAK9Page from "./pages/math-game-arena/kelas9/KesebangunanKekongruenPage";
-import TransformasiGeometriMGAK9Page from "./pages/math-game-arena/kelas9/TransformasiGeometriPage";
-import BangunRuangSisiLengkungMGAK9Page from "./pages/math-game-arena/kelas9/BangunRuangSisiLengkungPage";
-import StatistikaMGAK9Page from "./pages/math-game-arena/kelas9/StatistikaPage";
-import PeluangMGAK9Page from "./pages/math-game-arena/kelas9/PeluangPage";
-import PersamaanKuadratMGAK9Page from "./pages/math-game-arena/kelas9/PersamaanKuadratPage";
-import FungsiKuadratMGAK9Page from "./pages/math-game-arena/kelas9/FungsiKuadratPage";
+// MGA - Kelas 9 Topic Pages
+const BilanganBerpangkatMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/BilanganBerpangkatPage"));
+const KesebangunanKekongruenMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/KesebangunanKekongruenPage"));
+const TransformasiGeometriMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/TransformasiGeometriPage"));
+const BangunRuangSisiLengkungMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/BangunRuangSisiLengkungPage"));
+const StatistikaMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/StatistikaPage"));
+const PeluangMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/PeluangPage"));
+const PersamaanKuadratMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/PersamaanKuadratPage"));
+const FungsiKuadratMGAK9Page = lazy(() => import("./pages/math-game-arena/kelas9/FungsiKuadratPage"));
+const SubmaterialGameVariantsChooserK9 = lazy(() => import("./components/mga-k9/SubmaterialGameVariantsChooser"));
+const SubmaterialGameDispatcherK9 = lazy(() => import("./components/mga-k9/SubmaterialGameDispatcher"));
 
-// Math Game Arena - Kelas 9 Catch-all chooser & dispatcher (7 game variants per submaterial)
-import SubmaterialGameVariantsChooserK9 from "./components/mga-k9/SubmaterialGameVariantsChooser";
-import SubmaterialGameDispatcherK9 from "./components/mga-k9/SubmaterialGameDispatcher";
+// Materi Matematika
+const MateriMatematikaPage = lazy(() => import("./pages/MateriMatematikaPage"));
+const MateriMatematikaKelas7Page = lazy(() => import("./pages/MateriMatematikaKelas7Page"));
+const MateriMatematikaKelas8Page = lazy(() => import("./pages/MateriMatematikaKelas8Page"));
+const MateriMatematikaKelas9Page = lazy(() => import("./pages/MateriMatematikaKelas9Page"));
+const BilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/BilanganBulatPage"));
+const PenjumlahanBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PenjumlahanPage"));
+const PenguranganBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PenguranganPage"));
+const PerkalianBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PerkalianPage"));
+const PembagianBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PembagianPage"));
+const OperasiCampuranBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/OperasiCampuranPage"));
+const KPKFPBBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/KPKFPBPage"));
+const BilanganRasionalMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/BilanganRasionalPage"));
+const ArtiPecahanMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/ArtiPecahanPage"));
+const PecahanCampuranMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PecahanCampuranPage"));
+const PenjumlahanPenguranganMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PenjumlahanPenguranganPage"));
+const PerkalianPecahanMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PerkalianPecahanPage"));
+const PembagianPecahanMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PembagianPecahanPage"));
+const BentukDesimalMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/BentukDesimalPage"));
+const PenjumlahanPenguranganBentukDesimalMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PenjumlahanPenguranganBentukDesimalPage"));
+const PerkalianBentukDesimalMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PerkalianBentukDesimalPage"));
+const PembagianBentukDesimalMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PembagianBentukDesimalPage"));
+const PembulatanBentukDesimalMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-rasional/PembulatanBentukDesimalPage"));
+const AljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/AljabarPage"));
+const PengertianUnsurMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/PengertianUnsurPage"));
+const PenjumlahanPenguranganAljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/PenjumlahanPenguranganPage"));
+const PerkalianAljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/PerkalianPage"));
+const PembagianAljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/PembagianPage"));
+const PemangkatanAljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/PemangkatanPage"));
+const SubstitusiAljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/SubstitusiPage"));
+const FaktorisasiAljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/FaktorisasiPage"));
+const OperasiPecahanAljabarMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aljabar/OperasiPecahanPage"));
+const PLSVPtLSVMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/PLSVPtLSVPage"));
+const KalimatTerbukaTertutupPage = lazy(() => import("./pages/materi-matematika/kelas7/plsv-ptlsv/KalimatTerbukaTertutupPage"));
+const PengertianPLSVPage = lazy(() => import("./pages/materi-matematika/kelas7/plsv-ptlsv/PengertianPLSVPage"));
+const PenyelesaianPLSVPage = lazy(() => import("./pages/materi-matematika/kelas7/plsv-ptlsv/PenyelesaianPLSVPage"));
+const ModelMatematikaPLSVPage = lazy(() => import("./pages/materi-matematika/kelas7/plsv-ptlsv/ModelMatematikaPLSVPage"));
+const PengertianPtLSVPage = lazy(() => import("./pages/materi-matematika/kelas7/plsv-ptlsv/PengertianPtLSVPage"));
+const PenyelesaianPtLSVPage = lazy(() => import("./pages/materi-matematika/kelas7/plsv-ptlsv/PenyelesaianPtLSVPage"));
+const ModelMatematikaPtLSVPage = lazy(() => import("./pages/materi-matematika/kelas7/plsv-ptlsv/ModelMatematikaPtLSVPage"));
+const PerbandinganMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/PerbandinganPage"));
+const PerbandinganUmumMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/perbandingan/PerbandinganUmumPage"));
+const PerbandinganSenilaiMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/perbandingan/PerbandinganSenilaiPage"));
+const PerbandinganCampuranMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/perbandingan/PerbandinganCampuranPage"));
+const PerbandinganBertingkatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/perbandingan/PerbandinganBertingkatPage"));
+const SkalaMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/perbandingan/SkalaPage"));
+const AritmetikaSosialMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/AritmetikaSosialPage"));
+const JualBeliUntungRugiMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aritmetika-sosial/JualBeliUntungRugiPage"));
+const DiskonMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aritmetika-sosial/DiskonPage"));
+const BrutoNettoTaraMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aritmetika-sosial/BrutoNettoTaraPage"));
+const BungaTunggalMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aritmetika-sosial/BungaTunggalPage"));
+const PPNMMk7Page = lazy(() => import("./pages/materi-matematika/kelas7/aritmetika-sosial/PPNPage"));
+const PPhMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/aritmetika-sosial/PPhPage"));
+const GarisDanSudutMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/GarisDanSudutPage"));
+const HubunganDuaGarisMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/garis-dan-sudut/HubunganDuaGarisPage"));
+const SudutPelurusPenyikuBertolakMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/garis-dan-sudut/SudutPelurusPenyikuBertolakPage"));
+const SifatSudutDuaGarisSejajarPage = lazy(() => import("./pages/materi-matematika/kelas7/garis-dan-sudut/SifatSudutDuaGarisSejajarPage"));
+const JumlahSudutSegiBanyakPage = lazy(() => import("./pages/materi-matematika/kelas7/garis-dan-sudut/JumlahSudutSegiBanyakPage"));
+const SegitigaSegiempatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/SegitigaSegiempatPage"));
+const GarisBeratBagiTinggiPage = lazy(() => import("./pages/materi-matematika/kelas7/segitiga-segiempat/GarisBeratBagiTinggiPage"));
+const KelilingSegitigaSegiempatPage = lazy(() => import("./pages/materi-matematika/kelas7/segitiga-segiempat/KelilingSegitigaSegiempatPage"));
+const LuasSegitigaPage = lazy(() => import("./pages/materi-matematika/kelas7/segitiga-segiempat/LuasSegitigaPage"));
+const LuasSegiempatPage = lazy(() => import("./pages/materi-matematika/kelas7/segitiga-segiempat/LuasSegiempatPage"));
+const KelilingLuasBangunTakBeraturanPage = lazy(() => import("./pages/materi-matematika/kelas7/segitiga-segiempat/KelilingLuasBangunTakBeraturanPage"));
+const KubusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/KubusPage"));
+const BalokMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/BalokPage"));
+const PrismaMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/PrismaPage"));
+const LimasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/LimasPage"));
+const GabunganMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/GabunganPage"));
+const HimpunanMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/HimpunanPage"));
+const PengertianKeanggotaanHimpunanPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/PengertianKeanggotaanPage"));
+const JenisHimpunanPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/JenisHimpunanPage"));
+const DiagramVennPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/DiagramVennPage"));
+const PemecahanMasalahHimpunanPage = lazy(() => import("./pages/materi-matematika/kelas7/himpunan/PemecahanMasalahHimpunanPage"));
 
-// Materi Matematika Pages
-import MateriMatematikaPage from "./pages/MateriMatematikaPage";
-import MateriMatematikaKelas7Page from "./pages/MateriMatematikaKelas7Page";
-import MateriMatematikaKelas8Page from "./pages/MateriMatematikaKelas8Page";
-import MateriMatematikaKelas9Page from "./pages/MateriMatematikaKelas9Page";
+// Materi Matematika - Kelas 8
+const PolaBilanganMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/PolaBilanganPage"));
+const PengertianPolaMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PengertianPolaPage"));
+const PolaKhususMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaKhususPage"));
+const PolaAritmetikaMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaAritmetikaPage"));
+const PolaGeometriMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaGeometriPage"));
+const KoordinatCartesiusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/KoordinatCartesiusPage"));
+const UnsurUnsurCartesiusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/UnsurUnsurCartesiusPage"));
+const PosisiRelatifTitikAcuanMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage"));
+const JarakTitikGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/JarakTitikGarisPage"));
+const PosisiRelatifGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifGarisPage"));
+const RelasiFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/RelasiFungsiPage"));
+const PengertianRelasiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/PengertianRelasiPage"));
+const PengertianFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/PengertianFungsiPage"));
+const BanyakFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/BanyakFungsiPage"));
+const NotasiFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/NotasiFungsiPage"));
+const GrafikFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/GrafikFungsiPage"));
+const SPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/SPLDVPage"));
+const DefinisiSPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/DefinisiSPLDVPage"));
+const MetodeGrafikMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeGrafikPage"));
+const MetodeSubstitusiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeSubstitusiPage"));
+const MetodeEliminasiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeEliminasiPage"));
+const MetodeCampuranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeCampuranPage"));
+const ModelSPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/ModelSPLDVPage"));
+const PenyelesaianMasalahSPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/PenyelesaianMasalahSPLDVPage"));
+const PersamaanGarisLurusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/PersamaanGarisLurusPage"));
+const GrafikPGLMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/persamaan-garis-lurus/GrafikPGLPage"));
+const GradienMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/persamaan-garis-lurus/GradienPage"));
+const MenentukanPGLMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/persamaan-garis-lurus/MenentukanPGLPage"));
+const Hubungan2GarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/persamaan-garis-lurus/Hubungan2GarisPage"));
+const AplikasiKontekstualMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/persamaan-garis-lurus/AplikasiKontekstualPage"));
+const TeoremaPythagorasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/TeoremaPythagorasPage"));
+const PembuktianPythagorasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/teorema-pythagoras/PembuktianPage"));
+const MenghitungPanjangPythagorasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/teorema-pythagoras/MenghitungPanjangPage"));
+const TriplePythagorasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/teorema-pythagoras/TriplePythagorasPage"));
+const JenisSegitigaPythagorasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/teorema-pythagoras/JenisSegitigaPage"));
+const SudutKhususPythagorasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/teorema-pythagoras/SudutKhususPage"));
+const MasalahKontekstualPythagorasMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/teorema-pythagoras/MasalahKontekstualPage"));
+const LingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/LingkaranPage"));
+const UnsurUnsurLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/UnsurUnsurPage"));
+const KelilingLuasLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/KelilingLuasPage"));
+const KaitanBangunDatarLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/KaitanBangunDatarPage"));
+const BusurJuringLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/BusurJuringPage"));
+const SudutPusatKelilingLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/SudutPusatKelilingPage"));
+const PenerapanKontekstualLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/PenerapanKontekstualPage"));
+const GarisSinggungLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/GarisSinggungLingkaranPage"));
+const PengertianGSLMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/garis-singgung-lingkaran/PengertianPage"));
+const MenghitungPanjangGSLMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/garis-singgung-lingkaran/MenghitungPanjangPage"));
+const GSPLMMk8Page = lazy(() => import("./pages/materi-matematika/kelas8/garis-singgung-lingkaran/GSPLPage"));
+const GSPDMMk8Page = lazy(() => import("./pages/materi-matematika/kelas8/garis-singgung-lingkaran/GSPDPage"));
+const SabukLilitanMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/garis-singgung-lingkaran/SabukLilitanPage"));
+const BangunRuangSisiDatarMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/BangunRuangSisiDatarPage"));
 
-// Materi Matematika - Kelas 7 Topic Pages
-import BilanganBulatMMK7Page from "./pages/materi-matematika/kelas7/BilanganBulatPage";
-import PenjumlahanBilanganBulatMMK7Page from "./pages/materi-matematika/kelas7/bilangan-bulat/PenjumlahanPage";
-import PenguranganBilanganBulatMMK7Page from "./pages/materi-matematika/kelas7/bilangan-bulat/PenguranganPage";
-import PerkalianBilanganBulatMMK7Page from "./pages/materi-matematika/kelas7/bilangan-bulat/PerkalianPage";
-import PembagianBilanganBulatMMK7Page from "./pages/materi-matematika/kelas7/bilangan-bulat/PembagianPage";
-import OperasiCampuranBilanganBulatMMK7Page from "./pages/materi-matematika/kelas7/bilangan-bulat/OperasiCampuranPage";
-import KPKFPBBilanganBulatMMK7Page from "./pages/materi-matematika/kelas7/bilangan-bulat/KPKFPBPage";
-import BilanganRasionalMMK7Page from "./pages/materi-matematika/kelas7/BilanganRasionalPage";
-import ArtiPecahanMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/ArtiPecahanPage";
-import PecahanCampuranMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PecahanCampuranPage";
-import PenjumlahanPenguranganMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PenjumlahanPenguranganPage";
-import PerkalianPecahanMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PerkalianPecahanPage";
-import PembagianPecahanMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembagianPecahanPage";
-import BentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/BentukDesimalPage";
-import PenjumlahanPenguranganBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PenjumlahanPenguranganBentukDesimalPage";
-import PerkalianBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PerkalianBentukDesimalPage";
-import PembagianBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembagianBentukDesimalPage";
-import PembulatanBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembulatanBentukDesimalPage";
-import AljabarMMK7Page from "./pages/materi-matematika/kelas7/AljabarPage";
-import PengertianUnsurMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PengertianUnsurPage";
-import PenjumlahanPenguranganAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PenjumlahanPenguranganPage";
-import PerkalianAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PerkalianPage";
-import PembagianAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PembagianPage";
-import PemangkatanAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PemangkatanPage";
-import SubstitusiAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/SubstitusiPage";
-import FaktorisasiAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/FaktorisasiPage";
-import OperasiPecahanAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/OperasiPecahanPage";
-import PLSVPtLSVMMK7Page from "./pages/materi-matematika/kelas7/PLSVPtLSVPage";
-import KalimatTerbukaTertutupPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/KalimatTerbukaTertutupPage";
-import PengertianPLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PengertianPLSVPage";
-import PenyelesaianPLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PenyelesaianPLSVPage";
-import ModelMatematikaPLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/ModelMatematikaPLSVPage";
-import PengertianPtLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PengertianPtLSVPage";
-import PenyelesaianPtLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PenyelesaianPtLSVPage";
-import ModelMatematikaPtLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/ModelMatematikaPtLSVPage";
-import PerbandinganMMK7Page from "./pages/materi-matematika/kelas7/PerbandinganPage";
-import PerbandinganUmumMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganUmumPage";
-import PerbandinganSenilaiMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganSenilaiPage";
-import PerbandinganCampuranMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganCampuranPage";
-import PerbandinganBertingkatMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganBertingkatPage";
-import SkalaMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/SkalaPage";
-import AritmetikaSosialMMK7Page from "./pages/materi-matematika/kelas7/AritmetikaSosialPage";
-import JualBeliUntungRugiMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/JualBeliUntungRugiPage";
-import DiskonMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/DiskonPage";
-import BrutoNettoTaraMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/BrutoNettoTaraPage";
-import BungaTunggalMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/BungaTunggalPage";
-import PPNMMk7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/PPNPage";
-import PPhMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/PPhPage";
-import GarisDanSudutMMK7Page from "./pages/materi-matematika/kelas7/GarisDanSudutPage";
-import HubunganDuaGarisMMK7Page from "./pages/materi-matematika/kelas7/garis-dan-sudut/HubunganDuaGarisPage";
-import SudutPelurusPenyikuBertolakMMK7Page from "./pages/materi-matematika/kelas7/garis-dan-sudut/SudutPelurusPenyikuBertolakPage";
-import SifatSudutDuaGarisSejajarPage from "./pages/materi-matematika/kelas7/garis-dan-sudut/SifatSudutDuaGarisSejajarPage";
-import JumlahSudutSegiBanyakPage from "./pages/materi-matematika/kelas7/garis-dan-sudut/JumlahSudutSegiBanyakPage";
-import SegitigaSegiempatMMK7Page from "./pages/materi-matematika/kelas7/SegitigaSegiempatPage";
-import GarisBeratBagiTinggiPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/GarisBeratBagiTinggiPage";
-import KelilingSegitigaSegiempatPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/KelilingSegitigaSegiempatPage";
-import LuasSegitigaPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/LuasSegitigaPage";
-import LuasSegiempatPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/LuasSegiempatPage";
-import KelilingLuasBangunTakBeraturanPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/KelilingLuasBangunTakBeraturanPage";
-import KubusMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/KubusPage";
-import BalokMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/BalokPage";
-import PrismaMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/PrismaPage";
-import KubusLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/KubusPage";
-import BalokLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/BalokPage";
-import PrismaLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/PrismaPage";
-import LimasLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/LimasPage";
-import MasalahKontekstualBRSDLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/MasalahKontekstualPage";
-import BRSDGabunganLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar-gabungan/GabunganPage";
-import LimasMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/LimasPage";
-import GabunganMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/GabunganPage";
-import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
-import PengertianKeanggotaanHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/PengertianKeanggotaanPage";
-import JenisHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/JenisHimpunanPage";
-import DiagramVennPage from "./pages/materi-matematika/kelas7/himpunan/DiagramVennPage";
-import PemecahanMasalahHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/PemecahanMasalahHimpunanPage";
+// Materi Matematika - Kelas 9
+const BilanganBerpangkatMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/BilanganBerpangkatPage"));
+const PengertianNotasiPangkatMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bilangan-berpangkat/PengertianNotasiPangkatPage"));
+const SifatSifatOperasiMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bilangan-berpangkat/SifatSifatOperasiPage"));
+const BentukAkarMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bilangan-berpangkat/BentukAkarPage"));
+const NotasiIlmiahMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bilangan-berpangkat/NotasiIlmiahPage"));
+const KesebangunanKekongruenMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/KesebangunanKekongruenPage"));
+const DefinisiKesebangunanMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/DefinisiPage"));
+const MenghitungRusukMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/MenghitungRusukPage"));
+const SegitigaSebangunMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/SegitigaSebangunPage"));
+const PerbandinganRusukSikuSikuMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/PerbandinganRusukSikuSikuPage"));
+const KekongruenBangunDatarMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage"));
+const TransformasiGeometriMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/TransformasiGeometriPage"));
+const TranslasiMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/transformasi-geometri/TranslasiPage"));
+const RefleksiMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/transformasi-geometri/RefleksiPage"));
+const RotasiMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/transformasi-geometri/RotasiPage"));
+const DilatasisMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/transformasi-geometri/DilatasisPage"));
+const BangunRuangSisiLengkungMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/BangunRuangSisiLengkungPage"));
+const TabungMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/TabungPage"));
+const KerucutMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/KerucutPage"));
+const BolaMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/BolaPage"));
+const PerubahanVolumeMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/PerubahanVolumePage"));
+const GabunganMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/GabunganPage"));
+const StatistikaMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/StatistikaPage"));
+const PengantarStatistikaMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/statistika/PengantarStatistikaPage"));
+const PenyajianDataMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/statistika/PenyajianDataPage"));
+const RataRataMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/statistika/RataRataPage"));
+const MedianModusMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/statistika/MedianModusPage"));
+const KuartilMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/statistika/KuartilPage"));
+const PenyebaranDataMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/statistika/PenyebaranDataPage"));
+const PeluangMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/PeluangPage"));
+const RuangSampelMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/peluang/RuangSampelPage"));
+const PeluangEmpirikMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/peluang/PeluangEmpirikPage"));
+const PeluangTeoretikMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/peluang/PeluangTeoretikPage"));
+const FrekuensiHarapanMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/peluang/FrekuensiHarapanPage"));
+const KomplementMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/peluang/KomplementPage"));
+const PeluangKejadianMajemukMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/peluang/PeluangKejadianMajemukPage"));
+const PersamaanKuadratMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/PersamaanKuadratPage"));
+const PKMMBentukUmumPage = lazy(() => import("./pages/materi-matematika/kelas9/persamaan-kuadrat/BentukUmumPage"));
+const PKMMPemfaktoranPage = lazy(() => import("./pages/materi-matematika/kelas9/persamaan-kuadrat/PemfaktoranPage"));
+const PKMMRumusKuadratikPage = lazy(() => import("./pages/materi-matematika/kelas9/persamaan-kuadrat/RumusKuadratikPage"));
+const PKMMPelengkapKuadratPage = lazy(() => import("./pages/materi-matematika/kelas9/persamaan-kuadrat/PelengkapKuadratPage"));
+const PKMMDiskriminanPage = lazy(() => import("./pages/materi-matematika/kelas9/persamaan-kuadrat/DiskriminanPage"));
+const PKMMMenyusunBaruPage = lazy(() => import("./pages/materi-matematika/kelas9/persamaan-kuadrat/MenyusunPKBaruPage"));
+const PKMMPenerapanKontekstualPage = lazy(() => import("./pages/materi-matematika/kelas9/persamaan-kuadrat/PenerapanKontekstualPage"));
+const FungsiKuadratMMK9Page = lazy(() => import("./pages/materi-matematika/kelas9/FungsiKuadratPage"));
+const FKMMBentukUmumKarakteristikPage = lazy(() => import("./pages/materi-matematika/kelas9/fungsi-kuadrat/BentukUmumKarakteristikPage"));
+const FKMMTitikPotongPage = lazy(() => import("./pages/materi-matematika/kelas9/fungsi-kuadrat/TitikPotongPage"));
+const FKMMSumbuSimetriPage = lazy(() => import("./pages/materi-matematika/kelas9/fungsi-kuadrat/SumbuSimetriPage"));
+const FKMMMenggambarGrafikPage = lazy(() => import("./pages/materi-matematika/kelas9/fungsi-kuadrat/MenggambarGrafikPage"));
+const FKMMMenyusunFungsiPage = lazy(() => import("./pages/materi-matematika/kelas9/fungsi-kuadrat/MenyusunFungsiPage"));
+const FKMMPenerapanNilaiMaksMinPage = lazy(() => import("./pages/materi-matematika/kelas9/fungsi-kuadrat/PenerapanNilaiMaksMinPage"));
 
-// Materi Matematika - Kelas 8 Topic Pages
-import PolaBilanganMMK8Page from "./pages/materi-matematika/kelas8/PolaBilanganPage";
-import PengertianPolaMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PengertianPolaPage";
-import PolaKhususMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaKhususPage";
-import PolaAritmetikaMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaAritmetikaPage";
-import PolaGeometriMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaGeometriPage";
-import KoordinatCartesiusMMK8Page from "./pages/materi-matematika/kelas8/KoordinatCartesiusPage";
-import UnsurUnsurCartesiusMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/UnsurUnsurCartesiusPage";
-import PosisiRelatifTitikAcuanMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage";
-import JarakTitikGarisMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/JarakTitikGarisPage";
-import PosisiRelatifGarisMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifGarisPage";
-import RelasiFungsiMMK8Page from "./pages/materi-matematika/kelas8/RelasiFungsiPage";
-import PengertianRelasiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/PengertianRelasiPage";
-import PengertianFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/PengertianFungsiPage";
-import BanyakFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/BanyakFungsiPage";
-import NotasiFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/NotasiFungsiPage";
-import GrafikFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/GrafikFungsiPage";
-import SPLDVMMK8Page from "./pages/materi-matematika/kelas8/SPLDVPage";
-import DefinisiSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/DefinisiSPLDVPage";
-import MetodeGrafikMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeGrafikPage";
-import MetodeSubstitusiMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeSubstitusiPage";
-import MetodeEliminasiMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeEliminasiPage";
-import MetodeCampuranMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeCampuranPage";
-import ModelSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/ModelSPLDVPage";
-import PenyelesaianMasalahSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/PenyelesaianMasalahSPLDVPage";
-import PersamaanGarisLurusMMK8Page from "./pages/materi-matematika/kelas8/PersamaanGarisLurusPage";
-import GrafikPGLMMK8Page from "./pages/materi-matematika/kelas8/persamaan-garis-lurus/GrafikPGLPage";
-import GradienMMK8Page from "./pages/materi-matematika/kelas8/persamaan-garis-lurus/GradienPage";
-import MenentukanPGLMMK8Page from "./pages/materi-matematika/kelas8/persamaan-garis-lurus/MenentukanPGLPage";
-import Hubungan2GarisMMK8Page from "./pages/materi-matematika/kelas8/persamaan-garis-lurus/Hubungan2GarisPage";
-import AplikasiKontekstualMMK8Page from "./pages/materi-matematika/kelas8/persamaan-garis-lurus/AplikasiKontekstualPage";
-import TeoremaPythagorasMMK8Page from "./pages/materi-matematika/kelas8/TeoremaPythagorasPage";
-import PembuktianPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/PembuktianPage";
-import MenghitungPanjangPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/MenghitungPanjangPage";
-import TriplePythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/TriplePythagorasPage";
-import JenisSegitigaPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/JenisSegitigaPage";
-import SudutKhususPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/SudutKhususPage";
-import MasalahKontekstualPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/MasalahKontekstualPage";
-import LingkaranMMK8Page from "./pages/materi-matematika/kelas8/LingkaranPage";
-import UnsurUnsurLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/UnsurUnsurPage";
-import KelilingLuasLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/KelilingLuasPage";
-import KaitanBangunDatarLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/KaitanBangunDatarPage";
-import BusurJuringLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/BusurJuringPage";
-import SudutPusatKelilingLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/SudutPusatKelilingPage";
-import PenerapanKontekstualLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/PenerapanKontekstualPage";
-import GarisSinggungLingkaranMMK8Page from "./pages/materi-matematika/kelas8/GarisSinggungLingkaranPage";
-import PengertianGSLMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/PengertianPage";
-import MenghitungPanjangGSLMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/MenghitungPanjangPage";
-import GSPLMMk8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/GSPLPage";
-import GSPDMMk8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/GSPDPage";
-import SabukLilitanMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/SabukLilitanPage";
-import BangunRuangSisiDatarMMK8Page from "./pages/materi-matematika/kelas8/BangunRuangSisiDatarPage";
-
-// Materi Matematika - Kelas 9 Topic Pages
-import BilanganBerpangkatMMK9Page from "./pages/materi-matematika/kelas9/BilanganBerpangkatPage";
-import PengertianNotasiPangkatMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpangkat/PengertianNotasiPangkatPage";
-import SifatSifatOperasiMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpangkat/SifatSifatOperasiPage";
-import BentukAkarMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpangkat/BentukAkarPage";
-import NotasiIlmiahMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpangkat/NotasiIlmiahPage";
-import KesebangunanKekongruenMMK9Page from "./pages/materi-matematika/kelas9/KesebangunanKekongruenPage";
-import DefinisiKesebangunanMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/DefinisiPage";
-import MenghitungRusukMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/MenghitungRusukPage";
-import SegitigaSebangunMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/SegitigaSebangunPage";
-import PerbandinganRusukSikuSikuMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/PerbandinganRusukSikuSikuPage";
-import KekongruenBangunDatarMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage";
-import TransformasiGeometriMMK9Page from "./pages/materi-matematika/kelas9/TransformasiGeometriPage";
-import TranslasiMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/TranslasiPage";
-import RefleksiMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/RefleksiPage";
-import RotasiMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/RotasiPage";
-import DilatasisMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/DilatasisPage";
-import BangunRuangSisiLengkungMMK9Page from "./pages/materi-matematika/kelas9/BangunRuangSisiLengkungPage";
-import TabungMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/TabungPage";
-import KerucutMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/KerucutPage";
-import BolaMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/BolaPage";
-import PerubahanVolumeMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/PerubahanVolumePage";
-import GabunganMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/GabunganPage";
-import StatistikaMMK9Page from "./pages/materi-matematika/kelas9/StatistikaPage";
-import PengantarStatistikaMMK9Page from "./pages/materi-matematika/kelas9/statistika/PengantarStatistikaPage";
-import PenyajianDataMMK9Page from "./pages/materi-matematika/kelas9/statistika/PenyajianDataPage";
-import RataRataMMK9Page from "./pages/materi-matematika/kelas9/statistika/RataRataPage";
-import MedianModusMMK9Page from "./pages/materi-matematika/kelas9/statistika/MedianModusPage";
-import KuartilMMK9Page from "./pages/materi-matematika/kelas9/statistika/KuartilPage";
-import PenyebaranDataMMK9Page from "./pages/materi-matematika/kelas9/statistika/PenyebaranDataPage";
-import PeluangMMK9Page from "./pages/materi-matematika/kelas9/PeluangPage";
-import RuangSampelMMK9Page from "./pages/materi-matematika/kelas9/peluang/RuangSampelPage";
-import PeluangEmpirikMMK9Page from "./pages/materi-matematika/kelas9/peluang/PeluangEmpirikPage";
-import PeluangTeoretikMMK9Page from "./pages/materi-matematika/kelas9/peluang/PeluangTeoretikPage";
-import FrekuensiHarapanMMK9Page from "./pages/materi-matematika/kelas9/peluang/FrekuensiHarapanPage";
-import KomplementMMK9Page from "./pages/materi-matematika/kelas9/peluang/KomplementPage";
-import PeluangKejadianMajemukMMK9Page from "./pages/materi-matematika/kelas9/peluang/PeluangKejadianMajemukPage";
-import PersamaanKuadratMMK9Page from "./pages/materi-matematika/kelas9/PersamaanKuadratPage";
-import PKMMBentukUmumPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/BentukUmumPage";
-import PKMMPemfaktoranPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PemfaktoranPage";
-import PKMMRumusKuadratikPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/RumusKuadratikPage";
-import PKMMPelengkapKuadratPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PelengkapKuadratPage";
-import PKMMDiskriminanPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/DiskriminanPage";
-import PKMMMenyusunBaruPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/MenyusunPKBaruPage";
-import PKMMPenerapanKontekstualPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PenerapanKontekstualPage";
-import FungsiKuadratMMK9Page from "./pages/materi-matematika/kelas9/FungsiKuadratPage";
-import FKMMBentukUmumKarakteristikPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/BentukUmumKarakteristikPage";
-import FKMMTitikPotongPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/TitikPotongPage";
-import FKMMSumbuSimetriPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/SumbuSimetriPage";
-import FKMMMenggambarGrafikPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/MenggambarGrafikPage";
-import FKMMMenyusunFungsiPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/MenyusunFungsiPage";
-import FKMMPenerapanNilaiMaksMinPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/PenerapanNilaiMaksMinPage";
-
-const queryClient = new QueryClient();
+// ── App setup ──────────────────────────────────────────────────────────────
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+      retry: 1,
+    },
+  },
+});
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -843,782 +847,820 @@ const AppInner = () => {
   return (
     <>
       <ScrollToTop />
-      <Routes>
-      <Route path="/" element={<WelcomePage />} />
-      <Route path="/menu" element={<MenuPage />} />
-      <Route path="/lkpd" element={<LKPDMenuPage />} />
-      <Route path="/lkpd/kelas-7" element={<LKPDKelas7Page />} />
-      <Route path="/lkpd/kelas-8" element={<LKPDKelas8Page />} />
-      <Route path="/lkpd/kelas-9" element={<LKPDKelas9Page />} />
-      <Route path="/lkpd/kelas-7/perbandingan" element={<LKPDPerbandinganPage />} />
-      <Route path="/lkpd/kelas-7/perbandingan/umum" element={<LKPDPage />} />
-      <Route path="/lkpd/kelas-7/perbandingan/bertingkat" element={<BertingkatLKPDPage />} />
-      <Route path="/lkpd/kelas-7/perbandingan/senilai-berbalik" element={<SenilaiLKPDPage />} />
-      <Route path="/lkpd/kelas-7/perbandingan/skala" element={<SkalaLKPDPage />} />
-      <Route path="/lkpd/kelas-7/perbandingan/campuran" element={<CampuranLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat" element={<BilanganBulatMenuPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/perkalian" element={<PerkalianLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/pembagian" element={<PembagianLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/pesawat-tembak-meteor" element={<PesawatTembakMeteorPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-bulat/penjumlahan/pesawat-tembak-meteor" element={<PesawatTembakMeteorPenjumlahanPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional" element={<BilanganRasionalMenuPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional/penjumlahan-pengurangan" element={<PenjumlahanPenguranganPecahanLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional/perkalian" element={<PerkalianPecahanLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional/pembagian" element={<PembagianPecahanLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalLKPDPage />} />
-      <Route path="/lkpd/kelas-7/bilangan-rasional/operasi-desimal" element={<OperasiDesimalLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aljabar" element={<AljabarMenuPage />} />
-      <Route path="/lkpd/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurAljabarLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aljabar/perkalian-pembagian" element={<PerkalianPembagianAljabarLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarLKPDPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMenuPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv/kalimat-terbuka-tertutup" element={<KalimatTerbukaTertutupLKPDPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVLKPDPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVLKPDPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVLKPDPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVLKPDPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVLKPDPage />} />
-      <Route path="/lkpd/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMenuPage />} />
-      <Route path="/lkpd/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aritmetika-sosial/diskon" element={<DiskonLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalLKPDPage />} />
-      <Route path="/lkpd/kelas-7/garis-dan-sudut" element={<GarisDanSudutMenuPage />} />
-      <Route path="/lkpd/kelas-7/garis-dan-sudut/lkpd" element={<GarisDanSudutLKPDPage />} />
-      <Route path="/lkpd/kelas-7/segitiga-dan-segiempat" element={<SegitigaDanSegiempatMenuPage />} />
-      <Route path="/lkpd/kelas-7/segitiga-dan-segiempat/lkpd" element={<SegitigaDanSegiempatLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aritmetika-sosial/ppn" element={<PPNLKPDPage />} />
-      <Route path="/lkpd/kelas-7/aritmetika-sosial/pph" element={<PPhLKPDPage />} />
-      <Route path="/lkpd/kelas-7/himpunan" element={<HimpunanMenuPage />} />
-      <Route path="/lkpd/kelas-7/himpunan/lkpd" element={<HimpunanLKPDPage />} />
-      <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
-      <Route path="/lkpd/kelas-8/pola-bilangan" element={<PolaBilanganMenuPage />} />
-      <Route path="/lkpd/kelas-8/pola-bilangan/lkpd" element={<PolaBilanganLKPDPage />} />
-      <Route path="/lkpd/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/koordinat-cartesius/lkpd" element={<KoordinatCartesiusLKPDPage />} />
-      <Route path="/lkpd/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/relasi-dan-fungsi/lkpd" element={<RelasiFungsiLKPDPage />} />
-      <Route path="/lkpd/kelas-8/spldv" element={<SPLDVLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/spldv/lkpd" element={<SPLDVLKPDPage />} />
-      <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/persamaan-garis-lurus/lkpd" element={<PersamaanGarisLurusLKPDPage />} />
-      <Route path="/lkpd/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/teorema-pythagoras/lkpd" element={<TeoremaPythagorasLKPDPage />} />
-      <Route path="/lkpd/kelas-8/lingkaran" element={<LingkaranLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/lingkaran/lkpd" element={<LingkaranLKPDPage />} />
-      <Route path="/lkpd/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/garis-singgung-lingkaran/lkpd" element={<GarisSinggungLingkaranLKPDPage />} />
-      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusBRSDLKPDPage />} />
-      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokBRSDLKPDPage />} />
-      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaBRSDLKPDPage />} />
-      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasBRSDLKPDPage />} />
-      <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/gabungan" element={<GabunganBRSDLKPDPage />} />
-      <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
-      <Route path="/lkpd/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiPangkatLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bilangan-berpangkat/sifat-operasi" element={<SifatOperasiPangkatLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahLKPDPage />} />
-      <Route path="/lkpd/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenanLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/transformasi-geometri" element={<TransformasiGeometriLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/transformasi-geometri/translasi" element={<TranslasiTGLKPDPage />} />
-      <Route path="/lkpd/kelas-9/transformasi-geometri/refleksi" element={<RefleksiTGLKPDPage />} />
-      <Route path="/lkpd/kelas-9/transformasi-geometri/rotasi" element={<RotasiTGLKPDPage />} />
-      <Route path="/lkpd/kelas-9/transformasi-geometri/dilatasi" element={<DilatasiTGLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungBRSLLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutBRSLLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaBRSLLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/perubahan-luas-volume" element={<PerubahanLuasVolumeBRSLLKPDPage />} />
-      <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganBRSLLKPDPage />} />
-      <Route path="/lkpd/kelas-9/statistika" element={<StatistikaLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/statistika/pengantar-statistika" element={<PengantarStatistikaLKPDPage />} />
-      <Route path="/lkpd/kelas-9/statistika/penyajian-data" element={<PenyajianDataLKPDPage />} />
-      <Route path="/lkpd/kelas-9/statistika/rata-rata" element={<RataRataStatistikaLKPDPage />} />
-      <Route path="/lkpd/kelas-9/statistika/median-modus" element={<MedianModusLKPDPage />} />
-      <Route path="/lkpd/kelas-9/statistika/kuartil" element={<KuartilLKPDPage />} />
-      <Route path="/lkpd/kelas-9/statistika/jangkauan-simpangan" element={<JangkauanSimpanganLKPDPage />} />
-      <Route path="/lkpd/kelas-9/peluang" element={<PeluangLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/peluang/ruang-sampel" element={<RuangSampelLKPDPage />} />
-      <Route path="/lkpd/kelas-9/peluang/peluang-empirik" element={<PeluangEmpirikLKPDPage />} />
-      <Route path="/lkpd/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikLKPDPage />} />
-      <Route path="/lkpd/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanLKPDPage />} />
-      <Route path="/lkpd/kelas-9/peluang/komplemen" element={<KomplemenLKPDPage />} />
-      <Route path="/lkpd/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukLKPDPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKBentukUmumLKPDPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKPemfaktoranLKPDPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKRumusKuadratikLKPDPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKPelengkapKuadratLKPDPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat/diskriminan" element={<PKDiskriminanLKPDPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat/menyusun-baru" element={<PKMenyusunBaruLKPDPage />} />
-      <Route path="/lkpd/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualLKPDPage />} />
-      <Route path="/lkpd/kelas-9/fungsi-kuadrat" element={<FungsiKuadratLKPDMenuPage />} />
-      <Route path="/lkpd/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKBentukUmumKarakteristikLKPDPage />} />
-      <Route path="/lkpd/kelas-9/fungsi-kuadrat/titik-potong" element={<FKTitikPotongLKPDPage />} />
-      <Route path="/lkpd/kelas-9/fungsi-kuadrat/sumbu-simetri-puncak" element={<FKSumbuSimetriPuncakLKPDPage />} />
-      <Route path="/lkpd/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMenggambarGrafikLKPDPage />} />
-      <Route path="/lkpd/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMenyusunFungsiLKPDPage />} />
-      <Route path="/lkpd/kelas-9/fungsi-kuadrat/penerapan-maks-min" element={<FKPenerapanMaksMinLKPDPage />} />
-      <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
-      <Route path="/atp" element={<ATPPage />} />
-      <Route element={<GuruLayout />}>
-        <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
-        <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
-        <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />
-        <Route path="/ruang-untuk-guru/penilaian-pembelajaran" element={<PenilaianPembelajaranPage />} />
-        <Route path="/ruang-untuk-guru/capaian-pembelajaran" element={<CapaianPembelajaranPage />} />
-        <Route path="/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan" element={<RubrikPenilaianDimensiLulusanPage />} />
-        <Route path="/ruang-untuk-guru/jurnal-guru" element={<JurnalGuruPage />} />
-        <Route path="/ruang-untuk-guru/agenda-guru" element={<AgendaGuruPage />} />
-        <Route path="/ruang-untuk-guru/prosem" element={<ProsemPage />} />
-        <Route path="/ruang-untuk-guru/prosem/:tahun" element={<ProsemTahunPage />} />
-        <Route path="/ruang-untuk-guru/kktp" element={<KKTPPage />} />
-        <Route path="/ruang-untuk-guru/absensi-siswa" element={<AbsensiSiswaPage />} />
-        <Route path="/ruang-untuk-guru/penilaian-siswa" element={<PenilaianSiswaPage />} />
-        <Route path="/ruang-untuk-guru/rpp/rancang" element={<RancangRPPPage />} />
-        <Route path="/ruang-untuk-guru/kokulikuler" element={<KokulikulerPage />} />
-        <Route path="/ruang-untuk-guru/prota" element={<ProtaPage />} />
-        <Route path="/ruang-untuk-guru/prota/:tahun" element={<ProtaTahunPage />} />
-        <Route path="/ruang-untuk-guru/analisis-alokasi-waktu" element={<AnalisisAlokasiWaktuPage />} />
-        <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
-        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat" element={<RPPBilanganBulatPage />} />
-        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan" element={<RPPPenjumlahanBilanganBulatPage />} />
-        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pengurangan" element={<RPPPenguranganBilanganBulatPage />} />
-        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/perkalian" element={<RPPPerkalianBilanganBulatPage />} />
-        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pembagian" element={<RPPPembagianBilanganBulatPage />} />
-        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/operasi-campuran" element={<RPPOperasiCampuranBilanganBulatPage />} />
-        <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/kpk-fpb" element={<RPPKpkFpbPage />} />
-        <Route path="/ruang-untuk-guru/rpp/:materiSlug" element={<RPPMateriDynamicPage />} />
-        <Route path="/ruang-untuk-guru/rpp/:materiSlug/:subSlug" element={<RPPDetailDynamicPage />} />
-      </Route>
-      <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
-      <Route path="/pesan-kesan" element={<PesanKesanPage />} />
-      <Route path="/petunjuk" element={<PetunjukPage />} />
-      <Route path="/quiz" element={<QuizPage />} />
-      <Route path="/referensi" element={<ReferensiPage />} />
-      <Route path="/kalkulator-scientific" element={<KalkulatorScientificPage />} />
-      <Route path="/kumpulan-rumus" element={<KumpulanRumusPage />} />
-      <Route path="/konversi-satuan" element={<KonversiSatuanPage />} />
-      <Route path="/video-pembelajaran" element={<VideoPembelajaranPage />} />
-      <Route path="/donasi" element={<DonasiPage />} />
-      <Route path="/biografi" element={<BiografiPage />} />
-      <Route path="/olimpiade" element={<OlimpiadePage />} />
-      <Route path="/olimpiade/bilangan-bulat" element={<OlimpiadeBilanganBulatPage />} />
-      <Route path="/olimpiade/bilangan-rasional" element={<OlimpiadeBilanganRasionalPage />} />
-      <Route path="/olimpiade/bilangan-berpangkat" element={<OlimpiadeBilanganBerpangkatPage />} />
-      <Route path="/olimpiade/statistika" element={<OlimpiadeStatistikaPage />} />
-      <Route path="/olimpiade/bilangan-irasional" element={<OlimpiadeBilanganIrasionalPage />} />
-      <Route path="/olimpiade/kpk-fpb" element={<OlimpiadeKPKFPBPage />} />
-      <Route path="/olimpiade/modulo" element={<OlimpiadeModuloPage />} />
-      <Route path="/olimpiade/himpunan" element={<OlimpiadeHimpunanPage />} />
-      <Route path="/olimpiade/relasi-fungsi" element={<OlimpiadeRelasiFungsiPage />} />
-      <Route path="/olimpiade/perbandingan" element={<OlimpiadePerbandinganPage />} />
-      <Route path="/olimpiade/aljabar" element={<OlimpiadeAljabarPage />} />
-      <Route path="/olimpiade/pola-bilangan" element={<OlimpiadePolaBilanganPage />} />
-      <Route path="/olimpiade/spldv" element={<OlimpiadeSPLDVPage />} />
-      <Route path="/olimpiade/garis-sudut" element={<OlimpiadeGarisSudutPage />} />
-      <Route path="/olimpiade/koordinat-cartesius" element={<OlimpiadeKoordinatCartesiusPage />} />
-      <Route path="/olimpiade/teorema-pythagoras" element={<OlimpiadeTeoremaPage />} />
-      <Route path="/olimpiade/segitiga-segiempat" element={<OlimpiadeSegitigaSegiempatPage />} />
-      <Route path="/olimpiade/lingkaran" element={<OlimpiadeLingkaranPage />} />
-      <Route path="/olimpiade/bangun-ruang-sisi-datar" element={<OlimpiadeBangunRuangSisiDatarPage />} />
-      <Route path="/olimpiade/bangun-ruang-sisi-lengkung" element={<OlimpiadeBangunRuangSisiLengkungPage />} />
-      <Route path="/olimpiade/plsv" element={<OlimpiadePLSVPage />} />
-      <Route path="/olimpiade/persamaan-garis" element={<OlimpiadePersamaanGarisPage />} />
-      <Route path="/olimpiade/persamaan-kuadrat" element={<OlimpiadePersamaanKuadratPage />} />
-      <Route path="/olimpiade/fungsi-kuadrat" element={<OlimpiadeFungsiKuadratPage />} />
-      <Route path="/olimpiade/aritmetika-sosial" element={<OlimpiadeAritmetikaSosialPage />} />
-      <Route path="/olimpiade/kesebangunan" element={<OlimpiadeKesebangunanPage />} />
-      <Route path="/olimpiade/transformasi-geometri" element={<OlimpiadeTransformasiPage />} />
-      <Route path="/olimpiade/peluang" element={<OlimpiadePeluangPage />} />
-      <Route path="/tka" element={<TKAPage />} />
-      <Route path="/tka/tips" element={<TKATipsPage />} />
-      <Route path="/tka/paket-1" element={<TKALatihan1Page />} />
-      <Route path="/tka/paket-2" element={<TKALatihan2Page />} />
-      <Route path="/tka/paket-3" element={<TKALatihan3Page />} />
-      <Route path="/tka/paket-4" element={<TKALatihan4Page />} />
-      <Route path="/tka/paket-5" element={<TKALatihan5Page />} />
-      <Route path="/papan-peringkat" element={<PapanPeringkatPage />} />
-      <Route path="/bank-soal" element={<BankSoalPage />} />
-      <Route path="/bank-soal/bilangan-bulat" element={<BankSoalBilanganBulatPage />} />
-      <Route path="/bank-soal/bilangan-rasional" element={<BankSoalBilanganRasionalPage />} />
-      <Route path="/bank-soal/segitiga-dan-segiempat" element={<BankSoalSegitigaSegiempatPage />} />
-      <Route path="/bank-soal/himpunan" element={<BankSoalHimpunanPage />} />
-      <Route path="/bank-soal/koordinat-cartesius" element={<BankSoalKoordinatCartesiusPage />} />
-      <Route path="/bank-soal/aljabar" element={<BankSoalAljabarPage />} />
-      <Route path="/bank-soal/plsv" element={<BankSoalPLSVPage />} />
-      <Route path="/bank-soal/perbandingan" element={<BankSoalPerbandinganPage />} />
-      <Route path="/bank-soal/aritmetika-sosial" element={<BankSoalAritmetikaSosialPage />} />
-      <Route path="/bank-soal/pola-bilangan" element={<BankSoalPolaBilanganPage />} />
-      <Route path="/bank-soal/relasi-fungsi" element={<BankSoalRelasiFungsiPage />} />
-      <Route path="/bank-soal/garis-sudut" element={<BankSoalGarisSudutPage />} />
-      <Route path="/bank-soal/spldv" element={<BankSoalSPLDVPage />} />
-      <Route path="/bank-soal/persamaan-garis-lurus" element={<BankSoalPersamaanGarisLurusPage />} />
-      <Route path="/bank-soal/peluang" element={<BankSoalPeluangPage />} />
-      <Route path="/bank-soal/teorema-pythagoras" element={<BankSoalTeoremaPythagorasPage />} />
-      <Route path="/bank-soal/lingkaran" element={<BankSoalLingkaranPage />} />
-      <Route path="/bank-soal/bangun-ruang-sisi-datar" element={<BankSoalBangunRuangSisiDatarPage />} />
-      <Route path="/bank-soal/bangun-ruang-sisi-lengkung" element={<BankSoalBangunRuangSisiLengkungPage />} />
-      <Route path="/bank-soal/bilangan-berpangkat" element={<BankSoalBilanganBerpangkatPage />} />
-      <Route path="/bank-soal/persamaan-kuadrat" element={<BankSoalPersamaanKuadratPage />} />
-      <Route path="/bank-soal/fungsi-kuadrat" element={<BankSoalFungsiKuadratPage />} />
-      <Route path="/bank-soal/statistika" element={<BankSoalStatistikaPage />} />
-      <Route path="/bank-soal/garis-singgung-lingkaran" element={<BankSoalGarisSinggungLingkaranPage />} />
-      <Route path="/bank-soal/kesebangunan-kekongruenan" element={<BankSoalKesebangunanPage />} />
-      <Route path="/bank-soal/transformasi-geometri" element={<BankSoalTransformasiGeometriPage />} />
-      <Route path="/chat-ai" element={<ChatAIPage />} />
-      <Route path="/pengaturan" element={<PengaturanPage />} />
-      <Route path="/tentang-aplikasi" element={<TentangAplikasiPage />} />
-      <Route path="/coming-soon" element={<ComingSoonPage />} />
-      
-      {/* Latihan Mandiri Routes */}
-      <Route path="/latihan-mandiri" element={<LatihanMandiriPage />} />
-      <Route path="/latihan-mandiri/kelas-7" element={<LatihanMandiriKelas7Page />} />
-      <Route path="/latihan-mandiri/kelas-8" element={<LatihanMandiriKelas8Page />} />
-      <Route path="/latihan-mandiri/kelas-9" element={<LatihanMandiriKelas9Page />} />
-      
-      {/* Kelas 7 Topic Routes */}
-<Route path="/latihan-mandiri/kelas-7/bilangan-bulat" element={<BilanganBulatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBBilanganBulatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional" element={<BilanganRasionalK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/arti-pecahan-senilai-membandingkan" element={<ArtiPecahanSenilaiMembandingkanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pecahan-campuran-persen" element={<PecahanCampuranPersenK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/penjumlahan-pecahan" element={<PenjumlahanPecahanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/perkalian-pecahan" element={<PerkalianPecahanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pembagian-pecahan" element={<PembagianPecahanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/penjumlahan-pengurangan-desimal" element={<PenjumlahanPenguranganDesimalK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/perkalian-desimal" element={<PerkalianDesimalK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pembagian-desimal" element={<PembagianDesimalK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pembulatan-desimal" element={<PembulatanDesimalK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar" element={<AljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/perkalian" element={<PerkalianAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/pembagian" element={<PembagianAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/pemangkatan" element={<PemangkatanAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/substitusi" element={<SubstitusiBilanganAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aljabar/pecahan-aljabar" element={<MenyederhanakanPecahanAljabarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv" element={<PLSVPtLSVK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/kalimat-terbuka" element={<KalimatTerbukaTertutupK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/perbandingan" element={<PerbandinganK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/perbandingan/umum" element={<PerbandinganUmumK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/perbandingan/bertingkat" element={<PerbandinganBertingkatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/perbandingan/skala" element={<PerbandinganSkalaK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial" element={<AritmetikaSosialK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/diskon" element={<DiskonK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/ppn" element={<PPNK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/pph" element={<PPhK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut" element={<GarisDanSudutK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/hubungan-2-garis" element={<HubunganDuaGarisK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak" element={<SudutPelurusPenyikuBertolakK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/sifat-sudut-dua-garis-sejajar" element={<SifatSudutDuaGarisSejajarK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/jumlah-sudut-segi-banyak" element={<JumlahSudutSegiBanyakK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-segitiga-dan-segiempat" element={<KelilingSegitigaSegiempatLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" element={<KelilingLuasBangunTakBeraturanLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/himpunan" element={<HimpunanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/himpunan/menyatakan-himpunan" element={<MenyatakanHimpunanLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/himpunan/diagram-venn" element={<DiagramVennLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/himpunan/himpunan-bagian" element={<HimpunanBagianLatihanK7Page />} />
-      <Route path="/latihan-mandiri/kelas-7/himpunan/operasi-himpunan" element={<OperasiHimpunanLatihanK7Page />} />
-      
-      {/* Kelas 8 Topic Routes */}
-      <Route path="/latihan-mandiri/kelas-8/pola-bilangan" element={<PolaBilanganK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pengertian-pola" element={<PengertianPolaK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif" element={<PosisiRelatifGarisK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/notasi-fungsi" element={<NotasiFungsiK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv" element={<SPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv/definisi" element={<DefinisiSPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv/metode-grafik" element={<MetodeGrafikSPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiSPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiSPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv/metode-campuran" element={<MetodeCampuranSPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv/model-spldv" element={<ModelSPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/grafik" element={<GrafikPGLK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/gradien" element={<GradienK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<MenentukanPGLK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualPGLK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangPythagorasK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaPythagorasK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/lingkaran" element={<LingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarLingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/lingkaran/busur-juring" element={<BusurJuringLingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/pengertian" element={<PengertianGSLK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/menghitung-panjang" element={<MenghitungPanjangGSLK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspl" element={<GSPLK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusLMK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokLMK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaLMK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasLMK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/masalah-kontekstual" element={<MasalahKontekstualBRSDLMK8Page />} />
-      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan" element={<BRSDGabunganLMK8Page />} />
-      
-      {/* Kelas 9 Topic Routes */}
-      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/sifat-sifat" element={<SifatSifatK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/pangkat-nol-negatif-pecahan" element={<PangkatNolNegatifPecahanK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/definisi" element={<DefinisiKesebangunanK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk" element={<MenghitungRusukK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" element={<SegitigaSebangunK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/rasio-rusuk" element={<RasioRusukK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/kekongruenan" element={<KekongruenBangunDatarK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri" element={<TransformasiGeometriK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/translasi" element={<TranslasiK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/refleksi" element={<RefleksiK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/rotasi" element={<RotasiK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/dilatasi" element={<DilatsiK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume" element={<PerubahanVolumeLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/statistika" element={<StatistikaK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/statistika/pengantar" element={<PengantarStatistikaLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/statistika/penyajian-data" element={<PenyajianDataLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/statistika/rata-rata" element={<RataRataLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/statistika/median-modus" element={<MedianModusLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/statistika/kuartil" element={<KuartilLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/statistika/penyebaran-data" element={<PenyebaranDataLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/peluang" element={<PeluangK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/peluang/ruang-sampel" element={<RuangSampelLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/peluang/peluang-empirik" element={<PeluangEmpirikLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/peluang/komplemen" element={<KomplementLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukLMK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKBentukUmumPage />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKPemfaktoranPage />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKRumusKuadratikPage />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKPelengkapKuadratPage />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/diskriminan" element={<PKDiskriminanPage />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru" element={<PKMenyusunBaruPage />} />
-      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualPage />} />
-      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat" element={<FungsiKuadratK9Page />} />
-      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKBentukUmumKarakteristikPage />} />
-      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/titik-potong" element={<FKTitikPotongPage />} />
-      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/sumbu-simetri" element={<FKSumbuSimetriPage />} />
-      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMenggambarGrafikPage />} />
-      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMenyusunFungsiPage />} />
-      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" element={<FKPenerapanNilaiMaksMinPage />} />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/menu" element={<MenuPage />} />
+          <Route path="/lkpd" element={<LKPDMenuPage />} />
+          <Route path="/lkpd/kelas-7" element={<LKPDKelas7Page />} />
+          <Route path="/lkpd/kelas-8" element={<LKPDKelas8Page />} />
+          <Route path="/lkpd/kelas-9" element={<LKPDKelas9Page />} />
+          <Route path="/lkpd/kelas-7/perbandingan" element={<LKPDPerbandinganPage />} />
+          <Route path="/lkpd/kelas-7/perbandingan/umum" element={<LKPDPage />} />
+          <Route path="/lkpd/kelas-7/perbandingan/bertingkat" element={<BertingkatLKPDPage />} />
+          <Route path="/lkpd/kelas-7/perbandingan/senilai-berbalik" element={<SenilaiLKPDPage />} />
+          <Route path="/lkpd/kelas-7/perbandingan/skala" element={<SkalaLKPDPage />} />
+          <Route path="/lkpd/kelas-7/perbandingan/campuran" element={<CampuranLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat" element={<BilanganBulatMenuPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/perkalian" element={<PerkalianLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/pembagian" element={<PembagianLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/pesawat-tembak-meteor" element={<PesawatTembakMeteorPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-bulat/penjumlahan/pesawat-tembak-meteor" element={<PesawatTembakMeteorPenjumlahanPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional" element={<BilanganRasionalMenuPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional/penjumlahan-pengurangan" element={<PenjumlahanPenguranganPecahanLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional/perkalian" element={<PerkalianPecahanLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional/pembagian" element={<PembagianPecahanLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalLKPDPage />} />
+          <Route path="/lkpd/kelas-7/bilangan-rasional/operasi-desimal" element={<OperasiDesimalLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aljabar" element={<AljabarMenuPage />} />
+          <Route path="/lkpd/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurAljabarLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aljabar/perkalian-pembagian" element={<PerkalianPembagianAljabarLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarLKPDPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMenuPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv/kalimat-terbuka-tertutup" element={<KalimatTerbukaTertutupLKPDPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVLKPDPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVLKPDPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVLKPDPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVLKPDPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVLKPDPage />} />
+          <Route path="/lkpd/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMenuPage />} />
+          <Route path="/lkpd/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aritmetika-sosial/diskon" element={<DiskonLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalLKPDPage />} />
+          <Route path="/lkpd/kelas-7/garis-dan-sudut" element={<GarisDanSudutMenuPage />} />
+          <Route path="/lkpd/kelas-7/garis-dan-sudut/lkpd" element={<GarisDanSudutLKPDPage />} />
+          <Route path="/lkpd/kelas-7/segitiga-dan-segiempat" element={<SegitigaDanSegiempatMenuPage />} />
+          <Route path="/lkpd/kelas-7/segitiga-dan-segiempat/lkpd" element={<SegitigaDanSegiempatLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aritmetika-sosial/ppn" element={<PPNLKPDPage />} />
+          <Route path="/lkpd/kelas-7/aritmetika-sosial/pph" element={<PPhLKPDPage />} />
+          <Route path="/lkpd/kelas-7/himpunan" element={<HimpunanMenuPage />} />
+          <Route path="/lkpd/kelas-7/himpunan/lkpd" element={<HimpunanLKPDPage />} />
+          <Route path="/lkpd/kelas-7/*" element={<ComingSoonPage />} />
+          <Route path="/lkpd/kelas-8/pola-bilangan" element={<PolaBilanganMenuPage />} />
+          <Route path="/lkpd/kelas-8/pola-bilangan/lkpd" element={<PolaBilanganLKPDPage />} />
+          <Route path="/lkpd/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/koordinat-cartesius/lkpd" element={<KoordinatCartesiusLKPDPage />} />
+          <Route path="/lkpd/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/relasi-dan-fungsi/lkpd" element={<RelasiFungsiLKPDPage />} />
+          <Route path="/lkpd/kelas-8/spldv" element={<SPLDVLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/spldv/lkpd" element={<SPLDVLKPDPage />} />
+          <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/persamaan-garis-lurus/lkpd" element={<PersamaanGarisLurusLKPDPage />} />
+          <Route path="/lkpd/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/teorema-pythagoras/lkpd" element={<TeoremaPythagorasLKPDPage />} />
+          <Route path="/lkpd/kelas-8/lingkaran" element={<LingkaranLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/lingkaran/lkpd" element={<LingkaranLKPDPage />} />
+          <Route path="/lkpd/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/garis-singgung-lingkaran/lkpd" element={<GarisSinggungLingkaranLKPDPage />} />
+          <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusBRSDLKPDPage />} />
+          <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokBRSDLKPDPage />} />
+          <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaBRSDLKPDPage />} />
+          <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasBRSDLKPDPage />} />
+          <Route path="/lkpd/kelas-8/bangun-ruang-sisi-datar/gabungan" element={<GabunganBRSDLKPDPage />} />
+          <Route path="/lkpd/kelas-8/*" element={<ComingSoonPage />} />
+          <Route path="/lkpd/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiPangkatLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bilangan-berpangkat/sifat-operasi" element={<SifatOperasiPangkatLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahLKPDPage />} />
+          <Route path="/lkpd/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenanLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/transformasi-geometri" element={<TransformasiGeometriLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/transformasi-geometri/translasi" element={<TranslasiTGLKPDPage />} />
+          <Route path="/lkpd/kelas-9/transformasi-geometri/refleksi" element={<RefleksiTGLKPDPage />} />
+          <Route path="/lkpd/kelas-9/transformasi-geometri/rotasi" element={<RotasiTGLKPDPage />} />
+          <Route path="/lkpd/kelas-9/transformasi-geometri/dilatasi" element={<DilatasiTGLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungBRSLLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutBRSLLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaBRSLLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/perubahan-luas-volume" element={<PerubahanLuasVolumeBRSLLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganBRSLLKPDPage />} />
+          <Route path="/lkpd/kelas-9/statistika" element={<StatistikaLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/statistika/pengantar-statistika" element={<PengantarStatistikaLKPDPage />} />
+          <Route path="/lkpd/kelas-9/statistika/penyajian-data" element={<PenyajianDataLKPDPage />} />
+          <Route path="/lkpd/kelas-9/statistika/rata-rata" element={<RataRataStatistikaLKPDPage />} />
+          <Route path="/lkpd/kelas-9/statistika/median-modus" element={<MedianModusLKPDPage />} />
+          <Route path="/lkpd/kelas-9/statistika/kuartil" element={<KuartilLKPDPage />} />
+          <Route path="/lkpd/kelas-9/statistika/jangkauan-simpangan" element={<JangkauanSimpanganLKPDPage />} />
+          <Route path="/lkpd/kelas-9/peluang" element={<PeluangLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/peluang/ruang-sampel" element={<RuangSampelLKPDPage />} />
+          <Route path="/lkpd/kelas-9/peluang/peluang-empirik" element={<PeluangEmpirikLKPDPage />} />
+          <Route path="/lkpd/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikLKPDPage />} />
+          <Route path="/lkpd/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanLKPDPage />} />
+          <Route path="/lkpd/kelas-9/peluang/komplemen" element={<KomplemenLKPDPage />} />
+          <Route path="/lkpd/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukLKPDPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKBentukUmumLKPDPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKPemfaktoranLKPDPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKRumusKuadratikLKPDPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKPelengkapKuadratLKPDPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat/diskriminan" element={<PKDiskriminanLKPDPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat/menyusun-baru" element={<PKMenyusunBaruLKPDPage />} />
+          <Route path="/lkpd/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualLKPDPage />} />
+          <Route path="/lkpd/kelas-9/fungsi-kuadrat" element={<FungsiKuadratLKPDMenuPage />} />
+          <Route path="/lkpd/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKBentukUmumKarakteristikLKPDPage />} />
+          <Route path="/lkpd/kelas-9/fungsi-kuadrat/titik-potong" element={<FKTitikPotongLKPDPage />} />
+          <Route path="/lkpd/kelas-9/fungsi-kuadrat/sumbu-simetri-puncak" element={<FKSumbuSimetriPuncakLKPDPage />} />
+          <Route path="/lkpd/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMenggambarGrafikLKPDPage />} />
+          <Route path="/lkpd/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMenyusunFungsiLKPDPage />} />
+          <Route path="/lkpd/kelas-9/fungsi-kuadrat/penerapan-maks-min" element={<FKPenerapanMaksMinLKPDPage />} />
+          <Route path="/lkpd/kelas-9/*" element={<ComingSoonPage />} />
+          <Route path="/atp" element={<ATPPage />} />
+          <Route element={<GuruLayout />}>
+            <Route path="/ruang-untuk-guru" element={<RuangUntukGuruPage />} />
+            <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
+            <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />
+            <Route path="/ruang-untuk-guru/penilaian-pembelajaran" element={<PenilaianPembelajaranPage />} />
+            <Route path="/ruang-untuk-guru/capaian-pembelajaran" element={<CapaianPembelajaranPage />} />
+            <Route path="/ruang-untuk-guru/rubrik-penilaian-dimensi-lulusan" element={<RubrikPenilaianDimensiLulusanPage />} />
+            <Route path="/ruang-untuk-guru/jurnal-guru" element={<JurnalGuruPage />} />
+            <Route path="/ruang-untuk-guru/agenda-guru" element={<AgendaGuruPage />} />
+            <Route path="/ruang-untuk-guru/prosem" element={<ProsemPage />} />
+            <Route path="/ruang-untuk-guru/prosem/:tahun" element={<ProsemTahunPage />} />
+            <Route path="/ruang-untuk-guru/kktp" element={<KKTPPage />} />
+            <Route path="/ruang-untuk-guru/absensi-siswa" element={<AbsensiSiswaPage />} />
+            <Route path="/ruang-untuk-guru/penilaian-siswa" element={<PenilaianSiswaPage />} />
+            <Route path="/ruang-untuk-guru/rpp/rancang" element={<RancangRPPPage />} />
+            <Route path="/ruang-untuk-guru/kokulikuler" element={<KokulikulerPage />} />
+            <Route path="/ruang-untuk-guru/prota" element={<ProtaPage />} />
+            <Route path="/ruang-untuk-guru/prota/:tahun" element={<ProtaTahunPage />} />
+            <Route path="/ruang-untuk-guru/analisis-alokasi-waktu" element={<AnalisisAlokasiWaktuPage />} />
+            <Route path="/ruang-untuk-guru/rpp" element={<RPPPage />} />
+            <Route path="/ruang-untuk-guru/rpp/bilangan-bulat" element={<RPPBilanganBulatPage />} />
+            <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/penjumlahan" element={<RPPPenjumlahanBilanganBulatPage />} />
+            <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pengurangan" element={<RPPPenguranganBilanganBulatPage />} />
+            <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/perkalian" element={<RPPPerkalianBilanganBulatPage />} />
+            <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/pembagian" element={<RPPPembagianBilanganBulatPage />} />
+            <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/operasi-campuran" element={<RPPOperasiCampuranBilanganBulatPage />} />
+            <Route path="/ruang-untuk-guru/rpp/bilangan-bulat/kpk-fpb" element={<RPPKpkFpbPage />} />
+            <Route path="/ruang-untuk-guru/rpp/:materiSlug" element={<RPPMateriDynamicPage />} />
+            <Route path="/ruang-untuk-guru/rpp/:materiSlug/:subSlug" element={<RPPDetailDynamicPage />} />
+          </Route>
+          <Route path="/ulangan-harian" element={<UlanganHarianPage />} />
+          <Route path="/pesan-kesan" element={<PesanKesanPage />} />
+          <Route path="/petunjuk" element={<PetunjukPage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/referensi" element={<ReferensiPage />} />
+          <Route path="/kalkulator-scientific" element={<KalkulatorScientificPage />} />
+          <Route path="/kumpulan-rumus" element={<KumpulanRumusPage />} />
+          <Route path="/konversi-satuan" element={<KonversiSatuanPage />} />
+          <Route path="/video-pembelajaran" element={<VideoPembelajaranPage />} />
+          <Route path="/donasi" element={<DonasiPage />} />
+          <Route path="/biografi" element={<BiografiPage />} />
+          <Route path="/olimpiade" element={<OlimpiadePage />} />
+          <Route path="/olimpiade/bilangan-bulat" element={<OlimpiadeBilanganBulatPage />} />
+          <Route path="/olimpiade/bilangan-rasional" element={<OlimpiadeBilanganRasionalPage />} />
+          <Route path="/olimpiade/bilangan-berpangkat" element={<OlimpiadeBilanganBerpangkatPage />} />
+          <Route path="/olimpiade/statistika" element={<OlimpiadeStatistikaPage />} />
+          <Route path="/olimpiade/bilangan-irasional" element={<OlimpiadeBilanganIrasionalPage />} />
+          <Route path="/olimpiade/kpk-fpb" element={<OlimpiadeKPKFPBPage />} />
+          <Route path="/olimpiade/modulo" element={<OlimpiadeModuloPage />} />
+          <Route path="/olimpiade/himpunan" element={<OlimpiadeHimpunanPage />} />
+          <Route path="/olimpiade/relasi-fungsi" element={<OlimpiadeRelasiFungsiPage />} />
+          <Route path="/olimpiade/perbandingan" element={<OlimpiadePerbandinganPage />} />
+          <Route path="/olimpiade/aljabar" element={<OlimpiadeAljabarPage />} />
+          <Route path="/olimpiade/pola-bilangan" element={<OlimpiadePolaBilanganPage />} />
+          <Route path="/olimpiade/spldv" element={<OlimpiadeSPLDVPage />} />
+          <Route path="/olimpiade/garis-sudut" element={<OlimpiadeGarisSudutPage />} />
+          <Route path="/olimpiade/koordinat-cartesius" element={<OlimpiadeKoordinatCartesiusPage />} />
+          <Route path="/olimpiade/teorema-pythagoras" element={<OlimpiadeTeoremaPage />} />
+          <Route path="/olimpiade/segitiga-segiempat" element={<OlimpiadeSegitigaSegiempatPage />} />
+          <Route path="/olimpiade/lingkaran" element={<OlimpiadeLingkaranPage />} />
+          <Route path="/olimpiade/bangun-ruang-sisi-datar" element={<OlimpiadeBangunRuangSisiDatarPage />} />
+          <Route path="/olimpiade/bangun-ruang-sisi-lengkung" element={<OlimpiadeBangunRuangSisiLengkungPage />} />
+          <Route path="/olimpiade/plsv" element={<OlimpiadePLSVPage />} />
+          <Route path="/olimpiade/persamaan-garis" element={<OlimpiadePersamaanGarisPage />} />
+          <Route path="/olimpiade/persamaan-kuadrat" element={<OlimpiadePersamaanKuadratPage />} />
+          <Route path="/olimpiade/fungsi-kuadrat" element={<OlimpiadeFungsiKuadratPage />} />
+          <Route path="/olimpiade/aritmetika-sosial" element={<OlimpiadeAritmetikaSosialPage />} />
+          <Route path="/olimpiade/kesebangunan" element={<OlimpiadeKesebangunanPage />} />
+          <Route path="/olimpiade/transformasi-geometri" element={<OlimpiadeTransformasiPage />} />
+          <Route path="/olimpiade/peluang" element={<OlimpiadePeluangPage />} />
+          <Route path="/tka" element={<TKAPage />} />
+          <Route path="/tka/tips" element={<TKATipsPage />} />
+          <Route path="/tka/paket-1" element={<TKALatihan1Page />} />
+          <Route path="/tka/paket-2" element={<TKALatihan2Page />} />
+          <Route path="/tka/paket-3" element={<TKALatihan3Page />} />
+          <Route path="/tka/paket-4" element={<TKALatihan4Page />} />
+          <Route path="/tka/paket-5" element={<TKALatihan5Page />} />
+          <Route path="/papan-peringkat" element={<PapanPeringkatPage />} />
+          <Route path="/bank-soal" element={<BankSoalPage />} />
+          <Route path="/bank-soal/bilangan-bulat" element={<BankSoalBilanganBulatPage />} />
+          <Route path="/bank-soal/bilangan-rasional" element={<BankSoalBilanganRasionalPage />} />
+          <Route path="/bank-soal/segitiga-dan-segiempat" element={<BankSoalSegitigaSegiempatPage />} />
+          <Route path="/bank-soal/himpunan" element={<BankSoalHimpunanPage />} />
+          <Route path="/bank-soal/koordinat-cartesius" element={<BankSoalKoordinatCartesiusPage />} />
+          <Route path="/bank-soal/aljabar" element={<BankSoalAljabarPage />} />
+          <Route path="/bank-soal/plsv" element={<BankSoalPLSVPage />} />
+          <Route path="/bank-soal/perbandingan" element={<BankSoalPerbandinganPage />} />
+          <Route path="/bank-soal/aritmetika-sosial" element={<BankSoalAritmetikaSosialPage />} />
+          <Route path="/bank-soal/pola-bilangan" element={<BankSoalPolaBilanganPage />} />
+          <Route path="/bank-soal/relasi-fungsi" element={<BankSoalRelasiFungsiPage />} />
+          <Route path="/bank-soal/garis-sudut" element={<BankSoalGarisSudutPage />} />
+          <Route path="/bank-soal/spldv" element={<BankSoalSPLDVPage />} />
+          <Route path="/bank-soal/persamaan-garis-lurus" element={<BankSoalPersamaanGarisLurusPage />} />
+          <Route path="/bank-soal/peluang" element={<BankSoalPeluangPage />} />
+          <Route path="/bank-soal/teorema-pythagoras" element={<BankSoalTeoremaPythagorasPage />} />
+          <Route path="/bank-soal/lingkaran" element={<BankSoalLingkaranPage />} />
+          <Route path="/bank-soal/bangun-ruang-sisi-datar" element={<BankSoalBangunRuangSisiDatarPage />} />
+          <Route path="/bank-soal/bangun-ruang-sisi-lengkung" element={<BankSoalBangunRuangSisiLengkungPage />} />
+          <Route path="/bank-soal/bilangan-berpangkat" element={<BankSoalBilanganBerpangkatPage />} />
+          <Route path="/bank-soal/persamaan-kuadrat" element={<BankSoalPersamaanKuadratPage />} />
+          <Route path="/bank-soal/fungsi-kuadrat" element={<BankSoalFungsiKuadratPage />} />
+          <Route path="/bank-soal/statistika" element={<BankSoalStatistikaPage />} />
+          <Route path="/bank-soal/garis-singgung-lingkaran" element={<BankSoalGarisSinggungLingkaranPage />} />
+          <Route path="/bank-soal/kesebangunan-kekongruenan" element={<BankSoalKesebangunanPage />} />
+          <Route path="/bank-soal/transformasi-geometri" element={<BankSoalTransformasiGeometriPage />} />
+          <Route path="/chat-ai" element={<ChatAIPage />} />
+          <Route path="/pengaturan" element={<PengaturanPage />} />
+          <Route path="/tentang-aplikasi" element={<TentangAplikasiPage />} />
+          <Route path="/coming-soon" element={<ComingSoonPage />} />
+          <Route path="/menghitung-cepat" element={<MenghitungCepatPage />} />
+          <Route path="/menghitung-cepat/perkalian-dengan-11" element={<PerkalianDengan11Page />} />
+          <Route path="/menghitung-cepat/kuadrat-berakhiran-5" element={<KuadratBerakhiran5Page />} />
+          <Route path="/menghitung-cepat/kuadrat-cepat" element={<KuadratCepatPage />} />
+          <Route path="/menghitung-cepat/perkalian-dekat-100" element={<PerkalianDekat100Page />} />
+          <Route path="/menghitung-cepat/persentase-cepat" element={<PersentaseCepatPage />} />
+          <Route path="/menghitung-cepat/penjumlahan-pengurangan" element={<PenjumlahanPenguranganCepatPage />} />
+          <Route path="/menghitung-cepat/perkalian-dua-digit" element={<PerkalianDuaDigitPage />} />
+          <Route path="/menghitung-cepat/pembagian-cepat" element={<PembagianCepatPage />} />
+          <Route path="/menghitung-cepat/tabel-referensi" element={<TabelReferensiPage />} />
+          <Route path="/menghitung-cepat/latihan-flashcard" element={<LatihanFlashcardPage />} />
 
-      {/* Math Game Arena Routes */}
-      <Route path="/math-game-arena" element={<MathGameArenaPage />} />
-      <Route path="/math-game-arena/kelas-7" element={<MathGameArenaKelas7Page />} />
-      <Route path="/math-game-arena/kelas-8" element={<MathGameArenaKelas8Page />} />
-      <Route path="/math-game-arena/kelas-9" element={<MathGameArenaKelas9Page />} />
-      <Route path="/math-game-arena/umum" element={<MathGameArenaUmumPage />} />
-      <Route path="/math-game-arena/umum/balap-mobil" element={<CarRacingGamePage />} />
-      <Route path="/math-game-arena/umum/tetris" element={<TetrisGamePage />} />
-      <Route path="/math-game-arena/umum/dino-run" element={<DinoRunGamePage />} />
-      <Route path="/math-game-arena/umum/flappy-rocket" element={<FlappyRocketPage />} />
-      <Route path="/math-game-arena/umum/tangkap-benda" element={<CatchItemsGamePage />} />
-      <Route path="/math-game-arena/umum/snake-math" element={<SnakeMathPage />} />
-      <Route path="/math-game-arena/umum/asteroid-blaster" element={<AsteroidBlasterPage />} />
-      <Route path="/math-game-arena/umum/bubble-pop" element={<BubblePopPage />} />
-      <Route path="/math-game-arena/umum/hajar-mol" element={<MolSmashPage />} />
-      <Route path="/math-game-arena/umum/mancing-soal" element={<FishingMathPage />} />
-      <Route path="/math-game-arena/umum/pecah-jawaban" element={<BrickBreakerPage />} />
-      <Route path="/math-game-arena/umum/tembak-tank" element={<BattleTankPage />} />
-      <Route path="/math-game-arena/umum/kereta-koin-math" element={<CoinTrainMathPage />} />
-      <Route path="/math-game-arena/umum/ninja-buah-math" element={<FruitNinjaMathPage />} />
-      <Route path="/math-game-arena/umum/pulau-harta-math" element={<TreasureIslandMathPage />} />
-      <Route path="/math-game-arena/umum/kapal-selam-math-battle" element={<SubmarineBattleMathPage />} />
-      <Route path="/math-game-arena/umum/lompat-jawaban" element={<PlatformJumpMathPage />} />
-      <Route path="/math-game-arena/umum/ksatria-mat" element={<KsatriaMatPage />} />
-      <Route path="/math-game-arena/umum/space-impact" element={<SpaceImpactPage />} />
-      <Route path="/math-game-arena/umum/galaxy-defender" element={<GalaxyDefenderPage />} />
-      <Route path="/math-game-arena/umum/math-bros" element={<MathBrosPage />} />
-      <Route path="/math-game-arena/umum/zuma-math" element={<ZumaMathPage />} />
-      <Route path="/math-game-arena/umum/pacman-math" element={<PacmanMathPage />} />
-      <Route path="/math-game-arena/umum/bounce-math" element={<BounceMathPage />} />
-      <Route path="/math-game-arena/umum/western-bar" element={<WesternBarPage />} />
-      <Route path="/math-game-arena/umum/pinball-math" element={<PinballMathPage />} />
-      <Route path="/math-game-arena/umum/penalti-math" element={<PenaltiMathPage />} />
-      
-      {/* Math Game Arena - Kelas 7 Topic Routes */}
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/pesawat-tembak-meteor" element={<PenjumlahanMeteorGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/turtle-run" element={<PenjumlahanTurtleRunGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/flappy-rocket" element={<PenjumlahanFlappyRocketGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tembak-tank" element={<PenjumlahanTembakTankGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/space-impact" element={<PenjumlahanSpaceImpactGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tetris" element={<PenjumlahanTetrisGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/snake-math" element={<PenjumlahanSnakeMathGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/pesawat-tembak-meteor" element={<PenguranganMeteorGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/flappy-rocket" element={<PenguranganFlappyRocketGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/tembak-tank" element={<PenguranganTembakTankGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/space-impact" element={<PenguranganSpaceImpactGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/turtle-run" element={<PenguranganTurtleRunGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/tetris" element={<PenguranganTetrisGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/snake-math" element={<PenguranganSnakeMathGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/pesawat-tembak-meteor" element={<PerkalianMeteorGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/flappy-rocket" element={<PerkalianFlappyRocketGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/tembak-tank" element={<PerkalianTembakTankGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/space-impact" element={<PerkalianSpaceImpactGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/turtle-run" element={<PerkalianTurtleRunGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/tetris" element={<PerkalianTetrisGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/snake-math" element={<PerkalianSnakeMathGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/pesawat-tembak-meteor" element={<PembagianMeteorGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/flappy-rocket" element={<PembagianFlappyRocketGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/tembak-tank" element={<PembagianTembakTankGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/space-impact" element={<PembagianSpaceImpactGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/turtle-run" element={<PembagianTurtleRunGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/tetris" element={<PembagianTetrisGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/snake-math" element={<PembagianSnakeMathGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/pesawat-tembak-meteor" element={<OperasiCampuranMeteorGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/flappy-rocket" element={<OperasiCampuranFlappyRocketGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tembak-tank" element={<OperasiCampuranTembakTankGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/space-impact" element={<OperasiCampuranSpaceImpactGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/turtle-run" element={<OperasiCampuranTurtleRunGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tetris" element={<OperasiCampuranTetrisGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/snake-math" element={<OperasiCampuranSnakeMathGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/pesawat-tembak-meteor" element={<KPKFPBMeteorGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/flappy-rocket" element={<KPKFPBFlappyRocketGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tembak-tank" element={<KPKFPBTembakTankGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/space-impact" element={<KPKFPBSpaceImpactGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/turtle-run" element={<KPKFPBTurtleRunGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tetris" element={<KPKFPBTetrisGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/snake-math" element={<KPKFPBSnakeMathGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/meteor-pantul" element={<PenjumlahanMeteorPantulGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/meteor-pantul" element={<PenguranganMeteorPantulGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/meteor-pantul" element={<PerkalianMeteorPantulGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/meteor-pantul" element={<PembagianMeteorPantulGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/meteor-pantul" element={<OperasiCampuranMeteorPantulGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/meteor-pantul" element={<KPKFPBMeteorPantulGameMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/perbandingan" element={<PerbandinganMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/garis-dan-sudut" element={<GarisDanSudutMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMGAK7Page />} />
-      <Route path="/math-game-arena/kelas-7/himpunan" element={<HimpunanMGAK7Page />} />
+          {/* Latihan Mandiri Routes */}
+          <Route path="/latihan-mandiri" element={<LatihanMandiriPage />} />
+          <Route path="/latihan-mandiri/kelas-7" element={<LatihanMandiriKelas7Page />} />
+          <Route path="/latihan-mandiri/kelas-8" element={<LatihanMandiriKelas8Page />} />
+          <Route path="/latihan-mandiri/kelas-9" element={<LatihanMandiriKelas9Page />} />
 
-      {/* Kelas 7 - Catch-all submaterial chooser & game dispatcher (7 game variants per submaterial)
-          Note: bilangan-bulat keeps its own static routes above (more specific = higher rank in v6),
-          so its existing 7-variant flow is preserved. All other sub-topics now go through the chooser. */}
-      <Route path="/math-game-arena/kelas-7/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK7 />} />
-      <Route path="/math-game-arena/kelas-7/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK7 />} />
-      
-      {/* Math Game Arena - Kelas 8 Topic Routes */}
-      <Route path="/math-game-arena/kelas-8/pola-bilangan" element={<PolaBilanganMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/spldv" element={<SPLDVMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/lingkaran" element={<LingkaranMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMGAK8Page />} />
-      <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMGAK8Page />} />
-      {/* Kelas 8 - Catch-all submaterial chooser & game dispatcher (7 game variants per submaterial) */}
-      <Route path="/math-game-arena/kelas-8/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK8 />} />
-      <Route path="/math-game-arena/kelas-8/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK8 />} />
+          {/* Kelas 7 Topic Routes */}
+          <Route path="/latihan-mandiri/kelas-7/bilangan-bulat" element={<BilanganBulatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBBilanganBulatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional" element={<BilanganRasionalK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/arti-pecahan-senilai-membandingkan" element={<ArtiPecahanSenilaiMembandingkanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pecahan-campuran-persen" element={<PecahanCampuranPersenK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/penjumlahan-pecahan" element={<PenjumlahanPecahanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/perkalian-pecahan" element={<PerkalianPecahanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pembagian-pecahan" element={<PembagianPecahanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/penjumlahan-pengurangan-desimal" element={<PenjumlahanPenguranganDesimalK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/perkalian-desimal" element={<PerkalianDesimalK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pembagian-desimal" element={<PembagianDesimalK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/bilangan-rasional/pembulatan-desimal" element={<PembulatanDesimalK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar" element={<AljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/perkalian" element={<PerkalianAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/pembagian" element={<PembagianAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/pemangkatan" element={<PemangkatanAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/substitusi" element={<SubstitusiBilanganAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aljabar/pecahan-aljabar" element={<MenyederhanakanPecahanAljabarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv" element={<PLSVPtLSVK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/kalimat-terbuka" element={<KalimatTerbukaTertutupK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/perbandingan" element={<PerbandinganK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/perbandingan/umum" element={<PerbandinganUmumK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/perbandingan/bertingkat" element={<PerbandinganBertingkatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/perbandingan/skala" element={<PerbandinganSkalaK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial" element={<AritmetikaSosialK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/diskon" element={<DiskonK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/ppn" element={<PPNK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/pph" element={<PPhK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut" element={<GarisDanSudutK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/hubungan-2-garis" element={<HubunganDuaGarisK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak" element={<SudutPelurusPenyikuBertolakK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/sifat-sudut-dua-garis-sejajar" element={<SifatSudutDuaGarisSejajarK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/jumlah-sudut-segi-banyak" element={<JumlahSudutSegiBanyakK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-segitiga-dan-segiempat" element={<KelilingSegitigaSegiempatLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" element={<KelilingLuasBangunTakBeraturanLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/himpunan" element={<HimpunanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/himpunan/menyatakan-himpunan" element={<MenyatakanHimpunanLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/himpunan/diagram-venn" element={<DiagramVennLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/himpunan/himpunan-bagian" element={<HimpunanBagianLatihanK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/himpunan/operasi-himpunan" element={<OperasiHimpunanLatihanK7Page />} />
 
-      {/* Math Game Arena - Kelas 9 Topic Routes */}
-      <Route path="/math-game-arena/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatMGAK9Page />} />
-      <Route path="/math-game-arena/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenMGAK9Page />} />
-      <Route path="/math-game-arena/kelas-9/transformasi-geometri" element={<TransformasiGeometriMGAK9Page />} />
-      <Route path="/math-game-arena/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungMGAK9Page />} />
-      <Route path="/math-game-arena/kelas-9/statistika" element={<StatistikaMGAK9Page />} />
-      <Route path="/math-game-arena/kelas-9/peluang" element={<PeluangMGAK9Page />} />
-      <Route path="/math-game-arena/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMGAK9Page />} />
-      <Route path="/math-game-arena/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMGAK9Page />} />
+          {/* Kelas 8 Topic Routes */}
+          <Route path="/latihan-mandiri/kelas-8/pola-bilangan" element={<PolaBilanganK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pengertian-pola" element={<PengertianPolaK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif" element={<PosisiRelatifGarisK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/notasi-fungsi" element={<NotasiFungsiK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv" element={<SPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv/definisi" element={<DefinisiSPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv/metode-grafik" element={<MetodeGrafikSPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiSPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiSPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv/metode-campuran" element={<MetodeCampuranSPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv/model-spldv" element={<ModelSPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/grafik" element={<GrafikPGLK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/gradien" element={<GradienK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<MenentukanPGLK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualPGLK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangPythagorasK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaPythagorasK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/lingkaran" element={<LingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarLingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/lingkaran/busur-juring" element={<BusurJuringLingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/pengertian" element={<PengertianGSLK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/menghitung-panjang" element={<MenghitungPanjangGSLK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspl" element={<GSPLK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusLMK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokLMK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaLMK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasLMK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/masalah-kontekstual" element={<MasalahKontekstualBRSDLMK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan" element={<BRSDGabunganLMK8Page />} />
 
-      {/* Kelas 9 - Catch-all submaterial chooser & game dispatcher (7 game variants per submaterial) */}
-      <Route path="/math-game-arena/kelas-9/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK9 />} />
-      <Route path="/math-game-arena/kelas-9/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK9 />} />
+          {/* Kelas 9 Topic Routes */}
+          <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/sifat-sifat" element={<SifatSifatK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/pangkat-nol-negatif-pecahan" element={<PangkatNolNegatifPecahanK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/definisi" element={<DefinisiKesebangunanK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk" element={<MenghitungRusukK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" element={<SegitigaSebangunK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/rasio-rusuk" element={<RasioRusukK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/kekongruenan" element={<KekongruenBangunDatarK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/transformasi-geometri" element={<TransformasiGeometriK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/translasi" element={<TranslasiK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/refleksi" element={<RefleksiK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/rotasi" element={<RotasiK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/dilatasi" element={<DilatsiK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume" element={<PerubahanVolumeLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/statistika" element={<StatistikaK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/statistika/pengantar" element={<PengantarStatistikaLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/statistika/penyajian-data" element={<PenyajianDataLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/statistika/rata-rata" element={<RataRataLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/statistika/median-modus" element={<MedianModusLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/statistika/kuartil" element={<KuartilLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/statistika/penyebaran-data" element={<PenyebaranDataLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/peluang" element={<PeluangK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/peluang/ruang-sampel" element={<RuangSampelLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/peluang/peluang-empirik" element={<PeluangEmpirikLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/peluang/komplemen" element={<KomplementLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukLMK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKBentukUmumPage />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKPemfaktoranPage />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKRumusKuadratikPage />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKPelengkapKuadratPage />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/diskriminan" element={<PKDiskriminanPage />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru" element={<PKMenyusunBaruPage />} />
+          <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualPage />} />
+          <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat" element={<FungsiKuadratK9Page />} />
+          <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKBentukUmumKarakteristikPage />} />
+          <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/titik-potong" element={<FKTitikPotongPage />} />
+          <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/sumbu-simetri" element={<FKSumbuSimetriPage />} />
+          <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMenggambarGrafikPage />} />
+          <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMenyusunFungsiPage />} />
+          <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" element={<FKPenerapanNilaiMaksMinPage />} />
 
-      {/* Materi Matematika Routes */}
-      <Route path="/materi-matematika" element={<MateriMatematikaPage />} />
-      <Route path="/materi-matematika/kelas-7" element={<MateriMatematikaKelas7Page />} />
-      <Route path="/materi-matematika/kelas-8" element={<MateriMatematikaKelas8Page />} />
-      <Route path="/materi-matematika/kelas-9" element={<MateriMatematikaKelas9Page />} />
-      
-      {/* Materi Matematika - Kelas 7 Topic Routes */}
-      <Route path="/materi-matematika/kelas-7/bilangan-bulat" element={<BilanganBulatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBBilanganBulatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional" element={<BilanganRasionalMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/penjumlahan-pengurangan-pecahan" element={<PenjumlahanPenguranganMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/perkalian-pecahan" element={<PerkalianPecahanMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembagian-pecahan" element={<PembagianPecahanMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/penjumlahan-pengurangan-bentuk-desimal" element={<PenjumlahanPenguranganBentukDesimalMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/perkalian-bentuk-desimal" element={<PerkalianBentukDesimalMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembagian-bentuk-desimal" element={<PembagianBentukDesimalMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembulatan-bentuk-desimal" element={<PembulatanBentukDesimalMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar" element={<AljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/perkalian" element={<PerkalianAljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/pembagian" element={<PembagianAljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/pemangkatan" element={<PemangkatanAljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aljabar/operasi-pecahan" element={<OperasiPecahanAljabarMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/kalimat-terbuka-tertutup" element={<KalimatTerbukaTertutupPage />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVPage />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVPage />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVPage />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVPage />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVPage />} />
-      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVPage />} />
-      <Route path="/materi-matematika/kelas-7/perbandingan" element={<PerbandinganMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/perbandingan/umum" element={<PerbandinganUmumMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/perbandingan/bertingkat" element={<PerbandinganBertingkatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/perbandingan/skala" element={<SkalaMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/diskon" element={<DiskonMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/ppn" element={<PPNMMk7Page />} />
-      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/pph" element={<PPhMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/garis-dan-sudut" element={<GarisDanSudutMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/garis-dan-sudut/hubungan-2-garis" element={<HubunganDuaGarisMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak" element={<SudutPelurusPenyikuBertolakMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/garis-dan-sudut/sifat-sudut-dua-garis-sejajar" element={<SifatSudutDuaGarisSejajarPage />} />
-      <Route path="/materi-matematika/kelas-7/garis-dan-sudut/jumlah-sudut-segi-banyak" element={<JumlahSudutSegiBanyakPage />} />
-      <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiPage />} />
-      <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-segitiga-segiempat" element={<KelilingSegitigaSegiempatPage />} />
-      <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaPage />} />
-      <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatPage />} />
-      <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" element={<KelilingLuasBangunTakBeraturanPage />} />
-      <Route path="/materi-matematika/kelas-7/himpunan" element={<HimpunanMMK7Page />} />
-      <Route path="/materi-matematika/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanPage />} />
-      <Route path="/materi-matematika/kelas-7/himpunan/jenis-himpunan" element={<JenisHimpunanPage />} />
-      <Route path="/materi-matematika/kelas-7/himpunan/diagram-venn" element={<DiagramVennPage />} />
-      <Route path="/materi-matematika/kelas-7/himpunan/pemecahan-masalah" element={<PemecahanMasalahHimpunanPage />} />
-      
-      {/* Materi Matematika - Kelas 8 Topic Routes */}
-      <Route path="/materi-matematika/kelas-8/pola-bilangan" element={<PolaBilanganMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/pola-bilangan/pengertian" element={<PengertianPolaMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-garis" element={<PosisiRelatifGarisMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/notasi-rumus-fungsi" element={<NotasiFungsiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv" element={<SPLDVMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv/definisi" element={<DefinisiSPLDVMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv/metode-grafik" element={<MetodeGrafikMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv/metode-campuran" element={<MetodeCampuranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv/model-spldv" element={<ModelSPLDVMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/grafik" element={<GrafikPGLMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/gradien" element={<GradienMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<MenentukanPGLMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangPythagorasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaPythagorasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/lingkaran" element={<LingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarLingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/lingkaran/busur-juring" element={<BusurJuringLingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/pengertian" element={<PengertianGSLMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/menghitung-panjang" element={<MenghitungPanjangGSLMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/gspl" element={<GSPLMMk8Page />} />
-      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDMMk8Page />} />
-      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasMMK8Page />} />
-      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/gabungan" element={<GabunganMMK8Page />} />
-      
-      {/* Materi Matematika - Kelas 9 Topic Routes */}
-      <Route path="/materi-matematika/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiPangkatMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/sifat-sifat-operasi" element={<SifatSifatOperasiMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/definisi" element={<DefinisiKesebangunanMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/menghitung-panjang-rusuk" element={<MenghitungRusukMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" element={<SegitigaSebangunMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku" element={<PerbandinganRusukSikuSikuMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar" element={<KekongruenBangunDatarMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/transformasi-geometri" element={<TransformasiGeometriMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/transformasi-geometri/translasi" element={<TranslasiMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/transformasi-geometri/refleksi" element={<RefleksiMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/transformasi-geometri/rotasi" element={<RotasiMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/transformasi-geometri/dilatasi" element={<DilatasisMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume" element={<PerubahanVolumeMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/statistika" element={<StatistikaMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/statistika/pengantar" element={<PengantarStatistikaMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/statistika/penyajian-data" element={<PenyajianDataMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/statistika/rata-rata" element={<RataRataMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/statistika/median-modus" element={<MedianModusMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/statistika/kuartil" element={<KuartilMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/statistika/penyebaran-data" element={<PenyebaranDataMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/peluang" element={<PeluangMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/peluang/ruang-sampel" element={<RuangSampelMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/peluang/peluang-empirik" element={<PeluangEmpirikMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/peluang/komplemen" element={<KomplementMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKMMBentukUmumPage />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKMMPemfaktoranPage />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKMMRumusKuadratikPage />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKMMPelengkapKuadratPage />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/diskriminan" element={<PKMMDiskriminanPage />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru" element={<PKMMMenyusunBaruPage />} />
-      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKMMPenerapanKontekstualPage />} />
-      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMMK9Page />} />
-      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKMMBentukUmumKarakteristikPage />} />
-      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/titik-potong" element={<FKMMTitikPotongPage />} />
-      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/sumbu-simetri" element={<FKMMSumbuSimetriPage />} />
-      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMMMenggambarGrafikPage />} />
-      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMMMenyusunFungsiPage />} />
-      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" element={<FKMMPenerapanNilaiMaksMinPage />} />
+          {/* Math Game Arena Routes */}
+          <Route path="/math-game-arena" element={<MathGameArenaPage />} />
+          <Route path="/math-game-arena/kelas-7" element={<MathGameArenaKelas7Page />} />
+          <Route path="/math-game-arena/kelas-8" element={<MathGameArenaKelas8Page />} />
+          <Route path="/math-game-arena/kelas-9" element={<MathGameArenaKelas9Page />} />
+          <Route path="/math-game-arena/umum" element={<MathGameArenaUmumPage />} />
+          <Route path="/math-game-arena/umum/balap-mobil" element={<CarRacingGamePage />} />
+          <Route path="/math-game-arena/umum/tetris" element={<TetrisGamePage />} />
+          <Route path="/math-game-arena/umum/dino-run" element={<DinoRunGamePage />} />
+          <Route path="/math-game-arena/umum/flappy-rocket" element={<FlappyRocketPage />} />
+          <Route path="/math-game-arena/umum/tangkap-benda" element={<CatchItemsGamePage />} />
+          <Route path="/math-game-arena/umum/snake-math" element={<SnakeMathPage />} />
+          <Route path="/math-game-arena/umum/asteroid-blaster" element={<AsteroidBlasterPage />} />
+          <Route path="/math-game-arena/umum/bubble-pop" element={<BubblePopPage />} />
+          <Route path="/math-game-arena/umum/hajar-mol" element={<MolSmashPage />} />
+          <Route path="/math-game-arena/umum/mancing-soal" element={<FishingMathPage />} />
+          <Route path="/math-game-arena/umum/pecah-jawaban" element={<BrickBreakerPage />} />
+          <Route path="/math-game-arena/umum/tembak-tank" element={<BattleTankPage />} />
+          <Route path="/math-game-arena/umum/kereta-koin-math" element={<CoinTrainMathPage />} />
+          <Route path="/math-game-arena/umum/ninja-buah-math" element={<FruitNinjaMathPage />} />
+          <Route path="/math-game-arena/umum/pulau-harta-math" element={<TreasureIslandMathPage />} />
+          <Route path="/math-game-arena/umum/kapal-selam-math-battle" element={<SubmarineBattleMathPage />} />
+          <Route path="/math-game-arena/umum/lompat-jawaban" element={<PlatformJumpMathPage />} />
+          <Route path="/math-game-arena/umum/ksatria-mat" element={<KsatriaMatPage />} />
+          <Route path="/math-game-arena/umum/space-impact" element={<SpaceImpactPage />} />
+          <Route path="/math-game-arena/umum/galaxy-defender" element={<GalaxyDefenderPage />} />
+          <Route path="/math-game-arena/umum/math-bros" element={<MathBrosPage />} />
+          <Route path="/math-game-arena/umum/zuma-math" element={<ZumaMathPage />} />
+          <Route path="/math-game-arena/umum/pacman-math" element={<PacmanMathPage />} />
+          <Route path="/math-game-arena/umum/bounce-math" element={<BounceMathPage />} />
+          <Route path="/math-game-arena/umum/western-bar" element={<WesternBarPage />} />
+          <Route path="/math-game-arena/umum/pinball-math" element={<PinballMathPage />} />
+          <Route path="/math-game-arena/umum/penalti-math" element={<PenaltiMathPage />} />
 
-      {/* Menghitung Cepat Routes */}
-      <Route path="/menghitung-cepat" element={<MenghitungCepatPage />} />
-      <Route path="/menghitung-cepat/perkalian-11" element={<PerkalianDengan11Page />} />
-      <Route path="/menghitung-cepat/kuadrat-berakhiran-5" element={<KuadratBerakhiran5Page />} />
-      <Route path="/menghitung-cepat/kuadrat-cepat" element={<KuadratCepatPage />} />
-      <Route path="/menghitung-cepat/perkalian-dekat-100" element={<PerkalianDekat100Page />} />
-      <Route path="/menghitung-cepat/persentase-cepat" element={<PersentaseCepatPage />} />
-      <Route path="/menghitung-cepat/penjumlahan-pengurangan" element={<PenjumlahanPenguranganCepatPage />} />
-      <Route path="/menghitung-cepat/perkalian-dua-digit" element={<PerkalianDuaDigitPage />} />
-      <Route path="/menghitung-cepat/pembagian-cepat" element={<PembagianCepatPage />} />
-      <Route path="/menghitung-cepat/tabel-referensi" element={<TabelReferensiPage />} />
-      <Route path="/menghitung-cepat/latihan-flashcard" element={<LatihanFlashcardPage />} />
+          {/* Math Game Arena - Kelas 7 Topic Routes */}
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/pesawat-tembak-meteor" element={<PenjumlahanMeteorGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/turtle-run" element={<PenjumlahanTurtleRunGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/flappy-rocket" element={<PenjumlahanFlappyRocketGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tembak-tank" element={<PenjumlahanTembakTankGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/space-impact" element={<PenjumlahanSpaceImpactGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/tetris" element={<PenjumlahanTetrisGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/snake-math" element={<PenjumlahanSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/pesawat-tembak-meteor" element={<PenguranganMeteorGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/flappy-rocket" element={<PenguranganFlappyRocketGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/tembak-tank" element={<PenguranganTembakTankGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/space-impact" element={<PenguranganSpaceImpactGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/turtle-run" element={<PenguranganTurtleRunGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/tetris" element={<PenguranganTetrisGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/snake-math" element={<PenguranganSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/pesawat-tembak-meteor" element={<PerkalianMeteorGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/flappy-rocket" element={<PerkalianFlappyRocketGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/tembak-tank" element={<PerkalianTembakTankGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/space-impact" element={<PerkalianSpaceImpactGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/turtle-run" element={<PerkalianTurtleRunGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/tetris" element={<PerkalianTetrisGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/snake-math" element={<PerkalianSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/pesawat-tembak-meteor" element={<PembagianMeteorGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/flappy-rocket" element={<PembagianFlappyRocketGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/tembak-tank" element={<PembagianTembakTankGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/space-impact" element={<PembagianSpaceImpactGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/turtle-run" element={<PembagianTurtleRunGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/tetris" element={<PembagianTetrisGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/snake-math" element={<PembagianSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/pesawat-tembak-meteor" element={<OperasiCampuranMeteorGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/flappy-rocket" element={<OperasiCampuranFlappyRocketGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tembak-tank" element={<OperasiCampuranTembakTankGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/space-impact" element={<OperasiCampuranSpaceImpactGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/turtle-run" element={<OperasiCampuranTurtleRunGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tetris" element={<OperasiCampuranTetrisGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/snake-math" element={<OperasiCampuranSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/pesawat-tembak-meteor" element={<KPKFPBMeteorGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/flappy-rocket" element={<KPKFPBFlappyRocketGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tembak-tank" element={<KPKFPBTembakTankGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/space-impact" element={<KPKFPBSpaceImpactGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/turtle-run" element={<KPKFPBTurtleRunGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tetris" element={<KPKFPBTetrisGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/snake-math" element={<KPKFPBSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/meteor-pantul" element={<PenjumlahanMeteorPantulGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/meteor-pantul" element={<PenguranganMeteorPantulGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/meteor-pantul" element={<PerkalianMeteorPantulGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/meteor-pantul" element={<PembagianMeteorPantulGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/meteor-pantul" element={<OperasiCampuranMeteorPantulGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/meteor-pantul" element={<KPKFPBMeteorPantulGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/penjumlahan-pecahan" element={<PenjumlahanPecahanGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pengurangan-pecahan" element={<PenguranganPecahanGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/perkalian-pecahan" element={<PerkalianPecahanGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pembagian-pecahan" element={<PembagianPecahanGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/penjumlahan-desimal" element={<PenjumlahanDesimalGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pengurangan-desimal" element={<PenguranganDesimalGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/perkalian-desimal" element={<PerkalianDesimalGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pembagian-desimal" element={<PembagianDesimalGamePage />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pembulatan-desimal" element={<PembulatanDesimalGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/perkalian" element={<PerkalianAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/pembagian" element={<PembagianAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/pemangkatan" element={<PemangkatanAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aljabar/operasi-pecahan" element={<OperasiPecahanAljabarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/kalimat-terbuka" element={<KalimatTerbukaGamePage />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVGamePage />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVGamePage />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVGamePage />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVGamePage />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVGamePage />} />
+          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVGamePage />} />
+          <Route path="/math-game-arena/kelas-7/perbandingan" element={<PerbandinganMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/perbandingan/umum" element={<PerbandinganUmumGamePage />} />
+          <Route path="/math-game-arena/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiGamePage />} />
+          <Route path="/math-game-arena/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranGamePage />} />
+          <Route path="/math-game-arena/kelas-7/perbandingan/bertingkat" element={<PerbandinganBertingkatGamePage />} />
+          <Route path="/math-game-arena/kelas-7/perbandingan/skala" element={<SkalaGamePage />} />
+          <Route path="/math-game-arena/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/diskon" element={<DiskonGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/ppn" element={<PPNGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/pph" element={<PPhGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalGamePage />} />
+          <Route path="/math-game-arena/kelas-7/garis-dan-sudut" element={<GarisDanSudutMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/hubungan-dua-garis" element={<HubunganDuaGarisGamePage />} />
+          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/sudut-pelurus" element={<SudutPelurusGamePage />} />
+          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/sifat-sudut-sejajar" element={<SifatSudutSejajarGamePage />} />
+          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/jumlah-sudut-segibanyak" element={<JumlahSudutSegibanyakGamePage />} />
+          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiGamePage />} />
+          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/keliling" element={<KelilingSegitigaSegiempatGamePage />} />
+          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaGamePage />} />
+          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatGamePage />} />
+          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/bangun-tak-beraturan" element={<BangunTakBeraturanGamePage />} />
+          <Route path="/math-game-arena/kelas-7/himpunan" element={<HimpunanMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanGamePage />} />
+          <Route path="/math-game-arena/kelas-7/himpunan/himpunan-berhingga-kosong" element={<HimpunanBerhingaKosongGamePage />} />
+          <Route path="/math-game-arena/kelas-7/himpunan/diagram-venn" element={<DiagramVennGamePage />} />
+          <Route path="/math-game-arena/kelas-7/himpunan/pemecahan-masalah" element={<PemecahanMasalahHimpunanGamePage />} />
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+          {/* Math Game Arena - Kelas 7 catch-all chooser & dispatcher */}
+          <Route path="/math-game-arena/kelas-7/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK7 />} />
+          <Route path="/math-game-arena/kelas-7/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK7 />} />
+
+          {/* Math Game Arena - Kelas 8 Topic Routes */}
+          <Route path="/math-game-arena/kelas-8/pola-bilangan" element={<PolaBilanganMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/spldv" element={<SPLDVMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/lingkaran" element={<LingkaranMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK8 />} />
+          <Route path="/math-game-arena/kelas-8/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK8 />} />
+
+          {/* Math Game Arena - Kelas 9 Topic Routes */}
+          <Route path="/math-game-arena/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/transformasi-geometri" element={<TransformasiGeometriMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/statistika" element={<StatistikaMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/peluang" element={<PeluangMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMGAK9Page />} />
+          <Route path="/math-game-arena/kelas-9/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK9 />} />
+          <Route path="/math-game-arena/kelas-9/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK9 />} />
+
+          {/* Materi Matematika Routes */}
+          <Route path="/materi-matematika" element={<MateriMatematikaPage />} />
+          <Route path="/materi-matematika/kelas-7" element={<MateriMatematikaKelas7Page />} />
+          <Route path="/materi-matematika/kelas-8" element={<MateriMatematikaKelas8Page />} />
+          <Route path="/materi-matematika/kelas-9" element={<MateriMatematikaKelas9Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat" element={<BilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBBilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional" element={<BilanganRasionalMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/penjumlahan-pengurangan" element={<PenjumlahanPenguranganMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/perkalian" element={<PerkalianPecahanMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembagian" element={<PembagianPecahanMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/penjumlahan-pengurangan-desimal" element={<PenjumlahanPenguranganBentukDesimalMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/perkalian-desimal" element={<PerkalianBentukDesimalMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembagian-desimal" element={<PembagianBentukDesimalMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembulatan-desimal" element={<PembulatanBentukDesimalMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar" element={<AljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/perkalian" element={<PerkalianAljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/pembagian" element={<PembagianAljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/pemangkatan" element={<PemangkatanAljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aljabar/operasi-pecahan" element={<OperasiPecahanAljabarMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv/kalimat-terbuka-tertutup" element={<KalimatTerbukaTertutupPage />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVPage />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVPage />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVPage />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVPage />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVPage />} />
+          <Route path="/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVPage />} />
+          <Route path="/materi-matematika/kelas-7/perbandingan" element={<PerbandinganMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/perbandingan/umum" element={<PerbandinganUmumMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/perbandingan/bertingkat" element={<PerbandinganBertingkatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/perbandingan/skala" element={<SkalaMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aritmetika-sosial/diskon" element={<DiskonMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/aritmetika-sosial/ppn" element={<PPNMMk7Page />} />
+          <Route path="/materi-matematika/kelas-7/aritmetika-sosial/pph" element={<PPhMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/garis-dan-sudut" element={<GarisDanSudutMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/garis-dan-sudut/hubungan-dua-garis" element={<HubunganDuaGarisMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak" element={<SudutPelurusPenyikuBertolakMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/garis-dan-sudut/sifat-sudut-sejajar" element={<SifatSudutDuaGarisSejajarPage />} />
+          <Route path="/materi-matematika/kelas-7/garis-dan-sudut/jumlah-sudut-segi-banyak" element={<JumlahSudutSegiBanyakPage />} />
+          <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiPage />} />
+          <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling" element={<KelilingSegitigaSegiempatPage />} />
+          <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaPage />} />
+          <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatPage />} />
+          <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/bangun-tak-beraturan" element={<KelilingLuasBangunTakBeraturanPage />} />
+          <Route path="/materi-matematika/kelas-7/himpunan" element={<HimpunanMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanPage />} />
+          <Route path="/materi-matematika/kelas-7/himpunan/jenis-himpunan" element={<JenisHimpunanPage />} />
+          <Route path="/materi-matematika/kelas-7/himpunan/diagram-venn" element={<DiagramVennPage />} />
+          <Route path="/materi-matematika/kelas-7/himpunan/pemecahan-masalah" element={<PemecahanMasalahHimpunanPage />} />
+          <Route path="/materi-matematika/kelas-8/pola-bilangan" element={<PolaBilanganMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/pola-bilangan/pengertian-pola" element={<PengertianPolaMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-garis" element={<PosisiRelatifGarisMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/notasi-fungsi" element={<NotasiFungsiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv" element={<SPLDVMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv/definisi" element={<DefinisiSPLDVMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv/metode-grafik" element={<MetodeGrafikMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv/metode-campuran" element={<MetodeCampuranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv/model-spldv" element={<ModelSPLDVMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/grafik" element={<GrafikPGLMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/gradien" element={<GradienMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<MenentukanPGLMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangPythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaPythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran" element={<LingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran/busur-juring" element={<BusurJuringLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/pengertian" element={<PengertianGSLMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/menghitung-panjang" element={<MenghitungPanjangGSLMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/gspl" element={<GSPLMMk8Page />} />
+          <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDMMk8Page />} />
+          <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/gabungan" element={<GabunganMMK8Page />} />
+          <Route path="/materi-matematika/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiPangkatMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/sifat-sifat-operasi" element={<SifatSifatOperasiMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/definisi" element={<DefinisiKesebangunanMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk" element={<MenghitungRusukMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" element={<SegitigaSebangunMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku" element={<PerbandinganRusukSikuSikuMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan" element={<KekongruenBangunDatarMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/transformasi-geometri" element={<TransformasiGeometriMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/transformasi-geometri/translasi" element={<TranslasiMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/transformasi-geometri/refleksi" element={<RefleksiMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/transformasi-geometri/rotasi" element={<RotasiMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/transformasi-geometri/dilatasi" element={<DilatasisMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume" element={<PerubahanVolumeMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/statistika" element={<StatistikaMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/statistika/pengantar" element={<PengantarStatistikaMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/statistika/penyajian-data" element={<PenyajianDataMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/statistika/rata-rata" element={<RataRataMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/statistika/median-modus" element={<MedianModusMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/statistika/kuartil" element={<KuartilMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/statistika/penyebaran-data" element={<PenyebaranDataMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/peluang" element={<PeluangMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/peluang/ruang-sampel" element={<RuangSampelMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/peluang/peluang-empirik" element={<PeluangEmpirikMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/peluang/peluang-teoretik" element={<PeluangTeoretikMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/peluang/komplemen" element={<KomplementMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/peluang/kejadian-majemuk" element={<PeluangKejadianMajemukMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKMMBentukUmumPage />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKMMPemfaktoranPage />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKMMRumusKuadratikPage />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKMMPelengkapKuadratPage />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/diskriminan" element={<PKMMDiskriminanPage />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/menyusun-baru" element={<PKMMMenyusunBaruPage />} />
+          <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKMMPenerapanKontekstualPage />} />
+          <Route path="/materi-matematika/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMMK9Page />} />
+          <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKMMBentukUmumKarakteristikPage />} />
+          <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/titik-potong" element={<FKMMTitikPotongPage />} />
+          <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/sumbu-simetri" element={<FKMMSumbuSimetriPage />} />
+          <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMMMenggambarGrafikPage />} />
+          <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMMMenyusunFungsiPage />} />
+          <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" element={<FKMMPenerapanNilaiMaksMinPage />} />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </>
   );
 };
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <FontProvider>
-    <SoundProvider>
-    <MusicProvider>
     <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AppInner />
-        </BrowserRouter>
-      </TooltipProvider>
+      <SoundProvider>
+        <MusicProvider>
+          <FontProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <AppInner />
+              </BrowserRouter>
+            </TooltipProvider>
+          </FontProvider>
+        </MusicProvider>
+      </SoundProvider>
     </ThemeProvider>
-    </MusicProvider>
-    </SoundProvider>
-    </FontProvider>
   </QueryClientProvider>
 );
 
