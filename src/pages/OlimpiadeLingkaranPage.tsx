@@ -37,6 +37,9 @@ import dasar32 from "@assets/32_1778278243304.png";
 import dasar34 from "@assets/34_1778278243304.png";
 import dasar35 from "@assets/35_1778278243305.jpg";
 import dasar36 from "@assets/36_1778278243302.png";
+import olim2 from "@assets/2_1778279195517.png";
+import olim7 from "@assets/7_1778279195517.png";
+import olim12 from "@assets/12_1778279195516.png";
 import olim3 from "@assets/3_1778279167066.png";
 import olim4 from "@assets/4_1778279167067.png";
 import olim5 from "@assets/5_1778279167068.png";
@@ -1019,16 +1022,16 @@ const dasarImages: Record<number, string> = {
 };
 
 const olimpiadeImages: Record<number, string> = {
-  2: "/lingkaran-olimpiade-2.png",
+  2: olim2,
   3: olim3,
   4: olim4,
   5: olim5,
   6: olim6,
-  7: "/lingkaran-olimpiade-7.png",
+  7: olim7,
   8: olim8,
   9: olim9,
   11: olim11,
-  12: "/lingkaran-olimpiade-12.png",
+  12: olim12,
   14: olim14,
   15: olim15,
   17: olim17,
