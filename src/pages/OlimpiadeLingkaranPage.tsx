@@ -9,21 +9,54 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { lingkaranDasarPembahasan } from "@/data/pembahasan/lingkaranDasar";
 import { lingkaranOlimpiadePembahasan } from "@/data/pembahasan/lingkaranOlimpiade";
-import img16 from "@assets/16_1778278243308.png";
-import img17 from "@assets/17_1778278243308.png";
-import img18 from "@assets/18_1778278243307.png";
-import img19 from "@assets/19_1778278243308.png";
-import img20 from "@assets/20_1778278243307.png";
-import img21 from "@assets/21_1778278243306.png";
-import img25 from "@assets/25_1778278243303.png";
-import img26 from "@assets/26_1778278243306.png";
-import img28 from "@assets/28_1778278243305.png";
-import img29 from "@assets/29_1778278243305.png";
-import img31 from "@assets/31_1778278243303.png";
-import img32 from "@assets/32_1778278243304.png";
-import img34 from "@assets/34_1778278243304.png";
-import img35 from "@assets/35_1778278243305.jpg";
-import img36 from "@assets/36_1778278243302.png";
+import dasar3 from "@assets/3_1778279067121.png";
+import dasar4 from "@assets/4_1778279067122.png";
+import dasar5 from "@assets/5_1778279067123.png";
+import dasar6 from "@assets/6_1778279067124.jpg";
+import dasar8 from "@assets/8_1778279067129.png";
+import dasar9 from "@assets/9_1778279067129.png";
+import dasar11 from "@assets/11_1778279067124.jpg";
+import dasar14 from "@assets/14_1778279067128.png";
+import dasar15 from "@assets/15_1778279067129.png";
+import dasar16 from "@assets/16_1778278243308.png";
+import dasar17 from "@assets/17_1778279067127.png";
+import dasar18 from "@assets/18_1778279067128.png";
+import dasar19 from "@assets/19_1778279067126.png";
+import dasar20 from "@assets/20_1778279067125.jpeg";
+import dasar21 from "@assets/21_1778279067127.png";
+import dasar22 from "@assets/22_1778279067126.png";
+import dasar23 from "@assets/23_1778279067124.jpeg";
+import dasar24 from "@assets/24_1778279067126.png";
+import dasar25 from "@assets/25_1778278243303.png";
+import dasar26 from "@assets/26_1778279067122.png";
+import dasar27 from "@assets/27_1778279067123.png";
+import dasar28 from "@assets/28_1778278243305.png";
+import dasar29 from "@assets/29_1778279067125.png";
+import dasar31 from "@assets/31_1778278243303.png";
+import dasar32 from "@assets/32_1778278243304.png";
+import dasar34 from "@assets/34_1778278243304.png";
+import dasar35 from "@assets/35_1778278243305.jpg";
+import dasar36 from "@assets/36_1778278243302.png";
+import olim3 from "@assets/3_1778279167066.png";
+import olim4 from "@assets/4_1778279167067.png";
+import olim5 from "@assets/5_1778279167068.png";
+import olim6 from "@assets/6_1778279167069.jpg";
+import olim8 from "@assets/8_1778279167074.png";
+import olim9 from "@assets/9_1778279167074.png";
+import olim11 from "@assets/11_1778279167069.jpg";
+import olim14 from "@assets/14_1778279167073.png";
+import olim15 from "@assets/15_1778279167073.png";
+import olim17 from "@assets/17_1778279167072.png";
+import olim18 from "@assets/18_1778279167073.png";
+import olim19 from "@assets/19_1778279167072.png";
+import olim20 from "@assets/20_1778279167070.jpeg";
+import olim21 from "@assets/21_1778279167072.png";
+import olim22 from "@assets/22_1778279167071.png";
+import olim23 from "@assets/23_1778279167070.jpeg";
+import olim24 from "@assets/24_1778279167071.png";
+import olim26 from "@assets/26_1778279167067.png";
+import olim27 from "@assets/27_1778279167068.png";
+import olim29 from "@assets/29_1778279167071.png";
 
 const M = ({ math }: { math: string }) => <InlineMath math={math} />;
 
@@ -951,60 +984,64 @@ const latihanDasar = [
 const dasarImages: Record<number, string> = {
   1: "/lingkaran-dasar-1.png",
   2: "/lingkaran-dasar-2.png",
-  3: "/lingkaran-dasar-3.png",
-  4: "/lingkaran-dasar-4.png",
-  5: "/lingkaran-dasar-5.png",
-  6: "/lingkaran-dasar-6.png",
+  3: dasar3,
+  4: dasar4,
+  5: dasar5,
+  6: dasar6,
   7: "/lingkaran-dasar-7.png",
-  8: "/lingkaran-dasar-8.png",
-  9: "/lingkaran-dasar-9.png",
+  8: dasar8,
+  9: dasar9,
   10: "/lingkaran-dasar-10.jpg",
-  11: "/lingkaran-dasar-11.png",
+  11: dasar11,
   12: "/lingkaran-dasar-12.png",
   13: "/lingkaran-dasar-13.png",
-  14: "/lingkaran-dasar-14.png",
-  15: "/lingkaran-dasar-15.png",
-  16: img16,
-  17: img17,
-  18: img18,
-  19: img19,
-  20: img20,
-  21: img21,
-  25: img25,
-  26: img26,
-  28: img28,
-  29: img29,
-  31: img31,
-  32: img32,
-  34: img34,
-  35: img35,
-  36: img36,
+  14: dasar14,
+  15: dasar15,
+  16: dasar16,
+  17: dasar17,
+  18: dasar18,
+  19: dasar19,
+  20: dasar20,
+  21: dasar21,
+  22: dasar22,
+  23: dasar23,
+  24: dasar24,
+  25: dasar25,
+  26: dasar26,
+  27: dasar27,
+  28: dasar28,
+  29: dasar29,
+  31: dasar31,
+  32: dasar32,
+  34: dasar34,
+  35: dasar35,
+  36: dasar36,
 };
 
 const olimpiadeImages: Record<number, string> = {
   2: "/lingkaran-olimpiade-2.png",
-  3: "/lingkaran-olimpiade-3.png",
-  4: "/lingkaran-olimpiade-4.png",
-  5: "/lingkaran-olimpiade-5.png",
-  6: "/lingkaran-olimpiade-6.png",
+  3: olim3,
+  4: olim4,
+  5: olim5,
+  6: olim6,
   7: "/lingkaran-olimpiade-7.png",
-  8: "/lingkaran-olimpiade-8.png",
-  9: "/lingkaran-olimpiade-9.png",
-  11: "/lingkaran-olimpiade-11.png",
+  8: olim8,
+  9: olim9,
+  11: olim11,
   12: "/lingkaran-olimpiade-12.png",
-  14: "/lingkaran-olimpiade-14.png",
-  15: "/lingkaran-olimpiade-15.png",
-  17: "/lingkaran-olimpiade-17.png",
-  18: "/lingkaran-olimpiade-18.png",
-  19: "/lingkaran-olimpiade-19.png",
-  20: "/lingkaran-olimpiade-20.png",
-  21: "/lingkaran-olimpiade-21.png",
-  22: "/lingkaran-olimpiade-22.png",
-  23: "/lingkaran-olimpiade-23.png",
-  24: "/lingkaran-olimpiade-24.png",
-  26: "/lingkaran-olimpiade-26.png",
-  27: "/lingkaran-olimpiade-27.png",
-  29: "/lingkaran-olimpiade-29.png",
+  14: olim14,
+  15: olim15,
+  17: olim17,
+  18: olim18,
+  19: olim19,
+  20: olim20,
+  21: olim21,
+  22: olim22,
+  23: olim23,
+  24: olim24,
+  26: olim26,
+  27: olim27,
+  29: olim29,
 };
 
 const latihanOlimpiade = [
