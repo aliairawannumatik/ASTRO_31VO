@@ -498,30 +498,57 @@ const renderCategoryCard = (
 
     {isOpen && (
       <div className="px-3 pb-3">
-        <div className="rounded-xl overflow-hidden border border-white/5 bg-black/30 divide-y divide-white/5">
+        <div className="rounded-xl overflow-hidden border border-white/10 bg-black/30">
+          {/* Table header */}
+          <div className={`grid grid-cols-[2rem_1fr_1.6fr_1.2fr] gap-0 border-b ${category.border} ${category.bg}`}>
+            <div className={`px-3 py-2.5 text-[10px] font-black uppercase tracking-widest ${category.color} opacity-70 flex items-center justify-center`}>
+              No
+            </div>
+            <div className={`px-3 py-2.5 text-[10px] font-black uppercase tracking-widest ${category.color} opacity-70 flex items-center border-l border-white/10`}>
+              Nama Rumus
+            </div>
+            <div className={`px-3 py-2.5 text-[10px] font-black uppercase tracking-widest ${category.color} opacity-70 flex items-center border-l border-white/10`}>
+              Rumus
+            </div>
+            <div className={`px-3 py-2.5 text-[10px] font-black uppercase tracking-widest ${category.color} opacity-70 flex items-center border-l border-white/10`}>
+              Keterangan
+            </div>
+          </div>
+
+          {/* Table rows */}
           {category.rumus.map((rumus, idx) => (
             <div
               key={idx}
-              className="px-4 py-3 hover:bg-white/[0.03] transition-colors"
+              className={`grid grid-cols-[2rem_1fr_1.6fr_1.2fr] gap-0 border-b border-white/5 last:border-b-0 hover:bg-white/[0.03] transition-colors ${
+                idx % 2 === 0 ? "bg-transparent" : "bg-white/[0.015]"
+              }`}
             >
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className={`text-[10px] font-mono font-bold tabular-nums ${category.color} opacity-50 shrink-0`}>
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                <span className={`text-xs md:text-sm font-semibold font-display ${category.color}`}>
+              {/* No */}
+              <div className={`px-2 py-3 flex items-center justify-center text-[10px] font-mono font-bold tabular-nums ${category.color} opacity-40 shrink-0`}>
+                {String(idx + 1).padStart(2, "0")}
+              </div>
+
+              {/* Nama Rumus */}
+              <div className={`px-3 py-3 flex items-center border-l border-white/5`}>
+                <span className={`text-xs font-semibold font-display leading-snug ${category.color}`}>
                   {rumus.name}
                 </span>
               </div>
-              <div className="rounded-lg bg-black/40 px-3 py-2.5 border border-white/5 overflow-x-auto mb-1.5">
-                <div className="text-white text-center min-w-fit">
+
+              {/* Rumus */}
+              <div className="px-3 py-2 flex items-center border-l border-white/5 overflow-x-auto">
+                <div className="text-white text-sm min-w-fit">
                   <BlockMath math={rumus.formula} />
                 </div>
               </div>
-              {rumus.description && (
-                <p className="text-[11px] text-white/45 leading-snug pl-1">
-                  {rumus.description}
-                </p>
-              )}
+
+              {/* Keterangan */}
+              <div className="px-3 py-3 flex items-center border-l border-white/5">
+                {rumus.description
+                  ? <span className="text-[11px] text-white/50 leading-snug">{rumus.description}</span>
+                  : <span className="text-[11px] text-white/20 italic">—</span>
+                }
+              </div>
             </div>
           ))}
         </div>
