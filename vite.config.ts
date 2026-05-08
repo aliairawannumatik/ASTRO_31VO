@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import legacy from "@vitejs/plugin-legacy";
 import path from "path";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 export default defineConfig({
   envPrefix: ["VITE_"],
@@ -24,6 +25,28 @@ export default defineConfig({
     legacy({
       targets: ["Android >= 5", "Chrome >= 60", "iOS >= 12"],
       modernPolyfills: true,
+    }),
+    ViteImageOptimizer({
+      includePublic: true,
+      logStats: true,
+      ansiColors: true,
+      png: {
+        quality: 82,
+      },
+      jpeg: {
+        quality: 82,
+      },
+      jpg: {
+        quality: 82,
+      },
+      webp: {
+        lossless: false,
+        quality: 82,
+        effort: 4,
+        smartSubsample: true,
+      },
+      cache: true,
+      cacheLocation: "node_modules/.cache/vite-plugin-image-optimizer",
     }),
   ],
   resolve: {
