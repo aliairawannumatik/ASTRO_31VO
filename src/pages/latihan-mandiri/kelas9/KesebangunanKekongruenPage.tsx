@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "DEFINISI KESEBANGUNAN DAN KEKONGRUENAN",
     path: "/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/definisi",
-    soal: 40,
+    soal: 20,
     icon: Shapes,
     gradient: "from-cyan-900/40 to-teal-900/30",
     border: "border-cyan-500/30",
@@ -34,7 +34,7 @@ const subtopics = [
   {
     label: "SEGITIGA-SEGITIGA YANG SEBANGUN",
     path: "/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun",
-    soal: 40,
+    soal: 11,
     icon: Triangle,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -92,7 +92,7 @@ const KesebangunanKekongruenPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">200 Soal Total · Gambar & Diagram Geometri</span>
+            <span className="text-white/70 text-xs font-body">151 Soal Total · Gambar & Diagram Geometri</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
