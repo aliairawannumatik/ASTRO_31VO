@@ -38,7 +38,6 @@ const brslDasarImages: Record<number, string> = {
   3: dasarImg3,
   5: dasarImg5,
   6: dasarImg6,
-  31: dasarImg32,
   32: dasarImg33,
   33: dasarImg34,
   34: dasarImg35,
@@ -614,6 +613,15 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                             <img
                               src={dasarImg31}
                               alt="Gambar soal 30"
+                              className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                            />
+                          </div>
+                        )}
+                        {soal.no === 31 && li === 0 && (
+                          <div className="flex justify-center my-3">
+                            <img
+                              src={dasarImg32}
+                              alt="Gambar soal 31"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
                           </div>
