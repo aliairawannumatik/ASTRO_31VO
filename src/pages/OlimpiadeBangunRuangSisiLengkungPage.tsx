@@ -711,7 +711,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                       <img
                         src={brslOlimpiadeImages[soal.no]}
                         alt={`Gambar soal ${soal.no}`}
-                        className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                        className={`w-full rounded-lg border border-white/10 bg-white/90 p-2 ${soal.no === 5 ? "max-w-[140px]" : "max-w-[280px]"}`}
                       />
                     </div>
                   )}
