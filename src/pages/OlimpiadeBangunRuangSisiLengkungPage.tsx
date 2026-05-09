@@ -22,10 +22,10 @@ import dasarImg35 from "@assets/35_1778331371124.png";
 import dasarImg36 from "@assets/36_1778331371124.png";
 import dasarImg37 from "@assets/37_1778331371124.png";
 import dasarImg38 from "@assets/38_1778331371123.png";
-import olimImg1 from "@assets/1_1777274776154.png";
-import olimImg5 from "@assets/5_1777274776155.png";
-import olimImg10 from "@assets/10_1777274776155.png";
-import olimImg15 from "@assets/15_1777274776155.png";
+import olimImg1 from "@assets/1_1778332918941.png";
+import olimImg5 from "@assets/5_1778332923707.png";
+import olimImg10 from "@assets/10_1778332918942.png";
+import olimImg15 from "@assets/15_1778332918942.png";
 
 const brslOlimpiadeImages: Record<number, string> = {
   1: olimImg1,
