@@ -14,7 +14,7 @@ import imgBB54 from "@assets/54_1778368609759.png";
 import imgBB56 from "@assets/56_1778368609762.png";
 
 const bilBulatOlimpiadeImages: Record<number, string> = {
-  2: imgBB2,
+  8: imgBB2,
   33: imgBB33,
   40: imgBB40,
   45: imgBB45,
