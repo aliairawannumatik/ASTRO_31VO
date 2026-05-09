@@ -38,7 +38,6 @@ const brslDasarImages: Record<number, string> = {
   3: dasarImg3,
   5: dasarImg5,
   6: dasarImg6,
-  33: dasarImg34,
   34: dasarImg35,
   35: dasarImg36,
   36: dasarImg37,
@@ -469,7 +468,7 @@ const latihanDasar = [
   { no: 30, soal: "Perhatikan gambar!\nLuas permukaan bangun ruang tersebut adalah ....", options: ["A. 550 $cm^2$", "B. 1320 $cm^2$", "C. 1474 $cm^2$", "D. 1584 $cm^2$"] },
   { no: 31, soal: "Perhatikan gambar!\nLuas permukaan gambar disamping adalah ...", options: ["A. 400$\\pi$ $cm^2$", "B. 800$\\pi$ $cm^2$", "C. 1200$\\pi$ $cm^2$", "D. 1600$\\pi$ $cm^2$"] },
   { no: 32, soal: "Perhatikan gambar!\nGambar diatas merupakan sebuah bandul terbuat dari logam. Jika berat setiap 1 $cm^3$ adalah 15 gram, maka berat bandul seluruhnya adalah ....", options: ["A. 7122 gram", "B. 7212 gram", "C. 7222 gram", "D. 7232 gram"] },
-  { no: 33, soal: "Sebuah bandul terdiri dari kerucut dan belahan bola. Jika diameter bola 14 cm dan garis pelukis kerucutnya 25 cm, maka volume bandul tersebut adalah ....", options: ["A. 132,6 $cm^3$", "B. 1232,0 $cm^3$", "C. 1950,7 $cm^3$", "D. 2002,0 $cm^3$"] },
+  { no: 33, soal: "Sebuah bandul terdiri dari kerucut dan belahan bola.\nJika diameter bola 14 cm dan garis pelukis kerucutnya 25 cm, maka volume bandul tersebut adalah ....", options: ["A. 132,6 $cm^3$", "B. 1232,0 $cm^3$", "C. 1950,7 $cm^3$", "D. 2002,0 $cm^3$"] },
   { no: 34, soal: "Perhatikan gambar benda padat berbentuk tabung dan setengah bola berikut!\nLuas permukaan benda tersebut adalah ... ($\\pi = \\frac{22}{7}$)", options: ["A. 702 cm²", "B. 802 cm²", "C. 902 cm²", "D. 1.002 cm²"] },
   { no: 35, soal: "Perhatikan gambar berikut!\nSebuah peluru terbentuk dari tabung dan kerucut. Volume peluru tersebut adalah...", options: ["A. 4.312,0 $cm^3$", "B. 4.230,0 $cm^3$", "C. 4.358,2 $cm^3$", "D. 5.312,4 $cm^3$"] },
   { no: 36, soal: "Bangun pada gambar berikut terdiri dari tabung dan belahan bola.\nLuas permukaan bangun tersebut adalah....", options: ["A. 880 $cm^2$", "B. 1.496 $cm^2$", "C. 1.596 $cm^2$", "D. 2.010 $cm^2$"] },
@@ -630,6 +629,15 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                             <img
                               src={dasarImg33}
                               alt="Gambar soal 32"
+                              className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                            />
+                          </div>
+                        )}
+                        {soal.no === 33 && li === 0 && (
+                          <div className="flex justify-center my-3">
+                            <img
+                              src={dasarImg34}
+                              alt="Gambar soal 33"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
                           </div>
