@@ -14,7 +14,6 @@ import dasarImg3 from "@assets/3_1778331371127.png";
 import dasarImg5 from "@assets/5_1778331371127.png";
 import dasarImg6 from "@assets/6_1778331371126.png";
 import dasarImg13 from "@assets/13_1778331371126.png";
-import dasarImg30 from "@assets/30_1777273872297.png";
 import dasarImg31 from "@assets/31_1778331371125.png";
 import dasarImg32 from "@assets/32_1778331371125.png";
 import dasarImg33 from "@assets/33_1778331371123.png";
@@ -40,15 +39,14 @@ const brslDasarImages: Record<number, string> = {
   5: dasarImg5,
   6: dasarImg6,
   13: dasarImg13,
-  30: dasarImg30,
-  31: dasarImg31,
-  32: dasarImg32,
-  33: dasarImg33,
-  34: dasarImg34,
-  35: dasarImg35,
-  36: dasarImg36,
-  37: dasarImg37,
-  38: dasarImg38,
+  30: dasarImg31,
+  31: dasarImg32,
+  32: dasarImg33,
+  33: dasarImg34,
+  34: dasarImg35,
+  35: dasarImg36,
+  36: dasarImg37,
+  37: dasarImg38,
 };
 
 /* ─────────────── LaTeX helper ─────────────── */
