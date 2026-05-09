@@ -26,17 +26,17 @@ import kesDasarImg1i from "@assets/Gemini_Generated_Image_ei9ifzei9ifzei9i_17783
 import kesDasarImg1ii from "@assets/Gemini_Generated_Image_jtpzlcjtpzlcjtpz_1778334487099.png";
 import kesDasarImg1iii from "@assets/Gemini_Generated_Image_2aindm2aindm2ain_1778334487100.png";
 import kesDasarImg1iv from "@assets/hghg_1778334636982.png";
-import kesOlimpiadeImg2 from "@assets/2_1777275877424.png";
-import kesOlimpiadeImg3 from "@assets/3_1777275877425.png";
-import kesOlimpiadeImg4 from "@assets/4_1777275877425.png";
-import kesOlimpiadeImg7 from "@assets/7_1777275877426.png";
-import kesOlimpiadeImg8 from "@assets/8_1777275877426.png";
-import kesOlimpiadeImg9 from "@assets/9_1777275877426.png";
-import kesOlimpiadeImg11 from "@assets/11_1777275877427.png";
-import kesOlimpiadeImg13 from "@assets/13_1777275877427.png";
-import kesOlimpiadeImg14 from "@assets/14_1777275877428.png";
-import kesOlimpiadeImg16 from "@assets/16_1777275877428.png";
-import kesOlimpiadeImg17 from "@assets/17_1777275877429.png";
+import kesOlimpiadeImg2 from "@assets/2_1778338050020.png";
+import kesOlimpiadeImg3 from "@assets/3_1778338050023.png";
+import kesOlimpiadeImg4 from "@assets/4_1778338050022.png";
+import kesOlimpiadeImg7 from "@assets/7_1778338050019.png";
+import kesOlimpiadeImg8 from "@assets/8_1778338050019.png";
+import kesOlimpiadeImg9 from "@assets/9_1778338050020.png";
+import kesOlimpiadeImg11 from "@assets/11_1778338050018.png";
+import kesOlimpiadeImg13 from "@assets/13_1778338050021.png";
+import kesOlimpiadeImg14 from "@assets/14_1778338050018.png";
+import kesOlimpiadeImg16 from "@assets/16_1778338050021.png";
+import kesOlimpiadeImg17 from "@assets/17_1778338050017.png";
 
 const kesOlimpiadeImages: Record<number, string> = {
   2: kesOlimpiadeImg2,
