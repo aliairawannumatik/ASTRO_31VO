@@ -38,7 +38,6 @@ const brslDasarImages: Record<number, string> = {
   3: dasarImg3,
   5: dasarImg5,
   6: dasarImg6,
-  13: dasarImg13,
   30: dasarImg31,
   31: dasarImg32,
   32: dasarImg33,
@@ -596,10 +595,22 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
             <motion.div key="dasar" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-3">
               {latihanDasar.map((soal) => (
                 <div key={soal.no} className="bg-[#0a1628]/80 backdrop-blur border border-white/6 rounded-2xl px-5 py-4">
-                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                  <div className="font-body text-sm text-white mb-3 leading-relaxed">
                     <span className="text-cyan-400 font-bold font-display">{soal.no}.</span>{" "}
                     {soal.soal.split("\n").map((line, li) => (
-                      <span key={li}>{li > 0 && <br />}{renderWithLatex(line)}</span>
+                      <span key={li}>
+                        {li > 0 && <br />}
+                        {renderWithLatex(line)}
+                        {soal.no === 13 && li === 0 && (
+                          <div className="flex justify-center my-3">
+                            <img
+                              src={dasarImg13}
+                              alt="Gambar soal 13"
+                              className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
+                            />
+                          </div>
+                        )}
+                      </span>
                     ))}
                   </div>
                   {brslDasarImages[soal.no] && (
