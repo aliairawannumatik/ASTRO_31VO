@@ -10,18 +10,19 @@ import { BlockMath, InlineMath } from "react-katex";
 import PembahasanCard from "@/components/PembahasanCard";
 import { brslDasarPembahasan } from "@/data/pembahasan/brslDasar";
 import { brslOlimpiadePembahasan } from "@/data/pembahasan/brslOlimpiade";
-import dasarImg3 from "@assets/3_1777273872295.png";
-import dasarImg5 from "@assets/5_1777273872296.png";
-import dasarImg6 from "@assets/6_1777273872296.png";
-import dasarImg13 from "@assets/13_1777273872297.png";
+import dasarImg3 from "@assets/3_1778331371127.png";
+import dasarImg5 from "@assets/5_1778331371127.png";
+import dasarImg6 from "@assets/6_1778331371126.png";
+import dasarImg13 from "@assets/13_1778331371126.png";
 import dasarImg30 from "@assets/30_1777273872297.png";
-import dasarImg31 from "@assets/31_1777273872298.png";
-import dasarImg32 from "@assets/32_1777273872298.png";
-import dasarImg33 from "@assets/33_1777273872299.png";
-import dasarImg34 from "@assets/34_1777273872299.png";
-import dasarImg35 from "@assets/35_1777273872299.png";
-import dasarImg36 from "@assets/36_1777273872300.png";
-import dasarImg37 from "@assets/37_1777273872301.png";
+import dasarImg31 from "@assets/31_1778331371125.png";
+import dasarImg32 from "@assets/32_1778331371125.png";
+import dasarImg33 from "@assets/33_1778331371123.png";
+import dasarImg34 from "@assets/34_1778331371123.png";
+import dasarImg35 from "@assets/35_1778331371124.png";
+import dasarImg36 from "@assets/36_1778331371124.png";
+import dasarImg37 from "@assets/37_1778331371124.png";
+import dasarImg38 from "@assets/38_1778331371123.png";
 import olimImg1 from "@assets/1_1777274776154.png";
 import olimImg5 from "@assets/5_1777274776155.png";
 import olimImg10 from "@assets/10_1777274776155.png";
@@ -47,6 +48,7 @@ const brslDasarImages: Record<number, string> = {
   35: dasarImg35,
   36: dasarImg36,
   37: dasarImg37,
+  38: dasarImg38,
 };
 
 /* ─────────────── LaTeX helper ─────────────── */
