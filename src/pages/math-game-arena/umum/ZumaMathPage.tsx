@@ -20,10 +20,10 @@ const BASE_SPEED = 0.28;         // t-units per frame (normal)
 const FAST_SPEED = 1.8;          // when chain is being pushed back (on wrong)
 const PROJ_SPEED = 11;
 
-// ── Colors: 4 neon colors ─────────────────────────────────────────────────
-const C_FILL  = ["#0891b2", "#be185d", "#4d7c0f", "#c2410c"];
-const C_GLOW  = ["#22d3ee", "#f472b6", "#a3e635", "#fb923c"];
-const C_LIGHT = ["#cffafe", "#fce7f3", "#ecfccb", "#ffedd5"];
+// ── Colors: 4 vivid saturated colors ──────────────────────────────────────
+const C_FILL  = ["#0040c0", "#c00000", "#006600", "#c05000"];
+const C_GLOW  = ["#1e90ff", "#ff1a1a", "#00cc00", "#ff7700"];
+const C_LIGHT = ["#b0d4ff", "#ffb3b3", "#b3ffb3", "#ffd0a0"];
 const C_NAME  = ["BIRU", "MERAH", "HIJAU", "ORANYE"];
 
 // ── Math questions ─────────────────────────────────────────────────────────
