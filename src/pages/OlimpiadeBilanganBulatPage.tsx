@@ -6,6 +6,21 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
+import imgBB2 from "@assets/2_1778368609760.png";
+import imgBB33 from "@assets/33_1778368609761.png";
+import imgBB40 from "@assets/40_1778368609761.png";
+import imgBB45 from "@assets/45_1778368609760.png";
+import imgBB54 from "@assets/54_1778368609759.png";
+import imgBB56 from "@assets/56_1778368609762.png";
+
+const bilBulatOlimpiadeImages: Record<number, string> = {
+  2: imgBB2,
+  33: imgBB33,
+  40: imgBB40,
+  45: imgBB45,
+  54: imgBB54,
+  56: imgBB56,
+};
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -1154,10 +1169,10 @@ const OlimpiadeBilanganBulatPage = () => {
                   </div>
 
                   {/* Gambar Soal */}
-                  {soal.image && (
+                  {(bilBulatOlimpiadeImages[soal.no] || soal.image) && (
                     <div className="mb-3 flex justify-center">
                       <img
-                        src={soal.image}
+                        src={bilBulatOlimpiadeImages[soal.no] || soal.image}
                         alt={`Diagram soal ${soal.no}`}
                         className="max-w-full rounded-lg bg-white p-2"
                         style={{ maxHeight: "220px", objectFit: "contain" }}
