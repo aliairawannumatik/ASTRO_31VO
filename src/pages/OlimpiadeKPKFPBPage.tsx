@@ -1071,7 +1071,7 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
   {
     no: 7,
     soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan gambar berikut. Jika pada setiap persegi ditempatkan bilangan bulat positif sedemikian rupa sehingga perkalian bilangan-bilangan dari sembarang lima persegi yang berurutan menghasilkan 360, maka jumlah bilangan pada semua persegi tersebut adalah ...",
-    image: "/NO_7_OLIMP_1774498206855.png",
+    image: "/kpk-fpb-soal7-1778374556739.png",
     options: [],
     jawaban: "23",
     pembahasan: {
