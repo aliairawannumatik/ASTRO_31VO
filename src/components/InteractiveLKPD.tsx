@@ -56,6 +56,7 @@ type Props = {
   title: string;
   intro: string;
   steps?: { icon: "Compass" | "Lightbulb" | "Target"; title: string; text: string }[];
+  headerSlot?: ReactNode;
   situations: SituationCard[];
   guidedIntro: string;
   guidedItems: GuidedItem[];
@@ -318,6 +319,7 @@ const InteractiveLKPD = ({
     { icon: "Lightbulb", title: "Temukan", text: "Selesaikan setiap soal untuk menemukan konsep." },
     { icon: "Target", title: "Terapkan", text: "Gunakan kesimpulan pada soal kontekstual." },
   ],
+  headerSlot,
   situations,
   guidedIntro,
   guidedItems,
@@ -385,17 +387,27 @@ const InteractiveLKPD = ({
     if (kind === "fill") {
       const f = item as FillGuided | FillPractice;
       const suffix = "suffix" in f ? f.suffix : undefined;
-      const ring = variant === "guided" ? "focus:ring-cyan-300/20 focus:border-cyan-300 border-cyan-200/30" : "focus:ring-fuchsia-300/20 focus:border-fuchsia-300 border-fuchsia-200/30";
+      const borderColor = variant === "guided" ? "border-cyan-400/70" : "border-fuchsia-400/70";
+      const focusRing = variant === "guided" ? "focus:ring-cyan-300/30 focus:border-cyan-300" : "focus:ring-fuchsia-300/30 focus:border-fuchsia-300";
+      const badgeColor = variant === "guided" ? "bg-cyan-500/20 border-cyan-400/50 text-cyan-200" : "bg-fuchsia-500/20 border-fuchsia-400/50 text-fuchsia-200";
       return (
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2">
-          <input
-            value={(value as string) || ""}
-            onChange={(e) => update(item.id, e.target.value)}
-            className={`flex-1 rounded-xl border bg-black/30 px-4 py-2 text-white outline-none focus:ring-2 ${ring}`}
-            placeholder="tulis jawabanmu"
-          />
-          {suffix && <span className="text-sm text-white/65">{suffix}</span>}
-          {isAnswered(item, value) && <ResultBadge correct={results[item.id]} />}
+        <div className="mt-3">
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-bold tracking-wide ${badgeColor}`}>
+              ✏️ ISIAN SISWA
+            </span>
+            <span className="text-white/35 text-xs">← wajib diisi</span>
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <input
+              value={(value as string) || ""}
+              onChange={(e) => update(item.id, e.target.value)}
+              className={`flex-1 rounded-xl border-2 border-dashed bg-black/30 px-4 py-2.5 text-white outline-none focus:ring-2 focus:border-solid ${borderColor} ${focusRing}`}
+              placeholder="✏️ Tulis jawabanmu di sini..."
+            />
+            {suffix && <span className="text-sm text-white/65">{suffix}</span>}
+            {isAnswered(item, value) && <ResultBadge correct={results[item.id]} />}
+          </div>
         </div>
       );
     }
@@ -493,6 +505,8 @@ const InteractiveLKPD = ({
             );
           })}
         </div>
+
+        {headerSlot}
 
         <section className="bg-gradient-to-br from-cyan-500/15 via-blue-500/10 to-violet-500/15 border border-cyan-200/30 rounded-3xl p-5 md:p-7 mb-6 backdrop-blur">
           <div className="flex items-start gap-3 mb-5">
