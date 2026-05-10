@@ -1432,9 +1432,9 @@ const OlimpiadeBilanganRasionalPage = () => {
                     <div className="flex justify-center mb-4">
                       <div className="bg-white rounded-xl p-3 shadow-lg shadow-black/30 inline-block">
                         <img
-                          src="/Picture1_1774497198057.png"
+                          src="/rasional-soal1-1778374330823.png"
                           alt="Kotak operasi: □ + □/□ × □"
-                          className="h-20 w-auto object-contain"
+                          className="h-32 w-auto object-contain"
                         />
                       </div>
                     </div>
