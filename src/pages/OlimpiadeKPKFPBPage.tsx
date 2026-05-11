@@ -1238,7 +1238,7 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
   {
     no: 15,
     soal: "OSN Matematika 2021 Tingkat Kota\nSetiap 12 menit Bus-A dapat menempuh rute P – X – S – X – P, setiap 20 menit, Bus-B dapat menyelesaikan rute Q – X – T – X – Q, setiap 28 menit Bus-C dapat menyelesaikan rute R – X – U – X – R. Pukul 1 siang (13.00), Bus-A berangkat dari P, Bus-B berangkat dari Q dan Bus-C berangkat dari R, menempuh rutenya masing-masing dengan kecepatan konstan dan mengulangi perjalanan sepanjang rutenya hingga pukul 11 malam (23.00). Diantara pukul 5 sore hingga pukul 10 malam (17.00 – 22.00), berapakah kali 2 atau lebih bus tiba di X secara bersamaan?",
-    image: "/NO_15_OLIMP_1774498453052.png",
+    image: "/kpk-fpb-soal15-1778489488052.png",
     options: ["A. 18", "B. 19", "C. 20", "D. 21"],
     jawaban: "A. 18",
     pembahasan: {
