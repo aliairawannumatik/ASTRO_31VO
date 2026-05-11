@@ -90,6 +90,7 @@ const AsteroidBlasterPage = () => {
   const thrusterRef = useRef(0);
   const autoShootRef = useRef(false);
   const touchXRef = useRef<number | null>(null);
+  const shipImgRef = useRef<HTMLImageElement | null>(null);
 
   // react
   const [phase, setPhase] = useState<Phase>("idle");
@@ -195,85 +196,52 @@ const AsteroidBlasterPage = () => {
   }, []);
 
   // ── Draw ship ─────────────────────────────────────────────────────────
-  const drawShip = useCallback((ctx: CanvasRenderingContext2D, x: number, ts: number, shakeX: number) => {
+  const drawShip = useCallback((ctx: CanvasRenderingContext2D, x: number, _ts: number, shakeX: number) => {
     const cx = x + SHIP_W / 2 + shakeX;
     const top = SHIP_Y;
+    const imgW = 72, imgH = 72;
+    const imgTop = top - 14;
 
-    // engine glow
+    // Engine flame glow (at tail = bottom of image)
     thrusterRef.current += 0.15;
     const thrPulse = 0.6 + 0.4 * Math.sin(thrusterRef.current * 6);
-    const grad = ctx.createRadialGradient(cx, top + SHIP_H + 5, 0, cx, top + SHIP_H + 5, 22 * thrPulse);
-    grad.addColorStop(0, "rgba(255,160,0,0.9)");
-    grad.addColorStop(0.4, "rgba(255,60,0,0.5)");
+    const thrY = imgTop + imgH - 6;
+    // Main orange core
+    const grad = ctx.createRadialGradient(cx, thrY, 0, cx, thrY, 20 * thrPulse);
+    grad.addColorStop(0, "rgba(255,210,80,1)");
+    grad.addColorStop(0.25, "rgba(255,120,0,0.85)");
+    grad.addColorStop(0.55, "rgba(255,40,0,0.45)");
     grad.addColorStop(1, "transparent");
     ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(cx, top + SHIP_H + 5, 22 * thrPulse, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, thrY, 20 * thrPulse, 0, Math.PI * 2); ctx.fill();
+    // Outer blue exhaust halo
+    const halo = ctx.createRadialGradient(cx, thrY, 0, cx, thrY, 28 * thrPulse);
+    halo.addColorStop(0, "transparent");
+    halo.addColorStop(0.5, "rgba(0,120,255,0.12)");
+    halo.addColorStop(1, "transparent");
+    ctx.fillStyle = halo;
+    ctx.beginPath(); ctx.arc(cx, thrY, 28 * thrPulse, 0, Math.PI * 2); ctx.fill();
 
-    // body
-    ctx.shadowColor = "#00FFFF";
-    ctx.shadowBlur = 16;
-    const bodyGrad = ctx.createLinearGradient(cx - SHIP_W/2, top, cx + SHIP_W/2, top + SHIP_H);
-    bodyGrad.addColorStop(0, "#2a9dc7");
-    bodyGrad.addColorStop(1, "#1a5f7a");
-    ctx.fillStyle = bodyGrad;
-    ctx.beginPath();
-    ctx.moveTo(cx, top);           // nose
-    ctx.lineTo(cx + 18, top + 30); // right body
-    ctx.lineTo(cx + 24, top + SHIP_H); // right base
-    ctx.lineTo(cx - 24, top + SHIP_H); // left base
-    ctx.lineTo(cx - 18, top + 30); // left body
-    ctx.closePath();
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    // wings
-    const wingGrad = ctx.createLinearGradient(cx, top, cx, top + SHIP_H);
-    wingGrad.addColorStop(0, "#1a6b8a");
-    wingGrad.addColorStop(1, "#0d3d52");
-    ctx.fillStyle = wingGrad;
-    ctx.shadowColor = "#00EEFF";
-    ctx.shadowBlur = 8;
-    // left wing
-    ctx.beginPath();
-    ctx.moveTo(cx - 18, top + 30);
-    ctx.lineTo(cx - SHIP_W/2 - 10, top + SHIP_H);
-    ctx.lineTo(cx - 24, top + SHIP_H);
-    ctx.closePath();
-    ctx.fill();
-    // right wing
-    ctx.beginPath();
-    ctx.moveTo(cx + 18, top + 30);
-    ctx.lineTo(cx + SHIP_W/2 + 10, top + SHIP_H);
-    ctx.lineTo(cx + 24, top + SHIP_H);
-    ctx.closePath();
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    // cockpit
-    const cockpitGrad = ctx.createRadialGradient(cx, top + 14, 2, cx, top + 14, 10);
-    cockpitGrad.addColorStop(0, "#aaffff");
-    cockpitGrad.addColorStop(1, "#004466");
-    ctx.fillStyle = cockpitGrad;
-    ctx.beginPath();
-    ctx.ellipse(cx, top + 16, 8, 10, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // cannon barrel
-    ctx.fillStyle = "#00FFFF";
-    ctx.shadowColor = "#00FFFF";
-    ctx.shadowBlur = 6;
-    ctx.fillRect(cx - 3, top - 10, 6, 14);
-    ctx.shadowBlur = 0;
-
-    // accent stripes
-    ctx.strokeStyle = "rgba(0,255,255,0.4)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(cx - 10, top + 22);
-    ctx.lineTo(cx + 10, top + 22);
-    ctx.stroke();
+    // Ship image
+    if (shipImgRef.current) {
+      ctx.save();
+      ctx.shadowColor = "rgba(80,160,255,0.55)";
+      ctx.shadowBlur = 14;
+      ctx.drawImage(shipImgRef.current, cx - imgW / 2, imgTop, imgW, imgH);
+      ctx.shadowBlur = 0;
+      ctx.restore();
+    } else {
+      // Fallback vector ship while image loads
+      ctx.shadowColor = "#00FFFF"; ctx.shadowBlur = 16;
+      const bodyGrad = ctx.createLinearGradient(cx - SHIP_W/2, top, cx + SHIP_W/2, top + SHIP_H);
+      bodyGrad.addColorStop(0, "#2a9dc7"); bodyGrad.addColorStop(1, "#1a5f7a");
+      ctx.fillStyle = bodyGrad;
+      ctx.beginPath();
+      ctx.moveTo(cx, top); ctx.lineTo(cx + 18, top + 30);
+      ctx.lineTo(cx + 24, top + SHIP_H); ctx.lineTo(cx - 24, top + SHIP_H);
+      ctx.lineTo(cx - 18, top + 30); ctx.closePath();
+      ctx.fill(); ctx.shadowBlur = 0;
+    }
   }, []);
 
   // ── Draw asteroid ────────────────────────────────────────────────────
@@ -639,6 +607,12 @@ const AsteroidBlasterPage = () => {
   }, [loop, resetGame]);
 
   useEffect(() => () => { if (fbRef.current) clearTimeout(fbRef.current); }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/pesawat-nobg.png";
+    img.onload = () => { shipImgRef.current = img; };
+  }, []);
 
   // touch
   const onTouchMove = (e: React.TouchEvent) => {
