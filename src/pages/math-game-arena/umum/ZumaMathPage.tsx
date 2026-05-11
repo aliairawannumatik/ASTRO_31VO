@@ -52,6 +52,15 @@ const makeWrong = (ans: number, used: Set<number>): number => {
   return Math.max(1, v);
 };
 
+// ── Shade hex color by pct (negative = darker) ────────────────────────────
+function shadeColor(hex: string, pct: number): string {
+  const num = parseInt(hex.replace("#", ""), 16);
+  const r = Math.max(0, Math.min(255, (num >> 16) + pct));
+  const g = Math.max(0, Math.min(255, ((num >> 8) & 0xff) + pct));
+  const b = Math.max(0, Math.min(255, (num & 0xff) + pct));
+  return `rgb(${r},${g},${b})`;
+}
+
 // ── Catmull-Rom smooth path ────────────────────────────────────────────────
 const CTRL: [number, number][] = [
   [500, 80], [360, 80], [200, 75], [90, 145],
@@ -134,6 +143,7 @@ const ZumaMathPage = () => {
   const projRef = useRef<Projectile | null>(null);
   const particlesRef = useRef<Particle[]>([]);
   const starsRef = useRef<Star[]>([]);
+  const frameRef = useRef(0);
   const cannonAngleRef = useRef(0);
   const currentColorRef = useRef(0);
   const nextColorRef = useRef(0);
@@ -432,152 +442,343 @@ const ZumaMathPage = () => {
     if (flashTimerRef.current > 0) { flashTimerRef.current--; if (flashTimerRef.current === 0) setFlashMsg(""); }
 
     // ══════════════ DRAW ════════════════════════════════════════════
-    ctx.fillStyle = "#00000f";
+    frameRef.current++;
+    const frame = frameRef.current;
+
+    // ── Background: deep space gradient + nebula patches ─────────────
+    const bgGrad = ctx.createRadialGradient(CW/2, CH*0.4, 0, CW/2, CH/2, CW);
+    bgGrad.addColorStop(0, "#0d1a3a");
+    bgGrad.addColorStop(0.55, "#06102a");
+    bgGrad.addColorStop(1, "#020810");
+    ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, CW, CH);
 
-    // Stars
-    for (const s of starsRef.current) {
-      ctx.globalAlpha = s.a;
-      ctx.fillStyle = "#fff";
+    const neb1 = ctx.createRadialGradient(90, 160, 0, 90, 160, 130);
+    neb1.addColorStop(0, "rgba(0,80,200,0.09)"); neb1.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = neb1; ctx.fillRect(0, 0, CW, CH);
+
+    const neb2 = ctx.createRadialGradient(390, 420, 0, 390, 420, 160);
+    neb2.addColorStop(0, "rgba(100,0,180,0.08)"); neb2.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = neb2; ctx.fillRect(0, 0, CW, CH);
+
+    const neb3 = ctx.createRadialGradient(260, 50, 0, 260, 50, 100);
+    neb3.addColorStop(0, "rgba(0,180,100,0.05)"); neb3.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = neb3; ctx.fillRect(0, 0, CW, CH);
+
+    // Twinkling stars
+    for (let si = 0; si < starsRef.current.length; si++) {
+      const s = starsRef.current[si];
+      const twinkle = s.a * (0.45 + 0.55 * Math.sin(frame * 0.038 + si * 1.73));
+      ctx.globalAlpha = twinkle;
+      ctx.fillStyle = si % 5 === 0 ? "#aaddff" : si % 7 === 0 ? "#ffddaa" : "#ffffff";
+      ctx.shadowColor = ctx.fillStyle;
+      ctx.shadowBlur = s.r > 1.2 ? 5 : 0;
       ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
     }
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = 1; ctx.shadowBlur = 0;
 
-    // Path track (dashed glow trail)
+    // ── Path track: multi-layer 3D groove ────────────────────────────
     ctx.save();
-    ctx.strokeStyle = "#ffffff18";
-    ctx.lineWidth = BALL_R * 2 + 4;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.beginPath();
-    ctx.moveTo(PATH_PTS[0][0], PATH_PTS[0][1]);
-    for (let i = 1; i < PATH_PTS.length; i++) ctx.lineTo(PATH_PTS[i][0], PATH_PTS[i][1]);
-    ctx.stroke();
-    ctx.strokeStyle = "#00ffcc0a";
-    ctx.lineWidth = 2;
-    ctx.setLineDash([8, 12]);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    const drawPath = () => {
+      ctx.beginPath();
+      ctx.moveTo(PATH_PTS[0][0], PATH_PTS[0][1]);
+      for (let i = 1; i < PATH_PTS.length; i++) ctx.lineTo(PATH_PTS[i][0], PATH_PTS[i][1]);
+    };
+    // Outer shadow
+    ctx.strokeStyle = "rgba(0,0,0,0.75)"; ctx.lineWidth = BALL_R * 2 + 18;
+    drawPath(); ctx.stroke();
+    // Deep groove base
+    ctx.strokeStyle = "rgba(0,15,40,0.95)"; ctx.lineWidth = BALL_R * 2 + 10;
+    drawPath(); ctx.stroke();
+    // Mid glow rim
+    ctx.strokeStyle = "rgba(0,70,140,0.38)"; ctx.lineWidth = BALL_R * 2 + 4;
+    drawPath(); ctx.stroke();
+    // Dark channel floor
+    ctx.strokeStyle = "rgba(0,5,18,0.92)"; ctx.lineWidth = BALL_R * 2 - 6;
+    drawPath(); ctx.stroke();
+    // Top edge highlight (3D look)
+    ctx.strokeStyle = "rgba(0,210,255,0.13)"; ctx.lineWidth = 2;
+    drawPath(); ctx.stroke();
+    // Animated dashed guide
+    ctx.strokeStyle = "rgba(0,255,200,0.07)"; ctx.lineWidth = 1;
+    ctx.setLineDash([6, 14]); ctx.lineDashOffset = -(frame * 0.6);
+    drawPath(); ctx.stroke();
+    ctx.setLineDash([]); ctx.lineDashOffset = 0;
     ctx.restore();
 
-    // Hole indicator at end of path
-    const holePos = getPathPos(TOTAL_LEN);
+    // ── Entry portal ──────────────────────────────────────────────────
+    const entryPos = getPathPos(0);
     ctx.save();
-    ctx.shadowColor = "#ff0000"; ctx.shadowBlur = 20;
-    ctx.strokeStyle = "#ff4444"; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.arc(holePos[0], holePos[1], 14, 0, Math.PI*2); ctx.stroke();
-    ctx.fillStyle = "#00000f";
-    ctx.beginPath(); ctx.arc(holePos[0], holePos[1], 11, 0, Math.PI*2); ctx.fill();
-    ctx.font = "10px monospace"; ctx.fillStyle = "#ff4444"; ctx.textAlign = "center";
+    const entryPulse = 0.5 + 0.5 * Math.sin(frame * 0.07);
+    ctx.shadowColor = "#00ff88"; ctx.shadowBlur = 14 + 6 * entryPulse;
+    for (let ri = 0; ri < 3; ri++) {
+      ctx.globalAlpha = (0.18 + ri * 0.14) * entryPulse;
+      ctx.strokeStyle = "#00ff88"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(entryPos[0], entryPos[1], 5 + ri * 5, 0, Math.PI*2); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = "#00ff8890";
+    ctx.beginPath(); ctx.arc(entryPos[0], entryPos[1], 5, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+
+    // ── Hole: pulsing danger vortex ───────────────────────────────────
+    const holePos = getPathPos(TOTAL_LEN);
+    const holePulse = 0.5 + 0.5 * Math.sin(frame * 0.09);
+    ctx.save();
+    ctx.shadowColor = "#ff2200"; ctx.shadowBlur = 18 + holePulse * 16;
+    ctx.strokeStyle = `rgba(255,55,30,${0.45 + holePulse * 0.55})`; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(holePos[0], holePos[1], 16 + holePulse * 4, 0, Math.PI*2); ctx.stroke();
+    const holeGrad = ctx.createRadialGradient(holePos[0], holePos[1], 0, holePos[0], holePos[1], 13);
+    holeGrad.addColorStop(0, "#000000"); holeGrad.addColorStop(0.5, "#200005"); holeGrad.addColorStop(1, "#5a0010");
+    ctx.fillStyle = holeGrad;
+    ctx.beginPath(); ctx.arc(holePos[0], holePos[1], 13, 0, Math.PI*2); ctx.fill();
+    const rot = frame * 0.06;
+    for (let ri = 0; ri < 3; ri++) {
+      const a = rot + (ri / 3) * Math.PI * 2;
+      ctx.globalAlpha = 0.5 + 0.4 * Math.sin(frame * 0.1 + ri);
+      ctx.strokeStyle = "#ff5533"; ctx.lineWidth = 1.5; ctx.shadowBlur = 6;
+      ctx.beginPath(); ctx.arc(holePos[0], holePos[1], 8, a, a + Math.PI * 0.7); ctx.stroke();
+    }
+    ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+    ctx.font = "bold 11px sans-serif"; ctx.fillStyle = "#ff4444"; ctx.textAlign = "center";
     ctx.fillText("☠", holePos[0], holePos[1] + 4);
     ctx.restore();
 
-    // Entry indicator
-    const entryPos = getPathPos(0);
-    ctx.save();
-    ctx.shadowColor = "#00ff88"; ctx.shadowBlur = 10;
-    ctx.fillStyle = "#00ff8844";
-    ctx.beginPath(); ctx.arc(entryPos[0], entryPos[1], 10, 0, Math.PI*2); ctx.fill();
-    ctx.restore();
+    // ── Connector wire between chain balls ────────────────────────────
+    if (chain.length > 1) {
+      ctx.save();
+      ctx.globalAlpha = 0.22; ctx.lineWidth = 3; ctx.lineCap = "round";
+      for (let ci = 0; ci < chain.length - 1; ci++) {
+        const [ax, ay] = getPathPos(chain[ci].t);
+        const [bx2, by2] = getPathPos(chain[ci+1].t);
+        ctx.strokeStyle = C_GLOW[chain[ci].color];
+        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx2, by2); ctx.stroke();
+      }
+      ctx.restore();
+    }
 
-    // Draw chain balls
+    // ── Draw chain balls (3D sphere with specular highlight) ──────────
     for (const b of chain) {
       const [bx, by] = getPathPos(b.t);
       const g = C_GLOW[b.color], f = C_FILL[b.color], l = C_LIGHT[b.color];
       ctx.save();
+      // Glow ring
       ctx.shadowColor = g; ctx.shadowBlur = 14;
-      // outer ring
-      ctx.strokeStyle = g; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.arc(bx, by, BALL_R, 0, Math.PI*2); ctx.stroke();
-      // fill
-      const grad = ctx.createRadialGradient(bx-4, by-4, 1, bx, by, BALL_R);
-      grad.addColorStop(0, l);
-      grad.addColorStop(0.4, g);
-      grad.addColorStop(1, f);
-      ctx.fillStyle = grad;
-      ctx.beginPath(); ctx.arc(bx, by, BALL_R - 1, 0, Math.PI*2); ctx.fill();
-      // value text
-      ctx.font = `bold 9px monospace`;
-      ctx.textAlign = "center";
-      ctx.fillStyle = "#000";
-      ctx.fillText(String(optsRef.current[b.color]), bx, by + 3);
+      ctx.strokeStyle = g + "88"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(bx, by, BALL_R + 1.5, 0, Math.PI*2); ctx.stroke();
+      // 3D main gradient (highlight top-left)
+      const hx = bx - BALL_R * 0.3, hy = by - BALL_R * 0.38;
+      const grad = ctx.createRadialGradient(hx, hy, 0, bx, by, BALL_R);
+      grad.addColorStop(0, l); grad.addColorStop(0.28, g);
+      grad.addColorStop(0.65, f); grad.addColorStop(1, shadeColor(f, -40));
+      ctx.fillStyle = grad; ctx.shadowBlur = 0;
+      ctx.beginPath(); ctx.arc(bx, by, BALL_R, 0, Math.PI*2); ctx.fill();
+      // Specular highlight
+      const specG = ctx.createRadialGradient(hx, hy, 0, hx, hy, BALL_R * 0.52);
+      specG.addColorStop(0, "rgba(255,255,255,0.88)");
+      specG.addColorStop(0.45, "rgba(255,255,255,0.28)");
+      specG.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = specG;
+      ctx.beginPath(); ctx.arc(bx, by, BALL_R, 0, Math.PI*2); ctx.fill();
+      // Bottom rim reflection
+      const rimG = ctx.createRadialGradient(bx + BALL_R*0.2, by + BALL_R*0.5, 0, bx, by, BALL_R);
+      rimG.addColorStop(0, "rgba(255,255,255,0.14)"); rimG.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = rimG;
+      ctx.beginPath(); ctx.arc(bx, by, BALL_R, 0, Math.PI*2); ctx.fill();
+      // Number text
+      ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+      ctx.shadowBlur = 4; ctx.shadowColor = "rgba(0,0,0,0.95)";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(String(optsRef.current[b.color]), bx, by + 3.5);
       ctx.shadowBlur = 0;
       ctx.restore();
     }
 
-    // Draw projectile
+    // ── Aiming trajectory line ────────────────────────────────────────
+    {
+      const aimAngle = cannonAngleRef.current;
+      const barrelLen = 36;
+      const tipX = CANNON_X + Math.cos(aimAngle) * (14 + barrelLen + 4);
+      const tipY = CANNON_Y + Math.sin(aimAngle) * (14 + barrelLen + 4);
+      const aimColor = C_GLOW[currentColorRef.current];
+      ctx.save();
+      ctx.globalAlpha = 0.26; ctx.strokeStyle = aimColor; ctx.lineWidth = 1.5;
+      ctx.setLineDash([5, 9]); ctx.lineDashOffset = -(frame * 0.4);
+      ctx.shadowColor = aimColor; ctx.shadowBlur = 6;
+      ctx.beginPath(); ctx.moveTo(tipX, tipY);
+      ctx.lineTo(tipX + Math.cos(aimAngle) * 300, tipY + Math.sin(aimAngle) * 300);
+      ctx.stroke();
+      ctx.setLineDash([]); ctx.lineDashOffset = 0;
+      ctx.globalAlpha = 1;
+      ctx.restore();
+    }
+
+    // ── Draw projectile (3D sphere + speed trail) ─────────────────────
     if (projRef.current) {
       const pr = projRef.current;
       const g = C_GLOW[pr.color], l = C_LIGHT[pr.color], f = C_FILL[pr.color];
       ctx.save();
-      ctx.shadowColor = g; ctx.shadowBlur = 20;
-      const grad = ctx.createRadialGradient(pr.x-4, pr.y-4, 1, pr.x, pr.y, BALL_R);
-      grad.addColorStop(0, l); grad.addColorStop(0.5, g); grad.addColorStop(1, f);
-      ctx.fillStyle = grad;
+      // Speed trail
+      for (let ti = 1; ti <= 3; ti++) {
+        ctx.globalAlpha = 0.14 - ti * 0.03;
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(pr.x - pr.vx * ti * 0.8, pr.y - pr.vy * ti * 0.8, BALL_R * (1 - ti * 0.18), 0, Math.PI*2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = g; ctx.shadowBlur = 22;
+      const hx = pr.x - BALL_R * 0.3, hy = pr.y - BALL_R * 0.38;
+      const grad = ctx.createRadialGradient(hx, hy, 0, pr.x, pr.y, BALL_R);
+      grad.addColorStop(0, l); grad.addColorStop(0.28, g);
+      grad.addColorStop(0.65, f); grad.addColorStop(1, shadeColor(f, -40));
+      ctx.fillStyle = grad; ctx.shadowBlur = 0;
       ctx.beginPath(); ctx.arc(pr.x, pr.y, BALL_R, 0, Math.PI*2); ctx.fill();
-      ctx.strokeStyle = g; ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.font = "bold 9px monospace"; ctx.textAlign = "center"; ctx.fillStyle = "#000";
-      ctx.fillText(String(optsRef.current[pr.color]), pr.x, pr.y + 3);
+      const specG = ctx.createRadialGradient(hx, hy, 0, hx, hy, BALL_R * 0.52);
+      specG.addColorStop(0, "rgba(255,255,255,0.88)");
+      specG.addColorStop(0.45, "rgba(255,255,255,0.28)");
+      specG.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = specG;
+      ctx.beginPath(); ctx.arc(pr.x, pr.y, BALL_R, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = g; ctx.lineWidth = 1.5; ctx.shadowBlur = 16; ctx.shadowColor = g;
+      ctx.beginPath(); ctx.arc(pr.x, pr.y, BALL_R + 1, 0, Math.PI*2); ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+      ctx.shadowBlur = 4; ctx.shadowColor = "rgba(0,0,0,0.95)";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(String(optsRef.current[pr.color]), pr.x, pr.y + 3.5);
       ctx.restore();
     }
 
-    // Draw cannon
-    const angle = cannonAngleRef.current;
-    const barrelLen = 36, barrelW = 10;
-    ctx.save();
-    ctx.translate(CANNON_X, CANNON_Y);
-    // base circle
-    ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 20;
-    const baseGrad = ctx.createRadialGradient(-4, -4, 2, 0, 0, 28);
-    baseGrad.addColorStop(0, "#00ffcc"); baseGrad.addColorStop(0.5, "#0891b2"); baseGrad.addColorStop(1, "#0c1a2e");
-    ctx.fillStyle = baseGrad;
-    ctx.beginPath(); ctx.arc(0, 0, 26, 0, Math.PI*2); ctx.fill();
-    ctx.strokeStyle = "#00ffcc88"; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.arc(0, 0, 26, 0, Math.PI*2); ctx.stroke();
-    // next ball preview (small dot at bottom)
-    ctx.fillStyle = C_GLOW[nextColorRef.current];
-    ctx.shadowColor = C_GLOW[nextColorRef.current]; ctx.shadowBlur = 10;
-    ctx.beginPath(); ctx.arc(0, 16, 6, 0, Math.PI*2); ctx.fill();
-    // current ball indicator
-    const cg = C_GLOW[currentColorRef.current], cf = C_FILL[currentColorRef.current], cl = C_LIGHT[currentColorRef.current];
-    ctx.shadowColor = cg; ctx.shadowBlur = 12;
-    const cgrad = ctx.createRadialGradient(-2, -2, 1, 0, -2, 11);
-    cgrad.addColorStop(0, cl); cgrad.addColorStop(0.5, cg); cgrad.addColorStop(1, cf);
-    ctx.fillStyle = cgrad;
-    ctx.beginPath(); ctx.arc(0, -2, 11, 0, Math.PI*2); ctx.fill();
-    ctx.font = "bold 8px monospace"; ctx.textAlign = "center"; ctx.fillStyle = "#000";
-    ctx.fillText(String(optsRef.current[currentColorRef.current]), 0, 1);
-    // barrel
-    ctx.rotate(angle);
-    ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 10;
-    ctx.fillStyle = "#0891b2";
-    ctx.beginPath();
-    ctx.roundRect(14, -barrelW/2, barrelLen, barrelW, 4);
-    ctx.fill();
-    ctx.strokeStyle = "#00ffcc"; ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ctx.restore();
-
-    // Draw particles
-    for (const p of particlesRef.current) {
-      ctx.globalAlpha = p.a;
-      ctx.fillStyle = p.color;
-      ctx.shadowColor = p.color; ctx.shadowBlur = 8;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+    // ── Draw cannon: mechanical turret ────────────────────────────────
+    {
+      const angle = cannonAngleRef.current;
+      const barrelLen = 36, barrelW = 10;
+      ctx.save();
+      ctx.translate(CANNON_X, CANNON_Y);
+      // Ellipse shadow on floor
       ctx.shadowBlur = 0;
+      ctx.globalAlpha = 0.45;
+      ctx.fillStyle = "#000";
+      ctx.beginPath(); ctx.ellipse(0, 10, 26, 7, 0, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+      // Slowly rotating outer dashed ring
+      ctx.strokeStyle = "#00ffcc30"; ctx.lineWidth = 1;
+      ctx.setLineDash([3, 7]); ctx.lineDashOffset = frame * 0.25;
+      ctx.beginPath(); ctx.arc(0, 0, 34, 0, Math.PI*2); ctx.stroke();
+      ctx.setLineDash([]); ctx.lineDashOffset = 0;
+      // Base plate
+      ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 22;
+      const baseGrad = ctx.createRadialGradient(-7, -9, 2, 0, 0, 26);
+      baseGrad.addColorStop(0, "#3af0d0");
+      baseGrad.addColorStop(0.25, "#0e9abf");
+      baseGrad.addColorStop(0.6, "#0a4570");
+      baseGrad.addColorStop(1, "#040e20");
+      ctx.fillStyle = baseGrad;
+      ctx.beginPath(); ctx.arc(0, 0, 26, 0, Math.PI*2); ctx.fill();
+      // Metallic rim
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = "#00ffcc55"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(0, 0, 26, 0, Math.PI*2); ctx.stroke();
+      // Sheen arc (top-left highlight for 3D dome look)
+      ctx.strokeStyle = "rgba(255,255,255,0.2)"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(-5, -7, 20, 1.1 * Math.PI, 1.65 * Math.PI); ctx.stroke();
+      // Inner panel
+      const innerGrad = ctx.createRadialGradient(-3, -4, 1, 0, 0, 16);
+      innerGrad.addColorStop(0, "#1a4a60"); innerGrad.addColorStop(1, "#040e20");
+      ctx.fillStyle = innerGrad;
+      ctx.beginPath(); ctx.arc(0, 0, 16, 0, Math.PI*2); ctx.fill();
+      // Next ball preview (bottom slot)
+      const nc = nextColorRef.current;
+      ctx.shadowColor = C_GLOW[nc]; ctx.shadowBlur = 8;
+      const nbGrad = ctx.createRadialGradient(-1.5, 12.5, 0, 0, 15, 6);
+      nbGrad.addColorStop(0, C_LIGHT[nc]); nbGrad.addColorStop(0.5, C_GLOW[nc]); nbGrad.addColorStop(1, C_FILL[nc]);
+      ctx.fillStyle = nbGrad;
+      ctx.beginPath(); ctx.arc(0, 15, 6, 0, Math.PI*2); ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.font = "bold 6px sans-serif"; ctx.textAlign = "center";
+      ctx.fillStyle = "#000"; ctx.fillText(String(optsRef.current[nc]), 0, 17.5);
+      // Current ball (3D sphere)
+      const cc = currentColorRef.current;
+      ctx.shadowColor = C_GLOW[cc]; ctx.shadowBlur = 14;
+      const cHx = -3.5, cHy = -5.5;
+      const cGrad = ctx.createRadialGradient(cHx, cHy, 0, 0, -2, 11);
+      cGrad.addColorStop(0, C_LIGHT[cc]); cGrad.addColorStop(0.28, C_GLOW[cc]);
+      cGrad.addColorStop(0.65, C_FILL[cc]); cGrad.addColorStop(1, shadeColor(C_FILL[cc], -40));
+      ctx.fillStyle = cGrad; ctx.shadowBlur = 0;
+      ctx.beginPath(); ctx.arc(0, -2, 11, 0, Math.PI*2); ctx.fill();
+      const cSpecG = ctx.createRadialGradient(cHx, cHy, 0, cHx, cHy, 7);
+      cSpecG.addColorStop(0, "rgba(255,255,255,0.82)"); cSpecG.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = cSpecG;
+      ctx.beginPath(); ctx.arc(0, -2, 11, 0, Math.PI*2); ctx.fill();
+      ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center";
+      ctx.fillStyle = "#000"; ctx.shadowBlur = 0;
+      ctx.fillText(String(optsRef.current[cc]), 0, 1.5);
+      // Barrel (rotates with aim)
+      ctx.rotate(angle);
+      ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 12;
+      const barrelGrad = ctx.createLinearGradient(0, -barrelW/2, 0, barrelW/2);
+      barrelGrad.addColorStop(0, "#5af0e0");
+      barrelGrad.addColorStop(0.22, "#0bb8d4");
+      barrelGrad.addColorStop(0.55, "#066a88");
+      barrelGrad.addColorStop(1, "#022535");
+      ctx.fillStyle = barrelGrad;
+      ctx.beginPath(); ctx.roundRect(14, -barrelW/2, barrelLen, barrelW, [3, barrelW/2, barrelW/2, 3]); ctx.fill();
+      ctx.strokeStyle = "#00ffcc88"; ctx.lineWidth = 1; ctx.stroke();
+      // Highlight stripe on barrel top
+      ctx.shadowBlur = 0; ctx.globalAlpha = 0.42;
+      ctx.strokeStyle = "rgba(200,255,250,0.95)"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(16, -barrelW/2 + 2); ctx.lineTo(14 + barrelLen - 4, -barrelW/2 + 2); ctx.stroke();
+      ctx.globalAlpha = 1;
+      // Nozzle flare (colored to current ball)
+      ctx.shadowColor = C_GLOW[cc]; ctx.shadowBlur = 16;
+      ctx.fillStyle = C_GLOW[cc] + "aa";
+      ctx.beginPath(); ctx.arc(14 + barrelLen, 0, 4.5, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 0.65; ctx.fillStyle = "#fff";
+      ctx.beginPath(); ctx.arc(14 + barrelLen - 1, -1.2, 2, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.restore();
+    }
+
+    // ── Draw particles (sparks with streak) ──────────────────────────
+    for (const p of particlesRef.current) {
+      ctx.save();
+      ctx.globalAlpha = p.a;
+      ctx.fillStyle = p.color; ctx.shadowColor = p.color; ctx.shadowBlur = 10;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+      if (p.r > 2.8) {
+        ctx.globalAlpha = p.a * 0.45;
+        ctx.strokeStyle = p.color; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.vx * 3, p.y - p.vy * 3); ctx.stroke();
+      }
+      ctx.shadowBlur = 0;
+      ctx.restore();
     }
     ctx.globalAlpha = 1;
 
-    // Flash message
+    // ── Canvas border glow ────────────────────────────────────────────
+    ctx.save();
+    const borderGrad = ctx.createLinearGradient(0, 0, CW, CH);
+    borderGrad.addColorStop(0, "rgba(0,255,200,0.16)");
+    borderGrad.addColorStop(0.5, "rgba(80,0,200,0.07)");
+    borderGrad.addColorStop(1, "rgba(0,180,255,0.16)");
+    ctx.strokeStyle = borderGrad; ctx.lineWidth = 2;
+    ctx.strokeRect(1, 1, CW-2, CH-2);
+    ctx.restore();
+
+    // ── Flash message with pill background ───────────────────────────
     if (flashTimerRef.current > 0) {
-      ctx.globalAlpha = Math.min(1, flashTimerRef.current / 25);
-      ctx.font = "bold 15px monospace"; ctx.textAlign = "center";
+      const alpha = Math.min(1, flashTimerRef.current / 25);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font = "bold 14px sans-serif"; ctx.textAlign = "center";
+      const tw = ctx.measureText(flashMsgTextRef.current).width;
+      ctx.fillStyle = "rgba(0,0,0,0.62)";
+      ctx.beginPath(); ctx.roundRect(CW/2 - tw/2 - 12, CANNON_Y - 70, tw + 24, 26, 8); ctx.fill();
       ctx.fillStyle = "#fff"; ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 14;
-      ctx.fillText(flashMsgTextRef.current, CW/2, CANNON_Y - 50);
+      ctx.fillText(flashMsgTextRef.current, CW/2, CANNON_Y - 52);
       ctx.shadowBlur = 0;
+      ctx.restore();
       ctx.globalAlpha = 1;
-      ctx.textAlign = "left";
     }
   }, [randomColor, initChain, setupQuestion, flash, explode, checkMatch, popBalls]);
 
