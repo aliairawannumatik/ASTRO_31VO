@@ -13,6 +13,11 @@ const CH = 560;
 const PLAYER_SPD = 290;
 const BULLET_SPD = 520;
 const JOYSTICK_R = 48;
+const BOSS_INTERVAL = 60;  // seconds between boss appearances
+const BOSS_W = 160;
+const BOSS_H = 148;
+const BOSS_HP = 25;
+const BOSS_PTS = 200;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 let _uid = 0;
@@ -20,11 +25,12 @@ interface Player { x: number; y: number; w: number; h: number; invincible: numbe
 interface Bullet { id: number; x: number; y: number; vx: number; vy: number; isEnemy: boolean }
 interface Enemy {
   id: number; x: number; y: number; w: number; h: number;
-  hp: number; vx: number; vy: number;
+  hp: number; maxHp: number; vx: number; vy: number;
   glow: string;
-  type: "bomber" | "fighter" | "raider" | "saucer";
+  type: "bomber" | "fighter" | "raider" | "saucer" | "raja";
   imgIdx: number;
-  shootTimer: number; pulse: number;
+  isBoss?: boolean;
+  shootTimer: number; pulse: number; phase2?: boolean;
 }
 interface Particle { x: number; y: number; vx: number; vy: number; alpha: number; color: string; r: number }
 interface Star { x: number; y: number; r: number; spd: number }
@@ -77,7 +83,11 @@ const AsteroidBlasterPage = () => {
 
   // Images
   const shipImgRef = useRef<HTMLImageElement | null>(null);
-  const enemyImgsRef = useRef<Array<HTMLImageElement | null>>([null, null, null, null]);
+  const enemyImgsRef = useRef<Array<HTMLImageElement | null>>([null, null, null, null, null]);
+
+  // Boss refs
+  const nextBossAtRef = useRef(BOSS_INTERVAL);
+  const bossAlertTimerRef = useRef(0);
 
   // React state
   const [phase, setPhase] = useState<Phase>("idle");
@@ -86,6 +96,7 @@ const AsteroidBlasterPage = () => {
   const [best, setBest] = useState(0);
   const [joyHandle, setJoyHandle] = useState({ x: 55, y: 55 });
   const [joyActive, setJoyActive] = useState(false);
+  const [bossAlert, setBossAlert] = useState(false);
 
   // ── Spawn helpers ──────────────────────────────────────────────────────
   const spawnParticles = useCallback((x: number, y: number, color: string, n = 12) => {
@@ -101,7 +112,6 @@ const AsteroidBlasterPage = () => {
     const wave = waveRef.current;
     const count = Math.min(2 + Math.floor(wave / 3), 6);
     for (let i = 0; i < count; i++) {
-      // saucer (boss) only after wave 5, otherwise pick from first 3
       const pool = wave >= 5 ? ENEMY_DEFS : ENEMY_DEFS.slice(0, 3);
       const def = pool[Math.floor(Math.random() * pool.length)];
       const w = def.type === "saucer" ? 60 : def.type === "bomber" ? 54 : 42 + Math.random() * 10;
@@ -111,7 +121,7 @@ const AsteroidBlasterPage = () => {
         x: 20 + Math.random() * (CW - w - 20),
         y: -70 - i * 65,
         w, h,
-        hp: def.hp,
+        hp: def.hp, maxHp: def.hp,
         vx: (Math.random() - 0.5) * 90,
         vy: 46 + Math.random() * 34 + wave * 2.2,
         glow: def.glow,
@@ -121,6 +131,30 @@ const AsteroidBlasterPage = () => {
         pulse: Math.random() * Math.PI * 2,
       });
     }
+  }, []);
+
+  const spawnBoss = useCallback(() => {
+    setBossAlert(true);
+    bossAlertTimerRef.current = 2.5;
+    // Remove any previous boss
+    enemiesRef.current = enemiesRef.current.filter(e => !e.isBoss);
+    setTimeout(() => {
+      enemiesRef.current.push({
+        id: _uid++,
+        x: CW / 2 - BOSS_W / 2,
+        y: -BOSS_H - 20,
+        w: BOSS_W, h: BOSS_H,
+        hp: BOSS_HP, maxHp: BOSS_HP,
+        vx: 55, vy: 38,
+        glow: "#ff2222",
+        type: "raja",
+        imgIdx: 4,
+        isBoss: true,
+        shootTimer: 1.5,
+        pulse: 0,
+        phase2: false,
+      });
+    }, 2500);
   }, []);
 
   // ── Draw enemy ────────────────────────────────────────────────────────
@@ -149,16 +183,15 @@ const AsteroidBlasterPage = () => {
       ctx.beginPath(); ctx.ellipse(cx, cy, e.w / 2, e.h / 2, 0, 0, Math.PI * 2); ctx.fill();
     }
 
-    // HP bar (shown when hp > 1)
-    if (e.hp > 1) {
+    // HP bar (shown when hp > 1, skip boss — it has its own HUD bar)
+    if (e.hp > 1 && !e.isBoss) {
       const barW = e.w * 0.8, barH = 4;
       const barX = cx - barW / 2, barY = e.y + e.h + 5;
-      const maxHp = ENEMY_DEFS[e.imgIdx].hp;
       ctx.shadowBlur = 0;
       ctx.fillStyle = "rgba(0,0,0,0.5)";
       ctx.fillRect(barX, barY, barW, barH);
       ctx.fillStyle = e.glow;
-      ctx.fillRect(barX, barY, barW * (e.hp / maxHp), barH);
+      ctx.fillRect(barX, barY, barW * (e.hp / e.maxHp), barH);
     }
 
     ctx.shadowBlur = 0;
@@ -207,9 +240,11 @@ const AsteroidBlasterPage = () => {
     keysRef.current = {};
     scoreRef.current = 0; livesRef.current = 3;
     elapsedRef.current = 0; spawnTimerRef.current = 0; waveRef.current = 0;
+    nextBossAtRef.current = BOSS_INTERVAL; bossAlertTimerRef.current = 0;
     joyActiveRef.current = false; joyDirRef.current = { x: 0, y: 0 };
     fireRef.current = false; shootCoolRef.current = 0;
     setScore(0); setLives(3); setJoyActive(false); setJoyHandle({ x: 55, y: 55 });
+    setBossAlert(false);
     starsRef.current = Array.from({ length: 90 }, () => ({
       x: Math.random() * CW, y: Math.random() * CH,
       r: 0.4 + Math.random() * 1.6, spd: 30 + Math.random() * 70,
@@ -276,24 +311,62 @@ const AsteroidBlasterPage = () => {
         spawnTimerRef.current = Math.max(1100, 1900 - elapsedRef.current * 6);
       }
 
+      // ── Boss alert countdown ──────────────────────────────────────────
+      if (bossAlertTimerRef.current > 0) {
+        bossAlertTimerRef.current -= dt;
+        if (bossAlertTimerRef.current <= 0) setBossAlert(false);
+      }
+
+      // ── Boss spawn check (every BOSS_INTERVAL seconds) ───────────────
+      if (elapsedRef.current >= nextBossAtRef.current) {
+        nextBossAtRef.current += BOSS_INTERVAL;
+        spawnBoss();
+      }
+
       // ── Move bullets ─────────────────────────────────────────────────
       bulletsRef.current.forEach(b => { b.x += b.vx * dt; b.y += b.vy * dt; });
       bulletsRef.current = bulletsRef.current.filter(b => b.y > -30 && b.y < CH + 30 && b.x > -30 && b.x < CW + 30);
 
       // ── Move enemies ──────────────────────────────────────────────────
       enemiesRef.current.forEach(e => {
-        e.x += e.vx * dt; e.y += e.vy * dt; e.pulse += dt * 2.2;
-        if (e.x < 0 || e.x + e.w > CW) { e.vx *= -1; e.x = Math.max(0, Math.min(CW - e.w, e.x)); }
-        // Enemy fire
-        e.shootTimer -= dt;
-        if (e.shootTimer <= 0 && e.y > -10) {
-          const ex = e.x + e.w / 2, ey2 = e.y + e.h;
-          const spread = (Math.random() - 0.5) * 0.4;
-          bulletsRef.current.push({ id: _uid++, x: ex, y: ey2, vx: Math.sin(spread) * 150, vy: 155 + Math.random() * 30, isEnemy: true });
-          e.shootTimer = 2.8 + Math.random() * 3;
+        e.pulse += dt * 2.2;
+
+        if (e.isBoss) {
+          // Boss: enter from top, settle at y=30, then oscillate side to side
+          const targetY = 30;
+          if (e.y < targetY) {
+            e.y += e.vy * dt;
+            if (e.y >= targetY) { e.y = targetY; e.vy = 0; }
+          }
+          e.x += e.vx * dt;
+          if (e.x < 0 || e.x + e.w > CW) { e.vx *= -1; e.x = Math.max(0, Math.min(CW - e.w, e.x)); }
+          // Phase 2 at half HP — faster, shoots more
+          if (!e.phase2 && e.hp <= BOSS_HP / 2) { e.phase2 = true; e.vx *= 1.5; }
+          // Boss shoot — spread pattern
+          e.shootTimer -= dt;
+          if (e.shootTimer <= 0) {
+            const bx = e.x + e.w / 2, by = e.y + e.h * 0.7;
+            const shots = e.phase2 ? 5 : 3;
+            for (let si = 0; si < shots; si++) {
+              const ang = (Math.PI / 2) + ((si - (shots - 1) / 2) * 0.35);
+              bulletsRef.current.push({ id: _uid++, x: bx, y: by, vx: Math.cos(ang) * 180, vy: Math.sin(ang) * 180, isEnemy: true });
+            }
+            e.shootTimer = e.phase2 ? 1.1 : 1.6;
+          }
+        } else {
+          e.x += e.vx * dt; e.y += e.vy * dt;
+          if (e.x < 0 || e.x + e.w > CW) { e.vx *= -1; e.x = Math.max(0, Math.min(CW - e.w, e.x)); }
+          // Regular enemy fire
+          e.shootTimer -= dt;
+          if (e.shootTimer <= 0 && e.y > -10) {
+            const ex = e.x + e.w / 2, ey2 = e.y + e.h;
+            const spread = (Math.random() - 0.5) * 0.4;
+            bulletsRef.current.push({ id: _uid++, x: ex, y: ey2, vx: Math.sin(spread) * 150, vy: 155 + Math.random() * 30, isEnemy: true });
+            e.shootTimer = 2.8 + Math.random() * 3;
+          }
         }
       });
-      enemiesRef.current = enemiesRef.current.filter(e => e.y < CH + 70);
+      enemiesRef.current = enemiesRef.current.filter(e => e.isBoss ? true : e.y < CH + 70);
 
       // ── Player bullet → enemy ─────────────────────────────────────────
       const killBullets = new Set<number>();
@@ -307,13 +380,18 @@ const AsteroidBlasterPage = () => {
             e.hp--;
             if (e.hp <= 0) {
               killEnemies.add(e.id);
-              const pts = ENEMY_DEFS[e.imgIdx].pts;
+              const pts = e.isBoss ? BOSS_PTS : ENEMY_DEFS[e.imgIdx]?.pts ?? 20;
               scoreRef.current += pts;
               setScore(scoreRef.current);
-              spawnParticles(e.x + e.w / 2, e.y + e.h / 2, e.glow, 15);
-              scorePopRef.current.push({ x: e.x + e.w / 2, y: e.y, txt: `+${pts}`, alpha: 1, vy: -75 });
+              const particleCount = e.isBoss ? 40 : 15;
+              spawnParticles(e.x + e.w / 2, e.y + e.h / 2, e.glow, particleCount);
+              if (e.isBoss) {
+                spawnParticles(e.x + e.w / 2, e.y + e.h / 2, "#FF4444", 25);
+                spawnParticles(e.x + e.w / 2, e.y + e.h / 2, "#FF8800", 20);
+              }
+              scorePopRef.current.push({ x: e.x + e.w / 2, y: e.y + e.h / 2, txt: `+${pts}${e.isBoss ? " 👑" : ""}`, alpha: 1, vy: -75 });
             } else {
-              spawnParticles(b.x, b.y, e.glow, 5);
+              spawnParticles(b.x, b.y, e.glow, e.isBoss ? 8 : 5);
             }
           }
         });
@@ -351,7 +429,7 @@ const AsteroidBlasterPage = () => {
             livesRef.current = Math.max(0, livesRef.current - 1);
             setLives(livesRef.current);
             p.invincible = 2.5;
-            e.hp = 0;
+            if (!e.isBoss) e.hp = 0; // Boss survives body collision
             spawnParticles(p.x + p.w / 2, p.y + p.h / 2, "#FF4444", 20);
           }
         });
@@ -417,8 +495,32 @@ const AsteroidBlasterPage = () => {
     }
     ctx.globalAlpha = 1; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
 
+    // ── Boss HP bar (drawn on canvas above everything) ────────────────
+    const boss = enemiesRef.current.find(e => e.isBoss);
+    if (boss) {
+      const barW = CW - 60, barH = 10;
+      const barX = 30, barY = CH - 22;
+      const hpRatio = Math.max(0, boss.hp / boss.maxHp);
+      // Track — bg
+      ctx.fillStyle = "rgba(0,0,0,0.55)";
+      ctx.fillRect(barX - 2, barY - 2, barW + 4, barH + 4);
+      ctx.fillStyle = "#330000";
+      ctx.fillRect(barX, barY, barW, barH);
+      // Fill — color shifts red→orange as hp drops
+      const barColor = hpRatio > 0.5 ? "#ff2222" : "#ff8800";
+      ctx.shadowColor = barColor; ctx.shadowBlur = 8;
+      ctx.fillStyle = barColor;
+      ctx.fillRect(barX, barY, barW * hpRatio, barH);
+      ctx.shadowBlur = 0;
+      // Label
+      ctx.fillStyle = "#FFD700"; ctx.font = "bold 10px monospace";
+      ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+      ctx.fillText(`👑 RAJA — ${boss.hp} / ${boss.maxHp} HP${boss.phase2 ? " ⚡ FASE 2!" : ""}`, CW / 2, barY - 3);
+      ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    }
+
     rafRef.current = requestAnimationFrame(loop);
-  }, [drawEnemy, drawPlayer, spawnWave, spawnParticles, guruQuiz.isPausedRef]);
+  }, [drawEnemy, drawPlayer, spawnWave, spawnBoss, spawnParticles, guruQuiz.isPausedRef]);
 
   // ── Start game ────────────────────────────────────────────────────────
   const startGame = useCallback(() => {
@@ -458,9 +560,9 @@ const AsteroidBlasterPage = () => {
     img.onload = () => { shipImgRef.current = img; };
   }, []);
 
-  // Load enemy images
+  // Load enemy images (index 4 = raja boss)
   useEffect(() => {
-    const srcs = ["/musuh-1.png", "/musuh-2.png", "/musuh-3.png", "/musuh-4.png"];
+    const srcs = ["/musuh-1.png", "/musuh-2.png", "/musuh-3.png", "/musuh-4.png", "/raja.png"];
     srcs.forEach((src, i) => {
       const img = new Image();
       img.src = src;
@@ -532,6 +634,16 @@ const AsteroidBlasterPage = () => {
         <div className="relative w-full select-none shrink-0" style={{ maxWidth: CW, aspectRatio: `${CW}/${CH}`, maxHeight: "calc(100dvh - 240px)" }}>
           <canvas ref={canvasRef} width={CW} height={CH} className="rounded-2xl border border-border shadow-2xl w-full h-full" />
 
+          {/* Boss Alert Overlay */}
+          {bossAlert && (
+            <div className="absolute inset-x-0 top-16 flex items-start justify-center pointer-events-none z-30">
+              <div className="animate-bounce bg-red-900/90 border-2 border-red-500 rounded-2xl px-6 py-3 text-center shadow-2xl" style={{ boxShadow: "0 0 30px #ff2222" }}>
+                <p className="text-red-400 font-bold text-lg tracking-widest">⚠️ RAJA MUNCUL! ⚠️</p>
+                <p className="text-yellow-300 text-xs mt-0.5">Musuh RAJA sedang memasuki arena!</p>
+              </div>
+            </div>
+          )}
+
           {phase === "idle" && (
             <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/75">
               <div className="text-center px-5 max-w-xs">
@@ -539,13 +651,14 @@ const AsteroidBlasterPage = () => {
                 <h2 className="font-display text-2xl font-bold text-cyan-400 mb-2">GALAKSI TEMPUR</h2>
                 <p className="text-white/65 text-xs mb-4 leading-relaxed">
                   Hancurkan pesawat musuh yang menyerbu! Gunakan <span className="text-cyan-400 font-bold">joystick analog</span> untuk bergerak ke segala arah dan tombol <span className="text-red-400 font-bold">FIRE</span> untuk menembak.<br/><br/>
-                  Setiap <span className="text-yellow-400 font-bold">25 detik</span> akan muncul soal matematika dari NUMATIK!
+                  Setiap <span className="text-yellow-400 font-bold">25 detik</span> muncul soal matematika. Setiap <span className="text-red-400 font-bold">60 detik</span> muncul <span className="text-red-400 font-bold">👑 RAJA</span> — musuh boss berukuran besar yang harus ditembak berulang-ulang!
                 </p>
                 <div className="flex justify-center gap-2 mb-4 text-xs flex-wrap">
                   <span className="bg-red-900/30 border border-red-500/40 rounded-lg px-2 py-1">🔴 Bomber: 30 poin</span>
                   <span className="bg-indigo-900/30 border border-indigo-400/40 rounded-lg px-2 py-1">🔵 Fighter: 20 poin</span>
                   <span className="bg-orange-900/30 border border-orange-400/40 rounded-lg px-2 py-1">🟠 Raider: 25 poin</span>
-                  <span className="bg-green-900/30 border border-green-400/40 rounded-lg px-2 py-1">🟢 BOSS: 35 poin</span>
+                  <span className="bg-green-900/30 border border-green-400/40 rounded-lg px-2 py-1">🟢 Saucer: 35 poin</span>
+                  <span className="bg-red-900/60 border border-red-400 rounded-lg px-2 py-1 font-bold text-red-300">👑 RAJA: 200 poin</span>
                 </div>
                 <button onClick={startGame} className="bg-cyan-500 text-black font-bold px-10 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
                   🚀 MULAI
