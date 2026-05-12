@@ -21,8 +21,9 @@ interface Bullet { id: number; x: number; y: number; vx: number; vy: number; isE
 interface Enemy {
   id: number; x: number; y: number; w: number; h: number;
   hp: number; vx: number; vy: number;
-  color: string; glow: string;
-  type: "saucer" | "fighter" | "bomber";
+  glow: string;
+  type: "bomber" | "fighter" | "raider" | "saucer";
+  imgIdx: number;
   shootTimer: number; pulse: number;
 }
 interface Particle { x: number; y: number; vx: number; vy: number; alpha: number; color: string; r: number }
@@ -31,10 +32,12 @@ interface ScorePop { x: number; y: number; txt: string; alpha: number; vy: numbe
 
 type Phase = "idle" | "playing" | "dead";
 
-const ENEMY_TYPES: Array<{ color: string; glow: string; type: Enemy["type"] }> = [
-  { color: "#a855f7", glow: "#d8b4fe", type: "saucer" },
-  { color: "#06b6d4", glow: "#67e8f9", type: "fighter" },
-  { color: "#f97316", glow: "#fdba74", type: "bomber" },
+// imgIdx → file, glow, rotate180
+const ENEMY_DEFS = [
+  { type: "bomber" as const,  glow: "#ff6b6b", pts: 30, hp: 3, imgIdx: 0, rotate: true  }, // musuh-1 merah besar
+  { type: "fighter" as const, glow: "#818cf8", pts: 20, hp: 2, imgIdx: 1, rotate: true  }, // musuh-2 biru dark
+  { type: "raider" as const,  glow: "#fb923c", pts: 25, hp: 2, imgIdx: 2, rotate: false }, // musuh-3 oranye emas
+  { type: "saucer" as const,  glow: "#4ade80", pts: 35, hp: 4, imgIdx: 3, rotate: true  }, // musuh-4 hijau ungu boss
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────
@@ -72,8 +75,9 @@ const AsteroidBlasterPage = () => {
   const joyActiveRef = useRef(false);
   const fireRef = useRef(false);
 
-  // Image
+  // Images
   const shipImgRef = useRef<HTMLImageElement | null>(null);
+  const enemyImgsRef = useRef<Array<HTMLImageElement | null>>([null, null, null, null]);
 
   // React state
   const [phase, setPhase] = useState<Phase>("idle");
@@ -97,18 +101,22 @@ const AsteroidBlasterPage = () => {
     const wave = waveRef.current;
     const count = Math.min(2 + Math.floor(wave / 3), 6);
     for (let i = 0; i < count; i++) {
-      const t = ENEMY_TYPES[Math.floor(Math.random() * ENEMY_TYPES.length)];
-      const w = t.type === "bomber" ? 50 : 36 + Math.random() * 12;
-      const h = t.type === "bomber" ? 34 : 26 + Math.random() * 10;
+      // saucer (boss) only after wave 5, otherwise pick from first 3
+      const pool = wave >= 5 ? ENEMY_DEFS : ENEMY_DEFS.slice(0, 3);
+      const def = pool[Math.floor(Math.random() * pool.length)];
+      const w = def.type === "saucer" ? 60 : def.type === "bomber" ? 54 : 42 + Math.random() * 10;
+      const h = def.type === "saucer" ? 56 : def.type === "bomber" ? 38 : 30 + Math.random() * 10;
       enemiesRef.current.push({
         id: _uid++,
-        x: 20 + Math.random() * (CW - 60),
-        y: -60 - i * 60,
+        x: 20 + Math.random() * (CW - w - 20),
+        y: -70 - i * 65,
         w, h,
-        hp: t.type === "bomber" ? 3 : 2,
-        vx: (Math.random() - 0.5) * 80,
-        vy: 48 + Math.random() * 36 + wave * 2.5,
-        color: t.color, glow: t.glow, type: t.type,
+        hp: def.hp,
+        vx: (Math.random() - 0.5) * 90,
+        vy: 46 + Math.random() * 34 + wave * 2.2,
+        glow: def.glow,
+        type: def.type,
+        imgIdx: def.imgIdx,
         shootTimer: 2.5 + Math.random() * 3.5,
         pulse: Math.random() * Math.PI * 2,
       });
@@ -118,52 +126,39 @@ const AsteroidBlasterPage = () => {
   // ── Draw enemy ────────────────────────────────────────────────────────
   const drawEnemy = useCallback((ctx: CanvasRenderingContext2D, e: Enemy) => {
     const cx = e.x + e.w / 2, cy = e.y + e.h / 2;
+    const img = enemyImgsRef.current[e.imgIdx];
+    const def = ENEMY_DEFS[e.imgIdx];
     ctx.save();
-    ctx.shadowColor = e.glow;
-    ctx.shadowBlur = 16;
 
-    if (e.type === "saucer") {
-      // Disc body
-      const dg = ctx.createLinearGradient(cx, cy - e.h * 0.4, cx, cy + e.h * 0.5);
-      dg.addColorStop(0, "#ffffff44"); dg.addColorStop(0.3, e.color); dg.addColorStop(1, "#00000066");
-      ctx.fillStyle = dg;
-      ctx.beginPath(); ctx.ellipse(cx, cy + 4, e.w / 2, e.h / 3, 0, 0, Math.PI * 2); ctx.fill();
-      // Dome
-      const dome = ctx.createRadialGradient(cx - e.w * 0.07, cy - e.h * 0.2, 0, cx, cy, e.w / 3);
-      dome.addColorStop(0, "rgba(220,255,255,0.95)"); dome.addColorStop(1, e.color + "99");
-      ctx.fillStyle = dome;
-      ctx.beginPath(); ctx.ellipse(cx, cy, e.w / 3, e.h / 2.3, 0, Math.PI, 0); ctx.fill();
-      // Rim dots
-      for (let i = 0; i < 5; i++) {
-        const ang = (i / 5) * Math.PI * 2 + e.pulse;
-        ctx.fillStyle = e.glow; ctx.shadowBlur = 6;
-        ctx.beginPath(); ctx.arc(cx + Math.cos(ang) * e.w * 0.44, cy + 4 + Math.sin(ang) * e.h * 0.3, 2.5, 0, Math.PI * 2); ctx.fill();
+    // Outer glow halo
+    ctx.shadowColor = e.glow;
+    ctx.shadowBlur = 18 + Math.sin(e.pulse) * 5;
+
+    if (img) {
+      // Rotate 180° if needed (so nose faces downward toward player)
+      if (def.rotate) {
+        ctx.translate(cx, cy);
+        ctx.rotate(Math.PI);
+        ctx.drawImage(img, -e.w / 2, -e.h / 2, e.w, e.h);
+      } else {
+        ctx.drawImage(img, e.x, e.y, e.w, e.h);
       }
-    } else if (e.type === "fighter") {
-      ctx.fillStyle = e.color;
-      ctx.beginPath();
-      ctx.moveTo(cx, e.y);
-      ctx.lineTo(e.x + e.w, e.y + e.h);
-      ctx.lineTo(cx, e.y + e.h * 0.72);
-      ctx.lineTo(e.x, e.y + e.h);
-      ctx.closePath(); ctx.fill();
-      // Engine
-      const eng = ctx.createRadialGradient(cx, e.y + e.h, 0, cx, e.y + e.h, 14);
-      eng.addColorStop(0, e.glow + "cc"); eng.addColorStop(1, "transparent");
-      ctx.fillStyle = eng;
-      ctx.beginPath(); ctx.arc(cx, e.y + e.h, 14, 0, Math.PI * 2); ctx.fill();
     } else {
-      // Bomber
-      ctx.fillStyle = e.color;
-      ctx.beginPath(); ctx.roundRect(e.x, e.y + e.h * 0.28, e.w, e.h * 0.52, 6); ctx.fill();
-      // Wings
-      ctx.beginPath();
-      ctx.moveTo(e.x, e.y + e.h * 0.38); ctx.lineTo(e.x - 14, e.y + e.h * 0.85); ctx.lineTo(e.x + e.w * 0.36, e.y + e.h * 0.62); ctx.closePath(); ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(e.x + e.w, e.y + e.h * 0.38); ctx.lineTo(e.x + e.w + 14, e.y + e.h * 0.85); ctx.lineTo(e.x + e.w * 0.64, e.y + e.h * 0.62); ctx.closePath(); ctx.fill();
-      // Cockpit
-      ctx.fillStyle = e.glow + "88";
-      ctx.beginPath(); ctx.ellipse(cx, e.y + e.h * 0.44, e.w * 0.14, e.h * 0.16, 0, 0, Math.PI * 2); ctx.fill();
+      // Fallback: simple colored shape
+      ctx.fillStyle = e.glow;
+      ctx.beginPath(); ctx.ellipse(cx, cy, e.w / 2, e.h / 2, 0, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // HP bar (shown when hp > 1)
+    if (e.hp > 1) {
+      const barW = e.w * 0.8, barH = 4;
+      const barX = cx - barW / 2, barY = e.y + e.h + 5;
+      const maxHp = ENEMY_DEFS[e.imgIdx].hp;
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = "rgba(0,0,0,0.5)";
+      ctx.fillRect(barX, barY, barW, barH);
+      ctx.fillStyle = e.glow;
+      ctx.fillRect(barX, barY, barW * (e.hp / maxHp), barH);
     }
 
     ctx.shadowBlur = 0;
@@ -312,7 +307,7 @@ const AsteroidBlasterPage = () => {
             e.hp--;
             if (e.hp <= 0) {
               killEnemies.add(e.id);
-              const pts = e.type === "bomber" ? 30 : e.type === "saucer" ? 25 : 20;
+              const pts = ENEMY_DEFS[e.imgIdx].pts;
               scoreRef.current += pts;
               setScore(scoreRef.current);
               spawnParticles(e.x + e.w / 2, e.y + e.h / 2, e.glow, 15);
@@ -463,6 +458,16 @@ const AsteroidBlasterPage = () => {
     img.onload = () => { shipImgRef.current = img; };
   }, []);
 
+  // Load enemy images
+  useEffect(() => {
+    const srcs = ["/musuh-1.png", "/musuh-2.png", "/musuh-3.png", "/musuh-4.png"];
+    srcs.forEach((src, i) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => { enemyImgsRef.current[i] = img; };
+    });
+  }, []);
+
   // ── Joystick handlers ─────────────────────────────────────────────────
   const onJoyStart = useCallback((e: React.TouchEvent) => {
     e.preventDefault();
@@ -537,9 +542,10 @@ const AsteroidBlasterPage = () => {
                   Setiap <span className="text-yellow-400 font-bold">25 detik</span> akan muncul soal matematika dari NUMATIK!
                 </p>
                 <div className="flex justify-center gap-2 mb-4 text-xs flex-wrap">
-                  <span className="bg-purple-500/20 border border-purple-400/40 rounded-lg px-2 py-1">👽 Piring terbang: 25 poin</span>
-                  <span className="bg-cyan-500/20 border border-cyan-400/40 rounded-lg px-2 py-1">✈️ Fighter: 20 poin</span>
-                  <span className="bg-orange-500/20 border border-orange-400/40 rounded-lg px-2 py-1">💣 Bomber: 30 poin</span>
+                  <span className="bg-red-900/30 border border-red-500/40 rounded-lg px-2 py-1">🔴 Bomber: 30 poin</span>
+                  <span className="bg-indigo-900/30 border border-indigo-400/40 rounded-lg px-2 py-1">🔵 Fighter: 20 poin</span>
+                  <span className="bg-orange-900/30 border border-orange-400/40 rounded-lg px-2 py-1">🟠 Raider: 25 poin</span>
+                  <span className="bg-green-900/30 border border-green-400/40 rounded-lg px-2 py-1">🟢 BOSS: 35 poin</span>
                 </div>
                 <button onClick={startGame} className="bg-cyan-500 text-black font-bold px-10 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
                   🚀 MULAI
