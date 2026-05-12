@@ -629,7 +629,7 @@ const AsteroidBlasterPage = () => {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "/pesawat-nobg.png";
+    img.src = "/pesawat-nobg-new.png";
     img.onload = () => { shipImgRef.current = img; };
   }, []);
 
