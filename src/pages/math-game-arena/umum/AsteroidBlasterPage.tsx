@@ -49,7 +49,7 @@ let _id = 0;
 interface Asteroid {
   id: number; x: number; y: number; vy: number; value: number; correct: boolean;
   rot: number; rotSpd: number; color: string; hit: boolean; hitAnim: number;
-  cracks: Array<[number,number,number,number]>;
+  cracks: Array<[number,number,number,number]>; imgIdx: number;
 }
 interface Bullet { id: number; x: number; y: number; trail: Array<{x:number;y:number}> }
 interface Particle { x: number; y: number; vx: number; vy: number; alpha: number; color: string; r: number }
@@ -92,6 +92,7 @@ const AsteroidBlasterPage = () => {
   const touchXRef = useRef<number | null>(null);
   const shipImgRef = useRef<HTMLImageElement | null>(null);
   const asteroidImgRef = useRef<HTMLImageElement | null>(null);
+  const asteroidImg2Ref = useRef<HTMLImageElement | null>(null);
 
   // react
   const [phase, setPhase] = useState<Phase>("idle");
@@ -157,6 +158,7 @@ const AsteroidBlasterPage = () => {
         rotSpd: (Math.random() - 0.5) * 1.5,
         color: AST_COLORS[Math.floor(Math.random() * AST_COLORS.length)],
         hit: false, hitAnim: 0, cracks,
+        imgIdx: Math.floor(Math.random() * 2),
       });
     }
     asteroidsRef.current = [...asteroidsRef.current, ...newAsts];
@@ -257,7 +259,9 @@ const AsteroidBlasterPage = () => {
 
     const sz = AST_R * 2 + 10; // image draw size
 
-    if (asteroidImgRef.current) {
+    const asteroidImg = a.imgIdx === 1 ? asteroidImg2Ref.current : asteroidImgRef.current;
+
+    if (asteroidImg) {
       // Correct answer: pulsing gold glow halo behind asteroid
       if (a.correct) {
         const pulse = 14 + 8 * Math.sin(ts / 300);
@@ -281,7 +285,7 @@ const AsteroidBlasterPage = () => {
       }
 
       // Draw asteroid image centered
-      ctx.drawImage(asteroidImgRef.current, -sz / 2, -sz / 2, sz, sz);
+      ctx.drawImage(asteroidImg, -sz / 2, -sz / 2, sz, sz);
       ctx.shadowBlur = 0;
     } else {
       // Fallback polygon while image loads
@@ -637,6 +641,12 @@ const AsteroidBlasterPage = () => {
     const img = new Image();
     img.src = "/asteroid-1778564543768.png";
     img.onload = () => { asteroidImgRef.current = img; };
+  }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/asteroid2-fireball.png";
+    img.onload = () => { asteroidImg2Ref.current = img; };
   }, []);
 
   // touch
