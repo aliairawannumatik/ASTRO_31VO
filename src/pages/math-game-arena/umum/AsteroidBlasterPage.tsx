@@ -91,6 +91,7 @@ const AsteroidBlasterPage = () => {
   const autoShootRef = useRef(false);
   const touchXRef = useRef<number | null>(null);
   const shipImgRef = useRef<HTMLImageElement | null>(null);
+  const asteroidImgRef = useRef<HTMLImageElement | null>(null);
 
   // react
   const [phase, setPhase] = useState<Phase>("idle");
@@ -254,46 +255,64 @@ const AsteroidBlasterPage = () => {
     const alpha = a.hit ? Math.max(0, 1 - a.hitAnim * 2) : 1;
     ctx.globalAlpha = alpha;
 
-    // asteroid body (irregular polygon)
-    const pts = 10;
-    const irregularity = 0.28;
-    ctx.beginPath();
-    for (let i = 0; i < pts; i++) {
-      const ang = (Math.PI * 2 / pts) * i;
-      const r = AST_R * (1 - irregularity/2 + irregularity * Math.sin(i * 2.4 + a.id));
-      i === 0 ? ctx.moveTo(Math.cos(ang)*r, Math.sin(ang)*r) : ctx.lineTo(Math.cos(ang)*r, Math.sin(ang)*r);
+    const sz = AST_R * 2 + 10; // image draw size
+
+    if (asteroidImgRef.current) {
+      // Correct answer: pulsing gold glow halo behind asteroid
+      if (a.correct) {
+        const pulse = 14 + 8 * Math.sin(ts / 300);
+        ctx.shadowColor = "#FFD700";
+        ctx.shadowBlur = pulse;
+        // draw a hidden shape just to emit the shadow
+        ctx.beginPath(); ctx.arc(0, 0, AST_R - 2, 0, Math.PI * 2); ctx.fillStyle = "rgba(0,0,0,0)"; ctx.fill();
+        // bright outer ring
+        ctx.globalAlpha = alpha * (0.35 + 0.25 * Math.sin(ts / 300));
+        ctx.strokeStyle = "#FFD700";
+        ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.arc(0, 0, AST_R + 4, 0, Math.PI * 2); ctx.stroke();
+        ctx.globalAlpha = alpha;
+        ctx.shadowBlur = 0;
+      }
+
+      // Hit flash: red glow
+      if (a.hit) {
+        ctx.shadowColor = "#FF4444";
+        ctx.shadowBlur = 24;
+      }
+
+      // Draw asteroid image centered
+      ctx.drawImage(asteroidImgRef.current, -sz / 2, -sz / 2, sz, sz);
+      ctx.shadowBlur = 0;
+    } else {
+      // Fallback polygon while image loads
+      const pts = 10, irregularity = 0.28;
+      ctx.beginPath();
+      for (let i = 0; i < pts; i++) {
+        const ang = (Math.PI * 2 / pts) * i;
+        const r = AST_R * (1 - irregularity/2 + irregularity * Math.sin(i * 2.4 + a.id));
+        i === 0 ? ctx.moveTo(Math.cos(ang)*r, Math.sin(ang)*r) : ctx.lineTo(Math.cos(ang)*r, Math.sin(ang)*r);
+      }
+      ctx.closePath();
+      const grad = ctx.createRadialGradient(-4, -4, 2, 0, 0, AST_R);
+      grad.addColorStop(0, lighten(a.color, 30));
+      grad.addColorStop(1, a.correct ? "#5a3e00" : "#2a1a0a");
+      ctx.fillStyle = grad;
+      ctx.shadowColor = a.correct ? "#FFD700" : (a.hit ? "#FF4444" : "rgba(0,0,0,0)");
+      ctx.shadowBlur = a.correct ? 16 + 8*Math.sin(ts/400) : (a.hit ? 20 : 0);
+      ctx.fill();
+      ctx.strokeStyle = a.correct ? "#FFD700" : "#3a2a15";
+      ctx.lineWidth = a.correct ? 2.5 : 1.5;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
     }
-    ctx.closePath();
 
-    // fill
-    const grad = ctx.createRadialGradient(-4, -4, 2, 0, 0, AST_R);
-    grad.addColorStop(0, lighten(a.color, 30));
-    grad.addColorStop(1, a.correct ? "#5a3e00" : "#2a1a0a");
-    ctx.fillStyle = grad;
-    ctx.shadowColor = a.correct ? "#FFD700" : (a.hit ? "#FF4444" : "rgba(0,0,0,0)");
-    ctx.shadowBlur = a.correct ? 16 + 8*Math.sin(ts/400) : (a.hit ? 20 : 0);
-    ctx.fill();
-
-    // stroke
-    ctx.strokeStyle = a.correct ? "#FFD700" : "#3a2a15";
-    ctx.lineWidth = a.correct ? 2.5 : 1.5;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    // cracks
-    ctx.strokeStyle = "rgba(0,0,0,0.35)";
-    ctx.lineWidth = 1;
-    a.cracks.forEach(([sx,sy,ex,ey]) => {
-      ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(ex,ey); ctx.stroke();
-    });
-
-    // value label
+    // Value label (always shown)
     const valStr = String(a.value);
     const fs = valStr.length > 3 ? 11 : valStr.length > 2 ? 13 : 16;
+    ctx.shadowColor = a.correct ? "#FFD700" : "rgba(0,0,0,0.9)";
+    ctx.shadowBlur = a.correct ? 8 : 5;
     ctx.fillStyle = a.correct ? "#FFD700" : "#fff";
-    ctx.shadowColor = a.correct ? "#FFD700" : "transparent";
-    ctx.shadowBlur = a.correct ? 6 : 0;
-    ctx.font = `bold ${fs}px monospace`;
+    ctx.font = `bold ${fs}px sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(valStr, 0, 0);
@@ -612,6 +631,12 @@ const AsteroidBlasterPage = () => {
     const img = new Image();
     img.src = "/pesawat-nobg.png";
     img.onload = () => { shipImgRef.current = img; };
+  }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/asteroid-1778564543768.png";
+    img.onload = () => { asteroidImgRef.current = img; };
   }, []);
 
   // touch
