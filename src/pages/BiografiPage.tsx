@@ -164,7 +164,7 @@ const BiografiPage = () => {
 
               <div className="flex flex-col items-center mb-5 relative z-10">
                 <div className="relative mb-4">
-                  <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-cyan-400/50">
+                  <div className="w-56 h-36 rounded-2xl overflow-hidden border-2 border-cyan-400/50">
                     <img src="/wandri-1778563724307.png" alt="Bapak Wandri, S.Pd., Gr." className="w-full h-full object-cover object-top" />
                   </div>
                 </div>
