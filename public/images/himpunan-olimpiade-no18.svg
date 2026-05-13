@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" width="520" height="400" font-family="Georgia, serif">
+
+  <!-- Background -->
+  <rect width="520" height="400" rx="12" ry="12" fill="white" stroke="#7c5c2e" stroke-width="3"/>
+
+  <!-- S label -->
+  <text x="18" y="32" font-size="22" font-weight="bold" fill="#222">S</text>
+
+  <!-- Circle P (Pelat Penutup) - top left -->
+  <ellipse cx="195" cy="175" rx="130" ry="110" fill="rgba(180,120,40,0.10)" stroke="#7c5c2e" stroke-width="2.5"/>
+
+  <!-- Circle E (Elektrolit) - top right -->
+  <ellipse cx="325" cy="175" rx="130" ry="110" fill="rgba(180,120,40,0.10)" stroke="#7c5c2e" stroke-width="2.5"/>
+
+  <!-- Circle T (Terminal) - bottom center -->
+  <ellipse cx="260" cy="275" rx="130" ry="110" fill="rgba(180,120,40,0.10)" stroke="#7c5c2e" stroke-width="2.5"/>
+
+  <!-- Labels for circles -->
+  <text x="135" y="95" font-size="20" font-weight="bold" fill="#3a2000" text-anchor="middle">P</text>
+  <text x="385" y="95" font-size="20" font-weight="bold" fill="#3a2000" text-anchor="middle">E</text>
+  <text x="260" y="390" font-size="20" font-weight="bold" fill="#3a2000" text-anchor="middle">T</text>
+
+  <!-- P only (top-left region) -->
+  <text x="152" y="178" font-size="16" fill="#222" text-anchor="middle">6</text>
+
+  <!-- E only (top-right region) -->
+  <text x="368" y="178" font-size="16" fill="#222" text-anchor="middle">21</text>
+
+  <!-- T only (bottom region) -->
+  <text x="260" y="358" font-size="16" fill="#222" text-anchor="middle">20</text>
+
+  <!-- P ∩ E only (top center) -->
+  <text x="260" y="140" font-size="16" fill="#222" text-anchor="middle">14</text>
+
+  <!-- P ∩ T only (bottom-left) -->
+  <text x="192" y="278" font-size="16" fill="#222" text-anchor="middle">5</text>
+
+  <!-- E ∩ T only (bottom-right) -->
+  <text x="328" y="278" font-size="16" fill="#222" text-anchor="middle">10</text>
+
+  <!-- P ∩ E ∩ T (center) -->
+  <text x="260" y="215" font-size="16" fill="#222" text-anchor="middle">5</text>
+
+  <!-- Outside all circles (di luar semua) -->
+  <text x="55" y="355" font-size="14" fill="#555" text-anchor="middle">lainnya</text>
+
+  <!-- Legend -->
+  <rect x="12" y="310" width="12" height="12" rx="2" fill="rgba(180,120,40,0.3)" stroke="#7c5c2e" stroke-width="1.2"/>
+  <text x="30" y="321" font-size="11" fill="#444">P = Pelat Penutup (30)</text>
+  <rect x="12" y="328" width="12" height="12" rx="2" fill="rgba(180,120,40,0.3)" stroke="#7c5c2e" stroke-width="1.2"/>
+  <text x="30" y="339" font-size="11" fill="#444">E = Elektrolit (50)</text>
+  <rect x="12" y="346" width="12" height="12" rx="2" fill="rgba(180,120,40,0.3)" stroke="#7c5c2e" stroke-width="1.2"/>
+  <text x="30" y="357" font-size="11" fill="#444">T = Terminal (40)</text>
+
+</svg>
