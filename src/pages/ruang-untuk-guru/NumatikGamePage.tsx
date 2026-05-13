@@ -77,7 +77,7 @@ const games = [
     icon: <Worm className="w-7 h-7 text-lime-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Asteroid Blaster",
+    label: "Cosmic Fury",
     emoji: "🌌",
     path: "/math-game-arena/umum/asteroid-blaster",
     desc: "Tembak asteroid dengan jawaban benar! Hindari yang salah!",
