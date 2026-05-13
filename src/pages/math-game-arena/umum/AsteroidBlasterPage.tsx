@@ -38,13 +38,23 @@ interface ScorePop { x: number; y: number; txt: string; alpha: number; vy: numbe
 
 type Phase = "idle" | "playing" | "dead";
 
-// imgIdx → file, glow, rotate180
+// imgIdx → file, glow, rotate180  (hp=1: semua musuh kecil hancur 1 tembakan)
 const ENEMY_DEFS = [
-  { type: "bomber" as const,  glow: "#ff6b6b", pts: 30, hp: 3, imgIdx: 0, rotate: true  }, // musuh-1 merah besar
-  { type: "fighter" as const, glow: "#818cf8", pts: 20, hp: 2, imgIdx: 1, rotate: true  }, // musuh-2 biru dark
-  { type: "raider" as const,  glow: "#fb923c", pts: 25, hp: 2, imgIdx: 2, rotate: false }, // musuh-3 oranye emas
-  { type: "saucer" as const,  glow: "#4ade80", pts: 35, hp: 4, imgIdx: 3, rotate: true  }, // musuh-4 hijau ungu boss
+  { type: "bomber" as const,  glow: "#ff6b6b", pts: 30, hp: 1, imgIdx: 0, rotate: true  }, // musuh-1 merah besar
+  { type: "fighter" as const, glow: "#818cf8", pts: 20, hp: 1, imgIdx: 1, rotate: true  }, // musuh-2 biru dark
+  { type: "raider" as const,  glow: "#fb923c", pts: 25, hp: 1, imgIdx: 2, rotate: false }, // musuh-3 oranye emas
+  { type: "saucer" as const,  glow: "#4ade80", pts: 35, hp: 1, imgIdx: 3, rotate: true  }, // musuh-4 hijau ungu
 ];
+
+// ── Difficulty stages: meningkat setiap 30 detik ───────────────────────────
+const DIFFICULTY_STAGES = [
+  { label: "MUDAH",        color: "#4ade80", count: [1, 2], vyBase: 46,  vyRand: 20, spawnMs: 2800, shootMin: 4.0, shootRand: 2.5, typePool: [0, 1]       },
+  { label: "SEDANG",       color: "#facc15", count: [2, 3], vyBase: 78,  vyRand: 25, spawnMs: 2200, shootMin: 3.0, shootRand: 2.0, typePool: [0, 1, 2]    },
+  { label: "SULIT",        color: "#f97316", count: [3, 4], vyBase: 110, vyRand: 30, spawnMs: 1700, shootMin: 2.2, shootRand: 1.5, typePool: [0, 1, 2, 3] },
+  { label: "SANGAT SULIT", color: "#ef4444", count: [4, 5], vyBase: 142, vyRand: 35, spawnMs: 1350, shootMin: 1.5, shootRand: 1.2, typePool: [0, 1, 2, 3] },
+  { label: "EKSTREM",      color: "#a855f7", count: [5, 6], vyBase: 170, vyRand: 40, spawnMs: 1100, shootMin: 1.0, shootRand: 1.0, typePool: [0, 1, 2, 3] },
+];
+const getDiffStage = (elapsed: number) => Math.min(Math.floor(elapsed / 30), DIFFICULTY_STAGES.length - 1);
 
 // ── Component ─────────────────────────────────────────────────────────────
 const AsteroidBlasterPage = () => {
@@ -89,6 +99,10 @@ const AsteroidBlasterPage = () => {
   const nextBossAtRef = useRef(BOSS_INTERVAL);
   const bossAlertTimerRef = useRef(0);
 
+  // Difficulty refs
+  const diffTierRef = useRef(0);
+  const tierAlertTimerRef = useRef(0);
+
   // React state
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
@@ -97,6 +111,8 @@ const AsteroidBlasterPage = () => {
   const [joyHandle, setJoyHandle] = useState({ x: 55, y: 55 });
   const [joyActive, setJoyActive] = useState(false);
   const [bossAlert, setBossAlert] = useState(false);
+  const [diffTier, setDiffTier] = useState(0);
+  const [tierAlert, setTierAlert] = useState(false);
 
   // ── Spawn helpers ──────────────────────────────────────────────────────
   const spawnParticles = useCallback((x: number, y: number, color: string, n = 12) => {
@@ -109,11 +125,12 @@ const AsteroidBlasterPage = () => {
 
   const spawnWave = useCallback(() => {
     waveRef.current++;
-    const wave = waveRef.current;
-    const count = Math.min(2 + Math.floor(wave / 3), 6);
+    const stage = DIFFICULTY_STAGES[getDiffStage(elapsedRef.current)];
+    const [minC, maxC] = stage.count;
+    const count = minC + Math.floor(Math.random() * (maxC - minC + 1));
     for (let i = 0; i < count; i++) {
-      const pool = wave >= 5 ? ENEMY_DEFS : ENEMY_DEFS.slice(0, 3);
-      const def = pool[Math.floor(Math.random() * pool.length)];
+      const defIdx = stage.typePool[Math.floor(Math.random() * stage.typePool.length)];
+      const def = ENEMY_DEFS[defIdx];
       const w = def.type === "saucer" ? 60 : def.type === "bomber" ? 54 : 42 + Math.random() * 10;
       const h = def.type === "saucer" ? 56 : def.type === "bomber" ? 38 : 30 + Math.random() * 10;
       enemiesRef.current.push({
@@ -123,11 +140,11 @@ const AsteroidBlasterPage = () => {
         w, h,
         hp: def.hp, maxHp: def.hp,
         vx: (Math.random() - 0.5) * 90,
-        vy: 46 + Math.random() * 34 + wave * 2.2,
+        vy: stage.vyBase + Math.random() * stage.vyRand,
         glow: def.glow,
         type: def.type,
         imgIdx: def.imgIdx,
-        shootTimer: 2.5 + Math.random() * 3.5,
+        shootTimer: stage.shootMin + Math.random() * stage.shootRand,
         pulse: Math.random() * Math.PI * 2,
       });
     }
@@ -241,10 +258,11 @@ const AsteroidBlasterPage = () => {
     scoreRef.current = 0; livesRef.current = 3;
     elapsedRef.current = 0; spawnTimerRef.current = 0; waveRef.current = 0;
     nextBossAtRef.current = BOSS_INTERVAL; bossAlertTimerRef.current = 0;
+    diffTierRef.current = 0; tierAlertTimerRef.current = 0;
     joyActiveRef.current = false; joyDirRef.current = { x: 0, y: 0 };
     fireRef.current = false; shootCoolRef.current = 0;
     setScore(0); setLives(3); setJoyActive(false); setJoyHandle({ x: 55, y: 55 });
-    setBossAlert(false);
+    setBossAlert(false); setDiffTier(0); setTierAlert(false);
     starsRef.current = Array.from({ length: 90 }, () => ({
       x: Math.random() * CW, y: Math.random() * CH,
       r: 0.4 + Math.random() * 1.6, spd: 30 + Math.random() * 70,
@@ -281,6 +299,20 @@ const AsteroidBlasterPage = () => {
 
     if (ph === "playing" && !guruQuiz.isPausedRef.current) {
       elapsedRef.current += dt;
+
+      // ── Difficulty tier check (every 30s) ────────────────────────────
+      const newTier = getDiffStage(elapsedRef.current);
+      if (newTier !== diffTierRef.current) {
+        diffTierRef.current = newTier;
+        setDiffTier(newTier);
+        tierAlertTimerRef.current = 2.5;
+        setTierAlert(true);
+      }
+      if (tierAlertTimerRef.current > 0) {
+        tierAlertTimerRef.current -= dt;
+        if (tierAlertTimerRef.current <= 0) setTierAlert(false);
+      }
+
       const p = playerRef.current;
 
       // ── Player movement ──────────────────────────────────────────────
@@ -308,7 +340,7 @@ const AsteroidBlasterPage = () => {
       spawnTimerRef.current -= dt * 1000;
       if (spawnTimerRef.current <= 0) {
         spawnWave();
-        spawnTimerRef.current = Math.max(1100, 1900 - elapsedRef.current * 6);
+        spawnTimerRef.current = DIFFICULTY_STAGES[getDiffStage(elapsedRef.current)].spawnMs;
       }
 
       // ── Boss alert countdown ──────────────────────────────────────────
@@ -356,13 +388,14 @@ const AsteroidBlasterPage = () => {
         } else {
           e.x += e.vx * dt; e.y += e.vy * dt;
           if (e.x < 0 || e.x + e.w > CW) { e.vx *= -1; e.x = Math.max(0, Math.min(CW - e.w, e.x)); }
-          // Regular enemy fire
+          // Regular enemy fire — interval sesuai tingkat kesulitan saat ini
           e.shootTimer -= dt;
           if (e.shootTimer <= 0 && e.y > -10) {
             const ex = e.x + e.w / 2, ey2 = e.y + e.h;
             const spread = (Math.random() - 0.5) * 0.4;
             bulletsRef.current.push({ id: _uid++, x: ex, y: ey2, vx: Math.sin(spread) * 150, vy: 155 + Math.random() * 30, isEnemy: true });
-            e.shootTimer = 2.8 + Math.random() * 3;
+            const st = DIFFICULTY_STAGES[getDiffStage(elapsedRef.current)];
+            e.shootTimer = st.shootMin + Math.random() * st.shootRand;
           }
         }
       });
@@ -487,6 +520,15 @@ const AsteroidBlasterPage = () => {
     ctx.fillText(`SKOR: ${scoreRef.current}`, 10, 10);
     ctx.fillStyle = "rgba(255,255,255,0.35)"; ctx.font = "11px monospace";
     ctx.fillText(`REKOR: ${bestRef.current}`, 10, 28);
+
+    // Difficulty badge on canvas (bottom-left above boss bar area)
+    const curStage = DIFFICULTY_STAGES[getDiffStage(elapsedRef.current)];
+    ctx.font = "bold 11px monospace";
+    ctx.fillStyle = curStage.color;
+    ctx.shadowColor = curStage.color;
+    ctx.shadowBlur = 6;
+    ctx.fillText(`⚡ ${curStage.label}`, 10, 46);
+    ctx.shadowBlur = 0;
 
     ctx.textAlign = "right"; ctx.font = "18px sans-serif";
     for (let i = 0; i < 3; i++) {
@@ -634,6 +676,23 @@ const AsteroidBlasterPage = () => {
         <div className="relative w-full select-none shrink-0" style={{ maxWidth: CW, aspectRatio: `${CW}/${CH}`, maxHeight: "calc(100dvh - 240px)" }}>
           <canvas ref={canvasRef} width={CW} height={CH} className="rounded-2xl border border-border shadow-2xl w-full h-full" />
 
+          {/* Difficulty Tier-Up Alert */}
+          {tierAlert && (
+            <div className="absolute inset-x-0 top-4 flex items-start justify-center pointer-events-none z-30">
+              <div className="animate-bounce rounded-2xl px-5 py-2.5 text-center shadow-2xl border-2"
+                style={{
+                  background: "rgba(0,0,0,0.85)",
+                  borderColor: DIFFICULTY_STAGES[diffTier].color,
+                  boxShadow: `0 0 24px ${DIFFICULTY_STAGES[diffTier].color}`,
+                }}>
+                <p className="font-bold text-base tracking-widest" style={{ color: DIFFICULTY_STAGES[diffTier].color }}>
+                  ⚡ TINGKAT: {DIFFICULTY_STAGES[diffTier].label}!
+                </p>
+                <p className="text-white/70 text-[11px] mt-0.5">Musuh makin cepat dan berbahaya!</p>
+              </div>
+            </div>
+          )}
+
           {/* Boss Alert Overlay */}
           {bossAlert && (
             <div className="absolute inset-x-0 top-16 flex items-start justify-center pointer-events-none z-30">
@@ -649,15 +708,24 @@ const AsteroidBlasterPage = () => {
               <div className="text-center px-5 max-w-xs">
                 <div className="text-5xl mb-2">🌌</div>
                 <h2 className="font-display text-2xl font-bold text-cyan-400 mb-2">GALAKSI TEMPUR</h2>
-                <p className="text-white/65 text-xs mb-4 leading-relaxed">
-                  Hancurkan pesawat musuh yang menyerbu! Gunakan <span className="text-cyan-400 font-bold">joystick analog</span> untuk bergerak ke segala arah dan tombol <span className="text-red-400 font-bold">FIRE</span> untuk menembak.<br/><br/>
-                  Setiap <span className="text-yellow-400 font-bold">25 detik</span> muncul soal matematika. Setiap <span className="text-red-400 font-bold">60 detik</span> muncul <span className="text-red-400 font-bold">👑 RAJA</span> — musuh boss berukuran besar yang harus ditembak berulang-ulang!
+                <p className="text-white/65 text-xs mb-3 leading-relaxed">
+                  Hancurkan pesawat musuh yang menyerbu! Gunakan <span className="text-cyan-400 font-bold">joystick</span> untuk bergerak dan tombol <span className="text-red-400 font-bold">FIRE</span> untuk menembak. Musuh kecil hancur <span className="text-green-400 font-bold">1 tembakan</span>!
                 </p>
+                {/* Difficulty stages */}
+                <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 mb-3 text-left text-[10px] space-y-0.5">
+                  <p className="text-white/50 uppercase tracking-widest font-bold mb-1">⏱ Tingkat Kesulitan (per 30 dtk)</p>
+                  {DIFFICULTY_STAGES.map((s, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="font-bold w-28" style={{ color: s.color }}>0:{String(i * 30).padStart(2,"0")}+ → {s.label}</span>
+                      <span className="text-white/40">{s.count[0]}–{s.count[1]} musuh/gelombang</span>
+                    </div>
+                  ))}
+                </div>
                 <div className="flex justify-center gap-2 mb-4 text-xs flex-wrap">
-                  <span className="bg-red-900/30 border border-red-500/40 rounded-lg px-2 py-1">🔴 Bomber: 30 poin</span>
-                  <span className="bg-indigo-900/30 border border-indigo-400/40 rounded-lg px-2 py-1">🔵 Fighter: 20 poin</span>
-                  <span className="bg-orange-900/30 border border-orange-400/40 rounded-lg px-2 py-1">🟠 Raider: 25 poin</span>
-                  <span className="bg-green-900/30 border border-green-400/40 rounded-lg px-2 py-1">🟢 Saucer: 35 poin</span>
+                  <span className="bg-red-900/30 border border-red-500/40 rounded-lg px-2 py-1">🔴 30 poin</span>
+                  <span className="bg-indigo-900/30 border border-indigo-400/40 rounded-lg px-2 py-1">🔵 20 poin</span>
+                  <span className="bg-orange-900/30 border border-orange-400/40 rounded-lg px-2 py-1">🟠 25 poin</span>
+                  <span className="bg-green-900/30 border border-green-400/40 rounded-lg px-2 py-1">🟢 35 poin</span>
                   <span className="bg-red-900/60 border border-red-400 rounded-lg px-2 py-1 font-bold text-red-300">👑 RAJA: 200 poin</span>
                 </div>
                 <button onClick={startGame} className="bg-cyan-500 text-black font-bold px-10 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
