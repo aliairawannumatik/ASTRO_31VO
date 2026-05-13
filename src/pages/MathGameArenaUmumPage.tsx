@@ -56,7 +56,7 @@ const games = [
     badge: "BARU",
   },
   {
-    label: "Cosmic Fury",
+    label: "Galaksi Tempur",
     emoji: "🌌",
     path: "/math-game-arena/umum/asteroid-blaster",
     desc: "Tembak pesawat musuh dan jawablah pertanyaan matematika yang muncul",
