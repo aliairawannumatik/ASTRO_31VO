@@ -59,7 +59,7 @@ const games = [
     label: "Cosmic Fury",
     emoji: "🌌",
     path: "/math-game-arena/umum/asteroid-blaster",
-    desc: "Tembak asteroid yang membawa jawaban benar! Jangan sampai lolos ke bawah!",
+    desc: "Tembak pesawat musuh beserta rajanya dengan jawaban benar!",
     icon: <Crosshair className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     badge: "BARU",
   },
