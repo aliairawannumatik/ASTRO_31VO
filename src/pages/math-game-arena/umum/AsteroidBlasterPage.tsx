@@ -838,9 +838,18 @@ const AsteroidBlasterPage = () => {
           <div className="gt-scroll relative z-10">
             <div className="gt-wrap">
 
-              {/* ── HEADER (badge + title) ── */}
+              {/* ── HEADER (nav + badge + title) ── */}
               <div className="gt-header flex flex-col items-center text-center">
-                <div className="text-[7px] tracking-[5px] text-cyan-500/60 uppercase font-bold mb-0.5">⬡ NUMATIK GAME ⬡</div>
+                {/* Nav row */}
+                <div className="flex items-center justify-between w-full mb-1">
+                  <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/numatik-game"); }}
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm transition-all hover:scale-110 active:scale-95"
+                    style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>🏠</button>
+                  <div className="text-[7px] tracking-[5px] text-cyan-500/60 uppercase font-bold">⬡ NUMATIK GAME ⬡</div>
+                  <button onClick={() => { playPopSound(); navigate(-1); }}
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-white/60 hover:text-white text-sm font-bold transition-all hover:scale-110 active:scale-95"
+                    style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>✕</button>
+                </div>
                 <div className="gt-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.6rem,5vw,2.2rem)" }}>GALAKSI TEMPUR</div>
                 <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right, transparent, #00FFFF, #818cf8, transparent)" }} />
                 <p className="text-white/40 text-[8px] tracking-widest uppercase mt-0.5">⚡ Pertarungan Epik di Luar Angkasa ⚡</p>
