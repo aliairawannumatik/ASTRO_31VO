@@ -23,7 +23,7 @@ const kelas7Topics: Topic[] = [
 
 const kelas8Topics: Topic[] = [
   { label: "POLA BILANGAN", path: "/lkpd/kelas-8/pola-bilangan" },
-  { label: "KOORDINAT CARTESIUS", path: "/lkpd/kelas-8/koordinat-cartesius" },
+  { label: "KOORDINAT KARTESIUS", path: "/lkpd/kelas-8/koordinat-cartesius" },
   { label: "RELASI DAN FUNGSI", path: "/lkpd/kelas-8/relasi-dan-fungsi" },
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/lkpd/kelas-8/spldv" },
   { label: "PERSAMAAN GARIS LURUS", path: "/lkpd/kelas-8/persamaan-garis-lurus" },

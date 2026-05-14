@@ -1660,7 +1660,7 @@ const soalGarisSinggungLingkaran: Question[] = [
   },
   {
     id: 87, type: "Benar/Salah", difficulty: "Sedang", category: "TKA",
-    question: "Titik P (4, 3) dan lingkaran pusat O(0, 0) dengan r = 2. Tentukan BENAR atau SALAH! (Koordinat Cartesius)",
+    question: "Titik P (4, 3) dan lingkaran pusat O(0, 0) dengan r = 2. Tentukan BENAR atau SALAH! (Koordinat Kartesius)",
     statements: [
       { text: "PO = 5 (dihitung dengan rumus jarak)", isCorrect: true },
       { text: "Panjang garis singgung dari P ke lingkaran = √21 satuan", isCorrect: true },

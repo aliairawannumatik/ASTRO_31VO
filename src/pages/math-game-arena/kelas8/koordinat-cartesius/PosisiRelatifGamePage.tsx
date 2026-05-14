@@ -33,7 +33,7 @@ const PosisiRelatifGamePage = () => (
     questions={questions}
     topicLabel="POSISI RELATIF SUATU TITIK TERHADAP SUATU GARIS"
     backPath="/math-game-arena/kelas-8/koordinat-cartesius"
-    backLabel="Kembali ke Koordinat Cartesius"
+    backLabel="Kembali ke Koordinat Kartesius"
   />
 );
 

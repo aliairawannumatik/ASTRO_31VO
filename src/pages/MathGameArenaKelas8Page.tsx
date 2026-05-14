@@ -8,7 +8,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 const topics = [
   { label: "POLA BILANGAN", path: "/math-game-arena/kelas-8/pola-bilangan" },
-  { label: "KOORDINAT CARTESIUS", path: "/math-game-arena/kelas-8/koordinat-cartesius" },
+  { label: "KOORDINAT KARTESIUS", path: "/math-game-arena/kelas-8/koordinat-cartesius" },
   { label: "RELASI DAN FUNGSI", path: "/math-game-arena/kelas-8/relasi-dan-fungsi" },
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/math-game-arena/kelas-8/spldv" },
   { label: "PERSAMAAN GARIS LURUS", path: "/math-game-arena/kelas-8/persamaan-garis-lurus" },

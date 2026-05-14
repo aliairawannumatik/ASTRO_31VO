@@ -43,7 +43,7 @@ const situations: SituationCard[] = [
       </svg>
     ),
     text:
-      "Setiap persamaan linear dua variabel digambar sebagai sebuah GARIS lurus pada bidang Cartesius. Jika kamu punya DUA persamaan, kamu punya DUA garis. Titik tempat keduanya berpotongan = solusi sistem. Inilah ide METODE GRAFIK!",
+      "Setiap persamaan linear dua variabel digambar sebagai sebuah GARIS lurus pada bidang Kartesius. Jika kamu punya DUA persamaan, kamu punya DUA garis. Titik tempat keduanya berpotongan = solusi sistem. Inilah ide METODE GRAFIK!",
   },
 ];
 
@@ -145,7 +145,7 @@ const guidedItems: GuidedItem[] = [
     kind: "choice",
     options: [
       "titik potong dua garis dengan sumbu X",
-      "titik potong dua garis pada bidang Cartesius",
+      "titik potong dua garis pada bidang Kartesius",
       "titik tengah dua garis",
       "titik perpotongan garis dengan sumbu Y",
     ],
@@ -404,7 +404,7 @@ const practiceItems: PracticeItem[] = [
       { left: "Dua garis sejajar (berbeda)", right: "Tidak ada solusi" },
       { left: "Dua garis berhimpit", right: "Tak hingga solusi" },
     ],
-    hint: "Lihat hubungan dua garis pada bidang Cartesius.",
+    hint: "Lihat hubungan dua garis pada bidang Kartesius.",
     discussion: [
       "Berpotongan → bertemu di satu titik = 1 solusi.",
       "Sejajar berbeda → tidak pernah bertemu = TIDAK ADA solusi.",

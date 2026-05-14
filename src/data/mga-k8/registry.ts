@@ -1,6 +1,6 @@
 import type { RegistryK8, SubmaterialEntryK8 } from "./types";
 import { POLA_BILANGAN } from "./pola-bilangan";
-import { KOORDINAT_CARTESIUS } from "./koordinat-cartesius";
+import { KOORDINAT_KARTESIUS } from "./koordinat-cartesius";
 import { RELASI_FUNGSI } from "./relasi-fungsi";
 import { SPLDV } from "./spldv";
 import { PERSAMAAN_GARIS_LURUS } from "./persamaan-garis-lurus";
@@ -11,7 +11,7 @@ import { BANGUN_RUANG_SISI_DATAR } from "./bangun-ruang-sisi-datar";
 
 const ALL_ENTRIES: SubmaterialEntryK8[] = [
   ...POLA_BILANGAN,
-  ...KOORDINAT_CARTESIUS,
+  ...KOORDINAT_KARTESIUS,
   ...RELASI_FUNGSI,
   ...SPLDV,
   ...PERSAMAAN_GARIS_LURUS,

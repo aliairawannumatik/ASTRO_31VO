@@ -235,9 +235,9 @@ const UnsurUnsurPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-sky-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(56,189,248,0.7)' }}>
-            UNSUR-UNSUR DIAGRAM CARTESIUS
+            UNSUR-UNSUR DIAGRAM KARTESIUS
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Cartesius · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
             <span className="text-sky-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">·</span>
@@ -307,7 +307,7 @@ const UnsurUnsurPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/koordinat-cartesius"); }}
             className="text-sm text-muted-foreground hover:text-sky-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Koordinat Cartesius
+            ← Kembali ke Koordinat Kartesius
           </button>
         </div>
       </div>

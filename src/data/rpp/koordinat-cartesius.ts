@@ -2,20 +2,20 @@ import { Crosshair, MapPin, Move3d } from "lucide-react";
 import { THEMES, DIMENSI, type MateriCatalogEntry } from "../rppHelpers";
 
 const CP =
-  "Menggunakan sistem koordinat Cartesius dalam memodelkan dan menyelesaikan masalah geometri.";
+  "Menggunakan sistem koordinat Kartesius dalam memodelkan dan menyelesaikan masalah geometri.";
 
 export const koordinatCartesius: MateriCatalogEntry = {
   slug: "koordinat-cartesius",
-  title: "Koordinat Cartesius",
-  shortTitle: "Koordinat Cartesius",
+  title: "Koordinat Kartesius",
+  shortTitle: "Koordinat Kartesius",
   icon: Crosshair,
-  intro: "Pilih sub-topik koordinat Cartesius untuk melihat Rencana Pelaksanaan Pembelajaran (RPP) lengkap.",
+  intro: "Pilih sub-topik koordinat Kartesius untuk melihat Rencana Pelaksanaan Pembelajaran (RPP) lengkap.",
   theme: THEMES.cyan,
   subMateri: [
     {
       slug: "sistem-koordinat",
       title: "Sistem Koordinat",
-      desc: "RPP pengenalan sistem koordinat Cartesius dan posisi titik di kuadran.",
+      desc: "RPP pengenalan sistem koordinat Kartesius dan posisi titik di kuadran.",
       icon: Crosshair,
       model: "PBL",
       dimensiProfil: [DIMENSI.beriman, DIMENSI.gotongRoyong("sistem koordinat"), DIMENSI.bernalarKritis("sistem koordinat"), DIMENSI.komunikatif],
@@ -25,7 +25,7 @@ export const koordinatCartesius: MateriCatalogEntry = {
         "Bertahap dari sumbu x dan y, ke titik asal, kuadran, hingga membaca dan menulis koordinat titik.",
       capaianPembelajaran: CP,
       tujuanPembelajaran:
-        "Peserta didik dapat membaca dan menentukan posisi titik pada bidang koordinat Cartesius.",
+        "Peserta didik dapat membaca dan menentukan posisi titik pada bidang koordinat Kartesius.",
       topikPembelajaran: "Sumbu Koordinat, Titik Asal, Kuadran, dan Posisi Titik.",
       kemitraan: [
         { title: "IPS", desc: "Membaca peta dengan sistem koordinat." },

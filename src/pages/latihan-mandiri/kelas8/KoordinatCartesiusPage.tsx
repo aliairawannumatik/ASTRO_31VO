@@ -6,7 +6,7 @@ import { MapPin, Ruler, Navigation, Crosshair, ChevronRight } from "lucide-react
 
 const subtopics = [
   {
-    label: "UNSUR-UNSUR PADA DIAGRAM CARTESIUS",
+    label: "UNSUR-UNSUR PADA DIAGRAM KARTESIUS",
     path: "/latihan-mandiri/kelas-8/koordinat-cartesius/unsur-unsur",
     soal: 12,
     icon: MapPin,
@@ -73,7 +73,7 @@ const KoordinatCartesiusPage = () => {
             <span className="text-3xl">📍</span>
           </div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center">
-            KOORDINAT CARTESIUS
+            KOORDINAT KARTESIUS
           </h1>
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">

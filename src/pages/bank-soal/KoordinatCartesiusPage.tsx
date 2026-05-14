@@ -306,23 +306,23 @@ const soalKoordinatCartesius: Question[] = [
   ═══════════════════════════════════ */
   {
     id: 1, type: "PG", difficulty: "Mudah", category: "Unsur Koordinat",
-    question: "Pada sistem koordinat Cartesius, sumbu horizontal disebut sumbu ...",
+    question: "Pada sistem koordinat Kartesius, sumbu horizontal disebut sumbu ...",
     svgKey: "sumbu-xy",
     options: ["A. Sumbu y", "B. Sumbu z", "C. Sumbu x", "D. Sumbu w"],
     correctAnswer: "C. Sumbu x",
     explanation: {
-      concept: "Sistem koordinat Cartesius terdiri dari sumbu x (horizontal) dan sumbu y (vertikal) yang saling tegak lurus dan berpotongan di titik asal O(0,0).",
+      concept: "Sistem koordinat Kartesius terdiri dari sumbu x (horizontal) dan sumbu y (vertikal) yang saling tegak lurus dan berpotongan di titik asal O(0,0).",
       steps: ["Sumbu x = sumbu horizontal (mendatar)", "Sumbu y = sumbu vertikal (tegak)", "Berpotongan di titik O(0,0) yang disebut titik pusat koordinat"],
       formula: "\\text{Titik koordinat: } (x, y) \\text{ dengan } x = \\text{absis}, y = \\text{ordinat}"
     }
   },
   {
     id: 2, type: "PG", difficulty: "Mudah", category: "Unsur Koordinat",
-    question: "Koordinat titik yang terletak tepat di titik pusat sistem koordinat Cartesius adalah ...",
+    question: "Koordinat titik yang terletak tepat di titik pusat sistem koordinat Kartesius adalah ...",
     options: ["A. $(1, 1)$", "B. $(0, 1)$", "C. $(1, 0)$", "D. $(0, 0)$"],
     correctAnswer: "D. $(0, 0)$",
     explanation: {
-      concept: "Titik pusat koordinat Cartesius disebut titik asal atau origin O, yang memiliki koordinat (0, 0).",
+      concept: "Titik pusat koordinat Kartesius disebut titik asal atau origin O, yang memiliki koordinat (0, 0).",
       steps: ["Titik asal/origin = O(0,0)", "Merupakan perpotongan sumbu x dan sumbu y", "Semua koordinat diukur relatif terhadap O"],
       formula: "O = (0, 0) \\text{ (Titik Asal / Origin)}"
     }
@@ -513,7 +513,7 @@ const soalKoordinatCartesius: Question[] = [
   },
   {
     id: 19, type: "PG", difficulty: "Mudah", category: "Banyak Kuadran",
-    question: "Berapa banyak kuadran pada sistem koordinat Cartesius?",
+    question: "Berapa banyak kuadran pada sistem koordinat Kartesius?",
     options: ["A. 2", "B. 3", "C. 4", "D. 8"],
     correctAnswer: "C. 4",
     explanation: {
@@ -528,7 +528,7 @@ const soalKoordinatCartesius: Question[] = [
     options: ["A. Ordinat", "B. Absis", "C. Gradien", "D. Konstanta"],
     correctAnswer: "B. Absis",
     explanation: {
-      concept: "Dalam sistem koordinat Cartesius, komponen x disebut absis dan komponen y disebut ordinat.",
+      concept: "Dalam sistem koordinat Kartesius, komponen x disebut absis dan komponen y disebut ordinat.",
       steps: ["(x, y): x = absis, y = ordinat", "Absis menunjukkan posisi horizontal", "Ordinat menunjukkan posisi vertikal"],
       formula: "(\\underbrace{x}_{\\text{absis}}, \\underbrace{y}_{\\text{ordinat}})"
     }
@@ -594,11 +594,11 @@ const soalKoordinatCartesius: Question[] = [
   },
   {
     id: 26, type: "PG", difficulty: "Mudah", category: "Unsur Koordinat",
-    question: "Sistem koordinat Cartesius ditemukan oleh matematikawan bernama ...",
+    question: "Sistem koordinat Kartesius ditemukan oleh matematikawan bernama ...",
     options: ["A. Isaac Newton", "B. René Descartes", "C. Leonhard Euler", "D. Pythagoras"],
     correctAnswer: "B. René Descartes",
     explanation: {
-      concept: "Sistem koordinat Cartesius (dari kata 'Cartesius' yang merupakan nama Latin Descartes) ditemukan oleh René Descartes, matematikawan Prancis abad ke-17.",
+      concept: "Sistem koordinat Kartesius (dari kata 'Cartesius' yang merupakan nama Latin Descartes) ditemukan oleh René Descartes, matematikawan Prancis abad ke-17.",
       steps: ["René Descartes (1596–1650) = filsuf dan matematikawan Prancis", "Nama 'Cartesius' = bentuk Latin dari 'Descartes'"],
       formula: ""
     }
@@ -1134,7 +1134,7 @@ const soalKoordinatCartesius: Question[] = [
     options: ["A. (1) dan (2) saja", "B. (1), (2), dan (3)", "C. (2) dan (4) saja", "D. (1), (2), (3), dan (4)"],
     correctAnswer: "D. (1), (2), (3), dan (4)",
     explanation: {
-      concept: "Verifikasi setiap pernyataan tentang koordinat Cartesius.",
+      concept: "Verifikasi setiap pernyataan tentang koordinat Kartesius.",
       steps: ["(1): OA=√(9+16)=5 ✓", "(2): B=(-x_A,-y_A) → simetris thd O ✓", "(3): M_AB=((3-3)/2,(4-4)/2)=(0,0) ✓", "(4): OB=√(9+16)=5=OA ✓"],
       formula: ""
     }
@@ -1158,14 +1158,14 @@ const soalKoordinatCartesius: Question[] = [
   },
   {
     id: 74, type: "Benar/Salah", difficulty: "Sedang", category: "MCMA Benar/Salah",
-    question: "Tentukan Benar atau Salah setiap pernyataan tentang koordinat Cartesius berikut!",
+    question: "Tentukan Benar atau Salah setiap pernyataan tentang koordinat Kartesius berikut!",
     statements: [
       { text: "Titik $(0, k)$ dengan $k \\neq 0$ selalu terletak di sumbu y", isCorrect: true },
       { text: "Semua titik di kuadran III memiliki nilai $x \\cdot y$ negatif", isCorrect: false },
       { text: "Jarak titik $(a, b)$ dari titik asal = $\\sqrt{a^2+b^2}$", isCorrect: true }
     ],
     explanation: {
-      concept: "Sifat-sifat dasar koordinat Cartesius.",
+      concept: "Sifat-sifat dasar koordinat Kartesius.",
       steps: [
         "(1): (0,k) dengan k≠0 → di sumbu y ✓ BENAR",
         "(2): Kd III: x<0, y<0 → x·y = (+) positif, bukan negatif → SALAH ✗",
@@ -1396,7 +1396,7 @@ const soalKoordinatCartesius: Question[] = [
   },
   {
     id: 92, type: "PG", difficulty: "Sulit", category: "Literasi Matematika",
-    question: "Sebuah peta militer menggunakan koordinat Cartesius. Pasukan A di $(−5, 3)$ dan pasukan B di $(7, −2)$. Titik pertemuan berada di tengah-tengah. Jika 1 satuan = 2 km, berapa jarak sesungguhnya pasukan A ke titik pertemuan?",
+    question: "Sebuah peta militer menggunakan koordinat Kartesius. Pasukan A di $(−5, 3)$ dan pasukan B di $(7, −2)$. Titik pertemuan berada di tengah-tengah. Jika 1 satuan = 2 km, berapa jarak sesungguhnya pasukan A ke titik pertemuan?",
     options: ["A. $\\sqrt{61}$ km", "B. $2\\sqrt{61}$ km", "C. $4\\sqrt{61}$ km", "D. $13$ km"],
     correctAnswer: "B. $2\\sqrt{61}$ km",
     explanation: {
@@ -1744,7 +1744,7 @@ export default function BankSoalKoordinatCartesiusPage() {
           <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-3" style={{ fontFamily: "var(--font-heading)" }}>
             Bank Soal{" "}
             <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #06b6d4, #a855f7)" }}>
-              Koordinat Cartesius
+              Koordinat Kartesius
             </span>
           </h1>
           <p className="text-sm text-muted-foreground font-body max-w-xl mx-auto">

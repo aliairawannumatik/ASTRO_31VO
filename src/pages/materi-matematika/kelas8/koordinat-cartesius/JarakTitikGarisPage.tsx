@@ -89,9 +89,9 @@ const JarakTitikGarisPage = () => {
           JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS
         </h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
-          Teorema Pythagoras Bertemu Koordinat Cartesius!
+          Teorema Pythagoras Bertemu Koordinat Kartesius!
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Cartesius · Materi Matematika</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Kartesius · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
@@ -101,7 +101,7 @@ const JarakTitikGarisPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Di peta digital, berapa jarak lurus dari rumahmu ke sekolah? Di game, berapa jarak karakter dari musuh? Semua pertanyaan ini dijawab dengan rumus yang sama: gabungan <strong className="text-cyan-300">koordinat Cartesius</strong> dan <strong className="text-cyan-300">Teorema Pythagoras</strong>. Konsep ini juga fundamental untuk menghitung jarak terdekat sebuah titik ke sebuah garis — dipakai dalam grafis komputer, engineering, dan GPS!
+                  Di peta digital, berapa jarak lurus dari rumahmu ke sekolah? Di game, berapa jarak karakter dari musuh? Semua pertanyaan ini dijawab dengan rumus yang sama: gabungan <strong className="text-cyan-300">koordinat Kartesius</strong> dan <strong className="text-cyan-300">Teorema Pythagoras</strong>. Konsep ini juga fundamental untuk menghitung jarak terdekat sebuah titik ke sebuah garis — dipakai dalam grafis komputer, engineering, dan GPS!
                 </p>
               </div>
             )}
@@ -115,7 +115,7 @@ const JarakTitikGarisPage = () => {
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">
-                    Jarak antara dua titik di bidang Cartesius dihitung menggunakan <strong className="text-cyan-300">rumus jarak</strong> yang merupakan penerapan langsung Teorema Pythagoras. Dua titik membentuk hipotenusa segitiga siku-siku di mana selisih koordinatnya membentuk dua sisi tegak.
+                    Jarak antara dua titik di bidang Kartesius dihitung menggunakan <strong className="text-cyan-300">rumus jarak</strong> yang merupakan penerapan langsung Teorema Pythagoras. Dua titik membentuk hipotenusa segitiga siku-siku di mana selisih koordinatnya membentuk dua sisi tegak.
                   </p>
                 </div>
 
@@ -298,7 +298,7 @@ const JarakTitikGarisPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/koordinat-cartesius"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Koordinat Cartesius
+            ← Kembali ke Koordinat Kartesius
           </button>
         </div>
       </div>

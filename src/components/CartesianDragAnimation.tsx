@@ -105,7 +105,7 @@ export default function CartesianDragAnimation() {
       {/* Header */}
       <div className="px-4 pt-4 pb-2 text-center">
         <p className="font-display text-sm font-bold text-cyan-300 mb-0.5">
-          🎮 Diagram Cartesius Interaktif
+          🎮 Diagram Kartesius Interaktif
         </p>
         <p className="text-xs text-white/50 font-body">
           Seret titik-titik berwarna untuk melihat koordinatnya berubah!

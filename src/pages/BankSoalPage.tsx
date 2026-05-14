@@ -41,7 +41,7 @@ const bankSoalTopics = [
   { label: "SEGITIGA DAN SEGIEMPAT", icon: Triangle, path: "/bank-soal/segitiga-dan-segiempat", ready: true },
   { label: "HIMPUNAN", icon: CircleDot, path: "/bank-soal/himpunan", ready: true },
   { label: "POLA BILANGAN", icon: Hash, path: "/bank-soal/pola-bilangan", ready: true },
-  { label: "KOORDINAT CARTESIUS", icon: Grid3X3, path: "/bank-soal/koordinat-cartesius", ready: true },
+  { label: "KOORDINAT KARTESIUS", icon: Grid3X3, path: "/bank-soal/koordinat-cartesius", ready: true },
   { label: "RELASI DAN FUNGSI", icon: ArrowLeftRight, path: "/bank-soal/relasi-fungsi", ready: true },
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", icon: GitBranch, path: "/bank-soal/spldv", ready: true },
   { label: "PERSAMAAN GARIS LURUS", icon: LineChart, path: "/bank-soal/persamaan-garis-lurus", ready: true },

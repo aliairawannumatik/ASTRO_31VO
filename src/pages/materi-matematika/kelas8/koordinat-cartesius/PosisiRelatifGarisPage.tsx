@@ -105,7 +105,7 @@ const PosisiRelatifGarisPage = () => {
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Di Atas, Di Bawah, atau Tepat di Garis?
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Cartesius · Materi Matematika</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Kartesius · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
@@ -115,7 +115,7 @@ const PosisiRelatifGarisPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Bayangkan garis pantai sebagai batas antara laut dan daratan. Rumah di sisi mana? Di sisi laut atau daratan? Pertanyaan yang sama muncul di matematika: ketika ada sebuah garis di bidang Cartesius, kita bisa menentukan apakah suatu titik berada <strong className="text-cyan-300">di atas, di bawah, atau tepat pada garis</strong> tersebut — tanpa perlu menggambar, hanya dengan substitusi koordinat!
+                  Bayangkan garis pantai sebagai batas antara laut dan daratan. Rumah di sisi mana? Di sisi laut atau daratan? Pertanyaan yang sama muncul di matematika: ketika ada sebuah garis di bidang Kartesius, kita bisa menentukan apakah suatu titik berada <strong className="text-cyan-300">di atas, di bawah, atau tepat pada garis</strong> tersebut — tanpa perlu menggambar, hanya dengan substitusi koordinat!
                 </p>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-yellow-200">
@@ -341,7 +341,7 @@ const PosisiRelatifGarisPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/koordinat-cartesius"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Koordinat Cartesius
+            ← Kembali ke Koordinat Kartesius
           </button>
         </div>
       </div>

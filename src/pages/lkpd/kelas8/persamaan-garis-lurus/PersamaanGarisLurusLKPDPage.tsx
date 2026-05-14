@@ -368,7 +368,7 @@ const guidedItems: GuidedItem[] = [
       "Urutkan langkah MENGGAMBAR grafik 2x + y = 4 dengan metode dua titik:",
     kind: "sort",
     items: [
-      "Plot kedua titik pada bidang Cartesius.",
+      "Plot kedua titik pada bidang Kartesius.",
       "Saat y = 0, hitung x. Diperoleh titik potong sumbu x.",
       "Hubungkan kedua titik dengan penggaris dan beri nama garisnya.",
       "Saat x = 0, hitung y. Diperoleh titik potong sumbu y.",
@@ -376,7 +376,7 @@ const guidedItems: GuidedItem[] = [
     correctOrder: [
       "Saat x = 0, hitung y. Diperoleh titik potong sumbu y.",
       "Saat y = 0, hitung x. Diperoleh titik potong sumbu x.",
-      "Plot kedua titik pada bidang Cartesius.",
+      "Plot kedua titik pada bidang Kartesius.",
       "Hubungkan kedua titik dengan penggaris dan beri nama garisnya.",
     ],
     discussion: [

@@ -457,7 +457,7 @@ const slides: Slide[] = [
     ],
     submenus: [
       "Kelas 7 : Bilangan bulat, Pecahan, Aljabar, Persamaan dan Pertidaksamaan Linear Satu Variabel, Perbandingan, Aritmetika Sosial, Garis dan Sudut, Segitiga dan Segiempat, Himpunan",
-      "Kelas 8 : Pola Bilangan, Koordinat Cartesius, Relasi dan Fungsi, Sistem Persamaan Linear Dua Variabel, Persamaan Garis Lurus, Teorema Pythagoras, Lingkaran, Garis Singgung Lingkaran, Bangun Ruang Sisi Datar",
+      "Kelas 8 : Pola Bilangan, Koordinat Kartesius, Relasi dan Fungsi, Sistem Persamaan Linear Dua Variabel, Persamaan Garis Lurus, Teorema Pythagoras, Lingkaran, Garis Singgung Lingkaran, Bangun Ruang Sisi Datar",
       "Kelas 9 : Bilangan Berpangkat, Kesebangunan dan Kekongruenan, Transformasi Geometri, Bangun Ruang Sisi Lengkung, Statistika, Peluang, Persamaan Kuadrat (Pengayaan), Fungsi Kuadrat (Pengayaan)",
     ],
     mockup: <MateriMockup />,

@@ -202,8 +202,8 @@ const PengertianRelasiPage = () => {
 
                 {/* Grafik/Koordinat */}
                 <div className="bg-slate-800/50 border border-violet-500/20 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-violet-300">4️⃣ Grafik Cartesius</p>
-                  <p className="font-body text-xs text-white/60">Pasangan <InlineMath math="(x, y)" /> digambarkan sebagai titik pada bidang koordinat Cartesius. Sumbu-x untuk domain, sumbu-y untuk range.</p>
+                  <p className="font-body text-sm font-bold text-violet-300">4️⃣ Grafik Kartesius</p>
+                  <p className="font-body text-xs text-white/60">Pasangan <InlineMath math="(x, y)" /> digambarkan sebagai titik pada bidang koordinat Kartesius. Sumbu-x untuk domain, sumbu-y untuk range.</p>
                   {/* Simple dot plot visual */}
                   <div className="bg-slate-900/60 border border-violet-500/20 rounded-xl p-4 flex justify-center">
                     <svg viewBox="0 0 160 160" className="w-40 h-40" aria-label="Grafik relasi x kuadrat">
@@ -235,7 +235,7 @@ const PengertianRelasiPage = () => {
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-yellow-200">
-                    <strong>💡 Tips:</strong> Diagram panah paling mudah untuk memahami konsep, sedangkan grafik Cartesius berguna untuk visualisasi pola relasi.
+                    <strong>💡 Tips:</strong> Diagram panah paling mudah untuk memahami konsep, sedangkan grafik Kartesius berguna untuk visualisasi pola relasi.
                   </p>
                 </div>
               </div>
@@ -435,7 +435,7 @@ const PengertianRelasiPage = () => {
                     ["Domain", "Himpunan asal (himpunan A)"],
                     ["Kodomain", "Himpunan kawan (himpunan B)"],
                     ["Range", "Bagian dari kodomain yang benar-benar dipasangkan"],
-                    ["4 Cara Penyajian", "Diagram panah, pasangan berurutan, tabel, grafik Cartesius"],
+                    ["4 Cara Penyajian", "Diagram panah, pasangan berurutan, tabel, grafik Kartesius"],
                   ].map(([term, def]) => (
                     <div key={term} className="flex gap-2">
                       <span className="text-cyan-400 shrink-0">▸</span>

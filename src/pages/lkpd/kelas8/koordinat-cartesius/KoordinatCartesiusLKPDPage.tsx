@@ -66,7 +66,7 @@ const guidedItems: GuidedItem[] = [
   {
     id: "g1",
     label:
-      "Pada bidang Cartesius, sumbu mendatar disebut sumbu …",
+      "Pada bidang Kartesius, sumbu mendatar disebut sumbu …",
     kind: "choice",
     options: ["Sumbu X (absis)", "Sumbu Y (ordinat)", "Sumbu Z", "Sumbu O"],
     correctIndex: 0,
@@ -78,7 +78,7 @@ const guidedItems: GuidedItem[] = [
   {
     id: "g2",
     label:
-      "Sumbu tegak (vertikal) pada bidang Cartesius disebut sumbu …",
+      "Sumbu tegak (vertikal) pada bidang Kartesius disebut sumbu …",
     kind: "choice",
     options: ["Sumbu X (absis)", "Sumbu Y (ordinat)", "Sumbu Z", "Sumbu O"],
     correctIndex: 1,
@@ -101,7 +101,7 @@ const guidedItems: GuidedItem[] = [
   {
     id: "g4",
     label:
-      "Bidang Cartesius dibagi menjadi 4 daerah oleh sumbu X dan sumbu Y. Setiap daerah disebut …",
+      "Bidang Kartesius dibagi menjadi 4 daerah oleh sumbu X dan sumbu Y. Setiap daerah disebut …",
     kind: "fill",
     answers: ["kuadran"],
     discussion: [
@@ -239,7 +239,7 @@ const guidedItems: GuidedItem[] = [
   {
     id: "g15",
     label:
-      "Urutkan langkah menggambar titik (−3, 4) pada bidang Cartesius dari yang pertama hingga terakhir.",
+      "Urutkan langkah menggambar titik (−3, 4) pada bidang Kartesius dari yang pertama hingga terakhir.",
     kind: "sort",
     items: [
       "Mulai dari titik asal O(0, 0).",
@@ -264,7 +264,7 @@ const guidedItems: GuidedItem[] = [
 
 const summaryCards: SummaryCard[] = [
   {
-    title: "📐 Unsur Bidang Cartesius",
+    title: "📐 Unsur Bidang Kartesius",
     text: "Sumbu X (mendatar) = absis. Sumbu Y (tegak) = ordinat. Perpotongannya = titik asal O(0, 0). Sebuah titik ditulis (x, y) — urutan tidak boleh terbalik.",
     tone: "cyan",
   },
@@ -441,23 +441,23 @@ const practiceItems: PracticeItem[] = [
 const KoordinatCartesiusLKPDPage = () => (
   <InteractiveLKPD
     badgeText="LKPD · Kelas 8 · Bab 1"
-    title="Koordinat Cartesius — Penemuan Terbimbing"
-    intro="Sobat Numatik, ayo menjelajahi bidang Cartesius! Kamu akan menemukan sendiri sumbu X, sumbu Y, empat kuadran, dan cara menentukan koordinat titik — sambil bermain dengan diagram interaktif yang bisa kamu seret-seret."
+    title="Koordinat Kartesius — Penemuan Terbimbing"
+    intro="Sobat Numatik, ayo menjelajahi bidang Kartesius! Kamu akan menemukan sendiri sumbu X, sumbu Y, empat kuadran, dan cara menentukan koordinat titik — sambil bermain dengan diagram interaktif yang bisa kamu seret-seret."
     situations={situations}
-    guidedIntro="Kerjakan soal-soal ini secara berurutan. Setiap jawaban akan membantumu menemukan konsep koordinat Cartesius. Tekan tombol 'Periksa Jawaban' di bawah untuk melihat pembahasan."
+    guidedIntro="Kerjakan soal-soal ini secara berurutan. Setiap jawaban akan membantumu menemukan konsep koordinat Kartesius. Tekan tombol 'Periksa Jawaban' di bawah untuk melihat pembahasan."
     guidedItems={guidedItems}
     summaryCards={summaryCards}
     midSlot={
       <section className="mb-6 rounded-3xl border border-cyan-300/30 bg-gradient-to-br from-cyan-500/10 via-blue-600/10 to-violet-500/10 p-5 md:p-7 backdrop-blur">
         <div className="text-center mb-4">
           <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/15 px-4 py-2 text-xs font-bold text-cyan-100">
-            🎮 LABORATORIUM CARTESIUS INTERAKTIF
+            🎮 LABORATORIUM KARTESIUS INTERAKTIF
           </span>
           <h2 className="font-display text-2xl md:text-3xl font-bold text-white mt-3">
-            B. Eksplorasi Bidang Cartesius
+            B. Eksplorasi Bidang Kartesius
           </h2>
           <p className="text-sm text-white/70 font-body mt-2 max-w-2xl mx-auto">
-            Ini bukan gambar biasa! Seret titik A, B, C, atau D ke posisi mana pun di bidang Cartesius.
+            Ini bukan gambar biasa! Seret titik A, B, C, atau D ke posisi mana pun di bidang Kartesius.
             Perhatikan bagaimana koordinatnya berubah dan kuadran tempatnya berpindah secara otomatis.
             Coba pindahkan setiap titik ke setiap kuadran untuk membuktikan aturan tanda yang sudah kamu pelajari!
           </p>
@@ -483,7 +483,7 @@ const KoordinatCartesiusLKPDPage = () => (
     practiceIntro="Sekarang giliranmu menerapkan apa yang sudah kamu temukan. Kerjakan dengan teliti — gunakan diagram interaktif di atas untuk mengeceknya jika ragu."
     practiceItems={practiceItems}
     prevPath="/lkpd/kelas-8/koordinat-cartesius"
-    backLabel="Kembali ke menu Koordinat Cartesius"
+    backLabel="Kembali ke menu Koordinat Kartesius"
     scoreMessages={{
       perfect: "Mantap, Sobat Numatik! Kamu sudah jago membaca koordinat dan kuadran.",
       high: "Bagus sekali! Periksa kembali bagian yang masih merah agar lebih mantap.",

@@ -129,7 +129,7 @@ const MetodeGrafikPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Setiap PLDV bisa digambar sebagai sebuah <strong className="text-cyan-300">garis lurus</strong> di bidang koordinat Cartesius. Karena SPLDV memiliki dua PLDV, kita akan menggambar <em>dua garis</em>. Solusi SPLDV adalah <strong className="text-cyan-300">titik potong</strong> kedua garis tersebut — koordinat titik itulah nilai <InlineMath math="x" /> dan <InlineMath math="y" /> yang memenuhi kedua persamaan!
+                  Setiap PLDV bisa digambar sebagai sebuah <strong className="text-cyan-300">garis lurus</strong> di bidang koordinat Kartesius. Karena SPLDV memiliki dua PLDV, kita akan menggambar <em>dua garis</em>. Solusi SPLDV adalah <strong className="text-cyan-300">titik potong</strong> kedua garis tersebut — koordinat titik itulah nilai <InlineMath math="x" /> dan <InlineMath math="y" /> yang memenuhi kedua persamaan!
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -452,7 +452,7 @@ const MetodeGrafikPage = () => {
               <div className="px-5 pb-5 space-y-3">
                 <div className="grid grid-cols-1 gap-2 font-body text-sm">
                   {[
-                    { poin: "Metode grafik menyelesaikan SPLDV dengan menggambar dua garis lurus di koordinat Cartesius.", icon: "📊" },
+                    { poin: "Metode grafik menyelesaikan SPLDV dengan menggambar dua garis lurus di koordinat Kartesius.", icon: "📊" },
                     { poin: "Setiap PLDV digambar dengan menentukan minimal 2 titik — paling mudah: titik potong sumbu-x (y=0) dan sumbu-y (x=0).", icon: "📍" },
                     { poin: "Solusi SPLDV adalah koordinat titik potong kedua garis: (x, y).", icon: "🎯" },
                     { poin: "Jika gradien berbeda → berpotongan (1 solusi). Gradien sama, konstanta beda → sejajar (tidak ada solusi). Keduanya sama → berimpit (tak hingga solusi).", icon: "📐" },

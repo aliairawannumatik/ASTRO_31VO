@@ -2,11 +2,11 @@ import type { SubmaterialEntryK8, BaseQ } from "./types";
 import { expandPool } from "./_helpers";
 
 const PARENT_SLUG = "koordinat-cartesius";
-const PARENT_LABEL = "KOORDINAT CARTESIUS";
+const PARENT_LABEL = "KOORDINAT KARTESIUS";
 
 const UNSUR_UNSUR: BaseQ[] = [
-  { q: "Sumbu mendatar pada koordinat Cartesius disebut sumbu ...", opts: ["X", "Y", "Z", "O"], correct: 0 },
-  { q: "Sumbu tegak pada koordinat Cartesius disebut sumbu ...", opts: ["X", "Y", "Z", "O"], correct: 1 },
+  { q: "Sumbu mendatar pada koordinat Kartesius disebut sumbu ...", opts: ["X", "Y", "Z", "O"], correct: 0 },
+  { q: "Sumbu tegak pada koordinat Kartesius disebut sumbu ...", opts: ["X", "Y", "Z", "O"], correct: 1 },
   { q: "Titik pusat koordinat memiliki koordinat ...", opts: ["(1,1)", "(0,0)", "(1,0)", "(0,1)"], correct: 1 },
   { q: "Titik (3, 4) memiliki absis ...", opts: ["3", "4", "7", "12"], correct: 0 },
   { q: "Titik (3, 4) memiliki ordinat ...", opts: ["3", "4", "7", "12"], correct: 1 },
@@ -14,7 +14,7 @@ const UNSUR_UNSUR: BaseQ[] = [
   { q: "Titik (4, −3) berada di kuadran ke-...", opts: ["I", "II", "III", "IV"], correct: 3 },
   { q: "Titik (5, 7) berada di kuadran ke-...", opts: ["I", "II", "III", "IV"], correct: 0 },
   { q: "Titik (−3, −4) berada di kuadran ke-...", opts: ["I", "II", "III", "IV"], correct: 2 },
-  { q: "Banyak kuadran pada koordinat Cartesius adalah ...", opts: ["2", "3", "4", "6"], correct: 2 },
+  { q: "Banyak kuadran pada koordinat Kartesius adalah ...", opts: ["2", "3", "4", "6"], correct: 2 },
   { q: "Titik dengan ordinat 0 berada pada sumbu ...", opts: ["X", "Y", "diagonal", "asimtot"], correct: 0 },
   { q: "Titik dengan absis 0 berada pada sumbu ...", opts: ["X", "Y", "diagonal", "asimtot"], correct: 1 },
 ];
@@ -49,8 +49,8 @@ const POSISI_RELATIF: BaseQ[] = [
   { q: "Titik (0, 0) disebut ...", opts: ["asimtot", "fokus", "titik asal", "titik puncak"], correct: 2 },
 ];
 
-export const KOORDINAT_CARTESIUS: SubmaterialEntryK8[] = [
-  { slug: "unsur-unsur", label: "UNSUR-UNSUR DIAGRAM CARTESIUS", emoji: "📍", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(UNSUR_UNSUR) },
+export const KOORDINAT_KARTESIUS: SubmaterialEntryK8[] = [
+  { slug: "unsur-unsur", label: "UNSUR-UNSUR DIAGRAM KARTESIUS", emoji: "📍", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(UNSUR_UNSUR) },
   { slug: "jarak-titik", label: "JARAK ANTAR DUA TITIK & TITIK KE GARIS", emoji: "📏", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(JARAK_TITIK) },
   { slug: "posisi-relatif", label: "POSISI RELATIF TITIK TERHADAP GARIS", emoji: "🧭", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(POSISI_RELATIF) },
 ];

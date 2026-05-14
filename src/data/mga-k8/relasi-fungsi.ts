@@ -7,11 +7,11 @@ const PARENT_LABEL = "RELASI DAN FUNGSI";
 const PENGERTIAN_RELASI: BaseQ[] = [
   { q: "Hubungan antara anggota himpunan A dengan anggota himpunan B disebut ...", opts: ["Fungsi", "Relasi", "Domain", "Range"], correct: 1 },
   { q: "Penyajian relasi yang menggunakan panah disebut ...", opts: ["diagram panah", "diagram batang", "tabel", "grafik"], correct: 0 },
-  { q: "Penyajian relasi (a,b) disebut ...", opts: ["diagram panah", "himpunan pasangan berurutan", "diagram Cartesius", "grafik"], correct: 1 },
+  { q: "Penyajian relasi (a,b) disebut ...", opts: ["diagram panah", "himpunan pasangan berurutan", "diagram Kartesius", "grafik"], correct: 1 },
   { q: "Pada relasi A→B, A disebut ...", opts: ["Range", "Domain", "Kodomain", "Fungsi"], correct: 1 },
   { q: "Pada relasi A→B, B disebut ...", opts: ["Domain", "Range", "Kodomain", "Fungsi"], correct: 2 },
   { q: "Banyaknya cara menyajikan relasi adalah ...", opts: ["1", "2", "3", "4"], correct: 2 },
-  { q: "Diagram yang menggambarkan relasi pada bidang Cartesius disebut ...", opts: ["panah", "Cartesius", "batang", "lingkaran"], correct: 1 },
+  { q: "Diagram yang menggambarkan relasi pada bidang Kartesius disebut ...", opts: ["panah", "Cartesius", "batang", "lingkaran"], correct: 1 },
   { q: "Relasi 'lebih besar dari' menghubungkan ... dengan ...", opts: ["bilangan & bilangan", "huruf & angka", "garis & titik", "warna & bentuk"], correct: 0 },
   { q: "Pada A={1,2} dan B={a,b}, banyak relasi mungkin ada ... pasangan", opts: ["2", "4", "6", "8"], correct: 1 },
   { q: "Anggota himpunan asal disebut ...", opts: ["Range", "Domain", "Kodomain", "Hasil"], correct: 1 },

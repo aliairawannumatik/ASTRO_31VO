@@ -104,12 +104,12 @@ const UnsurUnsurCartesiusPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          UNSUR-UNSUR PADA DIAGRAM CARTESIUS
+          UNSUR-UNSUR PADA DIAGRAM KARTESIUS
         </h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Peta Koordinat — Bahasa Universal Matematika!
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Cartesius · Materi Matematika</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Kartesius · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
@@ -122,11 +122,11 @@ const UnsurUnsurCartesiusPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Saat kamu share lokasi ke teman lewat Google Maps, kamu sebenarnya sedang berbagi dua angka: garis lintang dan garis bujur. Itulah konsep <strong className="text-cyan-300">koordinat</strong>! Dalam matematika, kita menggunakan <strong className="text-cyan-300">Diagram Cartesius</strong> — sebuah sistem peta angka yang diciptakan filsuf Prancis René Descartes — untuk menentukan posisi setiap titik di bidang datar secara tepat dan jelas.
+                  Saat kamu share lokasi ke teman lewat Google Maps, kamu sebenarnya sedang berbagi dua angka: garis lintang dan garis bujur. Itulah konsep <strong className="text-cyan-300">koordinat</strong>! Dalam matematika, kita menggunakan <strong className="text-cyan-300">Diagram Kartesius</strong> — sebuah sistem peta angka yang diciptakan filsuf Prancis René Descartes — untuk menentukan posisi setiap titik di bidang datar secara tepat dan jelas.
                 </p>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Fakta keren:</strong> Nama "Cartesius" berasal dari nama Latin René Descartes (Renatus Cartesius). Menurut cerita, ide sistem koordinat ini muncul saat ia berbaring di tempat tidur dan mengamati seekor lalat di langit-langit kamar. Ia berpikir: bagaimana cara menentukan posisi lalat itu secara tepat? 🪰
+                    <strong>Fakta keren:</strong> Nama "Cartesius" berasal dari nama Latin René Descartes (Renatus Kartesius). Menurut cerita, ide sistem koordinat ini muncul saat ia berbaring di tempat tidur dan mengamati seekor lalat di langit-langit kamar. Ia berpikir: bagaimana cara menentukan posisi lalat itu secara tepat? 🪰
                   </p>
                 </div>
               </div>
@@ -135,19 +135,19 @@ const UnsurUnsurCartesiusPage = () => {
 
           {/* UNSUR-UNSUR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="unsur" icon={<Grid className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Komponen Utama Diagram Cartesius" />
+            <SectionHeader id="unsur" icon={<Grid className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Komponen Utama Diagram Kartesius" />
             {expandedSections.includes("unsur") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">
-                    Diagram Cartesius terdiri dari dua garis bilangan yang saling tegak lurus. Setiap titik di bidang Cartesius dinyatakan dengan pasangan bilangan <strong className="text-cyan-300">(x, y)</strong> yang disebut <strong className="text-cyan-300">koordinat</strong>.
+                    Diagram Kartesius terdiri dari dua garis bilangan yang saling tegak lurus. Setiap titik di bidang Kartesius dinyatakan dengan pasangan bilangan <strong className="text-cyan-300">(x, y)</strong> yang disebut <strong className="text-cyan-300">koordinat</strong>.
                   </p>
                 </div>
 
                 {/* Visual diagram */}
                 <div className="bg-slate-800/70 border border-cyan-500/20 rounded-xl p-4 flex flex-col items-center gap-3">
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase">🗺️ Diagram Cartesius — Bidang Koordinat</p>
+                  <p className="font-body text-xs font-bold text-cyan-300 uppercase">🗺️ Diagram Kartesius — Bidang Koordinat</p>
                   <CoordGrid />
                 </div>
 
@@ -181,10 +181,10 @@ const UnsurUnsurCartesiusPage = () => {
 
           {/* KUADRAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="kuadran" icon={<Grid className="w-5 h-5" />} iconColor="text-violet-400" title="🧭 Empat Kuadran — Wilayah di Bidang Cartesius" />
+            <SectionHeader id="kuadran" icon={<Grid className="w-5 h-5" />} iconColor="text-violet-400" title="🧭 Empat Kuadran — Wilayah di Bidang Kartesius" />
             {expandedSections.includes("kuadran") && (
               <div className="px-5 pb-5 space-y-3">
-                <p className="font-body text-sm text-white/80">Sumbu-x dan sumbu-y membagi bidang Cartesius menjadi <strong className="text-violet-300">4 daerah</strong> yang disebut kuadran, diberi nomor romawi I, II, III, IV berlawanan arah jarum jam:</p>
+                <p className="font-body text-sm text-white/80">Sumbu-x dan sumbu-y membagi bidang Kartesius menjadi <strong className="text-violet-300">4 daerah</strong> yang disebut kuadran, diberi nomor romawi I, II, III, IV berlawanan arah jarum jam:</p>
 
                 {/* Kuadran visual */}
                 <div className="grid grid-cols-2 gap-2 text-xs font-body">
@@ -372,7 +372,7 @@ const UnsurUnsurCartesiusPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/koordinat-cartesius"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Koordinat Cartesius
+            ← Kembali ke Koordinat Kartesius
           </button>
         </div>
       </div>

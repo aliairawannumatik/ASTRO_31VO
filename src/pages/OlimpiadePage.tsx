@@ -24,7 +24,7 @@ const routes: Record<string, string> = {
   "Pola Bilangan": "/olimpiade/pola-bilangan",
   "Sistem Persamaan Linear Dua Variabel": "/olimpiade/spldv",
   "Garis dan Sudut": "/olimpiade/garis-sudut",
-  "Koordinat Cartesius": "/olimpiade/koordinat-cartesius",
+  "Koordinat Kartesius": "/olimpiade/koordinat-cartesius",
   "Teorema Pythagoras": "/olimpiade/teorema-pythagoras",
   "Segitiga & Segiempat": "/olimpiade/segitiga-segiempat",
   "Lingkaran": "/olimpiade/lingkaran",
@@ -103,7 +103,7 @@ const categories: Category[] = [
     bar: "bg-emerald-400",
     topics: [
       { name: "Garis dan Sudut", emoji: "∠" },
-      { name: "Koordinat Cartesius", emoji: "⊹" },
+      { name: "Koordinat Kartesius", emoji: "⊹" },
       { name: "Teorema Pythagoras", emoji: "△" },
       { name: "Segitiga & Segiempat", emoji: "◻" },
       { name: "Lingkaran", emoji: "○" },

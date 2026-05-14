@@ -33,7 +33,7 @@ const JarakTitikGamePage = () => (
     questions={questions}
     topicLabel="JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS"
     backPath="/math-game-arena/kelas-8/koordinat-cartesius"
-    backLabel="Kembali ke Koordinat Cartesius"
+    backLabel="Kembali ke Koordinat Kartesius"
   />
 );
 

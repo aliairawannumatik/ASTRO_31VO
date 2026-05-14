@@ -43,7 +43,7 @@ const ROTASI: BaseQ[] = [
   { q: "Rotasi 90° searah jarum jam titik (0,1) menjadi ...", opts: ["(1,0)", "(-1,0)", "(0,-1)", "(0,1)"], correct: 0 },
   { q: "Rotasi 180° titik (5,2) menghasilkan ...", opts: ["(5,2)", "(-5,2)", "(5,-2)", "(-5,-2)"], correct: 3 },
   { q: "Putaran setengah lingkaran sama dengan rotasi ...", opts: ["90°", "180°", "270°", "360°"], correct: 1 },
-  { q: "Pusat rotasi pada bidang Cartesius biasanya di ...", opts: ["(0,0)", "(1,1)", "(2,2)", "sembarang"], correct: 0 },
+  { q: "Pusat rotasi pada bidang Kartesius biasanya di ...", opts: ["(0,0)", "(1,1)", "(2,2)", "sembarang"], correct: 0 },
   { q: "Rotasi 90° berlawanan arah jam dari (2,0) = ...", opts: ["(0,2)", "(0,-2)", "(-2,0)", "(2,0)"], correct: 0 },
   { q: "Rotasi 180° terhadap O dari (4,-3) menghasilkan ...", opts: ["(4,3)", "(-4,3)", "(-4,-3)", "(3,4)"], correct: 1 },
   { q: "Rotasi tidak mengubah ...", opts: ["letak", "ukuran", "arah", "posisi"], correct: 1 },

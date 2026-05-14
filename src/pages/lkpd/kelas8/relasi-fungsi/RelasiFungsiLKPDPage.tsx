@@ -154,13 +154,13 @@ const guidedItems: GuidedItem[] = [
     kind: "choice",
     options: [
       "Diagram panah",
-      "Diagram Cartesius",
+      "Diagram Kartesius",
       "Himpunan pasangan berurutan",
       "Diagram batang",
     ],
     correctIndex: 3,
     discussion: [
-      "Tiga cara menyajikan relasi adalah: (1) Diagram panah, (2) Himpunan pasangan berurutan, (3) Diagram Cartesius.",
+      "Tiga cara menyajikan relasi adalah: (1) Diagram panah, (2) Himpunan pasangan berurutan, (3) Diagram Kartesius.",
       "Diagram batang dipakai untuk statistik, BUKAN untuk relasi.",
     ],
   },
@@ -321,7 +321,7 @@ const guidedItems: GuidedItem[] = [
     correctIndex: 0,
     discussion: [
       "f(x) = 2x + 1 adalah fungsi LINEAR (pangkat tertinggi x adalah 1).",
-      "Grafik fungsi linear selalu berupa GARIS LURUS pada bidang Cartesius.",
+      "Grafik fungsi linear selalu berupa GARIS LURUS pada bidang Kartesius.",
     ],
   },
   {
@@ -333,21 +333,21 @@ const guidedItems: GuidedItem[] = [
       "Tentukan beberapa nilai x (misal: −2, −1, 0, 1, 2).",
       "Hitung nilai f(x) untuk setiap x.",
       "Tulis pasangan (x, f(x)) sebagai titik koordinat.",
-      "Plot titik-titik tersebut pada bidang Cartesius.",
+      "Plot titik-titik tersebut pada bidang Kartesius.",
       "Hubungkan titik-titik dengan garis lurus.",
     ],
     correctOrder: [
       "Tentukan beberapa nilai x (misal: −2, −1, 0, 1, 2).",
       "Hitung nilai f(x) untuk setiap x.",
       "Tulis pasangan (x, f(x)) sebagai titik koordinat.",
-      "Plot titik-titik tersebut pada bidang Cartesius.",
+      "Plot titik-titik tersebut pada bidang Kartesius.",
       "Hubungkan titik-titik dengan garis lurus.",
     ],
     discussion: [
       "Pilih nilai x dulu (biasanya −2 sampai 2 cukup).",
       "Substitusi ke rumus untuk dapat nilai y = f(x).",
       "Susun tabel pasangan (x, y).",
-      "Plot setiap pasangan sebagai titik di bidang Cartesius.",
+      "Plot setiap pasangan sebagai titik di bidang Kartesius.",
       "Hubungkan titik-titiknya — untuk fungsi linear akan terbentuk GARIS LURUS.",
     ],
   },
@@ -361,7 +361,7 @@ const summaryCards: SummaryCard[] = [
   },
   {
     title: "📋 Tiga Cara Penyajian",
-    text: "Relasi/fungsi dapat disajikan dalam: (1) Diagram panah, (2) Himpunan pasangan berurutan {(x, y)}, dan (3) Diagram Cartesius (titik-titik di bidang xy).",
+    text: "Relasi/fungsi dapat disajikan dalam: (1) Diagram panah, (2) Himpunan pasangan berurutan {(x, y)}, dan (3) Diagram Kartesius (titik-titik di bidang xy).",
     tone: "violet",
   },
   {

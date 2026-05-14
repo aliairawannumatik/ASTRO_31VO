@@ -119,7 +119,7 @@ const PosisiRelatifTitikAcuanPage = () => {
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Bukan Hanya Terhadap Sumbu — Terhadap Titik Manapun!
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Cartesius · Materi Matematika</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Kartesius · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
@@ -337,7 +337,7 @@ const PosisiRelatifTitikAcuanPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/koordinat-cartesius"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Koordinat Cartesius
+            ← Kembali ke Koordinat Kartesius
           </button>
         </div>
       </div>

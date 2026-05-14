@@ -50,7 +50,7 @@ const materiRPP: { label: string; path: string; available: boolean }[] = [
   { label: "SEGITIGA DAN SEGIEMPAT", path: "/ruang-untuk-guru/rpp/segitiga-segiempat", available: true },
   { label: "HIMPUNAN", path: "/ruang-untuk-guru/rpp/himpunan", available: true },
   { label: "POLA BILANGAN", path: "/ruang-untuk-guru/rpp/pola-bilangan", available: true },
-  { label: "KOORDINAT CARTESIUS", path: "/ruang-untuk-guru/rpp/koordinat-cartesius", available: true },
+  { label: "KOORDINAT KARTESIUS", path: "/ruang-untuk-guru/rpp/koordinat-cartesius", available: true },
   { label: "RELASI DAN FUNGSI", path: "/ruang-untuk-guru/rpp/relasi-fungsi", available: true },
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/ruang-untuk-guru/rpp/spldv", available: true },
   { label: "PERSAMAAN GARIS LURUS", path: "/ruang-untuk-guru/rpp/persamaan-garis-lurus", available: true },

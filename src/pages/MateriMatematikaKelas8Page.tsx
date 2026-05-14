@@ -6,7 +6,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const topics = [
   { label: "POLA BILANGAN", path: "/materi-matematika/kelas-8/pola-bilangan" },
-  { label: "KOORDINAT CARTESIUS", path: "/materi-matematika/kelas-8/koordinat-cartesius" },
+  { label: "KOORDINAT KARTESIUS", path: "/materi-matematika/kelas-8/koordinat-cartesius" },
   { label: "RELASI DAN FUNGSI", path: "/materi-matematika/kelas-8/relasi-dan-fungsi" },
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/materi-matematika/kelas-8/spldv" },
   { label: "PERSAMAAN GARIS LURUS", path: "/materi-matematika/kelas-8/persamaan-garis-lurus" },

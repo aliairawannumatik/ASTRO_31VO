@@ -2,12 +2,12 @@ import MeteorShootingGame from "@/components/MeteorShootingGame";
 
 const questions = [
   {
-    question: "Pada bidang Cartesius, sumbu yang mendatar (horizontal) disebut ...",
+    question: "Pada bidang Kartesius, sumbu yang mendatar (horizontal) disebut ...",
     options: ["Sumbu Y", "Sumbu Z", "Sumbu X", "Ordinat"],
     correctIndex: 2,
   },
   {
-    question: "Titik O(0, 0) pada bidang Cartesius disebut ...",
+    question: "Titik O(0, 0) pada bidang Kartesius disebut ...",
     options: ["Titik koordinat", "Titik pusat", "Titik asal (origin)", "Titik acuan"],
     correctIndex: 2,
   },
@@ -31,9 +31,9 @@ const questions = [
 const UnsurUnsurCartesiusGamePage = () => (
   <MeteorShootingGame
     questions={questions}
-    topicLabel="UNSUR-UNSUR PADA DIAGRAM CARTESIUS"
+    topicLabel="UNSUR-UNSUR PADA DIAGRAM KARTESIUS"
     backPath="/math-game-arena/kelas-8/koordinat-cartesius"
-    backLabel="Kembali ke Koordinat Cartesius"
+    backLabel="Kembali ke Koordinat Kartesius"
   />
 );
 

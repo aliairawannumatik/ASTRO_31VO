@@ -416,7 +416,7 @@ const JarakTitikGarisPage = () => {
             style={{ textShadow: '0 0 20px rgba(45,212,191,0.7)' }}>
             JARAK TITIK DAN JARAK TITIK KE GARIS
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Cartesius · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
             <span className="text-teal-400 text-xs font-bold">📋 19 Soal</span>
             <span className="text-white/30 text-xs">·</span>
@@ -487,7 +487,7 @@ const JarakTitikGarisPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/koordinat-cartesius"); }}
             className="text-sm text-muted-foreground hover:text-teal-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Koordinat Cartesius
+            ← Kembali ke Koordinat Kartesius
           </button>
         </div>
       </div>

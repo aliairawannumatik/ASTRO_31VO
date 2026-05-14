@@ -91,7 +91,7 @@ const GrafikFungsiPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Grafik fungsi adalah representasi visual dari semua pasangan <InlineMath math="(x, f(x))" /> dalam bidang koordinat Cartesius. Dengan grafik, kita bisa seketika melihat sifat-sifat fungsi seperti apakah ia naik, turun, atau membentuk lengkung tertentu.
+                  Grafik fungsi adalah representasi visual dari semua pasangan <InlineMath math="(x, f(x))" /> dalam bidang koordinat Kartesius. Dengan grafik, kita bisa seketika melihat sifat-sifat fungsi seperti apakah ia naik, turun, atau membentuk lengkung tertentu.
                 </p>
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
                   <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">📊 Jenis Grafik Fungsi</p>
@@ -181,7 +181,7 @@ const GrafikFungsiPage = () => {
                   {[
                     { step: "1", title: "Buat tabel nilai", desc: "Pilih beberapa nilai x yang mudah (biasanya -2 sampai 2), hitung f(x) untuk masing-masing.", color: "border-cyan-500/30 bg-cyan-900/10" },
                     { step: "2", title: "Tentukan titik-titik koordinat", desc: "Setiap baris tabel menghasilkan titik (x, f(x)) yang akan digambar.", color: "border-violet-500/30 bg-violet-900/10" },
-                    { step: "3", title: "Plot titik di bidang koordinat", desc: "Gambar titik-titik tersebut pada sistem koordinat Cartesius.", color: "border-green-500/30 bg-green-900/10" },
+                    { step: "3", title: "Plot titik di bidang koordinat", desc: "Gambar titik-titik tersebut pada sistem koordinat Kartesius.", color: "border-green-500/30 bg-green-900/10" },
                     { step: "4", title: "Hubungkan titik-titik", desc: "Hubungkan semua titik dengan garis mulus (untuk domain real/bilangan real) atau biarkan sebagai titik-titik (untuk domain terbatas).", color: "border-orange-500/30 bg-orange-900/10" },
                   ].map(({ step, title, desc, color }) => (
                     <div key={step} className={`border ${color} rounded-lg p-3 flex gap-3`}>
@@ -404,7 +404,7 @@ const GrafikFungsiPage = () => {
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {[
-                    ["Grafik Fungsi", "Kumpulan titik (x, f(x)) yang diplot di bidang Cartesius"],
+                    ["Grafik Fungsi", "Kumpulan titik (x, f(x)) yang diplot di bidang Kartesius"],
                     ["Uji Garis Vertikal", "Jika satu garis vertikal memotong grafik di >1 titik, bukan fungsi"],
                     ["Titik Potong Sumbu-x", "Cari f(x) = 0 (y = 0)"],
                     ["Titik Potong Sumbu-y", "Hitung f(0) (x = 0)"],

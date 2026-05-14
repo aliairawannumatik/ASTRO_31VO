@@ -299,12 +299,12 @@ const soalRelasiFungsi: Question[] = [
       "A. Diagram panah",
       "B. Himpunan pasangan berurutan",
       "C. Diagram Venn",
-      "D. Diagram Cartesius"
+      "D. Diagram Kartesius"
     ],
     correctAnswer: "C. Diagram Venn",
     explanation: {
-      concept: "Relasi dapat dinyatakan dengan 3 cara: (1) Diagram panah, (2) Himpunan pasangan berurutan, (3) Diagram Cartesius.",
-      steps: ["Diagram panah → menunjukkan arah pemetaan", "Pasangan berurutan → dalam tanda kurung (a, b)", "Diagram Cartesius → titik-titik pada sumbu x dan y", "Diagram Venn digunakan untuk himpunan, bukan relasi"],
+      concept: "Relasi dapat dinyatakan dengan 3 cara: (1) Diagram panah, (2) Himpunan pasangan berurutan, (3) Diagram Kartesius.",
+      steps: ["Diagram panah → menunjukkan arah pemetaan", "Pasangan berurutan → dalam tanda kurung (a, b)", "Diagram Kartesius → titik-titik pada sumbu x dan y", "Diagram Venn digunakan untuk himpunan, bukan relasi"],
     }
   },
   {
@@ -543,7 +543,7 @@ const soalRelasiFungsi: Question[] = [
   },
   {
     id: 31, type: "PG", difficulty: "Mudah", category: "Cara Menyatakan Relasi",
-    question: "Diagram Cartesius digunakan untuk menyatakan relasi dengan cara ...",
+    question: "Diagram Kartesius digunakan untuk menyatakan relasi dengan cara ...",
     options: [
       "A. Menggambar lingkaran dan anak panah",
       "B. Menuliskan pasangan (x, y) dalam tanda kurung",
@@ -552,7 +552,7 @@ const soalRelasiFungsi: Question[] = [
     ],
     correctAnswer: "C. Membuat titik-titik pada bidang koordinat",
     explanation: {
-      concept: "Pada diagram Cartesius, anggota A ditempatkan di sumbu-x dan anggota B di sumbu-y. Relasi ditunjukkan dengan titik.",
+      concept: "Pada diagram Kartesius, anggota A ditempatkan di sumbu-x dan anggota B di sumbu-y. Relasi ditunjukkan dengan titik.",
       steps: ["Sumbu-x mewakili domain", "Sumbu-y mewakili kodomain", "Setiap pasangan (a,b) ditandai sebagai titik"],
     }
   },

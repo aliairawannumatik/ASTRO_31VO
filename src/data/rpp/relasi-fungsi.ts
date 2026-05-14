@@ -22,11 +22,11 @@ export const relasiFungsi: MateriCatalogEntry = {
       relevansi:
         "Konsep relasi tampak pada hubungan murid dengan jadwal kelas, hubungan barang dengan harga, dan menu dengan kategori pesanan.",
       strukturMateri:
-        "Bertahap dari pengertian relasi, ke cara menyatakannya (diagram panah, himpunan pasangan berurutan, diagram Cartesius).",
+        "Bertahap dari pengertian relasi, ke cara menyatakannya (diagram panah, himpunan pasangan berurutan, diagram Kartesius).",
       capaianPembelajaran: CP,
       tujuanPembelajaran:
         "Peserta didik dapat menyatakan relasi antara dua himpunan dengan tiga cara berbeda.",
-      topikPembelajaran: "Pengertian Relasi, Diagram Panah, Himpunan Pasangan Berurutan, Diagram Cartesius.",
+      topikPembelajaran: "Pengertian Relasi, Diagram Panah, Himpunan Pasangan Berurutan, Diagram Kartesius.",
       kemitraan: [
         { title: "Bahasa Indonesia", desc: "Menerjemahkan kalimat menjadi relasi antar himpunan." },
         { title: "IPS", desc: "Hubungan kategori barang dengan harga sebagai relasi." },
@@ -148,7 +148,7 @@ export const relasiFungsi: MateriCatalogEntry = {
     {
       slug: "grafik-fungsi",
       title: "Grafik Fungsi",
-      desc: "RPP menggambar grafik fungsi pada bidang koordinat Cartesius dan membaca informasinya.",
+      desc: "RPP menggambar grafik fungsi pada bidang koordinat Kartesius dan membaca informasinya.",
       icon: LineChart,
       model: "Discovery",
       dimensiProfil: [DIMENSI.beriman, DIMENSI.bernalarKritis("grafik fungsi"), DIMENSI.mandiri, DIMENSI.kreatif("visualisasi data")],
