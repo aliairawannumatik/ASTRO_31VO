@@ -60,6 +60,7 @@ const RelasiFungsiLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/RelasiFu
 const RelasiFungsiLKPDPage = lazy(() => import("./pages/lkpd/kelas8/relasi-fungsi/RelasiFungsiLKPDPage"));
 const SPLDVLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/SPLDVMenuPage"));
 const SPLDVLKPDPage = lazy(() => import("./pages/lkpd/kelas8/spldv/SPLDVLKPDPage"));
+const SPLDVMetodeEliminasiLKPDPage = lazy(() => import("./pages/lkpd/kelas8/spldv/MetodeEliminasiLKPDPage"));
 const PersamaanGarisLurusLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage"));
 const PersamaanGarisLurusLKPDPage = lazy(() => import("./pages/lkpd/kelas8/persamaan-garis-lurus/PersamaanGarisLurusLKPDPage"));
 const TeoremaPythagorasLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/TeoremaPythagorasMenuPage"));
@@ -922,6 +923,7 @@ const AppInner = () => {
           <Route path="/lkpd/kelas-8/relasi-dan-fungsi/lkpd" element={<RelasiFungsiLKPDPage />} />
           <Route path="/lkpd/kelas-8/spldv" element={<SPLDVLKPDMenuPage />} />
           <Route path="/lkpd/kelas-8/spldv/lkpd" element={<SPLDVLKPDPage />} />
+          <Route path="/lkpd/kelas-8/spldv/metode-eliminasi" element={<SPLDVMetodeEliminasiLKPDPage />} />
           <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
           <Route path="/lkpd/kelas-8/persamaan-garis-lurus/lkpd" element={<PersamaanGarisLurusLKPDPage />} />
           <Route path="/lkpd/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasLKPDMenuPage />} />
