@@ -783,9 +783,9 @@ const OlimpiadePolaBilanganPage = () => {
                 )}
                 {soal.no === 1 && (
                   <div className="my-3 flex flex-col items-center gap-1">
-                    <div className="bg-white rounded-xl p-3 shadow-md max-w-xs w-full flex justify-center">
+                    <div className="bg-white rounded-xl p-3 shadow-md max-w-sm w-full flex justify-center">
                       <img
-                        src={imgPolaBuilatan}
+                        src="/images/pola-bilangan-olimp-no1.jpg"
                         alt="Pola bulatan hitam dan putih OSN 2003"
                         className="max-w-full h-auto object-contain"
                       />
