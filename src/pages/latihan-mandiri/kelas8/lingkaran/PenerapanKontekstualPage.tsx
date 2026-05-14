@@ -96,77 +96,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Kue Ulang Tahun Melingkar", {
-    type: "essay",
-    content: "Kue ulang tahun berbentuk silinder (tabung) dengan diameter 28 cm dan tinggi 8 cm. Permukaannya akan dihias krim.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas alas kue (lingkaran). (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", math: "\\text{Hitung luas samping kue (keliling × tinggi).}" },
-      { label: "c.", text: "Hitung luas total permukaan kue yang perlu dihias krim (atas + samping)." },
-    ],
-  }),
-
-  Q(8, "Cat Dinding Melingkar", {
-    type: "essay",
-    content: "Dinding lingkaran gedung berjari-jari 7 m akan dicat. Satu kaleng cat cukup untuk 10 m². Harga 1 kaleng cat Rp 85.000.",
-    parts: [
-      { label: "a.", text: "Hitung luas lantai lingkaran." },
-      { label: "b.", text: "Berapa kaleng cat yang diperlukan?" },
-      { label: "c.", text: "Berapa total biaya pengecatan?" },
-    ],
-  }),
-
-  Q(9, "Cat Dinding Melingkar", {
-    type: "essay",
-    content: "Proyek pembangunan taman:\n• Taman berbentuk lingkaran r = 21 m\n• Jalan setapak lebar 3,5 m di sekeliling taman\n• Biaya jalan: Rp 150.000/m²\n• Biaya tanaman taman: Rp 30.000/m²",
-    parts: [
-      { label: "a.", text: "Hitung luas taman (tanpa jalan)." },
-      { label: "b.", text: "Hitung luas jalan setapak." },
-      { label: "c.", text: "Hitung total anggaran proyek (taman + jalan)." },
-    ],
-  }),
-
-  Q(10, "Soal ANBK — Proyek Taman", {
-    type: "essay",
-    content: "Baling-baling kincir angin membentuk 3 juring sama besar dengan panjang baling-baling 7 m.",
-    parts: [
-      { label: "a.", text: "Berapakah sudut setiap juring baling-baling?" },
-      { label: "b.", math: "\\text{Hitung luas satu baling-baling. (} \\pi = \\tfrac{22}{7})" },
-      { label: "c.", text: "Jika kincir berputar 20 kali/menit, berapa meter ujung baling-baling bergerak per menit?" },
-    ],
-  }),
-
-  Q(11, "Kincir Angin (Windmill)", {
-    type: "essay",
-    content: "Sistem irigasi menggunakan pompa yang berputar melingkar dengan jangkauan 56 m. Pompa berputar 4 jam untuk mengairi seluruh area.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas area yang diairi. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Jika pompa berputar pada kecepatan sudut 90°/jam, berapa jam untuk satu putaran penuh?" },
-      { label: "c.", text: "Berapa luas yang diairi dalam 1 jam pertama?" },
-    ],
-  }),
-
-  Q(12, "Soal TKA — Pompa Air Melingkar", {
-    type: "essay",
-    content: "Sebuah ruangan berbentuk persegi panjang 7 m × 5 m. Di tengahnya diletakkan karpet melingkar berjari-jari 2 m.",
-    parts: [
-      { label: "a.", text: "Hitung luas ruangan." },
-      { label: "b.", text: "Hitung luas karpet." },
-      { label: "c.", text: "Berapa persen luas ruangan yang tertutup karpet?" },
-    ],
-  }),
-
-  Q(13, "Karpet Melingkar", {
-    type: "essay",
-    content: "Sebuah drum minyak berbentuk silinder memiliki diameter 56 cm. Dinding samping drum akan diberi stiker melingkar setinggi 30 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling alas drum. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Hitung luas stiker (keliling × tinggi stiker)." },
-      { label: "c.", text: "Jika harga stiker Rp 500/cm², berapa biaya stiker satu drum?" },
-    ],
-  }),
-
-  Q(14, "Soal UN — Drum Silinder", {
+  Q(7, "Soal UN — Drum Silinder", {
     type: "essay",
     img: "/image_1778761973928.png",
     imgAlt: "Nelayan melempar jaring ikan berbentuk lingkaran dari perahu",
@@ -178,7 +108,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Soal ANBK — Penangkap Ikan Jaring Melingkar", {
+  Q(8, "Soal ANBK — Penangkap Ikan Jaring Melingkar", {
     type: "essay",
     img: "/image_1778762091357.png",
     imgAlt: "Meja makan berbentuk lingkaran dengan taplak meja putih",
@@ -190,7 +120,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(16, "Meja Makan Melingkar", {
+  Q(9, "Meja Makan Melingkar", {
     type: "essay",
     img: "/image_1778762340281.png",
     imgAlt: "Diagram geometri orbit satelit mengelilingi bumi",
@@ -202,17 +132,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(17, "Soal TKA — Satelit Mengorbit Bumi", {
-    type: "essay",
-    content: "Sebuah ember berbentuk silinder (bagian atas saja) dengan diameter 28 cm. Akan dipasang cincin kawat di bibir ember.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling bibir ember. (} \\pi = \\tfrac{22}{7})" },
-      { label: "b.", text: "Berapa meter kawat yang dibutuhkan?" },
-      { label: "c.", text: "Jika harga kawat Rp 3.000/meter, berapa biaya kawat untuk 10 ember?" },
-    ],
-  }),
-
-  Q(18, "Ban Mobil", {
+  Q(10, "Ban Mobil", {
     type: "essay",
     img: "/image_1778762645992.png",
     imgAlt: "Ban mobil melingkar di jalan basah malam hari",
@@ -224,47 +144,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "Soal UN — Ember Bundar", {
-    type: "essay",
-    content: "Lapangan basket memiliki lingkaran tengah berjari-jari 1,8 m dan dua lingkaran luar berjari-jari 6,5 m.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas lingkaran tengah. (} \\pi = 3{,}14)" },
-      { label: "b.", text: "Hitung luas satu lingkaran luar." },
-      { label: "c.", text: "Hitung total luas ketiga lingkaran di lapangan basket." },
-    ],
-  }),
-
-  Q(20, "Ban Mobil", {
-    type: "essay",
-    content: "Sebuah kaleng berbentuk tabung dengan diameter 14 cm. Label kertas akan ditempel mengelilingi kaleng setinggi 10 cm.",
-    parts: [
-      { label: "a.", text: "Hitung keliling alas kaleng." },
-      { label: "b.", text: "Hitung luas label kertas yang diperlukan." },
-      { label: "c.", text: "Jika kertas dijual per lembar 30 cm × 50 cm, berapa lembar yang diperlukan untuk 20 kaleng?" },
-    ],
-  }),
-
-  Q(21, "Soal ANBK — Lapangan Basket", {
-    type: "essay",
-    content: "Generator listrik memiliki roda dengan jari-jari 0,5 m yang berputar 60 kali per menit.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling roda. (} \\pi = 3{,}14)" },
-      { label: "b.", text: "Berapa meter jarak yang ditempuh tepi roda per menit?" },
-      { label: "c.", text: "Berapa km jarak yang ditempuh tepi roda dalam 1 jam?" },
-    ],
-  }),
-
-  Q(22, "Tabung Kaleng", {
-    type: "essay",
-    content: "Sebuah ruangan berbentuk lingkaran berjari-jari 7 m. Lantainya akan dicat dengan harga Rp 45.000/m².",
-    parts: [
-      { label: "a.", text: "Hitung luas lantai." },
-      { label: "b.", text: "Hitung biaya pengecatan lantai." },
-      { label: "c.", text: "Jika ada 5% bahan yang terbuang, berapa total cat yang dibeli (dalam m²)?" },
-    ],
-  }),
-
-  Q(23, "Soal UN — Kolam Ikan", {
+  Q(11, "Soal UN — Kolam Ikan", {
     type: "essay",
     img: "/image_1778762749930.png",
     imgAlt: "Kolam ikan berbentuk lingkaran tampak atas dengan pemilik memberi pakan",
@@ -276,157 +156,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(24, "Soal TKA — Menghitung Laju Putaran", {
-    type: "essay",
-    content: "Menara air berbentuk tabung dengan diameter 7 m dan tinggi 10 m. Dinding luar akan dicat.",
-    parts: [
-      { label: "a.", text: "Hitung luas dinding samping (keliling × tinggi)." },
-      { label: "b.", text: "Hitung luas satu tutup atas (lingkaran)." },
-      { label: "c.", text: "Hitung total luas yang dicat (dinding + tutup atas)." },
-    ],
-  }),
-
-  Q(25, "Harga Cat Ruangan Melingkar", {
-    type: "essay",
-    content: "Pipa air berbentuk silinder memiliki diameter dalam 14 cm. Air mengalir memenuhi seluruh luas penampang pipa.",
-    parts: [
-      { label: "a.", text: "Hitung luas penampang pipa." },
-      { label: "b.", text: "Jika kecepatan aliran air 2 m/s, berapa liter air mengalir per detik? (1 m³ = 1000 liter)" },
-      { label: "c.", text: "Berapa liter air yang mengalir dalam 1 jam?" },
-    ],
-  }),
-
-  Q(26, "Soal UN — Kolam Ikan", {
-    type: "essay",
-    content: "Bulan mengelilingi bumi dengan orbit hampir melingkar berjari-jari ≈ 384.000 km. Satu putaran = 27 hari.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling orbit bulan. (} \\pi \\approx 3{,}14)" },
-      { label: "b.", text: "Hitung kecepatan bulan dalam km/hari." },
-      { label: "c.", text: "Hitung kecepatan bulan dalam km/jam." },
-    ],
-  }),
-
-  Q(27, "Menara Air (Water Tower)", {
-    type: "essay",
-    content: "Sebuah stadion membutuhkan lapangan sepak bola yang dikelilingi lintasan lari melingkar. Diameter total (lapangan + lintasan) = 224 m. Lintasan lebar 14 m.",
-    parts: [
-      { label: "a.", text: "Tentukan diameter lapangan sepak bola berbentuk lingkaran." },
-      { label: "b.", text: "Hitung luas lapangan sepak bola." },
-      { label: "c.", text: "Hitung luas lintasan lari." },
-    ],
-  }),
-
-  Q(28, "Soal ANBK — Drainase Pipa", {
-    type: "essay",
-    content: "Kompas menunjukkan arah dalam lingkaran penuh (360°). Kapal bergerak dari Utara (90°) searah jarum jam ke arah Timur Laut (45°).",
-    parts: [
-      { label: "a.", text: "Berapa derajat kapal berputar?" },
-      { label: "b.", text: "Jika jangkauan radar kapal 14 km, berapa km² area yang dimonitor dalam sektor 45° tersebut?" },
-      { label: "c.", text: "Berapa persen dari seluruh area lingkaran radar?" },
-    ],
-  }),
-
-  Q(29, "Soal TKA — Bumi dan Bulan", {
-    type: "essay",
-    content: "Atlet lempar cakram melempar dari lingkaran berdiameter 2,5 m. Cakram mendarat 45 m dari pusat lingkaran.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung keliling lingkaran lempar cakram. (} \\pi = 3{,}14)" },
-      { label: "b.", text: "Luas daerah yang mungkin ditempuh cakram (dari pusat dengan jari-jari 45 m) adalah berapa m²?" },
-      { label: "c.", text: "Jika daerah aman = luas seluruh sektor 60° dengan r = 45 m, berapa luasnya?" },
-    ],
-  }),
-
-  Q(30, "Soal UN — Persyaratan Lahan", {
-    type: "essay",
-    content: "Kincir ria memiliki diameter 42 m. Pusat kincir berada 21 m di atas tanah. Kincir berputar 1 kali setiap 3 menit.",
-    parts: [
-      { label: "a.", text: "Hitung keliling kincir ria." },
-      { label: "b.", text: "Berapa kecepatan tepi kincir (m/menit)?" },
-      { label: "c.", text: "Pada posisi tertinggi, berapa meter posisi penumpang dari tanah?" },
-    ],
-  }),
-
-  Q(31, "Kompas dan Arah", {
-    type: "essay",
-    content: "Drone terbang melingkar dengan jari-jari 100 m dari menara pusat. Kamera mengambil gambar area di bawahnya.",
-    parts: [
-      { label: "a.", math: "\\text{Hitung luas area yang bisa dipotret (lingkaran). (} \\pi = 3{,}14)" },
-      { label: "b.", text: "Jika drone hanya terbang setengah lingkaran, berapa luas area foto?" },
-      { label: "c.", text: "Berapa km² total area jika jari-jari ditingkatkan menjadi 200 m?" },
-    ],
-  }),
-
-  Q(32, "Soal ANBK — Lempar Cakram", {
-    type: "essay",
-    content: "Di toko terdapat dua jenis kue melingkar:\nKue A: diameter 28 cm, harga Rp 84.000\nKue B: diameter 14 cm, harga Rp 24.000",
-    parts: [
-      { label: "a.", text: "Hitung luas kue A dan kue B." },
-      { label: "b.", text: "Hitung harga per cm² kue A dan kue B." },
-      { label: "c.", text: "Kue mana yang lebih hemat? Jelaskan!" },
-    ],
-  }),
-
-  Q(33, "Kincir Ria (Ferris Wheel)", {
-    type: "essay",
-    content: "Sebuah kebun berbentuk lingkaran berjari-jari 28 m akan diwariskan kepada 4 orang anak secara sama rata.",
-    parts: [
-      { label: "a.", text: "Hitung luas kebun seluruhnya." },
-      { label: "b.", text: "Hitung luas bagian yang diterima setiap anak." },
-      { label: "c.", text: "Jika harga tanah Rp 500.000/m², berapa nilai kebun setiap anak?" },
-    ],
-  }),
-
-  Q(34, "Soal TKA — Pengambilan Gambar Drone", {
-    type: "essay",
-    content: "Pipa berbentuk cincin dengan diameter luar 42 cm dan diameter dalam 28 cm akan digunakan sebagai saluran air.",
-    parts: [
-      { label: "a.", text: "Hitung luas penampang pipa (cincin/annulus)." },
-      { label: "b.", text: "Jika air mengalir dengan kecepatan 5 m/s, berapa liter per detik debit airnya?" },
-      { label: "c.", text: "Berapa liter yang mengalir dalam 10 menit?" },
-    ],
-  }),
-
-  Q(35, "Soal UN — Memilih Produk", {
-    type: "essay",
-    content: "Dua reaktor kimia berbentuk lingkaran: Reaktor P (r = 14 m) dan Reaktor Q (r = 7 m).",
-    parts: [
-      { label: "a.", text: "Berapa perbandingan luas Reaktor P : Reaktor Q?" },
-      { label: "b.", text: "Jika biaya operasi sebanding luas, dan biaya reaktor Q = Rp 100 juta, berapa biaya reaktor P?" },
-      { label: "c.", text: "Apakah lebih efisien menggunakan 1 reaktor P atau 4 reaktor Q? (Bandingkan luas total!)" },
-    ],
-  }),
-
-  Q(36, "Soal ANBK — Pembagian Warisan", {
-    type: "essay",
-    content: "Sebuah lahan berbentuk lingkaran dengan jari-jari 21 m akan dibagi menjadi 3 bagian sama besar.",
-    parts: [
-      { label: "a.", text: "Hitung luas total lahan. (π = 22/7)" },
-      { label: "b.", text: "Berapa luas masing-masing bagian?" },
-      { label: "c.", text: "Jika harga tanah Rp 500.000/m², berapa nilai setiap bagian?" },
-    ],
-  }),
-
-  Q(37, "Soal TKA — Jalur Pipa Melingkar", {
-    type: "essay",
-    content: "Sebuah jalur pipa melingkar memiliki diameter luar 56 cm dan diameter dalam 42 cm.",
-    parts: [
-      { label: "a.", text: "Hitung luas penampang pipa. (π = 22/7)" },
-      { label: "b.", text: "Jika pipa sepanjang 10 m, berapa volume bahan pipa tersebut?" },
-      { label: "c.", text: "Jika berat jenis bahan = 2 kg/cm³, berapa berat total pipa?" },
-    ],
-  }),
-
-  Q(38, "Soal UN — Perbandingan Efisiensi", {
-    type: "essay",
-    content: "Dua kipas angin berbentuk lingkaran: Kipas A berjari-jari 28 cm dan Kipas B berjari-jari 14 cm.",
-    parts: [
-      { label: "a.", text: "Berapa perbandingan luas Kipas A : Kipas B?" },
-      { label: "b.", text: "Jika 4 kipas B digunakan, apakah luasnya sama dengan 1 kipas A?" },
-      { label: "c.", text: "Manakah yang lebih efisien dari segi biaya jika harga sebanding luas?" },
-    ],
-  }),
-
-  Q(39, "Soal ANBK Gabungan — Desain Taman Terpadu", {
+  Q(12, "Soal ANBK Gabungan — Desain Taman Terpadu", {
     type: "mixed",
     diagram: {
       size: 220,
@@ -469,7 +199,7 @@ const PenerapanKontekstualPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 39 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
