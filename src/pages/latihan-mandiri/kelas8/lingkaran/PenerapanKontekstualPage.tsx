@@ -72,6 +72,9 @@ const questions: Q[] = [
 
   Q(5, "Taman Kota Melingkar", {
     type: "essay",
+    img: "/soal-taman-kota.png",
+    imgAlt: "Taman kota berbentuk lingkaran tampak atas",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Taman kota berbentuk lingkaran berjari-jari 70 m. Sekeliling taman akan dipasangi pagar dengan harga Rp 250.000 per meter.",
     parts: [
       { label: "a.", math: "\\text{Hitung keliling taman. (} \\pi = \\tfrac{22}{7})" },
