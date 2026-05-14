@@ -12,7 +12,7 @@ type Q = {
   n: number; title: string;
   content?: string;
   parts?: Part[]; diagram?: CircleDiagramProps;
-  img?: string; imgAlt?: string;
+  img?: string; imgAlt?: string; imgCaption?: string;
   type: "essay" | "mixed";
 };
 const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
@@ -22,26 +22,6 @@ const questions: Q[] = [
     type: "mixed",
     img: "/soal-roda-sepeda.png",
     imgAlt: "Roda sepeda dengan jari-jari 35 cm",
-    diagram: {
-      size: 220, r: 0.62,
-      pts: [
-        { angle: 90, label: "", color: "#94a3b8" },
-        { angle: 210, label: "", color: "#94a3b8" },
-        { angle: 330, label: "", color: "#94a3b8" },
-        { angle: 30, label: "", color: "#94a3b8" },
-        { angle: 150, label: "", color: "#94a3b8" },
-        { angle: 270, label: "", color: "#94a3b8" },
-      ],
-      radii: [
-        { angle: 90, color: "rgba(148,163,184,0.4)" },
-        { angle: 210, color: "rgba(148,163,184,0.4)" },
-        { angle: 330, color: "rgba(148,163,184,0.4)" },
-        { angle: 30, color: "rgba(148,163,184,0.4)" },
-        { angle: 150, color: "rgba(148,163,184,0.4)" },
-        { angle: 270, color: "rgba(148,163,184,0.4)" },
-      ],
-      extraTexts: [{ x: 110, y: 200, text: "r = 35 cm", color: "#60a5fa", size: 10, bold: true }],
-    },
     content: "Roda sepeda berjari-jari 35 cm berputar di jalan.",
     parts: [
       { label: "a.", math: "\\text{Hitung keliling roda. (} \\pi = \\tfrac{22}{7})" },
@@ -52,6 +32,9 @@ const questions: Q[] = [
 
   Q(2, "Kolam Renang Melingkar", {
     type: "essay",
+    img: "/soal-kolam-renang.png",
+    imgAlt: "Kolam renang berbentuk lingkaran tampak atas",
+    imgCaption: "https://www.bing.com/images/create/ai-image-generator",
     content: "Sebuah kolam renang berbentuk lingkaran berdiameter 28 m. Di sekeliling kolam dibuat jalan setapak lebar 3,5 m.",
     parts: [
       { label: "a.", math: "\\text{Hitung luas kolam renang. (} \\pi = \\tfrac{22}{7})" },
@@ -529,8 +512,14 @@ const PenerapanKontekstualPage = () => {
                       {q.title}
                     </span>
                     {q.img && (
-                      <div className="mb-3 flex justify-center">
+                      <div className="mb-3 flex flex-col items-center gap-1">
                         <img src={q.img} alt={q.imgAlt ?? ""} className="max-w-[220px] w-full object-contain rounded-lg bg-white/90 p-2" />
+                        {q.imgCaption && (
+                          <a href={q.imgCaption} target="_blank" rel="noopener noreferrer"
+                            className="text-[10px] text-white/40 hover:text-rose-300 transition-colors break-all text-center font-body">
+                            {q.imgCaption}
+                          </a>
+                        )}
                       </div>
                     )}
                     {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
