@@ -257,6 +257,7 @@ const PerkalianDuaDigitPage = lazy(() => import("./pages/menghitung-cepat/Perkal
 const PembagianCepatPage = lazy(() => import("./pages/menghitung-cepat/PembagianCepatPage"));
 const TabelReferensiPage = lazy(() => import("./pages/menghitung-cepat/TabelReferensiPage"));
 const LatihanFlashcardPage = lazy(() => import("./pages/menghitung-cepat/LatihanFlashcardPage"));
+const GameLatihanHitungCepatPage = lazy(() => import("./pages/menghitung-cepat/GameLatihanHitungCepatPage"));
 
 // Latihan Mandiri
 const LatihanMandiriPage = lazy(() => import("./pages/LatihanMandiriPage"));
@@ -1104,6 +1105,7 @@ const AppInner = () => {
           <Route path="/menghitung-cepat/pembagian-cepat" element={<PembagianCepatPage />} />
           <Route path="/menghitung-cepat/tabel-referensi" element={<TabelReferensiPage />} />
           <Route path="/menghitung-cepat/latihan-flashcard" element={<LatihanFlashcardPage />} />
+          <Route path="/menghitung-cepat/game-latihan" element={<GameLatihanHitungCepatPage />} />
 
           {/* Latihan Mandiri Routes */}
           <Route path="/latihan-mandiri" element={<LatihanMandiriPage />} />

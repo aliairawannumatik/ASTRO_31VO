@@ -12,6 +12,7 @@ import {
   Calculator,
   BookOpen,
   Brain,
+  Gamepad2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
@@ -121,6 +122,25 @@ const MenghitungCepatPage = () => {
           <span className="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-body px-3 py-1 rounded-full">
             🏆 Cocok untuk ANBK & UN
           </span>
+        </div>
+
+        <div className="mb-4">
+          <button
+            onClick={() => handleClick("/menghitung-cepat/game-latihan")}
+            className="group w-full bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-fuchsia-500/15 backdrop-blur border border-amber-500/40 hover:border-amber-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
+          >
+            <div className="flex items-start gap-4">
+              <Gamepad2 className="w-8 h-8 text-amber-300 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
+              <div>
+                <h3 className="font-display text-base font-bold text-amber-200 mb-1 leading-tight">
+                  🎮 GAME LATIHAN HITUNG CEPAT
+                </h3>
+                <p className="text-xs text-white/70 font-body leading-relaxed">
+                  Hajar Mol, Galaksi Defender Math, dan Bubble Pop — asah reflek berhitung lewat game interaktif yang seru!
+                </p>
+              </div>
+            </div>
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
