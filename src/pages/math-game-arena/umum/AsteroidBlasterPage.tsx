@@ -187,7 +187,8 @@ const AsteroidBlasterPage = () => {
 
     if (img) {
       // Rotate 180° if needed (so nose faces downward toward player)
-      if (def.rotate) {
+      // def may be undefined for boss (imgIdx=4 has no ENEMY_DEFS entry)
+      if (def?.rotate) {
         ctx.translate(cx, cy);
         ctx.rotate(Math.PI);
         ctx.drawImage(img, -e.w / 2, -e.h / 2, e.w, e.h);
