@@ -297,6 +297,7 @@ const KalimatTerbukaTertutupK7Page = lazy(() => import("./pages/latihan-mandiri/
 const PengertianPLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/PengertianPLSVPage"));
 const PenyelesaianPLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPLSVPage"));
 const ModelMatematikaPLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPLSVPage"));
+const PengertianPtLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/PengertianPtLSVPage"));
 const PenyelesaianPtLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPtLSVPage"));
 const ModelMatematikaPtLSVK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPtLSVPage"));
 const PerbandinganK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/PerbandinganPage"));
@@ -1143,6 +1144,7 @@ const AppInner = () => {
           <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVK7Page />} />
           <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVK7Page />} />
           <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVK7Page />} />
+          <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVK7Page />} />
           <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVK7Page />} />
           <Route path="/latihan-mandiri/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVK7Page />} />
           <Route path="/latihan-mandiri/kelas-7/perbandingan" element={<PerbandinganK7Page />} />
