@@ -199,6 +199,12 @@ const SubmaterialGameVariantsChooser = () => {
                       alt="Pesawat"
                       className="w-10 h-12 drop-shadow-[0_0_12px_rgba(0,200,255,0.6)]"
                     />
+                  ) : v.variantSlug === "galaksi-tempur" ? (
+                    <img
+                      src="/raja.png"
+                      alt="Raja Musuh"
+                      className="w-11 h-12 drop-shadow-[0_0_14px_rgba(236,72,153,0.8)]"
+                    />
                   ) : (
                     <span className="text-4xl">{v.emoji}</span>
                   )}

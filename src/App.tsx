@@ -1357,6 +1357,7 @@ const AppInner = () => {
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/turtle-run" element={<PembagianTurtleRunGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/tetris" element={<PembagianTetrisGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/snake-math" element={<PembagianSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/pesawat-tembak-meteor" element={<OperasiCampuranMeteorGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/flappy-rocket" element={<OperasiCampuranFlappyRocketGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tembak-tank" element={<OperasiCampuranTembakTankGameMGAK7Page />} />
@@ -1364,6 +1365,7 @@ const AppInner = () => {
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/turtle-run" element={<OperasiCampuranTurtleRunGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/tetris" element={<OperasiCampuranTetrisGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/snake-math" element={<OperasiCampuranSnakeMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/pesawat-tembak-meteor" element={<KPKFPBMeteorGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/flappy-rocket" element={<KPKFPBFlappyRocketGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/tembak-tank" element={<KPKFPBTembakTankGameMGAK7Page />} />
