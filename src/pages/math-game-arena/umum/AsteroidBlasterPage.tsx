@@ -22,7 +22,7 @@ const BOSS_PTS = 200;
 // ── Types ──────────────────────────────────────────────────────────────────
 let _uid = 0;
 interface Player { x: number; y: number; w: number; h: number; invincible: number }
-interface Bullet { id: number; x: number; y: number; vx: number; vy: number; isEnemy: boolean }
+interface Bullet { id: number; x: number; y: number; vx: number; vy: number; isEnemy: boolean; powerType?: PowerType }
 interface Enemy {
   id: number; x: number; y: number; w: number; h: number;
   hp: number; maxHp: number; vx: number; vy: number;
@@ -37,6 +37,16 @@ interface Star { x: number; y: number; r: number; spd: number }
 interface ScorePop { x: number; y: number; txt: string; alpha: number; vy: number }
 
 type Phase = "idle" | "playing" | "dead";
+type PowerType = "spread" | "rapid" | "double" | "laser";
+
+interface PowerUp { id: number; x: number; y: number; type: PowerType; vy: number; pulse: number }
+
+const POWER_DEFS: Record<PowerType, { label: string; color: string; icon: string; duration: number; cooldown: number }> = {
+  spread: { label: "SPREAD", color: "#facc15", icon: "✦", duration: 8,  cooldown: 0.18 },
+  rapid:  { label: "RAPID",  color: "#22d3ee", icon: "⚡", duration: 8,  cooldown: 0.06 },
+  double: { label: "DOUBLE", color: "#c084fc", icon: "▲▲", duration: 8, cooldown: 0.14 },
+  laser:  { label: "LASER",  color: "#f87171", icon: "☄",  duration: 6,  cooldown: 0.24 },
+};
 
 // imgIdx → file, glow, rotate180  (hp=1: semua musuh kecil hancur 1 tembakan)
 const ENEMY_DEFS = [
@@ -103,6 +113,12 @@ const AsteroidBlasterPage = () => {
   const diffTierRef = useRef(0);
   const tierAlertTimerRef = useRef(0);
 
+  // Power-up refs
+  const powerUpsRef = useRef<PowerUp[]>([]);
+  const activePowerRef = useRef<PowerType | null>(null);
+  const powerTimerRef = useRef(0);
+  const powerSpawnTimerRef = useRef(14);
+
   // React state
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
@@ -113,6 +129,8 @@ const AsteroidBlasterPage = () => {
   const [bossAlert, setBossAlert] = useState(false);
   const [diffTier, setDiffTier] = useState(0);
   const [tierAlert, setTierAlert] = useState(false);
+  const [activePower, setActivePower] = useState<PowerType | null>(null);
+  const [powerTimeLeft, setPowerTimeLeft] = useState(0);
 
   // ── Spawn helpers ──────────────────────────────────────────────────────
   const spawnParticles = useCallback((x: number, y: number, color: string, n = 12) => {
@@ -260,10 +278,13 @@ const AsteroidBlasterPage = () => {
     elapsedRef.current = 0; spawnTimerRef.current = 0; waveRef.current = 0;
     nextBossAtRef.current = BOSS_INTERVAL; bossAlertTimerRef.current = 0;
     diffTierRef.current = 0; tierAlertTimerRef.current = 0;
+    powerUpsRef.current = []; activePowerRef.current = null;
+    powerTimerRef.current = 0; powerSpawnTimerRef.current = 14;
     joyActiveRef.current = false; joyDirRef.current = { x: 0, y: 0 };
     fireRef.current = false; shootCoolRef.current = 0;
     setScore(0); setLives(3); setJoyActive(false); setJoyHandle({ x: 55, y: 55 });
     setBossAlert(false); setDiffTier(0); setTierAlert(false);
+    setActivePower(null); setPowerTimeLeft(0);
     starsRef.current = Array.from({ length: 90 }, () => ({
       x: Math.random() * CW, y: Math.random() * CH,
       r: 0.4 + Math.random() * 1.6, spd: 30 + Math.random() * 70,
@@ -333,8 +354,61 @@ const AsteroidBlasterPage = () => {
       if (shootCoolRef.current > 0) shootCoolRef.current -= dt;
       if ((keysRef.current[" "] || fireRef.current) && shootCoolRef.current <= 0) {
         const cx2 = p.x + p.w / 2;
-        bulletsRef.current.push({ id: _uid++, x: cx2, y: p.y + 4, vx: 0, vy: -BULLET_SPD, isEnemy: false });
-        shootCoolRef.current = 0.17;
+        const ap = activePowerRef.current;
+        if (ap === "spread") {
+          [-0.5, -0.25, 0, 0.25, 0.5].forEach(a => {
+            bulletsRef.current.push({ id: _uid++, x: cx2, y: p.y + 4, vx: Math.sin(a) * BULLET_SPD, vy: -Math.cos(a) * BULLET_SPD, isEnemy: false, powerType: "spread" });
+          });
+        } else if (ap === "rapid") {
+          bulletsRef.current.push({ id: _uid++, x: cx2, y: p.y + 4, vx: 0, vy: -BULLET_SPD, isEnemy: false, powerType: "rapid" });
+        } else if (ap === "double") {
+          bulletsRef.current.push({ id: _uid++, x: cx2 - 13, y: p.y + 4, vx: 0, vy: -BULLET_SPD, isEnemy: false, powerType: "double" });
+          bulletsRef.current.push({ id: _uid++, x: cx2 + 13, y: p.y + 4, vx: 0, vy: -BULLET_SPD, isEnemy: false, powerType: "double" });
+        } else if (ap === "laser") {
+          bulletsRef.current.push({ id: _uid++, x: cx2, y: p.y + 4, vx: 0, vy: -BULLET_SPD * 1.4, isEnemy: false, powerType: "laser" });
+        } else {
+          bulletsRef.current.push({ id: _uid++, x: cx2, y: p.y + 4, vx: 0, vy: -BULLET_SPD, isEnemy: false });
+        }
+        shootCoolRef.current = ap ? POWER_DEFS[ap].cooldown : 0.17;
+      }
+
+      // ── Power-up spawn (periodic) ─────────────────────────────────────
+      powerSpawnTimerRef.current -= dt;
+      if (powerSpawnTimerRef.current <= 0) {
+        const types: PowerType[] = ["spread", "rapid", "double", "laser"];
+        const t = types[Math.floor(Math.random() * types.length)];
+        powerUpsRef.current.push({ id: _uid++, x: 30 + Math.random() * (CW - 60), y: -20, type: t, vy: 55 + Math.random() * 30, pulse: 0 });
+        powerSpawnTimerRef.current = 14 + Math.random() * 10;
+      }
+
+      // ── Move power-ups + player collection ───────────────────────────
+      const killPowers = new Set<number>();
+      powerUpsRef.current.forEach(pw => {
+        pw.y += pw.vy * dt;
+        pw.pulse += dt * 3;
+        if (pw.y > CH + 20) { killPowers.add(pw.id); return; }
+        if (p.x < pw.x + 18 && p.x + p.w > pw.x - 18 && p.y < pw.y + 18 && p.y + p.h > pw.y - 18) {
+          killPowers.add(pw.id);
+          activePowerRef.current = pw.type;
+          setActivePower(pw.type);
+          powerTimerRef.current = POWER_DEFS[pw.type].duration;
+          setPowerTimeLeft(POWER_DEFS[pw.type].duration);
+          spawnParticles(pw.x, pw.y, POWER_DEFS[pw.type].color, 22);
+          scorePopRef.current.push({ x: pw.x, y: pw.y, txt: `${POWER_DEFS[pw.type].icon} ${POWER_DEFS[pw.type].label}!`, alpha: 1, vy: -80 });
+          playPopSound();
+        }
+      });
+      powerUpsRef.current = powerUpsRef.current.filter(pw => !killPowers.has(pw.id));
+
+      // ── Active power countdown ────────────────────────────────────────
+      if (activePowerRef.current) {
+        powerTimerRef.current -= dt;
+        setPowerTimeLeft(Math.max(0, powerTimerRef.current));
+        if (powerTimerRef.current <= 0) {
+          activePowerRef.current = null;
+          setActivePower(null);
+          setPowerTimeLeft(0);
+        }
       }
 
       // ── Spawn waves ──────────────────────────────────────────────────
@@ -410,7 +484,8 @@ const AsteroidBlasterPage = () => {
         enemiesRef.current.forEach(e => {
           if (killEnemies.has(e.id)) return;
           if (b.x > e.x && b.x < e.x + e.w && b.y > e.y && b.y < e.y + e.h) {
-            killBullets.add(b.id);
+            // Laser pierces — does NOT consume the bullet
+            if (b.powerType !== "laser") killBullets.add(b.id);
             e.hp--;
             if (e.hp <= 0) {
               killEnemies.add(e.id);
@@ -424,6 +499,12 @@ const AsteroidBlasterPage = () => {
                 spawnParticles(e.x + e.w / 2, e.y + e.h / 2, "#FF8800", 20);
               }
               scorePopRef.current.push({ x: e.x + e.w / 2, y: e.y + e.h / 2, txt: `+${pts}${e.isBoss ? " 👑" : ""}`, alpha: 1, vy: -75 });
+              // Drop power-up: 30% from regular enemies, 100% from boss
+              if (e.isBoss || Math.random() < 0.30) {
+                const types: PowerType[] = ["spread", "rapid", "double", "laser"];
+                const t = types[Math.floor(Math.random() * types.length)];
+                powerUpsRef.current.push({ id: _uid++, x: e.x + e.w / 2, y: e.y + e.h / 2, type: t, vy: 60, pulse: 0 });
+              }
             } else {
               spawnParticles(b.x, b.y, e.glow, e.isBoss ? 8 : 5);
             }
@@ -480,6 +561,32 @@ const AsteroidBlasterPage = () => {
     // ── Draw enemies ──────────────────────────────────────────────────
     enemiesRef.current.forEach(e => drawEnemy(ctx, e));
 
+    // ── Draw power-up items ───────────────────────────────────────────
+    powerUpsRef.current.forEach(pw => {
+      const pd = POWER_DEFS[pw.type];
+      const glow = 0.6 + 0.4 * Math.sin(pw.pulse);
+      ctx.save();
+      ctx.globalAlpha = 0.8 + 0.2 * glow;
+      ctx.shadowColor = pd.color; ctx.shadowBlur = 20 * glow;
+      // Outer ring
+      ctx.strokeStyle = pd.color; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(pw.x, pw.y, 17, 0, Math.PI * 2); ctx.stroke();
+      // Inner fill
+      const grad = ctx.createRadialGradient(pw.x, pw.y, 0, pw.x, pw.y, 14);
+      grad.addColorStop(0, pd.color + "bb"); grad.addColorStop(1, pd.color + "22");
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(pw.x, pw.y, 14, 0, Math.PI * 2); ctx.fill();
+      // Icon + label
+      ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+      ctx.fillStyle = "#fff"; ctx.textAlign = "center";
+      ctx.font = "bold 11px monospace"; ctx.textBaseline = "middle";
+      ctx.fillText(pd.icon, pw.x, pw.y - 3);
+      ctx.font = "bold 7px monospace";
+      ctx.fillText(pd.label, pw.x, pw.y + 8);
+      ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      ctx.restore();
+    });
+
     // ── Draw bullets ──────────────────────────────────────────────────
     bulletsRef.current.forEach(b => {
       ctx.save();
@@ -487,8 +594,14 @@ const AsteroidBlasterPage = () => {
         ctx.shadowColor = "#ff5555"; ctx.shadowBlur = 8; ctx.fillStyle = "#ff5555";
         ctx.beginPath(); ctx.ellipse(b.x, b.y, 3, 6, 0, 0, Math.PI * 2); ctx.fill();
       } else {
-        ctx.shadowColor = "#00FFFF"; ctx.shadowBlur = 12; ctx.fillStyle = "#00FFFF";
-        ctx.beginPath(); ctx.ellipse(b.x, b.y, 3, 9, 0, 0, Math.PI * 2); ctx.fill();
+        let color = "#00FFFF"; let bw = 3, bh = 9;
+        if (b.powerType === "spread") { color = "#facc15"; bw = 3;  bh = 8;  }
+        if (b.powerType === "rapid")  { color = "#22d3ee"; bw = 2;  bh = 13; }
+        if (b.powerType === "double") { color = "#c084fc"; bw = 3;  bh = 10; }
+        if (b.powerType === "laser")  { color = "#f87171"; bw = 6;  bh = 18; }
+        ctx.shadowColor = color; ctx.shadowBlur = b.powerType === "laser" ? 20 : 12;
+        ctx.fillStyle = color;
+        ctx.beginPath(); ctx.ellipse(b.x, b.y, bw, bh, 0, 0, Math.PI * 2); ctx.fill();
       }
       ctx.shadowBlur = 0; ctx.restore();
     });
@@ -537,6 +650,29 @@ const AsteroidBlasterPage = () => {
       ctx.fillText("💙", CW - 8 - i * 26, 10);
     }
     ctx.globalAlpha = 1; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+
+    // ── Active Power-Up HUD (top-center) ──────────────────────────────
+    if (activePowerRef.current) {
+      const pd = POWER_DEFS[activePowerRef.current];
+      const timerRatio = Math.max(0, powerTimerRef.current / pd.duration);
+      const barW = 86, barH = 5;
+      const barX = CW / 2 - barW / 2;
+      ctx.save();
+      ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.shadowColor = pd.color; ctx.shadowBlur = 8;
+      ctx.fillStyle = pd.color; ctx.font = "bold 11px monospace";
+      ctx.fillText(`${pd.icon} ${pd.label}`, CW / 2, 8);
+      ctx.shadowBlur = 0;
+      // Timer bar background
+      ctx.fillStyle = "rgba(0,0,0,0.45)";
+      ctx.fillRect(barX, 23, barW, barH);
+      // Timer bar fill — pulses red when < 2s
+      ctx.fillStyle = powerTimerRef.current < 2 ? "#ff5555" : pd.color;
+      ctx.shadowColor = powerTimerRef.current < 2 ? "#ff5555" : pd.color;
+      ctx.shadowBlur = 4;
+      ctx.fillRect(barX, 23, barW * timerRatio, barH);
+      ctx.shadowBlur = 0; ctx.restore();
+    }
 
     // ── Boss HP bar (drawn on canvas above everything) ────────────────
     const boss = enemiesRef.current.find(e => e.isBoss);
@@ -667,11 +803,25 @@ const AsteroidBlasterPage = () => {
         </div>
 
         {/* Mini HUD */}
-        <div className="flex gap-4 mb-2 text-xs font-display shrink-0">
+        <div className="flex gap-4 mb-1 text-xs font-display shrink-0">
           <span className="text-cyan-400">SKOR: <span className="font-bold text-sm">{score}</span></span>
           <span className="text-white/50">REKOR: <span className="text-yellow-400 font-bold">{best}</span></span>
           <span className="flex gap-0.5">{[...Array(3)].map((_, i) => <span key={i} className={i < lives ? "opacity-100" : "opacity-20"}>💙</span>)}</span>
         </div>
+        {/* Active power badge */}
+        {activePower && (
+          <div className="flex items-center gap-1.5 mb-1 shrink-0">
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
+              style={{ color: POWER_DEFS[activePower].color, borderColor: POWER_DEFS[activePower].color, background: POWER_DEFS[activePower].color + "22", boxShadow: `0 0 8px ${POWER_DEFS[activePower].color}66` }}>
+              {POWER_DEFS[activePower].icon} {POWER_DEFS[activePower].label}
+            </span>
+            <div className="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-full rounded-full transition-all"
+                style={{ width: `${(powerTimeLeft / POWER_DEFS[activePower].duration) * 100}%`, background: powerTimeLeft < 2 ? "#ff5555" : POWER_DEFS[activePower].color }} />
+            </div>
+            <span className="text-[9px] text-white/40">{Math.ceil(powerTimeLeft)}s</span>
+          </div>
+        )}
 
         {/* Canvas */}
         <div className="relative w-full select-none shrink-0" style={{ maxWidth: CW, aspectRatio: `${CW}/${CH}`, maxHeight: "calc(100dvh - 240px)" }}>
@@ -722,12 +872,27 @@ const AsteroidBlasterPage = () => {
                     </div>
                   ))}
                 </div>
-                <div className="flex justify-center gap-2 mb-4 text-xs flex-wrap">
+                <div className="flex justify-center gap-2 mb-3 text-xs flex-wrap">
                   <span className="bg-red-900/30 border border-red-500/40 rounded-lg px-2 py-1">🔴 30 poin</span>
                   <span className="bg-indigo-900/30 border border-indigo-400/40 rounded-lg px-2 py-1">🔵 20 poin</span>
                   <span className="bg-orange-900/30 border border-orange-400/40 rounded-lg px-2 py-1">🟠 25 poin</span>
                   <span className="bg-green-900/30 border border-green-400/40 rounded-lg px-2 py-1">🟢 35 poin</span>
                   <span className="bg-red-900/60 border border-red-400 rounded-lg px-2 py-1 font-bold text-red-300">👑 RAJA: 200 poin</span>
+                </div>
+                {/* Power-up guide */}
+                <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 mb-4 text-left text-[10px] space-y-1">
+                  <p className="text-white/50 uppercase tracking-widest font-bold mb-1">⚡ Power-Up Tembakan</p>
+                  {(Object.entries(POWER_DEFS) as [PowerType, typeof POWER_DEFS[PowerType]][]).map(([, pd]) => (
+                    <div key={pd.label} className="flex items-center gap-2">
+                      <span className="font-bold w-20" style={{ color: pd.color }}>{pd.icon} {pd.label}</span>
+                      <span className="text-white/45">
+                        {pd.label === "SPREAD" && "5 peluru menyebar"}
+                        {pd.label === "RAPID" && "Tembak 3× lebih cepat"}
+                        {pd.label === "DOUBLE" && "2 peluru sejajar"}
+                        {pd.label === "LASER" && "Sinar tembus musuh"}
+                      </span>
+                    </div>
+                  ))}
                 </div>
                 <button onClick={startGame} className="bg-cyan-500 text-black font-bold px-10 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
                   🚀 MULAI
