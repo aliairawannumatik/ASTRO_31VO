@@ -51,24 +51,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(4, "Gradien Positif, Negatif, atau Nol?", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 5,
-      segs: [
-        { x1: -4, y1: -4, x2: 4, y2: 4, color: "#34d399", label: "A" },
-        { x1: -4, y1: 4, x2: 4, y2: -4, color: "#f472b6", label: "B" },
-        { x1: -4, y1: 2, x2: 4, y2: 2, color: "#facc15", label: "C" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Garis A memiliki gradien positif, negatif, atau nol? Mengapa?" },
-      { label: "b.", text: "Garis B memiliki gradien positif, negatif, atau nol? Mengapa?" },
-      { label: "c.", text: "Garis C memiliki gradien positif, negatif, atau nol? Mengapa?" },
-    ],
-  }),
-
-  Q(5, "Gradien dari Grafik Menggunakan Segitiga", {
+  Q(4, "Gradien dari Grafik Menggunakan Segitiga", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -93,7 +76,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Gradien Garis Tegak dan Datar", {
+  Q(5, "Gradien Garis Tegak dan Datar", {
     type: "mixed",
     diagram: {
       size: 260, range: 5,
@@ -109,7 +92,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Mencari Koordinat dari Gradien", {
+  Q(6, "Mencari Koordinat dari Gradien", {
     type: "mixed",
     content: "Gradien garis yang melalui titik P(2, k) dan Q(6, 10) adalah 2. Tentukan nilai k.",
     parts: [
@@ -119,7 +102,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Perbandingan Gradien Dua Garis", {
+  Q(7, "Perbandingan Gradien Dua Garis", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -136,7 +119,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Gradien dari Titik Potong Sumbu", {
+  Q(8, "Gradien dari Titik Potong Sumbu", {
     type: "mixed",
     content: "Garis memotong sumbu-x di titik (a, 0) dan sumbu-y di titik (0, b). Gunakan kedua titik ini untuk mencari gradien:",
     parts: [
@@ -146,7 +129,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "UN 2018 — Nilai Gradien", {
+  Q(9, "UN 2018 — Nilai Gradien", {
     type: "mixed",
     content: "Persamaan garis adalah 3x + 4y − 24 = 0.",
     parts: [
@@ -156,7 +139,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(11, "Hubungan Gradien Garis Naik dan Turun", {
+  Q(10, "Hubungan Gradien Garis Naik dan Turun", {
     type: "mixed",
     content: "Tentukan sifat gradien (positif/negatif/nol/tak terdefinisi) dari setiap deskripsi garis:",
     parts: [
@@ -167,7 +150,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(12, "Gradien Garis y = mx (Melalui O)", {
+  Q(11, "Gradien Garis y = mx (Melalui O)", {
     type: "mixed",
     diagram: {
       size: 260, range: 5,
@@ -184,7 +167,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(13, "Mencari Nilai yang Tidak Diketahui dari Gradien", {
+  Q(12, "Mencari Nilai yang Tidak Diketahui dari Gradien", {
     type: "mixed",
     content: "Tentukan nilai yang belum diketahui:",
     parts: [
@@ -194,7 +177,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(14, "Gradien Garis Paralel", {
+  Q(13, "Gradien Garis Paralel", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -210,7 +193,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Gradien Garis Tegak Lurus", {
+  Q(14, "Gradien Garis Tegak Lurus", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -226,7 +209,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(16, "Gradien Garis pada Trapesium", {
+  Q(15, "Gradien Garis pada Trapesium", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -250,7 +233,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(17, "Gradien dari Bentuk Pecahan", {
+  Q(16, "Gradien dari Bentuk Pecahan", {
     type: "mixed",
     content: "Tentukan gradien dari persamaan-persamaan berikut:",
     parts: [
@@ -260,7 +243,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(18, "Membuktikan Titik Segaris", {
+  Q(17, "Membuktikan Titik Segaris", {
     type: "mixed",
     content: "Buktikan apakah tiga titik berikut terletak pada satu garis lurus (segaris):",
     parts: [
@@ -270,7 +253,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "UN 2021 — Soal Gradien Terapan", {
+  Q(18, "UN 2021 — Soal Gradien Terapan", {
     type: "mixed",
     content: "Sebuah jalan menanjak membentuk garis lurus. Jika ujung bawah jalan ada di koordinat (0, 10) dan ujung atas di (50, 40):",
     parts: [
@@ -279,7 +262,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(20, "Gradien dari Persamaan Non-Standar", {
+  Q(19, "Gradien dari Persamaan Non-Standar", {
     type: "mixed",
     content: "Tentukan gradien dari setiap persamaan:",
     parts: [
@@ -289,7 +272,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(21, "Tantangan — Gradien Segitiga", {
+  Q(20, "Tantangan — Gradien Segitiga", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,

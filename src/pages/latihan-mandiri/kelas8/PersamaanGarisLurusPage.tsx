@@ -19,7 +19,7 @@ const subtopics = [
     icon: TrendingUp,
     color: "#60a5fa",
     desc: "Gradien dari 2 titik, persamaan, dan grafik",
-    soal: 21,
+    soal: 20,
   },
   {
     label: "MENENTUKAN PERSAMAAN GARIS LURUS",
