@@ -56,13 +56,6 @@ const games = [
     icon: <Disc className="w-7 h-7 text-red-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Galaksi Defender Math",
-    emoji: "👽",
-    path: "/math-game-arena/umum/galaxy-defender",
-    desc: "Pertahankan Bumi! Tembak alien jawaban benar yang turun dari luar angkasa!",
-    icon: <Rocket className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
-  },
-  {
     label: "Tetris Numatik",
     emoji: "🧩",
     path: "/math-game-arena/umum/tetris",
@@ -89,6 +82,13 @@ const games = [
     path: "/math-game-arena/umum/bubble-pop",
     desc: "Pecahkan gelembung jawaban benar sebelum sampai ke atas!",
     icon: <Sparkles className="w-7 h-7 text-sky-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
+    label: "Galaksi Defender Math",
+    emoji: "👽",
+    path: "/math-game-arena/umum/galaxy-defender",
+    desc: "Pertahankan Bumi! Tembak alien jawaban benar yang turun dari luar angkasa!",
+    icon: <Rocket className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
     label: "Hajar Mol!",
