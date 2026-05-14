@@ -214,6 +214,8 @@ const questions: Q[] = [
 
   Q(18, "Ban Mobil", {
     type: "essay",
+    img: "/image_1778762645992.png",
+    imgAlt: "Ban mobil melingkar di jalan basah malam hari",
     content: "Ban mobil memiliki jari-jari luar 35 cm. Mobil bergerak sejauh 440 m.",
     parts: [
       { label: "a.", text: "Hitung keliling ban." },
