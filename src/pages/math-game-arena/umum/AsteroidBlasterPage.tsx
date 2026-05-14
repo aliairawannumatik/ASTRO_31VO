@@ -855,48 +855,145 @@ const AsteroidBlasterPage = () => {
           )}
 
           {phase === "idle" && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/75">
-              <div className="text-center px-5 max-w-xs">
-                <div className="text-5xl mb-2">🌌</div>
-                <h2 className="font-display text-2xl font-bold text-cyan-400 mb-2">GALAKSI TEMPUR</h2>
-                <p className="text-white/65 text-xs mb-3 leading-relaxed">
-                  Hancurkan pesawat musuh yang menyerbu! Gunakan <span className="text-cyan-400 font-bold">joystick</span> untuk bergerak dan tombol <span className="text-red-400 font-bold">FIRE</span> untuk menembak. Musuh kecil hancur <span className="text-green-400 font-bold">1 tembakan</span>!
-                </p>
-                {/* Difficulty stages */}
-                <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 mb-3 text-left text-[10px] space-y-0.5">
-                  <p className="text-white/50 uppercase tracking-widest font-bold mb-1">⏱ Tingkat Kesulitan (per 30 dtk)</p>
-                  {DIFFICULTY_STAGES.map((s, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <span className="font-bold w-28" style={{ color: s.color }}>0:{String(i * 30).padStart(2,"0")}+ → {s.label}</span>
-                      <span className="text-white/40">{s.count[0]}–{s.count[1]} musuh/gelombang</span>
+            <div className="absolute inset-0 rounded-2xl overflow-hidden">
+              <style>{`
+                @keyframes gt-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+                @keyframes gt-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+                @keyframes gt-floatC { 0%,100%{transform:translateY(0px) rotate(180deg)} 50%{transform:translateY(-8px) rotate(180deg)} }
+                @keyframes gt-pulse  { 0%,100%{opacity:0.75} 50%{opacity:1} }
+                @keyframes gt-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+                @keyframes gt-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+                .gt-fa{animation:gt-floatA 3.2s ease-in-out infinite}
+                .gt-fb{animation:gt-floatB 3.8s ease-in-out infinite}
+                .gt-fc{animation:gt-floatC 3.5s ease-in-out infinite}
+                .gt-fp{animation:gt-pulse 2s ease-in-out infinite}
+                .gt-title-shine{background:linear-gradient(90deg,#00FFFF,#22d3ee,#818cf8,#c084fc,#22d3ee,#00FFFF);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gt-shimmer 4s linear infinite}
+              `}</style>
+
+              {/* Deep space background */}
+              <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 10%, rgba(0,50,120,0.95) 0%, rgba(4,0,30,0.98) 65%)" }} />
+              {/* Nebula accent */}
+              <div className="absolute top-0 left-0 right-0 h-40 pointer-events-none" style={{ background: "radial-gradient(ellipse at 60% 0%, rgba(120,0,200,0.18) 0%, transparent 70%)" }} />
+              {/* Scan line */}
+              <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right, transparent, rgba(0,255,255,0.15), transparent)", animation: "gt-scanY 6s linear infinite" }} />
+
+              {/* Scrollable content */}
+              <div className="relative z-10 h-full overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+                <div className="flex flex-col items-center px-3 py-3">
+
+                  {/* Sub-badge */}
+                  <div className="text-[7px] tracking-[5px] text-cyan-500/60 uppercase font-bold mb-0.5">⬡ NUMATIK GAME ⬡</div>
+
+                  {/* ── TITLE ── */}
+                  <div className="relative mb-0.5 text-center">
+                    <div className="font-display font-black leading-none text-white" style={{ fontSize: "1.8rem", textShadow: "0 0 20px #00FFFF, 0 0 50px #0088FF" }}>GALAKSI</div>
+                    <div className="gt-title-shine font-display font-black leading-none" style={{ fontSize: "2rem" }}>TEMPUR</div>
+                    <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right, transparent, #00FFFF, #818cf8, transparent)" }} />
+                  </div>
+                  <p className="text-white/40 text-[8px] tracking-widest uppercase mb-2">⚡ Pertarungan Epik di Luar Angkasa ⚡</p>
+
+                  {/* ── PLAYER + ENEMIES side by side ── */}
+                  <div className="flex items-end justify-center gap-4 w-full mb-1.5">
+                    {/* Player ship left */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="text-[7px] text-cyan-400/70 font-bold tracking-wider uppercase">PESAWATMU</div>
+                      <div className="relative">
+                        <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%)", transform: "scale(2)" }} />
+                        <img src="/pesawat-nobg-new.png" alt="pesawat" className="gt-fa relative z-10"
+                          style={{ width: 48, filter: "drop-shadow(0 0 14px #00FFFF) drop-shadow(0 0 28px #0088FF)" }} />
+                      </div>
+                      <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom, rgba(0,200,255,0.8), transparent)" }} />
+                      <div className="text-[8px] font-bold text-cyan-400">KAMU</div>
                     </div>
-                  ))}
-                </div>
-                <div className="flex justify-center gap-2 mb-3 text-xs flex-wrap">
-                  <span className="bg-red-900/30 border border-red-500/40 rounded-lg px-2 py-1">🔴 30 poin</span>
-                  <span className="bg-indigo-900/30 border border-indigo-400/40 rounded-lg px-2 py-1">🔵 20 poin</span>
-                  <span className="bg-orange-900/30 border border-orange-400/40 rounded-lg px-2 py-1">🟠 25 poin</span>
-                  <span className="bg-green-900/30 border border-green-400/40 rounded-lg px-2 py-1">🟢 35 poin</span>
-                  <span className="bg-red-900/60 border border-red-400 rounded-lg px-2 py-1 font-bold text-red-300">👑 RAJA: 200 poin</span>
-                </div>
-                {/* Power-up guide */}
-                <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 mb-4 text-left text-[10px] space-y-1">
-                  <p className="text-white/50 uppercase tracking-widest font-bold mb-1">⚡ Power-Up Tembakan</p>
-                  {(Object.entries(POWER_DEFS) as [PowerType, typeof POWER_DEFS[PowerType]][]).map(([, pd]) => (
-                    <div key={pd.label} className="flex items-center gap-2">
-                      <span className="font-bold w-20" style={{ color: pd.color }}>{pd.icon} {pd.label}</span>
-                      <span className="text-white/45">
-                        {pd.label === "SPREAD" && "5 peluru menyebar"}
-                        {pd.label === "RAPID" && "Tembak 3× lebih cepat"}
-                        {pd.label === "DOUBLE" && "2 peluru sejajar"}
-                        {pd.label === "LASER" && "Sinar tembus musuh"}
-                      </span>
+
+                    {/* VS */}
+                    <div className="flex flex-col items-center pb-4">
+                      <div className="text-xl font-black text-white/20">VS</div>
                     </div>
-                  ))}
+
+                    {/* 4 enemies in a 2×2 grid */}
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {[
+                        { src: "/musuh-1.png", glow: "#ff6b6b", pts: 30, name: "BOMBER",  rotated: true,  delay: "0s"   },
+                        { src: "/musuh-2.png", glow: "#818cf8", pts: 20, name: "FIGHTER", rotated: true,  delay: "0.5s" },
+                        { src: "/musuh-3.png", glow: "#fb923c", pts: 25, name: "RAIDER",  rotated: false, delay: "1s"   },
+                        { src: "/musuh-4.png", glow: "#4ade80", pts: 35, name: "SAUCER",  rotated: true,  delay: "1.5s" },
+                      ].map(e => (
+                        <div key={e.name} className="flex flex-col items-center gap-0.5">
+                          <div className="relative rounded-lg p-1.5 border"
+                            style={{ borderColor: e.glow + "55", background: e.glow + "12", boxShadow: `0 0 10px ${e.glow}33` }}>
+                            <img src={e.src} alt={e.name}
+                              style={{
+                                width: 30, height: "auto",
+                                filter: `drop-shadow(0 0 7px ${e.glow}) drop-shadow(0 0 2px ${e.glow})`,
+                                transform: e.rotated ? "rotate(180deg)" : undefined,
+                                animation: `gt-floatB 3.4s ease-in-out infinite`,
+                                animationDelay: e.delay,
+                              }} />
+                          </div>
+                          <span className="text-[6px] font-bold" style={{ color: e.glow }}>{e.name}</span>
+                          <span className="text-[7px] font-bold text-yellow-300">+{e.pts}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* ── BOSS ── */}
+                  <div className="w-full h-px mb-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(255,50,50,0.35), transparent)" }} />
+                  <div className="flex items-center gap-3 w-full px-2 mb-1.5">
+                    {/* Boss image */}
+                    <div className="relative rounded-xl border-2 px-2.5 py-1.5 flex flex-col items-center shrink-0"
+                      style={{ borderColor: "#ff444477", background: "linear-gradient(160deg, rgba(100,0,0,0.5), rgba(30,0,0,0.7))", boxShadow: "0 0 25px rgba(255,40,0,0.4), inset 0 1px 0 rgba(255,80,80,0.1)" }}>
+                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-sm">👑</div>
+                      <img src="/raja.png" alt="Raja" className="gt-fp mt-1"
+                        style={{ width: 56, filter: "drop-shadow(0 0 16px #ff4444) drop-shadow(0 0 30px rgba(255,0,0,0.45)) drop-shadow(0 0 5px #ff8800)" }} />
+                    </div>
+                    {/* Boss info */}
+                    <div className="flex flex-col gap-0.5">
+                      <div className="text-[8px] text-red-400/60 tracking-widest uppercase font-bold">💀 RAJA BESAR</div>
+                      <div className="text-sm font-black text-red-300" style={{ textShadow: "0 0 10px #ff4444" }}>200 POIN</div>
+                      <div className="text-[7px] text-white/30 leading-relaxed">25 HP · 2 Fase Serangan<br/>Muncul setiap 60 detik</div>
+                      <div className="flex gap-1 mt-0.5">
+                        {["#ff4444","#ff8800","#ffcc00"].map(c => (
+                          <div key={c} className="w-1.5 h-1.5 rounded-full" style={{ background: c, boxShadow: `0 0 4px ${c}` }} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ── POWER-UPS ── */}
+                  <div className="w-full h-px mb-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(250,204,21,0.3), transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold">⚡ Power-Up Tembakan</div>
+                  <div className="grid grid-cols-4 gap-1.5 mb-3 w-full max-w-[260px]">
+                    {(Object.entries(POWER_DEFS) as [PowerType, typeof POWER_DEFS[PowerType]][]).map(([, pd]) => (
+                      <div key={pd.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                        style={{ borderColor: pd.color + "44", background: pd.color + "0f", boxShadow: `0 0 8px ${pd.color}33` }}>
+                        <span className="text-base leading-none" style={{ filter: `drop-shadow(0 0 5px ${pd.color})` }}>{pd.icon}</span>
+                        <span className="text-[7px] font-black" style={{ color: pd.color }}>{pd.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">
+                          {pd.label === "SPREAD" && "5 arah"}
+                          {pd.label === "RAPID" && "3× cepat"}
+                          {pd.label === "DOUBLE" && "2 sejajar"}
+                          {pd.label === "LASER" && "Tembus"}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* ── MULAI BUTTON ── */}
+                  <button onClick={startGame}
+                    className="relative overflow-hidden font-display font-black text-black text-lg px-12 py-3 rounded-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 mb-1.5"
+                    style={{
+                      background: "linear-gradient(135deg, #00FFFF 0%, #22d3ee 40%, #0ea5e9 100%)",
+                      boxShadow: "0 0 25px rgba(0,200,255,0.8), 0 0 50px rgba(0,120,200,0.4), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.4)",
+                    }}>
+                    <span className="relative z-10 tracking-wide">🚀 MULAI BERMAIN</span>
+                  </button>
+
+                  <div className="text-[7px] text-white/20 text-center leading-relaxed pb-1">
+                    Joystick / WASD untuk bergerak · SPASI / FIRE untuk menembak
+                  </div>
                 </div>
-                <button onClick={startGame} className="bg-cyan-500 text-black font-bold px-10 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
-                  🚀 MULAI
-                </button>
               </div>
             </div>
           )}
