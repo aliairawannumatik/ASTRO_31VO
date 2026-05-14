@@ -7,6 +7,7 @@ import DinoRunGamePage from "@/pages/math-game-arena/umum/DinoRunGamePage";
 import TetrisGamePage from "@/pages/math-game-arena/umum/TetrisGamePage";
 import SnakeMathPage from "@/pages/math-game-arena/umum/SnakeMathPage";
 import BrickBreakerPage from "@/pages/math-game-arena/umum/BrickBreakerPage";
+import GalaksiTempurPage from "@/pages/math-game-arena/umum/GalaksiTempurPage";
 import { getSubmaterialK9 } from "@/data/mga-k9/registry";
 
 const SubmaterialGameDispatcherK9 = () => {
@@ -50,6 +51,15 @@ const SubmaterialGameDispatcherK9 = () => {
           backPath={backPath}
           backLabel="Kembali ke Pilihan Game"
           homePath={homePath}
+        />
+      );
+    case "galaksi-tempur":
+      return (
+        <GalaksiTempurPage
+          topicLabel={topicLabel}
+          backPath={backPath}
+          homePath={homePath}
+          quizQuestions={q.snake}
         />
       );
     case "flappy-rocket":

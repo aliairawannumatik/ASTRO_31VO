@@ -28,6 +28,15 @@ const VARIANTS: GameVariant[] = [
     glow: "rgba(124,58,237,0.4)",
   },
   {
+    name: "Galaksi Tempur",
+    emoji: "🌌",
+    description: "Tembak musuh alien & jawab soal materi setiap 25 detik untuk poin bonus!",
+    variantSlug: "galaksi-tempur",
+    from: "#06b6d4",
+    to: "#7c3aed",
+    glow: "rgba(124,58,237,0.5)",
+  },
+  {
     name: "Flappy Rocket",
     emoji: "🚀",
     description: "Terbangkan roket lewati gerbang. Tiap gerbang khusus = soal!",
