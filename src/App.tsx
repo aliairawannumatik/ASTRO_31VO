@@ -1372,64 +1372,13 @@ const AppInner = () => {
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/meteor-pantul" element={<OperasiCampuranMeteorPantulGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/meteor-pantul" element={<KPKFPBMeteorPantulGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/arti-pecahan" element={<ArtiPecahanGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pecahan-campuran" element={<PecahanCampuranGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/penjumlahan-pecahan" element={<PenjumlahanPecahanGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pengurangan-pecahan" element={<PenguranganPecahanGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/perkalian-pecahan" element={<PerkalianPecahanGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pembagian-pecahan" element={<PembagianPecahanGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/penjumlahan-desimal" element={<PenjumlahanDesimalGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pengurangan-desimal" element={<PenguranganDesimalGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/perkalian-desimal" element={<PerkalianDesimalGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pembagian-desimal" element={<PembagianDesimalGamePage />} />
-          <Route path="/math-game-arena/kelas-7/bilangan-rasional/pembulatan-desimal" element={<PembulatanDesimalGamePage />} />
           <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurAljabarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/perkalian" element={<PerkalianAljabarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/pembagian" element={<PembagianAljabarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/pemangkatan" element={<PemangkatanAljabarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/aljabar/operasi-pecahan" element={<OperasiPecahanAljabarGamePage />} />
           <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/kalimat-terbuka" element={<KalimatTerbukaGamePage />} />
-          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVGamePage />} />
-          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVGamePage />} />
-          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVGamePage />} />
-          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVGamePage />} />
-          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVGamePage />} />
-          <Route path="/math-game-arena/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVGamePage />} />
           <Route path="/math-game-arena/kelas-7/perbandingan" element={<PerbandinganMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/perbandingan/umum" element={<PerbandinganUmumGamePage />} />
-          <Route path="/math-game-arena/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiGamePage />} />
-          <Route path="/math-game-arena/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranGamePage />} />
-          <Route path="/math-game-arena/kelas-7/perbandingan/bertingkat" element={<PerbandinganBertingkatGamePage />} />
-          <Route path="/math-game-arena/kelas-7/perbandingan/skala" element={<SkalaGamePage />} />
           <Route path="/math-game-arena/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiGameMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/diskon" element={<DiskonGameMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraGameMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/ppn" element={<PPNGameMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/pph" element={<PPhGameMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalGamePage />} />
           <Route path="/math-game-arena/kelas-7/garis-dan-sudut" element={<GarisDanSudutMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/hubungan-dua-garis" element={<HubunganDuaGarisGamePage />} />
-          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/sudut-pelurus" element={<SudutPelurusGamePage />} />
-          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/sifat-sudut-sejajar" element={<SifatSudutSejajarGamePage />} />
-          <Route path="/math-game-arena/kelas-7/garis-dan-sudut/jumlah-sudut-segibanyak" element={<JumlahSudutSegibanyakGamePage />} />
           <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiGamePage />} />
-          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/keliling" element={<KelilingSegitigaSegiempatGamePage />} />
-          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaGamePage />} />
-          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatGamePage />} />
-          <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat/bangun-tak-beraturan" element={<BangunTakBeraturanGamePage />} />
           <Route path="/math-game-arena/kelas-7/himpunan" element={<HimpunanMGAK7Page />} />
-          <Route path="/math-game-arena/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanGamePage />} />
-          <Route path="/math-game-arena/kelas-7/himpunan/himpunan-berhingga-kosong" element={<HimpunanBerhingaKosongGamePage />} />
-          <Route path="/math-game-arena/kelas-7/himpunan/diagram-venn" element={<DiagramVennGamePage />} />
-          <Route path="/math-game-arena/kelas-7/himpunan/pemecahan-masalah" element={<PemecahanMasalahHimpunanGamePage />} />
 
           {/* Math Game Arena - Kelas 7 catch-all chooser & dispatcher */}
           <Route path="/math-game-arena/kelas-7/:parentSlug/:slug" element={<SubmaterialGameVariantsChooserK7 />} />
