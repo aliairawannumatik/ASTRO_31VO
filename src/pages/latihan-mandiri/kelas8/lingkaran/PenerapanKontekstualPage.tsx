@@ -192,6 +192,8 @@ const questions: Q[] = [
 
   Q(16, "Meja Makan Melingkar", {
     type: "essay",
+    img: "/image_1778762340281.png",
+    imgAlt: "Diagram geometri orbit satelit mengelilingi bumi",
     content: "Satelit mengorbit bumi pada ketinggian 7.000 km. Jari-jari bumi ≈ 6.400 km. Orbit dianggap melingkar.",
     parts: [
       { label: "a.", text: "Tentukan jari-jari orbit satelit dari pusat bumi." },
