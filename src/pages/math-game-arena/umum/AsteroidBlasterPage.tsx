@@ -1017,7 +1017,7 @@ const AsteroidBlasterPage = () => {
         </div>
 
         {/* ── Controls ── */}
-        <div className="flex items-center justify-between w-full max-w-sm mt-auto mb-2 px-3 shrink-0">
+        <div className={`flex items-center justify-between w-full max-w-sm mt-auto mb-2 px-3 shrink-0 ${phase === "idle" ? "invisible pointer-events-none" : ""}`}>
 
           {/* Joystick */}
           <div
