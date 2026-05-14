@@ -12,6 +12,7 @@ type Q = {
   n: number; title: string;
   content?: string;
   parts?: Part[]; diagram?: CircleDiagramProps;
+  img?: string; imgAlt?: string;
   type: "essay" | "mixed";
 };
 const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
@@ -19,6 +20,8 @@ const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, t
 const questions: Q[] = [
   Q(1, "Roda Sepeda", {
     type: "mixed",
+    img: "/soal-roda-sepeda.png",
+    imgAlt: "Roda sepeda dengan jari-jari 35 cm",
     diagram: {
       size: 220, r: 0.62,
       pts: [
@@ -525,6 +528,11 @@ const PenerapanKontekstualPage = () => {
                     <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
                       {q.title}
                     </span>
+                    {q.img && (
+                      <div className="mb-3 flex justify-center">
+                        <img src={q.img} alt={q.imgAlt ?? ""} className="max-w-[220px] w-full object-contain rounded-lg bg-white/90 p-2" />
+                      </div>
+                    )}
                     {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
                     {q.diagram && (
                       <div className="mb-3 flex justify-center">
