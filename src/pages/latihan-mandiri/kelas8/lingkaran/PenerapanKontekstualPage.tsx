@@ -180,6 +180,8 @@ const questions: Q[] = [
 
   Q(15, "Soal ANBK — Penangkap Ikan Jaring Melingkar", {
     type: "essay",
+    img: "/image_1778762091357.png",
+    imgAlt: "Meja makan berbentuk lingkaran dengan taplak meja putih",
     content: "Meja makan berbentuk lingkaran dengan diameter 1,4 m akan dilapisi taplak meja. Taplak menjuntai 20 cm di setiap sisi.",
     parts: [
       { label: "a.", text: "Tentukan diameter taplak meja." },
