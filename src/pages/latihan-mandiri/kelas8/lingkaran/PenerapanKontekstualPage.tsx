@@ -266,6 +266,8 @@ const questions: Q[] = [
 
   Q(23, "Soal UN — Kolam Ikan", {
     type: "essay",
+    img: "/image_1778762749930.png",
+    imgAlt: "Kolam ikan berbentuk lingkaran tampak atas dengan pemilik memberi pakan",
     content: "Kolam ikan berbentuk lingkaran dengan diameter 14 m. Pemilik ingin memberi pakan ikan yang disebar merata.",
     parts: [
       { label: "a.", text: "Hitung luas permukaan kolam." },
