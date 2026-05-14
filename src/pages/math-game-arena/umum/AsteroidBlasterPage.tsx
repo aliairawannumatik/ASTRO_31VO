@@ -886,11 +886,10 @@ const AsteroidBlasterPage = () => {
 
                   {/* ── TITLE ── */}
                   <div className="relative mb-0.5 text-center">
-                    <div className="font-display font-black leading-none text-white" style={{ fontSize: "1.8rem", textShadow: "0 0 20px #00FFFF, 0 0 50px #0088FF" }}>GALAKSI</div>
-                    <div className="gt-title-shine font-display font-black leading-none" style={{ fontSize: "2rem" }}>TEMPUR</div>
+                    <div className="gt-title-shine font-display font-black leading-none" style={{ fontSize: "2rem" }}>GALAKSI TEMPUR</div>
                     <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right, transparent, #00FFFF, #818cf8, transparent)" }} />
                   </div>
-                  <p className="text-white/40 text-[8px] tracking-widest uppercase mb-2">⚡ Pertarungan Epik di Luar Angkasa ⚡</p>
+                  <p className="text-white/40 text-[8px] tracking-widest uppercase mb-1">⚡ Pertarungan Epik di Luar Angkasa ⚡</p>
 
                   {/* ── PLAYER + ENEMIES side by side ── */}
                   <div className="flex items-end justify-center gap-4 w-full mb-1.5">
