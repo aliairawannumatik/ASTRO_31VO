@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "@/components/Starfield";
-import { Send, User, Rocket, RefreshCw, ChevronLeft, Paperclip, Mic, MicOff, X, FileText, ImageIcon } from "lucide-react";
+import { Send, User, Rocket, RefreshCw, Paperclip, Mic, MicOff, X, FileText, ImageIcon } from "lucide-react";
 import "katex/dist/katex.min.css";
 
 const QUICK_TOPICS = [
@@ -205,9 +205,9 @@ const ChatAIPage = () => {
         <div className="flex items-center gap-3 px-3 py-3 bg-[#080f22]/90 backdrop-blur-md border-b border-white/6">
           <button
             onClick={() => navigate("/menu")}
-            className="w-8 h-8 rounded-xl flex items-center justify-center text-white/50 hover:text-white hover:bg-white/8 transition-all shrink-0"
+            className="text-sm text-white/30 hover:text-amber-400 transition-colors cursor-pointer font-body shrink-0"
           >
-            <ChevronLeft className="w-5 h-5" />
+            ← Kembali ke Menu
           </button>
 
           <div className="relative shrink-0">
@@ -372,15 +372,6 @@ const ChatAIPage = () => {
 
         <div ref={bottomRef} />
       </div>
-
-      {/* ── BACK BUTTON FLOATING ── */}
-      <button
-        onClick={() => navigate("/menu")}
-        className="fixed bottom-24 left-4 z-20 w-11 h-11 rounded-2xl flex items-center justify-center bg-[#0d1627]/90 border border-white/10 text-white/50 hover:text-white hover:border-cyan-500/50 hover:bg-cyan-500/10 hover:shadow-[0_0_16px_rgba(6,182,212,0.25)] backdrop-blur transition-all duration-200 active:scale-95"
-        title="Kembali ke Menu"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
 
       {/* ── INPUT AREA ── */}
       <div className="relative z-10 shrink-0 px-3 pb-4 pt-2 bg-[#080f22]/90 backdrop-blur-md border-t border-white/6">
