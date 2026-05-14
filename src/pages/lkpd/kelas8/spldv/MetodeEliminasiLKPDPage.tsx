@@ -14,10 +14,10 @@ function checkAnswer(val: string, accepted: string[]): boolean {
 /* ─── correct answers ─────────────────────────────────────── */
 const ANSWERS: Record<string, string[]> = {
   /* Section A */
-  a1: ["dua variabel", "2 variabel", "memiliki dua variabel", "mempunyai dua variabel"],
-  a2: ["pangkat 1", "berderajat 1", "linear", "derajat 1", "berpangkat 1", "pangkat tertinggi 1", "1"],
-  a3: ["ax + by = c", "ax+by=c", "berbentuk ax + by = c", "koefisien bilangan real", "bilangan real"],
-  a4: ["lebih dari satu penyelesaian", "banyak penyelesaian", "tak hingga penyelesaian", "tak terhingga", "lebih dari satu", "banyak"],
+  a1: ["dua variabel", "2 variabel", "dua", "2"],
+  a2: ["1", "satu", "pangkat 1", "satu (1)"],
+  a3: ["real", "bilangan real", "nyata"],
+  a4: ["banyak", "tak hingga", "tak terhingga", "lebih dari satu", "infinit"],
 
   /* Kasus 1 – Eliminasi */
   k1_dik: ["2x + y = 8 dan x – y = 10", "2x + y = 8 dan x - y = 10", "2x+y=8 dan x-y=10", "2x+y=8 dan x–y=10"],
@@ -259,14 +259,31 @@ const MetodeEliminasiLKPDPage = () => {
         <SectionHeader label="A. Pengertian Sistem Persamaan Linear Dua Variabel (SPLDV)" color="cyan" />
 
         <div className="rounded-2xl border border-white/10 bg-white/4 p-4 mb-4 font-body text-sm text-white/85">
-          <p className="mb-2">Pada pembahasan mengenai PLDV, ciri-ciri dari PLDV antara lain :</p>
-          <div className="space-y-2 pl-2">
-            {["a1","a2","a3","a4"].map((id, i) => (
-              <p key={id} className="flex items-center gap-2">
-                <span className="text-cyan-400 font-bold">{i+1}.</span>
-                <B id={id} w="w-56" mono={false} />
-              </p>
-            ))}
+          <p className="mb-3">Pada pembahasan mengenai PLDV, ciri-ciri dari PLDV antara lain :</p>
+          <div className="space-y-3 pl-2">
+            <p className="flex flex-wrap items-baseline gap-1.5">
+              <span className="text-cyan-400 font-bold shrink-0">1.</span>
+              <span>Memiliki</span>
+              <B id="a1" w="w-28" mono={false} />
+              <span className="text-white/60">(misalnya variabel x dan y)</span>
+            </p>
+            <p className="flex flex-wrap items-baseline gap-1.5">
+              <span className="text-cyan-400 font-bold shrink-0">2.</span>
+              <span>Pangkat masing-masing variabelnya adalah</span>
+              <B id="a2" w="w-16" mono={false} />
+              <span className="text-white/60">(disebut linear)</span>
+            </p>
+            <p className="flex flex-wrap items-baseline gap-1.5">
+              <span className="text-cyan-400 font-bold shrink-0">3.</span>
+              <span>Koefisien variabel berupa bilangan</span>
+              <B id="a3" w="w-20" mono={false} />
+            </p>
+            <p className="flex flex-wrap items-baseline gap-1.5">
+              <span className="text-cyan-400 font-bold shrink-0">4.</span>
+              <span>Memiliki</span>
+              <B id="a4" w="w-28" mono={false} />
+              <span>penyelesaian</span>
+            </p>
           </div>
           <CK sectionKey="a" />
         </div>
