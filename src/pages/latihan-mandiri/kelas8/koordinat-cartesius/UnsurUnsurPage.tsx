@@ -193,24 +193,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(12, "Titik Paling Jauh dari Sumbu", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 2, y: 5, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -4, y: 2, label: "B", color: "#fb923c", labelPos: "tl" },
-        { x: 1, y: -3, label: "C", color: "#34d399", labelPos: "br" },
-        { x: -3, y: -1, label: "D", color: "#facc15", labelPos: "bl" },
-      ],
-    },
-    content: "Koordinat: A(2,5), B(−4,2), C(1,−3), D(−3,−1)",
-    parts: [
-      { label: "a.", text: "Titik mana yang paling jauh dari sumbu-x? Jelaskan!" },
-      { label: "b.", text: "Titik mana yang paling dekat dengan sumbu-y?" },
-    ],
-  }),
-
   Q(13, "Garis Sejajar Sumbu-x", {
     type: "mixed",
     content: "Perhatikan semua titik yang memiliki ordinat (y) = −3.",
@@ -294,16 +276,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(17, "Koordinat Titik dengan Syarat", {
-    type: "mixed",
-    content: "Tentukan koordinat titik yang memenuhi syarat-syarat berikut:",
-    parts: [
-      { label: "a.", text: "Berjarak 5 satuan dari sumbu-x dan berada di atas sumbu-x, dengan x = 3." },
-      { label: "b.", text: "Berjarak 4 satuan dari sumbu-y dan berada di sebelah kiri sumbu-y, dengan y = −2." },
-      { label: "c.", text: "Terletak tepat di sumbu-x dan berjarak 6 satuan dari titik asal O, di sebelah kiri O." },
-    ],
-  }),
-
   Q(18, "Soal ANBK - Evaluasi Pernyataan", {
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:",
@@ -315,130 +287,12 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "Diagram 6 Titik — Baca dan Analisis", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      pts: [
-        { x: 5, y: 2, label: "K", color: "#f472b6", labelPos: "tr" },
-        { x: -4, y: 5, label: "L", color: "#fb923c", labelPos: "tl" },
-        { x: -6, y: -3, label: "M", color: "#a78bfa", labelPos: "bl" },
-        { x: 3, y: -5, label: "N", color: "#34d399", labelPos: "br" },
-        { x: 0, y: 6, label: "P", color: "#facc15", labelPos: "tr" },
-        { x: -2, y: 0, label: "Q", color: "#60a5fa", labelPos: "top" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Baca dan tuliskan koordinat semua titik K, L, M, N, P, Q." },
-      { label: "b.", text: "Urutkan titik berdasarkan jaraknya dari sumbu-x (dari dekat ke jauh)." },
-      { label: "c.", text: "Urutkan titik berdasarkan jaraknya dari sumbu-y (dari dekat ke jauh)." },
-    ],
-  }),
-
-  Q(20, "Titik dengan Kondisi Aljabar", {
-    type: "mixed",
-    content: "Tentukan kuadran titik P(2k+1, 3) agar berada di Kuadran I.",
-    parts: [
-      { label: "a.", text: "Syarat apa yang harus dipenuhi oleh absis dan ordinat untuk berada di Kuadran I?" },
-      { label: "b.", math: "\\text{Tentukan nilai } k \\text{ agar } P(2k+1,\\ 3) \\text{ berada di Kuadran I.}" },
-    ],
-  }),
-
   Q(21, "Titik pada Sumbu dari Kondisi Aljabar", {
     type: "mixed",
     content: "Tentukan nilai m agar:",
     parts: [
       { label: "a.", math: "Q(4,\\ 2m-5) \\text{ terletak pada sumbu-x.}" },
       { label: "b.", math: "R(3n+6,\\ 2) \\text{ terletak pada sumbu-y.}" },
-    ],
-  }),
-
-  Q(22, "Membaca Koordinat — 5 Titik Baru", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: -1, y: 4, label: "W", color: "#f472b6", labelPos: "tl" },
-        { x: 3, y: -2, label: "X", color: "#fb923c", labelPos: "br" },
-        { x: -4, y: -4, label: "Y", color: "#a78bfa", labelPos: "bl" },
-        { x: 5, y: 3, label: "Z", color: "#34d399", labelPos: "tr" },
-        { x: 0, y: -3, label: "V", color: "#facc15", labelPos: "tr" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Tuliskan koordinat titik W, X, Y, Z, dan V." },
-      { label: "b.", text: "Titik mana yang berada di kuadran III?" },
-      { label: "c.", text: "Titik mana yang berada pada sumbu koordinat?" },
-    ],
-  }),
-
-  Q(23, "Kontekstual — Peta Kota", {
-    type: "mixed",
-    content: "Sebuah peta kota menggunakan sistem koordinat kartesius. Posisi beberapa tempat adalah:\nRumah: A(3, 2), Sekolah: B(−4, 5), Pasar: C(−2, −3), Kantor Polisi: D(4, −4), Taman: E(0, 3)",
-    parts: [
-      { label: "a.", text: "Di kuadran mana masing-masing tempat berada?" },
-      { label: "b.", text: "Tempat mana yang berada paling jauh dari sumbu-x?" },
-      { label: "c.", text: "Tempat mana yang berada paling dekat dengan sumbu-y?" },
-    ],
-  }),
-
-  Q(24, "Persegi dari Koordinat", {
-    type: "mixed",
-    content: "Tiga titik sudut persegi adalah A(0, 0), B(4, 0), C(4, 4).",
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik sudut ke-4 yaitu D." },
-      { label: "b.", text: "Hitung keliling persegi tersebut." },
-      { label: "c.", text: "Hitung luas persegi tersebut." },
-    ],
-  }),
-
-  Q(25, "Mencari Koordinat dari Jarak", {
-    type: "mixed",
-    content: "Tentukan nilai yang belum diketahui:",
-    parts: [
-      { label: "a.", math: "P(?,\\ 3) \\text{ berjarak 5 satuan dari sumbu-y. Tentukan } x." },
-      { label: "b.", math: "Q(-6,\\ ?) \\text{ berjarak 4 satuan dari sumbu-x (di bawah). Tentukan } y." },
-      { label: "c.", math: "R(?,\\ ?) \\text{ berjarak 3 dari sumbu-x dan 4 dari sumbu-y di Kuadran IV.}" },
-    ],
-  }),
-
-  Q(26, "ANBK — Pasangkan Titik dengan Kuadran", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6, quadrantLabels: true,
-      pts: [
-        { x: 3, y: 2, label: "1", color: "#f472b6", labelPos: "tr" },
-        { x: -4, y: 3, label: "2", color: "#fb923c", labelPos: "tl" },
-        { x: -2, y: -4, label: "3", color: "#a78bfa", labelPos: "bl" },
-        { x: 5, y: -1, label: "4", color: "#34d399", labelPos: "br" },
-        { x: 0, y: 4, label: "5", color: "#facc15", labelPos: "tr" },
-        { x: -3, y: 0, label: "6", color: "#60a5fa", labelPos: "top" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Pasangkan nomor titik (1–6) dengan lokasinya: Kuadran I, II, III, IV, Sumbu-x, atau Sumbu-y." },
-      { label: "b.", text: "Tuliskan koordinat masing-masing titik." },
-    ],
-  }),
-
-  Q(27, "Titik Istimewa pada Sistem Koordinat", {
-    type: "mixed",
-    content: "Jawab pertanyaan tentang titik-titik istimewa berikut:",
-    parts: [
-      { label: "a.", text: "Di mana titik (0, 0) berada? Apa namanya?" },
-      { label: "b.", text: "Titik (1, 0) berada pada sumbu apa? Berapa jaraknya dari O?" },
-      { label: "c.", text: "Titik (0, 1) berada pada sumbu apa? Berapa jaraknya dari O?" },
-      { label: "d.", text: "Apakah (0, 0) berada di salah satu kuadran? Jelaskan!" },
-    ],
-  }),
-
-  Q(28, "Menemukan Pola Koordinat", {
-    type: "mixed",
-    content: "Perhatikan deretan titik: A(1, 2), B(2, 4), C(3, 6), D(4, 8)",
-    parts: [
-      { label: "a.", text: "Apa pola hubungan antara absis dan ordinat?" },
-      { label: "b.", text: "Tuliskan koordinat titik E dan F pada pola yang sama." },
-      { label: "c.", math: "\\text{Jika } y = 2x \\text{, apakah titik } (5,\\ 10) \\text{ mengikuti pola ini?}" },
     ],
   }),
 
@@ -459,40 +313,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(30, "Soal UN — Koordinat dalam Konteks", {
-    type: "mixed",
-    content: "Seorang navigator kapal mencatat posisinya di peta koordinat:\nMulai: A(2, −3)\nBergerak 5 satuan ke kanan dan 4 satuan ke atas → posisi B.",
-    parts: [
-      { label: "a.", text: "Tentukan koordinat posisi B." },
-      { label: "b.", text: "Di kuadran mana posisi A berada? Posisi B?" },
-      { label: "c.", text: "Dari B, kapal bergerak 3 satuan ke kiri dan 7 satuan ke bawah. Tentukan posisi C." },
-    ],
-  }),
-
-  Q(31, "Soal ANBK — Gabungan Konsep Unsur Koordinat", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 3, y: 4, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -3, y: 4, label: "B", color: "#60a5fa", labelPos: "tl" },
-        { x: -3, y: -4, label: "C", color: "#34d399", labelPos: "bl" },
-        { x: 3, y: -4, label: "D", color: "#facc15", labelPos: "br" },
-      ],
-      segs: [
-        { x1: 3, y1: 4, x2: -3, y2: 4, color: "rgba(255,255,255,0.25)" },
-        { x1: -3, y1: 4, x2: -3, y2: -4, color: "rgba(255,255,255,0.25)" },
-        { x1: -3, y1: -4, x2: 3, y2: -4, color: "rgba(255,255,255,0.25)" },
-        { x1: 3, y1: -4, x2: 3, y2: 4, color: "rgba(255,255,255,0.25)" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Tuliskan koordinat A, B, C, D dan tentukan kuadrannya." },
-      { label: "b.", text: "Bangun apa yang dibentuk oleh titik A, B, C, D? Hitung kelilingnya." },
-      { label: "c.", text: "Tentukan koordinat titik tengah diagonal AC dan diagonal BD." },
-      { label: "d.", text: "Apa yang bisa kamu simpulkan dari titik tengah kedua diagonal?" },
-    ],
-  }),
 ];
 
 const UnsurUnsurPage = () => {
@@ -513,7 +333,7 @@ const UnsurUnsurPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Cartesius · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 31 Soal</span>
+            <span className="text-sky-400 text-xs font-bold">📋 18 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
