@@ -348,7 +348,7 @@ const GradienPage = () => {
                 <div className="flex flex-col gap-2 mt-2 pl-2">
                   {q.parts.map((p, pi) => (
                     <div key={pi} className="flex items-start gap-2">
-                      <span className="text-blue-400 text-xs font-body font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
+                      <span className="text-blue-400 text-xs font-body font-bold shrink-0 mt-0.5 min-w-[60px]">{p.label}</span>
                       <div className="text-white/75 text-sm font-body leading-relaxed">
                         {p.math ? <InlineMath math={p.math} /> : <span>{p.text}</span>}
                       </div>

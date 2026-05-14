@@ -19,7 +19,7 @@ const subtopics = [
     icon: TrendingUp,
     color: "#60a5fa",
     desc: "Gradien dari 2 titik, persamaan, dan grafik",
-    soal: 20,
+    soal: 23,
   },
   {
     label: "MENENTUKAN PERSAMAAN GARIS LURUS",
@@ -27,7 +27,7 @@ const subtopics = [
     icon: PenLine,
     color: "#34d399",
     desc: "Bentuk y = mx + c, melalui titik dan gradien",
-    soal: 13,
+    soal: 15,
   },
   {
     label: "HUBUNGAN 2 GARIS",
@@ -35,7 +35,7 @@ const subtopics = [
     icon: GitBranch,
     color: "#fb923c",
     desc: "Sejajar, tegak lurus, dan berpotongan",
-    soal: 41,
+    soal: 13,
   },
   {
     label: "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL",
@@ -43,7 +43,7 @@ const subtopics = [
     icon: Globe,
     color: "#a78bfa",
     desc: "Biaya, kecepatan, grafik kehidupan nyata",
-    soal: 41,
+    soal: 15,
   },
 ];
 
@@ -59,7 +59,7 @@ const PersamaanGarisLurusPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           PERSAMAAN GARIS LURUS
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Latihan Mandiri · 5 Sub Topik · 177 Soal Total</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Latihan Mandiri · 5 Sub Topik · 81 Soal Total</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((sub, i) => {
