@@ -100,6 +100,7 @@ const questions: Q[] = [
     type: "essay",
     img: "/image_1778761973928.png",
     imgAlt: "Nelayan melempar jaring ikan berbentuk lingkaran dari perahu",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Jaring ikan berbentuk lingkaran. Jika diameter jaring 14 m, dan nelayan melempar jaring setiap 10 menit.",
     parts: [
       { label: "a.", text: "Berapa luas area yang tertutup jaring setiap kali dilempar?" },
@@ -112,6 +113,7 @@ const questions: Q[] = [
     type: "essay",
     img: "/image_1778762091357.png",
     imgAlt: "Meja makan berbentuk lingkaran dengan taplak meja putih",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Meja makan berbentuk lingkaran dengan diameter 1,4 m akan dilapisi taplak meja. Taplak menjuntai 20 cm di setiap sisi.",
     parts: [
       { label: "a.", text: "Tentukan diameter taplak meja." },
@@ -124,6 +126,7 @@ const questions: Q[] = [
     type: "essay",
     img: "/image_1778762340281.png",
     imgAlt: "Diagram geometri orbit satelit mengelilingi bumi",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Satelit mengorbit bumi pada ketinggian 7.000 km. Jari-jari bumi ≈ 6.400 km. Orbit dianggap melingkar.",
     parts: [
       { label: "a.", text: "Tentukan jari-jari orbit satelit dari pusat bumi." },
@@ -136,6 +139,7 @@ const questions: Q[] = [
     type: "essay",
     img: "/image_1778762645992.png",
     imgAlt: "Ban mobil melingkar di jalan basah malam hari",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Ban mobil memiliki jari-jari luar 35 cm. Mobil bergerak sejauh 440 m.",
     parts: [
       { label: "a.", text: "Hitung keliling ban." },
@@ -148,6 +152,7 @@ const questions: Q[] = [
     type: "essay",
     img: "/image_1778762749930.png",
     imgAlt: "Kolam ikan berbentuk lingkaran tampak atas dengan pemilik memberi pakan",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Kolam ikan berbentuk lingkaran dengan diameter 14 m. Pemilik ingin memberi pakan ikan yang disebar merata.",
     parts: [
       { label: "a.", text: "Hitung luas permukaan kolam." },
@@ -160,6 +165,7 @@ const questions: Q[] = [
     type: "mixed",
     img: "/image_1778763445513.png",
     imgAlt: "Desain taman terpadu 3 zona: kolam (r=3,5 m), taman bunga (r=7,7 m), lintasan jogging (r=12,6 m)",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Taman terpadu 3 zona:\n• Kolam: r = 3,5 m\n• Taman Bunga: r = 7,7 m (annulus)\n• Lintasan Jogging: r = 12,6 m (annulus)\n(π = 22/7)",
     parts: [
       { label: "a.", text: "Hitung luas Kolam." },
