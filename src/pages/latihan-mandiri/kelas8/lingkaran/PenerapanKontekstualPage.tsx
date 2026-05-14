@@ -22,6 +22,7 @@ const questions: Q[] = [
     type: "mixed",
     img: "/soal-roda-sepeda.png",
     imgAlt: "Roda sepeda dengan jari-jari 35 cm",
+    imgCaption: "https://www.cycle-eirin.com/wordpress",
     content: "Roda sepeda berjari-jari 35 cm berputar di jalan.",
     parts: [
       { label: "a.", math: "\\text{Hitung keliling roda. (} \\pi = \\tfrac{22}{7})" },
