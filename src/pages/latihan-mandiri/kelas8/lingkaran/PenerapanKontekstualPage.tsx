@@ -158,20 +158,8 @@ const questions: Q[] = [
 
   Q(12, "Soal ANBK Gabungan — Desain Taman Terpadu", {
     type: "mixed",
-    diagram: {
-      size: 220,
-      extraCircles: [
-        { cx: 110, cy: 110, r: 90, color: "#34d399", fill: "rgba(52,211,153,0.07)" },
-        { cx: 110, cy: 110, r: 55, color: "#60a5fa", fill: "rgba(56,189,248,0.1)" },
-        { cx: 110, cy: 110, r: 25, color: "#f472b6", fill: "rgba(248,113,163,0.2)" },
-      ],
-      extraTexts: [
-        { x: 110, y: 113, text: "Kolam", color: "#f472b6", size: 8, bold: true },
-        { x: 155, y: 95, text: "Taman", color: "#60a5fa", size: 8 },
-        { x: 182, y: 75, text: "Jogging", color: "#34d399", size: 8 },
-      ],
-      showCenter: false,
-    },
+    img: "/image_1778763445513.png",
+    imgAlt: "Desain taman terpadu 3 zona: kolam (r=3,5 m), taman bunga (r=7,7 m), lintasan jogging (r=12,6 m)",
     content: "Taman terpadu 3 zona:\n• Kolam: r = 3,5 m\n• Taman Bunga: r = 7,7 m (annulus)\n• Lintasan Jogging: r = 12,6 m (annulus)\n(π = 22/7)",
     parts: [
       { label: "a.", text: "Hitung luas Kolam." },
