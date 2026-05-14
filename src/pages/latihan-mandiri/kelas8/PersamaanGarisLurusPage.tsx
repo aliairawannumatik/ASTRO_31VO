@@ -11,7 +11,7 @@ const subtopics = [
     icon: BarChart2,
     color: "#f472b6",
     desc: "Titik potong sumbu, tabel nilai, sketsa grafik",
-    soal: 41,
+    soal: 15,
   },
   {
     label: "GRADIEN (KEMIRINGAN GARIS)",
