@@ -47,7 +47,6 @@ const LatihanMandiriKelas8Page = () => {
             >
               <BookOpen className="w-5 h-5 text-accent shrink-0 group-hover:scale-110 transition-transform" />
               <span className="font-body text-sm text-white flex-1">{topic.label}</span>
-              <span className="text-xs text-white/40 font-body shrink-0">{topic.soal} Soal</span>
               <span className="text-xs text-accent font-display shrink-0">BUKA</span>
             </button>
           ))}
