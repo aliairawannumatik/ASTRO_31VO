@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "UNSUR-UNSUR LINGKARAN",
     path: "/latihan-mandiri/kelas-8/lingkaran/unsur-unsur",
-    soal: 40,
+    soal: 2,
     gradient: "from-cyan-900/40 to-blue-900/30",
     border: "border-cyan-500/30",
     badge: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
@@ -20,7 +20,7 @@ const subtopics = [
   {
     label: "KELILING DAN LUAS LINGKARAN",
     path: "/latihan-mandiri/kelas-8/lingkaran/keliling-luas",
-    soal: 40,
+    soal: 13,
     gradient: "from-emerald-900/40 to-teal-900/30",
     border: "border-emerald-500/30",
     badge: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
@@ -32,7 +32,7 @@ const subtopics = [
   {
     label: "KAITAN LINGKARAN DENGAN BANGUN DATAR LAINNYA",
     path: "/latihan-mandiri/kelas-8/lingkaran/kaitan-bangun-datar",
-    soal: 40,
+    soal: 1,
     gradient: "from-orange-900/40 to-amber-900/30",
     border: "border-orange-500/30",
     badge: "bg-orange-500/20 text-orange-300 border-orange-400/40",
@@ -44,7 +44,7 @@ const subtopics = [
   {
     label: "PANJANG BUSUR DAN LUAS JURING",
     path: "/latihan-mandiri/kelas-8/lingkaran/busur-juring",
-    soal: 40,
+    soal: 6,
     gradient: "from-yellow-900/40 to-amber-900/30",
     border: "border-yellow-500/30",
     badge: "bg-yellow-500/20 text-yellow-300 border-yellow-400/40",
@@ -56,7 +56,7 @@ const subtopics = [
   {
     label: "SUDUT PUSAT DAN SUDUT KELILING",
     path: "/latihan-mandiri/kelas-8/lingkaran/sudut-pusat-keliling",
-    soal: 40,
+    soal: 15,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
     badge: "bg-violet-500/20 text-violet-300 border-violet-400/40",
@@ -98,7 +98,7 @@ const LingkaranPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">240 Soal Total · Dilengkapi Diagram SVG Interaktif</span>
+            <span className="text-white/70 text-xs font-body">77 Soal Total · Dilengkapi Diagram SVG Interaktif</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
