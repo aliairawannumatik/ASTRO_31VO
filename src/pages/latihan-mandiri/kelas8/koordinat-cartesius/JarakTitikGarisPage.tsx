@@ -236,28 +236,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(12, "Jarak dari Titik Tengah", {
-    type: "mixed",
-    content: "Diketahui titik A(2, 4) dan B(8, 10).",
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik tengah M dari AB." },
-      { label: "b.", text: "Hitung jarak AM dan MB. Apa yang kamu simpulkan?" },
-      { label: "c.", text: "Hitung jarak AB." },
-    ],
-  }),
-
-  Qn(13, "Jarak Titik ke Titik Asal O", {
-    type: "mixed",
-    content: "Jarak titik P(x, y) ke titik asal O(0, 0) dapat dihitung sebagai:",
-    parts: [
-      { label: "Rumus:", math: "OP = \\sqrt{x^2 + y^2}" },
-      { label: "a.", math: "\\text{Hitung } OA \\text{ jika } A(3,\\ 4)" },
-      { label: "b.", math: "\\text{Hitung } OB \\text{ jika } B(-5,\\ 12)" },
-      { label: "c.", math: "\\text{Hitung } OC \\text{ jika } C(-6,\\ -8)" },
-    ],
-  }),
-
-  Qn(14, "Luas Segitiga dari Koordinat", {
+  Qn(12, "Luas Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -279,18 +258,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(15, "Soal TKA — Jarak dan Koordinat", {
-    type: "mixed",
-    content: "Diketahui titik A(3, 4) dan B(−1, 1).",
-    parts: [
-      { label: "a.", math: "\\text{Hitung jarak } AB." },
-      { label: "b.", math: "\\text{Hitung jarak } A \\text{ ke sumbu-x dan ke sumbu-y.}" },
-      { label: "c.", math: "\\text{Hitung jarak } B \\text{ ke sumbu-x dan ke sumbu-y.}" },
-      { label: "d.", text: "Titik manakah yang lebih dekat ke titik asal O?" },
-    ],
-  }),
-
-  Qn(16, "Jarak dalam Konteks Nyata", {
+  Qn(13, "Jarak dalam Konteks Nyata", {
     type: "mixed",
     content: "Sebuah peta kota menggunakan koordinat kartesius (dalam km).\nRumah Andi: A(2, 3), Sekolah: B(8, 11)",
     diagram: {
@@ -307,28 +275,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(17, "Titik yang Berjarak Sama", {
-    type: "mixed",
-    content: "Tentukan sebuah titik pada sumbu-x yang berjarak sama dari titik A(3, 4) dan B(−1, 2).",
-    parts: [
-      { label: "a.", math: "\\text{Misalkan titik pada sumbu-x adalah } P(x,\\ 0)." },
-      { label: "b.", math: "\\text{Gunakan kondisi: } PA = PB" },
-      { label: "c.", text: "Hitung nilai x dan tentukan koordinat P." },
-    ],
-  }),
-
-  Qn(18, "Jarak Ganda — Dua Titik", {
-    type: "mixed",
-    content: "Hitung jarak antara pasangan titik berikut:",
-    parts: [
-      { label: "a.", math: "A(0,\\ 0) \\text{ dan } B(3,\\ 4)" },
-      { label: "b.", math: "C(-2,\\ 1) \\text{ dan } D(2,\\ 4)" },
-      { label: "c.", math: "E(5,\\ -3) \\text{ dan } F(-1,\\ 5)" },
-      { label: "d.", math: "G(-4,\\ -7) \\text{ dan } H(2,\\ 1)" },
-    ],
-  }),
-
-  Qn(19, "Jarak Titik ke Garis — Lanjutan", {
+  Qn(14, "Jarak Titik ke Garis — Lanjutan", {
     type: "mixed",
     content: "Hitung jarak dari titik ke garis yang diberikan:",
     parts: [
@@ -339,7 +286,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(20, "Titik Equidistant dari Dua Garis", {
+  Qn(15, "Titik Equidistant dari Dua Garis", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -358,7 +305,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(21, "Persegi Panjang — Diagonal", {
+  Qn(16, "Persegi Panjang — Diagonal", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -384,31 +331,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(22, "Jarak Titik — Soal Pilihan Ganda Tipe UN", {
-    type: "mixed",
-    content: "Jarak antara titik P(1, 3) dan Q(4, 7) adalah ...",
-    parts: [
-      { label: "A.", math: "3\\sqrt{2}" },
-      { label: "B.", math: "4\\sqrt{2}" },
-      { label: "C.", math: "5" },
-      { label: "D.", math: "\\sqrt{25} = 5" },
-      { label: "", text: "Tentukan jawaban yang benar dan tunjukkan penghitungannya!" },
-    ],
-  }),
-
-  Qn(23, "Jarak Titik — Soal Tipe ANBK", {
-    type: "mixed",
-    content: "Diketahui titik K(−2, 3) dan L(4, −5). Manakah pernyataan yang BENAR?",
-    parts: [
-      { label: "(1)", math: "KL = 10" },
-      { label: "(2)", text: "Jarak K ke sumbu-x = 3" },
-      { label: "(3)", text: "Jarak L ke sumbu-y = 4" },
-      { label: "(4)", math: "KL = \\sqrt{100} = 10" },
-      { label: "", text: "Periksa semua pernyataan dan tentukan yang benar!" },
-    ],
-  }),
-
-  Qn(24, "Luas Segitiga — Koordinat Beragam", {
+  Qn(17, "Luas Segitiga — Koordinat Beragam", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -430,48 +353,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(25, "Titik pada Lingkaran", {
-    type: "mixed",
-    content: "Sebuah lingkaran berpusat di O(0, 0) dengan jari-jari 5.",
-    parts: [
-      { label: "a.", math: "\\text{Apakah titik } A(3,\\ 4) \\text{ terletak pada lingkaran? Periksa!}" },
-      { label: "b.", math: "\\text{Apakah titik } B(4,\\ 4) \\text{ terletak pada lingkaran? Periksa!}" },
-      { label: "c.", math: "\\text{Apakah titik } C(5,\\ 0) \\text{ terletak pada lingkaran? Periksa!}" },
-    ],
-  }),
-
-  Qn(26, "Jarak Titik ke Garis Miring (Pengantar)", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [
-        { x1: -5, y1: -5, x2: 5, y2: 5, color: "#facc15", label: "y=x" },
-      ],
-      pts: [
-        { x: 4, y: 1, label: "P(4,1)", color: "#f472b6", labelPos: "br" },
-        { x: -2, y: 3, label: "Q(−2,3)", color: "#60a5fa", labelPos: "tl" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Apakah titik P(4, 1) berada di atas atau di bawah garis y = x?" },
-      { label: "b.", text: "Apakah titik Q(−2, 3) berada di atas atau di bawah garis y = x?" },
-      { label: "c.", text: "Titik yang berada di atas garis y = x memiliki sifat y > x atau y < x?" },
-    ],
-  }),
-
-  Qn(27, "Kode Posisi Titik Relatif", {
-    type: "mixed",
-    content: "Tentukan posisi setiap titik terhadap garis y = x (di atas, di bawah, atau pada garis):",
-    parts: [
-      { label: "a.", math: "A(3,\\ 3)" },
-      { label: "b.", math: "B(2,\\ 5)" },
-      { label: "c.", math: "C(-1,\\ -3)" },
-      { label: "d.", math: "D(4,\\ -1)" },
-      { label: "e.", math: "E(0,\\ 0)" },
-    ],
-  }),
-
-  Qn(28, "Keliling Segi Empat dari Koordinat", {
+  Qn(18, "Keliling Segi Empat dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -494,17 +376,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(29, "Mencari Titik dari Jarak yang Diketahui", {
-    type: "mixed",
-    content: "Cari semua titik yang memenuhi syarat:",
-    parts: [
-      { label: "a.", math: "\\text{Berjarak 5 dari } O(0,0) \\text{ dan terletak pada sumbu-x.}" },
-      { label: "b.", math: "\\text{Berjarak 3 dari } A(1,0) \\text{ dan terletak pada sumbu-y.}" },
-      { label: "c.", math: "\\text{Berjarak 4 dari sumbu-x dan berjarak 3 dari sumbu-y di Kuadran II.}" },
-    ],
-  }),
-
-  Qn(30, "Jarak dalam Segitiga Siku-siku", {
+  Qn(19, "Jarak dalam Segitiga Siku-siku", {
     type: "mixed",
     diagram: {
       size: 260, range: 8,
@@ -526,137 +398,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(31, "Soal UN — Jarak Titik", {
-    type: "mixed",
-    content: "Koordinat titik A(−3, 4) dan B(5, −2).",
-    parts: [
-      { label: "a.", math: "\\text{Hitung } AB." },
-      { label: "b.", math: "\\text{Hitung titik tengah } M \\text{ dari } AB." },
-      { label: "c.", math: "\\text{Hitung jarak } A \\text{ ke sumbu-x dan sumbu-y.}" },
-      { label: "d.", math: "\\text{Hitung jarak } B \\text{ ke garis } y = 3." },
-    ],
-  }),
-
-  Qn(32, "Titik Tiga — Terbukti Segaris atau Tidak", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: -2, y: -1, label: "A", color: "#f472b6", labelPos: "bl" },
-        { x: 1, y: 1, label: "B", color: "#fb923c", labelPos: "tr" },
-        { x: 4, y: 3, label: "C", color: "#34d399", labelPos: "tr" },
-      ],
-      segs: [
-        { x1: -2, y1: -1, x2: 4, y2: 3, color: "#60a5fa", dashed: true },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung AB, BC, dan AC." },
-      { label: "b.", text: "Apakah AB + BC = AC? Apa kesimpulanmu tentang posisi ketiga titik?" },
-    ],
-  }),
-
-  Qn(33, "Titik pada Garis y = 2x", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -3, y1: -6, x2: 3, y2: 6, color: "#facc15", label: "y=2x" }],
-      pts: [
-        { x: 2, y: 4, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -1, y: -2, label: "B", color: "#60a5fa", labelPos: "bl" },
-        { x: 3, y: 5, label: "C", color: "#34d399", labelPos: "tr" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Periksa apakah titik A(2, 4) terletak pada garis y = 2x." },
-      { label: "b.", text: "Periksa apakah titik B(−1, −2) terletak pada garis y = 2x." },
-      { label: "c.", text: "Periksa apakah titik C(3, 5) terletak pada garis y = 2x." },
-    ],
-  }),
-
-  Qn(34, "Jarak Titik dan Klasifikasinya", {
-    type: "mixed",
-    content: "Diketahui empat titik: A(0,5), B(3,0), C(0,−5), D(−3,0).",
-    parts: [
-      { label: "a.", text: "Hitung jarak setiap titik ke titik asal O." },
-      { label: "b.", text: "Hitung jarak AB, BC, CD, dan DA." },
-      { label: "c.", text: "Bangun apa yang dibentuk oleh A, B, C, D? Jelaskan!" },
-    ],
-  }),
-
-  Qn(35, "Koordinat Titik — Dari Kondisi Jarak", {
-    type: "mixed",
-    content: "Tentukan koordinat titik P yang memenuhi syarat:",
-    parts: [
-      { label: "a.", text: "P terletak pada sumbu-y dan berjarak 5 dari titik A(4, 0)." },
-      { label: "b.", text: "P terletak pada sumbu-x dan berjarak 5 dari titik B(0, 3)." },
-    ],
-  }),
-
-  Qn(36, "Soal TKA — Keliling dan Luas", {
-    type: "mixed",
-    content: "Titik-titik sudut suatu segi empat: A(0, 0), B(6, 0), C(6, 4), D(0, 4).",
-    parts: [
-      { label: "a.", text: "Buat sketsa segi empat ABCD pada koordinat kartesius." },
-      { label: "b.", text: "Hitung keliling ABCD." },
-      { label: "c.", text: "Hitung luas ABCD." },
-      { label: "d.", text: "Hitung panjang diagonal AC." },
-    ],
-  }),
-
-  Qn(37, "Jarak Titik ke Garis Kombinasi", {
-    type: "mixed",
-    content: "Diketahui titik P(−3, 5). Hitung:",
-    parts: [
-      { label: "a.", text: "Jarak P ke sumbu-x." },
-      { label: "b.", text: "Jarak P ke sumbu-y." },
-      { label: "c.", math: "\\text{Jarak P ke garis } y = -2." },
-      { label: "d.", math: "\\text{Jarak P ke garis } x = 4." },
-      { label: "e.", text: "Jarak P ke titik asal O." },
-    ],
-  }),
-
-  Qn(38, "Titik Tengah dan Jarak", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      pts: [
-        { x: -4, y: 2, label: "A(−4,2)", color: "#f472b6", labelPos: "tl" },
-        { x: 6, y: -4, label: "B(6,−4)", color: "#fb923c", labelPos: "br" },
-        { x: 1, y: -1, label: "M(?,?)", color: "#facc15", labelPos: "top" },
-      ],
-      segs: [{ x1: -4, y1: 2, x2: 6, y2: -4, color: "#60a5fa" }],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik tengah M dari AB." },
-      { label: "b.", text: "Hitung jarak AM." },
-      { label: "c.", text: "Verifikasi: apakah AM = MB?" },
-    ],
-  }),
-
-  Qn(39, "Soal ANBK — Evaluasi Jarak", {
-    type: "mixed",
-    content: "Pernyataan tentang titik A(3, 4) dan B(−3, −4). Tentukan B (Benar) atau S (Salah):",
-    parts: [
-      { label: "(1)", math: "AB = 10" },
-      { label: "(2)", text: "Jarak A ke sumbu-x = 4" },
-      { label: "(3)", text: "Jarak B ke sumbu-y = 3" },
-      { label: "(4)", text: "Jarak A ke titik O sama dengan jarak B ke titik O" },
-      { label: "(5)", math: "OA = OB = 5" },
-    ],
-  }),
-
-  Qn(40, "Soal UN — Konteks Jarak Tempuh", {
-    type: "mixed",
-    content: "Di peta skala koordinat (1 satuan = 100 meter):\nGedung A: (2, 3)\nGedung B: (8, 11)\nGedung C: (14, 3)",
-    parts: [
-      { label: "a.", math: "\\text{Hitung jarak } AB." },
-      { label: "b.", math: "\\text{Hitung jarak } BC." },
-      { label: "c.", math: "\\text{Hitung jarak } AC." },
-      { label: "d.", text: "Hitung total jarak perjalanan A→B→C→A dalam meter." },
-      { label: "e.", text: "Apakah segitiga ABC sama sisi? Jelaskan!" },
-    ],
-  }),
 ];
 
 const JarakTitikGarisPage = () => {
@@ -677,7 +418,7 @@ const JarakTitikGarisPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Cartesius · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-teal-400 text-xs font-bold">📋 19 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
