@@ -124,59 +124,52 @@ const MenghitungCepatPage = () => {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={() => handleClick("/menghitung-cepat/game-latihan")}
-            className="group bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-fuchsia-500/15 backdrop-blur border border-amber-500/40 hover:border-amber-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
+            className="group bg-card/80 backdrop-blur border border-amber-500/30 hover:border-amber-400/60 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
           >
             <div className="flex items-start gap-4">
-              <Gamepad2 className="w-8 h-8 text-amber-300 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
+              <Gamepad2 className="w-7 h-7 text-amber-400 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
               <div>
-                <h3 className="font-display text-base font-bold text-amber-200 mb-1 leading-tight">
+                <h3 className="font-display text-sm font-bold text-foreground mb-1 leading-tight">
                   🎮 GAME LATIHAN HITUNG CEPAT
                 </h3>
-                <p className="text-xs text-white/70 font-body leading-relaxed">
-                  Hajar Mol, Galaksi Defender Math, dan Bubble Pop — asah reflek berhitung lewat game interaktif yang seru!
-                </p>
+                <p className="text-xs text-muted-foreground font-body">Hajar Mol, Galaksi Defender Math, dan Bubble Pop</p>
               </div>
             </div>
           </button>
+
           <button
             onClick={() => handleClick("/menghitung-cepat/tabel-referensi")}
-            className="group bg-gradient-to-r from-yellow-500/15 via-amber-500/15 to-orange-500/15 backdrop-blur border border-yellow-500/40 hover:border-yellow-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
+            className="group bg-card/80 backdrop-blur border border-yellow-500/30 hover:border-yellow-400/60 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
           >
             <div className="flex items-start gap-4">
-              <BookOpen className="w-8 h-8 text-yellow-300 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
+              <BookOpen className="w-7 h-7 text-yellow-400 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
               <div>
-                <h3 className="font-display text-base font-bold text-yellow-200 mb-1 leading-tight">
+                <h3 className="font-display text-sm font-bold text-foreground mb-1 leading-tight">
                   ⭐ TABEL REFERENSI CEPAT
                 </h3>
-                <p className="text-xs text-white/70 font-body leading-relaxed">
-                  Perkalian 1–10, kuadrat 1–30, kubik, akar, pangkat, prima, pecahan↔persen, dan konversi satuan.
-                </p>
+                <p className="text-xs text-muted-foreground font-body">Perkalian 1–10, kuadrat 1–30, kubik, akar, pangkat, prima, pecahan↔persen</p>
               </div>
             </div>
           </button>
 
           <button
             onClick={() => handleClick("/menghitung-cepat/latihan-flashcard")}
-            className="group bg-gradient-to-r from-violet-500/15 via-fuchsia-500/15 to-pink-500/15 backdrop-blur border border-fuchsia-500/40 hover:border-fuchsia-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
+            className="group bg-card/80 backdrop-blur border border-fuchsia-500/30 hover:border-fuchsia-400/60 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
           >
             <div className="flex items-start gap-4">
-              <Brain className="w-8 h-8 text-fuchsia-300 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
+              <Brain className="w-7 h-7 text-fuchsia-400 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
               <div>
-                <h3 className="font-display text-base font-bold text-fuchsia-200 mb-1 leading-tight">
+                <h3 className="font-display text-sm font-bold text-foreground mb-1 leading-tight">
                   🧠 LATIHAN FLASHCARD
                 </h3>
-                <p className="text-xs text-white/70 font-body leading-relaxed">
-                  Kuis kilat berbasis tabel: perkalian, kuadrat, kubik, akar, atau pecahan↔persen — 10 soal, timer 60 detik.
-                </p>
+                <p className="text-xs text-muted-foreground font-body">Kuis kilat berbasis tabel: perkalian, kuadrat, kubik, akar, atau pecahan↔persen</p>
               </div>
             </div>
           </button>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {topics.map((topic, i) => (
             <button
               key={topic.path}
