@@ -168,6 +168,8 @@ const questions: Q[] = [
 
   Q(14, "Soal UN — Drum Silinder", {
     type: "essay",
+    img: "/image_1778761973928.png",
+    imgAlt: "Nelayan melempar jaring ikan berbentuk lingkaran dari perahu",
     content: "Jaring ikan berbentuk lingkaran. Jika diameter jaring 14 m, dan nelayan melempar jaring setiap 10 menit.",
     parts: [
       { label: "a.", text: "Berapa luas area yang tertutup jaring setiap kali dilempar?" },
