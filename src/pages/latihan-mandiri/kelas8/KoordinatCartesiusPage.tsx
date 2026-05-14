@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "UNSUR-UNSUR PADA DIAGRAM CARTESIUS",
     path: "/latihan-mandiri/kelas-8/koordinat-cartesius/unsur-unsur",
-    soal: 40,
+    soal: 12,
     icon: MapPin,
     gradient: "from-sky-900/40 to-blue-900/30",
     border: "border-sky-500/30",
@@ -21,7 +21,7 @@ const subtopics = [
   {
     label: "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN",
     path: "/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan",
-    soal: 40,
+    soal: 14,
     icon: Crosshair,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -78,7 +78,7 @@ const KoordinatCartesiusPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">160 Soal Total · Dilengkapi Diagram Koordinat</span>
+            <span className="text-white/70 text-xs font-body">106 Soal Total · Dilengkapi Diagram Koordinat</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>

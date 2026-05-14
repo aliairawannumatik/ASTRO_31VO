@@ -104,38 +104,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Koordinat pada Sumbu-y", {
-    type: "mixed",
-    content: "Jika titik Q(x, 4) terletak pada sumbu-y:",
-    parts: [
-      { label: "a.", text: "Tentukan nilai x." },
-      { label: "b.", text: "Tuliskan koordinat lengkap titik Q." },
-      { label: "c.", text: "Di mana posisi titik Q relatif terhadap titik asal O?" },
-    ],
-  }),
-
-  Q(7, "Membaca Diagram - Titik Beragam Posisi", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 2, y: 5, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -3, y: 4, label: "B", color: "#60a5fa", labelPos: "tl" },
-        { x: 5, y: -1, label: "C", color: "#34d399", labelPos: "br" },
-        { x: -4, y: -3, label: "D", color: "#fb923c", labelPos: "bl" },
-        { x: 1, y: 0, label: "E", color: "#facc15", labelPos: "top" },
-        { x: 0, y: -5, label: "F", color: "#a78bfa", labelPos: "tr" },
-        { x: -5, y: 0, label: "G", color: "#f87171", labelPos: "top" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Tuliskan koordinat semua titik di atas." },
-      { label: "b.", text: "Sebutkan titik-titik yang berada di kuadran II." },
-      { label: "c.", text: "Sebutkan titik-titik yang berada pada sumbu koordinat." },
-    ],
-  }),
-
-  Q(8, "Titik Tengah Segmen", {
+  Q(6, "Titik Tengah Segmen", {
     type: "mixed",
     content: "Tentukan koordinat titik tengah dari setiap segmen berikut:",
     parts: [
@@ -145,7 +114,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Mencari Ujung Segmen dari Titik Tengah", {
+  Q(7, "Mencari Ujung Segmen dari Titik Tengah", {
     type: "mixed",
     content: "Titik M adalah titik tengah segmen PQ. Tentukan koordinat Q jika:",
     parts: [
@@ -155,7 +124,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Jarak Titik ke Sumbu-x", {
+  Q(8, "Jarak Titik ke Sumbu-x", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -174,7 +143,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(11, "Jarak Titik ke Sumbu-y", {
+  Q(9, "Jarak Titik ke Sumbu-y", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -193,44 +162,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(13, "Garis Sejajar Sumbu-x", {
-    type: "mixed",
-    content: "Perhatikan semua titik yang memiliki ordinat (y) = −3.",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -5.5, y1: -3, x2: 5.5, y2: -3, color: "#facc15", label: "y = −3" }],
-      pts: [
-        { x: -4, y: -3, label: "P", color: "#f472b6", labelPos: "top" },
-        { x: 0, y: -3, label: "Q", color: "#60a5fa", labelPos: "top" },
-        { x: 3, y: -3, label: "R", color: "#34d399", labelPos: "top" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Apa yang dapat kamu simpulkan tentang semua titik dengan y = −3?" },
-      { label: "b.", text: "Garis y = −3 sejajar dengan sumbu mana?" },
-      { label: "c.", text: "Berapa jarak garis y = −3 dari sumbu-x?" },
-    ],
-  }),
-
-  Q(14, "Garis Sejajar Sumbu-y", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: 4, y1: -5.5, x2: 4, y2: 5.5, color: "#a78bfa", label: "x=4" }],
-      pts: [
-        { x: 4, y: 3, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: 4, y: -2, label: "B", color: "#fb923c", labelPos: "tr" },
-        { x: 4, y: 0, label: "C", color: "#facc15", labelPos: "tr" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Apa yang sama dari koordinat semua titik pada garis x = 4?" },
-      { label: "b.", text: "Garis x = 4 sejajar dengan sumbu mana?" },
-      { label: "c.", text: "Berapa jarak garis x = 4 dari sumbu-y?" },
-    ],
-  }),
-
-  Q(15, "Titik ke-4 Persegi Panjang", {
+  Q(10, "Titik ke-4 Persegi Panjang", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -254,7 +186,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(16, "Segitiga dari Koordinat", {
+  Q(11, "Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -276,7 +208,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(18, "Soal ANBK - Evaluasi Pernyataan", {
+  Q(12, "Soal ANBK - Evaluasi Pernyataan", {
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:",
     parts: [
@@ -284,32 +216,6 @@ const questions: Q[] = [
       { label: "(2)", text: "Titik yang berada di Kuadran II memiliki x < 0 dan y > 0." },
       { label: "(3)", text: "Titik (5, 0) terletak pada sumbu-x." },
       { label: "(4)", text: "Jika x = 0 dan y ≠ 0, titik tersebut terletak pada sumbu-y." },
-    ],
-  }),
-
-  Q(21, "Titik pada Sumbu dari Kondisi Aljabar", {
-    type: "mixed",
-    content: "Tentukan nilai m agar:",
-    parts: [
-      { label: "a.", math: "Q(4,\\ 2m-5) \\text{ terletak pada sumbu-x.}" },
-      { label: "b.", math: "R(3n+6,\\ 2) \\text{ terletak pada sumbu-y.}" },
-    ],
-  }),
-
-  Q(29, "Diagram — Jarak ke Kedua Sumbu", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [{ x: 4, y: 3, label: "P(4,3)", color: "#f472b6", labelPos: "tr" }],
-      segs: [
-        { x1: 4, y1: 3, x2: 4, y2: 0, color: "#f472b6", dashed: true, label: "3" },
-        { x1: 4, y1: 3, x2: 0, y2: 3, color: "#60a5fa", dashed: true, label: "4" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Berapa jarak P ke sumbu-x?" },
-      { label: "b.", text: "Berapa jarak P ke sumbu-y?" },
-      { label: "c.", text: "Jika P(−3, −5), berapa jaraknya ke sumbu-x? ke sumbu-y?" },
     ],
   }),
 
@@ -333,7 +239,7 @@ const UnsurUnsurPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Cartesius · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 18 Soal</span>
+            <span className="text-sky-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
