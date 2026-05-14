@@ -59,17 +59,9 @@ const questions: Q[] = [
 
   Q(4, "Pizza Melingkar", {
     type: "mixed",
-    diagram: {
-      size: 220, r: 0.62,
-      sectors: [
-        { startAngle: 0, endAngle: 60, fillColor: "rgba(248,113,163,0.3)", strokeColor: "#f472b6" },
-        { startAngle: 60, endAngle: 120, fillColor: "rgba(250,204,21,0.2)", strokeColor: "#facc15" },
-        { startAngle: 120, endAngle: 180, fillColor: "rgba(52,211,153,0.2)", strokeColor: "#34d399" },
-        { startAngle: 180, endAngle: 240, fillColor: "rgba(96,165,250,0.2)", strokeColor: "#60a5fa" },
-        { startAngle: 240, endAngle: 300, fillColor: "rgba(167,139,250,0.2)", strokeColor: "#a78bfa" },
-        { startAngle: 300, endAngle: 360, fillColor: "rgba(251,146,60,0.2)", strokeColor: "#fb923c" },
-      ],
-    },
+    img: "/soal-pizza.png",
+    imgAlt: "Pizza melingkar dibagi menjadi 6 potongan sama besar",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Pizza berbentuk lingkaran berjari-jari 21 cm dibagi menjadi 6 bagian sama besar untuk 6 orang.",
     parts: [
       { label: "a.", math: "\\text{Hitung luas seluruh pizza. (} \\pi = \\tfrac{22}{7})" },
