@@ -85,6 +85,9 @@ const questions: Q[] = [
 
   Q(6, "Lapangan Lari Melingkar", {
     type: "essay",
+    img: "/soal-lintasan-lari.png",
+    imgAlt: "Lintasan lari berbentuk melingkar tampak samping",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Lintasan lari berbentuk lingkaran berjari-jari 63 m. Seorang atlet berlari 5 kali putaran setiap hari selama 7 hari.",
     parts: [
       { label: "a.", math: "\\text{Hitung keliling lintasan. (} \\pi = \\tfrac{22}{7})" },
