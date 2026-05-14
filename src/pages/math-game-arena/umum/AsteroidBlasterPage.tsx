@@ -794,6 +794,7 @@ const AsteroidBlasterPage = () => {
 
       <div className="relative z-10 w-full max-w-lg px-2 pt-6 pb-2 flex flex-col items-center" style={{ height: "100dvh" }}>
         {/* Nav */}
+        {phase !== "idle" && (
         <div className="flex items-center justify-between w-full mb-2 shrink-0">
           <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/numatik-game"); }}
             className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm shrink-0">🏠</button>
@@ -801,13 +802,16 @@ const AsteroidBlasterPage = () => {
           <button onClick={() => { playPopSound(); navigate(-1); }}
             className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold shrink-0">✕</button>
         </div>
+        )}
 
         {/* Mini HUD */}
+        {phase !== "idle" && (
         <div className="flex gap-4 mb-1 text-xs font-display shrink-0">
           <span className="text-cyan-400">SKOR: <span className="font-bold text-sm">{score}</span></span>
           <span className="text-white/50">REKOR: <span className="text-yellow-400 font-bold">{best}</span></span>
           <span className="flex gap-0.5">{[...Array(3)].map((_, i) => <span key={i} className={i < lives ? "opacity-100" : "opacity-20"}>💙</span>)}</span>
         </div>
+        )}
         {/* Active power badge */}
         {activePower && (
           <div className="flex items-center gap-1.5 mb-1 shrink-0">
