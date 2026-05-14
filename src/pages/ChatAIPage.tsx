@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
 import { Send, User, Rocket, RefreshCw, Paperclip, Mic, MicOff, X, FileText, ImageIcon } from "lucide-react";
 import "katex/dist/katex.min.css";
 
@@ -198,6 +199,7 @@ const ChatAIPage = () => {
   return (
     <div className="relative min-h-screen flex flex-col gradient-space overflow-hidden">
       <Starfield />
+      <PageNavigation prevPath="/menu" />
 
       {/* ── HEADER ── */}
       <div className="relative z-10 shrink-0">
