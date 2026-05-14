@@ -124,10 +124,10 @@ const MenghitungCepatPage = () => {
           </span>
         </div>
 
-        <div className="mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
           <button
             onClick={() => handleClick("/menghitung-cepat/game-latihan")}
-            className="group w-full bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-fuchsia-500/15 backdrop-blur border border-amber-500/40 hover:border-amber-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
+            className="group bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-fuchsia-500/15 backdrop-blur border border-amber-500/40 hover:border-amber-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
           >
             <div className="flex items-start gap-4">
               <Gamepad2 className="w-8 h-8 text-amber-300 mt-0.5 group-hover:scale-110 transition-transform shrink-0" />
@@ -141,9 +141,6 @@ const MenghitungCepatPage = () => {
               </div>
             </div>
           </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
           <button
             onClick={() => handleClick("/menghitung-cepat/tabel-referensi")}
             className="group bg-gradient-to-r from-yellow-500/15 via-amber-500/15 to-orange-500/15 backdrop-blur border border-yellow-500/40 hover:border-yellow-300/70 rounded-xl p-5 text-left hover:box-glow-cyan transition-all duration-300 cursor-pointer animate-slide-up"
