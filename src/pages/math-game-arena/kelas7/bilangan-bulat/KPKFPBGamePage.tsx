@@ -27,6 +27,15 @@ import { useNavigate } from "react-router-dom";
       glow: "rgba(124,58,237,0.4)",
     },
     {
+      name: "Galaksi Tempur",
+      emoji: "🌌",
+      description: "Tembak musuh alien & jawab soal materi setiap 25 detik untuk poin bonus!",
+      path: "/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/galaksi-tempur",
+      from: "#7c3aed",
+      to: "#ec4899",
+      glow: "rgba(236,72,153,0.4)",
+    },
+    {
       name: "Flappy Rocket",
       emoji: "🚀",
       description: "Terbangkan roket lewati gerbang. Tiap gerbang khusus = soal!",

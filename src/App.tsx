@@ -608,6 +608,12 @@ const PerkalianMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-
 const PembagianMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianMeteorPantulGamePage"));
 const OperasiCampuranMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranMeteorPantulGamePage"));
 const KPKFPBMeteorPantulGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBMeteorPantulGamePage"));
+const PenjumlahanGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanGalaksiTempurGamePage"));
+const PenguranganGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganGalaksiTempurGamePage"));
+const PerkalianGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianGalaksiTempurGamePage"));
+const PembagianGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianGalaksiTempurGamePage"));
+const OperasiCampuranGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranGalaksiTempurGamePage"));
+const KPKFPBGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBGalaksiTempurGamePage"));
 
 // MGA - Kelas 8 Topic Pages
 const PolaBilanganMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/PolaBilanganPage"));
@@ -1371,6 +1377,12 @@ const AppInner = () => {
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/meteor-pantul" element={<PembagianMeteorPantulGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/meteor-pantul" element={<OperasiCampuranMeteorPantulGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/meteor-pantul" element={<KPKFPBMeteorPantulGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/galaksi-tempur" element={<PenjumlahanGalaksiTempurGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/galaksi-tempur" element={<PenguranganGalaksiTempurGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/galaksi-tempur" element={<PerkalianGalaksiTempurGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/galaksi-tempur" element={<PembagianGalaksiTempurGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/galaksi-tempur" element={<OperasiCampuranGalaksiTempurGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/galaksi-tempur" element={<KPKFPBGalaksiTempurGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />
