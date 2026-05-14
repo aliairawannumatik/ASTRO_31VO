@@ -68,7 +68,7 @@ const subtopics = [
   {
     label: "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL",
     path: "/latihan-mandiri/kelas-8/lingkaran/penerapan-kontekstual",
-    soal: 39,
+    soal: 12,
     gradient: "from-rose-900/40 to-pink-900/30",
     border: "border-rose-500/30",
     badge: "bg-rose-500/20 text-rose-300 border-rose-400/40",
