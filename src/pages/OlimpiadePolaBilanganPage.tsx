@@ -539,7 +539,7 @@ const Soal31SVG = () => {
 const soalSVGMap: Record<number, ReactNode> = {
   27: <Soal27SVG />,
   28: <Soal28SVG />,
-  29: <Soal29SVG />,
+  29: <img src="/images/pola-bilangan-latdar-no29.jpg" alt="Pola segitiga" className="my-2 max-w-xs w-full rounded" />,
   30: <Soal30SVG />,
   31: <Soal31SVG />,
 };
