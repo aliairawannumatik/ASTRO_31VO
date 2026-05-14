@@ -35,7 +35,7 @@ const questions: Q[] = [
     type: "essay",
     img: "/soal-kolam-renang.png",
     imgAlt: "Kolam renang berbentuk lingkaran tampak atas",
-    imgCaption: "https://www.bing.com/images/create/ai-image-generator",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Sebuah kolam renang berbentuk lingkaran berdiameter 28 m. Di sekeliling kolam dibuat jalan setapak lebar 3,5 m.",
     parts: [
       { label: "a.", math: "\\text{Hitung luas kolam renang. (} \\pi = \\tfrac{22}{7})" },
