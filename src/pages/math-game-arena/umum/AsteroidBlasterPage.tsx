@@ -807,6 +807,8 @@ const AsteroidBlasterPage = () => {
             .gt-fc{animation:gt-floatC 3.5s ease-in-out infinite}
             .gt-fp{animation:gt-pulse 2s ease-in-out infinite}
             .gt-title-shine{background:linear-gradient(90deg,#00FFFF,#22d3ee,#818cf8,#c084fc,#22d3ee,#00FFFF);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gt-shimmer 4s linear infinite}
+            @keyframes gt-breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+            .gt-btn-breathe{animation:gt-breathe 2.8s ease-in-out infinite}
             /* Portrait: single column filling full height */
             .gt-scroll { height:100%; overflow-y:auto; scrollbar-width:none; display:flex; flex-direction:column; }
             .gt-wrap   { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; padding:0.5rem 1rem; width:100%; }
@@ -934,7 +936,7 @@ const AsteroidBlasterPage = () => {
                   {/* Button */}
                   <div className="flex flex-col items-center gap-1 mt-2">
                     <button onClick={startGame}
-                      className="relative overflow-hidden font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer transition-transform hover:scale-105 active:scale-95 w-full"
+                      className="gt-btn-breathe relative overflow-hidden font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
                       style={{
                         background: "linear-gradient(135deg, #00FFFF 0%, #22d3ee 40%, #0ea5e9 100%)",
                         boxShadow: "0 0 30px rgba(0,200,255,0.9), 0 0 60px rgba(0,120,200,0.4), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.4)",
