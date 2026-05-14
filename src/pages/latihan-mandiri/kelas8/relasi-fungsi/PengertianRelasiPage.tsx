@@ -69,17 +69,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa nama aturan relasi pada diagram tersebut?" },
     ],
   }),
-  Qn(6, "Relasi dari Diagram Kartesius", {
-    type: "mixed",
-    content: "Sebuah relasi R dari himpunan P = {1, 2, 3, 4} ke Q = {1, 2, 3, 4, 5} disajikan pada diagram Kartesius. Titik-titik yang diplot: (1,2), (2,3), (3,4), (4,5).",
-    parts: [
-      { label: "a.", text: "Tuliskan himpunan pasangan berurutan relasi R." },
-      { label: "b.", text: "Gambarlah diagram panah untuk relasi R." },
-      { label: "c.", text: "Apa aturan yang menghubungkan anggota P dengan Q?" },
-      { label: "d.", text: "Tentukan domain dan range relasi R." },
-    ],
-  }),
-  Qn(7, "Relasi 'Kuadrat dari'", {
+  Qn(6, "Relasi 'Kuadrat dari'", {
     type: "mixed",
     content: "Diketahui A = {1, 2, 3, 4, 5} dan B = {1, 4, 9, 16, 25, 36}. Relasi yang berlaku adalah 'kuadrat dari'.",
     parts: [
@@ -88,7 +78,7 @@ const questions: Q[] = [
       { label: "c.", text: "Nilai mana di himpunan B yang bukan merupakan range?" },
     ],
   }),
-  Qn(8, "Menyatakan Relasi dalam Tiga Cara", {
+  Qn(7, "Menyatakan Relasi dalam Tiga Cara", {
     type: "mixed",
     content: "Relasi R = {(2,5), (3,7), (4,9), (5,11)} diberikan dalam bentuk pasangan berurutan.",
     parts: [
@@ -98,7 +88,7 @@ const questions: Q[] = [
       { label: "d.", text: "Tentukan domain dan range relasi R." },
     ],
   }),
-  Qn(9, "Relasi pada Siswa dan Nilai", {
+  Qn(8, "Relasi pada Siswa dan Nilai", {
     type: "mixed",
     content: "Kelas 8A memiliki 4 siswa: Amir, Budi, Citra, Dini. Nilai matematika mereka: Amir→85, Budi→90, Citra→85, Dini→75.",
     parts: [
@@ -107,7 +97,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan domain dan range relasi ini." },
     ],
   }),
-  Qn(10, "Relasi 'Lebih dari'", {
+  Qn(9, "Relasi 'Lebih dari'", {
     type: "mixed",
     content: "Diketahui P = {2, 4, 6} dan Q = {1, 3, 5, 7}. Relasi yang berlaku adalah 'lebih dari'.",
     parts: [
@@ -116,7 +106,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
   }),
-  Qn(11, "Relasi 'Setengah dari'", {
+  Qn(10, "Relasi 'Setengah dari'", {
     type: "mixed",
     content: "Diketahui himpunan A = {2, 4, 6, 8, 10} dan B = {1, 2, 3, 4, 5, 6, 7, 8}. Relasi yang menghubungkan A ke B adalah 'setengah dari'.",
     parts: [
@@ -125,16 +115,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah semua anggota B menjadi range? Jelaskan." },
     ],
   }),
-  Qn(12, "Relasi Nama Bulan", {
-    type: "mixed",
-    content: "Misalkan A = {Januari, Maret, Juni, Oktober} dan B = {31, 30, 28}. Relasi yang berlaku adalah 'jumlah hari bulan tersebut'.",
-    parts: [
-      { label: "a.", text: "Pasangkan setiap bulan dengan jumlah harinya." },
-      { label: "b.", text: "Gambarlah diagram panah dari relasi ini." },
-      { label: "c.", text: "Apakah relasi ini termasuk fungsi? Mengapa?" },
-    ],
-  }),
-  Qn(13, "Relasi dari Diagram – Tentukan Aturan", {
+  Qn(11, "Relasi dari Diagram – Tentukan Aturan", {
     type: "mixed",
     diagram: <ArrowDiagram setA={[1,2,3,4]} setB={[3,5,7,9,11]} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#fb923c" colorB="#34d399" arrowColor="#f472b6" />,
     parts: [
@@ -143,252 +124,13 @@ const questions: Q[] = [
       { label: "c.", text: "Jika A diperluas hingga {1, 2, 3, 4, 5}, apa nilai yang dipasangkan dengan 5?" },
     ],
   }),
-  Qn(14, "Relasi 'Kelipatan dari'", {
-    type: "mixed",
-    content: "Diketahui A = {2, 3, 5} dan B = {4, 6, 10, 9, 15, 25}. Relasi dari A ke B adalah 'setengah dari elemen B' (atau: B adalah kelipatan dua kali dari A).",
-    parts: [
-      { label: "a.", text: "Tentukan semua pasangan (a, b) dengan a ∈ A, b ∈ B, dan b = 2a." },
-      { label: "b.", text: "Gambarlah diagram panah." },
-      { label: "c.", text: "Tentukan domain dan range." },
-    ],
-  }),
-  Qn(15, "Membaca Pasangan Berurutan – Domain Range", {
-    type: "mixed",
-    content: "Diketahui relasi R sebagai berikut:",
-    parts: [
-      { label: "", math: "R = \\{(a,1),\\ (b,2),\\ (c,1),\\ (d,3),\\ (e,2)\\}" },
-      { label: "a.", text: "Tentukan domain relasi R." },
-      { label: "b.", text: "Tentukan range relasi R." },
-      { label: "c.", text: "Jika kodomain B = {1, 2, 3, 4, 5}, anggota kodomain mana yang bukan range?" },
-    ],
-  }),
-  Qn(16, "Relasi Tidak Sepenuhnya Dipetakan", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={['p','q','r','s']} setB={[1,2,3,4,5]} arrows={[[0,0],[1,2],[2,4]]} labelA="A" labelB="B" colorA="#60a5fa" colorB="#facc15" arrowColor="#f472b6" />,
-    parts: [
-      { label: "a.", text: "Anggota himpunan A mana yang tidak memiliki pasangan di B? Sebutkan." },
-      { label: "b.", text: "Tuliskan himpunan pasangan berurutannya." },
-      { label: "c.", text: "Tuliskan domain dan range dari relasi ini." },
-    ],
-  }),
-  Qn(17, "Relasi Satu ke Banyak", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3]} setB={[1,2,3,4,5,6]} arrows={[[0,0],[0,1],[1,2],[1,3],[2,4],[2,5]]} labelA="A" labelB="B" colorA="#a78bfa" colorB="#34d399" arrowColor="#fb923c" />,
-    parts: [
-      { label: "a.", text: "Tuliskan himpunan pasangan berurutannya." },
-      { label: "b.", text: "Apakah ini termasuk fungsi? Jelaskan." },
-      { label: "c.", text: "Tentukan domain dan range." },
-    ],
-  }),
-  Qn(18, "Membuat Relasi dari Soal Cerita", {
-    type: "mixed",
-    content: "Dalam sebuah pertandingan, tim A bertanding melawan tim B, C, dan D. Tim B bertanding melawan tim A dan C. Tim C bertanding melawan tim B dan D.",
-    parts: [
-      { label: "a.", text: "Nyatakan relasi 'bertanding melawan' dalam bentuk pasangan berurutan." },
-      { label: "b.", text: "Gambarlah diagram panah relasi tersebut." },
-      { label: "c.", text: "Apakah relasi ini bersifat simetris? Mengapa?" },
-    ],
-  }),
-  Qn(19, "Relasi dari Tabel", {
-    type: "mixed",
-    content: "Perhatikan tabel berikut yang menyatakan relasi 'hasil kali' dari A ke B:",
-    parts: [
-      { label: "", text: "A: {1, 2, 3, 4} → B: {2, 4, 6, 8}" },
-      { label: "a.", text: "Aturan apa yang menghubungkan anggota A ke B?" },
-      { label: "b.", text: "Tuliskan pasangan berurutan relasi tersebut." },
-      { label: "c.", text: "Gambarlah diagram panah." },
-    ],
-  }),
-  Qn(20, "Diagram Kartesius ke Pasangan Berurutan", {
-    type: "mixed",
-    content: "Pada diagram Kartesius, titik-titik yang mewakili relasi R dari A = {1,2,3,4} ke B = {1,2,3,4,5} adalah: (1,3), (2,4), (3,5), (4,4).",
-    parts: [
-      { label: "a.", text: "Tuliskan himpunan pasangan berurutan relasi R." },
-      { label: "b.", text: "Gambarlah diagram panah dari relasi R." },
-      { label: "c.", text: "Tentukan domain dan range relasi R." },
-      { label: "d.", text: "Apakah ini termasuk fungsi? Mengapa?" },
-    ],
-  }),
-  Qn(21, "Relasi Bilangan Asli", {
-    type: "mixed",
-    content: "Diketahui A = {1, 2, 3, 4} dan B = {1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 25}. Relasi dari A ke B adalah 'kuadrat dari'.",
-    parts: [
-      { label: "a.", text: "Tuliskan semua pasangan berurutan dari relasi tersebut." },
-      { label: "b.", math: "\\text{Lengkapi: } 3 \\to \\ldots, \\quad 4 \\to \\ldots" },
-      { label: "c.", text: "Gambarkan diagram panah." },
-    ],
-  }),
-  Qn(22, "Relasi 'Dua Kali Lebih dari'", {
-    type: "mixed",
-    content: "Diketahui A = {3, 5, 7, 9} dan B = {1, 2, 3, 4, 5, 6, 7, 8, 9}. Relasi R: 'setengah dari' memetakan dari A ke B.",
-    parts: [
-      { label: "a.", text: "Apakah semua anggota A dapat dipetakan ke B? Jelaskan." },
-      { label: "b.", text: "Tuliskan pasangan berurutan yang valid." },
-      { label: "c.", text: "Tentukan domain efektif (anggota A yang bisa dipasangkan)." },
-    ],
-  }),
-  Qn(23, "Relasi Banyak ke Satu", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3,4,5,6]} setB={['Ganjil','Genap']} arrows={[[0,0],[1,1],[2,0],[3,1],[4,0],[5,1]]} labelA="Bilangan" labelB="Jenis" colorA="#f472b6" colorB="#60a5fa" arrowColor="#34d399" />,
-    parts: [
-      { label: "a.", text: "Tuliskan himpunan pasangan berurutan relasi tersebut." },
-      { label: "b.", text: "Apa nama relasi yang digunakan? (jenis bilangan)" },
-      { label: "c.", text: "Apakah ini termasuk fungsi? Jelaskan." },
-    ],
-  }),
-  Qn(24, "Menentukan Relasi dari Aturan", {
-    type: "mixed",
-    content: "Diketahui aturan relasi R: 'y lebih 3 dari x', dengan A = {0, 1, 2, 3, 4} dan B = himpunan bilangan asli.",
-    parts: [
-      { label: "a.", text: "Tuliskan semua pasangan berurutan (x, y) yang sesuai aturan." },
-      { label: "b.", text: "Tentukan range relasi R." },
-      { label: "c.", math: "\\text{Nyatakan aturan sebagai formula: } y = \\ldots" },
-    ],
-  }),
-  Qn(25, "Relasi Huruf dan Bilangan", {
-    type: "mixed",
-    content: "Diketahui A = {a, b, c, d, e} dan B = {1, 2, 3, 4, 5}. Relasi R dari A ke B adalah 'urutan abjad ke-...'.",
-    parts: [
-      { label: "a.", text: "Tuliskan semua pasangan berurutan relasi R." },
-      { label: "b.", text: "Gambarlah diagram panah." },
-      { label: "c.", text: "Apakah relasi ini termasuk fungsi? Mengapa?" },
-    ],
-  }),
-  Qn(26, "Melengkapi Diagram Panah", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[2,4,6,8]} setB={[1,2,3,4,5,6,7,8]} arrows={[[0,0],[1,1],[2,2]]} labelA="A" labelB="B" colorA="#fb923c" colorB="#a78bfa" arrowColor="#facc15" questionMarks={false} />,
-    content: "Diagram panah di atas belum lengkap. Aturan yang berlaku adalah 'setengah dari'.",
-    parts: [
-      { label: "a.", text: "Tentukan pasangan untuk anggota A = 8. (Ke mana anak panah dari 8?)" },
-      { label: "b.", text: "Lengkapi dan tuliskan semua pasangan berurutan." },
-      { label: "c.", text: "Tentukan range setelah diagram dilengkapi." },
-    ],
-  }),
-  Qn(27, "Relasi Usia Siswa", {
-    type: "mixed",
-    content: "Data usia 5 siswa: Andi (13), Bela (14), Chandra (13), Dian (15), Eva (14).",
-    parts: [
-      { label: "a.", text: "Nyatakan relasi 'memiliki usia' dalam bentuk himpunan pasangan berurutan." },
-      { label: "b.", text: "Gambarlah diagram panah dari relasi tersebut." },
-      { label: "c.", text: "Tentukan domain dan range relasi ini." },
-    ],
-  }),
-  Qn(28, "Relasi Bukan Fungsi – Diagram Panah", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3]} setB={['a','b','c','d']} arrows={[[0,0],[0,1],[1,2],[2,3]]} labelA="A" labelB="B" colorA="#f87171" colorB="#34d399" arrowColor="#facc15" />,
-    parts: [
-      { label: "a.", text: "Tuliskan himpunan pasangan berurutan dari diagram di atas." },
-      { label: "b.", text: "Mengapa relasi ini bukan fungsi? Jelaskan." },
-      { label: "c.", text: "Apa syarat agar relasi dari A ke B menjadi fungsi?" },
-    ],
-  }),
-  Qn(29, "Relasi 'Pembagi dari'", {
-    type: "mixed",
-    content: "Diketahui A = {1, 2, 3, 4} dan B = {4, 8, 12}. Relasi dari A ke B adalah 'pembagi dari' (a membagi b).",
-    parts: [
-      { label: "a.", text: "Tentukan semua pasangan (a, b) yang memenuhi a membagi b habis." },
-      { label: "b.", text: "Gambarlah diagram panah." },
-      { label: "c.", text: "Apakah semua anggota A dipetakan? Jelaskan." },
-    ],
-  }),
-  Qn(30, "Relasi dalam Kehidupan Sehari-hari", {
-    type: "mixed",
-    content: "Dalam sebuah keluarga: Ibu → [Anak: Andi, Bela, Cici]. Relasi yang berlaku adalah 'ibu dari'.",
-    parts: [
-      { label: "a.", text: "Nyatakan relasi 'ibu dari' dalam bentuk pasangan berurutan." },
-      { label: "b.", text: "Tentukan domain dan range dari relasi tersebut." },
-      { label: "c.", text: "Apakah relasi 'anak dari' (kebalikannya) merupakan fungsi? Mengapa?" },
-    ],
-  }),
-  Qn(31, "Relasi Dua Himpunan Bilangan", {
-    type: "mixed",
-    content: "Diketahui P = {1, 2, 3, 4, 5} dan Q = {2, 4, 6, 8, 10, 12}. Relasi dari P ke Q: 'y = 2x'.",
-    parts: [
-      { label: "a.", math: "\\text{Pasangkan: } 1\\to\\ldots,\\; 2\\to\\ldots,\\; 3\\to\\ldots,\\; 4\\to\\ldots,\\; 5\\to\\ldots" },
-      { label: "b.", text: "Gambarlah diagram panah." },
-      { label: "c.", text: "Anggota Q mana yang tidak termasuk range? Sebutkan." },
-    ],
-  }),
-  Qn(32, "Relasi dari Kondisi Pertidaksamaan", {
-    type: "mixed",
-    content: "Diketahui A = {1, 2, 3, 4} dan B = {1, 2, 3, 4}. Relasi R: (a, b) ∈ R jika dan hanya jika a < b.",
-    parts: [
-      { label: "a.", text: "Tuliskan semua pasangan berurutan yang memenuhi a < b." },
-      { label: "b.", text: "Gambarlah diagram panah." },
-      { label: "c.", text: "Apakah relasi ini termasuk fungsi? Mengapa?" },
-    ],
-  }),
-  Qn(33, "Relasi Perkalian", {
-    type: "mixed",
-    content: "Diketahui A = {2, 3, 4} dan B = {6, 8, 9, 12, 16, 18}. Relasi R: 'b adalah kelipatan a' (b = 2a atau b = 3a atau b = 4a).",
-    parts: [
-      { label: "a.", text: "Tentukan semua pasangan (a, b) dengan b = 2a, 3a, dan 4a yang memenuhi b ∈ B." },
-      { label: "b.", text: "Gambarlah diagram panah." },
-      { label: "c.", text: "Tentukan domain dan range relasi ini." },
-    ],
-  }),
-  Qn(34, "Penyajian Tiga Cara – UN Style", {
-    type: "mixed",
-    content: "Relasi R dinyatakan dengan himpunan pasangan berurutan:",
-    parts: [
-      { label: "", math: "R = \\{(1,4),\\ (2,5),\\ (3,6),\\ (4,7)\\}" },
-      { label: "a.", text: "Gambarlah diagram panah dari relasi R, dengan A = {1,2,3,4} dan B = {4,5,6,7,8}." },
-      { label: "b.", text: "Gambarlah diagram Kartesius (scatter plot) dari relasi R." },
-      { label: "c.", math: "\\text{Temukan aturan: } y = \\ldots" },
-    ],
-  }),
-  Qn(35, "Relasi pada Mata Pelajaran", {
-    type: "mixed",
-    content: "Seorang siswa mempelajari mata pelajaran: Matematika, IPA, IPS, dan Bahasa. Nilai masing-masing: Matematika=90, IPA=85, IPS=80, Bahasa=88.",
-    parts: [
-      { label: "a.", text: "Nyatakan relasi 'nilai mata pelajaran' dalam himpunan pasangan berurutan." },
-      { label: "b.", text: "Tentukan domain dan range." },
-      { label: "c.", text: "Apakah ini fungsi? Jelaskan." },
-    ],
-  }),
-  Qn(36, "Menemukan Anggota Himpunan dari Relasi", {
+  Qn(12, "Menemukan Anggota Himpunan dari Relasi", {
     type: "mixed",
     content: "Diketahui relasi R dari A ke B dengan aturan 'y = x² − 1'. Jika A = {0, 1, 2, 3, 4}, tentukan:",
     parts: [
       { label: "a.", math: "\\text{Nilai } y \\text{ untuk setiap } x \\in A" },
       { label: "b.", text: "Tuliskan himpunan pasangan berurutan relasi R." },
       { label: "c.", text: "Tentukan range relasi R." },
-    ],
-  }),
-  Qn(37, "Relasi 'Lebih Kecil dari' – UN Style", {
-    type: "mixed",
-    content: "Diketahui A = {1, 2, 3} dan B = {1, 2, 3, 4}. Relasi R dari A ke B: 'a < b'.",
-    parts: [
-      { label: "a.", text: "Tentukan semua pasangan (a, b) yang memenuhi a < b." },
-      { label: "b.", text: "Gambarlah diagram panah dari relasi tersebut." },
-      { label: "c.", text: "Berapa banyak pasangan berurutan dalam relasi R?" },
-    ],
-  }),
-  Qn(38, "Relasi Ganda – Satu Anggota ke Banyak", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={['A','B','C']} setB={[1,2,3,4,5]} arrows={[[0,0],[0,1],[1,2],[2,3],[2,4]]} labelA="Siswa" labelB="Nilai" colorA="#60a5fa" colorB="#f472b6" arrowColor="#34d399" />,
-    parts: [
-      { label: "a.", text: "Tuliskan semua pasangan berurutan." },
-      { label: "b.", text: "Siswa mana yang memiliki lebih dari satu nilai? Apakah ini wajar untuk fungsi?" },
-      { label: "c.", text: "Apakah relasi ini merupakan fungsi? Jelaskan." },
-    ],
-  }),
-  Qn(39, "Membedakan Domain dan Range dari Konteks", {
-    type: "mixed",
-    content: "Sebuah mesin penjual kopi menerima koin Rp2.000 dan Rp5.000. Kopi tersedia seharga: Rp2.000, Rp4.000, Rp5.000, Rp10.000.",
-    parts: [
-      { label: "a.", text: "Nyatakan relasi 'koin yang dimasukkan → kopi yang bisa dibeli' dalam diagram panah." },
-      { label: "b.", text: "Apakah setiap input koin memetakan ke satu jenis kopi saja? Jelaskan." },
-      { label: "c.", text: "Tentukan domain dan range dari relasi ini." },
-    ],
-  }),
-  Qn(40, "Soal Terapan Relasi – Konteks UN", {
-    type: "mixed",
-    content: "Diketahui himpunan bilangan A = {2, 4, 6, 8} dan B = {1, 2, 3, 4}. Relasi dari B ke A adalah 'dua kali lipat dari' (a = 2b).",
-    parts: [
-      { label: "a.", text: "Gambarlah diagram panah dari relasi tersebut." },
-      { label: "b.", text: "Tuliskan himpunan pasangan berurutan." },
-      { label: "c.", text: "Apakah relasi ini merupakan fungsi? Apakah merupakan korespondensi satu-satu? Jelaskan." },
     ],
   }),
 ];
@@ -410,7 +152,7 @@ const PengertianRelasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
