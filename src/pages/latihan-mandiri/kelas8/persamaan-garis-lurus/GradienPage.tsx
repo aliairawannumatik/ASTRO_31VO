@@ -184,27 +184,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(13, "Gradien Dua Titik dengan Koordinat Negatif", {
-    type: "mixed",
-    content: "Hitung gradien garis yang melalui titik-titik berikut:",
-    parts: [
-      { label: "a.", math: "A(-5,\\ -3) \\text{ dan } B(-1,\\ 5)" },
-      { label: "b.", math: "C(-4,\\ 7) \\text{ dan } D(-2,\\ 1)" },
-      { label: "c.", math: "E(-6,\\ -2) \\text{ dan } F(0,\\ 4)" },
-    ],
-  }),
-
-  Q(14, "Membandingkan Gradien — Mana yang Lebih Besar?", {
-    type: "mixed",
-    content: "Bandingkan gradien setiap pasang garis (lebih besar, sama, atau lebih kecil):",
-    parts: [
-      { label: "a.", math: "y = 3x + 1 \\text{ dan } y = 5x - 2" },
-      { label: "b.", math: "y = -2x + 4 \\text{ dan } y = -4x + 4" },
-      { label: "c.", math: "y = \\tfrac{1}{2}x + 3 \\text{ dan } y = \\tfrac{3}{4}x - 1" },
-    ],
-  }),
-
-  Q(15, "Mencari Nilai yang Tidak Diketahui dari Gradien", {
+  Q(13, "Mencari Nilai yang Tidak Diketahui dari Gradien", {
     type: "mixed",
     content: "Tentukan nilai yang belum diketahui:",
     parts: [
@@ -214,42 +194,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(16, "Gradien dari Grafik Batang Tangga", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -4, y1: 2, x2: 2, y2: 5, color: "#a78bfa", label: "g" },
-        { x1: -4, y1: 2, x2: 2, y2: 2, color: "#facc15", dashed: true },
-        { x1: 2, y1: 2, x2: 2, y2: 5, color: "#f472b6", dashed: true },
-      ],
-      pts: [
-        { x: -4, y: 2, label: "C(−4,2)", color: "#a78bfa", labelPos: "tl" },
-        { x: 2, y: 5, label: "D(2,5)", color: "#a78bfa", labelPos: "tr" },
-      ],
-      extraTexts: [
-        { x: -1, y: 1.3, text: "run = 6", color: "#facc15", size: 9 },
-        { x: 2.8, y: 3.5, text: "rise = 3", color: "#f472b6", size: 9 },
-      ],
-    },
-    parts: [
-      { label: "a.", math: "m = \\frac{\\text{rise}}{\\text{run}} = \\frac{\\Delta y}{\\Delta x} = \\ldots" },
-      { label: "b.", text: "Berapa besar kenaikan y jika x bertambah 4 satuan?" },
-    ],
-  }),
-
-  Q(17, "ANBK — Benar atau Salah tentang Gradien", {
-    type: "mixed",
-    content: "Tentukan pernyataan BENAR (B) atau SALAH (S):",
-    parts: [
-      { label: "(1)", math: "\\text{Gradien garis } y = -3x + 5 \\text{ adalah } -3." },
-      { label: "(2)", text: "Garis dengan gradien 0 adalah garis vertikal." },
-      { label: "(3)", text: "Semakin besar nilai gradien positif, semakin landai garisnya." },
-      { label: "(4)", math: "\\text{Gradien garis melalui } (0,\\ 0) \\text{ dan } (2,\\ 6) \\text{ adalah } 3." },
-    ],
-  }),
-
-  Q(18, "Gradien Garis Paralel", {
+  Q(14, "Gradien Garis Paralel", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -265,7 +210,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "Gradien Garis Tegak Lurus", {
+  Q(15, "Gradien Garis Tegak Lurus", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -281,120 +226,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(20, "Menentukan Gradien Garis Tegak Lurus", {
-    type: "mixed",
-    content: "Tentukan gradien garis yang tegak lurus dengan setiap garis berikut:",
-    parts: [
-      { label: "a.", math: "y = 3x + 2" },
-      { label: "b.", math: "y = -\\tfrac{1}{4}x + 5" },
-      { label: "c.", math: "y = \\tfrac{2}{3}x - 1" },
-      { label: "d.", math: "2x - 5y = 10" },
-    ],
-  }),
-
-  Q(21, "UN 2017 — Gradien Garis", {
-    type: "mixed",
-    content: "Sebuah garis melalui titik (0, 3) dan (4, −5).",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 0, y: 3, label: "(0,3)", color: "#f472b6", labelPos: "tr" },
-        { x: 4, y: -5, label: "(4,−5)", color: "#60a5fa", labelPos: "br" },
-      ],
-      segs: [{ x1: -1, y1: 5, x2: 5, y2: -7, color: "#a78bfa", label: "g" }],
-    },
-    parts: [
-      { label: "a.", math: "\\text{Hitung gradien garis.}" },
-      { label: "b.", math: "\\text{Tentukan persamaan garis dalam bentuk } y = mx + c." },
-      { label: "c.", math: "\\text{Tentukan gradien garis yang tegak lurus dengan garis } g." },
-    ],
-  }),
-
-  Q(22, "Gradien dari Nilai Perubahan", {
-    type: "mixed",
-    content: "Sebuah garis lurus mengalami perubahan:",
-    parts: [
-      { label: "a.", text: "Saat x bertambah 5, y bertambah 10. Berapa gradiennya?" },
-      { label: "b.", text: "Saat x bertambah 6, y berkurang 4. Berapa gradiennya?" },
-      { label: "c.", text: "Saat x bertambah 3, y tidak berubah. Berapa gradiennya?" },
-    ],
-  }),
-
-  Q(23, "Gradien dari Persamaan Campuran", {
-    type: "mixed",
-    content: "Tentukan gradien setiap persamaan:",
-    parts: [
-      { label: "a.", math: "4x - 3y + 12 = 0" },
-      { label: "b.", math: "\\frac{x}{2} - \\frac{y}{4} = 1" },
-      { label: "c.", math: "-2x + 5y - 15 = 0" },
-      { label: "d.", math: "\\frac{3x - 6y}{2} = 9" },
-    ],
-  }),
-
-  Q(24, "Mencari k agar Gradien Terpenuhi", {
-    type: "mixed",
-    content: "Tentukan nilai k:",
-    parts: [
-      { label: "a.", math: "\\text{Gradien garis melalui } A(k,\\ 4) \\text{ dan } B(2k,\\ 10) \\text{ adalah } 2." },
-      { label: "b.", math: "\\text{Gradien garis melalui } P(1,\\ k) \\text{ dan } Q(5,\\ 3k-4) \\text{ adalah } 3." },
-    ],
-  }),
-
-  Q(25, "Membandingkan Kecuraman Tiga Garis", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: 0, y1: 0, x2: 5, y2: 1, color: "#34d399", label: "ℓ₁" },
-        { x1: 0, y1: 0, x2: 5, y2: 3, color: "#f472b6", label: "ℓ₂" },
-        { x1: 0, y1: 0, x2: 3, y2: 5, color: "#60a5fa", label: "ℓ₃" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Urutkan garis dari yang paling landai ke paling curam." },
-      { label: "b.", text: "Hitung gradien masing-masing garis." },
-      { label: "c.", text: "Apa kesimpulanmu tentang hubungan gradien dan kecuraman?" },
-    ],
-  }),
-
-  Q(26, "TKA — Gradien dari Grafik Kontekstual", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: 0, y1: 0, x2: 4, y2: 6, color: "#facc15", label: "Biaya" }],
-      pts: [
-        { x: 0, y: 0, label: "(0,0)", color: "#facc15", labelPos: "br" },
-        { x: 4, y: 6, label: "(4,6)", color: "#facc15", labelPos: "tr" },
-      ],
-      extraTexts: [
-        { x: 1, y: 5, text: "sumbu-x: waktu (jam)", color: "rgba(255,255,255,0.4)", size: 8 },
-        { x: -2, y: 3, text: "sumbu-y: biaya (×10rb)", color: "rgba(255,255,255,0.4)", size: 8 },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung gradien grafik biaya vs waktu." },
-      { label: "b.", text: "Apa arti fisik dari gradien ini dalam konteks biaya dan waktu?" },
-    ],
-  }),
-
-  Q(27, "Gradien Negatif — Interpretasi", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: 0, y1: 5, x2: 5, y2: 0, color: "#f87171", label: "g" }],
-      pts: [
-        { x: 0, y: 5, label: "(0,5)", color: "#f87171", labelPos: "tr" },
-        { x: 5, y: 0, label: "(5,0)", color: "#f87171", labelPos: "top" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung gradien garis g." },
-      { label: "b.", text: "Mengapa gradiennya negatif?" },
-      { label: "c.", text: "Apa arti gradien negatif dalam konteks nyata?" },
-    ],
-  }),
-
-  Q(28, "Gradien Garis pada Trapesium", {
+  Q(16, "Gradien Garis pada Trapesium", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -418,7 +250,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(29, "Gradien dari Bentuk Pecahan", {
+  Q(17, "Gradien dari Bentuk Pecahan", {
     type: "mixed",
     content: "Tentukan gradien dari persamaan-persamaan berikut:",
     parts: [
@@ -428,7 +260,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(30, "Membuktikan Titik Segaris", {
+  Q(18, "Membuktikan Titik Segaris", {
     type: "mixed",
     content: "Buktikan apakah tiga titik berikut terletak pada satu garis lurus (segaris):",
     parts: [
@@ -438,7 +270,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(31, "UN 2021 — Soal Gradien Terapan", {
+  Q(19, "UN 2021 — Soal Gradien Terapan", {
     type: "mixed",
     content: "Sebuah jalan menanjak membentuk garis lurus. Jika ujung bawah jalan ada di koordinat (0, 10) dan ujung atas di (50, 40):",
     parts: [
@@ -447,7 +279,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(32, "Gradien dari Persamaan Non-Standar", {
+  Q(20, "Gradien dari Persamaan Non-Standar", {
     type: "mixed",
     content: "Tentukan gradien dari setiap persamaan:",
     parts: [
@@ -457,80 +289,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(33, "Gradien Dua Garis Berkaitan", {
-    type: "mixed",
-    content: "Diketahui garis g: y = 3x − 4.",
-    parts: [
-      { label: "a.", text: "Tentukan gradien garis yang sejajar dengan g." },
-      { label: "b.", math: "\\text{Tentukan gradien garis yang tegak lurus dengan } g." },
-      { label: "c.", math: "\\text{Jika garis } h: y = kx + 2 \\text{ tegak lurus dengan } g, \\text{tentukan nilai } k." },
-    ],
-  }),
-
-  Q(34, "Gradien dari Tabel Data", {
-    type: "mixed",
-    content: "Perhatikan tabel:",
-    parts: [
-      { label: "Tabel:", text: "x: 0, 1, 2, 3   |   y: 7, 5, 3, 1" },
-      { label: "a.", text: "Hitung selisih y untuk setiap pertambahan x sebesar 1." },
-      { label: "b.", text: "Apakah hubungannya linier? Jelaskan!" },
-      { label: "c.", math: "\\text{Tentukan gradien dan persamaan garisnya.}" },
-    ],
-  }),
-
-  Q(35, "ANBK — Pilih Pernyataan yang Tepat", {
-    type: "mixed",
-    content: "Garis ℓ melalui A(−2, 1) dan B(4, 7). Manakah pernyataan yang BENAR?",
-    parts: [
-      { label: "(1)", math: "m = 1" },
-      { label: "(2)", text: "Garis bergerak naik dari kiri ke kanan." },
-      { label: "(3)", text: "Garis tegak lurus dengan garis y = −x + 5." },
-      { label: "(4)", text: "Gradiennya sama dengan gradien garis y = x + 3." },
-    ],
-  }),
-
-  Q(36, "Gradien dari Kordinat Pecahan", {
-    type: "mixed",
-    content: "Hitung gradien garis yang melalui pasangan titik berikut:",
-    parts: [
-      { label: "a.", math: "A\\left(\\tfrac{1}{2},\\ 3\\right) \\text{ dan } B\\left(\\tfrac{3}{2},\\ 7\\right)" },
-      { label: "b.", math: "C\\left(-\\tfrac{2}{3},\\ 1\\right) \\text{ dan } D\\left(\\tfrac{4}{3},\\ -3\\right)" },
-    ],
-  }),
-
-  Q(37, "Soal Cerita — Gradien Lapangan", {
-    type: "mixed",
-    content: "Atap sebuah rumah memiliki kemiringan (gradien) ¾. Jika lebar rumah adalah 8 meter (arah horizontal):",
-    parts: [
-      { label: "a.", text: "Berapa tinggi atap dari tepi ke puncak?" },
-      { label: "b.", text: "Gambarkan profil atap dalam sistem koordinat." },
-      { label: "c.", text: "Tuliskan persamaan garis atap jika sudut kiri bawah di titik (0, 0)." },
-    ],
-  }),
-
-  Q(38, "Mana yang Paling Tegak?", {
-    type: "mixed",
-    content: "Perhatikan keempat garis berikut:",
-    parts: [
-      { label: "A.", math: "y = 0{,}5x + 1" },
-      { label: "B.", math: "y = 2x - 3" },
-      { label: "C.", math: "y = 7x + 4" },
-      { label: "D.", math: "y = 0{,}1x" },
-      { label: "Soal:", text: "Urutkan dari garis paling tegak (curam) ke paling landai." },
-    ],
-  }),
-
-  Q(39, "Gradien dan Titik pada Garis yang Sama", {
-    type: "mixed",
-    content: "Garis ℓ memiliki gradien 2 dan melalui titik (1, 5).",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan titik lain pada garis } \\ell \\text{ saat } x = 4." },
-      { label: "b.", math: "\\text{Tentukan titik lain saat } x = -2." },
-      { label: "c.", text: "Tentukan persamaan garis ℓ." },
-    ],
-  }),
-
-  Q(40, "Tantangan — Gradien Segitiga", {
+  Q(21, "Tantangan — Gradien Segitiga", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -564,7 +323,7 @@ const GradienPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-full px-4 py-1 mb-3">
-            <span className="text-blue-400 text-xs font-body">40 Soal Latihan</span>
+            <span className="text-blue-400 text-xs font-body">{questions.length} Soal Latihan</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
             GRADIEN (KEMIRINGAN GARIS)
@@ -606,7 +365,7 @@ const GradienPage = () => {
                 <div className="flex flex-col gap-2 mt-2 pl-2">
                   {q.parts.map((p, pi) => (
                     <div key={pi} className="flex items-start gap-2">
-                      <span className="text-blue-400 text-xs font-body font-bold shrink-0 mt-0.5 min-w-[60px]">{p.label}</span>
+                      <span className="text-blue-400 text-xs font-body font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                       <div className="text-white/75 text-sm font-body leading-relaxed">
                         {p.math ? <InlineMath math={p.math} /> : <span>{p.text}</span>}
                       </div>
