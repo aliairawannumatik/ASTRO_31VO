@@ -11,6 +11,7 @@ const subtopics = [
     icon: FlaskConical,
     color: "#a78bfa",
     desc: "Verifikasi, luas persegi, diseksi",
+    soal: 3,
   },
   {
     label: "MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU",
@@ -18,6 +19,7 @@ const subtopics = [
     icon: Ruler,
     color: "#60a5fa",
     desc: "Mencari hipotenusa dan kaki segitiga",
+    soal: 8,
   },
   {
     label: "TRIPLE PYTHAGORAS",
@@ -25,6 +27,7 @@ const subtopics = [
     icon: Star,
     color: "#34d399",
     desc: "3-4-5, 5-12-13, kelipatan triple",
+    soal: 11,
   },
   {
     label: "PYTHAGORAS DAN JENIS-JENIS SEGITIGA",
@@ -32,6 +35,7 @@ const subtopics = [
     icon: Triangle,
     color: "#fb923c",
     desc: "Lancip, siku-siku, dan tumpul",
+    soal: 6,
   },
   {
     label: "PERBANDINGAN SISI SEGITIGA SIKU-SIKU SUDUT KHUSUS",
@@ -39,6 +43,7 @@ const subtopics = [
     icon: Compass,
     color: "#f472b6",
     desc: "45°-45°-90° dan 30°-60°-90°",
+    soal: 8,
   },
   {
     label: "PENERAPAN TEOREMA PYTHAGORAS PADA MASALAH KONTEKSTUAL",
@@ -46,6 +51,7 @@ const subtopics = [
     icon: Globe,
     color: "#facc15",
     desc: "Tangga, kapal, jarak, kehidupan nyata",
+    soal: 8,
   },
 ];
 
@@ -61,7 +67,7 @@ const TeoremaPythagorasPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           TEOREMA PYTHAGORAS
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Latihan Mandiri · 6 Sub Topik · 40 Soal/Sub Topik</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Latihan Mandiri · 6 Sub Topik · 44 Soal Total</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((sub, i) => {
@@ -89,7 +95,13 @@ const TeoremaPythagorasPage = () => {
                   <p className="font-body text-sm text-white font-semibold leading-tight">{sub.label}</p>
                   <p className="text-xs mt-0.5" style={{ color: `${sub.color}bb` }}>{sub.desc}</p>
                 </div>
-                <ChevronRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" style={{ color: sub.color }} />
+                <div className="flex flex-col items-end gap-1.5 shrink-0">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                    style={{ background: `${sub.color}22`, color: sub.color, border: `1px solid ${sub.color}44` }}>
+                    {sub.soal} Soal
+                  </span>
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" style={{ color: sub.color }} />
+                </div>
               </button>
             );
           })}
