@@ -842,13 +842,17 @@ const AsteroidBlasterPage = () => {
               <div className="gt-header flex flex-col items-center text-center">
                 {/* Nav row */}
                 <div className="flex items-center justify-between w-full mb-1">
-                  <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/numatik-game"); }}
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm transition-all hover:scale-110 active:scale-95"
-                    style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>🏠</button>
-                  <div className="text-[7px] tracking-[5px] text-cyan-500/60 uppercase font-bold">⬡ NUMATIK GAME ⬡</div>
                   <button onClick={() => { playPopSound(); navigate(-1); }}
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-white/60 hover:text-white text-sm font-bold transition-all hover:scale-110 active:scale-95"
-                    style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>✕</button>
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">←</span>
+                    <span>Kembali</span>
+                  </button>
+                  <div className="text-[7px] tracking-[5px] text-cyan-500/60 uppercase font-bold">⬡ NUMATIK GAME ⬡</div>
+                  <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/numatik-game"); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">🏠</span>
+                    <span>Home</span>
+                  </button>
                 </div>
                 <div className="gt-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.6rem,5vw,2.2rem)" }}>GALAKSI TEMPUR</div>
                 <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right, transparent, #00FFFF, #818cf8, transparent)" }} />
@@ -967,12 +971,20 @@ const AsteroidBlasterPage = () => {
       <div className={`relative z-10 w-full max-w-lg px-2 flex flex-col items-center ${phase === "idle" ? "pt-0 pb-0" : "pt-6 pb-2"}`} style={{ height: "100dvh" }}>
         {/* Nav */}
         {phase !== "idle" && (
-        <div className="flex items-center justify-between w-full mb-2 shrink-0">
-          <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/numatik-game"); }}
-            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm shrink-0">🏠</button>
-          <h1 className="font-display text-xl font-bold text-primary text-glow-cyan text-center flex-1">🌌 GALAKSI TEMPUR</h1>
+        <div className="flex items-center justify-between w-full mb-2 shrink-0 gap-2">
           <button onClick={() => { playPopSound(); navigate(-1); }}
-            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold shrink-0">✕</button>
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Kembali">
+            <span className="text-base leading-none">←</span>
+            <span className="hidden sm:inline">Kembali</span>
+          </button>
+          <h1 className="font-display text-xl font-bold text-primary text-glow-cyan text-center flex-1">🌌 GALAKSI TEMPUR</h1>
+          <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/numatik-game"); }}
+            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
+            title="Menu Utama">
+            <span className="text-base leading-none">🏠</span>
+            <span className="hidden sm:inline">Home</span>
+          </button>
         </div>
         )}
 
