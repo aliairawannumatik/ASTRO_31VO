@@ -429,7 +429,7 @@ const questions: Q[] = [
     content: "Diagram lingkaran menunjukkan moda transportasi 200 siswa ke sekolah.",
     parts: [
       { label: "a.", text: "Berapa siswa yang menggunakan motor?" },
-      { label: "b.", text: "Berapa derajat sudut sektor untuk 'Angkot 30%'?" },
+      { label: "b.", text: "Berapa siswa yang menggunakan angkot?" },
     ],
   }),
   Qn(8, "Diagram Lingkaran – Persen (Unsur Diketahui)", {
