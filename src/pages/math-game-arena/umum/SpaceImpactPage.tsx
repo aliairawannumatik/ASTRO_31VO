@@ -729,9 +729,18 @@ const SpaceImpactPage = ({
   const waveActiveRef = useRef(false);
   const waveDelayRef = useRef(0);
   const keysRef = useRef<Set<string>>(new Set());
-  const touchRef = useRef<{ up: boolean; down: boolean; left: boolean; right: boolean; shoot: boolean }>({
-    up: false, down: false, left: false, right: false, shoot: false,
+  const touchRef = useRef<{ up: boolean; down: boolean; left: boolean; right: boolean; shoot: boolean; dx: number; dy: number }>({
+    up: false, down: false, left: false, right: false, shoot: false, dx: 0, dy: 0,
   });
+
+  // Bomb / laser
+  const bombsRef = useRef(2);
+  const [bombs, setBombs] = useState(2);
+  const laserRef = useRef<{ active: boolean; timer: number }>({ active: false, timer: 0 });
+
+  // Joystick UI state (for thumb rendering only)
+  const [joystickPos, setJoystickPos] = useState({ x: 0, y: 0 });
+  const joystickBaseRef = useRef<{ cx: number; cy: number } | null>(null);
 
   // ── Initialize stars ──────────────────────────────────────────────────
   const initStars = useCallback(() => {
@@ -778,11 +787,16 @@ const SpaceImpactPage = ({
     invincibleRef.current = 0;
     waveActiveRef.current = false;
     waveDelayRef.current = 60;
+    bombsRef.current = 2;
+    laserRef.current = { active: false, timer: 0 };
+    touchRef.current.dx = 0;
+    touchRef.current.dy = 0;
     initStars();
     setScore(0);
     setLives(3);
     setLevel(1);
     setCombo(0);
+    setBombs(2);
     setFlashMsg("");
     phaseRef.current = "playing";
     setPhase("playing");
@@ -828,6 +842,25 @@ const SpaceImpactPage = ({
     setFlashMsg(msg);
   }, []);
 
+  // ── Fire bomb (laser) ─────────────────────────────────────────────────
+  const fireBomb = useCallback(() => {
+    if (bombsRef.current <= 0 || laserRef.current.active || phaseRef.current !== "playing") return;
+    bombsRef.current--;
+    setBombs(bombsRef.current);
+    laserRef.current = { active: true, timer: 45 };
+    for (let i = enemiesRef.current.length - 1; i >= 0; i--) {
+      const e = enemiesRef.current[i];
+      explode(e.x + e.w / 2, e.y + e.h / 2, e.glowColor, true);
+      if (e.isBoss) explode(e.x + e.w / 2, e.y + e.h / 2, "#ffffff", true);
+      enemiesRef.current.splice(i, 1);
+      const pts = (e.isBoss ? 500 : 150) * levelRef.current;
+      scoreRef.current += pts;
+      setScore(scoreRef.current);
+      playPopSound();
+    }
+    showFlash("💥 LASER BOMB! Semua musuh hancur!");
+  }, [explode, showFlash]);
+
   // ── Game loop ─────────────────────────────────────────────────────────
   const loop = useCallback(() => {
     if (guruQuiz.isPausedRef.current) { rafRef.current = requestAnimationFrame(loop); return; }
@@ -845,11 +878,20 @@ const SpaceImpactPage = ({
     const PW = 48, PH = 30;
     const SPEED = 3.5;
 
-    // ── Move player ──────────────────────────────────────────────────
+    // ── Move player (keyboard + analog joystick) ──────────────────────────────────────────────
+    const analogX = touch.dx;
+    const analogY = touch.dy;
+    const useAnalog = Math.abs(analogX) > 0.05 || Math.abs(analogY) > 0.05;
     if ((keys.has("ArrowUp") || keys.has("w") || touch.up) && p.y > 30) p.y -= SPEED;
     if ((keys.has("ArrowDown") || keys.has("s") || touch.down) && p.y < CH - PH - 10) p.y += SPEED;
     if ((keys.has("ArrowLeft") || keys.has("a") || touch.left) && p.x > 10) p.x -= SPEED;
     if ((keys.has("ArrowRight") || keys.has("d") || touch.right) && p.x < CW * 0.45) p.x += SPEED;
+    if (useAnalog) {
+      if (analogY < -0.15 && p.y > 30) p.y += SPEED * analogY;
+      if (analogY > 0.15 && p.y < CH - PH - 10) p.y += SPEED * analogY;
+      if (analogX < -0.15 && p.x > 10) p.x += SPEED * analogX;
+      if (analogX > 0.15 && p.x < CW * 0.45) p.x += SPEED * analogX;
+    }
 
     // ── Shoot ────────────────────────────────────────────────────────
     if (keys.has(" ") || keys.has("z") || touch.shoot) shoot();
@@ -996,6 +1038,12 @@ const SpaceImpactPage = ({
       showFlash(`🚀 Level ${levelRef.current}! Gelombang berikutnya...`);
     }
 
+    // ── Laser timer ──────────────────────────────────────────────────
+    if (laserRef.current.active) {
+      laserRef.current.timer--;
+      if (laserRef.current.timer <= 0) laserRef.current.active = false;
+    }
+
     // ── Flash timer ──────────────────────────────────────────────────
     if (flashTimerRef.current > 0) { flashTimerRef.current--; if (flashTimerRef.current === 0) setFlashMsg(""); }
 
@@ -1119,6 +1167,50 @@ const SpaceImpactPage = ({
       drawPlayerShip(ctx, p.x, p.y, shieldRef.current, rapidRef.current, spreadRef.current);
     }
 
+    // draw laser beam
+    if (laserRef.current.active) {
+      const t = laserRef.current.timer;
+      const alpha = Math.min(1, t / 12);
+      const laserX = p.x + 56;
+      const laserY = p.y + 15;
+      const laserW = CW - laserX;
+
+      // Outer wide glow
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.35;
+      const outerGrad = ctx.createLinearGradient(laserX, 0, laserX + laserW, 0);
+      outerGrad.addColorStop(0, "#ffffff");
+      outerGrad.addColorStop(0.15, "#00eeff");
+      outerGrad.addColorStop(1, "rgba(0,100,255,0)");
+      ctx.fillStyle = outerGrad;
+      ctx.shadowColor = "#00ffff";
+      ctx.shadowBlur = 40;
+      ctx.fillRect(laserX, laserY - 22, laserW, 44);
+
+      // Mid glow
+      ctx.globalAlpha = alpha * 0.7;
+      ctx.shadowBlur = 20;
+      ctx.fillStyle = outerGrad;
+      ctx.fillRect(laserX, laserY - 10, laserW, 20);
+
+      // Core (bright white)
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = "#ffffff";
+      ctx.shadowColor = "#aaffff";
+      ctx.shadowBlur = 14;
+      ctx.fillRect(laserX, laserY - 3, laserW, 6);
+
+      // Hot center line
+      ctx.globalAlpha = alpha * 0.9;
+      ctx.fillStyle = "#e0ffff";
+      ctx.shadowBlur = 6;
+      ctx.fillRect(laserX, laserY - 1, laserW, 2);
+
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+      ctx.restore();
+    }
+
     // draw particles
     for (const pt of particlesRef.current) {
       ctx.globalAlpha = pt.alpha;
@@ -1164,10 +1256,44 @@ const SpaceImpactPage = ({
     return () => { window.removeEventListener("keydown", down); window.removeEventListener("keyup", up); };
   }, []);
 
-  // ── Touch control helpers ─────────────────────────────────────────────
-  const setTouch = (key: keyof typeof touchRef.current, val: boolean) => { touchRef.current[key] = val; };
+  // ── Joystick handlers ─────────────────────────────────────────────────
+  const JOYSTICK_R = 45; // max thumb travel radius
+  const onJoystickDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    joystickBaseRef.current = { cx, cy };
+  }, []);
 
-  const btnClass = "select-none active:opacity-70 bg-white/10 border border-white/20 rounded-lg font-bold text-white text-lg flex items-center justify-center cursor-pointer touch-none";
+  const onJoystickMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (!joystickBaseRef.current) return;
+    const { cx, cy } = joystickBaseRef.current;
+    let dx = e.clientX - cx;
+    let dy = e.clientY - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > JOYSTICK_R) { dx = (dx / dist) * JOYSTICK_R; dy = (dy / dist) * JOYSTICK_R; }
+    const ndx = dx / JOYSTICK_R; // -1..1
+    const ndy = dy / JOYSTICK_R;
+    touchRef.current.dx = ndx;
+    touchRef.current.dy = ndy;
+    touchRef.current.left  = ndx < -0.2;
+    touchRef.current.right = ndx >  0.2;
+    touchRef.current.up    = ndy < -0.2;
+    touchRef.current.down  = ndy >  0.2;
+    setJoystickPos({ x: dx, y: dy });
+  }, []);
+
+  const onJoystickUp = useCallback(() => {
+    joystickBaseRef.current = null;
+    touchRef.current.dx = 0;
+    touchRef.current.dy = 0;
+    touchRef.current.up = false;
+    touchRef.current.down = false;
+    touchRef.current.left = false;
+    touchRef.current.right = false;
+    setJoystickPos({ x: 0, y: 0 });
+  }, []);
 
   if (phase === "idle") {
     return (
@@ -1184,10 +1310,11 @@ const SpaceImpactPage = ({
         bestLabel={best > 0 ? `Rekor Tertinggi: ${best}` : undefined}
         decorations={[]}
         instructions={[
-          { text: <>Pakai <strong className="text-yellow-300">WASD / ↑↓←→</strong> untuk gerak, <strong className="text-yellow-300">SPASI</strong> untuk tembak</> },
-          { text: <>Tembak musuh — butuh <strong className="text-cyan-300">3x</strong> hit untuk hancurkan</> },
+          { text: <>Pakai <strong className="text-yellow-300">analog joystick</strong> atau <strong className="text-yellow-300">WASD / ↑↓←→</strong> untuk bergerak</> },
+          { text: <>Tombol <strong className="text-green-300">🔫 TEMBAK</strong> untuk menembak musuh (butuh 3× tembakan)</> },
+          { text: <>Tombol <strong className="text-red-300">💣 BOM</strong> melepaskan laser besar yang menghancurkan SEMUA musuh sekaligus!</> },
+          { text: <>Kamu punya <strong className="text-red-300">2 bom</strong> per sesi — gunakan dengan bijak!</> },
           { text: <>Tiap <strong className="text-yellow-300">25 detik</strong> muncul soal bonus untuk skor besar</> },
-          { text: <>Kumpulkan power-up: shield, rapid fire, dan spread shot!</> },
         ]}
       />
     );
@@ -1288,31 +1415,88 @@ const SpaceImpactPage = ({
 
         {/* Touch controls */}
         {phase === "playing" && (
-          <div className="mt-4 w-full flex justify-between items-end gap-2 select-none" style={{ maxWidth: CW }}>
-            {/* D-pad */}
-            <div className="grid grid-cols-3 gap-1" style={{ width: 120 }}>
-              <div />
-              <button className={`${btnClass} h-10`}
-                onPointerDown={() => setTouch("up", true)} onPointerUp={() => setTouch("up", false)} onPointerLeave={() => setTouch("up", false)}>▲</button>
-              <div />
-              <button className={`${btnClass} h-10`}
-                onPointerDown={() => setTouch("left", true)} onPointerUp={() => setTouch("left", false)} onPointerLeave={() => setTouch("left", false)}>◀</button>
-              <div />
-              <button className={`${btnClass} h-10`}
-                onPointerDown={() => setTouch("right", true)} onPointerUp={() => setTouch("right", false)} onPointerLeave={() => setTouch("right", false)}>▶</button>
-              <div />
-              <button className={`${btnClass} h-10`}
-                onPointerDown={() => setTouch("down", true)} onPointerUp={() => setTouch("down", false)} onPointerLeave={() => setTouch("down", false)}>▼</button>
-              <div />
-            </div>
-            {/* Fire */}
-            <button
-              className={`${btnClass} rounded-full text-2xl`}
-              style={{ width: 72, height: 72, background: "rgba(0,255,140,0.15)", borderColor: "#00ff8c" }}
-              onPointerDown={() => setTouch("shoot", true)} onPointerUp={() => setTouch("shoot", false)} onPointerLeave={() => setTouch("shoot", false)}
+          <div className="mt-3 w-full flex justify-between items-center gap-2 select-none px-1" style={{ maxWidth: CW }}>
+
+            {/* Analog joystick */}
+            <div
+              className="relative rounded-full flex items-center justify-center touch-none cursor-pointer"
+              style={{
+                width: 110, height: 110,
+                background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, rgba(0,100,180,0.18) 60%, rgba(0,50,120,0.35) 100%)",
+                border: "2px solid rgba(0,200,255,0.35)",
+                boxShadow: "0 0 18px rgba(0,180,255,0.2), inset 0 0 12px rgba(0,0,80,0.4)",
+              }}
+              onPointerDown={onJoystickDown}
+              onPointerMove={onJoystickMove}
+              onPointerUp={onJoystickUp}
+              onPointerCancel={onJoystickUp}
             >
-              🔫
-            </button>
+              {/* Cross hair guides */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                <div style={{ width: "80%", height: 1, background: "#00eeff", position: "absolute" }} />
+                <div style={{ width: 1, height: "80%", background: "#00eeff", position: "absolute" }} />
+              </div>
+              {/* Thumb knob */}
+              <div
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  width: 42, height: 42,
+                  transform: `translate(${joystickPos.x}px, ${joystickPos.y}px)`,
+                  background: "radial-gradient(circle at 35% 35%, rgba(160,240,255,0.95), rgba(0,160,220,0.85))",
+                  border: "2px solid rgba(0,240,255,0.8)",
+                  boxShadow: "0 0 14px rgba(0,220,255,0.6), inset 0 1px 4px rgba(255,255,255,0.4)",
+                  transition: joystickBaseRef.current ? "none" : "transform 0.12s ease-out",
+                }}
+              />
+            </div>
+
+            {/* Right side: FIRE + BOMB */}
+            <div className="flex flex-col items-center gap-2">
+              {/* Bomb slots */}
+              <div className="flex gap-2 mb-1">
+                {[0, 1].map(i => (
+                  <button
+                    key={i}
+                    onClick={i === 0 && bombs > 0 ? fireBomb : undefined}
+                    onPointerDown={i === 0 && bombs > 0 ? fireBomb : undefined}
+                    className="relative rounded-xl flex flex-col items-center justify-center font-bold text-white touch-none select-none transition-all"
+                    style={{
+                      width: 50, height: 50,
+                      background: bombs > i
+                        ? "radial-gradient(circle, rgba(255,60,60,0.25), rgba(180,0,0,0.4))"
+                        : "rgba(255,255,255,0.04)",
+                      border: bombs > i ? "2px solid rgba(255,80,80,0.7)" : "2px solid rgba(255,255,255,0.12)",
+                      boxShadow: bombs > i ? "0 0 12px rgba(255,60,60,0.4)" : "none",
+                      opacity: bombs > i ? 1 : 0.4,
+                      cursor: bombs > i && i === 0 ? "pointer" : "default",
+                    }}
+                    title={bombs > i ? "Tembakkan Laser Bomb!" : "Bom habis"}
+                  >
+                    <span style={{ fontSize: 22 }}>💣</span>
+                    <span style={{ fontSize: 9, color: bombs > i ? "#ff9999" : "#666", fontFamily: "monospace", lineHeight: 1 }}>
+                      {bombs > i ? "LASER" : "—"}
+                    </span>
+                  </button>
+                ))}
+              </div>
+              {/* Fire button */}
+              <button
+                className="rounded-full font-bold text-white text-2xl flex items-center justify-center touch-none select-none active:scale-95 transition-transform"
+                style={{
+                  width: 76, height: 76,
+                  background: "radial-gradient(circle, rgba(0,255,140,0.25), rgba(0,120,60,0.45))",
+                  border: "2.5px solid rgba(0,255,140,0.6)",
+                  boxShadow: "0 0 18px rgba(0,255,140,0.35)",
+                }}
+                onPointerDown={() => { touchRef.current.shoot = true; }}
+                onPointerUp={() => { touchRef.current.shoot = false; }}
+                onPointerLeave={() => { touchRef.current.shoot = false; }}
+                onPointerCancel={() => { touchRef.current.shoot = false; }}
+              >
+                🔫
+              </button>
+            </div>
+
           </div>
         )}
 
