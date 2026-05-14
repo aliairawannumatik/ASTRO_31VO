@@ -761,7 +761,7 @@ const OlimpiadePolaBilanganPage = () => {
                       <div className="my-3 flex flex-col items-center gap-1">
                         <div className="bg-white rounded-xl p-3 shadow-md max-w-sm w-full flex justify-center">
                           <img
-                            src={imgPolaSegilima}
+                            src="/images/pola-bilangan-olimp-no37.jpg"
                             alt="Pola segilima ke-1, ke-2, ke-3, ke-4"
                             className="max-w-full h-auto object-contain"
                           />
