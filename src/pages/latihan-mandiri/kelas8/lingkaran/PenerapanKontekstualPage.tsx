@@ -46,19 +46,9 @@ const questions: Q[] = [
 
   Q(3, "Jam Dinding", {
     type: "mixed",
-    diagram: {
-      size: 220, r: 0.62,
-      pts: [
-        { angle: 90, label: "12", color: "#facc15", labelOffset: 20 },
-        { angle: 0, label: "3", color: "#facc15", labelOffset: 20 },
-        { angle: 270, label: "6", color: "#facc15", labelOffset: 20 },
-        { angle: 180, label: "9", color: "#facc15", labelOffset: 20 },
-      ],
-      radii: [
-        { angle: 90, color: "#60a5fa", label: "jarum menit" },
-        { angle: 30, color: "#f472b6", label: "jarum jam" },
-      ],
-    },
+    img: "/soal-jam-dinding.png",
+    imgAlt: "Jam dinding berbentuk lingkaran",
+    imgCaption: "https://www.bing.com/images/create",
     content: "Jam dinding berbentuk lingkaran. Jarum menit panjang 21 cm, jarum jam panjang 14 cm.",
     parts: [
       { label: "a.", text: "Berapa jarak yang ditempuh ujung jarum menit dalam 1 jam?" },
