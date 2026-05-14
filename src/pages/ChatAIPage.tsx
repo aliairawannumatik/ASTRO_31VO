@@ -2,9 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "@/components/Starfield";
-import { Send, User, Rocket, RefreshCw, ChevronLeft } from "lucide-react";
+import { Send, User, Rocket, RefreshCw, ChevronLeft, Paperclip, Mic, MicOff, X, FileText, ImageIcon } from "lucide-react";
 import "katex/dist/katex.min.css";
-
 
 const QUICK_TOPICS = [
   { label: "Bilangan Pecahan 🍕", prompt: "Tolong jelaskan cara menjumlahkan bilangan pecahan dengan penyebut berbeda!" },
@@ -18,6 +17,8 @@ const QUICK_TOPICS = [
 type Message = {
   role: "user" | "model";
   text: string;
+  imageUrl?: string;
+  fileName?: string;
 };
 
 const formatText = (text: string) => {
@@ -45,8 +46,17 @@ const ChatAIPage = () => {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [attachedFile, setAttachedFile] = useState<File | null>(null);
+  const [attachedPreview, setAttachedPreview] = useState<string | null>(null);
+  const [isImage, setIsImage] = useState(false);
+
+  const [isRecording, setIsRecording] = useState(false);
+
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   const hasUserMessages = messages.some(m => m.role === "user");
 
@@ -54,11 +64,85 @@ const ChatAIPage = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const img = file.type.startsWith("image/");
+    setIsImage(img);
+    setAttachedFile(file);
+    if (img) {
+      const reader = new FileReader();
+      reader.onload = (ev) => setAttachedPreview(ev.target?.result as string);
+      reader.readAsDataURL(file);
+    } else {
+      setAttachedPreview(null);
+    }
+    e.target.value = "";
+  };
+
+  const removeAttachment = () => {
+    setAttachedFile(null);
+    setAttachedPreview(null);
+    setIsImage(false);
+  };
+
+  const toggleVoice = () => {
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Browser kamu belum mendukung fitur suara. Coba Chrome ya! 🎤");
+      return;
+    }
+
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "id-ID";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(prev => (prev ? prev + " " + transcript : transcript));
+      setIsRecording(false);
+    };
+    recognition.onend = () => setIsRecording(false);
+    recognition.onerror = () => setIsRecording(false);
+
+    recognitionRef.current = recognition;
+    recognition.start();
+    setIsRecording(true);
+  };
+
   const sendMessage = async (text?: string) => {
     const trimmed = (text ?? input).trim();
-    if (!trimmed || loading) return;
+    if ((!trimmed && !attachedFile) || loading) return;
 
-    const userMsg: Message = { role: "user", text: trimmed };
+    let messageText = trimmed;
+    let imageUrl: string | undefined;
+    let fileName: string | undefined;
+
+    if (attachedFile) {
+      if (isImage && attachedPreview) {
+        imageUrl = attachedPreview;
+        messageText = trimmed || `Tolong analisis gambar ini: ${attachedFile.name}`;
+      } else {
+        fileName = attachedFile.name;
+        messageText = trimmed
+          ? `${trimmed}\n[File terlampir: ${attachedFile.name}]`
+          : `[File terlampir: ${attachedFile.name}]`;
+      }
+      removeAttachment();
+    }
+
+    if (!messageText) return;
+
+    const userMsg: Message = { role: "user", text: messageText, imageUrl, fileName };
     const updatedMessages = [...messages, userMsg];
     setMessages(updatedMessages);
     setInput("");
@@ -67,19 +151,13 @@ const ChatAIPage = () => {
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messages: updatedMessages,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: updatedMessages }),
       });
 
       if (!res.ok) throw new Error(`AI chat error: ${res.status}`);
-
       const data = await res.json();
       const responseText = data.text ?? "Maaf, tidak ada respons dari server.";
-
       setMessages((prev) => [...prev, { role: "model", text: responseText }]);
     } catch {
       setMessages((prev) => [
@@ -108,7 +186,14 @@ const ChatAIPage = () => {
       text: "Halo, Sobat Numatik! 🚀 Aku NUMATIK AI, asisten matematika pintarmu di galaksi ini! ✨\n\nAku siap membantu kamu belajar matematika dengan cara yang seru dan mudah dipahami. Mau tanya apa hari ini? 😊",
     }]);
     setInput("");
+    removeAttachment();
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+    }
   };
+
+  const canSend = (input.trim() || !!attachedFile) && !loading;
 
   return (
     <div className="relative min-h-screen flex flex-col gradient-space overflow-hidden">
@@ -116,11 +201,8 @@ const ChatAIPage = () => {
 
       {/* ── HEADER ── */}
       <div className="relative z-10 shrink-0">
-        {/* Gradient bar */}
         <div className="h-0.5 w-full bg-gradient-to-r from-violet-500 via-cyan-400 to-blue-500" />
-
         <div className="flex items-center gap-3 px-3 py-3 bg-[#080f22]/90 backdrop-blur-md border-b border-white/6">
-          {/* Back button */}
           <button
             onClick={() => navigate("/menu")}
             className="w-8 h-8 rounded-xl flex items-center justify-center text-white/50 hover:text-white hover:bg-white/8 transition-all shrink-0"
@@ -128,7 +210,6 @@ const ChatAIPage = () => {
             <ChevronLeft className="w-5 h-5" />
           </button>
 
-          {/* Avatar with glow ring */}
           <div className="relative shrink-0">
             <div className="absolute inset-0 rounded-full bg-cyan-400/40 blur-md animate-pulse" />
             <div className="relative w-10 h-10 rounded-full border-2 border-cyan-400/60 overflow-hidden shadow-[0_0_16px_rgba(34,211,238,0.4)]">
@@ -136,7 +217,6 @@ const ChatAIPage = () => {
             </div>
           </div>
 
-          {/* Name + status */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <p className="font-display text-sm font-black text-white leading-none tracking-wide">NUMATIK AI</p>
@@ -147,7 +227,6 @@ const ChatAIPage = () => {
             </div>
           </div>
 
-          {/* Reset button */}
           <button
             onClick={resetChat}
             title="Mulai percakapan baru"
@@ -161,7 +240,6 @@ const ChatAIPage = () => {
       {/* ── CHAT AREA ── */}
       <div className="relative z-10 flex-1 overflow-y-auto px-3 py-4 space-y-4">
 
-        {/* Welcome hero — shown until user sends first message */}
         <AnimatePresence>
           {!hasUserMessages && (
             <motion.div
@@ -171,7 +249,6 @@ const ChatAIPage = () => {
               transition={{ duration: 0.4 }}
               className="flex flex-col items-center text-center pt-4 pb-2 px-2"
             >
-              {/* Big glowing avatar */}
               <div className="relative mb-4">
                 <div className="absolute inset-0 rounded-full bg-cyan-400/25 blur-2xl scale-150" />
                 <div className="relative w-20 h-20 rounded-full border-2 border-cyan-400/50 overflow-hidden shadow-[0_0_30px_rgba(34,211,238,0.35)]">
@@ -189,7 +266,6 @@ const ChatAIPage = () => {
                 Tanya apa saja tentang matematika — aku akan jelasin langkah demi langkah dengan cara yang seru!
               </p>
 
-              {/* Quick topic chips */}
               <div className="w-full max-w-sm">
                 <p className="text-[10px] font-display font-bold text-white/30 tracking-widest uppercase mb-2.5">
                   🔥 Topik Populer
@@ -221,7 +297,6 @@ const ChatAIPage = () => {
             transition={{ duration: 0.25 }}
             className={`flex gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
           >
-            {/* Avatar */}
             {msg.role === "model" ? (
               <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden border-2 border-cyan-400/40 shadow-[0_0_10px_rgba(34,211,238,0.2)] self-end">
                 <img src="/numatik-ai-avatar.png" alt="NUMATIK AI" className="w-full h-full object-cover" />
@@ -232,7 +307,6 @@ const ChatAIPage = () => {
               </div>
             )}
 
-            {/* Bubble */}
             <div className={`max-w-[80%] relative ${msg.role === "model" ? "items-start" : "items-end"} flex flex-col gap-1`}>
               {msg.role === "model" && i === 0 && (
                 <span className="text-[9px] font-display font-bold text-cyan-400/60 px-1 tracking-wide">NUMATIK AI</span>
@@ -240,6 +314,22 @@ const ChatAIPage = () => {
               {msg.role === "user" && (
                 <span className="text-[9px] font-display font-bold text-violet-400/60 px-1 tracking-wide text-right">KAMU</span>
               )}
+
+              {/* Image attachment in bubble */}
+              {msg.imageUrl && (
+                <div className="rounded-xl overflow-hidden border border-violet-400/30 shadow-lg mb-1">
+                  <img src={msg.imageUrl} alt="Lampiran" className="max-w-[200px] max-h-[200px] object-cover" />
+                </div>
+              )}
+
+              {/* File attachment chip in bubble */}
+              {msg.fileName && (
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-violet-600/30 border border-violet-400/30 mb-1">
+                  <FileText className="w-4 h-4 text-violet-300 shrink-0" />
+                  <span className="text-xs font-body text-violet-200 truncate max-w-[150px]">{msg.fileName}</span>
+                </div>
+              )}
+
               <div className={`rounded-2xl px-4 py-3 text-sm font-body leading-relaxed shadow-lg ${
                 msg.role === "model"
                   ? "bg-[#0d1627]/95 border border-cyan-500/15 text-white/90 rounded-tl-sm shadow-[0_4px_20px_rgba(6,182,212,0.08)]"
@@ -251,7 +341,7 @@ const ChatAIPage = () => {
           </motion.div>
         ))}
 
-        {/* Loading indicator */}
+        {/* Loading */}
         <AnimatePresence>
           {loading && (
             <motion.div
@@ -295,14 +385,70 @@ const ChatAIPage = () => {
       {/* ── INPUT AREA ── */}
       <div className="relative z-10 shrink-0 px-3 pb-4 pt-2 bg-[#080f22]/90 backdrop-blur-md border-t border-white/6">
 
-        {/* Rocket tip */}
+        {/* Tip */}
         <div className="flex items-center gap-1.5 mb-2 px-1">
           <Rocket className="w-3 h-3 text-cyan-400/50" />
           <span className="text-white/20 text-[10px] font-body">Tekan Enter kirim • Shift+Enter baris baru</span>
         </div>
 
+        {/* Attachment preview chip */}
+        <AnimatePresence>
+          {attachedFile && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              className="flex items-center gap-2 mb-2 px-1"
+            >
+              <div className="flex items-center gap-2 bg-violet-500/15 border border-violet-500/30 rounded-xl px-3 py-1.5 max-w-xs">
+                {isImage && attachedPreview ? (
+                  <img src={attachedPreview} alt="preview" className="w-8 h-8 rounded-lg object-cover shrink-0 border border-violet-400/30" />
+                ) : (
+                  <FileText className="w-4 h-4 text-violet-300 shrink-0" />
+                )}
+                <span className="text-xs font-body text-violet-200 truncate max-w-[140px]">{attachedFile.name}</span>
+                <button
+                  onClick={removeAttachment}
+                  className="ml-1 w-4 h-4 rounded-full flex items-center justify-center text-violet-400 hover:text-white hover:bg-violet-500/40 transition-all shrink-0"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Input box */}
-        <div className="relative flex items-end gap-2 bg-[#0d1627] border border-white/8 rounded-2xl px-3 py-2.5 focus-within:border-cyan-500/50 focus-within:shadow-[0_0_0_3px_rgba(6,182,212,0.08)] transition-all duration-200">
+        <div className="relative flex items-end gap-2 bg-[#0d1627] border border-white/8 rounded-2xl px-2 py-2.5 focus-within:border-cyan-500/50 focus-within:shadow-[0_0_0_3px_rgba(6,182,212,0.08)] transition-all duration-200">
+
+          {/* Hidden file input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*,.pdf,.doc,.docx,.txt"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+
+          {/* Upload button */}
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={loading}
+            title="Upload gambar atau file"
+            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
+              attachedFile
+                ? "bg-violet-500/30 text-violet-300 border border-violet-500/40"
+                : "text-white/30 hover:text-violet-300 hover:bg-violet-500/15"
+            }`}
+          >
+            {isImage && attachedFile ? (
+              <ImageIcon className="w-4 h-4" />
+            ) : (
+              <Paperclip className="w-4 h-4" />
+            )}
+          </button>
+
+          {/* Textarea */}
           <textarea
             ref={inputRef}
             value={input}
@@ -315,19 +461,48 @@ const ChatAIPage = () => {
             style={{ scrollbarWidth: "none" }}
           />
 
+          {/* Voice button */}
+          <button
+            onClick={toggleVoice}
+            disabled={loading}
+            title={isRecording ? "Hentikan rekaman" : "Kirim pesan dengan suara"}
+            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
+              isRecording
+                ? "bg-red-500/30 text-red-400 border border-red-500/50 shadow-[0_0_12px_rgba(239,68,68,0.3)] animate-pulse"
+                : "text-white/30 hover:text-cyan-300 hover:bg-cyan-500/15"
+            }`}
+          >
+            {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+          </button>
+
           {/* Send button */}
           <button
             onClick={() => sendMessage()}
-            disabled={!input.trim() || loading}
-            className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
-              input.trim() && !loading
+            disabled={!canSend}
+            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
+              canSend
                 ? "bg-gradient-to-br from-cyan-500 to-blue-600 shadow-[0_0_16px_rgba(6,182,212,0.4)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] hover:scale-105"
                 : "bg-white/5 cursor-not-allowed"
             }`}
           >
-            <Send className={`w-4 h-4 ${input.trim() && !loading ? "text-white" : "text-white/20"}`} />
+            <Send className={`w-4 h-4 ${canSend ? "text-white" : "text-white/20"}`} />
           </button>
         </div>
+
+        {/* Recording indicator */}
+        <AnimatePresence>
+          {isRecording && (
+            <motion.div
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="flex items-center gap-2 mt-2 px-1"
+            >
+              <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+              <span className="text-red-400 text-[10px] font-body">Sedang mendengarkan... bicara sekarang!</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
