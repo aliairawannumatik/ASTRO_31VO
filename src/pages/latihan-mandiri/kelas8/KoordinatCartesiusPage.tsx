@@ -47,7 +47,7 @@ const subtopics = [
   {
     label: "POSISI RELATIF SUATU TITIK TERHADAP SUATU GARIS",
     path: "/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif",
-    soal: 40,
+    soal: 10,
     icon: Navigation,
     gradient: "from-rose-900/40 to-pink-900/30",
     border: "border-rose-500/30",
@@ -78,7 +78,7 @@ const KoordinatCartesiusPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">85 Soal Total · Dilengkapi Diagram Koordinat</span>
+            <span className="text-white/70 text-xs font-body">55 Soal Total · Dilengkapi Diagram Koordinat</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
