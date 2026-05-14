@@ -5,15 +5,15 @@ import { BookOpen, GraduationCap } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const topicsKelas8 = [
-  { label: "POLA BILANGAN", path: "/latihan-mandiri/kelas-8/pola-bilangan" },
-  { label: "KOORDINAT CARTESIUS", path: "/latihan-mandiri/kelas-8/koordinat-cartesius" },
-  { label: "RELASI DAN FUNGSI", path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi" },
-  { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/latihan-mandiri/kelas-8/spldv" },
-  { label: "PERSAMAAN GARIS LURUS", path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus" },
-  { label: "TEOREMA PYTHAGORAS", path: "/latihan-mandiri/kelas-8/teorema-pythagoras" },
-  { label: "LINGKARAN", path: "/latihan-mandiri/kelas-8/lingkaran" },
-  { label: "GARIS SINGGUNG LINGKARAN", path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran" },
-  { label: "BANGUN RUANG SISI DATAR", path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" },
+  { label: "POLA BILANGAN", path: "/latihan-mandiri/kelas-8/pola-bilangan", soal: 50 },
+  { label: "KOORDINAT CARTESIUS", path: "/latihan-mandiri/kelas-8/koordinat-cartesius", soal: 55 },
+  { label: "RELASI DAN FUNGSI", path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi", soal: 200 },
+  { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", path: "/latihan-mandiri/kelas-8/spldv", soal: 128 },
+  { label: "PERSAMAAN GARIS LURUS", path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus", soal: 200 },
+  { label: "TEOREMA PYTHAGORAS", path: "/latihan-mandiri/kelas-8/teorema-pythagoras", soal: 240 },
+  { label: "LINGKARAN", path: "/latihan-mandiri/kelas-8/lingkaran", soal: 240 },
+  { label: "GARIS SINGGUNG LINGKARAN", path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran", soal: 200 },
+  { label: "BANGUN RUANG SISI DATAR", path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar", soal: 80 },
 ];
 
 const LatihanMandiriKelas8Page = () => {
@@ -46,8 +46,9 @@ const LatihanMandiriKelas8Page = () => {
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <BookOpen className="w-5 h-5 text-accent shrink-0 group-hover:scale-110 transition-transform" />
-              <span className="font-body text-sm text-white">{topic.label}</span>
-              <span className="ml-auto text-xs text-accent font-display">BUKA</span>
+              <span className="font-body text-sm text-white flex-1">{topic.label}</span>
+              <span className="text-xs text-white/40 font-body shrink-0">{topic.soal} Soal</span>
+              <span className="text-xs text-accent font-display shrink-0">BUKA</span>
             </button>
           ))}
         </div>
