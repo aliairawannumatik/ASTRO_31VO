@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "PENGERTIAN RELASI DAN PENYAJIANNYA",
     path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-relasi",
-    soal: 40,
+    soal: 12,
     icon: GitMerge,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -21,7 +21,7 @@ const subtopics = [
   {
     label: "PENGERTIAN FUNGSI DAN PENYAJIANNYA",
     path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-fungsi",
-    soal: 40,
+    soal: 8,
     icon: Zap,
     gradient: "from-emerald-900/40 to-teal-900/30",
     border: "border-emerald-500/30",
@@ -34,7 +34,7 @@ const subtopics = [
   {
     label: "MENENTUKAN BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU",
     path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi/banyak-fungsi",
-    soal: 40,
+    soal: 11,
     icon: Hash,
     gradient: "from-orange-900/40 to-amber-900/30",
     border: "border-orange-500/30",
@@ -47,7 +47,7 @@ const subtopics = [
   {
     label: "NOTASI DAN RUMUS FUNGSI",
     path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi/notasi-fungsi",
-    soal: 40,
+    soal: 19,
     icon: FunctionSquare,
     gradient: "from-sky-900/40 to-blue-900/30",
     border: "border-sky-500/30",
@@ -60,7 +60,7 @@ const subtopics = [
   {
     label: "GRAFIK FUNGSI",
     path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi/grafik-fungsi",
-    soal: 40,
+    soal: 16,
     icon: TrendingUp,
     gradient: "from-rose-900/40 to-pink-900/30",
     border: "border-rose-500/30",
@@ -91,7 +91,7 @@ const RelasiFungsiPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">200 Soal Total · Diagram Panah & Grafik Fungsi</span>
+            <span className="text-white/70 text-xs font-body">66 Soal Total · Diagram Panah & Grafik Fungsi</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
