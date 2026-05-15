@@ -11,6 +11,32 @@ function checkAnswer(val: string, accepted: string[]): boolean {
   return accepted.some((a) => normalize(a) === n);
 }
 
+/* ─── SVG fruit helpers ────────────────────────────────────── */
+function Apple({ size = 34 }: { size?: number }) {
+  const h = Math.round(size * 1.22);
+  return (
+    <svg width={size} height={h} viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17 5 C18 2 23 1 22 5" stroke="#5a3825" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      <ellipse cx="22" cy="4" rx="5" ry="2.5" fill="#16a34a" transform="rotate(-25 22 4)"/>
+      <path d="M17 8 C6 8 2 16 2 23 C2 33 8 41 17 41 C26 41 32 33 32 23 C32 16 28 8 17 8Z" fill="#ef4444"/>
+      <path d="M17 8 C14 8 11 10 10 12 C12 10 15 9 17 9 C19 9 22 10 24 12 C23 10 20 8 17 8Z" fill="#dc2626"/>
+      <ellipse cx="10" cy="19" rx="3.5" ry="2.5" fill="#fca5a5" opacity="0.45"/>
+    </svg>
+  );
+}
+function Banana({ size = 52 }: { size?: number }) {
+  const h = Math.round(size * 0.52);
+  return (
+    <svg width={size} height={h} viewBox="0 0 52 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 22 Q18 4 36 5 Q47 6 48 14" stroke="#a16207" strokeWidth="9" fill="none" strokeLinecap="round"/>
+      <path d="M4 22 Q18 4 36 5 Q47 6 48 14" stroke="#fde047" strokeWidth="6" fill="none" strokeLinecap="round"/>
+      <path d="M5 21 Q19 6 37 7 Q46 8 47 14" stroke="#fef9c3" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.7"/>
+      <circle cx="4" cy="22" r="3" fill="#7c2d12"/>
+      <circle cx="48" cy="14" r="3" fill="#7c2d12"/>
+    </svg>
+  );
+}
+
 /* ─── correct answers ─────────────────────────────────────── */
 const ANSWERS: Record<string, string[]> = {
   /* Section A */
@@ -40,33 +66,37 @@ const ANSWERS: Record<string, string[]> = {
   k1_cek2b: ["-4", "−4"],
   k1_cek2c: ["10"],
 
-  /* Kasus 3 – Eliminasi (3x − 2y = 11 dan 2x + y = 5) */
-  k3_r1a: ["3x"],
-  k3_r1b: ["2y"],
-  k3_r1c: ["11"],
-  k3_r2a: ["4x"],
-  k3_r2b: ["2y"],
-  k3_r2c: ["10"],
-  k3_resl_x: ["7x"],
-  k3_resr_x: ["21"],
-  k3_xhasil: ["3"],
-  k3_r3a: ["6x"],
-  k3_r3b: ["4y"],
-  k3_r3c: ["22"],
-  k3_r4a: ["6x"],
-  k3_r4b: ["3y"],
-  k3_r4c: ["15"],
-  k3_resl_y: ["7y"],
-  k3_resr_y: ["-7", "−7"],
-  k3_ynilai: ["-1", "−1"],
-  k3_xfinal: ["3"],
-  k3_yfinal: ["-1", "−1"],
-  k3_cek1a: ["3"],
-  k3_cek1b: ["-1", "−1"],
-  k3_cek1c: ["11"],
-  k3_cek2a: ["3"],
-  k3_cek2b: ["-1", "−1"],
-  k3_cek2c: ["5"],
+  /* Kasus 3 – Kontekstual Buah (4a + 2b = 12.500, 3a + b = 9.000) */
+  k3_vara: ["a", "x"],
+  k3_varb: ["b", "y"],
+  k3_eq1: ["4a + 2b = 12.500","4a + 2b = 12500","4a+2b=12.500","4a+2b=12500"],
+  k3_eq2: ["3a + b = 9.000","3a + b = 9000","3a+b=9.000","3a+b=9000"],
+  k3_e1a: ["4a"], k3_e1b: ["2b"], k3_e1c: ["12.500","12500"],
+  k3_e2a: ["6a"], k3_e2b: ["2b"], k3_e2c: ["18.000","18000"],
+  k3_resl_a: ["2a"], k3_resr_a: ["5.500","5500"], k3_aval: ["2.750","2750"],
+  k3_e3a: ["12a"], k3_e3b: ["6b"], k3_e3c: ["37.500","37500"],
+  k3_e4a: ["12a"], k3_e4b: ["4b"], k3_e4c: ["36.000","36000"],
+  k3_resl_b: ["2b"], k3_resr_b: ["1.500","1500"], k3_bval: ["750"],
+  k3_afinal: ["2.750","2750"], k3_bfinal: ["750"],
+  k3_cek1a: ["2.750","2750"], k3_cek1b: ["750"], k3_cek1c: ["12.500","12500"],
+  k3_cek2a: ["2.750","2750"], k3_cek2b: ["750"], k3_cek2c: ["9.000","9000"],
+  k3_jawab: ["6.250","6250","Rp 6.250","Rp 6250"],
+
+  /* Kasus 4 – Kontekstual Buah (same, all blanks incl. model) */
+  k4_vara: ["a", "x"],
+  k4_varb: ["b", "y"],
+  k4_coef1a: ["4"], k4_coef1b: ["2"], k4_rhs1: ["12.500","12500"],
+  k4_coef2a: ["3"], k4_coef2b: ["1"], k4_rhs2: ["9.000","9000"],
+  k4_e1a: ["4a"], k4_e1b: ["2b"], k4_e1c: ["12.500","12500"],
+  k4_e2a: ["6a"], k4_e2b: ["2b"], k4_e2c: ["18.000","18000"],
+  k4_resl_a: ["2a"], k4_resr_a: ["5.500","5500"], k4_aval: ["2.750","2750"],
+  k4_e3a: ["12a"], k4_e3b: ["6b"], k4_e3c: ["37.500","37500"],
+  k4_e4a: ["12a"], k4_e4b: ["4b"], k4_e4c: ["36.000","36000"],
+  k4_resl_b: ["2b"], k4_resr_b: ["1.500","1500"], k4_bval: ["750"],
+  k4_afinal: ["2.750","2750"], k4_bfinal: ["750"],
+  k4_cek1a: ["2.750","2750"], k4_cek1b: ["750"], k4_cek1c: ["12.500","12500"],
+  k4_cek2a: ["2.750","2750"], k4_cek2b: ["750"], k4_cek2c: ["9.000","9000"],
+  k4_jawab: ["6.250","6250","Rp 6.250","Rp 6250"],
 
   /* Kasus 2 – Eliminasi (2x − y = 4 dan x + y = 5) */
   k2_r1a: ["2x"],
@@ -103,8 +133,12 @@ const SECTIONS: Record<string, string[]> = {
   k1step2: ["k1_cek1a","k1_cek1b","k1_cek1c","k1_cek2a","k1_cek2b","k1_cek2c"],
   k2step1: ["k2_r1a","k2_r1b","k2_r1c","k2_r2a","k2_r2b","k2_r2c","k2_resl_x","k2_resr_x","k2_xhasil","k2_r3a","k2_r3b","k2_r3c","k2_r4a","k2_r4b","k2_r4c","k2_resl_y","k2_resr_y","k2_ynilai","k2_xfinal","k2_yfinal"],
   k2step2: ["k2_cek1a","k2_cek1b","k2_cek1c","k2_cek2a","k2_cek2b","k2_cek2c"],
-  k3step1: ["k3_r1a","k3_r1b","k3_r1c","k3_r2a","k3_r2b","k3_r2c","k3_resl_x","k3_resr_x","k3_xhasil","k3_r3a","k3_r3b","k3_r3c","k3_r4a","k3_r4b","k3_r4c","k3_resl_y","k3_resr_y","k3_ynilai","k3_xfinal","k3_yfinal"],
+  k3model: ["k3_vara","k3_varb","k3_eq1","k3_eq2"],
+  k3step1: ["k3_e1a","k3_e1b","k3_e1c","k3_e2a","k3_e2b","k3_e2c","k3_resl_a","k3_resr_a","k3_aval","k3_e3a","k3_e3b","k3_e3c","k3_e4a","k3_e4b","k3_e4c","k3_resl_b","k3_resr_b","k3_bval","k3_afinal","k3_bfinal"],
   k3step2: ["k3_cek1a","k3_cek1b","k3_cek1c","k3_cek2a","k3_cek2b","k3_cek2c"],
+  k4model: ["k4_vara","k4_varb","k4_coef1a","k4_coef1b","k4_rhs1","k4_coef2a","k4_coef2b","k4_rhs2"],
+  k4step1: ["k4_e1a","k4_e1b","k4_e1c","k4_e2a","k4_e2b","k4_e2c","k4_resl_a","k4_resr_a","k4_aval","k4_e3a","k4_e3b","k4_e3c","k4_e4a","k4_e4b","k4_e4c","k4_resl_b","k4_resr_b","k4_bval","k4_afinal","k4_bfinal"],
+  k4step2: ["k4_cek1a","k4_cek1b","k4_cek1c","k4_cek2a","k4_cek2b","k4_cek2c"],
 };
 
 /* ─── Page Context (prevents input remount on re-render) ──── */
@@ -673,121 +707,328 @@ const MetodeEliminasiLKPDPage = () => {
         </div>
 
         {/* ══════════════════════════════════════════════════════
-             KASUS 3 — METODE ELIMINASI
+             KASUS 3 — KONTEKSTUAL (orange)
         ══════════════════════════════════════════════════════ */}
-        <SectionHeader label="Kasus 3 Penyelesaian SPLDV Menggunakan Metode Eliminasi" color="violet" />
+        <SectionHeader label="Kasus 3 Penyelesaian SPLDV Menggunakan Metode Eliminasi" color="amber" />
 
-        <div className="rounded-2xl border-2 border-violet-400/40 bg-gradient-to-br from-violet-900/50 to-purple-900/40 p-5 mb-6 font-body text-base text-white/90">
-          <p className="text-sm text-violet-200/80 mb-3">Tentukan himpunan penyelesaian dari:</p>
-          <div className="font-mono my-3 bg-violet-950/60 rounded-xl p-4 border border-violet-400/30 flex flex-col items-center">
-            <div className="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-xl font-bold text-white">
-              <span className="text-right">3<span className="text-yellow-300">x</span> − 2<span className="text-yellow-300">y</span></span>
-              <span className="text-white/70">=</span>
-              <span>11</span>
-              <span className="text-right">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span></span>
-              <span className="text-white/70">=</span>
-              <span>5</span>
+        <div className="rounded-2xl border-2 border-orange-400/40 bg-gradient-to-br from-orange-900/50 to-amber-900/40 p-5 mb-6 font-body text-base text-white/90">
+
+          {/* ── Konteks ──────────────────────────────────────── */}
+          <p className="text-sm text-orange-200/90 font-body mb-4 leading-relaxed">
+            Dhea ingin berbelanja buah-buahan di pasar dan berencana membeli <strong className="text-yellow-300">2 buah apel</strong> dan <strong className="text-yellow-300">1 buah pisang</strong>. Saat tiba di tempat penjualan buah, terpampang harga di depan toko sebagai berikut:
+          </p>
+
+          {/* ── SVG Susunan ──────────────────────────────────── */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="rounded-xl border border-orange-400/40 bg-orange-950/50 p-3 text-center">
+              <p className="text-xs font-bold text-orange-300 mb-2 font-display">Susunan 1</p>
+              <div className="flex flex-wrap justify-center gap-1 mb-1">
+                <Apple /><Apple /><Apple /><Apple />
+              </div>
+              <div className="flex justify-center gap-2 mb-2">
+                <Banana /><Banana />
+              </div>
+              <p className="text-sm font-mono text-white font-bold">Rp 12.500,00</p>
             </div>
-            <p className="text-violet-300/60 text-sm mt-2">untuk <span className="text-yellow-300 font-bold">x</span>, <span className="text-yellow-300 font-bold">y</span> ∈ ℝ</p>
+            <div className="rounded-xl border border-orange-400/40 bg-orange-950/50 p-3 text-center">
+              <p className="text-xs font-bold text-orange-300 mb-2 font-display">Susunan 2</p>
+              <div className="flex flex-wrap justify-center gap-1 mb-1">
+                <Apple /><Apple /><Apple />
+              </div>
+              <div className="flex justify-center mb-2">
+                <Banana />
+              </div>
+              <p className="text-sm font-mono text-white font-bold">Rp 9.000,00</p>
+            </div>
+          </div>
+          <div className="flex justify-center gap-10 mb-4">
+            <div className="flex flex-col items-center gap-1">
+              <Apple size={30} /><p className="text-xs text-white/55">Buah apel</p>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <Banana size={46} /><p className="text-xs text-white/55">Buah pisang</p>
+            </div>
+          </div>
+          <p className="text-xs text-orange-200/60 italic font-body mb-5">
+            "Masalah penjualan kedua jenis buah di atas adalah salah satu masalah sehari-hari yang dapat diselesaikan melalui suatu metode dalam sistem persamaan linear dua variabel (SPLDV)."
+          </p>
+
+          {/* ── A. Membuat Model Matematika ──────────────────── */}
+          <div className="rounded-xl bg-amber-900/40 border border-amber-400/30 p-4 mb-4">
+            <p className="text-sm font-bold text-amber-300 mb-3">📐 Membuat Model Matematika</p>
+            <p className="text-sm text-white/85 mb-3 font-body">
+              Misalkan harga 1 buah apel = <B id="k3_vara" w="w-10" /> dan harga 1 buah pisang = <B id="k3_varb" w="w-10" />
+            </p>
+            <div className="space-y-2 font-mono text-sm">
+              <p className="flex flex-wrap items-center gap-2 text-white/85">
+                <span className="text-amber-300 font-bold">Susunan 1 :</span>
+                <span>4 apel + 2 pisang = Rp 12.500 → <strong className="text-yellow-300 text-base"><B id="k3_eq1" w="w-48" /></strong></span>
+              </p>
+              <p className="flex flex-wrap items-center gap-2 text-white/85">
+                <span className="text-amber-300 font-bold">Susunan 2 :</span>
+                <span>3 apel + 1 pisang = Rp 9.000 &nbsp;→ <strong className="text-yellow-300 text-base"><B id="k3_eq2" w="w-40" /></strong></span>
+              </p>
+            </div>
+            <CK sectionKey="k3model" />
           </div>
 
-          {/* Langkah ① — Eliminasi y → cari x */}
-          <div className="mt-4 rounded-xl bg-violet-900/40 border border-violet-400/30 p-4">
-            <p className="text-sm font-bold text-violet-300 mb-1">
-              ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
-            </p>
-            <p className="text-xs text-white/50 mb-3">(KPK koefisien y: 2 dan 1 = 2 → P1 × 1, P2 × 2, lalu jumlahkan)</p>
-            <div className="bg-violet-950/50 rounded-xl p-3 border border-violet-400/20 font-mono text-base">
+          {/* ── B. Penyelesaian: Eliminasi b → cari a ────────── */}
+          <div className="rounded-xl bg-orange-900/40 border border-orange-400/30 p-4 mb-4">
+            <p className="text-sm font-bold text-orange-300 mb-1">① Eliminasi variabel <span className="font-mono text-yellow-300">b</span> → cari nilai <span className="font-mono text-yellow-300">a</span></p>
+            <p className="text-xs text-white/50 mb-3">(KPK koefisien b: 2 dan 1 = 2 → P1 × 1, P2 × 2, lalu kurangkan)</p>
+            <div className="bg-orange-950/50 rounded-xl p-3 border border-orange-400/20 font-mono text-sm">
               <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
-                <span className="text-white/50 text-xs whitespace-nowrap">3<span className="text-yellow-300">x</span> − 2<span className="text-yellow-300">y</span> = 11 × 1</span>
-                <span className="text-right flex items-center gap-1"><B id="k3_r1a" w="w-12" /> −&#8202;<B id="k3_r1b" w="w-12" /></span>
+                <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 1</span>
+                <span className="flex items-center gap-1"><B id="k3_e1a" w="w-10" /> +&#8202;<B id="k3_e1b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
-                <span><B id="k3_r1c" w="w-10" /></span>
-                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 2</span>
-                <span className="text-right flex items-center gap-1"><B id="k3_r2a" w="w-12" /> +&#8202;<B id="k3_r2b" w="w-12" /></span>
+                <span><B id="k3_e1c" w="w-16" /></span>
+                <span className="text-white/45 text-xs whitespace-nowrap">3a + b = 9.000 × 2</span>
+                <span className="flex items-center gap-1"><B id="k3_e2a" w="w-10" /> +&#8202;<B id="k3_e2b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
-                <span><B id="k3_r2c" w="w-10" /></span>
+                <span><B id="k3_e2c" w="w-16" /></span>
               </div>
               <div className="border-t border-white/20 my-2" />
               <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
-                <span className="w-6 text-right text-white/40 text-sm">+</span>
-                <span className="text-right"><B id="k3_resl_x" w="w-14" /></span>
+                <span className="w-6 text-right text-white/40 text-xs">−</span>
+                <span><B id="k3_resl_a" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
-                <span className="flex items-center gap-2"><B id="k3_resr_x" w="w-14" /><span className="text-white/40 text-xs font-normal">← variabel <span className="text-yellow-300">y</span> tereliminasi</span></span>
+                <span className="flex items-center gap-2"><B id="k3_resr_a" w="w-16" /><span className="text-white/40 text-xs font-sans">← b tereliminasi</span></span>
                 <span className="w-6"> </span>
-                <span className="text-right text-yellow-300 font-black text-xl">x</span>
+                <span className="text-yellow-300 font-black">a</span>
                 <span className="text-white/60 px-1">=</span>
-                <span className="flex items-center gap-2"><B id="k3_xhasil" w="w-14" /><span className="text-white/40 text-xs font-normal">← bagi kedua ruas dengan 7</span></span>
+                <span className="flex items-center gap-2"><B id="k3_aval" w="w-20" /><span className="text-white/40 text-xs font-sans">← bagi 2</span></span>
               </div>
             </div>
           </div>
 
-          {/* Langkah ② — Eliminasi x → cari y */}
-          <div className="mt-4 rounded-xl bg-purple-900/40 border border-purple-400/30 p-4">
-            <p className="text-sm font-bold text-purple-300 mb-1">
-              ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
-            </p>
-            <p className="text-xs text-white/50 mb-3">(KPK koefisien x: 3 dan 2 = 6 → P1 × 2, P2 × 3, lalu kurangkan)</p>
-            <div className="bg-purple-950/50 rounded-xl p-3 border border-purple-400/20 font-mono text-base">
+          {/* ── C. Eliminasi a → cari b ───────────────────────── */}
+          <div className="rounded-xl bg-amber-900/40 border border-amber-400/30 p-4 mb-4">
+            <p className="text-sm font-bold text-amber-300 mb-1">② Eliminasi variabel <span className="font-mono text-yellow-300">a</span> → cari nilai <span className="font-mono text-yellow-300">b</span></p>
+            <p className="text-xs text-white/50 mb-3">(KPK koefisien a: 4 dan 3 = 12 → P1 × 3, P2 × 4, lalu kurangkan)</p>
+            <div className="bg-amber-950/50 rounded-xl p-3 border border-amber-400/20 font-mono text-sm">
               <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
-                <span className="text-white/50 text-xs whitespace-nowrap">3<span className="text-yellow-300">x</span> − 2<span className="text-yellow-300">y</span> = 11 × 2</span>
-                <span className="text-right flex items-center gap-1"><B id="k3_r3a" w="w-12" /> −&#8202;<B id="k3_r3b" w="w-12" /></span>
+                <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 3</span>
+                <span className="flex items-center gap-1"><B id="k3_e3a" w="w-12" /> +&#8202;<B id="k3_e3b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
-                <span><B id="k3_r3c" w="w-10" /></span>
-                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 3</span>
-                <span className="text-right flex items-center gap-1"><B id="k3_r4a" w="w-12" /> +&#8202;<B id="k3_r4b" w="w-12" /></span>
+                <span><B id="k3_e3c" w="w-16" /></span>
+                <span className="text-white/45 text-xs whitespace-nowrap">3a + b = 9.000 × 4</span>
+                <span className="flex items-center gap-1"><B id="k3_e4a" w="w-12" /> +&#8202;<B id="k3_e4b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
-                <span><B id="k3_r4c" w="w-10" /></span>
+                <span><B id="k3_e4c" w="w-16" /></span>
               </div>
               <div className="border-t border-white/20 my-2" />
               <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
-                <span className="w-6 text-right text-white/40 text-sm">−</span>
-                <span className="text-right"><B id="k3_resl_y" w="w-14" /></span>
+                <span className="w-6 text-right text-white/40 text-xs">−</span>
+                <span><B id="k3_resl_b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
-                <span className="flex items-center gap-2"><B id="k3_resr_y" w="w-14" /><span className="text-white/40 text-xs font-normal">← variabel <span className="text-yellow-300">x</span> tereliminasi</span></span>
+                <span className="flex items-center gap-2"><B id="k3_resr_b" w="w-16" /><span className="text-white/40 text-xs font-sans">← a tereliminasi</span></span>
                 <span className="w-6"> </span>
-                <span className="text-right text-yellow-300 font-black text-xl">y</span>
+                <span className="text-yellow-300 font-black">b</span>
                 <span className="text-white/60 px-1">=</span>
-                <span className="flex items-center gap-2"><B id="k3_ynilai" w="w-14" /><span className="text-white/40 text-xs font-normal">← bagi kedua ruas dengan 7</span></span>
+                <span className="flex items-center gap-2"><B id="k3_bval" w="w-20" /><span className="text-white/40 text-xs font-sans">← bagi 2</span></span>
               </div>
             </div>
-          </div>
-
-          <div className="mt-4 rounded-xl bg-violet-900/30 border border-violet-400/20 p-4">
-            <p className="text-white/90 text-base">
-              Maka nilai <span className="text-yellow-300 font-black font-mono text-lg">x</span> = <B id="k3_xfinal" w="w-14" /> dan <span className="text-yellow-300 font-black font-mono text-lg">y</span> = <B id="k3_yfinal" w="w-14" />
-            </p>
+            <div className="mt-3">
+              <p className="text-white/90 text-sm font-body">Maka harga 1 apel = Rp <B id="k3_afinal" w="w-20" /> dan harga 1 pisang = Rp <B id="k3_bfinal" w="w-16" /></p>
+            </div>
             <CK sectionKey="k3step1" />
           </div>
 
-          {/* Memeriksa Hasil Kembali */}
-          <div className="mt-4 rounded-xl bg-gradient-to-br from-amber-600/30 to-orange-700/20 border-2 border-amber-400/60 p-4 shadow-[0_0_16px_rgba(245,158,11,0.25)]">
+          {/* ── D. Memeriksa ─────────────────────────────────── */}
+          <div className="rounded-xl bg-gradient-to-br from-amber-600/30 to-orange-700/20 border-2 border-amber-400/60 p-4 mb-4 shadow-[0_0_16px_rgba(245,158,11,0.2)]">
             <div className="flex items-center gap-2 mb-3">
-              <span className="bg-amber-400 text-black text-xs font-black px-2 py-0.5 rounded-full font-display tracking-wide">🔍 MEMERIKSA HASIL KEMBALI</span>
+              <span className="bg-amber-400 text-black text-xs font-black px-2 py-0.5 rounded-full font-display">🔍 MEMERIKSA HASIL KEMBALI</span>
             </div>
-            <p className="text-sm text-amber-100/80 mb-3 font-body">Substitusikan nilai <span className="text-yellow-300 font-black font-mono text-base">x</span> dan <span className="text-yellow-300 font-black font-mono text-base">y</span> yang diperoleh ke kedua persamaan:</p>
-            <div className="space-y-3 font-mono text-base bg-amber-950/40 rounded-xl p-3 border border-amber-400/20">
+            <p className="text-xs text-amber-100/75 mb-3 font-body">Substitusikan a = <B id="k3_cek1a" w="w-16" /> dan b = <B id="k3_cek1b" w="w-14" /> ke kedua persamaan:</p>
+            <div className="space-y-2 font-mono text-sm bg-amber-950/40 rounded-xl p-3 border border-amber-400/20">
               <p className="flex flex-wrap items-center gap-2">
-                <span className="text-amber-300 font-bold text-sm">Persamaan 1 :</span>
-                3(<B id="k3_cek1a" w="w-10" />) − 2(<B id="k3_cek1b" w="w-10" />) = <B id="k3_cek1c" w="w-10" />
-                <span className="text-white/50 font-body text-sm">(hasil harus 11)</span>
+                <span className="text-amber-300 font-bold text-xs">Susunan 1 :</span>
+                4(<B id="k3_cek1a" w="w-16" />) + 2(<B id="k3_cek1b" w="w-14" />) = <B id="k3_cek1c" w="w-16" />
+                <span className="text-white/45 font-body text-xs">(harus 12.500)</span>
               </p>
               <p className="flex flex-wrap items-center gap-2">
-                <span className="text-amber-300 font-bold text-sm">Persamaan 2 :</span>
-                2(<B id="k3_cek2a" w="w-10" />) + (<B id="k3_cek2b" w="w-10" />) = <B id="k3_cek2c" w="w-10" />
-                <span className="text-white/50 font-body text-sm">(hasil harus 5)</span>
+                <span className="text-amber-300 font-bold text-xs">Susunan 2 :</span>
+                3(<B id="k3_cek2a" w="w-16" />) + (<B id="k3_cek2b" w="w-14" />) = <B id="k3_cek2c" w="w-16" />
+                <span className="text-white/45 font-body text-xs">(harus 9.000)</span>
               </p>
             </div>
             <CK sectionKey="k3step2" />
           </div>
 
-          {/* Kesimpulan */}
-          <div className="mt-4 rounded-xl bg-gradient-to-br from-violet-600/30 to-purple-700/20 border-2 border-violet-400/60 p-4">
-            <p className="text-base font-black text-violet-300 font-display mb-2">✅ Kesimpulan:</p>
-            <p className="text-white text-lg font-mono font-bold flex flex-wrap items-center gap-2">
-              Himpunan penyelesaian = {"{"}(<B id="k3_xfinal" w="w-14" />, <B id="k3_yfinal" w="w-14" />){"}"}
+          {/* ── E. Kesimpulan ─────────────────────────────────── */}
+          <div className="rounded-xl bg-gradient-to-br from-emerald-600/30 to-teal-700/20 border-2 border-emerald-400/60 p-4">
+            <p className="text-base font-black text-emerald-300 font-display mb-2">✅ Kesimpulan:</p>
+            <p className="text-white/85 text-sm font-body mb-2">Biaya yang harus dibayar Dhea untuk 2 apel + 1 pisang:</p>
+            <p className="font-mono text-base text-white mb-1">2 × Rp <B id="k3_afinal" w="w-20" /> + 1 × Rp <B id="k3_bfinal" w="w-16" /> = Rp <B id="k3_jawab" w="w-20" /></p>
+            <p className="text-emerald-200/60 text-sm mt-2 font-body">Jadi Dhea harus membayar <span className="text-yellow-300 font-black">Rp 6.250,00</span></p>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════
+             KASUS 4 — KONTEKSTUAL MANDIRI (rose/pink)
+        ══════════════════════════════════════════════════════ */}
+        <SectionHeader label="Kasus 4 Penyelesaian SPLDV Menggunakan Metode Eliminasi" color="violet" />
+
+        <div className="rounded-2xl border-2 border-pink-400/40 bg-gradient-to-br from-pink-900/50 to-rose-900/40 p-5 mb-6 font-body text-base text-white/90">
+
+          {/* ── Konteks (same story) ─────────────────────────── */}
+          <p className="text-sm text-pink-200/90 font-body mb-4 leading-relaxed">
+            Dhea ingin berbelanja buah-buahan di pasar dan berencana membeli <strong className="text-yellow-300">2 buah apel</strong> dan <strong className="text-yellow-300">1 buah pisang</strong>. Saat tiba di tempat penjualan buah, terpampang harga di depan toko sebagai berikut:
+          </p>
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="rounded-xl border border-pink-400/40 bg-pink-950/50 p-3 text-center">
+              <p className="text-xs font-bold text-pink-300 mb-2 font-display">Susunan 1</p>
+              <div className="flex flex-wrap justify-center gap-1 mb-1">
+                <Apple /><Apple /><Apple /><Apple />
+              </div>
+              <div className="flex justify-center gap-2 mb-2">
+                <Banana /><Banana />
+              </div>
+              <p className="text-sm font-mono text-white font-bold">Rp 12.500,00</p>
+            </div>
+            <div className="rounded-xl border border-pink-400/40 bg-pink-950/50 p-3 text-center">
+              <p className="text-xs font-bold text-pink-300 mb-2 font-display">Susunan 2</p>
+              <div className="flex flex-wrap justify-center gap-1 mb-1">
+                <Apple /><Apple /><Apple />
+              </div>
+              <div className="flex justify-center mb-2">
+                <Banana />
+              </div>
+              <p className="text-sm font-mono text-white font-bold">Rp 9.000,00</p>
+            </div>
+          </div>
+          <div className="flex justify-center gap-10 mb-4">
+            <div className="flex flex-col items-center gap-1">
+              <Apple size={30} /><p className="text-xs text-white/55">Buah apel</p>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <Banana size={46} /><p className="text-xs text-white/55">Buah pisang</p>
+            </div>
+          </div>
+          <p className="text-xs text-pink-200/60 italic font-body mb-5">
+            "Masalah penjualan kedua jenis buah di atas adalah salah satu masalah sehari-hari yang dapat diselesaikan melalui suatu metode dalam sistem persamaan linear dua variabel (SPLDV)."
+          </p>
+
+          {/* ── A. Model Matematika (semua isian) ────────────── */}
+          <div className="rounded-xl bg-rose-900/40 border border-rose-400/30 p-4 mb-4">
+            <p className="text-sm font-bold text-rose-300 mb-3">📐 Membuat Model Matematika</p>
+            <p className="text-sm text-white/85 mb-3 font-body">
+              Misalkan harga 1 buah apel = <B id="k4_vara" w="w-10" /> dan harga 1 buah pisang = <B id="k4_varb" w="w-10" />
             </p>
-            <p className="text-violet-200/60 text-sm mt-2 font-body">Kedua persamaan terpenuhi → jawaban benar!</p>
+            <div className="space-y-3 font-mono text-sm">
+              <div className="flex flex-wrap items-center gap-2 text-white/85">
+                <span className="text-rose-300 font-bold">Susunan 1 :</span>
+                <B id="k4_coef1a" w="w-8" />
+                <span className="text-yellow-300 font-bold">a</span> +
+                <B id="k4_coef1b" w="w-8" />
+                <span className="text-yellow-300 font-bold">b</span>
+                <span>=</span>
+                <span>Rp</span>
+                <B id="k4_rhs1" w="w-20" />
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-white/85">
+                <span className="text-rose-300 font-bold">Susunan 2 :</span>
+                <B id="k4_coef2a" w="w-8" />
+                <span className="text-yellow-300 font-bold">a</span> +
+                <B id="k4_coef2b" w="w-8" />
+                <span className="text-yellow-300 font-bold">b</span>
+                <span>=</span>
+                <span>Rp</span>
+                <B id="k4_rhs2" w="w-20" />
+              </div>
+            </div>
+            <CK sectionKey="k4model" />
+          </div>
+
+          {/* ── B. Eliminasi b → cari a ───────────────────────── */}
+          <div className="rounded-xl bg-pink-900/40 border border-pink-400/30 p-4 mb-4">
+            <p className="text-sm font-bold text-pink-300 mb-1">① Eliminasi variabel <span className="font-mono text-yellow-300">b</span> → cari nilai <span className="font-mono text-yellow-300">a</span></p>
+            <p className="text-xs text-white/50 mb-3">(KPK koefisien b: 2 dan 1 = 2 → P1 × 1, P2 × 2, lalu kurangkan)</p>
+            <div className="bg-pink-950/50 rounded-xl p-3 border border-pink-400/20 font-mono text-sm">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 1</span>
+                <span className="flex items-center gap-1"><B id="k4_e1a" w="w-10" /> +&#8202;<B id="k4_e1b" w="w-10" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k4_e1c" w="w-16" /></span>
+                <span className="text-white/45 text-xs whitespace-nowrap">3a + b = 9.000 × 2</span>
+                <span className="flex items-center gap-1"><B id="k4_e2a" w="w-10" /> +&#8202;<B id="k4_e2b" w="w-10" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k4_e2c" w="w-16" /></span>
+              </div>
+              <div className="border-t border-white/20 my-2" />
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+                <span className="w-6 text-right text-white/40 text-xs">−</span>
+                <span><B id="k4_resl_a" w="w-10" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k4_resr_a" w="w-16" /><span className="text-white/40 text-xs font-sans">← b tereliminasi</span></span>
+                <span className="w-6"> </span>
+                <span className="text-yellow-300 font-black">a</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k4_aval" w="w-20" /><span className="text-white/40 text-xs font-sans">← bagi 2</span></span>
+              </div>
+            </div>
+          </div>
+
+          {/* ── C. Eliminasi a → cari b ───────────────────────── */}
+          <div className="rounded-xl bg-rose-900/40 border border-rose-400/30 p-4 mb-4">
+            <p className="text-sm font-bold text-rose-300 mb-1">② Eliminasi variabel <span className="font-mono text-yellow-300">a</span> → cari nilai <span className="font-mono text-yellow-300">b</span></p>
+            <p className="text-xs text-white/50 mb-3">(KPK koefisien a: 4 dan 3 = 12 → P1 × 3, P2 × 4, lalu kurangkan)</p>
+            <div className="bg-rose-950/50 rounded-xl p-3 border border-rose-400/20 font-mono text-sm">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 3</span>
+                <span className="flex items-center gap-1"><B id="k4_e3a" w="w-12" /> +&#8202;<B id="k4_e3b" w="w-10" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k4_e3c" w="w-16" /></span>
+                <span className="text-white/45 text-xs whitespace-nowrap">3a + b = 9.000 × 4</span>
+                <span className="flex items-center gap-1"><B id="k4_e4a" w="w-12" /> +&#8202;<B id="k4_e4b" w="w-10" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k4_e4c" w="w-16" /></span>
+              </div>
+              <div className="border-t border-white/20 my-2" />
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+                <span className="w-6 text-right text-white/40 text-xs">−</span>
+                <span><B id="k4_resl_b" w="w-10" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k4_resr_b" w="w-16" /><span className="text-white/40 text-xs font-sans">← a tereliminasi</span></span>
+                <span className="w-6"> </span>
+                <span className="text-yellow-300 font-black">b</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k4_bval" w="w-20" /><span className="text-white/40 text-xs font-sans">← bagi 2</span></span>
+              </div>
+            </div>
+            <div className="mt-3">
+              <p className="text-white/90 text-sm font-body">Maka harga 1 apel = Rp <B id="k4_afinal" w="w-20" /> dan harga 1 pisang = Rp <B id="k4_bfinal" w="w-16" /></p>
+            </div>
+            <CK sectionKey="k4step1" />
+          </div>
+
+          {/* ── D. Memeriksa ─────────────────────────────────── */}
+          <div className="rounded-xl bg-gradient-to-br from-amber-600/30 to-orange-700/20 border-2 border-amber-400/60 p-4 mb-4 shadow-[0_0_16px_rgba(245,158,11,0.2)]">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="bg-amber-400 text-black text-xs font-black px-2 py-0.5 rounded-full font-display">🔍 MEMERIKSA HASIL KEMBALI</span>
+            </div>
+            <p className="text-xs text-amber-100/75 mb-3 font-body">Substitusikan nilai a dan b yang diperoleh ke kedua persamaan:</p>
+            <div className="space-y-2 font-mono text-sm bg-amber-950/40 rounded-xl p-3 border border-amber-400/20">
+              <p className="flex flex-wrap items-center gap-2">
+                <span className="text-amber-300 font-bold text-xs">Susunan 1 :</span>
+                4(<B id="k4_cek1a" w="w-16" />) + 2(<B id="k4_cek1b" w="w-14" />) = <B id="k4_cek1c" w="w-16" />
+                <span className="text-white/45 font-body text-xs">(harus 12.500)</span>
+              </p>
+              <p className="flex flex-wrap items-center gap-2">
+                <span className="text-amber-300 font-bold text-xs">Susunan 2 :</span>
+                3(<B id="k4_cek2a" w="w-16" />) + (<B id="k4_cek2b" w="w-14" />) = <B id="k4_cek2c" w="w-16" />
+                <span className="text-white/45 font-body text-xs">(harus 9.000)</span>
+              </p>
+            </div>
+            <CK sectionKey="k4step2" />
+          </div>
+
+          {/* ── E. Kesimpulan ─────────────────────────────────── */}
+          <div className="rounded-xl bg-gradient-to-br from-emerald-600/30 to-teal-700/20 border-2 border-emerald-400/60 p-4">
+            <p className="text-base font-black text-emerald-300 font-display mb-2">✅ Kesimpulan:</p>
+            <p className="text-white/85 text-sm font-body mb-2">Biaya yang harus dibayar Dhea untuk 2 apel + 1 pisang:</p>
+            <p className="font-mono text-base text-white mb-1">2 × Rp <B id="k4_afinal" w="w-20" /> + 1 × Rp <B id="k4_bfinal" w="w-16" /> = Rp <B id="k4_jawab" w="w-20" /></p>
+            <p className="text-emerald-200/60 text-sm mt-2 font-body">Jadi Dhea harus membayar <span className="text-yellow-300 font-black">Rp 6.250,00</span></p>
           </div>
         </div>
 
