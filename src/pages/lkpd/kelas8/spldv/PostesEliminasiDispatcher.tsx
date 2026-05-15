@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import MeteorShootingGame from "@/components/MeteorShootingGame";
+import type { QuizQuestion } from "@/components/MeteorShootingGame";
 import FlappyRocketPage from "@/pages/math-game-arena/umum/FlappyRocketPage";
 import BattleTankPage from "@/pages/math-game-arena/umum/BattleTankPage";
 import SpaceImpactPage from "@/pages/math-game-arena/umum/SpaceImpactPage";
@@ -11,7 +12,7 @@ import GalaksiTempurPage from "@/pages/math-game-arena/umum/GalaksiTempurPage";
 import { getSubmaterialK8 } from "@/data/mga-k8/registry";
 import type { GuruQuestion } from "@/hooks/useGuruQuiz";
 
-const BACK_PATH = "/lkpd/kelas-8/spldv/metode-eliminasi";
+const BACK_PATH = "/lkpd/kelas-8/spldv/metode-eliminasi?postes=1";
 const HOME_PATH = "/menu";
 const TOPIC = "POSTES — SPLDV METODE ELIMINASI";
 
@@ -28,6 +29,12 @@ const POSTES_GURU: GuruQuestion[] = [
   },
 ];
 
+const POSTES_METEOR: QuizQuestion[] = POSTES_GURU.map((q) => ({
+  question: q.question,
+  options: q.options,
+  correctIndex: q.correctIdx,
+}));
+
 const entry = getSubmaterialK8("spldv", "metode-eliminasi");
 const q = entry?.questions;
 
@@ -35,7 +42,7 @@ const PostesEliminasiDispatcher = () => {
   const navigate = useNavigate();
   const { variant } = useParams<{ variant: string }>();
 
-  if (!q || !variant) {
+  if (!variant) {
     return (
       <div className="relative min-h-screen flex flex-col items-center justify-center bg-slate-950">
         <div className="relative z-10 text-center px-6">
@@ -56,7 +63,7 @@ const PostesEliminasiDispatcher = () => {
     case "meteor":
       return (
         <MeteorShootingGame
-          questions={q.meteor}
+          questions={POSTES_METEOR}
           topicLabel={TOPIC}
           backPath={BACK_PATH}
           backLabel="Kembali ke POSTES"

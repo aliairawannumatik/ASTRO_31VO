@@ -1,5 +1,5 @@
-import { useState, createContext, useContext, useCallback, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, createContext, useContext, useCallback, useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { ChevronDown, ChevronUp, Lightbulb, BookOpen, Minus, Trophy, Gamepad2 } from "lucide-react";
@@ -304,6 +304,8 @@ const MetodeEliminasiLKPDPage = () => {
     setOpenSections((prev) => prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const postesRef = useRef<HTMLDivElement>(null);
 
   /* ── POSTES state ── */
   const [postesOpen, setPostesOpen] = useState(false);
@@ -312,6 +314,18 @@ const MetodeEliminasiLKPDPage = () => {
   const [kesanOpen, setKesanOpen] = useState(false);
 
   const valsRef = useRef(vals);
+
+  /* ── Scroll to postes when returning from game ── */
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("postes") === "1") {
+      setPostesOpen(true);
+      const t = setTimeout(() => {
+        postesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+      return () => clearTimeout(t);
+    }
+  }, [location.search]);
   valsRef.current = vals;
 
   const handleChange = useCallback((id: string, v: string) => {
@@ -1423,7 +1437,7 @@ const MetodeEliminasiLKPDPage = () => {
         {/* ══════════════════════════════════════════════════════
              POSTES — COLLAPSIBLE
         ══════════════════════════════════════════════════════ */}
-        <div className="mb-6">
+        <div ref={postesRef} className="mb-6">
           <button
             onClick={() => setPostesOpen((v) => !v)}
             className="w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 border-rose-400/60 bg-gradient-to-r from-rose-600/30 via-pink-600/20 to-orange-600/20 shadow-[0_0_24px_rgba(244,63,94,0.2)] hover:opacity-90 active:scale-[0.99] transition-all"

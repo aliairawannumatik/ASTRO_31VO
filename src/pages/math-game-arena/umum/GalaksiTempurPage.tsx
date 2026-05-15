@@ -78,6 +78,10 @@ const GalaksiTempurPage = ({ topicLabel, backPath, homePath, quizQuestions }: Ga
 
   const phaseRef = useRef<Phase>("idle");
   const guruQuiz = useGuruQuiz(phaseRef, "playing", 25000, quizQuestions);
+  const guruIsCountdownActiveRef = useRef(false);
+  const guruSecondsUntilNextRef = useRef(0);
+  useEffect(() => { guruIsCountdownActiveRef.current = guruQuiz.isCountdownActive; }, [guruQuiz.isCountdownActive]);
+  useEffect(() => { guruSecondsUntilNextRef.current = guruQuiz.secondsUntilNext; }, [guruQuiz.secondsUntilNext]);
 
   const playerRef = useRef<Player>({ x: CW / 2 - 24, y: CH - 110, w: 56, h: 64, invincible: 0 });
   const bulletsRef = useRef<Bullet[]>([]);
@@ -560,8 +564,8 @@ const GalaksiTempurPage = ({ topicLabel, backPath, homePath, quizQuestions }: Ga
     }
 
     // Guru quiz countdown chip
-    if (guruQuiz.isCountdownActive && ph === "playing") {
-      const s = guruQuiz.secondsUntilNext;
+    if (guruIsCountdownActiveRef.current && ph === "playing") {
+      const s = guruSecondsUntilNextRef.current;
       const isUrgent = s <= 5;
       const chipW = 130, chipH = 22, chipX = (CW - chipW) / 2, chipY = 6;
       ctx.save();
@@ -578,7 +582,7 @@ const GalaksiTempurPage = ({ topicLabel, backPath, homePath, quizQuestions }: Ga
     }
 
     rafRef.current = requestAnimationFrame(loop);
-  }, [drawEnemy, drawPlayer, spawnWave, spawnBoss, spawnParticles, guruQuiz.isPausedRef, guruQuiz.isCountdownActive, guruQuiz.secondsUntilNext]);
+  }, [drawEnemy, drawPlayer, spawnWave, spawnBoss, spawnParticles, guruQuiz.isPausedRef]);
 
   const startGame = useCallback(() => {
     playPopSound();
