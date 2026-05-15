@@ -169,8 +169,7 @@ function Blank({ id, w = "w-20", mono = true }: { id: string; w?: string; mono?:
         value={vals[id] ?? ""}
         onChange={(e) => onChange(id, e.target.value)}
         placeholder="···"
-        size={18}
-        className={`${w} min-w-[3rem] ${borderStyle} ${bg} ${tc} rounded-md text-center text-base outline-none px-2 py-1 transition-all duration-200 ${mono ? "font-mono" : "font-body"} placeholder-white/30 font-bold`}
+        className={`${w} min-w-0 ${borderStyle} ${bg} ${tc} rounded-md text-center text-sm outline-none px-1 py-1 transition-all duration-200 ${mono ? "font-mono" : "font-body"} placeholder-white/30 font-bold`}
       />
       {r !== null && (
         <span className={`text-sm font-bold ${r ? "text-emerald-400" : "text-red-400"}`}>{r ? "✓" : "✗"}</span>
@@ -753,8 +752,8 @@ const MetodeEliminasiLKPDPage = () => {
               ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
               <span className="text-white/50 font-normal ml-2">(kedua persamaan dikurangkan)</span>
             </p>
-            <div className="bg-blue-950/50 rounded-xl p-3 border border-blue-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+            <div className="bg-blue-950/50 rounded-xl p-3 border border-blue-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center min-w-max">
                 <span className="w-6 text-right text-white/30 text-sm"> </span>
                 <span className="text-right text-white"><span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
                 <span className="text-white/60 px-1">=</span>
@@ -784,8 +783,8 @@ const MetodeEliminasiLKPDPage = () => {
               ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
               <span className="text-white/50 font-normal ml-2">(kedua persamaan dijumlahkan)</span>
             </p>
-            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center min-w-max">
                 <span className="w-6 text-right text-white/30 text-sm"> </span>
                 <span className="text-right text-white"><span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
                 <span className="text-white/60 px-1">=</span>
@@ -862,8 +861,8 @@ const MetodeEliminasiLKPDPage = () => {
               ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
               <span className="text-white/50 font-normal ml-2">(koefisien y berlawanan tanda → jumlahkan)</span>
             </p>
-            <div className="bg-cyan-950/50 rounded-xl p-3 border border-cyan-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+            <div className="bg-cyan-950/50 rounded-xl p-3 border border-cyan-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center min-w-max">
                 <span className="w-6 text-right text-white/30 text-sm"> </span>
                 <span className="text-right text-white">2<span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
                 <span className="text-white/60 px-1">=</span>
@@ -893,8 +892,8 @@ const MetodeEliminasiLKPDPage = () => {
               ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
               <span className="text-white/50 font-normal ml-2">(koefisien x belum sama, KPK = 2 → kalikan persamaan 2 dengan 2)</span>
             </p>
-            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
                 <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 8 × 1</span>
                 <span className="text-right flex items-center gap-1"><B id="k1_r1a" w="w-12" /> +&#8202;<B id="k1_r1b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
@@ -976,8 +975,8 @@ const MetodeEliminasiLKPDPage = () => {
               ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
               <span className="text-white/50 font-normal ml-2">(koefisien y berlawanan tanda: −1 dan +1 → jumlahkan)</span>
             </p>
-            <div className="bg-teal-950/50 rounded-xl p-3 border border-teal-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+            <div className="bg-teal-950/50 rounded-xl p-3 border border-teal-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center min-w-max">
                 <span className="w-6 text-right text-white/30 text-sm"> </span>
                 <span className="text-right text-white">2<span className="text-yellow-300 font-bold text-lg">x</span> − <span className="text-yellow-300 font-bold text-lg">y</span></span>
                 <span className="text-white/60 px-1">=</span>
@@ -1007,8 +1006,8 @@ const MetodeEliminasiLKPDPage = () => {
               ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
               <span className="text-white/50 font-normal ml-2">(koefisien x: 2 dan 1, KPK = 2 → kalikan P2 dengan 2)</span>
             </p>
-            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
                 <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 4 × 1</span>
                 <span className="text-right flex items-center gap-1"><B id="k2_r3a" w="w-12" /> −&#8202;<B id="k2_r3b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
@@ -1035,8 +1034,8 @@ const MetodeEliminasiLKPDPage = () => {
           {/* Isian langkah eliminasi y (soal) */}
           <div className="mt-4 rounded-xl bg-teal-900/30 border border-teal-400/20 p-4">
             <p className="text-sm text-teal-200/80 mb-3 font-body">Lengkapi tabel eliminasi variabel <span className="text-yellow-300 font-black font-mono">y</span> di bawah ini:</p>
-            <div className="bg-teal-950/50 rounded-xl p-3 border border-teal-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+            <div className="bg-teal-950/50 rounded-xl p-3 border border-teal-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
                 <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 4 × 1</span>
                 <span className="text-right flex items-center gap-1"><B id="k2_r1a" w="w-12" /> −&#8202;<B id="k2_r1b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
@@ -1121,8 +1120,8 @@ const MetodeEliminasiLKPDPage = () => {
               ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
             </p>
             <p className="text-xs text-white/50 mb-3">(koefisien y: 1 dan 2, KPK = 2 → P1 × 2, P2 × 1, lalu jumlahkan)</p>
-            <div className="bg-orange-950/50 rounded-xl p-3 border border-orange-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+            <div className="bg-orange-950/50 rounded-xl p-3 border border-orange-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
                 <span className="text-white/45 text-xs whitespace-nowrap">2x + y = 5 × 2</span>
                 <span className="flex items-center gap-1"><B id="k3_r1a" w="w-10" /> +&#8202;<B id="k3_r1b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
@@ -1152,8 +1151,8 @@ const MetodeEliminasiLKPDPage = () => {
               ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
             </p>
             <p className="text-xs text-white/50 mb-3">(koefisien x: 2 dan 3, KPK = 6 → P1 × 3, P2 × 2, lalu kurangkan)</p>
-            <div className="bg-amber-950/50 rounded-xl p-3 border border-amber-400/20 font-mono text-base">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+            <div className="bg-amber-950/50 rounded-xl p-3 border border-amber-400/20 font-mono text-base overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
                 <span className="text-white/45 text-xs whitespace-nowrap">2x + y = 5 × 3</span>
                 <span className="flex items-center gap-1"><B id="k3_r3a" w="w-10" /> +&#8202;<B id="k3_r3b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
@@ -1294,8 +1293,8 @@ const MetodeEliminasiLKPDPage = () => {
           <div className="rounded-xl bg-pink-900/40 border border-pink-400/30 p-4 mb-4">
             <p className="text-sm font-bold text-pink-300 mb-1">① Eliminasi variabel <span className="font-mono text-yellow-300">b</span> → cari nilai <span className="font-mono text-yellow-300">a</span></p>
             <p className="text-xs text-white/50 mb-3">(KPK koefisien b: 2 dan 1 = 2 → P1 × 1, P2 × 2, lalu kurangkan)</p>
-            <div className="bg-pink-950/50 rounded-xl p-3 border border-pink-400/20 font-mono text-sm">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+            <div className="bg-pink-950/50 rounded-xl p-3 border border-pink-400/20 font-mono text-sm overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
                 <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 1</span>
                 <span className="flex items-center gap-1"><B id="k4_e1a" w="w-10" /> +&#8202;<B id="k4_e1b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
@@ -1323,8 +1322,8 @@ const MetodeEliminasiLKPDPage = () => {
           <div className="rounded-xl bg-rose-900/40 border border-rose-400/30 p-4 mb-4">
             <p className="text-sm font-bold text-rose-300 mb-1">② Eliminasi variabel <span className="font-mono text-yellow-300">a</span> → cari nilai <span className="font-mono text-yellow-300">b</span></p>
             <p className="text-xs text-white/50 mb-3">(KPK koefisien a: 4 dan 3 = 12 → P1 × 3, P2 × 4, lalu kurangkan)</p>
-            <div className="bg-rose-950/50 rounded-xl p-3 border border-rose-400/20 font-mono text-sm">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+            <div className="bg-rose-950/50 rounded-xl p-3 border border-rose-400/20 font-mono text-sm overflow-x-auto">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
                 <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 3</span>
                 <span className="flex items-center gap-1"><B id="k4_e3a" w="w-12" /> +&#8202;<B id="k4_e3b" w="w-10" /></span>
                 <span className="text-white/60 px-1">=</span>
