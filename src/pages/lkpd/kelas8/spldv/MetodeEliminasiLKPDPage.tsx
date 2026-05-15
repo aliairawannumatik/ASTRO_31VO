@@ -260,8 +260,8 @@ const MetodeEliminasiLKPDPage = () => {
             <p>Alokasi Waktu: <span className="text-white font-bold">2 × 40 menit</span></p>
             <p>Satuan Pendidikan: <span className="text-white font-bold">SMP</span></p>
           </div>
-          <p className="mt-3 text-sm text-white/70 font-body leading-relaxed">
-            Pada LKS ini kamu akan belajar menyelesaikan SPLDV melalui metode <strong className="text-cyan-300">Eliminasi</strong>, <strong className="text-emerald-300">Substitusi</strong>, dan <strong className="text-violet-300">Campuran</strong>.
+          <p className="mt-3 text-sm text-white/80 font-body leading-relaxed text-left">
+            <span className="text-cyan-300 font-bold">14. &nbsp; Tujuan Pembelajaran :</span> Peserta didik dapat menyelesaikan sistem persamaan linear dua variabel dengan metode eliminasi untuk penyelesaian masalah.
           </p>
         </div>
 
