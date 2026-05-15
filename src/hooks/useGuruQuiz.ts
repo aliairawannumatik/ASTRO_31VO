@@ -194,7 +194,7 @@ export function useGuruQuiz(
       const correct = idx === currentQuestion.correctIdx;
       setLastResult(correct ? "correct" : "wrong");
       if (correct) {
-        internal.current.guruScore += 20;
+        internal.current.guruScore += 50;
         setGuruScore(internal.current.guruScore);
       }
       setTimeout(() => {

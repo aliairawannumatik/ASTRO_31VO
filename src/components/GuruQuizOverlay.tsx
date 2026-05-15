@@ -86,28 +86,28 @@ export default function GuruQuizOverlay({
   }
 
   if (showCelebration) {
-    const maxScore = totalQuestions * 20;
-    const correctCount = guruScore / 20;
+    const maxScore = totalQuestions * 50;
+    const correctCount = guruScore / 50;
     const allCorrect = guruScore === maxScore;
     const noneCorrect = guruScore === 0;
 
     const tier = allCorrect
       ? {
-          bg: "linear-gradient(135deg, #064e3b 0%, #065f46 40%, #047857 100%)",
-          border: "#34d399",
-          glow: "rgba(52,211,153,0.45)",
-          emoji: ["🏆", "🎉", "🌟", "🎊", "✨"],
-          badge: "bg-emerald-500/20 border-emerald-400/50",
-          scoreColor: "#6ee7b7",
-          scoreGlow: "#34d399",
-          titleColor: "#6ee7b7",
-          titleGlow: "#34d399",
-          title: "SELAMAT! KAMU BERHASIL!",
+          bg: "linear-gradient(135deg, #1a0050 0%, #6d00b0 20%, #c2006a 45%, #ff6a00 70%, #ffd700 100%)",
+          border: "#ff6a00",
+          glow: "rgba(255,106,0,0.55)",
+          emoji: ["🏆", "🎉", "🌈", "🎊", "🌟", "✨", "🥇"],
+          badge: "bg-yellow-500/20 border-yellow-400/50",
+          scoreColor: "#ffd700",
+          scoreGlow: "#ff6a00",
+          titleColor: "#fff",
+          titleGlow: "#ff6a00",
+          title: "SEMPURNA! NILAI 100! 🏆",
           subtitle: "Semua soal dijawab dengan benar!",
-          message: "Luar biasa! Kamu benar-benar menguasai materi Metode Eliminasi. Pertahankan terus ya, Juara! 🥇",
-          btnBg: "linear-gradient(135deg, #10b981, #059669)",
-          btnColor: "#ecfdf5",
-          btnGlow: "rgba(16,185,129,0.55)",
+          message: "LUAR BIASA! Kamu meraih nilai sempurna 100! Kamu benar-benar jagoan Metode Eliminasi! Pertahankan terus ya, Juara! 🥇",
+          btnBg: "linear-gradient(135deg, #ff6a00, #c2006a, #6d00b0)",
+          btnColor: "#fff",
+          btnGlow: "rgba(255,106,0,0.65)",
           btnText: "🚀 Lanjut Main Lagi!",
           stars: totalQuestions,
         }
@@ -282,7 +282,7 @@ export default function GuruQuizOverlay({
             className="rounded-xl px-3 py-1 text-sm font-bold text-yellow-300"
             style={{ background: "rgba(255,215,0,0.15)", border: "1px solid rgba(255,215,0,0.3)" }}
           >
-            +20 poin ✓
+            +50 poin ✓
           </div>
         </div>
 
@@ -354,7 +354,7 @@ export default function GuruQuizOverlay({
             }}
           >
             {lastResult === "correct"
-              ? "✅ BENAR! +20 poin! Hebat! 🎉"
+              ? "✅ BENAR! +50 poin! Hebat! 🎉"
               : `❌ Salah. Jawaban: ${currentQuestion.options[currentQuestion.correctIdx]}`}
           </div>
         )}
