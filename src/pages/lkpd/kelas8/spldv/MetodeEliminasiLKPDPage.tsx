@@ -1378,13 +1378,6 @@ const MetodeEliminasiLKPDPage = () => {
             </div>
           </div>
 
-          {/* Penutup motivasi */}
-          <div className="rounded-2xl bg-gradient-to-r from-yellow-500/20 to-amber-500/15 border border-yellow-400/40 p-4 text-center">
-            <p className="text-yellow-300 font-display font-black text-base mb-1">🏆 Selamat! Kamu Telah Menguasai Metode Eliminasi!</p>
-            <p className="text-white/75 font-body text-sm leading-relaxed">
-              Teruslah berlatih dan jangan takut mencoba soal-soal baru. Setiap soal yang berhasil diselesaikan adalah bukti bahwa kamu semakin hebat dalam matematika! 💪
-            </p>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════════════════
@@ -1463,6 +1456,14 @@ const MetodeEliminasiLKPDPage = () => {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Penutup motivasi */}
+        <div className="rounded-2xl bg-gradient-to-r from-yellow-500/20 to-amber-500/15 border border-yellow-400/40 p-4 text-center mb-6">
+          <p className="text-yellow-300 font-display font-black text-base mb-1">🏆 Selamat! Kamu Telah Menguasai Metode Eliminasi!</p>
+          <p className="text-white/75 font-body text-sm leading-relaxed">
+            Teruslah berlatih dan jangan takut mencoba soal-soal baru. Setiap soal yang berhasil diselesaikan adalah bukti bahwa kamu semakin hebat dalam matematika! 💪
+          </p>
         </div>
 
         {/* Footer */}
