@@ -1,7 +1,8 @@
 import { useState, createContext, useContext, useCallback, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { ChevronDown, ChevronUp, Lightbulb, BookOpen, Minus, X, Trophy, Gamepad2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Lightbulb, BookOpen, Minus, Trophy, Gamepad2 } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -302,15 +303,10 @@ const MetodeEliminasiLKPDPage = () => {
   const toggleMateriSection = (id: string) =>
     setOpenSections((prev) => prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]);
 
+  const navigate = useNavigate();
+
   /* ── POSTES state ── */
   const [postesOpen, setPostesOpen] = useState(false);
-  const [postesGame, setPostesGame] = useState<typeof POSTES_GAMES[0] | null>(null);
-  const [postesAnswers, setPostesAnswers] = useState<Record<number, string>>({});
-  const [postesSubmitted, setPostesSubmitted] = useState(false);
-  const postesScore = postesSubmitted
-    ? POSTES_QUESTIONS.reduce((acc, q) => acc + (postesAnswers[q.id] === q.correct ? q.poin : 0), 0)
-    : 0;
-  const closePostes = () => { setPostesGame(null); setPostesAnswers({}); setPostesSubmitted(false); };
 
   /* ── Kesan state ── */
   const [kesanOpen, setKesanOpen] = useState(false);
@@ -1449,7 +1445,7 @@ const MetodeEliminasiLKPDPage = () => {
                 {POSTES_GAMES.map((g) => (
                   <button
                     key={g.id}
-                    onClick={() => { setPostesAnswers({}); setPostesSubmitted(false); setPostesGame(g); }}
+                    onClick={() => navigate(`/lkpd/kelas-8/spldv/metode-eliminasi/postes/${g.id}`)}
                     className={`rounded-xl border-2 bg-gradient-to-br ${g.bg} p-3 text-center active:scale-95 transition-all hover:brightness-110`}
                     style={{ boxShadow: `0 0 16px ${g.glow}` }}
                   >
@@ -1569,171 +1565,6 @@ const MetodeEliminasiLKPDPage = () => {
         </div>
       </div>
     </div>
-
-    {/* ══════════════════════════════════════════════════════
-         POSTES QUIZ MODAL
-    ══════════════════════════════════════════════════════ */}
-    {postesGame && (
-      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/75 backdrop-blur-sm p-0 sm:p-4">
-        <div
-          className="relative w-full sm:max-w-lg bg-gradient-to-br from-slate-900 via-blue-950 to-violet-950 sm:rounded-3xl border-0 sm:border-2 border-cyan-400/40 overflow-hidden max-h-screen sm:max-h-[92vh] flex flex-col"
-          style={{ boxShadow: `0 0 60px ${postesGame.glow}` }}
-        >
-          {/* Modal header */}
-          <div className={`flex items-center justify-between px-5 py-4 bg-gradient-to-r ${postesGame.bg} border-b border-white/10 shrink-0`}>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">{postesGame.emoji}</span>
-              <div>
-                <p className="font-display text-xs font-black text-white/60 uppercase tracking-widest">POSTES • Metode Eliminasi</p>
-                <p className="font-display text-sm font-black text-white">{postesGame.name}</p>
-              </div>
-            </div>
-            <button onClick={closePostes} className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
-              <X size={18} className="text-white/80" />
-            </button>
-          </div>
-
-          {/* Modal body */}
-          <div className="overflow-y-auto flex-1 px-5 py-5 space-y-5">
-            {!postesSubmitted ? (
-              <>
-                {POSTES_QUESTIONS.map((q, qi) => (
-                  <div key={q.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    {/* soal header */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="w-7 h-7 rounded-full bg-cyan-500/30 border border-cyan-400/50 flex items-center justify-center font-display text-xs font-black text-cyan-200 shrink-0">
-                        {qi + 1}
-                      </span>
-                      <span className="font-body text-xs text-cyan-300 font-semibold">Soal {qi + 1} • {q.poin} poin</span>
-                    </div>
-                    {/* soal text */}
-                    <p className="font-body text-sm text-white/90 leading-relaxed whitespace-pre-line mb-4">{q.soal}</p>
-                    {/* options */}
-                    <div className="grid grid-cols-2 gap-2">
-                      {q.opts.map((opt, oi) => {
-                        const selected = postesAnswers[q.id] === opt;
-                        return (
-                          <button
-                            key={oi}
-                            onClick={() => setPostesAnswers((prev) => ({ ...prev, [q.id]: opt }))}
-                            className={`rounded-xl border-2 px-3 py-2.5 text-left flex items-center gap-2 transition-all active:scale-95 ${
-                              selected
-                                ? "border-cyan-400 bg-cyan-500/25 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
-                                : "border-white/15 bg-white/5 hover:border-white/30 hover:bg-white/10"
-                            }`}
-                          >
-                            <span className={`w-5 h-5 rounded-full border flex items-center justify-center text-xs font-black shrink-0 ${selected ? "border-cyan-400 bg-cyan-400 text-slate-900" : "border-white/30 text-white/60"}`}>
-                              {q.labels[oi]}
-                            </span>
-                            <span className="font-body text-xs text-white/90 font-semibold">{opt}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-
-                {/* Submit */}
-                <button
-                  disabled={Object.keys(postesAnswers).length < POSTES_QUESTIONS.length}
-                  onClick={() => setPostesSubmitted(true)}
-                  className="w-full py-3.5 rounded-2xl font-display font-black text-sm uppercase tracking-widest transition-all active:scale-95
-                    disabled:opacity-40 disabled:cursor-not-allowed
-                    enabled:bg-gradient-to-r enabled:from-rose-500 enabled:to-pink-500 enabled:shadow-[0_0_24px_rgba(244,63,94,0.5)] enabled:hover:brightness-110 text-white"
-                >
-                  🏁 Kumpulkan Jawaban
-                </button>
-              </>
-            ) : (
-              /* ── Results screen ── */
-              (() => {
-                const correctCount = POSTES_QUESTIONS.filter((q) => postesAnswers[q.id] === q.correct).length;
-                const isAllCorrect  = correctCount === POSTES_QUESTIONS.length;
-                const isAllWrong    = correctCount === 0;
-                return (
-                  <div className="flex flex-col items-center gap-5 py-4">
-                    {/* Big reaction */}
-                    {isAllCorrect && (
-                      <div className="text-center animate-bounce">
-                        <p className="text-6xl mb-2">🏆🎉🌟</p>
-                        <p className="font-display text-2xl font-black text-yellow-300 drop-shadow-lg">SEMPURNA!</p>
-                        <p className="font-body text-sm text-white/80 mt-1">Kamu menguasai semua soal dengan luar biasa!</p>
-                      </div>
-                    )}
-                    {!isAllCorrect && !isAllWrong && (
-                      <div className="text-center">
-                        <p className="text-6xl mb-2">👍✨</p>
-                        <p className="font-display text-2xl font-black text-cyan-300">HAMPIR!</p>
-                        <p className="font-body text-sm text-white/80 mt-1">Bagus! Satu lagi dan kamu bisa sempurna!</p>
-                      </div>
-                    )}
-                    {isAllWrong && (
-                      <div className="text-center">
-                        <p className="text-6xl mb-2">💪📚</p>
-                        <p className="font-display text-2xl font-black text-rose-300">SEMANGAT!</p>
-                        <p className="font-body text-sm text-white/80 mt-1">Pelajari kembali materinya — kamu pasti bisa!</p>
-                      </div>
-                    )}
-
-                    {/* Score badge */}
-                    <div className="rounded-2xl bg-gradient-to-r from-yellow-500/20 to-amber-500/15 border border-yellow-400/40 px-8 py-4 text-center w-full">
-                      <p className="font-body text-xs text-white/60 mb-1 uppercase tracking-widest">Skor Akhir</p>
-                      <p className="font-display text-4xl font-black text-yellow-300">{postesScore}<span className="text-lg text-white/40"> / 100</span></p>
-                      <p className="font-body text-xs text-white/50 mt-1">{correctCount} dari {POSTES_QUESTIONS.length} soal benar</p>
-                    </div>
-
-                    {/* Per-question breakdown */}
-                    <div className="w-full space-y-3">
-                      {POSTES_QUESTIONS.map((q, qi) => {
-                        const isCorrect = postesAnswers[q.id] === q.correct;
-                        return (
-                          <div key={q.id} className={`rounded-xl border-2 p-4 ${isCorrect ? "border-emerald-400/50 bg-emerald-900/20" : "border-red-400/50 bg-red-900/20"}`}>
-                            <div className="flex items-start gap-2 mb-2">
-                              <span className="text-lg shrink-0">{isCorrect ? "✅" : "❌"}</span>
-                              <div className="flex-1">
-                                <p className="font-body text-xs font-bold text-white/70 mb-1">Soal {qi + 1} ({q.poin} poin)</p>
-                                <p className="font-body text-xs text-white/80 whitespace-pre-line leading-relaxed">{q.soal}</p>
-                              </div>
-                            </div>
-                            <div className={`rounded-lg px-3 py-2 mt-2 text-xs font-body ${isCorrect ? "bg-emerald-500/20 text-emerald-200" : "bg-red-500/20 text-red-200"}`}>
-                              Jawabanmu: <span className="font-bold">{postesAnswers[q.id] ?? "—"}</span>
-                              {!isCorrect && <span className="ml-2 text-emerald-300">• Jawaban benar: <span className="font-bold">{q.correct}</span></span>}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Celebration confetti-like stars (CSS) */}
-                    {isAllCorrect && (
-                      <div className="flex gap-3 text-2xl animate-pulse">
-                        <span>⭐</span><span>🎊</span><span>⭐</span><span>🎊</span><span>⭐</span>
-                      </div>
-                    )}
-
-                    {/* Action buttons */}
-                    <div className="flex gap-3 w-full">
-                      <button
-                        onClick={() => { setPostesAnswers({}); setPostesSubmitted(false); }}
-                        className="flex-1 py-3 rounded-2xl border-2 border-cyan-400/50 bg-cyan-500/15 hover:bg-cyan-500/25 font-display text-xs font-black text-cyan-300 uppercase tracking-wide transition-all active:scale-95"
-                      >
-                        🔄 Coba Lagi
-                      </button>
-                      <button
-                        onClick={closePostes}
-                        className="flex-1 py-3 rounded-2xl border-2 border-white/20 bg-white/5 hover:bg-white/10 font-display text-xs font-black text-white/70 uppercase tracking-wide transition-all active:scale-95"
-                      >
-                        Selesai
-                      </button>
-                    </div>
-                  </div>
-                );
-              })()
-            )}
-          </div>
-        </div>
-      </div>
-    )}
 
     </PageCtx.Provider>
   );

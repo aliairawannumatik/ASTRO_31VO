@@ -61,6 +61,7 @@ const RelasiFungsiLKPDPage = lazy(() => import("./pages/lkpd/kelas8/relasi-fungs
 const SPLDVLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/SPLDVMenuPage"));
 const SPLDVLKPDPage = lazy(() => import("./pages/lkpd/kelas8/spldv/SPLDVLKPDPage"));
 const SPLDVMetodeEliminasiLKPDPage = lazy(() => import("./pages/lkpd/kelas8/spldv/MetodeEliminasiLKPDPage"));
+const PostesEliminasiDispatcher = lazy(() => import("./pages/lkpd/kelas8/spldv/PostesEliminasiDispatcher"));
 const SPLDVMetodeSubstitusiLKPDPage = lazy(() => import("./pages/lkpd/kelas8/spldv/MetodeSubstitusiLKPDPage"));
 const SPLDVMetodeCampuranLKPDPage = lazy(() => import("./pages/lkpd/kelas8/spldv/MetodeCampuranLKPDPage"));
 const PersamaanGarisLurusLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas8/PersamaanGarisLurusMenuPage"));
@@ -926,6 +927,7 @@ const AppInner = () => {
           <Route path="/lkpd/kelas-8/spldv" element={<SPLDVLKPDMenuPage />} />
           <Route path="/lkpd/kelas-8/spldv/lkpd" element={<SPLDVLKPDPage />} />
           <Route path="/lkpd/kelas-8/spldv/metode-eliminasi" element={<SPLDVMetodeEliminasiLKPDPage />} />
+          <Route path="/lkpd/kelas-8/spldv/metode-eliminasi/postes/:variant" element={<PostesEliminasiDispatcher />} />
           <Route path="/lkpd/kelas-8/spldv/metode-substitusi" element={<SPLDVMetodeSubstitusiLKPDPage />} />
           <Route path="/lkpd/kelas-8/spldv/metode-campuran" element={<SPLDVMetodeCampuranLKPDPage />} />
           <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
