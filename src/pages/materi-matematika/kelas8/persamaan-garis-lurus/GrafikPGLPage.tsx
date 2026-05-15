@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, TrendingUp
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import GeoGebraGrapher from "@/components/GeoGebraGrapher";
 
 /* ─── SVG helpers ─── */
 const W = 200, H = 160, MX = 100, MY = 80, SC = 16;
@@ -168,6 +169,24 @@ const GrafikPGLPage = () => {
                       ))}
                     </tbody>
                   </table>
+                </div>
+
+                {/* ── GeoGebra-style interactive graphing tool ── */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🖥️</span>
+                    <p className="text-sm font-bold text-cyan-300 font-body">Laboratorium Grafik Interaktif</p>
+                    <span className="text-xs bg-cyan-600/30 border border-cyan-500/40 text-cyan-300 px-2 py-0.5 rounded-full">GeoGebra-style</span>
+                  </div>
+                  <p className="text-xs text-white/60 font-body leading-relaxed">
+                    Ketik persamaan apa saja di panel kanan — grafiknya langsung tergambar! Gunakan scroll untuk zoom, drag untuk geser bidang, dan hover untuk melihat koordinat.
+                  </p>
+                  <GeoGebraGrapher />
+                  <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-3">
+                    <p className="text-xs text-violet-200 font-body">
+                      <strong>💡 Coba masukkan:</strong> <span className="font-mono">y = 3x + 2</span> lalu <span className="font-mono">3x - 2y + 6 = 0</span> lalu <span className="font-mono">x/4 + y/3 = 1</span> — perhatikan titik potong sumbu dan perpotongan antar garis!
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
