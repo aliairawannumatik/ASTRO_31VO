@@ -86,76 +86,153 @@ export default function GuruQuizOverlay({
   }
 
   if (showCelebration) {
-    const stars = Math.round((guruScore / (totalQuestions * 20)) * 5);
+    const maxScore = totalQuestions * 20;
+    const correctCount = guruScore / 20;
+    const allCorrect = guruScore === maxScore;
+    const noneCorrect = guruScore === 0;
+
+    const tier = allCorrect
+      ? {
+          bg: "linear-gradient(135deg, #064e3b 0%, #065f46 40%, #047857 100%)",
+          border: "#34d399",
+          glow: "rgba(52,211,153,0.45)",
+          emoji: ["🏆", "🎉", "🌟", "🎊", "✨"],
+          badge: "bg-emerald-500/20 border-emerald-400/50",
+          scoreColor: "#6ee7b7",
+          scoreGlow: "#34d399",
+          titleColor: "#6ee7b7",
+          titleGlow: "#34d399",
+          title: "SELAMAT! KAMU BERHASIL!",
+          subtitle: "Semua soal dijawab dengan benar!",
+          message: "Luar biasa! Kamu benar-benar menguasai materi Metode Eliminasi. Pertahankan terus ya, Juara! 🥇",
+          btnBg: "linear-gradient(135deg, #10b981, #059669)",
+          btnColor: "#ecfdf5",
+          btnGlow: "rgba(16,185,129,0.55)",
+          btnText: "🚀 Lanjut Main Lagi!",
+          stars: totalQuestions,
+        }
+      : noneCorrect
+      ? {
+          bg: "linear-gradient(135deg, #1e1b4b 0%, #3b0764 50%, #1e1b4b 100%)",
+          border: "#a78bfa",
+          glow: "rgba(167,139,250,0.4)",
+          emoji: ["💪", "🔥", "📚", "⚡", "💥"],
+          badge: "bg-violet-500/20 border-violet-400/50",
+          scoreColor: "#c4b5fd",
+          scoreGlow: "#a78bfa",
+          titleColor: "#c4b5fd",
+          titleGlow: "#a78bfa",
+          title: "SEMANGAT EKSTRA!",
+          subtitle: "Jangan pernah menyerah!",
+          message: "Setiap jagoan matematika pernah gagal dulu! Pelajari kembali materinya dan coba lagi — kamu PASTI bisa! 🌟",
+          btnBg: "linear-gradient(135deg, #7c3aed, #6d28d9)",
+          btnColor: "#ede9fe",
+          btnGlow: "rgba(124,58,237,0.55)",
+          btnText: "🔥 Coba Lagi, Ayo!",
+          stars: 0,
+        }
+      : {
+          bg: "linear-gradient(135deg, #1c1917 0%, #292524 40%, #1c1917 100%)",
+          border: "#fbbf24",
+          glow: "rgba(251,191,36,0.4)",
+          emoji: ["👍", "✨", "💡", "🌈", "⭐"],
+          badge: "bg-amber-500/20 border-amber-400/50",
+          scoreColor: "#fde68a",
+          scoreGlow: "#fbbf24",
+          titleColor: "#fde68a",
+          titleGlow: "#fbbf24",
+          title: "AYO SEMANGAT!",
+          subtitle: "Hampir sempurna, terus berjuang!",
+          message: "Bagus! Kamu sudah menjawab sebagian benar. Pelajari soal yang terlewat dan kamu akan semakin jago! 💪",
+          btnBg: "linear-gradient(135deg, #f59e0b, #d97706)",
+          btnColor: "#1c1917",
+          btnGlow: "rgba(245,158,11,0.55)",
+          btnText: "⚡ Lanjut Main!",
+          stars: correctCount,
+        };
+
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(8px)" }} />
         <div
-          className="absolute inset-0"
-          style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(6px)" }}
-        />
-        <div
-          className="relative z-10 flex flex-col items-center gap-4 rounded-3xl border-4 px-8 py-10 text-center shadow-2xl"
+          className="relative z-10 flex flex-col items-center gap-4 rounded-3xl border-4 px-7 py-9 text-center shadow-2xl overflow-hidden"
           style={{
-            background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)",
-            borderColor: "#FFD700",
+            background: tier.bg,
+            borderColor: tier.border,
             maxWidth: 380,
             width: "92vw",
-            boxShadow: "0 0 60px rgba(255,215,0,0.4)",
+            boxShadow: `0 0 70px ${tier.glow}`,
           }}
         >
-          <div className="text-5xl animate-bounce">🏆</div>
-          <h2 className="text-2xl font-black text-yellow-300" style={{ textShadow: "0 0 20px #FFD700" }}>
-            TANTANGAN NUMATIK SELESAI!
-          </h2>
-
-          <div className="flex gap-1 text-3xl">
-            {Array.from({ length: 5 }, (_, i) => (
-              <span key={i} style={{ opacity: i < stars ? 1 : 0.25 }}>⭐</span>
-            ))}
-          </div>
-
-          <div
-            className="rounded-2xl px-6 py-4 text-center"
-            style={{ background: "rgba(255,215,0,0.15)", border: "2px solid rgba(255,215,0,0.4)" }}
-          >
-            <p className="text-sm text-yellow-200 mb-1">Skor Tantangan NUMATIK</p>
-            <p
-              className="text-5xl font-black text-yellow-300"
-              style={{ textShadow: "0 0 20px #FFD700" }}
-            >
-              {guruScore}
-            </p>
-            <p className="text-xs text-yellow-200 mt-1">
-              dari {totalQuestions * 20} poin maksimal
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-1 text-2xl">
-            {STAR_EMOJIS.slice(0, 6).map((e, i) => (
-              <span key={i} className="animate-pulse" style={{ animationDelay: `${i * 0.15}s` }}>
+          {/* Floating emoji strip */}
+          <div className="flex gap-2 text-3xl">
+            {tier.emoji.map((e, i) => (
+              <span
+                key={i}
+                className={allCorrect ? "animate-bounce" : noneCorrect ? "animate-pulse" : "animate-pulse"}
+                style={{ animationDelay: `${i * 0.12}s` }}
+              >
                 {e}
               </span>
             ))}
           </div>
 
-          <p className="text-sm text-indigo-200">
-            {guruScore === totalQuestions * 20
-              ? "Luar biasa! Semua jawaban benar! Kamu hebat! 🥇"
-              : guruScore >= (totalQuestions * 20) / 2
-              ? "Bagus sekali! Terus semangat belajar matematika! 💪"
-              : "Jangan menyerah! Terus berlatih dan kamu pasti bisa! 🌟"}
+          {/* Title */}
+          <div>
+            <h2
+              className="text-2xl font-black tracking-wide"
+              style={{ color: tier.titleColor, textShadow: `0 0 24px ${tier.titleGlow}` }}
+            >
+              {tier.title}
+            </h2>
+            <p className="text-xs mt-1" style={{ color: tier.scoreColor, opacity: 0.8 }}>
+              {tier.subtitle}
+            </p>
+          </div>
+
+          {/* Score badge */}
+          <div
+            className={`rounded-2xl border-2 px-8 py-4 w-full ${tier.badge}`}
+          >
+            <p className="text-xs mb-1" style={{ color: tier.scoreColor, opacity: 0.75 }}>
+              Skor Postes Kamu
+            </p>
+            <p
+              className="text-5xl font-black"
+              style={{ color: tier.scoreColor, textShadow: `0 0 24px ${tier.scoreGlow}` }}
+            >
+              {guruScore}
+              <span className="text-lg font-semibold" style={{ opacity: 0.5 }}>/{maxScore}</span>
+            </p>
+            {/* Stars row */}
+            <div className="flex justify-center gap-1 mt-2 text-xl">
+              {Array.from({ length: totalQuestions }, (_, i) => (
+                <span key={i} style={{ opacity: i < tier.stars ? 1 : 0.2, filter: i < tier.stars ? `drop-shadow(0 0 6px ${tier.scoreGlow})` : "none" }}>
+                  ⭐
+                </span>
+              ))}
+            </div>
+            <p className="text-xs mt-1" style={{ color: tier.scoreColor, opacity: 0.6 }}>
+              {correctCount} dari {totalQuestions} soal benar
+            </p>
+          </div>
+
+          {/* Message */}
+          <p className="text-sm leading-relaxed" style={{ color: tier.scoreColor, opacity: 0.9 }}>
+            {tier.message}
           </p>
 
+          {/* CTA button */}
           <button
             onClick={onDismissCelebration}
-            className="mt-2 rounded-2xl px-8 py-3 text-base font-bold transition-all duration-200 hover:scale-105 active:scale-95"
+            className="mt-1 w-full rounded-2xl py-3.5 text-base font-black tracking-wide transition-all duration-200 hover:scale-105 active:scale-95"
             style={{
-              background: "linear-gradient(135deg, #FFD700, #FFA500)",
-              color: "#1e1b4b",
-              boxShadow: "0 4px 20px rgba(255,215,0,0.5)",
+              background: tier.btnBg,
+              color: tier.btnColor,
+              boxShadow: `0 4px 24px ${tier.btnGlow}`,
             }}
           >
-            Lanjutkan Main! 🎮
+            {tier.btnText}
           </button>
         </div>
       </div>

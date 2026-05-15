@@ -21,7 +21,7 @@ const GURU_QUESTIONS: GuruQuestion[] = [
   { question: "Rumus baku: Nilai tiap 1 satuan diperoleh dari jumlah besaran dibagi ...", options: ["selisih satuan", "banyak satuan", "hasil kali satuan", "akar satuan"], correctIdx: 1 },
 ];
 
-const MAX_QUESTIONS = 5;
+const DEFAULT_MAX_QUESTIONS = 5;
 const DEFAULT_INTERVAL_MS = 25000;
 
 export interface UseGuruQuizReturn {
@@ -50,6 +50,9 @@ export function useGuruQuiz(
   customQuestions?: GuruQuestion[]
 ): UseGuruQuizReturn {
   const isPausedRef = useRef(false);
+  const MAX_QUESTIONS = customQuestions && customQuestions.length > 0
+    ? Math.min(customQuestions.length, DEFAULT_MAX_QUESTIONS)
+    : DEFAULT_MAX_QUESTIONS;
 
   const [isVisible, setIsVisible] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<GuruQuestion | null>(null);
