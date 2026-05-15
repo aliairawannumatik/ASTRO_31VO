@@ -56,6 +56,13 @@ const InteractiveKerangkaKubus = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerW, setContainerW] = useState(600);
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const obs = new ResizeObserver(([entry]) => setContainerW(entry.contentRect.width));
+    obs.observe(containerRef.current);
+    return () => obs.disconnect();
+  }, []);
+
   const onMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     dragRef.current = { startX: e.clientX, startY: e.clientY, baseRotX: rotX, baseRotY: rotY };
@@ -116,6 +123,11 @@ const InteractiveKerangkaKubus = () => {
     }
   };
 
+  // Responsive: scale edge size so 4 bars + 3 gaps fit within the container width
+  const ks = Math.min(KK_S, Math.max(52, Math.floor((containerW - 3 * 8 - 8) / 4)));
+  const kScale = ks / KK_S;
+  const kRowGap = Math.max(14, Math.round(22 * kScale));
+
   // 12 edges arranged in 3 rows × 4 columns when "bongkar" is on.
   const flatIndex = (axis: KubusEdgeAxis, idx: number) => {
     const row = axis === "x" ? 0 : axis === "z" ? 1 : 2;
@@ -128,40 +140,31 @@ const InteractiveKerangkaKubus = () => {
   // that center at the desired point in the cube's coordinate frame.
   const getEdgeTransform = (e: KubusEdgeSpec) => {
     if (!bongkar) {
-      // Cube-local coords: each axis spans 0..KK_S. Edge endpoints are determined by
-      // its axis and which corner (a,b) of the perpendicular plane it sits at.
-      const A = e.a * KK_S;
-      const B = e.b * KK_S;
+      const A = e.a * ks;
+      const B = e.b * ks;
       let cx = 0, cy = 0, cz = 0, rot = "";
       if (e.axis === "x") {
-        // edge runs along x at corner (y=A, z=B); center at (S/2, A, B)
-        cx = KK_S / 2; cy = A; cz = B;
+        cx = ks / 2; cy = A; cz = B;
       } else if (e.axis === "z") {
-        // edge runs along z at corner (x=A, y=B); after rotateY(-90) bar points +z; center at (A, B, S/2)
-        cx = A; cy = B; cz = KK_S / 2; rot = " rotateY(-90deg)";
+        cx = A; cy = B; cz = ks / 2; rot = " rotateY(-90deg)";
       } else {
-        // y axis: edge runs along y at corner (x=A, z=B); after rotateZ(90) bar points +y; center at (A, S/2, B)
-        cx = A; cy = KK_S / 2; cz = B; rot = " rotateZ(90deg)";
+        cx = A; cy = ks / 2; cz = B; rot = " rotateZ(90deg)";
       }
-      // Bar's natural top-left is (0,0); its center is (KK_S/2, KK_THICK/2).
-      // To place center at (cx, cy, cz), translate by (cx - KK_S/2, cy - KK_THICK/2, cz).
-      return `translate3d(${cx - KK_S / 2}px, ${cy - KK_THICK / 2}px, ${cz}px)${rot}`;
+      return `translate3d(${cx - ks / 2}px, ${cy - KK_THICK / 2}px, ${cz}px)${rot}`;
     }
     // Unfolded layout: 3 rows × 4 columns of horizontal bars.
     const gap = 8;
-    const rowGap = 22;
-    const baseRowY = KK_S + 36;
+    const baseRowY = ks + 36;
     const { row, col } = flatIndex(e.axis, e.idx);
-    const totalW = 4 * KK_S + 3 * gap;
-    const startX = (KK_S - totalW) / 2;
-    const ex = startX + col * (KK_S + gap);
-    const ey = baseRowY + row * rowGap;
-    // Same convention: place bar's center at (ex + KK_S/2, ey, 0).
+    const totalW = 4 * ks + 3 * gap;
+    const startX = (ks - totalW) / 2;
+    const ex = startX + col * (ks + gap);
+    const ey = baseRowY + row * kRowGap;
     return `translate3d(${ex}px, ${ey - KK_THICK / 2}px, 0px)`;
   };
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
+    <div ref={containerRef} className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
         Drag untuk memutar · Klik tombol untuk membongkar 12 rusuk yang sama panjang
       </p>
@@ -170,7 +173,7 @@ const InteractiveKerangkaKubus = () => {
         className="relative mx-auto flex items-center justify-center select-none overflow-visible"
         style={{
           width: "100%",
-          height: bongkar ? 360 : 280,
+          height: bongkar ? Math.round(360 * kScale) : Math.round(280 * kScale),
           cursor: isDragging ? "grabbing" : "grab",
           touchAction: "none",
           transition: "height 0.6s ease",
@@ -179,17 +182,17 @@ const InteractiveKerangkaKubus = () => {
         onTouchStart={onTouchStart}
       >
         <div style={{
-          width: KK_S, height: KK_S,
+          width: ks, height: ks,
           position: "relative",
           transformStyle: "preserve-3d",
-          transformOrigin: `50% 50% ${KK_S / 2}px`,
+          transformOrigin: `50% 50% ${ks / 2}px`,
           transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
           transition: isDragging ? "none" : "transform 1s ease",
         }}>
           {KK_EDGES.map((e, i) => (
             <div key={i} style={{
               position: "absolute", top: 0, left: 0,
-              width: KK_S, height: KK_THICK,
+              width: ks, height: KK_THICK,
               background: KK_COLOR,
               borderRadius: 3,
               transformStyle: "preserve-3d",

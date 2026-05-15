@@ -520,6 +520,15 @@ const InteractiveKerangkaBalok = () => {
   const [rotY, setRotY] = useState(28);
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -18, baseRotY: 28 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerW, setContainerW] = useState(600);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const obs = new ResizeObserver(([entry]) => setContainerW(entry.contentRect.width));
+    obs.observe(containerRef.current);
+    return () => obs.disconnect();
+  }, []);
 
   const onMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
@@ -581,48 +590,47 @@ const InteractiveKerangkaBalok = () => {
     }
   };
 
-  const LEN: Record<EdgeAxis, number> = { p: P, l: L, t: T };
+  // Responsive: scale so 4 panjang bars + gaps fit within container width
+  const ps = Math.min(P, Math.max(50, Math.floor((containerW - 3 * 6 - 8) / 4)));
+  const bScale = ps / P;
+  const ls = Math.round(L * bScale);
+  const ts = Math.round(T * bScale);
+  const bRowGap = Math.max(12, Math.round(18 * bScale));
+
+  const dLEN: Record<EdgeAxis, number> = { p: ps, l: ls, t: ts };
   const THICK = 5;
 
-  // Each bar's natural local box is (len) wide × (THICK) tall, lying along +x.
-  // We use the default transform-origin (center of the bar). Transform list applies
-  // right-to-left: rotation around the bar's center, then translation places that
-  // center at the desired point in the balok's local frame.
   const getEdgeTransform = (e: EdgeSpec) => {
-    const len = LEN[e.axis];
+    const len = dLEN[e.axis];
     if (!bongkar) {
       const [sx, sy, sz] = e.start;
+      const sx_s = sx > 0 ? ps : 0;
+      const sy_s = sy > 0 ? ts : 0;
+      const sz_s = sz > 0 ? ls : 0;
       let cx = 0, cy = 0, cz = 0, rot = "";
       if (e.axis === "p") {
-        // edge runs along x; center at (P/2, sy, sz)
-        cx = P / 2; cy = sy; cz = sz;
+        cx = ps / 2; cy = sy_s; cz = sz_s;
       } else if (e.axis === "l") {
-        // edge runs along z; after rotateY(-90) bar points +z; center at (sx, sy, L/2)
-        cx = sx; cy = sy; cz = L / 2; rot = " rotateY(-90deg)";
+        cx = sx_s; cy = sy_s; cz = ls / 2; rot = " rotateY(-90deg)";
       } else {
-        // edge runs along y; after rotateZ(90) bar points +y; center at (sx, T/2, sz)
-        cx = sx; cy = T / 2; cz = sz; rot = " rotateZ(90deg)";
+        cx = sx_s; cy = ts / 2; cz = sz_s; rot = " rotateZ(90deg)";
       }
-      // To place the bar's center at (cx, cy, cz), translate the top-left by
-      // (cx - len/2, cy - THICK/2, cz).
       return `translate3d(${cx - len / 2}px, ${cy - THICK / 2}px, ${cz}px)${rot}`;
     }
     const gap = 6;
-    const rowGap = 18;
-    const baseRowY = T + 36;
+    const baseRowY = ts + 36;
     const rowY =
       e.axis === "p" ? baseRowY :
-      e.axis === "l" ? baseRowY + rowGap :
-      baseRowY + rowGap * 2;
+      e.axis === "l" ? baseRowY + bRowGap :
+      baseRowY + bRowGap * 2;
     const totalW = 4 * len + 3 * gap;
-    const startX = (P - totalW) / 2;
+    const startX = (ps - totalW) / 2;
     const ex = startX + e.idx * (len + gap);
-    // Same center-placement convention.
     return `translate3d(${ex}px, ${rowY - THICK / 2}px, 0px)`;
   };
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
+    <div ref={containerRef} className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
         Drag untuk memutar · Klik tombol untuk membongkar 12 rusuk menjadi 4p + 4l + 4t
       </p>
@@ -631,7 +639,7 @@ const InteractiveKerangkaBalok = () => {
         className="relative mx-auto flex items-center justify-center select-none overflow-visible"
         style={{
           width: "100%",
-          height: bongkar ? 360 : 280,
+          height: bongkar ? Math.round(360 * bScale) : Math.round(280 * bScale),
           cursor: isDragging ? "grabbing" : "grab",
           touchAction: "none",
           transition: "height 0.6s ease",
@@ -640,15 +648,15 @@ const InteractiveKerangkaBalok = () => {
         onTouchStart={onTouchStart}
       >
         <div style={{
-          width: P, height: T,
+          width: ps, height: ts,
           position: "relative",
           transformStyle: "preserve-3d",
-          transformOrigin: `50% 50% ${L / 2}px`,
+          transformOrigin: `50% 50% ${ls / 2}px`,
           transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
           transition: isDragging ? "none" : "transform 1s ease",
         }}>
           {KERANGKA_EDGES.map((e, i) => {
-            const len = LEN[e.axis];
+            const len = dLEN[e.axis];
             const color = KERANGKA_COLORS[e.axis];
             return (
               <div key={i} style={{
