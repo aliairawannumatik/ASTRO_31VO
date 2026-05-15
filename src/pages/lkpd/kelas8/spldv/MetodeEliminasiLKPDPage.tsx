@@ -1331,7 +1331,7 @@ const MetodeEliminasiLKPDPage = () => {
         <div className="rounded-3xl border-2 border-cyan-400/40 bg-gradient-to-br from-cyan-900/50 via-blue-900/40 to-violet-900/40 p-6 mb-6 shadow-[0_0_40px_rgba(6,182,212,0.15)]">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-3xl">✨</span>
-            <h2 className="font-display text-lg font-black text-cyan-200 tracking-wide uppercase">Kesan Menggunakan Metode Eliminasi</h2>
+            <h2 className="font-display text-lg font-black text-cyan-200 tracking-wide uppercase">Kesimpulan Penggunaan Metode Eliminasi</h2>
           </div>
 
           <p className="text-white/85 font-body text-sm leading-relaxed mb-5">
