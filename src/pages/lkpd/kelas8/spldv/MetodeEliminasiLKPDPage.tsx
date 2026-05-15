@@ -990,6 +990,72 @@ const MetodeEliminasiLKPDPage = () => {
           </div>
         </div>
 
+        {/* ══════════════════════════════════════════════════════
+             KESAN MENGGUNAKAN METODE ELIMINASI
+        ══════════════════════════════════════════════════════ */}
+        <div className="rounded-3xl border-2 border-cyan-400/40 bg-gradient-to-br from-cyan-900/50 via-blue-900/40 to-violet-900/40 p-6 mb-6 shadow-[0_0_40px_rgba(6,182,212,0.15)]">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-3xl">✨</span>
+            <h2 className="font-display text-lg font-black text-cyan-200 tracking-wide uppercase">Kesan Menggunakan Metode Eliminasi</h2>
+          </div>
+
+          <p className="text-white/85 font-body text-sm leading-relaxed mb-5">
+            Setelah mempelajari dan mempraktikkan metode eliminasi, tuliskan kesanmu secara jujur dan penuh semangat!
+          </p>
+
+          {/* Card kesan 1 */}
+          <div className="rounded-2xl bg-gradient-to-br from-cyan-800/40 to-blue-800/30 border border-cyan-400/30 p-4 mb-3 flex gap-3 items-start">
+            <span className="text-2xl shrink-0 mt-0.5">🚀</span>
+            <div>
+              <p className="font-display text-sm font-black text-cyan-300 mb-1">Kekuatan Metode Eliminasi</p>
+              <p className="text-white/80 font-body text-sm leading-relaxed">
+                Metode eliminasi bagaikan senjata rahasia matematika — dengan <span className="text-yellow-300 font-bold">menyamakan koefisien</span> lalu menjumlahkan atau mengurangkan, satu variabel <em>lenyap</em> seketika! Tidak perlu substitusi panjang, cukup satu langkah dan variabel pertama sudah di tangan.
+              </p>
+            </div>
+          </div>
+
+          {/* Card kesan 2 */}
+          <div className="rounded-2xl bg-gradient-to-br from-violet-800/40 to-purple-800/30 border border-violet-400/30 p-4 mb-3 flex gap-3 items-start">
+            <span className="text-2xl shrink-0 mt-0.5">💡</span>
+            <div>
+              <p className="font-display text-sm font-black text-violet-300 mb-1">Serasa Jadi Detektif Matematika</p>
+              <p className="text-white/80 font-body text-sm leading-relaxed">
+                Setiap langkah eliminasi terasa seperti <span className="text-yellow-300 font-bold">memecahkan teka-teki</span> — mencari KPK koefisien, mengalikan persamaan, lalu menonton variabel menghilang satu per satu. Prosesnya sistematis, terstruktur, dan sangat memuaskan ketika jawaban akhir ditemukan!
+              </p>
+            </div>
+          </div>
+
+          {/* Card kesan 3 */}
+          <div className="rounded-2xl bg-gradient-to-br from-emerald-800/40 to-teal-800/30 border border-emerald-400/30 p-4 mb-3 flex gap-3 items-start">
+            <span className="text-2xl shrink-0 mt-0.5">🎯</span>
+            <div>
+              <p className="font-display text-sm font-black text-emerald-300 mb-1">Andalan untuk Koefisien Besar</p>
+              <p className="text-white/80 font-body text-sm leading-relaxed">
+                Ketika koefisien variabelnya besar atau tidak mudah dinyatakan satu sama lain, metode eliminasi justru <span className="text-yellow-300 font-bold">bersinar paling terang</span>. Ia bekerja tanpa menghasilkan pecahan rumit di tengah jalan — solusi tetap bersih, rapi, dan mudah diperiksa kembali.
+              </p>
+            </div>
+          </div>
+
+          {/* Card kesan 4 */}
+          <div className="rounded-2xl bg-gradient-to-br from-amber-800/40 to-orange-800/30 border border-amber-400/30 p-4 mb-5 flex gap-3 items-start">
+            <span className="text-2xl shrink-0 mt-0.5">🌟</span>
+            <div>
+              <p className="font-display text-sm font-black text-amber-300 mb-1">Refleksi Diri</p>
+              <p className="text-white/80 font-body text-sm leading-relaxed">
+                Belajar metode eliminasi mengajarkan kita bahwa <span className="text-yellow-300 font-bold">kesabaran dan keteraturan</span> adalah kunci. Setiap langkah yang dilakukan dengan teliti membawa kita selangkah lebih dekat ke jawaban yang tepat — persis seperti menghadapi tantangan di kehidupan nyata!
+              </p>
+            </div>
+          </div>
+
+          {/* Penutup motivasi */}
+          <div className="rounded-2xl bg-gradient-to-r from-yellow-500/20 to-amber-500/15 border border-yellow-400/40 p-4 text-center">
+            <p className="text-yellow-300 font-display font-black text-base mb-1">🏆 Selamat! Kamu Telah Menguasai Metode Eliminasi!</p>
+            <p className="text-white/75 font-body text-sm leading-relaxed">
+              Teruslah berlatih dan jangan takut mencoba soal-soal baru. Setiap soal yang berhasil diselesaikan adalah bukti bahwa kamu semakin hebat dalam matematika! 💪
+            </p>
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="text-center">
           <button
