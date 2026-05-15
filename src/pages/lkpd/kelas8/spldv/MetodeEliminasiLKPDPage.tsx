@@ -303,7 +303,7 @@ const MetodeEliminasiLKPDPage = () => {
 
         {/* Contoh pengantar */}
         <div className="rounded-2xl border-2 border-blue-400/40 bg-gradient-to-br from-blue-900/50 to-indigo-900/40 p-5 mb-6 font-body text-base text-white/90">
-          <p className="font-bold text-white text-lg mb-1">Contoh SPLDV:</p>
+          <p className="font-bold text-white text-lg mb-1">Contoh Penyelesaian SPLDV menggunakan metode eliminasi:</p>
           <p className="text-sm text-blue-200/80 mb-3">Tentukan himpunan penyelesaian dari:</p>
           <div className="font-mono text-center my-3 space-y-1 bg-blue-950/60 rounded-xl p-4 border border-blue-400/30">
             <p className="text-xl font-bold text-white"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5</p>
