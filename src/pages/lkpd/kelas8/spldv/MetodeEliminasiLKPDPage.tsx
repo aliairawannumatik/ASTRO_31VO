@@ -1334,10 +1334,6 @@ const MetodeEliminasiLKPDPage = () => {
             <h2 className="font-display text-lg font-black text-cyan-200 tracking-wide uppercase">Kesimpulan Penggunaan Metode Eliminasi</h2>
           </div>
 
-          <p className="text-white/85 font-body text-sm leading-relaxed mb-5">
-            Setelah mempelajari dan mempraktikkan metode eliminasi, tuliskan kesanmu secara jujur dan penuh semangat!
-          </p>
-
           {/* Card kesan 1 */}
           <div className="rounded-2xl bg-gradient-to-br from-cyan-800/40 to-blue-800/30 border border-cyan-400/30 p-4 mb-3 flex gap-3 items-start">
             <span className="text-2xl shrink-0 mt-0.5">🚀</span>
