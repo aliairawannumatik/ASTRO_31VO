@@ -40,28 +40,7 @@ const ANSWERS: Record<string, string[]> = {
   k1_cek2b: ["-4", "−4"],
   k1_cek2c: ["10"],
 
-  /* Kasus 2 – Substitusi */
-  k2_dik: ["2x - y = 4 dan x + y = 5", "2x – y = 4 dan x + y = 5", "2x-y=4 dan x+y=5"],
-  k2_tan: ["nilai x dan y", "x dan y", "penyelesaian"],
-  k2_xsubst: ["y"],
-  k2_xsubst2: ["y"],
-  k2_r1l: ["10"],
-  k2_r1r: ["2y"],
-  k2_r2l: ["10"],
-  k2_r2r: ["3y"],
-  k2_y: ["2"],
-  k2_ysub: ["2"],
-  k2_xhasil: ["3"],
-  k2_xfinal: ["3"],
-  k2_yfinal: ["2"],
-  k2_cek1a: ["3"],
-  k2_cek1b: ["2"],
-  k2_cek1c: ["5"],
-  k2_cek2a: ["3"],
-  k2_cek2b: ["2"],
-  k2_cek2c: ["4"],
-
-  /* Kasus 3 – Campuran */
+  /* Kasus 2 – Campuran */
   k3_dik: ["2x + y = 5 dan 3x - 2y = 11", "2x+y=5 dan 3x-2y=11", "2x + y = 5 dan 3x – 2y = 11"],
   k3_tan: ["nilai x dan y", "x dan y", "penyelesaian"],
   k3_r1a: ["3x"],
@@ -90,10 +69,8 @@ const SECTIONS: Record<string, string[]> = {
   a: ["a1","a2","a3","a4"],
   k1step1: ["k1_r1a","k1_r1b","k1_r1c","k1_r2a","k1_r2b","k1_r2c","k1_resl","k1_resr","k1_ynilai","k1_xfinal","k1_yfinal"],
   k1step2: ["k1_cek1a","k1_cek1b","k1_cek1c","k1_cek2a","k1_cek2b","k1_cek2c"],
-  k2step1: ["k2_xsubst","k2_xsubst2","k2_r1l","k2_r1r","k2_r2l","k2_r2r","k2_y","k2_ysub","k2_xhasil","k2_xfinal","k2_yfinal"],
-  k2step2: ["k2_cek1a","k2_cek1b","k2_cek1c","k2_cek2a","k2_cek2b","k2_cek2c"],
-  k3step1: ["k3_r1a","k3_r1b","k3_r1c","k3_r2a","k3_r2b","k3_r2c","k3_resl","k3_resr","k3_x","k3_substx","k3_kiri","k3_y","k3_xfinal","k3_yfinal"],
-  k3step2: ["k3_cek1a","k3_cek1b","k3_cek1c","k3_cek2a","k3_cek2b","k3_cek2c"],
+  k2step1: ["k3_r1a","k3_r1b","k3_r1c","k3_r2a","k3_r2b","k3_r2c","k3_resl","k3_resr","k3_x","k3_substx","k3_kiri","k3_y","k3_xfinal","k3_yfinal"],
+  k2step2: ["k3_cek1a","k3_cek1b","k3_cek1c","k3_cek2a","k3_cek2b","k3_cek2c"],
 };
 
 /* ─── Page Context (prevents input remount on re-render) ──── */
@@ -521,77 +498,9 @@ const MetodeEliminasiLKPDPage = () => {
 
 
         {/* ══════════════════════════════════════════════════════
-             BAGIAN B — METODE SUBSTITUSI (KASUS 2)
+             BAGIAN B — METODE CAMPURAN (KASUS 2)
         ══════════════════════════════════════════════════════ */}
-        <SectionHeader label="B. Metode Substitusi — KASUS 2" color="emerald">
-          Tentukan penyelesaian dari <span className="font-mono text-white font-bold text-base">2<span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 4</span> dan <span className="font-mono text-white font-bold text-base"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5</span> dengan <span className="text-yellow-300 font-mono font-bold">x</span>, <span className="text-yellow-300 font-mono font-bold">y</span> ∈ ℝ menggunakan <strong className="text-emerald-300">metode substitusi</strong>.
-        </SectionHeader>
-
-        <StepCard step="1" title="Penyelesaian" color="emerald">
-          <p className="font-mono text-sm text-emerald-200/70 mb-3"><span className="text-yellow-300 font-bold">x</span> + <span className="text-yellow-300 font-bold">y</span> = 5 &nbsp; … (persamaan 1)<br />2<span className="text-yellow-300 font-bold">x</span> − <span className="text-yellow-300 font-bold">y</span> = 4 &nbsp; … (persamaan 2)</p>
-
-          <p className="text-sm text-white/80 mb-2">Nyatakan <span className="text-yellow-300 font-black font-mono text-base">x</span> sebagai <span className="text-yellow-300 font-black font-mono text-base">y</span> pada persamaan 1 :</p>
-          <p className="font-mono text-lg mb-4">
-            <span className="text-yellow-300 font-black">x</span> + <span className="text-yellow-300 font-black">y</span> = 5 &nbsp;→&nbsp; <span className="text-yellow-300 font-black">x</span> = 5 − <B id="k2_xsubst" w="w-12" />
-          </p>
-
-          <p className="text-sm text-white/80 mb-2">Substitusikan <span className="text-yellow-300 font-black font-mono text-base">x</span> = 5 − <B id="k2_xsubst2" w="w-12" /> ke persamaan 2 :</p>
-          <div className="rounded-xl bg-emerald-950/60 border-2 border-emerald-400/30 p-4 font-mono text-lg mb-4 space-y-2">
-            <p>2(5 − <span className="text-yellow-300 font-black">y</span>) − <span className="text-yellow-300 font-black">y</span> = 4</p>
-            <p className="flex items-center gap-1">
-              <B id="k2_r1l" w="w-12" /> − <B id="k2_r1r" w="w-12" /> − <span className="text-yellow-300 font-black">y</span> = 4
-            </p>
-            <p className="flex items-center gap-1">
-              <B id="k2_r2l" w="w-12" /> − <B id="k2_r2r" w="w-12" /> = 4
-            </p>
-            <p className="flex items-center gap-1 text-emerald-200">
-              <span className="text-yellow-300 font-black text-xl">y</span> = <B id="k2_y" w="w-12" />
-            </p>
-          </div>
-
-          <p className="text-sm text-white/80 mb-2">Substitusikan <span className="text-yellow-300 font-black font-mono text-base">y</span> = <B id="k2_ysub" w="w-12" /> ke persamaan 1 :</p>
-          <div className="rounded-xl bg-emerald-950/60 border-2 border-emerald-400/30 p-4 font-mono text-lg mb-4 space-y-2">
-            <p className="flex items-center gap-2">
-              <span className="text-yellow-300 font-black">x</span> + <B id="k2_ysub" w="w-12" /> = 5
-            </p>
-            <p className="flex items-center gap-2 text-emerald-200">
-              <span className="text-yellow-300 font-black text-xl">x</span> = <B id="k2_xhasil" w="w-12" />
-            </p>
-          </div>
-
-          <p className="text-white/90 text-base">
-            Maka nilai <span className="text-yellow-300 font-black font-mono text-lg">x</span> = <B id="k2_xfinal" w="w-12" /> dan <span className="text-yellow-300 font-black font-mono text-lg">y</span> = <B id="k2_yfinal" w="w-12" />
-          </p>
-          <CK sectionKey="k2step1" />
-        </StepCard>
-
-        <StepCard step="2" title="Memeriksa Hasil Kembali" color="amber">
-          <p className="text-white/80 text-sm mb-4">Substitusikan <span className="text-yellow-300 font-black font-mono text-base">x = 3</span> dan <span className="text-yellow-300 font-black font-mono text-base">y = 2</span> ke kedua persamaan:</p>
-          <div className="space-y-3 font-mono text-base">
-            <p className="flex flex-wrap items-center gap-2">
-              <span className="text-amber-300 font-bold text-sm">Persamaan 1 :</span>
-              <B id="k2_cek1a" w="w-10" /> + <B id="k2_cek1b" w="w-10" /> = <B id="k2_cek1c" w="w-10" />
-              <span className="text-white/50 font-body text-sm">(hasil harus 5)</span>
-            </p>
-            <p className="flex flex-wrap items-center gap-2">
-              <span className="text-amber-300 font-bold text-sm">Persamaan 2 :</span>
-              2(<B id="k2_cek2a" w="w-10" />) − <B id="k2_cek2b" w="w-10" /> = <B id="k2_cek2c" w="w-10" />
-              <span className="text-white/50 font-body text-sm">(hasil harus 4)</span>
-            </p>
-          </div>
-          <CK sectionKey="k2step2" />
-        </StepCard>
-
-        <div className="rounded-xl border-2 border-emerald-400/25 bg-gradient-to-br from-emerald-900/30 to-teal-900/20 p-4 mb-6">
-          <p className="text-sm text-emerald-300 font-body mb-2">💬 Kesan menggunakan metode substitusi :</p>
-          <textarea rows={2} className="w-full bg-transparent text-base text-white/90 font-body outline-none resize-none placeholder-white/30" placeholder="Tuliskan kesanmu di sini…" />
-        </div>
-
-
-        {/* ══════════════════════════════════════════════════════
-             BAGIAN B — METODE CAMPURAN (KASUS 3)
-        ══════════════════════════════════════════════════════ */}
-        <SectionHeader label="B. Metode Campuran — KASUS 3" color="violet">
+        <SectionHeader label="B. Metode Campuran — KASUS 2" color="violet">
           Tentukan penyelesaian dari <span className="font-mono text-white font-bold text-base">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5</span> dan <span className="font-mono text-white font-bold text-base">3<span className="text-yellow-300">x</span> − 2<span className="text-yellow-300">y</span> = 11</span> dengan <span className="text-yellow-300 font-mono font-bold">x</span>, <span className="text-yellow-300 font-mono font-bold">y</span> ∈ ℝ menggunakan <strong className="text-violet-300">metode campuran</strong>.
         </SectionHeader>
 
@@ -634,7 +543,7 @@ const MetodeEliminasiLKPDPage = () => {
           <p className="text-white/90 text-base">
             Maka nilai <span className="text-yellow-300 font-black font-mono text-lg">x</span> = <B id="k3_xfinal" w="w-12" /> dan <span className="text-yellow-300 font-black font-mono text-lg">y</span> = <B id="k3_yfinal" w="w-12" />
           </p>
-          <CK sectionKey="k3step1" />
+          <CK sectionKey="k2step1" />
         </StepCard>
 
         <StepCard step="2" title="Memeriksa Hasil Kembali" color="amber">
@@ -651,7 +560,7 @@ const MetodeEliminasiLKPDPage = () => {
               <span className="text-white/50 font-body text-sm">(hasil harus 11)</span>
             </p>
           </div>
-          <CK sectionKey="k3step2" />
+          <CK sectionKey="k2step2" />
         </StepCard>
 
         <div className="rounded-xl border-2 border-violet-400/25 bg-gradient-to-br from-violet-900/30 to-purple-900/20 p-4 mb-6">
