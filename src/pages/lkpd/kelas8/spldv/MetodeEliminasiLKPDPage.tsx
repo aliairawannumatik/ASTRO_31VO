@@ -1614,6 +1614,27 @@ const MetodeEliminasiLKPDPage = () => {
           )}
         </div>
 
+        {/* Daftar Pustaka */}
+        <div className="rounded-2xl border border-white/15 bg-white/5 p-5 mb-6">
+          <p className="text-sm font-black text-white/80 font-display mb-3 tracking-wide uppercase">📚 Daftar Pustaka</p>
+          <div className="space-y-2">
+            <div className="flex gap-2 items-start">
+              <span className="text-white/40 text-xs font-mono mt-0.5 shrink-0">•</span>
+              <p className="text-xs text-white/60 font-body leading-relaxed">
+                <span className="font-semibold text-white/75">Sumber Referensi Internet:</span>{" "}
+                <a
+                  href="https://gemini.google.com/app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300 transition-colors break-all"
+                >
+                  https://gemini.google.com/app
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Penutup motivasi */}
         <div className="rounded-2xl bg-gradient-to-r from-yellow-500/20 to-amber-500/15 border border-yellow-400/40 p-4 text-center mb-6">
           <p className="text-yellow-300 font-display font-black text-base mb-1">🏆 Selamat! Kamu Telah Menguasai Metode Eliminasi!</p>
