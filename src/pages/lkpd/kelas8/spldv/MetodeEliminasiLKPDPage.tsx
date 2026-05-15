@@ -1,6 +1,9 @@
 import { useState, createContext, useContext, useCallback, useRef } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
+import { ChevronDown, ChevronUp, Lightbulb, BookOpen, Minus } from "lucide-react";
+import "katex/dist/katex.min.css";
+import { InlineMath, BlockMath } from "react-katex";
 
 /* ─── helpers ─────────────────────────────────────────────── */
 function normalize(s: string) {
@@ -263,6 +266,10 @@ function SectionHeader({ label, color = "cyan", children }: { label: string; col
 const MetodeEliminasiLKPDPage = () => {
   const [vals, setVals] = useState<Record<string, string>>({});
   const [res, setRes] = useState<Record<string, boolean | null>>({});
+  const [materiOpen, setMateriOpen] = useState(false);
+  const [openSections, setOpenSections] = useState<string[]>(["ide"]);
+  const toggleMateriSection = (id: string) =>
+    setOpenSections((prev) => prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]);
 
   const valsRef = useRef(vals);
   valsRef.current = vals;
@@ -302,6 +309,334 @@ const MetodeEliminasiLKPDPage = () => {
           <p className="mt-3 text-sm text-white/80 font-body leading-relaxed text-left">
             <span className="text-cyan-300 font-bold">Tujuan Pembelajaran :</span> Peserta didik dapat menyelesaikan sistem persamaan linear dua variabel dengan metode eliminasi untuk penyelesaian masalah.
           </p>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════
+             PANDUAN MATERI — COLLAPSIBLE
+        ══════════════════════════════════════════════════════ */}
+        <div className="mb-6">
+          <button
+            onClick={() => setMateriOpen((v) => !v)}
+            className="w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 border-yellow-400/60 bg-gradient-to-r from-yellow-600/30 via-amber-600/20 to-orange-600/20 shadow-[0_0_24px_rgba(234,179,8,0.2)] hover:opacity-90 active:scale-[0.99] transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">📖</span>
+              <div className="text-left">
+                <p className="font-display text-sm font-black text-yellow-200 tracking-wide uppercase">Panduan Materi — Metode Eliminasi</p>
+                <p className="font-body text-xs text-yellow-300/70 mt-0.5">{materiOpen ? "Tutup panduan materi" : "Buka untuk membaca teori sebelum mengerjakan"}</p>
+              </div>
+            </div>
+            {materiOpen
+              ? <ChevronUp className="w-5 h-5 text-yellow-300 shrink-0" />
+              : <ChevronDown className="w-5 h-5 text-yellow-300 shrink-0" />}
+          </button>
+
+          {materiOpen && (
+            <div className="mt-3 rounded-2xl border-2 border-yellow-400/30 bg-gradient-to-br from-yellow-950/60 via-amber-950/50 to-orange-950/40 overflow-hidden">
+
+              {/* ── Sub-section: Ide Dasar ── */}
+              <div className="border-b border-yellow-400/20">
+                <button
+                  onClick={() => toggleMateriSection("ide")}
+                  className="w-full flex items-center justify-between px-5 py-3 hover:bg-white/5 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    <Lightbulb className="w-4 h-4 text-yellow-400" />
+                    <span className="font-body text-sm font-semibold text-white">🌟 Ide Dasar Metode Eliminasi</span>
+                  </div>
+                  {openSections.includes("ide") ? <ChevronUp className="w-4 h-4 text-yellow-300" /> : <ChevronDown className="w-4 h-4 text-yellow-300" />}
+                </button>
+                {openSections.includes("ide") && (
+                  <div className="px-5 pb-5 space-y-4">
+                    <p className="font-body text-sm text-white/80 leading-relaxed">
+                      Kata "eliminasi" berasal dari bahasa Latin yang berarti <strong className="text-cyan-300">menghilangkan</strong> atau <strong className="text-cyan-300">mengeliminasi</strong>. Ide utama metode ini: kita <em>menghapus</em> salah satu variabel dari sistem persamaan dengan cara menjumlahkan atau mengurangkan kedua persamaan, sehingga tersisa hanya satu variabel yang bisa langsung diselesaikan.
+                    </p>
+                    <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4">
+                      <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">🔄 Prinsip Dasar Eliminasi</p>
+                      <div className="space-y-2 text-sm font-body text-white/80">
+                        <div className="bg-slate-800/60 border border-cyan-500/10 rounded-lg px-3 py-2">
+                          <p className="text-cyan-300 font-semibold mb-1">Koefisien SAMA dan BERTANDA SAMA → Kurangkan</p>
+                          <BlockMath math="(ax + by) - (ax + cy) = d - e \;\Rightarrow\; (b-c)y = d - e" />
+                        </div>
+                        <div className="bg-slate-800/60 border border-violet-500/10 rounded-lg px-3 py-2">
+                          <p className="text-violet-300 font-semibold mb-1">Koefisien SAMA dan BERTANDA BERBEDA → Jumlahkan</p>
+                          <BlockMath math="(ax + by) + (ax - by) = d + e \;\Rightarrow\; 2ax = d + e" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {[
+                        { icon: "1️⃣", title: "Samakan Koefisien", desc: "Kalikan salah satu atau kedua persamaan agar koefisien variabel yang akan dieliminasi menjadi sama.", color: "border-cyan-500/30 bg-cyan-900/10" },
+                        { icon: "2️⃣", title: "Eliminasi Variabel", desc: "Jumlahkan atau kurangkan kedua persamaan untuk menghilangkan satu variabel.", color: "border-violet-500/30 bg-violet-900/10" },
+                        { icon: "3️⃣", title: "Selesaikan & Cari Variabel Lain", desc: "Selesaikan persamaan satu variabel, lalu eliminasi variabel lain untuk mendapat nilai lengkap.", color: "border-green-500/30 bg-green-900/10" },
+                      ].map(({ icon, title, desc, color }) => (
+                        <div key={title} className={`border ${color} rounded-xl p-3 text-center`}>
+                          <p className="text-2xl mb-1">{icon}</p>
+                          <p className="font-display text-sm font-bold text-white mb-1">{title}</p>
+                          <p className="font-body text-xs text-white/60">{desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                      <p className="font-body text-sm text-yellow-200">
+                        <strong>Keunggulan Eliminasi:</strong> Sangat efektif ketika koefisien variabel sudah sama atau bisa disamakan dengan perkalian sederhana. Tidak perlu menyatakan satu variabel secara eksplisit seperti metode substitusi!
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* ── Sub-section: Langkah-Langkah ── */}
+              <div className="border-b border-yellow-400/20">
+                <button
+                  onClick={() => toggleMateriSection("langkah")}
+                  className="w-full flex items-center justify-between px-5 py-3 hover:bg-white/5 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    <Minus className="w-4 h-4 text-red-400" />
+                    <span className="font-body text-sm font-semibold text-white">📘 Langkah-Langkah Metode Eliminasi</span>
+                  </div>
+                  {openSections.includes("langkah") ? <ChevronUp className="w-4 h-4 text-yellow-300" /> : <ChevronDown className="w-4 h-4 text-yellow-300" />}
+                </button>
+                {openSections.includes("langkah") && (
+                  <div className="px-5 pb-5 space-y-4">
+                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                      <p className="font-body text-sm font-semibold text-red-300 mb-2">🎯 Ringkasan Intisari</p>
+                      <p className="font-body text-sm text-white/80 leading-relaxed">
+                        Metode eliminasi "menghapus" satu variabel dengan membuat koefisiennya sama di kedua persamaan, lalu menjumlahkan atau mengurangkan. Proses ini dilakukan dua kali — sekali untuk mencari <InlineMath math="x" />, sekali untuk mencari <InlineMath math="y" />.
+                      </p>
+                    </div>
+                    <div className="space-y-3">
+                      <p className="font-body text-sm font-bold text-white">📋 5 Langkah Sistematis</p>
+                      {[
+                        { no: "1", title: "Tulis kedua persamaan sejajar", color: "border-cyan-500/30 bg-cyan-900/10", body: <p className="text-white/70 text-xs">Pastikan kedua persamaan sudah dalam bentuk standar <InlineMath math="ax + by = c" /> dan tuliskan satu di atas yang lain.</p> },
+                        { no: "2", title: "Pilih variabel yang akan dieliminasi", color: "border-violet-500/30 bg-violet-900/10", body: <p className="text-white/70 text-xs">Pilih variabel yang paling mudah disamakan koefisiennya. Kalikan salah satu atau kedua persamaan dengan bilangan yang tepat.</p> },
+                        { no: "3", title: "Samakan koefisien variabel yang dipilih", color: "border-green-500/30 bg-green-900/10", body: <p className="text-white/70 text-xs">Setelah perkalian, koefisien variabel yang dipilih harus sama besar di kedua persamaan.</p> },
+                        { no: "4", title: "Kurangkan atau jumlahkan kedua persamaan", color: "border-orange-500/30 bg-orange-900/10", body: <p className="text-white/70 text-xs">Koefisien bertanda sama → kurangkan. Bertanda berbeda → jumlahkan. Variabel yang dipilih akan lenyap!</p> },
+                        { no: "5", title: "Eliminasi variabel lain untuk nilai lengkap", color: "border-yellow-500/30 bg-yellow-900/10", body: <p className="text-white/70 text-xs">Ulangi proses eliminasi, kali ini hapus variabel yang sudah ditemukan nilainya untuk mendapat variabel satunya.</p> },
+                      ].map(({ no, title, color, body }) => (
+                        <div key={no} className={`border ${color} rounded-xl p-3`}>
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="font-display text-sm font-bold text-white bg-white/10 rounded-full w-6 h-6 flex items-center justify-center shrink-0">{no}</span>
+                            <p className="font-body text-sm font-semibold text-white">{title}</p>
+                          </div>
+                          <div className="pl-8">{body}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="bg-slate-800/40 border border-yellow-500/20 rounded-xl p-3 space-y-2">
+                      <p className="font-body text-sm font-bold text-yellow-300">⚡ Kapan Pilih Eliminasi vs Substitusi?</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body border-collapse">
+                          <thead>
+                            <tr className="bg-yellow-900/40">
+                              <th className="border border-yellow-500/30 px-3 py-1 text-yellow-200 text-left">Kondisi SPLDV</th>
+                              <th className="border border-yellow-500/30 px-3 py-1 text-yellow-200 text-center">Pilih</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {[
+                              ["Ada variabel berkoefisien 1", "Substitusi (lebih cepat)"],
+                              ["Koefisien variabel sama di kedua persamaan", "Eliminasi (langsung)"],
+                              ["Semua koefisien besar, tidak ada yang 1", "Eliminasi (lebih efisien)"],
+                              ["Persamaan sudah dalam bentuk y = mx + c", "Substitusi (tanpa perlu isolasi)"],
+                            ].map(([kondisi, pilih], i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-white/5" : ""}>
+                                <td className="border border-white/10 px-3 py-1 text-white/70">{kondisi}</td>
+                                <td className="border border-white/10 px-3 py-1 text-center text-cyan-300 font-semibold">{pilih}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* ── Sub-section: Contoh Soal ── */}
+              <div className="border-b border-yellow-400/20">
+                <button
+                  onClick={() => toggleMateriSection("contoh")}
+                  className="w-full flex items-center justify-between px-5 py-3 hover:bg-white/5 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-yellow-400 text-base">🎯</span>
+                    <span className="font-body text-sm font-semibold text-white">📝 Contoh Soal &amp; Pembahasan</span>
+                  </div>
+                  {openSections.includes("contoh") ? <ChevronUp className="w-4 h-4 text-yellow-300" /> : <ChevronDown className="w-4 h-4 text-yellow-300" />}
+                </button>
+                {openSections.includes("contoh") && (
+                  <div className="px-5 pb-5 space-y-6">
+
+                    {/* Soal 1 — Mudah */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <span className="inline-block px-2 py-0.5 rounded text-xs font-bold font-body bg-green-700/60 text-green-200">MUDAH</span>
+                        <p className="font-body text-sm font-semibold text-white">Soal 1</p>
+                      </div>
+                      <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-4">
+                        <p className="font-body text-sm text-white/90">
+                          Selesaikan SPLDV berikut dengan metode eliminasi:<br />
+                          <InlineMath math="3x + y = 7" /> dan <InlineMath math="x + y = 3" />
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/60 border border-green-500/20 rounded-lg p-4 space-y-4">
+                        <p className="font-body text-xs font-bold text-green-300 uppercase">✅ Pembahasan</p>
+                        <div>
+                          <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 1 — Eliminasi variabel <InlineMath math="y" /> untuk mencari <InlineMath math="x" />:</strong></p>
+                          <p className="font-body text-xs text-white/60 mb-2">Koefisien <InlineMath math="y" /> di kedua persamaan sudah sama (= 1) dan bertanda sama → kurangkan.</p>
+                          <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
+                            <div className="flex items-center gap-2">
+                              <span className="text-white/40 w-4">P1</span>
+                              <span className="text-white font-mono">3x + y = 7</span>
+                            </div>
+                            <div className="flex items-center gap-2 border-b border-white/20 pb-1">
+                              <span className="text-white/40 w-4">P2</span>
+                              <span className="text-white font-mono">x + y = 3</span>
+                              <span className="text-red-400 ml-auto text-xs">(dikurangkan)</span>
+                            </div>
+                            <div className="flex items-center gap-2 pt-1">
+                              <span className="text-white/40 w-4"></span>
+                              <span className="text-cyan-300 font-mono font-bold">2x = 4</span>
+                            </div>
+                          </div>
+                          <BlockMath math="2x = 4 \;\Rightarrow\; x = 2" />
+                        </div>
+                        <div>
+                          <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 2 — Eliminasi variabel <InlineMath math="x" /> untuk mencari <InlineMath math="y" />:</strong></p>
+                          <p className="font-body text-xs text-white/60 mb-2">Kalikan P2 dengan 3 agar koefisien <InlineMath math="x" /> sama, lalu kurangkan.</p>
+                          <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
+                            <div className="flex items-center gap-2">
+                              <span className="text-white/40 w-8">P1</span>
+                              <span className="text-white font-mono">3x + y = 7</span>
+                            </div>
+                            <div className="flex items-center gap-2 border-b border-white/20 pb-1">
+                              <span className="text-white/40 w-8">P2×3</span>
+                              <span className="text-white font-mono">3x + 3y = 9</span>
+                              <span className="text-red-400 ml-auto text-xs">(dikurangkan)</span>
+                            </div>
+                            <div className="flex items-center gap-2 pt-1">
+                              <span className="text-white/40 w-8"></span>
+                              <span className="text-cyan-300 font-mono font-bold">−2y = −2</span>
+                            </div>
+                          </div>
+                          <BlockMath math="-2y = -2 \;\Rightarrow\; y = 1" />
+                        </div>
+                        <div>
+                          <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 3 — Verifikasi:</strong></p>
+                          <BlockMath math="P1: 3(2) + 1 = 7 \checkmark \quad P2: 2 + 1 = 3 \checkmark" />
+                        </div>
+                        <div className="bg-green-900/20 border border-green-500/20 rounded p-2">
+                          <p className="font-body text-xs text-green-300">🔑 Solusi: <InlineMath math="x = 2,\ y = 1" /></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-white/10" />
+
+                    {/* Soal 2 — Sedang */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <span className="inline-block px-2 py-0.5 rounded text-xs font-bold font-body bg-yellow-700/60 text-yellow-200">SEDANG</span>
+                        <p className="font-body text-sm font-semibold text-white">Soal 2</p>
+                      </div>
+                      <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-4">
+                        <p className="font-body text-sm text-white/90">
+                          Selesaikan dengan metode eliminasi:<br />
+                          <InlineMath math="2x + 3y = 16" /> dan <InlineMath math="5x - 2y = 2" />
+                        </p>
+                      </div>
+                      <div className="bg-slate-900/60 border border-yellow-500/20 rounded-lg p-4 space-y-4">
+                        <p className="font-body text-xs font-bold text-yellow-300 uppercase">✅ Pembahasan</p>
+                        <p className="font-body text-xs text-white/60">Koefisien tidak ada yang sama — perlu perkalian dulu sebelum eliminasi.</p>
+                        <div>
+                          <p className="font-body text-sm text-white/80 mb-1"><strong>Eliminasi <InlineMath math="y" /> → cari <InlineMath math="x" />:</strong></p>
+                          <p className="font-body text-xs text-white/60 mb-2">KPK dari 3 dan 2 adalah 6. Kalikan P1 × 2 dan P2 × 3.</p>
+                          <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
+                            <div className="flex items-center gap-2">
+                              <span className="text-white/40 w-8 shrink-0">P1×2</span>
+                              <span className="text-white font-mono">4x + 6y = 32</span>
+                            </div>
+                            <div className="flex items-center gap-2 border-b border-white/20 pb-1">
+                              <span className="text-white/40 w-8 shrink-0">P2×3</span>
+                              <span className="text-white font-mono">15x − 6y = 6</span>
+                              <span className="text-green-400 ml-auto text-xs">(dijumlahkan)</span>
+                            </div>
+                            <div className="flex items-center gap-2 pt-1">
+                              <span className="text-white/40 w-8 shrink-0"></span>
+                              <span className="text-cyan-300 font-mono font-bold">19x = 38</span>
+                            </div>
+                          </div>
+                          <BlockMath math="x = 2" />
+                        </div>
+                        <div>
+                          <p className="font-body text-sm text-white/80 mb-1"><strong>Eliminasi <InlineMath math="x" /> → cari <InlineMath math="y" />:</strong></p>
+                          <p className="font-body text-xs text-white/60 mb-2">KPK dari 2 dan 5 adalah 10. Kalikan P1 × 5 dan P2 × 2.</p>
+                          <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
+                            <div className="flex items-center gap-2">
+                              <span className="text-white/40 w-8 shrink-0">P1×5</span>
+                              <span className="text-white font-mono">10x + 15y = 80</span>
+                            </div>
+                            <div className="flex items-center gap-2 border-b border-white/20 pb-1">
+                              <span className="text-white/40 w-8 shrink-0">P2×2</span>
+                              <span className="text-white font-mono">10x − 4y = 4</span>
+                              <span className="text-red-400 ml-auto text-xs">(dikurangkan)</span>
+                            </div>
+                            <div className="flex items-center gap-2 pt-1">
+                              <span className="text-white/40 w-8 shrink-0"></span>
+                              <span className="text-cyan-300 font-mono font-bold">19y = 76</span>
+                            </div>
+                          </div>
+                          <BlockMath math="y = 4" />
+                        </div>
+                        <div className="bg-yellow-900/20 border border-yellow-500/20 rounded p-2">
+                          <p className="font-body text-xs text-yellow-300">💡 Solusi: <InlineMath math="x = 2,\ y = 4" />. Ingat: tanda berbeda → jumlahkan, tanda sama → kurangkan!</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* ── Sub-section: Rangkuman ── */}
+              <div>
+                <button
+                  onClick={() => toggleMateriSection("rangkuman")}
+                  className="w-full flex items-center justify-between px-5 py-3 hover:bg-white/5 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-primary" />
+                    <span className="font-body text-sm font-semibold text-white">📋 Rangkuman</span>
+                  </div>
+                  {openSections.includes("rangkuman") ? <ChevronUp className="w-4 h-4 text-yellow-300" /> : <ChevronDown className="w-4 h-4 text-yellow-300" />}
+                </button>
+                {openSections.includes("rangkuman") && (
+                  <div className="px-5 pb-5 space-y-3">
+                    <div className="grid grid-cols-1 gap-2 font-body text-sm">
+                      {[
+                        { poin: "Metode eliminasi menghilangkan satu variabel dengan menyamakan koefisiennya, lalu menjumlahkan atau mengurangkan kedua persamaan.", icon: "🗑️" },
+                        { poin: "Koefisien sama, tanda sama → kurangkan. Koefisien sama, tanda berbeda → jumlahkan.", icon: "➕➖" },
+                        { poin: "Lakukan proses eliminasi dua kali: sekali untuk x, sekali untuk y.", icon: "🔁" },
+                        { poin: "Sederhanakan persamaan di awal (bagi dengan faktor persekutuan) untuk mempermudah perhitungan.", icon: "✂️" },
+                        { poin: "Selalu verifikasi solusi ke KEDUA persamaan awal untuk memastikan kebenaran jawaban.", icon: "✅" },
+                      ].map(({ poin, icon }) => (
+                        <div key={poin} className="flex items-start gap-3 bg-slate-800/40 border border-white/10 rounded-lg px-4 py-3">
+                          <span className="text-lg shrink-0">{icon}</span>
+                          <p className="text-white/80">{poin}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mt-2">
+                      <p className="font-body text-xs text-center text-red-300 font-bold mb-1">Inti Metode Eliminasi</p>
+                      <BlockMath math="\text{Samakan koefisien} \;\xrightarrow{+\text{ atau }-}\; \text{variabel lenyap} \;\Rightarrow\; \text{selesaikan}" />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          )}
         </div>
 
         {/* ══════════════════════════════════════════════════════
