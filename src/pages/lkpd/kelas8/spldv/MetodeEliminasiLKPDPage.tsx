@@ -88,15 +88,12 @@ const ANSWERS: Record<string, string[]> = {
 
 const SECTIONS: Record<string, string[]> = {
   a: ["a1","a2","a3","a4"],
-  k1step1: ["k1_dik","k1_tan"],
-  k1step3: ["k1_r1a","k1_r1b","k1_r1c","k1_r2a","k1_r2b","k1_r2c","k1_resl","k1_resr","k1_ynilai","k1_xfinal","k1_yfinal"],
-  k1step4: ["k1_cek1a","k1_cek1b","k1_cek1c","k1_cek2a","k1_cek2b","k1_cek2c"],
-  k2step1: ["k2_dik","k2_tan"],
-  k2step3: ["k2_xsubst","k2_xsubst2","k2_r1l","k2_r1r","k2_r2l","k2_r2r","k2_y","k2_ysub","k2_xhasil","k2_xfinal","k2_yfinal"],
-  k2step4: ["k2_cek1a","k2_cek1b","k2_cek1c","k2_cek2a","k2_cek2b","k2_cek2c"],
-  k3step1: ["k3_dik","k3_tan"],
-  k3step3: ["k3_r1a","k3_r1b","k3_r1c","k3_r2a","k3_r2b","k3_r2c","k3_resl","k3_resr","k3_x","k3_substx","k3_kiri","k3_y","k3_xfinal","k3_yfinal"],
-  k3step4: ["k3_cek1a","k3_cek1b","k3_cek1c","k3_cek2a","k3_cek2b","k3_cek2c"],
+  k1step1: ["k1_r1a","k1_r1b","k1_r1c","k1_r2a","k1_r2b","k1_r2c","k1_resl","k1_resr","k1_ynilai","k1_xfinal","k1_yfinal"],
+  k1step2: ["k1_cek1a","k1_cek1b","k1_cek1c","k1_cek2a","k1_cek2b","k1_cek2c"],
+  k2step1: ["k2_xsubst","k2_xsubst2","k2_r1l","k2_r1r","k2_r2l","k2_r2r","k2_y","k2_ysub","k2_xhasil","k2_xfinal","k2_yfinal"],
+  k2step2: ["k2_cek1a","k2_cek1b","k2_cek1c","k2_cek2a","k2_cek2b","k2_cek2c"],
+  k3step1: ["k3_r1a","k3_r1b","k3_r1c","k3_r2a","k3_r2b","k3_r2c","k3_resl","k3_resr","k3_x","k3_substx","k3_kiri","k3_y","k3_xfinal","k3_yfinal"],
+  k3step2: ["k3_cek1a","k3_cek1b","k3_cek1c","k3_cek2a","k3_cek2b","k3_cek2c"],
 };
 
 /* ─── FillBlank ───────────────────────────────────────────── */
@@ -313,25 +310,7 @@ const MetodeEliminasiLKPDPage = () => {
         </SectionHeader>
 
         {/* Step 1 */}
-        <StepCard step="1" title="Memahami Masalah">
-          <p>Unsur yang <span className="text-yellow-300">diketahui</span> :</p>
-          <p><B id="k1_dik" w="w-64" mono={false} /></p>
-          <p className="mt-2">Unsur yang <span className="text-yellow-300">ditanyakan</span> :</p>
-          <p><B id="k1_tan" w="w-48" mono={false} /></p>
-          <CK sectionKey="k1step1" />
-        </StepCard>
-
-        {/* Step 2 */}
-        <StepCard step="2" title="Merencanakan Strategi">
-          <p>Strategi yang akan digunakan :</p>
-          <div className="flex items-start gap-2 mt-1">
-            <span className="text-cyan-400 mt-0.5">✦</span>
-            <p>Metode <strong className="text-cyan-300">eliminasi</strong>, yaitu menghilangkan salah satu variabel dengan menyamakan koefisiennya kemudian menjumlahkan atau mengurangkan kedua persamaan.</p>
-          </div>
-        </StepCard>
-
-        {/* Step 3 */}
-        <StepCard step="3" title="Menjalankan Rencana Penyelesaian">
+        <StepCard step="1" title="Penyelesaian">
           <p className="font-mono text-xs text-white/60 mb-2">2x + y = 8 &nbsp; … (persamaan 1)<br />x − y = 10 &nbsp; … (persamaan 2)</p>
           <p className="text-white/70 text-xs mb-3">Koefisien y sudah sama (berlawanan tanda) → <span className="text-cyan-300">jumlahkan</span> kedua persamaan untuk menghilangkan y:</p>
           <div className="rounded-xl bg-[#0d1627]/80 border border-white/8 p-3 font-mono text-sm text-center mb-3 space-y-1">
@@ -373,11 +352,11 @@ const MetodeEliminasiLKPDPage = () => {
           <p className="text-white/80">
             Maka nilai x = <B id="k1_xfinal" w="w-10" /> dan y = <B id="k1_yfinal" w="w-10" />
           </p>
-          <CK sectionKey="k1step3" />
+          <CK sectionKey="k1step1" />
         </StepCard>
 
-        {/* Step 4 */}
-        <StepCard step="4" title="Memeriksa Hasil Kembali">
+        {/* Step 2 */}
+        <StepCard step="2" title="Memeriksa Hasil Kembali">
           <p className="text-white/70 text-xs mb-3">Substitusikan x = 6 dan y = −4 ke kedua persamaan:</p>
           <div className="space-y-2 font-mono text-sm">
             <p className="flex flex-wrap items-center gap-1">
@@ -391,7 +370,7 @@ const MetodeEliminasiLKPDPage = () => {
               <span className="text-white/50 font-body text-xs">(hasil harus 10)</span>
             </p>
           </div>
-          <CK sectionKey="k1step4" />
+          <CK sectionKey="k1step2" />
         </StepCard>
 
         <div className="rounded-xl border border-white/8 bg-white/3 p-3 mb-6">
@@ -407,22 +386,7 @@ const MetodeEliminasiLKPDPage = () => {
           Tentukan penyelesaian dari <span className="font-mono text-white">2x − y = 4</span> dan <span className="font-mono text-white">x + y = 5</span> dengan x, y ∈ ℝ menggunakan <strong className="text-emerald-300">metode substitusi</strong>.
         </SectionHeader>
 
-        <StepCard step="1" title="Memahami Masalah">
-          <p>Unsur yang <span className="text-yellow-300">diketahui</span> :</p>
-          <p><B id="k2_dik" w="w-64" mono={false} /></p>
-          <p className="mt-2">Unsur yang <span className="text-yellow-300">ditanyakan</span> :</p>
-          <p><B id="k2_tan" w="w-48" mono={false} /></p>
-          <CK sectionKey="k2step1" />
-        </StepCard>
-
-        <StepCard step="2" title="Merencanakan Strategi">
-          <div className="flex items-start gap-2">
-            <span className="text-emerald-400 mt-0.5">✦</span>
-            <p>Metode <strong className="text-emerald-300">substitusi</strong>, yaitu menyatakan variabel satu ke dalam variabel lain pada suatu persamaan, kemudian menggantikan ke persamaan lainnya.</p>
-          </div>
-        </StepCard>
-
-        <StepCard step="3" title="Menjalankan Rencana Penyelesaian">
+        <StepCard step="1" title="Penyelesaian">
           <p className="font-mono text-xs text-white/60 mb-2">x + y = 5 &nbsp; … (persamaan 1)<br />2x − y = 4 &nbsp; … (persamaan 2)</p>
 
           <p className="text-xs text-white/70 mb-2">Nyatakan x sebagai y pada persamaan 1 :</p>
@@ -457,10 +421,10 @@ const MetodeEliminasiLKPDPage = () => {
           <p className="text-white/80">
             Maka nilai x = <B id="k2_xfinal" w="w-10" /> dan y = <B id="k2_yfinal" w="w-10" />
           </p>
-          <CK sectionKey="k2step3" />
+          <CK sectionKey="k2step1" />
         </StepCard>
 
-        <StepCard step="4" title="Memeriksa Hasil Kembali">
+        <StepCard step="2" title="Memeriksa Hasil Kembali">
           <p className="text-white/70 text-xs mb-3">Substitusikan x = 3 dan y = 2 ke kedua persamaan:</p>
           <div className="space-y-2 font-mono text-sm">
             <p className="flex flex-wrap items-center gap-1">
@@ -474,7 +438,7 @@ const MetodeEliminasiLKPDPage = () => {
               <span className="text-white/50 font-body text-xs">(hasil harus 4)</span>
             </p>
           </div>
-          <CK sectionKey="k2step4" />
+          <CK sectionKey="k2step2" />
         </StepCard>
 
         <div className="rounded-xl border border-white/8 bg-white/3 p-3 mb-6">
@@ -490,22 +454,7 @@ const MetodeEliminasiLKPDPage = () => {
           Tentukan penyelesaian dari <span className="font-mono text-white">2x + y = 5</span> dan <span className="font-mono text-white">3x − 2y = 11</span> dengan x, y ∈ ℝ menggunakan <strong className="text-violet-300">metode campuran</strong>.
         </SectionHeader>
 
-        <StepCard step="1" title="Memahami Masalah">
-          <p>Unsur yang <span className="text-yellow-300">diketahui</span> :</p>
-          <p><B id="k3_dik" w="w-64" mono={false} /></p>
-          <p className="mt-2">Unsur yang <span className="text-yellow-300">ditanyakan</span> :</p>
-          <p><B id="k3_tan" w="w-48" mono={false} /></p>
-          <CK sectionKey="k3step1" />
-        </StepCard>
-
-        <StepCard step="2" title="Merencanakan Strategi">
-          <div className="flex items-start gap-2">
-            <span className="text-violet-400 mt-0.5">✦</span>
-            <p>Metode <strong className="text-violet-300">campuran</strong>, yaitu menggunakan metode eliminasi terlebih dahulu untuk mendapatkan salah satu nilai variabel, kemudian menggunakan metode substitusi untuk nilai variabel lainnya.</p>
-          </div>
-        </StepCard>
-
-        <StepCard step="3" title="Menjalankan Rencana Penyelesaian">
+        <StepCard step="1" title="Penyelesaian">
           <p className="font-mono text-xs text-white/60 mb-2">2x + y = 5 &nbsp; … (persamaan 1)<br />3x − 2y = 11 … (persamaan 2)</p>
 
           <p className="text-xs text-white/70 mb-2">Langkah 1 — <strong className="text-cyan-300">Eliminasi</strong> variabel y (KPK koefisien y: 1 dan 2 = 2, kalikan P1 dengan 2):</p>
@@ -544,10 +493,10 @@ const MetodeEliminasiLKPDPage = () => {
           <p className="text-white/80">
             Maka nilai x = <B id="k3_xfinal" w="w-10" /> dan y = <B id="k3_yfinal" w="w-10" />
           </p>
-          <CK sectionKey="k3step3" />
+          <CK sectionKey="k3step1" />
         </StepCard>
 
-        <StepCard step="4" title="Memeriksa Hasil Kembali">
+        <StepCard step="2" title="Memeriksa Hasil Kembali">
           <p className="text-white/70 text-xs mb-3">Substitusikan x = 3 dan y = −1 ke kedua persamaan:</p>
           <div className="space-y-2 font-mono text-sm">
             <p className="flex flex-wrap items-center gap-1">
@@ -561,7 +510,7 @@ const MetodeEliminasiLKPDPage = () => {
               <span className="text-white/50 font-body text-xs">(hasil harus 11)</span>
             </p>
           </div>
-          <CK sectionKey="k3step4" />
+          <CK sectionKey="k3step2" />
         </StepCard>
 
         <div className="rounded-xl border border-white/8 bg-white/3 p-3 mb-6">
