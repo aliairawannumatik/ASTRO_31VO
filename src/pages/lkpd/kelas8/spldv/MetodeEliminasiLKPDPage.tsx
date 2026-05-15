@@ -40,6 +40,34 @@ const ANSWERS: Record<string, string[]> = {
   k1_cek2b: ["-4", "−4"],
   k1_cek2c: ["10"],
 
+  /* Kasus 3 – Eliminasi (3x − 2y = 11 dan 2x + y = 5) */
+  k3_r1a: ["3x"],
+  k3_r1b: ["2y"],
+  k3_r1c: ["11"],
+  k3_r2a: ["4x"],
+  k3_r2b: ["2y"],
+  k3_r2c: ["10"],
+  k3_resl_x: ["7x"],
+  k3_resr_x: ["21"],
+  k3_xhasil: ["3"],
+  k3_r3a: ["6x"],
+  k3_r3b: ["4y"],
+  k3_r3c: ["22"],
+  k3_r4a: ["6x"],
+  k3_r4b: ["3y"],
+  k3_r4c: ["15"],
+  k3_resl_y: ["7y"],
+  k3_resr_y: ["-7", "−7"],
+  k3_ynilai: ["-1", "−1"],
+  k3_xfinal: ["3"],
+  k3_yfinal: ["-1", "−1"],
+  k3_cek1a: ["3"],
+  k3_cek1b: ["-1", "−1"],
+  k3_cek1c: ["11"],
+  k3_cek2a: ["3"],
+  k3_cek2b: ["-1", "−1"],
+  k3_cek2c: ["5"],
+
   /* Kasus 2 – Eliminasi (2x − y = 4 dan x + y = 5) */
   k2_r1a: ["2x"],
   k2_r1b: ["y"],
@@ -75,6 +103,8 @@ const SECTIONS: Record<string, string[]> = {
   k1step2: ["k1_cek1a","k1_cek1b","k1_cek1c","k1_cek2a","k1_cek2b","k1_cek2c"],
   k2step1: ["k2_r1a","k2_r1b","k2_r1c","k2_r2a","k2_r2b","k2_r2c","k2_resl_x","k2_resr_x","k2_xhasil","k2_r3a","k2_r3b","k2_r3c","k2_r4a","k2_r4b","k2_r4c","k2_resl_y","k2_resr_y","k2_ynilai","k2_xfinal","k2_yfinal"],
   k2step2: ["k2_cek1a","k2_cek1b","k2_cek1c","k2_cek2a","k2_cek2b","k2_cek2c"],
+  k3step1: ["k3_r1a","k3_r1b","k3_r1c","k3_r2a","k3_r2b","k3_r2c","k3_resl_x","k3_resr_x","k3_xhasil","k3_r3a","k3_r3b","k3_r3c","k3_r4a","k3_r4b","k3_r4c","k3_resl_y","k3_resr_y","k3_ynilai","k3_xfinal","k3_yfinal"],
+  k3step2: ["k3_cek1a","k3_cek1b","k3_cek1c","k3_cek2a","k3_cek2b","k3_cek2c"],
 };
 
 /* ─── Page Context (prevents input remount on re-render) ──── */
@@ -639,6 +669,125 @@ const MetodeEliminasiLKPDPage = () => {
               Himpunan penyelesaian = {"{"}(<B id="k2_xfinal" w="w-14" />, <B id="k2_yfinal" w="w-14" />){"}"}
             </p>
             <p className="text-emerald-200/60 text-sm mt-2 font-body">Kedua persamaan terpenuhi → jawaban benar!</p>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════
+             KASUS 3 — METODE ELIMINASI
+        ══════════════════════════════════════════════════════ */}
+        <SectionHeader label="Kasus 3 Penyelesaian SPLDV Menggunakan Metode Eliminasi" color="violet" />
+
+        <div className="rounded-2xl border-2 border-violet-400/40 bg-gradient-to-br from-violet-900/50 to-purple-900/40 p-5 mb-6 font-body text-base text-white/90">
+          <p className="text-sm text-violet-200/80 mb-3">Tentukan himpunan penyelesaian dari:</p>
+          <div className="font-mono my-3 bg-violet-950/60 rounded-xl p-4 border border-violet-400/30 flex flex-col items-center">
+            <div className="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-xl font-bold text-white">
+              <span className="text-right">3<span className="text-yellow-300">x</span> − 2<span className="text-yellow-300">y</span></span>
+              <span className="text-white/70">=</span>
+              <span>11</span>
+              <span className="text-right">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span></span>
+              <span className="text-white/70">=</span>
+              <span>5</span>
+            </div>
+            <p className="text-violet-300/60 text-sm mt-2">untuk <span className="text-yellow-300 font-bold">x</span>, <span className="text-yellow-300 font-bold">y</span> ∈ ℝ</p>
+          </div>
+
+          {/* Langkah ① — Eliminasi y → cari x */}
+          <div className="mt-4 rounded-xl bg-violet-900/40 border border-violet-400/30 p-4">
+            <p className="text-sm font-bold text-violet-300 mb-1">
+              ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
+            </p>
+            <p className="text-xs text-white/50 mb-3">(KPK koefisien y: 2 dan 1 = 2 → P1 × 1, P2 × 2, lalu jumlahkan)</p>
+            <div className="bg-violet-950/50 rounded-xl p-3 border border-violet-400/20 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="text-white/50 text-xs whitespace-nowrap">3<span className="text-yellow-300">x</span> − 2<span className="text-yellow-300">y</span> = 11 × 1</span>
+                <span className="text-right flex items-center gap-1"><B id="k3_r1a" w="w-12" /> −&#8202;<B id="k3_r1b" w="w-12" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k3_r1c" w="w-10" /></span>
+                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 2</span>
+                <span className="text-right flex items-center gap-1"><B id="k3_r2a" w="w-12" /> +&#8202;<B id="k3_r2b" w="w-12" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k3_r2c" w="w-10" /></span>
+              </div>
+              <div className="border-t border-white/20 my-2" />
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+                <span className="w-6 text-right text-white/40 text-sm">+</span>
+                <span className="text-right"><B id="k3_resl_x" w="w-14" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k3_resr_x" w="w-14" /><span className="text-white/40 text-xs font-normal">← variabel <span className="text-yellow-300">y</span> tereliminasi</span></span>
+                <span className="w-6"> </span>
+                <span className="text-right text-yellow-300 font-black text-xl">x</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k3_xhasil" w="w-14" /><span className="text-white/40 text-xs font-normal">← bagi kedua ruas dengan 7</span></span>
+              </div>
+            </div>
+          </div>
+
+          {/* Langkah ② — Eliminasi x → cari y */}
+          <div className="mt-4 rounded-xl bg-purple-900/40 border border-purple-400/30 p-4">
+            <p className="text-sm font-bold text-purple-300 mb-1">
+              ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
+            </p>
+            <p className="text-xs text-white/50 mb-3">(KPK koefisien x: 3 dan 2 = 6 → P1 × 2, P2 × 3, lalu kurangkan)</p>
+            <div className="bg-purple-950/50 rounded-xl p-3 border border-purple-400/20 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="text-white/50 text-xs whitespace-nowrap">3<span className="text-yellow-300">x</span> − 2<span className="text-yellow-300">y</span> = 11 × 2</span>
+                <span className="text-right flex items-center gap-1"><B id="k3_r3a" w="w-12" /> −&#8202;<B id="k3_r3b" w="w-12" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k3_r3c" w="w-10" /></span>
+                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 3</span>
+                <span className="text-right flex items-center gap-1"><B id="k3_r4a" w="w-12" /> +&#8202;<B id="k3_r4b" w="w-12" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k3_r4c" w="w-10" /></span>
+              </div>
+              <div className="border-t border-white/20 my-2" />
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+                <span className="w-6 text-right text-white/40 text-sm">−</span>
+                <span className="text-right"><B id="k3_resl_y" w="w-14" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k3_resr_y" w="w-14" /><span className="text-white/40 text-xs font-normal">← variabel <span className="text-yellow-300">x</span> tereliminasi</span></span>
+                <span className="w-6"> </span>
+                <span className="text-right text-yellow-300 font-black text-xl">y</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k3_ynilai" w="w-14" /><span className="text-white/40 text-xs font-normal">← bagi kedua ruas dengan 7</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-xl bg-violet-900/30 border border-violet-400/20 p-4">
+            <p className="text-white/90 text-base">
+              Maka nilai <span className="text-yellow-300 font-black font-mono text-lg">x</span> = <B id="k3_xfinal" w="w-14" /> dan <span className="text-yellow-300 font-black font-mono text-lg">y</span> = <B id="k3_yfinal" w="w-14" />
+            </p>
+            <CK sectionKey="k3step1" />
+          </div>
+
+          {/* Memeriksa Hasil Kembali */}
+          <div className="mt-4 rounded-xl bg-gradient-to-br from-amber-600/30 to-orange-700/20 border-2 border-amber-400/60 p-4 shadow-[0_0_16px_rgba(245,158,11,0.25)]">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="bg-amber-400 text-black text-xs font-black px-2 py-0.5 rounded-full font-display tracking-wide">🔍 MEMERIKSA HASIL KEMBALI</span>
+            </div>
+            <p className="text-sm text-amber-100/80 mb-3 font-body">Substitusikan nilai <span className="text-yellow-300 font-black font-mono text-base">x</span> dan <span className="text-yellow-300 font-black font-mono text-base">y</span> yang diperoleh ke kedua persamaan:</p>
+            <div className="space-y-3 font-mono text-base bg-amber-950/40 rounded-xl p-3 border border-amber-400/20">
+              <p className="flex flex-wrap items-center gap-2">
+                <span className="text-amber-300 font-bold text-sm">Persamaan 1 :</span>
+                3(<B id="k3_cek1a" w="w-10" />) − 2(<B id="k3_cek1b" w="w-10" />) = <B id="k3_cek1c" w="w-10" />
+                <span className="text-white/50 font-body text-sm">(hasil harus 11)</span>
+              </p>
+              <p className="flex flex-wrap items-center gap-2">
+                <span className="text-amber-300 font-bold text-sm">Persamaan 2 :</span>
+                2(<B id="k3_cek2a" w="w-10" />) + (<B id="k3_cek2b" w="w-10" />) = <B id="k3_cek2c" w="w-10" />
+                <span className="text-white/50 font-body text-sm">(hasil harus 5)</span>
+              </p>
+            </div>
+            <CK sectionKey="k3step2" />
+          </div>
+
+          {/* Kesimpulan */}
+          <div className="mt-4 rounded-xl bg-gradient-to-br from-violet-600/30 to-purple-700/20 border-2 border-violet-400/60 p-4">
+            <p className="text-base font-black text-violet-300 font-display mb-2">✅ Kesimpulan:</p>
+            <p className="text-white text-lg font-mono font-bold flex flex-wrap items-center gap-2">
+              Himpunan penyelesaian = {"{"}(<B id="k3_xfinal" w="w-14" />, <B id="k3_yfinal" w="w-14" />){"}"}
+            </p>
+            <p className="text-violet-200/60 text-sm mt-2 font-body">Kedua persamaan terpenuhi → jawaban benar!</p>
           </div>
         </div>
 
