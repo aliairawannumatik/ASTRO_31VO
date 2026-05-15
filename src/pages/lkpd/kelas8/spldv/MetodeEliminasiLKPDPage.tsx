@@ -304,10 +304,16 @@ const MetodeEliminasiLKPDPage = () => {
         <div className="rounded-2xl border-2 border-blue-400/40 bg-gradient-to-br from-blue-900/50 to-indigo-900/40 p-5 mb-6 font-body text-base text-white/90">
           <p className="font-bold text-white text-lg mb-1">Contoh Penyelesaian SPLDV menggunakan metode eliminasi:</p>
           <p className="text-sm text-blue-200/80 mb-3">Tentukan himpunan penyelesaian dari:</p>
-          <div className="font-mono text-center my-3 space-y-1 bg-blue-950/60 rounded-xl p-4 border border-blue-400/30">
-            <p className="text-xl font-bold text-white"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5</p>
-            <p className="text-xl font-bold text-white"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 1</p>
-            <p className="text-blue-300/60 text-sm mt-1">untuk <span className="text-yellow-300 font-bold">x</span>, <span className="text-yellow-300 font-bold">y</span> ∈ ℝ</p>
+          <div className="font-mono my-3 bg-blue-950/60 rounded-xl p-4 border border-blue-400/30 flex flex-col items-center">
+            <div className="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-xl font-bold text-white">
+              <span className="text-right"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span></span>
+              <span className="text-white/70">=</span>
+              <span>5</span>
+              <span className="text-right"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span></span>
+              <span className="text-white/70">=</span>
+              <span>1</span>
+            </div>
+            <p className="text-blue-300/60 text-sm mt-2">untuk <span className="text-yellow-300 font-bold">x</span>, <span className="text-yellow-300 font-bold">y</span> ∈ ℝ</p>
           </div>
 
           {/* Eliminasi 1 — mencari y */}
@@ -316,35 +322,27 @@ const MetodeEliminasiLKPDPage = () => {
               ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
               <span className="text-white/50 font-normal ml-2">(kedua persamaan dikurangkan)</span>
             </p>
-            <div className="inline-block min-w-[15rem] bg-blue-950/50 rounded-xl p-3 border border-blue-400/20">
-              <div className="flex items-center gap-3 font-mono text-base">
+            <div className="bg-blue-950/50 rounded-xl p-3 border border-blue-400/20 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
                 <span className="w-6 text-right text-white/30 text-sm"> </span>
-                <span className="text-white"><span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-white font-bold">5</span>
-                <span className="ml-auto text-white/40 text-xs">… (1)</span>
-              </div>
-              <div className="flex items-center gap-3 font-mono text-base">
+                <span className="text-right text-white"><span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-white font-bold">5 <span className="text-white/40 text-xs ml-2">… (1)</span></span>
                 <span className="w-6 text-right text-red-400 font-black text-xl leading-none">−</span>
-                <span className="text-white"><span className="text-yellow-300 font-bold text-lg">x</span> − <span className="text-yellow-300 font-bold text-lg">y</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-white font-bold">1</span>
-                <span className="ml-auto text-white/40 text-xs">… (2)</span>
+                <span className="text-right text-white"><span className="text-yellow-300 font-bold text-lg">x</span> − <span className="text-yellow-300 font-bold text-lg">y</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-white font-bold">1 <span className="text-white/40 text-xs ml-2">… (2)</span></span>
               </div>
               <div className="border-t-2 border-cyan-400/60 my-2" />
-              <div className="flex items-center gap-3 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
                 <span className="w-6"> </span>
-                <span className="text-emerald-300 font-black text-lg">2<span className="text-yellow-300">y</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-emerald-300 font-black text-lg">4</span>
-                <span className="ml-3 text-white/50 text-xs">← variabel <span className="text-yellow-300 font-bold">x</span> tereliminasi</span>
-              </div>
-              <div className="flex items-center gap-3 font-mono text-base mt-1">
+                <span className="text-right text-emerald-300 font-black text-lg">2<span className="text-yellow-300">y</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-emerald-300 font-black text-lg">4 <span className="text-white/50 text-xs ml-2 font-normal">← variabel <span className="text-yellow-300">x</span> tereliminasi</span></span>
                 <span className="w-6"> </span>
-                <span className="text-yellow-300 font-black text-xl">y</span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-yellow-300 font-black text-xl">2</span>
-                <span className="ml-3 text-white/50 text-xs">← bagi kedua ruas dengan 2</span>
+                <span className="text-right text-yellow-300 font-black text-xl">y</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-yellow-300 font-black text-xl">2 <span className="text-white/50 text-xs ml-2 font-normal">← bagi kedua ruas dengan 2</span></span>
               </div>
             </div>
           </div>
@@ -355,35 +353,27 @@ const MetodeEliminasiLKPDPage = () => {
               ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
               <span className="text-white/50 font-normal ml-2">(kedua persamaan dijumlahkan)</span>
             </p>
-            <div className="inline-block min-w-[15rem] bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20">
-              <div className="flex items-center gap-3 font-mono text-base">
+            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
                 <span className="w-6 text-right text-white/30 text-sm"> </span>
-                <span className="text-white"><span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-white font-bold">5</span>
-                <span className="ml-auto text-white/40 text-xs">… (1)</span>
-              </div>
-              <div className="flex items-center gap-3 font-mono text-base">
+                <span className="text-right text-white"><span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-white font-bold">5 <span className="text-white/40 text-xs ml-2">… (1)</span></span>
                 <span className="w-6 text-right text-emerald-400 font-black text-xl leading-none">+</span>
-                <span className="text-white"><span className="text-yellow-300 font-bold text-lg">x</span> − <span className="text-yellow-300 font-bold text-lg">y</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-white font-bold">1</span>
-                <span className="ml-auto text-white/40 text-xs">… (2)</span>
+                <span className="text-right text-white"><span className="text-yellow-300 font-bold text-lg">x</span> − <span className="text-yellow-300 font-bold text-lg">y</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-white font-bold">1 <span className="text-white/40 text-xs ml-2">… (2)</span></span>
               </div>
               <div className="border-t-2 border-emerald-400/60 my-2" />
-              <div className="flex items-center gap-3 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
                 <span className="w-6"> </span>
-                <span className="text-emerald-300 font-black text-lg">2<span className="text-yellow-300">x</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-emerald-300 font-black text-lg">6</span>
-                <span className="ml-3 text-white/50 text-xs">← variabel <span className="text-yellow-300 font-bold">y</span> tereliminasi</span>
-              </div>
-              <div className="flex items-center gap-3 font-mono text-base mt-1">
+                <span className="text-right text-emerald-300 font-black text-lg">2<span className="text-yellow-300">x</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-emerald-300 font-black text-lg">6 <span className="text-white/50 text-xs ml-2 font-normal">← variabel <span className="text-yellow-300">y</span> tereliminasi</span></span>
                 <span className="w-6"> </span>
-                <span className="text-yellow-300 font-black text-xl">x</span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-yellow-300 font-black text-xl">3</span>
-                <span className="ml-3 text-white/50 text-xs">← bagi kedua ruas dengan 2</span>
+                <span className="text-right text-yellow-300 font-black text-xl">x</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-yellow-300 font-black text-xl">3 <span className="text-white/50 text-xs ml-2 font-normal">← bagi kedua ruas dengan 2</span></span>
               </div>
             </div>
           </div>
@@ -423,10 +413,16 @@ const MetodeEliminasiLKPDPage = () => {
 
         <div className="rounded-2xl border-2 border-blue-400/40 bg-gradient-to-br from-blue-900/50 to-indigo-900/40 p-5 mb-6 font-body text-base text-white/90">
           <p className="text-sm text-blue-200/80 mb-3">Tentukan himpunan penyelesaian dari:</p>
-          <div className="font-mono text-center my-3 space-y-1 bg-blue-950/60 rounded-xl p-4 border border-blue-400/30">
-            <p className="text-xl font-bold text-white">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 8</p>
-            <p className="text-xl font-bold text-white"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 10</p>
-            <p className="text-blue-300/60 text-sm mt-1">untuk <span className="text-yellow-300 font-bold">x</span>, <span className="text-yellow-300 font-bold">y</span> ∈ ℝ</p>
+          <div className="font-mono my-3 bg-blue-950/60 rounded-xl p-4 border border-blue-400/30 flex flex-col items-center">
+            <div className="grid grid-cols-[1fr_auto_auto] gap-x-3 items-center text-xl font-bold text-white">
+              <span className="text-right">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span></span>
+              <span className="text-white/70">=</span>
+              <span>8</span>
+              <span className="text-right"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span></span>
+              <span className="text-white/70">=</span>
+              <span>10</span>
+            </div>
+            <p className="text-blue-300/60 text-sm mt-2">untuk <span className="text-yellow-300 font-bold">x</span>, <span className="text-yellow-300 font-bold">y</span> ∈ ℝ</p>
           </div>
 
           {/* Langkah ① — Eliminasi y → cari x */}
@@ -435,35 +431,27 @@ const MetodeEliminasiLKPDPage = () => {
               ① Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">y</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">x</span>
               <span className="text-white/50 font-normal ml-2">(koefisien y berlawanan tanda → jumlahkan)</span>
             </p>
-            <div className="inline-block min-w-[15rem] bg-cyan-950/50 rounded-xl p-3 border border-cyan-400/20">
-              <div className="flex items-center gap-3 font-mono text-base">
+            <div className="bg-cyan-950/50 rounded-xl p-3 border border-cyan-400/20 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
                 <span className="w-6 text-right text-white/30 text-sm"> </span>
-                <span className="text-white">2<span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-white font-bold">8</span>
-                <span className="ml-auto text-white/40 text-xs">… (1)</span>
-              </div>
-              <div className="flex items-center gap-3 font-mono text-base">
+                <span className="text-right text-white">2<span className="text-yellow-300 font-bold text-lg">x</span> + <span className="text-yellow-300 font-bold text-lg">y</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-white font-bold">8 <span className="text-white/40 text-xs ml-2">… (1)</span></span>
                 <span className="w-6 text-right text-emerald-400 font-black text-xl leading-none">+</span>
-                <span className="text-white"><span className="text-yellow-300 font-bold text-lg">x</span> − <span className="text-yellow-300 font-bold text-lg">y</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-white font-bold">10</span>
-                <span className="ml-auto text-white/40 text-xs">… (2)</span>
+                <span className="text-right text-white"><span className="text-yellow-300 font-bold text-lg">x</span> − <span className="text-yellow-300 font-bold text-lg">y</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-white font-bold">10 <span className="text-white/40 text-xs ml-2">… (2)</span></span>
               </div>
               <div className="border-t-2 border-cyan-400/60 my-2" />
-              <div className="flex items-center gap-3 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
                 <span className="w-6"> </span>
-                <span className="text-emerald-300 font-black text-lg">3<span className="text-yellow-300">x</span></span>
-                <span className="text-white/60 mx-1">=</span>
-                <span className="text-emerald-300 font-black text-lg">18</span>
-                <span className="ml-3 text-white/50 text-xs">← variabel <span className="text-yellow-300 font-bold">y</span> tereliminasi</span>
-              </div>
-              <div className="flex items-center gap-3 font-mono text-base mt-1">
+                <span className="text-right text-emerald-300 font-black text-lg">3<span className="text-yellow-300">x</span></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="text-emerald-300 font-black text-lg">18 <span className="text-white/50 text-xs ml-2 font-normal">← variabel <span className="text-yellow-300">y</span> tereliminasi</span></span>
                 <span className="w-6"> </span>
-                <span className="text-yellow-300 font-black text-xl">x</span>
-                <span className="text-white/60 mx-1">=</span>
-                <B id="k1_xfinal" w="w-14" />
-                <span className="ml-3 text-white/50 text-xs">← bagi kedua ruas dengan 3</span>
+                <span className="text-right text-yellow-300 font-black text-xl">x</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k1_xfinal" w="w-14" /><span className="text-white/50 text-xs font-normal">← bagi kedua ruas dengan 3</span></span>
               </div>
             </div>
           </div>
@@ -474,33 +462,27 @@ const MetodeEliminasiLKPDPage = () => {
               ② Eliminasi variabel <span className="text-yellow-300 text-base font-mono font-black">x</span> → cari nilai <span className="text-yellow-300 text-base font-mono font-black">y</span>
               <span className="text-white/50 font-normal ml-2">(koefisien x belum sama, KPK = 2 → kalikan persamaan 2 dengan 2)</span>
             </p>
-            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20">
-              <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 items-center font-mono text-base">
-                <span className="text-white/50 text-xs">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 8 × 1</span>
-                <span className="flex items-center gap-1 flex-wrap">
-                  <B id="k1_r1a" w="w-12" /> +
-                  <B id="k1_r1b" w="w-10" /> =
-                  <B id="k1_r1c" w="w-10" />
-                </span>
-                <span className="text-white/50 text-xs"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 10 × 2</span>
-                <span className="flex items-center gap-1 flex-wrap">
-                  <B id="k1_r2a" w="w-12" /> −
-                  <B id="k1_r2b" w="w-12" /> =
-                  <B id="k1_r2c" w="w-10" />
-                </span>
-                <span className="text-white/40 text-sm border-t border-white/10 pt-1">−</span>
-                <span className="border-t border-white/20 pt-1 flex items-center gap-1">
-                  <B id="k1_resl" w="w-14" /> =
-                  <B id="k1_resr" w="w-14" />
-                  <span className="text-white/40 text-xs ml-2">← variabel <span className="text-yellow-300">x</span> tereliminasi</span>
-                </span>
-                <span />
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-yellow-300 font-black text-xl">y</span>
-                  <span className="text-white/60">=</span>
-                  <B id="k1_ynilai" w="w-14" />
-                  <span className="text-white/40 text-xs ml-1">← bagi kedua ruas</span>
-                </div>
+            <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base">
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 8 × 1</span>
+                <span className="text-right flex items-center gap-1"><B id="k1_r1a" w="w-12" /> +&#8202;<B id="k1_r1b" w="w-10" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k1_r1c" w="w-10" /></span>
+                <span className="text-white/50 text-xs whitespace-nowrap"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 10 × 2</span>
+                <span className="text-right flex items-center gap-1"><B id="k1_r2a" w="w-12" /> −&#8202;<B id="k1_r2b" w="w-12" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span><B id="k1_r2c" w="w-10" /></span>
+              </div>
+              <div className="border-t border-white/20 my-2" />
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 items-center">
+                <span className="w-6 text-right text-white/40 text-sm">−</span>
+                <span className="text-right"><B id="k1_resl" w="w-14" /></span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k1_resr" w="w-14" /><span className="text-white/40 text-xs font-normal">← variabel <span className="text-yellow-300">x</span> tereliminasi</span></span>
+                <span className="w-6"> </span>
+                <span className="text-right text-yellow-300 font-black text-xl">y</span>
+                <span className="text-white/60 px-1">=</span>
+                <span className="flex items-center gap-2"><B id="k1_ynilai" w="w-14" /><span className="text-white/40 text-xs font-normal">← bagi kedua ruas</span></span>
               </div>
             </div>
             <CK sectionKey="k1step1" />
