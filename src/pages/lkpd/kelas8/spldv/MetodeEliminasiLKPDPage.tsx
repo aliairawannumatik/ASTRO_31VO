@@ -695,41 +695,6 @@ const MetodeEliminasiLKPDPage = () => {
           )}
         </div>
 
-        {/* ══════════════════════════════════════════════════════
-             BAGIAN A — PENGERTIAN SPLDV
-        ══════════════════════════════════════════════════════ */}
-        <SectionHeader label="A. Pengertian Sistem Persamaan Linear Dua Variabel (SPLDV)" color="cyan" />
-
-        <div className="rounded-2xl border-2 border-cyan-400/30 bg-gradient-to-br from-cyan-900/40 to-blue-900/30 p-5 mb-4 font-body text-base text-white/90">
-          <p className="mb-4 text-white font-semibold">Pada pembahasan mengenai PLDV, ciri-ciri dari PLDV antara lain :</p>
-          <div className="space-y-4 pl-2">
-            <p className="flex flex-wrap items-baseline gap-2">
-              <span className="text-cyan-300 font-bold shrink-0 text-lg">1.</span>
-              <span>Memiliki</span>
-              <B id="a1" w="w-28" mono={false} />
-              <span className="text-cyan-200/70">(misalnya variabel <span className="text-yellow-300 font-bold font-mono text-lg">x</span> dan <span className="text-yellow-300 font-bold font-mono text-lg">y</span>)</span>
-            </p>
-            <p className="flex flex-wrap items-baseline gap-2">
-              <span className="text-cyan-300 font-bold shrink-0 text-lg">2.</span>
-              <span>Pangkat masing-masing variabelnya adalah</span>
-              <B id="a2" w="w-16" mono={false} />
-              <span className="text-cyan-200/70">(disebut linear)</span>
-            </p>
-            <p className="flex flex-wrap items-baseline gap-2">
-              <span className="text-cyan-300 font-bold shrink-0 text-lg">3.</span>
-              <span>Koefisien variabel berupa bilangan</span>
-              <B id="a3" w="w-20" mono={false} />
-            </p>
-            <p className="flex flex-wrap items-baseline gap-2">
-              <span className="text-cyan-300 font-bold shrink-0 text-lg">4.</span>
-              <span>Memiliki</span>
-              <B id="a4" w="w-28" mono={false} />
-              <span>penyelesaian</span>
-            </p>
-          </div>
-          <CK sectionKey="a" />
-        </div>
-
         {/* Contoh pengantar */}
         <div className="rounded-2xl border-2 border-blue-400/40 bg-gradient-to-br from-blue-900/50 to-indigo-900/40 p-5 mb-6 font-body text-base text-white/90">
           <p className="font-bold text-white text-lg mb-1">Contoh Penyelesaian SPLDV menggunakan metode eliminasi:</p>
