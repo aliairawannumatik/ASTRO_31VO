@@ -420,7 +420,7 @@ const MetodeEliminasiLKPDPage = () => {
         {/* ══════════════════════════════════════════════════════
              BAGIAN B — METODE ELIMINASI (KASUS 1)
         ══════════════════════════════════════════════════════ */}
-        <SectionHeader label="B. Metode Eliminasi — KASUS 1" color="cyan">
+        <SectionHeader label="Kasus 1 Penyelesaian SPLDV Menggunakan Metode Eliminasi" color="cyan">
           Tentukan penyelesaian dari <span className="font-mono text-white font-bold text-base">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 8</span> dan <span className="font-mono text-white font-bold text-base"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 10</span> dengan <span className="text-yellow-300 font-mono font-bold">x</span>, <span className="text-yellow-300 font-mono font-bold">y</span> ∈ ℝ menggunakan <strong className="text-cyan-300">metode eliminasi</strong>.
         </SectionHeader>
 
