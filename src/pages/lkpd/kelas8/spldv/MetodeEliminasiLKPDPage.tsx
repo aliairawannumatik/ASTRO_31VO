@@ -261,7 +261,7 @@ const MetodeEliminasiLKPDPage = () => {
             <p>Satuan Pendidikan: <span className="text-white font-bold">SMP</span></p>
           </div>
           <p className="mt-3 text-sm text-white/80 font-body leading-relaxed text-left">
-            <span className="text-cyan-300 font-bold">14. &nbsp; Tujuan Pembelajaran :</span> Peserta didik dapat menyelesaikan sistem persamaan linear dua variabel dengan metode eliminasi untuk penyelesaian masalah.
+            <span className="text-cyan-300 font-bold">Tujuan Pembelajaran :</span> Peserta didik dapat menyelesaikan sistem persamaan linear dua variabel dengan metode eliminasi untuk penyelesaian masalah.
           </p>
         </div>
 
