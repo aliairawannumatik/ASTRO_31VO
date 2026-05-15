@@ -1391,6 +1391,84 @@ const MetodeEliminasiLKPDPage = () => {
           </div>
         </div>
 
+        {/* ══════════════════════════════════════════════════════
+             KOTAK KESAN SISWA
+        ══════════════════════════════════════════════════════ */}
+        <div className="rounded-3xl border-2 border-cyan-400/40 bg-gradient-to-br from-slate-900/80 via-blue-950/60 to-violet-950/60 p-6 mb-6 shadow-[0_0_32px_rgba(6,182,212,0.12)]">
+          <div className="flex items-center gap-3 mb-1">
+            <span className="text-2xl">✍️</span>
+            <h2 className="font-display text-base font-black text-cyan-200 tracking-wide uppercase">Kesanku Belajar Hari Ini</h2>
+          </div>
+          <p className="font-body text-xs text-white/55 mb-5 pl-9">
+            Tuliskan kesanmu secara jujur setelah mempelajari dan mengerjakan LKPD ini!
+          </p>
+
+          {/* Pertanyaan 1 */}
+          <div className="mb-4">
+            <label className="block font-body text-sm font-semibold text-cyan-300 mb-2">
+              1. Apa yang paling kamu sukai dari metode eliminasi?
+            </label>
+            <textarea
+              rows={3}
+              placeholder="Tuliskan jawabanmu di sini..."
+              className="w-full rounded-xl border-2 border-dashed border-cyan-400/50 bg-white/5 text-white placeholder-white/25 font-body text-sm px-4 py-3 outline-none focus:border-cyan-300 focus:bg-white/8 resize-none transition-all duration-200 leading-relaxed"
+            />
+          </div>
+
+          {/* Pertanyaan 2 */}
+          <div className="mb-4">
+            <label className="block font-body text-sm font-semibold text-violet-300 mb-2">
+              2. Bagian mana yang menurutmu paling sulit? Mengapa?
+            </label>
+            <textarea
+              rows={3}
+              placeholder="Tuliskan jawabanmu di sini..."
+              className="w-full rounded-xl border-2 border-dashed border-violet-400/50 bg-white/5 text-white placeholder-white/25 font-body text-sm px-4 py-3 outline-none focus:border-violet-300 focus:bg-white/8 resize-none transition-all duration-200 leading-relaxed"
+            />
+          </div>
+
+          {/* Pertanyaan 3 */}
+          <div className="mb-4">
+            <label className="block font-body text-sm font-semibold text-emerald-300 mb-2">
+              3. Apa yang ingin kamu pelajari lebih lanjut setelah ini?
+            </label>
+            <textarea
+              rows={3}
+              placeholder="Tuliskan jawabanmu di sini..."
+              className="w-full rounded-xl border-2 border-dashed border-emerald-400/50 bg-white/5 text-white placeholder-white/25 font-body text-sm px-4 py-3 outline-none focus:border-emerald-300 focus:bg-white/8 resize-none transition-all duration-200 leading-relaxed"
+            />
+          </div>
+
+          {/* Penilaian diri */}
+          <div className="mb-2">
+            <label className="block font-body text-sm font-semibold text-amber-300 mb-3">
+              4. Seberapa paham kamu dengan materi hari ini?
+            </label>
+            <div className="grid grid-cols-4 gap-2">
+              {[
+                { emoji: "😕", label: "Belum Paham", color: "border-red-400/50 bg-red-900/20 hover:bg-red-900/40" },
+                { emoji: "🙂", label: "Cukup Paham", color: "border-yellow-400/50 bg-yellow-900/20 hover:bg-yellow-900/40" },
+                { emoji: "😊", label: "Paham", color: "border-blue-400/50 bg-blue-900/20 hover:bg-blue-900/40" },
+                { emoji: "🤩", label: "Sangat Paham", color: "border-emerald-400/50 bg-emerald-900/20 hover:bg-emerald-900/40" },
+              ].map(({ emoji, label, color }) => (
+                <button
+                  key={label}
+                  type="button"
+                  className={`rounded-xl border-2 ${color} p-3 text-center transition-all duration-200 active:scale-95 group`}
+                  onClick={(e) => {
+                    const parent = (e.currentTarget as HTMLElement).parentElement!;
+                    parent.querySelectorAll("button").forEach((b) => b.classList.remove("ring-2", "ring-white/60", "scale-105"));
+                    (e.currentTarget as HTMLElement).classList.add("ring-2", "ring-white/60", "scale-105");
+                  }}
+                >
+                  <p className="text-2xl mb-1">{emoji}</p>
+                  <p className="font-body text-xs text-white/80 font-semibold leading-tight">{label}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="text-center">
           <button
