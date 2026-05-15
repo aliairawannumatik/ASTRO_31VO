@@ -123,23 +123,15 @@ function Blank({ id, vals, res, onChange, w = "w-20", mono = true }: BlankProps)
   // Text color
   const tc = r === null ? "text-cyan-100" : r ? "text-emerald-300" : "text-red-300";
 
-  // Placeholder dots color class via CSS trick using opacity
   return (
     <span className="inline-flex items-center gap-0.5 align-middle">
-      <span className="relative inline-block">
-        <input
-          value={vals[id] ?? ""}
-          onChange={(e) => onChange(id, e.target.value)}
-          placeholder="· · · · ·"
-          className={`${w} ${borderStyle} ${bg} ${tc} rounded-md text-center text-sm outline-none px-1 py-1 transition-all duration-200 ${mono ? "font-mono" : "font-body"} placeholder-white/30`}
-        />
-        {/* Empty hint dots overlay when blank and unchecked */}
-        {isEmpty && r === null && (
-          <span className="absolute inset-0 flex items-center justify-center pointer-events-none text-white/25 text-xs tracking-widest select-none">
-            ···
-          </span>
-        )}
-      </span>
+      <input
+        value={vals[id] ?? ""}
+        onChange={(e) => onChange(id, e.target.value)}
+        placeholder="···"
+        size={18}
+        className={`${w} min-w-[3rem] ${borderStyle} ${bg} ${tc} rounded-md text-center text-sm outline-none px-2 py-1 transition-all duration-200 ${mono ? "font-mono" : "font-body"} placeholder-white/20`}
+      />
       {r !== null && (
         <span className={`text-xs font-bold ${r ? "text-emerald-400" : "text-red-400"}`}>{r ? "✓" : "✗"}</span>
       )}
