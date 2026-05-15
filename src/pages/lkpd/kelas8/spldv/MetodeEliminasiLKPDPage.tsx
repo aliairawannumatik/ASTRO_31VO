@@ -254,7 +254,6 @@ const MetodeEliminasiLKPDPage = () => {
         <div className="rounded-3xl border-2 border-cyan-400/50 bg-gradient-to-br from-cyan-600/30 via-blue-700/25 to-violet-600/25 p-6 mb-6 text-center shadow-[0_0_40px_rgba(6,182,212,0.25)]">
           <p className="font-display text-xs font-bold tracking-widest text-cyan-300 uppercase mb-1">Lembar Kerja Siswa 2 (LKS 2)</p>
           <h1 className="font-display text-xl md:text-2xl font-black text-white mb-2 drop-shadow-lg">Penyelesaian SPLDV Menggunakan Metode Eliminasi</h1>
-          <p className="font-body text-sm text-cyan-200/80">Metode Eliminasi · Substitusi · Campuran</p>
           <div className="mt-4 grid grid-cols-2 gap-2 text-sm font-body text-white/70">
             <p>Mata Pelajaran: <span className="text-white font-bold">Matematika</span></p>
             <p>Kelas / Semester: <span className="text-white font-bold">VIII / I</span></p>
