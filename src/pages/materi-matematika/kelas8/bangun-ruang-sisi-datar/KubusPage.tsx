@@ -53,6 +53,8 @@ const InteractiveKerangkaKubus = () => {
   const [rotY, setRotY] = useState(28);
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -18, baseRotY: 28 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerW, setContainerW] = useState(600);
 
   const onMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
