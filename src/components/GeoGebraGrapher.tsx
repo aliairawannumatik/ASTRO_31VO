@@ -6,6 +6,8 @@ import {
   Plus, Trash2, Download, MousePointer2, Move, Keyboard,
 } from "lucide-react";
 import { compile } from "mathjs";
+import { InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
 
 /* ─── Types ─────────────────────────────────────────────── */
 interface LineEntry {
@@ -164,6 +166,35 @@ function parseIntercept(s: string): ParsedEquation | null {
   const a = parseFloat(m[1]), b = parseFloat(m[2]);
   if (!a || !b) return null;
   return { kind: "slope", m: -b / a, c: b };
+}
+
+/* ─── LaTeX preview helper ───────────────────────────────── */
+function toLatex(raw: string): string {
+  return raw
+    .trim()
+    .replace(/sqrt\(([^)]*)\)/g, "\\sqrt{$1}")
+    .replace(/abs\(([^)]*)\)/g, "\\left|$1\\right|")
+    .replace(/\bsin\b/g, "\\sin")
+    .replace(/\bcos\b/g, "\\cos")
+    .replace(/\btan\b/g, "\\tan")
+    .replace(/\bln\b/g, "\\ln")
+    .replace(/\bpi\b/g, "\\pi")
+    .replace(/\*/g, "\\cdot ")
+    .replace(/\^\(([^)]*)\)/g, "^{$1}")
+    .replace(/\^(-?\d+(?:\.\d+)?)/g, "^{$1}");
+}
+
+function LatexPreview({ raw, color }: { raw: string; color?: string }) {
+  const tex = toLatex(raw);
+  try {
+    return (
+      <span className="text-sm" style={{ color: color ?? "#67e8f9" }}>
+        <InlineMath math={tex} />
+      </span>
+    );
+  } catch {
+    return <span className="text-xs font-mono text-white/40">{raw}</span>;
+  }
 }
 
 /* ─── Curve parser (mathjs path) ────────────────────────── */
@@ -822,6 +853,11 @@ export default function GeoGebraGrapher() {
                 <Plus className="w-4 h-4" />
               </button>
             </div>
+            {input.trim() && (
+              <div className="px-2 py-1 bg-slate-800/60 rounded-lg border border-white/10 min-h-[28px] flex items-center">
+                <LatexPreview raw={input} />
+              </div>
+            )}
 
             {/* Math keyboard panel */}
             {showKeyboard && (
@@ -870,9 +906,12 @@ export default function GeoGebraGrapher() {
                       <input type="color" value={line.color} onChange={e => changeLineColor(line.id, e.target.value)} className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
                       <div className="w-4 h-4 rounded-full border border-white/30 shrink-0" style={{ background: line.color }} />
                     </div>
-                    <input type="text" value={line.raw} onChange={e => updateLineRaw(line.id, e.target.value)} className="flex-1 bg-transparent text-xs font-mono text-white focus:outline-none min-w-0" style={{ color: line.color }} />
+                    <input type="text" value={line.raw} onChange={e => updateLineRaw(line.id, e.target.value)} className="flex-1 bg-transparent text-xs font-mono text-white/60 focus:outline-none min-w-0" />
                     <button onClick={() => toggleLine(line.id)} className="text-white/40 hover:text-white/80 transition-colors shrink-0">{line.visible ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}</button>
                     <button onClick={() => removeLine(line.id)} className="text-white/40 hover:text-red-400 transition-colors shrink-0"><Trash2 className="w-3.5 h-3.5" /></button>
+                  </div>
+                  <div className="pl-6">
+                    <LatexPreview raw={line.raw} color={line.color} />
                   </div>
                   {line.error && <p className="text-xs text-red-400">{line.error}</p>}
                   {!line.error && line.visible && typeLabel && (
