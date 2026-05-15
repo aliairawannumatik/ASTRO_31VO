@@ -893,13 +893,19 @@ const MetodeEliminasiLKPDPage = () => {
               <span className="text-white/50 font-normal ml-2">(koefisien x belum sama, KPK = 2 → kalikan persamaan 2 dengan 2)</span>
             </p>
             <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base overflow-x-auto">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
-                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 8 × 1</span>
-                <span className="text-right flex items-center gap-1"><B id="k1_r1a" w="w-12" /> +&#8202;<B id="k1_r1b" w="w-10" /></span>
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/50 text-xs">2<span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 8 × 1</span>
+                  <span className="flex items-center gap-1"><B id="k1_r1a" w="w-12" /> +&#8202;<B id="k1_r1b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k1_r1c" w="w-10" /></span>
-                <span className="text-white/50 text-xs whitespace-nowrap"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 10 × 2</span>
-                <span className="text-right flex items-center gap-1"><B id="k1_r2a" w="w-12" /> −&#8202;<B id="k1_r2b" w="w-12" /></span>
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/50 text-xs"><span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 10 × 2</span>
+                  <span className="flex items-center gap-1"><B id="k1_r2a" w="w-12" /> −&#8202;<B id="k1_r2b" w="w-12" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k1_r2c" w="w-10" /></span>
               </div>
@@ -1007,13 +1013,19 @@ const MetodeEliminasiLKPDPage = () => {
               <span className="text-white/50 font-normal ml-2">(koefisien x: 2 dan 1, KPK = 2 → kalikan P2 dengan 2)</span>
             </p>
             <div className="bg-emerald-950/50 rounded-xl p-3 border border-emerald-400/20 font-mono text-base overflow-x-auto">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
-                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 4 × 1</span>
-                <span className="text-right flex items-center gap-1"><B id="k2_r3a" w="w-12" /> −&#8202;<B id="k2_r3b" w="w-10" /></span>
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/50 text-xs">2<span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 4 × 1</span>
+                  <span className="flex items-center gap-1"><B id="k2_r3a" w="w-12" /> −&#8202;<B id="k2_r3b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k2_r3c" w="w-10" /></span>
-                <span className="text-white/50 text-xs whitespace-nowrap"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 2</span>
-                <span className="text-right flex items-center gap-1"><B id="k2_r4a" w="w-12" /> +&#8202;<B id="k2_r4b" w="w-12" /></span>
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/50 text-xs"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 2</span>
+                  <span className="flex items-center gap-1"><B id="k2_r4a" w="w-12" /> +&#8202;<B id="k2_r4b" w="w-12" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k2_r4c" w="w-10" /></span>
               </div>
@@ -1035,13 +1047,19 @@ const MetodeEliminasiLKPDPage = () => {
           <div className="mt-4 rounded-xl bg-teal-900/30 border border-teal-400/20 p-4">
             <p className="text-sm text-teal-200/80 mb-3 font-body">Lengkapi tabel eliminasi variabel <span className="text-yellow-300 font-black font-mono">y</span> di bawah ini:</p>
             <div className="bg-teal-950/50 rounded-xl p-3 border border-teal-400/20 font-mono text-base overflow-x-auto">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
-                <span className="text-white/50 text-xs whitespace-nowrap">2<span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 4 × 1</span>
-                <span className="text-right flex items-center gap-1"><B id="k2_r1a" w="w-12" /> −&#8202;<B id="k2_r1b" w="w-10" /></span>
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/50 text-xs">2<span className="text-yellow-300">x</span> − <span className="text-yellow-300">y</span> = 4 × 1</span>
+                  <span className="flex items-center gap-1"><B id="k2_r1a" w="w-12" /> −&#8202;<B id="k2_r1b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k2_r1c" w="w-10" /></span>
-                <span className="text-white/50 text-xs whitespace-nowrap"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 1</span>
-                <span className="text-right flex items-center gap-1"><B id="k2_r2a" w="w-12" /> +&#8202;<B id="k2_r2b" w="w-10" /></span>
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/50 text-xs"><span className="text-yellow-300">x</span> + <span className="text-yellow-300">y</span> = 5 × 1</span>
+                  <span className="flex items-center gap-1"><B id="k2_r2a" w="w-12" /> +&#8202;<B id="k2_r2b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k2_r2c" w="w-10" /></span>
               </div>
@@ -1121,13 +1139,19 @@ const MetodeEliminasiLKPDPage = () => {
             </p>
             <p className="text-xs text-white/50 mb-3">(koefisien y: 1 dan 2, KPK = 2 → P1 × 2, P2 × 1, lalu jumlahkan)</p>
             <div className="bg-orange-950/50 rounded-xl p-3 border border-orange-400/20 font-mono text-base overflow-x-auto">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
-                <span className="text-white/45 text-xs whitespace-nowrap">2x + y = 5 × 2</span>
-                <span className="flex items-center gap-1"><B id="k3_r1a" w="w-10" /> +&#8202;<B id="k3_r1b" w="w-10" /></span>
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">2x + y = 5 × 2</span>
+                  <span className="flex items-center gap-1"><B id="k3_r1a" w="w-10" /> +&#8202;<B id="k3_r1b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k3_r1c" w="w-10" /></span>
-                <span className="text-white/45 text-xs whitespace-nowrap">3x − 2y = 11 × 1</span>
-                <span className="flex items-center gap-1"><B id="k3_r2a" w="w-10" /> −&#8202;<B id="k3_r2b" w="w-10" /></span>
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">3x − 2y = 11 × 1</span>
+                  <span className="flex items-center gap-1"><B id="k3_r2a" w="w-10" /> −&#8202;<B id="k3_r2b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k3_r2c" w="w-10" /></span>
               </div>
@@ -1152,13 +1176,19 @@ const MetodeEliminasiLKPDPage = () => {
             </p>
             <p className="text-xs text-white/50 mb-3">(koefisien x: 2 dan 3, KPK = 6 → P1 × 3, P2 × 2, lalu kurangkan)</p>
             <div className="bg-amber-950/50 rounded-xl p-3 border border-amber-400/20 font-mono text-base overflow-x-auto">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
-                <span className="text-white/45 text-xs whitespace-nowrap">2x + y = 5 × 3</span>
-                <span className="flex items-center gap-1"><B id="k3_r3a" w="w-10" /> +&#8202;<B id="k3_r3b" w="w-10" /></span>
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">2x + y = 5 × 3</span>
+                  <span className="flex items-center gap-1"><B id="k3_r3a" w="w-10" /> +&#8202;<B id="k3_r3b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k3_r3c" w="w-10" /></span>
-                <span className="text-white/45 text-xs whitespace-nowrap">3x − 2y = 11 × 2</span>
-                <span className="flex items-center gap-1"><B id="k3_r4a" w="w-10" /> −&#8202;<B id="k3_r4b" w="w-10" /></span>
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">3x − 2y = 11 × 2</span>
+                  <span className="flex items-center gap-1"><B id="k3_r4a" w="w-10" /> −&#8202;<B id="k3_r4b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k3_r4c" w="w-10" /></span>
               </div>
@@ -1294,13 +1324,19 @@ const MetodeEliminasiLKPDPage = () => {
             <p className="text-sm font-bold text-pink-300 mb-1">① Eliminasi variabel <span className="font-mono text-yellow-300">b</span> → cari nilai <span className="font-mono text-yellow-300">a</span></p>
             <p className="text-xs text-white/50 mb-3">(KPK koefisien b: 2 dan 1 = 2 → P1 × 1, P2 × 2, lalu kurangkan)</p>
             <div className="bg-pink-950/50 rounded-xl p-3 border border-pink-400/20 font-mono text-sm overflow-x-auto">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
-                <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 1</span>
-                <span className="flex items-center gap-1"><B id="k4_e1a" w="w-10" /> +&#8202;<B id="k4_e1b" w="w-10" /></span>
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">4a + 2b = 12.500 × 1</span>
+                  <span className="flex items-center gap-1"><B id="k4_e1a" w="w-10" /> +&#8202;<B id="k4_e1b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k4_e1c" w="w-16" /></span>
-                <span className="text-white/45 text-xs whitespace-nowrap">3a + b = 9.000 × 2</span>
-                <span className="flex items-center gap-1"><B id="k4_e2a" w="w-10" /> +&#8202;<B id="k4_e2b" w="w-10" /></span>
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">3a + b = 9.000 × 2</span>
+                  <span className="flex items-center gap-1"><B id="k4_e2a" w="w-10" /> +&#8202;<B id="k4_e2b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k4_e2c" w="w-16" /></span>
               </div>
@@ -1323,13 +1359,19 @@ const MetodeEliminasiLKPDPage = () => {
             <p className="text-sm font-bold text-rose-300 mb-1">② Eliminasi variabel <span className="font-mono text-yellow-300">a</span> → cari nilai <span className="font-mono text-yellow-300">b</span></p>
             <p className="text-xs text-white/50 mb-3">(KPK koefisien a: 4 dan 3 = 12 → P1 × 3, P2 × 4, lalu kurangkan)</p>
             <div className="bg-rose-950/50 rounded-xl p-3 border border-rose-400/20 font-mono text-sm overflow-x-auto">
-              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center min-w-max">
-                <span className="text-white/45 text-xs whitespace-nowrap">4a + 2b = 12.500 × 3</span>
-                <span className="flex items-center gap-1"><B id="k4_e3a" w="w-12" /> +&#8202;<B id="k4_e3b" w="w-10" /></span>
+              <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-2 items-center">
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">4a + 2b = 12.500 × 3</span>
+                  <span className="flex items-center gap-1"><B id="k4_e3a" w="w-12" /> +&#8202;<B id="k4_e3b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k4_e3c" w="w-16" /></span>
-                <span className="text-white/45 text-xs whitespace-nowrap">3a + b = 9.000 × 4</span>
-                <span className="flex items-center gap-1"><B id="k4_e4a" w="w-12" /> +&#8202;<B id="k4_e4b" w="w-10" /></span>
+                <span className="w-6"> </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-white/45 text-xs">3a + b = 9.000 × 4</span>
+                  <span className="flex items-center gap-1"><B id="k4_e4a" w="w-12" /> +&#8202;<B id="k4_e4b" w="w-10" /></span>
+                </div>
                 <span className="text-white/60 px-1">=</span>
                 <span><B id="k4_e4c" w="w-16" /></span>
               </div>
