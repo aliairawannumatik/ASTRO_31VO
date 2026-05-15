@@ -855,28 +855,8 @@ const ZumaMathPage = () => {
           Tembak bola warna yang cocok untuk meledakkan rantai!
         </p>
 
-        {/* Question panel */}
-        {phase === "playing" && (
-          <div className="bg-black/60 border border-white/10 rounded-xl px-4 py-2 mb-3 w-full max-w-sm">
-            <p className="text-center text-white/60 text-xs font-body mb-1">❓ Soal:</p>
-            <p className="text-center text-yellow-300 font-display text-lg font-bold mb-2">{question} = ?</p>
-            <div className="grid grid-cols-4 gap-1">
-              {opts.map((val, i) => (
-                <div key={i} className="flex flex-col items-center gap-0.5">
-                  <div className="rounded-full w-6 h-6 border-2 flex items-center justify-center text-[10px] font-bold text-black"
-                    style={{ background: C_GLOW[i], borderColor: C_LIGHT[i], boxShadow: `0 0 8px ${C_GLOW[i]}` }}>
-                    {i === correctColor ? "★" : ""}
-                  </div>
-                  <span className="text-white text-[10px] font-mono font-bold">{val}</span>
-                  <span className="text-white/40 text-[8px] font-body">{C_NAME[i]}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Canvas */}
-        <div className="relative" style={{ width: CW, maxWidth: "100%", maxHeight: 'calc(100dvh - 265px)', aspectRatio: `${CW}/${CH}` }}>
+        <div className="relative" style={{ width: CW, maxWidth: "100%", maxHeight: 'calc(100dvh - 160px)', aspectRatio: `${CW}/${CH}` }}>
           <canvas
             ref={canvasRef}
             width={CW} height={CH}
