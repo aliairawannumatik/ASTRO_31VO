@@ -5,7 +5,7 @@ const subtopics = [
   { label: "PENYELESAIAN SPLDV DENGAN METODE GRAFIK", path: "/lkpd/kelas-8/spldv/lkpd", icon: "📈" },
   { label: "PENYELESAIAN SPLDV DENGAN METODE SUBSTITUSI", path: "/lkpd/kelas-8/spldv/metode-substitusi", icon: "🔄" },
   { label: "PENYELESAIAN SPLDV DENGAN METODE ELIMINASI", path: "/lkpd/kelas-8/spldv/metode-eliminasi", icon: "➖" },
-  { label: "PENYELESAIAN SPLDV DENGAN METODE CAMPURAN", path: "/lkpd/kelas-8/spldv/lkpd", icon: "🔀" },
+  { label: "PENYELESAIAN SPLDV DENGAN METODE CAMPURAN", path: "/lkpd/kelas-8/spldv/metode-campuran", icon: "🔀" },
   { label: "MEMBUAT MODEL DARI PERMASALAHAN YANG BERKAITAN DENGAN SPLDV", path: "/lkpd/kelas-8/spldv/lkpd", icon: "🧮" },
   { label: "PENYELESAIAN MASALAH YANG BERKAITAN DENGAN SPLDV", path: "/lkpd/kelas-8/spldv/lkpd", icon: "✅" },
 ];
