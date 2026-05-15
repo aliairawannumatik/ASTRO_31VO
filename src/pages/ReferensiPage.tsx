@@ -19,6 +19,7 @@ const bukuRefs = [
 
 const internetRefs = [
   { label: "Bing.com/images/create", url: "https://bing.com/images/create", akses: "Januari 2026" },
+  { label: "Gemini.google.com/app", url: "https://gemini.google.com/app", akses: "Mei 2026" },
   { label: "Defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", url: "https://defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", akses: "Desember 2025" },
   { label: "Emporioarchitect.com/img/blog/siap-membangun-rumah-ketahui-dulu-masalah-umum-dalam-proses-pembangunan-rumah", url: "https://www.emporioarchitect.com/img/blog/siap-membangun-rumah-ketahui-dulu-masalah-umum-dalam-proses-pembangunan-rumah-dan-solusi-mengatasinya-070222103548184287.jpg", akses: "April 2026" },
   { label: "Imgx.gridoto.com/crop/0x0:0x0/700x0/filters:watermark(file/2017/gridoto", url: "https://imgx.gridoto.com/crop/0x0:0x0/700x0/filters:watermark(file/2017/gridoto/img/watermark.png,5,5,60)/photo/gridoto/2017/10/20/292677212.jpg", akses: "April 2026" },
