@@ -17,12 +17,12 @@ const TOPIC = "POSTES — SPLDV METODE ELIMINASI";
 
 const POSTES_GURU: GuruQuestion[] = [
   {
-    question: "Sistem: x + y = 5 dan 2x − y = 4. Nilai x yang memenuhi adalah ...",
+    question: "Diberikan sistem persamaan berikut:\nx + y = 5\n2x − y = 4\nBerapakah nilai x yang memenuhi sistem persamaan tersebut?",
     options: ["4", "1", "2", "3"],
     correctIdx: 3,
   },
   {
-    question: "2 buku + 3 pensil = Rp12.000. 3 buku + 1 pensil = Rp11.000. Harga 1 pensil = ...",
+    question: "Harga 2 buah buku dan 3 buah pensil adalah Rp12.000,00. Sedangkan harga 3 buah buku dan 1 buah pensil adalah Rp11.000,00. Berapakah harga 1 buah pensil?",
     options: ["Rp3.000,00", "Rp2.500,00", "Rp1.500,00", "Rp2.000,00"],
     correctIdx: 3,
   },
