@@ -280,18 +280,98 @@ const MetodeEliminasiLKPDPage = () => {
 
         {/* Contoh pengantar */}
         <div className="rounded-2xl border border-white/8 bg-[#0d1627]/60 p-4 mb-6 font-body text-sm text-white/80">
-          <p className="font-bold text-white mb-2">Contoh SPLDV:</p>
-          <p className="mb-1">Tentukan himpunan penyelesaian dari:</p>
+          <p className="font-bold text-white mb-1">Contoh SPLDV:</p>
+          <p className="text-xs text-white/60 mb-2">Tentukan himpunan penyelesaian dari:</p>
           <div className="font-mono text-center my-2 text-cyan-200 space-y-0.5">
             <p>x + y = 5</p>
             <p>x − y = 1</p>
             <p className="text-white/40 text-xs">untuk x, y ∈ ℝ</p>
           </div>
-          <div className="mt-3 space-y-1 text-xs text-white/70 border-t border-white/10 pt-3">
-            <p><span className="text-yellow-300 font-bold">Diketahui:</span> sistem persamaan x + y = 5 dan x − y = 1</p>
-            <p><span className="text-yellow-300 font-bold">Ditanyakan:</span> nilai x dan y</p>
-            <p><span className="text-emerald-300 font-bold">Jawab:</span> Dengan cara tebak → x = 3, y = 2</p>
-            <p>Cek: x + y = 3 + 2 = 5 ✓ &nbsp;|&nbsp; x − y = 3 − 2 = 1 ✓</p>
+
+          {/* Eliminasi 1 — mencari y (kurangkan) */}
+          <div className="mt-4 border-t border-white/10 pt-3">
+            <p className="text-xs font-bold text-cyan-300 mb-2">① Eliminasi variabel <span className="text-yellow-300">x</span> → cari nilai <span className="text-yellow-300">y</span> <span className="text-white/40 font-normal">(kedua persamaan dikurangkan)</span></p>
+            <div className="inline-block min-w-[13rem]">
+              {/* Baris 1 */}
+              <div className="flex items-center gap-2 font-mono text-sm">
+                <span className="w-5 text-right text-white/30 text-xs"> </span>
+                <span className="text-white/80">x + y</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-white/80">5</span>
+                <span className="ml-auto text-white/30 text-xs">… (1)</span>
+              </div>
+              {/* Baris 2 dengan tanda minus di kiri */}
+              <div className="flex items-center gap-2 font-mono text-sm">
+                <span className="w-5 text-right text-red-400 font-bold text-base leading-none">−</span>
+                <span className="text-white/80">x − y</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-white/80">1</span>
+                <span className="ml-auto text-white/30 text-xs">… (2)</span>
+              </div>
+              {/* Garis eliminasi */}
+              <div className="border-t border-cyan-400/60 my-1" />
+              {/* Hasil */}
+              <div className="flex items-center gap-2 font-mono text-sm">
+                <span className="w-5"> </span>
+                <span className="text-emerald-300 font-bold">2y</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-emerald-300 font-bold">4</span>
+                <span className="ml-3 text-white/40 text-xs">← variabel x tereliminasi</span>
+              </div>
+              <div className="flex items-center gap-2 font-mono text-sm mt-0.5">
+                <span className="w-5"> </span>
+                <span className="text-yellow-300 font-bold">y</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-yellow-300 font-bold">2</span>
+                <span className="ml-3 text-white/40 text-xs">← bagi kedua ruas dengan 2</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Eliminasi 2 — mencari x (tambahkan) */}
+          <div className="mt-4 border-t border-white/10 pt-3">
+            <p className="text-xs font-bold text-cyan-300 mb-2">② Eliminasi variabel <span className="text-yellow-300">y</span> → cari nilai <span className="text-yellow-300">x</span> <span className="text-white/40 font-normal">(kedua persamaan dijumlahkan)</span></p>
+            <div className="inline-block min-w-[13rem]">
+              {/* Baris 1 */}
+              <div className="flex items-center gap-2 font-mono text-sm">
+                <span className="w-5 text-right text-white/30 text-xs"> </span>
+                <span className="text-white/80">x + y</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-white/80">5</span>
+                <span className="ml-auto text-white/30 text-xs">… (1)</span>
+              </div>
+              {/* Baris 2 dengan tanda plus di kiri */}
+              <div className="flex items-center gap-2 font-mono text-sm">
+                <span className="w-5 text-right text-emerald-400 font-bold text-base leading-none">+</span>
+                <span className="text-white/80">x − y</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-white/80">1</span>
+                <span className="ml-auto text-white/30 text-xs">… (2)</span>
+              </div>
+              {/* Garis eliminasi */}
+              <div className="border-t border-cyan-400/60 my-1" />
+              {/* Hasil */}
+              <div className="flex items-center gap-2 font-mono text-sm">
+                <span className="w-5"> </span>
+                <span className="text-emerald-300 font-bold">2x</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-emerald-300 font-bold">6</span>
+                <span className="ml-3 text-white/40 text-xs">← variabel y tereliminasi</span>
+              </div>
+              <div className="flex items-center gap-2 font-mono text-sm mt-0.5">
+                <span className="w-5"> </span>
+                <span className="text-yellow-300 font-bold">x</span>
+                <span className="text-white/50 mx-1">=</span>
+                <span className="text-yellow-300 font-bold">3</span>
+                <span className="ml-3 text-white/40 text-xs">← bagi kedua ruas dengan 2</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Kesimpulan */}
+          <div className="mt-4 border-t border-white/10 pt-3 space-y-1 text-xs text-white/70">
+            <p><span className="text-emerald-300 font-bold">Kesimpulan:</span> Himpunan penyelesaian = <span className="font-mono text-white">{"{"}(3, 2){"}"}</span></p>
+            <p className="text-white/40">Cek: x + y = 3 + 2 = 5 ✓ &nbsp;|&nbsp; x − y = 3 − 2 = 1 ✓</p>
           </div>
         </div>
 
