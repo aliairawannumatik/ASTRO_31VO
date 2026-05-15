@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext, useContext, useCallback, useRef } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 
@@ -96,31 +96,28 @@ const SECTIONS: Record<string, string[]> = {
   k3step2: ["k3_cek1a","k3_cek1b","k3_cek1c","k3_cek2a","k3_cek2b","k3_cek2c"],
 };
 
-/* ─── FillBlank ───────────────────────────────────────────── */
-type BlankProps = {
-  id: string;
+/* ─── Page Context (prevents input remount on re-render) ──── */
+type PageCtxType = {
   vals: Record<string, string>;
   res: Record<string, boolean | null>;
   onChange: (id: string, v: string) => void;
-  w?: string;
-  mono?: boolean;
+  onCek: (k: string) => void;
 };
+const PageCtx = createContext<PageCtxType>({
+  vals: {}, res: {}, onChange: () => {}, onCek: () => {},
+});
 
-function Blank({ id, vals, res, onChange, w = "w-20", mono = true }: BlankProps) {
+/* ─── Blank (module-level — stable reference) ─────────────── */
+function Blank({ id, w = "w-20", mono = true }: { id: string; w?: string; mono?: boolean }) {
+  const { vals, res, onChange } = useContext(PageCtx);
   const r = res[id] ?? null;
-  const isEmpty = !(vals[id] ?? "");
 
-  // Border color: dotted cyan when unchecked, solid green/red after check
   const borderStyle = r === null
-    ? "border-2 border-dashed border-cyan-400/50 focus-within:border-cyan-300"
+    ? "border-2 border-dashed border-cyan-400/50 focus:border-cyan-300"
     : r
     ? "border-2 border-solid border-emerald-400"
     : "border-2 border-solid border-red-400";
-
-  // Background: always transparent (matches dark space bg), tinted after check
   const bg = r === null ? "bg-transparent" : r ? "bg-emerald-500/10" : "bg-red-500/10";
-
-  // Text color
   const tc = r === null ? "text-cyan-100" : r ? "text-emerald-300" : "text-red-300";
 
   return (
@@ -139,9 +136,9 @@ function Blank({ id, vals, res, onChange, w = "w-20", mono = true }: BlankProps)
   );
 }
 
-/* ─── CekButton ───────────────────────────────────────────── */
-type CekProps = { sectionKey: string; vals: Record<string, string>; onCek: (k: string) => void; res: Record<string, boolean | null> };
-function CekButton({ sectionKey, vals, onCek, res }: CekProps) {
+/* ─── CekButton (module-level — stable reference) ─────────── */
+function CekButton({ sectionKey }: { sectionKey: string }) {
+  const { vals, res, onCek } = useContext(PageCtx);
   const ids = SECTIONS[sectionKey] ?? [];
   const checked = ids.some((id) => res[id] !== null && res[id] !== undefined);
   const correct = ids.filter((id) => res[id] === true).length;
@@ -161,6 +158,12 @@ function CekButton({ sectionKey, vals, onCek, res }: CekProps) {
     </div>
   );
 }
+
+/* ─── Shorthand aliases (module-level — stable) ───────────── */
+const B = ({ id, w, mono }: { id: string; w?: string; mono?: boolean }) =>
+  <Blank id={id} w={w} mono={mono} />;
+const CK = ({ sectionKey }: { sectionKey: string }) =>
+  <CekButton sectionKey={sectionKey} />;
 
 /* ─── StepCard ────────────────────────────────────────────── */
 function StepCard({ step, title, children }: { step: string; title: string; children: React.ReactNode }) {
@@ -198,28 +201,26 @@ const MetodeEliminasiLKPDPage = () => {
   const [vals, setVals] = useState<Record<string, string>>({});
   const [res, setRes] = useState<Record<string, boolean | null>>({});
 
-  const handleChange = (id: string, v: string) => {
+  // Use a ref so handleCek always reads latest vals without needing it as dependency
+  const valsRef = useRef(vals);
+  valsRef.current = vals;
+
+  const handleChange = useCallback((id: string, v: string) => {
     setVals((prev) => ({ ...prev, [id]: v }));
     setRes((prev) => ({ ...prev, [id]: null }));
-  };
+  }, []);
 
-  const handleCek = (sectionKey: string) => {
+  const handleCek = useCallback((sectionKey: string) => {
     const ids = SECTIONS[sectionKey] ?? [];
     const updates: Record<string, boolean | null> = {};
     ids.forEach((id) => {
-      updates[id] = checkAnswer(vals[id] ?? "", ANSWERS[id] ?? []);
+      updates[id] = checkAnswer(valsRef.current[id] ?? "", ANSWERS[id] ?? []);
     });
     setRes((prev) => ({ ...prev, ...updates }));
-  };
-
-  const B = (props: Omit<BlankProps, "vals" | "res" | "onChange">) => (
-    <Blank {...props} vals={vals} res={res} onChange={handleChange} />
-  );
-  const CK = (props: Omit<CekProps, "vals" | "onCek" | "res">) => (
-    <CekButton {...props} vals={vals} onCek={handleCek} res={res} />
-  );
+  }, []);
 
   return (
+    <PageCtx.Provider value={{ vals, res, onChange: handleChange, onCek: handleCek }}>
     <div className="relative min-h-screen flex flex-col gradient-space overflow-hidden">
       <Starfield />
       <PageNavigation prevPath="/lkpd/kelas-8/spldv" />
@@ -521,6 +522,7 @@ const MetodeEliminasiLKPDPage = () => {
         </div>
       </div>
     </div>
+    </PageCtx.Provider>
   );
 };
 
