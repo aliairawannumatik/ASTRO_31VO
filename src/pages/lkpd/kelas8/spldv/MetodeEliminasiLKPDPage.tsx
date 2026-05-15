@@ -382,7 +382,10 @@ const MetodeEliminasiLKPDPage = () => {
             </div>
             {materiOpen
               ? <ChevronUp className="w-5 h-5 text-yellow-300 shrink-0" />
-              : <ChevronDown className="w-5 h-5 text-yellow-300 shrink-0" />}
+              : <div className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-400 animate-pulse" />
+                  <ChevronDown className="w-5 h-5 text-yellow-300 shrink-0" />
+                </div>}
           </button>
 
           {materiOpen && (
@@ -1445,11 +1448,16 @@ const MetodeEliminasiLKPDPage = () => {
             <div className="flex items-center gap-3">
               <span className="text-2xl">🎮</span>
               <div className="text-left">
-                <p className="font-display text-sm font-black text-rose-200 uppercase tracking-wide">POSTES — Metode Eliminasi</p>
+                <p className="font-display text-sm font-black text-rose-200 uppercase tracking-wide">POSTES — PENYELESAIAN SPLDV DENGAN METODE ELIMINASI</p>
                 <p className="font-body text-xs text-rose-300/70 mt-0.5">Ayo ukur pemahaman kamu dengan memilih salah satu game berikut</p>
               </div>
             </div>
-            {postesOpen ? <ChevronUp className="text-rose-300 shrink-0" size={20} /> : <ChevronDown className="text-rose-300 shrink-0" size={20} />}
+            {postesOpen ? <ChevronUp className="text-rose-300 shrink-0" size={20} /> : (
+              <div className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-rose-400 animate-pulse" />
+                <ChevronDown className="text-rose-300 shrink-0" size={20} />
+              </div>
+            )}
           </button>
 
           {postesOpen && (
@@ -1487,7 +1495,12 @@ const MetodeEliminasiLKPDPage = () => {
                 <p className="font-body text-xs text-cyan-300/70 mt-0.5">Tuliskan kesanmu secara jujur setelah mengerjakan LKPD ini!</p>
               </div>
             </div>
-            {kesanOpen ? <ChevronUp className="text-cyan-300 shrink-0" size={20} /> : <ChevronDown className="text-cyan-300 shrink-0" size={20} />}
+            {kesanOpen ? <ChevronUp className="text-cyan-300 shrink-0" size={20} /> : (
+              <div className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 animate-pulse" />
+                <ChevronDown className="text-cyan-300 shrink-0" size={20} />
+              </div>
+            )}
           </button>
 
           {kesanOpen && (
