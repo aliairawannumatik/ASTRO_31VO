@@ -106,6 +106,8 @@ function parseLinear(s: string): ParsedEquation | null {
     if (constOnly) { const c = evalFrac(constOnly[1]); if (c !== null) return { kind: "slope", m: 0, c }; }
     const linX = /^(-?\d*\.?\d+(?:\/\d+)?)\*?x$/.exec(rhs);
     if (linX) { const m = evalFrac(linX[1]); if (m !== null) return { kind: "slope", m, c: 0 }; }
+    // y = <ekspresi non-linear> → jangan diteruskan ke normalizeGeneral, biarkan parseCurve menangani
+    return null;
   }
 
   // ax + by + c = 0  OR  ax + by = c  (general form)
