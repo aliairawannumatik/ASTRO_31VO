@@ -53,11 +53,11 @@ const ENEMY_DEFS = [
 ];
 
 const DIFFICULTY_STAGES = [
-  { label: "MUDAH",        color: "#4ade80", count: [1, 2], vyBase: 46,  vyRand: 20, spawnMs: 2800, shootMin: 4.0, shootRand: 2.5, typePool: [0, 1]       },
-  { label: "SEDANG",       color: "#facc15", count: [2, 3], vyBase: 78,  vyRand: 25, spawnMs: 2200, shootMin: 3.0, shootRand: 2.0, typePool: [0, 1, 2]    },
-  { label: "SULIT",        color: "#f97316", count: [3, 4], vyBase: 110, vyRand: 30, spawnMs: 1700, shootMin: 2.2, shootRand: 1.5, typePool: [0, 1, 2, 3] },
-  { label: "SANGAT SULIT", color: "#ef4444", count: [4, 5], vyBase: 142, vyRand: 35, spawnMs: 1350, shootMin: 1.5, shootRand: 1.2, typePool: [0, 1, 2, 3] },
-  { label: "EKSTREM",      color: "#a855f7", count: [5, 6], vyBase: 170, vyRand: 40, spawnMs: 1100, shootMin: 1.0, shootRand: 1.0, typePool: [0, 1, 2, 3] },
+  { label: "MUDAH",        color: "#4ade80", count: [1, 2], vyBase: 46,  vyRand: 20, spawnMs: 2800, shootMin: 2.0, shootRand: 1.0, typePool: [0, 1]       },
+  { label: "SEDANG",       color: "#facc15", count: [2, 3], vyBase: 78,  vyRand: 25, spawnMs: 2200, shootMin: 1.6, shootRand: 0.8, typePool: [0, 1, 2]    },
+  { label: "SULIT",        color: "#f97316", count: [3, 4], vyBase: 110, vyRand: 30, spawnMs: 1700, shootMin: 1.2, shootRand: 0.7, typePool: [0, 1, 2, 3] },
+  { label: "SANGAT SULIT", color: "#ef4444", count: [4, 5], vyBase: 142, vyRand: 35, spawnMs: 1350, shootMin: 0.9, shootRand: 0.5, typePool: [0, 1, 2, 3] },
+  { label: "EKSTREM",      color: "#a855f7", count: [5, 6], vyBase: 170, vyRand: 40, spawnMs: 1100, shootMin: 0.6, shootRand: 0.4, typePool: [0, 1, 2, 3] },
 ];
 const getDiffStage = (elapsed: number) => Math.min(Math.floor(elapsed / 30), DIFFICULTY_STAGES.length - 1);
 
@@ -511,10 +511,13 @@ const GalaksiTempurPage = ({ topicLabel, backPath, homePath, quizQuestions }: Ga
         ctx.shadowColor = "#ff0000"; ctx.shadowBlur = 8;
         ctx.beginPath(); ctx.moveTo(b.x, b.y); ctx.lineTo(b.x, b.y - 18); ctx.stroke();
       } else if (b.isEnemy) {
-        const eg = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, 5);
-        eg.addColorStop(0, "#ff4444"); eg.addColorStop(1, "transparent");
+        ctx.shadowColor = "#ff2200";
+        ctx.shadowBlur = 14;
+        const eg = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, 8);
+        eg.addColorStop(0, "#ff6666"); eg.addColorStop(0.5, "#ff2200"); eg.addColorStop(1, "transparent");
         ctx.fillStyle = eg;
-        ctx.beginPath(); ctx.arc(b.x, b.y, 5, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(b.x, b.y, 8, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 0;
       } else {
         const pg = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, 4);
         const col = b.powerType === "spread" ? "#facc15" : b.powerType === "double" ? "#c084fc" : b.powerType === "rapid" ? "#22d3ee" : "#00FFFF";
