@@ -125,6 +125,15 @@ const PacmanMathPage = () => {
   const phaseRef = useRef<Phase>("idle");
   const guruQuiz = useGuruQuiz(phaseRef);
   const mazeRef = useRef<number[][]>(BASE_MAZE.map(r => [...r]));
+  // Static background stars (generated once)
+  const bgStarsRef = useRef<{x:number;y:number;r:number;a:number}[]>(
+    Array.from({length: 60}, () => ({
+      x: Math.random() * CW,
+      y: OY + Math.random() * (ROWS * CELL),
+      r: 0.5 + Math.random() * 1.2,
+      a: 0.3 + Math.random() * 0.7,
+    }))
+  );
   const pacRef = useRef<Entity & { ndx: number; ndy: number; mouthA: number }>({
     row: 15, col: 10, dx: 0, dy: 0, ndx: -1, ndy: 0, prog: 0, mouthA: 0.25
   });
@@ -296,30 +305,33 @@ const PacmanMathPage = () => {
           startGame(false);
         }
       }
-      // Draw dying animation
-      ctx.fillStyle = "#00000f";
+      // Draw dying animation — spaceship explosion
+      ctx.fillStyle = "#03001e";
       ctx.fillRect(0, 0, CW, CH);
+      drawBackground(ctx);
       drawMaze(ctx, mazeRef.current);
       const [px, py] = cellCenter(pacRef.current.row, pacRef.current.col);
       const dyingFrac = 1 - dyingTimerRef.current / 60;
-      // pac-man "closes" his mouth all the way then shrinks
-      ctx.save();
-      ctx.shadowColor = "#facc15"; ctx.shadowBlur = 16;
-      ctx.fillStyle = "#facc15";
-      const mouthClose = Math.min(1, dyingFrac * 2) * Math.PI;
-      ctx.beginPath();
-      ctx.moveTo(px, py);
-      ctx.arc(px, py, CELL / 2 - 1, mouthClose / 2, Math.PI * 2 - mouthClose / 2);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
+      // Expanding explosion rings
+      const ringColors = ["#ff6600", "#ffcc00", "#ff3300", "#ffffff"];
+      for (let ring = 0; ring < 4; ring++) {
+        const rf = Math.min(1, dyingFrac * 2.5 - ring * 0.3);
+        if (rf <= 0) continue;
+        ctx.globalAlpha = (1 - rf) * 0.9;
+        ctx.strokeStyle = ringColors[ring];
+        ctx.lineWidth = 3 - ring * 0.5;
+        ctx.shadowColor = ringColors[ring]; ctx.shadowBlur = 16;
+        ctx.beginPath(); ctx.arc(px, py, rf * CELL * 2.5, 0, Math.PI * 2); ctx.stroke();
+      }
+      ctx.globalAlpha = 1; ctx.shadowBlur = 0;
       drawHUD(ctx);
       return;
     }
 
     if (phaseRef.current !== "playing") {
-      ctx.fillStyle = "#00000f";
+      ctx.fillStyle = "#03001e";
       ctx.fillRect(0, 0, CW, CH);
+      drawBackground(ctx);
       drawMaze(ctx, mazeRef.current);
       drawHUD(ctx);
       return;
@@ -433,8 +445,9 @@ const PacmanMathPage = () => {
     });
 
     // ═══════════════ DRAW ═══════════════════════════════════════════
-    ctx.fillStyle = "#00000f";
+    ctx.fillStyle = "#03001e";
     ctx.fillRect(0, 0, CW, CH);
+    drawBackground(ctx);
 
     drawMaze(ctx, maze);
 
@@ -474,7 +487,26 @@ const PacmanMathPage = () => {
     drawHUD(ctx);
   }, [startGame, eatCell, ghostAI, burst, flash, setupQ]);
 
-  // ── Draw helpers (defined outside loop for reuse) ─────────────────────
+  // ── Draw helpers (space theme) ────────────────────────────────────────
+  function drawBackground(ctx: CanvasRenderingContext2D) {
+    // Deep space gradient
+    const grad = ctx.createLinearGradient(0, OY, 0, OY + ROWS * CELL);
+    grad.addColorStop(0,   "#03001e");
+    grad.addColorStop(0.5, "#07002a");
+    grad.addColorStop(1,   "#03001e");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, OY, CW, ROWS * CELL);
+    // Background stars
+    const tw = Date.now() * 0.001;
+    for (const s of bgStarsRef.current) {
+      const twinkle = s.a * (0.6 + 0.4 * Math.sin(tw * 1.3 + s.x));
+      ctx.globalAlpha = twinkle;
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
   function drawMaze(ctx: CanvasRenderingContext2D, maze: number[][]) {
     if (!maze || maze.length < ROWS) return;
     for (let r = 0; r < ROWS; r++) {
@@ -483,90 +515,148 @@ const PacmanMathPage = () => {
         const v = maze[r][c];
         const x = OX + c * CELL, y = OY + r * CELL;
         if (v === 1) {
-          // Wall
-          ctx.fillStyle = "#00004a";
+          // Nebula wall — deep purple block with cosmic border
+          ctx.fillStyle = "#0d0030";
           ctx.fillRect(x, y, CELL, CELL);
-          ctx.strokeStyle = "#1a1aff";
+          ctx.strokeStyle = "#6d28d9";
           ctx.lineWidth = 1;
-          ctx.shadowColor = "#4444ff"; ctx.shadowBlur = 4;
+          ctx.shadowColor = "#a855f7"; ctx.shadowBlur = 5;
           ctx.strokeRect(x + 1, y + 1, CELL - 2, CELL - 2);
           ctx.shadowBlur = 0;
+          // Inner nebula dot
+          ctx.fillStyle = "rgba(139,92,246,0.18)";
+          ctx.fillRect(x + 3, y + 3, CELL - 6, CELL - 6);
         } else if (v === 0) {
-          // Dot
-          ctx.fillStyle = "#ffdd88";
-          ctx.shadowColor = "#ffdd88"; ctx.shadowBlur = 4;
-          ctx.beginPath(); ctx.arc(x + CELL / 2, y + CELL / 2, 2.5, 0, Math.PI * 2); ctx.fill();
+          // Star dot — small 4-point sparkle
+          const sx = x + CELL / 2, sy = y + CELL / 2;
+          ctx.fillStyle = "#bfdbfe";
+          ctx.shadowColor = "#93c5fd"; ctx.shadowBlur = 6;
+          ctx.beginPath();
+          for (let p = 0; p < 8; p++) {
+            const a = (p * Math.PI) / 4;
+            const rad = p % 2 === 0 ? 2.8 : 1.0;
+            if (p === 0) ctx.moveTo(sx + Math.cos(a) * rad, sy + Math.sin(a) * rad);
+            else ctx.lineTo(sx + Math.cos(a) * rad, sy + Math.sin(a) * rad);
+          }
+          ctx.closePath(); ctx.fill();
           ctx.shadowBlur = 0;
         } else if (v === 2) {
-          // Power pellet — find which opt it corresponds to
+          // Planet power pellet with ring
           const spot = POWER_SPOTS.find(([sr, sc]) => sr === r && sc === c);
           const optIdx = spot ? spot[2] : 0;
           const colors = ["#22d3ee", "#f472b6", "#a3e635", "#fb923c"];
           const glows  = ["#a5f3fc", "#fce7f3", "#ecfccb", "#ffedd5"];
-          const pulse = 0.7 + 0.3 * Math.sin(Date.now() * 0.005 + optIdx);
+          const pulse = 0.75 + 0.25 * Math.sin(Date.now() * 0.005 + optIdx);
+          const cx = x + CELL / 2, cy = y + CELL / 2;
+          const pr = 7 * pulse;
+          // Planet body
           ctx.fillStyle = colors[optIdx];
-          ctx.shadowColor = glows[optIdx]; ctx.shadowBlur = 14 * pulse;
-          ctx.beginPath(); ctx.arc(x + CELL / 2, y + CELL / 2, 6 * pulse, 0, Math.PI * 2); ctx.fill();
+          ctx.shadowColor = glows[optIdx]; ctx.shadowBlur = 18 * pulse;
+          ctx.beginPath(); ctx.arc(cx, cy, pr, 0, Math.PI * 2); ctx.fill();
           ctx.shadowBlur = 0;
+          // Ring
+          ctx.save();
+          ctx.globalAlpha = 0.75;
+          ctx.strokeStyle = colors[optIdx];
+          ctx.lineWidth = 1.5;
+          ctx.shadowColor = glows[optIdx]; ctx.shadowBlur = 6;
+          ctx.beginPath();
+          ctx.ellipse(cx, cy, pr * 1.75, pr * 0.45, Math.PI / 5, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
           // Answer value
           ctx.font = "bold 8px monospace"; ctx.textAlign = "center";
           ctx.fillStyle = "#000";
-          ctx.fillText(String(optsRef.current[optIdx]), x + CELL / 2, y + CELL / 2 + 3);
+          ctx.fillText(String(optsRef.current[optIdx]), cx, cy + 3);
           ctx.textAlign = "left";
         }
       }
     }
   }
 
+  // Spaceship player
   function drawPac(ctx: CanvasRenderingContext2D, px: number, py: number, pac: typeof pacRef.current) {
     const dir = Math.atan2(pac.dy, pac.dx) || 0;
+    const half = CELL / 2 - 1;
     ctx.save();
     ctx.translate(px, py);
     ctx.rotate(dir);
-    ctx.shadowColor = "#facc15"; ctx.shadowBlur = 18;
-    ctx.fillStyle = "#facc15";
-    const m = pac.mouthA;
+    // Engine exhaust glow
+    const thrust = 0.5 + 0.5 * Math.abs(Math.sin(Date.now() * 0.015));
+    ctx.fillStyle = `rgba(255,120,0,${0.5 * thrust})`;
+    ctx.shadowColor = "#ff6600"; ctx.shadowBlur = 14 * thrust;
     ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.arc(0, 0, CELL / 2 - 1, m, Math.PI * 2 - m);
+    ctx.ellipse(-half * 0.8, 0, half * 0.35, half * 0.18 * thrust, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    // Ship body — sleek cyan fighter
+    ctx.shadowColor = "#00e5ff"; ctx.shadowBlur = 14;
+    ctx.fillStyle = "#00e5ff";
+    ctx.beginPath();
+    ctx.moveTo(half, 0);                        // nose
+    ctx.lineTo(-half * 0.5, -half * 0.55);     // top wing tip
+    ctx.lineTo(-half * 0.2, -half * 0.22);     // top wing root
+    ctx.lineTo(-half * 0.7, 0);                // tail center
+    ctx.lineTo(-half * 0.2, half * 0.22);      // bottom wing root
+    ctx.lineTo(-half * 0.5, half * 0.55);      // bottom wing tip
     ctx.closePath();
     ctx.fill();
+    // Cockpit window
+    ctx.fillStyle = "#fff";
+    ctx.shadowColor = "#ffffff"; ctx.shadowBlur = 6;
+    ctx.beginPath();
+    ctx.ellipse(half * 0.18, 0, half * 0.2, half * 0.14, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
     ctx.restore();
   }
 
+  // UFO enemy
   function drawGhost(ctx: CanvasRenderingContext2D, gx: number, gy: number, g: Ghost) {
     const r = CELL / 2 - 1;
     const fright = g.frightTimer > 0;
-    const mainColor = fright ? (g.frightTimer < 80 && Math.floor(g.frightTimer / 10) % 2 === 0 ? "#ffffff" : "#0000cc") : g.color;
+    const flicker = fright && g.frightTimer < 80 && Math.floor(g.frightTimer / 10) % 2 === 0;
+    const discColor = flicker ? "#ffffff" : fright ? "#1a0066" : g.color;
+    const glowColor = fright ? "#4400ff" : g.glowColor;
     ctx.save();
-    ctx.shadowColor = fright ? "#0066ff" : g.glowColor;
-    ctx.shadowBlur = 12;
-    // Body
-    ctx.fillStyle = mainColor;
+    ctx.shadowColor = glowColor; ctx.shadowBlur = 14;
+    // UFO disc body
+    ctx.fillStyle = discColor;
     ctx.beginPath();
-    ctx.arc(gx, gy - r * 0.2, r, Math.PI, 0);
-    ctx.lineTo(gx + r, gy + r * 0.8);
-    // wavy bottom
-    const ww = r / 2.5;
-    for (let i = 3; i >= 0; i--) {
-      const wx = gx - r + i * ww;
-      const dir2 = i % 2 === 0 ? -1 : 1;
-      ctx.quadraticCurveTo(wx + ww / 2, gy + r * 0.8 + dir2 * r * 0.35, wx, gy + r * 0.8);
-    }
+    ctx.ellipse(gx, gy + r * 0.25, r, r * 0.38, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // Dome
+    ctx.fillStyle = fright ? "#110033" : "rgba(255,255,255,0.25)";
+    ctx.beginPath();
+    ctx.ellipse(gx, gy - r * 0.05, r * 0.55, r * 0.52, 0, Math.PI, 0);
     ctx.closePath();
     ctx.fill();
-    // Eyes
+    // Dome tint
     if (!fright) {
-      ctx.fillStyle = "#fff";
-      ctx.beginPath(); ctx.ellipse(gx - r * 0.3, gy - r * 0.2, r * 0.22, r * 0.28, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(gx + r * 0.3, gy - r * 0.2, r * 0.22, r * 0.28, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = "#00f";
-      ctx.beginPath(); ctx.arc(gx - r * 0.28, gy - r * 0.18, r * 0.1, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(gx + r * 0.32, gy - r * 0.18, r * 0.1, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = g.color;
+      ctx.globalAlpha = 0.35;
+      ctx.beginPath();
+      ctx.ellipse(gx, gy - r * 0.05, r * 0.55, r * 0.52, 0, Math.PI, 0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+    // Underside lights
+    if (!fright) {
+      const lightColors = ["#fff", "#fff", "#fff"];
+      for (let li = 0; li < 3; li++) {
+        const lx = gx - r * 0.5 + li * r * 0.5;
+        const blink = 0.5 + 0.5 * Math.sin(Date.now() * 0.008 + li * 2.1);
+        ctx.fillStyle = lightColors[li];
+        ctx.globalAlpha = blink * 0.9;
+        ctx.beginPath(); ctx.arc(lx, gy + r * 0.3, r * 0.1, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
     } else {
-      ctx.fillStyle = "#fff";
-      ctx.font = "8px monospace"; ctx.textAlign = "center";
-      ctx.fillText("^_^", gx, gy);
+      // Scared X eyes
+      ctx.fillStyle = "#aaa";
+      ctx.font = `${Math.round(r * 0.7)}px monospace`; ctx.textAlign = "center";
+      ctx.fillText("x_x", gx, gy + r * 0.18);
       ctx.textAlign = "left";
     }
     ctx.shadowBlur = 0;
@@ -574,20 +664,29 @@ const PacmanMathPage = () => {
   }
 
   function drawHUD(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = "rgba(0,0,15,0.85)";
+    ctx.fillStyle = "rgba(3,0,30,0.9)";
     ctx.fillRect(0, 0, CW, OY - 2);
-    // Lives
+    // Rocket lives
     for (let i = 0; i < livesRef.current; i++) {
-      const lx = 14 + i * 22, ly = 18;
-      ctx.fillStyle = "#facc15"; ctx.shadowColor = "#facc15"; ctx.shadowBlur = 8;
+      const lx = 14 + i * 22, ly = 15;
+      ctx.save();
+      ctx.translate(lx, ly);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillStyle = "#00e5ff"; ctx.shadowColor = "#00e5ff"; ctx.shadowBlur = 8;
       ctx.beginPath();
-      ctx.moveTo(lx, ly); ctx.arc(lx, ly, 8, 0.3, Math.PI * 2 - 0.3); ctx.closePath();
-      ctx.fill(); ctx.shadowBlur = 0;
+      ctx.moveTo(7, 0);
+      ctx.lineTo(-5, -4);
+      ctx.lineTo(-3, 0);
+      ctx.lineTo(-5, 4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.restore();
     }
     // Score
     ctx.font = "bold 12px monospace"; ctx.textAlign = "right";
-    ctx.fillStyle = "#00ffcc"; ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 8;
-    ctx.fillText(`${scoreRef.current}`, CW - 10, 22);
+    ctx.fillStyle = "#a78bfa"; ctx.shadowColor = "#a78bfa"; ctx.shadowBlur = 8;
+    ctx.fillText(`⭐ ${scoreRef.current}`, CW - 8, 20);
     ctx.shadowBlur = 0; ctx.textAlign = "left";
   }
 
