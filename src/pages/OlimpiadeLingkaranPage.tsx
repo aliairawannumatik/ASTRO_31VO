@@ -13,7 +13,7 @@ import dasar3 from "@assets/3_1778279067121.png";
 import dasar4 from "@assets/4_1778279067122.png";
 import dasar5 from "@assets/5_1778279067123.png";
 import dasar6 from "@assets/6_1778279067124.jpg";
-import dasar8 from "@assets/8_1778279067129.png";
+import dasar8 from "@assets/image_1778975173462.png";
 import dasar9 from "@assets/9_1778279067129.png";
 import dasar11 from "@assets/11_1778279067124.jpg";
 import dasar14 from "@assets/14_1778279067128.png";
