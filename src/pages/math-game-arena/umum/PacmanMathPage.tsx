@@ -10,11 +10,11 @@ import GuruQuizOverlay from "@/components/GuruQuizOverlay";
 // ── Layout ────────────────────────────────────────────────────────────────
 const COLS = 21;
 const ROWS = 21;
-const CELL = 22;
-const CW = 480;
-const OX = Math.round((CW - COLS * CELL) / 2); // = 9
-const OY = 68;
-const CH = OY + ROWS * CELL + 10; // = 68 + 462 + 10 = 540
+const CELL = 26;
+const CW = 560;
+const OX = Math.round((CW - COLS * CELL) / 2); // = (560 - 546) / 2 = 7
+const OY = 30;
+const CH = OY + ROWS * CELL + 10; // = 30 + 546 + 10 = 586
 const TUNNEL_ROW = 10;
 
 // ── Speed ─────────────────────────────────────────────────────────────────
@@ -588,24 +588,7 @@ const PacmanMathPage = () => {
     ctx.font = "bold 12px monospace"; ctx.textAlign = "right";
     ctx.fillStyle = "#00ffcc"; ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 8;
     ctx.fillText(`${scoreRef.current}`, CW - 10, 22);
-    ctx.shadowBlur = 0;
-    // Question
-    ctx.font = "bold 11px monospace"; ctx.textAlign = "center";
-    ctx.fillStyle = "#facc15"; ctx.shadowColor = "#facc15"; ctx.shadowBlur = 6;
-    ctx.fillText(`❓ ${mqRef.current.q} = ?`, CW / 2, 23);
-    // Opt hint row
-    ctx.font = "bold 9px monospace";
-    const colors = ["#22d3ee", "#f472b6", "#a3e635", "#fb923c"];
-    const labels = ["◉", "◉", "◉", "◉"];
-    for (let i = 0; i < 4; i++) {
-      ctx.fillStyle = colors[i]; ctx.shadowColor = colors[i]; ctx.shadowBlur = 6;
-      ctx.fillText(`${labels[i]}${optsRef.current[i]}`, 100 + i * 72, 42);
-    }
     ctx.shadowBlur = 0; ctx.textAlign = "left";
-    // Correct indicator
-    ctx.fillStyle = "#facc15"; ctx.font = "bold 9px monospace"; ctx.textAlign = "center";
-    ctx.fillText(`★ = ${C_OPT_NAMES[correctOptRef.current]}`, CW / 2, 58);
-    ctx.textAlign = "left";
   }
 
   // ── Setup loop ─────────────────────────────────────────────────────────
@@ -654,12 +637,8 @@ const PacmanMathPage = () => {
             ✕
           </button>
         </div>
-        <p className="text-white/50 text-xs font-body mb-3 text-center">
-          Makan semua titik! Cari pelet warna jawaban BENAR!
-        </p>
-
         {/* Canvas */}
-        <div className="relative" style={{ width: CW, maxWidth: "100%", maxHeight: 'calc(100dvh - 255px)', aspectRatio: `${CW}/${CH}` }}>
+        <div className="relative" style={{ width: CW, maxWidth: "100%", maxHeight: 'calc(100dvh - 160px)', aspectRatio: `${CW}/${CH}` }}>
           <canvas
             ref={canvasRef}
             width={CW} height={CH}
@@ -725,18 +704,6 @@ const PacmanMathPage = () => {
           <p className="mt-1 text-xs font-body text-center text-white/80 animate-pulse">{flashMsg}</p>
         )}
 
-        {/* Question legend */}
-        {phase === "playing" && (
-          <div className="mt-2 flex gap-2 flex-wrap justify-center">
-            {["#22d3ee","#f472b6","#a3e635","#fb923c"].map((color, i) => (
-              <div key={i} className="flex items-center gap-1 bg-white/10 rounded-lg px-2 py-1">
-                <div className="w-3 h-3 rounded-full" style={{ background: color, boxShadow: `0 0 6px ${color}` }} />
-                <span className="text-white text-[10px] font-mono font-bold">{opts[i]}</span>
-                {i === correctOpt && <span className="text-yellow-400 text-[10px]">★</span>}
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Touch controls */}
         {(phase === "playing" || phase === "dying") && (
