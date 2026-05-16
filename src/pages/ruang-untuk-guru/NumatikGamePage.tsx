@@ -75,7 +75,7 @@ const games = [
     icon: <Crosshair className="w-7 h-7 text-violet-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Zuma Math",
+    label: "Zum Math",
     emoji: "🔮",
     path: "/math-game-arena/umum/zuma-math",
     desc: "Tembak bola ke rantai untuk membuat kluster dan jawab soal!",

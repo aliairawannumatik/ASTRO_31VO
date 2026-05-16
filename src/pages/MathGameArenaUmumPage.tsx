@@ -168,7 +168,7 @@ const games = [
     badge: "BARU",
   },
   {
-    label: "Zuma Math",
+    label: "Zum Math",
     emoji: "🔮",
     path: "/math-game-arena/umum/zuma-math",
     desc: "Tembak bola warna dari meriam! Cocokkan 3+ bola warna yang sama. Warna jawaban benar = BONUS besar!",
