@@ -18,8 +18,8 @@ const CH = OY + ROWS * CELL + 10; // = 30 + 546 + 10 = 586
 const TUNNEL_ROW = 10;
 
 // ── Speed ─────────────────────────────────────────────────────────────────
-const PAC_BASE = 0.10;   // progress units per frame
-const GHOST_BASE = 0.10;
+const PAC_BASE = 0.065;  // progress units per frame
+const GHOST_BASE = 0.065;
 const FRIGHT_DUR = 300;  // frames ghost stays frightened
 
 // ── Maze (21×21): 0=dot 1=wall 2=power 3=empty 4=ghost-zone ──────────────
