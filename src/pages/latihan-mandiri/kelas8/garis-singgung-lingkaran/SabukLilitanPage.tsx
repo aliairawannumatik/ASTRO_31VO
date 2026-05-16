@@ -5,388 +5,383 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { RefreshCw } from "lucide-react";
-import GSLDiagram from "./GSLDiagram";
 
 type Part = { label: string; math?: string; text?: string };
 type Q = {
   n: number; title: string;
-  content?: string; mathContent?: string;
+  content?: string;
   parts?: Part[];
   diagram?: React.ReactNode;
   difficulty?: "Mudah" | "Sedang" | "Sulit";
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
+const BG = "rgba(2,8,23,0.97)";
+const VC = "#a78bfa";
+
+/* ─── helpers ─────────────────────────────────────────── */
+
+function externalTangentPoints(
+  x1: number, y1: number,
+  x2: number, y2: number,
+  r: number,
+  side: 1 | -1
+): [number, number, number, number] {
+  const dx = x2 - x1, dy = y2 - y1;
+  const len = Math.sqrt(dx * dx + dy * dy);
+  const nx = -dy / len * side, ny = dx / len * side;
+  return [x1 + nx * r, y1 + ny * r, x2 + nx * r, y2 + ny * r];
+}
+
+function arcPath(cx: number, cy: number, r: number, startAngle: number, endAngle: number, clockwise = true) {
+  const s = clockwise ? 1 : 0;
+  const sa = startAngle * Math.PI / 180;
+  const ea = endAngle * Math.PI / 180;
+  const x1 = cx + r * Math.cos(sa), y1 = cy + r * Math.sin(sa);
+  const x2 = cx + r * Math.cos(ea), y2 = cy + r * Math.sin(ea);
+  let dAngle = clockwise ? (endAngle - startAngle + 360) % 360 : (startAngle - endAngle + 360) % 360;
+  const large = dAngle > 180 ? 1 : 0;
+  return `M ${x1} ${y1} A ${r} ${r} 0 ${large} ${s} ${x2} ${y2}`;
+}
+
+/* ─── SVG Components ───────────────────────────────────── */
+
+const DuaKaleng = ({ r = 40, size = 220 }: { r?: number; size?: number }) => {
+  const gap = r * 2;
+  const cx1 = size / 2 - gap / 2;
+  const cx2 = size / 2 + gap / 2;
+  const cy = size / 2;
+  const beltColor = "#facc15";
+  const circleColor = VC;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <rect width={size} height={size} fill={BG} rx="12" />
+      <line x1={cx1} y1={cy - r} x2={cx2} y2={cy - r} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <line x1={cx1} y1={cy + r} x2={cx2} y2={cy + r} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <path d={`M ${cx1} ${cy - r} A ${r} ${r} 0 1 0 ${cx1} ${cy + r}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      <path d={`M ${cx2} ${cy - r} A ${r} ${r} 0 1 1 ${cx2} ${cy + r}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      <circle cx={cx1} cy={cy} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="2" />
+      <circle cx={cx2} cy={cy} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="2" />
+      <circle cx={cx1} cy={cy} r={3.5} fill={circleColor} stroke="white" strokeWidth="1" />
+      <circle cx={cx2} cy={cy} r={3.5} fill={circleColor} stroke="white" strokeWidth="1" />
+      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
+      <text x={cx1 - 6} y={cy + 16} fill="#94a3b8" fontSize="11" fontWeight="bold" fontFamily="serif">O₁</text>
+      <text x={cx2 - 6} y={cy + 16} fill="#94a3b8" fontSize="11" fontWeight="bold" fontFamily="serif">O₂</text>
+      <text x={(cx1 + cx2) / 2 - 6} y={cy + 12} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">d</text>
+      <text x={cx1 - 14} y={cy - r / 2} fill={circleColor} fontSize="9" fontFamily="sans-serif">r</text>
+    </svg>
+  );
+};
+
+const BarisanLingkaran = ({ n, r = 28, size = 280 }: { n: number; r?: number; size?: number }) => {
+  const margin = r + 12;
+  const totalW = 2 * r * n;
+  const vw = 2 * margin + totalW;
+  const vh = 2 * r + 48;
+  const cy = vh / 2;
+  const centers = Array.from({ length: n }, (_, i) => margin + r + i * 2 * r);
+  const cx0 = centers[0], cxN = centers[n - 1];
+  const beltColor = "#facc15";
+  const circleColor = VC;
+  return (
+    <svg width={size} height={size * vh / vw} viewBox={`0 0 ${vw} ${vh}`}>
+      <rect width={vw} height={vh} fill={BG} rx="12" />
+      <line x1={cx0} y1={cy - r} x2={cxN} y2={cy - r} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <line x1={cx0} y1={cy + r} x2={cxN} y2={cy + r} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <path d={`M ${cx0} ${cy - r} A ${r} ${r} 0 1 0 ${cx0} ${cy + r}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      <path d={`M ${cxN} ${cy - r} A ${r} ${r} 0 1 1 ${cxN} ${cy + r}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      {centers.map((cx, i) => (
+        <g key={i}>
+          <circle cx={cx} cy={cy} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="1.8" />
+          <circle cx={cx} cy={cy} r={3} fill={circleColor} stroke="white" strokeWidth="0.8" />
+          {i < n - 1 && <line x1={cx} y1={cy} x2={cx + 2 * r} y2={cy} stroke="#94a3b8" strokeWidth="1" strokeDasharray="3,2" />}
+        </g>
+      ))}
+      <text x={cx0 - 8} y={cy + r + 14} fill="#94a3b8" fontSize="10" fontFamily="serif">O₁</text>
+      <text x={cxN - 8} y={cy + r + 14} fill="#94a3b8" fontSize="10" fontFamily="serif">O{n}</text>
+    </svg>
+  );
+};
+
+const SegitigaLingkaran = ({ r = 40, size = 240 }: { r?: number; size?: number }) => {
+  const h = r * Math.sqrt(3);
+  const cx = size / 2;
+  const cy = size / 2 + r * 0.2;
+  const c1 = { x: cx - r, y: cy + h / 3 };
+  const c2 = { x: cx + r, y: cy + h / 3 };
+  const c3 = { x: cx, y: cy - 2 * h / 3 };
+  const circles = [c1, c2, c3];
+  const beltColor = "#facc15";
+  const circleColor = VC;
+  const segments: [number, number, number, number, string][] = [];
+  const arcs: { cx: number; cy: number; start: number; end: number }[] = [];
+  const pairs = [[0, 1], [1, 2], [2, 0]] as const;
+  pairs.forEach(([i, j]) => {
+    const a = circles[i], b = circles[j];
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    const nx = -dy / (2 * r), ny = dx / (2 * r);
+    const tx1 = a.x + nx * r, ty1 = a.y + ny * r;
+    const tx2 = b.x + nx * r, ty2 = b.y + ny * r;
+    segments.push([tx1, ty1, tx2, ty2, `${angle}`]);
+  });
+  const arcAngles = [
+    { cx: c1.x, cy: c1.y, start: 210, end: 330 },
+    { cx: c2.x, cy: c2.y, start: 330, end: 90 },
+    { cx: c3.x, cy: c3.y, start: 90, end: 210 },
+  ];
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <rect width={size} height={size} fill={BG} rx="12" />
+      {segments.map(([x1, y1, x2, y2], i) => (
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      ))}
+      {arcAngles.map((a, i) => (
+        <path key={i} d={arcPath(a.cx, a.cy, r, a.start, a.end, true)}
+          fill="none" stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      ))}
+      {circles.map((c, i) => (
+        <g key={i}>
+          <circle cx={c.x} cy={c.y} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="1.8" />
+          <circle cx={c.x} cy={c.y} r={3} fill={circleColor} stroke="white" strokeWidth="0.8" />
+        </g>
+      ))}
+      <text x={c1.x - 12} y={c1.y + 16} fill="#94a3b8" fontSize="10" fontFamily="serif">O₁</text>
+      <text x={c2.x + 4} y={c2.y + 16} fill="#94a3b8" fontSize="10" fontFamily="serif">O₂</text>
+      <text x={c3.x - 6} y={c3.y - 8} fill="#94a3b8" fontSize="10" fontFamily="serif">O₃</text>
+    </svg>
+  );
+};
+
+const GridLingkaran = ({ cols, rows, r = 26, size = 280 }: { cols: number; rows: number; r?: number; size?: number }) => {
+  const margin = r + 10;
+  const vw = 2 * margin + cols * 2 * r;
+  const vh = 2 * margin + rows * 2 * r;
+  const beltColor = "#facc15";
+  const circleColor = VC;
+  const centers: { x: number; y: number }[] = [];
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      centers.push({ x: margin + r + col * 2 * r, y: margin + r + row * 2 * r });
+    }
+  }
+  const left = margin, right = margin + cols * 2 * r, top = margin, bottom = margin + rows * 2 * r;
+  const cx0 = margin + r, cxN = margin + r + (cols - 1) * 2 * r;
+  const cy0 = margin + r, cyN = margin + r + (rows - 1) * 2 * r;
+  const scaleX = size / vw, scaleY = size * (vh / vw) / vh;
+  return (
+    <svg width={size} height={size * vh / vw} viewBox={`0 0 ${vw} ${vh}`}>
+      <rect width={vw} height={vh} fill={BG} rx="12" />
+      <line x1={cx0} y1={top - r} x2={cxN} y2={top - r} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <line x1={cx0} y1={bottom + r} x2={cxN} y2={bottom + r} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <line x1={left - r} y1={cy0} x2={left - r} y2={cyN} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <line x1={right + r} y1={cy0} x2={right + r} y2={cyN} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <path d={`M ${left - r} ${cy0} A ${r} ${r} 0 0 1 ${cx0} ${top - r}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      <path d={`M ${cxN} ${top - r} A ${r} ${r} 0 0 1 ${right + r} ${cy0}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      <path d={`M ${right + r} ${cyN} A ${r} ${r} 0 0 1 ${cxN} ${bottom + r}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      <path d={`M ${cx0} ${bottom + r} A ${r} ${r} 0 0 1 ${left - r} ${cyN}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
+      {centers.map((c, i) => (
+        <g key={i}>
+          <circle cx={c.x} cy={c.y} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="1.5" />
+          <circle cx={c.x} cy={c.y} r={2.5} fill={circleColor} />
+        </g>
+      ))}
+    </svg>
+  );
+};
+
+const BowlingLingkaran = ({ r = 26, size = 260 }: { r?: number; size?: number }) => {
+  const rows = [4, 3, 2, 1];
+  const spacing = r * 2;
+  const totalW = 3 * spacing + 2 * r;
+  const totalH = 3 * spacing * (Math.sqrt(3) / 2) + 2 * r;
+  const vw = totalW + 20, vh = totalH + 20;
+  const offsetX = 10 + r;
+  const offsetY = 10 + r;
+  const centers: { x: number; y: number }[] = [];
+  const rowH = spacing * Math.sqrt(3) / 2;
+  rows.forEach((count, rowIdx) => {
+    const y = offsetY + rowIdx * rowH;
+    const startX = offsetX + rowIdx * r;
+    for (let col = 0; col < count; col++) {
+      centers.push({ x: startX + col * spacing, y });
+    }
+  });
+  const beltColor = "#facc15";
+  const circleColor = VC;
+  const corner1 = centers[0];
+  const corner2 = centers[3];
+  const corner3 = centers[9];
+  return (
+    <svg width={size} height={size * vh / vw} viewBox={`0 0 ${vw} ${vh}`}>
+      <rect width={vw} height={vh} fill={BG} rx="12" />
+      {[
+        { from: corner1, to: corner2, side: -1 as const },
+        { from: corner2, to: corner3, side: -1 as const },
+        { from: corner3, to: corner1, side: -1 as const },
+      ].map(({ from, to, side }, i) => {
+        const [x1, y1, x2, y2] = externalTangentPoints(from.x, from.y, to.x, to.y, r, side);
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />;
+      })}
+      {(() => {
+        const corners = [corner1, corner2, corner3];
+        const arcDefs = [
+          { cx: corner1.x, cy: corner1.y, start: 150, end: 270 },
+          { cx: corner2.x, cy: corner2.y, start: 270, end: 30 },
+          { cx: corner3.x, cy: corner3.y, start: 30, end: 150 },
+        ];
+        return arcDefs.map((a, i) => (
+          <path key={i} d={arcPath(a.cx, a.cy, r, a.start, a.end, true)}
+            fill="none" stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+        ));
+      })()}
+      {centers.map((c, i) => (
+        <g key={i}>
+          <circle cx={c.x} cy={c.y} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="1.5" />
+          <circle cx={c.x} cy={c.y} r={2.5} fill={circleColor} />
+        </g>
+      ))}
+      <text x={corner1.x - 12} y={corner1.y + r + 13} fill="#94a3b8" fontSize="10" fontFamily="sans-serif">n=10</text>
+    </svg>
+  );
+};
+
+const DuaPuliSabuk = ({ R = 46, r = 22, size = 280 }: { R?: number; r?: number; size?: number }) => {
+  const cx1 = R + 16, cx2 = size - r - 16;
+  const cy = size / 2;
+  const p = cx2 - cx1;
+  const rDiff = R - r;
+  const sinA = rDiff / p;
+  const cosA = Math.sqrt(Math.max(0, 1 - sinA * sinA));
+  const ax = cx1 + R * sinA, ay = cy - R * cosA;
+  const bx = cx2 + r * sinA, by = cy - r * cosA;
+  const ax2 = cx1 + R * sinA, ay2 = cy + R * cosA;
+  const bx2 = cx2 + r * sinA, by2 = cy + r * cosA;
+  const startAngle1 = Math.atan2(ay - cy, ax - cx1) * 180 / Math.PI;
+  const endAngle1 = Math.atan2(ay2 - cy, ax2 - cx1) * 180 / Math.PI;
+  const startAngle2 = Math.atan2(by - cy, bx - cx2) * 180 / Math.PI;
+  const endAngle2 = Math.atan2(by2 - cy, bx2 - cx2) * 180 / Math.PI;
+  const beltColor = "#facc15";
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <rect width={size} height={size} fill={BG} rx="12" />
+      <line x1={ax} y1={ay} x2={bx} y2={by} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <line x1={ax2} y1={ay2} x2={bx2} y2={by2} stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <path d={arcPath(cx1, cy, R, startAngle1, endAngle1, false)}
+        fill="none" stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <path d={arcPath(cx2, cy, r, startAngle2, endAngle2, true)}
+        fill="none" stroke={beltColor} strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx={cx1} cy={cy} r={R} fill={`${VC}15`} stroke={VC} strokeWidth="2" />
+      <circle cx={cx1} cy={cy} r={R * 0.38} fill={`${VC}25`} stroke={VC} strokeWidth="1.5" />
+      <circle cx={cx2} cy={cy} r={r} fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="2" />
+      <circle cx={cx2} cy={cy} r={r * 0.38} fill="rgba(251,146,60,0.25)" stroke="#fb923c" strokeWidth="1.5" />
+      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
+      <circle cx={cx1} cy={cy} r={3.5} fill={VC} stroke="white" strokeWidth="1" />
+      <text x={cx1 - 8} y={cy + 18} fill={VC} fontSize="11" fontWeight="bold" fontFamily="serif">O₁</text>
+      <circle cx={cx2} cy={cy} r={3.5} fill="#fb923c" stroke="white" strokeWidth="1" />
+      <text x={cx2 - 8} y={cy + 18} fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="serif">O₂</text>
+      <text x={cx1 - 22} y={cy - R / 2} fill={VC} fontSize="10" fontWeight="bold" fontFamily="sans-serif">R</text>
+      <text x={cx2 + 8} y={cy - r / 2} fill="#fb923c" fontSize="10" fontWeight="bold" fontFamily="sans-serif">r</text>
+      <text x={(cx1 + cx2) / 2 - 4} y={cy + 14} fill="#94a3b8" fontSize="10" fontFamily="sans-serif">d</text>
+    </svg>
+  );
+};
+
+/* ─── Questions ────────────────────────────────────────── */
+
 const questions: Q[] = [
-  Qn(1, "Pengertian Sabuk Lilitan", {
+  Qn(1, "Dua Kaleng Berbentuk Lingkaran", {
     difficulty: "Mudah",
-    diagram: <GSLDiagram variant="belt-equal" size={230} />,
-    content: "Sabuk lilitan adalah sabuk atau tali yang melingkari dua atau lebih silinder/lingkaran. Panjang sabuk terdiri dari bagian lurus dan bagian busur.",
+    diagram: <DuaKaleng r={44} size={230} />,
+    content: "Gambar di atas menunjukkan penampang 2 buah tutup kaleng yang berbentuk lingkaran dengan diameter masing-masing 14 cm. Tentukan panjang tali minimal yang diperlukan untuk mengikat kedua tutup kaleng tersebut! (gunakan π = 22/7)",
     parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan 'sabuk lilitan' dalam konteks matematika?" },
-      { label: "b.", text: "Sebutkan dua bagian yang membentuk panjang sabuk lilitan." },
-      { label: "c.", text: "Berikan tiga contoh sabuk lilitan dalam kehidupan nyata." },
+      { label: "a.", math: "r = 7 \\text{ cm},\\quad d = 2r = 14 \\text{ cm (jarak pusat ke pusat)}" },
+      { label: "b.", math: "\\text{Panjang lurus} = 2 \\times d = 2 \\times 14 = 28 \\text{ cm}" },
+      { label: "c.", math: "L_{\\min} = 2d + 2\\pi r = 28 + 2 \\times \\tfrac{22}{7} \\times 7 = 28 + 44 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(2, "Sabuk Lilitan Dua Lingkaran Sama Besar", {
+  Qn(2, "Empat Laher (Bearing) Berjejer", {
     difficulty: "Mudah",
-    diagram: <GSLDiagram variant="belt-equal" size={230} />,
-    mathContent: "L_{sabuk} = 2d + 2\\pi r",
+    diagram: <BarisanLingkaran n={4} r={30} size={280} />,
+    content: "Gambar di atas menunjukkan penampang 4 buah laher (bearing) yang berbentuk lingkaran dengan diameter masing-masing 14 cm, disusun berjejer seperti tampak pada gambar. Berapakah panjang tali minimal yang dibutuhkan untuk mengikat keempat laher tersebut? (π = 22/7)",
     parts: [
-      { label: "a.", text: "Jelaskan arti setiap suku dalam rumus L_sabuk = 2d + 2πr." },
-      { label: "b.", math: "d = \\text{GSPL} = \\sqrt{p^2 - (r - r)^2} = p \\text{ (jika sama besar)}" },
-      { label: "c.", math: "\\text{Jika } r = 7, p = 20: L = 2(20) + 2\\pi(7) = 40 + 14\\pi \\approx \\ldots \\text{ cm}" },
+      { label: "a.", math: "r = 7 \\text{ cm},\\quad \\text{panjang lurus (atas+bawah)} = 2 \\times (n-1) \\times 2r = 2 \\times 3 \\times 14 = 84 \\text{ cm}" },
+      { label: "b.", math: "\\text{Busur (dua setengah lingkaran ujung)} = 2\\pi r = 2 \\times \\tfrac{22}{7} \\times 7 = 44 \\text{ cm}" },
+      { label: "c.", math: "L_{\\min} = 84 + 44 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(3, "Sabuk Luar – Dua Lingkaran Sama Besar", {
-    difficulty: "Mudah",
-    diagram: <GSLDiagram variant="belt-equal" size={230} values={{ r: 45 }} />,
-    content: "Dua lingkaran berjari-jari 10 cm. Jarak antar pusat = 26 cm.",
-    parts: [
-      { label: "a.", math: "d = \\sqrt{26^2 - (10-10)^2} = 26 \\text{ cm (bagian lurus)}" },
-      { label: "b.", math: "L_{busur} = 2\\pi r = 2\\pi \\times 10 = 20\\pi \\text{ cm (setengah lingkaran masing-masing)}" },
-      { label: "c.", math: "L_{sabuk} = 2 \\times 26 + 20\\pi = 52 + 20\\pi \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(4, "Sabuk Luar – Dua Lingkaran Berbeda Besar", {
+  Qn(3, "Tiga Pipa Susunan Segitiga", {
     difficulty: "Sedang",
-    diagram: <GSLDiagram variant="belt-unequal" size={230} />,
-    mathContent: "L_{sabuk} = 2 \\times d_{GSPL} + \\pi(R + r) + 2(R - r)\\arcsin\\!\\left(\\frac{R-r}{p}\\right)",
+    diagram: <SegitigaLingkaran r={44} size={230} />,
+    content: "Tiga buah pipa yang berpenampang lingkaran dengan diameter masing-masing 14 cm disusun membentuk segitiga sama sisi seperti tampak pada gambar. Tentukan panjang tali minimal yang dibutuhkan untuk mengikat ketiga pipa tersebut! (π = 22/7)",
     parts: [
-      { label: "a.", text: "Untuk pendekatan, jika sudut kecil, gunakan: L ≈ 2 × GSPL + π(R + r)." },
-      { label: "b.", math: "\\text{Jika } R = 8, r = 4, p = 20:\\ d_{GSPL} = \\sqrt{20^2 - 4^2} = \\sqrt{384}" },
-      { label: "c.", math: "L \\approx 2\\sqrt{384} + \\pi(8+4) = 2\\sqrt{384} + 12\\pi \\approx \\ldots \\text{ cm}" },
+      { label: "a.", math: "r = 7 \\text{ cm},\\quad \\text{jarak pusat ke pusat} = 2r = 14 \\text{ cm}" },
+      { label: "b.", math: "\\text{Panjang lurus} = 3 \\times 14 = 42 \\text{ cm}" },
+      { label: "c.", math: "\\text{Busur total} = 2\\pi r = 44 \\text{ cm} \\Rightarrow L_{\\min} = 42 + 44 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(5, "Sabuk Lilitan – Dua Lingkaran Sama, Soal UN", {
-    difficulty: "Mudah",
-    content: "Dua silinder berjari-jari 7 cm diikat dengan pita. Jarak antar pusat = 30 cm.",
-    parts: [
-      { label: "a.", math: "d = 30 \\text{ cm (bagian lurus, karena R = r)}" },
-      { label: "b.", math: "L_{busur} = 2\\pi r = 2 \\times \\frac{22}{7} \\times 7 = 44 \\text{ cm}" },
-      { label: "c.", math: "L_{sabuk} = 2 \\times 30 + 44 = 60 + 44 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(6, "Sabuk Lilitan – Tiga Lingkaran Sama Besar", {
+  Qn(4, "Delapan Pipa Paralon Susunan Persegi Panjang", {
     difficulty: "Sedang",
-    content: "Tiga silinder berjari-jari 7 cm, masing-masing bersinggungan dengan yang lain, diikat sabuk. Jarak antar pusat = 2r = 14 cm.",
+    diagram: <GridLingkaran cols={4} rows={2} r={26} size={280} />,
+    content: "Gambar di atas menampilkan penampang 8 buah pipa paralon yang masing-masing berdiameter 14 cm, disusun dalam 2 baris dan 4 kolom. Tentukan panjang tali minimal yang diperlukan untuk mengikat seluruh pipa paralon dengan susunan tersebut! (π = 22/7)",
     parts: [
-      { label: "a.", text: "Berapa panjang bagian lurus sabuk? Ada berapa bagian lurus?" },
-      { label: "b.", math: "\\text{Bagian lurus}: 3 \\times d = 3 \\times 14 = 42 \\text{ cm}" },
-      { label: "c.", math: "\\text{Busur total} = 2\\pi r = 2\\pi \\times 7 = 14\\pi \\approx 44 \\text{ cm}" },
+      { label: "a.", math: "r = 7 \\text{ cm},\\quad \\text{lurus atas+bawah} = 2 \\times 3 \\times 14 = 84 \\text{ cm}" },
+      { label: "b.", math: "\\text{lurus kiri+kanan} = 2 \\times 1 \\times 14 = 28 \\text{ cm}" },
+      { label: "c.", math: "\\text{Busur sudut (1 lingkaran penuh)} = 2\\pi r = 44 \\text{ cm} \\Rightarrow L_{\\min} = 84 + 28 + 44 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(7, "Sabuk Lilitan – Soal Cerita (Kaleng)", {
-    difficulty: "Mudah",
-    content: "Tiga kaleng susu berjari-jari 3 cm diikat jadi satu. Tata letak: tiga lingkaran sama besar bersinggungan dua-dua.",
-    parts: [
-      { label: "a.", math: "\\text{Jarak antar pusat} = 2r = 6 \\text{ cm}" },
-      { label: "b.", math: "\\text{Panjang lurus} = 3 \\times 6 = 18 \\text{ cm}" },
-      { label: "c.", math: "\\text{Total sabuk} = 18 + 2\\pi \\times 3 = 18 + 6\\pi \\approx 18 + 18{,}85 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(8, "Sabuk Lilitan – Panjang Minimum", {
+  Qn(5, "Sepuluh Laher Susunan Segitiga (Piramida)", {
     difficulty: "Sedang",
-    diagram: <GSLDiagram variant="belt-equal" size={230} values={{ r: 40 }} />,
-    content: "Dua silinder berjari-jari 14 cm. Jarak antar pusat = 50 cm. Hitung panjang sabuk minimum.",
+    diagram: <BowlingLingkaran r={26} size={260} />,
+    content: "Sepuluh buah laher (bearing) yang berpenampang lingkaran dengan jari-jari masing-masing 7 cm disusun membentuk susunan segitiga seperti formasi bola bowling (1-2-3-4) seperti gambar. Hitunglah panjang tali minimal yang diperlukan untuk mengikat kesepuluh laher tersebut! (π = 22/7)",
     parts: [
-      { label: "a.", math: "d = 50 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2\\pi r = 2 \\times \\frac{22}{7} \\times 14 = 88 \\text{ cm}" },
-      { label: "c.", math: "L_{min} = 2 \\times 50 + 88 = 100 + 88 = \\ldots \\text{ cm}" },
+      { label: "a.", math: "r = 7 \\text{ cm},\\quad \\text{tiap sisi segitiga (4 laher): } (4-1) \\times 2r = 3 \\times 14 = 42 \\text{ cm}" },
+      { label: "b.", math: "\\text{Panjang lurus total} = 3 \\times 42 = 126 \\text{ cm}" },
+      { label: "c.", math: "\\text{Busur total} = 2\\pi r = 44 \\text{ cm} \\Rightarrow L_{\\min} = 126 + 44 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(9, "Sabuk Lilitan – Soal Cerita (Ban)", {
-    difficulty: "Mudah",
-    content: "Dua ban berjari-jari 21 cm dihubungkan rantai. Jarak pusat = 60 cm. Hitung panjang rantai minimum (π = 22/7).",
-    parts: [
-      { label: "a.", math: "\\text{Bagian lurus} = 2 \\times 60 = 120 \\text{ cm}" },
-      { label: "b.", math: "\\text{Busur total} = 2\\pi r = 2 \\times \\frac{22}{7} \\times 21 = 132 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 120 + 132 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(10, "Sabuk Luar – Dua Lingkaran Beda Jari-Jari", {
+  Qn(6, "Membandingkan Dua Formasi Susunan", {
     difficulty: "Sedang",
-    diagram: <GSLDiagram variant="belt-unequal" size={230} values={{ r1: 50, r2: 30 }} />,
-    content: "Dua silinder berjari-jari R = 10 cm dan r = 6 cm. Jarak pusat p = 20 cm.",
+    content: "Enam buah paralon yang masing-masing berdiameter 14 cm akan disusun dalam dua formasi yang berbeda:\n(A) 1 baris, 6 paralon berjejer lurus.\n(B) 2 baris, 3 paralon per baris (susunan 2 × 3).\nHitunglah panjang tali minimal untuk masing-masing formasi, kemudian tentukan formasi mana yang menggunakan tali paling sedikit!",
     parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{20^2 - (10-6)^2} = \\sqrt{400-16} = \\sqrt{384} = 8\\sqrt{6}" },
-      { label: "b.", math: "L_{lurus} = 2 \\times 8\\sqrt{6} = 16\\sqrt{6} \\approx 39{,}2 \\text{ cm}" },
-      { label: "c.", math: "L_{approx} \\approx 16\\sqrt{6} + \\pi(10+6) \\approx 39{,}2 + 50{,}3 = \\ldots \\text{ cm}" },
+      { label: "A.", math: "L_A = 2 \\times (5 \\times 14) + 2\\pi(7) = 140 + 44 = 184 \\text{ cm}" },
+      { label: "B.", math: "L_B = [2 \\times 2 \\times 14 + 2 \\times 1 \\times 14] + 44 = [56+28]+44 = 128 \\text{ cm}" },
+      { label: "∴", text: "Formasi B (2 × 3) menggunakan tali lebih pendek 56 cm dibanding Formasi A." },
     ],
   }),
-  Qn(11, "Sabuk Lilitan – Hitung Bagian Busur", {
+  Qn(7, "Dua Belas Kaleng Susu Susunan 3 × 4", {
     difficulty: "Sedang",
-    content: "Dua roda berjari-jari sama 14 cm. Jarak pusat 30 cm. Hitung panjang busur yang dilalui sabuk.",
+    diagram: <GridLingkaran cols={4} rows={3} r={22} size={280} />,
+    content: "Dua belas buah kaleng susu yang berpenampang lingkaran dengan diameter masing-masing 14 cm disusun dalam 3 baris dan 4 kolom seperti gambar di atas. Hitunglah panjang tali minimal yang digunakan untuk mengikat seluruh kaleng susu tersebut! (π = 22/7)",
     parts: [
-      { label: "a.", text: "Pada dua lingkaran sama besar, sabuk menyentuh setengah lingkaran di masing-masing sisi." },
-      { label: "b.", math: "\\text{Busur tiap roda} = \\pi r = \\frac{22}{7} \\times 14 = 44 \\text{ cm}" },
-      { label: "c.", math: "\\text{Total busur} = 2 \\times 44 = 88 \\text{ cm}" },
+      { label: "a.", math: "\\text{Lurus atas+bawah} = 2 \\times (4-1) \\times 14 = 2 \\times 42 = 84 \\text{ cm}" },
+      { label: "b.", math: "\\text{Lurus kiri+kanan} = 2 \\times (3-1) \\times 14 = 2 \\times 28 = 56 \\text{ cm}" },
+      { label: "c.", math: "\\text{Busur} = 2\\pi r = 44 \\text{ cm} \\Rightarrow L_{\\min} = 84 + 56 + 44 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(12, "Sabuk Lilitan – Soal UN Style", {
-    difficulty: "Mudah",
-    content: "Dua drum minyak berjari-jari 28 cm diikat pita. Jarak antar pusat = 80 cm. Hitung panjang pita (π = 22/7).",
-    parts: [
-      { label: "a.", math: "\\text{Bagian lurus} = 2 \\times 80 = 160 \\text{ cm}" },
-      { label: "b.", math: "\\text{Busur} = 2\\pi r = 2 \\times \\frac{22}{7} \\times 28 = 176 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 160 + 176 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(13, "Sabuk Lilitan – Tiga Silinder Berjejer", {
-    difficulty: "Sedang",
-    content: "Tiga silinder berjari-jari 7 cm berjejer (tidak segitiga). Jarak pusat berturutan = 14 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Bagian lurus} = 2 \\times 14 + 14 = 3 \\times 14 = 42 \\text{ (sisi atas dan bawah)}" },
-      { label: "b.", text: "Perhatikan: ada 2 busur setengah lingkaran di kiri dan kanan, dan 2 busur di tengah yang tidak ada." },
-      { label: "c.", math: "L_{total} = 42 \\times 2 + 2\\pi \\times 7 = 84 + 14\\pi \\approx 84 + 44 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(14, "Sabuk Lilitan – Soal Cerita (Logistik)", {
-    difficulty: "Sedang",
-    content: "Empat drum berjari-jari 21 cm disusun bujursangkar (2×2). Jarak pusat = 42 cm. Sabuk melingkari semuanya.",
-    parts: [
-      { label: "a.", math: "\\text{Bagian lurus} = 4 \\times 42 = 168 \\text{ cm}" },
-      { label: "b.", math: "\\text{Busur total} = 2\\pi r = 2 \\times \\frac{22}{7} \\times 21 = 132 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 168 + 132 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(15, "Sabuk Lilitan – Mencari Jarak Pusat", {
-    difficulty: "Sedang",
-    content: "Panjang sabuk dua silinder sama besar (r = 7) adalah 100 cm. Hitung jarak antar pusat (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L = 2d + 2\\pi r \\Rightarrow 100 = 2d + 2 \\times \\frac{22}{7} \\times 7 = 2d + 44" },
-      { label: "b.", math: "2d = 100 - 44 = 56 \\Rightarrow d = 28 \\text{ cm}" },
-      { label: "c.", text: "Berapa jarak antar tepi luar kedua silinder (bukan pusat ke pusat)?" },
-    ],
-  }),
-  Qn(16, "Sabuk Lilitan – Mencari Jari-Jari", {
-    difficulty: "Sedang",
-    content: "Panjang sabuk dua silinder sama besar adalah 120 cm. Jarak pusat = 25 cm (π = 22/7).",
-    parts: [
-      { label: "a.", math: "120 = 2(25) + 2\\pi r = 50 + 2\\pi r" },
-      { label: "b.", math: "2\\pi r = 70 \\Rightarrow r = \\frac{70}{2\\pi} = \\frac{35}{\\pi} = \\frac{35 \\times 7}{22} = \\frac{245}{22} = 11{,}14 \\text{ cm}" },
-      { label: "c.", text: "Dibulatkan menjadi r ≈ ... cm." },
-    ],
-  }),
-  Qn(17, "Sabuk Lilitan – Dua Puli Mesin", {
-    difficulty: "Sedang",
-    content: "Dua puli mesin berjari-jari 15 cm dan 5 cm. Jarak pusat = 25 cm. Sabuk luar.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{25^2 - (15-5)^2} = \\sqrt{625 - 100} = \\sqrt{525} = 5\\sqrt{21}" },
-      { label: "b.", math: "\\text{Panjang lurus} = 2 \\times 5\\sqrt{21} = 10\\sqrt{21} \\approx 45{,}8 \\text{ cm}" },
-      { label: "c.", math: "\\text{Perkiraan total sabuk} \\approx 10\\sqrt{21} + \\pi(15+5) \\approx 45{,}8 + 62{,}8 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(18, "Sabuk Lilitan – Soal TKA", {
+  Qn(8, "Panjang Rantai Penghubung Dua Gir", {
     difficulty: "Sulit",
-    content: "Dua lingkaran berjari-jari sama r = 6 cm. Sabuk melingkari keduanya tanpa menyilang. Tentukan panjang sabuk jika p = 10 cm.",
+    diagram: <DuaPuliSabuk R={52} r={26} size={280} />,
+    content: "Gir belakang dan gir depan sebuah sepeda motor dihubungkan dengan rantai yang melilit pada kedua gir. Jari-jari gir besar (O₁) adalah R = 21 cm dan jari-jari gir kecil (O₂) adalah r = 7 cm. Jarak kedua pusat gir adalah 50 cm, dan sudut ∠LO₁N = 160° (sudut busur pada gir besar yang tidak terkena rantai). Hitunglah perkiraan panjang rantai yang menghubungkan kedua gir tersebut! (π = 22/7)",
     parts: [
-      { label: "a.", math: "L_{lurus} = 2p = 2 \\times 10 = 20 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2\\pi r = 12\\pi \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 20 + 12\\pi \\approx 20 + 37{,}7 = \\ldots \\text{ cm}" },
+      { label: "a.", math: "d_{\\text{lurus}} = \\sqrt{50^2 - (21-7)^2} = \\sqrt{2500-196} = \\sqrt{2304} = 48 \\text{ cm}" },
+      { label: "b.", math: "\\text{Busur gir besar} (360°{-}160°{=}200°) = \\tfrac{200}{360} \\times 2\\pi \\times 21 = \\tfrac{5}{9} \\times 44 \\times 3 = \\tfrac{660}{9} \\approx 73{,}3 \\text{ cm}" },
+      { label: "c.", math: "\\text{Busur gir kecil} (160°) = \\tfrac{160}{360} \\times 2\\pi \\times 7 = \\tfrac{4}{9} \\times 44 = \\tfrac{176}{9} \\approx 19{,}6 \\text{ cm} \\Rightarrow L = 2(48) + 73{,}3 + 19{,}6 \\approx \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(19, "Sabuk Lilitan – Mesin Pabrik", {
-    difficulty: "Mudah",
-    content: "Mesin pabrik menggunakan sabuk yang melingkari dua roda berjari-jari 35 cm masing-masing. Jarak pusat = 1 m = 100 cm. Hitung panjang sabuk (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 100 = 200 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2 \\times \\frac{22}{7} \\times 35 = 220 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 200 + 220 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(20, "Sabuk Lilitan – Panjang Total Dalam Meter", {
-    difficulty: "Mudah",
-    content: "Dua roda dengan r = 42 cm. Jarak pusat = 140 cm. Hitung panjang sabuk dalam meter (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 140 = 280 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2 \\times \\frac{22}{7} \\times 42 = 264 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 280 + 264 = 544 \\text{ cm} = \\ldots \\text{ m}" },
-    ],
-  }),
-  Qn(21, "Sabuk Lilitan – Konversi Satuan", {
-    difficulty: "Mudah",
-    content: "Panjang sabuk = 2(p) + 2πr. Diketahui r = 7 dm dan p = 24 dm.",
-    parts: [
-      { label: "a.", math: "L = 2(24) + 2\\pi(7) = 48 + 14\\pi" },
-      { label: "b.", math: "L \\approx 48 + 14 \\times 3{,}14 = 48 + 43{,}96 = \\ldots \\text{ dm}" },
-      { label: "c.", text: "Konversi ke cm: L = ... cm." },
-    ],
-  }),
-  Qn(22, "Sabuk Lilitan – Perbandingan", {
-    difficulty: "Sedang",
-    content: "Dua konfigurasi sabuk:\n① r = 7, p = 20\n② r = 14, p = 20",
-    parts: [
-      { label: "a.", math: "L_1 = 2(20) + 2\\pi(7) = 40 + 14\\pi" },
-      { label: "b.", math: "L_2 = 2(20) + 2\\pi(14) = 40 + 28\\pi" },
-      { label: "c.", math: "L_2 - L_1 = 14\\pi \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(23, "Sabuk Lilitan – Soal UN Cerita", {
-    difficulty: "Mudah",
-    content: "Pak Ahmad memiliki dua pipa berjari-jari 21 cm yang hendak diikat pita. Jarak pusat antar pipa = 70 cm. Berapa panjang pita minimum yang dibutuhkan? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 70 = 140 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2\\pi r = 2 \\times \\frac{22}{7} \\times 21 = 132 \\text{ cm}" },
-      { label: "c.", math: "L_{min} = 140 + 132 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(24, "Sabuk Lilitan – Tiga Roda Segitiga", {
-    difficulty: "Sedang",
-    content: "Tiga roda berjari-jari 7 cm, bersinggungan berpasangan. Sabuk melingkari ketiganya membentuk sisi segitiga sama sisi.",
-    parts: [
-      { label: "a.", math: "\\text{Jarak pusat-ke-pusat} = 2r = 14 \\text{ cm}" },
-      { label: "b.", math: "\\text{Bagian lurus} = 3 \\times 14 = 42 \\text{ cm}" },
-      { label: "c.", math: "\\text{Busur total} = \\frac{360^\\circ - 3 \\times 60^\\circ}{360^\\circ} \\times 2\\pi r \\times 3 = \\frac{180^\\circ}{360^\\circ} \\times 6\\pi r = 3\\pi r = 21\\pi \\approx \\ldots" },
-    ],
-  }),
-  Qn(25, "Sabuk Lilitan – Menentukan Jumlah Pita", {
-    difficulty: "Sedang",
-    content: "Sebuah toko dijual pita dengan harga Rp500/cm. Pita digunakan untuk mengikat 2 silinder r = 21 cm, jarak pusat = 80 cm.",
-    parts: [
-      { label: "a.", math: "L_{sabuk} = 2(80) + 2\\pi(21) = 160 + 42\\pi \\approx 160 + 132 = 292 \\text{ cm}" },
-      { label: "b.", text: "Berapa biaya pembelian pita?" },
-      { label: "c.", text: "Jika pita dijual per rol 3 meter, berapa rol yang harus dibeli?" },
-    ],
-  }),
-  Qn(26, "Sabuk Lilitan – Soal Pecahan", {
-    difficulty: "Sedang",
-    content: "Dua silinder r = 3,5 cm. Jarak pusat = 15 cm. Hitung panjang sabuk (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 15 = 30 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2 \\times \\frac{22}{7} \\times 3{,}5 = 22 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 30 + 22 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(27, "Sabuk Lilitan – Soal ANBK", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari 10 cm dihubungkan sabuk. Jika panjang sabuk = 100 cm, hitung jarak antar pusat (π = 3,14).",
-    parts: [
-      { label: "a.", math: "100 = 2d + 2\\pi(10) = 2d + 62{,}8" },
-      { label: "b.", math: "2d = 100 - 62{,}8 = 37{,}2 \\Rightarrow d = 18{,}6 \\text{ cm}" },
-      { label: "c.", text: "Berapa jarak tepi luar lingkaran pertama ke tepi luar lingkaran kedua?" },
-    ],
-  }),
-  Qn(28, "Sabuk Lilitan – Soal Cerita Kilang", {
-    difficulty: "Mudah",
-    content: "Di kilang minyak, dua tangki silinder berjari-jari 7 m ditempatkan bersebelahan. Jarak pusat = 20 m. Kawat pengaman melingkari kedua tangki. Hitung panjang kawat (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 20 = 40 \\text{ m}" },
-      { label: "b.", math: "L_{busur} = 2 \\times \\frac{22}{7} \\times 7 = 44 \\text{ m}" },
-      { label: "c.", math: "L_{total} = 40 + 44 = \\ldots \\text{ m}" },
-    ],
-  }),
-  Qn(29, "Sabuk Lilitan – Dua Roda Beda Besar", {
+  Qn(9, "Panjang Sabuk Karet Kompresor", {
     difficulty: "Sulit",
-    diagram: <GSLDiagram variant="belt-unequal" size={230} values={{ r1: 50, r2: 25 }} />,
-    content: "Dua roda berjari-jari R = 15 cm dan r = 5 cm. Jarak pusat = 20 cm. Sabuk luar.",
+    diagram: <DuaPuliSabuk R={46} r={23} size={280} />,
+    content: "Roda penggerak dan kipas sebuah kompresor berbentuk lingkaran yang dihubungkan oleh sabuk karet (sun belt). Jari-jari roda besar adalah R = 28 cm dan jari-jari roda kecil adalah r = 7 cm, sedangkan jarak kedua pusatnya adalah 35 cm. Hitunglah panjang sabuk karet yang menghubungkan kedua komponen kompresor tersebut! (gunakan pendekatan L ≈ 2×GSPL + π(R + r), π = 22/7)",
     parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{20^2 - (15-5)^2} = \\sqrt{400-100} = \\sqrt{300} = 10\\sqrt{3}" },
-      { label: "b.", math: "L_{approx} \\approx 2 \\times 10\\sqrt{3} + \\pi(15+5) = 20\\sqrt{3} + 20\\pi" },
-      { label: "c.", math: "L \\approx 20 \\times 1{,}732 + 20 \\times 3{,}14 = 34{,}64 + 62{,}8 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(30, "Sabuk Lilitan – Perbandingan Tiga Konfigurasi", {
-    difficulty: "Sedang",
-    content: "Hitung panjang sabuk untuk r = 7, π = 22/7 dengan jarak pusat yang berbeda:",
-    parts: [
-      { label: "a.", math: "p = 20 \\Rightarrow L = 2(20) + 2\\pi(7) = 40 + 44 = 84 \\text{ cm}" },
-      { label: "b.", math: "p = 30 \\Rightarrow L = 2(30) + 44 = 104 \\text{ cm}" },
-      { label: "c.", text: "Jika p bertambah 10 cm, sabuk bertambah berapa cm?" },
-    ],
-  }),
-  Qn(31, "Sabuk Lilitan – Soal TKA Lanjut", {
-    difficulty: "Sulit",
-    content: "Sabuk melingkari dua silinder sama besar (r = 5 cm). Panjang sabuk 80 cm. Tentukan jarak pusat.",
-    parts: [
-      { label: "a.", math: "80 = 2d + 2\\pi(5) = 2d + 10\\pi" },
-      { label: "b.", math: "2d = 80 - 10\\pi \\Rightarrow d = 40 - 5\\pi \\approx 40 - 15{,}7 = 24{,}3 \\text{ cm}" },
-      { label: "c.", text: "Apakah jarak ini berarti kedua silinder bersinggungan? (cek: apakah d > 2r?)" },
-    ],
-  }),
-  Qn(32, "Sabuk Lilitan – Soal Pilihan UN", {
-    difficulty: "Mudah",
-    content: "Dua kaleng susu r = 7 cm. Jarak pusat = 14 cm + 2r = 28 cm? (Ternyata jarak pusat = 28 cm).",
-    parts: [
-      { label: "a.", math: "L = 2(28) + 2\\pi(7) = 56 + 14\\pi" },
-      { label: "b.", math: "L = 56 + 14 \\times \\frac{22}{7} = 56 + 44 = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Bandingkan dengan r = 7, p = 14: L = 2(14) + 14π = 28 + 44 = 72 cm. Mana yang lebih panjang?" },
-    ],
-  }),
-  Qn(33, "Sabuk Lilitan – Soal Cerita Mesin Pres", {
-    difficulty: "Sedang",
-    content: "Mesin pres menggunakan sabuk yang melingkari tiga silinder berjari-jari 10 cm berjejer lurus. Jarak pusat berdekatan = 30 cm.",
-    parts: [
-      { label: "a.", math: "\\text{Bagian lurus} = 2 \\times 2 \\times 30 = 120 \\text{ cm (atas dan bawah, dua celah)}" },
-      { label: "b.", math: "\\text{Busur} = 2\\pi r = 2\\pi \\times 10 = 20\\pi \\approx 62{,}8 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 120 + 20\\pi \\approx 120 + 62{,}8 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(34, "Sabuk Lilitan – Soal ANBK Terapan", {
-    difficulty: "Sedang",
-    content: "Petani ingin mengikat 2 tong berjari-jari 42 cm menggunakan kawat. Jarak antar pusat = 2 m = 200 cm. Hitung panjang kawat (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 200 = 400 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2 \\times \\frac{22}{7} \\times 42 = 264 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 400 + 264 = \\ldots \\text{ cm} = \\ldots \\text{ m}" },
-    ],
-  }),
-  Qn(35, "Sabuk Lilitan – Soal Variabel", {
-    difficulty: "Sulit",
-    content: "Dua lingkaran berjari-jari r. Sabuk melingkari keduanya. Jika panjang sabuk = 6πr, hitung jarak pusat.",
-    parts: [
-      { label: "a.", math: "L = 2d + 2\\pi r = 6\\pi r \\Rightarrow 2d = 6\\pi r - 2\\pi r = 4\\pi r" },
-      { label: "b.", math: "d = 2\\pi r" },
-      { label: "c.", math: "\\text{Jika } r = 7: d = 14\\pi \\approx 44 \\text{ cm}" },
-    ],
-  }),
-  Qn(36, "Sabuk Lilitan – Soal Cerita (Industri)", {
-    difficulty: "Sedang",
-    content: "Industri tekstil menggunakan mesin dengan dua rol berjari-jari 35 cm masing-masing. Jarak pusat = 105 cm. Hitung panjang sabuk (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 105 = 210 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2 \\times \\frac{22}{7} \\times 35 = 220 \\text{ cm}" },
-      { label: "c.", math: "L_{total} = 210 + 220 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(37, "Sabuk Lilitan – Soal Perbandingan Konfigurasi", {
-    difficulty: "Sulit",
-    content: "Dua konfigurasi:\n① Sabuk melingkari 2 silinder r=7, p=20\n② Sabuk melingkari 3 silinder r=7, p=14 (berjejer).\nMana yang memerlukan sabuk lebih panjang?",
-    parts: [
-      { label: "a.", math: "L_1 = 2(20) + 2\\pi(7) = 40 + 14\\pi" },
-      { label: "b.", math: "L_2 = 2(2 \\times 14) + 2\\pi(7) = 56 + 14\\pi" },
-      { label: "c.", text: "Selisih sabuk = L₂ − L₁ = 56 − 40 = 16 cm (busur sama karena r sama)." },
-    ],
-  }),
-  Qn(38, "Sabuk Lilitan – Mencari Jumlah Lingkaran", {
-    difficulty: "Sulit",
-    content: "Sabuk melingkari n silinder berjari-jari r = 7, berjejer lurus dengan jarak pusat berdekatan = 14 cm. Panjang sabuk = 154 cm.",
-    parts: [
-      { label: "a.", math: "L = 2(n-1) \\times 14 + 2\\pi r = 28(n-1) + 14\\pi" },
-      { label: "b.", math: "154 = 28(n-1) + 44 \\Rightarrow 28(n-1) = 110 \\Rightarrow n-1 = \\ldots" },
-      { label: "c.", math: "n = \\ldots \\text{ (jumlah silinder)}" },
-    ],
-  }),
-  Qn(39, "Sabuk Lilitan – Soal UN Final", {
-    difficulty: "Mudah",
-    content: "Dua tong berjari-jari 21 cm diikat pita. Jarak pusat = 62 cm. Hitung panjang pita minimum (π = 22/7).",
-    parts: [
-      { label: "a.", math: "L_{lurus} = 2 \\times 62 = 124 \\text{ cm}" },
-      { label: "b.", math: "L_{busur} = 2 \\times \\frac{22}{7} \\times 21 = 132 \\text{ cm}" },
-      { label: "c.", math: "L_{min} = 124 + 132 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(40, "Sabuk Lilitan – Soal TKA Gabungan", {
-    difficulty: "Sulit",
-    diagram: <GSLDiagram variant="belt-unequal" size={230} values={{ r1: 55, r2: 30 }} />,
-    content: "Dua puli berjari-jari R = 20 cm dan r = 10 cm. Jarak pusat = 50 cm. Sabuk luar melingkari keduanya.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{50^2 - (20-10)^2} = \\sqrt{2500 - 100} = \\sqrt{2400} = 20\\sqrt{6} \\approx 48{,}99 \\text{ cm}" },
-      { label: "b.", math: "\\sin \\alpha = \\frac{R-r}{p} = \\frac{10}{50} = 0{,}2 \\Rightarrow \\alpha \\approx 11{,}5^\\circ" },
-      { label: "c.", math: "L_{approx} \\approx 2 \\times 20\\sqrt{6} + \\pi(R+r) = 40\\sqrt{6} + 30\\pi \\approx 97{,}98 + 94{,}25 = \\ldots \\text{ cm}" },
+      { label: "a.", math: "\\text{GSPL} = \\sqrt{35^2 - (28-7)^2} = \\sqrt{1225 - 441} = \\sqrt{784} = 28 \\text{ cm}" },
+      { label: "b.", math: "\\pi(R+r) = \\tfrac{22}{7} \\times (28+7) = \\tfrac{22}{7} \\times 35 = 110 \\text{ cm}" },
+      { label: "c.", math: "L \\approx 2 \\times 28 + 110 = 56 + 110 = \\ldots \\text{ cm}" },
     ],
   }),
 ];
+
+/* ─── Page ─────────────────────────────────────────────── */
 
 const diffColor: Record<string, string> = {
   Mudah: "bg-violet-500/20 text-violet-300 border-violet-400/40",
@@ -411,37 +406,53 @@ const SabukLilitanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 9 Soal</span>
             <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className="text-white/50 text-xs">Terapan Nyata</span>
           </div>
         </div>
 
         <div className="mb-5 bg-violet-900/20 border border-violet-500/20 rounded-xl p-4">
-          <p className="text-violet-300 text-xs font-bold mb-2">📌 Rumus Panjang Sabuk Lilitan</p>
-          <div className="grid grid-cols-1 gap-2 text-xs">
+          <p className="text-violet-300 text-xs font-bold mb-2">📌 Rumus Panjang Sabuk Lilitan Minimal</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="bg-white/5 rounded-lg px-3 py-2">
-              <p className="text-violet-300 font-bold mb-1">Dua lingkaran sama besar (R = r):</p>
-              <div className="flex justify-center"><BlockMath math="L = 2p + 2\\pi r" /></div>
+              <p className="text-violet-300 text-[10px] font-bold mb-1">n lingkaran sama besar (berjejer):</p>
+              <div className="flex justify-center">
+                <BlockMath math="L = 2(n-1)(2r) + 2\pi r" />
+              </div>
             </div>
             <div className="bg-white/5 rounded-lg px-3 py-2">
-              <p className="text-violet-300 font-bold mb-1">Dua lingkaran berbeda (pendekatan):</p>
-              <div className="flex justify-center"><BlockMath math="L \\approx 2 \\times d_{GSPL} + \\pi(R + r)" /></div>
+              <p className="text-violet-300 text-[10px] font-bold mb-1">Susunan grid m × n:</p>
+              <div className="flex justify-center">
+                <BlockMath math="L = 2(n{-}1)(2r) + 2(m{-}1)(2r) + 2\pi r" />
+              </div>
             </div>
-            <div className="bg-white/5 rounded-lg px-3 py-2 flex gap-2">
-              <span className="text-violet-400 font-bold shrink-0">Ingat:</span>
-              <span className="text-white/60">p = jarak antar pusat, d = panjang bagian lurus</span>
+            <div className="bg-white/5 rounded-lg px-3 py-2">
+              <p className="text-violet-300 text-[10px] font-bold mb-1">Susunan segitiga sama sisi:</p>
+              <div className="flex justify-center">
+                <BlockMath math="L = 3(2r) + 2\pi r" />
+              </div>
             </div>
+            <div className="bg-white/5 rounded-lg px-3 py-2">
+              <p className="text-violet-300 text-[10px] font-bold mb-1">Dua lingkaran berbeda (pendekatan):</p>
+              <div className="flex justify-center">
+                <BlockMath math="L \approx 2\,d_{\text{GSPL}} + \pi(R+r)" />
+              </div>
+            </div>
+          </div>
+          <div className="mt-2 bg-white/5 rounded-lg px-3 py-2 text-xs text-white/60 font-body">
+            <span className="text-violet-300 font-bold">Kunci: </span>
+            Panjang tali = Bagian lurus + Bagian busur. Busur total untuk semua susunan simetris selalu = 2πr (satu keliling penuh).
           </div>
         </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
+              style={{ animationDelay: `${i * 0.05}s` }}>
               <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-slate-900/80 to-purple-900/30 backdrop-blur" />
               <div className="absolute inset-0 border border-violet-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-violet-400 to-purple-500 rounded-l-2xl" />
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-violet-400 to-fuchsia-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-violet-500/20 border border-violet-400/50 flex items-center justify-center shrink-0">
@@ -459,17 +470,12 @@ const SabukLilitanPage = () => {
                       )}
                     </div>
                     {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
-                    {q.mathContent && (
-                      <div className="mb-3 bg-violet-500/10 border border-violet-500/20 rounded-lg px-4 py-2 flex justify-center">
-                        <BlockMath math={q.mathContent} />
-                      </div>
-                    )}
                     {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
-                            {p.label && <span className="text-violet-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
+                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                            <span className="text-violet-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                             {p.math
                               ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
                               : <p className="font-body text-sm text-white/80">{p.text}</p>
