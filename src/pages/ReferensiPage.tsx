@@ -27,6 +27,7 @@ const internetRefs = [
   { label: "M4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", url: "https://m4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", akses: "November 2025" },
   { label: "Pixabay.com/id/sound-effects/", url: "https://pixabay.com/id/sound-effects/", akses: "April 2026" },
   { label: "Pngtree.com/freepng/3d-sun-full-view_16171547.html", url: "https://pngtree.com/freepng/3d-sun-full-view_16171547.html", akses: "12 Maret 2026" },
+  { label: "Pusmendik.kemendikdasmen.go.id/tka/", url: "https://pusmendik.kemendikdasmen.go.id/tka/", akses: "Mei 2026" },
   { label: "Wahyu. 2014. Siap OSN Olimpiade Sains Nasional Matematika SMP 2015. Situbondo : E-book", url: null, akses: "Maret 2026" },
   { label: "Youtube.com/watch?v=PXT5uJP1WwE", url: "https://www.youtube.com/watch?v=PXT5uJP1WwE", akses: "Maret 2026", author: "Nurahman, F.", title: "TEMPLATE GAME INTERAKTIF POWERPOINT #4" },
   { label: "youtube.com/channel/UCC5UkJ8cooLJT5yWRd_naUg", url: "https://www.youtube.com/channel/UCC5UkJ8cooLJT5yWRd_naUg", akses: "Mei 2026", author: "Wandri Math.", title: "MATEMATIKA KELAS 7 - 8 - 9." },
