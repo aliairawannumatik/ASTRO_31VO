@@ -622,12 +622,6 @@ const ZumaMathPage = () => {
       rimG.addColorStop(0, "rgba(255,255,255,0.18)"); rimG.addColorStop(1, "rgba(255,255,255,0)");
       ctx.fillStyle = rimG;
       ctx.beginPath(); ctx.arc(bx, by, BALL_R, 0, Math.PI*2); ctx.fill();
-      // Number
-      ctx.font = "bold 10px monospace"; ctx.textAlign = "center";
-      ctx.shadowBlur = 6; ctx.shadowColor = "rgba(0,0,0,1)";
-      ctx.fillStyle = "#ffffff";
-      ctx.fillText(String(optsRef.current[b.color]), bx, by + 3.5);
-      ctx.shadowBlur = 0;
       ctx.restore();
     }
 
@@ -702,11 +696,6 @@ const ZumaMathPage = () => {
       ctx.beginPath(); ctx.arc(pr.x, pr.y, BALL_R, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = "rgba(255,255,255,0.96)";
       ctx.beginPath(); ctx.arc(pr.x - BALL_R*0.20, pr.y - BALL_R*0.28, 2.2, 0, Math.PI*2); ctx.fill();
-      // Number
-      ctx.font = "bold 10px monospace"; ctx.textAlign = "center";
-      ctx.shadowBlur = 6; ctx.shadowColor = "rgba(0,0,0,1)";
-      ctx.fillStyle = "#fff";
-      ctx.fillText(String(optsRef.current[pr.color]), pr.x, pr.y + 3.5);
       ctx.restore();
     }
 
@@ -763,10 +752,6 @@ const ZumaMathPage = () => {
       ctx.fillStyle = nbGrad;
       ctx.beginPath(); ctx.arc(0, 15, 6, 0, Math.PI*2); ctx.fill();
       ctx.shadowBlur = 0;
-      ctx.font = "bold 6px monospace"; ctx.textAlign = "center";
-      ctx.fillStyle = "#fff"; ctx.shadowColor = "#000"; ctx.shadowBlur = 3;
-      ctx.fillText(String(optsRef.current[nc]), 0, 17.5);
-      ctx.shadowBlur = 0;
       // Current ball
       const cc = currentColorRef.current;
       ctx.shadowColor = C_GLOW[cc]; ctx.shadowBlur = 18;
@@ -786,10 +771,6 @@ const ZumaMathPage = () => {
       ctx.beginPath(); ctx.arc(0, -2, 11, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = "rgba(255,255,255,0.96)";
       ctx.beginPath(); ctx.arc(-2.5, -4.5, 1.8, 0, Math.PI*2); ctx.fill();
-      ctx.font = "bold 8px monospace"; ctx.textAlign = "center";
-      ctx.shadowBlur = 5; ctx.shadowColor = "#000";
-      ctx.fillStyle = "#fff"; ctx.fillText(String(optsRef.current[cc]), 0, 1.5);
-      ctx.shadowBlur = 0;
       // Barrel
       ctx.rotate(angle);
       ctx.shadowColor = "#00ffcc"; ctx.shadowBlur = 18;
