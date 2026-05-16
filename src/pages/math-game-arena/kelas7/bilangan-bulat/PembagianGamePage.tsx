@@ -98,6 +98,24 @@ import { useNavigate } from "react-router-dom";
       to: "#a855f7",
       glow: "rgba(249,115,22,0.4)",
     },
+    {
+      name: "Zum Math",
+      emoji: "🔮",
+      description: "Klik gelembung jawaban yang benar sebelum menyentuh bawah layar!",
+      path: "/math-game-arena/kelas-7/bilangan-bulat/pembagian/zum-math",
+      from: "#a855f7",
+      to: "#6366f1",
+      glow: "rgba(168,85,247,0.4)",
+    },
+    {
+      name: "Pac Math",
+      emoji: "👾",
+      description: "Gerakkan Pac-Man, makan semua titik, hindari hantu! Soal muncul tiap 25 detik.",
+      path: "/math-game-arena/kelas-7/bilangan-bulat/pembagian/pac-math",
+      from: "#eab308",
+      to: "#f97316",
+      glow: "rgba(234,179,8,0.4)",
+    },
   ];
 
   const PembagianGamePage = () => {

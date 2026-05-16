@@ -624,6 +624,18 @@ const PerkalianGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game
 const PembagianGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianGalaksiTempurGamePage"));
 const OperasiCampuranGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranGalaksiTempurGamePage"));
 const KPKFPBGalaksiTempurGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBGalaksiTempurGamePage"));
+const PenjumlahanZumMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanZumMathGamePage"));
+const PenguranganZumMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganZumMathGamePage"));
+const PerkalianZumMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianZumMathGamePage"));
+const PembagianZumMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianZumMathGamePage"));
+const OperasiCampuranZumMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranZumMathGamePage"));
+const KPKFPBZumMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBZumMathGamePage"));
+const PenjumlahanPacMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenjumlahanPacMathGamePage"));
+const PenguranganPacMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganPacMathGamePage"));
+const PerkalianPacMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianPacMathGamePage"));
+const PembagianPacMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/PembagianPacMathGamePage"));
+const OperasiCampuranPacMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranPacMathGamePage"));
+const KPKFPBPacMathGameMGAK7Page = lazy(() => import("./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBPacMathGamePage"));
 
 // MGA - Kelas 8 Topic Pages
 const PolaBilanganMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/PolaBilanganPage"));
@@ -1405,6 +1417,18 @@ const AppInner = () => {
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/galaksi-tempur" element={<PembagianGalaksiTempurGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/galaksi-tempur" element={<OperasiCampuranGalaksiTempurGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/galaksi-tempur" element={<KPKFPBGalaksiTempurGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/zum-math" element={<PenjumlahanZumMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/zum-math" element={<PenguranganZumMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/zum-math" element={<PerkalianZumMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/zum-math" element={<PembagianZumMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/zum-math" element={<OperasiCampuranZumMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/zum-math" element={<KPKFPBZumMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan/pac-math" element={<PenjumlahanPacMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan/pac-math" element={<PenguranganPacMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian/pac-math" element={<PerkalianPacMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian/pac-math" element={<PembagianPacMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran/pac-math" element={<OperasiCampuranPacMathGameMGAK7Page />} />
+          <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb/pac-math" element={<KPKFPBPacMathGameMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
           <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />
