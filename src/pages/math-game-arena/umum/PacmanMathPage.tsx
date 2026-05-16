@@ -18,7 +18,7 @@ const CH = OY + ROWS * CELL + 10; // = 30 + 546 + 10 = 586
 const TUNNEL_ROW = 10;
 
 // ── Speed ─────────────────────────────────────────────────────────────────
-const PAC_BASE = 0.16;   // progress units per frame
+const PAC_BASE = 0.10;   // progress units per frame
 const GHOST_BASE = 0.10;
 const FRIGHT_DUR = 300;  // frames ghost stays frightened
 
