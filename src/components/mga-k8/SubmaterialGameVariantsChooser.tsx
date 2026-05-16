@@ -99,6 +99,24 @@ const VARIANTS: GameVariant[] = [
     to: "#a855f7",
     glow: "rgba(249,115,22,0.4)",
   },
+  {
+    name: "Zum Math",
+    emoji: "🔮",
+    description: "Klik gelembung jawaban yang benar sebelum jatuh! Soal materi muncul setiap 25 detik.",
+    variantSlug: "zum-math",
+    from: "#7c3aed",
+    to: "#ec4899",
+    glow: "rgba(124,58,237,0.5)",
+  },
+  {
+    name: "Pac Math",
+    emoji: "👾",
+    description: "Makan semua titik dan hindari hantu! Jawab soal materi setiap 25 detik untuk poin bonus.",
+    variantSlug: "pac-math",
+    from: "#f59e0b",
+    to: "#ef4444",
+    glow: "rgba(245,158,11,0.5)",
+  },
 ];
 
 const SubmaterialGameVariantsChooserK8 = () => {

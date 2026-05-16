@@ -8,6 +8,8 @@ import TetrisGamePage from "@/pages/math-game-arena/umum/TetrisGamePage";
 import SnakeMathPage from "@/pages/math-game-arena/umum/SnakeMathPage";
 import BrickBreakerPage from "@/pages/math-game-arena/umum/BrickBreakerPage";
 import GalaksiTempurPage from "@/pages/math-game-arena/umum/GalaksiTempurPage";
+import ZumMathPage from "@/pages/math-game-arena/umum/ZumMathPage";
+import PacMathPage from "@/pages/math-game-arena/umum/PacMathPage";
 import { getSubmaterial } from "@/data/mga-k7/registry";
 
 const SubmaterialGameDispatcher = () => {
@@ -124,6 +126,24 @@ const SubmaterialGameDispatcher = () => {
     case "meteor-pantul":
       return (
         <BrickBreakerPage
+          topicLabel={topicLabel}
+          backPath={backPath}
+          homePath={homePath}
+          quizQuestions={q.snake}
+        />
+      );
+    case "zum-math":
+      return (
+        <ZumMathPage
+          topicLabel={topicLabel}
+          backPath={backPath}
+          homePath={homePath}
+          quizQuestions={q.snake}
+        />
+      );
+    case "pac-math":
+      return (
+        <PacMathPage
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
