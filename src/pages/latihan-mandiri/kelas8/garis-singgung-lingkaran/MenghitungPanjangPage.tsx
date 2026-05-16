@@ -5,12 +5,177 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Ruler } from "lucide-react";
-import GSLDiagram from "./GSLDiagram";
+
+const SvgSatu = () => (
+  <svg width="240" height="180" viewBox="0 0 240 180">
+    <circle cx="90" cy="122" r="65" fill="none" stroke="#a78bfa" strokeWidth="2"/>
+    <circle cx="90" cy="122" r="3" fill="white"/>
+    <circle cx="124" cy="70" r="3" fill="#fb923c"/>
+    <circle cx="225" cy="122" r="3" fill="#fb923c"/>
+    <line x1="225" y1="122" x2="124" y2="70" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="90" y1="122" x2="124" y2="70" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="90" y1="122" x2="225" y2="122" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
+    <path d="M131,80 L127,87 L120,83" fill="none" stroke="white" strokeWidth="1.3"/>
+    <text x="77" y="142" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="114" y="60" fill="#fb923c" fontSize="13" fontWeight="bold">A</text>
+    <text x="228" y="120" fill="#fb923c" fontSize="13" fontWeight="bold">P</text>
+    <text x="93" y="90" fill="#c4b5fd" fontSize="10">OA = 15 cm</text>
+    <text x="148" y="115" fill="#e2e8f0" fontSize="10">OP = 39 cm</text>
+  </svg>
+);
+
+const SvgDua = () => (
+  <svg width="240" height="180" viewBox="0 0 240 180">
+    <circle cx="163" cy="112" r="60" fill="none" stroke="#34d399" strokeWidth="2"/>
+    <circle cx="163" cy="112" r="3" fill="white"/>
+    <circle cx="130" cy="60" r="3" fill="#fb923c"/>
+    <circle cx="25" cy="112" r="3" fill="#fbbf24"/>
+    <line x1="25" y1="112" x2="130" y2="60" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="163" y1="112" x2="130" y2="60" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="25" y1="112" x2="163" y2="112" stroke="#34d399" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
+    <path d="M124,68 L118,64 L121,57" fill="none" stroke="white" strokeWidth="1.3"/>
+    <text x="149" y="132" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="130" y="52" fill="#fb923c" fontSize="13" fontWeight="bold">A</text>
+    <text x="11" y="110" fill="#fbbf24" fontSize="13" fontWeight="bold">K</text>
+    <text x="130" y="92" fill="#34d399" fontSize="10">OA = 30 cm</text>
+    <text x="44" y="78" fill="#e2e8f0" fontSize="10">KA = 40 cm</text>
+    <text x="70" y="124" fill="#e2e8f0" fontSize="10">KO = ?</text>
+  </svg>
+);
+
+const SvgTiga = () => (
+  <svg width="245" height="195" viewBox="0 0 245 195">
+    <circle cx="133" cy="78" r="65" fill="none" stroke="#7c3aed" strokeWidth="2"/>
+    <polygon points="46,143 133,143 133,78 70,78" fill="rgba(124,58,237,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
+    <circle cx="46" cy="143" r="3" fill="#fb923c"/>
+    <circle cx="133" cy="143" r="3" fill="#fb923c"/>
+    <circle cx="133" cy="78" r="3" fill="white"/>
+    <circle cx="70" cy="78" r="3" fill="#fb923c"/>
+    <path d="M125,143 L125,135 L133,135" fill="none" stroke="white" strokeWidth="1.3"/>
+    <line x1="46" y1="143" x2="133" y2="78" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" opacity="0.7"/>
+    <text x="30" y="158" fill="#fb923c" fontSize="13" fontWeight="bold">E</text>
+    <text x="136" y="160" fill="#fb923c" fontSize="13" fontWeight="bold">C</text>
+    <text x="136" y="74" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="54" y="72" fill="#fb923c" fontSize="13" fontWeight="bold">D</text>
+    <text x="72" y="158" fill="#e2e8f0" fontSize="10">EC = 16 cm</text>
+    <text x="75" y="71" fill="#e2e8f0" fontSize="10">OD = 12 cm</text>
+    <text x="138" y="114" fill="#c4b5fd" fontSize="10">OC=12</text>
+    <text x="18" y="106" fill="#a78bfa" fontSize="12" fontStyle="italic">//</text>
+    <text x="99" y="66" fill="#a78bfa" fontSize="12" fontStyle="italic">//</text>
+  </svg>
+);
+
+const SvgEmpat = () => (
+  <svg width="240" height="200" viewBox="0 0 240 200">
+    <circle cx="178" cy="100" r="58" fill="none" stroke="#f472b6" strokeWidth="2"/>
+    <circle cx="178" cy="100" r="3" fill="white"/>
+    <circle cx="153" cy="44" r="3" fill="#fb923c"/>
+    <circle cx="153" cy="156" r="3" fill="#fb923c"/>
+    <circle cx="28" cy="100" r="3" fill="#fbbf24"/>
+    <line x1="28" y1="100" x2="153" y2="44" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="28" y1="100" x2="153" y2="156" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="178" y1="100" x2="153" y2="44" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="178" y1="100" x2="153" y2="156" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="28" y1="100" x2="178" y2="100" stroke="#f472b6" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
+    <path d="M147,52 L141,47 L147,41" fill="none" stroke="white" strokeWidth="1.3"/>
+    <path d="M147,148 L141,153 L147,159" fill="none" stroke="white" strokeWidth="1.3"/>
+    <text x="14" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">A</text>
+    <text x="182" y="118" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="156" y="38" fill="#fb923c" fontSize="13" fontWeight="bold">B</text>
+    <text x="156" y="172" fill="#fb923c" fontSize="13" fontWeight="bold">C</text>
+    <text x="148" y="86" fill="#f9a8d4" fontSize="10">OB=24</text>
+    <text x="52" y="94" fill="#e2e8f0" fontSize="10">AO = 40 cm</text>
+  </svg>
+);
+
+const SvgLima = () => (
+  <svg width="240" height="200" viewBox="0 0 240 200">
+    <circle cx="162" cy="100" r="52" fill="none" stroke="#0ea5e9" strokeWidth="2"/>
+    <circle cx="162" cy="100" r="3" fill="white"/>
+    <circle cx="139" cy="54" r="3" fill="#fb923c"/>
+    <circle cx="139" cy="146" r="3" fill="#fb923c"/>
+    <circle cx="44" cy="100" r="3" fill="#fbbf24"/>
+    <line x1="44" y1="100" x2="139" y2="54" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="44" y1="100" x2="139" y2="146" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="162" y1="100" x2="139" y2="54" stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="162" y1="100" x2="139" y2="146" stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="44" y1="100" x2="162" y2="100" stroke="#0ea5e9" strokeWidth="1" strokeDasharray="3,3" opacity="0.4"/>
+    <line x1="139" y1="54" x2="139" y2="146" stroke="#7dd3fc" strokeWidth="1.5" strokeDasharray="5,3"/>
+    <path d="M134,62 L129,57 L134,52" fill="none" stroke="white" strokeWidth="1.3"/>
+    <path d="M134,138 L129,143 L134,148" fill="none" stroke="white" strokeWidth="1.3"/>
+    <text x="30" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">P</text>
+    <text x="166" y="118" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="143" y="48" fill="#fb923c" fontSize="13" fontWeight="bold">Q</text>
+    <text x="143" y="160" fill="#fb923c" fontSize="13" fontWeight="bold">R</text>
+    <text x="143" y="104" fill="#7dd3fc" fontSize="10">QR</text>
+    <text x="56" y="96" fill="#e2e8f0" fontSize="10">OP = 25 cm</text>
+    <text x="147" y="80" fill="#38bdf8" fontSize="10">OQ=15</text>
+  </svg>
+);
+
+const SvgEnam = () => (
+  <svg width="250" height="200" viewBox="0 0 250 200">
+    <circle cx="112" cy="100" r="64" fill="none" stroke="#34d399" strokeWidth="2"/>
+    <circle cx="112" cy="100" r="3" fill="white"/>
+    <circle cx="140" cy="44" r="3" fill="#fb923c"/>
+    <circle cx="140" cy="156" r="3" fill="#fb923c"/>
+    <circle cx="228" cy="100" r="3" fill="#fbbf24"/>
+    <line x1="228" y1="100" x2="140" y2="44" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="228" y1="100" x2="140" y2="156" stroke="#fb923c" strokeWidth="1.8"/>
+    <line x1="112" y1="100" x2="140" y2="44" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="112" y1="100" x2="140" y2="156" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <line x1="228" y1="100" x2="112" y2="100" stroke="#34d399" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
+    <line x1="140" y1="44" x2="140" y2="156" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3"/>
+    <path d="M134,52 L128,47 L134,41" fill="none" stroke="white" strokeWidth="1.3"/>
+    <path d="M134,148 L128,153 L134,159" fill="none" stroke="white" strokeWidth="1.3"/>
+    <text x="232" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">K</text>
+    <text x="96" y="120" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="144" y="38" fill="#fb923c" fontSize="13" fontWeight="bold">L</text>
+    <text x="144" y="170" fill="#fb923c" fontSize="13" fontWeight="bold">M</text>
+    <text x="144" y="104" fill="#a78bfa" fontSize="10">LM</text>
+    <text x="158" y="68" fill="#e2e8f0" fontSize="10">KL=40 cm</text>
+    <text x="155" y="118" fill="#e2e8f0" fontSize="10">OK=50 cm</text>
+    <text x="112" y="80" fill="#34d399" fontSize="10">OL=r</text>
+  </svg>
+);
+
+const SvgTujuh = () => {
+  const r1 = 20, r2 = 60;
+  const cx1 = 44, cy = 105;
+  const cx2 = 200, d_svg = cx2 - cx1;
+  const dr = r2 - r1;
+  const sinA = dr / d_svg;
+  const cosA = Math.sqrt(1 - sinA * sinA);
+  const ax = Math.round(cx1 + r1 * sinA);
+  const ay = Math.round(cy - r1 * cosA);
+  const bx = Math.round(cx2 + r2 * sinA);
+  const by = Math.round(cy - r2 * cosA);
+  return (
+    <svg width="250" height="200" viewBox="0 0 250 200">
+      <circle cx={cx1} cy={cy} r={r1} fill="none" stroke="#fbbf24" strokeWidth="2"/>
+      <circle cx={cx1} cy={cy} r="3" fill="white"/>
+      <circle cx={cx2} cy={cy} r={r2} fill="none" stroke="#f97316" strokeWidth="2"/>
+      <circle cx={cx2} cy={cy} r="3" fill="white"/>
+      <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#34d399" strokeWidth="2"/>
+      <line x1={ax} y1={2 * cy - ay} x2={bx} y2={2 * cy - by} stroke="#34d399" strokeWidth="2"/>
+      <circle cx={ax} cy={ay} r="3" fill="#fb923c"/>
+      <circle cx={bx} cy={by} r="3" fill="#fb923c"/>
+      <circle cx={ax} cy={2 * cy - ay} r="3" fill="#fb923c"/>
+      <circle cx={bx} cy={2 * cy - by} r="3" fill="#fb923c"/>
+      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="white" strokeWidth="1" strokeDasharray="4,3" opacity="0.35"/>
+      <text x={ax - 2} y={ay - 7} fill="#fb923c" fontSize="12" fontWeight="bold">A</text>
+      <text x={bx + 4} y={by - 7} fill="#fb923c" fontSize="12" fontWeight="bold">B</text>
+      <text x={cx1 - 6} y={cy + 18} fill="#fbbf24" fontSize="10">r₁=7 cm</text>
+      <text x={cx2 - 14} y={cy + 26} fill="#f97316" fontSize="10">r₂=21 cm</text>
+      <text x="103" y={cy + 12} fill="#e2e8f0" fontSize="10">d = 50 cm</text>
+    </svg>
+  );
+};
 
 type Part = { label: string; math?: string; text?: string };
 type Q = {
   n: number; title: string;
-  content?: string; mathContent?: string;
+  content?: string;
   parts?: Part[];
   diagram?: React.ReactNode;
   difficulty?: "Mudah" | "Sedang" | "Sulit";
@@ -18,369 +183,75 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Rumus Dasar Panjang Garis Singgung", {
+  Qn(1, "Menghitung Panjang Garis Singgung", {
     difficulty: "Mudah",
-    diagram: <GSLDiagram variant="tangent-right-angle" size={220} />,
-    mathContent: "PT = \\sqrt{OP^2 - r^2}",
+    diagram: <SvgSatu />,
+    content: "Perhatikan gambar! AP adalah garis singgung lingkaran berpusat O. Panjang jari-jari OA = 15 cm dan jarak OP = 39 cm. Hitunglah panjang garis singgung AP!",
     parts: [
-      { label: "a.", text: "Sebutkan nama teorema yang digunakan dalam rumus di atas." },
-      { label: "b.", math: "\\text{Jika } OP = 10, r = 6, \\text{ hitung } PT" },
-      { label: "c.", math: "\\text{Jika } OP = 25, r = 7, \\text{ hitung } PT" },
+      { label: "a.", math: "AP^2 = OP^2 - OA^2 = 39^2 - 15^2 = \\ldots" },
+      { label: "b.", math: "AP = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+      { label: "c.", text: "Hitunglah luas segitiga OAP!" },
     ],
   }),
-  Qn(2, "Menghitung PT – Soal Dasar 1", {
+  Qn(2, "Mencari Jarak Titik ke Pusat Lingkaran", {
     difficulty: "Mudah",
-    diagram: <GSLDiagram variant="tangent-right-angle" size={220} color="#34d399" />,
-    content: "Jari-jari lingkaran = 5 cm. Titik P berjarak 13 cm dari pusat O.",
+    diagram: <SvgDua />,
+    content: "Pada gambar di atas, KA adalah garis singgung lingkaran berpusat O dengan A sebagai titik singgung. Panjang KA = 40 cm dan jari-jari OA = 30 cm. Hitunglah panjang KO!",
     parts: [
-      { label: "a.", math: "PT^2 = OP^2 - r^2 = 13^2 - 5^2 = \\ldots" },
-      { label: "b.", math: "PT = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Apakah ini merupakan triple Pythagoras? Sebutkan tripletnya." },
+      { label: "a.", math: "KO^2 = KA^2 + OA^2 = 40^2 + 30^2 = \\ldots" },
+      { label: "b.", math: "KO = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+      { label: "c.", text: "Hitunglah luas segitiga KOA!" },
     ],
   }),
-  Qn(3, "Menghitung PT – Soal Dasar 2", {
-    difficulty: "Mudah",
-    content: "Lingkaran berpusat O berjari-jari 8 cm. Titik P berjarak 17 cm dari O.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{17^2 - 8^2} = \\sqrt{289 - 64} = \\sqrt{\\ldots}" },
-      { label: "b.", math: "PT = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Verifikasi: apakah 8² + 15² = 17²?" },
-    ],
-  }),
-  Qn(4, "Menghitung PT – Soal Dasar 3", {
-    difficulty: "Mudah",
-    content: "Jari-jari lingkaran 24 cm. Jarak pusat ke titik P = 25 cm.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{25^2 - 24^2} = \\sqrt{625 - 576} = \\sqrt{\\ldots} = \\ldots" },
-      { label: "b.", math: "PT = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Sebutkan triple Pythagoras yang digunakan." },
-    ],
-  }),
-  Qn(5, "Mencari Jari-Jari", {
+  Qn(3, "Luas Trapesium dari Garis Singgung", {
     difficulty: "Sedang",
-    content: "Panjang garis singgung dari titik P ke lingkaran O adalah 15 cm. Jarak OP = 17 cm.",
+    diagram: <SvgTiga />,
+    content: "Pada gambar, EF adalah garis singgung lingkaran berpusat O di titik C, dan EF // OD. Panjang EC = 16 cm dan OD = OC = 12 cm. Hitunglah luas trapesium ECOD!",
     parts: [
-      { label: "a.", math: "r^2 = OP^2 - PT^2 = 17^2 - 15^2 = \\ldots" },
-      { label: "b.", math: "r = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Apakah segitiga OTP termasuk segitiga siku-siku istimewa?" },
+      { label: "a.", text: "Sebutkan panjang kedua sisi sejajar trapesium ECOD dan tingginya!" },
+      { label: "b.", math: "EO = \\sqrt{EC^2 + OC^2} = \\sqrt{16^2 + 12^2} = \\ldots \\text{ cm}" },
+      { label: "c.", math: "\\text{Luas} = \\tfrac{1}{2}(EC + OD) \\times OC = \\tfrac{1}{2}(16 + 12) \\times 12 = \\ldots \\text{ cm}^2" },
     ],
   }),
-  Qn(6, "Mencari Jarak OP", {
+  Qn(4, "Dua Garis Singgung dari Titik Luar", {
     difficulty: "Sedang",
-    content: "Jari-jari lingkaran 6 cm. Panjang garis singgung PT = 8 cm.",
+    diagram: <SvgEmpat />,
+    content: "Pada gambar di atas, AB dan AC adalah garis singgung lingkaran berpusat O. Jari-jari OB = OC = 24 cm dan panjang AO = 40 cm. Hitunglah:",
     parts: [
-      { label: "a.", math: "OP = \\sqrt{PT^2 + r^2} = \\sqrt{8^2 + 6^2} = \\sqrt{\\ldots} = \\ldots" },
-      { label: "b.", math: "OP = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Sebutkan triple Pythagoras yang berlaku di sini." },
+      { label: "a.", math: "AB = \\sqrt{AO^2 - OB^2} = \\sqrt{40^2 - 24^2} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "\\text{Luas } \\triangle ABO = \\tfrac{1}{2} \\times OB \\times AB = \\ldots \\text{ cm}^2" },
+      { label: "c.", math: "\\text{Luas layang-layang } ABOC = 2 \\times \\text{Luas } \\triangle ABO = \\ldots \\text{ cm}^2" },
+      { label: "d.", math: "\\text{Tali busur } BC = 2 \\times OB \\times \\sin(\\angle BOA) = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(7, "Panjang Garis Singgung – PT dari Akar", {
-    difficulty: "Mudah",
-    content: "Lingkaran berpusat O berjari-jari 9 cm. P berjarak 15 cm dari O.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{15^2 - 9^2} = \\sqrt{225 - 81} = \\sqrt{144} = \\ldots" },
-      { label: "b.", math: "PT = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Hitung luas segitiga OTP." },
-    ],
-  }),
-  Qn(8, "Garis Singgung – Soal Cerita (Tiang Listrik)", {
+  Qn(5, "Panjang Garis Singgung pada Layang-layang", {
     difficulty: "Sedang",
-    diagram: <GSLDiagram variant="tangent-external-point" size={220} />,
-    content: "Seutas kawat diikat dari tiang ke titik singgung di tanki minyak berbentuk silinder. Radius tanki 3 m, jarak tiang dari pusat tanki 5 m.",
+    diagram: <SvgLima />,
+    content: "Pada gambar, PQ dan PR adalah garis singgung lingkaran berpusat O. Jari-jari OQ = OR = 15 cm dan panjang OP = 25 cm. Hitunglah:",
     parts: [
-      { label: "a.", math: "\\text{Panjang kawat} = \\sqrt{5^2 - 3^2} = \\sqrt{\\ldots} = \\ldots \\text{ m}" },
-      { label: "b.", text: "Apakah kawat tersebut merupakan garis singgung lingkaran? Jelaskan." },
-      { label: "c.", text: "Sudut antara kawat dan jari-jari tanki di titik singgung adalah berapa derajat?" },
+      { label: "a.", math: "PQ = \\sqrt{OP^2 - OQ^2} = \\sqrt{25^2 - 15^2} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "QR = \\frac{2 \\times OQ \\times PQ}{OP} = \\frac{2 \\times 15 \\times \\ldots}{25} = \\ldots \\text{ cm}" },
+      { label: "c.", math: "\\text{Luas layang-layang } OQPR = \\tfrac{1}{2} \\times OP \\times QR = \\ldots \\text{ cm}^2" },
     ],
   }),
-  Qn(9, "Dua Garis Singgung – Panjang Sama", {
-    difficulty: "Mudah",
-    diagram: <GSLDiagram variant="tangent-two" size={220} />,
-    content: "Dari titik P di luar lingkaran O berjari-jari 12 cm, ditarik PA dan PB. OP = 20 cm.",
-    parts: [
-      { label: "a.", math: "PA = \\sqrt{20^2 - 12^2} = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "PB = \\ldots \\text{ cm (mengapa sama dengan PA?)}" },
-      { label: "c.", text: "Hitung keliling segiempat OABP (A dan B adalah titik singgung)." },
-    ],
-  }),
-  Qn(10, "Garis Singgung – UN 2019", {
+  Qn(6, "Jari-jari, Layang-layang, dan Tali Busur", {
     difficulty: "Sedang",
-    content: "Titik P berjarak 26 cm dari pusat lingkaran berjari-jari 10 cm. Garis singgung PT ditarik dari P.",
+    diagram: <SvgEnam />,
+    content: "Pada lingkaran berpusat O, titik K berada di luar lingkaran dengan KL dan KM sebagai garis singgung. Panjang OK = 50 cm dan KL = 40 cm. Hitunglah:",
     parts: [
-      { label: "a.", math: "PT = \\sqrt{26^2 - 10^2} = \\sqrt{676 - 100} = \\sqrt{576} = \\ldots" },
-      { label: "b.", math: "PT = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Tentukan sin, cos, dan tan dari ∠TPO." },
+      { label: "a.", math: "r = OL = \\sqrt{OK^2 - KL^2} = \\sqrt{50^2 - 40^2} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "\\text{Luas layang-layang } LOMK = 2 \\times \\tfrac{1}{2} \\times OL \\times KL = \\ldots \\text{ cm}^2" },
+      { label: "c.", math: "\\text{Tali busur } LM = \\frac{2 \\times OL \\times KL}{OK} = \\frac{2 \\times \\ldots \\times 40}{50} = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(11, "Panjang Garis Singgung – Pecahan", {
-    difficulty: "Sedang",
-    content: "Jari-jari lingkaran 2,4 dm. Titik P berjarak 2,6 dm dari pusat O.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{(2{,}6)^2 - (2{,}4)^2} = \\sqrt{6{,}76 - 5{,}76} = \\sqrt{\\ldots}" },
-      { label: "b.", math: "PT = \\ldots \\text{ dm}" },
-      { label: "c.", text: "Konversi ke cm: PT = ... cm." },
-    ],
-  }),
-  Qn(12, "Luas Segitiga dari Garis Singgung", {
-    difficulty: "Sedang",
-    content: "PT adalah garis singgung lingkaran O. OT = 9 cm, PT = 12 cm.",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{9^2 + 12^2} = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "\\text{Luas } \\triangle OTP = \\frac{1}{2} \\times OT \\times PT = \\frac{1}{2} \\times 9 \\times 12 = \\ldots \\text{ cm}^2" },
-      { label: "c.", text: "Hitung keliling segitiga OTP." },
-    ],
-  }),
-  Qn(13, "Garis Singgung – OP dalam Bentuk Akar", {
-    difficulty: "Sedang",
-    content: "Jari-jari lingkaran r = 5 cm. Titik P berjarak OP = 5√2 cm dari pusat.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{(5\\sqrt{2})^2 - 5^2} = \\sqrt{50 - 25} = \\sqrt{25} = \\ldots" },
-      { label: "b.", math: "PT = \\ldots \\text{ cm}" },
-      { label: "c.", math: "\\angle TOP = \\arctan\\!\\left(\\frac{PT}{OT}\\right) = \\arctan(1) = 45^\\circ" },
-    ],
-  }),
-  Qn(14, "Garis Singgung – Soal Cerita (Menara)", {
-    difficulty: "Sedang",
-    content: "Sebuah tali ditarik dari puncak menara setinggi 20 m ke tanah. Jarak dari dasar menara ke titik tali menyentuh tanah adalah 15 m.",
-    parts: [
-      { label: "a.", math: "\\text{Panjang tali} = \\sqrt{20^2 + 15^2} = \\sqrt{\\ldots} = \\ldots \\text{ m}" },
-      { label: "b.", text: "Apakah ini soal garis singgung? Jelaskan." },
-      { label: "c.", text: "Jika menara dianggap jari-jari, dan tanah garis singgung, di mana pusat lingkarannya?" },
-    ],
-  }),
-  Qn(15, "Mencari r dari PT dan OP", {
-    difficulty: "Sedang",
-    content: "Panjang garis singgung PT = 24 cm. Jarak OP = 25 cm.",
-    parts: [
-      { label: "a.", math: "r^2 = OP^2 - PT^2 = 25^2 - 24^2 = \\ldots" },
-      { label: "b.", math: "r = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Hitung luas lingkaran tersebut." },
-    ],
-  }),
-  Qn(16, "Soal UN – Mencari OP", {
-    difficulty: "Mudah",
-    content: "Garis singgung PT = 7,5 cm. Jari-jari lingkaran 10 cm. Tentukan jarak OP.",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{r^2 + PT^2} = \\sqrt{10^2 + 7{,}5^2} = \\sqrt{\\ldots}" },
-      { label: "b.", math: "OP = \\sqrt{100 + 56{,}25} = \\sqrt{156{,}25} = \\ldots" },
-      { label: "c.", text: "Berapa luas segitiga OTP?" },
-    ],
-  }),
-  Qn(17, "Garis Singgung – Soal ANBK", {
-    difficulty: "Sedang",
-    content: "Lingkaran L₁ berpusat O(0, 0) berjari-jari 5. Titik P(12, 0). Tentukan panjang garis singgung dari P ke L₁.",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{(12-0)^2 + (0-0)^2} = 12" },
-      { label: "b.", math: "PT = \\sqrt{12^2 - 5^2} = \\sqrt{144 - 25} = \\sqrt{119} \\approx \\ldots" },
-      { label: "c.", math: "PT \\approx \\ldots \\text{ cm (2 desimal)}" },
-    ],
-  }),
-  Qn(18, "Garis Singgung – Keliling Segitiga", {
-    difficulty: "Sedang",
-    content: "PT garis singgung dengan OT = 15 cm, OP = 25 cm.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{25^2 - 15^2} = \\sqrt{625 - 225} = \\sqrt{400} = \\ldots" },
-      { label: "b.", text: "Hitung keliling segitiga OTP." },
-      { label: "c.", text: "Hitung luas segitiga OTP." },
-    ],
-  }),
-  Qn(19, "Garis Singgung Berturut-turut", {
+  Qn(7, "Garis Singgung pada Sistem Roda-Sabuk", {
     difficulty: "Sulit",
-    content: "Dari titik P, garis singgung PA ditarik ke lingkaran O berjari-jari r. Diketahui OP = 2r.",
+    diagram: <SvgTujuh />,
+    content: "Dua roda pada sebuah mesin berbentuk lingkaran dengan jari-jari masing-masing 7 cm (roda kecil) dan 21 cm (roda besar). Jarak antara kedua poros = 50 cm. Sebuah sabuk melilit kedua roda pada titik singgung A dan B. Hitunglah:",
     parts: [
-      { label: "a.", math: "PA = \\sqrt{(2r)^2 - r^2} = \\sqrt{4r^2 - r^2} = \\sqrt{3r^2} = r\\sqrt{3}" },
-      { label: "b.", math: "\\angle APO = \\arcsin\\!\\left(\\frac{r}{2r}\\right) = 30^\\circ" },
-      { label: "c.", math: "\\text{Jika } r = 8 \\text{ cm, maka } PA = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(20, "Panjang Garis Singgung – Soal UN Kelas 8", {
-    difficulty: "Mudah",
-    content: "Sebuah lingkaran berjari-jari 6 cm. Dari titik P yang berjarak 10 cm dari pusat, ditarik garis singgung PT.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{10^2 - 6^2} = \\sqrt{100 - 36} = \\sqrt{64} = \\ldots" },
-      { label: "b.", math: "PT = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Hitung sin ∠OPT." },
-    ],
-  }),
-  Qn(21, "Luas Jajargenjang dari Garis Singgung", {
-    difficulty: "Sulit",
-    content: "Dari P di luar lingkaran O, PA dan PB adalah garis singgung. OA = 5 cm, PA = 12 cm.",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{5^2 + 12^2} = \\ldots \\text{ cm}" },
-      { label: "b.", text: "Buktikan segiempat OAPB adalah jajargenjang." },
-      { label: "c.", math: "\\text{Luas } OAPB = 2 \\times \\text{Luas } \\triangle OAP = 2 \\times \\frac{1}{2} \\times 5 \\times 12 = \\ldots \\text{ cm}^2" },
-    ],
-  }),
-  Qn(22, "Soal Cerita – Jangkauan Pandang", {
-    difficulty: "Sedang",
-    content: "Seorang pengamat berdiri di titik P yang berjarak 50 km dari pusat Bumi. Jari-jari Bumi = 6400 km. (Gunakan pendekatan OP = 50 km dari permukaan, sehingga dari pusat = 6450 km.)",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{6450^2 - 6400^2} = \\sqrt{(6450-6400)(6450+6400)}" },
-      { label: "b.", math: "PT = \\sqrt{50 \\times 12850} = \\sqrt{642500} \\approx \\ldots \\text{ km}" },
-      { label: "c.", text: "Apa makna PT dalam konteks ini?" },
-    ],
-  }),
-  Qn(23, "Garis Singgung – Perbandingan", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berpusat O₁ dan O₂ masing-masing berjari-jari 5 cm dan 5 cm. Titik P di luar kedua lingkaran dengan O₁P = 13 cm dan O₂P = 12 cm.",
-    parts: [
-      { label: "a.", math: "PT_1 = \\sqrt{13^2 - 5^2} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "PT_2 = \\sqrt{12^2 - 5^2} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Garis singgung ke lingkaran mana yang lebih panjang? Mengapa?" },
-    ],
-  }),
-  Qn(24, "Garis Singgung dan Koordinat", {
-    difficulty: "Sedang",
-    content: "Lingkaran berpusat O(3, 4) berjari-jari 5. Titik P(9, 4) di luar lingkaran.",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{(9-3)^2 + (4-4)^2} = \\sqrt{36} = 6" },
-      { label: "b.", math: "PT = \\sqrt{6^2 - 5^2} = \\sqrt{36 - 25} = \\sqrt{11} \\approx \\ldots" },
-      { label: "c.", text: "Apakah P berada di luar lingkaran? Buktikan." },
-    ],
-  }),
-  Qn(25, "Garis Singgung Dua Kali – Soal TKA", {
-    difficulty: "Sulit",
-    content: "Dari titik P di luar lingkaran O berjari-jari r, panjang garis singgung PT = r√3. Tentukan jarak OP.",
-    parts: [
-      { label: "a.", math: "OP^2 = PT^2 + r^2 = (r\\sqrt{3})^2 + r^2 = 3r^2 + r^2 = 4r^2" },
-      { label: "b.", math: "OP = \\sqrt{4r^2} = 2r" },
-      { label: "c.", math: "\\angle OPT = \\arctan\\!\\left(\\frac{r}{r\\sqrt{3}}\\right) = \\arctan\\!\\left(\\frac{1}{\\sqrt{3}}\\right) = 30^\\circ" },
-    ],
-  }),
-  Qn(26, "Panjang Garis Singgung – Pilihan Ganda UN", {
-    difficulty: "Mudah",
-    content: "Jika OP = 15 cm dan OT = 9 cm (T titik singgung), maka panjang PT adalah ...",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{15^2 - 9^2}" },
-      { label: "b.", math: "PT = \\sqrt{225 - 81} = \\sqrt{144} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Apakah (9, 12, 15) merupakan triple Pythagoras? Verifikasi." },
-    ],
-  }),
-  Qn(27, "Menentukan r – Dari Perbandingan", {
-    difficulty: "Sulit",
-    content: "Panjang garis singgung dari P adalah 4r/3 (empat pertiga kali jari-jari). Tentukan OP dalam r.",
-    parts: [
-      { label: "a.", math: "PT = \\frac{4r}{3}" },
-      { label: "b.", math: "OP = \\sqrt{r^2 + \\left(\\frac{4r}{3}\\right)^2} = \\sqrt{r^2 + \\frac{16r^2}{9}} = \\sqrt{\\frac{25r^2}{9}} = \\frac{5r}{3}" },
-      { label: "c.", math: "\\sin \\angle OPT = \\frac{r}{OP} = \\frac{r}{5r/3} = \\frac{3}{5}" },
-    ],
-  }),
-  Qn(28, "Aplikasi – Menara Pemancar", {
-    difficulty: "Sedang",
-    content: "Menara pemancar setinggi 40 m berdiri di atas bukit dengan dasar di permukaan tanah. Seseorang di titik P ingin tahu jarak ke pangkal menara. OP = 50 m.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{50^2 - 40^2} = \\sqrt{2500 - 1600} = \\sqrt{900} = \\ldots \\text{ m}" },
-      { label: "b.", text: "Dalam konteks ini, apakah PT adalah garis singgung? Jelaskan." },
-      { label: "c.", text: "Hitung sudut elevasi PT terhadap horisontal." },
-    ],
-  }),
-  Qn(29, "Garis Singgung – Perbandingan Panjang", {
-    difficulty: "Sedang",
-    content: "PT₁ = garis singgung dari P ke lingkaran O₁ (r₁ = 3, O₁P = 5). PT₂ = garis singgung dari P ke lingkaran O₂ (r₂ = 4, O₂P = 5).",
-    parts: [
-      { label: "a.", math: "PT_1 = \\sqrt{5^2 - 3^2} = \\sqrt{16} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "PT_2 = \\sqrt{5^2 - 4^2} = \\sqrt{9} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Perbandingan PT₁ : PT₂ = ...  Jelaskan hubungannya dengan jari-jari." },
-    ],
-  }),
-  Qn(30, "Garis Singgung – Soal Cerita Kolam", {
-    difficulty: "Sedang",
-    content: "Seorang anak berdiri di pinggir lapangan yang jaraknya 24 m dari pusat kolam bundar. Jari-jari kolam = 7 m.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{24^2 - 7^2} = \\sqrt{576 - 49} = \\sqrt{527} \\approx \\ldots \\text{ m}" },
-      { label: "b.", text: "Berapa banyak titik di tepi kolam yang bisa dicapai anak melalui garis singgung?" },
-      { label: "c.", math: "\\text{Sudut antara dua garis singgung} = 2 \\arctan\\!\\left(\\frac{7}{\\sqrt{527}}\\right) \\approx \\ldots ^\\circ" },
-    ],
-  }),
-  Qn(31, "Panjang GSL dari Persamaan", {
-    difficulty: "Sedang",
-    content: "Diketahui lingkaran x² + y² = 25. Titik P(7, 0) di luar lingkaran.",
-    parts: [
-      { label: "a.", math: "r = 5, \\; OP = 7" },
-      { label: "b.", math: "PT = \\sqrt{7^2 - 5^2} = \\sqrt{49 - 25} = \\sqrt{24} = 2\\sqrt{6}" },
-      { label: "c.", math: "PT = 2\\sqrt{6} \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(32, "Mencari PT – Bilangan Bulat", {
-    difficulty: "Mudah",
-    content: "Pilih yang menghasilkan PT bilangan bulat:",
-    parts: [
-      { label: "a.", math: "r = 3, OP = 5 \\Rightarrow PT = \\ldots" },
-      { label: "b.", math: "r = 5, OP = 13 \\Rightarrow PT = \\ldots" },
-      { label: "c.", math: "r = 6, OP = 10 \\Rightarrow PT = \\ldots" },
-    ],
-  }),
-  Qn(33, "Soal Menentukan PT – Variasi", {
-    difficulty: "Sedang",
-    content: "Tentukan panjang garis singgung untuk setiap pasangan (r, OP) berikut:",
-    parts: [
-      { label: "a.", math: "r = 15, \\; OP = 17 \\Rightarrow PT = \\ldots" },
-      { label: "b.", math: "r = 20, \\; OP = 25 \\Rightarrow PT = \\ldots" },
-      { label: "c.", math: "r = 12, \\; OP = 20 \\Rightarrow PT = \\ldots" },
-    ],
-  }),
-  Qn(34, "Garis Singgung – Soal UN", {
-    difficulty: "Sedang",
-    content: "Sebuah lingkaran berjari-jari 10 cm. Dari titik P di luar lingkaran, panjang garis singgung = 24 cm. Tentukan OP.",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{r^2 + PT^2} = \\sqrt{10^2 + 24^2} = \\sqrt{100 + 576} = \\sqrt{676}" },
-      { label: "b.", math: "OP = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Sebutkan triple Pythagoras yang digunakan." },
-    ],
-  }),
-  Qn(35, "Garis Singgung dari Koordinat", {
-    difficulty: "Sedang",
-    content: "Lingkaran berpusat O(0, 0), r = 6. Titik P(8, 6).",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{8^2 + 6^2} = \\sqrt{64 + 36} = \\sqrt{100} = 10" },
-      { label: "b.", math: "PT = \\sqrt{10^2 - 6^2} = \\sqrt{64} = \\ldots" },
-      { label: "c.", text: "Hitung luas segitiga OTP." },
-    ],
-  }),
-  Qn(36, "Panjang GSL – Soal Campuran", {
-    difficulty: "Sulit",
-    content: "Dari titik P, panjang garis singgung ke lingkaran berjari-jari r adalah p. Jika p = 3r, maka OP = ...",
-    parts: [
-      { label: "a.", math: "OP^2 = r^2 + p^2 = r^2 + (3r)^2 = r^2 + 9r^2 = 10r^2" },
-      { label: "b.", math: "OP = r\\sqrt{10}" },
-      { label: "c.", math: "\\text{Jika } r = 5, \\text{ maka } OP = 5\\sqrt{10} \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(37, "Panjang Garis Singgung – ANBK", {
-    difficulty: "Mudah",
-    content: "Diketahui jari-jari lingkaran 10 cm dan OP = 26 cm. Hitung PT.",
-    parts: [
-      { label: "a.", math: "PT = \\sqrt{26^2 - 10^2}" },
-      { label: "b.", math: "PT = \\sqrt{676 - 100} = \\sqrt{576} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Hitung sin ∠POT." },
-    ],
-  }),
-  Qn(38, "Garis Singgung – Variasi Sulit", {
-    difficulty: "Sulit",
-    content: "Dari titik P di luar lingkaran O (r = 4), ditarik garis singgung PA. Titik M adalah titik tengah PA. Jika ∠OPA = 30°, hitung PA dan OM.",
-    parts: [
-      { label: "a.", math: "\\sin 30^\\circ = \\frac{r}{OP} \\Rightarrow OP = \\frac{4}{0{,}5} = 8" },
-      { label: "b.", math: "PA = OP \\cos 30^\\circ = 8 \\times \\frac{\\sqrt{3}}{2} = 4\\sqrt{3}" },
-      { label: "c.", math: "OM = \\sqrt{OA^2 - AM^2} = \\sqrt{4^2 - (2\\sqrt{3})^2} = \\sqrt{16 - 12} = 2" },
-    ],
-  }),
-  Qn(39, "Soal UN – Garis Singgung dan Luas", {
-    difficulty: "Sedang",
-    content: "Garis singgung dari P ke lingkaran berpusat O. OT = 5 cm, PT = 12 cm.",
-    parts: [
-      { label: "a.", math: "OP = \\sqrt{5^2 + 12^2} = \\sqrt{169} = 13 \\text{ cm}" },
-      { label: "b.", math: "\\text{Luas } \\triangle OTP = \\frac{1}{2} \\times 5 \\times 12 = \\ldots \\text{ cm}^2" },
-      { label: "c.", math: "\\text{Keliling } \\triangle OTP = 5 + 12 + 13 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(40, "Soal TKA – Garis Singgung Gabungan", {
-    difficulty: "Sulit",
-    diagram: <GSLDiagram variant="tangent-two" size={220} color="#fb923c" />,
-    content: "Dari P di luar lingkaran O berjari-jari 5 cm, ditarik PA dan PB (keduanya garis singgung). OP = 13 cm. Titik Q adalah perpotongan AB dan OP.",
-    parts: [
-      { label: "a.", math: "PA = PB = \\sqrt{13^2 - 5^2} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "OQ = \\frac{r^2}{OP} = \\frac{25}{13} \\approx \\ldots \\text{ cm (titik tengah tali busur AB)}" },
-      { label: "c.", math: "AB = 2\\sqrt{r^2 - OQ^2} = 2\\sqrt{25 - \\frac{625}{169}} = \\ldots \\text{ cm}" },
+      { label: "a.", math: "AB = \\sqrt{d^2 - (r_2 - r_1)^2} = \\sqrt{50^2 - (21-7)^2} = \\sqrt{2500 - 196} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "\\text{Keliling roda kecil} = 2 \\times \\frac{22}{7} \\times 7 = \\ldots \\text{ cm}" },
+      { label: "c.", math: "\\text{Keliling roda besar} = 2 \\times \\frac{22}{7} \\times 21 = \\ldots \\text{ cm}" },
     ],
   }),
 ];
@@ -408,7 +279,7 @@ const MenghitungPanjangPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 7 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -417,7 +288,7 @@ const MenghitungPanjangPage = () => {
         <div className="mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4">
           <p className="text-orange-300 text-xs font-bold mb-2">📌 Rumus Panjang Garis Singgung dari Titik Luar</p>
           <div className="bg-white/5 rounded-lg px-3 py-3 mb-2 flex justify-center">
-            <BlockMath math="PT = \\sqrt{OP^2 - r^2}" />
+            <BlockMath math="PT = \sqrt{OP^2 - r^2}" />
           </div>
           <div className="grid grid-cols-3 gap-2 text-xs">
             {[
@@ -436,7 +307,7 @@ const MenghitungPanjangPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
+              style={{ animationDelay: `${i * 0.04}s` }}>
               <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-slate-900/80 to-amber-900/30 backdrop-blur" />
               <div className="absolute inset-0 border border-orange-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-orange-400 to-amber-500 rounded-l-2xl" />
@@ -457,17 +328,12 @@ const MenghitungPanjangPage = () => {
                       )}
                     </div>
                     {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
-                    {q.mathContent && (
-                      <div className="mb-3 bg-orange-500/10 border border-orange-500/20 rounded-lg px-4 py-2 flex justify-center">
-                        <BlockMath math={q.mathContent} />
-                      </div>
-                    )}
-                    {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
+                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-2">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
-                            {p.label && <span className="text-orange-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
+                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                            <span className="text-orange-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                             {p.math
                               ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
                               : <p className="font-body text-sm text-white/80">{p.text}</p>
