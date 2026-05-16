@@ -5,7 +5,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { GitCompareArrows } from "lucide-react";
-import GSLDiagram from "./GSLDiagram";
 
 type Part = { label: string; math?: string; text?: string };
 type Q = {
@@ -17,370 +16,284 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
+const C = "#38bdf8";
+const BG = "rgba(2,8,23,0.97)";
+
+const DiagramGSPLDuaLingkaran = ({
+  r1px, r2px, labelP, labelQ, labelA, labelB, labelAB = "AB", labelPA, labelQB, labelPQ,
+  size = 240
+}: {
+  r1px: number; r2px: number; size?: number;
+  labelP?: string; labelQ?: string; labelA?: string; labelB?: string;
+  labelAB?: string; labelPA?: string; labelQB?: string; labelPQ?: string;
+}) => {
+  const cx1 = r1px + 14;
+  const cx2 = size - r2px - 14;
+  const cy = size / 2;
+  const d = cx2 - cx1;
+  const rDiff = r1px - r2px;
+  const sinA = rDiff / d;
+  const cosA = Math.sqrt(Math.max(0, 1 - sinA * sinA));
+  const ax = cx1 + r1px * sinA;
+  const ay = cy - r1px * cosA;
+  const bx = cx2 + r2px * sinA;
+  const by = cy - r2px * cosA;
+  const ax2 = cx1 + r1px * sinA;
+  const ay2 = cy + r1px * cosA;
+  const bx2 = cx2 + r2px * sinA;
+  const by2 = cy + r2px * cosA;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <rect width={size} height={size} fill={BG} rx="12" />
+      <circle cx={cx1} cy={cy} r={r1px} fill="rgba(56,189,248,0.07)" stroke={C} strokeWidth="2" />
+      <circle cx={cx2} cy={cy} r={r2px} fill="rgba(251,146,60,0.07)" stroke="#fb923c" strokeWidth="2" />
+      <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#34d399" strokeWidth="2.2" />
+      <line x1={ax2} y1={ay2} x2={bx2} y2={by2} stroke="#34d399" strokeWidth="2.2" />
+      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
+      <line x1={cx1} y1={cy} x2={ax} y2={ay} stroke="#60a5fa" strokeWidth="1.4" strokeDasharray="3,2" />
+      <line x1={cx2} y1={cy} x2={bx} y2={by} stroke="#fb923c" strokeWidth="1.4" strokeDasharray="3,2" />
+      <rect x={ax - 6} y={ay - 1} width="6" height="6" fill="none" stroke="#facc15" strokeWidth="1.2"
+        transform={`rotate(${Math.atan2(ay - cy, ax - cx1) * 180 / Math.PI + 90}, ${ax}, ${ay})`} />
+      <rect x={bx - 6} y={by - 1} width="6" height="6" fill="none" stroke="#facc15" strokeWidth="1.2"
+        transform={`rotate(${Math.atan2(by - cy, bx - cx2) * 180 / Math.PI + 90}, ${bx}, ${by})`} />
+      <circle cx={cx1} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <text x={cx1 - 8} y={cy + 18} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">{labelP ?? "M"}</text>
+      <circle cx={cx2} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <text x={cx2 - 4} y={cy + 18} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">{labelQ ?? "N"}</text>
+      <circle cx={ax} cy={ay} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <text x={ax - 16} y={ay - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">{labelA ?? "A"}</text>
+      <circle cx={bx} cy={by} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <text x={bx + 5} y={by - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">{labelB ?? "B"}</text>
+      {labelPA && (
+        <text x={cx1 - 22} y={cy - r1px / 2} fill={C} fontSize="10" fontWeight="bold" fontFamily="sans-serif">{labelPA}</text>
+      )}
+      {labelQB && (
+        <text x={cx2 + 7} y={cy - r2px / 2} fill="#fb923c" fontSize="10" fontWeight="bold" fontFamily="sans-serif">{labelQB}</text>
+      )}
+      {labelPQ && (
+        <text x={(cx1 + cx2) / 2 - 12} y={cy + 14} fill="#94a3b8" fontSize="10" fontWeight="bold" fontFamily="sans-serif">{labelPQ}</text>
+      )}
+      <text x={(ax + bx) / 2 - 10} y={(ay + by) / 2 - 9} fill="#34d399" fontSize="10" fontWeight="bold" fontFamily="sans-serif">{labelAB}</text>
+    </svg>
+  );
+};
+
+const DiagramBersinggungLuar = ({ size = 240 }: { size?: number }) => {
+  const r1 = 36;
+  const r2 = 20;
+  const cx1 = 70;
+  const cx2 = cx1 + r1 + r2;
+  const cy = size / 2;
+  const rDiff = r1 - r2;
+  const d = cx2 - cx1;
+  const sinA = rDiff / d;
+  const cosA = Math.sqrt(Math.max(0, 1 - sinA * sinA));
+  const ax = cx1 + r1 * sinA;
+  const ay = cy - r1 * cosA;
+  const bx = cx2 + r2 * sinA;
+  const by = cy - r2 * cosA;
+  const ax2 = cx1 + r1 * sinA;
+  const ay2 = cy + r1 * cosA;
+  const bx2 = cx2 + r2 * sinA;
+  const by2 = cy + r2 * cosA;
+  const tx = cx1 + r1;
+  const ty = cy;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <rect width={size} height={size} fill={BG} rx="12" />
+      <circle cx={cx1} cy={cy} r={r1} fill="rgba(56,189,248,0.07)" stroke={C} strokeWidth="2" />
+      <circle cx={cx2} cy={cy} r={r2} fill="rgba(251,146,60,0.07)" stroke="#fb923c" strokeWidth="2" />
+      <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#34d399" strokeWidth="2.2" />
+      <line x1={ax2} y1={ay2} x2={bx2} y2={by2} stroke="#34d399" strokeWidth="2.2" />
+      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
+      <circle cx={tx} cy={ty} r={3} fill="#facc15" stroke="white" strokeWidth="1" />
+      <text x={tx - 4} y={ty + 16} fill="#facc15" fontSize="9" fontFamily="sans-serif">titik singgung</text>
+      <circle cx={cx1} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <text x={cx1 - 8} y={cy + 17} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">P</text>
+      <circle cx={cx2} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <text x={cx2 - 4} y={cy + 17} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">Q</text>
+      <circle cx={ax} cy={ay} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <text x={ax - 16} y={ay - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">A</text>
+      <circle cx={bx} cy={by} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <text x={bx + 5} y={by - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">B</text>
+      <line x1={cx1} y1={cy} x2={ax} y2={ay} stroke="#60a5fa" strokeWidth="1.3" strokeDasharray="3,2" />
+      <line x1={cx2} y1={cy} x2={bx} y2={by} stroke="#fb923c" strokeWidth="1.3" strokeDasharray="3,2" />
+      <text x={cx1 - 26} y={cy - r1 / 2} fill={C} fontSize="10" fontWeight="bold" fontFamily="sans-serif">AP</text>
+      <text x={cx2 + 7} y={cy - r2 / 2} fill="#fb923c" fontSize="10" fontWeight="bold" fontFamily="sans-serif">BQ</text>
+    </svg>
+  );
+};
+
+const DiagramGir = ({ size = 280 }: { size?: number }) => {
+  const r1 = 52;
+  const r2 = 26;
+  const cx1 = r1 + 16;
+  const cx2 = size - r2 - 20;
+  const cy = size / 2 + 10;
+  const d = cx2 - cx1;
+  const rDiff = r1 - r2;
+  const sinA = rDiff / d;
+  const cosA = Math.sqrt(Math.max(0, 1 - sinA * sinA));
+  const ax = cx1 + r1 * sinA;
+  const ay = cy - r1 * cosA;
+  const bx = cx2 + r2 * sinA;
+  const by = cy - r2 * cosA;
+  const ax2 = cx1 + r1 * sinA;
+  const ay2 = cy + r1 * cosA;
+  const bx2 = cx2 + r2 * sinA;
+  const by2 = cy + r2 * cosA;
+  const toothCount1 = 14;
+  const toothCount2 = 7;
+  const gearTeeth = (cx: number, cy: number, rInner: number, rOuter: number, count: number, color: string) => {
+    const teeth = [];
+    for (let i = 0; i < count; i++) {
+      const a1 = (i * 2 * Math.PI) / count;
+      const a2 = ((i + 0.35) * 2 * Math.PI) / count;
+      const a3 = ((i + 0.65) * 2 * Math.PI) / count;
+      const a4 = ((i + 1) * 2 * Math.PI) / count;
+      teeth.push(
+        <path key={i} d={`
+          M ${cx + rInner * Math.cos(a1)} ${cy + rInner * Math.sin(a1)}
+          L ${cx + rOuter * Math.cos(a2)} ${cy + rOuter * Math.sin(a2)}
+          L ${cx + rOuter * Math.cos(a3)} ${cy + rOuter * Math.sin(a3)}
+          L ${cx + rInner * Math.cos(a4)} ${cy + rInner * Math.sin(a4)}
+        `} fill={color} stroke="rgba(0,0,0,0.5)" strokeWidth="0.8" />
+      );
+    }
+    return teeth;
+  };
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <rect width={size} height={size} fill={BG} rx="12" />
+      <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#94a3b8" strokeWidth="3" strokeLinecap="round" />
+      <line x1={ax2} y1={ay2} x2={bx2} y2={by2} stroke="#94a3b8" strokeWidth="3" strokeLinecap="round" />
+      <path d={`M ${ax2} ${ay2} A ${r1} ${r1} 0 0 0 ${ax} ${ay}`} fill="none" stroke="#94a3b8" strokeWidth="3" />
+      <path d={`M ${bx} ${by} A ${r2} ${r2} 0 0 0 ${bx2} ${by2}`} fill="none" stroke="#94a3b8" strokeWidth="3" />
+      <circle cx={cx1} cy={cy} r={r1} fill="rgba(251,146,60,0.18)" stroke="#fb923c" strokeWidth="1.5" />
+      {gearTeeth(cx1, cy, r1, r1 + 7, toothCount1, "rgba(251,146,60,0.6)")}
+      <circle cx={cx1} cy={cy} r={r1 * 0.35} fill="rgba(251,146,60,0.3)" stroke="#fb923c" strokeWidth="1.5" />
+      <circle cx={cx2} cy={cy} r={r2} fill="rgba(56,189,248,0.18)" stroke={C} strokeWidth="1.5" />
+      {gearTeeth(cx2, cy, r2, r2 + 5, toothCount2, "rgba(56,189,248,0.6)")}
+      <circle cx={cx2} cy={cy} r={r2 * 0.35} fill="rgba(56,189,248,0.3)" stroke={C} strokeWidth="1.5" />
+      <circle cx={cx1} cy={cy} r={3.5} fill="#fb923c" stroke="white" strokeWidth="1" />
+      <text x={cx1 - 6} y={cy + 18} fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="serif">Q₁</text>
+      <circle cx={cx2} cy={cy} r={3.5} fill={C} stroke="white" strokeWidth="1" />
+      <text x={cx2 - 6} y={cy + 18} fill={C} fontSize="11" fontWeight="bold" fontFamily="serif">Q₂</text>
+      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1" strokeDasharray="4,3" />
+      <text x={(cx1 + cx2) / 2 - 10} y={cy + 12} fill="#94a3b8" fontSize="10" fontWeight="bold" fontFamily="sans-serif">d</text>
+      <circle cx={ax} cy={ay} r={4} fill="#34d399" stroke="white" strokeWidth="1.2" />
+      <text x={ax - 14} y={ay - 7} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">A</text>
+      <circle cx={bx} cy={by} r={4} fill="#facc15" stroke="white" strokeWidth="1.2" />
+      <text x={bx + 5} y={by - 7} fill="#facc15" fontSize="12" fontWeight="bold" fontFamily="serif">B</text>
+    </svg>
+  );
+};
+
 const questions: Q[] = [
-  Qn(1, "Pengertian GSPL", {
+  Qn(1, "Mencari Panjang GSPL dari Gambar", {
     difficulty: "Mudah",
-    diagram: <GSLDiagram variant="gspl-two-circles" size={230} />,
-    content: "Garis Singgung Persekutuan Luar (GSPL) adalah garis singgung dua lingkaran yang tidak memotong ruas garis yang menghubungkan kedua pusat.",
+    diagram: <DiagramGSPLDuaLingkaran r1px={62} r2px={28} size={240}
+      labelP="M" labelQ="N" labelA="A" labelB="B"
+      labelPA="MA = 9 cm" labelQB="NB = 4 cm" labelPQ="MN = 13 cm" />,
+    content: "Pada gambar di atas, jari-jari lingkaran berpusat di M adalah MA = 9 cm, jari-jari lingkaran berpusat di N adalah NB = 4 cm, dan jarak kedua pusat MN = 13 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
     parts: [
-      { label: "a.", text: "Jelaskan perbedaan GSPL dengan GSPD dengan kata-katamu sendiri." },
-      { label: "b.", text: "Berapa banyak GSPL yang dimiliki oleh dua lingkaran yang tidak saling berpotongan dan tidak saling berada di dalam?" },
-      { label: "c.", text: "Kapan dua lingkaran tidak memiliki GSPL sama sekali?" },
+      { label: "a.", math: "d_{GSPL} = \\sqrt{MN^2 - (MA - NB)^2} = \\sqrt{13^2 - (9-4)^2}" },
+      { label: "b.", math: "= \\sqrt{169 - 25} = \\sqrt{144}" },
+      { label: "c.", math: "AB = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(2, "Rumus GSPL", {
+  Qn(2, "Mencari Jarak Pusat (GSPD diketahui)", {
     difficulty: "Mudah",
-    mathContent: "d_{GSPL} = \\sqrt{p^2 - (R - r)^2}",
+    content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 24 cm. Kedua jari-jari lingkaran tersebut masing-masing 10 cm dan 8 cm. Berapakah jarak antara kedua pusat lingkaran itu?",
     parts: [
-      { label: "a.", text: "Sebutkan arti masing-masing variabel: p, R, r, dan d_GSPL." },
-      { label: "b.", math: "\\text{Jika } p = 13, R = 5, r = 2, \\text{ hitung } d_{GSPL}" },
-      { label: "c.", text: "Mengapa digunakan (R − r) dan bukan (R + r) pada rumus GSPL?" },
+      { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 24^2 = p^2 - (10+8)^2" },
+      { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
+      { label: "c.", math: "p = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(3, "GSPL – Soal Dasar 1", {
+  Qn(3, "Mencari Jari-Jari yang Tidak Diketahui (GSPD)", {
     difficulty: "Mudah",
-    diagram: <GSLDiagram variant="gspl-two-circles" size={230} values={{ r1: 50, r2: 30 }} />,
-    content: "Dua lingkaran berjari-jari R = 8 cm dan r = 3 cm. Jarak kedua pusat p = 13 cm.",
+    content: "Panjang garis singgung persekutuan dalam dua lingkaran adalah 20 cm dan jarak antara kedua pusatnya adalah 25 cm. Jika panjang salah satu jari-jari lingkaran adalah 9 cm, tentukan panjang jari-jari lingkaran yang lain!",
     parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{13^2 - (8-3)^2} = \\sqrt{169 - 25} = \\sqrt{\\ldots}" },
-      { label: "b.", math: "d_{GSPL} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Apakah hasilnya merupakan bilangan bulat? Ini triple Pythagoras apa?" },
+      { label: "a.", math: "d_{GSPD}^2 = p^2 - (R + r)^2 \\Rightarrow 400 = 625 - (R + r)^2" },
+      { label: "b.", math: "(R + r)^2 = 225 \\Rightarrow R + r = 15" },
+      { label: "c.", math: "r = 15 - 9 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(4, "GSPL – Soal Dasar 2", {
+  Qn(4, "Mencari Jari-Jari dengan Perbandingan (GSPD)", {
+    difficulty: "Sedang",
+    content: "Jarak antara dua pusat lingkaran adalah 25 cm dan panjang garis singgung persekutuan dalamnya adalah 20 cm. Jika jari-jari lingkaran pertama adalah 2 kali jari-jari lingkaran kedua, hitunglah panjang jari-jari lingkaran pertama!",
+    parts: [
+      { label: "a.", math: "(R + r)^2 = p^2 - d_{GSPD}^2 = 625 - 400 = 225 \\Rightarrow R + r = 15" },
+      { label: "b.", math: "R = 2r \\Rightarrow 2r + r = 15 \\Rightarrow r = 5" },
+      { label: "c.", math: "R = 2 \\times 5 = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(5, "Mencari Panjang GSPL dari Gambar (2)", {
     difficulty: "Mudah",
-    content: "Dua lingkaran berjari-jari 10 cm dan 4 cm. Jarak antara dua pusat = 10 cm.",
+    diagram: <DiagramGSPLDuaLingkaran r1px={65} r2px={26} size={240}
+      labelP="P" labelQ="Q" labelA="A" labelB="B"
+      labelPA="PA = 15 cm" labelQB="QB = 6 cm" labelPQ="PQ = 25 cm" />,
+    content: "Pada gambar di atas, jari-jari lingkaran berpusat di P adalah PA = 15 cm, jari-jari lingkaran berpusat di Q adalah QB = 6 cm, dan jarak PQ = 25 cm. Hitunglah panjang garis singgung persekutuan luar AB!",
     parts: [
-      { label: "a.", math: "R - r = 10 - 4 = 6" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{10^2 - 6^2} = \\sqrt{100 - 36} = \\sqrt{64} = \\ldots" },
-      { label: "c.", math: "d_{GSPL} = \\ldots \\text{ cm}" },
+      { label: "a.", math: "AB = \\sqrt{PQ^2 - (PA - QB)^2} = \\sqrt{25^2 - (15-6)^2}" },
+      { label: "b.", math: "= \\sqrt{625 - 81} = \\sqrt{544}" },
+      { label: "c.", math: "AB = 4\\sqrt{34} \\approx \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(5, "GSPL – Mencari Jarak Pusat", {
+  Qn(6, "Mencari Jarak Pusat dari GSPL", {
     difficulty: "Sedang",
-    content: "Panjang GSPL dua lingkaran berjari-jari 7 cm dan 3 cm adalah 12 cm. Hitung jarak antar pusat (p).",
+    content: "Panjang jari-jari dua buah lingkaran masing-masing 25 cm dan 7 cm. Diketahui panjang garis singgung persekutuan luarnya adalah 24 cm. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
     parts: [
-      { label: "a.", math: "d_{GSPL}^2 = p^2 - (R-r)^2 \\Rightarrow 144 = p^2 - (7-3)^2 = p^2 - 16" },
-      { label: "b.", math: "p^2 = 144 + 16 = 160 \\Rightarrow p = \\sqrt{160} = 4\\sqrt{10} \\approx \\ldots" },
-      { label: "c.", text: "Apakah kedua lingkaran saling berpotongan, bersinggungan, atau terpisah?" },
+      { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 24^2 = p^2 - (25-7)^2" },
+      { label: "b.", math: "576 = p^2 - 324 \\Rightarrow p^2 = 900" },
+      { label: "c.", math: "p = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(6, "GSPL – Mencari Jari-Jari", {
+  Qn(7, "GSPL pada Dua Lingkaran yang Bersinggungan Luar", {
     difficulty: "Sedang",
-    content: "GSPL dua lingkaran sepanjang 12 cm. Jarak pusat = 13 cm. Jari-jari lingkaran besar R = 6 cm. Hitung r.",
+    diagram: <DiagramBersinggungLuar size={240} />,
+    content: "Gambar di atas menunjukkan dua lingkaran yang saling bersinggungan secara luar. AB adalah garis singgung persekutuan luar kedua lingkaran tersebut, dengan panjang AP = 3 cm dan BQ = 12 cm. Hitunglah panjang AB!",
     parts: [
-      { label: "a.", math: "d_{GSPL}^2 = p^2 - (R-r)^2 \\Rightarrow 144 = 169 - (6-r)^2" },
-      { label: "b.", math: "(6-r)^2 = 169 - 144 = 25 \\Rightarrow 6-r = \\pm 5" },
-      { label: "c.", math: "r = 1 \\text{ atau } r = 11 \\text{ (yang masuk akal?)} \\Rightarrow r = \\ldots" },
+      { label: "a.", math: "\\text{Karena bersinggungan luar: } PQ = AP + BQ = 3 + 12 = 15 \\text{ cm}" },
+      { label: "b.", math: "AB = \\sqrt{PQ^2 - (AP - BQ)^2} = \\sqrt{15^2 - (12-3)^2} = \\sqrt{225 - 81}" },
+      { label: "c.", math: "AB = \\sqrt{144} = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(7, "GSPL – Dua Lingkaran Sama Besar", {
-    difficulty: "Mudah",
-    diagram: <GSLDiagram variant="gspl-two-circles" size={230} values={{ r1: 45, r2: 45 }} />,
-    content: "Dua lingkaran berjari-jari sama r = 6 cm. Jarak antar pusat p = 10 cm.",
-    parts: [
-      { label: "a.", math: "R - r = 6 - 6 = 0" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{10^2 - 0^2} = \\sqrt{100} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Jika dua lingkaran sama besar, bagaimana posisi GSPL terhadap garis penghubung pusat?" },
-    ],
-  }),
-  Qn(8, "GSPL – Soal Cerita (Roda Gigi)", {
+  Qn(8, "Mencari Jari-Jari yang Tidak Diketahui (GSPL)", {
     difficulty: "Sedang",
-    content: "Dua roda berbentuk lingkaran dengan jari-jari 8 cm dan 5 cm. Jarak antar pusat kedua roda = 15 cm. Sabuk menghubungkan keduanya secara luar.",
+    content: "Panjang garis singgung persekutuan luar dua lingkaran adalah 24 cm. Jarak kedua pusat lingkaran adalah 26 cm dan salah satu jari-jarinya adalah 5 cm. Hitunglah panjang jari-jari lingkaran yang lain!",
     parts: [
-      { label: "a.", math: "\\text{Panjang bagian lurus sabuk} = d_{GSPL} = \\sqrt{15^2 - (8-5)^2}" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{225 - 9} = \\sqrt{216} = 6\\sqrt{6} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", text: "Mengapa sabuk ini disebut sabuk luar dan bukan sabuk dalam?" },
+      { label: "a.", math: "d_{GSPL}^2 = p^2 - (R - r)^2 \\Rightarrow 576 = 676 - (R - 5)^2" },
+      { label: "b.", math: "(R - 5)^2 = 100 \\Rightarrow R - 5 = 10" },
+      { label: "c.", math: "R = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(9, "GSPL – Segitiga Bantu", {
+  Qn(9, "Mencari GSPD dan GSPL", {
     difficulty: "Sedang",
-    diagram: <GSLDiagram variant="gspl-two-circles" size={230} />,
-    content: "Dua lingkaran berjari-jari R = 7 cm dan r = 2 cm. Jarak pusat O₁O₂ = 13 cm.",
+    content: "Jarak antara dua pusat lingkaran adalah 20 cm. Panjang jari-jari masing-masing lingkaran adalah 8 cm dan 4 cm. Hitunglah panjang:\na. garis singgung persekutuan dalam,\nb. garis singgung persekutuan luar.",
     parts: [
-      { label: "a.", math: "\\text{Segitiga bantu: sisi miring} = O_1O_2 = 13, \\; \\text{sisi tegak} = R - r = 5" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{13^2 - 5^2} = \\sqrt{169 - 25} = \\sqrt{144} = \\ldots" },
-      { label: "c.", text: "Mengapa dibuat segitiga bantu dengan sisi tegak (R − r)?" },
+      { label: "a.", math: "d_{GSPD} = \\sqrt{20^2 - (8+4)^2} = \\sqrt{400 - 144} = \\sqrt{256} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "d_{GSPL} = \\sqrt{20^2 - (8-4)^2} = \\sqrt{400 - 16} = \\sqrt{384} = 8\\sqrt{6} \\approx \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(10, "GSPL – Soal UN 2020", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari 9 cm dan 4 cm. Jarak pusat = 15 cm. Hitung panjang GSPL.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{15^2 - (9-4)^2} = \\sqrt{225 - 25} = \\sqrt{200}" },
-      { label: "b.", math: "d_{GSPL} = 10\\sqrt{2} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", math: "\\text{Jika } d_{GSPL} = 10\\sqrt{2}, \\text{ nyatakan dalam 2 desimal}" },
-    ],
-  }),
-  Qn(11, "GSPL – Nilai Ganda", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari 5 cm dan 5 cm. Jarak pusat = 13 cm. Hitung GSPL.",
-    parts: [
-      { label: "a.", math: "R - r = 5 - 5 = 0" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{13^2 - 0^2} = 13 \\text{ cm}" },
-      { label: "c.", text: "Berapa banyak GSPL pada dua lingkaran sama besar? Gambarkan posisinya." },
-    ],
-  }),
-  Qn(12, "GSPL – Mencari p dari d", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari 6 cm dan 2 cm. Panjang GSPL = 12 cm. Hitung jarak antar pusat.",
-    parts: [
-      { label: "a.", math: "d^2 = p^2 - (R-r)^2 \\Rightarrow 144 = p^2 - (6-2)^2 = p^2 - 16" },
-      { label: "b.", math: "p^2 = 160 \\Rightarrow p = 4\\sqrt{10}" },
-      { label: "c.", math: "p \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(13, "GSPL – Perbandingan Jari-Jari", {
+  Qn(10, "Hubungan GSPL dan GSPD", {
     difficulty: "Sulit",
-    content: "R : r = 3 : 1. Jarak antar pusat p = 8 cm, r = 2 cm, R = 6 cm. Hitung GSPL.",
+    content: "Panjang jari-jari dua buah lingkaran masing-masing 6 cm dan 4 cm. Panjang garis singgung persekutuan luarnya adalah √2 kali panjang garis singgung persekutuan dalamnya. Hitunglah jarak antara kedua pusat lingkaran tersebut!",
     parts: [
-      { label: "a.", math: "R - r = 6 - 2 = 4" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{8^2 - 4^2} = \\sqrt{64 - 16} = \\sqrt{48} = 4\\sqrt{3}" },
-      { label: "c.", math: "d_{GSPL} = 4\\sqrt{3} \\approx \\ldots \\text{ cm}" },
+      { label: "a.", math: "d_{GSPL}^2 = 2 \\cdot d_{GSPD}^2 \\Rightarrow p^2 - (6-4)^2 = 2\\left[p^2 - (6+4)^2\\right]" },
+      { label: "b.", math: "p^2 - 4 = 2p^2 - 200 \\Rightarrow p^2 = 196" },
+      { label: "c.", math: "p = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(14, "GSPL – Kondisi Ada Tidaknya", {
-    difficulty: "Sedang",
-    content: "Tentukan ada atau tidaknya GSPL untuk kondisi berikut:",
-    parts: [
-      { label: "a.", text: "R = 10, r = 3, p = 6. (Apakah p > |R − r|?)" },
-      { label: "b.", text: "R = 8, r = 3, p = 5. (Apakah p > |R − r|?)" },
-      { label: "c.", text: "Apa kondisi yang harus dipenuhi agar GSPL ada?" },
-    ],
-  }),
-  Qn(15, "GSPL – Soal Cerita Pipa", {
-    difficulty: "Sedang",
-    content: "Dua pipa berpenampang lingkaran, jari-jari masing-masing 4 cm dan 2 cm, diikat bersebelahan. Jarak pusat = 10 cm.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{10^2 - (4-2)^2} = \\sqrt{100 - 4} = \\sqrt{96} = 4\\sqrt{6}" },
-      { label: "b.", math: "d_{GSPL} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", text: "Apa fungsi GSPL dalam konteks pipa ini?" },
-    ],
-  }),
-  Qn(16, "GSPL – Sudut antara GSPL dan O₁O₂", {
+  Qn(11, "Panjang Rantai Gir Sepeda Motor", {
     difficulty: "Sulit",
-    content: "Dua lingkaran berjari-jari R = 5, r = 2, jarak pusat p = 13. Hitung GSPL dan sudut α antara GSPL dan garis O₁O₂.",
+    diagram: <DiagramGir size={260} />,
+    content: "Gambar di atas menunjukkan dua gir sepeda motor yang dihubungkan oleh rantai. Diameter gir besar (Q₁) adalah 24 cm dan diameter gir kecil (Q₂) adalah 12 cm, sedangkan jarak antara kedua pusat gir adalah 42 cm. Hitunglah panjang rantai dari titik singgung A ke titik singgung B pada bagian lurus atas!",
     parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{13^2 - 3^2} = \\sqrt{160} = 4\\sqrt{10}" },
-      { label: "b.", math: "\\sin \\alpha = \\frac{R - r}{p} = \\frac{3}{13}" },
-      { label: "c.", math: "\\alpha = \\arcsin\\!\\left(\\frac{3}{13}\\right) \\approx \\ldots ^\\circ" },
-    ],
-  }),
-  Qn(17, "GSPL – Variasi Ukuran", {
-    difficulty: "Mudah",
-    content: "Hitung GSPL untuk masing-masing data berikut:",
-    parts: [
-      { label: "a.", math: "R = 5, r = 2, p = 5 \\Rightarrow d_{GSPL} = \\ldots" },
-      { label: "b.", math: "R = 10, r = 2, p = 10 \\Rightarrow d_{GSPL} = \\ldots" },
-      { label: "c.", math: "R = 3, r = 1, p = 6 \\Rightarrow d_{GSPL} = \\ldots" },
-    ],
-  }),
-  Qn(18, "GSPL – Soal Perbandingan", {
-    difficulty: "Sedang",
-    content: "Dua pasang lingkaran:\n① R₁ = 6, r₁ = 2, p₁ = 10\n② R₂ = 5, r₂ = 1, p₂ = 10",
-    parts: [
-      { label: "a.", math: "d_1 = \\sqrt{10^2 - (6-2)^2} = \\sqrt{84} = 2\\sqrt{21}" },
-      { label: "b.", math: "d_2 = \\sqrt{10^2 - (5-1)^2} = \\sqrt{84} = 2\\sqrt{21}" },
-      { label: "c.", text: "Mengapa hasilnya sama? Apa yang menentukan panjang GSPL?" },
-    ],
-  }),
-  Qn(19, "GSPL – Segitiga Siku-Siku Bantu", {
-    difficulty: "Sedang",
-    content: "Gambarlah segitiga siku-siku bantu yang digunakan untuk mencari GSPL. R = 9, r = 4, p = 13.",
-    parts: [
-      { label: "a.", text: "Apa yang menjadi hipotenusa segitiga bantu tersebut?" },
-      { label: "b.", text: "Apa yang menjadi salah satu kaki tegak?" },
-      { label: "c.", math: "d_{GSPL} = \\sqrt{13^2 - 5^2} = \\sqrt{144} = \\ldots" },
-    ],
-  }),
-  Qn(20, "GSPL – Soal ANBK", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari 11 cm dan 5 cm. Jarak antar pusat = 20 cm. Hitung GSPL.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{20^2 - (11-5)^2} = \\sqrt{400 - 36} = \\sqrt{364}" },
-      { label: "b.", math: "d_{GSPL} = 2\\sqrt{91} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", text: "Apakah kedua lingkaran ini saling berpotongan? Jelaskan." },
-    ],
-  }),
-  Qn(21, "GSPL – Mencari R", {
-    difficulty: "Sulit",
-    content: "GSPL = 15 cm, r = 2 cm, jarak pusat = 17 cm. Hitung R.",
-    parts: [
-      { label: "a.", math: "15^2 = 17^2 - (R-2)^2 \\Rightarrow 225 = 289 - (R-2)^2" },
-      { label: "b.", math: "(R-2)^2 = 64 \\Rightarrow R - 2 = 8 \\Rightarrow R = \\ldots" },
-      { label: "c.", text: "Verifikasi: cek dengan rumus GSPL menggunakan R yang ditemukan." },
-    ],
-  }),
-  Qn(22, "GSPL – Masalah Nyata Gir Sepeda", {
-    difficulty: "Sedang",
-    content: "Gir besar sepeda berjari-jari 12 cm, gir kecil 4 cm, jarak antar pusat = 20 cm.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{20^2 - (12-4)^2} = \\sqrt{400 - 64} = \\sqrt{336}" },
-      { label: "b.", math: "d_{GSPL} = 4\\sqrt{21} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", text: "Dalam kenyataan, rantai sepeda merupakan sabuk dalam (GSPD) atau luar (GSPL)?" },
-    ],
-  }),
-  Qn(23, "GSPL – Bilangan Bulat", {
-    difficulty: "Mudah",
-    content: "Tentukan pasangan (R, r, p) yang menghasilkan GSPL bilangan bulat:",
-    parts: [
-      { label: "a.", math: "R = 5, r = 1, p = 10 \\Rightarrow d_{GSPL} = \\sqrt{100 - 16} = \\ldots" },
-      { label: "b.", math: "R = 7, r = 3, p = 5 \\Rightarrow d_{GSPL} = \\sqrt{25 - 16} = \\ldots" },
-      { label: "c.", math: "R = 9, r = 4, p = 13 \\Rightarrow d_{GSPL} = \\sqrt{169 - 25} = \\ldots" },
-    ],
-  }),
-  Qn(24, "GSPL – Soal UN", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari 11 dan 4 cm. Panjang GSPL = 24 cm. Hitung jarak pusat.",
-    parts: [
-      { label: "a.", math: "24^2 = p^2 - (11-4)^2 \\Rightarrow 576 = p^2 - 49" },
-      { label: "b.", math: "p^2 = 625 \\Rightarrow p = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Sebutkan triple Pythagoras yang digunakan." },
-    ],
-  }),
-  Qn(25, "GSPL – Hubungan dengan GSPD", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari R = 8, r = 3, p = 15. Hitung GSPL dan GSPD.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{15^2 - (8-3)^2} = \\sqrt{225 - 25} = \\sqrt{200} = 10\\sqrt{2}" },
-      { label: "b.", math: "d_{GSPD} = \\sqrt{15^2 - (8+3)^2} = \\sqrt{225 - 121} = \\sqrt{104} = 2\\sqrt{26}" },
-      { label: "c.", text: "Mana yang lebih panjang, GSPL atau GSPD? Mengapa selalu demikian?" },
-    ],
-  }),
-  Qn(26, "GSPL – Soal Cerita (Roller)", {
-    difficulty: "Sedang",
-    content: "Dua silinder (penampang lingkaran) berjari-jari 15 cm dan 6 cm dihubungkan dengan sabuk luar. Jarak pusat = 25 cm.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{25^2 - (15-6)^2} = \\sqrt{625 - 81} = \\sqrt{544} = 4\\sqrt{34}" },
-      { label: "b.", math: "d_{GSPL} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", text: "Panjang total sabuk = 2 × GSPL + busur di masing-masing roda. Tuliskan rumus totalnya." },
-    ],
-  }),
-  Qn(27, "GSPL – Mencari r (Kecil)", {
-    difficulty: "Sulit",
-    content: "R = 10, p = 26, GSPL = 24. Hitung r.",
-    parts: [
-      { label: "a.", math: "24^2 = 26^2 - (10-r)^2 \\Rightarrow 576 = 676 - (10-r)^2" },
-      { label: "b.", math: "(10-r)^2 = 100 \\Rightarrow 10-r = 10 \\Rightarrow r = 0 \\text{ atau } 10-r = -10 \\Rightarrow r = 20" },
-      { label: "c.", text: "Mana nilai r yang masuk akal? Jelaskan." },
-    ],
-  }),
-  Qn(28, "GSPL – Soal Berlapis", {
-    difficulty: "Sulit",
-    content: "Tiga lingkaran kongruen berjari-jari r, saling bersinggungan luar. Hitung panjang GSPL antara dua lingkaran yang bersebelahan.",
-    parts: [
-      { label: "a.", math: "p = r + r = 2r" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{(2r)^2 - (r-r)^2} = \\sqrt{4r^2} = 2r" },
-      { label: "c.", math: "\\text{Jika } r = 7, \\; d_{GSPL} = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(29, "GSPL – Perbandingan Panjang", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran p = 20, R = 10, r = 2 vs p = 20, R = 8, r = 4.",
-    parts: [
-      { label: "a.", math: "d_1 = \\sqrt{20^2 - (10-2)^2} = \\sqrt{400 - 64} = \\sqrt{336}" },
-      { label: "b.", math: "d_2 = \\sqrt{20^2 - (8-4)^2} = \\sqrt{400 - 16} = \\sqrt{384}" },
-      { label: "c.", text: "Mana yang lebih panjang? Faktor apa yang menyebabkan perbedaan ini?" },
-    ],
-  }),
-  Qn(30, "GSPL – Soal TKA (Trigonometri)", {
-    difficulty: "Sulit",
-    content: "Dua lingkaran berjari-jari R = 5, r = 2, p = 13. Sudut yang dibentuk GSPL dengan O₁O₂ adalah α.",
-    parts: [
-      { label: "a.", math: "\\sin \\alpha = \\frac{R - r}{p} = \\frac{3}{13}" },
-      { label: "b.", math: "\\cos \\alpha = \\frac{d_{GSPL}}{p} \\Rightarrow d_{GSPL} = p \\cos \\alpha" },
-      { label: "c.", math: "d_{GSPL} = \\sqrt{13^2 - 3^2} = \\sqrt{160} = 4\\sqrt{10} \\approx \\ldots" },
-    ],
-  }),
-  Qn(31, "GSPL – Soal Terapan Perkebunan", {
-    difficulty: "Sedang",
-    content: "Dua tangki minyak berbentuk silinder, jari-jari 5 m dan 3 m, berjarak pusat ke pusat 17 m. Hitung panjang pagar yang menyentuh kedua tangki di luar.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{17^2 - (5-3)^2} = \\sqrt{289 - 4} = \\sqrt{285}" },
-      { label: "b.", math: "d_{GSPL} \\approx \\ldots \\text{ m}" },
-      { label: "c.", text: "Ada berapa pagar seperti itu yang bisa dipasang?" },
-    ],
-  }),
-  Qn(32, "GSPL – Rumus Umum", {
-    difficulty: "Sedang",
-    content: "Jika jarak pusat p = R + r + k (k = jarak tambahan), nyatakan GSPL dalam R, r, dan k.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{(R+r+k)^2 - (R-r)^2}" },
-      { label: "b.", math: "= \\sqrt{(R+r+k+R-r)(R+r+k-R+r)} = \\sqrt{(2R+k)(2r+k)}" },
-      { label: "c.", math: "\\text{Jika } k = 0 \\text{ (bersinggungan luar): } d_{GSPL} = \\sqrt{4Rr} = 2\\sqrt{Rr}" },
-    ],
-  }),
-  Qn(33, "GSPL – Dua Lingkaran Bersinggungan Luar", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran bersinggungan luar, R = 9, r = 4.",
-    parts: [
-      { label: "a.", math: "p = R + r = 9 + 4 = 13" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{13^2 - (9-4)^2} = \\sqrt{169 - 25} = \\sqrt{144} = \\ldots" },
-      { label: "c.", math: "\\text{Atau gunakan rumus cepat: } d_{GSPL} = 2\\sqrt{Rr} = 2\\sqrt{9 \\times 4} = \\ldots" },
-    ],
-  }),
-  Qn(34, "GSPL – ANBK Style", {
-    difficulty: "Sedang",
-    content: "Dua lingkaran berjari-jari 8 cm dan 3 cm. Jarak pusat = 17 cm. Hitung GSPL.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{17^2 - (8-3)^2} = \\sqrt{289 - 25} = \\sqrt{264}" },
-      { label: "b.", math: "d_{GSPL} = 2\\sqrt{66} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", text: "Apakah ada GSPD untuk konfigurasi ini? (Cek apakah p > R + r)" },
-    ],
-  }),
-  Qn(35, "GSPL – Soal Campuran", {
-    difficulty: "Sulit",
-    content: "Tiga lingkaran masing-masing berjari-jari 2, 3, dan 4 cm, semua bersinggungan luar satu sama lain. Hitung GSPL antara lingkaran R=4 dan R=3.",
-    parts: [
-      { label: "a.", math: "p_{43} = 4 + 3 = 7" },
-      { label: "b.", math: "d_{GSPL} = \\sqrt{7^2 - (4-3)^2} = \\sqrt{49 - 1} = \\sqrt{48} = 4\\sqrt{3}" },
-      { label: "c.", math: "d_{GSPL} \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(36, "GSPL – Soal Cerita (Ban Kendaraan)", {
-    difficulty: "Sedang",
-    content: "Dua roda kendaraan dengan jari-jari 40 cm dan 20 cm dihubungkan sabuk luar. Jarak pusat = 100 cm.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{100^2 - (40-20)^2} = \\sqrt{10000 - 400} = \\sqrt{9600}" },
-      { label: "b.", math: "d_{GSPL} = 40\\sqrt{6} \\approx \\ldots \\text{ cm}" },
-      { label: "c.", text: "Konversi ke meter: GSPL ≈ ... m." },
-    ],
-  }),
-  Qn(37, "GSPL – Persamaan Jarak Pusat", {
-    difficulty: "Sulit",
-    content: "GSPL = GSPD untuk dua lingkaran berjari-jari R dan r. Apakah ini mungkin?",
-    parts: [
-      { label: "a.", math: "\\sqrt{p^2 - (R-r)^2} = \\sqrt{p^2 - (R+r)^2}" },
-      { label: "b.", math: "(R-r)^2 = (R+r)^2 \\Rightarrow R^2 - 2Rr + r^2 = R^2 + 2Rr + r^2" },
-      { label: "c.", math: "-2Rr = 2Rr \\Rightarrow 4Rr = 0 \\Rightarrow R = 0 \\text{ atau } r = 0 \\text{ (tidak mungkin)}" },
-    ],
-  }),
-  Qn(38, "GSPL – Soal UN Nasional", {
-    difficulty: "Mudah",
-    content: "Dua lingkaran berjari-jari 7 cm dan 2 cm. Jarak antar pusat 13 cm. Panjang GSPL = ...",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{13^2 - (7-2)^2} = \\sqrt{169 - 25} = \\sqrt{144}" },
-      { label: "b.", math: "d_{GSPL} = \\ldots \\text{ cm}" },
-      { label: "c.", text: "Berapakah jumlah semua GSPL yang dimiliki oleh dua lingkaran ini?" },
-    ],
-  }),
-  Qn(39, "GSPL – Soal Gabungan", {
-    difficulty: "Sulit",
-    content: "Dua lingkaran berjari-jari R = 5, r = 3, p = 10. Hitung luas trapesium yang dibentuk oleh GSPL, jari-jari R, jari-jari r, dan proyeksinya.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{10^2 - (5-3)^2} = \\sqrt{96} = 4\\sqrt{6}" },
-      { label: "b.", text: "Trapesium terbentuk dari: GSPL sebagai sisi miring, R dan r sebagai dua sisi sejajar, dan GSPL sebagai sisi lainnya." },
-      { label: "c.", math: "\\text{Luas trapesium} = \\frac{1}{2}(R+r) \\times d_{GSPL} = \\frac{1}{2} \\times 8 \\times 4\\sqrt{6} = 16\\sqrt{6} \\approx \\ldots \\text{ cm}^2" },
-    ],
-  }),
-  Qn(40, "GSPL – Soal TKA Final", {
-    difficulty: "Sulit",
-    diagram: <GSLDiagram variant="gspl-two-circles" size={230} values={{ r1: 55, r2: 30 }} />,
-    content: "Dua lingkaran berjari-jari R = 9 cm dan r = 4 cm. Jarak pusat p = 25 cm. Hitung: GSPL, sudut GSPL dengan O₁O₂, dan luas daerah antara dua GSPL dan dua lingkaran.",
-    parts: [
-      { label: "a.", math: "d_{GSPL} = \\sqrt{25^2 - (9-4)^2} = \\sqrt{625 - 25} = \\sqrt{600} = 10\\sqrt{6} \\approx 24{,}5 \\text{ cm}" },
-      { label: "b.", math: "\\sin \\alpha = \\frac{R-r}{p} = \\frac{5}{25} = \\frac{1}{5} \\Rightarrow \\alpha \\approx 11{,}5^\\circ" },
-      { label: "c.", math: "\\text{Luas daerah} \\approx d_{GSPL} \\times (R - r) = 10\\sqrt{6} \\times 5 = 50\\sqrt{6} \\text{ cm}^2 \\text{ (pendekatan)}" },
+      { label: "a.", math: "r_1 = 12 \\text{ cm},\\; r_2 = 6 \\text{ cm},\\; d = 42 \\text{ cm}" },
+      { label: "b.", math: "AB = \\sqrt{d^2 - (r_1 - r_2)^2} = \\sqrt{42^2 - (12-6)^2} = \\sqrt{1764 - 36}" },
+      { label: "c.", math: "AB = \\sqrt{1728} = 24\\sqrt{3} \\approx \\ldots \\text{ cm}" },
     ],
   }),
 ];
@@ -408,23 +321,34 @@ const GSPLPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 11 Soal</span>
             <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className="text-white/50 text-xs">UN / ANBK / Terapan</span>
           </div>
         </div>
 
         <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
-          <p className="text-cyan-300 text-xs font-bold mb-2">📌 Rumus Garis Singgung Persekutuan Luar</p>
-          <div className="bg-white/5 rounded-lg px-3 py-3 mb-2 flex justify-center">
-            <BlockMath math="d_{GSPL} = \\sqrt{p^2 - (R - r)^2}" />
+          <p className="text-cyan-300 text-xs font-bold mb-2">📌 Rumus Garis Singgung Persekutuan</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
+            <div className="bg-white/5 rounded-lg px-3 py-3">
+              <p className="text-cyan-300 text-[10px] font-bold mb-1">GSPL (Luar)</p>
+              <div className="flex justify-center">
+                <BlockMath math="d_{\text{GSPL}} = \sqrt{p^2 - (R - r)^2}" />
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-lg px-3 py-3">
+              <p className="text-violet-300 text-[10px] font-bold mb-1">GSPD (Dalam)</p>
+              <div className="flex justify-center">
+                <BlockMath math="d_{\text{GSPD}} = \sqrt{p^2 - (R + r)^2}" />
+              </div>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-2 text-xs">
             {[
-              { l: "p", v: "Jarak antar pusat O₁O₂" },
+              { l: "p", v: "Jarak antar pusat" },
               { l: "R", v: "Jari-jari lingkaran besar" },
               { l: "r", v: "Jari-jari lingkaran kecil" },
-              { l: "d", v: "Panjang GSPL" },
+              { l: "d", v: "Panjang garis singgung" },
             ].map(x => (
               <div key={x.l} className="bg-white/5 rounded-lg px-2 py-2">
                 <span className="text-cyan-400 font-bold">{x.l}: </span>
@@ -437,7 +361,7 @@ const GSPLPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
+              style={{ animationDelay: `${i * 0.05}s` }}>
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
               <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-blue-500 rounded-l-2xl" />
