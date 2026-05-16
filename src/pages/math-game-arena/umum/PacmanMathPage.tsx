@@ -661,26 +661,196 @@ const PacmanMathPage = () => {
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
-      <div className="relative z-10 flex flex-col items-center px-2 pt-7 pb-4 w-full max-w-lg">
-        <div className="flex items-center justify-between w-full mb-1">
-          <button
-            onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all text-sm"
-            title="Menu Utama"
-          >
-            🏠
-          </button>
-          <h1 className="font-display text-2xl font-bold text-primary text-glow-cyan text-center flex-1">
-            👾 PAC MATH
-          </h1>
-          <button
-            onClick={() => { playPopSound(); navigate(-1); }}
-            className="shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all font-bold"
-            title="Keluar"
-          >
-            ✕
-          </button>
+
+      {/* ── IDLE START SCREEN ─────────────────────────────────────────────── */}
+      {phase === "idle" && (
+        <div className="fixed inset-0 z-40 overflow-hidden">
+          <style>{`
+            @keyframes pm-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+            @keyframes pm-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+            @keyframes pm-chomp  { 0%,100%{transform:scale(1) rotate(-10deg)} 50%{transform:scale(1.15) rotate(10deg)} }
+            @keyframes pm-pulse  { 0%,100%{opacity:0.65;transform:scale(1)} 50%{opacity:1;transform:scale(1.12)} }
+            @keyframes pm-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+            @keyframes pm-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+            @keyframes pm-pellet { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+            .pm-fa{animation:pm-floatA 3.2s ease-in-out infinite}
+            .pm-fb{animation:pm-floatB 3.8s ease-in-out infinite}
+            .pm-chomp{animation:pm-chomp 0.5s ease-in-out infinite}
+            .pm-fp{animation:pm-pulse 2.4s ease-in-out infinite}
+            .pm-pel{animation:pm-pellet 1.2s ease-in-out infinite}
+            .pm-title-shine{background:linear-gradient(90deg,#facc15,#fbbf24,#fb923c,#facc15,#fbbf24,#facc15);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:pm-shimmer 3.5s linear infinite}
+            @keyframes pm-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+            .pm-btn-breathe{animation:pm-breathe 2.8s ease-in-out infinite}
+            .pm-scroll{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+            .pm-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100%}
+            .pm-main{display:flex;flex-direction:column;gap:0.75rem}
+            .pm-visual{display:flex;flex-direction:column;gap:0.5rem}
+            .pm-action{display:flex;flex-direction:column;gap:0.5rem}
+            @media(orientation:landscape){
+              .pm-wrap{justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100%}
+              .pm-main{flex-direction:row;align-items:stretch;gap:2rem}
+              .pm-visual{flex:1;justify-content:center;gap:0.6rem}
+              .pm-action{flex:1;justify-content:center;gap:0.6rem}
+            }
+          `}</style>
+
+          {/* Background layers — dark arcade navy */}
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(10,30,100,1) 0%, rgba(2,4,30,1) 60%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(250,204,21,0.1) 0%, transparent 55%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(30,144,255,0.1) 0%, transparent 55%)" }} />
+          <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(250,204,21,0.25),transparent)", animation: "pm-scanY 6s linear infinite" }} />
+
+          <div className="pm-scroll relative z-10">
+            <div className="pm-wrap">
+
+              {/* Header row */}
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-between w-full mb-1">
+                  <button onClick={() => { playPopSound(); navigate(-1); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(250,204,21,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">←</span>
+                    <span>Kembali</span>
+                  </button>
+                  <div className="text-[7px] tracking-[5px] text-yellow-400/60 uppercase font-bold">⬡ NUMATIK GAME ⬡</div>
+                  <button onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(250,204,21,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">🏠</span>
+                    <span>Home</span>
+                  </button>
+                </div>
+                <div className="pm-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.7rem,5vw,2.4rem)" }}>PAC MATH</div>
+                <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right,transparent,#facc15,#fb923c,transparent)" }} />
+                <p className="text-yellow-400/70 text-[9px] font-bold tracking-wider uppercase mt-1">Makan · Hindari · Taklukkan</p>
+                <p className="text-white/35 text-[8px] tracking-widest uppercase mt-0.5">🕹️ Game Arkade Matematika Epik 🕹️</p>
+              </div>
+
+              <div className="pm-main">
+                {/* Left – visual */}
+                <div className="pm-visual">
+                  <div className="flex items-end justify-center gap-5 w-full">
+                    {/* Pac-Man side */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="text-[7px] text-yellow-400/70 font-bold tracking-wider uppercase">PAC-MAN</div>
+                      <div className="relative">
+                        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(250,204,21,0.3) 0%,transparent 70%)", transform: "scale(2.4)", borderRadius: "50%" }} />
+                        <div className="pm-chomp relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 16px #facc15) drop-shadow(0 0 32px #f59e0b)" }}>😁</div>
+                      </div>
+                      <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(250,204,21,0.8),transparent)" }} />
+                      <div className="text-[8px] font-bold text-yellow-400">KAMU</div>
+                    </div>
+
+                    <div className="flex flex-col items-center pb-4">
+                      <div className="text-xl font-black text-white/20">VS</div>
+                    </div>
+
+                    {/* Ghosts side */}
+                    <div className="flex flex-col items-center gap-1.5">
+                      <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">HANTU MUSUH</div>
+                      <div className="grid grid-cols-2 gap-1.5">
+                        {([
+                          { glow: "#ff4444", name: "BLINKY", delay: "0s" },
+                          { glow: "#ff9ff3", name: "PINKY",  delay: "0.5s" },
+                          { glow: "#00d2ff", name: "INKY",   delay: "1s" },
+                          { glow: "#ffa500", name: "CLYDE",  delay: "1.5s" },
+                        ]).map(g => (
+                          <div key={g.name} className="flex flex-col items-center gap-0.5 rounded-lg p-1.5 border"
+                            style={{ borderColor: g.glow + "55", background: g.glow + "12", boxShadow: `0 0 10px ${g.glow}33` }}>
+                            <div className="pm-fb text-2xl" style={{ animationDelay: g.delay, filter: `drop-shadow(0 0 7px ${g.glow})` }}>👻</div>
+                            <span className="text-[6px] font-bold" style={{ color: g.glow }}>{g.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(250,204,21,0.4),transparent)" }} />
+
+                  {/* Power pellet legend */}
+                  <div>
+                    <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Pelet Warna = Pilihan Jawaban</div>
+                    <div className="grid grid-cols-4 gap-1.5 w-full">
+                      {(["BIRU","MERAH","HIJAU","ORANYE"] as string[]).map((name, i) => {
+                        const glow = ["#1e90ff","#ff4444","#00cc44","#ff7700"][i];
+                        return (
+                          <div key={name} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                            style={{ borderColor: glow + "44", background: glow + "10", boxShadow: `0 0 8px ${glow}30` }}>
+                            <div className="pm-pel rounded-full" style={{ width: 18, height: 18, background: glow, boxShadow: `0 0 8px ${glow}`, animationDelay: `${i * 0.25}s` }} />
+                            <span className="text-[7px] font-black" style={{ color: glow }}>{name}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Small dot trail decoration */}
+                  <div className="flex justify-center items-center gap-1.5 py-0.5">
+                    {Array.from({ length: 10 }).map((_, i) => (
+                      <div key={i} className="rounded-full bg-yellow-400/50" style={{ width: 4, height: 4, animationDelay: `${i * 0.12}s` }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right – how to play + start */}
+                <div className="pm-action">
+                  <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(250,204,21,0.28),transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1 font-bold text-center">📖 Cara Bermain</div>
+                  <div className="space-y-1.5">
+                    {[
+                      { icon: "🟡", text: "Makan semua titik kuning di labirin untuk naik level" },
+                      { icon: "⚡", text: "4 pelet warna besar = pilihan jawaban soal matematika" },
+                      { icon: "✅", text: "Pelet BENAR = +500 poin + semua hantu ketakutan!" },
+                      { icon: "👻", text: "Makan hantu ketakutan (biru) = +300 poin bonus" },
+                      { icon: "❌", text: "Jangan sampai tertangkap hantu — kamu punya 3 nyawa!" },
+                    ].map(({ icon, text }) => (
+                      <div key={text} className="flex items-start gap-2 px-1">
+                        <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                        <p className="text-[8px] text-white/55 leading-relaxed">{text}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1.5 mt-2">
+                    {best > 0 && (
+                      <div className="text-[8px] text-yellow-400/80 font-bold">🏆 Rekor: {best}</div>
+                    )}
+                    <button onClick={() => startGame(true)}
+                      className="pm-btn-breathe font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                      style={{
+                        background: "linear-gradient(135deg,#facc15 0%,#fbbf24 45%,#f59e0b 100%)",
+                        boxShadow: "0 0 30px rgba(250,204,21,0.85),0 0 60px rgba(245,158,11,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.3)",
+                      }}>
+                      😁 MULAI BERMAIN
+                    </button>
+                    <div className="text-[7px] text-white/20 text-center leading-relaxed">
+                      WASD / Panah = gerak · Joystick kiri untuk mobile
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      )}
+
+      {/* ── Main game container ───────────────────────────────────────────── */}
+      <div className={`relative z-10 flex flex-col items-center px-2 pb-4 w-full max-w-lg ${phase === "idle" ? "pt-0" : "pt-6"}`} style={{ height: '100dvh' }}>
+        {phase !== "idle" && (
+          <div className="flex items-center justify-between w-full mb-1 shrink-0 gap-2">
+            <button onClick={() => { playPopSound(); navigate(-1); }}
+              className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(250,204,21,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+              <span className="text-base leading-none">←</span>
+              <span className="hidden sm:inline">Kembali</span>
+            </button>
+            <h1 className="font-display text-xl font-bold text-center flex-1" style={{ background: "linear-gradient(90deg,#facc15,#fbbf24,#fb923c)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              😁 PAC MATH
+            </h1>
+            <button onClick={() => { playPopSound(); navigate('/ruang-untuk-guru/numatik-game'); }}
+              className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(250,204,21,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+              <span className="text-base leading-none">🏠</span>
+              <span className="hidden sm:inline">Home</span>
+            </button>
+          </div>
+        )}
         {/* Canvas */}
         <div className="relative" style={{ width: CW, maxWidth: "100%", maxHeight: 'calc(100dvh - 160px)', aspectRatio: `${CW}/${CH}` }}>
           <canvas
@@ -689,25 +859,6 @@ const PacmanMathPage = () => {
             className="rounded-xl border border-white/10 shadow-2xl w-full h-full"
             style={{ touchAction: "none" }}
           />
-
-          {/* IDLE */}
-          {phase === "idle" && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 rounded-xl gap-3">
-              <div className="text-5xl">👾</div>
-              <h2 className="font-display text-2xl text-yellow-300">PAC MATH</h2>
-              <div className="text-white/60 text-xs text-center max-w-xs font-body px-4 space-y-1">
-                <p>Makan semua titik kuning untuk naik level!</p>
-                <p>Ada 4 pelet warna besar — masing-masing = pilihan jawaban soal.</p>
-                <p><span className="text-yellow-300">Pelet BENAR</span> = +500 poin + hantu ketakutan!</p>
-                <p>Makan hantu yang ketakutan = +300 poin</p>
-                <p className="text-white/40 pt-1">🎮 WASD / Panah = gerak<br/>📱 D-pad di bawah untuk mobile</p>
-              </div>
-              <button onClick={() => startGame(true)} className="px-8 py-3 bg-accent text-black font-display font-bold text-lg rounded-full hover:scale-105 transition-transform shadow-glow">
-                MULAI
-              </button>
-              {best > 0 && <p className="text-yellow-400 text-xs font-body">🏆 Rekor: {best}</p>}
-            </div>
-          )}
 
           {/* DEAD */}
           {phase === "dead" && (
