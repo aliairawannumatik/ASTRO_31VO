@@ -136,6 +136,7 @@ const ZumaMathPage = () => {
   const [correctColor, setCorrectColor] = useState(0);
   const [flashMsg, setFlashMsg] = useState("");
   const [combo, setCombo] = useState(0);
+  const [joystickKnob, setJoystickKnob] = useState({ x: 0, y: 0 });
 
   // Refs
   const phaseRef = useRef<"idle"|"playing"|"dead"|"win">("idle");
@@ -163,6 +164,8 @@ const ZumaMathPage = () => {
   const totalBallsRef = useRef(0);
   const maxBallsRef = useRef(35);
   const prevMouseRef = useRef({ x: CANNON_X, y: CANNON_Y - 50 });
+  const joystickActiveRef = useRef(false);
+  const joystickCenterRef = useRef({ x: 0, y: 0 });
 
   // ── Question setup ─────────────────────────────────────────────────────
   const setupQuestion = useCallback(() => {
@@ -920,6 +923,35 @@ const ZumaMathPage = () => {
     updateAngle(t.clientX, t.clientY);
   }, [updateAngle]);
 
+  // ── Analog joystick (aim) ──────────────────────────────────────────────
+  const handleJoyDown = useCallback((e: React.PointerEvent) => {
+    e.preventDefault();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    joystickCenterRef.current = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    joystickActiveRef.current = true;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  }, []);
+
+  const handleJoyMove = useCallback((e: React.PointerEvent) => {
+    if (!joystickActiveRef.current) return;
+    e.preventDefault();
+    const { x: cx, y: cy } = joystickCenterRef.current;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const maxR = 30;
+    const clamp = Math.min(dist, maxR);
+    const angle = Math.atan2(dy, dx);
+    setJoystickKnob({ x: Math.cos(angle) * clamp, y: Math.sin(angle) * clamp });
+    if (dist > 6) cannonAngleRef.current = angle;
+  }, []);
+
+  const handleJoyUp = useCallback((e: React.PointerEvent) => {
+    e.preventDefault();
+    joystickActiveRef.current = false;
+    setJoystickKnob({ x: 0, y: 0 });
+  }, []);
+
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
       {isLight ? <Snowfall /> : <Starfield />}
@@ -933,7 +965,7 @@ const ZumaMathPage = () => {
             🏠
           </button>
           <h1 className="font-display text-2xl font-bold text-primary text-glow-cyan mb-1 text-center flex-1">
-            🔮 ZUMA MATH
+            🔮 ZUM MATH
           </h1>
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
@@ -962,7 +994,7 @@ const ZumaMathPage = () => {
           {phase === "idle" && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 rounded-xl gap-4">
               <div className="text-5xl">🔮</div>
-              <h2 className="font-display text-2xl text-white text-glow-cyan">ZUMA MATH</h2>
+              <h2 className="font-display text-2xl text-white text-glow-cyan">ZUM MATH</h2>
               <div className="text-white/60 text-xs text-center max-w-xs font-body px-4 space-y-1">
                 <p>Bola-bola berwarna bergerak menuju lubang <span className="text-red-400">☠</span></p>
                 <p>Tembak bola dari meriam untuk mencocokkan <span className="text-yellow-400">3+ bola</span> warna yang sama!</p>
@@ -1024,21 +1056,58 @@ const ZumaMathPage = () => {
           <p className="mt-1 text-xs font-body text-center text-white/80 animate-pulse">{flashMsg}</p>
         )}
 
-        {/* Touch shoot button */}
+        {/* Left analog joystick — aim */}
         {phase === "playing" && (
-          <div className="mt-3 flex gap-3">
-            <button
-              className="px-6 py-3 bg-cyan-500/20 border border-cyan-400/40 rounded-full text-white text-sm font-bold cursor-pointer select-none active:opacity-60"
-              onPointerDown={(e) => { e.preventDefault(); shoot(); }}
-            >
-              🔫 TEMBAK
-            </button>
-            <button
-              className="px-6 py-3 bg-purple-500/20 border border-purple-400/40 rounded-full text-white text-sm font-bold cursor-pointer select-none active:opacity-60"
-              onPointerDown={(e) => { e.preventDefault(); swapColor(); }}
-            >
-              ↔ TUKAR
-            </button>
+          <div
+            onPointerDown={handleJoyDown}
+            onPointerMove={handleJoyMove}
+            onPointerUp={handleJoyUp}
+            onPointerCancel={handleJoyUp}
+            style={{
+              position: 'fixed', bottom: 24, left: 24, zIndex: 50,
+              touchAction: 'none', userSelect: 'none',
+              width: 88, height: 88, borderRadius: '50%',
+              background: 'rgba(255,255,255,0.07)',
+              border: '2px solid rgba(255,255,255,0.22)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 0 18px rgba(34,211,238,0.15)',
+              cursor: 'none',
+            }}
+          >
+            <span style={{ position: 'absolute', top: 5, left: '50%', transform: 'translateX(-50%)', fontSize: 8, color: 'rgba(255,255,255,0.3)', pointerEvents: 'none' }}>▲</span>
+            <span style={{ position: 'absolute', bottom: 5, left: '50%', transform: 'translateX(-50%)', fontSize: 8, color: 'rgba(255,255,255,0.3)', pointerEvents: 'none' }}>▼</span>
+            <span style={{ position: 'absolute', left: 5, top: '50%', transform: 'translateY(-50%)', fontSize: 8, color: 'rgba(255,255,255,0.3)', pointerEvents: 'none' }}>◀</span>
+            <span style={{ position: 'absolute', right: 5, top: '50%', transform: 'translateY(-50%)', fontSize: 8, color: 'rgba(255,255,255,0.3)', pointerEvents: 'none' }}>▶</span>
+            <div style={{
+              width: 36, height: 36, borderRadius: '50%',
+              background: 'radial-gradient(circle at 35% 35%, #67e8f9, #22d3ee)',
+              border: '2px solid rgba(255,255,255,0.4)',
+              boxShadow: '0 0 12px rgba(34,211,238,0.6)',
+              position: 'absolute',
+              transform: `translate(${joystickKnob.x}px, ${joystickKnob.y}px)`,
+              transition: joystickActiveRef.current ? 'none' : 'transform 0.12s ease',
+              pointerEvents: 'none',
+            }} />
+          </div>
+        )}
+
+        {/* Right fire button */}
+        {phase === "playing" && (
+          <div
+            onPointerDown={(e) => { e.preventDefault(); shoot(); }}
+            style={{
+              position: 'fixed', bottom: 24, right: 24, zIndex: 50,
+              touchAction: 'none', userSelect: 'none',
+              width: 76, height: 76, borderRadius: '50%',
+              background: 'radial-gradient(circle at 35% 35%, rgba(251,146,60,0.35), rgba(239,68,68,0.25))',
+              border: '2px solid rgba(251,146,60,0.5)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 0 20px rgba(251,146,60,0.3)',
+              cursor: 'pointer',
+            }}
+          >
+            <span style={{ fontSize: 22, pointerEvents: 'none' }}>🔥</span>
+            <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.7)', fontWeight: 'bold', pointerEvents: 'none', letterSpacing: 1 }}>FIRE</span>
           </div>
         )}
       <GuruQuizOverlay {...guruQuiz} />
