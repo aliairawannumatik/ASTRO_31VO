@@ -15,7 +15,7 @@ import dasar5 from "@assets/5_1778279067123.png";
 import dasar6 from "@assets/6_1778279067124.jpg";
 import dasar8 from "@assets/image_1778975173462.png";
 import dasar9 from "@assets/image_1778975294660.png";
-import dasar11 from "@assets/11_1778279067124.jpg";
+import dasar11 from "@assets/image_1778975333922.png";
 import dasar14 from "@assets/14_1778279067128.png";
 import dasar15 from "@assets/15_1778279067129.png";
 import dasar16 from "@assets/16_1778278243308.png";
