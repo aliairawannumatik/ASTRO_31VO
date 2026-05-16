@@ -339,27 +339,46 @@ const PacmanMathPage = () => {
     if (keys.has("ArrowDown")  || keys.has("s")) { pac.ndx = 0;  pac.ndy = 1; }
 
     // ── Move pac-man ────────────────────────────────────────────────
-    pac.prog += spd;
     pac.mouthA = Math.abs(Math.sin(frameRef.current * 0.18)) * 0.38;
+
+    // If stopped, try immediately starting in queued direction
+    if (pac.dx === 0 && pac.dy === 0) {
+      const tr = pac.row + pac.ndy, tc = ((pac.col + pac.ndx) % COLS + COLS) % COLS;
+      if (passable(maze, tr, tc)) { pac.dx = pac.ndx; pac.dy = pac.ndy; }
+    }
+    // Allow instant 180° reverse while moving
+    if ((pac.ndx !== 0 || pac.ndy !== 0) &&
+        pac.ndx === -pac.dx && pac.ndy === -pac.dy) {
+      pac.dx = pac.ndx; pac.dy = pac.ndy; pac.prog = 1 - pac.prog;
+    }
+
+    pac.prog += spd;
 
     while (pac.prog >= 1) {
       pac.prog -= 1;
-      const tryR = pac.row + pac.ndy, tryC = pac.col + pac.ndx;
-      const tryRealC = ((tryC % COLS) + COLS) % COLS;
-      if (passable(maze, tryR, tryRealC)) {
-        pac.dy = pac.ndy; pac.dx = pac.ndx;
-      }
+      // Try queued turn at this cell crossing
+      const tryR = pac.row + pac.ndy, tryC = ((pac.col + pac.ndx) % COLS + COLS) % COLS;
+      if (passable(maze, tryR, tryC)) { pac.dy = pac.ndy; pac.dx = pac.ndx; }
+      // Advance to next cell
       const nr = pac.row + pac.dy;
       let nc = pac.col + pac.dx;
       if (passable(maze, nr, ((nc % COLS) + COLS) % COLS)) {
         pac.row = nr;
-        if (pac.row === TUNNEL_ROW) {
-          nc = ((nc % COLS) + COLS) % COLS;
-        }
+        if (pac.row === TUNNEL_ROW) nc = ((nc % COLS) + COLS) % COLS;
         pac.col = nc;
         eatCell(pac.row, pac.col);
       } else {
         pac.dy = 0; pac.dx = 0; pac.prog = 0;
+      }
+    }
+
+    // ── Prevent visual wall clipping ────────────────────────────────
+    // If the next cell in current direction is a wall, snap to cell center
+    if (pac.dx !== 0 || pac.dy !== 0) {
+      const nextR = pac.row + pac.dy;
+      const nextC = ((pac.col + pac.dx) % COLS + COLS) % COLS;
+      if (!passable(maze, nextR, nextC)) {
+        pac.prog = 0; pac.dx = 0; pac.dy = 0;
       }
     }
 
@@ -385,8 +404,8 @@ const PacmanMathPage = () => {
         g.col + g.ndx * g.prog,
       );
       const [px2, py2] = cellCenter(
-        pac.row + pac.dx * pac.prog,
-        pac.col + pac.dy * pac.prog,
+        pac.row + pac.dy * pac.prog,
+        pac.col + pac.dx * pac.prog,
       );
       if (Math.abs(gx - px2) < CELL * 0.75 && Math.abs(gy - py2) < CELL * 0.75) {
         if (g.frightTimer > 0 && !g.eaten) {
