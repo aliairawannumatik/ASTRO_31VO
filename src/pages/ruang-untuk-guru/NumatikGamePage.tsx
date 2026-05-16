@@ -82,7 +82,7 @@ const games = [
     icon: <Circle className="w-7 h-7 text-purple-400 shrink-0 group-hover:scale-110 transition-transform" />,
   },
   {
-    label: "Pacman Math",
+    label: "Pac Math",
     emoji: "👾",
     path: "/math-game-arena/umum/pacman-math",
     desc: "Telan pelet jawaban benar, hindari hantu, dan kuasai labirin!",

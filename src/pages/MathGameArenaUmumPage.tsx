@@ -160,7 +160,7 @@ const games = [
     badge: "BARU",
   },
   {
-    label: "Pacman Math",
+    label: "Pac Math",
     emoji: "👾",
     path: "/math-game-arena/umum/pacman-math",
     desc: "Makan semua titik di labirin! Temukan pelet warna jawaban BENAR untuk skor besar & hantu ketakutan!",

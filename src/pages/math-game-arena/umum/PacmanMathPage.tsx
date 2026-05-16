@@ -627,7 +627,7 @@ const PacmanMathPage = () => {
             🏠
           </button>
           <h1 className="font-display text-2xl font-bold text-primary text-glow-cyan text-center flex-1">
-            👾 PACMAN MATH
+            👾 PAC MATH
           </h1>
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
@@ -650,7 +650,7 @@ const PacmanMathPage = () => {
           {phase === "idle" && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 rounded-xl gap-3">
               <div className="text-5xl">👾</div>
-              <h2 className="font-display text-2xl text-yellow-300">PACMAN MATH</h2>
+              <h2 className="font-display text-2xl text-yellow-300">PAC MATH</h2>
               <div className="text-white/60 text-xs text-center max-w-xs font-body px-4 space-y-1">
                 <p>Makan semua titik kuning untuk naik level!</p>
                 <p>Ada 4 pelet warna besar — masing-masing = pilihan jawaban soal.</p>
