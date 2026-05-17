@@ -1138,36 +1138,215 @@ const BattleTankPage = ({
 
             <div className="bt-main">
               <div className="bt-visual">
-                <div className="flex items-end justify-center gap-5 w-full">
+
+                {/* ── Tank battle row: Player VS Enemies ── */}
+                <div className="flex items-center justify-center gap-4 w-full">
+
+                  {/* Player tank */}
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="text-[7px] text-emerald-400/70 font-bold tracking-wider uppercase">TANKMU</div>
                     <div className="relative">
-                      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(74,222,128,0.25) 0%,transparent 70%)", transform: "scale(2.2)", borderRadius: "50%" }} />
-                      <div className="bt-fa relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 14px #4ade80) drop-shadow(0 0 28px #16a34a)" }}>🪖</div>
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(74,222,128,0.3) 0%,transparent 70%)", transform: "scale(2.4)", borderRadius: "50%" }} />
+                      {/* Player tank — green, faces right */}
+                      <svg viewBox="0 0 80 56" className="bt-fa relative z-10" style={{ width: 72, filter: "drop-shadow(0 0 8px #4ade80) drop-shadow(0 0 18px #16a34a)" }}>
+                        <defs>
+                          <linearGradient id="bt-p-body" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#86efac"/>
+                            <stop offset="55%" stopColor="#22c55e"/>
+                            <stop offset="100%" stopColor="#15803d"/>
+                          </linearGradient>
+                          <linearGradient id="bt-p-track" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#4ade80"/>
+                            <stop offset="100%" stopColor="#166534"/>
+                          </linearGradient>
+                          <linearGradient id="bt-p-turret" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#a7f3d0"/>
+                            <stop offset="100%" stopColor="#059669"/>
+                          </linearGradient>
+                        </defs>
+                        {/* Tracks */}
+                        <rect x="4" y="34" width="72" height="16" rx="7" fill="url(#bt-p-track)" stroke="#14532d" strokeWidth="1.2"/>
+                        {/* Track links */}
+                        {[10,20,30,40,50,60,68].map(tx => (
+                          <line key={tx} x1={tx} y1="34" x2={tx} y2="50" stroke="#14532d" strokeWidth="0.9" opacity="0.7"/>
+                        ))}
+                        {/* Body */}
+                        <rect x="10" y="22" width="58" height="18" rx="5" fill="url(#bt-p-body)" stroke="#14532d" strokeWidth="1"/>
+                        {/* Turret base */}
+                        <ellipse cx="38" cy="22" rx="18" ry="9" fill="url(#bt-p-turret)" stroke="#065f46" strokeWidth="1"/>
+                        {/* Turret dome */}
+                        <rect x="22" y="11" width="28" height="14" rx="6" fill="url(#bt-p-turret)" stroke="#065f46" strokeWidth="1"/>
+                        {/* Cannon */}
+                        <rect x="46" y="16" width="26" height="6" rx="3" fill="#059669" stroke="#022c22" strokeWidth="1"/>
+                        {/* Cannon tip flash */}
+                        <circle cx="73" cy="19" r="3.5" fill="#bbf7d0" opacity="0.7"/>
+                        {/* Hatch */}
+                        <ellipse cx="34" cy="14" rx="7" ry="5" fill="#6ee7b7" stroke="#047857" strokeWidth="0.8"/>
+                        <circle cx="34" cy="14" r="2.5" fill="#a7f3d0"/>
+                        {/* Star emblem */}
+                        <polygon points="54,27 55.4,31 59.5,31 56.3,33.4 57.7,37.5 54,35 50.3,37.5 51.7,33.4 48.5,31 52.6,31" fill="#fde68a" opacity="0.9"/>
+                        {/* Antenna */}
+                        <line x1="28" y1="11" x2="26" y2="4" stroke="#4ade80" strokeWidth="1.2" strokeLinecap="round"/>
+                        <circle cx="26" cy="3.5" r="2" fill="#bbf7d0"/>
+                        {/* Wheel bolts */}
+                        {[14,28,42,56,68].map((wx,i) => (
+                          <circle key={i} cx={wx} cy="42" r="3.5" fill="#166534" stroke="#bbf7d0" strokeWidth="0.7"/>
+                        ))}
+                        {/* Body panel lines */}
+                        <line x1="10" y1="30" x2="68" y2="30" stroke="#065f46" strokeWidth="0.7" opacity="0.5"/>
+                      </svg>
                     </div>
                     <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(74,222,128,0.8),transparent)" }} />
                     <div className="text-[8px] font-bold text-emerald-400">KAMU</div>
                   </div>
-                  <div className="flex flex-col items-center pb-4">
-                    <div className="text-xl font-black text-white/20">VS</div>
+
+                  <div className="flex flex-col items-center pb-2 shrink-0">
+                    <div className="text-lg font-black text-white/20">VS</div>
                   </div>
-                  <div className="flex flex-col items-center gap-1.5">
+
+                  {/* Enemy tanks 2×2 grid */}
+                  <div className="flex flex-col items-center gap-1">
                     <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">TANK MUSUH</div>
                     <div className="grid grid-cols-2 gap-1.5">
                       {([
-                        { glow: "#ff5e87", name: "MERAH",  delay: "0s"   },
-                        { glow: "#ffc94a", name: "EMAS",   delay: "0.5s" },
-                        { glow: "#cc66ff", name: "UNGU",   delay: "1s"   },
-                        { glow: "#00e6d2", name: "TEAL",   delay: "1.5s" },
-                      ] as const).map(g => (
-                        <div key={g.name} className="flex flex-col items-center gap-0.5 rounded-lg p-1.5 border"
-                          style={{ borderColor: g.glow + "55", background: g.glow + "12", boxShadow: `0 0 10px ${g.glow}33` }}>
-                          <div className="bt-fb text-2xl" style={{ animationDelay: g.delay, filter: `drop-shadow(0 0 7px ${g.glow})` }}>🔫</div>
-                          <span className="text-[6px] font-bold" style={{ color: g.glow }}>{g.name}</span>
+                        { body: "#ff5e87", track: "#aa2244", turret: "#ff2255", name: "MERAH",  delay: "0s"   },
+                        { body: "#ffc94a", track: "#aa8800", turret: "#ffaa00", name: "EMAS",   delay: "0.4s" },
+                        { body: "#cc66ff", track: "#7700aa", turret: "#aa44dd", name: "UNGU",   delay: "0.8s" },
+                        { body: "#00e6d2", track: "#007766", turret: "#00bbaa", name: "TEAL",   delay: "1.2s" },
+                      ]).map(e => (
+                        <div key={e.name} className="flex flex-col items-center gap-0.5 rounded-lg p-1.5 border"
+                          style={{ borderColor: e.body + "55", background: e.body + "12", boxShadow: `0 0 10px ${e.body}33` }}>
+                          <svg viewBox="0 0 64 44" className="bt-fb" style={{ width: 48, animationDelay: e.delay, filter: `drop-shadow(0 0 5px ${e.body})` }}>
+                            <defs>
+                              <linearGradient id={`bt-e-body-${e.name}`} x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor={e.body}/>
+                                <stop offset="100%" stopColor={e.track}/>
+                              </linearGradient>
+                            </defs>
+                            {/* Track */}
+                            <rect x="2" y="28" width="60" height="13" rx="5.5" fill={e.track} stroke="#00000055" strokeWidth="1"/>
+                            {[9,17,25,33,41,49,56].map(tx => (
+                              <line key={tx} x1={tx} y1="28" x2={tx} y2="41" stroke="#00000044" strokeWidth="0.8"/>
+                            ))}
+                            {/* Body */}
+                            <rect x="7" y="18" width="50" height="15" rx="4" fill={`url(#bt-e-body-${e.name})`} stroke="#00000044" strokeWidth="0.8"/>
+                            {/* Turret */}
+                            <rect x="16" y="8" width="26" height="13" rx="5" fill={e.turret} stroke="#00000044" strokeWidth="0.8"/>
+                            {/* Cannon — faces LEFT (enemy) */}
+                            <rect x="4" y="12" width="18" height="5" rx="2.5" fill={e.track} stroke="#00000055" strokeWidth="0.8"/>
+                            {/* Hatch */}
+                            <ellipse cx="30" cy="10" rx="5" ry="3.5" fill={e.body} opacity="0.7" stroke="#00000033" strokeWidth="0.6"/>
+                            {/* Wheels */}
+                            {[10,22,34,46,56].map((wx,i) => (
+                              <circle key={i} cx={wx} cy="34.5" r="3" fill={e.track} stroke={e.body} strokeWidth="0.6"/>
+                            ))}
+                          </svg>
+                          <span className="text-[6px] font-bold" style={{ color: e.body }}>{e.name}</span>
                         </div>
                       ))}
                     </div>
                   </div>
+                </div>
+
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.4),transparent)" }} />
+
+                {/* ── Boss / Raja Tank ── */}
+                <div className="flex flex-col items-center gap-1 py-1 rounded-2xl border border-yellow-400/30 px-3"
+                  style={{ background: "rgba(250,204,21,0.06)", boxShadow: "0 0 18px rgba(250,204,21,0.18)" }}>
+                  <div className="text-[7px] text-yellow-300/80 font-black tracking-widest uppercase">👑 TANK RAJA (BOS)</div>
+                  <div className="relative">
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(250,204,21,0.3) 0%,transparent 65%)", transform: "scale(2.2)", borderRadius: "50%" }} />
+                    {/* Boss tank SVG — large, golden, menacing, faces right */}
+                    <svg viewBox="0 0 110 72" className="bt-fa relative z-10" style={{ width: 100, filter: "drop-shadow(0 0 10px #facc15) drop-shadow(0 0 22px #b45309)" }}>
+                      <defs>
+                        <linearGradient id="bt-boss-body" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#fde68a"/>
+                          <stop offset="45%" stopColor="#f59e0b"/>
+                          <stop offset="100%" stopColor="#92400e"/>
+                        </linearGradient>
+                        <linearGradient id="bt-boss-track" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#fbbf24"/>
+                          <stop offset="100%" stopColor="#78350f"/>
+                        </linearGradient>
+                        <linearGradient id="bt-boss-turret" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#fef3c7"/>
+                          <stop offset="100%" stopColor="#d97706"/>
+                        </linearGradient>
+                        <radialGradient id="bt-boss-glow" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stopColor="rgba(253,224,71,0.4)"/>
+                          <stop offset="100%" stopColor="rgba(253,224,71,0)"/>
+                        </radialGradient>
+                      </defs>
+
+                      {/* Glow aura */}
+                      <ellipse cx="55" cy="50" rx="48" ry="22" fill="url(#bt-boss-glow)"/>
+
+                      {/* Tracks — wider and taller */}
+                      <rect x="3" y="48" width="104" height="20" rx="9" fill="url(#bt-boss-track)" stroke="#451a03" strokeWidth="1.5"/>
+                      {[12,22,32,42,52,62,72,82,92,100].map(tx => (
+                        <line key={tx} x1={tx} y1="48" x2={tx} y2="68" stroke="#451a03" strokeWidth="1.1" opacity="0.6"/>
+                      ))}
+                      {/* Track spikes */}
+                      {[8,24,40,56,72,88,102].map((tx,i) => (
+                        <rect key={i} x={tx-2} y="66" width="4" height="5" rx="1" fill="#fbbf24" opacity="0.8"/>
+                      ))}
+
+                      {/* Body — armored, chunky */}
+                      <rect x="8" y="30" width="90" height="24" rx="7" fill="url(#bt-boss-body)" stroke="#451a03" strokeWidth="1.5"/>
+                      {/* Armor plates */}
+                      <rect x="12" y="34" width="20" height="14" rx="3" fill="rgba(0,0,0,0.12)" stroke="#fbbf2444" strokeWidth="0.8"/>
+                      <rect x="36" y="34" width="20" height="14" rx="3" fill="rgba(0,0,0,0.12)" stroke="#fbbf2444" strokeWidth="0.8"/>
+                      <rect x="60" y="34" width="20" height="14" rx="3" fill="rgba(0,0,0,0.12)" stroke="#fbbf2444" strokeWidth="0.8"/>
+
+                      {/* Turret base ring */}
+                      <ellipse cx="50" cy="30" rx="26" ry="10" fill="#f59e0b" stroke="#451a03" strokeWidth="1.2"/>
+
+                      {/* Turret dome — big and menacing */}
+                      <rect x="26" y="12" width="42" height="22" rx="9" fill="url(#bt-boss-turret)" stroke="#451a03" strokeWidth="1.5"/>
+                      {/* Turret rivets */}
+                      {[[30,15],[64,15],[30,30],[64,30]].map(([rx,ry],i) => (
+                        <circle key={i} cx={rx} cy={ry} r="2" fill="#fde68a" stroke="#78350f" strokeWidth="0.7"/>
+                      ))}
+
+                      {/* Main cannon — thick, double barrel */}
+                      <rect x="64" y="17" width="38" height="8" rx="4" fill="#d97706" stroke="#451a03" strokeWidth="1.2"/>
+                      <rect x="64" y="26" width="38" height="8" rx="4" fill="#b45309" stroke="#451a03" strokeWidth="1.2"/>
+                      {/* Muzzle flash */}
+                      <ellipse cx="104" cy="21" rx="5" ry="3.5" fill="#fef08a" opacity="0.8"/>
+                      <ellipse cx="104" cy="30" rx="5" ry="3.5" fill="#fef08a" opacity="0.65"/>
+
+                      {/* Hatch */}
+                      <ellipse cx="44" cy="16" rx="8" ry="5.5" fill="#fde68a" stroke="#b45309" strokeWidth="1"/>
+                      <circle cx="44" cy="16" r="3" fill="#fef3c7"/>
+
+                      {/* Crown on turret */}
+                      <path d="M36,12 L38,5 L44,10 L50,3 L56,10 L62,5 L64,12 Z" fill="#facc15" stroke="#92400e" strokeWidth="1"/>
+                      {/* Crown gems */}
+                      <circle cx="38" cy="8" r="2" fill="#f87171"/>
+                      <circle cx="50" cy="5" r="2.5" fill="#34d399"/>
+                      <circle cx="62" cy="8" r="2" fill="#60a5fa"/>
+
+                      {/* Skull emblem on body */}
+                      <circle cx="22" cy="41" r="6" fill="#1c1917" opacity="0.7"/>
+                      <circle cx="20" cy="39.5" r="1.2" fill="white" opacity="0.8"/>
+                      <circle cx="24" cy="39.5" r="1.2" fill="white" opacity="0.8"/>
+                      <path d="M19.5,43 Q22,45 24.5,43" stroke="white" strokeWidth="0.9" fill="none" opacity="0.7"/>
+
+                      {/* Large wheels */}
+                      {[14,32,55,78,96].map((wx,i) => (
+                        <circle key={i} cx={wx} cy="58" r="6" fill="#78350f" stroke="#fbbf24" strokeWidth="1.2"/>
+                      ))}
+                      {[14,32,55,78,96].map((wx,i) => (
+                        <circle key={i} cx={wx} cy="58" r="2.5" fill="#fbbf24"/>
+                      ))}
+
+                      {/* HP bar hint */}
+                      <rect x="20" y="72" width="70" height="4" rx="2" fill="#451a03"/>
+                      <rect x="20" y="72" width="70" height="4" rx="2" fill="#ef4444" opacity="0.9"/>
+                      <text x="55" y="75.5" textAnchor="middle" fontSize="3.5" fill="white" fontWeight="bold">HP RAJA</text>
+                    </svg>
+                  </div>
+                  <div className="text-[7px] text-yellow-300/60 text-center leading-tight">Muncul tiap 60 detik · Mahkota &amp; 3 meriam · Butuh banyak tembakan!</div>
                 </div>
 
                 <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.4),transparent)" }} />
