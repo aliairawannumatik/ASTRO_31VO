@@ -7,148 +7,122 @@ import { playPopSound } from "@/hooks/useAudio";
 const routes: Record<string, string> = {
   "Bilangan Bulat": "/tka/modul-pemantapan/bilangan-bulat",
   "Bilangan Rasional": "/tka/modul-pemantapan/bilangan-rasional",
-  "Bilangan Berpangkat": "/tka/modul-pemantapan/bilangan-berpangkat",
-  "Bilangan Irasional": "/tka/modul-pemantapan/bilangan-irasional",
   "KPK dan FPB": "/tka/modul-pemantapan/kpk-fpb",
-  "Modulo & Sisa Pembagian": "/tka/modul-pemantapan/modulo",
-  "Himpunan": "/tka/modul-pemantapan/himpunan",
-  "Relasi dan Fungsi": "/tka/modul-pemantapan/relasi-fungsi",
-  "Perbandingan": "/tka/modul-pemantapan/perbandingan",
   "Aljabar": "/tka/modul-pemantapan/aljabar",
   "Persamaan & Pertidaksamaan LSV": "/tka/modul-pemantapan/plsv",
-  "Persamaan Garis": "/tka/modul-pemantapan/persamaan-garis",
-  "Persamaan Kuadrat": "/tka/modul-pemantapan/persamaan-kuadrat",
-  "Fungsi Kuadrat": "/tka/modul-pemantapan/fungsi-kuadrat",
+  "Perbandingan": "/tka/modul-pemantapan/perbandingan",
   "Aritmetika Sosial": "/tka/modul-pemantapan/aritmetika-sosial",
-  "Pola Bilangan": "/tka/modul-pemantapan/pola-bilangan",
-  "Sistem Persamaan Linear Dua Variabel": "/tka/modul-pemantapan/spldv",
+  "Himpunan": "/tka/modul-pemantapan/himpunan",
   "Garis dan Sudut": "/tka/modul-pemantapan/garis-sudut",
-  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
-  "Teorema Pythagoras": "/tka/modul-pemantapan/teorema-pythagoras",
   "Segitiga & Segiempat": "/tka/modul-pemantapan/segitiga-segiempat",
+  "Pola Bilangan": "/tka/modul-pemantapan/pola-bilangan",
+  "Koordinat Kartesius": "/tka/modul-pemantapan/koordinat-cartesius",
+  "Relasi dan Fungsi": "/tka/modul-pemantapan/relasi-fungsi",
+  "Persamaan Garis": "/tka/modul-pemantapan/persamaan-garis",
+  "Sistem Persamaan Linear Dua Variabel": "/tka/modul-pemantapan/spldv",
+  "Teorema Pythagoras": "/tka/modul-pemantapan/teorema-pythagoras",
   "Lingkaran": "/tka/modul-pemantapan/lingkaran",
   "Bangun Ruang Sisi Datar": "/tka/modul-pemantapan/bangun-ruang-sisi-datar",
-  "Bangun Ruang Sisi Lengkung": "/tka/modul-pemantapan/bangun-ruang-sisi-lengkung",
+  "Bilangan Berpangkat": "/tka/modul-pemantapan/bilangan-berpangkat",
+  "Bilangan Irasional": "/tka/modul-pemantapan/bilangan-irasional",
+  "Modulo & Sisa Pembagian": "/tka/modul-pemantapan/modulo",
+  "Persamaan Kuadrat": "/tka/modul-pemantapan/persamaan-kuadrat",
+  "Fungsi Kuadrat": "/tka/modul-pemantapan/fungsi-kuadrat",
   "Kesebangunan & Kekongruenan": "/tka/modul-pemantapan/kesebangunan",
   "Transformasi Geometri": "/tka/modul-pemantapan/transformasi-geometri",
+  "Bangun Ruang Sisi Lengkung": "/tka/modul-pemantapan/bangun-ruang-sisi-lengkung",
   "Statistika": "/tka/modul-pemantapan/statistika",
   "Peluang": "/tka/modul-pemantapan/peluang",
 };
 
 type Topic = { name: string; emoji: string };
-type Category = {
+
+type Kelas = {
   label: string;
-  emoji: string;
-  gradient: string;
-  border: string;
-  headerGrad: string;
-  dot: string;
-  badge: string;
-  bar: string;
+  grade: string;
+  accent: string;
+  glow: string;
+  headerBg: string;
+  headerBorder: string;
+  badgeBg: string;
+  badgeText: string;
+  barColor: string;
+  iconBg: string;
   topics: Topic[];
 };
 
-const categories: Category[] = [
+const kelasList: Kelas[] = [
   {
-    label: "Teori Bilangan",
-    emoji: "🔢",
-    gradient: "from-blue-900 to-blue-950",
-    border: "border-blue-700",
-    headerGrad: "from-blue-800 to-blue-900",
-    dot: "bg-blue-400",
-    badge: "bg-blue-700 text-blue-200 border-blue-500",
-    bar: "bg-blue-400",
+    label: "Kelas 7",
+    grade: "VII",
+    accent: "#fbbf24",
+    glow: "rgba(251,191,36,0.18)",
+    headerBg: "linear-gradient(135deg, rgba(251,191,36,0.18) 0%, rgba(245,158,11,0.08) 100%)",
+    headerBorder: "rgba(251,191,36,0.35)",
+    badgeBg: "rgba(251,191,36,0.18)",
+    badgeText: "#fde68a",
+    barColor: "#fbbf24",
+    iconBg: "rgba(251,191,36,0.12)",
     topics: [
       { name: "Bilangan Bulat", emoji: "🔵" },
       { name: "Bilangan Rasional", emoji: "⅔" },
-      { name: "Bilangan Berpangkat", emoji: "²ⁿ" },
-      { name: "Bilangan Irasional", emoji: "√" },
       { name: "KPK dan FPB", emoji: "÷" },
-      { name: "Modulo & Sisa Pembagian", emoji: "%" },
-    ],
-  },
-  {
-    label: "Aljabar & Fungsi",
-    emoji: "📐",
-    gradient: "from-violet-900 to-violet-950",
-    border: "border-violet-700",
-    headerGrad: "from-violet-800 to-violet-900",
-    dot: "bg-violet-400",
-    badge: "bg-violet-700 text-violet-200 border-violet-500",
-    bar: "bg-violet-400",
-    topics: [
       { name: "Himpunan", emoji: "⊂" },
-      { name: "Relasi dan Fungsi", emoji: "↦" },
-      { name: "Perbandingan", emoji: "∶" },
       { name: "Aljabar", emoji: "𝑥" },
       { name: "Persamaan & Pertidaksamaan LSV", emoji: "=" },
-      { name: "Persamaan Garis", emoji: "📈" },
-      { name: "Persamaan Kuadrat", emoji: "²" },
-      { name: "Fungsi Kuadrat", emoji: "∪" },
+      { name: "Perbandingan", emoji: "∶" },
       { name: "Aritmetika Sosial", emoji: "💰" },
-      { name: "Pola Bilangan", emoji: "…" },
-      { name: "Sistem Persamaan Linear Dua Variabel", emoji: "xy" },
+      { name: "Garis dan Sudut", emoji: "∠" },
+      { name: "Segitiga & Segiempat", emoji: "◻" },
     ],
   },
   {
-    label: "Geometri",
-    emoji: "📏",
-    gradient: "from-emerald-900 to-emerald-950",
-    border: "border-emerald-700",
-    headerGrad: "from-emerald-800 to-emerald-900",
-    dot: "bg-emerald-400",
-    badge: "bg-emerald-700 text-emerald-200 border-emerald-500",
-    bar: "bg-emerald-400",
+    label: "Kelas 8",
+    grade: "VIII",
+    accent: "#22d3ee",
+    glow: "rgba(34,211,238,0.18)",
+    headerBg: "linear-gradient(135deg, rgba(34,211,238,0.18) 0%, rgba(6,182,212,0.08) 100%)",
+    headerBorder: "rgba(34,211,238,0.35)",
+    badgeBg: "rgba(34,211,238,0.18)",
+    badgeText: "#a5f3fc",
+    barColor: "#22d3ee",
+    iconBg: "rgba(34,211,238,0.12)",
     topics: [
-      { name: "Garis dan Sudut", emoji: "∠" },
+      { name: "Pola Bilangan", emoji: "…" },
       { name: "Koordinat Kartesius", emoji: "⊹" },
+      { name: "Relasi dan Fungsi", emoji: "↦" },
+      { name: "Persamaan Garis", emoji: "📈" },
+      { name: "Sistem Persamaan Linear Dua Variabel", emoji: "xy" },
       { name: "Teorema Pythagoras", emoji: "△" },
-      { name: "Segitiga & Segiempat", emoji: "◻" },
       { name: "Lingkaran", emoji: "○" },
       { name: "Bangun Ruang Sisi Datar", emoji: "⬡" },
-      { name: "Bangun Ruang Sisi Lengkung", emoji: "⬤" },
-      { name: "Kesebangunan & Kekongruenan", emoji: "≅" },
-      { name: "Transformasi Geometri", emoji: "↻" },
     ],
   },
   {
-    label: "Statistika & Peluang",
-    emoji: "📊",
-    gradient: "from-orange-900 to-orange-950",
-    border: "border-orange-700",
-    headerGrad: "from-orange-800 to-orange-900",
-    dot: "bg-orange-400",
-    badge: "bg-orange-700 text-orange-200 border-orange-500",
-    bar: "bg-orange-400",
+    label: "Kelas 9",
+    grade: "IX",
+    accent: "#a78bfa",
+    glow: "rgba(167,139,250,0.18)",
+    headerBg: "linear-gradient(135deg, rgba(167,139,250,0.18) 0%, rgba(139,92,246,0.08) 100%)",
+    headerBorder: "rgba(167,139,250,0.35)",
+    badgeBg: "rgba(167,139,250,0.18)",
+    badgeText: "#ddd6fe",
+    barColor: "#a78bfa",
+    iconBg: "rgba(167,139,250,0.12)",
     topics: [
+      { name: "Bilangan Berpangkat", emoji: "²ⁿ" },
+      { name: "Bilangan Irasional", emoji: "√" },
+      { name: "Modulo & Sisa Pembagian", emoji: "%" },
+      { name: "Persamaan Kuadrat", emoji: "²" },
+      { name: "Fungsi Kuadrat", emoji: "∪" },
+      { name: "Kesebangunan & Kekongruenan", emoji: "≅" },
+      { name: "Transformasi Geometri", emoji: "↻" },
+      { name: "Bangun Ruang Sisi Lengkung", emoji: "⬤" },
       { name: "Statistika", emoji: "📉" },
       { name: "Peluang", emoji: "🎲" },
     ],
   },
 ];
-
-const BookSVG = () => (
-  <svg viewBox="0 0 64 64" className="w-14 h-14" fill="none">
-    <defs>
-      <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="#67e8f9" />
-        <stop offset="100%" stopColor="#0891b2" />
-      </linearGradient>
-    </defs>
-    <rect x="8" y="8" width="36" height="48" rx="3" fill="url(#bg1)" opacity="0.9" />
-    <rect x="16" y="8" width="36" height="48" rx="3" fill="url(#bg1)" opacity="0.6" />
-    <rect x="12" y="18" width="24" height="2" rx="1" fill="white" opacity="0.7" />
-    <rect x="12" y="24" width="20" height="2" rx="1" fill="white" opacity="0.5" />
-    <rect x="12" y="30" width="22" height="2" rx="1" fill="white" opacity="0.5" />
-    <rect x="12" y="36" width="18" height="2" rx="1" fill="white" opacity="0.4" />
-  </svg>
-);
-
-const StarChip = ({ color }: { color: string }) => (
-  <span className={`inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border font-body ${color}`}>
-    ✦ MATERI & LATIHAN
-  </span>
-);
 
 const TKAModulPemantapanPage = () => {
   const navigate = useNavigate();
@@ -164,30 +138,34 @@ const TKAModulPemantapanPage = () => {
       <Starfield />
       <PageNavigation prevPath="/tka" />
 
-      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+      <div className="relative z-10 max-w-2xl w-full px-4 py-10">
+
+        {/* ── Header ── */}
         <div className="flex flex-col items-center mb-10">
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-cyan-500/20 to-blue-400/10 border border-cyan-400/30 flex items-center justify-center mb-5 shadow-[0_0_32px_rgba(34,211,238,0.2)]">
-            <BookSVG />
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 shadow-[0_0_32px_rgba(34,211,238,0.2)]"
+            style={{ background: "linear-gradient(135deg, rgba(34,211,238,0.15), rgba(99,102,241,0.1))", border: "1px solid rgba(34,211,238,0.3)" }}>
+            <span className="text-3xl">📚</span>
           </div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-white text-center mb-1"
-            style={{ textShadow: '0 0 40px rgba(34,211,238,0.5)' }}>
+            style={{ textShadow: "0 0 40px rgba(34,211,238,0.5)" }}>
             MODUL PEMANTAPAN TKA
           </h1>
-          <h2 className="font-display text-sm md:text-base font-semibold text-center mb-2"
-            style={{ color: '#22d3ee', textShadow: '0 0 20px rgba(34,211,238,0.4)' }}>
-            Oleh : Irawan Sutiawan, M.Pd
-          </h2>
-          <p className="text-white/50 text-sm text-center font-body mb-4">
-            Materi & latihan dasar untuk persiapan TKA Matematika SMP
+          <p className="font-display text-sm font-semibold text-center mb-4"
+            style={{ color: "#22d3ee", textShadow: "0 0 20px rgba(34,211,238,0.4)" }}>
+            Oleh: Irawan Sutiawan, M.Pd
+          </p>
+          <p className="text-white/45 text-xs text-center font-body mb-5 max-w-sm">
+            Materi &amp; latihan soal per topik untuk persiapan TKA Matematika SMP
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-2">
             {[
-              { v: "28", l: "Topik", color: "bg-cyan-500/15 border-cyan-400/30 text-cyan-300" },
-              { v: "4", l: "Kategori", color: "bg-blue-500/15 border-blue-400/30 text-blue-300" },
-              { v: "TKA", l: "Siap Ujian", color: "bg-emerald-500/15 border-emerald-400/30 text-emerald-300" },
-            ].map(({ v, l, color }) => (
-              <div key={l} className={`flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full border font-body ${color}`}>
+              { v: "28", l: "Topik", c: "rgba(34,211,238,0.12)", bc: "rgba(34,211,238,0.3)", tc: "#67e8f9" },
+              { v: "3", l: "Jenjang Kelas", c: "rgba(167,139,250,0.12)", bc: "rgba(167,139,250,0.3)", tc: "#c4b5fd" },
+              { v: "TKA", l: "Siap Ujian", c: "rgba(34,197,94,0.1)", bc: "rgba(34,197,94,0.3)", tc: "#86efac" },
+            ].map(({ v, l, c, bc, tc }) => (
+              <div key={l} className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full font-body"
+                style={{ background: c, border: `1px solid ${bc}`, color: tc }}>
                 <span className="text-sm">{v}</span>
                 <span className="opacity-70 font-normal">{l}</span>
               </div>
@@ -195,45 +173,90 @@ const TKAModulPemantapanPage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 animate-slide-up">
-          {categories.map((cat, ci) => (
-            <div key={cat.label}
-              className={`relative rounded-2xl overflow-hidden border ${cat.border}`}
-              style={{ animationDelay: `${ci * 0.06}s` }}>
-              <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient}`} />
+        {/* ── Per-Kelas Sections ── */}
+        <div className="flex flex-col gap-6">
+          {kelasList.map((kelas, ki) => (
+            <div key={kelas.label} className="rounded-2xl overflow-hidden"
+              style={{
+                border: `1px solid ${kelas.headerBorder}`,
+                boxShadow: `0 4px 32px ${kelas.glow}`,
+                background: "rgba(10,10,30,0.7)",
+              }}>
 
-              <div className={`relative flex items-center gap-3 px-5 py-3.5 bg-gradient-to-r ${cat.headerGrad} border-b ${cat.border}`}>
-                <span className="text-xl leading-none">{cat.emoji}</span>
-                <div className="flex-1">
-                  <p className="font-display text-sm font-bold text-white">{cat.label}</p>
-                  <p className="font-body text-[10px] text-white/40">{cat.topics.length} topik</p>
+              {/* Section header */}
+              <div className="flex items-center gap-4 px-5 py-4"
+                style={{ background: kelas.headerBg, borderBottom: `1px solid ${kelas.headerBorder}` }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 font-display font-black text-lg"
+                  style={{ background: `${kelas.iconBg}`, border: `1.5px solid ${kelas.headerBorder}`, color: kelas.accent }}>
+                  {kelas.grade}
                 </div>
-                <StarChip color={cat.badge} />
+                <div className="flex-1">
+                  <p className="font-display text-base font-bold text-white">{kelas.label}</p>
+                  <p className="font-body text-[11px]" style={{ color: kelas.accent, opacity: 0.7 }}>
+                    {kelas.topics.length} topik materi
+                  </p>
+                </div>
+                <span className="font-body text-[9px] font-bold px-2.5 py-1 rounded-full tracking-widest uppercase"
+                  style={{ background: kelas.badgeBg, color: kelas.badgeText, border: `1px solid ${kelas.headerBorder}` }}>
+                  ✦ MATERI & LATIHAN
+                </span>
               </div>
 
-              <div className="relative px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {cat.topics.map((topic, ti) => {
+              {/* Topics list */}
+              <div className="px-3 py-3 flex flex-col gap-1.5">
+                {kelas.topics.map((topic, ti) => {
                   const hasRoute = !!routes[topic.name];
+                  const num = ti + 1;
                   return (
                     <button
                       key={topic.name}
                       onClick={() => handleClick(topic.name)}
                       disabled={!hasRoute}
-                      className={`group flex items-center gap-3 rounded-xl px-4 py-3.5 text-left transition-all duration-200 shadow-md
+                      className={`group flex items-center gap-3 w-full rounded-xl px-4 py-3 text-left transition-all duration-200
                         ${hasRoute
-                          ? "bg-white/20 hover:bg-white/30 border border-white/40 hover:border-white/70 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
-                          : "bg-white/5 border border-white/10 cursor-not-allowed opacity-40"}`}
-                      style={{ animationDelay: `${(ci * 0.06) + (ti * 0.025)}s` }}
+                          ? "cursor-pointer hover:-translate-y-0.5 active:translate-y-0"
+                          : "cursor-not-allowed opacity-35"}`}
+                      style={hasRoute ? {
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px solid rgba(255,255,255,0.07)",
+                      } : {
+                        background: "rgba(255,255,255,0.02)",
+                        border: "1px solid rgba(255,255,255,0.04)",
+                      }}
+                      onMouseEnter={e => {
+                        if (hasRoute) {
+                          (e.currentTarget as HTMLButtonElement).style.background = `${kelas.iconBg}`;
+                          (e.currentTarget as HTMLButtonElement).style.border = `1px solid ${kelas.headerBorder}`;
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        if (hasRoute) {
+                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)";
+                          (e.currentTarget as HTMLButtonElement).style.border = "1px solid rgba(255,255,255,0.07)";
+                        }
+                      }}
                     >
-                      <div className={`w-1.5 h-9 rounded-full shrink-0 ${cat.bar} opacity-80 group-hover:opacity-100 transition-opacity`} />
-                      <div className="w-9 h-9 rounded-lg bg-black/40 border border-white/10 flex items-center justify-center shrink-0 text-base group-hover:scale-110 transition-transform">
+                      {/* Number */}
+                      <span className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center font-display font-bold text-[10px]"
+                        style={{ background: kelas.iconBg, color: kelas.accent, border: `1px solid ${kelas.headerBorder}` }}>
+                        {num}
+                      </span>
+
+                      {/* Emoji icon */}
+                      <span className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm"
+                        style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
                         {topic.emoji}
-                      </div>
-                      <span className="font-body text-sm text-white/90 group-hover:text-white leading-snug flex-1 transition-colors font-medium">
+                      </span>
+
+                      {/* Name */}
+                      <span className="flex-1 font-body text-sm font-medium leading-snug text-white/80 group-hover:text-white transition-colors">
                         {topic.name}
                       </span>
+
+                      {/* Arrow */}
                       {hasRoute && (
-                        <svg className="w-4 h-4 text-white/40 group-hover:text-white/80 shrink-0 transition-all group-hover:translate-x-1 duration-200"
+                        <svg className="w-4 h-4 shrink-0 transition-all duration-200 group-hover:translate-x-1"
+                          style={{ color: kelas.accent, opacity: 0.5 }}
                           fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
@@ -246,12 +269,14 @@ const TKAModulPemantapanPage = () => {
           ))}
         </div>
 
+        {/* ── Footer note ── */}
         <div className="mt-8 flex flex-col items-center gap-3">
-          <div className="w-full bg-cyan-500/8 border border-cyan-400/20 rounded-xl px-4 py-3 flex items-start gap-3">
-            <span className="text-lg shrink-0">📘</span>
-            <p className="font-body text-xs text-white/55 leading-relaxed">
-              Setiap topik memuat <span className="text-cyan-300 font-semibold">materi ringkas</span> dan{" "}
-              <span className="text-cyan-300 font-semibold">latihan dasar</span> untuk memantapkan pemahaman sebelum menghadapi TKA.
+          <div className="w-full rounded-xl px-4 py-3 flex items-start gap-3"
+            style={{ background: "rgba(34,211,238,0.05)", border: "1px solid rgba(34,211,238,0.15)" }}>
+            <span className="text-base shrink-0">📘</span>
+            <p className="font-body text-xs text-white/50 leading-relaxed">
+              Setiap topik memuat <span className="text-cyan-300 font-semibold">ringkasan materi</span> dan{" "}
+              <span className="text-cyan-300 font-semibold">latihan soal dasar</span> untuk memantapkan pemahaman sebelum menghadapi TKA.
             </p>
           </div>
           <button
