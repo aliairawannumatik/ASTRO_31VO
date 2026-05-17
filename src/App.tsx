@@ -217,6 +217,35 @@ const TKALatihan3Page = lazy(() => import("./pages/tka/TKALatihan3Page"));
 const TKALatihan4Page = lazy(() => import("./pages/tka/TKALatihan4Page"));
 const TKALatihan5Page = lazy(() => import("./pages/tka/TKALatihan5Page"));
 const TKATipsPage = lazy(() => import("./pages/tka/TKATipsPage"));
+const TKAModulPemantapanPage = lazy(() => import("./pages/tka/TKAModulPemantapanPage"));
+const TKAPemantapanBilanganBulatPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganBulatPage"));
+const TKAPemantapanBilanganRasionalPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganRasionalPage"));
+const TKAPemantapanBilanganBerpangkatPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganBerpangkatPage"));
+const TKAPemantapanBilanganIrasionalPage = lazy(() => import("./pages/tka/modul-pemantapan/BilanganIrasionalPage"));
+const TKAPemantapanKPKFPBPage = lazy(() => import("./pages/tka/modul-pemantapan/KPKFPBPage"));
+const TKAPemantapanModuloPage = lazy(() => import("./pages/tka/modul-pemantapan/ModuloPage"));
+const TKAPemantapanHimpunanPage = lazy(() => import("./pages/tka/modul-pemantapan/HimpunanPage"));
+const TKAPemantapanRelasiFungsiPage = lazy(() => import("./pages/tka/modul-pemantapan/RelasiFungsiPage"));
+const TKAPemantapanPerbandinganPage = lazy(() => import("./pages/tka/modul-pemantapan/PerbandinganPage"));
+const TKAPemantapanAljabarPage = lazy(() => import("./pages/tka/modul-pemantapan/AljabarPage"));
+const TKAPemantapanPLSVPage = lazy(() => import("./pages/tka/modul-pemantapan/PLSVPage"));
+const TKAPemantapanPersamaanGarisPage = lazy(() => import("./pages/tka/modul-pemantapan/PersamaanGarisPage"));
+const TKAPemantapanPersamaanKuadratPage = lazy(() => import("./pages/tka/modul-pemantapan/PersamaanKuadratPage"));
+const TKAPemantapanFungsiKuadratPage = lazy(() => import("./pages/tka/modul-pemantapan/FungsiKuadratPage"));
+const TKAPemantapanAritmetikaSosialPage = lazy(() => import("./pages/tka/modul-pemantapan/AritmetikaSosialPage"));
+const TKAPemantapanPolaBilanganPage = lazy(() => import("./pages/tka/modul-pemantapan/PolaBilanganPage"));
+const TKAPemantapanSPLDVPage = lazy(() => import("./pages/tka/modul-pemantapan/SPLDVPage"));
+const TKAPemantapanGarisSudutPage = lazy(() => import("./pages/tka/modul-pemantapan/GarisSudutPage"));
+const TKAPemantapanKoordinatCartesiusPage = lazy(() => import("./pages/tka/modul-pemantapan/KoordinatCartesiusPage"));
+const TKAPemantapanTeoremaPage = lazy(() => import("./pages/tka/modul-pemantapan/TeoremaPage"));
+const TKAPemantapanSegitigaSegiempatPage = lazy(() => import("./pages/tka/modul-pemantapan/SegitigaSegiempatPage"));
+const TKAPemantapanLingkaranPage = lazy(() => import("./pages/tka/modul-pemantapan/LingkaranPage"));
+const TKAPemantapanBangunRuangSisiDatarPage = lazy(() => import("./pages/tka/modul-pemantapan/BangunRuangSisiDatarPage"));
+const TKAPemantapanBangunRuangSisiLengkungPage = lazy(() => import("./pages/tka/modul-pemantapan/BangunRuangSisiLengkungPage"));
+const TKAPemantapanKesebangunanPage = lazy(() => import("./pages/tka/modul-pemantapan/KesebangunanPage"));
+const TKAPemantapanTransformasiPage = lazy(() => import("./pages/tka/modul-pemantapan/TransformasiPage"));
+const TKAPemantapanStatistikaPage = lazy(() => import("./pages/tka/modul-pemantapan/StatistikaPage"));
+const TKAPemantapanPeluangPage = lazy(() => import("./pages/tka/modul-pemantapan/PeluangPage"));
 const PapanPeringkatPage = lazy(() => import("./pages/PapanPeringkatPage"));
 const BankSoalPage = lazy(() => import("./pages/BankSoalPage"));
 const BankSoalBilanganBulatPage = lazy(() => import("./pages/bank-soal/BilanganBulatPage"));
@@ -1090,6 +1119,35 @@ const AppInner = () => {
           <Route path="/tka/paket-3" element={<TKALatihan3Page />} />
           <Route path="/tka/paket-4" element={<TKALatihan4Page />} />
           <Route path="/tka/paket-5" element={<TKALatihan5Page />} />
+          <Route path="/tka/modul-pemantapan" element={<TKAModulPemantapanPage />} />
+          <Route path="/tka/modul-pemantapan/bilangan-bulat" element={<TKAPemantapanBilanganBulatPage />} />
+          <Route path="/tka/modul-pemantapan/bilangan-rasional" element={<TKAPemantapanBilanganRasionalPage />} />
+          <Route path="/tka/modul-pemantapan/bilangan-berpangkat" element={<TKAPemantapanBilanganBerpangkatPage />} />
+          <Route path="/tka/modul-pemantapan/bilangan-irasional" element={<TKAPemantapanBilanganIrasionalPage />} />
+          <Route path="/tka/modul-pemantapan/kpk-fpb" element={<TKAPemantapanKPKFPBPage />} />
+          <Route path="/tka/modul-pemantapan/modulo" element={<TKAPemantapanModuloPage />} />
+          <Route path="/tka/modul-pemantapan/himpunan" element={<TKAPemantapanHimpunanPage />} />
+          <Route path="/tka/modul-pemantapan/relasi-fungsi" element={<TKAPemantapanRelasiFungsiPage />} />
+          <Route path="/tka/modul-pemantapan/perbandingan" element={<TKAPemantapanPerbandinganPage />} />
+          <Route path="/tka/modul-pemantapan/aljabar" element={<TKAPemantapanAljabarPage />} />
+          <Route path="/tka/modul-pemantapan/plsv" element={<TKAPemantapanPLSVPage />} />
+          <Route path="/tka/modul-pemantapan/persamaan-garis" element={<TKAPemantapanPersamaanGarisPage />} />
+          <Route path="/tka/modul-pemantapan/persamaan-kuadrat" element={<TKAPemantapanPersamaanKuadratPage />} />
+          <Route path="/tka/modul-pemantapan/fungsi-kuadrat" element={<TKAPemantapanFungsiKuadratPage />} />
+          <Route path="/tka/modul-pemantapan/aritmetika-sosial" element={<TKAPemantapanAritmetikaSosialPage />} />
+          <Route path="/tka/modul-pemantapan/pola-bilangan" element={<TKAPemantapanPolaBilanganPage />} />
+          <Route path="/tka/modul-pemantapan/spldv" element={<TKAPemantapanSPLDVPage />} />
+          <Route path="/tka/modul-pemantapan/garis-sudut" element={<TKAPemantapanGarisSudutPage />} />
+          <Route path="/tka/modul-pemantapan/koordinat-cartesius" element={<TKAPemantapanKoordinatCartesiusPage />} />
+          <Route path="/tka/modul-pemantapan/teorema-pythagoras" element={<TKAPemantapanTeoremaPage />} />
+          <Route path="/tka/modul-pemantapan/segitiga-segiempat" element={<TKAPemantapanSegitigaSegiempatPage />} />
+          <Route path="/tka/modul-pemantapan/lingkaran" element={<TKAPemantapanLingkaranPage />} />
+          <Route path="/tka/modul-pemantapan/bangun-ruang-sisi-datar" element={<TKAPemantapanBangunRuangSisiDatarPage />} />
+          <Route path="/tka/modul-pemantapan/bangun-ruang-sisi-lengkung" element={<TKAPemantapanBangunRuangSisiLengkungPage />} />
+          <Route path="/tka/modul-pemantapan/kesebangunan" element={<TKAPemantapanKesebangunanPage />} />
+          <Route path="/tka/modul-pemantapan/transformasi-geometri" element={<TKAPemantapanTransformasiPage />} />
+          <Route path="/tka/modul-pemantapan/statistika" element={<TKAPemantapanStatistikaPage />} />
+          <Route path="/tka/modul-pemantapan/peluang" element={<TKAPemantapanPeluangPage />} />
           <Route path="/papan-peringkat" element={<PapanPeringkatPage />} />
           <Route path="/bank-soal" element={<BankSoalPage />} />
           <Route path="/bank-soal/bilangan-bulat" element={<BankSoalBilanganBulatPage />} />

@@ -305,6 +305,39 @@ const TKAPage = () => {
           </InfoSection>
         </div>
 
+        {/* ── Modul Pemantapan ── */}
+        <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.30s" }}>
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="text-cyan-400/50 text-xs font-body font-semibold tracking-widest uppercase">Modul Pemantapan</span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+
+          <button
+            onClick={() => { playPopSound(); navigate("/tka/modul-pemantapan"); }}
+            className="group w-full flex items-center gap-4
+              bg-gradient-to-r from-cyan-500/15 via-blue-500/10 to-cyan-400/5
+              border border-cyan-400/35 rounded-xl px-5 py-4
+              hover:from-cyan-500/25 hover:border-cyan-400/60 hover:shadow-lg hover:shadow-cyan-500/10
+              transition-all duration-300 cursor-pointer text-left"
+          >
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0
+              bg-gradient-to-br from-cyan-400/25 to-blue-500/10 border border-cyan-400/40 group-hover:border-cyan-400/70 transition-colors">
+              <BookOpen className="w-5 h-5 text-cyan-300" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span className="text-[10px] text-cyan-400/50 font-body uppercase tracking-wider">Materi &amp; Latihan Dasar</span>
+              <p className="font-body text-sm font-bold text-cyan-200 group-hover:text-cyan-100 transition-colors">
+                Modul Pemantapan TKA
+              </p>
+            </div>
+            <span className="text-xs font-body text-cyan-300/70 border border-cyan-400/30 bg-cyan-400/10 px-2.5 py-1 rounded-full shrink-0">
+              28 Topik
+            </span>
+            <ChevronRight className="w-4 h-4 shrink-0 text-cyan-400/50 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all" />
+          </button>
+        </div>
+
         {/* ── Paket Latihan Section ── */}
         <div className="mb-6 animate-slide-up">
           <div className="flex items-center gap-2 mb-3 px-1">

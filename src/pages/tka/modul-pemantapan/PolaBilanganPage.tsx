@@ -13,7 +13,7 @@ const materiSections: MateriSection[] = [
 
 const latihanDasar: LatihanSoal[] = [
   { no: 1, soal: "Diketahui barisan aritmatika: $-8, -4, 0, 4, 8, 12, n, 20, 24$. Nilai n adalah …", options: ["A. 10", "B. 14", "C. 16", "D. 18"], jawaban: "C", pembahasan: "Beda = 4, nilai setelah 12 = 16 → Jawaban C" },
-  { no: 3, soal: "Suku ke-22 dari barisan $99, 93, 87, 81, …$ adalah …", options: ["A. –27", "B. –21", "C. –15", "D. –9"], jawaban: "B", pembahasan: "a=99, b=-6\n$U_{22} = 99 + 21 \\times (-6) = 99 - 126 = -27$ → Jawaban A" },
+  { no: 3, soal: "Suku ke-22 dari barisan $99, 93, 87, 81, …$ adalah …", options: ["A. –27", "B. –21", "C. –15", "D. –9"], jawaban: "A", pembahasan: "a = 99, b = −6\n$U_{22} = 99 + (22-1) \\times (-6) = 99 - 126 = -27$ → Jawaban A" },
   { no: 4, soal: "Suku pertama barisan aritmatika adalah 3 dan bedanya 4. Suku ke-10 adalah …", options: ["A. 30", "B. 33", "C. 36", "D. 39"], jawaban: "D", pembahasan: "$U_{10} = 3 + 9 \\times 4 = 39$ → Jawaban D" },
   { no: 5, soal: "Barisan aritmatika diketahui $U_3 = 18$ dan $U_7 = 38$. Jumlah 24 suku pertama adalah …", options: ["A. 786", "B. 1248", "C. 1572", "D. 3144"], jawaban: "C", pembahasan: "b = (38-18)/4 = 5, a = 18 - 2×5 = 8\n$S_{24} = \\frac{24}{2}(2 \\times 8 + 23 \\times 5) = 12 \\times 131 = 1572$ → Jawaban C" },
   { no: 6, soal: "Gedung pertunjukan: baris depan 12 kursi, baris ke-2: 14, baris ke-3: 16, dst. Banyak kursi pada baris ke-20 adalah …", options: ["A. 28 buah", "B. 50 buah", "C. 58 buah", "D. 60 buah"], jawaban: "B", pembahasan: "a=12, b=2\n$U_{20} = 12 + 19 \\times 2 = 50$ → Jawaban B" },
