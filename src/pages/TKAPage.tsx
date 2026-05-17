@@ -3,10 +3,64 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import {
   Brain, ChevronRight, FileText, Lightbulb, BookOpen, Target,
-  ChevronDown, ChevronUp, Info, Layers, Award, BarChart2, ExternalLink
+  ChevronDown, ChevronUp, Info, Layers, Award, BarChart2, ExternalLink,
+  Clock, Zap, CheckCircle2, Coffee, Pencil, AlertTriangle, Star,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
+
+const tips = [
+  {
+    icon: BookOpen, color: "text-cyan-400", bg: "bg-cyan-400/10 border-cyan-400/30",
+    number: "01", title: "Pelajari Kisi-Kisi & Materi",
+    desc: "Fokus pada materi yang sering muncul: Aljabar, Bilangan, Geometri, Statistika, dan Peluang. Kuasai rumus-rumus dasar dan pastikan kamu memahami konsepnya, bukan sekadar hafal.",
+  },
+  {
+    icon: Clock, color: "text-yellow-400", bg: "bg-yellow-400/10 border-yellow-400/30",
+    number: "02", title: "Kelola Waktu dengan Cermat",
+    desc: "TKA biasanya memiliki batas waktu ketat. Alokasikan rata-rata 1–2 menit per soal. Jika satu soal terlalu sulit, lewati dulu dan kembali lagi setelah semua soal yang mudah selesai dikerjakan.",
+  },
+  {
+    icon: Target, color: "text-green-400", bg: "bg-green-400/10 border-green-400/30",
+    number: "03", title: "Kerjakan Soal Mudah Terlebih Dahulu",
+    desc: "Jangan terpaku pada soal yang sulit. Kerjakan soal yang kamu kuasai lebih dahulu untuk mengamankan poin. Setelah itu, baru kembali ke soal yang lebih menantang.",
+  },
+  {
+    icon: Pencil, color: "text-purple-400", bg: "bg-purple-400/10 border-purple-400/30",
+    number: "04", title: "Baca Soal dengan Teliti",
+    desc: "Pastikan kamu memahami apa yang ditanyakan sebelum menjawab. Banyak kesalahan terjadi karena terburu-buru membaca soal. Perhatikan kata kunci seperti 'bukan', 'kecuali', atau 'paling besar'.",
+  },
+  {
+    icon: Zap, color: "text-orange-400", bg: "bg-orange-400/10 border-orange-400/30",
+    number: "05", title: "Gunakan Teknik Eliminasi",
+    desc: "Jika ragu pada pilihan jawaban, gunakan teknik eliminasi — singkirkan pilihan yang jelas salah terlebih dahulu. Dengan mempersempit pilihan, peluangmu menjawab dengan benar menjadi lebih besar.",
+  },
+  {
+    icon: Brain, color: "text-pink-400", bg: "bg-pink-400/10 border-pink-400/30",
+    number: "06", title: "Latihan Soal Secara Rutin",
+    desc: "Biasakan mengerjakan soal-soal TKA dari tahun sebelumnya. Semakin sering berlatih, semakin cepat dan tepat kamu dalam memahami pola soal dan menemukan strategi penyelesaiannya.",
+  },
+  {
+    icon: Coffee, color: "text-amber-400", bg: "bg-amber-400/10 border-amber-400/30",
+    number: "07", title: "Istirahat Cukup Sebelum Tes",
+    desc: "Tidur yang cukup (7–8 jam) sebelum hari ujian sangat penting. Otak yang segar akan membantu kamu berpikir lebih jernih, berkonsentrasi lebih baik, dan mengingat materi dengan lebih mudah.",
+  },
+  {
+    icon: CheckCircle2, color: "text-teal-400", bg: "bg-teal-400/10 border-teal-400/30",
+    number: "08", title: "Periksa Kembali Jawaban",
+    desc: "Jika masih ada waktu tersisa, gunakan untuk mengecek ulang jawaban — terutama soal yang kamu ragu. Kesalahan kecil seperti salah hitung atau salah baca sering bisa diperbaiki di tahap ini.",
+  },
+  {
+    icon: AlertTriangle, color: "text-red-400", bg: "bg-red-400/10 border-red-400/30",
+    number: "09", title: "Tetap Tenang & Jangan Panik",
+    desc: "Rasa cemas adalah hal wajar. Tarik napas dalam-dalam dan percaya pada kemampuanmu. Kepanikan hanya akan menghambat konsentrasi. Fokus satu soal pada satu waktu.",
+  },
+  {
+    icon: Star, color: "text-indigo-400", bg: "bg-indigo-400/10 border-indigo-400/30",
+    number: "10", title: "Persiapkan Diri Sejak Jauh Hari",
+    desc: "Jangan belajar semalam sebelum ujian (SKS — Sistem Kebut Semalam). Mulailah mempersiapkan diri minimal 2–3 minggu sebelum tes agar materi lebih meresap dan kamu tidak kelelahan.",
+  },
+];
 
 const packages = [
   { id: 1, label: "Try Out 1", path: "/tka/paket-1", soal: 30 },
@@ -157,6 +211,7 @@ const TKAPage = () => {
   const [infoOpen, setInfoOpen] = useState<string[]>([]);
   const [showTentang, setShowTentang] = useState(false);
   const [showPaket, setShowPaket] = useState(false);
+  const [showTips, setShowTips] = useState(false);
 
   const toggleInfo = (id: string) =>
     setInfoOpen(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -507,14 +562,15 @@ const TKAPage = () => {
 
         {/* ── Tips & Panduan ── */}
         <div className="animate-slide-up" style={{ animationDelay: "0.30s" }}>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400/50 text-xs font-body font-semibold tracking-widest uppercase">Tips &amp; Panduan</span>
-            <div className="h-px flex-1 bg-white/10" />
-          </div>
+          <SectionToggleHeader
+            label="Tips &amp; Panduan"
+            color="text-amber-400/60"
+            open={showTips}
+            onToggle={() => setShowTips(v => !v)}
+          />
 
           <button
-            onClick={() => { playPopSound(); navigate("/tka/tips"); }}
+            onClick={() => { playPopSound(); setShowTips(v => !v); }}
             className="group w-full flex items-center gap-4
               bg-gradient-to-r from-amber-500/15 via-yellow-500/10 to-amber-400/5
               border border-amber-400/35 rounded-xl px-5 py-4
@@ -534,8 +590,40 @@ const TKAPage = () => {
             <span className="text-xs font-body text-amber-300/70 border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 rounded-full shrink-0">
               10 Tips
             </span>
-            <ChevronRight className="w-4 h-4 shrink-0 text-amber-400/50 group-hover:text-amber-300 group-hover:translate-x-0.5 transition-all" />
+            {showTips
+              ? <ChevronUp className="w-4 h-4 shrink-0 text-amber-300 transition-all" />
+              : <ChevronDown className="w-4 h-4 shrink-0 text-amber-400/50 group-hover:text-amber-300 transition-all" />}
           </button>
+
+          {showTips && (
+            <div className="mt-3 flex flex-col gap-3">
+              {tips.map((tip, i) => {
+                const Icon = tip.icon;
+                return (
+                  <div
+                    key={i}
+                    className={`flex gap-4 bg-card/70 backdrop-blur border rounded-2xl p-4 animate-slide-up ${tip.bg}`}
+                    style={{ animationDelay: `${i * 0.05}s` }}
+                  >
+                    <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border ${tip.bg}`}>
+                      <Icon className={`w-5 h-5 ${tip.color}`} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`font-display text-xs font-bold ${tip.color} opacity-70`}>{tip.number}</span>
+                        <h3 className={`font-display text-sm font-bold ${tip.color}`}>{tip.title}</h3>
+                      </div>
+                      <p className="text-white/70 text-xs font-body leading-relaxed">{tip.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="rounded-2xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-accent/10 border border-primary/20 p-4 text-center">
+                <p className="font-display text-sm font-bold text-primary text-glow-cyan mb-1">🚀 Kamu Pasti Bisa!</p>
+                <p className="text-white/60 text-xs font-body">Persiapan matang + mental kuat = hasil terbaik. Tetap semangat, Sobat Numatik!</p>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="mt-8 text-center">
