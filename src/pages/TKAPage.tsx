@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 
 const packages = [
-  { id: 1, label: "Paket 1", path: "/tka/paket-1", soal: 30 },
-  { id: 2, label: "Paket 2", path: "/tka/paket-2", soal: 30 },
-  { id: 3, label: "Paket 3", path: "/tka/paket-3", soal: 30 },
-  { id: 4, label: "Paket 4", path: "/tka/paket-4", soal: 30 },
-  { id: 5, label: "Paket 5", path: "/tka/paket-5", soal: 30 },
+  { id: 1, label: "Try Out 1", path: "/tka/paket-1", soal: 30 },
+  { id: 2, label: "Try Out 2", path: "/tka/paket-2", soal: 30 },
+  { id: 3, label: "Try Out 3", path: "/tka/paket-3", soal: 30 },
+  { id: 4, label: "Try Out 4", path: "/tka/paket-4", soal: 30 },
+  { id: 5, label: "Try Out 5", path: "/tka/paket-5", soal: 30 },
 ];
 
 const routes: Record<string, string> = {
@@ -188,7 +188,7 @@ const TKAPage = () => {
           <div className="mt-4 flex gap-5 items-center">
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
               <FileText className="w-3.5 h-3.5" />
-              <span>5 Paket Soal</span>
+              <span>5 Try Out</span>
             </div>
             <span className="text-white/20">·</span>
             <div className="flex items-center gap-1.5 text-white/40 text-xs font-body">
@@ -466,7 +466,7 @@ const TKAPage = () => {
         {/* ── Paket Latihan (toggle) ── */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.20s" }}>
           <SectionToggleHeader
-            label="Paket Latihan"
+            label="Try Out"
             color="text-white/40"
             open={showPaket}
             onToggle={() => setShowPaket(v => !v)}
@@ -489,7 +489,7 @@ const TKAPage = () => {
                     <span className="font-display text-base font-bold text-cyan-300 leading-tight">{String(pkg.id).padStart(2, "0")}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-[10px] text-white/30 font-body uppercase tracking-wider">Latihan TKA</span>
+                    <span className="text-[10px] text-white/30 font-body uppercase tracking-wider">Try Out TKA</span>
                     <p className="font-body text-sm font-semibold text-white group-hover:text-cyan-100 transition-colors truncate">
                       {pkg.label}
                     </p>
