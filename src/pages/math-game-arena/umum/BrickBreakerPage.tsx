@@ -1242,41 +1242,277 @@ const BrickBreakerPage = ({
 
   return (
     <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
-      {/* MathGameIntro shown as a full-screen overlay when idle */}
+      {/* ── IDLE SCREEN ── */}
       {isIdle && (
-        <div className="absolute inset-0 z-50">
-          <MathGameIntro
-            gameTitle="METEOR PANTUL NUMATIK"
-            subtitle="☄️ HUJAN METEOR GALAKSI ☄️"
-            heroEmoji="🛸"
-            startLabel="LUNCURKAN METEOR"
-            theme="meteor"
-            onStart={startGame}
-            onBack={() => { playPopSound(); resolvedBackPath ? navigate(resolvedBackPath) : navigate(-1); }}
-            onHome={() => { playPopSound(); navigate(resolvedHomePath); }}
-            bestLabel={bestRef.current > 0 ? `Rekor Tertinggi: ${bestRef.current}` : undefined}
-            extraOverlay={
-              <>
-                {/* UFOs drifting back & forth */}
-                <div
-                  className="absolute top-[18%] left-0 text-5xl animate-ufo-fly"
-                  style={{ filter: "drop-shadow(0 0 18px rgba(34,211,238,0.85)) drop-shadow(0 0 28px rgba(168,85,247,0.55))" }}
-                >🛸</div>
-                <div
-                  className="absolute top-[68%] left-0 text-4xl animate-ufo-fly"
-                  style={{ filter: "drop-shadow(0 0 16px rgba(168,85,247,0.85)) drop-shadow(0 0 26px rgba(34,211,238,0.5))", animationDelay: "9s", animationDuration: "22s" }}
-                >🛸</div>
-              </>
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          <style>{`
+            @keyframes mp-floatA  { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+            @keyframes mp-floatB  { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+            @keyframes mp-spin    { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+            @keyframes mp-bounce  { 0%,100%{transform:translateY(0) scale(1)} 40%{transform:translateY(-14px) scale(1.07)} 60%{transform:translateY(-10px) scale(1.04)} }
+            @keyframes mp-pulse   { 0%,100%{opacity:0.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.1)} }
+            @keyframes mp-shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+            @keyframes mp-scanY   { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+            @keyframes mp-breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+            @keyframes mp-crack   { 0%,80%{opacity:0} 85%,100%{opacity:1} }
+            @keyframes mp-rimSpin { from{stroke-dashoffset:0} to{stroke-dashoffset:-60} }
+            .mp-fa  { animation:mp-floatA 3.2s ease-in-out infinite }
+            .mp-fb  { animation:mp-floatB 3.8s ease-in-out infinite }
+            .mp-bou { animation:mp-bounce 1.6s ease-in-out infinite }
+            .mp-pul { animation:mp-pulse  2.4s ease-in-out infinite }
+            .mp-title-shine { background:linear-gradient(90deg,#fb923c,#f97316,#a855f7,#ec4899,#fb923c,#f97316);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:mp-shimmer 3.5s linear infinite }
+            .mp-btn { animation:mp-breathe 2.8s ease-in-out infinite }
+            .mp-scroll { height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column }
+            .mp-wrap  { flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100% }
+            .mp-main  { display:flex;flex-direction:column;gap:0.75rem }
+            .mp-left  { display:flex;flex-direction:column;gap:0.5rem }
+            .mp-right { display:flex;flex-direction:column;gap:0.5rem }
+            @media(orientation:landscape){
+              .mp-wrap  { justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100% }
+              .mp-main  { flex-direction:row;align-items:stretch;gap:2rem }
+              .mp-left  { flex:1;justify-content:center;gap:0.6rem }
+              .mp-right { flex:1;justify-content:center;gap:0.6rem }
             }
-            instructions={[
-              { text: <>Kemudikan <strong className="text-orange-300">pesawat 🛸</strong> dengan mouse atau sentuhan layar</> },
-              { text: <>Pantulkan <strong className="text-amber-300">meteor ☄️</strong> untuk hancurkan kristal asteroid</> },
-              { text: <>Tiap asteroid pecah setelah <strong className="text-yellow-300">2× kena</strong> meteor</> },
-              { text: <>Tiap <strong className="text-orange-300">25 detik</strong> muncul Soal NUMATIK 🤖 untuk skor besar</> },
-              { text: <>Tiap <strong className="text-red-300">60 detik</strong>: NORMAL → HARD → VERY HARD ⚡</> },
-              { text: <>Bangun <strong className="text-amber-300">combo 🔥</strong> untuk poin berlipat!</> },
-            ]}
-          />
+          `}</style>
+
+          {/* Deep space background — warm purple/orange */}
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(80,20,120,1) 0%, rgba(10,2,30,1) 60%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(250,100,0,0.12) 0%, transparent 55%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(168,85,247,0.12) 0%, transparent 55%)" }} />
+          <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(251,146,60,0.3),transparent)", animation: "mp-scanY 6s linear infinite" }} />
+
+          <div className="mp-scroll relative z-10">
+            <div className="mp-wrap">
+
+              {/* ── HEADER ── */}
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-between w-full mb-1">
+                  <button onClick={() => { playPopSound(); resolvedBackPath ? navigate(resolvedBackPath) : navigate(-1); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(251,146,60,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">←</span><span>Kembali</span>
+                  </button>
+                  <div className="text-[7px] tracking-[5px] text-orange-400/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                  <button onClick={() => { playPopSound(); navigate(resolvedHomePath); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-purple-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(251,146,60,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">🏠</span><span>Home</span>
+                  </button>
+                </div>
+                <div className="mp-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.4rem,4.5vw,2rem)" }}>METEOR PANTUL NUMATIK</div>
+                <div className="mx-auto mt-0.5 h-0.5 w-36 rounded-full" style={{ background: "linear-gradient(to right,transparent,#fb923c,#a855f7,transparent)" }} />
+                <p className="text-orange-300/60 text-[8px] tracking-widest uppercase mt-0.5">☄️ Pantul · Hancur · Skor ☄️</p>
+                {topicLabel && <p className="text-purple-300/70 text-[9px] tracking-wider mt-0.5 font-bold">✦ {topicLabel} ✦</p>}
+                {bestRef.current > 0 && <p className="text-yellow-300/80 text-[8px] font-bold mt-0.5">🏆 Rekor Tertinggi: {bestRef.current}</p>}
+              </div>
+
+              {/* ── MAIN BODY ── */}
+              <div className="mp-main">
+
+                {/* ── LEFT — game objects visual ── */}
+                <div className="mp-left">
+
+                  {/* UFO + VS + Bricks */}
+                  <div className="flex items-center justify-center gap-3 w-full">
+
+                    {/* Player UFO paddle */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="text-[7px] text-orange-300/70 font-bold tracking-wider uppercase">PESAWATMU</div>
+                      <div className="relative">
+                        <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background:"radial-gradient(circle,rgba(251,146,60,0.25) 0%,transparent 70%)", transform:"scale(2.2)" }} />
+                        <svg viewBox="0 0 80 52" className="mp-fa relative z-10" style={{ width:72, filter:"drop-shadow(0 0 8px #fb923c) drop-shadow(0 0 20px #a855f7)" }}>
+                          <defs>
+                            <radialGradient id="mp-ufo-dome" cx="40%" cy="30%" r="60%">
+                              <stop offset="0%" stopColor="rgba(220,200,255,0.98)"/>
+                              <stop offset="50%" stopColor="rgba(180,140,255,0.8)"/>
+                              <stop offset="100%" stopColor="#7c3aed99"/>
+                            </radialGradient>
+                            <linearGradient id="mp-ufo-disc" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#f97316"/>
+                              <stop offset="40%" stopColor="#fb923c"/>
+                              <stop offset="100%" stopColor="#c2410c"/>
+                            </linearGradient>
+                            <radialGradient id="mp-ufo-glow" cx="50%" cy="100%" r="50%">
+                              <stop offset="0%" stopColor="rgba(251,146,60,0.7)"/>
+                              <stop offset="100%" stopColor="rgba(251,146,60,0)"/>
+                            </radialGradient>
+                          </defs>
+                          {/* Antenna */}
+                          <line x1="40" y1="10" x2="40" y2="2" stroke="#fb923c" strokeWidth="1.5" strokeLinecap="round"/>
+                          <circle cx="40" cy="1.5" r="2.5" fill="#fbbf24"/>
+                          <circle cx="40" cy="1.5" r="1.2" fill="white"/>
+                          {/* Dome */}
+                          <path d="M24,22 Q40,4 56,22 Z" fill="url(#mp-ufo-dome)" stroke="rgba(200,180,255,0.4)" strokeWidth="0.8"/>
+                          <ellipse cx="35" cy="16" rx="4.5" ry="2.5" fill="rgba(255,255,255,0.5)" transform="rotate(-20,35,16)"/>
+                          {/* Main disc body */}
+                          <ellipse cx="40" cy="28" rx="36" ry="11" fill="url(#mp-ufo-disc)" stroke="#c2410c55" strokeWidth="0.8"/>
+                          {/* Rim ring */}
+                          <ellipse cx="40" cy="28" rx="37" ry="7" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="6 3"/>
+                          {/* Rim lights */}
+                          {[0,1,2,3,4,5,6].map(i => {
+                            const a = (i/7)*Math.PI*2;
+                            const cols=["#ff6b6b","#fbbf24","#4ade80","#60a5fa","#c084fc","#fb923c","#f472b6"];
+                            return <circle key={i} cx={40+Math.cos(a)*32} cy={28+Math.sin(a)*6.5} r="3" fill={cols[i]} style={{filter:`drop-shadow(0 0 3px ${cols[i]})`}}/>;
+                          })}
+                          {/* Undercarriage glow */}
+                          <ellipse cx="40" cy="36" rx="22" ry="6" fill="url(#mp-ufo-glow)"/>
+                          {/* Landing feet */}
+                          <line x1="25" y1="36" x2="22" y2="44" stroke="#fb923c" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="22" cy="45" r="2.5" fill="#fbbf24"/>
+                          <line x1="40" y1="37" x2="40" y2="46" stroke="#fb923c" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="40" cy="47" r="2.5" fill="#fbbf24"/>
+                          <line x1="55" y1="36" x2="58" y2="44" stroke="#fb923c" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="58" cy="45" r="2.5" fill="#fbbf24"/>
+                          {/* Thruster jets */}
+                          <ellipse cx="28" cy="39" rx="3" ry="5" fill="rgba(255,200,50,0.5)" style={{filter:"blur(1px)"}}/>
+                          <ellipse cx="52" cy="39" rx="3" ry="5" fill="rgba(255,200,50,0.5)" style={{filter:"blur(1px)"}}/>
+                        </svg>
+                      </div>
+                      <div className="w-1.5 h-4 rounded-full" style={{ background:"linear-gradient(to bottom,rgba(251,146,60,0.8),transparent)" }} />
+                      <div className="text-[8px] font-bold text-orange-400">KAMU</div>
+                    </div>
+
+                    {/* Meteor bouncing ball */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="text-[7px] text-amber-300/70 font-bold tracking-wider uppercase">METEOR</div>
+                      <div className="mp-bou" style={{ filter:"drop-shadow(0 0 10px #f97316) drop-shadow(0 0 22px #ef4444)" }}>
+                        <svg viewBox="0 0 54 54" style={{ width:50 }}>
+                          <defs>
+                            <radialGradient id="mp-meteor-body" cx="35%" cy="30%" r="65%">
+                              <stop offset="0%" stopColor="#fef08a"/>
+                              <stop offset="30%" stopColor="#fb923c"/>
+                              <stop offset="70%" stopColor="#ef4444"/>
+                              <stop offset="100%" stopColor="#7f1d1d"/>
+                            </radialGradient>
+                            <radialGradient id="mp-meteor-corona" cx="50%" cy="50%" r="50%">
+                              <stop offset="60%" stopColor="rgba(251,146,60,0)"/>
+                              <stop offset="100%" stopColor="rgba(251,146,60,0.45)"/>
+                            </radialGradient>
+                          </defs>
+                          {/* Corona glow */}
+                          <circle cx="27" cy="27" r="26" fill="url(#mp-meteor-corona)"/>
+                          {/* Flame spikes around */}
+                          {[30,75,120,165,210,255,300,345].map((deg,i) => {
+                            const r1=19, r2=26+i%3*3, rad=deg*Math.PI/180;
+                            return <line key={deg} x1={27+Math.cos(rad)*r1} y1={27+Math.sin(rad)*r1} x2={27+Math.cos(rad)*r2} y2={27+Math.sin(rad)*r2} stroke={i%2===0?"#fbbf24":"#f97316"} strokeWidth={i%3===0?2:1.2} strokeLinecap="round" opacity="0.8"/>;
+                          })}
+                          {/* Main body */}
+                          <circle cx="27" cy="27" r="18" fill="url(#mp-meteor-body)"/>
+                          {/* Cute face — left winking eye */}
+                          <path d="M20,22 Q22,20 24,22" stroke="#7f1d1d" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
+                          {/* Right eye open & happy */}
+                          <ellipse cx="34" cy="22" rx="3" ry="3.5" fill="#7f1d1d"/>
+                          <ellipse cx="33" cy="21" rx="1.2" ry="1.2" fill="rgba(255,255,255,0.6)"/>
+                          {/* Big cute smile */}
+                          <path d="M19,30 Q27,38 35,30" stroke="#7f1d1d" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                          {/* Little rosy cheeks */}
+                          <ellipse cx="18" cy="28" rx="3.5" ry="2.5" fill="rgba(255,100,100,0.4)"/>
+                          <ellipse cx="36" cy="28" rx="3.5" ry="2.5" fill="rgba(255,100,100,0.4)"/>
+                          {/* Shine highlight */}
+                          <ellipse cx="21" cy="20" rx="4" ry="2.5" fill="rgba(255,255,255,0.45)" transform="rotate(-25,21,20)"/>
+                          {/* Little horns */}
+                          <path d="M17,12 L14,5 L20,10 Z" fill="#f97316" stroke="#ef4444" strokeWidth="0.5"/>
+                          <path d="M37,12 L40,5 L34,10 Z" fill="#f97316" stroke="#ef4444" strokeWidth="0.5"/>
+                        </svg>
+                      </div>
+                      <div className="text-[8px] font-bold text-amber-400">☄️ BOLA API</div>
+                    </div>
+
+                    <div className="flex flex-col items-center shrink-0">
+                      <div className="text-lg font-black text-white/20">VS</div>
+                    </div>
+
+                    {/* Asteroid bricks grid */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">ASTEROID</div>
+                      <div className="flex flex-col gap-1">
+                        {[
+                          { color:"#ff5e87", glow:"#ff5e87", label:"PINK",  crack:false },
+                          { color:"#ff9040", glow:"#ff9040", label:"ORANYE",crack:true  },
+                          { color:"#ffc94a", glow:"#ffc94a", label:"KUNING",crack:false },
+                          { color:"#72f572", glow:"#72f572", label:"HIJAU", crack:true  },
+                          { color:"#5ec8ff", glow:"#5ec8ff", label:"BIRU",  crack:false },
+                        ].map((row,ri) => (
+                          <div key={ri} className="flex gap-1 mp-fb" style={{ animationDelay:`${ri*0.3}s` }}>
+                            {[0,1,2].map(ci => (
+                              <div key={ci} className="relative rounded flex items-center justify-center"
+                                style={{ width:24,height:12, background:row.color+"22", border:`1px solid ${row.color}66`, boxShadow:`0 0 6px ${row.glow}44` }}>
+                                <div className="w-full h-full rounded" style={{ background:`linear-gradient(135deg,${row.color}88 0%,${row.color}33 100%)` }}/>
+                                {/* Crack on some bricks */}
+                                {row.crack && ci===1 && (
+                                  <svg viewBox="0 0 24 12" className="absolute inset-0 w-full h-full">
+                                    <path d="M11,1 L9,5 L13,6 L10,11" stroke="rgba(0,0,0,0.5)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+                                  </svg>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-[6px] font-bold text-white/30 mt-0.5">2× untuk hancur</div>
+                    </div>
+
+                  </div>
+
+                  {/* Difficulty badges row */}
+                  <div>
+                    <div className="w-full h-px my-1" style={{ background:"linear-gradient(to right,transparent,rgba(168,85,247,0.3),transparent)" }} />
+                    <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Tingkat Kesulitan</div>
+                    <div className="grid grid-cols-3 gap-1.5 w-full">
+                      {[
+                        { label:"NORMAL",    color:"#5eead4", icon:"🌱", desc:"60 detik" },
+                        { label:"HARD",      color:"#fbbf24", icon:"🔥", desc:"+60 detik" },
+                        { label:"VERY HARD", color:"#ef4444", icon:"💀", desc:"+60 detik" },
+                      ].map(d => (
+                        <div key={d.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                          style={{ borderColor:d.color+"44", background:d.color+"0f", boxShadow:`0 0 8px ${d.color}30` }}>
+                          <span className="text-sm leading-none">{d.icon}</span>
+                          <span className="text-[6px] font-black" style={{ color:d.color }}>{d.label}</span>
+                          <span className="text-[5px] text-white/30 text-center leading-tight">{d.desc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* ── RIGHT — instructions + button ── */}
+                <div className="mp-right">
+                  <div>
+                    <div className="w-full h-px mb-1.5" style={{ background:"linear-gradient(to right,transparent,rgba(251,146,60,0.3),transparent)" }} />
+                    <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">📖 Cara Bermain</div>
+                    <div className="space-y-1.5 px-1">
+                      {[
+                        { icon:"🛸", text:"Gerakkan pesawat dengan mouse atau sentuh layar untuk memantulkan meteor" },
+                        { icon:"☄️", text:"Meteor memantul ke atas — hancurkan semua asteroid di atas layar" },
+                        { icon:"💥", text:"Tiap asteroid butuh 2× terkena meteor untuk hancur" },
+                        { icon:"📝", text:"Tiap 25 detik muncul soal guru — jawab benar = +20 poin bonus" },
+                        { icon:"🔥", text:"Bangun combo dari memecah asteroid berturut-turut untuk poin berlipat!" },
+                      ].map((item,i) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <span className="text-xs shrink-0 mt-0.5">{item.icon}</span>
+                          <span className="text-[8px] text-white/55 leading-tight">{item.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1 mt-2">
+                    <button onClick={startGame}
+                      className="mp-btn relative overflow-hidden font-display font-black text-white text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                      style={{
+                        background:"linear-gradient(135deg,#f97316 0%,#fb923c 40%,#a855f7 100%)",
+                        boxShadow:"0 0 30px rgba(249,115,22,0.85),0 0 60px rgba(168,85,247,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.25)",
+                      }}>
+                      <span className="relative z-10 tracking-wide">🛸 LUNCURKAN METEOR</span>
+                    </button>
+                    <div className="text-[7px] text-white/20 text-center">
+                      Mouse / Sentuh layar untuk menggerakkan pesawat
+                    </div>
+                  </div>
+                </div>
+
+              </div>{/* mp-main */}
+            </div>{/* mp-wrap */}
+          </div>{/* mp-scroll */}
         </div>
       )}
 
