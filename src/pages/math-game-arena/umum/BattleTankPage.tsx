@@ -6,7 +6,6 @@ import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
-import MathGameIntro from "@/components/MathGameIntro";
 
 // Canvas dimensions are orientation-aware: portrait keeps the original 420x600
 // playfield; landscape uses a wider/shorter playfield so tanks have more room.
@@ -1080,30 +1079,155 @@ const BattleTankPage = ({
 
   if (phase === "idle") {
     return (
-      <MathGameIntro
-        gameTitle="SHOOT TANK"
-        subtitle="🎯 MEDAN PERTEMPURAN 🎯"
-        topicLabel={topicLabel}
-        heroEmoji="💥"
-        startLabel="MULAI BERTEMPUR"
-        theme="battle"
-        onStart={startGame}
-        onBack={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-        onHome={() => { playPopSound(); navigate(homePath); }}
-        bestLabel={bestRef.current > 0 ? `Rekor Tertinggi: ${bestRef.current}` : undefined}
-        decorations={[
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 72"><rect x="4" y="48" width="102" height="18" rx="9" fill="#222"/><rect x="4" y="50" width="102" height="14" rx="7" fill="#2a2a2a"/><circle cx="18" cy="57" r="7" fill="#444"/><circle cx="18" cy="57" r="3.5" fill="#1a1a1a"/><circle cx="36" cy="57" r="7" fill="#444"/><circle cx="36" cy="57" r="3.5" fill="#1a1a1a"/><circle cx="55" cy="57" r="7" fill="#444"/><circle cx="55" cy="57" r="3.5" fill="#1a1a1a"/><circle cx="74" cy="57" r="7" fill="#444"/><circle cx="74" cy="57" r="3.5" fill="#1a1a1a"/><circle cx="92" cy="57" r="7" fill="#444"/><circle cx="92" cy="57" r="3.5" fill="#1a1a1a"/><rect x="8" y="32" width="82" height="22" rx="5" fill="#3a6820"/><rect x="8" y="32" width="82" height="10" rx="5" fill="#4a8828"/><rect x="12" y="36" width="70" height="5" rx="2" fill="#5aaa33" opacity="0.4"/><ellipse cx="48" cy="30" rx="26" ry="16" fill="#336018"/><ellipse cx="48" cy="28" rx="24" ry="12" fill="#3e7822"/><rect x="65" y="24" width="40" height="9" rx="4" fill="#2a5010"/><rect x="100" y="22" width="10" height="13" rx="2" fill="#1a3808"/><circle cx="40" cy="22" r="8" fill="#2a5010"/><circle cx="40" cy="22" r="5" fill="#1a3808"/><rect cx="37" cy="19" width="6" height="6" rx="1" fill="#0a1804"/><circle cx="40" cy="22" r="2" fill="#0a1804"/><rect x="10" y="34" width="12" height="18" rx="2" fill="#2a5818" opacity="0.5"/><rect x="78" y="34" width="10" height="18" rx="2" fill="#2a5818" opacity="0.5"/></svg>')}`, className: "absolute top-[8%] left-[4%] w-24 h-16 md:w-32 md:h-20 opacity-80 animate-float-slow", glowRgba: "rgba(80,180,40,0.5)" },
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 72"><rect x="4" y="48" width="102" height="18" rx="9" fill="#1a1a22"/><rect x="4" y="50" width="102" height="14" rx="7" fill="#22222e"/><circle cx="18" cy="57" r="7" fill="#3a3a4a"/><circle cx="18" cy="57" r="3.5" fill="#111118"/><circle cx="36" cy="57" r="7" fill="#3a3a4a"/><circle cx="36" cy="57" r="3.5" fill="#111118"/><circle cx="55" cy="57" r="7" fill="#3a3a4a"/><circle cx="55" cy="57" r="3.5" fill="#111118"/><circle cx="74" cy="57" r="7" fill="#3a3a4a"/><circle cx="74" cy="57" r="3.5" fill="#111118"/><circle cx="92" cy="57" r="7" fill="#3a3a4a"/><circle cx="92" cy="57" r="3.5" fill="#111118"/><rect x="8" y="32" width="82" height="22" rx="5" fill="#3a3a55"/><rect x="8" y="32" width="82" height="10" rx="5" fill="#4a4a6a"/><rect x="12" y="36" width="70" height="5" rx="2" fill="#6a6a8a" opacity="0.4"/><ellipse cx="48" cy="30" rx="26" ry="16" fill="#2a2a45"/><ellipse cx="48" cy="28" rx="24" ry="12" fill="#353555"/><rect x="65" y="24" width="40" height="9" rx="4" fill="#1e1e38"/><rect x="100" y="22" width="10" height="13" rx="2" fill="#111128"/><circle cx="40" cy="22" r="8" fill="#1e1e38"/><circle cx="40" cy="22" r="5" fill="#111128"/><circle cx="40" cy="22" r="2" fill="#080810"/><rect x="10" y="34" width="12" height="18" rx="2" fill="#2a2a45" opacity="0.5"/><rect x="78" y="34" width="10" height="18" rx="2" fill="#2a2a45" opacity="0.5"/></svg>')}`, className: "absolute top-[42%] right-[4%] w-20 h-14 md:w-28 md:h-18 opacity-75 animate-float-medium", glowRgba: "rgba(80,80,180,0.5)" },
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 72"><rect x="4" y="48" width="102" height="18" rx="9" fill="#2a1a08"/><rect x="4" y="50" width="102" height="14" rx="7" fill="#3a2210"/><circle cx="18" cy="57" r="7" fill="#5a3a18"/><circle cx="18" cy="57" r="3.5" fill="#1a0e04"/><circle cx="36" cy="57" r="7" fill="#5a3a18"/><circle cx="36" cy="57" r="3.5" fill="#1a0e04"/><circle cx="55" cy="57" r="7" fill="#5a3a18"/><circle cx="55" cy="57" r="3.5" fill="#1a0e04"/><circle cx="74" cy="57" r="7" fill="#5a3a18"/><circle cx="74" cy="57" r="3.5" fill="#1a0e04"/><circle cx="92" cy="57" r="7" fill="#5a3a18"/><circle cx="92" cy="57" r="3.5" fill="#1a0e04"/><rect x="8" y="32" width="82" height="22" rx="5" fill="#b88830"/><rect x="8" y="32" width="82" height="10" rx="5" fill="#d4a040"/><rect x="12" y="36" width="70" height="5" rx="2" fill="#eec055" opacity="0.4"/><ellipse cx="48" cy="30" rx="26" ry="16" fill="#a07020"/><ellipse cx="48" cy="28" rx="24" ry="12" fill="#ba8a2a"/><rect x="65" y="24" width="40" height="9" rx="4" fill="#7a5010"/><rect x="100" y="22" width="10" height="13" rx="2" fill="#4a3008"/><circle cx="40" cy="22" r="8" fill="#7a5010"/><circle cx="40" cy="22" r="5" fill="#4a3008"/><circle cx="40" cy="22" r="2" fill="#2a1804"/><rect x="10" y="34" width="12" height="18" rx="2" fill="#a07020" opacity="0.5"/><rect x="78" y="34" width="10" height="18" rx="2" fill="#a07020" opacity="0.5"/></svg>')}`, className: "absolute bottom-[14%] left-[5%] w-22 h-14 md:w-30 md:h-20 opacity-80 animate-float-fast", glowRgba: "rgba(200,150,40,0.5)" },
-        ]}
-        instructions={[
-          { text: <>Gunakan <strong className="text-yellow-300">stik analog</strong> atau <strong className="text-yellow-300">tombol panah</strong> untuk menggerakkan tank ke <strong className="text-cyan-300">atas, bawah, kiri, kanan</strong></> },
-          { text: <>Meriam tank <strong className="text-cyan-300">otomatis mengunci musuh terdekat</strong> — kamu cukup tekan <strong className="text-pink-300">🔥 TEMBAK</strong> (atau klik / tap / spasi) dan peluru akan melesat tepat ke sasaran</> },
-          { text: <>Hancurkan semua tank musuh yang juga bergerak ke segala arah — kamu punya <strong className="text-pink-300">3 nyawa</strong></> },
-          { text: <>Setiap <strong className="text-yellow-300">60 detik</strong> akan muncul <strong className="text-amber-300">👑 BOS RAKSASA</strong> — tembak berkali-kali sampai HP-nya habis untuk dapat <strong className="text-green-400">bonus besar</strong>!</> },
-          { text: <>Setiap <strong className="text-yellow-300">25 detik</strong> akan muncul <strong className="text-pink-300">soal dari guru</strong> — game di-pause, jawab benar = <strong className="text-green-400">+20 poin</strong></> },
-        ]}
-      />
+      <div className="fixed inset-0 z-40 overflow-hidden">
+        <style>{`
+          @keyframes bt-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+          @keyframes bt-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+          @keyframes bt-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+          @keyframes bt-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+          @keyframes bt-breathe{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+          .bt-fa{animation:bt-floatA 3.2s ease-in-out infinite}
+          .bt-fb{animation:bt-floatB 3.8s ease-in-out infinite}
+          .bt-title-shine{background:linear-gradient(90deg,#86efac,#4ade80,#bef264,#86efac,#4ade80,#86efac);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:bt-shimmer 3.5s linear infinite}
+          .bt-btn-breathe{animation:bt-breathe 2.8s ease-in-out infinite}
+          .bt-scroll{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+          .bt-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100%}
+          .bt-main{display:flex;flex-direction:column;gap:0.75rem}
+          .bt-visual{display:flex;flex-direction:column;gap:0.5rem}
+          .bt-action{display:flex;flex-direction:column;gap:0.5rem}
+          @media(orientation:landscape){
+            .bt-wrap{justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100%}
+            .bt-main{flex-direction:row;align-items:stretch;gap:2rem}
+            .bt-visual{flex:1;justify-content:center;gap:0.6rem}
+            .bt-action{flex:1;justify-content:center;gap:0.6rem}
+          }
+        `}</style>
+
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(20,60,10,1) 0%, rgba(2,10,2,1) 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(34,197,94,0.12) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(163,230,53,0.10) 0%, transparent 55%)" }} />
+        <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.25),transparent)", animation: "bt-scanY 6s linear infinite" }} />
+
+        <div className="bt-scroll relative z-10">
+          <div className="bt-wrap">
+
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center justify-between w-full mb-1">
+                <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-lime-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(74,222,128,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">←</span>
+                  <span>Kembali</span>
+                </button>
+                <div className="text-[7px] tracking-[5px] text-emerald-400/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <button onClick={() => { playPopSound(); navigate(homePath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-lime-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(74,222,128,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">🏠</span>
+                  <span>Home</span>
+                </button>
+              </div>
+              <div className="bt-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.7rem,5vw,2.4rem)" }}>SHOOT TANK</div>
+              <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right,transparent,#4ade80,#bef264,transparent)" }} />
+              <p className="text-emerald-400/70 text-[9px] font-bold tracking-wider uppercase mt-1">🎯 Bidik · Tembak · Hancurkan</p>
+              {topicLabel && <p className="text-white/35 text-[8px] tracking-widest uppercase mt-0.5">🕹️ {topicLabel} 🕹️</p>}
+              {bestRef.current > 0 && (
+                <div className="mt-1 py-1 px-3 rounded-xl bg-emerald-500/10 border border-emerald-400/20">
+                  <p className="text-emerald-300 text-[8px] font-bold">🏆 Rekor: <span className="text-yellow-300">{bestRef.current}</span></p>
+                </div>
+              )}
+            </div>
+
+            <div className="bt-main">
+              <div className="bt-visual">
+                <div className="flex items-end justify-center gap-5 w-full">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="text-[7px] text-emerald-400/70 font-bold tracking-wider uppercase">TANKMU</div>
+                    <div className="relative">
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(74,222,128,0.25) 0%,transparent 70%)", transform: "scale(2.2)", borderRadius: "50%" }} />
+                      <div className="bt-fa relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 14px #4ade80) drop-shadow(0 0 28px #16a34a)" }}>🪖</div>
+                    </div>
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(74,222,128,0.8),transparent)" }} />
+                    <div className="text-[8px] font-bold text-emerald-400">KAMU</div>
+                  </div>
+                  <div className="flex flex-col items-center pb-4">
+                    <div className="text-xl font-black text-white/20">VS</div>
+                  </div>
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">TANK MUSUH</div>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {([
+                        { glow: "#ff5e87", name: "MERAH",  delay: "0s"   },
+                        { glow: "#ffc94a", name: "EMAS",   delay: "0.5s" },
+                        { glow: "#cc66ff", name: "UNGU",   delay: "1s"   },
+                        { glow: "#00e6d2", name: "TEAL",   delay: "1.5s" },
+                      ] as const).map(g => (
+                        <div key={g.name} className="flex flex-col items-center gap-0.5 rounded-lg p-1.5 border"
+                          style={{ borderColor: g.glow + "55", background: g.glow + "12", boxShadow: `0 0 10px ${g.glow}33` }}>
+                          <div className="bt-fb text-2xl" style={{ animationDelay: g.delay, filter: `drop-shadow(0 0 7px ${g.glow})` }}>🔫</div>
+                          <span className="text-[6px] font-bold" style={{ color: g.glow }}>{g.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.4),transparent)" }} />
+
+                <div>
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Senjata &amp; Power-up</div>
+                  <div className="grid grid-cols-3 gap-1.5 w-full">
+                    {([
+                      { icon: "💥", label: "TEMBAK", desc: "Klik/Tap/Spasi", color: "#4ade80" },
+                      { icon: "👑", label: "BOS",    desc: "Tiap 60 detik",  color: "#facc15" },
+                      { icon: "📝", label: "SOAL",   desc: "25 detik +20pts",color: "#f472b6" },
+                    ] as const).map(w => (
+                      <div key={w.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                        style={{ borderColor: w.color + "44", background: w.color + "0f", boxShadow: `0 0 8px ${w.color}30` }}>
+                        <span className="text-base leading-none" style={{ filter: `drop-shadow(0 0 5px ${w.color})` }}>{w.icon}</span>
+                        <span className="text-[7px] font-black" style={{ color: w.color }}>{w.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">{w.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="bt-action">
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.28),transparent)" }} />
+                <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1 font-bold text-center">📖 Cara Bermain</div>
+                <div className="space-y-1.5">
+                  {[
+                    { icon: "🕹️", text: "Gunakan stik analog atau tombol panah ↑↓←→ untuk menggerakkan tank ke segala arah" },
+                    { icon: "💥", text: "Meriam otomatis mengunci musuh terdekat — tekan TEMBAK (klik/tap/spasi) untuk menembak" },
+                    { icon: "❤️", text: "Hancurkan semua tank musuh yang bergerak — kamu punya 3 nyawa" },
+                    { icon: "👑", text: "Tiap 60 detik muncul BOS RAKSASA — tembak berulang hingga HP-nya habis untuk bonus besar!" },
+                    { icon: "📝", text: "Tiap 25 detik muncul soal dari guru — game pause, jawab benar = +20 poin" },
+                  ].map(({ icon, text }) => (
+                    <div key={text} className="flex items-start gap-2 px-1">
+                      <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                      <p className="text-[8px] text-white/55 leading-relaxed">{text}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col items-center gap-1.5 mt-2">
+                  <button onClick={startGame}
+                    className="bt-btn-breathe font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                    style={{
+                      background: "linear-gradient(135deg,#4ade80 0%,#22c55e 45%,#16a34a 100%)",
+                      boxShadow: "0 0 30px rgba(74,222,128,0.85),0 0 60px rgba(34,197,94,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.3)",
+                    }}>
+                    🎯 MULAI BERTEMPUR
+                  </button>
+                  <div className="text-[7px] text-white/20 text-center leading-relaxed">
+                    Panah / WASD = gerak · Klik/Tap/Spasi = tembak
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     );
   }
 

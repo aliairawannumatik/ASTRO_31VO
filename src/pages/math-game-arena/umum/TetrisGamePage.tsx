@@ -504,144 +504,180 @@ const TetrisGamePage = ({
   };
 
   if (!started) {
-    const tetrominoBlocks: Array<{ pos: string; anim: string; cells: number[][]; color: string; glow: string; size: string }> = [
-      { pos: "top-[8%] left-[6%]", anim: "animate-float-slow", cells: [[1,1,1,1]], color: "bg-cyan-400", glow: "rgba(0,255,255,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
-      { pos: "top-[12%] right-[10%]", anim: "animate-float-medium", cells: [[1,1],[1,1]], color: "bg-yellow-400", glow: "rgba(255,215,0,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
-      { pos: "top-[40%] left-[4%]", anim: "animate-float-fast", cells: [[0,1,0],[1,1,1]], color: "bg-fuchsia-500", glow: "rgba(217,70,239,0.6)", size: "w-3 h-3 md:w-4 md:h-4" },
-      { pos: "top-[35%] right-[5%]", anim: "animate-float-slow", cells: [[1,0],[1,0],[1,1]], color: "bg-orange-400", glow: "rgba(255,140,0,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
-      { pos: "bottom-[18%] left-[8%]", anim: "animate-float-medium", cells: [[0,1],[0,1],[1,1]], color: "bg-blue-500", glow: "rgba(30,144,255,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
-      { pos: "bottom-[22%] right-[7%]", anim: "animate-float-fast", cells: [[0,1,1],[1,1,0]], color: "bg-emerald-400", glow: "rgba(0,255,136,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
-      { pos: "bottom-[8%] left-[14%]", anim: "animate-float-slow", cells: [[1,1,0],[0,1,1]], color: "bg-pink-500", glow: "rgba(255,68,68,0.55)", size: "w-3 h-3 md:w-4 md:h-4" },
-      { pos: "top-[55%] right-[14%]", anim: "animate-float-fast", cells: [[1,1],[1,1]], color: "bg-fuchsia-400", glow: "rgba(232,121,249,0.55)", size: "w-2.5 h-2.5 md:w-3.5 md:h-3.5" },
-    ];
-
     return (
-      <>
-        <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-          <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-950/80 via-background/40 to-fuchsia-950/70" />
-          <Starfield />
+      <div className="fixed inset-0 z-40 overflow-hidden">
+        <style>{`
+          @keyframes tg-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+          @keyframes tg-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+          @keyframes tg-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+          @keyframes tg-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+          @keyframes tg-breathe{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+          .tg-fa{animation:tg-floatA 3.2s ease-in-out infinite}
+          .tg-fb{animation:tg-floatB 3.8s ease-in-out infinite}
+          .tg-title-shine{background:linear-gradient(90deg,#e879f9,#c084fc,#818cf8,#e879f9,#c084fc,#e879f9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:tg-shimmer 3.5s linear infinite}
+          .tg-btn-breathe{animation:tg-breathe 2.8s ease-in-out infinite}
+          .tg-scroll{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+          .tg-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100%}
+          .tg-main{display:flex;flex-direction:column;gap:0.75rem}
+          .tg-visual{display:flex;flex-direction:column;gap:0.5rem}
+          .tg-action{display:flex;flex-direction:column;gap:0.5rem}
+          @media(orientation:landscape){
+            .tg-wrap{justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100%}
+            .tg-main{flex-direction:row;align-items:stretch;gap:2rem}
+            .tg-visual{flex:1;justify-content:center;gap:0.6rem}
+            .tg-action{flex:1;justify-content:center;gap:0.6rem}
+          }
+        `}</style>
 
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {tetrominoBlocks.map((t, i) => (
-              <div key={i} className={`absolute ${t.pos} ${t.anim}`}>
-                <div className="flex flex-col gap-[2px] opacity-70">
-                  {t.cells.map((row, r) => (
-                    <div key={r} className="flex gap-[2px]">
-                      {row.map((cell, c) =>
-                        cell ? (
-                          <div
-                            key={c}
-                            className={`${t.size} ${t.color} rounded-sm`}
-                            style={{ boxShadow: `0 0 12px ${t.glow}, inset 0 2px 0 rgba(255,255,255,0.35), inset 0 -2px 0 rgba(0,0,0,0.25)` }}
-                          />
-                        ) : (
-                          <div key={c} className={t.size} />
-                        )
-                      )}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(40,5,70,1) 0%, rgba(5,2,15,1) 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(168,85,247,0.15) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(236,72,153,0.12) 0%, transparent 55%)" }} />
+        <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(192,132,252,0.25),transparent)", animation: "tg-scanY 6s linear infinite" }} />
+
+        {([
+          { pos: "top-[8%] left-[6%]",       anim: "tg-fa", cells: [[1,1,1,1]] as number[][], color: "#00E5FF", delay: "0s"   },
+          { pos: "top-[12%] right-[10%]",     anim: "tg-fb", cells: [[1,1],[1,1]] as number[][], color: "#FFD93D", delay: "0.5s" },
+          { pos: "top-[40%] left-[4%]",       anim: "tg-fa", cells: [[0,1,0],[1,1,1]] as number[][], color: "#C147E9", delay: "1s"   },
+          { pos: "bottom-[18%] right-[6%]",   anim: "tg-fb", cells: [[0,1,1],[1,1,0]] as number[][], color: "#27E8A7", delay: "0.3s" },
+          { pos: "bottom-[10%] left-[12%]",   anim: "tg-fa", cells: [[1,1,0],[0,1,1]] as number[][], color: "#FF3D6E", delay: "0.8s" },
+        ]).map((t, i) => (
+          <div key={i} className={`absolute ${t.pos} pointer-events-none ${t.anim}`} style={{ animationDelay: t.delay }}>
+            <div className="flex flex-col gap-[2px] opacity-55">
+              {t.cells.map((row, r) => (
+                <div key={r} className="flex gap-[2px]">
+                  {row.map((cell, c) => cell ? (
+                    <div key={c} className="w-3.5 h-3.5 rounded-sm" style={{ background: t.color, boxShadow: `0 0 8px ${t.color}` }} />
+                  ) : (
+                    <div key={c} className="w-3.5 h-3.5" />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div className="tg-scroll relative z-10">
+          <div className="tg-wrap">
+
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center justify-between w-full mb-1">
+                <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">←</span>
+                  <span>Kembali</span>
+                </button>
+                <div className="text-[7px] tracking-[5px] text-fuchsia-400/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <button onClick={() => { playPopSound(); navigate(homePath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">🏠</span>
+                  <span>Home</span>
+                </button>
+              </div>
+              <div className="tg-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.7rem,5vw,2.4rem)" }}>TETRIS NUMATIK</div>
+              <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right,transparent,#c084fc,#e879f9,transparent)" }} />
+              <p className="text-fuchsia-400/70 text-[9px] font-bold tracking-wider uppercase mt-1">🧩 Susun · Hapus Baris · Skor!</p>
+              {topicLabel && <p className="text-white/35 text-[8px] tracking-widest uppercase mt-0.5">🕹️ {topicLabel} 🕹️</p>}
+            </div>
+
+            <div className="tg-main">
+              <div className="tg-visual">
+                <div className="flex items-center justify-center gap-5 w-full">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="text-[7px] text-fuchsia-400/70 font-bold tracking-wider uppercase">BALOK JATUH</div>
+                    <div className="relative flex items-center justify-center">
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(192,132,252,0.25) 0%,transparent 70%)", transform: "scale(2.2)", borderRadius: "50%" }} />
+                      <div className="tg-fa relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 14px #c084fc) drop-shadow(0 0 28px #a855f7)" }}>🧩</div>
+                    </div>
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(192,132,252,0.8),transparent)" }} />
+                    <div className="text-[8px] font-bold text-fuchsia-400">KAMU</div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-1">BALOK-BALOK</div>
+                    <div className="grid grid-cols-4 gap-1.5">
+                      {([
+                        { color: "#00E5FF", cells: [[1,1,1,1]] as number[][], label: "I" },
+                        { color: "#FFD93D", cells: [[1,1],[1,1]] as number[][], label: "O" },
+                        { color: "#C147E9", cells: [[0,1,0],[1,1,1]] as number[][], label: "T" },
+                        { color: "#FF3D6E", cells: [[1,1,0],[0,1,1]] as number[][], label: "Z" },
+                      ]).map((t, i) => (
+                        <div key={t.label} className="flex flex-col items-center gap-0.5 rounded-lg p-1.5 border"
+                          style={{ borderColor: t.color + "55", background: t.color + "12", boxShadow: `0 0 10px ${t.color}33` }}>
+                          <div className="tg-fb flex flex-col gap-[2px]" style={{ animationDelay: `${i * 0.4}s` }}>
+                            {t.cells.map((row, r) => (
+                              <div key={r} className="flex gap-[2px]">
+                                {row.map((cell, c) => cell ? (
+                                  <div key={c} className="w-2.5 h-2.5 rounded-sm" style={{ background: t.color, boxShadow: `0 0 5px ${t.color}` }} />
+                                ) : (
+                                  <div key={c} className="w-2.5 h-2.5" />
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                          <span className="text-[6px] font-bold" style={{ color: t.color }}>{t.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(192,132,252,0.4),transparent)" }} />
+
+                <div>
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Kontrol</div>
+                  <div className="grid grid-cols-3 gap-1.5 w-full">
+                    {([
+                      { icon: "◀▶",  label: "GESER",  desc: "← → atau A/D",    color: "#c084fc" },
+                      { icon: "🔄",  label: "PUTAR",  desc: "↑ / Swipe atas",  color: "#f472b6" },
+                      { icon: "⬇️",  label: "JATUH",  desc: "↓ · Spasi drop",  color: "#facc15" },
+                    ] as const).map(w => (
+                      <div key={w.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                        style={{ borderColor: w.color + "44", background: w.color + "0f", boxShadow: `0 0 8px ${w.color}30` }}>
+                        <span className="text-base leading-none" style={{ filter: `drop-shadow(0 0 5px ${w.color})` }}>{w.icon}</span>
+                        <span className="text-[7px] font-black" style={{ color: w.color }}>{w.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">{w.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="tg-action">
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(192,132,252,0.28),transparent)" }} />
+                <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1 font-bold text-center">📖 Cara Bermain</div>
+                <div className="space-y-1.5">
+                  {[
+                    { icon: "🧩", text: "Susun balok yang jatuh agar membentuk baris penuh tanpa celah" },
+                    { icon: "◀▶", text: "Gunakan ← → untuk menggeser dan ↑ (atau swipe atas) untuk memutar balok" },
+                    { icon: "⬇️", text: "Tekan ↓ untuk turun cepat, SPASI untuk hard drop langsung ke bawah" },
+                    { icon: "📝", text: "Tiap 25 detik muncul soal dari guru — game pause, jawab benar = +20 poin" },
+                    { icon: "⏸️", text: "Tekan P untuk pause. Level semakin tinggi, balok semakin cepat jatuh!" },
+                  ].map(({ icon, text }) => (
+                    <div key={text} className="flex items-start gap-2 px-1">
+                      <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                      <p className="text-[8px] text-white/55 leading-relaxed">{text}</p>
                     </div>
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
 
-          <div className="relative z-10 text-center animate-slide-up px-4">
-            <div className="mb-2">
-              <h1 className="font-display text-3xl md:text-5xl font-black tracking-wider">
-                <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(217,70,239,0.55)]">
-                  MATH GAME ARENA
-                </span>
-              </h1>
-            </div>
-            <div className="mb-2">
-              <h2 className="font-display text-4xl md:text-6xl font-black tracking-[0.18em]">
-                <span className="bg-gradient-to-r from-fuchsia-300 via-pink-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(236,72,153,0.6)]">
-                  🧩 TETRIS
-                </span>
-              </h2>
-            </div>
-            <div className="mb-6">
-              <h3 className="font-display text-2xl md:text-4xl font-black tracking-[0.25em]">
-                <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(255,180,0,0.55)]">
-                  NUMATIK
-                </span>
-              </h3>
-            </div>
-
-            <div className="inline-block mb-8">
-              <div className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500/25 to-fuchsia-500/25 border border-fuchsia-400/40 backdrop-blur-sm">
-                <span className="font-display text-sm md:text-base font-bold text-fuchsia-200 tracking-wide">
-                  {topicLabel ?? "MATH GAME"}
-                </span>
+                <div className="flex flex-col items-center gap-1.5 mt-2">
+                  <button onClick={startGame}
+                    className="tg-btn-breathe font-display font-black text-white text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                    style={{
+                      background: "linear-gradient(135deg,#a855f7 0%,#c026d3 45%,#ec4899 100%)",
+                      boxShadow: "0 0 30px rgba(168,85,247,0.85),0 0 60px rgba(192,38,211,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.2)",
+                    }}>
+                    🧩 MULAI GAME
+                  </button>
+                  <div className="text-[7px] text-white/20 text-center leading-relaxed">
+                    ← → geser · ↑ putar · ↓ turun · Spasi hard drop · P pause
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="bg-card/70 backdrop-blur-md border border-fuchsia-500/30 rounded-2xl p-6 max-w-md mx-auto mb-8 shadow-[0_0_30px_rgba(217,70,239,0.15)]">
-              <h3 className="font-display text-lg font-bold text-fuchsia-300 mb-4 flex items-center justify-center gap-2">
-                <span className="text-xl">🧩</span> CARA BERMAIN <span className="text-xl">🧩</span>
-              </h3>
-              <ul className="text-left space-y-3 font-body text-sm text-foreground/90">
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">1</span>
-                  <span>Susun balok yang jatuh agar membentuk <strong className="text-fuchsia-300">baris penuh</strong> tanpa celah</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">2</span>
-                  <span>Gunakan tombol <strong className="text-fuchsia-300">◀ / ▶</strong> untuk menggeser balok dan <strong className="text-yellow-300">PUTAR</strong> untuk mengubah posisi balok</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">3</span>
-                  <span><strong className="text-yellow-300">Tahan tombol ↑</strong> untuk memperlambat jatuhnya balok, atau tekan tombol <strong className="text-fuchsia-300">↓</strong> untuk menjatuhkannya langsung ke bawah</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">4</span>
-                  <span>Setiap baris yang penuh akan hilang dan menambah <strong className="text-green-400">skor</strong></span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-fuchsia-200 font-bold text-xs">5</span>
-                  <span className="text-xs">Di komputer: <strong className="text-fuchsia-300">← →</strong> geser, <strong className="text-fuchsia-300">↑</strong> putar, <strong className="text-fuchsia-300">↓</strong> turun, <strong className="text-yellow-300">SPASI</strong> hard drop, <strong className="text-fuchsia-300">P</strong> pause</span>
-                </li>
-              </ul>
-            </div>
-
-            <button
-              onClick={startGame}
-              className="relative font-display text-xl md:text-2xl px-14 py-5 rounded-2xl bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-black tracking-wider cursor-pointer shadow-[0_0_40px_rgba(217,70,239,0.55)] hover:shadow-[0_0_60px_rgba(217,70,239,0.75)] transition-shadow duration-300 animate-pulse-scale"
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                <span>&#9658;</span> MULAI GAME <span>&#9658;</span>
-              </span>
-            </button>
           </div>
         </div>
-
-        <div
-          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-3 md:p-4 pointer-events-none"
-          style={{
-            paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))",
-            paddingLeft: "max(0.75rem, env(safe-area-inset-left, 0px))",
-            paddingRight: "max(0.75rem, env(safe-area-inset-right, 0px))",
-          }}
-        >
-          <button
-            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-            className="pointer-events-auto shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(217,70,239,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
-            title="Kembali"
-          >
-            <span className="text-base leading-none">←</span>
-            <span className="hidden sm:inline">Kembali</span>
-          </button>
-          <button
-            onClick={() => { playPopSound(); navigate(homePath); }}
-            className="pointer-events-auto shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(217,70,239,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
-            title="Menu Utama"
-          >
-            <span className="text-base leading-none">🏠</span>
-            <span className="hidden sm:inline">Home</span>
-          </button>
-        </div>
-      </>
+      </div>
     );
   }
 

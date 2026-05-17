@@ -6,7 +6,6 @@ import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
-import MathGameIntro from "@/components/MathGameIntro";
 
 // ── Canvas dimensions ──────────────────────────────────────────────────────
 const CW = 560;
@@ -437,29 +436,156 @@ const DinoRunGamePage = ({
 
   if (phase === "idle") {
     return (
-      <MathGameIntro
-        gameTitle="TURTLE RUN MATH"
-        subtitle="⚡ PETUALANGAN MATEMATIKA ⚡"
-        topicLabel={topicLabel}
-        heroEmoji="🐢"
-        startLabel="MULAI PETUALANGAN"
-        theme="ocean"
-        onStart={startGame}
-        onBack={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-        onHome={() => { playPopSound(); navigate(homePath); }}
-        bestLabel={highScore > 0 ? `Rekor Tertinggi: ${highScore}` : undefined}
-        decorations={[
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 70"><defs><radialGradient id="sh1" cx="50%" cy="45%" r="50%"><stop offset="0%" stop-color="#88FFAA"/><stop offset="60%" stop-color="#22CC55"/><stop offset="100%" stop-color="#116622"/></radialGradient></defs><ellipse cx="45" cy="36" rx="28" ry="22" fill="url(#sh1)"/><path d="M26,28 L33,20 L45,18 L57,20 L64,28 L64,44 L57,52 L45,54 L33,52 L26,44Z" fill="#229944" opacity="0.5"/><line x1="45" y1="18" x2="45" y2="54" stroke="#116622" stroke-width="1.5" opacity="0.6"/><line x1="26" y1="36" x2="64" y2="36" stroke="#116622" stroke-width="1.5" opacity="0.6"/><line x1="31" y1="21" x2="59" y2="51" stroke="#116622" stroke-width="1" opacity="0.4"/><line x1="59" y1="21" x2="31" y2="51" stroke="#116622" stroke-width="1" opacity="0.4"/><ellipse cx="72" cy="33" rx="10" ry="8" fill="#44DD66"/><circle cx="77" cy="30" r="2" fill="#003300"/><circle cx="78" cy="29.5" r="0.8" fill="white"/><ellipse cx="73" cy="40" rx="4" ry="3" fill="#33BB44" opacity="0.8"/><ellipse cx="22" cy="22" rx="9" ry="6" fill="#44DD66" transform="rotate(-30,22,22)"/><ellipse cx="22" cy="50" rx="9" ry="6" fill="#44DD66" transform="rotate(30,22,50)"/><ellipse cx="65" cy="18" rx="9" ry="6" fill="#44DD66" transform="rotate(20,65,18)"/><ellipse cx="65" cy="54" rx="9" ry="6" fill="#44DD66" transform="rotate(-20,65,54)"/><ellipse cx="16" cy="37" rx="5" ry="3" fill="#229944" transform="rotate(10,16,37)"/></svg>')}`, className: "absolute top-[8%] left-[5%] w-16 h-12 md:w-24 md:h-18 opacity-80 animate-float-slow", glowRgba: "rgba(34,204,85,0.5)" },
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 70"><defs><radialGradient id="sh2" cx="50%" cy="45%" r="50%"><stop offset="0%" stop-color="#AAFFDD"/><stop offset="60%" stop-color="#00BBAA"/><stop offset="100%" stop-color="#006655"/></radialGradient></defs><ellipse cx="45" cy="36" rx="28" ry="22" fill="url(#sh2)"/><path d="M26,28 L33,20 L45,18 L57,20 L64,28 L64,44 L57,52 L45,54 L33,52 L26,44Z" fill="#009988" opacity="0.5"/><line x1="45" y1="18" x2="45" y2="54" stroke="#006655" stroke-width="1.5" opacity="0.6"/><line x1="26" y1="36" x2="64" y2="36" stroke="#006655" stroke-width="1.5" opacity="0.6"/><line x1="31" y1="21" x2="59" y2="51" stroke="#006655" stroke-width="1" opacity="0.4"/><line x1="59" y1="21" x2="31" y2="51" stroke="#006655" stroke-width="1" opacity="0.4"/><ellipse cx="72" cy="33" rx="10" ry="8" fill="#00CCAA"/><circle cx="77" cy="30" r="2" fill="#002222"/><circle cx="78" cy="29.5" r="0.8" fill="white"/><ellipse cx="73" cy="40" rx="4" ry="3" fill="#00AA88" opacity="0.8"/><ellipse cx="22" cy="22" rx="9" ry="6" fill="#00CCAA" transform="rotate(-30,22,22)"/><ellipse cx="22" cy="50" rx="9" ry="6" fill="#00CCAA" transform="rotate(30,22,50)"/><ellipse cx="65" cy="18" rx="9" ry="6" fill="#00CCAA" transform="rotate(20,65,18)"/><ellipse cx="65" cy="54" rx="9" ry="6" fill="#00CCAA" transform="rotate(-20,65,54)"/><ellipse cx="16" cy="37" rx="5" ry="3" fill="#009977" transform="rotate(10,16,37)"/></svg>')}`, className: "absolute top-[40%] right-[5%] w-14 h-10 md:w-20 md:h-15 opacity-75 animate-float-medium", glowRgba: "rgba(0,187,170,0.5)" },
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 70"><defs><radialGradient id="sh3" cx="50%" cy="45%" r="50%"><stop offset="0%" stop-color="#DDFFAA"/><stop offset="60%" stop-color="#88CC22"/><stop offset="100%" stop-color="#446600"/></radialGradient></defs><ellipse cx="45" cy="36" rx="28" ry="22" fill="url(#sh3)"/><path d="M26,28 L33,20 L45,18 L57,20 L64,28 L64,44 L57,52 L45,54 L33,52 L26,44Z" fill="#77BB11" opacity="0.5"/><line x1="45" y1="18" x2="45" y2="54" stroke="#446600" stroke-width="1.5" opacity="0.6"/><line x1="26" y1="36" x2="64" y2="36" stroke="#446600" stroke-width="1.5" opacity="0.6"/><line x1="31" y1="21" x2="59" y2="51" stroke="#446600" stroke-width="1" opacity="0.4"/><line x1="59" y1="21" x2="31" y2="51" stroke="#446600" stroke-width="1" opacity="0.4"/><ellipse cx="72" cy="33" rx="10" ry="8" fill="#AADD33"/><circle cx="77" cy="30" r="2" fill="#223300"/><circle cx="78" cy="29.5" r="0.8" fill="white"/><ellipse cx="73" cy="40" rx="4" ry="3" fill="#88BB22" opacity="0.8"/><ellipse cx="22" cy="22" rx="9" ry="6" fill="#AADD33" transform="rotate(-30,22,22)"/><ellipse cx="22" cy="50" rx="9" ry="6" fill="#AADD33" transform="rotate(30,22,50)"/><ellipse cx="65" cy="18" rx="9" ry="6" fill="#AADD33" transform="rotate(20,65,18)"/><ellipse cx="65" cy="54" rx="9" ry="6" fill="#AADD33" transform="rotate(-20,65,54)"/><ellipse cx="16" cy="37" rx="5" ry="3" fill="#77AA11" transform="rotate(10,16,37)"/></svg>')}`, className: "absolute bottom-[15%] left-[8%] w-16 h-12 md:w-22 md:h-16 opacity-80 animate-float-fast", glowRgba: "rgba(136,204,34,0.5)" },
-        ]}
-        instructions={[
-          { text: <>Tekan <strong className="text-yellow-300">SPASI / ↑</strong> untuk loncat, <strong className="text-yellow-300">↓</strong> untuk tiarap</> },
-          { text: <>Hindari kaktus, batu, burung, dan palang rendah</> },
-          { text: <>Kamu punya <strong className="text-pink-300">3 nyawa</strong> — setiap kena rintangan kehilangan satu</> },
-          { text: <>Tiap <strong className="text-yellow-300">25 detik</strong> muncul soal dari guru (5 soal total)</> },
-        ]}
-      />
+      <div className="fixed inset-0 z-40 overflow-hidden">
+        <style>{`
+          @keyframes dr-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+          @keyframes dr-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+          @keyframes dr-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+          @keyframes dr-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+          @keyframes dr-breathe{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+          @keyframes dr-run    { 0%,100%{transform:translateX(0px) scaleX(1)} 50%{transform:translateX(5px) scaleX(1.08)} }
+          .dr-fa{animation:dr-floatA 3.2s ease-in-out infinite}
+          .dr-fb{animation:dr-floatB 3.8s ease-in-out infinite}
+          .dr-run{animation:dr-run 0.5s ease-in-out infinite}
+          .dr-title-shine{background:linear-gradient(90deg,#fdba74,#fb923c,#f97316,#fdba74,#fb923c,#fdba74);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:dr-shimmer 3.5s linear infinite}
+          .dr-btn-breathe{animation:dr-breathe 2.8s ease-in-out infinite}
+          .dr-scroll{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+          .dr-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100%}
+          .dr-main{display:flex;flex-direction:column;gap:0.75rem}
+          .dr-visual{display:flex;flex-direction:column;gap:0.5rem}
+          .dr-action{display:flex;flex-direction:column;gap:0.5rem}
+          @media(orientation:landscape){
+            .dr-wrap{justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100%}
+            .dr-main{flex-direction:row;align-items:stretch;gap:2rem}
+            .dr-visual{flex:1;justify-content:center;gap:0.6rem}
+            .dr-action{flex:1;justify-content:center;gap:0.6rem}
+          }
+        `}</style>
+
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(60,25,5,1) 0%, rgba(5,3,1,1) 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(251,146,60,0.12) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(34,211,238,0.08) 0%, transparent 55%)" }} />
+        <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(251,146,60,0.25),transparent)", animation: "dr-scanY 6s linear infinite" }} />
+
+        <div className="dr-scroll relative z-10">
+          <div className="dr-wrap">
+
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center justify-between w-full mb-1">
+                <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(251,146,60,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">←</span>
+                  <span>Kembali</span>
+                </button>
+                <div className="text-[7px] tracking-[5px] text-orange-400/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <button onClick={() => { playPopSound(); navigate(homePath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(251,146,60,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">🏠</span>
+                  <span>Home</span>
+                </button>
+              </div>
+              <div className="dr-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.5rem,4.5vw,2.2rem)" }}>TURTLE RUN MATH</div>
+              <div className="mx-auto mt-0.5 h-0.5 w-32 rounded-full" style={{ background: "linear-gradient(to right,transparent,#fb923c,#fdba74,transparent)" }} />
+              <p className="text-orange-400/70 text-[9px] font-bold tracking-wider uppercase mt-1">🐢 Lari · Loncat · Hindari</p>
+              {topicLabel && <p className="text-white/35 text-[8px] tracking-widest uppercase mt-0.5">🕹️ {topicLabel} 🕹️</p>}
+              {highScore > 0 && (
+                <div className="mt-1 py-1 px-3 rounded-xl bg-orange-500/10 border border-orange-400/20">
+                  <p className="text-orange-300 text-[8px] font-bold">🏆 Rekor: <span className="text-yellow-300">{highScore}</span></p>
+                </div>
+              )}
+            </div>
+
+            <div className="dr-main">
+              <div className="dr-visual">
+                <div className="flex items-end justify-center gap-5 w-full">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="text-[7px] text-orange-400/70 font-bold tracking-wider uppercase">KURA-KURAMU</div>
+                    <div className="relative">
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(251,146,60,0.25) 0%,transparent 70%)", transform: "scale(2.2)", borderRadius: "50%" }} />
+                      <div className="dr-run relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 14px #fb923c) drop-shadow(0 0 28px #ea580c)" }}>🐢</div>
+                    </div>
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(251,146,60,0.8),transparent)" }} />
+                    <div className="text-[8px] font-bold text-orange-400">KAMU</div>
+                  </div>
+                  <div className="flex flex-col items-center pb-4">
+                    <div className="text-base font-black text-white/20">VS</div>
+                  </div>
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">RINTANGAN</div>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {([
+                        { emoji: "🌵", glow: "#22c55e", name: "KAKTUS",  delay: "0s"   },
+                        { emoji: "🦅", glow: "#60a5fa", name: "BURUNG",  delay: "0.5s" },
+                        { emoji: "🪨", glow: "#a8a29e", name: "BATU",    delay: "1s"   },
+                        { emoji: "🚧", glow: "#fb923c", name: "PALANG",  delay: "1.5s" },
+                      ] as const).map(g => (
+                        <div key={g.name} className="flex flex-col items-center gap-0.5 rounded-lg p-1.5 border"
+                          style={{ borderColor: g.glow + "55", background: g.glow + "12", boxShadow: `0 0 10px ${g.glow}33` }}>
+                          <div className="dr-fb text-2xl" style={{ animationDelay: g.delay, filter: `drop-shadow(0 0 7px ${g.glow})` }}>{g.emoji}</div>
+                          <span className="text-[6px] font-bold" style={{ color: g.glow }}>{g.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(251,146,60,0.4),transparent)" }} />
+
+                <div>
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Kontrol</div>
+                  <div className="grid grid-cols-3 gap-1.5 w-full">
+                    {([
+                      { icon: "⬆️",  label: "LONCAT",  desc: "Spasi / ↑ / Tap",    color: "#fb923c" },
+                      { icon: "⬇️",  label: "TIARAP",  desc: "↓ / Tahan bawah",   color: "#facc15" },
+                      { icon: "📝",  label: "SOAL",    desc: "25 detik · +20 pts", color: "#f472b6" },
+                    ] as const).map(w => (
+                      <div key={w.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                        style={{ borderColor: w.color + "44", background: w.color + "0f", boxShadow: `0 0 8px ${w.color}30` }}>
+                        <span className="text-base leading-none" style={{ filter: `drop-shadow(0 0 5px ${w.color})` }}>{w.icon}</span>
+                        <span className="text-[7px] font-black" style={{ color: w.color }}>{w.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">{w.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="dr-action">
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(251,146,60,0.28),transparent)" }} />
+                <div className="text-[7px] text-white/35 tracking-widests uppercase mb-1 font-bold text-center">📖 Cara Bermain</div>
+                <div className="space-y-1.5">
+                  {[
+                    { icon: "🐢", text: "Kura-kura berlari otomatis ke kanan — kamu hanya perlu loncat dan tiarap" },
+                    { icon: "⬆️", text: "Tekan SPASI / ↑ / Tap untuk loncat, tekan ↓ untuk tiarap menghindari rintangan tinggi" },
+                    { icon: "❤️", text: "Kamu punya 3 nyawa — setiap kena rintangan kehilangan satu nyawa" },
+                    { icon: "📝", text: "Tiap 25 detik muncul soal dari guru (5 soal total) — jawab benar = +20 poin" },
+                  ].map(({ icon, text }) => (
+                    <div key={text} className="flex items-start gap-2 px-1">
+                      <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                      <p className="text-[8px] text-white/55 leading-relaxed">{text}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col items-center gap-1.5 mt-2">
+                  <button onClick={startGame}
+                    className="dr-btn-breathe font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                    style={{
+                      background: "linear-gradient(135deg,#fb923c 0%,#f97316 45%,#ea580c 100%)",
+                      boxShadow: "0 0 30px rgba(251,146,60,0.85),0 0 60px rgba(234,88,12,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.3)",
+                    }}>
+                    🐢 MULAI PETUALANGAN
+                  </button>
+                  <div className="text-[7px] text-white/20 text-center leading-relaxed">
+                    Spasi / ↑ = loncat · ↓ = tiarap · Tap untuk mobile
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     );
   }
 

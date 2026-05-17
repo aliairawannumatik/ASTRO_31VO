@@ -613,131 +613,158 @@ const SnakeMathPage = ({
   useEffect(() => () => { if (fbTimerRef.current) clearTimeout(fbTimerRef.current); }, []);
 
   if (phase === "idle") {
-    const decorations: Array<{ pos: string; anim: string; emoji: string; size: string; glow: string; opacity: string }> = [
-      { pos: "top-[8%] left-[7%]", anim: "animate-float-slow", emoji: "🍎", size: "text-3xl md:text-5xl", glow: "drop-shadow-[0_0_15px_rgba(255,80,80,0.55)]", opacity: "opacity-80" },
-      { pos: "top-[14%] right-[10%]", anim: "animate-float-medium", emoji: "🍏", size: "text-2xl md:text-4xl", glow: "drop-shadow-[0_0_15px_rgba(100,255,150,0.55)]", opacity: "opacity-75" },
-      { pos: "top-[42%] left-[4%]", anim: "animate-float-fast", emoji: "⭐", size: "text-2xl md:text-3xl", glow: "drop-shadow-[0_0_15px_rgba(255,215,0,0.55)]", opacity: "opacity-70" },
-      { pos: "top-[36%] right-[6%]", anim: "animate-float-slow", emoji: "🍒", size: "text-3xl md:text-4xl", glow: "drop-shadow-[0_0_15px_rgba(255,100,100,0.55)]", opacity: "opacity-75" },
-      { pos: "bottom-[18%] left-[8%]", anim: "animate-float-medium", emoji: "🍇", size: "text-3xl md:text-5xl", glow: "drop-shadow-[0_0_15px_rgba(180,100,255,0.55)]", opacity: "opacity-75" },
-      { pos: "bottom-[24%] right-[8%]", anim: "animate-float-fast", emoji: "🍊", size: "text-2xl md:text-4xl", glow: "drop-shadow-[0_0_15px_rgba(255,165,0,0.55)]", opacity: "opacity-75" },
-      { pos: "bottom-[10%] left-[18%]", anim: "animate-float-slow", emoji: "✨", size: "text-2xl md:text-3xl", glow: "drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]", opacity: "opacity-80" },
-      { pos: "top-[55%] right-[16%]", anim: "animate-float-fast", emoji: "🐍", size: "text-3xl md:text-5xl", glow: "drop-shadow-[0_0_18px_rgba(0,255,136,0.6)]", opacity: "opacity-80" },
-    ];
-
     return (
-      <>
-        <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-          <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-background/40 to-teal-950/70" />
-          <Starfield />
+      <div className="fixed inset-0 z-40 overflow-hidden">
+        <style>{`
+          @keyframes sm-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+          @keyframes sm-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+          @keyframes sm-wiggle { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
+          @keyframes sm-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+          @keyframes sm-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+          @keyframes sm-breathe{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+          .sm-fa{animation:sm-floatA 3.2s ease-in-out infinite}
+          .sm-fb{animation:sm-floatB 3.8s ease-in-out infinite}
+          .sm-wiggle{animation:sm-wiggle 1.2s ease-in-out infinite}
+          .sm-title-shine{background:linear-gradient(90deg,#86efac,#4ade80,#a3e635,#86efac,#4ade80,#86efac);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:sm-shimmer 3.5s linear infinite}
+          .sm-btn-breathe{animation:sm-breathe 2.8s ease-in-out infinite}
+          .sm-scroll{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+          .sm-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100%}
+          .sm-main{display:flex;flex-direction:column;gap:0.75rem}
+          .sm-visual{display:flex;flex-direction:column;gap:0.5rem}
+          .sm-action{display:flex;flex-direction:column;gap:0.5rem}
+          @media(orientation:landscape){
+            .sm-wrap{justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100%}
+            .sm-main{flex-direction:row;align-items:stretch;gap:2rem}
+            .sm-visual{flex:1;justify-content:center;gap:0.6rem}
+            .sm-action{flex:1;justify-content:center;gap:0.6rem}
+          }
+        `}</style>
 
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {decorations.map((d, i) => (
-              <div key={i} className={`absolute ${d.pos} ${d.anim}`}>
-                <span className={`${d.size} ${d.glow} ${d.opacity}`}>{d.emoji}</span>
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(5,40,15,1) 0%, rgba(2,8,4,1) 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(74,222,128,0.12) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(163,230,53,0.10) 0%, transparent 55%)" }} />
+        <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.25),transparent)", animation: "sm-scanY 6s linear infinite" }} />
+
+        <div className="sm-scroll relative z-10">
+          <div className="sm-wrap">
+
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center justify-between w-full mb-1">
+                <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(74,222,128,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">←</span>
+                  <span>Kembali</span>
+                </button>
+                <div className="text-[7px] tracking-[5px] text-emerald-400/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <button onClick={() => { playPopSound(); navigate(homePath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(74,222,128,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">🏠</span>
+                  <span>Home</span>
+                </button>
               </div>
-            ))}
-            <div className="absolute bottom-[6%] left-1/2 -translate-x-1/2 animate-hover-ship">
-              <span className="text-5xl md:text-7xl drop-shadow-[0_0_25px_rgba(0,255,136,0.6)]">🐍</span>
-            </div>
-          </div>
-
-          <div className="relative z-10 text-center animate-slide-up px-4">
-            <div className="mb-2">
-              <h1 className="font-display text-3xl md:text-5xl font-black tracking-wider">
-                <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,255,136,0.55)]">
-                  MATH GAME ARENA
-                </span>
-              </h1>
-            </div>
-            <div className="mb-2">
-              <h2 className="font-display text-4xl md:text-6xl font-black tracking-[0.18em]">
-                <span className="bg-gradient-to-r from-emerald-300 via-green-400 to-lime-400 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(0,255,136,0.6)]">
-                  🐍 SNAKE
-                </span>
-              </h2>
-            </div>
-            <div className="mb-6">
-              <h3 className="font-display text-2xl md:text-4xl font-black tracking-[0.25em]">
-                <span className="bg-gradient-to-r from-yellow-300 via-lime-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(190,255,80,0.55)]">
-                  MATEMATIKA
-                </span>
-              </h3>
+              <div className="sm-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.5rem,4.5vw,2.2rem)" }}>SNAKE MATEMATIKA</div>
+              <div className="mx-auto mt-0.5 h-0.5 w-32 rounded-full" style={{ background: "linear-gradient(to right,transparent,#4ade80,#a3e635,transparent)" }} />
+              <p className="text-emerald-400/70 text-[9px] font-bold tracking-wider uppercase mt-1">🐍 Makan · Panjangkan · Bertahan</p>
+              {topicLabel && <p className="text-white/35 text-[8px] tracking-widest uppercase mt-0.5">🕹️ {topicLabel} 🕹️</p>}
+              {bestRef.current > 0 && (
+                <div className="mt-1 py-1 px-3 rounded-xl bg-emerald-500/10 border border-emerald-400/20">
+                  <p className="text-emerald-300 text-[8px] font-bold">🏆 Rekor: <span className="text-yellow-300">{bestRef.current}</span></p>
+                </div>
+              )}
             </div>
 
-            <div className="inline-block mb-8">
-              <div className="px-6 py-2 rounded-full bg-gradient-to-r from-emerald-500/25 to-teal-500/25 border border-emerald-400/40 backdrop-blur-sm">
-                <span className="font-display text-sm md:text-base font-bold text-emerald-200 tracking-wide">
-                  {topicLabel ?? "MATH GAME"}
-                </span>
+            <div className="sm-main">
+              <div className="sm-visual">
+                <div className="flex items-end justify-center gap-5 w-full">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="text-[7px] text-emerald-400/70 font-bold tracking-wider uppercase">ULARMU</div>
+                    <div className="relative">
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(74,222,128,0.25) 0%,transparent 70%)", transform: "scale(2.2)", borderRadius: "50%" }} />
+                      <div className="sm-wiggle relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 14px #4ade80) drop-shadow(0 0 28px #16a34a)" }}>🐍</div>
+                    </div>
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(74,222,128,0.8),transparent)" }} />
+                    <div className="text-[8px] font-bold text-emerald-400">KAMU</div>
+                  </div>
+                  <div className="flex flex-col items-center pb-4">
+                    <div className="text-base font-black text-white/20">MAKAN</div>
+                  </div>
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">BUAH-BUAHAN</div>
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {([
+                        { emoji: "🍎", glow: "#ff6b6b", delay: "0s"   },
+                        { emoji: "🍇", glow: "#c084fc", delay: "0.4s" },
+                        { emoji: "🍊", glow: "#fb923c", delay: "0.8s" },
+                        { emoji: "🍓", glow: "#f43f5e", delay: "1.2s" },
+                        { emoji: "🍌", glow: "#fbbf24", delay: "0.2s" },
+                        { emoji: "🥝", glow: "#86efac", delay: "0.6s" },
+                      ] as const).map((f, i) => (
+                        <div key={i} className="flex items-center justify-center rounded-lg p-1.5 border"
+                          style={{ borderColor: f.glow + "44", background: f.glow + "12", boxShadow: `0 0 8px ${f.glow}30` }}>
+                          <div className="sm-fb text-xl" style={{ animationDelay: f.delay, filter: `drop-shadow(0 0 6px ${f.glow})` }}>{f.emoji}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.4),transparent)" }} />
+
+                <div>
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Kontrol</div>
+                  <div className="grid grid-cols-3 gap-1.5 w-full">
+                    {([
+                      { icon: "🕹️",  label: "ARAHKAN",  desc: "Panah / WASD",      color: "#4ade80" },
+                      { icon: "👆",   label: "SWIPE",    desc: "Geser layar HP",    color: "#86efac" },
+                      { icon: "📝",   label: "SOAL",     desc: "25 detik · +20pts", color: "#facc15" },
+                    ] as const).map(w => (
+                      <div key={w.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                        style={{ borderColor: w.color + "44", background: w.color + "0f", boxShadow: `0 0 8px ${w.color}30` }}>
+                        <span className="text-base leading-none" style={{ filter: `drop-shadow(0 0 5px ${w.color})` }}>{w.icon}</span>
+                        <span className="text-[7px] font-black" style={{ color: w.color }}>{w.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">{w.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="sm-action">
+                <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(74,222,128,0.28),transparent)" }} />
+                <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1 font-bold text-center">📖 Cara Bermain</div>
+                <div className="space-y-1.5">
+                  {[
+                    { icon: "🐍", text: "Arahkan ular untuk memakan buah-buahan — ular akan memanjang dan skor bertambah" },
+                    { icon: "💥", text: "Jangan menabrak bingkai/tembok atau tubuh sendiri — kalau menabrak, Game Over!" },
+                    { icon: "⚡", text: "Semakin panjang ular, semakin cepat gerakannya — tetap fokus!" },
+                    { icon: "📝", text: "Tiap 25 detik muncul soal dari guru (5 soal) — jawab benar = +20 poin bonus" },
+                  ].map(({ icon, text }) => (
+                    <div key={text} className="flex items-start gap-2 px-1">
+                      <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                      <p className="text-[8px] text-white/55 leading-relaxed">{text}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col items-center gap-1.5 mt-2">
+                  <button onClick={startGame}
+                    className="sm-btn-breathe font-display font-black text-white text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                    style={{
+                      background: "linear-gradient(135deg,#22c55e 0%,#16a34a 45%,#15803d 100%)",
+                      boxShadow: "0 0 30px rgba(74,222,128,0.85),0 0 60px rgba(34,197,94,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.2)",
+                    }}>
+                    🐍 MULAI BERMAIN
+                  </button>
+                  <div className="text-[7px] text-white/20 text-center leading-relaxed">
+                    ← ↑ → ↓ atau WASD = arahkan · Swipe untuk mobile
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="bg-card/70 backdrop-blur-md border border-emerald-500/30 rounded-2xl p-6 max-w-md mx-auto mb-8 shadow-[0_0_30px_rgba(0,255,136,0.15)]">
-              <h3 className="font-display text-lg font-bold text-emerald-300 mb-4 flex items-center justify-center gap-2">
-                <span className="text-xl">🐍</span> CARA BERMAIN <span className="text-xl">🍎</span>
-              </h3>
-              <ul className="text-left space-y-3 font-body text-sm text-foreground/90">
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">1</span>
-                  <span>Arahkan ular memakan <strong className="text-yellow-300">🍎 buah apa saja</strong> — ular akan <strong className="text-emerald-300">memanjang</strong> dan skor bertambah</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">2</span>
-                  <span>Jangan menabrak <strong className="text-red-400">bingkai/tembok</strong> atau <strong className="text-red-400">tubuh sendiri</strong> — kalau menabrak, Game Over!</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">3</span>
-                  <span>Setiap <strong className="text-amber-300">25 detik</strong> akan muncul <strong className="text-amber-300">soal matematika</strong> dari Pak/Bu Guru — jawab dengan benar untuk bonus skor</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">4</span>
-                  <span>Setelah <strong className="text-cyan-300">semua soal terjawab</strong>, permainan terus berjalan sampai ular mati</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-200 font-bold text-xs">5</span>
-                  <span className="text-xs">Di komputer: gunakan <strong className="text-emerald-300">← ↑ → ↓</strong> atau <strong className="text-emerald-300">WASD</strong>. Di HP: swipe atau gunakan tombol arah di bagian bawah layar.</span>
-                </li>
-              </ul>
-            </div>
-
-            <button
-              onClick={startGame}
-              className="relative font-display text-xl md:text-2xl px-14 py-5 rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-black tracking-wider cursor-pointer shadow-[0_0_40px_rgba(0,255,136,0.55)] hover:shadow-[0_0_60px_rgba(0,255,136,0.75)] transition-shadow duration-300 animate-pulse-scale"
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                <span>&#9658;</span> MULAI GAME <span>&#9658;</span>
-              </span>
-            </button>
           </div>
         </div>
-
-        <div
-          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-3 md:p-4 pointer-events-none"
-          style={{
-            paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))",
-            paddingLeft: "max(0.75rem, env(safe-area-inset-left, 0px))",
-            paddingRight: "max(0.75rem, env(safe-area-inset-right, 0px))",
-          }}
-        >
-          <button
-            onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-            className="pointer-events-auto shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,255,136,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
-            title="Kembali"
-          >
-            <span className="text-base leading-none">←</span>
-            <span className="hidden sm:inline">Kembali</span>
-          </button>
-          <button
-            onClick={() => { playPopSound(); navigate(homePath); }}
-            className="pointer-events-auto shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,255,136,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
-            title="Menu Utama"
-          >
-            <span className="text-base leading-none">🏠</span>
-            <span className="hidden sm:inline">Home</span>
-          </button>
-        </div>
-      </>
+      </div>
     );
   }
 
