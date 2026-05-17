@@ -24,7 +24,6 @@ import dasar18 from "@assets/image_1778975711518.png";
 import dasar19 from "@assets/image_1778975731451.png";
 import dasar20 from "@assets/image_1778975757866.png";
 import dasar21 from "@assets/image_1778975779908.png";
-import dasar24 from "@assets/24_1778279067126.png";
 import dasar25 from "@assets/25_1778278243303.png";
 import dasar26 from "@assets/26_1778279067122.png";
 import dasar27 from "@assets/27_1778279067123.png";
@@ -1004,7 +1003,6 @@ const dasarImages: Record<number, string> = {
   19: dasar19,
   20: dasar20,
   21: dasar21,
-  24: dasar24,
   25: dasar25,
   26: dasar26,
   27: dasar27,
