@@ -197,6 +197,22 @@ import { useNavigate } from "react-router-dom";
                       alt="Raja Musuh"
                       className="w-11 h-12 drop-shadow-[0_0_14px_rgba(236,72,153,0.8)]"
                     />
+                  ) : v.path.endsWith("/pac-math") ? (
+                    <svg viewBox="0 0 52 52" style={{ width: 46, height: 46, filter: "drop-shadow(0 0 10px #facc15) drop-shadow(0 0 22px #f59e0b)" }}>
+                      <defs>
+                        <radialGradient id="bb-pbd-pac" cx="35%" cy="28%" r="65%">
+                          <stop offset="0%" stopColor="#fef08a"/>
+                          <stop offset="40%" stopColor="#facc15"/>
+                          <stop offset="85%" stopColor="#d97706"/>
+                          <stop offset="100%" stopColor="#92400e"/>
+                        </radialGradient>
+                      </defs>
+                      <path d="M26,26 L48,14 A22,22 0 1,0 48,38 Z" fill="url(#bb-pbd-pac)"/>
+                      <circle cx="32" cy="15" r="3" fill="#1a0a00"/>
+                      <circle cx="33" cy="14" r="1.2" fill="rgba(255,255,255,0.75)"/>
+                      <ellipse cx="16" cy="30" rx="5" ry="3.5" fill="rgba(255,120,60,0.35)"/>
+                      <path d="M31,22 L34,27 M37,19 L38,25 M43,16 L42,22" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.6"/>
+                    </svg>
                   ) : (
                     <span className="text-4xl">{v.emoji}</span>
                   )}
