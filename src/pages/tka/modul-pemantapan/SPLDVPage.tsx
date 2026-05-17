@@ -28,7 +28,7 @@ const latihanDasar: LatihanSoal[] = [
   { no: 14, soal: "Hazky mengambil uang di bank sebesar Rp.1.850.000,00 yang terdiri dari uang seratus ribuan dan uang lima puluh ribuan. Jika banyaknya uang lima puluh ribuan 7 lembar lebih banyak dari uang seratus ribuan, maka banyaknya uang lima puluh ribuan adalah...", options: ["A. 10 lembar", "B. 12 lembar", "C. 15 lembar", "D. 17 lembar"] },
   { no: 15, soal: "Dalam sebuah tempat pertunjukan terdapat 200 orang yang terdiri dari penonton dewasa dan anak-anak. Dari penjualan tiket diperoleh uang sebesar Rp 780.000,00. Jika harga tiket orang dewasa Rp 4.000,00 dan harga tiket anak-anak Rp 3.500,00, banyak penonton anak-anak adalah....", options: ["A. 40 orang", "B. 35 orang", "C. 30 orang", "D. 160 orang"] },
   { no: 16, soal: "Lima tahun yang lalu, usia Ayah adalah empat kali usia Paman. Lima tahun yang akan datang, dua kali usia Ayah sama dengan tiga kali usia Paman ditambah 7 tahun. Berapakah usia Ayah sekarang?", options: ["A. 40 tahun", "B. 35 tahun", "C. 25 tahun", "D. 45 tahun"] },
-  { no: 17, soal: "Jumlah dua buah kebalikan bilangan adalah 5, sedangkan selisihnya adalah 1. Tentukan hasil kali kedua bilangan tersebut.", options: ["A. 6", "B. $\\frac{1}{6}$", "C. 5", "D. $\\frac{1}{5}$"] },
+  { no: 17, soal: "Jumlah dua buah kebalikan bilangan adalah 5, sedangkan selisihnya adalah 1. (Kebalikan bilangan x adalah $\\frac{1}{x}$). Tentukan hasil kali kedua bilangan tersebut.", options: ["A. 6", "B. $\\frac{1}{6}$", "C. 5", "D. $\\frac{1}{5}$"] },
 ];
 
 const SPLDVPage = () => (

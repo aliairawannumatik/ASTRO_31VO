@@ -9,22 +9,85 @@ const materiSections: MateriSection[] = [
   { heading: "E. Teorema Fermat Kecil", content: `Jika $p$ adalah bilangan prima dan $a$ tidak habis dibagi $p$, maka:\n$a^{p-1} \\equiv 1 \\pmod{p}$\n\nContoh:\n$2^6 \\equiv 1 \\pmod{7}$ (karena $p=7$, $p-1=6$)` },
 ];
 
-const latihanDasar: LatihanSoal[] = [
-  { no: 1, soal: "Nilai dari $17 \\mod 5$ adalah …", options: ["A. 1", "B. 2", "C. 3", "D. 4"], jawaban: "B", pembahasan: "$17 = 3 \\times 5 + 2 \\Rightarrow 17 \\mod 5 = 2$ → Jawaban B" },
-  { no: 2, soal: "Nilai dari $105 \\mod 7$ adalah …", options: ["A. 0", "B. 1", "C. 2", "D. 3"], jawaban: "A", pembahasan: "$105 = 15 \\times 7 + 0 \\Rightarrow 105 \\mod 7 = 0$ → Jawaban A" },
-  { no: 3, soal: "Nilai dari $(-13) \\mod 5$ adalah …", options: ["A. -3", "B. 2", "C. 3", "D. -2"], jawaban: "B", pembahasan: "$-13 = -3 \\times 5 + 2 \\Rightarrow (-13) \\mod 5 = 2$ → Jawaban B" },
-  { no: 4, soal: "Jika hari ini Senin, maka 100 hari lagi adalah hari …", options: ["A. Selasa", "B. Rabu", "C. Kamis", "D. Jumat"], jawaban: "B", pembahasan: "$100 \\mod 7 = 2$ (100 = 14×7 + 2)\nSenin + 2 = Rabu → Jawaban B" },
-  { no: 5, soal: "Digit terakhir dari $7^{2024}$ adalah …", options: ["A. 1", "B. 3", "C. 7", "D. 9"], jawaban: "A", pembahasan: "Pola digit terakhir $7^n$: 7,9,3,1,7,9,3,1,... (siklus 4)\n$2024 \\mod 4 = 0 \\Rightarrow$ digit = 1 → Jawaban A" },
-  { no: 6, soal: "Digit terakhir dari $3^{100}$ adalah …", options: ["A. 1", "B. 3", "C. 7", "D. 9"], jawaban: "A", pembahasan: "Pola digit terakhir $3^n$: 3,9,7,1,3,... (siklus 4)\n$100 \\mod 4 = 0 \\Rightarrow$ digit = 1 → Jawaban A" },
-  { no: 7, soal: "Berapakah nilai $35 \\equiv ? \\pmod{8}$", options: ["A. 1", "B. 2", "C. 3", "D. 4"], jawaban: "C", pembahasan: "$35 = 4 \\times 8 + 3 \\Rightarrow 35 \\equiv 3 \\pmod{8}$ → Jawaban C" },
-  { no: 8, soal: "Jika $x \\equiv 3 \\pmod{7}$ dan $y \\equiv 5 \\pmod{7}$, maka $(x + y) \\mod 7$ adalah …", options: ["A. 0", "B. 1", "C. 2", "D. 8"], jawaban: "B", pembahasan: "$(x+y) \\equiv (3+5) \\equiv 8 \\equiv 1 \\pmod{7}$ → Jawaban B" },
-  { no: 9, soal: "Jika $x \\equiv 4 \\pmod{6}$ dan $y \\equiv 5 \\pmod{6}$, maka $(x \\times y) \\mod 6$ adalah …", options: ["A. 0", "B. 2", "C. 4", "D. 5"], jawaban: "B", pembahasan: "$xy \\equiv 4 \\times 5 = 20 \\equiv 2 \\pmod{6}$ → Jawaban B" },
-  { no: 10, soal: "Sisa pembagian $2^{50}$ oleh 7 adalah …", options: ["A. 1", "B. 2", "C. 4", "D. 6"], jawaban: "C", pembahasan: "$2^3 = 8 \\equiv 1 \\pmod{7}$\n$50 = 3 \\times 16 + 2 \\Rightarrow 2^{50} = (2^3)^{16} \\times 2^2 \\equiv 1 \\times 4 = 4 \\pmod{7}$ → Jawaban C" },
-  { no: 11, soal: "Digit terakhir dari $2^{2025}$ adalah …", options: ["A. 2", "B. 4", "C. 6", "D. 8"], jawaban: "D", pembahasan: "Pola digit terakhir $2^n$: 2,4,8,6,2,4,8,6,... (siklus 4)\n$2025 \\mod 4 = 1 \\Rightarrow$ digit = 2 → Jawaban A" },
-  { no: 12, soal: "Pukul berapa 150 jam setelah pukul 07.00?", options: ["A. 01.00", "B. 07.00", "C. 13.00", "D. 19.00"], jawaban: "C", pembahasan: "$150 \\mod 24 = 6$\nPukul 07.00 + 6 jam = 13.00 → Jawaban C" },
-  { no: 13, soal: "Nilai dari $(2^3 + 3^2) \\mod 5$ adalah …", options: ["A. 0", "B. 1", "C. 2", "D. 3"], jawaban: "B", pembahasan: "$2^3 + 3^2 = 8 + 9 = 17$\n$17 \\mod 5 = 2$ → Jawaban C" },
-  { no: 14, soal: "Barisan bilangan: 1, 5, 9, 13, ... Suku ke-100 dari barisan ini, jika dibagi 7 sisanya adalah …", options: ["A. 0", "B. 1", "C. 2", "D. 3"], jawaban: "D", pembahasan: "$U_{100} = 1 + 99 \\times 4 = 397$\n$397 = 56 \\times 7 + 5 \\Rightarrow 397 \\mod 7 = 5$" },
-  { no: 15, soal: "Jika $n \\equiv 2 \\pmod{3}$, maka $n^2 \\pmod{3}$ adalah …", options: ["A. 0", "B. 1", "C. 2", "D. 4"], jawaban: "B", pembahasan: "$n^2 \\equiv 2^2 = 4 \\equiv 1 \\pmod{3}$ → Jawaban B" },
+const latihanDasar: LatihanItem[] = [
+  {
+    no: 1,
+    soal: "Tentukan sisa dari:\na. 51 dibagi 5\nb. 123 dibagi 3\nc. 5 dibagi 9\nd. 5555 dibagi 4",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 2,
+    soal: "Tentukan nilai setiap angka berikut pada modulo yang diberikan:\na. $23 \\mod 5$\nb. $27 \\mod 3$\nc. $6 \\mod 8$\nd. $0 \\mod 12$\ne. $38 \\mod 5$",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 3,
+    soal: "Sebuah truk mengangkut tiga jenis barang dengan berat masing-masing 73 kg, 45 kg, dan 98 kg. Jika total berat semua barang tersebut akan dibagi rata ke dalam karung-karung berkapasitas 12 kg, berapakah sisa berat barang yang tidak dapat masuk ke dalam karung terakhir?",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 4,
+    soal: "Berapakah sisa pembagian $(55 + 56 + 57 + 58 + 59 + 60 + 61)$ oleh 60?",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 5,
+    soal: "Sebuah mesin pencetak tiket kereta api memberikan nomor urut secara berurutan. Untuk tujuan audit, setiap tiket yang dicetak diuji dengan mencari sisa pembagian nomor tiket tersebut dengan 150. Jika ada 7 tiket berturut-turut yang dicetak, yaitu dimulai dari tiket bernomor 145, 146, 147, 148, 149, 150, hingga 151, berapakah sisa pembagian total nomor 7 tiket tersebut ketika dibagi dengan 150?",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 6,
+    soal: "Seorang programmer sedang menguji sebuah algoritma enkripsi yang melibatkan perkalian tiga bilangan besar: 25, 34, dan 18. Untuk alasan keamanan, hasil perkalian tersebut harus diuji sisa pembagiannya dengan 11. Berapakah sisa pembagian $(25 \\times 34 \\times 18)$ oleh 11?",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 7,
+    soal: "Seorang desainer grafis membuat pola berulang berdasarkan digit terakhir dari hasil perkalian bilangan-bilangan. Berapakah digit terakhir (nilai satuan) dari hasil perkalian $(127 \\times 354 \\times 789 \\times 416)$?",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 8,
+    soal: "Tentukan sisa dari:\na. $16^2$ dibagi 3\nb. $17^{20}$ dibagi 5\nc. $10^{99}$ dibagi 7\nd. $3^{100}$ dibagi oleh 5\ne. $2^{2015}$ dibagi 9\nf. $3^{1990}$ dibagi 41",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 9,
+    soal: "Tentukan angka terakhir dari $777^{333}$",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 10,
+    soal: "Berapakah digit terakhir dari $3^{2023}$?",
+    options: ["A. 3", "B. 9", "C. 1", "D. 7"],
+    pembahasan: "",
+  },
+  {
+    no: 11,
+    soal: "Berapakah digit terakhir dari $2^{2025}$?",
+    options: ["A. 2", "B. 4", "C. 6", "D. 8"],
+    pembahasan: "",
+  },
+  {
+    no: 12,
+    soal: "Bilangan bulat positif terkecil n sehingga $n!$ habis dibagi oleh 2012 adalah .... (Catatan: $n! = 1 \\times 2 \\times \\cdots \\times n$)",
+    options: [],
+    pembahasan: "",
+  },
+  {
+    no: 13,
+    soal: "Misalkan n adalah bilangan bulat. Jika $n^2 + 2n + 2$ habis dibagi oleh $n + 1$, maka nilai n adalah ....",
+    options: [],
+    pembahasan: "",
+  },
 ];
 
 const ModuloPage = () => (
