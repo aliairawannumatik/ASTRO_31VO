@@ -1359,38 +1359,233 @@ const SpaceImpactPage = ({
 
               {/* LEFT — spaceship vs enemies visual */}
               <div className="si-battle">
-                <div className="flex items-end justify-center gap-4 w-full">
-                  {/* Player ship */}
+                <div className="flex items-center justify-center gap-4 w-full">
+
+                  {/* Player ship — matches drawPlayerShip() cyan/teal arrow */}
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="text-[7px] text-cyan-400/70 font-bold tracking-wider uppercase">PESAWATMU</div>
                     <div className="relative">
-                      <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%)", transform: "scale(2)" }} />
-                      <img src="/pesawat-nobg-new.png" alt="pesawat" className="si-fa relative z-10"
-                        style={{ width: 48, filter: "drop-shadow(0 0 14px #00FFFF) drop-shadow(0 0 28px #0088FF)" }} />
+                      <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle,rgba(0,255,200,0.25) 0%,transparent 70%)", transform: "scale(2.4)" }} />
+                      <svg viewBox="0 0 90 56" className="si-fa relative z-10" style={{ width: 78, filter: "drop-shadow(0 0 8px #00ffcc) drop-shadow(0 0 20px #00aaff)" }}>
+                        <defs>
+                          <linearGradient id="si-p-body" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#e0faff"/>
+                            <stop offset="25%" stopColor="#7ee8ff"/>
+                            <stop offset="60%" stopColor="#00c8a8"/>
+                            <stop offset="100%" stopColor="#006644"/>
+                          </linearGradient>
+                          <linearGradient id="si-p-wing" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#22ddbb"/>
+                            <stop offset="100%" stopColor="#008855"/>
+                          </linearGradient>
+                          <linearGradient id="si-p-flame" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="rgba(0,0,0,0)"/>
+                            <stop offset="40%" stopColor="rgba(255,80,0,0.65)"/>
+                            <stop offset="100%" stopColor="rgba(255,200,40,0.95)"/>
+                          </linearGradient>
+                          <radialGradient id="si-p-cockpit" cx="40%" cy="35%" r="60%">
+                            <stop offset="0%" stopColor="rgba(220,255,255,0.98)"/>
+                            <stop offset="35%" stopColor="#80ffee"/>
+                            <stop offset="100%" stopColor="#009999"/>
+                          </radialGradient>
+                        </defs>
+
+                        {/* Engine flame */}
+                        <path d="M14,28 L0,28 L14,28" fill="none"/>
+                        <path d="M14,22 L0,28 L14,34 Z" fill="url(#si-p-flame)"/>
+                        {/* Thruster jets */}
+                        <path d="M12,19 L4,21 L12,23 Z" fill="rgba(100,200,255,0.6)"/>
+                        <path d="M12,33 L4,35 L12,37 Z" fill="rgba(100,200,255,0.6)"/>
+
+                        {/* Upper swept wing */}
+                        <path d="M57,24 L41,6 L14,22 Z" fill="url(#si-p-wing)"/>
+                        <line x1="53" y1="24" x2="38" y2="9" stroke="#44ffcc" strokeWidth="1.2"/>
+                        {/* Lower swept wing */}
+                        <path d="M57,32 L41,50 L14,34 Z" fill="url(#si-p-wing)"/>
+                        <line x1="53" y1="32" x2="38" y2="47" stroke="#44ffcc" strokeWidth="1.2"/>
+
+                        {/* Main fuselage — sleek arrow */}
+                        <path d="M80,28 C70,16 16,15 6,28 C16,41 70,40 80,28 Z" fill="url(#si-p-body)" stroke="rgba(0,255,160,0.3)" strokeWidth="0.8"/>
+                        {/* Hull highlights */}
+                        <path d="M24,23 C42,20 64,22 76,27" stroke="rgba(200,255,255,0.35)" strokeWidth="1.5" fill="none"/>
+                        <path d="M24,33 C42,36 64,34 76,29" stroke="rgba(200,255,255,0.35)" strokeWidth="1.5" fill="none"/>
+
+                        {/* Cockpit canopy */}
+                        <ellipse cx="61" cy="28" rx="9" ry="6" fill="url(#si-p-cockpit)"/>
+                        <ellipse cx="62" cy="26" rx="3.5" ry="2.2" fill="rgba(255,255,255,0.8)"/>
+
+                        {/* Nose tip */}
+                        <path d="M80,26 L89,28 L80,30 Z" fill="#c8f0ff"/>
+
+                        {/* Laser cannon barrel */}
+                        <rect x="78" y="26.5" width="8" height="3" rx="1.5" fill="#00ffcc" opacity="0.8"/>
+                        {/* Muzzle glow */}
+                        <circle cx="87" cy="28" r="2.5" fill="#00ffcc" opacity="0.7"/>
+                      </svg>
                     </div>
-                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom, rgba(0,200,255,0.8), transparent)" }} />
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(0,255,200,0.8),transparent)" }} />
                     <div className="text-[8px] font-bold text-cyan-400">KAMU</div>
                   </div>
-                  <div className="flex flex-col items-center pb-4">
-                    <div className="text-xl font-black text-white/20">VS</div>
+
+                  <div className="flex flex-col items-center shrink-0">
+                    <div className="text-lg font-black text-white/20">VS</div>
                   </div>
-                  {/* Enemy grid */}
+
+                  {/* Enemy grid — SVG versions of saucer, fighter, bomber, boss */}
                   <div className="grid grid-cols-2 gap-1.5">
-                    {[
-                      { src: "/musuh-1.png", glow: "#ff6b6b", name: "BOMBER",  delay: "0s"   },
-                      { src: "/musuh-2.png", glow: "#818cf8", name: "FIGHTER", delay: "0.5s" },
-                      { src: "/musuh-3.png", glow: "#fb923c", name: "RAIDER",  delay: "1s"   },
-                      { src: "/musuh-4.png", glow: "#4ade80", name: "SAUCER",  delay: "1.5s" },
-                    ].map(e => (
-                      <div key={e.name} className="flex flex-col items-center gap-0.5">
-                        <div className="relative rounded-lg p-1.5 border"
-                          style={{ borderColor: e.glow + "55", background: e.glow + "12", boxShadow: `0 0 10px ${e.glow}33` }}>
-                          <img src={e.src} alt={e.name}
-                            style={{ width: 30, height: "auto", filter: `drop-shadow(0 0 7px ${e.glow})`, transform: "rotate(180deg)", animation: `si-floatB 3.4s ease-in-out infinite`, animationDelay: e.delay }} />
-                        </div>
-                        <span className="text-[6px] font-bold" style={{ color: e.glow }}>{e.name}</span>
+
+                    {/* SAUCER */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="rounded-lg p-1.5 border si-fb" style={{ borderColor:"#ff6b6b55",background:"#ff6b6b12",boxShadow:"0 0 10px #ff6b6b33" }}>
+                        <svg viewBox="0 0 52 40" style={{ width: 36, filter: "drop-shadow(0 0 6px #ff6b6b)" }}>
+                          <defs>
+                            <radialGradient id="si-s-dome" cx="35%" cy="30%" r="60%">
+                              <stop offset="0%" stopColor="rgba(220,255,255,0.98)"/>
+                              <stop offset="45%" stopColor="rgba(160,220,255,0.75)"/>
+                              <stop offset="100%" stopColor="#ff6b6baa"/>
+                            </radialGradient>
+                          </defs>
+                          {/* Tractor beam */}
+                          <path d="M20,28 L14,40 L38,40 L32,28 Z" fill="rgba(255,107,107,0.25)"/>
+                          {/* Disc body */}
+                          <ellipse cx="26" cy="26" rx="22" ry="8" fill="#ff6b6b" stroke="#ff000044" strokeWidth="0.8"/>
+                          {/* Spinning rim */}
+                          <ellipse cx="26" cy="26" rx="23" ry="5" fill="none" stroke="#ff6b6b" strokeWidth="2"/>
+                          {/* Rim lights */}
+                          {[0,1,2,3,4,5].map(i => {
+                            const a = (i/6)*Math.PI*2;
+                            return <circle key={i} cx={26+Math.cos(a)*22} cy={26+Math.sin(a)*5} r="2" fill={i%2===0?"#ff6b6b":"white"}/>;
+                          })}
+                          {/* Dome */}
+                          <path d="M16,26 Q26,8 36,26 Z" fill="url(#si-s-dome)"/>
+                          {/* Dome highlight */}
+                          <ellipse cx="22" cy="20" rx="3" ry="2" fill="rgba(255,255,255,0.65)" transform="rotate(-15,22,20)"/>
+                          {/* Underlight */}
+                          <ellipse cx="26" cy="30" rx="8" ry="2.5" fill="#ff6b6b" opacity="0.6"/>
+                        </svg>
                       </div>
-                    ))}
+                      <span className="text-[6px] font-bold" style={{ color:"#ff6b6b" }}>SAUCER</span>
+                    </div>
+
+                    {/* FIGHTER */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="rounded-lg p-1.5 border si-fb" style={{ animationDelay:"0.5s",borderColor:"#818cf855",background:"#818cf812",boxShadow:"0 0 10px #818cf833" }}>
+                        <svg viewBox="0 0 52 44" style={{ width: 36, filter: "drop-shadow(0 0 6px #818cf8)", transform:"scaleX(-1)" }}>
+                          <defs>
+                            <linearGradient id="si-f-body" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="rgba(255,255,255,0.3)"/>
+                              <stop offset="30%" stopColor="#818cf8"/>
+                              <stop offset="100%" stopColor="#1e1b4b"/>
+                            </linearGradient>
+                          </defs>
+                          {/* Engine trail */}
+                          <path d="M10,22 L0,22 L10,22" fill="none"/>
+                          <path d="M10,19 L0,22 L10,25 Z" fill="#818cf855"/>
+                          {/* Upper delta wing */}
+                          <path d="M30,20 L16,4 L5,20 L14,21 Z" fill="#818cf8cc"/>
+                          <line x1="28" y1="21" x2="15" y2="7" stroke="#818cf8" strokeWidth="1.5"/>
+                          {/* Lower delta wing */}
+                          <path d="M30,24 L16,40 L5,24 L14,23 Z" fill="#818cf8cc"/>
+                          <line x1="28" y1="23" x2="15" y2="37" stroke="#818cf8" strokeWidth="1.5"/>
+                          {/* Fuselage */}
+                          <path d="M46,22 L14,12 L4,22 L14,32 Z" fill="url(#si-f-body)"/>
+                          {/* Cockpit */}
+                          <ellipse cx="36" cy="22" rx="5" ry="4.5" fill="#a5b4fc"/>
+                          <ellipse cx="37" cy="20.5" rx="2" ry="1.5" fill="rgba(255,255,255,0.8)"/>
+                          {/* Accent lines */}
+                          <line x1="18" y1="18" x2="40" y2="21" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+                          <line x1="18" y1="26" x2="40" y2="23" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+                        </svg>
+                      </div>
+                      <span className="text-[6px] font-bold" style={{ color:"#818cf8" }}>FIGHTER</span>
+                    </div>
+
+                    {/* BOMBER */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="rounded-lg p-1.5 border si-fb" style={{ animationDelay:"1s",borderColor:"#fb923c55",background:"#fb923c12",boxShadow:"0 0 10px #fb923c33" }}>
+                        <svg viewBox="0 0 52 46" style={{ width: 36, filter: "drop-shadow(0 0 6px #fb923c)", transform:"scaleX(-1)" }}>
+                          <defs>
+                            <linearGradient id="si-b-body" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="rgba(255,255,255,0.2)"/>
+                              <stop offset="30%" stopColor="#fb923c"/>
+                              <stop offset="100%" stopColor="#7c2d12"/>
+                            </linearGradient>
+                          </defs>
+                          {/* Dual engine plumes */}
+                          <path d="M10,15 L0,17 L10,19 Z" fill="rgba(255,100,0,0.6)"/>
+                          <path d="M10,27 L0,29 L10,31 Z" fill="rgba(255,100,0,0.6)"/>
+                          {/* Top wing slab */}
+                          <path d="M34,10 L24,2 L8,10 Z" fill="#fb923ccc"/>
+                          <line x1="32" y1="10" x2="23" y2="4" stroke="#fb923c" strokeWidth="1.5"/>
+                          {/* Bottom wing slab */}
+                          <path d="M34,36 L24,44 L8,36 Z" fill="#fb923ccc"/>
+                          <line x1="32" y1="36" x2="23" y2="42" stroke="#fb923c" strokeWidth="1.5"/>
+                          {/* Heavy fuselage */}
+                          <rect x="6" y="10" width="38" height="26" rx="5" fill="url(#si-b-body)"/>
+                          {/* Hull plates */}
+                          <line x1="14" y1="10" x2="14" y2="36" stroke="rgba(255,255,255,0.18)" strokeWidth="1"/>
+                          <line x1="24" y1="10" x2="24" y2="36" stroke="rgba(255,255,255,0.18)" strokeWidth="1"/>
+                          {/* Bomb bay */}
+                          <rect x="14" y="18" width="11" height="10" rx="2" fill="rgba(0,0,0,0.4)" stroke="#fb923c77" strokeWidth="0.8"/>
+                          {/* Cockpit */}
+                          <ellipse cx="38" cy="23" rx="5" ry="5" fill="#fdba74"/>
+                          <ellipse cx="39" cy="21" rx="2" ry="1.5" fill="rgba(255,255,255,0.75)"/>
+                          {/* Engine pods */}
+                          <ellipse cx="9" cy="17" rx="4" ry="4.5" fill="#ff5500"/>
+                          <ellipse cx="9" cy="29" rx="4" ry="4.5" fill="#ff5500"/>
+                          <ellipse cx="7.5" cy="17" rx="2.2" ry="2.8" fill="#ffcc00"/>
+                          <ellipse cx="7.5" cy="29" rx="2.2" ry="2.8" fill="#ffcc00"/>
+                        </svg>
+                      </div>
+                      <span className="text-[6px] font-bold" style={{ color:"#fb923c" }}>BOMBER</span>
+                    </div>
+
+                    {/* BOSS */}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="rounded-lg p-1.5 border si-fb" style={{ animationDelay:"1.5s",borderColor:"#4ade8055",background:"#4ade8012",boxShadow:"0 0 10px #4ade8033" }}>
+                        <svg viewBox="0 0 52 46" style={{ width: 36, filter: "drop-shadow(0 0 6px #4ade80)", transform:"scaleX(-1)" }}>
+                          <defs>
+                            <linearGradient id="si-boss-body" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#bbf7d0"/>
+                              <stop offset="40%" stopColor="#4ade80"/>
+                              <stop offset="100%" stopColor="#14532d"/>
+                            </linearGradient>
+                          </defs>
+                          {/* Triple engine plumes */}
+                          <path d="M9,11 L0,13 L9,15 Z" fill="rgba(100,255,100,0.6)"/>
+                          <path d="M9,21 L0,23 L9,25 Z" fill="rgba(100,255,100,0.6)"/>
+                          <path d="M9,31 L0,33 L9,35 Z" fill="rgba(100,255,100,0.6)"/>
+                          {/* Outer swept wings */}
+                          <path d="M32,8 L20,0 L6,8 Z" fill="#4ade80bb"/>
+                          <path d="M32,38 L20,46 L6,38 Z" fill="#4ade80bb"/>
+                          {/* Secondary wings */}
+                          <path d="M40,16 L28,8 L18,16 Z" fill="#22c55eaa"/>
+                          <path d="M40,30 L28,38 L18,30 Z" fill="#22c55eaa"/>
+                          {/* Armored fuselage */}
+                          <rect x="5" y="8" width="42" height="30" rx="4" fill="url(#si-boss-body)"/>
+                          {/* Armor plates */}
+                          <line x1="15" y1="8" x2="15" y2="38" stroke="rgba(255,255,255,0.2)" strokeWidth="1"/>
+                          <line x1="28" y1="8" x2="28" y2="38" stroke="rgba(255,255,255,0.2)" strokeWidth="1"/>
+                          {/* Crown */}
+                          <path d="M30,8 L32,3 L37,7 L42,1 L47,7 L50,3 L50,8 Z" fill="#facc15" stroke="#92400e" strokeWidth="0.8"/>
+                          <circle cx="37" cy="5" r="1.5" fill="#f87171"/>
+                          <circle cx="46" cy="4" r="1.5" fill="#60a5fa"/>
+                          {/* Cockpit */}
+                          <ellipse cx="42" cy="23" rx="6" ry="6" fill="#86efac"/>
+                          <ellipse cx="43" cy="21" rx="2.5" ry="1.8" fill="rgba(255,255,255,0.8)"/>
+                          {/* Triple engine pods */}
+                          <ellipse cx="8" cy="13" rx="4" ry="3.5" fill="#22c55e"/>
+                          <ellipse cx="8" cy="23" rx="4" ry="3.5" fill="#22c55e"/>
+                          <ellipse cx="8" cy="33" rx="4" ry="3.5" fill="#22c55e"/>
+                          {/* Engine glow */}
+                          <ellipse cx="6" cy="13" rx="2" ry="2.2" fill="#bbf7d0"/>
+                          <ellipse cx="6" cy="23" rx="2" ry="2.2" fill="#bbf7d0"/>
+                          <ellipse cx="6" cy="33" rx="2" ry="2.2" fill="#bbf7d0"/>
+                        </svg>
+                      </div>
+                      <span className="text-[6px] font-bold" style={{ color:"#4ade80" }}>BOSS</span>
+                    </div>
+
                   </div>
                 </div>
 
@@ -1400,7 +1595,7 @@ const SpaceImpactPage = ({
                   <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Senjata</div>
                   <div className="grid grid-cols-3 gap-1.5 w-full">
                     {[
-                      { icon: "🔫", label: "TEMBAK",  desc: "3× untuk hancurkan", color: "#00FFFF" },
+                      { icon: "🔥", label: "TEMBAK",  desc: "3× untuk hancurkan", color: "#00FFFF" },
                       { icon: "💣", label: "BOM",     desc: "2× per sesi · laser besar", color: "#ff4444" },
                       { icon: "📝", label: "SOAL",    desc: "25 detik · +20 poin", color: "#facc15" },
                     ].map(w => (
@@ -1423,7 +1618,7 @@ const SpaceImpactPage = ({
                   <div className="space-y-1.5 px-1">
                     {[
                       { icon: "🕹️", text: "Pakai joystick atau WASD / ↑↓←→ untuk menggerakkan pesawat" },
-                      { icon: "🔫", text: "Tekan TEMBAK untuk menembak musuh — butuh 3× tembakan untuk hancur" },
+                      { icon: "🔥", text: "Tekan TEMBAK untuk menembak musuh — butuh 3× tembakan untuk hancur" },
                       { icon: "💣", text: "BOM melepaskan laser besar yang menghancurkan SEMUA musuh sekaligus (2× per sesi)" },
                       { icon: "📝", text: "Tiap 25 detik muncul soal dari guru — jawab benar = +20 poin" },
                     ].map((item, i) => (
