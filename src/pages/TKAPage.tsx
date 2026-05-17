@@ -211,6 +211,7 @@ const TKAPage = () => {
   const [infoOpen, setInfoOpen] = useState<string[]>([]);
   const [showTentang, setShowTentang] = useState(false);
   const [showPaket, setShowPaket] = useState(false);
+  const [showTips, setShowTips] = useState(false);
 
   const toggleInfo = (id: string) =>
     setInfoOpen(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -561,39 +562,42 @@ const TKAPage = () => {
 
         {/* ── Tips & Panduan ── */}
         <div className="animate-slide-up" style={{ animationDelay: "0.30s" }}>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400/60 text-xs font-body font-semibold tracking-widest uppercase">Tips &amp; Panduan</span>
-            <div className="h-px flex-1 bg-white/10" />
-          </div>
+          <SectionToggleHeader
+            label="Tips &amp; Panduan"
+            color="text-amber-400/60"
+            open={showTips}
+            onToggle={() => setShowTips(v => !v)}
+          />
 
-          <div className="flex flex-col gap-3">
-            {tips.map((tip, i) => {
-              const Icon = tip.icon;
-              return (
-                <div
-                  key={i}
-                  className={`flex gap-4 bg-card/70 backdrop-blur border rounded-2xl p-4 animate-slide-up ${tip.bg}`}
-                  style={{ animationDelay: `${i * 0.05}s` }}
-                >
-                  <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border ${tip.bg}`}>
-                    <Icon className={`w-5 h-5 ${tip.color}`} />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className={`font-display text-xs font-bold ${tip.color} opacity-70`}>{tip.number}</span>
-                      <h3 className={`font-display text-sm font-bold ${tip.color}`}>{tip.title}</h3>
+          {showTips && (
+            <div className="flex flex-col gap-3">
+              {tips.map((tip, i) => {
+                const Icon = tip.icon;
+                return (
+                  <div
+                    key={i}
+                    className={`flex gap-4 bg-card/70 backdrop-blur border rounded-2xl p-4 animate-slide-up ${tip.bg}`}
+                    style={{ animationDelay: `${i * 0.05}s` }}
+                  >
+                    <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border ${tip.bg}`}>
+                      <Icon className={`w-5 h-5 ${tip.color}`} />
                     </div>
-                    <p className="text-white/70 text-xs font-body leading-relaxed">{tip.desc}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`font-display text-xs font-bold ${tip.color} opacity-70`}>{tip.number}</span>
+                        <h3 className={`font-display text-sm font-bold ${tip.color}`}>{tip.title}</h3>
+                      </div>
+                      <p className="text-white/70 text-xs font-body leading-relaxed">{tip.desc}</p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            <div className="rounded-2xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-accent/10 border border-primary/20 p-4 text-center">
-              <p className="font-display text-sm font-bold text-primary text-glow-cyan mb-1">🚀 Kamu Pasti Bisa!</p>
-              <p className="text-white/60 text-xs font-body">Persiapan matang + mental kuat = hasil terbaik. Tetap semangat, Sobat Numatik!</p>
+                );
+              })}
+              <div className="rounded-2xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-accent/10 border border-primary/20 p-4 text-center">
+                <p className="font-display text-sm font-bold text-primary text-glow-cyan mb-1">🚀 Kamu Pasti Bisa!</p>
+                <p className="text-white/60 text-xs font-body">Persiapan matang + mental kuat = hasil terbaik. Tetap semangat, Sobat Numatik!</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="mt-8 text-center">
