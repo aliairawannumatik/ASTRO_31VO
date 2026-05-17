@@ -332,60 +332,149 @@ const ZumMathPage = ({
   // ── Start screen ─────────────────────────────────────────────────────────
   if (!started) {
     return (
-      <div className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+      <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
         {isLight ? <Snowfall /> : <Starfield />}
-        <div className="relative z-10 text-center animate-slide-up px-4">
-          <div className="mb-3">
-            <h1 className="font-display text-3xl md:text-5xl font-black">
-              <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(167,139,250,0.6)]">
-                MATH GAME ARENA
-              </span>
-            </h1>
-          </div>
-          <div className="mb-2">
-            <h2 className="font-display text-4xl md:text-6xl font-black tracking-wider">
-              <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(251,191,36,0.6)]">
-                🔮 ZUM MATH
-              </span>
-            </h2>
-          </div>
-          <div className="mb-6 inline-block">
-            <div className="px-5 py-2 rounded-full bg-gradient-to-r from-violet-500/25 to-fuchsia-500/25 border border-fuchsia-400/40 backdrop-blur-sm">
-              <span className="font-display text-sm font-bold text-fuchsia-200 tracking-wide">
-                {topicLabel ?? "MATH GAME"}
-              </span>
+        <div className="fixed inset-0 z-40 overflow-hidden">
+          <style>{`
+            @keyframes zga-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+            @keyframes zga-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+            @keyframes zga-pulse  { 0%,100%{opacity:0.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.1)} }
+            @keyframes zga-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+            @keyframes zga-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+            .zga-fa{animation:zga-floatA 3.2s ease-in-out infinite}
+            .zga-fb{animation:zga-floatB 3.8s ease-in-out infinite}
+            .zga-fp{animation:zga-pulse 2.4s ease-in-out infinite}
+            .zga-title-shine{background:linear-gradient(90deg,#e879f9,#a855f7,#7c3aed,#ec4899,#a855f7,#e879f9);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:zga-shimmer 4s linear infinite}
+            @keyframes zga-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+            .zga-btn-breathe{animation:zga-breathe 2.8s ease-in-out infinite}
+            .zga-scroll{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+            .zga-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100%}
+            .zga-main{display:flex;flex-direction:column;gap:0.75rem}
+            .zga-visual{display:flex;flex-direction:column;gap:0.5rem}
+            .zga-action{display:flex;flex-direction:column;gap:0.5rem}
+            @media(orientation:landscape){
+              .zga-wrap{justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100%}
+              .zga-main{flex-direction:row;align-items:stretch;gap:2rem}
+              .zga-visual{flex:1;justify-content:center;gap:0.6rem}
+              .zga-action{flex:1;justify-content:center;gap:0.6rem}
+            }
+          `}</style>
+
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(120,30,200,1) 0%, rgba(20,0,60,1) 60%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(236,72,153,0.2) 0%, transparent 55%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(124,58,237,0.15) 0%, transparent 55%)" }} />
+          <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(232,121,249,0.3),transparent)", animation: "zga-scanY 6s linear infinite" }} />
+
+          <div className="zga-scroll relative z-10">
+            <div className="zga-wrap">
+
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-between w-full mb-1">
+                  <button onClick={() => { playPopSound(); backPath ? navigate(backPath) : navigate(-1); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-700 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(232,121,249,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">←</span>
+                    <span>Kembali</span>
+                  </button>
+                  <div className="text-[7px] tracking-[5px] text-fuchsia-400/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                  <button onClick={() => { playPopSound(); navigate(homePath); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-700 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(232,121,249,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">🏠</span>
+                    <span>Home</span>
+                  </button>
+                </div>
+                <div className="zga-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.7rem,5vw,2.4rem)" }}>ZUM MATH</div>
+                <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right,transparent,#e879f9,#a855f7,transparent)" }} />
+                <p className="text-fuchsia-300/70 text-[9px] font-bold tracking-wider uppercase mt-1">Klik · Jawab · Ledakkan</p>
+                {topicLabel && <p className="text-white/35 text-[8px] tracking-widest uppercase mt-0.5">✨ {topicLabel} ✨</p>}
+              </div>
+
+              <div className="zga-main">
+                <div className="zga-visual">
+                  <div className="flex items-end justify-center gap-5 w-full">
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="text-[7px] text-fuchsia-400/70 font-bold tracking-wider uppercase">KAMU</div>
+                      <div className="relative">
+                        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(232,121,249,0.28) 0%,transparent 70%)", transform: "scale(2.4)", borderRadius: "50%" }} />
+                        <div className="zga-fa relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 16px #e879f9) drop-shadow(0 0 32px #a855f7)" }}>🔮</div>
+                      </div>
+                      <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(232,121,249,0.8),transparent)" }} />
+                      <div className="text-[8px] font-bold text-fuchsia-400">PILIH</div>
+                    </div>
+                    <div className="flex flex-col items-center pb-4">
+                      <div className="text-xl font-black text-white/20">VS</div>
+                    </div>
+                    <div className="flex flex-col items-center gap-1.5">
+                      <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">GELEMBUNG JAWABAN</div>
+                      <div className="flex gap-1.5 items-center">
+                        {(["#7c3aed","#0ea5e9","#e11d48","#16a34a"] as string[]).map((col, i) => (
+                          <div key={i} className="zga-fb rounded-full flex items-center justify-center"
+                            style={{ width: 28, height: 28, animationDelay: `${i * 0.3}s`,
+                              background: `radial-gradient(circle at 35% 35%,${col}cc,${col})`,
+                              boxShadow: `0 0 10px ${col},0 0 20px ${col}44`,
+                              fontSize: 10, color: "#fff", fontWeight: 900 }}>
+                            {["A","B","C","D"][i]}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="zga-fp mt-1 text-2xl" style={{ filter: "drop-shadow(0 0 8px #e11d48)" }}>☠</div>
+                      <div className="text-[7px] text-red-400/70 font-bold">JANGAN SALAH</div>
+                    </div>
+                  </div>
+
+                  <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(232,121,249,0.4),transparent)" }} />
+
+                  <div>
+                    <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">🎨 Warna Gelembung = Pilihan Jawaban</div>
+                    <div className="grid grid-cols-4 gap-1.5 w-full">
+                      {(["UNGU","BIRU","MERAH","HIJAU"] as string[]).map((name, i) => {
+                        const col = ["#7c3aed","#0ea5e9","#e11d48","#16a34a"][i];
+                        return (
+                          <div key={name} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                            style={{ borderColor: col + "44", background: col + "10", boxShadow: `0 0 8px ${col}30` }}>
+                            <div className="rounded-full" style={{ width: 18, height: 18,
+                              background: `radial-gradient(circle at 35% 35%,${col}cc,${col})`,
+                              boxShadow: `0 0 6px ${col}` }} />
+                            <span className="text-[7px] font-black" style={{ color: col }}>{name}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="zga-action">
+                  <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(232,121,249,0.28),transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1 font-bold text-center">📖 Cara Bermain</div>
+                  <div className="space-y-1.5">
+                    {[
+                      { icon: "🔮", text: "Gelembung berisi jawaban jatuh dari atas layar" },
+                      { icon: "✅", text: "Klik gelembung dengan jawaban BENAR untuk poin!" },
+                      { icon: "❌", text: "Klik jawaban SALAH = kehilangan 1 nyawa" },
+                      { icon: "⚡", text: "Kecepatan meningkat tiap 5 soal — tetap fokus!" },
+                    ].map(({ icon, text }) => (
+                      <div key={text} className="flex items-start gap-2 px-1">
+                        <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                        <p className="text-[8px] text-white/55 leading-relaxed">{text}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1.5 mt-2">
+                    <button onClick={startGame}
+                      className="zga-btn-breathe font-display font-black text-white text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                      style={{
+                        background: "linear-gradient(135deg,#e879f9 0%,#a855f7 45%,#7c3aed 100%)",
+                        boxShadow: "0 0 30px rgba(232,121,249,0.85),0 0 60px rgba(168,85,247,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.18)",
+                      }}>
+                      🔮 MULAI BERMAIN
+                    </button>
+                    <div className="text-[7px] text-white/20 text-center leading-relaxed">
+                      Tap / klik gelembung · 3 nyawa tersedia
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="bg-card/70 backdrop-blur-md border border-fuchsia-500/30 rounded-2xl p-6 max-w-xs mx-auto mb-8">
-            <h3 className="font-display text-base font-bold text-fuchsia-300 mb-3 flex items-center justify-center gap-2">
-              🎯 CARA BERMAIN
-            </h3>
-            <ul className="text-sm text-white/70 font-body space-y-2 text-left">
-              <li>🔮 Gelembung berisi jawaban jatuh dari atas</li>
-              <li>✅ Klik gelembung jawaban yang <b className="text-green-400">BENAR</b></li>
-              <li>❌ Jangan klik jawaban <b className="text-red-400">SALAH</b></li>
-              <li>❤️ Kamu punya <b className="text-red-400">3 nyawa</b></li>
-              <li>⚡ Kecepatan meningkat setiap 5 soal!</li>
-            </ul>
-          </div>
-          <button
-            onClick={startGame}
-            className="px-10 py-4 rounded-2xl font-display text-xl font-black text-white transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{ background: "linear-gradient(135deg,#7c3aed,#ec4899)", boxShadow: "0 4px 30px rgba(124,58,237,0.5)" }}
-          >
-            🚀 MULAI MAIN!
-          </button>
-          <div className="mt-6 flex gap-4 justify-center">
-            {backPath && (
-              <button onClick={() => { playPopSound(); navigate(backPath); }}
-                className="text-sm text-white/40 hover:text-fuchsia-400 transition-colors font-body">
-                ← Pilih Game Lain
-              </button>
-            )}
-            <button onClick={() => { playPopSound(); navigate(homePath); }}
-              className="text-sm text-white/40 hover:text-cyan-400 transition-colors font-body">
-              🏠 Menu Utama
-            </button>
           </div>
         </div>
       </div>

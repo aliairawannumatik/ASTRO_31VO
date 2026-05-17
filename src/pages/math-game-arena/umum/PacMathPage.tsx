@@ -501,65 +501,164 @@ const PacMathPage = ({
   // ── Start Screen ─────────────────────────────────────────────────────────
   if (!started || (gameOver && !won)) {
     return (
-      <div className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+      <div className={`relative flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`} style={{ height: '100dvh' }}>
         {isLight ? <Snowfall /> : <Starfield />}
-        <div className="relative z-10 text-center animate-slide-up px-4">
-          <div className="mb-3">
-            <h1 className="font-display text-3xl md:text-5xl font-black">
-              <span className="bg-gradient-to-r from-yellow-300 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.6)]">
-                MATH GAME ARENA
-              </span>
-            </h1>
-          </div>
-          <div className="mb-2">
-            <h2 className="font-display text-4xl md:text-6xl font-black tracking-wider">
-              <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(255,200,0,0.6)]">
-                👾 PAC MATH
-              </span>
-            </h2>
-          </div>
-          <div className="mb-6 inline-block">
-            <div className="px-5 py-2 rounded-full bg-gradient-to-r from-yellow-500/25 to-orange-500/25 border border-yellow-400/40 backdrop-blur-sm">
-              <span className="font-display text-sm font-bold text-yellow-200 tracking-wide">
-                {topicLabel ?? "MATH GAME"}
-              </span>
+        <div className="fixed inset-0 z-40 overflow-hidden">
+          <style>{`
+            @keyframes pga-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+            @keyframes pga-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+            @keyframes pga-chomp  { 0%,100%{transform:scale(1) rotate(-10deg)} 50%{transform:scale(1.15) rotate(10deg)} }
+            @keyframes pga-pulse  { 0%,100%{opacity:0.65;transform:scale(1)} 50%{opacity:1;transform:scale(1.12)} }
+            @keyframes pga-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+            @keyframes pga-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+            @keyframes pga-pellet { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+            .pga-fa{animation:pga-floatA 3.2s ease-in-out infinite}
+            .pga-fb{animation:pga-floatB 3.8s ease-in-out infinite}
+            .pga-chomp{animation:pga-chomp 0.5s ease-in-out infinite}
+            .pga-fp{animation:pga-pulse 2.4s ease-in-out infinite}
+            .pga-pel{animation:pga-pellet 1.2s ease-in-out infinite}
+            .pga-title-shine{background:linear-gradient(90deg,#facc15,#fbbf24,#fb923c,#facc15,#fbbf24,#facc15);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:pga-shimmer 3.5s linear infinite}
+            @keyframes pga-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+            .pga-btn-breathe{animation:pga-breathe 2.8s ease-in-out infinite}
+            .pga-scroll{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+            .pga-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:0.5rem 1rem;width:100%}
+            .pga-main{display:flex;flex-direction:column;gap:0.75rem}
+            .pga-visual{display:flex;flex-direction:column;gap:0.5rem}
+            .pga-action{display:flex;flex-direction:column;gap:0.5rem}
+            @media(orientation:landscape){
+              .pga-wrap{justify-content:space-evenly;padding:0.35rem 1.75rem;max-width:860px;margin:0 auto;width:100%}
+              .pga-main{flex-direction:row;align-items:stretch;gap:2rem}
+              .pga-visual{flex:1;justify-content:center;gap:0.6rem}
+              .pga-action{flex:1;justify-content:center;gap:0.6rem}
+            }
+          `}</style>
+
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(10,30,100,1) 0%, rgba(2,4,30,1) 60%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 55%, rgba(250,204,21,0.1) 0%, transparent 55%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(30,144,255,0.1) 0%, transparent 55%)" }} />
+          <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right,transparent,rgba(250,204,21,0.25),transparent)", animation: "pga-scanY 6s linear infinite" }} />
+
+          <div className="pga-scroll relative z-10">
+            <div className="pga-wrap">
+
+              <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-between w-full mb-1">
+                  <button onClick={() => { playPopSound(); backPath ? navigate(backPath) : navigate(-1); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(250,204,21,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">←</span>
+                    <span>Kembali</span>
+                  </button>
+                  <div className="text-[7px] tracking-[5px] text-yellow-400/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                  <button onClick={() => { playPopSound(); navigate(homePath); }}
+                    className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-display font-bold text-xs shadow-[0_0_15px_rgba(250,204,21,0.5)] hover:opacity-90 transition-opacity cursor-pointer">
+                    <span className="text-base leading-none">🏠</span>
+                    <span>Home</span>
+                  </button>
+                </div>
+                <div className="pga-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.7rem,5vw,2.4rem)" }}>PAC MATH</div>
+                <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right,transparent,#facc15,#fb923c,transparent)" }} />
+                <p className="text-yellow-400/70 text-[9px] font-bold tracking-wider uppercase mt-1">Makan · Hindari · Taklukkan</p>
+                {topicLabel && <p className="text-white/35 text-[8px] tracking-widest uppercase mt-0.5">🕹️ {topicLabel} 🕹️</p>}
+                {gameOver && (
+                  <div className="mt-2 py-1.5 px-4 rounded-xl bg-red-500/20 border border-red-400/30">
+                    <p className="text-red-300 text-[9px] font-bold">Skor terakhir: <span className="text-yellow-300">{score}</span></p>
+                  </div>
+                )}
+              </div>
+
+              <div className="pga-main">
+                <div className="pga-visual">
+                  <div className="flex items-end justify-center gap-5 w-full">
+                    <div className="flex flex-col items-center gap-0.5">
+                      <div className="text-[7px] text-yellow-400/70 font-bold tracking-wider uppercase">PAC-MAN</div>
+                      <div className="relative">
+                        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle,rgba(250,204,21,0.3) 0%,transparent 70%)", transform: "scale(2.4)", borderRadius: "50%" }} />
+                        <div className="pga-chomp relative z-10 text-5xl" style={{ filter: "drop-shadow(0 0 16px #facc15) drop-shadow(0 0 32px #f59e0b)" }}>😁</div>
+                      </div>
+                      <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(250,204,21,0.8),transparent)" }} />
+                      <div className="text-[8px] font-bold text-yellow-400">KAMU</div>
+                    </div>
+                    <div className="flex flex-col items-center pb-4">
+                      <div className="text-xl font-black text-white/20">VS</div>
+                    </div>
+                    <div className="flex flex-col items-center gap-1.5">
+                      <div className="text-[7px] text-white/40 font-bold tracking-wider uppercase mb-0.5">HANTU MUSUH</div>
+                      <div className="grid grid-cols-2 gap-1.5">
+                        {([
+                          { glow: "#ff4444", name: "BLINKY", delay: "0s" },
+                          { glow: "#ff9ff3", name: "PINKY",  delay: "0.5s" },
+                          { glow: "#00d2ff", name: "INKY",   delay: "1s" },
+                          { glow: "#ffa500", name: "CLYDE",  delay: "1.5s" },
+                        ]).map(g => (
+                          <div key={g.name} className="flex flex-col items-center gap-0.5 rounded-lg p-1.5 border"
+                            style={{ borderColor: g.glow + "55", background: g.glow + "12", boxShadow: `0 0 10px ${g.glow}33` }}>
+                            <div className="pga-fb text-2xl" style={{ animationDelay: g.delay, filter: `drop-shadow(0 0 7px ${g.glow})` }}>👻</div>
+                            <span className="text-[6px] font-bold" style={{ color: g.glow }}>{g.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(250,204,21,0.4),transparent)" }} />
+
+                  <div>
+                    <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Kapsul Warna = Pilihan Jawaban</div>
+                    <div className="grid grid-cols-4 gap-1.5 w-full">
+                      {(["MERAH","CYAN","PINK","ORANYE"] as string[]).map((name, i) => {
+                        const glow = ["#ff4444","#00ccff","#ff88ff","#ffaa00"][i];
+                        return (
+                          <div key={name} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                            style={{ borderColor: glow + "44", background: glow + "10", boxShadow: `0 0 8px ${glow}30` }}>
+                            <div className="pga-pel rounded-full" style={{ width: 18, height: 18, background: glow, boxShadow: `0 0 8px ${glow}`, animationDelay: `${i * 0.25}s` }} />
+                            <span className="text-[7px] font-black" style={{ color: glow }}>{name}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center items-center gap-1.5 py-0.5">
+                    {Array.from({ length: 10 }).map((_, i) => (
+                      <div key={i} className="rounded-full bg-yellow-400/50" style={{ width: 4, height: 4 }} />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pga-action">
+                  <div className="w-full h-px" style={{ background: "linear-gradient(to right,transparent,rgba(250,204,21,0.28),transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1 font-bold text-center">📖 Cara Bermain</div>
+                  <div className="space-y-1.5">
+                    {[
+                      { icon: "🟡", text: "Gerakkan Pac-Man makan semua titik di labirin" },
+                      { icon: "⚡", text: "Kapsul warna besar = pilihan jawaban soal matematika" },
+                      { icon: "✅", text: "Kapsul BENAR = +500 poin + semua hantu ketakutan!" },
+                      { icon: "👻", text: "Makan hantu ketakutan (biru) = +300 poin bonus" },
+                      { icon: "❌", text: "Jangan sampai tertangkap hantu — 3 nyawa tersedia!" },
+                    ].map(({ icon, text }) => (
+                      <div key={text} className="flex items-start gap-2 px-1">
+                        <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                        <p className="text-[8px] text-white/55 leading-relaxed">{text}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1.5 mt-2">
+                    <button onClick={startGame}
+                      className="pga-btn-breathe font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                      style={{
+                        background: "linear-gradient(135deg,#facc15 0%,#fbbf24 45%,#f59e0b 100%)",
+                        boxShadow: "0 0 30px rgba(250,204,21,0.85),0 0 60px rgba(245,158,11,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.3)",
+                      }}>
+                      {gameOver ? "🔄 MAIN LAGI!" : "😁 MULAI BERMAIN"}
+                    </button>
+                    <div className="text-[7px] text-white/20 text-center leading-relaxed">
+                      WASD / Panah = gerak · Joystick kiri untuk mobile
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          {gameOver && (
-            <div className="mb-4 py-3 px-6 rounded-xl bg-red-500/20 border border-red-400/30">
-              <p className="text-red-300 font-body">Skor terakhir: <span className="font-black text-xl text-yellow-300">{score}</span></p>
-            </div>
-          )}
-          <div className="bg-card/70 backdrop-blur-md border border-yellow-500/30 rounded-2xl p-6 max-w-xs mx-auto mb-8">
-            <h3 className="font-display text-base font-bold text-yellow-300 mb-3 flex items-center justify-center gap-2">
-              🎮 CARA BERMAIN
-            </h3>
-            <ul className="text-sm text-white/70 font-body space-y-2 text-left">
-              <li>🟡 Gerakkan Pac-Man dengan tombol arah / swipe</li>
-              <li>⚪ Makan semua titik untuk menang</li>
-              <li>🟣 Kapsul ungu: hantu jadi takut!</li>
-              <li>👻 Hindari hantu — jika tertangkap kehilangan nyawa</li>
-              <li>❓ Soal muncul setiap 25 detik!</li>
-            </ul>
-          </div>
-          <button
-            onClick={startGame}
-            className="px-10 py-4 rounded-2xl font-display text-xl font-black text-white transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{ background: "linear-gradient(135deg,#f59e0b,#ef4444)", boxShadow: "0 4px 30px rgba(245,158,11,0.5)" }}
-          >
-            🚀 {gameOver ? "MAIN LAGI!" : "MULAI MAIN!"}
-          </button>
-          <div className="mt-6 flex gap-4 justify-center">
-            {backPath && (
-              <button onClick={() => { playPopSound(); navigate(backPath); }}
-                className="text-sm text-white/40 hover:text-yellow-400 transition-colors font-body">
-                ← Pilih Game Lain
-              </button>
-            )}
-            <button onClick={() => { playPopSound(); navigate(homePath); }}
-              className="text-sm text-white/40 hover:text-cyan-400 transition-colors font-body">
-              🏠 Menu Utama
-            </button>
           </div>
         </div>
       </div>
