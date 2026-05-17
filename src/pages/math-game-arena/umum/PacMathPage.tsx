@@ -650,7 +650,21 @@ const PacMathPage = ({
                         background: "linear-gradient(135deg,#facc15 0%,#fbbf24 45%,#f59e0b 100%)",
                         boxShadow: "0 0 30px rgba(250,204,21,0.85),0 0 60px rgba(245,158,11,0.35),0 4px 16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.3)",
                       }}>
-                      {gameOver ? "🔄 MAIN LAGI!" : "😁 MULAI BERMAIN"}
+                      <span className="flex items-center justify-center gap-2">
+                        <svg viewBox="0 0 36 36" className="pga-chomp shrink-0" style={{ width:28,height:28,filter:"drop-shadow(0 0 6px #facc15)" }}>
+                          <defs>
+                            <radialGradient id="pac-btn-grad" cx="35%" cy="30%" r="65%">
+                              <stop offset="0%" stopColor="#fff176"/>
+                              <stop offset="50%" stopColor="#facc15"/>
+                              <stop offset="100%" stopColor="#b45309"/>
+                            </radialGradient>
+                          </defs>
+                          <path d="M18,18 L34,12 A16,16 0 1,0 34,24 Z" fill="url(#pac-btn-grad)"/>
+                          <circle cx="22" cy="11" r="2.2" fill="#1a1a00"/>
+                          <circle cx="22.6" cy="10.4" r="0.8" fill="rgba(255,255,255,0.7)"/>
+                        </svg>
+                        {gameOver ? "MAIN LAGI!" : "MULAI BERMAIN"}
+                      </span>
                     </button>
                     <div className="text-[7px] text-white/20 text-center leading-relaxed">
                       WASD / Panah = gerak · Joystick kiri untuk mobile
