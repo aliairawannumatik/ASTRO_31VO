@@ -6,7 +6,6 @@ import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
-import MathGameIntro from "@/components/MathGameIntro";
 
 // ── Canvas dimensions ─────────────────────────────────────────────────────
 const CW = 480;
@@ -1297,26 +1296,167 @@ const SpaceImpactPage = ({
 
   if (phase === "idle") {
     return (
-      <MathGameIntro
-        gameTitle="SPACE IMPACT MATH"
-        subtitle="⚔️ PERTEMPURAN GALAKSI ⚔️"
-        topicLabel={topicLabel}
-        heroEmoji="🚀"
-        startLabel="MULAI MISI"
-        theme="galaxy"
-        onStart={startGame}
-        onBack={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-        onHome={() => { playPopSound(); navigate(homePath); }}
-        bestLabel={best > 0 ? `Rekor Tertinggi: ${best}` : undefined}
-        decorations={[]}
-        instructions={[
-          { text: <>Pakai <strong className="text-yellow-300">analog joystick</strong> atau <strong className="text-yellow-300">WASD / ↑↓←→</strong> untuk bergerak</> },
-          { text: <>Tombol <strong className="text-green-300">🔫 TEMBAK</strong> untuk menembak musuh (butuh 3× tembakan)</> },
-          { text: <>Tombol <strong className="text-red-300">💣 BOM</strong> melepaskan laser besar yang menghancurkan SEMUA musuh sekaligus!</> },
-          { text: <>Kamu punya <strong className="text-red-300">2 bom</strong> per sesi — gunakan dengan bijak!</> },
-          { text: <>Tiap <strong className="text-yellow-300">25 detik</strong> muncul soal bonus untuk skor besar</> },
-        ]}
-      />
+      <div className="fixed inset-0 z-40 overflow-hidden">
+        <style>{`
+          @keyframes si-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+          @keyframes si-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+          @keyframes si-floatC { 0%,100%{transform:translateY(0px) rotate(180deg)} 50%{transform:translateY(-8px) rotate(180deg)} }
+          @keyframes si-pulse  { 0%,100%{opacity:0.75} 50%{opacity:1} }
+          @keyframes si-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+          @keyframes si-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+          @keyframes si-breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+          .si-fa{animation:si-floatA 3.2s ease-in-out infinite}
+          .si-fb{animation:si-floatB 3.8s ease-in-out infinite}
+          .si-fc{animation:si-floatC 3.5s ease-in-out infinite}
+          .si-fp{animation:si-pulse 2s ease-in-out infinite}
+          .si-title-shine{background:linear-gradient(90deg,#00FFFF,#22d3ee,#818cf8,#c084fc,#22d3ee,#00FFFF);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:si-shimmer 4s linear infinite}
+          .si-btn-breathe{animation:si-breathe 2.8s ease-in-out infinite}
+          .si-scroll { height:100%; overflow-y:auto; scrollbar-width:none; display:flex; flex-direction:column; }
+          .si-wrap   { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; padding:0.5rem 1rem; width:100%; }
+          .si-main   { display:flex; flex-direction:column; gap:0.75rem; }
+          .si-battle { display:flex; flex-direction:column; gap:0.5rem; }
+          .si-action { display:flex; flex-direction:column; gap:0.5rem; }
+          @media (orientation:landscape) {
+            .si-wrap   { justify-content:space-evenly; padding:0.35rem 1.75rem; max-width:860px; margin:0 auto; width:100%; }
+            .si-main   { flex-direction:row; align-items:stretch; gap:2rem; }
+            .si-battle { flex:1; justify-content:center; gap:0.6rem; }
+            .si-action { flex:1; justify-content:center; gap:0.6rem; }
+          }
+        `}</style>
+
+        {/* Deep space background */}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(0,50,130,1) 0%, rgba(4,0,30,1) 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 50%, rgba(80,0,180,0.2) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 30%, rgba(0,100,200,0.15) 0%, transparent 55%)" }} />
+        <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right, transparent, rgba(0,255,255,0.18), transparent)", animation: "si-scanY 6s linear infinite" }} />
+
+        <div className="si-scroll relative z-10">
+          <div className="si-wrap">
+
+            {/* ── HEADER ── */}
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center justify-between w-full mb-1">
+                <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">←</span>
+                  <span>Kembali</span>
+                </button>
+                <div className="text-[7px] tracking-[5px] text-cyan-500/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <button onClick={() => { playPopSound(); navigate(homePath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">🏠</span>
+                  <span>Home</span>
+                </button>
+              </div>
+              <div className="si-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.4rem,4.5vw,2rem)" }}>SPACE IMPACT MATH</div>
+              <div className="mx-auto mt-0.5 h-0.5 w-32 rounded-full" style={{ background: "linear-gradient(to right, transparent, #00FFFF, #818cf8, transparent)" }} />
+              <p className="text-white/40 text-[8px] tracking-widest uppercase mt-0.5">⚡ Gerak · Tembak · Hancurkan ⚡</p>
+              {topicLabel && <p className="text-cyan-300/70 text-[9px] tracking-wider mt-0.5 font-bold">✦ {topicLabel} ✦</p>}
+            </div>
+
+            {/* ── MAIN BODY ── */}
+            <div className="si-main">
+
+              {/* LEFT — spaceship vs enemies visual */}
+              <div className="si-battle">
+                <div className="flex items-end justify-center gap-4 w-full">
+                  {/* Player ship */}
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="text-[7px] text-cyan-400/70 font-bold tracking-wider uppercase">PESAWATMU</div>
+                    <div className="relative">
+                      <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%)", transform: "scale(2)" }} />
+                      <img src="/pesawat-nobg-new.png" alt="pesawat" className="si-fa relative z-10"
+                        style={{ width: 48, filter: "drop-shadow(0 0 14px #00FFFF) drop-shadow(0 0 28px #0088FF)" }} />
+                    </div>
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom, rgba(0,200,255,0.8), transparent)" }} />
+                    <div className="text-[8px] font-bold text-cyan-400">KAMU</div>
+                  </div>
+                  <div className="flex flex-col items-center pb-4">
+                    <div className="text-xl font-black text-white/20">VS</div>
+                  </div>
+                  {/* Enemy grid */}
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {[
+                      { src: "/musuh-1.png", glow: "#ff6b6b", name: "BOMBER",  delay: "0s"   },
+                      { src: "/musuh-2.png", glow: "#818cf8", name: "FIGHTER", delay: "0.5s" },
+                      { src: "/musuh-3.png", glow: "#fb923c", name: "RAIDER",  delay: "1s"   },
+                      { src: "/musuh-4.png", glow: "#4ade80", name: "SAUCER",  delay: "1.5s" },
+                    ].map(e => (
+                      <div key={e.name} className="flex flex-col items-center gap-0.5">
+                        <div className="relative rounded-lg p-1.5 border"
+                          style={{ borderColor: e.glow + "55", background: e.glow + "12", boxShadow: `0 0 10px ${e.glow}33` }}>
+                          <img src={e.src} alt={e.name}
+                            style={{ width: 30, height: "auto", filter: `drop-shadow(0 0 7px ${e.glow})`, transform: "rotate(180deg)", animation: `si-floatB 3.4s ease-in-out infinite`, animationDelay: e.delay }} />
+                        </div>
+                        <span className="text-[6px] font-bold" style={{ color: e.glow }}>{e.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Weapons row */}
+                <div>
+                  <div className="w-full h-px my-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(250,204,21,0.3), transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">⚡ Senjata</div>
+                  <div className="grid grid-cols-3 gap-1.5 w-full">
+                    {[
+                      { icon: "🔫", label: "TEMBAK",  desc: "3× untuk hancurkan", color: "#00FFFF" },
+                      { icon: "💣", label: "BOM",     desc: "2× per sesi · laser besar", color: "#ff4444" },
+                      { icon: "📝", label: "SOAL",    desc: "25 detik · +20 poin", color: "#facc15" },
+                    ].map(w => (
+                      <div key={w.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border"
+                        style={{ borderColor: w.color + "44", background: w.color + "0f", boxShadow: `0 0 8px ${w.color}33` }}>
+                        <span className="text-base leading-none" style={{ filter: `drop-shadow(0 0 5px ${w.color})` }}>{w.icon}</span>
+                        <span className="text-[7px] font-black" style={{ color: w.color }}>{w.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">{w.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT — instructions + button */}
+              <div className="si-action">
+                <div>
+                  <div className="w-full h-px mb-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(250,204,21,0.3), transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">📋 CARA BERMAIN</div>
+                  <div className="space-y-1.5 px-1">
+                    {[
+                      { icon: "🕹️", text: "Pakai joystick atau WASD / ↑↓←→ untuk menggerakkan pesawat" },
+                      { icon: "🔫", text: "Tekan TEMBAK untuk menembak musuh — butuh 3× tembakan untuk hancur" },
+                      { icon: "💣", text: "BOM melepaskan laser besar yang menghancurkan SEMUA musuh sekaligus (2× per sesi)" },
+                      { icon: "📝", text: "Tiap 25 detik muncul soal dari guru — jawab benar = +20 poin" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <span className="text-xs shrink-0 mt-0.5">{item.icon}</span>
+                        <span className="text-[8px] text-white/60 leading-tight">{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center gap-1 mt-2">
+                  {best > 0 && (
+                    <div className="text-[8px] text-yellow-300/80 font-bold mb-0.5">🏆 Rekor Tertinggi: {best}</div>
+                  )}
+                  <button onClick={startGame}
+                    className="si-btn-breathe relative overflow-hidden font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                    style={{
+                      background: "linear-gradient(135deg, #00FFFF 0%, #22d3ee 40%, #0ea5e9 100%)",
+                      boxShadow: "0 0 30px rgba(0,200,255,0.9), 0 0 60px rgba(0,120,200,0.4), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.4)",
+                    }}>
+                    <span className="relative z-10 tracking-wide">🚀 MULAI MISI</span>
+                  </button>
+                  <div className="text-[7px] text-white/20 text-center">
+                    Joystick / WASD untuk bergerak · TEMBAK / BOM untuk menyerang
+                  </div>
+                </div>
+              </div>
+
+            </div>{/* si-main */}
+          </div>{/* si-wrap */}
+        </div>{/* si-scroll */}
+      </div>
     );
   }
 

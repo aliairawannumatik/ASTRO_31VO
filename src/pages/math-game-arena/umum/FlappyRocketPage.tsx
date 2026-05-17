@@ -6,7 +6,6 @@ import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
 import { useGuruQuiz, type GuruQuestion } from "@/hooks/useGuruQuiz";
 import GuruQuizOverlay from "@/components/GuruQuizOverlay";
-import MathGameIntro from "@/components/MathGameIntro";
 
 // ── Canvas ───────────────────────────────────────────────────────────────────
 const CW = 420;
@@ -851,28 +850,180 @@ const FlappyRocketPage = ({
 
   if (phase === "idle") {
     return (
-      <MathGameIntro
-        gameTitle="FLAPPY ROCKET"
-        subtitle="🚀 MISI LUAR ANGKASA 🚀"
-        topicLabel={topicLabel}
-        heroEmoji="🚀"
-        startLabel="TERBANG SEKARANG"
-        theme="space"
-        onStart={startGame}
-        onBack={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
-        onHome={() => { playPopSound(); navigate(homePath); }}
-        bestLabel={best > 0 ? `Rekor Tertinggi: ${best}` : undefined}
-        decorations={[
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100"><defs><linearGradient id="b1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#88CCFF"/><stop offset="50%" stop-color="#4499FF"/><stop offset="100%" stop-color="#2255CC"/></linearGradient><linearGradient id="n1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF8888"/><stop offset="100%" stop-color="#CC2222"/></linearGradient></defs><path d="M30,3 Q42,22 42,38 L18,38 Q18,22 30,3Z" fill="url(#n1)"/><rect x="16" y="36" width="28" height="36" rx="5" fill="url(#b1)"/><circle cx="30" cy="52" r="7" fill="#00EEFF" opacity="0.95"/><circle cx="28" cy="50" r="3" fill="white" opacity="0.8"/><path d="M16,66 L4,88 L16,80Z" fill="#3377EE"/><path d="M44,66 L56,88 L44,80Z" fill="#3377EE"/><ellipse cx="30" cy="76" rx="12" ry="5" fill="#FF8800" opacity="0.9"/><ellipse cx="30" cy="83" rx="7" ry="9" fill="#FFE000" opacity="0.85"/><ellipse cx="30" cy="91" rx="4" ry="5" fill="white" opacity="0.6"/></svg>')}`, className: "absolute top-[10%] left-[8%] w-14 h-20 md:w-20 md:h-28 opacity-80 animate-float-slow", glowRgba: "rgba(0,200,255,0.55)" },
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100"><defs><linearGradient id="b2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#CCAAFF"/><stop offset="50%" stop-color="#9966FF"/><stop offset="100%" stop-color="#6633BB"/></linearGradient><linearGradient id="n2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFAAAA"/><stop offset="100%" stop-color="#FF3333"/></linearGradient></defs><path d="M30,3 Q42,22 42,38 L18,38 Q18,22 30,3Z" fill="url(#n2)"/><rect x="16" y="36" width="28" height="36" rx="5" fill="url(#b2)"/><circle cx="30" cy="52" r="7" fill="#FF99FF" opacity="0.95"/><circle cx="28" cy="50" r="3" fill="white" opacity="0.8"/><path d="M16,66 L4,88 L16,80Z" fill="#7744DD"/><path d="M44,66 L56,88 L44,80Z" fill="#7744DD"/><ellipse cx="30" cy="76" rx="12" ry="5" fill="#FF6600" opacity="0.9"/><ellipse cx="30" cy="83" rx="7" ry="9" fill="#FFCC00" opacity="0.85"/><ellipse cx="30" cy="91" rx="4" ry="5" fill="white" opacity="0.6"/></svg>')}`, className: "absolute top-[35%] right-[6%] w-10 h-14 md:w-14 md:h-20 opacity-70 animate-float-medium", glowRgba: "rgba(180,100,255,0.5)" },
-          { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100"><defs><linearGradient id="b3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#88FFCC"/><stop offset="50%" stop-color="#00DDAA"/><stop offset="100%" stop-color="#009977"/></linearGradient><linearGradient id="n3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFDD88"/><stop offset="100%" stop-color="#FF9900"/></linearGradient></defs><path d="M30,3 Q42,22 42,38 L18,38 Q18,22 30,3Z" fill="url(#n3)"/><rect x="16" y="36" width="28" height="36" rx="5" fill="url(#b3)"/><circle cx="30" cy="52" r="7" fill="#AAFFEE" opacity="0.95"/><circle cx="28" cy="50" r="3" fill="white" opacity="0.8"/><path d="M16,66 L4,88 L16,80Z" fill="#00AA77"/><path d="M44,66 L56,88 L44,80Z" fill="#00AA77"/><ellipse cx="30" cy="76" rx="12" ry="5" fill="#FF7700" opacity="0.9"/><ellipse cx="30" cy="83" rx="7" ry="9" fill="#FFEE00" opacity="0.85"/><ellipse cx="30" cy="91" rx="4" ry="5" fill="white" opacity="0.6"/></svg>')}`, className: "absolute bottom-[18%] left-[10%] w-14 h-20 md:w-20 md:h-28 opacity-80 animate-float-fast", glowRgba: "rgba(0,220,170,0.55)" },
-        ]}
-        instructions={[
-          { text: <>Tap layar atau tekan <strong className="text-yellow-300">SPASI</strong> untuk membuat roket terbang naik</> },
-          { text: <>Hindari pipa dan terus terbang melewati setiap celah</> },
-          { text: <>Setiap <strong className="text-yellow-300">25 detik</strong> akan muncul <strong className="text-pink-300">soal dari guru</strong> — game di-pause, jawab benar = <strong className="text-green-400">+20 poin</strong></> },
-        ]}
-      />
+      <div className="fixed inset-0 z-40 overflow-hidden">
+        <style>{`
+          @keyframes fr-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+          @keyframes fr-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+          @keyframes fr-pulse  { 0%,100%{opacity:0.75} 50%{opacity:1} }
+          @keyframes fr-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+          @keyframes fr-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+          @keyframes fr-breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+          .fr-fa{animation:fr-floatA 3.2s ease-in-out infinite}
+          .fr-fb{animation:fr-floatB 3.8s ease-in-out infinite}
+          .fr-fp{animation:fr-pulse 2s ease-in-out infinite}
+          .fr-title-shine{background:linear-gradient(90deg,#00FFFF,#38bdf8,#818cf8,#c084fc,#38bdf8,#00FFFF);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fr-shimmer 4s linear infinite}
+          .fr-btn-breathe{animation:fr-breathe 2.8s ease-in-out infinite}
+          .fr-scroll { height:100%; overflow-y:auto; scrollbar-width:none; display:flex; flex-direction:column; }
+          .fr-wrap   { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; padding:0.5rem 1rem; width:100%; }
+          .fr-main   { display:flex; flex-direction:column; gap:0.75rem; }
+          .fr-battle { display:flex; flex-direction:column; gap:0.5rem; }
+          .fr-action { display:flex; flex-direction:column; gap:0.5rem; }
+          @media (orientation:landscape) {
+            .fr-wrap   { justify-content:space-evenly; padding:0.35rem 1.75rem; max-width:860px; margin:0 auto; width:100%; }
+            .fr-main   { flex-direction:row; align-items:stretch; gap:2rem; }
+            .fr-battle { flex:1; justify-content:center; gap:0.6rem; }
+            .fr-action { flex:1; justify-content:center; gap:0.6rem; }
+          }
+        `}</style>
+
+        {/* Deep space background */}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(0,30,100,1) 0%, rgba(2,0,25,1) 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 15% 50%, rgba(56,100,200,0.18) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 85% 30%, rgba(130,0,200,0.12) 0%, transparent 55%)" }} />
+        <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right, transparent, rgba(0,255,255,0.18), transparent)", animation: "fr-scanY 6s linear infinite" }} />
+
+        <div className="fr-scroll relative z-10">
+          <div className="fr-wrap">
+
+            {/* ── HEADER ── */}
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center justify-between w-full mb-1">
+                <button onClick={() => { playPopSound(); if (backPath) navigate(backPath); else navigate(-1); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">←</span>
+                  <span>Kembali</span>
+                </button>
+                <div className="text-[7px] tracking-[5px] text-cyan-500/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <button onClick={() => { playPopSound(); navigate(homePath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">🏠</span>
+                  <span>Home</span>
+                </button>
+              </div>
+              <div className="fr-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.6rem,5vw,2.2rem)" }}>FLAPPY ROCKET</div>
+              <div className="mx-auto mt-0.5 h-0.5 w-28 rounded-full" style={{ background: "linear-gradient(to right, transparent, #00FFFF, #818cf8, transparent)" }} />
+              <p className="text-white/40 text-[8px] tracking-widest uppercase mt-0.5">🚀 Hindari · Terbang · Taklukkan 🚀</p>
+              {topicLabel && <p className="text-cyan-300/70 text-[9px] tracking-wider mt-0.5 font-bold">✦ {topicLabel} ✦</p>}
+            </div>
+
+            {/* ── MAIN BODY ── */}
+            <div className="fr-main">
+
+              {/* LEFT — rocket vs pipe visual */}
+              <div className="fr-battle">
+                <div className="flex items-end justify-center gap-6 w-full">
+                  {/* Rocket player */}
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="text-[7px] text-cyan-400/70 font-bold tracking-wider uppercase">ROKETMU</div>
+                    <div className="relative">
+                      <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%)", transform: "scale(2)" }} />
+                      <svg viewBox="0 0 60 100" className="fr-fa relative z-10" style={{ width: 44, filter: "drop-shadow(0 0 14px #00FFFF) drop-shadow(0 0 28px #0088FF)" }}>
+                        <defs>
+                          <linearGradient id="fr-body" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#88CCFF"/>
+                            <stop offset="50%" stopColor="#4499FF"/>
+                            <stop offset="100%" stopColor="#2255CC"/>
+                          </linearGradient>
+                          <linearGradient id="fr-nose" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#FF8888"/>
+                            <stop offset="100%" stopColor="#CC2222"/>
+                          </linearGradient>
+                        </defs>
+                        <path d="M30,3 Q42,22 42,38 L18,38 Q18,22 30,3Z" fill="url(#fr-nose)"/>
+                        <rect x="16" y="36" width="28" height="36" rx="5" fill="url(#fr-body)"/>
+                        <circle cx="30" cy="52" r="7" fill="#00EEFF" opacity="0.95"/>
+                        <circle cx="28" cy="50" r="3" fill="white" opacity="0.8"/>
+                        <path d="M16,66 L4,88 L16,80Z" fill="#3377EE"/>
+                        <path d="M44,66 L56,88 L44,80Z" fill="#3377EE"/>
+                        <ellipse cx="30" cy="76" rx="12" ry="5" fill="#FF8800" opacity="0.9"/>
+                        <ellipse cx="30" cy="83" rx="7" ry="9" fill="#FFE000" opacity="0.85"/>
+                        <ellipse cx="30" cy="91" rx="4" ry="5" fill="white" opacity="0.6"/>
+                      </svg>
+                    </div>
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom, rgba(0,200,255,0.8), transparent)" }} />
+                    <div className="text-[8px] font-bold text-cyan-400">KAMU</div>
+                  </div>
+                  <div className="flex flex-col items-center pb-4">
+                    <div className="text-xl font-black text-white/20">VS</div>
+                  </div>
+                  {/* Pipe obstacles */}
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="text-[7px] text-red-400/70 font-bold tracking-wider uppercase">RINTANGAN</div>
+                    <div className="relative flex items-center justify-center" style={{ width: 56, height: 80 }}>
+                      <div className="absolute top-0" style={{ width: 32, height: 28, background: "linear-gradient(to right, #22c55e, #16a34a, #15803d)", borderRadius: "0 0 4px 4px", boxShadow: "0 0 10px rgba(34,197,94,0.5)" }}>
+                        <div style={{ width: 38, height: 10, background: "linear-gradient(to right, #16a34a, #22c55e, #16a34a)", borderRadius: 4, position: "absolute", bottom: 0, left: -3 }} />
+                      </div>
+                      <div className="absolute" style={{ top: "50%", transform: "translateY(-50%)" }}>
+                        <span className="text-yellow-400 text-[8px] font-bold">CELAH</span>
+                      </div>
+                      <div className="absolute bottom-0" style={{ width: 32, height: 28, background: "linear-gradient(to right, #22c55e, #16a34a, #15803d)", borderRadius: "4px 4px 0 0", boxShadow: "0 0 10px rgba(34,197,94,0.5)" }}>
+                        <div style={{ width: 38, height: 10, background: "linear-gradient(to right, #16a34a, #22c55e, #16a34a)", borderRadius: 4, position: "absolute", top: 0, left: -3 }} />
+                      </div>
+                    </div>
+                    <span className="text-[8px] font-bold text-red-400">HINDARI!</span>
+                  </div>
+                </div>
+
+                {/* Kontrol grid */}
+                <div>
+                  <div className="w-full h-px my-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(0,200,255,0.25), transparent)" }} />
+                  <div className="grid grid-cols-3 gap-1.5 w-full px-1">
+                    {([
+                      { icon: "👆", label: "TAP",   desc: "Layar untuk naik" },
+                      { icon: "⌨️", label: "SPASI", desc: "Atau tombol ↑"    },
+                      { icon: "📝", label: "SOAL",  desc: "Tiap 25 detik"    },
+                    ] as const).map(t => (
+                      <div key={t.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border border-cyan-500/20"
+                        style={{ background: "rgba(0,200,255,0.07)", boxShadow: "0 0 8px rgba(0,200,255,0.12)" }}>
+                        <span className="text-base leading-none">{t.icon}</span>
+                        <span className="text-[7px] font-black text-cyan-300">{t.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">{t.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT — instructions + button */}
+              <div className="fr-action">
+                <div>
+                  <div className="w-full h-px mb-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(0,200,255,0.3), transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">📋 CARA BERMAIN</div>
+                  <div className="space-y-1.5 px-1">
+                    {[
+                      { icon: "🚀", text: "Tap layar atau tekan SPASI untuk membuat roket terbang naik" },
+                      { icon: "🚧", text: "Hindari pipa dan terus terbang melewati setiap celah" },
+                      { icon: "📝", text: "Tiap 25 detik muncul soal dari guru — jawab benar = +20 poin" },
+                      { icon: "🏆", text: "Semakin jauh terbang, semakin tinggi skor kamu!" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <span className="text-xs shrink-0 mt-0.5">{item.icon}</span>
+                        <span className="text-[8px] text-white/60 leading-tight">{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center gap-1 mt-2">
+                  {best > 0 && (
+                    <div className="text-[8px] text-yellow-300/80 font-bold mb-0.5">🏆 Rekor Tertinggi: {best}</div>
+                  )}
+                  <button onClick={startGame}
+                    className="fr-btn-breathe relative overflow-hidden font-display font-black text-black text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                    style={{
+                      background: "linear-gradient(135deg, #00FFFF 0%, #22d3ee 40%, #0ea5e9 100%)",
+                      boxShadow: "0 0 30px rgba(0,200,255,0.9), 0 0 60px rgba(0,120,200,0.4), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.4)",
+                    }}>
+                    <span className="relative z-10 tracking-wide">🚀 MULAI TERBANG</span>
+                  </button>
+                  <div className="text-[7px] text-white/20 text-center">Tap layar / SPASI / ↑ untuk terbang</div>
+                </div>
+              </div>
+
+            </div>{/* fr-main */}
+          </div>{/* fr-wrap */}
+        </div>{/* fr-scroll */}
+      </div>
     );
   }
 
