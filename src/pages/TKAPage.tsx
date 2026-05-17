@@ -196,7 +196,7 @@ const SectionToggleHeader = ({
     className="w-full flex items-center gap-2 mb-3 px-1 group cursor-pointer"
   >
     <div className="h-px flex-1 bg-white/10 group-hover:bg-white/20 transition-colors" />
-    <div className="flex items-center gap-1.5">
+    <div className={`flex items-center gap-1.5 ${!open ? "animate-pulse" : ""}`}>
       <span className={`text-xs font-body font-semibold tracking-widest uppercase ${color}`}>{label}</span>
       {open
         ? <ChevronUp className={`w-3.5 h-3.5 ${color}`} />
@@ -431,7 +431,7 @@ const TKAPage = () => {
         <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.10s" }}>
           <div className="flex items-center gap-2 mb-3 px-1">
             <div className="h-px flex-1 bg-white/10" />
-            <span className="text-cyan-400/60 text-xs font-body font-semibold tracking-widest uppercase">Modul Pemantapan</span>
+            <span className="animate-pulse text-cyan-400/60 text-xs font-body font-semibold tracking-widest uppercase">Modul Pemantapan</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
