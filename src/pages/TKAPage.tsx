@@ -234,9 +234,12 @@ const TKAPage = () => {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/30 to-blue-600/20 border border-cyan-400/40 flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/10">
             <Brain className="w-8 h-8 text-cyan-400" />
           </div>
-          <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center tracking-wide">
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center tracking-wide">
             TES KEMAMPUAN AKADEMIK
           </h1>
+          <p className="font-display text-sm font-semibold text-cyan-300/70 text-center tracking-wider mb-2">
+            TAHUN AJARAN 2026 - 2027
+          </p>
           <p className="text-white/50 text-xs text-center font-body max-w-xs">
             Pemantapan &amp; Persiapan TKA — Matematika Kelas IX
           </p>
