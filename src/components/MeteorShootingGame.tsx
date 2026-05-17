@@ -233,135 +233,159 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
 
   if (!started) {
     return (
-      <>
-      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-        <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/80" />
-        <Starfield />
+      <div className="fixed inset-0 z-40 overflow-hidden">
+        <style>{`
+          @keyframes msg-floatA { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)} }
+          @keyframes msg-floatB { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(7px)} }
+          @keyframes msg-floatC { 0%,100%{transform:translateY(0px) rotate(15deg)} 50%{transform:translateY(-8px) rotate(-10deg)} }
+          @keyframes msg-pulse  { 0%,100%{opacity:0.75} 50%{opacity:1} }
+          @keyframes msg-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+          @keyframes msg-scanY  { 0%{transform:translateY(-120%)} 100%{transform:translateY(220%)} }
+          @keyframes msg-breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+          @keyframes msg-fall   { 0%{transform:translateY(-20px) rotate(0deg)} 100%{transform:translateY(8px) rotate(20deg)} }
+          .msg-fa{animation:msg-floatA 3.2s ease-in-out infinite}
+          .msg-fb{animation:msg-floatB 3.8s ease-in-out infinite}
+          .msg-fc{animation:msg-floatC 2.8s ease-in-out infinite}
+          .msg-fp{animation:msg-pulse 2s ease-in-out infinite}
+          .msg-title-shine{background:linear-gradient(90deg,#facc15,#fb923c,#ef4444,#f97316,#facc15);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:msg-shimmer 4s linear infinite}
+          .msg-btn-breathe{animation:msg-breathe 2.8s ease-in-out infinite}
+          .msg-scroll { height:100%; overflow-y:auto; scrollbar-width:none; display:flex; flex-direction:column; }
+          .msg-wrap   { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; padding:0.5rem 1rem; width:100%; }
+          .msg-main   { display:flex; flex-direction:column; gap:0.75rem; }
+          .msg-battle { display:flex; flex-direction:column; gap:0.5rem; }
+          .msg-action { display:flex; flex-direction:column; gap:0.5rem; }
+          @media (orientation:landscape) {
+            .msg-wrap   { justify-content:space-evenly; padding:0.35rem 1.75rem; max-width:860px; margin:0 auto; width:100%; }
+            .msg-main   { flex-direction:row; align-items:stretch; gap:2rem; }
+            .msg-battle { flex:1; justify-content:center; gap:0.6rem; }
+            .msg-action { flex:1; justify-content:center; gap:0.6rem; }
+          }
+        `}</style>
 
-        <div
-          className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3"
-          style={{
-            paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
-            paddingRight: "max(1rem, env(safe-area-inset-right, 0px))",
-            paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))",
-          }}
-        >
-          <button
-            onClick={() => { playPopSound(); stopBgMusic(); navigate(backPath); }}
-            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
-            title={backLabel}
-          >
-            <span className="text-base leading-none">←</span>
-            <span className="hidden sm:inline">Kembali</span>
-          </button>
-          <button
-            onClick={() => { playPopSound(); stopBgMusic(); navigate(homePath); }}
-            className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.4)] hover:opacity-90 transition-opacity cursor-pointer"
-            title="Menu Utama"
-          >
-            <span className="text-base leading-none">🏠</span>
-            <span className="hidden sm:inline">Home</span>
-          </button>
-        </div>
+        {/* Deep space + meteor-fire background */}
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 15%, rgba(80,20,0,1) 0%, rgba(15,2,0,1) 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 40%, rgba(200,60,0,0.18) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 90% 60%, rgba(150,30,0,0.14) 0%, transparent 55%)" }} />
+        <div className="absolute inset-x-0 h-[1px] pointer-events-none" style={{ background: "linear-gradient(to right, transparent, rgba(255,150,50,0.2), transparent)", animation: "msg-scanY 6s linear infinite" }} />
 
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[10%] left-[8%] animate-float-slow">
-            <img src={meteorImg} alt="" className="w-12 h-12 md:w-16 md:h-16 opacity-60 drop-shadow-[0_0_15px_rgba(255,100,50,0.5)]" />
-          </div>
-          <div className="absolute top-[15%] right-[12%] animate-float-medium">
-            <img src={meteorImg} alt="" className="w-10 h-10 md:w-14 md:h-14 opacity-50 drop-shadow-[0_0_12px_rgba(255,80,40,0.5)]" />
-          </div>
-          <div className="absolute top-[40%] left-[5%] animate-float-fast">
-            <img src={meteorImg} alt="" className="w-8 h-8 md:w-12 md:h-12 opacity-40 drop-shadow-[0_0_10px_rgba(255,60,30,0.5)]" />
-          </div>
-          <div className="absolute top-[35%] right-[6%] animate-float-slow">
-            <img src={meteorImg} alt="" className="w-14 h-14 md:w-18 md:h-18 opacity-55 drop-shadow-[0_0_18px_rgba(255,90,45,0.5)]" />
-          </div>
-          <div className="absolute bottom-[20%] left-[10%] animate-float-medium">
-            <img src={meteorImg} alt="" className="w-9 h-9 md:w-13 md:h-13 opacity-45 drop-shadow-[0_0_12px_rgba(255,70,35,0.5)]" />
-          </div>
-          <div className="absolute bottom-[25%] right-[8%] animate-float-fast">
-            <img src={meteorImg} alt="" className="w-11 h-11 md:w-15 md:h-15 opacity-50 drop-shadow-[0_0_14px_rgba(255,85,40,0.5)]" />
-          </div>
-          <div className="absolute bottom-[8%] left-1/2 -translate-x-1/2 animate-hover-ship">
-            <div className="relative flex flex-col items-center">
-              <img src={spaceshipImg} alt="" className="w-20 h-24 md:w-28 md:h-32 opacity-70 drop-shadow-[0_0_25px_rgba(0,200,255,0.4)]" />
-              <div className="absolute -bottom-1 w-5 h-7 md:w-6 md:h-8 animate-flame" style={{ left: "40%", transform: "translateX(-50%)" }}>
-                <div className="w-full h-full flex flex-col items-center">
-                  <div className="w-2 md:w-2.5 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[1px] opacity-90" />
-                  <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-orange-500/80 via-red-500/40 to-transparent blur-sm" />
+        <div className="msg-scroll relative z-10">
+          <div className="msg-wrap">
+
+            {/* ── HEADER ── */}
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center justify-between w-full mb-1">
+                <button onClick={() => { playPopSound(); stopBgMusic(); navigate(backPath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(255,100,0,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">←</span>
+                  <span>Kembali</span>
+                </button>
+                <div className="text-[7px] tracking-[5px] text-orange-500/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <button onClick={() => { playPopSound(); stopBgMusic(); navigate(homePath); }}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(255,100,0,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
+                  <span className="text-base leading-none">🏠</span>
+                  <span>Home</span>
+                </button>
+              </div>
+              <div className="msg-title-shine font-display font-black leading-none" style={{ fontSize: "clamp(1.3rem,4vw,1.9rem)" }}>PESAWAT TEMBAK METEOR</div>
+              <div className="mx-auto mt-0.5 h-0.5 w-36 rounded-full" style={{ background: "linear-gradient(to right, transparent, #fb923c, #ef4444, transparent)" }} />
+              <p className="text-white/40 text-[8px] tracking-widest uppercase mt-0.5">🔥 Arahkan · Tembak · Hancurkan 🔥</p>
+              {topicLabel && <p className="text-orange-300/70 text-[9px] tracking-wider mt-0.5 font-bold">✦ {topicLabel} ✦</p>}
+            </div>
+
+            {/* ── MAIN BODY ── */}
+            <div className="msg-main">
+
+              {/* LEFT — spaceship vs meteors visual */}
+              <div className="msg-battle">
+                <div className="flex items-end justify-center gap-6 w-full">
+                  {/* Player ship */}
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="text-[7px] text-cyan-400/70 font-bold tracking-wider uppercase">PESAWATMU</div>
+                    <div className="relative">
+                      <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.15) 0%, transparent 70%)", transform: "scale(2.2)" }} />
+                      <img src={spaceshipImg} alt="pesawat" className="msg-fa relative z-10"
+                        style={{ width: 48, filter: "drop-shadow(0 0 12px #00FFFF) drop-shadow(0 0 24px #0088FF)" }} />
+                    </div>
+                    <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom, rgba(255,140,0,0.9), transparent)" }} />
+                    <div className="text-[8px] font-bold text-cyan-400">KAMU</div>
+                  </div>
+                  <div className="flex flex-col items-center pb-4">
+                    <div className="text-xl font-black text-white/20">VS</div>
+                  </div>
+                  {/* Meteors */}
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="text-[7px] text-orange-400/70 font-bold tracking-wider uppercase">METEOR MUSUH</div>
+                    <div className="flex gap-2 items-end">
+                      {[
+                        { w: 36, delay: "0s",   opacity: 0.9 },
+                        { w: 28, delay: "0.6s",  opacity: 0.75 },
+                        { w: 42, delay: "1.1s",  opacity: 0.85 },
+                      ].map((m, i) => (
+                        <img key={i} src={meteorImg} alt="meteor"
+                          style={{ width: m.w, filter: "drop-shadow(0 0 10px #ff6600) drop-shadow(0 0 20px #ff3300)", opacity: m.opacity, animation: `msg-floatB 3.4s ease-in-out infinite`, animationDelay: m.delay }} />
+                      ))}
+                    </div>
+                    <span className="text-[8px] font-bold text-orange-400">HANCURKAN!</span>
+                  </div>
+                </div>
+
+                {/* Laser beam hint */}
+                <div>
+                  <div className="w-full h-px my-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(255,150,0,0.3), transparent)" }} />
+                  <div className="grid grid-cols-3 gap-1.5 w-full px-1">
+                    {([
+                      { icon: "◀▶",  label: "GESER",  desc: "Kiri / Kanan"   },
+                      { icon: "🔥",   label: "TEMBAK", desc: "Tombol api"     },
+                      { icon: "⌨️",   label: "PC",     desc: "← → + SPASI"   },
+                    ] as const).map(t => (
+                      <div key={t.label} className="flex flex-col items-center gap-0.5 rounded-xl py-1.5 px-1 border border-orange-500/20"
+                        style={{ background: "rgba(255,100,0,0.07)", boxShadow: "0 0 8px rgba(255,100,0,0.12)" }}>
+                        <span className="text-base leading-none">{t.icon}</span>
+                        <span className="text-[7px] font-black text-orange-300">{t.label}</span>
+                        <span className="text-[6px] text-white/35 text-center leading-tight">{t.desc}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <div className="relative z-10 text-center animate-slide-up px-4">
-          <div className="mb-2">
-            <h1 className="font-display text-3xl md:text-5xl font-black tracking-wider">
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,200,255,0.5)]">
-                MATH GAME ARENA
-              </span>
-            </h1>
-          </div>
-          <div className="mb-6">
-            <h2 className="font-display text-4xl md:text-6xl font-black tracking-[0.2em]">
-              <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,180,0,0.6)]">
-                NUMATIK
-              </span>
-            </h2>
-          </div>
+              {/* RIGHT — instructions + button */}
+              <div className="msg-action">
+                <div>
+                  <div className="w-full h-px mb-1.5" style={{ background: "linear-gradient(to right, transparent, rgba(255,150,0,0.3), transparent)" }} />
+                  <div className="text-[7px] text-white/35 tracking-widest uppercase mb-1.5 font-bold text-center">📋 CARA BERMAIN</div>
+                  <div className="space-y-1.5 px-1">
+                    {[
+                      { icon: "📖", text: "Baca soal matematika yang muncul di bawah layar" },
+                      { icon: "◀▶", text: "Geser pesawat ke kiri/kanan agar sejajar dengan meteor BENAR" },
+                      { icon: "🔥", text: "Tekan TEMBAK atau SPASI untuk menembakkan laser ke meteor" },
+                      { icon: "✅", text: "Tembak jawaban BENAR = +20 poin · Salah = minus poin!" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <span className="text-xs shrink-0 mt-0.5">{item.icon}</span>
+                        <span className="text-[8px] text-white/60 leading-tight">{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-          <div className="inline-block mb-8">
-            <div className="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/40 backdrop-blur-sm">
-              <span className="font-display text-sm md:text-base font-bold text-cyan-300 tracking-wide">
-                {topicLabel}
-              </span>
-            </div>
-          </div>
+                <div className="flex flex-col items-center gap-1 mt-2">
+                  <button onClick={handleStart}
+                    className="msg-btn-breathe relative overflow-hidden font-display font-black text-white text-lg px-8 py-3 rounded-2xl cursor-pointer hover:scale-110 active:scale-95 w-full"
+                    style={{
+                      background: "linear-gradient(135deg, #f97316 0%, #ef4444 50%, #dc2626 100%)",
+                      boxShadow: "0 0 30px rgba(255,100,0,0.9), 0 0 60px rgba(200,50,0,0.4), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.25)",
+                    }}>
+                    <span className="relative z-10 tracking-wide">🔥 MULAI TEMBAK</span>
+                  </button>
+                  <div className="text-[7px] text-white/20 text-center">◀ ▶ untuk bergerak · 🔥 TEMBAK untuk menembak</div>
+                </div>
+              </div>
 
-          <div className="bg-card/70 backdrop-blur-md border border-cyan-500/30 rounded-2xl p-6 max-w-md mx-auto mb-8 shadow-[0_0_30px_rgba(0,200,255,0.15)]">
-            <h3 className="font-display text-lg font-bold text-cyan-400 mb-4 flex items-center justify-center gap-2">
-              <span className="text-xl">🚀</span> CARA BERMAIN <span className="text-xl">🚀</span>
-            </h3>
-            <ul className="text-left space-y-3 font-body text-sm text-foreground/90">
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">1</span>
-                <span>Baca soal matematika yang muncul di bawah layar</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">2</span>
-                <span>Gunakan tombol <strong className="text-cyan-300">◀ / ▶</strong> di kiri layar untuk menggeser pesawat</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">3</span>
-                <span>Arahkan pesawat ke meteor berisi jawaban <strong className="text-cyan-300">BENAR</strong>, lalu tekan tombol <strong className="text-yellow-300">🔥 TEMBAK</strong> di kanan layar</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">4</span>
-                <span>Setiap jawaban benar mendapat <strong className="text-green-400">+20 poin</strong></span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-xs">5</span>
-                <span className="text-xs">Di komputer: gunakan tombol <strong className="text-cyan-300">← →</strong> untuk bergerak dan <strong className="text-yellow-300">SPASI</strong> untuk menembak</span>
-              </li>
-            </ul>
-          </div>
-
-          <button
-            onClick={handleStart}
-            className="relative font-display text-xl md:text-2xl px-14 py-5 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-black tracking-wider cursor-pointer shadow-[0_0_40px_rgba(0,200,255,0.5)] hover:shadow-[0_0_60px_rgba(0,200,255,0.7)] transition-shadow duration-300 animate-pulse-scale"
-          >
-            <span className="relative z-10 flex items-center gap-3">
-              <span>&#9658;</span> MULAI GAME <span>&#9658;</span>
-            </span>
-          </button>
-
-        </div>
+            </div>{/* msg-main */}
+          </div>{/* msg-wrap */}
+        </div>{/* msg-scroll */}
       </div>
-
-      </>
     );
   }
 
