@@ -237,7 +237,7 @@ const TKAPage = () => {
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center tracking-wide">
             TES KEMAMPUAN AKADEMIK
           </h1>
-          <p className="font-display text-sm font-semibold text-cyan-300/70 text-center tracking-wider mb-2">
+          <p className="font-display text-xl md:text-2xl font-bold text-cyan-300 text-center tracking-wider mb-2 animate-pulse">
             TAHUN AJARAN 2026 - 2027
           </p>
           <p className="text-white/50 text-xs text-center font-body max-w-xs">
