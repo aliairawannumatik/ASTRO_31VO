@@ -916,28 +916,111 @@ const FlappyRocketPage = ({
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="text-[7px] text-cyan-400/70 font-bold tracking-wider uppercase">ROKETMU</div>
                     <div className="relative">
-                      <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%)", transform: "scale(2)" }} />
-                      <svg viewBox="0 0 60 100" className="fr-fa relative z-10" style={{ width: 44, filter: "drop-shadow(0 0 14px #00FFFF) drop-shadow(0 0 28px #0088FF)" }}>
+                      <div className="absolute inset-0 pointer-events-none rounded-full" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.25) 0%, transparent 70%)", transform: "scale(2.4)" }} />
+                      {/* Cute detailed rocket — points RIGHT (game direction) */}
+                      <svg viewBox="0 0 110 70" className="fr-fa relative z-10" style={{ width: 72, filter: "drop-shadow(0 0 10px #00FFFF) drop-shadow(0 0 22px #0066FF)" }}>
                         <defs>
-                          <linearGradient id="fr-body" x1="0" y1="0" x2="1" y2="0">
-                            <stop offset="0%" stopColor="#88CCFF"/>
-                            <stop offset="50%" stopColor="#4499FF"/>
-                            <stop offset="100%" stopColor="#2255CC"/>
+                          <linearGradient id="fr-body2" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#FFFFFF"/>
+                            <stop offset="45%" stopColor="#E8F4FF"/>
+                            <stop offset="100%" stopColor="#A0C4E8"/>
                           </linearGradient>
-                          <linearGradient id="fr-nose" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#FF8888"/>
-                            <stop offset="100%" stopColor="#CC2222"/>
+                          <linearGradient id="fr-nose2" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#FF9AA8"/>
+                            <stop offset="55%" stopColor="#EE3355"/>
+                            <stop offset="100%" stopColor="#AA1133"/>
                           </linearGradient>
+                          <linearGradient id="fr-fin2" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#EE3355"/>
+                            <stop offset="100%" stopColor="#991133"/>
+                          </linearGradient>
+                          <linearGradient id="fr-flame-outer" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="rgba(255,40,0,0)"/>
+                            <stop offset="35%" stopColor="rgba(255,110,0,0.85)"/>
+                            <stop offset="70%" stopColor="rgba(255,200,40,1)"/>
+                            <stop offset="100%" stopColor="rgba(255,240,160,1)"/>
+                          </linearGradient>
+                          <linearGradient id="fr-flame-inner" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="rgba(255,210,80,0)"/>
+                            <stop offset="50%" stopColor="rgba(255,240,190,0.95)"/>
+                            <stop offset="100%" stopColor="rgba(255,255,255,1)"/>
+                          </linearGradient>
+                          <radialGradient id="fr-win2" cx="35%" cy="35%" r="60%">
+                            <stop offset="0%" stopColor="#D0FAFF"/>
+                            <stop offset="50%" stopColor="#30C8FF"/>
+                            <stop offset="100%" stopColor="#0E5A99"/>
+                          </radialGradient>
+                          <radialGradient id="fr-halo" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stopColor="rgba(255,160,40,0.55)"/>
+                            <stop offset="55%" stopColor="rgba(255,90,20,0.22)"/>
+                            <stop offset="100%" stopColor="rgba(255,40,0,0)"/>
+                          </radialGradient>
                         </defs>
-                        <path d="M30,3 Q42,22 42,38 L18,38 Q18,22 30,3Z" fill="url(#fr-nose)"/>
-                        <rect x="16" y="36" width="28" height="36" rx="5" fill="url(#fr-body)"/>
-                        <circle cx="30" cy="52" r="7" fill="#00EEFF" opacity="0.95"/>
-                        <circle cx="28" cy="50" r="3" fill="white" opacity="0.8"/>
-                        <path d="M16,66 L4,88 L16,80Z" fill="#3377EE"/>
-                        <path d="M44,66 L56,88 L44,80Z" fill="#3377EE"/>
-                        <ellipse cx="30" cy="76" rx="12" ry="5" fill="#FF8800" opacity="0.9"/>
-                        <ellipse cx="30" cy="83" rx="7" ry="9" fill="#FFE000" opacity="0.85"/>
-                        <ellipse cx="30" cy="91" rx="4" ry="5" fill="white" opacity="0.6"/>
+
+                        {/* Engine nozzle */}
+                        <rect x="10" y="27" width="7" height="16" rx="2" fill="#2A3548" stroke="#111820" strokeWidth="0.8"/>
+
+                        {/* Flame halo glow */}
+                        <ellipse cx="8" cy="35" rx="18" ry="14" fill="url(#fr-halo)"/>
+
+                        {/* Outer flame */}
+                        <path d="M16,27 Q2,31 0,35 Q2,39 16,43 Q14,38 14,35 Q14,32 16,27Z" fill="url(#fr-flame-outer)"/>
+                        {/* Inner flame core */}
+                        <path d="M16,30 Q5,33 4,35 Q5,37 16,40 Q13,37 13,35 Q13,33 16,30Z" fill="url(#fr-flame-inner)"/>
+
+                        {/* Top fin */}
+                        <path d="M22,22 L12,8 L12,22 L26,24Z" fill="url(#fr-fin2)" stroke="#880022" strokeWidth="0.6"/>
+                        {/* Bottom fin */}
+                        <path d="M22,48 L12,62 L12,48 L26,46Z" fill="url(#fr-fin2)" stroke="#880022" strokeWidth="0.6"/>
+
+                        {/* Main body capsule */}
+                        <path d="M17,22 L68,22 Q76,22 76,35 Q76,48 68,48 L17,48 Q14,44 14,35 Q14,26 17,22Z" fill="url(#fr-body2)" stroke="#7A8294" strokeWidth="1"/>
+
+                        {/* Nose cone */}
+                        <path d="M68,22 Q90,24 96,35 Q90,46 68,48Z" fill="url(#fr-nose2)" stroke="#880022" strokeWidth="0.8"/>
+                        {/* Nose highlight */}
+                        <ellipse cx="78" cy="29" rx="5" ry="2.5" fill="rgba(255,255,255,0.45)" transform="rotate(-20,78,29)"/>
+
+                        {/* Red engine band */}
+                        <rect x="17" y="22" width="5" height="26" rx="1.5" fill="#EE3355"/>
+                        {/* Red accent stripe */}
+                        <rect x="54" y="22" width="5" height="26" rx="1.5" fill="#EE3355"/>
+
+                        {/* Porthole window outer ring */}
+                        <circle cx="40" cy="35" r="10" fill="#2A3548"/>
+                        <circle cx="40" cy="35" r="9" fill="#4A5568"/>
+                        {/* Window glass */}
+                        <circle cx="40" cy="35" r="8" fill="url(#fr-win2)"/>
+                        {/* Window shine */}
+                        <circle cx="36.5" cy="31.5" r="3" fill="rgba(255,255,255,0.9)"/>
+                        <circle cx="43" cy="38" r="1.4" fill="rgba(255,255,255,0.45)"/>
+
+                        {/* Cute face in window — astronaut */}
+                        <circle cx="40" cy="35" r="5.5" fill="#FFE8C8"/>
+                        {/* Eyes */}
+                        <ellipse cx="37.5" cy="33.5" rx="1.2" ry="1.5" fill="#222"/>
+                        <ellipse cx="42.5" cy="33.5" rx="1.2" ry="1.5" fill="#222"/>
+                        {/* Eye shine */}
+                        <circle cx="38" cy="33" r="0.55" fill="white"/>
+                        <circle cx="43" cy="33" r="0.55" fill="white"/>
+                        {/* Smile */}
+                        <path d="M37.5,37 Q40,39.5 42.5,37" stroke="#A05030" strokeWidth="0.9" fill="none" strokeLinecap="round"/>
+                        {/* Rosy cheeks */}
+                        <circle cx="36.5" cy="36.5" r="1.5" fill="rgba(255,100,100,0.35)"/>
+                        <circle cx="43.5" cy="36.5" r="1.5" fill="rgba(255,100,100,0.35)"/>
+
+                        {/* Rivets */}
+                        <circle cx="22" cy="27" r="1.2" fill="#A8B8CC"/>
+                        <circle cx="22" cy="43" r="1.2" fill="#A8B8CC"/>
+                        <circle cx="30" cy="23" r="1.1" fill="#A8B8CC"/>
+                        <circle cx="30" cy="47" r="1.1" fill="#A8B8CC"/>
+
+                        {/* Glossy sheen on body */}
+                        <path d="M17,22 L68,22 Q72,22 74,28 L17,28 Q14,26 17,22Z" fill="rgba(255,255,255,0.18)"/>
+
+                        {/* Star decorations around rocket */}
+                        <polygon points="5,14 6.2,11 7.4,14 10.5,14 8,16 9,19 6.2,17.2 3.4,19 4.4,16 2,14" fill="#FFD700" opacity="0.8"/>
+                        <polygon points="100,18 101,15.5 102,18 104.5,18 102.5,19.5 103.2,22 101,20.5 98.8,22 99.5,19.5 97.5,18" fill="#FF88CC" opacity="0.7"/>
                       </svg>
                     </div>
                     <div className="w-1.5 h-4 rounded-full" style={{ background: "linear-gradient(to bottom, rgba(0,200,255,0.8), transparent)" }} />
@@ -946,19 +1029,50 @@ const FlappyRocketPage = ({
                   <div className="flex flex-col items-center pb-4">
                     <div className="text-xl font-black text-white/20">VS</div>
                   </div>
-                  {/* Pipe obstacles */}
+                  {/* Asteroid obstacles */}
                   <div className="flex flex-col items-center gap-1">
                     <div className="text-[7px] text-red-400/70 font-bold tracking-wider uppercase">RINTANGAN</div>
-                    <div className="relative flex items-center justify-center" style={{ width: 56, height: 80 }}>
-                      <div className="absolute top-0" style={{ width: 32, height: 28, background: "linear-gradient(to right, #22c55e, #16a34a, #15803d)", borderRadius: "0 0 4px 4px", boxShadow: "0 0 10px rgba(34,197,94,0.5)" }}>
-                        <div style={{ width: 38, height: 10, background: "linear-gradient(to right, #16a34a, #22c55e, #16a34a)", borderRadius: 4, position: "absolute", bottom: 0, left: -3 }} />
-                      </div>
-                      <div className="absolute" style={{ top: "50%", transform: "translateY(-50%)" }}>
-                        <span className="text-yellow-400 text-[8px] font-bold">CELAH</span>
-                      </div>
-                      <div className="absolute bottom-0" style={{ width: 32, height: 28, background: "linear-gradient(to right, #22c55e, #16a34a, #15803d)", borderRadius: "4px 4px 0 0", boxShadow: "0 0 10px rgba(34,197,94,0.5)" }}>
-                        <div style={{ width: 38, height: 10, background: "linear-gradient(to right, #16a34a, #22c55e, #16a34a)", borderRadius: 4, position: "absolute", top: 0, left: -3 }} />
-                      </div>
+                    <div className="relative flex items-center justify-center fr-fb" style={{ width: 60, height: 86 }}>
+                      <svg viewBox="0 0 60 86" style={{ width: 60, height: 86 }}>
+                        <defs>
+                          <linearGradient id="fr-ast-top" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#3F362E"/>
+                            <stop offset="50%" stopColor="#8A7B6B"/>
+                            <stop offset="100%" stopColor="#3F362E"/>
+                          </linearGradient>
+                          <linearGradient id="fr-ast-bot" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#3F362E"/>
+                            <stop offset="50%" stopColor="#8A7B6B"/>
+                            <stop offset="100%" stopColor="#3F362E"/>
+                          </linearGradient>
+                        </defs>
+                        {/* Top asteroid (hanging from top) */}
+                        <path d="M2,-2 L58,-2 L60,4 L57,10 L59,16 L56,22 L58,28 L53,33 Q47,37 40,35 Q33,38 26,35 Q20,38 14,34 L10,28 L12,22 L8,16 L11,10 L8,4 Z" fill="url(#fr-ast-top)" stroke="rgba(0,0,0,0.4)" strokeWidth="1"/>
+                        {/* Craters on top asteroid */}
+                        <circle cx="18" cy="12" r="4" fill="#3F362E"/>
+                        <circle cx="16.5" cy="10.5" r="1.5" fill="#B8A896"/>
+                        <circle cx="40" cy="20" r="5" fill="#3F362E"/>
+                        <circle cx="38.5" cy="18.5" r="2" fill="#B8A896"/>
+                        <circle cx="28" cy="8" r="3" fill="#3F362E"/>
+                        <circle cx="27" cy="7" r="1.2" fill="#B8A896"/>
+                        {/* Glow edge on top asteroid bottom */}
+                        <path d="M14,34 Q26,32 30,36 Q34,32 47,35 L53,33" stroke="#00E5FF" strokeWidth="1.5" fill="none" strokeOpacity="0.7"/>
+
+                        {/* Gap label */}
+                        <text x="30" y="45" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#FFD700">CELAH</text>
+
+                        {/* Bottom asteroid (rising from bottom) */}
+                        <path d="M6,54 Q12,50 18,53 Q24,49 30,53 Q36,49 42,52 Q49,49 55,53 L58,58 L56,64 L59,70 L56,76 L58,82 L57,88 L2,88 L3,82 L1,76 L4,70 L2,64 L5,58 Z" fill="url(#fr-ast-bot)" stroke="rgba(0,0,0,0.4)" strokeWidth="1"/>
+                        {/* Craters on bottom asteroid */}
+                        <circle cx="20" cy="66" r="4.5" fill="#3F362E"/>
+                        <circle cx="18.5" cy="64.5" r="1.8" fill="#B8A896"/>
+                        <circle cx="42" cy="72" r="4" fill="#3F362E"/>
+                        <circle cx="40.5" cy="70.5" r="1.5" fill="#B8A896"/>
+                        <circle cx="31" cy="60" r="3" fill="#3F362E"/>
+                        <circle cx="30" cy="59" r="1.1" fill="#B8A896"/>
+                        {/* Glow edge on bottom asteroid top */}
+                        <path d="M6,54 Q18,57 30,53 Q42,57 55,53" stroke="#FF6B6B" strokeWidth="1.5" fill="none" strokeOpacity="0.7"/>
+                      </svg>
                     </div>
                     <span className="text-[8px] font-bold text-red-400">HINDARI!</span>
                   </div>
