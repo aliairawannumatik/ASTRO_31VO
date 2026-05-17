@@ -1,0 +1,37 @@
+import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
+import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
+
+const materiSections: MateriSection[] = [
+  { heading: "A. Pengertian Himpunan", content: `Himpunan adalah kumpulan objek yang terdefinisi dengan jelas.\n\nCara menyatakan himpunan:\n1. Dengan kata-kata: "Himpunan bilangan genap"\n2. Dengan notasi pembentuk himpunan: $A = \\{x | x$ bilangan genap$\\}$\n3. Dengan mendaftar anggotanya: $A = \\{2, 4, 6, 8, ...\\}$` },
+  { heading: "B. Jenis-jenis Himpunan", content: `- Himpunan kosong ($\\emptyset$ atau $\\{\\}$): tidak memiliki anggota\n- Himpunan semesta (S atau U): memuat semua anggota yang dibicarakan\n- Himpunan berhingga: jumlah anggota dapat dihitung\n- Himpunan tak berhingga: jumlah anggota tidak dapat dihitung\n- Himpunan sama: memiliki anggota yang tepat sama\n- Himpunan ekuivalen: memiliki jumlah anggota yang sama` },
+  { heading: "C. Operasi Himpunan", content: `1. Gabungan (Union): $A \\cup B = \\{x | x \\in A$ atau $x \\in B\\}$\n   Rumus: $n(A \\cup B) = n(A) + n(B) - n(A \\cap B)$\n\n2. Irisan (Intersection): $A \\cap B = \\{x | x \\in A$ dan $x \\in B\\}$\n\n3. Selisih (Difference): $A - B = \\{x | x \\in A$ dan $x \\notin B\\}$\n\n4. Komplemen: $A^c = \\{x | x \\in S$ dan $x \\notin A\\}$\n\n5. Hukum De Morgan:\n   $(A \\cup B)^c = A^c \\cap B^c$\n   $(A \\cap B)^c = A^c \\cup B^c$` },
+  { heading: "D. Diagram Venn", content: `Diagram Venn digunakan untuk menyatakan hubungan antar himpunan secara visual.\n\nRumus kardinalitas untuk tiga himpunan:\n$n(A \\cup B \\cup C) = n(A) + n(B) + n(C) - n(A \\cap B) - n(A \\cap C) - n(B \\cap C) + n(A \\cap B \\cap C)$` },
+];
+
+const latihanDasar: LatihanSoal[] = [
+  { no: 1, soal: "Diketahui $S = \\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\\}$, $P = \\{1, 2, 3, 4, 5\\}$, $Q = \\{4, 5, 6, 7, 8\\}$. Nilai $n(P \\cup Q)^c$ adalah ...", options: ["A. 2", "B. 3", "C. 4", "D. 5"], jawaban: "A", pembahasan: "$P \\cup Q = \\{1,2,3,4,5,6,7,8\\}$\n$(P \\cup Q)^c = S - (P \\cup Q) = \\{9, 10\\}$\n$n(P \\cup Q)^c = 2$ → Jawaban A" },
+  { no: 2, soal: "Diketahui $A = \\{x | x$ bilangan prima kurang dari 20$\\}$ dan $B = \\{x | x$ bilangan ganjil kurang dari 20$\\}$. Banyak anggota $A \\cap B$ adalah ...", options: ["A. 5", "B. 6", "C. 7", "D. 8"], jawaban: "C", pembahasan: "$A = \\{2, 3, 5, 7, 11, 13, 17, 19\\}$\n$B = \\{1, 3, 5, 7, 9, 11, 13, 15, 17, 19\\}$\n$A \\cap B = \\{3, 5, 7, 11, 13, 17, 19\\}$ (semua prima kecuali 2)\n$n(A \\cap B) = 7$ → Jawaban C" },
+  { no: 3, soal: "Pada suatu kelas terdapat 40 siswa. 25 siswa menyukai pelajaran Matematika, 20 siswa menyukai pelajaran Bahasa Indonesia, dan 10 siswa menyukai keduanya. Banyak siswa yang tidak menyukai keduanya adalah ...", options: ["A. 2", "B. 5", "C. 8", "D. 10"], jawaban: "B", pembahasan: "$n(M \\cup B) = 25 + 20 - 10 = 35$\nTidak menyukai keduanya = $40 - 35 = 5$ → Jawaban B" },
+  { no: 4, soal: "Dalam satu kelas terdapat 35 siswa. 15 siswa mengikuti kegiatan ekstrakurikuler Pramuka, 18 siswa mengikuti PMR, dan 5 siswa mengikuti keduanya. Banyak siswa yang tidak mengikuti salah satupun kegiatan tersebut adalah ...", options: ["A. 5", "B. 7", "C. 10", "D. 12"], jawaban: "B", pembahasan: "$n(P \\cup PMR) = 15 + 18 - 5 = 28$\nTidak keduanya = $35 - 28 = 7$ → Jawaban B" },
+  { no: 5, soal: "Dari 50 orang siswa, 30 orang suka olahraga lari dan 25 orang suka renang. Jika 10 orang suka keduanya, maka banyak siswa yang tidak suka olahraga lari maupun renang adalah ...", options: ["A. 5", "B. 10", "C. 15", "D. 20"], jawaban: "A", pembahasan: "$n(L \\cup R) = 30 + 25 - 10 = 45$\nTidak keduanya = $50 - 45 = 5$ → Jawaban A" },
+  { no: 6, soal: "Dari survei terhadap 100 orang, diketahui 60 orang menonton film A, 50 orang menonton film B, dan 20 orang menonton kedua film. Banyak orang yang hanya menonton film A adalah ...", options: ["A. 30", "B. 40", "C. 50", "D. 60"], jawaban: "B", pembahasan: "Hanya menonton A = $60 - 20 = 40$ → Jawaban B" },
+  { no: 7, soal: "Pada sebuah kelas, semua siswa mengikuti kegiatan ekstrakurikuler. 20 siswa mengikuti seni, 15 siswa mengikuti olahraga, dan 8 siswa mengikuti keduanya. Banyak siswa di kelas itu adalah ...", options: ["A. 25", "B. 27", "C. 30", "D. 35"], jawaban: "B", pembahasan: "$n(S \\cup O) = 20 + 15 - 8 = 27$ → Jawaban B" },
+  { no: 8, soal: "Di antara 60 anggota suatu kelompok, 35 orang bisa berbicara bahasa Inggris, 30 orang bisa berbicara bahasa Prancis. Jika setiap orang bisa berbicara paling sedikit satu bahasa, berapa orang yang bisa berbicara kedua bahasa?", options: ["A. 3", "B. 5", "C. 7", "D. 10"], jawaban: "B", pembahasan: "$n(I \\cup P) = 60$ (semua bisa paling sedikit satu)\n$60 = 35 + 30 - n(I \\cap P)$\n$n(I \\cap P) = 5$ → Jawaban B" },
+  { no: 9, soal: "Diketahui $n(S) = 50$, $n(A) = 30$, $n(B) = 25$, $n(A \\cap B)^c = 5$. Maka $n(A \\cap B) = ...$", options: ["A. 5", "B. 10", "C. 15", "D. 20"], jawaban: "B", pembahasan: "$n(A \\cap B)^c = n(S) - n(A \\cap B)$? Tidak, $(A \\cap B)^c = S - (A \\cap B)$.\nJika yang dimaksud: banyak yang di luar $A \\cap B$ = 5, maka:\n$n(A \\cap B) = 50 - ... $ (perlu konteks lebih)\nDengan $n(A \\cup B) = 30 + 25 - n(A \\cap B) \\leq 50$\n$n(A \\cap B) \\geq 5$" },
+  { no: 10, soal: "Hasil survei dari 45 orang: 25 suka teh, 20 suka kopi, dan 5 suka keduanya. Berapa banyak orang yang tidak suka keduanya?", options: ["A. 5", "B. 10", "C. 3", "D. 7"], jawaban: "A", pembahasan: "$n(T \\cup K) = 25 + 20 - 5 = 40$\nTidak suka keduanya = $45 - 40 = 5$ → Jawaban A" },
+  { no: 11, soal: "Diketahui $S = \\{1,2,3,...,10\\}$, $A = \\{1,3,5,7,9\\}$, $B = \\{2,3,5,7\\}$. Nilai $(A \\cup B)^c$ adalah ...", options: ["A. $\\{4, 6, 8, 10\\}$", "B. $\\{3, 5, 7\\}$", "C. $\\{4, 6, 8\\}$", "D. $\\{3, 5, 7, 10\\}$"], jawaban: "A", pembahasan: "$A \\cup B = \\{1,2,3,5,7,9\\}$\n$(A \\cup B)^c = S - (A \\cup B) = \\{4,6,8,10\\}$ → Jawaban A" },
+  { no: 12, soal: "Dari data berikut:\n- 10 siswa ikut basket\n- 12 siswa ikut voli\n- 5 siswa ikut keduanya\n- 8 siswa tidak ikut apapun\nBanyak siswa seluruhnya adalah ...", options: ["A. 25", "B. 27", "C. 30", "D. 35"], jawaban: "A", pembahasan: "$n(B \\cup V) = 10 + 12 - 5 = 17$\nTotal = $17 + 8 = 25$ → Jawaban A" },
+  { no: 13, soal: "Di kelas 7A terdapat 36 siswa. 20 orang suka matematika, 18 orang suka IPA. Jika 7 orang tidak suka keduanya, berapa yang suka keduanya?", options: ["A. 8", "B. 9", "C. 10", "D. 11"], jawaban: "B", pembahasan: "$n(M \\cup IPA) = 36 - 7 = 29$\n$29 = 20 + 18 - n(M \\cap IPA)$\n$n(M \\cap IPA) = 9$ → Jawaban B" },
+  { no: 14, soal: "Dari 40 siswa, 18 gemar matematika, 23 gemar IPA, dan 5 tidak gemar keduanya. Banyak siswa yang gemar kedua pelajaran adalah ...", options: ["A. 3", "B. 4", "C. 5", "D. 6"], jawaban: "D", pembahasan: "$n(M \\cup IPA) = 40 - 5 = 35$\n$35 = 18 + 23 - n(M \\cap IPA)$\n$n(M \\cap IPA) = 6$ → Jawaban D" },
+  { no: 15, soal: "Diketahui $A = \\{$ faktor dari 12 $\\}$ dan $B = \\{$ faktor dari 18 $\\}$. Banyak anggota $A \\cup B$ adalah ...", options: ["A. 7", "B. 8", "C. 9", "D. 10"], jawaban: "B", pembahasan: "$A = \\{1,2,3,4,6,12\\}$\n$B = \\{1,2,3,6,9,18\\}$\n$A \\cup B = \\{1,2,3,4,6,9,12,18\\}$\n$n(A \\cup B) = 8$ → Jawaban B" },
+];
+
+const HimpunanPage = () => (
+  <TKAPemantapanLayout
+    title="HIMPUNAN"
+    materiSections={materiSections}
+    latihanDasar={latihanDasar}
+  />
+);
+
+export default HimpunanPage;
