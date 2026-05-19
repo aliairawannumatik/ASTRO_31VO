@@ -41,13 +41,18 @@ const RationalizeSVG = () => (
 );
 
 const questions: Q[] = [
-  Qn(1, "Pengertian Bentuk Akar – Dasar", {
+  Qn(1, "Pengertian, Akar Pangkat Tiga & Bentuk Paling Sederhana – Dasar/ANBK", {
     type: "mixed",
-    content: "Hitung nilai bentuk akar berikut:",
     parts: [
       { label: "a.", math: "\\sqrt{49} = \\ldots" },
       { label: "b.", math: "\\sqrt{121} = \\ldots" },
       { label: "c.", math: "\\sqrt[3]{64} = \\ldots" },
+      { label: "d.", math: "\\sqrt[3]{54} = \\sqrt[3]{27 \\times 2} = 3\\sqrt[3]{2}" },
+      { label: "e.", math: "\\sqrt[3]{250} = \\ldots" },
+      { label: "f.", math: "\\sqrt[3]{128} = \\ldots" },
+      { label: "g.", math: "\\sqrt{\\frac{49}{4}} = \\ldots" },
+      { label: "h.", math: "\\sqrt{\\frac{25}{9}} = \\ldots" },
+      { label: "i.", math: "\\sqrt{\\frac{32}{2}} = \\ldots" },
     ],
   }),
   Qn(2, "Menyederhanakan Bentuk Akar – UN/ANBK/TKA", {
@@ -68,7 +73,7 @@ const questions: Q[] = [
       { label: "l.", math: "\\sqrt{147} = \\ldots" },
     ],
   }),
-  Qn(3, "Operasi Penjumlahan & Pengurangan Bentuk Akar – UN/TKA", {
+  Qn(3, "Operasi Penjumlahan & Pengurangan Bentuk Akar – UN/ANBK/TKA", {
     type: "mixed", mathContent: "a\\sqrt{c} + b\\sqrt{c} = (a+b)\\sqrt{c}",
     parts: [
       { label: "a.", math: "3\\sqrt{2} + 5\\sqrt{2} = \\ldots" },
@@ -77,34 +82,23 @@ const questions: Q[] = [
       { label: "d.", math: "\\sqrt{3} + \\sqrt{12} + \\sqrt{27} = \\ldots" },
       { label: "e.", math: "\\sqrt{8} - \\sqrt{32} + \\sqrt{50} = \\ldots" },
       { label: "f.", math: "2\\sqrt{45} - 3\\sqrt{20} + \\sqrt{5} = \\ldots" },
+      { label: "g.", math: "\\sqrt{8} + \\sqrt{2} = 2\\sqrt{2} + \\sqrt{2} = \\ldots" },
+      { label: "h.", math: "\\sqrt{12} + \\sqrt{27} = \\ldots" },
+      { label: "i.", math: "\\sqrt{50} - \\sqrt{18} + \\sqrt{8} = \\ldots" },
     ],
   }),
-  Qn(4, "Penjumlahan Akar Berbeda – TKA", {
-    type: "mixed",
-    content: "Sederhanakan terlebih dahulu, lalu jumlahkan:",
-    parts: [
-      { label: "a.", math: "\\sqrt{8} + \\sqrt{2} = 2\\sqrt{2} + \\sqrt{2} = \\ldots" },
-      { label: "b.", math: "\\sqrt{12} + \\sqrt{27} = \\ldots" },
-      { label: "c.", math: "\\sqrt{50} - \\sqrt{18} + \\sqrt{8} = \\ldots" },
-    ],
-  }),
-  Qn(5, "Perkalian Bentuk Akar – UN", {
+  Qn(4, "Perkalian Bentuk Akar – UN/ANBK", {
     type: "mixed", mathContent: "\\sqrt{a} \\times \\sqrt{b} = \\sqrt{a \\times b}",
     parts: [
       { label: "a.", math: "\\sqrt{3} \\times \\sqrt{12} = \\ldots" },
       { label: "b.", math: "\\sqrt{5} \\times \\sqrt{20} = \\ldots" },
       { label: "c.", math: "\\sqrt{6} \\times \\sqrt{24} = \\ldots" },
+      { label: "d.", math: "2\\sqrt{3} \\times 3\\sqrt{3} = \\ldots" },
+      { label: "e.", math: "4\\sqrt{5} \\times 2\\sqrt{5} = \\ldots" },
+      { label: "f.", math: "3\\sqrt{2} \\times 5\\sqrt{8} = \\ldots" },
     ],
   }),
-  Qn(6, "Perkalian Bentuk Akar Berkoefisien – ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "2\\sqrt{3} \\times 3\\sqrt{3} = \\ldots" },
-      { label: "b.", math: "4\\sqrt{5} \\times 2\\sqrt{5} = \\ldots" },
-      { label: "c.", math: "3\\sqrt{2} \\times 5\\sqrt{8} = \\ldots" },
-    ],
-  }),
-  Qn(7, "Pembagian Bentuk Akar – TKA", {
+  Qn(5, "Pembagian Bentuk Akar – TKA", {
     type: "mixed", mathContent: "\\frac{\\sqrt{a}}{\\sqrt{b}} = \\sqrt{\\frac{a}{b}}",
     parts: [
       { label: "a.", math: "\\frac{\\sqrt{50}}{\\sqrt{2}} = \\ldots" },
@@ -112,7 +106,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{6\\sqrt{8}}{3\\sqrt{2}} = \\ldots" },
     ],
   }),
-  Qn(8, "Merasionalkan Penyebut Bentuk Akar – UN/ANBK/TKA", {
+  Qn(6, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
     type: "mixed", diagram: <RationalizeSVG />,
     parts: [
       { label: "a.", math: "\\frac{6}{\\sqrt{3}} = \\frac{6\\sqrt{3}}{3} = \\ldots" },
@@ -122,25 +116,25 @@ const questions: Q[] = [
       { label: "e.", math: "\\frac{2\\sqrt{2}}{\\sqrt{6}} = \\ldots" },
       { label: "f.", math: "\\frac{3\\sqrt{5}}{\\sqrt{15}} = \\ldots" },
       { label: "g.", math: "\\frac{5}{2\\sqrt{3}} = \\ldots" },
+      { label: "h.", math: "\\frac{\\sqrt{18}+\\sqrt{8}}{\\sqrt{2}} = \\ldots" },
+      { label: "i.", math: "\\frac{\\sqrt{27}-\\sqrt{12}}{\\sqrt{3}} = \\ldots" },
+      { label: "j.", math: "\\frac{\\sqrt{75}+\\sqrt{48}}{\\sqrt{3}} = \\ldots" },
     ],
   }),
-  Qn(9, "Merasionalkan Penyebut Binomial – UN", {
+  Qn(7, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
     type: "mixed", mathContent: "\\frac{a}{b+\\sqrt{c}} \\times \\frac{b-\\sqrt{c}}{b-\\sqrt{c}}",
     parts: [
       { label: "a.", math: "\\frac{1}{2+\\sqrt{3}} = \\frac{2-\\sqrt{3}}{(2)^2-(\\sqrt{3})^2} = \\ldots" },
       { label: "b.", math: "\\frac{4}{3-\\sqrt{5}} = \\ldots" },
       { label: "c.", math: "\\frac{6}{\\sqrt{7}+1} = \\ldots" },
+      { label: "d.", math: "\\frac{\\sqrt{5}+\\sqrt{3}}{\\sqrt{5}-\\sqrt{3}} = \\ldots" },
+      { label: "e.", math: "\\frac{3+\\sqrt{2}}{3-\\sqrt{2}} = \\ldots" },
+      { label: "f.", math: "\\frac{\\sqrt{6}-\\sqrt{2}}{\\sqrt{6}+\\sqrt{2}} = \\ldots" },
+      { label: "g.", math: "\\frac{\\sqrt{2}+1}{\\sqrt{2}-1} = \\ldots" },
+      { label: "h.", math: "\\frac{4}{\\sqrt{5}+\\sqrt{3}} = \\ldots" },
     ],
   }),
-  Qn(10, "Merasionalkan Binomial Akar – TKA", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{\\sqrt{5}+\\sqrt{3}}{\\sqrt{5}-\\sqrt{3}} = \\ldots" },
-      { label: "b.", math: "\\frac{3+\\sqrt{2}}{3-\\sqrt{2}} = \\ldots" },
-      { label: "c.", math: "\\frac{\\sqrt{6}-\\sqrt{2}}{\\sqrt{6}+\\sqrt{2}} = \\ldots" },
-    ],
-  }),
-  Qn(11, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
+  Qn(8, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
     type: "mixed", mathContent: "(\\sqrt{a}+\\sqrt{b})(\\sqrt{a}-\\sqrt{b}) = a - b",
     parts: [
       { label: "a.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
@@ -154,15 +148,7 @@ const questions: Q[] = [
       { label: "i.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
     ],
   }),
-  Qn(12, "Akar Pangkat Tiga – ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt[3]{54} = \\sqrt[3]{27 \\times 2} = 3\\sqrt[3]{2}" },
-      { label: "b.", math: "\\sqrt[3]{250} = \\ldots" },
-      { label: "c.", math: "\\sqrt[3]{128} = \\ldots" },
-    ],
-  }),
-  Qn(13, "Akar dan Pangkat Campuran – ANBK", {
+  Qn(9, "Akar dan Pangkat Campuran – ANBK", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{2^6} = \\ldots" },
@@ -170,7 +156,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt{5^4 \\times 2^2} = \\ldots" },
     ],
   }),
-  Qn(14, "Soal Cerita Akar – UN", {
+  Qn(10, "Soal Cerita Akar – UN", {
     type: "mixed",
     content: "Sebuah taman berbentuk persegi memiliki luas 288 m².",
     parts: [
@@ -179,14 +165,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika diperlukan pagar, berapa pagar yang dibutuhkan dalam bentuk akar paling sederhana?" },
     ],
   }),
-  Qn(15, "Merasionalkan Tingkat Lanjut – TKA", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{\\sqrt{2}+1}{\\sqrt{2}-1} = \\ldots" },
-      { label: "b.", math: "\\frac{4}{\\sqrt{5}+\\sqrt{3}} = \\ldots" },
-    ],
-  }),
-  Qn(16, "Menentukan Nilai Akar – ANBK", {
+  Qn(11, "Menentukan Nilai Akar – ANBK", {
     type: "mixed",
     content: "Tentukan nilai x yang memenuhi:",
     parts: [
@@ -195,7 +174,7 @@ const questions: Q[] = [
       { label: "c.", math: "2\\sqrt{x} = 10 \\Rightarrow x = \\ldots" },
     ],
   }),
-  Qn(17, "Akar Bertingkat – UN", {
+  Qn(12, "Akar Bertingkat – UN", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{\\sqrt{81}} = \\ldots" },
@@ -203,24 +182,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt[4]{625} = \\ldots" },
     ],
   }),
-  Qn(18, "Akar dan Bentuk Paling Sederhana – ANBK", {
-    type: "mixed",
-    content: "Sederhanakan sepenuhnya:",
-    parts: [
-      { label: "a.", math: "\\sqrt{\\frac{49}{4}} = \\ldots" },
-      { label: "b.", math: "\\sqrt{\\frac{25}{9}} = \\ldots" },
-      { label: "c.", math: "\\sqrt{\\frac{32}{2}} = \\ldots" },
-    ],
-  }),
-  Qn(19, "Operasi Campuran Bentuk Akar – UN", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{\\sqrt{18}+\\sqrt{8}}{\\sqrt{2}} = \\ldots" },
-      { label: "b.", math: "\\frac{\\sqrt{27}-\\sqrt{12}}{\\sqrt{3}} = \\ldots" },
-      { label: "c.", math: "\\frac{\\sqrt{75}+\\sqrt{48}}{\\sqrt{3}} = \\ldots" },
-    ],
-  }),
-  Qn(20, "Akar Pangkat Dua dan Tiga Campuran – TKA", {
+  Qn(13, "Akar Pangkat Dua dan Tiga Campuran – TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{4} \\times \\sqrt[3]{8} = \\ldots" },
@@ -228,7 +190,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt{9} \\times \\sqrt[3]{125} - \\sqrt{16} = \\ldots" },
     ],
   }),
-  Qn(21, "Akar dan Eksponen Pecahan – UN", {
+  Qn(14, "Akar dan Eksponen Pecahan – UN", {
     type: "mixed",
     content: "Nyatakan dalam bentuk eksponen pecahan lalu hitung:",
     parts: [
@@ -237,7 +199,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt[6]{64} = \\ldots" },
     ],
   }),
-  Qn(22, "Soal UN – Nilai dari Ekspresi", {
+  Qn(15, "Soal UN – Nilai dari Ekspresi", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(\\sqrt{7})^2 = \\ldots" },
@@ -245,7 +207,7 @@ const questions: Q[] = [
       { label: "c.", math: "(3\\sqrt{2})^2 = \\ldots" },
     ],
   }),
-  Qn(23, "Soal ANBK – Penyederhanaan Lanjutan", {
+  Qn(16, "Soal ANBK – Penyederhanaan Lanjutan", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{12} \\times \\sqrt{3} + \\sqrt{2} \\times \\sqrt{8} = \\ldots" },
@@ -253,7 +215,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt{6}(\\sqrt{6}-\\sqrt{24}) = \\ldots" },
     ],
   }),
-  Qn(24, "Soal ANBK – Persamaan Akar", {
+  Qn(17, "Soal ANBK – Persamaan Akar", {
     type: "mixed",
     content: "Selesaikan persamaan berikut:",
     parts: [
@@ -262,7 +224,7 @@ const questions: Q[] = [
       { label: "c.", math: "2\\sqrt{x} - 3 = 5 \\Rightarrow x = \\ldots" },
     ],
   }),
-  Qn(25, "Soal TKA – Akar Ganda dalam Ekspresi", {
+  Qn(18, "Soal TKA – Akar Ganda dalam Ekspresi", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{\\sqrt{3}+1}{\\sqrt{3}-1} + \\frac{\\sqrt{3}-1}{\\sqrt{3}+1} = \\ldots" },
@@ -270,7 +232,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\sqrt{5}-\\frac{2}{\\sqrt{5}}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(26, "Soal UN/ANBK/TKA – Gabungan Bentuk Akar", {
+  Qn(19, "Soal UN/ANBK/TKA – Gabungan Bentuk Akar", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{48} + \\sqrt{75} - \\sqrt{27} = \\ldots" },
@@ -298,7 +260,7 @@ const BentukAkarPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 26 Soal</span>
+            <span className="text-amber-400 text-xs font-bold">📋 19 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
