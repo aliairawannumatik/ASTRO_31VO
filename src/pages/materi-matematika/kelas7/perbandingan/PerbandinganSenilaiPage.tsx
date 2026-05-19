@@ -282,7 +282,6 @@ const PerbandinganSenilaiPage = () => {
                     <table className="w-full font-body text-sm border-collapse text-center">
                       <thead>
                         <tr className="bg-green-600/30">
-                          <th className="px-4 py-2 text-green-200 border border-green-500/40 font-bold">Variabel</th>
                           <th className="px-4 py-2 text-green-200 border border-green-500/40 font-bold">
                             <InlineMath math="V_1" />
                           </th>
@@ -293,7 +292,6 @@ const PerbandinganSenilaiPage = () => {
                       </thead>
                       <tbody className="text-white/80">
                         <tr className="bg-slate-800/40">
-                          <td className="px-4 py-2 border border-green-500/30 text-green-300 font-semibold">Besaran A</td>
                           <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
                             <InlineMath math="a_1" />
                           </td>
@@ -302,7 +300,6 @@ const PerbandinganSenilaiPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="px-4 py-2 border border-green-500/30 text-green-300 font-semibold">Besaran B</td>
                           <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
                             <InlineMath math="b_1" />
                           </td>
@@ -409,7 +406,6 @@ const PerbandinganSenilaiPage = () => {
                     <table className="w-full font-body text-sm border-collapse text-center">
                       <thead>
                         <tr className="bg-red-600/30">
-                          <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold">Variabel</th>
                           <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold">
                             <InlineMath math="V_1" />
                           </th>
@@ -420,7 +416,6 @@ const PerbandinganSenilaiPage = () => {
                       </thead>
                       <tbody className="text-white/80">
                         <tr className="bg-slate-800/40">
-                          <td className="px-4 py-2 border border-red-500/30 text-red-300 font-semibold">Besaran A</td>
                           <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
                             <InlineMath math="a_1" />
                           </td>
@@ -429,7 +424,6 @@ const PerbandinganSenilaiPage = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="px-4 py-2 border border-red-500/30 text-red-300 font-semibold">Besaran B</td>
                           <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
                             <InlineMath math="b_1" />
                           </td>
