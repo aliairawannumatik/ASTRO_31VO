@@ -312,50 +312,62 @@ const PerbandinganSenilaiPage = () => {
                   </div>
 
                   {/* Kali silang visual */}
-                  <div className="bg-slate-900/60 rounded-lg p-4 flex flex-col items-center gap-2">
-                    <p className="font-body text-xs text-white/50 mb-1">Kali silang (cross multiplication):</p>
-                    <div className="flex items-center gap-3">
-                      <div className="flex flex-col items-center">
-                        <span className="font-body text-xs text-green-300">A</span>
-                        <div className="flex gap-4 relative">
-                          <div className="text-center">
-                            <div className="bg-green-600/30 border border-green-500/50 rounded px-3 py-1">
-                              <InlineMath math="a_1" />
-                            </div>
-                            <div className="text-[10px] text-white/40 mt-1">V₁</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="bg-green-600/30 border border-green-500/50 rounded px-3 py-1">
-                              <InlineMath math="a_2" />
-                            </div>
-                            <div className="text-[10px] text-white/40 mt-1">V₂</div>
-                          </div>
+                  <div className="bg-slate-900/60 rounded-lg p-5 flex flex-col items-center gap-4">
+                    <p className="font-body text-xs text-white/50">Kali silang (cross multiplication):</p>
+
+                    {/* Grid 2×2 dengan SVG silang */}
+                    <div className="relative w-full max-w-sm" style={{ height: 140 }}>
+                      {/* SVG garis silang — digambar di belakang */}
+                      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 140" preserveAspectRatio="none">
+                        {/* Garis silang: a₁ (kiri-atas) → b₂ (kanan-bawah) */}
+                        <line x1="75" y1="35" x2="225" y2="105" stroke="#facc15" strokeWidth="2.5" strokeDasharray="6 3" />
+                        {/* Garis silang: a₂ (kanan-atas) → b₁ (kiri-bawah) */}
+                        <line x1="225" y1="35" x2="75" y2="105" stroke="#fb923c" strokeWidth="2.5" strokeDasharray="6 3" />
+                        {/* Titik persilangan */}
+                        <circle cx="150" cy="70" r="5" fill="#ffffff" fillOpacity="0.15" stroke="#ffffff" strokeOpacity="0.4" strokeWidth="1.5" />
+                        <text x="150" y="74" textAnchor="middle" fontSize="8" fill="white" fillOpacity="0.5">×</text>
+                      </svg>
+
+                      {/* Kotak a₁ — kiri atas */}
+                      <div className="absolute flex flex-col items-center gap-1" style={{ left: '10%', top: 8 }}>
+                        <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-5 py-3 text-center shadow-lg shadow-green-900/30">
+                          <span className="font-body font-bold text-white text-base"><InlineMath math="a_1" /></span>
+                        </div>
+                        <span className="font-body text-[10px] text-green-300 font-semibold">V₁ · A</span>
+                      </div>
+
+                      {/* Kotak a₂ — kanan atas */}
+                      <div className="absolute flex flex-col items-center gap-1" style={{ right: '10%', top: 8 }}>
+                        <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-5 py-3 text-center shadow-lg shadow-green-900/30">
+                          <span className="font-body font-bold text-white text-base"><InlineMath math="a_2" /></span>
+                        </div>
+                        <span className="font-body text-[10px] text-green-300 font-semibold">V₂ · A</span>
+                      </div>
+
+                      {/* Kotak b₁ — kiri bawah */}
+                      <div className="absolute flex flex-col items-center gap-1" style={{ left: '10%', bottom: 8 }}>
+                        <span className="font-body text-[10px] text-blue-300 font-semibold">V₁ · B</span>
+                        <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-5 py-3 text-center shadow-lg shadow-blue-900/30">
+                          <span className="font-body font-bold text-white text-base"><InlineMath math="b_1" /></span>
+                        </div>
+                      </div>
+
+                      {/* Kotak b₂ — kanan bawah */}
+                      <div className="absolute flex flex-col items-center gap-1" style={{ right: '10%', bottom: 8 }}>
+                        <span className="font-body text-[10px] text-blue-300 font-semibold">V₂ · B</span>
+                        <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-5 py-3 text-center shadow-lg shadow-blue-900/30">
+                          <span className="font-body font-bold text-white text-base"><InlineMath math="b_2" /></span>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 text-white/30 text-lg font-bold select-none">
-                      <span className="text-yellow-400 text-xl">✕</span>
+
+                    {/* Keterangan warna garis */}
+                    <div className="flex gap-4 text-[10px] font-body">
+                      <span className="flex items-center gap-1"><span className="inline-block w-5 border-t-2 border-dashed border-yellow-400"></span><span className="text-yellow-300">a₁ × b₂</span></span>
+                      <span className="flex items-center gap-1"><span className="inline-block w-5 border-t-2 border-dashed border-orange-400"></span><span className="text-orange-300">a₂ × b₁</span></span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex flex-col items-center">
-                        <div className="flex gap-4">
-                          <div className="text-center">
-                            <div className="bg-blue-600/30 border border-blue-500/50 rounded px-3 py-1">
-                              <InlineMath math="b_1" />
-                            </div>
-                            <div className="text-[10px] text-white/40 mt-1">V₁</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="bg-blue-600/30 border border-blue-500/50 rounded px-3 py-1">
-                              <InlineMath math="b_2" />
-                            </div>
-                            <div className="text-[10px] text-white/40 mt-1">V₂</div>
-                          </div>
-                        </div>
-                        <span className="font-body text-xs text-blue-300 mt-1">B</span>
-                      </div>
-                    </div>
-                    <div className="mt-2 w-full border-t border-white/10 pt-3 text-center">
+
+                    <div className="w-full border-t border-white/10 pt-3 text-center">
                       <BlockMath math="a_1 \times b_2 = a_2 \times b_1" />
                     </div>
                   </div>
