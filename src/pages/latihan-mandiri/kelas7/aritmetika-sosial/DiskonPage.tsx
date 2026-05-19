@@ -83,34 +83,35 @@ const DiskonPage = () => {
               <span className="font-semibold text-accent shrink-0">5.</span>
               <div>
                 <p className="mb-2">Data harga dan diskon sepatu dan kaos dari ke-empat toko sebagai berikut:</p>
-                <div className="overflow-x-auto mb-2">
-                  <table className="min-w-full text-xs border border-white/20">
+                <div className="mb-2">
+                  <table className="w-full text-xs border border-white/20">
                     <thead>
                       <tr className="bg-white/10">
-                        <th className="border border-white/20 px-2 py-1">Barang</th>
-                        <th className="border border-white/20 px-2 py-1">Harga (Rp)</th>
-                        <th className="border border-white/20 px-2 py-1">Toko Damai</th>
-                        <th className="border border-white/20 px-2 py-1">Toko Tentram</th>
-                        <th className="border border-white/20 px-2 py-1">Toko Rukun</th>
-                        <th className="border border-white/20 px-2 py-1">Toko Sentosa</th>
+                        <th className="border border-white/20 px-2 py-1 text-left">Toko</th>
+                        <th className="border border-white/20 px-2 py-1 text-center">Sepatu<br/><span className="font-normal text-white/60">Rp140.000</span></th>
+                        <th className="border border-white/20 px-2 py-1 text-center">Kaos<br/><span className="font-normal text-white/60">Rp100.000</span></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-white/20 px-2 py-1">Sepatu</td>
-                        <td className="border border-white/20 px-2 py-1">140.000</td>
-                        <td className="border border-white/20 px-2 py-1">20%</td>
-                        <td className="border border-white/20 px-2 py-1">25%</td>
-                        <td className="border border-white/20 px-2 py-1">15%</td>
-                        <td className="border border-white/20 px-2 py-1">30%</td>
+                        <td className="border border-white/20 px-2 py-1 font-semibold">Toko Damai</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">20%</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">25%</td>
+                      </tr>
+                      <tr className="bg-white/5">
+                        <td className="border border-white/20 px-2 py-1 font-semibold">Toko Tentram</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">25%</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">20%</td>
                       </tr>
                       <tr>
-                        <td className="border border-white/20 px-2 py-1">Kaos</td>
-                        <td className="border border-white/20 px-2 py-1">100.000</td>
-                        <td className="border border-white/20 px-2 py-1">25%</td>
-                        <td className="border border-white/20 px-2 py-1">20%</td>
-                        <td className="border border-white/20 px-2 py-1">30%</td>
-                        <td className="border border-white/20 px-2 py-1">15%</td>
+                        <td className="border border-white/20 px-2 py-1 font-semibold">Toko Rukun</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">15%</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">30%</td>
+                      </tr>
+                      <tr className="bg-white/5">
+                        <td className="border border-white/20 px-2 py-1 font-semibold">Toko Sentosa</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">30%</td>
+                        <td className="border border-white/20 px-2 py-1 text-center">15%</td>
                       </tr>
                     </tbody>
                   </table>
