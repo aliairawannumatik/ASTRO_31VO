@@ -274,13 +274,96 @@ const PerbandinganSenilaiPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pada perbandingan senilai, <strong className="text-primary">rasio antara dua besaran selalu konstan</strong> (tetap). Sehingga ketika salah satu berubah, yang lain berubah secara proporsional.
                 </p>
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-green-300 mb-3">Rumus Perbandingan Senilai:</p>
-                  <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="\frac{a_1}{a_2} = \frac{b_1}{b_2}" />
-                    <BlockMath math="\Leftrightarrow \quad a_1 \times b_2 = a_2 \times b_1" />
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-4">
+                  <p className="font-body text-sm font-semibold text-green-300">Rumus Perbandingan Senilai:</p>
+
+                  {/* Tabel V1 V2 */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full font-body text-sm border-collapse text-center">
+                      <thead>
+                        <tr className="bg-green-600/30">
+                          <th className="px-4 py-2 text-green-200 border border-green-500/40 font-bold">Variabel</th>
+                          <th className="px-4 py-2 text-green-200 border border-green-500/40 font-bold">
+                            <InlineMath math="V_1" />
+                          </th>
+                          <th className="px-4 py-2 text-green-200 border border-green-500/40 font-bold">
+                            <InlineMath math="V_2" />
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-white/80">
+                        <tr className="bg-slate-800/40">
+                          <td className="px-4 py-2 border border-green-500/30 text-green-300 font-semibold">Besaran A</td>
+                          <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
+                            <InlineMath math="a_1" />
+                          </td>
+                          <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
+                            <InlineMath math="a_2" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 border border-green-500/30 text-green-300 font-semibold">Besaran B</td>
+                          <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
+                            <InlineMath math="b_1" />
+                          </td>
+                          <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
+                            <InlineMath math="b_2" />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <p className="font-body text-xs text-white/60 mt-2">Di mana <InlineMath math="a" /> dan <InlineMath math="b" /> adalah dua besaran yang bergerak searah.</p>
+
+                  {/* Kali silang visual */}
+                  <div className="bg-slate-900/60 rounded-lg p-4 flex flex-col items-center gap-2">
+                    <p className="font-body text-xs text-white/50 mb-1">Kali silang (cross multiplication):</p>
+                    <div className="flex items-center gap-3">
+                      <div className="flex flex-col items-center">
+                        <span className="font-body text-xs text-green-300">A</span>
+                        <div className="flex gap-4 relative">
+                          <div className="text-center">
+                            <div className="bg-green-600/30 border border-green-500/50 rounded px-3 py-1">
+                              <InlineMath math="a_1" />
+                            </div>
+                            <div className="text-[10px] text-white/40 mt-1">V₁</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="bg-green-600/30 border border-green-500/50 rounded px-3 py-1">
+                              <InlineMath math="a_2" />
+                            </div>
+                            <div className="text-[10px] text-white/40 mt-1">V₂</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-white/30 text-lg font-bold select-none">
+                      <span className="text-yellow-400 text-xl">✕</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="flex flex-col items-center">
+                        <div className="flex gap-4">
+                          <div className="text-center">
+                            <div className="bg-blue-600/30 border border-blue-500/50 rounded px-3 py-1">
+                              <InlineMath math="b_1" />
+                            </div>
+                            <div className="text-[10px] text-white/40 mt-1">V₁</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="bg-blue-600/30 border border-blue-500/50 rounded px-3 py-1">
+                              <InlineMath math="b_2" />
+                            </div>
+                            <div className="text-[10px] text-white/40 mt-1">V₂</div>
+                          </div>
+                        </div>
+                        <span className="font-body text-xs text-blue-300 mt-1">B</span>
+                      </div>
+                    </div>
+                    <div className="mt-2 w-full border-t border-white/10 pt-3 text-center">
+                      <BlockMath math="a_1 \times b_2 = a_2 \times b_1" />
+                    </div>
+                  </div>
+
+                  <p className="font-body text-xs text-white/60">Di mana <InlineMath math="a" /> dan <InlineMath math="b" /> adalah dua besaran yang bergerak searah (senilai).</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full font-body text-sm border-collapse">
