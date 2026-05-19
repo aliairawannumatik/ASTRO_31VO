@@ -10,13 +10,13 @@ type Q = { n: number; title: string; content?: string; mathContent?: string; par
 const Qn = (n: number, title: string, rest: Omit<Q, "n"|"title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Nilai Pangkat Bilangan Bulat", {
+  Qn(1, "Ekspansi Bentuk Pangkat – UN", {
     type: "mixed",
-    content: "Hitung nilai bilangan berpangkat berikut:",
+    content: "Nyatakan dalam bentuk perkalian berulang lalu hitung nilainya:",
     parts: [
-      { label: "a.", math: "2^8 = \\ldots" },
-      { label: "b.", math: "3^4 = \\ldots" },
-      { label: "c.", math: "5^3 = \\ldots" },
+      { label: "a.", math: "4^3" },
+      { label: "b.", math: "(-5)^2" },
+      { label: "c.", math: "\\left(\\frac{1}{2}\\right)^5" },
     ],
   }),
   Qn(2, "Penulisan Bentuk Pangkat – UN Style", {
@@ -81,24 +81,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Berapa digit angka 0 pada } 10^8?" },
     ],
   }),
-  Qn(9, "Ekspansi Bentuk Pangkat – UN", {
-    type: "mixed",
-    content: "Nyatakan dalam bentuk perkalian berulang lalu hitung nilainya:",
-    parts: [
-      { label: "a.", math: "4^3" },
-      { label: "b.", math: "(-5)^2" },
-      { label: "c.", math: "\\left(\\frac{1}{2}\\right)^5" },
-    ],
-  }),
-  Qn(10, "Pangkat Basis Pecahan – ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\left(-\\frac{1}{2}\\right)^4 = \\ldots" },
-      { label: "b.", math: "\\left(\\frac{2}{5}\\right)^3 = \\ldots" },
-      { label: "c.", math: "\\left(-\\frac{3}{4}\\right)^2 = \\ldots" },
-    ],
-  }),
-  Qn(11, "Identifikasi Pangkat Ganjil/Genap – TKA", {
+  Qn(9, "Identifikasi Pangkat Ganjil/Genap – TKA", {
     type: "mixed",
     content: "Tentukan apakah hasil bilangan berpangkat positif atau negatif:",
     parts: [
@@ -126,7 +109,7 @@ const PengertianNotasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 11 Soal</span>
+            <span className="text-sky-400 text-xs font-bold">📋 9 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
