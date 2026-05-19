@@ -49,9 +49,8 @@ const questions: Q[] = [
     type: "mixed", diagram: <NotationSVG />,
     content: "Notasi ilmiah: a × 10ⁿ, di mana 1 ≤ a < 10.",
     parts: [
-      { label: "a.", text: "Manakah yang merupakan notasi ilmiah yang benar?" },
-      { label: "b.", math: "3{,}5 \\times 10^4 \\text{ — apakah ini notasi ilmiah yang valid?}" },
-      { label: "c.", math: "15 \\times 10^3 \\text{ — apakah ini notasi ilmiah yang valid? Perbaiki jika salah.}" },
+      { label: "a.", math: "3{,}5 \\times 10^4 \\text{ — apakah ini notasi ilmiah yang valid?}" },
+      { label: "b.", math: "15 \\times 10^3 \\text{ — apakah ini notasi ilmiah yang valid? Perbaiki jika salah.}" },
     ],
   }),
   Qn(2, "Mengubah ke Notasi Ilmiah – Bilangan Besar – UN", {
@@ -128,14 +127,6 @@ const questions: Q[] = [
       { label: "c.", math: "120 \\times 10^{-3} = \\ldots" },
     ],
   }),
-  Qn(11, "Soal ANBK – Akar dalam Notasi Ilmiah", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt{4 \\times 10^6} = 2 \\times 10^3" },
-      { label: "b.", math: "\\sqrt{25 \\times 10^8} = \\ldots" },
-      { label: "c.", math: "\\sqrt{36 \\times 10^{-4}} = \\ldots" },
-    ],
-  }),
 ];
 
 const NotasiIlmiahPage = () => {
@@ -155,7 +146,7 @@ const NotasiIlmiahPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 11 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 10 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
