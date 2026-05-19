@@ -611,22 +611,22 @@ const PerbandinganSenilaiPage = () => {
                           <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 shadow-lg shadow-green-900/30">
                             <span className="font-body font-bold text-white text-sm">5</span>
                           </div>
-                          <span className="font-body text-[9px] text-green-300">V₁·A</span>
+                          <span className="font-body text-[9px] text-green-300">V₁·Baris1</span>
                         </div>
                         <div className="absolute flex flex-col items-center gap-1" style={{ right: '5%', top: 6 }}>
-                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 shadow-lg shadow-green-900/30">
-                            <span className="font-body font-bold text-white text-sm">8</span>
+                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-2 py-2 shadow-lg shadow-green-900/30">
+                            <span className="font-body font-bold text-white text-sm">20.000</span>
                           </div>
-                          <span className="font-body text-[9px] text-green-300">V₂·A</span>
+                          <span className="font-body text-[9px] text-green-300">V₂·Baris1</span>
                         </div>
                         <div className="absolute flex flex-col items-center gap-1" style={{ left: '5%', bottom: 6 }}>
-                          <span className="font-body text-[9px] text-blue-300">V₁·B</span>
-                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-2 py-2 shadow-lg shadow-blue-900/30">
-                            <span className="font-body font-bold text-white text-sm">20.000</span>
+                          <span className="font-body text-[9px] text-blue-300">V₁·Baris2</span>
+                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 shadow-lg shadow-blue-900/30">
+                            <span className="font-body font-bold text-white text-sm">8</span>
                           </div>
                         </div>
                         <div className="absolute flex flex-col items-center gap-1" style={{ right: '5%', bottom: 6 }}>
-                          <span className="font-body text-[9px] text-blue-300">V₂·B</span>
+                          <span className="font-body text-[9px] text-blue-300">V₂·Baris2</span>
                           <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 shadow-lg shadow-blue-900/30">
                             <span className="font-body font-bold text-yellow-300 text-sm">x</span>
                           </div>
