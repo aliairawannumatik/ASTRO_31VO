@@ -454,7 +454,6 @@ const PerbandinganSenilaiPage = () => {
                     <div className="flex flex-col gap-3 w-full max-w-xs">
                       {/* Baris A */}
                       <div className="flex items-center gap-2">
-                        <span className="font-body text-xs text-red-300 font-bold w-5">A</span>
                         <div className="bg-red-600/30 border border-red-500/50 rounded px-4 py-2 text-center flex-1">
                           <InlineMath math="a_1" />
                         </div>
@@ -468,7 +467,6 @@ const PerbandinganSenilaiPage = () => {
 
                       {/* Baris B */}
                       <div className="flex items-center gap-2">
-                        <span className="font-body text-xs text-orange-300 font-bold w-5">B</span>
                         <div className="bg-orange-600/30 border border-orange-500/50 rounded px-4 py-2 text-center flex-1">
                           <InlineMath math="b_1" />
                         </div>
