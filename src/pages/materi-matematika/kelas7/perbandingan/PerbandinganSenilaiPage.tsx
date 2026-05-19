@@ -572,18 +572,72 @@ const PerbandinganSenilaiPage = () => {
                       Harga 5 buah mangga adalah Rp20.000. Berapakah harga 8 buah mangga?
                     </p>
                   </div>
-                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Analisis:</strong> Makin banyak mangga → harga makin mahal. Ini adalah perbandingan <strong className="text-green-400">senilai</strong>.</p>
-                      <p>Diketahui: <InlineMath math="a_1 = 5" /> buah, <InlineMath math="b_1 = 20.000" />, <InlineMath math="a_2 = 8" /> buah, <InlineMath math="b_2 = x" /></p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\frac{5}{8} = \frac{20.000}{x}" />
-                        <BlockMath math="\Rightarrow 5x = 8 \times 20.000 = 160.000" />
-                        <BlockMath math="x = \frac{160.000}{5} = 32.000" />
-                      </div>
-                      <p className="text-primary font-semibold">Harga 8 buah mangga = <strong>Rp32.000</strong></p>
+                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-4">
+                    <p className="font-body text-xs font-semibold text-green-400">PEMBAHASAN:</p>
+                    <p className="font-body text-sm text-white/80"><strong>Analisis:</strong> Makin banyak mangga → harga makin mahal → <strong className="text-green-400">senilai</strong> → gunakan <strong>kali silang</strong>.</p>
+
+                    {/* Tabel V1 V2 */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full font-body text-sm border-collapse text-center">
+                        <thead>
+                          <tr className="bg-green-600/30">
+                            <th className="px-4 py-2 text-green-200 border border-green-500/40 font-bold"><InlineMath math="V_1" /></th>
+                            <th className="px-4 py-2 text-green-200 border border-green-500/40 font-bold"><InlineMath math="V_2" /></th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-white/80">
+                          <tr className="bg-slate-800/40">
+                            <td className="px-4 py-2 border border-green-500/30 font-bold text-white">5 buah</td>
+                            <td className="px-4 py-2 border border-green-500/30 font-bold text-white">8 buah</td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 border border-green-500/30 font-bold text-white">Rp20.000</td>
+                            <td className="px-4 py-2 border border-green-500/30 font-bold text-yellow-300"><InlineMath math="x" /></td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+
+                    {/* Kali silang visual dengan angka */}
+                    <div className="bg-slate-900/60 rounded-lg p-4 flex flex-col items-center gap-3">
+                      <p className="font-body text-xs text-white/50">Kali silang:</p>
+                      <div className="relative w-full max-w-xs" style={{ height: 130 }}>
+                        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 280 130" preserveAspectRatio="none">
+                          <line x1="70" y1="32" x2="210" y2="98" stroke="#facc15" strokeWidth="2.5" strokeDasharray="6 3" />
+                          <line x1="210" y1="32" x2="70" y2="98" stroke="#fb923c" strokeWidth="2.5" strokeDasharray="6 3" />
+                          <circle cx="140" cy="65" r="5" fill="#ffffff" fillOpacity="0.12" stroke="#ffffff" strokeOpacity="0.35" strokeWidth="1.5" />
+                        </svg>
+                        <div className="absolute flex flex-col items-center gap-1" style={{ left: '5%', top: 6 }}>
+                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 shadow-lg shadow-green-900/30">
+                            <span className="font-body font-bold text-white text-sm">5</span>
+                          </div>
+                          <span className="font-body text-[9px] text-green-300">V₁·A</span>
+                        </div>
+                        <div className="absolute flex flex-col items-center gap-1" style={{ right: '5%', top: 6 }}>
+                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 shadow-lg shadow-green-900/30">
+                            <span className="font-body font-bold text-white text-sm">8</span>
+                          </div>
+                          <span className="font-body text-[9px] text-green-300">V₂·A</span>
+                        </div>
+                        <div className="absolute flex flex-col items-center gap-1" style={{ left: '5%', bottom: 6 }}>
+                          <span className="font-body text-[9px] text-blue-300">V₁·B</span>
+                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-2 py-2 shadow-lg shadow-blue-900/30">
+                            <span className="font-body font-bold text-white text-sm">20.000</span>
+                          </div>
+                        </div>
+                        <div className="absolute flex flex-col items-center gap-1" style={{ right: '5%', bottom: 6 }}>
+                          <span className="font-body text-[9px] text-blue-300">V₂·B</span>
+                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 shadow-lg shadow-blue-900/30">
+                            <span className="font-body font-bold text-yellow-300 text-sm">x</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="w-full border-t border-white/10 pt-2 space-y-1 text-center">
+                        <BlockMath math="5 \times x = 8 \times 20.000" />
+                        <BlockMath math="5x = 160.000 \Rightarrow x = 32.000" />
+                      </div>
+                    </div>
+                    <p className="font-body text-sm text-primary font-semibold text-center">✅ Harga 8 buah mangga = <strong>Rp32.000</strong></p>
                   </div>
                 </div>
 
@@ -598,19 +652,66 @@ const PerbandinganSenilaiPage = () => {
                       Persediaan pakan cukup untuk 20 ekor sapi selama 18 hari. Jika peternak membeli 10 ekor sapi lagi, berapa hari persediaan pakan akan habis?
                     </p>
                   </div>
-                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Analisis:</strong> Sapi bertambah → pakan lebih cepat habis → hari berkurang. Ini <strong className="text-yellow-400">berbalik nilai</strong>.</p>
-                      <p><strong>Perhatikan:</strong> Total sapi sekarang = <InlineMath math="20 + 10 = 30" /> ekor.</p>
-                      <p>Diketahui: <InlineMath math="a_1 = 20" />, <InlineMath math="b_1 = 18" />, <InlineMath math="a_2 = 30" />, <InlineMath math="b_2 = x" /></p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="a_1 \times b_1 = a_2 \times b_2" />
-                        <BlockMath math="20 \times 18 = 30 \times x \Rightarrow 360 = 30x" />
-                        <BlockMath math="x = \frac{360}{30} = 12 \text{ hari}" />
-                      </div>
-                      <p className="text-primary font-semibold">Persediaan pakan akan habis dalam <strong>12 hari</strong>.</p>
+                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400">PEMBAHASAN:</p>
+                    <p className="font-body text-sm text-white/80"><strong>Analisis:</strong> Sapi bertambah → hari berkurang → <strong className="text-yellow-400">berbalik nilai</strong> → gunakan <strong>kali sejajar</strong>.</p>
+                    <p className="font-body text-sm text-white/80"><strong>Perhatikan:</strong> Total sapi = <InlineMath math="20 + 10 = 30" /> ekor.</p>
+
+                    {/* Tabel V1 V2 */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full font-body text-sm border-collapse text-center">
+                        <thead>
+                          <tr className="bg-red-600/30">
+                            <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold"><InlineMath math="V_1" /></th>
+                            <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold"><InlineMath math="V_2" /></th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-white/80">
+                          <tr className="bg-slate-800/40">
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">20 sapi</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">30 sapi</td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">18 hari</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-yellow-300"><InlineMath math="x" /></td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+
+                    {/* Kali sejajar visual dengan angka */}
+                    <div className="bg-slate-900/60 rounded-lg p-4 flex flex-col items-center gap-3">
+                      <p className="font-body text-xs text-white/50">Kali sejajar:</p>
+                      <div className="flex flex-col gap-3 w-full max-w-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
+                            <span className="font-body font-bold text-white text-sm">20</span>
+                          </div>
+                          <div className="flex-1 border-t-2 border-dashed border-yellow-400/60 relative flex items-center justify-center">
+                            <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
+                          </div>
+                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
+                            <span className="font-body font-bold text-white text-sm">30</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
+                            <span className="font-body font-bold text-white text-sm">18</span>
+                          </div>
+                          <div className="flex-1 border-t-2 border-dashed border-orange-400/60 relative flex items-center justify-center">
+                            <span className="absolute font-body text-[9px] text-orange-300 -top-3">sejajar</span>
+                          </div>
+                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
+                            <span className="font-body font-bold text-yellow-300 text-sm">x</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="w-full border-t border-white/10 pt-2 text-center space-y-1">
+                        <BlockMath math="20 \times 18 = 30 \times x" />
+                        <BlockMath math="360 = 30x \Rightarrow x = 12 \text{ hari}" />
+                      </div>
+                    </div>
+                    <p className="font-body text-sm text-primary font-semibold text-center">✅ Persediaan pakan habis dalam <strong>12 hari</strong>.</p>
                   </div>
                 </div>
 
@@ -625,18 +726,74 @@ const PerbandinganSenilaiPage = () => {
                       Sebuah jembatan direncanakan selesai dalam 30 hari oleh 20 pekerja. Setelah 12 hari berjalan, proyek libur selama 3 hari karena cuaca buruk. Agar proyek selesai tepat waktu, berapa tambahan pekerja yang harus direkrut?
                     </p>
                   </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-3 font-body text-sm text-white/80">
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p><strong>① Total beban kerja:</strong> <InlineMath math="30 \times 20 = 600" /> satuan kerja</p>
-                        <p><strong>② Pekerjaan selesai:</strong> <InlineMath math="12 \times 20 = 240" /> satuan kerja</p>
-                        <p><strong>③ Sisa beban:</strong> <InlineMath math="600 - 240 = 360" /> satuan kerja</p>
-                        <p><strong>④ Sisa waktu:</strong> <InlineMath math="30 - 12 - 3 = 15" /> hari</p>
-                        <p><strong>⑤ Pekerja dibutuhkan:</strong> <InlineMath math="360 \div 15 = 24" /> orang</p>
-                      </div>
-                      <p className="text-primary font-semibold">Tambahan pekerja = <InlineMath math="24 - 20 = 4" /> orang</p>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-4">
+                    <p className="font-body text-xs font-semibold text-red-400">PEMBAHASAN:</p>
+                    <p className="font-body text-sm text-white/80"><strong>Analisis:</strong> Pekerja ↑ → waktu ↓ → <strong className="text-red-400">berbalik nilai</strong>. Soal ini ada proyek terhenti, jadi hitung sisa dulu.</p>
+
+                    {/* Langkah hitung sisa */}
+                    <div className="bg-slate-900/50 rounded-lg p-3 space-y-1 font-body text-sm text-white/80">
+                      <p><strong className="text-orange-300">①</strong> Total beban kerja: <InlineMath math="30 \times 20 = 600" /> satuan</p>
+                      <p><strong className="text-orange-300">②</strong> Selesai: <InlineMath math="12 \times 20 = 240" /> satuan → Sisa: <InlineMath math="600 - 240 = 360" /> satuan</p>
+                      <p><strong className="text-orange-300">③</strong> Sisa waktu: <InlineMath math="30 - 12 - 3 = 15" /> hari</p>
                     </div>
+
+                    <p className="font-body text-sm text-white/80 font-semibold">→ Sekarang terapkan kali sejajar (berbalik nilai): 20 pekerja butuh 18 hari, berapa pekerja untuk 15 hari?</p>
+
+                    {/* Tabel V1 V2 */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full font-body text-sm border-collapse text-center">
+                        <thead>
+                          <tr className="bg-red-600/30">
+                            <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold"><InlineMath math="V_1" /></th>
+                            <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold"><InlineMath math="V_2" /></th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-white/80">
+                          <tr className="bg-slate-800/40">
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">20 pekerja</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-yellow-300"><InlineMath math="x" /> pekerja</td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">18 hari</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">15 hari</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Kali sejajar visual dengan angka */}
+                    <div className="bg-slate-900/60 rounded-lg p-4 flex flex-col items-center gap-3">
+                      <p className="font-body text-xs text-white/50">Kali sejajar:</p>
+                      <div className="flex flex-col gap-3 w-full max-w-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
+                            <span className="font-body font-bold text-white text-sm">20</span>
+                          </div>
+                          <div className="flex-1 border-t-2 border-dashed border-yellow-400/60 relative flex items-center justify-center">
+                            <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
+                          </div>
+                          <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
+                            <span className="font-body font-bold text-yellow-300 text-sm">x</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
+                            <span className="font-body font-bold text-white text-sm">18</span>
+                          </div>
+                          <div className="flex-1 border-t-2 border-dashed border-orange-400/60 relative flex items-center justify-center">
+                            <span className="absolute font-body text-[9px] text-orange-300 -top-3">sejajar</span>
+                          </div>
+                          <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
+                            <span className="font-body font-bold text-white text-sm">15</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="w-full border-t border-white/10 pt-2 text-center space-y-1">
+                        <BlockMath math="20 \times 18 = x \times 15" />
+                        <BlockMath math="360 = 15x \Rightarrow x = 24 \text{ orang}" />
+                      </div>
+                    </div>
+                    <p className="font-body text-sm text-primary font-semibold text-center">✅ Tambahan pekerja = <InlineMath math="24 - 20 = 4" /> orang</p>
                   </div>
                 </div>
 
