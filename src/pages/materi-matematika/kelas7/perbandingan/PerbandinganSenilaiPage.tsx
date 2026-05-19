@@ -296,12 +296,12 @@ const PerbandinganSenilaiPage = () => {
                             <InlineMath math="a_1" />
                           </td>
                           <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
-                            <InlineMath math="a_2" />
+                            <InlineMath math="b_1" />
                           </td>
                         </tr>
                         <tr>
                           <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
-                            <InlineMath math="b_1" />
+                            <InlineMath math="a_2" />
                           </td>
                           <td className="px-4 py-2 border border-green-500/30 font-bold text-white">
                             <InlineMath math="b_2" />
@@ -432,12 +432,12 @@ const PerbandinganSenilaiPage = () => {
                             <InlineMath math="a_1" />
                           </td>
                           <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
-                            <InlineMath math="a_2" />
+                            <InlineMath math="b_1" />
                           </td>
                         </tr>
                         <tr>
                           <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
-                            <InlineMath math="b_1" />
+                            <InlineMath math="a_2" />
                           </td>
                           <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
                             <InlineMath math="b_2" />
