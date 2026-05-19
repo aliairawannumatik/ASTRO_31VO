@@ -457,7 +457,7 @@ const PerbandinganSenilaiPage = () => {
                         <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-5 py-3 text-center flex-1 shadow-lg shadow-green-900/30">
                           <span className="font-body font-bold text-white text-base"><InlineMath math="a_1" /></span>
                         </div>
-                        <div className="flex-1 border-t-2 border-dashed border-yellow-400/60 relative flex items-center justify-center">
+                        <div className="flex-1 border-t-4 border-dashed border-yellow-400 relative flex items-center justify-center">
                           <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
                         </div>
                         <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-5 py-3 text-center flex-1 shadow-lg shadow-green-900/30">
@@ -470,8 +470,8 @@ const PerbandinganSenilaiPage = () => {
                         <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-5 py-3 text-center flex-1 shadow-lg shadow-blue-900/30">
                           <span className="font-body font-bold text-white text-base"><InlineMath math="b_1" /></span>
                         </div>
-                        <div className="flex-1 border-t-2 border-dashed border-orange-400/60 relative flex items-center justify-center">
-                          <span className="absolute font-body text-[9px] text-orange-300 -top-3">sejajar</span>
+                        <div className="flex-1 border-t-4 border-dashed border-yellow-400 relative flex items-center justify-center">
+                          <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
                         </div>
                         <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-5 py-3 text-center flex-1 shadow-lg shadow-blue-900/30">
                           <span className="font-body font-bold text-white text-base"><InlineMath math="b_2" /></span>
