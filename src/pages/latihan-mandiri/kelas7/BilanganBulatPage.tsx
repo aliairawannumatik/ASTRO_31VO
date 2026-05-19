@@ -9,8 +9,8 @@ const subtopics = [
   { label: "PENGURANGAN BILANGAN BULAT", path: "/latihan-mandiri/kelas-7/bilangan-bulat/pengurangan", soal: 5, icon: Minus, gradient: "from-cyan-900/40 to-sky-900/30", border: "border-cyan-500/30", badge: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40", iconBg: "bg-cyan-500/20", iconColor: "text-cyan-400", leftBar: "from-cyan-400 to-sky-500", desc: "Pengurangan bilangan bulat, lawan suatu bilangan, garis bilangan" },
   { label: "PERKALIAN BILANGAN BULAT", path: "/latihan-mandiri/kelas-7/bilangan-bulat/perkalian", soal: 5, icon: X, gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", badge: "bg-violet-500/20 text-violet-300 border-violet-400/40", iconBg: "bg-violet-500/20", iconColor: "text-violet-400", leftBar: "from-violet-400 to-purple-500", desc: "Perkalian bilangan bulat, aturan tanda (+×+, +×−, −×−), sifat-sifatnya" },
   { label: "PEMBAGIAN BILANGAN BULAT", path: "/latihan-mandiri/kelas-7/bilangan-bulat/pembagian", soal: 5, icon: Divide, gradient: "from-sky-900/40 to-blue-900/30", border: "border-sky-500/30", badge: "bg-sky-500/20 text-sky-300 border-sky-400/40", iconBg: "bg-sky-500/20", iconColor: "text-sky-400", leftBar: "from-sky-400 to-blue-500", desc: "Pembagian bilangan bulat, hubungan perkalian dan pembagian, aturan tanda" },
-  { label: "OPERASI HITUNG CAMPURAN BILANGAN BULAT", path: "/latihan-mandiri/kelas-7/bilangan-bulat/operasi-campuran", soal: 20, icon: Calculator, gradient: "from-indigo-900/40 to-blue-900/30", border: "border-indigo-500/30", badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40", iconBg: "bg-indigo-500/20", iconColor: "text-indigo-400", leftBar: "from-indigo-400 to-blue-500", desc: "Hierarki operasi hitung, tanda kurung, soal kontekstual campuran" },
-  { label: "KPK DAN FPB", path: "/latihan-mandiri/kelas-7/bilangan-bulat/kpk-fpb", soal: 11, icon: Network, gradient: "from-purple-900/40 to-fuchsia-900/30", border: "border-purple-500/30", badge: "bg-purple-500/20 text-purple-300 border-purple-400/40", iconBg: "bg-purple-500/20", iconColor: "text-purple-400", leftBar: "from-purple-400 to-fuchsia-500", desc: "Faktor, kelipatan, faktorisasi prima, pohon faktor, aplikasi KPK & FPB" },
+  { label: "OPERASI HITUNG CAMPURAN BILANGAN BULAT", path: "/latihan-mandiri/kelas-7/bilangan-bulat/operasi-campuran", soal: 15, icon: Calculator, gradient: "from-indigo-900/40 to-blue-900/30", border: "border-indigo-500/30", badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40", iconBg: "bg-indigo-500/20", iconColor: "text-indigo-400", leftBar: "from-indigo-400 to-blue-500", desc: "Hierarki operasi hitung, tanda kurung, soal kontekstual campuran" },
+  { label: "KPK DAN FPB", path: "/latihan-mandiri/kelas-7/bilangan-bulat/kpk-fpb", soal: 10, icon: Network, gradient: "from-purple-900/40 to-fuchsia-900/30", border: "border-purple-500/30", badge: "bg-purple-500/20 text-purple-300 border-purple-400/40", iconBg: "bg-purple-500/20", iconColor: "text-purple-400", leftBar: "from-purple-400 to-fuchsia-500", desc: "Faktor, kelipatan, faktorisasi prima, pohon faktor, aplikasi KPK & FPB" },
 ];
 
 const BilanganBulatPage = () => {
@@ -28,7 +28,7 @@ const BilanganBulatPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-1">Kelas 7 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2 mt-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">54 Soal Total · UN / TKA / ANBK</span>
+            <span className="text-white/70 text-xs font-body">48 Soal Total · UN / TKA / ANBK</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
