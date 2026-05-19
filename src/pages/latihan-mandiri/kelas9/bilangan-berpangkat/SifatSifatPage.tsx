@@ -74,40 +74,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{m^8 \\times m^3}{m^6} = \\ldots" },
     ],
   }),
-  Qn(9, "Pemangkatan Ganda – UN", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "((2^3)^2)^2 = 2^{\\square} = \\ldots" },
-      { label: "b.", math: "((5^2)^3)^1 = \\ldots" },
-      { label: "c.", math: "((a^2)^3)^4 = a^{\\square}" },
-    ],
-  }),
-  Qn(10, "Campuran Sifat Perkalian & Pemangkatan – ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(2^3)^2 \\times 2^4 = \\ldots" },
-      { label: "b.", math: "(3^2)^3 \\times 3^2 = \\ldots" },
-      { label: "c.", math: "(x^4)^3 \\times x^2 = x^{\\square}" },
-    ],
-  }),
-  Qn(11, "Nilai Numerik Sifat – UN", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "2^3 \\times 4^2 = 2^3 \\times (2^2)^2 = 2^\\square = \\ldots" },
-      { label: "b.", math: "9^3 = (3^2)^3 = 3^\\square = \\ldots" },
-      { label: "c.", math: "8^4 = (2^3)^4 = \\ldots" },
-    ],
-  }),
-  Qn(12, "Menentukan Pangkat – TKA", {
-    type: "mixed",
-    content: "Tentukan nilai n yang memenuhi:",
-    parts: [
-      { label: "a.", math: "2^n = 2^3 \\times 2^4 \\Rightarrow n = \\ldots" },
-      { label: "b.", math: "3^n = \\frac{3^8}{3^3} \\Rightarrow n = \\ldots" },
-      { label: "c.", math: "5^n = (5^3)^4 \\Rightarrow n = \\ldots" },
-    ],
-  }),
-  Qn(13, "Penyederhanaan Ekspresi Aljabar – ANBK", {
+  Qn(9, "Penyederhanaan Ekspresi Aljabar – ANBK", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{a^5 b^3}{a^2 b} = \\ldots" },
@@ -115,7 +82,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{p^8 q^4}{p^3 q^4} = \\ldots" },
     ],
   }),
-  Qn(14, "Soal UN – Sifat Distribusi Campuran", {
+  Qn(10, "Soal UN – Sifat Distribusi Campuran", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(2a)^3 = \\ldots" },
@@ -123,25 +90,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\frac{2x}{3y}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(15, "Persamaan Eksponen Sederhana – UN", {
-    type: "mixed",
-    content: "Temukan nilai x:",
-    parts: [
-      { label: "a.", math: "2^x \\times 2^3 = 2^7 \\Rightarrow x = \\ldots" },
-      { label: "b.", math: "\\frac{3^x}{3^2} = 3^5 \\Rightarrow x = \\ldots" },
-      { label: "c.", math: "(4^x)^2 = 4^8 \\Rightarrow x = \\ldots" },
-    ],
-  }),
-  Qn(16, "Soal ANBK – Menyamakan Basis", {
-    type: "mixed",
-    content: "Sederhanakan dengan menyamakan basis terlebih dahulu:",
-    parts: [
-      { label: "a.", math: "4^3 \\times 2^5 = (2^2)^3 \\times 2^5 = 2^\\square = \\ldots" },
-      { label: "b.", math: "9^2 \\times 3^3 = \\ldots" },
-      { label: "c.", math: "8^2 \\div 4^3 = \\ldots" },
-    ],
-  }),
-  Qn(17, "Soal TKA – Menyederhanakan Eksponen Besar", {
+  Qn(11, "Soal TKA – Menyederhanakan Eksponen Besar", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{6^5}{6^2} = \\ldots" },
@@ -149,7 +98,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{2^{15}}{4^5} = \\ldots" },
     ],
   }),
-  Qn(18, "Soal UN – Ekspresi Variabel Gabungan", {
+  Qn(12, "Soal UN – Ekspresi Variabel Gabungan", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(a^2 b^3)^4 = a^\\square b^\\square" },
@@ -157,24 +106,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\frac{a^3}{b^2}\\right)^3 = \\ldots" },
     ],
   }),
-  Qn(19, "Soal UN – Nilai Numerik", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "2^3 \\times 2^4 \\times 2^2 = \\ldots" },
-      { label: "b.", math: "3^2 \\times 9^3 = 3^2 \\times 3^6 = \\ldots" },
-      { label: "c.", math: "16^3 \\div 4^4 = \\ldots" },
-    ],
-  }),
-  Qn(20, "Soal TKA – Perbandingan Ekspresi", {
-    type: "mixed",
-    content: "Manakah yang lebih besar?",
-    parts: [
-      { label: "a.", math: "2^{10} \\text{ atau } (2^5)^2 ?" },
-      { label: "b.", math: "3^6 \\text{ atau } (3^2)^3?" },
-      { label: "c.", math: "\\frac{5^8}{5^4} \\text{ atau } (5^2)^2?" },
-    ],
-  }),
-  Qn(21, "Soal ANBK – Penyederhanaan Langkah Demi Langkah", {
+  Qn(13, "Soal ANBK – Penyederhanaan Langkah Demi Langkah", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{(2^3)^4}{2^8} = \\ldots" },
@@ -182,15 +114,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{(a^3)^4}{a^5 \\times a^3} = a^\\square" },
     ],
   }),
-  Qn(22, "Soal UN – Ekspresi dengan Angka Nyata", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{32 \\times 8}{4} = \\frac{2^5 \\times 2^3}{2^2} = \\ldots" },
-      { label: "b.", math: "\\frac{27 \\times 9}{3^4} = \\ldots" },
-      { label: "c.", math: "\\frac{4^3 \\times 8^2}{2^{10}} = \\ldots" },
-    ],
-  }),
-  Qn(23, "Soal TKA – Variabel dan Angka", {
+  Qn(14, "Soal TKA – Variabel dan Angka", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(2x^3)^4 = 2^4 \\times x^{12} = \\ldots" },
@@ -198,15 +122,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\frac{2x^2}{y^3}\\right)^3 = \\ldots" },
     ],
   }),
-  Qn(24, "Soal UN – Eksponen Bilangan Negatif", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(-2)^3 \\times (-2)^5 = (-2)^\\square = \\ldots" },
-      { label: "b.", math: "(-3)^4 \\div (-3)^2 = \\ldots" },
-      { label: "c.", math: "((-2)^3)^2 = \\ldots" },
-    ],
-  }),
-  Qn(25, "Soal UN – Sifat Eksponen pada Aljabar", {
+  Qn(15, "Soal UN – Sifat Eksponen pada Aljabar", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{(2a)^4}{4a^2} = \\ldots" },
@@ -214,16 +130,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{(ab)^5}{a^3 b^2} = \\ldots" },
     ],
   }),
-  Qn(26, "Soal ANBK – Menentukan n", {
-    type: "mixed",
-    content: "Tentukan nilai n:",
-    parts: [
-      { label: "a.", math: "5^n \\times 5^4 = 5^{10} \\Rightarrow n = \\ldots" },
-      { label: "b.", math: "\\frac{7^n}{7^3} = 7^5 \\Rightarrow n = \\ldots" },
-      { label: "c.", math: "(2^n)^3 = 2^{18} \\Rightarrow n = \\ldots" },
-    ],
-  }),
-  Qn(27, "Soal TKA – Gabungan Sifat", {
+  Qn(16, "Soal TKA – Gabungan Sifat", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{(a^2)^5 \\times a^3}{a^{10}} = a^\\square" },
@@ -231,7 +138,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{(2m^2)^3 \\times m^4}{4m^5} = \\ldots" },
     ],
   }),
-  Qn(28, "Soal ANBK – Sifat Pangkat Basis Sama Akar", {
+  Qn(17, "Soal ANBK – Sifat Pangkat Basis Sama Akar", {
     type: "mixed",
     content: "Sederhanakan dengan sifat-sifat eksponen:",
     parts: [
@@ -240,16 +147,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{(p^2 q^3)^4}{p^5 q^8} = \\ldots" },
     ],
   }),
-  Qn(29, "Soal UN – Eksponen dan Persamaan Linear", {
-    type: "mixed",
-    content: "Jika 2^(2x+1) = 2^7, tentukan x:",
-    parts: [
-      { label: "a.", math: "2x + 1 = 7 \\Rightarrow x = \\ldots" },
-      { label: "b.", math: "3^{x+2} = 3^8 \\Rightarrow x = \\ldots" },
-      { label: "c.", math: "5^{2x-1} = 5^9 \\Rightarrow x = \\ldots" },
-    ],
-  }),
-  Qn(30, "Soal TKA – Sifat Eksponen Tingkat Lanjut", {
+  Qn(18, "Soal TKA – Sifat Eksponen Tingkat Lanjut", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{(2^3 \\cdot 3^2)^2}{6^4} = \\ldots" },
@@ -257,7 +155,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\frac{x^3}{y^2}\\right)^4 \\cdot \\frac{y^{10}}{x^8} = \\ldots" },
     ],
   }),
-  Qn(31, "Soal UN/ANBK/TKA – Gabungan Semua Sifat", {
+  Qn(19, "Soal UN/ANBK/TKA – Gabungan Semua Sifat", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{(2^3)^4 \\times 2^2}{2^{10} \\times 2^2} = \\ldots" },
@@ -285,7 +183,7 @@ const SifatSifatPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 31 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 19 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
