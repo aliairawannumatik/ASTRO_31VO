@@ -17,11 +17,13 @@ c. Berdasarkan hasil di atas, apakah pengurangan pada bilangan bulat bersifat ko
   },
   {
     number: 2,
-    content: `Posisi sebuah drone pengintai (A), kapal selam (B), dan terumbu karang (C) berturut-turut adalah 85 m (di atas permukaan laut), -45 m, dan -15 m dari permukaan air laut. Berapa meter selisih ketinggian posisi-posisi berikut?
+    content: `Posisi sebuah drone pengintai (A), kapal selam (B), dan terumbu karang (C) berturut-turut adalah 85 m (di atas permukaan laut), -15 m, dan -45 m dari permukaan air laut. Berapa meter selisih ketinggian posisi-posisi berikut?
 a. A dengan B
 b. C dengan B
 c. A dengan C`,
-    type: "essay"
+    type: "essay",
+    image: "/images/drone-kapal-selam.png",
+    imageCaption: "Sumber gambar: Bing Image Creator (https://www.bing.com/images/create)"
   },
   {
     number: 3,
@@ -76,6 +78,18 @@ const PenguranganPage = () => {
                   {q.number}
                 </span>
                 <div className="flex-1">
+                  {'image' in q && q.image && (
+                    <div className="mb-3">
+                      <img
+                        src={q.image}
+                        alt="Ilustrasi soal"
+                        className="rounded-xl w-full max-w-xs mx-auto block object-cover"
+                      />
+                      {'imageCaption' in q && q.imageCaption && (
+                        <p className="text-center text-white/40 text-xs mt-1 font-body italic">{q.imageCaption}</p>
+                      )}
+                    </div>
+                  )}
                   <p className="font-body text-sm text-white whitespace-pre-line">{q.content}</p>
                 </div>
               </div>
