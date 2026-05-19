@@ -588,10 +588,10 @@ const PerbandinganSenilaiPage = () => {
                         <tbody className="text-white/80">
                           <tr className="bg-slate-800/40">
                             <td className="px-4 py-2 border border-green-500/30 font-bold text-white">5 buah</td>
-                            <td className="px-4 py-2 border border-green-500/30 font-bold text-white">8 buah</td>
+                            <td className="px-4 py-2 border border-green-500/30 font-bold text-white">Rp20.000</td>
                           </tr>
                           <tr>
-                            <td className="px-4 py-2 border border-green-500/30 font-bold text-white">Rp20.000</td>
+                            <td className="px-4 py-2 border border-green-500/30 font-bold text-white">8 buah</td>
                             <td className="px-4 py-2 border border-green-500/30 font-bold text-yellow-300"><InlineMath math="x" /></td>
                           </tr>
                         </tbody>
@@ -669,10 +669,10 @@ const PerbandinganSenilaiPage = () => {
                         <tbody className="text-white/80">
                           <tr className="bg-slate-800/40">
                             <td className="px-4 py-2 border border-red-500/30 font-bold text-white">20 sapi</td>
-                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">30 sapi</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">18 hari</td>
                           </tr>
                           <tr>
-                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">18 hari</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">30 sapi</td>
                             <td className="px-4 py-2 border border-red-500/30 font-bold text-yellow-300"><InlineMath math="x" /></td>
                           </tr>
                         </tbody>
@@ -687,19 +687,19 @@ const PerbandinganSenilaiPage = () => {
                           <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
                             <span className="font-body font-bold text-white text-sm">20</span>
                           </div>
-                          <div className="flex-1 border-t-2 border-dashed border-yellow-400/60 relative flex items-center justify-center">
+                          <div className="flex-1 border-t-4 border-dashed border-yellow-400 relative flex items-center justify-center">
                             <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
                           </div>
                           <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
-                            <span className="font-body font-bold text-white text-sm">30</span>
+                            <span className="font-body font-bold text-white text-sm">18</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
-                            <span className="font-body font-bold text-white text-sm">18</span>
+                            <span className="font-body font-bold text-white text-sm">30</span>
                           </div>
-                          <div className="flex-1 border-t-2 border-dashed border-orange-400/60 relative flex items-center justify-center">
-                            <span className="absolute font-body text-[9px] text-orange-300 -top-3">sejajar</span>
+                          <div className="flex-1 border-t-4 border-dashed border-yellow-400 relative flex items-center justify-center">
+                            <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
                           </div>
                           <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
                             <span className="font-body font-bold text-yellow-300 text-sm">x</span>
@@ -751,10 +751,10 @@ const PerbandinganSenilaiPage = () => {
                         <tbody className="text-white/80">
                           <tr className="bg-slate-800/40">
                             <td className="px-4 py-2 border border-red-500/30 font-bold text-white">20 pekerja</td>
-                            <td className="px-4 py-2 border border-red-500/30 font-bold text-yellow-300"><InlineMath math="x" /> pekerja</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">18 hari</td>
                           </tr>
                           <tr>
-                            <td className="px-4 py-2 border border-red-500/30 font-bold text-white">18 hari</td>
+                            <td className="px-4 py-2 border border-red-500/30 font-bold text-yellow-300"><InlineMath math="x" /> pekerja</td>
                             <td className="px-4 py-2 border border-red-500/30 font-bold text-white">15 hari</td>
                           </tr>
                         </tbody>
@@ -769,19 +769,19 @@ const PerbandinganSenilaiPage = () => {
                           <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
                             <span className="font-body font-bold text-white text-sm">20</span>
                           </div>
-                          <div className="flex-1 border-t-2 border-dashed border-yellow-400/60 relative flex items-center justify-center">
+                          <div className="flex-1 border-t-4 border-dashed border-yellow-400 relative flex items-center justify-center">
                             <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
                           </div>
                           <div className="bg-green-600/40 border-2 border-green-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-green-900/30">
-                            <span className="font-body font-bold text-yellow-300 text-sm">x</span>
+                            <span className="font-body font-bold text-white text-sm">18</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
-                            <span className="font-body font-bold text-white text-sm">18</span>
+                            <span className="font-body font-bold text-yellow-300 text-sm">x</span>
                           </div>
-                          <div className="flex-1 border-t-2 border-dashed border-orange-400/60 relative flex items-center justify-center">
-                            <span className="absolute font-body text-[9px] text-orange-300 -top-3">sejajar</span>
+                          <div className="flex-1 border-t-4 border-dashed border-yellow-400 relative flex items-center justify-center">
+                            <span className="absolute font-body text-[9px] text-yellow-300 -top-3">sejajar</span>
                           </div>
                           <div className="bg-blue-600/40 border-2 border-blue-400/70 rounded-lg px-4 py-2 text-center flex-1 shadow-lg shadow-blue-900/30">
                             <span className="font-body font-bold text-white text-sm">15</span>
