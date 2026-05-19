@@ -401,13 +401,87 @@ const PerbandinganSenilaiPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pada perbandingan berbalik nilai, <strong className="text-primary">hasil kali kedua besaran selalu konstan</strong>. Artinya, saat satu naik dua kali lipat, yang lain turun menjadi setengahnya.
                 </p>
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-red-300 mb-3">Rumus Perbandingan Berbalik Nilai:</p>
-                  <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="a_1 \times b_1 = a_2 \times b_2" />
-                    <BlockMath math="\Leftrightarrow \quad \frac{a_1}{a_2} = \frac{b_2}{b_1}" />
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 space-y-4">
+                  <p className="font-body text-sm font-semibold text-red-300">Rumus Perbandingan Berbalik Nilai:</p>
+
+                  {/* Tabel V1 V2 */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full font-body text-sm border-collapse text-center">
+                      <thead>
+                        <tr className="bg-red-600/30">
+                          <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold">Variabel</th>
+                          <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold">
+                            <InlineMath math="V_1" />
+                          </th>
+                          <th className="px-4 py-2 text-red-200 border border-red-500/40 font-bold">
+                            <InlineMath math="V_2" />
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-white/80">
+                        <tr className="bg-slate-800/40">
+                          <td className="px-4 py-2 border border-red-500/30 text-red-300 font-semibold">Besaran A</td>
+                          <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
+                            <InlineMath math="a_1" />
+                          </td>
+                          <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
+                            <InlineMath math="a_2" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 border border-red-500/30 text-red-300 font-semibold">Besaran B</td>
+                          <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
+                            <InlineMath math="b_1" />
+                          </td>
+                          <td className="px-4 py-2 border border-red-500/30 font-bold text-white">
+                            <InlineMath math="b_2" />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <p className="font-body text-xs text-white/60 mt-2">Perhatikan: posisi <InlineMath math="b_1" /> dan <InlineMath math="b_2" /> <strong>dibalik</strong> pada persamaan rasio!</p>
+
+                  {/* Kali sejajar visual */}
+                  <div className="bg-slate-900/60 rounded-lg p-4 flex flex-col items-center gap-3">
+                    <p className="font-body text-xs text-white/50">Kali sejajar (parallel multiplication):</p>
+
+                    <div className="flex items-center gap-3 w-full justify-center">
+                      {/* Kolom V1 */}
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="font-body text-[10px] text-white/40 font-bold tracking-widest">V₁</span>
+                        <div className="bg-red-600/30 border border-red-500/50 rounded px-4 py-2 text-center">
+                          <InlineMath math="a_1" />
+                        </div>
+                        <span className="text-yellow-400 font-bold text-lg leading-none">×</span>
+                        <div className="bg-orange-600/30 border border-orange-500/50 rounded px-4 py-2 text-center">
+                          <InlineMath math="b_1" />
+                        </div>
+                      </div>
+
+                      {/* Tanda = */}
+                      <div className="flex flex-col items-center justify-center h-full mt-4">
+                        <span className="font-body text-2xl font-bold text-white/40">=</span>
+                      </div>
+
+                      {/* Kolom V2 */}
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="font-body text-[10px] text-white/40 font-bold tracking-widest">V₂</span>
+                        <div className="bg-red-600/30 border border-red-500/50 rounded px-4 py-2 text-center">
+                          <InlineMath math="a_2" />
+                        </div>
+                        <span className="text-yellow-400 font-bold text-lg leading-none">×</span>
+                        <div className="bg-orange-600/30 border border-orange-500/50 rounded px-4 py-2 text-center">
+                          <InlineMath math="b_2" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="w-full border-t border-white/10 pt-3 text-center">
+                      <BlockMath math="a_1 \times b_1 = a_2 \times b_2" />
+                    </div>
+                  </div>
+
+                  <p className="font-body text-xs text-white/60">Hasil kali besaran A dan B pada setiap kolom selalu <strong>sama (konstan)</strong>.</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full font-body text-sm border-collapse">
