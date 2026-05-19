@@ -2,12 +2,146 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, AlertTriangle } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, AlertTriangle, TrendingUp, TrendingDown } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import imgSenilai from "@assets/image_1775451452551.png";
 import imgBangunan from "@assets/image_1775451578472.png";
+
+const SenilaiAnimasi = () => {
+  const [v1, setV1] = useState(4);
+  const v2 = v1 * 5;
+  const maxV2 = 50;
+  const pct1 = (v1 / 10) * 100;
+  const pct2 = (v2 / maxV2) * 100;
+
+  return (
+    <div className="mt-4 bg-black/30 border border-green-500/20 rounded-xl p-4 space-y-4">
+      <p className="font-body text-xs font-bold text-green-300 text-center tracking-wide uppercase">
+        🎮 Animasi Interaktif — Perbandingan Senilai
+      </p>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-body text-xs text-white/60">⛽ Bensin (liter)</span>
+          <div className="relative w-14 h-32 bg-slate-800/60 rounded-lg border border-green-500/20 flex flex-col-reverse overflow-hidden">
+            <div
+              className="w-full rounded-b-lg bg-gradient-to-t from-green-600 to-green-400 transition-all duration-500 ease-in-out"
+              style={{ height: `${pct1}%` }}
+            />
+          </div>
+          <span className="font-body text-lg font-bold text-green-300 tabular-nums">{v1} L</span>
+          <TrendingUp className="w-4 h-4 text-green-400" />
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-body text-xs text-white/60">🚗 Jarak (km)</span>
+          <div className="relative w-14 h-32 bg-slate-800/60 rounded-lg border border-green-500/20 flex flex-col-reverse overflow-hidden">
+            <div
+              className="w-full rounded-b-lg bg-gradient-to-t from-emerald-600 to-emerald-300 transition-all duration-500 ease-in-out"
+              style={{ height: `${pct2}%` }}
+            />
+          </div>
+          <span className="font-body text-lg font-bold text-emerald-300 tabular-nums">{v2} km</span>
+          <TrendingUp className="w-4 h-4 text-emerald-400" />
+        </div>
+      </div>
+
+      <div className="flex items-center gap-1 justify-center">
+        <span className="font-body text-[10px] text-green-400 font-bold">↑↑</span>
+        <span className="font-body text-[10px] text-white/50">keduanya bergerak searah</span>
+      </div>
+
+      <div className="space-y-1">
+        <div className="flex justify-between font-body text-[10px] text-white/40">
+          <span>1 L</span>
+          <span>Geser untuk mengubah bensin</span>
+          <span>10 L</span>
+        </div>
+        <input
+          type="range" min={1} max={10} value={v1}
+          onChange={(e) => { playPopSound(); setV1(Number(e.target.value)); }}
+          className="w-full h-2 rounded-full appearance-none cursor-pointer accent-green-400"
+        />
+      </div>
+
+      <div className="bg-green-500/10 rounded-lg p-2 text-center">
+        <span className="font-body text-xs text-white/60">Rasio tetap: </span>
+        <span className="font-body text-xs font-bold text-green-300">
+          {v1} : {v2} = 1 : 5 ✓
+        </span>
+      </div>
+    </div>
+  );
+};
+
+const BerbalikAnimasi = () => {
+  const [v1, setV1] = useState(4);
+  const produk = 60;
+  const v2 = Math.round(produk / v1);
+  const pct1 = (v1 / 10) * 100;
+  const pct2 = (v2 / produk) * 100;
+
+  return (
+    <div className="mt-4 bg-black/30 border border-red-500/20 rounded-xl p-4 space-y-4">
+      <p className="font-body text-xs font-bold text-red-300 text-center tracking-wide uppercase">
+        🎮 Animasi Interaktif — Perbandingan Berbalik Nilai
+      </p>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-body text-xs text-white/60">👷 Pekerja</span>
+          <div className="relative w-14 h-32 bg-slate-800/60 rounded-lg border border-red-500/20 flex flex-col-reverse overflow-hidden">
+            <div
+              className="w-full rounded-b-lg bg-gradient-to-t from-red-600 to-red-400 transition-all duration-500 ease-in-out"
+              style={{ height: `${pct1}%` }}
+            />
+          </div>
+          <span className="font-body text-lg font-bold text-red-300 tabular-nums">{v1} org</span>
+          <TrendingUp className="w-4 h-4 text-red-400" />
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-body text-xs text-white/60">📅 Hari selesai</span>
+          <div className="relative w-14 h-32 bg-slate-800/60 rounded-lg border border-orange-500/20 flex flex-col-reverse overflow-hidden">
+            <div
+              className="w-full rounded-b-lg bg-gradient-to-t from-orange-600 to-yellow-400 transition-all duration-500 ease-in-out"
+              style={{ height: `${pct2}%` }}
+            />
+          </div>
+          <span className="font-body text-lg font-bold text-orange-300 tabular-nums">{v2} hari</span>
+          <TrendingDown className="w-4 h-4 text-orange-400" />
+        </div>
+      </div>
+
+      <div className="flex items-center gap-1 justify-center">
+        <span className="font-body text-[10px] text-red-400 font-bold">↑↓</span>
+        <span className="font-body text-[10px] text-white/50">keduanya bergerak berlawanan arah</span>
+      </div>
+
+      <div className="space-y-1">
+        <div className="flex justify-between font-body text-[10px] text-white/40">
+          <span>1 org</span>
+          <span>Geser untuk mengubah pekerja</span>
+          <span>10 org</span>
+        </div>
+        <input
+          type="range" min={1} max={10} value={v1}
+          onChange={(e) => { playPopSound(); setV1(Number(e.target.value)); }}
+          className="w-full h-2 rounded-full appearance-none cursor-pointer accent-red-400"
+        />
+      </div>
+
+      <div className="bg-red-500/10 rounded-lg p-2 text-center">
+        <span className="font-body text-xs text-white/60">Hasil kali tetap: </span>
+        <span className="font-body text-xs font-bold text-red-300">
+          {v1} × {v2} ≈ {produk} ✓
+        </span>
+      </div>
+    </div>
+  );
+};
 
 const PerbandinganSenilaiPage = () => {
   const navigate = useNavigate();
@@ -53,11 +187,20 @@ const PerbandinganSenilaiPage = () => {
                   Bayangkan dua skenario berbeda. Pertama, semakin banyak bensin yang kamu isi, semakin jauh kamu bisa berkendara — keduanya naik bersama. Kedua, semakin banyak pekerja yang menggarap sawah, semakin cepat sawah itu selesai — satu naik, yang lain turun.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+                  {/* SENILAI CARD */}
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                     <p className="font-body text-sm font-bold text-green-300 mb-2">↑↑ Senilai (Searah)</p>
-                    <p className="font-body text-sm text-white/70">Satu naik → yang lain ikut <strong>naik</strong>. Satu turun → yang lain ikut <strong>turun</strong>.</p>
-                    <p className="font-body text-xs text-green-200 mt-2">Contoh: Bensin ↑ → Jarak tempuh ↑</p>
-                    <div className="rounded-lg overflow-hidden mt-3 border border-green-500/20">
+
+                    {/* DEFINISI SENILAI */}
+                    <div className="bg-green-500/10 border border-green-400/30 rounded-lg px-3 py-2 mb-3">
+                      <p className="font-body text-xs font-semibold text-green-200 leading-relaxed">
+                        <span className="text-green-400 font-bold">Perbandingan senilai</span> adalah hubungan antara dua variabel di mana jika variabel pertama bertambah, variabel kedua juga akan ikut bertambah dan jika variabel pertama berkurang, variabel kedua juga ikut berkurang secara proporsional.
+                      </p>
+                    </div>
+
+                    <p className="font-body text-xs text-green-200 mb-3">Contoh: Bensin ↑ → Jarak tempuh ↑</p>
+                    <div className="rounded-lg overflow-hidden border border-green-500/20">
                       <img
                         src={imgSenilai}
                         alt="Ilustrasi bensin dan jarak tempuh"
@@ -74,12 +217,22 @@ const PerbandinganSenilaiPage = () => {
                         </a>
                       </div>
                     </div>
+                    <SenilaiAnimasi />
                   </div>
+
+                  {/* BERBALIK NILAI CARD */}
                   <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
                     <p className="font-body text-sm font-bold text-red-300 mb-2">↑↓ Berbalik Nilai (Berlawanan)</p>
-                    <p className="font-body text-sm text-white/70">Satu naik → yang lain justru <strong>turun</strong>. Keduanya tidak pernah searah.</p>
-                    <p className="font-body text-xs text-red-200 mt-2">Contoh: Pekerja ↑ → Waktu selesai ↓</p>
-                    <div className="rounded-lg overflow-hidden mt-3 border border-red-500/20">
+
+                    {/* DEFINISI BERBALIK NILAI */}
+                    <div className="bg-red-500/10 border border-red-400/30 rounded-lg px-3 py-2 mb-3">
+                      <p className="font-body text-xs font-semibold text-red-200 leading-relaxed">
+                        <span className="text-red-400 font-bold">Perbandingan berbalik nilai</span> adalah hubungan antara dua variabel di mana jika variabel pertama bertambah, variabel kedua justru berkurang, dan sebaliknya — hasil kali keduanya selalu tetap (konstan).
+                      </p>
+                    </div>
+
+                    <p className="font-body text-xs text-red-200 mb-3">Contoh: Pekerja ↑ → Waktu selesai ↓</p>
+                    <div className="rounded-lg overflow-hidden border border-red-500/20">
                       <img
                         src={imgBangunan}
                         alt="Ilustrasi pekerja bangunan"
@@ -96,7 +249,9 @@ const PerbandinganSenilaiPage = () => {
                         </a>
                       </div>
                     </div>
+                    <BerbalikAnimasi />
                   </div>
+
                 </div>
               </div>
             )}
