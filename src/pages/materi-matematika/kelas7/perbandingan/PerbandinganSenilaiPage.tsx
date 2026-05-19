@@ -443,45 +443,44 @@ const PerbandinganSenilaiPage = () => {
 
                   {/* Kali sejajar visual */}
                   <div className="bg-slate-900/60 rounded-lg p-4 flex flex-col items-center gap-3">
-                    <p className="font-body text-xs text-white/50">Kali sejajar (parallel multiplication):</p>
+                    <p className="font-body text-xs text-white/50">Kali sejajar (tiap baris dikalikan sejajar):</p>
 
-                    <div className="flex items-center gap-3 w-full justify-center">
-                      {/* Kolom V1 */}
-                      <div className="flex flex-col items-center gap-2">
-                        <span className="font-body text-[10px] text-white/40 font-bold tracking-widest">V₁</span>
-                        <div className="bg-red-600/30 border border-red-500/50 rounded px-4 py-2 text-center">
+                    <div className="flex flex-col gap-3 w-full max-w-xs">
+                      {/* Baris A */}
+                      <div className="flex items-center gap-2">
+                        <span className="font-body text-xs text-red-300 font-bold w-5">A</span>
+                        <div className="bg-red-600/30 border border-red-500/50 rounded px-4 py-2 text-center flex-1">
                           <InlineMath math="a_1" />
                         </div>
-                        <span className="text-yellow-400 font-bold text-lg leading-none">×</span>
-                        <div className="bg-orange-600/30 border border-orange-500/50 rounded px-4 py-2 text-center">
-                          <InlineMath math="b_1" />
+                        <div className="w-8 border-t-2 border-dashed border-red-400/50 relative flex items-center justify-center">
+                          <span className="absolute font-body text-[9px] text-red-300 -top-3">sejajar</span>
                         </div>
-                      </div>
-
-                      {/* Tanda = */}
-                      <div className="flex flex-col items-center justify-center h-full mt-4">
-                        <span className="font-body text-2xl font-bold text-white/40">=</span>
-                      </div>
-
-                      {/* Kolom V2 */}
-                      <div className="flex flex-col items-center gap-2">
-                        <span className="font-body text-[10px] text-white/40 font-bold tracking-widest">V₂</span>
-                        <div className="bg-red-600/30 border border-red-500/50 rounded px-4 py-2 text-center">
+                        <div className="bg-red-600/30 border border-red-500/50 rounded px-4 py-2 text-center flex-1">
                           <InlineMath math="a_2" />
                         </div>
-                        <span className="text-yellow-400 font-bold text-lg leading-none">×</span>
-                        <div className="bg-orange-600/30 border border-orange-500/50 rounded px-4 py-2 text-center">
+                      </div>
+
+                      {/* Baris B */}
+                      <div className="flex items-center gap-2">
+                        <span className="font-body text-xs text-orange-300 font-bold w-5">B</span>
+                        <div className="bg-orange-600/30 border border-orange-500/50 rounded px-4 py-2 text-center flex-1">
+                          <InlineMath math="b_1" />
+                        </div>
+                        <div className="w-8 border-t-2 border-dashed border-orange-400/50 relative flex items-center justify-center">
+                          <span className="absolute font-body text-[9px] text-orange-300 -top-3">sejajar</span>
+                        </div>
+                        <div className="bg-orange-600/30 border border-orange-500/50 rounded px-4 py-2 text-center flex-1">
                           <InlineMath math="b_2" />
                         </div>
                       </div>
                     </div>
 
                     <div className="w-full border-t border-white/10 pt-3 text-center">
-                      <BlockMath math="a_1 \times b_1 = a_2 \times b_2" />
+                      <BlockMath math="a_1 \times a_2 = b_1 \times b_2" />
                     </div>
                   </div>
 
-                  <p className="font-body text-xs text-white/60">Hasil kali besaran A dan B pada setiap kolom selalu <strong>sama (konstan)</strong>.</p>
+                  <p className="font-body text-xs text-white/60">Besaran A dikalikan sejajar, Besaran B dikalikan sejajar — hasilnya selalu <strong>sama (konstan)</strong>.</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full font-body text-sm border-collapse">
