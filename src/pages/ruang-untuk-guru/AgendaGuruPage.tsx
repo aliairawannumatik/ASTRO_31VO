@@ -150,13 +150,6 @@ const AgendaGuruPage = () => {
             Tambah Baris
           </button>
           <button
-            onClick={handlePrint}
-            className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/40 bg-cyan-500/15 px-4 py-2 text-sm font-semibold text-cyan-100 hover:bg-cyan-500/25 transition-colors"
-          >
-            <Printer className="w-4 h-4" />
-            Cetak / Simpan PDF
-          </button>
-          <button
             onClick={resetAgenda}
             className="inline-flex items-center gap-2 rounded-xl border border-rose-400/40 bg-rose-500/15 px-4 py-2 text-sm font-semibold text-rose-100 hover:bg-rose-500/25 transition-colors"
           >

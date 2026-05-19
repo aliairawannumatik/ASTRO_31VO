@@ -234,22 +234,6 @@ const CapaianPembelajaranPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             {faseInfo.pengantar}
           </p>
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <button
-              onClick={handlePrintWord}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
-            >
-              <FileText className="w-4 h-4" />
-              Cetak Word
-            </button>
-            <button
-              onClick={handlePrintPDF}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-500 border border-red-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
-            >
-              <FileDown className="w-4 h-4" />
-              Cetak PDF
-            </button>
-          </div>
         </div>
 
         <section className="grid md:grid-cols-3 gap-4 mb-8">

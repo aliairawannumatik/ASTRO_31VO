@@ -443,24 +443,6 @@ const AnalisisAlokasiWaktuPage = () => {
           </p>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-center gap-3 mb-6 flex-wrap animate-slide-up">
-          <button onClick={handleSave}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${savedOk ? "bg-emerald-600 border-emerald-400/40" : "bg-emerald-700/80 hover:bg-emerald-600 border-emerald-400/40"}`}>
-            <Save className="w-4 h-4" />
-            {savedOk ? "Tersimpan!" : "Simpan"}
-          </button>
-          <button onClick={handleWord}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
-            <FileText className="w-4 h-4" />
-            Cetak Word
-          </button>
-          <button onClick={handlePDF}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-500 border border-red-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
-            <FileDown className="w-4 h-4" />
-            Cetak PDF
-          </button>
-        </div>
 
         {/* Kelas + Semester Selectors */}
         <div className="flex flex-wrap justify-center gap-2 mb-3 animate-slide-up">

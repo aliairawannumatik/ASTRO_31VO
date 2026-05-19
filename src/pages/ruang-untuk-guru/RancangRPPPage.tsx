@@ -645,22 +645,6 @@ const RancangRPPPage = () => {
           </p>
         </div>
 
-        {/* Action bar */}
-        <div className="flex justify-end gap-2 mb-5 animate-slide-up">
-          <button onClick={handleSave}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-all hover:scale-[1.03] ${saved ? "bg-emerald-600/80 border-emerald-400/40" : "bg-teal-600/80 hover:bg-teal-500 border-teal-400/40"}`}>
-            {saved ? <CheckCircle className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-            {saved ? "Tersimpan!" : "Simpan"}
-          </button>
-          <button onClick={handleWord}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-xs font-bold transition-all hover:scale-[1.03]">
-            <FileText className="w-4 h-4" /> Cetak Word
-          </button>
-          <button onClick={handlePDF}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600/80 hover:bg-rose-500 border border-rose-400/40 text-white text-xs font-bold transition-all hover:scale-[1.03]">
-            <Printer className="w-4 h-4" /> Cetak PDF
-          </button>
-        </div>
 
         {/* ── SECTION A: IDENTITAS ── */}
         <Section title="A · Identitas RPP" icon={BookOpen} accent="teal">
@@ -999,30 +983,6 @@ const RancangRPPPage = () => {
           </div>
         )}
 
-        {/* ── BOTTOM ACTIONS ── */}
-        <div className="bg-card/50 border border-white/10 rounded-2xl p-5 mb-6 animate-slide-up">
-          <p className="text-white/60 text-sm font-body text-center mb-4">RPP siap? Simpan dan cetak dalam format yang kamu butuhkan.</p>
-          <div className="flex justify-center gap-3 flex-wrap">
-            <button onClick={handleSave}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border font-bold text-sm transition-all hover:scale-[1.03] ${saved ? "bg-emerald-600/80 border-emerald-400/40" : "bg-teal-600/80 hover:bg-teal-500 border-teal-400/40"}`}>
-              {saved ? <CheckCircle className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-              {saved ? "Tersimpan!" : "Simpan RPP"}
-            </button>
-            <button onClick={handleWord}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white font-bold text-sm transition-all hover:scale-[1.03]">
-              <FileText className="w-4 h-4" /> Unduh Word (.doc)
-            </button>
-            <button onClick={handlePDF}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-600/80 hover:bg-rose-500 border border-rose-400/40 text-white font-bold text-sm transition-all hover:scale-[1.03]">
-              <Printer className="w-4 h-4" /> Cetak / Unduh PDF
-            </button>
-          </div>
-          {!isReady && (
-            <p className="text-amber-400/70 text-xs text-center mt-3">
-              ⚠ Isi minimal: Materi Pokok, Model Pembelajaran, dan pilih minimal 1 Tujuan Pembelajaran.
-            </p>
-          )}
-        </div>
 
         <div className="text-center">
           <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/rpp"); }}

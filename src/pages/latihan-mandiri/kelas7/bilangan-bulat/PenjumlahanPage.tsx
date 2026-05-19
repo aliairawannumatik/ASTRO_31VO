@@ -35,8 +35,7 @@ a. 18°C dan 14°C
 b. 5°C dan 0°C
 c. 0°C dan -7°C
 d. -3°C dan -1°C
-e. -8°C dan 2°C
-f. -4°C dan -9°C`,
+e. -8°C dan 2°C`,
     type: "essay"
   },
   {
@@ -47,8 +46,7 @@ a. 52 ... -31
 b. 74 ... -92
 c. -41 ... 55
 d. -95 ... 112
-e. -18 ... -14
-f. -35 ... -60`,
+e. -18 ... -14`,
     type: "essay"
   },
   {
@@ -79,12 +77,9 @@ f. -7 + (-2)`,
     content: `Hitunglah hasil penjumlahan bilangan bulat berikut tanpa menggunakan alat bantu (kalkulator)!
 a. 35 + (-15)
 b. 12 + (-21)
-c. 25 + (-36)
-d. -9 + (-15)
-e. -22 + (-8)
-f. 56 + (-24)
-g. 73 + (-85)
-h. -58 + (-64)`,
+c. -9 + (-15)
+d. 56 + (-24)
+e. -58 + (-64)`,
     type: "essay"
   },
 ];

@@ -9,33 +9,28 @@ import { InlineMath } from 'react-katex';
 const questions = [
   { number: 1, math: "25 + 48 : (-8) = ...", type: "math" },
   { number: 2, math: "64 - 26 \\times (-4) = ...", type: "math" },
-  { number: 3, math: "-35 - 9 \\times (-6) = ...", type: "math" },
-  { number: 4, math: "12 + 120 : 10 \\times (-5) = ...", type: "math" },
-  { number: 5, math: "21 - 24 \\times (-6) : 12 = ...", type: "math" },
-  { number: 6, math: "45 + 144 : 16 \\times (-7) = ...", type: "math" },
-  { number: 7, math: "80 : 5 + 9 \\times (-11) = ...", type: "math" },
-  { number: 8, math: "14 + 90 : (-18) - 8 \\times 6 = ...", type: "math" },
-  { number: 9, math: "30 - 7 \\times 9 + 156 : (-12) = ...", type: "math" },
-  { number: 10, math: "126 : 9 \\times (-13) - 6 \\times 17 = ...", type: "math" },
-  { number: 11, math: "-25 \\times (8 + (-9)) + (2 - 7) = ...", type: "math" },
-  { number: 12, math: "(-20) + 8 \\times 5 - 18 : (-3) = ...", type: "math" },
+  { number: 3, math: "12 + 120 : 10 \\times (-5) = ...", type: "math" },
+  { number: 4, math: "21 - 24 \\times (-6) : 12 = ...", type: "math" },
+  { number: 5, math: "80 : 5 + 9 \\times (-11) = ...", type: "math" },
+  { number: 6, math: "126 : 9 \\times (-13) - 6 \\times 17 = ...", type: "math" },
+  { number: 7, math: "(-20) + 8 \\times 5 - 18 : (-3) = ...", type: "math" },
   {
-    number: 13,
+    number: 8,
     content: `Dalam kompetensi Bahasa Inggris yang terdiri dari 50 soal, peserta akan mendapatkan skor 4 untuk setiap jawaban benar, skor -2 untuk setiap jawaban salah, dan skor -1 untuk soal yang tidak dijawab. Jika Budi menjawab 44 soal dan yang benar 36 soal, maka skor yang diperoleh Budi adalah ...`,
     type: "essay"
   },
   {
-    number: 14,
+    number: 9,
     content: `Dalam suatu pertandingan setiap kemenangan mendapat nilai 3, seri bernilai 1 dan kalah bernilai -2. Jika tim SMPN 28 BDG bermain sebanyak 20 kali dengan meraih 10 kemenangan dan 4 seri, maka nilai yang diperoleh SMPN 28 BDG adalah ...`,
     type: "essay"
   },
   {
-    number: 15,
+    number: 10,
     content: `Bus Trans Jakarta berisi penumpang berangkat dari terminal ke pasar, di halte pertama turun 4 orang, di halte kedua naik 2 orang sampai di pasar ternyata ada 15 orang. berapa banyak penumpang yang naik pada terminal?`,
     type: "essay"
   },
   {
-    number: 16,
+    number: 11,
     content: `Perhatikan suhu udara di beberapa negara berikut!
 Wina -7°C
 Soul -1°C
@@ -49,22 +44,22 @@ Selisih suhu udara yang benar di bawah ini adalah.....
     type: "essay"
   },
   {
-    number: 17,
+    number: 12,
     content: `Pa Bangun menjual gorengan dengan harga Rp. 5000 per 4 gorengan. Bagus membeli 32 gorengan. Jika Ia membayar dengan uang lima puluh ribu, uang kembali yang diterima Bagus adalah sebesar........`,
     type: "essay"
   },
   {
-    number: 18,
+    number: 13,
     content: `Suhu di kota Moskow 11°C. Pada saat turun salju, suhunya turun 4°C setiap 15 menit. Suhu di kota tersebut setelah turun salju 1 jam adalah ..`,
     type: "essay"
   },
   {
-    number: 19,
+    number: 14,
     content: `Operasi "*" berarti kalikan bilangan pertama dengan dua kali bilangan ke dua, kemudian tambahkan hasilnya dengan bilangan ke dua. Hasil dari 5 * 3 adalah .......`,
     type: "essay"
   },
   {
-    number: 20,
+    number: 15,
     content: `Operasi " # " artinya kalikan bilangan pertama dengan bilangan kedua, kemudian kurangkan hasilnya dengan dua kali bilangan kedua. Hasil dari 5 # - 4 adalah......`,
     type: "essay"
   },

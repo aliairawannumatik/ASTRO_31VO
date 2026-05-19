@@ -35,7 +35,7 @@ c. Berapakah FPB dari 40, 60, dan 100?`,
   },
   {
     number: 5,
-    content: `Tentukan KPK dari pasangan bilangan berikut dengan cara memfaktorkan (pohon faktor)!
+    content: `Tentukan KPK dari pasangan bilangan berikut!
 a. 18 dan 45
 b. 20 dan 50
 c. 28, 42, dan 70`,
@@ -43,7 +43,7 @@ c. 28, 42, dan 70`,
   },
   {
     number: 6,
-    content: `Tentukan FPB dari pasangan bilangan berikut dengan cara memfaktorkan (pohon faktor)!
+    content: `Tentukan FPB dari pasangan bilangan berikut!
 a. 48 dan 72
 b. 90 dan 120
 c. 36, 54, dan 90`,
@@ -56,21 +56,16 @@ c. 36, 54, dan 90`,
   },
   {
     number: 8,
-    content: `Roni berenang setiap 4 hari sekali. Dimas dan Edo berenang masing-masing setiap 8 hari dan 10 hari sekali. Jika pada tanggal 15 Januari mereka berenang bersama-sama, pada tanggal berapa mereka akan berenang bersama-sama lagi untuk kedua kalinya?`,
-    type: "essay"
-  },
-  {
-    number: 9,
     content: `Petugas keamanan A berjaga setiap 3 hari sekali, petugas B setiap 4 hari sekali, dan petugas C setiap 5 hari sekali. Jika tanggal 1 Mei mereka berjaga bersama, kapan mereka akan berjaga bersama lagi berikutnya?`,
     type: "essay"
   },
   {
-    number: 10,
+    number: 9,
     content: `Tersedia 72 butir telur asin, 54 butir telur ayam, dan 90 butir telur bebek yang akan dimasukkan ke dalam beberapa wadah. Jika setiap wadah berisi jenis telur dengan jumlah yang sama rata, berapa wadah sebanyak-banyaknya yang dibutuhkan?`,
     type: "essay"
   },
   {
-    number: 11,
+    number: 10,
     content: `Panitia bakti sosial menyediakan 120 buku tulis dan 80 pensil. Jika buku dan pensil tersebut akan dibagikan secara merata kepada anak-anak kurang mampu, berapa orang terbanyak yang dapat menerima paket bantuan tersebut?`,
     type: "essay"
   },

@@ -280,22 +280,6 @@ const PenilaianSiswaPage = () => {
             </p>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex justify-end gap-2 mb-5 animate-slide-up">
-            <button onClick={handleSave}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-all duration-200 hover:scale-[1.03] ${saved ? "bg-emerald-600/80 border-emerald-400/40 text-white" : "bg-violet-600/80 hover:bg-violet-500 border-violet-400/40 text-white"}`}>
-              {saved ? <CheckCircle className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-              {saved ? "Tersimpan!" : "Simpan"}
-            </button>
-            <button onClick={handleDownloadWord}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/40 text-white text-xs font-bold transition-all duration-200 hover:scale-[1.03]">
-              <FileText className="w-4 h-4" /> Cetak Word
-            </button>
-            <button onClick={handlePrintPDF}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600/80 hover:bg-rose-500 border border-rose-400/40 text-white text-xs font-bold transition-all duration-200 hover:scale-[1.03]">
-              <Printer className="w-4 h-4" /> Cetak PDF
-            </button>
-          </div>
 
           {/* Identitas */}
           <div className="bg-card/70 backdrop-blur border border-white/10 rounded-2xl p-5 mb-5 animate-slide-up">
