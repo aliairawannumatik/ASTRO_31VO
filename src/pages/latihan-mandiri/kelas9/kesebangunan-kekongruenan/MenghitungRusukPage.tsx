@@ -11,8 +11,164 @@ type Part = { label: string; math?: string; text?: string };
 type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: string; };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
+const TrapezoidABCDPQRSSVG = () => (
+  <svg viewBox="0 0 295 130" width="295" height="130" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+    <polygon points="25,108 115,108 97,48 47,48" fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="1.5"/>
+    <text x="11" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
+    <text x="116" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
+    <text x="97" y="43" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
+    <text x="37" y="43" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
+    <text x="58" y="123" fill="#fbbf24" fontSize="10" fontWeight="bold">14 cm</text>
+    <text x="108" y="75" fill="#fbbf24" fontSize="10" fontWeight="bold">10 cm</text>
+    <polygon points="145,108 280,108 253,18 178,18" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="131" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">P</text>
+    <text x="282" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">Q</text>
+    <text x="254" y="13" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">R</text>
+    <text x="163" y="13" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">S</text>
+    <text x="196" y="123" fill="#fbbf24" fontSize="10" fontWeight="bold">21 cm</text>
+    <text x="260" y="67" fill="#fb923c" fontSize="13" fontWeight="bold">?</text>
+  </svg>
+);
+
+const SimilarQuadNSVG = () => (
+  <svg viewBox="0 0 290 130" width="290" height="130" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+    <polygon points="25,108 100,108 80,48 25,55" fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="1.5"/>
+    <polyline points="25,98 35,98 35,108" fill="none" stroke="#fb923c" strokeWidth="1"/>
+    <text x="51" y="84" fill="#64748b" fontSize="15">✕</text>
+    <text x="52" y="123" fill="#fbbf24" fontSize="10" fontWeight="bold">10 cm</text>
+    <text x="85" y="82" fill="#fbbf24" fontSize="10" fontWeight="bold">8 cm</text>
+    <polygon points="155,108 268,108 238,18 155,29" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <polyline points="155,98 165,98 165,108" fill="none" stroke="#fbbf24" strokeWidth="1"/>
+    <text x="193" y="80" fill="#64748b" fontSize="15">✕</text>
+    <text x="192" y="123" fill="#fbbf24" fontSize="10" fontWeight="bold">15 cm</text>
+    <text x="248" y="67" fill="#fb923c" fontSize="11" fontWeight="bold">n cm</text>
+  </svg>
+);
+
+const SimilarRectRatioSVG = () => (
+  <svg viewBox="0 0 265 130" width="265" height="130" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+    <rect x="15" y="22" width="100" height="62" fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="1.5"/>
+    <text x="4" y="19" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
+    <text x="116" y="19" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
+    <text x="116" y="97" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
+    <text x="4" y="97" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
+    <text x="50" y="101" fill="#fbbf24" fontSize="10" fontWeight="bold">10 cm</text>
+    <text x="119" y="57" fill="#fbbf24" fontSize="10" fontWeight="bold">6 cm</text>
+    <rect x="150" y="32" width="95" height="58" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="138" y="29" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
+    <text x="246" y="29" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">F</text>
+    <text x="246" y="103" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">G</text>
+    <text x="138" y="103" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">H</text>
+    <text x="185" y="103" fill="#fb923c" fontSize="13" fontWeight="bold">m</text>
+    <text x="248" y="65" fill="#fb923c" fontSize="13" fontWeight="bold">n</text>
+  </svg>
+);
+
 const questions: Q[] = [
-  Qn(1, "Persegi Panjang Sebangun – Cari Panjang", {
+  Qn(1, "Persegi Panjang Sebangun – UN", {
+    type: "mixed",
+    content: "Persegi panjang berukuran 12 cm × 8 cm akan sebangun dengan persegi panjang berukuran ....",
+    parts: [
+      { label: "A.", text: "9 cm × 5 cm" },
+      { label: "B.", text: "6 cm × 4 cm" },
+      { label: "C.", text: "15 cm × 9 cm" },
+      { label: "D.", text: "18 cm × 14 cm" },
+    ],
+  }),
+  Qn(2, "Trapesium Sebangun – UN", {
+    type: "mixed",
+    content: "Pada gambar tersebut trapesium ABCD sebangun dengan trapesium PQRS. Panjang rusuk QR adalah ....",
+    diagram: <TrapezoidABCDPQRSSVG />,
+    parts: [
+      { label: "A.", text: "9 cm" },
+      { label: "B.", text: "12 cm" },
+      { label: "C.", text: "15 cm" },
+      { label: "D.", text: "18 cm" },
+    ],
+  }),
+  Qn(3, "Bangun Datar Sebangun – Nilai n – UN", {
+    type: "mixed",
+    content: "Jika kedua bangun datar di atas sebangun, maka nilai n adalah ....",
+    diagram: <SimilarQuadNSVG />,
+    parts: [
+      { label: "A.", text: "8" },
+      { label: "B.", text: "10" },
+      { label: "C.", text: "12" },
+      { label: "D.", text: "15" },
+    ],
+  }),
+  Qn(4, "Gambar Diperbesar – UN", {
+    type: "mixed",
+    content: "Gambar berukuran 30 cm × 20 cm diperbesar sebesar 150%. Ukuran gambar hasil perbesaran berukuran ....",
+    parts: [
+      { label: "A.", text: "40 cm × 28 cm" },
+      { label: "B.", text: "45 cm × 30 cm" },
+      { label: "C.", text: "48 cm × 32 cm" },
+      { label: "D.", text: "42 cm × 25 cm" },
+    ],
+  }),
+  Qn(5, "Bayangan Tiang dan Pohon – UN", {
+    type: "mixed",
+    content: "Suatu tiang dengan tinggi 4 m mempunyai panjang bayangan 2,4 m. Jika suatu pohon mempunyai panjang bayangan 3 m, maka tinggi pohon tersebut adalah ....",
+    parts: [
+      { label: "A.", text: "4 m" },
+      { label: "B.", text: "5 m" },
+      { label: "C.", text: "6 m" },
+      { label: "D.", text: "7 m" },
+    ],
+  }),
+  Qn(6, "Lapangan Sebangun – Nilai p – ANBK", {
+    type: "mixed",
+    content: "Dua lapangan masing-masing berbentuk persegi panjang. Lapangan pertama berukuran 72 m × 45 m dan lapangan kedua berukuran p m × 135 m. Jika kedua lapangan tersebut sebangun, maka nilai p adalah ....",
+    parts: [
+      { label: "A.", text: "180" },
+      { label: "B.", text: "198" },
+      { label: "C.", text: "216" },
+      { label: "D.", text: "240" },
+    ],
+  }),
+  Qn(7, "Rasio Sisi Persegi Panjang Sebangun – ANBK", {
+    type: "mixed",
+    content: "Gambar berikut menunjukkan bahwa persegi panjang ABCD dan persegi panjang EFGH sebangun. Jika EF = m dan FG = n, pernyataan yang benar adalah ....",
+    diagram: <SimilarRectRatioSVG />,
+    parts: [
+      { label: "A.", math: "m : n = 5 : 3" },
+      { label: "B.", math: "m : n = 3 : 5" },
+      { label: "C.", math: "m : n = 2 : 3" },
+      { label: "D.", math: "m : n = 1 : 1" },
+    ],
+  }),
+  Qn(8, "Foto di Karton – TKA", {
+    type: "mixed",
+    content: "Sebuah foto berukuran 16 cm × 24 cm diletakkan secara vertikal di atas karton. Ternyata di sebelah kiri, kanan, dan atas foto masih tersisa 2 cm karton. Jika karton dan foto sebangun, lebar karton di bagian bawah foto adalah ....",
+    parts: [
+      { label: "A.", text: "3 cm" },
+      { label: "B.", text: "4 cm" },
+      { label: "C.", text: "5 cm" },
+      { label: "D.", text: "6 cm" },
+    ],
+  }),
+  Qn(9, "Bayangan Anak dan Tiang Bendera – ANBK", {
+    type: "mixed",
+    content: "Seorang anak dengan tinggi 120 cm mempunyai panjang bayangan 1,8 m di tanah mendatar. Suatu tiang bendera mempunyai panjang bayangan 5,4 m. Tinggi tiang bendera sebenarnya adalah ....",
+    parts: [
+      { label: "A.", text: "200 cm" },
+      { label: "B.", text: "300 cm" },
+      { label: "C.", text: "360 cm" },
+      { label: "D.", text: "400 cm" },
+    ],
+  }),
+  Qn(10, "Menara dan Tiang – TKA", {
+    type: "mixed",
+    content: "Suatu menara yang tingginya 30 m mempunyai panjang bayangan 45 m, sedangkan suatu tiang mempunyai panjang bayangan 12 m. Panjang tiang sebenarnya adalah ....",
+    parts: [
+      { label: "A.", text: "6 m" },
+      { label: "B.", text: "8 m" },
+      { label: "C.", text: "10 m" },
+      { label: "D.", text: "12 m" },
+    ],
+  }),
+  Qn(11, "Persegi Panjang Sebangun – Cari Panjang", {
     type: "mixed",
     diagram: <SimilarRects w1={60} h1={40} w2={90} h2={60} sides1={["8 cm","5 cm","",""]} sides2={["12 cm","? cm","",""]} color1="#f97316" color2="#fbbf24"/>,
     parts: [
@@ -21,7 +177,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa faktor skala dari ABCD ke EFGH?" },
     ],
   }),
-  Qn(2, "Segitiga Sebangun – Mencari Sisi", {
+  Qn(12, "Segitiga Sebangun – Mencari Sisi", {
     type: "mixed",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["P","Q","R"]} sideLabels1={["6","8","?"]} sideLabels2={["9","12","15"]} color1="#f97316" color2="#fb923c" type="right"/>,
     parts: [
@@ -30,7 +186,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa keliling △ABC jika keliling △PQR = 36 cm?" },
     ],
   }),
-  Qn(3, "Bangun Sebangun – Foto dan Bingkai", {
+  Qn(13, "Bangun Sebangun – Foto dan Bingkai", {
     type: "mixed",
     content: "Sebuah foto berukuran 6 cm × 9 cm akan dipasang pada bingkai yang sebangun dengan foto. Lebar bingkai 15 cm.",
     parts: [
@@ -39,7 +195,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa luas bingkai?" },
     ],
   }),
-  Qn(4, "Garis Sejajar dalam Segitiga (Thales)", {
+  Qn(14, "Garis Sejajar dalam Segitiga (Thales)", {
     type: "mixed",
     diagram: <ParallelLinesTriangle topLabel="DE" botLabel="BC" leftA="AD=3" leftB="DB=6" rightA="AE=4" rightB="EC=?" topSide="DE" botSide="BC" color1="#f97316" color2="#fbbf24"/>,
     parts: [
@@ -48,7 +204,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitunglah BC jika DE = 5 cm menggunakan rasio kesebangunan." },
     ],
   }),
-  Qn(5, "Soal Kontekstual – Bayangan Pohon", {
+  Qn(15, "Soal Kontekstual – Bayangan Pohon", {
     type: "mixed",
     content: "Sebuah tiang listrik setinggi 6 m menghasilkan bayangan 4 m di tanah. Pada saat yang sama, pohon di sampingnya menghasilkan bayangan 10 m.",
     parts: [
@@ -57,7 +213,7 @@ const questions: Q[] = [
       { label: "c.", text: "Mengapa bayangan dan benda membentuk segitiga yang sebangun?" },
     ],
   }),
-  Qn(6, "Segitiga Sebangun dalam Soal Cerita", {
+  Qn(16, "Segitiga Sebangun dalam Soal Cerita", {
     type: "mixed",
     content: "Dua gedung berdiri di sisi jalan. Gedung A setinggi 20 m memiliki bayangan 8 m. Gedung B memiliki bayangan 12 m di waktu yang sama.",
     parts: [
@@ -66,7 +222,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{20}{8} = \\frac{h_B}{12} \\Rightarrow h_B = \\ldots" },
     ],
   }),
-  Qn(7, "Menghitung Sisi Sebangun dengan Persamaan", {
+  Qn(17, "Menghitung Sisi Sebangun dengan Persamaan", {
     type: "mixed",
     content: "△ABC ~ △DEF. AB = (x+2) cm, DE = 12 cm, BC = 6 cm, EF = 9 cm.",
     parts: [
@@ -75,7 +231,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitunglah panjang AB." },
     ],
   }),
-  Qn(8, "Faktor Skala dari Luas", {
+  Qn(18, "Faktor Skala dari Luas", {
     type: "mixed",
     content: "Dua segitiga sebangun. Luas segitiga pertama 50 cm² dan luas segitiga kedua 200 cm².",
     parts: [
@@ -84,7 +240,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika keliling segitiga pertama 24 cm, berapa keliling segitiga kedua?" },
     ],
   }),
-  Qn(9, "Garis Sejajar Membagi Sisi Sebanding", {
+  Qn(19, "Garis Sejajar Membagi Sisi Sebanding", {
     type: "mixed",
     diagram: <ParallelLinesTriangle topLabel="MN" botLabel="PQ" leftA="AM=5" leftB="MP=10" rightA="AN=4" rightB="NQ=?" topSide="MN" botSide="PQ" color1="#f97316" color2="#fb923c"/>,
     parts: [
@@ -93,7 +249,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{MN}{PQ} = \\frac{AM}{AP} = \\frac{5}{15} = \\ldots" },
     ],
   }),
-  Qn(10, "Perbandingan pada Foto dan Benda", {
+  Qn(20, "Perbandingan pada Foto dan Benda", {
     type: "mixed",
     content: "Sebuah mobil sepanjang 4 m difoto. Dalam foto, panjang mobil 8 cm. Lebar mobil 1,6 m.",
     parts: [
@@ -102,7 +258,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah foto dan mobil asli sebangun? Buktikan." },
     ],
   }),
-  Qn(11, "Menghitung Panjang dengan Perbandingan", {
+  Qn(21, "Menghitung Panjang dengan Perbandingan", {
     type: "mixed",
     content: "Dua segitiga ABC dan PQR sebangun. AB = 7 cm, BC = 14 cm, CA = 21 cm. PQ = 5 cm.",
     parts: [
@@ -130,7 +286,7 @@ const MenghitungRusukPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 11 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 21 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
