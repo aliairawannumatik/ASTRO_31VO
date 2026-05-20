@@ -67,8 +67,8 @@ const questions: Q[] = [
       { label: "i.", math: "120 \\times 10^{-3} = \\ldots" },
     ],
   }),
-  Qn(3, "Mengubah dari Notasi Ilmiah & Perkalian – UN/ANBK/TKA", {
-    type: "mixed", mathContent: "(a \\times 10^m)(b \\times 10^n) = (a \\times b) \\times 10^{m+n}",
+  Qn(3, "Mengubah dari Notasi Ilmiah – UN/ANBK/TKA", {
+    type: "mixed",
     parts: [
       { label: "a.", math: "6{,}02 \\times 10^{23} = \\ldots" },
       { label: "b.", math: "3{,}0 \\times 10^8 = \\ldots \\text{ (kecepatan cahaya, m/s)}" },
@@ -76,17 +76,17 @@ const questions: Q[] = [
       { label: "d.", math: "4{,}5 \\times 10^{-4} = 0{,}00045" },
       { label: "e.", math: "1{,}67 \\times 10^{-27} = \\ldots \\text{ (massa proton, kg)}" },
       { label: "f.", math: "2{,}5 \\times 10^{-6} = \\ldots \\text{ m}" },
-      { label: "g.", math: "(3 \\times 10^4)(2 \\times 10^5) = 6 \\times 10^9" },
-      { label: "h.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
-      { label: "i.", math: "(2{,}5 \\times 10^7)(4 \\times 10^3) = \\ldots" },
     ],
   }),
-  Qn(4, "Pembagian Notasi Ilmiah – ANBK", {
+  Qn(4, "Perkalian & Pembagian Notasi Ilmiah – UN/ANBK", {
     type: "mixed", mathContent: "\\frac{a \\times 10^m}{b \\times 10^n} = \\frac{a}{b} \\times 10^{m-n}",
     parts: [
-      { label: "a.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
-      { label: "b.", math: "\\frac{6 \\times 10^{12}}{3 \\times 10^5} = \\ldots" },
-      { label: "c.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
+      { label: "a.", math: "(3 \\times 10^4)(2 \\times 10^5) = 6 \\times 10^9" },
+      { label: "b.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
+      { label: "c.", math: "(2{,}5 \\times 10^7)(4 \\times 10^3) = \\ldots" },
+      { label: "d.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
+      { label: "e.", math: "\\frac{6 \\times 10^{12}}{3 \\times 10^5} = \\ldots" },
+      { label: "f.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
     ],
   }),
   Qn(5, "Penjumlahan Notasi Ilmiah – TKA", {
