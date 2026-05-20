@@ -156,33 +156,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt{5^4 \\times 2^2} = \\ldots" },
     ],
   }),
-  Qn(10, "Soal Cerita Akar – UN", {
-    type: "mixed",
-    content: "Sebuah taman berbentuk persegi memiliki luas 288 m².",
-    parts: [
-      { label: "a.", math: "s = \\sqrt{288} = \\sqrt{144 \\times 2} = \\ldots \\text{ m}" },
-      { label: "b.", text: "Hitung keliling taman tersebut." },
-      { label: "c.", text: "Jika diperlukan pagar, berapa pagar yang dibutuhkan dalam bentuk akar paling sederhana?" },
-    ],
-  }),
-  Qn(11, "Menentukan Nilai Akar – ANBK", {
-    type: "mixed",
-    content: "Tentukan nilai x yang memenuhi:",
-    parts: [
-      { label: "a.", math: "\\sqrt{x} = 9 \\Rightarrow x = \\ldots" },
-      { label: "b.", math: "\\sqrt{x+1} = 4 \\Rightarrow x = \\ldots" },
-      { label: "c.", math: "2\\sqrt{x} = 10 \\Rightarrow x = \\ldots" },
-    ],
-  }),
-  Qn(12, "Akar Bertingkat – UN", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt{\\sqrt{81}} = \\ldots" },
-      { label: "b.", math: "\\sqrt{\\sqrt{256}} = \\ldots" },
-      { label: "c.", math: "\\sqrt[4]{625} = \\ldots" },
-    ],
-  }),
-  Qn(13, "Akar Pangkat Dua dan Tiga Campuran – TKA", {
+  Qn(10, "Akar Pangkat Dua dan Tiga Campuran – TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{4} \\times \\sqrt[3]{8} = \\ldots" },
@@ -190,7 +164,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt{9} \\times \\sqrt[3]{125} - \\sqrt{16} = \\ldots" },
     ],
   }),
-  Qn(14, "Akar dan Eksponen Pecahan – UN", {
+  Qn(11, "Akar dan Eksponen Pecahan – UN", {
     type: "mixed",
     content: "Nyatakan dalam bentuk eksponen pecahan lalu hitung:",
     parts: [
@@ -199,7 +173,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt[6]{64} = \\ldots" },
     ],
   }),
-  Qn(15, "Soal UN – Nilai dari Ekspresi", {
+  Qn(12, "Soal UN – Nilai dari Ekspresi", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(\\sqrt{7})^2 = \\ldots" },
@@ -207,7 +181,7 @@ const questions: Q[] = [
       { label: "c.", math: "(3\\sqrt{2})^2 = \\ldots" },
     ],
   }),
-  Qn(16, "Soal ANBK – Penyederhanaan Lanjutan", {
+  Qn(13, "Soal ANBK – Penyederhanaan Lanjutan", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{12} \\times \\sqrt{3} + \\sqrt{2} \\times \\sqrt{8} = \\ldots" },
@@ -215,7 +189,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt{6}(\\sqrt{6}-\\sqrt{24}) = \\ldots" },
     ],
   }),
-  Qn(17, "Soal ANBK – Persamaan Akar", {
+  Qn(14, "Soal ANBK – Persamaan Akar", {
     type: "mixed",
     content: "Selesaikan persamaan berikut:",
     parts: [
@@ -224,7 +198,7 @@ const questions: Q[] = [
       { label: "c.", math: "2\\sqrt{x} - 3 = 5 \\Rightarrow x = \\ldots" },
     ],
   }),
-  Qn(18, "Soal TKA – Akar Ganda dalam Ekspresi", {
+  Qn(15, "Soal TKA – Akar Ganda dalam Ekspresi", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{\\sqrt{3}+1}{\\sqrt{3}-1} + \\frac{\\sqrt{3}-1}{\\sqrt{3}+1} = \\ldots" },
@@ -232,7 +206,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\sqrt{5}-\\frac{2}{\\sqrt{5}}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(19, "Soal UN/ANBK/TKA – Gabungan Bentuk Akar", {
+  Qn(16, "Soal UN/ANBK/TKA – Gabungan Bentuk Akar", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{48} + \\sqrt{75} - \\sqrt{27} = \\ldots" },
@@ -260,7 +234,7 @@ const BentukAkarPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 19 Soal</span>
+            <span className="text-amber-400 text-xs font-bold">📋 16 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
