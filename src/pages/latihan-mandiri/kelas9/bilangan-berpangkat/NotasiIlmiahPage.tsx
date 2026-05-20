@@ -53,47 +53,35 @@ const questions: Q[] = [
       { label: "b.", math: "15 \\times 10^3 \\text{ — apakah ini notasi ilmiah yang valid? Perbaiki jika salah.}" },
     ],
   }),
-  Qn(2, "Mengubah ke Notasi Ilmiah – Bilangan Besar – UN", {
-    type: "mixed",
+  Qn(2, "Mengubah ke Notasi Ilmiah & Memperbaiki Notasi – UN/ANBK/TKA", {
+    type: "mixed", diagram: <ScaleChartSVG />,
     parts: [
       { label: "a.", math: "7.500.000 = 7{,}5 \\times 10^{\\square}" },
       { label: "b.", math: "43.000.000.000 = \\ldots \\times 10^{\\square}" },
       { label: "c.", math: "986.000 = \\ldots" },
+      { label: "d.", math: "0{,}0035 = 3{,}5 \\times 10^{-3}" },
+      { label: "e.", math: "0{,}000072 = \\ldots" },
+      { label: "f.", math: "0{,}00000045 = \\ldots" },
+      { label: "g.", math: "25 \\times 10^4 = 2{,}5 \\times 10^5" },
+      { label: "h.", math: "0{,}35 \\times 10^7 = \\ldots" },
+      { label: "i.", math: "120 \\times 10^{-3} = \\ldots" },
     ],
   }),
-  Qn(3, "Mengubah ke Notasi Ilmiah – Bilangan Kecil – ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "0{,}0035 = 3{,}5 \\times 10^{-3}" },
-      { label: "b.", math: "0{,}000072 = \\ldots" },
-      { label: "c.", math: "0{,}00000045 = \\ldots" },
-    ],
-  }),
-  Qn(4, "Mengubah dari Notasi Ilmiah – Bilangan Besar – TKA", {
-    type: "mixed",
+  Qn(3, "Mengubah dari Notasi Ilmiah & Perkalian – UN/ANBK/TKA", {
+    type: "mixed", mathContent: "(a \\times 10^m)(b \\times 10^n) = (a \\times b) \\times 10^{m+n}",
     parts: [
       { label: "a.", math: "6{,}02 \\times 10^{23} = \\ldots" },
       { label: "b.", math: "3{,}0 \\times 10^8 = \\ldots \\text{ (kecepatan cahaya, m/s)}" },
       { label: "c.", math: "9{,}46 \\times 10^{12} = \\ldots \\text{ km (satu tahun cahaya)}" },
+      { label: "d.", math: "4{,}5 \\times 10^{-4} = 0{,}00045" },
+      { label: "e.", math: "1{,}67 \\times 10^{-27} = \\ldots \\text{ (massa proton, kg)}" },
+      { label: "f.", math: "2{,}5 \\times 10^{-6} = \\ldots \\text{ m}" },
+      { label: "g.", math: "(3 \\times 10^4)(2 \\times 10^5) = 6 \\times 10^9" },
+      { label: "h.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
+      { label: "i.", math: "(2{,}5 \\times 10^7)(4 \\times 10^3) = \\ldots" },
     ],
   }),
-  Qn(5, "Mengubah dari Notasi Ilmiah – Bilangan Kecil – UN", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "4{,}5 \\times 10^{-4} = 0{,}00045" },
-      { label: "b.", math: "1{,}67 \\times 10^{-27} = \\ldots \\text{ (massa proton, kg)}" },
-      { label: "c.", math: "2{,}5 \\times 10^{-6} = \\ldots \\text{ m}" },
-    ],
-  }),
-  Qn(6, "Perkalian Notasi Ilmiah – UN", {
-    type: "mixed", mathContent: "(a \\times 10^m)(b \\times 10^n) = (a \\times b) \\times 10^{m+n}",
-    parts: [
-      { label: "a.", math: "(3 \\times 10^4)(2 \\times 10^5) = 6 \\times 10^9" },
-      { label: "b.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
-      { label: "c.", math: "(2{,}5 \\times 10^7)(4 \\times 10^3) = \\ldots" },
-    ],
-  }),
-  Qn(7, "Pembagian Notasi Ilmiah – ANBK", {
+  Qn(4, "Pembagian Notasi Ilmiah – ANBK", {
     type: "mixed", mathContent: "\\frac{a \\times 10^m}{b \\times 10^n} = \\frac{a}{b} \\times 10^{m-n}",
     parts: [
       { label: "a.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
@@ -101,7 +89,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
     ],
   }),
-  Qn(8, "Penjumlahan Notasi Ilmiah – TKA", {
+  Qn(5, "Penjumlahan Notasi Ilmiah – TKA", {
     type: "mixed",
     content: "Untuk menjumlahkan, samakan pangkat 10 terlebih dahulu:",
     parts: [
@@ -110,21 +98,12 @@ const questions: Q[] = [
       { label: "c.", math: "5 \\times 10^4 + 3 \\times 10^3 = 5 \\times 10^4 + 0{,}3 \\times 10^4 = \\ldots" },
     ],
   }),
-  Qn(9, "Pengurangan Notasi Ilmiah – UN", {
+  Qn(6, "Pengurangan Notasi Ilmiah – UN", {
     type: "mixed",
     parts: [
       { label: "a.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
       { label: "b.", math: "9{,}5 \\times 10^5 - 4{,}5 \\times 10^5 = \\ldots" },
       { label: "c.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
-    ],
-  }),
-  Qn(10, "Memperbaiki Notasi yang Salah – TKA", {
-    type: "mixed",
-    content: "Perbaiki notasi ilmiah berikut ke bentuk baku:",
-    parts: [
-      { label: "a.", math: "25 \\times 10^4 = 2{,}5 \\times 10^5" },
-      { label: "b.", math: "0{,}35 \\times 10^7 = \\ldots" },
-      { label: "c.", math: "120 \\times 10^{-3} = \\ldots" },
     ],
   }),
 ];
@@ -146,7 +125,7 @@ const NotasiIlmiahPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 10 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 6 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
