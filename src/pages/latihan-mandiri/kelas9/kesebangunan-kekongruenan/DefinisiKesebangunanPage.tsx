@@ -20,6 +20,32 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
+const SimilarRightTrianglesPQRXYZ = () => (
+  <svg viewBox="0 0 275 148" width="275" height="148" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+    {/* Y axis */}
+    <line x1="18" y1="6" x2="18" y2="128" stroke="#64748b" strokeWidth="1.5"/>
+    <polygon points="18,4 14,12 22,12" fill="#64748b"/>
+    {/* X axis */}
+    <line x1="14" y1="122" x2="264" y2="122" stroke="#64748b" strokeWidth="1.5"/>
+    <polygon points="265,122 257,118 257,126" fill="#64748b"/>
+    {/* Axis labels */}
+    <text x="10" y="8" fill="#94a3b8" fontSize="11" fontStyle="italic">Y</text>
+    <text x="258" y="135" fill="#94a3b8" fontSize="11" fontStyle="italic">X</text>
+    {/* Small triangle PQR — right angle at Q */}
+    <polygon points="50,60 50,122 115,122" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="1.5"/>
+    <polyline points="50,112 60,112 60,122" fill="none" stroke="#22d3ee" strokeWidth="1"/>
+    <text x="37" y="59" fill="#e2e8f0" fontSize="12" fontStyle="italic" fontFamily="serif">P</text>
+    <text x="35" y="137" fill="#e2e8f0" fontSize="12" fontStyle="italic" fontFamily="serif">Q</text>
+    <text x="117" y="137" fill="#e2e8f0" fontSize="12" fontStyle="italic" fontFamily="serif">R</text>
+    {/* Large triangle XYZ — right angle at Y, scale ×1.5 */}
+    <polygon points="143,23 143,122 240,122" fill="rgba(244,114,182,0.15)" stroke="#f472b6" strokeWidth="1.5"/>
+    <polyline points="143,112 153,112 153,122" fill="none" stroke="#f472b6" strokeWidth="1"/>
+    <text x="146" y="20" fill="#e2e8f0" fontSize="12" fontStyle="italic" fontFamily="serif">X</text>
+    <text x="129" y="137" fill="#e2e8f0" fontSize="12" fontStyle="italic" fontFamily="serif">Y</text>
+    <text x="242" y="137" fill="#e2e8f0" fontSize="12" fontStyle="italic" fontFamily="serif">Z</text>
+  </svg>
+);
+
 const questions: Q[] = [
   Qn(1, "Pengertian Kesebangunan", {
     type: "mixed",
@@ -60,7 +86,18 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah kedua segitiga itu sebangun? Berapa rasio perbandingannya?" },
     ],
   }),
-  Qn(5, "Membedakan Sebangun dan Kongruen", {
+  Qn(5, "Sisi Sebanding – Pilihan Ganda – UN", {
+    type: "mixed",
+    content: "Perhatikan gambar berikut! △PQR sebangun dengan △XYZ karena m∠P = m∠X, m∠Q = m∠Y, dan m∠R = m∠Z. Panjang rusuk-rusuk yang sebanding adalah ....",
+    diagram: <SimilarRightTrianglesPQRXYZ />,
+    parts: [
+      { label: "A.", math: "\\dfrac{PQ}{XY} = \\dfrac{PR}{ZY} = \\dfrac{QR}{XZ}" },
+      { label: "B.", math: "\\dfrac{PQ}{XY} = \\dfrac{PR}{XZ} = \\dfrac{QR}{YZ}" },
+      { label: "C.", math: "\\dfrac{PQ}{XZ} = \\dfrac{XY}{QR} = \\dfrac{ZY}{PR}" },
+      { label: "D.", math: "\\dfrac{PR}{PQ} = \\dfrac{QR}{XY} = \\dfrac{ZY}{ZX}" },
+    ],
+  }),
+  Qn(6, "Membedakan Sebangun dan Kongruen", {
     type: "mixed",
     content: "Perhatikan pernyataan-pernyataan berikut:",
     parts: [
@@ -73,7 +110,7 @@ const questions: Q[] = [
       { label: "c.", text: "Mana yang tidak sebangun dan tidak kongruen?" },
     ],
   }),
-  Qn(6, "Faktor Skala / Rasio Kesebangunan", {
+  Qn(7, "Faktor Skala / Rasio Kesebangunan", {
     type: "mixed",
     diagram: <SimilarRects w1={50} h1={35} w2={100} h2={70} sides1={["5 cm","3,5 cm","",""]as any} sides2={["10 cm","7 cm","",""]as any} color1="#38bdf8" color2="#34d399"/>,
     parts: [
@@ -83,7 +120,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{L_{besar}}{L_{kecil}} = k^2 = \\ldots" },
     ],
   }),
-  Qn(7, "Foto dan Bayangan", {
+  Qn(8, "Foto dan Bayangan", {
     type: "mixed",
     content: "Sebuah foto berukuran 4 cm × 6 cm akan diperbesar menjadi 10 cm × 15 cm.",
     parts: [
@@ -93,7 +130,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\text{Rasio luas} = \\left(\\frac{4}{10}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(8, "Sudut-Sudut Bersesuaian", {
+  Qn(9, "Sudut-Sudut Bersesuaian", {
     type: "mixed",
     content: "Dua segitiga ABC dan PQR diketahui sebangun dengan ∠A = ∠P, ∠B = ∠Q, ∠C = ∠R.",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["P","Q","R"]} sideLabels1={["c","a","b"]} sideLabels2={["r","p","q"]} color1="#22d3ee" color2="#fb923c" type="scalene"/>,
@@ -103,7 +140,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika AB = 8, BC = 10, PQ = 4, tentukan QR." },
     ],
   }),
-  Qn(9, "Bangun Tidak Sebangun", {
+  Qn(10, "Bangun Tidak Sebangun", {
     type: "mixed",
     content: "Diketahui dua persegi panjang: ABCD dengan AB = 6 cm, BC = 4 cm; dan EFGH dengan EF = 9 cm, FG = 5 cm.",
     parts: [
@@ -112,7 +149,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapakah FG seharusnya agar ABCD dan EFGH sebangun?" },
     ],
   }),
-  Qn(10, "Kesebangunan Persegi", {
+  Qn(11, "Kesebangunan Persegi", {
     type: "mixed",
     content: "Dua buah persegi: persegi pertama bersisi 5 cm dan persegi kedua bersisi 8 cm.",
     parts: [
@@ -121,7 +158,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa rasio perbandingan luas kedua persegi tersebut?" },
     ],
   }),
-  Qn(11, "Kesebangunan Segitiga Sama Sisi", {
+  Qn(12, "Kesebangunan Segitiga Sama Sisi", {
     type: "mixed",
     content: "Dua buah segitiga sama sisi: yang pertama bersisi 6 cm dan yang kedua bersisi 9 cm.",
     parts: [
@@ -130,7 +167,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berikan contoh dua segitiga yang pasti sebangun." },
     ],
   }),
-  Qn(12, "Kesebangunan pada Foto Identitas", {
+  Qn(13, "Kesebangunan pada Foto Identitas", {
     type: "mixed",
     content: "Foto identitas standar berukuran 3×4 cm. Foto tersebut akan dicetak ulang dalam tiga ukuran: 4×6 cm, 6×9 cm, dan 9×12 cm.",
     parts: [
@@ -139,7 +176,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa rasio perbandingan antara foto 3×4 dengan foto 6×9?" },
     ],
   }),
-  Qn(13, "Faktor Skala dari Luas", {
+  Qn(14, "Faktor Skala dari Luas", {
     type: "mixed",
     content: "Dua bangun sebangun. Luas bangun pertama 36 cm² dan luas bangun kedua 81 cm².",
     parts: [
@@ -148,7 +185,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika sebuah sisi bangun pertama 6 cm, berapa sisi yang bersesuaian pada bangun kedua?" },
     ],
   }),
-  Qn(14, "Notasi Kesebangunan", {
+  Qn(15, "Notasi Kesebangunan", {
     type: "mixed",
     content: "Jika △ABC ~ △DEF, maka penulisan urutan titik sudut sangat penting.",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["c","a","b"]} sideLabels2={["f","d","e"]} color1="#22d3ee" color2="#a78bfa"/>,
@@ -158,7 +195,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah △BAC ~ △EDF juga benar? Jelaskan." },
     ],
   }),
-  Qn(15, "Kesebangunan Jajargenjang", {
+  Qn(16, "Kesebangunan Jajargenjang", {
     type: "mixed",
     content: "Dua jajargenjang ABCD dan EFGH. ABCD: AB = 10 cm, BC = 6 cm, ∠A = 70°. EFGH: EF = 15 cm, FG = 9 cm, ∠E = 70°.",
     parts: [
@@ -167,7 +204,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah kedua jajargenjang sebangun? Berapa faktor skalanya?" },
     ],
   }),
-  Qn(16, "Kekongruenan dan Luas", {
+  Qn(17, "Kekongruenan dan Luas", {
     type: "mixed",
     content: "Dua bangun yang kongruen selalu memiliki luas yang sama.",
     parts: [
@@ -176,7 +213,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bolehkah dua bangun yang luasnya sama langsung disebut kongruen? Berikan contoh kontra." },
     ],
   }),
-  Qn(17, "Menentukan Sudut yang Sama dari Perbandingan Sisi", {
+  Qn(18, "Menentukan Sudut yang Sama dari Perbandingan Sisi", {
     type: "mixed",
     content: "Diketahui △ABC ~ △PQR dengan AB = 6, BC = 8, AC = 10, PQ = 9, QR = 12, PR = 15.",
     parts: [
@@ -185,7 +222,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sudut manakah yang paling besar? Mengapa?" },
     ],
   }),
-  Qn(18, "Kesebangunan Lingkaran", {
+  Qn(19, "Kesebangunan Lingkaran", {
     type: "mixed",
     content: "Dua lingkaran dengan jari-jari r₁ = 5 cm dan r₂ = 8 cm.",
     parts: [
@@ -194,7 +231,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa rasio luas kedua lingkaran itu?" },
     ],
   }),
-  Qn(19, "Identifikasi Pasangan Sebangun", {
+  Qn(20, "Identifikasi Pasangan Sebangun", {
     type: "mixed",
     content: "Tentukan pasangan bangun yang pasti sebangun:",
     parts: [
@@ -205,7 +242,7 @@ const questions: Q[] = [
       { label: "", text: "Dari pilihan A–D, mana yang pasti sebangun? Jelaskan alasan untuk setiap pilihan." },
     ],
   }),
-  Qn(20, "Membandingkan Segitiga", {
+  Qn(21, "Membandingkan Segitiga", {
     type: "mixed",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["6","8","10"]} sideLabels2={["9","12","15"]} color1="#38bdf8" color2="#34d399" type="right"/>,
     parts: [
@@ -233,7 +270,7 @@ const DefinisiKesebangunanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 20 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 21 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
