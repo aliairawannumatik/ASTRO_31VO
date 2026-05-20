@@ -89,21 +89,16 @@ const questions: Q[] = [
       { label: "f.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
     ],
   }),
-  Qn(5, "Penjumlahan Notasi Ilmiah – TKA", {
+  Qn(5, "Penjumlahan & Pengurangan Notasi Ilmiah – UN/TKA", {
     type: "mixed",
-    content: "Untuk menjumlahkan, samakan pangkat 10 terlebih dahulu:",
+    content: "Untuk menjumlahkan/mengurangkan, samakan pangkat 10 terlebih dahulu:",
     parts: [
       { label: "a.", math: "3 \\times 10^5 + 2 \\times 10^5 = 5 \\times 10^5" },
       { label: "b.", math: "4{,}2 \\times 10^6 + 3{,}8 \\times 10^6 = \\ldots" },
       { label: "c.", math: "5 \\times 10^4 + 3 \\times 10^3 = 5 \\times 10^4 + 0{,}3 \\times 10^4 = \\ldots" },
-    ],
-  }),
-  Qn(6, "Pengurangan Notasi Ilmiah – UN", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
-      { label: "b.", math: "9{,}5 \\times 10^5 - 4{,}5 \\times 10^5 = \\ldots" },
-      { label: "c.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
+      { label: "d.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
+      { label: "e.", math: "9{,}5 \\times 10^5 - 4{,}5 \\times 10^5 = \\ldots" },
+      { label: "f.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
     ],
   }),
 ];
@@ -125,7 +120,7 @@ const NotasiIlmiahPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 6 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 5 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
