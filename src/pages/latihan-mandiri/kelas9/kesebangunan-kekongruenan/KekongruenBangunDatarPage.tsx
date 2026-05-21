@@ -7,6 +7,7 @@ import imgQ1 from "@assets/image_1779360053350.png";
 import imgQ2 from "@assets/Gemini_Generated_Image_ngxre9ngxre9ngxr_(1)_1779360148381.png";
 import imgQ4 from "@assets/image_1779360180879.png";
 import imgQ5 from "@assets/Gemini_Generated_Image_wd58awd58awd58aw_(1)_1779360225111.png";
+import imgQ6 from "@assets/image_1779360254264.png";
 
 type Q = { n: number; title: string; content: string; diagram?: React.ReactNode; options: { label: string; text: string }[] };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
@@ -28,33 +29,7 @@ const SvgQ88 = () => (
 );
 
 const SvgQ89 = () => (
-  <svg width={260} height={190} viewBox="0 0 260 190" style={{display:'block'}}>
-    <rect width="260" height="190" fill="#0b1733" rx="14"/>
-    <polygon points="130,18 22,168 238,168" fill="rgba(56,189,248,0.07)"/>
-    <line x1="130" y1="18" x2="22" y2="168" stroke="#38bdf8" strokeWidth="2.5"/>
-    <line x1="130" y1="18" x2="238" y2="168" stroke="#38bdf8" strokeWidth="2.5"/>
-    <line x1="22" y1="168" x2="238" y2="168" stroke="#38bdf8" strokeWidth="2.5"/>
-    <line x1="51" y1="64" x2="52" y2="58" stroke="#38bdf8" strokeWidth="2"/>
-    <line x1="209" y1="64" x2="208" y2="58" stroke="#38bdf8" strokeWidth="2"/>
-    <line x1="48" y1="68" x2="49" y2="62" stroke="#38bdf8" strokeWidth="2"/>
-    <line x1="212" y1="68" x2="211" y2="62" stroke="#38bdf8" strokeWidth="2"/>
-    <line x1="238" y1="168" x2="96" y2="66" stroke="#fbbf24" strokeWidth="2" strokeDasharray="5,4"/>
-    <line x1="22" y1="168" x2="164" y2="66" stroke="#fbbf24" strokeWidth="2" strokeDasharray="5,4"/>
-    <polyline points="92,72 98,76 102,70" fill="none" stroke="#fbbf24" strokeWidth="1.5"/>
-    <polyline points="158,70 162,76 168,72" fill="none" stroke="#fbbf24" strokeWidth="1.5"/>
-    <circle cx="130" cy="6" r="12" fill="#0b1733" stroke="#38bdf8" strokeWidth="2"/>
-    <text x="130" y="11" fill="#38bdf8" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="8" cy="168" r="12" fill="#0b1733" stroke="#38bdf8" strokeWidth="2"/>
-    <text x="8" y="173" fill="#38bdf8" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="252" cy="168" r="12" fill="#0b1733" stroke="#38bdf8" strokeWidth="2"/>
-    <text x="252" y="173" fill="#38bdf8" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <rect x="80" y="52" width="20" height="16" rx="5" fill="rgba(0,0,0,0.65)"/>
-    <text x="90" y="64" fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="middle">E</text>
-    <rect x="160" y="52" width="20" height="16" rx="5" fill="rgba(0,0,0,0.65)"/>
-    <text x="170" y="64" fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="84" y="26" width="50" height="15" rx="5" fill="rgba(0,0,0,0.6)"/>
-    <text x="109" y="37" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">AB = AC</text>
-  </svg>
+  <img src={imgQ6} alt="Diagram Soal 6 - Segitiga Sama Kaki Garis Tinggi" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const questions: Q[] = [
