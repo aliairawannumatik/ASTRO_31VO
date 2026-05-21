@@ -5,6 +5,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import { CheckSquare } from "lucide-react";
 import imgQ1 from "@assets/image_1779360053350.png";
 import imgQ2 from "@assets/Gemini_Generated_Image_ngxre9ngxre9ngxr_(1)_1779360148381.png";
+import imgQ4 from "@assets/image_1779360180879.png";
 
 type Q = { n: number; title: string; content: string; diagram?: React.ReactNode; options: { label: string; text: string }[] };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
@@ -18,30 +19,7 @@ const SvgQ84 = () => (
 );
 
 const SvgQ86 = () => (
-  <svg width={220} height={185} viewBox="0 0 220 185" style={{display:'block'}}>
-    <rect width="220" height="185" fill="#0b1733" rx="14"/>
-    <polygon points="110,18 18,168 202,168" fill="rgba(16,185,129,0.07)"/>
-    <line x1="110" y1="18" x2="18" y2="168" stroke="#10b981" strokeWidth="2.5"/>
-    <line x1="110" y1="18" x2="202" y2="168" stroke="#10b981" strokeWidth="2.5"/>
-    <line x1="18" y1="168" x2="202" y2="168" stroke="#10b981" strokeWidth="2.5"/>
-    <line x1="110" y1="18" x2="110" y2="168" stroke="#f472b6" strokeWidth="2" strokeDasharray="5,4"/>
-    <line x1="46" y1="58" x2="52" y2="52" stroke="#10b981" strokeWidth="2"/>
-    <line x1="168" y1="58" x2="162" y2="52" stroke="#10b981" strokeWidth="2"/>
-    <line x1="42" y1="62" x2="48" y2="56" stroke="#10b981" strokeWidth="2"/>
-    <line x1="172" y1="62" x2="166" y2="56" stroke="#10b981" strokeWidth="2"/>
-    <line x1="102" y1="26" x2="110" y2="32" stroke="#f472b6" strokeWidth="1.8"/>
-    <line x1="118" y1="26" x2="110" y2="32" stroke="#f472b6" strokeWidth="1.8"/>
-    <circle cx="110" cy="6" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
-    <text x="110" y="11" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <circle cx="4" cy="168" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
-    <text x="4" y="173" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="216" cy="168" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
-    <text x="216" y="173" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="110" cy="180" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
-    <text x="110" y="180" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="64" y="88" width="50" height="15" rx="5" fill="rgba(0,0,0,0.6)"/>
-    <text x="89" y="99" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">AC = BC</text>
-  </svg>
+  <img src={imgQ4} alt="Diagram Soal 4 - Segitiga Sama Kaki Garis Bagi" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ88 = () => (
