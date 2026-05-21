@@ -97,20 +97,7 @@ const questions: Q[] = [
       { label: "D.", math: "\\dfrac{PR}{PQ} = \\dfrac{QR}{XY} = \\dfrac{ZY}{ZX}" },
     ],
   }),
-  Qn(6, "Membedakan Sebangun dan Kongruen", {
-    type: "mixed",
-    content: "Perhatikan pernyataan-pernyataan berikut:",
-    parts: [
-      { label: "1.", text: "Dua lingkaran dengan jari-jari berbeda." },
-      { label: "2.", text: "Dua persegi dengan sisi sama panjang." },
-      { label: "3.", text: "Foto asli dan foto yang diperbesar 2 kali." },
-      { label: "", text: "Dari ketiga contoh di atas:" },
-      { label: "a.", text: "Mana yang sebangun tapi tidak kongruen?" },
-      { label: "b.", text: "Mana yang sebangun sekaligus kongruen?" },
-      { label: "c.", text: "Mana yang tidak sebangun dan tidak kongruen?" },
-    ],
-  }),
-  Qn(7, "Faktor Skala / Rasio Kesebangunan", {
+  Qn(6, "Faktor Skala / Rasio Kesebangunan", {
     type: "mixed",
     diagram: <SimilarRects w1={50} h1={35} w2={100} h2={70} sides1={["5 cm","3,5 cm","",""]as any} sides2={["10 cm","7 cm","",""]as any} color1="#38bdf8" color2="#34d399"/>,
     parts: [
@@ -120,7 +107,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{L_{besar}}{L_{kecil}} = k^2 = \\ldots" },
     ],
   }),
-  Qn(8, "Foto dan Bayangan", {
+  Qn(7, "Foto dan Bayangan", {
     type: "mixed",
     content: "Sebuah foto berukuran 4 cm × 6 cm akan diperbesar menjadi 10 cm × 15 cm.",
     parts: [
@@ -130,7 +117,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\text{Rasio luas} = \\left(\\frac{4}{10}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(9, "Kesebangunan pada Foto Identitas", {
+  Qn(8, "Kesebangunan pada Foto Identitas", {
     type: "mixed",
     content: "Foto identitas standar berukuran 3×4 cm. Foto tersebut akan dicetak ulang dalam tiga ukuran: 4×6 cm, 6×9 cm, dan 9×12 cm.",
     parts: [
@@ -139,7 +126,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa rasio perbandingan antara foto 3×4 dengan foto 6×9?" },
     ],
   }),
-  Qn(10, "Faktor Skala dari Luas", {
+  Qn(9, "Faktor Skala dari Luas", {
     type: "mixed",
     content: "Dua bangun sebangun. Luas bangun pertama 36 cm² dan luas bangun kedua 81 cm².",
     parts: [
@@ -148,7 +135,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika sebuah sisi bangun pertama 6 cm, berapa sisi yang bersesuaian pada bangun kedua?" },
     ],
   }),
-  Qn(11, "Kekongruenan dan Luas", {
+  Qn(10, "Kekongruenan dan Luas", {
     type: "mixed",
     content: "Dua bangun yang kongruen selalu memiliki luas yang sama.",
     parts: [
@@ -157,7 +144,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bolehkah dua bangun yang luasnya sama langsung disebut kongruen? Berikan contoh kontra." },
     ],
   }),
-  Qn(12, "Identifikasi Pasangan Sebangun", {
+  Qn(11, "Identifikasi Pasangan Sebangun", {
     type: "mixed",
     content: "Tentukan pasangan bangun yang pasti sebangun:",
     parts: [
@@ -168,7 +155,7 @@ const questions: Q[] = [
       { label: "", text: "Dari pilihan A–D, mana yang pasti sebangun? Jelaskan alasan untuk setiap pilihan." },
     ],
   }),
-  Qn(13, "Membandingkan Segitiga", {
+  Qn(12, "Membandingkan Segitiga", {
     type: "mixed",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["6","8","10"]} sideLabels2={["9","12","15"]} color1="#38bdf8" color2="#34d399" type="right"/>,
     parts: [
@@ -196,7 +183,7 @@ const DefinisiKesebangunanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 13 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
