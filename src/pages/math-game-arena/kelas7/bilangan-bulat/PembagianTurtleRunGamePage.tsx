@@ -1,6 +1,6 @@
 import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePage";
 
-import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PEMBAGIAN_TURTLE_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "14 ÷ 2 = ?", opts: ["6", "7", "-7", "-6"], correctIndex: 1, bonus: 25 },
     { q: "(-12) ÷ 3 = ?", opts: ["4", "-4", "-9", "9"], correctIndex: 1, bonus: 25 },
@@ -19,7 +19,7 @@ import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pembagian"
       homePath="/menu"
 
-      quizQuestions={PEMBAGIAN_QUIZ}
+      quizQuestions={PEMBAGIAN_TURTLE_QUIZ}
     />
   );
 

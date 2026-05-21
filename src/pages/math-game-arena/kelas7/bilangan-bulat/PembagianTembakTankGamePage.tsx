@@ -1,6 +1,6 @@
 import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage";
 
-import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PEMBAGIAN_TANK_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "8 ÷ 2 = ...", opts: ["4", "10", "-4", "-10"], ans: 0 },
     { q: "(-12) ÷ 4 = ...", opts: ["-3", "3", "-8", "8"], ans: 0 },
@@ -23,7 +23,7 @@ import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pembagian"
       homePath="/menu"
 
-      quizQuestions={PEMBAGIAN_QUIZ}
+      quizQuestions={PEMBAGIAN_TANK_QUIZ}
     />
   );
 

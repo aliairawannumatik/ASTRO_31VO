@@ -1,6 +1,6 @@
 import DinoRunGamePage, { MQ } from "@/pages/math-game-arena/umum/DinoRunGamePage";
 
-import { PERKALIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PERKALIAN_TURTLE_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "3 × 5 = ?", opts: ["8", "15", "-15", "-8"], correctIndex: 1, bonus: 25 },
     { q: "(-2) × 4 = ?", opts: ["8", "-8", "6", "-6"], correctIndex: 1, bonus: 25 },
@@ -19,7 +19,7 @@ import { PERKALIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/perkalian"
       homePath="/menu"
 
-      quizQuestions={PERKALIAN_QUIZ}
+      quizQuestions={PERKALIAN_TURTLE_QUIZ}
     />
   );
 

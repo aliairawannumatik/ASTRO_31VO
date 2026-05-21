@@ -1,6 +1,6 @@
 import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPage";
 
-import { KPK_FPB_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { KPK_FPB_SPACE_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "FPB(8, 12)", ans: 4 },
     { q: "KPK(3, 4)", ans: 12 },
@@ -23,7 +23,7 @@ import { KPK_FPB_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb"
       homePath="/menu"
 
-      quizQuestions={KPK_FPB_QUIZ}
+      quizQuestions={KPK_FPB_SPACE_QUIZ}
     />
   );
 

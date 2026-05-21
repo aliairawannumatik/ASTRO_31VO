@@ -1,6 +1,6 @@
 import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPage";
 
-import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PEMBAGIAN_SPACE_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "12 ÷ 3", ans: 4 },
     { q: "(-15) ÷ 5", ans: -3 },
@@ -23,7 +23,7 @@ import { PEMBAGIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pembagian"
       homePath="/menu"
 
-      quizQuestions={PEMBAGIAN_QUIZ}
+      quizQuestions={PEMBAGIAN_SPACE_QUIZ}
     />
   );
 

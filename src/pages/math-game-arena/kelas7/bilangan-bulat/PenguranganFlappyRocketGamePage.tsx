@@ -1,6 +1,6 @@
 import FlappyRocketPage, { MQ } from "@/pages/math-game-arena/umum/FlappyRocketPage";
 
-import { PENGURANGAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PENGURANGAN_FLAPPY_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "9 - 4 = ?", opts: ["13", "5", "-5", "-13"], ans: 1 },
     { q: "6 - 11 = ?", opts: ["5", "-5", "17", "-17"], ans: 1 },
@@ -19,7 +19,7 @@ import { PENGURANGAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pengurangan"
       homePath="/menu"
 
-      quizQuestions={PENGURANGAN_QUIZ}
+      quizQuestions={PENGURANGAN_FLAPPY_QUIZ}
     />
   );
 

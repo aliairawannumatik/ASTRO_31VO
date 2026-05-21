@@ -1,6 +1,6 @@
 import FlappyRocketPage, { MQ } from "@/pages/math-game-arena/umum/FlappyRocketPage";
 
-import { KPK_FPB_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { KPK_FPB_FLAPPY_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "FPB(6, 9) = ?", opts: ["1", "2", "3", "6"], ans: 2 },
     { q: "KPK(3, 4) = ?", opts: ["7", "12", "6", "24"], ans: 1 },
@@ -19,7 +19,7 @@ import { KPK_FPB_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb"
       homePath="/menu"
 
-      quizQuestions={KPK_FPB_QUIZ}
+      quizQuestions={KPK_FPB_FLAPPY_QUIZ}
     />
   );
 

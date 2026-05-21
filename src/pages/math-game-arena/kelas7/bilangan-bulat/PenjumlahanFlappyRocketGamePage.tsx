@@ -1,6 +1,6 @@
 import FlappyRocketPage, { MQ } from "@/pages/math-game-arena/umum/FlappyRocketPage";
 
-import { PENJUMLAHAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PENJUMLAHAN_FLAPPY_QUIZ } from "@/data/mga-k7-bilbul-quiz";
 const questions: MQ[] = [
   { q: "7 + (-12) = ?", opts: ["19", "-5", "5", "-19"], ans: 1 },
   { q: "(-25) + 40 = ?", opts: ["-15", "65", "15", "-65"], ans: 2 },
@@ -19,7 +19,7 @@ const PenjumlahanFlappyRocketGamePage = () => (
     backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
     homePath="/menu"
 
-    quizQuestions={PENJUMLAHAN_QUIZ}
+    quizQuestions={PENJUMLAHAN_FLAPPY_QUIZ}
   />
 );
 

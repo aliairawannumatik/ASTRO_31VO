@@ -1,6 +1,6 @@
 import SpaceImpactPage, { MQ } from "@/pages/math-game-arena/umum/SpaceImpactPage";
 
-import { PENJUMLAHAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PENJUMLAHAN_SPACE_QUIZ } from "@/data/mga-k7-bilbul-quiz";
 const questions: MQ[] = [
   { q: "(-7) + 12", ans: 5 },
   { q: "8 + (-15)", ans: -7 },
@@ -23,7 +23,7 @@ const PenjumlahanSpaceImpactGamePage = () => (
     backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
     homePath="/menu"
 
-    quizQuestions={PENJUMLAHAN_QUIZ}
+    quizQuestions={PENJUMLAHAN_SPACE_QUIZ}
   />
 );
 

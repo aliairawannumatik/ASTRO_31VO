@@ -1,6 +1,6 @@
 import FlappyRocketPage, { MQ } from "@/pages/math-game-arena/umum/FlappyRocketPage";
 
-import { PERKALIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PERKALIAN_FLAPPY_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "5 × 3 = ?", opts: ["8", "15", "-15", "-8"], ans: 1 },
     { q: "(-2) × 6 = ?", opts: ["12", "-12", "-4", "4"], ans: 1 },
@@ -19,7 +19,7 @@ import { PERKALIAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/perkalian"
       homePath="/menu"
 
-      quizQuestions={PERKALIAN_QUIZ}
+      quizQuestions={PERKALIAN_FLAPPY_QUIZ}
     />
   );
 

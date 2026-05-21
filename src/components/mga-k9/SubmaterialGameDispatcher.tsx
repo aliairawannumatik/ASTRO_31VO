@@ -11,6 +11,27 @@ import GalaksiTempurPage from "@/pages/math-game-arena/umum/GalaksiTempurPage";
 import ZumMathPage from "@/pages/math-game-arena/umum/ZumMathPage";
 import PacMathPage from "@/pages/math-game-arena/umum/PacMathPage";
 import { getSubmaterialK9 } from "@/data/mga-k9/registry";
+import type { GuruQuestion } from "@/hooks/useGuruQuiz";
+
+const GAME_OFFSETS: Record<string, number> = {
+  "snake-math":      0,
+  "galaksi-tempur":  1,
+  "tetris":          2,
+  "meteor-pantul":   3,
+  "zum-math":        4,
+  "pac-math":        5,
+  "flappy-rocket":   6,
+  "tembak-tank":     7,
+  "space-impact":    8,
+  "turtle-run":      9,
+};
+
+function gameSlice(questions: GuruQuestion[], variant: string): GuruQuestion[] {
+  if (!questions || questions.length === 0) return questions;
+  const offset = GAME_OFFSETS[variant] ?? 0;
+  const n = questions.length;
+  return questions.map((_, i) => questions[(i + offset) % n]);
+}
 
 const SubmaterialGameDispatcherK9 = () => {
   const navigate = useNavigate();
@@ -61,7 +82,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "flappy-rocket":
@@ -71,7 +92,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "tembak-tank":
@@ -81,7 +102,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={`${topicLabel} · Tembak tank dengan jawaban benar!`}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "space-impact":
@@ -91,7 +112,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "turtle-run":
@@ -101,7 +122,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "tetris":
@@ -110,7 +131,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "snake-math":
@@ -119,7 +140,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
           quizIntervalMs={25_000}
         />
       );
@@ -129,7 +150,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "zum-math":
@@ -138,7 +159,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     case "pac-math":
@@ -147,7 +168,7 @@ const SubmaterialGameDispatcherK9 = () => {
           topicLabel={topicLabel}
           backPath={backPath}
           homePath={homePath}
-          quizQuestions={q.snake}
+          quizQuestions={gameSlice(q.snake, variant)}
         />
       );
     default:

@@ -1,6 +1,6 @@
 import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage";
 
-import { PENGURANGAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PENGURANGAN_TANK_QUIZ } from "@/data/mga-k7-bilbul-quiz";
   const questions: MQ[] = [
     { q: "10 - 3 = ...", opts: ["7", "13", "-7", "-13"], ans: 0 },
     { q: "4 - 9 = ...", opts: ["-5", "5", "-13", "13"], ans: 0 },
@@ -23,7 +23,7 @@ import { PENGURANGAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
       backPath="/math-game-arena/kelas-7/bilangan-bulat/pengurangan"
       homePath="/menu"
 
-      quizQuestions={PENGURANGAN_QUIZ}
+      quizQuestions={PENGURANGAN_TANK_QUIZ}
     />
   );
 

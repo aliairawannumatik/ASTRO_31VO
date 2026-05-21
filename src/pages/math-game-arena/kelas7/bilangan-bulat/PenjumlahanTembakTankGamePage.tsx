@@ -1,6 +1,6 @@
 import BattleTankPage, { MQ } from "@/pages/math-game-arena/umum/BattleTankPage";
 
-import { PENJUMLAHAN_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import { PENJUMLAHAN_TANK_QUIZ } from "@/data/mga-k7-bilbul-quiz";
 const questions: MQ[] = [
   { q: "(-7) + 9 = ...", opts: ["2", "-2", "16", "-16"], ans: 0 },
   { q: "15 + (-22) = ...", opts: ["-7", "7", "37", "-37"], ans: 0 },
@@ -23,7 +23,7 @@ const PenjumlahanTembakTankGamePage = () => (
     backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
     homePath="/menu"
 
-    quizQuestions={PENJUMLAHAN_QUIZ}
+    quizQuestions={PENJUMLAHAN_TANK_QUIZ}
   />
 );
 
