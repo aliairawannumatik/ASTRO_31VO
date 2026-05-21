@@ -108,7 +108,16 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{L_{besar}}{L_{kecil}} = k^2 = \\ldots" },
     ],
   }),
-  Qn(7, "Foto dan Bayangan", {
+  Qn(7, "Membandingkan Segitiga", {
+    type: "mixed",
+    diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["6","8","10"]} sideLabels2={["9","12","15"]} color1="#38bdf8" color2="#34d399" type="right"/>,
+    parts: [
+      { label: "a.", text: "Periksa apakah perbandingan sisi-sisi yang bersesuaian sama." },
+      { label: "b.", text: "Apakah kedua segitiga sebangun? Berapa faktor skalanya?" },
+      { label: "c.", text: "Apakah kedua segitiga itu merupakan segitiga siku-siku? Periksa dengan Teorema Pythagoras." },
+    ],
+  }),
+  Qn(8, "Foto dan Bayangan", {
     type: "mixed",
     content: "Sebuah foto berukuran 4 cm × 6 cm akan diperbesar menjadi 10 cm × 15 cm.",
     parts: [
@@ -118,7 +127,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\text{Rasio luas} = \\left(\\frac{4}{10}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(8, "Faktor Skala dari Luas", {
+  Qn(9, "Faktor Skala dari Luas", {
     type: "mixed",
     content: "Dua bangun sebangun. Luas bangun pertama 36 cm² dan luas bangun kedua 81 cm².",
     parts: [
@@ -127,22 +136,13 @@ const questions: Q[] = [
       { label: "c.", text: "Jika sebuah sisi bangun pertama 6 cm, berapa sisi yang bersesuaian pada bangun kedua?" },
     ],
   }),
-  Qn(9, "Kekongruenan dan Luas", {
+  Qn(10, "Kekongruenan dan Luas", {
     type: "mixed",
     content: "Dua bangun yang kongruen selalu memiliki luas yang sama.",
     parts: [
       { label: "a.", text: "Apakah pernyataan tersebut benar? Jelaskan." },
       { label: "b.", text: "Sebutkan dua sifat yang selalu sama pada dua bangun yang kongruen." },
       { label: "c.", text: "Bolehkah dua bangun yang luasnya sama langsung disebut kongruen? Berikan contoh kontra." },
-    ],
-  }),
-  Qn(10, "Membandingkan Segitiga", {
-    type: "mixed",
-    diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["6","8","10"]} sideLabels2={["9","12","15"]} color1="#38bdf8" color2="#34d399" type="right"/>,
-    parts: [
-      { label: "a.", text: "Periksa apakah perbandingan sisi-sisi yang bersesuaian sama." },
-      { label: "b.", text: "Apakah kedua segitiga sebangun? Berapa faktor skalanya?" },
-      { label: "c.", text: "Apakah kedua segitiga itu merupakan segitiga siku-siku? Periksa dengan Teorema Pythagoras." },
     ],
   }),
 ];
