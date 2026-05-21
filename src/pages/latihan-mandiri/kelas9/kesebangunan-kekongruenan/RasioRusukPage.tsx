@@ -12,152 +12,203 @@ type Q = { n: number; title: string; content?: string; math?: string; parts?: Pa
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const SvgQ1 = () => (
-  <svg width={220} height={148} viewBox="0 0 220 148" style={{display:'block'}}>
-    <rect width="220" height="148" fill="rgba(2,8,23,0.85)" rx="12"/>
-    <line x1="28" y1="125" x2="192" y2="125" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="125" x2="28" y2="18" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="18" x2="192" y2="125" stroke="#34d399" strokeWidth="1.8"/>
-    <rect x="28" y="117" width="8" height="8" fill="none" stroke="#34d399" strokeWidth="1.2"/>
-    <line x1="28" y1="125" x2="77" y2="50" stroke="#6ee7b7" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <polyline points="74,55 79,58 82,53" fill="none" stroke="#6ee7b7" strokeWidth="1.2"/>
-    <text x="28" y="13" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">C</text>
-    <text x="18" y="142" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">A</text>
-    <text x="200" y="140" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">B</text>
-    <text x="88" y="48" fill="#6ee7b7" fontSize="11" fontWeight="bold" textAnchor="start">D</text>
+  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
+    <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="52" y1="157" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="52" y1="22" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
+    <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="120,67 126,72 121,78" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
+    <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="36" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+    <circle cx="232" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="232" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+    <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
   </svg>
 );
 
 const SvgQ2 = () => (
-  <svg width={220} height={148} viewBox="0 0 220 148" style={{display:'block'}}>
-    <rect width="220" height="148" fill="rgba(2,8,23,0.85)" rx="12"/>
-    <line x1="28" y1="22" x2="165" y2="22" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="22" x2="28" y2="118" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="165" y1="22" x2="28" y2="118" stroke="#34d399" strokeWidth="1.8"/>
-    <rect x="28" y="22" width="8" height="8" fill="none" stroke="#34d399" strokeWidth="1.2"/>
-    <line x1="28" y1="22" x2="71" y2="83" stroke="#6ee7b7" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <polyline points="68,78 63,82 67,87" fill="none" stroke="#6ee7b7" strokeWidth="1.2"/>
-    <text x="18" y="16" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">A</text>
-    <text x="175" y="16" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">B</text>
-    <text x="18" y="133" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">C</text>
-    <text x="78" y="80" fill="#6ee7b7" fontSize="11" fontWeight="bold" textAnchor="start">D</text>
-    <text x="97" y="17" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="middle">AB = 12 cm</text>
-    <text x="106" y="72" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="middle">BC = 15 cm</text>
+  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="42,30 208,30 42,155" fill="rgba(34,211,238,0.08)"/>
+    <line x1="42" y1="30" x2="208" y2="30" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="42" y1="30" x2="42" y2="155" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="208" y1="30" x2="42" y2="155" stroke="#22d3ee" strokeWidth="2.5"/>
+    <rect x="42" y="30" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
+    <line x1="42" y1="30" x2="102" y2="106" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="97,99 103,94 108,100" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <circle cx="28" cy="18" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="28" y="23" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+    <circle cx="222" cy="18" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="222" y="23" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+    <circle cx="28" cy="167" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="28" y="172" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
+    <circle cx="116" cy="119" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <text x="116" y="124" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
+    <rect x="92" y="36" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="128" y="48" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">AB = 12 cm</text>
+    <rect x="130" y="76" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="166" y="88" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">BC = 15 cm</text>
   </svg>
 );
 
 const SvgQ3 = () => (
-  <svg width={220} height={148} viewBox="0 0 220 148" style={{display:'block'}}>
-    <rect width="220" height="148" fill="rgba(2,8,23,0.85)" rx="12"/>
-    <line x1="28" y1="125" x2="192" y2="125" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="125" x2="28" y2="18" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="18" x2="192" y2="125" stroke="#34d399" strokeWidth="1.8"/>
-    <rect x="28" y="117" width="8" height="8" fill="none" stroke="#34d399" strokeWidth="1.2"/>
-    <line x1="28" y1="125" x2="77" y2="50" stroke="#6ee7b7" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <polyline points="74,55 79,58 82,53" fill="none" stroke="#6ee7b7" strokeWidth="1.2"/>
-    <text x="28" y="13" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">C</text>
-    <text x="18" y="142" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">A</text>
-    <text x="200" y="140" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">B</text>
-    <text x="88" y="48" fill="#6ee7b7" fontSize="11" fontWeight="bold" textAnchor="start">D</text>
-    <text x="42" y="38" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="start">CD = 12 cm</text>
-    <text x="142" y="98" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="start">DB = 3 cm</text>
+  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
+    <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="52" y1="157" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="52" y1="22" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
+    <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="120,67 126,72 121,78" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
+    <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="36" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+    <circle cx="232" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="232" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+    <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
+    <rect x="60" y="32" width="70" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="95" y="44" fill="#6ee7b7" fontSize="10" fontWeight="bold" textAnchor="middle">CD = 12 cm</text>
+    <rect x="142" y="105" width="66" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="175" y="117" fill="#6ee7b7" fontSize="10" fontWeight="bold" textAnchor="middle">DB = 3 cm</text>
   </svg>
 );
 
 const SvgQ4 = () => (
-  <svg width={220} height={148} viewBox="0 0 220 148" style={{display:'block'}}>
-    <rect width="220" height="148" fill="rgba(2,8,23,0.85)" rx="12"/>
-    <line x1="28" y1="125" x2="192" y2="125" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="125" x2="28" y2="18" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="18" x2="192" y2="125" stroke="#34d399" strokeWidth="1.8"/>
-    <rect x="28" y="117" width="8" height="8" fill="none" stroke="#34d399" strokeWidth="1.2"/>
-    <line x1="28" y1="125" x2="77" y2="50" stroke="#6ee7b7" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <polyline points="74,55 79,58 82,53" fill="none" stroke="#6ee7b7" strokeWidth="1.2"/>
-    <text x="28" y="13" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">C</text>
-    <text x="18" y="142" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">A</text>
-    <text x="200" y="140" fill="#34d399" fontSize="12" fontWeight="bold" textAnchor="middle">B</text>
-    <text x="88" y="48" fill="#6ee7b7" fontSize="11" fontWeight="bold" textAnchor="start">D</text>
-    <text x="43" y="37" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="start">5 cm</text>
-    <text x="140" y="99" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="start">4 cm</text>
+  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
+    <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="52" y1="157" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <line x1="52" y1="22" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
+    <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
+    <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="120,67 126,72 121,78" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
+    <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="36" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+    <circle cx="232" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="232" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+    <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
+    <rect x="62" y="32" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="93" y="44" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">CD = 5 cm</text>
+    <rect x="142" y="105" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="173" y="117" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">DB = 4 cm</text>
   </svg>
 );
 
 const SvgQ5a = () => (
-  <svg width={200} height={130} viewBox="0 0 200 130" style={{display:'block'}}>
-    <rect width="200" height="130" fill="rgba(2,8,23,0.85)" rx="8"/>
-    <line x1="15" y1="112" x2="175" y2="112" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="15" y1="112" x2="80" y2="15" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="80" y1="15" x2="175" y2="112" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="80" y1="15" x2="80" y2="112" stroke="#6ee7b7" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <rect x="72" y="104" width="8" height="8" fill="none" stroke="#6ee7b7" strokeWidth="1.2"/>
-    <text x="80" y="10" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">C</text>
-    <text x="8" y="125" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">A</text>
-    <text x="183" y="125" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">B</text>
-    <text x="80" y="125" fill="#6ee7b7" fontSize="10" fontWeight="bold" textAnchor="middle">D</text>
-    <text x="54" y="63" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">18 cm</text>
-    <text x="140" y="115" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">6 cm</text>
-    <text x="40" y="115" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">a</text>
+  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="127,18 22,150 215,150" fill="rgba(16,185,129,0.08)"/>
+    <line x1="127" y1="18" x2="22" y2="150" stroke="#10b981" strokeWidth="2.5"/>
+    <line x1="22" y1="150" x2="215" y2="150" stroke="#10b981" strokeWidth="2.5"/>
+    <line x1="127" y1="18" x2="215" y2="150" stroke="#10b981" strokeWidth="2.5"/>
+    <line x1="127" y1="18" x2="148" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="139,150 139,141 148,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+    <circle cx="127" cy="6" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
+    <text x="127" y="11" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
+    <circle cx="8" cy="164" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
+    <text x="8" y="169" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+    <circle cx="228" cy="164" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
+    <text x="228" y="169" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+    <circle cx="148" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
+    <text x="148" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
+    <rect x="152" y="72" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="188" y="84" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">CD = 18 cm</text>
+    <rect x="158" y="130" width="60" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="188" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">DB = 6 cm</text>
+    <rect x="60" y="130" width="44" height="18" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="82" y="143" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">a</text>
   </svg>
 );
 
 const SvgQ5b = () => (
-  <svg width={200} height={130} viewBox="0 0 200 130" style={{display:'block'}}>
-    <rect width="200" height="130" fill="rgba(2,8,23,0.85)" rx="8"/>
-    <line x1="20" y1="112" x2="175" y2="112" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="20" y1="112" x2="85" y2="18" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="85" y1="18" x2="175" y2="112" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="85" y1="18" x2="85" y2="112" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <rect x="77" y="104" width="8" height="8" fill="none" stroke="#fbbf24" strokeWidth="1.2"/>
-    <text x="85" y="13" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">G</text>
-    <text x="12" y="125" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">E</text>
-    <text x="183" y="125" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">F</text>
-    <text x="85" y="125" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">H</text>
-    <text x="52" y="115" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">4 cm</text>
-    <text x="130" y="115" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">5 cm</text>
-    <text x="62" y="68" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">b</text>
+  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="100,18 20,150 215,150" fill="rgba(129,140,248,0.08)"/>
+    <line x1="100" y1="18" x2="20" y2="150" stroke="#818cf8" strokeWidth="2.5"/>
+    <line x1="20" y1="150" x2="215" y2="150" stroke="#818cf8" strokeWidth="2.5"/>
+    <line x1="100" y1="18" x2="215" y2="150" stroke="#818cf8" strokeWidth="2.5"/>
+    <line x1="100" y1="18" x2="107" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="98,150 98,141 107,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+    <circle cx="100" cy="6" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
+    <text x="100" y="11" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">G</text>
+    <circle cx="6" cy="164" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
+    <text x="6" y="169" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">E</text>
+    <circle cx="228" cy="164" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
+    <text x="228" y="169" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">F</text>
+    <circle cx="107" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
+    <text x="107" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">H</text>
+    <rect x="64" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="79" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">b</text>
+    <rect x="22" y="130" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="53" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">EH = 4 cm</text>
+    <rect x="120" y="130" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="151" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">HF = 5 cm</text>
   </svg>
 );
 
 const SvgQ5c = () => (
-  <svg width={200} height={110} viewBox="0 0 200 110" style={{display:'block'}}>
-    <rect width="200" height="110" fill="rgba(2,8,23,0.85)" rx="8"/>
-    <line x1="15" y1="95" x2="185" y2="95" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="15" y1="95" x2="48" y2="18" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="48" y1="18" x2="185" y2="95" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="48" y1="18" x2="48" y2="95" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <rect x="40" y="87" width="8" height="8" fill="none" stroke="#fbbf24" strokeWidth="1.2"/>
-    <text x="48" y="13" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">L</text>
-    <text x="8" y="106" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">K</text>
-    <text x="192" y="106" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">M</text>
-    <text x="48" y="107" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">N</text>
-    <text x="30" y="98" fill="rgba(255,255,255,0.75)" fontSize="9" textAnchor="middle">4 cm</text>
-    <text x="118" y="104" fill="rgba(255,255,255,0.75)" fontSize="9" textAnchor="middle">25 cm</text>
-    <text x="60" y="60" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="start">c</text>
+  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="55,18 20,150 215,150" fill="rgba(168,85,247,0.08)"/>
+    <line x1="55" y1="18" x2="20" y2="150" stroke="#a855f7" strokeWidth="2.5"/>
+    <line x1="20" y1="150" x2="215" y2="150" stroke="#a855f7" strokeWidth="2.5"/>
+    <line x1="55" y1="18" x2="215" y2="150" stroke="#a855f7" strokeWidth="2.5"/>
+    <line x1="55" y1="18" x2="59" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="50,150 50,141 59,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+    <circle cx="55" cy="6" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
+    <text x="55" y="11" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">L</text>
+    <circle cx="6" cy="164" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
+    <text x="6" y="169" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">K</text>
+    <circle cx="228" cy="164" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
+    <text x="228" y="169" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">M</text>
+    <circle cx="59" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
+    <text x="59" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">N</text>
+    <rect x="26" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="41" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">c</text>
+    <rect x="14" y="130" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="45" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">KN = 4 cm</text>
+    <rect x="100" y="130" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="136" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">NM = 25 cm</text>
   </svg>
 );
 
 const SvgQ5d = () => (
-  <svg width={200} height={130} viewBox="0 0 200 130" style={{display:'block'}}>
-    <rect width="200" height="130" fill="rgba(2,8,23,0.85)" rx="8"/>
-    <line x1="28" y1="112" x2="175" y2="112" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="112" x2="28" y2="18" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="28" y1="18" x2="175" y2="112" stroke="#34d399" strokeWidth="1.8"/>
-    <rect x="28" y="104" width="8" height="8" fill="none" stroke="#34d399" strokeWidth="1.2"/>
-    {/* U on hypotenuse TS, RU ⊥ TS */}
-    {/* T=(28,18), S=(175,112): dir=(147,94), |TS|²=147²+94²=21609+8836=30445 */}
-    {/* TU: t = TR²/TS² * TS = 81/225 of TS, US = RS²/TS² * TS */}
-    {/* Let TR=9, RS=12, TS=15. TU/TS = TR²/TS² ... */}
-    {/* TU = TR²/TS = 81/15 = 5.4, so t_U = 5.4/15 = 0.36 */}
-    {/* U = T + 0.36*(S-T) = (28+0.36*147, 18+0.36*94) = (81,52) */}
-    {/* RU ⊥ TS: from R=(28,112) to U=(81,52) */}
-    <line x1="28" y1="112" x2="81" y2="52" stroke="#6ee7b7" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <polyline points="78,57 83,60 86,55" fill="none" stroke="#6ee7b7" strokeWidth="1.2"/>
-    <text x="28" y="13" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">T</text>
-    <text x="18" y="125" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">R</text>
-    <text x="183" y="125" fill="#34d399" fontSize="11" fontWeight="bold" textAnchor="middle">S</text>
-    <text x="90" y="50" fill="#6ee7b7" fontSize="11" fontWeight="bold" textAnchor="start">U</text>
-    <text x="18" y="68" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">9 cm</text>
-    <text x="102" y="124" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">12 cm</text>
-    <text x="142" y="82" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">d</text>
+  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <polygon points="52,22 52,158 210,158" fill="rgba(248,113,113,0.08)"/>
+    <line x1="52" y1="22" x2="52" y2="158" stroke="#f87171" strokeWidth="2.5"/>
+    <line x1="52" y1="158" x2="210" y2="158" stroke="#f87171" strokeWidth="2.5"/>
+    <line x1="52" y1="22" x2="210" y2="158" stroke="#f87171" strokeWidth="2.5"/>
+    <rect x="52" y="149" width="9" height="9" fill="rgba(248,113,113,0.2)" stroke="#f87171" strokeWidth="1.5"/>
+    <line x1="52" y1="158" x2="109" y2="71" stroke="#22d3ee" strokeWidth="2" strokeDasharray="6,4"/>
+    <polyline points="113,64 120,70 115,76" fill="none" stroke="#22d3ee" strokeWidth="1.5"/>
+    <circle cx="38" cy="10" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
+    <text x="38" y="15" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">T</text>
+    <circle cx="36" cy="172" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
+    <text x="36" y="177" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">R</text>
+    <circle cx="222" cy="172" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
+    <text x="222" y="177" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">S</text>
+    <circle cx="122" cy="59" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <text x="122" y="64" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">U</text>
+    <rect x="157" y="98" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="172" y="113" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">d</text>
+    <rect x="10" y="82" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="41" y="94" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">TR = 9 cm</text>
+    <rect x="96" y="162" width="70" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="131" y="174" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">RS = 12 cm</text>
   </svg>
 );
 
