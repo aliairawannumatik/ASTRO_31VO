@@ -160,6 +160,20 @@ const pgQuestions: PGQ[] = [
   {
     n: 4,
     content: "Sebuah koin dan sebuah dadu dilempar bersama-sama. Banyaknya anggota ruang sampel percobaan tersebut adalah ....",
+    diagram: (
+      <FreqTable
+        caption="Tabel ruang sampel: Dadu + Koin"
+        headers={["Dadu", "Koin A", "Koin G"]}
+        rows={[
+          [1,"(1,A)","(1,G)"],
+          [2,"(2,A)","(2,G)"],
+          [3,"(3,A)","(3,G)"],
+          [4,"(4,A)","(4,G)"],
+          [5,"(5,A)","(5,G)"],
+          [6,"(6,A)","(6,G)"],
+        ]}
+      />
+    ),
     options: [
       { key: "A", text: "6" },
       { key: "B", text: "8" },
@@ -385,30 +399,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel yang memuat sisi Angka?" },
     ],
   }),
-  Qn(11, "Tabel – Dadu dan Koin", {
-    type: "mixed",
-    diagram: (
-      <FreqTable
-        caption="Tabel ruang sampel: Dadu + Koin"
-        headers={["Dadu", "Koin A", "Koin G"]}
-        rows={[
-          [1,"(1,A)","(1,G)"],
-          [2,"(2,A)","(2,G)"],
-          [3,"(3,A)","(3,G)"],
-          [4,"(4,A)","(4,G)"],
-          [5,"(5,A)","(5,G)"],
-          [6,"(6,A)","(6,G)"],
-        ]}
-      />
-    ),
-    content: "Sebuah dadu dan sebuah koin dilempar bersama.",
-    parts: [
-      { label: "a.", text: "Berapa n(S) berdasarkan tabel?" },
-      { label: "b.", text: "Sebutkan titik sampel dengan dadu genap dan koin Angka." },
-      { label: "c.", text: "Sebutkan titik sampel dengan dadu prima dan koin Gambar." },
-    ],
-  }),
-  Qn(12, "Aturan Perkalian – Menghitung n(S)", {
+  Qn(11, "Aturan Perkalian – Menghitung n(S)", {
     type: "mixed",
     content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
     parts: [
@@ -417,7 +408,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
     ],
   }),
-  Qn(13, "Pengambilan Tanpa Pengembalian", {
+  Qn(12, "Pengambilan Tanpa Pengembalian", {
     type: "mixed",
     content: "Kotak berisi 3 bola: Merah (M), Biru (B), Hijau (H). Dua bola diambil satu per satu tanpa pengembalian.",
     diagram: (
@@ -437,7 +428,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
     ],
   }),
-  Qn(14, "Soal TKA – Pengambilan Kelereng", {
+  Qn(13, "Soal TKA – Pengambilan Kelereng", {
     type: "mixed",
     content: "Kantong berisi 4 kelereng: 2 merah (M1, M2) dan 2 putih (P1, P2). Dua kelereng diambil bersamaan.",
     diagram: (
@@ -479,7 +470,7 @@ const RuangSampelPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 27 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 26 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
