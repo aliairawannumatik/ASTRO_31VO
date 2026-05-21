@@ -129,7 +129,7 @@ type PGQ = { n: number; content: string; options: PGOpt[] };
 const pgQuestions: PGQ[] = [
   {
     n: 1,
-    content: "Ruang sampel dari percobaan melempar sepasang uang koin adalah ....",
+    content: "Ruang sampel dari percobaan melempar 2 keping uang koin adalah ....",
     options: [
       { key: "a", text: "S = \\{(A, G)\\}", math: true },
       { key: "b", text: "S = \\{(A, A),\\ (G, G)\\}", math: true },
