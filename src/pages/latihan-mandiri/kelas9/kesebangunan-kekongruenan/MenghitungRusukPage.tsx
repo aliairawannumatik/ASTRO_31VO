@@ -97,17 +97,7 @@ const questions: Q[] = [
       { label: "D.", text: "15" },
     ],
   }),
-  Qn(4, "Gambar Diperbesar – UN", {
-    type: "mixed",
-    content: "Gambar berukuran 30 cm × 20 cm diperbesar sebesar 150%. Ukuran gambar hasil perbesaran berukuran ....",
-    parts: [
-      { label: "A.", text: "40 cm × 28 cm" },
-      { label: "B.", text: "45 cm × 30 cm" },
-      { label: "C.", text: "48 cm × 32 cm" },
-      { label: "D.", text: "42 cm × 25 cm" },
-    ],
-  }),
-  Qn(5, "Bayangan Tiang dan Pohon – UN", {
+  Qn(4, "Bayangan Tiang dan Pohon – UN", {
     type: "mixed",
     content: "Suatu tiang dengan tinggi 4 m mempunyai panjang bayangan 2,4 m. Jika suatu pohon mempunyai panjang bayangan 3 m, maka tinggi pohon tersebut adalah ....",
     parts: [
@@ -117,7 +107,7 @@ const questions: Q[] = [
       { label: "D.", text: "7 m" },
     ],
   }),
-  Qn(6, "Lapangan Sebangun – Nilai p – ANBK", {
+  Qn(5, "Lapangan Sebangun – Nilai p – ANBK", {
     type: "mixed",
     content: "Dua lapangan masing-masing berbentuk persegi panjang. Lapangan pertama berukuran 72 m × 45 m dan lapangan kedua berukuran p m × 135 m. Jika kedua lapangan tersebut sebangun, maka nilai p adalah ....",
     parts: [
@@ -127,7 +117,7 @@ const questions: Q[] = [
       { label: "D.", text: "240" },
     ],
   }),
-  Qn(7, "Rasio Sisi Persegi Panjang Sebangun – ANBK", {
+  Qn(6, "Rasio Sisi Persegi Panjang Sebangun – ANBK", {
     type: "mixed",
     content: "Gambar berikut menunjukkan bahwa persegi panjang ABCD dan persegi panjang EFGH sebangun. Jika EF = m dan FG = n, pernyataan yang benar adalah ....",
     diagram: <SimilarRectRatioSVG />,
@@ -138,7 +128,7 @@ const questions: Q[] = [
       { label: "D.", math: "m : n = 1 : 1" },
     ],
   }),
-  Qn(8, "Foto di Karton – TKA", {
+  Qn(7, "Foto di Karton – TKA", {
     type: "mixed",
     content: "Sebuah foto berukuran 16 cm × 24 cm diletakkan secara vertikal di atas karton. Ternyata di sebelah kiri, kanan, dan atas foto masih tersisa 2 cm karton. Jika karton dan foto sebangun, lebar karton di bagian bawah foto adalah ....",
     parts: [
@@ -148,123 +138,13 @@ const questions: Q[] = [
       { label: "D.", text: "6 cm" },
     ],
   }),
-  Qn(9, "Bayangan Anak dan Tiang Bendera – ANBK", {
-    type: "mixed",
-    content: "Seorang anak dengan tinggi 120 cm mempunyai panjang bayangan 1,8 m di tanah mendatar. Suatu tiang bendera mempunyai panjang bayangan 5,4 m. Tinggi tiang bendera sebenarnya adalah ....",
-    parts: [
-      { label: "A.", text: "200 cm" },
-      { label: "B.", text: "300 cm" },
-      { label: "C.", text: "360 cm" },
-      { label: "D.", text: "400 cm" },
-    ],
-  }),
-  Qn(10, "Menara dan Tiang – TKA", {
-    type: "mixed",
-    content: "Suatu menara yang tingginya 30 m mempunyai panjang bayangan 45 m, sedangkan suatu tiang mempunyai panjang bayangan 12 m. Panjang tiang sebenarnya adalah ....",
-    parts: [
-      { label: "A.", text: "6 m" },
-      { label: "B.", text: "8 m" },
-      { label: "C.", text: "10 m" },
-      { label: "D.", text: "12 m" },
-    ],
-  }),
-  Qn(11, "Persegi Panjang Sebangun – Cari Panjang", {
-    type: "mixed",
-    diagram: <SimilarRects w1={60} h1={40} w2={90} h2={60} sides1={["8 cm","5 cm","",""]} sides2={["12 cm","? cm","",""]} color1="#f97316" color2="#fbbf24"/>,
-    parts: [
-      { label: "a.", math: "\\frac{AB}{EF} = \\frac{BC}{FG} \\Rightarrow \\frac{8}{12} = \\frac{5}{FG}" },
-      { label: "b.", text: "Hitunglah panjang FG." },
-      { label: "c.", text: "Berapa faktor skala dari ABCD ke EFGH?" },
-    ],
-  }),
-  Qn(12, "Segitiga Sebangun – Mencari Sisi", {
-    type: "mixed",
-    diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["P","Q","R"]} sideLabels1={["6","8","?"]} sideLabels2={["9","12","15"]} color1="#f97316" color2="#fb923c" type="right"/>,
-    parts: [
-      { label: "a.", math: "\\frac{AB}{PQ} = \\frac{6}{9} = \\frac{2}{3}" },
-      { label: "b.", text: "Tentukan panjang AC." },
-      { label: "c.", text: "Berapa keliling △ABC jika keliling △PQR = 36 cm?" },
-    ],
-  }),
-  Qn(13, "Bangun Sebangun – Foto dan Bingkai", {
-    type: "mixed",
-    content: "Sebuah foto berukuran 6 cm × 9 cm akan dipasang pada bingkai yang sebangun dengan foto. Lebar bingkai 15 cm.",
-    parts: [
-      { label: "a.", text: "Tentukan panjang bingkai." },
-      { label: "b.", text: "Berapa faktor skala dari foto ke bingkai?" },
-      { label: "c.", text: "Berapa luas bingkai?" },
-    ],
-  }),
-  Qn(14, "Garis Sejajar dalam Segitiga (Thales)", {
-    type: "mixed",
-    diagram: <ParallelLinesTriangle topLabel="DE" botLabel="BC" leftA="AD=3" leftB="DB=6" rightA="AE=4" rightB="EC=?" topSide="DE" botSide="BC" color1="#f97316" color2="#fbbf24"/>,
-    parts: [
-      { label: "a.", math: "\\frac{AD}{DB} = \\frac{AE}{EC} \\Rightarrow \\frac{3}{6} = \\frac{4}{EC}" },
-      { label: "b.", text: "Hitunglah EC." },
-      { label: "c.", text: "Hitunglah BC jika DE = 5 cm menggunakan rasio kesebangunan." },
-    ],
-  }),
-  Qn(15, "Soal Kontekstual – Bayangan Pohon", {
-    type: "mixed",
-    content: "Sebuah tiang listrik setinggi 6 m menghasilkan bayangan 4 m di tanah. Pada saat yang sama, pohon di sampingnya menghasilkan bayangan 10 m.",
-    parts: [
-      { label: "a.", math: "\\frac{\\text{tinggi tiang}}{\\text{bayangan tiang}} = \\frac{\\text{tinggi pohon}}{\\text{bayangan pohon}}" },
-      { label: "b.", text: "Hitunglah tinggi pohon." },
-      { label: "c.", text: "Mengapa bayangan dan benda membentuk segitiga yang sebangun?" },
-    ],
-  }),
-  Qn(16, "Segitiga Sebangun dalam Soal Cerita", {
-    type: "mixed",
-    content: "Dua gedung berdiri di sisi jalan. Gedung A setinggi 20 m memiliki bayangan 8 m. Gedung B memiliki bayangan 12 m di waktu yang sama.",
-    parts: [
-      { label: "a.", text: "Buatlah perbandingan tinggi badan terhadap bayangan untuk gedung A." },
-      { label: "b.", text: "Hitunglah tinggi gedung B." },
-      { label: "c.", math: "\\frac{20}{8} = \\frac{h_B}{12} \\Rightarrow h_B = \\ldots" },
-    ],
-  }),
-  Qn(17, "Menghitung Sisi Sebangun dengan Persamaan", {
-    type: "mixed",
-    content: "△ABC ~ △DEF. AB = (x+2) cm, DE = 12 cm, BC = 6 cm, EF = 9 cm.",
-    parts: [
-      { label: "a.", math: "\\frac{AB}{DE} = \\frac{BC}{EF} \\Rightarrow \\frac{x+2}{12} = \\frac{6}{9}" },
-      { label: "b.", text: "Selesaikan persamaan untuk mencari x." },
-      { label: "c.", text: "Hitunglah panjang AB." },
-    ],
-  }),
-  Qn(18, "Faktor Skala dari Luas", {
-    type: "mixed",
-    content: "Dua segitiga sebangun. Luas segitiga pertama 50 cm² dan luas segitiga kedua 200 cm².",
-    parts: [
-      { label: "a.", math: "k^2 = \\frac{200}{50} = 4 \\Rightarrow k = \\ldots" },
-      { label: "b.", text: "Jika alas segitiga pertama 10 cm, berapa alas segitiga kedua?" },
-      { label: "c.", text: "Jika keliling segitiga pertama 24 cm, berapa keliling segitiga kedua?" },
-    ],
-  }),
-  Qn(19, "Garis Sejajar Membagi Sisi Sebanding", {
-    type: "mixed",
-    diagram: <ParallelLinesTriangle topLabel="MN" botLabel="PQ" leftA="AM=5" leftB="MP=10" rightA="AN=4" rightB="NQ=?" topSide="MN" botSide="PQ" color1="#f97316" color2="#fb923c"/>,
-    parts: [
-      { label: "a.", math: "\\frac{AM}{MP} = \\frac{AN}{NQ}" },
-      { label: "b.", text: "Hitunglah NQ." },
-      { label: "c.", math: "\\frac{MN}{PQ} = \\frac{AM}{AP} = \\frac{5}{15} = \\ldots" },
-    ],
-  }),
-  Qn(20, "Perbandingan pada Foto dan Benda", {
+  Qn(8, "Perbandingan pada Foto dan Benda", {
     type: "mixed",
     content: "Sebuah mobil sepanjang 4 m difoto. Dalam foto, panjang mobil 8 cm. Lebar mobil 1,6 m.",
     parts: [
       { label: "a.", text: "Tentukan skala foto." },
       { label: "b.", text: "Berapa lebar mobil dalam foto (dalam cm)?" },
       { label: "c.", text: "Apakah foto dan mobil asli sebangun? Buktikan." },
-    ],
-  }),
-  Qn(21, "Menghitung Panjang dengan Perbandingan", {
-    type: "mixed",
-    content: "Dua segitiga ABC dan PQR sebangun. AB = 7 cm, BC = 14 cm, CA = 21 cm. PQ = 5 cm.",
-    parts: [
-      { label: "a.", text: "Tentukan faktor skala dari △ABC ke △PQR." },
-      { label: "b.", text: "Hitunglah QR dan RP." },
-      { label: "c.", text: "Hitunglah keliling △PQR." },
     ],
   }),
 ];
@@ -286,7 +166,7 @@ const MenghitungRusukPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 21 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 8 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
