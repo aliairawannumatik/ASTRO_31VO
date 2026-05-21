@@ -124,6 +124,131 @@ type Part = { label: string; math?: string; text?: string };
 type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay" | "mixed" | "diagram-only" };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
+type PGOpt = { key: string; text: string; math?: boolean };
+type PGQ = { n: number; content: string; options: PGOpt[] };
+const pgQuestions: PGQ[] = [
+  {
+    n: 1,
+    content: "Ruang sampel dari percobaan melempar sepasang uang koin adalah ....",
+    options: [
+      { key: "a", text: "S = \\{(A, G)\\}", math: true },
+      { key: "b", text: "S = \\{(A, A),\\ (G, G)\\}", math: true },
+      { key: "c", text: "S = \\{(A, A),\\ (A, G),\\ (G, A),\\ (G, G)\\}", math: true },
+      { key: "d", text: "S = \\{(A, G),\\ (G, A)\\}", math: true },
+    ],
+  },
+  {
+    n: 2,
+    content: "Dua buah dadu dilempar bersamaan. Himpunan kejadian jumlah mata kedua dadu adalah 7 merupakan ....",
+    options: [
+      { key: "a", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2)\\}", math: true },
+      { key: "b", text: "\\{(1,6),\\ (2,5),\\ (3,4)\\}", math: true },
+      { key: "c", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4),\\ (4,3)\\}", math: true },
+      { key: "d", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4)\\}", math: true },
+    ],
+  },
+  {
+    n: 3,
+    content: "Sebuah kantong berisi kartu bernomor 1, 2, 3, 4 dan kartu berhuruf A, B, C. Jika diambil satu kartu secara acak, banyaknya titik sampelnya adalah ....",
+    options: [
+      { key: "a", text: "5" },
+      { key: "b", text: "6" },
+      { key: "c", text: "7" },
+      { key: "d", text: "8" },
+    ],
+  },
+  {
+    n: 4,
+    content: "Sebuah koin dan sebuah dadu dilempar bersama-sama. Banyaknya anggota ruang sampel percobaan tersebut adalah ....",
+    options: [
+      { key: "a", text: "6" },
+      { key: "b", text: "8" },
+      { key: "c", text: "12" },
+      { key: "d", text: "18" },
+    ],
+  },
+  {
+    n: 5,
+    content: "Reza mempunyai 3 kaos, 4 celana, dan 2 pasang sepatu. Banyaknya cara Reza dapat memilih busana yang akan dikenakan adalah ....",
+    options: [
+      { key: "a", text: "9" },
+      { key: "b", text: "12" },
+      { key: "c", text: "18" },
+      { key: "d", text: "24" },
+    ],
+  },
+  {
+    n: 6,
+    content: "Banyaknya titik sampel pada percobaan melempar 2 buah dadu secara bersamaan adalah ....",
+    options: [
+      { key: "a", text: "12" },
+      { key: "b", text: "18" },
+      { key: "c", text: "36" },
+      { key: "d", text: "48" },
+    ],
+  },
+  {
+    n: 7,
+    content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
+    options: [
+      { key: "a", text: "2" },
+      { key: "b", text: "3" },
+      { key: "c", text: "4" },
+      { key: "d", text: "5" },
+    ],
+  },
+  {
+    n: 8,
+    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
+    options: [
+      { key: "a", text: "12" },
+      { key: "b", text: "18" },
+      { key: "c", text: "24" },
+      { key: "d", text: "36" },
+    ],
+  },
+  {
+    n: 9,
+    content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu 4 atau 8 adalah ....",
+    options: [
+      { key: "a", text: "6" },
+      { key: "b", text: "8" },
+      { key: "c", text: "10" },
+      { key: "d", text: "12" },
+    ],
+  },
+  {
+    n: 10,
+    content: "Sebuah dadu dilempar satu kali. Banyaknya kemungkinan muncul mata dadu bukan angka 2 adalah ....",
+    options: [
+      { key: "a", text: "4" },
+      { key: "b", text: "5" },
+      { key: "c", text: "6" },
+      { key: "d", text: "7" },
+    ],
+  },
+  {
+    n: 11,
+    content: "Pasangan suami istri berencana memiliki 3 orang anak. Banyaknya titik sampel dari jenis kelamin anak yang mungkin terjadi adalah ....",
+    options: [
+      { key: "a", text: "4" },
+      { key: "b", text: "6" },
+      { key: "c", text: "8" },
+      { key: "d", text: "12" },
+    ],
+  },
+  {
+    n: 12,
+    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
+    options: [
+      { key: "a", text: "\\{(A, A)\\}", math: true },
+      { key: "b", text: "\\{(G, G)\\}", math: true },
+      { key: "c", text: "\\{(A, G),\\ (G, A)\\}", math: true },
+      { key: "d", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
+    ],
+  },
+];
+
 const questions: Q[] = [
   Qn(1, "Ruang Sampel Koin Tunggal", {
     type: "mixed",
@@ -353,7 +478,7 @@ const RuangSampelPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 15 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 27 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -372,6 +497,56 @@ const RuangSampelPage = () => {
                 <span className="text-white/60 text-[10px]">{r.name}</span>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* ── PILIHAN GANDA ── */}
+        <div className="mb-5 mt-2">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="h-px flex-1 bg-cyan-500/20" />
+            <span className="text-cyan-300 text-xs font-bold uppercase tracking-widest px-2">A. Pilihan Ganda</span>
+            <div className="h-px flex-1 bg-cyan-500/20" />
+          </div>
+          <p className="text-white/40 text-[11px] font-body mb-4 text-center">Pilihlah satu jawaban yang paling tepat.</p>
+          <div className="flex flex-col gap-3">
+            {pgQuestions.map((q, i) => (
+              <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
+                style={{ animationDelay: `${i * 0.02}s` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
+                <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-teal-500 rounded-l-2xl" />
+                <div className="relative px-5 py-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center shrink-0">
+                      <span className="text-cyan-300 text-xs font-bold">{q.n}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>
+                      <div className="grid grid-cols-1 gap-1.5">
+                        {q.options.map(opt => (
+                          <div key={opt.key} className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                            <span className="text-cyan-300 text-xs font-bold shrink-0 min-w-[18px]">{opt.key}.</span>
+                            {opt.math
+                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={opt.text} /></div>
+                              : <span className="font-body text-sm text-white/80">{opt.text}</span>
+                            }
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── URAIAN ── */}
+        <div className="mb-4 mt-2">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="h-px flex-1 bg-cyan-500/20" />
+            <span className="text-cyan-300 text-xs font-bold uppercase tracking-widest px-2">B. Uraian</span>
+            <div className="h-px flex-1 bg-cyan-500/20" />
           </div>
         </div>
 
