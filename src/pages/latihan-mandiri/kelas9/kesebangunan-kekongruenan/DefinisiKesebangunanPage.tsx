@@ -67,7 +67,18 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika } AB = 6 \\text{ cm dan } DE = 9 \\text{ cm, berapakah rasio kesebangunannya?}" },
     ],
   }),
-  Qn(3, "Syarat Kesebangunan – Sisi", {
+  Qn(3, "Identifikasi Pasangan Sebangun", {
+    type: "mixed",
+    content: "Tentukan pasangan bangun yang pasti sebangun:",
+    parts: [
+      { label: "A.", text: "Semua persegi" },
+      { label: "B.", text: "Semua persegi panjang" },
+      { label: "C.", text: "Semua lingkaran" },
+      { label: "D.", text: "Semua segitiga sama sisi" },
+      { label: "", text: "Dari pilihan A–D, mana yang pasti sebangun? Jelaskan alasan untuk setiap pilihan." },
+    ],
+  }),
+  Qn(4, "Syarat Kesebangunan – Sisi", {
     type: "mixed",
     content: "Dua segitiga PQR dan STU memiliki panjang sisi: PQ = 4, QR = 6, PR = 8 dan ST = 6, TU = 9, SU = 12.",
     parts: [
@@ -76,7 +87,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah kedua segitiga itu sebangun? Berapa rasio perbandingannya?" },
     ],
   }),
-  Qn(4, "Sisi Sebanding – Pilihan Ganda – UN", {
+  Qn(5, "Sisi Sebanding – Pilihan Ganda – UN", {
     type: "mixed",
     content: "Perhatikan gambar berikut! △PQR sebangun dengan △XYZ karena m∠P = m∠X, m∠Q = m∠Y, dan m∠R = m∠Z. Panjang rusuk-rusuk yang sebanding adalah ....",
     diagram: <SimilarRightTrianglesPQRXYZ />,
@@ -87,7 +98,7 @@ const questions: Q[] = [
       { label: "D.", math: "\\dfrac{PR}{PQ} = \\dfrac{QR}{XY} = \\dfrac{ZY}{ZX}" },
     ],
   }),
-  Qn(5, "Faktor Skala / Rasio Kesebangunan", {
+  Qn(6, "Faktor Skala / Rasio Kesebangunan", {
     type: "mixed",
     diagram: <SimilarRects w1={50} h1={35} w2={100} h2={70} sides1={["5 cm","3,5 cm","",""]as any} sides2={["10 cm","7 cm","",""]as any} color1="#38bdf8" color2="#34d399"/>,
     parts: [
@@ -97,7 +108,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{L_{besar}}{L_{kecil}} = k^2 = \\ldots" },
     ],
   }),
-  Qn(6, "Foto dan Bayangan", {
+  Qn(7, "Foto dan Bayangan", {
     type: "mixed",
     content: "Sebuah foto berukuran 4 cm × 6 cm akan diperbesar menjadi 10 cm × 15 cm.",
     parts: [
@@ -107,7 +118,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\text{Rasio luas} = \\left(\\frac{4}{10}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(7, "Faktor Skala dari Luas", {
+  Qn(8, "Faktor Skala dari Luas", {
     type: "mixed",
     content: "Dua bangun sebangun. Luas bangun pertama 36 cm² dan luas bangun kedua 81 cm².",
     parts: [
@@ -116,24 +127,13 @@ const questions: Q[] = [
       { label: "c.", text: "Jika sebuah sisi bangun pertama 6 cm, berapa sisi yang bersesuaian pada bangun kedua?" },
     ],
   }),
-  Qn(8, "Kekongruenan dan Luas", {
+  Qn(9, "Kekongruenan dan Luas", {
     type: "mixed",
     content: "Dua bangun yang kongruen selalu memiliki luas yang sama.",
     parts: [
       { label: "a.", text: "Apakah pernyataan tersebut benar? Jelaskan." },
       { label: "b.", text: "Sebutkan dua sifat yang selalu sama pada dua bangun yang kongruen." },
       { label: "c.", text: "Bolehkah dua bangun yang luasnya sama langsung disebut kongruen? Berikan contoh kontra." },
-    ],
-  }),
-  Qn(9, "Identifikasi Pasangan Sebangun", {
-    type: "mixed",
-    content: "Tentukan pasangan bangun yang pasti sebangun:",
-    parts: [
-      { label: "A.", text: "Semua persegi" },
-      { label: "B.", text: "Semua persegi panjang" },
-      { label: "C.", text: "Semua lingkaran" },
-      { label: "D.", text: "Semua segitiga sama sisi" },
-      { label: "", text: "Dari pilihan A–D, mana yang pasti sebangun? Jelaskan alasan untuk setiap pilihan." },
     ],
   }),
   Qn(10, "Membandingkan Segitiga", {
