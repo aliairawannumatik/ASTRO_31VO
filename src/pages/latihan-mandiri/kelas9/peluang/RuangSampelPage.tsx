@@ -247,6 +247,16 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
     ],
   },
+  {
+    n: 13,
+    content: "Tiga keping uang logam dilempar secara bersamaan. Banyaknya anggota ruang sampel dari percobaan tersebut adalah ....",
+    options: [
+      { key: "A", text: "4" },
+      { key: "B", text: "6" },
+      { key: "C", text: "8" },
+      { key: "D", text: "10" },
+    ],
+  },
 ];
 
 const questions: Q[] = [
@@ -327,27 +337,7 @@ const questions: Q[] = [
       { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
     ],
   }),
-  Qn(8, "Tiga Koin – Diagram Pohon", {
-    type: "mixed",
-    diagram: (
-      <TreeDiagram
-        title="Percobaan 3 Koin"
-        branches={[
-          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
-          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
-          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
-          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
-        ]}
-      />
-    ),
-    content: "Tiga koin dilempar bersamaan.",
-    parts: [
-      { label: "a.", text: "Tentukan n(S) dari diagram pohon di atas." },
-      { label: "b.", text: "Sebutkan titik sampel dengan tepat dua sisi Angka." },
-      { label: "c.", text: "Berapa banyak titik sampel dengan paling sedikit satu Gambar?" },
-    ],
-  }),
-  Qn(9, "Kartu Remi – Ruang Sampel", {
+  Qn(8, "Kartu Remi – Ruang Sampel", {
     type: "mixed",
     content: "Satu set kartu remi terdiri dari 52 kartu: 4 jenis (♠ ♥ ♦ ♣), masing-masing 13 nilai (A,2,3,...,10,J,Q,K). Satu kartu diambil.",
     parts: [
@@ -357,7 +347,7 @@ const questions: Q[] = [
       { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
     ],
   }),
-  Qn(10, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
+  Qn(9, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
     type: "mixed",
     content: "Sebuah koin dilempar tiga kali secara berurutan. Catat urutan Angka (A) dan Gambar (G).",
     parts: [
@@ -366,7 +356,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan jumlah Angka lebih banyak dari Gambar." },
     ],
   }),
-  Qn(11, "Diagram Pohon – Koin dan Dadu", {
+  Qn(10, "Diagram Pohon – Koin dan Dadu", {
     type: "mixed",
     diagram: (
       <TreeDiagram
@@ -384,7 +374,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa banyak titik sampel yang memuat sisi Angka?" },
     ],
   }),
-  Qn(12, "Tabel – Dadu dan Koin", {
+  Qn(11, "Tabel – Dadu dan Koin", {
     type: "mixed",
     diagram: (
       <FreqTable
@@ -407,7 +397,7 @@ const questions: Q[] = [
       { label: "c.", text: "Sebutkan titik sampel dengan dadu prima dan koin Gambar." },
     ],
   }),
-  Qn(13, "Aturan Perkalian – Menghitung n(S)", {
+  Qn(12, "Aturan Perkalian – Menghitung n(S)", {
     type: "mixed",
     content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
     parts: [
@@ -416,7 +406,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
     ],
   }),
-  Qn(14, "Pengambilan Tanpa Pengembalian", {
+  Qn(13, "Pengambilan Tanpa Pengembalian", {
     type: "mixed",
     content: "Kotak berisi 3 bola: Merah (M), Biru (B), Hijau (H). Dua bola diambil satu per satu tanpa pengembalian.",
     diagram: (
@@ -436,7 +426,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
     ],
   }),
-  Qn(15, "Soal TKA – Pengambilan Kelereng", {
+  Qn(14, "Soal TKA – Pengambilan Kelereng", {
     type: "mixed",
     content: "Kantong berisi 4 kelereng: 2 merah (M1, M2) dan 2 putih (P1, P2). Dua kelereng diambil bersamaan.",
     diagram: (
