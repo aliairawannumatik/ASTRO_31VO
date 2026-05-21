@@ -3,7 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 import { Dices } from "lucide-react";
 
 const accentColor = "cyan";
@@ -119,10 +119,6 @@ const SpinnerDiagram = ({ sectors }: { sectors: { label: string; color: string; 
     </svg>
   );
 };
-
-type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay" | "mixed" | "diagram-only" };
-const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 type PGOpt = { key: string; text: string; math?: boolean };
 type PGQ = { n: number; content: string; options: PGOpt[]; diagram?: React.ReactNode };
@@ -282,175 +278,63 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "10" },
     ],
   },
-];
-
-const questions: Q[] = [
-  Qn(1, "Ruang Sampel Koin Tunggal", {
-    type: "mixed",
-    content: "Sebuah koin dilempar satu kali. Sisi koin adalah Angka (A) dan Gambar (G).",
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan tersebut." },
-      { label: "b.", text: "Berapa banyak titik sampel n(S)?" },
-      { label: "c.", text: "Apa yang dimaksud dengan titik sampel? Sebutkan contohnya." },
-    ],
-  }),
-  Qn(2, "Ruang Sampel Dadu Tunggal", {
-    type: "mixed",
-    content: "Sebuah dadu bersisi enam dilempar satu kali.",
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S dari percobaan tersebut." },
-      { label: "b.", text: "Berapa nilai n(S)?" },
-      { label: "c.", text: "Sebutkan titik sampel yang merupakan bilangan prima." },
-      { label: "d.", text: "Sebutkan titik sampel yang merupakan bilangan ganjil." },
-    ],
-  }),
-  Qn(3, "Ruang Sampel Dua Koin", {
-    type: "mixed",
+  {
+    n: 14,
+    content: "Dari kota A ke kota B tersedia 3 jalur berbeda, dan dari kota B ke kota C tersedia 4 jalur berbeda. Banyaknya rute yang dapat ditempuh dari kota A ke kota C melalui kota B adalah ....",
     diagram: (
-      <TreeDiagram
-        title="Percobaan 2 Koin"
-        branches={[
-          { label: "A", children: ["(A,A)", "(A,G)"] },
-          { label: "G", children: ["(G,A)", "(G,G)"] },
-        ]}
-      />
+      <svg viewBox="0 0 340 190" className="w-full max-w-sm mx-auto">
+        {/* A→B: 3 jalur */}
+        <path d="M 62,83 Q 115,30 148,83" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 62,90 L 148,90"         fill="none" stroke="#06b6d4" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 62,97 Q 115,150 148,97" fill="none" stroke="#0e7490" strokeWidth="2" strokeDasharray="5,3"/>
+        {/* A→B jalur labels */}
+        <rect x="96" y="20" width="36" height="16" rx="6" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="1"/>
+        <text x="114" y="32" textAnchor="middle" fill="#67e8f9" fontSize="10" fontWeight="bold">jalur 1</text>
+        <rect x="96" y="82" width="36" height="16" rx="6" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" strokeWidth="1"/>
+        <text x="114" y="94" textAnchor="middle" fill="#67e8f9" fontSize="10" fontWeight="bold">jalur 2</text>
+        <rect x="96" y="144" width="36" height="16" rx="6" fill="rgba(14,116,144,0.15)" stroke="#0e7490" strokeWidth="1"/>
+        <text x="114" y="156" textAnchor="middle" fill="#67e8f9" fontSize="10" fontWeight="bold">jalur 3</text>
+        {/* B→C: 4 jalur */}
+        <path d="M 192,82 Q 247,22  278,82" fill="none" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 192,87 Q 247,60  278,87" fill="none" stroke="#c084fc" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 192,93 Q 247,120 278,93" fill="none" stroke="#d946ef" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 192,98 Q 247,158 278,98" fill="none" stroke="#e879f9" strokeWidth="2" strokeDasharray="5,3"/>
+        {/* B→C jalur labels */}
+        <rect x="222" y="12" width="36" height="16" rx="6" fill="rgba(168,85,247,0.15)" stroke="#a855f7" strokeWidth="1"/>
+        <text x="240" y="24" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 1</text>
+        <rect x="222" y="50" width="36" height="16" rx="6" fill="rgba(192,132,252,0.15)" stroke="#c084fc" strokeWidth="1"/>
+        <text x="240" y="62" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 2</text>
+        <rect x="222" y="115" width="36" height="16" rx="6" fill="rgba(217,70,239,0.15)" stroke="#d946ef" strokeWidth="1"/>
+        <text x="240" y="127" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 3</text>
+        <rect x="222" y="152" width="36" height="16" rx="6" fill="rgba(232,121,249,0.15)" stroke="#e879f9" strokeWidth="1"/>
+        <text x="240" y="164" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 4</text>
+        {/* City A */}
+        <circle cx="40" cy="90" r="22" fill="#0f2a3a" stroke="#22d3ee" strokeWidth="2.5"/>
+        <text x="40" y="95" textAnchor="middle" fill="#22d3ee" fontSize="16" fontWeight="bold">A</text>
+        {/* City B */}
+        <circle cx="170" cy="90" r="22" fill="#1a0f3a" stroke="#a855f7" strokeWidth="2.5"/>
+        <text x="170" y="95" textAnchor="middle" fill="#c084fc" fontSize="16" fontWeight="bold">B</text>
+        {/* City C */}
+        <circle cx="300" cy="90" r="22" fill="#2a0f1a" stroke="#e879f9" strokeWidth="2.5"/>
+        <text x="300" y="95" textAnchor="middle" fill="#e879f9" fontSize="16" fontWeight="bold">C</text>
+        {/* Arrowhead tips A→B */}
+        <polygon points="148,90 138,86 138,94" fill="#06b6d4"/>
+        {/* Arrowhead tips B→C */}
+        <polygon points="278,90 268,86 268,94" fill="#c084fc"/>
+        {/* Legend */}
+        <rect x="4" y="172" width="100" height="14" rx="5" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="1"/>
+        <text x="54" y="182" textAnchor="middle" fill="#67e8f9" fontSize="9" fontWeight="bold">A → B : 3 jalur</text>
+        <rect x="116" y="172" width="110" height="14" rx="5" fill="rgba(168,85,247,0.08)" stroke="#a855f7" strokeWidth="1"/>
+        <text x="171" y="182" textAnchor="middle" fill="#d8b4fe" fontSize="9" fontWeight="bold">B → C : 4 jalur</text>
+      </svg>
     ),
-    content: "Dua koin dilempar bersamaan. Gunakan diagram pohon di atas.",
-    parts: [
-      { label: "a.", text: "Tuliskan semua anggota ruang sampel S." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Sebutkan titik sampel yang menghasilkan tepat satu sisi Angka." },
+    options: [
+      { key: "A", text: "7" },
+      { key: "B", text: "10" },
+      { key: "C", text: "12" },
+      { key: "D", text: "16" },
     ],
-  }),
-  Qn(4, "Tabel Ruang Sampel Dua Dadu", {
-    type: "mixed",
-    diagram: <DiceGrid />,
-    content: "Dua buah dadu dilempar bersamaan. Perhatikan tabel ruang sampel di atas.",
-    parts: [
-      { label: "a.", text: "Tentukan n(S)." },
-      { label: "b.", text: "Berapa banyak titik sampel dengan jumlah kedua dadu sama dengan 7?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan kedua dadu menunjukkan angka yang sama?" },
-    ],
-  }),
-  Qn(5, "Dua Dadu – Selisih Tertentu", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => Math.abs(i-j) === 2} />,
-    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan selisih = 2.",
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan selisih kedua dadu = 2." },
-      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan selisih = 0 (angka sama)?" },
-    ],
-  }),
-  Qn(6, "Dua Dadu – Hasil Kali Tertentu", {
-    type: "mixed",
-    diagram: <DiceGrid highlight={(i,j) => i*j === 12} />,
-    content: "Dua dadu dilempar. Sel diarsir menunjukkan titik sampel dengan hasil kali = 12.",
-    parts: [
-      { label: "a.", text: "Sebutkan semua titik sampel dengan hasil kali kedua dadu = 12." },
-      { label: "b.", text: "Berapa banyak titik sampel tersebut?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan hasil kali ≤ 6?" },
-    ],
-  }),
-  Qn(7, "Kartu dari 1 sampai 10", {
-    type: "mixed",
-    content: "Sebuah kotak berisi kartu bernomor 1 sampai 10. Satu kartu diambil secara acak.",
-    parts: [
-      { label: "a.", text: "Tuliskan ruang sampel S." },
-      { label: "b.", text: "Tentukan n(S)." },
-      { label: "c.", text: "Sebutkan titik sampel yang merupakan bilangan prima." },
-      { label: "d.", text: "Sebutkan titik sampel yang merupakan kelipatan 3." },
-    ],
-  }),
-  Qn(8, "Kartu Remi – Ruang Sampel", {
-    type: "mixed",
-    content: "Satu set kartu remi terdiri dari 52 kartu: 4 jenis (♠ ♥ ♦ ♣), masing-masing 13 nilai (A,2,3,...,10,J,Q,K). Satu kartu diambil.",
-    parts: [
-      { label: "a.", text: "Tentukan n(S)." },
-      { label: "b.", text: "Berapa banyak titik sampel kartu berwarna merah (♥ dan ♦)?" },
-      { label: "c.", text: "Berapa banyak titik sampel kartu gambar (J, Q, K)?" },
-      { label: "d.", text: "Berapa banyak titik sampel kartu As (A)?" },
-    ],
-  }),
-  Qn(9, "Percobaan Koin Tidak Seimbang – Ruang Sampel", {
-    type: "mixed",
-    content: "Sebuah koin dilempar tiga kali secara berurutan. Catat urutan Angka (A) dan Gambar (G).",
-    parts: [
-      { label: "a.", math: "n(S) = 2^3 = \\ldots" },
-      { label: "b.", text: "Tuliskan semua 8 anggota ruang sampel." },
-      { label: "c.", text: "Sebutkan titik sampel dengan jumlah Angka lebih banyak dari Gambar." },
-    ],
-  }),
-  Qn(10, "Diagram Pohon – Koin dan Dadu", {
-    type: "mixed",
-    diagram: (
-      <TreeDiagram
-        title="Koin + Dadu"
-        branches={[
-          { label: "A", children: ["(A,1)", "(A,2)", "(A,3)", "(A,4)", "(A,5)", "(A,6)"] },
-          { label: "G", children: ["(G,1)", "(G,2)", "(G,3)", "(G,4)", "(G,5)", "(G,6)"] },
-        ]}
-      />
-    ),
-    content: "Sebuah koin dan sebuah dadu dilempar bersamaan.",
-    parts: [
-      { label: "a.", text: "Tentukan n(S) dari percobaan ini." },
-      { label: "b.", text: "Sebutkan titik sampel dengan sisi Gambar dan angka genap pada dadu." },
-      { label: "c.", text: "Berapa banyak titik sampel yang memuat sisi Angka?" },
-    ],
-  }),
-  Qn(11, "Aturan Perkalian – Menghitung n(S)", {
-    type: "mixed",
-    content: "Sebuah restoran menyediakan 3 pilihan makanan utama, 2 pilihan minuman, dan 4 pilihan dessert. Seorang pelanggan memilih satu dari setiap kategori.",
-    parts: [
-      { label: "a.", math: "n(S) = 3 \\times 2 \\times 4 = \\ldots" },
-      { label: "b.", text: "Apakah semua kombinasi merupakan titik sampel yang valid? Mengapa?" },
-      { label: "c.", text: "Jika 1 menu dessert habis, berapa n(S) yang baru?" },
-    ],
-  }),
-  Qn(12, "Pengambilan Tanpa Pengembalian", {
-    type: "mixed",
-    content: "Kotak berisi 3 bola: Merah (M), Biru (B), Hijau (H). Dua bola diambil satu per satu tanpa pengembalian.",
-    diagram: (
-      <FreqTable
-        caption="Ruang sampel (tanpa pengembalian)"
-        headers={["Ambil ke-1", "Ambil ke-2", "Titik Sampel"]}
-        rows={[
-          ["M","B","(M,B)"],["M","H","(M,H)"],
-          ["B","M","(B,M)"],["B","H","(B,H)"],
-          ["H","M","(H,M)"],["H","B","(H,B)"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Tentukan n(S)." },
-      { label: "b.", text: "Berapa banyak titik sampel yang mengandung bola Merah?" },
-      { label: "c.", text: "Bandingkan dengan pengambilan dengan pengembalian: mana yang n(S)-nya lebih besar?" },
-    ],
-  }),
-  Qn(13, "Soal TKA – Pengambilan Kelereng", {
-    type: "mixed",
-    content: "Kantong berisi 4 kelereng: 2 merah (M1, M2) dan 2 putih (P1, P2). Dua kelereng diambil bersamaan.",
-    diagram: (
-      <FreqTable
-        caption="Semua pasangan yang mungkin"
-        headers={["Pasangan", "Warna"]}
-        rows={[
-          ["(M1,M2)","Merah-Merah"],
-          ["(M1,P1)","Merah-Putih"],
-          ["(M1,P2)","Merah-Putih"],
-          ["(M2,P1)","Merah-Putih"],
-          ["(M2,P2)","Merah-Putih"],
-          ["(P1,P2)","Putih-Putih"],
-        ]}
-      />
-    ),
-    parts: [
-      { label: "a.", text: "Tentukan n(S)." },
-      { label: "b.", text: "Berapa banyak titik sampel dengan kedua kelereng berwarna sama?" },
-      { label: "c.", text: "Berapa banyak titik sampel dengan kedua kelereng berwarna berbeda?" },
-    ],
-  }),
+  },
 ];
 
 const RuangSampelPage = () => {
@@ -470,7 +354,7 @@ const RuangSampelPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 26 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 14 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -532,54 +416,6 @@ const RuangSampelPage = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* ── URAIAN ── */}
-        <div className="mb-4 mt-2">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-px flex-1 bg-cyan-500/20" />
-            <span className="text-cyan-300 text-xs font-bold uppercase tracking-widest px-2">B. Uraian</span>
-            <div className="h-px flex-1 bg-cyan-500/20" />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
-              <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-teal-500 rounded-l-2xl" />
-              <div className="relative px-5 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-cyan-300 text-xs font-bold">{q.n}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-cyan-400 text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                      {q.title}
-                    </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
-                    {q.math && <div className="mb-3 text-white overflow-x-auto"><BlockMath math={q.math} /></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
-                    {q.parts && (
-                      <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? "bg-white/5" : "bg-transparent px-0"}`}>
-                            {p.label && <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
-                            {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
-                            }
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
 
         <div className="mt-8 text-center">
