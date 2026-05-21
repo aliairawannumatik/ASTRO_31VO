@@ -125,7 +125,7 @@ type Q = { n: number; title: string; content?: string; math?: string; parts?: Pa
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 type PGOpt = { key: string; text: string; math?: boolean };
-type PGQ = { n: number; content: string; options: PGOpt[] };
+type PGQ = { n: number; content: string; options: PGOpt[]; diagram?: React.ReactNode };
 const pgQuestions: PGQ[] = [
   {
     n: 1,
@@ -250,6 +250,17 @@ const pgQuestions: PGQ[] = [
   {
     n: 13,
     content: "Tiga keping uang logam dilempar secara bersamaan. Banyaknya anggota ruang sampel dari percobaan tersebut adalah ....",
+    diagram: (
+      <TreeDiagram
+        title="Percobaan 3 Koin"
+        branches={[
+          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
+          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
+          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
+          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
+        ]}
+      />
+    ),
     options: [
       { key: "A", text: "4" },
       { key: "B", text: "6" },
@@ -512,6 +523,7 @@ const RuangSampelPage = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>
+                      {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
                       <div className="grid grid-cols-1 gap-1.5">
                         {q.options.map(opt => (
                           <div key={opt.key} className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
