@@ -4,6 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { CheckSquare } from "lucide-react";
 import imgQ1 from "@assets/image_1779360053350.png";
+import imgQ2 from "@assets/Gemini_Generated_Image_ngxre9ngxre9ngxr_(1)_1779360148381.png";
 
 type Q = { n: number; title: string; content: string; diagram?: React.ReactNode; options: { label: string; text: string }[] };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
@@ -13,27 +14,7 @@ const SvgQ1 = () => (
 );
 
 const SvgQ84 = () => (
-  <svg width={240} height={185} viewBox="0 0 240 185" style={{display:'block'}}>
-    <rect width="240" height="185" fill="#0b1733" rx="14"/>
-    <polygon points="22,96 110,22 220,38 220,170 22,96" fill="rgba(129,140,248,0.06)"/>
-    <line x1="22" y1="96" x2="110" y2="22" stroke="#818cf8" strokeWidth="2.2"/>
-    <line x1="110" y1="22" x2="220" y2="38" stroke="#818cf8" strokeWidth="2.2"/>
-    <line x1="220" y1="38" x2="220" y2="170" stroke="#818cf8" strokeWidth="2.2"/>
-    <line x1="22" y1="96" x2="220" y2="96" stroke="#818cf8" strokeWidth="2.2"/>
-    <line x1="110" y1="22" x2="220" y2="96" stroke="#c084fc" strokeWidth="1.8" strokeDasharray="5,3"/>
-    <line x1="110" y1="22" x2="220" y2="170" stroke="#c084fc" strokeWidth="1.8" strokeDasharray="5,3"/>
-    <line x1="22" y1="96" x2="220" y2="38" stroke="#c084fc" strokeWidth="1.8" strokeDasharray="5,3"/>
-    <circle cx="10" cy="96" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
-    <text x="10" y="101" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">P</text>
-    <circle cx="110" cy="10" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
-    <text x="110" y="15" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">T</text>
-    <circle cx="220" cy="26" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
-    <text x="220" y="31" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">R</text>
-    <circle cx="220" cy="96" r="12" fill="#0b1733" stroke="#c084fc" strokeWidth="2"/>
-    <text x="220" y="101" fill="#c084fc" fontSize="13" fontWeight="bold" textAnchor="middle">S</text>
-    <circle cx="220" cy="170" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
-    <text x="220" y="175" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">Q</text>
-  </svg>
+  <img src={imgQ2} alt="Diagram Soal 2 - Banyak Segitiga Kongruen" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ86 = () => (
