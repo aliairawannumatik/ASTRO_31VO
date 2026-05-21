@@ -50,10 +50,6 @@ const SvgQ2 = () => (
     <text x="28" y="172" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
     <circle cx="116" cy="119" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
     <text x="116" y="124" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="92" y="36" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="128" y="48" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">AB = 12 cm</text>
-    <rect x="130" y="76" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="166" y="88" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">BC = 15 cm</text>
   </svg>
 );
 
@@ -66,7 +62,7 @@ const SvgQ3 = () => (
     <line x1="52" y1="22" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
     <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
-    <polyline points="120,67 126,72 121,78" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <polyline points="134,66 129,72 123,67" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
     <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
     <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
     <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
@@ -75,10 +71,6 @@ const SvgQ3 = () => (
     <text x="232" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
     <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
     <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="60" y="32" width="70" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="95" y="44" fill="#6ee7b7" fontSize="10" fontWeight="bold" textAnchor="middle">CD = 12 cm</text>
-    <rect x="142" y="105" width="66" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="175" y="117" fill="#6ee7b7" fontSize="10" fontWeight="bold" textAnchor="middle">DB = 3 cm</text>
   </svg>
 );
 
@@ -101,35 +93,44 @@ const SvgQ4 = () => (
     <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
     <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
     <rect x="62" y="32" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="93" y="44" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">CD = 5 cm</text>
+    <text x="93" y="44" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">5 cm</text>
     <rect x="142" y="105" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="173" y="117" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">DB = 4 cm</text>
+    <text x="173" y="117" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">4 cm</text>
   </svg>
 );
 
 const SvgQ5a = () => (
   <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
     <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    {/* Triangle: C at top-centre, A bottom-left, B bottom-right, right-angle at C */}
     <polygon points="127,18 22,150 215,150" fill="rgba(16,185,129,0.08)"/>
     <line x1="127" y1="18" x2="22" y2="150" stroke="#10b981" strokeWidth="2.5"/>
     <line x1="22" y1="150" x2="215" y2="150" stroke="#10b981" strokeWidth="2.5"/>
     <line x1="127" y1="18" x2="215" y2="150" stroke="#10b981" strokeWidth="2.5"/>
-    <line x1="127" y1="18" x2="148" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
-    <polyline points="139,150 139,141 148,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+    {/* Altitude CD: perfectly vertical from C(127,18) to D(127,150) so CD ⊥ AB */}
+    <line x1="127" y1="18" x2="127" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
+    {/* Right-angle mark at D: vertical CD meets horizontal AB */}
+    <polyline points="135,150 135,142 127,142" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+    {/* Right-angle mark at C: angle ACB = 90° */}
+    <polyline points="123,23 127,29 131,24" fill="none" stroke="#10b981" strokeWidth="1.5"/>
+    {/* Vertex labels */}
     <circle cx="127" cy="6" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
     <text x="127" y="11" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
     <circle cx="8" cy="164" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
     <text x="8" y="169" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
     <circle cx="228" cy="164" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
     <text x="228" y="169" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="148" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
-    <text x="148" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="152" y="72" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="188" y="84" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">CD = 18 cm</text>
-    <rect x="158" y="130" width="60" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="188" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">DB = 6 cm</text>
-    <rect x="60" y="130" width="44" height="18" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
-    <text x="82" y="143" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">a</text>
+    <circle cx="127" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
+    <text x="127" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
+    {/* CD = 18 cm label, to the right of the vertical altitude */}
+    <rect x="132" y="72" width="34" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="149" y="84" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">18 cm</text>
+    {/* DB = 6 cm label, above the DB segment */}
+    <rect x="153" y="130" width="34" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <text x="170" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">6 cm</text>
+    {/* 'a' = AD label, above the AD segment */}
+    <rect x="55" y="130" width="34" height="18" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="72" y="143" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">a</text>
   </svg>
 );
 
@@ -213,17 +214,7 @@ const SvgQ5d = () => (
 );
 
 const questions: Q[] = [
-  Qn(1, "Garis Tinggi dari Sudut Siku-Siku", {
-    type: "mixed",
-    diagram: <TriangleAltitude labelTop="C" labelBotL="A" labelBotR="B" labelMid="H" sideA="AC" sideB="AH=9" sideC="HB=16" altLabel="CH" color1="#34d399" color2="#6ee7b7" color3="#059669"/>,
-    content: "Segitiga siku-siku ACB dengan ∠C = 90°. CH ⊥ AB.",
-    parts: [
-      { label: "a.", math: "CH^2 = AH \\cdot HB = 9 \\times 16 = \\ldots \\Rightarrow CH = \\ldots" },
-      { label: "b.", math: "AC^2 = AH \\cdot AB = 9 \\times 25 = \\ldots \\Rightarrow AC = \\ldots" },
-      { label: "c.", math: "BC^2 = HB \\cdot AB = 16 \\times 25 = \\ldots \\Rightarrow BC = \\ldots" },
-    ],
-  }),
-  Qn(2, "Pernyataan yang Benar tentang Perbandingan Rusuk", {
+  Qn(1, "Pernyataan yang Benar tentang Perbandingan Rusuk", {
     type: "pilgan",
     diagram: <SvgQ1 />,
     content: "Berdasarkan gambar berikut, segitiga ABC siku-siku di A dan AD ⊥ BC. Terdapat pernyataan sebagai berikut.",
@@ -238,6 +229,16 @@ const questions: Q[] = [
       { label: "B.", text: "(i), (ii), dan (iv)" },
       { label: "C.", text: "(i), (iii), dan (iv)" },
       { label: "D.", text: "(ii), (iii), dan (iv)" },
+    ],
+  }),
+  Qn(2, "Garis Tinggi dari Sudut Siku-Siku", {
+    type: "mixed",
+    diagram: <TriangleAltitude labelTop="C" labelBotL="A" labelBotR="B" labelMid="H" sideA="AC" sideB="AH=9" sideC="HB=16" altLabel="CH" color1="#34d399" color2="#6ee7b7" color3="#059669"/>,
+    content: "Segitiga siku-siku ACB dengan ∠C = 90°. CH ⊥ AB.",
+    parts: [
+      { label: "a.", math: "CH^2 = AH \\cdot HB = 9 \\times 16 = \\ldots \\Rightarrow CH = \\ldots" },
+      { label: "b.", math: "AC^2 = AH \\cdot AB = 9 \\times 25 = \\ldots \\Rightarrow AC = \\ldots" },
+      { label: "c.", math: "BC^2 = HB \\cdot AB = 16 \\times 25 = \\ldots \\Rightarrow BC = \\ldots" },
     ],
   }),
   Qn(3, "Mencari Panjang AD", {
