@@ -282,32 +282,39 @@ const pgQuestions: PGQ[] = [
     n: 14,
     content: "Dari kota A ke kota B tersedia 3 jalur berbeda, dan dari kota B ke kota C tersedia 4 jalur berbeda. Banyaknya rute yang dapat ditempuh dari kota A ke kota C melalui kota B adalah ....",
     diagram: (
-      <svg viewBox="0 0 340 190" className="w-full max-w-sm mx-auto">
+      <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto">
         {/* A→B: 3 jalur */}
-        <path d="M 62,83 Q 115,30 148,83" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="5,3"/>
-        <path d="M 62,90 L 148,90"         fill="none" stroke="#06b6d4" strokeWidth="2" strokeDasharray="5,3"/>
-        <path d="M 62,97 Q 115,150 148,97" fill="none" stroke="#0e7490" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 62,83 Q 115,30 148,83"  fill="none" stroke="#22d3ee" strokeWidth="2"   strokeDasharray="5,3"/>
+        <path d="M 62,90 L 148,90"          fill="none" stroke="#06b6d4" strokeWidth="2"   strokeDasharray="5,3"/>
+        <path d="M 62,97 Q 115,152 148,97"  fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="5,3"/>
         {/* A→B jalur labels */}
-        <rect x="96" y="20" width="36" height="16" rx="6" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="1"/>
+        {/* jalur 1 — di atas arc (midpoint y≈57) */}
+        <rect x="96" y="20" width="36" height="16" rx="6" fill="rgba(34,211,238,0.18)" stroke="#22d3ee" strokeWidth="1"/>
         <text x="114" y="32" textAnchor="middle" fill="#67e8f9" fontSize="10" fontWeight="bold">jalur 1</text>
-        <rect x="96" y="82" width="36" height="16" rx="6" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" strokeWidth="1"/>
-        <text x="114" y="94" textAnchor="middle" fill="#67e8f9" fontSize="10" fontWeight="bold">jalur 2</text>
-        <rect x="96" y="144" width="36" height="16" rx="6" fill="rgba(14,116,144,0.15)" stroke="#0e7490" strokeWidth="1"/>
-        <text x="114" y="156" textAnchor="middle" fill="#67e8f9" fontSize="10" fontWeight="bold">jalur 3</text>
+        {/* jalur 2 — di atas garis lurus */}
+        <rect x="96" y="77" width="36" height="14" rx="6" fill="rgba(6,182,212,0.18)" stroke="#06b6d4" strokeWidth="1"/>
+        <text x="114" y="88" textAnchor="middle" fill="#67e8f9" fontSize="10" fontWeight="bold">jalur 2</text>
+        {/* jalur 3 — jauh di bawah arc (midpoint y≈125), diberi jarak 40px */}
+        <rect x="96" y="166" width="36" height="16" rx="6" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" strokeWidth="1"/>
+        <text x="114" y="178" textAnchor="middle" fill="#7dd3fc" fontSize="10" fontWeight="bold">jalur 3</text>
         {/* B→C: 4 jalur */}
         <path d="M 192,82 Q 247,22  278,82" fill="none" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,3"/>
         <path d="M 192,87 Q 247,60  278,87" fill="none" stroke="#c084fc" strokeWidth="2" strokeDasharray="5,3"/>
         <path d="M 192,93 Q 247,120 278,93" fill="none" stroke="#d946ef" strokeWidth="2" strokeDasharray="5,3"/>
         <path d="M 192,98 Q 247,158 278,98" fill="none" stroke="#e879f9" strokeWidth="2" strokeDasharray="5,3"/>
-        {/* B→C jalur labels */}
-        <rect x="222" y="12" width="36" height="16" rx="6" fill="rgba(168,85,247,0.15)" stroke="#a855f7" strokeWidth="1"/>
+        {/* B→C jalur labels — diletakkan tepat di bawah tiap arc */}
+        {/* jalur 1: midpoint y≈52 → label di atas */}
+        <rect x="222" y="12" width="36" height="16" rx="6" fill="rgba(168,85,247,0.18)" stroke="#a855f7" strokeWidth="1"/>
         <text x="240" y="24" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 1</text>
-        <rect x="222" y="50" width="36" height="16" rx="6" fill="rgba(192,132,252,0.15)" stroke="#c084fc" strokeWidth="1"/>
+        {/* jalur 2: midpoint y≈73 → label di atas */}
+        <rect x="222" y="50" width="36" height="16" rx="6" fill="rgba(192,132,252,0.18)" stroke="#c084fc" strokeWidth="1"/>
         <text x="240" y="62" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 2</text>
-        <rect x="222" y="115" width="36" height="16" rx="6" fill="rgba(217,70,239,0.15)" stroke="#d946ef" strokeWidth="1"/>
-        <text x="240" y="127" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 3</text>
-        <rect x="222" y="152" width="36" height="16" rx="6" fill="rgba(232,121,249,0.15)" stroke="#e879f9" strokeWidth="1"/>
-        <text x="240" y="164" textAnchor="middle" fill="#d8b4fe" fontSize="10" fontWeight="bold">jalur 4</text>
+        {/* jalur 3: midpoint y≈107 → label tepat di bawah (y=111) */}
+        <rect x="222" y="111" width="36" height="16" rx="6" fill="rgba(217,70,239,0.18)" stroke="#d946ef" strokeWidth="1"/>
+        <text x="240" y="123" textAnchor="middle" fill="#f0abfc" fontSize="10" fontWeight="bold">jalur 3</text>
+        {/* jalur 4: midpoint y≈128 → label tepat di bawah (y=133) */}
+        <rect x="222" y="133" width="36" height="16" rx="6" fill="rgba(232,121,249,0.18)" stroke="#e879f9" strokeWidth="1"/>
+        <text x="240" y="145" textAnchor="middle" fill="#f5d0fe" fontSize="10" fontWeight="bold">jalur 4</text>
         {/* City A */}
         <circle cx="40" cy="90" r="22" fill="#0f2a3a" stroke="#22d3ee" strokeWidth="2.5"/>
         <text x="40" y="95" textAnchor="middle" fill="#22d3ee" fontSize="16" fontWeight="bold">A</text>
@@ -317,15 +324,14 @@ const pgQuestions: PGQ[] = [
         {/* City C */}
         <circle cx="300" cy="90" r="22" fill="#2a0f1a" stroke="#e879f9" strokeWidth="2.5"/>
         <text x="300" y="95" textAnchor="middle" fill="#e879f9" fontSize="16" fontWeight="bold">C</text>
-        {/* Arrowhead tips A→B */}
+        {/* Arrowheads */}
         <polygon points="148,90 138,86 138,94" fill="#06b6d4"/>
-        {/* Arrowhead tips B→C */}
         <polygon points="278,90 268,86 268,94" fill="#c084fc"/>
         {/* Legend */}
-        <rect x="4" y="172" width="100" height="14" rx="5" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="1"/>
-        <text x="54" y="182" textAnchor="middle" fill="#67e8f9" fontSize="9" fontWeight="bold">A → B : 3 jalur</text>
-        <rect x="116" y="172" width="110" height="14" rx="5" fill="rgba(168,85,247,0.08)" stroke="#a855f7" strokeWidth="1"/>
-        <text x="171" y="182" textAnchor="middle" fill="#d8b4fe" fontSize="9" fontWeight="bold">B → C : 4 jalur</text>
+        <rect x="4" y="193" width="100" height="14" rx="5" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="1"/>
+        <text x="54" y="203" textAnchor="middle" fill="#67e8f9" fontSize="9" fontWeight="bold">A → B : 3 jalur</text>
+        <rect x="116" y="193" width="110" height="14" rx="5" fill="rgba(168,85,247,0.08)" stroke="#a855f7" strokeWidth="1"/>
+        <text x="171" y="203" textAnchor="middle" fill="#d8b4fe" fontSize="9" fontWeight="bold">B → C : 4 jalur</text>
       </svg>
     ),
     options: [
