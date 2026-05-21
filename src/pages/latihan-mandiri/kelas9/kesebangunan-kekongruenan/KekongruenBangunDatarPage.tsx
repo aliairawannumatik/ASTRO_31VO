@@ -3,34 +3,13 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { CheckSquare } from "lucide-react";
+import imgQ1 from "@assets/image_1779360053350.png";
 
 type Q = { n: number; title: string; content: string; diagram?: React.ReactNode; options: { label: string; text: string }[] };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const SvgQ1 = () => (
-  <svg width={265} height={185} viewBox="0 0 265 185" style={{display:'block'}}>
-    <rect width="265" height="185" fill="#0b1733" rx="14"/>
-    <polygon points="90,18 18,170 248,170" fill="rgba(34,211,238,0.07)"/>
-    <line x1="18" y1="170" x2="248" y2="170" stroke="#22d3ee" strokeWidth="2.5"/>
-    <line x1="18" y1="170" x2="90" y2="18" stroke="#22d3ee" strokeWidth="2.5"/>
-    <line x1="90" y1="18" x2="248" y2="170" stroke="#22d3ee" strokeWidth="2.5"/>
-    <line x1="155" y1="170" x2="90" y2="18" stroke="#e879f9" strokeWidth="2" strokeDasharray="5,4"/>
-    <line x1="248" y1="170" x2="54" y2="94" stroke="#e879f9" strokeWidth="2" strokeDasharray="5,4"/>
-    <circle cx="90" cy="18" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
-    <text x="90" y="23" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">E</text>
-    <circle cx="6" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
-    <text x="6" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="155" cy="182" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
-    <text x="155" y="182" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="258" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
-    <text x="258" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <rect x="38" y="85" width="20" height="16" rx="5" fill="rgba(0,0,0,0.65)"/>
-    <text x="48" y="97" fill="#e879f9" fontSize="12" fontWeight="bold" textAnchor="middle">F</text>
-    <rect x="124" y="118" width="22" height="16" rx="5" fill="rgba(0,0,0,0.65)"/>
-    <text x="135" y="130" fill="#e879f9" fontSize="12" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="176" y="154" width="50" height="15" rx="5" fill="rgba(0,0,0,0.6)"/>
-    <text x="201" y="165" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">BC = CD</text>
-  </svg>
+  <img src={imgQ1} alt="Diagram Soal 1 - Kekongruenan" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ84 = () => (
