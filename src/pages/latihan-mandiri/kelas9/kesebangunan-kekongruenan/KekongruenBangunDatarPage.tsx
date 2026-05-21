@@ -8,10 +8,49 @@ import { CheckSquare } from "lucide-react";
 import { CongruentTriangles, TwoShapesCongruent, SimilarTriangles } from "./GeoFigure";
 
 type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: string; };
+type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: string; options?: { label: string; text: string }[] };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
+const SvgNewQ = () => (
+  <svg width="240" height="180" viewBox="0 0 240 180" style={{display:'block'}}>
+    <rect width="240" height="180" fill="rgba(2,8,23,0.85)" rx="12"/>
+    <line x1="120" y1="16" x2="22" y2="158" stroke="#f472b6" strokeWidth="2"/>
+    <line x1="120" y1="16" x2="218" y2="158" stroke="#f472b6" strokeWidth="2"/>
+    <line x1="22" y1="158" x2="218" y2="158" stroke="#f472b6" strokeWidth="2"/>
+    <line x1="22" y1="158" x2="166" y2="94" stroke="#fb923c" strokeWidth="1.6" strokeDasharray="5,3"/>
+    <line x1="218" y1="158" x2="74" y2="94" stroke="#fb923c" strokeWidth="1.6" strokeDasharray="5,3"/>
+    <circle cx="120" cy="121" r="3.5" fill="#fbbf24"/>
+    <text x="120" y="10" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+    <text x="10" y="170" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+    <text x="230" y="170" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
+    <text x="62" y="92" fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="end">D</text>
+    <text x="178" y="92" fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="start">E</text>
+    <text x="120" y="138" fill="rgba(251,191,36,0.85)" fontSize="11" fontWeight="bold" textAnchor="middle">F</text>
+    <line x1="66" y1="72" x2="73" y2="82" stroke="#34d399" strokeWidth="1.8"/>
+    <line x1="165" y1="72" x2="172" y2="82" stroke="#34d399" strokeWidth="1.8"/>
+    <line x1="87" y1="48" x2="94" y2="58" stroke="#a78bfa" strokeWidth="1.8"/>
+    <line x1="84" y1="52" x2="91" y2="62" stroke="#a78bfa" strokeWidth="1.8"/>
+    <line x1="146" y1="48" x2="153" y2="58" stroke="#a78bfa" strokeWidth="1.8"/>
+    <line x1="143" y1="52" x2="150" y2="62" stroke="#a78bfa" strokeWidth="1.8"/>
+    <text x="38" y="128" fill="rgba(52,211,153,0.85)" fontSize="9" textAnchor="middle">AB=AC</text>
+    <text x="202" y="128" fill="rgba(52,211,153,0.85)" fontSize="9" textAnchor="middle">AB=AC</text>
+    <text x="85" y="45" fill="rgba(167,139,250,0.85)" fontSize="9" textAnchor="end">AD=AE</text>
+    <text x="163" y="45" fill="rgba(167,139,250,0.85)" fontSize="9" textAnchor="start">AD=AE</text>
+  </svg>
+);
+
 const questions: Q[] = [
+  Qn(0, "Aksioma Kekongruenan Dua Segitiga", {
+    type: "pilgan",
+    diagram: <SvgNewQ />,
+    content: "Perhatikan gambar! Segitiga ABC sama kaki dengan AB = AC. Titik D terletak pada AB dan titik E terletak pada AC sedemikian hingga AD = AE. Garis BE dan CD berpotongan di titik F. Menurut aksioma apakah △ABE ≅ △ACD?",
+    options: [
+      { label: "A.", text: "sisi, sisi, sisi" },
+      { label: "B.", text: "sisi, sudut, sisi" },
+      { label: "C.", text: "sudut, sisi, sudut" },
+      { label: "D.", text: "sudut, sudut, sisi" },
+    ],
+  }),
   Qn(1, "Syarat SSS – Sisi-Sisi-Sisi", {
     type: "mixed",
     diagram: <CongruentTriangles vertices1={["A","B","C"]} vertices2={["P","Q","R"]} sides1={["6 cm","8 cm","10 cm"]} sides2={["6 cm","8 cm","10 cm"]} color1="#f472b6" color2="#fb923c" shape="right" ticks={true}/>,
@@ -394,7 +433,7 @@ const KekongruenBangunDatarPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 41 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -417,7 +456,7 @@ const KekongruenBangunDatarPage = () => {
         </div>
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
+            <div key={i} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
               <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
               <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
@@ -425,7 +464,7 @@ const KekongruenBangunDatarPage = () => {
               <div className="relative px-5 py-4">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-rose-500/20 border border-rose-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-rose-300 text-xs font-bold">{q.n}</span>
+                    <span className="text-rose-300 text-xs font-bold">{i + 1}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
@@ -440,6 +479,16 @@ const KekongruenBangunDatarPage = () => {
                               {p.text && <p className="font-body text-sm text-white/80 leading-relaxed">{p.text}</p>}
                               {p.math && <div className="text-white/80 text-sm mt-0.5"><InlineMath math={p.math} /></div>}
                             </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {q.options && (
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        {q.options.map((opt, oi) => (
+                          <div key={oi} className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                            <span className="text-amber-400 text-xs font-bold shrink-0">{opt.label}</span>
+                            <span className="font-body text-sm text-white/80">{opt.text}</span>
                           </div>
                         ))}
                       </div>
