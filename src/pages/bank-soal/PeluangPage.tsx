@@ -372,1365 +372,996 @@ const visualMap: Record<string, React.ReactNode> = {
 
 /* ── Question Data ── */
 const questionsData: Question[] = [
-  /* ══════════ MUDAH (1–35) ══════════ */
+  /* ══════ A. PILIHAN GANDA — Percobaan, Ruang Sampel & Titik Sampel ══════ */
   {
     id: 1, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah koin dilempar satu kali. Ruang sampelnya adalah S = {A, G}. Banyaknya titik sampel adalah ...",
-    svgKey: "koin-1",
-    options: ["A. 1", "B. 2", "C. 3", "D. 4"],
-    correctAnswer: "B. 2",
+    question: "Ruang sampel dari pelemparan 2 keping uang logam adalah ....",
+    svgKey: "koin-2",
+    options: [
+      "A. S = {(A, G)}",
+      "B. S = {(A, G), (A, A), (G, G)}",
+      "C. S = {(A, G), (G, A), (A, A), (G, G)}",
+      "D. S = {(A, G), (G, A)}"
+    ],
+    correctAnswer: "C. S = {(A, G), (G, A), (A, A), (G, G)}",
     explanation: {
-      concept: "Ruang sampel adalah himpunan semua hasil yang mungkin.",
-      steps: ["Koin memiliki 2 sisi: Angka (A) dan Gambar (G)", "S = {A, G}", "n(S) = 2"],
-      formula: "n(S) = 2"
+      concept: "Ruang sampel adalah himpunan semua hasil yang mungkin dari suatu percobaan.",
+      steps: [
+        "Koin pertama: bisa muncul A atau G",
+        "Koin kedua: bisa muncul A atau G",
+        "Semua kombinasi: (A,A), (A,G), (G,A), (G,G)",
+        "n(S) = 4"
+      ],
+      formula: "n(S) = 2^n \\text{ untuk } n \\text{ koin}"
     }
   },
   {
     id: 2, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu bermata 6 dilempar satu kali. Banyaknya anggota ruang sampel adalah ...",
-    svgKey: "dadu-prima",
-    options: ["A. 3", "B. 4", "C. 5", "D. 6"],
-    correctAnswer: "D. 6",
+    question: "Pada pelemparan dua buah dadu, kejadian mata dadu berjumlah 6 adalah ....",
+    svgKey: "dua-dadu-7",
+    options: [
+      "A. {(0, 6), (1, 5), (2, 4)}",
+      "B. {(1, 5), (5, 1), (2, 4), (4, 2), (3, 3), (6, 0)}",
+      "C. {(1, 5), (2, 4), (3, 3)}",
+      "D. {(1, 5), (5, 1), (2, 4), (4, 2), (3, 3)}"
+    ],
+    correctAnswer: "D. {(1, 5), (5, 1), (2, 4), (4, 2), (3, 3)}",
     explanation: {
-      concept: "Dadu bermata 6 memiliki 6 kemungkinan hasil.",
-      steps: ["S = {1, 2, 3, 4, 5, 6}", "n(S) = 6"],
-      formula: "n(S) = 6"
+      concept: "Pasangan dadu yang berjumlah 6: (1,5), (5,1), (2,4), (4,2), (3,3).",
+      steps: [
+        "1 + 5 = 6 ✓ → (1,5) dan (5,1)",
+        "2 + 4 = 6 ✓ → (2,4) dan (4,2)",
+        "3 + 3 = 6 ✓ → (3,3)",
+        "Tidak ada (0,6) atau (6,0) karena dadu bermata 1–6"
+      ],
+      formula: ""
     }
   },
   {
     id: 3, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu dilempar satu kali. Peluang muncul bilangan prima adalah ...",
-    svgKey: "dadu-prima",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{3}$", "C. $\\frac{1}{2}$", "D. $\\frac{2}{3}$"],
-    correctAnswer: "C. $\\frac{1}{2}$",
+    question: "Sebuah kotak terdiri dari kartu bernomor 1, 2, 3 serta kartu berhuruf abjad A, B, C, D. Banyaknya titik sampel dari pengambilan sebuah kartu dari kotak tersebut adalah ....",
+    options: ["A. 5", "B. 6", "C. 7", "D. 8"],
+    correctAnswer: "C. 7",
     explanation: {
-      concept: "Bilangan prima antara 1–6 adalah 2, 3, dan 5.",
-      steps: ["A = {2, 3, 5}", "n(A) = 3", "$P(A) = \\dfrac{n(A)}{n(S)} = \\dfrac{3}{6} = \\dfrac{1}{2}$"],
-      formula: "P(A) = \\frac{n(A)}{n(S)}"
+      concept: "Titik sampel = jumlah semua kartu yang mungkin terambil.",
+      steps: [
+        "Kartu bernomor: 1, 2, 3 → 3 kartu",
+        "Kartu berhuruf: A, B, C, D → 4 kartu",
+        "Total titik sampel = 3 + 4 = 7"
+      ],
+      formula: "n(S) = n(\\text{nomor}) + n(\\text{huruf})"
     }
   },
   {
     id: 4, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu dilempar satu kali. Peluang muncul bilangan genap adalah ...",
-    svgKey: "dadu-genap",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "B. $\\frac{1}{2}$",
+    question: "Pada percobaan melempar undi dua buah koin logam dan sebuah dadu sekaligus. Banyaknya titik sampel adalah ....",
+    svgKey: "koin-2",
+    options: ["A. 6", "B. 12", "C. 20", "D. 24"],
+    correctAnswer: "D. 24",
     explanation: {
-      concept: "Bilangan genap pada dadu: 2, 4, 6.",
-      steps: ["A = {2, 4, 6}", "n(A) = 3", "$P(A) = \\dfrac{3}{6} = \\dfrac{1}{2}$"],
-      formula: "P(\\text{genap}) = \\frac{1}{2}"
+      concept: "Titik sampel = banyak hasil koin × banyak hasil dadu.",
+      steps: [
+        "2 koin: 2² = 4 kemungkinan",
+        "1 dadu: 6 kemungkinan",
+        "Total = 4 × 6 = 24"
+      ],
+      formula: "n(S) = 4 \\times 6 = 24"
     }
   },
   {
     id: 5, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Pada pelemparan sebuah dadu bermata 6, peluang muncul mata dadu lebih dari 4 adalah ...",
-    svgKey: "dadu-besar4",
-    options: ["A. $\\frac{1}{3}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "A. $\\frac{1}{3}$",
+    question: "Andi memiliki 3 baju, 4 celana, dan 2 pasang sepatu. Banyaknya cara Andi dapat memadukan baju, celana, dan sepatunya adalah ....",
+    options: ["A. 9", "B. 18", "C. 24", "D. 36"],
+    correctAnswer: "C. 24",
     explanation: {
-      concept: "Mata dadu > 4 adalah: 5 dan 6.",
-      steps: ["A = {5, 6}", "n(A) = 2", "$P(A) = \\dfrac{2}{6} = \\dfrac{1}{3}$"],
-      formula: ""
+      concept: "Aturan perkalian: jumlah cara = n₁ × n₂ × n₃.",
+      steps: [
+        "Pilihan baju: 3",
+        "Pilihan celana: 4",
+        "Pilihan sepatu: 2",
+        "Total kombinasi = 3 × 4 × 2 = 24"
+      ],
+      formula: "n = 3 \\times 4 \\times 2 = 24"
     }
   },
   {
     id: 6, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah kantong berisi 3 bola merah dan 2 bola biru. Jika satu bola diambil secara acak, peluang terambil bola merah adalah ...",
-    svgKey: "marble-3r2b",
-    options: ["A. $\\frac{1}{5}$", "B. $\\frac{3}{5}$", "C. $\\frac{2}{5}$", "D. $\\frac{4}{5}$"],
-    correctAnswer: "B. $\\frac{3}{5}$",
-    explanation: {
-      concept: "P(merah) = banyak bola merah / total bola.",
-      steps: ["n(merah) = 3", "n(S) = 3 + 2 = 5", "$P(\\text{merah}) = \\dfrac{3}{5}$"],
-      formula: "P = \\frac{n(A)}{n(S)}"
-    }
-  },
-  {
-    id: 7, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Diketahui $P(A) = 0{,}4$. Maka nilai $P(A^c)$ (komplemen A) adalah ...",
-    options: ["A. 0,4", "B. 0,5", "C. 0,6", "D. 1,4"],
-    correctAnswer: "C. 0,6",
-    explanation: {
-      concept: "P(Ac) = 1 − P(A) karena jumlah peluang suatu kejadian dan komplementnya selalu 1.",
-      steps: ["$P(A^c) = 1 - P(A)$", "$P(A^c) = 1 - 0{,}4 = 0{,}6$"],
-      formula: "P(A^c) = 1 - P(A)"
-    }
-  },
-  {
-    id: 8, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Suatu kejadian memiliki peluang $\\frac{1}{3}$. Jika percobaan dilakukan 60 kali, maka frekuensi harapan kejadian tersebut adalah ...",
-    svgKey: "frek-60-1o3",
-    options: ["A. 15", "B. 20", "C. 25", "D. 30"],
-    correctAnswer: "B. 20",
-    explanation: {
-      concept: "Frekuensi harapan = P(A) × n.",
-      steps: ["$f_h = P(A) \\times n$", "$f_h = \\dfrac{1}{3} \\times 60 = 20$"],
-      formula: "f_h = P(A) \\times n"
-    }
-  },
-  {
-    id: 9, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Dua koin dilempar bersamaan. Banyaknya anggota ruang sampel adalah ...",
-    svgKey: "koin-2",
-    options: ["A. 2", "B. 3", "C. 4", "D. 8"],
-    correctAnswer: "C. 4",
-    explanation: {
-      concept: "Ruang sampel 2 koin: S = {AA, AG, GA, GG}.",
-      steps: ["S = {AA, AG, GA, GG}", "n(S) = 4"],
-      formula: "n(S) = 2^2 = 4"
-    }
-  },
-  {
-    id: 10, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Dua koin dilempar bersamaan. Peluang muncul dua angka (AA) adalah ...",
-    svgKey: "koin-2",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{4}$", "D. 1"],
-    correctAnswer: "A. $\\frac{1}{4}$",
-    explanation: {
-      concept: "S = {AA, AG, GA, GG}. Kejadian AA hanya 1 anggota.",
-      steps: ["n(AA) = 1", "n(S) = 4", "$P(AA) = \\dfrac{1}{4}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 11, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Dua koin dilempar bersamaan. Peluang muncul minimal satu angka (A) adalah ...",
-    svgKey: "koin-2",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{3}{4}$"],
-    correctAnswer: "D. $\\frac{3}{4}$",
-    explanation: {
-      concept: "Minimal satu A: {AA, AG, GA} — ada 3 kemungkinan.",
-      steps: ["A = {AA, AG, GA}", "n(A) = 3", "$P(A) = \\dfrac{3}{4}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 12, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu dilempar sekali. Peluang muncul faktor dari 6 adalah ...",
-    svgKey: "dadu-faktor6",
-    options: ["A. $\\frac{1}{3}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "C. $\\frac{2}{3}$",
-    explanation: {
-      concept: "Faktor dari 6 adalah bilangan yang membagi habis 6: 1, 2, 3, 6.",
-      steps: ["A = {1, 2, 3, 6}", "n(A) = 4", "$P(A) = \\dfrac{4}{6} = \\dfrac{2}{3}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 13, type: "PG", difficulty: "Mudah", category: "Kontekstual",
-    question: "Dalam satu kelas terdapat 20 siswa: 8 perempuan dan 12 laki-laki. Jika satu siswa dipilih secara acak, peluang terpilih siswa perempuan adalah ...",
-    options: ["A. $\\frac{1}{5}$", "B. $\\frac{2}{5}$", "C. $\\frac{3}{5}$", "D. $\\frac{4}{5}$"],
-    correctAnswer: "B. $\\frac{2}{5}$",
-    explanation: {
-      concept: "P(perempuan) = jumlah perempuan / total siswa.",
-      steps: ["n(perempuan) = 8", "n(S) = 20", "$P = \\dfrac{8}{20} = \\dfrac{2}{5}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 14, type: "PG", difficulty: "Mudah", category: "Kontekstual",
-    question: "Prakiraan cuaca menyatakan peluang hujan besok adalah 0,35. Maka peluang TIDAK hujan besok adalah ...",
-    options: ["A. 0,35", "B. 0,50", "C. 0,65", "D. 0,75"],
-    correctAnswer: "C. 0,65",
-    explanation: {
-      concept: "P(tidak hujan) = 1 − P(hujan).",
-      steps: ["$P(\\text{tidak hujan}) = 1 - 0{,}35 = 0{,}65$"],
-      formula: "P(A^c) = 1 - P(A)"
-    }
-  },
-  {
-    id: 15, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu dilempar 120 kali. Frekuensi harapan muncul angka 6 adalah ...",
-    svgKey: "frek-120-1o6",
-    options: ["A. 10", "B. 20", "C. 30", "D. 40"],
-    correctAnswer: "B. 20",
-    explanation: {
-      concept: "P(angka 6) = 1/6. Frekuensi harapan = P × n.",
-      steps: ["$f_h = \\dfrac{1}{6} \\times 120 = 20$"],
-      formula: ""
-    }
-  },
-  {
-    id: 16, type: "PG", difficulty: "Mudah", category: "Empirik",
-    question: "Sebuah koin dilempar 50 kali dan muncul angka (A) sebanyak 28 kali. Peluang empirik muncul angka adalah ...",
-    options: ["A. $\\frac{11}{25}$", "B. $\\frac{13}{25}$", "C. $\\frac{14}{25}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "C. $\\frac{14}{25}$",
-    explanation: {
-      concept: "Peluang empirik = frekuensi kejadian / banyak percobaan.",
-      steps: ["$P_{\\text{empirik}} = \\dfrac{28}{50} = \\dfrac{14}{25}$"],
-      formula: "P_{\\text{empirik}} = \\frac{f}{n}"
-    }
-  },
-  {
-    id: 17, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Dari kartu bernomor 1 sampai 10, dipilih satu kartu secara acak. Peluang terambil kartu bernomor ganjil adalah ...",
-    options: ["A. $\\frac{2}{5}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{5}$", "D. $\\frac{7}{10}$"],
-    correctAnswer: "B. $\\frac{1}{2}$",
-    explanation: {
-      concept: "Bilangan ganjil dari 1–10: 1, 3, 5, 7, 9.",
-      steps: ["A = {1, 3, 5, 7, 9}", "n(A) = 5", "$P = \\dfrac{5}{10} = \\dfrac{1}{2}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 18, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah kotak berisi 4 bola merah dan 6 bola putih. Peluang terambil bola yang bukan merah adalah ...",
-    svgKey: "marble-4r6p",
-    options: ["A. $\\frac{2}{5}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{5}$", "D. $\\frac{4}{5}$"],
-    correctAnswer: "C. $\\frac{3}{5}$",
-    explanation: {
-      concept: "Bukan merah = putih. P(putih) = 6/10.",
-      steps: ["n(putih) = 6", "n(S) = 10", "$P(\\text{bukan merah}) = \\dfrac{6}{10} = \\dfrac{3}{5}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 19, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Dua buah dadu dilempar bersamaan. Banyaknya anggota ruang sampelnya adalah ...",
+    question: "Pada pelemparan 2 buah dadu, banyaknya titik sampel pada percobaan tersebut adalah ....",
     svgKey: "dua-dadu-7",
     options: ["A. 12", "B. 18", "C. 24", "D. 36"],
     correctAnswer: "D. 36",
     explanation: {
-      concept: "Setiap dadu memiliki 6 kemungkinan, sehingga 2 dadu menghasilkan 6×6 = 36 titik sampel.",
-      steps: ["n(S) = 6 × 6 = 36"],
+      concept: "Dua dadu masing-masing bermata 6.",
+      steps: [
+        "Dadu pertama: 6 kemungkinan",
+        "Dadu kedua: 6 kemungkinan",
+        "n(S) = 6 × 6 = 36"
+      ],
       formula: "n(S) = 6^2 = 36"
     }
   },
   {
-    id: 20, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah kantong berisi 5 bola merah, 3 bola putih, dan 2 bola hijau. Peluang terambil bola putih adalah ...",
-    svgKey: "marble-5r3p2h",
-    options: ["A. $\\frac{1}{5}$", "B. $\\frac{3}{10}$", "C. $\\frac{2}{5}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "B. $\\frac{3}{10}$",
+    id: 7, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Tiga buah mata uang logam dilempar secara bersamaan. Banyaknya kejadian muncul tepat dua angka (A) adalah ....",
+    svgKey: "koin-3",
+    options: ["A. 2", "B. 3", "C. 4", "D. 5"],
+    correctAnswer: "B. 3",
     explanation: {
-      concept: "n(S) = 5 + 3 + 2 = 10.",
-      steps: ["n(putih) = 3", "n(S) = 10", "$P(\\text{putih}) = \\dfrac{3}{10}$"],
+      concept: "Tepat 2 angka (A) dari 3 koin: hitung kombinasi C(3,2).",
+      steps: [
+        "S = {AAA, AAG, AGA, AGG, GAA, GAG, GGA, GGG}",
+        "Tepat 2A: {AAG, AGA, GAA}",
+        "Banyaknya = 3"
+      ],
+      formula: "C(3,2) = 3"
+    }
+  },
+  {
+    id: 8, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Dari pelemparan dua buah koin dan sebuah dadu, banyaknya titik sampel adalah ....",
+    svgKey: "koin-2",
+    options: ["A. 12", "B. 18", "C. 24", "D. 36"],
+    correctAnswer: "C. 24",
+    explanation: {
+      concept: "Titik sampel = hasil 2 koin × hasil 1 dadu.",
+      steps: [
+        "2 koin: 2² = 4 kemungkinan",
+        "1 dadu: 6 kemungkinan",
+        "n(S) = 4 × 6 = 24"
+      ],
+      formula: "n(S) = 4 \\times 6 = 24"
+    }
+  },
+  {
+    id: 9, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Sebuah dadu biru dan sebuah dadu hitam dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu 4 atau 10 adalah ....",
+    svgKey: "dua-dadu-10",
+    options: ["A. 4", "B. 5", "C. 6", "D. 8"],
+    correctAnswer: "C. 6",
+    explanation: {
+      concept: "Hitung pasangan yang berjumlah 4 dan yang berjumlah 10, lalu gabungkan.",
+      steps: [
+        "Jumlah 4: (1,3),(3,1),(2,2) → 3 pasangan",
+        "Jumlah 10: (4,6),(6,4),(5,5) → 3 pasangan",
+        "Total = 3 + 3 = 6"
+      ],
       formula: ""
+    }
+  },
+  {
+    id: 10, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Jika sebuah dadu dilempar, maka banyaknya kejadian muncul mata dadu bukan 2 adalah ....",
+    svgKey: "dadu-prima",
+    options: ["A. 1", "B. 2", "C. 5", "D. 6"],
+    correctAnswer: "C. 5",
+    explanation: {
+      concept: "Komplemen kejadian 'muncul 2' dari ruang sampel dadu.",
+      steps: [
+        "S = {1, 2, 3, 4, 5, 6}, n(S) = 6",
+        "Kejadian muncul 2: {2} → n = 1",
+        "Bukan 2: {1, 3, 4, 5, 6} → n = 5"
+      ],
+      formula: "n(A^c) = n(S) - n(A) = 6 - 1 = 5"
+    }
+  },
+  {
+    id: 11, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Sebuah keluarga berencana memiliki 3 anak. Banyaknya titik sampel yang dapat terjadi adalah ....",
+    svgKey: "koin-3",
+    options: ["A. 4", "B. 6", "C. 8", "D. 12"],
+    correctAnswer: "C. 8",
+    explanation: {
+      concept: "Setiap anak bisa laki-laki (L) atau perempuan (P): 2 kemungkinan per anak.",
+      steps: [
+        "n(S) = 2³ = 8",
+        "S = {LLL, LLP, LPL, LPP, PLL, PLP, PPL, PPP}"
+      ],
+      formula: "n(S) = 2^3 = 8"
+    }
+  },
+  {
+    id: 12, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada pelemparan dua buah uang logam, kejadian tidak muncul gambar (G) adalah ....",
+    svgKey: "koin-2",
+    options: [
+      "A. {(A, A)}",
+      "B. {(G, G)}",
+      "C. {(A, G), (G, A)}",
+      "D. {(G, G), (A, G), (G, A)}"
+    ],
+    correctAnswer: "A. {(A, A)}",
+    explanation: {
+      concept: "Tidak muncul gambar berarti kedua sisi menunjukkan angka (A).",
+      steps: [
+        "S = {(A,A), (A,G), (G,A), (G,G)}",
+        "Tidak muncul G → (A,A)",
+        "Jadi kejadiannya = {(A, A)}"
+      ],
+      formula: ""
+    }
+  },
+
+  /* Frekuensi Relatif */
+  {
+    id: 13, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada 80 kali pelemparan sekeping mata uang, muncul sisi angka sebanyak 52 kali. Frekuensi relatif munculnya sisi angka adalah ....",
+    svgKey: "koin-1",
+    options: [
+      "A. $\\frac{1}{5}$",
+      "B. $\\frac{13}{20}$",
+      "C. $\\frac{17}{20}$",
+      "D. $\\frac{7}{10}$"
+    ],
+    correctAnswer: "B. $\\frac{13}{20}$",
+    explanation: {
+      concept: "Frekuensi relatif = banyak kejadian ÷ banyak percobaan.",
+      steps: [
+        "$f_r = \\dfrac{52}{80} = \\dfrac{13}{20}$"
+      ],
+      formula: "f_r = \\frac{f}{n}"
+    }
+  },
+  {
+    id: 14, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada percobaan melempar undi sebuah dadu sebanyak 60 kali, mata dadu bermata 6 muncul 9 kali. Frekuensi relatif munculnya mata dadu bermata 6 adalah ....",
+    svgKey: "dadu-prima",
+    options: [
+      "A. $\\frac{3}{20}$",
+      "B. $\\frac{1}{20}$",
+      "C. $\\frac{9}{60}$",
+      "D. $\\frac{6}{60}$"
+    ],
+    correctAnswer: "A. $\\frac{3}{20}$",
+    explanation: {
+      concept: "Frekuensi relatif = banyak kejadian ÷ banyak percobaan.",
+      steps: [
+        "$f_r = \\dfrac{9}{60} = \\dfrac{3}{20}$"
+      ],
+      formula: "f_r = \\frac{9}{60} = \\frac{3}{20}"
+    }
+  },
+  {
+    id: 15, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada percobaan melempar dadu sebanyak 60 kali diperoleh data frekuensi:\n\nMata Dadu: 1→8, 2→10, 3→14, 4→12, 5→9, 6→7\n\nFrekuensi relatif muncul mata dadu 2 adalah ....",
+    svgKey: "dadu-genap",
+    options: [
+      "A. $\\frac{2}{15}$",
+      "B. $\\frac{1}{6}$",
+      "C. $\\frac{7}{20}$",
+      "D. $\\frac{1}{5}$"
+    ],
+    correctAnswer: "B. $\\frac{1}{6}$",
+    explanation: {
+      concept: "Frekuensi relatif = frekuensi muncul ÷ total percobaan.",
+      steps: [
+        "Frekuensi mata 2 = 10",
+        "Total percobaan = 60",
+        "$f_r = \\dfrac{10}{60} = \\dfrac{1}{6}$"
+      ],
+      formula: "f_r = \\frac{10}{60} = \\frac{1}{6}"
+    }
+  },
+  {
+    id: 16, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada percobaan melempar dadu sebanyak 60 kali diperoleh data frekuensi:\n\nMata Dadu: 1→8, 2→10, 3→14, 4→12, 5→9, 6→7\n\nFrekuensi relatif muncul mata dadu 3 adalah ....",
+    svgKey: "dadu-prima",
+    options: [
+      "A. $\\frac{1}{4}$",
+      "B. $\\frac{1}{5}$",
+      "C. $\\frac{7}{30}$",
+      "D. $\\frac{1}{6}$"
+    ],
+    correctAnswer: "C. $\\frac{7}{30}$",
+    explanation: {
+      concept: "Frekuensi relatif = frekuensi muncul ÷ total percobaan.",
+      steps: [
+        "Frekuensi mata 3 = 14",
+        "Total percobaan = 60",
+        "$f_r = \\dfrac{14}{60} = \\dfrac{7}{30}$"
+      ],
+      formula: "f_r = \\frac{14}{60} = \\frac{7}{30}"
+    }
+  },
+  {
+    id: 17, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada percobaan melempar dadu sebanyak 60 kali diperoleh data frekuensi:\n\nMata Dadu: 1→8, 2→10, 3→14, 4→12, 5→9, 6→7\n\nFrekuensi relatif muncul mata dadu 5 adalah ....",
+    svgKey: "dadu-genap",
+    options: [
+      "A. $\\frac{1}{6}$",
+      "B. $\\frac{3}{20}$",
+      "C. $\\frac{1}{5}$",
+      "D. $\\frac{1}{8}$"
+    ],
+    correctAnswer: "B. $\\frac{3}{20}$",
+    explanation: {
+      concept: "Frekuensi relatif = frekuensi muncul ÷ total percobaan.",
+      steps: [
+        "Frekuensi mata 5 = 9",
+        "Total percobaan = 60",
+        "$f_r = \\dfrac{9}{60} = \\dfrac{3}{20}$"
+      ],
+      formula: "f_r = \\frac{9}{60} = \\frac{3}{20}"
+    }
+  },
+  {
+    id: 18, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada percobaan pelemparan sebuah dadu sebanyak 120 kali, munculnya mata dadu genap terjadi sebanyak 66 kali. Frekuensi relatif munculnya mata dadu genap pada percobaan tersebut adalah ....",
+    svgKey: "dadu-genap",
+    options: [
+      "A. $\\frac{9}{20}$",
+      "B. $\\frac{6}{25}$",
+      "C. $\\frac{11}{20}$",
+      "D. $\\frac{11}{40}$"
+    ],
+    correctAnswer: "C. $\\frac{11}{20}$",
+    explanation: {
+      concept: "Frekuensi relatif = frekuensi kejadian ÷ banyak percobaan.",
+      steps: [
+        "$f_r = \\dfrac{66}{120} = \\dfrac{11}{20}$"
+      ],
+      formula: "f_r = \\frac{66}{120} = \\frac{11}{20}"
+    }
+  },
+  {
+    id: 19, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Sekeping uang logam dilempar sebanyak 200 kali dan ternyata sisi angka muncul sebanyak 90 kali. Frekuensi relatif munculnya sisi angka adalah ....",
+    svgKey: "koin-1",
+    options: [
+      "A. $\\frac{9}{20}$",
+      "B. $\\frac{9}{10}$",
+      "C. $\\frac{9}{25}$",
+      "D. $\\frac{3}{10}$"
+    ],
+    correctAnswer: "A. $\\frac{9}{20}$",
+    explanation: {
+      concept: "Frekuensi relatif = frekuensi muncul ÷ total percobaan.",
+      steps: [
+        "$f_r = \\dfrac{90}{200} = \\dfrac{9}{20}$"
+      ],
+      formula: "f_r = \\frac{90}{200} = \\frac{9}{20}"
+    }
+  },
+
+  /* Peluang dan Komplemen Suatu Kejadian */
+  {
+    id: 20, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Pada percobaan mengetos sebuah dadu 240 kali, ternyata muncul mata dadu 4 sebanyak 36 kali. Frekuensi relatif munculnya mata dadu bukan 4 adalah ....",
+    svgKey: "dadu-besar4",
+    options: [
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{8}$",
+      "C. $\\frac{17}{20}$",
+      "D. $\\frac{7}{8}$"
+    ],
+    correctAnswer: "C. $\\frac{17}{20}$",
+    explanation: {
+      concept: "Frekuensi bukan 4 = total − frekuensi 4, lalu bagi dengan total percobaan.",
+      steps: [
+        "Frekuensi bukan 4 = 240 − 36 = 204",
+        "$f_r = \\dfrac{204}{240} = \\dfrac{17}{20}$"
+      ],
+      formula: "f_r(\\text{bukan 4}) = \\frac{204}{240} = \\frac{17}{20}"
     }
   },
   {
     id: 21, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Pada pelemparan satu dadu, peluang muncul bilangan yang bukan prima adalah ...",
-    svgKey: "dadu-genap",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "B. $\\frac{1}{2}$",
+    question: "Sebuah huruf dipilih acak dari kata \"MATEMATIKA\". Peluang terpilihnya huruf A adalah ....",
+    options: [
+      "A. $\\frac{1}{10}$",
+      "B. $\\frac{2}{10}$",
+      "C. $\\frac{3}{10}$",
+      "D. $\\frac{4}{10}$"
+    ],
+    correctAnswer: "C. $\\frac{3}{10}$",
     explanation: {
-      concept: "Prima: {2,3,5}. Bukan prima: {1,4,6}.",
-      steps: ["P(prima) = 3/6 = 1/2", "$P(\\text{bukan prima}) = 1 - \\dfrac{1}{2} = \\dfrac{1}{2}$"],
-      formula: "P(A^c) = 1 - P(A)"
+      concept: "Hitung banyak huruf A dan total huruf dalam kata.",
+      steps: [
+        "MATEMATIKA → M, A, T, E, M, A, T, I, K, A",
+        "Total huruf = 10",
+        "Huruf A muncul: 3 kali",
+        "$P(A) = \\dfrac{3}{10}$"
+      ],
+      formula: "P(A) = \\frac{n(A)}{n(S)} = \\frac{3}{10}"
     }
   },
   {
     id: 22, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Peluang suatu kejadian adalah $\\frac{2}{5}$. Jika percobaan dilakukan 200 kali, frekuensi harapannya adalah ...",
-    svgKey: "frek-200-2o5",
-    options: ["A. 40", "B. 60", "C. 80", "D. 100"],
-    correctAnswer: "C. 80",
+    question: "Nilai peluang yang mungkin adalah sebagai berikut, kecuali ....",
+    options: ["A. 0", "B. 0,75", "C. 1,25", "D. 1"],
+    correctAnswer: "C. 1,25",
     explanation: {
-      concept: "f_h = P(A) × n.",
-      steps: ["$f_h = \\dfrac{2}{5} \\times 200 = 80$"],
-      formula: ""
+      concept: "Nilai peluang suatu kejadian selalu memenuhi 0 ≤ P(A) ≤ 1.",
+      steps: [
+        "P = 0 → mungkin (kejadian mustahil)",
+        "P = 0,75 → mungkin (0 ≤ 0,75 ≤ 1)",
+        "P = 1,25 → TIDAK mungkin (melebihi 1)",
+        "P = 1 → mungkin (kejadian pasti)"
+      ],
+      formula: "0 \\leq P(A) \\leq 1"
     }
   },
   {
     id: 23, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu dilempar satu kali. Peluang muncul angka 1 adalah ...",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{4}$", "C. $\\frac{1}{3}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "A. $\\frac{1}{6}$",
+    question: "Ruang sampel suatu kejadian adalah {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}. Jika A = kejadian muncul bilangan prima, maka komplemen kejadian A adalah ....",
+    svgKey: "dadu-prima",
+    options: [
+      "A. {2, 3, 5, 7}",
+      "B. {1, 3, 5, 7, 9}",
+      "C. {1, 4, 6, 8, 9, 10}",
+      "D. {1, 4, 6, 8, 10}"
+    ],
+    correctAnswer: "C. {1, 4, 6, 8, 9, 10}",
     explanation: {
-      concept: "Hanya 1 dari 6 sisi yang menunjukkan angka 1.",
-      steps: ["n(angka 1) = 1", "n(S) = 6", "$P = \\dfrac{1}{6}$"],
-      formula: ""
+      concept: "Komplemen A = anggota S yang bukan anggota A.",
+      steps: [
+        "S = {1,2,3,4,5,6,7,8,9,10}",
+        "A (prima) = {2,3,5,7}",
+        "$A^c = S - A = \\{1,4,6,8,9,10\\}$",
+        "Catatan: 9 = 3² bukan bilangan prima"
+      ],
+      formula: "A^c = S \\setminus A"
     }
   },
   {
     id: 24, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Dalam sebuah kotak terdapat 4 bola merah dan 6 bola putih. Peluang terambil bola putih adalah ...",
+    question: "Dalam pemilihan ketua kelas terdapat 4 kandidat: 2 wanita dan 2 pria. Satu orang dipilih secara acak. Peluang terpilihnya kandidat wanita adalah ....",
+    options: [
+      "A. $\\frac{1}{4}$",
+      "B. $\\frac{1}{3}$",
+      "C. $\\frac{1}{2}$",
+      "D. $\\frac{3}{4}$"
+    ],
+    correctAnswer: "C. $\\frac{1}{2}$",
+    explanation: {
+      concept: "Peluang = banyak hasil yang diinginkan ÷ total ruang sampel.",
+      steps: [
+        "n(wanita) = 2",
+        "n(S) = 4",
+        "$P(\\text{wanita}) = \\dfrac{2}{4} = \\dfrac{1}{2}$"
+      ],
+      formula: "P = \\frac{2}{4} = \\frac{1}{2}"
+    }
+  },
+  {
+    id: 25, type: "PG", difficulty: "Mudah", category: "UN",
+    question: "Dari sekelompok kartu yang diberi nomor 1 sampai 10, diambil satu kartu secara acak. Peluang terambilnya kartu bukan bilangan genap adalah ....",
+    options: [
+      "A. $\\frac{1}{4}$",
+      "B. $\\frac{1}{3}$",
+      "C. $\\frac{1}{2}$",
+      "D. $\\frac{2}{3}$"
+    ],
+    correctAnswer: "C. $\\frac{1}{2}$",
+    explanation: {
+      concept: "Bukan genap = ganjil. Hitung banyak bilangan ganjil dalam 1–10.",
+      steps: [
+        "Ganjil: {1, 3, 5, 7, 9} → n = 5",
+        "n(S) = 10",
+        "$P(\\text{bukan genap}) = \\dfrac{5}{10} = \\dfrac{1}{2}$"
+      ],
+      formula: "P = \\frac{5}{10} = \\frac{1}{2}"
+    }
+  },
+  {
+    id: 26, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Sepasang suami istri merencanakan untuk memiliki 2 anak saja. Peluang mereka mempunyai paling sedikit satu anak perempuan adalah ....",
+    svgKey: "koin-2",
+    options: [
+      "A. $\\frac{1}{4}$",
+      "B. $\\frac{1}{2}$",
+      "C. $\\frac{3}{4}$",
+      "D. 1"
+    ],
+    correctAnswer: "C. $\\frac{3}{4}$",
+    explanation: {
+      concept: "S = {LL, LP, PL, PP}. Paling sedikit 1P: kebalikan dari 'tidak ada P'.",
+      steps: [
+        "P(tidak ada P) = P(LL) = 1/4",
+        "$P(\\text{paling sedikit 1P}) = 1 - \\dfrac{1}{4} = \\dfrac{3}{4}$"
+      ],
+      formula: "P(A) = 1 - P(A^c)"
+    }
+  },
+  {
+    id: 27, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Sebuah papan berbentuk segi delapan beraturan terbagi atas 4 bagian merah, 2 bagian biru, dan 2 bagian kuning. Sebuah jarum penunjuk diputar. Peluang jarum berhenti pada bagian bukan merah adalah ....",
+    options: [
+      "A. $\\frac{1}{8}$",
+      "B. $\\frac{1}{4}$",
+      "C. $\\frac{3}{8}$",
+      "D. $\\frac{1}{2}$"
+    ],
+    correctAnswer: "D. $\\frac{1}{2}$",
+    explanation: {
+      concept: "Bukan merah = biru + kuning.",
+      steps: [
+        "n(bukan merah) = 2 + 2 = 4",
+        "n(S) = 8",
+        "$P(\\text{bukan merah}) = \\dfrac{4}{8} = \\dfrac{1}{2}$"
+      ],
+      formula: "P = \\frac{4}{8} = \\frac{1}{2}"
+    }
+  },
+  {
+    id: 28, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Sebuah dadu dilempar sekali. Peluang munculnya bilangan ganjil atau lebih dari 4 adalah ....",
+    svgKey: "dadu-besar3",
+    options: [
+      "A. $\\frac{1}{6}$",
+      "B. $\\frac{1}{2}$",
+      "C. $\\frac{2}{3}$",
+      "D. $\\frac{5}{6}$"
+    ],
+    correctAnswer: "C. $\\frac{2}{3}$",
+    explanation: {
+      concept: "Gunakan rumus P(A∪B) = P(A)+P(B)−P(A∩B).",
+      steps: [
+        "Ganjil = {1,3,5}, lebih dari 4 = {5,6}",
+        "Ganjil ∪ lebih dari 4 = {1,3,5,6} → n = 4",
+        "$P = \\dfrac{4}{6} = \\dfrac{2}{3}$"
+      ],
+      formula: "P(A \\cup B) = \\frac{n(A \\cup B)}{n(S)}"
+    }
+  },
+  {
+    id: 29, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Tiga mata uang logam dilempar bersamaan. Peluang kejadian muncul minimal 2 angka (A) adalah ....",
+    svgKey: "koin-3",
+    options: [
+      "A. $\\frac{1}{6}$",
+      "B. $\\frac{1}{4}$",
+      "C. $\\frac{3}{8}$",
+      "D. $\\frac{1}{2}$"
+    ],
+    correctAnswer: "D. $\\frac{1}{2}$",
+    explanation: {
+      concept: "Minimal 2A = tepat 2A atau tepat 3A.",
+      steps: [
+        "n(S) = 8",
+        "Tepat 2A: {AAG, AGA, GAA} → 3",
+        "Tepat 3A: {AAA} → 1",
+        "Total = 4",
+        "$P = \\dfrac{4}{8} = \\dfrac{1}{2}$"
+      ],
+      formula: "P(\\geq 2A) = \\frac{4}{8} = \\frac{1}{2}"
+    }
+  },
+  {
+    id: 30, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Sebuah dadu dan sebuah koin dilempar bersama-sama. Peluang muncul mata dadu kelipatan 3 dan koin angka (A) adalah ....",
+    svgKey: "dadu-koin",
+    options: [
+      "A. $\\frac{1}{12}$",
+      "B. $\\frac{1}{6}$",
+      "C. $\\frac{1}{4}$",
+      "D. $\\frac{1}{3}$"
+    ],
+    correctAnswer: "B. $\\frac{1}{6}$",
+    explanation: {
+      concept: "n(S) = 12. Hitung pasangan yang memenuhi keduanya.",
+      steps: [
+        "Kelipatan 3 pada dadu: {3, 6}",
+        "Koin angka: {A}",
+        "Pasangan yang sesuai: (3,A) dan (6,A) → 2",
+        "$P = \\dfrac{2}{12} = \\dfrac{1}{6}$"
+      ],
+      formula: "P = \\frac{2}{12} = \\frac{1}{6}"
+    }
+  },
+  {
+    id: 31, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Dalam sebuah kardus terdapat 12 bola merah, 5 bola kuning, dan 3 bola cokelat. Jika diambil sebuah bola secara acak, maka peluang terambilnya bola merah adalah ....",
     svgKey: "marble-4r6p",
-    options: ["A. $\\frac{2}{5}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{5}$", "D. $\\frac{4}{5}$"],
-    correctAnswer: "C. $\\frac{3}{5}$",
+    options: [
+      "A. $\\frac{1}{4}$",
+      "B. $\\frac{3}{10}$",
+      "C. $\\frac{2}{5}$",
+      "D. $\\frac{3}{5}$"
+    ],
+    correctAnswer: "D. $\\frac{3}{5}$",
     explanation: {
-      concept: "P(putih) = 6/10.",
-      steps: ["$P(\\text{putih}) = \\dfrac{6}{10} = \\dfrac{3}{5}$"],
-      formula: ""
+      concept: "Peluang = banyak bola merah ÷ total bola.",
+      steps: [
+        "n(merah) = 12",
+        "n(S) = 12 + 5 + 3 = 20",
+        "$P(\\text{merah}) = \\dfrac{12}{20} = \\dfrac{3}{5}$"
+      ],
+      formula: "P = \\frac{12}{20} = \\frac{3}{5}"
     }
   },
   {
-    id: 25, type: "PG", difficulty: "Mudah", category: "Empirik",
-    question: "Koin dilempar 200 kali. Muncul gambar (G) sebanyak 90 kali. Peluang empirik muncul gambar adalah ...",
-    options: ["A. $\\frac{2}{5}$", "B. $\\frac{9}{20}$", "C. $\\frac{1}{2}$", "D. $\\frac{11}{20}$"],
-    correctAnswer: "B. $\\frac{9}{20}$",
-    explanation: {
-      concept: "P empirik = f/n.",
-      steps: ["$P_{\\text{empirik}} = \\dfrac{90}{200} = \\dfrac{9}{20}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 26, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu dilempar sekali. Peluang muncul kelipatan 3 adalah ...",
-    svgKey: "dadu-kelipatan3",
-    options: ["A. $\\frac{1}{3}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "A. $\\frac{1}{3}$",
-    explanation: {
-      concept: "Kelipatan 3 pada dadu: 3 dan 6.",
-      steps: ["A = {3, 6}", "n(A) = 2", "$P = \\dfrac{2}{6} = \\dfrac{1}{3}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 27, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Diketahui $P(A) = \\frac{3}{7}$. Nilai $P(A^c)$ adalah ...",
-    options: ["A. $\\frac{3}{7}$", "B. $\\frac{4}{7}$", "C. $\\frac{5}{7}$", "D. $\\frac{7}{3}$"],
-    correctAnswer: "B. $\\frac{4}{7}$",
-    explanation: {
-      concept: "P(Ac) = 1 − P(A).",
-      steps: ["$P(A^c) = 1 - \\dfrac{3}{7} = \\dfrac{7}{7} - \\dfrac{3}{7} = \\dfrac{4}{7}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 28, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Dari 52 kartu bridge, satu kartu diambil secara acak. Peluang terambil kartu As adalah ...",
-    svgKey: "kartu-bridge",
-    options: ["A. $\\frac{1}{52}$", "B. $\\frac{1}{26}$", "C. $\\frac{1}{13}$", "D. $\\frac{1}{4}$"],
-    correctAnswer: "C. $\\frac{1}{13}$",
-    explanation: {
-      concept: "Dalam 52 kartu bridge, terdapat 4 kartu As (satu tiap suit).",
-      steps: ["n(As) = 4", "n(S) = 52", "$P = \\dfrac{4}{52} = \\dfrac{1}{13}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 29, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah koin dilempar 300 kali. Frekuensi harapan muncul angka (A) adalah ...",
-    svgKey: "frek-300-1o2",
-    options: ["A. 100", "B. 120", "C. 150", "D. 200"],
-    correctAnswer: "C. 150",
-    explanation: {
-      concept: "P(A) = 1/2, frekuensi harapan = P × n.",
-      steps: ["$f_h = \\dfrac{1}{2} \\times 300 = 150$"],
-      formula: ""
-    }
-  },
-  {
-    id: 30, type: "PG", difficulty: "Mudah", category: "Kontekstual",
-    question: "Dalam daftar hadir 30 siswa, 12 siswa tidak hadir. Jika satu nama dipilih acak, peluang terpilih siswa yang hadir adalah ...",
-    options: ["A. $\\frac{2}{5}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{5}$", "D. $\\frac{4}{5}$"],
-    correctAnswer: "C. $\\frac{3}{5}$",
-    explanation: {
-      concept: "Hadir = 30 − 12 = 18 siswa.",
-      steps: ["n(hadir) = 30 - 12 = 18", "$P = \\dfrac{18}{30} = \\dfrac{3}{5}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 31, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah dadu dilempar sekali. Peluang muncul bilangan kurang dari 4 adalah ...",
-    svgKey: "dadu-kecil4",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
+    id: 32, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Suatu keluarga memiliki tiga orang anak. Peluang keluarga tersebut mempunyai paling sedikit 2 anak laki-laki adalah ....",
+    svgKey: "koin-3",
+    options: [
+      "A. $\\frac{1}{4}$",
+      "B. $\\frac{1}{2}$",
+      "C. $\\frac{3}{4}$",
+      "D. 1"
+    ],
     correctAnswer: "B. $\\frac{1}{2}$",
     explanation: {
-      concept: "Bilangan < 4 pada dadu: 1, 2, 3.",
-      steps: ["A = {1, 2, 3}", "n(A) = 3", "$P = \\dfrac{3}{6} = \\dfrac{1}{2}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 32, type: "PG", difficulty: "Mudah", category: "Kontekstual",
-    question: "Sebuah spinner (roda putar) dibagi menjadi 4 bagian sama besar berwarna merah, biru, hijau, dan kuning. Peluang jarum berhenti di bagian merah adalah ...",
-    svgKey: "spinner-4",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{3}$", "C. $\\frac{1}{2}$", "D. $\\frac{3}{4}$"],
-    correctAnswer: "A. $\\frac{1}{4}$",
-    explanation: {
-      concept: "4 bagian sama besar → P(satu bagian) = 1/4.",
-      steps: ["$P(\\text{merah}) = \\dfrac{1}{4}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 33, type: "PG", difficulty: "Mudah", category: "Dasar Peluang",
-    question: "Nilai peluang suatu kejadian A yang paling tepat adalah ...",
-    options: ["A. $P(A) = -0{,}5$", "B. $P(A) = 1{,}2$", "C. $P(A) = 0{,}85$", "D. $P(A) = \\frac{5}{4}$"],
-    correctAnswer: "C. $P(A) = 0{,}85$",
-    explanation: {
-      concept: "Nilai peluang selalu berada antara 0 dan 1 (inklusif): 0 ≤ P(A) ≤ 1.",
-      steps: ["A: P = −0,5 → tidak valid (< 0)", "B: P = 1,2 → tidak valid (> 1)", "C: P = 0,85 → valid", "D: P = 5/4 = 1,25 → tidak valid"],
-      formula: "0 \\leq P(A) \\leq 1"
-    }
-  },
-  {
-    id: 34, type: "PG", difficulty: "Mudah", category: "UN",
-    question: "Sebuah kotak berisi 4 bola merah, 3 bola kuning, dan 3 bola biru. Peluang terambil bola kuning adalah ...",
-    svgKey: "marble-5r3k",
-    options: ["A. $\\frac{1}{5}$", "B. $\\frac{3}{10}$", "C. $\\frac{2}{5}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "B. $\\frac{3}{10}$",
-    explanation: {
-      concept: "n(S) = 4 + 3 + 3 = 10.",
-      steps: ["n(kuning) = 3", "n(S) = 10", "$P = \\dfrac{3}{10}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 35, type: "Benar/Salah", difficulty: "Mudah", category: "Dasar Peluang",
-    question: "Tentukan benar atau salah setiap pernyataan berikut tentang peluang:",
-    statements: [
-      { text: "Peluang kejadian pasti (certain event) bernilai 1.", isCorrect: true },
-      { text: "Peluang kejadian mustahil (impossible event) bernilai −1.", isCorrect: false },
-      { text: "Jika P(A) = 0,7 maka P(Ac) = 0,3.", isCorrect: true },
-      { text: "Peluang suatu kejadian dapat bernilai lebih dari 1.", isCorrect: false },
-    ],
-    explanation: {
-      concept: "Sifat-sifat dasar peluang.",
+      concept: "Minimal 2L = tepat 2L atau 3L.",
       steps: [
-        "Kejadian pasti: P = 1 (benar)",
-        "Kejadian mustahil: P = 0, bukan −1 (salah)",
-        "P(Ac) = 1 − P(A) = 1 − 0,7 = 0,3 (benar)",
-        "0 ≤ P(A) ≤ 1, tidak bisa > 1 (salah)",
+        "S = 8 anggota (2³)",
+        "Tepat 2L: {LLP, LPL, PLL} → 3",
+        "Tepat 3L: {LLL} → 1",
+        "Total = 4",
+        "$P = \\dfrac{4}{8} = \\dfrac{1}{2}$"
       ],
-      formula: "0 \\leq P(A) \\leq 1"
+      formula: "P = \\frac{4}{8} = \\frac{1}{2}"
     }
   },
-
-  /* ══════════ SEDANG (36–75) ══════════ */
   {
-    id: 36, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dua buah dadu dilempar bersamaan. Peluang muncul jumlah mata dadu sama dengan 7 adalah ...",
+    id: 33, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Lima belas kartu diberi angka 1, 2, 3, ..., 15. Kartu-kartu tersebut dikocok kemudian diambil satu kartu secara acak. Peluang terambil kartu bergangka ganjil adalah ....",
+    options: [
+      "A. $\\frac{1}{3}$",
+      "B. $\\frac{7}{15}$",
+      "C. $\\frac{8}{15}$",
+      "D. $\\frac{1}{2}$"
+    ],
+    correctAnswer: "C. $\\frac{8}{15}$",
+    explanation: {
+      concept: "Hitung bilangan ganjil dari 1 hingga 15.",
+      steps: [
+        "Ganjil: {1,3,5,7,9,11,13,15} → n = 8",
+        "n(S) = 15",
+        "$P(\\text{ganjil}) = \\dfrac{8}{15}$"
+      ],
+      formula: "P = \\frac{8}{15}"
+    }
+  },
+  {
+    id: 34, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Dua buah dadu dilempar bersamaan. Peluang muncul mata dadu berjumlah 7 adalah ....",
     svgKey: "dua-dadu-7",
-    options: ["A. $\\frac{1}{9}$", "B. $\\frac{1}{8}$", "C. $\\frac{1}{6}$", "D. $\\frac{5}{36}$"],
+    options: [
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{12}$",
+      "C. $\\frac{1}{6}$",
+      "D. $\\frac{5}{36}$"
+    ],
     correctAnswer: "C. $\\frac{1}{6}$",
     explanation: {
-      concept: "Jumlah = 7: (1,6),(6,1),(2,5),(5,2),(3,4),(4,3) — ada 6 pasangan.",
-      steps: ["n(jumlah=7) = 6", "n(S) = 36", "$P = \\dfrac{6}{36} = \\dfrac{1}{6}$"],
-      formula: ""
+      concept: "Hitung semua pasangan dadu yang berjumlah 7.",
+      steps: [
+        "(1,6),(6,1),(2,5),(5,2),(3,4),(4,3) → 6 pasangan",
+        "n(S) = 36",
+        "$P = \\dfrac{6}{36} = \\dfrac{1}{6}$"
+      ],
+      formula: "P = \\frac{6}{36} = \\frac{1}{6}"
+    }
+  },
+  {
+    id: 35, type: "PG", difficulty: "Sedang", category: "Kontekstual",
+    question: "Dari 1.000 butir telur ayam, terdapat 125 butir telur yang retak. Jika sebuah telur diambil secara acak, maka peluang terambil telur yang tidak retak adalah ....",
+    options: [
+      "A. $\\frac{1}{8}$",
+      "B. $\\frac{3}{4}$",
+      "C. $\\frac{7}{8}$",
+      "D. 1"
+    ],
+    correctAnswer: "C. $\\frac{7}{8}$",
+    explanation: {
+      concept: "Tidak retak = total − retak.",
+      steps: [
+        "n(tidak retak) = 1000 − 125 = 875",
+        "n(S) = 1000",
+        "$P = \\dfrac{875}{1000} = \\dfrac{7}{8}$"
+      ],
+      formula: "P(\\text{tidak retak}) = \\frac{875}{1000} = \\frac{7}{8}"
+    }
+  },
+  {
+    id: 36, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Di dalam sebuah kotak terdapat 8 bola putih, 4 bola merah, dan 4 bola kuning. Dari kotak tersebut diambil sebuah bola secara acak tanpa dikembalikan. Peluang terambilnya bola merah adalah ....",
+    svgKey: "marble-4r6p",
+    options: [
+      "A. $\\frac{1}{8}$",
+      "B. $\\frac{1}{4}$",
+      "C. $\\frac{3}{8}$",
+      "D. $\\frac{1}{2}$"
+    ],
+    correctAnswer: "B. $\\frac{1}{4}$",
+    explanation: {
+      concept: "Peluang = banyak bola merah ÷ total bola.",
+      steps: [
+        "n(merah) = 4",
+        "n(S) = 8 + 4 + 4 = 16",
+        "$P(\\text{merah}) = \\dfrac{4}{16} = \\dfrac{1}{4}$"
+      ],
+      formula: "P = \\frac{4}{16} = \\frac{1}{4}"
     }
   },
   {
     id: 37, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dua buah dadu dilempar bersamaan. Peluang muncul jumlah mata dadu sama dengan 10 adalah ...",
-    svgKey: "dua-dadu-10",
-    options: ["A. $\\frac{1}{36}$", "B. $\\frac{1}{12}$", "C. $\\frac{1}{9}$", "D. $\\frac{1}{6}$"],
-    correctAnswer: "B. $\\frac{1}{12}$",
+    question: "Dari 30 siswa terdapat 16 siswa gemar Matematika, 14 siswa gemar IPA, dan 8 siswa tidak gemar keduanya. Jika dipilih satu siswa secara acak, maka peluang terpilihnya siswa yang hanya gemar IPA adalah ....",
+    svgKey: "venn-siswa",
+    options: [
+      "A. $\\frac{1}{6}$",
+      "B. $\\frac{1}{5}$",
+      "C. $\\frac{4}{15}$",
+      "D. $\\frac{13}{30}$"
+    ],
+    correctAnswer: "B. $\\frac{1}{5}$",
     explanation: {
-      concept: "Jumlah = 10: (4,6),(6,4),(5,5) — ada 3 pasangan.",
-      steps: ["n(jumlah=10) = 3", "$P = \\dfrac{3}{36} = \\dfrac{1}{12}$"],
-      formula: ""
+      concept: "Gunakan diagram Venn untuk menemukan jumlah siswa yang hanya gemar IPA.",
+      steps: [
+        "n(M∪I) = 30 − 8 = 22 (yang gemar setidaknya satu)",
+        "n(M∩I) = n(M) + n(I) − n(M∪I) = 16 + 14 − 22 = 8 (gemar keduanya)",
+        "n(hanya IPA) = n(I) − n(M∩I) = 14 − 8 = 6",
+        "$P(\\text{hanya IPA}) = \\dfrac{6}{30} = \\dfrac{1}{5}$"
+      ],
+      formula: "P = \\frac{6}{30} = \\frac{1}{5}"
     }
   },
   {
     id: 38, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dua buah dadu dilempar bersamaan. Peluang muncul jumlah mata dadu sama dengan 2 adalah ...",
-    svgKey: "dua-dadu-2",
-    options: ["A. $\\frac{1}{36}$", "B. $\\frac{1}{18}$", "C. $\\frac{1}{12}$", "D. $\\frac{1}{9}$"],
-    correctAnswer: "A. $\\frac{1}{36}$",
+    question: "Empat buah koin dilempar bersamaan. Peluang munculnya tepat 3 angka dan 1 gambar adalah ....",
+    svgKey: "koin-3",
+    options: [
+      "A. $\\frac{1}{8}$",
+      "B. $\\frac{1}{4}$",
+      "C. $\\frac{3}{16}$",
+      "D. $\\frac{1}{2}$"
+    ],
+    correctAnswer: "B. $\\frac{1}{4}$",
     explanation: {
-      concept: "Jumlah = 2 hanya bisa dengan (1,1).",
-      steps: ["n(jumlah=2) = 1", "$P = \\dfrac{1}{36}$"],
-      formula: ""
+      concept: "n(S) = 2⁴ = 16. Tepat 3A 1G = C(4,1) = 4.",
+      steps: [
+        "n(S) = 2⁴ = 16",
+        "n(tepat 3A,1G) = C(4,1) = 4",
+        "{AAAG, AAGA, AGAA, GAAA}",
+        "$P = \\dfrac{4}{16} = \\dfrac{1}{4}$"
+      ],
+      formula: "P = \\frac{C(4,1)}{2^4} = \\frac{4}{16} = \\frac{1}{4}"
     }
   },
   {
-    id: 39, type: "PG", difficulty: "Sedang", category: "TKA",
-    question: "Dua buah dadu dilempar bersamaan. Peluang jumlah mata dadu lebih dari 9 adalah ...",
-    svgKey: "dua-dadu-gt9",
-    options: ["A. $\\frac{1}{12}$", "B. $\\frac{1}{9}$", "C. $\\frac{1}{6}$", "D. $\\frac{5}{18}$"],
-    correctAnswer: "C. $\\frac{1}{6}$",
+    id: 39, type: "PG", difficulty: "Sedang", category: "UN",
+    question: "Dadu merah dan dadu hijau dilempar bersamaan. Peluang munculnya mata 5 pada dadu merah dan mata 3 pada dadu hijau adalah ....",
+    svgKey: "dua-dadu-7",
+    options: [
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{12}$",
+      "C. $\\frac{1}{6}$",
+      "D. $\\frac{5}{36}$"
+    ],
+    correctAnswer: "A. $\\frac{1}{36}$",
     explanation: {
-      concept: "Jumlah > 9: jumlah = 10, 11, atau 12.",
+      concept: "Kedua kejadian bebas: P(A∩B) = P(A) × P(B).",
       steps: [
-        "Jumlah 10: (4,6),(6,4),(5,5) → 3",
-        "Jumlah 11: (5,6),(6,5) → 2",
-        "Jumlah 12: (6,6) → 1",
-        "Total = 6",
-        "$P = \\dfrac{6}{36} = \\dfrac{1}{6}$"
+        "P(dadu merah = 5) = 1/6",
+        "P(dadu hijau = 3) = 1/6",
+        "$P = \\dfrac{1}{6} \\times \\dfrac{1}{6} = \\dfrac{1}{36}$"
       ],
-      formula: ""
+      formula: "P = \\frac{1}{6} \\times \\frac{1}{6} = \\frac{1}{36}"
     }
   },
   {
     id: 40, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dua koin dilempar bersamaan. Peluang muncul tepat satu angka (A) adalah ...",
-    svgKey: "koin-2",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{4}$", "D. 1"],
-    correctAnswer: "B. $\\frac{1}{2}$",
-    explanation: {
-      concept: "Tepat satu A: {AG, GA} — ada 2 kejadian dari 4.",
-      steps: ["A = {AG, GA}", "n(A) = 2", "$P = \\dfrac{2}{4} = \\dfrac{1}{2}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 41, type: "PG", difficulty: "Sedang", category: "TKA",
-    question: "Diketahui $P(A) = 0{,}5$, $P(B) = 0{,}4$, dan $P(A \\cap B) = 0{,}2$. Nilai $P(A \\cup B)$ adalah ...",
-    svgKey: "venn-ab",
-    options: ["A. 0,5", "B. 0,6", "C. 0,7", "D. 0,9"],
-    correctAnswer: "C. 0,7",
-    explanation: {
-      concept: "Rumus gabungan dua kejadian.",
-      steps: ["$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$", "$= 0{,}5 + 0{,}4 - 0{,}2 = 0{,}7$"],
-      formula: "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)"
-    }
-  },
-  {
-    id: 42, type: "PG", difficulty: "Sedang", category: "TKA",
-    question: "Kejadian A dan B saling lepas. Jika $P(A) = \\frac{1}{3}$ dan $P(B) = \\frac{1}{4}$, maka $P(A \\cup B)$ adalah ...",
-    options: ["A. $\\frac{1}{12}$", "B. $\\frac{7}{12}$", "C. $\\frac{5}{12}$", "D. $\\frac{3}{4}$"],
-    correctAnswer: "B. $\\frac{7}{12}$",
-    explanation: {
-      concept: "Saling lepas: P(A∩B) = 0, sehingga P(A∪B) = P(A) + P(B).",
-      steps: ["$P(A \\cup B) = \\dfrac{1}{3} + \\dfrac{1}{4} = \\dfrac{4}{12} + \\dfrac{3}{12} = \\dfrac{7}{12}$"],
-      formula: "P(A \\cup B) = P(A) + P(B) \\text{ (saling lepas)}"
-    }
-  },
-  {
-    id: 43, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Satu dadu dan satu koin dilempar bersamaan. Banyaknya anggota ruang sampel adalah ...",
-    svgKey: "dadu-koin",
-    options: ["A. 6", "B. 8", "C. 12", "D. 36"],
-    correctAnswer: "C. 12",
-    explanation: {
-      concept: "n(S) = jumlah kemungkinan dadu × jumlah kemungkinan koin = 6 × 2.",
-      steps: ["n(S) = 6 × 2 = 12"],
-      formula: "n(S) = n_1 \\times n_2"
-    }
-  },
-  {
-    id: 44, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Satu dadu dan satu koin dilempar bersamaan. Peluang muncul angka genap pada dadu dan gambar (G) pada koin adalah ...",
-    svgKey: "dadu-koin",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{3}$", "C. $\\frac{5}{12}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "A. $\\frac{1}{4}$",
-    explanation: {
-      concept: "Genap dadu: {2,4,6}; Gambar koin: {G}. Kombinasi = 3 pasangan.",
-      steps: ["n(genap, G) = 3 × 1 = 3", "n(S) = 12", "$P = \\dfrac{3}{12} = \\dfrac{1}{4}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 45, type: "PG", difficulty: "Sedang", category: "HOTS",
-    question: "Dua buah dadu dilempar bersamaan. Peluang jumlah mata dadu merupakan bilangan prima adalah ...",
-    svgKey: "dua-dadu-prima",
-    options: ["A. $\\frac{5}{18}$", "B. $\\frac{5}{12}$", "C. $\\frac{7}{18}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "B. $\\frac{5}{12}$",
-    explanation: {
-      concept: "Bilangan prima antara 2–12: 2, 3, 5, 7, 11.",
-      steps: [
-        "Jumlah=2: (1,1) → 1",
-        "Jumlah=3: (1,2),(2,1) → 2",
-        "Jumlah=5: (1,4),(4,1),(2,3),(3,2) → 4",
-        "Jumlah=7: (1,6),(6,1),(2,5),(5,2),(3,4),(4,3) → 6",
-        "Jumlah=11: (5,6),(6,5) → 2",
-        "Total = 15",
-        "$P = \\dfrac{15}{36} = \\dfrac{5}{12}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 46, type: "PG", difficulty: "Sedang", category: "Kontekstual",
-    question: "Sebuah pabrik memproduksi lampu dengan peluang cacat 0,02. Jika diproduksi 1.000 lampu, frekuensi harapan lampu yang cacat adalah ...",
-    options: ["A. 10", "B. 20", "C. 50", "D. 100"],
-    correctAnswer: "B. 20",
-    explanation: {
-      concept: "Frekuensi harapan = P × n.",
-      steps: ["$f_h = 0{,}02 \\times 1000 = 20$"],
-      formula: ""
-    }
-  },
-  {
-    id: 47, type: "PG", difficulty: "Sedang", category: "Empirik",
-    question: "Koin dilempar 200 kali. Muncul angka sebanyak 110 kali. Peluang empirik muncul angka adalah ...",
-    options: ["A. $\\frac{9}{20}$", "B. $\\frac{1}{2}$", "C. $\\frac{11}{20}$", "D. $\\frac{3}{5}$"],
-    correctAnswer: "C. $\\frac{11}{20}$",
-    explanation: {
-      concept: "P empirik = frekuensi/n.",
-      steps: ["$P_{\\text{empirik}} = \\dfrac{110}{200} = \\dfrac{11}{20}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 48, type: "PG", difficulty: "Sedang", category: "TKA",
-    question: "Dari 52 kartu bridge, satu kartu diambil secara acak. Peluang terambil kartu yang BUKAN As adalah ...",
-    svgKey: "kartu-bridge",
-    options: ["A. $\\frac{1}{13}$", "B. $\\frac{1}{4}$", "C. $\\frac{12}{13}$", "D. $\\frac{3}{4}$"],
-    correctAnswer: "C. $\\frac{12}{13}$",
-    explanation: {
-      concept: "P(bukan As) = 1 − P(As).",
-      steps: ["$P(\\text{bukan As}) = 1 - \\dfrac{4}{52} = \\dfrac{48}{52} = \\dfrac{12}{13}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 49, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dalam sebuah kotak terdapat 12 kartu bernomor 1–12. Peluang terambil kartu bernomor kelipatan 4 adalah ...",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{4}$", "C. $\\frac{1}{3}$", "D. $\\frac{5}{12}$"],
-    correctAnswer: "B. $\\frac{1}{4}$",
-    explanation: {
-      concept: "Kelipatan 4 dari 1–12: 4, 8, 12.",
-      steps: ["n(kelipatan 4) = 3", "n(S) = 12", "$P = \\dfrac{3}{12} = \\dfrac{1}{4}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 50, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dua buah dadu dilempar bersamaan. Peluang muncul jumlah mata dadu sama dengan 8 adalah ...",
-    svgKey: "dua-dadu-8",
-    options: ["A. $\\frac{1}{9}$", "B. $\\frac{5}{36}$", "C. $\\frac{1}{6}$", "D. $\\frac{7}{36}$"],
-    correctAnswer: "B. $\\frac{5}{36}$",
-    explanation: {
-      concept: "Jumlah = 8: (2,6),(6,2),(3,5),(5,3),(4,4) — ada 5 pasangan.",
-      steps: ["n(jumlah=8) = 5", "$P = \\dfrac{5}{36}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 51, type: "PG", difficulty: "Sedang", category: "Kontekstual",
-    question: "Sebuah spinner dibagi 3 sektor: merah (120°), biru (90°), hijau (150°). Peluang jarum berhenti di sektor merah adalah ...",
-    svgKey: "spinner-3",
-    options: ["A. $\\frac{1}{3}$", "B. $\\frac{1}{4}$", "C. $\\frac{5}{12}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "A. $\\frac{1}{3}$",
-    explanation: {
-      concept: "P(sektor) = sudut sektor / 360°.",
-      steps: ["$P(\\text{merah}) = \\dfrac{120°}{360°} = \\dfrac{1}{3}$"],
-      formula: "P = \\frac{\\theta}{360°}"
-    }
-  },
-  {
-    id: 52, type: "PG", difficulty: "Sedang", category: "TKA",
-    question: "Diketahui $P(A) = 0{,}6$, $P(B) = 0{,}5$, dan $P(A \\cup B) = 0{,}8$. Nilai $P(A \\cap B)$ adalah ...",
-    svgKey: "venn-ab",
-    options: ["A. 0,2", "B. 0,3", "C. 0,4", "D. 0,5"],
-    correctAnswer: "B. 0,3",
-    explanation: {
-      concept: "Gunakan rumus P(A∩B) = P(A) + P(B) − P(A∪B).",
-      steps: ["$P(A \\cap B) = 0{,}6 + 0{,}5 - 0{,}8 = 0{,}3$"],
-      formula: "P(A \\cap B) = P(A) + P(B) - P(A \\cup B)"
-    }
-  },
-  {
-    id: 53, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dadu dilempar 180 kali. Peluang muncul bilangan prima adalah $\\frac{1}{2}$. Frekuensi harapan muncul bilangan prima adalah ...",
-    svgKey: "frek-180-1o2",
-    options: ["A. 60", "B. 72", "C. 90", "D. 120"],
-    correctAnswer: "C. 90",
-    explanation: {
-      concept: "f_h = P × n.",
-      steps: ["$f_h = \\dfrac{1}{2} \\times 180 = 90$"],
-      formula: ""
-    }
-  },
-  {
-    id: 54, type: "PG", difficulty: "Sedang", category: "ANBK",
-    question: "Dua dadu dilempar bersamaan. Peluang jumlah mata dadu minimal 10 adalah ...",
-    svgKey: "dua-dadu-gt9",
-    options: ["A. $\\frac{1}{12}$", "B. $\\frac{1}{9}$", "C. $\\frac{1}{6}$", "D. $\\frac{5}{18}$"],
-    correctAnswer: "C. $\\frac{1}{6}$",
-    explanation: {
-      concept: "Minimal 10 berarti jumlah ≥ 10 (yaitu 10, 11, atau 12).",
-      steps: [
-        "Jumlah 10: 3 cara, Jumlah 11: 2 cara, Jumlah 12: 1 cara",
-        "Total = 6",
-        "$P = \\dfrac{6}{36} = \\dfrac{1}{6}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 55, type: "PG", difficulty: "Sedang", category: "HOTS",
-    question: "Diketahui $P(A) = 0{,}3$, $P(B) = 0{,}4$, dan $P(A \\cap B) = 0{,}1$. Nilai $P(A^c \\cap B^c)$ adalah ...",
-    options: ["A. 0,3", "B. 0,4", "C. 0,5", "D. 0,6"],
-    correctAnswer: "B. 0,4",
-    explanation: {
-      concept: "P(Ac ∩ Bc) = 1 − P(A∪B) = 1 − [P(A)+P(B)−P(A∩B)].",
-      steps: [
-        "$P(A \\cup B) = 0{,}3 + 0{,}4 - 0{,}1 = 0{,}6$",
-        "$P(A^c \\cap B^c) = 1 - 0{,}6 = 0{,}4$"
-      ],
-      formula: "P(A^c \\cap B^c) = 1 - P(A \\cup B)"
-    }
-  },
-  {
-    id: 56, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Sebuah kantong berisi 3 bola merah, 4 bola putih, dan 2 bola biru. Peluang terambil bola yang bukan biru adalah ...",
-    svgKey: "marble-3r4b5h",
-    options: ["A. $\\frac{2}{9}$", "B. $\\frac{4}{9}$", "C. $\\frac{7}{9}$", "D. $\\frac{8}{9}$"],
-    correctAnswer: "C. $\\frac{7}{9}$",
-    explanation: {
-      concept: "Bukan biru = merah + putih = 3 + 4 = 7.",
-      steps: ["n(bukan biru) = 7", "n(S) = 9", "$P = \\dfrac{7}{9}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 57, type: "PG", difficulty: "Sedang", category: "HOTS",
-    question: "Sebuah dadu dilempar sekali. Peluang muncul bilangan ganjil DAN lebih dari 3 adalah ...",
-    svgKey: "dadu-ganjil-besar3",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{3}$", "C. $\\frac{1}{2}$", "D. $\\frac{2}{3}$"],
-    correctAnswer: "A. $\\frac{1}{6}$",
-    explanation: {
-      concept: "Ganjil = {1,3,5}; lebih dari 3 = {4,5,6}; irisannya = {5}.",
-      steps: ["Ganjil ∩ (>3) = {5}", "n = 1", "$P = \\dfrac{1}{6}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 58, type: "PG", difficulty: "Sedang", category: "Kontekstual",
-    question: "Dari 100 produk yang diperiksa, 5 di antaranya cacat. Peluang memilih produk yang tidak cacat adalah ...",
-    options: ["A. $\\frac{1}{20}$", "B. $\\frac{9}{10}$", "C. $\\frac{19}{20}$", "D. $\\frac{99}{100}$"],
-    correctAnswer: "C. $\\frac{19}{20}$",
-    explanation: {
-      concept: "Tidak cacat = 100 − 5 = 95.",
-      steps: ["$P(\\text{tidak cacat}) = \\dfrac{95}{100} = \\dfrac{19}{20}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 59, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dua koin dilempar bersamaan. Peluang muncul keduanya gambar (GG) adalah ...",
-    svgKey: "koin-2",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{4}$", "D. 1"],
-    correctAnswer: "A. $\\frac{1}{4}$",
-    explanation: {
-      concept: "S = {AA, AG, GA, GG}. GG hanya 1 anggota.",
-      steps: ["n(GG) = 1", "n(S) = 4", "$P = \\dfrac{1}{4}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 60, type: "PG", difficulty: "Sedang", category: "HOTS",
-    question: "Dua dadu dilempar. Peluang salah satu dadu menunjukkan angka 4 adalah ...",
-    svgKey: "dua-dadu-8",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{5}{18}$", "C. $\\frac{11}{36}$", "D. $\\frac{1}{3}$"],
-    correctAnswer: "C. $\\frac{11}{36}$",
-    explanation: {
-      concept: "Dadu 1 = 4 OR dadu 2 = 4, kurangi yang keduanya = 4.",
-      steps: [
-        "Dadu1=4: {(4,1),(4,2),(4,3),(4,4),(4,5),(4,6)} = 6",
-        "Dadu2=4: {(1,4),(2,4),(3,4),(4,4),(5,4),(6,4)} = 6",
-        "Keduanya=4: {(4,4)} = 1",
-        "$P = \\dfrac{6+6-1}{36} = \\dfrac{11}{36}$"
-      ],
-      formula: "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)"
-    }
-  },
-  {
-    id: 61, type: "MCMA", difficulty: "Sedang", category: "TKA",
-    question: "Diketahui A dan B adalah dua kejadian dalam ruang sampel S. Pilih SEMUA pernyataan yang benar!",
-    options: [
-      "A. $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$",
-      "B. Jika A dan B saling lepas, maka $P(A \\cap B) = 0$",
-      "C. $P(A^c) = P(A)$",
-      "D. $0 \\leq P(A) \\leq 1$ untuk setiap kejadian A"
-    ],
-    correctAnswer: "A, B, D",
-    explanation: {
-      concept: "Sifat-sifat peluang.",
-      steps: [
-        "A: Rumus gabungan → Benar",
-        "B: Saling lepas → P(A∩B) = 0 → Benar",
-        "C: P(Ac) = 1 − P(A) ≠ P(A) secara umum → Salah",
-        "D: Nilai peluang selalu antara 0 dan 1 → Benar"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 62, type: "PG", difficulty: "Sedang", category: "Kontekstual",
-    question: "Peluang hujan pada hari Senin adalah 0,4 dan pada hari Selasa adalah 0,3 (kejadian bebas). Peluang hujan PADA KEDUA hari tersebut adalah ...",
-    options: ["A. 0,10", "B. 0,12", "C. 0,58", "D. 0,70"],
-    correctAnswer: "B. 0,12",
-    explanation: {
-      concept: "Untuk kejadian bebas, P(A∩B) = P(A) × P(B).",
-      steps: ["$P = 0{,}4 \\times 0{,}3 = 0{,}12$"],
-      formula: "P(A \\cap B) = P(A) \\times P(B) \\text{ (kejadian bebas)}"
-    }
-  },
-  {
-    id: 63, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dua dadu dilempar bersamaan. Peluang jumlah mata dadu merupakan bilangan genap adalah ...",
+    question: "Dadu merah dan dadu biru dilempar bersamaan. Peluang munculnya mata genap pada kedua dadu adalah ....",
     svgKey: "dua-dadu-genap",
-    options: ["A. $\\frac{1}{3}$", "B. $\\frac{5}{12}$", "C. $\\frac{1}{2}$", "D. $\\frac{7}{12}$"],
-    correctAnswer: "C. $\\frac{1}{2}$",
-    explanation: {
-      concept: "Jumlah genap terjadi jika keduanya genap atau keduanya ganjil.",
-      steps: [
-        "Keduanya genap: 3×3 = 9 cara",
-        "Keduanya ganjil: 3×3 = 9 cara",
-        "Total = 18",
-        "$P = \\dfrac{18}{36} = \\dfrac{1}{2}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 64, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Dari 52 kartu bridge, satu kartu diambil secara acak. Peluang terambil kartu hati (♥) adalah ...",
-    svgKey: "kartu-bridge",
-    options: ["A. $\\frac{1}{52}$", "B. $\\frac{1}{4}$", "C. $\\frac{1}{3}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "B. $\\frac{1}{4}$",
-    explanation: {
-      concept: "Dalam 52 kartu bridge, terdapat 13 kartu hati.",
-      steps: ["n(hati) = 13", "$P = \\dfrac{13}{52} = \\dfrac{1}{4}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 65, type: "PG", difficulty: "Sedang", category: "TKA",
-    question: "Dari 52 kartu bridge, peluang terambil kartu gambar (Jack, Queen, King) adalah ...",
-    svgKey: "kartu-bridge",
-    options: ["A. $\\frac{1}{13}$", "B. $\\frac{3}{52}$", "C. $\\frac{3}{13}$", "D. $\\frac{1}{4}$"],
-    correctAnswer: "C. $\\frac{3}{13}$",
-    explanation: {
-      concept: "Kartu gambar: J, Q, K — masing-masing 4 buah = 12 total.",
-      steps: ["n(gambar) = 3 × 4 = 12", "$P = \\dfrac{12}{52} = \\dfrac{3}{13}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 66, type: "PG", difficulty: "Sedang", category: "HOTS",
-    question: "Dalam satu kelas 40 siswa: 25 menyukai matematika, 20 menyukai IPA, dan 10 menyukai keduanya. Peluang terpilih siswa yang tidak menyukai keduanya adalah ...",
-    svgKey: "venn-siswa",
-    options: ["A. $\\frac{1}{8}$", "B. $\\frac{1}{4}$", "C. $\\frac{3}{8}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "A. $\\frac{1}{8}$",
-    explanation: {
-      concept: "Gunakan diagram Venn untuk menghitung irisan dan komplemen.",
-      steps: [
-        "$n(M \\cup I) = 25 + 20 - 10 = 35$",
-        "Tidak suka keduanya = $40 - 35 = 5$",
-        "$P = \\dfrac{5}{40} = \\dfrac{1}{8}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 67, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Peluang suatu kejadian adalah $\\frac{1}{5}$. Jika percobaan dilakukan 500 kali, frekuensi harapannya adalah ...",
-    svgKey: "frek-500-1o5",
-    options: ["A. 50", "B. 80", "C. 100", "D. 150"],
-    correctAnswer: "C. 100",
-    explanation: {
-      concept: "f_h = P × n.",
-      steps: ["$f_h = \\dfrac{1}{5} \\times 500 = 100$"],
-      formula: ""
-    }
-  },
-  {
-    id: 68, type: "PG", difficulty: "Sedang", category: "ANBK",
-    question: "Dua dadu dilempar bersamaan. Peluang muncul angka yang berbeda pada kedua dadu adalah ...",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{3}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "D. $\\frac{5}{6}$",
-    explanation: {
-      concept: "P(angka sama) = 6/36 = 1/6. Maka P(berbeda) = 1 − 1/6.",
-      steps: ["n(sama) = 6", "P(sama) = 6/36 = 1/6", "$P(\\text{berbeda}) = 1 - \\dfrac{1}{6} = \\dfrac{5}{6}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 69, type: "PG", difficulty: "Sedang", category: "UN",
-    question: "Sebuah kantong berisi 5 bola merah dan 3 bola kuning. Satu bola diambil secara acak. Peluang terambil bola yang BUKAN merah adalah ...",
-    svgKey: "marble-5r3k",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{3}{8}$", "C. $\\frac{5}{8}$", "D. $\\frac{3}{4}$"],
-    correctAnswer: "B. $\\frac{3}{8}$",
-    explanation: {
-      concept: "Bukan merah = kuning.",
-      steps: ["n(kuning) = 3", "n(S) = 8", "$P = \\dfrac{3}{8}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 70, type: "PG", difficulty: "Sedang", category: "HOTS",
-    question: "Diketahui $P(A) = 0{,}6$, $P(B) = 0{,}5$, dan $P(A \\cup B) = 0{,}9$. Nilai $P(A \\cap B)$ adalah ...",
-    options: ["A. 0,1", "B. 0,2", "C. 0,3", "D. 0,4"],
-    correctAnswer: "B. 0,2",
-    explanation: {
-      concept: "P(A∩B) = P(A) + P(B) − P(A∪B).",
-      steps: ["$P(A \\cap B) = 0{,}6 + 0{,}5 - 0{,}9 = 0{,}2$"],
-      formula: ""
-    }
-  },
-  {
-    id: 71, type: "PG", difficulty: "Sedang", category: "TKA",
-    question: "Dua dadu dilempar bersamaan. Peluang jumlah mata dadu kurang dari 5 adalah ...",
-    svgKey: "dua-dadu-lt5",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{1}{4}$", "C. $\\frac{1}{3}$", "D. $\\frac{5}{12}$"],
-    correctAnswer: "A. $\\frac{1}{6}$",
-    explanation: {
-      concept: "Jumlah < 5: jumlah = 2, 3, atau 4.",
-      steps: [
-        "Jumlah 2: (1,1) = 1",
-        "Jumlah 3: (1,2),(2,1) = 2",
-        "Jumlah 4: (1,3),(3,1),(2,2) = 3",
-        "Total = 6",
-        "$P = \\dfrac{6}{36} = \\dfrac{1}{6}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 72, type: "PG", difficulty: "Sedang", category: "Literasi Matematika",
-    question: "Ramalan cuaca menyatakan probabilitas hujan di suatu kota adalah 0,7. Dari 30 hari ke depan, berapa hari yang diperkirakan akan hujan?",
-    options: ["A. 7 hari", "B. 14 hari", "C. 21 hari", "D. 24 hari"],
-    correctAnswer: "C. 21 hari",
-    explanation: {
-      concept: "Frekuensi harapan = P × n.",
-      steps: ["$f_h = 0{,}7 \\times 30 = 21$"],
-      formula: ""
-    }
-  },
-  {
-    id: 73, type: "PG", difficulty: "Sedang", category: "ANBK",
-    question: "Sebuah dadu dilempar sekali. Peluang muncul bilangan prima yang kurang dari 5 adalah ...",
-    options: ["A. $\\frac{1}{3}$", "B. $\\frac{1}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "A. $\\frac{1}{3}$",
-    explanation: {
-      concept: "Bilangan prima < 5 pada dadu: 2, 3.",
-      steps: ["A = {2, 3}", "n(A) = 2", "$P = \\dfrac{2}{6} = \\dfrac{1}{3}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 74, type: "MCMA", difficulty: "Sedang", category: "TKA",
-    question: "Dari 52 kartu bridge, sebuah kartu diambil acak. Pilih SEMUA pernyataan yang benar!",
-    svgKey: "kartu-bridge",
     options: [
-      "A. P(kartu merah) = 1/2",
-      "B. P(kartu As) = 1/13",
-      "C. P(kartu hitam) = 3/4",
-      "D. P(kartu gambar J/Q/K) = 3/13"
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{12}$",
+      "C. $\\frac{1}{4}$",
+      "D. $\\frac{1}{2}$"
     ],
-    correctAnswer: "A, B, D",
+    correctAnswer: "C. $\\frac{1}{4}$",
     explanation: {
-      concept: "Fakta kartu bridge: 26 merah, 26 hitam, 4 As, 12 kartu gambar.",
+      concept: "P(genap pada satu dadu) = 3/6 = 1/2. Kedua dadu independen.",
       steps: [
-        "A: P(merah) = 26/52 = 1/2 ✓",
-        "B: P(As) = 4/52 = 1/13 ✓",
-        "C: P(hitam) = 26/52 = 1/2, bukan 3/4 ✗",
-        "D: P(J/Q/K) = 12/52 = 3/13 ✓"
+        "P(genap dadu merah) = 1/2",
+        "P(genap dadu biru) = 1/2",
+        "$P(\\text{keduanya genap}) = \\dfrac{1}{2} \\times \\dfrac{1}{2} = \\dfrac{1}{4}$"
       ],
-      formula: ""
-    }
-  },
-  {
-    id: 75, type: "Benar/Salah", difficulty: "Sedang", category: "ANBK",
-    question: "Tentukan benar atau salah setiap pernyataan berikut tentang kejadian saling lepas (mutually exclusive):",
-    statements: [
-      { text: "Jika A dan B saling lepas, maka P(A∪B) = P(A) + P(B).", isCorrect: true },
-      { text: "Jika A dan B saling lepas, maka P(A∩B) = P(A) × P(B).", isCorrect: false },
-      { text: "Dua kejadian bisa saling lepas sekaligus saling bebas jika P(A) = 0 atau P(B) = 0.", isCorrect: true },
-      { text: "Pada pelemparan 1 dadu, kejadian 'muncul angka genap' dan 'muncul angka > 3' saling lepas.", isCorrect: false },
-    ],
-    explanation: {
-      concept: "Kejadian saling lepas: P(A∩B) = 0.",
-      steps: [
-        "1: P(A∪B) = P(A)+P(B) jika saling lepas → Benar",
-        "2: P(A∩B) = 0 (bukan P(A)×P(B) secara umum) → Salah",
-        "3: Jika P(A)=0 atau P(B)=0, maka P(A∩B)=0 dan P(A)×P(B)=0 → Benar",
-        "4: Genap={2,4,6} dan >3={4,5,6} beririsan di {4,6} → tidak saling lepas → Salah"
-      ],
-      formula: ""
+      formula: "P = \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}"
     }
   },
 
-  /* ══════════ SULIT (76–100) ══════════ */
+  /* Satu set kartu bridge */
   {
-    id: 76, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Dua dadu dilempar bersamaan. Peluang selisih kedua mata dadu sama dengan 2 adalah ...",
-    svgKey: "dua-dadu-selisih2",
-    options: ["A. $\\frac{1}{6}$", "B. $\\frac{2}{9}$", "C. $\\frac{5}{18}$", "D. $\\frac{1}{3}$"],
-    correctAnswer: "B. $\\frac{2}{9}$",
-    explanation: {
-      concept: "|d1 − d2| = 2.",
-      steps: [
-        "Pasangan: (1,3),(3,1),(2,4),(4,2),(3,5),(5,3),(4,6),(6,4) = 8 pasangan",
-        "$P = \\dfrac{8}{36} = \\dfrac{2}{9}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 77, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Dua dadu dilempar bersamaan. Peluang hasil kali kedua mata dadu merupakan bilangan genap adalah ...",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{4}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "C. $\\frac{3}{4}$",
-    explanation: {
-      concept: "Hasil kali ganjil hanya jika KEDUANYA ganjil. Ganjil pada dadu: {1,3,5}.",
-      steps: [
-        "n(keduanya ganjil) = 3 × 3 = 9",
-        "P(hasil kali ganjil) = 9/36 = 1/4",
-        "$P(\\text{hasil kali genap}) = 1 - \\dfrac{1}{4} = \\dfrac{3}{4}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 78, type: "PG", difficulty: "Sulit", category: "TKA",
-    question: "Dari bilangan 1 sampai 20, satu bilangan dipilih secara acak. Peluang terpilih bilangan prima ATAU bilangan genap adalah ...",
-    options: ["A. $\\frac{3}{5}$", "B. $\\frac{7}{10}$", "C. $\\frac{4}{5}$", "D. $\\frac{17}{20}$"],
-    correctAnswer: "D. $\\frac{17}{20}$",
-    explanation: {
-      concept: "Gunakan rumus P(A∪B) = P(A)+P(B)−P(A∩B).",
-      steps: [
-        "Prima (1–20): {2,3,5,7,11,13,17,19} → n=8",
-        "Genap (1–20): {2,4,6,8,10,12,14,16,18,20} → n=10",
-        "Prima∩Genap: {2} → n=1",
-        "$P = \\dfrac{8+10-1}{20} = \\dfrac{17}{20}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 79, type: "PG", difficulty: "Sulit", category: "Olimpiade",
-    question: "Kejadian A dan B saling bebas (independent). Jika $P(A) = \\frac{2}{5}$ dan $P(B) = \\frac{1}{3}$, maka $P(A \\cap B)$ adalah ...",
-    options: ["A. $\\frac{1}{15}$", "B. $\\frac{2}{15}$", "C. $\\frac{1}{5}$", "D. $\\frac{11}{15}$"],
-    correctAnswer: "B. $\\frac{2}{15}$",
-    explanation: {
-      concept: "Untuk kejadian saling bebas: P(A∩B) = P(A) × P(B).",
-      steps: ["$P(A \\cap B) = P(A) \\times P(B) = \\dfrac{2}{5} \\times \\dfrac{1}{3} = \\dfrac{2}{15}$"],
-      formula: "P(A \\cap B) = P(A) \\times P(B)"
-    }
-  },
-  {
-    id: 80, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Tiga koin dilempar bersamaan. Peluang muncul tepat dua angka (A) adalah ...",
-    svgKey: "koin-3",
-    options: ["A. $\\frac{1}{8}$", "B. $\\frac{1}{4}$", "C. $\\frac{3}{8}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "C. $\\frac{3}{8}$",
-    explanation: {
-      concept: "S memiliki 2³ = 8 anggota. Tepat 2A: {AAG, AGA, GAA}.",
-      steps: ["n(tepat 2A) = 3", "n(S) = 8", "$P = \\dfrac{3}{8}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 81, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Tiga koin dilempar bersamaan. Peluang muncul minimal dua gambar (G) adalah ...",
-    svgKey: "koin-3",
-    options: ["A. $\\frac{1}{8}$", "B. $\\frac{1}{2}$", "C. $\\frac{5}{8}$", "D. $\\frac{3}{4}$"],
-    correctAnswer: "B. $\\frac{1}{2}$",
-    explanation: {
-      concept: "Minimal 2G: tepat 2G atau tepat 3G.",
-      steps: [
-        "Tepat 2G: {AGG, GAG, GGA} = 3",
-        "Tepat 3G: {GGG} = 1",
-        "Total = 4",
-        "$P = \\dfrac{4}{8} = \\dfrac{1}{2}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 82, type: "PG", difficulty: "Sulit", category: "TKA",
-    question: "Dua dadu dilempar. Peluang jumlah mata dadu = 7 ATAU kedua dadu menunjukkan angka sama adalah ...",
-    svgKey: "dua-dadu-7",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{3}$", "C. $\\frac{5}{12}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "B. $\\frac{1}{3}$",
-    explanation: {
-      concept: "Hitung kejadian A (jumlah=7) dan B (sama), lalu P(A∪B).",
-      steps: [
-        "Jumlah=7: {(1,6),(6,1),(2,5),(5,2),(3,4),(4,3)} = 6",
-        "Sama: {(1,1),(2,2),(3,3),(4,4),(5,5),(6,6)} = 6",
-        "Irisan (jumlah=7 DAN sama): mustahil → 0",
-        "$P = \\dfrac{6+6-0}{36} = \\dfrac{12}{36} = \\dfrac{1}{3}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 83, type: "PG", difficulty: "Sulit", category: "ANBK",
-    question: "Diketahui $P(A) = \\frac{1}{2}$, $P(B) = \\frac{5}{8}$, dan $P(A \\cup B) = \\frac{3}{4}$. Nilai $P(A \\cap B)$ adalah ...",
-    options: ["A. $\\frac{1}{8}$", "B. $\\frac{1}{4}$", "C. $\\frac{3}{8}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "C. $\\frac{3}{8}$",
-    explanation: {
-      concept: "P(A∩B) = P(A) + P(B) − P(A∪B).",
-      steps: [
-        "$P(A \\cap B) = \\dfrac{1}{2} + \\dfrac{5}{8} - \\dfrac{3}{4}$",
-        "$= \\dfrac{4}{8} + \\dfrac{5}{8} - \\dfrac{6}{8} = \\dfrac{3}{8}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 84, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Dua dadu dilempar. Peluang jumlah mata prima DAN setidaknya satu dadu menunjukkan angka 1 adalah ...",
-    svgKey: "dua-dadu-prima",
-    options: ["A. $\\frac{5}{36}$", "B. $\\frac{7}{36}$", "C. $\\frac{5}{12}$", "D. $\\frac{1}{4}$"],
-    correctAnswer: "B. $\\frac{7}{36}$",
-    explanation: {
-      concept: "Cari pasangan dadu dengan jumlah prima DAN minimal satu angka = 1.",
-      steps: [
-        "(1,1)→2✓, (1,2)→3✓, (2,1)→3✓, (1,4)→5✓, (4,1)→5✓, (1,6)→7✓, (6,1)→7✓",
-        "Total = 7 pasangan",
-        "$P = \\dfrac{7}{36}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 85, type: "PG", difficulty: "Sulit", category: "Olimpiade",
-    question: "Dua dadu dilempar bersamaan. Peluang jumlah mata dadu merupakan bilangan sempurna (perfect number) adalah ...",
-    options: ["A. $\\frac{5}{36}$", "B. $\\frac{1}{6}$", "C. $\\frac{7}{36}$", "D. $\\frac{1}{4}$"],
-    correctAnswer: "A. $\\frac{5}{36}$",
-    explanation: {
-      concept: "Bilangan sempurna antara 2–12: hanya 6. (6 = 1+2+3, faktor selain dirinya).",
-      steps: [
-        "Jumlah = 6: (1,5),(5,1),(2,4),(4,2),(3,3) = 5 pasangan",
-        "$P = \\dfrac{5}{36}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 86, type: "PG", difficulty: "Sulit", category: "Literasi Matematika",
-    question: "Sebuah pabrik memproduksi bola lampu dengan tingkat cacat 3%. Dari 500 bola lampu yang diproduksi, berapa banyak yang diharapkan cacat?",
-    options: ["A. 10", "B. 15", "C. 20", "D. 30"],
-    correctAnswer: "B. 15",
-    explanation: {
-      concept: "Frekuensi harapan = P(cacat) × n.",
-      steps: [
-        "$P(\\text{cacat}) = \\dfrac{3}{100}$",
-        "$f_h = \\dfrac{3}{100} \\times 500 = 15$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 87, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Dalam satu kelas 40 siswa: 25 suka matematika, 20 suka IPA, 10 suka keduanya. Peluang dipilih siswa yang tidak suka keduanya adalah ...",
-    svgKey: "venn-siswa",
-    options: ["A. $\\frac{1}{8}$", "B. $\\frac{1}{4}$", "C. $\\frac{3}{8}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "A. $\\frac{1}{8}$",
-    explanation: {
-      concept: "Hitung siswa yang suka minimal satu pelajaran menggunakan inklusi-eksklusi.",
-      steps: [
-        "$n(M \\cup I) = 25 + 20 - 10 = 35$",
-        "Tidak suka keduanya $= 40 - 35 = 5$",
-        "$P = \\dfrac{5}{40} = \\dfrac{1}{8}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 88, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Dadu dilempar 600 kali. Angka 5 muncul 92 kali. Selisih antara peluang empirik dan peluang teoritik angka 5 adalah ...",
-    options: ["A. $\\frac{1}{300}$", "B. $\\frac{1}{150}$", "C. $\\frac{1}{75}$", "D. $\\frac{1}{50}$"],
-    correctAnswer: "C. $\\frac{1}{75}$",
-    explanation: {
-      concept: "Bandingkan P empirik dan P teoritik.",
-      steps: [
-        "$P_{\\text{empirik}} = \\dfrac{92}{600} = \\dfrac{23}{150}$",
-        "$P_{\\text{teoritik}} = \\dfrac{1}{6} = \\dfrac{25}{150}$",
-        "$\\text{Selisih} = \\dfrac{25}{150} - \\dfrac{23}{150} = \\dfrac{2}{150} = \\dfrac{1}{75}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 89, type: "PG", difficulty: "Sulit", category: "TKA",
-    question: "Dari 52 kartu bridge, satu kartu diambil acak. Peluang terambil kartu merah ATAU kartu As adalah ...",
+    id: 41, type: "PG", difficulty: "Sulit", category: "UN",
+    question: "Satu set kartu bridge terdiri atas 13 kartu cengkih berwarna hitam, 13 kartu hati berwarna merah, dan 13 kartu skop berwarna hitam, dan 13 kartu berlian berwarna merah. Tiap jenis kartu terdiri atas As (A), King (K), Queen (Q), Jack (J), serta kartu-kartu bernomor 10, 9, 8, 7, 6, 5, 4, 3, dan 2. Sebuah kartu diambil secara acak. Peluang terambilnya kartu As skop diambil adalah ....",
     svgKey: "kartu-bridge",
-    options: ["A. $\\frac{1}{2}$", "B. $\\frac{7}{13}$", "C. $\\frac{7}{13}$", "D. $\\frac{15}{26}$"],
-    correctAnswer: "B. $\\frac{7}{13}$",
+    options: [
+      "A. $\\frac{1}{52}$",
+      "B. $\\frac{1}{13}$",
+      "C. $\\frac{1}{4}$",
+      "D. $\\frac{2}{13}$"
+    ],
+    correctAnswer: "A. $\\frac{1}{52}$",
     explanation: {
-      concept: "Kartu merah = 26, As = 4, As merah = 2.",
+      concept: "Kartu As Skop hanya ada 1 dari 52 kartu.",
       steps: [
-        "$P(\\text{merah} \\cup \\text{As}) = \\dfrac{26+4-2}{52} = \\dfrac{28}{52} = \\dfrac{7}{13}$"
+        "n(As Skop) = 1",
+        "n(S) = 52",
+        "$P = \\dfrac{1}{52}$"
+      ],
+      formula: "P = \\frac{1}{52}"
+    }
+  },
+
+  /* C. Isian */
+  {
+    id: 42, type: "PG", difficulty: "Sulit", category: "Kontekstual",
+    question: "Pada pelemparan dua buah dadu bersama-sama, banyaknya kejadian muncul kedua-duanya mata dadu 6 adalah ....",
+    svgKey: "dua-dadu-7",
+    options: ["A. 1", "B. 2", "C. 5", "D. 6"],
+    correctAnswer: "A. 1",
+    explanation: {
+      concept: "Pasangan (6,6) hanya ada satu dalam ruang sampel 36.",
+      steps: [
+        "n(S) = 36",
+        "n(6,6) = 1 → hanya (6,6)",
+        "Jumlah kejadian = 1"
       ],
       formula: ""
     }
   },
   {
-    id: 90, type: "PG", difficulty: "Sulit", category: "Olimpiade",
-    question: "Dua dadu dilempar bersamaan. Peluang angka pada dadu pertama lebih besar dari angka pada dadu kedua adalah ...",
-    svgKey: "dua-dadu-d1gtd2",
-    options: ["A. $\\frac{1}{3}$", "B. $\\frac{5}{12}$", "C. $\\frac{1}{2}$", "D. $\\frac{7}{12}$"],
-    correctAnswer: "B. $\\frac{5}{12}$",
+    id: 43, type: "PG", difficulty: "Sulit", category: "UN",
+    question: "Dua buah uang logam dilempar bersama-sama. Banyaknya kejadian muncul kedua-duanya sisi gambar adalah ....",
+    svgKey: "koin-2",
+    options: ["A. 1", "B. 2", "C. 3", "D. 4"],
+    correctAnswer: "A. 1",
     explanation: {
-      concept: "Hitung pasangan di mana dadu1 > dadu2.",
+      concept: "S = {(A,A),(A,G),(G,A),(G,G)}. Keduanya gambar = {(G,G)}.",
       steps: [
-        "d1=2: (2,1) → 1; d1=3: 2; d1=4: 3; d1=5: 4; d1=6: 5",
-        "Total = 1+2+3+4+5 = 15",
-        "$P = \\dfrac{15}{36} = \\dfrac{5}{12}$"
+        "S = {(A,A),(A,G),(G,A),(G,G)}",
+        "Keduanya G: {(G,G)} → 1 kejadian"
       ],
       formula: ""
     }
   },
   {
-    id: 91, type: "MCMA", difficulty: "Sulit", category: "HOTS",
-    question: "Dua dadu dilempar bersamaan. Pilih SEMUA pernyataan yang benar!",
+    id: 44, type: "PG", difficulty: "Sulit", category: "Kontekstual",
+    question: "Ruang sampel pada percobaan pelemparan dua buah dadu bersama-sama. Peluang munculnya jumlah mata dadu genap adalah ....",
+    svgKey: "dua-dadu-genap",
+    options: [
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{6}$",
+      "C. $\\frac{1}{4}$",
+      "D. $\\frac{1}{2}$"
+    ],
+    correctAnswer: "D. $\\frac{1}{2}$",
+    explanation: {
+      concept: "Jumlah genap jika keduanya genap atau keduanya ganjil.",
+      steps: [
+        "Keduanya genap: 3×3 = 9",
+        "Keduanya ganjil: 3×3 = 9",
+        "Total = 18",
+        "$P = \\dfrac{18}{36} = \\dfrac{1}{2}$"
+      ],
+      formula: "P = \\frac{18}{36} = \\frac{1}{2}"
+    }
+  },
+  {
+    id: 45, type: "PG", difficulty: "Sulit", category: "UN",
+    question: "Sebuah dadu biru dan sebuah dadu merah dilempar bersamaan. Peluang munculnya jumlah mata dadu berjumlah 5 pada dadu pada percobaan tersebut adalah ....",
     svgKey: "dua-dadu-7",
     options: [
-      "A. P(jumlah = 7) = 1/6",
-      "B. P(jumlah = 12) = 1/36",
-      "C. P(jumlah ganjil) = 1/2",
-      "D. P(jumlah = 1) = 1/36"
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{12}$",
+      "C. $\\frac{1}{9}$",
+      "D. $\\frac{5}{36}$"
     ],
-    correctAnswer: "A, B, C",
+    correctAnswer: "C. $\\frac{1}{9}$",
     explanation: {
-      concept: "Analisis ruang sampel 2 dadu.",
+      concept: "Jumlah = 5: hitung semua pasangan.",
       steps: [
-        "A: Jumlah=7 ada 6 cara → 6/36=1/6 ✓",
-        "B: Jumlah=12 hanya (6,6) → 1/36 ✓",
-        "C: Jumlah ganjil = 18 cara → 1/2 ✓",
-        "D: Jumlah minimum = 2 (bukan 1) → Tidak mungkin, P=0 ✗"
+        "(1,4),(4,1),(2,3),(3,2) → 4 pasangan",
+        "n(S) = 36",
+        "$P = \\dfrac{4}{36} = \\dfrac{1}{9}$"
       ],
-      formula: ""
+      formula: "P = \\frac{4}{36} = \\frac{1}{9}"
     }
   },
   {
-    id: 92, type: "MCMA", difficulty: "Sulit", category: "Olimpiade",
-    question: "Sebuah kantong berisi 3 bola merah, 4 bola biru, dan 5 bola hijau. Pilih SEMUA pernyataan yang benar!",
-    svgKey: "marble-3r4b5h",
+    id: 46, type: "PG", difficulty: "Sulit", category: "Kontekstual",
+    question: "Sebuah dadu dan sebuah koin dilempar bersama-sama. Peluang munculnya mata dadu prima pada dadu dan sisi gambar pada koin adalah ....",
+    svgKey: "dadu-koin",
     options: [
-      "A. P(merah) = 1/4",
-      "B. P(biru atau hijau) = 3/4",
-      "C. P(bukan merah) = 3/4",
-      "D. P(merah) + P(biru) + P(hijau) = 1"
+      "A. $\\frac{1}{12}$",
+      "B. $\\frac{1}{6}$",
+      "C. $\\frac{1}{4}$",
+      "D. $\\frac{1}{3}$"
     ],
-    correctAnswer: "A, B, C, D",
+    correctAnswer: "C. $\\frac{1}{4}$",
     explanation: {
-      concept: "n(S) = 3+4+5 = 12.",
+      concept: "Prima pada dadu: {2,3,5}. Gambar pada koin: {G}.",
       steps: [
-        "A: P(merah) = 3/12 = 1/4 ✓",
-        "B: P(biru∪hijau) = (4+5)/12 = 9/12 = 3/4 ✓",
-        "C: P(bukan merah) = 9/12 = 3/4 ✓",
-        "D: 3/12 + 4/12 + 5/12 = 12/12 = 1 ✓"
+        "P(prima) = 3/6 = 1/2",
+        "P(gambar) = 1/2",
+        "$P = \\dfrac{1}{2} \\times \\dfrac{1}{2} = \\dfrac{1}{4}$"
       ],
-      formula: ""
+      formula: "P = \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}"
     }
   },
   {
-    id: 93, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS",
-    question: "Tentukan benar atau salah setiap pernyataan berikut:",
-    statements: [
-      { text: "P(A∪B) selalu lebih besar dari atau sama dengan P(A) dan P(B).", isCorrect: true },
-      { text: "Jika P(A) = P(B) = 0,6, maka A dan B tidak mungkin saling lepas.", isCorrect: true },
-      { text: "Untuk kejadian bebas A dan B: P(A∪B) = P(A) + P(B) − P(A)·P(B).", isCorrect: true },
-      { text: "Peluang empirik selalu sama dengan peluang teoritik.", isCorrect: false },
+    id: 47, type: "PG", difficulty: "Sulit", category: "Kontekstual",
+    question: "Sebuah kotak berisi 9 bola merah dan 6 bola biru. Diambil satu bola secara acak. Peluang terambilnya bola bukan merah adalah ....",
+    svgKey: "marble-3r2b",
+    options: [
+      "A. $\\frac{2}{5}$",
+      "B. $\\frac{3}{5}$",
+      "C. $\\frac{1}{3}$",
+      "D. $\\frac{2}{3}$"
     ],
+    correctAnswer: "A. $\\frac{2}{5}$",
     explanation: {
-      concept: "Sifat peluang lanjutan.",
+      concept: "Bukan merah = biru. Peluang = n(biru) ÷ n(S).",
       steps: [
-        "1: P(A∪B) ≥ max(P(A),P(B)) → Benar",
-        "2: P(A)+P(B)=1,2 > 1 → P(A∩B) ≥ 0,2 > 0 → tidak saling lepas → Benar",
-        "3: Untuk bebas: P(A∩B)=P(A)P(B), substitusi ke rumus → Benar",
-        "4: Empirik mendekati teoritik seiring banyak percobaan, tidak selalu sama → Salah"
+        "n(biru) = 6",
+        "n(S) = 9 + 6 = 15",
+        "$P(\\text{bukan merah}) = \\dfrac{6}{15} = \\dfrac{2}{5}$"
       ],
-      formula: ""
+      formula: "P = \\frac{6}{15} = \\frac{2}{5}"
     }
   },
   {
-    id: 94, type: "PG", difficulty: "Sulit", category: "Olimpiade",
-    question: "Dua dadu dilempar bersamaan. Peluang angka pada dadu pertama lebih besar dari atau sama dengan angka pada dadu kedua adalah ...",
-    svgKey: "dua-dadu-d1ged2",
-    options: ["A. $\\frac{5}{12}$", "B. $\\frac{1}{2}$", "C. $\\frac{7}{12}$", "D. $\\frac{2}{3}$"],
-    correctAnswer: "C. $\\frac{7}{12}$",
-    explanation: {
-      concept: "d1 ≥ d2 termasuk kasus d1 = d2.",
-      steps: [
-        "d1 > d2: 15 pasangan",
-        "d1 = d2: 6 pasangan",
-        "Total = 21",
-        "$P = \\dfrac{21}{36} = \\dfrac{7}{12}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 95, type: "PG", difficulty: "Sulit", category: "TKA",
-    question: "Diketahui A dan B saling lepas dengan $P(A) = 0{,}3$ dan $P(B) = 0{,}4$. Nilai $P((A \\cup B)^c)$ adalah ...",
-    options: ["A. 0,1", "B. 0,3", "C. 0,4", "D. 0,7"],
-    correctAnswer: "B. 0,3",
-    explanation: {
-      concept: "P(A∪B) = P(A)+P(B) (saling lepas). Lalu P((A∪B)c) = 1 − P(A∪B).",
-      steps: [
-        "$P(A \\cup B) = 0{,}3 + 0{,}4 = 0{,}7$",
-        "$P((A \\cup B)^c) = 1 - 0{,}7 = 0{,}3$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 96, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Dua dadu dilempar. Peluang minimal satu dadu menunjukkan bilangan prima adalah ...",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{4}$", "D. $\\frac{5}{6}$"],
-    correctAnswer: "C. $\\frac{3}{4}$",
-    explanation: {
-      concept: "Komplemen: P(min 1 prima) = 1 − P(keduanya tidak prima).",
-      steps: [
-        "Tidak prima pada dadu: {1,4,6} → 3 dari 6",
-        "$P(\\text{tidak prima}) = \\dfrac{3}{6} = \\dfrac{1}{2}$",
-        "$P(\\text{keduanya tidak prima}) = \\left(\\dfrac{1}{2}\\right)^2 = \\dfrac{1}{4}$",
-        "$P(\\text{min 1 prima}) = 1 - \\dfrac{1}{4} = \\dfrac{3}{4}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 97, type: "PG", difficulty: "Sulit", category: "HOTS",
-    question: "Tiga koin dilempar bersamaan. Peluang jumlah angka (A) yang muncul lebih banyak dari gambar (G) adalah ...",
-    svgKey: "koin-3",
-    options: ["A. $\\frac{1}{4}$", "B. $\\frac{1}{2}$", "C. $\\frac{3}{4}$", "D. 1"],
-    correctAnswer: "B. $\\frac{1}{2}$",
-    explanation: {
-      concept: "A lebih banyak dari G artinya minimal 2 angka muncul.",
-      steps: [
-        "Tepat 2A: {AAG,AGA,GAA} = 3",
-        "Tepat 3A: {AAA} = 1",
-        "Total = 4",
-        "$P = \\dfrac{4}{8} = \\dfrac{1}{2}$"
-      ],
-      formula: ""
-    }
-  },
-  {
-    id: 98, type: "PG", difficulty: "Sulit", category: "Olimpiade",
-    question: "Dari bilangan 1 sampai 50, dipilih satu bilangan secara acak. Peluang terpilih kelipatan 3 atau kelipatan 5 adalah ...",
-    options: ["A. $\\frac{9}{25}$", "B. $\\frac{23}{50}$", "C. $\\frac{12}{25}$", "D. $\\frac{1}{2}$"],
-    correctAnswer: "B. $\\frac{23}{50}$",
-    explanation: {
-      concept: "Gunakan inklusi-eksklusi untuk kelipatan 3 atau kelipatan 5.",
-      steps: [
-        "Kelipatan 3 (1–50): ⌊50/3⌋ = 16",
-        "Kelipatan 5 (1–50): ⌊50/5⌋ = 10",
-        "Kelipatan 15 (1–50): ⌊50/15⌋ = 3",
-        "$n = 16 + 10 - 3 = 23$",
-        "$P = \\dfrac{23}{50}$"
-      ],
-      formula: "P(K_3 \\cup K_5) = \\frac{n(K_3)+n(K_5)-n(K_{15})}{50}"
-    }
-  },
-  {
-    id: 99, type: "PG", difficulty: "Sulit", category: "TKA",
-    question: "Sebuah kantong berisi 3 bola merah, 4 bola biru, dan 5 bola hijau. Peluang terambil bola yang TIDAK hijau adalah ...",
-    svgKey: "marble-3r4b5h",
-    options: ["A. $\\frac{5}{12}$", "B. $\\frac{1}{2}$", "C. $\\frac{7}{12}$", "D. $\\frac{2}{3}$"],
-    correctAnswer: "C. $\\frac{7}{12}$",
-    explanation: {
-      concept: "Tidak hijau = merah + biru.",
-      steps: ["n(tidak hijau) = 3+4 = 7", "n(S) = 12", "$P = \\dfrac{7}{12}$"],
-      formula: ""
-    }
-  },
-  {
-    id: 100, type: "Benar/Salah", difficulty: "Sulit", category: "Olimpiade",
-    question: "Tentukan benar atau salah setiap pernyataan berikut tentang peluang gabungan dua kejadian:",
-    statements: [
-      { text: "P(A∪B) = P(A) + P(B) berlaku untuk semua kejadian A dan B.", isCorrect: false },
-      { text: "P(A∩B) ≤ min(P(A), P(B)).", isCorrect: true },
-      { text: "P(A∪B) ≤ P(A) + P(B) untuk semua kejadian A dan B.", isCorrect: true },
-      { text: "Jika P(A) + P(B) > 1 maka A dan B pasti tidak saling lepas.", isCorrect: true },
+    id: 48, type: "PG", difficulty: "Sulit", category: "UN",
+    question: "Sebuah dadu biru dan dadu merah dilempar bersamaan. Peluang munculnya jumlah mata dadu 5 pada dadu pada percobaan tersebut adalah ....",
+    svgKey: "dua-dadu-7",
+    options: [
+      "A. $\\frac{3}{36}$",
+      "B. $\\frac{4}{36}$",
+      "C. $\\frac{5}{36}$",
+      "D. $\\frac{6}{36}$"
     ],
+    correctAnswer: "B. $\\frac{4}{36}$",
     explanation: {
-      concept: "Sifat-sifat lanjutan peluang gabungan.",
+      concept: "Pasangan dadu dengan jumlah 5.",
       steps: [
-        "1: Hanya berlaku jika saling lepas → Salah",
-        "2: P(A∩B) ≤ P(A) dan P(A∩B) ≤ P(B) → Benar",
-        "3: P(A∪B) = P(A)+P(B)−P(A∩B) ≤ P(A)+P(B) karena P(A∩B)≥0 → Benar",
-        "4: Jika saling lepas: P(A∪B)=P(A)+P(B)>1, mustahil → pasti tidak saling lepas → Benar"
+        "(1,4),(4,1),(2,3),(3,2) → 4 pasangan",
+        "$P = \\dfrac{4}{36} = \\dfrac{1}{9}$"
       ],
-      formula: ""
+      formula: "P = \\frac{4}{36} = \\frac{1}{9}"
     }
   },
+  {
+    id: 49, type: "PG", difficulty: "Sulit", category: "Kontekstual",
+    question: "Sebuah dadu dilempar dua kali. Peluang munculnya mata dadu genap pada pelemparan pertama dan mata dadu tiga pada pelemparan kedua adalah ....",
+    svgKey: "dadu-genap",
+    options: [
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{12}$",
+      "C. $\\frac{1}{4}$",
+      "D. $\\frac{1}{6}$"
+    ],
+    correctAnswer: "B. $\\frac{1}{12}$",
+    explanation: {
+      concept: "Kedua pelemparan independen.",
+      steps: [
+        "P(genap) = 3/6 = 1/2",
+        "P(muncul 3) = 1/6",
+        "$P = \\dfrac{1}{2} \\times \\dfrac{1}{6} = \\dfrac{1}{12}$"
+      ],
+      formula: "P = \\frac{1}{2} \\times \\frac{1}{6} = \\frac{1}{12}"
+    }
+  },
+  {
+    id: 50, type: "PG", difficulty: "Sulit", category: "UN",
+    question: "Sebuah dadu biru dan sebuah dadu merah dilempar bersama-sama, Peluang munculnya mata 5 pada dadu merah pada percobaan tersebut adalah ....",
+    svgKey: "dadu-besar4",
+    options: [
+      "A. $\\frac{1}{36}$",
+      "B. $\\frac{1}{12}$",
+      "C. $\\frac{1}{6}$",
+      "D. $\\frac{5}{36}$"
+    ],
+    correctAnswer: "C. $\\frac{1}{6}$",
+    explanation: {
+      concept: "Untuk dadu merah saja: P(5) = 1/6, tidak tergantung dadu biru.",
+      steps: [
+        "Dadu merah bermata 6: P(5) = 1/6",
+        "Dadu biru tidak mempengaruhi hasil dadu merah"
+      ],
+      formula: "P = \\frac{1}{6}"
+    }
+  }
 ];
 
 /* ── SoalCard Component ── */
