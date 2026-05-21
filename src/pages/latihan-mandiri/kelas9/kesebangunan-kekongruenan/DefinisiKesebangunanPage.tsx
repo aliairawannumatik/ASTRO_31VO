@@ -57,17 +57,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Hitung: } \\frac{AB}{EF} = \\frac{BC}{FG} = \\ldots" },
     ],
   }),
-  Qn(2, "Pengertian Kekongruenan", {
-    type: "mixed",
-    content: "Dua bangun datar dikatakan kongruen (≅) jika kedua syarat terpenuhi sekaligus.",
-    diagram: <TwoShapesCongruent shape="rect" color1="#34d399" color2="#fb923c" sides1={["8 cm","5 cm"]} sides2={["8 cm","5 cm"]} label1="ABCD" label2="PQRS"/>,
-    parts: [
-      { label: "a.", text: "Apa perbedaan antara dua bangun yang sebangun dan dua bangun yang kongruen?" },
-      { label: "b.", text: "Apakah dua bangun yang kongruen pasti sebangun? Jelaskan." },
-      { label: "c.", text: "Apakah dua bangun yang sebangun pasti kongruen? Jelaskan dengan contoh." },
-    ],
-  }),
-  Qn(3, "Syarat Kesebangunan – Sudut", {
+  Qn(2, "Syarat Kesebangunan – Sudut", {
     type: "mixed",
     content: "Perhatikan dua segitiga berikut. Sudut-sudut segitiga ABC: ∠A = 50°, ∠B = 70°, ∠C = 60°. Sudut-sudut segitiga DEF: ∠D = 50°, ∠E = 70°, ∠F = 60°.",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["","",""]} sideLabels2={["","",""]} color1="#22d3ee" color2="#f472b6"/>,
@@ -77,7 +67,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika } AB = 6 \\text{ cm dan } DE = 9 \\text{ cm, berapakah rasio kesebangunannya?}" },
     ],
   }),
-  Qn(4, "Syarat Kesebangunan – Sisi", {
+  Qn(3, "Syarat Kesebangunan – Sisi", {
     type: "mixed",
     content: "Dua segitiga PQR dan STU memiliki panjang sisi: PQ = 4, QR = 6, PR = 8 dan ST = 6, TU = 9, SU = 12.",
     parts: [
@@ -86,7 +76,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah kedua segitiga itu sebangun? Berapa rasio perbandingannya?" },
     ],
   }),
-  Qn(5, "Sisi Sebanding – Pilihan Ganda – UN", {
+  Qn(4, "Sisi Sebanding – Pilihan Ganda – UN", {
     type: "mixed",
     content: "Perhatikan gambar berikut! △PQR sebangun dengan △XYZ karena m∠P = m∠X, m∠Q = m∠Y, dan m∠R = m∠Z. Panjang rusuk-rusuk yang sebanding adalah ....",
     diagram: <SimilarRightTrianglesPQRXYZ />,
@@ -97,7 +87,7 @@ const questions: Q[] = [
       { label: "D.", math: "\\dfrac{PR}{PQ} = \\dfrac{QR}{XY} = \\dfrac{ZY}{ZX}" },
     ],
   }),
-  Qn(6, "Faktor Skala / Rasio Kesebangunan", {
+  Qn(5, "Faktor Skala / Rasio Kesebangunan", {
     type: "mixed",
     diagram: <SimilarRects w1={50} h1={35} w2={100} h2={70} sides1={["5 cm","3,5 cm","",""]as any} sides2={["10 cm","7 cm","",""]as any} color1="#38bdf8" color2="#34d399"/>,
     parts: [
@@ -107,7 +97,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{L_{besar}}{L_{kecil}} = k^2 = \\ldots" },
     ],
   }),
-  Qn(7, "Foto dan Bayangan", {
+  Qn(6, "Foto dan Bayangan", {
     type: "mixed",
     content: "Sebuah foto berukuran 4 cm × 6 cm akan diperbesar menjadi 10 cm × 15 cm.",
     parts: [
@@ -117,7 +107,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\text{Rasio luas} = \\left(\\frac{4}{10}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(8, "Faktor Skala dari Luas", {
+  Qn(7, "Faktor Skala dari Luas", {
     type: "mixed",
     content: "Dua bangun sebangun. Luas bangun pertama 36 cm² dan luas bangun kedua 81 cm².",
     parts: [
@@ -126,7 +116,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika sebuah sisi bangun pertama 6 cm, berapa sisi yang bersesuaian pada bangun kedua?" },
     ],
   }),
-  Qn(9, "Kekongruenan dan Luas", {
+  Qn(8, "Kekongruenan dan Luas", {
     type: "mixed",
     content: "Dua bangun yang kongruen selalu memiliki luas yang sama.",
     parts: [
@@ -135,7 +125,7 @@ const questions: Q[] = [
       { label: "c.", text: "Bolehkah dua bangun yang luasnya sama langsung disebut kongruen? Berikan contoh kontra." },
     ],
   }),
-  Qn(10, "Identifikasi Pasangan Sebangun", {
+  Qn(9, "Identifikasi Pasangan Sebangun", {
     type: "mixed",
     content: "Tentukan pasangan bangun yang pasti sebangun:",
     parts: [
@@ -146,7 +136,7 @@ const questions: Q[] = [
       { label: "", text: "Dari pilihan A–D, mana yang pasti sebangun? Jelaskan alasan untuk setiap pilihan." },
     ],
   }),
-  Qn(11, "Membandingkan Segitiga", {
+  Qn(10, "Membandingkan Segitiga", {
     type: "mixed",
     diagram: <SimilarTriangles vertices1={["A","B","C"]} vertices2={["D","E","F"]} sideLabels1={["6","8","10"]} sideLabels2={["9","12","15"]} color1="#38bdf8" color2="#34d399" type="right"/>,
     parts: [
@@ -174,7 +164,7 @@ const DefinisiKesebangunanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 11 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 10 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
