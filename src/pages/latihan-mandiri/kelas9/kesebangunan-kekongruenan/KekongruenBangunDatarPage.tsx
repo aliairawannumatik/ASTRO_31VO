@@ -3,7 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { CheckSquare } from "lucide-react";
-import imgQ1 from "@assets/image_1779360053350.png";
+import imgQ1 from "@assets/Gemini_Generated_Image_i78ewni78ewni78e_(1)_1779360375566.png";
 import imgQ2 from "@assets/Gemini_Generated_Image_ngxre9ngxre9ngxr_(1)_1779360148381.png";
 import imgQ4 from "@assets/image_1779360180879.png";
 import imgQ5 from "@assets/Gemini_Generated_Image_wd58awd58awd58aw_(1)_1779360225111.png";
