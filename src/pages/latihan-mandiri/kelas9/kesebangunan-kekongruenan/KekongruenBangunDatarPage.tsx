@@ -6,6 +6,7 @@ import { CheckSquare } from "lucide-react";
 import imgQ1 from "@assets/image_1779360053350.png";
 import imgQ2 from "@assets/Gemini_Generated_Image_ngxre9ngxre9ngxr_(1)_1779360148381.png";
 import imgQ4 from "@assets/image_1779360180879.png";
+import imgQ5 from "@assets/Gemini_Generated_Image_wd58awd58awd58aw_(1)_1779360225111.png";
 
 type Q = { n: number; title: string; content: string; diagram?: React.ReactNode; options: { label: string; text: string }[] };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
@@ -23,31 +24,7 @@ const SvgQ86 = () => (
 );
 
 const SvgQ88 = () => (
-  <svg width={240} height={178} viewBox="0 0 240 178" style={{display:'block'}}>
-    <rect width="240" height="178" fill="#0b1733" rx="14"/>
-    <polygon points="120,18 22,85 218,85" fill="rgba(248,113,113,0.07)"/>
-    <line x1="120" y1="18" x2="22" y2="85" stroke="#f87171" strokeWidth="2.5"/>
-    <line x1="120" y1="18" x2="218" y2="85" stroke="#f87171" strokeWidth="2.5"/>
-    <line x1="22" y1="85" x2="218" y2="85" stroke="#f87171" strokeWidth="2.5"/>
-    <line x1="22" y1="85" x2="120" y2="152" stroke="#34d399" strokeWidth="2" strokeDasharray="5,4"/>
-    <line x1="218" y1="85" x2="120" y2="152" stroke="#34d399" strokeWidth="2" strokeDasharray="5,4"/>
-    <line x1="64" y1="74" x2="70" y2="80" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="176" y1="74" x2="170" y2="80" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="60" y1="78" x2="66" y2="84" stroke="#34d399" strokeWidth="1.8"/>
-    <line x1="180" y1="78" x2="174" y2="84" stroke="#34d399" strokeWidth="1.8"/>
-    <circle cx="120" cy="6" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
-    <text x="120" y="11" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <circle cx="8" cy="85" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
-    <text x="8" y="90" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="232" cy="85" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
-    <text x="232" y="90" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="120" cy="164" r="12" fill="#0b1733" stroke="#34d399" strokeWidth="2"/>
-    <text x="120" y="169" fill="#34d399" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="52" y="108" width="56" height="15" rx="5" fill="rgba(0,0,0,0.6)"/>
-    <text x="80" y="119" fill="#fde68a" fontSize="9" fontWeight="bold" textAnchor="middle">AD ∥ BC</text>
-    <rect x="132" y="108" width="56" height="15" rx="5" fill="rgba(0,0,0,0.6)"/>
-    <text x="160" y="119" fill="#fde68a" fontSize="9" fontWeight="bold" textAnchor="middle">BD ∥ AC</text>
-  </svg>
+  <img src={imgQ5} alt="Diagram Soal 5 - Garis Sejajar Kekongruenan" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ89 = () => (
