@@ -91,6 +91,7 @@ type TriangleAltitudeProps = {
   labelTop?: string; labelBotL?: string; labelBotR?: string; labelMid?: string;
   sideA?: string; sideB?: string; sideC?: string; sideD?: string;
   altLabel?: string;
+  rightAngleAtTop?: boolean;
 };
 
 export const TriangleAltitude = ({
@@ -98,6 +99,7 @@ export const TriangleAltitude = ({
   labelTop="A", labelBotL="B", labelBotR="C", labelMid="D",
   sideA="?", sideB="3", sideC="4", sideD="12",
   altLabel="AD",
+  rightAngleAtTop=false,
 }: TriangleAltitudeProps) => (
   <svg width={240} height={150} viewBox="0 0 240 150" style={{display:'block'}}>
     <rect width="240" height="150" fill="rgba(2,8,23,0.85)" rx="12"/>
@@ -106,6 +108,7 @@ export const TriangleAltitude = ({
     <line x1={210} y1={130} x2={120} y2={20} stroke={color2} strokeWidth="1.8"/>
     <line x1={120} y1={20} x2={120} y2={130} stroke={color3} strokeWidth="1.5" strokeDasharray="4,3"/>
     <rect x={112} y={122} width={8} height={8} fill="none" stroke={color3} strokeWidth="1.2"/>
+    {rightAngleAtTop && <polyline points="116,25 120,31 124,25" fill="none" stroke={color2} strokeWidth="1.5"/>}
     <text x={120} y={14} fill={color1} fontSize="11" fontWeight="bold" textAnchor="middle">{labelTop}</text>
     <text x={22} y={140} fill={color1} fontSize="11" fontWeight="bold" textAnchor="middle">{labelBotL}</text>
     <text x={218} y={140} fill={color1} fontSize="11" fontWeight="bold" textAnchor="middle">{labelBotR}</text>

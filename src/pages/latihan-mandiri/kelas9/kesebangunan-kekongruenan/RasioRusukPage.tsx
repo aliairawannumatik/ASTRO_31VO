@@ -20,7 +20,7 @@ const SvgQ1 = () => (
     <line x1="52" y1="22" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
     <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
-    <polyline points="120,67 126,72 121,78" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <polyline points="120,78 116,84 111,80" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
     <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
     <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
     <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
@@ -62,7 +62,7 @@ const SvgQ3 = () => (
     <line x1="52" y1="22" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
     <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
-    <polyline points="134,66 129,72 123,67" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <polyline points="120,78 116,84 111,80" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
     <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
     <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
     <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
@@ -83,7 +83,7 @@ const SvgQ4 = () => (
     <line x1="52" y1="22" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
     <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
-    <polyline points="120,67 126,72 121,78" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
+    <polyline points="120,78 116,84 111,80" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
     <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
     <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
     <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
@@ -96,6 +96,7 @@ const SvgQ4 = () => (
     <text x="93" y="44" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">5 cm</text>
     <rect x="142" y="105" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
     <text x="173" y="117" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">4 cm</text>
+
   </svg>
 );
 
@@ -143,6 +144,7 @@ const SvgQ5b = () => (
     <line x1="100" y1="18" x2="215" y2="150" stroke="#818cf8" strokeWidth="2.5"/>
     <line x1="100" y1="18" x2="107" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="98,150 98,141 107,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+    <polyline points="96,24 101,29 105,23" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
     <circle cx="100" cy="6" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
     <text x="100" y="11" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">G</text>
     <circle cx="6" cy="164" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
@@ -151,12 +153,8 @@ const SvgQ5b = () => (
     <text x="228" y="169" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">F</text>
     <circle cx="107" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
     <text x="107" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">H</text>
-    <rect x="64" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
-    <text x="79" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">b</text>
-    <rect x="22" y="130" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="53" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">EH = 4 cm</text>
-    <rect x="120" y="130" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="151" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">HF = 5 cm</text>
+    <rect x="113" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="128" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">b</text>
   </svg>
 );
 
@@ -169,6 +167,7 @@ const SvgQ5c = () => (
     <line x1="55" y1="18" x2="215" y2="150" stroke="#a855f7" strokeWidth="2.5"/>
     <line x1="55" y1="18" x2="59" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="50,150 50,141 59,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+    <polyline points="53,25 59,30 61,23" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
     <circle cx="55" cy="6" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
     <text x="55" y="11" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">L</text>
     <circle cx="6" cy="164" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
@@ -177,12 +176,8 @@ const SvgQ5c = () => (
     <text x="228" y="169" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">M</text>
     <circle cx="59" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
     <text x="59" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">N</text>
-    <rect x="26" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
-    <text x="41" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">c</text>
-    <rect x="14" y="130" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="45" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">KN = 4 cm</text>
-    <rect x="100" y="130" width="72" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="136" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">NM = 25 cm</text>
+    <rect x="64" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
+    <text x="79" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">c</text>
   </svg>
 );
 
@@ -195,7 +190,7 @@ const SvgQ5d = () => (
     <line x1="52" y1="22" x2="210" y2="158" stroke="#f87171" strokeWidth="2.5"/>
     <rect x="52" y="149" width="9" height="9" fill="rgba(248,113,113,0.2)" stroke="#f87171" strokeWidth="1.5"/>
     <line x1="52" y1="158" x2="109" y2="71" stroke="#22d3ee" strokeWidth="2" strokeDasharray="6,4"/>
-    <polyline points="113,64 120,70 115,76" fill="none" stroke="#22d3ee" strokeWidth="1.5"/>
+    <polyline points="114,76 110,81 105,77" fill="none" stroke="#22d3ee" strokeWidth="1.5"/>
     <circle cx="38" cy="10" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
     <text x="38" y="15" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">T</text>
     <circle cx="36" cy="172" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
@@ -206,10 +201,6 @@ const SvgQ5d = () => (
     <text x="122" y="64" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">U</text>
     <rect x="157" y="98" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="172" y="113" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">d</text>
-    <rect x="10" y="82" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="41" y="94" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">TR = 9 cm</text>
-    <rect x="96" y="162" width="70" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
-    <text x="131" y="174" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">RS = 12 cm</text>
   </svg>
 );
 
@@ -233,7 +224,7 @@ const questions: Q[] = [
   }),
   Qn(2, "Garis Tinggi dari Sudut Siku-Siku", {
     type: "mixed",
-    diagram: <TriangleAltitude labelTop="C" labelBotL="A" labelBotR="B" labelMid="H" sideA="AC" sideB="AH=9" sideC="HB=16" altLabel="CH" color1="#34d399" color2="#6ee7b7" color3="#059669"/>,
+    diagram: <TriangleAltitude labelTop="C" labelBotL="A" labelBotR="B" labelMid="H" sideA="AC" sideB="AH=9" sideC="HB=16" altLabel="CH" color1="#34d399" color2="#6ee7b7" color3="#059669" rightAngleAtTop/>,
     content: "Segitiga siku-siku ACB dengan ∠C = 90°. CH ⊥ AB.",
     parts: [
       { label: "a.", math: "CH^2 = AH \\cdot HB = 9 \\times 16 = \\ldots \\Rightarrow CH = \\ldots" },
