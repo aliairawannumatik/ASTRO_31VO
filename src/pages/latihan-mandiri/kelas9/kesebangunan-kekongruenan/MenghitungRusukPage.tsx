@@ -138,13 +138,14 @@ const questions: Q[] = [
       { label: "D.", text: "6 cm" },
     ],
   }),
-  Qn(8, "Perbandingan pada Foto dan Benda", {
+  Qn(8, "Perbandingan pada Foto dan Benda – UN", {
     type: "mixed",
-    content: "Sebuah mobil sepanjang 4 m difoto. Dalam foto, panjang mobil 8 cm. Lebar mobil 1,6 m.",
+    content: "Sebuah mobil sepanjang 4 m difoto sehingga panjang mobil dalam foto menjadi 8 cm. Jika lebar mobil sebenarnya 1,6 m, maka lebar mobil dalam foto adalah ....",
     parts: [
-      { label: "a.", text: "Tentukan skala foto." },
-      { label: "b.", text: "Berapa lebar mobil dalam foto (dalam cm)?" },
-      { label: "c.", text: "Apakah foto dan mobil asli sebangun? Buktikan." },
+      { label: "A.", text: "2,4 cm" },
+      { label: "B.", text: "3,2 cm" },
+      { label: "C.", text: "4,0 cm" },
+      { label: "D.", text: "4,8 cm" },
     ],
   }),
 ];
