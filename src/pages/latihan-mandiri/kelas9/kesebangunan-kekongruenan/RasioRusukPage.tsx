@@ -222,30 +222,48 @@ const questions: Q[] = [
       { label: "D.", text: "√36 cm" },
     ],
   }),
-  Qn(6, "Hitunglah Nilai p", {
-    type: "hitungP",
-    content: "Hitunglah nilai p berdasarkan gambar di bawah ini.",
-    parts: [
-      {
-        label: "a.",
-        diagram: <SvgQ5a />,
-        text: "Segitiga siku-siku di C. CD ⊥ AB, CD = 18 cm, DB = 6 cm. Cari p = AD.",
-      },
-      {
-        label: "b.",
-        diagram: <SvgQ5b />,
-        text: "Segitiga siku-siku di G. GH ⊥ EF, EH = 4 cm, HF = 5 cm. Cari p = GH.",
-      },
-      {
-        label: "c.",
-        diagram: <SvgQ5c />,
-        text: "Segitiga siku-siku di L. LN ⊥ KM, KN = 4 cm, NM = 25 cm. Cari p = LN.",
-      },
-      {
-        label: "d.",
-        diagram: <SvgQ5d />,
-        text: "Segitiga TRS siku-siku di R. RU ⊥ TS, TR = 9 cm, RS = 12 cm. Cari p = US.",
-      },
+  Qn(6, "Mencari Nilai p = AD", {
+    type: "pilgan",
+    diagram: <SvgQ5a />,
+    content: "Pada gambar berikut, segitiga siku-siku di C dengan CD ⊥ AB. Diketahui CD = 18 cm dan DB = 6 cm. Nilai p = AD adalah …",
+    options: [
+      { label: "A.", text: "48 cm" },
+      { label: "B.", text: "54 cm" },
+      { label: "C.", text: "60 cm" },
+      { label: "D.", text: "72 cm" },
+    ],
+  }),
+  Qn(7, "Mencari Nilai p = GH", {
+    type: "pilgan",
+    diagram: <SvgQ5b />,
+    content: "Pada gambar berikut, segitiga siku-siku di G dengan GH ⊥ EF. Diketahui EH = 4 cm dan HF = 5 cm. Nilai p = GH adalah …",
+    options: [
+      { label: "A.", text: "2√5 cm" },
+      { label: "B.", text: "3√5 cm" },
+      { label: "C.", text: "4√5 cm" },
+      { label: "D.", text: "5√5 cm" },
+    ],
+  }),
+  Qn(8, "Mencari Nilai p = LN", {
+    type: "pilgan",
+    diagram: <SvgQ5c />,
+    content: "Pada gambar berikut, segitiga siku-siku di L dengan LN ⊥ KM. Diketahui KN = 4 cm dan NM = 25 cm. Nilai p = LN adalah …",
+    options: [
+      { label: "A.", text: "8 cm" },
+      { label: "B.", text: "9 cm" },
+      { label: "C.", text: "10 cm" },
+      { label: "D.", text: "12 cm" },
+    ],
+  }),
+  Qn(9, "Mencari Nilai p = US", {
+    type: "pilgan",
+    diagram: <SvgQ5d />,
+    content: "Pada gambar berikut, segitiga TRS siku-siku di R dengan RU ⊥ TS. Diketahui TR = 9 cm dan RS = 12 cm. Nilai p = US adalah …",
+    options: [
+      { label: "A.", text: "7,2 cm" },
+      { label: "B.", text: "8,0 cm" },
+      { label: "C.", text: "9,6 cm" },
+      { label: "D.", text: "10,8 cm" },
     ],
   }),
 ];
@@ -267,7 +285,7 @@ const RasioRusukPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 6 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 9 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
