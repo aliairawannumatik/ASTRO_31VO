@@ -95,7 +95,7 @@ const SvgQ5a = () => (
     <text x="80" y="125" fill="#6ee7b7" fontSize="10" fontWeight="bold" textAnchor="middle">D</text>
     <text x="54" y="63" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">18 cm</text>
     <text x="140" y="115" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">6 cm</text>
-    <text x="40" y="115" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">p</text>
+    <text x="40" y="115" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">a</text>
   </svg>
 );
 
@@ -113,7 +113,7 @@ const SvgQ5b = () => (
     <text x="85" y="125" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">H</text>
     <text x="52" y="115" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">4 cm</text>
     <text x="130" y="115" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">5 cm</text>
-    <text x="62" y="68" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">p</text>
+    <text x="62" y="68" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">b</text>
   </svg>
 );
 
@@ -131,7 +131,7 @@ const SvgQ5c = () => (
     <text x="48" y="107" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">N</text>
     <text x="30" y="98" fill="rgba(255,255,255,0.75)" fontSize="9" textAnchor="middle">4 cm</text>
     <text x="118" y="104" fill="rgba(255,255,255,0.75)" fontSize="9" textAnchor="middle">25 cm</text>
-    <text x="60" y="60" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="start">p</text>
+    <text x="60" y="60" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="start">c</text>
   </svg>
 );
 
@@ -157,7 +157,7 @@ const SvgQ5d = () => (
     <text x="90" y="50" fill="#6ee7b7" fontSize="11" fontWeight="bold" textAnchor="start">U</text>
     <text x="18" y="68" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">9 cm</text>
     <text x="102" y="124" fill="rgba(255,255,255,0.75)" fontSize="10" textAnchor="middle">12 cm</text>
-    <text x="142" y="82" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">p</text>
+    <text x="142" y="82" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">d</text>
   </svg>
 );
 
@@ -222,10 +222,10 @@ const questions: Q[] = [
       { label: "D.", text: "√36 cm" },
     ],
   }),
-  Qn(6, "Mencari Nilai p = AD", {
+  Qn(6, "Mencari Nilai a = AD", {
     type: "pilgan",
     diagram: <SvgQ5a />,
-    content: "Pada gambar berikut, segitiga siku-siku di C dengan CD ⊥ AB. Diketahui CD = 18 cm dan DB = 6 cm. Nilai p = AD adalah …",
+    content: "Pada gambar berikut, segitiga siku-siku di C dengan CD ⊥ AB. Diketahui CD = 18 cm dan DB = 6 cm. Nilai a = AD adalah …",
     options: [
       { label: "A.", text: "48 cm" },
       { label: "B.", text: "54 cm" },
@@ -233,10 +233,10 @@ const questions: Q[] = [
       { label: "D.", text: "72 cm" },
     ],
   }),
-  Qn(7, "Mencari Nilai p = GH", {
+  Qn(7, "Mencari Nilai b = GH", {
     type: "pilgan",
     diagram: <SvgQ5b />,
-    content: "Pada gambar berikut, segitiga siku-siku di G dengan GH ⊥ EF. Diketahui EH = 4 cm dan HF = 5 cm. Nilai p = GH adalah …",
+    content: "Pada gambar berikut, segitiga siku-siku di G dengan GH ⊥ EF. Diketahui EH = 4 cm dan HF = 5 cm. Nilai b = GH adalah …",
     options: [
       { label: "A.", text: "2√5 cm" },
       { label: "B.", text: "3√5 cm" },
@@ -244,10 +244,10 @@ const questions: Q[] = [
       { label: "D.", text: "5√5 cm" },
     ],
   }),
-  Qn(8, "Mencari Nilai p = LN", {
+  Qn(8, "Mencari Nilai c = LN", {
     type: "pilgan",
     diagram: <SvgQ5c />,
-    content: "Pada gambar berikut, segitiga siku-siku di L dengan LN ⊥ KM. Diketahui KN = 4 cm dan NM = 25 cm. Nilai p = LN adalah …",
+    content: "Pada gambar berikut, segitiga siku-siku di L dengan LN ⊥ KM. Diketahui KN = 4 cm dan NM = 25 cm. Nilai c = LN adalah …",
     options: [
       { label: "A.", text: "8 cm" },
       { label: "B.", text: "9 cm" },
@@ -255,10 +255,10 @@ const questions: Q[] = [
       { label: "D.", text: "12 cm" },
     ],
   }),
-  Qn(9, "Mencari Nilai p = US", {
+  Qn(9, "Mencari Nilai d = US", {
     type: "pilgan",
     diagram: <SvgQ5d />,
-    content: "Pada gambar berikut, segitiga TRS siku-siku di R dengan RU ⊥ TS. Diketahui TR = 9 cm dan RS = 12 cm. Nilai p = US adalah …",
+    content: "Pada gambar berikut, segitiga TRS siku-siku di R dengan RU ⊥ TS. Diketahui TR = 9 cm dan RS = 12 cm. Nilai d = US adalah …",
     options: [
       { label: "A.", text: "7,2 cm" },
       { label: "B.", text: "8,0 cm" },
