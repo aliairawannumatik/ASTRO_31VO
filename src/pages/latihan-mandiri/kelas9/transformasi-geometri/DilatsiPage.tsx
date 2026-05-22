@@ -78,7 +78,29 @@ type Q = {
 const questions: Q[] = [
   /* ══════════ GRUP 1: DILATASI PUSAT O(0,0) ══════════ */
   {
-    n: 1, title: "Mencari Koordinat Asal dari Bayangan",
+    n: 1, title: "Dilatasi dengan k Negatif",
+    content: "Titik A(1, 3) didilatasi dengan pusat O(0, 0) dan faktor skala k = −2. Bayangan A′ adalah ...",
+    choices: [
+      { label: "A", text: "(2, 6)" },
+      { label: "B", text: "(−2, −6)" },
+      { label: "C", text: "(−2, 6)" },
+      { label: "D", text: "(2, −6)" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 2, title: "Perbandingan Luas Setelah Dilatasi",
+    content: "Segitiga PQR dengan P(2, 1), Q(6, 1), R(4, 5) didilatasi terhadap O dengan k = 2. Berapa kali lebih besar luas △P′Q′R′ dibanding luas △PQR?",
+    choices: [
+      { label: "A", text: "2 kali" },
+      { label: "B", text: "4 kali" },
+      { label: "C", text: "6 kali" },
+      { label: "D", text: "8 kali" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 3, title: "Mencari Koordinat Asal dari Bayangan",
     content: "S(x, y) didilatasi dengan pusat O(0, 0) dan k = 3 menghasilkan S′(−9, 12). Koordinat titik S adalah ...",
     choices: [
       { label: "A", text: "(−3, 4)" },
@@ -89,7 +111,7 @@ const questions: Q[] = [
     answer: "A",
   },
   {
-    n: 2, title: "Faktor Skala — Diagram Segitiga",
+    n: 4, title: "Faktor Skala — Diagram Segitiga",
     diagram: (
       <GridSVG>
         <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
@@ -109,7 +131,7 @@ const questions: Q[] = [
     answer: "A",
   },
   {
-    n: 3, title: "Faktor Skala — Diagram Segi Empat",
+    n: 5, title: "Faktor Skala — Diagram Segi Empat",
     diagram: (
       <GridSVG>
         <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
@@ -130,7 +152,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 4, title: "Luas Bayangan Segitiga Setelah Dilatasi",
+    n: 6, title: "Luas Bayangan Segitiga Setelah Dilatasi",
     content: "Segitiga ABC mempunyai koordinat A(0, 0), B(4, 0), dan C(0, 3). Jika △A′B′C′ adalah bayangan △ABC hasil dilatasi D[O, 3], luas △A′B′C′ adalah ...",
     choices: [
       { label: "A", text: "6 satuan luas" },
@@ -141,7 +163,7 @@ const questions: Q[] = [
     answer: "D",
   },
   {
-    n: 5, title: "Luas Bayangan — Diagram Pembesaran",
+    n: 7, title: "Luas Bayangan — Diagram Pembesaran",
     diagram: (
       <GridSVG>
         <Poly pts={[[1,0],[2,0],[2,2],[1,2]]} color="#f43f5e" label="P"/>
@@ -162,7 +184,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 6, title: "Koordinat Bayangan — Diagram Segitiga",
+    n: 8, title: "Koordinat Bayangan — Diagram Segitiga",
     diagram: (
       <GridSVG>
         <Poly pts={[[0,0],[2,0],[0,3]]} color="#f43f5e" label="△ABC"/>
@@ -180,28 +202,6 @@ const questions: Q[] = [
       { label: "D", text: "(2, 6)" },
     ],
     answer: "A",
-  },
-  {
-    n: 7, title: "Dilatasi dengan k Negatif",
-    content: "Titik A(1, 3) didilatasi dengan pusat O(0, 0) dan faktor skala k = −2. Bayangan A′ adalah ...",
-    choices: [
-      { label: "A", text: "(2, 6)" },
-      { label: "B", text: "(−2, −6)" },
-      { label: "C", text: "(−2, 6)" },
-      { label: "D", text: "(2, −6)" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 8, title: "Perbandingan Luas Setelah Dilatasi",
-    content: "Segitiga PQR dengan P(2, 1), Q(6, 1), R(4, 5) didilatasi terhadap O dengan k = 2. Berapa kali lebih besar luas △P′Q′R′ dibanding luas △PQR?",
-    choices: [
-      { label: "A", text: "2 kali" },
-      { label: "B", text: "4 kali" },
-      { label: "C", text: "6 kali" },
-      { label: "D", text: "8 kali" },
-    ],
-    answer: "B",
   },
   {
     n: 9, title: "Faktor Skala — Diagram Penyusutan",
