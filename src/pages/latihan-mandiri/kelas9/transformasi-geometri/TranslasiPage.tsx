@@ -194,7 +194,7 @@ const questions: Q[] = [
   }),
   Qn(23,"Mencari Vektor dari Garis Asal dan Bayangan",{type:"pg",
     content:"Garis y = 3x + 8 ditranslasikan oleh T = (a, b) sehingga bayangannya adalah y = 3x \u2212 1. Jika diketahui a = 2, maka vektor translasi T adalah ...",
-    opts:["(2, \u22123)","(2, 3)","(\u22122, \u22123)","(\u22122, 3)"],
+    opts:["(2, \u22123)","(2, 3)","(2, 15)","(2, \u221215)"],
   }),
 ];
 
