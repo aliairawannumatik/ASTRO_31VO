@@ -9,7 +9,7 @@ import SnakeMathPage from "@/pages/math-game-arena/umum/SnakeMathPage";
 import BrickBreakerPage from "@/pages/math-game-arena/umum/BrickBreakerPage";
 import GalaksiTempurPage from "@/pages/math-game-arena/umum/GalaksiTempurPage";
 import ZumaMathPage from "@/pages/math-game-arena/umum/ZumaMathPage";
-import PacMathPage from "@/pages/math-game-arena/umum/PacMathPage";
+import PacmanMathPage from "@/pages/math-game-arena/umum/PacmanMathPage";
 import { getSubmaterialK8 } from "@/data/mga-k8/registry";
 import type { GuruQuestion } from "@/hooks/useGuruQuiz";
 
@@ -156,14 +156,7 @@ const SubmaterialGameDispatcherK8 = () => {
     case "zum-math":
       return <ZumaMathPage />;
     case "pac-math":
-      return (
-        <PacMathPage
-          topicLabel={topicLabel}
-          backPath={backPath}
-          homePath={homePath}
-          quizQuestions={gameSlice(q.snake, variant)}
-        />
-      );
+      return <PacmanMathPage />;
     default:
       return (
         <div className="relative min-h-screen flex flex-col items-center justify-center bg-slate-950">

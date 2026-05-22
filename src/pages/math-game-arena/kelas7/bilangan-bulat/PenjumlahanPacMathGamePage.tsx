@@ -1,14 +1,5 @@
-import PacMathPage from "@/pages/math-game-arena/umum/PacMathPage";
-import { PENJUMLAHAN_PAC_MATH_QUIZ } from "@/data/mga-k7-bilbul-quiz";
+import PacmanMathPage from "@/pages/math-game-arena/umum/PacmanMathPage";
 
-const PenjumlahanPacMathGamePage = () => (
-  <PacMathPage
-    topicLabel="PENJUMLAHAN BILANGAN BULAT"
-    backPath="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan"
-    homePath="/menu"
-    quizQuestions={PENJUMLAHAN_PAC_MATH_QUIZ}
-    quizIntervalMs={25_000}
-  />
-);
+const PenjumlahanPacMathGamePage = () => <PacmanMathPage />;
 
 export default PenjumlahanPacMathGamePage;
