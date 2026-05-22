@@ -78,7 +78,7 @@ function ArcArrow({ cx: acx, cy: acy, r, startAngle, endAngle, color = "#facc15"
 }
 
 type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay"|"mixed"|"diagram" };
+type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; opts?: [string,string,string,string]; diagram?: React.ReactNode; type: "essay"|"mixed"|"diagram"|"pg" };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 /* ─── SVG helper: diagram kuadran ─── */
@@ -134,43 +134,17 @@ const questions: Q[] = [
       {label:"Tunjukkan:",math:"A(6,3) \\overset{90°\\text{ CCW}}{\\longrightarrow} A'(?,\\,?)"},
     ],
   }),
-  Qn(3,"Bayangan Titik — Rotasi 90° CW dari O",{type:"mixed",
-    content:"Perhatikan diagram berikut.\n\nGunakan notasi R[O, −90°] yang menyatakan rotasi searah jarum jam sejauh 90° dengan pusat O(0, 0).",
-    diagram:(
-      <QuadrantSVG>
-        <circle cx={qx(4)} cy={qy(-3)} r={5} fill="#fb923c" opacity="0.9"/>
-        <text x={qx(4)+8} y={qy(-3)-4} fill="#fb923c" fontSize="9" fontWeight="bold">P(4,−3)</text>
-        <circle cx={qy(-3)+110} cy={qx(4)-110+110} r={0} fill="none"/>
-        <path d={`M${qx(3.5)},${qy(0)} A${3.5*40},${3.5*40},0,0,1,${qx(0)},${qy(3.5)}`}
-          fill="none" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3"/>
-        <text x={qx(1.5)} y={qy(2)} fill="#facc15" fontSize="8">−90°</text>
-      </QuadrantSVG>
-    ),
-    parts:[
-      {label:"a.",text:"Jika P(4, −3), tentukan koordinat P′ hasil rotasi R[O, −90°]."},
-      {label:"b.",text:"Jika Q(−3, 8), tentukan koordinat Q′ hasil rotasi R[O, −90°]."},
-      {label:"c.",text:"Jika R(7, 0), tentukan koordinat R′ hasil rotasi R[O, −90°]."},
-    ],
-  }),
-  Qn(4,"Mencari Titik Asal dari Bayangan — R[O, −90°]",{type:"mixed",
-    content:"Bayangan suatu titik P hasil rotasi R[O, −90°] adalah P′(7, −2). Tentukan koordinat titik asal P.",
-    parts:[
-      {label:"Langkah 1:",math:"\\text{Gunakan CW 90°: } (x,y) \\to (y,-x),\\quad \\text{jadi } (y,-x)=(7,-2)"},
-      {label:"Langkah 2:",math:"\\text{Dari } (y,-x)=(7,-2): \\quad y=7,\\; -x=-2 \\Rightarrow x=2"},
-      {label:"Kesimpulan:",math:"P = (2,\\, 7)"},
-    ],
-  }),
-  Qn(5,"Bayangan Titik — Rotasi 180° dari O",{type:"mixed",
+  Qn(3,"Bayangan Titik — Rotasi 180° dari O",{type:"mixed",
     content:"Titik A(3, 7) dengan R[O, 180°] menghasilkan koordinat A′ = ...",
     parts:[
       {label:"A.",text:"A′(−3, 7)"},
       {label:"B.",text:"A′(3, −7)"},
       {label:"C.",text:"A′(−3, −7)"},
       {label:"D.",text:"A′(7, 3)"},
-      {label:"Buktikan:",math:"A(3,7) \\overset{180°}{\longrightarrow} A'(-3,-7)"},
+      {label:"Buktikan:",math:"A(3,7) \\overset{180°}{\\longrightarrow} A'(-3,-7)"},
     ],
   }),
-  Qn(6,"Menentukan Nilai α pada Rotasi",{type:"mixed",
+  Qn(4,"Menentukan Nilai α pada Rotasi",{type:"mixed",
     content:"Diketahui P(−4, 9) dirotasi sebesar α° dengan pusat O menghasilkan P′(4, −9). Nilai α yang mungkin adalah ...",
     parts:[
       {label:"A.",text:"−90°"},
@@ -180,16 +154,7 @@ const questions: Q[] = [
       {label:"Analisis:",text:"Perhatikan pola: koordinat x berubah tanda, koordinat y berubah tanda → pemetaan (x,y) → (−x,−y) sesuai dengan rotasi berapa derajat?"},
     ],
   }),
-  Qn(7,"Rotasi Berturut-turut — Mencari Parameter",{type:"mixed",
-    content:"Dilakukan rotasi berturut-turut terhadap titik (c, 8−b) sejauh 180° lalu 90°. Jika koordinat bayangannya adalah (2b, −4), tentukan nilai b + c.",
-    parts:[
-      {label:"Langkah 1:",math:"(c,\\,8-b) \\overset{180°}{\longrightarrow} (-c,\\,b-8)"},
-      {label:"Langkah 2:",math:"(-c,\\,b-8) \\overset{90°\\text{ CW}}{\\longrightarrow} (b-8,\\,-c) = (2b,-4)"},
-      {label:"Langkah 3:",math:"b-8=2b \\Rightarrow b=-8;\\quad -(-8)-8=c? \\text{ Dari }-c=-4 \\Rightarrow c=4"},
-      {label:"Selesaikan:",math:"b-8=2b \\Rightarrow b=-8,\\;c=-4.\\quad b+c = -12"},
-    ],
-  }),
-  Qn(8,"Menentukan Sudut Rotasi dari Pasangan Titik",{type:"mixed",
+  Qn(5,"Menentukan Sudut Rotasi dari Pasangan Titik",{type:"mixed",
     content:"Diketahui rotasi dari A(4, −6) menghasilkan A′(−4, 6). Nilai α adalah ...",
     parts:[
       {label:"A.",text:"−90°"},
@@ -199,7 +164,7 @@ const questions: Q[] = [
       {label:"Petunjuk:",math:"\\text{Periksa: pola } (4,-6)\\to(-4,6) \\equiv (x,y)\\to(-x,-y)"},
     ],
   }),
-  Qn(9,"Diagram — Kuadran Bayangan setelah Rotasi [O, 90°]",{type:"diagram",
+  Qn(6,"Diagram — Kuadran Bayangan setelah Rotasi [O, 90°]",{type:"pg",
     diagram:(
       <QuadrantSVG>
         <rect x={qx(-2.5)} y={qy(-1)} width={40} height={27}
@@ -210,17 +175,10 @@ const questions: Q[] = [
         <polygon points={`${qx(0.3)},${qy(1.8)} ${qx(0.1)},${qy(1.5)} ${qx(0.5)},${qy(1.6)}`} fill="#facc15"/>
       </QuadrantSVG>
     ),
-    content:"Bangun A terletak di kuadran III (koordinat x dan y keduanya negatif). Bangun diputar sebesar [O, 90°] berlawanan arah jarum jam.",
-    parts:[
-      {label:"Pertanyaan:",text:"Hasil rotasi bangun A terletak di kuadran ..."},
-      {label:"A.",text:"Kuadran I"},
-      {label:"B.",text:"Kuadran II"},
-      {label:"C.",text:"Kuadran III"},
-      {label:"D.",text:"Kuadran IV"},
-      {label:"Verifikasi:",math:"\\text{Titik uji: }(-2,-1)\\overset{90°}{\\longrightarrow}(1,-2)\\text{ (Kuadran IV)}"},
-    ],
+    content:"Bangun A terletak di kuadran III. Bangun diputar sebesar [O, 90°] berlawanan arah jarum jam. Hasil rotasi bangun A terletak di kuadran ...",
+    opts:["Kuadran I","Kuadran II","Kuadran III","Kuadran IV"],
   }),
-  Qn(10,"Kurva y = x² + 1 Dirotasi [O, 180°] — Pernyataan yang SALAH",{type:"mixed",
+  Qn(7,"Kurva y = x² + 1 Dirotasi [O, 180°] — Pernyataan yang SALAH",{type:"mixed",
     content:"Kurva y = x² + 1 dirotasi oleh [O, 180°]. Pernyataan berikut benar, kecuali ...",
     parts:[
       {label:"A.",text:"Kurva bayangan terbuka ke bawah."},
@@ -230,28 +188,28 @@ const questions: Q[] = [
       {label:"Petunjuk:",math:"R[O,180°]: (x,y)\\to(-x,-y).\\quad y=x^2+1\\to -y=(-x)^2+1 \\Rightarrow y=-(x^2+1)"},
     ],
   }),
-  Qn(11,"Bayangan Garis y = 2x oleh Rotasi [O, 90° CCW]",{type:"mixed",
+  Qn(8,"Bayangan Garis y = 2x oleh Rotasi [O, 90° CCW]",{type:"mixed",
     content:"Garis y = 2x dirotasikan oleh [O, 90°] berlawanan arah jarum jam. Bayangannya adalah ...",
     parts:[
       {label:"A.",text:"y = −2x"},
-      {label:"B.",text:"y = x sendiri"},
+      {label:"B.",text:"y = x"},
       {label:"C.",text:"x + 2y = 0"},
       {label:"D.",text:"2x + y = 0"},
       {label:"Langkah:",math:"\\text{Titik }(t,2t)\\overset{90°\\text{ CCW}}{\\longrightarrow}(-2t,t).\\;x=-2t,\\,y=t \\Rightarrow x=-2y \\Rightarrow x+2y=0"},
     ],
   }),
-  Qn(12,"Bayangan Garis x = 4 oleh Rotasi [O, −90°]",{type:"mixed",
+  Qn(9,"Bayangan Garis x = 4 oleh Rotasi [O, −90°]",{type:"mixed",
     content:"Persamaan garis x = 4 dirotasikan oleh [O, −90°] (searah jarum jam). Bayangannya adalah ...",
     parts:[
       {label:"A.",text:"x = −4"},
       {label:"B.",text:"y = −4"},
       {label:"C.",text:"y = 4"},
       {label:"D.",text:"y = x + 4"},
-      {label:"Langkah:",math:"\\text{CW 90°: }(x,y)\\to(y,-x).\\;\\text{Titik }(4,t)\\to(t,-4).\\;\\text{Set }x=t,\\,y=-4 \\Rightarrow y=-4"},
+      {label:"Langkah:",math:"\\text{CW 90°: }(x,y)\\to(y,-x).\\;\\text{Titik }(4,t)\\to(t,-4).\\;x=t,\\,y=-4 \\Rightarrow y=-4"},
     ],
   }),
-  Qn(13,"Bangun Segitiga OAB Dirotasi [O, 180°]",{type:"mixed",
-    content:"Bangun segitiga OAB dengan titik O(0,0), A(8, 0), dan B(8, 6) dirotasikan oleh [O, 180°]. Pernyataan yang benar adalah ...",
+  Qn(10,"Bangun Segitiga OAB Dirotasi [O, 180°]",{type:"mixed",
+    content:"Bangun segitiga OAB dengan O(0,0), A(8, 0), B(8, 6) dirotasikan oleh [O, 180°]. Pernyataan yang benar adalah ...",
     parts:[
       {label:"A.",text:"Bayangan A′ berada di kuadran II."},
       {label:"B.",text:"Bayangan B′(−8, −6) berada di kuadran III."},
@@ -260,59 +218,28 @@ const questions: Q[] = [
       {label:"Verifikasi:",math:"A(8,0)\\to A'(-8,0);\\quad B(8,6)\\to B'(-8,-6)\\text{ (Kuadran III)}"},
     ],
   }),
-  Qn(14,"Notasi Rotasi Berurutan — Benar atau Salah",{type:"mixed",
-    content:"Notasi R_α ∘ R_β menyatakan rotasi berurutan sejauh α kemudian β°. Tentukan kebenaran pernyataan berikut:",
-    parts:[
-      {label:"a.",math:"R_{90} \\circ R_{180} = R_{270}\\quad \\text{(Benar/Salah)}"},
-      {label:"b.",math:"R_{180} \\circ R_{90} = R_{(-90)}\\quad \\text{(Benar/Salah)}"},
-      {label:"c.",math:"R_{270} \\circ R_{(-90)} = R_{180}\\quad \\text{(Benar/Salah)}"},
-      {label:"d.",math:"R_{(-90)} \\circ R_{(-90)} = R_{180}\\quad \\text{(Benar/Salah)}"},
-      {label:"Petunjuk:",text:"Jumlahkan sudut-sudut rotasi. Hasil > 360° atau < −360° disesuaikan menjadi ekuivalen sudutnya."},
-    ],
+  Qn(11,"Notasi Rotasi Berurutan",{type:"pg",
+    content:"Diketahui R₉₀ ∘ R₁₈₀ menyatakan rotasi 90° dilakukan setelah rotasi 180° terhadap titik asal. Sudut total rotasi tersebut setara dengan ...",
+    opts:["R₉₀","R₁₈₀","R₂₇₀","R₃₆₀"],
   }),
-  Qn(15,"Essay — Rotasi CCW, CW, dan 180° pada Berbagai Titik",{type:"essay",
-    content:"Kerjakan soal-soal berikut.",
-    parts:[
-      {label:"a.",text:"Tentukan bayangan titik-titik berikut hasil rotasi 90° berlawanan arah jarum jam dengan pusat O(0,0): P(3, 7), Q(−5, 2), R(0, −6), S(−4, −1)."},
-      {label:"b.",text:"Tentukan bayangan titik-titik berikut hasil rotasi 90° searah jarum jam dengan pusat O(0,0): K(6, 3), L(−2, 5), M(4, −7), N(0, 9)."},
-      {label:"c.",text:"Tentukan bayangan titik-titik berikut hasil rotasi α = 180° dengan pusat O(0,0): A(5, −3), B(−7, 0), C(2, 8), D(−1, −4)."},
-      {label:"d.",text:"Jika M menyatakan pencerminan dan R menyatakan rotasi, manakah pernyataan yang benar?\n  i.  M(sumbu-x) = R[O, α = −180°]\n  ii.  M(y = x) = R[O, α = 90°]\n  iii.  R[O, α = 360°] = transformasi identitas\n  iv.  M[O] = R[O, α = 180°]"},
-    ],
+  /* ══════════ 40 SOAL PILIHAN GANDA (PG) ══════════ */
+  Qn(12,"Rotasi 90° CCW — Bayangan Titik",{type:"pg",
+    content:"Titik C(5, −3) dirotasi 90° berlawanan arah jarum jam terhadap titik asal. Koordinat bayangan C adalah ...",
+    opts:["C′(−5, 3)","C′(3, 5)","C′(5, 3)","C′(−3, −5)"],
   }),
-  /* ══════════ 40 SOAL ASLI (renumbered 16–55) ══════════ */
-  Qn(16,"Rotasi 90° Berlawanan Jarum Jam (CCW)",{type:"mixed",
-    content:"Rotasi 90° CCW terhadap titik asal memetakan (x, y) → (−y, x). Tentukan bayangan titik-titik berikut:",
-    parts:[
-      {label:"a.",math:"A(3, 2) \\to A'"},
-      {label:"b.",math:"B(-1, 4) \\to B'"},
-      {label:"c.",math:"C(5, -3) \\to C'"},
-    ],
+  Qn(13,"Rotasi 90° CW — Bayangan Titik",{type:"pg",
+    content:"Titik Q(−3, 2) dirotasi 90° searah jarum jam terhadap titik asal. Koordinat bayangan Q adalah ...",
+    opts:["Q′(2, 3)","Q′(−2, −3)","Q′(3, 2)","Q′(−3, −2)"],
   }),
-  Qn(17,"Rotasi 90° Searah Jarum Jam (CW)",{type:"mixed",
-    content:"Rotasi 90° CW terhadap titik asal memetakan (x, y) → (y, −x). Tentukan bayangan:",
-    parts:[
-      {label:"a.",math:"P(4, 1) \\to P'"},
-      {label:"b.",math:"Q(-3, 2) \\to Q'"},
-      {label:"c.",math:"R(0, -5) \\to R'"},
-    ],
+  Qn(14,"Rotasi 180° — Bayangan Titik",{type:"pg",
+    content:"Titik C(6, −1) dirotasi 180° terhadap titik asal. Koordinat bayangan C adalah ...",
+    opts:["C′(1, −6)","C′(6, 1)","C′(−6, 1)","C′(−1, 6)"],
   }),
-  Qn(18,"Rotasi 180° terhadap Titik Asal",{type:"mixed",
-    content:"Rotasi 180° terhadap titik asal memetakan (x, y) → (−x, −y). Tentukan bayangan:",
-    parts:[
-      {label:"a.",math:"A(3, 4) \\to A'"},
-      {label:"b.",math:"B(-2, -5) \\to B'"},
-      {label:"c.",math:"C(6, -1) \\to C'"},
-    ],
+  Qn(15,"Rotasi 270° CCW — Bayangan Titik",{type:"pg",
+    content:"Titik K(2, 3) dirotasi 270° berlawanan arah jarum jam terhadap titik asal. Koordinat bayangan K adalah ...",
+    opts:["K′(−3, 2)","K′(3, −2)","K′(−2, −3)","K′(2, 3)"],
   }),
-  Qn(19,"Rotasi 270° CCW (= 90° CW)",{type:"mixed",
-    content:"Rotasi 270° CCW terhadap titik asal memetakan (x, y) → (y, −x). Tentukan bayangan:",
-    parts:[
-      {label:"a.",math:"K(2, 3) \\to K'"},
-      {label:"b.",math:"L(-4, 1) \\to L'"},
-      {label:"c.",math:"M(3, -3) \\to M'"},
-    ],
-  }),
-  Qn(20,"Rotasi — Diagram Segitiga 90° CCW",{type:"diagram",
+  Qn(16,"Diagram — Rotasi 90° CCW pada Segitiga",{type:"pg",
     diagram:(
       <GridSVG>
         <Poly pts={[[1,1],[4,1],[1,4]]} color="#fb923c" label="△ABC"/>
@@ -321,47 +248,26 @@ const questions: Q[] = [
         <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
       </GridSVG>
     ),
-    content:"Segitiga ABC dirotasi 90° CCW terhadap titik asal O.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat A, B, C dari diagram."},
-      {label:"b.",text:"Verifikasi koordinat A′, B′, C′ menggunakan rumus rotasi 90° CCW."},
-      {label:"c.",text:"Apakah luas segitiga berubah setelah rotasi?"},
-    ],
+    content:"Perhatikan diagram. Segitiga ABC dengan B(4, 1) dirotasi 90° CCW terhadap titik asal. Koordinat bayangan B′ adalah ...",
+    opts:["B′(−4, 1)","B′(1, 4)","B′(−1, 4)","B′(4, −1)"],
   }),
-  Qn(21,"Menemukan Sudut Rotasi",{type:"mixed",
-    content:"Titik P(3, 0) dirotasi terhadap titik asal menghasilkan bayangan P′.",
-    parts:[
-      {label:"a.",math:"\\text{Jika } P'(0, 3), \\text{ berapa derajat sudut rotasinya?}"},
-      {label:"b.",math:"\\text{Jika } P'(-3, 0), \\text{ berapa derajat sudut rotasinya?}"},
-      {label:"c.",math:"\\text{Jika } P'(0, -3), \\text{ berapa derajat sudut rotasinya (CCW)?}"},
-    ],
+  Qn(17,"Menemukan Sudut Rotasi",{type:"pg",
+    content:"Titik P(3, 0) dirotasi terhadap titik asal menghasilkan P′(0, 3). Sudut rotasi yang digunakan adalah ...",
+    opts:["90° CW","90° CCW","180°","270° CCW"],
   }),
-  Qn(22,"Rotasi terhadap Titik Bukan Asal",{type:"mixed",
-    content:"Titik A(5, 3) dirotasi 90° CCW terhadap titik pusat P(2, 1). Langkah: translasi ke O, rotasi, balik translasi.",
-    parts:[
-      {label:"a.",math:"\\text{Translasi: } A - P = (5-2, 3-1) = (3, 2)"},
-      {label:"b.",math:"\\text{Rotasi 90° CCW: } (3, 2) \\to (-2, 3)"},
-      {label:"c.",math:"\\text{Balik translasi: } (-2, 3) + P = (-2+2, 3+1) = (0, 4) = A'"},
-    ],
+  Qn(18,"Rotasi terhadap Titik Bukan Asal",{type:"pg",
+    content:"Titik A(5, 3) dirotasi 90° CCW terhadap pusat P(2, 1). Koordinat bayangan A adalah ...",
+    opts:["A′(0, 2)","A′(0, 4)","A′(2, 4)","A′(−2, 4)"],
   }),
-  Qn(23,"Rotasi 180° — UN Style",{type:"mixed",
-    content:"Segitiga PQR dengan P(1,2), Q(4,2), R(3,5) dirotasi 180° terhadap titik asal.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat P′, Q′, R′."},
-      {label:"b.",text:"Di kuadran manakah segitiga bayangan berada?"},
-      {label:"c.",text:"Apakah bentuk dan ukuran segitiga berubah?"},
-    ],
+  Qn(19,"Rotasi 180° — Bayangan di Kuadran",{type:"pg",
+    content:"Titik Q(4, 2) dirotasi 180° terhadap titik asal. Koordinat bayangan Q adalah ...",
+    opts:["Q′(2, 4)","Q′(−4, 2)","Q′(4, −2)","Q′(−4, −2)"],
   }),
-  Qn(24,"Rotasi dan Kuadran",{type:"mixed",
-    content:"Titik A(3, 4) berada di Kuadran I. Setelah dirotasi terhadap titik asal, tentukan kuadran bayangan untuk masing-masing rotasi:",
-    parts:[
-      {label:"a.",text:"Rotasi 90° CCW"},
-      {label:"b.",text:"Rotasi 180°"},
-      {label:"c.",text:"Rotasi 270° CCW"},
-      {label:"d.",text:"Rotasi 360°"},
-    ],
+  Qn(20,"Rotasi 90° CCW — Kuadran Hasil",{type:"pg",
+    content:"Titik A(3, 4) berada di Kuadran I. Setelah dirotasi 90° CCW terhadap titik asal, bayangan A berada di kuadran ...",
+    opts:["Kuadran I","Kuadran II","Kuadran III","Kuadran IV"],
   }),
-  Qn(25,"Rotasi — Diagram 180°",{type:"diagram",
+  Qn(21,"Diagram — Rotasi 180°",{type:"pg",
     diagram:(
       <GridSVG>
         <Poly pts={[[1,1],[3,1],[2,4]]} color="#fb923c" label="△"/>
@@ -370,53 +276,30 @@ const questions: Q[] = [
         <ArcArrow cx={0} cy={0} r={20} startAngle={60} endAngle={240} color="#facc15"/>
       </GridSVG>
     ),
-    content:"Segitiga dirotasi 180° terhadap titik asal O.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat semua sudut segitiga asal dan bayangan."},
-      {label:"b.",text:"Verifikasi menggunakan rumus rotasi 180°."},
-      {label:"c.",text:"Apa yang terjadi pada orientasi (arah) segitiga setelah rotasi 180°?"},
-    ],
+    content:"Perhatikan diagram. Titik (1, 1) dari segitiga dirotasi 180° terhadap titik asal O. Koordinat bayangannya adalah ...",
+    opts:["(1, −1)","(−1, 1)","(−1, −1)","(1, 1)"],
   }),
-  Qn(26,"Rotasi Berturut-turut",{type:"mixed",
-    content:"Titik A(2, 1) dirotasi berturut-turut:",
-    parts:[
-      {label:"",text:"Rotasi 90° CCW, lalu 90° CCW lagi."},
-      {label:"a.",text:"Tentukan posisi A setelah rotasi pertama."},
-      {label:"b.",text:"Tentukan posisi A setelah rotasi kedua."},
-      {label:"c.",math:"\\text{Dua rotasi 90° CCW = satu rotasi } \\ldots\\text{°}"},
-    ],
+  Qn(22,"Rotasi Berturut-turut 2 × 90° CCW",{type:"pg",
+    content:"Titik A(2, 1) dirotasi 90° CCW dua kali berturut-turut terhadap titik asal. Koordinat bayangan akhir A adalah ...",
+    opts:["A″(−1, 2)","A″(−2, −1)","A″(2, −1)","A″(1, −2)"],
   }),
-  Qn(27,"Rotasi — Menemukan Titik Asal",{type:"mixed",
-    content:"Bayangan suatu titik setelah rotasi 90° CCW terhadap titik asal adalah P′(−3, 5). Tentukan titik asalnya P.",
-    parts:[
-      {label:"a.",math:"\\text{Gunakan invers: jika } (x,y) \\to (-y,x), \\text{ maka } (-y,x) \\to (x,y)"},
-      {label:"b.",text:"Tentukan koordinat P."},
-    ],
+  Qn(23,"Mencari Titik Asal dari Bayangan 90° CCW",{type:"pg",
+    content:"Bayangan suatu titik setelah rotasi 90° CCW terhadap titik asal adalah P′(−3, 5). Koordinat titik asal P adalah ...",
+    opts:["P(5, −3)","P(5, 3)","P(3, 5)","P(−5, 3)"],
   }),
-  Qn(28,"ANBK — Rotasi Persegi",{type:"mixed",
-    content:"Persegi ABCD dengan A(1,1), B(3,1), C(3,3), D(1,3) dirotasi 90° CW terhadap titik asal.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat bayangan A′, B′, C′, D′."},
-      {label:"b.",text:"Gambarkan sketsa persegi asal dan bayangannya."},
-      {label:"c.",text:"Apakah persegi ABCD ≅ A′B′C′D′?"},
-    ],
+  Qn(24,"Rotasi 90° CW — Sudut Persegi",{type:"pg",
+    content:"Titik A(1, 1) dari persegi ABCD dirotasi 90° searah jarum jam terhadap titik asal. Koordinat bayangan A adalah ...",
+    opts:["A′(−1, 1)","A′(1, −1)","A′(−1, −1)","A′(1, 1)"],
   }),
-  Qn(29,"Rotasi 90° — Sumbu Bergeser",{type:"mixed",
-    content:"Titik P(4, 2) dirotasi 90° CCW terhadap pusat R(1, 1).",
-    parts:[
-      {label:"a.",text:"Langkah 1: Hitung vektor dari R ke P: P − R = (4−1, 2−1) = (3, 1)."},
-      {label:"b.",text:"Langkah 2: Rotasi vektor 90° CCW: (3, 1) → (−1, 3)."},
-      {label:"c.",text:"Langkah 3: Tambahkan kembali R: (−1+1, 3+1) = P′(0, 4)."},
-    ],
+  Qn(25,"Rotasi 90° CCW dari Pusat Bukan Asal",{type:"pg",
+    content:"Titik P(4, 2) dirotasi 90° CCW terhadap pusat R(1, 1). Koordinat bayangan P adalah ...",
+    opts:["P′(0, 2)","P′(0, 4)","P′(2, 4)","P′(4, 0)"],
   }),
-  Qn(30,"Rotasi — UN 2018 Style",{type:"mixed",
-    content:"Diketahui titik A(−2, 3) dirotasikan 90° berlawanan arah jarum jam terhadap titik asal. Bayangan A adalah ...",
-    parts:[
-      {label:"",text:"Pilihan: a. (3, 2)   b. (−3, −2)   c. (−3, 2)   d. (3, −2)"},
-      {label:"Jawab:",text:"Tentukan dan jelaskan langkah penyelesaiannya."},
-    ],
+  Qn(26,"Rotasi 90° CCW — UN Style",{type:"pg",
+    content:"Titik A(−2, 3) dirotasikan 90° berlawanan arah jarum jam terhadap titik asal. Bayangan A adalah ...",
+    opts:["(3, 2)","(−3, −2)","(−3, 2)","(3, −2)"],
   }),
-  Qn(31,"Rotasi — Diagram Persegi Panjang 90° CW",{type:"diagram",
+  Qn(27,"Diagram — Persegi Panjang Rotasi 90° CW",{type:"pg",
     diagram:(
       <GridSVG>
         <Poly pts={[[1,1],[4,1],[4,3],[1,3]]} color="#fb923c" label="ABCD"/>
@@ -425,61 +308,34 @@ const questions: Q[] = [
         <ArcArrow cx={0} cy={0} r={25} startAngle={100} endAngle={-10} color="#facc15"/>
       </GridSVG>
     ),
-    content:"Persegi panjang ABCD dirotasi 90° CW terhadap titik asal.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat semua sudut ABCD dari diagram."},
-      {label:"b.",text:"Verifikasi koordinat A′B′C′D′ menggunakan rumus rotasi 90° CW."},
-      {label:"c.",text:"Apakah panjang dan lebar persegi panjang berubah setelah rotasi?"},
-    ],
+    content:"Perhatikan diagram. Titik B(4, 1) dari persegi panjang ABCD dirotasi 90° CW terhadap titik asal. Koordinat bayangan B′ adalah ...",
+    opts:["B′(−4, 1)","B′(1, −4)","B′(4, −1)","B′(−1, 4)"],
   }),
-  Qn(32,"TKA — Rotasi 270°",{type:"mixed",
-    content:"Titik Q(−2, 5) dirotasi 270° CCW terhadap titik asal. Rotasi 270° CCW = 90° CW, memetakan (x,y) → (y, −x).",
-    parts:[
-      {label:"a.",text:"Tentukan bayangan Q."},
-      {label:"b.",math:"\\text{Tentukan juga bayangan Q jika dirotasi 90° CCW: } Q \\to Q_1"},
-      {label:"c.",text:"Apakah Q dan Q₁ berbeda? Jelaskan mengapa."},
-    ],
+  Qn(28,"Rotasi 270° CCW — TKA Style",{type:"pg",
+    content:"Titik Q(−2, 5) dirotasi 270° berlawanan arah jarum jam terhadap titik asal. Koordinat bayangan Q adalah ...",
+    opts:["Q′(2, −5)","Q′(5, 2)","Q′(−5, −2)","Q′(−2, −5)"],
   }),
-  Qn(33,"Rotasi 360°",{type:"mixed",
-    content:"Titik M(a, b) dirotasi 360° terhadap sembarang pusat rotasi.",
-    parts:[
-      {label:"a.",text:"Apa yang terjadi pada posisi M setelah rotasi 360°?"},
-      {label:"b.",math:"\\text{Nyatakan rotasi 360° secara matematis: } (a,b) \\to ?"},
-      {label:"c.",text:"Apakah rotasi 360° sama dengan transformasi identitas? Jelaskan."},
-    ],
+  Qn(29,"Rotasi 360°",{type:"pg",
+    content:"Titik M(3, −4) dirotasi 360° terhadap titik asal. Koordinat bayangan M adalah ...",
+    opts:["(−3, 4)","(4, −3)","(3, −4)","(−3, −4)"],
   }),
-  Qn(34,"Rotasi — Soal Cerita Jam",{type:"mixed",
-    content:"Jarum jam panjang pada jam 12.00 menunjuk ke atas (arah positif sumbu-y). Setiap 15 menit, jarum berputar 90° searah jarum jam.",
-    parts:[
-      {label:"a.",text:"Setelah 15 menit (12.15), ke arah mana jarum menunjuk?"},
-      {label:"b.",text:"Setelah 30 menit (12.30), ke arah mana jarum menunjuk?"},
-      {label:"c.",text:"Setelah 45 menit (12.45), ke arah mana jarum menunjuk?"},
-    ],
+  Qn(30,"Rotasi Jam — Arah Jarum",{type:"pg",
+    content:"Jarum panjang jam menunjuk ke atas (arah positif sumbu-y). Setelah berputar 90° searah jarum jam, jarum menunjuk ke arah ...",
+    opts:["Positif sumbu-y","Negatif sumbu-y","Positif sumbu-x","Negatif sumbu-x"],
   }),
-  Qn(35,"Rotasi — Titik Asal dari Bayangan",{type:"mixed",
-    content:"Bayangan suatu titik setelah rotasi 180° terhadap titik asal adalah K′(4, −3). Tentukan:",
-    parts:[
-      {label:"a.",text:"Koordinat titik asal K."},
-      {label:"b.",math:"\\text{Bayangan K jika dirotasi 90° CCW terhadap titik asal.}"},
-    ],
+  Qn(31,"Mencari Titik Asal dari Bayangan 180°",{type:"pg",
+    content:"Bayangan suatu titik setelah rotasi 180° terhadap titik asal adalah K′(4, −3). Koordinat titik asal K adalah ...",
+    opts:["K(−4, 3)","K(4, 3)","K(−4, −3)","K(3, −4)"],
   }),
-  Qn(36,"Rotasi — Segitiga dengan Koordinat Negatif",{type:"mixed",
-    content:"Segitiga dengan A(−3, −1), B(−1, −1), C(−2, −4) dirotasi 90° CCW terhadap titik asal.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat A′, B′, C′."},
-      {label:"b.",text:"Di kuadran mana segitiga bayangan berada?"},
-      {label:"c.",text:"Hitung luas segitiga ABC dan A′B′C′."},
-    ],
+  Qn(32,"Rotasi 90° CCW — Koordinat Negatif",{type:"pg",
+    content:"Titik A(−3, −1) dirotasi 90° berlawanan arah jarum jam terhadap titik asal. Koordinat bayangan A adalah ...",
+    opts:["A′(1, −3)","A′(−1, 3)","A′(3, 1)","A′(−3, 1)"],
   }),
-  Qn(37,"ANBK — Rotasi Berurutan",{type:"mixed",
-    content:"Titik P(1, 0) dirotasi berturut-turut empat kali dengan sudut 90° CCW terhadap titik asal.",
-    parts:[
-      {label:"a.",text:"Tentukan posisi P setelah setiap rotasi (4 bayangan)."},
-      {label:"b.",text:"Di mana P berada setelah 4 rotasi?"},
-      {label:"c.",text:"Apa bentuk lintasan yang dilalui P?"},
-    ],
+  Qn(33,"Rotasi Berurutan 4 Kali",{type:"pg",
+    content:"Titik P(1, 0) dirotasi empat kali berturut-turut 90° CCW terhadap titik asal. Setelah empat rotasi, koordinat P adalah ...",
+    opts:["P(0, 1)","P(−1, 0)","P(0, −1)","P(1, 0)"],
   }),
-  Qn(38,"Rotasi — Diagram Titik-titik",{type:"diagram",
+  Qn(34,"Diagram — Menentukan Sudut Rotasi",{type:"pg",
     diagram:(
       <GridSVG>
         <Dot x={4} y={0} color="#fb923c" r={4} label="A(4,0)"/>
@@ -490,69 +346,38 @@ const questions: Q[] = [
         <ArcArrow cx={0} cy={0} r={27} startAngle={0} endAngle={90} color="#facc15"/>
       </GridSVG>
     ),
-    content:"Diagram menunjukkan rotasi titik A dan B terhadap pusat O.",
-    parts:[
-      {label:"a.",text:"Berapa derajat sudut rotasi dan arah putarannya?"},
-      {label:"b.",text:"Verifikasi koordinat A′ dan B′ dengan rumus rotasi yang sesuai."},
-      {label:"c.",math:"\\text{Tentukan bayangan C(3,4) dengan rotasi yang sama.}"},
-    ],
+    content:"Perhatikan diagram. Titik A(4, 0) dipetakan ke A′(0, 4) melalui rotasi. Sudut dan arah rotasi yang digunakan adalah ...",
+    opts:["90° CW","90° CCW","180°","270° CCW"],
   }),
-  Qn(39,"Rotasi — Matriks",{type:"mixed",
-    content:"Matriks rotasi 90° CCW adalah:",
-    math:"R_{90} = \\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}",
-    parts:[
-      {label:"a.",math:"\\text{Hitung: } R_{90} \\begin{pmatrix}3\\\\-2\\end{pmatrix}"},
-      {label:"b.",math:"\\text{Hitung: } R_{90} \\begin{pmatrix}-1\\\\4\\end{pmatrix}"},
-      {label:"c.",math:"\\text{Tulis matriks rotasi 180°: } R_{180} = \\begin{pmatrix}?&?\\\\?&?\\end{pmatrix}"},
-    ],
+  Qn(35,"Rotasi Matriks 90° CCW",{type:"pg",
+    content:"Matriks rotasi 90° CCW digunakan pada titik A(3, −2). Koordinat bayangan A adalah ...",
+    opts:["A′(−3, 2)","A′(2, 3)","A′(3, 2)","A′(−2, −3)"],
   }),
-  Qn(40,"Rotasi — Jarak ke Pusat Tetap",{type:"mixed",
-    content:"Buktikan bahwa rotasi tidak mengubah jarak titik dari pusat rotasi.",
-    parts:[
-      {label:"a.",math:"\\text{Titik A(3,4) dirotasi 90° CCW menjadi A'(-4,3). Hitung |OA| dan |OA'|.}"},
-      {label:"b.",math:"\\text{Gunakan: } |OA| = \\sqrt{x^2+y^2}"},
-      {label:"c.",text:"Apa kesimpulan yang dapat kamu ambil?"},
-    ],
+  Qn(36,"Rotasi — Jarak Tetap",{type:"pg",
+    content:"Titik A(3, 4) dirotasi 90° CCW menghasilkan A′(−4, 3). Nilai |OA′| adalah ...",
+    opts:["3","4","5","7"],
   }),
-  Qn(41,"Rotasi — Soal Kontekstual Kipas",{type:"mixed",
-    content:"Baling-baling kipas angin memiliki tiga bilah yang masing-masing diputar 120° dari bilah sebelumnya. Bilah pertama mengarah ke titik A(3, 0).",
-    parts:[
-      {label:"a.",text:"Tentukan arah bilah kedua setelah rotasi 120° CCW terhadap pusat."},
-      {label:"b.",text:"Tentukan arah bilah ketiga setelah rotasi 240° CCW terhadap pusat."},
-      {label:"c.",text:"Setelah rotasi 360°, di mana bilah pertama berada?"},
-    ],
+  Qn(37,"Rotasi 90° CCW — Kipas",{type:"pg",
+    content:"Bilah kipas berada di posisi A(3, 0). Setelah rotasi 90° CCW terhadap pusat, posisi bilah menjadi ...",
+    opts:["A′(0, 3)","A′(0, −3)","A′(3, 0)","A′(−3, 0)"],
   }),
-  Qn(42,"Rotasi 90° CW — Segitiga Siku-siku",{type:"mixed",
-    content:"Segitiga siku-siku dengan K(0,0), L(3,0), M(0,4) dirotasi 90° CW terhadap titik asal.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat K′, L′, M′."},
-      {label:"b.",text:"Tentukan sisi-sisi segitiga bayangan dan bandingkan dengan segitiga asal."},
-      {label:"c.",text:"Di kuadran mana segitiga bayangan berada?"},
-    ],
+  Qn(38,"Rotasi 90° CW — Segitiga Siku-siku",{type:"pg",
+    content:"Segitiga siku-siku K(0,0), L(3,0), M(0,4) dirotasi 90° CW terhadap titik asal. Koordinat L′ adalah ...",
+    opts:["L′(0, 3)","L′(0, −3)","L′(3, 0)","L′(−3, 0)"],
   }),
-  Qn(43,"TKA — Rotasi dan Translasi Gabungan",{type:"mixed",
-    content:"Titik A(2, 3) dirotasi 180° terhadap titik asal menghasilkan A′. Kemudian A′ ditranslasikan oleh T = (1, −2) menghasilkan A″.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat A′."},
-      {label:"b.",text:"Tentukan koordinat A″."},
-    ],
+  Qn(39,"Rotasi dan Translasi Gabungan",{type:"pg",
+    content:"Titik A(2, 3) dirotasi 180° terhadap titik asal, lalu ditranslasikan oleh T = (1, −2). Koordinat bayangan akhir A adalah ...",
+    opts:["A″(−1, −5)","A″(1, −5)","A″(−1, 5)","A″(3, −5)"],
   }),
-  Qn(44,"Rotasi — Menentukan Pusat Rotasi",{type:"mixed",
-    content:"Titik P(2, 1) dipetakan ke P′(−1, 2) oleh suatu rotasi 90° CCW. Tentukan pusat rotasi.",
-    parts:[
-      {label:"a.",text:"Misal pusat rotasi adalah (a, b). Gunakan rumus rotasi 90° CCW terhadap (a, b)."},
-      {label:"b.",text:"Bentuk sistem persamaan dan selesaikan untuk a dan b."},
-      {label:"c.",text:"Tentukan pusat rotasi."},
-    ],
+  Qn(40,"Menentukan Pusat Rotasi",{type:"pg",
+    content:"Titik P(2, 1) dipetakan ke P′(−1, 2) oleh rotasi 90° CCW. Pusat rotasi tersebut adalah ...",
+    opts:["(1, 1)","(0, 0)","(1, 0)","(0, 1)"],
   }),
-  Qn(45,"Rotasi — UN 2020 Style",{type:"mixed",
-    content:"Titik A(3, −4) dirotasikan 270° berlawanan jarum jam terhadap titik asal menghasilkan ...",
-    parts:[
-      {label:"",text:"Pilihan: a. (4, 3)   b. (−4, −3)   c. (4, −3)   d. (−4, 3)"},
-      {label:"Jawab:",text:"Gunakan: 270° CCW = 90° CW, yaitu (x,y) → (y, −x)."},
-    ],
+  Qn(41,"Rotasi 270° CCW — UN 2020 Style",{type:"pg",
+    content:"Titik A(3, −4) dirotasikan 270° berlawanan jarum jam terhadap titik asal. Bayangan A adalah ...",
+    opts:["(4, 3)","(−4, −3)","(4, −3)","(−4, 3)"],
   }),
-  Qn(46,"Rotasi — Diagram Segitiga Berbeda Warna",{type:"diagram",
+  Qn(42,"Diagram — Segitiga Rotasi ke Kuadran IV",{type:"pg",
     diagram:(
       <GridSVG>
         <Poly pts={[[2,0],[5,0],[5,3]]} color="#fb923c" label="△ABC"/>
@@ -561,50 +386,30 @@ const questions: Q[] = [
         <ArcArrow cx={0} cy={0} r={18} startAngle={0} endAngle={-90} color="#facc15"/>
       </GridSVG>
     ),
-    parts:[
-      {label:"a.",text:"Berapa derajat rotasi dan arahnya?"},
-      {label:"b.",text:"Tentukan koordinat A, B, C dan A′, B′, C′."},
-      {label:"c.",text:"Verifikasi transformasi menggunakan rumus yang sesuai."},
-    ],
+    content:"Perhatikan diagram. Segitiga berputar dari kuadran I ke kuadran IV. Jenis rotasi yang terjadi adalah ...",
+    opts:["90° CCW","90° CW","180°","270° CCW"],
   }),
-  Qn(47,"Rotasi — Sifat Isometri",{type:"mixed",
-    content:"Segitiga ABC dengan A(1,0), B(4,0), C(1,3) dirotasi 90° CCW terhadap titik asal.",
-    parts:[
-      {label:"a.",text:"Tentukan A′, B′, C′."},
-      {label:"b.",math:"\\text{Hitung panjang AB dan A'B'. Apakah sama?}"},
-      {label:"c.",text:"Apakah rotasi termasuk isometri? Jelaskan."},
-    ],
+  Qn(43,"Rotasi — Sifat Isometri",{type:"pg",
+    content:"Segitiga ABC dengan A(1,0) dan B(4,0) dirotasi 90° CCW. Panjang sisi A′B′ adalah ...",
+    opts:["1","3","4","9"],
   }),
-  Qn(48,"Rotasi — Koordinat dengan Parameter",{type:"mixed",
-    content:"Titik P(a, b) dirotasi 90° CCW terhadap titik asal menghasilkan P′(−4, 3).",
-    parts:[
-      {label:"a.",text:"Tentukan nilai a dan b."},
-      {label:"b.",math:"\\text{Jika P kemudian dirotasi 180°, tentukan P''.}"},
-    ],
+  Qn(44,"Rotasi 90° CCW — Mencari Parameter",{type:"pg",
+    content:"Titik P(a, b) dirotasi 90° CCW terhadap titik asal menghasilkan P′(−4, 3). Nilai a + b adalah ...",
+    opts:["1","5","7","−1"],
   }),
-  Qn(49,"Rotasi — Bangun Simetri Putar",{type:"mixed",
-    content:"Persegi memiliki simetri putar. Tentukan sudut rotasi yang menghasilkan bayangan yang tepat sama dengan bangun asalnya.",
-    parts:[
-      {label:"a.",text:"Tuliskan semua sudut rotasi (kurang dari 360°) yang memenuhi syarat tersebut untuk persegi."},
-      {label:"b.",text:"Apakah segitiga sama sisi juga memiliki simetri putar? Jelaskan."},
-    ],
+  Qn(45,"Simetri Putar Persegi",{type:"pg",
+    content:"Sudut rotasi terkecil (lebih dari 0°) yang membuat persegi tampak sama seperti semula adalah ...",
+    opts:["45°","90°","120°","180°"],
   }),
-  Qn(50,"Rotasi — Koordinat Pecahan",{type:"mixed",
-    content:"Titik A(√3, 1) dirotasi 30° CCW terhadap titik asal.",
-    parts:[
-      {label:"a.",math:"\\text{Gunakan rumus: } x' = x\\cos\\theta - y\\sin\\theta, \\quad y' = x\\sin\\theta + y\\cos\\theta"},
-      {label:"b.",math:"\\cos 30° = \\frac{\\sqrt{3}}{2}, \\quad \\sin 30° = \\frac{1}{2}"},
-      {label:"c.",math:"\\text{Hitung koordinat A'.}"},
-    ],
+  Qn(46,"Rotasi 30° — Koordinat Khusus",{type:"pg",
+    content:"Titik A(√3, 1) dirotasi 30° CCW terhadap titik asal. Koordinat bayangan A adalah ...",
+    opts:["(√3, 1)","(1, √3)","(0, 2)","(2, 0)"],
   }),
-  Qn(51,"Rotasi — ANBK Tipe Analisis",{type:"mixed",
-    content:"Seorang siswa mengklaim bahwa rotasi 90° CCW dan rotasi 270° CW menghasilkan bayangan yang sama. Apakah benar?",
-    parts:[
-      {label:"a.",math:"\\text{Uji dengan titik P(3, 2). Hitung bayangan dengan 90° CCW dan 270° CW.}"},
-      {label:"b.",text:"Bandingkan hasil keduanya dan berikan kesimpulan."},
-    ],
+  Qn(47,"Rotasi 90° CCW dan 270° CW — Perbandingan",{type:"pg",
+    content:"Rotasi 90° CCW dan rotasi 270° CW terhadap titik asal menghasilkan bayangan yang sama. Pernyataan ini ...",
+    opts:["Salah, karena arahnya berbeda","Benar, karena 90° CCW setara dengan 270° CW","Benar hanya untuk titik di sumbu-x","Salah, sudutnya tidak sama"],
   }),
-  Qn(52,"Rotasi — Titik dan Bayangannya",{type:"diagram",
+  Qn(48,"Diagram — Menentukan Jenis Rotasi",{type:"pg",
     diagram:(
       <GridSVG>
         <Dot x={3} y={1} color="#fb923c" r={4} label="P(3,1)"/>
@@ -616,35 +421,20 @@ const questions: Q[] = [
         <ArcArrow cx={0} cy={0} r={30} startAngle={63} endAngle={153} color="#facc15"/>
       </GridSVG>
     ),
-    content:"Diagram menunjukkan rotasi P→P′ dan Q→Q′ terhadap pusat O.",
-    parts:[
-      {label:"a.",text:"Tentukan sudut dan arah rotasi berdasarkan koordinat P dan P′."},
-      {label:"b.",text:"Verifikasi dengan koordinat Q dan Q′."},
-    ],
+    content:"Perhatikan diagram. Rotasi yang memetakan P(3, 1) ke P′(−1, 3) adalah ...",
+    opts:["90° CW","90° CCW","180°","270° CW"],
   }),
-  Qn(53,"Rotasi — Aplikasi Roda",{type:"mixed",
-    content:"Sebuah titik pada tepi roda sepeda berada di posisi A(0, 30) cm dari pusat roda. Roda berputar 90° CW (searah pergerakan maju).",
-    parts:[
-      {label:"a.",text:"Tentukan posisi titik A setelah roda berputar 90° CW."},
-      {label:"b.",text:"Setelah satu putaran penuh (360°), di mana posisi A?"},
-    ],
+  Qn(49,"Rotasi 90° CW — Aplikasi Roda",{type:"pg",
+    content:"Titik A(0, 30) pada tepi roda dirotasi 90° CW. Koordinat A setelah rotasi adalah ...",
+    opts:["A′(30, 0)","A′(0, −30)","A′(−30, 0)","A′(0, 30)"],
   }),
-  Qn(54,"Rotasi — Semua Sudut Istimewa",{type:"mixed",
-    content:"Titik P(4, 0) dirotasi terhadap titik asal. Tentukan bayangannya untuk setiap sudut rotasi CCW berikut:",
-    parts:[
-      {label:"a.",math:"\\theta = 90°"},
-      {label:"b.",math:"\\theta = 180°"},
-      {label:"c.",math:"\\theta = 270°"},
-      {label:"d.",math:"\\theta = 360°"},
-    ],
+  Qn(50,"Rotasi 270° CCW — Sudut Istimewa",{type:"pg",
+    content:"Titik P(4, 0) dirotasi 270° CCW terhadap titik asal. Koordinat bayangan P adalah ...",
+    opts:["P′(0, 4)","P′(0, −4)","P′(−4, 0)","P′(4, 0)"],
   }),
-  Qn(55,"Rotasi — Soal UN Terapan",{type:"mixed",
-    content:"Sebuah baling-baling helikopter berputar searah jarum jam. Ujung baling-baling A berada di koordinat A(0, 5) pada suatu saat. Setelah 0,5 detik, baling-baling berputar 90°.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat A setelah 0,5 detik."},
-      {label:"b.",text:"Tentukan koordinat A setelah 1 detik (rotasi total 180°)."},
-      {label:"c.",text:"Tentukan koordinat A setelah 2 detik (rotasi total 360°)."},
-    ],
+  Qn(51,"Rotasi 90° CW — Baling-baling",{type:"pg",
+    content:"Ujung baling-baling berada di posisi A(0, 5). Setelah rotasi 90° searah jarum jam, koordinat A adalah ...",
+    opts:["A′(5, 0)","A′(0, −5)","A′(−5, 0)","A′(0, 5)"],
   }),
 ];
 
@@ -665,7 +455,7 @@ const RotasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 55 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 51 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -707,6 +497,16 @@ const RotasiPage = () => {
                     {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
                     {q.math && <div className="mb-3 overflow-x-auto"><BlockMath>{q.math}</BlockMath></div>}
                     {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
+                    {q.opts && (
+                      <div className="grid grid-cols-2 gap-2 mt-1 mb-1">
+                        {(["A","B","C","D"] as const).map((lbl, oi) => (
+                          <div key={lbl} className="flex items-center gap-2 bg-white/5 border border-orange-500/15 rounded-lg px-3 py-2">
+                            <span className="text-orange-400 text-xs font-bold shrink-0 w-4">{lbl}.</span>
+                            <span className="font-body text-xs text-white/85 leading-snug">{q.opts![oi]}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
