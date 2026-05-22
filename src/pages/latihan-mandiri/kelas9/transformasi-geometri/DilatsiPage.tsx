@@ -438,7 +438,7 @@ const DilatsiPage = () => {
             </div>
             <div className="bg-white/5 rounded-lg px-3 py-2">
               <p className="text-rose-400 text-[10px] font-bold mb-1">Pusat (a, b)</p>
-              <BlockMath>{String.raw`P' = (a,b) + k\bigl(P-(a,b)\bigr)`}</BlockMath>
+              <BlockMath>{String.raw`x' = a + k(x-a),\quad y' = b + k(y-b)`}</BlockMath>
             </div>
             <div className="grid grid-cols-2 gap-2 text-[10px]">
               <div className="bg-white/5 rounded-lg px-2 py-1.5">
