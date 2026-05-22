@@ -36,10 +36,6 @@ const BiografiPage = () => {
               <p className="text-white font-body text-sm">Irawan Sutiawan, M.Pd</p>
             </div>
             <div>
-              <p className="text-primary font-display text-xs mb-1">INSTITUSI</p>
-              <p className="text-white font-body text-sm">SMPN 28 Bandung</p>
-            </div>
-            <div>
               <p className="text-primary font-display text-xs mb-1">MATA PELAJARAN</p>
               <p className="text-white font-body text-sm">Matematika</p>
             </div>
