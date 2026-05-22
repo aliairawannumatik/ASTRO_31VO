@@ -203,6 +203,22 @@ const questions: Q[] = [
     content:"Grafik f(x) = (x + 3)² dicerminkan terhadap garis y = x. Bayangan titik puncak grafik f(x) berada di koordinat ...",
     opts:["(0, −3)","(−3, 0)","(3, 0)","(0, 3)"],
   }),
+  Qn(21,"Refleksi Berturut-turut — Sumbu Y lalu y = b",{type:"pg",
+    content:"Koordinat bayangan akhir titik A(−4, 1) setelah dicerminkan terhadap sumbu-Y, kemudian dilanjutkan refleksi terhadap garis y = 3 adalah ...",
+    opts:["A″(−4, 5)","A″(−4, 1)","A″(4, 1)","A″(4, 5)"],
+  }),
+  Qn(22,"Pencerminan Ganda — y = −x lalu y = x",{type:"pg",
+    content:"Titik P(−3, −4) dicerminkan terhadap garis y = −x, kemudian bayangannya dicerminkan terhadap garis y = x. Koordinat bayangan akhir P adalah ...",
+    opts:["P″(4, 3)","P″(3, 4)","P″(−3, 4)","P″(−4, 3)"],
+  }),
+  Qn(23,"Ordinat Bayangan — Refleksi x = a lalu y = −x",{type:"pg",
+    content:"Titik B(−6, 3) dicerminkan terhadap garis x = 1, kemudian hasilnya dicerminkan terhadap garis y = −x. Ordinat bayangan titik B adalah ...",
+    opts:["6","3","−3","−8"],
+  }),
+  Qn(24,"Menentukan Garis Cermin",{type:"pg",
+    content:"Diketahui titik K(−5, −3) dipetakan ke K′(3, 5) melalui suatu refleksi. Garis pencerminan yang digunakan adalah ...",
+    opts:["x = 1","y = 1","y = x","y = −x"],
+  }),
 ];
 
 const RefleksiPage = () => {
@@ -222,7 +238,7 @@ const RefleksiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 18 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 22 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
