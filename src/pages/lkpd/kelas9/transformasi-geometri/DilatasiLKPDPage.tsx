@@ -330,6 +330,62 @@ const practiceItems: PracticeItem[] = [
     hint: "Kalikan koordinat C dengan ½.",
     discussion: ["C'(½·0, ½·6) = (0, 3)."],
   },
+  {
+    id: "pp9",
+    question:
+      "Garis y = 2x + 3 didilatasi terhadap pusat O(0, 0) dengan k = 2. Persamaan bayangan garis tersebut adalah y = …",
+    kind: "fill",
+    answers: ["2x + 6", "y = 2x + 6", "2x+6"],
+    hint: "Substitusi x = x'/k dan y = y'/k ke persamaan asal, lalu sederhanakan.",
+    discussion: [
+      "Aturan: x = x'/k dan y = y'/k (balik transformasi).",
+      "Substitusi ke y = 2x + 3: y'/2 = 2(x'/2) + 3",
+      "y'/2 = x' + 3 → y' = 2x' + 6.",
+      "Jadi bayangan garis: y = 2x + 6 (konstanta dikali k, gradien tetap).",
+    ],
+  },
+  {
+    id: "pp10",
+    question:
+      "Bayangan suatu garis setelah dilatasi D[O, 3] adalah y = x − 9. Persamaan garis asalnya adalah y = …",
+    kind: "fill",
+    answers: ["x - 3", "x − 3", "x-3", "y = x - 3", "y = x − 3"],
+    hint: "Kebalikan: konstanta bayangan = k × konstanta asal. Cari konstanta asal.",
+    discussion: [
+      "Jika dilatasi D[O, k] menghasilkan bayangan y = mx + kc, maka garis asal adalah y = mx + c.",
+      "Bayangan: y = x − 9, dengan k = 3 → kc = −9 → c = −3.",
+      "Gradien tetap: m = 1.",
+      "Garis asal: y = x − 3.",
+      "Cek: dilatasi y = x − 3 dengan k = 3 → y'/3 = x'/3 − 3 → y' = x' − 9 ✓",
+    ],
+  },
+  {
+    id: "pp11",
+    question:
+      "Titik P(5, 4) didilatasi terhadap pusat A(2, 1) dengan k = 3. Bayangan P' = …",
+    kind: "fill",
+    answers: ["(11, 10)", "(11,10)", "11,10", "11, 10"],
+    hint: "Rumus: x' = a + k(x − a), y' = b + k(y − b). Pusat (a, b) = (2, 1).",
+    discussion: [
+      "x' = 2 + 3(5 − 2) = 2 + 9 = 11.",
+      "y' = 1 + 3(4 − 1) = 1 + 9 = 10.",
+      "P' = (11, 10).",
+    ],
+  },
+  {
+    id: "pp12",
+    question:
+      "Titik Q(1, 5) didilatasi terhadap pusat B(3, 2) dengan k = −2. Bayangan Q' = …",
+    kind: "fill",
+    answers: ["(7, -4)", "(7,-4)", "(7, −4)", "7,-4", "7, -4"],
+    hint: "Rumus: x' = a + k(x − a), y' = b + k(y − b). Pusat (a, b) = (3, 2), k = −2.",
+    discussion: [
+      "x' = 3 + (−2)(1 − 3) = 3 + (−2)(−2) = 3 + 4 = 7.",
+      "y' = 2 + (−2)(5 − 2) = 2 + (−2)(3) = 2 − 6 = −4.",
+      "Q' = (7, −4).",
+      "k negatif → bayangan berada di SEBERANG pusat B.",
+    ],
+  },
 ];
 
 const DilatasiLKPDPage = () => (
