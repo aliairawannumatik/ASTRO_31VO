@@ -125,10 +125,6 @@ const questions: Q[] = [
     content:"Translasi T memetakan P(3, \u22122) ke P\u2019(7, 4). Bayangan titik Q(\u22121, 5) oleh T yang sama adalah ...",
     opts:["(\u22125, \u22121)","(3, \u22121)","(\u22125, 11)","(3, 11)"],
   }),
-  Qn(12,"Translasi Titik Dasar",{type:"pg",
-    content:"Titik A(3, 4) ditranslasikan oleh T = (2, \u22123). Koordinat bayangan A adalah ...",
-    opts:["(1, 7)","(5, 7)","(5, 1)","(1, 1)"],
-  }),
   Qn(14,"Translasi Bangun — Diagram",{type:"diagram",
     content:"Perhatikan diagram. Bangun A dipetakan ke A\u2019 oleh translasi T. Vektor T adalah ...",
     opts:["(2, 2)","(\u22122, \u22122)","(4, 0)","(0, 4)"],
@@ -171,10 +167,6 @@ const questions: Q[] = [
         <Dot x={2} y={3} color="#22d3ee" r={3} label="R(2,3)"/>
       </GridSVG>
     ),
-  }),
-  Qn(20,"Soal Cerita Translasi",{type:"pg",
-    content:"Robot bergerak dari P(2, 3) sejauh 5 satuan ke kanan dan 3 satuan ke bawah. Posisi akhir robot adalah ...",
-    opts:["(7, 6)","(\u22123, 0)","(7, 0)","(\u22123, 6)"],
   }),
   Qn(37,"Translasi Garis Horizontal",{type:"pg",
     content:"Garis y = 3 ditranslasikan oleh T = (4, \u22125). Persamaan bayangan garis adalah ...",
