@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { BlockMath } from 'react-katex';
 import { Maximize2 } from "lucide-react";
 
 const S = 200;
@@ -64,44 +65,53 @@ function DilLine({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: n
   return <line x1={px(x1)} y1={py(y1)} x2={px(x2)} y2={py(y2)} stroke="#facc15" strokeWidth="0.8" strokeDasharray="3,2"/>;
 }
 
-type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay"|"mixed"|"diagram" };
-const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
+type Choice = { label: string; text: string };
+type Q = {
+  n: number;
+  title: string;
+  content: string;
+  math?: string;
+  diagram?: React.ReactNode;
+  choices: Choice[];
+  answer: "A" | "B" | "C" | "D";
+};
 
 const questions: Q[] = [
   /* ══════════ GRUP 1: DILATASI PUSAT O(0,0) ══════════ */
-  Qn(1,"Mencari Koordinat Asal dari Bayangan",{type:"mixed",
-    content:"S(x, y) didilatasi dengan pusat O(0, 0) dan k = 3 menghasilkan S′(−9, 12). Koordinat titik S adalah ...",
-    parts:[
-      {label:"A.",text:"(−3, 4)"},
-      {label:"B.",text:"(3, −4)"},
-      {label:"C.",text:"(3, 4)"},
-      {label:"D.",text:"(−27, 36)"},
-      {label:"Langkah:",math:"S = \\frac{S'}{k} = \\frac{1}{3}(-9,12) = (-3,4)"},
+  {
+    n: 1, title: "Mencari Koordinat Asal dari Bayangan",
+    content: "S(x, y) didilatasi dengan pusat O(0, 0) dan k = 3 menghasilkan S′(−9, 12). Koordinat titik S adalah ...",
+    choices: [
+      { label: "A", text: "(−3, 4)" },
+      { label: "B", text: "(3, −4)" },
+      { label: "C", text: "(3, 4)" },
+      { label: "D", text: "(−27, 36)" },
     ],
-  }),
-  Qn(2,"Diagram — Faktor Skala Segitiga",{type:"diagram",
-    diagram:(
+    answer: "A",
+  },
+  {
+    n: 2, title: "Faktor Skala — Diagram Segitiga",
+    diagram: (
       <GridSVG>
         <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
         <Poly pts={[[1,0],[2,0],[2,2]]} color="#f43f5e" label="△ABC"/>
         <Poly pts={[[2,0],[4,0],[4,4]]} color="#22d3ee" fill="rgba(34,211,238,0.12)" label="△A'B'C'"/>
         <DilLine x1={0} y1={0} x2={4} y2={0}/>
         <DilLine x1={0} y1={0} x2={4} y2={4}/>
-        <DilLine x1={0} y1={0} x2={2} y2={0}/>
       </GridSVG>
     ),
-    content:"Perhatikan diagram di atas. Faktor skala dilatasi dari △ABC ke △A′B′C′ adalah ...",
-    parts:[
-      {label:"A.",text:"2"},
-      {label:"B.",text:"3"},
-      {label:"C.",text:"4"},
-      {label:"D.",text:"6"},
-      {label:"Petunjuk:",text:"Bandingkan koordinat A(1,0) dengan A′(2,0). Faktor skala = A′/A."},
+    content: "Perhatikan diagram di atas. Faktor skala dilatasi dari △ABC ke △A′B′C′ adalah ...",
+    choices: [
+      { label: "A", text: "2" },
+      { label: "B", text: "3" },
+      { label: "C", text: "4" },
+      { label: "D", text: "6" },
     ],
-  }),
-  Qn(3,"Diagram — Faktor Skala Segi Empat",{type:"diagram",
-    diagram:(
+    answer: "A",
+  },
+  {
+    n: 3, title: "Faktor Skala — Diagram Segi Empat",
+    diagram: (
       <GridSVG>
         <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
         <Poly pts={[[1,0],[1,1],[0,1],[0,0]]} color="#f43f5e" label="KLMN"/>
@@ -111,28 +121,29 @@ const questions: Q[] = [
         <DilLine x1={0} y1={0} x2={0} y2={3}/>
       </GridSVG>
     ),
-    content:"Perhatikan diagram di atas. Faktor skala dilatasi segi empat KLMN ke segi empat K′L′M′N′ adalah ...",
-    parts:[
-      {label:"A.",text:"9"},
-      {label:"B.",text:"6"},
-      {label:"C.",text:"3"},
-      {label:"D.",text:"2"},
-      {label:"Petunjuk:",text:"Bandingkan koordinat K(1,0) dengan K′(3,0). Faktor skala = 3/1 = 3."},
+    content: "Perhatikan diagram di atas. Faktor skala dilatasi segi empat KLMN ke segi empat K′L′M′N′ adalah ...",
+    choices: [
+      { label: "A", text: "9" },
+      { label: "B", text: "6" },
+      { label: "C", text: "3" },
+      { label: "D", text: "2" },
     ],
-  }),
-  Qn(4,"Luas Bayangan Segitiga Setelah Dilatasi",{type:"mixed",
-    content:"Segitiga ABC mempunyai titik koordinat berturut-turut (2, 1), (5, 1), dan (2, 4). Jika △A′B′C′ adalah bayangan △ABC hasil dilatasi oleh [O(0,0), 3], luas △A′B′C′ adalah ...",
-    parts:[
-      {label:"A.",text:"4 satuan luas"},
-      {label:"B.",text:"9 satuan luas"},
-      {label:"C.",text:"36 satuan luas"},
-      {label:"D.",text:"81 satuan luas"},
-      {label:"Langkah:",math:"\\text{Luas }\\triangle ABC = \\tfrac{1}{2}|3 \\times 3| = 4{,}5 \\text{ satuan}"},
-      {label:"",math:"\\text{Luas }\\triangle A'B'C' = k^2 \\times 4{,}5 = 9 \\times 4{,}5 = 40{,}5 \\approx 36 \\text{ (pilihan terdekat)}"},
+    answer: "C",
+  },
+  {
+    n: 4, title: "Luas Bayangan Segitiga Setelah Dilatasi",
+    content: "Segitiga ABC mempunyai koordinat A(0, 0), B(4, 0), dan C(0, 3). Jika △A′B′C′ adalah bayangan △ABC hasil dilatasi D[O, 3], luas △A′B′C′ adalah ...",
+    choices: [
+      { label: "A", text: "6 satuan luas" },
+      { label: "B", text: "18 satuan luas" },
+      { label: "C", text: "36 satuan luas" },
+      { label: "D", text: "54 satuan luas" },
     ],
-  }),
-  Qn(5,"Dilatasi — Diagram Pembesaran",{type:"diagram",
-    diagram:(
+    answer: "D",
+  },
+  {
+    n: 5, title: "Luas Bayangan — Diagram Pembesaran",
+    diagram: (
       <GridSVG>
         <Poly pts={[[1,0],[2,0],[2,2],[1,2]]} color="#f43f5e" label="P"/>
         <Poly pts={[[2,0],[4,0],[4,4],[2,4]]} color="#22d3ee" fill="rgba(34,211,238,0.12)" label="P'"/>
@@ -142,15 +153,18 @@ const questions: Q[] = [
         <DilLine x1={0} y1={0} x2={2} y2={4}/>
       </GridSVG>
     ),
-    content:"Bangun P didilatasi terhadap pusat O dengan faktor skala tertentu menghasilkan P′.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat sudut-sudut P dan P′ dari diagram."},
-      {label:"b.",text:"Tentukan faktor skala dilatasi."},
-      {label:"c.",text:"Bandingkan luas P dan luas P′. Berapa kali lebih besar?"},
+    content: "Bangun P (merah) didilatasi terhadap pusat O menghasilkan P′ (biru). Luas P = 2 satuan luas. Berapa kali lebih besar luas P′ dibanding luas P?",
+    choices: [
+      { label: "A", text: "2 kali" },
+      { label: "B", text: "4 kali" },
+      { label: "C", text: "6 kali" },
+      { label: "D", text: "8 kali" },
     ],
-  }),
-  Qn(6,"Dilatasi — Diagram Segitiga",{type:"diagram",
-    diagram:(
+    answer: "B",
+  },
+  {
+    n: 6, title: "Koordinat Bayangan — Diagram Segitiga",
+    diagram: (
       <GridSVG>
         <Poly pts={[[0,0],[2,0],[0,3]]} color="#f43f5e" label="△ABC"/>
         <Poly pts={[[0,0],[4,0],[0,6]]} color="#a78bfa" fill="rgba(167,139,250,0.12)" label="△A'B'C'"/>
@@ -159,30 +173,40 @@ const questions: Q[] = [
         <DilLine x1={0} y1={0} x2={0} y2={6}/>
       </GridSVG>
     ),
-    parts:[
-      {label:"a.",text:"Tentukan koordinat A, B, C dan A′, B′, C′ dari diagram."},
-      {label:"b.",text:"Tentukan faktor skala dilatasi."},
-      {label:"c.",text:"Hitung perbandingan luas △ABC terhadap △A′B′C′."},
+    content: "Berdasarkan diagram, koordinat C′ (bayangan C(0, 3)) setelah dilatasi terhadap O adalah ...",
+    choices: [
+      { label: "A", text: "(0, 6)" },
+      { label: "B", text: "(0, 3)" },
+      { label: "C", text: "(4, 6)" },
+      { label: "D", text: "(2, 6)" },
     ],
-  }),
-  Qn(7,"Dilatasi dengan k Negatif",{type:"mixed",
-    content:"Dilatasi dengan pusat O(0,0) dan faktor skala k = −2 memetakan (x,y) → (−2x, −2y). Tentukan bayangan:",
-    parts:[
-      {label:"a.",math:"A(1, 3) \\to A'"},
-      {label:"b.",math:"B(-2, 1) \\to B'"},
-      {label:"c.",text:"Apa perbedaan antara dilatasi dengan k positif dan k negatif?"},
+    answer: "A",
+  },
+  {
+    n: 7, title: "Dilatasi dengan k Negatif",
+    content: "Titik A(1, 3) didilatasi dengan pusat O(0, 0) dan faktor skala k = −2. Bayangan A′ adalah ...",
+    choices: [
+      { label: "A", text: "(2, 6)" },
+      { label: "B", text: "(−2, −6)" },
+      { label: "C", text: "(−2, 6)" },
+      { label: "D", text: "(2, −6)" },
     ],
-  }),
-  Qn(8,"Dilatasi — UN Style",{type:"mixed",
-    content:"Segitiga PQR dengan P(2, 1), Q(6, 1), R(4, 5) didilatasi terhadap titik asal dengan faktor skala k = 2.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat P′, Q′, R′."},
-      {label:"b.",text:"Hitung luas segitiga PQR dan P′Q′R′."},
-      {label:"c.",text:"Berapa kali lebih besar luas bayangan dibanding luas asal?"},
+    answer: "B",
+  },
+  {
+    n: 8, title: "Perbandingan Luas Setelah Dilatasi",
+    content: "Segitiga PQR dengan P(2, 1), Q(6, 1), R(4, 5) didilatasi terhadap O dengan k = 2. Berapa kali lebih besar luas △P′Q′R′ dibanding luas △PQR?",
+    choices: [
+      { label: "A", text: "2 kali" },
+      { label: "B", text: "4 kali" },
+      { label: "C", text: "6 kali" },
+      { label: "D", text: "8 kali" },
     ],
-  }),
-  Qn(9,"Dilatasi — Diagram Penyusutan",{type:"diagram",
-    diagram:(
+    answer: "B",
+  },
+  {
+    n: 9, title: "Faktor Skala — Diagram Penyusutan",
+    diagram: (
       <GridSVG>
         <Poly pts={[[-4,-4],[4,-4],[4,4],[-4,4]]} color="#f43f5e" label="Asal"/>
         <Poly pts={[[-2,-2],[2,-2],[2,2],[-2,2]]} color="#34d399" fill="rgba(52,211,153,0.12)" label="Bayangan"/>
@@ -193,22 +217,29 @@ const questions: Q[] = [
         <DilLine x1={0} y1={0} x2={-4} y2={-4}/>
       </GridSVG>
     ),
-    content:"Persegi besar didilatasi terhadap pusat O menghasilkan persegi kecil.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat sudut-sudut kedua persegi dari diagram."},
-      {label:"b.",text:"Tentukan faktor skala dilatasi."},
-      {label:"c.",text:"Hitung rasio keliling dan luas persegi asal terhadap bayangannya."},
+    content: "Persegi besar (merah) didilatasi terhadap O menghasilkan persegi kecil (hijau). Faktor skala dilatasi tersebut adalah ...",
+    choices: [
+      { label: "A", text: "2" },
+      { label: "B", text: "1/3" },
+      { label: "C", text: "1/2" },
+      { label: "D", text: "1/4" },
     ],
-  }),
-  Qn(10,"Mencari Titik Asal dari Bayangan",{type:"mixed",
-    content:"Bayangan titik A setelah dilatasi dengan pusat O(0,0) dan k = 3 adalah A′(12, −9). Tentukan titik asalnya A.",
-    parts:[
-      {label:"a.",math:"\\text{Gunakan: } A = \\frac{A'}{k} = \\frac{1}{3}(12, -9)"},
-      {label:"b.",text:"Tentukan koordinat A."},
+    answer: "C",
+  },
+  {
+    n: 10, title: "Mencari Titik Asal dari Bayangan",
+    content: "Bayangan titik A setelah dilatasi dengan pusat O(0, 0) dan k = 3 adalah A′(12, −9). Koordinat titik A adalah ...",
+    choices: [
+      { label: "A", text: "(4, −3)" },
+      { label: "B", text: "(36, −27)" },
+      { label: "C", text: "(4, 3)" },
+      { label: "D", text: "(−4, 3)" },
     ],
-  }),
-  Qn(11,"Dilatasi — Diagram Perbandingan",{type:"diagram",
-    diagram:(
+    answer: "A",
+  },
+  {
+    n: 11, title: "Sifat Titik Pusat dan Bayangan — Diagram",
+    diagram: (
       <GridSVG>
         <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
         <Dot x={1} y={2} color="#f43f5e" r={4} label="A(1,2)"/>
@@ -219,49 +250,64 @@ const questions: Q[] = [
         <DilLine x1={0} y1={0} x2={6} y2={3}/>
       </GridSVG>
     ),
-    content:"Titik A dan B masing-masing didilatasi terhadap O menghasilkan A′ dan B′.",
-    parts:[
-      {label:"a.",text:"Tentukan faktor skala dari A ke A′."},
-      {label:"b.",text:"Verifikasi dengan B dan B′."},
-      {label:"c.",text:"Apakah O, A, A′ segaris? Apakah O, B, B′ segaris? Jelaskan."},
+    content: "Berdasarkan diagram, faktor skala dilatasi dari A ke A′ dan dari B ke B′ adalah ...",
+    choices: [
+      { label: "A", text: "2" },
+      { label: "B", text: "3" },
+      { label: "C", text: "4" },
+      { label: "D", text: "6" },
     ],
-  }),
-  Qn(12,"Dilatasi — Perbandingan Panjang Ruas",{type:"mixed",
-    content:"Ruas garis AB dengan A(1, 2) dan B(3, 4) didilatasi terhadap O(0,0) dengan k = 3.",
-    parts:[
-      {label:"a.",text:"Tentukan A′ dan B′."},
-      {label:"b.",text:"Hitung panjang AB dan A′B′."},
-      {label:"c.",math:"\\text{Gunakan: } |AB| = \\sqrt{(3-1)^2+(4-2)^2}"},
+    answer: "B",
+  },
+  {
+    n: 12, title: "Perbandingan Panjang Ruas Setelah Dilatasi",
+    content: "Ruas garis AB dengan A(1, 2) dan B(3, 4) didilatasi terhadap O(0, 0) dengan k = 3. Perbandingan panjang A′B′ terhadap AB adalah ...",
+    choices: [
+      { label: "A", text: "2 : 1" },
+      { label: "B", text: "3 : 1" },
+      { label: "C", text: "6 : 1" },
+      { label: "D", text: "9 : 1" },
     ],
-  }),
-  Qn(13,"Dilatasi — Koordinat dengan Variabel",{type:"mixed",
-    content:"Titik A(m, 2m) didilatasi terhadap O(0,0) dengan k = 3 menghasilkan A′(9, 18).",
-    parts:[
-      {label:"a.",text:"Tentukan nilai m."},
-      {label:"b.",text:"Tentukan koordinat titik A."},
-      {label:"c.",math:"\\text{Verifikasi: } 3 \\times A = A'?"},
+    answer: "B",
+  },
+  {
+    n: 13, title: "Dilatasi dengan Koordinat Variabel",
+    content: "Titik A(m, 2m) didilatasi terhadap O(0, 0) dengan k = 3 menghasilkan A′(9, 18). Nilai m adalah ...",
+    choices: [
+      { label: "A", text: "1" },
+      { label: "B", text: "2" },
+      { label: "C", text: "3" },
+      { label: "D", text: "6" },
     ],
-  }),
-  Qn(14,"Dilatasi — ANBK Tipe Analisis",{type:"mixed",
-    content:"Seorang siswa berkata: 'Dilatasi dengan k = −1 sama dengan rotasi 180°.' Apakah pernyataan ini benar untuk dilatasi terhadap titik asal?",
-    parts:[
-      {label:"a.",math:"\\text{Uji dengan A(3,2). Dilatasi k=-1: } A' = ?"},
-      {label:"b.",math:"\\text{Rotasi 180°: } A' = ?"},
-      {label:"c.",text:"Bandingkan hasilnya. Apakah pernyataan siswa benar?"},
+    answer: "C",
+  },
+  {
+    n: 14, title: "ANBK — Dilatasi k = −1 dan Rotasi 180°",
+    content: "Titik A(3, 2) didilatasi terhadap O dengan k = −1. Bayangan A′ adalah ...",
+    choices: [
+      { label: "A", text: "(3, −2)" },
+      { label: "B", text: "(−3, 2)" },
+      { label: "C", text: "(−3, −2)" },
+      { label: "D", text: "(−6, −4)" },
     ],
-  }),
+    answer: "C",
+  },
   /* ══════════ GRUP 2: DILATASI PUSAT (a, b) ══════════ */
-  Qn(15,"Dilatasi dengan Pusat Bergeser",{type:"mixed",
-    content:"Titik A(5, 4) didilatasi dengan pusat P(1, 2) dan k = 3.",
-    math:"A' = P + k(A-P) = (1,2) + 3\\big((5,4)-(1,2)\\big)",
-    parts:[
-      {label:"a.",text:"Hitung A − P."},
-      {label:"b.",text:"Kalikan dengan k = 3."},
-      {label:"c.",text:"Tambahkan P untuk mendapat A′."},
+  {
+    n: 15, title: "Dilatasi dengan Pusat Bergeser",
+    content: "Titik A(5, 4) didilatasi dengan pusat P(1, 2) dan k = 3. Bayangan A′ adalah ...",
+    math: "A' = P + k(A-P)",
+    choices: [
+      { label: "A", text: "(13, 8)" },
+      { label: "B", text: "(12, 6)" },
+      { label: "C", text: "(16, 14)" },
+      { label: "D", text: "(4, 2)" },
     ],
-  }),
-  Qn(16,"Dilatasi — Diagram Segitiga dengan Pusat Bukan O",{type:"diagram",
-    diagram:(
+    answer: "A",
+  },
+  {
+    n: 16, title: "Bayangan Titik — Diagram Pusat Bukan O",
+    diagram: (
       <GridSVG>
         <Dot x={1} y={1} color="#facc15" r={3} label="P(1,1)"/>
         <Poly pts={[[2,1],[4,1],[2,3]]} color="#f43f5e" label="△"/>
@@ -270,73 +316,86 @@ const questions: Q[] = [
         <DilLine x1={1} y1={1} x2={3} y2={5}/>
       </GridSVG>
     ),
-    content:"Segitiga merah didilatasi terhadap pusat P(1,1) menghasilkan segitiga biru.",
-    parts:[
-      {label:"a.",text:"Tentukan faktor skala dilatasi dari diagram."},
-      {label:"b.",text:"Verifikasi koordinat bayangan menggunakan rumus dilatasi pusat P."},
-      {label:"c.",text:"Hitung perbandingan luas kedua segitiga."},
+    content: "Segitiga merah didilatasi terhadap pusat P(1, 1). Koordinat bayangan titik (2, 1) adalah ...",
+    choices: [
+      { label: "A", text: "(3, 1)" },
+      { label: "B", text: "(4, 2)" },
+      { label: "C", text: "(5, 3)" },
+      { label: "D", text: "(2, 1)" },
     ],
-  }),
+    answer: "A",
+  },
   /* ══════════ GRUP 3: DILATASI KOMPOSISI ══════════ */
-  Qn(17,"ANBK — Dilatasi Dua Kali Berurutan",{type:"mixed",
-    content:"Titik A(1, 2) didilatasi dua kali berturut-turut terhadap titik asal:",
-    parts:[
-      {label:"",math:"\\text{Pertama dengan } k_1 = 2, \\text{ lalu dengan } k_2 = 3"},
-      {label:"a.",text:"Tentukan posisi A setelah dilatasi pertama."},
-      {label:"b.",text:"Tentukan posisi A setelah dilatasi kedua."},
-      {label:"c.",math:"\\text{Apakah sama dengan dilatasi tunggal } k = k_1 \\times k_2 = 6?"},
+  {
+    n: 17, title: "ANBK — Dilatasi Dua Kali Berurutan",
+    content: "Titik A(1, 2) didilatasi terhadap O dengan k₁ = 2, lalu hasilnya didilatasi lagi dengan k₂ = 3. Koordinat akhir A adalah ...",
+    choices: [
+      { label: "A", text: "(2, 4)" },
+      { label: "B", text: "(3, 6)" },
+      { label: "C", text: "(6, 12)" },
+      { label: "D", text: "(12, 24)" },
     ],
-  }),
-  Qn(18,"Dilatasi Gabungan dengan Transformasi Lain",{type:"mixed",
-    content:"Titik A(2, 3) didilatasi terhadap O dengan k = 2 menghasilkan A′. Kemudian A′ direfleksikan terhadap sumbu-x menghasilkan A″.",
-    parts:[
-      {label:"a.",text:"Tentukan A′."},
-      {label:"b.",text:"Tentukan A″."},
-      {label:"c.",text:"Apakah urutan transformasi mempengaruhi hasil akhir? Coba balik urutannya."},
+    answer: "C",
+  },
+  {
+    n: 18, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
+    content: "Titik A(2, 3) didilatasi terhadap O dengan k = 2 menghasilkan A′. Kemudian A′ direfleksikan terhadap sumbu-x menghasilkan A″. Koordinat A″ adalah ...",
+    choices: [
+      { label: "A", text: "(4, 6)" },
+      { label: "B", text: "(−4, 6)" },
+      { label: "C", text: "(4, −6)" },
+      { label: "D", text: "(2, −3)" },
     ],
-  }),
+    answer: "C",
+  },
   /* ══════════ GRUP 4: DILATASI KURVA LINEAR ══════════ */
-  Qn(19,"Bayangan Garis Lurus — Pusat O(0,0)",{type:"mixed",
-    content:"Garis y = 3x − 4 didilatasi terhadap pusat O(0, 0) dengan faktor skala k = 2.",
-    parts:[
-      {label:"a.",text:"Substitusi x = x′/k dan y = y′/k ke persamaan garis asal."},
-      {label:"b.",math:"\\frac{y'}{2} = 3 \\cdot \\frac{x'}{2} - 4"},
-      {label:"c.",text:"Sederhanakan untuk mendapat persamaan bayangan garis."},
-      {label:"Jawab:",math:"y' = 3x' - 8 \\quad \\Rightarrow \\quad y = 3x - 8"},
-      {label:"Aturan:",text:"Dilatasi D[O, k] pada garis y = mx + c menghasilkan y = mx + kc (gradien tetap, konstanta dikali k)."},
+  {
+    n: 19, title: "Bayangan Garis Lurus — Pusat O(0, 0)",
+    content: "Garis y = 3x − 4 didilatasi terhadap pusat O(0, 0) dengan faktor skala k = 2. Persamaan bayangan garis tersebut adalah ...",
+    choices: [
+      { label: "A", text: "y = 3x − 2" },
+      { label: "B", text: "y = 6x − 4" },
+      { label: "C", text: "y = 3x − 8" },
+      { label: "D", text: "y = 6x − 8" },
     ],
-  }),
-  Qn(20,"Garis Asal dari Bayangan — Pusat O(0,0)",{type:"mixed",
-    content:"Bayangan suatu garis setelah dilatasi D[O, 2] adalah y = 2x + 10. Tentukan persamaan garis asalnya.",
-    parts:[
-      {label:"a.",text:"Gunakan sifat: konstanta bayangan = k × konstanta asal."},
-      {label:"b.",math:"10 = 2 \\times c \\quad \\Rightarrow \\quad c = 5"},
-      {label:"c.",text:"Gradien tidak berubah (m = 2 tetap)."},
-      {label:"Jawab:",math:"\\text{Garis asal: } y = 2x + 5"},
-      {label:"Cek:",math:"\\text{Dilatasi } y = 2x+5 \\text{ dengan } k=2: \\; \\frac{y'}{2} = 2 \\cdot \\frac{x'}{2} + 5 \\Rightarrow y' = 2x' + 10 \\;✓"},
+    answer: "C",
+  },
+  {
+    n: 20, title: "Garis Asal dari Bayangan — Pusat O(0, 0)",
+    content: "Bayangan suatu garis setelah dilatasi D[O, 2] adalah y = 2x + 10. Persamaan garis asalnya adalah ...",
+    choices: [
+      { label: "A", text: "y = 2x + 20" },
+      { label: "B", text: "y = 2x + 5" },
+      { label: "C", text: "y = x + 5" },
+      { label: "D", text: "y = 4x + 10" },
     ],
-  }),
+    answer: "B",
+  },
   /* ══════════ GRUP 5: DILATASI PUSAT (a,b) LANJUTAN ══════════ */
-  Qn(21,"Dilatasi Pusat P(1, 2) dengan k = 3",{type:"mixed",
-    content:"Titik A(4, 6) didilatasi terhadap pusat P(1, 2) dengan faktor skala k = 3.",
-    math:"A' = P + k(A - P)",
-    parts:[
-      {label:"a.",math:"x' = 1 + 3(4 - 1) = 1 + 9 = 10"},
-      {label:"b.",math:"y' = 2 + 3(6 - 2) = 2 + 12 = 14"},
-      {label:"Jawab:",math:"A' = (10,\\; 14)"},
-      {label:"c.",text:"Verifikasi: apakah P, A, A′ segaris? (Tiga titik segaris jika selisih gradien P→A sama dengan P→A′.)"},
+  {
+    n: 21, title: "Dilatasi Pusat P(1, 2) dengan k = 3",
+    content: "Titik A(4, 6) didilatasi terhadap pusat P(1, 2) dengan faktor skala k = 3. Bayangan A′ adalah ...",
+    math: "A' = P + k(A - P)",
+    choices: [
+      { label: "A", text: "(10, 14)" },
+      { label: "B", text: "(13, 20)" },
+      { label: "C", text: "(7, 8)" },
+      { label: "D", text: "(12, 18)" },
     ],
-  }),
-  Qn(22,"Dilatasi Pusat Q(2, −1) dengan k = −2",{type:"mixed",
-    content:"Titik B(−1, 3) didilatasi terhadap pusat Q(2, −1) dengan faktor skala k = −2.",
-    math:"B' = Q + k(B - Q)",
-    parts:[
-      {label:"a.",math:"x' = 2 + (-2)(-1 - 2) = 2 + (-2)(-3) = 2 + 6 = 8"},
-      {label:"b.",math:"y' = -1 + (-2)(3 - (-1)) = -1 + (-2)(4) = -1 - 8 = -9"},
-      {label:"Jawab:",math:"B' = (8,\\; -9)"},
-      {label:"c.",text:"k negatif → bayangan berada di SEBERANG pusat Q dari titik B. Jelaskan mengapa B′ berada di posisi tersebut!"},
+    answer: "A",
+  },
+  {
+    n: 22, title: "Dilatasi Pusat Q(2, −1) dengan k = −2",
+    content: "Titik B(−1, 3) didilatasi terhadap pusat Q(2, −1) dengan faktor skala k = −2. Bayangan B′ adalah ...",
+    math: "B' = Q + k(B - Q)",
+    choices: [
+      { label: "A", text: "(−4, −7)" },
+      { label: "B", text: "(5, −9)" },
+      { label: "C", text: "(8, −9)" },
+      { label: "D", text: "(8, 5)" },
     ],
-  }),
+    answer: "C",
+  },
 ];
 
 const groupHeaders: Record<number, string> = {
@@ -347,8 +406,29 @@ const groupHeaders: Record<number, string> = {
   21: "📍 Dilatasi Pusat (a, b) — Lanjutan",
 };
 
+const CHOICE_COLORS = {
+  default: "bg-white/5 border-white/10 text-white/80 hover:bg-rose-500/10 hover:border-rose-400/40",
+  correct: "bg-emerald-500/20 border-emerald-400/60 text-emerald-300",
+  wrong:   "bg-rose-500/20 border-rose-400/60 text-rose-300",
+  reveal:  "bg-emerald-500/10 border-emerald-400/30 text-emerald-400/70",
+};
+
 const DilatsiPage = () => {
   const navigate = useNavigate();
+  const [selected, setSelected] = useState<Record<number, string>>({});
+
+  const handleSelect = (qn: number, label: string) => {
+    if (selected[qn]) return;
+    playPopSound();
+    setSelected(prev => ({ ...prev, [qn]: label }));
+  };
+
+  const correct = Object.entries(selected).filter(([n, l]) => {
+    const q = questions.find(q => q.n === Number(n));
+    return q && l === q.answer;
+  }).length;
+  const answered = Object.keys(selected).length;
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -363,10 +443,16 @@ const DilatsiPage = () => {
             DILATASI (PERKALIAN/PERUBAHAN UKURAN)
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
-          <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
+          <div className="mt-3 flex items-center gap-3 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
             <span className="text-rose-400 text-xs font-bold">📋 22 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            {answered > 0 && (
+              <>
+                <span className="text-white/30 text-xs">·</span>
+                <span className="text-emerald-400 text-xs font-bold">{correct}/{answered} benar</span>
+              </>
+            )}
           </div>
         </div>
 
@@ -399,61 +485,96 @@ const DilatsiPage = () => {
         </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => (
-            <div key={q.n}>
-              {groupHeaders[q.n] && (
-                <div className="flex items-center gap-3 mb-2 mt-4">
-                  <div className="flex-1 h-px bg-gradient-to-r from-rose-500/40 to-transparent"/>
-                  <span className="text-rose-300 text-[11px] font-bold tracking-widest uppercase whitespace-nowrap">
-                    {groupHeaders[q.n]}
-                  </span>
-                  <div className="flex-1 h-px bg-gradient-to-l from-rose-500/40 to-transparent"/>
-                </div>
-              )}
-              <div className="relative rounded-2xl overflow-hidden animate-slide-up"
-                style={{ animationDelay: `${i * 0.02}s` }}>
-                <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
-                <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
-                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
-                <div className="relative px-5 py-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-rose-500/20 border border-rose-400/50 flex items-center justify-center shrink-0">
-                      <span className="text-rose-300 text-xs font-bold">{q.n}</span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                        {q.title}
-                      </span>
-                      {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
-                      {q.math && <div className="mb-3 overflow-x-auto"><BlockMath>{q.math}</BlockMath></div>}
-                      {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
-                      {q.parts && (
-                        <div className="flex flex-col gap-2">
-                          {q.parts.map((p, pi) => (
-                            <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
-                              {p.label && <span className="text-rose-400 text-xs font-bold shrink-0 mt-0.5">{p.label}</span>}
-                              <div className="flex-1 min-w-0">
-                                {p.math && <div className="overflow-x-auto"><InlineMath>{p.math}</InlineMath></div>}
-                                {p.text && <span className="font-body text-sm text-white/80">{p.text}</span>}
-                              </div>
-                            </div>
-                          ))}
+          {questions.map((q, i) => {
+            const sel = selected[q.n];
+            const answered = !!sel;
+            return (
+              <div key={q.n}>
+                {groupHeaders[q.n] && (
+                  <div className="flex items-center gap-3 mb-2 mt-4">
+                    <div className="flex-1 h-px bg-gradient-to-r from-rose-500/40 to-transparent"/>
+                    <span className="text-rose-300 text-[11px] font-bold tracking-widest uppercase whitespace-nowrap">
+                      {groupHeaders[q.n]}
+                    </span>
+                    <div className="flex-1 h-px bg-gradient-to-l from-rose-500/40 to-transparent"/>
+                  </div>
+                )}
+                <div className="relative rounded-2xl overflow-hidden animate-slide-up"
+                  style={{ animationDelay: `${i * 0.02}s` }}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
+                  <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
+                  <div className="relative px-5 py-4">
+                    <div className="flex items-start gap-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border ${answered ? (sel === q.answer ? 'bg-emerald-500/20 border-emerald-400/50' : 'bg-rose-500/20 border-rose-400/50') : 'bg-rose-500/20 border-rose-400/50'}`}>
+                        <span className={`text-xs font-bold ${answered ? (sel === q.answer ? 'text-emerald-300' : 'text-rose-300') : 'text-rose-300'}`}>{q.n}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                          {q.title}
+                        </span>
+                        <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>
+                        {q.math && (
+                          <div className="mb-3 overflow-x-auto">
+                            <BlockMath>{q.math}</BlockMath>
+                          </div>
+                        )}
+                        {q.diagram && (
+                          <div className="mb-3 flex justify-center">{q.diagram}</div>
+                        )}
+                        <div className="grid grid-cols-1 gap-2">
+                          {q.choices.map(c => {
+                            let cls = CHOICE_COLORS.default;
+                            if (answered) {
+                              if (c.label === q.answer) cls = CHOICE_COLORS.correct;
+                              else if (c.label === sel) cls = CHOICE_COLORS.wrong;
+                              else cls = CHOICE_COLORS.reveal;
+                            }
+                            return (
+                              <button
+                                key={c.label}
+                                onClick={() => handleSelect(q.n, c.label)}
+                                disabled={answered}
+                                className={`flex items-center gap-3 w-full text-left rounded-xl border px-3 py-2.5 text-sm font-body transition-all duration-200 ${cls} ${!answered ? 'cursor-pointer' : 'cursor-default'}`}
+                              >
+                                <span className="font-bold text-xs shrink-0 w-5">{c.label}.</span>
+                                <span>{c.text}</span>
+                                {answered && c.label === q.answer && (
+                                  <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>
+                                )}
+                                {answered && c.label === sel && sel !== q.answer && (
+                                  <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>
+                                )}
+                              </button>
+                            );
+                          })}
                         </div>
-                      )}
+                        {answered && (
+                          <p className={`mt-2 text-xs font-bold ${sel === q.answer ? 'text-emerald-400' : 'text-rose-400'}`}>
+                            {sel === q.answer ? '✅ Benar!' : `❌ Kurang tepat. Jawaban yang benar: ${q.answer}`}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">🖼️ Fitur Visual</p>
-          <p className="text-white/60 text-xs font-body leading-relaxed">
-            Beberapa soal dilengkapi diagram bidang koordinat yang menunjukkan pembesaran dan penyusutan bangun terhadap pusat dilatasi. Soal-soal dipilih dari kisi-kisi UN, ANBK, dan TKA.
-          </p>
-        </div>
+        {answered === 22 && (
+          <div className="mt-6 bg-rose-900/30 border border-rose-500/30 rounded-xl p-5 text-center">
+            <p className="text-rose-300 text-lg font-bold mb-1">🎯 Skor Kamu</p>
+            <p className="text-white text-3xl font-bold">{correct} / 22</p>
+            <p className="text-white/50 text-xs mt-2">
+              {correct >= 20 ? "🌟 Luar biasa! Kamu menguasai Dilatasi!" :
+               correct >= 15 ? "👍 Bagus! Terus berlatih!" :
+               correct >= 10 ? "🚀 Lumayan! Pelajari kembali rumus-rumusnya." :
+               "💪 Semangat! Ulangi materi dan coba lagi."}
+            </p>
+          </div>
+        )}
 
         <div className="mt-6 text-center">
           <button
