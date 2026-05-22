@@ -436,6 +436,46 @@ const questions: Q[] = [
     content:"Ujung baling-baling berada di posisi A(0, 5). Setelah rotasi 90° searah jarum jam, koordinat A adalah ...",
     opts:["A′(5, 0)","A′(0, −5)","A′(−5, 0)","A′(0, 5)"],
   }),
+  Qn(52,"Rotasi 90° CW dari Titik Asal",{type:"pg",
+    content:"Titik B(5, 2) dirotasi sebesar 90° searah jarum jam terhadap titik asal O(0, 0). Koordinat bayangan B adalah ...",
+    opts:["B′(−5, 2)","B′(5, −2)","B′(2, −5)","B′(−2, 5)"],
+  }),
+  Qn(53,"Rotasi 90° CCW dari Titik Asal",{type:"pg",
+    content:"Titik K(3, −5) dirotasi sebesar 90° berlawanan arah jarum jam terhadap titik asal O(0, 0). Koordinat bayangan K adalah ...",
+    opts:["K′(5, 3)","K′(−3, 5)","K′(−5, −3)","K′(3, −5)"],
+  }),
+  Qn(54,"Rotasi 180° dari Titik Asal",{type:"pg",
+    content:"Titik T(−6, 3) dirotasi sebesar 180° terhadap titik asal O(0, 0). Koordinat bayangan T adalah ...",
+    opts:["T′(6, −3)","T′(−6, 3)","T′(3, −6)","T′(6, 3)"],
+  }),
+  Qn(55,"Rotasi 270° CW terhadap Pusat Bukan Asal",{type:"pg",
+    content:"Titik A(−1, −4) dirotasi terhadap pusat P(3, 2) sejauh 270° searah jarum jam. Koordinat bayangan A adalah ...",
+    opts:["(9, −2)","(−9, 2)","(2, 9)","(−2, −9)"],
+  }),
+  Qn(56,"Rotasi 90° CCW terhadap Pusat P",{type:"pg",
+    content:"Titik C(6, 1) dirotasi oleh R[P(2, −1), θ = 90°] berlawanan arah jarum jam. Koordinat bayangan C adalah ...",
+    opts:["C′(2, 3)","C′(0, 3)","C′(0, −3)","C′(−2, 3)"],
+  }),
+  Qn(57,"Rotasi 90° CCW — Pusat di Kuadran IV",{type:"pg",
+    content:"Bayangan titik A(5, 3) setelah dirotasi oleh R[P(1, −2), θ = 90°] berlawanan arah jarum jam adalah ...",
+    opts:["(−4, 2)","(4, −2)","(2, −4)","(−2, 4)"],
+  }),
+  Qn(58,"Rotasi −90° terhadap Pusat Bukan Asal",{type:"pg",
+    content:"Bayangan titik B(4, −1) setelah dirotasi oleh R[P(−2, 3), θ = −90°] adalah ...",
+    opts:["B′(−6, −3)","B′(6, 3)","B′(3, −6)","B′(−3, 6)"],
+  }),
+  Qn(59,"Rotasi CCW dilanjutkan Refleksi",{type:"pg",
+    content:"Titik L(2, −4) dirotasi oleh R[(0, 0), θ = 90°] berlawanan arah jarum jam, kemudian bayangannya direfleksikan terhadap garis y = 3. Koordinat bayangan akhir L adalah ...",
+    opts:["(4, 4)","(−4, 4)","(4, −4)","(−4, −4)"],
+  }),
+  Qn(60,"Translasi dilanjutkan Rotasi 180°",{type:"pg",
+    content:"Titik Q(3, −1) ditranslasikan oleh T = (−2, 3), kemudian dilanjutkan rotasi R[(1, −2), θ = 180°]. Koordinat bayangan akhir Q adalah ...",
+    opts:["(1, −6)","(−1, 6)","(6, 1)","(−6, −1)"],
+  }),
+  Qn(61,"Mencari Nilai a + b dari Bayangan Rotasi",{type:"pg",
+    content:"Bayangan titik M(a, b) setelah dirotasi oleh R[O(0, 0), θ = 90°] berlawanan arah jarum jam adalah M′(−3, 5). Nilai (a + b) adalah ...",
+    opts:["3","5","8","−8"],
+  }),
 ];
 
 const RotasiPage = () => {
@@ -455,7 +495,7 @@ const RotasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 51 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 61 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
