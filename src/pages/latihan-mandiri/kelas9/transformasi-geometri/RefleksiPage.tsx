@@ -144,15 +144,6 @@ const questions: Q[] = [
     content:"Titik A(x, y) berada di Kuadran II. Jika A dicerminkan berturut-turut terhadap sumbu X kemudian sumbu Y, maka bayangan akhir A″ berada di kuadran ...",
     opts:["Kuadran I","Kuadran II","Kuadran III","Kuadran IV"],
   }),
-  Qn(9,"Notasi Pencerminan Dua Kali",{type:"pg",
-    content:"Jika M_y adalah pencerminan terhadap sumbu Y sehingga P →(M_y)→ Q dan Q →(M_y)→ R, pernyataan yang pasti benar adalah ...",
-    opts:["P = Q","P = R","Q = R","P ≠ Q ≠ R"],
-  }),
-  Qn(10,"Komposisi M_x ∘ M_y",{type:"pg",
-    content:"Notasi M_x ∘ M_y berarti pencerminan berturut-turut: pertama terhadap sumbu Y, kemudian terhadap sumbu X. Bayangan titik K(a, b) oleh komposisi tersebut adalah ...",
-    math:"M_x \\circ M_y : (a, b) \\to \\;?",
-    opts:["(a, b)","(−a, b)","(a, −b)","(−a, −b)"],
-  }),
   Qn(11,"Diagram — Garis Cermin y = k",{type:"diagram",
     content:"Perhatikan diagram. Titik P(−3, 4) dicerminkan terhadap garis y = k menghasilkan P′(−3, −2). Nilai k adalah ...",
     opts:["−2","0","1","2"],
@@ -409,179 +400,11 @@ const questions: Q[] = [
       {label:"c.",text:"Apa kesimpulan umum untuk titik yang berada tepat pada garis cermin?"},
     ],
   }),
-  Qn(21,"TKA — Identifikasi Refleksi",{type:"mixed",
-    content:"Titik A(−3, 4) dan bayangannya A′(4, −3). Tentukan garis pencerminan yang digunakan.",
-    parts:[
-      {label:"a.",text:"Periksa apakah ini refleksi terhadap y = x atau y = −x."},
-      {label:"b.",text:"Jelaskan cara membedakan kedua jenis refleksi tersebut."},
-    ],
-  }),
-  Qn(22,"Refleksi Lingkaran",{type:"mixed",
-    content:"Lingkaran dengan pusat P(3, −2) dan jari-jari 5 satuan direfleksikan terhadap sumbu-x.",
-    parts:[
-      {label:"a.",text:"Tentukan pusat lingkaran bayangan."},
-      {label:"b.",text:"Apakah jari-jari berubah setelah refleksi?"},
-      {label:"c.",math:"\\text{Tulis persamaan lingkaran bayangan dalam bentuk } (x-a)^2+(y-b)^2=r^2."},
-    ],
-  }),
-  Qn(23,"Refleksi — Diagram Persegi Panjang",{type:"diagram",
-    diagram:(
-      <GridSVG>
-        <MirrorLine x={0} vertical={false} color="#facc15"/>
-        <Poly pts={[[1,1],[4,1],[4,3],[1,3]]} color="#34d399" label="ABCD"/>
-        <Poly pts={[[1,-1],[4,-1],[4,-3],[1,-3]]} color="#f472b6" fill="rgba(244,114,182,0.12)" label="A'B'C'D'"/>
-        <DashLine x1={1} y1={1} x2={1} y2={-1} color="#94a3b8"/>
-        <DashLine x1={4} y1={3} x2={4} y2={-3} color="#94a3b8"/>
-        <Dot x={1} y={1} color="#34d399" r={3} label="A(1,1)"/>
-        <Dot x={4} y={3} color="#34d399" r={3} label="C(4,3)"/>
-      </GridSVG>
-    ),
-    parts:[
-      {label:"a.",text:"Tentukan koordinat semua sudut ABCD dan A′B′C′D′ dari diagram."},
-      {label:"b.",text:"Apakah persegi panjang ABCD dan A′B′C′D′ kongruen? Hitunglah panjang dan lebarnya."},
-      {label:"c.",text:"Di mana posisi persegi panjang bayangan relatif terhadap sumbu-x?"},
-    ],
-  }),
   Qn(24,"Refleksi — Mencari Parameter",{type:"mixed",
     content:"Titik P(m, 3) direfleksikan terhadap sumbu-y menghasilkan P′(5, n). Tentukan nilai m dan n.",
     parts:[
       {label:"a.",text:"Gunakan rumus refleksi terhadap sumbu-y."},
       {label:"b.",text:"Tentukan nilai m dan n."},
-    ],
-  }),
-  Qn(25,"ANBK — Refleksi Ganda terhadap Dua Sumbu",{type:"mixed",
-    content:"Titik K(3, −2) direfleksikan terhadap sumbu-x menghasilkan K′, lalu K′ direfleksikan terhadap sumbu-y menghasilkan K″.",
-    parts:[
-      {label:"a.",text:"Tentukan K′ dan K″."},
-      {label:"b.",text:"Transformasi tunggal apa yang setara dengan dua refleksi berturut-turut ini?"},
-      {label:"c.",math:"\\text{Jika K'' = (-3, 2), apakah benar? Verifikasi!}"},
-    ],
-  }),
-  Qn(26,"Refleksi Titik Simetris",{type:"mixed",
-    content:"Titik A(a, b) dan titik B adalah refleksi A terhadap sumbu-x. Titik C adalah refleksi A terhadap sumbu-y.",
-    parts:[
-      {label:"a.",text:"Nyatakan koordinat B dan C dalam a dan b."},
-      {label:"b.",math:"\\text{Tentukan titik tengah AC dan titik tengah AB.}"},
-      {label:"c.",text:"Apakah titik tengah AC selalu berada di sumbu-y? Jelaskan."},
-    ],
-  }),
-  Qn(27,"Refleksi Garis terhadap y = x",{type:"mixed",
-    content:"Garis y = 2x + 3 direfleksikan terhadap garis y = x.",
-    parts:[
-      {label:"a.",text:"Tukar x dan y pada persamaan garis untuk mendapatkan persamaan bayangan."},
-      {label:"b.",text:"Tulis persamaan bayangan dalam bentuk y = mx + c."},
-      {label:"c.",text:"Apa hubungan gradien garis asal dan bayangan saat refleksi terhadap y = x?"},
-    ],
-  }),
-  Qn(28,"Refleksi Segitiga — UN Style",{type:"mixed",
-    content:"Segitiga dengan titik-titik P(2, 1), Q(6, 1), R(4, 5) direfleksikan terhadap garis y = x.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat P′, Q′, R′."},
-      {label:"b.",text:"Hitung panjang sisi PQ dan P′Q′. Apakah sama?"},
-      {label:"c.",text:"Hitung luas segitiga PQR dan P′Q′R′."},
-    ],
-  }),
-  Qn(29,"Refleksi — Garis x = 4",{type:"mixed",
-    content:"Tentukan bayangan titik-titik berikut setelah refleksi terhadap garis x = 4:",
-    parts:[
-      {label:"a.",math:"A(1, 3) \\to A'"},
-      {label:"b.",math:"B(7, -2) \\to B'"},
-      {label:"c.",math:"C(4, 5) \\to C'"},
-    ],
-  }),
-  Qn(30,"Refleksi — Garis y = −3",{type:"mixed",
-    content:"Titik-titik K, L, M direfleksikan terhadap garis y = −3. Tentukan koordinat bayangannya:",
-    parts:[
-      {label:"a.",math:"K(2, 1) \\to K'"},
-      {label:"b.",math:"L(-3, -5) \\to L'"},
-      {label:"c.",math:"M(0, -3) \\to M'"},
-    ],
-  }),
-  Qn(31,"Refleksi Jajargenjang",{type:"mixed",
-    content:"Jajargenjang ABCD dengan A(−3,1), B(1,1), C(2,3), D(−2,3) direfleksikan terhadap sumbu-y.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat bayangan A′B′C′D′."},
-      {label:"b.",text:"Apakah bayangan jajargenjang ini tetap berbentuk jajargenjang?"},
-      {label:"c.",text:"Bandingkan luas jajargenjang asal dan bayangannya."},
-    ],
-  }),
-  Qn(32,"Refleksi — Titik pada Sumbu",{type:"mixed",
-    content:"Titik P berada pada sumbu-x dengan koordinat P(k, 0).",
-    parts:[
-      {label:"a.",text:"Tentukan bayangan P terhadap sumbu-x."},
-      {label:"b.",text:"Tentukan bayangan P terhadap sumbu-y."},
-      {label:"c.",math:"\\text{Tentukan bayangan P terhadap garis } y = x."},
-    ],
-  }),
-  Qn(33,"TKA — Matriks Refleksi",{type:"mixed",
-    content:"Matriks transformasi untuk refleksi terhadap sumbu-x adalah:",
-    math:"M_x = \\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}",
-    parts:[
-      {label:"a.",math:"\\text{Tentukan bayangan A(3,-2) menggunakan matriks: } M_x \\begin{pmatrix}3\\\\-2\\end{pmatrix}"},
-      {label:"b.",math:"\\text{Tulis matriks refleksi terhadap sumbu-y: } M_y = \\begin{pmatrix}?&?\\\\?&?\\end{pmatrix}"},
-    ],
-  }),
-  Qn(34,"Refleksi — Soal Kontekstual",{type:"mixed",
-    content:"Sebuah cermin vertikal diletakkan pada garis x = 5. Sebuah bola berada di posisi A(2, 3).",
-    parts:[
-      {label:"a.",text:"Tentukan posisi bayangan bola di cermin."},
-      {label:"b.",text:"Berapa jarak bola dari cermin?"},
-      {label:"c.",text:"Berapa jarak antara bola asli dan bayangannya?"},
-    ],
-  }),
-  Qn(35,"Refleksi — Koordinat Pecahan",{type:"mixed",
-    content:"Titik A(3/2, −5/2) direfleksikan terhadap garis y = x.",
-    parts:[
-      {label:"a.",text:"Tentukan koordinat bayangan A′."},
-      {label:"b.",text:"Apakah A berada di atas atau di bawah garis y = x? Jelaskan."},
-    ],
-  }),
-  Qn(36,"Refleksi dan Titik Tengah",{type:"mixed",
-    content:"Titik A(4, 6) dicerminkan terhadap suatu garis dan menghasilkan A′(−2, 6). Tentukan garis cerminnya.",
-    parts:[
-      {label:"a.",text:"Hitung titik tengah AA′."},
-      {label:"b.",text:"Tentukan persamaan garis cermin (garis tersebut tegak lurus AA′ dan melalui titik tengahnya)."},
-    ],
-  }),
-  Qn(37,"Refleksi Segitiga — Luas Tetap",{type:"diagram",
-    diagram:(
-      <GridSVG>
-        <MirrorLine x={0} vertical={true} color="#facc15"/>
-        <Poly pts={[[1,1],[4,1],[1,4]]} color="#22d3ee" label="△KLM"/>
-        <Poly pts={[[-1,1],[-4,1],[-1,4]]} color="#f472b6" fill="rgba(244,114,182,0.12)" label="△K'L'M'"/>
-        <DashLine x1={1} y1={1} x2={-1} y2={1} color="#94a3b8"/>
-        <DashLine x1={4} y1={1} x2={-4} y2={1} color="#94a3b8"/>
-        <DashLine x1={1} y1={4} x2={-1} y2={4} color="#94a3b8"/>
-      </GridSVG>
-    ),
-    parts:[
-      {label:"a.",text:"Tentukan koordinat K, L, M, K′, L′, M′ dari diagram."},
-      {label:"b.",text:"Hitung luas △KLM dan △K′L′M′. Bandingkan."},
-      {label:"c.",text:"Apakah refleksi termasuk isometri? Jelaskan alasanmu."},
-    ],
-  }),
-  Qn(38,"Refleksi — ANBK Tipe Analisis",{type:"mixed",
-    content:"Seorang siswa mengklaim: 'Refleksi titik A(2, 3) terhadap sumbu-x menghasilkan A′(2, 3).' Apakah pernyataan ini benar?",
-    parts:[
-      {label:"a.",text:"Periksa jawaban siswa tersebut dengan menggunakan rumus refleksi sumbu-x."},
-      {label:"b.",text:"Jika salah, tentukan jawaban yang benar dan jelaskan kesalahan siswa."},
-    ],
-  }),
-  Qn(39,"Refleksi Penuh — 4 Garis",{type:"mixed",
-    content:"Tentukan bayangan titik P(3, 5) setelah dicerminkan terhadap masing-masing garis berikut:",
-    parts:[
-      {label:"a.",math:"\\text{Sumbu-}x \\to P_1"},
-      {label:"b.",math:"\\text{Sumbu-}y \\to P_2"},
-      {label:"c.",math:"y = x \\to P_3"},
-      {label:"d.",math:"y = -x \\to P_4"},
-    ],
-  }),
-  Qn(40,"Refleksi — Soal UN Terapan",{type:"mixed",
-    content:"Pada sebuah pertandingan bola, pemain berada di titik P(4, 2). Ia ingin memantulkan bola ke dinding (sumbu-y) dan mengarahkannya ke gawang di G(−6, 2).",
-    parts:[
-      {label:"a.",text:"Tentukan bayangan gawang G terhadap sumbu-y untuk mencari titik pantulan."},
-      {label:"b.",text:"Tentukan koordinat titik pantulan bola di dinding (sumbu-y)."},
-      {label:"c.",text:"Hitung total jarak yang ditempuh bola: dari P ke dinding, lalu ke G."},
     ],
   }),
 ];
@@ -603,7 +426,7 @@ const RefleksiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 60 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 19 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
