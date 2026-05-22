@@ -142,10 +142,6 @@ const questions: Q[] = [
     content:"Titik Q(1, 2) ditranslasikan berturut-turut oleh T\u2081 = (3, \u22121) kemudian T\u2082 = (\u22122, 4). Koordinat bayangan Q adalah ...",
     opts:["(4, 1)","(2, 5)","(5, 1)","(2, 7)"],
   }),
-  Qn(18,"Translasi Garis",{type:"pg",
-    content:"Garis y = 2x + 1 ditranslasikan oleh T = (3, \u22122). Persamaan bayangan garis adalah ...",
-    opts:["y = 2x \u2212 3","y = 2x + 3","y = 2x \u2212 7","y = 2x + 7"],
-  }),
   Qn(29,"Pergeseran pada Denah",{type:"pg",
     content:"Kamar tidur di titik A(5, 8) dipindahkan 3 satuan ke kiri dan 2 satuan ke atas. Koordinat baru kamar tidur adalah ...",
     opts:["(8, 6)","(2, 10)","(8, 10)","(2, 6)"],
@@ -167,6 +163,10 @@ const questions: Q[] = [
         <Dot x={2} y={3} color="#22d3ee" r={3} label="R(2,3)"/>
       </GridSVG>
     ),
+  }),
+  Qn(18,"Translasi Garis",{type:"pg",
+    content:"Garis y = 2x + 1 ditranslasikan oleh T = (3, \u22122). Persamaan bayangan garis adalah ...",
+    opts:["y = 2x \u2212 3","y = 2x + 3","y = 2x \u2212 7","y = 2x + 7"],
   }),
   Qn(37,"Translasi Garis Horizontal",{type:"pg",
     content:"Garis y = 3 ditranslasikan oleh T = (4, \u22125). Persamaan bayangan garis adalah ...",
