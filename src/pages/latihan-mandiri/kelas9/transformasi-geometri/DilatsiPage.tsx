@@ -295,12 +295,56 @@ const questions: Q[] = [
       {label:"c.",text:"Apakah urutan transformasi mempengaruhi hasil akhir? Coba balik urutannya."},
     ],
   }),
+  /* ══════════ GRUP 4: DILATASI KURVA LINEAR ══════════ */
+  Qn(19,"Bayangan Garis Lurus — Pusat O(0,0)",{type:"mixed",
+    content:"Garis y = 3x − 4 didilatasi terhadap pusat O(0, 0) dengan faktor skala k = 2.",
+    parts:[
+      {label:"a.",text:"Substitusi x = x′/k dan y = y′/k ke persamaan garis asal."},
+      {label:"b.",math:"\\frac{y'}{2} = 3 \\cdot \\frac{x'}{2} - 4"},
+      {label:"c.",text:"Sederhanakan untuk mendapat persamaan bayangan garis."},
+      {label:"Jawab:",math:"y' = 3x' - 8 \\quad \\Rightarrow \\quad y = 3x - 8"},
+      {label:"Aturan:",text:"Dilatasi D[O, k] pada garis y = mx + c menghasilkan y = mx + kc (gradien tetap, konstanta dikali k)."},
+    ],
+  }),
+  Qn(20,"Garis Asal dari Bayangan — Pusat O(0,0)",{type:"mixed",
+    content:"Bayangan suatu garis setelah dilatasi D[O, 2] adalah y = 2x + 10. Tentukan persamaan garis asalnya.",
+    parts:[
+      {label:"a.",text:"Gunakan sifat: konstanta bayangan = k × konstanta asal."},
+      {label:"b.",math:"10 = 2 \\times c \\quad \\Rightarrow \\quad c = 5"},
+      {label:"c.",text:"Gradien tidak berubah (m = 2 tetap)."},
+      {label:"Jawab:",math:"\\text{Garis asal: } y = 2x + 5"},
+      {label:"Cek:",math:"\\text{Dilatasi } y = 2x+5 \\text{ dengan } k=2: \\; \\frac{y'}{2} = 2 \\cdot \\frac{x'}{2} + 5 \\Rightarrow y' = 2x' + 10 \\;✓"},
+    ],
+  }),
+  /* ══════════ GRUP 5: DILATASI PUSAT (a,b) LANJUTAN ══════════ */
+  Qn(21,"Dilatasi Pusat P(1, 2) dengan k = 3",{type:"mixed",
+    content:"Titik A(4, 6) didilatasi terhadap pusat P(1, 2) dengan faktor skala k = 3.",
+    math:"A' = P + k(A - P)",
+    parts:[
+      {label:"a.",math:"x' = 1 + 3(4 - 1) = 1 + 9 = 10"},
+      {label:"b.",math:"y' = 2 + 3(6 - 2) = 2 + 12 = 14"},
+      {label:"Jawab:",math:"A' = (10,\\; 14)"},
+      {label:"c.",text:"Verifikasi: apakah P, A, A′ segaris? (Tiga titik segaris jika selisih gradien P→A sama dengan P→A′.)"},
+    ],
+  }),
+  Qn(22,"Dilatasi Pusat Q(2, −1) dengan k = −2",{type:"mixed",
+    content:"Titik B(−1, 3) didilatasi terhadap pusat Q(2, −1) dengan faktor skala k = −2.",
+    math:"B' = Q + k(B - Q)",
+    parts:[
+      {label:"a.",math:"x' = 2 + (-2)(-1 - 2) = 2 + (-2)(-3) = 2 + 6 = 8"},
+      {label:"b.",math:"y' = -1 + (-2)(3 - (-1)) = -1 + (-2)(4) = -1 - 8 = -9"},
+      {label:"Jawab:",math:"B' = (8,\\; -9)"},
+      {label:"c.",text:"k negatif → bayangan berada di SEBERANG pusat Q dari titik B. Jelaskan mengapa B′ berada di posisi tersebut!"},
+    ],
+  }),
 ];
 
 const groupHeaders: Record<number, string> = {
   1:  "📍 Dilatasi Pusat O(0, 0)",
   15: "📍 Dilatasi Pusat (a, b)",
   17: "🔀 Dilatasi Komposisi",
+  19: "📈 Dilatasi Kurva Linear — Pusat O(0, 0)",
+  21: "📍 Dilatasi Pusat (a, b) — Lanjutan",
 };
 
 const DilatsiPage = () => {
@@ -320,7 +364,7 @@ const DilatsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 18 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 22 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
