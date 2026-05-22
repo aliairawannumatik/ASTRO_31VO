@@ -184,6 +184,18 @@ const questions: Q[] = [
     content:"Parabola y = x\u00b2 ditranslasikan oleh T = (2, \u22123). Persamaan bayangan parabola adalah ...",
     opts:["y = x\u00b2 \u2212 4x + 7","y = x\u00b2 \u2212 4x + 1","y = x\u00b2 + 4x + 7","y = x\u00b2 + 4x + 1"],
   }),
+  Qn(21,"Translasi Garis Dua Kali Berturut-turut",{type:"pg",
+    content:"Garis y = 3x \u2212 2 ditranslasikan berturut-turut oleh T\u2081 = (1, \u22122) kemudian T\u2082 = (3, 4). Bayangan garis setelah dua translasi tersebut adalah ...",
+    opts:["y = 3x \u2212 12","y = 3x + 12","y = 3x \u2212 8","y = 3x \u2212 2"],
+  }),
+  Qn(22,"Garis Asal dari Bayangan dan Vektor",{type:"pg",
+    content:"Garis g ditranslasikan oleh T = (2, \u22125) menghasilkan bayangan g\u2019 : y = 2x + 3. Persamaan garis g sebelum translasi adalah ...",
+    opts:["y = 2x + 12","y = 2x \u2212 7","y = 2x + 3","y = 2x \u2212 12"],
+  }),
+  Qn(23,"Mencari Vektor dari Garis Asal dan Bayangan",{type:"pg",
+    content:"Garis y = 3x + 8 ditranslasikan oleh T = (a, b) sehingga bayangannya adalah y = 3x \u2212 1. Jika diketahui a = 2, maka vektor translasi T adalah ...",
+    opts:["(2, \u22123)","(2, 3)","(\u22122, \u22123)","(\u22122, 3)"],
+  }),
 ];
 
 const TranslasiPage = () => {
