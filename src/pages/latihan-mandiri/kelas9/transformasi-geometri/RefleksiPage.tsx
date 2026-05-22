@@ -231,6 +231,34 @@ const questions: Q[] = [
     content:"Titik M(3, −5) direfleksikan terhadap sumbu-X, kemudian bayangannya direfleksikan terhadap titik asal O(0, 0). Koordinat bayangan akhir M adalah ...",
     opts:["M″(3, 5)","M″(−3, 5)","M″(−3, −5)","M″(3, −5)"],
   }),
+  Qn(28,"Refleksi Fungsi Linear — Sumbu-x",{type:"pg",
+    content:"Fungsi linear f(x) = 3x − 2 dicerminkan terhadap sumbu-x. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = 3x + 2","y = −3x + 2","y = −3x − 2","y = 3x − 2"],
+  }),
+  Qn(29,"Refleksi Fungsi Linear — Sumbu-y",{type:"pg",
+    content:"Fungsi linear f(x) = 3x − 2 dicerminkan terhadap sumbu-y. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = 3x + 2","y = −3x + 2","y = −3x − 2","y = 3x − 2"],
+  }),
+  Qn(30,"Refleksi Fungsi Linear — y = x",{type:"pg",
+    content:"Fungsi linear f(x) = 2x − 6 dicerminkan terhadap garis y = x. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = 2x + 3","y = (1/2)x + 3","y = −(1/2)x + 3","y = −2x − 3"],
+  }),
+  Qn(31,"Refleksi Fungsi Linear — y = −x",{type:"pg",
+    content:"Fungsi linear f(x) = 2x + 4 dicerminkan terhadap garis y = −x. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = (1/2)x + 2","y = −(1/2)x − 2","y = 2x − 4","y = −2x + 4"],
+  }),
+  Qn(32,"Refleksi Fungsi Linear — Titik Asal",{type:"pg",
+    content:"Fungsi linear f(x) = 4x + 6 dicerminkan terhadap titik asal O(0, 0). Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = −4x + 6","y = 4x − 6","y = −4x − 6","y = 4x + 6"],
+  }),
+  Qn(33,"Refleksi Fungsi Linear — x = k",{type:"pg",
+    content:"Fungsi linear f(x) = 2x − 1 dicerminkan terhadap garis x = 3. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = −2x + 11","y = 2x + 11","y = −2x − 1","y = 2x − 7"],
+  }),
+  Qn(34,"Refleksi Fungsi Linear — y = k",{type:"pg",
+    content:"Fungsi linear f(x) = 3x + 2 dicerminkan terhadap garis y = 4. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = −3x + 6","y = 3x − 6","y = −3x + 2","y = 3x + 6"],
+  }),
 ];
 
 const RefleksiPage = () => {
@@ -250,7 +278,7 @@ const RefleksiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 25 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 32 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
