@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -406,28 +405,8 @@ const groupHeaders: Record<number, string> = {
   21: "📍 Dilatasi Pusat (a, b) — Lanjutan",
 };
 
-const CHOICE_COLORS = {
-  default: "bg-white/5 border-white/10 text-white/80 hover:bg-rose-500/10 hover:border-rose-400/40",
-  correct: "bg-emerald-500/20 border-emerald-400/60 text-emerald-300",
-  wrong:   "bg-rose-500/20 border-rose-400/60 text-rose-300",
-  reveal:  "bg-emerald-500/10 border-emerald-400/30 text-emerald-400/70",
-};
-
 const DilatsiPage = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<Record<number, string>>({});
-
-  const handleSelect = (qn: number, label: string) => {
-    if (selected[qn]) return;
-    playPopSound();
-    setSelected(prev => ({ ...prev, [qn]: label }));
-  };
-
-  const correct = Object.entries(selected).filter(([n, l]) => {
-    const q = questions.find(q => q.n === Number(n));
-    return q && l === q.answer;
-  }).length;
-  const answered = Object.keys(selected).length;
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -447,12 +426,6 @@ const DilatsiPage = () => {
             <span className="text-rose-400 text-xs font-bold">📋 22 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
-            {answered > 0 && (
-              <>
-                <span className="text-white/30 text-xs">·</span>
-                <span className="text-emerald-400 text-xs font-bold">{correct}/{answered} benar</span>
-              </>
-            )}
           </div>
         </div>
 
@@ -485,96 +458,58 @@ const DilatsiPage = () => {
         </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => {
-            const sel = selected[q.n];
-            const answered = !!sel;
-            return (
-              <div key={q.n}>
-                {groupHeaders[q.n] && (
-                  <div className="flex items-center gap-3 mb-2 mt-4">
-                    <div className="flex-1 h-px bg-gradient-to-r from-rose-500/40 to-transparent"/>
-                    <span className="text-rose-300 text-[11px] font-bold tracking-widest uppercase whitespace-nowrap">
-                      {groupHeaders[q.n]}
-                    </span>
-                    <div className="flex-1 h-px bg-gradient-to-l from-rose-500/40 to-transparent"/>
-                  </div>
-                )}
-                <div className="relative rounded-2xl overflow-hidden animate-slide-up"
-                  style={{ animationDelay: `${i * 0.02}s` }}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
-                  <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
-                  <div className="relative px-5 py-4">
-                    <div className="flex items-start gap-3">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border ${answered ? (sel === q.answer ? 'bg-emerald-500/20 border-emerald-400/50' : 'bg-rose-500/20 border-rose-400/50') : 'bg-rose-500/20 border-rose-400/50'}`}>
-                        <span className={`text-xs font-bold ${answered ? (sel === q.answer ? 'text-emerald-300' : 'text-rose-300') : 'text-rose-300'}`}>{q.n}</span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                          {q.title}
-                        </span>
-                        <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>
-                        {q.math && (
-                          <div className="mb-3 overflow-x-auto">
-                            <BlockMath>{q.math}</BlockMath>
-                          </div>
-                        )}
-                        {q.diagram && (
-                          <div className="mb-3 flex justify-center">{q.diagram}</div>
-                        )}
-                        <div className="grid grid-cols-1 gap-2">
-                          {q.choices.map(c => {
-                            let cls = CHOICE_COLORS.default;
-                            if (answered) {
-                              if (c.label === q.answer) cls = CHOICE_COLORS.correct;
-                              else if (c.label === sel) cls = CHOICE_COLORS.wrong;
-                              else cls = CHOICE_COLORS.reveal;
-                            }
-                            return (
-                              <button
-                                key={c.label}
-                                onClick={() => handleSelect(q.n, c.label)}
-                                disabled={answered}
-                                className={`flex items-center gap-3 w-full text-left rounded-xl border px-3 py-2.5 text-sm font-body transition-all duration-200 ${cls} ${!answered ? 'cursor-pointer' : 'cursor-default'}`}
-                              >
-                                <span className="font-bold text-xs shrink-0 w-5">{c.label}.</span>
-                                <span>{c.text}</span>
-                                {answered && c.label === q.answer && (
-                                  <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>
-                                )}
-                                {answered && c.label === sel && sel !== q.answer && (
-                                  <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>
-                                )}
-                              </button>
-                            );
-                          })}
+          {questions.map((q, i) => (
+            <div key={q.n}>
+              {groupHeaders[q.n] && (
+                <div className="flex items-center gap-3 mb-2 mt-4">
+                  <div className="flex-1 h-px bg-gradient-to-r from-rose-500/40 to-transparent"/>
+                  <span className="text-rose-300 text-[11px] font-bold tracking-widest uppercase whitespace-nowrap">
+                    {groupHeaders[q.n]}
+                  </span>
+                  <div className="flex-1 h-px bg-gradient-to-l from-rose-500/40 to-transparent"/>
+                </div>
+              )}
+              <div className="relative rounded-2xl overflow-hidden animate-slide-up"
+                style={{ animationDelay: `${i * 0.02}s` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
+                <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
+                <div className="relative px-5 py-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-rose-500/20 border border-rose-400/50 flex items-center justify-center shrink-0">
+                      <span className="text-rose-300 text-xs font-bold">{q.n}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                        {q.title}
+                      </span>
+                      <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>
+                      {q.math && (
+                        <div className="mb-3 overflow-x-auto">
+                          <BlockMath>{q.math}</BlockMath>
                         </div>
-                        {answered && (
-                          <p className={`mt-2 text-xs font-bold ${sel === q.answer ? 'text-emerald-400' : 'text-rose-400'}`}>
-                            {sel === q.answer ? '✅ Benar!' : `❌ Kurang tepat. Jawaban yang benar: ${q.answer}`}
-                          </p>
-                        )}
+                      )}
+                      {q.diagram && (
+                        <div className="mb-3 flex justify-center">{q.diagram}</div>
+                      )}
+                      <div className="grid grid-cols-1 gap-2">
+                        {q.choices.map(c => (
+                          <div
+                            key={c.label}
+                            className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm font-body text-white/80"
+                          >
+                            <span className="font-bold text-xs shrink-0 w-5 text-rose-400">{c.label}.</span>
+                            <span>{c.text}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
-
-        {answered === 22 && (
-          <div className="mt-6 bg-rose-900/30 border border-rose-500/30 rounded-xl p-5 text-center">
-            <p className="text-rose-300 text-lg font-bold mb-1">🎯 Skor Kamu</p>
-            <p className="text-white text-3xl font-bold">{correct} / 22</p>
-            <p className="text-white/50 text-xs mt-2">
-              {correct >= 20 ? "🌟 Luar biasa! Kamu menguasai Dilatasi!" :
-               correct >= 15 ? "👍 Bagus! Terus berlatih!" :
-               correct >= 10 ? "🚀 Lumayan! Pelajari kembali rumus-rumusnya." :
-               "💪 Semangat! Ulangi materi dan coba lagi."}
-            </p>
-          </div>
-        )}
 
         <div className="mt-6 text-center">
           <button
