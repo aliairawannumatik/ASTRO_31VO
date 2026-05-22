@@ -80,7 +80,7 @@ const TentangAplikasiPage = () => {
         <div className="animate-slide-up mb-6" style={{ animationDelay: '0.35s' }}>
           <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-500 shadow-[0_0_30px_rgba(0,200,255,0.2)]">
             <div className="rounded-2xl bg-[#0d0d2b] px-6 py-4 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center shrink-0 overflow-hidden p-1">
+              <div className="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center shrink-0 overflow-hidden">
                 <img src="/logo-numatik-versi.png" alt="NUMATIK" className="w-full h-full object-contain" />
               </div>
               <div className="flex-1">
