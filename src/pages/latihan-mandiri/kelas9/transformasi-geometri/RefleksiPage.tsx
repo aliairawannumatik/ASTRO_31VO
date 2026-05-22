@@ -144,6 +144,18 @@ const questions: Q[] = [
     content:"Titik A(x, y) berada di Kuadran II. Jika A dicerminkan berturut-turut terhadap sumbu X kemudian sumbu Y, maka bayangan akhir A″ berada di kuadran ...",
     opts:["Kuadran I","Kuadran II","Kuadran III","Kuadran IV"],
   }),
+  Qn(25,"Refleksi terhadap Titik Asal",{type:"pg",
+    content:"Titik Q(6, −3) dicerminkan terhadap titik asal O(0, 0). Koordinat bayangan Q adalah ...",
+    opts:["Q′(3, 6)","Q′(−6, 3)","Q′(6, 3)","Q′(−3, 6)"],
+  }),
+  Qn(26,"Mencari Titik Asal dari Bayangannya — O(0,0)",{type:"pg",
+    content:"Bayangan suatu titik setelah dicerminkan terhadap titik asal O(0, 0) adalah W′(−4, 7). Koordinat titik asalnya W adalah ...",
+    opts:["W(4, −7)","W(7, −4)","W(−7, 4)","W(−4, 7)"],
+  }),
+  Qn(27,"Refleksi Titik Asal — Komposisi",{type:"pg",
+    content:"Titik M(3, −5) direfleksikan terhadap sumbu-X, kemudian bayangannya direfleksikan terhadap titik asal O(0, 0). Koordinat bayangan akhir M adalah ...",
+    opts:["M″(3, 5)","M″(−3, 5)","M″(−3, −5)","M″(3, −5)"],
+  }),
   Qn(11,"Diagram — Garis Cermin y = k",{type:"diagram",
     content:"Perhatikan diagram. Titik P(−3, 4) dicerminkan terhadap garis y = k menghasilkan P′(−3, −2). Nilai k adalah ...",
     opts:["−2","0","1","2"],
@@ -191,10 +203,6 @@ const questions: Q[] = [
     content:"Titik M(2, −5) dicerminkan menghasilkan M′(2, 9). Pencerminan tersebut dilakukan terhadap garis ...",
     opts:["x = 2","y = 2","y = x","y = −x"],
   }),
-  Qn(18,"Mencari h + k",{type:"pg",
-    content:"Titik P(4, −6) dicerminkan berturut-turut terhadap garis x = h kemudian garis y = k sehingga menghasilkan P″(−2, 2). Nilai h + k adalah ...",
-    opts:["−1","1","3","−3"],
-  }),
   Qn(19,"Pencerminan terhadap y = x",{type:"pg",
     content:"Koordinat bayangan titik R(−4, 7) setelah dicerminkan terhadap garis y = x adalah ...",
     opts:["(4, −7)","(7, −4)","(−7, 4)","(4, 7)"],
@@ -218,18 +226,6 @@ const questions: Q[] = [
   Qn(24,"Menentukan Garis Cermin",{type:"pg",
     content:"Diketahui titik K(−5, −3) dipetakan ke K′(3, 5) melalui suatu refleksi. Garis pencerminan yang digunakan adalah ...",
     opts:["x = 1","y = 1","y = x","y = −x"],
-  }),
-  Qn(25,"Refleksi terhadap Titik Asal",{type:"pg",
-    content:"Titik Q(6, −3) dicerminkan terhadap titik asal O(0, 0). Koordinat bayangan Q adalah ...",
-    opts:["Q′(3, 6)","Q′(−6, 3)","Q′(6, 3)","Q′(−3, 6)"],
-  }),
-  Qn(26,"Mencari Titik Asal dari Bayangannya — O(0,0)",{type:"pg",
-    content:"Bayangan suatu titik setelah dicerminkan terhadap titik asal O(0, 0) adalah W′(−4, 7). Koordinat titik asalnya W adalah ...",
-    opts:["W(4, −7)","W(7, −4)","W(−7, 4)","W(−4, 7)"],
-  }),
-  Qn(27,"Refleksi Titik Asal — Komposisi",{type:"pg",
-    content:"Titik M(3, −5) direfleksikan terhadap sumbu-X, kemudian bayangannya direfleksikan terhadap titik asal O(0, 0). Koordinat bayangan akhir M adalah ...",
-    opts:["M″(3, 5)","M″(−3, 5)","M″(−3, −5)","M″(3, −5)"],
   }),
   Qn(28,"Refleksi Fungsi Linear — Sumbu-x",{type:"pg",
     content:"Fungsi linear f(x) = 3x − 2 dicerminkan terhadap sumbu-x. Persamaan bayangan fungsi tersebut adalah ...",
@@ -278,7 +274,7 @@ const RefleksiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 32 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 31 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
