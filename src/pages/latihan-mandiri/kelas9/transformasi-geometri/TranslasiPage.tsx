@@ -87,7 +87,81 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1,"Translasi Titik Dasar",{type:"mixed",
+  Qn(1,"Translasi Titik — Pilihan",{type:"mixed",
+    content:"Titik P(2, 6) digeser oleh vektor translasi berikut:",
+    math:"T = \\begin{pmatrix}5\\\\-3\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan koordinat bayangan titik P setelah translasi tersebut!"},
+    ],
+  }),
+  Qn(2,"Bayangan Titik — Translasi",{type:"mixed",
+    content:"Titik A(−4, 3) ditranslasikan oleh vektor:",
+    math:"T = \\begin{pmatrix}6\\\\2\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan koordinat bayangan titik A!"},
+    ],
+  }),
+  Qn(3,"Hasil Translasi Titik",{type:"mixed",
+    content:"Titik K(5, −1) ditranslasikan oleh vektor berikut:",
+    math:"T = \\begin{pmatrix}-4\\\\3\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan koordinat bayangan K′ hasil translasi tersebut!"},
+    ],
+  }),
+  Qn(4,"Komponen Vektor Translasi",{type:"mixed",
+    content:"Titik A(4, 7) dipetakan ke titik A′(−3, 2) oleh suatu translasi T.",
+    parts:[
+      {label:"",text:"Tentukan komponen vektor translasi T yang digunakan!"},
+    ],
+  }),
+  Qn(5,"Mencari Komponen Translasi",{type:"mixed",
+    content:"Sebuah translasi memetakan titik P(−5, 8) ke titik P′(−1, 5).",
+    parts:[
+      {label:"",text:"Tentukan vektor translasi yang memetakan P ke P′!"},
+    ],
+  }),
+  Qn(6,"Nilai a dan b pada Translasi",{type:"mixed",
+    content:"Translasi T memetakan titik (a, 7) ke titik (5, b).",
+    math:"T = \\begin{pmatrix}3\\\\-4\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan nilai a dan b secara berturut-turut!"},
+    ],
+  }),
+  Qn(7,"Koordinat Titik Asal",{type:"mixed",
+    content:"Titik Q(a, b) ditranslasikan oleh vektor T menghasilkan Q′(1, −3).",
+    math:"T = \\begin{pmatrix}-5\\\\4\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan koordinat titik Q(a, b)!"},
+    ],
+  }),
+  Qn(8,"Titik Asal dari Bayangan",{type:"mixed",
+    content:"Bayangan titik M setelah ditranslasikan oleh vektor T adalah M′(11, −9).",
+    math:"T = \\begin{pmatrix}4\\\\6\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan koordinat titik M sebelum ditranslasikan!"},
+    ],
+  }),
+  Qn(9,"Translasi Berturut-turut",{type:"mixed",
+    content:"Titik B(1, 4) ditranslasikan berturut-turut oleh dua vektor berikut:",
+    math:"T_1 = \\begin{pmatrix}-3\\\\2\\end{pmatrix} \\text{ kemudian } T_2 = \\begin{pmatrix}4\\\\-5\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan koordinat bayangan terakhir titik B setelah kedua translasi tersebut!"},
+    ],
+  }),
+  Qn(10,"Mencari Nilai x + y",{type:"mixed",
+    content:"Perhatikan diagram translasi berikut.",
+    math:"C(x,\\, y) \\xrightarrow{\\;T\\;} C'(7,\\, 2), \\quad T = \\begin{pmatrix}4\\\\-3\\end{pmatrix}",
+    parts:[
+      {label:"",text:"Tentukan nilai x + y!"},
+    ],
+  }),
+  Qn(11,"Bayangan Titik Lain",{type:"mixed",
+    content:"Translasi T memetakan titik P(3, −2) ke P′(7, 4).",
+    parts:[
+      {label:"",text:"Dengan translasi T yang sama, tentukan koordinat bayangan titik Q(−1, 5)!"},
+    ],
+  }),
+  Qn(12,"Translasi Titik Dasar",{type:"mixed",
     content:"Titik A(3, 4) ditranslasikan oleh vektor translasi berikut:",
     parts:[
       {label:"a.",math:"T = \\begin{pmatrix}2\\\\-3\\end{pmatrix}"},
@@ -459,7 +533,7 @@ const TranslasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 51 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -475,7 +549,7 @@ const TranslasiPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
+            <div key={i} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
               <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
@@ -483,7 +557,7 @@ const TranslasiPage = () => {
               <div className="relative px-5 py-4">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-cyan-300 text-xs font-bold">{q.n}</span>
+                    <span className="text-cyan-300 text-xs font-bold">{i + 1}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-cyan-400 text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10 px-2 py-0.5 rounded inline-block mb-2">
