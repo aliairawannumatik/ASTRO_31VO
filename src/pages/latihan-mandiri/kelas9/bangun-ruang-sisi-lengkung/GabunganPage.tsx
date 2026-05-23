@@ -25,38 +25,60 @@ type QMC = {
 };
 
 /* ═══════════════════════════════════════════════════
-   SVG DIAGRAM COMPONENTS
+   SVG DIAGRAM COMPONENTS  (fully responsive, normalised)
+   viewBox = 0 0 360 280  –  shapes always fill the frame
 ═══════════════════════════════════════════════════ */
+
+const VB_W = 360, VB_H = 280;
+const CX = 160;  // centre-x (leaves ~200px right for labels)
+const SW = 2;    // stroke-width for shapes
+const LSW = 1.2; // stroke-width for dimension lines
+
+function dimLabel(color: string, x: number, y: number, txt: string) {
+  return <text x={x} y={y} fill={color} fontSize="14" fontFamily="monospace" fontWeight="bold">{txt}</text>;
+}
+function dimLine(color: string, x1: number, y1: number, x2: number, y2: number) {
+  return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={LSW} strokeOpacity="0.7" />;
+}
+function tick(color: string, x: number, y: number, horiz = true) {
+  return horiz
+    ? <line x1={x - 5} y1={y} x2={x + 5} y2={y} stroke={color} strokeWidth={LSW} />
+    : <line x1={x} y1={y - 5} x2={x} y2={y + 5} stroke={color} strokeWidth={LSW} />;
+}
 
 function TabungKerucutSVG({ r, tTab, tKer, color = "#f59e0b" }: {
   r: number; tTab: number; tKer: number; color?: string;
 }) {
-  const W   = Math.min(r * 4.5, 52);
-  const HC  = Math.min(tTab * 3.5, 78);
-  const HK  = Math.min(tKer * 3.5, 55);
-  const ell = Math.max(W * 0.24, 5);
-  const cx  = 120;
-  const baseY    = 178;
-  const topCylY  = baseY - HC;
-  const apexY    = topCylY - HK;
+  const W  = 68;
+  const tot = 170;
+  const ratio = Math.min(Math.max(tTab / (tTab + tKer), 0.3), 0.75);
+  const HC = Math.round(tot * ratio);
+  const HK = tot - HC;
+  const ell = Math.round(W * 0.22);
+  const baseY   = 250;
+  const topCylY = baseY - HC;
+  const apexY   = topCylY - HK;
+  const lx = CX + W + 12;
   return (
-    <svg viewBox="0 0 240 200" width="300" height="250" className="mx-auto">
-      <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
-      <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
-      <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.6" />
-      <line x1={cx + W} y1={topCylY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1.6" />
-      <ellipse cx={cx} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.2" strokeDasharray="4,3" />
-      <polygon points={`${cx - W},${topCylY} ${cx + W},${topCylY} ${cx},${apexY}`} fill={color} fillOpacity="0.13" stroke={color} strokeWidth="1.6" />
-      <line x1={cx + W + 5} y1={topCylY + 1} x2={cx + W + 5} y2={baseY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
-      <line x1={cx + W + 1} y1={topCylY} x2={cx + W + 9} y2={topCylY} stroke={color} strokeWidth="1" />
-      <line x1={cx + W + 1} y1={baseY}   x2={cx + W + 9} y2={baseY}   stroke={color} strokeWidth="1" />
-      <text x={cx + W + 18} y={(topCylY + baseY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tTab}</text>
-      <line x1={cx + W + 5} y1={apexY + 1}   x2={cx + W + 5} y2={topCylY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
-      <line x1={cx + W + 1} y1={apexY}    x2={cx + W + 9} y2={apexY}    stroke={color} strokeWidth="1" />
-      <line x1={cx + W + 1} y1={topCylY}  x2={cx + W + 9} y2={topCylY}  stroke={color} strokeWidth="1" />
-      <text x={cx + W + 18} y={(apexY + topCylY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tKer}</text>
-      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
-      <text x={cx + W / 2} y={baseY + 16} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
+    <svg viewBox={`0 0 ${VB_W} ${VB_H}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+      {/* cylinder body */}
+      <ellipse cx={CX} cy={baseY}   rx={W} ry={ell} fill={color} fillOpacity="0.20" stroke={color} strokeWidth={SW} />
+      <ellipse cx={CX} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.14" stroke={color} strokeWidth={SW * 0.7} strokeDasharray="6,4" />
+      <rect x={CX - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.09" />
+      <line x1={CX - W} y1={topCylY} x2={CX - W} y2={baseY} stroke={color} strokeWidth={SW} />
+      <line x1={CX + W} y1={topCylY} x2={CX + W} y2={baseY} stroke={color} strokeWidth={SW} />
+      {/* cone */}
+      <polygon points={`${CX - W},${topCylY} ${CX + W},${topCylY} ${CX},${apexY}`} fill={color} fillOpacity="0.16" stroke={color} strokeWidth={SW} />
+      {/* dim lines right */}
+      {dimLine(color, lx, topCylY, lx, baseY)}
+      {tick(color, lx, topCylY)} {tick(color, lx, baseY)}
+      {dimLabel(color, lx + 10, (topCylY + baseY) / 2 + 5, `t=${tTab}`)}
+      {dimLine(color, lx, apexY, lx, topCylY)}
+      {tick(color, lx, apexY)} {tick(color, lx, topCylY)}
+      {dimLabel(color, lx + 10, (apexY + topCylY) / 2 + 5, `t=${tKer}`)}
+      {/* radius */}
+      <line x1={CX} y1={baseY} x2={CX + W} y2={baseY} stroke={color} strokeWidth={LSW} strokeDasharray="4,3" strokeOpacity="0.8" />
+      {dimLabel(color, CX + W / 2 - 14, baseY + 20, `r=${r}`)}
     </svg>
   );
 }
@@ -64,28 +86,29 @@ function TabungKerucutSVG({ r, tTab, tKer, color = "#f59e0b" }: {
 function TabungHemiSVG({ r, tTab, color = "#38bdf8" }: {
   r: number; tTab: number; color?: string;
 }) {
-  const W   = Math.min(r * 4.5, 52);
-  const HC  = Math.min(tTab * 3.5, 78);
-  const ell = Math.max(W * 0.24, 5);
-  const cx  = 120;
-  const baseY   = 178;
+  const W  = 68;
+  const HC = 130;
+  const ell = Math.round(W * 0.22);
+  const baseY   = 240;
   const topCylY = baseY - HC;
+  const lx = CX + W + 12;
   return (
-    <svg viewBox="0 0 240 210" width="300" height="263" className="mx-auto">
-      <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
-      <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
-      <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.6" />
-      <line x1={cx + W} y1={topCylY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1.6" />
-      <ellipse cx={cx} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
-      <path d={`M ${cx - W} ${topCylY} A ${W} ${W} 0 0 1 ${cx + W} ${topCylY}`}
-        fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
-      <line x1={cx + W + 5} y1={topCylY + 1} x2={cx + W + 5} y2={baseY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
-      <line x1={cx + W + 1} y1={topCylY} x2={cx + W + 9} y2={topCylY} stroke={color} strokeWidth="1" />
-      <line x1={cx + W + 1} y1={baseY}   x2={cx + W + 9} y2={baseY}   stroke={color} strokeWidth="1" />
-      <text x={cx + W + 18} y={(topCylY + baseY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tTab}</text>
-      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
-      <text x={cx + W / 2} y={baseY + 16} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
-      <text x={cx} y={topCylY - W - 4} fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.75">½ Bola (r={r})</text>
+    <svg viewBox={`0 0 ${VB_W} ${VB_H}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+      {/* cylinder */}
+      <ellipse cx={CX} cy={baseY}   rx={W} ry={ell} fill={color} fillOpacity="0.20" stroke={color} strokeWidth={SW} />
+      <ellipse cx={CX} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth={SW * 0.7} strokeDasharray="6,4" />
+      <rect x={CX - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.09" />
+      <line x1={CX - W} y1={topCylY} x2={CX - W} y2={baseY} stroke={color} strokeWidth={SW} />
+      <line x1={CX + W} y1={topCylY} x2={CX + W} y2={baseY} stroke={color} strokeWidth={SW} />
+      {/* hemisphere dome */}
+      <path d={`M ${CX - W} ${topCylY} A ${W} ${W} 0 0 1 ${CX + W} ${topCylY}`} fill={color} fillOpacity="0.22" stroke={color} strokeWidth={SW} />
+      {/* dim lines */}
+      {dimLine(color, lx, topCylY, lx, baseY)}
+      {tick(color, lx, topCylY)} {tick(color, lx, baseY)}
+      {dimLabel(color, lx + 10, (topCylY + baseY) / 2 + 5, `t=${tTab}`)}
+      <line x1={CX} y1={baseY} x2={CX + W} y2={baseY} stroke={color} strokeWidth={LSW} strokeDasharray="4,3" strokeOpacity="0.8" />
+      {dimLabel(color, CX + W / 2 - 14, baseY + 20, `r=${r}`)}
+      {dimLabel(color, CX - 28, topCylY - W - 10, `½ Bola`)}
     </svg>
   );
 }
@@ -93,26 +116,26 @@ function TabungHemiSVG({ r, tTab, color = "#38bdf8" }: {
 function KerucutHemiSVG({ r, tKer, color = "#a78bfa" }: {
   r: number; tKer: number; color?: string;
 }) {
-  const W   = Math.min(r * 4.5, 52);
-  const HK  = Math.min(tKer * 4, 75);
-  const ell = Math.max(W * 0.24, 5);
-  const cx  = 120;
-  const baseY = 150;
+  const W  = 68;
+  const HK = 120;
+  const ell = Math.round(W * 0.22);
+  const baseY = 185;
   const apexY = baseY - HK;
+  const lx = CX + W + 12;
   return (
-    <svg viewBox="0 0 240 210" width="300" height="263" className="mx-auto">
-      <polygon points={`${cx - W},${baseY} ${cx + W},${baseY} ${cx},${apexY}`}
-        fill={color} fillOpacity="0.11" stroke={color} strokeWidth="1.6" />
-      <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.2" strokeDasharray="4,3" />
-      <path d={`M ${cx - W} ${baseY} A ${W} ${W} 0 0 0 ${cx + W} ${baseY}`}
-        fill={color} fillOpacity="0.20" stroke={color} strokeWidth="1.6" />
-      <line x1={cx + W + 5} y1={apexY + 1} x2={cx + W + 5} y2={baseY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
-      <line x1={cx + W + 1} y1={apexY} x2={cx + W + 9} y2={apexY} stroke={color} strokeWidth="1" />
-      <line x1={cx + W + 1} y1={baseY} x2={cx + W + 9} y2={baseY} stroke={color} strokeWidth="1" />
-      <text x={cx + W + 18} y={(apexY + baseY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tKer}</text>
-      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
-      <text x={cx + W / 2} y={baseY - 4} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
-      <text x={cx} y={baseY + W + 18} fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.75">½ Bola (r={r})</text>
+    <svg viewBox={`0 0 ${VB_W} ${VB_H}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+      {/* cone */}
+      <polygon points={`${CX - W},${baseY} ${CX + W},${baseY} ${CX},${apexY}`} fill={color} fillOpacity="0.14" stroke={color} strokeWidth={SW} />
+      <ellipse cx={CX} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.14" stroke={color} strokeWidth={SW * 0.7} strokeDasharray="6,4" />
+      {/* hemisphere below */}
+      <path d={`M ${CX - W} ${baseY} A ${W} ${W} 0 0 0 ${CX + W} ${baseY}`} fill={color} fillOpacity="0.24" stroke={color} strokeWidth={SW} />
+      {/* dim lines */}
+      {dimLine(color, lx, apexY, lx, baseY)}
+      {tick(color, lx, apexY)} {tick(color, lx, baseY)}
+      {dimLabel(color, lx + 10, (apexY + baseY) / 2 + 5, `t=${tKer}`)}
+      <line x1={CX} y1={baseY} x2={CX + W} y2={baseY} stroke={color} strokeWidth={LSW} strokeDasharray="4,3" strokeOpacity="0.8" />
+      {dimLabel(color, CX + W / 2 - 14, baseY - 8, `r=${r}`)}
+      {dimLabel(color, CX - 28, baseY + W + 20, `½ Bola`)}
     </svg>
   );
 }
@@ -120,43 +143,52 @@ function KerucutHemiSVG({ r, tKer, color = "#a78bfa" }: {
 function HemiTabKerSVG({ r, tTab, tKer, color = "#fb7185" }: {
   r: number; tTab: number; tKer: number; color?: string;
 }) {
-  const W   = Math.min(r * 3.8, 46);
-  const HC  = Math.min(tTab * 3, 65);
-  const HK  = Math.min(tKer * 3, 48);
-  const ell = Math.max(W * 0.24, 5);
-  const cx  = 120;
-  const baseY   = 190;
+  const W  = 62;
+  const HC = 90;
+  const HK = 55;
+  const HR = 42;  // hemisphere drawn radius
+  const ell = Math.round(W * 0.22);
+  const baseY   = 250;
   const topCylY = baseY - HC;
   const apexY   = topCylY - HK;
+  const lx = CX + W + 12;
   return (
-    <svg viewBox="0 0 240 215" width="300" height="269" className="mx-auto">
-      <path d={`M ${cx - W} ${baseY} A ${W} ${W} 0 0 0 ${cx + W} ${baseY}`}
-        fill={color} fillOpacity="0.20" stroke={color} strokeWidth="1.5" />
-      <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
-      <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.5" />
-      <line x1={cx + W} y1={topCylY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1.5" />
-      <ellipse cx={cx} cy={baseY}   rx={W} ry={ell} fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
-      <ellipse cx={cx} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
-      <polygon points={`${cx - W},${topCylY} ${cx + W},${topCylY} ${cx},${apexY}`}
-        fill={color} fillOpacity="0.13" stroke={color} strokeWidth="1.5" />
-      <text x={cx - W - 8} y={baseY + W + 14} fill={color} fontSize="9" textAnchor="end" fontFamily="monospace" fillOpacity="0.75">½ Bola</text>
-      <text x={cx + W + 18} y={(topCylY + baseY) / 2 + 4} fill={color} fontSize="10" fontFamily="monospace">t={tTab}</text>
-      <text x={cx + W + 18} y={(apexY + topCylY) / 2 + 4} fill={color} fontSize="10" fontFamily="monospace">t={tKer}</text>
-      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
-      <text x={cx + W / 2} y={baseY + 14} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r}</text>
+    <svg viewBox={`0 0 ${VB_W} ${VB_H}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+      {/* hemisphere at bottom */}
+      <path d={`M ${CX - W} ${baseY} A ${W} ${W} 0 0 0 ${CX + W} ${baseY}`} fill={color} fillOpacity="0.24" stroke={color} strokeWidth={SW} />
+      {/* cylinder */}
+      <rect x={CX - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.09" />
+      <line x1={CX - W} y1={topCylY} x2={CX - W} y2={baseY} stroke={color} strokeWidth={SW} />
+      <line x1={CX + W} y1={topCylY} x2={CX + W} y2={baseY} stroke={color} strokeWidth={SW} />
+      <ellipse cx={CX} cy={baseY}   rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth={SW * 0.7} strokeDasharray="6,4" />
+      <ellipse cx={CX} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth={SW * 0.7} strokeDasharray="6,4" />
+      {/* cone at top */}
+      <polygon points={`${CX - W},${topCylY} ${CX + W},${topCylY} ${CX},${apexY}`} fill={color} fillOpacity="0.16" stroke={color} strokeWidth={SW} />
+      {/* dim lines */}
+      {dimLine(color, lx, topCylY, lx, baseY)}
+      {tick(color, lx, topCylY)} {tick(color, lx, baseY)}
+      {dimLabel(color, lx + 10, (topCylY + baseY) / 2 + 5, `t=${tTab}`)}
+      {dimLine(color, lx, apexY, lx, topCylY)}
+      {tick(color, lx, apexY)} {tick(color, lx, topCylY)}
+      {dimLabel(color, lx + 10, (apexY + topCylY) / 2 + 5, `t=${tKer}`)}
+      <line x1={CX} y1={baseY} x2={CX + W} y2={baseY} stroke={color} strokeWidth={LSW} strokeDasharray="4,3" strokeOpacity="0.8" />
+      {dimLabel(color, CX + W / 2 - 14, baseY + 20, `r=${r}`)}
+      {dimLabel(color, CX - 20, baseY + W + 18, `½ Bola`)}
     </svg>
   );
 }
 
 function InfoBubbleSVG({ lines, color = "#22d3ee" }: { lines: string[]; color?: string }) {
-  const h = 32 + lines.length * 26;
+  const lineH = 32;
+  const pad   = 20;
+  const h = pad * 2 + lines.length * lineH;
   return (
-    <svg viewBox={`0 0 300 ${h}`} width="340" height={Math.round(h * 1.13)} className="mx-auto">
-      <rect x="10" y="6" width="280" height={h - 12} rx="12"
-        fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" strokeOpacity="0.5" />
+    <svg viewBox={`0 0 360 ${h}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+      <rect x="10" y="8" width="340" height={h - 16} rx="14"
+        fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.8" strokeOpacity="0.55" />
       {lines.map((line, i) => (
-        <text key={i} x="150" y={28 + i * 26} fill={color} fontSize="12"
-          textAnchor="middle" fontFamily="monospace">{line}</text>
+        <text key={i} x="180" y={pad + 4 + i * lineH + lineH * 0.6} fill={color} fontSize="14"
+          textAnchor="middle" fontFamily="monospace" fontWeight="600">{line}</text>
       ))}
     </svg>
   );
@@ -784,7 +816,7 @@ const GabunganPage = () => {
                           {q.title}
                         </span>
                         <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>
-                        {q.diagram && <div className="mb-3 flex justify-center overflow-x-auto">{q.diagram}</div>}
+                        {q.diagram && <div className="mb-3 w-full">{q.diagram}</div>}
                         <div className="grid grid-cols-1 gap-2 mb-3">
                           {q.options.map(opt => (
                             <button key={opt.key}
