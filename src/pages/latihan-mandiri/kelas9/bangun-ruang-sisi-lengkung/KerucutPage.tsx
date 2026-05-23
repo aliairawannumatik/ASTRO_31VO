@@ -64,12 +64,12 @@ function ConeSVG({ r, h, s, color = "#fb923c", extraLabel = "", showHeight = tru
 
 function ConeNetSVG({ color = "#fb923c" }: { color?: string }) {
   return (
-    <svg viewBox="0 0 280 180" width="280" height="180" className="mx-auto">
+    <svg viewBox="0 -25 280 245" width="280" height="245" className="mx-auto">
       <path d="M 140 20 L 30 160 A 120 120 0 0 0 250 160 Z" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.8" />
       <text x="140" y="110" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Selimut (sektor/juring)</text>
       <text x="140" y="128" fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">jari-jari = s (garis pelukis)</text>
-      <ellipse cx="140" cy="165" rx="45" ry="14" fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1.8" />
-      <text x="140" y="169" fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">Alas (r)</text>
+      <ellipse cx="140" cy="185" rx="45" ry="14" fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1.8" />
+      <text x="140" y="189" fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">Alas (r)</text>
     </svg>
   );
 }
@@ -220,42 +220,6 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 13, title: "Mencari Garis Pelukis dari Luas Permukaan",
-    content: "Luas permukaan total sebuah kerucut adalah 75π cm². Jika jari-jarinya 5 cm, garis pelukis kerucut tersebut adalah ...",
-    diagram: <ConeSVG r="5 cm" s="?" />,
-    options: [
-      { key: "A", text: "8 cm" },
-      { key: "B", text: "10 cm" },
-      { key: "C", text: "12 cm" },
-      { key: "D", text: "15 cm" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 14, title: "Mencari Tinggi dari Garis Pelukis",
-    content: "Sebuah kerucut memiliki jari-jari 9 cm dan garis pelukis 15 cm. Tinggi kerucut tersebut adalah ...",
-    diagram: <ConeSVG r="9 cm" s="15 cm" />,
-    options: [
-      { key: "A", text: "8 cm" },
-      { key: "B", text: "10 cm" },
-      { key: "C", text: "12 cm" },
-      { key: "D", text: "16 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 15, title: "Volume Kerucut – Garis Pelukis Diketahui",
-    content: "Sebuah kerucut memiliki garis pelukis 10 cm dan jari-jari 6 cm. Volume kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="6 cm" s="10 cm" />,
-    options: [
-      { key: "A", text: "275,2 cm³" },
-      { key: "B", text: "301,44 cm³" },
-      { key: "C", text: "326,56 cm³" },
-      { key: "D", text: "376,8 cm³" },
-    ],
-    answer: "B",
-  },
-  {
     n: 16, title: "Perbandingan Volume Dua Kerucut",
     content: "Kerucut A memiliki r = 6 cm dan t = 4 cm. Kerucut B memiliki r = 3 cm dan t = 8 cm. Perbandingan volume A : B adalah ...",
     options: [
@@ -265,18 +229,6 @@ const questions: Q[] = [
       { key: "D", text: "4 : 1" },
     ],
     answer: "C",
-  },
-  {
-    n: 17, title: "Soal Cerita – Tumpukan Pasir",
-    content: "Sebuah tumpukan pasir berbentuk kerucut dengan r = 3 m dan t = 4 m. Volume pasir tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="3 m" h="4 m" color="#fbbf24" extraLabel="Tumpukan Pasir" />,
-    options: [
-      { key: "A", text: "25,12 m³" },
-      { key: "B", text: "37,68 m³" },
-      { key: "C", text: "50,24 m³" },
-      { key: "D", text: "75,36 m³" },
-    ],
-    answer: "B",
   },
   {
     n: 18, title: "Biaya Pengecatan Selimut Kerucut",
@@ -303,42 +255,6 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 20, title: "Luas Permukaan – Soal UN",
-    content: "Sebuah kerucut memiliki r = 10,5 cm dan s = 17,5 cm. Luas permukaan kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="10,5 cm" s="17,5 cm" />,
-    options: [
-      { key: "A", text: "693 cm²" },
-      { key: "B", text: "770 cm²" },
-      { key: "C", text: "924 cm²" },
-      { key: "D", text: "1.078 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 21, title: "Mencari Jari-Jari dari Volume",
-    content: "Volume sebuah kerucut adalah 628 cm³ dan tingginya 6 cm. Jari-jari alas kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="?" h="6 cm" />,
-    options: [
-      { key: "A", text: "5 cm" },
-      { key: "B", text: "7 cm" },
-      { key: "C", text: "10 cm" },
-      { key: "D", text: "14 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 22, title: "Soal Cerita – Permen Kerucut",
-    content: "Sebuah permen berbentuk kerucut memiliki diameter 4 cm dan tinggi 9 cm. Volume coklat yang dibutuhkan untuk mengisi 10 permen adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="2 cm" h="9 cm" color="#f472b6" extraLabel="× 10 permen" />,
-    options: [
-      { key: "A", text: "251,2 cm³" },
-      { key: "B", text: "376,8 cm³" },
-      { key: "C", text: "502,4 cm³" },
-      { key: "D", text: "628 cm³" },
-    ],
-    answer: "B",
-  },
-  {
     n: 23, title: "TKA – Perbandingan Luas Selimut",
     content: "Dua kerucut mempunyai garis pelukis yang sama. Perbandingan jari-jari kerucut pertama dan kedua adalah 3 : 5. Perbandingan luas selimut kedua kerucut adalah ...",
     options: [
@@ -361,30 +277,6 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 25, title: "Mencari Diameter dari Luas Selimut",
-    content: "Luas selimut sebuah kerucut adalah 880 cm². Jika garis pelukisnya 20 cm, diameter alas kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="?" s="20 cm" />,
-    options: [
-      { key: "A", text: "14 cm" },
-      { key: "B", text: "20 cm" },
-      { key: "C", text: "28 cm" },
-      { key: "D", text: "35 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 26, title: "Soal Cerita – Ember Kerucut",
-    content: "Sebuah ember berbentuk kerucut dengan r = 21 cm dan t = 28 cm. Kapasitas ember tersebut dalam liter adalah ... (π = 22/7, 1 liter = 1.000 cm³)",
-    diagram: <ConeSVG r="21 cm" h="28 cm" color="#38bdf8" extraLabel="Ember" />,
-    options: [
-      { key: "A", text: "9,702 liter" },
-      { key: "B", text: "12,936 liter" },
-      { key: "C", text: "15,708 liter" },
-      { key: "D", text: "19,404 liter" },
-    ],
-    answer: "B",
-  },
-  {
     n: 27, title: "ANBK – Biaya Membuat Kerucut",
     content: "Sebuah kerucut dengan r = 5 cm dan s = 13 cm akan dibuat dari lembaran seng. Jika harga seng Rp1.500 per cm², biaya membuat 5 kerucut tanpa alas adalah ... (π = 3,14)",
     diagram: <ConeSVG r="5 cm" s="13 cm" />,
@@ -393,18 +285,6 @@ const questions: Q[] = [
       { key: "B", text: "Rp 1.530.750" },
       { key: "C", text: "Rp 2.041.000" },
       { key: "D", text: "Rp 3.061.500" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 28, title: "UN – Mencari Volume dari s dan t",
-    content: "Sebuah kerucut memiliki garis pelukis 26 cm dan tinggi 24 cm. Volume kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="?" h="24 cm" s="26 cm" />,
-    options: [
-      { key: "A", text: "2.009,6 cm³" },
-      { key: "B", text: "2.512 cm³" },
-      { key: "C", text: "3.014,4 cm³" },
-      { key: "D", text: "4.019,2 cm³" },
     ],
     answer: "B",
   },
@@ -420,30 +300,6 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 30, title: "Soal Cerita – Pasir Jam Pasir",
-    content: "Pasir dalam jam pasir jatuh membentuk kerucut dengan jari-jari 3 cm dan tinggi 4 cm. Volume pasir yang terkumpul adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="3 cm" h="4 cm" color="#fbbf24" extraLabel="Pasir" />,
-    options: [
-      { key: "A", text: "25,12 cm³" },
-      { key: "B", text: "37,68 cm³" },
-      { key: "C", text: "50,24 cm³" },
-      { key: "D", text: "62,8 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 31, title: "Luas Permukaan Total",
-    content: "Sebuah kerucut memiliki r = 7 cm dan s = 25 cm. Luas permukaan total kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="7 cm" s="25 cm" />,
-    options: [
-      { key: "A", text: "550 cm²" },
-      { key: "B", text: "616 cm²" },
-      { key: "C", text: "704 cm²" },
-      { key: "D", text: "770 cm²" },
-    ],
-    answer: "C",
-  },
-  {
     n: 32, title: "Perbandingan Volume Kerucut dan Tabung",
     content: "Sebuah kerucut dan tabung memiliki jari-jari dan tinggi yang sama. Perbandingan volume kerucut terhadap volume tabung adalah ...",
     options: [
@@ -453,17 +309,6 @@ const questions: Q[] = [
       { key: "D", text: "3 : 1" },
     ],
     answer: "B",
-  },
-  {
-    n: 33, title: "ANBK – Kerucut Berlubang",
-    content: "Sebuah kerucut besar (r = 10 cm, t = 15 cm) memiliki lubang berbentuk kerucut kecil (r = 5 cm, t = 15 cm) di dalamnya. Volume bahan yang tersisa adalah ...",
-    options: [
-      { key: "A", text: "125π cm³" },
-      { key: "B", text: "250π cm³" },
-      { key: "C", text: "375π cm³" },
-      { key: "D", text: "500π cm³" },
-    ],
-    answer: "C",
   },
   {
     n: 34, title: "Soal Terapan – Karton Topi Ulang Tahun",
@@ -478,184 +323,6 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 35, title: "Volume Kerucut dalam Liter",
-    content: "Sebuah wadah berbentuk kerucut dengan diameter 42 cm dan tinggi 60 cm. Kapasitas wadah tersebut dalam liter adalah ... (π = 22/7, 1 liter = 1.000 cm³)",
-    diagram: <ConeSVG r="21 cm" h="60 cm" color="#38bdf8" extraLabel="Wadah" />,
-    options: [
-      { key: "A", text: "18,48 liter" },
-      { key: "B", text: "22,00 liter" },
-      { key: "C", text: "27,72 liter" },
-      { key: "D", text: "36,96 liter" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 36, title: "Luas Permukaan dari Garis Pelukis",
-    content: "Sebuah kerucut memiliki garis pelukis 17 cm dan jari-jari 8 cm. Luas permukaan total kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="8 cm" s="17 cm" />,
-    options: [
-      { key: "A", text: "502,4 cm²" },
-      { key: "B", text: "628 cm²" },
-      { key: "C", text: "753,6 cm²" },
-      { key: "D", text: "878 cm²" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 37, title: "TKA – Kerucut Terpancung",
-    content: "Sebuah gelas berbentuk kerucut terpancung memiliki r₁ = 6 cm (atas), r₂ = 2 cm (bawah), dan tinggi 8 cm. Tinggi kerucut penuh sebelum dipotong adalah ...",
-    options: [
-      { key: "A", text: "8 cm" },
-      { key: "B", text: "10 cm" },
-      { key: "C", text: "12 cm" },
-      { key: "D", text: "16 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 38, title: "UN Terpadu – Volume Kerucut",
-    content: "Sebuah kerucut memiliki r = 9 cm dan t = 12 cm. Volume kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="9 cm" h="12 cm" />,
-    options: [
-      { key: "A", text: "814,5 cm³" },
-      { key: "B", text: "1.017,36 cm³" },
-      { key: "C", text: "1.220 cm³" },
-      { key: "D", text: "1.526 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 39, title: "ANBK – Tutup Botol Kerucut",
-    content: "Sebuah pabrik membuat tutup botol berbentuk kerucut (r = 2 cm, s = 5 cm) dari seng. Total luas seng (selimut saja) untuk 1.000 tutup adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="2 cm" s="5 cm" color="#6b7280" showHeight={false} />,
-    options: [
-      { key: "A", text: "3.140 cm²" },
-      { key: "B", text: "6.280 cm²" },
-      { key: "C", text: "31.400 cm²" },
-      { key: "D", text: "62.800 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 40, title: "UN Terpadu – Kerucut + Tabung",
-    content: "Sebuah gudang memiliki atap kerucut (r = 3,5 m, t = 4,8 m) dan badan tabung (r = 3,5 m, t = 6 m). Total volume gudang adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="3,5 m" h="4,8 m" color="#fbbf24" extraLabel="Atap Gudang" />,
-    options: [
-      { key: "A", text: "231 m³" },
-      { key: "B", text: "261,8 m³" },
-      { key: "C", text: "292,6 m³" },
-      { key: "D", text: "315 m³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 41, title: "Unsur Kerucut – Sisi, Rusuk, Titik Sudut",
-    content: "Pernyataan yang BENAR tentang unsur-unsur bangun ruang kerucut adalah ...",
-    options: [
-      { key: "A", text: "Sisi = 2, rusuk = 2, titik sudut = 1" },
-      { key: "B", text: "Sisi = 2, rusuk = 1, titik sudut = 1" },
-      { key: "C", text: "Sisi = 3, rusuk = 2, titik sudut = 0" },
-      { key: "D", text: "Sisi = 1, rusuk = 1, titik sudut = 0" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 42, title: "Bentuk Selimut Kerucut",
-    content: "Jika selimut kerucut dibuka dan diratakan, bangun datar yang terbentuk adalah ...",
-    diagram: <ConeNetSVG />,
-    options: [
-      { key: "A", text: "Persegi panjang" },
-      { key: "B", text: "Segitiga sama kaki" },
-      { key: "C", text: "Juring (sektor) lingkaran" },
-      { key: "D", text: "Trapesium" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 43, title: "Hubungan r, t, dan s – Teorema Pythagoras",
-    content: "Rumus yang tepat untuk mencari garis pelukis (s) kerucut dari jari-jari (r) dan tinggi (t) adalah ...",
-    diagram: <ConeSVG r="r" h="t" s="s" />,
-    options: [
-      { key: "A", text: "s = r + t" },
-      { key: "B", text: "s = r² + t²" },
-      { key: "C", text: "s = √(r² + t²)" },
-      { key: "D", text: "s = √(r² − t²)" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 44, title: "Mencari Garis Pelukis – r=5, t=12",
-    content: "Sebuah kerucut memiliki jari-jari alas 5 cm dan tinggi 12 cm. Panjang garis pelukis kerucut tersebut adalah ...",
-    diagram: <ConeSVG r="5 cm" h="12 cm" />,
-    options: [
-      { key: "A", text: "10 cm" },
-      { key: "B", text: "11 cm" },
-      { key: "C", text: "13 cm" },
-      { key: "D", text: "15 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 45, title: "Mencari Jari-Jari – s=17, t=15",
-    content: "Sebuah kerucut memiliki garis pelukis 17 cm dan tinggi 15 cm. Jari-jari alas kerucut tersebut adalah ...",
-    diagram: <ConeSVG r="?" h="15 cm" s="17 cm" />,
-    options: [
-      { key: "A", text: "6 cm" },
-      { key: "B", text: "8 cm" },
-      { key: "C", text: "10 cm" },
-      { key: "D", text: "12 cm" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 46, title: "Mencari Tinggi – s=25, r=7",
-    content: "Sebuah kerucut memiliki garis pelukis 25 cm dan jari-jari 7 cm. Tinggi kerucut tersebut adalah ...",
-    diagram: <ConeSVG r="7 cm" h="?" s="25 cm" />,
-    options: [
-      { key: "A", text: "20 cm" },
-      { key: "B", text: "22 cm" },
-      { key: "C", text: "24 cm" },
-      { key: "D", text: "26 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 47, title: "Luas Selimut – r=6, t=8",
-    content: "Sebuah kerucut memiliki jari-jari 6 cm dan tinggi 8 cm. Luas selimut kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="6 cm" h="8 cm" />,
-    options: [
-      { key: "A", text: "150,7 cm²" },
-      { key: "B", text: "172,5 cm²" },
-      { key: "C", text: "188,4 cm²" },
-      { key: "D", text: "213,6 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 48, title: "Luas Permukaan – r=14, t=48",
-    content: "Sebuah kerucut memiliki jari-jari 14 cm dan tinggi 48 cm. Luas permukaan total kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="14 cm" h="48 cm" />,
-    options: [
-      { key: "A", text: "2.200 cm²" },
-      { key: "B", text: "2.464 cm²" },
-      { key: "C", text: "2.816 cm²" },
-      { key: "D", text: "3.080 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 49, title: "Mencari Tinggi dari Luas Selimut",
-    content: "Luas selimut sebuah kerucut adalah 188,4 cm². Jika jari-jarinya 6 cm, tinggi kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="6 cm" h="?" s="?" />,
-    options: [
-      { key: "A", text: "5 cm" },
-      { key: "B", text: "6 cm" },
-      { key: "C", text: "8 cm" },
-      { key: "D", text: "10 cm" },
-    ],
-    answer: "C",
-  },
-  {
     n: 50, title: "Mencari Jari-Jari dari Luas Permukaan",
     content: "Luas permukaan total sebuah kerucut adalah 282,6 cm². Jika garis pelukisnya 13 cm, jari-jari alas kerucut tersebut adalah ... (π = 3,14)",
     options: [
@@ -665,30 +332,6 @@ const questions: Q[] = [
       { key: "D", text: "9 cm" },
     ],
     answer: "B",
-  },
-  {
-    n: 51, title: "Volume Kerucut – d=28, t=36",
-    content: "Sebuah kerucut memiliki diameter 28 cm dan tinggi 36 cm. Volume kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="14 cm" h="36 cm" />,
-    options: [
-      { key: "A", text: "5.544 cm³" },
-      { key: "B", text: "6.468 cm³" },
-      { key: "C", text: "7.392 cm³" },
-      { key: "D", text: "8.316 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 52, title: "Mencari Jari-Jari dari Volume",
-    content: "Volume sebuah kerucut adalah 1.570 cm³ dan tingginya 15 cm. Jari-jari alas kerucut tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="?" h="15 cm" />,
-    options: [
-      { key: "A", text: "7 cm" },
-      { key: "B", text: "8 cm" },
-      { key: "C", text: "10 cm" },
-      { key: "D", text: "14 cm" },
-    ],
-    answer: "C",
   },
   {
     n: 53, title: "Perbandingan Luas Selimut Dua Kerucut",
@@ -713,17 +356,6 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 55, title: "Juring → Kerucut: Tinggi Kerucut",
-    content: "Sebuah juring berjari-jari 15 cm membentuk kerucut dengan jari-jari alas 5 cm. Tinggi kerucut yang terbentuk adalah ...",
-    options: [
-      { key: "A", text: "√150 cm ≈ 12,25 cm" },
-      { key: "B", text: "10√2 cm ≈ 14,14 cm" },
-      { key: "C", text: "12 cm" },
-      { key: "D", text: "√250 cm ≈ 15,81 cm" },
-    ],
-    answer: "B",
-  },
-  {
     n: 56, title: "Aplikasi – Kubah Masjid",
     content: "Atap menara masjid berbentuk kerucut dengan r = 3,5 m dan s = 6,5 m. Seluruh selimut dicat dengan biaya Rp80.000 per m². Total biaya pengecatan adalah ... (π = 22/7)",
     diagram: <ConeSVG r="3,5 m" s="6,5 m" color="#a78bfa" extraLabel="Kubah Masjid" />,
@@ -734,18 +366,6 @@ const questions: Q[] = [
       { key: "D", text: "Rp 6.160.000" },
     ],
     answer: "C",
-  },
-  {
-    n: 57, title: "Aplikasi – Tangki Air Kerucut Terbalik",
-    content: "Tangki air berbentuk kerucut terbalik (puncak di bawah) dengan r = 21 cm dan tinggi 40 cm. Jika air diisi setengah tinggi tangki, volume air yang ada adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="21 cm" h="40 cm" color="#38bdf8" extraLabel="Tangki Terbalik" />,
-    options: [
-      { key: "A", text: "1.155 cm³" },
-      { key: "B", text: "2.310 cm³" },
-      { key: "C", text: "4.620 cm³" },
-      { key: "D", text: "9.240 cm³" },
-    ],
-    answer: "B",
   },
   {
     n: 58, title: "Aplikasi – Kap Lampu (Kerucut Terpancung)",
@@ -779,18 +399,6 @@ const questions: Q[] = [
       { key: "D", text: "1.848 cm³" },
     ],
     answer: "C",
-  },
-  {
-    n: 61, title: "UN Terpadu – Kerucut + Belahan Bola",
-    content: "Sebuah mainan berbentuk belahan bola (bawah) dan kerucut (atas) dengan r = 7 cm, tinggi kerucut = 24 cm. Luas permukaan total mainan adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="7 cm" h="24 cm" color="#f472b6" extraLabel="Mainan Anak" />,
-    options: [
-      { key: "A", text: "704 cm²" },
-      { key: "B", text: "858 cm²" },
-      { key: "C", text: "1.012 cm²" },
-      { key: "D", text: "1.166 cm²" },
-    ],
-    answer: "B",
   },
 ];
 
@@ -840,7 +448,7 @@ const KerucutPage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-              <span className="text-orange-400 text-xs font-bold">📋 61 Soal Pilihan Ganda</span>
+              <span className="text-orange-400 text-xs font-bold">📋 28 Soal Pilihan Ganda</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
