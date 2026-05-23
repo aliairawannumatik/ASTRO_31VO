@@ -389,6 +389,189 @@ const questions: Q[] = [
       { label: "c.", math: "V_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ m}^3" },
     ],
   }),
+
+  /* ── SOAL BARU 41–61 ── */
+  Qn(41, "Unsur Kerucut – Sisi, Rusuk, Titik Sudut", {
+    content: "Lengkapi tabel unsur-unsur bangun ruang kerucut berikut!",
+    parts: [
+      { label: "a.", text: "Jumlah sisi (permukaan) kerucut = … buah (alas lingkaran + selimut lengkung)" },
+      { label: "b.", text: "Jumlah rusuk kerucut = … buah (hanya 1 rusuk berupa lingkaran alas)" },
+      { label: "c.", text: "Jumlah titik sudut kerucut = … buah (hanya titik puncak)" },
+      { label: "d.", text: "Bandingkan dengan tabung: sisi = 3, rusuk = 2, titik sudut = 0. Apa perbedaannya?" },
+    ],
+  }),
+  Qn(42, "Bentuk Selimut Kerucut", {
+    content: "Jika selimut kerucut dibuka/diratakan, akan membentuk bangun apa? Jelaskan unsur-unsurnya!",
+    parts: [
+      { label: "a.", text: "Selimut kerucut jika diratakan berbentuk … (juring lingkaran / sektor lingkaran)" },
+      { label: "b.", text: "Jari-jari juring tersebut sama dengan … kerucut (garis pelukis / s)" },
+      { label: "c.", math: "\\text{Panjang busur juring} = \\text{keliling lingkaran alas} = 2\\pi r" },
+      { label: "d.", text: "Alas kerucut berbentuk lingkaran dengan jari-jari = … (r)" },
+    ],
+  }),
+  Qn(43, "Hubungan r, t, dan s — Teorema Pythagoras", {
+    content: "Perhatikan kerucut di bawah ini. Jelaskan hubungan antara jari-jari (r), tinggi (t), dan garis pelukis (s) menggunakan Teorema Pythagoras!",
+    diagram: <ConeSVG r="r" h="t" s="s" />,
+    parts: [
+      { label: "a.", math: "s^2 = r^2 + t^2 \\Rightarrow s = \\sqrt{r^2 + t^2}" },
+      { label: "b.", math: "r^2 = s^2 - t^2 \\Rightarrow r = \\sqrt{s^2 - t^2}" },
+      { label: "c.", math: "t^2 = s^2 - r^2 \\Rightarrow t = \\sqrt{s^2 - r^2}" },
+      { label: "d.", text: "Ketiga unsur r, t, s membentuk segitiga siku-siku dengan s sebagai sisi …" },
+    ],
+  }),
+  Qn(44, "Mencari s dari r dan t – Angka Baru", {
+    content: "Sebuah kerucut memiliki jari-jari alas 5 cm dan tinggi 12 cm. Tentukan panjang garis pelukisnya!",
+    diagram: <ConeSVG r="5 cm" h="12 cm" />,
+    parts: [
+      { label: "a.", math: "s = \\sqrt{r^2 + t^2} = \\sqrt{5^2 + 12^2} = \\sqrt{\\ldots + \\ldots}" },
+      { label: "b.", math: "s = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(45, "Mencari r dari s dan t", {
+    content: "Sebuah kerucut memiliki garis pelukis 17 cm dan tinggi 15 cm. Tentukan jari-jari alasnya!",
+    diagram: <ConeSVG r="?" h="15 cm" s="17 cm" />,
+    parts: [
+      { label: "a.", math: "r = \\sqrt{s^2 - t^2} = \\sqrt{17^2 - 15^2} = \\sqrt{\\ldots - \\ldots}" },
+      { label: "b.", math: "r = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(46, "Mencari t dari s dan r", {
+    content: "Sebuah kerucut memiliki garis pelukis 25 cm dan jari-jari 7 cm. Tentukan tinggi kerucut!",
+    diagram: <ConeSVG r="7 cm" h="?" s="25 cm" />,
+    parts: [
+      { label: "a.", math: "t = \\sqrt{s^2 - r^2} = \\sqrt{25^2 - 7^2} = \\sqrt{\\ldots - \\ldots}" },
+      { label: "b.", math: "t = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(47, "Luas Selimut – Diketahui r dan t", {
+    content: "Sebuah kerucut memiliki jari-jari 6 cm dan tinggi 8 cm. Hitunglah luas selimut kerucut! (π = 3,14)",
+    diagram: <ConeSVG r="6 cm" h="8 cm" />,
+    parts: [
+      { label: "a.", math: "s = \\sqrt{6^2 + 8^2} = \\sqrt{100} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "L_{\\text{selimut}} = \\pi r s = 3{,}14 \\times 6 \\times s = \\ldots \\text{ cm}^2" },
+    ],
+  }),
+  Qn(48, "Luas Permukaan – r dan t Diketahui", {
+    content: "Sebuah kerucut memiliki jari-jari 14 cm dan tinggi 48 cm. Hitunglah luas permukaan total kerucut! (π = 22/7)",
+    diagram: <ConeSVG r="14 cm" h="48 cm" />,
+    parts: [
+      { label: "a.", math: "s = \\sqrt{14^2 + 48^2} = \\sqrt{196 + 2304} = \\sqrt{2500} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "L = \\pi r(r + s) = \\frac{22}{7} \\times 14 \\times (14 + 50) = \\ldots \\text{ cm}^2" },
+    ],
+  }),
+  Qn(49, "Mencari Tinggi dari Luas Selimut dan Jari-Jari", {
+    content: "Luas selimut sebuah kerucut adalah 188,4 cm². Jika jari-jarinya 6 cm, tentukan tinggi kerucut tersebut! (π = 3,14)",
+    diagram: <ConeSVG r="6 cm" s="?" h="?" />,
+    parts: [
+      { label: "a.", math: "\\pi r s = 188{,}4 \\Rightarrow 3{,}14 \\times 6 \\times s = 188{,}4" },
+      { label: "b.", math: "s = \\frac{188{,}4}{18{,}84} = \\ldots \\text{ cm}" },
+      { label: "c.", math: "t = \\sqrt{s^2 - r^2} = \\sqrt{\\ldots^2 - 6^2} = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(50, "Mencari r dari Luas Permukaan Total", {
+    content: "Luas permukaan total sebuah kerucut adalah 251,2 cm². Jika garis pelukisnya 10 cm, tentukan jari-jari alas kerucut! (π = 3,14)",
+    parts: [
+      { label: "a.", math: "L = \\pi r(r + s) \\Rightarrow 251{,}2 = 3{,}14 \\times r \\times (r + 10)" },
+      { label: "b.", math: "r(r + 10) = \\frac{251{,}2}{3{,}14} = \\ldots" },
+      { label: "c.", text: "Selesaikan persamaan kuadrat atau coba nilai r = … cm" },
+    ],
+  }),
+  Qn(51, "Volume Kerucut – Angka Baru", {
+    content: "Sebuah kerucut memiliki diameter 28 cm dan tinggi 36 cm. Hitunglah volume kerucut! (π = 22/7)",
+    diagram: <ConeSVG r="14 cm" h="36 cm" />,
+    parts: [
+      { label: "a.", math: "r = \\frac{28}{2} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "V = \\frac{1}{3} \\times \\frac{22}{7} \\times 14^2 \\times 36 = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(52, "Mencari r dari Volume dan Tinggi", {
+    content: "Volume sebuah kerucut adalah 1.884 cm³ dan tingginya 15 cm. Tentukan jari-jari alasnya! (π = 3,14)",
+    diagram: <ConeSVG r="?" h="15 cm" />,
+    parts: [
+      { label: "a.", math: "\\frac{1}{3} \\pi r^2 t = 1884 \\Rightarrow \\frac{1}{3} \\times 3{,}14 \\times r^2 \\times 15 = 1884" },
+      { label: "b.", math: "r^2 = \\frac{1884}{\\frac{1}{3} \\times 3{,}14 \\times 15} = \\ldots" },
+      { label: "c.", math: "r = \\sqrt{\\ldots} = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(53, "Perbandingan Luas Selimut Dua Kerucut", {
+    content: "Kerucut P memiliki r = 6 cm dan s = 10 cm. Kerucut Q memiliki r = 9 cm dan s = 15 cm. Tentukan perbandingan luas selimut P dan Q!",
+    parts: [
+      { label: "a.", math: "L_P = \\pi \\times 6 \\times 10 = 60\\pi \\text{ cm}^2" },
+      { label: "b.", math: "L_Q = \\pi \\times 9 \\times 15 = 135\\pi \\text{ cm}^2" },
+      { label: "c.", math: "L_P : L_Q = 60\\pi : 135\\pi = \\ldots : \\ldots" },
+    ],
+  }),
+  Qn(54, "Juring → Kerucut: Mencari Jari-Jari Kerucut", {
+    content: "Sebuah juring lingkaran memiliki jari-jari 15 cm dan sudut pusat 120°. Juring ini dilipat menjadi selimut kerucut. Tentukan jari-jari alas kerucut yang terbentuk!",
+    parts: [
+      { label: "a.", math: "\\text{Panjang busur} = \\frac{120}{360} \\times 2\\pi \\times 15 = \\frac{1}{3} \\times 30\\pi = 10\\pi \\text{ cm}" },
+      { label: "b.", text: "Panjang busur = keliling alas kerucut = 2πr" },
+      { label: "c.", math: "2\\pi r = 10\\pi \\Rightarrow r = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(55, "Juring → Kerucut: Mencari Tinggi Kerucut", {
+    content: "Dari soal no. 54, setelah juring dibentuk menjadi kerucut (r = 5 cm, s = 15 cm), tentukan tinggi kerucut yang terbentuk!",
+    parts: [
+      { label: "a.", math: "t = \\sqrt{s^2 - r^2} = \\sqrt{15^2 - 5^2} = \\sqrt{225 - 25}" },
+      { label: "b.", math: "t = \\sqrt{200} = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(56, "Aplikasi – Kubah Masjid Berbentuk Kerucut", {
+    content: "Atap sebuah menara masjid berbentuk kerucut dengan r = 3,5 m dan garis pelukis 6,5 m. Seluruh permukaan selimut akan dicat dengan biaya Rp 80.000 per m². Berapa total biaya pengecatan? (π = 22/7)",
+    diagram: <ConeSVG r="3,5 m" s="6,5 m" color="#a78bfa" extraLabel="Kubah Masjid" />,
+    parts: [
+      { label: "a.", math: "L_{\\text{selimut}} = \\pi r s = \\frac{22}{7} \\times 3{,}5 \\times 6{,}5 = \\ldots \\text{ m}^2" },
+      { label: "b.", math: "\\text{Biaya} = L \\times 80.000 = \\text{Rp}\\ldots" },
+    ],
+  }),
+  Qn(57, "Aplikasi – Tangki Air Kerucut", {
+    content: "Sebuah tangki air berbentuk kerucut terbalik (puncak di bawah) dengan r = 21 cm dan tinggi 40 cm. Air diisi hingga setengah tinggi tangki. Berapa cm³ volume air yang ada? (π = 22/7)",
+    diagram: <ConeSVG r="21 cm" h="40 cm" color="#38bdf8" extraLabel="Tangki Terbalik" />,
+    parts: [
+      { label: "a.", text: "Jika air setengah tinggi, maka tinggi air = 20 cm dan r air ∝ tinggi (kesamaan segitiga)" },
+      { label: "b.", math: "r_{\\text{air}} = \\frac{20}{40} \\times 21 = \\ldots \\text{ cm}" },
+      { label: "c.", math: "V_{\\text{air}} = \\frac{1}{3} \\times \\frac{22}{7} \\times r_{\\text{air}}^2 \\times 20 = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(58, "Aplikasi – Kap Lampu (Kerucut Terpancung)", {
+    content: "Sebuah kap lampu berbentuk kerucut terpancung memiliki jari-jari atas 4 cm, jari-jari bawah 12 cm, dan tinggi 9 cm. Jika kap dibuat dari kerucut besar dikurangi kerucut kecil, hitung volume kerucut kecil yang dipotong! (π = 3,14)",
+    parts: [
+      { label: "a.", text: "Kesamaan segitiga: r₁/r₂ = t₁/t₂ → 4/12 = t₁/(t₁ + 9)" },
+      { label: "b.", math: "4(t_1 + 9) = 12t_1 \\Rightarrow 4t_1 + 36 = 12t_1 \\Rightarrow t_1 = \\ldots \\text{ cm}" },
+      { label: "c.", math: "V_{\\text{kecil}} = \\frac{1}{3} \\times 3{,}14 \\times 4^2 \\times t_1 = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(59, "TKA – Perbandingan r:s Diketahui", {
+    content: "Sebuah kerucut memiliki perbandingan jari-jari dan garis pelukis r : s = 3 : 5. Jika luas selimutnya 1.200π cm², tentukan jari-jari dan garis pelukis kerucut!",
+    parts: [
+      { label: "a.", text: "Misalkan r = 3k dan s = 5k untuk suatu bilangan k" },
+      { label: "b.", math: "\\pi r s = 1200\\pi \\Rightarrow \\pi \\times 3k \\times 5k = 1200\\pi" },
+      { label: "c.", math: "15k^2 = 1200 \\Rightarrow k^2 = \\ldots \\Rightarrow k = \\ldots" },
+      { label: "d.", math: "r = 3k = \\ldots \\text{ cm}, \\quad s = 5k = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(60, "HOTS – Volume Kerucut dengan Perbandingan r:s = 7:25", {
+    content: "Sebuah kerucut memiliki perbandingan r : s = 7 : 25. Jika luas selimut kerucut adalah 550 cm², tentukan: (a) r dan s, (b) tinggi kerucut, (c) volume kerucut! (π = 22/7)",
+    parts: [
+      { label: "a.", math: "r = 7k,\\ s = 25k \\Rightarrow \\frac{22}{7} \\times 7k \\times 25k = 550 \\Rightarrow 22 \\times 25k^2 = 550" },
+      { label: "b.", math: "550k^2 = 550 \\Rightarrow k = 1 \\Rightarrow r = 7\\ \\text{cm},\\ s = 25\\ \\text{cm}" },
+      { label: "c.", math: "t = \\sqrt{25^2 - 7^2} = \\sqrt{576} = \\ldots \\text{ cm}" },
+      { label: "d.", math: "V = \\frac{1}{3} \\times \\frac{22}{7} \\times 49 \\times t = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(61, "UN Terpadu – Kerucut + Belahan Bola", {
+    content: "Sebuah mainan berbentuk belahan bola di bawah dan kerucut di atas. Jari-jari keduanya sama = 7 cm dan tinggi kerucut = 24 cm. Hitunglah: (a) luas permukaan total mainan, (b) volume total mainan! (π = 22/7)",
+    diagram: <ConeSVG r="7 cm" h="24 cm" color="#f472b6" extraLabel="Mainan Anak" />,
+    parts: [
+      { label: "a.", math: "s = \\sqrt{7^2 + 24^2} = \\sqrt{625} = 25\\ \\text{cm}" },
+      { label: "b.", math: "L_{\\text{selimut kerucut}} = \\frac{22}{7} \\times 7 \\times 25 = \\ldots \\text{ cm}^2" },
+      { label: "c.", math: "L_{\\text{belahan bola}} = 2\\pi r^2 = 2 \\times \\frac{22}{7} \\times 49 = \\ldots \\text{ cm}^2" },
+      { label: "d.", math: "L_{\\text{total}} = L_{\\text{selimut}} + L_{\\text{belahan bola}} = \\ldots \\text{ cm}^2" },
+      { label: "e.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times \\frac{22}{7} \\times 49 \\times 24 = \\ldots \\text{ cm}^3" },
+      { label: "f.", math: "V_{\\text{belahan bola}} = \\frac{2}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ cm}^3" },
+      { label: "g.", math: "V_{\\text{total}} = V_{\\text{kerucut}} + V_{\\text{belahan bola}} = \\ldots \\text{ cm}^3" },
+    ],
+  }),
 ];
 
 const KerucutPage = () => {
@@ -408,7 +591,7 @@ const KerucutPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 40 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 61 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
