@@ -184,49 +184,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 8, title: "Koordinat Bayangan — Diagram Segitiga",
-    diagram: (
-      <GridSVG>
-        <Poly pts={[[0,0],[2,0],[0,3]]} color="#f43f5e" label="△ABC"/>
-        <Poly pts={[[0,0],[4,0],[0,6]]} color="#a78bfa" fill="rgba(167,139,250,0.12)" label="△A'B'C'"/>
-        <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
-        <DilLine x1={0} y1={0} x2={4} y2={0}/>
-        <DilLine x1={0} y1={0} x2={0} y2={6}/>
-      </GridSVG>
-    ),
-    content: "Berdasarkan diagram, koordinat C′ (bayangan C(0, 3)) setelah dilatasi terhadap O adalah ...",
-    choices: [
-      { label: "A", text: "(0, 6)" },
-      { label: "B", text: "(0, 3)" },
-      { label: "C", text: "(4, 6)" },
-      { label: "D", text: "(2, 6)" },
-    ],
-    answer: "A",
-  },
-  {
-    n: 9, title: "Faktor Skala — Diagram Penyusutan",
-    diagram: (
-      <GridSVG>
-        <Poly pts={[[-4,-4],[4,-4],[4,4],[-4,4]]} color="#f43f5e" label="Asal"/>
-        <Poly pts={[[-2,-2],[2,-2],[2,2],[-2,2]]} color="#34d399" fill="rgba(52,211,153,0.12)" label="Bayangan"/>
-        <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
-        <DilLine x1={0} y1={0} x2={4} y2={4}/>
-        <DilLine x1={0} y1={0} x2={-4} y2={4}/>
-        <DilLine x1={0} y1={0} x2={4} y2={-4}/>
-        <DilLine x1={0} y1={0} x2={-4} y2={-4}/>
-      </GridSVG>
-    ),
-    content: "Persegi besar (merah) didilatasi terhadap O menghasilkan persegi kecil (hijau). Faktor skala dilatasi tersebut adalah ...",
-    choices: [
-      { label: "A", text: "2" },
-      { label: "B", text: "1/3" },
-      { label: "C", text: "1/2" },
-      { label: "D", text: "1/4" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 10, title: "Mencari Titik Asal dari Bayangan",
+    n: 8, title: "Mencari Titik Asal dari Bayangan",
     content: "Bayangan titik A setelah dilatasi dengan pusat O(0, 0) dan k = 3 adalah A′(12, −9). Koordinat titik A adalah ...",
     choices: [
       { label: "A", text: "(4, −3)" },
@@ -237,40 +195,7 @@ const questions: Q[] = [
     answer: "A",
   },
   {
-    n: 11, title: "Sifat Titik Pusat dan Bayangan — Diagram",
-    diagram: (
-      <GridSVG>
-        <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
-        <Dot x={1} y={2} color="#f43f5e" r={4} label="A(1,2)"/>
-        <Dot x={3} y={6} color="#a78bfa" r={4} label="A'(3,6)"/>
-        <DilLine x1={0} y1={0} x2={3} y2={6}/>
-        <Dot x={2} y={1} color="#f43f5e" r={4} label="B(2,1)"/>
-        <Dot x={6} y={3} color="#a78bfa" r={4} label="B'(6,3)"/>
-        <DilLine x1={0} y1={0} x2={6} y2={3}/>
-      </GridSVG>
-    ),
-    content: "Berdasarkan diagram, faktor skala dilatasi dari A ke A′ dan dari B ke B′ adalah ...",
-    choices: [
-      { label: "A", text: "2" },
-      { label: "B", text: "3" },
-      { label: "C", text: "4" },
-      { label: "D", text: "6" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 12, title: "Perbandingan Panjang Ruas Setelah Dilatasi",
-    content: "Ruas garis AB dengan A(1, 2) dan B(3, 4) didilatasi terhadap O(0, 0) dengan k = 3. Perbandingan panjang A′B′ terhadap AB adalah ...",
-    choices: [
-      { label: "A", text: "2 : 1" },
-      { label: "B", text: "3 : 1" },
-      { label: "C", text: "6 : 1" },
-      { label: "D", text: "9 : 1" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 13, title: "Dilatasi dengan Koordinat Variabel",
+    n: 9, title: "Dilatasi dengan Koordinat Variabel",
     content: "Titik A(m, 2m) didilatasi terhadap O(0, 0) dengan k = 3 menghasilkan A′(9, 18). Nilai m adalah ...",
     choices: [
       { label: "A", text: "1" },
@@ -281,7 +206,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 14, title: "ANBK — Dilatasi k = −1 dan Rotasi 180°",
+    n: 10, title: "ANBK — Dilatasi k = −1 dan Rotasi 180°",
     content: "Titik A(3, 2) didilatasi terhadap O dengan k = −1. Bayangan A′ adalah ...",
     choices: [
       { label: "A", text: "(3, −2)" },
@@ -293,7 +218,7 @@ const questions: Q[] = [
   },
   /* ══════════ GRUP 2: DILATASI PUSAT (a, b) ══════════ */
   {
-    n: 15, title: "Dilatasi dengan Pusat Bergeser",
+    n: 11, title: "Dilatasi dengan Pusat Bergeser",
     content: "Titik A(5, 4) didilatasi dengan pusat P(1, 2) dan k = 3. Bayangan A′ adalah ...",
     math: "A' = P + k(A-P)",
     choices: [
@@ -305,7 +230,7 @@ const questions: Q[] = [
     answer: "A",
   },
   {
-    n: 16, title: "Bayangan Titik — Diagram Pusat Bukan O",
+    n: 12, title: "Bayangan Titik — Diagram Pusat Bukan O",
     diagram: (
       <GridSVG>
         <Dot x={1} y={1} color="#facc15" r={3} label="P(1,1)"/>
@@ -326,7 +251,7 @@ const questions: Q[] = [
   },
   /* ══════════ GRUP 3: DILATASI KOMPOSISI ══════════ */
   {
-    n: 17, title: "ANBK — Dilatasi Dua Kali Berurutan",
+    n: 13, title: "ANBK — Dilatasi Dua Kali Berurutan",
     content: "Titik A(1, 2) didilatasi terhadap O dengan k₁ = 2, lalu hasilnya didilatasi lagi dengan k₂ = 3. Koordinat akhir A adalah ...",
     choices: [
       { label: "A", text: "(2, 4)" },
@@ -337,13 +262,59 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 18, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
+    n: 14, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
     content: "Titik A(2, 3) didilatasi terhadap O dengan k = 2 menghasilkan A′. Kemudian A′ direfleksikan terhadap sumbu-x menghasilkan A″. Koordinat A″ adalah ...",
     choices: [
       { label: "A", text: "(4, 6)" },
       { label: "B", text: "(−4, 6)" },
       { label: "C", text: "(4, −6)" },
       { label: "D", text: "(2, −3)" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 15, title: "Dilatasi Dilanjut Translasi",
+    content: "Titik A(2, 1) didilatasi terhadap O(0, 0) dengan k = 3 menghasilkan A′. Kemudian A′ ditranslasikan oleh T(−4, 2) menghasilkan A″. Koordinat A″ adalah ...",
+    choices: [
+      { label: "A", text: "(6, 3)" },
+      { label: "B", text: "(2, 5)" },
+      { label: "C", text: "(−2, 5)" },
+      { label: "D", text: "(2, −5)" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 16, title: "Refleksi Dilanjut Dilatasi",
+    content: "Titik B(−2, 4) direfleksikan terhadap sumbu-y menghasilkan B′. Kemudian B′ didilatasi terhadap O(0, 0) dengan k = 2 menghasilkan B″. Koordinat B″ adalah ...",
+    choices: [
+      { label: "A", text: "(−4, 8)" },
+      { label: "B", text: "(4, −8)" },
+      { label: "C", text: "(4, 8)" },
+      { label: "D", text: "(8, 4)" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 17, title: "Dilatasi Dilanjut Rotasi 90° (Berlawanan Jarum Jam) Pusat (a, b)",
+    content: "Titik C(3, 2) didilatasi terhadap O dengan k = 2 menghasilkan C′(6, 4). C′ dirotasikan 90° berlawanan arah jarum jam terhadap pusat P(2, 0). Koordinat C″ adalah ...",
+    math: String.raw`C''_x = a-(y'-b),\quad C''_y = b+(x'-a)`,
+    choices: [
+      { label: "A", text: "(4, −2)" },
+      { label: "B", text: "(−2, 4)" },
+      { label: "C", text: "(2, 4)" },
+      { label: "D", text: "(−4, 2)" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 18, title: "Rotasi 180° Pusat (a, b) Dilanjut Dilatasi Pusat (a, b)",
+    content: "Titik D(5, 3) dirotasikan 180° terhadap pusat P(2, 1) menghasilkan D′. D′ kemudian didilatasi terhadap pusat P(2, 1) dengan k = 2 menghasilkan D″. Koordinat D″ adalah ...",
+    math: String.raw`D'=(2a-x,\;2b-y),\quad D''_x=a+k(D'_x-a)`,
+    choices: [
+      { label: "A", text: "(−1, −1)" },
+      { label: "B", text: "(8, 5)" },
+      { label: "C", text: "(−4, −3)" },
+      { label: "D", text: "(0, 3)" },
     ],
     answer: "C",
   },
@@ -399,8 +370,8 @@ const questions: Q[] = [
 
 const groupHeaders: Record<number, string> = {
   1:  "📍 Dilatasi Pusat O(0, 0)",
-  15: "📍 Dilatasi Pusat (a, b)",
-  17: "🔀 Dilatasi Komposisi",
+  11: "📍 Dilatasi Pusat (a, b)",
+  13: "🔀 Dilatasi Komposisi",
   19: "📈 Dilatasi Kurva Linear — Pusat O(0, 0)",
   21: "📍 Dilatasi Pusat (a, b) — Lanjutan",
 };
