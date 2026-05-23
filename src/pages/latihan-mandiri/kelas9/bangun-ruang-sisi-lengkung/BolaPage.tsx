@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -5,6 +6,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
+type OptionKey = "A" | "B" | "C" | "D";
 type Part = { label: string; math?: string; text?: string };
 type Q = {
   n: number; title: string;
@@ -12,6 +14,14 @@ type Q = {
   parts?: Part[];
   diagram?: React.ReactNode;
 };
+type QMC = {
+  n: number; title: string;
+  content: string;
+  diagram?: React.ReactNode;
+  options: { key: OptionKey; text: string }[];
+  answer: OptionKey;
+};
+
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 function SphereSVG({ r, color = "#818cf8", extraLabel = "", half = false }: {
@@ -73,6 +83,280 @@ function HalfSphereSVG({ r, color = "#818cf8" }: { r?: string; color?: string })
     </svg>
   );
 }
+
+function BolaDalamTabungSVG({ color = "#818cf8" }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 260 230" width="260" height="230" className="mx-auto">
+      <defs>
+        <radialGradient id="bdt-sphere" cx="35%" cy="30%" r="60%">
+          <stop offset="0%" stopColor={color} stopOpacity="0.5" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.10" />
+        </radialGradient>
+      </defs>
+      {/* Cylinder body */}
+      <rect x="60" y="25" width="140" height="160" fill={color} fillOpacity="0.04" stroke={color} strokeWidth="1.5" />
+      {/* Cylinder top ellipse */}
+      <ellipse cx="130" cy="25" rx="70" ry="18" fill={color} fillOpacity="0.08" stroke={color} strokeWidth="1.5" />
+      {/* Cylinder bottom ellipse */}
+      <ellipse cx="130" cy="185" rx="70" ry="18" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" />
+      {/* Sphere */}
+      <circle cx="130" cy="105" r="70" fill="url(#bdt-sphere)" stroke={color} strokeWidth="2" />
+      <ellipse cx="130" cy="105" rx="70" ry="20" fill="none" stroke={color} strokeWidth="1" strokeDasharray="5,3" />
+      {/* Radius label */}
+      <line x1="130" y1="105" x2="200" y2="105" stroke={color} strokeWidth="1.2" strokeDasharray="4,2" />
+      <circle cx="130" cy="105" r="3" fill={color} />
+      <text x="168" y="98" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r</text>
+      {/* Caption */}
+      <text x="130" y="215" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Bola menyinggung semua sisi tabung</text>
+    </svg>
+  );
+}
+
+function TabungSetengahBolaSVG({ color = "#818cf8" }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 260 250" width="260" height="250" className="mx-auto">
+      <defs>
+        <radialGradient id="tsb-sphere" cx="35%" cy="25%" r="65%">
+          <stop offset="0%" stopColor={color} stopOpacity="0.45" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.08" />
+        </radialGradient>
+      </defs>
+      {/* Cylinder */}
+      <rect x="60" y="130" width="140" height="90" fill={color} fillOpacity="0.05" stroke={color} strokeWidth="1.5" />
+      <ellipse cx="130" cy="220" rx="70" ry="18" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" />
+      <ellipse cx="130" cy="130" rx="70" ry="18" fill={color} fillOpacity="0.08" stroke={color} strokeWidth="1.2" strokeDasharray="5,3" />
+      {/* Half sphere on top */}
+      <path d="M 60 130 A 70 70 0 0 1 200 130 Z" fill="url(#tsb-sphere)" stroke={color} strokeWidth="2" />
+      {/* Labels */}
+      <line x1="130" y1="130" x2="200" y2="130" stroke={color} strokeWidth="1.2" strokeDasharray="4,2" />
+      <circle cx="130" cy="130" r="3" fill={color} />
+      <text x="212" y="134" fill={color} fontSize="11" textAnchor="start" fontFamily="monospace">r = 7</text>
+      <line x1="205" y1="135" x2="205" y2="218" stroke={color} strokeWidth="1" strokeDasharray="3,2" />
+      <text x="212" y="182" fill={color} fontSize="11" textAnchor="start" fontFamily="monospace">t = 10</text>
+      <text x="130" y="243" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Tabung + Setengah Bola</text>
+    </svg>
+  );
+}
+
+function PerbandinganBangunSVG({ color = "#818cf8" }: { color?: string }) {
+  return (
+    <svg viewBox="0 0 340 210" width="340" height="210" className="mx-auto">
+      <defs>
+        <radialGradient id="pbg-sphere" cx="35%" cy="30%" r="60%">
+          <stop offset="0%" stopColor={color} stopOpacity="0.45" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.08" />
+        </radialGradient>
+        <linearGradient id="pbg-cone" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.18" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+      {/* Cylinder */}
+      <rect x="8" y="38" width="82" height="120" fill={color} fillOpacity="0.05" stroke={color} strokeWidth="1.4" />
+      <ellipse cx="49" cy="38" rx="41" ry="12" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.4" />
+      <ellipse cx="49" cy="158" rx="41" ry="12" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.4" />
+      <text x="49" y="185" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Tabung</text>
+      <text x="49" y="196" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 3</text>
+      {/* Sphere */}
+      <circle cx="170" cy="98" r="60" fill="url(#pbg-sphere)" stroke={color} strokeWidth="2" />
+      <ellipse cx="170" cy="98" rx="60" ry="17" fill="none" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
+      <text x="170" y="180" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Bola</text>
+      <text x="170" y="191" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 2</text>
+      {/* Cone */}
+      <ellipse cx="290" cy="158" rx="41" ry="12" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.4" />
+      <line x1="249" y1="158" x2="290" y2="38" stroke={color} strokeWidth="1.5" />
+      <line x1="331" y1="158" x2="290" y2="38" stroke={color} strokeWidth="1.5" />
+      <polygon points="249,158 331,158 290,38" fill="url(#pbg-cone)" />
+      <text x="290" y="185" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Kerucut</text>
+      <text x="290" y="196" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 1</text>
+    </svg>
+  );
+}
+
+const mcQuestions: QMC[] = [
+  {
+    n: 1, title: "Titik Sudut Bola",
+    content: "Banyaknya titik sudut yang dimiliki oleh bangun bola adalah ...",
+    options: [
+      { key: "A", text: "tidak ada" },
+      { key: "B", text: "1 buah" },
+      { key: "C", text: "2 buah" },
+      { key: "D", text: "banyak sekali" },
+    ],
+    answer: "A",
+  },
+  {
+    n: 2, title: "Rumus Luas Permukaan Bola",
+    content: "Rumus yang tepat untuk menghitung luas permukaan bola berjari-jari r adalah ...",
+    options: [
+      { key: "A", text: "L = 2πr²" },
+      { key: "B", text: "L = 3πr²" },
+      { key: "C", text: "L = 4πr²" },
+      { key: "D", text: "L = ⁴⁄₃πr³" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 3, title: "Luas Permukaan Bola – r = 14 cm",
+    content: "Sebuah bola memiliki jari-jari 14 cm. Luas permukaan bola tersebut adalah ... (π = 22/7)",
+    diagram: <SphereSVG r="14 cm" />,
+    options: [
+      { key: "A", text: "1.848 cm²" },
+      { key: "B", text: "2.156 cm²" },
+      { key: "C", text: "2.464 cm²" },
+      { key: "D", text: "3.080 cm²" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 4, title: "Mencari Jari-Jari dari Luas Permukaan",
+    content: "Luas permukaan sebuah bola adalah 154 cm². Panjang jari-jari bola tersebut adalah ... (π = 22/7)",
+    diagram: <SphereSVG r="?" />,
+    options: [
+      { key: "A", text: "3 cm" },
+      { key: "B", text: "3,5 cm" },
+      { key: "C", text: "5 cm" },
+      { key: "D", text: "7 cm" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 5, title: "Perbandingan Luas Permukaan Dua Bola",
+    content: "Dua buah bola memiliki jari-jari masing-masing 5 cm dan 10 cm. Perbandingan luas permukaan bola pertama terhadap bola kedua adalah ...",
+    options: [
+      { key: "A", text: "1 : 4" },
+      { key: "B", text: "1 : 2" },
+      { key: "C", text: "4 : 1" },
+      { key: "D", text: "2 : 1" },
+    ],
+    answer: "A",
+  },
+  {
+    n: 6, title: "Perbandingan Luas Permukaan dan Volume",
+    content: "Sebuah bola berjari-jari r cm. Perbandingan antara luas permukaan bola dengan volumenya adalah ...",
+    options: [
+      { key: "A", text: "3 : r" },
+      { key: "B", text: "r : 3" },
+      { key: "C", text: "r : 4" },
+      { key: "D", text: "4 : r" },
+    ],
+    answer: "A",
+  },
+  {
+    n: 7, title: "Volume Bola – Diameter 21 cm",
+    content: "Sebuah bola memiliki diameter 21 cm. Volume bola tersebut adalah ... (π = 22/7)",
+    diagram: <SphereSVG r="10,5 cm" />,
+    options: [
+      { key: "A", text: "1.386 cm³" },
+      { key: "B", text: "2.910 cm³" },
+      { key: "C", text: "4.851 cm³" },
+      { key: "D", text: "9.702 cm³" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 8, title: "Perbandingan Volume Dua Bola",
+    content: "Dua buah bola memiliki jari-jari masing-masing 3 cm dan 6 cm. Perbandingan volume bola pertama terhadap bola kedua adalah ...",
+    options: [
+      { key: "A", text: "1 : 4" },
+      { key: "B", text: "1 : 6" },
+      { key: "C", text: "1 : 8" },
+      { key: "D", text: "2 : 3" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 9, title: "Bola dalam Tabung",
+    content: "Sebuah bola menyinggung semua sisi bagian dalam sebuah tabung (diameter dan tinggi tabung sama dengan diameter bola). Perbandingan volume bola terhadap volume tabung adalah ...",
+    diagram: <BolaDalamTabungSVG />,
+    options: [
+      { key: "A", text: "1 : 2" },
+      { key: "B", text: "2 : 3" },
+      { key: "C", text: "3 : 4" },
+      { key: "D", text: "3 : 2" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 10, title: "Volume Gabungan Tabung dan Setengah Bola",
+    content: "Sebuah bangun gabungan terdiri dari tabung dengan jari-jari 7 cm dan tinggi 10 cm, serta setengah bola di atasnya dengan jari-jari yang sama. Volume bangun tersebut adalah ... (π = 22/7)",
+    diagram: <TabungSetengahBolaSVG />,
+    options: [
+      { key: "A", text: "2.108,7 cm³" },
+      { key: "B", text: "2.258,7 cm³" },
+      { key: "C", text: "2.558,7 cm³" },
+      { key: "D", text: "2.977,3 cm³" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 11, title: "Perbandingan Volume Tabung, Bola, Kerucut",
+    content: "Sebuah tabung, bola, dan kerucut memiliki jari-jari dan tinggi yang sama (tinggi = 2r). Perbandingan volume tabung : bola : kerucut adalah ...",
+    diagram: <PerbandinganBangunSVG />,
+    options: [
+      { key: "A", text: "1 : 2 : 3" },
+      { key: "B", text: "2 : 1 : 3" },
+      { key: "C", text: "3 : 2 : 1" },
+      { key: "D", text: "3 : 1 : 2" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 12, title: "Luas Permukaan dari Volume Bola",
+    content: "Volume sebuah bola adalah 36π cm³. Luas permukaan bola tersebut adalah ...",
+    options: [
+      { key: "A", text: "18π cm²" },
+      { key: "B", text: "27π cm²" },
+      { key: "C", text: "36π cm²" },
+      { key: "D", text: "54π cm²" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 13, title: "Perbandingan Luas Permukaan – Diameter Berbeda",
+    content: "Dua buah bola memiliki diameter masing-masing 6 cm dan 8 cm. Perbandingan luas permukaan kedua bola adalah ...",
+    options: [
+      { key: "A", text: "3 : 4" },
+      { key: "B", text: "4 : 9" },
+      { key: "C", text: "9 : 16" },
+      { key: "D", text: "16 : 27" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 14, title: "Luas Permukaan dari Volume (Besar)",
+    content: "Volume sebuah bola adalah 972π cm³. Luas permukaan bola tersebut adalah ...",
+    options: [
+      { key: "A", text: "81π cm²" },
+      { key: "B", text: "108π cm²" },
+      { key: "C", text: "162π cm²" },
+      { key: "D", text: "324π cm²" },
+    ],
+    answer: "D",
+  },
+  {
+    n: 15, title: "Bola Besi dalam Tabung Berisi Air",
+    content: "Sebuah tabung berisi air memiliki jari-jari alas 18 cm dengan permukaan air setinggi 10 cm. Ke dalam tabung dimasukkan bola besi berjari-jari 9 cm sehingga permukaan air naik setinggi t cm. Nilai t adalah ... (π sama)",
+    options: [
+      { key: "A", text: "2" },
+      { key: "B", text: "3" },
+      { key: "C", text: "4" },
+      { key: "D", text: "5" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 16, title: "Perubahan Volume saat Jari-Jari Diperbesar",
+    content: "Jari-jari sebuah bola diperbesar menjadi 3/2 kali jari-jari semula. Perbandingan volume bola sebelum dan sesudah diperbesar adalah ...",
+    options: [
+      { key: "A", text: "4 : 9" },
+      { key: "B", text: "8 : 9" },
+      { key: "C", text: "8 : 27" },
+      { key: "D", text: "27 : 8" },
+    ],
+    answer: "C",
+  },
+];
 
 const questions: Q[] = [
   Qn(1, "Luas Permukaan Bola", {
@@ -245,7 +529,7 @@ const questions: Q[] = [
       { label: "a.", math: "K = 2\\pi r = 2 \\times \\frac{22}{7} \\times 21 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(23, "Soal Cerita – Planet Buatan", {
+  Qn(23, "Soal Cerita – Model Planet", {
     content: "Sebuah model planet berbentuk bola dengan diameter 1,4 m dicat seluruhnya. Jika 1 kg cat dapat menutup 50 m², berapa kg cat yang dibutuhkan? (π = 22/7)",
     diagram: <SphereSVG r="0,7 m" color="#a78bfa" extraLabel="Model Planet" />,
     parts: [
@@ -268,8 +552,8 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Biaya} = 6 \\times L_1 \\times 100 = \\text{Rp}\\ldots" },
     ],
   }),
-  Qn(26, "TKA – Bola dari Kawat Tipis", {
-    content: "Bola dengan jari-jari 10 cm diukur kelilingnya (lingkaran terbesar). Berapa cm keliling tersebut? (π = 3,14)",
+  Qn(26, "TKA – Keliling Lingkaran Besar", {
+    content: "Sebuah bola berjari-jari 10 cm. Berapa cm keliling lingkaran terbesarnya? (π = 3,14)",
     diagram: <SphereSVG r="10 cm" />,
     parts: [
       { label: "a.", math: "K = 2\\pi r = 2 \\times 3{,}14 \\times 10 = \\ldots \\text{ cm}" },
@@ -387,8 +671,38 @@ const questions: Q[] = [
   }),
 ];
 
+const MC_OFFSET = 16;
+
+const optionStyle = (key: OptionKey, selected: OptionKey | undefined, answer: OptionKey, revealed: boolean) => {
+  if (!revealed) {
+    return selected === key
+      ? "bg-indigo-500/30 border-indigo-400 text-white"
+      : "bg-white/5 border-white/10 text-white/80 hover:border-indigo-400/50 hover:bg-indigo-500/10";
+  }
+  if (key === answer) return "bg-emerald-500/25 border-emerald-400 text-emerald-200";
+  if (selected === key && key !== answer) return "bg-rose-500/25 border-rose-400 text-rose-200 line-through";
+  return "bg-white/3 border-white/8 text-white/40";
+};
+
 const BolaPage = () => {
   const navigate = useNavigate();
+  const [selected, setSelected] = useState<Record<number, OptionKey>>({});
+  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
+
+  const handleSelect = (n: number, key: OptionKey) => {
+    if (revealed[n]) return;
+    playPopSound();
+    setSelected(prev => ({ ...prev, [n]: key }));
+  };
+
+  const handleReveal = (n: number) => {
+    playPopSound();
+    setRevealed(prev => ({ ...prev, [n]: true }));
+  };
+
+  const mcScore = mcQuestions.filter(q => revealed[q.n] && selected[q.n] === q.answer).length;
+  const mcDone = mcQuestions.filter(q => revealed[q.n]).length;
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -403,10 +717,17 @@ const BolaPage = () => {
             BOLA
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
-          <div className="mt-3 flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-2">
-            <span className="text-indigo-400 text-xs font-bold">📋 40 Soal</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+          <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
+            <div className="flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-2">
+              <span className="text-indigo-400 text-xs font-bold">📋 56 Soal</span>
+              <span className="text-white/30 text-xs">·</span>
+              <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            </div>
+            {mcDone > 0 && (
+              <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
+                <span className="text-emerald-400 text-xs font-bold">✅ {mcScore}/{mcDone} pilihan ganda benar</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -427,6 +748,78 @@ const BolaPage = () => {
           </div>
         </div>
 
+        {/* ── Pilihan Ganda (Soal 1–16) ── */}
+        <div className="mb-3 flex items-center gap-2">
+          <div className="h-px flex-1 bg-indigo-500/20" />
+          <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–16 · Pilihan Ganda</span>
+          <div className="h-px flex-1 bg-indigo-500/20" />
+        </div>
+
+        <div className="flex flex-col gap-4 mb-8 animate-slide-up">
+          {mcQuestions.map((q, i) => {
+            const isRevealed = !!revealed[q.n];
+            const sel = selected[q.n];
+            const isCorrect = isRevealed && sel === q.answer;
+            const isWrong = isRevealed && sel && sel !== q.answer;
+            return (
+              <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
+                style={{ animationDelay: `${i * 0.015}s` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
+                <div className={`absolute inset-0 rounded-2xl transition-colors duration-300 ${isCorrect ? "border border-emerald-500/40" : isWrong ? "border border-rose-500/40" : "border border-indigo-500/20"}`} />
+                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-400 to-violet-500 rounded-l-2xl" />
+                <div className="relative px-5 py-4">
+                  <div className="flex items-start gap-3">
+                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors ${isCorrect ? "bg-emerald-500/20 border-emerald-400/50" : isWrong ? "bg-rose-500/20 border-rose-400/50" : "bg-indigo-500/20 border-indigo-400/50"}`}>
+                      <span className={`text-xs font-bold ${isCorrect ? "text-emerald-300" : isWrong ? "text-rose-300" : "text-indigo-300"}`}>{q.n}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                        {q.title}
+                      </span>
+                      <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>
+                      {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
+                      <div className="grid grid-cols-1 gap-2 mb-3">
+                        {q.options.map(opt => (
+                          <button key={opt.key}
+                            onClick={() => handleSelect(q.n, opt.key)}
+                            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body transition-all cursor-pointer ${optionStyle(opt.key, sel, q.answer, isRevealed)}`}>
+                            <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
+                              isRevealed && opt.key === q.answer ? "border-emerald-400 text-emerald-300 bg-emerald-500/20"
+                              : isRevealed && sel === opt.key && opt.key !== q.answer ? "border-rose-400 text-rose-300 bg-rose-500/20"
+                              : sel === opt.key ? "border-indigo-400 text-indigo-300 bg-indigo-500/20"
+                              : "border-white/20 text-white/50"
+                            }`}>{opt.key}</span>
+                            <span>{opt.text}</span>
+                            {isRevealed && opt.key === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>}
+                            {isRevealed && sel === opt.key && opt.key !== q.answer && <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>}
+                          </button>
+                        ))}
+                      </div>
+                      {!isRevealed ? (
+                        <button onClick={() => handleReveal(q.n)}
+                          className="text-xs px-3 py-1.5 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/25 transition-all cursor-pointer font-body">
+                          Lihat Jawaban
+                        </button>
+                      ) : (
+                        <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
+                          {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ── Soal Isian (Soal 17–56) ── */}
+        <div className="mb-3 flex items-center gap-2">
+          <div className="h-px flex-1 bg-indigo-500/20" />
+          <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 17–56 · Isian / Uraian</span>
+          <div className="h-px flex-1 bg-indigo-500/20" />
+        </div>
+
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
@@ -437,7 +830,7 @@ const BolaPage = () => {
               <div className="relative px-5 py-4">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-indigo-300 text-xs font-bold">{q.n}</span>
+                    <span className="text-indigo-300 text-xs font-bold">{q.n + MC_OFFSET}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded inline-block mb-2">
