@@ -248,7 +248,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 7, title: "Luas Kain Tenda (Selimut + Atap)", cat: "tab-ker",
+    n: 5, title: "Luas Kain Tenda (Selimut + Atap)", cat: "tab-ker",
     content: "Tenda: tabung r = 3 m, t = 2 m, atap kerucut r = 3 m, s = 5 m. Luas kain yang diperlukan adalah …",
     diagram: <TabungKerucutSVG r={3} tTab={2} tKer={4} />,
     options: [
@@ -262,7 +262,7 @@ const mcQuestions: QMC[] = [
 
   /* ── TABUNG + SETENGAH BOLA ── */
   {
-    n: 12, title: "Luas Permukaan Tangki (Tabung + ½ Bola)", cat: "tab-hemi",
+    n: 6, title: "Luas Permukaan Tangki (Tabung + ½ Bola)", cat: "tab-hemi",
     content: "Tangki: tabung r = 21 cm, t = 50 cm, tutup atas setengah bola r = 21 cm. Luas permukaan luar (alas + selimut + ½ bola) adalah …",
     diagram: <TabungHemiSVG r={21} tTab={50} />,
     options: [
@@ -274,7 +274,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 13, title: "Luas Permukaan Kaleng Spray", cat: "tab-hemi",
+    n: 7, title: "Luas Permukaan Kaleng Spray", cat: "tab-hemi",
     content: "Kaleng spray: tabung r = 3 cm, t = 18 cm, tutup atas setengah bola r = 3 cm. Luas permukaan (alas + selimut + ½ bola) adalah …",
     diagram: <TabungHemiSVG r={3} tTab={18} />,
     options: [
@@ -286,7 +286,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 16, title: "Volume Menara Air (Tabung + ½ Bola)", cat: "tab-hemi",
+    n: 8, title: "Volume Menara Air (Tabung + ½ Bola)", cat: "tab-hemi",
     content: "Menara air: tabung r = 21 cm, t = 20 cm, kubah setengah bola r = 21 cm di atas. Total volume adalah …",
     diagram: <TabungHemiSVG r={21} tTab={20} />,
     options: [
@@ -298,7 +298,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 19, title: "Luas Permukaan Gabungan Tabung + ½ Bola", cat: "tab-hemi",
+    n: 9, title: "Luas Permukaan Gabungan Tabung + ½ Bola", cat: "tab-hemi",
     content: "Benda: tabung r = 7 cm, t = 10 cm, dan setengah bola di atas r = 7 cm. Luas permukaan luar (alas + selimut + ½ bola) adalah …",
     diagram: <TabungHemiSVG r={7} tTab={10} />,
     options: [
@@ -312,7 +312,7 @@ const mcQuestions: QMC[] = [
 
   /* ── KERUCUT + SETENGAH BOLA ── */
   {
-    n: 21, title: "Volume Ice Cream (Kerucut + ½ Bola)", cat: "ker-hemi",
+    n: 10, title: "Volume Ice Cream (Kerucut + ½ Bola)", cat: "ker-hemi",
     content: "Ice cream cone: setengah bola es krim r = 6 cm di atas kerucut r = 6 cm, t = 8 cm. Total volumenya adalah …",
     diagram: <KerucutHemiSVG r={6} tKer={8} />,
     options: [
@@ -324,7 +324,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 22, title: "Luas Permukaan Pion Catur (Kerucut + ½ Bola)", cat: "ker-hemi",
+    n: 11, title: "Luas Permukaan Pion Catur (Kerucut + ½ Bola)", cat: "ker-hemi",
     content: "Pion catur: kerucut r = 5 cm, s = 13 cm, di atas setengah bola r = 5 cm. Luas permukaan total (selimut kerucut + ½ bola) adalah …",
     diagram: <KerucutHemiSVG r={5} tKer={12} />,
     options: [
@@ -336,7 +336,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 23, title: "Volume Gelato (Kerucut + ½ Bola)", cat: "ker-hemi",
+    n: 12, title: "Volume Gelato (Kerucut + ½ Bola)", cat: "ker-hemi",
     content: "Gelato: setengah bola r = 4 cm di atas kerucut r = 4 cm, t = 9 cm. Total volumenya adalah …",
     diagram: <KerucutHemiSVG r={4} tKer={9} />,
     options: [
@@ -348,7 +348,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 25, title: "Luas Permukaan (Kerucut + ½ Bola)", cat: "ker-hemi",
+    n: 13, title: "Luas Permukaan (Kerucut + ½ Bola)", cat: "ker-hemi",
     content: "Sebuah ornamen: kerucut r = 6 cm, s = 10 cm, berdiri di atas setengah bola r = 6 cm. Luas permukaan total (selimut kerucut + lengkung ½ bola) adalah …",
     diagram: <KerucutHemiSVG r={6} tKer={8} />,
     options: [
@@ -362,7 +362,7 @@ const mcQuestions: QMC[] = [
 
   /* ── GABUNGAN CAMPURAN ── */
   {
-    n: 27, title: "Volume Roket (½ Bola + Tabung + Kerucut)", cat: "campuran",
+    n: 14, title: "Volume Roket (½ Bola + Tabung + Kerucut)", cat: "campuran",
     content: "Model roket: ½ bola r = 5 cm (hidung) + tabung r = 5 cm, t = 15 cm (badan) + kerucut r = 5 cm, t = 6 cm (ekor). Total volumenya adalah …",
     diagram: <HemiTabKerSVG r={5} tTab={15} tKer={6} />,
     options: [
@@ -374,7 +374,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 28, title: "Volume Menara Besar (½ Bola + Tabung + Kerucut)", cat: "campuran",
+    n: 15, title: "Volume Menara Besar (½ Bola + Tabung + Kerucut)", cat: "campuran",
     content: "Menara: ½ bola r = 21 cm (dasar) + tabung r = 21 cm, t = 40 cm + kerucut r = 21 cm, t = 30 cm (puncak). Total volume adalah …",
     diagram: <HemiTabKerSVG r={21} tTab={40} tKer={30} />,
     options: [
@@ -386,7 +386,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 31, title: "Tinggi Air – ½ Bola ke Tabung", cat: "campuran",
+    n: 16, title: "Tinggi Air – ½ Bola ke Tabung", cat: "campuran",
     content: "Ember setengah bola r = 21 cm penuh air. Air dituangkan ke tabung r = 7 cm. Tinggi air dalam tabung adalah …",
     options: [
       { key: "A", text: "63 cm" },
@@ -397,7 +397,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 35, title: "Biaya Cat – Tabung + ½ Bola", cat: "campuran",
+    n: 17, title: "Biaya Cat – Tabung + ½ Bola", cat: "campuran",
     content: "Benda: tabung r = 7 cm, t = 10 cm, dan setengah bola di atas r = 7 cm (tanpa alas). Biaya cat Rp2.000/cm². Total biaya adalah …",
     diagram: <TabungHemiSVG r={7} tTab={10} />,
     options: [
@@ -409,7 +409,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 40, title: "Luas Permukaan Roket (½ Bola + Tabung + Kerucut)", cat: "campuran",
+    n: 18, title: "Luas Permukaan Roket (½ Bola + Tabung + Kerucut)", cat: "campuran",
     content: "Roket: ½ bola r = 5 cm (hidung) + tabung r = 5 cm, t = 10 cm + kerucut r = 5 cm, s = 13 cm, t = 12 cm (ekor). Luas permukaan luar (½ bola + selimut tabung + selimut kerucut + alas) adalah …",
     diagram: <HemiTabKerSVG r={5} tTab={10} tKer={12} />,
     options: [
