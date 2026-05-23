@@ -1,450 +1,712 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 
-type Part = { label: string; math?: string; text?: string };
-type Q = {
-  n: number; title: string;
-  content?: string; math?: string;
-  parts?: Part[];
-  diagram?: React.ReactNode;
+type OptionKey = "A" | "B" | "C" | "D";
+type Cat = "tab-ker" | "tab-hemi" | "ker-hemi" | "campuran";
+
+const CAT_LABELS: Record<Cat, { icon: string; label: string; color: string }> = {
+  "tab-ker":  { icon: "🔺", label: "Tabung + Kerucut",   color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
+  "tab-hemi": { icon: "🧪", label: "Tabung + ½ Bola",    color: "text-teal-400 border-teal-500/30 bg-teal-500/10" },
+  "ker-hemi": { icon: "🍦", label: "Kerucut + ½ Bola",   color: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10" },
+  "campuran": { icon: "🧩", label: "Gabungan Campuran",   color: "text-green-400 border-green-500/30 bg-green-500/10" },
 };
-const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-function CylinderConeSVG({ r, hCyl, hCone, color = "#10b981" }: {
-  r: number; hCyl: number; hCone: number; color?: string;
+type QMC = {
+  n: number; title: string; cat: Cat;
+  content: string;
+  diagram?: React.ReactNode;
+  options: { key: OptionKey; text: string }[];
+  answer: OptionKey;
+};
+
+/* ═══════════════════════════════════════════════════
+   SVG DIAGRAM COMPONENTS
+═══════════════════════════════════════════════════ */
+
+function TabungKerucutSVG({ r, tTab, tKer, color = "#10b981" }: {
+  r: number; tTab: number; tKer: number; color?: string;
 }) {
-  const scale = 0.9;
-  const R = r * scale * 5;
-  const HC = hCyl * scale * 4;
-  const HK = hCone * scale * 4;
-  const ell = R * 0.28;
-  const cx = 110;
-  const baseY = 155;
-  const topCylY = baseY - HC;
-  const apexY = topCylY - HK;
+  const W   = Math.min(r * 4.5, 52);
+  const HC  = Math.min(tTab * 3.5, 78);
+  const HK  = Math.min(tKer * 3.5, 55);
+  const ell = Math.max(W * 0.24, 5);
+  const cx  = 120;
+  const baseY    = 178;
+  const topCylY  = baseY - HC;
+  const apexY    = topCylY - HK;
   return (
-    <svg viewBox="0 0 220 200" width="220" height="200" className="mx-auto">
-      <ellipse cx={cx} cy={baseY} rx={R} ry={ell} fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1.8" />
-      <ellipse cx={cx} cy={topCylY} rx={R} ry={ell} fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1.8" />
-      <rect x={cx - R} y={topCylY} width={R * 2} height={HC} fill={color} fillOpacity="0.08" />
-      <line x1={cx - R} y1={topCylY} x2={cx - R} y2={baseY} stroke={color} strokeWidth="1.8" />
-      <line x1={cx + R} y1={topCylY} x2={cx + R} y2={baseY} stroke={color} strokeWidth="1.8" />
-      <line x1={cx - R} y1={topCylY} x2={cx} y2={apexY} stroke={color} strokeWidth="1.8" />
-      <line x1={cx + R} y1={topCylY} x2={cx} y2={apexY} stroke={color} strokeWidth="1.8" />
-      <polygon points={`${cx - R},${topCylY} ${cx + R},${topCylY} ${cx},${apexY}`} fill={color} fillOpacity="0.12" />
-      <text x={cx + R + 12} y={(topCylY + baseY) / 2} fill={color} fontSize="11" textAnchor="start" fontFamily="monospace">t={hCyl}</text>
-      <text x={cx + R + 12} y={(apexY + topCylY) / 2} fill={color} fontSize="11" textAnchor="start" fontFamily="monospace">t={hCone}</text>
-      <text x={cx} y={baseY + 18} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
+    <svg viewBox="0 0 240 200" width="240" height="200" className="mx-auto">
+      <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
+      <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
+      <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.6" />
+      <line x1={cx + W} y1={topCylY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1.6" />
+      <ellipse cx={cx} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.2" strokeDasharray="4,3" />
+      <polygon points={`${cx - W},${topCylY} ${cx + W},${topCylY} ${cx},${apexY}`} fill={color} fillOpacity="0.13" stroke={color} strokeWidth="1.6" />
+      <line x1={cx + W + 5} y1={topCylY + 1} x2={cx + W + 5} y2={baseY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
+      <line x1={cx + W + 1} y1={topCylY} x2={cx + W + 9} y2={topCylY} stroke={color} strokeWidth="1" />
+      <line x1={cx + W + 1} y1={baseY}   x2={cx + W + 9} y2={baseY}   stroke={color} strokeWidth="1" />
+      <text x={cx + W + 18} y={(topCylY + baseY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tTab}</text>
+      <line x1={cx + W + 5} y1={apexY + 1}   x2={cx + W + 5} y2={topCylY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
+      <line x1={cx + W + 1} y1={apexY}    x2={cx + W + 9} y2={apexY}    stroke={color} strokeWidth="1" />
+      <line x1={cx + W + 1} y1={topCylY}  x2={cx + W + 9} y2={topCylY}  stroke={color} strokeWidth="1" />
+      <text x={cx + W + 18} y={(apexY + topCylY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tKer}</text>
+      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
+      <text x={cx + W / 2} y={baseY + 16} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
     </svg>
   );
 }
 
-function CylinderHemiSVG({ r, hCyl, color = "#10b981" }: {
-  r: number; hCyl: number; color?: string;
+function TabungHemiSVG({ r, tTab, color = "#10b981" }: {
+  r: number; tTab: number; color?: string;
 }) {
-  const R = Math.min(r * 6, 68);
-  const HC = Math.min(hCyl * 7, 85);
-  const ell = R * 0.28;
-  const cx = 110;
-  const baseY = 155;
+  const W   = Math.min(r * 4.5, 52);
+  const HC  = Math.min(tTab * 3.5, 78);
+  const ell = Math.max(W * 0.24, 5);
+  const cx  = 120;
+  const baseY   = 178;
   const topCylY = baseY - HC;
   return (
-    <svg viewBox="0 0 220 210" width="220" height="210" className="mx-auto">
-      <ellipse cx={cx} cy={baseY} rx={R} ry={ell} fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1.8" />
-      <ellipse cx={cx} cy={topCylY} rx={R} ry={ell} fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.2" strokeDasharray="4,3" />
-      <rect x={cx - R} y={topCylY} width={R * 2} height={HC} fill={color} fillOpacity="0.07" />
-      <line x1={cx - R} y1={topCylY} x2={cx - R} y2={baseY} stroke={color} strokeWidth="1.8" />
-      <line x1={cx + R} y1={topCylY} x2={cx + R} y2={baseY} stroke={color} strokeWidth="1.8" />
-      <path d={`M ${cx - R} ${topCylY} A ${R} ${R} 0 0 1 ${cx + R} ${topCylY}`} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.8" />
-      <text x={cx + R + 12} y={(topCylY + baseY) / 2} fill={color} fontSize="11" textAnchor="start" fontFamily="monospace">t={hCyl}</text>
-      <text x={cx} y={baseY + 18} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
-      <text x={cx} y={topCylY - 18} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">½ Bola (r={r})</text>
+    <svg viewBox="0 0 240 210" width="240" height="210" className="mx-auto">
+      <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
+      <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
+      <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.6" />
+      <line x1={cx + W} y1={topCylY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1.6" />
+      <ellipse cx={cx} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
+      <path d={`M ${cx - W} ${topCylY} A ${W} ${W} 0 0 1 ${cx + W} ${topCylY}`}
+        fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
+      <line x1={cx + W + 5} y1={topCylY + 1} x2={cx + W + 5} y2={baseY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
+      <line x1={cx + W + 1} y1={topCylY} x2={cx + W + 9} y2={topCylY} stroke={color} strokeWidth="1" />
+      <line x1={cx + W + 1} y1={baseY}   x2={cx + W + 9} y2={baseY}   stroke={color} strokeWidth="1" />
+      <text x={cx + W + 18} y={(topCylY + baseY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tTab}</text>
+      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
+      <text x={cx + W / 2} y={baseY + 16} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
+      <text x={cx} y={topCylY - W - 4} fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.75">½ Bola (r={r})</text>
     </svg>
   );
 }
 
-function ConeHemiSVG({ r, hCone, color = "#10b981" }: {
-  r: number; hCone: number; color?: string;
+function KerucutHemiSVG({ r, tKer, color = "#10b981" }: {
+  r: number; tKer: number; color?: string;
 }) {
-  const R = Math.min(r * 7, 68);
-  const HC = Math.min(hCone * 7, 75);
-  const ell = R * 0.28;
-  const cx = 110;
+  const W   = Math.min(r * 4.5, 52);
+  const HK  = Math.min(tKer * 4, 75);
+  const ell = Math.max(W * 0.24, 5);
+  const cx  = 120;
   const baseY = 150;
-  const apexY = baseY - HC;
+  const apexY = baseY - HK;
   return (
-    <svg viewBox="0 0 220 200" width="220" height="200" className="mx-auto">
-      <ellipse cx={cx} cy={baseY} rx={R} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.5" strokeDasharray="4,3" />
-      <line x1={cx - R} y1={baseY} x2={cx} y2={apexY} stroke={color} strokeWidth="1.8" />
-      <line x1={cx + R} y1={baseY} x2={cx} y2={apexY} stroke={color} strokeWidth="1.8" />
-      <polygon points={`${cx - R},${baseY} ${cx + R},${baseY} ${cx},${apexY}`} fill={color} fillOpacity="0.10" />
-      <path d={`M ${cx - R} ${baseY} A ${R} ${R} 0 0 0 ${cx + R} ${baseY}`} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.8" />
-      <text x={cx} y={baseY + 20} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">½ Bola (r={r})</text>
-      <text x={cx + R + 12} y={(apexY + baseY) / 2} fill={color} fontSize="11" textAnchor="start" fontFamily="monospace">t={hCone}</text>
-      <text x={cx} y={apexY - 8} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r}</text>
+    <svg viewBox="0 0 240 210" width="240" height="210" className="mx-auto">
+      <polygon points={`${cx - W},${baseY} ${cx + W},${baseY} ${cx},${apexY}`}
+        fill={color} fillOpacity="0.11" stroke={color} strokeWidth="1.6" />
+      <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.2" strokeDasharray="4,3" />
+      <path d={`M ${cx - W} ${baseY} A ${W} ${W} 0 0 0 ${cx + W} ${baseY}`}
+        fill={color} fillOpacity="0.20" stroke={color} strokeWidth="1.6" />
+      <line x1={cx + W + 5} y1={apexY + 1} x2={cx + W + 5} y2={baseY - 1} stroke={color} strokeWidth="1" strokeOpacity="0.65" />
+      <line x1={cx + W + 1} y1={apexY} x2={cx + W + 9} y2={apexY} stroke={color} strokeWidth="1" />
+      <line x1={cx + W + 1} y1={baseY} x2={cx + W + 9} y2={baseY} stroke={color} strokeWidth="1" />
+      <text x={cx + W + 18} y={(apexY + baseY) / 2 + 4} fill={color} fontSize="11" fontFamily="monospace">t={tKer}</text>
+      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
+      <text x={cx + W / 2} y={baseY - 4} fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r={r}</text>
+      <text x={cx} y={baseY + W + 18} fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.75">½ Bola (r={r})</text>
     </svg>
   );
 }
 
-const questions: Q[] = [
-  Qn(1, "Tabung + Kerucut – Volume", {
-    content: "Sebuah tenda berbentuk tabung dengan r = 7 m, t = 3 m, dilengkapi atap berbentuk kerucut dengan r = 7 m dan t = 2 m. Hitunglah total volume tenda! (π = 22/7)",
-    diagram: <CylinderConeSVG r={7} hCyl={3} hCone={2} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 3 = \\ldots \\text{ m}^3" },
-      { label: "b.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times \\frac{22}{7} \\times 49 \\times 2 = \\ldots \\text{ m}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ m}^3" },
+function HemiTabKerSVG({ r, tTab, tKer, color = "#10b981" }: {
+  r: number; tTab: number; tKer: number; color?: string;
+}) {
+  const W   = Math.min(r * 3.8, 46);
+  const HC  = Math.min(tTab * 3, 65);
+  const HK  = Math.min(tKer * 3, 48);
+  const ell = Math.max(W * 0.24, 5);
+  const cx  = 120;
+  const baseY   = 190;
+  const topCylY = baseY - HC;
+  const apexY   = topCylY - HK;
+  return (
+    <svg viewBox="0 0 240 215" width="240" height="215" className="mx-auto">
+      <path d={`M ${cx - W} ${baseY} A ${W} ${W} 0 0 0 ${cx + W} ${baseY}`}
+        fill={color} fillOpacity="0.20" stroke={color} strokeWidth="1.5" />
+      <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
+      <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.5" />
+      <line x1={cx + W} y1={topCylY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1.5" />
+      <ellipse cx={cx} cy={baseY}   rx={W} ry={ell} fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
+      <ellipse cx={cx} cy={topCylY} rx={W} ry={ell} fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
+      <polygon points={`${cx - W},${topCylY} ${cx + W},${topCylY} ${cx},${apexY}`}
+        fill={color} fillOpacity="0.13" stroke={color} strokeWidth="1.5" />
+      <text x={cx - W - 8} y={baseY + W + 14} fill={color} fontSize="9" textAnchor="end" fontFamily="monospace" fillOpacity="0.75">½ Bola</text>
+      <text x={cx + W + 18} y={(topCylY + baseY) / 2 + 4} fill={color} fontSize="10" fontFamily="monospace">t={tTab}</text>
+      <text x={cx + W + 18} y={(apexY + topCylY) / 2 + 4} fill={color} fontSize="10" fontFamily="monospace">t={tKer}</text>
+      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.65" />
+      <text x={cx + W / 2} y={baseY + 14} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r}</text>
+    </svg>
+  );
+}
+
+function InfoBubbleSVG({ lines, color = "#10b981" }: { lines: string[]; color?: string }) {
+  const h = 28 + lines.length * 23;
+  return (
+    <svg viewBox={`0 0 300 ${h}`} width="300" height={h} className="mx-auto">
+      <rect x="10" y="6" width="280" height={h - 12} rx="12"
+        fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" strokeOpacity="0.5" />
+      {lines.map((line, i) => (
+        <text key={i} x="150" y={26 + i * 23} fill={color} fontSize="11"
+          textAnchor="middle" fontFamily="monospace">{line}</text>
+      ))}
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   SOAL PILIHAN GANDA
+═══════════════════════════════════════════════════ */
+
+const mcQuestions: QMC[] = [
+  /* ── TABUNG + KERUCUT ── */
+  {
+    n: 1, title: "Volume Tenda (Tabung + Kerucut)", cat: "tab-ker",
+    content: "Sebuah tenda berbentuk tabung r = 7 m, t = 3 m, dilengkapi atap kerucut r = 7 m, t = 3 m. Total volume tenda adalah … (π = 22/7)",
+    diagram: <TabungKerucutSVG r={7} tTab={3} tKer={3} />,
+    options: [
+      { key: "A", text: "462 m³" },
+      { key: "B", text: "539 m³" },
+      { key: "C", text: "616 m³" },
+      { key: "D", text: "770 m³" },
     ],
-  }),
-  Qn(2, "Tabung + Kerucut – Luas Permukaan", {
-    content: "Sebuah peluru kendali (model) berbentuk tabung dengan r = 5 cm, t = 12 cm, dan ujung berbentuk kerucut dengan r = 5 cm, s = 13 cm. Hitunglah luas permukaan luar! (π = 3,14)",
-    diagram: <CylinderConeSVG r={5} hCyl={12} hCone={5} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{alas tabung}} = \\pi r^2 = 3{,}14 \\times 25 = \\ldots" },
-      { label: "b.", math: "L_{\\text{selimut tabung}} = 2\\pi r t = 2 \\times 3{,}14 \\times 5 \\times 12 = \\ldots" },
-      { label: "c.", math: "L_{\\text{selimut kerucut}} = \\pi r s = 3{,}14 \\times 5 \\times 13 = \\ldots" },
-      { label: "d.", math: "L_{\\text{total}} = L_{\\text{alas}} + L_{\\text{selimut tabung}} + L_{\\text{selimut kerucut}} = \\ldots" },
+    answer: "C",
+  },
+  {
+    n: 2, title: "Luas Permukaan Peluru (Tabung + Kerucut)", cat: "tab-ker",
+    content: "Model peluru: tabung r = 5 cm, t = 12 cm, ujung kerucut r = 5 cm, s = 13 cm. Luas permukaan luar adalah … (π = 3,14)",
+    diagram: <TabungKerucutSVG r={5} tTab={12} tKer={5} />,
+    options: [
+      { key: "A", text: "580,9 cm²" },
+      { key: "B", text: "659,4 cm²" },
+      { key: "C", text: "737,9 cm²" },
+      { key: "D", text: "816,4 cm²" },
     ],
-  }),
-  Qn(3, "Tabung + Setengah Bola – Volume", {
-    content: "Sebuah kapsul obat berbentuk tabung dengan r = 0,7 cm dan t = 2 cm, dengan kedua ujungnya berbentuk setengah bola r = 0,7 cm. Hitunglah volume kapsul! (π = 22/7)",
-    diagram: <CylinderHemiSVG r={0.7} hCyl={2} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times (0{,}7)^2 \\times 2 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{1 bola penuh}} = \\frac{4}{3} \\times \\frac{22}{7} \\times (0{,}7)^3 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = V_{\\text{tabung}} + V_{\\text{bola}} = \\ldots \\text{ cm}^3" },
+    answer: "B",
+  },
+  {
+    n: 3, title: "Volume Silo (Tabung + Kerucut)", cat: "tab-ker",
+    content: "Silo berbentuk tabung r = 7 m, t = 10 m, dan tutup kerucut r = 7 m, t = 6 m. Total volume silo adalah … (π = 22/7)",
+    diagram: <TabungKerucutSVG r={7} tTab={10} tKer={6} />,
+    options: [
+      { key: "A", text: "1.232 m³" },
+      { key: "B", text: "1.540 m³" },
+      { key: "C", text: "1.848 m³" },
+      { key: "D", text: "2.156 m³" },
     ],
-  }),
-  Qn(4, "Tabung + Setengah Bola – Luas Permukaan", {
-    content: "Sebuah tangki bahan bakar berbentuk tabung dengan r = 21 cm dan t = 50 cm. Bagian atas berbentuk setengah bola r = 21 cm. Hitunglah luas permukaan luar tangki! (π = 22/7)",
-    diagram: <CylinderHemiSVG r={21} hCyl={50} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{alas}} = \\pi r^2 = \\frac{22}{7} \\times 441 = \\ldots" },
-      { label: "b.", math: "L_{\\text{selimut tabung}} = 2\\pi r t = 2 \\times \\frac{22}{7} \\times 21 \\times 50 = \\ldots" },
-      { label: "c.", math: "L_{\\text{setengah bola}} = 2\\pi r^2 = 2 \\times \\frac{22}{7} \\times 441 = \\ldots" },
-      { label: "d.", math: "L_{\\text{total}} = L_{\\text{alas}} + L_{\\text{selimut}} + L_{\\text{setengah bola}} = \\ldots" },
+    answer: "C",
+  },
+  {
+    n: 4, title: "Volume Roket (Tabung + Kerucut)", cat: "tab-ker",
+    content: "Model roket: tabung r = 7 cm, t = 30 cm, hidung kerucut r = 7 cm, t = 15 cm. Total volume badan roket adalah … (π = 22/7)",
+    diagram: <TabungKerucutSVG r={7} tTab={30} tKer={15} />,
+    options: [
+      { key: "A", text: "4.235 cm³" },
+      { key: "B", text: "4.620 cm³" },
+      { key: "C", text: "5.082 cm³" },
+      { key: "D", text: "5.390 cm³" },
     ],
-  }),
-  Qn(5, "Kerucut + Setengah Bola – Volume", {
-    content: "Sebuah ice cream cone: setengah bola es krim r = 3,5 cm di atas kerucut r = 3,5 cm, t = 12 cm. Hitunglah total volumenya! (π = 22/7)",
-    diagram: <ConeHemiSVG r={3.5} hCone={12} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times \\frac{22}{7} \\times (3{,}5)^2 \\times 12 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times \\frac{22}{7} \\times (3{,}5)^3 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 5, title: "Volume Peluru Kecil (Tabung + Kerucut)", cat: "tab-ker",
+    content: "Sebuah peluru: tabung r = 5 cm, t = 9 cm, dan ujung kerucut r = 5 cm, t = 3 cm. Total volumenya adalah … (π = 3,14)",
+    diagram: <TabungKerucutSVG r={5} tTab={9} tKer={3} />,
+    options: [
+      { key: "A", text: "628 cm³" },
+      { key: "B", text: "706,5 cm³" },
+      { key: "C", text: "785 cm³" },
+      { key: "D", text: "942 cm³" },
     ],
-  }),
-  Qn(6, "Soal Cerita – Menara Air", {
-    content: "Sebuah menara air berbentuk tabung dengan r = 3,5 m dan t = 5 m, dengan bagian atas berbentuk setengah bola r = 3,5 m. Berapa m³ total volume menara? (π = 22/7)",
-    diagram: <CylinderHemiSVG r={3.5} hCyl={5} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 12{,}25 \\times 5 = \\ldots \\text{ m}^3" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times \\frac{22}{7} \\times (3{,}5)^3 = \\ldots \\text{ m}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ m}^3" },
+    answer: "C",
+  },
+  {
+    n: 6, title: "Luas Selimut Pensil Runcing", cat: "tab-ker",
+    content: "Model pensil: tabung r = 0,5 cm, t = 15 cm, ujung kerucut r = 0,5 cm, s = 2 cm. Luas selimut gabungan (tanpa alas) adalah … (π = 3,14)",
+    diagram: <TabungKerucutSVG r={0.5} tTab={15} tKer={2} />,
+    options: [
+      { key: "A", text: "47,1 cm²" },
+      { key: "B", text: "50,24 cm²" },
+      { key: "C", text: "56,52 cm²" },
+      { key: "D", text: "62,8 cm²" },
     ],
-  }),
-  Qn(7, "Soal Cerita – Gentong Air", {
-    content: "Sebuah gentong air berbentuk tabung r = 21 cm, t = 40 cm, dengan tutup berbentuk kerucut r = 21 cm, t = 14 cm. Berapa liter air yang dapat ditampung (tanpa tutup)? (π = 22/7)",
-    diagram: <CylinderConeSVG r={21} hCyl={40} hCone={14} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 441 \\times 40 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V \\text{ (liter)} = \\frac{V}{1000} = \\ldots \\text{ liter}" },
+    answer: "B",
+  },
+  {
+    n: 7, title: "Luas Kain Tenda (Selimut + Atap)", cat: "tab-ker",
+    content: "Tenda: tabung r = 3 m, t = 2 m, atap kerucut r = 3 m, s = 5 m. Luas kain yang diperlukan (selimut tabung + selimut kerucut) adalah … (π = 3,14)",
+    diagram: <TabungKerucutSVG r={3} tTab={2} tKer={4} />,
+    options: [
+      { key: "A", text: "47,1 m²" },
+      { key: "B", text: "62,8 m²" },
+      { key: "C", text: "75,36 m²" },
+      { key: "D", text: "84,78 m²" },
     ],
-  }),
-  Qn(8, "Luas Permukaan – Pensil Runcing", {
-    content: "Sebuah pensil (model geometri) terdiri dari tabung dengan r = 0,5 cm, t = 15 cm dan ujung runcing berbentuk kerucut r = 0,5 cm, s = 2 cm. Berapa luas permukaan luar (tanpa alas tabung)? (π = 3,14)",
-    diagram: <CylinderConeSVG r={0.5} hCyl={15} hCone={2} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut tabung}} = 2\\pi r t = 2 \\times 3{,}14 \\times 0{,}5 \\times 15 = \\ldots" },
-      { label: "b.", math: "L_{\\text{selimut kerucut}} = \\pi r s = 3{,}14 \\times 0{,}5 \\times 2 = \\ldots" },
-      { label: "c.", math: "L_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ cm}^2" },
+    answer: "D",
+  },
+  {
+    n: 8, title: "Luas Selimut Corong + Tabung", cat: "tab-ker",
+    content: "Corong: kerucut r = 10 cm, s = 15 cm, disambung tabung r = 10 cm, t = 20 cm. Luas selimut gabungan adalah … (π = 3,14)",
+    diagram: <TabungKerucutSVG r={10} tTab={20} tKer={12} />,
+    options: [
+      { key: "A", text: "1.099 cm²" },
+      { key: "B", text: "1.413 cm²" },
+      { key: "C", text: "1.727 cm²" },
+      { key: "D", text: "2.041 cm²" },
     ],
-  }),
-  Qn(9, "UN Style – Silo Penyimpanan", {
-    content: "Sebuah silo terdiri dari tabung r = 7 m, t = 10 m, dan bagian atas berbentuk kerucut r = 7 m, t = 4 m. Berapa m³ total volume? (π = 22/7)",
-    diagram: <CylinderConeSVG r={7} hCyl={10} hCone={4} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 10 = \\ldots" },
-      { label: "b.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times \\frac{22}{7} \\times 49 \\times 4 = \\ldots" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ m}^3" },
+    answer: "C",
+  },
+  {
+    n: 9, title: "Volume Gabungan Tabung + Kerucut", cat: "tab-ker",
+    content: "Sebuah bangun terdiri dari tabung r = 3 cm, t = 8 cm, dan kerucut r = 3 cm, t = 6 cm. Volume totalnya adalah … (π = 3,14)",
+    diagram: <TabungKerucutSVG r={3} tTab={8} tKer={6} />,
+    options: [
+      { key: "A", text: "169,56 cm³" },
+      { key: "B", text: "226,08 cm³" },
+      { key: "C", text: "282,6 cm³" },
+      { key: "D", text: "339,12 cm³" },
     ],
-  }),
-  Qn(10, "Soal Cerita – Bola Salju", {
-    content: "Sebuah tiang bendera terdiri dari batang silinder r = 2 cm, t = 200 cm, dan ujung atas berbentuk bola r = 3 cm. Berapa total luas permukaan yang dicat (selimut tabung + luas bola)? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut tabung}} = 2\\pi \\times 2 \\times 200 = \\ldots \\text{ cm}^2" },
-      { label: "b.", math: "L_{\\text{bola}} = 4\\pi \\times 9 = \\ldots \\text{ cm}^2" },
-      { label: "c.", math: "L_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ cm}^2" },
+    answer: "C",
+  },
+  {
+    n: 10, title: "Volume Gentong + Tutup Kerucut", cat: "tab-ker",
+    content: "Gentong: tabung r = 21 cm, t = 40 cm, tutup kerucut r = 21 cm, t = 14 cm. Total volume adalah … (π = 22/7)",
+    diagram: <TabungKerucutSVG r={21} tTab={40} tKer={14} />,
+    options: [
+      { key: "A", text: "49.140 cm³" },
+      { key: "B", text: "55.440 cm³" },
+      { key: "C", text: "61.908 cm³" },
+      { key: "D", text: "68.376 cm³" },
     ],
-  }),
-  Qn(11, "Tabung + 2 Setengah Bola (Kapsul Penuh)", {
-    content: "Sebuah kapsul berbentuk tabung r = 7 mm, t = 14 mm, dengan ujung kiri dan kanan masing-masing setengah bola r = 7 mm. Hitunglah total volume kapsul! (π = 22/7)",
-    diagram: <CylinderHemiSVG r={7} hCyl={14} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 14 = \\ldots \\text{ mm}^3" },
-      { label: "b.", math: "V_{\\text{bola penuh}} = \\frac{4}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ mm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ mm}^3" },
+    answer: "C",
+  },
+
+  /* ── TABUNG + SETENGAH BOLA ── */
+  {
+    n: 11, title: "Volume Kapsul (Tabung + 2 ½ Bola)", cat: "tab-hemi",
+    content: "Kapsul obat: tabung r = 3 cm, t = 10 cm, dengan kedua ujung setengah bola r = 3 cm (total = tabung + 1 bola penuh). Volume kapsul adalah … (π = 3,14)",
+    diagram: <TabungHemiSVG r={3} tTab={10} />,
+    options: [
+      { key: "A", text: "282,6 cm³" },
+      { key: "B", text: "339,12 cm³" },
+      { key: "C", text: "395,64 cm³" },
+      { key: "D", text: "452,16 cm³" },
     ],
-  }),
-  Qn(12, "UN Style – Soal Tenda Kemah", {
-    content: "Sebuah tenda kemah berbentuk tabung r = 3 m, t = 2 m, dan atap kerucut r = 3 m, t = 2 m. Berapa m² kain yang dibutuhkan untuk selimut tabung + selimut kerucut (s = √13 m)? (π = 3,14)",
-    diagram: <CylinderConeSVG r={3} hCyl={2} hCone={2} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut tabung}} = 2\\pi \\times 3 \\times 2 = \\ldots \\text{ m}^2" },
-      { label: "b.", math: "s = \\sqrt{3^2 + 2^2} = \\sqrt{13} \\approx 3{,}61 \\text{ m}" },
-      { label: "c.", math: "L_{\\text{selimut kerucut}} = \\pi \\times 3 \\times \\sqrt{13} \\approx \\ldots \\text{ m}^2" },
-      { label: "d.", math: "L_{\\text{kain}} = \\ldots + \\ldots \\approx \\ldots \\text{ m}^2" },
+    answer: "C",
+  },
+  {
+    n: 12, title: "Luas Permukaan Tangki (Tabung + ½ Bola)", cat: "tab-hemi",
+    content: "Tangki: tabung r = 21 cm, t = 50 cm, tutup atas setengah bola r = 21 cm. Luas permukaan luar (alas + selimut + ½ bola) adalah … (π = 22/7)",
+    diagram: <TabungHemiSVG r={21} tTab={50} />,
+    options: [
+      { key: "A", text: "7.986 cm²" },
+      { key: "B", text: "9.372 cm²" },
+      { key: "C", text: "10.758 cm²" },
+      { key: "D", text: "11.704 cm²" },
     ],
-  }),
-  Qn(13, "ANBK – Kaleng Spray", {
-    content: "Sebuah kaleng spray terdiri dari tabung r = 3 cm, t = 18 cm, dan tutup atas setengah bola r = 3 cm. Hitunglah luas permukaan luar kaleng! (π = 3,14)",
-    diagram: <CylinderHemiSVG r={3} hCyl={18} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{alas}} = \\pi r^2 = 3{,}14 \\times 9 = \\ldots" },
-      { label: "b.", math: "L_{\\text{selimut tabung}} = 2\\pi r t = 2 \\times 3{,}14 \\times 3 \\times 18 = \\ldots" },
-      { label: "c.", math: "L_{\\frac{1}{2}\\text{bola}} = 2\\pi r^2 = 2 \\times 3{,}14 \\times 9 = \\ldots" },
-      { label: "d.", math: "L_{\\text{total}} = \\ldots + \\ldots + \\ldots = \\ldots \\text{ cm}^2" },
+    answer: "C",
+  },
+  {
+    n: 13, title: "Luas Permukaan Kaleng Spray", cat: "tab-hemi",
+    content: "Kaleng spray: tabung r = 3 cm, t = 18 cm, tutup atas setengah bola r = 3 cm. Luas permukaan (alas + selimut + ½ bola) adalah … (π = 3,14)",
+    diagram: <TabungHemiSVG r={3} tTab={18} />,
+    options: [
+      { key: "A", text: "367,38 cm²" },
+      { key: "B", text: "395,64 cm²" },
+      { key: "C", text: "423,9 cm²" },
+      { key: "D", text: "452,16 cm²" },
     ],
-  }),
-  Qn(14, "Soal Cerita – Granat Model", {
-    content: "Sebuah model granat terdiri dari silinder r = 4 cm, t = 6 cm, dan setengah bola r = 4 cm di bagian atas. Berapa total volumenya? (π = 3,14)",
-    diagram: <CylinderHemiSVG r={4} hCyl={6} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = 3{,}14 \\times 16 \\times 6 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 64 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 14, title: "Volume Granat Model (Tabung + ½ Bola)", cat: "tab-hemi",
+    content: "Model granat: tabung r = 6 cm, t = 10 cm, bagian atas setengah bola r = 6 cm. Total volumenya adalah … (π = 3,14)",
+    diagram: <TabungHemiSVG r={6} tTab={10} />,
+    options: [
+      { key: "A", text: "1.130,4 cm³" },
+      { key: "B", text: "1.356,48 cm³" },
+      { key: "C", text: "1.582,56 cm³" },
+      { key: "D", text: "1.808,64 cm³" },
     ],
-  }),
-  Qn(15, "TKA – Kerucut di Atas Setengah Bola", {
-    content: "Sebuah ornamen berbentuk kerucut r = 6 cm, t = 8 cm, berdiri di atas setengah bola r = 6 cm. Hitunglah total volumenya! (π = 3,14)",
-    diagram: <ConeHemiSVG r={6} hCone={8} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 36 \\times 8 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 216 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 15, title: "Volume Balon Gas (Tabung + ½ Bola)", cat: "tab-hemi",
+    content: "Balon gas: tabung r = 21 cm, t = 40 cm, bagian bawah setengah bola r = 21 cm. Total volume adalah … (π = 22/7)",
+    diagram: <TabungHemiSVG r={21} tTab={40} />,
+    options: [
+      { key: "A", text: "55.440 cm³" },
+      { key: "B", text: "64.900 cm³" },
+      { key: "C", text: "74.844 cm³" },
+      { key: "D", text: "94.248 cm³" },
     ],
-  }),
-  Qn(16, "UN – Luas Permukaan Gabungan Kerucut+½Bola", {
-    content: "Sebuah pion catur berbentuk kerucut dengan r = 5 cm, s = 13 cm, di atas setengah bola r = 5 cm. Hitunglah luas permukaan total pion (selimut kerucut + lengkung ½ bola)! (π = 3,14)",
-    diagram: <ConeHemiSVG r={5} hCone={12} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut kerucut}} = \\pi r s = 3{,}14 \\times 5 \\times 13 = \\ldots \\text{ cm}^2" },
-      { label: "b.", math: "L_{\\frac{1}{2}\\text{bola}} = 2\\pi r^2 = 2 \\times 3{,}14 \\times 25 = \\ldots \\text{ cm}^2" },
-      { label: "c.", math: "L_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ cm}^2" },
+    answer: "C",
+  },
+  {
+    n: 16, title: "Volume Menara Air (Tabung + ½ Bola)", cat: "tab-hemi",
+    content: "Menara air: tabung r = 21 cm, t = 20 cm, kubah setengah bola r = 21 cm di atas. Total volume adalah … (π = 22/7)",
+    diagram: <TabungHemiSVG r={21} tTab={20} />,
+    options: [
+      { key: "A", text: "27.720 cm³" },
+      { key: "B", text: "36.960 cm³" },
+      { key: "C", text: "47.124 cm³" },
+      { key: "D", text: "57.288 cm³" },
     ],
-  }),
-  Qn(17, "ANBK – Tabung + Setengah Bola Bawah", {
-    content: "Sebuah balon gas berbentuk tabung r = 14 cm, t = 30 cm, dengan bagian bawah setengah bola r = 14 cm. Berapa total volume? (π = 22/7)",
-    diagram: <CylinderHemiSVG r={14} hCyl={30} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 196 \\times 30 = \\ldots" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times \\frac{22}{7} \\times 2744 = \\ldots" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 17, title: "Luas Cat Tiang Bendera (Selimut + Bola)", cat: "tab-hemi",
+    content: "Tiang bendera: selimut tabung r = 2 cm, t = 200 cm, dan ujung atas bola penuh r = 3 cm. Luas permukaan yang dicat adalah … (π = 3,14)",
+    diagram: <InfoBubbleSVG lines={["Tabung (r=2, t=200)  +  Bola (r=3)", "L_sel = 2×3,14×2×200", "L_bola = 4×3,14×9"]} />,
+    options: [
+      { key: "A", text: "2.199,8 cm²" },
+      { key: "B", text: "2.512 cm²" },
+      { key: "C", text: "2.625,04 cm²" },
+      { key: "D", text: "2.764,5 cm²" },
     ],
-  }),
-  Qn(18, "Soal Cerita – Es Krim Gelato", {
-    content: "Sebuah gelato terdiri dari setengah bola es krim r = 4 cm di atas kerucut r = 4 cm, t = 9 cm. Berapa total volume es krim? (π = 3,14)",
-    diagram: <ConeHemiSVG r={4} hCone={9} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 16 \\times 9 = \\ldots" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 64 = \\ldots" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 18, title: "Luas Permukaan Mainan (Bola + Tabung)", cat: "tab-hemi",
+    content: "Mainan: bola r = 5 cm di atas tabung r = 5 cm, t = 10 cm. Luas permukaan luar (luas bola + selimut tabung + alas) adalah … (π = 3,14)",
+    diagram: <TabungHemiSVG r={5} tTab={10} />,
+    options: [
+      { key: "A", text: "471 cm²" },
+      { key: "B", text: "549,5 cm²" },
+      { key: "C", text: "628 cm²" },
+      { key: "D", text: "706,5 cm²" },
     ],
-  }),
-  Qn(19, "UN Style – Peluru Kerucut+Tabung", {
-    content: "Peluru (model) berbentuk tabung r = 1 cm, t = 4 cm, dengan ujung kerucut r = 1 cm, t = 2 cm. Berapa total volume? (π = 3,14)",
-    diagram: <CylinderConeSVG r={1} hCyl={4} hCone={2} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = 3{,}14 \\times 1 \\times 4 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 1 \\times 2 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 19, title: "Luas Permukaan Gabungan Tabung + ½ Bola", cat: "tab-hemi",
+    content: "Benda: tabung r = 7 cm, t = 10 cm, dan setengah bola di atas r = 7 cm. Luas permukaan luar (alas + selimut + ½ bola) adalah … (π = 22/7)",
+    diagram: <TabungHemiSVG r={7} tTab={10} />,
+    options: [
+      { key: "A", text: "594 cm²" },
+      { key: "B", text: "748 cm²" },
+      { key: "C", text: "902 cm²" },
+      { key: "D", text: "1.056 cm²" },
     ],
-  }),
-  Qn(20, "Soal Cerita – Tempat Pensil", {
-    content: "Sebuah tempat pensil berbentuk tabung r = 5 cm, t = 15 cm, tanpa tutup atas. Dekorasi atasnya berbentuk setengah bola r = 5 cm dilepas. Berapa luas permukaan tabung saja (tanpa alas dan tanpa tutup)? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut}} = 2\\pi r t = 2 \\times 3{,}14 \\times 5 \\times 15 = \\ldots \\text{ cm}^2" },
+    answer: "C",
+  },
+  {
+    n: 20, title: "Volume Es Krim Bar (Tabung + Bola Penuh)", cat: "tab-hemi",
+    content: "Es krim bar: tabung r = 3 cm, t = 8 cm, dengan dua ujung masing-masing setengah bola r = 3 cm (= tabung + 1 bola penuh). Volumenya adalah … (π = 3,14)",
+    diagram: <TabungHemiSVG r={3} tTab={8} />,
+    options: [
+      { key: "A", text: "226,08 cm³" },
+      { key: "B", text: "282,6 cm³" },
+      { key: "C", text: "339,12 cm³" },
+      { key: "D", text: "395,64 cm³" },
     ],
-  }),
-  Qn(21, "TKA – Tiga Kerucut dalam Tabung", {
-    content: "Sebuah tabung r = 6 cm, t = 9 cm berisi tiga kerucut identik yang masing-masing r = 2 cm, t = 9 cm. Berapa volume ruang kosong dalam tabung? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = 3{,}14 \\times 36 \\times 9 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{1\\text{ kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 4 \\times 9 = \\ldots" },
-      { label: "c.", math: "V_{\\text{sisa}} = V_{\\text{tabung}} - 3 \\times V_{\\text{kerucut}} = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+
+  /* ── KERUCUT + SETENGAH BOLA ── */
+  {
+    n: 21, title: "Volume Ice Cream (Kerucut + ½ Bola)", cat: "ker-hemi",
+    content: "Ice cream cone: setengah bola es krim r = 6 cm di atas kerucut r = 6 cm, t = 8 cm. Total volumenya adalah … (π = 3,14)",
+    diagram: <KerucutHemiSVG r={6} tKer={8} />,
+    options: [
+      { key: "A", text: "301,44 cm³" },
+      { key: "B", text: "452,16 cm³" },
+      { key: "C", text: "603,2 cm³" },
+      { key: "D", text: "753,6 cm³" },
     ],
-  }),
-  Qn(22, "Soal Cerita – Mangkuk Setengah Bola dalam Tabung", {
-    content: "Sebuah mangkuk berbentuk setengah bola r = 10 cm dimasukkan ke dalam tabung r = 10 cm dan t = 10 cm. Berapa volume air yang dapat ditampung di tabung (di luar mangkuk)? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = 3{,}14 \\times 100 \\times 10 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 1000 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{air}} = V_{\\text{tabung}} - V_{\\frac{1}{2}\\text{bola}} = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 22, title: "Luas Permukaan Pion Catur (Kerucut + ½ Bola)", cat: "ker-hemi",
+    content: "Pion catur: kerucut r = 5 cm, s = 13 cm, di atas setengah bola r = 5 cm. Luas permukaan total (selimut kerucut + ½ bola) adalah … (π = 3,14)",
+    diagram: <KerucutHemiSVG r={5} tKer={12} />,
+    options: [
+      { key: "A", text: "157 cm²" },
+      { key: "B", text: "204,1 cm²" },
+      { key: "C", text: "361,1 cm²" },
+      { key: "D", text: "518,1 cm²" },
     ],
-  }),
-  Qn(23, "UN – Roket Sederhana", {
-    content: "Model roket terdiri dari tabung r = 7 cm, t = 30 cm, dan hidung kerucut r = 7 cm, t = 15 cm, serta 4 sirip berbentuk segitiga (abaikan). Hitunglah total volume badan roket! (π = 22/7)",
-    diagram: <CylinderConeSVG r={7} hCyl={30} hCone={15} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 30 = \\ldots" },
-      { label: "b.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times \\frac{22}{7} \\times 49 \\times 15 = \\ldots" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 23, title: "Volume Gelato (Kerucut + ½ Bola)", cat: "ker-hemi",
+    content: "Gelato: setengah bola r = 4 cm di atas kerucut r = 4 cm, t = 9 cm. Total volumenya adalah … (π = 3,14)",
+    diagram: <KerucutHemiSVG r={4} tKer={9} />,
+    options: [
+      { key: "A", text: "150,72 cm³" },
+      { key: "B", text: "200,96 cm³" },
+      { key: "C", text: "251,2 cm³" },
+      { key: "D", text: "284,69 cm³" },
     ],
-  }),
-  Qn(24, "ANBK – Drum Kimia Tertutup", {
-    content: "Sebuah drum kimia: tabung r = 14 cm, t = 50 cm, tutup bawah berbentuk setengah bola r = 14 cm, dan tutup atas datar. Berapa liter kapasitasnya? (π = 22/7)",
-    diagram: <CylinderHemiSVG r={14} hCyl={50} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 196 \\times 50 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times \\frac{22}{7} \\times 2744 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V \\text{ (liter)} = \\frac{V_{\\text{total}}}{1000} = \\ldots \\text{ liter}" },
+    answer: "D",
+  },
+  {
+    n: 24, title: "Volume Ornamen (Kerucut + ½ Bola)", cat: "ker-hemi",
+    content: "Ornamen: kerucut r = 5 cm, t = 12 cm, berdiri di atas setengah bola r = 5 cm. Total volumenya adalah … (π = 3,14)",
+    diagram: <KerucutHemiSVG r={5} tKer={12} />,
+    options: [
+      { key: "A", text: "314 cm³" },
+      { key: "B", text: "471 cm³" },
+      { key: "C", text: "575,67 cm³" },
+      { key: "D", text: "680,67 cm³" },
     ],
-  }),
-  Qn(25, "TKA – Soal Cerita Tabung+Kerucut+Bola", {
-    content: "Sebuah mainan terdiri dari bola r = 5 cm di atas tabung r = 5 cm, t = 10 cm. Berapa total luas permukaan luar mainan (luas bola + selimut tabung + alas tabung)? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "L_{\\text{bola}} = 4\\pi r^2 = 4 \\times 3{,}14 \\times 25 = \\ldots" },
-      { label: "b.", math: "L_{\\text{selimut tabung}} = 2\\pi r t = 2 \\times 3{,}14 \\times 5 \\times 10 = \\ldots" },
-      { label: "c.", math: "L_{\\text{alas}} = \\pi r^2 = 3{,}14 \\times 25 = \\ldots" },
-      { label: "d.", math: "L_{\\text{total}} = \\ldots \\text{ cm}^2" },
+    answer: "C",
+  },
+  {
+    n: 25, title: "Luas Permukaan (Kerucut + ½ Bola)", cat: "ker-hemi",
+    content: "Sebuah ornamen: kerucut r = 6 cm, s = 10 cm, berdiri di atas setengah bola r = 6 cm. Luas permukaan total (selimut kerucut + lengkung ½ bola) adalah … (π = 3,14)",
+    diagram: <KerucutHemiSVG r={6} tKer={8} />,
+    options: [
+      { key: "A", text: "188,4 cm²" },
+      { key: "B", text: "226,08 cm²" },
+      { key: "C", text: "376,8 cm²" },
+      { key: "D", text: "414,48 cm²" },
     ],
-  }),
-  Qn(26, "UN Style – Volume Es Krim Bar", {
-    content: "Es krim bar terdiri dari balok berbentuk tabung r = 3 cm, t = 8 cm, dengan dua ujung masing-masing setengah bola r = 3 cm. Berapa cm³ es krim? (π = 3,14)",
-    diagram: <CylinderHemiSVG r={3} hCyl={8} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = 3{,}14 \\times 9 \\times 8 = \\ldots" },
-      { label: "b.", math: "V_{\\text{bola penuh}} = \\frac{4}{3} \\times 3{,}14 \\times 27 = \\ldots" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+
+  /* ── GABUNGAN CAMPURAN ── */
+  {
+    n: 26, title: "Volume Tiga Bangun (½ Bola + Tabung + Kerucut)", cat: "campuran",
+    content: "Mainan: ½ bola r = 6 cm (bawah) + tabung r = 6 cm, t = 10 cm (tengah) + kerucut r = 6 cm, t = 8 cm (atas). Total volume adalah … (π = 3,14)",
+    diagram: <HemiTabKerSVG r={6} tTab={10} tKer={8} />,
+    options: [
+      { key: "A", text: "1.130,4 cm³" },
+      { key: "B", text: "1.432,44 cm³" },
+      { key: "C", text: "1.733,84 cm³" },
+      { key: "D", text: "1.884 cm³" },
     ],
-  }),
-  Qn(27, "ANBK – Menara Observasi", {
-    content: "Menara observasi: tabung r = 5 m, t = 20 m, dan kubah setengah bola r = 5 m di atas. Berapa m³ total volume? (π = 3,14)",
-    diagram: <CylinderHemiSVG r={5} hCyl={20} />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = 3{,}14 \\times 25 \\times 20 = \\ldots \\text{ m}^3" },
-      { label: "b.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 125 = \\ldots \\text{ m}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ m}^3" },
+    answer: "D",
+  },
+  {
+    n: 27, title: "Volume Roket (½ Bola + Tabung + Kerucut)", cat: "campuran",
+    content: "Model roket: ½ bola r = 5 cm (hidung) + tabung r = 5 cm, t = 15 cm (badan) + kerucut r = 5 cm, t = 6 cm (ekor). Total volumenya adalah … (π = 3,14)",
+    diagram: <HemiTabKerSVG r={5} tTab={15} tKer={6} />,
+    options: [
+      { key: "A", text: "1.177,5 cm³" },
+      { key: "B", text: "1.334,5 cm³" },
+      { key: "C", text: "1.491,5 cm³" },
+      { key: "D", text: "1.596,17 cm³" },
     ],
-  }),
-  Qn(28, "Soal Cerita – Kubus dengan Bola Dibuang", {
-    content: "Sebuah kubus bersisi 14 cm dilubangi di tengah berbentuk bola r = 7 cm. Berapa cm³ volume kubus yang tersisa? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "V_{\\text{kubus}} = 14^3 = 2744 \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{bola}} = \\frac{4}{3} \\times \\frac{22}{7} \\times 7^3 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{sisa}} = 2744 - \\ldots = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 28, title: "Volume Menara Besar (½ Bola + Tabung + Kerucut)", cat: "campuran",
+    content: "Menara: ½ bola r = 21 cm (dasar) + tabung r = 21 cm, t = 40 cm + kerucut r = 21 cm, t = 30 cm (puncak). Total volume adalah … (π = 22/7)",
+    diagram: <HemiTabKerSVG r={21} tTab={40} tKer={30} />,
+    options: [
+      { key: "A", text: "55.440 cm³" },
+      { key: "B", text: "69.300 cm³" },
+      { key: "C", text: "74.844 cm³" },
+      { key: "D", text: "88.704 cm³" },
     ],
-  }),
-  Qn(29, "UN – Tabung Dilubangi Kerucut", {
-    content: "Sebuah tabung r = 10 cm, t = 20 cm, dilubangi kerucut r = 10 cm, t = 20 cm dari atas. Berapa volume benda yang tersisa? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = 3{,}14 \\times 100 \\times 20 = 6280 \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 100 \\times 20 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{sisa}} = 6280 - \\ldots = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 29, title: "Volume Sisa – Tabung Dilubangi Kerucut", cat: "campuran",
+    content: "Tabung r = 10 cm, t = 20 cm dilubangi kerucut r = 10 cm, t = 20 cm dari atas. Volume benda yang tersisa adalah … (π = 3,14)",
+    diagram: <InfoBubbleSVG lines={["V_sisa = V_tabung − V_kerucut", "= πr²t − ⅓πr²t", "= ⅔ × πr²t"]} />,
+    options: [
+      { key: "A", text: "2.093,33 cm³" },
+      { key: "B", text: "3.140 cm³" },
+      { key: "C", text: "4.186,67 cm³" },
+      { key: "D", text: "6.280 cm³" },
     ],
-  }),
-  Qn(30, "TKA – Wajan Setengah Bola+Tabung", {
-    content: "Sebuah wajan berbentuk setengah bola r = 21 cm (bagian bawah) dengan bibir tabung r = 21 cm, t = 5 cm. Berapa total kapasitas wajan? (π = 22/7)",
-    diagram: <CylinderHemiSVG r={21} hCyl={5} />,
-    parts: [
-      { label: "a.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times \\frac{22}{7} \\times 21^3 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 441 \\times 5 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 30, title: "Volume Sisa – Kubus Dilubangi Bola", cat: "campuran",
+    content: "Kubus bersisi 6 cm dilubangi di tengah berbentuk bola r = 3 cm. Volume kubus yang tersisa adalah … (π = 3,14)",
+    diagram: <InfoBubbleSVG lines={["V_kubus = 6³ = 216 cm³", "V_bola = 4/3 × 3,14 × 27", "V_sisa = 216 − V_bola"]} />,
+    options: [
+      { key: "A", text: "56,52 cm³" },
+      { key: "B", text: "102,96 cm³" },
+      { key: "C", text: "144 cm³" },
+      { key: "D", text: "169,56 cm³" },
     ],
-  }),
-  Qn(31, "UN – Luas Permukaan Gabungan Tiga Bangun", {
-    content: "Sebuah benda terdiri dari tabung r = 7 cm, t = 10 cm, dan setengah bola di atas r = 7 cm. Hitunglah luas permukaan luar benda! (π = 22/7)",
-    diagram: <CylinderHemiSVG r={7} hCyl={10} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{alas tabung}} = \\pi r^2 = \\frac{22}{7} \\times 49 = \\ldots" },
-      { label: "b.", math: "L_{\\text{selimut tabung}} = 2\\pi r t = 2 \\times \\frac{22}{7} \\times 7 \\times 10 = \\ldots" },
-      { label: "c.", math: "L_{\\frac{1}{2}\\text{bola}} = 2\\pi r^2 = 2 \\times \\frac{22}{7} \\times 49 = \\ldots" },
-      { label: "d.", math: "L_{\\text{total}} = \\ldots + \\ldots + \\ldots = \\ldots \\text{ cm}^2" },
+    answer: "B",
+  },
+  {
+    n: 31, title: "Tinggi Air – ½ Bola ke Tabung", cat: "campuran",
+    content: "Ember setengah bola r = 21 cm penuh air. Air dituangkan ke tabung r = 7 cm. Tinggi air dalam tabung adalah … (π = 22/7)",
+    diagram: <InfoBubbleSVG lines={["V_½bola = ²⁄₃ × 22/7 × 21³ = 19.404 cm³", "22/7 × 49 × t = 19.404", "154 × t = 19.404 → t = ?"]} />,
+    options: [
+      { key: "A", text: "63 cm" },
+      { key: "B", text: "84 cm" },
+      { key: "C", text: "105 cm" },
+      { key: "D", text: "126 cm" },
     ],
-  }),
-  Qn(32, "ANBK – Soal Campuran Lengkap", {
-    content: "Sebuah mainan: setengah bola r = 6 cm (bawah) + tabung r = 6 cm, t = 10 cm (tengah) + kerucut r = 6 cm, t = 8 cm (atas). Berapa total volume? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 216 = \\ldots" },
-      { label: "b.", math: "V_{\\text{tabung}} = 3{,}14 \\times 36 \\times 10 = \\ldots" },
-      { label: "c.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 36 \\times 8 = \\ldots" },
-      { label: "d.", math: "V_{\\text{total}} = \\ldots + \\ldots + \\ldots = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 32, title: "Volume Sisa – Tabung Dilubangi ½ Bola", cat: "campuran",
+    content: "Tabung r = 10 cm, t = 15 cm dilubangi setengah bola r = 10 cm dari atas. Volume benda yang tersisa adalah … (π = 3,14)",
+    diagram: <TabungHemiSVG r={10} tTab={15} color="#f87171" />,
+    options: [
+      { key: "A", text: "2.093,33 cm³" },
+      { key: "B", text: "2.616,67 cm³" },
+      { key: "C", text: "3.140 cm³" },
+      { key: "D", text: "4.710 cm³" },
     ],
-  }),
-  Qn(33, "Soal Cerita – Bohlam Lampu", {
-    content: "Sebuah bohlam lampu berbentuk setengah bola r = 3 cm di atas tabung r = 1,5 cm, t = 5 cm. Berapa total volume bohlam? (π = 3,14)",
-    diagram: <CylinderHemiSVG r={3} hCyl={5} />,
-    parts: [
-      { label: "a.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 27 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{tabung}} = 3{,}14 \\times 2{,}25 \\times 5 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "B",
+  },
+  {
+    n: 33, title: "Kapasitas Wajan (½ Bola + Bibir Tabung)", cat: "campuran",
+    content: "Wajan: bagian bola setengah r = 21 cm, dengan bibir tabung r = 21 cm, t = 5 cm. Total kapasitas wajan adalah … (π = 22/7)",
+    diagram: <TabungHemiSVG r={21} tTab={5} />,
+    options: [
+      { key: "A", text: "6.930 cm³" },
+      { key: "B", text: "19.404 cm³" },
+      { key: "C", text: "22.704 cm³" },
+      { key: "D", text: "26.334 cm³" },
     ],
-  }),
-  Qn(34, "UN Style – Biaya Cat Gabungan", {
-    content: "Benda terdiri dari tabung r = 7 cm, t = 10 cm, dan setengah bola di atas r = 7 cm. Jika biaya cat Rp2.000/cm², berapa biaya mengcat seluruh permukaannya (tanpa alas)? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut tabung}} = 2\\pi \\times 7 \\times 10 = \\ldots \\text{ cm}^2" },
-      { label: "b.", math: "L_{\\frac{1}{2}\\text{bola}} = 2\\pi \\times 49 = \\ldots \\text{ cm}^2" },
-      { label: "c.", math: "\\text{Biaya} = (\\ldots + \\ldots) \\times 2000 = \\text{Rp}\\ldots" },
+    answer: "D",
+  },
+  {
+    n: 34, title: "Volume Sisa – Tiga Kerucut dalam Tabung", cat: "campuran",
+    content: "Tabung r = 6 cm, t = 9 cm berisi 3 kerucut r = 2 cm, t = 9 cm. Volume ruang kosong dalam tabung adalah … (π = 3,14)",
+    diagram: <InfoBubbleSVG lines={["V_tabung = 3,14 × 36 × 9", "V_3kerucut = 3 × ⅓ × 3,14 × 4 × 9", "V_sisa = V_tabung − V_3kerucut"]} />,
+    options: [
+      { key: "A", text: "339,12 cm³" },
+      { key: "B", text: "565,2 cm³" },
+      { key: "C", text: "791,28 cm³" },
+      { key: "D", text: "904,32 cm³" },
     ],
-  }),
-  Qn(35, "TKA – Tangki Bola + Pipa Tabung", {
-    content: "Sebuah sistem tangki: bola r = 21 cm + pipa tabung r = 3,5 cm, t = 100 cm. Berapa total volume sistem? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "V_{\\text{bola}} = \\frac{4}{3} \\times \\frac{22}{7} \\times 21^3 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{pipa}} = \\frac{22}{7} \\times 12{,}25 \\times 100 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{total}} = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 35, title: "Biaya Cat – Tabung + ½ Bola", cat: "campuran",
+    content: "Benda: tabung r = 7 cm, t = 10 cm, dan setengah bola di atas r = 7 cm (tanpa alas). Biaya cat Rp2.000/cm². Total biaya adalah … (π = 22/7)",
+    diagram: <TabungHemiSVG r={7} tTab={10} />,
+    options: [
+      { key: "A", text: "Rp880.000" },
+      { key: "B", text: "Rp1.232.000" },
+      { key: "C", text: "Rp1.496.000" },
+      { key: "D", text: "Rp1.848.000" },
     ],
-  }),
-  Qn(36, "ANBK – Luas Selimut Gabungan", {
-    content: "Sebuah corong (kerucut tanpa alas r = 10 cm, s = 15 cm) disambung ke tabung r = 10 cm, t = 20 cm. Berapa cm² luas selimut gabungan? (π = 3,14)",
-    diagram: <CylinderConeSVG r={10} hCyl={20} hCone={12} />,
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut kerucut}} = \\pi r s = 3{,}14 \\times 10 \\times 15 = \\ldots" },
-      { label: "b.", math: "L_{\\text{selimut tabung}} = 2\\pi r t = 2 \\times 3{,}14 \\times 10 \\times 20 = \\ldots" },
-      { label: "c.", math: "L_{\\text{gabungan}} = \\ldots + \\ldots = \\ldots \\text{ cm}^2" },
+    answer: "C",
+  },
+  {
+    n: 36, title: "Volume Total – Bola + Pipa Tabung", cat: "campuran",
+    content: "Sistem tangki: bola r = 21 cm + pipa tabung r = 3,5 cm, panjang 100 cm. Total volume sistem adalah … (π = 22/7)",
+    diagram: <InfoBubbleSVG lines={["V_bola = ⁴⁄₃ × 22/7 × 21³ = 38.808 cm³", "V_pipa = 22/7 × 12,25 × 100 = 3.850 cm³", "V_total = 38.808 + 3.850"]} />,
+    options: [
+      { key: "A", text: "38.808 cm³" },
+      { key: "B", text: "40.012 cm³" },
+      { key: "C", text: "42.658 cm³" },
+      { key: "D", text: "46.508 cm³" },
     ],
-  }),
-  Qn(37, "Soal Cerita – Bak Cuci Piring", {
-    content: "Bak cuci piring berbentuk setengah bola r = 20 cm. Berapa liter air yang dapat ditampung? (π = 3,14, 1 liter = 1.000 cm³)",
-    parts: [
-      { label: "a.", math: "V = \\frac{2}{3} \\times 3{,}14 \\times 8000 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V \\text{ (liter)} = \\frac{V}{1000} = \\ldots \\text{ liter}" },
+    answer: "C",
+  },
+  {
+    n: 37, title: "Kapasitas Bak Cuci (½ Bola) dalam Liter", cat: "campuran",
+    content: "Bak cuci berbentuk setengah bola r = 20 cm. Berapa liter air yang dapat ditampung? (π = 3,14; 1 liter = 1.000 cm³)",
+    diagram: <InfoBubbleSVG lines={["V = ²⁄₃ × 3,14 × 20³", "= ²⁄₃ × 3,14 × 8.000", "V (liter) = V / 1.000"]} />,
+    options: [
+      { key: "A", text: "8,37 liter" },
+      { key: "B", text: "12,56 liter" },
+      { key: "C", text: "16,75 liter" },
+      { key: "D", text: "25,12 liter" },
     ],
-  }),
-  Qn(38, "UN Terpadu – Soal Selisih Volume", {
-    content: "Sebuah kerucut r = 10 cm, t = 30 cm, dan sebuah tabung r = 10 cm, t = 10 cm berdiri berdampingan. Berapa selisih volume keduanya? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 100 \\times 30 = \\ldots" },
-      { label: "b.", math: "V_{\\text{tabung}} = 3{,}14 \\times 100 \\times 10 = \\ldots" },
-      { label: "c.", math: "\\Delta V = |V_{\\text{kerucut}} - V_{\\text{tabung}}| = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 38, title: "Selisih Volume – Kerucut vs Tabung", cat: "campuran",
+    content: "Kerucut r = 10 cm, t = 30 cm, dan tabung r = 10 cm, t = 10 cm. Selisih volume keduanya adalah … (π = 3,14)",
+    diagram: <InfoBubbleSVG lines={["V_kerucut = ⅓ × 3,14 × 100 × 30", "V_tabung  = 3,14 × 100 × 10", "Selisih = |V_kerucut − V_tabung|"]} />,
+    options: [
+      { key: "A", text: "0 cm³" },
+      { key: "B", text: "1.046,67 cm³" },
+      { key: "C", text: "2.093,33 cm³" },
+      { key: "D", text: "3.140 cm³" },
     ],
-  }),
-  Qn(39, "ANBK – Soal Kontekstual Isi Air", {
-    content: "Sebuah ember berbentuk setengah bola r = 21 cm penuh air. Air dituangkan ke dalam tabung r = 7 cm. Berapa tinggi air dalam tabung? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times \\frac{22}{7} \\times 21^3 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "\\frac{22}{7} \\times 49 \\times t = V_{\\frac{1}{2}\\text{bola}} \\Rightarrow t = \\ldots \\text{ cm}" },
+    answer: "A",
+  },
+  {
+    n: 39, title: "Kapasitas Drum (Tabung + ½ Bola) dalam Liter", cat: "campuran",
+    content: "Drum kimia: tabung r = 21 cm, t = 40 cm, tutup bawah setengah bola r = 21 cm. Kapasitas dalam liter adalah … (π = 22/7)",
+    diagram: <TabungHemiSVG r={21} tTab={40} />,
+    options: [
+      { key: "A", text: "55,44 liter" },
+      { key: "B", text: "64,9 liter" },
+      { key: "C", text: "74,84 liter" },
+      { key: "D", text: "84,26 liter" },
     ],
-  }),
-  Qn(40, "UN Terpadu – Soal Lengkap Gabungan", {
-    content: "Sebuah kendaraan model: tabung r = 5 cm, t = 15 cm (badan), ditambah setengah bola r = 5 cm (depan), dan kerucut r = 5 cm, t = 6 cm (belakang). Hitunglah: (a) total volume, (b) total luas permukaan luar! (π = 3,14)",
-    parts: [
-      { label: "a.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3} \\times 3{,}14 \\times 125 = \\ldots" },
-      { label: "b.", math: "V_{\\text{tabung}} = 3{,}14 \\times 25 \\times 15 = \\ldots" },
-      { label: "c.", math: "V_{\\text{kerucut}} = \\frac{1}{3} \\times 3{,}14 \\times 25 \\times 6 = \\ldots" },
-      { label: "d.", math: "V_{\\text{total}} = \\ldots + \\ldots + \\ldots = \\ldots \\text{ cm}^3" },
-      { label: "e.", math: "L_{\\text{total}} = 2\\pi r^2 + 2\\pi r t + \\pi r s_{\\text{kerucut}} = \\ldots \\text{ cm}^2" },
+    answer: "C",
+  },
+  {
+    n: 40, title: "Luas Permukaan Roket (½ Bola + Tabung + Kerucut)", cat: "campuran",
+    content: "Roket: ½ bola r = 5 cm (hidung) + tabung r = 5 cm, t = 10 cm + kerucut r = 5 cm, s = 13 cm, t = 12 cm (ekor). Luas permukaan luar (½ bola + selimut tabung + selimut kerucut + alas) adalah … (π = 3,14)",
+    diagram: <HemiTabKerSVG r={5} tTab={10} tKer={12} />,
+    options: [
+      { key: "A", text: "471 cm²" },
+      { key: "B", text: "596,8 cm²" },
+      { key: "C", text: "675,1 cm²" },
+      { key: "D", text: "753,6 cm²" },
     ],
-  }),
+    answer: "D",
+  },
 ];
+
+/* ═══════════════════════════════════════════════════
+   HELPER COMPONENTS
+═══════════════════════════════════════════════════ */
+
+function CatDivider({ cat }: { cat: Cat }) {
+  const { icon, label, color } = CAT_LABELS[cat];
+  return (
+    <div className="flex items-center gap-2 mt-2 mb-1">
+      <div className="h-px flex-1 bg-white/8" />
+      <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${color}`}>
+        {icon} {label}
+      </span>
+      <div className="h-px flex-1 bg-white/8" />
+    </div>
+  );
+}
+
+const optionStyle = (key: OptionKey, selected: OptionKey | undefined, answer: OptionKey, revealed: boolean) => {
+  if (!revealed) {
+    return selected === key
+      ? "bg-emerald-500/30 border-emerald-400 text-white"
+      : "bg-white/5 border-white/10 text-white/80 hover:border-emerald-400/50 hover:bg-emerald-500/10";
+  }
+  if (key === answer) return "bg-emerald-500/25 border-emerald-400 text-emerald-200";
+  if (selected === key && key !== answer) return "bg-rose-500/25 border-rose-400 text-rose-200 line-through";
+  return "bg-white/3 border-white/8 text-white/40";
+};
+
+/* ═══════════════════════════════════════════════════
+   PAGE
+═══════════════════════════════════════════════════ */
 
 const GabunganPage = () => {
   const navigate = useNavigate();
+  const [selected, setSelected] = useState<Record<number, OptionKey>>({});
+  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
+
+  const handleSelect = (n: number, key: OptionKey) => {
+    if (revealed[n]) return;
+    playPopSound();
+    setSelected(prev => ({ ...prev, [n]: key }));
+  };
+
+  const handleReveal = (n: number) => {
+    playPopSound();
+    setRevealed(prev => ({ ...prev, [n]: true }));
+  };
+
+  const mcScore = mcQuestions.filter(q => revealed[q.n] && selected[q.n] === q.answer).length;
+  const mcDone  = mcQuestions.filter(q => revealed[q.n]).length;
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -459,10 +721,17 @@ const GabunganPage = () => {
             BANGUN RUANG SISI LENGKUNG GABUNGAN
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
-          <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 40 Soal</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+          <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
+            <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
+              <span className="text-emerald-400 text-xs font-bold">📋 40 Soal</span>
+              <span className="text-white/30 text-xs">·</span>
+              <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            </div>
+            {mcDone > 0 && (
+              <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
+                <span className="text-emerald-400 text-xs font-bold">✅ {mcScore}/{mcDone} jawaban benar</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -470,56 +739,86 @@ const GabunganPage = () => {
           <p className="text-emerald-300 text-xs font-bold mb-2">📌 Strategi Soal Gabungan</p>
           <div className="grid grid-cols-1 gap-2 text-xs font-body">
             {[
-              "Volume gabungan = jumlah volume setiap bangun penyusun",
-              "Luas permukaan = bagian yang terlihat dari luar saja",
-              "Bidang pertemuan dua bangun TIDAK dihitung sebagai permukaan luar",
-              "Perhatikan apakah alas/tutup bangun termasuk atau tidak",
-            ].map((s, i) => (
-              <div key={i} className="bg-white/5 rounded-lg px-3 py-2 flex gap-2">
-                <span className="text-emerald-400 font-bold shrink-0">•</span>
-                <span className="text-white/60">{s}</span>
+              { label: "Volume Gabungan", formula: "V_{\\text{total}} = V_1 + V_2 + V_3 + \\ldots" },
+              { label: "Luas Permukaan", formula: "\\text{Hitung bagian luar saja (bidang bersekutu diabaikan)}" },
+              { label: "Tabung + Kerucut (r,t sama)", formula: "V_{\\text{ker}} = \\tfrac{1}{3}\\,V_{\\text{tab}}" },
+              { label: "½ Bola (r)", formula: "V_{\\frac{1}{2}\\text{bola}} = \\tfrac{2}{3}\\pi r^3" },
+            ].map(f => (
+              <div key={f.label} className="bg-white/5 rounded-lg px-3 py-2 flex gap-3 items-center">
+                <span className="text-emerald-400 font-bold shrink-0 w-44 text-[11px]">{f.label}</span>
+                <span className="text-white/80 text-xs"><InlineMath math={f.formula} /></span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
-              <div className="absolute inset-0 border border-emerald-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-teal-500 rounded-l-2xl" />
-              <div className="relative px-5 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-emerald-300 text-xs font-bold">{q.n}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                      {q.title}
-                    </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
-                    {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
-                    {q.math && <div className="mb-3 text-white/90 text-sm"><BlockMath math={q.math} /></div>}
-                    {q.parts && (
-                      <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
-                            {p.label && <span className="text-emerald-400 text-xs font-bold shrink-0 mt-0.5 w-5">{p.label}</span>}
-                            <div className="flex-1 min-w-0">
-                              {p.text && <span className="font-body text-sm text-white/80">{p.text}</span>}
-                              {p.math && <span className="text-white/90 text-sm"><InlineMath math={p.math} /></span>}
-                            </div>
-                          </div>
-                        ))}
+        <div className="mb-3 flex items-center gap-2">
+          <div className="h-px flex-1 bg-emerald-500/20" />
+          <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–40 · Pilihan Ganda</span>
+          <div className="h-px flex-1 bg-emerald-500/20" />
+        </div>
+
+        <div className="flex flex-col gap-3 animate-slide-up">
+          {mcQuestions.map((q, i) => {
+            const isRevealed = !!revealed[q.n];
+            const sel        = selected[q.n];
+            const isCorrect  = isRevealed && sel === q.answer;
+            const isWrong    = isRevealed && !!sel && sel !== q.answer;
+            const prevCat    = i > 0 ? mcQuestions[i - 1].cat : null;
+            const showDivider = q.cat !== prevCat;
+            return (
+              <div key={q.n}>
+                {showDivider && <CatDivider cat={q.cat} />}
+                <div className="relative rounded-2xl overflow-hidden animate-slide-up"
+                  style={{ animationDelay: `${i * 0.015}s` }}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
+                  <div className={`absolute inset-0 rounded-2xl transition-colors duration-300 ${isCorrect ? "border border-emerald-500/40" : isWrong ? "border border-rose-500/40" : "border border-emerald-500/20"}`} />
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-teal-500 rounded-l-2xl" />
+                  <div className="relative px-5 py-4">
+                    <div className="flex items-start gap-3">
+                      <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors ${isCorrect ? "bg-emerald-500/20 border-emerald-400/50" : isWrong ? "bg-rose-500/20 border-rose-400/50" : "bg-emerald-500/20 border-emerald-400/50"}`}>
+                        <span className={`text-xs font-bold ${isCorrect ? "text-emerald-300" : isWrong ? "text-rose-300" : "text-emerald-300"}`}>{q.n}</span>
                       </div>
-                    )}
+                      <div className="flex-1 min-w-0">
+                        <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                          {q.title}
+                        </span>
+                        <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>
+                        {q.diagram && <div className="mb-3 flex justify-center overflow-x-auto">{q.diagram}</div>}
+                        <div className="grid grid-cols-1 gap-2 mb-3">
+                          {q.options.map(opt => (
+                            <button key={opt.key}
+                              onClick={() => handleSelect(q.n, opt.key)}
+                              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body transition-all cursor-pointer ${optionStyle(opt.key, sel, q.answer, isRevealed)}`}>
+                              <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
+                                isRevealed && opt.key === q.answer                          ? "border-emerald-400 text-emerald-300 bg-emerald-500/20"
+                                : isRevealed && sel === opt.key && opt.key !== q.answer     ? "border-rose-400 text-rose-300 bg-rose-500/20"
+                                : sel === opt.key                                           ? "border-emerald-400 text-emerald-300 bg-emerald-500/20"
+                                : "border-white/20 text-white/50"
+                              }`}>{opt.key}</span>
+                              <span>{opt.text}</span>
+                              {isRevealed && opt.key === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>}
+                              {isRevealed && sel === opt.key && opt.key !== q.answer && <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>}
+                            </button>
+                          ))}
+                        </div>
+                        {!isRevealed ? (
+                          <button onClick={() => handleReveal(q.n)}
+                            className="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 transition-all cursor-pointer font-body">
+                            Lihat Jawaban
+                          </button>
+                        ) : (
+                          <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
+                            {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-8 text-center">
