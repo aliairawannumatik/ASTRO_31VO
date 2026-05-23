@@ -2448,6 +2448,7 @@ const SoalCard = ({ soal }: { soal: Question }) => {
           <span className="text-xs font-bold text-primary/80 bg-primary/10 px-2 py-1 rounded-md">#{soal.id}</span>
           <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${difficultyColor[soal.difficulty]}`}>{soal.difficulty}</span>
           <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${typeColor[soal.type]}`}>{typeLabel[soal.type]}</span>
+          <span className={`text-xs font-semibold px-2 py-1 rounded-full border ${bangunColor[getBangun(soal)]}`}>{getBangun(soal)}</span>
           <span className={`text-xs font-semibold px-2 py-1 rounded-full border ${topikColor[getTopik(soal)]}`}>{getTopik(soal)}</span>
           <span className="text-xs text-white/30 font-body">{soal.category}</span>
         </div>
@@ -2601,6 +2602,28 @@ function getTopik(soal: Question): Topik {
 }
 
 /* ══════════════════════════════════════════════════════
+   BANGUN CLASSIFICATION
+══════════════════════════════════════════════════════ */
+type Bangun = "Tabung" | "Kerucut" | "Bola" | "Belahan Bola" | "Gabungan";
+
+function getBangun(soal: Question): Bangun {
+  const cat = soal.category;
+  if (cat.includes("Kerucut")) return "Kerucut";
+  if (cat.includes("Tabung")) return "Tabung";
+  if (cat.includes("Belahan")) return "Belahan Bola";
+  if (cat.includes("Bola")) return "Bola";
+  return "Gabungan";
+}
+
+const bangunColor: Record<Bangun, string> = {
+  "Tabung":       "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+  "Kerucut":      "bg-orange-500/20 text-orange-300 border-orange-500/40",
+  "Bola":         "bg-pink-500/20 text-pink-300 border-pink-500/40",
+  "Belahan Bola": "bg-rose-500/20 text-rose-300 border-rose-500/40",
+  "Gabungan":     "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
+};
+
+/* ══════════════════════════════════════════════════════
    MAIN PAGE
 ══════════════════════════════════════════════════════ */
 const BankSoalBangunRuangSisiLengkungPage = () => {
@@ -2608,6 +2631,7 @@ const BankSoalBangunRuangSisiLengkungPage = () => {
   const [filterDifficulty, setFilterDifficulty] = useState<Difficulty | "Semua">("Semua");
   const [filterType, setFilterType] = useState<QuestionType | "Semua">("Semua");
   const [filterTopik, setFilterTopik] = useState<Topik | "Semua">("Semua");
+  const [filterBangun, setFilterBangun] = useState<Bangun | "Semua">("Semua");
   const [showFilter, setShowFilter] = useState(false);
 
   const diffOrder: Record<Difficulty, number> = { "Mudah": 0, "Sedang": 1, "Sulit": 2 };
@@ -2616,7 +2640,8 @@ const BankSoalBangunRuangSisiLengkungPage = () => {
     const arr = soalBangunRuangSisiLengkung.filter(s =>
       (filterDifficulty === "Semua" || s.difficulty === filterDifficulty) &&
       (filterType === "Semua" || s.type === filterType) &&
-      (filterTopik === "Semua" || getTopik(s) === filterTopik)
+      (filterTopik === "Semua" || getTopik(s) === filterTopik) &&
+      (filterBangun === "Semua" || getBangun(s) === filterBangun)
     );
     return [...arr].sort((a, b) => {
       const ta = topikOrder[getTopik(a)];
@@ -2627,7 +2652,7 @@ const BankSoalBangunRuangSisiLengkungPage = () => {
       if (da !== db) return da - db;
       return a.id - b.id;
     });
-  }, [filterDifficulty, filterType, filterTopik]);
+  }, [filterDifficulty, filterType, filterTopik, filterBangun]);
 
   const counts = {
     Mudah: soalBangunRuangSisiLengkung.filter(s => s.difficulty === "Mudah").length,
@@ -2691,6 +2716,22 @@ const BankSoalBangunRuangSisiLengkungPage = () => {
                     <button key={t} onClick={() => { playPopSound(); setFilterType(t); }}
                       className={`text-xs px-3 py-1.5 rounded-full border font-body cursor-pointer transition-all ${filterType === t ? "bg-primary text-white border-primary" : "border-border text-white/50 hover:border-primary/40"}`}>
                       {t === "MCMA" ? "PG Kompleks MCMA" : t === "Benar/Salah" ? "PG Kompleks B/S" : t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-white/50 mb-2 font-body">Bangun:</p>
+                <div className="flex flex-wrap gap-2">
+                  {(["Semua","Tabung","Kerucut","Bola","Belahan Bola","Gabungan"] as const).map(bg => (
+                    <button key={bg} onClick={() => { playPopSound(); setFilterBangun(bg); }}
+                      className={`text-xs px-3 py-1.5 rounded-full border font-body cursor-pointer transition-all ${
+                        filterBangun === bg
+                          ? bg === "Semua" ? "bg-primary text-white border-primary"
+                          : `border ${bangunColor[bg as Bangun]} font-bold`
+                          : "border-border text-white/50 hover:border-primary/40"
+                      }`}>
+                      {bg}
                     </button>
                   ))}
                 </div>
