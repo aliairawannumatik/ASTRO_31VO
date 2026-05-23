@@ -28,7 +28,7 @@ type QMC = {
    SVG DIAGRAM COMPONENTS
 ═══════════════════════════════════════════════════ */
 
-function TabungKerucutSVG({ r, tTab, tKer, color = "#10b981" }: {
+function TabungKerucutSVG({ r, tTab, tKer, color = "#f59e0b" }: {
   r: number; tTab: number; tKer: number; color?: string;
 }) {
   const W   = Math.min(r * 4.5, 52);
@@ -40,7 +40,7 @@ function TabungKerucutSVG({ r, tTab, tKer, color = "#10b981" }: {
   const topCylY  = baseY - HC;
   const apexY    = topCylY - HK;
   return (
-    <svg viewBox="0 0 240 200" width="240" height="200" className="mx-auto">
+    <svg viewBox="0 0 240 200" width="300" height="250" className="mx-auto">
       <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
       <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
       <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.6" />
@@ -61,7 +61,7 @@ function TabungKerucutSVG({ r, tTab, tKer, color = "#10b981" }: {
   );
 }
 
-function TabungHemiSVG({ r, tTab, color = "#10b981" }: {
+function TabungHemiSVG({ r, tTab, color = "#38bdf8" }: {
   r: number; tTab: number; color?: string;
 }) {
   const W   = Math.min(r * 4.5, 52);
@@ -71,7 +71,7 @@ function TabungHemiSVG({ r, tTab, color = "#10b981" }: {
   const baseY   = 178;
   const topCylY = baseY - HC;
   return (
-    <svg viewBox="0 0 240 210" width="240" height="210" className="mx-auto">
+    <svg viewBox="0 0 240 210" width="300" height="263" className="mx-auto">
       <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.6" />
       <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
       <line x1={cx - W} y1={topCylY} x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.6" />
@@ -90,7 +90,7 @@ function TabungHemiSVG({ r, tTab, color = "#10b981" }: {
   );
 }
 
-function KerucutHemiSVG({ r, tKer, color = "#10b981" }: {
+function KerucutHemiSVG({ r, tKer, color = "#a78bfa" }: {
   r: number; tKer: number; color?: string;
 }) {
   const W   = Math.min(r * 4.5, 52);
@@ -100,7 +100,7 @@ function KerucutHemiSVG({ r, tKer, color = "#10b981" }: {
   const baseY = 150;
   const apexY = baseY - HK;
   return (
-    <svg viewBox="0 0 240 210" width="240" height="210" className="mx-auto">
+    <svg viewBox="0 0 240 210" width="300" height="263" className="mx-auto">
       <polygon points={`${cx - W},${baseY} ${cx + W},${baseY} ${cx},${apexY}`}
         fill={color} fillOpacity="0.11" stroke={color} strokeWidth="1.6" />
       <ellipse cx={cx} cy={baseY} rx={W} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.2" strokeDasharray="4,3" />
@@ -117,7 +117,7 @@ function KerucutHemiSVG({ r, tKer, color = "#10b981" }: {
   );
 }
 
-function HemiTabKerSVG({ r, tTab, tKer, color = "#10b981" }: {
+function HemiTabKerSVG({ r, tTab, tKer, color = "#fb7185" }: {
   r: number; tTab: number; tKer: number; color?: string;
 }) {
   const W   = Math.min(r * 3.8, 46);
@@ -129,7 +129,7 @@ function HemiTabKerSVG({ r, tTab, tKer, color = "#10b981" }: {
   const topCylY = baseY - HC;
   const apexY   = topCylY - HK;
   return (
-    <svg viewBox="0 0 240 215" width="240" height="215" className="mx-auto">
+    <svg viewBox="0 0 240 215" width="300" height="269" className="mx-auto">
       <path d={`M ${cx - W} ${baseY} A ${W} ${W} 0 0 0 ${cx + W} ${baseY}`}
         fill={color} fillOpacity="0.20" stroke={color} strokeWidth="1.5" />
       <rect x={cx - W} y={topCylY} width={W * 2} height={HC} fill={color} fillOpacity="0.07" />
@@ -148,14 +148,14 @@ function HemiTabKerSVG({ r, tTab, tKer, color = "#10b981" }: {
   );
 }
 
-function InfoBubbleSVG({ lines, color = "#10b981" }: { lines: string[]; color?: string }) {
-  const h = 28 + lines.length * 23;
+function InfoBubbleSVG({ lines, color = "#22d3ee" }: { lines: string[]; color?: string }) {
+  const h = 32 + lines.length * 26;
   return (
-    <svg viewBox={`0 0 300 ${h}`} width="300" height={h} className="mx-auto">
+    <svg viewBox={`0 0 300 ${h}`} width="340" height={Math.round(h * 1.13)} className="mx-auto">
       <rect x="10" y="6" width="280" height={h - 12} rx="12"
         fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" strokeOpacity="0.5" />
       {lines.map((line, i) => (
-        <text key={i} x="150" y={26 + i * 23} fill={color} fontSize="11"
+        <text key={i} x="150" y={28 + i * 26} fill={color} fontSize="12"
           textAnchor="middle" fontFamily="monospace">{line}</text>
       ))}
     </svg>
