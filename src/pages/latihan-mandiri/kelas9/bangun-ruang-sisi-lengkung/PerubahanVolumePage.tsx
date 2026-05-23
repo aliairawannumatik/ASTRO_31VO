@@ -390,18 +390,6 @@ const mcQuestions: QMC[] = [
     answer: "B",
   },
   {
-    n: 8, title: "Tabung – r Bertambah 4 cm", cat: "tabung",
-    content: "Sebuah tabung dengan r = 7 cm dan t = 10 cm. Jika jari-jari bertambah 4 cm menjadi 11 cm (t tetap), selisih volume keduanya adalah … (π = 22/7)",
-    diagram: <CompareCylSVG r1={7} t1={10} r2={11} t2={10} label1="r = 7" label2="r = 11" />,
-    options: [
-      { key: "A", text: "1.540 cm³" },
-      { key: "B", text: "2.000 cm³" },
-      { key: "C", text: "2.263 cm³" },
-      { key: "D", text: "3.080 cm³" },
-    ],
-    answer: "C",
-  },
-  {
     n: 9, title: "Tabung – Volume Berkurang ¼", cat: "tabung",
     content: "Volume sebuah tabung berkurang menjadi ¼ semula. Jika jari-jari tidak berubah, tinggi tabung baru menjadi ...",
     diagram: <RumusBubbleSVG lines={["V₂/V₁ = t₂/t₁ = 1/4", "→ tinggi menjadi 1/4 kali"]} />,
@@ -446,46 +434,6 @@ const mcQuestions: QMC[] = [
       { key: "B", text: "8 cm" },
       { key: "C", text: "10 cm" },
       { key: "D", text: "20 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 13, title: "Selisih Volume Tabung – r: 10→14 cm", cat: "tabung",
-    content: "Sebuah tabung memiliki r = 10 cm dan t = 14 cm. Jika r diperbesar menjadi 14 cm (t tetap), selisih volumenya adalah … (π = 22/7)",
-    diagram: <CompareCylSVG r1={10} t1={14} r2={14} t2={14} label1="r=10" label2="r=14" />,
-    options: [
-      { key: "A", text: "2.200 cm³" },
-      { key: "B", text: "3.080 cm³" },
-      { key: "C", text: "4.224 cm³" },
-      { key: "D", text: "5.280 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 14, title: "Tiga Tabung – Perbandingan Volume", cat: "tabung",
-    content: "Tabung I: r=2, t=9. Tabung II: r=3, t=4. Tabung III: r=6, t=1. Pernyataan yang benar tentang volume ketiga tabung adalah ...",
-    diagram: <ThreeCylSVG items={[
-      { r: 2, t: 9, label: "r=2, t=9" },
-      { r: 3, t: 4, label: "r=3, t=4" },
-      { r: 6, t: 1, label: "r=6, t=1" },
-    ]} />,
-    options: [
-      { key: "A", text: "VI < VII < VIII" },
-      { key: "B", text: "VIII < VII < VI" },
-      { key: "C", text: "VI < VIII < VII" },
-      { key: "D", text: "Volume ketiganya sama" },
-    ],
-    answer: "D",
-  },
-  {
-    n: 15, title: "Pipa Air Diperpanjang – r = 3,5 cm", cat: "tabung",
-    content: "Sebuah pipa berbentuk tabung r = 3,5 cm, panjang 2 m diperpanjang menjadi 5 m. Tambahan volume pipa adalah … (π = 22/7)",
-    diagram: <CompareCylSVG r1={35} t1={1} r2={35} t2={3} label1="t=2 m" label2="t=5 m" color="#34d399" />,
-    options: [
-      { key: "A", text: "7.700 cm³" },
-      { key: "B", text: "9.625 cm³" },
-      { key: "C", text: "11.550 cm³" },
-      { key: "D", text: "19.250 cm³" },
     ],
     answer: "C",
   },
@@ -576,18 +524,6 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 23, title: "Bola – Jari-Jari Diperbesar 3 Kali", cat: "bola",
-    content: "Sebuah bola berjari-jari 5 cm. Jika r diperbesar menjadi 15 cm, volume bola baru menjadi ... kali semula.",
-    diagram: <CompareSphereSVG r1={5} r2={8} />,
-    options: [
-      { key: "A", text: "9 kali" },
-      { key: "B", text: "18 kali" },
-      { key: "C", text: "27 kali" },
-      { key: "D", text: "81 kali" },
-    ],
-    answer: "C",
-  },
-  {
     n: 24, title: "Bola – Jari-Jari Diperkecil Sepertiga", cat: "bola",
     content: "Jika jari-jari bola diperkecil menjadi sepertiga semula, volume bola baru menjadi ...",
     diagram: <CompareSphereSVG r1={7} r2={3} />,
@@ -598,18 +534,6 @@ const mcQuestions: QMC[] = [
       { key: "D", text: "1/81 kali semula" },
     ],
     answer: "C",
-  },
-  {
-    n: 25, title: "Bola – Luas Permukaan saat r Diperbesar 4 Kali", cat: "bola",
-    content: "Jika jari-jari sebuah bola diperbesar 4 kali, luas permukaan bola menjadi ... kali semula.",
-    diagram: <RumusBubbleSVG lines={["L = 4πr²", "L₂ = 4π(4r)² = 16 × 4πr² = 16L₁"]} color="#818cf8" />,
-    options: [
-      { key: "A", text: "4 kali" },
-      { key: "B", text: "8 kali" },
-      { key: "C", text: "12 kali" },
-      { key: "D", text: "16 kali" },
-    ],
-    answer: "D",
   },
   {
     n: 26, title: "Bola – Volume Baru dari Perbandingan r", cat: "bola",
@@ -637,30 +561,6 @@ const mcQuestions: QMC[] = [
   },
   /* ── GABUNGAN ── */
   {
-    n: 28, title: "Tabung vs Kerucut – Volume Berbanding 3:1", cat: "gabungan",
-    content: "Sebuah tabung dan kerucut memiliki r dan t yang sama. Jika volume tabung 300 cm³, volume kerucut tersebut adalah ...",
-    diagram: <RumusBubbleSVG lines={["V_kerucut = ¹⁄₃ V_tabung", "= ¹⁄₃ × 300"]} color="#10b981" />,
-    options: [
-      { key: "A", text: "50 cm³" },
-      { key: "B", text: "75 cm³" },
-      { key: "C", text: "100 cm³" },
-      { key: "D", text: "150 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 29, title: "Perubahan Luas Selimut Tabung", cat: "gabungan",
-    content: "Sebuah tabung dengan r = 7 cm dan t = 10 cm diperbesar: r menjadi 14 cm dan t tetap. Luas selimut tabung baru menjadi ... kali semula.",
-    diagram: <CompareCylSVG r1={7} t1={10} r2={14} t2={10} label1="r=7" label2="r=14" />,
-    options: [
-      { key: "A", text: "2 kali" },
-      { key: "B", text: "3 kali" },
-      { key: "C", text: "4 kali" },
-      { key: "D", text: "8 kali" },
-    ],
-    answer: "A",
-  },
-  {
     n: 30, title: "Volume Tabung Berkurang karena r Mengecil", cat: "gabungan",
     content: "Sebuah tabung mengalami pengurangan jari-jari dari 10 cm menjadi 8 cm, tinggi tetap 15 cm. Persentase volume yang berkurang adalah … (π = 3,14)",
     diagram: <CompareCylSVG r1={10} t1={15} r2={8} t2={15} label1="r=10" label2="r=8" color="#f87171" />,
@@ -681,114 +581,6 @@ const mcQuestions: QMC[] = [
       { key: "B", text: "10 cm" },
       { key: "C", text: "12 cm" },
       { key: "D", text: "16 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 32, title: "Bola Dilebur Jadi Tabung", cat: "gabungan",
-    content: "Dua bola logam masing-masing berjari-jari 3 cm dilebur menjadi sebuah tabung berjari-jari 3 cm. Tinggi tabung yang terbentuk adalah … (π sama)",
-    diagram: <RumusBubbleSVG lines={["V_2bola = 2 × ⁴⁄₃π×27 = 72π cm³", "π×9×t = 72π → t = ?"]} color="#10b981" />,
-    options: [
-      { key: "A", text: "4 cm" },
-      { key: "B", text: "6 cm" },
-      { key: "C", text: "8 cm" },
-      { key: "D", text: "12 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 33, title: "Kerucut Dilebur Jadi Bola", cat: "gabungan",
-    content: "Sebuah kerucut dengan r = 6 cm dan t = 8 cm dilebur menjadi sebuah bola. Jari-jari bola yang terbentuk adalah ...",
-    diagram: <RumusBubbleSVG lines={["V_kerucut = ¹⁄₃π×36×8 = 96π cm³", "⁴⁄₃πR³ = 96π → R = ∛72 cm"]} color="#10b981" />,
-    options: [
-      { key: "A", text: "∛36 cm" },
-      { key: "B", text: "∛48 cm" },
-      { key: "C", text: "∛72 cm" },
-      { key: "D", text: "∛96 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 34, title: "Air dari Tabung Dipindah ke Bola", cat: "gabungan",
-    content: "Air dari tabung dengan r = 10 cm dan t = 27 cm seluruhnya dipindahkan ke bola. Jari-jari bola tersebut adalah … (π sama)",
-    diagram: <RumusBubbleSVG lines={["V_tabung = π×100×27 = 2700π cm³", "⁴⁄₃πr³ = 2700π → r³ = 2025"]} color="#10b981" />,
-    options: [
-      { key: "A", text: "∛675 cm" },
-      { key: "B", text: "∛1350 cm" },
-      { key: "C", text: "∛2025 ≈ 12,65 cm" },
-      { key: "D", text: "∛2700 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 35, title: "Empat Bola Dilebur Jadi Satu", cat: "gabungan",
-    content: "Empat bola masing-masing berjari-jari 3 cm dilebur menjadi satu bola besar. Jari-jari bola besar tersebut adalah ...",
-    diagram: <RumusBubbleSVG lines={["V_total = 4×⁴⁄₃π×27 = 144π cm³", "⁴⁄₃πR³ = 144π → R = ∛108 cm"]} color="#10b981" />,
-    options: [
-      { key: "A", text: "∛54 cm" },
-      { key: "B", text: "∛72 cm" },
-      { key: "C", text: "∛108 cm" },
-      { key: "D", text: "∛144 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 36, title: "Air Dipindah dari Tabung A ke Tabung B", cat: "gabungan",
-    content: "Air dari tabung A (r = 7 cm, t = 10 cm) seluruhnya dipindah ke tabung B (r = 14 cm). Tinggi air di tabung B adalah … (π = 22/7)",
-    diagram: <CompareCylSVG r1={7} t1={10} r2={14} t2={3} label1="Tabung A" label2="Tabung B" color="#38bdf8" />,
-    options: [
-      { key: "A", text: "1,25 cm" },
-      { key: "B", text: "2 cm" },
-      { key: "C", text: "2,5 cm" },
-      { key: "D", text: "5 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 37, title: "Persentase Volume Berkurang – Kaleng Minuman", cat: "gabungan",
-    content: "Sebuah kaleng minuman dikecilkan: r dari 3,5 cm menjadi 3 cm, t dari 10 cm menjadi 8 cm. Persentase volume yang berkurang adalah … (π = 22/7)",
-    diagram: <CompareCylSVG r1={35} t1={10} r2={3} t2={8} label1="r=3,5; t=10" label2="r=3; t=8" color="#f59e0b" />,
-    options: [
-      { key: "A", text: "25,5%" },
-      { key: "B", text: "35,7%" },
-      { key: "C", text: "41,2%" },
-      { key: "D", text: "58,8%" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 38, title: "Bola Berjari-Jari 12 Diubah Jadi Kerucut", cat: "gabungan",
-    content: "Sebuah bola berjari-jari 12 cm diubah menjadi kerucut dengan t = 96 cm. Jari-jari kerucut agar volumenya sama adalah ...",
-    diagram: <RumusBubbleSVG lines={["V_bola = ⁴⁄₃π×1728 = 2304π cm³", "¹⁄₃πr²×96 = 2304π → r² = 72"]} color="#10b981" />,
-    options: [
-      { key: "A", text: "6 cm" },
-      { key: "B", text: "6√2 cm" },
-      { key: "C", text: "8 cm" },
-      { key: "D", text: "12 cm" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 39, title: "Dua Bola A dan B – Selisih Volume", cat: "gabungan",
-    content: "Bola A berjari-jari 6 cm dan Bola B berjari-jari 12 cm. Selisih volume kedua bola tersebut adalah … (π = 3,14)",
-    diagram: <CompareSphereSVG r1={6} r2={8} />,
-    options: [
-      { key: "A", text: "1.695,5 cm³" },
-      { key: "B", text: "3.052,1 cm³" },
-      { key: "C", text: "6.330,24 cm³" },
-      { key: "D", text: "7.521,6 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 40, title: "Perbandingan Luas Permukaan Dua Bola", cat: "gabungan",
-    content: "Bola A berjari-jari 6 cm dan Bola B berjari-jari 12 cm. Perbandingan luas permukaan A terhadap B adalah ...",
-    diagram: <CompareSphereSVG r1={6} r2={8} />,
-    options: [
-      { key: "A", text: "1 : 2" },
-      { key: "B", text: "1 : 3" },
-      { key: "C", text: "1 : 4" },
-      { key: "D", text: "1 : 8" },
     ],
     answer: "C",
   },
@@ -853,7 +645,7 @@ const PerubahanVolumePage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-lg px-4 py-2">
-              <span className="text-purple-400 text-xs font-bold">📋 40 Soal</span>
+              <span className="text-purple-400 text-xs font-bold">📋 23 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
@@ -885,7 +677,7 @@ const PerubahanVolumePage = () => {
 
         <div className="mb-3 flex items-center gap-2">
           <div className="h-px flex-1 bg-purple-500/20" />
-          <span className="text-purple-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–40 · Pilihan Ganda</span>
+          <span className="text-purple-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–31 · Pilihan Ganda</span>
           <div className="h-px flex-1 bg-purple-500/20" />
         </div>
 
