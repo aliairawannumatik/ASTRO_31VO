@@ -1,392 +1,842 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 
-type Part = { label: string; math?: string; text?: string };
-type Q = {
-  n: number; title: string;
-  content?: string; math?: string;
-  parts?: Part[];
+type OptionKey = "A" | "B" | "C" | "D";
+type Cat = "tabung" | "kerucut" | "bola" | "gabungan";
+type QMC = {
+  n: number; title: string; cat: Cat;
+  content: string;
   diagram?: React.ReactNode;
+  options: { key: OptionKey; text: string }[];
+  answer: OptionKey;
 };
-const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-function CompareCylinderSVG({ r1, h1, r2, h2, color = "#a855f7" }: {
-  r1: number; h1: number; r2: number; h2: number; color?: string;
-}) {
-  const maxH = Math.max(h1, h2);
-  const scale = 80 / maxH;
-  const H1 = h1 * scale;
-  const H2 = h2 * scale;
-  const R1 = Math.max(r1 * 10, 14);
-  const R2 = Math.max(r2 * 10, 14);
-  const ell1 = Math.max(R1 * 0.28, 5);
-  const ell2 = Math.max(R2 * 0.28, 5);
+const CAT_LABELS: Record<Cat, { icon: string; label: string; color: string }> = {
+  tabung:   { icon: "🧪", label: "Tabung",   color: "text-purple-400 border-purple-500/30 bg-purple-500/10" },
+  kerucut:  { icon: "🔺", label: "Kerucut",  color: "text-orange-400 border-orange-500/30 bg-orange-500/10" },
+  bola:     { icon: "🔮", label: "Bola",     color: "text-indigo-400 border-indigo-500/30 bg-indigo-500/10" },
+  gabungan: { icon: "🔄", label: "Gabungan", color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
+};
+
+/* ─── SVG PRIMITIVES ─── */
+
+function drawCyl(
+  cx: number, baseY: number, r: number, t: number,
+  color: string, scale = 1, opacity = 1
+) {
+  const W  = Math.min(r * 8 * scale, 52);
+  const H  = Math.min(t * 6 * scale, 95);
+  const ry = Math.max(W * 0.22, 4);
+  const top = baseY - H;
   return (
-    <svg viewBox="0 0 280 160" width="280" height="160" className="mx-auto">
-      <text x="60" y="14" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Awal</text>
-      <ellipse cx="60" cy="130 - H1 + ell1" rx={R1} ry={ell1} fill={color} fillOpacity="0.08" stroke={color} strokeWidth="1.5" />
-      <ellipse cx="60" cy="130" rx={R1} ry={ell1} fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1.5" />
-      <rect x={60 - R1} y={130 - H1} width={R1 * 2} height={H1} fill={color} fillOpacity="0.07" />
-      <line x1={60 - R1} y1={130 - H1} x2={60 - R1} y2="130" stroke={color} strokeWidth="1.5" />
-      <line x1={60 + R1} y1={130 - H1} x2={60 + R1} y2="130" stroke={color} strokeWidth="1.5" />
-      <text x="60" y={130 - H1 / 2} fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" dominantBaseline="middle">r={r1}, t={h1}</text>
-
-      <text x="60" y="148" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = {r1}²×{h1}π</text>
-
-      <text x="150" y="75" fill={color} fontSize="18" textAnchor="middle" fontFamily="monospace">→</text>
-
-      <text x="220" y="14" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Baru</text>
-      <ellipse cx="220" cy={130 - H2 + ell2} rx={R2} ry={ell2} fill={color} fillOpacity="0.08" stroke={color} strokeWidth="1.5" />
-      <ellipse cx="220" cy="130" rx={R2} ry={ell2} fill={color} fillOpacity="0.20" stroke={color} strokeWidth="1.5" />
-      <rect x={220 - R2} y={130 - H2} width={R2 * 2} height={H2} fill={color} fillOpacity="0.12" />
-      <line x1={220 - R2} y1={130 - H2} x2={220 - R2} y2="130" stroke={color} strokeWidth="1.5" />
-      <line x1={220 + R2} y1={130 - H2} x2={220 + R2} y2="130" stroke={color} strokeWidth="1.5" />
-      <text x="220" y={130 - H2 / 2} fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" dominantBaseline="middle">r={r2}, t={h2}</text>
-      <text x="220" y="148" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = {r2}²×{h2}π</text>
-    </svg>
+    <g opacity={opacity}>
+      <rect x={cx - W} y={top} width={W * 2} height={H} fill={color} fillOpacity="0.09" />
+      <line x1={cx - W} y1={top}   x2={cx - W} y2={baseY} stroke={color} strokeWidth="1.5" />
+      <line x1={cx + W} y1={top}   x2={cx + W} y2={baseY} stroke={color} strokeWidth="1.5" />
+      <ellipse cx={cx} cy={baseY} rx={W} ry={ry} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.5" />
+      <ellipse cx={cx} cy={top}   rx={W} ry={ry} fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.5" />
+    </g>
   );
 }
 
-function RatioArrow({ label, color = "#a855f7" }: { label: string; color?: string }) {
+function drawCylLabels(
+  cx: number, baseY: number, r: number, t: number, color: string, scale = 1
+) {
+  const W  = Math.min(r * 8 * scale, 52);
+  const H  = Math.min(t * 6 * scale, 95);
+  const ry = Math.max(W * 0.22, 4);
+  const top = baseY - H;
   return (
-    <svg viewBox="0 0 240 60" width="240" height="60" className="mx-auto">
+    <g>
+      <line x1={cx} y1={top} x2={cx + W} y2={top} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.7" />
+      <circle cx={cx} cy={top} r="2.5" fill={color} />
+      <text x={cx + W / 2} y={top - 6} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r}</text>
+      <line x1={cx + W + 6} y1={top + ry} x2={cx + W + 6} y2={baseY - ry} stroke={color} strokeWidth="1" strokeOpacity="0.7" />
+      <line x1={cx + W + 2} y1={top + ry}   x2={cx + W + 10} y2={top + ry}   stroke={color} strokeWidth="1" />
+      <line x1={cx + W + 2} y1={baseY - ry} x2={cx + W + 10} y2={baseY - ry} stroke={color} strokeWidth="1" />
+      <text x={cx + W + 18} y={(top + ry + baseY - ry) / 2} fill={color} fontSize="10" textAnchor="middle"
+        fontFamily="monospace" dominantBaseline="middle">t={t}</text>
+    </g>
+  );
+}
+
+function drawCone(
+  cx: number, baseY: number, r: number, t: number,
+  color: string, scale = 1, opacity = 1
+) {
+  const W  = Math.min(r * 8 * scale, 52);
+  const H  = Math.min(t * 6 * scale, 95);
+  const ry = Math.max(W * 0.22, 4);
+  const tip = baseY - H;
+  return (
+    <g opacity={opacity}>
+      <polygon points={`${cx - W},${baseY} ${cx + W},${baseY} ${cx},${tip}`}
+        fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" />
+      <ellipse cx={cx} cy={baseY} rx={W} ry={ry} fill={color} fillOpacity="0.18" stroke={color} strokeWidth="1.5" />
+    </g>
+  );
+}
+
+function drawConeLabels(
+  cx: number, baseY: number, r: number, t: number, color: string, scale = 1
+) {
+  const W  = Math.min(r * 8 * scale, 52);
+  const H  = Math.min(t * 6 * scale, 95);
+  const ry = Math.max(W * 0.22, 4);
+  const tip = baseY - H;
+  return (
+    <g>
+      <line x1={cx} y1={baseY} x2={cx + W} y2={baseY} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.7" />
+      <text x={cx + W / 2} y={baseY + 13} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r}</text>
+      <line x1={cx + W + 6} y1={tip} x2={cx + W + 6} y2={baseY - ry} stroke={color} strokeWidth="1" strokeOpacity="0.7" />
+      <line x1={cx + W + 2} y1={tip}       x2={cx + W + 10} y2={tip}       stroke={color} strokeWidth="1" />
+      <line x1={cx + W + 2} y1={baseY - ry} x2={cx + W + 10} y2={baseY - ry} stroke={color} strokeWidth="1" />
+      <text x={cx + W + 18} y={(tip + baseY - ry) / 2} fill={color} fontSize="10" textAnchor="middle"
+        fontFamily="monospace" dominantBaseline="middle">t={t}</text>
+    </g>
+  );
+}
+
+function drawSphere(
+  cx: number, cy: number, r: number, color: string, gradId: string, opacity = 1
+) {
+  const R = Math.min(r * 7, 55);
+  return (
+    <g opacity={opacity}>
       <defs>
-        <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-          <path d="M0,1 L8,4 L0,7 Z" fill={color} />
-        </marker>
+        <radialGradient id={gradId} cx="38%" cy="35%" r="55%">
+          <stop offset="0%"   stopColor={color} stopOpacity="0.5" />
+          <stop offset="60%"  stopColor={color} stopOpacity="0.18" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.05" />
+        </radialGradient>
       </defs>
-      <rect x="10" y="18" width="80" height="24" rx="6" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.2" />
-      <text x="50" y="33" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Dimensi Awal</text>
-      <line x1="95" y1="30" x2="150" y2="30" stroke={color} strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-      <text x="122" y="24" fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">{label}</text>
-      <rect x="155" y="18" width="75" height="24" rx="6" fill={color} fillOpacity="0.22" stroke={color} strokeWidth="1.2" />
-      <text x="192" y="33" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Dimensi Baru</text>
+      <circle cx={cx} cy={cy} r={R} fill={`url(#${gradId})`} stroke={color} strokeWidth="1.8" />
+      <ellipse cx={cx} cy={cy} rx={R} ry={R * 0.22} fill="none" stroke={color} strokeWidth="1" strokeDasharray="5,3" />
+    </g>
+  );
+}
+
+/* ─── COMPARISON DIAGRAMS ─── */
+
+function CompareCylSVG({ r1, t1, r2, t2, label1 = "Awal", label2 = "Baru", color = "#a855f7" }: {
+  r1: number; t1: number; r2: number; t2: number;
+  label1?: string; label2?: string; color?: string;
+}) {
+  const BASE = 145;
+  return (
+    <svg viewBox="0 0 320 175" width="320" height="175" className="mx-auto">
+      <text x="75"  y="14" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{label1}</text>
+      <text x="245" y="14" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{label2}</text>
+      {drawCyl(75, BASE, r1, t1, color)}
+      {drawCylLabels(75, BASE, r1, t1, color)}
+      <text x="160" y="82" fill={color} fontSize="22" textAnchor="middle" fontFamily="monospace">→</text>
+      {drawCyl(245, BASE, r2, t2, color, 1, 1)}
+      {drawCylLabels(245, BASE, r2, t2, color)}
+      <text x="75"  y="165" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">
+        V={r1}²×{t1}π
+      </text>
+      <text x="245" y="165" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">
+        V={r2}²×{t2}π
+      </text>
     </svg>
   );
 }
 
-const questions: Q[] = [
-  Qn(1, "Tabung – Jari-Jari Diperbesar 2 Kali", {
-    content: "Sebuah tabung memiliki r = 5 cm dan t = 10 cm. Jika jari-jarinya diperbesar 2 kali (tinggi tetap), berapa kali volume tabung bertambah?",
-    diagram: <CompareCylinderSVG r1={5} h1={10} r2={10} h2={10} />,
-    parts: [
-      { label: "a.", math: "V_1 = \\pi \\times 25 \\times 10 = 250\\pi" },
-      { label: "b.", math: "V_2 = \\pi \\times (2 \\times 5)^2 \\times 10 = \\pi \\times 100 \\times 10 = 1000\\pi" },
-      { label: "c.", math: "\\frac{V_2}{V_1} = \\frac{1000\\pi}{250\\pi} = \\ldots \\text{ kali}" },
+function CompareConeSVG({ r1, t1, r2, t2, color = "#fb923c" }: {
+  r1: number; t1: number; r2: number; t2: number; color?: string;
+}) {
+  const BASE = 148;
+  return (
+    <svg viewBox="0 0 320 175" width="320" height="175" className="mx-auto">
+      <text x="75"  y="14" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Awal</text>
+      <text x="245" y="14" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Baru</text>
+      {drawCone(75, BASE, r1, t1, color)}
+      {drawConeLabels(75, BASE, r1, t1, color)}
+      <text x="160" y="82" fill={color} fontSize="22" textAnchor="middle" fontFamily="monospace">→</text>
+      {drawCone(245, BASE, r2, t2, color)}
+      {drawConeLabels(245, BASE, r2, t2, color)}
+    </svg>
+  );
+}
+
+function CompareSphereSVG({ r1, r2, color = "#818cf8" }: {
+  r1: number; r2: number; color?: string;
+}) {
+  const R1 = Math.min(r1 * 7, 50);
+  const R2 = Math.min(r2 * 7, 60);
+  const cy1 = 100;
+  const cy2 = 100 + (R2 - R1) / 2;
+  return (
+    <svg viewBox="0 0 300 175" width="300" height="175" className="mx-auto">
+      <defs>
+        <radialGradient id="csp1" cx="38%" cy="35%" r="55%">
+          <stop offset="0%"   stopColor={color} stopOpacity="0.5" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.05" />
+        </radialGradient>
+        <radialGradient id="csp2" cx="38%" cy="35%" r="55%">
+          <stop offset="0%"   stopColor={color} stopOpacity="0.55" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.08" />
+        </radialGradient>
+      </defs>
+      <text x="75"  y="16" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Awal</text>
+      <text x="225" y="16" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Baru</text>
+      <circle cx={75} cy={cy1} r={R1} fill="url(#csp1)" stroke={color} strokeWidth="1.8" />
+      <ellipse cx={75} cy={cy1} rx={R1} ry={R1 * 0.22} fill="none" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
+      <line x1={75} y1={cy1} x2={75 + R1} y2={cy1} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.7" />
+      <text x={75 + R1 / 2} y={cy1 - 6} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r1}</text>
+      <text x="150" y="100" fill={color} fontSize="22" textAnchor="middle" fontFamily="monospace">→</text>
+      <circle cx={225} cy={cy2} r={R2} fill="url(#csp2)" stroke={color} strokeWidth="1.8" />
+      <ellipse cx={225} cy={cy2} rx={R2} ry={R2 * 0.22} fill="none" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
+      <line x1={225} y1={cy2} x2={225 + R2} y2={cy2} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.7" />
+      <text x={225 + R2 / 2} y={cy2 - 8} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r2}</text>
+    </svg>
+  );
+}
+
+function RumusBubbleSVG({ lines, color = "#a855f7" }: { lines: string[]; color?: string }) {
+  const h = 30 + lines.length * 26;
+  return (
+    <svg viewBox={`0 0 300 ${h}`} width="300" height={h} className="mx-auto">
+      <rect x="10" y="8" width="280" height={h - 16} rx="12"
+        fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" strokeOpacity="0.5" />
+      {lines.map((line, i) => (
+        <text key={i} x="150" y={28 + i * 26} fill={color} fontSize="12"
+          textAnchor="middle" fontFamily="monospace">{line}</text>
+      ))}
+    </svg>
+  );
+}
+
+function TransformSVG({
+  left, right, eq = "=", color = "#a855f7"
+}: {
+  left: React.ReactNode; right: React.ReactNode;
+  eq?: string; color?: string;
+}) {
+  return (
+    <svg viewBox="0 0 300 160" width="300" height="160" className="mx-auto">
+      <foreignObject x="10" y="20" width="110" height="120">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+          {left}
+        </div>
+      </foreignObject>
+      <text x="150" y="90" fill={color} fontSize="20" textAnchor="middle" fontFamily="monospace">{eq}</text>
+      <foreignObject x="180" y="20" width="110" height="120">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+          {right}
+        </div>
+      </foreignObject>
+    </svg>
+  );
+}
+
+function ThreeCylSVG({ items, color = "#a855f7" }: {
+  items: { r: number; t: number; label: string }[]; color?: string;
+}) {
+  const BASE = 138;
+  const positions = [50, 155, 260];
+  return (
+    <svg viewBox="0 0 310 165" width="310" height="165" className="mx-auto">
+      {items.map((item, i) => (
+        <g key={i}>
+          {drawCyl(positions[i], BASE, item.r, item.t, color)}
+          <text x={positions[i]} y={BASE + 15} fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">{item.label}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function EqualVolumeSVG({ shape1, shape2, color1 = "#a855f7", color2 = "#fb923c" }: {
+  shape1: React.ReactNode; shape2: React.ReactNode;
+  color1?: string; color2?: string;
+}) {
+  return (
+    <svg viewBox="0 0 300 160" width="300" height="160" className="mx-auto">
+      <foreignObject x="5" y="10" width="125" height="140">
+        <div xmlns="http://www.w3.org/1999/xhtml" style={{ display:"flex", alignItems:"center", justifyContent:"center", height:"100%" }}>
+          {shape1}
+        </div>
+      </foreignObject>
+      <text x="150" y="88" fill="#ffffff" fontSize="20" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">=</text>
+      <foreignObject x="170" y="10" width="125" height="140">
+        <div xmlns="http://www.w3.org/1999/xhtml" style={{ display:"flex", alignItems:"center", justifyContent:"center", height:"100%" }}>
+          {shape2}
+        </div>
+      </foreignObject>
+    </svg>
+  );
+}
+
+/* ─── Inline mini SVGs for diagrams ─── */
+const miniCylSVG = (r: number, t: number, color: string) => {
+  const BASE = 100; const W = Math.min(r * 8, 40); const H = Math.min(t * 6, 75); const ry = Math.max(W * 0.22, 4);
+  return (
+    <svg viewBox={`0 0 ${W * 2 + 40} 120`} width={W * 2 + 40} height={120}>
+      {drawCyl(W + 20, BASE, r, t, color)}
+      {drawCylLabels(W + 20, BASE, r, t, color)}
+    </svg>
+  );
+};
+const miniConeSVG = (r: number, t: number, color: string) => {
+  const BASE = 110; const W = Math.min(r * 8, 40); const H = Math.min(t * 6, 80);
+  return (
+    <svg viewBox={`0 0 ${W * 2 + 40} 130`} width={W * 2 + 40} height={130}>
+      {drawCone(W + 20, BASE, r, t, color)}
+      {drawConeLabels(W + 20, BASE, r, t, color)}
+    </svg>
+  );
+};
+const miniSphereSVG = (r: number, color: string) => {
+  const R = Math.min(r * 7, 46);
+  return (
+    <svg viewBox={`0 0 ${R * 2 + 50} ${R * 2 + 30}`} width={R * 2 + 50} height={R * 2 + 30}>
+      {drawSphere(R + 25, R + 15, r, color, `ms-${r}`)}
+      <line x1={R + 25} y1={R + 15} x2={R + 25 + R} y2={R + 15} stroke={color} strokeWidth="1" strokeDasharray="2,2" strokeOpacity="0.7" />
+      <text x={R + 25 + R / 2} y={R + 8} fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace">r={r}</text>
+    </svg>
+  );
+};
+
+const mcQuestions: QMC[] = [
+  /* ── TABUNG ── */
+  {
+    n: 1, title: "Tabung – Jari-Jari Diperbesar 2 Kali", cat: "tabung",
+    content: "Sebuah tabung memiliki r = 5 cm dan t = 10 cm. Jika jari-jarinya diperbesar 2 kali (tinggi tetap), volume tabung menjadi ... kali semula.",
+    diagram: <CompareCylSVG r1={5} t1={10} r2={10} t2={10} />,
+    options: [
+      { key: "A", text: "2 kali" },
+      { key: "B", text: "3 kali" },
+      { key: "C", text: "4 kali" },
+      { key: "D", text: "8 kali" },
     ],
-  }),
-  Qn(2, "Tabung – Tinggi Diperbesar 3 Kali", {
-    content: "Sebuah tabung dengan r = 7 cm dan t = 5 cm. Jika tingginya diperbesar 3 kali (jari-jari tetap), berapa kali volume tabung?",
-    diagram: <CompareCylinderSVG r1={7} h1={5} r2={7} h2={15} />,
-    parts: [
-      { label: "a.", math: "V_1 = \\pi r^2 t = 49\\pi \\times 5 = 245\\pi" },
-      { label: "b.", math: "V_2 = \\pi r^2 (3t) = 49\\pi \\times 15 = 735\\pi" },
-      { label: "c.", math: "\\frac{V_2}{V_1} = \\frac{735\\pi}{245\\pi} = \\ldots \\text{ kali}" },
+    answer: "C",
+  },
+  {
+    n: 2, title: "Tabung – Tinggi Diperbesar 3 Kali", cat: "tabung",
+    content: "Sebuah tabung dengan r = 7 cm dan t = 5 cm. Jika tingginya diperbesar 3 kali (jari-jari tetap), volume tabung menjadi ... kali semula.",
+    diagram: <CompareCylSVG r1={7} t1={5} r2={7} t2={15} />,
+    options: [
+      { key: "A", text: "2 kali" },
+      { key: "B", text: "3 kali" },
+      { key: "C", text: "6 kali" },
+      { key: "D", text: "9 kali" },
     ],
-  }),
-  Qn(3, "Tabung – r Diperkecil ½ Kali", {
-    content: "Sebuah tabung dengan r = 6 cm dan t = 10 cm. Jika jari-jari diperkecil menjadi setengahnya (tinggi tetap), berapa volume tabung yang baru?",
-    diagram: <CompareCylinderSVG r1={6} h1={10} r2={3} h2={10} />,
-    parts: [
-      { label: "a.", math: "V_1 = \\pi \\times 36 \\times 10 = 360\\pi \\text{ cm}^3" },
-      { label: "b.", math: "V_2 = \\pi \\times (\\frac{6}{2})^2 \\times 10 = \\pi \\times 9 \\times 10 = 90\\pi \\text{ cm}^3" },
-      { label: "c.", math: "\\frac{V_2}{V_1} = \\ldots \\quad V_2 = \\ldots \\approx \\ldots \\text{ cm}^3" },
+    answer: "B",
+  },
+  {
+    n: 3, title: "Tabung – r Diperkecil Setengah", cat: "tabung",
+    content: "Sebuah tabung dengan r = 6 cm dan t = 10 cm. Jika jari-jari diperkecil menjadi setengahnya (tinggi tetap), volume tabung yang baru adalah ...",
+    diagram: <CompareCylSVG r1={6} t1={10} r2={3} t2={10} label1="r = 6" label2="r = 3" />,
+    options: [
+      { key: "A", text: "45π cm³" },
+      { key: "B", text: "90π cm³" },
+      { key: "C", text: "180π cm³" },
+      { key: "D", text: "360π cm³" },
     ],
-  }),
-  Qn(4, "Tabung – r dan t Keduanya Diperbesar 2 Kali", {
-    content: "Sebuah tabung diperbesar sehingga r dan t masing-masing menjadi 2 kali semula. Berapa kali volume tabung baru dibanding semula?",
-    diagram: <RatioArrow label="r×2, t×2" />,
-    parts: [
-      { label: "a.", math: "V_1 = \\pi r^2 t" },
-      { label: "b.", math: "V_2 = \\pi (2r)^2 (2t) = \\pi \\times 4r^2 \\times 2t = 8\\pi r^2 t" },
-      { label: "c.", math: "\\frac{V_2}{V_1} = 8 \\text{ kali}" },
+    answer: "B",
+  },
+  {
+    n: 4, title: "Tabung – r dan t Keduanya Diperbesar 2 Kali", cat: "tabung",
+    content: "Sebuah tabung diperbesar sehingga r dan t masing-masing menjadi 2 kali semula. Volume tabung baru dibanding semula adalah ...",
+    diagram: <RumusBubbleSVG lines={["r × 2,  t × 2", "V₂ = π(2r)²(2t) = 8πr²t", "V₂ / V₁ = 8 kali"]} />,
+    options: [
+      { key: "A", text: "4 kali" },
+      { key: "B", text: "6 kali" },
+      { key: "C", text: "8 kali" },
+      { key: "D", text: "16 kali" },
     ],
-  }),
-  Qn(5, "Tabung – Perbandingan Volume", {
-    content: "Tabung A: r = 3, t = 8. Tabung B: r = 6, t = 2. Manakah yang volumenya lebih besar? Berapa perbandingannya?",
-    parts: [
-      { label: "a.", math: "V_A = \\pi \\times 9 \\times 8 = 72\\pi" },
-      { label: "b.", math: "V_B = \\pi \\times 36 \\times 2 = 72\\pi" },
-      { label: "c.", text: "Volume keduanya ... karena V_A = V_B" },
+    answer: "C",
+  },
+  {
+    n: 5, title: "Tabung – Perbandingan Volume", cat: "tabung",
+    content: "Tabung A: r = 3 cm, t = 8 cm. Tabung B: r = 6 cm, t = 2 cm. Perbandingan volume tabung A terhadap B adalah ...",
+    diagram: <ThreeCylSVG items={[{ r: 3, t: 8, label: "A: r=3, t=8" }, { r: 6, t: 2, label: "B: r=6, t=2" }]} />,
+    options: [
+      { key: "A", text: "VA < VB" },
+      { key: "B", text: "VA > VB" },
+      { key: "C", text: "VA = VB" },
+      { key: "D", text: "Tidak dapat ditentukan" },
     ],
-  }),
-  Qn(6, "Kerucut – Jari-Jari Diperbesar 2 Kali", {
-    content: "Sebuah kerucut r = 5 cm, t = 12 cm. Jika r diperbesar 2 kali dan t tetap, berapa kali volume kerucut baru?",
-    diagram: <RatioArrow label="r×2" />,
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{1}{3}\\pi \\times 25 \\times 12 = 100\\pi" },
-      { label: "b.", math: "V_2 = \\frac{1}{3}\\pi \\times 100 \\times 12 = 400\\pi" },
-      { label: "c.", math: "\\frac{V_2}{V_1} = 4 \\text{ kali}" },
+    answer: "C",
+  },
+  {
+    n: 6, title: "Tabung – Pengaruh r terhadap Luas Selimut", cat: "tabung",
+    content: "Jika jari-jari sebuah tabung diperbesar n kali (tinggi tetap), luas selimut tabung menjadi ...",
+    diagram: <RumusBubbleSVG lines={["Ls = 2πrt", "Ls₂ = 2π(nr)t = n × Ls₁"]} />,
+    options: [
+      { key: "A", text: "n kali" },
+      { key: "B", text: "n² kali" },
+      { key: "C", text: "n³ kali" },
+      { key: "D", text: "2n kali" },
     ],
-  }),
-  Qn(7, "Kerucut – Tinggi Diperbesar 3 Kali", {
-    content: "Sebuah kerucut r = 7 cm, t = 6 cm. Jika tinggi diperbesar 3 kali dan r tetap, berapa kali volume kerucut bertambah?",
-    diagram: <RatioArrow label="t×3" />,
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{1}{3}\\pi \\times 49 \\times 6 = 98\\pi" },
-      { label: "b.", math: "V_2 = \\frac{1}{3}\\pi \\times 49 \\times 18 = 294\\pi" },
-      { label: "c.", math: "\\frac{V_2}{V_1} = \\ldots \\text{ kali}" },
+    answer: "A",
+  },
+  {
+    n: 7, title: "Tabung – Pengaruh r terhadap Volume", cat: "tabung",
+    content: "Jika jari-jari tabung diperbesar n kali (tinggi tetap), volume tabung bertambah ...",
+    diagram: <RumusBubbleSVG lines={["V = πr²t", "V₂ = π(nr)²t = n²πr²t = n²V₁"]} />,
+    options: [
+      { key: "A", text: "n kali" },
+      { key: "B", text: "n² kali" },
+      { key: "C", text: "n³ kali" },
+      { key: "D", text: "2n kali" },
     ],
-  }),
-  Qn(8, "Bola – Jari-Jari Diperbesar 2 Kali", {
-    content: "Sebuah bola berjari-jari r. Jika jari-jari diperbesar 2 kali, berapa kali volume bola bertambah?",
-    diagram: <RatioArrow label="r×2" color="#818cf8" />,
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{4}{3}\\pi r^3" },
-      { label: "b.", math: "V_2 = \\frac{4}{3}\\pi (2r)^3 = \\frac{4}{3}\\pi \\times 8r^3 = 8V_1" },
-      { label: "c.", text: "Volume bola menjadi 8 kali semula" },
+    answer: "B",
+  },
+  {
+    n: 8, title: "Tabung – r Bertambah 4 cm", cat: "tabung",
+    content: "Sebuah tabung dengan r = 7 cm dan t = 10 cm. Jika jari-jari bertambah 4 cm menjadi 11 cm (t tetap), selisih volume keduanya adalah … (π = 22/7)",
+    diagram: <CompareCylSVG r1={7} t1={10} r2={11} t2={10} label1="r = 7" label2="r = 11" />,
+    options: [
+      { key: "A", text: "1.540 cm³" },
+      { key: "B", text: "2.000 cm³" },
+      { key: "C", text: "2.263 cm³" },
+      { key: "D", text: "3.080 cm³" },
     ],
-  }),
-  Qn(9, "Bola – Jari-Jari Diperbesar 3 Kali", {
-    content: "Sebuah bola berjari-jari 5 cm. Jika r diperbesar menjadi 15 cm, berapa kali volume bola yang baru?",
-    diagram: <RatioArrow label="r: 5→15 (×3)" color="#818cf8" />,
-    parts: [
-      { label: "a.", math: "\\frac{V_2}{V_1} = \\left(\\frac{r_2}{r_1}\\right)^3 = \\left(\\frac{15}{5}\\right)^3 = 3^3 = \\ldots \\text{ kali}" },
+    answer: "C",
+  },
+  {
+    n: 9, title: "Tabung – Volume Berkurang ¼", cat: "tabung",
+    content: "Volume sebuah tabung berkurang menjadi ¼ semula. Jika jari-jari tidak berubah, tinggi tabung baru menjadi ...",
+    diagram: <RumusBubbleSVG lines={["V₂/V₁ = t₂/t₁ = 1/4", "→ tinggi menjadi 1/4 kali"]} />,
+    options: [
+      { key: "A", text: "1/2 kali semula" },
+      { key: "B", text: "1/3 kali semula" },
+      { key: "C", text: "1/4 kali semula" },
+      { key: "D", text: "1/8 kali semula" },
     ],
-  }),
-  Qn(10, "Bola – Jari-Jari Diperkecil", {
-    content: "Jika jari-jari bola diperkecil menjadi sepertiga semula, berapa kali volume bola yang baru dibanding semula?",
-    diagram: <RatioArrow label="r ÷ 3" color="#818cf8" />,
-    parts: [
-      { label: "a.", math: "\\frac{V_2}{V_1} = \\left(\\frac{1}{3}\\right)^3 = \\frac{1}{27}" },
-      { label: "b.", text: "Volume bola menjadi 1/27 kali atau berkurang ... kali" },
+    answer: "C",
+  },
+  {
+    n: 10, title: "Tabung – r dan t Bersamaan Berubah", cat: "tabung",
+    content: "Sebuah tabung diperbesar: r menjadi 3 kali dan t menjadi 2 kali semula. Volume tabung baru menjadi ... kali semula.",
+    diagram: <RumusBubbleSVG lines={["V₂/V₁ = (3r)²(2t) / (r²t)", "= 9 × 2 = 18 kali"]} />,
+    options: [
+      { key: "A", text: "6 kali" },
+      { key: "B", text: "9 kali" },
+      { key: "C", text: "12 kali" },
+      { key: "D", text: "18 kali" },
     ],
-  }),
-  Qn(11, "Tabung – Pengaruh r terhadap Luas Selimut", {
-    content: "Jika jari-jari sebuah tabung diperbesar n kali (tinggi tetap), berapa kali luas selimut tabung bertambah?",
-    parts: [
-      { label: "a.", math: "L_s = 2\\pi r t" },
-      { label: "b.", math: "L_{s2} = 2\\pi (nr) t = n \\times 2\\pi r t = n \\times L_{s1}" },
-      { label: "c.", text: "Luas selimut bertambah n kali (sebanding langsung dengan r)" },
+    answer: "D",
+  },
+  {
+    n: 11, title: "Tangki Air Diperbesar – r: 1→2 m", cat: "tabung",
+    content: "Sebuah tangki tabung r = 1 m, t = 2 m diubah menjadi r = 2 m, t = 2 m. Tambahan kapasitas tangki adalah … (π = 3,14; 1 m³ = 1.000 liter)",
+    diagram: <CompareCylSVG r1={1} t1={2} r2={2} t2={2} color="#38bdf8" label1="r=1 m" label2="r=2 m" />,
+    options: [
+      { key: "A", text: "6.280 liter" },
+      { key: "B", text: "12.560 liter" },
+      { key: "C", text: "18.840 liter" },
+      { key: "D", text: "25.120 liter" },
     ],
-  }),
-  Qn(12, "Tabung – Pengaruh r terhadap Volume", {
-    content: "Jika jari-jari tabung diperbesar n kali (tinggi tetap), berapa kali volume bertambah?",
-    parts: [
-      { label: "a.", math: "V = \\pi r^2 t" },
-      { label: "b.", math: "V_2 = \\pi (nr)^2 t = n^2 \\pi r^2 t = n^2 V_1" },
-      { label: "c.", text: "Volume bertambah n² kali (kuadrat perubahan jari-jari)" },
+    answer: "C",
+  },
+  {
+    n: 12, title: "Mencari r agar Volume 4 Kali", cat: "tabung",
+    content: "Sebuah tabung dengan r = 5 cm dan t konstan. Agar volume menjadi 4 kali semula, jari-jari baru yang diperlukan adalah ...",
+    diagram: <RumusBubbleSVG lines={["V₂/V₁ = (r₂/r₁)² = 4", "r₂/r₁ = √4 = 2 → r₂ = 2 × 5"]} />,
+    options: [
+      { key: "A", text: "5 cm" },
+      { key: "B", text: "8 cm" },
+      { key: "C", text: "10 cm" },
+      { key: "D", text: "20 cm" },
     ],
-  }),
-  Qn(13, "Tabung – r Bertambah 4 cm", {
-    content: "Sebuah tabung dengan r = 7 cm dan t = 10 cm. Jika jari-jari bertambah 4 cm (menjadi 11 cm), berapakah selisih volume keduanya? (π = 22/7)",
-    diagram: <CompareCylinderSVG r1={7} h1={10} r2={11} h2={10} />,
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{22}{7} \\times 49 \\times 10 = \\ldots" },
-      { label: "b.", math: "V_2 = \\frac{22}{7} \\times 121 \\times 10 = \\ldots" },
-      { label: "c.", math: "\\Delta V = V_2 - V_1 = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 13, title: "Selisih Volume Tabung – r: 10→14 cm", cat: "tabung",
+    content: "Sebuah tabung memiliki r = 10 cm dan t = 14 cm. Jika r diperbesar menjadi 14 cm (t tetap), selisih volumenya adalah … (π = 22/7)",
+    diagram: <CompareCylSVG r1={10} t1={14} r2={14} t2={14} label1="r=10" label2="r=14" />,
+    options: [
+      { key: "A", text: "2.200 cm³" },
+      { key: "B", text: "3.080 cm³" },
+      { key: "C", text: "4.224 cm³" },
+      { key: "D", text: "5.280 cm³" },
     ],
-  }),
-  Qn(14, "Kerucut – r dan t Masing-Masing Dikali 2", {
-    content: "Sebuah kerucut dengan r = 3 cm dan t = 4 cm. Jika r dan t masing-masing diperbesar 2 kali, berapa kali volume kerucut baru?",
-    diagram: <RatioArrow label="r×2, t×2" color="#fb923c" />,
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{1}{3}\\pi \\times 9 \\times 4 = 12\\pi" },
-      { label: "b.", math: "V_2 = \\frac{1}{3}\\pi \\times 36 \\times 8 = 96\\pi" },
-      { label: "c.", math: "\\frac{V_2}{V_1} = \\frac{96}{12} = \\ldots \\text{ kali}" },
+    answer: "C",
+  },
+  {
+    n: 14, title: "Tiga Tabung – Perbandingan Volume", cat: "tabung",
+    content: "Tabung I: r=2, t=9. Tabung II: r=3, t=4. Tabung III: r=6, t=1. Pernyataan yang benar tentang volume ketiga tabung adalah ...",
+    diagram: <ThreeCylSVG items={[
+      { r: 2, t: 9, label: "r=2, t=9" },
+      { r: 3, t: 4, label: "r=3, t=4" },
+      { r: 6, t: 1, label: "r=6, t=1" },
+    ]} />,
+    options: [
+      { key: "A", text: "VI < VII < VIII" },
+      { key: "B", text: "VIII < VII < VI" },
+      { key: "C", text: "VI < VIII < VII" },
+      { key: "D", text: "Volume ketiganya sama" },
     ],
-  }),
-  Qn(15, "UN Style – Bola Diperbesar", {
-    content: "Volume bola mula-mula adalah 500π/3 cm³. Jika jari-jari diperbesar 2 kali, berapakah volume bola yang baru?",
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{500\\pi}{3} \\Rightarrow r_1^3 = \\frac{500}{4} = 125 \\Rightarrow r_1 = 5 \\text{ cm}" },
-      { label: "b.", math: "V_2 = \\frac{4}{3}\\pi (10)^3 = \\frac{4000\\pi}{3} \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 15, title: "Pipa Air Diperpanjang – r = 3,5 cm", cat: "tabung",
+    content: "Sebuah pipa berbentuk tabung r = 3,5 cm, panjang 2 m diperpanjang menjadi 5 m. Tambahan volume pipa adalah … (π = 22/7)",
+    diagram: <CompareCylSVG r1={35} t1={1} r2={35} t2={3} label1="t=2 m" label2="t=5 m" color="#34d399" />,
+    options: [
+      { key: "A", text: "7.700 cm³" },
+      { key: "B", text: "9.625 cm³" },
+      { key: "C", text: "11.550 cm³" },
+      { key: "D", text: "19.250 cm³" },
     ],
-  }),
-  Qn(16, "Tabung – Tinggi Dikurangi", {
-    content: "Volume sebuah tabung berkurang menjadi 1/4 semula. Jika jari-jari tidak berubah, berapa kali tinggi menjadi lebih kecil?",
-    parts: [
-      { label: "a.", math: "\\frac{V_2}{V_1} = \\frac{\\pi r^2 t_2}{\\pi r^2 t_1} = \\frac{t_2}{t_1} = \\frac{1}{4}" },
-      { label: "b.", text: "Tinggi berkurang menjadi 1/4 kali semula." },
+    answer: "C",
+  },
+  /* ── KERUCUT ── */
+  {
+    n: 16, title: "Kerucut – Jari-Jari Diperbesar 2 Kali", cat: "kerucut",
+    content: "Sebuah kerucut r = 5 cm, t = 12 cm. Jika r diperbesar 2 kali dan t tetap, volume kerucut baru menjadi ... kali semula.",
+    diagram: <CompareConeSVG r1={5} t1={12} r2={10} t2={12} />,
+    options: [
+      { key: "A", text: "2 kali" },
+      { key: "B", text: "3 kali" },
+      { key: "C", text: "4 kali" },
+      { key: "D", text: "8 kali" },
     ],
-  }),
-  Qn(17, "ANBK – Volume Bola Baru dari Perbandingan", {
-    content: "Volume sebuah bola adalah 36π cm³. Jika jari-jari diperbesar menjadi 3/2 kali semula, berapakah volume bola yang baru?",
-    parts: [
-      { label: "a.", math: "\\frac{V_2}{V_1} = \\left(\\frac{3}{2}\\right)^3 = \\frac{27}{8}" },
-      { label: "b.", math: "V_2 = \\frac{27}{8} \\times 36\\pi = \\frac{972\\pi}{8} = \\frac{243\\pi}{2} \\approx 121{,}5\\pi \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 17, title: "Kerucut – Tinggi Diperbesar 3 Kali", cat: "kerucut",
+    content: "Sebuah kerucut r = 7 cm, t = 6 cm. Jika tinggi diperbesar 3 kali dan r tetap, volume kerucut baru menjadi ... kali semula.",
+    diagram: <CompareConeSVG r1={7} t1={6} r2={7} t2={18} />,
+    options: [
+      { key: "A", text: "2 kali" },
+      { key: "B", text: "3 kali" },
+      { key: "C", text: "6 kali" },
+      { key: "D", text: "9 kali" },
     ],
-  }),
-  Qn(18, "Tabung – Selisih Volume Akibat Perubahan r", {
-    content: "Sebuah tabung memiliki r = 10 cm dan t = 14 cm. Jika r diperbesar menjadi 14 cm (t tetap), berapa selisih volumenya? (π = 22/7)",
-    diagram: <CompareCylinderSVG r1={10} h1={14} r2={14} h2={14} />,
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{22}{7} \\times 100 \\times 14 = \\ldots" },
-      { label: "b.", math: "V_2 = \\frac{22}{7} \\times 196 \\times 14 = \\ldots" },
-      { label: "c.", math: "\\Delta V = V_2 - V_1 = \\ldots \\text{ cm}^3" },
+    answer: "B",
+  },
+  {
+    n: 18, title: "Kerucut – r dan t Masing-Masing Dikali 2", cat: "kerucut",
+    content: "Sebuah kerucut dengan r = 3 cm dan t = 4 cm. Jika r dan t masing-masing diperbesar 2 kali, volume kerucut baru menjadi ... kali semula.",
+    diagram: <CompareConeSVG r1={3} t1={4} r2={6} t2={8} />,
+    options: [
+      { key: "A", text: "4 kali" },
+      { key: "B", text: "6 kali" },
+      { key: "C", text: "8 kali" },
+      { key: "D", text: "16 kali" },
     ],
-  }),
-  Qn(19, "Kerucut – Perubahan Volume Akibat Perubahan t", {
-    content: "Kerucut A: r = 6, t = 5. Kerucut B (t diperbesar): r = 6, t = 20. Berapa perbandingan V_B : V_A?",
-    parts: [
-      { label: "a.", math: "\\frac{V_B}{V_A} = \\frac{\\frac{1}{3}\\pi \\times 36 \\times 20}{\\frac{1}{3}\\pi \\times 36 \\times 5} = \\frac{20}{5} = \\ldots" },
+    answer: "C",
+  },
+  {
+    n: 19, title: "Kerucut – Perubahan Volume karena Tinggi", cat: "kerucut",
+    content: "Kerucut A: r = 6, t = 5. Kerucut B: r = 6, t = 20. Perbandingan volume V_B : V_A adalah ...",
+    diagram: <CompareConeSVG r1={6} t1={5} r2={6} t2={20} color="#fb923c" />,
+    options: [
+      { key: "A", text: "2 : 1" },
+      { key: "B", text: "3 : 1" },
+      { key: "C", text: "4 : 1" },
+      { key: "D", text: "5 : 1" },
     ],
-  }),
-  Qn(20, "Bola – Luas Permukaan Diperbesar", {
-    content: "Jika jari-jari sebuah bola diperbesar 4 kali, berapa kali luas permukaan bola menjadi lebih besar?",
-    diagram: <RatioArrow label="r×4" color="#818cf8" />,
-    parts: [
-      { label: "a.", math: "L = 4\\pi r^2" },
-      { label: "b.", math: "L_2 = 4\\pi (4r)^2 = 4\\pi \\times 16r^2 = 16 \\times 4\\pi r^2 = 16 L_1" },
-      { label: "c.", text: "Luas permukaan menjadi 16 kali semula" },
+    answer: "C",
+  },
+  {
+    n: 20, title: "Kerucut – r Dikali n (Pembuktian)", cat: "kerucut",
+    content: "Jika jari-jari kerucut diperbesar n kali (t tetap), volume kerucut berubah menjadi ...",
+    diagram: <RumusBubbleSVG lines={["V₁ = ¹⁄₃πr²t", "V₂ = ¹⁄₃π(nr)²t = n²V₁"]} color="#fb923c" />,
+    options: [
+      { key: "A", text: "n kali" },
+      { key: "B", text: "n² kali" },
+      { key: "C", text: "n³ kali" },
+      { key: "D", text: "2n kali" },
     ],
-  }),
-  Qn(21, "UN Style – Perubahan r dan t Bersamaan", {
-    content: "Sebuah tabung diperbesar: r menjadi 3 kali dan t menjadi 2 kali. Berapa kali volume bertambah?",
-    diagram: <RatioArrow label="r×3, t×2" />,
-    parts: [
-      { label: "a.", math: "\\frac{V_2}{V_1} = \\frac{\\pi(3r)^2(2t)}{\\pi r^2 t} = 9 \\times 2 = 18 \\text{ kali}" },
+    answer: "B",
+  },
+  {
+    n: 21, title: "Kerucut – Mencari t agar Volume Sama", cat: "kerucut",
+    content: "Kerucut A: r = 6, t = 8. Kerucut B: r = 4, t = ?. Agar volume B = volume A, tinggi kerucut B adalah ...",
+    diagram: <CompareConeSVG r1={6} t1={8} r2={4} t2={18} color="#fb923c" />,
+    options: [
+      { key: "A", text: "12 cm" },
+      { key: "B", text: "15 cm" },
+      { key: "C", text: "18 cm" },
+      { key: "D", text: "24 cm" },
     ],
-  }),
-  Qn(22, "Soal Cerita – Tangki Air Diperbesar", {
-    content: "Sebuah tangki tabung dengan r = 1 m dan t = 2 m diubah menjadi tangki baru dengan r = 2 m dan t = 2 m. Berapa liter tambahan kapasitas? (π = 3,14, 1 m³ = 1.000 liter)",
-    diagram: <CompareCylinderSVG r1={1} h1={2} r2={2} h2={2} />,
-    parts: [
-      { label: "a.", math: "V_1 = 3{,}14 \\times 1 \\times 2 = 6{,}28 \\text{ m}^3" },
-      { label: "b.", math: "V_2 = 3{,}14 \\times 4 \\times 2 = 25{,}12 \\text{ m}^3" },
-      { label: "c.", math: "\\Delta V = 25{,}12 - 6{,}28 = 18{,}84 \\text{ m}^3 = \\ldots \\text{ liter}" },
+    answer: "C",
+  },
+  /* ── BOLA ── */
+  {
+    n: 22, title: "Bola – Jari-Jari Diperbesar 2 Kali", cat: "bola",
+    content: "Sebuah bola berjari-jari r. Jika jari-jari diperbesar 2 kali, volume bola menjadi ... kali semula.",
+    diagram: <CompareSphereSVG r1={5} r2={8} />,
+    options: [
+      { key: "A", text: "2 kali" },
+      { key: "B", text: "4 kali" },
+      { key: "C", text: "6 kali" },
+      { key: "D", text: "8 kali" },
     ],
-  }),
-  Qn(23, "ANBK – Mencari Perubahan r agar Volume 4 Kali", {
-    content: "Sebuah tabung dengan r = 5 cm dan t konstan. Berapa kali r harus diperbesar agar volume menjadi 4 kali semula?",
-    parts: [
-      { label: "a.", math: "\\frac{V_2}{V_1} = \\left(\\frac{r_2}{r_1}\\right)^2 = 4" },
-      { label: "b.", math: "\\frac{r_2}{r_1} = \\sqrt{4} = 2 \\Rightarrow r_2 = 2 \\times 5 = \\ldots \\text{ cm}" },
+    answer: "D",
+  },
+  {
+    n: 23, title: "Bola – Jari-Jari Diperbesar 3 Kali", cat: "bola",
+    content: "Sebuah bola berjari-jari 5 cm. Jika r diperbesar menjadi 15 cm, volume bola baru menjadi ... kali semula.",
+    diagram: <CompareSphereSVG r1={5} r2={8} />,
+    options: [
+      { key: "A", text: "9 kali" },
+      { key: "B", text: "18 kali" },
+      { key: "C", text: "27 kali" },
+      { key: "D", text: "81 kali" },
     ],
-  }),
-  Qn(24, "Kerucut – Mencari t Baru agar Volume Sama", {
-    content: "Kerucut A: r = 6, t = 8. Kerucut B: r = 4, t = ?. Agar volume B = volume A, berapa tinggi B?",
-    parts: [
-      { label: "a.", math: "V_A = \\frac{1}{3}\\pi \\times 36 \\times 8 = 96\\pi" },
-      { label: "b.", math: "\\frac{1}{3}\\pi \\times 16 \\times t_B = 96\\pi \\Rightarrow t_B = \\frac{96 \\times 3}{16} = \\ldots \\text{ cm}" },
+    answer: "C",
+  },
+  {
+    n: 24, title: "Bola – Jari-Jari Diperkecil Sepertiga", cat: "bola",
+    content: "Jika jari-jari bola diperkecil menjadi sepertiga semula, volume bola baru menjadi ...",
+    diagram: <CompareSphereSVG r1={7} r2={3} />,
+    options: [
+      { key: "A", text: "1/3 kali semula" },
+      { key: "B", text: "1/9 kali semula" },
+      { key: "C", text: "1/27 kali semula" },
+      { key: "D", text: "1/81 kali semula" },
     ],
-  }),
-  Qn(25, "Bola – Volume Berkurang", {
-    content: "Volume awal bola adalah 2.304π cm³. Jika jari-jari berkurang menjadi setengahnya, berapa volume bola yang baru?",
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{4}{3}\\pi r^3 = 2304\\pi \\Rightarrow r^3 = 1728 \\Rightarrow r = 12 \\text{ cm}" },
-      { label: "b.", math: "V_2 = \\frac{4}{3}\\pi (6)^3 = \\frac{4}{3}\\pi \\times 216 = 288\\pi \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 25, title: "Bola – Luas Permukaan saat r Diperbesar 4 Kali", cat: "bola",
+    content: "Jika jari-jari sebuah bola diperbesar 4 kali, luas permukaan bola menjadi ... kali semula.",
+    diagram: <RumusBubbleSVG lines={["L = 4πr²", "L₂ = 4π(4r)² = 16 × 4πr² = 16L₁"]} color="#818cf8" />,
+    options: [
+      { key: "A", text: "4 kali" },
+      { key: "B", text: "8 kali" },
+      { key: "C", text: "12 kali" },
+      { key: "D", text: "16 kali" },
     ],
-  }),
-  Qn(26, "UN Style – Tabung dan Kerucut Perbandingan", {
-    content: "Sebuah tabung dan kerucut memiliki r dan t yang sama. Jika volume tabung 300 cm³, berapa volume kerucut?",
-    parts: [
-      { label: "a.", math: "V_{\\text{kerucut}} = \\frac{1}{3} V_{\\text{tabung}} = \\frac{1}{3} \\times 300 = \\ldots \\text{ cm}^3" },
+    answer: "D",
+  },
+  {
+    n: 26, title: "Bola – Volume Baru dari Perbandingan r", cat: "bola",
+    content: "Volume sebuah bola adalah 36π cm³. Jika jari-jari diperbesar menjadi 3/2 kali semula, volume bola baru adalah ...",
+    diagram: <RumusBubbleSVG lines={["V₂/V₁ = (3/2)³ = 27/8", "V₂ = 27/8 × 36π = 121,5π cm³"]} color="#818cf8" />,
+    options: [
+      { key: "A", text: "54π cm³" },
+      { key: "B", text: "81π cm³" },
+      { key: "C", text: "121,5π cm³" },
+      { key: "D", text: "243π cm³" },
     ],
-  }),
-  Qn(27, "Soal Cerita – Tabung Diperpanjang", {
-    content: "Sebuah pipa air berbentuk tabung dengan r = 3,5 cm dan panjang 2 m diperpanjang menjadi 5 m. Berapa cm³ tambahan volume pipa? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{22}{7} \\times 12{,}25 \\times 200 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_2 = \\frac{22}{7} \\times 12{,}25 \\times 500 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "\\Delta V = V_2 - V_1 = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 27, title: "Bola – Volume Berkurang saat r Diperkecil", cat: "bola",
+    content: "Volume awal bola adalah 2.304π cm³. Jika jari-jari berkurang menjadi setengahnya, volume bola yang baru adalah ...",
+    diagram: <CompareSphereSVG r1={7} r2={4} />,
+    options: [
+      { key: "A", text: "144π cm³" },
+      { key: "B", text: "216π cm³" },
+      { key: "C", text: "288π cm³" },
+      { key: "D", text: "432π cm³" },
     ],
-  }),
-  Qn(28, "TKA – Bola Dilebur Jadi Tabung", {
-    content: "Dua bola logam masing-masing berjari-jari 3 cm dilebur menjadi sebuah tabung berjari-jari 3 cm. Berapa tinggi tabung yang terbentuk? (π sama)",
-    parts: [
-      { label: "a.", math: "V_{2\\text{ bola}} = 2 \\times \\frac{4}{3}\\pi \\times 27 = 72\\pi \\text{ cm}^3" },
-      { label: "b.", math: "\\pi \\times 9 \\times t = 72\\pi \\Rightarrow t = \\frac{72}{9} = \\ldots \\text{ cm}" },
+    answer: "C",
+  },
+  /* ── GABUNGAN ── */
+  {
+    n: 28, title: "Tabung vs Kerucut – Volume Berbanding 3:1", cat: "gabungan",
+    content: "Sebuah tabung dan kerucut memiliki r dan t yang sama. Jika volume tabung 300 cm³, volume kerucut tersebut adalah ...",
+    diagram: <RumusBubbleSVG lines={["V_kerucut = ¹⁄₃ V_tabung", "= ¹⁄₃ × 300"]} color="#10b981" />,
+    options: [
+      { key: "A", text: "50 cm³" },
+      { key: "B", text: "75 cm³" },
+      { key: "C", text: "100 cm³" },
+      { key: "D", text: "150 cm³" },
     ],
-  }),
-  Qn(29, "ANBK – Kerucut Dilebur Jadi Bola", {
-    content: "Sebuah kerucut dengan r = 6 cm dan t = 8 cm dilebur menjadi sebuah bola. Tentukan jari-jari bola yang terbentuk!",
-    parts: [
-      { label: "a.", math: "V_{\\text{kerucut}} = \\frac{1}{3}\\pi \\times 36 \\times 8 = 96\\pi \\text{ cm}^3" },
-      { label: "b.", math: "\\frac{4}{3}\\pi R^3 = 96\\pi \\Rightarrow R^3 = 72 \\Rightarrow R = \\sqrt[3]{72} \\approx \\ldots \\text{ cm}" },
+    answer: "C",
+  },
+  {
+    n: 29, title: "Perubahan Luas Selimut Tabung", cat: "gabungan",
+    content: "Sebuah tabung dengan r = 7 cm dan t = 10 cm diperbesar: r menjadi 14 cm dan t tetap. Luas selimut tabung baru menjadi ... kali semula.",
+    diagram: <CompareCylSVG r1={7} t1={10} r2={14} t2={10} label1="r=7" label2="r=14" />,
+    options: [
+      { key: "A", text: "2 kali" },
+      { key: "B", text: "3 kali" },
+      { key: "C", text: "4 kali" },
+      { key: "D", text: "8 kali" },
     ],
-  }),
-  Qn(30, "Soal Cerita – Air dalam Dua Wadah", {
-    content: "Air dari tabung dengan r = 10 cm dan t = 27 cm dipindahkan ke bola. Jika semua air cukup mengisi bola, tentukan jari-jari bola! (π sama)",
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\pi \\times 100 \\times 27 = 2700\\pi \\text{ cm}^3" },
-      { label: "b.", math: "\\frac{4}{3}\\pi r^3 = 2700\\pi \\Rightarrow r^3 = 2025 \\Rightarrow r \\approx \\ldots \\text{ cm}" },
+    answer: "A",
+  },
+  {
+    n: 30, title: "Volume Tabung Berkurang karena r Mengecil", cat: "gabungan",
+    content: "Sebuah tabung mengalami pengurangan jari-jari dari 10 cm menjadi 8 cm, tinggi tetap 15 cm. Persentase volume yang berkurang adalah … (π = 3,14)",
+    diagram: <CompareCylSVG r1={10} t1={15} r2={8} t2={15} label1="r=10" label2="r=8" color="#f87171" />,
+    options: [
+      { key: "A", text: "25%" },
+      { key: "B", text: "30%" },
+      { key: "C", text: "36%" },
+      { key: "D", text: "40%" },
     ],
-  }),
-  Qn(31, "UN – Perubahan Luas Permukaan Tabung", {
-    content: "Sebuah tabung dengan r = 7 cm dan t = 10 cm diperbesar: r menjadi 14 cm dan t tetap 10 cm. Berapa kali luas selimut bertambah?",
-    parts: [
-      { label: "a.", math: "L_{s1} = 2\\pi \\times 7 \\times 10 = 140\\pi" },
-      { label: "b.", math: "L_{s2} = 2\\pi \\times 14 \\times 10 = 280\\pi" },
-      { label: "c.", math: "\\frac{L_{s2}}{L_{s1}} = \\frac{280}{140} = \\ldots \\text{ kali}" },
+    answer: "C",
+  },
+  {
+    n: 31, title: "Setengah Bola dan Kerucut – Volume Sama", cat: "gabungan",
+    content: "Sebuah setengah bola berjari-jari 6 cm dan sebuah kerucut berjari-jari 6 cm memiliki volume yang sama. Tinggi kerucut tersebut adalah ...",
+    diagram: <RumusBubbleSVG lines={["V_½bola = ²⁄₃π×216 = 144π cm³", "¹⁄₃π×36×t = 144π → t = ?"]} color="#10b981" />,
+    options: [
+      { key: "A", text: "8 cm" },
+      { key: "B", text: "10 cm" },
+      { key: "C", text: "12 cm" },
+      { key: "D", text: "16 cm" },
     ],
-  }),
-  Qn(32, "Soal Perbandingan – Tiga Tabung", {
-    content: "Tabung I: r=2,t=9. Tabung II: r=3,t=4. Tabung III: r=6,t=1. Urutkan dari yang terkecil ke terbesar volumenya!",
-    parts: [
-      { label: "a.", math: "V_I = \\pi \\times 4 \\times 9 = 36\\pi" },
-      { label: "b.", math: "V_{II} = \\pi \\times 9 \\times 4 = 36\\pi" },
-      { label: "c.", math: "V_{III} = \\pi \\times 36 \\times 1 = 36\\pi \\quad \\Rightarrow \\text{Volume ketiganya...}" },
+    answer: "C",
+  },
+  {
+    n: 32, title: "Bola Dilebur Jadi Tabung", cat: "gabungan",
+    content: "Dua bola logam masing-masing berjari-jari 3 cm dilebur menjadi sebuah tabung berjari-jari 3 cm. Tinggi tabung yang terbentuk adalah … (π sama)",
+    diagram: <RumusBubbleSVG lines={["V_2bola = 2 × ⁴⁄₃π×27 = 72π cm³", "π×9×t = 72π → t = ?"]} color="#10b981" />,
+    options: [
+      { key: "A", text: "4 cm" },
+      { key: "B", text: "6 cm" },
+      { key: "C", text: "8 cm" },
+      { key: "D", text: "12 cm" },
     ],
-  }),
-  Qn(33, "TKA – Perubahan r pada Kerucut", {
-    content: "Jika jari-jari kerucut diperbesar n kali (t tetap), buktikan bahwa volume berubah n² kali!",
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{1}{3}\\pi r^2 t" },
-      { label: "b.", math: "V_2 = \\frac{1}{3}\\pi (nr)^2 t = n^2 \\times \\frac{1}{3}\\pi r^2 t = n^2 V_1" },
+    answer: "C",
+  },
+  {
+    n: 33, title: "Kerucut Dilebur Jadi Bola", cat: "gabungan",
+    content: "Sebuah kerucut dengan r = 6 cm dan t = 8 cm dilebur menjadi sebuah bola. Jari-jari bola yang terbentuk adalah ...",
+    diagram: <RumusBubbleSVG lines={["V_kerucut = ¹⁄₃π×36×8 = 96π cm³", "⁴⁄₃πR³ = 96π → R = ∛72 cm"]} color="#10b981" />,
+    options: [
+      { key: "A", text: "∛36 cm" },
+      { key: "B", text: "∛48 cm" },
+      { key: "C", text: "∛72 cm" },
+      { key: "D", text: "∛96 cm" },
     ],
-  }),
-  Qn(34, "ANBK – Bola Baru dari Gabungan", {
-    content: "Empat bola berjari-jari 3 cm dilebur menjadi satu bola besar. Tentukan jari-jari bola besar!",
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{4}{3}\\pi \\times 27 = 36\\pi \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{total}} = 4 \\times 36\\pi = 144\\pi" },
-      { label: "c.", math: "\\frac{4}{3}\\pi R^3 = 144\\pi \\Rightarrow R^3 = 108 \\Rightarrow R = \\sqrt[3]{108} \\approx \\ldots \\text{ cm}" },
+    answer: "C",
+  },
+  {
+    n: 34, title: "Air dari Tabung Dipindah ke Bola", cat: "gabungan",
+    content: "Air dari tabung dengan r = 10 cm dan t = 27 cm seluruhnya dipindahkan ke bola. Jari-jari bola tersebut adalah … (π sama)",
+    diagram: <RumusBubbleSVG lines={["V_tabung = π×100×27 = 2700π cm³", "⁴⁄₃πr³ = 2700π → r³ = 2025"]} color="#10b981" />,
+    options: [
+      { key: "A", text: "∛675 cm" },
+      { key: "B", text: "∛1350 cm" },
+      { key: "C", text: "∛2025 ≈ 12,65 cm" },
+      { key: "D", text: "∛2700 cm" },
     ],
-  }),
-  Qn(35, "UN – Volume Tabung Berubah karena r", {
-    content: "Sebuah tabung mengalami pengurangan jari-jari dari 10 cm menjadi 8 cm, tinggi tetap 15 cm. Berapa persen volume berkurang? (π = 3,14)",
-    parts: [
-      { label: "a.", math: "V_1 = 3{,}14 \\times 100 \\times 15 = 4710 \\text{ cm}^3" },
-      { label: "b.", math: "V_2 = 3{,}14 \\times 64 \\times 15 = 3014{,}4 \\text{ cm}^3" },
-      { label: "c.", math: "\\% \\text{ berkurang} = \\frac{V_1 - V_2}{V_1} \\times 100\\% = \\ldots\\%" },
+    answer: "C",
+  },
+  {
+    n: 35, title: "Empat Bola Dilebur Jadi Satu", cat: "gabungan",
+    content: "Empat bola masing-masing berjari-jari 3 cm dilebur menjadi satu bola besar. Jari-jari bola besar tersebut adalah ...",
+    diagram: <RumusBubbleSVG lines={["V_total = 4×⁴⁄₃π×27 = 144π cm³", "⁴⁄₃πR³ = 144π → R = ∛108 cm"]} color="#10b981" />,
+    options: [
+      { key: "A", text: "∛54 cm" },
+      { key: "B", text: "∛72 cm" },
+      { key: "C", text: "∛108 cm" },
+      { key: "D", text: "∛144 cm" },
     ],
-  }),
-  Qn(36, "Soal Cerita – Pengisian Ulang Tabung", {
-    content: "Air dari tabung A (r=7, t=10) seluruhnya dipindah ke tabung B (r=14, t=?). Jika tinggi air di B sama dengan 1/4 tinggi A, berapakah tinggi tabung B minimal? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "V_A = \\frac{22}{7} \\times 49 \\times 10 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "\\frac{22}{7} \\times 196 \\times t_B = V_A \\Rightarrow t_B = \\ldots \\text{ cm}" },
+    answer: "C",
+  },
+  {
+    n: 36, title: "Air Dipindah dari Tabung A ke Tabung B", cat: "gabungan",
+    content: "Air dari tabung A (r = 7 cm, t = 10 cm) seluruhnya dipindah ke tabung B (r = 14 cm). Tinggi air di tabung B adalah … (π = 22/7)",
+    diagram: <CompareCylSVG r1={7} t1={10} r2={14} t2={3} label1="Tabung A" label2="Tabung B" color="#38bdf8" />,
+    options: [
+      { key: "A", text: "1,25 cm" },
+      { key: "B", text: "2 cm" },
+      { key: "C", text: "2,5 cm" },
+      { key: "D", text: "5 cm" },
     ],
-  }),
-  Qn(37, "TKA – Volume Setengah Bola vs Kerucut", {
-    content: "Sebuah setengah bola berjari-jari 6 cm dan sebuah kerucut berjari-jari 6 cm. Jika volume keduanya sama, berapa tinggi kerucut?",
-    parts: [
-      { label: "a.", math: "V_{\\frac{1}{2}\\text{bola}} = \\frac{2}{3}\\pi \\times 216 = 144\\pi \\text{ cm}^3" },
-      { label: "b.", math: "\\frac{1}{3}\\pi \\times 36 \\times t = 144\\pi \\Rightarrow t = \\frac{144 \\times 3}{36} = \\ldots \\text{ cm}" },
+    answer: "C",
+  },
+  {
+    n: 37, title: "Persentase Volume Berkurang – Kaleng Minuman", cat: "gabungan",
+    content: "Sebuah kaleng minuman dikecilkan: r dari 3,5 cm menjadi 3 cm, t dari 10 cm menjadi 8 cm. Persentase volume yang berkurang adalah … (π = 22/7)",
+    diagram: <CompareCylSVG r1={35} t1={10} r2={3} t2={8} label1="r=3,5; t=10" label2="r=3; t=8" color="#f59e0b" />,
+    options: [
+      { key: "A", text: "25,5%" },
+      { key: "B", text: "35,7%" },
+      { key: "C", text: "41,2%" },
+      { key: "D", text: "58,8%" },
     ],
-  }),
-  Qn(38, "ANBK – Soal Kontekstual Perubahan Ukuran", {
-    content: "Sebuah perusahaan mengecilkan ukuran kaleng minuman: r dari 3,5 cm menjadi 3 cm dan t dari 10 cm menjadi 8 cm. Berapa persen volume berkurang? (π = 22/7)",
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{22}{7} \\times 12{,}25 \\times 10 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_2 = \\frac{22}{7} \\times 9 \\times 8 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "\\% = \\frac{V_1 - V_2}{V_1} \\times 100\\% = \\ldots\\%" },
+    answer: "C",
+  },
+  {
+    n: 38, title: "Bola Berjari-Jari 12 Diubah Jadi Kerucut", cat: "gabungan",
+    content: "Sebuah bola berjari-jari 12 cm diubah menjadi kerucut dengan t = 96 cm. Jari-jari kerucut agar volumenya sama adalah ...",
+    diagram: <RumusBubbleSVG lines={["V_bola = ⁴⁄₃π×1728 = 2304π cm³", "¹⁄₃πr²×96 = 2304π → r² = 72"]} color="#10b981" />,
+    options: [
+      { key: "A", text: "6 cm" },
+      { key: "B", text: "6√2 cm" },
+      { key: "C", text: "8 cm" },
+      { key: "D", text: "12 cm" },
     ],
-  }),
-  Qn(39, "UN Style – Mencari r agar Volume Sama", {
-    content: "Sebuah bola berjari-jari 12 cm diubah menjadi kerucut dengan t = 96 cm. Berapa jari-jari kerucut agar volumenya sama?",
-    parts: [
-      { label: "a.", math: "V_{\\text{bola}} = \\frac{4}{3}\\pi \\times 1728 = 2304\\pi \\text{ cm}^3" },
-      { label: "b.", math: "\\frac{1}{3}\\pi r^2 \\times 96 = 2304\\pi \\Rightarrow 32\\pi r^2 = 2304\\pi \\Rightarrow r = \\ldots \\text{ cm}" },
+    answer: "B",
+  },
+  {
+    n: 39, title: "Dua Bola A dan B – Selisih Volume", cat: "gabungan",
+    content: "Bola A berjari-jari 6 cm dan Bola B berjari-jari 12 cm. Selisih volume kedua bola tersebut adalah … (π = 3,14)",
+    diagram: <CompareSphereSVG r1={6} r2={8} />,
+    options: [
+      { key: "A", text: "1.695,5 cm³" },
+      { key: "B", text: "3.052,1 cm³" },
+      { key: "C", text: "6.330,24 cm³" },
+      { key: "D", text: "7.521,6 cm³" },
     ],
-  }),
-  Qn(40, "UN Terpadu – Perubahan Dimensi Bola", {
-    content: "Bola A berjari-jari 6 cm. Bola B berjari-jari 12 cm. Hitunglah: (a) perbandingan luas permukaan A:B, (b) perbandingan volume A:B, (c) selisih volume! (π = 3,14)",
-    parts: [
-      { label: "a.", math: "\\frac{L_A}{L_B} = \\left(\\frac{6}{12}\\right)^2 = \\frac{1}{4}" },
-      { label: "b.", math: "\\frac{V_A}{V_B} = \\left(\\frac{6}{12}\\right)^3 = \\frac{1}{8}" },
-      { label: "c.", math: "\\Delta V = \\frac{4}{3} \\times 3{,}14 \\times (12^3 - 6^3) = \\ldots \\text{ cm}^3" },
+    answer: "C",
+  },
+  {
+    n: 40, title: "Perbandingan Luas Permukaan Dua Bola", cat: "gabungan",
+    content: "Bola A berjari-jari 6 cm dan Bola B berjari-jari 12 cm. Perbandingan luas permukaan A terhadap B adalah ...",
+    diagram: <CompareSphereSVG r1={6} r2={8} />,
+    options: [
+      { key: "A", text: "1 : 2" },
+      { key: "B", text: "1 : 3" },
+      { key: "C", text: "1 : 4" },
+      { key: "D", text: "1 : 8" },
     ],
-  }),
+    answer: "C",
+  },
 ];
+
+function CatDivider({ cat }: { cat: Cat }) {
+  const { icon, label, color } = CAT_LABELS[cat];
+  return (
+    <div className="flex items-center gap-2 mt-2 mb-1">
+      <div className="h-px flex-1 bg-white/8" />
+      <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${color}`}>
+        {icon} {label}
+      </span>
+      <div className="h-px flex-1 bg-white/8" />
+    </div>
+  );
+}
+
+const optionStyle = (key: OptionKey, selected: OptionKey | undefined, answer: OptionKey, revealed: boolean) => {
+  if (!revealed) {
+    return selected === key
+      ? "bg-purple-500/30 border-purple-400 text-white"
+      : "bg-white/5 border-white/10 text-white/80 hover:border-purple-400/50 hover:bg-purple-500/10";
+  }
+  if (key === answer) return "bg-emerald-500/25 border-emerald-400 text-emerald-200";
+  if (selected === key && key !== answer) return "bg-rose-500/25 border-rose-400 text-rose-200 line-through";
+  return "bg-white/3 border-white/8 text-white/40";
+};
 
 const PerubahanVolumePage = () => {
   const navigate = useNavigate();
+  const [selected, setSelected] = useState<Record<number, OptionKey>>({});
+  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
+
+  const handleSelect = (n: number, key: OptionKey) => {
+    if (revealed[n]) return;
+    playPopSound();
+    setSelected(prev => ({ ...prev, [n]: key }));
+  };
+
+  const handleReveal = (n: number) => {
+    playPopSound();
+    setRevealed(prev => ({ ...prev, [n]: true }));
+  };
+
+  const mcScore = mcQuestions.filter(q => revealed[q.n] && selected[q.n] === q.answer).length;
+  const mcDone  = mcQuestions.filter(q => revealed[q.n]).length;
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -401,10 +851,17 @@ const PerubahanVolumePage = () => {
             PERUBAHAN VOLUME BANGUN RUANG SISI LENGKUNG
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
-          <div className="mt-3 flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-lg px-4 py-2">
-            <span className="text-purple-400 text-xs font-bold">📋 40 Soal</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+          <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
+            <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-lg px-4 py-2">
+              <span className="text-purple-400 text-xs font-bold">📋 40 Soal</span>
+              <span className="text-white/30 text-xs">·</span>
+              <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            </div>
+            {mcDone > 0 && (
+              <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
+                <span className="text-emerald-400 text-xs font-bold">✅ {mcScore}/{mcDone} jawaban benar</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -412,10 +869,11 @@ const PerubahanVolumePage = () => {
           <p className="text-purple-300 text-xs font-bold mb-2">📌 Kunci Perubahan Volume</p>
           <div className="grid grid-cols-1 gap-2 text-xs font-body">
             {[
-              { label: "Tabung (r dikali n, t tetap)", formula: "V_2 = n^2 V_1" },
-              { label: "Tabung (t dikali m, r tetap)", formula: "V_2 = m \\cdot V_1" },
-              { label: "Kerucut (r dikali n, t tetap)", formula: "V_2 = n^2 V_1" },
-              { label: "Bola (r dikali n)", formula: "V_2 = n^3 V_1" },
+              { label: "Tabung (r × n, t tetap)", formula: "V_2 = n^2 V_1" },
+              { label: "Tabung (t × m, r tetap)", formula: "V_2 = m \\cdot V_1" },
+              { label: "Kerucut (r × n, t tetap)", formula: "V_2 = n^2 V_1" },
+              { label: "Bola (r × n)",             formula: "V_2 = n^3 V_1" },
+              { label: "Luas Permukaan (r × n)",   formula: "L_2 = n^2 L_1" },
             ].map(f => (
               <div key={f.label} className="bg-white/5 rounded-lg px-3 py-2 flex gap-3 items-center">
                 <span className="text-purple-400 font-bold shrink-0 w-40 text-[11px]">{f.label}</span>
@@ -425,43 +883,73 @@ const PerubahanVolumePage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
-              <div className="absolute inset-0 border border-purple-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-400 to-violet-500 rounded-l-2xl" />
-              <div className="relative px-5 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-purple-300 text-xs font-bold">{q.n}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-purple-400 text-[10px] font-bold uppercase tracking-wider bg-purple-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                      {q.title}
-                    </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
-                    {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
-                    {q.math && <div className="mb-3 text-white/90 text-sm"><BlockMath math={q.math} /></div>}
-                    {q.parts && (
-                      <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
-                            {p.label && <span className="text-purple-400 text-xs font-bold shrink-0 mt-0.5 w-5">{p.label}</span>}
-                            <div className="flex-1 min-w-0">
-                              {p.text && <span className="font-body text-sm text-white/80">{p.text}</span>}
-                              {p.math && <span className="text-white/90 text-sm"><InlineMath math={p.math} /></span>}
-                            </div>
-                          </div>
-                        ))}
+        <div className="mb-3 flex items-center gap-2">
+          <div className="h-px flex-1 bg-purple-500/20" />
+          <span className="text-purple-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–40 · Pilihan Ganda</span>
+          <div className="h-px flex-1 bg-purple-500/20" />
+        </div>
+
+        <div className="flex flex-col gap-3 animate-slide-up">
+          {mcQuestions.map((q, i) => {
+            const isRevealed = !!revealed[q.n];
+            const sel       = selected[q.n];
+            const isCorrect = isRevealed && sel === q.answer;
+            const isWrong   = isRevealed && !!sel && sel !== q.answer;
+            const prevCat   = i > 0 ? mcQuestions[i - 1].cat : null;
+            const showDivider = q.cat !== prevCat;
+            return (
+              <div key={q.n}>
+                {showDivider && <CatDivider cat={q.cat} />}
+                <div className="relative rounded-2xl overflow-hidden animate-slide-up"
+                  style={{ animationDelay: `${i * 0.015}s` }}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
+                  <div className={`absolute inset-0 rounded-2xl transition-colors duration-300 ${isCorrect ? "border border-emerald-500/40" : isWrong ? "border border-rose-500/40" : "border border-purple-500/20"}`} />
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-400 to-violet-500 rounded-l-2xl" />
+                  <div className="relative px-5 py-4">
+                    <div className="flex items-start gap-3">
+                      <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors ${isCorrect ? "bg-emerald-500/20 border-emerald-400/50" : isWrong ? "bg-rose-500/20 border-rose-400/50" : "bg-purple-500/20 border-purple-400/50"}`}>
+                        <span className={`text-xs font-bold ${isCorrect ? "text-emerald-300" : isWrong ? "text-rose-300" : "text-purple-300"}`}>{q.n}</span>
                       </div>
-                    )}
+                      <div className="flex-1 min-w-0">
+                        <span className="text-purple-400 text-[10px] font-bold uppercase tracking-wider bg-purple-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                          {q.title}
+                        </span>
+                        <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>
+                        {q.diagram && <div className="mb-3 flex justify-center overflow-x-auto">{q.diagram}</div>}
+                        <div className="grid grid-cols-1 gap-2 mb-3">
+                          {q.options.map(opt => (
+                            <button key={opt.key}
+                              onClick={() => handleSelect(q.n, opt.key)}
+                              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body transition-all cursor-pointer ${optionStyle(opt.key, sel, q.answer, isRevealed)}`}>
+                              <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
+                                isRevealed && opt.key === q.answer                          ? "border-emerald-400 text-emerald-300 bg-emerald-500/20"
+                                : isRevealed && sel === opt.key && opt.key !== q.answer     ? "border-rose-400 text-rose-300 bg-rose-500/20"
+                                : sel === opt.key                                           ? "border-purple-400 text-purple-300 bg-purple-500/20"
+                                : "border-white/20 text-white/50"
+                              }`}>{opt.key}</span>
+                              <span>{opt.text}</span>
+                              {isRevealed && opt.key === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>}
+                              {isRevealed && sel === opt.key && opt.key !== q.answer && <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>}
+                            </button>
+                          ))}
+                        </div>
+                        {!isRevealed ? (
+                          <button onClick={() => handleReveal(q.n)}
+                            className="text-xs px-3 py-1.5 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-300 hover:bg-purple-500/25 transition-all cursor-pointer font-body">
+                            Lihat Jawaban
+                          </button>
+                        ) : (
+                          <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
+                            {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-8 text-center">
