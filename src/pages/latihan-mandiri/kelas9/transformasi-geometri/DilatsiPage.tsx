@@ -89,15 +89,15 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 2, title: "ANBK — Dilatasi k = −1 dan Rotasi 180°",
-    content: "Titik A(3, 2) didilatasi terhadap O dengan k = −1. Bayangan A′ adalah ...",
+    n: 2, title: "Dilatasi dengan k Pecahan",
+    content: "Titik A(6, 4) didilatasi dengan pusat O(0, 0) dan faktor skala k = 1/2. Bayangan A′ adalah ...",
     choices: [
-      { label: "A", text: "(3, −2)" },
-      { label: "B", text: "(−3, 2)" },
+      { label: "A", text: "(3, 2)" },
+      { label: "B", text: "(12, 8)" },
       { label: "C", text: "(−3, −2)" },
-      { label: "D", text: "(−6, −4)" },
+      { label: "D", text: "(6, 4)" },
     ],
-    answer: "C",
+    answer: "A",
   },
   {
     n: 3, title: "Mencari Koordinat Asal dari Bayangan",
@@ -121,7 +121,7 @@ const questions: Q[] = [
         <DilLine x1={0} y1={0} x2={4} y2={4}/>
       </GridSVG>
     ),
-    content: "Perhatikan diagram di atas. Faktor skala dilatasi dari △ABC ke △A′B′C′ adalah ...",
+    content: "Perhatikan diagram di bawah. Faktor skala dilatasi dari △ABC ke △A′B′C′ adalah ...",
     choices: [
       { label: "A", text: "2" },
       { label: "B", text: "3" },
@@ -131,25 +131,15 @@ const questions: Q[] = [
     answer: "A",
   },
   {
-    n: 5, title: "Faktor Skala — Diagram Segi Empat",
-    diagram: (
-      <GridSVG>
-        <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
-        <Poly pts={[[1,0],[1,1],[0,1],[0,0]]} color="#f43f5e" label="KLMN"/>
-        <Poly pts={[[3,0],[3,3],[0,3],[0,0]]} color="#a78bfa" fill="rgba(167,139,250,0.1)" label="K'L'M'N'"/>
-        <DilLine x1={0} y1={0} x2={3} y2={0}/>
-        <DilLine x1={0} y1={0} x2={3} y2={3}/>
-        <DilLine x1={0} y1={0} x2={0} y2={3}/>
-      </GridSVG>
-    ),
-    content: "Perhatikan diagram di atas. Faktor skala dilatasi segi empat KLMN ke segi empat K′L′M′N′ adalah ...",
+    n: 5, title: "Mencari Faktor Skala dari Titik Awal dan Bayangan",
+    content: "Titik P(3, −6) didilatasi terhadap pusat O(0, 0) menghasilkan bayangan P′(9, −18). Faktor skala dilatasi tersebut adalah ...",
     choices: [
-      { label: "A", text: "9" },
-      { label: "B", text: "6" },
-      { label: "C", text: "3" },
-      { label: "D", text: "2" },
+      { label: "A", text: "2" },
+      { label: "B", text: "3" },
+      { label: "C", text: "−3" },
+      { label: "D", text: "6" },
     ],
-    answer: "C",
+    answer: "B",
   },
   {
     n: 6, title: "Luas Bayangan Segitiga Setelah Dilatasi",
