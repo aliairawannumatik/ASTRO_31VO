@@ -23,8 +23,8 @@ const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, 
 const groupHeaders: Record<number, string> = {
   1:  "📌 Bagian A — Unsur-Unsur Tabung",
   9:  "📐 Bagian B — Luas Permukaan Tabung",
-  27: "🔢 Bagian C — Volume Tabung",
-  35: "🌍 Bagian D — Aplikasi di Kehidupan Nyata",
+  26: "🔢 Bagian C — Volume Tabung",
+  33: "🌍 Bagian D — Aplikasi di Kehidupan Nyata",
 };
 
 function CylinderSVG({ r, h, color = "#22d3ee", showSlant = false, extraLabel = "" }: {
@@ -67,17 +67,17 @@ function CylinderSVG({ r, h, color = "#22d3ee", showSlant = false, extraLabel = 
 
 function CylinderNetSVG({ r, h, color = "#22d3ee" }: { r?: string; h?: string; color?: string }) {
   return (
-    <svg viewBox="0 0 300 180" width="300" height="170" className="mx-auto">
-      {/* Tutup — moved close to the left edge of Selimut */}
+    <svg viewBox="0 0 315 180" width="310" height="170" className="mx-auto">
+      {/* Tutup — right edge at 108, rect starts at 110 → menempel */}
       <ellipse cx="70" cy="90" rx="38" ry="38" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.8" strokeDasharray="5,3" />
       <text x="70" y="95" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Tutup</text>
-      {/* Selimut — rectangle starting right after Tutup */}
+      {/* Selimut — x=110 s/d x=230 */}
       <rect x="110" y="30" width="120" height="120" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.8" />
       <text x="170" y="90" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Selimut</text>
       {h && <text x="170" y="170" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">2πr = lebar</text>}
-      {/* Alas — on the right */}
-      <ellipse cx="258" cy="90" rx="38" ry="38" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.8" strokeDasharray="5,3" />
-      <text x="258" y="95" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Alas</text>
+      {/* Alas — left edge at 232, rect right edge at 230 → menempel */}
+      <ellipse cx="270" cy="90" rx="38" ry="38" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.8" strokeDasharray="5,3" />
+      <text x="270" y="95" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">Alas</text>
     </svg>
   );
 }
@@ -122,7 +122,7 @@ function SelimutRectSVG({ color = "#22d3ee" }: { color?: string }) {
 }
 
 const questions: Q[] = [
-  // ── BAGIAN A · UNSUR-UNSUR ────────────────────────────────────────────────
+  // ── BAGIAN A · UNSUR-UNSUR ───────────────────────────────────────────────
   Qn(1, "Konsep Dasar Tabung", {
     content: "Banyak sisi pada tabung adalah ...",
     choices: [
@@ -312,18 +312,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(19, "Mencari Tinggi dari Luas Selimut – 440", {
-    content: "Luas selimut sebuah tabung adalah 440 cm². Jika jari-jarinya 5 cm, tinggi tabung tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="5 cm" h="?" />,
-    choices: [
-      { label: "A", text: "7 cm" },
-      { label: "B", text: "10 cm" },
-      { label: "C", text: "14 cm" },
-      { label: "D", text: "20 cm" },
-    ],
-    answer: "C",
-  }),
-  Qn(20, "Mencari Jari-Jari dari Luas Selimut", {
+  Qn(19, "Mencari Jari-Jari dari Luas Selimut", {
     content: "Diketahui luas selimut sebuah tabung 462 cm² dan tingginya 7 cm. Jari-jari alas tabung tersebut adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="?" h="7 cm" />,
     choices: [
@@ -334,7 +323,7 @@ const questions: Q[] = [
     ],
     answer: "B",
   }),
-  Qn(21, "Mencari Diameter dari Luas Selimut", {
+  Qn(20, "Mencari Diameter dari Luas Selimut", {
     content: "Luas selimut sebuah tabung adalah 1.760 cm². Jika tinggi tabung 20 cm, diameter alas tabung tersebut adalah ... (π = 22/7)",
     choices: [
       { label: "A", text: "7 cm" },
@@ -344,7 +333,7 @@ const questions: Q[] = [
     ],
     answer: "D",
   }),
-  Qn(22, "Luas Permukaan Tabung Terbuka", {
+  Qn(21, "Luas Permukaan Tabung Terbuka", {
     content: "Sebuah tabung tanpa tutup memiliki jari-jari 10 cm dan tinggi 15 cm. Luas permukaannya adalah ... (π = 3,14)",
     diagram: <CylinderSVG r="10 cm" h="15 cm" />,
     choices: [
@@ -355,7 +344,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(23, "Luas Selimut – Soal Terbalik", {
+  Qn(22, "Luas Selimut – Soal Terbalik", {
     content: "Luas selimut sebuah tabung adalah 924 cm². Jika tingginya 3 kali jari-jarinya, jari-jari dan tinggi tabung tersebut adalah ... (π = 22/7)",
     choices: [
       { label: "A", text: "r = 3 cm, t = 9 cm" },
@@ -365,7 +354,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(24, "Luas Permukaan – Kaleng Terbuka", {
+  Qn(23, "Luas Permukaan – Kaleng Terbuka", {
     content: "Sebuah kaleng terbuka (tanpa tutup atas) berbentuk tabung dengan r = 10,5 cm dan t = 15 cm. Luas permukaan kaleng tersebut adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="10,5 cm" h="15 cm" color="#fbbf24" extraLabel="Tanpa Tutup Atas" />,
     choices: [
@@ -376,7 +365,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(25, "Luas Selimut – Perbandingan", {
+  Qn(24, "Luas Selimut – Perbandingan", {
     content: "Dua tabung memiliki tinggi yang sama. Jika perbandingan jari-jarinya 2 : 3, perbandingan luas selimut kedua tabung adalah ...",
     choices: [
       { label: "A", text: "4 : 9" },
@@ -386,7 +375,7 @@ const questions: Q[] = [
     ],
     answer: "B",
   }),
-  Qn(26, "Luas Permukaan – Terpadu", {
+  Qn(25, "Luas Permukaan – Terpadu", {
     content: "Sebuah tabung memiliki luas permukaan total 836 cm² dan tinggi 12 cm. Volume tabung tersebut adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="?" h="12 cm" />,
     choices: [
@@ -399,18 +388,7 @@ const questions: Q[] = [
   }),
 
   // ── BAGIAN C · VOLUME ─────────────────────────────────────────────────────
-  Qn(27, "Volume Tabung – r = 7, t = 15", {
-    content: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 15 cm. Volume tabung tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="7 cm" h="15 cm" />,
-    choices: [
-      { label: "A", text: "1.650 cm³" },
-      { label: "B", text: "2.310 cm³" },
-      { label: "C", text: "3.234 cm³" },
-      { label: "D", text: "4.620 cm³" },
-    ],
-    answer: "B",
-  }),
-  Qn(28, "Volume Tabung – r = 6, t = 8", {
+  Qn(26, "Volume Tabung – r = 6, t = 8", {
     content: "Sebuah tabung memiliki jari-jari 6 cm dan tinggi 8 cm. Volume tabung tersebut adalah ... (π = 3,14)",
     diagram: <CylinderSVG r="6 cm" h="8 cm" />,
     choices: [
@@ -421,7 +399,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(29, "Volume Tabung – Diameter Diketahui", {
+  Qn(27, "Volume Tabung – Diameter Diketahui", {
     content: "Sebuah tabung memiliki diameter 14 cm dan tinggi 20 cm. Volume tabung adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 cm" h="20 cm" />,
     choices: [
@@ -432,7 +410,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(30, "Volume – dari Luas Alas 154", {
+  Qn(28, "Volume – dari Luas Alas 154", {
     content: "Sebuah tabung mempunyai luas alas 154 cm² dan tinggi 10 cm. Volume tabung tersebut adalah ... (π = 22/7)",
     choices: [
       { label: "A", text: "770 cm³" },
@@ -442,7 +420,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(31, "Mencari Tinggi dari Volume – 1.540", {
+  Qn(29, "Mencari Tinggi dari Volume – 1.540", {
     content: "Volume sebuah tabung adalah 1.540 cm³. Jika jari-jari alasnya 7 cm, maka tinggi tabung tersebut adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 cm" h="?" />,
     choices: [
@@ -453,7 +431,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(32, "Keliling Alas dari Volume", {
+  Qn(30, "Keliling Alas dari Volume", {
     content: "Volume sebuah tabung adalah 4.620 cm³ dan tingginya 30 cm. Keliling alas tabung tersebut adalah ... (π = 22/7)",
     choices: [
       { label: "A", text: "22 cm" },
@@ -463,7 +441,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(33, "Perbandingan Volume Dua Tabung", {
+  Qn(31, "Perbandingan Volume Dua Tabung", {
     content: "Tabung A memiliki r = 3 cm dan t = 8 cm. Tabung B memiliki r = 6 cm dan t = 4 cm. Perbandingan volume Tabung A terhadap Tabung B adalah ...",
     choices: [
       { label: "A", text: "VA = VB" },
@@ -473,7 +451,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(34, "Volume – Mencari r dari Minyak Goreng", {
+  Qn(32, "Volume – Mencari r dari Minyak Goreng", {
     content: "Sebuah tabung berisi minyak goreng 3.080 cm³. Jika tinggi minyak dalam tabung 20 cm, jari-jari tabung tersebut adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="?" h="20 cm" color="#fbbf24" />,
     choices: [
@@ -486,7 +464,7 @@ const questions: Q[] = [
   }),
 
   // ── BAGIAN D · APLIKASI DI KEHIDUPAN NYATA ───────────────────────────────
-  Qn(35, "Aplikasi – Kolam Renang", {
+  Qn(33, "Aplikasi – Kolam Renang", {
     content: "Sebuah kolam renang berbentuk tabung berdiameter 14 m dan kedalaman 2 m. Volume air yang dibutuhkan untuk mengisi kolam hingga penuh adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 m" h="2 m" color="#38bdf8" extraLabel="Kolam Renang" />,
     choices: [
@@ -497,7 +475,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(36, "Aplikasi – Pengisian Tangki dengan Pompa", {
+  Qn(34, "Aplikasi – Pengisian Tangki dengan Pompa", {
     content: "Sebuah tangki berbentuk tabung dengan r = 3,5 m dan tinggi 5 m akan diisi menggunakan pompa yang mengalirkan 385 liter/menit. Waktu yang dibutuhkan untuk mengisi penuh tangki adalah ... (π = 22/7, 1 m³ = 1.000 liter)",
     diagram: <CylinderSVG r="3,5 m" h="5 m" color="#38bdf8" extraLabel="Tangki" />,
     choices: [
@@ -508,7 +486,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(37, "Aplikasi – Pipa Air Mengalir", {
+  Qn(35, "Aplikasi – Pipa Air Mengalir", {
     content: "Air mengalir melalui pipa silinder berjari-jari 1,4 cm dengan kecepatan 5 cm/detik. Volume air yang mengalir dalam 1 menit adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="1,4 cm" h="300 cm" color="#38bdf8" extraLabel="L = 5 × 60 = 300 cm" />,
     choices: [
@@ -519,7 +497,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(38, "Aplikasi – Kaleng Roti Tanpa Tutup", {
+  Qn(36, "Aplikasi – Kaleng Roti Tanpa Tutup", {
     content: "Sebuah pabrik membuat kaleng roti berbentuk tabung tanpa tutup dengan r = 14 cm dan t = 20 cm. Luas seng yang diperlukan untuk satu kaleng adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="14 cm" h="20 cm" color="#fbbf24" extraLabel="Tanpa Tutup" />,
     choices: [
@@ -538,17 +516,6 @@ const questions: Q[] = [
       { label: "B", text: "Rp330.000" },
       { label: "C", text: "Rp440.000" },
       { label: "D", text: "Rp880.000" },
-    ],
-    answer: "C",
-  }),
-  Qn(40, "Aplikasi – Pengecatan Silo Beras", {
-    content: "Sebuah silo penyimpanan beras berbentuk tabung dengan diameter 4,2 m dan tinggi 6 m. Sisi luar (selimut + tutup atas saja) akan dicat. Luas yang akan dicat adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="2,1 m" h="6 m" color="#a78bfa" />,
-    choices: [
-      { label: "A", text: "52,8 m²" },
-      { label: "B", text: "79,2 m²" },
-      { label: "C", text: "93,06 m²" },
-      { label: "D", text: "106,92 m²" },
     ],
     answer: "C",
   }),
