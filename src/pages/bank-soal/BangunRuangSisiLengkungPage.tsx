@@ -221,6 +221,83 @@ const visualMap: Record<string, React.ReactNode> = {
   "belaha-bola-14": <BelahaBolaSVG r="14 cm" />,
   "gabung-tk-7-20-24": <GabungTabungKerucutSVG r="7 cm" tTabung="20 cm" tKerucut="24 cm" />,
   "gabung-tk-10-15-20": <GabungTabungKerucutSVG r="10 cm" tTabung="15 cm" tKerucut="20 cm" />,
+
+  "kerucut-bernomor": (
+    <svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-xs mx-auto my-2 rounded-lg" style={{background:"rgba(15,23,42,0.65)"}}>
+      <ellipse cx="150" cy="180" rx="95" ry="24" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" strokeWidth="2"/>
+      <polygon points="55,180 245,180 150,32" fill="rgba(251,191,36,0.07)"/>
+      <line x1="55" y1="180" x2="150" y2="32" stroke="#fbbf24" strokeWidth="2"/>
+      <line x1="245" y1="180" x2="150" y2="32" stroke="#fbbf24" strokeWidth="2"/>
+      <line x1="150" y1="32" x2="150" y2="180" stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,3"/>
+      <circle cx="150" cy="32" r="4" fill="#22d3ee"/>
+      <circle cx="28" cy="25" r="11" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" strokeWidth="1.5"/>
+      <text x="28" y="30" textAnchor="middle" fill="#22d3ee" fontSize="12" fontWeight="bold">①</text>
+      <line x1="39" y1="28" x2="145" y2="33" stroke="#22d3ee" strokeWidth="1" strokeDasharray="3,2" opacity="0.8"/>
+      <circle cx="274" cy="95" r="11" fill="rgba(244,114,182,0.22)" stroke="#f472b6" strokeWidth="1.5"/>
+      <text x="274" y="100" textAnchor="middle" fill="#f472b6" fontSize="12" fontWeight="bold">②</text>
+      <line x1="263" y1="98" x2="213" y2="115" stroke="#f472b6" strokeWidth="1" strokeDasharray="3,2" opacity="0.8"/>
+      <circle cx="274" cy="180" r="11" fill="rgba(74,222,128,0.22)" stroke="#4ade80" strokeWidth="1.5"/>
+      <text x="274" y="185" textAnchor="middle" fill="#4ade80" fontSize="12" fontWeight="bold">③</text>
+      <line x1="263" y1="180" x2="247" y2="180" stroke="#4ade80" strokeWidth="1" strokeDasharray="3,2" opacity="0.8"/>
+      <circle cx="28" cy="180" r="11" fill="rgba(167,139,250,0.22)" stroke="#a78bfa" strokeWidth="1.5"/>
+      <text x="28" y="185" textAnchor="middle" fill="#a78bfa" fontSize="12" fontWeight="bold">④</text>
+      <line x1="39" y1="180" x2="60" y2="180" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3,2" opacity="0.8"/>
+      <text x="150" y="218" textAnchor="middle" fill="#94a3b8" fontSize="10">Perhatikan bagian-bagian kerucut</text>
+    </svg>
+  ),
+
+  "kerucut-rst": (
+    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-xs mx-auto my-2 rounded-lg" style={{background:"rgba(15,23,42,0.65)"}}>
+      <ellipse cx="150" cy="175" rx="90" ry="22" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" strokeWidth="2"/>
+      <polygon points="60,175 240,175 150,30" fill="rgba(251,191,36,0.07)"/>
+      <line x1="60" y1="175" x2="150" y2="30" stroke="#fbbf24" strokeWidth="2"/>
+      <line x1="240" y1="175" x2="150" y2="30" stroke="#fbbf24" strokeWidth="2"/>
+      <line x1="150" y1="30" x2="150" y2="175" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="6,3"/>
+      <line x1="150" y1="175" x2="240" y2="175" stroke="#22d3ee" strokeWidth="2.5"/>
+      <rect x="150" y="163" width="12" height="12" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+      <text x="196" y="170" textAnchor="middle" fill="#22d3ee" fontSize="13" fontWeight="bold">r</text>
+      <text x="136" y="108" textAnchor="middle" fill="#f472b6" fontSize="13" fontWeight="bold">t</text>
+      <text x="210" y="108" textAnchor="middle" fill="#4ade80" fontSize="14" fontWeight="bold">s</text>
+      <text x="150" y="210" textAnchor="middle" fill="#94a3b8" fontSize="10">s² = r² + t²</text>
+    </svg>
+  ),
+
+  "juring-kerucut": (
+    <svg viewBox="0 0 310 210" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-xs mx-auto my-2 rounded-lg" style={{background:"rgba(15,23,42,0.65)"}}>
+      <circle cx="110" cy="110" r="82" fill="none" stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="5,3" opacity="0.5"/>
+      <path d="M 110 110 L 110 28 A 82 82 0 0 1 192 151 Z" fill="rgba(34,211,238,0.18)" stroke="#22d3ee" strokeWidth="2"/>
+      <circle cx="110" cy="110" r="4" fill="#fbbf24"/>
+      <text x="96" y="118" fill="#fbbf24" fontSize="13" fontWeight="bold">O</text>
+      <text x="114" y="22" fill="#22d3ee" fontSize="12" fontWeight="bold">A</text>
+      <text x="197" y="160" fill="#22d3ee" fontSize="12" fontWeight="bold">B</text>
+      <path d="M 110 70 A 40 40 0 0 1 142 133" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
+      <text x="127" y="95" fill="#f472b6" fontSize="11">144°</text>
+      <text x="58" y="80" fill="#94a3b8" fontSize="10">R = 20 cm</text>
+      <line x1="110" y1="28" x2="68" y2="64" stroke="#94a3b8" strokeWidth="1" strokeDasharray="3,2" opacity="0.7"/>
+      <text x="218" y="60" fill="#4ade80" fontSize="11" fontWeight="bold">→ Juring ini</text>
+      <text x="218" y="78" fill="#4ade80" fontSize="11">dibentuk</text>
+      <text x="218" y="96" fill="#4ade80" fontSize="11">menjadi</text>
+      <text x="218" y="114" fill="#4ade80" fontSize="11">selimut</text>
+      <text x="218" y="132" fill="#4ade80" fontSize="11">kerucut</text>
+    </svg>
+  ),
+
+  "kap-lampu-4-12": (
+    <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-xs mx-auto my-2 rounded-lg" style={{background:"rgba(15,23,42,0.65)"}}>
+      <ellipse cx="140" cy="155" rx="72" ry="18" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" strokeWidth="2"/>
+      <ellipse cx="140" cy="65" rx="24" ry="8" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="1.8"/>
+      <line x1="68" y1="155" x2="116" y2="65" stroke="#fbbf24" strokeWidth="2"/>
+      <line x1="212" y1="155" x2="164" y2="65" stroke="#fbbf24" strokeWidth="2"/>
+      <polygon points="68,155 212,155 164,65 116,65" fill="rgba(251,191,36,0.06)"/>
+      <line x1="140" y1="65" x2="140" y2="155" stroke="#94a3b8" strokeWidth="1.3" strokeDasharray="5,3"/>
+      <line x1="140" y1="65" x2="164" y2="65" stroke="#22d3ee" strokeWidth="2"/>
+      <text x="152" y="58" fill="#22d3ee" fontSize="10">r₁=4</text>
+      <line x1="140" y1="155" x2="212" y2="155" stroke="#fbbf24" strokeWidth="2"/>
+      <text x="155" y="172" fill="#fbbf24" fontSize="10">r₂=12</text>
+      <text x="218" y="115" fill="#4ade80" fontSize="11" fontWeight="bold">s=10 cm</text>
+      <text x="140" y="195" textAnchor="middle" fill="#94a3b8" fontSize="10">Kap Lampu (Kerucut Terpancung)</text>
+    </svg>
+  ),
 };
 
 /* ══════════════════════════════════════════════════════
@@ -230,10 +307,340 @@ const visualMap: Record<string, React.ReactNode> = {
 const soalBangunRuangSisiLengkung: Question[] = [
 
   /* ═══════════════════════════════════════════════════
-     PG – MUDAH  (Q1 – Q14)
+     KERUCUT – KONSEP & PERHITUNGAN DASAR  (Q1 – Q21)
   ═══════════════════════════════════════════════════ */
   {
-    id: 1, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
+    id: 1, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Jumlah permukaan (sisi) pada bangun ruang kerucut adalah ...",
+    options: ["A. 1 buah", "B. 2 buah", "C. 3 buah", "D. 4 buah"],
+    correctAnswer: "B. 2 buah",
+    explanation: {
+      concept: "Kerucut memiliki dua buah sisi: satu sisi alas berbentuk lingkaran dan satu sisi selimut berbentuk bidang lengkung.",
+      steps: [
+        "Sisi 1: Alas kerucut → berbentuk lingkaran",
+        "Sisi 2: Selimut kerucut → berbentuk bidang lengkung (jika diratakan membentuk juring lingkaran)",
+        "Total sisi kerucut = 2 buah"
+      ],
+      formula: "\\text{Jumlah sisi kerucut} = 2"
+    }
+  },
+  {
+    id: 2, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Jumlah rusuk yang dimiliki oleh bangun ruang kerucut adalah ...",
+    options: ["A. tidak ada", "B. 1 buah", "C. 2 buah", "D. 3 buah"],
+    correctAnswer: "B. 1 buah",
+    explanation: {
+      concept: "Rusuk adalah garis pertemuan antara dua sisi. Pada kerucut, sisi alas (lingkaran) bertemu dengan sisi selimut menghasilkan tepat satu rusuk berupa lingkaran di bagian bawah.",
+      steps: [
+        "Rusuk kerucut = lingkaran alas (pertemuan antara sisi alas dan sisi selimut)",
+        "Kerucut hanya memiliki 1 rusuk berupa lingkaran"
+      ],
+      formula: "\\text{Jumlah rusuk kerucut} = 1"
+    }
+  },
+  {
+    id: 3, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Jumlah titik sudut pada kerucut adalah ...",
+    options: ["A. tidak ada", "B. 1 buah", "C. 2 buah", "D. 3 buah"],
+    correctAnswer: "B. 1 buah",
+    explanation: {
+      concept: "Titik sudut adalah titik pertemuan tiga sisi atau lebih. Pada kerucut, hanya puncak (apex) yang merupakan satu-satunya titik sudut.",
+      steps: [
+        "Titik sudut kerucut = puncak (titik terlancip di atas)",
+        "Alas kerucut berbentuk lingkaran (tidak membentuk sudut)",
+        "Total titik sudut = 1 buah"
+      ],
+      formula: "\\text{Jumlah titik sudut kerucut} = 1"
+    }
+  },
+  {
+    id: 4, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Jika selimut kerucut dibuka dan diratakan, bangun datar yang terbentuk adalah ...",
+    options: ["A. tembereng lingkaran", "B. segitiga sama kaki", "C. juring lingkaran", "D. lingkaran penuh"],
+    correctAnswer: "C. juring lingkaran",
+    explanation: {
+      concept: "Selimut kerucut jika diratakan (diungulung) akan membentuk juring lingkaran dengan jari-jari = garis pelukis (s) dan panjang busur = keliling alas kerucut.",
+      steps: [
+        "Selimut kerucut = bidang lengkung",
+        "Jika diratakan → membentuk juring (sektor) lingkaran",
+        "Jari-jari juring = garis pelukis (s)",
+        "Busur juring = keliling alas kerucut = $2\\pi r$"
+      ],
+      formula: "L_{\\text{selimut}} = \\pi r s"
+    }
+  },
+  {
+    id: 5, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Perhatikan gambar kerucut berikut!\n\n① menunjukkan puncak, ② menunjukkan garis miring sisi, ③ menunjukkan tepi alas, ④ menunjukkan bidang alas.\n\nNomor yang menunjukkan RUSUK kerucut adalah ...",
+    svgKey: "kerucut-bernomor",
+    options: ["A. ①", "B. ②", "C. ③", "D. ④"],
+    correctAnswer: "C. ③",
+    explanation: {
+      concept: "Rusuk kerucut adalah garis (kurva) pertemuan antara sisi alas dan sisi selimut, yaitu lingkaran yang membentuk tepi alas kerucut.",
+      steps: [
+        "① = puncak kerucut → titik sudut",
+        "② = garis pelukis (slant height) → bagian dari sisi selimut",
+        "③ = tepi alas (lingkaran alas) → ini adalah RUSUK kerucut ✓",
+        "④ = bidang alas → sisi alas kerucut"
+      ],
+      formula: "\\text{Rusuk kerucut} = \\text{lingkaran alas}"
+    }
+  },
+  {
+    id: 6, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Jika volume kerucut adalah 126 cm³, maka volume tabung yang memiliki ukuran jari-jari alas dan tinggi yang sama dengan kerucut tersebut adalah ...",
+    options: ["A. 168 cm³", "B. 252 cm³", "C. 315 cm³", "D. 378 cm³"],
+    correctAnswer: "D. 378 cm³",
+    explanation: {
+      concept: "Volume tabung = 3 × volume kerucut jika memiliki alas dan tinggi yang sama.",
+      steps: [
+        "$V_{\\text{kerucut}} = \\dfrac{1}{3} \\times \\pi r^2 t$",
+        "$V_{\\text{tabung}} = \\pi r^2 t = 3 \\times V_{\\text{kerucut}}$",
+        "$V_{\\text{tabung}} = 3 \\times 126 = 378$ cm³"
+      ],
+      formula: "V_{\\text{tabung}} = 3 \\times V_{\\text{kerucut}}"
+    }
+  },
+  {
+    id: 7, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Perhatikan gambar kerucut berikut! Jika r = jari-jari alas, t = tinggi kerucut, dan s = garis pelukis, maka hubungan yang benar antara ketiga ukuran tersebut adalah ...",
+    svgKey: "kerucut-rst",
+    options: ["A. $t^2 = s^2 + r^2$", "B. $r^2 = t^2 + s^2$", "C. $t^2 = s^2 - r^2$", "D. $s^2 = r^2 + t^2$"],
+    correctAnswer: "D. $s^2 = r^2 + t^2$",
+    explanation: {
+      concept: "Pada kerucut, terdapat segitiga siku-siku dengan sisi: r (alas), t (tegak), dan s (hipotenusa/garis pelukis). Berlaku teorema Pythagoras.",
+      steps: [
+        "r = jari-jari alas (sisi mendatar)",
+        "t = tinggi kerucut (sisi tegak)",
+        "s = garis pelukis (sisi miring/hipotenusa)",
+        "Teorema Pythagoras: $s^2 = r^2 + t^2$ ✓"
+      ],
+      formula: "s^2 = r^2 + t^2"
+    }
+  },
+  {
+    id: 8, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    question: "Sebuah kerucut memiliki jari-jari alas r = 12 cm dan tinggi t = 16 cm. Panjang garis pelukis (s) kerucut tersebut adalah ...",
+    options: ["A. $\\sqrt{280}$ cm", "B. $\\sqrt{320}$ cm", "C. 18 cm", "D. 20 cm"],
+    correctAnswer: "D. 20 cm",
+    explanation: {
+      concept: "Gunakan teorema Pythagoras: s² = r² + t².",
+      steps: [
+        "$s^2 = r^2 + t^2 = 12^2 + 16^2$",
+        "$= 144 + 256 = 400$",
+        "$s = \\sqrt{400} = 20$ cm ✓"
+      ],
+      formula: "s = \\sqrt{r^2 + t^2}"
+    }
+  },
+  {
+    id: 9, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    question: "Sebuah kerucut mempunyai garis pelukis s = 50 cm dan tinggi t = 48 cm. Jari-jari alas kerucut tersebut adalah ...",
+    options: ["A. 7 cm", "B. 10 cm", "C. 14 cm", "D. 20 cm"],
+    correctAnswer: "C. 14 cm",
+    explanation: {
+      concept: "Dari hubungan s² = r² + t², cari r.",
+      steps: [
+        "$r^2 = s^2 - t^2 = 50^2 - 48^2$",
+        "$= 2500 - 2304 = 196$",
+        "$r = \\sqrt{196} = 14$ cm ✓"
+      ],
+      formula: "r = \\sqrt{s^2 - t^2}"
+    }
+  },
+  {
+    id: 10, type: "PG", difficulty: "Mudah", category: "KONSEP – Kerucut",
+    question: "Rumus luas selimut kerucut adalah ...",
+    options: ["A. $L = 2\\pi r t$", "B. $L = 2\\pi r(r + t)$", "C. $L = \\pi r t$", "D. $L = \\pi r s$"],
+    correctAnswer: "D. $L = \\pi r s$",
+    explanation: {
+      concept: "Luas selimut kerucut dihitung menggunakan jari-jari alas (r) dan garis pelukis (s), bukan tinggi (t).",
+      steps: [
+        "Selimut kerucut = juring lingkaran dengan jari-jari s dan busur = keliling alas",
+        "$L_{\\text{selimut}} = \\pi r s$",
+        "Catatan: s = garis pelukis, bukan tinggi t"
+      ],
+      formula: "L_{\\text{selimut}} = \\pi r s"
+    }
+  },
+  {
+    id: 11, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    question: "Sebuah kerucut mempunyai jari-jari alas 6 cm dan tinggi 8 cm. Luas selimut kerucut tersebut adalah ... (π = 3,14)",
+    options: ["A. 113,04 cm²", "B. 150,72 cm²", "C. 188,40 cm²", "D. 226,08 cm²"],
+    correctAnswer: "C. 188,40 cm²",
+    explanation: {
+      concept: "Cari garis pelukis s terlebih dahulu, lalu hitung luas selimut.",
+      steps: [
+        "$s = \\sqrt{r^2 + t^2} = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10$ cm",
+        "$L_{\\text{selimut}} = \\pi r s = 3{,}14 \\times 6 \\times 10$",
+        "$= 3{,}14 \\times 60 = 188{,}40$ cm² ✓"
+      ],
+      formula: "s = \\sqrt{r^2 + t^2}, \\quad L = \\pi r s"
+    }
+  },
+  {
+    id: 12, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    question: "Diketahui sebuah kerucut dengan jari-jari alas 9 cm dan tinggi 12 cm. Luas selimut kerucut tersebut adalah ...",
+    options: ["A. $105\\pi$ cm²", "B. $120\\pi$ cm²", "C. $135\\pi$ cm²", "D. $180\\pi$ cm²"],
+    correctAnswer: "C. $135\\pi$ cm²",
+    explanation: {
+      concept: "Cari s dengan Pythagoras, lalu hitung luas selimut.",
+      steps: [
+        "$s = \\sqrt{9^2 + 12^2} = \\sqrt{81 + 144} = \\sqrt{225} = 15$ cm",
+        "$L_{\\text{selimut}} = \\pi \\times 9 \\times 15 = 135\\pi$ cm² ✓"
+      ],
+      formula: "L = \\pi r s"
+    }
+  },
+  {
+    id: 13, type: "PG", difficulty: "Sedang", category: "UN – Kerucut",
+    question: "Sebuah kerucut mempunyai tinggi 24 cm dan garis pelukis 26 cm. Luas alas kerucut tersebut adalah ... (π = 3,14)",
+    options: ["A. 314 cm²", "B. 331 cm²", "C. 157 cm²", "D. 628 cm²"],
+    correctAnswer: "A. 314 cm²",
+    explanation: {
+      concept: "Dari t dan s, cari r menggunakan Pythagoras, kemudian hitung luas alas.",
+      steps: [
+        "$r = \\sqrt{s^2 - t^2} = \\sqrt{26^2 - 24^2} = \\sqrt{676 - 576} = \\sqrt{100} = 10$ cm",
+        "$L_{\\text{alas}} = \\pi r^2 = 3{,}14 \\times 10^2 = 3{,}14 \\times 100 = 314$ cm² ✓"
+      ],
+      formula: "r = \\sqrt{s^2 - t^2}, \\quad L_{\\text{alas}} = \\pi r^2"
+    }
+  },
+  {
+    id: 14, type: "PG", difficulty: "Sedang", category: "UN – Kerucut",
+    question: "Sebuah kerucut mempunyai luas alas $100\\pi$ cm² dan panjang garis pelukis 26 cm. Tinggi kerucut tersebut adalah ...",
+    options: ["A. 20 cm", "B. 22 cm", "C. 24 cm", "D. 26 cm"],
+    correctAnswer: "C. 24 cm",
+    explanation: {
+      concept: "Dari luas alas cari r, kemudian gunakan Pythagoras untuk mencari t.",
+      steps: [
+        "$\\pi r^2 = 100\\pi \\Rightarrow r^2 = 100 \\Rightarrow r = 10$ cm",
+        "$t = \\sqrt{s^2 - r^2} = \\sqrt{26^2 - 10^2} = \\sqrt{676 - 100} = \\sqrt{576} = 24$ cm ✓"
+      ],
+      formula: "t = \\sqrt{s^2 - r^2}"
+    }
+  },
+  {
+    id: 15, type: "PG", difficulty: "Sedang", category: "HOTS – Kerucut",
+    question: "Diketahui luas selimut kerucut $60\\pi$ cm² dan diameter alasnya 12 cm. Panjang garis pelukis dan tinggi kerucut berturut-turut adalah ...",
+    options: ["A. 8 cm dan 6 cm", "B. 10 cm dan 6 cm", "C. 10 cm dan 8 cm", "D. 12 cm dan 8 cm"],
+    correctAnswer: "C. 10 cm dan 8 cm",
+    explanation: {
+      concept: "Dari luas selimut dan diameter, cari s, kemudian gunakan Pythagoras untuk t.",
+      steps: [
+        "$r = \\dfrac{d}{2} = \\dfrac{12}{2} = 6$ cm",
+        "$L_{\\text{selimut}} = \\pi r s = 60\\pi \\Rightarrow 6s = 60 \\Rightarrow s = 10$ cm",
+        "$t = \\sqrt{s^2 - r^2} = \\sqrt{10^2 - 6^2} = \\sqrt{100 - 36} = \\sqrt{64} = 8$ cm",
+        "Jadi $s = 10$ cm dan $t = 8$ cm ✓"
+      ],
+      formula: "s = \\dfrac{L}{\\pi r}, \\quad t = \\sqrt{s^2 - r^2}"
+    }
+  },
+  {
+    id: 16, type: "PG", difficulty: "Sedang", category: "HOTS – Kerucut",
+    question: "Diketahui luas alas dan luas selimut sebuah kerucut masing-masing $100\\pi$ cm² dan $260\\pi$ cm². Tinggi kerucut tersebut adalah ...",
+    options: ["A. 20 cm", "B. 22 cm", "C. 24 cm", "D. 26 cm"],
+    correctAnswer: "C. 24 cm",
+    explanation: {
+      concept: "Dari luas alas cari r, dari luas selimut cari s, lalu Pythagoras untuk t.",
+      steps: [
+        "$\\pi r^2 = 100\\pi \\Rightarrow r = 10$ cm",
+        "$\\pi r s = 260\\pi \\Rightarrow 10s = 260 \\Rightarrow s = 26$ cm",
+        "$t = \\sqrt{s^2 - r^2} = \\sqrt{26^2 - 10^2} = \\sqrt{676 - 100} = \\sqrt{576} = 24$ cm ✓"
+      ],
+      formula: "t = \\sqrt{s^2 - r^2}"
+    }
+  },
+  {
+    id: 17, type: "PG", difficulty: "Sedang", category: "HOTS – Kerucut",
+    question: "Sebuah juring lingkaran berpusat di O dengan jari-jari OA = OB = 20 cm dan sudut AOB = 144°. Juring tersebut digulung menjadi selimut kerucut. Jari-jari alas kerucut yang terbentuk adalah ...",
+    svgKey: "juring-kerucut",
+    options: ["A. 6 cm", "B. 8 cm", "C. 10 cm", "D. 12 cm"],
+    correctAnswer: "B. 8 cm",
+    explanation: {
+      concept: "Saat juring digulung menjadi selimut kerucut: panjang busur juring = keliling alas kerucut, dan jari-jari juring = garis pelukis kerucut.",
+      steps: [
+        "Panjang busur juring $= \\dfrac{144}{360} \\times 2\\pi \\times 20 = \\dfrac{2}{5} \\times 40\\pi = 16\\pi$ cm",
+        "Keliling alas kerucut $= 2\\pi r_{\\text{kerucut}} = 16\\pi$",
+        "$r_{\\text{kerucut}} = 8$ cm ✓",
+        "Catatan: garis pelukis $s = OA = 20$ cm"
+      ],
+      formula: "r_{\\text{kerucut}} = \\dfrac{\\theta}{360} \\times R_{\\text{juring}}"
+    }
+  },
+  {
+    id: 18, type: "PG", difficulty: "Sedang", category: "HOTS – Kerucut",
+    question: "Sebuah juring lingkaran mempunyai luas $\\frac{3}{5}$ luas lingkaran penuhnya dan berjari-jari 25 cm. Jika juring itu digulung menjadi selimut kerucut, tinggi kerucut yang terbentuk adalah ...",
+    options: ["A. 15 cm", "B. 18 cm", "C. 20 cm", "D. 24 cm"],
+    correctAnswer: "C. 20 cm",
+    explanation: {
+      concept: "Luas juring proporsional dengan sudutnya. Dari perbandingan luas, cari r kerucut, lalu hitung t.",
+      steps: [
+        "$\\dfrac{\\text{Luas juring}}{\\text{Luas lingkaran}} = \\dfrac{3}{5} \\Rightarrow \\dfrac{\\theta}{360} = \\dfrac{3}{5}$",
+        "$r_{\\text{kerucut}} = \\dfrac{\\theta}{360} \\times R = \\dfrac{3}{5} \\times 25 = 15$ cm",
+        "$s = R = 25$ cm (jari-jari juring = garis pelukis)",
+        "$t = \\sqrt{s^2 - r^2} = \\sqrt{25^2 - 15^2} = \\sqrt{625 - 225} = \\sqrt{400} = 20$ cm ✓"
+      ],
+      formula: "r_{\\text{kerucut}} = \\dfrac{\\theta}{360} \\times R, \\quad t = \\sqrt{s^2 - r^2}"
+    }
+  },
+  {
+    id: 19, type: "PG", difficulty: "Sedang", category: "TKA – Kerucut",
+    question: "Sebuah kerucut memiliki perbandingan jari-jari dan garis pelukis r : s = 3 : 5. Jika luas selimut kerucut $60\\pi$ cm², luas alas kerucut tersebut adalah ...",
+    options: ["A. $36\\pi$ cm²", "B. $64\\pi$ cm²", "C. $100\\pi$ cm²", "D. $144\\pi$ cm²"],
+    correctAnswer: "A. $36\\pi$ cm²",
+    explanation: {
+      concept: "Misalkan r = 3k dan s = 5k, substitusi ke rumus luas selimut.",
+      steps: [
+        "$r = 3k,\\ s = 5k$",
+        "$L_{\\text{selimut}} = \\pi r s = \\pi (3k)(5k) = 15\\pi k^2 = 60\\pi$",
+        "$k^2 = 4 \\Rightarrow k = 2$",
+        "$r = 3 \\times 2 = 6$ cm",
+        "$L_{\\text{alas}} = \\pi r^2 = \\pi \\times 36 = 36\\pi$ cm² ✓"
+      ],
+      formula: "L_{\\text{selimut}} = \\pi rs, \\quad L_{\\text{alas}} = \\pi r^2"
+    }
+  },
+  {
+    id: 20, type: "PG", difficulty: "Sedang", category: "TKA – Kerucut",
+    question: "Sebuah kerucut memiliki perbandingan r : s = 5 : 13. Jika luas selimut kerucut $260\\pi$ cm², tinggi kerucut tersebut adalah ...",
+    options: ["A. 8 cm", "B. 16 cm", "C. 20 cm", "D. 24 cm"],
+    correctAnswer: "D. 24 cm",
+    explanation: {
+      concept: "Misalkan r = 5k dan s = 13k, cari k dari luas selimut, lalu hitung t.",
+      steps: [
+        "$r = 5k,\\ s = 13k$",
+        "$\\pi(5k)(13k) = 260\\pi \\Rightarrow 65k^2 = 260 \\Rightarrow k^2 = 4 \\Rightarrow k = 2$",
+        "$r = 10$ cm, $s = 26$ cm",
+        "$t = \\sqrt{s^2 - r^2} = \\sqrt{676 - 100} = \\sqrt{576} = 24$ cm ✓"
+      ],
+      formula: "t = \\sqrt{s^2 - r^2}"
+    }
+  },
+  {
+    id: 21, type: "PG", difficulty: "Sulit", category: "KONTEKSTUAL – Kerucut",
+    question: "Sebuah kap lampu berbentuk kerucut terpancung (frustum) dengan jari-jari lingkaran atas 4 cm dan jari-jari lingkaran bawah 12 cm. Jika garis miring sisi kap (slant height frustum) adalah 10 cm, luas bahan yang diperlukan untuk membuat kap tersebut adalah ... (π = 3,14)",
+    svgKey: "kap-lampu-4-12",
+    options: ["A. 402,4 cm²", "B. 452,4 cm²", "C. 502,4 cm²", "D. 552,4 cm²"],
+    correctAnswer: "C. 502,4 cm²",
+    explanation: {
+      concept: "Luas selimut kerucut terpancung = π × (r₁ + r₂) × s_frustum.",
+      steps: [
+        "$r_1 = 4$ cm (jari-jari atas), $r_2 = 12$ cm (jari-jari bawah)",
+        "$s_{\\text{frustum}} = 10$ cm (garis miring sisi kap)",
+        "$L_{\\text{bahan}} = \\pi(r_1 + r_2) \\times s_{\\text{frustum}}$",
+        "$= 3{,}14 \\times (4 + 12) \\times 10$",
+        "$= 3{,}14 \\times 16 \\times 10 = 3{,}14 \\times 160 = 502{,}4$ cm² ✓"
+      ],
+      formula: "L_{\\text{frustum}} = \\pi(r_1 + r_2) \\times s"
+    }
+  },
+
+  /* ═══════════════════════════════════════════════════
+     PG – MUDAH  (Q22 – Q35)
+  ═══════════════════════════════════════════════════ */
+  {
+    id: 22, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
     question: "Sebuah tabung memiliki jari-jari alas 7 cm dan tinggi 10 cm. Volume tabung tersebut adalah ... (π = 22/7)",
     svgKey: "tabung-7-10",
     options: ["A. 1.240 cm³", "B. 1.540 cm³", "C. 1.760 cm³", "D. 2.200 cm³"],
@@ -245,7 +652,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 2, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
+    id: 23, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
     question: "Luas selimut sebuah tabung dengan jari-jari 7 cm dan tinggi 10 cm adalah ... (π = 22/7)",
     svgKey: "tabung-7-10",
     options: ["A. 220 cm²", "B. 308 cm²", "C. 440 cm²", "D. 616 cm²"],
@@ -257,7 +664,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 3, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
+    id: 24, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
     question: "Luas permukaan sebuah tabung dengan jari-jari 7 cm dan tinggi 10 cm adalah ... (π = 22/7)",
     svgKey: "tabung-7-10",
     options: ["A. 594 cm²", "B. 660 cm²", "C. 748 cm²", "D. 880 cm²"],
@@ -269,7 +676,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 4, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 25, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Sebuah kerucut memiliki jari-jari alas 6 cm dan tinggi 8 cm. Panjang garis pelukisnya adalah ...",
     svgKey: "kerucut-6-8",
     options: ["A. 7 cm", "B. 8 cm", "C. 10 cm", "D. 14 cm"],
@@ -281,7 +688,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 5, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 26, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Sebuah kerucut memiliki jari-jari 6 cm dan garis pelukis 10 cm. Luas selimut kerucut tersebut adalah ... (π = 3,14)",
     svgKey: "selimut-kerucut-6-10",
     options: ["A. 153,86 cm²", "B. 169,56 cm²", "C. 188,40 cm²", "D. 204,20 cm²"],
@@ -293,7 +700,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 6, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 27, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Sebuah kerucut memiliki jari-jari alas 7 cm dan tinggi 24 cm. Volume kerucut tersebut adalah ... (π = 22/7)",
     svgKey: "kerucut-7-24",
     options: ["A. 924 cm³", "B. 1.232 cm³", "C. 1.540 cm³", "D. 2.464 cm³"],
@@ -305,7 +712,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 7, type: "PG", difficulty: "Mudah", category: "UN – Bola",
+    id: 28, type: "PG", difficulty: "Mudah", category: "UN – Bola",
     question: "Sebuah bola memiliki jari-jari 7 cm. Luas permukaan bola tersebut adalah ... (π = 22/7)",
     svgKey: "bola-7",
     options: ["A. 154 cm²", "B. 308 cm²", "C. 616 cm²", "D. 1.232 cm²"],
@@ -317,7 +724,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 8, type: "PG", difficulty: "Mudah", category: "UN – Bola",
+    id: 29, type: "PG", difficulty: "Mudah", category: "UN – Bola",
     question: "Sebuah bola memiliki jari-jari 7 cm. Volume bola tersebut adalah ... (π = 22/7)",
     svgKey: "bola-7",
     options: ["A. 718,67 cm³", "B. 1.078 cm³", "C. 1.437,33 cm³", "D. 1.540 cm³"],
@@ -329,7 +736,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 9, type: "PG", difficulty: "Mudah", category: "KONTEKSTUAL – Tabung",
+    id: 30, type: "PG", difficulty: "Mudah", category: "KONTEKSTUAL – Tabung",
     question: "Sebuah kaleng berbentuk tabung memiliki diameter 28 cm dan tinggi 40 cm. Volume kaleng tersebut adalah ... (π = 22/7)",
     svgKey: "tabung-14-20",
     options: ["A. 24.640 cm³", "B. 35.200 cm³", "C. 49.280 cm³", "D. 61.600 cm³"],
@@ -341,7 +748,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 10, type: "PG", difficulty: "Mudah", category: "KONTEKSTUAL – Bola",
+    id: 31, type: "PG", difficulty: "Mudah", category: "KONTEKSTUAL – Bola",
     question: "Sebuah balon berbentuk bola memiliki diameter 14 cm. Luas permukaan balon adalah ... (π = 22/7)",
     svgKey: "bola-7",
     options: ["A. 308 cm²", "B. 616 cm²", "C. 924 cm²", "D. 1.232 cm²"],
@@ -353,7 +760,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 11, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
+    id: 32, type: "PG", difficulty: "Mudah", category: "UN – Tabung",
     question: "Diketahui sebuah tabung dengan luas selimut 880 cm² dan tinggi 10 cm. Jari-jari tabung tersebut adalah ... (π = 22/7)",
     options: ["A. 7 cm", "B. 10 cm", "C. 14 cm", "D. 21 cm"],
     correctAnswer: "C. 14 cm",
@@ -364,7 +771,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 12, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 33, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Sebuah kerucut memiliki luas permukaan 660 cm² dan jari-jari alas 10 cm. Garis pelukis kerucut tersebut adalah ... (π = 22/7)",
     options: ["A. 10 cm", "B. 11 cm", "C. 21 cm", "D. 22 cm"],
     correctAnswer: "C. 21 cm",
@@ -375,7 +782,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 13, type: "PG", difficulty: "Mudah", category: "ANBK – Bola",
+    id: 34, type: "PG", difficulty: "Mudah", category: "ANBK – Bola",
     question: "Setengah bola (belahan bola) pejal memiliki jari-jari 7 cm. Luas permukaan belahan bola tersebut adalah ... (π = 22/7)",
     svgKey: "belaha-bola-7",
     options: ["A. 308 cm²", "B. 462 cm²", "C. 616 cm²", "D. 770 cm²"],
@@ -387,7 +794,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 14, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 35, type: "PG", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Sebuah kerucut memiliki jari-jari 14 cm dan tinggi 48 cm. Volume kerucut tersebut adalah ... (π = 22/7)",
     svgKey: "kerucut-14-48",
     options: ["A. 14.784 cm³", "B. 28.256 cm³", "C. 29.568 cm³", "D. 44.352 cm³"],
@@ -403,7 +810,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      PG – SEDANG  (Q15 – Q28)
   ═══════════════════════════════════════════════════ */
   {
-    id: 15, type: "PG", difficulty: "Sedang", category: "HOTS – Tabung",
+    id: 36, type: "PG", difficulty: "Sedang", category: "HOTS – Tabung",
     question: "Sebuah pipa air berbentuk tabung memiliki diameter luar 28 cm dan diameter dalam 20 cm dengan panjang 1 m. Volume bahan pipa tersebut adalah ... (π = 22/7)",
     options: ["A. 27.632 cm³", "B. 31.416 cm³", "C. 35.024 cm³", "D. 38.808 cm³"],
     correctAnswer: "B. 31.416 cm³",
@@ -414,7 +821,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 16, type: "PG", difficulty: "Sedang", category: "KONTEKSTUAL – Tabung",
+    id: 37, type: "PG", difficulty: "Sedang", category: "KONTEKSTUAL – Tabung",
     question: "Sebuah tangki air berbentuk tabung dengan jari-jari 70 cm dan tinggi 200 cm diisi air penuh. Jika 1 liter = 1.000 cm³, kapasitas tangki tersebut adalah ... (π = 22/7)",
     svgKey: "tabung-penampung-7-20",
     options: ["A. 2.464 liter", "B. 3.080 liter", "C. 4.928 liter", "D. 6.160 liter"],
@@ -426,7 +833,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 17, type: "PG", difficulty: "Sedang", category: "HOTS – Kerucut",
+    id: 38, type: "PG", difficulty: "Sedang", category: "HOTS – Kerucut",
     question: "Sebuah topi ulang tahun berbentuk kerucut mempunyai keliling alas 44 cm. Jika tingginya 24 cm, luas selimut topi tersebut adalah ... (π = 22/7)",
     options: ["A. 275 cm²", "B. 330 cm²", "C. 385 cm²", "D. 440 cm²"],
     correctAnswer: "C. 385 cm²",
@@ -437,7 +844,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 18, type: "PG", difficulty: "Sedang", category: "TKA – Tabung",
+    id: 39, type: "PG", difficulty: "Sedang", category: "TKA – Tabung",
     question: "Sebuah drum minyak berbentuk tabung dengan diameter 42 cm dan tinggi 100 cm. Luas permukaan drum (termasuk kedua tutupnya) adalah ... (π = 22/7)",
     options: ["A. 15.708 cm²", "B. 18.480 cm²", "C. 19.800 cm²", "D. 21.120 cm²"],
     correctAnswer: "B. 18.480 cm²",
@@ -448,7 +855,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 19, type: "PG", difficulty: "Sedang", category: "KONTEKSTUAL – Kerucut",
+    id: 40, type: "PG", difficulty: "Sedang", category: "KONTEKSTUAL – Kerucut",
     question: "Seorang pengrajin membuat cetakan es krim berbentuk kerucut dengan jari-jari 3,5 cm dan tinggi 12 cm. Volume es krim yang dapat dimasukkan ke dalam cetakan adalah ... (π = 22/7)",
     options: ["A. 154 cm³", "B. 186 cm³", "C. 198 cm³", "D. 231 cm³"],
     correctAnswer: "A. 154 cm³",
@@ -459,7 +866,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 20, type: "PG", difficulty: "Sedang", category: "ANBK – Bola",
+    id: 41, type: "PG", difficulty: "Sedang", category: "ANBK – Bola",
     question: "Sebuah bola basket memiliki keliling lingkaran terbesar 88 cm. Volume bola tersebut adalah ... (π = 22/7)",
     svgKey: "bola-14",
     options: ["A. 11.498,67 cm³", "B. 14.373,33 cm³", "C. 17.248 cm³", "D. 21.952 cm³"],
@@ -471,7 +878,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 21, type: "PG", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Gabungan",
+    id: 42, type: "PG", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Gabungan",
     question: "Sebuah mainan anak berbentuk gabungan tabung dan belahan bola dengan jari-jari keduanya 7 cm dan tinggi tabung 10 cm. Volume mainan tersebut adalah ... (π = 22/7)",
     options: ["A. 1.897,33 cm³", "B. 2.257,33 cm³", "C. 2.617,33 cm³", "D. 3.080 cm³"],
     correctAnswer: "B. 2.257,33 cm³",
@@ -482,7 +889,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 22, type: "PG", difficulty: "Sedang", category: "TKA – Tabung",
+    id: 43, type: "PG", difficulty: "Sedang", category: "TKA – Tabung",
     question: "Sebuah tabung memiliki volume 9.240 cm³ dan tinggi 30 cm. Luas permukaan tabung tersebut adalah ... (π = 22/7)",
     svgKey: "tabung-3.5-15",
     options: ["A. 1.980 cm²", "B. 2.156 cm²", "C. 2.332 cm²", "D. 2.508 cm²"],
@@ -494,7 +901,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 23, type: "PG", difficulty: "Sedang", category: "KONTEKSTUAL – Kerucut",
+    id: 44, type: "PG", difficulty: "Sedang", category: "KONTEKSTUAL – Kerucut",
     question: "Sebuah corong berbentuk kerucut mempunyai jari-jari 21 cm dan tinggi 28 cm. Corong tersebut dapat menampung air sebanyak ... (π = 22/7)",
     svgKey: "kerucut-21-28",
     options: ["A. 11.088 cm³", "B. 12.936 cm³", "C. 13.860 cm³", "D. 15.400 cm³"],
@@ -506,7 +913,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 24, type: "PG", difficulty: "Sedang", category: "HOTS – Bola",
+    id: 45, type: "PG", difficulty: "Sedang", category: "HOTS – Bola",
     question: "Jika volume sebuah bola adalah 38.808 cm³, jari-jari bola tersebut adalah ... (π = 22/7)",
     svgKey: "bola-21",
     options: ["A. 14 cm", "B. 21 cm", "C. 28 cm", "D. 35 cm"],
@@ -518,7 +925,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 25, type: "PG", difficulty: "Sedang", category: "UN – Gabungan",
+    id: 46, type: "PG", difficulty: "Sedang", category: "UN – Gabungan",
     question: "Sebuah pensil berbentuk gabungan tabung dan kerucut. Jari-jari tabung = kerucut = 1 cm, tinggi tabung 15 cm, tinggi kerucut 2 cm. Volume pensil tersebut adalah ... (π = 3,14)",
     options: ["A. 49,21 cm³", "B. 51,31 cm³", "C. 53,38 cm³", "D. 55,28 cm³"],
     correctAnswer: "C. 53,38 cm³",
@@ -529,7 +936,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 26, type: "PG", difficulty: "Sedang", category: "ANBK – Bola",
+    id: 47, type: "PG", difficulty: "Sedang", category: "ANBK – Bola",
     question: "Perbandingan jari-jari dua bola adalah 1 : 3. Perbandingan volume kedua bola tersebut adalah ...",
     options: ["A. 1 : 3", "B. 1 : 6", "C. 1 : 9", "D. 1 : 27"],
     correctAnswer: "D. 1 : 27",
@@ -540,7 +947,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 27, type: "PG", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Tabung",
+    id: 48, type: "PG", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Tabung",
     question: "Sebuah kolam renang berbentuk tabung berdiameter 14 m dan kedalaman 2 m. Biaya mengisi air kolam adalah Rp500 per liter. Biaya mengisi kolam penuh adalah ... (π = 22/7, 1 m³ = 1.000 liter)",
     options: ["A. Rp154.000.000", "B. Rp176.000.000", "C. Rp198.000.000", "D. Rp220.000.000"],
     correctAnswer: "A. Rp154.000.000",
@@ -551,7 +958,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 28, type: "PG", difficulty: "Sedang", category: "TKA – Kerucut",
+    id: 49, type: "PG", difficulty: "Sedang", category: "TKA – Kerucut",
     question: "Sebuah kerucut memiliki luas permukaan total 660 cm². Jika garis pelukisnya 15 cm, jari-jari alasnya adalah ... (π = 22/7)",
     options: ["A. 7 cm", "B. 10 cm", "C. 14 cm", "D. 21 cm"],
     correctAnswer: "B. 10 cm",
@@ -566,7 +973,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      PG – SULIT  (Q29 – Q40)
   ═══════════════════════════════════════════════════ */
   {
-    id: 29, type: "PG", difficulty: "Sulit", category: "HOTS – Gabungan",
+    id: 50, type: "PG", difficulty: "Sulit", category: "HOTS – Gabungan",
     question: "Sebuah tugu berbentuk gabungan tabung dan kerucut. Tabung berdiameter 14 cm dan tinggi 20 cm, kerucut bertinggi 24 cm dengan jari-jari sama. Volume tugu tersebut adalah ... (π = 22/7)",
     svgKey: "gabung-tk-7-20-24",
     options: ["A. 4.312 cm³", "B. 5.082 cm³", "C. 5.852 cm³", "D. 6.160 cm³"],
@@ -578,7 +985,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 30, type: "PG", difficulty: "Sulit", category: "HOTS – Tabung",
+    id: 51, type: "PG", difficulty: "Sulit", category: "HOTS – Tabung",
     question: "Sebuah tabung memiliki perbandingan jari-jari dan tinggi 1 : 2. Jika volume tabung 2.156 cm³, tinggi tabung tersebut adalah ... (π = 22/7)",
     options: ["A. 7 cm", "B. 14 cm", "C. 21 cm", "D. 28 cm"],
     correctAnswer: "B. 14 cm",
@@ -589,7 +996,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 31, type: "PG", difficulty: "Sulit", category: "HOTS – Bola",
+    id: 52, type: "PG", difficulty: "Sulit", category: "HOTS – Bola",
     question: "Sebuah bola dimasukkan ke dalam kubus yang pas (sisi kubus = diameter bola). Jika jari-jari bola 7 cm, selisih volume kubus dan bola adalah ... (π = 22/7)",
     svgKey: "bola-7",
     options: ["A. 1.094,67 cm³", "B. 1.238,67 cm³", "C. 1.282,67 cm³", "D. 1.330,67 cm³"],
@@ -601,7 +1008,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 32, type: "PG", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Tabung",
+    id: 53, type: "PG", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Tabung",
     question: "Sebuah perusahaan membuat kaleng susu berbentuk tabung tanpa tutup atas. Diameter 14 cm dan tinggi 20 cm. Jika harga bahan plat adalah Rp2.000/cm², biaya bahan untuk membuat 100 kaleng adalah ... (π = 22/7)",
     svgKey: "tabung-tanpa-atap-10-30",
     options: ["A. Rp105.280.000", "B. Rp113.960.000", "C. Rp118.800.000", "D. Rp121.440.000"],
@@ -613,7 +1020,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 33, type: "PG", difficulty: "Sulit", category: "HOTS – Kerucut",
+    id: 54, type: "PG", difficulty: "Sulit", category: "HOTS – Kerucut",
     question: "Sebuah kerucut dipotong sejajar alasnya sehingga menghasilkan kerucut kecil dan bangun frustum (potongan bawah). Jika kerucut asli memiliki r = 12 cm, t = 20 cm, dan kerucut kecil memiliki r = 6 cm, volume frustum adalah ... (π = 3,14)",
     options: ["A. 2.637,6 cm³", "B. 3.166,7 cm³", "C. 3.518,0 cm³", "D. 4.222,4 cm³"],
     correctAnswer: "A. 2.637,6 cm³",
@@ -624,7 +1031,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 34, type: "PG", difficulty: "Sulit", category: "TKA – Bola",
+    id: 55, type: "PG", difficulty: "Sulit", category: "TKA – Bola",
     question: "Bola besi dengan jari-jari 6 cm dilebur dan dicetak menjadi kerucut dengan jari-jari alas 6 cm. Tinggi kerucut yang terbentuk adalah ... (π = 3,14)",
     options: ["A. 16 cm", "B. 20 cm", "C. 24 cm", "D. 32 cm"],
     correctAnswer: "C. 24 cm",
@@ -635,7 +1042,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 35, type: "PG", difficulty: "Sulit", category: "HOTS – Gabungan",
+    id: 56, type: "PG", difficulty: "Sulit", category: "HOTS – Gabungan",
     question: "Sebuah ember berbentuk tabung berisi air setengahnya. Ember memiliki diameter 28 cm dan tinggi 30 cm. Ke dalam ember dimasukkan bola besi jari-jari 7 cm hingga terendam penuh. Air yang tumpah adalah ... (π = 22/7)",
     options: ["A. 1.232 cm³", "B. 1.437 cm³", "C. 1.540 cm³", "D. 1.848 cm³"],
     correctAnswer: "B. 1.437 cm³",
@@ -646,7 +1053,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 36, type: "PG", difficulty: "Sulit", category: "ANBK – Tabung",
+    id: 57, type: "PG", difficulty: "Sulit", category: "ANBK – Tabung",
     question: "Dua tabung memiliki volume sama. Tabung A berdiameter 14 cm dan tinggi 20 cm. Jika tabung B memiliki tinggi 5 cm, diameter tabung B adalah ... (π = 22/7)",
     options: ["A. 28 cm", "B. 35 cm", "C. 42 cm", "D. 56 cm"],
     correctAnswer: "D. 56 cm",
@@ -657,7 +1064,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 37, type: "PG", difficulty: "Sulit", category: "HOTS – Kerucut",
+    id: 58, type: "PG", difficulty: "Sulit", category: "HOTS – Kerucut",
     question: "Sebuah kerucut memiliki luas selimut tiga kali luas alasnya. Jika jari-jarinya 7 cm, garis pelukis dan volume kerucut adalah ...",
     options: ["A. s = 21 cm; V = 4.312 cm³", "B. s = 21 cm; V = 3.234 cm³", "C. s = 28 cm; V = 4.312 cm³", "D. s = 28 cm; V = 3.234 cm³"],
     correctAnswer: "A. s = 21 cm; V = 4.312 cm³",
@@ -668,7 +1075,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 38, type: "PG", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Bola",
+    id: 59, type: "PG", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Bola",
     question: "Sebuah perusahaan cat memiliki bola logam padat berdiameter 42 cm yang akan dicat seluruh permukaannya. Jika 1 kg cat dapat menutup 2.100 cm², berapa kg cat yang dibutuhkan? (π = 22/7)",
     svgKey: "bola-21",
     options: ["A. 2,64 kg", "B. 3,52 kg", "C. 4,40 kg", "D. 5,28 kg"],
@@ -680,7 +1087,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 39, type: "PG", difficulty: "Sulit", category: "TKA – Gabungan",
+    id: 60, type: "PG", difficulty: "Sulit", category: "TKA – Gabungan",
     question: "Sebuah silo (penyimpan gandum) berbentuk gabungan tabung dan belahan bola di bagian atas. Jari-jari 7 m, tinggi tabung 15 m. Volume total silo adalah ... (π = 22/7)",
     options: ["A. 2.669,33 m³", "B. 2.977,33 m³", "C. 3.080 m³", "D. 3.388 m³"],
     correctAnswer: "A. 2.669,33 m³",
@@ -691,7 +1098,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 40, type: "PG", difficulty: "Sulit", category: "HOTS – Bola",
+    id: 61, type: "PG", difficulty: "Sulit", category: "HOTS – Bola",
     question: "Tiga bola dengan jari-jari 3 cm, 4 cm, dan 5 cm dilebur menjadi satu bola besar. Jari-jari bola besar tersebut adalah ...",
     options: ["A. 5 cm", "B. 6 cm", "C. 7 cm", "D. 12 cm"],
     correctAnswer: "B. 6 cm",
@@ -706,7 +1113,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      MCMA – MUDAH  (Q41 – Q50)
   ═══════════════════════════════════════════════════ */
   {
-    id: 41, type: "MCMA", difficulty: "Mudah", category: "UN – Tabung",
+    id: 62, type: "MCMA", difficulty: "Mudah", category: "UN – Tabung",
     question: "Perhatikan pernyataan berikut tentang tabung dengan jari-jari 7 cm dan tinggi 10 cm (π = 22/7). Pilihlah pernyataan yang BENAR!",
     svgKey: "tabung-7-10",
     statements: [
@@ -729,7 +1136,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 42, type: "MCMA", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 63, type: "MCMA", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Sebuah kerucut memiliki r = 6 cm, t = 8 cm, s = 10 cm. Pilihlah pernyataan yang BENAR! (π = 22/7)",
     svgKey: "kerucut-6-8",
     statements: [
@@ -752,7 +1159,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 43, type: "MCMA", difficulty: "Mudah", category: "UN – Bola",
+    id: 64, type: "MCMA", difficulty: "Mudah", category: "UN – Bola",
     question: "Sebuah bola memiliki jari-jari 14 cm. Pilihlah pernyataan yang BENAR! (π = 22/7)",
     svgKey: "bola-14",
     statements: [
@@ -775,7 +1182,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 44, type: "MCMA", difficulty: "Mudah", category: "ANBK – Tabung",
+    id: 65, type: "MCMA", difficulty: "Mudah", category: "ANBK – Tabung",
     question: "Tabung A memiliki r = 7 cm, t = 10 cm dan Tabung B memiliki r = 14 cm, t = 10 cm. Pilihlah pernyataan yang BENAR! (π = 22/7)",
     statements: [
       { text: "Volume B adalah 4 kali volume A", isCorrect: true },
@@ -797,7 +1204,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 45, type: "MCMA", difficulty: "Mudah", category: "KONTEKSTUAL – Kerucut",
+    id: 66, type: "MCMA", difficulty: "Mudah", category: "KONTEKSTUAL – Kerucut",
     question: "Sebuah topi ulang tahun berbentuk kerucut dengan r = 7 cm dan s = 25 cm. Pilihlah pernyataan yang BENAR!",
     statements: [
       { text: "Luas selimut topi = 550 cm²", isCorrect: true },
@@ -819,7 +1226,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 46, type: "MCMA", difficulty: "Mudah", category: "UN – Bola",
+    id: 67, type: "MCMA", difficulty: "Mudah", category: "UN – Bola",
     question: "Pernyataan yang benar tentang hubungan rumus luas permukaan dan volume bola adalah ...",
     statements: [
       { text: "Luas permukaan bola = 4πr²", isCorrect: true },
@@ -841,7 +1248,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 47, type: "MCMA", difficulty: "Mudah", category: "ANBK – Tabung",
+    id: 68, type: "MCMA", difficulty: "Mudah", category: "ANBK – Tabung",
     question: "Tabung memiliki volume 4.620 cm³ dan luas alas 154 cm² (π = 22/7). Pilihlah pernyataan yang BENAR!",
     statements: [
       { text: "Jari-jari tabung = 7 cm", isCorrect: true },
@@ -863,7 +1270,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 48, type: "MCMA", difficulty: "Mudah", category: "KONTEKSTUAL – Bola",
+    id: 69, type: "MCMA", difficulty: "Mudah", category: "KONTEKSTUAL – Bola",
     question: "Sebuah ember berbentuk setengah bola dengan diameter 28 cm (π = 22/7). Pilihlah pernyataan yang BENAR!",
     svgKey: "belaha-bola-14",
     statements: [
@@ -886,7 +1293,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 49, type: "MCMA", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 70, type: "MCMA", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Kerucut memiliki r = 10 cm dan t = 24 cm (π = 22/7). Pilih pernyataan yang BENAR!",
     svgKey: "kerucut-10-24",
     statements: [
@@ -909,7 +1316,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 50, type: "MCMA", difficulty: "Mudah", category: "KONTEKSTUAL – Tabung",
+    id: 71, type: "MCMA", difficulty: "Mudah", category: "KONTEKSTUAL – Tabung",
     question: "Kaleng cat berbentuk tabung dengan diameter 28 cm dan tinggi 30 cm (π = 22/7). Pilih pernyataan yang BENAR!",
     statements: [
       { text: "Volume kaleng = 18.480 cm³", isCorrect: true },
@@ -935,7 +1342,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      MCMA – SEDANG  (Q51 – Q64)
   ═══════════════════════════════════════════════════ */
   {
-    id: 51, type: "MCMA", difficulty: "Sedang", category: "HOTS – Gabungan",
+    id: 72, type: "MCMA", difficulty: "Sedang", category: "HOTS – Gabungan",
     question: "Sebuah objek berbentuk gabungan tabung dan kerucut (r = 7 cm, t_tabung = 20 cm, t_kerucut = 24 cm). Pilih pernyataan yang BENAR! (π = 22/7)",
     svgKey: "gabung-tk-7-20-24",
     statements: [
@@ -958,7 +1365,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 52, type: "MCMA", difficulty: "Sedang", category: "TKA – Bola",
+    id: 73, type: "MCMA", difficulty: "Sedang", category: "TKA – Bola",
     question: "Bola A memiliki r = 3 cm dan Bola B memiliki r = 6 cm. Pilih pernyataan yang BENAR! (π = 3,14)",
     statements: [
       { text: "Perbandingan luas permukaan A : B = 1 : 4", isCorrect: true },
@@ -980,7 +1387,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 53, type: "MCMA", difficulty: "Sedang", category: "KONTEKSTUAL – Tabung",
+    id: 74, type: "MCMA", difficulty: "Sedang", category: "KONTEKSTUAL – Tabung",
     question: "Sebuah tangki air berbentuk tabung (r = 70 cm, t = 100 cm) diisi dari pipa dengan debit 10 liter/menit (π = 22/7). Pilih pernyataan yang BENAR!",
     statements: [
       { text: "Volume tangki = 1.540.000 cm³", isCorrect: true },
@@ -1002,7 +1409,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 54, type: "MCMA", difficulty: "Sedang", category: "ANBK – Kerucut",
+    id: 75, type: "MCMA", difficulty: "Sedang", category: "ANBK – Kerucut",
     question: "Dua kerucut P (r=7, t=24) dan Q (r=14, t=48) dibandingkan (π=22/7). Pilih pernyataan yang BENAR!",
     statements: [
       { text: "Garis pelukis P = 25 cm", isCorrect: true },
@@ -1024,7 +1431,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 55, type: "MCMA", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Bola",
+    id: 76, type: "MCMA", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Bola",
     question: "Sebuah bola logam berdiameter 14 cm dimasukkan ke dalam wadah berisi air. Pilih pernyataan yang BENAR! (π = 22/7)",
     svgKey: "bola-7",
     statements: [
@@ -1047,7 +1454,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 56, type: "MCMA", difficulty: "Sedang", category: "HOTS – Tabung",
+    id: 77, type: "MCMA", difficulty: "Sedang", category: "HOTS – Tabung",
     question: "Sebuah tabung dipotong menjadi 3 bagian sama tinggi. Tabung asli: r = 7 cm, t = 30 cm (π = 22/7). Pilih pernyataan yang BENAR!",
     svgKey: "tabung-7-10",
     statements: [
@@ -1070,7 +1477,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 57, type: "MCMA", difficulty: "Sedang", category: "TKA – Bola",
+    id: 78, type: "MCMA", difficulty: "Sedang", category: "TKA – Bola",
     question: "Bola dilebur dan dibentuk ulang. Bola asal r = 6 cm. Pilih pernyataan yang BENAR! (π = 3,14)",
     statements: [
       { text: "Volume bola asal = 904,32 cm³", isCorrect: true },
@@ -1092,7 +1499,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 58, type: "MCMA", difficulty: "Sedang", category: "ANBK – Tabung",
+    id: 79, type: "MCMA", difficulty: "Sedang", category: "ANBK – Tabung",
     question: "Sebuah kaleng susu berbentuk tabung memiliki luas permukaan 1.188 cm² dan jari-jari 7 cm (π = 22/7). Pilih pernyataan yang BENAR!",
     statements: [
       { text: "Luas selimut = 880 cm²", isCorrect: true },
@@ -1116,7 +1523,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 59, type: "MCMA", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Kerucut",
+    id: 80, type: "MCMA", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Kerucut",
     question: "Sebuah pabrik membuat wadah es krim kerucut (r = 3,5 cm, t = 12 cm). Mereka memproduksi 1.000 wadah/hari (π = 22/7). Pilih pernyataan yang BENAR!",
     statements: [
       { text: "Volume 1 wadah = 154 cm³", isCorrect: true },
@@ -1138,7 +1545,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 60, type: "MCMA", difficulty: "Sedang", category: "HOTS – Bola",
+    id: 81, type: "MCMA", difficulty: "Sedang", category: "HOTS – Bola",
     question: "Jari-jari bola diperbesar 50%. Pilih pernyataan yang BENAR!",
     statements: [
       { text: "Jari-jari baru = 1,5r", isCorrect: true },
@@ -1160,7 +1567,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 61, type: "MCMA", difficulty: "Sedang", category: "KONTEKSTUAL – Tabung",
+    id: 82, type: "MCMA", difficulty: "Sedang", category: "KONTEKSTUAL – Tabung",
     question: "Sebuah kolam berbentuk tabung memiliki diameter 7 m dan kedalaman 2 m. Kolam diisi air dengan pompa 500 liter/jam (π = 22/7). Pilih pernyataan yang BENAR!",
     statements: [
       { text: "Volume kolam = 77.000 liter", isCorrect: true },
@@ -1183,7 +1590,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 62, type: "MCMA", difficulty: "Sedang", category: "TKA – Kerucut",
+    id: 83, type: "MCMA", difficulty: "Sedang", category: "TKA – Kerucut",
     question: "Pernyataan yang benar tentang luas permukaan kerucut dengan r = 10 cm dan s = 26 cm (π = 22/7) adalah ...",
     statements: [
       { text: "Luas selimut = 817,14 cm²", isCorrect: true },
@@ -1205,7 +1612,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 63, type: "MCMA", difficulty: "Sedang", category: "ANBK – Gabungan",
+    id: 84, type: "MCMA", difficulty: "Sedang", category: "ANBK – Gabungan",
     question: "Mainan berbentuk belahan bola yang bertumpuk dengan tabung (r=7 cm, t_tabung=15 cm) (π=22/7). Pilih pernyataan BENAR!",
     statements: [
       { text: "Volume tabung = 2.310 cm³", isCorrect: true },
@@ -1227,7 +1634,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 64, type: "MCMA", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Tabung",
+    id: 85, type: "MCMA", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Tabung",
     question: "Sebuah pabrik minuman menggunakan kaleng berbentuk tabung (r=4 cm, t=12 cm). Mereka membuat 10.000 kaleng/hari dari lembaran aluminium seharga Rp5/cm² (π=3,14). Pilih pernyataan BENAR!",
     statements: [
       { text: "Luas permukaan 1 kaleng = 401,92 cm²", isCorrect: true },
@@ -1253,7 +1660,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      MCMA – SULIT  (Q65 – Q70)
   ═══════════════════════════════════════════════════ */
   {
-    id: 65, type: "MCMA", difficulty: "Sulit", category: "HOTS – Gabungan",
+    id: 86, type: "MCMA", difficulty: "Sulit", category: "HOTS – Gabungan",
     question: "Bola besi r = 12 cm dimasukkan ke dalam tabung r = 12 cm, t = 24 cm (π = 3,14). Pilih pernyataan BENAR!",
     statements: [
       { text: "Volume bola = 7.234,56 cm³", isCorrect: true },
@@ -1275,7 +1682,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 66, type: "MCMA", difficulty: "Sulit", category: "HOTS – Kerucut",
+    id: 87, type: "MCMA", difficulty: "Sulit", category: "HOTS – Kerucut",
     question: "Kerucut X dan Y sebangun dengan skala 1:2. r_X = 7, t_X = 24 cm (π=22/7). Pilih pernyataan BENAR!",
     statements: [
       { text: "r_Y = 14 cm, t_Y = 48 cm", isCorrect: true },
@@ -1297,7 +1704,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 67, type: "MCMA", difficulty: "Sulit", category: "TKA – Bola",
+    id: 88, type: "MCMA", difficulty: "Sulit", category: "TKA – Bola",
     question: "Bola besar r = 6 cm dipotong tepat di tengah menjadi 2 belahan sama besar (π = 3,14). Pilih pernyataan BENAR!",
     statements: [
       { text: "Volume setiap belahan = 452,16 cm³", isCorrect: true },
@@ -1319,7 +1726,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 68, type: "MCMA", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Gabungan",
+    id: 89, type: "MCMA", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Gabungan",
     question: "Sebuah silo berbentuk tabung + belahan bola (r = 7 m, t_tabung = 14 m). Total biaya cat Rp10.000/m² (π = 22/7). Pilih pernyataan BENAR!",
     statements: [
       { text: "Luas selimut tabung = 616 m²", isCorrect: true },
@@ -1341,7 +1748,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 69, type: "MCMA", difficulty: "Sulit", category: "HOTS – Tabung",
+    id: 90, type: "MCMA", difficulty: "Sulit", category: "HOTS – Tabung",
     question: "Tabung terbuka (tanpa tutup atas) r=10 cm, t=30 cm dibanding tabung tertutup dengan ukuran sama (π=3,14). Pilih pernyataan BENAR!",
     svgKey: "tabung-tanpa-atap-10-30",
     statements: [
@@ -1364,7 +1771,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 70, type: "MCMA", difficulty: "Sulit", category: "ANBK – Bola",
+    id: 91, type: "MCMA", difficulty: "Sulit", category: "ANBK – Bola",
     question: "Bola diperbesar 3 kali jari-jarinya. Pilih pernyataan BENAR!",
     statements: [
       { text: "Luas permukaan baru = 9 kali semula", isCorrect: true },
@@ -1390,7 +1797,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      BENAR/SALAH – MUDAH  (Q71 – Q80)
   ═══════════════════════════════════════════════════ */
   {
-    id: 71, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Tabung",
+    id: 92, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Tabung",
     question: "Tentukan BENAR atau SALAH setiap pernyataan berikut tentang tabung dengan r = 7 cm dan t = 10 cm (π = 22/7):",
     svgKey: "tabung-7-10",
     statements: [
@@ -1411,7 +1818,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 72, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 93, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Tentukan BENAR atau SALAH setiap pernyataan berikut tentang kerucut dengan r = 6 cm dan t = 8 cm:",
     svgKey: "kerucut-6-8",
     statements: [
@@ -1432,7 +1839,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 73, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Bola",
+    id: 94, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Bola",
     question: "Tentukan BENAR atau SALAH setiap pernyataan berikut tentang bola dengan diameter 14 cm (π = 22/7):",
     svgKey: "bola-7",
     statements: [
@@ -1453,7 +1860,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 74, type: "Benar/Salah", difficulty: "Mudah", category: "ANBK – Kerucut",
+    id: 95, type: "Benar/Salah", difficulty: "Mudah", category: "ANBK – Kerucut",
     question: "Tentukan BENAR atau SALAH pernyataan berikut tentang kerucut (π = 22/7):",
     statements: [
       { text: "Jika r = 7 dan s = 25, maka t = 24 cm", isCorrect: true },
@@ -1473,7 +1880,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 75, type: "Benar/Salah", difficulty: "Mudah", category: "KONTEKSTUAL – Tabung",
+    id: 96, type: "Benar/Salah", difficulty: "Mudah", category: "KONTEKSTUAL – Tabung",
     question: "Sebuah kolam renang berbentuk tabung dengan r = 3,5 m dan t = 1,5 m (π = 22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume kolam = 57,75 m³", isCorrect: true },
@@ -1493,7 +1900,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 76, type: "Benar/Salah", difficulty: "Mudah", category: "ANBK – Bola",
+    id: 97, type: "Benar/Salah", difficulty: "Mudah", category: "ANBK – Bola",
     question: "Tentukan BENAR atau SALAH pernyataan berikut:",
     statements: [
       { text: "Luas permukaan bola = 4 × luas lingkaran besar", isCorrect: true },
@@ -1513,7 +1920,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 77, type: "Benar/Salah", difficulty: "Mudah", category: "LITERASI MATEMATIKA – Tabung",
+    id: 98, type: "Benar/Salah", difficulty: "Mudah", category: "LITERASI MATEMATIKA – Tabung",
     question: "Sebuah botol minum berbentuk tabung dengan diameter 7 cm dan tinggi 20 cm (π = 22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume botol = 770 cm³", isCorrect: true },
@@ -1533,7 +1940,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 78, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Kerucut",
+    id: 99, type: "Benar/Salah", difficulty: "Mudah", category: "UN – Kerucut",
     question: "Kerucut dengan luas permukaan 550 cm² dan r = 7 cm (π = 22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Garis pelukis kerucut = 18 cm", isCorrect: false },
@@ -1554,7 +1961,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 79, type: "Benar/Salah", difficulty: "Mudah", category: "ANBK – Bola",
+    id: 100, type: "Benar/Salah", difficulty: "Mudah", category: "ANBK – Bola",
     question: "Sebuah bola dengan volume 4.851 cm³ (π = 22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Jari-jari bola = 10,5 cm", isCorrect: true },
@@ -1574,7 +1981,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 80, type: "Benar/Salah", difficulty: "Mudah", category: "KONTEKSTUAL – Kerucut",
+    id: 101, type: "Benar/Salah", difficulty: "Mudah", category: "KONTEKSTUAL – Kerucut",
     question: "Seorang petani menggunakan ember berbentuk kerucut terbalik (r = 21 cm, t = 28 cm) untuk menyiram (π = 22/7). Tentukan BENAR atau SALAH:",
     svgKey: "kerucut-21-28",
     statements: [
@@ -1599,7 +2006,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      BENAR/SALAH – SEDANG  (Q81 – Q90)
   ═══════════════════════════════════════════════════ */
   {
-    id: 81, type: "Benar/Salah", difficulty: "Sedang", category: "HOTS – Tabung",
+    id: 102, type: "Benar/Salah", difficulty: "Sedang", category: "HOTS – Tabung",
     question: "Tabung A (r=7, t=20) dan Tabung B (r=14, t=5). Tentukan BENAR atau SALAH (π=22/7):",
     statements: [
       { text: "Volume A = Volume B", isCorrect: true },
@@ -1619,7 +2026,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 82, type: "Benar/Salah", difficulty: "Sedang", category: "KONTEKSTUAL – Bola",
+    id: 103, type: "Benar/Salah", difficulty: "Sedang", category: "KONTEKSTUAL – Bola",
     question: "Sebuah planet (model bola) berdiameter 12 cm dibuat dari tanah liat (π = 3,14). Tentukan BENAR atau SALAH:",
     svgKey: "bola-14",
     statements: [
@@ -1640,7 +2047,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 83, type: "Benar/Salah", difficulty: "Sedang", category: "TKA – Kerucut",
+    id: 104, type: "Benar/Salah", difficulty: "Sedang", category: "TKA – Kerucut",
     question: "Sebuah tenda berbentuk kerucut dengan keliling alas 88 m dan tinggi 15 m (π = 22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Jari-jari tenda = 14 m", isCorrect: true },
@@ -1660,7 +2067,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 84, type: "Benar/Salah", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Gabungan",
+    id: 105, type: "Benar/Salah", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Gabungan",
     question: "Sebuah menara air (gabungan tabung dan belahan bola di atas): r = 7 m, t_tabung = 10 m (π = 22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume tabung = 1.540 m³", isCorrect: true },
@@ -1680,7 +2087,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 85, type: "Benar/Salah", difficulty: "Sedang", category: "ANBK – Tabung",
+    id: 106, type: "Benar/Salah", difficulty: "Sedang", category: "ANBK – Tabung",
     question: "Jari-jari tabung diperbesar 2 kali, tinggi tetap. Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume menjadi 4 kali semula", isCorrect: true },
@@ -1700,7 +2107,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 86, type: "Benar/Salah", difficulty: "Sedang", category: "HOTS – Kerucut",
+    id: 107, type: "Benar/Salah", difficulty: "Sedang", category: "HOTS – Kerucut",
     question: "Kerucut dipotong sejajar alas pada ketinggian t/2. Potongan atas membentuk kerucut kecil. Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Jari-jari kerucut kecil = r/2", isCorrect: true },
@@ -1720,7 +2127,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 87, type: "Benar/Salah", difficulty: "Sedang", category: "KONTEKSTUAL – Bola",
+    id: 108, type: "Benar/Salah", difficulty: "Sedang", category: "KONTEKSTUAL – Bola",
     question: "Sebuah mesin pengecatan otomatis dapat mengecat 500 cm²/menit. Ia mengecat bola-bola dengan r = 7 cm (π = 22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Luas 1 bola = 616 cm²", isCorrect: true },
@@ -1740,7 +2147,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 88, type: "Benar/Salah", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Tabung",
+    id: 109, type: "Benar/Salah", difficulty: "Sedang", category: "LITERASI MATEMATIKA – Tabung",
     question: "Produsen minuman membuat 2 ukuran kaleng tabung: Kaleng A (r=4, t=10 cm) dan Kaleng B (r=8, t=10 cm) (π=3,14). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume B = 4 × Volume A", isCorrect: true },
@@ -1760,7 +2167,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 89, type: "Benar/Salah", difficulty: "Sedang", category: "TKA – Gabungan",
+    id: 110, type: "Benar/Salah", difficulty: "Sedang", category: "TKA – Gabungan",
     question: "Sebuah mainan berbentuk bola besar r=7 cm yang di dalamnya ada rongga berbentuk kerucut (r=7, t=24) (π=22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume bola = 1.437,33 cm³", isCorrect: true },
@@ -1780,7 +2187,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 90, type: "Benar/Salah", difficulty: "Sedang", category: "ANBK – Bola",
+    id: 111, type: "Benar/Salah", difficulty: "Sedang", category: "ANBK – Bola",
     question: "Perbandingan jari-jari dua bola adalah 2:3. Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Perbandingan luas permukaan = 4:9", isCorrect: true },
@@ -1804,7 +2211,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
      BENAR/SALAH – SULIT  (Q91 – Q100)
   ═══════════════════════════════════════════════════ */
   {
-    id: 91, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Bola",
+    id: 112, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Bola",
     question: "Tiga bola dengan r=3 cm, r=4 cm, dan r=5 cm dilebur menjadi satu bola baru (π=3,14). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume total ketiga bola = 904,32 cm³", isCorrect: false },
@@ -1825,7 +2232,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 92, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Tabung",
+    id: 113, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Tabung",
     question: "Sebuah tabung (r=6 cm, t=10 cm) diisi dengan bola-bola kecil r=3 cm (π=3,14). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume tabung = 1.130,4 cm³", isCorrect: true },
@@ -1845,7 +2252,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 93, type: "Benar/Salah", difficulty: "Sulit", category: "TKA – Kerucut",
+    id: 114, type: "Benar/Salah", difficulty: "Sulit", category: "TKA – Kerucut",
     question: "Kerucut dengan r=10 cm, t=24 cm dimasukkan ke dalam tabung dengan r=10 cm, t=24 cm (π=3,14). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume kerucut = (1/3) volume tabung", isCorrect: true },
@@ -1865,7 +2272,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 94, type: "Benar/Salah", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Gabungan",
+    id: 115, type: "Benar/Salah", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Gabungan",
     question: "Tangki air (tabung r=7 m, t=20 m) + bola pelampung r=7 cm dalam tangki. Tentukan BENAR atau SALAH (π=22/7):",
     statements: [
       { text: "Volume tangki = 3.080 m³", isCorrect: true },
@@ -1885,7 +2292,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 95, type: "Benar/Salah", difficulty: "Sulit", category: "ANBK – Bola",
+    id: 116, type: "Benar/Salah", difficulty: "Sulit", category: "ANBK – Bola",
     question: "Sebuah bola es krim diletakkan di atas kerucut (r=3,5 cm, t=12 cm, s=12,5 cm). Es krim meluber jika volumenya > volume kerucut. Tentukan BENAR atau SALAH (π=22/7):",
     statements: [
       { text: "Volume kerucut = 154 cm³", isCorrect: true },
@@ -1905,7 +2312,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 96, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Tabung",
+    id: 117, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Tabung",
     question: "Jika tinggi tabung diperbesar 4 kali dan jari-jari diperkecil 2 kali, tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume baru = volume asal", isCorrect: true },
@@ -1925,7 +2332,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 97, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Kerucut",
+    id: 118, type: "Benar/Salah", difficulty: "Sulit", category: "HOTS – Kerucut",
     question: "Kerucut dengan luas selimut = 3 × luas alas (r=7 cm, π=22/7). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Garis pelukis = 21 cm", isCorrect: true },
@@ -1945,7 +2352,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 98, type: "Benar/Salah", difficulty: "Sulit", category: "TKA – Gabungan",
+    id: 119, type: "Benar/Salah", difficulty: "Sulit", category: "TKA – Gabungan",
     question: "Bola baja r=3 cm dilebur dan dibentuk kerucut dengan r_kerucut=3 cm dan tabung dengan r_tabung=3 cm, t_tabung=4 cm. Sisa bahan menjadi pelat (π=3,14). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume bola = 113,04 cm³", isCorrect: true },
@@ -1965,7 +2372,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 99, type: "Benar/Salah", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Bola",
+    id: 120, type: "Benar/Salah", difficulty: "Sulit", category: "LITERASI MATEMATIKA – Bola",
     question: "Sebuah planet mainan (bola r=21 cm) terbuat dari karet setebal 1 cm. Tentukan BENAR atau SALAH (π=22/7):",
     svgKey: "bola-21",
     statements: [
@@ -1986,7 +2393,7 @@ const soalBangunRuangSisiLengkung: Question[] = [
     }
   },
   {
-    id: 100, type: "Benar/Salah", difficulty: "Sulit", category: "ANBK – Gabungan",
+    id: 121, type: "Benar/Salah", difficulty: "Sulit", category: "ANBK – Gabungan",
     question: "Sebuah objek berbentuk kerucut terbalik di atas belahan bola (r sama = 10 cm, t_kerucut = 24 cm) (π=3,14). Tentukan BENAR atau SALAH:",
     statements: [
       { text: "Volume belahan bola = 2.093,33 cm³", isCorrect: true },
