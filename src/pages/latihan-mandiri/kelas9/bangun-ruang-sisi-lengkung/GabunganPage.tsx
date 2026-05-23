@@ -776,8 +776,8 @@ const GabunganPage = () => {
               { label: "Tabung + Kerucut (r,t sama)", formula: "V_{\\text{ker}} = \\tfrac{1}{3}\\,V_{\\text{tab}}" },
               { label: "½ Bola (r)", formula: "V_{\\frac{1}{2}\\text{bola}} = \\tfrac{2}{3}\\pi r^3" },
             ].map(f => (
-              <div key={f.label} className="bg-white/5 rounded-lg px-3 py-2 flex gap-3 items-center">
-                <span className="text-emerald-400 font-bold shrink-0 w-44 text-[11px]">{f.label}</span>
+              <div key={f.label} className="bg-white/5 rounded-lg px-3 py-2 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                <span className="text-emerald-400 font-bold text-[11px] sm:shrink-0 sm:w-44">{f.label}</span>
                 <span className="text-white/80 text-xs"><InlineMath math={f.formula} /></span>
               </div>
             ))}
