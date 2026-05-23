@@ -7,25 +7,33 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
 type OptionKey = "A" | "B" | "C" | "D";
+type Cat = "unsur" | "lp" | "vol" | "app";
 type Part = { label: string; math?: string; text?: string };
 type Q = {
-  n: number; title: string;
+  n: number; title: string; cat: Cat;
   content?: string; math?: string;
   parts?: Part[];
   diagram?: React.ReactNode;
 };
 type QMC = {
-  n: number; title: string;
+  n: number; title: string; cat: Cat;
   content: string;
   diagram?: React.ReactNode;
   options: { key: OptionKey; text: string }[];
   answer: OptionKey;
 };
 
-const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
+const CAT_LABELS: Record<Cat, { icon: string; label: string; color: string }> = {
+  unsur: { icon: "🔵", label: "Unsur Bola", color: "text-sky-400 border-sky-500/30 bg-sky-500/10" },
+  lp:    { icon: "📐", label: "Luas Permukaan", color: "text-violet-400 border-violet-500/30 bg-violet-500/10" },
+  vol:   { icon: "📦", label: "Volume", color: "text-indigo-400 border-indigo-500/30 bg-indigo-500/10" },
+  app:   { icon: "🌍", label: "Aplikasi di Kehidupan", color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
+};
 
-function SphereSVG({ r, color = "#818cf8", extraLabel = "", half = false }: {
-  r?: string; color?: string; extraLabel?: string; half?: boolean;
+const Qn = (n: number, title: string, cat: Cat, rest: Omit<Q, "n" | "title" | "cat">): Q => ({ n, title, cat, ...rest });
+
+function SphereSVG({ r, color = "#818cf8", extraLabel = "" }: {
+  r?: string; color?: string; extraLabel?: string;
 }) {
   return (
     <svg viewBox="0 0 220 200" width="220" height="200" className="mx-auto">
@@ -36,21 +44,9 @@ function SphereSVG({ r, color = "#818cf8", extraLabel = "", half = false }: {
           <stop offset="100%" stopColor={color} stopOpacity="0.05" />
         </radialGradient>
       </defs>
-      {half ? (
-        <>
-          <path d="M 40 100 A 70 70 0 0 1 180 100 Z" fill={`url(#sphere-grad-${r})`} stroke={color} strokeWidth="2" />
-          <ellipse cx="110" cy="100" rx="70" ry="22" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.8" />
-          <text x="110" y="170" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Setengah Bola</text>
-        </>
-      ) : (
-        <circle cx="110" cy="100" r="72" fill={`url(#sphere-grad-${r})`} stroke={color} strokeWidth="2" />
-      )}
-      {!half && (
-        <>
-          <ellipse cx="110" cy="100" rx="72" ry="22" fill="none" stroke={color} strokeWidth="1.2" strokeDasharray="6,4" />
-          <ellipse cx="110" cy="100" rx="22" ry="72" fill="none" stroke={color} strokeWidth="1" strokeDasharray="4,4" opacity="0.5" />
-        </>
-      )}
+      <circle cx="110" cy="100" r="72" fill={`url(#sphere-grad-${r})`} stroke={color} strokeWidth="2" />
+      <ellipse cx="110" cy="100" rx="72" ry="22" fill="none" stroke={color} strokeWidth="1.2" strokeDasharray="6,4" />
+      <ellipse cx="110" cy="100" rx="22" ry="72" fill="none" stroke={color} strokeWidth="1" strokeDasharray="4,4" opacity="0.5" />
       {r && (
         <>
           <line x1="110" y1="100" x2="170" y2="72" stroke={color} strokeWidth="1.5" />
@@ -93,20 +89,14 @@ function BolaDalamTabungSVG({ color = "#818cf8" }: { color?: string }) {
           <stop offset="100%" stopColor={color} stopOpacity="0.10" />
         </radialGradient>
       </defs>
-      {/* Cylinder body */}
       <rect x="60" y="25" width="140" height="160" fill={color} fillOpacity="0.04" stroke={color} strokeWidth="1.5" />
-      {/* Cylinder top ellipse */}
       <ellipse cx="130" cy="25" rx="70" ry="18" fill={color} fillOpacity="0.08" stroke={color} strokeWidth="1.5" />
-      {/* Cylinder bottom ellipse */}
       <ellipse cx="130" cy="185" rx="70" ry="18" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" />
-      {/* Sphere */}
       <circle cx="130" cy="105" r="70" fill="url(#bdt-sphere)" stroke={color} strokeWidth="2" />
       <ellipse cx="130" cy="105" rx="70" ry="20" fill="none" stroke={color} strokeWidth="1" strokeDasharray="5,3" />
-      {/* Radius label */}
       <line x1="130" y1="105" x2="200" y2="105" stroke={color} strokeWidth="1.2" strokeDasharray="4,2" />
       <circle cx="130" cy="105" r="3" fill={color} />
       <text x="168" y="98" fill={color} fontSize="11" textAnchor="middle" fontFamily="monospace">r</text>
-      {/* Caption */}
       <text x="130" y="215" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Bola menyinggung semua sisi tabung</text>
     </svg>
   );
@@ -121,13 +111,10 @@ function TabungSetengahBolaSVG({ color = "#818cf8" }: { color?: string }) {
           <stop offset="100%" stopColor={color} stopOpacity="0.08" />
         </radialGradient>
       </defs>
-      {/* Cylinder */}
       <rect x="60" y="130" width="140" height="90" fill={color} fillOpacity="0.05" stroke={color} strokeWidth="1.5" />
       <ellipse cx="130" cy="220" rx="70" ry="18" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.5" />
       <ellipse cx="130" cy="130" rx="70" ry="18" fill={color} fillOpacity="0.08" stroke={color} strokeWidth="1.2" strokeDasharray="5,3" />
-      {/* Half sphere on top */}
       <path d="M 60 130 A 70 70 0 0 1 200 130 Z" fill="url(#tsb-sphere)" stroke={color} strokeWidth="2" />
-      {/* Labels */}
       <line x1="130" y1="130" x2="200" y2="130" stroke={color} strokeWidth="1.2" strokeDasharray="4,2" />
       <circle cx="130" cy="130" r="3" fill={color} />
       <text x="212" y="134" fill={color} fontSize="11" textAnchor="start" fontFamily="monospace">r = 7</text>
@@ -151,31 +138,29 @@ function PerbandinganBangunSVG({ color = "#818cf8" }: { color?: string }) {
           <stop offset="100%" stopColor={color} stopOpacity="0.05" />
         </linearGradient>
       </defs>
-      {/* Cylinder */}
       <rect x="8" y="38" width="82" height="120" fill={color} fillOpacity="0.05" stroke={color} strokeWidth="1.4" />
       <ellipse cx="49" cy="38" rx="41" ry="12" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.4" />
       <ellipse cx="49" cy="158" rx="41" ry="12" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.4" />
-      <text x="49" y="185" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Tabung</text>
-      <text x="49" y="196" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 3</text>
-      {/* Sphere */}
+      <text x="49" y="180" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Tabung</text>
+      <text x="49" y="191" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 3</text>
       <circle cx="170" cy="98" r="60" fill="url(#pbg-sphere)" stroke={color} strokeWidth="2" />
       <ellipse cx="170" cy="98" rx="60" ry="17" fill="none" stroke={color} strokeWidth="1" strokeDasharray="4,3" />
       <text x="170" y="180" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Bola</text>
       <text x="170" y="191" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 2</text>
-      {/* Cone */}
       <ellipse cx="290" cy="158" rx="41" ry="12" fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.4" />
       <line x1="249" y1="158" x2="290" y2="38" stroke={color} strokeWidth="1.5" />
       <line x1="331" y1="158" x2="290" y2="38" stroke={color} strokeWidth="1.5" />
       <polygon points="249,158 331,158 290,38" fill="url(#pbg-cone)" />
-      <text x="290" y="185" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Kerucut</text>
-      <text x="290" y="196" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 1</text>
+      <text x="290" y="180" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace">Kerucut</text>
+      <text x="290" y="191" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fillOpacity="0.6">V = 1</text>
     </svg>
   );
 }
 
 const mcQuestions: QMC[] = [
+  /* ── UNSUR ── */
   {
-    n: 1, title: "Titik Sudut Bola",
+    n: 1, title: "Titik Sudut Bola", cat: "unsur",
     content: "Banyaknya titik sudut yang dimiliki oleh bangun bola adalah ...",
     options: [
       { key: "A", text: "tidak ada" },
@@ -185,8 +170,9 @@ const mcQuestions: QMC[] = [
     ],
     answer: "A",
   },
+  /* ── LUAS PERMUKAAN ── */
   {
-    n: 2, title: "Rumus Luas Permukaan Bola",
+    n: 2, title: "Rumus Luas Permukaan Bola", cat: "lp",
     content: "Rumus yang tepat untuk menghitung luas permukaan bola berjari-jari r adalah ...",
     options: [
       { key: "A", text: "L = 2πr²" },
@@ -197,7 +183,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 3, title: "Luas Permukaan Bola – r = 14 cm",
+    n: 3, title: "Luas Permukaan Bola – r = 14 cm", cat: "lp",
     content: "Sebuah bola memiliki jari-jari 14 cm. Luas permukaan bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="14 cm" />,
     options: [
@@ -209,7 +195,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 4, title: "Mencari Jari-Jari dari Luas Permukaan",
+    n: 4, title: "Mencari Jari-Jari dari Luas Permukaan", cat: "lp",
     content: "Luas permukaan sebuah bola adalah 154 cm². Panjang jari-jari bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="?" />,
     options: [
@@ -221,7 +207,7 @@ const mcQuestions: QMC[] = [
     answer: "B",
   },
   {
-    n: 5, title: "Perbandingan Luas Permukaan Dua Bola",
+    n: 5, title: "Perbandingan Luas Permukaan Dua Bola", cat: "lp",
     content: "Dua buah bola memiliki jari-jari masing-masing 5 cm dan 10 cm. Perbandingan luas permukaan bola pertama terhadap bola kedua adalah ...",
     options: [
       { key: "A", text: "1 : 4" },
@@ -232,7 +218,7 @@ const mcQuestions: QMC[] = [
     answer: "A",
   },
   {
-    n: 6, title: "Perbandingan Luas Permukaan dan Volume",
+    n: 6, title: "Perbandingan Luas Permukaan dan Volume", cat: "lp",
     content: "Sebuah bola berjari-jari r cm. Perbandingan antara luas permukaan bola dengan volumenya adalah ...",
     options: [
       { key: "A", text: "3 : r" },
@@ -243,7 +229,41 @@ const mcQuestions: QMC[] = [
     answer: "A",
   },
   {
-    n: 7, title: "Volume Bola – Diameter 21 cm",
+    n: 7, title: "Perbandingan Luas Permukaan – Diameter Berbeda", cat: "lp",
+    content: "Dua buah bola memiliki diameter masing-masing 6 cm dan 8 cm. Perbandingan luas permukaan kedua bola adalah ...",
+    options: [
+      { key: "A", text: "3 : 4" },
+      { key: "B", text: "4 : 9" },
+      { key: "C", text: "9 : 16" },
+      { key: "D", text: "16 : 27" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 8, title: "Luas Permukaan dari Volume Bola", cat: "lp",
+    content: "Volume sebuah bola adalah 36π cm³. Luas permukaan bola tersebut adalah ...",
+    options: [
+      { key: "A", text: "18π cm²" },
+      { key: "B", text: "27π cm²" },
+      { key: "C", text: "36π cm²" },
+      { key: "D", text: "54π cm²" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 9, title: "Luas Permukaan dari Volume (Besar)", cat: "lp",
+    content: "Volume sebuah bola adalah 972π cm³. Luas permukaan bola tersebut adalah ...",
+    options: [
+      { key: "A", text: "81π cm²" },
+      { key: "B", text: "108π cm²" },
+      { key: "C", text: "162π cm²" },
+      { key: "D", text: "324π cm²" },
+    ],
+    answer: "D",
+  },
+  /* ── VOLUME ── */
+  {
+    n: 10, title: "Volume Bola – Diameter 21 cm", cat: "vol",
     content: "Sebuah bola memiliki diameter 21 cm. Volume bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="10,5 cm" />,
     options: [
@@ -255,7 +275,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 8, title: "Perbandingan Volume Dua Bola",
+    n: 11, title: "Perbandingan Volume Dua Bola", cat: "vol",
     content: "Dua buah bola memiliki jari-jari masing-masing 3 cm dan 6 cm. Perbandingan volume bola pertama terhadap bola kedua adalah ...",
     options: [
       { key: "A", text: "1 : 4" },
@@ -266,31 +286,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 9, title: "Bola dalam Tabung",
-    content: "Sebuah bola menyinggung semua sisi bagian dalam sebuah tabung (diameter dan tinggi tabung sama dengan diameter bola). Perbandingan volume bola terhadap volume tabung adalah ...",
-    diagram: <BolaDalamTabungSVG />,
-    options: [
-      { key: "A", text: "1 : 2" },
-      { key: "B", text: "2 : 3" },
-      { key: "C", text: "3 : 4" },
-      { key: "D", text: "3 : 2" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 10, title: "Volume Gabungan Tabung dan Setengah Bola",
-    content: "Sebuah bangun gabungan terdiri dari tabung dengan jari-jari 7 cm dan tinggi 10 cm, serta setengah bola di atasnya dengan jari-jari yang sama. Volume bangun tersebut adalah ... (π = 22/7)",
-    diagram: <TabungSetengahBolaSVG />,
-    options: [
-      { key: "A", text: "2.108,7 cm³" },
-      { key: "B", text: "2.258,7 cm³" },
-      { key: "C", text: "2.558,7 cm³" },
-      { key: "D", text: "2.977,3 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 11, title: "Perbandingan Volume Tabung, Bola, Kerucut",
+    n: 12, title: "Perbandingan Volume Tabung, Bola, Kerucut", cat: "vol",
     content: "Sebuah tabung, bola, dan kerucut memiliki jari-jari dan tinggi yang sama (tinggi = 2r). Perbandingan volume tabung : bola : kerucut adalah ...",
     diagram: <PerbandinganBangunSVG />,
     options: [
@@ -302,51 +298,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 12, title: "Luas Permukaan dari Volume Bola",
-    content: "Volume sebuah bola adalah 36π cm³. Luas permukaan bola tersebut adalah ...",
-    options: [
-      { key: "A", text: "18π cm²" },
-      { key: "B", text: "27π cm²" },
-      { key: "C", text: "36π cm²" },
-      { key: "D", text: "54π cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 13, title: "Perbandingan Luas Permukaan – Diameter Berbeda",
-    content: "Dua buah bola memiliki diameter masing-masing 6 cm dan 8 cm. Perbandingan luas permukaan kedua bola adalah ...",
-    options: [
-      { key: "A", text: "3 : 4" },
-      { key: "B", text: "4 : 9" },
-      { key: "C", text: "9 : 16" },
-      { key: "D", text: "16 : 27" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 14, title: "Luas Permukaan dari Volume (Besar)",
-    content: "Volume sebuah bola adalah 972π cm³. Luas permukaan bola tersebut adalah ...",
-    options: [
-      { key: "A", text: "81π cm²" },
-      { key: "B", text: "108π cm²" },
-      { key: "C", text: "162π cm²" },
-      { key: "D", text: "324π cm²" },
-    ],
-    answer: "D",
-  },
-  {
-    n: 15, title: "Bola Besi dalam Tabung Berisi Air",
-    content: "Sebuah tabung berisi air memiliki jari-jari alas 18 cm dengan permukaan air setinggi 10 cm. Ke dalam tabung dimasukkan bola besi berjari-jari 9 cm sehingga permukaan air naik setinggi t cm. Nilai t adalah ... (π sama)",
-    options: [
-      { key: "A", text: "2" },
-      { key: "B", text: "3" },
-      { key: "C", text: "4" },
-      { key: "D", text: "5" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 16, title: "Perubahan Volume saat Jari-Jari Diperbesar",
+    n: 13, title: "Perubahan Volume saat Jari-Jari Diperbesar", cat: "vol",
     content: "Jari-jari sebuah bola diperbesar menjadi 3/2 kali jari-jari semula. Perbandingan volume bola sebelum dan sesudah diperbesar adalah ...",
     options: [
       { key: "A", text: "4 : 9" },
@@ -356,24 +308,54 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
+  /* ── APLIKASI ── */
+  {
+    n: 14, title: "Bola dalam Tabung", cat: "app",
+    content: "Sebuah bola menyinggung semua sisi bagian dalam sebuah tabung (diameter dan tinggi tabung sama dengan diameter bola). Perbandingan volume bola terhadap volume tabung adalah ...",
+    diagram: <BolaDalamTabungSVG />,
+    options: [
+      { key: "A", text: "1 : 2" },
+      { key: "B", text: "2 : 3" },
+      { key: "C", text: "3 : 4" },
+      { key: "D", text: "3 : 2" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 15, title: "Volume Gabungan Tabung dan Setengah Bola", cat: "app",
+    content: "Sebuah bangun gabungan terdiri dari tabung dengan jari-jari 7 cm dan tinggi 10 cm, serta setengah bola di atasnya dengan jari-jari yang sama. Volume bangun tersebut adalah ... (π = 22/7)",
+    diagram: <TabungSetengahBolaSVG />,
+    options: [
+      { key: "A", text: "2.108,7 cm³" },
+      { key: "B", text: "2.258,7 cm³" },
+      { key: "C", text: "2.558,7 cm³" },
+      { key: "D", text: "2.977,3 cm³" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 16, title: "Bola Besi dalam Tabung Berisi Air", cat: "app",
+    content: "Sebuah tabung berisi air memiliki jari-jari alas 18 cm dengan permukaan air setinggi 10 cm. Ke dalam tabung dimasukkan bola besi berjari-jari 9 cm sehingga permukaan air naik setinggi t cm. Nilai t adalah ... (π sama)",
+    options: [
+      { key: "A", text: "2" },
+      { key: "B", text: "3" },
+      { key: "C", text: "4" },
+      { key: "D", text: "5" },
+    ],
+    answer: "B",
+  },
 ];
 
 const questions: Q[] = [
-  Qn(1, "Luas Permukaan Bola", {
+  /* ── LUAS PERMUKAAN ── */
+  Qn(1, "Luas Permukaan Bola", "lp", {
     content: "Sebuah bola memiliki jari-jari 7 cm. Hitunglah luas permukaan bola tersebut! (π = 22/7)",
     diagram: <SphereSVG r="7 cm" />,
     parts: [
       { label: "a.", math: "L = 4\\pi r^2 = 4 \\times \\frac{22}{7} \\times 7^2 = \\ldots \\text{ cm}^2" },
     ],
   }),
-  Qn(2, "Volume Bola", {
-    content: "Sebuah bola memiliki jari-jari 6 cm. Hitunglah volume bola tersebut! (π = 3,14)",
-    diagram: <SphereSVG r="6 cm" />,
-    parts: [
-      { label: "a.", math: "V = \\frac{4}{3}\\pi r^3 = \\frac{4}{3} \\times 3{,}14 \\times 6^3 = \\ldots \\text{ cm}^3" },
-    ],
-  }),
-  Qn(3, "Luas Permukaan – Diameter Diketahui", {
+  Qn(2, "Luas Permukaan – Diameter Diketahui", "lp", {
     content: "Sebuah bola berdiameter 14 cm. Hitunglah luas permukaannya! (π = 22/7)",
     diagram: <SphereSVG r="7 cm" color="#60a5fa" />,
     parts: [
@@ -381,15 +363,7 @@ const questions: Q[] = [
       { label: "b.", math: "L = 4 \\times \\frac{22}{7} \\times 7^2 = \\ldots \\text{ cm}^2" },
     ],
   }),
-  Qn(4, "Volume Bola – Diameter Diketahui", {
-    content: "Sebuah bola berdiameter 21 cm. Hitunglah volume bola tersebut! (π = 22/7)",
-    diagram: <SphereSVG r="10,5 cm" />,
-    parts: [
-      { label: "a.", math: "r = 10{,}5 \\text{ cm}" },
-      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times (10{,}5)^3 = \\ldots \\text{ cm}^3" },
-    ],
-  }),
-  Qn(5, "Mencari Jari-Jari dari Luas Permukaan", {
+  Qn(3, "Mencari Jari-Jari dari Luas Permukaan", "lp", {
     content: "Luas permukaan sebuah bola adalah 616 cm². Tentukan jari-jari bola tersebut! (π = 22/7)",
     diagram: <SphereSVG r="?" />,
     parts: [
@@ -397,15 +371,7 @@ const questions: Q[] = [
       { label: "b.", math: "r = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(6, "Mencari Jari-Jari dari Volume", {
-    content: "Volume sebuah bola adalah 4.186,67 cm³. Tentukan jari-jari bola tersebut! (π = 3,14)",
-    diagram: <SphereSVG r="?" />,
-    parts: [
-      { label: "a.", math: "\\frac{4}{3} \\times 3{,}14 \\times r^3 = 4186{,}67" },
-      { label: "b.", math: "r^3 = \\frac{4186{,}67 \\times 3}{4 \\times 3{,}14} \\approx 1000 \\Rightarrow r = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(7, "Luas Permukaan Setengah Bola Padat", {
+  Qn(4, "Luas Permukaan Setengah Bola Padat", "lp", {
     content: "Sebuah mangkuk berbentuk setengah bola padat dengan r = 7 cm. Hitunglah luas permukaan totalnya (selimut + alas)! (π = 22/7)",
     diagram: <HalfSphereSVG r="7 cm" />,
     parts: [
@@ -414,40 +380,20 @@ const questions: Q[] = [
       { label: "c.", math: "L_{\\text{total}} = \\ldots + \\ldots = \\ldots \\text{ cm}^2" },
     ],
   }),
-  Qn(8, "Volume Setengah Bola", {
-    content: "Sebuah mangkuk berbentuk setengah bola memiliki jari-jari 10 cm. Berapa volume mangkuk tersebut? (π = 3,14)",
-    diagram: <HalfSphereSVG r="10 cm" />,
+  Qn(5, "Luas Permukaan Setengah Bola (Selimut Saja)", "lp", {
+    content: "Sebuah bola bekel berjari-jari 3 cm dipotong menjadi dua. Hitunglah luas permukaan lengkungan (selimut) saja! (π = 3,14)",
+    diagram: <HalfSphereSVG r="3 cm" />,
     parts: [
-      { label: "a.", math: "V = \\frac{1}{2} \\times \\frac{4}{3}\\pi r^3 = \\frac{2}{3}\\pi r^3" },
-      { label: "b.", math: "V = \\frac{2}{3} \\times 3{,}14 \\times 1000 = \\ldots \\text{ cm}^3" },
+      { label: "a.", math: "L_{\\text{selimut setengah bola}} = 2\\pi r^2 = 2 \\times 3{,}14 \\times 9 = \\ldots \\text{ cm}^2" },
     ],
   }),
-  Qn(9, "Soal Cerita – Bola Sepak", {
-    content: "Sebuah bola sepak memiliki diameter 22 cm. Berapa cm² luas kulit bola tersebut? (π = 22/7)",
-    diagram: <SphereSVG r="11 cm" color="#22c55e" extraLabel="Bola Sepak" />,
+  Qn(6, "Perbandingan Luas Permukaan Dua Bola", "lp", {
+    content: "Dua bola memiliki jari-jari yang berbeda dengan perbandingan 2 : 5. Tentukan perbandingan luas permukaan keduanya!",
     parts: [
-      { label: "a.", math: "r = 11 \\text{ cm}" },
-      { label: "b.", math: "L = 4 \\times \\frac{22}{7} \\times 11^2 = \\ldots \\text{ cm}^2" },
+      { label: "a.", math: "\\frac{L_1}{L_2} = \\frac{4\\pi r_1^2}{4\\pi r_2^2} = \\left(\\frac{r_1}{r_2}\\right)^2 = \\left(\\frac{2}{5}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(10, "Soal Cerita – Bola Plastik", {
-    content: "Sebuah bola plastik berjari-jari 3,5 cm dijual dengan harga Rp500 per cm² bahan. Berapa harga satu bola? (π = 22/7)",
-    diagram: <SphereSVG r="3,5 cm" color="#f472b6" extraLabel="Bola Plastik" />,
-    parts: [
-      { label: "a.", math: "L = 4 \\times \\frac{22}{7} \\times (3{,}5)^2 = \\ldots \\text{ cm}^2" },
-      { label: "b.", math: "\\text{Harga} = L \\times 500 = \\text{Rp}\\ldots" },
-    ],
-  }),
-  Qn(11, "UN Style – Bola dalam Kubus", {
-    content: "Sebuah bola dimasukkan ke dalam kubus bersisi 14 cm dengan tepat (bola menyentuh semua sisi). Berapa volume sisa di dalam kubus? (π = 22/7)",
-    diagram: <SphereSVG r="7 cm" />,
-    parts: [
-      { label: "a.", math: "V_{\\text{kubus}} = 14^3 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{bola}} = \\frac{4}{3} \\times \\frac{22}{7} \\times 7^3 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{sisa}} = \\ldots - \\ldots = \\ldots \\text{ cm}^3" },
-    ],
-  }),
-  Qn(12, "Luas Permukaan dari Volume", {
+  Qn(7, "Luas Permukaan dari Volume", "lp", {
     content: "Volume sebuah bola adalah 288π cm³. Tentukan luas permukaan bola tersebut!",
     diagram: <SphereSVG r="?" />,
     parts: [
@@ -455,118 +401,7 @@ const questions: Q[] = [
       { label: "b.", math: "L = 4\\pi r^2 = 4\\pi \\times \\ldots^2 = \\ldots\\pi \\text{ cm}^2" },
     ],
   }),
-  Qn(13, "Soal Cerita – Balon Udara", {
-    content: "Sebuah balon udara berbentuk bola berdiameter 10 m. Berapa m³ gas yang diisi ke dalam balon? (π = 3,14)",
-    diagram: <SphereSVG r="5 m" color="#fbbf24" extraLabel="Balon Udara" />,
-    parts: [
-      { label: "a.", math: "V = \\frac{4}{3} \\times 3{,}14 \\times 5^3 = \\ldots \\text{ m}^3" },
-    ],
-  }),
-  Qn(14, "Perbandingan Volume Dua Bola", {
-    content: "Bola A berjari-jari 3 cm dan Bola B berjari-jari 6 cm. Hitunglah perbandingan volume A : B!",
-    parts: [
-      { label: "a.", math: "\\frac{V_A}{V_B} = \\frac{\\frac{4}{3}\\pi \\times 27}{\\frac{4}{3}\\pi \\times 216} = \\frac{27}{216} = \\ldots" },
-    ],
-  }),
-  Qn(15, "Perbandingan Luas Permukaan Dua Bola", {
-    content: "Dua bola memiliki jari-jari yang berbeda dengan perbandingan 2 : 5. Tentukan perbandingan luas permukaan keduanya!",
-    parts: [
-      { label: "a.", math: "\\frac{L_1}{L_2} = \\frac{4\\pi r_1^2}{4\\pi r_2^2} = \\left(\\frac{r_1}{r_2}\\right)^2 = \\left(\\frac{2}{5}\\right)^2 = \\ldots" },
-    ],
-  }),
-  Qn(16, "ANBK – Bola Besar vs Bola Kecil", {
-    content: "Sebuah bola besar dengan r = 12 cm dipotong menjadi bola-bola kecil berjari-jari 3 cm. Berapa bola kecil yang dihasilkan?",
-    parts: [
-      { label: "a.", math: "V_{\\text{besar}} = \\frac{4}{3}\\pi \\times 12^3 = \\frac{4}{3}\\pi \\times 1728" },
-      { label: "b.", math: "V_{\\text{kecil}} = \\frac{4}{3}\\pi \\times 3^3 = \\frac{4}{3}\\pi \\times 27" },
-      { label: "c.", math: "n = \\frac{V_{\\text{besar}}}{V_{\\text{kecil}}} = \\frac{1728}{27} = \\ldots \\text{ bola}" },
-    ],
-  }),
-  Qn(17, "Luas Permukaan Setengah Bola (Selimut Saja)", {
-    content: "Sebuah bola bekel berjari-jari 3 cm dipotong menjadi dua. Hitunglah luas permukaan lengkungan (selimut) saja! (π = 3,14)",
-    diagram: <HalfSphereSVG r="3 cm" />,
-    parts: [
-      { label: "a.", math: "L_{\\text{selimut setengah bola}} = 2\\pi r^2 = 2 \\times 3{,}14 \\times 9 = \\ldots \\text{ cm}^2" },
-    ],
-  }),
-  Qn(18, "UN Style – Volume dan Luas", {
-    content: "Sebuah bola memiliki luas permukaan 1.386 cm². Hitunglah: (a) jari-jari, (b) volume bola! (π = 22/7)",
-    diagram: <SphereSVG r="?" />,
-    parts: [
-      { label: "a.", math: "4\\pi r^2 = 1386 \\Rightarrow r^2 = \\frac{1386}{4 \\times \\frac{22}{7}} = \\frac{1386 \\times 7}{88} = \\ldots \\Rightarrow r = \\ldots \\text{ cm}" },
-      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times r^3 = \\ldots \\text{ cm}^3" },
-    ],
-  }),
-  Qn(19, "Soal Cerita – Bola Logam", {
-    content: "Sebuah bola logam berjari-jari 6 cm dimasukkan ke dalam ember berisi air. Berapa cm³ air yang tumpah? (π = 3,14)",
-    diagram: <SphereSVG r="6 cm" color="#38bdf8" extraLabel="Bola Logam" />,
-    parts: [
-      { label: "a.", math: "V = \\frac{4}{3} \\times 3{,}14 \\times 6^3 = \\ldots \\text{ cm}^3" },
-      { label: "b.", text: "Volume air yang tumpah = volume bola = ...cm³" },
-    ],
-  }),
-  Qn(20, "TKA – Bola Terbuat dari Lempung", {
-    content: "Seorang anak membuat bola dari lempung berjari-jari 5 cm. Berapa gram berat lempung jika massa jenis lempung 2 g/cm³? (π = 3,14)",
-    diagram: <SphereSVG r="5 cm" color="#a78bfa" extraLabel="Bola Lempung" />,
-    parts: [
-      { label: "a.", math: "V = \\frac{4}{3} \\times 3{,}14 \\times 125 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "m = \\rho \\times V = 2 \\times \\ldots = \\ldots \\text{ gram}" },
-    ],
-  }),
-  Qn(21, "ANBK – Bola dalam Tabung", {
-    content: "Sebuah bola dengan r = 7 cm dimasukkan ke dalam tabung dengan r = 7 cm dan t = 14 cm. Berapa volume ruang kosong dalam tabung? (π = 22/7)",
-    diagram: <SphereSVG r="7 cm" />,
-    parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 14 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{\\text{bola}} = \\frac{4}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{sisa}} = \\ldots - \\ldots = \\ldots \\text{ cm}^3" },
-    ],
-  }),
-  Qn(22, "Soal UN – Keliling Lingkaran Besar", {
-    content: "Sebuah bola berjari-jari 21 cm. Berapa keliling lingkaran terbesar (penampang melintang) pada bola tersebut? (π = 22/7)",
-    diagram: <SphereSVG r="21 cm" />,
-    parts: [
-      { label: "a.", math: "K = 2\\pi r = 2 \\times \\frac{22}{7} \\times 21 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(23, "Soal Cerita – Model Planet", {
-    content: "Sebuah model planet berbentuk bola dengan diameter 1,4 m dicat seluruhnya. Jika 1 kg cat dapat menutup 50 m², berapa kg cat yang dibutuhkan? (π = 22/7)",
-    diagram: <SphereSVG r="0,7 m" color="#a78bfa" extraLabel="Model Planet" />,
-    parts: [
-      { label: "a.", math: "L = 4 \\times \\frac{22}{7} \\times (0{,}7)^2 = \\ldots \\text{ m}^2" },
-      { label: "b.", math: "\\text{Cat} = \\frac{L}{50} = \\ldots \\text{ kg}" },
-    ],
-  }),
-  Qn(24, "Volume – Soal Perbandingan", {
-    content: "Perbandingan jari-jari dua bola adalah 3 : 4. Jika volume bola kecil 972π cm³, hitunglah volume bola besar!",
-    parts: [
-      { label: "a.", math: "\\frac{V_1}{V_2} = \\left(\\frac{r_1}{r_2}\\right)^3 = \\left(\\frac{3}{4}\\right)^3 = \\frac{27}{64}" },
-      { label: "b.", math: "V_2 = \\frac{64}{27} \\times 972\\pi = \\ldots\\pi \\text{ cm}^3" },
-    ],
-  }),
-  Qn(25, "Luas Permukaan – Soal Terapan", {
-    content: "Sebuah bola pingpong berdiameter 4 cm akan dibungkus dengan kertas tipis. Jika harga kertas Rp100 per cm², berapa biaya untuk membungkus 6 bola? (π = 3,14)",
-    diagram: <SphereSVG r="2 cm" color="#fbbf24" extraLabel="× 6 bola" />,
-    parts: [
-      { label: "a.", math: "L_1 = 4 \\times 3{,}14 \\times 2^2 = \\ldots \\text{ cm}^2" },
-      { label: "b.", math: "\\text{Biaya} = 6 \\times L_1 \\times 100 = \\text{Rp}\\ldots" },
-    ],
-  }),
-  Qn(26, "TKA – Keliling Lingkaran Besar", {
-    content: "Sebuah bola berjari-jari 10 cm. Berapa cm keliling lingkaran terbesarnya? (π = 3,14)",
-    diagram: <SphereSVG r="10 cm" />,
-    parts: [
-      { label: "a.", math: "K = 2\\pi r = 2 \\times 3{,}14 \\times 10 = \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(27, "ANBK – Bola Dilebur", {
-    content: "Tiga buah bola masing-masing berjari-jari 2 cm, 3 cm, dan 4 cm dilebur menjadi satu bola baru. Tentukan jari-jari bola baru tersebut!",
-    parts: [
-      { label: "a.", math: "V_1 + V_2 + V_3 = \\frac{4}{3}\\pi(8 + 27 + 64) = \\frac{4}{3}\\pi \\times 99" },
-      { label: "b.", math: "\\frac{4}{3}\\pi R^3 = \\frac{4}{3}\\pi \\times 99 \\Rightarrow R^3 = 99 \\Rightarrow R \\approx \\ldots \\text{ cm}" },
-    ],
-  }),
-  Qn(28, "Soal UN – Diameter dari Luas Permukaan", {
+  Qn(8, "Soal UN – Diameter dari Luas Permukaan", "lp", {
     content: "Luas permukaan sebuah bola adalah 2.464 cm². Tentukan diameter bola tersebut! (π = 22/7)",
     diagram: <SphereSVG r="?" />,
     parts: [
@@ -574,63 +409,28 @@ const questions: Q[] = [
       { label: "b.", math: "d = 2r = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(29, "Soal Cerita – Kolam Berbentuk Setengah Bola", {
-    content: "Sebuah kolam mandi anak berbentuk setengah bola berjari-jari 70 cm. Berapa liter air yang dibutuhkan untuk mengisi hingga penuh? (π = 22/7, 1 liter = 1.000 cm³)",
-    diagram: <HalfSphereSVG r="70 cm" />,
-    parts: [
-      { label: "a.", math: "V = \\frac{2}{3}\\pi r^3 = \\frac{2}{3} \\times \\frac{22}{7} \\times 70^3 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V \\text{ (liter)} = \\frac{V}{1000} = \\ldots \\text{ liter}" },
-    ],
-  }),
-  Qn(30, "Volume Bola – Satuan dm", {
-    content: "Sebuah tangki berbentuk bola berdiameter 1,4 m. Berapa dm³ (liter) kapasitas tangki tersebut? (π = 22/7, 1 m = 10 dm)",
-    diagram: <SphereSVG r="0,7 m" color="#38bdf8" extraLabel="Tangki Bola" />,
-    parts: [
-      { label: "a.", math: "r = 0{,}7 \\text{ m} = 7 \\text{ dm}" },
-      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ dm}^3 = \\ldots \\text{ liter}" },
-    ],
-  }),
-  Qn(31, "Soal UN – Luas Lingkaran Besar Bola", {
+  Qn(9, "Soal UN – Luas Lingkaran Besar Bola", "lp", {
     content: "Sebuah semangka berbentuk bola dengan r = 14 cm dipotong tepat di tengah. Berapa cm² luas penampangnya? (π = 22/7)",
     diagram: <SphereSVG r="14 cm" color="#22c55e" extraLabel="Semangka" />,
     parts: [
       { label: "a.", math: "L_{\\text{penampang}} = \\pi r^2 = \\frac{22}{7} \\times 14^2 = \\ldots \\text{ cm}^2" },
     ],
   }),
-  Qn(32, "ANBK – Tiga Bola dalam Tabung", {
-    content: "Tiga bola berjari-jari 7 cm disusun dalam tabung dengan r = 7 cm dan t = 42 cm. Berapa volume ruang kosong? (π = 22/7)",
-    diagram: <SphereSVG r="7 cm" />,
+  Qn(10, "Soal UN – Keliling Lingkaran Besar", "lp", {
+    content: "Sebuah bola berjari-jari 21 cm. Berapa keliling lingkaran terbesar (penampang melintang) pada bola tersebut? (π = 22/7)",
+    diagram: <SphereSVG r="21 cm" />,
     parts: [
-      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 42 = \\ldots \\text{ cm}^3" },
-      { label: "b.", math: "V_{3\\text{ bola}} = 3 \\times \\frac{4}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ cm}^3" },
-      { label: "c.", math: "V_{\\text{sisa}} = \\ldots - \\ldots = \\ldots \\text{ cm}^3" },
+      { label: "a.", math: "K = 2\\pi r = 2 \\times \\frac{22}{7} \\times 21 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(33, "Soal Cerita – Produksi Bola Plastik", {
-    content: "Sebuah pabrik memproduksi bola plastik berjari-jari 5 cm. Material plastik untuk seluruh permukaan satu bola memiliki berat 0,1 gram per cm². Berapa gram berat satu bola? (π = 3,14)",
-    diagram: <SphereSVG r="5 cm" color="#a78bfa" extraLabel="Bola Plastik" />,
+  Qn(11, "TKA – Keliling Lingkaran Besar", "lp", {
+    content: "Sebuah bola berjari-jari 10 cm. Berapa cm keliling lingkaran terbesarnya? (π = 3,14)",
+    diagram: <SphereSVG r="10 cm" />,
     parts: [
-      { label: "a.", math: "L = 4 \\times 3{,}14 \\times 25 = \\ldots \\text{ cm}^2" },
-      { label: "b.", math: "m = 0{,}1 \\times L = \\ldots \\text{ gram}" },
+      { label: "a.", math: "K = 2\\pi r = 2 \\times 3{,}14 \\times 10 = \\ldots \\text{ cm}" },
     ],
   }),
-  Qn(34, "TKA – Volume dari Keliling", {
-    content: "Keliling lingkaran besar sebuah bola adalah 44 cm. Tentukan volume bola tersebut! (π = 22/7)",
-    diagram: <SphereSVG r="?" />,
-    parts: [
-      { label: "a.", math: "2\\pi r = 44 \\Rightarrow r = \\frac{44}{2 \\times \\frac{22}{7}} = \\ldots \\text{ cm}" },
-      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times r^3 = \\ldots \\text{ cm}^3" },
-    ],
-  }),
-  Qn(35, "Soal UN – Bola dan Rasio", {
-    content: "Jika jari-jari bola diperbesar 3 kali, berapa kali volume bola menjadi lebih besar?",
-    parts: [
-      { label: "a.", math: "V_1 = \\frac{4}{3}\\pi r^3" },
-      { label: "b.", math: "V_2 = \\frac{4}{3}\\pi (3r)^3 = \\frac{4}{3}\\pi \\times 27r^3 = 27 V_1" },
-      { label: "c.", text: "Jadi volume menjadi ... kali lebih besar" },
-    ],
-  }),
-  Qn(36, "ANBK – Luas Permukaan Diperbesar", {
+  Qn(12, "ANBK – Luas Permukaan Diperbesar", "lp", {
     content: "Jika jari-jari bola diperbesar 2 kali, berapa kali luas permukaannya bertambah?",
     parts: [
       { label: "a.", math: "L_1 = 4\\pi r^2" },
@@ -638,13 +438,7 @@ const questions: Q[] = [
       { label: "c.", text: "Luas permukaan menjadi ... kali semula" },
     ],
   }),
-  Qn(37, "Soal Cerita – Bumi dan Bulan", {
-    content: "Jari-jari Bumi ≈ 6.400 km dan jari-jari Bulan ≈ 1.600 km. Berapa kali volume Bumi dibanding volume Bulan?",
-    parts: [
-      { label: "a.", math: "\\frac{V_{\\text{Bumi}}}{V_{\\text{Bulan}}} = \\left(\\frac{r_{\\text{Bumi}}}{r_{\\text{Bulan}}}\\right)^3 = \\left(\\frac{6400}{1600}\\right)^3 = 4^3 = \\ldots" },
-    ],
-  }),
-  Qn(38, "UN Terpadu – Bola dan Luas Permukaan", {
+  Qn(13, "UN Terpadu – Bola dan Luas Permukaan", "lp", {
     content: "Sebuah bola memiliki volume 4.500π cm³. Hitunglah luas permukaan bola tersebut! (π sama)",
     diagram: <SphereSVG r="?" />,
     parts: [
@@ -652,15 +446,84 @@ const questions: Q[] = [
       { label: "b.", math: "L = 4\\pi r^2 = 4\\pi \\times (\\ldots)^2 = \\ldots\\pi \\text{ cm}^2" },
     ],
   }),
-  Qn(39, "Soal Terapan – Tangki Bahan Bakar", {
-    content: "Sebuah tangki bahan bakar berbentuk bola berjari-jari 1,05 m. Berapa liter kapasitas tangki? (π = 22/7, 1 m³ = 1.000 liter)",
-    diagram: <SphereSVG r="1,05 m" color="#fbbf24" extraLabel="Tangki BBM" />,
+  /* ── VOLUME ── */
+  Qn(14, "Volume Bola", "vol", {
+    content: "Sebuah bola memiliki jari-jari 6 cm. Hitunglah volume bola tersebut! (π = 3,14)",
+    diagram: <SphereSVG r="6 cm" />,
     parts: [
-      { label: "a.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times (1{,}05)^3 = \\ldots \\text{ m}^3" },
-      { label: "b.", math: "V \\text{ (liter)} = \\ldots \\times 1000 = \\ldots \\text{ liter}" },
+      { label: "a.", math: "V = \\frac{4}{3}\\pi r^3 = \\frac{4}{3} \\times 3{,}14 \\times 6^3 = \\ldots \\text{ cm}^3" },
     ],
   }),
-  Qn(40, "UN Terpadu – Soal Lengkap Bola", {
+  Qn(15, "Volume Bola – Diameter Diketahui", "vol", {
+    content: "Sebuah bola berdiameter 21 cm. Hitunglah volume bola tersebut! (π = 22/7)",
+    diagram: <SphereSVG r="10,5 cm" />,
+    parts: [
+      { label: "a.", math: "r = 10{,}5 \\text{ cm}" },
+      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times (10{,}5)^3 = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(16, "Mencari Jari-Jari dari Volume", "vol", {
+    content: "Volume sebuah bola adalah 4.186,67 cm³. Tentukan jari-jari bola tersebut! (π = 3,14)",
+    diagram: <SphereSVG r="?" />,
+    parts: [
+      { label: "a.", math: "\\frac{4}{3} \\times 3{,}14 \\times r^3 = 4186{,}67" },
+      { label: "b.", math: "r^3 = \\frac{4186{,}67 \\times 3}{4 \\times 3{,}14} \\approx 1000 \\Rightarrow r = \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(17, "Volume Setengah Bola", "vol", {
+    content: "Sebuah mangkuk berbentuk setengah bola memiliki jari-jari 10 cm. Berapa volume mangkuk tersebut? (π = 3,14)",
+    diagram: <HalfSphereSVG r="10 cm" />,
+    parts: [
+      { label: "a.", math: "V = \\frac{1}{2} \\times \\frac{4}{3}\\pi r^3 = \\frac{2}{3}\\pi r^3" },
+      { label: "b.", math: "V = \\frac{2}{3} \\times 3{,}14 \\times 1000 = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(18, "Perbandingan Volume Dua Bola", "vol", {
+    content: "Bola A berjari-jari 3 cm dan Bola B berjari-jari 6 cm. Hitunglah perbandingan volume A : B!",
+    parts: [
+      { label: "a.", math: "\\frac{V_A}{V_B} = \\frac{\\frac{4}{3}\\pi \\times 27}{\\frac{4}{3}\\pi \\times 216} = \\frac{27}{216} = \\ldots" },
+    ],
+  }),
+  Qn(19, "Volume – Soal Perbandingan", "vol", {
+    content: "Perbandingan jari-jari dua bola adalah 3 : 4. Jika volume bola kecil 972π cm³, hitunglah volume bola besar!",
+    parts: [
+      { label: "a.", math: "\\frac{V_1}{V_2} = \\left(\\frac{r_1}{r_2}\\right)^3 = \\left(\\frac{3}{4}\\right)^3 = \\frac{27}{64}" },
+      { label: "b.", math: "V_2 = \\frac{64}{27} \\times 972\\pi = \\ldots\\pi \\text{ cm}^3" },
+    ],
+  }),
+  Qn(20, "Volume Bola – Satuan dm", "vol", {
+    content: "Sebuah tangki berbentuk bola berdiameter 1,4 m. Berapa dm³ (liter) kapasitas tangki tersebut? (π = 22/7, 1 m = 10 dm)",
+    diagram: <SphereSVG r="0,7 m" color="#38bdf8" extraLabel="Tangki Bola" />,
+    parts: [
+      { label: "a.", math: "r = 0{,}7 \\text{ m} = 7 \\text{ dm}" },
+      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ dm}^3 = \\ldots \\text{ liter}" },
+    ],
+  }),
+  Qn(21, "TKA – Volume dari Keliling", "vol", {
+    content: "Keliling lingkaran besar sebuah bola adalah 44 cm. Tentukan volume bola tersebut! (π = 22/7)",
+    diagram: <SphereSVG r="?" />,
+    parts: [
+      { label: "a.", math: "2\\pi r = 44 \\Rightarrow r = \\frac{44}{2 \\times \\frac{22}{7}} = \\ldots \\text{ cm}" },
+      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times r^3 = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(22, "Soal UN – Bola dan Rasio Volume", "vol", {
+    content: "Jika jari-jari bola diperbesar 3 kali, berapa kali volume bola menjadi lebih besar?",
+    parts: [
+      { label: "a.", math: "V_1 = \\frac{4}{3}\\pi r^3" },
+      { label: "b.", math: "V_2 = \\frac{4}{3}\\pi (3r)^3 = \\frac{4}{3}\\pi \\times 27r^3 = 27 V_1" },
+      { label: "c.", text: "Jadi volume menjadi ... kali lebih besar" },
+    ],
+  }),
+  Qn(23, "UN Style – Volume dan Luas", "vol", {
+    content: "Sebuah bola memiliki luas permukaan 1.386 cm². Hitunglah: (a) jari-jari, (b) volume bola! (π = 22/7)",
+    diagram: <SphereSVG r="?" />,
+    parts: [
+      { label: "a.", math: "4\\pi r^2 = 1386 \\Rightarrow r^2 = \\frac{1386 \\times 7}{88} = \\ldots \\Rightarrow r = \\ldots \\text{ cm}" },
+      { label: "b.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times r^3 = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(24, "UN Terpadu – Soal Lengkap Bola", "vol", {
     content: "Sebuah bola tenis meja memiliki keliling lingkaran besar 31,4 cm. Hitunglah: (a) jari-jari, (b) luas permukaan, (c) volume! (π = 3,14)",
     diagram: <SphereSVG r="?" />,
     parts: [
@@ -669,9 +532,150 @@ const questions: Q[] = [
       { label: "c.", math: "V = \\frac{4}{3} \\times 3{,}14 \\times r^3 = \\ldots \\text{ cm}^3" },
     ],
   }),
+  /* ── APLIKASI DI KEHIDUPAN ── */
+  Qn(25, "Soal Cerita – Bola Sepak", "app", {
+    content: "Sebuah bola sepak memiliki diameter 22 cm. Berapa cm² luas kulit bola tersebut? (π = 22/7)",
+    diagram: <SphereSVG r="11 cm" color="#22c55e" extraLabel="Bola Sepak" />,
+    parts: [
+      { label: "a.", math: "r = 11 \\text{ cm}" },
+      { label: "b.", math: "L = 4 \\times \\frac{22}{7} \\times 11^2 = \\ldots \\text{ cm}^2" },
+    ],
+  }),
+  Qn(26, "Soal Cerita – Bola Plastik", "app", {
+    content: "Sebuah bola plastik berjari-jari 3,5 cm dijual dengan harga Rp500 per cm² bahan. Berapa harga satu bola? (π = 22/7)",
+    diagram: <SphereSVG r="3,5 cm" color="#f472b6" extraLabel="Bola Plastik" />,
+    parts: [
+      { label: "a.", math: "L = 4 \\times \\frac{22}{7} \\times (3{,}5)^2 = \\ldots \\text{ cm}^2" },
+      { label: "b.", math: "\\text{Harga} = L \\times 500 = \\text{Rp}\\ldots" },
+    ],
+  }),
+  Qn(27, "UN Style – Bola dalam Kubus", "app", {
+    content: "Sebuah bola dimasukkan ke dalam kubus bersisi 14 cm dengan tepat (bola menyentuh semua sisi). Berapa volume sisa di dalam kubus? (π = 22/7)",
+    diagram: <SphereSVG r="7 cm" />,
+    parts: [
+      { label: "a.", math: "V_{\\text{kubus}} = 14^3 = \\ldots \\text{ cm}^3" },
+      { label: "b.", math: "V_{\\text{bola}} = \\frac{4}{3} \\times \\frac{22}{7} \\times 7^3 = \\ldots \\text{ cm}^3" },
+      { label: "c.", math: "V_{\\text{sisa}} = \\ldots - \\ldots = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(28, "Soal Cerita – Balon Udara", "app", {
+    content: "Sebuah balon udara berbentuk bola berdiameter 10 m. Berapa m³ gas yang diisi ke dalam balon? (π = 3,14)",
+    diagram: <SphereSVG r="5 m" color="#fbbf24" extraLabel="Balon Udara" />,
+    parts: [
+      { label: "a.", math: "V = \\frac{4}{3} \\times 3{,}14 \\times 5^3 = \\ldots \\text{ m}^3" },
+    ],
+  }),
+  Qn(29, "ANBK – Bola Besar vs Bola Kecil", "app", {
+    content: "Sebuah bola besar dengan r = 12 cm dipotong menjadi bola-bola kecil berjari-jari 3 cm. Berapa bola kecil yang dihasilkan?",
+    parts: [
+      { label: "a.", math: "V_{\\text{besar}} = \\frac{4}{3}\\pi \\times 12^3 = \\frac{4}{3}\\pi \\times 1728" },
+      { label: "b.", math: "V_{\\text{kecil}} = \\frac{4}{3}\\pi \\times 3^3 = \\frac{4}{3}\\pi \\times 27" },
+      { label: "c.", math: "n = \\frac{V_{\\text{besar}}}{V_{\\text{kecil}}} = \\frac{1728}{27} = \\ldots \\text{ bola}" },
+    ],
+  }),
+  Qn(30, "Soal Cerita – Bola Logam", "app", {
+    content: "Sebuah bola logam berjari-jari 6 cm dimasukkan ke dalam ember berisi air. Berapa cm³ air yang tumpah? (π = 3,14)",
+    diagram: <SphereSVG r="6 cm" color="#38bdf8" extraLabel="Bola Logam" />,
+    parts: [
+      { label: "a.", math: "V = \\frac{4}{3} \\times 3{,}14 \\times 6^3 = \\ldots \\text{ cm}^3" },
+      { label: "b.", text: "Volume air yang tumpah = volume bola = ...cm³" },
+    ],
+  }),
+  Qn(31, "TKA – Bola Terbuat dari Lempung", "app", {
+    content: "Seorang anak membuat bola dari lempung berjari-jari 5 cm. Berapa gram berat lempung jika massa jenis lempung 2 g/cm³? (π = 3,14)",
+    diagram: <SphereSVG r="5 cm" color="#a78bfa" extraLabel="Bola Lempung" />,
+    parts: [
+      { label: "a.", math: "V = \\frac{4}{3} \\times 3{,}14 \\times 125 = \\ldots \\text{ cm}^3" },
+      { label: "b.", math: "m = \\rho \\times V = 2 \\times \\ldots = \\ldots \\text{ gram}" },
+    ],
+  }),
+  Qn(32, "ANBK – Bola dalam Tabung", "app", {
+    content: "Sebuah bola dengan r = 7 cm dimasukkan ke dalam tabung dengan r = 7 cm dan t = 14 cm. Berapa volume ruang kosong dalam tabung? (π = 22/7)",
+    diagram: <SphereSVG r="7 cm" />,
+    parts: [
+      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 14 = \\ldots \\text{ cm}^3" },
+      { label: "b.", math: "V_{\\text{bola}} = \\frac{4}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ cm}^3" },
+      { label: "c.", math: "V_{\\text{sisa}} = \\ldots - \\ldots = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(33, "Soal Cerita – Model Planet", "app", {
+    content: "Sebuah model planet berbentuk bola dengan diameter 1,4 m dicat seluruhnya. Jika 1 kg cat dapat menutup 50 m², berapa kg cat yang dibutuhkan? (π = 22/7)",
+    diagram: <SphereSVG r="0,7 m" color="#a78bfa" extraLabel="Model Planet" />,
+    parts: [
+      { label: "a.", math: "L = 4 \\times \\frac{22}{7} \\times (0{,}7)^2 = \\ldots \\text{ m}^2" },
+      { label: "b.", math: "\\text{Cat} = \\frac{L}{50} = \\ldots \\text{ kg}" },
+    ],
+  }),
+  Qn(34, "Luas Permukaan – Soal Terapan", "app", {
+    content: "Sebuah bola pingpong berdiameter 4 cm akan dibungkus dengan kertas tipis. Jika harga kertas Rp100 per cm², berapa biaya untuk membungkus 6 bola? (π = 3,14)",
+    diagram: <SphereSVG r="2 cm" color="#fbbf24" extraLabel="× 6 bola" />,
+    parts: [
+      { label: "a.", math: "L_1 = 4 \\times 3{,}14 \\times 2^2 = \\ldots \\text{ cm}^2" },
+      { label: "b.", math: "\\text{Biaya} = 6 \\times L_1 \\times 100 = \\text{Rp}\\ldots" },
+    ],
+  }),
+  Qn(35, "ANBK – Bola Dilebur", "app", {
+    content: "Tiga buah bola masing-masing berjari-jari 2 cm, 3 cm, dan 4 cm dilebur menjadi satu bola baru. Tentukan jari-jari bola baru tersebut!",
+    parts: [
+      { label: "a.", math: "V_1 + V_2 + V_3 = \\frac{4}{3}\\pi(8 + 27 + 64) = \\frac{4}{3}\\pi \\times 99" },
+      { label: "b.", math: "\\frac{4}{3}\\pi R^3 = \\frac{4}{3}\\pi \\times 99 \\Rightarrow R^3 = 99 \\Rightarrow R \\approx \\ldots \\text{ cm}" },
+    ],
+  }),
+  Qn(36, "Soal Cerita – Kolam Setengah Bola", "app", {
+    content: "Sebuah kolam mandi anak berbentuk setengah bola berjari-jari 70 cm. Berapa liter air yang dibutuhkan untuk mengisi hingga penuh? (π = 22/7, 1 liter = 1.000 cm³)",
+    diagram: <HalfSphereSVG r="70 cm" />,
+    parts: [
+      { label: "a.", math: "V = \\frac{2}{3}\\pi r^3 = \\frac{2}{3} \\times \\frac{22}{7} \\times 70^3 = \\ldots \\text{ cm}^3" },
+      { label: "b.", math: "V \\text{ (liter)} = \\frac{V}{1000} = \\ldots \\text{ liter}" },
+    ],
+  }),
+  Qn(37, "ANBK – Tiga Bola dalam Tabung", "app", {
+    content: "Tiga bola berjari-jari 7 cm disusun dalam tabung dengan r = 7 cm dan t = 42 cm. Berapa volume ruang kosong? (π = 22/7)",
+    diagram: <SphereSVG r="7 cm" />,
+    parts: [
+      { label: "a.", math: "V_{\\text{tabung}} = \\frac{22}{7} \\times 49 \\times 42 = \\ldots \\text{ cm}^3" },
+      { label: "b.", math: "V_{3\\text{ bola}} = 3 \\times \\frac{4}{3} \\times \\frac{22}{7} \\times 343 = \\ldots \\text{ cm}^3" },
+      { label: "c.", math: "V_{\\text{sisa}} = \\ldots - \\ldots = \\ldots \\text{ cm}^3" },
+    ],
+  }),
+  Qn(38, "Soal Cerita – Produksi Bola Plastik", "app", {
+    content: "Sebuah pabrik memproduksi bola plastik berjari-jari 5 cm. Material plastik untuk seluruh permukaan satu bola memiliki berat 0,1 gram per cm². Berapa gram berat satu bola? (π = 3,14)",
+    diagram: <SphereSVG r="5 cm" color="#a78bfa" extraLabel="Bola Plastik" />,
+    parts: [
+      { label: "a.", math: "L = 4 \\times 3{,}14 \\times 25 = \\ldots \\text{ cm}^2" },
+      { label: "b.", math: "m = 0{,}1 \\times L = \\ldots \\text{ gram}" },
+    ],
+  }),
+  Qn(39, "Soal Cerita – Bumi dan Bulan", "app", {
+    content: "Jari-jari Bumi ≈ 6.400 km dan jari-jari Bulan ≈ 1.600 km. Berapa kali volume Bumi dibanding volume Bulan?",
+    parts: [
+      { label: "a.", math: "\\frac{V_{\\text{Bumi}}}{V_{\\text{Bulan}}} = \\left(\\frac{r_{\\text{Bumi}}}{r_{\\text{Bulan}}}\\right)^3 = \\left(\\frac{6400}{1600}\\right)^3 = 4^3 = \\ldots" },
+    ],
+  }),
+  Qn(40, "Soal Terapan – Tangki Bahan Bakar", "app", {
+    content: "Sebuah tangki bahan bakar berbentuk bola berjari-jari 1,05 m. Berapa liter kapasitas tangki? (π = 22/7, 1 m³ = 1.000 liter)",
+    diagram: <SphereSVG r="1,05 m" color="#fbbf24" extraLabel="Tangki BBM" />,
+    parts: [
+      { label: "a.", math: "V = \\frac{4}{3} \\times \\frac{22}{7} \\times (1{,}05)^3 = \\ldots \\text{ m}^3" },
+      { label: "b.", math: "V \\text{ (liter)} = \\ldots \\times 1000 = \\ldots \\text{ liter}" },
+    ],
+  }),
 ];
 
 const MC_OFFSET = 16;
+
+function CatDivider({ cat }: { cat: Cat }) {
+  const { icon, label, color } = CAT_LABELS[cat];
+  return (
+    <div className="flex items-center gap-2 mt-2 mb-1">
+      <div className="h-px flex-1 bg-white/8" />
+      <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${color}`}>
+        {icon} {label}
+      </span>
+      <div className="h-px flex-1 bg-white/8" />
+    </div>
+  );
+}
 
 const optionStyle = (key: OptionKey, selected: OptionKey | undefined, answer: OptionKey, revealed: boolean) => {
   if (!revealed) {
@@ -755,56 +759,61 @@ const BolaPage = () => {
           <div className="h-px flex-1 bg-indigo-500/20" />
         </div>
 
-        <div className="flex flex-col gap-4 mb-8 animate-slide-up">
+        <div className="flex flex-col gap-3 mb-8 animate-slide-up">
           {mcQuestions.map((q, i) => {
             const isRevealed = !!revealed[q.n];
             const sel = selected[q.n];
             const isCorrect = isRevealed && sel === q.answer;
             const isWrong = isRevealed && sel && sel !== q.answer;
+            const prevCat = i > 0 ? mcQuestions[i - 1].cat : null;
+            const showDivider = q.cat !== prevCat;
             return (
-              <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-                style={{ animationDelay: `${i * 0.015}s` }}>
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
-                <div className={`absolute inset-0 rounded-2xl transition-colors duration-300 ${isCorrect ? "border border-emerald-500/40" : isWrong ? "border border-rose-500/40" : "border border-indigo-500/20"}`} />
-                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-400 to-violet-500 rounded-l-2xl" />
-                <div className="relative px-5 py-4">
-                  <div className="flex items-start gap-3">
-                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors ${isCorrect ? "bg-emerald-500/20 border-emerald-400/50" : isWrong ? "bg-rose-500/20 border-rose-400/50" : "bg-indigo-500/20 border-indigo-400/50"}`}>
-                      <span className={`text-xs font-bold ${isCorrect ? "text-emerald-300" : isWrong ? "text-rose-300" : "text-indigo-300"}`}>{q.n}</span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                        {q.title}
-                      </span>
-                      <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>
-                      {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
-                      <div className="grid grid-cols-1 gap-2 mb-3">
-                        {q.options.map(opt => (
-                          <button key={opt.key}
-                            onClick={() => handleSelect(q.n, opt.key)}
-                            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body transition-all cursor-pointer ${optionStyle(opt.key, sel, q.answer, isRevealed)}`}>
-                            <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
-                              isRevealed && opt.key === q.answer ? "border-emerald-400 text-emerald-300 bg-emerald-500/20"
-                              : isRevealed && sel === opt.key && opt.key !== q.answer ? "border-rose-400 text-rose-300 bg-rose-500/20"
-                              : sel === opt.key ? "border-indigo-400 text-indigo-300 bg-indigo-500/20"
-                              : "border-white/20 text-white/50"
-                            }`}>{opt.key}</span>
-                            <span>{opt.text}</span>
-                            {isRevealed && opt.key === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>}
-                            {isRevealed && sel === opt.key && opt.key !== q.answer && <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>}
-                          </button>
-                        ))}
+              <div key={q.n}>
+                {showDivider && <CatDivider cat={q.cat} />}
+                <div className="relative rounded-2xl overflow-hidden animate-slide-up"
+                  style={{ animationDelay: `${i * 0.015}s` }}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
+                  <div className={`absolute inset-0 rounded-2xl transition-colors duration-300 ${isCorrect ? "border border-emerald-500/40" : isWrong ? "border border-rose-500/40" : "border border-indigo-500/20"}`} />
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-400 to-violet-500 rounded-l-2xl" />
+                  <div className="relative px-5 py-4">
+                    <div className="flex items-start gap-3">
+                      <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors ${isCorrect ? "bg-emerald-500/20 border-emerald-400/50" : isWrong ? "bg-rose-500/20 border-rose-400/50" : "bg-indigo-500/20 border-indigo-400/50"}`}>
+                        <span className={`text-xs font-bold ${isCorrect ? "text-emerald-300" : isWrong ? "text-rose-300" : "text-indigo-300"}`}>{q.n}</span>
                       </div>
-                      {!isRevealed ? (
-                        <button onClick={() => handleReveal(q.n)}
-                          className="text-xs px-3 py-1.5 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/25 transition-all cursor-pointer font-body">
-                          Lihat Jawaban
-                        </button>
-                      ) : (
-                        <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
-                          {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
+                      <div className="flex-1 min-w-0">
+                        <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                          {q.title}
+                        </span>
+                        <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>
+                        {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
+                        <div className="grid grid-cols-1 gap-2 mb-3">
+                          {q.options.map(opt => (
+                            <button key={opt.key}
+                              onClick={() => handleSelect(q.n, opt.key)}
+                              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body transition-all cursor-pointer ${optionStyle(opt.key, sel, q.answer, isRevealed)}`}>
+                              <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
+                                isRevealed && opt.key === q.answer ? "border-emerald-400 text-emerald-300 bg-emerald-500/20"
+                                : isRevealed && sel === opt.key && opt.key !== q.answer ? "border-rose-400 text-rose-300 bg-rose-500/20"
+                                : sel === opt.key ? "border-indigo-400 text-indigo-300 bg-indigo-500/20"
+                                : "border-white/20 text-white/50"
+                              }`}>{opt.key}</span>
+                              <span>{opt.text}</span>
+                              {isRevealed && opt.key === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>}
+                              {isRevealed && sel === opt.key && opt.key !== q.answer && <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>}
+                            </button>
+                          ))}
                         </div>
-                      )}
+                        {!isRevealed ? (
+                          <button onClick={() => handleReveal(q.n)}
+                            className="text-xs px-3 py-1.5 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/25 transition-all cursor-pointer font-body">
+                            Lihat Jawaban
+                          </button>
+                        ) : (
+                          <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
+                            {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -820,43 +829,50 @@ const BolaPage = () => {
           <div className="h-px flex-1 bg-indigo-500/20" />
         </div>
 
-        <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
-              <div className="absolute inset-0 border border-indigo-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-400 to-violet-500 rounded-l-2xl" />
-              <div className="relative px-5 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-indigo-300 text-xs font-bold">{q.n + MC_OFFSET}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                      {q.title}
-                    </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
-                    {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
-                    {q.math && <div className="mb-3 text-white/90 text-sm"><BlockMath math={q.math} /></div>}
-                    {q.parts && (
-                      <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
-                            {p.label && <span className="text-indigo-400 text-xs font-bold shrink-0 mt-0.5 w-5">{p.label}</span>}
-                            <div className="flex-1 min-w-0">
-                              {p.text && <span className="font-body text-sm text-white/80">{p.text}</span>}
-                              {p.math && <span className="text-white/90 text-sm"><InlineMath math={p.math} /></span>}
-                            </div>
-                          </div>
-                        ))}
+        <div className="flex flex-col gap-3 animate-slide-up">
+          {questions.map((q, i) => {
+            const prevCat = i > 0 ? questions[i - 1].cat : null;
+            const showDivider = q.cat !== prevCat;
+            return (
+              <div key={q.n}>
+                {showDivider && <CatDivider cat={q.cat} />}
+                <div className="relative rounded-2xl overflow-hidden animate-slide-up"
+                  style={{ animationDelay: `${i * 0.02}s` }}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
+                  <div className="absolute inset-0 border border-indigo-500/20 rounded-2xl" />
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-400 to-violet-500 rounded-l-2xl" />
+                  <div className="relative px-5 py-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-400/50 flex items-center justify-center shrink-0">
+                        <span className="text-indigo-300 text-xs font-bold">{q.n + MC_OFFSET}</span>
                       </div>
-                    )}
+                      <div className="flex-1 min-w-0">
+                        <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                          {q.title}
+                        </span>
+                        {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                        {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
+                        {q.math && <div className="mb-3 text-white/90 text-sm"><BlockMath math={q.math} /></div>}
+                        {q.parts && (
+                          <div className="flex flex-col gap-2">
+                            {q.parts.map((p, pi) => (
+                              <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
+                                {p.label && <span className="text-indigo-400 text-xs font-bold shrink-0 mt-0.5 w-5">{p.label}</span>}
+                                <div className="flex-1 min-w-0">
+                                  {p.text && <span className="font-body text-sm text-white/80">{p.text}</span>}
+                                  {p.math && <span className="text-white/90 text-sm"><InlineMath math={p.math} /></span>}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-8 text-center">
