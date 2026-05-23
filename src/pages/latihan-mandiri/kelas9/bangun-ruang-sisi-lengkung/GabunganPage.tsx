@@ -248,32 +248,8 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 5, title: "Volume Peluru Kecil (Tabung + Kerucut)", cat: "tab-ker",
-    content: "Sebuah peluru: tabung r = 5 cm, t = 9 cm, dan ujung kerucut r = 5 cm, t = 3 cm. Total volumenya adalah …",
-    diagram: <TabungKerucutSVG r={5} tTab={9} tKer={3} />,
-    options: [
-      { key: "A", text: "628 cm³" },
-      { key: "B", text: "706,5 cm³" },
-      { key: "C", text: "785 cm³" },
-      { key: "D", text: "942 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 6, title: "Luas Selimut Pensil Runcing", cat: "tab-ker",
-    content: "Model pensil: tabung r = 0,5 cm, t = 15 cm, ujung kerucut r = 0,5 cm, s = 2 cm. Luas selimut gabungan (tanpa alas) adalah …",
-    diagram: <TabungKerucutSVG r={0.5} tTab={15} tKer={2} />,
-    options: [
-      { key: "A", text: "47,1 cm²" },
-      { key: "B", text: "50,24 cm²" },
-      { key: "C", text: "56,52 cm²" },
-      { key: "D", text: "62,8 cm²" },
-    ],
-    answer: "B",
-  },
-  {
     n: 7, title: "Luas Kain Tenda (Selimut + Atap)", cat: "tab-ker",
-    content: "Tenda: tabung r = 3 m, t = 2 m, atap kerucut r = 3 m, s = 5 m. Luas kain yang diperlukan (selimut tabung + selimut kerucut) adalah …",
+    content: "Tenda: tabung r = 3 m, t = 2 m, atap kerucut r = 3 m, s = 5 m. Luas kain yang diperlukan adalah …",
     diagram: <TabungKerucutSVG r={3} tTab={2} tKer={4} />,
     options: [
       { key: "A", text: "47,1 m²" },
@@ -283,56 +259,8 @@ const mcQuestions: QMC[] = [
     ],
     answer: "D",
   },
-  {
-    n: 8, title: "Luas Selimut Corong + Tabung", cat: "tab-ker",
-    content: "Corong: kerucut r = 10 cm, s = 15 cm, disambung tabung r = 10 cm, t = 20 cm. Luas selimut gabungan adalah …",
-    diagram: <TabungKerucutSVG r={10} tTab={20} tKer={12} />,
-    options: [
-      { key: "A", text: "1.099 cm²" },
-      { key: "B", text: "1.413 cm²" },
-      { key: "C", text: "1.727 cm²" },
-      { key: "D", text: "2.041 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 9, title: "Volume Gabungan Tabung + Kerucut", cat: "tab-ker",
-    content: "Sebuah bangun terdiri dari tabung r = 3 cm, t = 8 cm, dan kerucut r = 3 cm, t = 6 cm. Volume totalnya adalah …",
-    diagram: <TabungKerucutSVG r={3} tTab={8} tKer={6} />,
-    options: [
-      { key: "A", text: "169,56 cm³" },
-      { key: "B", text: "226,08 cm³" },
-      { key: "C", text: "282,6 cm³" },
-      { key: "D", text: "339,12 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 10, title: "Volume Gentong + Tutup Kerucut", cat: "tab-ker",
-    content: "Gentong: tabung r = 21 cm, t = 40 cm, tutup kerucut r = 21 cm, t = 14 cm. Total volume adalah …",
-    diagram: <TabungKerucutSVG r={21} tTab={40} tKer={14} />,
-    options: [
-      { key: "A", text: "49.140 cm³" },
-      { key: "B", text: "55.440 cm³" },
-      { key: "C", text: "61.908 cm³" },
-      { key: "D", text: "68.376 cm³" },
-    ],
-    answer: "C",
-  },
 
   /* ── TABUNG + SETENGAH BOLA ── */
-  {
-    n: 11, title: "Volume Kapsul (Tabung + 2 ½ Bola)", cat: "tab-hemi",
-    content: "Kapsul obat: tabung r = 3 cm, t = 10 cm, dengan kedua ujung setengah bola r = 3 cm (total = tabung + 1 bola penuh). Volume kapsul adalah …",
-    diagram: <TabungHemiSVG r={3} tTab={10} />,
-    options: [
-      { key: "A", text: "282,6 cm³" },
-      { key: "B", text: "339,12 cm³" },
-      { key: "C", text: "395,64 cm³" },
-      { key: "D", text: "452,16 cm³" },
-    ],
-    answer: "C",
-  },
   {
     n: 12, title: "Luas Permukaan Tangki (Tabung + ½ Bola)", cat: "tab-hemi",
     content: "Tangki: tabung r = 21 cm, t = 50 cm, tutup atas setengah bola r = 21 cm. Luas permukaan luar (alas + selimut + ½ bola) adalah …",
@@ -358,30 +286,6 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 14, title: "Volume Granat Model (Tabung + ½ Bola)", cat: "tab-hemi",
-    content: "Model granat: tabung r = 6 cm, t = 10 cm, bagian atas setengah bola r = 6 cm. Total volumenya adalah …",
-    diagram: <TabungHemiSVG r={6} tTab={10} />,
-    options: [
-      { key: "A", text: "1.130,4 cm³" },
-      { key: "B", text: "1.356,48 cm³" },
-      { key: "C", text: "1.582,56 cm³" },
-      { key: "D", text: "1.808,64 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 15, title: "Volume Balon Gas (Tabung + ½ Bola)", cat: "tab-hemi",
-    content: "Balon gas: tabung r = 21 cm, t = 40 cm, bagian bawah setengah bola r = 21 cm. Total volume adalah …",
-    diagram: <TabungHemiSVG r={21} tTab={40} />,
-    options: [
-      { key: "A", text: "55.440 cm³" },
-      { key: "B", text: "64.900 cm³" },
-      { key: "C", text: "74.844 cm³" },
-      { key: "D", text: "94.248 cm³" },
-    ],
-    answer: "C",
-  },
-  {
     n: 16, title: "Volume Menara Air (Tabung + ½ Bola)", cat: "tab-hemi",
     content: "Menara air: tabung r = 21 cm, t = 20 cm, kubah setengah bola r = 21 cm di atas. Total volume adalah …",
     diagram: <TabungHemiSVG r={21} tTab={20} />,
@@ -394,30 +298,6 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 17, title: "Luas Cat Tiang Bendera (Selimut + Bola)", cat: "tab-hemi",
-    content: "Tiang bendera: selimut tabung r = 2 cm, t = 200 cm, dan ujung atas bola penuh r = 3 cm. Luas permukaan yang dicat adalah …",
-    diagram: <InfoBubbleSVG lines={["Tabung (r=2, t=200)  +  Bola (r=3)", "L_sel = 2×3,14×2×200", "L_bola = 4×3,14×9"]} />,
-    options: [
-      { key: "A", text: "2.199,8 cm²" },
-      { key: "B", text: "2.512 cm²" },
-      { key: "C", text: "2.625,04 cm²" },
-      { key: "D", text: "2.764,5 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 18, title: "Luas Permukaan Mainan (Bola + Tabung)", cat: "tab-hemi",
-    content: "Mainan: bola r = 5 cm di atas tabung r = 5 cm, t = 10 cm. Luas permukaan luar (luas bola + selimut tabung + alas) adalah …",
-    diagram: <TabungHemiSVG r={5} tTab={10} />,
-    options: [
-      { key: "A", text: "471 cm²" },
-      { key: "B", text: "549,5 cm²" },
-      { key: "C", text: "628 cm²" },
-      { key: "D", text: "706,5 cm²" },
-    ],
-    answer: "D",
-  },
-  {
     n: 19, title: "Luas Permukaan Gabungan Tabung + ½ Bola", cat: "tab-hemi",
     content: "Benda: tabung r = 7 cm, t = 10 cm, dan setengah bola di atas r = 7 cm. Luas permukaan luar (alas + selimut + ½ bola) adalah …",
     diagram: <TabungHemiSVG r={7} tTab={10} />,
@@ -426,18 +306,6 @@ const mcQuestions: QMC[] = [
       { key: "B", text: "748 cm²" },
       { key: "C", text: "902 cm²" },
       { key: "D", text: "1.056 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 20, title: "Volume Es Krim Bar (Tabung + Bola Penuh)", cat: "tab-hemi",
-    content: "Es krim bar: tabung r = 3 cm, t = 8 cm, dengan dua ujung masing-masing setengah bola r = 3 cm (= tabung + 1 bola penuh). Volumenya adalah …",
-    diagram: <TabungHemiSVG r={3} tTab={8} />,
-    options: [
-      { key: "A", text: "226,08 cm³" },
-      { key: "B", text: "282,6 cm³" },
-      { key: "C", text: "339,12 cm³" },
-      { key: "D", text: "395,64 cm³" },
     ],
     answer: "C",
   },
@@ -480,18 +348,6 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 24, title: "Volume Ornamen (Kerucut + ½ Bola)", cat: "ker-hemi",
-    content: "Ornamen: kerucut r = 5 cm, t = 12 cm, berdiri di atas setengah bola r = 5 cm. Total volumenya adalah …",
-    diagram: <KerucutHemiSVG r={5} tKer={12} />,
-    options: [
-      { key: "A", text: "314 cm³" },
-      { key: "B", text: "471 cm³" },
-      { key: "C", text: "575,67 cm³" },
-      { key: "D", text: "680,67 cm³" },
-    ],
-    answer: "C",
-  },
-  {
     n: 25, title: "Luas Permukaan (Kerucut + ½ Bola)", cat: "ker-hemi",
     content: "Sebuah ornamen: kerucut r = 6 cm, s = 10 cm, berdiri di atas setengah bola r = 6 cm. Luas permukaan total (selimut kerucut + lengkung ½ bola) adalah …",
     diagram: <KerucutHemiSVG r={6} tKer={8} />,
@@ -505,18 +361,6 @@ const mcQuestions: QMC[] = [
   },
 
   /* ── GABUNGAN CAMPURAN ── */
-  {
-    n: 26, title: "Volume Tiga Bangun (½ Bola + Tabung + Kerucut)", cat: "campuran",
-    content: "Mainan: ½ bola r = 6 cm (bawah) + tabung r = 6 cm, t = 10 cm (tengah) + kerucut r = 6 cm, t = 8 cm (atas). Total volume adalah …",
-    diagram: <HemiTabKerSVG r={6} tTab={10} tKer={8} />,
-    options: [
-      { key: "A", text: "1.130,4 cm³" },
-      { key: "B", text: "1.432,44 cm³" },
-      { key: "C", text: "1.733,84 cm³" },
-      { key: "D", text: "1.884 cm³" },
-    ],
-    answer: "D",
-  },
   {
     n: 27, title: "Volume Roket (½ Bola + Tabung + Kerucut)", cat: "campuran",
     content: "Model roket: ½ bola r = 5 cm (hidung) + tabung r = 5 cm, t = 15 cm (badan) + kerucut r = 5 cm, t = 6 cm (ekor). Total volumenya adalah …",
@@ -542,74 +386,13 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 29, title: "Volume Sisa – Tabung Dilubangi Kerucut", cat: "campuran",
-    content: "Tabung r = 10 cm, t = 20 cm dilubangi kerucut r = 10 cm, t = 20 cm dari atas. Volume benda yang tersisa adalah …",
-    diagram: <InfoBubbleSVG lines={["V_sisa = V_tabung − V_kerucut", "= πr²t − ⅓πr²t", "= ⅔ × πr²t"]} />,
-    options: [
-      { key: "A", text: "2.093,33 cm³" },
-      { key: "B", text: "3.140 cm³" },
-      { key: "C", text: "4.186,67 cm³" },
-      { key: "D", text: "6.280 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 30, title: "Volume Sisa – Kubus Dilubangi Bola", cat: "campuran",
-    content: "Kubus bersisi 6 cm dilubangi di tengah berbentuk bola r = 3 cm. Volume kubus yang tersisa adalah …",
-    diagram: <InfoBubbleSVG lines={["V_kubus = 6³ = 216 cm³", "V_bola = 4/3 × 3,14 × 27", "V_sisa = 216 − V_bola"]} />,
-    options: [
-      { key: "A", text: "56,52 cm³" },
-      { key: "B", text: "102,96 cm³" },
-      { key: "C", text: "144 cm³" },
-      { key: "D", text: "169,56 cm³" },
-    ],
-    answer: "B",
-  },
-  {
     n: 31, title: "Tinggi Air – ½ Bola ke Tabung", cat: "campuran",
     content: "Ember setengah bola r = 21 cm penuh air. Air dituangkan ke tabung r = 7 cm. Tinggi air dalam tabung adalah …",
-    diagram: <InfoBubbleSVG lines={["V_½bola = ²⁄₃ × 22/7 × 21³ = 19.404 cm³", "22/7 × 49 × t = 19.404", "154 × t = 19.404 → t = ?"]} />,
     options: [
       { key: "A", text: "63 cm" },
       { key: "B", text: "84 cm" },
       { key: "C", text: "105 cm" },
       { key: "D", text: "126 cm" },
-    ],
-    answer: "D",
-  },
-  {
-    n: 32, title: "Volume Sisa – Tabung Dilubangi ½ Bola", cat: "campuran",
-    content: "Tabung r = 10 cm, t = 15 cm dilubangi setengah bola r = 10 cm dari atas. Volume benda yang tersisa adalah …",
-    diagram: <TabungHemiSVG r={10} tTab={15} color="#f87171" />,
-    options: [
-      { key: "A", text: "2.093,33 cm³" },
-      { key: "B", text: "2.616,67 cm³" },
-      { key: "C", text: "3.140 cm³" },
-      { key: "D", text: "4.710 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 33, title: "Kapasitas Wajan (½ Bola + Bibir Tabung)", cat: "campuran",
-    content: "Wajan: bagian bola setengah r = 21 cm, dengan bibir tabung r = 21 cm, t = 5 cm. Total kapasitas wajan adalah …",
-    diagram: <TabungHemiSVG r={21} tTab={5} />,
-    options: [
-      { key: "A", text: "6.930 cm³" },
-      { key: "B", text: "19.404 cm³" },
-      { key: "C", text: "22.704 cm³" },
-      { key: "D", text: "26.334 cm³" },
-    ],
-    answer: "D",
-  },
-  {
-    n: 34, title: "Volume Sisa – Tiga Kerucut dalam Tabung", cat: "campuran",
-    content: "Tabung r = 6 cm, t = 9 cm berisi 3 kerucut r = 2 cm, t = 9 cm. Volume ruang kosong dalam tabung adalah …",
-    diagram: <InfoBubbleSVG lines={["V_tabung = 3,14 × 36 × 9", "V_3kerucut = 3 × ⅓ × 3,14 × 4 × 9", "V_sisa = V_tabung − V_3kerucut"]} />,
-    options: [
-      { key: "A", text: "339,12 cm³" },
-      { key: "B", text: "565,2 cm³" },
-      { key: "C", text: "791,28 cm³" },
-      { key: "D", text: "904,32 cm³" },
     ],
     answer: "D",
   },
@@ -622,54 +405,6 @@ const mcQuestions: QMC[] = [
       { key: "B", text: "Rp1.232.000" },
       { key: "C", text: "Rp1.496.000" },
       { key: "D", text: "Rp1.848.000" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 36, title: "Volume Total – Bola + Pipa Tabung", cat: "campuran",
-    content: "Sistem tangki: bola r = 21 cm + pipa tabung r = 3,5 cm, panjang 100 cm. Total volume sistem adalah …",
-    diagram: <InfoBubbleSVG lines={["V_bola = ⁴⁄₃ × 22/7 × 21³ = 38.808 cm³", "V_pipa = 22/7 × 12,25 × 100 = 3.850 cm³", "V_total = 38.808 + 3.850"]} />,
-    options: [
-      { key: "A", text: "38.808 cm³" },
-      { key: "B", text: "40.012 cm³" },
-      { key: "C", text: "42.658 cm³" },
-      { key: "D", text: "46.508 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 37, title: "Kapasitas Bak Cuci (½ Bola) dalam Liter", cat: "campuran",
-    content: "Bak cuci berbentuk setengah bola r = 20 cm. Berapa liter air yang dapat ditampung?",
-    diagram: <InfoBubbleSVG lines={["V = ²⁄₃ × 3,14 × 20³", "= ²⁄₃ × 3,14 × 8.000", "V (liter) = V / 1.000"]} />,
-    options: [
-      { key: "A", text: "8,37 liter" },
-      { key: "B", text: "12,56 liter" },
-      { key: "C", text: "16,75 liter" },
-      { key: "D", text: "25,12 liter" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 38, title: "Selisih Volume – Kerucut vs Tabung", cat: "campuran",
-    content: "Kerucut r = 10 cm, t = 30 cm, dan tabung r = 10 cm, t = 10 cm. Selisih volume keduanya adalah …",
-    diagram: <InfoBubbleSVG lines={["V_kerucut = ⅓ × 3,14 × 100 × 30", "V_tabung  = 3,14 × 100 × 10", "Selisih = |V_kerucut − V_tabung|"]} />,
-    options: [
-      { key: "A", text: "0 cm³" },
-      { key: "B", text: "1.046,67 cm³" },
-      { key: "C", text: "2.093,33 cm³" },
-      { key: "D", text: "3.140 cm³" },
-    ],
-    answer: "A",
-  },
-  {
-    n: 39, title: "Kapasitas Drum (Tabung + ½ Bola) dalam Liter", cat: "campuran",
-    content: "Drum kimia: tabung r = 21 cm, t = 40 cm, tutup bawah setengah bola r = 21 cm. Kapasitas dalam liter adalah …",
-    diagram: <TabungHemiSVG r={21} tTab={40} />,
-    options: [
-      { key: "A", text: "55,44 liter" },
-      { key: "B", text: "64,9 liter" },
-      { key: "C", text: "74,84 liter" },
-      { key: "D", text: "84,26 liter" },
     ],
     answer: "C",
   },
@@ -754,7 +489,7 @@ const GabunganPage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-              <span className="text-emerald-400 text-xs font-bold">📋 40 Soal</span>
+              <span className="text-emerald-400 text-xs font-bold">📋 18 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
@@ -787,7 +522,7 @@ const GabunganPage = () => {
 
         <div className="mb-3 flex items-center gap-2">
           <div className="h-px flex-1 bg-emerald-500/20" />
-          <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–40 · Pilihan Ganda</span>
+          <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal Pilihan Ganda</span>
           <div className="h-px flex-1 bg-emerald-500/20" />
         </div>
 
