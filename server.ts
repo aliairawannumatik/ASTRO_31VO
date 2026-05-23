@@ -14,17 +14,6 @@ const SYSTEM_PROMPT = "Kamu adalah NUMATIK AI, asisten matematika ceria dan bers
 app.use(cors())
 app.use(express.json())
 
-const geminiOptions: ConstructorParameters<typeof GoogleGenAI>[0] = {
-  apiKey: process.env.AI_INTEGRATIONS_GEMINI_API_KEY,
-}
-if (process.env.AI_INTEGRATIONS_GEMINI_BASE_URL) {
-  geminiOptions.httpOptions = {
-    apiVersion: '',
-    baseUrl: process.env.AI_INTEGRATIONS_GEMINI_BASE_URL,
-  }
-}
-const ai = new GoogleGenAI(geminiOptions)
-
 app.post('/api/chat', async (req, res) => {
   try {
     const messages = req.body?.messages
@@ -32,6 +21,17 @@ app.post('/api/chat', async (req, res) => {
     if (!process.env.AI_INTEGRATIONS_GEMINI_API_KEY) {
       return res.status(503).json({ error: 'Layanan AI belum dikonfigurasi di server.' })
     }
+
+    const geminiOptions: ConstructorParameters<typeof GoogleGenAI>[0] = {
+      apiKey: process.env.AI_INTEGRATIONS_GEMINI_API_KEY,
+    }
+    if (process.env.AI_INTEGRATIONS_GEMINI_BASE_URL) {
+      geminiOptions.httpOptions = {
+        apiVersion: '',
+        baseUrl: process.env.AI_INTEGRATIONS_GEMINI_BASE_URL,
+      }
+    }
+    const ai = new GoogleGenAI(geminiOptions)
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({ error: 'Pesan tidak valid.' })
