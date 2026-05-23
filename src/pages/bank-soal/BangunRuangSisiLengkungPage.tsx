@@ -2448,6 +2448,7 @@ const SoalCard = ({ soal }: { soal: Question }) => {
           <span className="text-xs font-bold text-primary/80 bg-primary/10 px-2 py-1 rounded-md">#{soal.id}</span>
           <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${difficultyColor[soal.difficulty]}`}>{soal.difficulty}</span>
           <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${typeColor[soal.type]}`}>{typeLabel[soal.type]}</span>
+          <span className={`text-xs font-semibold px-2 py-1 rounded-full border ${topikColor[getTopik(soal)]}`}>{getTopik(soal)}</span>
           <span className="text-xs text-white/30 font-body">{soal.category}</span>
         </div>
         <div className="mb-4">
@@ -2549,18 +2550,84 @@ const SoalCard = ({ soal }: { soal: Question }) => {
 };
 
 /* ══════════════════════════════════════════════════════
+   TOPIK CLASSIFICATION
+══════════════════════════════════════════════════════ */
+type Topik = "Unsur" | "Luas Permukaan" | "Volume" | "Aplikasi";
+
+const topikOrder: Record<Topik, number> = {
+  "Unsur": 0,
+  "Luas Permukaan": 1,
+  "Volume": 2,
+  "Aplikasi": 3,
+};
+
+const topikColor: Record<Topik, string> = {
+  "Unsur":          "bg-sky-500/20 text-sky-300 border-sky-500/40",
+  "Luas Permukaan": "bg-violet-500/20 text-violet-300 border-violet-500/40",
+  "Volume":         "bg-amber-500/20 text-amber-300 border-amber-500/40",
+  "Aplikasi":       "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+};
+
+function getTopik(soal: Question): Topik {
+  const q   = soal.question.toLowerCase();
+  const cat = soal.category.toLowerCase();
+
+  if (cat.includes("konsep")) return "Unsur";
+  if (cat.includes("kontekstual") || cat.includes("literasi")) return "Aplikasi";
+
+  if (
+    q.includes("volume") ||
+    q.includes("kapasitas") ||
+    q.includes("menampung") ||
+    q.includes("dilebur") ||
+    q.includes("dicetak menjadi") ||
+    q.includes("melebur")
+  ) return "Volume";
+
+  if (q.includes("luas")) return "Luas Permukaan";
+
+  if (
+    q.includes("jumlah") ||
+    q.includes("rusuk") ||
+    q.includes("titik sudut") ||
+    q.includes("hubungan") ||
+    q.includes("rumus") ||
+    q.includes("garis pelukis") ||
+    q.includes("panjang s") ||
+    q.includes("jari-jari") && (q.includes("panjang") || q.includes("mencari") || q.includes("adalah")) && !q.includes("luas") && !q.includes("volume")
+  ) return "Unsur";
+
+  return "Aplikasi";
+}
+
+/* ══════════════════════════════════════════════════════
    MAIN PAGE
 ══════════════════════════════════════════════════════ */
 const BankSoalBangunRuangSisiLengkungPage = () => {
   const navigate = useNavigate();
   const [filterDifficulty, setFilterDifficulty] = useState<Difficulty | "Semua">("Semua");
   const [filterType, setFilterType] = useState<QuestionType | "Semua">("Semua");
+  const [filterTopik, setFilterTopik] = useState<Topik | "Semua">("Semua");
   const [showFilter, setShowFilter] = useState(false);
 
-  const filtered = soalBangunRuangSisiLengkung.filter(s =>
-    (filterDifficulty === "Semua" || s.difficulty === filterDifficulty) &&
-    (filterType === "Semua" || s.type === filterType)
-  );
+  const diffOrder: Record<Difficulty, number> = { "Mudah": 0, "Sedang": 1, "Sulit": 2 };
+
+  const filtered = useMemo(() => {
+    const arr = soalBangunRuangSisiLengkung.filter(s =>
+      (filterDifficulty === "Semua" || s.difficulty === filterDifficulty) &&
+      (filterType === "Semua" || s.type === filterType) &&
+      (filterTopik === "Semua" || getTopik(s) === filterTopik)
+    );
+    return [...arr].sort((a, b) => {
+      const ta = topikOrder[getTopik(a)];
+      const tb = topikOrder[getTopik(b)];
+      if (ta !== tb) return ta - tb;
+      const da = diffOrder[a.difficulty];
+      const db = diffOrder[b.difficulty];
+      if (da !== db) return da - db;
+      return a.id - b.id;
+    });
+  }, [filterDifficulty, filterType, filterTopik]);
 
   const counts = {
     Mudah: soalBangunRuangSisiLengkung.filter(s => s.difficulty === "Mudah").length,
@@ -2584,7 +2651,7 @@ const BankSoalBangunRuangSisiLengkungPage = () => {
           Tabung · Kerucut · Bola · Belahan Bola · Gabungan
         </p>
         <p className="text-white/40 text-xs text-center mb-5 font-body">
-          100 Soal · UN / TKA / HOTS / ANBK / Literasi · PG + MCMA + Benar/Salah · Dengan Pembahasan
+          121 Soal · UN / TKA / HOTS / ANBK / Literasi · PG + MCMA + Benar/Salah · Dengan Pembahasan
         </p>
 
         <div className="flex justify-center gap-2 mb-3 flex-wrap">
@@ -2627,6 +2694,23 @@ const BankSoalBangunRuangSisiLengkungPage = () => {
                     </button>
                   ))}
                 </div>
+              </div>
+              <div>
+                <p className="text-xs text-white/50 mb-2 font-body">Topik:</p>
+                <div className="flex flex-wrap gap-2">
+                  {(["Semua","Unsur","Luas Permukaan","Volume","Aplikasi"] as const).map(tp => (
+                    <button key={tp} onClick={() => { playPopSound(); setFilterTopik(tp); }}
+                      className={`text-xs px-3 py-1.5 rounded-full border font-body cursor-pointer transition-all ${
+                        filterTopik === tp
+                          ? tp === "Semua" ? "bg-primary text-white border-primary"
+                          : `border ${topikColor[tp as Topik]} font-bold`
+                          : "border-border text-white/50 hover:border-primary/40"
+                      }`}>
+                      {tp}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[10px] text-white/30 mt-1.5 font-body">Soal selalu diurutkan: Unsur → Luas Permukaan → Volume → Aplikasi</p>
               </div>
               <p className="text-xs text-white/40 font-body">Menampilkan {filtered.length} dari {soalBangunRuangSisiLengkung.length} soal</p>
             </div>
