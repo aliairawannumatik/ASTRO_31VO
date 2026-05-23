@@ -89,15 +89,15 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 2, title: "Perbandingan Luas Setelah Dilatasi",
-    content: "Segitiga PQR dengan P(2, 1), Q(6, 1), R(4, 5) didilatasi terhadap O dengan k = 2. Berapa kali lebih besar luas △P′Q′R′ dibanding luas △PQR?",
+    n: 2, title: "ANBK — Dilatasi k = −1 dan Rotasi 180°",
+    content: "Titik A(3, 2) didilatasi terhadap O dengan k = −1. Bayangan A′ adalah ...",
     choices: [
-      { label: "A", text: "2 kali" },
-      { label: "B", text: "4 kali" },
-      { label: "C", text: "6 kali" },
-      { label: "D", text: "8 kali" },
+      { label: "A", text: "(3, −2)" },
+      { label: "B", text: "(−3, 2)" },
+      { label: "C", text: "(−3, −2)" },
+      { label: "D", text: "(−6, −4)" },
     ],
-    answer: "B",
+    answer: "C",
   },
   {
     n: 3, title: "Mencari Koordinat Asal dari Bayangan",
@@ -163,7 +163,18 @@ const questions: Q[] = [
     answer: "D",
   },
   {
-    n: 7, title: "Luas Bayangan — Diagram Pembesaran",
+    n: 7, title: "Perbandingan Luas Setelah Dilatasi",
+    content: "Segitiga PQR dengan P(2, 1), Q(6, 1), R(4, 5) didilatasi terhadap O dengan k = 2. Berapa kali lebih besar luas △P′Q′R′ dibanding luas △PQR?",
+    choices: [
+      { label: "A", text: "2 kali" },
+      { label: "B", text: "4 kali" },
+      { label: "C", text: "6 kali" },
+      { label: "D", text: "8 kali" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 8, title: "Luas Bayangan — Diagram Pembesaran",
     diagram: (
       <GridSVG>
         <Poly pts={[[1,0],[2,0],[2,2],[1,2]]} color="#f43f5e" label="P"/>
@@ -184,7 +195,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 8, title: "Mencari Titik Asal dari Bayangan",
+    n: 9, title: "Mencari Titik Asal dari Bayangan",
     content: "Bayangan titik A setelah dilatasi dengan pusat O(0, 0) dan k = 3 adalah A′(12, −9). Koordinat titik A adalah ...",
     choices: [
       { label: "A", text: "(4, −3)" },
@@ -195,7 +206,7 @@ const questions: Q[] = [
     answer: "A",
   },
   {
-    n: 9, title: "Dilatasi dengan Koordinat Variabel",
+    n: 10, title: "Dilatasi dengan Koordinat Variabel",
     content: "Titik A(m, 2m) didilatasi terhadap O(0, 0) dengan k = 3 menghasilkan A′(9, 18). Nilai m adalah ...",
     choices: [
       { label: "A", text: "1" },
@@ -205,22 +216,10 @@ const questions: Q[] = [
     ],
     answer: "C",
   },
-  {
-    n: 10, title: "ANBK — Dilatasi k = −1 dan Rotasi 180°",
-    content: "Titik A(3, 2) didilatasi terhadap O dengan k = −1. Bayangan A′ adalah ...",
-    choices: [
-      { label: "A", text: "(3, −2)" },
-      { label: "B", text: "(−3, 2)" },
-      { label: "C", text: "(−3, −2)" },
-      { label: "D", text: "(−6, −4)" },
-    ],
-    answer: "C",
-  },
   /* ══════════ GRUP 2: DILATASI PUSAT (a, b) ══════════ */
   {
     n: 11, title: "Dilatasi dengan Pusat Bergeser",
     content: "Titik A(5, 4) didilatasi dengan pusat P(1, 2) dan k = 3. Bayangan A′ adalah ...",
-    math: "A' = P + k(A-P)",
     choices: [
       { label: "A", text: "(13, 8)" },
       { label: "B", text: "(12, 6)" },
@@ -234,10 +233,10 @@ const questions: Q[] = [
     diagram: (
       <GridSVG>
         <Dot x={1} y={1} color="#facc15" r={3} label="P(1,1)"/>
-        <Poly pts={[[2,1],[4,1],[2,3]]} color="#f43f5e" label="△"/>
-        <Poly pts={[[3,1],[7,1],[3,5]]} color="#22d3ee" fill="rgba(34,211,238,0.12)" label="△'"/>
-        <DilLine x1={1} y1={1} x2={7} y2={1}/>
-        <DilLine x1={1} y1={1} x2={3} y2={5}/>
+        <Poly pts={[[2,1],[3,1],[2,2]]} color="#f43f5e" label="△"/>
+        <Poly pts={[[3,1],[5,1],[3,3]]} color="#22d3ee" fill="rgba(34,211,238,0.12)" label="△'"/>
+        <DilLine x1={1} y1={1} x2={5} y2={1}/>
+        <DilLine x1={1} y1={1} x2={3} y2={3}/>
       </GridSVG>
     ),
     content: "Segitiga merah didilatasi terhadap pusat P(1, 1). Koordinat bayangan titik (2, 1) adalah ...",
@@ -297,7 +296,6 @@ const questions: Q[] = [
   {
     n: 17, title: "Dilatasi Dilanjut Rotasi 90° (Berlawanan Jarum Jam) Pusat (a, b)",
     content: "Titik C(3, 2) didilatasi terhadap O dengan k = 2 menghasilkan C′(6, 4). C′ dirotasikan 90° berlawanan arah jarum jam terhadap pusat P(2, 0). Koordinat C″ adalah ...",
-    math: String.raw`C''_x = a-(y'-b),\quad C''_y = b+(x'-a)`,
     choices: [
       { label: "A", text: "(4, −2)" },
       { label: "B", text: "(−2, 4)" },
@@ -309,7 +307,6 @@ const questions: Q[] = [
   {
     n: 18, title: "Rotasi 180° Pusat (a, b) Dilanjut Dilatasi Pusat (a, b)",
     content: "Titik D(5, 3) dirotasikan 180° terhadap pusat P(2, 1) menghasilkan D′. D′ kemudian didilatasi terhadap pusat P(2, 1) dengan k = 2 menghasilkan D″. Koordinat D″ adalah ...",
-    math: String.raw`D'=(2a-x,\;2b-y),\quad D''_x=a+k(D'_x-a)`,
     choices: [
       { label: "A", text: "(−1, −1)" },
       { label: "B", text: "(8, 5)" },
@@ -345,7 +342,6 @@ const questions: Q[] = [
   {
     n: 21, title: "Dilatasi Pusat P(1, 2) dengan k = 3",
     content: "Titik A(4, 6) didilatasi terhadap pusat P(1, 2) dengan faktor skala k = 3. Bayangan A′ adalah ...",
-    math: "A' = P + k(A - P)",
     choices: [
       { label: "A", text: "(10, 14)" },
       { label: "B", text: "(13, 20)" },
@@ -357,7 +353,6 @@ const questions: Q[] = [
   {
     n: 22, title: "Dilatasi Pusat Q(2, −1) dengan k = −2",
     content: "Titik B(−1, 3) didilatasi terhadap pusat Q(2, −1) dengan faktor skala k = −2. Bayangan B′ adalah ...",
-    math: "B' = Q + k(B - Q)",
     choices: [
       { label: "A", text: "(−4, −7)" },
       { label: "B", text: "(5, −9)" },
