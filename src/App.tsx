@@ -86,6 +86,7 @@ const BilanganBerpangkatLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/Bi
 const PengertianNotasiPangkatLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/PengertianNotasiPangkatLKPDPage"));
 const SifatOperasiPangkatLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/SifatOperasiPangkatLKPDPage"));
 const BentukAkarLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/BentukAkarLKPDPage"));
+const MerasionalkanAkarLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/MerasionalkanAkarLKPDPage"));
 const NotasiIlmiahLKPDPage = lazy(() => import("./pages/lkpd/kelas9/bilangan-berpangkat/NotasiIlmiahLKPDPage"));
 const KesebangunanKekongruenanLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/KesebangunanKekongruenanMenuPage"));
 const TransformasiGeometriLKPDMenuPage = lazy(() => import("./pages/lkpd/kelas9/TransformasiGeometriMenuPage"));
@@ -998,6 +999,7 @@ const AppInner = () => {
           <Route path="/lkpd/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiPangkatLKPDPage />} />
           <Route path="/lkpd/kelas-9/bilangan-berpangkat/sifat-operasi" element={<SifatOperasiPangkatLKPDPage />} />
           <Route path="/lkpd/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarLKPDPage />} />
+          <Route path="/lkpd/kelas-9/bilangan-berpangkat/merasionalkan-akar" element={<MerasionalkanAkarLKPDPage />} />
           <Route path="/lkpd/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahLKPDPage />} />
           <Route path="/lkpd/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenanLKPDMenuPage />} />
           <Route path="/lkpd/kelas-9/transformasi-geometri" element={<TransformasiGeometriLKPDMenuPage />} />

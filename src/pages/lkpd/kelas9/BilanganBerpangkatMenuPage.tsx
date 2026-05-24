@@ -4,6 +4,7 @@ const subtopics = [
   { label: "PENGERTIAN DAN NOTASI PANGKAT", path: "/lkpd/kelas-9/bilangan-berpangkat/pengertian-notasi", icon: "📝" },
   { label: "SIFAT-SIFAT OPERASI BILANGAN BERPANGKAT", path: "/lkpd/kelas-9/bilangan-berpangkat/sifat-operasi", icon: "⚡" },
   { label: "BENTUK AKAR", path: "/lkpd/kelas-9/bilangan-berpangkat/bentuk-akar", icon: "🌱" },
+  { label: "MERASIONALKAN BENTUK AKAR", path: "/lkpd/kelas-9/bilangan-berpangkat/merasionalkan-akar", icon: "🔁" },
   { label: "NOTASI ILMIAH", path: "/lkpd/kelas-9/bilangan-berpangkat/notasi-ilmiah", icon: "🔬" },
 ];
 
