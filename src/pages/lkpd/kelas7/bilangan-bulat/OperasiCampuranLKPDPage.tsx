@@ -92,16 +92,16 @@ const problems: Problem[] = [
 
   /* ── Soal 4 ─────────────────────────────────── */
   {
-    n: 4, emoji: "⚽", title: "Nilai Tim SMPN 28 BDG",
-    context: "Menang +3, seri +1, kalah −2.\nTim bermain 20 kali: 10 menang, 4 seri. Nilai total adalah …",
+    n: 4, emoji: "⚽", title: "Nilai Tim SMP MAUNG",
+    context: "Dalam suatu pertandingan sepak bola, setiap kemenangan mendapat nilai 3, seri bernilai 1, dan kalah bernilai −2.\nJika tim SMP MAUNG bermain sebanyak 20 kali dengan meraih 10 kemenangan dan 4 seri,\nmaka nilai yang diperoleh tim SMP MAUNG adalah …",
     color: "from-emerald-900/60 to-green-900/60",
     border: "border-emerald-500/40", badge: "bg-emerald-500/20 text-emerald-300",
     lines: [
       { text: "Nilai = (menang × 3) + (seri × 1) + (kalah × (−2))", boxes: [], isHeader: true },
-      { text: "Kalah = 20 − 10 − 4 = %%",                           boxes: [["6"]],         hint: "Total − menang − seri = kalah" },
-      { text: "Nilai = 10 × 3 + 4 × 1 + %% × (−2)",                 boxes: [["6"]],         hint: "Masukkan jumlah kekalahan" },
-      { text: "      = %% + %% + (%%)",                              boxes: [["30"], ["4"], ["-12","–12"]], hint: "Hitung: 10×3, 4×1, 6×(−2)" },
-      { text: "      = %%",                                           boxes: [["22"]],        hint: "30 + 4 − 12 = 22" },
+      { text: "Kalah = 20 − 10 − 4 = %%",                           boxes: [["6"]],                       hint: "Total pertandingan − menang − seri = kalah" },
+      { text: "Nilai = 10 × 3 + 4 × 1 + %% × (−2)",                 boxes: [["6"]],                       hint: "Masukkan jumlah kekalahan (6) ke dalam rumus" },
+      { text: "      = %% + %% + (%%)",                              boxes: [["30"], ["4"], ["-12","–12"]], hint: "Hitung: 10×3=30, 4×1=4, 6×(−2)=−12" },
+      { text: "      = %%",                                           boxes: [["22"]],                      hint: "30 + 4 − 12 = 22" },
     ],
   },
 
