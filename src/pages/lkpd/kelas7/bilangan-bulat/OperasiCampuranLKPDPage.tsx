@@ -1,23 +1,34 @@
-import { useState, useRef } from "react";
+import { useState, useRef, KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
-/* ═══════════════════════════════════════════════════
-   DATA TYPES
-═══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   TYPES
+══════════════════════════════════════════════════════════ */
 
-type StepKind = "fill" | "choice";
+/** One inline box inside an equation line */
+type BoxAnswers = string[]; // acceptable answers for that single box
 
-type Step = {
+/** A line of an equation, may contain %% placeholders for boxes */
+type EqLine = {
+  kind?: "eq";
+  text: string;       // equation text; %% = blank box
+  boxes: BoxAnswers[]; // one entry per %% in text
+  hint?: string;
+  isHeader?: boolean; // just display, no boxes
+};
+
+type ChoiceLine = {
+  kind: "choice";
   label: string;
-  kind: StepKind;
-  answer?: string[];
-  choices?: { key: string; text: string }[];
-  correctChoice?: string;
+  choices: { key: string; text: string }[];
+  correct: string;
   hint?: string;
 };
+
+type Line = EqLine | ChoiceLine;
 
 type Problem = {
   n: number;
@@ -27,373 +38,440 @@ type Problem = {
   color: string;
   border: string;
   badge: string;
-  steps: Step[];
-  solutionLines: string[];
+  lines: Line[];
 };
 
-/* ═══════════════════════════════════════════════════
-   PROBLEM DATA  (10 soal dari PDF)
-═══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   PROBLEM DATA
+══════════════════════════════════════════════════════════ */
 
 const problems: Problem[] = [
+  /* ── Soal 1 ─────────────────────────────────── */
   {
     n: 1, emoji: "🧮", title: "Operasi Campuran I",
     context: "Hasil dari −25 × (8 + (−9)) + (2 − 7) adalah …",
-    color: "from-cyan-900/60 to-blue-900/60", border: "border-cyan-500/40", badge: "bg-cyan-500/20 text-cyan-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Selesaikan dalam kurung pertama:\n8 + (−9) = …", answer: ["-1","–1"], hint: "8 + (−9) = 8 − 9 = −1" },
-      { kind: "fill", label: "Langkah 2 — Selesaikan dalam kurung kedua:\n2 − 7 = …", answer: ["-5","–5"], hint: "2 − 7 = −5" },
-      { kind: "fill", label: "Langkah 3 — Kalikan:\n−25 × (−1) = …", answer: ["25"], hint: "Negatif × negatif = positif → 25" },
-      { kind: "fill", label: "Langkah 4 — Gabungkan:\n25 + (−5) = …", answer: ["20"], hint: "25 − 5 = 20 ✓" },
-    ],
-    solutionLines: [
-      "−25 × (8 + (−9)) + (2 − 7)",
-      "= −25 × (−1) + (−5)",
-      "= 25 + (−5)",
-      "= 20 ✅",
+    color: "from-cyan-900/60 to-blue-900/60",
+    border: "border-cyan-500/40", badge: "bg-cyan-500/20 text-cyan-300",
+    lines: [
+      { text: "−25 × (8 + (−9)) + (2 − 7)", boxes: [], isHeader: true },
+      { text: "= −25 × (%%) + (%%)",         boxes: [["-1","–1"], ["-5","–5"]], hint: "Selesaikan kurung dulu: 8+(−9) dan 2−7" },
+      { text: "= %% + (−5)",                  boxes: [["25"]],                   hint: "−25 × (−1) = 25" },
+      { text: "= %%",                          boxes: [["20"]],                   hint: "25 + (−5) = 20" },
     ],
   },
+
+  /* ── Soal 2 ─────────────────────────────────── */
   {
     n: 2, emoji: "🔢", title: "Operasi Campuran II",
     context: "Hasil dari (−20) + 8 × 5 − 18 : (−3) adalah …",
-    color: "from-violet-900/60 to-purple-900/60", border: "border-violet-500/40", badge: "bg-violet-500/20 text-violet-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Kali dahulu:\n8 × 5 = …", answer: ["40"], hint: "8 × 5 = 40" },
-      { kind: "fill", label: "Langkah 2 — Bagi dahulu:\n18 : (−3) = …", answer: ["-6","–6"], hint: "18 : (−3) = −6 (positif ÷ negatif = negatif)" },
-      { kind: "fill", label: "Langkah 3 — Tambah/kurang dari kiri:\n(−20) + 40 − (−6) = …", answer: ["26"], hint: "−20 + 40 + 6 = 26" },
-    ],
-    solutionLines: [
-      "(−20) + 8 × 5 − 18 : (−3)",
-      "= (−20) + 40 − (−6)",
-      "= (−20) + 40 + 6",
-      "= 26 ✅",
+    color: "from-violet-900/60 to-purple-900/60",
+    border: "border-violet-500/40", badge: "bg-violet-500/20 text-violet-300",
+    lines: [
+      { text: "(−20) + 8 × 5 − 18 : (−3)",   boxes: [], isHeader: true },
+      { text: "= (−20) + %% − (%%)",           boxes: [["40"], ["-6","–6"]], hint: "Kali/bagi dulu: 8×5 dan 18÷(−3)" },
+      { text: "= (−20) + 40 + %%",             boxes: [["6"]],               hint: "−(−6) = +6, jadi tambahkan 6" },
+      { text: "= %%",                           boxes: [["26"]],              hint: "−20 + 40 + 6 = 26" },
     ],
   },
+
+  /* ── Soal 3 ─────────────────────────────────── */
   {
     n: 3, emoji: "📝", title: "Skor Bahasa Inggris Budi",
-    context: "Dalam kompetensi Bahasa Inggris (50 soal): benar +4, salah −2, tidak dijawab −1. Budi menjawab 44 soal dan benar 36 soal. Skor Budi adalah …",
-    color: "from-amber-900/60 to-yellow-900/60", border: "border-amber-500/40", badge: "bg-amber-500/20 text-amber-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Berapa soal yang salah?\nSoal salah = 44 − 36 = …", answer: ["8"], hint: "Budi menjawab 44, benar 36 → salah = 44 − 36 = 8" },
-      { kind: "fill", label: "Langkah 2 — Berapa soal tidak dijawab?\nSoal tidak dijawab = 50 − 44 = …", answer: ["6"], hint: "Total 50 soal, dijawab 44 → tidak dijawab = 50 − 44 = 6" },
-      { kind: "fill", label: "Langkah 3 — Hitung skor benar:\n36 × 4 = …", answer: ["144"], hint: "36 × 4 = 144" },
-      { kind: "fill", label: "Langkah 4 — Hitung skor salah:\n8 × (−2) = …", answer: ["-16","–16"], hint: "8 × (−2) = −16" },
-      { kind: "fill", label: "Langkah 5 — Hitung skor kosong:\n6 × (−1) = …", answer: ["-6","–6"], hint: "6 × (−1) = −6" },
-      { kind: "fill", label: "Langkah 6 — Total skor Budi:\n144 + (−16) + (−6) = …", answer: ["122"], hint: "144 − 16 − 6 = 122" },
-    ],
-    solutionLines: [
-      "Salah = 44 − 36 = 8 soal",
-      "Tidak dijawab = 50 − 44 = 6 soal",
-      "Skor = 36×4 + 8×(−2) + 6×(−1)",
-      "     = 144 − 16 − 6",
-      "     = 122 ✅",
+    context: "50 soal: benar +4 poin, salah −2 poin, tidak dijawab −1 poin.\nBudi menjawab 44 soal dan benar 36 soal. Skor Budi adalah …",
+    color: "from-amber-900/60 to-yellow-900/60",
+    border: "border-amber-500/40", badge: "bg-amber-500/20 text-amber-300",
+    lines: [
+      { text: "Skor = (benar × 4) + (salah × (−2)) + (kosong × (−1))", boxes: [], isHeader: true },
+      { text: "Soal salah  = 44 − 36 = %%",                             boxes: [["8"]],  hint: "Jumlah yang dijawab − yang benar" },
+      { text: "Soal kosong = 50 − 44 = %%",                             boxes: [["6"]],  hint: "Total soal − yang dijawab" },
+      { text: "Skor = 36 × 4 + %% × (−2) + %% × (−1)",                 boxes: [["8"], ["6"]], hint: "Masukkan soal salah dan kosong" },
+      { text: "     = %% + (%%) + (%%)",                                 boxes: [["144"], ["-16","–16"], ["-6","–6"]], hint: "Hitung masing-masing: 36×4, 8×(−2), 6×(−1)" },
+      { text: "     = %%",                                               boxes: [["122"]], hint: "144 − 16 − 6 = 122" },
     ],
   },
+
+  /* ── Soal 4 ─────────────────────────────────── */
   {
     n: 4, emoji: "⚽", title: "Nilai Tim SMPN 28 BDG",
-    context: "Pertandingan: menang +3, seri +1, kalah −2. Tim SMPN 28 BDG bermain 20 kali, meraih 10 kemenangan dan 4 seri. Nilai yang diperoleh adalah …",
-    color: "from-emerald-900/60 to-green-900/60", border: "border-emerald-500/40", badge: "bg-emerald-500/20 text-emerald-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Berapa kali kalah?\nKalah = 20 − 10 − 4 = …", answer: ["6"], hint: "Total 20 − 10 menang − 4 seri = 6 kalah" },
-      { kind: "fill", label: "Langkah 2 — Hitung nilai kemenangan:\n10 × 3 = …", answer: ["30"], hint: "10 × 3 = 30" },
-      { kind: "fill", label: "Langkah 3 — Hitung nilai seri:\n4 × 1 = …", answer: ["4"], hint: "4 × 1 = 4" },
-      { kind: "fill", label: "Langkah 4 — Hitung nilai kekalahan:\n6 × (−2) = …", answer: ["-12","–12"], hint: "6 × (−2) = −12" },
-      { kind: "fill", label: "Langkah 5 — Total nilai:\n30 + 4 + (−12) = …", answer: ["22"], hint: "30 + 4 − 12 = 22" },
-    ],
-    solutionLines: [
-      "Kalah = 20 − 10 − 4 = 6 kali",
-      "Nilai = 10×3 + 4×1 + 6×(−2)",
-      "      = 30 + 4 − 12",
-      "      = 22 ✅",
+    context: "Menang +3, seri +1, kalah −2.\nTim bermain 20 kali: 10 menang, 4 seri. Nilai total adalah …",
+    color: "from-emerald-900/60 to-green-900/60",
+    border: "border-emerald-500/40", badge: "bg-emerald-500/20 text-emerald-300",
+    lines: [
+      { text: "Nilai = (menang × 3) + (seri × 1) + (kalah × (−2))", boxes: [], isHeader: true },
+      { text: "Kalah = 20 − 10 − 4 = %%",                           boxes: [["6"]],         hint: "Total − menang − seri = kalah" },
+      { text: "Nilai = 10 × 3 + 4 × 1 + %% × (−2)",                 boxes: [["6"]],         hint: "Masukkan jumlah kekalahan" },
+      { text: "      = %% + %% + (%%)",                              boxes: [["30"], ["4"], ["-12","–12"]], hint: "Hitung: 10×3, 4×1, 6×(−2)" },
+      { text: "      = %%",                                           boxes: [["22"]],        hint: "30 + 4 − 12 = 22" },
     ],
   },
+
+  /* ── Soal 5 ─────────────────────────────────── */
   {
     n: 5, emoji: "🚌", title: "Penumpang Bus Trans Jakarta",
-    context: "Bus berangkat dari terminal. Di halte 1 turun 4 orang, di halte 2 naik 2 orang. Sampai di pasar ada 15 orang. Berapa penumpang yang naik di terminal?",
-    color: "from-rose-900/60 to-red-900/60", border: "border-rose-500/40", badge: "bg-rose-500/20 text-rose-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Misalkan penumpang di terminal = x.\nSetelah halte 1 (turun 4): x − 4\nSetelah halte 2 (naik 2): x − 4 + 2 = x − 2\nDi pasar ada 15 orang, jadi:\nx − 2 = 15 → x = …", answer: ["17"], hint: "x − 2 = 15 → x = 15 + 2 = 17" },
-    ],
-    solutionLines: [
-      "Misal penumpang awal = x",
-      "x − 4 + 2 = 15",
-      "x − 2 = 15",
-      "x = 17 ✅",
+    context: "Bus berangkat dari terminal. Halte 1: turun 4 orang. Halte 2: naik 2 orang.\nDi pasar ada 15 orang. Berapa penumpang yang naik di terminal?",
+    color: "from-rose-900/60 to-red-900/60",
+    border: "border-rose-500/40", badge: "bg-rose-500/20 text-rose-300",
+    lines: [
+      { text: "Misal penumpang di terminal = x", boxes: [], isHeader: true },
+      { text: "x − 4 + 2 = 15",                  boxes: [], isHeader: true },
+      { text: "x − %% = 15",                      boxes: [["2"]], hint: "−4 + 2 = −2, jadi koefisiennya 2" },
+      { text: "x = 15 + %% = %%",                 boxes: [["2"], ["17"]], hint: "Pindah ruas: x = 15 + 2" },
     ],
   },
+
+  /* ── Soal 6 ─────────────────────────────────── */
   {
     n: 6, emoji: "🌡️", title: "Selisih Suhu Beberapa Negara",
-    context: "Suhu udara: Wina −7°C | Seoul −1°C | Baghdad 39°C | Surabaya 33°C\nSelisih suhu udara yang BENAR adalah …",
-    color: "from-sky-900/60 to-cyan-900/60", border: "border-sky-500/40", badge: "bg-sky-500/20 text-sky-300",
-    steps: [
+    context: "Suhu: Wina −7°C | Seoul −1°C | Baghdad 39°C | Surabaya 33°C\nSelisih suhu yang BENAR adalah …",
+    color: "from-sky-900/60 to-cyan-900/60",
+    border: "border-sky-500/40", badge: "bg-sky-500/20 text-sky-300",
+    lines: [
+      { text: "Selisih Wina − Seoul = (−7) − (−1) = (−7) + 1 = %%",           boxes: [["−6","-6","–6"]], hint: "(−7) − (−1) = −7 + 1 = −6  → selisihnya 6°C, bukan −6°C" },
+      { text: "Selisih Baghdad − Wina = 39 − (−7) = 39 + 7 = %%",             boxes: [["46"]],           hint: "39 + 7 = 46°C, bukan 30°C" },
+      { text: "Selisih Surabaya − Seoul = 33 − (−1) = 33 + 1 = %%",           boxes: [["34"]],           hint: "33 + 1 = 34°C ← ini cocok dengan pilihan C!" },
+      { text: "Selisih Surabaya − Wina  = 33 − (−7) = 33 + 7 = %%",           boxes: [["40"]],           hint: "33 + 7 = 40°C, bukan 39°C" },
       {
         kind: "choice",
-        label: "Pilih pernyataan yang BENAR:",
+        label: "Berdasarkan perhitungan di atas, pernyataan yang BENAR adalah …",
         choices: [
           { key: "A", text: "Selisih suhu Wina dan Seoul = −6°C" },
           { key: "B", text: "Selisih suhu Baghdad dan Wina = 30°C" },
           { key: "C", text: "Selisih suhu Surabaya dan Seoul = 34°C" },
           { key: "D", text: "Selisih suhu Surabaya dan Wina = 39°C" },
         ],
-        correctChoice: "C",
-        hint: "Hitung: 33 − (−1) = 33 + 1 = 34 ✓",
+        correct: "C",
+        hint: "Perhatikan hasil hitunganmu di atas — mana yang nilainya cocok?",
       },
     ],
-    solutionLines: [
-      "A: Wina − Seoul = −7 − (−1) = −6°C → Selisih = 6°C (bukan −6) ✗",
-      "B: Baghdad − Wina = 39 − (−7) = 46°C (bukan 30) ✗",
-      "C: Surabaya − Seoul = 33 − (−1) = 34°C ✅",
-      "D: Surabaya − Wina = 33 − (−7) = 40°C (bukan 39) ✗",
-    ],
   },
+
+  /* ── Soal 7 ─────────────────────────────────── */
   {
     n: 7, emoji: "🍟", title: "Kembalian Uang Gorengan",
-    context: "Harga gorengan Rp5.000 per 4 buah. Bagus membeli 32 gorengan dan membayar Rp50.000. Uang kembali Bagus adalah …",
-    color: "from-orange-900/60 to-amber-900/60", border: "border-orange-500/40", badge: "bg-orange-500/20 text-orange-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Berapa kelompok 4 gorengan yang dibeli?\n32 ÷ 4 = …", answer: ["8"], hint: "32 ÷ 4 = 8 kelompok" },
-      { kind: "fill", label: "Langkah 2 — Harga total 32 gorengan:\n8 × 5.000 = … (dalam rupiah)", answer: ["40000","40.000"], hint: "8 × 5.000 = 40.000" },
-      { kind: "fill", label: "Langkah 3 — Uang kembali:\n50.000 − 40.000 = … (dalam rupiah)", answer: ["10000","10.000"], hint: "50.000 − 40.000 = 10.000" },
-    ],
-    solutionLines: [
-      "32 ÷ 4 = 8 kelompok",
-      "Harga total = 8 × 5.000 = Rp40.000",
-      "Kembalian = 50.000 − 40.000 = Rp10.000 ✅",
+    context: "Harga: Rp5.000 per 4 gorengan. Bagus membeli 32 gorengan.\nBayar Rp50.000. Uang kembali Bagus adalah …",
+    color: "from-orange-900/60 to-amber-900/60",
+    border: "border-orange-500/40", badge: "bg-orange-500/20 text-orange-300",
+    lines: [
+      { text: "Harga 32 gorengan = (32 ÷ 4) × 5.000", boxes: [], isHeader: true },
+      { text: "= %% × 5.000",                          boxes: [["8"]],              hint: "32 ÷ 4 = 8 kelompok" },
+      { text: "= Rp %%",                               boxes: [["40000","40.000"]], hint: "8 × 5.000 = 40.000" },
+      { text: "Kembalian = 50.000 − %% = Rp %%",       boxes: [["40000","40.000"], ["10000","10.000"]], hint: "50.000 − 40.000 = 10.000" },
     ],
   },
+
+  /* ── Soal 8 ─────────────────────────────────── */
   {
     n: 8, emoji: "❄️", title: "Suhu Kota Moskow",
-    context: "Suhu awal Moskow 11°C. Saat turun salju, suhu turun 4°C setiap 15 menit. Suhu setelah 1 jam turun salju adalah …",
-    color: "from-blue-900/60 to-indigo-900/60", border: "border-blue-500/40", badge: "bg-blue-500/20 text-blue-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Berapa kali interval 15 menit dalam 1 jam?\n60 ÷ 15 = …", answer: ["4"], hint: "60 menit ÷ 15 menit = 4 kali" },
-      { kind: "fill", label: "Langkah 2 — Total penurunan suhu:\n4 × 4°C = …", answer: ["16"], hint: "4 × 4 = 16°C" },
-      { kind: "fill", label: "Langkah 3 — Suhu akhir:\n11 − 16 = …", answer: ["-5","–5"], hint: "11 − 16 = −5°C" },
-    ],
-    solutionLines: [
-      "1 jam = 60 menit = 4 × 15 menit",
-      "Total turun = 4 × 4°C = 16°C",
-      "Suhu akhir = 11 − 16 = −5°C ✅",
+    context: "Suhu awal 11°C. Turun 4°C setiap 15 menit.\nSuhu setelah 1 jam turun salju adalah …",
+    color: "from-blue-900/60 to-indigo-900/60",
+    border: "border-blue-500/40", badge: "bg-blue-500/20 text-blue-300",
+    lines: [
+      { text: "Suhu akhir = 11 − (interval × 4)", boxes: [], isHeader: true },
+      { text: "Interval = 60 ÷ 15 = %% kali",     boxes: [["4"]],   hint: "1 jam = 60 menit → 60 ÷ 15 = 4" },
+      { text: "= 11 − (%% × 4)",                  boxes: [["4"]],   hint: "Masukkan 4 interval" },
+      { text: "= 11 − %%",                         boxes: [["16"]],  hint: "4 × 4 = 16" },
+      { text: "= %%",                              boxes: [["-5","–5"]], hint: "11 − 16 = −5" },
     ],
   },
+
+  /* ── Soal 9 ─────────────────────────────────── */
   {
     n: 9, emoji: "⭐", title: "Operasi Khusus ★",
-    context: "Operasi \"★\" artinya: kalikan bilangan pertama dengan DUA KALI bilangan kedua, lalu tambahkan bilangan kedua.\na ★ b = (a × 2b) + b\nHasil dari 5 ★ 3 adalah …",
-    color: "from-fuchsia-900/60 to-pink-900/60", border: "border-fuchsia-500/40", badge: "bg-fuchsia-500/20 text-fuchsia-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Hitung dua kali bilangan kedua:\n2 × 3 = …", answer: ["6"], hint: "2 × 3 = 6" },
-      { kind: "fill", label: "Langkah 2 — Kalikan bilangan pertama:\n5 × 6 = …", answer: ["30"], hint: "5 × 6 = 30" },
-      { kind: "fill", label: "Langkah 3 — Tambahkan bilangan kedua:\n30 + 3 = …", answer: ["33"], hint: "30 + 3 = 33" },
-    ],
-    solutionLines: [
-      "5 ★ 3 = (5 × 2×3) + 3",
-      "      = (5 × 6) + 3",
-      "      = 30 + 3",
-      "      = 33 ✅",
+    context: "Operasi ★ : a ★ b = (a × 2b) + b\nHasil dari 5 ★ 3 adalah …",
+    color: "from-fuchsia-900/60 to-pink-900/60",
+    border: "border-fuchsia-500/40", badge: "bg-fuchsia-500/20 text-fuchsia-300",
+    lines: [
+      { text: "5 ★ 3 = (5 × 2 × 3) + 3",  boxes: [], isHeader: true },
+      { text: "= (5 × %%) + 3",            boxes: [["6"]],  hint: "2 × 3 = 6" },
+      { text: "= %% + 3",                  boxes: [["30"]], hint: "5 × 6 = 30" },
+      { text: "= %%",                      boxes: [["33"]], hint: "30 + 3 = 33" },
     ],
   },
+
+  /* ── Soal 10 ─────────────────────────────────── */
   {
     n: 10, emoji: "💎", title: "Operasi Khusus #",
-    context: "Operasi \"#\" artinya: kalikan bilangan pertama dengan bilangan kedua, lalu KURANGI hasilnya dengan dua kali bilangan kedua.\na # b = (a × b) − 2b\nHasil dari 5 # (−4) adalah …",
-    color: "from-teal-900/60 to-emerald-900/60", border: "border-teal-500/40", badge: "bg-teal-500/20 text-teal-300",
-    steps: [
-      { kind: "fill", label: "Langkah 1 — Kalikan dua bilangan:\n5 × (−4) = …", answer: ["-20","–20"], hint: "5 × (−4) = −20" },
-      { kind: "fill", label: "Langkah 2 — Hitung dua kali bilangan kedua:\n2 × (−4) = …", answer: ["-8","–8"], hint: "2 × (−4) = −8" },
-      { kind: "fill", label: "Langkah 3 — Kurangkan:\n(−20) − (−8) = …", answer: ["-12","–12"], hint: "(−20) − (−8) = −20 + 8 = −12" },
-    ],
-    solutionLines: [
-      "5 # (−4) = (5 × (−4)) − 2×(−4)",
-      "         = (−20) − (−8)",
-      "         = −20 + 8",
-      "         = −12 ✅",
+    context: "Operasi # : a # b = (a × b) − 2b\nHasil dari 5 # (−4) adalah …",
+    color: "from-teal-900/60 to-emerald-900/60",
+    border: "border-teal-500/40", badge: "bg-teal-500/20 text-teal-300",
+    lines: [
+      { text: "5 # (−4) = (5 × (−4)) − 2 × (−4)", boxes: [], isHeader: true },
+      { text: "= (%%) − (%%)",                      boxes: [["-20","–20"], ["-8","–8"]], hint: "5×(−4)=−20 dan 2×(−4)=−8" },
+      { text: "= (%%) + %%",                         boxes: [["-20","–20"], ["8"]], hint: "−(−8) = +8" },
+      { text: "= %%",                               boxes: [["-12","–12"]], hint: "−20 + 8 = −12" },
     ],
   },
 ];
 
-/* ═══════════════════════════════════════════════════
-   STEP COMPONENT
-═══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   STATE TYPES
+══════════════════════════════════════════════════════════ */
 
-function StepBox({
-  step, stepIdx, problemN,
-  state, onInput, onCheck, onChoice,
-}: {
-  step: Step; stepIdx: number; problemN: number;
-  state: { value: string; status: "idle" | "correct" | "wrong"; selectedChoice?: string };
-  onInput: (v: string) => void;
-  onCheck: () => void;
-  onChoice: (key: string) => void;
+type BoxState = { value: string; status: "idle" | "correct" | "wrong" };
+type LineState = { boxStates: BoxState[]; choiceSelected?: string; status: "idle"|"correct"|"wrong" };
+
+function initLineState(line: Line): LineState {
+  if (line.kind === "choice") return { boxStates: [], status: "idle" };
+  const eq = line as EqLine;
+  if (eq.isHeader || eq.boxes.length === 0) return { boxStates: [], status: "correct" };
+  return { boxStates: eq.boxes.map(() => ({ value: "", status: "idle" as const })), status: "idle" };
+}
+
+/* ══════════════════════════════════════════════════════════
+   INLINE BOX  (small input field inside equation text)
+══════════════════════════════════════════════════════════ */
+
+function InlineBox({ value, status, onChange, onEnter, disabled }: {
+  value: string; status: "idle"|"correct"|"wrong";
+  onChange: (v: string) => void;
+  onEnter: () => void;
+  disabled: boolean;
 }) {
-  const isDone = state.status === "correct";
-  const isWrong = state.status === "wrong";
-  const inputRef = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLInputElement>(null);
+  const width = Math.max(40, value.length * 10 + 28);
 
-  if (step.kind === "choice") {
-    return (
-      <div className={`rounded-xl border p-4 transition-all ${isDone ? "border-emerald-500/50 bg-emerald-500/10" : isWrong ? "border-rose-500/40 bg-rose-500/8" : "border-white/10 bg-white/5"}`}>
-        <p className="text-white/80 text-sm font-body whitespace-pre-line leading-relaxed mb-3">{step.label}</p>
+  return (
+    <input
+      ref={ref}
+      type="text"
+      disabled={disabled || status === "correct"}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => { if (e.key === "Enter") onEnter(); }}
+      style={{ width }}
+      className={`
+        inline-block mx-1 px-2 py-0.5 rounded-lg border text-center font-mono text-sm align-baseline
+        outline-none transition-all duration-200
+        ${status === "correct"
+          ? "bg-emerald-500/20 border-emerald-400/60 text-emerald-200 cursor-default"
+          : status === "wrong"
+          ? "bg-rose-500/15 border-rose-400/60 text-rose-200"
+          : disabled
+          ? "bg-white/5 border-white/10 text-white/25 cursor-not-allowed"
+          : "bg-white/10 border-white/30 text-white focus:border-yellow-400/70 focus:bg-white/15"}
+      `}
+    />
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   EQUATION LINE RENDERER
+══════════════════════════════════════════════════════════ */
+
+function EqLineRow({ line, lineState, onBoxChange, onCheck, locked }: {
+  line: EqLine;
+  lineState: LineState;
+  onBoxChange: (bi: number, v: string) => void;
+  onCheck: () => void;
+  locked: boolean;
+}) {
+  const isDone   = lineState.status === "correct";
+  const isWrong  = lineState.status === "wrong";
+  const noBoxes  = line.isHeader || line.boxes.length === 0;
+  const allFilled = lineState.boxStates.every(b => b.value.trim() !== "");
+
+  const parts = line.text.split("%%");
+
+  return (
+    <div className={`relative transition-all duration-300 ${locked ? "opacity-30 select-none pointer-events-none" : ""}`}>
+      <div className={`flex items-center flex-wrap gap-y-1 rounded-xl px-3 py-2 border font-mono text-sm leading-relaxed transition-all
+        ${noBoxes
+          ? "border-white/10 bg-white/3 text-white/70 italic"
+          : isDone
+          ? "border-emerald-500/30 bg-emerald-500/8 text-white"
+          : isWrong
+          ? "border-rose-500/30 bg-rose-500/8 text-white"
+          : "border-white/10 bg-white/5 text-white"}`}>
+
+        {noBoxes ? (
+          <span className="text-white/60">{line.text}</span>
+        ) : (
+          <>
+            {parts.map((part, pi) => (
+              <span key={pi} className="inline-flex items-center flex-wrap">
+                <span>{part}</span>
+                {pi < parts.length - 1 && (
+                  <InlineBox
+                    value={lineState.boxStates[pi]?.value ?? ""}
+                    status={lineState.boxStates[pi]?.status ?? "idle"}
+                    onChange={v => onBoxChange(pi, v)}
+                    onEnter={() => { if (allFilled) onCheck(); }}
+                    disabled={locked || isDone}
+                  />
+                )}
+              </span>
+            ))}
+
+            {!isDone && (
+              <button
+                disabled={!allFilled}
+                onClick={() => { playPopSound(); onCheck(); }}
+                className="ml-2 inline-flex items-center gap-1 px-3 py-0.5 rounded-lg border text-xs font-bold transition-all cursor-pointer
+                  bg-white/10 border-white/20 text-white/80 hover:bg-white/20 hover:text-white
+                  disabled:opacity-30 disabled:cursor-not-allowed">
+                Cek ✓
+              </button>
+            )}
+
+            {isDone && <span className="ml-2 text-emerald-400 text-xs font-bold">✅</span>}
+            {isWrong && (
+              <span className="ml-2 text-rose-400 text-xs">
+                ✗ {line.hint && <span className="text-white/50 ml-1">💡 {line.hint}</span>}
+              </span>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   CHOICE LINE RENDERER
+══════════════════════════════════════════════════════════ */
+
+function ChoiceLineRow({ line, lineState, onSelect, onCheck, locked }: {
+  line: ChoiceLine;
+  lineState: LineState;
+  onSelect: (key: string) => void;
+  onCheck: () => void;
+  locked: boolean;
+}) {
+  const isDone  = lineState.status === "correct";
+  const isWrong = lineState.status === "wrong";
+  const sel     = lineState.choiceSelected;
+
+  return (
+    <div className={`transition-all duration-300 ${locked ? "opacity-30 select-none pointer-events-none" : ""}`}>
+      <div className={`rounded-xl border px-3 py-3 transition-all
+        ${isDone ? "border-emerald-500/30 bg-emerald-500/8" : isWrong ? "border-rose-500/30 bg-rose-500/8" : "border-white/10 bg-white/5"}`}>
+        <p className="text-white/80 text-sm font-body mb-3 leading-relaxed">{line.label}</p>
         <div className="grid grid-cols-1 gap-2">
-          {step.choices!.map(ch => {
-            const sel = state.selectedChoice === ch.key;
-            const correct = isDone && ch.key === step.correctChoice;
-            const wrong = isWrong && sel && ch.key !== step.correctChoice;
-            const correctHighlight = isDone && ch.key === step.correctChoice;
+          {line.choices.map(ch => {
+            const isSelected = sel === ch.key;
+            const isCorrect  = isDone && ch.key === line.correct;
+            const isWrongSel = isWrong && isSelected;
             return (
               <button key={ch.key} disabled={isDone}
-                onClick={() => { playPopSound(); onChoice(ch.key); }}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body transition-all cursor-pointer
-                  ${correctHighlight ? "bg-emerald-500/25 border-emerald-400 text-emerald-200"
-                  : wrong ? "bg-rose-500/25 border-rose-400 text-rose-200 line-through"
-                  : sel ? "bg-white/15 border-white/40 text-white"
-                  : "bg-white/5 border-white/10 text-white/80 hover:bg-white/10 hover:border-white/25"}`}>
+                onClick={() => { playPopSound(); onSelect(ch.key); }}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg border text-left text-sm font-body transition-all cursor-pointer
+                  ${isCorrect  ? "bg-emerald-500/20 border-emerald-400/60 text-emerald-200"
+                  : isWrongSel ? "bg-rose-500/15 border-rose-400/60 text-rose-200 line-through"
+                  : isSelected ? "bg-white/15 border-white/40 text-white"
+                  : "bg-white/5 border-white/10 text-white/75 hover:bg-white/10 hover:border-white/25"}`}>
                 <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0
-                  ${correctHighlight ? "border-emerald-400 text-emerald-300" : sel ? "border-white/60 text-white" : "border-white/20 text-white/50"}`}>{ch.key}</span>
+                  ${isCorrect ? "border-emerald-400 text-emerald-300" : isSelected ? "border-white/60 text-white" : "border-white/20 text-white/40"}`}>{ch.key}</span>
                 <span>{ch.text}</span>
-                {correctHighlight && <span className="ml-auto text-emerald-400 font-bold">✓</span>}
-                {wrong && <span className="ml-auto text-rose-400 font-bold">✗</span>}
+                {isCorrect  && <span className="ml-auto text-emerald-400">✓</span>}
+                {isWrongSel && <span className="ml-auto text-rose-400">✗</span>}
               </button>
             );
           })}
         </div>
-        {state.selectedChoice && !isDone && (
+        {sel && !isDone && (
           <button onClick={() => { playPopSound(); onCheck(); }}
             className="mt-3 w-full py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm font-bold hover:bg-white/15 transition-all cursor-pointer font-body">
             Cek Jawaban ✓
           </button>
         )}
-        {isDone && <p className="mt-2 text-emerald-400 text-xs font-bold">✅ Benar! Lanjut ke langkah berikutnya.</p>}
-        {isWrong && <p className="mt-2 text-rose-400 text-xs">❌ Kurang tepat. Coba lagi! 💡 {step.hint}</p>}
+        {isWrong && <p className="mt-2 text-rose-400 text-xs">❌ Kurang tepat. {line.hint && <span className="text-white/50">💡 {line.hint}</span>}</p>}
+        {isDone  && <p className="mt-2 text-emerald-400 text-xs font-bold">✅ Benar! Jawaban C adalah yang tepat.</p>}
       </div>
-    );
-  }
-
-  return (
-    <div className={`rounded-xl border p-4 transition-all ${isDone ? "border-emerald-500/50 bg-emerald-500/10" : isWrong ? "border-rose-500/40 bg-rose-500/8" : "border-white/10 bg-white/5"}`}>
-      <p className="text-white/80 text-sm font-body whitespace-pre-line leading-relaxed mb-3">{step.label}</p>
-      <div className="flex gap-2 items-center">
-        <div className="relative flex-1">
-          <input
-            ref={inputRef}
-            type="text"
-            disabled={isDone}
-            value={state.value}
-            onChange={e => onInput(e.target.value)}
-            onKeyDown={e => { if (e.key === "Enter" && state.value.trim()) { playPopSound(); onCheck(); } }}
-            placeholder="Ketik jawabanmu di sini …"
-            className={`w-full px-4 py-2.5 rounded-xl border text-sm font-mono text-white bg-transparent outline-none transition-all
-              placeholder:text-white/25
-              ${isDone ? "border-emerald-400/60 bg-emerald-500/10 text-emerald-200"
-              : isWrong ? "border-rose-400/60 bg-rose-500/8"
-              : "border-white/20 focus:border-white/50 bg-white/5 focus:bg-white/8"}`}
-          />
-          {isDone && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 font-bold">✓</span>}
-          {isWrong && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-rose-400 font-bold">✗</span>}
-        </div>
-        {!isDone && (
-          <button
-            onClick={() => { if (state.value.trim()) { playPopSound(); onCheck(); } }}
-            disabled={!state.value.trim()}
-            className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white text-sm font-bold hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer font-body shrink-0">
-            Cek ✓
-          </button>
-        )}
-      </div>
-      {isDone && <p className="mt-2 text-emerald-400 text-xs font-bold">✅ Benar! Lanjut ke langkah berikutnya.</p>}
-      {isWrong && <p className="mt-2 text-rose-400 text-xs">❌ Kurang tepat. Coba lagi! 💡 {step.hint}</p>}
     </div>
   );
 }
 
-/* ═══════════════════════════════════════════════════
-   PROBLEM CARD COMPONENT
-═══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   PROBLEM CARD
+══════════════════════════════════════════════════════════ */
 
-function ProblemCard({ prob, stepStates, onInput, onCheck, onChoice }:{
+function ProblemCard({ prob, lineStates, onBoxChange, onCheck, onChoiceSelect, onChoiceCheck }: {
   prob: Problem;
-  stepStates: { value: string; status: "idle"|"correct"|"wrong"; selectedChoice?: string }[];
-  onInput: (si: number, v: string) => void;
-  onCheck: (si: number) => void;
-  onChoice: (si: number, key: string) => void;
+  lineStates: LineState[];
+  onBoxChange: (li: number, bi: number, v: string) => void;
+  onCheck: (li: number) => void;
+  onChoiceSelect: (li: number, key: string) => void;
+  onChoiceCheck: (li: number) => void;
 }) {
-  const allDone = stepStates.every(s => s.status === "correct");
-  const doneCount = stepStates.filter(s => s.status === "correct").length;
-  const [showSolution, setShowSolution] = useState(false);
+  const [showSol, setShowSol] = useState(false);
+  const allDone = lineStates.every(s => s.status === "correct");
+  const doneCount = lineStates.filter(s => s.status === "correct").length;
 
   return (
     <div className={`relative rounded-2xl overflow-hidden border ${prob.border} bg-gradient-to-br ${prob.color} backdrop-blur-sm`}>
       {allDone && (
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <span key={i} className="absolute text-lg animate-bounce"
-              style={{ top: `${10 + i * 14}%`, left: `${5 + i * 16}%`, animationDelay: `${i * 0.15}s`, opacity: 0.6 }}>
-              {["⭐","✨","🎉","💫","🌟","🎊"][i]}
-            </span>
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {["⭐","✨","🎉","💫","🌟","🎊","⭐","✨"].map((e, i) => (
+            <span key={i} className="absolute text-base animate-bounce"
+              style={{ top: `${8 + i * 11}%`, left: `${4 + i * 13}%`, animationDelay: `${i * 0.12}s`, opacity: 0.5 }}>{e}</span>
           ))}
         </div>
       )}
 
       <div className="relative p-5">
+        {/* Header */}
         <div className="flex items-start gap-3 mb-4">
-          <div className={`w-10 h-10 rounded-full ${prob.badge} border border-white/20 flex items-center justify-center text-xl shrink-0 font-bold`}>
+          <div className={`w-10 h-10 rounded-full ${prob.badge} border border-white/20 flex items-center justify-center text-lg shrink-0 font-black`}>
             {allDone ? "✅" : prob.n}
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${prob.badge}`}>
-                {prob.emoji} Soal {prob.n}
-              </span>
-              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${prob.badge}`}>
-                {prob.title}
-              </span>
+          <div>
+            <div className="flex flex-wrap gap-2 mb-1">
+              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${prob.badge}`}>{prob.emoji} Soal {prob.n}</span>
+              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${prob.badge}`}>{prob.title}</span>
             </div>
-            <p className="font-body text-sm text-white/90 leading-relaxed whitespace-pre-line">{prob.context}</p>
+            <p className="text-white/90 text-sm font-body leading-relaxed whitespace-pre-line">{prob.context}</p>
           </div>
         </div>
 
-        <div className="mb-3 flex items-center gap-2">
+        {/* Divider */}
+        <div className="flex items-center gap-2 mb-3">
           <div className="h-px flex-1 bg-white/10" />
-          <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest px-2">
-            Langkah Penyelesaian ({doneCount}/{prob.steps.length})
+          <span className="text-white/35 text-[10px] font-bold uppercase tracking-widest">
+            Langkah Penyelesaian ({doneCount}/{lineStates.length})
           </span>
           <div className="h-px flex-1 bg-white/10" />
         </div>
 
-        <div className="flex flex-col gap-3">
-          {prob.steps.map((step, si) => {
-            const prevDone = si === 0 || stepStates[si - 1].status === "correct";
-            if (!prevDone) {
+        {/* Lines */}
+        <div className="flex flex-col gap-2">
+          {prob.lines.map((line, li) => {
+            const prevDone = li === 0 || lineStates[li - 1].status === "correct";
+            if (line.kind === "choice") {
               return (
-                <div key={si} className="rounded-xl border border-white/8 p-4 opacity-35 select-none">
-                  <p className="text-white/50 text-sm font-body">{step.label.split("\n")[0]}</p>
-                  <p className="text-white/30 text-xs mt-1">🔒 Selesaikan langkah sebelumnya dulu …</p>
-                </div>
+                <ChoiceLineRow key={li}
+                  line={line} lineState={lineStates[li]}
+                  onSelect={key => onChoiceSelect(li, key)}
+                  onCheck={() => onChoiceCheck(li)}
+                  locked={!prevDone} />
               );
             }
+            const eq = line as EqLine;
             return (
-              <StepBox key={si}
-                step={step} stepIdx={si} problemN={prob.n}
-                state={stepStates[si]}
-                onInput={v => onInput(si, v)}
-                onCheck={() => onCheck(si)}
-                onChoice={key => onChoice(si, key)}
-              />
+              <EqLineRow key={li}
+                line={eq} lineState={lineStates[li]}
+                onBoxChange={(bi, v) => onBoxChange(li, bi, v)}
+                onCheck={() => onCheck(li)}
+                locked={!prevDone} />
             );
           })}
         </div>
 
+        {/* Solution toggle */}
         {allDone && (
           <div className="mt-4">
-            <button onClick={() => { playPopSound(); setShowSolution(s => !s); }}
-              className={`w-full py-2.5 rounded-xl border text-sm font-bold transition-all cursor-pointer font-body
-                ${showSolution ? "bg-white/15 border-white/30 text-white" : "bg-white/8 border-white/15 text-white/70 hover:bg-white/12"}`}>
-              {showSolution ? "▲ Sembunyikan Pembahasan" : "▼ Lihat Pembahasan Lengkap 📖"}
+            <button onClick={() => { playPopSound(); setShowSol(s => !s); }}
+              className="w-full py-2 rounded-xl border text-sm font-bold transition-all cursor-pointer font-body bg-white/8 border-white/15 text-white/60 hover:bg-white/12 hover:text-white/80">
+              {showSol ? "▲ Tutup Pembahasan" : "▼ Lihat Pembahasan Lengkap 📖"}
             </button>
-            {showSolution && (
-              <div className="mt-3 rounded-xl border border-white/15 bg-white/5 p-4">
-                <p className="text-xs font-bold text-white/60 uppercase tracking-wider mb-2">📌 Pembahasan</p>
-                <div className="font-mono text-sm space-y-1">
-                  {prob.solutionLines.map((line, i) => (
-                    <p key={i} className={line.includes("✅") ? "text-emerald-400 font-bold" : "text-white/80"}>{line}</p>
+            {showSol && (
+              <div className="mt-2 rounded-xl border border-white/10 bg-black/20 p-4">
+                <div className="flex flex-col gap-1 font-mono text-sm">
+                  {prob.lines.map((line, li) => (
+                    <span key={li} className={
+                      (line as EqLine).isHeader ? "text-yellow-300/80 font-bold" : "text-white/75"
+                    }>
+                      {(line as EqLine).text ?? (line as ChoiceLine).label}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -405,50 +483,62 @@ function ProblemCard({ prob, stepStates, onInput, onCheck, onChoice }:{
   );
 }
 
-/* ═══════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════
    PAGE
-═══════════════════════════════════════════════════ */
-
-type StepState = { value: string; status: "idle"|"correct"|"wrong"; selectedChoice?: string };
+══════════════════════════════════════════════════════════ */
 
 const OperasiCampuranLKPDPage = () => {
   const navigate = useNavigate();
 
-  const [states, setStates] = useState<StepState[][][]>(
-    problems.map(p => p.steps.map(() => ({ value: "", status: "idle" as const })))
+  const [allLineStates, setAllLineStates] = useState<LineState[][]>(
+    problems.map(p => p.lines.map(initLineState))
   );
 
-  const totalSteps = problems.reduce((a, p) => a + p.steps.length, 0);
-  const doneSteps  = states.reduce((a, ps) => a + ps.filter(s => s.status === "correct").length, 0);
-  const allDone    = doneSteps === totalSteps;
+  const patchLine = (pi: number, li: number, patch: Partial<LineState>) =>
+    setAllLineStates(prev => {
+      const next = prev.map(ls => ls.map(s => ({ ...s, boxStates: [...s.boxStates] })));
+      next[pi][li] = { ...next[pi][li], ...patch };
+      return next;
+    });
 
-  const setStep = (pi: number, si: number, patch: Partial<StepState>) => {
-    setStates(prev => {
-      const next = prev.map(ps => [...ps.map(s => ({ ...s }))]);
-      next[pi][si] = { ...next[pi][si], ...patch };
+  const handleBoxChange = (pi: number, li: number, bi: number, v: string) => {
+    setAllLineStates(prev => {
+      const next = prev.map(ls => ls.map(s => ({ ...s, boxStates: s.boxStates.map(b => ({ ...b })) })));
+      next[pi][li].boxStates[bi] = { value: v, status: "idle" };
+      next[pi][li].status = "idle";
       return next;
     });
   };
 
-  const handleInput = (pi: number, si: number, v: string) =>
-    setStep(pi, si, { value: v, status: "idle" });
-
-  const handleCheck = (pi: number, si: number) => {
-    const step = problems[pi].steps[si];
-    const val  = states[pi][si].value.trim().replace(/\s/g, "");
-    if (step.kind === "fill") {
-      const correct = step.answer!.some(a => a.replace(/\s/g, "").toLowerCase() === val.toLowerCase());
-      setStep(pi, si, { status: correct ? "correct" : "wrong" });
-    } else {
-      const sel = states[pi][si].selectedChoice;
-      setStep(pi, si, { status: sel === step.correctChoice ? "correct" : "wrong" });
-    }
+  const handleCheck = (pi: number, li: number) => {
+    const line = problems[pi].lines[li] as EqLine;
+    const ls   = allLineStates[pi][li];
+    const newBoxes = ls.boxStates.map((b, bi) => {
+      const accepted = line.boxes[bi];
+      const norm = (s: string) => s.trim().replace(/\s/g, "").toLowerCase();
+      const correct = accepted.some(a => norm(a) === norm(b.value));
+      return { ...b, status: correct ? "correct" as const : "wrong" as const };
+    });
+    const allCorrect = newBoxes.every(b => b.status === "correct");
+    patchLine(pi, li, { boxStates: newBoxes, status: allCorrect ? "correct" : "wrong" });
   };
 
-  const handleChoice = (pi: number, si: number, key: string) =>
-    setStep(pi, si, { selectedChoice: key, status: "idle" });
+  const handleChoiceSelect = (pi: number, li: number, key: string) => {
+    patchLine(pi, li, { choiceSelected: key, status: "idle" });
+  };
 
-  const pct = Math.round((doneSteps / totalSteps) * 100);
+  const handleChoiceCheck = (pi: number, li: number) => {
+    const line = problems[pi].lines[li] as ChoiceLine;
+    const sel  = allLineStates[pi][li].choiceSelected;
+    patchLine(pi, li, { status: sel === line.correct ? "correct" : "wrong" });
+  };
+
+  const totalLines = allLineStates.reduce((a, ls) =>
+    a + ls.filter(s => s.boxStates.length > 0 || s.choiceSelected !== undefined || (s.status === "correct" && s.boxStates.length === 0)).length, 0);
+  const totalReal  = allLineStates.reduce((a, ls) => a + ls.filter(s => s.boxStates.length > 0 || s.choiceSelected !== undefined).length, 0);
+  const doneReal   = allLineStates.reduce((a, ls) => a + ls.filter(s => s.status === "correct" && (s.boxStates.length > 0 || s.choiceSelected !== undefined)).length, 0);
+  const pct        = totalReal > 0 ? Math.round((doneReal / totalReal) * 100) : 0;
+  const allDone    = doneReal === totalReal;
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -456,51 +546,65 @@ const OperasiCampuranLKPDPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
 
-        {/* HEADER */}
-        <div className="flex flex-col items-center mb-7">
+        {/* ── HEADER ── */}
+        <div className="flex flex-col items-center mb-7 text-center">
           <div className="w-16 h-16 rounded-full bg-yellow-500/20 border-2 border-yellow-400/60 flex items-center justify-center mb-3">
             <span className="text-3xl">🔢</span>
           </div>
-          <h1 className="font-display text-xl md:text-2xl font-bold text-yellow-300 text-center mb-1"
+          <h1 className="font-display text-xl md:text-2xl font-bold text-yellow-300 mb-1"
             style={{ textShadow: "0 0 24px rgba(234,179,8,0.7)" }}>
             PENERAPAN OPERASI HITUNG BILANGAN BULAT
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 7 · Bilangan Bulat · LKPD Interaktif</p>
-          <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
-            <div className="flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 rounded-lg px-4 py-2">
-              <span className="text-yellow-400 text-xs font-bold">📋 10 Soal</span>
-              <span className="text-white/30 text-xs">·</span>
-              <span className="text-white/50 text-xs">Isi titik-titik & cek jawabanmu!</span>
-            </div>
-          </div>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · Bilangan Bulat · LKPD Interaktif</p>
+          <p className="mt-2 text-white/60 text-sm font-body max-w-xl">
+            Isi kotak isian di dalam setiap baris langkah demi langkah — soalnya tetap utuh, kamu hanya mengisi nilai sub-operasinya!
+          </p>
         </div>
 
-        {/* PANDUAN */}
-        <div className="mb-6 bg-yellow-900/20 border border-yellow-500/25 rounded-xl p-4">
+        {/* ── CARA MENGERJAKAN ── */}
+        <div className="mb-5 bg-yellow-900/20 border border-yellow-500/25 rounded-xl p-4">
           <p className="text-yellow-300 text-xs font-bold mb-3">📌 Cara Mengerjakan</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
-              { icon: "📖", step: "1. Baca soal", desc: "Baca soal dengan teliti dan pahami informasinya." },
-              { icon: "✏️", step: "2. Isi titik-titik", desc: "Ketik jawabanmu pada setiap langkah, lalu tekan Cek ✓." },
-              { icon: "🎯", step: "3. Cek jawaban", desc: "Langkah berikutnya terbuka setelah langkah ini benar!" },
+              { icon: "👁️", step: "1. Baca soal", desc: "Baca soal dan perhatikan baris pertama — itu persamaan lengkapnya." },
+              { icon: "✏️", step: "2. Isi kotak dalam baris", desc: "Setiap baris memiliki kotak isian. Isi semua kotak, lalu tekan Cek ✓." },
+              { icon: "🔓", step: "3. Baris berikutnya terbuka", desc: "Jika benar, baris selanjutnya otomatis terbuka. Lanjut sampai selesai!" },
             ].map(c => (
               <div key={c.step} className="bg-white/5 rounded-lg p-3 flex gap-3 items-start">
                 <span className="text-xl">{c.icon}</span>
                 <div>
                   <p className="text-yellow-300 text-xs font-bold">{c.step}</p>
-                  <p className="text-white/60 text-xs font-body mt-0.5">{c.desc}</p>
+                  <p className="text-white/55 text-xs font-body mt-0.5 leading-relaxed">{c.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* PROGRESS */}
+        {/* ── URUTAN OPERASI ── */}
+        <div className="mb-5 bg-white/5 border border-white/10 rounded-xl p-4">
+          <p className="text-yellow-300 text-xs font-bold mb-2">💡 Ingat Urutan Operasi</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+            {[
+              { n:"1", lbl:"( Kurung )",       cls:"text-cyan-400 border-cyan-500/30 bg-cyan-500/10" },
+              { n:"2", lbl:"× ÷ Kali/Bagi",   cls:"text-rose-400 border-rose-500/30 bg-rose-500/10" },
+              { n:"3", lbl:"+ − Tambah/Kurang",cls:"text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
+              { n:"→", lbl:"Kiri ke Kanan",    cls:"text-amber-400 border-amber-500/30 bg-amber-500/10" },
+            ].map(r => (
+              <div key={r.n} className={`border rounded-lg py-2 px-1 text-xs font-bold ${r.cls}`}>
+                <div className="text-xl font-black">{r.n}</div>
+                <div className="mt-0.5">{r.lbl}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── PROGRESS ── */}
         <div className="mb-6 bg-white/5 border border-white/10 rounded-xl p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-white/70 text-xs font-bold">Progress</span>
+            <span className="text-white/60 text-xs font-bold">Progress</span>
             <span className={`text-xs font-bold ${allDone ? "text-emerald-400" : "text-yellow-400"}`}>
-              {doneSteps}/{totalSteps} langkah selesai ({pct}%)
+              {doneReal}/{totalReal} langkah ({pct}%)
             </span>
           </div>
           <div className="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -509,46 +613,28 @@ const OperasiCampuranLKPDPage = () => {
           </div>
           {allDone && (
             <p className="mt-2 text-center text-emerald-400 text-sm font-bold animate-bounce">
-              🎉 Luar biasa! Semua soal berhasil kamu selesaikan! Sobat Numatik keren! 🌟
+              🎉 Luar biasa! Semua soal berhasil kamu kerjakan! Sobat Numatik keren! 🌟
             </p>
           )}
         </div>
 
-        {/* SOAL-SOAL STRATEGI */}
-        <div className="mb-5 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-yellow-300 text-xs font-bold mb-2">💡 Ingat Urutan Operasi (KaKaBaTa)</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
-            {[
-              { n: "1", label: "( Kurung )", color: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10" },
-              { n: "2", label: "× ÷ Kali/Bagi", color: "text-rose-400 border-rose-500/30 bg-rose-500/10" },
-              { n: "3", label: "+ − Tambah/Kurang", color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
-              { n: "→", label: "Kiri ke Kanan", color: "text-amber-400 border-amber-500/30 bg-amber-500/10" },
-            ].map(r => (
-              <div key={r.n} className={`border rounded-lg py-2 px-2 text-xs font-bold ${r.color}`}>
-                <div className="text-lg font-black">{r.n}</div>
-                <div>{r.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* PROBLEM CARDS */}
+        {/* ── PROBLEM CARDS ── */}
         <div className="flex flex-col gap-5">
           {problems.map((prob, pi) => (
             <ProblemCard key={pi}
               prob={prob}
-              stepStates={states[pi]}
-              onInput={(si, v) => handleInput(pi, si, v)}
-              onCheck={si => handleCheck(pi, si)}
-              onChoice={(si, key) => handleChoice(pi, si, key)}
+              lineStates={allLineStates[pi]}
+              onBoxChange={(li, bi, v) => handleBoxChange(pi, li, bi, v)}
+              onCheck={li => handleCheck(pi, li)}
+              onChoiceSelect={(li, key) => handleChoiceSelect(pi, li, key)}
+              onChoiceCheck={li => handleChoiceCheck(pi, li)}
             />
           ))}
         </div>
 
-        {/* BACK BUTTON */}
+        {/* ── BACK ── */}
         <div className="mt-10 text-center">
-          <button
-            onClick={() => { playPopSound(); navigate("/lkpd/kelas-7/bilangan-bulat"); }}
+          <button onClick={() => { playPopSound(); navigate("/lkpd/kelas-7/bilangan-bulat"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
             ← Kembali ke LKPD Bilangan Bulat
           </button>
