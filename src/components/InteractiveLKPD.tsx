@@ -38,15 +38,17 @@ type ChoiceGuided = CommonGuided & { kind: "choice"; options: string[]; correctI
 type TFGuided = CommonGuided & { kind: "truefalse"; correct: boolean };
 type MatchGuided = CommonGuided & { kind: "match"; pairs: { left: string; right: string }[] };
 type SortGuided = CommonGuided & { kind: "sort"; items: string[]; correctOrder: string[] };
+type BaseExpGuided = CommonGuided & { kind: "base-exp"; base: string; exp: string };
 
 type FillPractice = CommonPractice & { kind?: "fill"; answers: string[] };
 type ChoicePractice = CommonPractice & { kind: "choice"; options: string[]; correctIndex: number };
 type TFPractice = CommonPractice & { kind: "truefalse"; correct: boolean };
 type MatchPractice = CommonPractice & { kind: "match"; pairs: { left: string; right: string }[] };
 type SortPractice = CommonPractice & { kind: "sort"; items: string[]; correctOrder: string[] };
+type BaseExpPractice = CommonPractice & { kind: "base-exp"; base: string; exp: string };
 
-export type GuidedItem = FillGuided | ChoiceGuided | TFGuided | MatchGuided | SortGuided;
-export type PracticeItem = FillPractice | ChoicePractice | TFPractice | MatchPractice | SortPractice;
+export type GuidedItem = FillGuided | ChoiceGuided | TFGuided | MatchGuided | SortGuided | BaseExpGuided;
+export type PracticeItem = FillPractice | ChoicePractice | TFPractice | MatchPractice | SortPractice | BaseExpPractice;
 
 export type SummaryCard = { title: string; text: string; tone?: "cyan" | "yellow" | "emerald" | "violet" | "rose" };
 export type SituationCard = { title: string; visual: ReactNode; text: string };
@@ -102,6 +104,10 @@ const isAnswered = (item: ItemWithKind, value: unknown): boolean => {
   if (kind === "truefalse") return value === true || value === false;
   if (kind === "match") return value !== undefined && Object.values(value as Record<string, string>).some((v) => Boolean(v));
   if (kind === "sort") return Array.isArray(value);
+  if (kind === "base-exp") {
+    const v = value as { base?: string; exp?: string } | undefined;
+    return hasText(v?.base) && hasText(v?.exp);
+  }
   return false;
 };
 
@@ -125,6 +131,11 @@ const isCorrect = (item: ItemWithKind, value: unknown): boolean => {
     const correct = (item as SortGuided | SortPractice).correctOrder;
     const arr = (value as string[]) || [];
     return arr.length === correct.length && arr.every((v, i) => v === correct[i]);
+  }
+  if (kind === "base-exp") {
+    const be = item as BaseExpGuided | BaseExpPractice;
+    const v = value as { base?: string; exp?: string } | undefined;
+    return answerMatches(v?.base || "", [be.base]) && answerMatches(v?.exp || "", [be.exp]);
   }
   return false;
 };
@@ -299,6 +310,54 @@ const SortInput = ({
   );
 };
 
+const BaseExpInput = ({
+  value,
+  onChange,
+  variant,
+}: {
+  value: { base?: string; exp?: string } | undefined;
+  onChange: (v: { base?: string; exp?: string }) => void;
+  variant: "guided" | "practice";
+}) => {
+  const borderColor = variant === "guided" ? "border-cyan-400/70" : "border-fuchsia-400/70";
+  const focusRing = variant === "guided"
+    ? "focus:ring-cyan-300/30 focus:border-cyan-300"
+    : "focus:ring-fuchsia-300/30 focus:border-fuchsia-300";
+  const badgeColor = variant === "guided"
+    ? "bg-cyan-500/20 border-cyan-400/50 text-cyan-200"
+    : "bg-fuchsia-500/20 border-fuchsia-400/50 text-fuchsia-200";
+  const v = value || {};
+  return (
+    <div className="mt-3">
+      <div className="flex items-center gap-2 mb-1.5">
+        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-bold tracking-wide ${badgeColor}`}>
+          ✏️ ISIAN SISWA
+        </span>
+        <span className="text-white/35 text-xs">← tulis bilangan pokok dan pangkatnya</span>
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          type="text"
+          inputMode="numeric"
+          value={v.base || ""}
+          onChange={(e) => onChange({ ...v, base: e.target.value })}
+          placeholder="basis"
+          className={`w-20 rounded-xl border-2 border-dashed bg-black/30 px-3 py-2.5 text-center text-white outline-none focus:ring-2 focus:border-solid ${borderColor} ${focusRing}`}
+        />
+        <span className="text-white/80 font-bold text-sm px-1">pangkat</span>
+        <input
+          type="text"
+          inputMode="numeric"
+          value={v.exp || ""}
+          onChange={(e) => onChange({ ...v, exp: e.target.value })}
+          placeholder="eksponen"
+          className={`w-20 rounded-xl border-2 border-dashed bg-black/30 px-3 py-2.5 text-center text-white outline-none focus:ring-2 focus:border-solid ${borderColor} ${focusRing}`}
+        />
+      </div>
+    </div>
+  );
+};
+
 const KindLabel = ({ kind }: { kind: NonNullable<ItemWithKind["kind"]> | "fill" }) => {
   const map: Record<string, string> = {
     fill: "Isian",
@@ -306,6 +365,7 @@ const KindLabel = ({ kind }: { kind: NonNullable<ItemWithKind["kind"]> | "fill" 
     truefalse: "Benar / Salah",
     match: "Menjodohkan",
     sort: "Mengurutkan",
+    "base-exp": "Bentuk Pangkat",
   };
   return <span className="text-[10px] uppercase tracking-wider text-cyan-300/80 font-bold">{map[kind]}</span>;
 };
@@ -471,6 +531,22 @@ const InteractiveLKPD = ({
             </button>
             {isAnswered(item, value) && <ResultBadge correct={results[item.id]} />}
           </div>
+        </>
+      );
+    }
+    if (kind === "base-exp") {
+      return (
+        <>
+          <BaseExpInput
+            value={value as { base?: string; exp?: string } | undefined}
+            onChange={(v) => update(item.id, v)}
+            variant={variant}
+          />
+          {isAnswered(item, value) && (
+            <div className="mt-2">
+              <ResultBadge correct={results[item.id]} />
+            </div>
+          )}
         </>
       );
     }

@@ -47,9 +47,9 @@ const situations: SituationCard[] = [
           <text x="40" y="84" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">1</text>
           <text x="40" y="120" fontSize="9" fill="#6ee7b7" textAnchor="middle">3⁰=1</text>
           <g>{[0, 1, 2].map((i) => (
-            <circle key={i} cx={80 + i * 14} cy="80" r="10" fill="#22d3ee" fillOpacity="0.7" stroke="#67e8f9" />
+            <circle key={i} cx={80 + i * 22} cy="80" r="9" fill="#22d3ee" fillOpacity="0.7" stroke="#67e8f9" />
           ))}</g>
-          <text x="94" y="120" fontSize="9" fill="#67e8f9" textAnchor="middle">3¹=3</text>
+          <text x="102" y="120" fontSize="9" fill="#67e8f9" textAnchor="middle">3¹=3</text>
           <g>{Array.from({ length: 9 }, (_, i) => (
             <circle key={i} cx={140 + (i % 3) * 10} cy={70 + Math.floor(i / 3) * 9} r="4" fill="#fbbf24" fillOpacity="0.7" stroke="#fde68a" />
           ))}</g>
@@ -69,11 +69,12 @@ const situations: SituationCard[] = [
 const guidedItems: GuidedItem[] = [
   {
     id: "g1",
-    label: "Bentuk 2 × 2 × 2 × 2 × 2 dapat ditulis sebagai pangkat menjadi …",
-    kind: "fill",
-    answers: ["2⁵", "2^5", "25", "2 pangkat 5", "2 pangkat lima"],
+    label: "Bentuk 2 × 2 × 2 × 2 × 2 dapat ditulis sebagai … pangkat …",
+    kind: "base-exp",
+    base: "2",
+    exp: "5",
     discussion: [
-      "Ada 5 faktor 2 yang dikalikan, jadi 2⁵.",
+      "Ada 5 faktor 2 yang dikalikan, jadi 2 pangkat 5 (ditulis 2⁵).",
       "Pada aⁿ: a = BILANGAN POKOK (basis), n = PANGKAT (eksponen).",
     ],
   },
@@ -86,10 +87,11 @@ const guidedItems: GuidedItem[] = [
   },
   {
     id: "g3",
-    label: "Bentuk 5 × 5 × 5 × 5 = …",
-    kind: "fill",
-    answers: ["5⁴", "5^4", "54"],
-    discussion: ["Ada 4 faktor 5 → 5⁴ = 625."],
+    label: "Bentuk 5 × 5 × 5 × 5 dapat ditulis sebagai … pangkat …",
+    kind: "base-exp",
+    base: "5",
+    exp: "4",
+    discussion: ["Ada 4 faktor 5, jadi 5 pangkat 4 (ditulis 5⁴) = 625."],
   },
   {
     id: "g4",
@@ -266,11 +268,12 @@ const games: LKPDGame[] = [
 const practiceItems: PracticeItem[] = [
   {
     id: "pp1",
-    question: "Tulis 7 × 7 × 7 × 7 dalam bentuk pangkat = …",
-    kind: "fill",
-    answers: ["7⁴", "7^4", "74"],
+    question: "Tulis 7 × 7 × 7 × 7 dalam bentuk … pangkat …",
+    kind: "base-exp",
+    base: "7",
+    exp: "4",
     hint: "Hitung berapa kali angka 7 dikalikan.",
-    discussion: ["4 faktor 7 → 7⁴ (= 2.401)."],
+    discussion: ["Ada 4 faktor 7, jadi 7 pangkat 4 (ditulis 7⁴ = 2.401)."],
   },
   {
     id: "pp2",
