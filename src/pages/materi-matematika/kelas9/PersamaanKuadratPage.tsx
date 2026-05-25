@@ -6,7 +6,7 @@ const subtopics = [
   { label: "MENENTUKAN AKAR-AKAR PERSAMAAN KUADRAT DENGAN RUMUS KUADRATIK", path: "/materi-matematika/kelas-9/persamaan-kuadrat/rumus-kuadratik", icon: "📐" },
   { label: "AKAR-AKAR PERSAMAAN KUADRAT DENGAN PELENGKAP KUADRAT", path: "/materi-matematika/kelas-9/persamaan-kuadrat/pelengkap-kuadrat", icon: "🔩" },
   { label: "DISKRIMINAN", path: "/materi-matematika/kelas-9/persamaan-kuadrat/diskriminan", icon: "🔍" },
-  { label: "MENYUSUN PERSAMAAN KUADRAT BARU", path: "/materi-matematika/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru", icon: "✏️" },
+  { label: "MENYUSUN PERSAMAAN KUADRAT BARU", path: "/materi-matematika/kelas-9/persamaan-kuadrat/menyusun-baru", icon: "✏️" },
   { label: "PENERAPAN PERSAMAAN KUADRAT PADA PERMASALAHAN KONTEKSTUAL", path: "/materi-matematika/kelas-9/persamaan-kuadrat/penerapan-kontekstual", icon: "🏗️" },
 ];
 

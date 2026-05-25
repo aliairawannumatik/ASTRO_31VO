@@ -5,7 +5,7 @@ const subtopics = [
   { label: "MENGHITUNG PANJANG RUSUK BANGUN DATAR YANG SEBANGUN", path: "/materi-matematika/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk", icon: "📏" },
   { label: "SEGITIGA – SEGITIGA YANG SEBANGUN", path: "/materi-matematika/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun", icon: "🔺" },
   { label: "MENEMUKAN PERBANDINGAN/RASIO RUSUK-RUSUK SEGITIGA SIKU SIKU DENGAN KONSEP KESEBANGUNAN", path: "/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku", icon: "↔️" },
-  { label: "KEKONGRUENAN PADA BANGUN DATAR", path: "/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar", icon: "🔷" },
+  { label: "KEKONGRUENAN PADA BANGUN DATAR", path: "/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan", icon: "🔷" },
 ];
 
 const KesebangunanKekongruenPage = () => (
