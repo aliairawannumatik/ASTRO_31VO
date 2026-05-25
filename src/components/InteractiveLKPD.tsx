@@ -329,29 +329,28 @@ const BaseExpInput = ({
   const v = value || {};
   return (
     <div className="mt-3">
-      <div className="flex items-center gap-2 mb-1.5">
+      <div className="flex items-center gap-2 mb-2">
         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-bold tracking-wide ${badgeColor}`}>
           ✏️ ISIAN SISWA
         </span>
-        <span className="text-white/35 text-xs">← tulis bilangan pokok dan pangkatnya</span>
+        <span className="text-white/35 text-xs">← isi bilangan pokok dan pangkatnya</span>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex items-start gap-1">
         <input
           type="text"
           inputMode="numeric"
           value={v.base || ""}
           onChange={(e) => onChange({ ...v, base: e.target.value })}
-          placeholder="basis"
-          className={`w-20 rounded-xl border-2 border-dashed bg-black/30 px-3 py-2.5 text-center text-white outline-none focus:ring-2 focus:border-solid ${borderColor} ${focusRing}`}
+          placeholder="?"
+          className={`w-14 h-14 rounded-xl border-2 border-dashed bg-black/30 text-center text-2xl font-bold text-white outline-none focus:ring-2 focus:border-solid ${borderColor} ${focusRing}`}
         />
-        <span className="text-white/80 font-bold text-sm px-1">pangkat</span>
         <input
           type="text"
           inputMode="numeric"
           value={v.exp || ""}
           onChange={(e) => onChange({ ...v, exp: e.target.value })}
-          placeholder="eksponen"
-          className={`w-20 rounded-xl border-2 border-dashed bg-black/30 px-3 py-2.5 text-center text-white outline-none focus:ring-2 focus:border-solid ${borderColor} ${focusRing}`}
+          placeholder="?"
+          className={`w-8 h-8 rounded-lg border-2 border-dashed bg-black/30 text-center text-sm font-bold text-white outline-none focus:ring-2 focus:border-solid ${borderColor} ${focusRing} -mt-1`}
         />
       </div>
     </div>
