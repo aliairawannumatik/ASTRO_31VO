@@ -155,8 +155,10 @@ const NotasiIlmiahPage = () => {
                     <div className="bg-gradient-to-br from-green-900/60 to-blue-900/60 border-2 border-green-500/50 rounded-xl px-6 py-5 text-center">
                       <span className="font-display text-4xl font-bold text-yellow-300">3,8</span>
                       <span className="font-display text-3xl font-bold text-white mx-2">×</span>
-                      <span className="font-display text-4xl font-bold text-white">10</span>
-                      <span className="font-display text-2xl font-bold text-cyan-400 align-super">5</span>
+                      <span className="inline-flex items-start">
+                        <span className="font-display text-4xl font-bold text-white">10</span>
+                        <span className="font-display text-2xl font-bold text-cyan-400 mt-1 leading-none">5</span>
+                      </span>
                     </div>
                     <div className="flex justify-around w-full text-xs font-body">
                       <div className="text-center">
