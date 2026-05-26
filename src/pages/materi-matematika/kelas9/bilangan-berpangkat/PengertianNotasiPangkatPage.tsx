@@ -17,50 +17,134 @@ const STEPS = [
   { count: 32, exp: 5, label: "2^5 = 32", color: "from-yellow-400 to-amber-600",     glow: "shadow-yellow-500/60",   bg: "bg-yellow-500/20",   border: "border-yellow-400/50",   text: "text-yellow-300"  },
 ];
 
-const BacteriaAnimation = () => {
-  const [step, setStep] = useState(0);
-  const [splitting, setSplitting] = useState(false);
-  const [autoPlayed, setAutoPlayed] = useState(false);
-
-  const current = STEPS[step];
-  const isMax = step === STEPS.length - 1;
-
-  const handleAction = () => {
-    playPopSound();
-    if (isMax) {
-      setSplitting(true);
-      setTimeout(() => { setStep(0); setSplitting(false); }, 350);
-      return;
-    }
-    setSplitting(true);
-    setTimeout(() => { setStep((s) => s + 1); setSplitting(false); }, 350);
-  };
+// ── Single bacterium that plays a 3-phase slow-motion division ──────────────
+const SplittingBacterium = ({
+  color, glow, nextColor, nextGlow, onDone,
+}: {
+  color: string; glow: string; nextColor: string; nextGlow: string; onDone: () => void;
+}) => {
+  // phase 0 = elongate, phase 1 = divide apart
+  const [phase, setPhase] = useState<0 | 1>(0);
 
   useEffect(() => {
-    if (!autoPlayed) {
-      const t = setTimeout(() => { setAutoPlayed(true); }, 600);
+    // after elongation (700 ms) → start dividing
+    const t1 = setTimeout(() => setPhase(1), 700);
+    // after divide (700 + 900 ms) → signal done
+    const t2 = setTimeout(() => onDone(), 1600);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);                                           // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (phase === 0) {
+    // Phase 1 – elongate & slightly flatten (sausage / cell-elongation shape)
+    return (
+      <motion.div
+        className={`w-11 h-11 bg-gradient-to-br ${color} shadow-lg ${glow} flex items-center justify-center text-xl select-none`}
+        style={{ borderRadius: "50%" }}
+        animate={{
+          scaleX: [1, 1.8, 2.0],
+          scaleY: [1, 0.62, 0.58],
+          borderRadius: ["50%", "40%", "38%"],
+        }}
+        transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+      >
+        🦠
+      </motion.div>
+    );
+  }
+
+  // Phase 2 – two daughter cells slide apart from the centre
+  const spread = 26;
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: 88, height: 44 }}>
+      {/* connecting "bridge" that shrinks to 0 */}
+      <motion.div
+        className={`absolute h-[26px] bg-gradient-to-r ${nextColor} opacity-70 rounded-full`}
+        initial={{ width: 52 }}
+        animate={{ width: 0 }}
+        transition={{ duration: 0.5, ease: "easeIn" }}
+      />
+      {/* left daughter */}
+      <motion.div
+        className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${nextColor} shadow-lg ${nextGlow} flex items-center justify-center text-lg select-none`}
+        initial={{ x: 0, scale: 0.72 }}
+        animate={{ x: -spread, scale: 1 }}
+        transition={{ type: "spring", stiffness: 130, damping: 14, delay: 0.05 }}
+      >
+        🦠
+      </motion.div>
+      {/* right daughter */}
+      <motion.div
+        className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${nextColor} shadow-lg ${nextGlow} flex items-center justify-center text-lg select-none`}
+        initial={{ x: 0, scale: 0.72 }}
+        animate={{ x: spread, scale: 1 }}
+        transition={{ type: "spring", stiffness: 130, damping: 14, delay: 0.05 }}
+      >
+        🦠
+      </motion.div>
+    </div>
+  );
+};
+
+// ── Main animation card ──────────────────────────────────────────────────────
+const BacteriaAnimation = () => {
+  const [step, setStep] = useState(0);
+  // 'idle' | 'splitting' (shows SplittingBacterium) | 'landing' (new count pops in)
+  const [phase, setPhase] = useState<"idle" | "splitting" | "landing">("idle");
+  const [doneCount, setDoneCount] = useState(0);
+
+  const current  = STEPS[step];
+  const next     = STEPS[step + 1] ?? STEPS[step];
+  const isMax    = step === STEPS.length - 1;
+  const busy     = phase !== "idle";
+
+  // Called by each SplittingBacterium when its animation finishes
+  const handleOneDone = () => {
+    setDoneCount((n) => n + 1);
+  };
+
+  // When all bacteria in splitting phase have signalled done → advance step
+  useEffect(() => {
+    if (phase === "splitting" && doneCount >= current.count) {
+      setPhase("landing");
+      setStep((s) => s + 1);
+      setDoneCount(0);
+      const t = setTimeout(() => setPhase("idle"), 50);
       return () => clearTimeout(t);
     }
-  }, [autoPlayed]);
+  }, [doneCount, phase, current.count]);
 
-  const bacteriaIds = Array.from({ length: current.count }, (_, i) => `${step}-${i}`);
+  const handleAction = () => {
+    if (busy) return;
+    playPopSound();
+    if (isMax) { setStep(0); return; }
+    setPhase("splitting");
+    setDoneCount(0);
+  };
+
+  const items = Array.from({ length: current.count }, (_, i) => i);
 
   return (
-    <div className={`rounded-2xl border-2 ${current.border} ${current.bg} backdrop-blur-sm overflow-hidden transition-all duration-500`}>
+    <div
+      className={`rounded-2xl border-2 ${current.border} ${current.bg} backdrop-blur-sm overflow-hidden transition-colors duration-700`}
+    >
       {/* Header */}
       <div className="px-5 pt-4 pb-2 text-center">
-        <p className="font-body text-xs font-semibold text-white/60 tracking-widest uppercase mb-1">🎬 Animasi Interaktif</p>
-        <h3 className="font-display text-base font-bold text-white">Pembelahan Kuman & Notasi Pangkat</h3>
+        <p className="font-body text-xs font-semibold text-white/60 tracking-widest uppercase mb-1">
+          🎬 Animasi Interaktif
+        </p>
+        <h3 className="font-display text-base font-bold text-white">
+          Pembelahan Kuman &amp; Notasi Pangkat
+        </h3>
       </div>
 
-      {/* Power notation display */}
-      <div className="flex items-center justify-center gap-3 py-3">
+      {/* Notation badge */}
+      <div className="flex items-center justify-center py-3">
         <motion.div
           key={step}
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 18 }}
-          className={`px-5 py-2 rounded-full ${current.bg} border ${current.border} flex items-center gap-2`}
+          className={`px-5 py-2 rounded-full ${current.bg} border ${current.border}`}
         >
           <span className={`font-display text-2xl font-bold ${current.text}`}>
             <InlineMath math={current.label} />
@@ -69,61 +153,95 @@ const BacteriaAnimation = () => {
       </div>
 
       {/* Bacteria field */}
-      <div className="relative px-4 pb-2 min-h-[130px] flex flex-wrap justify-center items-center gap-2 content-center">
-        <AnimatePresence mode="popLayout">
-          {bacteriaIds.map((id, i) => (
-            <motion.div
-              key={id}
-              initial={{ scale: 0, opacity: 0, rotate: -30 }}
-              animate={
-                splitting
-                  ? { scale: [1, 1.35, 0.85], rotate: [0, 12, -8], opacity: 1 }
-                  : { scale: 1, opacity: 1, rotate: 0 }
-              }
-              exit={{ scale: 0, opacity: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 20,
-                delay: splitting ? 0 : i * 0.04,
-              }}
-              className={`relative w-11 h-11 rounded-full bg-gradient-to-br ${current.color} shadow-lg ${current.glow} flex items-center justify-center cursor-pointer select-none`}
-              onClick={handleAction}
-              title="Klik untuk membelah!"
+      <div className="min-h-[150px] flex flex-wrap justify-center items-center gap-3 px-4 py-2 content-center">
+
+        {/* IDLE – normal bacteria */}
+        {phase === "idle" && items.map((_, i) => (
+          <motion.div
+            key={`idle-${step}-${i}`}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 380, damping: 22, delay: i * 0.045 }}
+            className={`relative w-11 h-11 rounded-full bg-gradient-to-br ${current.color} shadow-lg ${current.glow} flex items-center justify-center text-xl cursor-pointer select-none`}
+            onClick={handleAction}
+            title="Klik untuk membelah!"
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.92 }}
+          >
+            🦠
+            <span className={`absolute inset-0 rounded-full bg-gradient-to-br ${current.color} opacity-25 blur-sm pointer-events-none`} />
+          </motion.div>
+        ))}
+
+        {/* SPLITTING – each bacterium plays cell-division animation */}
+        {phase === "splitting" && items.map((_, i) => (
+          <SplittingBacterium
+            key={`split-${step}-${i}`}
+            color={current.color}
+            glow={current.glow}
+            nextColor={next.color}
+            nextGlow={next.glow}
+            onDone={handleOneDone}
+          />
+        ))}
+
+        {/* LANDING – brief invisible placeholder so layout doesn't jump */}
+        {phase === "landing" && null}
+      </div>
+
+      {/* Phase label */}
+      <div className="text-center h-5 mb-1">
+        <AnimatePresence mode="wait">
+          {phase === "splitting" && (
+            <motion.p
+              key="splitting-label"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="font-body text-xs text-white/50"
             >
-              <span className="text-xl leading-none">🦠</span>
-              {/* Glow ring */}
-              <span className={`absolute inset-0 rounded-full bg-gradient-to-br ${current.color} opacity-30 blur-sm`} />
-            </motion.div>
-          ))}
+              ⚗️ Sedang membelah…
+            </motion.p>
+          )}
         </AnimatePresence>
       </div>
 
-      {/* Step indicator */}
-      <div className="flex justify-center gap-1.5 py-2">
+      {/* Step dots */}
+      <div className="flex justify-center gap-1.5 pb-3">
         {STEPS.map((s, i) => (
           <div
             key={i}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === step ? `w-6 bg-gradient-to-r ${s.color}` : i < step ? "w-3 bg-white/40" : "w-3 bg-white/10"
+            className={`h-1.5 rounded-full transition-all duration-400 ${
+              i === step
+                ? `w-6 bg-gradient-to-r ${s.color}`
+                : i < step
+                ? "w-3 bg-white/40"
+                : "w-3 bg-white/10"
             }`}
           />
         ))}
       </div>
 
       {/* Button */}
-      <div className="px-5 pb-5 pt-1">
+      <div className="px-5 pb-5">
         <motion.button
           whileTap={{ scale: 0.94 }}
           onClick={handleAction}
-          className={`w-full py-3 rounded-xl bg-gradient-to-r ${current.color} text-white font-body font-bold text-sm shadow-lg ${current.glow} transition-all duration-300 hover:opacity-90 active:scale-95`}
+          disabled={busy}
+          className={`w-full py-3 rounded-xl bg-gradient-to-r ${current.color} text-white font-body font-bold text-sm shadow-lg ${current.glow} transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed`}
         >
-          {isMax ? "🔄 Ulangi dari awal" : `🦠 Tekan untuk membelah! (${current.count} → ${STEPS[step + 1].count})`}
+          {busy
+            ? "⏳ Membelah…"
+            : isMax
+            ? "🔄 Ulangi dari awal"
+            : `🦠 Tekan untuk membelah! (${current.count} → ${next.count})`}
         </motion.button>
         <p className="text-center font-body text-xs text-white/40 mt-2">
           {isMax
-            ? "Sudah mencapai 2⁵ = 32 kuman! Lihat betapa cepatnya berkembang biak? 🤯"
-            : "Klik kuman atau tombol di bawah untuk melihat pembelahan selanjutnya"}
+            ? "Sudah 2⁵ = 32 kuman! Lihat betapa cepatnya berkembang biak? 🤯"
+            : busy
+            ? "Perhatikan pembelahan sel secara slow-motion…"
+            : "Klik kuman atau tombol untuk melihat pembelahan selanjutnya"}
         </p>
       </div>
     </div>
