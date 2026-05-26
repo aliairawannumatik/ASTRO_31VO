@@ -254,6 +254,17 @@ const PengertianNotasiPangkatPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* ===================== ANIMASI PEMBELAHAN KUMAN ===================== */}
+          <div className="text-center space-y-1 px-1">
+            <p className="font-body text-xs font-semibold tracking-widest uppercase text-white/40">
+              Sebelum Mulai Belajar…
+            </p>
+            <h2 className="font-display text-lg md:text-xl font-bold text-white leading-snug">
+              🦠 Yuk, Amati Kuman Ini Membelah Diri!
+            </h2>
+            <p className="font-body text-sm text-white/60 leading-relaxed max-w-sm mx-auto">
+              Tekan tombol di bawah dan perhatikan apa yang terjadi — ada pola matematika tersembunyi di sini!
+            </p>
+          </div>
           <BacteriaAnimation />
 
           {/* ===================== PENGANTAR ===================== */}
