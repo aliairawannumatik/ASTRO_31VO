@@ -728,6 +728,48 @@ const SifatSifatOperasiPage = () => {
 
         </div>
 
+          {/* Rangkuman */}
+          <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 rounded-xl p-5 space-y-3">
+            <p className="font-body text-sm font-semibold text-cyan-300 text-center">🌟 RANGKUMAN MATERI</p>
+            <div className="space-y-2 font-body text-xs text-white/80">
+              <p>✅ <strong>Perkalian pangkat sama basis:</strong> <InlineMath math="a^m \times a^n = a^{m+n}" /> — eksponen <em>dijumlah</em></p>
+              <p>✅ <strong>Pembagian pangkat sama basis:</strong> <InlineMath math="a^m \div a^n = a^{m-n}" /> — eksponen <em>dikurang</em></p>
+              <p>✅ <strong>Pangkat dari pangkat:</strong> <InlineMath math="(a^m)^n = a^{mn}" /> — eksponen <em>dikalikan</em></p>
+              <p>✅ <strong>Pangkat nol:</strong> <InlineMath math="a^0 = 1" /> untuk semua <InlineMath math="a \neq 0" /></p>
+              <p>✅ <strong>Pangkat negatif:</strong> <InlineMath math="a^{-n} = \dfrac{1}{a^n}" /> — pindah ke bawah pecahan</p>
+              <p>✅ <strong>Pangkat pecahan:</strong> <InlineMath math="a^{m/n} = \sqrt[n]{a^m}" /> — hubungan pangkat & akar</p>
+            </div>
+          </div>
+
+          {/* Tips dan Trik */}
+          <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">🧠</span>
+              <div>
+                <p className="font-display text-base font-bold text-yellow-300 leading-tight">9 Sifat, 1 Otak — Kuasai Semuanya!</p>
+                <p className="font-body text-xs text-yellow-200/70">Tips & trik hafal dan pakai sifat pangkat tanpa bingung</p>
+              </div>
+            </div>
+            <div className="px-5 py-4 space-y-3 font-body text-sm text-white/80">
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Perkalian → tambah, Pembagian → kurang.</strong> Basisnya harus SAMA. <InlineMath math="2^3 \times 3^3" /> tidak bisa langsung dijumlah eksponennya karena basisnya beda!</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Pangkat dari pangkat: kalikan, bukan jumlah.</strong> <InlineMath math="(2^3)^4 = 2^{12}" />, bukan <InlineMath math="2^7" />. Ingat: kurung di luar = kalikan eksponen.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Pangkat negatif bukan nilai negatif!</strong> <InlineMath math="2^{-3} = \frac{1}{8}" />, bukan <InlineMath math="-8" />. Negatif di eksponen artinya "balik" ke pecahan.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Sederhanakan bertahap.</strong> Pada soal kompleks, uraikan satu sifat demi satu. Jangan coba selesaikan semua dalam satu langkah — itu sumber kesalahan terbesar!</p>
+              </div>
+            </div>
+          </div>
+
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bilangan-berpangkat"); }}

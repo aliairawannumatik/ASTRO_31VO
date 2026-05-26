@@ -663,6 +663,47 @@ const NotasiIlmiahPage = () => {
             )}
           </div>
 
+          {/* Rangkuman */}
+          <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 rounded-xl p-5 space-y-3">
+            <p className="font-body text-sm font-semibold text-cyan-300 text-center">🌟 RANGKUMAN MATERI</p>
+            <div className="space-y-2 font-body text-xs text-white/80">
+              <p>✅ <strong>Bentuk notasi ilmiah:</strong> <InlineMath math="a \times 10^n" /> dengan <InlineMath math="1 \leq a < 10" /> dan <InlineMath math="n" /> bilangan bulat</p>
+              <p>✅ <strong>Bilangan besar</strong> (≥ 10) → eksponen <strong className="text-green-400">positif</strong> &nbsp;|&nbsp; <strong>Bilangan kecil</strong> (&lt; 1) → eksponen <strong className="text-red-400">negatif</strong></p>
+              <p>✅ <strong>Perkalian/pembagian:</strong> operasi koefisien & eksponen <em>secara terpisah</em></p>
+              <p>✅ <strong>Penjumlahan/pengurangan:</strong> samakan eksponen terlebih dahulu, baru hitung koefisien</p>
+              <p>✅ <strong>Membandingkan:</strong> lihat eksponen dulu; jika sama, baru bandingkan koefisiennya</p>
+            </div>
+          </div>
+
+          {/* Tips dan Trik */}
+          <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">🚀</span>
+              <div>
+                <p className="font-display text-base font-bold text-yellow-300 leading-tight">Geser Koma, Ubah Dunia!</p>
+                <p className="font-body text-xs text-yellow-200/70">Tips & trik baca dan hitung notasi ilmiah dengan cepat</p>
+              </div>
+            </div>
+            <div className="px-5 py-4 space-y-3 font-body text-sm text-white/80">
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Kanan = positif, Kiri = negatif.</strong> Geser koma ke kanan → eksponen bertambah (bilangan membesar). Geser ke kiri → eksponen berkurang (bilangan mengecil). Hitung jumlah geserannya!</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Koefisien wajib antara 1 dan 10!</strong> Jika hasil operasimu menghasilkan koefisien di luar rentang itu (misal <InlineMath math="15 \times 10^3" />), sesuaikan: <InlineMath math="= 1{,}5 \times 10^4" />.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Eksponen berbeda? Samakan dulu.</strong> Untuk penjumlahan/pengurangan, ubah ke eksponen yang lebih besar baru hitung — hindari mengubah ke eksponen kecil agar koefisien tidak jadi angka panjang.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Bandingkan eksponen dulu.</strong> Saat membandingkan dua notasi ilmiah, cukup lihat eksponen — yang eksponennya lebih besar pasti bilangan yang lebih besar, tanpa perlu hitung detailnya.</p>
+              </div>
+            </div>
+          </div>
+
           {/* Tombol Kembali */}
           <div className="mt-4 text-center">
             <button

@@ -889,6 +889,47 @@ const BentukAkarPage = () => {
             )}
           </div>
 
+          {/* Rangkuman */}
+          <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 rounded-xl p-5 space-y-3">
+            <p className="font-body text-sm font-semibold text-cyan-300 text-center">🌟 RANGKUMAN MATERI</p>
+            <div className="space-y-2 font-body text-xs text-white/80">
+              <p>✅ <strong>Bentuk akar:</strong> <InlineMath math="\sqrt[n]{a} = a^{1/n}" /> — akar adalah pangkat pecahan</p>
+              <p>✅ <strong>Menyederhanakan:</strong> uraikan bilangan dalam akar menjadi faktor kuadrat sempurna</p>
+              <p>✅ <strong>Operasi sejenis:</strong> <InlineMath math="a\sqrt{c} \pm b\sqrt{c} = (a \pm b)\sqrt{c}" /> — koefisiennya dioperasikan</p>
+              <p>✅ <strong>Perkalian akar:</strong> <InlineMath math="\sqrt{a} \times \sqrt{b} = \sqrt{ab}" /></p>
+              <p>✅ <strong>Merasionalkan penyebut:</strong> kalikan dengan <em>sekawan</em> agar penyebut bebas dari akar</p>
+            </div>
+          </div>
+
+          {/* Tips dan Trik */}
+          <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">🌿</span>
+              <div>
+                <p className="font-display text-base font-bold text-yellow-300 leading-tight">Akar Itu Bukan Musuh — Ini Rahasianya!</p>
+                <p className="font-body text-xs text-yellow-200/70">Tips & trik agar operasi bentuk akar terasa mudah</p>
+              </div>
+            </div>
+            <div className="px-5 py-4 space-y-3 font-body text-sm text-white/80">
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Sederhanakan dulu, hitung kemudian!</strong> Sebelum menjumlah atau mengalikan, sederhanakan setiap akar. <InlineMath math="\sqrt{50} = 5\sqrt{2}" /> jauh lebih mudah diolah daripada membiarkan angkanya besar.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Akar beda TIDAK bisa langsung dijumlah!</strong> <InlineMath math="\sqrt{2} + \sqrt{3} \neq \sqrt{5}" /> — ini kesalahan paling sering! Penjumlahan hanya bisa jika bentuk akarnya sama.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Sekawan = ganti tanda tengah.</strong> Sekawan dari <InlineMath math="a + \sqrt{b}" /> adalah <InlineMath math="a - \sqrt{b}" />. Kalikan keduanya dan gunakan selisih kuadrat: <InlineMath math="(a+b)(a-b) = a^2 - b^2" />.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Cek dengan kuadratkan hasilmu.</strong> Cara paling mudah memverifikasi jawaban bentuk akar adalah dengan mengkuadratkannya kembali — jika dapat bilangan bulat, jawabanmu kemungkinan besar benar!</p>
+              </div>
+            </div>
+          </div>
+
           {/* Tombol Kembali */}
           <div className="mt-4 text-center">
             <button

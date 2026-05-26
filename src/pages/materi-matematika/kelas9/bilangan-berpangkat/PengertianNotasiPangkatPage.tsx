@@ -969,6 +969,35 @@ const PengertianNotasiPangkatPage = () => {
             </div>
           </div>
 
+          {/* Tips dan Trik */}
+          <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">⚡</span>
+              <div>
+                <p className="font-display text-base font-bold text-yellow-300 leading-tight">Jangan Sampai Ketipu!</p>
+                <p className="font-body text-xs text-yellow-200/70">Tips & trik agar tidak salah hitung pangkat</p>
+              </div>
+            </div>
+            <div className="px-5 py-4 space-y-3 font-body text-sm text-white/80">
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Kurung itu krusial!</strong> <InlineMath math="(-3)^2 = 9" /> berbeda dengan <InlineMath math="-3^2 = -9" />. Tanda kurung menentukan apakah tanda negatif ikut dipangkatkan atau tidak.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Genap = positif, Ganjil = negatif.</strong> Jika basis negatif dan <em>ada kurung</em>, cukup lihat pangkatnya: genap → hasilnya pasti positif, ganjil → hasilnya pasti negatif.</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Hati-hati dengan pangkat nol!</strong> <InlineMath math="a^0 = 1" /> untuk semua <InlineMath math="a \neq 0" /> — bukan nol, bukan <InlineMath math="a" />, tapi <strong>1</strong>!</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <span className="text-yellow-400 text-base mt-0.5">💡</span>
+                <p><strong className="text-yellow-300">Baca dulu, hitung kemudian.</strong> Sebelum menghitung, tandai mana basis dan mana eksponen. Ini mencegah kesalahan fatal sejak awal.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <div className="mt-8 text-center">
