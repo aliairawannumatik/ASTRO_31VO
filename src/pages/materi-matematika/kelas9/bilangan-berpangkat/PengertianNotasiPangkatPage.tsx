@@ -107,8 +107,10 @@ const PengertianNotasiPangkatPage = () => {
                   <div className="flex flex-col items-center gap-3">
                     <div className="relative inline-block">
                       <div className="bg-gradient-to-br from-cyan-900/60 to-blue-900/60 border-2 border-cyan-500/50 rounded-xl px-10 py-6 text-center">
-                        <span className="font-display text-5xl font-bold text-white">5</span>
-                        <span className="font-display text-3xl font-bold text-yellow-400 align-super">3</span>
+                        <span className="inline-flex items-start">
+                          <span className="font-display text-5xl font-bold text-white leading-none">5</span>
+                          <span className="font-display text-2xl font-bold text-yellow-400 leading-none" style={{ marginTop: '-4px', marginLeft: '3px' }}>3</span>
+                        </span>
                       </div>
                       <div className="mt-3 flex justify-around text-xs font-body">
                         <div className="text-center">
