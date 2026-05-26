@@ -1,11 +1,134 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, AlertTriangle } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+
+const STEPS = [
+  { count: 1,  exp: 0, label: "2^0 = 1",  color: "from-emerald-400 to-teal-600",     glow: "shadow-emerald-500/60",  bg: "bg-emerald-500/20",  border: "border-emerald-400/50",  text: "text-emerald-300" },
+  { count: 2,  exp: 1, label: "2^1 = 2",  color: "from-cyan-400 to-blue-600",        glow: "shadow-cyan-500/60",     bg: "bg-cyan-500/20",     border: "border-cyan-400/50",     text: "text-cyan-300"    },
+  { count: 4,  exp: 2, label: "2^2 = 4",  color: "from-violet-400 to-purple-700",    glow: "shadow-violet-500/60",   bg: "bg-violet-500/20",   border: "border-violet-400/50",   text: "text-violet-300"  },
+  { count: 8,  exp: 3, label: "2^3 = 8",  color: "from-orange-400 to-red-600",       glow: "shadow-orange-500/60",   bg: "bg-orange-500/20",   border: "border-orange-400/50",   text: "text-orange-300"  },
+  { count: 16, exp: 4, label: "2^4 = 16", color: "from-pink-400 to-fuchsia-600",     glow: "shadow-pink-500/60",     bg: "bg-pink-500/20",     border: "border-pink-400/50",     text: "text-pink-300"    },
+  { count: 32, exp: 5, label: "2^5 = 32", color: "from-yellow-400 to-amber-600",     glow: "shadow-yellow-500/60",   bg: "bg-yellow-500/20",   border: "border-yellow-400/50",   text: "text-yellow-300"  },
+];
+
+const BacteriaAnimation = () => {
+  const [step, setStep] = useState(0);
+  const [splitting, setSplitting] = useState(false);
+  const [autoPlayed, setAutoPlayed] = useState(false);
+
+  const current = STEPS[step];
+  const isMax = step === STEPS.length - 1;
+
+  const handleAction = () => {
+    playPopSound();
+    if (isMax) {
+      setSplitting(true);
+      setTimeout(() => { setStep(0); setSplitting(false); }, 350);
+      return;
+    }
+    setSplitting(true);
+    setTimeout(() => { setStep((s) => s + 1); setSplitting(false); }, 350);
+  };
+
+  useEffect(() => {
+    if (!autoPlayed) {
+      const t = setTimeout(() => { setAutoPlayed(true); }, 600);
+      return () => clearTimeout(t);
+    }
+  }, [autoPlayed]);
+
+  const bacteriaIds = Array.from({ length: current.count }, (_, i) => `${step}-${i}`);
+
+  return (
+    <div className={`rounded-2xl border-2 ${current.border} ${current.bg} backdrop-blur-sm overflow-hidden transition-all duration-500`}>
+      {/* Header */}
+      <div className="px-5 pt-4 pb-2 text-center">
+        <p className="font-body text-xs font-semibold text-white/60 tracking-widest uppercase mb-1">🎬 Animasi Interaktif</p>
+        <h3 className="font-display text-base font-bold text-white">Pembelahan Kuman & Notasi Pangkat</h3>
+      </div>
+
+      {/* Power notation display */}
+      <div className="flex items-center justify-center gap-3 py-3">
+        <motion.div
+          key={step}
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 18 }}
+          className={`px-5 py-2 rounded-full ${current.bg} border ${current.border} flex items-center gap-2`}
+        >
+          <span className={`font-display text-2xl font-bold ${current.text}`}>
+            <InlineMath math={current.label} />
+          </span>
+        </motion.div>
+      </div>
+
+      {/* Bacteria field */}
+      <div className="relative px-4 pb-2 min-h-[130px] flex flex-wrap justify-center items-center gap-2 content-center">
+        <AnimatePresence mode="popLayout">
+          {bacteriaIds.map((id, i) => (
+            <motion.div
+              key={id}
+              initial={{ scale: 0, opacity: 0, rotate: -30 }}
+              animate={
+                splitting
+                  ? { scale: [1, 1.35, 0.85], rotate: [0, 12, -8], opacity: 1 }
+                  : { scale: 1, opacity: 1, rotate: 0 }
+              }
+              exit={{ scale: 0, opacity: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 20,
+                delay: splitting ? 0 : i * 0.04,
+              }}
+              className={`relative w-11 h-11 rounded-full bg-gradient-to-br ${current.color} shadow-lg ${current.glow} flex items-center justify-center cursor-pointer select-none`}
+              onClick={handleAction}
+              title="Klik untuk membelah!"
+            >
+              <span className="text-xl leading-none">🦠</span>
+              {/* Glow ring */}
+              <span className={`absolute inset-0 rounded-full bg-gradient-to-br ${current.color} opacity-30 blur-sm`} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Step indicator */}
+      <div className="flex justify-center gap-1.5 py-2">
+        {STEPS.map((s, i) => (
+          <div
+            key={i}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === step ? `w-6 bg-gradient-to-r ${s.color}` : i < step ? "w-3 bg-white/40" : "w-3 bg-white/10"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Button */}
+      <div className="px-5 pb-5 pt-1">
+        <motion.button
+          whileTap={{ scale: 0.94 }}
+          onClick={handleAction}
+          className={`w-full py-3 rounded-xl bg-gradient-to-r ${current.color} text-white font-body font-bold text-sm shadow-lg ${current.glow} transition-all duration-300 hover:opacity-90 active:scale-95`}
+        >
+          {isMax ? "🔄 Ulangi dari awal" : `🦠 Tekan untuk membelah! (${current.count} → ${STEPS[step + 1].count})`}
+        </motion.button>
+        <p className="text-center font-body text-xs text-white/40 mt-2">
+          {isMax
+            ? "Sudah mencapai 2⁵ = 32 kuman! Lihat betapa cepatnya berkembang biak? 🤯"
+            : "Klik kuman atau tombol di bawah untuk melihat pembelahan selanjutnya"}
+        </p>
+      </div>
+    </div>
+  );
+};
 
 const PengertianNotasiPangkatPage = () => {
   const navigate = useNavigate();
@@ -34,6 +157,9 @@ const PengertianNotasiPangkatPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ===================== ANIMASI PEMBELAHAN KUMAN ===================== */}
+          <BacteriaAnimation />
 
           {/* ===================== PENGANTAR ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
