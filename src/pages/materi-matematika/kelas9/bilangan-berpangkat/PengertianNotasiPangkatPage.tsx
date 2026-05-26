@@ -268,20 +268,19 @@ const PengertianNotasiPangkatPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Coba bayangkan kamu diminta menghitung luas sebuah persegi dengan sisi 1.000 meter.
-                  Rumusnya <InlineMath math="L = s \times s" />. Tapi bagaimana kalau kamu harus mengalikan bilangan yang sama sebanyak 10 kali?
-                  Menulisnya secara manual tentu panjang banget, kan?
+                  Tadi kamu sudah melihat animasi kuman yang membelah diri — dari <strong className="text-emerald-300">1 kuman</strong> menjadi <strong className="text-cyan-300">2</strong>, lalu <strong className="text-violet-300">4</strong>, <strong className="text-orange-300">8</strong>, <strong className="text-pink-300">16</strong>, hingga <strong className="text-yellow-300">32</strong> hanya dalam beberapa langkah.
+                  Coba bayangkan kalau kamu harus menuliskan perkaliannya secara manual sampai generasi ke-10:{" "}
+                  <InlineMath math="2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2" /> — panjang dan melelahkan, kan?
                 </p>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-cyan-200 leading-relaxed">
-                    Inilah alasan kenapa matematika punya notasi pangkat! Daripada nulis{" "}
-                    <InlineMath math="2 \times 2 \times 2 \times 2 \times 2" />, cukup tulis{" "}
-                    <InlineMath math="2^5" /> saja. Lebih ringkas, lebih keren! 🌟
+                    Inilah alasan kenapa matematika punya <strong>notasi pangkat</strong>! Pembelahan kuman sampai generasi ke-10 cukup ditulis{" "}
+                    <InlineMath math="2^{10} = 1.024" /> saja. Satu simbol kecil, makna yang besar! 🌟
                   </p>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Catatan:</strong> Konsep bilangan berpangkat digunakan luas dalam ilmu sains, komputer, dan keuangan — dari menghitung ukuran file komputer (KB, MB, GB) hingga pertumbuhan bakteri!
+                    <strong>Tahukah kamu?</strong> Pembelahan sel bakteri nyata di alam mengikuti pola <InlineMath math="2^n" /> ini — itulah mengapa infeksi bakteri bisa menyebar sangat cepat jika tidak ditangani! Notasi pangkat membantu para ilmuwan menghitung dan memprediksinya.
                   </p>
                 </div>
               </div>
