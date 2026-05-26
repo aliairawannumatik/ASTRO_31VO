@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Starfield from "@/components/Starfield";
@@ -17,34 +17,25 @@ const STEPS = [
   { count: 32, exp: 5, label: "2^5 = 32", color: "from-yellow-400 to-amber-600",     glow: "shadow-yellow-500/60",   bg: "bg-yellow-500/20",   border: "border-yellow-400/50",   text: "text-yellow-300"  },
 ];
 
-// ── Single bacterium that plays a 3-phase slow-motion division ──────────────
+// ── Single bacterium: elongate → bridge → two daughters slide apart ──────────
 const SplittingBacterium = ({
-  color, glow, nextColor, nextGlow, onDone,
+  color, glow, nextColor, nextGlow,
 }: {
-  color: string; glow: string; nextColor: string; nextGlow: string; onDone: () => void;
+  color: string; glow: string; nextColor: string; nextGlow: string;
 }) => {
-  // phase 0 = elongate, phase 1 = divide apart
-  const [phase, setPhase] = useState<0 | 1>(0);
+  const [divPhase, setDivPhase] = useState<0 | 1>(0);
 
   useEffect(() => {
-    // after elongation (700 ms) → start dividing
-    const t1 = setTimeout(() => setPhase(1), 700);
-    // after divide (700 + 900 ms) → signal done
-    const t2 = setTimeout(() => onDone(), 1600);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);                                           // eslint-disable-line react-hooks/exhaustive-deps
+    const t = setTimeout(() => setDivPhase(1), 700);
+    return () => clearTimeout(t);
+  }, []);
 
-  if (phase === 0) {
-    // Phase 1 – elongate & slightly flatten (sausage / cell-elongation shape)
+  if (divPhase === 0) {
     return (
       <motion.div
         className={`w-11 h-11 bg-gradient-to-br ${color} shadow-lg ${glow} flex items-center justify-center text-xl select-none`}
-        style={{ borderRadius: "50%" }}
-        animate={{
-          scaleX: [1, 1.8, 2.0],
-          scaleY: [1, 0.62, 0.58],
-          borderRadius: ["50%", "40%", "38%"],
-        }}
+        style={{ borderRadius: "50%", flexShrink: 0 }}
+        animate={{ scaleX: [1, 1.85, 2.1], scaleY: [1, 0.6, 0.55] }}
         transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
       >
         🦠
@@ -52,32 +43,30 @@ const SplittingBacterium = ({
     );
   }
 
-  // Phase 2 – two daughter cells slide apart from the centre
-  const spread = 26;
   return (
-    <div className="relative flex items-center justify-center" style={{ width: 88, height: 44 }}>
-      {/* connecting "bridge" that shrinks to 0 */}
+    <div className="relative flex-shrink-0" style={{ width: 96, height: 44 }}>
+      {/* shrinking bridge between the two daughters */}
       <motion.div
-        className={`absolute h-[26px] bg-gradient-to-r ${nextColor} opacity-70 rounded-full`}
-        initial={{ width: 52 }}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[28px] bg-gradient-to-r ${nextColor} opacity-60 rounded-full`}
+        initial={{ width: 56 }}
         animate={{ width: 0 }}
-        transition={{ duration: 0.5, ease: "easeIn" }}
+        transition={{ duration: 0.55, ease: "easeIn" }}
       />
       {/* left daughter */}
       <motion.div
-        className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${nextColor} shadow-lg ${nextGlow} flex items-center justify-center text-lg select-none`}
-        initial={{ x: 0, scale: 0.72 }}
-        animate={{ x: -spread, scale: 1 }}
-        transition={{ type: "spring", stiffness: 130, damping: 14, delay: 0.05 }}
+        className={`absolute top-1/2 left-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-br ${nextColor} shadow-lg ${nextGlow} flex items-center justify-center text-lg select-none`}
+        initial={{ x: "-50%", scale: 0.7 }}
+        animate={{ x: "calc(-50% - 28px)", scale: 1 }}
+        transition={{ type: "spring", stiffness: 110, damping: 13 }}
       >
         🦠
       </motion.div>
       {/* right daughter */}
       <motion.div
-        className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${nextColor} shadow-lg ${nextGlow} flex items-center justify-center text-lg select-none`}
-        initial={{ x: 0, scale: 0.72 }}
-        animate={{ x: spread, scale: 1 }}
-        transition={{ type: "spring", stiffness: 130, damping: 14, delay: 0.05 }}
+        className={`absolute top-1/2 left-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-br ${nextColor} shadow-lg ${nextGlow} flex items-center justify-center text-lg select-none`}
+        initial={{ x: "-50%", scale: 0.7 }}
+        animate={{ x: "calc(-50% + 28px)", scale: 1 }}
+        transition={{ type: "spring", stiffness: 110, damping: 13 }}
       >
         🦠
       </motion.div>
@@ -88,38 +77,30 @@ const SplittingBacterium = ({
 // ── Main animation card ──────────────────────────────────────────────────────
 const BacteriaAnimation = () => {
   const [step, setStep] = useState(0);
-  // 'idle' | 'splitting' (shows SplittingBacterium) | 'landing' (new count pops in)
-  const [phase, setPhase] = useState<"idle" | "splitting" | "landing">("idle");
-  const [doneCount, setDoneCount] = useState(0);
+  const [phase, setPhase] = useState<"idle" | "splitting">("idle");
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const current  = STEPS[step];
-  const next     = STEPS[step + 1] ?? STEPS[step];
-  const isMax    = step === STEPS.length - 1;
-  const busy     = phase !== "idle";
-
-  // Called by each SplittingBacterium when its animation finishes
-  const handleOneDone = () => {
-    setDoneCount((n) => n + 1);
-  };
-
-  // When all bacteria in splitting phase have signalled done → advance step
-  useEffect(() => {
-    if (phase === "splitting" && doneCount >= current.count) {
-      setPhase("landing");
-      setStep((s) => s + 1);
-      setDoneCount(0);
-      const t = setTimeout(() => setPhase("idle"), 50);
-      return () => clearTimeout(t);
-    }
-  }, [doneCount, phase, current.count]);
+  const current = STEPS[step];
+  const next    = STEPS[step + 1] ?? STEPS[step];
+  const isMax   = step === STEPS.length - 1;
+  const busy    = phase !== "idle";
 
   const handleAction = () => {
     if (busy) return;
     playPopSound();
     if (isMax) { setStep(0); return; }
+
     setPhase("splitting");
-    setDoneCount(0);
+
+    // Total anim: 700 ms elongate + ~950 ms spring split = ~1650 ms
+    timerRef.current = setTimeout(() => {
+      setStep((s) => s + 1);
+      setPhase("idle");
+    }, 1700);
   };
+
+  // Clean up timer if the component unmounts mid-animation
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
   const items = Array.from({ length: current.count }, (_, i) => i);
 
@@ -181,12 +162,8 @@ const BacteriaAnimation = () => {
             glow={current.glow}
             nextColor={next.color}
             nextGlow={next.glow}
-            onDone={handleOneDone}
           />
         ))}
-
-        {/* LANDING – brief invisible placeholder so layout doesn't jump */}
-        {phase === "landing" && null}
       </div>
 
       {/* Phase label */}
