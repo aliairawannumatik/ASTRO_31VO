@@ -157,7 +157,7 @@ const NotasiIlmiahPage = () => {
                       <span className="font-display text-3xl font-bold text-white mx-2">×</span>
                       <span className="inline-flex items-start">
                         <span className="font-display text-4xl font-bold text-white">10</span>
-                        <span className="font-display text-2xl font-bold text-cyan-400 mt-1 leading-none">5</span>
+                        <span className="font-display text-2xl font-bold text-cyan-400 -mt-2 leading-none">5</span>
                       </span>
                     </div>
                     <div className="flex justify-around w-full text-xs font-body">
