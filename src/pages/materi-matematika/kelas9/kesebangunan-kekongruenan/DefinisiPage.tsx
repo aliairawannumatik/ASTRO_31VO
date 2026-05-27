@@ -234,7 +234,7 @@ const DefinisiPage = () => {
                     <p className="font-body text-sm text-white">Persegi panjang ABCD dengan panjang <InlineMath math="AB = 10" /> cm dan lebar <InlineMath math="BC = 6" /> cm sebangun dengan persegi panjang PQRS. Jika <InlineMath math="PQ = 15" /> cm, tentukan panjang <InlineMath math="QR" />!</p>
                     {/* Diagram dua persegi panjang sebangun */}
                     <div className="flex justify-center">
-                      <svg viewBox="0 0 380 130" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                      <svg viewBox="0 0 380 130" className="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
                         {/* Persegi panjang ABCD (10×6) — skala: ×8 = 80×48 */}
                         <rect x="20" y="35" width="80" height="48" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" strokeWidth="1.5" rx="1"/>
                         {/* Titik sudut ABCD */}
@@ -306,7 +306,7 @@ const DefinisiPage = () => {
                     <p className="font-body text-sm text-white">Segiempat ABCD <InlineMath math="\sim" /> EFGH. Diketahui <InlineMath math="\angle A = 80°" />, <InlineMath math="\angle B = 95°" />, <InlineMath math="\angle C = 100°" />. Tentukan besar <InlineMath math="\angle E" />, <InlineMath math="\angle F" />, <InlineMath math="\angle G" />, dan <InlineMath math="\angle H" />!</p>
                     {/* Diagram dua segiempat sebangun dengan label sudut */}
                     <div className="flex justify-center">
-                      <svg viewBox="0 0 380 120" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                      <svg viewBox="0 0 380 120" className="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
                         {/* Segiempat ABCD */}
                         <polygon points="22,18 102,12 108,78 18,84" fill="rgba(250,204,21,0.1)" stroke="#facc15" strokeWidth="1.5"/>
                         <circle cx="22" cy="18" r="2.5" fill="#facc15"/>
@@ -379,7 +379,7 @@ const DefinisiPage = () => {
                     <p className="font-body text-sm text-white">Segitiga ABC <InlineMath math="\sim" /> segitiga PQR dengan <InlineMath math="AB = 8" /> cm, <InlineMath math="BC = 12" /> cm, <InlineMath math="AC = 10" /> cm. Jika keliling segitiga PQR = 45 cm, tentukan panjang PQ, QR, dan PR!</p>
                     {/* Diagram dua segitiga sebangun */}
                     <div className="flex justify-center">
-                      <svg viewBox="0 0 380 125" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                      <svg viewBox="0 0 380 125" className="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
                         {/* Segitiga ABC: A(atas), B(kiri-bawah), C(kanan-bawah) */}
                         {/* AB=8, BC=12, AC=10 → skala 5px/cm */}
                         {/* B=(15,88), C=(75,88), A=(30,28) */}
@@ -510,7 +510,7 @@ const DefinisiPage = () => {
                     <p className="font-body text-sm text-white">Diketahui △ABC ≅ △PQR dengan <InlineMath math="AB = 12" /> cm, <InlineMath math="AC = 5" /> cm, dan <InlineMath math="\angle A = 90°" />. Tentukan panjang PQ, PR, dan QR!</p>
                     {/* Diagram dua segitiga siku-siku kongruen */}
                     <div className="flex justify-center">
-                      <svg viewBox="0 0 340 110" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
+                      <svg viewBox="0 0 340 110" className="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
                         {/* Segitiga ABC: sudut siku-siku di A */}
                         {/* A=(20,85), B=(20,25) AB=12→60px, C=(45,85) AC=5→25px */}
                         <polygon points="20,85 20,25 45,85" fill="rgba(52,211,153,0.12)" stroke="#34d399" strokeWidth="1.5"/>
@@ -578,7 +578,7 @@ const DefinisiPage = () => {
                     <p className="font-body text-sm text-white">Apakah pasangan berikut sebangun, kongruen, atau keduanya? Segitiga P dengan sisi 3, 4, 5 cm dan Segitiga Q dengan sisi 6, 8, 10 cm. Jelaskan!</p>
                     {/* Diagram dua segitiga: satu kecil (3-4-5) satu besar (6-8-10) */}
                     <div className="flex justify-center">
-                      <svg viewBox="0 0 340 105" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
+                      <svg viewBox="0 0 340 105" className="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
                         {/* Segitiga P (3,4,5) skala 8px/cm */}
                         {/* siku-siku di kiri bawah: (15,75), atas:(15,51), kanan:(47,75) */}
                         <polygon points="15,75 15,51 47,75" fill="rgba(250,204,21,0.12)" stroke="#facc15" strokeWidth="1.5"/>
@@ -645,7 +645,7 @@ const DefinisiPage = () => {
                     <p className="font-body text-sm text-white">Diketahui segi-6 beraturan ABCDEF dan segi-6 beraturan PQRSTU. Sisi ABCDEF = 5 cm dan sisi PQRSTU = 5 cm. Apakah kedua bangun tersebut sebangun? Kongruen? Berikan alasannya!</p>
                     {/* Diagram dua segi-6 beraturan sama ukuran → sebangun & kongruen */}
                     <div className="flex justify-center">
-                      <svg viewBox="0 0 340 115" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
+                      <svg viewBox="0 0 340 115" className="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
                         {/* Segi-6 ABCDEF, center(58,57), r=28 */}
                         {/* A=top(58,29), B=top-right(82,43), C=bot-right(82,71), D=bot(58,85), E=bot-left(34,71), F=top-left(34,43) */}
                         <polygon points="58,29 82,43 82,71 58,85 34,71 34,43" fill="rgba(248,113,113,0.12)" stroke="#f87171" strokeWidth="1.5"/>
