@@ -157,8 +157,8 @@ const ShadowAnimation = () => {
   const tiangShadowEnd = tiangX + shadowTiangPx;
   const treeShadowEnd  = treeX  + shadowTreePx;
 
-  const shadowTiangM = (4 / Math.tan(angleRad)).toFixed(1);
-  const shadowTreeM  = (8 / Math.tan(angleRad)).toFixed(1);
+  const shadowTiangM = (4 / Math.tan(angleRad)).toFixed(2);
+  const shadowTreeM  = (8 / Math.tan(angleRad)).toFixed(2);
   const ratio = (parseFloat(shadowTiangM) / parseFloat(shadowTreeM)).toFixed(2);
 
   const tr = "all 0.25s ease";
