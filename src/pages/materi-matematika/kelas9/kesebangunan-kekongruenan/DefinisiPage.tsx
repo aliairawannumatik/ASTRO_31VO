@@ -506,8 +506,50 @@ const DefinisiPage = () => {
                     <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Diketahui △ABC ≅ △PQR dengan <InlineMath math="AB = 12" /> cm, <InlineMath math="AC = 5" /> cm, dan <InlineMath math="\angle A = 90°" />. Tentukan panjang PQ, PR, dan QR!</p>
+                    {/* Diagram dua segitiga siku-siku kongruen */}
+                    <div className="flex justify-center">
+                      <svg viewBox="0 0 340 110" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
+                        {/* Segitiga ABC: sudut siku-siku di A */}
+                        {/* A=(20,85), B=(20,25) AB=12→60px, C=(45,85) AC=5→25px */}
+                        <polygon points="20,85 20,25 45,85" fill="rgba(52,211,153,0.12)" stroke="#34d399" strokeWidth="1.5"/>
+                        {/* Tanda siku-siku di A */}
+                        <polyline points="20,78 27,78 27,85" fill="none" stroke="#34d399" strokeWidth="1"/>
+                        <circle cx="20" cy="85" r="2.5" fill="#34d399"/>
+                        <circle cx="20" cy="25" r="2.5" fill="#34d399"/>
+                        <circle cx="45" cy="85" r="2.5" fill="#34d399"/>
+                        <text x="7"  y="89" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">A</text>
+                        <text x="7"  y="23" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">B</text>
+                        <text x="47" y="89" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">C</text>
+                        {/* Label sisi */}
+                        <text x="4"  y="58" fill="#a7f3d0" fontSize="8" fontFamily="sans-serif">12</text>
+                        <text x="27" y="93" fill="#a7f3d0" fontSize="8" fontFamily="sans-serif">5</text>
+                        <text x="38" y="52" fill="#a7f3d0" fontSize="8" fontFamily="sans-serif">13</text>
+                        <text x="25" y="65" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="sans-serif">△ABC</text>
+
+                        {/* Simbol ≅ */}
+                        <text x="118" y="62" fill="#facc15" fontSize="16" textAnchor="middle" fontFamily="sans-serif">≅</text>
+
+                        {/* Segitiga PQR: kongruen dengan ABC */}
+                        <polygon points="175,85 175,25 200,85" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" strokeWidth="1.5"/>
+                        {/* Tanda siku-siku di P */}
+                        <polyline points="175,78 182,78 182,85" fill="none" stroke="#60a5fa" strokeWidth="1"/>
+                        <circle cx="175" cy="85" r="2.5" fill="#60a5fa"/>
+                        <circle cx="175" cy="25" r="2.5" fill="#60a5fa"/>
+                        <circle cx="200" cy="85" r="2.5" fill="#60a5fa"/>
+                        <text x="162" y="89" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">P</text>
+                        <text x="162" y="23" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">Q</text>
+                        <text x="202" y="89" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">R</text>
+                        <text x="158" y="58" fill="#bfdbfe" fontSize="8" fontFamily="sans-serif">12</text>
+                        <text x="182" y="93" fill="#bfdbfe" fontSize="8" fontFamily="sans-serif">5</text>
+                        <text x="193" y="52" fill="#bfdbfe" fontSize="8" fontFamily="sans-serif">13</text>
+                        <text x="180" y="65" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="sans-serif">△PQR</text>
+
+                        {/* Keterangan */}
+                        <text x="20" y="105" fill="rgba(250,204,21,0.7)" fontSize="7.5" fontFamily="sans-serif">Kongruen → semua sisi & sudut bersesuaian SAMA. QR = √(12²+5²) = 13 cm</text>
+                      </svg>
+                    </div>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
@@ -532,8 +574,53 @@ const DefinisiPage = () => {
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Apakah pasangan berikut sebangun, kongruen, atau keduanya? Segitiga P dengan sisi 3, 4, 5 cm dan Segitiga Q dengan sisi 6, 8, 10 cm. Jelaskan!</p>
+                    {/* Diagram dua segitiga: satu kecil (3-4-5) satu besar (6-8-10) */}
+                    <div className="flex justify-center">
+                      <svg viewBox="0 0 340 105" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
+                        {/* Segitiga P (3,4,5) skala 8px/cm */}
+                        {/* siku-siku di kiri bawah: (15,75), atas:(15,51), kanan:(47,75) */}
+                        <polygon points="15,75 15,51 47,75" fill="rgba(250,204,21,0.12)" stroke="#facc15" strokeWidth="1.5"/>
+                        <polyline points="15,68 22,68 22,75" fill="none" stroke="#facc15" strokeWidth="1"/>
+                        <circle cx="15" cy="75" r="2" fill="#facc15"/>
+                        <circle cx="15" cy="51" r="2" fill="#facc15"/>
+                        <circle cx="47" cy="75" r="2" fill="#facc15"/>
+                        <text x="3"  y="79" fill="#fde68a" fontSize="8" fontFamily="sans-serif" fontWeight="bold">B</text>
+                        <text x="3"  y="49" fill="#fde68a" fontSize="8" fontFamily="sans-serif" fontWeight="bold">A</text>
+                        <text x="49" y="79" fill="#fde68a" fontSize="8" fontFamily="sans-serif" fontWeight="bold">C</text>
+                        <text x="2"  y="65" fill="#fbbf24" fontSize="7.5" fontFamily="sans-serif">3</text>
+                        <text x="26" y="83" fill="#fbbf24" fontSize="7.5" fontFamily="sans-serif">4</text>
+                        <text x="35" y="61" fill="#fbbf24" fontSize="7.5" fontFamily="sans-serif">5</text>
+                        <text x="22" y="66" fill="rgba(255,255,255,0.3)" fontSize="7" fontFamily="sans-serif">△P</text>
+
+                        {/* Label satuan */}
+                        <text x="8" y="90" fill="rgba(255,255,255,0.4)" fontSize="7" fontFamily="sans-serif">(3,4,5 cm)</text>
+
+                        {/* Simbol ~ tapi tidak ≅ */}
+                        <text x="100" y="67" fill="#facc15" fontSize="14" textAnchor="middle" fontFamily="sans-serif">~</text>
+                        <text x="100" y="80" fill="#ef4444" fontSize="9" textAnchor="middle" fontFamily="sans-serif">tdk ≅</text>
+
+                        {/* Segitiga Q (6,8,10) skala 8px/cm */}
+                        {/* siku-siku di kiri bawah: (145,85), atas:(145,37), kanan:(209,85) */}
+                        <polygon points="145,85 145,37 209,85" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" strokeWidth="1.5"/>
+                        <polyline points="145,78 152,78 152,85" fill="none" stroke="#a78bfa" strokeWidth="1"/>
+                        <circle cx="145" cy="85" r="2" fill="#a78bfa"/>
+                        <circle cx="145" cy="37" r="2" fill="#a78bfa"/>
+                        <circle cx="209" cy="85" r="2" fill="#a78bfa"/>
+                        <text x="133" y="89" fill="#c4b5fd" fontSize="8" fontFamily="sans-serif" fontWeight="bold">Q</text>
+                        <text x="133" y="35" fill="#c4b5fd" fontSize="8" fontFamily="sans-serif" fontWeight="bold">P</text>
+                        <text x="212" y="89" fill="#c4b5fd" fontSize="8" fontFamily="sans-serif" fontWeight="bold">R</text>
+                        <text x="130" y="63" fill="#c4b5fd" fontSize="7.5" fontFamily="sans-serif">6</text>
+                        <text x="172" y="95" fill="#c4b5fd" fontSize="7.5" fontFamily="sans-serif">8</text>
+                        <text x="183" y="58" fill="#c4b5fd" fontSize="7.5" fontFamily="sans-serif">10</text>
+                        <text x="165" y="68" fill="rgba(255,255,255,0.3)" fontSize="7" fontFamily="sans-serif">△Q</text>
+                        <text x="133" y="100" fill="rgba(255,255,255,0.4)" fontSize="7" fontFamily="sans-serif">(6,8,10 cm)</text>
+
+                        {/* Keterangan */}
+                        <text x="20" y="102" fill="rgba(250,204,21,0.65)" fontSize="7" fontFamily="sans-serif">Rasio 3:6=4:8=5:10=½ → Sebangun ✓ | Sisi ≠ sama panjang → Tidak Kongruen ✗</text>
+                      </svg>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
@@ -554,8 +641,57 @@ const DefinisiPage = () => {
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Diketahui segi-6 beraturan ABCDEF dan segi-6 beraturan PQRSTU. Sisi ABCDEF = 5 cm dan sisi PQRSTU = 5 cm. Apakah kedua bangun tersebut sebangun? Kongruen? Berikan alasannya!</p>
+                    {/* Diagram dua segi-6 beraturan sama ukuran → sebangun & kongruen */}
+                    <div className="flex justify-center">
+                      <svg viewBox="0 0 340 115" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
+                        {/* Segi-6 ABCDEF, center(58,57), r=28 */}
+                        {/* A=top(58,29), B=top-right(82,43), C=bot-right(82,71), D=bot(58,85), E=bot-left(34,71), F=top-left(34,43) */}
+                        <polygon points="58,29 82,43 82,71 58,85 34,71 34,43" fill="rgba(248,113,113,0.12)" stroke="#f87171" strokeWidth="1.5"/>
+                        <circle cx="58" cy="29" r="2" fill="#f87171"/>
+                        <circle cx="82" cy="43" r="2" fill="#f87171"/>
+                        <circle cx="82" cy="71" r="2" fill="#f87171"/>
+                        <circle cx="58" cy="85" r="2" fill="#f87171"/>
+                        <circle cx="34" cy="71" r="2" fill="#f87171"/>
+                        <circle cx="34" cy="43" r="2" fill="#f87171"/>
+                        <text x="54" y="23"  fill="#fca5a5" fontSize="8" fontFamily="sans-serif" fontWeight="bold">A</text>
+                        <text x="84" y="43"  fill="#fca5a5" fontSize="8" fontFamily="sans-serif" fontWeight="bold">B</text>
+                        <text x="84" y="74"  fill="#fca5a5" fontSize="8" fontFamily="sans-serif" fontWeight="bold">C</text>
+                        <text x="54" y="96"  fill="#fca5a5" fontSize="8" fontFamily="sans-serif" fontWeight="bold">D</text>
+                        <text x="22" y="74"  fill="#fca5a5" fontSize="8" fontFamily="sans-serif" fontWeight="bold">E</text>
+                        <text x="22" y="43"  fill="#fca5a5" fontSize="8" fontFamily="sans-serif" fontWeight="bold">F</text>
+                        {/* Label sisi contoh */}
+                        <text x="60" y="26" fill="#fca5a5" fontSize="7" fontFamily="sans-serif">5cm</text>
+                        <text x="48" y="62" fill="rgba(255,255,255,0.3)" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">ABCDEF</text>
+                        <text x="48" y="71" fill="rgba(255,255,255,0.25)" fontSize="6.5" textAnchor="middle" fontFamily="sans-serif">120° tiap sudut</text>
+
+                        {/* Simbol ~ dan ≅ */}
+                        <text x="158" y="54" fill="#facc15" fontSize="14" textAnchor="middle" fontFamily="sans-serif">~</text>
+                        <text x="158" y="70" fill="#34d399" fontSize="12" textAnchor="middle" fontFamily="sans-serif">≅</text>
+
+                        {/* Segi-6 PQRSTU, center(238,57), r=28 — ukuran sama */}
+                        <polygon points="238,29 262,43 262,71 238,85 214,71 214,43" fill="rgba(52,211,153,0.12)" stroke="#34d399" strokeWidth="1.5"/>
+                        <circle cx="238" cy="29" r="2" fill="#34d399"/>
+                        <circle cx="262" cy="43" r="2" fill="#34d399"/>
+                        <circle cx="262" cy="71" r="2" fill="#34d399"/>
+                        <circle cx="238" cy="85" r="2" fill="#34d399"/>
+                        <circle cx="214" cy="71" r="2" fill="#34d399"/>
+                        <circle cx="214" cy="43" r="2" fill="#34d399"/>
+                        <text x="234" y="23"  fill="#6ee7b7" fontSize="8" fontFamily="sans-serif" fontWeight="bold">P</text>
+                        <text x="264" y="43"  fill="#6ee7b7" fontSize="8" fontFamily="sans-serif" fontWeight="bold">Q</text>
+                        <text x="264" y="74"  fill="#6ee7b7" fontSize="8" fontFamily="sans-serif" fontWeight="bold">R</text>
+                        <text x="234" y="96"  fill="#6ee7b7" fontSize="8" fontFamily="sans-serif" fontWeight="bold">S</text>
+                        <text x="201" y="74"  fill="#6ee7b7" fontSize="8" fontFamily="sans-serif" fontWeight="bold">T</text>
+                        <text x="201" y="43"  fill="#6ee7b7" fontSize="8" fontFamily="sans-serif" fontWeight="bold">U</text>
+                        <text x="240" y="26" fill="#6ee7b7" fontSize="7" fontFamily="sans-serif">5cm</text>
+                        <text x="228" y="62" fill="rgba(255,255,255,0.3)" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">PQRSTU</text>
+                        <text x="228" y="71" fill="rgba(255,255,255,0.25)" fontSize="6.5" textAnchor="middle" fontFamily="sans-serif">120° tiap sudut</text>
+
+                        {/* Keterangan */}
+                        <text x="20" y="108" fill="rgba(250,204,21,0.65)" fontSize="7" fontFamily="sans-serif">Sisi sama (k=1) + sudut sama (120°) → Sebangun ✓ dan Kongruen ✓</text>
+                      </svg>
+                    </div>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
