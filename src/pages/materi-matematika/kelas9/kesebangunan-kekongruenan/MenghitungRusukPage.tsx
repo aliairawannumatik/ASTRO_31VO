@@ -50,6 +50,57 @@ const DiagramTrapesium = () => (
 );
 
 
+const DiagramContoh1 = () => (
+  <svg viewBox="0 0 360 195" className="w-full max-w-lg mx-auto">
+    {/* === ABCD (kiri, biru) === */}
+    {/* A=bawah-kiri, B=bawah-kanan, C=atas-kanan, D=atas-kiri */}
+    {/* AB=8, DC=6, AD=4(vertikal), BC=miring */}
+    <polygon points="20,155 80,155 65,115 20,115" fill="#3b82f6" fillOpacity="0.25" stroke="#60a5fa" strokeWidth="1.8"/>
+    {/* siku-siku A */}
+    <polyline points="20,147 28,147 28,155" fill="none" stroke="#93c5fd" strokeWidth="1.1"/>
+    {/* siku-siku D */}
+    <polyline points="20,123 28,123 28,115" fill="none" stroke="#93c5fd" strokeWidth="1.1"/>
+    {/* label titik */}
+    <text x="10" y="167" fontSize="9" fill="#93c5fd" fontWeight="bold">A</text>
+    <text x="82" y="167" fontSize="9" fill="#93c5fd" fontWeight="bold">B</text>
+    <text x="67" y="111" fontSize="9" fill="#93c5fd" fontWeight="bold">C</text>
+    <text x="8"  y="111" fontSize="9" fill="#93c5fd" fontWeight="bold">D</text>
+    {/* dimensi AB */}
+    <text x="50" y="170" textAnchor="middle" fontSize="8" fill="#7dd3fc">8 cm</text>
+    {/* dimensi DC */}
+    <text x="43" y="110" textAnchor="middle" fontSize="8" fill="#7dd3fc">6 cm</text>
+    {/* dimensi AD */}
+    <text x="5" y="138" textAnchor="middle" fontSize="8" fill="#7dd3fc">4</text>
+    {/* dimensi BC */}
+    <text x="84" y="138" textAnchor="start" fontSize="8" fill="#7dd3fc">5</text>
+
+    {/* simbol ~ */}
+    <text x="118" y="140" fontSize="20" fill="#facc15" textAnchor="middle">~</text>
+
+    {/* === PQRS (kanan, hijau, 2× lebih besar) === */}
+    {/* P=bawah-kiri, Q=bawah-kanan, R=atas-kanan, S=atas-kiri */}
+    {/* PQ=16, RS=?, PS=?(vertikal), QR=? */}
+    <polygon points="148,160 268,160 238,80 148,80" fill="#22c55e" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.8"/>
+    {/* siku-siku P */}
+    <polyline points="148,152 156,152 156,160" fill="none" stroke="#86efac" strokeWidth="1.1"/>
+    {/* siku-siku S */}
+    <polyline points="148,88 156,88 156,80" fill="none" stroke="#86efac" strokeWidth="1.1"/>
+    {/* label titik */}
+    <text x="137" y="173" fontSize="9" fill="#86efac" fontWeight="bold">P</text>
+    <text x="270" y="173" fontSize="9" fill="#86efac" fontWeight="bold">Q</text>
+    <text x="240" y="77"  fontSize="9" fill="#86efac" fontWeight="bold">R</text>
+    <text x="136" y="77"  fontSize="9" fill="#86efac" fontWeight="bold">S</text>
+    {/* dimensi PQ */}
+    <text x="208" y="175" textAnchor="middle" fontSize="8" fill="#86efac">16 cm</text>
+    {/* dimensi RS */}
+    <text x="193" y="75" textAnchor="middle" fontSize="8" fill="#fbbf24">RS = ?</text>
+    {/* dimensi PS */}
+    <text x="130" y="122" textAnchor="middle" fontSize="8" fill="#fbbf24">PS=?</text>
+    {/* dimensi QR */}
+    <text x="274" y="122" textAnchor="start" fontSize="8" fill="#fbbf24">QR=?</text>
+  </svg>
+);
+
 const MenghitungRusukPage = () => {
   const navigate = useNavigate();
   const Header = ({ id, icon, color, label }: { id: string; icon: React.ReactNode; color: string; label: string }) => (
@@ -140,18 +191,30 @@ const MenghitungRusukPage = () => {
                       Trapesium ABCD sebangun dengan trapesium PQRS. Diketahui <InlineMath math="AB = 8" /> cm, <InlineMath math="DC = 6" /> cm, <InlineMath math="BC = 5" /> cm, <InlineMath math="AD = 4" /> cm, dan <InlineMath math="PQ = 16" /> cm. Tentukan panjang <InlineMath math="QR" />, <InlineMath math="RS" />, dan <InlineMath math="PS" />!
                     </p>
                   </div>
+                  <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3">
+                    <DiagramContoh1 />
+                  </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Tentukan faktor skala dari perbandingan sisi yang diketahui:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p>Karena ABCD ∼ PQRS, sisi-sisi yang bersesuaian membentuk perbandingan yang sama:</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="k = \frac{PQ}{AB} = \frac{16}{8} = 2" />
+                        <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} = \frac{DC}{RS} = \frac{AD}{PS}" />
                       </div>
-                      <p><strong>Langkah 2:</strong> Hitung semua sisi PQRS:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="QR = k \times BC = 2 \times 5 = 10 \text{ cm}" />
-                        <BlockMath math="RS = k \times DC = 2 \times 6 = 12 \text{ cm}" />
-                        <BlockMath math="PS = k \times AD = 2 \times 4 = 8 \text{ cm}" />
+                      <p><strong>Mencari QR</strong> (AB bersesuaian dengan PQ, BC bersesuaian dengan QR):</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} \Rightarrow \frac{8}{16} = \frac{5}{QR}" />
+                        <BlockMath math="8 \times QR = 16 \times 5 \Rightarrow QR = \frac{80}{8} = 10 \text{ cm}" />
+                      </div>
+                      <p><strong>Mencari RS</strong> (DC bersesuaian dengan RS):</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{AB}{PQ} = \frac{DC}{RS} \Rightarrow \frac{8}{16} = \frac{6}{RS}" />
+                        <BlockMath math="8 \times RS = 16 \times 6 \Rightarrow RS = \frac{96}{8} = 12 \text{ cm}" />
+                      </div>
+                      <p><strong>Mencari PS</strong> (AD bersesuaian dengan PS):</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{AB}{PQ} = \frac{AD}{PS} \Rightarrow \frac{8}{16} = \frac{4}{PS}" />
+                        <BlockMath math="8 \times PS = 16 \times 4 \Rightarrow PS = \frac{64}{8} = 8 \text{ cm}" />
                       </div>
                       <p><strong className="text-green-300">QR = 10 cm, RS = 12 cm, PS = 8 cm.</strong></p>
                     </div>
