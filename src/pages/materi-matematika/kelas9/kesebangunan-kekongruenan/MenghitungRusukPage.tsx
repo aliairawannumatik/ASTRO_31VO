@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from "lucide-react";
+import { BookOpen, Lightbulb, Calculator, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -80,16 +79,10 @@ const DiagramBayangan = () => (
 
 const MenghitungRusukPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "contoh1"]);
-  const toggleSection = (s: string) => {
-    playPopSound();
-    setExpandedSections(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
-  };
   const Header = ({ id, icon, color, label }: { id: string; icon: React.ReactNode; color: string; label: string }) => (
-    <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3"><span style={{ color }}>{icon}</span><span className="font-body font-semibold text-white">{label}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
@@ -106,7 +99,6 @@ const MenghitungRusukPage = () => {
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label="📐 Cara Menghitung Rusuk yang Belum Diketahui" />
-            {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Kalau dua bangun sudah terbukti sebangun, kita bisa memanfaatkan sifat <strong className="text-cyan-300">rusuk-rusuk sebanding</strong> untuk mencari panjang rusuk yang belum diketahui. Caranya sangat sistematis!
@@ -122,13 +114,11 @@ const MenghitungRusukPage = () => {
                   </ol>
                 </div>
               </div>
-            )}
           </div>
 
           {/* KONSEP */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep1" icon={<Target className="w-5 h-5" />} color="#4ade80" label="📘 Konsep: Rumus Perbandingan Rusuk" />
-            {expandedSections.includes("konsep1") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
@@ -159,13 +149,11 @@ const MenghitungRusukPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH SOAL */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="contoh1" icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label="📝 Contoh Soal — Menghitung Panjang Rusuk" />
-            {expandedSections.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-6">
                 {/* MUDAH */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -250,7 +238,6 @@ const MenghitungRusukPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
         </div>
