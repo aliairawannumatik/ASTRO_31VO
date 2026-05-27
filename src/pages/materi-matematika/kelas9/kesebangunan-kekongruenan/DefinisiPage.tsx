@@ -230,8 +230,54 @@ const DefinisiPage = () => {
                     <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Persegi panjang ABCD dengan panjang <InlineMath math="AB = 10" /> cm dan lebar <InlineMath math="BC = 6" /> cm sebangun dengan persegi panjang PQRS. Jika <InlineMath math="PQ = 15" /> cm, tentukan panjang <InlineMath math="QR" />!</p>
+                    {/* Diagram dua persegi panjang sebangun */}
+                    <div className="flex justify-center">
+                      <svg viewBox="0 0 380 130" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                        {/* Persegi panjang ABCD (10×6) — skala: ×8 = 80×48 */}
+                        <rect x="20" y="35" width="80" height="48" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" strokeWidth="1.5" rx="1"/>
+                        {/* Titik sudut ABCD */}
+                        <circle cx="20" cy="35" r="2.5" fill="#60a5fa"/>
+                        <circle cx="100" cy="35" r="2.5" fill="#60a5fa"/>
+                        <circle cx="100" cy="83" r="2.5" fill="#60a5fa"/>
+                        <circle cx="20" cy="83" r="2.5" fill="#60a5fa"/>
+                        {/* Label sudut */}
+                        <text x="11" y="32" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">A</text>
+                        <text x="102" y="32" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">B</text>
+                        <text x="102" y="92" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">C</text>
+                        <text x="11" y="92" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">D</text>
+                        {/* Label sisi */}
+                        <text x="55" y="29" fill="#bfdbfe" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">10 cm</text>
+                        <text x="108" y="61" fill="#bfdbfe" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">6 cm</text>
+                        {/* Nama */}
+                        <text x="60" y="68" fill="rgba(255,255,255,0.5)" fontSize="8" textAnchor="middle" fontFamily="sans-serif">ABCD</text>
+
+                        {/* Simbol ~ */}
+                        <text x="158" y="64" fill="#facc15" fontSize="20" textAnchor="middle" fontFamily="sans-serif">~</text>
+
+                        {/* Persegi panjang PQRS (15×9) — skala: ×8 = 120×72 */}
+                        <rect x="190" y="23" width="120" height="72" fill="rgba(52,211,153,0.15)" stroke="#34d399" strokeWidth="1.5" rx="1"/>
+                        {/* Titik sudut PQRS */}
+                        <circle cx="190" cy="23" r="2.5" fill="#34d399"/>
+                        <circle cx="310" cy="23" r="2.5" fill="#34d399"/>
+                        <circle cx="310" cy="95" r="2.5" fill="#34d399"/>
+                        <circle cx="190" cy="95" r="2.5" fill="#34d399"/>
+                        {/* Label sudut */}
+                        <text x="180" y="21" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">P</text>
+                        <text x="313" y="21" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">Q</text>
+                        <text x="313" y="104" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">R</text>
+                        <text x="180" y="104" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">S</text>
+                        {/* Label sisi */}
+                        <text x="250" y="17" fill="#a7f3d0" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">15 cm</text>
+                        <text x="322" y="61" fill="#a7f3d0" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">? cm</text>
+                        {/* Nama */}
+                        <text x="250" y="63" fill="rgba(255,255,255,0.5)" fontSize="8" textAnchor="middle" fontFamily="sans-serif">PQRS</text>
+
+                        {/* Keterangan faktor skala */}
+                        <text x="190" y="118" fill="rgba(250,204,21,0.7)" fontSize="7.5" fontFamily="sans-serif">Faktor skala: 15/10 = 1,5×</text>
+                      </svg>
+                    </div>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
