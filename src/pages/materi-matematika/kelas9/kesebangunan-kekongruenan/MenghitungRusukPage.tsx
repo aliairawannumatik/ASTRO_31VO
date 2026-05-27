@@ -121,10 +121,6 @@ const MenghitungRusukPage = () => {
                     <li>Gunakan perkalian silang untuk mencari rusuk yang belum diketahui</li>
                   </ol>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
-                  <DiagramTrapesium />
-                  <p className="font-body text-xs text-white/50 text-center mt-2">Trapesium ABCD ~ PQRS dengan faktor skala k</p>
-                </div>
               </div>
             )}
           </div>
@@ -137,6 +133,10 @@ const MenghitungRusukPage = () => {
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">Jika bangun <InlineMath math="ABCD \sim PQRS" />, maka berlaku:</p>
+                  <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
+                    <DiagramTrapesium />
+                    <p className="font-body text-xs text-white/50 text-center mt-2">Trapesium ABCD ~ PQRS dengan faktor skala k</p>
+                  </div>
                   <div className="bg-slate-900/60 rounded-lg p-4">
                     <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} = \frac{CD}{RS} = \frac{DA}{SP} = k" />
                   </div>
