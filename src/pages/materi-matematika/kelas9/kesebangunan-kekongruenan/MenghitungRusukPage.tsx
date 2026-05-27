@@ -288,7 +288,7 @@ const ShadowAnimation = () => {
       </svg>
 
       {/* Slider */}
-      <div className="px-3">
+      <div className="px-3 mt-6">
         <div className="flex items-center justify-between mb-1">
           <span className="font-body text-xs text-white/60">☀️ Geser untuk ubah sudut matahari</span>
           <span className="font-body text-xs text-yellow-300 font-bold">{angleDeg}°</span>
