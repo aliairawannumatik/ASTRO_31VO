@@ -12,14 +12,12 @@ const DiagramTrapesium = () => (
     {/* Trapezium 1 */}
     <polygon points="20,130 100,130 85,80 35,80" fill="#3b82f6" fillOpacity="0.3" stroke="#60a5fa" strokeWidth="2" />
     <text x="60" y="110" textAnchor="middle" fontSize="9" fill="#93c5fd">ABCD</text>
-    <text x="60" y="150" textAnchor="middle" fontSize="8" fill="#64748b">AB=8, BC=5, CD=6</text>
     {/* Labels */}
     <text x="60" y="76" textAnchor="middle" fontSize="8" fill="#fde68a">CD=6</text>
     <text x="57" y="142" textAnchor="middle" fontSize="8" fill="#fde68a">AB=8</text>
     {/* Trapezium 2 */}
     <polygon points="160,140 290,140 265,65 185,65" fill="#22c55e" fillOpacity="0.25" stroke="#4ade80" strokeWidth="2" />
     <text x="225" y="110" textAnchor="middle" fontSize="9" fill="#86efac">QRSP</text>
-    <text x="225" y="160" textAnchor="middle" fontSize="8" fill="#64748b">QP=16, RS=12</text>
     <text x="225" y="61" textAnchor="middle" fontSize="8" fill="#fde68a">RS=12</text>
     <text x="225" y="153" textAnchor="middle" fontSize="8" fill="#fde68a">QP=16</text>
     {/* Tilde */}
