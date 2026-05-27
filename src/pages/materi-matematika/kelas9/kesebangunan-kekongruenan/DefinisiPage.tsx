@@ -302,8 +302,54 @@ const DefinisiPage = () => {
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Segiempat ABCD <InlineMath math="\sim" /> EFGH. Diketahui <InlineMath math="\angle A = 80°" />, <InlineMath math="\angle B = 95°" />, <InlineMath math="\angle C = 100°" />. Tentukan besar <InlineMath math="\angle E" />, <InlineMath math="\angle F" />, <InlineMath math="\angle G" />, dan <InlineMath math="\angle H" />!</p>
+                    {/* Diagram dua segiempat sebangun dengan label sudut */}
+                    <div className="flex justify-center">
+                      <svg viewBox="0 0 380 120" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                        {/* Segiempat ABCD */}
+                        <polygon points="22,18 102,12 108,78 18,84" fill="rgba(250,204,21,0.1)" stroke="#facc15" strokeWidth="1.5"/>
+                        <circle cx="22" cy="18" r="2.5" fill="#facc15"/>
+                        <circle cx="102" cy="12" r="2.5" fill="#facc15"/>
+                        <circle cx="108" cy="78" r="2.5" fill="#facc15"/>
+                        <circle cx="18" cy="84" r="2.5" fill="#facc15"/>
+                        {/* Label titik */}
+                        <text x="9" y="16" fill="#fde68a" fontSize="9" fontFamily="sans-serif" fontWeight="bold">A</text>
+                        <text x="105" y="11" fill="#fde68a" fontSize="9" fontFamily="sans-serif" fontWeight="bold">B</text>
+                        <text x="111" y="86" fill="#fde68a" fontSize="9" fontFamily="sans-serif" fontWeight="bold">C</text>
+                        <text x="6" y="93" fill="#fde68a" fontSize="9" fontFamily="sans-serif" fontWeight="bold">D</text>
+                        {/* Label sudut */}
+                        <text x="26" y="32" fill="#fbbf24" fontSize="7.5" fontFamily="sans-serif">80°</text>
+                        <text x="88" y="28" fill="#fbbf24" fontSize="7.5" fontFamily="sans-serif">95°</text>
+                        <text x="88" y="72" fill="#fbbf24" fontSize="7.5" fontFamily="sans-serif">100°</text>
+                        <text x="24" y="74" fill="#fbbf24" fontSize="7.5" fontFamily="sans-serif">85°</text>
+                        <text x="60" y="52" fill="rgba(255,255,255,0.4)" fontSize="8" textAnchor="middle" fontFamily="sans-serif">ABCD</text>
+
+                        {/* Simbol ~ */}
+                        <text x="155" y="52" fill="#facc15" fontSize="20" textAnchor="middle" fontFamily="sans-serif">~</text>
+
+                        {/* Segiempat EFGH (sedikit lebih besar, bentuk serupa) */}
+                        <polygon points="178,15 272,8 280,82 174,90" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
+                        <circle cx="178" cy="15" r="2.5" fill="#a78bfa"/>
+                        <circle cx="272" cy="8" r="2.5" fill="#a78bfa"/>
+                        <circle cx="280" cy="82" r="2.5" fill="#a78bfa"/>
+                        <circle cx="174" cy="90" r="2.5" fill="#a78bfa"/>
+                        {/* Label titik */}
+                        <text x="164" y="13" fill="#c4b5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">E</text>
+                        <text x="274" y="8" fill="#c4b5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">F</text>
+                        <text x="283" y="91" fill="#c4b5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">G</text>
+                        <text x="161" y="99" fill="#c4b5fd" fontSize="9" fontFamily="sans-serif" fontWeight="bold">H</text>
+                        {/* Label sudut */}
+                        <text x="182" y="30" fill="#a78bfa" fontSize="7.5" fontFamily="sans-serif">80°</text>
+                        <text x="254" y="25" fill="#a78bfa" fontSize="7.5" fontFamily="sans-serif">95°</text>
+                        <text x="254" y="76" fill="#a78bfa" fontSize="7.5" fontFamily="sans-serif">100°</text>
+                        <text x="178" y="78" fill="#a78bfa" fontSize="7.5" fontFamily="sans-serif">85°</text>
+                        <text x="228" y="52" fill="rgba(255,255,255,0.4)" fontSize="8" textAnchor="middle" fontFamily="sans-serif">EFGH</text>
+
+                        {/* Keterangan */}
+                        <text x="178" y="108" fill="rgba(250,204,21,0.7)" fontSize="7.5" fontFamily="sans-serif">Sudut bersesuaian sama besar: ∠E=∠A, ∠F=∠B, ∠G=∠C, ∠H=∠D</text>
+                      </svg>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
@@ -329,8 +375,58 @@ const DefinisiPage = () => {
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Segitiga ABC <InlineMath math="\sim" /> segitiga PQR dengan <InlineMath math="AB = 8" /> cm, <InlineMath math="BC = 12" /> cm, <InlineMath math="AC = 10" /> cm. Jika keliling segitiga PQR = 45 cm, tentukan panjang PQ, QR, dan PR!</p>
+                    {/* Diagram dua segitiga sebangun */}
+                    <div className="flex justify-center">
+                      <svg viewBox="0 0 380 125" className="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                        {/* Segitiga ABC: A(atas), B(kiri-bawah), C(kanan-bawah) */}
+                        {/* AB=8, BC=12, AC=10 → skala 5px/cm */}
+                        {/* B=(15,88), C=(75,88), A=(30,28) */}
+                        <polygon points="30,20 15,88 87,88" fill="rgba(248,113,113,0.12)" stroke="#f87171" strokeWidth="1.5"/>
+                        <circle cx="30" cy="20" r="2.5" fill="#f87171"/>
+                        <circle cx="15" cy="88" r="2.5" fill="#f87171"/>
+                        <circle cx="87" cy="88" r="2.5" fill="#f87171"/>
+                        {/* Label titik */}
+                        <text x="25" y="13" fill="#fca5a5" fontSize="9" fontFamily="sans-serif" fontWeight="bold">A</text>
+                        <text x="4" y="96" fill="#fca5a5" fontSize="9" fontFamily="sans-serif" fontWeight="bold">B</text>
+                        <text x="90" y="96" fill="#fca5a5" fontSize="9" fontFamily="sans-serif" fontWeight="bold">C</text>
+                        {/* Label sisi */}
+                        {/* AB = 8 cm (sisi kiri miring) */}
+                        <text x="14" y="50" fill="#fca5a5" fontSize="8" fontFamily="sans-serif">8 cm</text>
+                        {/* BC = 12 cm (alas) */}
+                        <text x="45" y="100" fill="#fca5a5" fontSize="8" textAnchor="middle" fontFamily="sans-serif">12 cm</text>
+                        {/* AC = 10 cm (sisi kanan miring) */}
+                        <text x="66" y="50" fill="#fca5a5" fontSize="8" fontFamily="sans-serif">10 cm</text>
+                        <text x="51" y="60" fill="rgba(255,255,255,0.35)" fontSize="8" textAnchor="middle" fontFamily="sans-serif">△ABC</text>
+
+                        {/* Simbol ~ */}
+                        <text x="145" y="58" fill="#facc15" fontSize="20" textAnchor="middle" fontFamily="sans-serif">~</text>
+
+                        {/* Segitiga PQR: lebih besar (k=1.5) */}
+                        {/* PQ=12, QR=18, PR=15 → skala 5px/cm */}
+                        {/* Q=(175,88), R=(265,88), P=(197,18) */}
+                        <polygon points="200,12 175,100 283,100" fill="rgba(52,211,153,0.12)" stroke="#34d399" strokeWidth="1.5"/>
+                        <circle cx="200" cy="12" r="2.5" fill="#34d399"/>
+                        <circle cx="175" cy="100" r="2.5" fill="#34d399"/>
+                        <circle cx="283" cy="100" r="2.5" fill="#34d399"/>
+                        {/* Label titik */}
+                        <text x="195" y="8" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">P</text>
+                        <text x="163" y="110" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">Q</text>
+                        <text x="286" y="110" fill="#6ee7b7" fontSize="9" fontFamily="sans-serif" fontWeight="bold">R</text>
+                        {/* Label sisi */}
+                        {/* PQ = 12 cm */}
+                        <text x="175" y="52" fill="#6ee7b7" fontSize="8" fontFamily="sans-serif">12 cm</text>
+                        {/* QR = 18 cm */}
+                        <text x="224" y="114" fill="#6ee7b7" fontSize="8" textAnchor="middle" fontFamily="sans-serif">18 cm</text>
+                        {/* PR = 15 cm */}
+                        <text x="251" y="52" fill="#6ee7b7" fontSize="8" fontFamily="sans-serif">15 cm</text>
+                        <text x="229" y="68" fill="rgba(255,255,255,0.35)" fontSize="8" textAnchor="middle" fontFamily="sans-serif">△PQR</text>
+
+                        {/* Keterangan faktor skala */}
+                        <text x="175" y="122" fill="rgba(250,204,21,0.7)" fontSize="7.5" fontFamily="sans-serif">Faktor skala k = 45/30 = 1,5× (setiap sisi PQR = 1,5 × sisi ABC)</text>
+                      </svg>
+                    </div>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
