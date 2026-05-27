@@ -108,6 +108,17 @@ const DefinisiPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernah lihat maket gedung atau miniatur rumah di kantor arsitek? Miniatur itu punya bentuk persis sama dengan bangunan aslinya, hanya skalanya lebih kecil — itulah <strong className="text-cyan-300">kesebangunan</strong> dalam kehidupan nyata!
                 </p>
+                <div className="rounded-xl overflow-hidden border border-cyan-500/20 shadow-lg shadow-cyan-900/20">
+                  <img
+                    src="/arsitektur-maket.png"
+                    alt="Maket gedung di meja arsitek dengan bangunan asli terlihat di latar belakang"
+                    className="w-full object-cover max-h-64"
+                  />
+                  <div className="bg-slate-800/80 px-4 py-2 flex items-center gap-2">
+                    <span className="text-cyan-400 text-xs">📐</span>
+                    <p className="font-body text-xs text-white/50 italic">Maket gedung (depan) dan bangunan aslinya (belakang) — bentuk sama, ukuran berbeda. Inilah kesebangunan!</p>
+                  </div>
+                </div>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-cyan-200 leading-relaxed">
                     Sebaliknya, coba perhatikan ubin-ubin di lantai ruang kelasmu. Semua ubin punya bentuk <em>dan</em> ukuran yang persis sama, bukan hanya mirip bentuknya saja. Nah, itu namanya <strong>kekongruenan</strong>! 🧱
