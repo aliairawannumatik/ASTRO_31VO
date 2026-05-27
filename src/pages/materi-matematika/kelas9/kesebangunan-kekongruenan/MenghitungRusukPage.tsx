@@ -8,24 +8,45 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 const DiagramTrapesium = () => (
-  <svg viewBox="0 0 340 180" className="w-full max-w-sm mx-auto">
-    {/* Trapezium 1 */}
-    <polygon points="20,130 100,130 85,80 35,80" fill="#3b82f6" fillOpacity="0.3" stroke="#60a5fa" strokeWidth="2" />
-    <text x="60" y="110" textAnchor="middle" fontSize="9" fill="#93c5fd">ABCD</text>
-    {/* Labels */}
-    <text x="60" y="76" textAnchor="middle" fontSize="8" fill="#fde68a">CD=6</text>
-    <text x="57" y="142" textAnchor="middle" fontSize="8" fill="#fde68a">AB=8</text>
-    {/* Trapezium 2 */}
-    <polygon points="160,140 290,140 265,65 185,65" fill="#22c55e" fillOpacity="0.25" stroke="#4ade80" strokeWidth="2" />
-    <text x="225" y="110" textAnchor="middle" fontSize="9" fill="#86efac">QRSP</text>
-    <text x="225" y="61" textAnchor="middle" fontSize="8" fill="#fde68a">RS=12</text>
-    <text x="225" y="153" textAnchor="middle" fontSize="8" fill="#fde68a">QP=16</text>
-    {/* Tilde */}
-    <text x="120" y="110" fontSize="16" fill="#facc15">~</text>
-    {/* Ratio box */}
-    <rect x="10" y="7" width="200" height="30" rx="5" fill="#1e293b" stroke="#334155" />
-    <text x="110" y="20" textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold">Faktor skala:</text>
-    <text x="110" y="32" textAnchor="middle" fontSize="9" fill="#4ade80">CD/RS = 6/12 = 1/2</text>
+  <svg viewBox="0 0 340 175" className="w-full max-w-sm mx-auto">
+    {/* Trapesium siku-siku ABCD (kiri, biru) */}
+    {/* Siku-siku di A (bawah-kiri) dan D (atas-kiri) — sisi AD vertikal */}
+    {/* A=bawah-kiri, B=bawah-kanan, C=atas-kanan, D=atas-kiri */}
+    <polygon points="18,140 82,140 68,92 18,92" fill="#3b82f6" fillOpacity="0.3" stroke="#60a5fa" strokeWidth="2"/>
+    {/* Tanda siku-siku di A */}
+    <polyline points="18,132 26,132 26,140" fill="none" stroke="#93c5fd" strokeWidth="1.2"/>
+    {/* Tanda siku-siku di D */}
+    <polyline points="18,100 26,100 26,92" fill="none" stroke="#93c5fd" strokeWidth="1.2"/>
+    {/* Label titik sudut */}
+    <text x="7"  y="150" fontSize="9" fill="#93c5fd" fontWeight="bold">A</text>
+    <text x="84" y="150" fontSize="9" fill="#93c5fd" fontWeight="bold">B</text>
+    <text x="70" y="89"  fontSize="9" fill="#93c5fd" fontWeight="bold">C</text>
+    <text x="5"  y="89"  fontSize="9" fill="#93c5fd" fontWeight="bold">D</text>
+    {/* Nama */}
+    <text x="50" y="122" textAnchor="middle" fontSize="9" fill="#93c5fd" fontWeight="bold">ABCD</text>
+
+    {/* Simbol ~ */}
+    <text x="122" y="122" fontSize="18" fill="#facc15" textAnchor="middle">~</text>
+
+    {/* Trapesium siku-siku PQRS (kanan, hijau, lebih besar) */}
+    {/* Siku-siku di P (bawah-kiri) dan S (atas-kiri) — sisi PS vertikal */}
+    {/* P=bawah-kiri, Q=bawah-kanan, R=atas-kanan, S=atas-kiri */}
+    <polygon points="155,144 263,144 241,82 155,82" fill="#22c55e" fillOpacity="0.25" stroke="#4ade80" strokeWidth="2"/>
+    {/* Tanda siku-siku di P */}
+    <polyline points="155,136 163,136 163,144" fill="none" stroke="#86efac" strokeWidth="1.2"/>
+    {/* Tanda siku-siku di S */}
+    <polyline points="155,90 163,90 163,82" fill="none" stroke="#86efac" strokeWidth="1.2"/>
+    {/* Label titik sudut */}
+    <text x="143" y="155" fontSize="9" fill="#86efac" fontWeight="bold">P</text>
+    <text x="265" y="155" fontSize="9" fill="#86efac" fontWeight="bold">Q</text>
+    <text x="243" y="79"  fontSize="9" fill="#86efac" fontWeight="bold">R</text>
+    <text x="142" y="79"  fontSize="9" fill="#86efac" fontWeight="bold">S</text>
+    {/* Nama */}
+    <text x="209" y="122" textAnchor="middle" fontSize="9" fill="#86efac" fontWeight="bold">PQRS</text>
+
+    {/* Info box */}
+    <rect x="10" y="8" width="185" height="20" rx="4" fill="#1e293b" stroke="#334155"/>
+    <text x="102" y="22" textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold">dengan faktor skala k</text>
   </svg>
 );
 
@@ -102,7 +123,7 @@ const MenghitungRusukPage = () => {
                 </div>
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <DiagramTrapesium />
-                  <p className="font-body text-xs text-white/50 text-center mt-2">Trapesium ABCD ~ QRSP dengan faktor skala 1:2</p>
+                  <p className="font-body text-xs text-white/50 text-center mt-2">Trapesium ABCD ~ PQRS dengan faktor skala k</p>
                 </div>
               </div>
             )}
