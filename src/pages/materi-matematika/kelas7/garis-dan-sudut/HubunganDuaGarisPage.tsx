@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import JangkaAnimasi from "@/components/JangkaAnimasi";
 
 const SejajarSVG = () => (
   <svg viewBox="0 0 320 120" className="w-full max-w-sm mx-auto my-3" aria-label="Dua garis sejajar">
@@ -457,10 +458,15 @@ const HubunganDuaGarisPage = () => {
         </h1>
         <p className="text-white/50 text-xs text-center mb-8 font-body">Kelas 7 · Garis dan Sudut · Materi Matematika</p>
 
-        <div className="flex flex-col gap-3 mb-10">
+        <div className="flex flex-col gap-3 mb-6">
           {sections.map((s, i) => (
             <AccordionSection key={s.title} section={s} idx={i} />
           ))}
+        </div>
+
+        {/* Animated Protractor */}
+        <div className="mb-8">
+          <JangkaAnimasi />
         </div>
 
         <div className="mb-4">
