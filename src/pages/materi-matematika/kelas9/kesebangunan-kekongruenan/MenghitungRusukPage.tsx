@@ -307,11 +307,11 @@ const MenghitungRusukPage = () => {
                       </div>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="\frac{\text{tinggi tiang}}{\text{tinggi pohon}} = \frac{\text{bayangan tiang}}{\text{bayangan pohon}}" />
-                        <BlockMath math="\frac{4}{h} = \frac{2}{3}" />
+                        <BlockMath math="\frac{4}{x} = \frac{2}{3}" />
                       </div>
                       <p><strong>Selesaikan:</strong></p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="h = \frac{4 \times 3}{2} = \frac{12}{2} = 6 \text{ m}" />
+                        <BlockMath math="x = \frac{4 \times 3}{2} = \frac{12}{2} = 6 \text{ m}" />
                       </div>
                       <p><strong className="text-primary">Tinggi pohon = 6 m.</strong></p>
                     </div>
