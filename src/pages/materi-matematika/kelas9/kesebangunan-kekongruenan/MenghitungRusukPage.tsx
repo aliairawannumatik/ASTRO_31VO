@@ -256,6 +256,32 @@ const ShadowAnimation = () => {
         })}
         <text x="500" y="47" textAnchor="middle" fontSize="8" fill="#fde68a">☀️ matahari</text>
 
+        {/* ── Sudut elevasi matahari (tiang) ── */}
+        <path
+          d={`M ${tiangShadowEnd - 22} ${GROUND_Y} A 22 22 0 0 0 ${tiangShadowEnd - 22 * Math.cos(angleRad)} ${GROUND_Y - 22 * Math.sin(angleRad)}`}
+          fill="#facc1530" stroke="#facc15" strokeWidth="1.5"
+          style={{ transition: tr }}
+        />
+        <text
+          x={tiangShadowEnd - 36 * Math.cos(angleRad / 2)}
+          y={GROUND_Y - 36 * Math.sin(angleRad / 2) + 4}
+          textAnchor="middle" fontSize="9" fill="#facc15" fontWeight="bold"
+          style={{ transition: tr }}
+        >θ={angleDeg}°</text>
+
+        {/* ── Sudut elevasi matahari (pohon) ── */}
+        <path
+          d={`M ${treeShadowEnd - 16} ${GROUND_Y} A 16 16 0 0 0 ${treeShadowEnd - 16 * Math.cos(angleRad)} ${GROUND_Y - 16 * Math.sin(angleRad)}`}
+          fill="#fde04730" stroke="#fde047" strokeWidth="1.2"
+          style={{ transition: tr }}
+        />
+        <text
+          x={treeShadowEnd - 28 * Math.cos(angleRad / 2)}
+          y={GROUND_Y - 28 * Math.sin(angleRad / 2) + 4}
+          textAnchor="middle" fontSize="8" fill="#fde047" fontWeight="bold"
+          style={{ transition: tr }}
+        >θ</text>
+
         {/* "bayangan" labels */}
         <text x={(treeX + treeShadowEnd) / 2} y={GROUND_Y + 38} textAnchor="middle" fontSize="7.5" fill="#94a3b8" style={{ transition: tr }}>bayangan pohon</text>
         <text x={(tiangX + tiangShadowEnd) / 2} y={GROUND_Y + 28} textAnchor="middle" fontSize="7.5" fill="#94a3b8" style={{ transition: tr }}>bayangan tiang</text>
