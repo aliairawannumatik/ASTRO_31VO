@@ -126,10 +126,17 @@ export default function SimilarityAnimation() {
             <text x={REF_B.x + 5} y={REF_B.y + 4} fontSize="10" fill={VB_COLOR} fontWeight="bold">B</text>
             <text x={REF_C.x - 13} y={REF_C.y + 4} fontSize="10" fill={VC_COLOR} fontWeight="bold">C</text>
 
-            {/* Angle arc at B (approximate 53°) */}
-            <path d="M 118,158 A 8,8 0 0,0 108,151" fill="none" stroke={VB_COLOR} strokeWidth="1.5" />
-            {/* Angle arc at C (approximate 37°) */}
-            <path d="M 82,106 A 8,8 0 0,1 90,103" fill="none" stroke={VC_COLOR} strokeWidth="1.5" />
+            {/* Angle arc at B (53°): from BA direction → BC direction, clockwise */}
+            {/* B=(127,158), BA unit=(-1,0), BC unit=(-0.6,-0.8), r=8 */}
+            {/* start: (119,158), end: (122.2,151.6) */}
+            <path d="M 119,158 A 8,8 0 0,1 122,152" fill="none" stroke={VB_COLOR} strokeWidth="1.5" />
+            <text x="110" y="150" fontSize="8" fill={VB_COLOR} fontFamily="sans-serif" textAnchor="middle">53°</text>
+
+            {/* Angle arc at C (37°): from CA direction → CB direction, counterclockwise */}
+            {/* C=(82,98), CA unit=(0,1), CB unit=(0.6,0.8), r=8 */}
+            {/* start: (82,106), end: (86.8,104.4) */}
+            <path d="M 82,106 A 8,8 0 0,0 87,104" fill="none" stroke={VC_COLOR} strokeWidth="1.5" />
+            <text x="94" y="110" fontSize="8" fill={VC_COLOR} fontFamily="sans-serif" textAnchor="middle">37°</text>
 
             {/* ── SIMILARITY SYMBOL ── */}
             <text x="200" y="128" textAnchor="middle" fontSize="26" fill="#facc15" fontWeight="bold">∼</text>
@@ -164,10 +171,15 @@ export default function SimilarityAnimation() {
               <circle cx={BASE_AB} cy={0} r="5" fill={VB_COLOR} />
               <circle cx={0} cy={-BASE_AC} r="5" fill={VC_COLOR} />
 
-              {/* Angle arc at B */}
-              <path d={`M ${BASE_AB - 9},0 A 8,8 0 0,0 ${BASE_AB - 7},${-8}`} fill="none" stroke={VB_COLOR} strokeWidth="1.5" />
-              {/* Angle arc at C */}
-              <path d={`M 0,${-BASE_AC + 9} A 8,8 0 0,1 8,${-BASE_AC + 7}`} fill="none" stroke={VC_COLOR} strokeWidth="1.5" />
+              {/* Angle arc at B (53°): B=(BASE_AB,0), BA unit=(-1,0), BC unit=(-0.6,-0.8) */}
+              {/* start: (BASE_AB-8, 0), end: (BASE_AB-4.8, -6.4) → clockwise sweep=1 */}
+              <path d={`M ${BASE_AB - 8},0 A 8,8 0 0,1 ${BASE_AB - 4.8},${-6.4}`} fill="none" stroke={VB_COLOR} strokeWidth="1.5" />
+              <text x={BASE_AB - 18} y={-10} fontSize="8" fill={VB_COLOR} fontFamily="sans-serif" textAnchor="middle">53°</text>
+
+              {/* Angle arc at C (37°): C=(0,-BASE_AC), CA unit=(0,1), CB unit=(0.6,0.8) */}
+              {/* start: (0, -BASE_AC+8), end: (4.8, -BASE_AC+6.4) → counterclockwise sweep=0 */}
+              <path d={`M 0,${-BASE_AC + 8} A 8,8 0 0,0 ${4.8},${-BASE_AC + 6.4}`} fill="none" stroke={VC_COLOR} strokeWidth="1.5" />
+              <text x={14} y={-BASE_AC + 18} fontSize="8" fill={VC_COLOR} fontFamily="sans-serif" textAnchor="middle">37°</text>
             </g>
 
             {/* ── ANGLE LEGEND ── */}
