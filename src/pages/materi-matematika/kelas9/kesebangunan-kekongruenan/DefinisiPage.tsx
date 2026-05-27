@@ -114,9 +114,12 @@ const DefinisiPage = () => {
                     alt="Maket gedung di meja arsitek dengan bangunan asli terlihat di latar belakang"
                     className="w-full object-cover max-h-64"
                   />
-                  <div className="bg-slate-800/80 px-4 py-2 flex items-center gap-2">
-                    <span className="text-cyan-400 text-xs">📐</span>
-                    <p className="font-body text-xs text-white/50 italic">Maket gedung (depan) dan bangunan aslinya (belakang) — bentuk sama, ukuran berbeda. Inilah kesebangunan!</p>
+                  <div className="bg-slate-800/80 px-4 py-2 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-cyan-400 text-xs">📐</span>
+                      <p className="font-body text-xs text-white/50 italic">Maket gedung (depan) dan bangunan aslinya (belakang) — bentuk sama, ukuran berbeda. Inilah kesebangunan!</p>
+                    </div>
+                    <p className="font-body text-xs text-white/30 shrink-0">bing.com/images/create</p>
                   </div>
                 </div>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
