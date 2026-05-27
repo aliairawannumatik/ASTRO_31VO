@@ -271,14 +271,14 @@ const ShadowAnimation = () => {
 
         {/* ── Sudut elevasi matahari (pohon) ── */}
         <path
-          d={`M ${treeShadowEnd - 16} ${GROUND_Y} A 16 16 0 0 1 ${treeShadowEnd - 16 * Math.cos(angleRad)} ${GROUND_Y - 16 * Math.sin(angleRad)}`}
-          fill="#fde04730" stroke="#fde047" strokeWidth="1.2"
+          d={`M ${treeShadowEnd - 22} ${GROUND_Y} A 22 22 0 0 1 ${treeShadowEnd - 22 * Math.cos(angleRad)} ${GROUND_Y - 22 * Math.sin(angleRad)}`}
+          fill="#fde04730" stroke="#fde047" strokeWidth="1.5"
           style={{ transition: tr }}
         />
         <text
-          x={treeShadowEnd - 28 * Math.cos(angleRad / 2)}
-          y={GROUND_Y - 28 * Math.sin(angleRad / 2) + 4}
-          textAnchor="middle" fontSize="8" fill="#fde047" fontWeight="bold"
+          x={treeShadowEnd - 36 * Math.cos(angleRad / 2)}
+          y={GROUND_Y - 36 * Math.sin(angleRad / 2) + 4}
+          textAnchor="middle" fontSize="9" fill="#fde047" fontWeight="bold"
           style={{ transition: tr }}
         >θ</text>
 
