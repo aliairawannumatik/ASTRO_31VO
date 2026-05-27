@@ -5,9 +5,9 @@ const VA_COLOR = "#f97316";
 const VB_COLOR = "#22d3ee";
 const VC_COLOR = "#a855f7";
 
-const REF_A = { x: 82, y: 158 };
-const REF_B = { x: 127, y: 158 };
-const REF_C = { x: 82, y: 98 };
+const REF_A = { x: 82, y: 128 };
+const REF_B = { x: 127, y: 128 };
+const REF_C = { x: 82, y: 68 };
 
 const TRF_CX = 305;
 const TRF_CY = 140;
@@ -85,7 +85,7 @@ export default function SimilarityAnimation() {
 
         {/* SVG Canvas */}
         <div className="bg-slate-800/60 rounded-xl overflow-hidden border border-slate-700/50">
-          <svg viewBox="0 0 410 235" className="w-full">
+          <svg viewBox="0 0 410 195" className="w-full">
             <defs>
               <pattern id="simgrid" width="20" height="20" patternUnits="userSpaceOnUse">
                 <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" strokeWidth="0.8" />
@@ -108,9 +108,6 @@ export default function SimilarityAnimation() {
               strokeLinejoin="round"
             />
 
-            {/* Side labels for reference */}
-            <text x={(REF_A.x + REF_B.x) / 2} y={REF_A.y + 13} textAnchor="middle" fontSize="8" fill="#94a3b8">45px</text>
-
             {/* Right-angle square at A */}
             <RightAngleSquare x={REF_A.x} y={REF_A.y} stroke={VA_COLOR} />
 
@@ -125,16 +122,16 @@ export default function SimilarityAnimation() {
             <text x={REF_C.x - 13} y={REF_C.y + 4} fontSize="10" fill={VC_COLOR} fontWeight="bold">C</text>
 
             {/* Angle arc at B (53°, r=13 — lebih besar): from BA dir → BC dir, clockwise */}
-            {/* start: B + 13*(-1,0)=(114,158), end: B + 13*(-0.6,-0.8)=(119.2,147.6) */}
-            <path d="M 114,158 A 13,13 0 0,1 119,148" fill="none" stroke={VB_COLOR} strokeWidth="1.5" />
+            {/* B=(127,128), start=(114,128), end=(119.2,117.6) */}
+            <path d="M 114,128 A 13,13 0 0,1 119,118" fill="none" stroke={VB_COLOR} strokeWidth="1.5" />
 
             {/* Angle arc at C (37°, r=8 — lebih kecil): from CA dir → CB dir, counterclockwise */}
-            {/* start: C + 8*(0,1)=(82,106), end: C + 8*(0.6,0.8)=(86.8,104.4) */}
-            <path d="M 82,106 A 8,8 0 0,0 87,104" fill="none" stroke={VC_COLOR} strokeWidth="1.5" />
+            {/* C=(82,68), start=(82,76), end=(86.8,74.4) */}
+            <path d="M 82,76 A 8,8 0 0,0 87,74" fill="none" stroke={VC_COLOR} strokeWidth="1.5" />
 
             {/* ── SIMILARITY SYMBOL ── */}
-            <text x="200" y="128" textAnchor="middle" fontSize="26" fill="#facc15" fontWeight="bold">∼</text>
-            <text x="200" y="145" textAnchor="middle" fontSize="8" fill="#a16207" fontFamily="sans-serif">sebangun</text>
+            <text x="200" y="100" textAnchor="middle" fontSize="26" fill="#facc15" fontWeight="bold">∼</text>
+            <text x="200" y="117" textAnchor="middle" fontSize="8" fill="#a16207" fontFamily="sans-serif">sebangun</text>
 
             {/* ── TRANSFORMED TRIANGLE ── */}
             <text x="305" y="18" textAnchor="middle" fontSize="9.5" fill="#60a5fa" fontFamily="sans-serif" letterSpacing="0.5">
@@ -174,22 +171,6 @@ export default function SimilarityAnimation() {
               <path d={`M 0,${-BASE_AC + 8} A 8,8 0 0,0 ${4.8},${-BASE_AC + 6.4}`} fill="none" stroke={VC_COLOR} strokeWidth="1.5" />
             </g>
 
-            {/* ── ANGLE LEGEND ── */}
-            <g transform="translate(8,210)">
-              <circle cx="8" cy="0" r="4" fill={VA_COLOR} />
-              <text x="16" y="4" fontSize="9" fill={VA_COLOR} fontFamily="sans-serif">∠A = 90°</text>
-
-              <circle cx="88" cy="0" r="4" fill={VB_COLOR} />
-              <text x="96" y="4" fontSize="9" fill={VB_COLOR} fontFamily="sans-serif">∠B = 53°</text>
-
-              <circle cx="168" cy="0" r="4" fill={VC_COLOR} />
-              <text x="176" y="4" fontSize="9" fill={VC_COLOR} fontFamily="sans-serif">∠C = 37°</text>
-
-              <rect x="248" y="-7" width="148" height="14" rx="4" fill="#15803d" fillOpacity="0.3" />
-              <text x="322" y="4" textAnchor="middle" fontSize="9" fill="#4ade80" fontWeight="bold" fontFamily="sans-serif">
-                ✓ Sudut SELALU sama!
-              </text>
-            </g>
           </svg>
         </div>
 
