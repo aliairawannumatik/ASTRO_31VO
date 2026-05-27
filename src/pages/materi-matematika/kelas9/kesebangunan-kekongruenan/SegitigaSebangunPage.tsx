@@ -185,6 +185,240 @@ const DiagramContoh3 = () => {
   );
 };
 
+/* ── shared geometry helpers ─────────────────────────────── */
+const ap = (cx:number,cy:number,p1x:number,p1y:number,p2x:number,p2y:number,r:number) => {
+  const d1x=p1x-cx,d1y=p1y-cy,l1=Math.sqrt(d1x*d1x+d1y*d1y);
+  const d2x=p2x-cx,d2y=p2y-cy,l2=Math.sqrt(d2x*d2x+d2y*d2y);
+  const u1x=d1x/l1,u1y=d1y/l1,u2x=d2x/l2,u2y=d2y/l2;
+  const sw=(u1x*u2y-u1y*u2x)>0?1:0;
+  return `M ${(cx+r*u1x).toFixed(1)} ${(cy+r*u1y).toFixed(1)} A ${r} ${r} 0 0 ${sw} ${(cx+r*u2x).toFixed(1)} ${(cy+r*u2y).toFixed(1)}`;
+};
+const ra = (cx:number,cy:number,p1x:number,p1y:number,p2x:number,p2y:number,s=7) => {
+  const d1x=p1x-cx,d1y=p1y-cy,l1=Math.sqrt(d1x*d1x+d1y*d1y);
+  const d2x=p2x-cx,d2y=p2y-cy,l2=Math.sqrt(d2x*d2x+d2y*d2y);
+  const u1x=d1x/l1*s,u1y=d1y/l1*s,u2x=d2x/l2*s,u2y=d2y/l2*s;
+  return `M ${(cx+u1x).toFixed(1)} ${(cy+u1y).toFixed(1)} L ${(cx+u1x+u2x).toFixed(1)} ${(cy+u1y+u2y).toFixed(1)} L ${(cx+u2x).toFixed(1)} ${(cy+u2y).toFixed(1)}`;
+};
+
+/* ── Diagram 1 – Terpisah ───────────────────────────────── */
+const DiagTerpisah = () => {
+  // T1: B=(12,105) C=(76,105) A=(37,37) — angles B=70° C=60° A=50°
+  const [A1,B1,C1] = [{x:37,y:37},{x:12,y:105},{x:76,y:105}];
+  // T2: scaled ×1.4 – B=(118,112) C=(208,112) A=(153,17)
+  const [A2,B2,C2] = [{x:153,y:17},{x:118,y:112},{x:208,y:112}];
+  return (
+    <svg viewBox="0 0 225 127" className="w-full rounded-lg bg-slate-950/50">
+      {/* T1 */}
+      <polygon points={`${B1.x},${B1.y} ${C1.x},${C1.y} ${A1.x},${A1.y}`} fill="#3b82f6" fillOpacity=".18" stroke="#60a5fa" strokeWidth="1.8"/>
+      <path d={ap(A1.x,A1.y,B1.x,B1.y,C1.x,C1.y,9)}  fill="none" stroke="#a855f7" strokeWidth="1.5"/>
+      <path d={ap(B1.x,B1.y,C1.x,C1.y,A1.x,A1.y,12)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(C1.x,C1.y,B1.x,B1.y,A1.x,A1.y,10)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <text x={A1.x-4} y={A1.y-5}  fontSize="8" fill="#c4b5fd" fontWeight="bold">A</text>
+      <text x={B1.x-9} y={B1.y+9}  fontSize="8" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C1.x+2} y={C1.y+9}  fontSize="8" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={(B1.x+C1.x)/2-7} y={B1.y+20} fontSize="7.5" fill="#93c5fd">△ABC</text>
+      {/* T2 */}
+      <polygon points={`${B2.x},${B2.y} ${C2.x},${C2.y} ${A2.x},${A2.y}`} fill="#22c55e" fillOpacity=".15" stroke="#4ade80" strokeWidth="1.8"/>
+      <path d={ap(A2.x,A2.y,B2.x,B2.y,C2.x,C2.y,10)} fill="none" stroke="#a855f7" strokeWidth="1.5"/>
+      <path d={ap(B2.x,B2.y,C2.x,C2.y,A2.x,A2.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(C2.x,C2.y,B2.x,B2.y,A2.x,A2.y,11)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <text x={A2.x-4} y={A2.y-5}  fontSize="8" fill="#c4b5fd" fontWeight="bold">P</text>
+      <text x={B2.x-9} y={B2.y+9}  fontSize="8" fill="#86efac" fontWeight="bold">Q</text>
+      <text x={C2.x+2} y={C2.y+9}  fontSize="8" fill="#86efac" fontWeight="bold">R</text>
+      <text x={(B2.x+C2.x)/2-7} y={B2.y+20} fontSize="7.5" fill="#86efac">△PQR</text>
+      {/* legend */}
+      <circle cx="8"  cy="8" r="4" fill="#a855f7" fillOpacity=".7"/><text x="15" y="12" fontSize="7" fill="#c4b5fd">∠A=∠P</text>
+      <circle cx="8" cy="19" r="4" fill="#f97316" fillOpacity=".7"/><text x="15" y="23" fontSize="7" fill="#fcd9b5">∠B=∠Q</text>
+      <circle cx="8" cy="30" r="4" fill="#22c55e" fillOpacity=".7"/><text x="15" y="34" fontSize="7" fill="#bbf7d0">∠C=∠R</text>
+    </svg>
+  );
+};
+
+/* ── Diagram 2 – Bertolak Belakang (Kupu-kupu) ──────────── */
+const DiagBertolakBelakang = () => {
+  // Lines A→C and B→D cross at E
+  const [A,B,D,C,E] = [{x:50,y:22},{x:190,y:22},{x:90,y:140},{x:170,y:140},{x:126,y:97}];
+  return (
+    <svg viewBox="0 0 248 158" className="w-full rounded-lg bg-slate-950/50">
+      {/* guide lines */}
+      <line x1={A.x} y1={A.y} x2={C.x} y2={C.y} stroke="#334155" strokeWidth="1" strokeDasharray="3,3"/>
+      <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#334155" strokeWidth="1" strokeDasharray="3,3"/>
+      {/* T1 △ABE */}
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${E.x},${E.y}`} fill="#3b82f6" fillOpacity=".18" stroke="#60a5fa" strokeWidth="1.8"/>
+      {/* T2 △DCE */}
+      <polygon points={`${D.x},${D.y} ${C.x},${C.y} ${E.x},${E.y}`} fill="#22c55e" fillOpacity=".15" stroke="#4ade80" strokeWidth="1.8"/>
+      {/* angle marks – A↔D orange */}
+      <path d={ap(A.x,A.y,B.x,B.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(D.x,D.y,C.x,C.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      {/* B↔C green */}
+      <path d={ap(B.x,B.y,A.x,A.y,E.x,E.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(C.x,C.y,D.x,D.y,E.x,E.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* E vertical angles purple – two radii */}
+      <path d={ap(E.x,E.y,A.x,A.y,B.x,B.y,12)} fill="none" stroke="#a855f7" strokeWidth="1.5"/>
+      <path d={ap(E.x,E.y,D.x,D.y,C.x,C.y,10)} fill="none" stroke="#a855f7" strokeWidth="1.5"/>
+      {/* labels */}
+      <text x={A.x-9} y={A.y+1}  fontSize="8.5" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+3} y={B.y+1}  fontSize="8.5" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={E.x+4} y={E.y+4}  fontSize="8.5" fill="#fde68a" fontWeight="bold">E</text>
+      <text x={D.x-9} y={D.y+11} fontSize="8.5" fill="#86efac" fontWeight="bold">D</text>
+      <text x={C.x+3} y={C.y+11} fontSize="8.5" fill="#86efac" fontWeight="bold">C</text>
+      {/* parallel tick marks on AB and DC */}
+      <line x1="118" y1="17" x2="122" y2="27" stroke="#fbbf24" strokeWidth="1.5"/>
+      <line x1="84" y1="135" x2="88" y2="145" stroke="#fbbf24" strokeWidth="1.5"/>
+      <line x1="162" y1="135" x2="166" y2="145" stroke="#fbbf24" strokeWidth="1.5"/>
+      <line x1="158" y1="17" x2="162" y2="27" stroke="#fbbf24" strokeWidth="1.5"/>
+      <text x="90" y="10" fontSize="7" fill="#fbbf24">AB // DC</text>
+      <text x={(A.x+E.x+B.x)/3-10} y="76" fontSize="7.5" fill="#93c5fd">△ABE</text>
+      <text x={(D.x+E.x+C.x)/3-10} y="130" fontSize="7.5" fill="#86efac">△DCE</text>
+    </svg>
+  );
+};
+
+/* ── Diagram 3 – Di Dalam / Garis Sejajar ───────────────── */
+const DiagDiDalam = () => {
+  const [A,B,C,D,E] = [{x:128,y:12},{x:15,y:155},{x:241,y:155},{x:62,y:95},{x:194,y:95}];
+  return (
+    <svg viewBox="0 0 265 170" className="w-full rounded-lg bg-slate-950/50">
+      {/* big △ABC */}
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity=".12" stroke="#60a5fa" strokeWidth="1.8"/>
+      {/* small △ADE shaded */}
+      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#a855f7" fillOpacity=".2" stroke="#d946ef" strokeWidth="1.8"/>
+      {/* DE parallel marker */}
+      <line x1="120" y1="90" x2="124" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
+      <line x1="126" y1="90" x2="130" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
+      <line x1="112" y1="150" x2="116" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
+      <line x1="118" y1="150" x2="122" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
+      {/* shared angle at A – two concentric arcs */}
+      <path d={ap(A.x,A.y,B.x,B.y,C.x,C.y,18)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(A.x,A.y,D.x,D.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      {/* ∠ADE = ∠ABC (corresponding) green */}
+      <path d={ap(D.x,D.y,A.x,A.y,E.x,E.y,11)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(B.x,B.y,C.x,C.y,A.x,A.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* ∠AED = ∠ACB (corresponding) cyan */}
+      <path d={ap(E.x,E.y,D.x,D.y,C.x,C.y,11)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      <path d={ap(C.x,C.y,B.x,B.y,A.x,A.y,13)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      {/* labels */}
+      <text x={A.x-4} y={A.y-5}  fontSize="8.5" fill="#fde68a" fontWeight="bold">A</text>
+      <text x={B.x-11} y={B.y+10} fontSize="8.5" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C.x+3}  y={C.y+10} fontSize="8.5" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={D.x-11} y={D.y-3}  fontSize="8.5" fill="#e879f9" fontWeight="bold">D</text>
+      <text x={E.x+3}  y={E.y-3}  fontSize="8.5" fill="#e879f9" fontWeight="bold">E</text>
+      <text x="145" y="87" fontSize="7" fill="#fbbf24">DE // BC</text>
+      <text x="88"  y="130" fontSize="7.5" fill="#e879f9">△ADE</text>
+      <text x="88"  y="142" fontSize="7.5" fill="#93c5fd">~△ABC</text>
+    </svg>
+  );
+};
+
+/* ── Diagram 4 – Siku-siku & Altitude ───────────────────── */
+const DiagSikuTinggi = () => {
+  const [A,B,C,D] = [{x:15,y:140},{x:230,y:140},{x:70,y:46},{x:70,y:140}];
+  return (
+    <svg viewBox="0 0 252 158" className="w-full rounded-lg bg-slate-950/50">
+      {/* △ACB full */}
+      <polygon points={`${A.x},${A.y} ${C.x},${C.y} ${B.x},${B.y}`} fill="#3b82f6" fillOpacity=".1" stroke="#60a5fa" strokeWidth="1.8"/>
+      {/* altitude line */}
+      <line x1={D.x} y1={D.y} x2={C.x} y2={C.y} stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3"/>
+      {/* △ADC shaded */}
+      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${C.x},${C.y}`} fill="#a855f7" fillOpacity=".18" stroke="#d946ef" strokeWidth="1.2"/>
+      {/* △CDB shaded */}
+      <polygon points={`${C.x},${C.y} ${D.x},${D.y} ${B.x},${B.y}`} fill="#22c55e" fillOpacity=".18" stroke="#4ade80" strokeWidth="1.2"/>
+      {/* right angle marks */}
+      <path d={ra(D.x,D.y,A.x,A.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
+      <path d={ra(D.x,D.y,B.x,B.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
+      <path d={ra(C.x,C.y,A.x,A.y,B.x,B.y,7)} fill="none" stroke="#fbbf24" strokeWidth="1.2"/>
+      {/* ∠A orange – shared in △ADC & △ACB */}
+      <path d={ap(A.x,A.y,D.x,D.y,C.x,C.y,12)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(A.x,A.y,D.x,D.y,C.x,C.y,16)} fill="none" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2"/>
+      {/* ∠B green – shared in △CDB & △ACB */}
+      <path d={ap(B.x,B.y,D.x,D.y,C.x,C.y,12)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(B.x,B.y,D.x,D.y,C.x,C.y,16)} fill="none" stroke="#22c55e" strokeWidth="1" strokeDasharray="2,2"/>
+      {/* ∠ACD = ∠B green (at C in △ADC) */}
+      <path d={ap(C.x,C.y,A.x,A.y,D.x,D.y,11)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* ∠DCB = ∠A orange (at C in △CDB) */}
+      <path d={ap(C.x,C.y,D.x,D.y,B.x,B.y,11)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      {/* labels */}
+      <text x={A.x-10} y={A.y+11} fontSize="8.5" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+3}  y={B.y+11} fontSize="8.5" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C.x-10} y={C.y-4}  fontSize="8.5" fill="#fde68a" fontWeight="bold">C</text>
+      <text x={D.x+3}  y={D.y+11} fontSize="8.5" fill="#e2e8f0" fontWeight="bold">D</text>
+      <text x="22"  y="120" fontSize="7.5" fill="#d946ef">△ADC</text>
+      <text x="128" y="120" fontSize="7.5" fill="#4ade80">△CDB</text>
+      <text x="90"  y="18"  fontSize="7.5" fill="#93c5fd">△ACB</text>
+      <text x="55"  y="136" fontSize="7" fill="#fbbf24">D</text>
+    </svg>
+  );
+};
+
+/* ── Posisi Sebangun Section ────────────────────────────── */
+const PosisiSebangunSection = () => {
+  const [tab, setTab] = useState(0);
+  const configs = [
+    {
+      title: 'Terpisah',
+      sub: 'Dua segitiga bebas',
+      color: '#60a5fa',
+      bg: 'bg-blue-500/20 border-blue-500/50',
+      active: 'bg-blue-500/30 border-blue-400',
+      diagram: <DiagTerpisah />,
+      info: 'Dua segitiga yang berdiri sendiri tanpa saling menyentuh. Tanda busur berwarna sama menunjukkan sudut-sudut yang bersesuaian dan sama besar. Ini konfigurasi paling umum yang ditemui di soal.',
+      syarat: 'Sd,Sd,Sd — ketiga pasang sudut sama besar',
+    },
+    {
+      title: 'Bertolak Belakang',
+      sub: 'Sudut bertolak belakang',
+      color: '#f97316',
+      bg: 'bg-orange-500/20 border-orange-500/50',
+      active: 'bg-orange-500/30 border-orange-400',
+      diagram: <DiagBertolakBelakang />,
+      info: 'Dua segitiga bertemu di satu titik (E). Sudut ∠AEB = ∠DEC karena bertolak belakang (vertikal). Jika AB // DC, sudut-sudut bersesuaian di A↔D dan B↔C juga sama besar (sudut sehadap/berseberangan).',
+      syarat: '∠AEB = ∠DEC (bertolak belakang) + AB // DC',
+    },
+    {
+      title: 'Di Dalam',
+      sub: 'Garis sejajar memotong',
+      color: '#a855f7',
+      bg: 'bg-purple-500/20 border-purple-500/50',
+      active: 'bg-purple-500/30 border-purple-400',
+      diagram: <DiagDiDalam />,
+      info: 'Segitiga kecil △ADE berada di dalam segitiga besar △ABC, berbagi sudut puncak ∠A. Karena DE // BC, sudut-sudut bersesuaian sama besar sehingga △ADE ~ △ABC.',
+      syarat: '∠A bersama + DE // BC → sudut sehadap sama',
+    },
+    {
+      title: 'Siku-siku & Tinggi',
+      sub: 'Tiga segitiga sebangun',
+      color: '#fbbf24',
+      bg: 'bg-yellow-500/20 border-yellow-500/50',
+      active: 'bg-yellow-500/30 border-yellow-400',
+      diagram: <DiagSikuTinggi />,
+      info: 'Pada △ACB siku-siku di C, garis tinggi CD membagi menjadi △ADC (ungu) dan △CDB (hijau). Ketiga segitiga saling sebangun: △ADC ~ △CDB ~ △ACB, karena masing-masing berbagi sudut dengan segitiga induk.',
+      syarat: '△ADC ~ △CDB ~ △ACB (Siku-Siku-Sudut)',
+    },
+  ];
+  const c = configs[tab];
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-2">
+        {configs.map((cfg, i) => (
+          <button key={i} onClick={() => setTab(i)}
+            className={`rounded-lg border p-2 text-left transition-all font-body ${
+              tab === i ? cfg.active : 'bg-slate-800/60 border-slate-700 hover:border-slate-500'
+            }`}>
+            <p className="text-xs font-semibold" style={{ color: tab === i ? cfg.color : '#94a3b8' }}>{cfg.title}</p>
+            <p className="text-xs text-white/40">{cfg.sub}</p>
+          </button>
+        ))}
+      </div>
+      {c.diagram}
+      <div className="rounded-lg p-3 space-y-1" style={{ background: `color-mix(in srgb, ${c.color} 8%, transparent)`, border: `1px solid color-mix(in srgb, ${c.color} 30%, transparent)` }}>
+        <p className="font-body text-xs font-semibold" style={{ color: c.color }}>📐 {c.title}</p>
+        <p className="font-body text-xs text-white/70 leading-relaxed">{c.info}</p>
+        <p className="font-body text-xs text-white/40 pt-1">✅ Syarat terpenuhi: <span className="text-white/60">{c.syarat}</span></p>
+      </div>
+    </div>
+  );
+};
+
 const InteraktifSebangunDemo = () => {
   const [scale, setScale] = useState(1.4);
   const [focus, setFocus] = useState<'sudut' | 'rusuk'>('sudut');
@@ -368,7 +602,7 @@ const InteraktifSebangunDemo = () => {
 
 const SegitigaSebangunPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "contoh1"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "posisi", "konsep2", "contoh1"]);
   const toggleSection = (s: string) => {
     playPopSound();
     setExpandedSections(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
@@ -439,6 +673,19 @@ const SegitigaSebangunPage = () => {
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI DUA SEGITIGA SEBANGUN:</p>
                   <DiagramSegitigaSebangun />
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* POSISI SEGITIGA SEBANGUN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Header id="posisi" icon={<Target className="w-5 h-5" />} color="#a855f7" label="🔷 Sub-Bab 2: Posisi Dua Segitiga Sebangun" />
+            {expandedSections.includes("posisi") && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Dua segitiga yang sebangun bisa muncul dalam berbagai <strong className="text-purple-300">konfigurasi posisi</strong>. Meskipun tampilannya berbeda, syarat kesebangunan tetap terpenuhi — ditunjukkan oleh tanda busur berwarna yang sama pada sudut-sudut yang bersesuaian.
+                </p>
+                <PosisiSebangunSection />
               </div>
             )}
           </div>
