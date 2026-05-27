@@ -101,6 +101,60 @@ const DiagramContoh1 = () => (
   </svg>
 );
 
+const DiagramContoh2 = () => (
+  <svg viewBox="0 0 370 205" className="w-full max-w-lg mx-auto">
+    {/* === ABCD (kiri, biru, lebih kecil) === */}
+    {/* A=bawah-kiri, B=bawah-kanan, C=atas-kanan, D=atas-kiri */}
+    {/* AD=4cm vertikal (kiri), DC=3cm atas, AB bawah, BC miring */}
+    <polygon points="28,162 95,162 80,106 28,106" fill="#3b82f6" fillOpacity="0.22" stroke="#60a5fa" strokeWidth="1.8"/>
+    {/* Label titik */}
+    <text x="15"  y="174" fontSize="9" fill="#93c5fd" fontWeight="bold">A</text>
+    <text x="97"  y="174" fontSize="9" fill="#93c5fd" fontWeight="bold">B</text>
+    <text x="81"  y="103" fontSize="9" fill="#93c5fd" fontWeight="bold">C</text>
+    <text x="14"  y="103" fontSize="9" fill="#93c5fd" fontWeight="bold">D</text>
+    {/* Dimensi AD (kiri, vertikal) */}
+    <text x="10" y="137" textAnchor="middle" fontSize="8" fill="#7dd3fc">4 cm</text>
+    {/* Dimensi DC (atas) */}
+    <text x="55" y="101" textAnchor="middle" fontSize="8" fill="#7dd3fc">3 cm</text>
+    {/* Dimensi AB (bawah) */}
+    <text x="62" y="177" textAnchor="middle" fontSize="8" fill="#7dd3fc">AB</text>
+    {/* Sudut A = 75° — arc kecil di pojok A */}
+    <path d="M 28,150 A 12,12 0 0,1 40,162" fill="none" stroke="#facc15" strokeWidth="1.4"/>
+    <text x="42"  y="158" fontSize="7.5" fill="#facc15" fontWeight="bold">75°</text>
+
+    {/* Simbol ~ */}
+    <text x="122" y="140" fontSize="20" fill="#facc15" textAnchor="middle">~</text>
+
+    {/* === PQRS (kanan, hijau, lebih besar — faktor skala 6/4=1.5) === */}
+    {/* P=bawah-kiri, Q=bawah-kanan, R=atas-kanan, S=atas-kiri */}
+    {/* PS=6cm vertikal (kiri), RS=? atas, PQ bawah, QR miring */}
+    <polygon points="152,168 252,168 232,84 152,84" fill="#22c55e" fillOpacity="0.18" stroke="#4ade80" strokeWidth="1.8"/>
+    {/* Label titik */}
+    <text x="139" y="181" fontSize="9" fill="#86efac" fontWeight="bold">P</text>
+    <text x="254" y="181" fontSize="9" fill="#86efac" fontWeight="bold">Q</text>
+    <text x="233" y="81"  fontSize="9" fill="#86efac" fontWeight="bold">R</text>
+    <text x="138" y="81"  fontSize="9" fill="#86efac" fontWeight="bold">S</text>
+    {/* Dimensi PS (kiri, vertikal) */}
+    <text x="134" y="129" textAnchor="middle" fontSize="8" fill="#86efac">6 cm</text>
+    {/* Dimensi RS (atas, ditanya) */}
+    <text x="193" y="78"  textAnchor="middle" fontSize="8" fill="#fbbf24">RS = ?</text>
+    {/* Dimensi PQ (bawah) */}
+    <text x="202" y="183" textAnchor="middle" fontSize="8" fill="#86efac">PQ</text>
+    {/* Sudut P = ? — arc kecil di pojok P */}
+    <path d="M 152,156 A 12,12 0 0,1 164,168" fill="none" stroke="#facc15" strokeWidth="1.4"/>
+    <text x="167" y="163" fontSize="7.5" fill="#fbbf24" fontWeight="bold">∠P=?</text>
+
+    {/* Garis bantu pasangan sisi: panah putus AD ↔ PS */}
+    <line x1="28" y1="134" x2="152" y2="126" stroke="#facc15" strokeWidth="0.8" strokeDasharray="4,3" opacity="0.5"/>
+    {/* Garis bantu DC ↔ RS */}
+    <line x1="54" y1="106" x2="192" y2="84" stroke="#f97316" strokeWidth="0.8" strokeDasharray="4,3" opacity="0.5"/>
+
+    {/* Info box bawah */}
+    <rect x="8" y="10" width="186" height="18" rx="4" fill="#1e293b" stroke="#334155"/>
+    <text x="101" y="23" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">ABCD ~ PQRS  (faktor skala = 6/4)</text>
+  </svg>
+);
+
 const MenghitungRusukPage = () => {
   const navigate = useNavigate();
   const Header = ({ id, icon, color, label }: { id: string; icon: React.ReactNode; color: string; label: string }) => (
@@ -230,6 +284,10 @@ const MenghitungRusukPage = () => {
                     <p className="font-body text-sm text-white">
                       Segiempat ABCD sebangun dengan PQRS. Diketahui <InlineMath math="AD = 4" /> cm, <InlineMath math="PS = 6" /> cm, <InlineMath math="CD = 3" /> cm, dan <InlineMath math="\angle A = 75°" />. Tentukan panjang <InlineMath math="RS" /> dan besar <InlineMath math="\angle P" />!
                     </p>
+                  </div>
+                  <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3">
+                    <DiagramContoh2 />
+                    <p className="font-body text-xs text-white/40 text-center mt-2">Segiempat ABCD ~ PQRS (sisi-sisi bersesuaian ditandai garis putus-putus)</p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
