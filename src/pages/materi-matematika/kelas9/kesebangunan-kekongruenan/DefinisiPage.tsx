@@ -146,20 +146,6 @@ const DefinisiPage = () => {
                   <p className="font-body text-sm text-white/80 leading-relaxed">
                     Dua bangun datar disebut <strong className="text-green-300">sebangun</strong> jika keduanya memenuhi dua syarat secara bersamaan:
                   </p>
-                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-2 font-body text-sm text-white/80">
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-400 font-bold shrink-0">①</span>
-                      <p><strong className="text-green-300">Sudut-sudut yang bersesuaian sama besar</strong> — setiap sudut di bangun pertama punya pasangan sudut yang sama besar di bangun kedua.</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-400 font-bold shrink-0">②</span>
-                      <p><strong className="text-green-300">Rusuk-rusuk yang bersesuaian sebanding</strong> — panjang sisi-sisinya membentuk perbandingan yang sama.</p>
-                    </div>
-                  </div>
-                  <div className="bg-slate-900/60 rounded-lg p-3 text-center">
-                    <BlockMath math="\frac{AB}{EF} = \frac{BC}{FG} = \frac{CD}{GH} = \frac{DA}{HE} = k" />
-                    <p className="font-body text-xs text-white/50 mt-1">k = faktor skala (rasio kesebangunan)</p>
-                  </div>
 
                   {/* Visual SVG representasi rumus */}
                   <div className="bg-slate-900/70 rounded-lg p-3">
@@ -175,20 +161,16 @@ const DefinisiPage = () => {
                       <line x1="164" y1="113" x2="16" y2="113" stroke="#34d399" strokeWidth="3" strokeLinecap="round"/>
                       {/* DA – violet */}
                       <line x1="16" y1="113" x2="16" y2="25" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round"/>
-
                       {/* Vertex labels – ABCD */}
                       <text x="10"  y="22" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
                       <text x="166" y="22" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
                       <text x="166" y="124" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
                       <text x="10"  y="124" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
-
                       {/* ── Dashed connecting lines B→E and C→H ── */}
                       <line x1="164" y1="25" x2="196" y2="39" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="4 3"/>
                       <line x1="164" y1="113" x2="196" y2="101" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="4 3"/>
-
                       {/* k label between rects */}
                       <text x="180" y="71" fill="rgba(255,255,255,0.35)" fontSize="11" textAnchor="middle" fontFamily="sans-serif" fontStyle="italic">k</text>
-
                       {/* ── Small rect EFGH ── */}
                       <rect x="196" y="39" width="99" height="59" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" strokeWidth="1" rx="2"/>
                       {/* EF – amber */}
@@ -199,17 +181,31 @@ const DefinisiPage = () => {
                       <line x1="295" y1="98" x2="196" y2="98" stroke="#34d399" strokeWidth="3" strokeLinecap="round"/>
                       {/* HE – violet */}
                       <line x1="196" y1="98" x2="196" y2="39" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round"/>
-
                       {/* Vertex labels – EFGH */}
                       <text x="188" y="37" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">E</text>
                       <text x="297" y="37" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">F</text>
                       <text x="297" y="110" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">G</text>
                       <text x="188" y="110" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">H</text>
-
                       {/* Similarity symbol */}
                       <text x="170" y="140" fill="rgba(255,255,255,0.3)" fontSize="9" textAnchor="middle" fontFamily="sans-serif">ABCD  ~  EFGH</text>
                     </svg>
                   </div>
+
+                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-2 font-body text-sm text-white/80">
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 font-bold shrink-0">①</span>
+                      <p><strong className="text-green-300">Sudut-sudut yang bersesuaian sama besar</strong> — setiap sudut di bangun pertama punya pasangan sudut yang sama besar di bangun kedua.</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-400 font-bold shrink-0">②</span>
+                      <p><strong className="text-green-300">Rusuk-rusuk yang bersesuaian sebanding</strong> — panjang sisi-sisinya membentuk perbandingan yang sama.</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+                    <BlockMath math="\frac{AB}{EF} = \frac{BC}{FG} = \frac{CD}{GH} = \frac{DA}{HE} = k" />
+                    <p className="font-body text-xs text-white/50 mt-1">k = faktor skala (rasio kesebangunan)</p>
+                  </div>
+
                 </div>
                 {/* Interactive Similarity Animation */}
                 <SimilarityAnimation />
