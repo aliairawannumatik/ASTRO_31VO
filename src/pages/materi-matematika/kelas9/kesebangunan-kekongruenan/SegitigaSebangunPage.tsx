@@ -185,6 +185,187 @@ const DiagramContoh3 = () => {
   );
 };
 
+const InteraktifSebangunDemo = () => {
+  const [scale, setScale] = useState(1.4);
+  const [focus, setFocus] = useState<'sudut' | 'rusuk'>('sudut');
+
+  const BASE = 80;
+  const xRel = 0.3867 * BASE;
+  const yRel = 1.0622 * BASE;
+
+  const B1 = { x: 10, y: 175 };
+  const C1 = { x: 10 + BASE, y: 175 };
+  const A1 = { x: B1.x + xRel, y: B1.y - yRel };
+
+  const B2 = { x: 160, y: 175 };
+  const C2 = { x: B2.x + BASE * scale, y: 175 };
+  const A2 = { x: B2.x + xRel * scale, y: B2.y - yRel * scale };
+
+  const AB1 = Math.sqrt(xRel ** 2 + yRel ** 2);
+  const CA1 = Math.sqrt((BASE - xRel) ** 2 + yRel ** 2);
+
+  const arc = (cx: number, cy: number, p1x: number, p1y: number, p2x: number, p2y: number, r: number) => {
+    const d1x = p1x - cx, d1y = p1y - cy, l1 = Math.sqrt(d1x * d1x + d1y * d1y);
+    const d2x = p2x - cx, d2y = p2y - cy, l2 = Math.sqrt(d2x * d2x + d2y * d2y);
+    const u1x = d1x / l1, u1y = d1y / l1;
+    const u2x = d2x / l2, u2y = d2y / l2;
+    const sx = cx + r * u1x, sy = cy + r * u1y;
+    const ex = cx + r * u2x, ey = cy + r * u2y;
+    const cross = u1x * u2y - u1y * u2x;
+    const sweep = cross > 0 ? 1 : 0;
+    return `M ${sx.toFixed(1)} ${sy.toFixed(1)} A ${r} ${r} 0 0 ${sweep} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+  };
+
+  const ao = focus === 'sudut' ? 1 : 0.2;
+  const ro = focus === 'rusuk' ? 1 : 0.2;
+
+  const TriangleGroup = ({
+    B, C, A, labels, strokeColor, textColor,
+  }: {
+    B: { x: number; y: number };
+    C: { x: number; y: number };
+    A: { x: number; y: number };
+    labels: { v1: string; v2: string; v3: string; ab: string; bc: string; ca: string };
+    strokeColor: string;
+    textColor: string;
+  }) => {
+    const abMid = { x: (B.x + A.x) / 2, y: (B.y + A.y) / 2 };
+    const bcMid = { x: (B.x + C.x) / 2, y: B.y };
+    const caMid = { x: (C.x + A.x) / 2, y: (C.y + A.y) / 2 };
+    return (
+      <g>
+        <polygon
+          points={`${B.x},${B.y} ${C.x},${C.y} ${A.x},${A.y}`}
+          fill={strokeColor} fillOpacity="0.12" stroke={strokeColor} strokeWidth="1.8"
+        />
+        <path d={arc(B.x, B.y, C.x, C.y, A.x, A.y, 14)} fill="none" stroke="#f97316" strokeWidth="1.6" opacity={ao} />
+        <path d={arc(C.x, C.y, B.x, B.y, A.x, A.y, 11)} fill="none" stroke="#22c55e" strokeWidth="1.6" opacity={ao} />
+        <path d={arc(A.x, A.y, B.x, B.y, C.x, C.y, 9)}  fill="none" stroke="#a855f7" strokeWidth="1.6" opacity={ao} />
+        <text x={B.x + 15} y={B.y - 9}  fontSize="7.5" fill="#f97316" fontWeight="bold" opacity={ao}>70°</text>
+        <text x={C.x - 23} y={C.y - 9}  fontSize="7.5" fill="#22c55e" fontWeight="bold" opacity={ao}>60°</text>
+        <text x={A.x - 2}  y={A.y + 15} fontSize="7.5" fill="#a855f7" fontWeight="bold" opacity={ao}>50°</text>
+        <text x={abMid.x - 14} y={abMid.y + 2} fontSize="7" fill="#fbbf24" opacity={ro}>{labels.ab}</text>
+        <text x={bcMid.x - 6}  y={bcMid.y + 13} fontSize="7" fill="#fbbf24" opacity={ro}>{labels.bc}</text>
+        <text x={caMid.x + 3}  y={caMid.y + 2}  fontSize="7" fill="#fbbf24" opacity={ro}>{labels.ca}</text>
+        <text x={B.x - 8} y={B.y + 11} fontSize="8.5" fill={textColor} fontWeight="bold">{labels.v1}</text>
+        <text x={C.x + 3} y={C.y + 11} fontSize="8.5" fill={textColor} fontWeight="bold">{labels.v2}</text>
+        <text x={A.x - 3} y={A.y - 6}  fontSize="8.5" fill={textColor} fontWeight="bold">{labels.v3}</text>
+      </g>
+    );
+  };
+
+  const fmt = (n: number) => n.toFixed(1);
+  const k = scale.toFixed(2);
+
+  return (
+    <div className="bg-slate-900/80 border border-purple-500/30 rounded-xl p-4 space-y-3">
+      <p className="font-body text-sm font-semibold text-purple-200 text-center">🎮 Coba Sendiri — Mengapa Cukup Satu Syarat?</p>
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => setFocus('sudut')}
+          className={`flex-1 text-xs py-2 rounded-lg font-body font-semibold transition-all ${
+            focus === 'sudut'
+              ? 'bg-orange-500/30 text-orange-300 border border-orange-400/60 shadow shadow-orange-500/20'
+              : 'bg-slate-800/60 text-white/40 border border-slate-700'
+          }`}
+        >
+          🔺 Fokus Sudut
+        </button>
+        <button
+          onClick={() => setFocus('rusuk')}
+          className={`flex-1 text-xs py-2 rounded-lg font-body font-semibold transition-all ${
+            focus === 'rusuk'
+              ? 'bg-yellow-500/30 text-yellow-300 border border-yellow-400/60 shadow shadow-yellow-500/20'
+              : 'bg-slate-800/60 text-white/40 border border-slate-700'
+          }`}
+        >
+          📏 Fokus Rusuk
+        </button>
+      </div>
+
+      <div className="space-y-1">
+        <div className="flex justify-between text-xs font-body text-white/40">
+          <span>△PQR lebih kecil</span>
+          <span>k = <strong className="text-purple-300">{k}</strong></span>
+          <span>△PQR lebih besar</span>
+        </div>
+        <input
+          type="range" min="0.5" max="1.6" step="0.05" value={scale}
+          onChange={e => setScale(Number(e.target.value))}
+          className="w-full accent-purple-400 cursor-pointer"
+        />
+      </div>
+
+      <svg viewBox="0 0 310 200" className="w-full rounded-lg bg-slate-950/60 border border-slate-800/80">
+        <TriangleGroup
+          B={B1} C={C1} A={A1}
+          strokeColor="#60a5fa" textColor="#93c5fd"
+          labels={{ v1: 'B', v2: 'C', v3: 'A', ab: fmt(AB1), bc: fmt(BASE), ca: fmt(CA1) }}
+        />
+        <text x={(B1.x + C1.x) / 2 - 12} y={B1.y + 22} fontSize="8" fill="#93c5fd">△ABC</text>
+
+        <TriangleGroup
+          B={B2} C={C2} A={A2}
+          strokeColor="#4ade80" textColor="#86efac"
+          labels={{ v1: 'P', v2: 'Q', v3: 'R', ab: fmt(AB1 * scale), bc: fmt(BASE * scale), ca: fmt(CA1 * scale) }}
+        />
+        <text x={(B2.x + C2.x) / 2 - 12} y={B2.y + 22} fontSize="8" fill="#86efac">△PQR</text>
+
+        <text x="133" y="148" fontSize="18" fill="#facc15" fontWeight="bold">~</text>
+      </svg>
+
+      {focus === 'sudut' ? (
+        <div className="bg-orange-500/10 border border-orange-500/25 rounded-lg p-3 space-y-2">
+          <p className="font-body text-xs font-semibold text-orange-300 text-center">
+            ✅ Sudut-sudut bersesuaian <em>selalu</em> sama besar — meski ukuran berubah!
+          </p>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            {[['∠B = ∠P', '70°', '#f97316'], ['∠C = ∠Q', '60°', '#22c55e'], ['∠A = ∠R', '50°', '#a855f7']].map(
+              ([lbl, val, col]) => (
+                <div key={lbl} className="bg-slate-800/60 rounded-lg p-2">
+                  <p className="text-xs text-white/40">{lbl}</p>
+                  <p className="text-sm font-bold" style={{ color: col }}>{val}</p>
+                </div>
+              )
+            )}
+          </div>
+          <p className="font-body text-xs text-white/50 text-center leading-relaxed">
+            Karena sudut-sudut sama → rusuk otomatis sebanding dengan rasio k = <span className="text-yellow-300 font-bold">{k}</span>
+          </p>
+        </div>
+      ) : (
+        <div className="bg-yellow-500/10 border border-yellow-500/25 rounded-lg p-3 space-y-2">
+          <p className="font-body text-xs font-semibold text-yellow-300 text-center">
+            ✅ Rasio semua pasang rusuk <em>selalu</em> sama = k — geser slidernya!
+          </p>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            {[
+              ['PQ / AB', k],
+              ['QR / BC', k],
+              ['RP / CA', k],
+            ].map(([lbl, val]) => (
+              <div key={lbl} className="bg-slate-800/60 rounded-lg p-2">
+                <p className="text-xs text-white/40">{lbl}</p>
+                <p className="text-sm font-bold text-yellow-300">{val}</p>
+              </div>
+            ))}
+          </div>
+          <p className="font-body text-xs text-white/50 text-center leading-relaxed">
+            Karena rusuk sebanding → sudut otomatis sama besar!
+          </p>
+        </div>
+      )}
+
+      <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+        <p className="font-body text-xs text-purple-200 text-center leading-relaxed">
+          💡 <strong>Kesimpulan:</strong> Cukup buktikan <em>salah satu</em> — sudut atau rusuk — karena yang satu secara otomatis membawa yang lain!
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const SegitigaSebangunPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "contoh1"]);
@@ -226,6 +407,7 @@ const SegitigaSebangunPage = () => {
                     <p>🔹 <strong>Syarat 3 (S, Sd, S):</strong> Dua pasang rusuk sebanding dan sudut apit sama besar</p>
                   </div>
                 </div>
+                <InteraktifSebangunDemo />
               </div>
             )}
           </div>
