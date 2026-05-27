@@ -258,7 +258,7 @@ const ShadowAnimation = () => {
 
         {/* ── Sudut elevasi matahari (tiang) ── */}
         <path
-          d={`M ${tiangShadowEnd - 22} ${GROUND_Y} A 22 22 0 0 0 ${tiangShadowEnd - 22 * Math.cos(angleRad)} ${GROUND_Y - 22 * Math.sin(angleRad)}`}
+          d={`M ${tiangShadowEnd - 22} ${GROUND_Y} A 22 22 0 0 1 ${tiangShadowEnd - 22 * Math.cos(angleRad)} ${GROUND_Y - 22 * Math.sin(angleRad)}`}
           fill="#facc1530" stroke="#facc15" strokeWidth="1.5"
           style={{ transition: tr }}
         />
@@ -267,11 +267,11 @@ const ShadowAnimation = () => {
           y={GROUND_Y - 36 * Math.sin(angleRad / 2) + 4}
           textAnchor="middle" fontSize="9" fill="#facc15" fontWeight="bold"
           style={{ transition: tr }}
-        >θ={angleDeg}°</text>
+        >θ</text>
 
         {/* ── Sudut elevasi matahari (pohon) ── */}
         <path
-          d={`M ${treeShadowEnd - 16} ${GROUND_Y} A 16 16 0 0 0 ${treeShadowEnd - 16 * Math.cos(angleRad)} ${GROUND_Y - 16 * Math.sin(angleRad)}`}
+          d={`M ${treeShadowEnd - 16} ${GROUND_Y} A 16 16 0 0 1 ${treeShadowEnd - 16 * Math.cos(angleRad)} ${GROUND_Y - 16 * Math.sin(angleRad)}`}
           fill="#fde04730" stroke="#fde047" strokeWidth="1.2"
           style={{ transition: tr }}
         />
