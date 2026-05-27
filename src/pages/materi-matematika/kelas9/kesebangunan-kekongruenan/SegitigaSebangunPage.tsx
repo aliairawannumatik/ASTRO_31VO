@@ -221,9 +221,9 @@ const SegitigaSebangunPage = () => {
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2">
                   <p className="font-body text-sm text-cyan-200 font-semibold">Dua segitiga sebangun jika memenuhi SALAH SATU dari berikut:</p>
                   <div className="font-body text-sm text-cyan-100 space-y-1">
-                    <p>🔹 <strong>Syarat 1 (SdSdSd/SdSd):</strong> Sudut-sudut yang bersesuaian sama besar</p>
-                    <p>🔹 <strong>Syarat 2 (SSS):</strong> Rusuk-rusuk yang bersesuaian sebanding</p>
-                    <p>🔹 <strong>Syarat 3 (SSdS):</strong> Dua pasang rusuk sebanding dan sudut apit sama besar</p>
+                    <p>🔹 <strong>Syarat 1 (Sd, Sd, Sd):</strong> Sudut-sudut yang bersesuaian sama besar</p>
+                    <p>🔹 <strong>Syarat 2 (S, S, S):</strong> Rusuk-rusuk yang bersesuaian sebanding</p>
+                    <p>🔹 <strong>Syarat 3 (S, Sd, S):</strong> Dua pasang rusuk sebanding dan sudut apit sama besar</p>
                   </div>
                 </div>
               </div>
