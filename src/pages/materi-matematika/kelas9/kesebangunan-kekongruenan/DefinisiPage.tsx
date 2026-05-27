@@ -160,6 +160,68 @@ const DefinisiPage = () => {
                     <BlockMath math="\frac{AB}{EF} = \frac{BC}{FG} = \frac{CD}{GH} = \frac{DA}{HE} = k" />
                     <p className="font-body text-xs text-white/50 mt-1">k = faktor skala (rasio kesebangunan)</p>
                   </div>
+
+                  {/* Visual SVG representasi rumus */}
+                  <div className="bg-slate-900/70 rounded-lg p-3">
+                    <p className="font-body text-xs text-slate-400 text-center mb-2">📊 Representasi Visual — warna sama = sisi bersesuaian</p>
+                    <svg viewBox="0 0 340 148" className="w-full" xmlns="http://www.w3.org/2000/svg">
+                      {/* ── Large rect ABCD ── */}
+                      <rect x="16" y="25" width="148" height="88" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" strokeWidth="1" rx="2"/>
+                      {/* AB – amber */}
+                      <line x1="16" y1="25" x2="164" y2="25" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round"/>
+                      {/* BC – rose */}
+                      <line x1="164" y1="25" x2="164" y2="113" stroke="#fb7185" strokeWidth="3" strokeLinecap="round"/>
+                      {/* CD – emerald */}
+                      <line x1="164" y1="113" x2="16" y2="113" stroke="#34d399" strokeWidth="3" strokeLinecap="round"/>
+                      {/* DA – violet */}
+                      <line x1="16" y1="113" x2="16" y2="25" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round"/>
+
+                      {/* Side labels – ABCD */}
+                      <text x="90" y="19" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">AB</text>
+                      <text x="174" y="73" fill="#fb7185" fontSize="9" textAnchor="start" fontFamily="sans-serif" fontWeight="600">BC</text>
+                      <text x="90" y="128" fill="#34d399" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">CD</text>
+                      <text x="6"  y="73" fill="#a78bfa" fontSize="9" textAnchor="end"   fontFamily="sans-serif" fontWeight="600">DA</text>
+
+                      {/* Vertex labels – ABCD */}
+                      <text x="10"  y="22" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+                      <text x="166" y="22" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+                      <text x="166" y="124" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+                      <text x="10"  y="124" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">D</text>
+
+                      {/* ── Dashed connecting lines B→E and C→H ── */}
+                      <line x1="164" y1="25" x2="196" y2="39" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="4 3"/>
+                      <line x1="164" y1="113" x2="196" y2="101" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="4 3"/>
+
+                      {/* k label between rects */}
+                      <text x="180" y="71" fill="rgba(255,255,255,0.35)" fontSize="11" textAnchor="middle" fontFamily="sans-serif" fontStyle="italic">k</text>
+
+                      {/* ── Small rect EFGH ── */}
+                      <rect x="196" y="39" width="99" height="59" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.15)" strokeWidth="1" rx="2"/>
+                      {/* EF – amber */}
+                      <line x1="196" y1="39" x2="295" y2="39" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round"/>
+                      {/* FG – rose */}
+                      <line x1="295" y1="39" x2="295" y2="98" stroke="#fb7185" strokeWidth="3" strokeLinecap="round"/>
+                      {/* GH – emerald */}
+                      <line x1="295" y1="98" x2="196" y2="98" stroke="#34d399" strokeWidth="3" strokeLinecap="round"/>
+                      {/* HE – violet */}
+                      <line x1="196" y1="98" x2="196" y2="39" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round"/>
+
+                      {/* Side labels – EFGH */}
+                      <text x="245" y="33" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">EF</text>
+                      <text x="305" y="72" fill="#fb7185" fontSize="9" textAnchor="start" fontFamily="sans-serif" fontWeight="600">FG</text>
+                      <text x="245" y="111" fill="#34d399" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">GH</text>
+                      <text x="188" y="72" fill="#a78bfa" fontSize="9" textAnchor="end"   fontFamily="sans-serif" fontWeight="600">HE</text>
+
+                      {/* Vertex labels – EFGH */}
+                      <text x="188" y="37" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">E</text>
+                      <text x="297" y="37" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">F</text>
+                      <text x="297" y="110" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">G</text>
+                      <text x="188" y="110" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">H</text>
+
+                      {/* Similarity symbol */}
+                      <text x="170" y="140" fill="rgba(255,255,255,0.3)" fontSize="9" textAnchor="middle" fontFamily="sans-serif">ABCD  ~  EFGH</text>
+                    </svg>
+                  </div>
                 </div>
                 {/* Interactive Similarity Animation */}
                 <SimilarityAnimation />
