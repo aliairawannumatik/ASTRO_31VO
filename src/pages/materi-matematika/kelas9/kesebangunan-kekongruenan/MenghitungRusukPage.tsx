@@ -302,9 +302,12 @@ const MenghitungRusukPage = () => {
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p><strong>Konsep:</strong> Tiang dan bayangan membentuk segitiga yang sebangun dengan pohon dan bayangannya (karena sudut elevasi matahari sama).</p>
+                      <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-2 my-2">
+                        <img src="/bayangan-tiang-pohon.png" alt="Ilustrasi bayangan tiang dan pohon" className="w-full max-w-sm mx-auto rounded-lg block" />
+                      </div>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\frac{\text{tinggi tiang}}{\text{bayangan tiang}} = \frac{\text{tinggi pohon}}{\text{bayangan pohon}}" />
-                        <BlockMath math="\frac{4}{2} = \frac{h}{3}" />
+                        <BlockMath math="\frac{\text{tinggi tiang}}{\text{tinggi pohon}} = \frac{\text{bayangan tiang}}{\text{bayangan pohon}}" />
+                        <BlockMath math="\frac{4}{h} = \frac{2}{3}" />
                       </div>
                       <p><strong>Selesaikan:</strong></p>
                       <div className="bg-slate-900/50 rounded p-3">
