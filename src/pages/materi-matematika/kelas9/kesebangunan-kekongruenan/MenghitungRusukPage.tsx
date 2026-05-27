@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -138,6 +139,155 @@ const DiagramContoh2 = () => (
   </svg>
 );
 
+const ShadowAnimation = () => {
+  const [angleDeg, setAngleDeg] = useState(63);
+  const angleRad = (angleDeg * Math.PI) / 180;
+
+  const GROUND_Y = 188;
+  const SCALE = 20;
+  const TIANG_H_PX = 4 * SCALE; // 80px = 4m
+  const TREE_H_PX  = 6 * SCALE; // 120px = 6m
+  const tiangX = 370;
+  const treeX  = 78;
+
+  const shadowTiangPx = (4 / Math.tan(angleRad)) * SCALE;
+  const shadowTreePx  = (6 / Math.tan(angleRad)) * SCALE;
+  const tiangTop = GROUND_Y - TIANG_H_PX; // 108
+  const treeTop  = GROUND_Y - TREE_H_PX;  // 68
+  const tiangShadowEnd = tiangX + shadowTiangPx;
+  const treeShadowEnd  = treeX  + shadowTreePx;
+
+  const shadowTiangM = (4 / Math.tan(angleRad)).toFixed(1);
+  const shadowTreeM  = (6 / Math.tan(angleRad)).toFixed(1);
+  const ratio = (parseFloat(shadowTiangM) / parseFloat(shadowTreeM)).toFixed(2);
+
+  const tr = "all 0.25s ease";
+
+  return (
+    <div className="space-y-3">
+      <svg viewBox="0 0 520 215" className="w-full" overflow="visible">
+        {/* Ground */}
+        <line x1="0" y1={GROUND_Y} x2="520" y2={GROUND_Y} stroke="#475569" strokeWidth="2"/>
+
+        {/* ── Pohon (hijau) ── */}
+        {/* Triangle area */}
+        <polygon
+          points={`${treeX},${GROUND_Y} ${treeX},${treeTop} ${treeShadowEnd},${GROUND_Y}`}
+          fill="#22c55e" fillOpacity="0.12" stroke="none"
+          style={{ transition: tr }}
+        />
+        {/* Trunk */}
+        <rect x={treeX - 3} y={treeTop + 55} width={6} height={TREE_H_PX - 55} fill="#92400e" rx="1"/>
+        {/* Canopy circles */}
+        <circle cx={treeX}      cy={treeTop + 18} r={24} fill="#16a34a" fillOpacity="0.85"/>
+        <circle cx={treeX - 14} cy={treeTop + 32} r={17} fill="#15803d" fillOpacity="0.85"/>
+        <circle cx={treeX + 14} cy={treeTop + 32} r={17} fill="#15803d" fillOpacity="0.85"/>
+        <circle cx={treeX}      cy={treeTop + 40} r={20} fill="#22c55e" fillOpacity="0.7"/>
+        {/* Hypotenuse (sinar matahari) */}
+        <line x1={treeX} y1={treeTop} x2={treeShadowEnd} y2={GROUND_Y}
+          stroke="#4ade80" strokeWidth="1.5" strokeDasharray="6,3"
+          style={{ transition: tr }}/>
+        {/* Shadow line */}
+        <line x1={treeX} y1={GROUND_Y} x2={treeShadowEnd} y2={GROUND_Y}
+          stroke="#facc15" strokeWidth="3.5" strokeLinecap="round"
+          style={{ transition: tr }}/>
+        {/* Right angle */}
+        <polyline points={`${treeX+9},${GROUND_Y} ${treeX+9},${GROUND_Y-9} ${treeX},${GROUND_Y-9}`}
+          fill="none" stroke="#4ade80" strokeWidth="1.2"/>
+        {/* Height label */}
+        <text x={treeX - 8} y={(treeTop + GROUND_Y) / 2 + 4} textAnchor="end" fontSize="10" fill="#86efac" fontWeight="bold">x</text>
+        {/* Shadow label */}
+        <text
+          x={(treeX + treeShadowEnd) / 2} y={GROUND_Y + 16}
+          textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold"
+          style={{ transition: tr }}
+        >{shadowTreeM} m</text>
+
+        {/* ── Tiang Bendera (biru) ── */}
+        {/* Triangle area */}
+        <polygon
+          points={`${tiangX},${GROUND_Y} ${tiangX},${tiangTop} ${tiangShadowEnd},${GROUND_Y}`}
+          fill="#3b82f6" fillOpacity="0.15" stroke="none"
+          style={{ transition: tr }}
+        />
+        {/* Pole */}
+        <rect x={tiangX - 2} y={tiangTop} width={4} height={TIANG_H_PX} fill="#93c5fd" rx="1"/>
+        {/* Flag (merah putih) */}
+        <polygon points={`${tiangX+2},${tiangTop} ${tiangX+22},${tiangTop+9} ${tiangX+2},${tiangTop+18}`} fill="#ef4444"/>
+        <polygon points={`${tiangX+2},${tiangTop+9} ${tiangX+22},${tiangTop+18} ${tiangX+2},${tiangTop+18}`} fill="#f8fafc"/>
+        {/* Hypotenuse (sinar matahari) */}
+        <line x1={tiangX} y1={tiangTop} x2={tiangShadowEnd} y2={GROUND_Y}
+          stroke="#60a5fa" strokeWidth="1.5" strokeDasharray="6,3"
+          style={{ transition: tr }}/>
+        {/* Shadow line */}
+        <line x1={tiangX} y1={GROUND_Y} x2={tiangShadowEnd} y2={GROUND_Y}
+          stroke="#facc15" strokeWidth="3.5" strokeLinecap="round"
+          style={{ transition: tr }}/>
+        {/* Right angle */}
+        <polyline points={`${tiangX+9},${GROUND_Y} ${tiangX+9},${GROUND_Y-9} ${tiangX},${GROUND_Y-9}`}
+          fill="none" stroke="#93c5fd" strokeWidth="1.2"/>
+        {/* Height label */}
+        <text x={tiangX - 8} y={(tiangTop + GROUND_Y) / 2 + 4} textAnchor="end" fontSize="10" fill="#7dd3fc" fontWeight="bold">4 m</text>
+        {/* Shadow label */}
+        <text
+          x={(tiangX + tiangShadowEnd) / 2} y={GROUND_Y + 16}
+          textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold"
+          style={{ transition: tr }}
+        >{shadowTiangM} m</text>
+
+        {/* Similarity symbol */}
+        <text x="228" y="148" textAnchor="middle" fontSize="22" fill="#facc15" fontWeight="bold">~</text>
+
+        {/* Sun icon (dekoratif, kanan atas) */}
+        <circle cx="500" cy="22" r="13" fill="#fde047" fillOpacity="0.95"/>
+        {[0,45,90,135,180,225,270,315].map((a) => {
+          const r = (a * Math.PI) / 180;
+          return (
+            <line key={a}
+              x1={500 + 15 * Math.cos(r)} y1={22 + 15 * Math.sin(r)}
+              x2={500 + 21 * Math.cos(r)} y2={22 + 21 * Math.sin(r)}
+              stroke="#fde047" strokeWidth="1.8"/>
+          );
+        })}
+        <text x="500" y="47" textAnchor="middle" fontSize="8" fill="#fde68a">☀️ matahari</text>
+
+        {/* "bayangan" labels */}
+        <text x={(treeX + treeShadowEnd) / 2} y={GROUND_Y + 28} textAnchor="middle" fontSize="7.5" fill="#94a3b8">bayangan pohon</text>
+        <text x={(tiangX + tiangShadowEnd) / 2} y={GROUND_Y + 28} textAnchor="middle" fontSize="7.5" fill="#94a3b8" style={{ transition: tr }}>bayangan tiang</text>
+      </svg>
+
+      {/* Slider */}
+      <div className="px-3">
+        <div className="flex items-center justify-between mb-1">
+          <span className="font-body text-xs text-white/60">☀️ Geser untuk ubah sudut matahari</span>
+          <span className="font-body text-xs text-yellow-300 font-bold">{angleDeg}°</span>
+        </div>
+        <input
+          type="range" min="40" max="75" step="1" value={angleDeg}
+          onChange={(e) => setAngleDeg(Number(e.target.value))}
+          className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-yellow-400 bg-slate-700"
+        />
+        <div className="flex justify-between text-xs text-white/30 mt-1 font-body">
+          <span>40° (matahari rendah)</span>
+          <span>75° (matahari tinggi)</span>
+        </div>
+      </div>
+
+      {/* Live ratio */}
+      <div className="bg-slate-900/70 border border-slate-700/50 rounded-lg p-3 font-body text-sm text-center space-y-1">
+        <p className="text-white/50 text-xs">Perbandingan selalu konstan — berapapun sudutnya:</p>
+        <p className="text-cyan-200 font-bold text-sm">
+          <span className="text-white/70">tinggi tiang / tinggi pohon </span>=
+          <span className="text-blue-300"> 4 / x </span>=
+          <span className="text-green-300"> {shadowTiangM} / {shadowTreeM} </span>=
+          <span className="text-yellow-300"> {ratio}</span>
+        </p>
+        <p className="text-white/40 text-xs">← bayangan tiang / bayangan pohon</p>
+      </div>
+    </div>
+  );
+};
+
 const MenghitungRusukPage = () => {
   const navigate = useNavigate();
   const Header = ({ id, icon, color, label }: { id: string; icon: React.ReactNode; color: string; label: string }) => (
@@ -211,6 +361,17 @@ const MenghitungRusukPage = () => {
                   </p>
                 </div>
               </div>
+          </div>
+
+          {/* ANIMASI INTERAKTIF */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Header id="animasi" icon={<Target className="w-5 h-5" />} color="#f97316" label="🎮 Animasi Interaktif — Bayangan & Segitiga Sebangun" />
+            <div className="px-5 pb-5 space-y-3">
+              <p className="font-body text-sm text-white/70 leading-relaxed">
+                Geser slider untuk mengubah sudut matahari. Perhatikan bagaimana panjang bayangan berubah, tetapi <strong className="text-orange-300">perbandingan tinggi tiang : tinggi pohon selalu sama</strong> dengan perbandingan bayangan tiang : bayangan pohon.
+              </p>
+              <ShadowAnimation />
+            </div>
           </div>
 
           {/* CONTOH SOAL */}
