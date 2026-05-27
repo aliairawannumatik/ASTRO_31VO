@@ -295,7 +295,7 @@ const MenghitungRusukPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Pada siang hari, sebuah tiang bendera setinggi 3 m mempunyai bayangan 1,8 m. Pada saat yang sama, sebuah pohon mempunyai bayangan sepanjang 2,1 m. Tentukan tinggi pohon tersebut!
+                      Pada siang hari, sebuah tiang bendera setinggi 4 m mempunyai bayangan 2 m. Pada saat yang sama, sebuah pohon mempunyai bayangan sepanjang 3 m. Tentukan tinggi pohon tersebut!
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
@@ -304,13 +304,13 @@ const MenghitungRusukPage = () => {
                       <p><strong>Konsep:</strong> Tiang dan bayangan membentuk segitiga yang sebangun dengan pohon dan bayangannya (karena sudut elevasi matahari sama).</p>
                       <div className="bg-slate-900/50 rounded p-3">
                         <BlockMath math="\frac{\text{tinggi tiang}}{\text{bayangan tiang}} = \frac{\text{tinggi pohon}}{\text{bayangan pohon}}" />
-                        <BlockMath math="\frac{3}{1{,}8} = \frac{h}{2{,}1}" />
+                        <BlockMath math="\frac{4}{2} = \frac{h}{3}" />
                       </div>
                       <p><strong>Selesaikan:</strong></p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="h = \frac{3 \times 2{,}1}{1{,}8} = \frac{6{,}3}{1{,}8} = 3{,}5 \text{ m}" />
+                        <BlockMath math="h = \frac{4 \times 3}{2} = \frac{12}{2} = 6 \text{ m}" />
                       </div>
-                      <p><strong className="text-primary">Tinggi pohon = 3,5 m.</strong></p>
+                      <p><strong className="text-primary">Tinggi pohon = 6 m.</strong></p>
                     </div>
                   </div>
                 </div>
