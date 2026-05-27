@@ -144,21 +144,21 @@ const ShadowAnimation = () => {
   const angleRad = (angleDeg * Math.PI) / 180;
 
   const GROUND_Y = 188;
-  const SCALE = 20;
-  const TIANG_H_PX = 4 * SCALE; // 80px = 4m
-  const TREE_H_PX  = 6 * SCALE; // 120px = 6m
+  const SCALE = 15;
+  const TIANG_H_PX = 4 * SCALE; // 60px = 4m
+  const TREE_H_PX  = 8 * SCALE; // 120px = 8m (2× tiang)
   const tiangX = 370;
   const treeX  = 78;
 
   const shadowTiangPx = (4 / Math.tan(angleRad)) * SCALE;
-  const shadowTreePx  = (6 / Math.tan(angleRad)) * SCALE;
-  const tiangTop = GROUND_Y - TIANG_H_PX; // 108
+  const shadowTreePx  = (8 / Math.tan(angleRad)) * SCALE;
+  const tiangTop = GROUND_Y - TIANG_H_PX; // 128
   const treeTop  = GROUND_Y - TREE_H_PX;  // 68
   const tiangShadowEnd = tiangX + shadowTiangPx;
   const treeShadowEnd  = treeX  + shadowTreePx;
 
   const shadowTiangM = (4 / Math.tan(angleRad)).toFixed(1);
-  const shadowTreeM  = (6 / Math.tan(angleRad)).toFixed(1);
+  const shadowTreeM  = (8 / Math.tan(angleRad)).toFixed(1);
   const ratio = (parseFloat(shadowTiangM) / parseFloat(shadowTreeM)).toFixed(2);
 
   const tr = "all 0.25s ease";
@@ -195,13 +195,18 @@ const ShadowAnimation = () => {
         <polyline points={`${treeX+9},${GROUND_Y} ${treeX+9},${GROUND_Y-9} ${treeX},${GROUND_Y-9}`}
           fill="none" stroke="#4ade80" strokeWidth="1.2"/>
         {/* Height label */}
-        <text x={treeX - 8} y={(treeTop + GROUND_Y) / 2 + 4} textAnchor="end" fontSize="10" fill="#86efac" fontWeight="bold">x</text>
+        <text x={treeX - 8} y={(treeTop + GROUND_Y) / 2 + 4} textAnchor="end" fontSize="10" fill="#86efac" fontWeight="bold">8 m</text>
         {/* Shadow label */}
         <text
           x={(treeX + treeShadowEnd) / 2} y={GROUND_Y + 16}
           textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold"
           style={{ transition: tr }}
         >{shadowTreeM} m</text>
+        <text
+          x={(treeX + treeShadowEnd) / 2} y={GROUND_Y + 28}
+          textAnchor="middle" fontSize="8" fill="#fb923c" fontWeight="bold"
+          style={{ transition: tr }}
+        >(= 2 × {shadowTiangM})</text>
 
         {/* ── Tiang Bendera (biru) ── */}
         {/* Triangle area */}
@@ -252,7 +257,7 @@ const ShadowAnimation = () => {
         <text x="500" y="47" textAnchor="middle" fontSize="8" fill="#fde68a">☀️ matahari</text>
 
         {/* "bayangan" labels */}
-        <text x={(treeX + treeShadowEnd) / 2} y={GROUND_Y + 28} textAnchor="middle" fontSize="7.5" fill="#94a3b8">bayangan pohon</text>
+        <text x={(treeX + treeShadowEnd) / 2} y={GROUND_Y + 38} textAnchor="middle" fontSize="7.5" fill="#94a3b8" style={{ transition: tr }}>bayangan pohon</text>
         <text x={(tiangX + tiangShadowEnd) / 2} y={GROUND_Y + 28} textAnchor="middle" fontSize="7.5" fill="#94a3b8" style={{ transition: tr }}>bayangan tiang</text>
       </svg>
 
@@ -274,15 +279,21 @@ const ShadowAnimation = () => {
       </div>
 
       {/* Live ratio */}
-      <div className="bg-slate-900/70 border border-slate-700/50 rounded-lg p-3 font-body text-sm text-center space-y-1">
+      <div className="bg-slate-900/70 border border-slate-700/50 rounded-lg p-3 font-body text-sm text-center space-y-2">
         <p className="text-white/50 text-xs">Perbandingan selalu konstan — berapapun sudutnya:</p>
         <p className="text-cyan-200 font-bold text-sm">
           <span className="text-white/70">tinggi tiang / tinggi pohon </span>=
-          <span className="text-blue-300"> 4 / x </span>=
+          <span className="text-blue-300"> 4 / 8 </span>=
+          <span className="text-yellow-300"> 0.50</span>
+        </p>
+        <p className="text-cyan-200 font-bold text-sm">
+          <span className="text-white/70">bayangan tiang / bayangan pohon </span>=
           <span className="text-green-300"> {shadowTiangM} / {shadowTreeM} </span>=
           <span className="text-yellow-300"> {ratio}</span>
         </p>
-        <p className="text-white/40 text-xs">← bayangan tiang / bayangan pohon</p>
+        <p className="text-orange-300 text-xs font-semibold">
+          ✦ bayangan pohon selalu = 2 × bayangan tiang ({shadowTiangM} × 2 = {shadowTreeM} m)
+        </p>
       </div>
     </div>
   );
