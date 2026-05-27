@@ -49,33 +49,6 @@ const DiagramTrapesium = () => (
   </svg>
 );
 
-const DiagramBayangan = () => (
-  <svg viewBox="0 0 340 170" className="w-full max-w-sm mx-auto">
-    {/* Ground */}
-    <line x1="10" y1="145" x2="330" y2="145" stroke="#475569" strokeWidth="2" />
-    {/* Person */}
-    <line x1="60" y1="145" x2="60" y2="85" stroke="#60a5fa" strokeWidth="3" />
-    <circle cx="60" cy="78" r="8" fill="#60a5fa" fillOpacity="0.5" stroke="#93c5fd" strokeWidth="1.5" />
-    <text x="60" y="163" textAnchor="middle" fontSize="8" fill="#93c5fd">Tinggi: 1,5 m</text>
-    {/* Person shadow */}
-    <line x1="60" y1="145" x2="108" y2="145" stroke="#60a5fa" strokeWidth="2" strokeDasharray="4,2" />
-    <text x="84" y="158" textAnchor="middle" fontSize="8" fill="#93c5fd">2 m</text>
-    {/* Tree */}
-    <line x1="200" y1="145" x2="200" y2="25" stroke="#4ade80" strokeWidth="3" />
-    <ellipse cx="200" cy="20" rx="20" ry="12" fill="#4ade80" fillOpacity="0.4" stroke="#86efac" strokeWidth="1.5" />
-    <text x="200" y="163" textAnchor="middle" fontSize="8" fill="#86efac">Tinggi: ?</text>
-    {/* Tree shadow */}
-    <line x1="200" y1="145" x2="320" y2="145" stroke="#4ade80" strokeWidth="2" strokeDasharray="4,2" />
-    <text x="260" y="158" textAnchor="middle" fontSize="8" fill="#86efac">6 m</text>
-    {/* Sun */}
-    <circle cx="320" cy="30" r="15" fill="#facc15" fillOpacity="0.6" />
-    <text x="320" y="35" textAnchor="middle" fontSize="10">☀️</text>
-    {/* Light rays */}
-    <line x1="308" y1="42" x2="108" y2="145" stroke="#facc15" strokeWidth="0.8" strokeDasharray="5,3" />
-    <line x1="308" y1="42" x2="320" y2="145" stroke="#facc15" strokeWidth="0.8" strokeDasharray="5,3" />
-    <text x="150" y="20" fontSize="9" fill="#fde68a" fontWeight="bold">Konsep Bayangan & Kesebangunan</text>
-  </svg>
-);
 
 const MenghitungRusukPage = () => {
   const navigate = useNavigate();
@@ -136,12 +109,13 @@ const MenghitungRusukPage = () => {
                   </div>
                   <div className="bg-slate-900/60 rounded-lg p-3">
                     <p className="font-body text-xs font-semibold text-green-300 mb-1">Kasus Bayangan (Kontekstual):</p>
-                    <BlockMath math="\frac{\text{tinggi benda}}{\text{tinggi bayangan benda}} = \frac{\text{tinggi tongkat}}{\text{tinggi bayangan tongkat}}" />
+                    <BlockMath math="\frac{\text{tinggi orang}}{\text{tinggi pohon}} = \frac{\text{tinggi bayangan orang}}{\text{tinggi bayangan pohon}}" />
                   </div>
                 </div>
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-2">🌳 ILUSTRASI BAYANGAN:</p>
-                  <DiagramBayangan />
+                  <img src="/bayangan-orang-pohon.png" alt="Ilustrasi bayangan orang dan pohon" className="w-full max-w-lg mx-auto rounded-lg block" />
+                  <p className="font-body text-xs text-white/40 text-center mt-2">gemini.google.com/app</p>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
