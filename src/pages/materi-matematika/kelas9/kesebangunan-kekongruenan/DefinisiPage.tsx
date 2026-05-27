@@ -176,12 +176,6 @@ const DefinisiPage = () => {
                       {/* DA – violet */}
                       <line x1="16" y1="113" x2="16" y2="25" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round"/>
 
-                      {/* Side labels – ABCD */}
-                      <text x="90" y="19" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">AB</text>
-                      <text x="174" y="73" fill="#fb7185" fontSize="9" textAnchor="start" fontFamily="sans-serif" fontWeight="600">BC</text>
-                      <text x="90" y="128" fill="#34d399" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">CD</text>
-                      <text x="6"  y="73" fill="#a78bfa" fontSize="9" textAnchor="end"   fontFamily="sans-serif" fontWeight="600">DA</text>
-
                       {/* Vertex labels – ABCD */}
                       <text x="10"  y="22" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
                       <text x="166" y="22" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
@@ -205,12 +199,6 @@ const DefinisiPage = () => {
                       <line x1="295" y1="98" x2="196" y2="98" stroke="#34d399" strokeWidth="3" strokeLinecap="round"/>
                       {/* HE – violet */}
                       <line x1="196" y1="98" x2="196" y2="39" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round"/>
-
-                      {/* Side labels – EFGH */}
-                      <text x="245" y="33" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">EF</text>
-                      <text x="305" y="72" fill="#fb7185" fontSize="9" textAnchor="start" fontFamily="sans-serif" fontWeight="600">FG</text>
-                      <text x="245" y="111" fill="#34d399" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="600">GH</text>
-                      <text x="188" y="72" fill="#a78bfa" fontSize="9" textAnchor="end"   fontFamily="sans-serif" fontWeight="600">HE</text>
 
                       {/* Vertex labels – EFGH */}
                       <text x="188" y="37" fill="rgba(255,255,255,0.6)" fontSize="10" fontFamily="monospace" fontWeight="bold">E</text>
