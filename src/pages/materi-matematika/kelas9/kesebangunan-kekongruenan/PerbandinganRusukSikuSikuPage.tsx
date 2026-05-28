@@ -11,117 +11,115 @@ import { InlineMath, BlockMath } from "react-katex";
    △ABC siku-siku di A, AB VERTIKAL, AC HORIZONTAL.
    B = kiri atas, A = kiri bawah (AB vertikal), C = kanan bawah (AC horizontal).
    BC = sisi miring (hipotenusa, diagonal). AD ⊥ BC, D pada BC.
-   Koordinat: B=(55,32), A=(55,192), C=(175,192)
+   Koordinat: B=(55,22), A=(55,182), C=(175,182)
    AB=160 (vertikal), AC=120 (horizontal), BC=200, AD=96, BD=128, DC=72  (3-4-5 × 40)
    BC_unit = (C-B)/|BC| = (120,160)/200 = (0.6,0.8)
    t = (A-B)·BC_unit = (0,160)·(0.6,0.8) = 128
-   D = B + 128*(0.6,0.8) = (55+76.8, 32+102.4) = (131.8,134.4) ≈ (132,134)
+   D = B + 128*(0.6,0.8) = (55+76.8, 22+102.4) = (131.8,124.4) ≈ (132,124)
 ──────────────────────────────────────────── */
 
-/* Sudut siku-siku di A=(55,192): AB ke atas (0,-1), AC ke kanan (1,0) → kotak axis-aligned */
+/* Sudut siku-siku di A=(55,182): AB ke atas (0,-1), AC ke kanan (1,0) → kotak axis-aligned */
 const RightAngleA = () => (
-  <path d="M 55,183 L 64,183 L 64,192" fill="none" stroke="#f97316" strokeWidth="1.5"/>
+  <path d="M 55,173 L 64,173 L 64,182" fill="none" stroke="#f97316" strokeWidth="1.5"/>
 );
 
-/* Sudut siku-siku di D=(132,134): AD⊥BC
-   DA_unit (D→A) = (55-132,192-134)/96 = (-76.8,57.6)/96 = (-0.8,0.6)
+/* Sudut siku-siku di D=(132,124): AD⊥BC
+   DA_unit (D→A) = (55-132,182-124)/96 = (-76.8,57.6)/96 = (-0.8,0.6)
    BC_unit = (0.6,0.8), s=8 */
 const RightAngleD = () => {
   const s = 8;
-  const p1 = { x: 132 + s*(-0.8), y: 134 + s*(0.6)  };  // toward A
-  const p2 = { x: 132 + s*(0.6),  y: 134 + s*(0.8)  };  // along BC
+  const p1 = { x: 132 + s*(-0.8), y: 124 + s*(0.6)  };  // toward A
+  const p2 = { x: 132 + s*(0.6),  y: 124 + s*(0.8)  };  // along BC
   const corner = { x: p1.x + s*(0.6), y: p1.y + s*(0.8) };
   return <path d={`M ${p1.x.toFixed(1)},${p1.y.toFixed(1)} L ${corner.x.toFixed(1)},${corner.y.toFixed(1)} L ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`} fill="none" stroke="#facc15" strokeWidth="1.5"/>;
 };
 
 const DiagramSikuSiku = () => (
-  <svg viewBox="0 0 260 220" className="w-full max-w-sm mx-auto">
-    {/* Sub-triangles shaded: △ABD (left/upper) and △ACD (lower/right) */}
-    <polygon points="55,192 55,32 132,134"  fill="#4ade80"  fillOpacity="0.18" stroke="none"/>
-    <polygon points="55,192 175,192 132,134" fill="#a855f7" fillOpacity="0.18" stroke="none"/>
+  <svg viewBox="0 0 260 218" className="w-full max-w-sm mx-auto">
+    {/* Sub-triangles shaded */}
+    <polygon points="55,182 55,22 132,124"  fill="#4ade80"  fillOpacity="0.18" stroke="none"/>
+    <polygon points="55,182 175,182 132,124" fill="#a855f7" fillOpacity="0.18" stroke="none"/>
     {/* Main triangle ABC */}
-    <polygon points="55,32 55,192 175,192" fill="none" stroke="#60a5fa" strokeWidth="2.2"/>
+    <polygon points="55,22 55,182 175,182" fill="none" stroke="#60a5fa" strokeWidth="2.2"/>
     {/* Altitude AD */}
-    <line x1="55" y1="192" x2="132" y2="134" stroke="#facc15" strokeWidth="2" strokeDasharray="5,3"/>
+    <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="2" strokeDasharray="5,3"/>
     <RightAngleA />
     <RightAngleD />
     {/* Vertex labels */}
-    <text x="36"  y="30"  fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
-    <text x="36"  y="207" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
-    <text x="178" y="207" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
-    <text x="136" y="130" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
+    <text x="36"  y="20"  fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
+    <text x="36"  y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
+    <text x="178" y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
+    <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
     {/* Side labels */}
-    <text x="38"  y="115" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">AB</text>
-    <text x="115" y="206" fontSize="10" fill="#c084fc" fontWeight="bold" textAnchor="middle">AC</text>
-    <text x="78"  y="170" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
-    <text x="86"  y="88"  fontSize="9"  fill="#86efac" textAnchor="middle">BD</text>
-    <text x="157" y="172" fontSize="9"  fill="#86efac" textAnchor="middle">DC</text>
+    <text x="38"  y="105" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">AB</text>
+    <text x="115" y="197" fontSize="10" fill="#c084fc" fontWeight="bold" textAnchor="middle">AC</text>
+    <text x="78"  y="162" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
+    <text x="85"  y="72"  fontSize="9"  fill="#86efac" textAnchor="middle">BD</text>
+    <text x="157" y="162" fontSize="9"  fill="#86efac" textAnchor="middle">DC</text>
     {/* Legend */}
-    <rect x="3" y="200" width="254" height="18" rx="4" fill="#0f172a" stroke="#334155"/>
+    <rect x="3" y="202" width="254" height="14" rx="4" fill="#0f172a" stroke="#334155"/>
     <text x="130" y="212" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">△ABD ~ △CAD ~ △CAB (tiga segitiga saling sebangun)</text>
-    <rect x="3" y="3" width="254" height="18" rx="4" fill="#0f172a" stroke="#334155"/>
-    <text x="130" y="15"  textAnchor="middle" fontSize="8" fill="#94a3b8">△ABC siku-siku di A, AB tegak, AC mendatar, AD ⊥ BC</text>
   </svg>
 );
 
 const DiagramProyeksiAlas = () => (
-  <svg viewBox="0 0 260 220" className="w-full max-w-sm mx-auto">
-    <polygon points="55,192 55,32 132,134" fill="#4ade80" fillOpacity="0.18" stroke="none"/>
-    <polygon points="55,32 55,192 175,192" fill="none" stroke="#60a5fa" strokeWidth="2"/>
-    <line x1="55" y1="192" x2="132" y2="134" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
+  <svg viewBox="0 0 260 218" className="w-full max-w-sm mx-auto">
+    <polygon points="55,182 55,22 132,124" fill="#4ade80" fillOpacity="0.18" stroke="none"/>
+    <polygon points="55,22 55,182 175,182" fill="none" stroke="#60a5fa" strokeWidth="2"/>
+    <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
     <RightAngleA />
     <RightAngleD />
-    <text x="36"  y="30"  fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
-    <text x="36"  y="207" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
-    <text x="178" y="207" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
-    <text x="136" y="130" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <text x="38"  y="115" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">AB</text>
-    <text x="86"  y="88"  fontSize="9"  fill="#4ade80" textAnchor="middle">BD</text>
-    <text x="157" y="172" fontSize="9"  fill="#94a3b8" textAnchor="middle">DC</text>
-    <rect x="3" y="200" width="254" height="18" rx="4" fill="#0f172a" stroke="#4ade80" strokeWidth="1"/>
-    <text x="130" y="209" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Tegak AB:</text>
-    <text x="130" y="217" textAnchor="middle" fontSize="9" fill="#4ade80" fontWeight="bold">AB² = BD × BC</text>
+    <text x="36"  y="20"  fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
+    <text x="36"  y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
+    <text x="178" y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
+    <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
+    <text x="38"  y="105" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">AB</text>
+    <text x="85"  y="72"  fontSize="9"  fill="#4ade80" textAnchor="middle">BD</text>
+    <text x="157" y="162" fontSize="9"  fill="#94a3b8" textAnchor="middle">DC</text>
+    <rect x="3" y="200" width="254" height="16" rx="4" fill="#0f172a" stroke="#4ade80" strokeWidth="1"/>
+    <text x="130" y="208" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Tegak AB:</text>
+    <text x="130" y="216" textAnchor="middle" fontSize="8" fill="#4ade80" fontWeight="bold">AB² = BD × BC</text>
   </svg>
 );
 
 const DiagramProyeksiTegak = () => (
-  <svg viewBox="0 0 260 220" className="w-full max-w-sm mx-auto">
-    <polygon points="55,192 175,192 132,134" fill="#c084fc" fillOpacity="0.18" stroke="none"/>
-    <polygon points="55,32 55,192 175,192" fill="none" stroke="#c084fc" strokeWidth="2"/>
-    <line x1="55" y1="192" x2="132" y2="134" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
+  <svg viewBox="0 0 260 218" className="w-full max-w-sm mx-auto">
+    <polygon points="55,182 175,182 132,124" fill="#c084fc" fillOpacity="0.18" stroke="none"/>
+    <polygon points="55,22 55,182 175,182" fill="none" stroke="#c084fc" strokeWidth="2"/>
+    <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
     <RightAngleA />
     <RightAngleD />
-    <text x="36"  y="30"  fontSize="12" fill="#e9d5ff" fontWeight="bold">B</text>
-    <text x="36"  y="207" fontSize="12" fill="#e9d5ff" fontWeight="bold">A</text>
-    <text x="178" y="207" fontSize="12" fill="#e9d5ff" fontWeight="bold">C</text>
-    <text x="136" y="130" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <text x="115" y="206" fontSize="10" fill="#c084fc" fontWeight="bold" textAnchor="middle">AC</text>
-    <text x="86"  y="88"  fontSize="9"  fill="#94a3b8" textAnchor="middle">BD</text>
-    <text x="157" y="172" fontSize="9"  fill="#c084fc" textAnchor="middle">DC</text>
-    <rect x="3" y="200" width="254" height="18" rx="4" fill="#0f172a" stroke="#c084fc" strokeWidth="1"/>
-    <text x="130" y="209" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Mendatar AC:</text>
-    <text x="130" y="217" textAnchor="middle" fontSize="9" fill="#c084fc" fontWeight="bold">AC² = DC × BC</text>
+    <text x="36"  y="20"  fontSize="12" fill="#e9d5ff" fontWeight="bold">B</text>
+    <text x="36"  y="197" fontSize="12" fill="#e9d5ff" fontWeight="bold">A</text>
+    <text x="178" y="197" fontSize="12" fill="#e9d5ff" fontWeight="bold">C</text>
+    <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
+    <text x="115" y="197" fontSize="10" fill="#c084fc" fontWeight="bold" textAnchor="middle">AC</text>
+    <text x="85"  y="72"  fontSize="9"  fill="#94a3b8" textAnchor="middle">BD</text>
+    <text x="157" y="162" fontSize="9"  fill="#c084fc" textAnchor="middle">DC</text>
+    <rect x="3" y="200" width="254" height="16" rx="4" fill="#0f172a" stroke="#c084fc" strokeWidth="1"/>
+    <text x="130" y="208" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Mendatar AC:</text>
+    <text x="130" y="216" textAnchor="middle" fontSize="8" fill="#c084fc" fontWeight="bold">AC² = DC × BC</text>
   </svg>
 );
 
 const DiagramGarisTinggi = () => (
-  <svg viewBox="0 0 260 220" className="w-full max-w-sm mx-auto">
-    <polygon points="55,192 55,32 132,134"  fill="#facc15" fillOpacity="0.10" stroke="none"/>
-    <polygon points="55,192 175,192 132,134" fill="#facc15" fillOpacity="0.10" stroke="none"/>
-    <polygon points="55,32 55,192 175,192" fill="none" stroke="#22c55e" strokeWidth="2"/>
-    <line x1="55" y1="192" x2="132" y2="134" stroke="#facc15" strokeWidth="2" strokeDasharray="5,3"/>
+  <svg viewBox="0 0 260 218" className="w-full max-w-sm mx-auto">
+    <polygon points="55,182 55,22 132,124"  fill="#facc15" fillOpacity="0.10" stroke="none"/>
+    <polygon points="55,182 175,182 132,124" fill="#facc15" fillOpacity="0.10" stroke="none"/>
+    <polygon points="55,22 55,182 175,182" fill="none" stroke="#22c55e" strokeWidth="2"/>
+    <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="2" strokeDasharray="5,3"/>
     <RightAngleA />
     <RightAngleD />
-    <text x="36"  y="30"  fontSize="12" fill="#86efac" fontWeight="bold">B</text>
-    <text x="36"  y="207" fontSize="12" fill="#86efac" fontWeight="bold">A</text>
-    <text x="178" y="207" fontSize="12" fill="#86efac" fontWeight="bold">C</text>
-    <text x="136" y="130" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <text x="78"  y="170" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
-    <text x="86"  y="88"  fontSize="9"  fill="#facc15" textAnchor="middle">BD</text>
-    <text x="157" y="172" fontSize="9"  fill="#facc15" textAnchor="middle">DC</text>
-    <rect x="3" y="200" width="254" height="18" rx="4" fill="#0f172a" stroke="#22c55e" strokeWidth="1"/>
-    <text x="130" y="209" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Garis Tinggi ke Sisi Miring:</text>
-    <text x="130" y="217" textAnchor="middle" fontSize="9" fill="#22c55e" fontWeight="bold">AD² = BD × DC</text>
+    <text x="36"  y="20"  fontSize="12" fill="#86efac" fontWeight="bold">B</text>
+    <text x="36"  y="197" fontSize="12" fill="#86efac" fontWeight="bold">A</text>
+    <text x="178" y="197" fontSize="12" fill="#86efac" fontWeight="bold">C</text>
+    <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
+    <text x="78"  y="162" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
+    <text x="85"  y="72"  fontSize="9"  fill="#facc15" textAnchor="middle">BD</text>
+    <text x="157" y="162" fontSize="9"  fill="#facc15" textAnchor="middle">DC</text>
+    <rect x="3" y="200" width="254" height="16" rx="4" fill="#0f172a" stroke="#22c55e" strokeWidth="1"/>
+    <text x="130" y="208" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Garis Tinggi ke Sisi Miring:</text>
+    <text x="130" y="216" textAnchor="middle" fontSize="8" fill="#22c55e" fontWeight="bold">AD² = BD × DC</text>
   </svg>
 );
 
