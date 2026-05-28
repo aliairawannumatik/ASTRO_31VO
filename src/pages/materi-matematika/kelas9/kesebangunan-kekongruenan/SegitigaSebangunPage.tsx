@@ -286,11 +286,9 @@ const DiagBertolakBelakang = () => {
       <text x={E.x+4} y={E.y+4}  fontSize="8.5" fill="#fde68a" fontWeight="bold">E</text>
       <text x={D.x-9} y={D.y+11} fontSize="8.5" fill="#86efac" fontWeight="bold">D</text>
       <text x={C.x+3} y={C.y+11} fontSize="8.5" fill="#86efac" fontWeight="bold">C</text>
-      {/* parallel tick marks on AB and DC */}
-      <line x1="118" y1="17" x2="122" y2="27" stroke="#fbbf24" strokeWidth="1.5"/>
-      <line x1="84" y1="135" x2="88" y2="145" stroke="#fbbf24" strokeWidth="1.5"/>
-      <line x1="162" y1="135" x2="166" y2="145" stroke="#fbbf24" strokeWidth="1.5"/>
-      <line x1="158" y1="17" x2="162" y2="27" stroke="#fbbf24" strokeWidth="1.5"/>
+      {/* tanda panah sejajar — AB (y=22) dan DC (y=140), keduanya mengarah ke kanan */}
+      <path d="M 115,18 L 121,22 L 115,26" fill="none" stroke="#fbbf24" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round"/>
+      <path d="M 125,136 L 131,140 L 125,144" fill="none" stroke="#fbbf24" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round"/>
       <text x="90" y="10" fontSize="7" fill="#fbbf24">AB // DC</text>
       <text x={(A.x+E.x+B.x)/3-10} y="76" fontSize="7.5" fill="#93c5fd">△ABE</text>
       <text x={(D.x+E.x+C.x)/3-10} y="130" fontSize="7.5" fill="#86efac">△DCE</text>
