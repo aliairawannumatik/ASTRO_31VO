@@ -369,33 +369,30 @@ const DiagSudutBerimpit = () => {
       {/* big △PRQ */}
       <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#7dd3fc" fillOpacity=".35" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △PTS */}
-      <polygon points={`${P.x},${P.y} ${T.x},${T.y} ${S.x},${S.y}`} fill="#f0abfc" fillOpacity=".42" stroke="#d946ef" strokeWidth="1.8"/>
+      <polygon points={`${P.x},${P.y} ${T.x},${T.y} ${S.x},${S.y}`} fill="#22c55e" fillOpacity=".40" stroke="#4ade80" strokeWidth="1.8"/>
       {/* shared ∠P – outer arc (△PRQ) orange, inner arc (△PTS) green */}
       <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       {/* ∠T = ∠Q – green arcs */}
       <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,15)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      {/* tanda sama ○ — small open circles on each angle arc */}
-      <circle cx="104" cy="91" r="3.5" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      <circle cx="199" cy="139" r="3.5" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* tanda sama ○ — circles centred exactly on arc midpoint (bisect unit vectors × r) */}
+      {/* ∠T midpoint: T + 13 × normalize(u_P + u_S) = (105, 91) */}
+      <circle cx="105" cy="91" r="3" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* ∠Q midpoint: Q + 15 × normalize(u_R + u_P) = (199, 138) */}
+      <circle cx="199" cy="138" r="3" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       {/* ∠S = ∠R (cyan) */}
       <path d={ap(S.x,S.y,T.x,T.y,P.x,P.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
       <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,13)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
       {/* S and T point dots */}
-      <circle cx={S.x} cy={S.y} r="2.5" fill="#e879f9"/>
-      <circle cx={T.x} cy={T.y} r="2.5" fill="#e879f9"/>
-      {/* dimension labels */}
-      <text x="56" y="108" fontSize="9" fill="#c084fc" fontWeight="bold"
-        textAnchor="middle" transform="rotate(-36, 56, 108)">12 cm</text>
-      <text x="61" y="162" fontSize="9" fill="#c084fc" fontWeight="bold" textAnchor="middle">9 cm</text>
-      <text x="157" y="162" fontSize="9" fill="#c084fc" fontWeight="bold" textAnchor="middle">11 cm</text>
+      <circle cx={S.x} cy={S.y} r="2.5" fill="#4ade80"/>
+      <circle cx={T.x} cy={T.y} r="2.5" fill="#4ade80"/>
       {/* vertex labels */}
       <text x="3"        y={P.y+4}  fontSize="9" fill="#fde68a" fontWeight="bold">P</text>
       <text x={R.x+3}   y={R.y-3}  fontSize="9" fill="#93c5fd" fontWeight="bold">R</text>
       <text x={Q.x+3}   y={Q.y+4}  fontSize="9" fill="#93c5fd" fontWeight="bold">Q</text>
-      <text x={T.x+4}   y={T.y-3}  fontSize="9" fill="#e879f9" fontWeight="bold">T</text>
-      <text x={S.x-4}   y={S.y+13} fontSize="9" fill="#e879f9" fontWeight="bold">S</text>
+      <text x={T.x+4}   y={T.y-3}  fontSize="9" fill="#4ade80" fontWeight="bold">T</text>
+      <text x={S.x-4}   y={S.y+13} fontSize="9" fill="#4ade80" fontWeight="bold">S</text>
     </svg>
   );
 };
