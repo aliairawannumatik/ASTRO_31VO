@@ -51,11 +51,7 @@ const DiagramSikuSiku = () => (
     <text x="178" y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
     {/* Side labels */}
-    <text x="38"  y="105" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">AB</text>
-    <text x="115" y="197" fontSize="10" fill="#c084fc" fontWeight="bold" textAnchor="middle">AC</text>
     <text x="78"  y="162" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
-    <text x="85"  y="72"  fontSize="9"  fill="#86efac" textAnchor="middle">BD</text>
-    <text x="157" y="162" fontSize="9"  fill="#86efac" textAnchor="middle">DC</text>
     {/* Legend */}
     <rect x="3" y="202" width="254" height="14" rx="4" fill="#0f172a" stroke="#334155"/>
     <text x="130" y="212" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">△ABD ~ △CAD ~ △CAB (tiga segitiga saling sebangun)</text>
@@ -73,9 +69,6 @@ const DiagramProyeksiAlas = () => (
     <text x="36"  y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
     <text x="178" y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <text x="38"  y="105" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">AB</text>
-    <text x="85"  y="72"  fontSize="9"  fill="#4ade80" textAnchor="middle">BD</text>
-    <text x="157" y="162" fontSize="9"  fill="#94a3b8" textAnchor="middle">DC</text>
     <rect x="3" y="200" width="254" height="16" rx="4" fill="#0f172a" stroke="#4ade80" strokeWidth="1"/>
     <text x="130" y="208" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Tegak AB:</text>
     <text x="130" y="216" textAnchor="middle" fontSize="8" fill="#4ade80" fontWeight="bold">AB² = BD × BC</text>
@@ -93,9 +86,6 @@ const DiagramProyeksiTegak = () => (
     <text x="36"  y="197" fontSize="12" fill="#e9d5ff" fontWeight="bold">A</text>
     <text x="178" y="197" fontSize="12" fill="#e9d5ff" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <text x="115" y="197" fontSize="10" fill="#c084fc" fontWeight="bold" textAnchor="middle">AC</text>
-    <text x="85"  y="72"  fontSize="9"  fill="#94a3b8" textAnchor="middle">BD</text>
-    <text x="157" y="162" fontSize="9"  fill="#c084fc" textAnchor="middle">DC</text>
     <rect x="3" y="200" width="254" height="16" rx="4" fill="#0f172a" stroke="#c084fc" strokeWidth="1"/>
     <text x="130" y="208" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Mendatar AC:</text>
     <text x="130" y="216" textAnchor="middle" fontSize="8" fill="#c084fc" fontWeight="bold">AC² = DC × BC</text>
@@ -115,8 +105,6 @@ const DiagramGarisTinggi = () => (
     <text x="178" y="197" fontSize="12" fill="#86efac" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
     <text x="78"  y="162" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
-    <text x="85"  y="72"  fontSize="9"  fill="#facc15" textAnchor="middle">BD</text>
-    <text x="157" y="162" fontSize="9"  fill="#facc15" textAnchor="middle">DC</text>
     <rect x="3" y="200" width="254" height="16" rx="4" fill="#0f172a" stroke="#22c55e" strokeWidth="1"/>
     <text x="130" y="208" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Garis Tinggi ke Sisi Miring:</text>
     <text x="130" y="216" textAnchor="middle" fontSize="8" fill="#22c55e" fontWeight="bold">AD² = BD × DC</text>
