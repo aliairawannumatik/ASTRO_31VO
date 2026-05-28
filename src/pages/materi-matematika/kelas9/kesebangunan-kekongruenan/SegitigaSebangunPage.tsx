@@ -381,7 +381,7 @@ const DiagSudutBerimpit = () => {
       <circle cx="199" cy="138" r="3" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       {/* ∠S = ∠R (cyan) */}
       <path d={ap(S.x,S.y,T.x,T.y,P.x,P.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
-      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,13)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,18)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
       {/* S and T point dots */}
       <circle cx={S.x} cy={S.y} r="2.5" fill="#4ade80"/>
       <circle cx={T.x} cy={T.y} r="2.5" fill="#4ade80"/>
