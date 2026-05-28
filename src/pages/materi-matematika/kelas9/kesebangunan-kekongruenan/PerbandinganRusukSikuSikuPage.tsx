@@ -57,7 +57,7 @@ const DiagramSikuSiku = () => (
 );
 
 const DiagramProyeksiAlas = () => (
-  <svg viewBox="0 0 260 218" className="w-full max-w-sm mx-auto">
+  <svg viewBox="0 0 260 226" className="w-full max-w-sm mx-auto">
     <polygon points="55,182 55,22 132,124" fill="#4ade80" fillOpacity="0.18" stroke="none"/>
     <polygon points="55,22 55,182 175,182" fill="none" stroke="#60a5fa" strokeWidth="2"/>
     <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
@@ -67,9 +67,9 @@ const DiagramProyeksiAlas = () => (
     <text x="36"  y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
     <text x="178" y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <rect x="3" y="196" width="254" height="26" rx="4" fill="#0f172a" stroke="#4ade80" strokeWidth="1"/>
-    <text x="130" y="206" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Tegak AB:</text>
-    <text x="130" y="219" textAnchor="middle" fontSize="12" fill="#4ade80" fontWeight="bold">AB² = BD × BC</text>
+    <rect x="3" y="193" width="254" height="30" rx="4" fill="#0f172a" stroke="#4ade80" strokeWidth="1"/>
+    <text x="130" y="205" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Tegak AB:</text>
+    <text x="130" y="220" textAnchor="middle" fontSize="12" fill="#4ade80" fontWeight="bold">AB² = BD × BC</text>
   </svg>
 );
 
@@ -84,9 +84,9 @@ const DiagramProyeksiTegak = () => (
     <text x="36"  y="197" fontSize="12" fill="#e9d5ff" fontWeight="bold">A</text>
     <text x="178" y="197" fontSize="12" fill="#e9d5ff" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <rect x="3" y="196" width="254" height="26" rx="4" fill="#0f172a" stroke="#c084fc" strokeWidth="1"/>
-    <text x="130" y="206" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Mendatar AC:</text>
-    <text x="130" y="219" textAnchor="middle" fontSize="12" fill="#c084fc" fontWeight="bold">AC² = DC × BC</text>
+    <rect x="3" y="193" width="254" height="30" rx="4" fill="#0f172a" stroke="#c084fc" strokeWidth="1"/>
+    <text x="130" y="205" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold">Proyeksi Rusuk Mendatar AC:</text>
+    <text x="130" y="220" textAnchor="middle" fontSize="12" fill="#c084fc" fontWeight="bold">AC² = DC × BC</text>
   </svg>
 );
 
@@ -102,9 +102,9 @@ const DiagramGarisTinggi = () => (
     <text x="36"  y="197" fontSize="12" fill="#86efac" fontWeight="bold">A</text>
     <text x="178" y="197" fontSize="12" fill="#86efac" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <rect x="3" y="196" width="254" height="26" rx="4" fill="#0f172a" stroke="#22c55e" strokeWidth="1"/>
-    <text x="130" y="206" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold">Garis Tinggi ke Sisi Miring:</text>
-    <text x="130" y="219" textAnchor="middle" fontSize="12" fill="#22c55e" fontWeight="bold">AD² = BD × DC</text>
+    <rect x="3" y="193" width="254" height="30" rx="4" fill="#0f172a" stroke="#22c55e" strokeWidth="1"/>
+    <text x="130" y="205" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold">Garis Tinggi ke Sisi Miring:</text>
+    <text x="130" y="220" textAnchor="middle" fontSize="12" fill="#22c55e" fontWeight="bold">AD² = BD × DC</text>
   </svg>
 );
 
