@@ -400,6 +400,7 @@ const DiagSikuTinggi = () => {
       {/* right angle marks */}
       <path d={ra(D.x,D.y,A.x,A.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
       <path d={ra(D.x,D.y,B.x,B.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
+      <path d={ra(C.x,C.y,A.x,A.y,B.x,B.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
       {/* ∠A orange – shared in △ADC & △ACB */}
       <path d={ap(A.x,A.y,D.x,D.y,C.x,C.y,12)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(A.x,A.y,D.x,D.y,C.x,C.y,16)} fill="none" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2"/>
