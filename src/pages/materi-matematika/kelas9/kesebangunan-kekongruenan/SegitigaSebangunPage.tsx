@@ -783,11 +783,11 @@ const SegitigaSebangunPage = () => {
                       <p>Jika dua pasang sudut yang bersesuaian dari dua segitiga sama besar, maka sudut ketiga otomatis sama (total sudut = 180°), sehingga kedua segitiga <strong>sebangun</strong>.</p>
                       <BlockMath math="\angle A = \angle P \text{ dan } \angle B = \angle Q \Rightarrow \triangle ABC \sim \triangle PQR" />
                     </div>
-                    <div className="bg-slate-900/60 rounded-lg p-3">
+                    <div className="bg-slate-900/60 rounded-lg px-3 pb-3 pt-5">
                       <p className="text-blue-300 font-semibold mb-1">Syarat S, S, S (Sisi-Sisi-Sisi):</p>
                       <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} = \frac{CA}{RP} \Rightarrow \triangle ABC \sim \triangle PQR" />
                     </div>
-                    <div className="bg-slate-900/60 rounded-lg p-3">
+                    <div className="bg-slate-900/60 rounded-lg px-3 pb-3 pt-5">
                       <p className="text-purple-300 font-semibold mb-1">Syarat S, Sd, S (Sisi-Sudut-Sisi):</p>
                       <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} \text{ dan } \angle B = \angle Q \Rightarrow \triangle ABC \sim \triangle PQR" />
                     </div>
