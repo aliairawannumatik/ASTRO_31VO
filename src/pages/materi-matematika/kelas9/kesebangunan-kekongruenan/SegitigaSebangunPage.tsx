@@ -283,11 +283,12 @@ const DiagDiDalam = () => {
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#7dd3fc" fillOpacity=".35" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △ADE shaded */}
       <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#22c55e" fillOpacity=".40" stroke="#4ade80" strokeWidth="1.8"/>
-      {/* DE parallel marker */}
-      <line x1="120" y1="90" x2="124" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
-      <line x1="126" y1="90" x2="130" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
-      <line x1="112" y1="150" x2="116" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
-      <line x1="118" y1="150" x2="122" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
+      {/* DE parallel arrows – chevron pointing right at midpoint of DE (128,95) */}
+      <path d="M 122,92 L 127,95 L 122,98" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinejoin="round"/>
+      <path d="M 128,92 L 133,95 L 128,98" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinejoin="round"/>
+      {/* BC parallel arrows – chevron pointing right at midpoint of BC (128,155) */}
+      <path d="M 122,152 L 127,155 L 122,158" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinejoin="round"/>
+      <path d="M 128,152 L 133,155 L 128,158" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinejoin="round"/>
       {/* Proportion ticks – single on AD & DB (same), single on AE & EC (same) */}
       {/* AD */}
       <line x1="93" y1="52" x2="97" y2="56" stroke="#fb923c" strokeWidth="1.5"/>
