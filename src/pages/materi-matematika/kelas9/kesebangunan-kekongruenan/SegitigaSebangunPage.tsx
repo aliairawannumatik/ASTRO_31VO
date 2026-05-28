@@ -489,12 +489,6 @@ const InteraktifSebangunDemo = () => {
     );
   };
 
-  // Integer labels for T2: multiply T1 sides by scale, round
-  const T2 = {
-    ab: Math.round(T1.ab * scale),
-    bc: Math.round(T1.bc * scale),
-    ca: Math.round(T1.ca * scale),
-  };
   const k = scale % 1 === 0 ? scale.toString() : scale.toFixed(2);
 
   return (
@@ -548,7 +542,7 @@ const InteraktifSebangunDemo = () => {
         <TriangleGroup
           B={B2} C={C2} A={A2}
           strokeColor="#4ade80" textColor="#86efac"
-          labels={{ v1: 'P', v2: 'Q', v3: 'R', ab: T2.ab.toString(), bc: T2.bc.toString(), ca: T2.ca.toString() }}
+          labels={{ v1: 'P', v2: 'Q', v3: 'R', ab: (T1.ab * scale).toFixed(1), bc: (T1.bc * scale).toFixed(1), ca: (T1.ca * scale).toFixed(1) }}
         />
         <text x={(B2.x + C2.x) / 2 - 12} y={B2.y + 22} fontSize="8" fill="#86efac">△PQR</text>
 
@@ -661,17 +655,17 @@ const SegitigaSebangunPage = () => {
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
                   <div className="space-y-3 font-body text-sm text-white/80">
                     <div className="bg-slate-900/60 rounded-lg p-3">
-                      <p className="text-green-300 font-semibold mb-1">Syarat SdSd (Sudut-Sudut):</p>
+                      <p className="text-green-300 font-semibold mb-1">Syarat Sd, Sd (Sudut-Sudut):</p>
                       <p>Jika dua pasang sudut yang bersesuaian dari dua segitiga sama besar, maka sudut ketiga otomatis sama (total sudut = 180°), sehingga kedua segitiga <strong>sebangun</strong>.</p>
-                      <BlockMath math="\text{Sd }A = \text{Sd }P \text{ dan } \text{Sd }B = \text{Sd }Q \Rightarrow \triangle ABC \sim \triangle PQR" />
+                      <BlockMath math="\angle A = \angle P \text{ dan } \angle B = \angle Q \Rightarrow \triangle ABC \sim \triangle PQR" />
                     </div>
                     <div className="bg-slate-900/60 rounded-lg p-3">
-                      <p className="text-blue-300 font-semibold mb-1">Syarat SSS (Sisi-Sisi-Sisi):</p>
+                      <p className="text-blue-300 font-semibold mb-1">Syarat S, S, S (Sisi-Sisi-Sisi):</p>
                       <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} = \frac{CA}{RP} \Rightarrow \triangle ABC \sim \triangle PQR" />
                     </div>
                     <div className="bg-slate-900/60 rounded-lg p-3">
-                      <p className="text-purple-300 font-semibold mb-1">Syarat SSdS (Sisi-Sudut-Sisi):</p>
-                      <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} \text{ dan } \text{Sd }B = \text{Sd }Q \Rightarrow \triangle ABC \sim \triangle PQR" />
+                      <p className="text-purple-300 font-semibold mb-1">Syarat S, Sd, S (Sisi-Sudut-Sisi):</p>
+                      <BlockMath math="\frac{AB}{PQ} = \frac{BC}{QR} \text{ dan } \angle B = \angle Q \Rightarrow \triangle ABC \sim \triangle PQR" />
                     </div>
                   </div>
                 </div>
