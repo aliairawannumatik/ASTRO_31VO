@@ -72,39 +72,51 @@ const DiagramGarisSejajar = () => (
 );
 
 const DiagramContoh1 = () => (
-  <svg viewBox="0 0 340 175" className="w-full max-w-lg mx-auto">
-    {/* △ABC: A=(15,148), B=(100,148), C=(72,76) */}
-    <polygon points="15,148 100,148 72,76" fill="#3b82f6" fillOpacity="0.28" stroke="#60a5fa" strokeWidth="2.5"/>
-    <text x="2"   y="150" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
-    <text x="104" y="150" fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
-    <text x="67"  y="69"  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
-    {/* Arcs △ABC */}
-    <path d="M 29 148 A 14 14 0 0 1 24.3 136.8" fill="none" stroke="#f97316" strokeWidth="2"/>
-    <path d="M 86 148 A 14 14 0 0 0 95.5 135.5" fill="none" stroke="#22c55e" strokeWidth="2"/>
-    <path d="M 63.5 86.8 A 14 14 0 0 1 77.5 89.2" fill="none" stroke="#a855f7" strokeWidth="2"/>
-    {/* Angle labels */}
-    <text x="31" y="137" fontSize="11" fill="#f97316" fontWeight="bold">50°</text>
-    <text x="77" y="137" fontSize="11" fill="#22c55e" fontWeight="bold">70°</text>
-    <text x="58" y="104" fontSize="11" fill="#a855f7" fontWeight="bold">60°</text>
-    <text x="57" y="165" textAnchor="middle" fontSize="12" fill="#93c5fd" fontWeight="bold">△ABC</text>
+  /* Right triangle: A=(305,15) top-right, B=(15,205) bottom-left, C=(305,205) bottom-right (right angle).
+     AC vertical (right side) divided 6:4:2.  AB hypotenuse (left side) divided a:8:b.
+     t1=5/12 → F1=(184,94), E1=(305,94)
+     t2=10/12 → F2=(63,173), E2=(305,173)
+     Base: B→foot(63,205)=c, foot→C=20  */
+  <svg viewBox="0 0 340 240" className="w-full max-w-lg mx-auto">
+    {/* Main right triangle */}
+    <polygon points="305,15 15,205 305,205" fill="#3b82f6" fillOpacity="0.12" stroke="#60a5fa" strokeWidth="2.5"/>
+    {/* Right-angle mark at C */}
+    <polyline points="295,205 295,195 305,195" fill="none" stroke="#60a5fa" strokeWidth="1.8"/>
 
-    {/* △PQR: P=(168,148), Q=(295,148), R=(258,44) */}
-    <polygon points="168,148 295,148 258,44" fill="#22c55e" fillOpacity="0.22" stroke="#4ade80" strokeWidth="2.5"/>
-    <text x="154" y="150" fontSize="12" fill="#86efac" fontWeight="bold">P</text>
-    <text x="298" y="150" fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
-    <text x="254" y="37"  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
-    {/* Arcs △PQR */}
-    <path d="M 184 148 A 16 16 0 0 1 178.5 135.4" fill="none" stroke="#f97316" strokeWidth="2"/>
-    <path d="M 279 148 A 16 16 0 0 0 290.2 133.2" fill="none" stroke="#22c55e" strokeWidth="2"/>
-    <path d="M 248.2 57.3 A 16 16 0 0 1 265.2 60.2" fill="none" stroke="#a855f7" strokeWidth="2"/>
-    {/* Angle labels */}
-    <text x="186" y="136" fontSize="11" fill="#f97316" fontWeight="bold">50°</text>
-    <text x="271" y="134" fontSize="11" fill="#22c55e" fontWeight="bold">70°</text>
-    <text x="245" y="77"  fontSize="11" fill="#a855f7" fontWeight="bold">60°</text>
-    <text x="231" y="165" textAnchor="middle" fontSize="12" fill="#86efac" fontWeight="bold">△PQR</text>
+    {/* First parallel line F1(184,94)→E1(305,94) */}
+    <line x1="184" y1="94" x2="305" y2="94" stroke="#4ade80" strokeWidth="2.2"/>
+    {/* Second parallel line F2(63,173)→E2(305,173) */}
+    <line x1="63" y1="173" x2="305" y2="173" stroke="#4ade80" strokeWidth="2.2"/>
 
-    {/* Tilde */}
-    <text x="133" y="108" fontSize="22" fill="#facc15" fontWeight="bold">~</text>
+    {/* Parallel chevron arrows — first line */}
+    <path d="M 237,91 L 242,94 L 237,97" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round"/>
+    <path d="M 244,91 L 249,94 L 244,97" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round"/>
+    {/* Parallel chevron arrows — second line */}
+    <path d="M 177,170 L 182,173 L 177,176" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round"/>
+    <path d="M 184,170 L 189,173 L 184,176" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round"/>
+
+    {/* Dashed drop-line from F2 to base (shows c/20 division) */}
+    <line x1="63" y1="173" x2="63" y2="205" stroke="#a855f7" strokeWidth="1.5" strokeDasharray="4,3"/>
+
+    {/* Left-side (hypotenuse AB) segment labels */}
+    <text x="252" y="46"  fontSize="13" fill="#f97316" fontWeight="bold" textAnchor="middle">a</text>
+    <text x="110" y="132" fontSize="13" fill="#f97316" fontWeight="bold" textAnchor="middle">8</text>
+    <text x="26"  y="194" fontSize="13" fill="#f97316" fontWeight="bold">b</text>
+
+    {/* Right-side (AC vertical) segment labels */}
+    <text x="313" y="58"  fontSize="13" fill="#60a5fa" fontWeight="bold">6</text>
+    <text x="313" y="137" fontSize="13" fill="#60a5fa" fontWeight="bold">4</text>
+    <text x="313" y="192" fontSize="13" fill="#60a5fa" fontWeight="bold">2</text>
+
+    {/* Base dimension lines */}
+    <line x1="15"  y1="212" x2="15"  y2="222" stroke="#64748b" strokeWidth="1.2"/>
+    <line x1="63"  y1="212" x2="63"  y2="222" stroke="#64748b" strokeWidth="1.2"/>
+    <line x1="305" y1="212" x2="305" y2="222" stroke="#64748b" strokeWidth="1.2"/>
+    <line x1="15"  y1="217" x2="63"  y2="217" stroke="#64748b" strokeWidth="1.2"/>
+    <line x1="63"  y1="217" x2="305" y2="217" stroke="#64748b" strokeWidth="1.2"/>
+    {/* Base labels */}
+    <text x="39"  y="232" textAnchor="middle" fontSize="13" fill="#c084fc" fontWeight="bold">c</text>
+    <text x="184" y="232" textAnchor="middle" fontSize="13" fill="#fde68a" fontWeight="bold">20</text>
   </svg>
 );
 
@@ -841,7 +853,7 @@ const SegitigaSebangunPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Diketahui △ABC dengan <InlineMath math="\text{Sd }A = 50°" /> dan <InlineMath math="\text{Sd }B = 70°" />. Diketahui juga △PQR dengan <InlineMath math="\text{Sd }P = 50°" /> dan <InlineMath math="\text{Sd }Q = 70°" />. Apakah kedua segitiga sebangun? Tentukan pasangan sudut yang bersesuaian!
+                      Pada gambar di samping, dua garis sejajar memotong sisi-sisi segitiga. Diketahui ukuran ruas garis seperti pada gambar. Hitunglah nilai <InlineMath math="a" />, <InlineMath math="b" />, dan <InlineMath math="c" />!
                     </p>
                   </div>
                   <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3">
@@ -850,19 +862,17 @@ const SegitigaSebangunPage = () => {
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Cari sudut ketiga masing-masing:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="\text{Sd }C = 180° - 50° - 70° = 60°" />
-                        <BlockMath math="\text{Sd }R = 180° - 50° - 70° = 60°" />
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p>Karena dua garis sejajar BC memotong kedua sisi segitiga, berlaku <strong>Dalil Garis Sejajar</strong> — ruas-ruas yang bersesuaian berbanding sama.</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p className="text-xs text-slate-400 font-semibold">Mencari a (kiri atas : kiri tengah = kanan atas : kanan tengah):</p>
+                        <BlockMath math="\frac{a}{8} = \frac{6}{4} \Rightarrow a = \frac{6}{4} \times 8 = 12" />
+                        <p className="text-xs text-slate-400 font-semibold">Mencari b (kiri bawah : kiri tengah = kanan bawah : kanan tengah):</p>
+                        <BlockMath math="\frac{b}{8} = \frac{2}{4} \Rightarrow b = \frac{2}{4} \times 8 = 4" />
+                        <p className="text-xs text-slate-400 font-semibold">Mencari c (perpanjangan alas terhadap garis sejajar kedua):</p>
+                        <BlockMath math="\frac{c}{20} = \frac{2}{6+4} = \frac{2}{10} \Rightarrow c = \frac{2}{10} \times 20 = 4" />
                       </div>
-                      <p>Ketiga pasang sudut sama besar (<strong>syarat SdSd</strong> terpenuhi):</p>
-                      <div className="bg-slate-900/50 rounded p-3 text-sm space-y-1">
-                        <p><InlineMath math="\text{Sd }A = \text{Sd }P = 50°" /></p>
-                        <p><InlineMath math="\text{Sd }B = \text{Sd }Q = 70°" /></p>
-                        <p><InlineMath math="\text{Sd }C = \text{Sd }R = 60°" /></p>
-                      </div>
-                      <p><strong className="text-green-300">△ABC ~ △PQR ✓</strong></p>
+                      <p><strong className="text-green-300">a = 12,  b = 4,  c = 4 ✓</strong></p>
                     </div>
                   </div>
                 </div>
