@@ -177,39 +177,123 @@ const DiagramContoh2 = () => {
   );
 };
 
-const DiagramContoh3 = () => {
-  const A = { x: 150, y: 18 }, B = { x: 25, y: 172 }, C = { x: 275, y: 172 };
-  const D = { x: 118, y: 55 }; // AD:AB = 3:12 = 1/4
-  const E = { x: 182, y: 55 }; // AE:AC = 4:16 = 1/4
+/* Tick mark helper: draws a cross (×) at midpoint of segment for equal-length marking */
+const CrossTick = ({ x1,y1,x2,y2,color="white",offset=0 }:{x1:number,y1:number,x2:number,y2:number,color?:string,offset?:number}) => {
+  const mx=(x1+x2)/2, my=(y1+y2)/2;
+  const dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy);
+  const ux=dx/len, uy=dy/len, px=-uy, py=ux; // perpendicular
+  const s=5;
+  // shift along segment by offset
+  const cx=mx+ux*offset, cy=my+uy*offset;
   return (
-    <svg viewBox="0 0 310 195" className="w-full max-w-sm mx-auto">
-      {/* △ADE shaded */}
-      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#facc15" fillOpacity="0.14" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3"/>
-      {/* △ABC */}
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.18" stroke="#60a5fa" strokeWidth="2.5"/>
-      {/* DE parallel line */}
-      <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#facc15" strokeWidth="2.5"/>
-      {/* Parallel tick on DE (1 tick) */}
-      <line x1="147" y1="49" x2="151" y2="61" stroke="#facc15" strokeWidth="2"/>
-      {/* Parallel ticks on BC (2 ticks) */}
-      <line x1="143" y1="165" x2="147" y2="179" stroke="#facc15" strokeWidth="2"/>
-      <line x1="153" y1="165" x2="157" y2="179" stroke="#facc15" strokeWidth="2"/>
+    <g>
+      <line x1={cx-ux*s} y1={cy-uy*s} x2={cx+ux*s} y2={cy+uy*s} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1={cx-px*s} y1={cy-py*s} x2={cx+px*s} y2={cy+py*s} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+    </g>
+  );
+};
+
+/* Double hash mark: two parallel ticks perpendicular to segment */
+const HashTick = ({ x1,y1,x2,y2,color="white" }:{x1:number,y1:number,x2:number,y2:number,color?:string}) => {
+  const mx=(x1+x2)/2, my=(y1+y2)/2;
+  const dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy);
+  const ux=dx/len, uy=dy/len, px=-uy, py=ux;
+  const s=5, gap=3.5;
+  return (
+    <g>
+      <line x1={mx-px*s-ux*gap} y1={my-py*s-uy*gap} x2={mx+px*s-ux*gap} y2={my+py*s-uy*gap} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1={mx-px*s+ux*gap} y1={my-py*s+uy*gap} x2={mx+px*s+ux*gap} y2={my+py*s+uy*gap} stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+    </g>
+  );
+};
+
+/* Chevron arrow (→) along a horizontal segment, pointing right, at centre */
+const ArrowRight = ({ cx,cy,color="#fbbf24" }:{cx:number,cy:number,color?:string}) => (
+  <path d={`M ${cx-7},${cy-5} L ${cx+7},${cy} L ${cx-7},${cy+5}`} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
+);
+
+const DiagramContoh3 = () => {
+  // Trapesium ABCD: A bottom-left, B bottom-right, C top-right, D top-left
+  // AB=51 (bottom), DC=36 (top). Parallel sides: AB // PQ // DC
+  // AP=12, PD=8, AD=20. P on AD, Q on BC.
+  const A={x:35, y:198}, B={x:290,y:198};
+  const D={x:75, y:38},  C={x:250,y:38};
+  // P divides AD: AP/AD = 12/20 = 3/5 from A
+  const P={x:Math.round(35+0.6*(75-35)), y:Math.round(198+0.6*(38-198))}; // (59,102)
+  // Q divides BC: BQ/BC = 12/20 = 3/5 from B
+  const Q={x:Math.round(290+0.6*(250-290)), y:Math.round(198+0.6*(38-198))}; // (266,102)
+  return (
+    <svg viewBox="0 0 330 230" className="w-full max-w-md mx-auto">
+      {/* Trapesium */}
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`}
+        fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2.2"/>
+      {/* PQ line */}
+      <line x1={P.x} y1={P.y} x2={Q.x} y2={Q.y} stroke="#4ade80" strokeWidth="2.2"/>
+
+      {/* Parallel arrows → on DC, PQ, AB */}
+      <ArrowRight cx={(D.x+C.x)/2} cy={D.y} color="#fbbf24"/>
+      <ArrowRight cx={(P.x+Q.x)/2} cy={P.y} color="#fbbf24"/>
+      <ArrowRight cx={(A.x+B.x)/2} cy={A.y} color="#fbbf24"/>
+
+      {/* Cross (×) tick marks on PD and QC — equal upper segments */}
+      <CrossTick x1={P.x} y1={P.y} x2={D.x} y2={D.y} color="#f97316"/>
+      <CrossTick x1={Q.x} y1={Q.y} x2={C.x} y2={C.y} color="#f97316"/>
+      {/* Double hash (≠) tick marks on AP and BQ — equal lower segments */}
+      <HashTick x1={A.x} y1={A.y} x2={P.x} y2={P.y} color="#c084fc"/>
+      <HashTick x1={B.x} y1={B.y} x2={Q.x} y2={Q.y} color="#c084fc"/>
+
       {/* Vertex labels */}
-      <text x="146" y="10"  fontSize="13" fill="#93c5fd" fontWeight="bold" textAnchor="middle">A</text>
-      <text x="10"  y="186" fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x="279" y="186" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x="100" y="57"  fontSize="12" fill="#fde68a" fontWeight="bold">D</text>
-      <text x="187" y="57"  fontSize="12" fill="#fde68a" fontWeight="bold">E</text>
-      {/* Side labels */}
-      <text x="110" y="33"  fontSize="11" fill="#f97316" fontWeight="bold">AD=3</text>
-      <text x="44"  y="122" fontSize="11" fill="#fb923c" fontWeight="bold">DB=9</text>
-      <text x="165" y="33"  fontSize="11" fill="#4ade80"  fontWeight="bold">AE=4</text>
-      <text x="220" y="122" fontSize="11" fill="#86efac"  fontWeight="bold">EC=12</text>
-      <text x="150" y="49"  fontSize="11" fill="#fde68a"  fontWeight="bold" textAnchor="middle">DE=3</text>
-      <text x="150" y="189" fontSize="11" fill="#93c5fd"  textAnchor="middle">BC = 12</text>
-      {/* Similar label top-right */}
-      <text x="268" y="42"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">△ADE</text>
-      <text x="268" y="56"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">~△ABC</text>
+      <text x={D.x-14} y={D.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={C.x+5}  y={C.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={P.x-16} y={P.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">P</text>
+      <text x={Q.x+5}  y={Q.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">Q</text>
+      <text x={A.x-14} y={A.y+14} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+5}  y={B.y+14} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+
+      {/* Dimension labels */}
+      <text x={(D.x+C.x)/2} y={D.y-7} fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">DC = 36 cm</text>
+      <text x={(A.x+B.x)/2} y={A.y+18} fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">AB = 51 cm</text>
+      <text x={P.x-38} y={(A.y+P.y)/2+4} fontSize="10" fill="#c084fc" fontWeight="bold">AP=12</text>
+      <text x={D.x-38} y={(D.y+P.y)/2+4} fontSize="10" fill="#f97316" fontWeight="bold">PD=8</text>
+      <text x={(P.x+Q.x)/2} y={P.y-8} fontSize="11" fill="#4ade80" fontWeight="bold" textAnchor="middle">PQ = ?</text>
+    </svg>
+  );
+};
+
+const DiagramContoh3b = () => {
+  // Same trapesium + diagonal BD + point M for pembahasan
+  const A={x:35, y:198}, B={x:290,y:198};
+  const D={x:75, y:38},  C={x:250,y:38};
+  const P={x:59, y:102};
+  const Q={x:266, y:102};
+  // M = intersection of BD with PQ (y=102)
+  // BD: B(290,198)→D(75,38). t=(102-198)/(38-198)=-96/-160=0.6 → x=290+0.6*(75-290)=290-129=161
+  const M={x:161, y:102};
+  return (
+    <svg viewBox="0 0 330 230" className="w-full max-w-md mx-auto">
+      {/* Trapesium */}
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`}
+        fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="2"/>
+      {/* PQ line */}
+      <line x1={P.x} y1={P.y} x2={Q.x} y2={Q.y} stroke="#4ade80" strokeWidth="2"/>
+      {/* Diagonal BD */}
+      <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#f97316" strokeWidth="1.8" strokeDasharray="6,3"/>
+      {/* Arrows → */}
+      <ArrowRight cx={(D.x+C.x)/2} cy={D.y} color="#fbbf24"/>
+      <ArrowRight cx={(P.x+Q.x)/2} cy={P.y} color="#fbbf24"/>
+      <ArrowRight cx={(A.x+B.x)/2} cy={A.y} color="#fbbf24"/>
+      {/* Vertex labels */}
+      <text x={D.x-14} y={D.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={C.x+5}  y={C.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={P.x-16} y={P.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">P</text>
+      <text x={Q.x+5}  y={Q.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">Q</text>
+      <text x={A.x-14} y={A.y+14} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+5}  y={B.y+14} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={M.x+5}  y={M.y+5}  fontSize="12" fill="#fbbf24" fontWeight="bold">M</text>
+      {/* △PDM shaded */}
+      <polygon points={`${P.x},${P.y} ${D.x},${D.y} ${M.x},${M.y}`} fill="#f97316" fillOpacity="0.18" stroke="#f97316" strokeWidth="1.2" strokeDasharray="4,2"/>
+      {/* △ADB shaded */}
+      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${B.x},${B.y}`} fill="#60a5fa" fillOpacity="0.12" stroke="#60a5fa" strokeWidth="1.2" strokeDasharray="4,2"/>
     </svg>
   );
 };
@@ -938,28 +1022,52 @@ const SegitigaSebangunPage = () => {
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white font-semibold">
+                      Memahirkan perhitungan panjang rusuk suatu bangun datar dalam kondisi sebangun
+                    </p>
                     <p className="font-body text-sm text-white">
-                      Pada △ABC, titik D pada AB dengan <InlineMath math="AD = 3" /> cm dan <InlineMath math="DB = 9" /> cm. Titik E pada AC. Diketahui DE // BC, <InlineMath math="BC = 12" /> cm. Tentukan panjang DE dan AE jika <InlineMath math="AC = 16" /> cm!
+                      Perhatikan gambar trapesium <em>ABCD</em> berikut.
                     </p>
                   </div>
                   <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3">
                     <p className="font-body text-xs font-semibold text-slate-300 mb-2">📐 ILUSTRASI:</p>
                     <DiagramContoh3 />
                   </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">
+                      Diketahui panjang <InlineMath math="AB = 51" /> cm, <InlineMath math="DC = 36" /> cm, <InlineMath math="AP = 12" /> cm, dan <InlineMath math="PD = 8" /> cm. Hitung panjang <InlineMath math="PQ" />.
+                    </p>
+                  </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Cari AB:</p>
+                      <p>
+                        Dari titik <em>D</em> ditarik garis lurus ke titik <em>B</em> atau titik <em>C</em> ke titik <em>A</em>.
+                        Pada pembahasan ini kita mengambil titik <em>D</em> ketitik <em>B</em> seperti terlihat pada gambar di samping.
+                        Garis <em>BD</em> memotong <em>PQ</em> di titik <em>M</em>. Berarti △<em>ADB</em> sebangun dengan △<em>PDM</em>.
+                        Berdasarkan aturan kesebangunan diperoleh:
+                      </p>
+                      <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 mb-2">
+                        <DiagramContoh3b />
+                      </div>
+                      <p><strong>Langkah 1:</strong> Cari AD:</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="AB = AD + DB = 3 + 9 = 12 \text{ cm}" />
+                        <BlockMath math="AD = AP + PD = 12 + 8 = 20 \text{ cm}" />
                       </div>
-                      <p><strong>Langkah 2:</strong> Gunakan △ADE ~ △ABC:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="\frac{AD}{AB} = \frac{DE}{BC} \Rightarrow \frac{3}{12} = \frac{DE}{12} \Rightarrow DE = 3 \text{ cm}" />
-                        <BlockMath math="\frac{AD}{AB} = \frac{AE}{AC} \Rightarrow \frac{3}{12} = \frac{AE}{16} \Rightarrow AE = 4 \text{ cm}" />
+                      <p><strong>Langkah 2:</strong> Karena △<em>ADB</em> ~ △<em>PDM</em>, cari PM:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{PD}{AD} = \frac{PM}{AB} \Rightarrow \frac{8}{20} = \frac{PM}{51} \Rightarrow PM = \frac{8 \times 51}{20} = \frac{102}{5}" />
                       </div>
-                      <p><strong className="text-primary">DE = 3 cm dan AE = 4 cm.</strong></p>
+                      <p><strong>Langkah 3:</strong> Karena <em>MQ</em> // <em>DC</em> dan △<em>BMQ</em> ~ △<em>BDC</em>, cari MQ:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{BM}{BD} = \frac{3}{5} \Rightarrow \frac{MQ}{DC} = \frac{3}{5} \Rightarrow MQ = \frac{3 \times 36}{5} = \frac{108}{5}" />
+                      </div>
+                      <p><strong>Langkah 4:</strong> Hitung PQ:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="PQ = PM + MQ = \frac{102}{5} + \frac{108}{5} = \frac{210}{5} = 42 \text{ cm}" />
+                      </div>
+                      <p><strong className="text-yellow-300">PQ = 42 cm.</strong></p>
                     </div>
                   </div>
                 </div>
