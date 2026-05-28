@@ -415,7 +415,7 @@ const PerbandinganRusukSikuSikuPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-sm text-white">△ABC siku-siku di A, AD ⊥ BC. Diketahui luas △ABD = 96 cm² dan BD = 12 cm. Hitunglah panjang AD, BC, AC, dan luas △ABC!</p>
+                    <p className="font-body text-sm text-white">△ABC siku-siku di A, AD ⊥ BC. Diketahui luas △ABD = 54 cm² dan BD = 9 cm. Hitunglah panjang AD, BC, AC, dan luas △ABC!</p>
                     {/* Diagram — △ABC siku-siku di A, D pada BC dekat B, △ABD di-shading */}
                     <svg viewBox="0 0 260 218" className="w-full max-w-xs mx-auto">
                       {/* Shading △ABD (merah) */}
@@ -435,10 +435,10 @@ const PerbandinganRusukSikuSikuPage = () => {
                       <text x="36"  y="197" fontSize="13" fill="#ffffff" fontWeight="bold">A</text>
                       <text x="178" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">C</text>
                       <text x="101" y="76"  fontSize="13" fill="#ffffff" fontWeight="bold">D</text>
-                      {/* Label BD = 12 */}
-                      <text x="62"  y="52"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">12</text>
-                      {/* Label luas △ABD = 96 cm² di dalam shading merah */}
-                      <text x="63"  y="108" fontSize="10" fill="#fca5a5" fontWeight="bold" textAnchor="middle">96 cm²</text>
+                      {/* Label BD = 9 */}
+                      <text x="62"  y="52"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">9</text>
+                      {/* Label luas △ABD = 54 cm² di dalam shading merah */}
+                      <text x="63"  y="108" fontSize="10" fill="#fca5a5" fontWeight="bold" textAnchor="middle">54 cm²</text>
                     </svg>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
@@ -446,17 +446,17 @@ const PerbandinganRusukSikuSikuPage = () => {
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
                         <p><strong>(a) Cari AD:</strong></p>
-                        <BlockMath math="L_{ABD} = \frac{AD \times BD}{2} \Rightarrow 96 = \frac{AD \times 12}{2} \Rightarrow AD = 16 \text{ cm}" />
+                        <BlockMath math="L_{ABD} = \frac{AD \times BD}{2} \Rightarrow 54 = \frac{AD \times 9}{2} \Rightarrow AD = 12 \text{ cm}" />
                         <p><strong>(b) Cari DC:</strong></p>
-                        <BlockMath math="AD^2 = BD \times DC \Rightarrow 256 = 12 \times DC \Rightarrow DC = \frac{64}{3} \approx 21{,}3 \text{ cm}" />
+                        <BlockMath math="AD^2 = BD \times DC \Rightarrow 144 = 9 \times DC \Rightarrow DC = 16 \text{ cm}" />
                         <p><strong>(c) Cari BC dan AC:</strong></p>
-                        <BlockMath math="BC = BD + DC = 12 + \tfrac{64}{3} = \tfrac{100}{3} \text{ cm}" />
-                        <BlockMath math="AC^2 = DC \times BC = \tfrac{64}{3} \times \tfrac{100}{3} = \tfrac{6400}{9}" />
-                        <BlockMath math="AC = \frac{80}{3} \approx 26{,}7 \text{ cm}" />
+                        <BlockMath math="BC = BD + DC = 9 + 16 = 25 \text{ cm}" />
+                        <BlockMath math="AC^2 = DC \times BC = 16 \times 25 = 400" />
+                        <BlockMath math="AC = \sqrt{400} = 20 \text{ cm}" />
                         <p><strong>(d) Luas △ABC:</strong></p>
-                        <BlockMath math="L = \frac{BC \times AD}{2} = \frac{\tfrac{100}{3} \times 16}{2} = \frac{800}{3} \approx 266{,}7 \text{ cm}^2" />
+                        <BlockMath math="L = \frac{BC \times AD}{2} = \frac{25 \times 12}{2} = 150 \text{ cm}^2" />
                       </div>
-                      <p><strong className="text-primary">AD=16 cm, DC≈21,3 cm, BC≈33,3 cm, AC≈26,7 cm, L≈266,7 cm².</strong></p>
+                      <p><strong className="text-primary">AD = 12 cm, DC = 16 cm, BC = 25 cm, AC = 20 cm, L = 150 cm².</strong></p>
                     </div>
                   </div>
                 </div>
