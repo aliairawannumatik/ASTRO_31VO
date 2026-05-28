@@ -362,19 +362,49 @@ const PerbandinganRusukSikuSikuPage = () => {
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">△ABC siku-siku di A dengan <InlineMath math="AB = 6" /> cm dan <InlineMath math="AC = 8" /> cm. AD adalah garis tinggi ke BC. Tentukan panjang BC, BD, DC, dan AD!</p>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Pada gambar berikut, panjang <InlineMath math="AB = 12" /> cm dan <InlineMath math="BC = 15" /> cm. Panjang <InlineMath math="AD" /> adalah . . . .</p>
+                    {/* Diagram — △ABC siku-siku di A, A=kiri atas, B=kanan atas, C=bawah kiri, D pada BC dengan AD⊥BC */}
+                    <svg viewBox="0 0 260 185" className="w-full max-w-xs mx-auto">
+                      {/* Segitiga ABC */}
+                      <polygon points="60,30 180,30 60,120" fill="none" stroke="#facc15" strokeWidth="2"/>
+                      {/* Garis tinggi AD */}
+                      <line x1="60" y1="30" x2="103" y2="88" stroke="#facc15" strokeWidth="1.8"/>
+                      {/* Sudut siku-siku di A */}
+                      <path d="M 70,30 L 70,40 L 60,40" fill="none" stroke="#60a5fa" strokeWidth="1.8"/>
+                      {/* Sudut siku-siku di D (AD⊥BC): p1 ke C, corner, p2 ke A */}
+                      <path d="M 96.6,92.8 L 91.8,86.4 L 98.2,81.6" fill="none" stroke="#60a5fa" strokeWidth="1.8"/>
+                      {/* Label vertex */}
+                      <text x="44"  y="28"  fontSize="14" fill="#ffffff" fontWeight="bold">A</text>
+                      <text x="183" y="28"  fontSize="14" fill="#ffffff" fontWeight="bold">B</text>
+                      <text x="44"  y="133" fontSize="14" fill="#ffffff" fontWeight="bold">C</text>
+                      <text x="107" y="92"  fontSize="14" fill="#ffffff" fontWeight="bold">D</text>
+                      {/* Label sisi */}
+                      <text x="120" y="22"  fontSize="12" fill="#ffffff" fontWeight="bold" textAnchor="middle">12</text>
+                      <text x="140" y="72"  fontSize="12" fill="#ffffff" fontWeight="bold" textAnchor="middle">15</text>
+                    </svg>
+                    {/* Pilihan jawaban */}
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                      {[["A", "5,4 cm"], ["B", "6 cm"], ["C", "7,2 cm"], ["D", "9,6 cm"]].map(([opt, val]) => (
+                        <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 font-body text-sm ${opt === "C" ? "bg-green-500/20 border border-green-500/50 text-green-300 font-bold" : "bg-slate-700/40 text-white/70"}`}>
+                          <span className="font-bold">{opt}.</span> {val}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="BC = \sqrt{AB^2 + AC^2} = \sqrt{36+64} = 10 \text{ cm}" />
-                        <BlockMath math="BD = \frac{AB^2}{BC} = \frac{36}{10} = 3{,}6 \text{ cm}" />
-                        <BlockMath math="DC = \frac{AC^2}{BC} = \frac{64}{10} = 6{,}4 \text{ cm}" />
-                        <BlockMath math="AD = \frac{AB \times AC}{BC} = \frac{6 \times 8}{10} = 4{,}8 \text{ cm}" />
+                      <p>△ABC siku-siku di A, AD ⊥ BC, dengan AB = 12 cm, BC = 15 cm.</p>
+                      <p><strong>Langkah 1 — Cari AC:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="AC = \sqrt{BC^2 - AB^2} = \sqrt{225 - 144} = \sqrt{81} = 9 \text{ cm}" />
                       </div>
-                      <p><strong className="text-yellow-300">BC=10 cm, BD=3,6 cm, DC=6,4 cm, AD=4,8 cm.</strong></p>
+                      <p><strong>Langkah 2 — Cari AD (garis tinggi ke sisi miring):</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="AD = \frac{AB \times AC}{BC} = \frac{12 \times 9}{15} = \frac{108}{15} = 7{,}2 \text{ cm}" />
+                      </div>
+                      <p><strong className="text-yellow-300">Jawaban: C. AD = 7,2 cm.</strong></p>
                     </div>
                   </div>
                 </div>
