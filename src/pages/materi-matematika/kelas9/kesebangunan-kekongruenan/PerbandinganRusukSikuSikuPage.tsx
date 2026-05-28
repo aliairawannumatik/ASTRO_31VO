@@ -306,24 +306,53 @@ const PerbandinganRusukSikuSikuPage = () => {
                     <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">△ABC siku-siku di A, AD garis tinggi ke BC. Diketahui <InlineMath math="BD = 4" /> cm dan <InlineMath math="DC = 9" /> cm. Tentukan panjang AD dan AB!</p>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Pada gambar berikut, diketahui panjang <InlineMath math="BD = 3" /> cm dan <InlineMath math="CD = 12" /> cm.</p>
+                    {/* Diagram — △CAB siku-siku di A, D pada CB dengan AD⊥CB */}
+                    <svg viewBox="0 0 270 215" className="w-full max-w-xs mx-auto">
+                      {/* Segitiga CAB */}
+                      <polygon points="80,20 80,180 210,180" fill="none" stroke="#cbd5e1" strokeWidth="1.8"/>
+                      {/* Garis tinggi AD */}
+                      <line x1="80" y1="180" x2="158" y2="116" stroke="#cbd5e1" strokeWidth="1.5"/>
+                      {/* Sudut siku-siku di A */}
+                      <path d="M 80,170 L 90,170 L 90,180" fill="none" stroke="#cbd5e1" strokeWidth="1.5"/>
+                      {/* Sudut siku-siku di D: p1 ke B, corner, p2 ke A */}
+                      <path d="M 163.7,123.0 L 156.7,128.7 L 151.0,121.7" fill="none" stroke="#cbd5e1" strokeWidth="1.5"/>
+                      {/* Label vertex */}
+                      <text x="72" y="16"  fontSize="14" fill="#e2e8f0" fontWeight="bold">C</text>
+                      <text x="62" y="198" fontSize="14" fill="#e2e8f0" fontWeight="bold">A</text>
+                      <text x="213" y="198" fontSize="14" fill="#e2e8f0" fontWeight="bold">B</text>
+                      <text x="162" y="113" fontSize="14" fill="#e2e8f0" fontWeight="bold">D</text>
+                      {/* Label sisi: BD=3, CD=12 */}
+                      <text x="192" y="141" fontSize="12" fill="#fde68a" fontWeight="bold" textAnchor="middle">3</text>
+                      <text x="118" y="63"  fontSize="12" fill="#fde68a" fontWeight="bold" textAnchor="middle">12</text>
+                    </svg>
+                    <p className="font-body text-sm text-white text-center">Panjang <InlineMath math="AD" />, <InlineMath math="AB" />, dan <InlineMath math="AC" /> berturut-turut adalah . . . .</p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Cari AD (garis tinggi):</strong></p>
+                      <p>△CAB siku-siku di A, AD ⊥ CB, dengan BD = 3 cm dan CD = 12 cm.</p>
+                      <p><strong>Langkah 1 — Cari BC:</strong></p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="AD^2 = BD \times DC = 4 \times 9 = 36" />
+                        <BlockMath math="BC = BD + CD = 3 + 12 = 15 \text{ cm}" />
+                      </div>
+                      <p><strong>Langkah 2 — Cari AD (garis tinggi):</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="AD^2 = BD \times CD = 3 \times 12 = 36" />
                         <BlockMath math="AD = \sqrt{36} = 6 \text{ cm}" />
                       </div>
-                      <p><strong>Cari AB (proyeksi alas):</strong></p>
+                      <p><strong>Langkah 3 — Cari AB:</strong></p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="BC = BD + DC = 4 + 9 = 13 \text{ cm}" />
-                        <BlockMath math="AB^2 = BD \times BC = 4 \times 13 = 52" />
-                        <BlockMath math="AB = \sqrt{52} = 2\sqrt{13} \approx 7{,}2 \text{ cm}" />
+                        <BlockMath math="AB^2 = BD \times BC = 3 \times 15 = 45" />
+                        <BlockMath math="AB = \sqrt{45} = 3\sqrt{5} \text{ cm}" />
                       </div>
-                      <p><strong className="text-green-300">AD = 6 cm, AB = 2√13 cm.</strong></p>
+                      <p><strong>Langkah 4 — Cari AC:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="AC^2 = CD \times BC = 12 \times 15 = 180" />
+                        <BlockMath math="AC = \sqrt{180} = 6\sqrt{5} \text{ cm}" />
+                      </div>
+                      <p><strong className="text-green-300">AD = 6 cm, AB = 3√5 cm, AC = 6√5 cm.</strong></p>
                     </div>
                   </div>
                 </div>
