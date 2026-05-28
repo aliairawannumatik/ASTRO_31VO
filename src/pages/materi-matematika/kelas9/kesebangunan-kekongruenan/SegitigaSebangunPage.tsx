@@ -282,7 +282,7 @@ const DiagDiDalam = () => {
       {/* big △ABC */}
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#7dd3fc" fillOpacity=".35" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △ADE shaded */}
-      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#f0abfc" fillOpacity=".42" stroke="#d946ef" strokeWidth="1.8"/>
+      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#22c55e" fillOpacity=".40" stroke="#4ade80" strokeWidth="1.8"/>
       {/* DE parallel marker */}
       <line x1="120" y1="90" x2="124" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
       <line x1="126" y1="90" x2="130" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
@@ -308,10 +308,10 @@ const DiagDiDalam = () => {
       <text x={A.x-4} y={A.y-5}  fontSize="8.5" fill="#fde68a" fontWeight="bold">A</text>
       <text x={B.x-11} y={B.y+10} fontSize="8.5" fill="#93c5fd" fontWeight="bold">B</text>
       <text x={C.x+3}  y={C.y+10} fontSize="8.5" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x={D.x-11} y={D.y-3}  fontSize="8.5" fill="#e879f9" fontWeight="bold">D</text>
-      <text x={E.x+3}  y={E.y-3}  fontSize="8.5" fill="#e879f9" fontWeight="bold">E</text>
+      <text x={D.x-11} y={D.y-3}  fontSize="8.5" fill="#4ade80" fontWeight="bold">D</text>
+      <text x={E.x+3}  y={E.y-3}  fontSize="8.5" fill="#4ade80" fontWeight="bold">E</text>
       <text x="145" y="87" fontSize="7" fill="#fbbf24">DE // BC</text>
-      <text x="88"  y="130" fontSize="7.5" fill="#e879f9">△ADE</text>
+      <text x="88"  y="130" fontSize="7.5" fill="#4ade80">△ADE</text>
       <text x="88"  y="142" fontSize="7.5" fill="#93c5fd">~△ABC</text>
     </svg>
   );
@@ -370,9 +370,9 @@ const DiagSudutBerimpit = () => {
       <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#7dd3fc" fillOpacity=".35" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △PTS */}
       <polygon points={`${P.x},${P.y} ${T.x},${T.y} ${S.x},${S.y}`} fill="#f0abfc" fillOpacity=".42" stroke="#d946ef" strokeWidth="1.8"/>
-      {/* shared ∠P – two concentric arcs orange */}
+      {/* shared ∠P – outer arc (△PRQ) orange, inner arc (△PTS) green */}
       <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
-      <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       {/* ∠T = ∠Q – green arcs */}
       <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,15)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
