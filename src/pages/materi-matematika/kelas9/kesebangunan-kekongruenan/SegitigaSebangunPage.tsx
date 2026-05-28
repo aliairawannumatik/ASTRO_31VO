@@ -127,40 +127,56 @@ const DiagramContoh1 = () => (
 );
 
 const DiagramContoh2 = () => {
-  // Right angle at A. A=bottom-left, B=top-left, C=bottom-right
-  // AD=15, DC=10, AC=25. DE//AB (DE⊥AC). DE=8, EC=12, BE=18(x), AB=20(y)
-  const A = { x: 30, y: 185 }, B = { x: 30, y: 25 }, C = { x: 300, y: 185 };
-  // D on AC at 15/25 = 0.6 from A
-  const D = { x: 192, y: 185 };
-  // E on BC at t=0.6 from B
-  const E = { x: 192, y: 121 };
+  // Oblique triangle: B top-center, A bottom-left, C bottom-right
+  // AD=15, DC=10, AC=25. DE⊥AC (vertical). DE=8, EC=12, BE=18(x), AB=20(y)
+  const A = { x: 28,  y: 195 };
+  const B = { x: 105, y: 18  };
+  const C = { x: 308, y: 195 };
+  // D on AC: AD/AC = 15/25 = 0.6
+  const D = { x: Math.round(28 + 0.6 * 280), y: 195 }; // x=196
+  // E directly above D on line BC (DE ⊥ AC)
+  // BC param: t where x=196 → t=(196-105)/(308-105)=91/203≈0.448
+  const tE = (196 - 105) / (308 - 105);
+  const E = { x: 196, y: Math.round(18 + tE * (195 - 18)) }; // y≈97
+
+  // Arc helper (inline, same logic as ap)
+  const arc = (cx:number,cy:number,p1x:number,p1y:number,p2x:number,p2y:number,r:number) => {
+    const d1x=p1x-cx,d1y=p1y-cy,l1=Math.sqrt(d1x*d1x+d1y*d1y);
+    const d2x=p2x-cx,d2y=p2y-cy,l2=Math.sqrt(d2x*d2x+d2y*d2y);
+    const u1x=d1x/l1,u1y=d1y/l1,u2x=d2x/l2,u2y=d2y/l2;
+    const sw=(u1x*u2y-u1y*u2x)>0?1:0;
+    return `M ${(cx+r*u1x).toFixed(1)} ${(cy+r*u1y).toFixed(1)} A ${r} ${r} 0 0 ${sw} ${(cx+r*u2x).toFixed(1)} ${(cy+r*u2y).toFixed(1)}`;
+  };
+
   return (
-    <svg viewBox="0 0 330 210" className="w-full max-w-sm mx-auto">
-      {/* △DEC shaded (smaller similar triangle) */}
+    <svg viewBox="0 0 340 220" className="w-full max-w-sm mx-auto">
+      {/* △DEC shaded */}
       <polygon points={`${D.x},${D.y} ${E.x},${E.y} ${C.x},${C.y}`} fill="#facc15" fillOpacity="0.14" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3"/>
       {/* △ABC main */}
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.12" stroke="#60a5fa" strokeWidth="2.5"/>
-      {/* DE segment */}
+      {/* DE segment (green vertical) */}
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
-      {/* Right-angle mark at A */}
-      <polyline points="30,175 40,175 40,185" fill="none" stroke="#60a5fa" strokeWidth="1.6"/>
       {/* Right-angle mark at D (DE⊥AC) */}
-      <polyline points="182,185 182,175 192,175" fill="none" stroke="#4ade80" strokeWidth="1.6"/>
+      <polyline points={`${D.x-10},${D.y} ${D.x-10},${D.y-10} ${D.x},${D.y-10}`} fill="none" stroke="#4ade80" strokeWidth="1.6"/>
+
+      {/* Equal arc marks at ∠B and ∠BDE — same color, same radius */}
+      <path d={arc(B.x,B.y, A.x,A.y, C.x,C.y, 22)} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
+      <path d={arc(D.x,D.y, B.x,B.y, E.x,E.y, 22)} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
+
       {/* Vertex labels */}
-      <text x="16"  y="200" fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x="16"  y="20"  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x="305" y="200" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x="193" y="200" fontSize="13" fill="#fde68a" fontWeight="bold">D</text>
-      <text x="197" y="118" fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
+      <text x={A.x-13} y={A.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x-4}  y={B.y-6}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C.x+4}  y={C.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={D.x+3}  y={D.y+14} fontSize="13" fill="#fde68a" fontWeight="bold">D</text>
+      <text x={E.x+5}  y={E.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
+
       {/* Side labels */}
-      <text x="4"   y="108" fontSize="12" fill="#c084fc" fontWeight="bold">y</text>
-      <text x="100" y="200" fontSize="11" fill="#f97316" fontWeight="bold">15 cm</text>
-      <text x="240" y="200" fontSize="11" fill="#f97316" fontWeight="bold">10 cm</text>
-      <text x="198" y="158" fontSize="11" fill="#4ade80" fontWeight="bold">8 cm</text>
-      <text x="260" y="148" fontSize="11" fill="#86efac" fontWeight="bold">12 cm</text>
-      <text x="108" y="64"  fontSize="12" fill="#fbbf24" fontWeight="bold">x</text>
-      {/* Similar label */}
-      <text x="58" y="155" fontSize="9" fill="#fde68a" fontWeight="bold">△DEC~△BAC</text>
+      <text x="50"  y="115" fontSize="12" fill="#c084fc" fontWeight="bold">y</text>
+      <text x="100" y="210" fontSize="11" fill="#f97316" fontWeight="bold">15 cm</text>
+      <text x="235" y="210" fontSize="11" fill="#f97316" fontWeight="bold">10 cm</text>
+      <text x={D.x+4} y={(D.y+E.y)/2+5} fontSize="11" fill="#4ade80" fontWeight="bold">8 cm</text>
+      <text x={(E.x+C.x)/2-10} y={(E.y+C.y)/2-5} fontSize="11" fill="#86efac" fontWeight="bold">12 cm</text>
+      <text x={(B.x+E.x)/2-18} y={(B.y+E.y)/2-4} fontSize="12" fill="#fbbf24" fontWeight="bold">x</text>
     </svg>
   );
 };
