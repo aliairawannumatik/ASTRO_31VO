@@ -271,12 +271,24 @@ const DiagBertolakBelakang = () => {
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${E.x},${E.y}`} fill="#7dd3fc" fillOpacity=".40" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* T2 △DCE */}
       <polygon points={`${D.x},${D.y} ${C.x},${C.y} ${E.x},${E.y}`} fill="#86efac" fillOpacity=".38" stroke="#4ade80" strokeWidth="1.8"/>
-      {/* angle marks – A↔D orange */}
+      {/* angle marks – A↔C orange (1 tanda = sama besar) */}
       <path d={ap(A.x,A.y,B.x,B.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
-      <path d={ap(D.x,D.y,C.x,C.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
-      {/* B↔C green */}
+      <path d={ap(C.x,C.y,D.x,D.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      {/* tanda sudut ∠A = ∠C — 1 tick (oranye) */}
+      {/* ∠A: tengah busur ≈ (62.0, 26.9), tegak lurus (-0.379, 0.925) */}
+      <line x1="61.4" y1="28.3" x2="62.6" y2="25.5" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠C: tengah busur ≈ (158.0, 135.1), tegak lurus (0.378, -0.926) */}
+      <line x1="158.6" y1="133.7" x2="157.4" y2="136.5" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* B↔D green (2 tanda = sama besar) */}
       <path d={ap(B.x,B.y,A.x,A.y,E.x,E.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      <path d={ap(C.x,C.y,D.x,D.y,E.x,E.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(D.x,D.y,C.x,C.y,E.x,E.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* tanda sudut ∠B = ∠D — 2 ticks (hijau) */}
+      {/* ∠B: tengah busur ≈ (178.2, 27.4), tegak lurus (-0.419, -0.908) */}
+      <line x1="176.5" y1="26.5" x2="177.7" y2="29.3" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="178.7" y1="25.5" x2="179.9" y2="28.3" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠D: tengah busur ≈ (101.8, 134.5), tegak lurus (0.423, 0.906) */}
+      <line x1="103.5" y1="135.4" x2="102.3" y2="132.6" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="101.3" y1="136.4" x2="100.1" y2="133.6" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
       {/* E vertical angles purple – two radii */}
       <path d={ap(E.x,E.y,A.x,A.y,B.x,B.y,12)} fill="none" stroke="#a855f7" strokeWidth="1.5"/>
       <path d={ap(E.x,E.y,D.x,D.y,C.x,C.y,10)} fill="none" stroke="#a855f7" strokeWidth="1.5"/>
