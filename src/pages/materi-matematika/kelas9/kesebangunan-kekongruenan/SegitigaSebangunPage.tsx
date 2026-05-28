@@ -329,7 +329,8 @@ const DiagDiDalam = () => {
       <text x={C.x+3}  y={C.y+10} fontSize="8.5" fill="#93c5fd" fontWeight="bold">C</text>
       <text x={D.x-11} y={D.y-3}  fontSize="8.5" fill="#4ade80" fontWeight="bold">D</text>
       <text x={E.x+3}  y={E.y-3}  fontSize="8.5" fill="#4ade80" fontWeight="bold">E</text>
-      <text x="195" y="160" fontSize="7.5" fill="#4ade80" fontWeight="bold">△ADE ~ △ABC</text>
+      <text x="208" y="78" fontSize="7.5" fill="#4ade80" fontWeight="bold">△ADE</text>
+      <text x="208" y="89" fontSize="7.5" fill="#4ade80" fontWeight="bold">~ △ABC</text>
     </svg>
   );
 };
@@ -377,7 +378,8 @@ const DiagDiDalamPTS = () => {
       <text x={T.x-4}  y={T.y-7}  fontSize="9"  fill="#f0abfc" fontWeight="bold">T</text>
       <text x={S.x-4}  y={S.y+13} fontSize="9"  fill="#f0abfc" fontWeight="bold">S</text>
       {/* keterangan */}
-      <text x="162" y="203" textAnchor="middle" fontSize="7.5" fill="#d946ef" fontWeight="bold">TS // RQ  →  △PTS ~ △PRQ</text>
+      <text x="10" y="27" fontSize="7.5" fill="#d946ef" fontWeight="bold">TS // RQ →</text>
+      <text x="10" y="38" fontSize="7.5" fill="#d946ef" fontWeight="bold">△PTS ~ △PRQ</text>
     </svg>
   );
 };
@@ -491,12 +493,14 @@ const PosisiSebangunSection = () => {
       bg: 'bg-purple-500/20 border-purple-500/50',
       active: 'bg-purple-500/30 border-purple-400',
       diagram: (
-        <div className="space-y-3">
-          <div>
+        <div className="flex flex-col landscape:flex-row gap-3">
+          <div className="min-w-0 landscape:flex-1">
             <p className="text-center text-xs text-purple-300/70 mb-1 font-body">△ADE di dalam △ABC (DE // BC)</p>
             <DiagDiDalam />
           </div>
-          <DiagDiDalamPTS />
+          <div className="min-w-0 landscape:flex-1">
+            <DiagDiDalamPTS />
+          </div>
         </div>
       ),
       info: 'Segitiga kecil △PTS berada di dalam segitiga besar △PRQ dan berbagi sudut puncak ∠P. Karena TS // RQ, sudut-sudut bersesuaian sama besar (∠PTR = ∠PRQ dan ∠PST = ∠PQR), sehingga △PTS ~ △PRQ.',
