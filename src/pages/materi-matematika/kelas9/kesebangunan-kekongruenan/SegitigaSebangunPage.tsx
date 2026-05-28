@@ -490,7 +490,15 @@ const PosisiSebangunSection = () => {
       color: '#a855f7',
       bg: 'bg-purple-500/20 border-purple-500/50',
       active: 'bg-purple-500/30 border-purple-400',
-      diagram: <DiagDiDalamPTS />,
+      diagram: (
+        <div className="space-y-3">
+          <div>
+            <p className="text-center text-xs text-purple-300/70 mb-1 font-body">△ADE di dalam △ABC (DE // BC)</p>
+            <DiagDiDalam />
+          </div>
+          <DiagDiDalamPTS />
+        </div>
+      ),
       info: 'Segitiga kecil △PTS berada di dalam segitiga besar △PRQ dan berbagi sudut puncak ∠P. Karena TS // RQ, sudut-sudut bersesuaian sama besar (∠PTR = ∠PRQ dan ∠PST = ∠PQR), sehingga △PTS ~ △PRQ.',
       syarat: '∠P bersama + TS // RQ → sudut sehadap sama → AA terpenuhi',
     },
