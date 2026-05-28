@@ -209,7 +209,7 @@ const DiagTerpisah = () => {
   return (
     <svg viewBox="0 0 225 152" className="w-full rounded-lg bg-slate-950/50">
       {/* T1 */}
-      <polygon points={`${B1.x},${B1.y} ${C1.x},${C1.y} ${A1.x},${A1.y}`} fill="#3b82f6" fillOpacity=".18" stroke="#60a5fa" strokeWidth="1.8"/>
+      <polygon points={`${B1.x},${B1.y} ${C1.x},${C1.y} ${A1.x},${A1.y}`} fill="#7dd3fc" fillOpacity=".40" stroke="#60a5fa" strokeWidth="1.8"/>
       <path d={ap(A1.x,A1.y,B1.x,B1.y,C1.x,C1.y,9)}  fill="none" stroke="#a855f7" strokeWidth="1.5"/>
       <path d={ap(B1.x,B1.y,C1.x,C1.y,A1.x,A1.y,12)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(C1.x,C1.y,B1.x,B1.y,A1.x,A1.y,10)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
@@ -218,7 +218,7 @@ const DiagTerpisah = () => {
       <text x={C1.x+2} y={C1.y+9}  fontSize="8" fill="#93c5fd" fontWeight="bold">C</text>
       <text x={(B1.x+C1.x)/2-7} y={B1.y+20} fontSize="7.5" fill="#93c5fd">△ABC</text>
       {/* T2 */}
-      <polygon points={`${B2.x},${B2.y} ${C2.x},${C2.y} ${A2.x},${A2.y}`} fill="#22c55e" fillOpacity=".15" stroke="#4ade80" strokeWidth="1.8"/>
+      <polygon points={`${B2.x},${B2.y} ${C2.x},${C2.y} ${A2.x},${A2.y}`} fill="#86efac" fillOpacity=".38" stroke="#4ade80" strokeWidth="1.8"/>
       <path d={ap(A2.x,A2.y,B2.x,B2.y,C2.x,C2.y,10)} fill="none" stroke="#a855f7" strokeWidth="1.5"/>
       <path d={ap(B2.x,B2.y,C2.x,C2.y,A2.x,A2.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(C2.x,C2.y,B2.x,B2.y,A2.x,A2.y,11)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
@@ -244,9 +244,9 @@ const DiagBertolakBelakang = () => {
       <line x1={A.x} y1={A.y} x2={C.x} y2={C.y} stroke="#334155" strokeWidth="1" strokeDasharray="3,3"/>
       <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#334155" strokeWidth="1" strokeDasharray="3,3"/>
       {/* T1 △ABE */}
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${E.x},${E.y}`} fill="#3b82f6" fillOpacity=".18" stroke="#60a5fa" strokeWidth="1.8"/>
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${E.x},${E.y}`} fill="#7dd3fc" fillOpacity=".40" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* T2 △DCE */}
-      <polygon points={`${D.x},${D.y} ${C.x},${C.y} ${E.x},${E.y}`} fill="#22c55e" fillOpacity=".15" stroke="#4ade80" strokeWidth="1.8"/>
+      <polygon points={`${D.x},${D.y} ${C.x},${C.y} ${E.x},${E.y}`} fill="#86efac" fillOpacity=".38" stroke="#4ade80" strokeWidth="1.8"/>
       {/* angle marks – A↔D orange */}
       <path d={ap(A.x,A.y,B.x,B.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(D.x,D.y,C.x,C.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
@@ -280,9 +280,9 @@ const DiagDiDalam = () => {
   return (
     <svg viewBox="0 0 265 170" className="w-full rounded-lg bg-slate-950/50">
       {/* big △ABC */}
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity=".12" stroke="#60a5fa" strokeWidth="1.8"/>
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#7dd3fc" fillOpacity=".35" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △ADE shaded */}
-      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#a855f7" fillOpacity=".2" stroke="#d946ef" strokeWidth="1.8"/>
+      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#f0abfc" fillOpacity=".42" stroke="#d946ef" strokeWidth="1.8"/>
       {/* DE parallel marker */}
       <line x1="120" y1="90" x2="124" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
       <line x1="126" y1="90" x2="130" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
@@ -323,13 +323,13 @@ const DiagSikuTinggi = () => {
   return (
     <svg viewBox="0 0 252 158" className="w-full rounded-lg bg-slate-950/50">
       {/* △ACB full */}
-      <polygon points={`${A.x},${A.y} ${C.x},${C.y} ${B.x},${B.y}`} fill="#3b82f6" fillOpacity=".1" stroke="#60a5fa" strokeWidth="1.8"/>
+      <polygon points={`${A.x},${A.y} ${C.x},${C.y} ${B.x},${B.y}`} fill="#7dd3fc" fillOpacity=".30" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* altitude line */}
       <line x1={D.x} y1={D.y} x2={C.x} y2={C.y} stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3"/>
       {/* △ADC shaded */}
-      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${C.x},${C.y}`} fill="#a855f7" fillOpacity=".18" stroke="#d946ef" strokeWidth="1.2"/>
+      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${C.x},${C.y}`} fill="#f0abfc" fillOpacity=".42" stroke="#d946ef" strokeWidth="1.2"/>
       {/* △CDB shaded */}
-      <polygon points={`${C.x},${C.y} ${D.x},${D.y} ${B.x},${B.y}`} fill="#22c55e" fillOpacity=".18" stroke="#4ade80" strokeWidth="1.2"/>
+      <polygon points={`${C.x},${C.y} ${D.x},${D.y} ${B.x},${B.y}`} fill="#86efac" fillOpacity=".40" stroke="#4ade80" strokeWidth="1.2"/>
       {/* right angle marks */}
       <path d={ra(D.x,D.y,A.x,A.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
       <path d={ra(D.x,D.y,B.x,B.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
@@ -367,9 +367,9 @@ const DiagSudutBerimpit = () => {
   return (
     <svg viewBox="0 0 238 170" className="w-full rounded-lg bg-slate-950/50">
       {/* big △PRQ */}
-      <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#3b82f6" fillOpacity=".12" stroke="#60a5fa" strokeWidth="1.8"/>
+      <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#7dd3fc" fillOpacity=".35" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △PTS */}
-      <polygon points={`${P.x},${P.y} ${T.x},${T.y} ${S.x},${S.y}`} fill="#a855f7" fillOpacity=".2" stroke="#d946ef" strokeWidth="1.8"/>
+      <polygon points={`${P.x},${P.y} ${T.x},${T.y} ${S.x},${S.y}`} fill="#f0abfc" fillOpacity=".42" stroke="#d946ef" strokeWidth="1.8"/>
       {/* shared ∠P – two concentric arcs orange */}
       <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
