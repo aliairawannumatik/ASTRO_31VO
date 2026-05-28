@@ -202,9 +202,9 @@ const ra = (cx:number,cy:number,p1x:number,p1y:number,p2x:number,p2y:number,s=7)
 
 /* ── Diagram 1 – Terpisah ───────────────────────────────── */
 const DiagTerpisah = () => {
-  // T1: B=(12,105) C=(76,105) A=(37,37) — angles B=70° C=60° A=50°
+  // T1: A=(37,59) B=(12,127) C=(76,127)
   const [A1,B1,C1] = [{x:37,y:59},{x:12,y:127},{x:76,y:127}];
-  // T2: scaled ×1.4 – B=(118,112) C=(208,112) A=(153,17)
+  // T2: P=(153,17) Q=(118,112) R=(208,112)
   const [A2,B2,C2] = [{x:153,y:17},{x:118,y:112},{x:208,y:112}];
   return (
     <svg viewBox="0 0 225 152" className="w-full rounded-lg bg-slate-950/50">
@@ -213,23 +213,53 @@ const DiagTerpisah = () => {
       <path d={ap(A1.x,A1.y,B1.x,B1.y,C1.x,C1.y,9)}  fill="none" stroke="#a855f7" strokeWidth="1.5"/>
       <path d={ap(B1.x,B1.y,C1.x,C1.y,A1.x,A1.y,12)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(C1.x,C1.y,B1.x,B1.y,A1.x,A1.y,10)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* tanda sudut T1: 1 garis=∠A, 2 garis=∠B, 3 garis=∠C */}
+      {/* ∠A — 1 tanda (ungu), tengah busur ≈ (38, 68), tegak lurus (-0.995, 0.102) */}
+      <line x1="39.5" y1="67.9" x2="36.5" y2="68.2" stroke="#a855f7" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠B — 2 tanda (oranye), tengah busur ≈ (21.5, 119.7), tegak lurus (0.605, 0.792) */}
+      <line x1="19.8" y1="119.1" x2="21.6" y2="121.5" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="21.4" y1="117.9" x2="23.2" y2="120.3" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠C — 3 tanda (hijau), tengah busur ≈ (67.6, 121.5), tegak lurus (0.551, -0.835) */}
+      <line x1="68.1" y1="123.6" x2="69.7" y2="121.1" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="66.8" y1="122.8" x2="68.4" y2="120.3" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="65.5" y1="122.0" x2="67.1" y2="119.5" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+
       <text x={A1.x-4} y={A1.y-5}  fontSize="8" fill="#c4b5fd" fontWeight="bold">A</text>
       <text x={B1.x-9} y={B1.y+9}  fontSize="8" fill="#93c5fd" fontWeight="bold">B</text>
       <text x={C1.x+2} y={C1.y+9}  fontSize="8" fill="#93c5fd" fontWeight="bold">C</text>
       <text x={(B1.x+C1.x)/2-7} y={B1.y+20} fontSize="7.5" fill="#93c5fd">△ABC</text>
+
       {/* T2 */}
       <polygon points={`${B2.x},${B2.y} ${C2.x},${C2.y} ${A2.x},${A2.y}`} fill="#86efac" fillOpacity=".38" stroke="#4ade80" strokeWidth="1.8"/>
       <path d={ap(A2.x,A2.y,B2.x,B2.y,C2.x,C2.y,10)} fill="none" stroke="#a855f7" strokeWidth="1.5"/>
       <path d={ap(B2.x,B2.y,C2.x,C2.y,A2.x,A2.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(C2.x,C2.y,B2.x,B2.y,A2.x,A2.y,11)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* tanda sudut T2: 1 garis=∠P, 2 garis=∠Q, 3 garis=∠R */}
+      {/* ∠P — 1 tanda (ungu), tengah busur ≈ (154, 27), tegak lurus (-0.995, 0.105) */}
+      <line x1="155.5" y1="26.8" x2="152.5" y2="27.2" stroke="#a855f7" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠Q — 2 tanda (oranye), tengah busur ≈ (128.4, 104.1), tegak lurus (0.606, 0.797) */}
+      <line x1="126.7" y1="103.5" x2="128.5" y2="105.9" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="128.3" y1="102.3" x2="130.1" y2="104.7" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠R — 3 tanda (hijau), tengah busur ≈ (198.8, 105.9), tegak lurus (0.549, -0.838) */}
+      <line x1="199.3" y1="108.0" x2="200.9" y2="105.4" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="198.0" y1="107.2" x2="199.6" y2="104.6" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="196.7" y1="106.4" x2="198.3" y2="103.8" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+
       <text x={A2.x-4} y={A2.y-5}  fontSize="8" fill="#c4b5fd" fontWeight="bold">P</text>
       <text x={B2.x-9} y={B2.y+9}  fontSize="8" fill="#86efac" fontWeight="bold">Q</text>
       <text x={C2.x+2} y={C2.y+9}  fontSize="8" fill="#86efac" fontWeight="bold">R</text>
       <text x={(B2.x+C2.x)/2-7} y={B2.y+20} fontSize="7.5" fill="#86efac">△PQR</text>
+
       {/* legend */}
-      <circle cx="8"  cy="8" r="4" fill="#a855f7" fillOpacity=".7"/><text x="15" y="12" fontSize="7" fill="#c4b5fd">∠A=∠P</text>
-      <circle cx="8" cy="19" r="4" fill="#f97316" fillOpacity=".7"/><text x="15" y="23" fontSize="7" fill="#fcd9b5">∠B=∠Q</text>
-      <circle cx="8" cy="30" r="4" fill="#22c55e" fillOpacity=".7"/><text x="15" y="34" fontSize="7" fill="#bbf7d0">∠C=∠R</text>
+      <line x1="5"  y1="8"  x2="11" y2="8"  stroke="#a855f7" strokeWidth="1.4" strokeLinecap="round"/>
+      <text x="15" y="12" fontSize="7" fill="#c4b5fd">∠A = ∠P</text>
+      <line x1="4"  y1="19" x2="10" y2="19" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="6"  y1="22" x2="12" y2="22" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      <text x="15" y="23" fontSize="7" fill="#fcd9b5">∠B = ∠Q</text>
+      <line x1="3"  y1="30" x2="9"  y2="30" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="5"  y1="33" x2="11" y2="33" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="7"  y1="36" x2="13" y2="36" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <text x="15" y="34" fontSize="7" fill="#bbf7d0">∠C = ∠R</text>
     </svg>
   );
 };
