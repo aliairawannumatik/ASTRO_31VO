@@ -289,24 +289,6 @@ const DiagDiDalam = () => {
       {/* BC parallel arrows – chevron pointing right at midpoint of BC (128,155) */}
       <path d="M 122,152 L 127,155 L 122,158" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinejoin="round"/>
       <path d="M 128,152 L 133,155 L 128,158" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinejoin="round"/>
-      {/* Proportion ticks – single on AD & DB (same), single on AE & EC (same) */}
-      {/* AD */}
-      <line x1="93" y1="52" x2="97" y2="56" stroke="#fb923c" strokeWidth="1.5"/>
-      {/* DB */}
-      <line x1="36" y1="123" x2="41" y2="127" stroke="#fb923c" strokeWidth="1.5"/>
-      {/* AE */}
-      <line x1="163" y1="52" x2="159" y2="56" stroke="#fb923c" strokeWidth="1.5"/>
-      {/* EC */}
-      <line x1="215" y1="127" x2="220" y2="123" stroke="#fb923c" strokeWidth="1.5"/>
-      {/* shared angle at A – two concentric arcs */}
-      <path d={ap(A.x,A.y,B.x,B.y,C.x,C.y,18)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
-      <path d={ap(A.x,A.y,D.x,D.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
-      {/* ∠ADE = ∠ABC (corresponding) green */}
-      <path d={ap(D.x,D.y,A.x,A.y,E.x,E.y,11)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      <path d={ap(B.x,B.y,C.x,C.y,A.x,A.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      {/* ∠AED = ∠ACB (corresponding) cyan */}
-      <path d={ap(E.x,E.y,D.x,D.y,C.x,C.y,11)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
-      <path d={ap(C.x,C.y,B.x,B.y,A.x,A.y,13)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
       {/* labels */}
       <text x={A.x-4} y={A.y-5}  fontSize="8.5" fill="#fde68a" fontWeight="bold">A</text>
       <text x={B.x-11} y={B.y+10} fontSize="8.5" fill="#93c5fd" fontWeight="bold">B</text>
