@@ -108,6 +108,37 @@ const DiagramGarisTinggi = () => (
   </svg>
 );
 
+const DiagramHubunganRusuk = () => (
+  <svg viewBox="0 0 260 242" className="w-full max-w-sm mx-auto">
+    {/* Shading seluruh segitiga */}
+    <polygon points="55,22 55,182 175,182" fill="#f97316" fillOpacity="0.12" stroke="none"/>
+    {/* Sisi AB (tegak) — kuning */}
+    <line x1="55" y1="22" x2="55" y2="182" stroke="#facc15" strokeWidth="3"/>
+    {/* Sisi AC (alas) — hijau */}
+    <line x1="55" y1="182" x2="175" y2="182" stroke="#4ade80" strokeWidth="3"/>
+    {/* Sisi BC (miring) — biru */}
+    <line x1="55" y1="22" x2="175" y2="182" stroke="#60a5fa" strokeWidth="3"/>
+    {/* Garis tinggi AD — oranye putus-putus */}
+    <line x1="55" y1="182" x2="132" y2="124" stroke="#f97316" strokeWidth="2.5" strokeDasharray="5,3"/>
+    <RightAngleA />
+    <RightAngleD />
+    {/* Label sisi */}
+    <text x="38"  y="108" fontSize="11" fill="#facc15" fontWeight="bold" textAnchor="middle">AB</text>
+    <text x="115" y="197" fontSize="11" fill="#4ade80" fontWeight="bold" textAnchor="middle">AC</text>
+    <text x="122" y="95"  fontSize="11" fill="#60a5fa" fontWeight="bold" textAnchor="middle">BC</text>
+    <text x="82"  y="160" fontSize="11" fill="#fb923c" fontWeight="bold" textAnchor="middle">AD</text>
+    {/* Vertex labels */}
+    <text x="36"  y="20"  fontSize="12" fill="#fed7aa" fontWeight="bold">B</text>
+    <text x="36"  y="197" fontSize="12" fill="#fed7aa" fontWeight="bold">A</text>
+    <text x="178" y="197" fontSize="12" fill="#fed7aa" fontWeight="bold">C</text>
+    <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
+    {/* Legend */}
+    <rect x="3" y="208" width="254" height="30" rx="4" fill="#0f172a" stroke="#f97316" strokeWidth="1"/>
+    <text x="130" y="220" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold">Hubungan Rusuk &amp; Tinggi:</text>
+    <text x="130" y="235" textAnchor="middle" fontSize="12" fill="#f97316" fontWeight="bold">AB × AC = BC × AD</text>
+  </svg>
+);
+
 const PerbandinganRusukSikuSikuPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "konsep3", "konsep4", "contoh1"]);
@@ -236,6 +267,10 @@ const PerbandinganRusukSikuSikuPage = () => {
                     <BlockMath math="\boxed{AB \times AC = BC \times AD}" />
                     <p className="font-body text-xs text-white/60 text-center">alas × tegak = miring × garis tinggi</p>
                   </div>
+                </div>
+
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
+                  <DiagramHubunganRusuk />
                 </div>
 
                 {/* Rangkuman semua rumus */}
