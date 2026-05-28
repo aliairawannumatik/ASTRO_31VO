@@ -43,36 +43,31 @@ const DiagramSegitigaSebangun = () => (
 );
 
 const DiagramGarisSejajar = () => (
-  <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto">
-    <defs>
-      <marker id="arr-s" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-        <path d="M0,0 L0,6 L6,3 z" fill="#94a3b8" />
-      </marker>
-    </defs>
+  <svg viewBox="0 0 300 220" className="w-full max-w-lg mx-auto">
     {/* Main triangle */}
-    <polygon points="140,20 30,175 250,175" fill="none" stroke="#60a5fa" strokeWidth="2" />
-    <text x="140" y="14" textAnchor="middle" fontSize="10" fill="#93c5fd" fontWeight="bold">A</text>
-    <text x="22" y="185" fontSize="10" fill="#93c5fd" fontWeight="bold">B</text>
-    <text x="252" y="185" fontSize="10" fill="#93c5fd" fontWeight="bold">C</text>
+    <polygon points="150,22 28,192 272,192" fill="none" stroke="#60a5fa" strokeWidth="2.5" />
+    <text x="150" y="14" textAnchor="middle" fontSize="14" fill="#93c5fd" fontWeight="bold">A</text>
+    <text x="14"  y="207" fontSize="14" fill="#93c5fd" fontWeight="bold">B</text>
+    <text x="275" y="207" fontSize="14" fill="#93c5fd" fontWeight="bold">C</text>
     {/* Parallel line XY */}
-    <line x1="75" y1="110" x2="200" y2="110" stroke="#facc15" strokeWidth="2" />
-    <text x="68" y="114" fontSize="10" fill="#fde68a" fontWeight="bold">X</text>
-    <text x="203" y="114" fontSize="10" fill="#fde68a" fontWeight="bold">Y</text>
-    {/* Parallel markers */}
-    <line x1="128" y1="105" x2="128" y2="115" stroke="#facc15" strokeWidth="1.5" />
-    <line x1="125" y1="168" x2="125" y2="178" stroke="#facc15" strokeWidth="1.5" />
-    <line x1="135" y1="168" x2="135" y2="178" stroke="#facc15" strokeWidth="1.5" />
-    <line x1="131" y1="105" x2="131" y2="115" stroke="#facc15" strokeWidth="1.5" />
+    <line x1="82" y1="122" x2="216" y2="122" stroke="#facc15" strokeWidth="2.5" />
+    <text x="64"  y="127" fontSize="13" fill="#fde68a" fontWeight="bold">X</text>
+    <text x="220" y="127" fontSize="13" fill="#fde68a" fontWeight="bold">Y</text>
+    {/* Parallel markers — XY (1 tick) */}
+    <line x1="145" y1="116" x2="145" y2="128" stroke="#facc15" strokeWidth="2" />
+    {/* Parallel markers — BC (2 ticks) */}
+    <line x1="143" y1="185" x2="143" y2="199" stroke="#facc15" strokeWidth="2" />
+    <line x1="152" y1="185" x2="152" y2="199" stroke="#facc15" strokeWidth="2" />
     {/* Labels on sides */}
-    <text x="92" y="70" fontSize="9" fill="#c084fc">AX</text>
-    <text x="175" y="70" fontSize="9" fill="#4ade80">AY</text>
-    <text x="44" y="145" fontSize="9" fill="#c084fc">XB</text>
-    <text x="220" y="145" fontSize="9" fill="#4ade80">YC</text>
-    {/* Proportional sign */}
-    <rect x="55" y="5" width="170" height="15" rx="3" fill="#1e293b" />
-    <text x="140" y="16" textAnchor="middle" fontSize="8" fill="#fde68a">XY // BC → AX/XB = AY/YC</text>
+    <text x="94"  y="76"  fontSize="12" fill="#c084fc" fontWeight="bold">AX</text>
+    <text x="188" y="76"  fontSize="12" fill="#4ade80" fontWeight="bold">AY</text>
+    <text x="40"  y="160" fontSize="12" fill="#c084fc" fontWeight="bold">XB</text>
+    <text x="240" y="160" fontSize="12" fill="#4ade80" fontWeight="bold">YC</text>
+    {/* Proportional label box */}
+    <rect x="48" y="4" width="204" height="18" rx="4" fill="#1e293b" />
+    <text x="150" y="17" textAnchor="middle" fontSize="10.5" fill="#fde68a" fontWeight="bold">XY // BC  →  AX/XB = AY/YC</text>
     {/* Dotted triangle △AXY */}
-    <polygon points="140,20 75,110 200,110" fill="#facc15" fillOpacity="0.08" stroke="#facc15" strokeWidth="1" strokeDasharray="4,3" />
+    <polygon points="150,22 82,122 216,122" fill="#facc15" fillOpacity="0.10" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3" />
   </svg>
 );
 
@@ -809,7 +804,7 @@ const SegitigaSebangunPage = () => {
 
           {/* DALIL GARIS SEJAJAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header icon={<Target className="w-5 h-5" />} color="#facc15" label="📘 Sub-Bab 2: Dalil Garis Sejajar dalam Segitiga" />
+            <Header icon={<Target className="w-5 h-5" />} color="#facc15" label="📘 Sub-Bab 3: Dalil Garis Sejajar dalam Segitiga" />
             <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-yellow-300">🎯 Ringkasan Intisari</p>
