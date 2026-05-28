@@ -134,10 +134,9 @@ const DiagramContoh2 = () => {
   const C = { x: 308, y: 195 };
   // D on AC: AD/AC = 15/25 = 0.6
   const D = { x: Math.round(28 + 0.6 * 280), y: 195 }; // x=196
-  // E directly above D on line BC (DE ⊥ AC)
-  // BC param: t where x=196 → t=(196-105)/(308-105)=91/203≈0.448
-  const tE = (196 - 105) / (308 - 105);
-  const E = { x: 196, y: Math.round(18 + tE * (195 - 18)) }; // y≈97
+  // E on BC at t=0.5 — diagonal DE (not vertical, not parallel to AB)
+  const tE = 0.5;
+  const E = { x: Math.round(105 + tE * (308 - 105)), y: Math.round(18 + tE * (195 - 18)) }; // ≈(207,107)
 
   // Arc helper (inline, same logic as ap)
   const arc = (cx:number,cy:number,p1x:number,p1y:number,p2x:number,p2y:number,r:number) => {
@@ -156,9 +155,6 @@ const DiagramContoh2 = () => {
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.12" stroke="#60a5fa" strokeWidth="2.5"/>
       {/* DE segment (green vertical) */}
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
-      {/* Right-angle mark at D (DE⊥AC) */}
-      <polyline points={`${D.x-10},${D.y} ${D.x-10},${D.y-10} ${D.x},${D.y-10}`} fill="none" stroke="#4ade80" strokeWidth="1.6"/>
-
       {/* Equal arc marks at ∠B and ∠BDE — same color, same radius */}
       <path d={arc(B.x,B.y, A.x,A.y, C.x,C.y, 22)} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
       <path d={arc(D.x,D.y, B.x,B.y, E.x,E.y, 22)} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
