@@ -72,110 +72,112 @@ const DiagramGarisSejajar = () => (
 );
 
 const DiagramContoh1 = () => (
-  <svg viewBox="0 0 340 165" className="w-full max-w-sm mx-auto">
-    {/* △ABC: A=(15,138), B=(90,138), C=(67,76) — Sd A=50°, Sd B=70°, Sd C=60° */}
-    <polygon points="15,138 90,138 67,76" fill="#3b82f6" fillOpacity="0.25" stroke="#60a5fa" strokeWidth="2"/>
-    <text x="4"  y="139" fontSize="8" fill="#93c5fd" fontWeight="bold">A</text>
-    <text x="92" y="139" fontSize="8" fill="#93c5fd" fontWeight="bold">B</text>
-    <text x="63" y="71"  fontSize="8" fill="#93c5fd" fontWeight="bold">C</text>
+  <svg viewBox="0 0 340 175" className="w-full max-w-lg mx-auto">
+    {/* △ABC: A=(15,148), B=(100,148), C=(72,76) */}
+    <polygon points="15,148 100,148 72,76" fill="#3b82f6" fillOpacity="0.28" stroke="#60a5fa" strokeWidth="2.5"/>
+    <text x="2"   y="150" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
+    <text x="104" y="150" fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
+    <text x="67"  y="69"  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
     {/* Arcs △ABC */}
-    <path d="M 27 138 A 12 12 0 0 1 22.7 128.8" fill="none" stroke="#f97316" strokeWidth="1.5"/>
-    <path d="M 78 138 A 12 12 0 0 0 85.8 126.7" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-    <path d="M 59.3 85.2 A 12 12 0 0 1 71.2 87.3" fill="none" stroke="#a855f7" strokeWidth="1.5"/>
+    <path d="M 29 148 A 14 14 0 0 1 24.3 136.8" fill="none" stroke="#f97316" strokeWidth="2"/>
+    <path d="M 86 148 A 14 14 0 0 0 95.5 135.5" fill="none" stroke="#22c55e" strokeWidth="2"/>
+    <path d="M 63.5 86.8 A 14 14 0 0 1 77.5 89.2" fill="none" stroke="#a855f7" strokeWidth="2"/>
     {/* Angle labels */}
-    <text x="29" y="128" fontSize="8" fill="#f97316" fontWeight="bold">50°</text>
-    <text x="71" y="128" fontSize="8" fill="#22c55e" fontWeight="bold">70°</text>
-    <text x="56" y="97"  fontSize="8" fill="#a855f7" fontWeight="bold">60°</text>
-    <text x="52" y="152" textAnchor="middle" fontSize="9" fill="#93c5fd">△ABC</text>
+    <text x="31" y="137" fontSize="11" fill="#f97316" fontWeight="bold">50°</text>
+    <text x="77" y="137" fontSize="11" fill="#22c55e" fontWeight="bold">70°</text>
+    <text x="58" y="104" fontSize="11" fill="#a855f7" fontWeight="bold">60°</text>
+    <text x="57" y="165" textAnchor="middle" fontSize="12" fill="#93c5fd" fontWeight="bold">△ABC</text>
 
-    {/* △PQR: P=(168,142), Q=(280,142), R=(246,49) — Sd P=50°, Sd Q=70°, Sd R=60° */}
-    <polygon points="168,142 280,142 246,49" fill="#22c55e" fillOpacity="0.2" stroke="#4ade80" strokeWidth="2"/>
-    <text x="157" y="143" fontSize="8" fill="#86efac" fontWeight="bold">P</text>
-    <text x="282" y="143" fontSize="8" fill="#86efac" fontWeight="bold">Q</text>
-    <text x="242" y="44"  fontSize="8" fill="#86efac" fontWeight="bold">R</text>
+    {/* △PQR: P=(168,148), Q=(295,148), R=(258,44) */}
+    <polygon points="168,148 295,148 258,44" fill="#22c55e" fillOpacity="0.22" stroke="#4ade80" strokeWidth="2.5"/>
+    <text x="154" y="150" fontSize="12" fill="#86efac" fontWeight="bold">P</text>
+    <text x="298" y="150" fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
+    <text x="254" y="37"  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
     {/* Arcs △PQR */}
-    <path d="M 182 142 A 14 14 0 0 1 177.0 131.3" fill="none" stroke="#f97316" strokeWidth="1.5"/>
-    <path d="M 266 142 A 14 14 0 0 0 275.2 128.8" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-    <path d="M 237.0 59.7 A 14 14 0 0 1 250.8 62.2" fill="none" stroke="#a855f7" strokeWidth="1.5"/>
+    <path d="M 184 148 A 16 16 0 0 1 178.5 135.4" fill="none" stroke="#f97316" strokeWidth="2"/>
+    <path d="M 279 148 A 16 16 0 0 0 290.2 133.2" fill="none" stroke="#22c55e" strokeWidth="2"/>
+    <path d="M 248.2 57.3 A 16 16 0 0 1 265.2 60.2" fill="none" stroke="#a855f7" strokeWidth="2"/>
     {/* Angle labels */}
-    <text x="185" y="132" fontSize="8" fill="#f97316" fontWeight="bold">50°</text>
-    <text x="259" y="130" fontSize="8" fill="#22c55e" fontWeight="bold">70°</text>
-    <text x="237" y="73"  fontSize="8" fill="#a855f7" fontWeight="bold">60°</text>
-    <text x="224" y="155" textAnchor="middle" fontSize="9" fill="#86efac">△PQR</text>
+    <text x="186" y="136" fontSize="11" fill="#f97316" fontWeight="bold">50°</text>
+    <text x="271" y="134" fontSize="11" fill="#22c55e" fontWeight="bold">70°</text>
+    <text x="245" y="77"  fontSize="11" fill="#a855f7" fontWeight="bold">60°</text>
+    <text x="231" y="165" textAnchor="middle" fontSize="12" fill="#86efac" fontWeight="bold">△PQR</text>
 
     {/* Tilde */}
-    <text x="135" y="105" fontSize="18" fill="#facc15" fontWeight="bold">~</text>
+    <text x="133" y="108" fontSize="22" fill="#facc15" fontWeight="bold">~</text>
   </svg>
 );
 
 const DiagramContoh2 = () => {
-  const A = { x: 130, y: 18 }, B = { x: 30, y: 148 }, C = { x: 240, y: 148 };
-  const P = { x: 90, y: 70 };   // AP:AB = 4:10
-  const Q = { x: 174, y: 70 };  // AQ:AC = 4:10
+  const A = { x: 150, y: 18 }, B = { x: 25, y: 165 }, C = { x: 275, y: 165 };
+  const P = { x: 100, y: 76 };
+  const Q = { x: 200, y: 76 };
   return (
-    <svg viewBox="0 0 280 170" className="w-full max-w-xs mx-auto">
+    <svg viewBox="0 0 310 190" className="w-full max-w-sm mx-auto">
       {/* △APQ shaded */}
-      <polygon points={`${A.x},${A.y} ${P.x},${P.y} ${Q.x},${Q.y}`} fill="#facc15" fillOpacity="0.12" stroke="#facc15" strokeWidth="1" strokeDasharray="4,3"/>
+      <polygon points={`${A.x},${A.y} ${P.x},${P.y} ${Q.x},${Q.y}`} fill="#facc15" fillOpacity="0.14" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3"/>
       {/* △ABC */}
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="2"/>
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.18" stroke="#60a5fa" strokeWidth="2.5"/>
       {/* PQ parallel line */}
-      <line x1={P.x} y1={P.y} x2={Q.x} y2={Q.y} stroke="#facc15" strokeWidth="2"/>
-      {/* Parallel tick marks */}
-      <line x1="128" y1="65" x2="132" y2="75" stroke="#facc15" strokeWidth="1.5"/>
-      <line x1="82"  y1="115" x2="86"  y2="125" stroke="#facc15" strokeWidth="1.5"/>
-      <line x1="176" y1="115" x2="180" y2="125" stroke="#facc15" strokeWidth="1.5"/>
+      <line x1={P.x} y1={P.y} x2={Q.x} y2={Q.y} stroke="#facc15" strokeWidth="2.5"/>
+      {/* Parallel tick marks on PQ (1 tick) */}
+      <line x1="147" y1="70" x2="151" y2="82" stroke="#facc15" strokeWidth="2"/>
+      {/* Parallel tick marks on BC (2 ticks) */}
+      <line x1="143" y1="158" x2="147" y2="172" stroke="#facc15" strokeWidth="2"/>
+      <line x1="153" y1="158" x2="157" y2="172" stroke="#facc15" strokeWidth="2"/>
       {/* Vertex labels */}
-      <text x="126" y="11"  fontSize="10" fill="#93c5fd" fontWeight="bold" textAnchor="middle">A</text>
-      <text x="20"  y="158" fontSize="10" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x="242" y="158" fontSize="10" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x="77"  y="70"  fontSize="9"  fill="#fde68a" fontWeight="bold">P</text>
-      <text x="178" y="70"  fontSize="9"  fill="#fde68a" fontWeight="bold">Q</text>
+      <text x="146" y="10"  fontSize="13" fill="#93c5fd" fontWeight="bold" textAnchor="middle">A</text>
+      <text x="10"  y="178" fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x="279" y="178" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x="83"  y="76"  fontSize="12" fill="#fde68a" fontWeight="bold">P</text>
+      <text x="205" y="76"  fontSize="12" fill="#fde68a" fontWeight="bold">Q</text>
       {/* Side labels */}
-      <text x="97"  y="42"  fontSize="8" fill="#f97316" fontWeight="bold">AP=4</text>
-      <text x="51"  y="113" fontSize="8" fill="#fb923c">PB=6</text>
-      <text x="161" y="42"  fontSize="8" fill="#4ade80">AQ</text>
-      <text x="215" y="113" fontSize="8" fill="#86efac">QC</text>
-      <text x="130" y="64"  fontSize="8" fill="#fde68a" fontWeight="bold" textAnchor="middle">PQ = 6</text>
-      <text x="135" y="162" fontSize="8" fill="#93c5fd" textAnchor="middle">BC = 15</text>
-      {/* Similar label */}
-      <text x="255" y="50"  fontSize="8" fill="#fde68a">△APQ</text>
-      <text x="258" y="61"  fontSize="8" fill="#fde68a">~△ABC</text>
+      <text x="103" y="43"  fontSize="11" fill="#f97316" fontWeight="bold">AP=4</text>
+      <text x="47"  y="127" fontSize="11" fill="#fb923c" fontWeight="bold">PB=6</text>
+      <text x="175" y="43"  fontSize="11" fill="#4ade80"  fontWeight="bold">AQ</text>
+      <text x="232" y="127" fontSize="11" fill="#86efac"  fontWeight="bold">QC</text>
+      <text x="150" y="70"  fontSize="11" fill="#fde68a"  fontWeight="bold" textAnchor="middle">PQ=6</text>
+      <text x="150" y="183" fontSize="11" fill="#93c5fd"  textAnchor="middle">BC = 15</text>
+      {/* Similar label top-right */}
+      <text x="268" y="42"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">△APQ</text>
+      <text x="268" y="56"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">~△ABC</text>
     </svg>
   );
 };
 
 const DiagramContoh3 = () => {
-  const A = { x: 130, y: 18 }, B = { x: 25, y: 158 }, C = { x: 255, y: 158 };
-  const D = { x: 104, y: 53 }; // AD:AB = 3:12 = 1/4
-  const E = { x: 161, y: 53 }; // AE:AC = 4:16 = 1/4
+  const A = { x: 150, y: 18 }, B = { x: 25, y: 172 }, C = { x: 275, y: 172 };
+  const D = { x: 118, y: 55 }; // AD:AB = 3:12 = 1/4
+  const E = { x: 182, y: 55 }; // AE:AC = 4:16 = 1/4
   return (
-    <svg viewBox="0 0 290 175" className="w-full max-w-xs mx-auto">
+    <svg viewBox="0 0 310 195" className="w-full max-w-sm mx-auto">
       {/* △ADE shaded */}
-      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#facc15" fillOpacity="0.12" stroke="#facc15" strokeWidth="1" strokeDasharray="4,3"/>
+      <polygon points={`${A.x},${A.y} ${D.x},${D.y} ${E.x},${E.y}`} fill="#facc15" fillOpacity="0.14" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3"/>
       {/* △ABC */}
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="2"/>
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.18" stroke="#60a5fa" strokeWidth="2.5"/>
       {/* DE parallel line */}
-      <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#facc15" strokeWidth="2"/>
-      {/* Parallel ticks */}
-      <line x1="128" y1="48" x2="132" y2="58" stroke="#facc15" strokeWidth="1.5"/>
-      <line x1="75"  y1="115" x2="79"  y2="125" stroke="#facc15" strokeWidth="1.5"/>
-      <line x1="183" y1="115" x2="187" y2="125" stroke="#facc15" strokeWidth="1.5"/>
+      <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#facc15" strokeWidth="2.5"/>
+      {/* Parallel tick on DE (1 tick) */}
+      <line x1="147" y1="49" x2="151" y2="61" stroke="#facc15" strokeWidth="2"/>
+      {/* Parallel ticks on BC (2 ticks) */}
+      <line x1="143" y1="165" x2="147" y2="179" stroke="#facc15" strokeWidth="2"/>
+      <line x1="153" y1="165" x2="157" y2="179" stroke="#facc15" strokeWidth="2"/>
       {/* Vertex labels */}
-      <text x="126" y="11"  fontSize="10" fill="#93c5fd" fontWeight="bold" textAnchor="middle">A</text>
-      <text x="13"  y="168" fontSize="10" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x="257" y="168" fontSize="10" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x="91"  y="55"  fontSize="9"  fill="#fde68a" fontWeight="bold">D</text>
-      <text x="165" y="55"  fontSize="9"  fill="#fde68a" fontWeight="bold">E</text>
+      <text x="146" y="10"  fontSize="13" fill="#93c5fd" fontWeight="bold" textAnchor="middle">A</text>
+      <text x="10"  y="186" fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x="279" y="186" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x="100" y="57"  fontSize="12" fill="#fde68a" fontWeight="bold">D</text>
+      <text x="187" y="57"  fontSize="12" fill="#fde68a" fontWeight="bold">E</text>
       {/* Side labels */}
-      <text x="98"  y="33"  fontSize="8" fill="#f97316" fontWeight="bold">AD=3</text>
-      <text x="49"  y="112" fontSize="8" fill="#fb923c">DB=9</text>
-      <text x="158" y="33"  fontSize="8" fill="#4ade80" fontWeight="bold">AE=4</text>
-      <text x="198" y="112" fontSize="8" fill="#86efac">EC=12</text>
-      <text x="132" y="48"  fontSize="8" fill="#fde68a" fontWeight="bold" textAnchor="middle">DE = 3</text>
-      <text x="140" y="170" fontSize="8" fill="#93c5fd" textAnchor="middle">BC = 12</text>
-      {/* Similar label */}
-      <text x="255" y="50"  fontSize="8" fill="#fde68a">△ADE</text>
-      <text x="255" y="61"  fontSize="8" fill="#fde68a">~△ABC</text>
+      <text x="110" y="33"  fontSize="11" fill="#f97316" fontWeight="bold">AD=3</text>
+      <text x="44"  y="122" fontSize="11" fill="#fb923c" fontWeight="bold">DB=9</text>
+      <text x="165" y="33"  fontSize="11" fill="#4ade80"  fontWeight="bold">AE=4</text>
+      <text x="220" y="122" fontSize="11" fill="#86efac"  fontWeight="bold">EC=12</text>
+      <text x="150" y="49"  fontSize="11" fill="#fde68a"  fontWeight="bold" textAnchor="middle">DE=3</text>
+      <text x="150" y="189" fontSize="11" fill="#93c5fd"  textAnchor="middle">BC = 12</text>
+      {/* Similar label top-right */}
+      <text x="268" y="42"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">△ADE</text>
+      <text x="268" y="56"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">~△ABC</text>
     </svg>
   );
 };
