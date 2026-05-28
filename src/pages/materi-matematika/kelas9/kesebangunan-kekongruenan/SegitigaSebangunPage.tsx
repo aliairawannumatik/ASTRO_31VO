@@ -420,10 +420,11 @@ const PosisiSebangunSection = () => {
 };
 
 const InteraktifSebangunDemo = () => {
-  const [scale, setScale] = useState(1.4);
+  const [scale, setScale] = useState(1.5);
   const [focus, setFocus] = useState<'sudut' | 'rusuk'>('sudut');
 
-  const BASE = 80;
+  // BASE=70 → display labels round to 7 (BC), 8 (AB), 9 (CA) — nice integers
+  const BASE = 70;
   const xRel = 0.3867 * BASE;
   const yRel = 1.0622 * BASE;
 
@@ -431,12 +432,12 @@ const InteraktifSebangunDemo = () => {
   const C1 = { x: 10 + BASE, y: 175 };
   const A1 = { x: B1.x + xRel, y: B1.y - yRel };
 
-  const B2 = { x: 160, y: 175 };
+  const B2 = { x: 145, y: 175 };
   const C2 = { x: B2.x + BASE * scale, y: 175 };
   const A2 = { x: B2.x + xRel * scale, y: B2.y - yRel * scale };
 
-  const AB1 = Math.sqrt(xRel ** 2 + yRel ** 2);
-  const CA1 = Math.sqrt((BASE - xRel) ** 2 + yRel ** 2);
+  // Fixed integer display labels for T1 (matches rounded geometry ÷10)
+  const T1 = { ab: 8, bc: 7, ca: 9 };
 
   const arc = (cx: number, cy: number, p1x: number, p1y: number, p2x: number, p2y: number, r: number) => {
     const d1x = p1x - cx, d1y = p1y - cy, l1 = Math.sqrt(d1x * d1x + d1y * d1y);
@@ -488,8 +489,13 @@ const InteraktifSebangunDemo = () => {
     );
   };
 
-  const fmt = (n: number) => n.toFixed(1);
-  const k = scale.toFixed(2);
+  // Integer labels for T2: multiply T1 sides by scale, round
+  const T2 = {
+    ab: Math.round(T1.ab * scale),
+    bc: Math.round(T1.bc * scale),
+    ca: Math.round(T1.ca * scale),
+  };
+  const k = scale % 1 === 0 ? scale.toString() : scale.toFixed(2);
 
   return (
     <div className="bg-slate-900/80 border border-purple-500/30 rounded-xl p-4 space-y-3">
@@ -525,7 +531,7 @@ const InteraktifSebangunDemo = () => {
           <span>△PQR lebih besar</span>
         </div>
         <input
-          type="range" min="0.5" max="1.6" step="0.05" value={scale}
+          type="range" min="0.25" max="2" step="0.05" value={scale}
           onChange={e => setScale(Number(e.target.value))}
           className="w-full accent-purple-400 cursor-pointer"
         />
@@ -535,18 +541,18 @@ const InteraktifSebangunDemo = () => {
         <TriangleGroup
           B={B1} C={C1} A={A1}
           strokeColor="#60a5fa" textColor="#93c5fd"
-          labels={{ v1: 'B', v2: 'C', v3: 'A', ab: fmt(AB1), bc: fmt(BASE), ca: fmt(CA1) }}
+          labels={{ v1: 'B', v2: 'C', v3: 'A', ab: T1.ab.toString(), bc: T1.bc.toString(), ca: T1.ca.toString() }}
         />
         <text x={(B1.x + C1.x) / 2 - 12} y={B1.y + 22} fontSize="8" fill="#93c5fd">△ABC</text>
 
         <TriangleGroup
           B={B2} C={C2} A={A2}
           strokeColor="#4ade80" textColor="#86efac"
-          labels={{ v1: 'P', v2: 'Q', v3: 'R', ab: fmt(AB1 * scale), bc: fmt(BASE * scale), ca: fmt(CA1 * scale) }}
+          labels={{ v1: 'P', v2: 'Q', v3: 'R', ab: T2.ab.toString(), bc: T2.bc.toString(), ca: T2.ca.toString() }}
         />
         <text x={(B2.x + C2.x) / 2 - 12} y={B2.y + 22} fontSize="8" fill="#86efac">△PQR</text>
 
-        <text x="133" y="148" fontSize="18" fill="#facc15" fontWeight="bold">~</text>
+        <text x="112" y="148" fontSize="18" fill="#facc15" fontWeight="bold">~</text>
       </svg>
 
       {focus === 'sudut' ? (
