@@ -155,9 +155,9 @@ const DiagramContoh2 = () => {
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.12" stroke="#60a5fa" strokeWidth="2.5"/>
       {/* DE segment (green vertical) */}
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
-      {/* Equal arc marks at ∠B and ∠BDE — same color, same radius */}
+      {/* Equal arc marks at ∠B and ∠CDE — same color, same radius */}
       <path d={arc(B.x,B.y, A.x,A.y, C.x,C.y, 22)} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
-      <path d={arc(D.x,D.y, B.x,B.y, E.x,E.y, 22)} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
+      <path d={arc(D.x,D.y, C.x,C.y, E.x,E.y, 22)} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round"/>
 
       {/* Vertex labels */}
       <text x={A.x-13} y={A.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
