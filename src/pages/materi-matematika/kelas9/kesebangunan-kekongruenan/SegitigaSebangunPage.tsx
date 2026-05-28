@@ -127,38 +127,40 @@ const DiagramContoh1 = () => (
 );
 
 const DiagramContoh2 = () => {
-  const A = { x: 150, y: 18 }, B = { x: 25, y: 165 }, C = { x: 275, y: 165 };
-  const P = { x: 100, y: 76 };
-  const Q = { x: 200, y: 76 };
+  // Right angle at A. A=bottom-left, B=top-left, C=bottom-right
+  // AD=15, DC=10, AC=25. DE//AB (DE⊥AC). DE=8, EC=12, BE=18(x), AB=20(y)
+  const A = { x: 30, y: 185 }, B = { x: 30, y: 25 }, C = { x: 300, y: 185 };
+  // D on AC at 15/25 = 0.6 from A
+  const D = { x: 192, y: 185 };
+  // E on BC at t=0.6 from B
+  const E = { x: 192, y: 121 };
   return (
-    <svg viewBox="0 0 310 190" className="w-full max-w-sm mx-auto">
-      {/* △APQ shaded */}
-      <polygon points={`${A.x},${A.y} ${P.x},${P.y} ${Q.x},${Q.y}`} fill="#facc15" fillOpacity="0.14" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3"/>
-      {/* △ABC */}
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.18" stroke="#60a5fa" strokeWidth="2.5"/>
-      {/* PQ parallel line */}
-      <line x1={P.x} y1={P.y} x2={Q.x} y2={Q.y} stroke="#facc15" strokeWidth="2.5"/>
-      {/* Parallel tick marks on PQ (1 tick) */}
-      <line x1="147" y1="70" x2="151" y2="82" stroke="#facc15" strokeWidth="2"/>
-      {/* Parallel tick marks on BC (2 ticks) */}
-      <line x1="143" y1="158" x2="147" y2="172" stroke="#facc15" strokeWidth="2"/>
-      <line x1="153" y1="158" x2="157" y2="172" stroke="#facc15" strokeWidth="2"/>
+    <svg viewBox="0 0 330 210" className="w-full max-w-sm mx-auto">
+      {/* △DEC shaded (smaller similar triangle) */}
+      <polygon points={`${D.x},${D.y} ${E.x},${E.y} ${C.x},${C.y}`} fill="#facc15" fillOpacity="0.14" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,3"/>
+      {/* △ABC main */}
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.12" stroke="#60a5fa" strokeWidth="2.5"/>
+      {/* DE segment */}
+      <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
+      {/* Right-angle mark at A */}
+      <polyline points="30,175 40,175 40,185" fill="none" stroke="#60a5fa" strokeWidth="1.6"/>
+      {/* Right-angle mark at D (DE⊥AC) */}
+      <polyline points="182,185 182,175 192,175" fill="none" stroke="#4ade80" strokeWidth="1.6"/>
       {/* Vertex labels */}
-      <text x="146" y="10"  fontSize="13" fill="#93c5fd" fontWeight="bold" textAnchor="middle">A</text>
-      <text x="10"  y="178" fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x="279" y="178" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x="83"  y="76"  fontSize="12" fill="#fde68a" fontWeight="bold">P</text>
-      <text x="205" y="76"  fontSize="12" fill="#fde68a" fontWeight="bold">Q</text>
+      <text x="16"  y="200" fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x="16"  y="20"  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x="305" y="200" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x="193" y="200" fontSize="13" fill="#fde68a" fontWeight="bold">D</text>
+      <text x="197" y="118" fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
       {/* Side labels */}
-      <text x="103" y="43"  fontSize="11" fill="#f97316" fontWeight="bold">AP=4</text>
-      <text x="47"  y="127" fontSize="11" fill="#fb923c" fontWeight="bold">PB=6</text>
-      <text x="175" y="43"  fontSize="11" fill="#4ade80"  fontWeight="bold">AQ</text>
-      <text x="232" y="127" fontSize="11" fill="#86efac"  fontWeight="bold">QC</text>
-      <text x="150" y="70"  fontSize="11" fill="#fde68a"  fontWeight="bold" textAnchor="middle">PQ=6</text>
-      <text x="150" y="183" fontSize="11" fill="#93c5fd"  textAnchor="middle">BC = 15</text>
-      {/* Similar label top-right */}
-      <text x="268" y="42"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">△APQ</text>
-      <text x="268" y="56"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">~△ABC</text>
+      <text x="4"   y="108" fontSize="12" fill="#c084fc" fontWeight="bold">y</text>
+      <text x="100" y="200" fontSize="11" fill="#f97316" fontWeight="bold">15 cm</text>
+      <text x="240" y="200" fontSize="11" fill="#f97316" fontWeight="bold">10 cm</text>
+      <text x="198" y="158" fontSize="11" fill="#4ade80" fontWeight="bold">8 cm</text>
+      <text x="260" y="148" fontSize="11" fill="#86efac" fontWeight="bold">12 cm</text>
+      <text x="108" y="64"  fontSize="12" fill="#fbbf24" fontWeight="bold">x</text>
+      {/* Similar label */}
+      <text x="58" y="155" fontSize="9" fill="#fde68a" fontWeight="bold">△DEC~△BAC</text>
     </svg>
   );
 };
@@ -890,7 +892,7 @@ const SegitigaSebangunPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Dalam △ABC, garis PQ sejajar BC dengan P pada AB dan Q pada AC. Jika <InlineMath math="AP = 4" /> cm, <InlineMath math="PB = 6" /> cm, dan <InlineMath math="BC = 15" /> cm, tentukan panjang PQ!
+                      Segitiga ABC siku-siku di A. Titik D pada AC dengan <InlineMath math="AD = 15" /> cm dan <InlineMath math="DC = 10" /> cm. Titik E pada BC sehingga <InlineMath math="DE \perp AC" />, <InlineMath math="DE = 8" /> cm, dan <InlineMath math="EC = 12" /> cm. Tentukan nilai <InlineMath math="x" /> (panjang BE) dan <InlineMath math="y" /> (panjang AB)!
                     </p>
                   </div>
                   <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3">
@@ -900,13 +902,21 @@ const SegitigaSebangunPage = () => {
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Karena PQ // BC, maka △APQ ~ △ABC. Perbandingan sisi:</p>
+                      <p>Karena <InlineMath math="DE \perp AC" /> dan <InlineMath math="BA \perp AC" />, maka <InlineMath math="DE \parallel BA" />. Sehingga <InlineMath math="\triangle DEC \sim \triangle BAC" />.</p>
+                      <p><strong>Langkah 1:</strong> Tentukan AC:</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\frac{AP}{AB} = \frac{PQ}{BC}" />
-                        <BlockMath math="AB = AP + PB = 4 + 6 = 10 \text{ cm}" />
-                        <BlockMath math="\frac{4}{10} = \frac{PQ}{15} \Rightarrow PQ = \frac{4 \times 15}{10} = 6 \text{ cm}" />
+                        <BlockMath math="AC = AD + DC = 15 + 10 = 25 \text{ cm}" />
                       </div>
-                      <p><strong className="text-yellow-300">PQ = 6 cm.</strong></p>
+                      <p><strong>Langkah 2:</strong> Cari y = AB:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{DE}{BA} = \frac{DC}{AC} \Rightarrow \frac{8}{y} = \frac{10}{25} \Rightarrow y = \frac{8 \times 25}{10} = 20 \text{ cm}" />
+                      </div>
+                      <p><strong>Langkah 3:</strong> Cari x = BE:</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\frac{EC}{BC} = \frac{DC}{AC} \Rightarrow \frac{12}{BC} = \frac{10}{25} \Rightarrow BC = 30 \text{ cm}" />
+                        <BlockMath math="x = BE = BC - EC = 30 - 12 = 18 \text{ cm}" />
+                      </div>
+                      <p><strong className="text-yellow-300">x = BE = 18 cm dan y = AB = 20 cm.</strong></p>
                     </div>
                   </div>
                 </div>
