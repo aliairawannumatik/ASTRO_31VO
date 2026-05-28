@@ -251,15 +251,9 @@ const DiagTerpisah = () => {
       <text x={(B2.x+C2.x)/2-7} y={B2.y+20} fontSize="7.5" fill="#86efac">△PQR</text>
 
       {/* legend */}
-      <line x1="5"  y1="8"  x2="11" y2="8"  stroke="#a855f7" strokeWidth="1.4" strokeLinecap="round"/>
-      <text x="15" y="12" fontSize="7" fill="#c4b5fd">∠A = ∠P</text>
-      <line x1="4"  y1="19" x2="10" y2="19" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="6"  y1="22" x2="12" y2="22" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
-      <text x="15" y="23" fontSize="7" fill="#fcd9b5">∠B = ∠Q</text>
-      <line x1="3"  y1="30" x2="9"  y2="30" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="5"  y1="33" x2="11" y2="33" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="7"  y1="36" x2="13" y2="36" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
-      <text x="15" y="34" fontSize="7" fill="#bbf7d0">∠C = ∠R</text>
+      <text x="5" y="12" fontSize="7" fill="#c4b5fd">∠A = ∠P</text>
+      <text x="5" y="23" fontSize="7" fill="#fcd9b5">∠B = ∠Q</text>
+      <text x="5" y="34" fontSize="7" fill="#bbf7d0">∠C = ∠R</text>
     </svg>
   );
 };
