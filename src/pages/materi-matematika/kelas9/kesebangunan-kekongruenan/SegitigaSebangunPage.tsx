@@ -422,9 +422,22 @@ const PosisiSebangunSection = () => {
       color: '#a855f7',
       bg: 'bg-purple-500/20 border-purple-500/50',
       active: 'bg-purple-500/30 border-purple-400',
-      diagram: <DiagDiDalam />,
-      info: 'Segitiga kecil △ADE berada di dalam segitiga besar △ABC, berbagi sudut puncak ∠A. Karena DE // BC, sudut-sudut bersesuaian sama besar sehingga △ADE ~ △ABC.',
-      syarat: '∠A bersama + DE // BC → sudut sehadap sama',
+      diagram: (
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <p className="text-center text-xs text-purple-300/70 mb-1 font-body">△ADE di dalam △ABC</p>
+              <DiagDiDalam />
+            </div>
+            <div>
+              <p className="text-center text-xs text-fuchsia-300/70 mb-1 font-body">△PTS di dalam △PRQ</p>
+              <DiagSudutBerimpit />
+            </div>
+          </div>
+        </div>
+      ),
+      info: 'Segitiga kecil berada di dalam segitiga besar dan berbagi sudut puncak yang sama (∠A atau ∠P). Karena sisi alas sejajar (DE // BC, TS // RQ), sudut-sudut bersesuaian sama besar — keduanya adalah pola yang sama.',
+      syarat: '∠ bersama + sisi alas sejajar → sudut sehadap sama',
     },
     {
       title: 'Siku-siku & Tinggi',
