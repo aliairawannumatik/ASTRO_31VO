@@ -295,9 +295,7 @@ const DiagDiDalam = () => {
       <text x={C.x+3}  y={C.y+10} fontSize="8.5" fill="#93c5fd" fontWeight="bold">C</text>
       <text x={D.x-11} y={D.y-3}  fontSize="8.5" fill="#4ade80" fontWeight="bold">D</text>
       <text x={E.x+3}  y={E.y-3}  fontSize="8.5" fill="#4ade80" fontWeight="bold">E</text>
-      <text x="145" y="87" fontSize="7" fill="#fbbf24">DE // BC</text>
-      <text x="88"  y="130" fontSize="7.5" fill="#4ade80">△ADE</text>
-      <text x="88"  y="142" fontSize="7.5" fill="#93c5fd">~△ABC</text>
+      <text x="195" y="160" fontSize="7.5" fill="#4ade80" fontWeight="bold">△ADE ~ △ABC</text>
     </svg>
   );
 };
