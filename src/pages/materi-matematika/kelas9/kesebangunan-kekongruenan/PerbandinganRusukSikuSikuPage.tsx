@@ -165,7 +165,7 @@ const PerbandinganRusukSikuSikuPage = () => {
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">Perhatikan △ABD dan △CAB. Karena keduanya sebangun:</p>
                   <div className="bg-slate-900/60 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-xs text-white/70"><InlineMath math="\frac{BD}{AB} = \frac{AB}{BC}" /> (rusuk bersesuaian sebanding)</p>
+                    <p className="font-body text-sm text-white/70"><InlineMath math="\frac{BD}{AB} = \frac{AB}{BC}" /> (rusuk bersesuaian sebanding)</p>
                     <BlockMath math="\boxed{AB^2 = BD \times BC}" />
                     <p className="font-body text-xs text-white/60 text-center">Kuadrat rusuk alas = proyeksi alas × sisi miring</p>
                   </div>
@@ -186,7 +186,7 @@ const PerbandinganRusukSikuSikuPage = () => {
                   <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">Perhatikan △CDA dan △CAB. Karena keduanya sebangun:</p>
                   <div className="bg-slate-900/60 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-xs text-white/70"><InlineMath math="\frac{CD}{AC} = \frac{AC}{BC}" /></p>
+                    <p className="font-body text-sm text-white/70"><InlineMath math="\frac{CD}{AC} = \frac{AC}{BC}" /></p>
                     <BlockMath math="\boxed{AC^2 = CD \times CB}" />
                     <p className="font-body text-xs text-white/60 text-center">Kuadrat rusuk tegak = proyeksi tegak × sisi miring</p>
                   </div>
@@ -207,7 +207,7 @@ const PerbandinganRusukSikuSikuPage = () => {
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">Perhatikan △ADB dan △ADC. Keduanya sebangun menghasilkan:</p>
                   <div className="bg-slate-900/60 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-xs text-white/70"><InlineMath math="\frac{BD}{AD} = \frac{AD}{DC}" /></p>
+                    <p className="font-body text-sm text-white/70"><InlineMath math="\frac{BD}{AD} = \frac{AD}{DC}" /></p>
                     <BlockMath math="\boxed{AD^2 = BD \times DC}" />
                     <p className="font-body text-xs text-white/60 text-center">Garis tinggi kuadrat = hasil kali dua proyeksi pada sisi miring</p>
                   </div>
@@ -228,11 +228,11 @@ const PerbandinganRusukSikuSikuPage = () => {
                   <p className="font-body text-sm font-semibold text-orange-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">Dari dua cara menghitung luas △ABC siku-siku di A:</p>
                   <div className="bg-slate-900/60 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-xs text-white/70">Cara 1 (alas-tinggi dengan AB dan AC):</p>
+                    <p className="font-body text-sm text-white/70">Cara 1 (alas-tinggi dengan AB dan AC):</p>
                     <BlockMath math="L = \frac{AB \times AC}{2}" />
-                    <p className="font-body text-xs text-white/70">Cara 2 (alas-tinggi dengan BC dan AD):</p>
+                    <p className="font-body text-sm text-white/70">Cara 2 (alas-tinggi dengan BC dan AD):</p>
                     <BlockMath math="L = \frac{BC \times AD}{2}" />
-                    <p className="font-body text-xs text-white/70">Karena luasnya sama, maka:</p>
+                    <p className="font-body text-sm text-white/70">Karena luasnya sama, maka:</p>
                     <BlockMath math="\boxed{AB \times AC = BC \times AD}" />
                     <p className="font-body text-xs text-white/60 text-center">alas × tegak = miring × garis tinggi</p>
                   </div>
