@@ -373,13 +373,11 @@ const DiagSudutBerimpit = () => {
       {/* shared ∠P – outer arc (△PRQ) orange, inner arc (△PTS) green */}
       <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      {/* ∠T = ∠Q – green arcs */}
-      <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,15)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      {/* tanda sama ○ — circles centred exactly on arc midpoint (bisect unit vectors × r) */}
-      {/* ∠T midpoint: T + 13 × normalize(u_P + u_S) = (105, 91) */}
+      {/* ∠T = ∠Q – green arcs (radius pushed out so circle sits inside without overlap) */}
+      <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,19)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,21)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* tanda sama ○ — circles at ~r=13/15 from vertex, inside the arcs above */}
       <circle cx="105" cy="91" r="3" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      {/* ∠Q midpoint: Q + 15 × normalize(u_R + u_P) = (199, 138) */}
       <circle cx="199" cy="138" r="3" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       {/* ∠S = ∠R (cyan) */}
       <path d={ap(S.x,S.y,T.x,T.y,P.x,P.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
