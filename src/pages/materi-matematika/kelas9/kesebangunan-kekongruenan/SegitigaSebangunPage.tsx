@@ -108,6 +108,10 @@ const DiagramContoh1 = () => (
     <text x="313" y="137" fontSize="13" fill="#60a5fa" fontWeight="bold">4</text>
     <text x="313" y="192" fontSize="13" fill="#60a5fa" fontWeight="bold">2</text>
 
+    {/* Chevron arrows on vertical side AC — at E1(305,94) and E2(305,173) pointing downward */}
+    <path d="M 302,90 L 305,96 L 308,90" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round"/>
+    <path d="M 302,169 L 305,175 L 308,169" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round"/>
+
     {/* Base dimension lines */}
     <line x1="15"  y1="212" x2="15"  y2="222" stroke="#64748b" strokeWidth="1.2"/>
     <line x1="63"  y1="212" x2="63"  y2="222" stroke="#64748b" strokeWidth="1.2"/>
