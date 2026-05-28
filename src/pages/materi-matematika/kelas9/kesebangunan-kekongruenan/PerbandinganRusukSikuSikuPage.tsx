@@ -325,7 +325,7 @@ const PerbandinganRusukSikuSikuPage = () => {
                       <text x="162" y="113" fontSize="14" fill="#ffffff" fontWeight="bold">D</text>
                       {/* Label sisi: BD=3, CD=12 */}
                       <text x="192" y="141" fontSize="12" fill="#ffffff" fontWeight="bold" textAnchor="middle">3</text>
-                      <text x="118" y="63"  fontSize="12" fill="#ffffff" fontWeight="bold" textAnchor="middle">12</text>
+                      <text x="136" y="63"  fontSize="12" fill="#ffffff" fontWeight="bold" textAnchor="middle">12</text>
                     </svg>
                     <p className="font-body text-sm text-white text-center">Panjang <InlineMath math="AD" />, <InlineMath math="AB" />, dan <InlineMath math="AC" /> berturut-turut adalah . . . .</p>
                   </div>
