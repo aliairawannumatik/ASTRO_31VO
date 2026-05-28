@@ -358,12 +358,12 @@ const DiagSikuTinggi = () => {
 
 /* ── Diagram 5 – Sudut Berimpit ─────────────────────────── */
 const DiagSudutBerimpit = () => {
-  const P = {x:15,y:148}, R = {x:188,y:20}, Q = {x:218,y:148};
-  // T and S chosen so △PTS ~ △PRQ (ratio k=0.45)
-  const T = {x:93,y:90};
-  const S = {x:106,y:148};
+  const P = {x:15,y:150}, R = {x:170,y:15}, Q = {x:238,y:150};
+  // T on side PR at ~45% ; S placed so TS is NOT parallel to RQ
+  const T = {x:85,y:89};
+  const S = {x:158,y:108};
   return (
-    <svg viewBox="0 0 248 172" className="w-full rounded-lg bg-slate-950/50">
+    <svg viewBox="0 0 260 172" className="w-full rounded-lg bg-slate-950/50">
       {/* big △PRQ */}
       <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#3b82f6" fillOpacity=".12" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △PTS */}
@@ -371,23 +371,21 @@ const DiagSudutBerimpit = () => {
       {/* shared ∠P – two concentric arcs orange */}
       <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
-      {/* ∠T = ∠R (green) */}
+      {/* ∠T = ∠Q (green) — tanda busur sama */}
       <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,12)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,14)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      {/* ∠S = ∠Q (cyan) */}
-      <path d={ap(S.x,S.y,T.x,T.y,Q.x,Q.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
-      <path d={ap(Q.x,Q.y,R.x,R.y,S.x,S.y,14)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
-      {/* TS // RQ – matching arrow marks (chevron) at midpoint of each side */}
-      {/* arrow on TS (midpoint ≈99.5,119, dir=(0.219,0.976)) */}
-      <path d="M 96.2,117.7 L 100.6,123.9 L 102.0,116.4" fill="none" stroke="#fbbf24" strokeWidth="1.6" strokeLinejoin="round"/>
-      {/* arrow on RQ (midpoint ≈203,84, dir=(0.228,0.974)) */}
-      <path d="M 199.6,82.8 L 204.1,88.9 L 205.4,81.4" fill="none" stroke="#fbbf24" strokeWidth="1.6" strokeLinejoin="round"/>
+      <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,14)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* equality tick marks on ∠T and ∠Q arcs */}
+      <line x1="85" y1="102" x2="91" y2="100" stroke="#22c55e" strokeWidth="1.8"/>
+      <line x1="224" y1="146" x2="228" y2="140" stroke="#22c55e" strokeWidth="1.8"/>
+      {/* ∠S = ∠R (cyan) */}
+      <path d={ap(S.x,S.y,T.x,T.y,P.x,P.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,14)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
       {/* labels */}
       <text x="3"          y={P.y+3}   fontSize="8.5" fill="#fde68a" fontWeight="bold">P</text>
       <text x={R.x-2}      y={R.y-5}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">R</text>
       <text x={Q.x+3}      y={Q.y+3}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">Q</text>
       <text x={T.x-13}     y={T.y+1}   fontSize="8.5" fill="#e879f9" fontWeight="bold">T</text>
-      <text x={S.x-4}      y={S.y+13}  fontSize="8.5" fill="#e879f9" fontWeight="bold">S</text>
+      <text x={S.x+4}      y={S.y+3}   fontSize="8.5" fill="#e879f9" fontWeight="bold">S</text>
     </svg>
   );
 };
@@ -424,20 +422,12 @@ const PosisiSebangunSection = () => {
       active: 'bg-purple-500/30 border-purple-400',
       diagram: (
         <div className="space-y-2">
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <p className="text-center text-xs text-purple-300/70 mb-1 font-body">△ADE di dalam △ABC</p>
-              <DiagDiDalam />
-            </div>
-            <div>
-              <p className="text-center text-xs text-fuchsia-300/70 mb-1 font-body">△PTS di dalam △PRQ</p>
-              <DiagSudutBerimpit />
-            </div>
-          </div>
+          <p className="text-center text-xs text-purple-300/70 mb-1 font-body">△ADE di dalam △ABC (DE // BC)</p>
+          <DiagDiDalam />
         </div>
       ),
-      info: 'Segitiga kecil berada di dalam segitiga besar dan berbagi sudut puncak yang sama (∠A atau ∠P). Karena sisi alas sejajar (DE // BC, TS // RQ), sudut-sudut bersesuaian sama besar — keduanya adalah pola yang sama.',
-      syarat: '∠ bersama + sisi alas sejajar → sudut sehadap sama',
+      info: 'Segitiga kecil △ADE berada di dalam segitiga besar △ABC dan berbagi sudut puncak ∠A. Karena DE // BC, sudut-sudut bersesuaian sama besar (∠ADE = ∠ABC dan ∠AED = ∠ACB), sehingga △ADE ~ △ABC.',
+      syarat: '∠A bersama + DE // BC → sudut sehadap sama → AA terpenuhi',
     },
     {
       title: 'Siku-siku & Tinggi',
@@ -456,8 +446,8 @@ const PosisiSebangunSection = () => {
       bg: 'bg-fuchsia-500/20 border-fuchsia-500/50',
       active: 'bg-fuchsia-500/30 border-fuchsia-400',
       diagram: <DiagSudutBerimpit />,
-      info: 'Dua segitiga berbagi sudut yang sama (berimpit) di titik P. Karena ∠P bersekutu dan ∠T = ∠R (ditunjukkan busur hijau), berlaku △PTS ~ △PRQ. Pola ini sering muncul saat garis TS memotong dua sisi segitiga besar sehingga terbentuk sudut bersesuaian yang sama besar.',
-      syarat: '∠P bersekutu + ∠PTS = ∠PRQ → Sd, Sd terpenuhi',
+      info: 'Dua segitiga berbagi sudut yang sama (berimpit) di titik P. ∠T = ∠Q ditunjukkan dengan busur hijau dan tanda sama (✓) pada kedua sudut. Karena TS tidak sejajar dengan RQ, kesebangunan △PTS ~ △PQR terjadi bukan dari garis sejajar, melainkan langsung dari dua pasang sudut yang sama besar.',
+      syarat: '∠P bersekutu + ∠PTS = ∠PQR → Sd, Sd terpenuhi → △PTS ~ △PQR',
     },
   ];
   const c = configs[tab];
