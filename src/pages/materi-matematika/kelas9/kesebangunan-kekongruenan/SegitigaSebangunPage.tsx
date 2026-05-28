@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from "lucide-react";
+import { BookOpen, Lightbulb, Calculator, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -203,11 +203,11 @@ const ra = (cx:number,cy:number,p1x:number,p1y:number,p2x:number,p2y:number,s=7)
 /* ── Diagram 1 – Terpisah ───────────────────────────────── */
 const DiagTerpisah = () => {
   // T1: B=(12,105) C=(76,105) A=(37,37) — angles B=70° C=60° A=50°
-  const [A1,B1,C1] = [{x:37,y:37},{x:12,y:105},{x:76,y:105}];
+  const [A1,B1,C1] = [{x:37,y:59},{x:12,y:127},{x:76,y:127}];
   // T2: scaled ×1.4 – B=(118,112) C=(208,112) A=(153,17)
   const [A2,B2,C2] = [{x:153,y:17},{x:118,y:112},{x:208,y:112}];
   return (
-    <svg viewBox="0 0 225 127" className="w-full rounded-lg bg-slate-950/50">
+    <svg viewBox="0 0 225 152" className="w-full rounded-lg bg-slate-950/50">
       {/* T1 */}
       <polygon points={`${B1.x},${B1.y} ${C1.x},${C1.y} ${A1.x},${A1.y}`} fill="#3b82f6" fillOpacity=".18" stroke="#60a5fa" strokeWidth="1.8"/>
       <path d={ap(A1.x,A1.y,B1.x,B1.y,C1.x,C1.y,9)}  fill="none" stroke="#a855f7" strokeWidth="1.5"/>
@@ -288,6 +288,13 @@ const DiagDiDalam = () => {
       <line x1="126" y1="90" x2="130" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
       <line x1="112" y1="150" x2="116" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
       <line x1="118" y1="150" x2="122" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
+      {/* Proportion ticks – single on AD & AE, double on DB & EC */}
+      <line x1="93" y1="52" x2="97" y2="56" stroke="#fb923c" strokeWidth="1.5"/>
+      <line x1="163" y1="52" x2="159" y2="56" stroke="#fb923c" strokeWidth="1.5"/>
+      <line x1="37" y1="122" x2="42" y2="126" stroke="#fb923c" strokeWidth="1.5"/>
+      <line x1="35" y1="124" x2="40" y2="128" stroke="#fb923c" strokeWidth="1.5"/>
+      <line x1="214" y1="126" x2="219" y2="122" stroke="#fb923c" strokeWidth="1.5"/>
+      <line x1="216" y1="128" x2="221" y2="124" stroke="#fb923c" strokeWidth="1.5"/>
       {/* shared angle at A – two concentric arcs */}
       <path d={ap(A.x,A.y,B.x,B.y,C.x,C.y,18)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(A.x,A.y,D.x,D.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
@@ -326,7 +333,6 @@ const DiagSikuTinggi = () => {
       {/* right angle marks */}
       <path d={ra(D.x,D.y,A.x,A.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
       <path d={ra(D.x,D.y,B.x,B.y,C.x,C.y,7)} fill="none" stroke="#fff" strokeWidth="1.2"/>
-      <path d={ra(C.x,C.y,A.x,A.y,B.x,B.y,7)} fill="none" stroke="#fbbf24" strokeWidth="1.2"/>
       {/* ∠A orange – shared in △ADC & △ACB */}
       <path d={ap(A.x,A.y,D.x,D.y,C.x,C.y,12)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(A.x,A.y,D.x,D.y,C.x,C.y,16)} fill="none" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2"/>
@@ -346,6 +352,47 @@ const DiagSikuTinggi = () => {
       <text x="128" y="120" fontSize="7.5" fill="#4ade80">△CDB</text>
       <text x="90"  y="18"  fontSize="7.5" fill="#93c5fd">△ACB</text>
       <text x="55"  y="136" fontSize="7" fill="#fbbf24">D</text>
+    </svg>
+  );
+};
+
+/* ── Diagram 5 – Sudut Berimpit ─────────────────────────── */
+const DiagSudutBerimpit = () => {
+  const P = {x:15,y:148}, R = {x:188,y:20}, Q = {x:218,y:148};
+  // T and S chosen so △PTS ~ △PRQ (ratio k=0.45)
+  const T = {x:93,y:90};
+  const S = {x:106,y:148};
+  return (
+    <svg viewBox="0 0 248 172" className="w-full rounded-lg bg-slate-950/50">
+      {/* big △PRQ */}
+      <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#3b82f6" fillOpacity=".12" stroke="#60a5fa" strokeWidth="1.8"/>
+      {/* small △PTS */}
+      <polygon points={`${P.x},${P.y} ${T.x},${T.y} ${S.x},${S.y}`} fill="#a855f7" fillOpacity=".2" stroke="#d946ef" strokeWidth="1.8"/>
+      {/* shared ∠P – two concentric arcs orange */}
+      <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      {/* ∠T = ∠R (green) */}
+      <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,12)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,14)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* ∠S = ∠Q (cyan) */}
+      <path d={ap(S.x,S.y,T.x,T.y,Q.x,Q.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      <path d={ap(Q.x,Q.y,R.x,R.y,S.x,S.y,14)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      {/* TS // RQ – single parallel tick marks */}
+      <line x1="104" y1="118" x2="96"  y2="120" stroke="#fbbf24" strokeWidth="1.5"/>
+      <line x1="207" y1="83"  x2="199" y2="85"  stroke="#fbbf24" strokeWidth="1.5"/>
+      {/* labels */}
+      <text x="3"          y={P.y+3}   fontSize="8.5" fill="#fde68a" fontWeight="bold">P</text>
+      <text x={R.x-2}      y={R.y-5}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">R</text>
+      <text x={Q.x+3}      y={Q.y+3}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">Q</text>
+      <text x={T.x-13}     y={T.y+1}   fontSize="8.5" fill="#e879f9" fontWeight="bold">T</text>
+      <text x={S.x-4}      y={S.y+13}  fontSize="8.5" fill="#e879f9" fontWeight="bold">S</text>
+      {/* side labels */}
+      <text x="34" y="118" fontSize="7" fill="#fb923c">PT=12</text>
+      <text x="24" y="158" fontSize="7" fill="#e879f9">PS=9</text>
+      <text x="143" y="160" fontSize="7" fill="#93c5fd">SQ=11</text>
+      {/* triangle names */}
+      <text x="60" y="112" fontSize="7.5" fill="#e879f9">△PTS</text>
+      <text x="60" y="124" fontSize="7.5" fill="#93c5fd">~△PRQ</text>
     </svg>
   );
 };
@@ -394,6 +441,16 @@ const PosisiSebangunSection = () => {
       info: 'Pada △ACB siku-siku di C, garis tinggi CD membagi menjadi △ADC (ungu) dan △CDB (hijau). Ketiga segitiga saling sebangun: △ADC ~ △CDB ~ △ACB, karena masing-masing berbagi sudut dengan segitiga induk.',
       syarat: '△ADC ~ △CDB ~ △ACB (Siku-Siku-Sudut)',
     },
+    {
+      title: 'Sudut Berimpit',
+      sub: 'Sudut sekutu di satu titik',
+      color: '#e879f9',
+      bg: 'bg-fuchsia-500/20 border-fuchsia-500/50',
+      active: 'bg-fuchsia-500/30 border-fuchsia-400',
+      diagram: <DiagSudutBerimpit />,
+      info: 'Dua segitiga berbagi sudut yang sama (berimpit) di titik P. Karena ∠P bersekutu dan ∠T = ∠R (ditunjukkan busur hijau), berlaku △PTS ~ △PRQ. Pola ini sering muncul saat garis TS memotong dua sisi segitiga besar sehingga terbentuk sudut bersesuaian yang sama besar.',
+      syarat: '∠P bersekutu + ∠PTS = ∠PRQ → Sd, Sd terpenuhi',
+    },
   ];
   const c = configs[tab];
   return (
@@ -402,8 +459,8 @@ const PosisiSebangunSection = () => {
         {configs.map((cfg, i) => (
           <button key={i} onClick={() => setTab(i)}
             className={`rounded-lg border p-2 text-left transition-all font-body ${
-              tab === i ? cfg.active : 'bg-slate-800/60 border-slate-700 hover:border-slate-500'
-            }`}>
+              configs.length % 2 !== 0 && i === configs.length - 1 ? 'col-span-2' : ''
+            } ${tab === i ? cfg.active : 'bg-slate-800/60 border-slate-700 hover:border-slate-500'}`}>
             <p className="text-xs font-semibold" style={{ color: tab === i ? cfg.color : '#94a3b8' }}>{cfg.title}</p>
             <p className="text-xs text-white/40">{cfg.sub}</p>
           </button>
@@ -602,16 +659,10 @@ const InteraktifSebangunDemo = () => {
 
 const SegitigaSebangunPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "posisi", "konsep2", "contoh1"]);
-  const toggleSection = (s: string) => {
-    playPopSound();
-    setExpandedSections(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
-  };
-  const Header = ({ id, icon, color, label }: { id: string; icon: React.ReactNode; color: string; label: string }) => (
-    <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+  const Header = ({ icon, color, label }: { icon: React.ReactNode; color: string; label: string }) => (
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3"><span style={{ color }}>{icon}</span><span className="font-body font-semibold text-white">{label}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
@@ -627,9 +678,8 @@ const SegitigaSebangunPage = () => {
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label="🔺 Mengapa Segitiga Istimewa?" />
-            {expandedSections.includes("intro") && (
-              <div className="px-5 pb-5 space-y-4">
+            <Header icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label="🔺 Mengapa Segitiga Istimewa?" />
+            <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pada bangun datar umum, kita butuh DUA syarat untuk membuktikan kesebangunan (sudut sama + rusuk sebanding). Tapi pada <strong className="text-cyan-300">segitiga</strong>, cukup salah satunya saja — karena keduanya saling memengaruhi secara otomatis!
                 </p>
@@ -643,14 +693,12 @@ const SegitigaSebangunPage = () => {
                 </div>
                 <InteraktifSebangunDemo />
               </div>
-            )}
           </div>
 
           {/* SYARAT AA */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="konsep1" icon={<Target className="w-5 h-5" />} color="#4ade80" label="📘 Sub-Bab 1: Syarat Kesebangunan Segitiga" />
-            {expandedSections.includes("konsep1") && (
-              <div className="px-5 pb-5 space-y-4">
+            <Header icon={<Target className="w-5 h-5" />} color="#4ade80" label="📘 Sub-Bab 1: Syarat Kesebangunan Segitiga" />
+            <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
                   <div className="space-y-3 font-body text-sm text-white/80">
@@ -670,27 +718,23 @@ const SegitigaSebangunPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* POSISI SEGITIGA SEBANGUN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="posisi" icon={<Target className="w-5 h-5" />} color="#a855f7" label="🔷 Sub-Bab 2: Posisi Dua Segitiga Sebangun" />
-            {expandedSections.includes("posisi") && (
-              <div className="px-5 pb-5 space-y-4">
+            <Header icon={<Target className="w-5 h-5" />} color="#a855f7" label="🔷 Sub-Bab 2: Posisi Dua Segitiga Sebangun" />
+            <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dua segitiga yang sebangun bisa muncul dalam berbagai <strong className="text-purple-300">konfigurasi posisi</strong>. Meskipun tampilannya berbeda, syarat kesebangunan tetap terpenuhi — ditunjukkan oleh tanda busur berwarna yang sama pada sudut-sudut yang bersesuaian.
                 </p>
                 <PosisiSebangunSection />
               </div>
-            )}
           </div>
 
           {/* DALIL GARIS SEJAJAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="konsep2" icon={<Target className="w-5 h-5" />} color="#facc15" label="📘 Sub-Bab 2: Dalil Garis Sejajar dalam Segitiga" />
-            {expandedSections.includes("konsep2") && (
-              <div className="px-5 pb-5 space-y-4">
+            <Header icon={<Target className="w-5 h-5" />} color="#facc15" label="📘 Sub-Bab 2: Dalil Garis Sejajar dalam Segitiga" />
+            <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-yellow-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">Jika sebuah garis ditarik sejajar salah satu sisi segitiga sehingga memotong dua sisi lainnya, maka:</p>
@@ -710,14 +754,12 @@ const SegitigaSebangunPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH SOAL */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="contoh1" icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label="📝 Contoh Soal — Segitiga Sebangun" />
-            {expandedSections.includes("contoh1") && (
-              <div className="px-5 pb-5 space-y-6">
+            <Header icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label="📝 Contoh Soal — Segitiga Sebangun" />
+            <div className="px-5 pb-5 space-y-6">
                 {/* MUDAH */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
@@ -811,7 +853,6 @@ const SegitigaSebangunPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
         </div>
