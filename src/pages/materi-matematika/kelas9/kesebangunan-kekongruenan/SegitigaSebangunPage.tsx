@@ -204,10 +204,10 @@ const ra = (cx:number,cy:number,p1x:number,p1y:number,p2x:number,p2y:number,s=7)
 const DiagTerpisah = () => {
   // T1: A=(37,59) B=(12,127) C=(76,127)
   const [A1,B1,C1] = [{x:37,y:59},{x:12,y:127},{x:76,y:127}];
-  // T2: P=(153,17) Q=(118,112) R=(208,112)
-  const [A2,B2,C2] = [{x:153,y:17},{x:118,y:112},{x:208,y:112}];
+  // T2: P=(153,32) Q=(118,127) R=(208,127) — alas QR sejajar dengan BC
+  const [A2,B2,C2] = [{x:153,y:32},{x:118,y:127},{x:208,y:127}];
   return (
-    <svg viewBox="0 0 225 152" className="w-full rounded-lg bg-slate-950/50">
+    <svg viewBox="0 0 225 165" className="w-full rounded-lg bg-slate-950/50">
       {/* T1 */}
       <polygon points={`${B1.x},${B1.y} ${C1.x},${C1.y} ${A1.x},${A1.y}`} fill="#7dd3fc" fillOpacity=".40" stroke="#60a5fa" strokeWidth="1.8"/>
       <path d={ap(A1.x,A1.y,B1.x,B1.y,C1.x,C1.y,9)}  fill="none" stroke="#a855f7" strokeWidth="1.5"/>
@@ -235,15 +235,15 @@ const DiagTerpisah = () => {
       <path d={ap(B2.x,B2.y,C2.x,C2.y,A2.x,A2.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(C2.x,C2.y,B2.x,B2.y,A2.x,A2.y,11)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       {/* tanda sudut T2: 1 garis=∠P, 2 garis=∠Q, 3 garis=∠R */}
-      {/* ∠P — 1 tanda (ungu), tengah busur ≈ (154, 27), tegak lurus (-0.995, 0.105) */}
-      <line x1="155.5" y1="26.8" x2="152.5" y2="27.2" stroke="#a855f7" strokeWidth="1.4" strokeLinecap="round"/>
-      {/* ∠Q — 2 tanda (oranye), tengah busur ≈ (128.4, 104.1), tegak lurus (0.606, 0.797) */}
-      <line x1="126.7" y1="103.5" x2="128.5" y2="105.9" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="128.3" y1="102.3" x2="130.1" y2="104.7" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
-      {/* ∠R — 3 tanda (hijau), tengah busur ≈ (198.8, 105.9), tegak lurus (0.549, -0.838) */}
-      <line x1="199.3" y1="108.0" x2="200.9" y2="105.4" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="198.0" y1="107.2" x2="199.6" y2="104.6" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="196.7" y1="106.4" x2="198.3" y2="103.8" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠P — 1 tanda (ungu), tengah busur ≈ (154, 42), tegak lurus (-0.995, 0.105) */}
+      <line x1="155.5" y1="41.8" x2="152.5" y2="42.2" stroke="#a855f7" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠Q — 2 tanda (oranye), tengah busur ≈ (128.4, 119.1), tegak lurus (0.606, 0.797) */}
+      <line x1="126.7" y1="118.5" x2="128.5" y2="120.9" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="128.3" y1="117.3" x2="130.1" y2="119.7" stroke="#f97316" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* ∠R — 3 tanda (hijau), tengah busur ≈ (198.8, 120.9), tegak lurus (0.549, -0.838) */}
+      <line x1="199.3" y1="123.0" x2="200.9" y2="120.4" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="198.0" y1="122.2" x2="199.6" y2="119.6" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="196.7" y1="121.4" x2="198.3" y2="118.8" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
 
       <text x={A2.x-4} y={A2.y-5}  fontSize="8" fill="#c4b5fd" fontWeight="bold">P</text>
       <text x={B2.x-9} y={B2.y+9}  fontSize="8" fill="#86efac" fontWeight="bold">Q</text>
