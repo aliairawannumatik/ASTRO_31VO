@@ -358,12 +358,14 @@ const DiagSikuTinggi = () => {
 
 /* ── Diagram 5 – Sudut Berimpit ─────────────────────────── */
 const DiagSudutBerimpit = () => {
-  const P = {x:15,y:150}, R = {x:170,y:15}, Q = {x:238,y:150};
-  // T on side PR at ~45% ; S placed so TS is NOT parallel to RQ
-  const T = {x:85,y:89};
-  const S = {x:158,y:108};
+  // Layout matches reference: P bottom-left, Q bottom-right, R top-right
+  // S on base PQ: PS=9cm, SQ=11cm   T on side PR: PT=12cm
+  // Scale ≈ 9.6 px/cm, PQ = 192px
+  const P = {x:18, y:148}, Q = {x:210, y:148}, R = {x:195, y:18};
+  const S = {x:104, y:148};   // PS = 86px ≈ 9cm
+  const T = {x:111, y:80};    // T on PR at ~52.5%, PT ≈ 12cm
   return (
-    <svg viewBox="0 0 260 172" className="w-full rounded-lg bg-slate-950/50">
+    <svg viewBox="0 0 238 170" className="w-full rounded-lg bg-slate-950/50">
       {/* big △PRQ */}
       <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#3b82f6" fillOpacity=".12" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* small △PTS */}
@@ -371,21 +373,29 @@ const DiagSudutBerimpit = () => {
       {/* shared ∠P – two concentric arcs orange */}
       <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,15)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
-      {/* ∠T = ∠Q (green) — tanda busur sama */}
-      <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,12)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,14)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
-      {/* equality tick marks on ∠T and ∠Q arcs */}
-      <line x1="85" y1="102" x2="91" y2="100" stroke="#22c55e" strokeWidth="1.8"/>
-      <line x1="224" y1="146" x2="228" y2="140" stroke="#22c55e" strokeWidth="1.8"/>
+      {/* ∠T = ∠Q – green arcs */}
+      <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,15)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* tanda sama ○ — small open circles on each angle arc */}
+      <circle cx="104" cy="91" r="3.5" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <circle cx="199" cy="139" r="3.5" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
       {/* ∠S = ∠R (cyan) */}
       <path d={ap(S.x,S.y,T.x,T.y,P.x,P.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
-      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,14)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
-      {/* labels */}
-      <text x="3"          y={P.y+3}   fontSize="8.5" fill="#fde68a" fontWeight="bold">P</text>
-      <text x={R.x-2}      y={R.y-5}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">R</text>
-      <text x={Q.x+3}      y={Q.y+3}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">Q</text>
-      <text x={T.x-13}     y={T.y+1}   fontSize="8.5" fill="#e879f9" fontWeight="bold">T</text>
-      <text x={S.x+4}      y={S.y+3}   fontSize="8.5" fill="#e879f9" fontWeight="bold">S</text>
+      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,13)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      {/* S and T point dots */}
+      <circle cx={S.x} cy={S.y} r="2.5" fill="#e879f9"/>
+      <circle cx={T.x} cy={T.y} r="2.5" fill="#e879f9"/>
+      {/* dimension labels */}
+      <text x="56" y="108" fontSize="9" fill="#c084fc" fontWeight="bold"
+        textAnchor="middle" transform="rotate(-36, 56, 108)">12 cm</text>
+      <text x="61" y="162" fontSize="9" fill="#c084fc" fontWeight="bold" textAnchor="middle">9 cm</text>
+      <text x="157" y="162" fontSize="9" fill="#c084fc" fontWeight="bold" textAnchor="middle">11 cm</text>
+      {/* vertex labels */}
+      <text x="3"        y={P.y+4}  fontSize="9" fill="#fde68a" fontWeight="bold">P</text>
+      <text x={R.x+3}   y={R.y-3}  fontSize="9" fill="#93c5fd" fontWeight="bold">R</text>
+      <text x={Q.x+3}   y={Q.y+4}  fontSize="9" fill="#93c5fd" fontWeight="bold">Q</text>
+      <text x={T.x+4}   y={T.y-3}  fontSize="9" fill="#e879f9" fontWeight="bold">T</text>
+      <text x={S.x-4}   y={S.y+13} fontSize="9" fill="#e879f9" fontWeight="bold">S</text>
     </svg>
   );
 };
