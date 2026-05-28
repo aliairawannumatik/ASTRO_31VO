@@ -759,7 +759,7 @@ const SegitigaSebangunPage = () => {
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2">
                   <p className="font-body text-sm text-cyan-200 font-semibold">Dua segitiga sebangun jika memenuhi SALAH SATU dari berikut:</p>
                   <div className="font-body text-sm text-cyan-100 space-y-1">
-                    <p>🔹 <strong>Syarat 1 (Sd, Sd, Sd):</strong> Sudut-sudut yang bersesuaian sama besar</p>
+                    <p>🔹 <strong>Syarat 1 (Sd, Sd, Sd) atau (Sd, Sd):</strong> Sudut-sudut yang bersesuaian sama besar</p>
                     <p>🔹 <strong>Syarat 2 (S, S, S):</strong> Rusuk-rusuk yang bersesuaian sebanding</p>
                     <p>🔹 <strong>Syarat 3 (S, Sd, S):</strong> Dua pasang rusuk sebanding dan sudut apit sama besar</p>
                   </div>
@@ -819,7 +819,7 @@ const SegitigaSebangunPage = () => {
                 </div>
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI GARIS SEJAJAR DALAM SEGITIGA:</p>
-                  <DiagramGarisSejajar />
+                  <DiagDiDalam />
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
