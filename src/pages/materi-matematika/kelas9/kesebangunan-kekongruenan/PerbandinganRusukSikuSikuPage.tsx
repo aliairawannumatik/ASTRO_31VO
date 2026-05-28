@@ -50,8 +50,6 @@ const DiagramSikuSiku = () => (
     <text x="36"  y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
     <text x="178" y="197" fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    {/* Side labels */}
-    <text x="78"  y="162" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
     {/* Legend */}
     <rect x="3" y="202" width="254" height="14" rx="4" fill="#0f172a" stroke="#334155"/>
     <text x="130" y="212" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">△ABD ~ △CAD ~ △CAB (tiga segitiga saling sebangun)</text>
@@ -104,7 +102,6 @@ const DiagramGarisTinggi = () => (
     <text x="36"  y="197" fontSize="12" fill="#86efac" fontWeight="bold">A</text>
     <text x="178" y="197" fontSize="12" fill="#86efac" fontWeight="bold">C</text>
     <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
-    <text x="78"  y="162" fontSize="10" fill="#facc15" fontWeight="bold">AD</text>
     <rect x="3" y="200" width="254" height="16" rx="4" fill="#0f172a" stroke="#22c55e" strokeWidth="1"/>
     <text x="130" y="208" textAnchor="middle" fontSize="8" fill="#fde68a" fontWeight="bold">Garis Tinggi ke Sisi Miring:</text>
     <text x="130" y="216" textAnchor="middle" fontSize="8" fill="#22c55e" fontWeight="bold">AD² = BD × DC</text>
