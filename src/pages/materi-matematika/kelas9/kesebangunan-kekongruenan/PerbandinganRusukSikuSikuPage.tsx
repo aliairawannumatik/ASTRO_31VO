@@ -311,21 +311,21 @@ const PerbandinganRusukSikuSikuPage = () => {
                     {/* Diagram — △CAB siku-siku di A, D pada CB dengan AD⊥CB */}
                     <svg viewBox="0 0 270 215" className="w-full max-w-xs mx-auto">
                       {/* Segitiga CAB */}
-                      <polygon points="80,20 80,180 210,180" fill="none" stroke="#cbd5e1" strokeWidth="1.8"/>
+                      <polygon points="80,20 80,180 210,180" fill="none" stroke="#facc15" strokeWidth="2"/>
                       {/* Garis tinggi AD */}
-                      <line x1="80" y1="180" x2="158" y2="116" stroke="#cbd5e1" strokeWidth="1.5"/>
+                      <line x1="80" y1="180" x2="158" y2="116" stroke="#facc15" strokeWidth="1.8"/>
                       {/* Sudut siku-siku di A */}
-                      <path d="M 80,170 L 90,170 L 90,180" fill="none" stroke="#cbd5e1" strokeWidth="1.5"/>
+                      <path d="M 80,170 L 90,170 L 90,180" fill="none" stroke="#60a5fa" strokeWidth="1.8"/>
                       {/* Sudut siku-siku di D: p1 ke B, corner, p2 ke A */}
-                      <path d="M 163.7,123.0 L 156.7,128.7 L 151.0,121.7" fill="none" stroke="#cbd5e1" strokeWidth="1.5"/>
+                      <path d="M 163.7,123.0 L 156.7,128.7 L 151.0,121.7" fill="none" stroke="#60a5fa" strokeWidth="1.8"/>
                       {/* Label vertex */}
-                      <text x="72" y="16"  fontSize="14" fill="#e2e8f0" fontWeight="bold">C</text>
-                      <text x="62" y="198" fontSize="14" fill="#e2e8f0" fontWeight="bold">A</text>
-                      <text x="213" y="198" fontSize="14" fill="#e2e8f0" fontWeight="bold">B</text>
-                      <text x="162" y="113" fontSize="14" fill="#e2e8f0" fontWeight="bold">D</text>
+                      <text x="72" y="16"  fontSize="14" fill="#ffffff" fontWeight="bold">C</text>
+                      <text x="62" y="198" fontSize="14" fill="#ffffff" fontWeight="bold">A</text>
+                      <text x="213" y="198" fontSize="14" fill="#ffffff" fontWeight="bold">B</text>
+                      <text x="162" y="113" fontSize="14" fill="#ffffff" fontWeight="bold">D</text>
                       {/* Label sisi: BD=3, CD=12 */}
-                      <text x="192" y="141" fontSize="12" fill="#fde68a" fontWeight="bold" textAnchor="middle">3</text>
-                      <text x="118" y="63"  fontSize="12" fill="#fde68a" fontWeight="bold" textAnchor="middle">12</text>
+                      <text x="192" y="141" fontSize="12" fill="#ffffff" fontWeight="bold" textAnchor="middle">3</text>
+                      <text x="118" y="63"  fontSize="12" fill="#ffffff" fontWeight="bold" textAnchor="middle">12</text>
                     </svg>
                     <p className="font-body text-sm text-white text-center">Panjang <InlineMath math="AD" />, <InlineMath math="AB" />, dan <InlineMath math="AC" /> berturut-turut adalah . . . .</p>
                   </div>
