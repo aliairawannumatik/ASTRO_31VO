@@ -377,22 +377,17 @@ const DiagSudutBerimpit = () => {
       {/* ∠S = ∠Q (cyan) */}
       <path d={ap(S.x,S.y,T.x,T.y,Q.x,Q.y,12)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
       <path d={ap(Q.x,Q.y,R.x,R.y,S.x,S.y,14)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
-      {/* TS // RQ – single parallel tick marks */}
-      <line x1="104" y1="118" x2="96"  y2="120" stroke="#fbbf24" strokeWidth="1.5"/>
-      <line x1="207" y1="83"  x2="199" y2="85"  stroke="#fbbf24" strokeWidth="1.5"/>
+      {/* TS // RQ – matching arrow marks (chevron) at midpoint of each side */}
+      {/* arrow on TS (midpoint ≈99.5,119, dir=(0.219,0.976)) */}
+      <path d="M 96.2,117.7 L 100.6,123.9 L 102.0,116.4" fill="none" stroke="#fbbf24" strokeWidth="1.6" strokeLinejoin="round"/>
+      {/* arrow on RQ (midpoint ≈203,84, dir=(0.228,0.974)) */}
+      <path d="M 199.6,82.8 L 204.1,88.9 L 205.4,81.4" fill="none" stroke="#fbbf24" strokeWidth="1.6" strokeLinejoin="round"/>
       {/* labels */}
       <text x="3"          y={P.y+3}   fontSize="8.5" fill="#fde68a" fontWeight="bold">P</text>
       <text x={R.x-2}      y={R.y-5}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">R</text>
       <text x={Q.x+3}      y={Q.y+3}   fontSize="8.5" fill="#93c5fd" fontWeight="bold">Q</text>
       <text x={T.x-13}     y={T.y+1}   fontSize="8.5" fill="#e879f9" fontWeight="bold">T</text>
       <text x={S.x-4}      y={S.y+13}  fontSize="8.5" fill="#e879f9" fontWeight="bold">S</text>
-      {/* side labels */}
-      <text x="34" y="118" fontSize="7" fill="#fb923c">PT=12</text>
-      <text x="24" y="158" fontSize="7" fill="#e879f9">PS=9</text>
-      <text x="143" y="160" fontSize="7" fill="#93c5fd">SQ=11</text>
-      {/* triangle names */}
-      <text x="60" y="112" fontSize="7.5" fill="#e879f9">△PTS</text>
-      <text x="60" y="124" fontSize="7.5" fill="#93c5fd">~△PRQ</text>
     </svg>
   );
 };
