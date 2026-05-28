@@ -288,13 +288,15 @@ const DiagDiDalam = () => {
       <line x1="126" y1="90" x2="130" y2="100" stroke="#fbbf24" strokeWidth="1.5"/>
       <line x1="112" y1="150" x2="116" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
       <line x1="118" y1="150" x2="122" y2="160" stroke="#fbbf24" strokeWidth="1.5"/>
-      {/* Proportion ticks – single on AD & AE, double on DB & EC */}
+      {/* Proportion ticks – single on AD & DB (same), single on AE & EC (same) */}
+      {/* AD */}
       <line x1="93" y1="52" x2="97" y2="56" stroke="#fb923c" strokeWidth="1.5"/>
+      {/* DB */}
+      <line x1="36" y1="123" x2="41" y2="127" stroke="#fb923c" strokeWidth="1.5"/>
+      {/* AE */}
       <line x1="163" y1="52" x2="159" y2="56" stroke="#fb923c" strokeWidth="1.5"/>
-      <line x1="37" y1="122" x2="42" y2="126" stroke="#fb923c" strokeWidth="1.5"/>
-      <line x1="35" y1="124" x2="40" y2="128" stroke="#fb923c" strokeWidth="1.5"/>
-      <line x1="214" y1="126" x2="219" y2="122" stroke="#fb923c" strokeWidth="1.5"/>
-      <line x1="216" y1="128" x2="221" y2="124" stroke="#fb923c" strokeWidth="1.5"/>
+      {/* EC */}
+      <line x1="215" y1="127" x2="220" y2="123" stroke="#fb923c" strokeWidth="1.5"/>
       {/* shared angle at A – two concentric arcs */}
       <path d={ap(A.x,A.y,B.x,B.y,C.x,C.y,18)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
       <path d={ap(A.x,A.y,D.x,D.y,E.x,E.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
