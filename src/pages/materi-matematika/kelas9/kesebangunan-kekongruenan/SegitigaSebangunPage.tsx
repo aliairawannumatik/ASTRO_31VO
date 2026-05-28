@@ -170,9 +170,9 @@ const DiagramContoh2 = () => {
       <text x="50"  y="115" fontSize="12" fill="#c084fc" fontWeight="bold">y</text>
       <text x="100" y="210" fontSize="11" fill="#f97316" fontWeight="bold">15 cm</text>
       <text x="235" y="210" fontSize="11" fill="#f97316" fontWeight="bold">10 cm</text>
-      <text x={D.x+4} y={(D.y+E.y)/2+5} fontSize="11" fill="#4ade80" fontWeight="bold">8 cm</text>
-      <text x={(E.x+C.x)/2-10} y={(E.y+C.y)/2-5} fontSize="11" fill="#86efac" fontWeight="bold">12 cm</text>
-      <text x={(B.x+E.x)/2-18} y={(B.y+E.y)/2-4} fontSize="12" fill="#fbbf24" fontWeight="bold">x</text>
+      <text x={D.x+16} y={(D.y+E.y)/2+5} fontSize="11" fill="#4ade80" fontWeight="bold">8 cm</text>
+      <text x={(E.x+C.x)/2+8} y={(E.y+C.y)/2-5} fontSize="11" fill="#86efac" fontWeight="bold">12 cm</text>
+      <text x={(B.x+E.x)/2-4} y={(B.y+E.y)/2-4} fontSize="12" fill="#fbbf24" fontWeight="bold">x</text>
     </svg>
   );
 };
