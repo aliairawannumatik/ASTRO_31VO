@@ -808,6 +808,10 @@ const SegitigaSebangunPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header icon={<Target className="w-5 h-5" />} color="#facc15" label="📘 Sub-Bab 3: Dalil Garis Sejajar dalam Segitiga" />
             <div className="px-5 pb-5 space-y-4">
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
+                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI GARIS SEJAJAR DALAM SEGITIGA:</p>
+                  <DiagDiDalam />
+                </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-yellow-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">Jika sebuah garis ditarik sejajar salah satu sisi segitiga sehingga memotong dua sisi lainnya, maka:</p>
@@ -816,10 +820,6 @@ const SegitigaSebangunPage = () => {
                     <p className="font-body text-xs text-white/60">Juga berlaku kebalikannya: Jika AD/DB = AE/EC, maka DE // BC</p>
                   </div>
                   <p className="font-body text-sm text-white/80">Selain itu: △ADE ~ △ABC dengan perbandingan rusuk <InlineMath math="\frac{AD}{AB} = \frac{AE}{AC} = \frac{DE}{BC}" /></p>
-                </div>
-                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
-                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI GARIS SEJAJAR DALAM SEGITIGA:</p>
-                  <DiagDiDalam />
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
