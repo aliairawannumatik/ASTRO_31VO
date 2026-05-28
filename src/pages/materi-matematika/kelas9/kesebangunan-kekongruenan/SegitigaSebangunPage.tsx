@@ -334,6 +334,54 @@ const DiagDiDalam = () => {
   );
 };
 
+/* ── Diagram 3b – Di Dalam PTS / PRQ (sesuai gambar) ────── */
+const DiagDiDalamPTS = () => {
+  // P=bottom-left, R=top-right, Q=bottom-right
+  const P = {x:18, y:185}, R = {x:250, y:35}, Q = {x:300, y:185};
+  // T on PR ~42%, S on PQ ~42%
+  const T = {x:115, y:122}, S = {x:136, y:185};
+  return (
+    <svg viewBox="0 0 325 208" className="w-full rounded-lg bg-slate-950/50">
+      {/* judul */}
+      <text x="162" y="13" textAnchor="middle" fontSize="8.5" fill="#fde68a" fontWeight="bold">△PTS di dalam △PRQ</text>
+      {/* segitiga besar PRQ — cyan */}
+      <polygon points={`${P.x},${P.y} ${R.x},${R.y} ${Q.x},${Q.y}`} fill="#06b6d4" fillOpacity=".12" stroke="#06b6d4" strokeWidth="2"/>
+      {/* segitiga kecil PTS — magenta */}
+      <polygon points={`${P.x},${P.y} ${T.x},${T.y} ${S.x},${S.y}`} fill="#d946ef" fillOpacity=".30" stroke="#d946ef" strokeWidth="2"/>
+
+      {/* sudut P bersama — oranye, dua busur */}
+      <path d={ap(P.x,P.y,R.x,R.y,Q.x,Q.y,22)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+      <path d={ap(P.x,P.y,T.x,T.y,S.x,S.y,13)} fill="none" stroke="#f97316" strokeWidth="1.5"/>
+
+      {/* ∠R = ∠T — hijau */}
+      <path d={ap(R.x,R.y,P.x,P.y,Q.x,Q.y,18)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      <path d={ap(T.x,T.y,P.x,P.y,S.x,S.y,13)} fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+      {/* tanda 1 garis pada ∠R dan ∠T */}
+      <line x1="242.3" y1="51.4" x2="245.7" y2="52.6" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="109.3" y1="133.8" x2="112.1" y2="134.8" stroke="#22c55e" strokeWidth="1.4" strokeLinecap="round"/>
+
+      {/* ∠Q = ∠S — cyan */}
+      <path d={ap(Q.x,Q.y,R.x,R.y,P.x,P.y,18)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+      <path d={ap(S.x,S.y,T.x,T.y,P.x,P.y,13)} fill="none" stroke="#06b6d4" strokeWidth="1.5"/>
+
+      {/* tanda panah sejajar TS // RQ — oranye diagonal */}
+      {/* pada TS: midpoint ≈ (125.5, 153.5), arah (0.316, 0.949) */}
+      <path d="M 120.8,151.9 L 126.8,157.3 L 128.3,149.4" fill="none" stroke="#f97316" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round"/>
+      {/* pada RQ: midpoint ≈ (275, 110), arah (0.316, 0.949) */}
+      <path d="M 270.3,108.4 L 276.3,113.8 L 277.8,105.9" fill="none" stroke="#f97316" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round"/>
+
+      {/* label titik */}
+      <text x={P.x-14} y={P.y+4}  fontSize="10" fill="#fde68a" fontWeight="bold">P</text>
+      <text x={R.x+5}  y={R.y+4}  fontSize="10" fill="#93c5fd" fontWeight="bold">R</text>
+      <text x={Q.x+4}  y={Q.y+5}  fontSize="10" fill="#93c5fd" fontWeight="bold">Q</text>
+      <text x={T.x-4}  y={T.y-7}  fontSize="9"  fill="#f0abfc" fontWeight="bold">T</text>
+      <text x={S.x-4}  y={S.y+13} fontSize="9"  fill="#f0abfc" fontWeight="bold">S</text>
+      {/* keterangan */}
+      <text x="162" y="203" textAnchor="middle" fontSize="7.5" fill="#d946ef" fontWeight="bold">TS // RQ  →  △PTS ~ △PRQ</text>
+    </svg>
+  );
+};
+
 /* ── Diagram 4 – Siku-siku & Altitude ───────────────────── */
 const DiagSikuTinggi = () => {
   const [A,B,C,D] = [{x:15,y:140},{x:230,y:140},{x:70,y:46},{x:70,y:140}];
@@ -442,14 +490,9 @@ const PosisiSebangunSection = () => {
       color: '#a855f7',
       bg: 'bg-purple-500/20 border-purple-500/50',
       active: 'bg-purple-500/30 border-purple-400',
-      diagram: (
-        <div className="space-y-2">
-          <p className="text-center text-xs text-purple-300/70 mb-1 font-body">△ADE di dalam △ABC (DE // BC)</p>
-          <DiagDiDalam />
-        </div>
-      ),
-      info: 'Segitiga kecil △ADE berada di dalam segitiga besar △ABC dan berbagi sudut puncak ∠A. Karena DE // BC, sudut-sudut bersesuaian sama besar (∠ADE = ∠ABC dan ∠AED = ∠ACB), sehingga △ADE ~ △ABC.',
-      syarat: '∠A bersama + DE // BC → sudut sehadap sama → AA terpenuhi',
+      diagram: <DiagDiDalamPTS />,
+      info: 'Segitiga kecil △PTS berada di dalam segitiga besar △PRQ dan berbagi sudut puncak ∠P. Karena TS // RQ, sudut-sudut bersesuaian sama besar (∠PTR = ∠PRQ dan ∠PST = ∠PQR), sehingga △PTS ~ △PRQ.',
+      syarat: '∠P bersama + TS // RQ → sudut sehadap sama → AA terpenuhi',
     },
     {
       title: 'Siku-siku & Tinggi',
