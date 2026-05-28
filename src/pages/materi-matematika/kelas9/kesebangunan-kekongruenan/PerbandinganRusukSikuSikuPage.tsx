@@ -414,8 +414,32 @@ const PerbandinganRusukSikuSikuPage = () => {
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">△ABC siku-siku di A, AD ⊥ BC. Diketahui luas △ABD = 96 cm² dan BD = 12 cm. Hitunglah panjang AD, BC, AC, dan luas △ABC!</p>
+                    {/* Diagram — △ABC siku-siku di A, D pada BC dekat B, △ABD di-shading */}
+                    <svg viewBox="0 0 260 218" className="w-full max-w-xs mx-auto">
+                      {/* Shading △ABD (merah) */}
+                      <polygon points="55,22 55,182 98,80" fill="#ef4444" fillOpacity="0.18" stroke="none"/>
+                      {/* Shading △ADC (gelap) */}
+                      <polygon points="55,182 175,182 98,80" fill="#94a3b8" fillOpacity="0.08" stroke="none"/>
+                      {/* Segitiga utama ABC */}
+                      <polygon points="55,22 55,182 175,182" fill="none" stroke="#facc15" strokeWidth="2"/>
+                      {/* Garis tinggi AD */}
+                      <line x1="55" y1="182" x2="98" y2="80" stroke="#facc15" strokeWidth="1.8"/>
+                      {/* Sudut siku-siku di A */}
+                      <path d="M 55,173 L 64,173 L 64,182" fill="none" stroke="#60a5fa" strokeWidth="1.8"/>
+                      {/* Sudut siku-siku di D */}
+                      <path d="M 102.8,86.4 L 99.7,93.8 L 94.9,87.4" fill="none" stroke="#60a5fa" strokeWidth="1.8"/>
+                      {/* Label vertex */}
+                      <text x="36"  y="20"  fontSize="13" fill="#ffffff" fontWeight="bold">B</text>
+                      <text x="36"  y="197" fontSize="13" fill="#ffffff" fontWeight="bold">A</text>
+                      <text x="178" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">C</text>
+                      <text x="101" y="76"  fontSize="13" fill="#ffffff" fontWeight="bold">D</text>
+                      {/* Label BD = 12 */}
+                      <text x="62"  y="52"  fontSize="11" fill="#fde68a" fontWeight="bold" textAnchor="middle">12</text>
+                      {/* Label luas △ABD = 96 cm² di dalam shading merah */}
+                      <text x="63"  y="108" fontSize="10" fill="#fca5a5" fontWeight="bold" textAnchor="middle">96 cm²</text>
+                    </svg>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
