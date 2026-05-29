@@ -76,8 +76,8 @@ const DiagramSifatKongruen = () => (
     <path d="M 58,185 A 18,18 0 0,0 48,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
     {/* circle marker inside ∠A arc (bisector dir ≈ (0.843,−0.539), r=10 from A) */}
     <circle cx="48" cy="180" r="2.5" fill="#f97316" />
-    {/* ∠B — sky: arc from (142,185) on BA → (153,169) on BC, sweep CCW (0) */}
-    <path d="M 142,185 A 18,18 0 0,0 153,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠B — sky: arc from (142,185) on BA → (153,169) on BC, sweep CW (1) into triangle */}
+    <path d="M 142,185 A 18,18 0 0,1 153,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
     {/* ∠C — pink: proper circular arc sweeping into triangle interior.
         Start r=15 on CA: (94,69), End r=15 on CB: (106,69), sweep CW (flag 1) */}
     <path d="M 94,69 A 15,15 0 0,1 106,69" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
@@ -118,8 +118,8 @@ const DiagramSifatKongruen = () => (
     <path d="M 248,185 A 18,18 0 0,0 238,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
     {/* circle marker inside ∠P arc (same as ∠A marker, bisector r=10 from P) */}
     <circle cx="238" cy="180" r="2.5" fill="#f97316" />
-    {/* ∠Q — sky: arc from (332,185) on QP → (343,169) on QR, sweep CCW (0) */}
-    <path d="M 332,185 A 18,18 0 0,0 343,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠Q — sky: arc from (332,185) on QP → (343,169) on QR, sweep CW (1) into triangle */}
+    <path d="M 332,185 A 18,18 0 0,1 343,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
     {/* ∠R — pink: proper circular arc sweeping into triangle interior.
         Start r=15 on RP: (284,69), End r=15 on RQ: (296,69), sweep CW (flag 1) */}
     <path d="M 284,69 A 15,15 0 0,1 296,69" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
