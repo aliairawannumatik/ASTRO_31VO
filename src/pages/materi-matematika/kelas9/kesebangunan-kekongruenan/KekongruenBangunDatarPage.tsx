@@ -1297,26 +1297,73 @@ const KekongruenBangunDatarPage = () => {
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 2 — Segitiga (RAR)</span>
+                    <span className="font-body font-semibold text-white">Contoh 2 — Aksioma Kekongruenan</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">
-                      Diketahui AC = EC dan BC = DC, serta kedua pasang ruas berpotongan di C.
-                      Buktikan bahwa <InlineMath math="\triangle ABC \cong \triangle EDC" />!
+                      Diketahui panjang <InlineMath math="BC = CD" />. <InlineMath math="\triangle CDA \cong \triangle CBE" /> menurut aksioma . . . .
                     </p>
+                    {/*
+                      Diagram:
+                        A(20,220)  B(120,220)  C(220,220)  — horizontal base
+                        E(120,20)              — top, directly above B
+                        D(180,140)             — on EC, foot of perpendicular from A·D line
+                        F(120,170)             — intersection of line AD with EB
+                      Lines: A–C base, E–B vertical, E–C diagonal, A–D (passes through F)
+                      Right angle at B: ∠EBC = 90° (EB ⊥ AC)
+                      Right angle at D: ∠CDA = 90°
+                    */}
+                    <svg viewBox="0 0 260 250" className="w-full max-w-xs mx-auto">
+                      {/* Lines — kuning */}
+                      <line x1="20"  y1="220" x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* A–C base */}
+                      <line x1="120" y1="20"  x2="120" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–B vertical */}
+                      <line x1="120" y1="20"  x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–C */}
+                      <line x1="20"  y1="220" x2="180" y2="140" stroke="#facc15" strokeWidth="1.6" /> {/* A–D (through F) */}
+
+                      {/* Right-angle box at B (120,220) — between EB↑ and BC→, box upper-left */}
+                      <polyline points="120,212 112,212 112,220"
+                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+
+                      {/* Right-angle box at D (180,140)
+                          DC unit=(0.447,0.894), DA unit=(-0.894,0.447), box size=7
+                          along DC: (183,146), along DA: (174,143), corner: (177,149) */}
+                      <polyline points="183,146 177,149 174,143"
+                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+
+                      {/* Vertex dots — kuning */}
+                      <circle cx="20"  cy="220" r="3" fill="#facc15" />
+                      <circle cx="120" cy="220" r="3" fill="#facc15" />
+                      <circle cx="220" cy="220" r="3" fill="#facc15" />
+                      <circle cx="120" cy="20"  r="3" fill="#facc15" />
+                      <circle cx="180" cy="140" r="3" fill="#facc15" />
+                      <circle cx="120" cy="170" r="3" fill="#facc15" />
+
+                      {/* Labels — putih */}
+                      <text x="10"  y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
+                      <text x="114" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
+                      <text x="224" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
+                      <text x="124" y="16"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">E</text>
+                      <text x="185" y="137" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">D</text>
+                      <text x="124" y="168" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">F</text>
+                    </svg>
+                    <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
+                      <p>A. &nbsp;sisi, sisi, sisi</p>
+                      <p>C. &nbsp;sisi, sudut, sisi</p>
+                      <p>B. &nbsp;sisi, sisi, sudut</p>
+                      <p>D. &nbsp;sudut, sisi, sudut</p>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p>Periksa unsur-unsur yang bersesuaian pada <InlineMath math="\triangle CDA" /> dan <InlineMath math="\triangle CBE" />:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>① <InlineMath math="AC = EC" /> (diketahui)</p>
-                        <p>② <InlineMath math="BC = DC" /> (diketahui)</p>
-                        <p>③ <InlineMath math="\angle ACB = \angle ECD" /> (sudut bertolak belakang)</p>
+                        <p>① <InlineMath math="\angle DCA = \angle BCE" /> (sudut C sama, karena A, B, C segaris)</p>
+                        <p>② <InlineMath math="CD = CB" /> (diketahui <InlineMath math="BC = CD" />) ← sisi diapit</p>
+                        <p>③ <InlineMath math="\angle CDA = \angle CBE = 90°" /> (sudut siku-siku)</p>
                       </div>
-                      <p>Dua rusuk + sudut apit sama → <strong className="text-yellow-300">Syarat RAR ✓</strong></p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\therefore \triangle ABC \cong \triangle EDC \text{ (RAR)}" />
-                      </div>
+                      <p>Dua sudut + sisi apit sama → aksioma <strong className="text-yellow-300">Sudut–Sisi–Sudut (S.Ss.S)</strong></p>
+                      <p><strong className="text-yellow-300">Jawaban: D. sudut, sisi, sudut ✓</strong></p>
                     </div>
                   </div>
                 </div>
