@@ -78,11 +78,12 @@ const DiagramSifatKongruen = () => (
     <circle cx="48" cy="180" r="2.5" fill="#f97316" />
     {/* ∠B — sky: arc from (142,185) on BA → (153,169) on BC, sweep CCW (0) */}
     <path d="M 142,185 A 18,18 0 0,0 153,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
-    {/* ∠C — pink: bezier arch curving toward C apex (∩ shape).
-        Start r=15 on CA: (94,69), End r=15 on CB: (106,69), control toward C: (100,59) */}
-    <path d="M 94,69 Q 100,59 106,69" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
-    {/* circle marker inside ∠C arc (bisector straight down from C, r=8 → (100,63)) */}
-    <circle cx="100" cy="63" r="2.5" fill="#e879f9" />
+    {/* ∠C — pink: proper circular arc sweeping into triangle interior.
+        Start r=15 on CA: (94,69), End r=15 on CB: (106,69), sweep CW (flag 1) */}
+    <path d="M 94,69 A 15,15 0 0,1 106,69" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
+    {/* × marker inside ∠C arc — bisector at (100,67) */}
+    <line x1="97" y1="64" x2="103" y2="70" stroke="#e879f9" strokeWidth="2" strokeLinecap="round" />
+    <line x1="103" y1="64" x2="97" y2="70" stroke="#e879f9" strokeWidth="2" strokeLinecap="round" />
 
     {/* ≅ */}
     <text x="195" y="128" fontSize="28" fill="#facc15" fontWeight="bold" fontFamily="serif">≅</text>
@@ -119,11 +120,12 @@ const DiagramSifatKongruen = () => (
     <circle cx="238" cy="180" r="2.5" fill="#f97316" />
     {/* ∠Q — sky: arc from (332,185) on QP → (343,169) on QR, sweep CCW (0) */}
     <path d="M 332,185 A 18,18 0 0,0 343,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
-    {/* ∠R — pink: same bezier arch as ∠C, shifted +190 in x.
-        Start r=15 on RP: (284,69), End r=15 on RQ: (296,69), control toward R: (290,59) */}
-    <path d="M 284,69 Q 290,59 296,69" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
-    {/* circle marker inside ∠R arc (bisector straight down from R, r=8 → (290,63)) */}
-    <circle cx="290" cy="63" r="2.5" fill="#e879f9" />
+    {/* ∠R — pink: proper circular arc sweeping into triangle interior.
+        Start r=15 on RP: (284,69), End r=15 on RQ: (296,69), sweep CW (flag 1) */}
+    <path d="M 284,69 A 15,15 0 0,1 296,69" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
+    {/* × marker inside ∠R arc — bisector at (290,67) */}
+    <line x1="287" y1="64" x2="293" y2="70" stroke="#e879f9" strokeWidth="2" strokeLinecap="round" />
+    <line x1="293" y1="64" x2="287" y2="70" stroke="#e879f9" strokeWidth="2" strokeLinecap="round" />
 
     {/* title */}
     <text x="205" y="20" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">△ABC ≅ △PQR</text>
