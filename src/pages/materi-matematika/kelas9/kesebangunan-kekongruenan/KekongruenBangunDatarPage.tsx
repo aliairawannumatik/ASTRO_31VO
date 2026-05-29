@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Shapes
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { DragCongruenceDemo } from "@/components/CongruenceDragDemo";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SVG DIAGRAMS — TRIANGLE CONGRUENCE
@@ -945,7 +946,7 @@ const KekongruenBangunDatarPage = () => {
                 </div>
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI SIFAT KEKONGRUENAN SEGITIGA:</p>
-                  <DiagramSifatKongruen />
+                  <DragCongruenceDemo shape="triangle" />
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
@@ -973,7 +974,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* RRR */}
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">① Syarat RRR — Sisi-Sisi-Sisi</p>
-                  <DiagramSyaratRRR />
+                  <DragCongruenceDemo shape="triangle" />
                   <p className="font-body text-sm text-white/80">
                     Ketiga pasang sisi bersesuaian sama panjang.
                   </p>
@@ -985,7 +986,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* RAR */}
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">② Syarat RAR — Sisi-Sudut-Sisi</p>
-                  <DiagramSyaratRAR />
+                  <DragCongruenceDemo shape="triangle" />
                   <p className="font-body text-sm text-white/80">
                     Dua sisi bersesuaian sama panjang <strong>dan sudut apitnya</strong> sama besar.
                   </p>
@@ -997,7 +998,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* ARA / AAR */}
                 <div className="bg-slate-800/60 border border-cyan-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">③ Syarat ARA / AAR — Sudut-Sisi-Sudut</p>
-                  <DiagramSyaratARA />
+                  <DragCongruenceDemo shape="triangle" />
                   <p className="font-body text-sm text-white/80">
                     Satu sisi bersesuaian sama panjang dan dua sudut bersesuaian sama besar
                     (sisi boleh diapit atau dihadapkan ke salah satu sudut).
@@ -1047,7 +1048,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* Persegi */}
                 <div className="bg-slate-800/60 border border-blue-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-blue-300">① Persegi (Square)</p>
-                  <DiagramPersegi />
+                  <DragCongruenceDemo shape="square" />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-blue-200">Syarat kekongruenan persegi:</p>
                     <p>Dua persegi kongruen jika dan hanya jika <strong className="text-yellow-300">panjang sisinya sama</strong>.</p>
@@ -1068,7 +1069,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* Persegi Panjang */}
                 <div className="bg-slate-800/60 border border-sky-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-sky-300">② Persegi Panjang (Rectangle)</p>
-                  <DiagramPersegiPanjang />
+                  <DragCongruenceDemo shape="rectangle" />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-sky-200">Syarat kekongruenan persegi panjang:</p>
                     <p>Dua persegi panjang kongruen jika <strong className="text-yellow-300">panjang (<InlineMath math="p" />) dan lebarnya (<InlineMath math="l" />) sama</strong>.</p>
@@ -1091,7 +1092,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* Jajar Genjang */}
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-yellow-300">③ Jajar Genjang (Parallelogram)</p>
-                  <DiagramJajarGenjang />
+                  <DragCongruenceDemo shape="parallelogram" />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-yellow-200">Syarat kekongruenan jajar genjang:</p>
                     <p>Dua jajar genjang kongruen jika <strong className="text-yellow-300">dua sisi bersesuaian sama panjang DAN sudut apit sama besar</strong>.</p>
@@ -1113,7 +1114,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* Trapesium */}
                 <div className="bg-slate-800/60 border border-teal-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-teal-300">④ Trapesium (Trapezoid)</p>
-                  <DiagramTrapesium />
+                  <DragCongruenceDemo shape="trapezoid" />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-teal-200">Syarat kekongruenan trapesium:</p>
                     <p>Dua trapesium kongruen jika <strong className="text-yellow-300">semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</strong>.</p>
@@ -1134,7 +1135,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* Belah Ketupat */}
                 <div className="bg-slate-800/60 border border-violet-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-violet-300">⑤ Belah Ketupat (Rhombus)</p>
-                  <DiagramBelahKetupat />
+                  <DragCongruenceDemo shape="rhombus" />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-violet-200">Syarat kekongruenan belah ketupat:</p>
                     <p>Dua belah ketupat kongruen jika <strong className="text-yellow-300">panjang sisinya sama DAN salah satu sudut apitnya sama besar</strong>.</p>
@@ -1156,7 +1157,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* Layang-layang */}
                 <div className="bg-slate-800/60 border border-rose-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-rose-300">⑥ Layang-layang (Kite)</p>
-                  <DiagramLayangLayang />
+                  <DragCongruenceDemo shape="kite" />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-rose-200">Syarat kekongruenan layang-layang:</p>
                     <p>Dua layang-layang kongruen jika <strong className="text-yellow-300">semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</strong>.</p>
@@ -1176,7 +1177,7 @@ const KekongruenBangunDatarPage = () => {
                 {/* Lingkaran */}
                 <div className="bg-slate-800/60 border border-pink-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-pink-300">⑦ Lingkaran (Circle)</p>
-                  <DiagramLingkaran />
+                  <DragCongruenceDemo shape="circle" />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-pink-200">Syarat kekongruenan lingkaran:</p>
                     <p>Dua lingkaran kongruen jika dan hanya jika <strong className="text-yellow-300">jari-jarinya sama panjang</strong>.</p>
