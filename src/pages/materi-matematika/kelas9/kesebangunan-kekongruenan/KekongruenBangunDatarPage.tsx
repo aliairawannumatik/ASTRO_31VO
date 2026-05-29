@@ -1012,11 +1012,11 @@ const KekongruenBangunDatarPage = () => {
 
                 {/* ARA / AAR */}
                 <div className="bg-slate-800/60 border border-cyan-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">③ Syarat ARA / AAR — Sudut-Sisi-Sudut</p>
+                  <p className="font-body text-sm font-semibold text-cyan-300">③ Syarat ARA / AAR / RAA — Sudut-Sisi-Sudut / Sudut-Sudut-Sisi / Sisi-Sudut-Sudut</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○","×","y"]} />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["","×","y"]} hideTicks={[0,2]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 4. Syarat ARA/AAR — satu sisi sama panjang dan dua sudut bersesuaian sama besar: ∠A=∠P, AB=PQ, ∠B=∠Q
+                      Gambar 4. Syarat ARA/AAR/RAA — satu sisi sama panjang dan dua sudut bersesuaian sama besar: ∠A=∠P, AB=PQ, ∠B=∠Q
                     </figcaption>
                   </figure>
                   <p className="font-body text-sm text-white/80">

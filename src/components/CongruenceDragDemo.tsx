@@ -98,17 +98,17 @@ function renderTriangleAngleMarks(
 
   return (
     <g style={{ pointerEvents: "none" }}>
-      {symbols[0] !== undefined && <>
+      {!!symbols[0] && <>
         <path d={`M ${p1A.x} ${p1A.y} A ${R} ${R} 0 0 ${sweepA} ${p2A.x} ${p2A.y}`}
           fill="none" stroke={color} strokeWidth="1.4" />
         {renderSym(symbols[0], sA.x, sA.y)}
       </>}
-      {symbols[1] !== undefined && <>
+      {!!symbols[1] && <>
         <path d={`M ${p1B.x} ${p1B.y} A ${R} ${R} 0 0 ${sweepB} ${p2B.x} ${p2B.y}`}
           fill="none" stroke={color} strokeWidth="1.4" />
         {renderSym(symbols[1], sB.x, sB.y)}
       </>}
-      {symbols[2] !== undefined && <>
+      {!!symbols[2] && <>
         <path d={`M ${p1C.x} ${p1C.y} A ${R} ${R} 0 0 ${sweepC} ${p2C.x} ${p2C.y}`}
           fill="none" stroke={color} strokeWidth="1.4" />
         {renderSym(symbols[2], sC.x, sC.y)}
