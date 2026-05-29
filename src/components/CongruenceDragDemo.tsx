@@ -189,6 +189,9 @@ function renderRhombus(cx: number, cy: number, fill: string, stroke: string, op:
       {/* diagonal BD — horizontal */}
       <line x1={dx} y1={dy} x2={bx} y2={by}
         stroke={stroke} strokeWidth="1.2" strokeDasharray="4 3" opacity="0.45" />
+      {/* right-angle mark at intersection (cx, cy) — upper-right quadrant */}
+      <line x1={cx + 6} y1={cy} x2={cx + 6} y2={cy - 6} stroke={stroke} strokeWidth="1.3" opacity="0.7" />
+      <line x1={cx} y1={cy - 6} x2={cx + 6} y2={cy - 6} stroke={stroke} strokeWidth="1.3" opacity="0.7" />
       {mkTick(ax, ay, bx, by, 1, stroke)}
       {mkTick(bx, by, ccx, ccy, 1, stroke)}
       {mkTick(ccx, ccy, dx, dy, 1, stroke)}
@@ -209,6 +212,9 @@ function renderKite(cx: number, cy: number, fill: string, stroke: string, op: nu
       {/* diagonal BD — horizontal */}
       <line x1={bx} y1={by} x2={dx} y2={dy}
         stroke={stroke} strokeWidth="1.2" strokeDasharray="4 3" opacity="0.45" />
+      {/* right-angle mark at intersection (cx, cy+5) — upper-right quadrant */}
+      <line x1={cx + 6} y1={cy + 5} x2={cx + 6} y2={cy - 1} stroke={stroke} strokeWidth="1.3" opacity="0.7" />
+      <line x1={cx} y1={cy - 1} x2={cx + 6} y2={cy - 1} stroke={stroke} strokeWidth="1.3" opacity="0.7" />
       {mkTick(ax, ay, bx, by, 1, stroke)}
       {mkTick(ax, ay, dx, dy, 1, stroke)}
       {mkTick(bx, by, ccx, ccy, 2, stroke)}
