@@ -153,21 +153,18 @@ const WaterfallAnimasiAlas = () => {
       C = (175, 182) — kanan bawah
       D = (132, 124) — pada BC, kaki garis tinggi dari A
 
-    BC direction unit: (0.6, 0.8)
-    Perpendicular unit: kiri=(-0.8, 0.6)  kanan=(0.8, -0.6)
-    Offset 6px → kiri=(-4.8≈-5, 3.6≈4)  kanan=(4.8≈5, -3.6≈-4)
+    viewBox diperluas ke atas: "0 -52 260 320"
+    sehingga busur parabola yang naik melewati B tetap terlihat.
 
-    Stream 1 — B→D (geser 5px ke KIRI dari BC, warna cyan terang):
-      B_L = (55-5, 22+4) = (50, 26)
-      D_L = (132-5, 124+4) = (127, 128)
+    Stream 1 — B→D — busur PENDEK (Q 185,-48):
+      puncak ≈ (114, 1) — sedikit di atas B, sweep ke kanan lalu turun ke D
 
-    Stream 2 — B→C (geser 5px ke KANAN dari BC, warna biru muda):
-      B_R = (55+5, 22-4) = (60, 18)
-      C_R = (175+5, 182-4) = (180, 178)
+    Stream 2 — B→C — busur LEBAR/TINGGI (Q 258,-90):
+      puncak ≈ (150,-14) — jauh di atas B, sweep melengkung lebar ke C
   */
   const pathAB  = "M 55,182 L 55,22";
-  const pathBD  = "M 50,26 L 127,128";   // stream 1: B→D, geser kiri
-  const pathBC  = "M 60,18 L 180,178";   // stream 2: B→C, geser kanan
+  const pathBD  = "M 55,22 Q 185,-48 132,124";   // busur parabola B→D
+  const pathBC  = "M 55,22 Q 258,-90 175,182";   // busur parabola B→C (lebih lebar)
 
   const drops = (path: string, count: number, dur: number, step: number, r: number, color: string, opacity = "0.95") =>
     Array.from({ length: count }, (_, i) => (
@@ -205,14 +202,15 @@ const WaterfallAnimasiAlas = () => {
 
       {/* SVG animasi */}
       <div className="bg-slate-950/90 border border-blue-500/25 rounded-xl p-3">
-        <svg viewBox="0 0 260 268" className="w-full max-w-sm mx-auto">
+        {/*
+          viewBox diperluas 52px ke atas (y mulai -52) supaya busur
+          parabola yang naik melewati titik B masih terlihat dalam frame.
+          Total tinggi koordinat: -52 → 268 = 320 unit.
+        */}
+        <svg viewBox="0 -52 260 320" className="w-full max-w-sm mx-auto">
           <defs>
-            <filter id="wfGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2.5" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="wfDrop" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="1.6" result="blur"/>
+            <filter id="wfGlow" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="2.8" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
@@ -226,48 +224,58 @@ const WaterfallAnimasiAlas = () => {
           {/* Sudut siku-siku di D */}
           <path d="M 125.6,129.6 L 121.6,122.8 L 128.4,118.8" fill="none" stroke="#f97316" strokeWidth="1.5"/>
 
-          {/* ── Saluran A→B (tengah, biru terang) ── */}
+          {/* ── Saluran A→B (lurus vertikal, biru terang) ── */}
           <line x1="55" y1="182" x2="55" y2="22" stroke="#38bdf8" strokeWidth="7" strokeOpacity="0.12" filter="url(#wfGlow)"/>
           <line x1="55" y1="182" x2="55" y2="22" stroke="#38bdf8" strokeWidth="2.5" strokeOpacity="0.45"/>
 
-          {/* ── Stream 1: B→D (geser kiri, cyan terang) ── */}
-          <line x1="50" y1="26" x2="127" y2="128" stroke="#06b6d4" strokeWidth="6" strokeOpacity="0.14" filter="url(#wfGlow)"/>
-          <line x1="50" y1="26" x2="127" y2="128" stroke="#06b6d4" strokeWidth="2.2" strokeOpacity="0.55"/>
+          {/* ── Busur stream 1: B→D (parabola pendek, cyan terang) ── */}
+          {/* puncak busur ≈ (114, 1) — sedikit di atas B */}
+          <path d="M 55,22 Q 185,-48 132,124"
+            fill="none" stroke="#06b6d4" strokeWidth="7" strokeOpacity="0.13"
+            strokeLinecap="round" filter="url(#wfGlow)"/>
+          <path d="M 55,22 Q 185,-48 132,124"
+            fill="none" stroke="#06b6d4" strokeWidth="2.2" strokeOpacity="0.60"
+            strokeLinecap="round"/>
 
-          {/* ── Stream 2: B→C (geser kanan, biru muda) ── */}
-          <line x1="60" y1="18" x2="180" y2="178" stroke="#bae6fd" strokeWidth="6" strokeOpacity="0.13" filter="url(#wfGlow)"/>
-          <line x1="60" y1="18" x2="180" y2="178" stroke="#bae6fd" strokeWidth="2.2" strokeOpacity="0.50"/>
+          {/* ── Busur stream 2: B→C (parabola lebar+tinggi, biru muda) ── */}
+          {/* puncak busur ≈ (150,-14) — jauh di atas B, arc lebih lebar */}
+          <path d="M 55,22 Q 258,-90 175,182"
+            fill="none" stroke="#bae6fd" strokeWidth="7" strokeOpacity="0.12"
+            strokeLinecap="round" filter="url(#wfGlow)"/>
+          <path d="M 55,22 Q 258,-90 175,182"
+            fill="none" stroke="#bae6fd" strokeWidth="2.2" strokeOpacity="0.55"
+            strokeLinecap="round"/>
 
-          {/* ── Ripple di B ── */}
-          <circle cx="55" cy="22" r="5" fill="#38bdf8" opacity="0.85">
-            <animate attributeName="r" values="4;16;4" dur="2s" repeatCount="indefinite"/>
+          {/* ── Ripple di B (titik percabangan) ── */}
+          <circle cx="55" cy="22" r="5" fill="#38bdf8" opacity="0.9">
+            <animate attributeName="r" values="4;18;4" dur="2s" repeatCount="indefinite"/>
             <animate attributeName="opacity" values="0.9;0;0.9" dur="2s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="55" cy="22" r="3" fill="#e0f2fe" opacity="0.6">
-            <animate attributeName="r" values="3;10;3" dur="2s" begin="0.3s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+          <circle cx="55" cy="22" r="3" fill="#e0f2fe" opacity="0.7">
+            <animate attributeName="r" values="3;11;3" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" begin="0.3s" repeatCount="indefinite"/>
           </circle>
 
-          {/* ── Glow endpoint D (stream 1 tiba di sini) ── */}
-          <circle cx="132" cy="124" r="5" fill="#06b6d4" opacity="0.0">
-            <animate attributeName="opacity" values="0;0.7;0" dur="2s" begin="0.1s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="4;9;4" dur="2s" begin="0.1s" repeatCount="indefinite"/>
+          {/* ── Splash di D (endpoint stream 1) ── */}
+          <circle cx="132" cy="124" r="4" fill="#06b6d4" opacity="0">
+            <animate attributeName="r" values="3;10;3" dur="1.9s" begin="0.05s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;0.75;0" dur="1.9s" begin="0.05s" repeatCount="indefinite"/>
           </circle>
 
-          {/* ── Glow endpoint C (stream 2 tiba di sini) ── */}
-          <circle cx="175" cy="182" r="5" fill="#bae6fd" opacity="0.0">
-            <animate attributeName="opacity" values="0;0.7;0" dur="2.5s" begin="0.15s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="4;9;4" dur="2.5s" begin="0.15s" repeatCount="indefinite"/>
+          {/* ── Splash di C (endpoint stream 2) ── */}
+          <circle cx="175" cy="182" r="4" fill="#bae6fd" opacity="0">
+            <animate attributeName="r" values="3;11;3" dur="2.8s" begin="0.1s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;0.75;0" dur="2.8s" begin="0.1s" repeatCount="indefinite"/>
           </circle>
 
-          {/* ── Tetes A→B (5 tetes biru terang) ── */}
+          {/* ── Tetes A→B (5 tetes lurus ke atas) ── */}
           {drops(pathAB, 5, 2.4, 0.48, 4.5, "#38bdf8")}
 
-          {/* ── Tetes Stream 1: B→D (4 tetes cyan terang, geser kiri) ── */}
-          {drops(pathBD, 4, 1.9, 0.48, 4.0, "#06b6d4")}
+          {/* ── Tetes busur B→D (4 tetes parabola pendek, cyan) ── */}
+          {drops(pathBD, 4, 1.9, 0.48, 4.2, "#06b6d4")}
 
-          {/* ── Tetes Stream 2: B→C (5 tetes biru muda, geser kanan) ── */}
-          {drops(pathBC, 5, 2.8, 0.56, 4.0, "#bae6fd", "0.90")}
+          {/* ── Tetes busur B→C (5 tetes parabola lebar, biru muda) ── */}
+          {drops(pathBC, 5, 2.8, 0.56, 4.2, "#bae6fd", "0.90")}
 
           {/* Label vertex */}
           <text x="36" y="20"  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
@@ -275,22 +283,22 @@ const WaterfallAnimasiAlas = () => {
           <text x="178" y="197" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
           <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
 
-          {/* Label segmen */}
+          {/* Label AB */}
           <text x="43" y="108" fontSize="11" fill="#38bdf8" fontWeight="bold" textAnchor="middle">AB</text>
-          {/* Label BD (di atas stream kiri) */}
-          <text x="78" y="60" fontSize="10" fill="#06b6d4" fontWeight="bold" textAnchor="middle">BD①</text>
-          {/* Label BC (di bawah stream kanan) */}
-          <text x="133" y="104" fontSize="10" fill="#bae6fd" fontWeight="bold" textAnchor="middle">BC②</text>
+          {/* Label BD① — di dekat puncak busur kiri (sekitar x=114, y=1) */}
+          <text x="115" y="-2" fontSize="10" fill="#06b6d4" fontWeight="bold" textAnchor="middle">BD ①</text>
+          {/* Label BC② — di dekat puncak busur kanan (sekitar x=150, y=-14) */}
+          <text x="180" y="-20" fontSize="10" fill="#bae6fd" fontWeight="bold" textAnchor="middle">BC ②</text>
 
           {/* Kotak rumus */}
           <rect x="8" y="200" width="244" height="60" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
           <text x="130" y="218" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
-            💧 A→B menyemprot ⟹ muncrat ① ke D  dan  ② ke C
+            💧 A→B menyemprot ⟹ muncrat busur ① ke D  dan  busur ② ke C
           </text>
           <line x1="20" y1="224" x2="240" y2="224" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
           <text x="130" y="247" textAnchor="middle" fontSize="16" fill="#38bdf8" fontWeight="bold">AB² = BD × BC</text>
           <text x="130" y="257" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
-            (kuadrat sumber  =  muncrat ① × muncrat ②)
+            (kuadrat sumber  =  busur ① × busur ②)
           </text>
         </svg>
       </div>
