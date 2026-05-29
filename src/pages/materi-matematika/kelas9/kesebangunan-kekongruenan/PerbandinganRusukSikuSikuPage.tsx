@@ -770,6 +770,16 @@ const PerbandinganRusukSikuSikuPage = () => {
             <p className="font-body text-xs text-white/50">Silang-kalikan kolom mana pun: <span className="text-amber-300">AB² = BD × BC</span></p>
           </div>
 
+          {/* WATERFALL (a) — AB² = BD × BC */}
+          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
+            <Header id="waterfall" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (a) — AB² = BD × BC" />
+            {expandedSections.includes("waterfall") && (
+              <div className="px-5 pb-5 pt-2">
+                <WaterfallAnimasiAlas />
+              </div>
+            )}
+          </div>
+
           {/* b: PROYEKSI RUSUK TEGAK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep2" icon={<Target className="w-5 h-5" />} color="#c084fc" label="📘 (b) Proyeksi Rusuk Tegak pada Rusuk Miring" />
@@ -824,6 +834,16 @@ const PerbandinganRusukSikuSikuPage = () => {
             <p className="font-body text-xs text-white/50">Silang-kalikan kolom mana pun: <span className="text-amber-300">AC² = CD × CB</span></p>
           </div>
 
+          {/* WATERFALL (b) — AC² = CD × CB */}
+          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
+            <Header id="waterfall2" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (b) — AC² = CD × CB" />
+            {expandedSections.includes("waterfall2") && (
+              <div className="px-5 pb-5 pt-2">
+                <WaterfallAnimasiTegak />
+              </div>
+            )}
+          </div>
+
           {/* c: GARIS TINGGI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep3" icon={<Target className="w-5 h-5" />} color="#22c55e" label="📘 (c) Rumus Garis Tinggi △ABC Siku-siku di A" />
@@ -876,6 +896,16 @@ const PerbandinganRusukSikuSikuPage = () => {
               </div>
             </div>
             <p className="font-body text-xs text-white/50">Silang-kalikan kolom mana pun: <span className="text-amber-300">AD² = BD × DC</span></p>
+          </div>
+
+          {/* WATERFALL (c) — AD² = DB × DC */}
+          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
+            <Header id="waterfall3" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (c) — AD² = DB × DC" />
+            {expandedSections.includes("waterfall3") && (
+              <div className="px-5 pb-5 pt-2">
+                <WaterfallAnimasiTinggi />
+              </div>
+            )}
           </div>
 
           {/* d: HUBUNGAN RUSUK */}
@@ -1092,35 +1122,6 @@ const PerbandinganRusukSikuSikuPage = () => {
             )}
           </div>
 
-          {/* WATERFALL (a) — AB² = BD × BC */}
-          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
-            <Header id="waterfall" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (a) — AB² = BD × BC" />
-            {expandedSections.includes("waterfall") && (
-              <div className="px-5 pb-5 pt-2">
-                <WaterfallAnimasiAlas />
-              </div>
-            )}
-          </div>
-
-          {/* WATERFALL (b) — AC² = CD × CB */}
-          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
-            <Header id="waterfall2" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (b) — AC² = CD × CB" />
-            {expandedSections.includes("waterfall2") && (
-              <div className="px-5 pb-5 pt-2">
-                <WaterfallAnimasiTegak />
-              </div>
-            )}
-          </div>
-
-          {/* WATERFALL (c) — AD² = DB × DC */}
-          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
-            <Header id="waterfall3" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (c) — AD² = DB × DC" />
-            {expandedSections.includes("waterfall3") && (
-              <div className="px-5 pb-5 pt-2">
-                <WaterfallAnimasiTinggi />
-              </div>
-            )}
-          </div>
 
         </div>
         <div className="mt-8 text-center">
