@@ -239,7 +239,6 @@ const questions: Q[] = [
   Qn(5, "Luas Permukaan Kubus – Dasar", {
     type: "mixed",
     content: "Rumus luas permukaan kubus dengan panjang rusuk s adalah:",
-    mathContent: "L = 6s^2",
     diagram: <CubeSVG label={false} />,
     parts: [
       { label: "a.", math: "\\text{Hitung luas permukaan kubus dengan } s = 5 \\text{ cm}" },
@@ -259,7 +258,6 @@ const questions: Q[] = [
   Qn(7, "Volume Kubus – Dasar", {
     type: "mixed",
     content: "Rumus volume kubus dengan panjang rusuk s adalah:",
-    mathContent: "V = s^3",
     parts: [
       { label: "a.", math: "V = \\ldots \\text{ jika } s = 4 \\text{ cm}" },
       { label: "b.", math: "V = \\ldots \\text{ jika } s = 7 \\text{ cm}" },
