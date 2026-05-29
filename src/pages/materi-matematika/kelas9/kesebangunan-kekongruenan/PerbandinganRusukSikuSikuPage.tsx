@@ -166,12 +166,32 @@ const WaterfallAnimasiAlas = () => {
   const pathBD  = "M 55,22 Q 130,-5 132,124";   // busur kecil B→D
   const pathBC  = "M 55,22 Q 190,-15 175,182";  // busur kecil B→C (lebih lebar)
 
-  const drops = (path: string, count: number, dur: number, step: number, r: number, color: string, opacity = "0.95") =>
-    Array.from({ length: count }, (_, i) => (
-      <circle key={i} r={r} fill={color} opacity={opacity}>
-        <animateMotion dur={`${dur}s`} repeatCount="indefinite" begin={`${(i * step).toFixed(2)}s`} path={path} />
-      </circle>
-    ));
+  /* Aliran air realistis: tiga lapisan stroke-dashoffset yang mengalir */
+  const flowStream = (path: string, color: string, highlight: string, dur: number, width: number) => (
+    <>
+      {/* lapisan cahaya luar (glow) */}
+      <path d={path} fill="none" stroke={color} strokeWidth={width + 5}
+        strokeOpacity="0.10" strokeLinecap="round" filter="url(#wfGlow)"/>
+      {/* aliran utama — ruas besar */}
+      <path d={path} fill="none" stroke={color} strokeWidth={width}
+        strokeDasharray="13 8" strokeLinecap="round" strokeOpacity="0.70">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${dur}s`} repeatCount="indefinite"/>
+      </path>
+      {/* lapisan kedua — ruas kecil, lebih cepat */}
+      <path d={path} fill="none" stroke={color} strokeWidth={width - 0.8}
+        strokeDasharray="6 15" strokeLinecap="round" strokeOpacity="0.45">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${(dur * 0.62).toFixed(2)}s`} repeatCount="indefinite"/>
+      </path>
+      {/* utas kilap tipis di atas */}
+      <path d={path} fill="none" stroke={highlight} strokeWidth={0.9}
+        strokeDasharray="4 17" strokeLinecap="round" strokeOpacity="0.90">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${(dur * 0.42).toFixed(2)}s`} repeatCount="indefinite"/>
+      </path>
+    </>
+  );
 
   return (
     <div className="space-y-4">
@@ -229,27 +249,14 @@ const WaterfallAnimasiAlas = () => {
           {/* Sudut siku-siku di D */}
           <path d="M 125.6,129.6 L 121.6,122.8 L 128.4,118.8" fill="none" stroke="#f97316" strokeWidth="1.5"/>
 
-          {/* ── Saluran A→B (lurus vertikal, biru terang) ── */}
-          <line x1="55" y1="182" x2="55" y2="22" stroke="#38bdf8" strokeWidth="7" strokeOpacity="0.12" filter="url(#wfGlow)"/>
-          <line x1="55" y1="182" x2="55" y2="22" stroke="#38bdf8" strokeWidth="2.5" strokeOpacity="0.45"/>
+          {/* ── Aliran A→B (vertikal, biru air) ── */}
+          {flowStream(pathAB, "#38bdf8", "#e0f2fe", 2.2, 3.0)}
 
-          {/* ── Busur stream 1: B→D (busur kecil, cyan terang) ── */}
-          {/* puncak busur ≈ (113, 17) — hanya 5px di atas B */}
-          <path d="M 55,22 Q 130,-5 132,124"
-            fill="none" stroke="#06b6d4" strokeWidth="7" strokeOpacity="0.13"
-            strokeLinecap="round" filter="url(#wfGlow)"/>
-          <path d="M 55,22 Q 130,-5 132,124"
-            fill="none" stroke="#06b6d4" strokeWidth="2.2" strokeOpacity="0.60"
-            strokeLinecap="round"/>
+          {/* ── Aliran B→D (busur kecil, cyan terang) ── */}
+          {flowStream(pathBD, "#06b6d4", "#a5f3fc", 1.8, 2.8)}
 
-          {/* ── Busur stream 2: B→C (busur kecil lebih lebar, biru muda) ── */}
-          {/* puncak busur ≈ (141, 16) — hanya 6px di atas B */}
-          <path d="M 55,22 Q 190,-15 175,182"
-            fill="none" stroke="#bae6fd" strokeWidth="7" strokeOpacity="0.12"
-            strokeLinecap="round" filter="url(#wfGlow)"/>
-          <path d="M 55,22 Q 190,-15 175,182"
-            fill="none" stroke="#bae6fd" strokeWidth="2.2" strokeOpacity="0.55"
-            strokeLinecap="round"/>
+          {/* ── Aliran B→C (busur lebar, biru muda) ── */}
+          {flowStream(pathBC, "#bae6fd", "#f0f9ff", 2.6, 2.8)}
 
           {/* ── Ripple di B (titik percabangan) ── */}
           <circle cx="55" cy="22" r="5" fill="#38bdf8" opacity="0.9">
@@ -273,14 +280,6 @@ const WaterfallAnimasiAlas = () => {
             <animate attributeName="opacity" values="0;0.75;0" dur="2.8s" begin="0.1s" repeatCount="indefinite"/>
           </circle>
 
-          {/* ── Tetes A→B (5 tetes lurus ke atas) ── */}
-          {drops(pathAB, 5, 2.4, 0.48, 4.5, "#38bdf8")}
-
-          {/* ── Tetes busur B→D (4 tetes parabola pendek, cyan) ── */}
-          {drops(pathBD, 4, 1.9, 0.48, 4.2, "#06b6d4")}
-
-          {/* ── Tetes busur B→C (5 tetes parabola lebar, biru muda) ── */}
-          {drops(pathBC, 5, 2.8, 0.56, 4.2, "#bae6fd", "0.90")}
 
           {/* Label vertex */}
           <text x="36" y="20"  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
