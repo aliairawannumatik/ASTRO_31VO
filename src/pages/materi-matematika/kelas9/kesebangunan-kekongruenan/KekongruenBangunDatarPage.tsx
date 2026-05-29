@@ -63,9 +63,19 @@ const DiagramSifatKongruen = () => (
     {/* center 3: (132,125)  line: (126,128)→(138,122) */}
     <line x1="126" y1="128" x2="138" y2="122" stroke="#facc15" strokeWidth="2.4" />
 
-    {/* angle arcs at A and B */}
-    <path d="M40,185 Q57,170 64,183" fill="none" stroke="#e879f9" strokeWidth="1.8" />
-    <path d="M160,185 Q144,170 137,183" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    {/*
+      Angle arcs — △ABC
+      A(40,185): between AB→right and AC→upper-right  color orange (#f97316)
+      B(160,185): between BC→upper-left and BA→left   color sky   (#38bdf8)
+      C(100,55) : between CA→lower-left and CB→lower-right color pink (#e879f9)
+      radius ≈ 18 px, drawn with quadratic bezier
+    */}
+    {/* ∠A — orange: from along-AB (58,185) curving to along-AC (48,169) */}
+    <path d="M 58,185 Q 52,171 48,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠B — sky: from along-BC (152,169) curving to along-BA (142,185) */}
+    <path d="M 152,169 Q 148,171 142,185" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠C — pink: small arc at apex, from along-CA (93,72) to along-CB (107,72) */}
+    <path d="M 92,72 Q 100,62 108,72" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
 
     {/* ≅ */}
     <text x="195" y="128" fontSize="28" fill="#facc15" fontWeight="bold" fontFamily="serif">≅</text>
@@ -92,9 +102,18 @@ const DiagramSifatKongruen = () => (
     <line x1="314" y1="123" x2="326" y2="117" stroke="#facc15" strokeWidth="2.4" />
     <line x1="316" y1="128" x2="328" y2="122" stroke="#facc15" strokeWidth="2.4" />
 
-    {/* angle arcs at P and Q */}
-    <path d="M230,185 Q247,170 254,183" fill="none" stroke="#e879f9" strokeWidth="1.8" />
-    <path d="M350,185 Q334,170 327,183" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    {/*
+      Angle arcs — △PQR  (x+190 from △ABC, same colors → A↔P, B↔Q, C↔R)
+      ∠P — orange (#f97316): from along-PQ (248,185) curving to along-PR (238,169)
+      ∠Q — sky   (#38bdf8): from along-QR (342,169) curving to along-QP (332,185)
+      ∠R — pink  (#e879f9): apex arc from (282,72) to (298,72)
+    */}
+    {/* ∠P — orange */}
+    <path d="M 248,185 Q 242,171 238,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠Q — sky */}
+    <path d="M 342,169 Q 338,171 332,185" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠R — pink */}
+    <path d="M 282,72 Q 290,62 298,72" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
 
     {/* title */}
     <text x="205" y="20" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">△ABC ≅ △PQR</text>
