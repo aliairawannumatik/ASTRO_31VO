@@ -68,14 +68,18 @@ const DiagramSifatKongruen = () => (
       A(40,185): between AB→right and AC→upper-right  color orange (#f97316)
       B(160,185): between BC→upper-left and BA→left   color sky   (#38bdf8)
       C(100,55) : between CA→lower-left and CB→lower-right color pink (#e879f9)
-      radius ≈ 18 px, drawn with quadratic bezier
+      radius = 18 px, drawn as proper SVG circular arcs centered at each vertex
+      unit_AC = (60,-130)/143.2 = (0.419,-0.908)
+      unit_BC = (-60,-130)/143.2 = (-0.419,-0.908)
     */}
-    {/* ∠A — orange: from along-AB (58,185) curving to along-AC (48,169) */}
-    <path d="M 58,185 Q 52,171 48,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
-    {/* ∠B — sky: from along-BC (152,169) curving to along-BA (142,185) */}
-    <path d="M 152,169 Q 148,171 142,185" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
-    {/* ∠C — pink: small arc at apex, from along-CA (93,72) to along-CB (107,72) */}
-    <path d="M 92,72 Q 100,62 108,72" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠A — orange: arc from (58,185) on AB → (48,169) on AC, sweep CCW (0) */}
+    <path d="M 58,185 A 18,18 0 0,0 48,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
+    {/* circle marker inside ∠A arc (bisector dir ≈ (0.843,−0.539), r=10 from A) */}
+    <circle cx="48" cy="180" r="2.5" fill="#f97316" />
+    {/* ∠B — sky: arc from (142,185) on BA → (153,169) on BC, sweep CCW (0) */}
+    <path d="M 142,185 A 18,18 0 0,0 153,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠C — pink: arc from (93,71) on CA → (107,71) on CB, sweep CW (1) into triangle */}
+    <path d="M 93,71 A 18,18 0 0,1 107,71" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
 
     {/* ≅ */}
     <text x="195" y="128" fontSize="28" fill="#facc15" fontWeight="bold" fontFamily="serif">≅</text>
@@ -104,16 +108,16 @@ const DiagramSifatKongruen = () => (
 
     {/*
       Angle arcs — △PQR  (x+190 from △ABC, same colors → A↔P, B↔Q, C↔R)
-      ∠P — orange (#f97316): from along-PQ (248,185) curving to along-PR (238,169)
-      ∠Q — sky   (#38bdf8): from along-QR (342,169) curving to along-QP (332,185)
-      ∠R — pink  (#e879f9): apex arc from (282,72) to (298,72)
+      All arcs use proper SVG circular arcs (radius=18), same geometry as △ABC shifted +190 in x
     */}
-    {/* ∠P — orange */}
-    <path d="M 248,185 Q 242,171 238,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
-    {/* ∠Q — sky */}
-    <path d="M 342,169 Q 338,171 332,185" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
-    {/* ∠R — pink */}
-    <path d="M 282,72 Q 290,62 298,72" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠P — orange: arc from (248,185) on PQ → (238,169) on PR, sweep CCW (0) */}
+    <path d="M 248,185 A 18,18 0 0,0 238,169" fill="none" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
+    {/* circle marker inside ∠P arc (same as ∠A marker, bisector r=10 from P) */}
+    <circle cx="238" cy="180" r="2.5" fill="#f97316" />
+    {/* ∠Q — sky: arc from (332,185) on QP → (343,169) on QR, sweep CCW (0) */}
+    <path d="M 332,185 A 18,18 0 0,0 343,169" fill="none" stroke="#38bdf8" strokeWidth="2.2" strokeLinecap="round" />
+    {/* ∠R — pink: arc from (283,71) on RP → (297,71) on RQ, sweep CW (1) into triangle */}
+    <path d="M 283,71 A 18,18 0 0,1 297,71" fill="none" stroke="#e879f9" strokeWidth="2.2" strokeLinecap="round" />
 
     {/* title */}
     <text x="205" y="20" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">△ABC ≅ △PQR</text>
