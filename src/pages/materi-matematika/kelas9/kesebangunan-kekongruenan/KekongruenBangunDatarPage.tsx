@@ -40,13 +40,13 @@ const DiagramSifatKongruen = () => (
 
     {/* ── Triangle ABC  A(40,185) B(160,185) C(100,55) ── */}
     <polygon points="40,185 160,185 100,55"
-      fill="#3b82f6" fillOpacity="0.18" stroke="#60a5fa" strokeWidth="2.2" strokeLinejoin="round" />
-    <circle cx="40"  cy="185" r="3" fill="#60a5fa" />
-    <circle cx="160" cy="185" r="3" fill="#60a5fa" />
-    <circle cx="100" cy="55"  r="3" fill="#60a5fa" />
-    <text x="22"  y="202" fontSize="14" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="163" y="202" fontSize="14" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="95"  y="47"  fontSize="14" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">C</text>
+      fill="#facc15" fillOpacity="0.55" stroke="#fde047" strokeWidth="2.5" strokeLinejoin="round" />
+    <circle cx="40"  cy="185" r="3.5" fill="#fde047" />
+    <circle cx="160" cy="185" r="3.5" fill="#fde047" />
+    <circle cx="100" cy="55"  r="3.5" fill="#fde047" />
+    <text x="22"  y="202" fontSize="14" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="163" y="202" fontSize="14" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="95"  y="47"  fontSize="14" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">C</text>
 
     {/* AB — double tick (green) — perpendicular = vertical, midpoint (100,185) */}
     <line x1="94"  y1="178" x2="94"  y2="192" stroke="#22c55e" strokeWidth="2.4" />
@@ -72,13 +72,13 @@ const DiagramSifatKongruen = () => (
 
     {/* ── Triangle PQR  P(230,185) Q(350,185) R(290,55) — same shape, x+190 ── */}
     <polygon points="230,185 350,185 290,55"
-      fill="#a855f7" fillOpacity="0.18" stroke="#c084fc" strokeWidth="2.2" strokeLinejoin="round" />
-    <circle cx="230" cy="185" r="3" fill="#c084fc" />
-    <circle cx="350" cy="185" r="3" fill="#c084fc" />
-    <circle cx="290" cy="55"  r="3" fill="#c084fc" />
-    <text x="212" y="202" fontSize="14" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="353" y="202" fontSize="14" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="285" y="47"  fontSize="14" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">R</text>
+      fill="#4ade80" fillOpacity="0.55" stroke="#86efac" strokeWidth="2.5" strokeLinejoin="round" />
+    <circle cx="230" cy="185" r="3.5" fill="#86efac" />
+    <circle cx="350" cy="185" r="3.5" fill="#86efac" />
+    <circle cx="290" cy="55"  r="3.5" fill="#86efac" />
+    <text x="212" y="202" fontSize="14" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="353" y="202" fontSize="14" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="285" y="47"  fontSize="14" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">R</text>
 
     {/* PQ — double tick (green) — midpoint (290,185) */}
     <line x1="284" y1="178" x2="284" y2="192" stroke="#22c55e" strokeWidth="2.4" />
@@ -106,35 +106,41 @@ const DiagramSyaratRRR = () => (
   <svg viewBox="0 0 340 150" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="340" height="150" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
-    {/* Triangle 1 */}
-    <polygon points="30,125 145,125 88,30" fill="#3b82f6" fillOpacity="0.22" stroke="#60a5fa" strokeWidth="2" strokeLinejoin="round" />
-    <text x="16" y="140" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="147" y="140" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="83" y="24" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">C</text>
+    {/* Triangle 1 — kuning cerah */}
+    <polygon points="30,125 145,125 88,30" fill="#facc15" fillOpacity="0.58" stroke="#fde047" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="30" cy="125" r="3" fill="#fde047" />
+    <circle cx="145" cy="125" r="3" fill="#fde047" />
+    <circle cx="88" cy="30" r="3" fill="#fde047" />
+    <text x="16" y="140" fontSize="12" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="147" y="140" fontSize="12" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="83" y="24" fontSize="12" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">C</text>
     {/* ticks AB double */}
-    <line x1="83" y1="127" x2="83" y2="118" stroke="#facc15" strokeWidth="2" />
-    <line x1="89" y1="127" x2="89" y2="118" stroke="#facc15" strokeWidth="2" />
+    <line x1="83" y1="127" x2="83" y2="118" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="89" y1="127" x2="89" y2="118" stroke="#ffffff" strokeWidth="2.2" />
     {/* ticks AC single */}
-    <line x1="54" y1="82" x2="62" y2="76" stroke="#22c55e" strokeWidth="2" />
+    <line x1="54" y1="82" x2="62" y2="76" stroke="#ffffff" strokeWidth="2.2" />
     {/* ticks BC triple */}
-    <line x1="115" y1="83" x2="110" y2="76" stroke="#f97316" strokeWidth="2" />
-    <line x1="120" y1="78" x2="115" y2="71" stroke="#f97316" strokeWidth="2" />
-    <line x1="125" y1="73" x2="120" y2="66" stroke="#f97316" strokeWidth="2" />
+    <line x1="115" y1="83" x2="110" y2="76" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="120" y1="78" x2="115" y2="71" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="125" y1="73" x2="120" y2="66" stroke="#ffffff" strokeWidth="2.2" />
 
     {/* ≅ */}
     <text x="163" y="90" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Triangle 2 */}
-    <polygon points="195,125 310,125 252,30" fill="#22c55e" fillOpacity="0.18" stroke="#4ade80" strokeWidth="2" strokeLinejoin="round" />
+    {/* Triangle 2 — hijau cerah */}
+    <polygon points="195,125 310,125 252,30" fill="#4ade80" fillOpacity="0.58" stroke="#86efac" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="195" cy="125" r="3" fill="#86efac" />
+    <circle cx="310" cy="125" r="3" fill="#86efac" />
+    <circle cx="252" cy="30" r="3" fill="#86efac" />
     <text x="181" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">P</text>
     <text x="312" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">Q</text>
     <text x="247" y="24" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <line x1="248" y1="127" x2="248" y2="118" stroke="#facc15" strokeWidth="2" />
-    <line x1="254" y1="127" x2="254" y2="118" stroke="#facc15" strokeWidth="2" />
-    <line x1="219" y1="82" x2="227" y2="76" stroke="#22c55e" strokeWidth="2" />
-    <line x1="280" y1="83" x2="275" y2="76" stroke="#f97316" strokeWidth="2" />
-    <line x1="285" y1="78" x2="280" y2="71" stroke="#f97316" strokeWidth="2" />
-    <line x1="290" y1="73" x2="285" y2="66" stroke="#f97316" strokeWidth="2" />
+    <line x1="248" y1="127" x2="248" y2="118" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="254" y1="127" x2="254" y2="118" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="219" y1="82" x2="227" y2="76" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="280" y1="83" x2="275" y2="76" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="285" y1="78" x2="280" y2="71" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="290" y1="73" x2="285" y2="66" stroke="#ffffff" strokeWidth="2.2" />
 
     <text x="170" y="14" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">RRR — 3 sisi bersesuaian sama panjang</text>
   </svg>
@@ -144,34 +150,40 @@ const DiagramSyaratRAR = () => (
   <svg viewBox="0 0 340 150" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="340" height="150" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
-    {/* Triangle 1 */}
-    <polygon points="30,125 145,125 88,30" fill="#a855f7" fillOpacity="0.22" stroke="#c084fc" strokeWidth="2" strokeLinejoin="round" />
-    <text x="16" y="140" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="147" y="140" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="83" y="24" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">C</text>
+    {/* Triangle 1 — magenta cerah */}
+    <polygon points="30,125 145,125 88,30" fill="#f472b6" fillOpacity="0.58" stroke="#fb7dd3" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="30" cy="125" r="3" fill="#fb7dd3" />
+    <circle cx="145" cy="125" r="3" fill="#fb7dd3" />
+    <circle cx="88" cy="30" r="3" fill="#fb7dd3" />
+    <text x="16" y="140" fontSize="12" fill="#fb7dd3" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="147" y="140" fontSize="12" fill="#fb7dd3" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="83" y="24" fontSize="12" fill="#fb7dd3" fontWeight="bold" fontFamily="sans-serif">C</text>
     {/* 2 sides with ticks */}
-    <line x1="83" y1="127" x2="83" y2="118" stroke="#facc15" strokeWidth="2.2" />
-    <line x1="89" y1="127" x2="89" y2="118" stroke="#facc15" strokeWidth="2.2" />
-    <line x1="54" y1="82" x2="62" y2="76" stroke="#22c55e" strokeWidth="2.2" />
-    <line x1="59" y1="77" x2="67" y2="71" stroke="#22c55e" strokeWidth="2.2" />
-    {/* angle arc at A (between AC and AB) */}
-    <path d="M30,125 Q46,112 50,125" fill="none" stroke="#f97316" strokeWidth="2" />
-    <circle cx="40" cy="117" r="1.5" fill="#f97316" />
+    <line x1="83" y1="127" x2="83" y2="118" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="89" y1="127" x2="89" y2="118" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="54" y1="82" x2="62" y2="76" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="59" y1="77" x2="67" y2="71" stroke="#ffffff" strokeWidth="2.2" />
+    {/* angle arc at A */}
+    <path d="M30,125 Q46,112 50,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
+    <circle cx="40" cy="117" r="2" fill="#facc15" />
 
     {/* ≅ */}
     <text x="163" y="90" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Triangle 2 */}
-    <polygon points="195,125 310,125 252,30" fill="#a855f7" fillOpacity="0.18" stroke="#c084fc" strokeWidth="2" strokeLinejoin="round" />
-    <text x="181" y="140" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="312" y="140" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="247" y="24" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <line x1="248" y1="127" x2="248" y2="118" stroke="#facc15" strokeWidth="2.2" />
-    <line x1="254" y1="127" x2="254" y2="118" stroke="#facc15" strokeWidth="2.2" />
-    <line x1="219" y1="82" x2="227" y2="76" stroke="#22c55e" strokeWidth="2.2" />
-    <line x1="224" y1="77" x2="232" y2="71" stroke="#22c55e" strokeWidth="2.2" />
-    <path d="M195,125 Q211,112 215,125" fill="none" stroke="#f97316" strokeWidth="2" />
-    <circle cx="205" cy="117" r="1.5" fill="#f97316" />
+    {/* Triangle 2 — oranye cerah */}
+    <polygon points="195,125 310,125 252,30" fill="#fb923c" fillOpacity="0.58" stroke="#fdba74" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="195" cy="125" r="3" fill="#fdba74" />
+    <circle cx="310" cy="125" r="3" fill="#fdba74" />
+    <circle cx="252" cy="30" r="3" fill="#fdba74" />
+    <text x="181" y="140" fontSize="12" fill="#fdba74" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="312" y="140" fontSize="12" fill="#fdba74" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="247" y="24" fontSize="12" fill="#fdba74" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <line x1="248" y1="127" x2="248" y2="118" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="254" y1="127" x2="254" y2="118" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="219" y1="82" x2="227" y2="76" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="224" y1="77" x2="232" y2="71" stroke="#ffffff" strokeWidth="2.2" />
+    <path d="M195,125 Q211,112 215,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
+    <circle cx="205" cy="117" r="2" fill="#facc15" />
 
     <text x="170" y="14" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">RAR — 2 sisi + sudut apit bersesuaian sama</text>
   </svg>
@@ -181,28 +193,34 @@ const DiagramSyaratARA = () => (
   <svg viewBox="0 0 340 150" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="340" height="150" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
-    {/* Triangle 1 */}
-    <polygon points="30,125 145,125 88,30" fill="#22c55e" fillOpacity="0.22" stroke="#4ade80" strokeWidth="2" strokeLinejoin="round" />
-    <text x="16" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="147" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="83" y="24" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">C</text>
+    {/* Triangle 1 — cyan cerah */}
+    <polygon points="30,125 145,125 88,30" fill="#22d3ee" fillOpacity="0.58" stroke="#67e8f9" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="30" cy="125" r="3" fill="#67e8f9" />
+    <circle cx="145" cy="125" r="3" fill="#67e8f9" />
+    <circle cx="88" cy="30" r="3" fill="#67e8f9" />
+    <text x="16" y="140" fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="147" y="140" fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="83" y="24" fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">C</text>
     {/* 1 side tick on AB */}
-    <line x1="86" y1="127" x2="86" y2="117" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="86" y1="127" x2="86" y2="117" stroke="#ffffff" strokeWidth="2.2" />
     {/* angle arcs at A and B */}
-    <path d="M30,125 Q46,112 50,125" fill="none" stroke="#f97316" strokeWidth="2" />
-    <path d="M145,125 Q132,112 127,125" fill="none" stroke="#38bdf8" strokeWidth="2" />
+    <path d="M30,125 Q46,112 50,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
+    <path d="M145,125 Q132,112 127,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
 
     {/* ≅ */}
     <text x="163" y="90" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Triangle 2 */}
-    <polygon points="195,125 310,125 252,30" fill="#22c55e" fillOpacity="0.18" stroke="#4ade80" strokeWidth="2" strokeLinejoin="round" />
-    <text x="181" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="312" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="247" y="24" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <line x1="251" y1="127" x2="251" y2="117" stroke="#facc15" strokeWidth="2.2" />
-    <path d="M195,125 Q211,112 215,125" fill="none" stroke="#f97316" strokeWidth="2" />
-    <path d="M310,125 Q297,112 292,125" fill="none" stroke="#38bdf8" strokeWidth="2" />
+    {/* Triangle 2 — lime cerah */}
+    <polygon points="195,125 310,125 252,30" fill="#a3e635" fillOpacity="0.58" stroke="#bef264" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="195" cy="125" r="3" fill="#bef264" />
+    <circle cx="310" cy="125" r="3" fill="#bef264" />
+    <circle cx="252" cy="30" r="3" fill="#bef264" />
+    <text x="181" y="140" fontSize="12" fill="#bef264" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="312" y="140" fontSize="12" fill="#bef264" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="247" y="24" fontSize="12" fill="#bef264" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <line x1="251" y1="127" x2="251" y2="117" stroke="#ffffff" strokeWidth="2.2" />
+    <path d="M195,125 Q211,112 215,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
+    <path d="M310,125 Q297,112 292,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
 
     <text x="170" y="14" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">ARA/AAR — 1 sisi + 2 sudut bersesuaian sama</text>
   </svg>
