@@ -437,8 +437,8 @@ const DiagramPersegiPanjang = () => (
       return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.4"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.4"/></g>;
     })}
 
-    {/* ≅ */}
-    <text x="180" y="100" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
+    {/* ≅ — centred in the 50px gap (x=150 to x=200) */}
+    <text x="175" y="100" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
     {/* ── Rectangle 2: P(200,45) Q(330,45) R(330,125) S(200,125) ── */}
     <rect x="200" y="45" width="130" height="80" fill="#0ea5e9" fillOpacity="0.16" stroke="#38bdf8" strokeWidth="2.2" />
@@ -519,8 +519,8 @@ const DiagramJajarGenjang = () => (
     {/* ∠B arc — sky, CW (sweep=1), r=15 */}
     <path d="M 135,130 A 15,15 0 0,1 147,115" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
 
-    {/* ≅ */}
-    <text x="180" y="95" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
+    {/* ≅ — centred between shape 1 right (≈142 at y=95) and shape 2 left (≈197 at y=95) */}
+    <text x="170" y="95" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
     {/* ── Parallelogram 2: P(205,130) Q(325,130) R(305,40) S(185,40) ── */}
     <polygon points="205,130 325,130 305,40 185,40"
@@ -570,8 +570,9 @@ const DiagramBelahKetupat = () => (
    *
    * Rhombus 2: offset x+175  A'(255,45) B'(325,88) C'(255,131) D'(185,88)
    */
-  <svg viewBox="0 0 340 170" className="w-full max-w-sm mx-auto">
-    <rect x="0" y="0" width="340" height="170" rx="10" fill="#0f172a" fillOpacity="0.5" />
+  /* Rhombus 2 shifted x+195 (was x+175): 55px gap B(150)→D'(205). viewBox→360. ≅ at x=178. */
+  <svg viewBox="0 0 360 170" className="w-full max-w-sm mx-auto">
+    <rect x="0" y="0" width="360" height="170" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
     {/* ── Rhombus 1: A(80,45) B(150,88) C(80,131) D(10,88) — violet ── */}
     <polygon points="80,45 150,88 80,131 10,88"
@@ -601,38 +602,38 @@ const DiagramBelahKetupat = () => (
     {/* ∠D — sky, acute, CW (sweep=1), r=14 (equal to ∠B) */}
     <path d="M 22,81 A 14,14 0 0,1 22,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
 
-    {/* ≅ */}
-    <text x="168" y="97" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
+    {/* ≅ — centred at x=178, midpoint of B(150) and D'(205), gap ≈17px each side */}
+    <text x="178" y="97" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* ── Rhombus 2: A'(255,45) B'(325,88) C'(255,131) D'(185,88) — x+175 ── */}
-    <polygon points="255,45 325,88 255,131 185,88"
+    {/* ── Rhombus 2: P(275,45) Q(345,88) R(275,131) S(205,88) — x+195 ── */}
+    <polygon points="275,45 345,88 275,131 205,88"
       fill="#8b5cf6" fillOpacity="0.16" stroke="#a78bfa" strokeWidth="2.2" strokeLinejoin="round" />
-    <circle cx="255" cy="45"  r="3" fill="#a78bfa" />
-    <circle cx="325" cy="88"  r="3" fill="#a78bfa" />
-    <circle cx="255" cy="131" r="3" fill="#a78bfa" />
-    <circle cx="185" cy="88"  r="3" fill="#a78bfa" />
-    <text x="249" y="40"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="328" y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="249" y="147" fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <text x="175" y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">S</text>
+    <circle cx="275" cy="45"  r="3" fill="#a78bfa" />
+    <circle cx="345" cy="88"  r="3" fill="#a78bfa" />
+    <circle cx="275" cy="131" r="3" fill="#a78bfa" />
+    <circle cx="205" cy="88"  r="3" fill="#a78bfa" />
+    <text x="269" y="40"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="348" y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="269" y="147" fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="190" y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">S</text>
 
-    {/* PQ tick */}
-    <line x1="294" y1="61"  x2="286" y2="72"  stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* PQ tick — x+195 from AB tick */}
+    <line x1="314" y1="61"  x2="306" y2="72"  stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
     {/* QR tick */}
-    <line x1="294" y1="116" x2="286" y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="314" y1="116" x2="306" y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
     {/* RS tick */}
-    <line x1="216" y1="116" x2="224" y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="236" y1="116" x2="244" y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
     {/* SP tick */}
-    <line x1="216" y1="61"  x2="224" y2="72"  stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="236" y1="61"  x2="244" y2="72"  stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
 
     {/* ∠P — orange, obtuse, CW (sweep=1) */}
-    <path d="M 267,52 A 14,14 0 0,1 243,52" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    <path d="M 287,52 A 14,14 0 0,1 263,52" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
     {/* ∠Q — sky, acute, CCW (sweep=0) */}
-    <path d="M 313,81 A 14,14 0 0,0 313,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
+    <path d="M 333,81 A 14,14 0 0,0 333,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
     {/* ∠S — sky, acute, CW (sweep=1) */}
-    <path d="M 197,81 A 14,14 0 0,1 197,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
+    <path d="M 217,81 A 14,14 0 0,1 217,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
 
-    <text x="170" y="16" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua belah ketupat kongruen jika sisinya sama &amp; sudut apitnya sama</text>
+    <text x="180" y="16" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua belah ketupat kongruen jika sisinya sama &amp; sudut apitnya sama</text>
   </svg>
 );
 
@@ -694,8 +695,8 @@ const DiagramLayangLayang = () => (
     {/* ∠D — orange, CCW (sweep=0), r=14 (equal to ∠B) */}
     <path d="M 129,77 A 14,14 0 0,0 129,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
 
-    {/* ≅ */}
-    <text x="168" y="97" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
+    {/* ≅ — centred at x=167, midpoint of D(138) and B'(197), gap ≈23px each side */}
+    <text x="167" y="97" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
     {/* ── Kite 2: A'(255,20) B'(197,88) C'(255,155) D'(313,88) — x+175 ── */}
     <polygon points="255,20 197,88 255,155 313,88"
