@@ -515,8 +515,8 @@ const WaterfallAnimasiTegak = () => {
 const WaterfallAnimasiTinggi = () => {
   // B=(55,22)  A=(55,182)  C=(175,182)  D=(132,124)
   const pathAD  = "M 55,182 L 132,124";
-  // Busur D→B: melengkung ke atas-kiri
-  const pathDB  = "M 132,124 Q 80,68 55,22";
+  // Busur D→B: diperbesar, melengkung ke kanan-atas agar jelas terpisah dari garis DB
+  const pathDB  = "M 132,124 Q 120,40 55,22";
   // Busur D→C: melengkung ke bawah-kanan (pendek)
   const pathDC  = "M 132,124 Q 168,143 175,182";
 
@@ -622,8 +622,8 @@ const WaterfallAnimasiTinggi = () => {
           {/* Label segmen */}
           {/* AD — tengah garis tinggi (≈ x=93,y=153) */}
           <text x="72" y="156" fontSize="11" fill="#4ade80" fontWeight="bold" textAnchor="middle">AD</text>
-          {/* DB① — tengah busur D→B (≈ x=87,y=71) */}
-          <text x="68" y="68" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="end">DB ①</text>
+          {/* DB① — tengah busur D→B (busur baru ≈ x=107,y=57) */}
+          <text x="122" y="50" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="start">DB ①</text>
           {/* DC② — tengah busur D→C (≈ x=161,y=148) */}
           <text x="178" y="146" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="start">DC ②</text>
 
