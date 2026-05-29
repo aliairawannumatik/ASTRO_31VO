@@ -661,74 +661,74 @@ const DiagramLayangLayang = () => (
    *
    * Kite 2: offset x+175  A'(255,20) B'(197,88) C'(255,170) D'(313,88)
    */
-  <svg viewBox="0 0 340 192" className="w-full max-w-sm mx-auto mt-4">
-    <rect x="0" y="0" width="340" height="192" rx="10" fill="#0f172a" fillOpacity="0.5" />
-
-    {/* ── Kite 1: A(80,20) B(22,88) C(80,170) D(138,88) — rose ── */}
-    <polygon points="80,20 22,88 80,170 138,88"
-      fill="#f43f5e" fillOpacity="0.2" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
-    <circle cx="80"  cy="20"  r="3" fill="#fb7185" />
-    <circle cx="22"  cy="88"  r="3" fill="#fb7185" />
-    <circle cx="80"  cy="170" r="3" fill="#fb7185" />
-    <circle cx="138" cy="88"  r="3" fill="#fb7185" />
-    <text x="74"  y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="7"   y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="74"  y="186" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">C</text>
-    <text x="141" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">D</text>
-
-    {/* AB single tick — unchanged mid(51,54) */}
-    <line x1="56" y1="59" x2="46" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
-    {/* AD single tick — unchanged mid(109,54) */}
-    <line x1="114" y1="50" x2="104" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
-
-    {/* CB double tick — new mid(51,129), perp=(0.817,−0.578) */}
-    {/* c1=(52.2,130.6): (47,134)→(58,127)   c2=(49.8,127.4): (45,131)→(55,124) */}
-    <line x1="47" y1="134" x2="58" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="45" y1="131" x2="55" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-
-    {/* CD double tick — new mid(109,129), perp=(−0.817,−0.578) */}
-    {/* c1=(110.2,127.4): (116,131)→(105,124)   c2=(107.8,130.6): (113,134)→(103,127) */}
-    <line x1="116" y1="131" x2="105" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="113" y1="134" x2="103" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-
-    {/* ∠B — orange, CW (sweep=1), r=14 */}
-    <path d="M 31,77 A 14,14 0 0,1 31,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
-    {/* ∠D — orange, CCW (sweep=0), r=14 */}
-    <path d="M 129,77 A 14,14 0 0,0 129,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
-
-    {/* ≅ — centred at x=167, midpoint of D(138) and B'(197) */}
-    <text x="167" y="97" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
-
-    {/* ── Kite 2: A'(255,20) B'(197,88) C'(255,170) D'(313,88) — x+175 ── */}
-    <polygon points="255,20 197,88 255,170 313,88"
-      fill="#f43f5e" fillOpacity="0.15" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
-    <circle cx="255" cy="20"  r="3" fill="#fb7185" />
-    <circle cx="197" cy="88"  r="3" fill="#fb7185" />
-    <circle cx="255" cy="170" r="3" fill="#fb7185" />
-    <circle cx="313" cy="88"  r="3" fill="#fb7185" />
-    <text x="249" y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="182" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="249" y="186" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <text x="316" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">S</text>
-
-    {/* PQ single tick — x+175 from AB */}
-    <line x1="231" y1="59" x2="221" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
-    {/* PS single tick — x+175 from AD */}
-    <line x1="289" y1="50" x2="279" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
-
-    {/* RQ double tick — x+175 from CB */}
-    <line x1="222" y1="134" x2="233" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="220" y1="131" x2="230" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    {/* RS double tick — x+175 from CD */}
-    <line x1="291" y1="131" x2="280" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="288" y1="134" x2="278" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-
-    {/* ∠Q — orange, CW (sweep=1), r=14 */}
-    <path d="M 206,77 A 14,14 0 0,1 206,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
-    {/* ∠S — orange, CCW (sweep=0), r=14 */}
-    <path d="M 304,77 A 14,14 0 0,0 304,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+  <svg viewBox="0 0 340 212" className="w-full max-w-sm mx-auto mt-4">
+    <rect x="0" y="0" width="340" height="212" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
     <text x="170" y="16" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua layang-layang kongruen jika semua sisi &amp; sudut bersesuaian sama</text>
+
+    <g transform="translate(0,20)">
+      {/* ── Kite 1: A(80,20) B(22,88) C(80,170) D(138,88) — rose ── */}
+      <polygon points="80,20 22,88 80,170 138,88"
+        fill="#f43f5e" fillOpacity="0.2" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
+      <circle cx="80"  cy="20"  r="3" fill="#fb7185" />
+      <circle cx="22"  cy="88"  r="3" fill="#fb7185" />
+      <circle cx="80"  cy="170" r="3" fill="#fb7185" />
+      <circle cx="138" cy="88"  r="3" fill="#fb7185" />
+      <text x="74"  y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">A</text>
+      <text x="7"   y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">B</text>
+      <text x="74"  y="186" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">C</text>
+      <text x="141" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">D</text>
+
+      {/* AB single tick */}
+      <line x1="56" y1="59" x2="46" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+      {/* AD single tick */}
+      <line x1="114" y1="50" x2="104" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+
+      {/* CB double tick */}
+      <line x1="47" y1="134" x2="58" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+      <line x1="45" y1="131" x2="55" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+
+      {/* CD double tick */}
+      <line x1="116" y1="131" x2="105" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+      <line x1="113" y1="134" x2="103" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+
+      {/* ∠B — orange, CW */}
+      <path d="M 31,77 A 14,14 0 0,1 31,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+      {/* ∠D — orange, CCW */}
+      <path d="M 129,77 A 14,14 0 0,0 129,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+
+      {/* ≅ */}
+      <text x="167" y="97" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
+
+      {/* ── Kite 2: A'(255,20) B'(197,88) C'(255,170) D'(313,88) — x+175 ── */}
+      <polygon points="255,20 197,88 255,170 313,88"
+        fill="#f43f5e" fillOpacity="0.15" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
+      <circle cx="255" cy="20"  r="3" fill="#fb7185" />
+      <circle cx="197" cy="88"  r="3" fill="#fb7185" />
+      <circle cx="255" cy="170" r="3" fill="#fb7185" />
+      <circle cx="313" cy="88"  r="3" fill="#fb7185" />
+      <text x="249" y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">P</text>
+      <text x="182" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">Q</text>
+      <text x="249" y="186" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">R</text>
+      <text x="316" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">S</text>
+
+      {/* PQ single tick */}
+      <line x1="231" y1="59" x2="221" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+      {/* PS single tick */}
+      <line x1="289" y1="50" x2="279" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+
+      {/* RQ double tick */}
+      <line x1="222" y1="134" x2="233" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+      <line x1="220" y1="131" x2="230" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+      {/* RS double tick */}
+      <line x1="291" y1="131" x2="280" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+      <line x1="288" y1="134" x2="278" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+
+      {/* ∠Q — orange, CW */}
+      <path d="M 206,77 A 14,14 0 0,1 206,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+      {/* ∠S — orange, CCW */}
+      <path d="M 304,77 A 14,14 0 0,0 304,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    </g>
   </svg>
 );
 
