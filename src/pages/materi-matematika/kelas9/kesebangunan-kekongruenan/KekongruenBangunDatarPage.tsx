@@ -550,6 +550,185 @@ const DiagramJajarGenjang = () => (
   </svg>
 );
 
+const DiagramBelahKetupat = () => (
+  /*
+   * Rhombus 1: A(80,45) B(150,88) C(80,131) D(10,88)  center=(80,88)
+   *   h-half=70, v-half=43  →  side=sqrt(70²+43²)=82.2
+   *   unit_AB=(0.852,0.523)  perp_AB(CCW)=(-0.523,0.852)
+   *   unit_BC=(-0.852,0.523) perp_BC(CCW)=(-0.523,-0.852)
+   *
+   * Ticks — single on all 4 sides, half-len=7, perpendicular to side:
+   *   AB mid(115,66.5): (119,61)→(111,72)
+   *   BC mid(115,109.5):(119,116)→(111,104)
+   *   CD mid(45,109.5): (41,116)→(49,104)
+   *   DA mid(45,66.5):  (41,61)→(49,72)
+   *
+   * Angle arcs r=14:
+   *   ∠A (obtuse≈120°): start AB (92,52), end AD (68,52), sweep CW(1)
+   *   ∠B (acute≈60°):   start BA (138,81), end BC (138,95), sweep CCW(0)
+   *   ∠D (acute, =∠B):  start DA (22,81), end DC (22,95), sweep CW(1)
+   *
+   * Rhombus 2: offset x+175  A'(255,45) B'(325,88) C'(255,131) D'(185,88)
+   */
+  <svg viewBox="0 0 340 170" className="w-full max-w-sm mx-auto">
+    <rect x="0" y="0" width="340" height="170" rx="10" fill="#0f172a" fillOpacity="0.5" />
+
+    {/* ── Rhombus 1: A(80,45) B(150,88) C(80,131) D(10,88) — violet ── */}
+    <polygon points="80,45 150,88 80,131 10,88"
+      fill="#8b5cf6" fillOpacity="0.22" stroke="#a78bfa" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="80"  cy="45"  r="3" fill="#a78bfa" />
+    <circle cx="150" cy="88"  r="3" fill="#a78bfa" />
+    <circle cx="80"  cy="131" r="3" fill="#a78bfa" />
+    <circle cx="10"  cy="88"  r="3" fill="#a78bfa" />
+    <text x="74"  y="40"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="153" y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="74"  y="147" fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">C</text>
+    <text x="0"   y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">D</text>
+
+    {/* AB tick — mid(115,66.5) perp=(-0.523,0.852) half=7 */}
+    <line x1="119" y1="61" x2="111" y2="72" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* BC tick — mid(115,109.5) */}
+    <line x1="119" y1="116" x2="111" y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* CD tick — mid(45,109.5) */}
+    <line x1="41"  y1="116" x2="49"  y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* DA tick — mid(45,66.5) */}
+    <line x1="41"  y1="61"  x2="49"  y2="72"  stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+
+    {/* ∠A — orange, obtuse, CW (sweep=1), r=14 */}
+    <path d="M 92,52 A 14,14 0 0,1 68,52" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠B — sky, acute, CCW (sweep=0), r=14 */}
+    <path d="M 138,81 A 14,14 0 0,0 138,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠D — sky, acute, CW (sweep=1), r=14 (equal to ∠B) */}
+    <path d="M 22,81 A 14,14 0 0,1 22,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
+
+    {/* ≅ */}
+    <text x="168" y="97" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
+
+    {/* ── Rhombus 2: A'(255,45) B'(325,88) C'(255,131) D'(185,88) — x+175 ── */}
+    <polygon points="255,45 325,88 255,131 185,88"
+      fill="#8b5cf6" fillOpacity="0.16" stroke="#a78bfa" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="255" cy="45"  r="3" fill="#a78bfa" />
+    <circle cx="325" cy="88"  r="3" fill="#a78bfa" />
+    <circle cx="255" cy="131" r="3" fill="#a78bfa" />
+    <circle cx="185" cy="88"  r="3" fill="#a78bfa" />
+    <text x="249" y="40"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="328" y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="249" y="147" fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="175" y="93"  fontSize="12" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">S</text>
+
+    {/* PQ tick */}
+    <line x1="294" y1="61"  x2="286" y2="72"  stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* QR tick */}
+    <line x1="294" y1="116" x2="286" y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* RS tick */}
+    <line x1="216" y1="116" x2="224" y2="104" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* SP tick */}
+    <line x1="216" y1="61"  x2="224" y2="72"  stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+
+    {/* ∠P — orange, obtuse, CW (sweep=1) */}
+    <path d="M 267,52 A 14,14 0 0,1 243,52" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠Q — sky, acute, CCW (sweep=0) */}
+    <path d="M 313,81 A 14,14 0 0,0 313,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠S — sky, acute, CW (sweep=1) */}
+    <path d="M 197,81 A 14,14 0 0,1 197,95" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
+
+    <text x="170" y="16" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua belah ketupat kongruen jika sisinya sama &amp; sudut apitnya sama</text>
+  </svg>
+);
+
+const DiagramLayangLayang = () => (
+  /*
+   * Kite 1: A(80,20) B(22,88) C(80,155) D(138,88)
+   *   AB=AD (top pair): dir AB=(-58,68) |=89.4  unit=(-0.649,0.761)
+   *   CB=CD (bot pair): dir CB=(-58,-67)|=88.6  unit=(-0.655,-0.756)
+   *
+   * Ticks:
+   *   AB single mid(51,54):   perp_AB=(-0.761,-0.649)  → (56,59)→(46,50)
+   *   AD single mid(109,54):  perp_AD=(-0.761, 0.649)  → (114,50)→(104,59)
+   *   CB double mid(51,121.5):perp_CB=(0.756,-0.655)   → two lines
+   *   CD double mid(109,121.5):perp_CD=(0.756,0.655)   → two lines
+   *
+   * Angle arcs r=14 at ∠B and ∠D (equal angles in kite):
+   *   ∠B at B(22,88):  start BA (31,77), end BC (31,99), sweep CW(1)
+   *   ∠D at D(138,88): start DA (129,77), end DC (129,99), sweep CCW(0)
+   *
+   * Kite 2: offset x+175  A'(255,20) B'(197,88) C'(255,155) D'(313,88)
+   */
+  <svg viewBox="0 0 340 175" className="w-full max-w-sm mx-auto">
+    <rect x="0" y="0" width="340" height="175" rx="10" fill="#0f172a" fillOpacity="0.5" />
+
+    {/* ── Kite 1: A(80,20) B(22,88) C(80,155) D(138,88) — rose ── */}
+    <polygon points="80,20 22,88 80,155 138,88"
+      fill="#f43f5e" fillOpacity="0.2" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="80"  cy="20"  r="3" fill="#fb7185" />
+    <circle cx="22"  cy="88"  r="3" fill="#fb7185" />
+    <circle cx="80"  cy="155" r="3" fill="#fb7185" />
+    <circle cx="138" cy="88"  r="3" fill="#fb7185" />
+    <text x="74"  y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="7"   y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="74"  y="170" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">C</text>
+    <text x="141" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">D</text>
+
+    {/* AB single tick — mid(51,54), perp=(-0.761,-0.649), half=7 */}
+    {/* mid - 7*perp = (51+5.33,54+4.54)=(56,59); mid + 7*perp = (51-5.33,54-4.54)=(46,50) */}
+    <line x1="56" y1="59" x2="46" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+
+    {/* AD single tick — mid(109,54), perp=(-0.761,0.649), half=7 */}
+    {/* mid - 7*perp = (109+5.33,54-4.54)=(114,50); mid + 7*perp = (109-5.33,54+4.54)=(104,59) */}
+    <line x1="114" y1="50" x2="104" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+
+    {/* CB double tick — mid(51,121.5), unit=(-0.655,-0.756), perp=(0.756,-0.655) */}
+    {/* c1=mid-2*unit=(52.3,123.0): line (47,127)→(57,119)  */}
+    {/* c2=mid+2*unit=(49.7,120.0): line (45,124)→(55,116)  */}
+    <line x1="47" y1="127" x2="57" y2="119" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="45" y1="124" x2="55" y2="116" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+
+    {/* CD double tick — mid(109,121.5), unit=(0.655,-0.756), perp=(0.756,0.655) */}
+    {/* c1=(107.7,123.0): line (103,119)→(113,127)  */}
+    {/* c2=(110.3,120.0): line (105,116)→(115,124)  */}
+    <line x1="103" y1="119" x2="113" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="105" y1="116" x2="115" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+
+    {/* ∠B — orange, CW (sweep=1), r=14 */}
+    <path d="M 31,77 A 14,14 0 0,1 31,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠D — orange, CCW (sweep=0), r=14 (equal to ∠B) */}
+    <path d="M 129,77 A 14,14 0 0,0 129,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+
+    {/* ≅ */}
+    <text x="168" y="97" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
+
+    {/* ── Kite 2: A'(255,20) B'(197,88) C'(255,155) D'(313,88) — x+175 ── */}
+    <polygon points="255,20 197,88 255,155 313,88"
+      fill="#f43f5e" fillOpacity="0.15" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="255" cy="20"  r="3" fill="#fb7185" />
+    <circle cx="197" cy="88"  r="3" fill="#fb7185" />
+    <circle cx="255" cy="155" r="3" fill="#fb7185" />
+    <circle cx="313" cy="88"  r="3" fill="#fb7185" />
+    <text x="249" y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="182" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="249" y="170" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="316" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">S</text>
+
+    {/* PQ single tick — x+175 from AB */}
+    <line x1="231" y1="59" x2="221" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* PS single tick — x+175 from AD */}
+    <line x1="289" y1="50" x2="279" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* RQ double tick — x+175 from CB */}
+    <line x1="222" y1="127" x2="232" y2="119" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="220" y1="124" x2="230" y2="116" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    {/* RS double tick — x+175 from CD */}
+    <line x1="278" y1="119" x2="288" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="280" y1="116" x2="290" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+
+    {/* ∠Q — orange, CW (sweep=1), r=14 */}
+    <path d="M 206,77 A 14,14 0 0,1 206,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠S — orange, CCW (sweep=0), r=14 */}
+    <path d="M 304,77 A 14,14 0 0,0 304,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+
+    <text x="170" y="16" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua layang-layang kongruen jika semua sisi &amp; sudut bersesuaian sama</text>
+  </svg>
+);
+
 const DiagramLingkaran = () => (
   <svg viewBox="0 0 320 150" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="320" height="150" rx="10" fill="#0f172a" fillOpacity="0.5" />
@@ -856,7 +1035,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-sky-500/10 border border-sky-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-sky-200">
                     Kekongruenan tidak hanya berlaku pada segitiga. Semua bangun datar — persegi, persegi panjang,
-                    jajar genjang, trapesium, lingkaran, maupun poligon lainnya — dapat bersifat kongruen.
+                    jajar genjang, trapesium, belah ketupat, layang-layang, lingkaran, maupun poligon lainnya — dapat bersifat kongruen.
                     Syarat umumnya tetap sama: <strong className="text-yellow-300">semua sisi bersesuaian sama panjang
                     DAN semua sudut bersesuaian sama besar.</strong>
                   </p>
@@ -949,9 +1128,51 @@ const KekongruenBangunDatarPage = () => {
                   </div>
                 </div>
 
+                {/* Belah Ketupat */}
+                <div className="bg-slate-800/60 border border-violet-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-violet-300">⑤ Belah Ketupat (Rhombus)</p>
+                  <DiagramBelahKetupat />
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
+                    <p className="font-semibold text-violet-200">Syarat kekongruenan belah ketupat:</p>
+                    <p>Dua belah ketupat kongruen jika <strong className="text-yellow-300">panjang sisinya sama DAN salah satu sudut apitnya sama besar</strong>.</p>
+                    <div className="bg-slate-900/70 rounded p-2 mt-1">
+                      <BlockMath math="ABCD \cong PQRS \iff AB = PQ \text{ dan } \angle A = \angle P" />
+                    </div>
+                    <p className="text-xs text-white/60 italic">
+                      ⚠️ Dua belah ketupat dengan sisi sama belum tentu kongruen — sudut apitnya harus sama!
+                    </p>
+                  </div>
+                  <div className="bg-violet-500/10 border border-violet-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
+                    <p className="font-semibold text-violet-300">Sifat tambahan:</p>
+                    <p>✅ <InlineMath math="AB = BC = CD = DA = PQ = QR = RS = SP" /> (semua sisi sama)</p>
+                    <p>✅ <InlineMath math="\angle A = \angle C" /> dan <InlineMath math="\angle B = \angle D" /> (sudut berhadapan sama)</p>
+                    <p>✅ Diagonal saling berpotongan tegak lurus dan saling membagi dua sama panjang</p>
+                  </div>
+                </div>
+
+                {/* Layang-layang */}
+                <div className="bg-slate-800/60 border border-rose-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-rose-300">⑥ Layang-layang (Kite)</p>
+                  <DiagramLayangLayang />
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
+                    <p className="font-semibold text-rose-200">Syarat kekongruenan layang-layang:</p>
+                    <p>Dua layang-layang kongruen jika <strong className="text-yellow-300">semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</strong>.</p>
+                    <div className="bg-slate-900/70 rounded p-2 mt-1">
+                      <BlockMath math="ABCD \cong PQRS \iff AB=PQ,\; AD=PS,\; CB=QR,\; CD=RS" />
+                      <BlockMath math="\angle B = \angle Q \text{ (sudut di antara sisi berbeda panjang)}" />
+                    </div>
+                  </div>
+                  <div className="bg-rose-500/10 border border-rose-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
+                    <p className="font-semibold text-rose-300">Sifat layang-layang:</p>
+                    <p>✅ <InlineMath math="AB = AD" /> dan <InlineMath math="CB = CD" /> (dua pasang sisi berdekatan sama)</p>
+                    <p>✅ <InlineMath math="\angle B = \angle D" /> (sudut di antara sisi yang berbeda panjang sama besar)</p>
+                    <p>✅ Diagonal utama (AC) memotong diagonal lainnya (BD) tegak lurus dan membaginya sama panjang</p>
+                  </div>
+                </div>
+
                 {/* Lingkaran */}
                 <div className="bg-slate-800/60 border border-pink-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-pink-300">⑤ Lingkaran (Circle)</p>
+                  <p className="font-body text-sm font-semibold text-pink-300">⑦ Lingkaran (Circle)</p>
                   <DiagramLingkaran />
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-pink-200">Syarat kekongruenan lingkaran:</p>
