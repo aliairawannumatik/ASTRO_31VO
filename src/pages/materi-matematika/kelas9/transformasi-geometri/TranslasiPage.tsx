@@ -153,7 +153,7 @@ function AnimasiTitik() {
       <div className="flex justify-center">
         <Grid accent="#22d3ee">
           {/* Ghost origin */}
-          <Dot x={OX} y={OY} color="#22d3ee" label={`A(${OX},${OY})`} ghost />
+          <Dot x={OX} y={OY} color="#ef4444" label={`A(${OX},${OY})`} ghost />
           {/* Arrow */}
           {moved && <Arrow x1={OX} y1={OY} x2={pos.x} y2={pos.y} color="#facc15" />}
           {/* Vector label mid-arrow */}
@@ -165,7 +165,7 @@ function AnimasiTitik() {
             >T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</text>
           )}
           {/* Current point */}
-          <Dot x={pos.x} y={pos.y} color="#22d3ee" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
+          <Dot x={pos.x} y={pos.y} color="#ef4444" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
         </Grid>
       </div>
 
