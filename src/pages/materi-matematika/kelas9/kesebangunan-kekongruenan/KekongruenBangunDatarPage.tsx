@@ -980,7 +980,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">① Syarat RRR — Sisi-Sisi-Sisi</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A", "B", "C"]} rightLabels={["P", "Q", "R"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 2. Syarat RRR — ketiga pasang sisi bersesuaian sama panjang: AB=PQ, BC=QR, CA=RP
                     </figcaption>

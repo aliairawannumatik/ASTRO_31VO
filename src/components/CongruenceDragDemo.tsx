@@ -150,7 +150,21 @@ const SHAPES: Record<CongruentShapeType, { render: RenderFn; vbH: number; cy: nu
   trapezoid:     { render: renderTrapezoid,      vbH: 190, cy: 93  },
 };
 
-export const DragCongruenceDemo = ({ shape }: { shape: CongruentShapeType }) => {
+const TRI_VERT_OFFSETS = [
+  { dx: -55, dy: +55, anchor: "end"    as const, lx: -5, ly: +14 },
+  { dx: +55, dy: +55, anchor: "start"  as const, lx: +5, ly: +14 },
+  { dx:   0, dy: -55, anchor: "middle" as const, lx:  0, ly:  -7 },
+];
+
+export const DragCongruenceDemo = ({
+  shape,
+  leftLabels,
+  rightLabels,
+}: {
+  shape: CongruentShapeType;
+  leftLabels?: [string, string, string];
+  rightLabels?: [string, string, string];
+}) => {
   const { render, vbH, cy: CY } = SHAPES[shape];
   const VBW = 300;
   const TARGET = { x: 75, y: CY };
@@ -283,6 +297,32 @@ export const DragCongruenceDemo = ({ shape }: { shape: CongruentShapeType }) => 
               <animate attributeName="opacity" values="0.35;0;0.35" dur="1.8s" repeatCount="indefinite" />
             </circle>
           )}
+
+          {/* Fixed left vertex labels — always at absolute TARGET vertex positions, never inside translate group */}
+          {leftLabels && shape === "triangle" && TRI_VERT_OFFSETS.map((v, i) => (
+            <text key={`ll-${i}`}
+              x={TARGET.x + v.dx + v.lx}
+              y={TARGET.y + v.dy + v.ly}
+              textAnchor={v.anchor}
+              fontSize="11" fill="#fde047" fontWeight="bold" fontFamily="serif"
+              style={{ pointerEvents: "none" }}
+            >
+              {leftLabels[i]}
+            </text>
+          ))}
+
+          {/* Fixed right vertex labels — always at absolute START vertex positions, hidden when snapped */}
+          {rightLabels && shape === "triangle" && !isSnapped && TRI_VERT_OFFSETS.map((v, i) => (
+            <text key={`rl-${i}`}
+              x={START.x + v.dx + v.lx}
+              y={START.y + v.dy + v.ly}
+              textAnchor={v.anchor}
+              fontSize="11" fill="#86efac" fontWeight="bold" fontFamily="serif"
+              style={{ pointerEvents: "none" }}
+            >
+              {rightLabels[i]}
+            </text>
+          ))}
 
           {!isSnapped ? (
             <>
