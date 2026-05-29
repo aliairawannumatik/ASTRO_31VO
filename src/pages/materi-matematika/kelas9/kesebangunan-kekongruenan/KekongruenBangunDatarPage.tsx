@@ -946,7 +946,12 @@ const KekongruenBangunDatarPage = () => {
                 </div>
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI SIFAT KEKONGRUENAN SEGITIGA:</p>
-                  <DragCongruenceDemo shape="triangle" />
+                  <figure>
+                    <DragCongruenceDemo shape="triangle" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 1. Ilustrasi △ABC ≅ △PQR — semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
+                    </figcaption>
+                  </figure>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
@@ -974,7 +979,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* RRR */}
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">① Syarat RRR — Sisi-Sisi-Sisi</p>
-                  <DragCongruenceDemo shape="triangle" />
+                  <figure>
+                    <DragCongruenceDemo shape="triangle" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 2. Syarat RRR — ketiga pasang sisi bersesuaian sama panjang: AB=PQ, BC=QR, CA=RP
+                    </figcaption>
+                  </figure>
                   <p className="font-body text-sm text-white/80">
                     Ketiga pasang sisi bersesuaian sama panjang.
                   </p>
@@ -986,7 +996,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* RAR */}
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">② Syarat RAR — Sisi-Sudut-Sisi</p>
-                  <DragCongruenceDemo shape="triangle" />
+                  <figure>
+                    <DragCongruenceDemo shape="triangle" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 3. Syarat RAR — dua sisi bersesuaian sama panjang dan sudut apitnya sama besar: AB=PQ, ∠A=∠P, AC=PR
+                    </figcaption>
+                  </figure>
                   <p className="font-body text-sm text-white/80">
                     Dua sisi bersesuaian sama panjang <strong>dan sudut apitnya</strong> sama besar.
                   </p>
@@ -998,7 +1013,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* ARA / AAR */}
                 <div className="bg-slate-800/60 border border-cyan-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">③ Syarat ARA / AAR — Sudut-Sisi-Sudut</p>
-                  <DragCongruenceDemo shape="triangle" />
+                  <figure>
+                    <DragCongruenceDemo shape="triangle" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 4. Syarat ARA/AAR — satu sisi sama panjang dan dua sudut bersesuaian sama besar: ∠A=∠P, AB=PQ, ∠B=∠Q
+                    </figcaption>
+                  </figure>
                   <p className="font-body text-sm text-white/80">
                     Satu sisi bersesuaian sama panjang dan dua sudut bersesuaian sama besar
                     (sisi boleh diapit atau dihadapkan ke salah satu sudut).
@@ -1048,7 +1068,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* Persegi */}
                 <div className="bg-slate-800/60 border border-blue-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-blue-300">① Persegi (Square)</p>
-                  <DragCongruenceDemo shape="square" />
+                  <figure>
+                    <DragCongruenceDemo shape="square" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 5. Dua persegi kongruen — Persegi ABCD ≅ Persegi PQRS jika sisinya sama panjang (AB = PQ)
+                    </figcaption>
+                  </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-blue-200">Syarat kekongruenan persegi:</p>
                     <p>Dua persegi kongruen jika dan hanya jika <strong className="text-yellow-300">panjang sisinya sama</strong>.</p>
@@ -1069,7 +1094,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* Persegi Panjang */}
                 <div className="bg-slate-800/60 border border-sky-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-sky-300">② Persegi Panjang (Rectangle)</p>
-                  <DragCongruenceDemo shape="rectangle" />
+                  <figure>
+                    <DragCongruenceDemo shape="rectangle" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 6. Dua persegi panjang kongruen — ABCD ≅ PQRS jika panjang dan lebarnya sama (AB=PQ dan BC=QR)
+                    </figcaption>
+                  </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-sky-200">Syarat kekongruenan persegi panjang:</p>
                     <p>Dua persegi panjang kongruen jika <strong className="text-yellow-300">panjang (<InlineMath math="p" />) dan lebarnya (<InlineMath math="l" />) sama</strong>.</p>
@@ -1092,7 +1122,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* Jajar Genjang */}
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-yellow-300">③ Jajar Genjang (Parallelogram)</p>
-                  <DragCongruenceDemo shape="parallelogram" />
+                  <figure>
+                    <DragCongruenceDemo shape="parallelogram" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 7. Dua jajar genjang kongruen — ABCD ≅ PQRS jika dua sisi bersesuaian sama panjang dan sudut apitnya sama besar (AB=PQ, BC=QR, ∠A=∠P)
+                    </figcaption>
+                  </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-yellow-200">Syarat kekongruenan jajar genjang:</p>
                     <p>Dua jajar genjang kongruen jika <strong className="text-yellow-300">dua sisi bersesuaian sama panjang DAN sudut apit sama besar</strong>.</p>
@@ -1114,7 +1149,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* Trapesium */}
                 <div className="bg-slate-800/60 border border-teal-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-teal-300">④ Trapesium (Trapezoid)</p>
-                  <DragCongruenceDemo shape="trapezoid" />
+                  <figure>
+                    <DragCongruenceDemo shape="trapezoid" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 8. Dua trapesium kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
+                    </figcaption>
+                  </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-teal-200">Syarat kekongruenan trapesium:</p>
                     <p>Dua trapesium kongruen jika <strong className="text-yellow-300">semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</strong>.</p>
@@ -1135,7 +1175,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* Belah Ketupat */}
                 <div className="bg-slate-800/60 border border-violet-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-violet-300">⑤ Belah Ketupat (Rhombus)</p>
-                  <DragCongruenceDemo shape="rhombus" />
+                  <figure>
+                    <DragCongruenceDemo shape="rhombus" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 9. Dua belah ketupat kongruen — ABCD ≅ PQRS jika panjang sisinya sama dan salah satu sudut apitnya sama besar (AB=PQ dan ∠A=∠P)
+                    </figcaption>
+                  </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-violet-200">Syarat kekongruenan belah ketupat:</p>
                     <p>Dua belah ketupat kongruen jika <strong className="text-yellow-300">panjang sisinya sama DAN salah satu sudut apitnya sama besar</strong>.</p>
@@ -1157,7 +1202,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* Layang-layang */}
                 <div className="bg-slate-800/60 border border-rose-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-rose-300">⑥ Layang-layang (Kite)</p>
-                  <DragCongruenceDemo shape="kite" />
+                  <figure>
+                    <DragCongruenceDemo shape="kite" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 10. Dua layang-layang kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
+                    </figcaption>
+                  </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-rose-200">Syarat kekongruenan layang-layang:</p>
                     <p>Dua layang-layang kongruen jika <strong className="text-yellow-300">semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</strong>.</p>
@@ -1177,7 +1227,12 @@ const KekongruenBangunDatarPage = () => {
                 {/* Lingkaran */}
                 <div className="bg-slate-800/60 border border-pink-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-pink-300">⑦ Lingkaran (Circle)</p>
-                  <DragCongruenceDemo shape="circle" />
+                  <figure>
+                    <DragCongruenceDemo shape="circle" />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                      Gambar 11. Dua lingkaran kongruen — Lingkaran₁ ≅ Lingkaran₂ jika jari-jarinya sama panjang (r₁ = r₂)
+                    </figcaption>
+                  </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
                     <p className="font-semibold text-pink-200">Syarat kekongruenan lingkaran:</p>
                     <p>Dua lingkaran kongruen jika dan hanya jika <strong className="text-yellow-300">jari-jarinya sama panjang</strong>.</p>
@@ -1235,40 +1290,45 @@ const KekongruenBangunDatarPage = () => {
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Perhatikan gambar berikut.</p>
                     {/* Diagram: P(35,135) T(115,83) U(149,136) S(120,183) R(240,18) Q(240,257) */}
-                    <svg viewBox="0 0 280 275" className="w-full max-w-xs mx-auto">
-                      {/* Lines — kuning */}
-                      <line x1="35" y1="135" x2="240" y2="18"  stroke="#facc15" strokeWidth="1.6" />
-                      <line x1="35" y1="135" x2="240" y2="257" stroke="#facc15" strokeWidth="1.6" />
-                      <line x1="35" y1="135" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
-                      <line x1="115" y1="83"  x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
-                      <line x1="149" y1="136" x2="120" y2="183" stroke="#facc15" strokeWidth="1.6" />
-                      <line x1="240" y1="18"  x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
-                      <line x1="240" y1="257" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
+                    <figure>
+                      <svg viewBox="0 0 280 275" className="w-full max-w-xs mx-auto">
+                        {/* Lines — kuning */}
+                        <line x1="35" y1="135" x2="240" y2="18"  stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="35" y1="135" x2="240" y2="257" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="35" y1="135" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="115" y1="83"  x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="149" y1="136" x2="120" y2="183" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="240" y1="18"  x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="240" y1="257" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
 
-                      {/* Right-angle box at T — kuning */}
-                      <polyline points="121,80 125,86 119,89"
-                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+                        {/* Right-angle box at T — kuning */}
+                        <polyline points="121,80 125,86 119,89"
+                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
 
-                      {/* Right-angle box at S — kuning */}
-                      <polyline points="126,187 130,181 124,177"
-                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+                        {/* Right-angle box at S — kuning */}
+                        <polyline points="126,187 130,181 124,177"
+                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
 
-                      {/* Vertex dots — kuning */}
-                      <circle cx="35"  cy="135" r="3" fill="#facc15" />
-                      <circle cx="115" cy="83"  r="3" fill="#facc15" />
-                      <circle cx="149" cy="136" r="3" fill="#facc15" />
-                      <circle cx="120" cy="183" r="3" fill="#facc15" />
-                      <circle cx="240" cy="18"  r="3" fill="#facc15" />
-                      <circle cx="240" cy="257" r="3" fill="#facc15" />
+                        {/* Vertex dots — kuning */}
+                        <circle cx="35"  cy="135" r="3" fill="#facc15" />
+                        <circle cx="115" cy="83"  r="3" fill="#facc15" />
+                        <circle cx="149" cy="136" r="3" fill="#facc15" />
+                        <circle cx="120" cy="183" r="3" fill="#facc15" />
+                        <circle cx="240" cy="18"  r="3" fill="#facc15" />
+                        <circle cx="240" cy="257" r="3" fill="#facc15" />
 
-                      {/* Labels — putih */}
-                      <text x="16"  y="140" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
-                      <text x="108" y="74"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">T</text>
-                      <text x="153" y="132" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">U</text>
-                      <text x="112" y="200" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">S</text>
-                      <text x="245" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
-                      <text x="245" y="263" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
-                    </svg>
+                        {/* Labels — putih */}
+                        <text x="16"  y="140" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
+                        <text x="108" y="74"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">T</text>
+                        <text x="153" y="132" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">U</text>
+                        <text x="112" y="200" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">S</text>
+                        <text x="245" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
+                        <text x="245" y="263" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
+                      </svg>
+                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                        Gambar 12. Diagram titik-titik P, T, U, S, R, Q — tentukan banyak segitiga yang kongruen
+                      </figcaption>
+                    </figure>
                     <p className="font-body text-sm text-white">
                       Banyak segitiga kongruen pada gambar adalah . . . .
                     </p>
@@ -1314,39 +1374,44 @@ const KekongruenBangunDatarPage = () => {
                       Right angle at B: ∠EBC = 90° (EB ⊥ AC)
                       Right angle at D: ∠CDA = 90°
                     */}
-                    <svg viewBox="0 0 260 250" className="w-full max-w-xs mx-auto">
-                      {/* Lines — kuning */}
-                      <line x1="20"  y1="220" x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* A–C base */}
-                      <line x1="120" y1="20"  x2="120" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–B vertical */}
-                      <line x1="120" y1="20"  x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–C */}
-                      <line x1="20"  y1="220" x2="180" y2="140" stroke="#facc15" strokeWidth="1.6" /> {/* A–D (through F) */}
+                    <figure>
+                      <svg viewBox="0 0 260 250" className="w-full max-w-xs mx-auto">
+                        {/* Lines — kuning */}
+                        <line x1="20"  y1="220" x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* A–C base */}
+                        <line x1="120" y1="20"  x2="120" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–B vertical */}
+                        <line x1="120" y1="20"  x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–C */}
+                        <line x1="20"  y1="220" x2="180" y2="140" stroke="#facc15" strokeWidth="1.6" /> {/* A–D (through F) */}
 
-                      {/* Right-angle box at B (120,220) — between EB↑ and BC→, box upper-left */}
-                      <polyline points="120,212 112,212 112,220"
-                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+                        {/* Right-angle box at B (120,220) — between EB↑ and BC→, box upper-left */}
+                        <polyline points="120,212 112,212 112,220"
+                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
 
-                      {/* Right-angle box at D (180,140)
-                          DC unit=(0.447,0.894), DA unit=(-0.894,0.447), box size=7
-                          along DC: (183,146), along DA: (174,143), corner: (177,149) */}
-                      <polyline points="183,146 177,149 174,143"
-                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+                        {/* Right-angle box at D (180,140)
+                            DC unit=(0.447,0.894), DA unit=(-0.894,0.447), box size=7
+                            along DC: (183,146), along DA: (174,143), corner: (177,149) */}
+                        <polyline points="183,146 177,149 174,143"
+                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
 
-                      {/* Vertex dots — kuning */}
-                      <circle cx="20"  cy="220" r="3" fill="#facc15" />
-                      <circle cx="120" cy="220" r="3" fill="#facc15" />
-                      <circle cx="220" cy="220" r="3" fill="#facc15" />
-                      <circle cx="120" cy="20"  r="3" fill="#facc15" />
-                      <circle cx="180" cy="140" r="3" fill="#facc15" />
-                      <circle cx="120" cy="170" r="3" fill="#facc15" />
+                        {/* Vertex dots — kuning */}
+                        <circle cx="20"  cy="220" r="3" fill="#facc15" />
+                        <circle cx="120" cy="220" r="3" fill="#facc15" />
+                        <circle cx="220" cy="220" r="3" fill="#facc15" />
+                        <circle cx="120" cy="20"  r="3" fill="#facc15" />
+                        <circle cx="180" cy="140" r="3" fill="#facc15" />
+                        <circle cx="120" cy="170" r="3" fill="#facc15" />
 
-                      {/* Labels — putih */}
-                      <text x="10"  y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
-                      <text x="114" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
-                      <text x="224" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
-                      <text x="124" y="16"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">E</text>
-                      <text x="185" y="137" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">D</text>
-                      <text x="124" y="168" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">F</text>
-                    </svg>
+                        {/* Labels — putih */}
+                        <text x="10"  y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
+                        <text x="114" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
+                        <text x="224" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
+                        <text x="124" y="16"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">E</text>
+                        <text x="185" y="137" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">D</text>
+                        <text x="124" y="168" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">F</text>
+                      </svg>
+                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                        Gambar 13. Diagram △CDA dan △CBE dengan BC = CD dan ∠CDA = ∠CBE = 90°
+                      </figcaption>
+                    </figure>
                     <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
                       <p>A. &nbsp;sisi, sisi, sisi</p>
                       <p>C. &nbsp;sisi, sudut, sisi</p>
@@ -1388,49 +1453,54 @@ const KekongruenBangunDatarPage = () => {
                         side PR labeled "5" (left side)
                       Corresponding: A↔P, B↔Q, C↔R  →  AC=PR  →  12-m=5  →  m=7
                     */}
-                    <svg viewBox="0 0 270 195" className="w-full max-w-sm mx-auto">
-                      {/* ===== Left triangle ABC ===== */}
-                      <polygon points="20,165 120,165 55,25"
-                        fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
+                    <figure>
+                      <svg viewBox="0 0 270 195" className="w-full max-w-sm mx-auto">
+                        {/* ===== Left triangle ABC ===== */}
+                        <polygon points="20,165 120,165 55,25"
+                          fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
 
-                      {/* Side label "12 - m" on AC (left side) */}
-                      <text x="12" y="103" fontSize="11" fill="#ffffff" fontFamily="serif" fontStyle="italic"
-                        textAnchor="middle" transform="rotate(-57,12,103)">12 – m</text>
+                        {/* Side label "12 - m" on AC (left side) */}
+                        <text x="12" y="103" fontSize="11" fill="#ffffff" fontFamily="serif" fontStyle="italic"
+                          textAnchor="middle" transform="rotate(-57,12,103)">12 – m</text>
 
-                      {/* Angle arc at A (60°) */}
-                      <path d="M 32,165 A 12,12 0 0,0 26,154" fill="none" stroke="#facc15" strokeWidth="1" />
-                      <text x="33" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
+                        {/* Angle arc at A (60°) */}
+                        <path d="M 32,165 A 12,12 0 0,0 26,154" fill="none" stroke="#facc15" strokeWidth="1" />
+                        <text x="33" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
 
-                      {/* Angle arc at B (70°) */}
-                      <path d="M 108,165 A 12,12 0 0,1 113,153" fill="none" stroke="#facc15" strokeWidth="1" />
-                      <text x="85" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">70°</text>
+                        {/* Angle arc at B (70°) */}
+                        <path d="M 108,165 A 12,12 0 0,1 113,153" fill="none" stroke="#facc15" strokeWidth="1" />
+                        <text x="85" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">70°</text>
 
-                      {/* Vertex labels ABC */}
-                      <text x="8"   y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
-                      <text x="118" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
-                      <text x="48"  y="18"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
+                        {/* Vertex labels ABC */}
+                        <text x="8"   y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
+                        <text x="118" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
+                        <text x="48"  y="18"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
 
-                      {/* ===== Right triangle PQR ===== */}
-                      <polygon points="148,165 242,165 196,30"
-                        fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
+                        {/* ===== Right triangle PQR ===== */}
+                        <polygon points="148,165 242,165 196,30"
+                          fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
 
-                      {/* Side label "5" on PR (left side) */}
-                      <text x="163" y="105" fontSize="12" fill="#ffffff" fontFamily="serif" fontStyle="italic"
-                        textAnchor="middle">5</text>
+                        {/* Side label "5" on PR (left side) */}
+                        <text x="163" y="105" fontSize="12" fill="#ffffff" fontFamily="serif" fontStyle="italic"
+                          textAnchor="middle">5</text>
 
-                      {/* Angle arc at P (60°) */}
-                      <path d="M 160,165 A 12,12 0 0,0 154,154" fill="none" stroke="#facc15" strokeWidth="1" />
-                      <text x="161" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
+                        {/* Angle arc at P (60°) */}
+                        <path d="M 160,165 A 12,12 0 0,0 154,154" fill="none" stroke="#facc15" strokeWidth="1" />
+                        <text x="161" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
 
-                      {/* Angle arc at R (50°) */}
-                      <path d="M 188,42 A 12,12 0 0,1 204,42" fill="none" stroke="#facc15" strokeWidth="1" />
-                      <text x="183" y="55"  fontSize="10" fill="#ffffff" fontFamily="serif">50°</text>
+                        {/* Angle arc at R (50°) */}
+                        <path d="M 188,42 A 12,12 0 0,1 204,42" fill="none" stroke="#facc15" strokeWidth="1" />
+                        <text x="183" y="55"  fontSize="10" fill="#ffffff" fontFamily="serif">50°</text>
 
-                      {/* Vertex labels PQR */}
-                      <text x="136" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
-                      <text x="240" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
-                      <text x="193" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
-                    </svg>
+                        {/* Vertex labels PQR */}
+                        <text x="136" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
+                        <text x="240" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
+                        <text x="193" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
+                      </svg>
+                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
+                        Gambar 14. Diagram △ABC ≅ △PQR — sisi AC = (12 – m) bersesuaian dengan sisi PR = 5, tentukan nilai m
+                      </figcaption>
+                    </figure>
 
                     <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
                       <p>A. &nbsp;4</p>
