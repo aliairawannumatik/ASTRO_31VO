@@ -215,8 +215,13 @@ const WaterfallAnimasiAlas = () => {
             </filter>
           </defs>
 
-          {/* Segitiga utama */}
-          <polygon points="55,22 55,182 175,182" fill="none" stroke="#facc15" strokeWidth="2.2"/>
+          {/* Segitiga utama — tiap rusuk digambar terpisah */}
+          {/* Rusuk AB (tegak) — biru air */}
+          <line x1="55" y1="22" x2="55" y2="182" stroke="#38bdf8" strokeWidth="2.2"/>
+          {/* Rusuk AC (alas) — kuning */}
+          <line x1="55" y1="182" x2="175" y2="182" stroke="#facc15" strokeWidth="2.2"/>
+          {/* Rusuk BC (miring) — kuning */}
+          <line x1="55" y1="22" x2="175" y2="182" stroke="#facc15" strokeWidth="2.2"/>
           {/* Garis tinggi AD (kuning putus) */}
           <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
           {/* Sudut siku-siku di A */}
