@@ -26,15 +26,16 @@ function mkTick(
   return <g>{ln(-ux, -uy, 0)}{ln(0, 0, 1)}{ln(ux, uy, 2)}</g>;
 }
 
-function renderTriangle(cx: number, cy: number, fill: string, stroke: string, op: number) {
+function renderTriangle(cx: number, cy: number, fill: string, stroke: string, op: number, hideTicks?: number[]) {
   const ax = cx - 55, ay = cy + 55, bx = cx + 55, by = cy + 55, ccx = cx, ccy = cy - 55;
+  const hide = hideTicks ?? [];
   return (
     <g>
       <polygon points={`${ax},${ay} ${bx},${by} ${ccx},${ccy}`}
         fill={fill} fillOpacity={op} stroke={stroke} strokeWidth="2.2" strokeLinejoin="round" />
-      {mkTick(ax, ay, bx, by, 2, stroke)}
-      {mkTick(ax, ay, ccx, ccy, 1, stroke)}
-      {mkTick(bx, by, ccx, ccy, 3, stroke)}
+      {!hide.includes(0) && mkTick(ax, ay, bx, by, 2, stroke)}
+      {!hide.includes(1) && mkTick(ax, ay, ccx, ccy, 1, stroke)}
+      {!hide.includes(2) && mkTick(bx, by, ccx, ccy, 3, stroke)}
     </g>
   );
 }
@@ -291,14 +292,21 @@ export const DragCongruenceDemo = ({
   leftLabels,
   rightLabels,
   angleMarks,
+  hideTicks,
 }: {
   shape: CongruentShapeType;
   leftLabels?: readonly string[];
   rightLabels?: readonly string[];
   /** symbols for angle arcs — only used when shape="triangle". Index: [0]=A/P, [1]=B/Q, [2]=C/R */
   angleMarks?: readonly string[];
+  /** tick indices to hide — only used when shape="triangle". 0=AB(double), 1=AC(single), 2=BC(triple) */
+  hideTicks?: number[];
 }) => {
-  const { render, vbH, cy: CY } = SHAPES[shape];
+  const { render: _render, vbH, cy: CY } = SHAPES[shape];
+  const render = (hideTicks && shape === "triangle")
+    ? (cx: number, cy: number, fill: string, stroke: string, op: number) =>
+        renderTriangle(cx, cy, fill, stroke, op, hideTicks)
+    : _render;
   const VBW = 300;
   const TARGET = { x: 75, y: CY };
   const START  = { x: 225, y: CY };

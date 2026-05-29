@@ -997,7 +997,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">② Syarat RAR — Sisi-Sudut-Sisi</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○","×","y"]} />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○"]} hideTicks={[2]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 3. Syarat RAR — dua sisi bersesuaian sama panjang dan sudut apitnya sama besar: AB=PQ, ∠A=∠P, AC=PR
                     </figcaption>
