@@ -227,7 +227,7 @@ const WaterfallAnimasiAlas = () => {
           parabola yang naik melewati titik B masih terlihat dalam frame.
           Total tinggi koordinat: -52 → 268 = 320 unit.
         */}
-        <svg viewBox="0 -10 260 290" className="w-full max-w-sm mx-auto">
+        <svg viewBox="0 -10 260 304" className="w-full max-w-sm mx-auto">
           <defs>
             <filter id="wfGlow" x="-60%" y="-60%" width="220%" height="220%">
               <feGaussianBlur stdDeviation="2.8" result="blur"/>
@@ -294,17 +294,17 @@ const WaterfallAnimasiAlas = () => {
           {/* Label BC② — di sisi kanan busur B→C, dekat jalur air (t=0.5 ≈ x=153, y=44) */}
           <text x="158" y="43" fontSize="10" fill="#fb923c" fontWeight="bold" textAnchor="start">BC ②</text>
 
-          {/* Kotak rumus — diperbesar agar tidak memotong teks */}
-          <rect x="8" y="196" width="244" height="82" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
-          <text x="130" y="212" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+          {/* Kotak rumus — jarak 20px dari alas segitiga (y=182), cukup lapang */}
+          <rect x="8" y="210" width="244" height="82" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
+          <text x="130" y="226" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
             A→B menyemprot
           </text>
-          <text x="130" y="224" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+          <text x="130" y="238" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
             menyembur busur ① ke D  dan  busur ② ke C
           </text>
-          <line x1="20" y1="232" x2="240" y2="232" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
-          <text x="130" y="253" textAnchor="middle" fontSize="16" fill="#38bdf8" fontWeight="bold">AB² = BD × BC</text>
-          <text x="130" y="268" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
+          <line x1="20" y1="246" x2="240" y2="246" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
+          <text x="130" y="267" textAnchor="middle" fontSize="16" fill="#38bdf8" fontWeight="bold">AB² = BD × BC</text>
+          <text x="130" y="282" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
             kuadrat sumber  =  semburan ① × semburan ②
           </text>
         </svg>
