@@ -343,9 +343,341 @@ const WaterfallAnimasiAlas = () => {
   );
 };
 
+/* ── WATERFALL (b) ────────────────────────────────────────────────────────
+   Air mengalir A→C (alas), menyembur dari C ke D dan ke B.
+   AC² = CD × CB
+──────────────────────────────────────────────────────────────────────────── */
+const WaterfallAnimasiTegak = () => {
+  // B=(55,22)  A=(55,182)  C=(175,182)  D=(132,124)
+  const pathAC  = "M 55,182 L 175,182";
+  // Busur C→D: bows sedikit ke kanan
+  const pathCD  = "M 175,182 Q 185,148 132,124";
+  // Busur C→B: melengkung ke atas menuju B
+  const pathCB  = "M 175,182 Q 135,90 55,22";
+
+  const flowStream = (path: string, color: string, highlight: string, dur: number, width: number) => (
+    <>
+      <path d={path} fill="none" stroke={color} strokeWidth={width + 5}
+        strokeOpacity="0.10" strokeLinecap="round" filter="url(#wfGlow2)"/>
+      <path d={path} fill="none" stroke={color} strokeWidth={width}
+        strokeDasharray="13 8" strokeLinecap="round" strokeOpacity="0.70">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${dur}s`} repeatCount="indefinite"/>
+      </path>
+      <path d={path} fill="none" stroke={color} strokeWidth={width - 0.8}
+        strokeDasharray="6 15" strokeLinecap="round" strokeOpacity="0.45">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${(dur * 0.62).toFixed(2)}s`} repeatCount="indefinite"/>
+      </path>
+      <path d={path} fill="none" stroke={highlight} strokeWidth={0.9}
+        strokeDasharray="4 17" strokeLinecap="round" strokeOpacity="0.90">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${(dur * 0.42).toFixed(2)}s`} repeatCount="indefinite"/>
+      </path>
+    </>
+  );
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-blue-950/60 border border-blue-400/30 rounded-lg p-4">
+        <p className="font-body text-xs text-blue-200 leading-relaxed">
+          🌊 Bayangkan air mengalir dari{" "}
+          <strong className="text-white">A ke C</strong> sepanjang alas, lalu di titik{" "}
+          <strong className="text-white">C</strong> air{" "}
+          <strong className="text-cyan-300">menyembur dua arah</strong>:{" "}
+          <span className="text-cyan-300 font-bold">① ke D</span> dan{" "}
+          <span className="text-sky-200 font-bold">② ke B</span>. Itulah cara hafal rumus{" "}
+          <strong className="text-cyan-300">AC² = CD × CB!</strong>
+        </p>
+      </div>
+
+      <div className="flex gap-3 justify-center font-body text-xs">
+        <div className="flex items-center gap-1.5">
+          <span className="inline-block w-8 h-2 rounded-full" style={{background:"#06b6d4"}}/>
+          <span className="text-cyan-300 font-semibold">① C → D</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="inline-block w-8 h-2 rounded-full" style={{background:"#bae6fd"}}/>
+          <span className="text-sky-200 font-semibold">② C → B</span>
+        </div>
+      </div>
+
+      <div className="bg-slate-950/90 border border-blue-500/25 rounded-xl p-3">
+        <svg viewBox="0 0 260 290" className="w-full max-w-sm mx-auto">
+          <defs>
+            <filter id="wfGlow2" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="2.8" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          {/* Segitiga */}
+          <line x1="55" y1="22" x2="55" y2="182" stroke="#facc15" strokeWidth="2.2"/>
+          <line x1="55" y1="182" x2="175" y2="182" stroke="#38bdf8" strokeWidth="2.2"/>
+          <line x1="55" y1="22" x2="175" y2="182" stroke="#facc15" strokeWidth="2.2"/>
+          <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
+          <path d="M 55,173 L 64,173 L 64,182" fill="none" stroke="#f97316" strokeWidth="1.5"/>
+          <path d="M 125.6,129.6 L 121.6,122.8 L 128.4,118.8" fill="none" stroke="#f97316" strokeWidth="1.5"/>
+
+          {/* Aliran A→C */}
+          {flowStream(pathAC, "#38bdf8", "#e0f2fe", 2.0, 3.0)}
+          {/* Busur C→D */}
+          {flowStream(pathCD, "#06b6d4", "#a5f3fc", 1.7, 2.8)}
+          {/* Busur C→B */}
+          {flowStream(pathCB, "#bae6fd", "#f0f9ff", 2.5, 2.8)}
+
+          {/* Ripple di C */}
+          <circle cx="175" cy="182" r="5" fill="#38bdf8" opacity="0.9">
+            <animate attributeName="r" values="4;18;4" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="175" cy="182" r="3" fill="#e0f2fe" opacity="0.7">
+            <animate attributeName="r" values="3;11;3" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+          </circle>
+
+          {/* Splash di D */}
+          <circle cx="132" cy="124" r="4" fill="#06b6d4" opacity="0">
+            <animate attributeName="r" values="3;10;3" dur="1.7s" begin="0.05s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;0.75;0" dur="1.7s" begin="0.05s" repeatCount="indefinite"/>
+          </circle>
+          {/* Splash di B */}
+          <circle cx="55" cy="22" r="4" fill="#bae6fd" opacity="0">
+            <animate attributeName="r" values="3;10;3" dur="2.5s" begin="0.1s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;0.75;0" dur="2.5s" begin="0.1s" repeatCount="indefinite"/>
+          </circle>
+
+          {/* Label vertex */}
+          <text x="36" y="20"  fontSize="13" fill="#ffffff" fontWeight="bold">B</text>
+          <text x="36" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">A</text>
+          <text x="178" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">C</text>
+          <text x="136" y="120" fontSize="13" fill="#ffffff" fontWeight="bold">D</text>
+
+          {/* Label segmen */}
+          <text x="115" y="197" fontSize="11" fill="#4ade80" fontWeight="bold" textAnchor="middle">AC</text>
+          {/* CD① — dekat titik tengah busur C→D (≈ x=169, y=151) */}
+          <text x="190" y="152" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="start">CD ①</text>
+          {/* CB② — dekat titik tengah busur C→B (≈ x=125, y=96) */}
+          <text x="128" y="88" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">CB ②</text>
+
+          {/* Kotak rumus */}
+          <rect x="8" y="200" width="244" height="82" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
+          <text x="130" y="216" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+            A→C mengalir
+          </text>
+          <text x="130" y="228" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+            menyembur busur ① ke D  dan  busur ② ke B
+          </text>
+          <line x1="20" y1="236" x2="240" y2="236" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
+          <text x="130" y="257" textAnchor="middle" fontSize="16" fill="#facc15" fontWeight="bold">AC² = CD × CB</text>
+          <text x="130" y="272" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
+            kuadrat sumber  =  semburan ① × semburan ②
+          </text>
+        </svg>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 font-body text-xs text-center">
+        <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-3 space-y-1">
+          <p className="text-white/50">Sumber air</p>
+          <p className="text-base">💧</p>
+          <p className="text-cyan-300 font-bold">A → C</p>
+          <p className="text-white/60">dikuadratkan<br/><strong className="text-white">AC²</strong></p>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-1">
+          <p className="text-white/40 text-lg">=</p>
+          <p className="text-white/30 text-[10px]">sama dengan</p>
+        </div>
+        <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-3 space-y-1">
+          <p className="text-white/50">Hasil semburan</p>
+          <p className="text-base">💦</p>
+          <p className="text-cyan-300 font-bold">CD × CB</p>
+          <p className="text-white/60">dua arah<br/><strong className="text-white">CD × CB</strong></p>
+        </div>
+      </div>
+
+      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3 text-center">
+        <p className="font-body text-sm font-bold text-white">💡 Kunci Hafal:</p>
+        <p className="font-body text-xs text-white/70 mt-1 leading-relaxed">
+          Air <span className="text-cyan-300">mengalir di alas (A→C)</span>, lalu{" "}
+          <span className="text-cyan-300">menyembur dua arah (C→D) dan (C→B)</span>.
+          Rusuk yang mengalir <strong className="text-white">dikuadratkan</strong>,
+          dua arah semburannya <strong className="text-white">dikalikan</strong>!
+        </p>
+      </div>
+    </div>
+  );
+};
+
+/* ── WATERFALL (c) ────────────────────────────────────────────────────────
+   Air mengalir A→D (garis tinggi), menyembur dari D ke B dan ke C.
+   AD² = DB × DC
+──────────────────────────────────────────────────────────────────────────── */
+const WaterfallAnimasiTinggi = () => {
+  // B=(55,22)  A=(55,182)  C=(175,182)  D=(132,124)
+  const pathAD  = "M 55,182 L 132,124";
+  // Busur D→B: melengkung ke atas-kiri
+  const pathDB  = "M 132,124 Q 80,68 55,22";
+  // Busur D→C: melengkung ke bawah-kanan (pendek)
+  const pathDC  = "M 132,124 Q 168,143 175,182";
+
+  const flowStream = (path: string, color: string, highlight: string, dur: number, width: number) => (
+    <>
+      <path d={path} fill="none" stroke={color} strokeWidth={width + 5}
+        strokeOpacity="0.10" strokeLinecap="round" filter="url(#wfGlow3)"/>
+      <path d={path} fill="none" stroke={color} strokeWidth={width}
+        strokeDasharray="13 8" strokeLinecap="round" strokeOpacity="0.70">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${dur}s`} repeatCount="indefinite"/>
+      </path>
+      <path d={path} fill="none" stroke={color} strokeWidth={width - 0.8}
+        strokeDasharray="6 15" strokeLinecap="round" strokeOpacity="0.45">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${(dur * 0.62).toFixed(2)}s`} repeatCount="indefinite"/>
+      </path>
+      <path d={path} fill="none" stroke={highlight} strokeWidth={0.9}
+        strokeDasharray="4 17" strokeLinecap="round" strokeOpacity="0.90">
+        <animate attributeName="stroke-dashoffset" from="21" to="0"
+          dur={`${(dur * 0.42).toFixed(2)}s`} repeatCount="indefinite"/>
+      </path>
+    </>
+  );
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-blue-950/60 border border-blue-400/30 rounded-lg p-4">
+        <p className="font-body text-xs text-blue-200 leading-relaxed">
+          🌊 Bayangkan air mengalir dari{" "}
+          <strong className="text-white">A ke D</strong> sepanjang garis tinggi, lalu di titik{" "}
+          <strong className="text-white">D</strong> air{" "}
+          <strong className="text-cyan-300">menyembur dua arah</strong>:{" "}
+          <span className="text-cyan-300 font-bold">① ke B</span> dan{" "}
+          <span className="text-sky-200 font-bold">② ke C</span>. Itulah cara hafal rumus{" "}
+          <strong className="text-cyan-300">AD² = DB × DC!</strong>
+        </p>
+      </div>
+
+      <div className="flex gap-3 justify-center font-body text-xs">
+        <div className="flex items-center gap-1.5">
+          <span className="inline-block w-8 h-2 rounded-full" style={{background:"#06b6d4"}}/>
+          <span className="text-cyan-300 font-semibold">① D → B</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="inline-block w-8 h-2 rounded-full" style={{background:"#bae6fd"}}/>
+          <span className="text-sky-200 font-semibold">② D → C</span>
+        </div>
+      </div>
+
+      <div className="bg-slate-950/90 border border-blue-500/25 rounded-xl p-3">
+        <svg viewBox="0 0 260 290" className="w-full max-w-sm mx-auto">
+          <defs>
+            <filter id="wfGlow3" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="2.8" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          {/* Segitiga */}
+          <line x1="55" y1="22" x2="55" y2="182" stroke="#facc15" strokeWidth="2.2"/>
+          <line x1="55" y1="182" x2="175" y2="182" stroke="#facc15" strokeWidth="2.2"/>
+          <line x1="55" y1="22" x2="175" y2="182" stroke="#facc15" strokeWidth="2.2"/>
+          {/* Garis tinggi AD — biru air (sumber) */}
+          <line x1="55" y1="182" x2="132" y2="124" stroke="#38bdf8" strokeWidth="2.2"/>
+          <path d="M 55,173 L 64,173 L 64,182" fill="none" stroke="#f97316" strokeWidth="1.5"/>
+          <path d="M 125.6,129.6 L 121.6,122.8 L 128.4,118.8" fill="none" stroke="#f97316" strokeWidth="1.5"/>
+
+          {/* Aliran A→D */}
+          {flowStream(pathAD, "#38bdf8", "#e0f2fe", 1.8, 3.0)}
+          {/* Busur D→B */}
+          {flowStream(pathDB, "#06b6d4", "#a5f3fc", 2.0, 2.8)}
+          {/* Busur D→C */}
+          {flowStream(pathDC, "#bae6fd", "#f0f9ff", 1.5, 2.8)}
+
+          {/* Ripple di D */}
+          <circle cx="132" cy="124" r="5" fill="#38bdf8" opacity="0.9">
+            <animate attributeName="r" values="4;18;4" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="132" cy="124" r="3" fill="#e0f2fe" opacity="0.7">
+            <animate attributeName="r" values="3;11;3" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+          </circle>
+
+          {/* Splash di B */}
+          <circle cx="55" cy="22" r="4" fill="#06b6d4" opacity="0">
+            <animate attributeName="r" values="3;10;3" dur="2.0s" begin="0.05s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;0.75;0" dur="2.0s" begin="0.05s" repeatCount="indefinite"/>
+          </circle>
+          {/* Splash di C */}
+          <circle cx="175" cy="182" r="4" fill="#bae6fd" opacity="0">
+            <animate attributeName="r" values="3;10;3" dur="1.5s" begin="0.1s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;0.75;0" dur="1.5s" begin="0.1s" repeatCount="indefinite"/>
+          </circle>
+
+          {/* Label vertex */}
+          <text x="36" y="20"  fontSize="13" fill="#ffffff" fontWeight="bold">B</text>
+          <text x="36" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">A</text>
+          <text x="178" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">C</text>
+          <text x="136" y="120" fontSize="13" fill="#ffffff" fontWeight="bold">D</text>
+
+          {/* Label segmen */}
+          {/* AD — tengah garis tinggi (≈ x=93,y=153) */}
+          <text x="72" y="156" fontSize="11" fill="#4ade80" fontWeight="bold" textAnchor="middle">AD</text>
+          {/* DB① — tengah busur D→B (≈ x=87,y=71) */}
+          <text x="68" y="68" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="end">DB ①</text>
+          {/* DC② — tengah busur D→C (≈ x=161,y=148) */}
+          <text x="178" y="146" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="start">DC ②</text>
+
+          {/* Kotak rumus */}
+          <rect x="8" y="200" width="244" height="82" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
+          <text x="130" y="216" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+            A→D mengalir (garis tinggi)
+          </text>
+          <text x="130" y="228" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+            menyembur busur ① ke B  dan  busur ② ke C
+          </text>
+          <line x1="20" y1="236" x2="240" y2="236" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
+          <text x="130" y="257" textAnchor="middle" fontSize="16" fill="#facc15" fontWeight="bold">AD² = DB × DC</text>
+          <text x="130" y="272" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
+            kuadrat sumber  =  semburan ① × semburan ②
+          </text>
+        </svg>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 font-body text-xs text-center">
+        <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-3 space-y-1">
+          <p className="text-white/50">Sumber air</p>
+          <p className="text-base">💧</p>
+          <p className="text-cyan-300 font-bold">A → D</p>
+          <p className="text-white/60">dikuadratkan<br/><strong className="text-white">AD²</strong></p>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-1">
+          <p className="text-white/40 text-lg">=</p>
+          <p className="text-white/30 text-[10px]">sama dengan</p>
+        </div>
+        <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-3 space-y-1">
+          <p className="text-white/50">Hasil semburan</p>
+          <p className="text-base">💦</p>
+          <p className="text-cyan-300 font-bold">DB × DC</p>
+          <p className="text-white/60">dua arah<br/><strong className="text-white">DB × DC</strong></p>
+        </div>
+      </div>
+
+      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3 text-center">
+        <p className="font-body text-sm font-bold text-white">💡 Kunci Hafal:</p>
+        <p className="font-body text-xs text-white/70 mt-1 leading-relaxed">
+          Air <span className="text-cyan-300">mengalir di garis tinggi (A→D)</span>, lalu{" "}
+          <span className="text-cyan-300">menyembur dua arah (D→B) dan (D→C)</span>.
+          Rusuk yang mengalir <strong className="text-white">dikuadratkan</strong>,
+          dua arah semburannya <strong className="text-white">dikalikan</strong>!
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const PerbandinganRusukSikuSikuPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "konsep3", "konsep4", "contoh1", "waterfall"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "konsep3", "konsep4", "contoh1", "waterfall", "waterfall2", "waterfall3"]);
   const toggleSection = (s: string) => {
     playPopSound();
     setExpandedSections(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
@@ -668,12 +1000,32 @@ const PerbandinganRusukSikuSikuPage = () => {
             )}
           </div>
 
-          {/* WATERFALL ANIMATION — cara hafal AB² = BD × BC */}
+          {/* WATERFALL (a) — AB² = BD × BC */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
-            <Header id="waterfall" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun — Hafal Rumus AB² = BD × BC" />
+            <Header id="waterfall" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (a) — AB² = BD × BC" />
             {expandedSections.includes("waterfall") && (
               <div className="px-5 pb-5 pt-2">
                 <WaterfallAnimasiAlas />
+              </div>
+            )}
+          </div>
+
+          {/* WATERFALL (b) — AC² = CD × CB */}
+          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
+            <Header id="waterfall2" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (b) — AC² = CD × CB" />
+            {expandedSections.includes("waterfall2") && (
+              <div className="px-5 pb-5 pt-2">
+                <WaterfallAnimasiTegak />
+              </div>
+            )}
+          </div>
+
+          {/* WATERFALL (c) — AD² = DB × DC */}
+          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
+            <Header id="waterfall3" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (c) — AD² = DB × DC" />
+            {expandedSections.includes("waterfall3") && (
+              <div className="px-5 pb-5 pt-2">
+                <WaterfallAnimasiTinggi />
               </div>
             )}
           </div>
