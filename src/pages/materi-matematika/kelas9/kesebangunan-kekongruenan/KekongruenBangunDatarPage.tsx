@@ -255,37 +255,79 @@ const DiagramSyaratRAR = () => (
 );
 
 const DiagramSyaratARA = () => (
+  /*
+   * △ABC = A(30,125) B(145,125) C(88,30)
+   * △PQR = P(195,125) Q(310,125) R(252,30)  (x+165)
+   *
+   * ARA/AAR: ∠A=∠P (•), AB=PQ (single tick), ∠B=∠Q (×)
+   *
+   * Arc at A/P — radius 16, CCW (sweep=0)
+   *   Start on AB: A+(16,0)=(46,125) / P+(16,0)=(211,125)
+   *   AC unit=(58,-95)/111.3=(0.521,-0.854)
+   *   End on AC: A+16*(0.521,-0.854)=(38.3,111.3) / P+same=(203.3,111.3)
+   *   Bisector unit=(1+0.521,-0.854)/|(...)| ≈ (0.872,-0.490)
+   *   Dot at r=10: A+(8.7,-4.9)=(38.7,120.1) / P+same=(203.7,120.1)
+   *
+   * Arc at B/Q — radius 16, CW (sweep=1)
+   *   BA unit=(-1,0), BC unit=(-0.515,-0.858)
+   *   Start on BA: B+16*(-1,0)=(129,125) / Q+same=(294,125)
+   *   End on BC: B+16*(-0.515,-0.858)=(136.8,111.3) / Q+same=(301.8,111.3)
+   *   Bisector unit=(-0.870,-0.493)
+   *   X at r=10: B+(-8.7,-4.9)=(136.3,120.1) / Q+same=(301.3,120.1)
+   *
+   * AB/PQ single tick: midpoint (87.5,125)/(252.5,125), vertical ±7
+   */
   <svg viewBox="0 0 340 150" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="340" height="150" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
-    {/* Triangle 1 — cyan cerah */}
+    {/* ── Triangle 1: A(30,125) B(145,125) C(88,30) — cyan ── */}
     <polygon points="30,125 145,125 88,30" fill="#22d3ee" fillOpacity="0.58" stroke="#67e8f9" strokeWidth="2.2" strokeLinejoin="round" />
-    <circle cx="30" cy="125" r="3" fill="#67e8f9" />
+    <circle cx="30"  cy="125" r="3" fill="#67e8f9" />
     <circle cx="145" cy="125" r="3" fill="#67e8f9" />
-    <circle cx="88" cy="30" r="3" fill="#67e8f9" />
-    <text x="16" y="140" fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <circle cx="88"  cy="30"  r="3" fill="#67e8f9" />
+    <text x="16"  y="140" fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">A</text>
     <text x="147" y="140" fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="83" y="24" fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">C</text>
-    {/* 1 side tick on AB */}
-    <line x1="86" y1="127" x2="86" y2="117" stroke="#ffffff" strokeWidth="2.2" />
-    {/* angle arcs at A and B */}
-    <path d="M30,125 Q46,112 50,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
-    <path d="M145,125 Q132,112 127,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
+    <text x="83"  y="24"  fontSize="12" fill="#67e8f9" fontWeight="bold" fontFamily="sans-serif">C</text>
+
+    {/* AB — single tick (vertical), midpoint (87.5,125) */}
+    <line x1="87" y1="118" x2="87" y2="132" stroke="#ffffff" strokeWidth="2.2" />
+
+    {/* ∠A arc — CCW (sweep=0), radius=16 */}
+    <path d="M 46,125 A 16,16 0 0,0 38,111" fill="none" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* • dot inside ∠A — at bisector r=10 from A */}
+    <circle cx="39" cy="120" r="3" fill="#facc15" />
+
+    {/* ∠B arc — CW (sweep=1), radius=16 */}
+    <path d="M 129,125 A 16,16 0 0,1 137,111" fill="none" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* × mark inside ∠B — at bisector r=10 from B */}
+    <line x1="133" y1="117" x2="139" y2="123" stroke="#facc15" strokeWidth="2" strokeLinecap="round" />
+    <line x1="139" y1="117" x2="133" y2="123" stroke="#facc15" strokeWidth="2" strokeLinecap="round" />
 
     {/* ≅ */}
     <text x="163" y="90" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Triangle 2 — lime cerah */}
+    {/* ── Triangle 2: P(195,125) Q(310,125) R(252,30) — lime (x+165) ── */}
     <polygon points="195,125 310,125 252,30" fill="#a3e635" fillOpacity="0.58" stroke="#bef264" strokeWidth="2.2" strokeLinejoin="round" />
     <circle cx="195" cy="125" r="3" fill="#bef264" />
     <circle cx="310" cy="125" r="3" fill="#bef264" />
-    <circle cx="252" cy="30" r="3" fill="#bef264" />
+    <circle cx="252" cy="30"  r="3" fill="#bef264" />
     <text x="181" y="140" fontSize="12" fill="#bef264" fontWeight="bold" fontFamily="sans-serif">P</text>
     <text x="312" y="140" fontSize="12" fill="#bef264" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="247" y="24" fontSize="12" fill="#bef264" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <line x1="251" y1="127" x2="251" y2="117" stroke="#ffffff" strokeWidth="2.2" />
-    <path d="M195,125 Q211,112 215,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
-    <path d="M310,125 Q297,112 292,125" fill="none" stroke="#facc15" strokeWidth="2.2" />
+    <text x="247" y="24"  fontSize="12" fill="#bef264" fontWeight="bold" fontFamily="sans-serif">R</text>
+
+    {/* PQ — single tick (vertical), midpoint (252.5,125) */}
+    <line x1="252" y1="118" x2="252" y2="132" stroke="#ffffff" strokeWidth="2.2" />
+
+    {/* ∠P arc — CCW (sweep=0), radius=16 — same as ∠A, x+165 */}
+    <path d="M 211,125 A 16,16 0 0,0 203,111" fill="none" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* • dot inside ∠P — at bisector r=10 from P */}
+    <circle cx="204" cy="120" r="3" fill="#facc15" />
+
+    {/* ∠Q arc — CW (sweep=1), radius=16 — same as ∠B, x+165 */}
+    <path d="M 294,125 A 16,16 0 0,1 302,111" fill="none" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+    {/* × mark inside ∠Q — at bisector r=10 from Q */}
+    <line x1="298" y1="117" x2="304" y2="123" stroke="#facc15" strokeWidth="2" strokeLinecap="round" />
+    <line x1="304" y1="117" x2="298" y2="123" stroke="#facc15" strokeWidth="2" strokeLinecap="round" />
 
     <text x="170" y="14" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">ARA/AAR — 1 sisi + 2 sudut bersesuaian sama</text>
   </svg>
