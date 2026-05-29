@@ -738,38 +738,6 @@ const PerbandinganRusukSikuSikuPage = () => {
             )}
           </div>
 
-          {/* Tips Air Terjun (a) — di bawah bingkai (a) */}
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 space-y-2">
-            <p className="font-body text-xs font-semibold text-amber-400">💡 Tips &amp; Trik — Teknik Air Terjun (a)</p>
-            <p className="font-body text-xs text-white/70">Susun rusuk △ABD (kecil) di atas dan △CAB (besar) di bawah, lalu baca tiap kolom ↕ sebagai pecahan:</p>
-            <div className="bg-slate-900/60 rounded-lg p-3">
-              <div className="flex items-center justify-center gap-3 font-mono text-sm">
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">BD</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">AB</p>
-                </div>
-                <p className="text-white/50 text-lg">=</p>
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">AB</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">BC</p>
-                </div>
-                <p className="text-white/50 text-lg">=</p>
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">AD</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">AC</p>
-                </div>
-              </div>
-              <div className="flex justify-between mt-2 px-1">
-                <p className="font-body text-xs text-amber-400/70">← △ABD (kecil)</p>
-                <p className="font-body text-xs text-amber-300/70">△CAB (besar) →</p>
-              </div>
-            </div>
-            <p className="font-body text-xs text-white/50">Silang-kalikan kolom mana pun: <span className="text-amber-300">AB² = BD × BC</span></p>
-          </div>
-
           {/* WATERFALL (a) — AB² = BD × BC */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
             <Header id="waterfall" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (a) — AB² = BD × BC" />
@@ -802,38 +770,6 @@ const PerbandinganRusukSikuSikuPage = () => {
             )}
           </div>
 
-          {/* Tips Air Terjun (b) — di atas bingkai (c) */}
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 space-y-2">
-            <p className="font-body text-xs font-semibold text-amber-400">💡 Tips &amp; Trik — Teknik Air Terjun (b)</p>
-            <p className="font-body text-xs text-white/70">Susun rusuk △CDA (kecil) di atas dan △CAB (besar) di bawah, lalu baca tiap kolom ↕ sebagai pecahan:</p>
-            <div className="bg-slate-900/60 rounded-lg p-3">
-              <div className="flex items-center justify-center gap-3 font-mono text-sm">
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">CD</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">AC</p>
-                </div>
-                <p className="text-white/50 text-lg">=</p>
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">AC</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">BC</p>
-                </div>
-                <p className="text-white/50 text-lg">=</p>
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">AD</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">AB</p>
-                </div>
-              </div>
-              <div className="flex justify-between mt-2 px-1">
-                <p className="font-body text-xs text-amber-400/70">← △CDA (kecil)</p>
-                <p className="font-body text-xs text-amber-300/70">△CAB (besar) →</p>
-              </div>
-            </div>
-            <p className="font-body text-xs text-white/50">Silang-kalikan kolom mana pun: <span className="text-amber-300">AC² = CD × CB</span></p>
-          </div>
-
           {/* WATERFALL (b) — AC² = CD × CB */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
             <Header id="waterfall2" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (b) — AC² = CD × CB" />
@@ -864,38 +800,6 @@ const PerbandinganRusukSikuSikuPage = () => {
                 </div>
               </div>
             )}
-          </div>
-
-          {/* Tips Air Terjun (c) — di atas bingkai (d) */}
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 space-y-2">
-            <p className="font-body text-xs font-semibold text-amber-400">💡 Tips &amp; Trik — Teknik Air Terjun (c)</p>
-            <p className="font-body text-xs text-white/70">Susun rusuk △ADB (kecil) di atas dan △ADC (besar) di bawah, lalu baca tiap kolom ↕ sebagai pecahan:</p>
-            <div className="bg-slate-900/60 rounded-lg p-3">
-              <div className="flex items-center justify-center gap-3 font-mono text-sm">
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">BD</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">AD</p>
-                </div>
-                <p className="text-white/50 text-lg">=</p>
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">AD</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">BD</p>
-                </div>
-                <p className="text-white/50 text-lg">=</p>
-                <div className="text-center">
-                  <p className="text-amber-300 font-bold">BD</p>
-                  <p className="text-white/30 leading-none">───</p>
-                  <p className="text-amber-200 font-bold">AC</p>
-                </div>
-              </div>
-              <div className="flex justify-between mt-2 px-1">
-                <p className="font-body text-xs text-amber-400/70">← △ADB (kecil)</p>
-                <p className="font-body text-xs text-amber-300/70">△ADC (besar) →</p>
-              </div>
-            </div>
-            <p className="font-body text-xs text-white/50">Silang-kalikan kolom mana pun: <span className="text-amber-300">AD² = BD × DC</span></p>
           </div>
 
           {/* WATERFALL (c) — AD² = DB × DC */}
