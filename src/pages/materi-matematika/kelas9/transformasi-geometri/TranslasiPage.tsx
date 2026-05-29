@@ -109,7 +109,7 @@ function ArahLegend() {
       <p className="text-yellow-300/80 text-[10px] font-body mb-2">
         Vektor translasi <span className="font-bold text-yellow-300">T(a, b)</span>
       </p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+      <div className="grid grid-cols-1 gap-y-1.5">
         {[
           ["→", "Geser Kanan", "(+a)"],
           ["←", "Geser Kiri",  "(−a)"],
@@ -181,19 +181,19 @@ function AnimasiTitik() {
         </Grid>
       </div>
 
-      {/* Status bar */}
-      <div className="bg-slate-800/60 rounded-lg px-4 py-2 text-center text-xs font-body min-h-[32px] flex items-center justify-center gap-2">
+      {/* Status bar — single line, nowrap */}
+      <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex items-center justify-center gap-1.5 overflow-x-auto whitespace-nowrap text-[10px] sm:text-xs sm:gap-2 sm:px-4">
         {moved ? (
           <>
-            <span className="text-cyan-300 font-bold">A({OX},{OY})</span>
+            <span className="text-cyan-300 font-bold whitespace-nowrap">A({OX},{OY})</span>
             <span className="text-white/40">→</span>
-            <span className="text-yellow-300 font-bold">A'({pos.x},{pos.y})</span>
+            <span className="text-yellow-300 font-bold whitespace-nowrap">A'({pos.x},{pos.y})</span>
             <span className="text-white/40">|</span>
-            <span className="text-yellow-200">T({dx > 0 ? '+' : ''}{dx}, {dy > 0 ? '+' : ''}{dy})</span>
-            {dirDesc && <span className="text-green-400 font-semibold ml-1">{dirDesc}</span>}
+            <span className="text-yellow-200 whitespace-nowrap">T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</span>
+            {dirDesc && <span className="text-green-400 font-semibold whitespace-nowrap">{dirDesc}</span>}
           </>
         ) : (
-          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser titik!</span>
+          <span className="text-white/30 whitespace-nowrap">Tekan ↑ ↓ ← → untuk menggeser titik!</span>
         )}
       </div>
 
