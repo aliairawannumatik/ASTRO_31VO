@@ -1229,23 +1229,70 @@ const KekongruenBangunDatarPage = () => {
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
-                    <span className="font-body font-semibold text-white">Contoh 1 — Persegi</span>
+                    <span className="font-body font-semibold text-white">Contoh 1 — Segitiga Kongruen</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Perhatikan gambar berikut.</p>
+                    {/* Diagram: P(35,135) T(115,83) U(149,136) S(120,183) R(240,18) Q(240,257) */}
+                    <svg viewBox="0 0 280 275" className="w-full max-w-xs mx-auto">
+                      {/* Lines */}
+                      <line x1="35" y1="135" x2="240" y2="18"  stroke="#e2e8f0" strokeWidth="1.6" />  {/* P-R through T */}
+                      <line x1="35" y1="135" x2="240" y2="257" stroke="#e2e8f0" strokeWidth="1.6" />  {/* P-Q through S */}
+                      <line x1="35" y1="135" x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* P-U */}
+                      <line x1="115" y1="83"  x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* T-U */}
+                      <line x1="149" y1="136" x2="120" y2="183" stroke="#e2e8f0" strokeWidth="1.6" />  {/* U-S */}
+                      <line x1="240" y1="18"  x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* R-U */}
+                      <line x1="240" y1="257" x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* Q-U */}
+
+                      {/* Right-angle box at T — between PT direction and TU direction
+                          PT unit ≈ (0.866,−0.494), TU unit ≈ (0.540, 0.841), box size=7
+                          Along PT from T: (121,80), along TU from T: (119,89), corner: (125,86) */}
+                      <polyline points="121,80 125,86 119,89"
+                        fill="none" stroke="#e2e8f0" strokeWidth="1.4" strokeLinejoin="miter" />
+
+                      {/* Right-angle box at S — between PS direction and SU direction
+                          PS unit ≈ (0.854, 0.508), SU unit ≈ (0.525,−0.851), box size=7
+                          Along PS from S: (126,187), along SU from S: (124,177), corner: (130,181) */}
+                      <polyline points="126,187 130,181 124,177"
+                        fill="none" stroke="#e2e8f0" strokeWidth="1.4" strokeLinejoin="miter" />
+
+                      {/* Vertex dots */}
+                      <circle cx="35"  cy="135" r="3" fill="#e2e8f0" />
+                      <circle cx="115" cy="83"  r="3" fill="#e2e8f0" />
+                      <circle cx="149" cy="136" r="3" fill="#e2e8f0" />
+                      <circle cx="120" cy="183" r="3" fill="#e2e8f0" />
+                      <circle cx="240" cy="18"  r="3" fill="#e2e8f0" />
+                      <circle cx="240" cy="257" r="3" fill="#e2e8f0" />
+
+                      {/* Labels */}
+                      <text x="16"  y="140" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">P</text>
+                      <text x="108" y="74"  fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">T</text>
+                      <text x="153" y="132" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">U</text>
+                      <text x="112" y="200" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">S</text>
+                      <text x="245" y="22"  fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">R</text>
+                      <text x="245" y="263" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">Q</text>
+                    </svg>
                     <p className="font-body text-sm text-white">
-                      Persegi ABCD memiliki sisi 9 cm. Persegi PQRS memiliki sisi 9 cm.
-                      Apakah kedua persegi tersebut kongruen? Sebutkan alasannya!
+                      Banyak segitiga kongruen pada gambar adalah . . . .
                     </p>
+                    <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
+                      <p>A. &nbsp;8 buah</p>
+                      <p>C. &nbsp;4 buah</p>
+                      <p>B. &nbsp;6 buah</p>
+                      <p>D. &nbsp;3 buah</p>
+                    </div>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Syarat kongruen persegi: sisi bersesuaian sama panjang.</p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <p><InlineMath math="AB = PQ = 9 \text{ cm}" /> ✓</p>
-                        <p>Semua sudut persegi = 90° ✓</p>
+                      <p>Identifikasi segitiga-segitiga yang terbentuk pada gambar:</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <p>① <InlineMath math="\triangle PTU" /> — siku-siku di T (<InlineMath math="\angle PTU = 90°" />)</p>
+                        <p>② <InlineMath math="\triangle PSU" /> — siku-siku di S (<InlineMath math="\angle PSU = 90°" />)</p>
+                        <p>③ <InlineMath math="\triangle TUS" /> — terbentuk dari T, U, S</p>
                       </div>
-                      <p><strong className="text-green-300">Kesimpulan: Persegi ABCD ≅ Persegi PQRS ✓</strong></p>
+                      <p>Ketiga segitiga tersebut kongruen satu sama lain karena memenuhi syarat kekongruenan.</p>
+                      <p><strong className="text-green-300">Jawaban: D. 3 buah ✓</strong></p>
                     </div>
                   </div>
                 </div>
