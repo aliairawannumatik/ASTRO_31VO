@@ -153,18 +153,18 @@ const WaterfallAnimasiAlas = () => {
       C = (175, 182) — kanan bawah
       D = (132, 124) — pada BC, kaki garis tinggi dari A
 
-    viewBox diperluas ke atas: "0 -52 260 320"
-    sehingga busur parabola yang naik melewati B tetap terlihat.
+    viewBox diperluas ke atas: "0 -32 260 300"
+    (lebih kecil dari sebelumnya agar busur tidak terlalu luas)
 
-    Stream 1 — B→D — busur PENDEK (Q 185,-48):
-      puncak ≈ (114, 1) — sedikit di atas B, sweep ke kanan lalu turun ke D
+    Stream 1 — B→D — busur KECIL (Q 160,-20):
+      puncak ≈ y≈13, sekitar 9px di atas B — semprotan compact ke D
 
-    Stream 2 — B→C — busur LEBAR/TINGGI (Q 258,-90):
-      puncak ≈ (150,-14) — jauh di atas B, sweep melengkung lebar ke C
+    Stream 2 — B→C — busur SEDANG (Q 232,-40):
+      puncak ≈ y≈7, sekitar 15px di atas B — semprotan lebih jauh ke C
   */
   const pathAB  = "M 55,182 L 55,22";
-  const pathBD  = "M 55,22 Q 185,-48 132,124";   // busur parabola B→D
-  const pathBC  = "M 55,22 Q 258,-90 175,182";   // busur parabola B→C (lebih lebar)
+  const pathBD  = "M 55,22 Q 160,-20 132,124";   // busur parabola B→D (diperkecil)
+  const pathBC  = "M 55,22 Q 232,-40 175,182";   // busur parabola B→C (diperkecil)
 
   const drops = (path: string, count: number, dur: number, step: number, r: number, color: string, opacity = "0.95") =>
     Array.from({ length: count }, (_, i) => (
@@ -207,7 +207,7 @@ const WaterfallAnimasiAlas = () => {
           parabola yang naik melewati titik B masih terlihat dalam frame.
           Total tinggi koordinat: -52 → 268 = 320 unit.
         */}
-        <svg viewBox="0 -52 260 320" className="w-full max-w-sm mx-auto">
+        <svg viewBox="0 -32 260 300" className="w-full max-w-sm mx-auto">
           <defs>
             <filter id="wfGlow" x="-60%" y="-60%" width="220%" height="220%">
               <feGaussianBlur stdDeviation="2.8" result="blur"/>
@@ -228,21 +228,21 @@ const WaterfallAnimasiAlas = () => {
           <line x1="55" y1="182" x2="55" y2="22" stroke="#38bdf8" strokeWidth="7" strokeOpacity="0.12" filter="url(#wfGlow)"/>
           <line x1="55" y1="182" x2="55" y2="22" stroke="#38bdf8" strokeWidth="2.5" strokeOpacity="0.45"/>
 
-          {/* ── Busur stream 1: B→D (parabola pendek, cyan terang) ── */}
-          {/* puncak busur ≈ (114, 1) — sedikit di atas B */}
-          <path d="M 55,22 Q 185,-48 132,124"
+          {/* ── Busur stream 1: B→D (parabola kecil, cyan terang) ── */}
+          {/* puncak busur ≈ (113, 13) — compact, sedikit di atas B */}
+          <path d="M 55,22 Q 160,-20 132,124"
             fill="none" stroke="#06b6d4" strokeWidth="7" strokeOpacity="0.13"
             strokeLinecap="round" filter="url(#wfGlow)"/>
-          <path d="M 55,22 Q 185,-48 132,124"
+          <path d="M 55,22 Q 160,-20 132,124"
             fill="none" stroke="#06b6d4" strokeWidth="2.2" strokeOpacity="0.60"
             strokeLinecap="round"/>
 
-          {/* ── Busur stream 2: B→C (parabola lebar+tinggi, biru muda) ── */}
-          {/* puncak busur ≈ (150,-14) — jauh di atas B, arc lebih lebar */}
-          <path d="M 55,22 Q 258,-90 175,182"
+          {/* ── Busur stream 2: B→C (parabola sedang, biru muda) ── */}
+          {/* puncak busur ≈ (148, 7) — lebih lebar dari B→D tapi tidak berlebihan */}
+          <path d="M 55,22 Q 232,-40 175,182"
             fill="none" stroke="#bae6fd" strokeWidth="7" strokeOpacity="0.12"
             strokeLinecap="round" filter="url(#wfGlow)"/>
-          <path d="M 55,22 Q 258,-90 175,182"
+          <path d="M 55,22 Q 232,-40 175,182"
             fill="none" stroke="#bae6fd" strokeWidth="2.2" strokeOpacity="0.55"
             strokeLinecap="round"/>
 
@@ -285,10 +285,10 @@ const WaterfallAnimasiAlas = () => {
 
           {/* Label AB */}
           <text x="43" y="108" fontSize="11" fill="#38bdf8" fontWeight="bold" textAnchor="middle">AB</text>
-          {/* Label BD① — di dekat puncak busur kiri (sekitar x=114, y=1) */}
-          <text x="115" y="-2" fontSize="10" fill="#06b6d4" fontWeight="bold" textAnchor="middle">BD ①</text>
-          {/* Label BC② — di dekat puncak busur kanan (sekitar x=150, y=-14) */}
-          <text x="180" y="-20" fontSize="10" fill="#bae6fd" fontWeight="bold" textAnchor="middle">BC ②</text>
+          {/* Label BD① — dekat puncak busur kecil B→D (puncak ≈ x=113, y=13) */}
+          <text x="113" y="9" fontSize="10" fill="#06b6d4" fontWeight="bold" textAnchor="middle">BD ①</text>
+          {/* Label BC② — dekat puncak busur sedang B→C (puncak ≈ x=148, y=7) */}
+          <text x="170" y="-8" fontSize="10" fill="#bae6fd" fontWeight="bold" textAnchor="middle">BC ②</text>
 
           {/* Kotak rumus */}
           <rect x="8" y="200" width="244" height="60" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
