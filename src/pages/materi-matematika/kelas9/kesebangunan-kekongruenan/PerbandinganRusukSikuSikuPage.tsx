@@ -303,7 +303,7 @@ const WaterfallAnimasiAlas = () => {
             menyembur busur ① ke D  dan  busur ② ke C
           </text>
           <line x1="20" y1="246" x2="240" y2="246" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
-          <text x="130" y="267" textAnchor="middle" fontSize="16" fill="#38bdf8" fontWeight="bold">AB² = BD × BC</text>
+          <text x="130" y="267" textAnchor="middle" fontSize="16" fill="#facc15" fontWeight="bold">AB² = BD × BC</text>
           <text x="130" y="282" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
             kuadrat sumber  =  semburan ① × semburan ②
           </text>
