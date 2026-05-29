@@ -352,8 +352,8 @@ const WaterfallAnimasiTegak = () => {
   const pathAC  = "M 55,182 L 175,182";
   // Busur C→D: bows sedikit ke kanan
   const pathCD  = "M 175,182 Q 185,148 132,124";
-  // Busur C→B: melengkung ke atas menuju B
-  const pathCB  = "M 175,182 Q 135,90 55,22";
+  // Busur C→B: diperbesar agar tidak berdempet dengan garis CB
+  const pathCB  = "M 175,182 Q 155,70 55,22";
 
   const flowStream = (path: string, color: string, highlight: string, dur: number, width: number) => (
     <>
