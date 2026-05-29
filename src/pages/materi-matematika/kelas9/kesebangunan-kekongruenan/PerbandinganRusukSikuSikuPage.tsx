@@ -201,7 +201,7 @@ const WaterfallAnimasiAlas = () => {
           🌊 Bayangkan air menyemprot dari{" "}
           <strong className="text-white">A ke B</strong> melewati sisi tegak, lalu di titik{" "}
           <strong className="text-white">B</strong> air langsung{" "}
-          <strong className="text-cyan-300">muncrat dua arah terpisah</strong>:{" "}
+          <strong className="text-cyan-300">menyembur dua arah terpisah</strong>:{" "}
           <span className="text-cyan-300 font-bold">① ke D</span> dan{" "}
           <span className="text-sky-200 font-bold">② langsung ke C</span>. Itulah cara hafal rumus{" "}
           <strong className="text-cyan-300">AB² = BD × BC!</strong>
@@ -227,7 +227,7 @@ const WaterfallAnimasiAlas = () => {
           parabola yang naik melewati titik B masih terlihat dalam frame.
           Total tinggi koordinat: -52 → 268 = 320 unit.
         */}
-        <svg viewBox="0 -10 260 278" className="w-full max-w-sm mx-auto">
+        <svg viewBox="0 -10 260 290" className="w-full max-w-sm mx-auto">
           <defs>
             <filter id="wfGlow" x="-60%" y="-60%" width="220%" height="220%">
               <feGaussianBlur stdDeviation="2.8" result="blur"/>
@@ -291,18 +291,21 @@ const WaterfallAnimasiAlas = () => {
           <text x="43" y="108" fontSize="11" fill="#38bdf8" fontWeight="bold" textAnchor="middle">AB</text>
           {/* Label BD① — dekat puncak busur B→D (puncak ≈ x=113, y=17) */}
           <text x="113" y="14" fontSize="10" fill="#06b6d4" fontWeight="bold" textAnchor="middle">BD ①</text>
-          {/* Label BC② — dekat puncak busur B→C (puncak ≈ x=141, y=16) */}
-          <text x="155" y="5" fontSize="10" fill="#bae6fd" fontWeight="bold" textAnchor="middle">BC ②</text>
+          {/* Label BC② — tepat di titik tengah busur B→C (t=0.5 ≈ x=153, y=44) */}
+          <text x="172" y="43" fontSize="10" fill="#bae6fd" fontWeight="bold" textAnchor="start">BC ②</text>
 
-          {/* Kotak rumus */}
-          <rect x="8" y="200" width="244" height="60" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
-          <text x="130" y="218" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
-            💧 A→B menyemprot ⟹ muncrat busur ① ke D  dan  busur ② ke C
+          {/* Kotak rumus — diperbesar agar tidak memotong teks */}
+          <rect x="8" y="196" width="244" height="82" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
+          <text x="130" y="212" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+            A→B menyemprot
           </text>
-          <line x1="20" y1="224" x2="240" y2="224" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
-          <text x="130" y="247" textAnchor="middle" fontSize="16" fill="#38bdf8" fontWeight="bold">AB² = BD × BC</text>
-          <text x="130" y="257" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
-            (kuadrat sumber  =  busur ① × busur ②)
+          <text x="130" y="224" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+            menyembur busur ① ke D  dan  busur ② ke C
+          </text>
+          <line x1="20" y1="232" x2="240" y2="232" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
+          <text x="130" y="253" textAnchor="middle" fontSize="16" fill="#38bdf8" fontWeight="bold">AB² = BD × BC</text>
+          <text x="130" y="268" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
+            kuadrat sumber  =  semburan ① × semburan ②
           </text>
         </svg>
       </div>
