@@ -11,60 +11,94 @@ import { InlineMath, BlockMath } from "react-katex";
    SVG DIAGRAMS — TRIANGLE CONGRUENCE
 ───────────────────────────────────────────────────────────────────────────── */
 
+/**
+ * DiagramSifatKongruen
+ *
+ * Triangles: ABC = A(40,185) B(160,185) C(100,55)
+ *            PQR = P(230,185) Q(350,185) R(290,55)  (offset +190 in x)
+ *
+ * Tick placement — each tick line is drawn PERPENDICULAR to its side,
+ * centred on the side's midpoint.
+ *
+ * Side AB / PQ  (horizontal):  perp = vertical  → double tick (green)
+ * Side AC / PR  (left, slope): perp = (0.908, 0.419) → single tick (orange)
+ * Side BC / QR  (right, slope):perp = (0.908,-0.419) → triple tick (yellow)
+ *
+ * Computed values:
+ *   AC direction (60,-130), |AC|=143.2, unit=(0.419,-0.908)
+ *   AC perp unit = (0.908, 0.419), half-len = 7
+ *   Midpoint AC = (70,120)  → tick (63.6,117.1)→(76.4,122.9)
+ *
+ *   BC direction (-60,-130), perp unit=(0.908,-0.419), half-len=7
+ *   Midpoint BC = (130,120)
+ *   Triple spacing: along-unit=(-0.419,-0.908)*5=(-2.1,-4.5)
+ *   Centers: (127.9,115.5) (130,120) (132.1,124.5)
+ *   Each tick: center ± perp*7 = (±6.4, ∓2.9)
+ */
 const DiagramSifatKongruen = () => (
-  <svg viewBox="0 0 380 200" className="w-full max-w-md mx-auto">
-    <defs>
-      <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-        <path d="M0,0 L6,3 L0,6 Z" fill="#facc15" />
-      </marker>
-    </defs>
+  <svg viewBox="0 0 410 215" className="w-full max-w-md mx-auto">
 
-    {/* ── Triangle ABC ── */}
-    <polygon points="30,170 150,170 90,50" fill="#3b82f6" fillOpacity="0.18" stroke="#60a5fa" strokeWidth="2.2" strokeLinejoin="round" />
-    {/* vertices */}
-    <circle cx="30" cy="170" r="3" fill="#60a5fa" />
-    <circle cx="150" cy="170" r="3" fill="#60a5fa" />
-    <circle cx="90" cy="50" r="3" fill="#60a5fa" />
-    <text x="14" y="185" fontSize="13" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="154" y="185" fontSize="13" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="85" y="42" fontSize="13" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">C</text>
-    {/* tick marks — AB bottom: double */}
-    <line x1="82" y1="172" x2="82" y2="162" stroke="#22c55e" strokeWidth="2" />
-    <line x1="88" y1="172" x2="88" y2="162" stroke="#22c55e" strokeWidth="2" />
-    {/* tick marks — AC left: single */}
-    <line x1="55" y1="116" x2="63" y2="110" stroke="#f97316" strokeWidth="2" />
-    {/* tick marks — BC right: triple */}
-    <line x1="118" y1="116" x2="112" y2="109" stroke="#facc15" strokeWidth="2" />
-    <line x1="123" y1="111" x2="117" y2="104" stroke="#facc15" strokeWidth="2" />
-    <line x1="128" y1="106" x2="122" y2="99" stroke="#facc15" strokeWidth="2" />
-    {/* angle arcs */}
-    <path d="M44,170 Q48,158 55,165" fill="none" stroke="#e879f9" strokeWidth="1.8" />
-    <path d="M140,170 Q134,158 128,164" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    {/* ── Triangle ABC  A(40,185) B(160,185) C(100,55) ── */}
+    <polygon points="40,185 160,185 100,55"
+      fill="#3b82f6" fillOpacity="0.18" stroke="#60a5fa" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="40"  cy="185" r="3" fill="#60a5fa" />
+    <circle cx="160" cy="185" r="3" fill="#60a5fa" />
+    <circle cx="100" cy="55"  r="3" fill="#60a5fa" />
+    <text x="22"  y="202" fontSize="14" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="163" y="202" fontSize="14" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="95"  y="47"  fontSize="14" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">C</text>
 
-    {/* ≅ symbol */}
-    <text x="178" y="115" fontSize="26" fill="#facc15" fontWeight="bold" fontFamily="serif">≅</text>
+    {/* AB — double tick (green) — perpendicular = vertical, midpoint (100,185) */}
+    <line x1="94"  y1="178" x2="94"  y2="192" stroke="#22c55e" strokeWidth="2.4" />
+    <line x1="106" y1="178" x2="106" y2="192" stroke="#22c55e" strokeWidth="2.4" />
 
-    {/* ── Triangle PQR ── */}
-    <polygon points="220,170 340,170 280,50" fill="#a855f7" fillOpacity="0.18" stroke="#c084fc" strokeWidth="2.2" strokeLinejoin="round" />
-    <circle cx="220" cy="170" r="3" fill="#c084fc" />
-    <circle cx="340" cy="170" r="3" fill="#c084fc" />
-    <circle cx="280" cy="50" r="3" fill="#c084fc" />
-    <text x="204" y="185" fontSize="13" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="344" y="185" fontSize="13" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="275" y="42" fontSize="13" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">R</text>
-    {/* same ticks */}
-    <line x1="272" y1="172" x2="272" y2="162" stroke="#22c55e" strokeWidth="2" />
-    <line x1="278" y1="172" x2="278" y2="162" stroke="#22c55e" strokeWidth="2" />
-    <line x1="245" y1="116" x2="253" y2="110" stroke="#f97316" strokeWidth="2" />
-    <line x1="308" y1="116" x2="302" y2="109" stroke="#facc15" strokeWidth="2" />
-    <line x1="313" y1="111" x2="307" y2="104" stroke="#facc15" strokeWidth="2" />
-    <line x1="318" y1="106" x2="312" y2="99" stroke="#facc15" strokeWidth="2" />
-    <path d="M234,170 Q238,158 245,165" fill="none" stroke="#e879f9" strokeWidth="1.8" />
-    <path d="M330,170 Q324,158 318,164" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    {/* AC — single tick (orange) — midpoint (70,120), perp=(0.908,0.419)*7 */}
+    <line x1="64" y1="117" x2="76" y2="123" stroke="#f97316" strokeWidth="2.4" />
+
+    {/* BC — triple tick (yellow) — midpoint (130,120), perp=(0.908,-0.419)*7 */}
+    {/* center 1: (128,116)  line: (122,119)→(134,113) */}
+    <line x1="122" y1="119" x2="134" y2="113" stroke="#facc15" strokeWidth="2.4" />
+    {/* center 2: (130,120)  line: (124,123)→(136,117) */}
+    <line x1="124" y1="123" x2="136" y2="117" stroke="#facc15" strokeWidth="2.4" />
+    {/* center 3: (132,125)  line: (126,128)→(138,122) */}
+    <line x1="126" y1="128" x2="138" y2="122" stroke="#facc15" strokeWidth="2.4" />
+
+    {/* angle arcs at A and B */}
+    <path d="M40,185 Q57,170 64,183" fill="none" stroke="#e879f9" strokeWidth="1.8" />
+    <path d="M160,185 Q144,170 137,183" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+
+    {/* ≅ */}
+    <text x="195" y="128" fontSize="28" fill="#facc15" fontWeight="bold" fontFamily="serif">≅</text>
+
+    {/* ── Triangle PQR  P(230,185) Q(350,185) R(290,55) — same shape, x+190 ── */}
+    <polygon points="230,185 350,185 290,55"
+      fill="#a855f7" fillOpacity="0.18" stroke="#c084fc" strokeWidth="2.2" strokeLinejoin="round" />
+    <circle cx="230" cy="185" r="3" fill="#c084fc" />
+    <circle cx="350" cy="185" r="3" fill="#c084fc" />
+    <circle cx="290" cy="55"  r="3" fill="#c084fc" />
+    <text x="212" y="202" fontSize="14" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="353" y="202" fontSize="14" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="285" y="47"  fontSize="14" fill="#e9d5ff" fontWeight="bold" fontFamily="sans-serif">R</text>
+
+    {/* PQ — double tick (green) — midpoint (290,185) */}
+    <line x1="284" y1="178" x2="284" y2="192" stroke="#22c55e" strokeWidth="2.4" />
+    <line x1="296" y1="178" x2="296" y2="192" stroke="#22c55e" strokeWidth="2.4" />
+
+    {/* PR — single tick (orange) — midpoint (260,120) = AC+190 */}
+    <line x1="254" y1="117" x2="266" y2="123" stroke="#f97316" strokeWidth="2.4" />
+
+    {/* QR — triple tick (yellow) — midpoint (320,120) = BC+190 */}
+    <line x1="312" y1="119" x2="324" y2="113" stroke="#facc15" strokeWidth="2.4" />
+    <line x1="314" y1="123" x2="326" y2="117" stroke="#facc15" strokeWidth="2.4" />
+    <line x1="316" y1="128" x2="328" y2="122" stroke="#facc15" strokeWidth="2.4" />
+
+    {/* angle arcs at P and Q */}
+    <path d="M230,185 Q247,170 254,183" fill="none" stroke="#e879f9" strokeWidth="1.8" />
+    <path d="M350,185 Q334,170 327,183" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
 
     {/* title */}
-    <text x="190" y="20" textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">△ABC ≅ △PQR</text>
-    <text x="190" y="35" textAnchor="middle" fontSize="9.5" fill="#94a3b8" fontFamily="sans-serif">Semua rusuk bersesuaian sama panjang &amp; sudut sama besar</text>
+    <text x="205" y="20" textAnchor="middle" fontSize="12" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">△ABC ≅ △PQR</text>
+    <text x="205" y="36" textAnchor="middle" fontSize="9.5" fill="#94a3b8" fontFamily="sans-serif">Semua rusuk bersesuaian sama panjang &amp; sudut sama besar</text>
   </svg>
 );
 
