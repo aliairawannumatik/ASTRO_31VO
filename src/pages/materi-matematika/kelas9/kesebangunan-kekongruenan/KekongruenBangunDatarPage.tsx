@@ -1235,42 +1235,38 @@ const KekongruenBangunDatarPage = () => {
                     <p className="font-body text-sm text-white">Perhatikan gambar berikut.</p>
                     {/* Diagram: P(35,135) T(115,83) U(149,136) S(120,183) R(240,18) Q(240,257) */}
                     <svg viewBox="0 0 280 275" className="w-full max-w-xs mx-auto">
-                      {/* Lines */}
-                      <line x1="35" y1="135" x2="240" y2="18"  stroke="#e2e8f0" strokeWidth="1.6" />  {/* P-R through T */}
-                      <line x1="35" y1="135" x2="240" y2="257" stroke="#e2e8f0" strokeWidth="1.6" />  {/* P-Q through S */}
-                      <line x1="35" y1="135" x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* P-U */}
-                      <line x1="115" y1="83"  x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* T-U */}
-                      <line x1="149" y1="136" x2="120" y2="183" stroke="#e2e8f0" strokeWidth="1.6" />  {/* U-S */}
-                      <line x1="240" y1="18"  x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* R-U */}
-                      <line x1="240" y1="257" x2="149" y2="136" stroke="#e2e8f0" strokeWidth="1.6" />  {/* Q-U */}
+                      {/* Lines — kuning */}
+                      <line x1="35" y1="135" x2="240" y2="18"  stroke="#facc15" strokeWidth="1.6" />
+                      <line x1="35" y1="135" x2="240" y2="257" stroke="#facc15" strokeWidth="1.6" />
+                      <line x1="35" y1="135" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
+                      <line x1="115" y1="83"  x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
+                      <line x1="149" y1="136" x2="120" y2="183" stroke="#facc15" strokeWidth="1.6" />
+                      <line x1="240" y1="18"  x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
+                      <line x1="240" y1="257" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
 
-                      {/* Right-angle box at T — between PT direction and TU direction
-                          PT unit ≈ (0.866,−0.494), TU unit ≈ (0.540, 0.841), box size=7
-                          Along PT from T: (121,80), along TU from T: (119,89), corner: (125,86) */}
+                      {/* Right-angle box at T — kuning */}
                       <polyline points="121,80 125,86 119,89"
-                        fill="none" stroke="#e2e8f0" strokeWidth="1.4" strokeLinejoin="miter" />
+                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
 
-                      {/* Right-angle box at S — between PS direction and SU direction
-                          PS unit ≈ (0.854, 0.508), SU unit ≈ (0.525,−0.851), box size=7
-                          Along PS from S: (126,187), along SU from S: (124,177), corner: (130,181) */}
+                      {/* Right-angle box at S — kuning */}
                       <polyline points="126,187 130,181 124,177"
-                        fill="none" stroke="#e2e8f0" strokeWidth="1.4" strokeLinejoin="miter" />
+                        fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
 
-                      {/* Vertex dots */}
-                      <circle cx="35"  cy="135" r="3" fill="#e2e8f0" />
-                      <circle cx="115" cy="83"  r="3" fill="#e2e8f0" />
-                      <circle cx="149" cy="136" r="3" fill="#e2e8f0" />
-                      <circle cx="120" cy="183" r="3" fill="#e2e8f0" />
-                      <circle cx="240" cy="18"  r="3" fill="#e2e8f0" />
-                      <circle cx="240" cy="257" r="3" fill="#e2e8f0" />
+                      {/* Vertex dots — kuning */}
+                      <circle cx="35"  cy="135" r="3" fill="#facc15" />
+                      <circle cx="115" cy="83"  r="3" fill="#facc15" />
+                      <circle cx="149" cy="136" r="3" fill="#facc15" />
+                      <circle cx="120" cy="183" r="3" fill="#facc15" />
+                      <circle cx="240" cy="18"  r="3" fill="#facc15" />
+                      <circle cx="240" cy="257" r="3" fill="#facc15" />
 
-                      {/* Labels */}
-                      <text x="16"  y="140" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">P</text>
-                      <text x="108" y="74"  fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">T</text>
-                      <text x="153" y="132" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">U</text>
-                      <text x="112" y="200" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">S</text>
-                      <text x="245" y="22"  fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">R</text>
-                      <text x="245" y="263" fontSize="13" fill="#e2e8f0" fontWeight="bold" fontFamily="serif">Q</text>
+                      {/* Labels — putih */}
+                      <text x="16"  y="140" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
+                      <text x="108" y="74"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">T</text>
+                      <text x="153" y="132" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">U</text>
+                      <text x="112" y="200" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">S</text>
+                      <text x="245" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
+                      <text x="245" y="263" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
                     </svg>
                     <p className="font-body text-sm text-white">
                       Banyak segitiga kongruen pada gambar adalah . . . .
