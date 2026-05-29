@@ -39,6 +39,83 @@ function renderTriangle(cx: number, cy: number, fill: string, stroke: string, op
   );
 }
 
+// Renders angle-arc markers at each vertex of the triangle.
+// symbols[0]=A/P, symbols[1]=B/Q, symbols[2]=C/R
+// Marks move WITH the shape — always call this inside the same <g> as the shape.
+function renderTriangleAngleMarks(
+  cx: number, cy: number,
+  symbols: readonly string[],
+  color: string
+) {
+  // Half-edge vectors from each vertex toward its two neighbours.
+  // A=(cx-55,cy+55), B=(cx+55,cy+55), C=(cx,cy-55)
+  const MAG = Math.sqrt(55 * 55 + 110 * 110); // ≈ 123.09
+  const R = 13;     // arc radius
+  const SYM = 21;   // symbol distance from vertex (along bisector)
+
+  // unit vectors from each vertex to its neighbours
+  const uAB = { x: 1, y: 0 };
+  const uAC = { x: 55 / MAG, y: -110 / MAG };
+  const uBA = { x: -1, y: 0 };
+  const uBC = { x: -55 / MAG, y: -110 / MAG };
+  const uCA = { x: -55 / MAG, y: 110 / MAG };
+  const uCB = { x: 55 / MAG, y: 110 / MAG };
+
+  // arc start / end for each vertex
+  const p1A = { x: cx - 55 + R * uAB.x, y: cy + 55 + R * uAB.y };
+  const p2A = { x: cx - 55 + R * uAC.x, y: cy + 55 + R * uAC.y };
+  const p1B = { x: cx + 55 + R * uBA.x, y: cy + 55 + R * uBA.y };
+  const p2B = { x: cx + 55 + R * uBC.x, y: cy + 55 + R * uBC.y };
+  const p1C = { x: cx + R * uCA.x, y: cy - 55 + R * uCA.y };
+  const p2C = { x: cx + R * uCB.x, y: cy - 55 + R * uCB.y };
+
+  // bisector directions (normalised average of the two edge unit-vectors)
+  function bisect(u1: {x:number,y:number}, u2: {x:number,y:number}, ox: number, oy: number) {
+    const bx = (u1.x + u2.x) / 2, by = (u1.y + u2.y) / 2;
+    const bm = Math.sqrt(bx * bx + by * by);
+    return { x: ox + SYM * bx / bm, y: oy + SYM * by / bm };
+  }
+  const sA = bisect(uAB, uAC, cx - 55, cy + 55);
+  const sB = bisect(uBA, uBC, cx + 55, cy + 55);
+  const sC = bisect(uCA, uCB, cx,       cy - 55);
+
+  // sweep flags: derived from cross-product rule for SVG y-down coords
+  // A: cross(uAB,uAC)<0 → sweep=0   B: cross(uBA,uBC)>0 → sweep=1   C: cross(uCA,uCB)<0 → sweep=0
+  const sweepA = 0, sweepB = 1, sweepC = 0;
+
+  function renderSym(sym: string, sx: number, sy: number) {
+    if (sym === "○") {
+      return <circle key="sym" cx={sx} cy={sy} r={2.5} fill={color} stroke="none" />;
+    }
+    return (
+      <text key="sym" x={sx} y={sy} textAnchor="middle" dominantBaseline="middle"
+        fontSize="7.5" fill={color} fontFamily="sans-serif" fontWeight="bold">
+        {sym}
+      </text>
+    );
+  }
+
+  return (
+    <g style={{ pointerEvents: "none" }}>
+      {symbols[0] !== undefined && <>
+        <path d={`M ${p1A.x} ${p1A.y} A ${R} ${R} 0 0 ${sweepA} ${p2A.x} ${p2A.y}`}
+          fill="none" stroke={color} strokeWidth="1.4" />
+        {renderSym(symbols[0], sA.x, sA.y)}
+      </>}
+      {symbols[1] !== undefined && <>
+        <path d={`M ${p1B.x} ${p1B.y} A ${R} ${R} 0 0 ${sweepB} ${p2B.x} ${p2B.y}`}
+          fill="none" stroke={color} strokeWidth="1.4" />
+        {renderSym(symbols[1], sB.x, sB.y)}
+      </>}
+      {symbols[2] !== undefined && <>
+        <path d={`M ${p1C.x} ${p1C.y} A ${R} ${R} 0 0 ${sweepC} ${p2C.x} ${p2C.y}`}
+          fill="none" stroke={color} strokeWidth="1.4" />
+        {renderSym(symbols[2], sC.x, sC.y)}
+      </>}
+    </g>
+  );
+}
+
 function renderSquare(cx: number, cy: number, fill: string, stroke: string, op: number) {
   const s = 43;
   return (
@@ -213,10 +290,13 @@ export const DragCongruenceDemo = ({
   shape,
   leftLabels,
   rightLabels,
+  angleMarks,
 }: {
   shape: CongruentShapeType;
   leftLabels?: readonly string[];
   rightLabels?: readonly string[];
+  /** symbols for angle arcs — only used when shape="triangle". Index: [0]=A/P, [1]=B/Q, [2]=C/R */
+  angleMarks?: readonly string[];
 }) => {
   const { render, vbH, cy: CY } = SHAPES[shape];
   const VBW = 300;
@@ -312,6 +392,10 @@ export const DragCongruenceDemo = ({
 
           {render(TARGET.x, TARGET.y, "#facc15", "#fde047", isSnapped ? 0.45 : 0.58)}
 
+          {/* Left-shape angle marks — stationary, rendered outside any translate */}
+          {angleMarks && shape === "triangle" &&
+            renderTriangleAngleMarks(TARGET.x, TARGET.y, angleMarks, "#fde047")}
+
           {!isSnapped && (
             <g
               transform={`translate(${delta.x},${delta.y})`}
@@ -320,6 +404,10 @@ export const DragCongruenceDemo = ({
               style={{ cursor: isDragging ? "grabbing" : "grab" }}
             >
               {render(START.x, START.y, "#4ade80", "#86efac", 0.62)}
+
+              {/* Right-shape angle marks — inside translate so they follow the drag */}
+              {angleMarks && shape === "triangle" &&
+                renderTriangleAngleMarks(START.x, START.y, angleMarks, "#86efac")}
 
               {!isDragging && (
                 <g opacity="0.55">

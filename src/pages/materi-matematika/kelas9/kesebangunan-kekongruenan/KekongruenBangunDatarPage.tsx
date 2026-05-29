@@ -947,7 +947,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI SIFAT KEKONGRUENAN SEGITIGA:</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○","×","y"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 1. Ilustrasi △ABC ≅ △PQR — semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
                     </figcaption>
@@ -980,7 +980,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">① Syarat RRR — Sisi-Sisi-Sisi</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" leftLabels={["A", "B", "C"]} rightLabels={["P", "Q", "R"]} />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A", "B", "C"]} rightLabels={["P", "Q", "R"]} angleMarks={["○","×","y"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 2. Syarat RRR — ketiga pasang sisi bersesuaian sama panjang: AB=PQ, BC=QR, CA=RP
                     </figcaption>
@@ -997,7 +997,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">② Syarat RAR — Sisi-Sudut-Sisi</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○","×","y"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 3. Syarat RAR — dua sisi bersesuaian sama panjang dan sudut apitnya sama besar: AB=PQ, ∠A=∠P, AC=PR
                     </figcaption>
@@ -1014,7 +1014,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-cyan-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">③ Syarat ARA / AAR — Sudut-Sisi-Sudut</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○","×","y"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 4. Syarat ARA/AAR — satu sisi sama panjang dan dua sudut bersesuaian sama besar: ∠A=∠P, AB=PQ, ∠B=∠Q
                     </figcaption>
