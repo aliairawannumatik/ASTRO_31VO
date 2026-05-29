@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from "lucide-react";
-import { playPopSound } from "@/hooks/useAudio";
+import { BookOpen, Lightbulb, Calculator, Target } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -677,16 +675,11 @@ const WaterfallAnimasiTinggi = () => {
 
 const PerbandinganRusukSikuSikuPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "konsep3", "konsep4", "contoh1", "waterfall", "waterfall2", "waterfall3"]);
-  const toggleSection = (s: string) => {
-    playPopSound();
-    setExpandedSections(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
-  };
-  const Header = ({ id, icon, color, label }: { id: string; icon: React.ReactNode; color: string; label: string }) => (
-    <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+  const expandedSections = { includes: (_: string) => true };
+  const Header = ({ icon, color, label }: { id?: string; icon: React.ReactNode; color: string; label: string }) => (
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3"><span style={{ color }}>{icon}</span><span className="font-body font-semibold text-white">{label}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
