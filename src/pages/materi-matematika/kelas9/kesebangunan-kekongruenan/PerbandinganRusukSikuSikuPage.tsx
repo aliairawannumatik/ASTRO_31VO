@@ -285,14 +285,14 @@ const WaterfallAnimasiAlas = () => {
           <text x="36" y="20"  fontSize="13" fill="#ffffff" fontWeight="bold">B</text>
           <text x="36" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">A</text>
           <text x="178" y="197" fontSize="13" fill="#ffffff" fontWeight="bold">C</text>
-          <text x="136" y="120" fontSize="11" fill="#ffffff" fontWeight="bold">D</text>
+          <text x="136" y="120" fontSize="13" fill="#ffffff" fontWeight="bold">D</text>
 
-          {/* Label segmen — orange */}
-          <text x="43" y="108" fontSize="11" fill="#fb923c" fontWeight="bold" textAnchor="middle">AB</text>
+          {/* Label segmen — hijau cerah */}
+          <text x="43" y="108" fontSize="11" fill="#4ade80" fontWeight="bold" textAnchor="middle">AB</text>
           {/* Label BD① — dekat puncak busur B→D (puncak ≈ x=113, y=17) */}
-          <text x="113" y="14" fontSize="10" fill="#fb923c" fontWeight="bold" textAnchor="middle">BD ①</text>
+          <text x="113" y="14" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">BD ①</text>
           {/* Label BC② — di sisi kanan busur B→C, dekat jalur air (t=0.5 ≈ x=153, y=44) */}
-          <text x="158" y="43" fontSize="10" fill="#fb923c" fontWeight="bold" textAnchor="start">BC ②</text>
+          <text x="158" y="43" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="start">BC ②</text>
 
           {/* Kotak rumus — jarak 20px dari alas segitiga (y=182), cukup lapang */}
           <rect x="8" y="210" width="244" height="82" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
