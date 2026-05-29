@@ -150,11 +150,64 @@ const SHAPES: Record<CongruentShapeType, { render: RenderFn; vbH: number; cy: nu
   trapezoid:     { render: renderTrapezoid,      vbH: 190, cy: 93  },
 };
 
-const TRI_VERT_OFFSETS = [
-  { dx: -55, dy: +55, anchor: "end"    as const, lx: -5, ly: +14 },
-  { dx: +55, dy: +55, anchor: "start"  as const, lx: +5, ly: +14 },
-  { dx:   0, dy: -55, anchor: "middle" as const, lx:  0, ly:  -7 },
-];
+type VertexDef = { dx: number; dy: number; anchor: "start" | "end" | "middle"; lx: number; ly: number };
+
+// Vertex positions (relative to shape center) and label offset/anchor per shape.
+// Order matches the ABCD / PQRS labeling used in the page content.
+const SHAPE_VERTS: Partial<Record<CongruentShapeType, VertexDef[]>> = {
+  // triangle: A=bottom-left, B=bottom-right, C=top
+  triangle: [
+    { dx: -55, dy: +55, anchor: "end",    lx: -5, ly: +14 },
+    { dx: +55, dy: +55, anchor: "start",  lx: +5, ly: +14 },
+    { dx:   0, dy: -55, anchor: "middle", lx:  0, ly:  -7 },
+  ],
+  // square: A=top-left, B=top-right, C=bottom-right, D=bottom-left
+  square: [
+    { dx: -43, dy: -43, anchor: "end",    lx: -3, ly:  -5 },
+    { dx: +43, dy: -43, anchor: "start",  lx: +4, ly:  -5 },
+    { dx: +43, dy: +43, anchor: "start",  lx: +4, ly: +14 },
+    { dx: -43, dy: +43, anchor: "end",    lx: -3, ly: +14 },
+  ],
+  // rectangle: A=top-left, B=top-right, C=bottom-right, D=bottom-left
+  rectangle: [
+    { dx: -52, dy: -34, anchor: "end",    lx: -3, ly:  -5 },
+    { dx: +52, dy: -34, anchor: "start",  lx: +4, ly:  -5 },
+    { dx: +52, dy: +34, anchor: "start",  lx: +4, ly: +14 },
+    { dx: -52, dy: +34, anchor: "end",    lx: -3, ly: +14 },
+  ],
+  // parallelogram: A=bottom-left, B=bottom-right, C=top-right, D=top-left
+  parallelogram: [
+    { dx: -30, dy: +42, anchor: "end",    lx: -4, ly: +13 },
+    { dx: +52, dy: +42, anchor: "start",  lx: +4, ly: +13 },
+    { dx: +30, dy: -42, anchor: "start",  lx: +4, ly:  -5 },
+    { dx: -52, dy: -42, anchor: "end",    lx: -4, ly:  -5 },
+  ],
+  // trapezoid: A=bottom-left, B=bottom-right, C=top-right, D=top-left
+  trapezoid: [
+    { dx: -55, dy: +42, anchor: "end",    lx: -4, ly: +13 },
+    { dx: +55, dy: +42, anchor: "start",  lx: +4, ly: +13 },
+    { dx: +33, dy: -42, anchor: "start",  lx: +4, ly:  -5 },
+    { dx: -33, dy: -42, anchor: "end",    lx: -4, ly:  -5 },
+  ],
+  // rhombus: A=top, B=right, C=bottom, D=left
+  rhombus: [
+    { dx:   0, dy: -55, anchor: "middle", lx:  0, ly:  -7 },
+    { dx: +60, dy:   0, anchor: "start",  lx: +5, ly: +4  },
+    { dx:   0, dy: +55, anchor: "middle", lx:  0, ly: +14 },
+    { dx: -60, dy:   0, anchor: "end",    lx: -5, ly: +4  },
+  ],
+  // kite: A=top, B=left, C=bottom, D=right
+  kite: [
+    { dx:   0, dy: -72, anchor: "middle", lx:  0, ly:  -7 },
+    { dx: -46, dy:  +5, anchor: "end",    lx: -5, ly: +4  },
+    { dx:   0, dy: +80, anchor: "middle", lx:  0, ly: +14 },
+    { dx: +46, dy:  +5, anchor: "start",  lx: +5, ly: +4  },
+  ],
+  // circle: single center point — label positioned above the circle
+  circle: [
+    { dx: 0, dy: -58, anchor: "middle", lx: 0, ly: 0 },
+  ],
+};
 
 export const DragCongruenceDemo = ({
   shape,
@@ -162,8 +215,8 @@ export const DragCongruenceDemo = ({
   rightLabels,
 }: {
   shape: CongruentShapeType;
-  leftLabels?: [string, string, string];
-  rightLabels?: [string, string, string];
+  leftLabels?: readonly string[];
+  rightLabels?: readonly string[];
 }) => {
   const { render, vbH, cy: CY } = SHAPES[shape];
   const VBW = 300;
@@ -238,6 +291,8 @@ export const DragCongruenceDemo = ({
     );
   });
 
+  const verts = SHAPE_VERTS[shape];
+
   return (
     <div className="space-y-2 select-none">
       <div className="bg-slate-950/70 border border-slate-700/40 rounded-xl overflow-hidden">
@@ -268,7 +323,7 @@ export const DragCongruenceDemo = ({
 
               {!isDragging && (
                 <g opacity="0.55">
-                  <circle cx={START.x} cy={START.y - (shape === "kite" ? 0 : 0)} r="26"
+                  <circle cx={START.x} cy={START.y} r="26"
                     fill="none" stroke="#4ade80" strokeWidth="1.2" strokeDasharray="3 3">
                     <animate attributeName="r" values="22;34;22" dur="2s" repeatCount="indefinite" />
                     <animate attributeName="opacity" values="0.55;0;0.55" dur="2s" repeatCount="indefinite" />
@@ -298,31 +353,35 @@ export const DragCongruenceDemo = ({
             </circle>
           )}
 
-          {/* Fixed left vertex labels — always at absolute TARGET vertex positions, never inside translate group */}
-          {leftLabels && shape === "triangle" && TRI_VERT_OFFSETS.map((v, i) => (
-            <text key={`ll-${i}`}
-              x={TARGET.x + v.dx + v.lx}
-              y={TARGET.y + v.dy + v.ly}
-              textAnchor={v.anchor}
-              fontSize="11" fill="#fde047" fontWeight="bold" fontFamily="serif"
-              style={{ pointerEvents: "none" }}
-            >
-              {leftLabels[i]}
-            </text>
-          ))}
+          {/* Fixed left vertex labels — rendered at absolute TARGET vertex positions, never inside translate */}
+          {leftLabels && verts && verts.map((v, i) =>
+            leftLabels[i] ? (
+              <text key={`ll-${i}`}
+                x={TARGET.x + v.dx + v.lx}
+                y={TARGET.y + v.dy + v.ly}
+                textAnchor={v.anchor}
+                fontSize="11" fill="#fde047" fontWeight="bold" fontFamily="serif"
+                style={{ pointerEvents: "none" }}
+              >
+                {leftLabels[i]}
+              </text>
+            ) : null
+          )}
 
-          {/* Fixed right vertex labels — always at absolute START vertex positions, hidden when snapped */}
-          {rightLabels && shape === "triangle" && !isSnapped && TRI_VERT_OFFSETS.map((v, i) => (
-            <text key={`rl-${i}`}
-              x={START.x + v.dx + v.lx}
-              y={START.y + v.dy + v.ly}
-              textAnchor={v.anchor}
-              fontSize="11" fill="#86efac" fontWeight="bold" fontFamily="serif"
-              style={{ pointerEvents: "none" }}
-            >
-              {rightLabels[i]}
-            </text>
-          ))}
+          {/* Fixed right vertex labels — rendered at absolute START vertex positions, hidden when snapped */}
+          {rightLabels && verts && !isSnapped && verts.map((v, i) =>
+            rightLabels[i] ? (
+              <text key={`rl-${i}`}
+                x={START.x + v.dx + v.lx}
+                y={START.y + v.dy + v.ly}
+                textAnchor={v.anchor}
+                fontSize="11" fill="#86efac" fontWeight="bold" fontFamily="serif"
+                style={{ pointerEvents: "none" }}
+              >
+                {rightLabels[i]}
+              </text>
+            ) : null
+          )}
 
           {!isSnapped ? (
             <>

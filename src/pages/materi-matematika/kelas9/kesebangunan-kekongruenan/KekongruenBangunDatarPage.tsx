@@ -947,7 +947,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI SIFAT KEKONGRUENAN SEGITIGA:</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 1. Ilustrasi △ABC ≅ △PQR — semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
                     </figcaption>
@@ -997,7 +997,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">② Syarat RAR — Sisi-Sudut-Sisi</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 3. Syarat RAR — dua sisi bersesuaian sama panjang dan sudut apitnya sama besar: AB=PQ, ∠A=∠P, AC=PR
                     </figcaption>
@@ -1014,7 +1014,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-cyan-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">③ Syarat ARA / AAR — Sudut-Sisi-Sudut</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" />
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 4. Syarat ARA/AAR — satu sisi sama panjang dan dua sudut bersesuaian sama besar: ∠A=∠P, AB=PQ, ∠B=∠Q
                     </figcaption>
@@ -1069,7 +1069,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-blue-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-blue-300">① Persegi (Square)</p>
                   <figure>
-                    <DragCongruenceDemo shape="square" />
+                    <DragCongruenceDemo shape="square" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 5. Dua persegi kongruen — Persegi ABCD ≅ Persegi PQRS jika sisinya sama panjang (AB = PQ)
                     </figcaption>
@@ -1095,7 +1095,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-sky-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-sky-300">② Persegi Panjang (Rectangle)</p>
                   <figure>
-                    <DragCongruenceDemo shape="rectangle" />
+                    <DragCongruenceDemo shape="rectangle" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 6. Dua persegi panjang kongruen — ABCD ≅ PQRS jika panjang dan lebarnya sama (AB=PQ dan BC=QR)
                     </figcaption>
@@ -1123,7 +1123,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-yellow-300">③ Jajar Genjang (Parallelogram)</p>
                   <figure>
-                    <DragCongruenceDemo shape="parallelogram" />
+                    <DragCongruenceDemo shape="parallelogram" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 7. Dua jajar genjang kongruen — ABCD ≅ PQRS jika dua sisi bersesuaian sama panjang dan sudut apitnya sama besar (AB=PQ, BC=QR, ∠A=∠P)
                     </figcaption>
@@ -1150,7 +1150,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-teal-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-teal-300">④ Trapesium (Trapezoid)</p>
                   <figure>
-                    <DragCongruenceDemo shape="trapezoid" />
+                    <DragCongruenceDemo shape="trapezoid" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 8. Dua trapesium kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
                     </figcaption>
@@ -1176,7 +1176,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-violet-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-violet-300">⑤ Belah Ketupat (Rhombus)</p>
                   <figure>
-                    <DragCongruenceDemo shape="rhombus" />
+                    <DragCongruenceDemo shape="rhombus" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 9. Dua belah ketupat kongruen — ABCD ≅ PQRS jika panjang sisinya sama dan salah satu sudut apitnya sama besar (AB=PQ dan ∠A=∠P)
                     </figcaption>
@@ -1203,7 +1203,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-rose-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-rose-300">⑥ Layang-layang (Kite)</p>
                   <figure>
-                    <DragCongruenceDemo shape="kite" />
+                    <DragCongruenceDemo shape="kite" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 10. Dua layang-layang kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
                     </figcaption>
@@ -1228,7 +1228,7 @@ const KekongruenBangunDatarPage = () => {
                 <div className="bg-slate-800/60 border border-pink-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-pink-300">⑦ Lingkaran (Circle)</p>
                   <figure>
-                    <DragCongruenceDemo shape="circle" />
+                    <DragCongruenceDemo shape="circle" leftLabels={["O₁"]} rightLabels={["O₂"]} />
                     <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
                       Gambar 11. Dua lingkaran kongruen — Lingkaran₁ ≅ Lingkaran₂ jika jari-jarinya sama panjang (r₁ = r₂)
                     </figcaption>
