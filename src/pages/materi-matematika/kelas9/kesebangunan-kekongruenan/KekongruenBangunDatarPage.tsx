@@ -639,87 +639,89 @@ const DiagramBelahKetupat = () => (
 
 const DiagramLayangLayang = () => (
   /*
-   * Kite 1: A(80,20) B(22,88) C(80,155) D(138,88)
-   *   AB=AD (top pair): dir AB=(-58,68) |=89.4  unit=(-0.649,0.761)
-   *   CB=CD (bot pair): dir CB=(-58,-67)|=88.6  unit=(-0.655,-0.756)
+   * Kite 1: A(80,20) B(22,88) C(80,170) D(138,88)   ← C moved down from y=155 to y=170
+   *   AB=AD (top pair): dir AB=(-58,68)  |=89.4  unit=(-0.649,0.761)
+   *   CB=CD (bot pair): dir CB=(-58,-82) |=100.4 unit=(-0.578,-0.817)
    *
-   * Ticks:
-   *   AB single mid(51,54):   perp_AB=(-0.761,-0.649)  → (56,59)→(46,50)
-   *   AD single mid(109,54):  perp_AD=(-0.761, 0.649)  → (114,50)→(104,59)
-   *   CB double mid(51,121.5):perp_CB=(0.756,-0.655)   → two lines
-   *   CD double mid(109,121.5):perp_CD=(0.756,0.655)   → two lines
+   * Ticks (AB/AD unchanged; CB/CD recomputed for new C):
+   *   AB single mid(51,54):   perp=(-0.761,-0.649) → (56,59)→(46,50)
+   *   AD single mid(109,54):  perp=(-0.761, 0.649) → (114,50)→(104,59)
    *
-   * Angle arcs r=14 at ∠B and ∠D (equal angles in kite):
+   *   CB double mid(51,129): unit=(-0.578,-0.817), perp=(0.817,-0.578), half=6.5
+   *     c1=mid-2·unit=(52.2,130.6): (47,134)→(58,127)
+   *     c2=mid+2·unit=(49.8,127.4): (45,131)→(55,124)
+   *
+   *   CD double mid(109,129): unit=(-0.578,0.817), perp=(-0.817,-0.578)
+   *     c1=mid-2·unit=(110.2,127.4): (116,131)→(105,124)
+   *     c2=mid+2·unit=(107.8,130.6): (113,134)→(103,127)
+   *
+   * Angle arcs r=14 at ∠B and ∠D (unchanged):
    *   ∠B at B(22,88):  start BA (31,77), end BC (31,99), sweep CW(1)
    *   ∠D at D(138,88): start DA (129,77), end DC (129,99), sweep CCW(0)
    *
-   * Kite 2: offset x+175  A'(255,20) B'(197,88) C'(255,155) D'(313,88)
+   * Kite 2: offset x+175  A'(255,20) B'(197,88) C'(255,170) D'(313,88)
    */
-  <svg viewBox="0 0 340 175" className="w-full max-w-sm mx-auto">
-    <rect x="0" y="0" width="340" height="175" rx="10" fill="#0f172a" fillOpacity="0.5" />
+  <svg viewBox="0 0 340 192" className="w-full max-w-sm mx-auto">
+    <rect x="0" y="0" width="340" height="192" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
-    {/* ── Kite 1: A(80,20) B(22,88) C(80,155) D(138,88) — rose ── */}
-    <polygon points="80,20 22,88 80,155 138,88"
+    {/* ── Kite 1: A(80,20) B(22,88) C(80,170) D(138,88) — rose ── */}
+    <polygon points="80,20 22,88 80,170 138,88"
       fill="#f43f5e" fillOpacity="0.2" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
     <circle cx="80"  cy="20"  r="3" fill="#fb7185" />
     <circle cx="22"  cy="88"  r="3" fill="#fb7185" />
-    <circle cx="80"  cy="155" r="3" fill="#fb7185" />
+    <circle cx="80"  cy="170" r="3" fill="#fb7185" />
     <circle cx="138" cy="88"  r="3" fill="#fb7185" />
     <text x="74"  y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">A</text>
     <text x="7"   y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="74"  y="170" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">C</text>
+    <text x="74"  y="186" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">C</text>
     <text x="141" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">D</text>
 
-    {/* AB single tick — mid(51,54), perp=(-0.761,-0.649), half=7 */}
-    {/* mid - 7*perp = (51+5.33,54+4.54)=(56,59); mid + 7*perp = (51-5.33,54-4.54)=(46,50) */}
+    {/* AB single tick — unchanged mid(51,54) */}
     <line x1="56" y1="59" x2="46" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
-
-    {/* AD single tick — mid(109,54), perp=(-0.761,0.649), half=7 */}
-    {/* mid - 7*perp = (109+5.33,54-4.54)=(114,50); mid + 7*perp = (109-5.33,54+4.54)=(104,59) */}
+    {/* AD single tick — unchanged mid(109,54) */}
     <line x1="114" y1="50" x2="104" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
 
-    {/* CB double tick — mid(51,121.5), unit=(-0.655,-0.756), perp=(0.756,-0.655) */}
-    {/* c1=mid-2*unit=(52.3,123.0): line (47,127)→(57,119)  */}
-    {/* c2=mid+2*unit=(49.7,120.0): line (45,124)→(55,116)  */}
-    <line x1="47" y1="127" x2="57" y2="119" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="45" y1="124" x2="55" y2="116" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    {/* CB double tick — new mid(51,129), perp=(0.817,−0.578) */}
+    {/* c1=(52.2,130.6): (47,134)→(58,127)   c2=(49.8,127.4): (45,131)→(55,124) */}
+    <line x1="47" y1="134" x2="58" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="45" y1="131" x2="55" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
 
-    {/* CD double tick — mid(109,121.5), unit=(0.655,-0.756), perp=(0.756,0.655) */}
-    {/* c1=(107.7,123.0): line (103,119)→(113,127)  */}
-    {/* c2=(110.3,120.0): line (105,116)→(115,124)  */}
-    <line x1="103" y1="119" x2="113" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="105" y1="116" x2="115" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    {/* CD double tick — new mid(109,129), perp=(−0.817,−0.578) */}
+    {/* c1=(110.2,127.4): (116,131)→(105,124)   c2=(107.8,130.6): (113,134)→(103,127) */}
+    <line x1="116" y1="131" x2="105" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="113" y1="134" x2="103" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
 
     {/* ∠B — orange, CW (sweep=1), r=14 */}
     <path d="M 31,77 A 14,14 0 0,1 31,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
-    {/* ∠D — orange, CCW (sweep=0), r=14 (equal to ∠B) */}
+    {/* ∠D — orange, CCW (sweep=0), r=14 */}
     <path d="M 129,77 A 14,14 0 0,0 129,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
 
-    {/* ≅ — centred at x=167, midpoint of D(138) and B'(197), gap ≈23px each side */}
+    {/* ≅ — centred at x=167, midpoint of D(138) and B'(197) */}
     <text x="167" y="97" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* ── Kite 2: A'(255,20) B'(197,88) C'(255,155) D'(313,88) — x+175 ── */}
-    <polygon points="255,20 197,88 255,155 313,88"
+    {/* ── Kite 2: A'(255,20) B'(197,88) C'(255,170) D'(313,88) — x+175 ── */}
+    <polygon points="255,20 197,88 255,170 313,88"
       fill="#f43f5e" fillOpacity="0.15" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
     <circle cx="255" cy="20"  r="3" fill="#fb7185" />
     <circle cx="197" cy="88"  r="3" fill="#fb7185" />
-    <circle cx="255" cy="155" r="3" fill="#fb7185" />
+    <circle cx="255" cy="170" r="3" fill="#fb7185" />
     <circle cx="313" cy="88"  r="3" fill="#fb7185" />
     <text x="249" y="15"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">P</text>
     <text x="182" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="249" y="170" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="249" y="186" fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">R</text>
     <text x="316" y="93"  fontSize="12" fill="#fda4af" fontWeight="bold" fontFamily="sans-serif">S</text>
 
     {/* PQ single tick — x+175 from AB */}
     <line x1="231" y1="59" x2="221" y2="50" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
     {/* PS single tick — x+175 from AD */}
     <line x1="289" y1="50" x2="279" y2="59" stroke="#facc15" strokeWidth="2.2" strokeLinecap="round" />
+
     {/* RQ double tick — x+175 from CB */}
-    <line x1="222" y1="127" x2="232" y2="119" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="220" y1="124" x2="230" y2="116" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="222" y1="134" x2="233" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="220" y1="131" x2="230" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
     {/* RS double tick — x+175 from CD */}
-    <line x1="278" y1="119" x2="288" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="280" y1="116" x2="290" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="291" y1="131" x2="280" y2="124" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="288" y1="134" x2="278" y2="127" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
 
     {/* ∠Q — orange, CW (sweep=1), r=14 */}
     <path d="M 206,77 A 14,14 0 0,1 206,99" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
