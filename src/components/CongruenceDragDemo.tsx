@@ -192,7 +192,7 @@ function renderRhombus(cx: number, cy: number, fill: string, stroke: string, op:
 }
 
 function renderKite(cx: number, cy: number, fill: string, stroke: string, op: number) {
-  const ax = cx, ay = cy - 72, bx = cx - 46, by = cy + 5, ccx = cx, ccy = cy + 80, dx = cx + 46, dy = cy + 5;
+  const ax = cx, ay = cy - 72, bx = cx - 46, by = cy + 5, ccx = cx, ccy = cy + 108, dx = cx + 46, dy = cy + 5;
   return (
     <g>
       <polygon points={`${ax},${ay} ${bx},${by} ${ccx},${ccy} ${dx},${dy}`}
@@ -240,7 +240,7 @@ const SHAPES: Record<CongruentShapeType, { render: RenderFn; vbH: number; cy: nu
   rectangle:     { render: renderRectangle,      vbH: 185, cy: 90  },
   parallelogram: { render: renderParallelogram,  vbH: 190, cy: 93  },
   rhombus:       { render: renderRhombus,        vbH: 200, cy: 100 },
-  kite:          { render: renderKite,           vbH: 230, cy: 112 },
+  kite:          { render: renderKite,           vbH: 258, cy: 112 },
   circle:        { render: renderCircle,         vbH: 185, cy: 90  },
   trapezoid:     { render: renderTrapezoid,      vbH: 190, cy: 93  },
 };
@@ -293,10 +293,10 @@ const SHAPE_VERTS: Partial<Record<CongruentShapeType, VertexDef[]>> = {
   ],
   // kite: A=top, B=left, C=bottom, D=right
   kite: [
-    { dx:   0, dy: -72, anchor: "middle", lx:  0, ly:  -7 },
-    { dx: -46, dy:  +5, anchor: "end",    lx: -5, ly: +4  },
-    { dx:   0, dy: +80, anchor: "middle", lx:  0, ly: +14 },
-    { dx: +46, dy:  +5, anchor: "start",  lx: +5, ly: +4  },
+    { dx:   0, dy:  -72, anchor: "middle", lx:  0, ly:  -7 },
+    { dx: -46, dy:   +5, anchor: "end",    lx: -5, ly: +4  },
+    { dx:   0, dy: +108, anchor: "middle", lx:  0, ly: +14 },
+    { dx: +46, dy:   +5, anchor: "start",  lx: +5, ly: +4  },
   ],
   // circle: single center point — label positioned above the circle
   circle: [
