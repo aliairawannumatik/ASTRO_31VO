@@ -183,6 +183,12 @@ function renderRhombus(cx: number, cy: number, fill: string, stroke: string, op:
     <g>
       <polygon points={`${ax},${ay} ${bx},${by} ${ccx},${ccy} ${dx},${dy}`}
         fill={fill} fillOpacity={op} stroke={stroke} strokeWidth="2.2" strokeLinejoin="round" />
+      {/* diagonal AC — vertical */}
+      <line x1={ax} y1={ay} x2={ccx} y2={ccy}
+        stroke={stroke} strokeWidth="1.2" strokeDasharray="4 3" opacity="0.45" />
+      {/* diagonal BD — horizontal */}
+      <line x1={dx} y1={dy} x2={bx} y2={by}
+        stroke={stroke} strokeWidth="1.2" strokeDasharray="4 3" opacity="0.45" />
       {mkTick(ax, ay, bx, by, 1, stroke)}
       {mkTick(bx, by, ccx, ccy, 1, stroke)}
       {mkTick(ccx, ccy, dx, dy, 1, stroke)}
@@ -197,6 +203,12 @@ function renderKite(cx: number, cy: number, fill: string, stroke: string, op: nu
     <g>
       <polygon points={`${ax},${ay} ${bx},${by} ${ccx},${ccy} ${dx},${dy}`}
         fill={fill} fillOpacity={op} stroke={stroke} strokeWidth="2.2" strokeLinejoin="round" />
+      {/* diagonal AC — vertical */}
+      <line x1={ax} y1={ay} x2={ccx} y2={ccy}
+        stroke={stroke} strokeWidth="1.2" strokeDasharray="4 3" opacity="0.45" />
+      {/* diagonal BD — horizontal */}
+      <line x1={bx} y1={by} x2={dx} y2={dy}
+        stroke={stroke} strokeWidth="1.2" strokeDasharray="4 3" opacity="0.45" />
       {mkTick(ax, ay, bx, by, 1, stroke)}
       {mkTick(ax, ay, dx, dy, 1, stroke)}
       {mkTick(bx, by, ccx, ccy, 2, stroke)}
