@@ -51,12 +51,13 @@ function Poly({ pts, color, fill, label, dashed }: { pts: [number, number][]; co
   );
 }
 
-function Dot({ x, y, color, label, ghost }: { x: number; y: number; color: string; label?: string; ghost?: boolean }) {
+function Dot({ x, y, color, label, labelColor, ghost }: { x: number; y: number; color: string; label?: string; labelColor?: string; ghost?: boolean }) {
+  const lc = labelColor ?? color;
   return (
     <g>
       <circle cx={px(x)} cy={py(y)} r={5} fill={ghost ? "none" : color} stroke={color} strokeWidth={ghost ? 1.5 : 0}
         strokeDasharray={ghost ? "3,2" : undefined} fillOpacity={ghost ? 0 : 1} strokeOpacity={ghost ? 0.5 : 1} />
-      {label && <text x={px(x) + 7} y={py(y) - 5} fill={color} fontSize="8" fontWeight="bold" fillOpacity={ghost ? 0.5 : 1}>{label}</text>}
+      {label && <text x={px(x) + 7} y={py(y) - 5} fill={lc} fontSize="8" fontWeight="bold" fillOpacity={ghost ? 0.5 : 1}>{label}</text>}
     </g>
   );
 }
@@ -103,18 +104,29 @@ function DirPad({ onMove, onReset }: { onMove: (d: Dir4) => void; onReset: () =>
 /* ── Legend: valid directions ── */
 function ArahLegend() {
   return (
-    <div className="bg-slate-800/70 border border-slate-600/40 rounded-xl px-4 py-3 text-xs font-body space-y-1.5">
+    <div className="w-full bg-slate-800/70 border border-slate-600/40 rounded-xl px-4 py-3 text-xs font-body">
       <p className="text-white/50 font-semibold text-[10px] uppercase tracking-wider mb-2">Petunjuk Arah</p>
-      {[["↑", "Geser Atas"], ["↓", "Geser Bawah"], ["←", "Geser Kiri"], ["→", "Geser Kanan"]].map(([arrow, label]) => (
-        <div key={label} className="flex items-center gap-2">
-          <span className="text-green-400 font-bold w-4 text-center">{arrow}</span>
-          <span className="text-green-300/80">{label} ✓</span>
-        </div>
-      ))}
+      <p className="text-yellow-300/80 text-[10px] font-body mb-2">
+        Vektor translasi <span className="font-bold text-yellow-300">T(a, b)</span>
+      </p>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+        {[
+          ["→", "Geser Kanan", "(+a)"],
+          ["←", "Geser Kiri",  "(−a)"],
+          ["↑", "Geser Atas",  "(+b)"],
+          ["↓", "Geser Bawah", "(−b)"],
+        ].map(([arrow, label, note]) => (
+          <div key={label} className="flex items-center gap-1.5">
+            <span className="text-green-400 font-bold w-4 text-center shrink-0">{arrow}</span>
+            <span className="text-green-300/80">{label}</span>
+            <span className="text-yellow-300/70 text-[9px]">{note}</span>
+          </div>
+        ))}
+      </div>
       <div className="mt-2 pt-2 border-t border-slate-600/40 flex items-center gap-2">
         <span className="text-red-400 font-bold">↗</span>
-        <span className="text-red-400/80 line-through">Miring</span>
-        <span className="text-red-400 text-[10px]">❌</span>
+        <span className="text-red-400/80 line-through text-[11px]">Miring</span>
+        <span className="text-red-400 text-[10px]">❌ Tidak diizinkan</span>
       </div>
     </div>
   );
@@ -153,7 +165,7 @@ function AnimasiTitik() {
       <div className="flex justify-center">
         <Grid accent="#22d3ee">
           {/* Ghost origin */}
-          <Dot x={OX} y={OY} color="#ef4444" label={`A(${OX},${OY})`} ghost />
+          <Dot x={OX} y={OY} color="#ef4444" labelColor="#22d3ee" label={`A(${OX},${OY})`} ghost />
           {/* Arrow */}
           {moved && <Arrow x1={OX} y1={OY} x2={pos.x} y2={pos.y} color="#facc15" />}
           {/* Vector label mid-arrow */}
@@ -165,7 +177,7 @@ function AnimasiTitik() {
             >T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</text>
           )}
           {/* Current point */}
-          <Dot x={pos.x} y={pos.y} color="#ef4444" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
+          <Dot x={pos.x} y={pos.y} color="#ef4444" labelColor="#22d3ee" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
         </Grid>
       </div>
 
@@ -185,8 +197,8 @@ function AnimasiTitik() {
         )}
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center justify-center gap-6">
+      {/* Controls — portrait: pad centered on top, legend below */}
+      <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-center sm:gap-6">
         <DirPad onMove={move} onReset={() => { setPos({ x: OX, y: OY }); setLastDir(null); }} />
         <ArahLegend />
       </div>
