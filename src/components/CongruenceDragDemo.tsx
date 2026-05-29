@@ -117,6 +117,15 @@ function renderTriangleAngleMarks(
   );
 }
 
+function mkRightAngle(cx: number, cy: number, dx: number, dy: number, color: string) {
+  return (
+    <g opacity="0.75">
+      <line x1={cx + dx} y1={cy} x2={cx + dx} y2={cy + dy} stroke={color} strokeWidth="1.4" />
+      <line x1={cx} y1={cy + dy} x2={cx + dx} y2={cy + dy} stroke={color} strokeWidth="1.4" />
+    </g>
+  );
+}
+
 function renderSquare(cx: number, cy: number, fill: string, stroke: string, op: number) {
   const s = 43;
   return (
@@ -127,6 +136,10 @@ function renderSquare(cx: number, cy: number, fill: string, stroke: string, op: 
       {mkTick(cx + s, cy - s, cx + s, cy + s, 1, stroke)}
       {mkTick(cx + s, cy + s, cx - s, cy + s, 1, stroke)}
       {mkTick(cx - s, cy + s, cx - s, cy - s, 1, stroke)}
+      {mkRightAngle(cx - s, cy - s, +8, +8, stroke)}
+      {mkRightAngle(cx + s, cy - s, -8, +8, stroke)}
+      {mkRightAngle(cx + s, cy + s, -8, -8, stroke)}
+      {mkRightAngle(cx - s, cy + s, +8, -8, stroke)}
     </g>
   );
 }
@@ -141,6 +154,10 @@ function renderRectangle(cx: number, cy: number, fill: string, stroke: string, o
       {mkTick(cx + pw, cy - ph, cx + pw, cy + ph, 1, stroke)}
       {mkTick(cx + pw, cy + ph, cx - pw, cy + ph, 2, stroke)}
       {mkTick(cx - pw, cy + ph, cx - pw, cy - ph, 1, stroke)}
+      {mkRightAngle(cx - pw, cy - ph, +8, +8, stroke)}
+      {mkRightAngle(cx + pw, cy - ph, -8, +8, stroke)}
+      {mkRightAngle(cx + pw, cy + ph, -8, -8, stroke)}
+      {mkRightAngle(cx - pw, cy + ph, +8, -8, stroke)}
     </g>
   );
 }
