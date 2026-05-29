@@ -1372,26 +1372,83 @@ const KekongruenBangunDatarPage = () => {
                 <div className="border-l-4 border-orange-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-orange-500/20 text-orange-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 3 — Persegi Panjang</span>
+                    <span className="font-body font-semibold text-white">Contoh 3 — Mencari Nilai m</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">
-                      Persegi panjang ABCD memiliki panjang 12 cm dan lebar 5 cm. Persegi panjang EFGH
-                      memiliki panjang 12 cm dan lebar 5 cm. Apakah ABCD ≅ EFGH? Tuliskan semua pasangan
-                      sisi dan sudut yang bersesuaian!
+                      Jika <InlineMath math="\triangle ABC \cong \triangle PQR" />, maka nilai <InlineMath math="m" /> = . . . .
                     </p>
+                    {/*
+                      Left  △ABC : A(20,165) B(120,165) C(55,25)
+                        ∠A=60° (bottom-left), ∠B=70° (bottom-right), ∠C=50°
+                        side AC labeled "12 - m" (left side)
+                      Right △PQR : P(148,165) Q(242,165) R(196,30)
+                        ∠P=60° (bottom-left), ∠R=50° (top), ∠Q=70°
+                        side PR labeled "5" (left side)
+                      Corresponding: A↔P, B↔Q, C↔R  →  AC=PR  →  12-m=5  →  m=7
+                    */}
+                    <svg viewBox="0 0 270 195" className="w-full max-w-sm mx-auto">
+                      {/* ===== Left triangle ABC ===== */}
+                      <polygon points="20,165 120,165 55,25"
+                        fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
+
+                      {/* Side label "12 - m" on AC (left side) */}
+                      <text x="12" y="103" fontSize="11" fill="#ffffff" fontFamily="serif" fontStyle="italic"
+                        textAnchor="middle" transform="rotate(-57,12,103)">12 – m</text>
+
+                      {/* Angle arc at A (60°) */}
+                      <path d="M 32,165 A 12,12 0 0,0 26,154" fill="none" stroke="#facc15" strokeWidth="1" />
+                      <text x="33" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
+
+                      {/* Angle arc at B (70°) */}
+                      <path d="M 108,165 A 12,12 0 0,1 113,153" fill="none" stroke="#facc15" strokeWidth="1" />
+                      <text x="85" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">70°</text>
+
+                      {/* Vertex labels ABC */}
+                      <text x="8"   y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
+                      <text x="118" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
+                      <text x="48"  y="18"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
+
+                      {/* ===== Right triangle PQR ===== */}
+                      <polygon points="148,165 242,165 196,30"
+                        fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
+
+                      {/* Side label "5" on PR (left side) */}
+                      <text x="163" y="105" fontSize="12" fill="#ffffff" fontFamily="serif" fontStyle="italic"
+                        textAnchor="middle">5</text>
+
+                      {/* Angle arc at P (60°) */}
+                      <path d="M 160,165 A 12,12 0 0,0 154,154" fill="none" stroke="#facc15" strokeWidth="1" />
+                      <text x="161" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
+
+                      {/* Angle arc at R (50°) */}
+                      <path d="M 188,42 A 12,12 0 0,1 204,42" fill="none" stroke="#facc15" strokeWidth="1" />
+                      <text x="183" y="55"  fontSize="10" fill="#ffffff" fontFamily="serif">50°</text>
+
+                      {/* Vertex labels PQR */}
+                      <text x="136" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
+                      <text x="240" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
+                      <text x="193" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
+                    </svg>
+
+                    <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
+                      <p>A. &nbsp;4</p>
+                      <p>C. &nbsp;6</p>
+                      <p>B. &nbsp;5</p>
+                      <p>D. &nbsp;7</p>
+                    </div>
                   </div>
                   <div className="bg-orange-500/5 border border-orange-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-orange-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p>Karena <InlineMath math="\triangle ABC \cong \triangle PQR" />, sisi-sisi bersesuaian adalah:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>① <InlineMath math="AB = EF = 12 \text{ cm}" /> ✓</p>
-                        <p>② <InlineMath math="BC = FG = 5 \text{ cm}" /> ✓</p>
-                        <p>③ Semua sudut = 90° ✓</p>
+                        <p><InlineMath math="A \leftrightarrow P,\quad B \leftrightarrow Q,\quad C \leftrightarrow R" /></p>
+                        <p>Sisi AC bersesuaian dengan sisi PR</p>
+                        <p><InlineMath math="AC = PR \Rightarrow 12 - m = 5" /></p>
+                        <p><InlineMath math="m = 12 - 5 = 7" /></p>
                       </div>
-                      <p><strong className="text-orange-300">ABCD ≅ EFGH ✓</strong></p>
-                      <p className="text-xs">Pasangan sisi: <InlineMath math="AB=EF,\; BC=FG,\; CD=GH,\; DA=HE" /></p>
-                      <p className="text-xs">Pasangan sudut: <InlineMath math="\angle A=\angle E=\angle B=\angle F=\angle C=\angle G=\angle D=\angle H=90°" /></p>
+                      <p><strong className="text-orange-300">Jawaban: D. 7 ✓</strong></p>
                     </div>
                   </div>
                 </div>
