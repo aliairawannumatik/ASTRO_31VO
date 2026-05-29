@@ -1453,44 +1453,6 @@ const KekongruenBangunDatarPage = () => {
                   </div>
                 </div>
 
-                {/* SULIT */}
-                <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
-                    <span className="font-body font-semibold text-white">Contoh 4 — Segitiga (RRR) dalam Persegi Panjang</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      ABCD adalah persegi panjang. Buktikan bahwa
-                      <InlineMath math="\triangle ABD \cong \triangle CDB" />!
-                      Kemudian tuliskan semua pasangan rusuk dan sudut yang bersesuaian!
-                    </p>
-                  </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-3 font-body text-sm text-white/80">
-                      <p>Perhatikan △ABD dan △CDB (BD adalah diagonal persekutuan):</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>① <InlineMath math="AB = CD" /> (sisi berhadapan persegi panjang sama panjang)</p>
-                        <p>② <InlineMath math="AD = CB" /> (sisi berhadapan persegi panjang sama panjang)</p>
-                        <p>③ <InlineMath math="BD = BD" /> (diagonal persekutuan)</p>
-                      </div>
-                      <p>Ketiga pasang rusuk sama panjang → <strong className="text-red-300">Syarat RRR ✓</strong></p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\therefore \triangle ABD \cong \triangle CDB \text{ (RRR)}" />
-                      </div>
-                      <p className="font-semibold">Pasangan rusuk bersesuaian:</p>
-                      <div className="bg-slate-900/50 rounded p-3 text-xs space-y-1">
-                        <p><InlineMath math="AB = CD,\quad AD = CB,\quad BD = DB" /></p>
-                      </div>
-                      <p className="font-semibold">Pasangan sudut bersesuaian:</p>
-                      <div className="bg-slate-900/50 rounded p-3 text-xs space-y-1">
-                        <p><InlineMath math="\angle ABD = \angle CDB,\quad \angle ADB = \angle CBD,\quad \angle DAB = \angle BCD" /></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
               </div>
             )}
           </div>
