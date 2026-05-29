@@ -711,23 +711,83 @@ const DefinisiPage = () => {
             )}
           </div>
 
-          {/* RANGKUMAN */}
-          <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-5 space-y-3">
-            <p className="font-body text-sm font-semibold text-cyan-300">🌟 Rangkuman Definisi</p>
-            <div className="overflow-x-auto">
-              <table className="w-full font-body text-xs text-white/80">
-                <thead><tr className="border-b border-cyan-500/30">
-                  <th className="text-left py-2 text-cyan-300">Konsep</th>
-                  <th className="text-left py-2 text-cyan-300">Sudut</th>
-                  <th className="text-left py-2 text-cyan-300">Rusuk</th>
-                  <th className="text-left py-2 text-cyan-300">Simbol</th>
-                </tr></thead>
-                <tbody className="divide-y divide-slate-700">
-                  <tr><td className="py-2 text-green-300">Sebangun</td><td className="py-2">Sama besar</td><td className="py-2">Sebanding (k)</td><td className="py-2"><InlineMath math="\sim" /></td></tr>
-                  <tr><td className="py-2 text-purple-300">Kongruen</td><td className="py-2">Sama besar</td><td className="py-2">Sama panjang (k=1)</td><td className="py-2"><InlineMath math="\cong" /></td></tr>
-                </tbody>
-              </table>
+          {/* ── RANGKUMAN, TIPS & TRIK, KESIMPULAN ── */}
+          <div className="space-y-4">
+
+            {/* Rangkuman */}
+            <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-5 space-y-4">
+              <p className="font-body text-base font-bold text-cyan-300">📋 Rangkuman — Definisi Kesebangunan &amp; Kekongruenan</p>
+              <div className="overflow-x-auto">
+                <table className="w-full font-body text-xs text-white/80">
+                  <thead><tr className="border-b border-cyan-500/30">
+                    <th className="text-left py-2 pr-3 text-cyan-300">Konsep</th>
+                    <th className="text-left py-2 pr-3 text-cyan-300">Sudut</th>
+                    <th className="text-left py-2 pr-3 text-cyan-300">Rusuk</th>
+                    <th className="text-left py-2 pr-3 text-cyan-300">Faktor Skala</th>
+                    <th className="text-left py-2 text-cyan-300">Simbol</th>
+                  </tr></thead>
+                  <tbody className="divide-y divide-slate-700">
+                    <tr>
+                      <td className="py-2 pr-3 text-green-300 font-semibold">Sebangun</td>
+                      <td className="py-2 pr-3">Sama besar</td>
+                      <td className="py-2 pr-3">Sebanding</td>
+                      <td className="py-2 pr-3"><InlineMath math="k \neq 0" /> (bebas)</td>
+                      <td className="py-2"><InlineMath math="\sim" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-3 text-purple-300 font-semibold">Kongruen</td>
+                      <td className="py-2 pr-3">Sama besar</td>
+                      <td className="py-2 pr-3">Sama panjang</td>
+                      <td className="py-2 pr-3"><InlineMath math="k = 1" /></td>
+                      <td className="py-2"><InlineMath math="\cong" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 font-body text-xs text-white/75">
+                <p>📌 <strong className="text-cyan-300">Hubungan penting:</strong> Kongruen ⊂ Sebangun (setiap bangun yang kongruen pasti sebangun, tetapi tidak sebaliknya)</p>
+                <p>📌 Sebangun = "bentuk sama, ukuran bisa berbeda" &nbsp;|&nbsp; Kongruen = "bentuk sama, ukuran tepat sama"</p>
+                <p>📌 Dua bangun sebangun jika: (1) semua sudut bersesuaian sama besar, DAN (2) semua rusuk bersesuaian sebanding dengan rasio <InlineMath math="k" /> yang konstan</p>
+              </div>
             </div>
+
+            {/* Tips & Trik */}
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-amber-300">💡 Tips &amp; Trik</p>
+              <div className="space-y-3 font-body text-sm text-white/80">
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">①</span>
+                  <p><strong className="text-amber-300">Cara cepat bedakan Sebangun vs Kongruen:</strong> Tanyakan "apakah ukurannya persis sama?" — jika YA → kongruen; jika TIDAK tapi bentuknya sama → sebangun.</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">②</span>
+                  <p><strong className="text-amber-300">Hitung faktor skala k:</strong> Pilih sembarang pasang rusuk yang bersesuaian, lalu bagi: <InlineMath math="k = \frac{\text{rusuk besar}}{\text{rusuk kecil}}" />. Cek dengan pasangan lain — jika sama, berarti sebangun ✓</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">③</span>
+                  <p><strong className="text-amber-300">Perhatikan urutan penulisan:</strong> <InlineMath math="ABCD \sim PQRS" /> artinya A↔P, B↔Q, C↔R, D↔S. Urutan huruf menentukan pasangan sisi dan sudut!</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">④</span>
+                  <p><strong className="text-amber-300">Bangun beraturan sejenis selalu sebangun:</strong> Semua lingkaran sebangun, semua persegi sebangun, semua segitiga sama sisi sebangun — karena sudutnya selalu sama!</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Kesimpulan */}
+            <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-green-300">✅ Kesimpulan</p>
+              <div className="space-y-2 font-body text-sm text-white/80">
+                <p>Kesebangunan dan kekongruenan adalah dua konsep dasar dalam geometri yang mendeskripsikan <strong className="text-yellow-300">hubungan antara dua bangun datar</strong>.</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <p>🔹 <strong className="text-green-300">Sebangun (<InlineMath math="\sim" />)</strong> — "saudara kembar berbeda ukuran": bentuk sama, sudut sama, sisi sebanding</p>
+                  <p>🔹 <strong className="text-purple-300">Kongruen (<InlineMath math="\cong" />)</strong> — "kembar identik": bentuk sama, sudut sama, sisi sama persis</p>
+                  <p>🔹 Kongruen adalah kasus khusus sebangun dengan faktor skala <InlineMath math="k = 1" /></p>
+                </div>
+                <p className="text-xs text-white/55 italic">Konsep ini menjadi dasar untuk mempelajari segitiga sebangun, menghitung panjang rusuk, dan membuktikan sifat-sifat geometri lanjutan.</p>
+              </div>
+            </div>
+
           </div>
 
         </div>

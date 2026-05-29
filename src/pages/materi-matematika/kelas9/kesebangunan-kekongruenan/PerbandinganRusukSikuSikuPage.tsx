@@ -1027,6 +1027,103 @@ const PerbandinganRusukSikuSikuPage = () => {
           </div>
 
 
+          {/* ── RANGKUMAN, TIPS & TRIK, KESIMPULAN ── */}
+          <div className="space-y-4">
+
+            {/* Rangkuman */}
+            <div className="bg-gradient-to-br from-violet-900/40 to-purple-900/40 border border-violet-500/30 rounded-xl p-5 space-y-4">
+              <p className="font-body text-base font-bold text-violet-300">📋 Rangkuman — Perbandingan Rusuk Segitiga Siku-Siku</p>
+              <p className="font-body text-xs text-white/60">Pada segitiga siku-siku ABC (siku-siku di A), dengan garis tinggi AD tegak lurus BC:</p>
+              <div className="overflow-x-auto">
+                <table className="w-full font-body text-xs text-white/80">
+                  <thead>
+                    <tr className="border-b border-violet-500/30">
+                      <th className="text-left py-2 pr-4 text-violet-300">Rumus</th>
+                      <th className="text-left py-2 pr-4 text-violet-300">Artinya</th>
+                      <th className="text-left py-2 text-violet-300">Ingatan</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-700">
+                    <tr>
+                      <td className="py-2 pr-4 font-mono"><InlineMath math="AD^2 = BD \times DC" /></td>
+                      <td className="py-2 pr-4">Garis tinggi = rata-rata geometri dua segmen alas</td>
+                      <td className="py-2 text-yellow-300">Tengah × dua ujung</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 font-mono"><InlineMath math="AB^2 = BD \times BC" /></td>
+                      <td className="py-2 pr-4">Sisi miring kiri² = segmen kiri × seluruh alas</td>
+                      <td className="py-2 text-cyan-300">Kaki kiri × alas penuh</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 font-mono"><InlineMath math="AC^2 = DC \times BC" /></td>
+                      <td className="py-2 pr-4">Sisi miring kanan² = segmen kanan × seluruh alas</td>
+                      <td className="py-2 text-green-300">Kaki kanan × alas penuh</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 font-body text-xs text-white/75">
+                <p>📌 <strong className="text-violet-300">Tiga segitiga sebangun:</strong> △ABC ~ △ABD ~ △ACD (semua memiliki sudut yang sama)</p>
+                <p>📌 <strong className="text-violet-300">Hubungan dengan Pythagoras:</strong> Rumus-rumus ini dapat diturunkan dari teorema Pythagoras + kesebangunan segitiga</p>
+                <p>📌 <strong className="text-violet-300">Syarat:</strong> Garis AD harus tegak lurus (⊥) terhadap BC agar semua rumus berlaku</p>
+              </div>
+            </div>
+
+            {/* Tips & Trik */}
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-amber-300">💡 Tips &amp; Trik — Teknik Air Terjun</p>
+              <div className="space-y-3 font-body text-sm text-white/80">
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">①</span>
+                  <div>
+                    <p><strong className="text-amber-300">Teknik Air Terjun — ingat pola seperti ini:</strong></p>
+                    <div className="bg-slate-900/50 rounded p-3 mt-1 font-mono text-xs space-y-1 text-center">
+                      <p className="text-yellow-300">AD² = BD · DC</p>
+                      <p className="text-cyan-300">AB² = BD · BC &nbsp; | &nbsp; AC² = DC · BC</p>
+                      <p className="text-white/50 text-xs mt-1">⬆ segmen kecil · segmen besar = sisi² yang "terjepit"</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">②</span>
+                  <div>
+                    <p><strong className="text-amber-300">Urutan langkah saat mengerjakan soal:</strong></p>
+                    <ol className="list-decimal list-inside space-y-1 ml-2 text-white/70 text-xs mt-1">
+                      <li>Gambar segitiga dan beri label BD, DC, BC, AD, AB, AC</li>
+                      <li>Cari BC terlebih dulu jika belum diketahui: <InlineMath math="BC = BD + DC" /></li>
+                      <li>Gunakan rumus yang sesuai untuk mencari yang ditanya</li>
+                      <li>Cek dengan Pythagoras: <InlineMath math="AB^2 + AC^2 = BC^2" /></li>
+                    </ol>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">③</span>
+                  <p><strong className="text-amber-300">Soal luas segitiga:</strong> Luas △ABC bisa dihitung dua cara: <InlineMath math="\frac{1}{2} \times BC \times AD" /> atau <InlineMath math="\frac{1}{2} \times AB \times AC" />. Gunakan cara yang lebih mudah berdasarkan data yang diketahui.</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">④</span>
+                  <p><strong className="text-amber-300">Notasi bervariasi:</strong> Soal bisa memakai segitiga ABC siku-siku di A, atau segitiga lain. Yang penting: identifikasi dulu <em>titik siku-siku</em> dan <em>kaki garis tinggi</em>-nya, lalu terapkan pola yang sama.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Kesimpulan */}
+            <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-green-300">✅ Kesimpulan</p>
+              <div className="space-y-2 font-body text-sm text-white/80">
+                <p>Garis tinggi pada segitiga siku-siku menciptakan <strong className="text-yellow-300">tiga segitiga yang semuanya sebangun</strong> satu sama lain, dan dari kesebangunan inilah lahir ketiga rumus perbandingan rusuk.</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <p>🔹 Satu garis tinggi AD menghasilkan <strong className="text-violet-300">3 rumus sekaligus</strong>: untuk AD, AB, dan AC</p>
+                  <p>🔹 Semua rumus berasal dari satu prinsip: <strong className="text-cyan-300">mean geometri dua segmen</strong></p>
+                  <p>🔹 Rumus ini sering diuji dalam soal HOTS — kuasai langkah sistematisnya!</p>
+                  <p>🔹 Selalu akhiri dengan cek Pythagoras untuk memvalidasi jawaban</p>
+                </div>
+                <p className="text-xs text-white/55 italic">Topik ini menggabungkan kesebangunan segitiga dengan teorema Pythagoras — dua konsep paling fundamental dalam geometri SMP.</p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/kesebangunan-kekongruenan"); }} className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">

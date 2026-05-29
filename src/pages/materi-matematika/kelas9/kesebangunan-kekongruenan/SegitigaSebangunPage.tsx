@@ -1074,6 +1074,97 @@ const SegitigaSebangunPage = () => {
               </div>
           </div>
 
+          {/* ── RANGKUMAN, TIPS & TRIK, KESIMPULAN ── */}
+          <div className="space-y-4">
+
+            {/* Rangkuman */}
+            <div className="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 border border-blue-500/30 rounded-xl p-5 space-y-4">
+              <p className="font-body text-base font-bold text-blue-300">📋 Rangkuman — Segitiga Sebangun</p>
+              <div className="overflow-x-auto">
+                <table className="w-full font-body text-xs text-white/80">
+                  <thead>
+                    <tr className="border-b border-blue-500/30">
+                      <th className="text-left py-2 pr-4 text-blue-300">Syarat</th>
+                      <th className="text-left py-2 pr-4 text-blue-300">Yang Diperlukan</th>
+                      <th className="text-left py-2 text-blue-300">Contoh</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-700">
+                    <tr>
+                      <td className="py-2 pr-4 text-green-300 font-bold">AA</td>
+                      <td className="py-2 pr-4">2 pasang sudut sama besar</td>
+                      <td className="py-2"><InlineMath math="\angle A=\angle P,\;\angle B=\angle Q" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 text-purple-300 font-bold">SAS (RAR)</td>
+                      <td className="py-2 pr-4">2 pasang sisi sebanding + sudut apit sama</td>
+                      <td className="py-2"><InlineMath math="\frac{AB}{PQ}=\frac{AC}{PR},\;\angle A=\angle P" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 text-cyan-300 font-bold">SSS (RRR)</td>
+                      <td className="py-2 pr-4">3 pasang sisi bersesuaian sebanding</td>
+                      <td className="py-2"><InlineMath math="\frac{AB}{PQ}=\frac{BC}{QR}=\frac{AC}{PR}" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 font-body text-xs text-white/75">
+                <p>📌 <strong className="text-blue-300">Teorema Garis Sejajar:</strong> Jika <InlineMath math="XY \parallel BC" /> pada △ABC, maka <InlineMath math="\frac{AX}{XB} = \frac{AY}{YC}" /> dan △AXY ~ △ABC</p>
+                <p>📌 <strong className="text-blue-300">Sudut ketiga:</strong> Jika dua sudut sudah sama, sudut ketiga otomatis sama (jumlah sudut segitiga = 180°)</p>
+                <p>📌 <strong className="text-blue-300">Rasio k:</strong> Jika △ABC ~ △PQR dengan rasio k, maka <InlineMath math="AB=k \cdot PQ,\;BC=k \cdot QR,\;AC=k \cdot PR" /></p>
+              </div>
+            </div>
+
+            {/* Tips & Trik */}
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-amber-300">💡 Tips &amp; Trik</p>
+              <div className="space-y-3 font-body text-sm text-white/80">
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">①</span>
+                  <div>
+                    <p><strong className="text-amber-300">Tentukan pasangan titik bersesuaian dulu!</strong> Lihat sudut-sudut yang sama besar, lalu cocokkan titik-titiknya. Urutan penulisan notasi harus mengikuti urutan pasangan yang benar.</p>
+                    <div className="bg-slate-900/50 rounded p-2 mt-1 text-xs">
+                      <p>Jika ∠A=∠P, ∠B=∠Q → tulis △ABC ~ △PQR (bukan △ABC ~ △QPR)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">②</span>
+                  <p><strong className="text-amber-300">AA adalah cara paling mudah:</strong> Cukup tunjukkan 2 sudut sama — sudut ketiga otomatis sama. Sering muncul di soal dengan garis sejajar atau sudut bertolak belakang.</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">③</span>
+                  <div>
+                    <p><strong className="text-amber-300">Perbandingan sisi → cari rusuk yang belum diketahui:</strong></p>
+                    <div className="bg-slate-900/50 rounded p-2 mt-1 text-xs">
+                      <BlockMath math="\frac{\text{rusuk 1 bangun kecil}}{\text{rusuk 1 bangun besar}} = \frac{\text{rusuk 2 bangun kecil}}{\text{rusuk 2 bangun besar}}" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">④</span>
+                  <p><strong className="text-amber-300">Pada trapesium dengan diagonal:</strong> Garis yang memotong kedua diagonal membentuk segitiga-segitiga sebangun. Gunakan ini untuk mencari panjang segmen.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Kesimpulan */}
+            <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-green-300">✅ Kesimpulan</p>
+              <div className="space-y-2 font-body text-sm text-white/80">
+                <p>Dua segitiga sebangun jika memenuhi <strong className="text-yellow-300">minimal satu dari tiga syarat</strong>: AA, SAS (RAR), atau SSS (RRR).</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <p>🔹 Kesebangunan <strong className="text-green-300">tidak mengharuskan</strong> ukuran sama — hanya bentuk yang sama</p>
+                  <p>🔹 Faktor skala <InlineMath math="k" /> menghubungkan semua rusuk yang bersesuaian</p>
+                  <p>🔹 Segitiga sebangun sangat sering muncul pada soal <strong className="text-cyan-300">garis sejajar, bayangan, dan trapesium</strong></p>
+                  <p>🔹 Jika <InlineMath math="k = 1" />, maka sebangun sekaligus kongruen</p>
+                </div>
+                <p className="text-xs text-white/55 italic">Konsep ini menjadi kunci untuk mengerjakan soal menghitung panjang rusuk dan membuktikan teorema geometri lebih lanjut.</p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/kesebangunan-kekongruenan"); }} className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">

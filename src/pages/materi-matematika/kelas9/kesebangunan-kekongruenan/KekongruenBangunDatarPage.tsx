@@ -1458,19 +1458,106 @@ const KekongruenBangunDatarPage = () => {
             )}
           </div>
 
-          {/* ── RANGKUMAN ── */}
-          <div className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-purple-500/30 rounded-xl p-5 space-y-3">
-            <p className="font-body text-sm font-semibold text-purple-300">🌟 Rangkuman Kekongruenan Bangun Datar</p>
-            <div className="font-body text-sm text-white/80 space-y-1">
-              <p>✅ Dua bangun kongruen ↔ semua sisi & sudut bersesuaian sama</p>
-              <p>✅ Segitiga: cukup pakai RRR / RAR / ARA / AAR</p>
-              <p>✅ Persegi: cukup 1 syarat — sisi sama panjang</p>
-              <p>✅ Persegi Panjang: panjang dan lebar bersesuaian sama</p>
-              <p>✅ Jajar Genjang: 2 sisi + sudut apit bersesuaian sama</p>
-              <p>✅ Trapesium & poligon umum: semua sisi + sudut bersesuaian sama</p>
-              <p>✅ Lingkaran: cukup 1 syarat — jari-jari sama</p>
-              <p>⚠️ Selalu perhatikan urutan titik sudut dalam penulisan notasi!</p>
+          {/* ── RANGKUMAN, TIPS & TRIK, KESIMPULAN ── */}
+          <div className="space-y-4">
+
+            {/* Rangkuman */}
+            <div className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-purple-500/30 rounded-xl p-5 space-y-4">
+              <p className="font-body text-base font-bold text-purple-300">📋 Rangkuman — Kekongruenan Bangun Datar</p>
+              <div className="overflow-x-auto">
+                <table className="w-full font-body text-xs text-white/80">
+                  <thead>
+                    <tr className="border-b border-purple-500/30">
+                      <th className="text-left py-2 pr-3 text-purple-300">Bangun</th>
+                      <th className="text-left py-2 pr-3 text-purple-300">Syarat Kongruen</th>
+                      <th className="text-left py-2 text-purple-300">Jumlah Syarat Min.</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-700">
+                    <tr>
+                      <td className="py-2 pr-3 text-blue-300 font-semibold">Segitiga</td>
+                      <td className="py-2 pr-3">RRR, RAR, ARA, atau AAR (salah satu)</td>
+                      <td className="py-2 text-yellow-300">3 unsur</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-3 text-green-300 font-semibold">Persegi</td>
+                      <td className="py-2 pr-3">Sisi yang sama panjang</td>
+                      <td className="py-2 text-yellow-300">1 unsur</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-3 text-cyan-300 font-semibold">Persegi Panjang</td>
+                      <td className="py-2 pr-3">Panjang dan lebar bersesuaian sama</td>
+                      <td className="py-2 text-yellow-300">2 unsur</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-3 text-pink-300 font-semibold">Jajar Genjang</td>
+                      <td className="py-2 pr-3">2 pasang sisi bersesuaian sama + sudut apit sama</td>
+                      <td className="py-2 text-yellow-300">3 unsur</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-3 text-orange-300 font-semibold">Trapesium &amp; Poligon</td>
+                      <td className="py-2 pr-3">Semua sisi bersesuaian sama + semua sudut sama</td>
+                      <td className="py-2 text-yellow-300">Semua unsur</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-3 text-red-300 font-semibold">Lingkaran</td>
+                      <td className="py-2 pr-3">Jari-jari sama panjang</td>
+                      <td className="py-2 text-yellow-300">1 unsur</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 font-body text-xs text-white/75">
+                <p>📌 <strong className="text-purple-300">Definisi:</strong> Dua bangun kongruen (<InlineMath math="\cong" />) jika semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</p>
+                <p>📌 <strong className="text-purple-300">Notasi penting:</strong> <InlineMath math="\triangle ABC \cong \triangle PQR" /> berarti A↔P, B↔Q, C↔R. Urutan huruf menentukan pasangan!</p>
+                <p>📌 <strong className="text-purple-300">Bangun bisa diputar/dicermin:</strong> Kongruen tetap berlaku meski salah satu bangun diputar atau direfleksi (dicermin)</p>
+              </div>
             </div>
+
+            {/* Tips & Trik */}
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-amber-300">💡 Tips &amp; Trik</p>
+              <div className="space-y-3 font-body text-sm text-white/80">
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">①</span>
+                  <p><strong className="text-amber-300">Ingat urutan syarat segitiga (RRR, RAR, ARA, AAR):</strong> Huruf R = Rusuk, A = sudut (Angle). Syarat tersebut menjamin ketiga sisi dan ketiga sudut otomatis sama — tidak perlu cek semuanya satu per satu!</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">②</span>
+                  <div>
+                    <p><strong className="text-amber-300">Cara cepat menentukan sisi bersesuaian dari notasi:</strong> Jika <InlineMath math="\triangle ABC \cong \triangle PQR" />, pasangkan huruf-huruf di posisi yang sama:</p>
+                    <div className="bg-slate-900/50 rounded p-2 mt-1 text-xs font-mono text-center">
+                      <p>A ↔ P &nbsp;|&nbsp; B ↔ Q &nbsp;|&nbsp; C ↔ R</p>
+                      <p className="text-white/50 mt-1">AB=PQ &nbsp;|&nbsp; BC=QR &nbsp;|&nbsp; AC=PR</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">③</span>
+                  <p><strong className="text-amber-300">Bedakan kongruen dengan sebangun di soal pilihan ganda:</strong> Jika ada "faktor skala k ≠ 1" → sebangun bukan kongruen. Jika "semua ukurannya sama persis" → kongruen (k=1).</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">④</span>
+                  <p><strong className="text-amber-300">Untuk soal "cari nilai x":</strong> Gunakan pasangan sisi bersesuaian yang sama. Jika <InlineMath math="AB = PQ" />, tulis persamaan langsung dan selesaikan.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Kesimpulan */}
+            <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-green-300">✅ Kesimpulan</p>
+              <div className="space-y-2 font-body text-sm text-white/80">
+                <p>Kekongruenan bangun datar adalah konsep <strong className="text-yellow-300">"berimpit sempurna"</strong> — dua bangun yang bisa saling ditumpuk tanpa celah dan tanpa sisa.</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <p>🔹 Tidak semua bangun memerlukan semua syarat: <strong className="text-cyan-300">persegi dan lingkaran</strong> hanya butuh 1 syarat</p>
+                  <p>🔹 Segitiga memiliki <strong className="text-purple-300">4 cara pembuktian</strong> kekongruenan (RRR, RAR, ARA, AAR)</p>
+                  <p>🔹 Bangun yang diputar atau dicermin <strong className="text-green-300">tetap kongruen</strong></p>
+                  <p>🔹 Kongruen adalah kasus khusus sebangun: <InlineMath math="k = 1" /></p>
+                </div>
+                <p className="text-xs text-white/55 italic">Kekongruenan adalah fondasi pembuktian geometri — digunakan untuk membuktikan garis sejajar, persamaan sudut, dan sifat-sifat bangun ruang.</p>
+              </div>
+            </div>
+
           </div>
 
         </div>

@@ -518,6 +518,94 @@ const MenghitungRusukPage = () => {
               </div>
           </div>
 
+          {/* ── RANGKUMAN, TIPS & TRIK, KESIMPULAN ── */}
+          <div className="space-y-4">
+
+            {/* Rangkuman */}
+            <div className="bg-gradient-to-br from-emerald-900/40 to-teal-900/40 border border-emerald-500/30 rounded-xl p-5 space-y-4">
+              <p className="font-body text-base font-bold text-emerald-300">📋 Rangkuman — Menghitung Rusuk Bangun Sebangun</p>
+              <div className="overflow-x-auto">
+                <table className="w-full font-body text-xs text-white/80">
+                  <thead>
+                    <tr className="border-b border-emerald-500/30">
+                      <th className="text-left py-2 pr-4 text-emerald-300">Konsep</th>
+                      <th className="text-left py-2 text-emerald-300">Rumus / Cara</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-700">
+                    <tr>
+                      <td className="py-2 pr-4 text-green-300 font-semibold">Faktor Skala</td>
+                      <td className="py-2"><InlineMath math="k = \dfrac{\text{rusuk bangun besar}}{\text{rusuk bangun kecil}}" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 text-blue-300 font-semibold">Perbandingan Sisi</td>
+                      <td className="py-2"><InlineMath math="\dfrac{AB}{PQ} = \dfrac{BC}{QR} = \dfrac{CD}{RS} = k" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 text-purple-300 font-semibold">Cari Rusuk Baru</td>
+                      <td className="py-2"><InlineMath math="\text{rusuk besar} = k \times \text{rusuk kecil}" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 text-cyan-300 font-semibold">Sudut</td>
+                      <td className="py-2">Semua sudut bersesuaian <strong>selalu sama besar</strong> (tidak berubah meski k ≠ 1)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 font-body text-xs text-white/75">
+                <p>📌 <strong className="text-emerald-300">Langkah sistematik:</strong> (1) Tentukan pasangan sisi bersesuaian → (2) Hitung k dari pasangan yang diketahui → (3) Gunakan k untuk mencari sisi yang ditanya</p>
+                <p>📌 <strong className="text-emerald-300">Soal bayangan:</strong> Tiang dan pohon sebangun jika sudut elevasi matahari sama → tinggi/bayangan selalu konstan</p>
+                <p>📌 <strong className="text-emerald-300">Validasi:</strong> Semua perbandingan sisi bersesuaian harus menghasilkan nilai k yang sama</p>
+              </div>
+            </div>
+
+            {/* Tips & Trik */}
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-amber-300">💡 Tips &amp; Trik</p>
+              <div className="space-y-3 font-body text-sm text-white/80">
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">①</span>
+                  <div>
+                    <p><strong className="text-amber-300">Identifikasi sisi "pasangan" terlebih dulu:</strong> Sebelum menghitung, gambar atau tandai mana sisi A yang bersesuaian dengan sisi P. Kesalahan terbesar siswa adalah memasangkan sisi yang salah.</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">②</span>
+                  <div>
+                    <p><strong className="text-amber-300">Gunakan perkalian silang untuk efisiensi:</strong></p>
+                    <div className="bg-slate-900/50 rounded p-2 mt-1">
+                      <BlockMath math="\frac{a}{p} = \frac{x}{q} \;\Longrightarrow\; x = \frac{a \times q}{p}" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">③</span>
+                  <p><strong className="text-amber-300">Soal bayangan / cermin:</strong> Selalu buat proporsi <InlineMath math="\frac{\text{tinggi objek}}{\text{panjang bayangan}} = \text{konstan}" />. Sudut matahari yang sama → AA → sebangun otomatis.</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-amber-400 font-bold shrink-0">④</span>
+                  <p><strong className="text-amber-300">Cek masuk akal:</strong> Jika k &gt; 1, bangun kedua lebih besar. Jika k &lt; 1, lebih kecil. Pastikan jawaban sesuai dengan gambar soal.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Kesimpulan */}
+            <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-5 space-y-3">
+              <p className="font-body text-base font-bold text-green-300">✅ Kesimpulan</p>
+              <div className="space-y-2 font-body text-sm text-white/80">
+                <p>Menghitung rusuk bangun sebangun bermuara pada satu kunci: <strong className="text-yellow-300">faktor skala k</strong>.</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <p>🔹 Temukan <InlineMath math="k" /> dari sepasang sisi yang diketahui</p>
+                  <p>🔹 Gunakan <InlineMath math="k" /> untuk menghitung semua sisi lainnya</p>
+                  <p>🔹 Sudut tidak perlu dihitung ulang — sudut bersesuaian selalu sama besar</p>
+                  <p>🔹 Aplikasi nyata: peta, foto, model miniatur, bayangan — semuanya menggunakan prinsip ini!</p>
+                </div>
+                <p className="text-xs text-white/55 italic">Penguasaan konsep ini membuka jalan untuk memahami transformasi geometri, skala peta, dan trigonometri.</p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/kesebangunan-kekongruenan"); }} className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
