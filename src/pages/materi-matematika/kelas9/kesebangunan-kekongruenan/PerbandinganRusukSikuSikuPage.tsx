@@ -139,9 +139,161 @@ const DiagramHubunganRusuk = () => (
   </svg>
 );
 
+/* ── WATERFALL ANIMATION ──────────────────────────────────────────────────
+   Segitiga: B=(55,22) kiri atas, A=(55,182) kiri bawah, C=(175,182) kanan bawah
+   D=(132,124) pada BC (kaki tinggi dari A).
+   Air menyemprot A→B (vertikal ke atas), lalu muncrat dari B ke D dan B ke C.
+   AB² = BD × BC
+──────────────────────────────────────────────────────────────────────────── */
+const WaterfallAnimasiAlas = () => {
+  const dropColors = { main: "#38bdf8", spray: "#7dd3fc" };
+  const drops = (path: string, count: number, dur: number, step: number, r: number, color: string) =>
+    Array.from({ length: count }, (_, i) => (
+      <circle key={i} r={r} fill={color} opacity="0.95">
+        <animateMotion dur={`${dur}s`} repeatCount="indefinite" begin={`${(i * step).toFixed(2)}s`} path={path} />
+      </circle>
+    ));
+
+  return (
+    <div className="space-y-4">
+      {/* Keterangan teknik */}
+      <div className="bg-blue-950/60 border border-blue-400/30 rounded-lg p-4">
+        <p className="font-body text-xs text-blue-200 leading-relaxed">
+          🌊 Bayangkan air menyemprot dari{" "}
+          <strong className="text-white">A ke B</strong> melewati sisi tegak, lalu di titik{" "}
+          <strong className="text-white">B</strong> air langsung{" "}
+          <strong className="text-cyan-300">muncrat dua arah</strong>: ke{" "}
+          <strong className="text-white">B→D</strong> dan ke{" "}
+          <strong className="text-white">B→C</strong>. Itulah cara hafal rumus{" "}
+          <strong className="text-cyan-300">AB² = BD × BC!</strong>
+        </p>
+      </div>
+
+      {/* SVG animasi */}
+      <div className="bg-slate-950/90 border border-blue-500/25 rounded-xl p-3">
+        <svg viewBox="0 0 260 262" className="w-full max-w-sm mx-auto">
+          <defs>
+            <filter id="wfGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="wfDropGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="1.8" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          {/* Segitiga utama */}
+          <polygon points="55,22 55,182 175,182" fill="none" stroke="#60a5fa" strokeWidth="2.2"/>
+          {/* Garis tinggi AD (putus-putus kuning) */}
+          <line x1="55" y1="182" x2="132" y2="124" stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3"/>
+          {/* Sudut siku-siku di A */}
+          <path d="M 55,173 L 64,173 L 64,182" fill="none" stroke="#f97316" strokeWidth="1.5"/>
+          {/* Sudut siku-siku di D */}
+          <path d="M 125.6,129.6 L 121.6,122.8 L 128.4,118.8" fill="none" stroke="#f97316" strokeWidth="1.5"/>
+
+          {/* Saluran air A→B (background glow) */}
+          <line x1="55" y1="182" x2="55" y2="22"
+            stroke={dropColors.main} strokeWidth="7" strokeOpacity="0.13" filter="url(#wfGlow)"/>
+          <line x1="55" y1="182" x2="55" y2="22"
+            stroke={dropColors.main} strokeWidth="2.5" strokeOpacity="0.40"/>
+
+          {/* Saluran muncrat B→D */}
+          <line x1="55" y1="22" x2="132" y2="124"
+            stroke={dropColors.main} strokeWidth="6" strokeOpacity="0.12" filter="url(#wfGlow)"/>
+          <line x1="55" y1="22" x2="132" y2="124"
+            stroke={dropColors.spray} strokeWidth="2" strokeOpacity="0.38"/>
+
+          {/* Saluran muncrat B→C */}
+          <line x1="55" y1="22" x2="175" y2="182"
+            stroke={dropColors.main} strokeWidth="6" strokeOpacity="0.11" filter="url(#wfGlow)"/>
+          <line x1="55" y1="22" x2="175" y2="182"
+            stroke={dropColors.spray} strokeWidth="2" strokeOpacity="0.33"/>
+
+          {/* Ripple / muncrat di titik B */}
+          <circle cx="55" cy="22" r="5" fill="#38bdf8" opacity="0.85">
+            <animate attributeName="r" values="4;14;4" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.85;0;0.85" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="55" cy="22" r="3" fill="#bae6fd" opacity="0.7">
+            <animate attributeName="r" values="3;9;3" dur="2s" begin="0.35s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="2s" begin="0.35s" repeatCount="indefinite"/>
+          </circle>
+
+          {/* Tetes air A→B (5 tetes, interval 0.48 s, durasi 2.4 s) */}
+          {drops("M 55,182 L 55,22", 5, 2.4, 0.48, 4.5, dropColors.main)}
+
+          {/* Tetes muncrat B→D (4 tetes, interval 0.5 s, durasi 2 s) */}
+          {drops("M 55,22 L 132,124", 4, 2.0, 0.50, 3.8, dropColors.spray)}
+
+          {/* Tetes muncrat B→C (5 tetes, interval 0.56 s, durasi 2.8 s) */}
+          {drops("M 55,22 L 175,182", 5, 2.8, 0.56, 3.8, dropColors.spray)}
+
+          {/* Label vertex */}
+          <text x="36" y="20"  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+          <text x="36" y="197" fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+          <text x="178" y="197" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+          <text x="136" y="120" fontSize="11" fill="#fde68a" fontWeight="bold">D</text>
+
+          {/* Label segmen */}
+          <text x="42" y="108" fontSize="11" fill="#38bdf8" fontWeight="bold" textAnchor="middle">AB</text>
+          <text x="86" y="66"  fontSize="10" fill="#7dd3fc" fontWeight="bold" textAnchor="middle">BD</text>
+          <text x="122" y="110" fontSize="10" fill="#7dd3fc" fontWeight="bold" textAnchor="middle">BC</text>
+
+          {/* Panah petunjuk aliran */}
+          <text x="64" y="102" fontSize="12" fill="#38bdf8" opacity="0.65">↑</text>
+          <text x="98" y="92"  fontSize="10" fill="#7dd3fc" opacity="0.60" transform="rotate(37,98,92)">↓</text>
+          <text x="104" y="147" fontSize="10" fill="#7dd3fc" opacity="0.60" transform="rotate(53,104,147)">↓</text>
+
+          {/* Kotak rumus */}
+          <rect x="8" y="196" width="244" height="58" rx="7" fill="#020d1a" stroke="#38bdf8" strokeWidth="1.8"/>
+          <text x="130" y="213" textAnchor="middle" fontSize="8.5" fill="#7dd3fc" fontWeight="bold">
+            💧 A→B menyemprot  ⟹  muncrat ke B→D  dan  B→C
+          </text>
+          <line x1="20" y1="218" x2="240" y2="218" stroke="#38bdf8" strokeOpacity="0.25" strokeWidth="0.8"/>
+          <text x="130" y="240" textAnchor="middle" fontSize="16" fill="#38bdf8" fontWeight="bold">AB² = BD × BC</text>
+          <text x="130" y="250" textAnchor="middle" fontSize="7.5" fill="#bae6fd" opacity="0.7">
+            (kuadrat sumber  =  muncrat 1 × muncrat 2)
+          </text>
+        </svg>
+      </div>
+
+      {/* Rangkuman cara hafal */}
+      <div className="grid grid-cols-3 gap-2 text-center font-body text-xs">
+        <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-3 space-y-1">
+          <p className="text-white/50">Sumber air</p>
+          <p className="text-base">💧</p>
+          <p className="text-cyan-300 font-bold">A → B</p>
+          <p className="text-white/60">dikuadratkan<br/><strong className="text-white">AB²</strong></p>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-1">
+          <p className="text-white/40 text-lg">=</p>
+          <p className="text-white/30 text-[10px]">sama dengan</p>
+        </div>
+        <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-3 space-y-1">
+          <p className="text-white/50">Hasil muncrat</p>
+          <p className="text-base">💦</p>
+          <p className="text-cyan-300 font-bold">BD × BC</p>
+          <p className="text-white/60">dua arah<br/><strong className="text-white">BD × BC</strong></p>
+        </div>
+      </div>
+
+      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3 text-center">
+        <p className="font-body text-sm font-bold text-white">💡 Kunci Hafal:</p>
+        <p className="font-body text-xs text-white/70 mt-1 leading-relaxed">
+          Ingat arah air — <span className="text-cyan-300">menyemprot naik (A→B)</span>, lalu{" "}
+          <span className="text-cyan-300">muncrat dua arah (B→D) dan (B→C)</span>.
+          Rusuk yang menyemprot <strong className="text-white">dikuadratkan</strong>,
+          dua arah muncratnya <strong className="text-white">dikalikan</strong>!
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const PerbandinganRusukSikuSikuPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "konsep3", "konsep4", "contoh1"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep1", "konsep2", "konsep3", "konsep4", "contoh1", "waterfall"]);
   const toggleSection = (s: string) => {
     playPopSound();
     setExpandedSections(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
@@ -460,6 +612,16 @@ const PerbandinganRusukSikuSikuPage = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* WATERFALL ANIMATION — cara hafal AB² = BD × BC */}
+          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
+            <Header id="waterfall" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun — Hafal Rumus AB² = BD × BC" />
+            {expandedSections.includes("waterfall") && (
+              <div className="px-5 pb-5 pt-2">
+                <WaterfallAnimasiAlas />
               </div>
             )}
           </div>
