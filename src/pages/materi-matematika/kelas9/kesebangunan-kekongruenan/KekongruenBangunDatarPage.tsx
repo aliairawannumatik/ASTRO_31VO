@@ -661,14 +661,10 @@ const DiagramLayangLayang = () => (
    *
    * Kite 2: offset x+175  A'(255,20) B'(197,88) C'(255,170) D'(313,88)
    */
-  <svg viewBox="0 0 340 218" className="w-full max-w-sm mx-auto">
-    <rect x="0" y="0" width="340" height="218" rx="10" fill="#0f172a" fillOpacity="0.5" />
+  <svg viewBox="0 0 340 192" className="w-full max-w-sm mx-auto mt-4">
+    <rect x="0" y="0" width="340" height="192" rx="10" fill="#0f172a" fillOpacity="0.5" />
 
     {/* ── Kite 1: A(80,20) B(22,88) C(80,170) D(138,88) — rose ── */}
-    {/* BC extension beyond C — direction (0.578, 0.817) * 35 → (80+20, 170+29) = (100,199) */}
-    <line x1="80" y1="170" x2="100" y2="199" stroke="#fb7185" strokeWidth="1.5" strokeDasharray="5,4" strokeLinecap="round" opacity="0.7" />
-    {/* DC extension beyond C — direction (-0.578, 0.817) * 35 → (80-20, 170+29) = (60,199) */}
-    <line x1="80" y1="170" x2="60" y2="199" stroke="#fb7185" strokeWidth="1.5" strokeDasharray="5,4" strokeLinecap="round" opacity="0.7" />
     <polygon points="80,20 22,88 80,170 138,88"
       fill="#f43f5e" fillOpacity="0.2" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
     <circle cx="80"  cy="20"  r="3" fill="#fb7185" />
@@ -704,10 +700,6 @@ const DiagramLayangLayang = () => (
     <text x="167" y="97" textAnchor="middle" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
     {/* ── Kite 2: A'(255,20) B'(197,88) C'(255,170) D'(313,88) — x+175 ── */}
-    {/* QR extension beyond R — same direction as BC, x+175: (255+20, 170+29) = (275,199) */}
-    <line x1="255" y1="170" x2="275" y2="199" stroke="#fb7185" strokeWidth="1.5" strokeDasharray="5,4" strokeLinecap="round" opacity="0.7" />
-    {/* SR extension beyond R — same direction as DC, x+175: (255-20, 170+29) = (235,199) */}
-    <line x1="255" y1="170" x2="235" y2="199" stroke="#fb7185" strokeWidth="1.5" strokeDasharray="5,4" strokeLinecap="round" opacity="0.7" />
     <polygon points="255,20 197,88 255,170 313,88"
       fill="#f43f5e" fillOpacity="0.15" stroke="#fb7185" strokeWidth="2.2" strokeLinejoin="round" />
     <circle cx="255" cy="20"  r="3" fill="#fb7185" />
