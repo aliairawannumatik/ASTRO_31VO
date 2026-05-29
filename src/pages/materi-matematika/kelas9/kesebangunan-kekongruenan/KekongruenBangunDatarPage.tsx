@@ -145,15 +145,15 @@ const DiagramSyaratRRR = () => (
     <text x="16" y="140" fontSize="12" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">A</text>
     <text x="147" y="140" fontSize="12" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">B</text>
     <text x="83" y="24" fontSize="12" fill="#fde047" fontWeight="bold" fontFamily="sans-serif">C</text>
-    {/* ticks AB double */}
-    <line x1="83" y1="127" x2="83" y2="118" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="89" y1="127" x2="89" y2="118" stroke="#ffffff" strokeWidth="2.2" />
-    {/* ticks AC single */}
-    <line x1="54" y1="82" x2="62" y2="76" stroke="#ffffff" strokeWidth="2.2" />
-    {/* ticks BC triple */}
-    <line x1="115" y1="83" x2="110" y2="76" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="120" y1="78" x2="115" y2="71" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="125" y1="73" x2="120" y2="66" stroke="#ffffff" strokeWidth="2.2" />
+    {/* AB double tick — perp=vertical, midpoint(87.5,125), centers x=85 & x=90 */}
+    <line x1="85" y1="118" x2="85" y2="132" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="90" y1="118" x2="90" y2="132" stroke="#ffffff" strokeWidth="2.2" />
+    {/* AC single tick — perp=(0.853,0.521), midpoint(59,77.5), half-len=7 */}
+    <line x1="53" y1="74" x2="65" y2="81" stroke="#ffffff" strokeWidth="2.2" />
+    {/* BC triple tick — perp=(0.857,-0.514), midpoint(116.5,77.5), spacing=4 along side, half-len=6 */}
+    <line x1="114" y1="84" x2="124" y2="78" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="112" y1="81" x2="122" y2="75" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="109" y1="77" x2="119" y2="71" stroke="#ffffff" strokeWidth="2.2" />
 
     {/* ≅ */}
     <text x="163" y="90" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
@@ -166,12 +166,15 @@ const DiagramSyaratRRR = () => (
     <text x="181" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">P</text>
     <text x="312" y="140" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">Q</text>
     <text x="247" y="24" fontSize="12" fill="#86efac" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <line x1="248" y1="127" x2="248" y2="118" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="254" y1="127" x2="254" y2="118" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="219" y1="82" x2="227" y2="76" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="280" y1="83" x2="275" y2="76" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="285" y1="78" x2="280" y2="71" stroke="#ffffff" strokeWidth="2.2" />
-    <line x1="290" y1="73" x2="285" y2="66" stroke="#ffffff" strokeWidth="2.2" />
+    {/* PQ double tick — x+165 from AB */}
+    <line x1="250" y1="118" x2="250" y2="132" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="255" y1="118" x2="255" y2="132" stroke="#ffffff" strokeWidth="2.2" />
+    {/* PR single tick — x+165 from AC */}
+    <line x1="218" y1="74" x2="230" y2="81" stroke="#ffffff" strokeWidth="2.2" />
+    {/* QR triple tick — x+165 from BC */}
+    <line x1="279" y1="84" x2="289" y2="78" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="277" y1="81" x2="287" y2="75" stroke="#ffffff" strokeWidth="2.2" />
+    <line x1="274" y1="77" x2="284" y2="71" stroke="#ffffff" strokeWidth="2.2" />
 
     <text x="170" y="14" textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">RRR — 3 sisi bersesuaian sama panjang</text>
   </svg>
