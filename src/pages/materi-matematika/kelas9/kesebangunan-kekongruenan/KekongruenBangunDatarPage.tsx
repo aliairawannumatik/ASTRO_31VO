@@ -338,43 +338,57 @@ const DiagramSyaratARA = () => (
 ───────────────────────────────────────────────────────────────────────────── */
 
 const DiagramPersegi = () => (
+  /*
+   * Square 1: A(30,35) B(130,35) C(130,135) D(30,135)  side=100
+   * Square 2: P(195,35) Q(295,35) R(295,135) S(195,135) side=100
+   *
+   * Side ticks (single, crossing edge by ±6):
+   *   Top/Bottom midpoint x=80 (sq1) or 245 (sq2), vertical tick y±6 from edge
+   *   Left/Right  midpoint y=85,              horizontal tick x±6 from edge
+   *
+   * Right-angle marks at every corner, inset 8 px, rendered via map()
+   */
   <svg viewBox="0 0 340 160" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="340" height="160" rx="10" fill="#0f172a" fillOpacity="0.5" />
-    {/* Square 1 */}
+
+    {/* ── Square 1: A(30,35) B(130,35) C(130,135) D(30,135) ── */}
     <rect x="30" y="35" width="100" height="100" fill="#3b82f6" fillOpacity="0.2" stroke="#60a5fa" strokeWidth="2.2" />
-    <text x="20" y="32" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="136" y="32" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="136" y="148" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">C</text>
-    <text x="20" y="148" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">D</text>
-    {/* side ticks – all 4 sides, single */}
-    <line x1="79" y1="37" x2="79" y2="27" stroke="#facc15" strokeWidth="2" />
-    <line x1="79" y1="137" x2="79" y2="127" stroke="#facc15" strokeWidth="2" />
-    <line x1="27" y1="85" x2="37" y2="85" stroke="#facc15" strokeWidth="2" />
-    <line x1="127" y1="85" x2="137" y2="85" stroke="#facc15" strokeWidth="2" />
-    {/* right angle marks */}
-    {[[30,35],[130,35],[130,135],[30,135]].map(([cx,cy],i)=>{
+    <text x="19"  y="32"  fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="133" y="32"  fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="133" y="148" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">C</text>
+    <text x="19"  y="148" fontSize="12" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">D</text>
+
+    {/* single ticks — centered on each side midpoint, crossing ±6 px */}
+    <line x1="80" y1="29" x2="80" y2="41" stroke="#facc15" strokeWidth="2.2" />  {/* top,  mid (80,35)  */}
+    <line x1="80" y1="129" x2="80" y2="141" stroke="#facc15" strokeWidth="2.2" /> {/* bot,  mid (80,135) */}
+    <line x1="24" y1="85" x2="36" y2="85" stroke="#facc15" strokeWidth="2.2" />   {/* left, mid (30,85)  */}
+    <line x1="124" y1="85" x2="136" y2="85" stroke="#facc15" strokeWidth="2.2" /> {/* right,mid (130,85) */}
+
+    {/* right-angle marks at each corner, inset 8 px */}
+    {([[30,35],[130,35],[130,135],[30,135]] as [number,number][]).map(([cx,cy],i)=>{
       const dx = i<2?8:-8, dy = i===0||i===3?8:-8;
-      return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.2"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.2"/></g>;
+      return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.4"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.4"/></g>;
     })}
-    {/* side label */}
     <text x="80" y="102" textAnchor="middle" fontSize="10" fill="#fde68a" fontFamily="sans-serif">s</text>
 
     {/* ≅ */}
     <text x="163" y="100" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Square 2 */}
+    {/* ── Square 2: P(195,35) Q(295,35) R(295,135) S(195,135) ── */}
     <rect x="195" y="35" width="100" height="100" fill="#a855f7" fillOpacity="0.18" stroke="#c084fc" strokeWidth="2.2" />
-    <text x="185" y="32" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="301" y="32" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="301" y="148" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <text x="185" y="148" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">S</text>
-    <line x1="244" y1="37" x2="244" y2="27" stroke="#facc15" strokeWidth="2" />
-    <line x1="244" y1="137" x2="244" y2="127" stroke="#facc15" strokeWidth="2" />
-    <line x1="192" y1="85" x2="202" y2="85" stroke="#facc15" strokeWidth="2" />
-    <line x1="292" y1="85" x2="302" y2="85" stroke="#facc15" strokeWidth="2" />
-    {[[195,35],[295,35],[295,135],[195,135]].map(([cx,cy],i)=>{
+    <text x="184" y="32"  fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="298" y="32"  fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="298" y="148" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="184" y="148" fontSize="12" fill="#d8b4fe" fontWeight="bold" fontFamily="sans-serif">S</text>
+
+    <line x1="245" y1="29"  x2="245" y2="41"  stroke="#facc15" strokeWidth="2.2" /> {/* top  mid (245,35)  */}
+    <line x1="245" y1="129" x2="245" y2="141" stroke="#facc15" strokeWidth="2.2" /> {/* bot  mid (245,135) */}
+    <line x1="189" y1="85"  x2="201" y2="85"  stroke="#facc15" strokeWidth="2.2" /> {/* left mid (195,85)  */}
+    <line x1="289" y1="85"  x2="301" y2="85"  stroke="#facc15" strokeWidth="2.2" /> {/* right mid (295,85) */}
+
+    {([[195,35],[295,35],[295,135],[195,135]] as [number,number][]).map(([cx,cy],i)=>{
       const dx = i<2?8:-8, dy = i===0||i===3?8:-8;
-      return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.2"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.2"/></g>;
+      return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.4"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#94a3b8" strokeWidth="1.4"/></g>;
     })}
     <text x="245" y="102" textAnchor="middle" fontSize="10" fill="#fde68a" fontFamily="sans-serif">s</text>
 
@@ -383,84 +397,154 @@ const DiagramPersegi = () => (
 );
 
 const DiagramPersegiPanjang = () => (
+  /*
+   * Rect 1: A(20,45) B(150,45) C(150,125) D(20,125)  p=130  l=80
+   * Rect 2: P(200,45) Q(330,45) R(330,125) S(200,125) p=130  l=80
+   *
+   * Ticks (cross edge ±6 px):
+   *   p-sides (top/bottom, len=130): double tick at x = mid±3, vertical, centred at x=85 / x=265
+   *   l-sides (left/right,  len=80):  single tick, horizontal, centred at y=85
+   *   l-side mid-x for Rect1 = (20+150)/2=85, Rect2 = (200+330)/2=265
+   *
+   * Right-angle marks at every corner, inset 7 px
+   */
   <svg viewBox="0 0 360 170" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="360" height="170" rx="10" fill="#0f172a" fillOpacity="0.5" />
-    {/* Rectangle 1 */}
+
+    {/* ── Rectangle 1: A(20,45) B(150,45) C(150,125) D(20,125) ── */}
     <rect x="20" y="45" width="130" height="80" fill="#0ea5e9" fillOpacity="0.2" stroke="#38bdf8" strokeWidth="2.2" />
-    <text x="8" y="42" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="155" y="42" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="155" y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">C</text>
-    <text x="8" y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">D</text>
-    {/* ticks — p (top/bottom) double, l (left/right) single */}
-    <line x1="81" y1="47" x2="81" y2="37" stroke="#facc15" strokeWidth="2" />
-    <line x1="86" y1="47" x2="86" y2="37" stroke="#facc15" strokeWidth="2" />
-    <line x1="81" y1="127" x2="81" y2="117" stroke="#facc15" strokeWidth="2" />
-    <line x1="86" y1="127" x2="86" y2="117" stroke="#facc15" strokeWidth="2" />
-    <line x1="17" y1="85" x2="27" y2="85" stroke="#22c55e" strokeWidth="2" />
-    <line x1="147" y1="85" x2="157" y2="85" stroke="#22c55e" strokeWidth="2" />
-    <text x="85" y="92" textAnchor="middle" fontSize="9" fill="#fde68a" fontFamily="sans-serif">p</text>
-    <text x="30" y="90" fontSize="9" fill="#fde68a" fontFamily="sans-serif">l</text>
-    {/* right angle */}
-    {[[20,45],[150,45],[150,125],[20,125]].map(([cx,cy],i)=>{const dx=i<2?7:-7,dy=i===0||i===3?7:-7;return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.2"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.2"/></g>;})}
+    <text x="7"   y="42"  fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="153" y="42"  fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="153" y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">C</text>
+    <text x="7"   y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">D</text>
+
+    {/* double tick on p-sides — centred at x=85, spacing 5, crossing ±6 */}
+    <line x1="82" y1="39" x2="82" y2="51" stroke="#facc15" strokeWidth="2.2" />  {/* top  */}
+    <line x1="88" y1="39" x2="88" y2="51" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="82" y1="119" x2="82" y2="131" stroke="#facc15" strokeWidth="2.2" /> {/* bot  */}
+    <line x1="88" y1="119" x2="88" y2="131" stroke="#facc15" strokeWidth="2.2" />
+
+    {/* single tick on l-sides — centred at y=85, crossing ±6 */}
+    <line x1="14" y1="85" x2="26" y2="85" stroke="#22c55e" strokeWidth="2.2" />   {/* left  x=20 */}
+    <line x1="144" y1="85" x2="156" y2="85" stroke="#22c55e" strokeWidth="2.2" /> {/* right x=150 */}
+
+    <text x="85"  y="90" textAnchor="middle" fontSize="9" fill="#fde68a" fontFamily="sans-serif">p</text>
+    <text x="32"  y="90" fontSize="9" fill="#fde68a" fontFamily="sans-serif">l</text>
+
+    {/* right-angle marks inset 7 px */}
+    {([[20,45],[150,45],[150,125],[20,125]] as [number,number][]).map(([cx,cy],i)=>{
+      const dx=i<2?7:-7, dy=i===0||i===3?7:-7;
+      return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.4"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.4"/></g>;
+    })}
 
     {/* ≅ */}
     <text x="180" y="100" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Rectangle 2 */}
+    {/* ── Rectangle 2: P(200,45) Q(330,45) R(330,125) S(200,125) ── */}
     <rect x="200" y="45" width="130" height="80" fill="#0ea5e9" fillOpacity="0.16" stroke="#38bdf8" strokeWidth="2.2" />
-    <text x="188" y="42" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="335" y="42" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="335" y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <text x="188" y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">S</text>
-    <line x1="261" y1="47" x2="261" y2="37" stroke="#facc15" strokeWidth="2" />
-    <line x1="266" y1="47" x2="266" y2="37" stroke="#facc15" strokeWidth="2" />
-    <line x1="261" y1="127" x2="261" y2="117" stroke="#facc15" strokeWidth="2" />
-    <line x1="266" y1="127" x2="266" y2="117" stroke="#facc15" strokeWidth="2" />
-    <line x1="197" y1="85" x2="207" y2="85" stroke="#22c55e" strokeWidth="2" />
-    <line x1="327" y1="85" x2="337" y2="85" stroke="#22c55e" strokeWidth="2" />
-    {[[200,45],[330,45],[330,125],[200,125]].map(([cx,cy],i)=>{const dx=i<2?7:-7,dy=i===0||i===3?7:-7;return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.2"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.2"/></g>;})}
+    <text x="187" y="42"  fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="333" y="42"  fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="333" y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="187" y="138" fontSize="11" fill="#7dd3fc" fontWeight="bold" fontFamily="sans-serif">S</text>
+
+    {/* double tick on p-sides — centred at x=265 */}
+    <line x1="262" y1="39" x2="262" y2="51" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="268" y1="39" x2="268" y2="51" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="262" y1="119" x2="262" y2="131" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="268" y1="119" x2="268" y2="131" stroke="#facc15" strokeWidth="2.2" />
+
+    {/* single tick on l-sides */}
+    <line x1="194" y1="85" x2="206" y2="85" stroke="#22c55e" strokeWidth="2.2" />  {/* left  x=200 */}
+    <line x1="324" y1="85" x2="336" y2="85" stroke="#22c55e" strokeWidth="2.2" />  {/* right x=330 */}
+
+    {([[200,45],[330,45],[330,125],[200,125]] as [number,number][]).map(([cx,cy],i)=>{
+      const dx=i<2?7:-7, dy=i===0||i===3?7:-7;
+      return <g key={i}><line x1={cx} y1={cy+dy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.4"/><line x1={cx+dx} y1={cy} x2={cx+dx} y2={cy+dy} stroke="#64748b" strokeWidth="1.4"/></g>;
+    })}
 
     <text x="180" y="17" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua persegi panjang kongruen jika panjang dan lebarnya sama</text>
   </svg>
 );
 
 const DiagramJajarGenjang = () => (
+  /*
+   * Parallelogram 1: A(30,130) B(150,130) C(130,40) D(10,40)
+   * Parallelogram 2: P(205,130) Q(325,130) R(305,40) S(185,40)  (offset x+175)
+   *
+   * Side directions & perpendiculars:
+   *   AB/DC (horizontal, y=130/40): perp = vertical
+   *     midpoint AB = (90,130), DC = (70,40)  → double tick centred at x=90/70
+   *   AD: direction D−A=(−20,−90), |=92.2, unit=(−0.217,−0.976)
+   *     perp unit (rotate 90° CCW) = (0.976,−0.217)
+   *     midpoint AD = (20,85) → single tick: (20±6.8, 85∓1.5) = (13,87)→(27,83)
+   *   BC: direction C−B=(−20,−90), same unit. midpoint BC=(140,85)
+   *     single tick: (133,87)→(147,83)
+   *
+   * Angle arcs (proper circular arcs, r=15):
+   *   ∠A (orange, obtuse ≈103°):
+   *     start on AB: A+(15,0)=(45,130)
+   *     end   on AD: A+15*(−0.217,−0.976)=(26.7,115.4)→(27,115)
+   *     sweep CCW (flag 0)  → M 45,130 A 15,15 0 0,0 27,115
+   *   ∠B (sky, acute ≈77°):
+   *     start on BA: B+15*(−1,0)=(135,130)
+   *     end   on BC: B+15*(−0.217,−0.976)=(146.7,115.4)→(147,115)
+   *     sweep CW  (flag 1)  → M 135,130 A 15,15 0 0,1 147,115
+   *   ∠P / ∠Q: same geometry, x+175
+   */
   <svg viewBox="0 0 360 160" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="360" height="160" rx="10" fill="#0f172a" fillOpacity="0.5" />
-    {/* Parallelogram 1: A(30,130) B(150,130) C(130,40) D(10,40) */}
-    <polygon points="30,130 150,130 130,40 10,40" fill="#f59e0b" fillOpacity="0.2" stroke="#fbbf24" strokeWidth="2.2" strokeLinejoin="round" />
-    <text x="20" y="148" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">A</text>
+
+    {/* ── Parallelogram 1: A(30,130) B(150,130) C(130,40) D(10,40) ── */}
+    <polygon points="30,130 150,130 130,40 10,40"
+      fill="#f59e0b" fillOpacity="0.2" stroke="#fbbf24" strokeWidth="2.2" strokeLinejoin="round" />
+    <text x="19"  y="148" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">A</text>
     <text x="152" y="148" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="132" y="36" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">C</text>
-    <text x="-2" y="36" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">D</text>
-    {/* ticks: AB/DC double (bottom/top), AD/BC single (sides) */}
-    <line x1="88" y1="132" x2="88" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="93" y1="132" x2="93" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="68" y1="42" x2="68" y2="32" stroke="#facc15" strokeWidth="2" />
-    <line x1="73" y1="42" x2="73" y2="32" stroke="#facc15" strokeWidth="2" />
-    <line x1="14" y1="88" x2="22" y2="83" stroke="#22c55e" strokeWidth="2" />
-    <line x1="144" y1="88" x2="152" y2="83" stroke="#22c55e" strokeWidth="2" />
-    {/* angle arcs */}
-    <path d="M30,130 Q47,118 48,130" fill="none" stroke="#f97316" strokeWidth="1.8" />
-    <path d="M150,130 Q137,118 133,130" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    <text x="132" y="36"  fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">C</text>
+    <text x="-2"  y="36"  fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">D</text>
+
+    {/* AB double tick — midpoint (90,130), vertical, spacing 5 */}
+    <line x1="87" y1="124" x2="87" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="93" y1="124" x2="93" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    {/* DC double tick — midpoint (70,40), vertical, spacing 5 */}
+    <line x1="67" y1="34"  x2="67" y2="46"  stroke="#facc15" strokeWidth="2.2" />
+    <line x1="73" y1="34"  x2="73" y2="46"  stroke="#facc15" strokeWidth="2.2" />
+    {/* AD single tick — midpoint (20,85), perp=(0.976,−0.217), half-len=7 */}
+    {/* (20−6.8, 85+1.5)→(20+6.8, 85−1.5) = (13,87)→(27,84) */}
+    <line x1="13" y1="87" x2="27" y2="84" stroke="#22c55e" strokeWidth="2.2" />
+    {/* BC single tick — midpoint (140,85) */}
+    <line x1="133" y1="87" x2="147" y2="84" stroke="#22c55e" strokeWidth="2.2" />
+
+    {/* ∠A arc — orange, CCW (sweep=0), r=15 */}
+    <path d="M 45,130 A 15,15 0 0,0 27,115" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠B arc — sky, CW (sweep=1), r=15 */}
+    <path d="M 135,130 A 15,15 0 0,1 147,115" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
 
     {/* ≅ */}
     <text x="180" y="95" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Parallelogram 2 */}
-    <polygon points="205,130 325,130 305,40 185,40" fill="#f59e0b" fillOpacity="0.16" stroke="#fbbf24" strokeWidth="2.2" strokeLinejoin="round" />
-    <text x="195" y="148" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">P</text>
+    {/* ── Parallelogram 2: P(205,130) Q(325,130) R(305,40) S(185,40) ── */}
+    <polygon points="205,130 325,130 305,40 185,40"
+      fill="#f59e0b" fillOpacity="0.16" stroke="#fbbf24" strokeWidth="2.2" strokeLinejoin="round" />
+    <text x="194" y="148" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">P</text>
     <text x="327" y="148" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="307" y="36" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <text x="172" y="36" fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">S</text>
-    <line x1="263" y1="132" x2="263" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="268" y1="132" x2="268" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="243" y1="42" x2="243" y2="32" stroke="#facc15" strokeWidth="2" />
-    <line x1="248" y1="42" x2="248" y2="32" stroke="#facc15" strokeWidth="2" />
-    <line x1="189" y1="88" x2="197" y2="83" stroke="#22c55e" strokeWidth="2" />
-    <line x1="319" y1="88" x2="327" y2="83" stroke="#22c55e" strokeWidth="2" />
-    <path d="M205,130 Q222,118 223,130" fill="none" stroke="#f97316" strokeWidth="1.8" />
-    <path d="M325,130 Q312,118 308,130" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+    <text x="307" y="36"  fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="172" y="36"  fontSize="11" fill="#fcd34d" fontWeight="bold" fontFamily="sans-serif">S</text>
+
+    {/* PQ double tick — midpoint (265,130) */}
+    <line x1="262" y1="124" x2="262" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="268" y1="124" x2="268" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    {/* SR double tick — midpoint (245,40) */}
+    <line x1="242" y1="34"  x2="242" y2="46"  stroke="#facc15" strokeWidth="2.2" />
+    <line x1="248" y1="34"  x2="248" y2="46"  stroke="#facc15" strokeWidth="2.2" />
+    {/* PS single tick — midpoint (195,85) */}
+    <line x1="188" y1="87" x2="202" y2="84" stroke="#22c55e" strokeWidth="2.2" />
+    {/* QR single tick — midpoint (315,85) */}
+    <line x1="308" y1="87" x2="322" y2="84" stroke="#22c55e" strokeWidth="2.2" />
+
+    {/* ∠P arc — orange, CCW (sweep=0), r=15, x+175 from ∠A */}
+    <path d="M 220,130 A 15,15 0 0,0 202,115" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+    {/* ∠Q arc — sky, CW (sweep=1), r=15, x+175 from ∠B */}
+    <path d="M 310,130 A 15,15 0 0,1 322,115" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" />
 
     <text x="180" y="17" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua jajar genjang kongruen: 2 sisi + sudut sama</text>
   </svg>
@@ -491,41 +575,88 @@ const DiagramLingkaran = () => (
 );
 
 const DiagramTrapesium = () => (
+  /*
+   * Trapezoid 1: A(15,130) B(155,130) C(125,45) D(45,45)
+   * Trapezoid 2: P(200,130) Q(340,130) R(310,45) S(230,45)  (offset x+185)
+   *
+   * Ticks (cross edge ±6 px, perpendicular to each side):
+   *
+   *   AB (bottom, horizontal, len=140): triple tick centred at x=85, y=130, spacing 5
+   *     → x=80,85,90  y=124→136
+   *   DC (top, horizontal, len=80): single tick centred at x=85, y=45
+   *     → x=85, y=39→51
+   *
+   *   AD (left leg): A(15,130)→D(45,45), dir=(30,−85), |=90.1
+   *     unit=(0.333,−0.943), perp=(0.943,0.333)
+   *     midpoint=(30,87.5)
+   *     double tick — two lines, spacing 4 along unit, half-len=6:
+   *       c1 = mid − 2·unit = (29.3, 89.4)
+   *       c2 = mid + 2·unit = (30.7, 85.6)
+   *       line1: c1 ± 6·perp = (23.7,87.4)→(35.0,91.4) → (24,87)→(35,91)
+   *       line2: c2 ± 6·perp = (25.0,83.6)→(36.4,87.6) → (25,84)→(36,88)
+   *
+   *   BC (right leg): B(155,130)→C(125,45), dir=(−30,−85), |=90.1
+   *     unit=(−0.333,−0.943), perp=(0.943,−0.333)
+   *     midpoint=(140,87.5)
+   *       c1 = (140.7,89.4)  c2 = (139.3,85.6)
+   *       line1: (135.0,91.4)→(146.3,87.4) → (135,91)→(146,87)
+   *       line2: (133.6,87.6)→(145.0,83.6) → (134,88)→(145,84)
+   *
+   *   Trapezoid 2 is same geometry x+185.
+   */
   <svg viewBox="0 0 360 165" className="w-full max-w-sm mx-auto">
     <rect x="0" y="0" width="360" height="165" rx="10" fill="#0f172a" fillOpacity="0.5" />
-    {/* Trapezoid 1: A(15,130) B(155,130) C(125,45) D(45,45) */}
-    <polygon points="15,130 155,130 125,45 45,45" fill="#14b8a6" fillOpacity="0.2" stroke="#2dd4bf" strokeWidth="2.2" strokeLinejoin="round" />
-    <text x="4" y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="157" y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="127" y="40" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">C</text>
-    <text x="33" y="40" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">D</text>
-    {/* ticks AB triple, DC single, kaki double */}
-    <line x1="83" y1="132" x2="83" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="88" y1="132" x2="88" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="93" y1="132" x2="93" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="83" y1="47" x2="83" y2="37" stroke="#f97316" strokeWidth="2" />
-    <line x1="28" y1="91" x2="36" y2="86" stroke="#22c55e" strokeWidth="2" />
-    <line x1="32" y1="86" x2="40" y2="81" stroke="#22c55e" strokeWidth="2" />
-    <line x1="138" y1="91" x2="146" y2="86" stroke="#22c55e" strokeWidth="2" />
-    <line x1="142" y1="86" x2="150" y2="81" stroke="#22c55e" strokeWidth="2" />
+
+    {/* ── Trapezoid 1: A(15,130) B(155,130) C(125,45) D(45,45) ── */}
+    <polygon points="15,130 155,130 125,45 45,45"
+      fill="#14b8a6" fillOpacity="0.2" stroke="#2dd4bf" strokeWidth="2.2" strokeLinejoin="round" />
+    <text x="3"   y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="158" y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="127" y="40"  fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">C</text>
+    <text x="33"  y="40"  fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">D</text>
+
+    {/* AB — triple tick, centred at (85,130), spacing 5, crossing ±6 */}
+    <line x1="80" y1="124" x2="80" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="85" y1="124" x2="85" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="90" y1="124" x2="90" y2="136" stroke="#facc15" strokeWidth="2.2" />
+
+    {/* DC — single tick, centred at (85,45), crossing ±6 */}
+    <line x1="85" y1="39" x2="85" y2="51" stroke="#f97316" strokeWidth="2.2" />
+
+    {/* AD — double tick, perpendicular, midpoint (30,87.5) */}
+    <line x1="24" y1="87" x2="35" y2="91" stroke="#22c55e" strokeWidth="2.2" />
+    <line x1="25" y1="84" x2="36" y2="88" stroke="#22c55e" strokeWidth="2.2" />
+
+    {/* BC — double tick, perpendicular, midpoint (140,87.5) */}
+    <line x1="135" y1="91" x2="146" y2="87" stroke="#22c55e" strokeWidth="2.2" />
+    <line x1="134" y1="88" x2="145" y2="84" stroke="#22c55e" strokeWidth="2.2" />
 
     {/* ≅ */}
     <text x="183" y="100" fontSize="22" fill="#facc15" fontFamily="serif">≅</text>
 
-    {/* Trapezoid 2 */}
-    <polygon points="200,130 340,130 310,45 230,45" fill="#14b8a6" fillOpacity="0.15" stroke="#2dd4bf" strokeWidth="2.2" strokeLinejoin="round" />
-    <text x="189" y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">P</text>
-    <text x="342" y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">Q</text>
-    <text x="312" y="40" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">R</text>
-    <text x="218" y="40" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">S</text>
-    <line x1="268" y1="132" x2="268" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="273" y1="132" x2="273" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="278" y1="132" x2="278" y2="122" stroke="#facc15" strokeWidth="2" />
-    <line x1="268" y1="47" x2="268" y2="37" stroke="#f97316" strokeWidth="2" />
-    <line x1="213" y1="91" x2="221" y2="86" stroke="#22c55e" strokeWidth="2" />
-    <line x1="217" y1="86" x2="225" y2="81" stroke="#22c55e" strokeWidth="2" />
-    <line x1="323" y1="91" x2="331" y2="86" stroke="#22c55e" strokeWidth="2" />
-    <line x1="327" y1="86" x2="335" y2="81" stroke="#22c55e" strokeWidth="2" />
+    {/* ── Trapezoid 2: P(200,130) Q(340,130) R(310,45) S(230,45) ── */}
+    <polygon points="200,130 340,130 310,45 230,45"
+      fill="#14b8a6" fillOpacity="0.15" stroke="#2dd4bf" strokeWidth="2.2" strokeLinejoin="round" />
+    <text x="188" y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">P</text>
+    <text x="343" y="147" fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">Q</text>
+    <text x="312" y="40"  fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">R</text>
+    <text x="218" y="40"  fontSize="11" fill="#5eead4" fontWeight="bold" fontFamily="sans-serif">S</text>
+
+    {/* PQ — triple tick, centred at (270,130) */}
+    <line x1="265" y1="124" x2="265" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="270" y1="124" x2="270" y2="136" stroke="#facc15" strokeWidth="2.2" />
+    <line x1="275" y1="124" x2="275" y2="136" stroke="#facc15" strokeWidth="2.2" />
+
+    {/* SR — single tick, centred at (270,45) */}
+    <line x1="270" y1="39" x2="270" y2="51" stroke="#f97316" strokeWidth="2.2" />
+
+    {/* PS — double tick, perpendicular, midpoint (215,87.5)  [x+185 from AD] */}
+    <line x1="209" y1="87" x2="220" y2="91" stroke="#22c55e" strokeWidth="2.2" />
+    <line x1="210" y1="84" x2="221" y2="88" stroke="#22c55e" strokeWidth="2.2" />
+
+    {/* QR — double tick, perpendicular, midpoint (325,87.5) [x+185 from BC] */}
+    <line x1="320" y1="91" x2="331" y2="87" stroke="#22c55e" strokeWidth="2.2" />
+    <line x1="319" y1="88" x2="330" y2="84" stroke="#22c55e" strokeWidth="2.2" />
 
     <text x="180" y="17" textAnchor="middle" fontSize="9.5" fill="#fde68a" fontWeight="bold" fontFamily="sans-serif">Dua trapesium kongruen: semua sisi &amp; sudut bersesuaian sama</text>
   </svg>
