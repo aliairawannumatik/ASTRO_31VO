@@ -39,23 +39,24 @@ function Grid({ children, accent = "#22d3ee" }: { children?: React.ReactNode; ac
   );
 }
 
-function Poly({ pts, color, fill, label }: { pts: [number, number][]; color: string; fill: string; label?: string }) {
+function Poly({ pts, color, fill, label, dashed }: { pts: [number, number][]; color: string; fill: string; label?: string; dashed?: boolean }) {
   const d = pts.map(([x, y]) => `${px(x)},${py(y)}`).join(" ");
   const cx_ = pts.reduce((s, [x]) => s + x, 0) / pts.length;
   const cy_ = pts.reduce((s, [, y]) => s + y, 0) / pts.length;
   return (
     <g>
-      <polygon points={d} fill={fill} stroke={color} strokeWidth="1.5" />
+      <polygon points={d} fill={fill} stroke={color} strokeWidth="1.5" strokeDasharray={dashed ? "4,2" : undefined} />
       {label && <text x={px(cx_)} y={py(cy_) + 4} textAnchor="middle" fill={color} fontSize="9" fontWeight="bold">{label}</text>}
     </g>
   );
 }
 
-function Dot({ x, y, color, label }: { x: number; y: number; color: string; label?: string }) {
+function Dot({ x, y, color, label, ghost }: { x: number; y: number; color: string; label?: string; ghost?: boolean }) {
   return (
     <g>
-      <circle cx={px(x)} cy={py(y)} r={4} fill={color} />
-      {label && <text x={px(x) + 6} y={py(y) - 4} fill={color} fontSize="9" fontWeight="bold">{label}</text>}
+      <circle cx={px(x)} cy={py(y)} r={5} fill={ghost ? "none" : color} stroke={color} strokeWidth={ghost ? 1.5 : 0}
+        strokeDasharray={ghost ? "3,2" : undefined} fillOpacity={ghost ? 0 : 1} strokeOpacity={ghost ? 0.5 : 1} />
+      {label && <text x={px(x) + 7} y={py(y) - 5} fill={color} fontSize="8" fontWeight="bold" fillOpacity={ghost ? 0.5 : 1}>{label}</text>}
     </g>
   );
 }
@@ -73,7 +74,238 @@ function Arrow({ x1, y1, x2, y2, color }: { x1: number; y1: number; x2: number; 
   );
 }
 
-/* ── Diagrams ── */
+/* ── Direction Pad ── */
+type Dir4 = 'up' | 'down' | 'left' | 'right';
+
+function DirPad({ onMove, onReset }: { onMove: (d: Dir4) => void; onReset: () => void }) {
+  const Btn = ({ d, label }: { d: Dir4 | null; label: string }) => (
+    <button
+      onClick={() => { playPopSound(); d ? onMove(d) : onReset(); }}
+      className="w-10 h-10 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-200 font-bold text-base
+                 hover:bg-cyan-500/40 hover:border-cyan-300 active:scale-90 transition-all flex items-center justify-center select-none"
+    >{label}</button>
+  );
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <div className="flex"><Btn d="up" label="↑" /></div>
+      <div className="flex gap-1">
+        <Btn d="left" label="←" />
+        <button onClick={() => { playPopSound(); onReset(); }}
+          className="w-10 h-10 rounded-lg bg-slate-700/60 border border-slate-500/40 text-slate-300 text-sm
+                     hover:bg-slate-600 active:scale-90 transition-all flex items-center justify-center select-none">↺</button>
+        <Btn d="right" label="→" />
+      </div>
+      <div className="flex"><Btn d="down" label="↓" /></div>
+    </div>
+  );
+}
+
+/* ── Legend: valid directions ── */
+function ArahLegend() {
+  return (
+    <div className="bg-slate-800/70 border border-slate-600/40 rounded-xl px-4 py-3 text-xs font-body space-y-1.5">
+      <p className="text-white/50 font-semibold text-[10px] uppercase tracking-wider mb-2">Petunjuk Arah</p>
+      {[["↑", "Geser Atas"], ["↓", "Geser Bawah"], ["←", "Geser Kiri"], ["→", "Geser Kanan"]].map(([arrow, label]) => (
+        <div key={label} className="flex items-center gap-2">
+          <span className="text-green-400 font-bold w-4 text-center">{arrow}</span>
+          <span className="text-green-300/80">{label} ✓</span>
+        </div>
+      ))}
+      <div className="mt-2 pt-2 border-t border-slate-600/40 flex items-center gap-2">
+        <span className="text-red-400 font-bold">↗</span>
+        <span className="text-red-400/80 line-through">Miring</span>
+        <span className="text-red-400 text-[10px]">❌</span>
+      </div>
+    </div>
+  );
+}
+
+/* ── Animasi 1: Geser Titik ── */
+function AnimasiTitik() {
+  const OX = -3, OY = 2;
+  const [pos, setPos] = useState({ x: OX, y: OY });
+  const dx = pos.x - OX, dy = pos.y - OY;
+  const moved = dx !== 0 || dy !== 0;
+
+  const [lastDir, setLastDir] = useState<Dir4 | null>(null);
+
+  const move = (d: Dir4) => {
+    setLastDir(d);
+    setPos(p => {
+      if (d === 'up'    && p.y < 5)  return { ...p, y: p.y + 1 };
+      if (d === 'down'  && p.y > -5) return { ...p, y: p.y - 1 };
+      if (d === 'left'  && p.x > -5) return { ...p, x: p.x - 1 };
+      if (d === 'right' && p.x < 5)  return { ...p, x: p.x + 1 };
+      return p;
+    });
+  };
+
+  const dirDesc = lastDir === 'up' ? '⬆ Geser Atas' : lastDir === 'down' ? '⬇ Geser Bawah'
+    : lastDir === 'left' ? '⬅ Geser Kiri' : lastDir === 'right' ? '➡ Geser Kanan' : null;
+
+  return (
+    <div className="space-y-3">
+      <div className="text-center">
+        <p className="text-cyan-300 font-bold text-sm font-body">📍 Animasi 1 — Translasi Titik</p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">Tekan tombol arah untuk menggeser titik A</p>
+      </div>
+
+      <div className="flex justify-center">
+        <Grid accent="#22d3ee">
+          {/* Ghost origin */}
+          <Dot x={OX} y={OY} color="#22d3ee" label={`A(${OX},${OY})`} ghost />
+          {/* Arrow */}
+          {moved && <Arrow x1={OX} y1={OY} x2={pos.x} y2={pos.y} color="#facc15" />}
+          {/* Vector label mid-arrow */}
+          {moved && (
+            <text
+              x={(px(OX) + px(pos.x)) / 2 + (dy !== 0 ? 12 : 0)}
+              y={(py(OY) + py(pos.y)) / 2 + (dx !== 0 ? -6 : 0)}
+              fill="#fde68a" fontSize="8" textAnchor="middle" fontWeight="bold"
+            >T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</text>
+          )}
+          {/* Current point */}
+          <Dot x={pos.x} y={pos.y} color="#22d3ee" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
+        </Grid>
+      </div>
+
+      {/* Status bar */}
+      <div className="bg-slate-800/60 rounded-lg px-4 py-2 text-center text-xs font-body min-h-[32px] flex items-center justify-center gap-2">
+        {moved ? (
+          <>
+            <span className="text-cyan-300 font-bold">A({OX},{OY})</span>
+            <span className="text-white/40">→</span>
+            <span className="text-yellow-300 font-bold">A'({pos.x},{pos.y})</span>
+            <span className="text-white/40">|</span>
+            <span className="text-yellow-200">T({dx > 0 ? '+' : ''}{dx}, {dy > 0 ? '+' : ''}{dy})</span>
+            {dirDesc && <span className="text-green-400 font-semibold ml-1">{dirDesc}</span>}
+          </>
+        ) : (
+          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser titik!</span>
+        )}
+      </div>
+
+      {/* Controls */}
+      <div className="flex items-center justify-center gap-6">
+        <DirPad onMove={move} onReset={() => { setPos({ x: OX, y: OY }); setLastDir(null); }} />
+        <ArahLegend />
+      </div>
+
+      {/* Concept note */}
+      <div className="bg-cyan-950/40 border border-cyan-500/20 rounded-lg px-4 py-2.5 text-center">
+        <p className="text-cyan-300 text-xs font-body">
+          💡 Setiap kali ditekan, titik bergeser <strong>1 satuan</strong> ke satu arah saja.
+          Inilah yang disebut <strong className="text-yellow-300">translasi</strong> — geser lurus, tidak miring!
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Animasi 2: Geser Segitiga ── */
+type Vec2 = [number, number];
+const TRI_BASE: Vec2[] = [[-3, -1], [0, -1], [-1.5, 2]];
+const TRI_LABELS = ['A', 'B', 'C'];
+
+function AnimasiSegitiga() {
+  const [off, setOff] = useState({ dx: 0, dy: 0 });
+  const [lastDir, setLastDir] = useState<Dir4 | null>(null);
+
+  const current: Vec2[] = TRI_BASE.map(([x, y]) => [x + off.dx, y + off.dy]);
+  const moved = off.dx !== 0 || off.dy !== 0;
+
+  const clampDx = (dx: number) => Math.max(-2, Math.min(5, dx));
+  const clampDy = (dy: number) => Math.max(-4, Math.min(3, dy));
+
+  const move = (d: Dir4) => {
+    setLastDir(d);
+    setOff(o => {
+      if (d === 'up')    return { ...o, dy: clampDy(o.dy + 1) };
+      if (d === 'down')  return { ...o, dy: clampDy(o.dy - 1) };
+      if (d === 'left')  return { ...o, dx: clampDx(o.dx - 1) };
+      if (d === 'right') return { ...o, dx: clampDx(o.dx + 1) };
+      return o;
+    });
+  };
+
+  const dirDesc = lastDir === 'up' ? '⬆ Geser Atas' : lastDir === 'down' ? '⬇ Geser Bawah'
+    : lastDir === 'left' ? '⬅ Geser Kiri' : lastDir === 'right' ? '➡ Geser Kanan' : null;
+
+  return (
+    <div className="space-y-3">
+      <div className="text-center">
+        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 2 — Translasi Segitiga</p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">Tekan tombol arah untuk menggeser segitiga ABC</p>
+      </div>
+
+      <div className="flex justify-center">
+        <Grid accent="#f472b6">
+          {/* Original ghost triangle */}
+          <Poly pts={TRI_BASE} color="#22d3ee" fill="rgba(34,211,238,0.08)" dashed />
+          {/* Ghost vertex labels */}
+          {TRI_BASE.map(([x, y], i) => (
+            <text key={i} x={px(x) + (i === 1 ? 6 : i === 0 ? -14 : -4)} y={py(y) + (i === 2 ? -5 : 10)}
+              fill="#22d3ee" fontSize="8" fillOpacity={0.45}>{TRI_LABELS[i]}({x},{y})</text>
+          ))}
+          {/* Arrows from each vertex */}
+          {moved && TRI_BASE.map(([x, y], i) => (
+            <Arrow key={i} x1={x} y1={y} x2={x + off.dx} y2={y + off.dy} color="#facc15" />
+          ))}
+          {/* Vector label (on middle arrow) */}
+          {moved && (() => {
+            const [mx, my] = TRI_BASE[2];
+            return (
+              <text
+                x={(px(mx) + px(mx + off.dx)) / 2 + (off.dy !== 0 ? 14 : 0)}
+                y={(py(my) + py(my + off.dy)) / 2 + (off.dx !== 0 ? -6 : 0)}
+                fill="#fde68a" fontSize="8" textAnchor="middle" fontWeight="bold"
+              >T({off.dx > 0 ? '+' : ''}{off.dx},{off.dy > 0 ? '+' : ''}{off.dy})</text>
+            );
+          })()}
+          {/* Current (translated) triangle */}
+          <Poly pts={current} color="#f472b6" fill="rgba(244,114,182,0.18)" label={moved ? "△A'B'C'" : "△ABC"} />
+          {/* Current vertex labels */}
+          {moved && current.map(([x, y], i) => (
+            <text key={i} x={px(x) + (i === 1 ? 6 : i === 0 ? -18 : -4)} y={py(y) + (i === 2 ? -5 : 10)}
+              fill="#f472b6" fontSize="8">{TRI_LABELS[i]}'({x},{y})</text>
+          ))}
+        </Grid>
+      </div>
+
+      {/* Status */}
+      <div className="bg-slate-800/60 rounded-lg px-4 py-2 text-center text-xs font-body min-h-[32px] flex items-center justify-center gap-2 flex-wrap">
+        {moved ? (
+          <>
+            <span className="text-cyan-300 font-bold">△ABC</span>
+            <span className="text-white/40">→</span>
+            <span className="text-pink-300 font-bold">△A'B'C'</span>
+            <span className="text-white/40">|</span>
+            <span className="text-yellow-200">T({off.dx > 0 ? '+' : ''}{off.dx}, {off.dy > 0 ? '+' : ''}{off.dy})</span>
+            {dirDesc && <span className="text-green-400 font-semibold ml-1">{dirDesc}</span>}
+          </>
+        ) : (
+          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser segitiga!</span>
+        )}
+      </div>
+
+      {/* Controls */}
+      <div className="flex items-center justify-center gap-6">
+        <DirPad onMove={move} onReset={() => { setOff({ dx: 0, dy: 0 }); setLastDir(null); }} />
+        <ArahLegend />
+      </div>
+
+      {/* Concept note */}
+      <div className="bg-pink-950/40 border border-pink-500/20 rounded-lg px-4 py-2.5 text-center">
+        <p className="text-pink-200 text-xs font-body">
+          💡 Semua titik sudut bergeser dengan <strong>jarak dan arah yang sama</strong>.
+          Bentuk & ukuran segitiga <strong className="text-green-300">tetap</strong> — hanya posisinya yang berubah!
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Static diagrams ── */
 const DiagramKonsep = () => (
   <Grid accent="#22d3ee">
     <Poly pts={[[-4, 1], [-2, 1], [-3, 3]]} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
@@ -118,6 +350,36 @@ const TranslasiPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Transformasi Geometri · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ── ANIMASI INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-cyan-500/30 rounded-xl overflow-hidden">
+            <div className="px-5 pt-4 pb-2">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">🎮</span>
+                <span className="font-body font-bold text-cyan-300 text-sm">Coba Sendiri — Animasi Interaktif</span>
+              </div>
+              <p className="text-white/50 text-xs font-body">
+                Geser titik dan segitiga menggunakan tombol arah. Perhatikan bahwa translasi hanya bergerak
+                <strong className="text-yellow-300"> atas, bawah, kiri, atau kanan</strong> — tidak miring!
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="mx-5 my-3 border-t border-white/10" />
+
+            {/* Animasi 1 */}
+            <div className="px-5 pb-4">
+              <AnimasiTitik />
+            </div>
+
+            {/* Divider */}
+            <div className="mx-5 my-1 border-t border-white/10" />
+
+            {/* Animasi 2 */}
+            <div className="px-5 pb-5 pt-3">
+              <AnimasiSegitiga />
+            </div>
+          </div>
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
