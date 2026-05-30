@@ -111,6 +111,322 @@ function rotatePtAround(x: number, y: number, a: number, b: number, deg: number)
   ];
 }
 
+/* ── Animasi Interaktif Rotasi TITIK ── */
+const TITIK_ANIM_DURATION = 1800;
+
+function AnimasiRotasiTitik() {
+  const [angle, setAngle] = useState<90 | 180 | 270>(90);
+  const [dir, setDir] = useState<"ccw" | "cw">("ccw");
+  const [centerType, setCenterType] = useState<"origin" | "custom">("origin");
+  const [inputA, setInputA] = useState("0");
+  const [inputB, setInputB] = useState("0");
+  const [inputPx, setInputPx] = useState("3");
+  const [inputPy, setInputPy] = useState("2");
+  const [show, setShow] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animAngle, setAnimAngle] = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  const ca = centerType === "origin" ? 0 : parseFloat(inputA) || 0;
+  const cb = centerType === "origin" ? 0 : parseFloat(inputB) || 0;
+  const ptX = parseFloat(inputPx) || 3;
+  const ptY = parseFloat(inputPy) || 2;
+  const actualDeg = dir === "ccw" ? angle : -angle;
+
+  const displayAngle = isAnimating ? animAngle : (show ? actualDeg : 0);
+  const [curX, curY] = rotatePtAround(ptX, ptY, ca, cb, displayAngle);
+  const [resX, resY] = rotatePtAround(ptX, ptY, ca, cb, actualDeg);
+  const showResult = show || isAnimating;
+
+  const dirLabel = dir === "ccw" ? "berlawanan arah jarum jam" : "searah jarum jam";
+  const accentColor = dir === "ccw" ? "#22d3ee" : "#fb923c";
+  const resultColor = dir === "ccw" ? "#f472b6" : "#fb923c";
+
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  const reset = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(false); setAnimAngle(0);
+  };
+
+  const handlePutar = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(true); setAnimAngle(0);
+    const startTime = performance.now();
+    const animate = (now: number) => {
+      const t = Math.min((now - startTime) / TITIK_ANIM_DURATION, 1);
+      setAnimAngle(easeOut(t) * actualDeg);
+      if (t < 1) { rafRef.current = requestAnimationFrame(animate); }
+      else { setAnimAngle(actualDeg); setIsAnimating(false); setShow(true); }
+    };
+    rafRef.current = requestAnimationFrame(animate);
+  };
+
+  const changeAndReset = (fn: () => void) => { fn(); if (rafRef.current) cancelAnimationFrame(rafRef.current); setShow(false); setIsAnimating(false); setAnimAngle(0); };
+
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
+  /* jari-jari dari pusat ke titik P */
+  const dx = ptX - ca, dy = ptY - cb;
+  const radius = Math.sqrt(dx * dx + dy * dy);
+  const radiusSvg = radius * sc;
+
+  /* sudut awal P terhadap pusat (dalam derajat, sistem koordinat layar) */
+  const startAngleDeg = Math.atan2(-(ptY - cb), ptX - ca) * (180 / Math.PI);
+
+  /* arc jejak rotasi */
+  const animatedAngleAbs = Math.abs(displayAngle);
+  const arcEndDeg = dir === "ccw"
+    ? startAngleDeg - animatedAngleAbs   // CCW = sudut naik di math = turun di screen
+    : startAngleDeg + animatedAngleAbs;
+
+  function svgArc(cx: number, cy: number, r: number, a1deg: number, a2deg: number) {
+    const a1 = a1deg * DEG, a2 = a2deg * DEG;
+    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    const x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
+    const diff = ((a2deg - a1deg) % 360 + 360) % 360;
+    const large = diff > 180 ? 1 : 0;
+    const sweep = 1;
+    return `M${x1},${y1} A${r},${r},0,${large},${sweep},${x2},${y2}`;
+  }
+
+  const cx_svg = px(ca), cy_svg = py(cb);
+  const tracePath = svgArc(cx_svg, cy_svg, radiusSvg, startAngleDeg, arcEndDeg);
+
+  const rx_ = Math.round(resX * 100) / 100;
+  const ry_ = Math.round(resY * 100) / 100;
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="text-violet-300 font-bold text-sm font-body">📍 Animasi Interaktif — Rotasi Titik</p>
+
+      {/* Input titik P */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Titik yang Dirotasi</p>
+        <div className="flex items-center gap-3 flex-wrap">
+          <span className="text-sm font-bold font-body text-violet-300">P =</span>
+          <span className="text-sm text-white/60 font-body">(</span>
+          <div className="flex items-center gap-1.5">
+            <label className="text-xs text-white/50 font-body">x =</label>
+            <input
+              type="number"
+              value={inputPx}
+              onChange={e => changeAndReset(() => setInputPx(e.target.value))}
+              className="w-16 bg-slate-700 border border-violet-500/50 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-violet-400"
+            />
+          </div>
+          <span className="text-white/40">,</span>
+          <div className="flex items-center gap-1.5">
+            <label className="text-xs text-white/50 font-body">y =</label>
+            <input
+              type="number"
+              value={inputPy}
+              onChange={e => changeAndReset(() => setInputPy(e.target.value))}
+              className="w-16 bg-slate-700 border border-violet-500/50 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-violet-400"
+            />
+          </div>
+          <span className="text-sm text-white/60 font-body">)</span>
+        </div>
+      </div>
+
+      {/* Pilih sudut */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Sudut Rotasi</p>
+        <div className="flex flex-col gap-2">
+          <div className="space-y-1">
+            <p className="text-xs font-body text-emerald-400 font-semibold">Berlawanan arah jarum jam</p>
+            <div className="flex gap-2 flex-wrap">
+              {([90, 180, 270] as const).map(a => (
+                <button key={`ccw-${a}`}
+                  onClick={() => changeAndReset(() => { setAngle(a); setDir("ccw"); })}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${angle === a && dir === "ccw" ? "bg-emerald-500 border-emerald-400 text-white shadow-lg shadow-emerald-500/30" : "bg-slate-700/60 border-slate-600 text-white/60 hover:border-emerald-500/50 hover:text-white/90"}`}
+                >{a}°</button>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-1">
+            <p className="text-xs font-body text-orange-400 font-semibold">Searah jarum jam</p>
+            <div className="flex gap-2 flex-wrap">
+              {([90, 180, 270] as const).map(a => (
+                <button key={`cw-${a}`}
+                  onClick={() => changeAndReset(() => { setAngle(a); setDir("cw"); })}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${angle === a && dir === "cw" ? "bg-orange-500 border-orange-400 text-white shadow-lg shadow-orange-500/30" : "bg-slate-700/60 border-slate-600 text-white/60 hover:border-orange-500/50 hover:text-white/90"}`}
+                >{a}°</button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Pilih pusat */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Rotasi</p>
+        <div className="flex gap-2">
+          {(["origin", "custom"] as const).map(c => (
+            <button key={c}
+              onClick={() => changeAndReset(() => setCenterType(c))}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${centerType === c ? "bg-yellow-500/80 border-yellow-400 text-white shadow-md" : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"}`}
+            >{c === "origin" ? "O(0, 0)" : "Titik (a, b)"}</button>
+          ))}
+        </div>
+        {centerType === "custom" && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">a =</label>
+            <input type="number" value={inputA} onChange={e => changeAndReset(() => setInputA(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+            <label className="text-xs text-white/60 font-body">b =</label>
+            <input type="number" value={inputB} onChange={e => changeAndReset(() => setInputB(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+          </div>
+        )}
+      </div>
+
+      {/* Grid + panel */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start w-full overflow-hidden">
+
+        {/* SVG Grid */}
+        <div className="w-full max-w-[360px] mx-auto lg:mx-0 flex-shrink-0">
+          <Grid accent={accentColor}>
+
+            {/* Lingkaran orbit penuh (ghost) — selalu tampil agar terlihat lintasan */}
+            {radiusSvg > 2 && (
+              <circle cx={cx_svg} cy={cy_svg} r={radiusSvg}
+                fill="none" stroke="#ffffff" strokeWidth="0.8"
+                strokeDasharray="4,4" opacity="0.12" />
+            )}
+
+            {/* Jejak busur animasi (arc yang sudah dilalui) */}
+            {showResult && animatedAngleAbs > 1 && radiusSvg > 2 && (
+              <path d={tracePath} fill="none"
+                stroke={dir === "ccw" ? "#a78bfa" : "#fb923c"}
+                strokeWidth="2.2" strokeDasharray="6,3" opacity="0.7" />
+            )}
+
+            {/* Garis jari-jari pusat → P asli */}
+            {showResult && (
+              <RadiusLine cx={ca} cy={cb} tx={ptX} ty={ptY} color="#22d3ee" dashed />
+            )}
+
+            {/* Garis jari-jari pusat → P sekarang (bergerak) */}
+            {showResult && (
+              <RadiusLine cx={ca} cy={cb} tx={curX} ty={curY} color="#4ade80" dashed />
+            )}
+
+            {/* Label sudut — textbox cerah atas tengah */}
+            {animatedAngleAbs > 2 && (() => {
+              const bx = S / 2, by = 18, bw = 72, bh = 28;
+              return (
+                <g>
+                  <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
+                    fill={dir === "ccw" ? "#7c3aed" : "#f97316"} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    {Math.round(animatedAngleAbs)}°
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* Titik P asli */}
+            <Dot x={ptX} y={ptY} color="#22d3ee" label={`P(${ptX},${ptY})`} />
+
+            {/* Titik P' (bergerak saat animasi) */}
+            {showResult && (
+              <g>
+                <circle cx={px(curX)} cy={py(curY)} r={7} fill={resultColor} opacity="0.9" />
+                <circle cx={px(curX)} cy={py(curY)} r={11} fill="none" stroke={resultColor} strokeWidth="1.5" opacity="0.5" />
+                {show && !isAnimating && (
+                  <text x={px(curX) + 10} y={py(curY) - 8} fill={resultColor} fontSize="10" fontWeight="bold">
+                    P'({rx_},{ry_})
+                  </text>
+                )}
+              </g>
+            )}
+
+            {/* Pusat rotasi */}
+            <CenterMark x={ca} y={cb} color="#facc15" />
+            <text x={px(ca) + 16} y={py(cb) - 14} fill="#facc15" fontSize="11" fontWeight="bold">
+              {centerType === "origin" ? "O(0,0)" : `O(${ca},${cb})`}
+            </text>
+
+          </Grid>
+
+          {/* Legenda */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2 justify-center text-xs font-body">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-cyan-400 inline-block" />
+              <span className="text-cyan-300">Titik P asli</span>
+            </div>
+            {showResult && (
+              <>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-0.5 rounded bg-green-400 inline-block" />
+                  <span className="text-green-400">Jari-jari putar</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
+                  <span style={{ color: resultColor }}>Titik P' bayangan</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-0.5 rounded inline-block" style={{ background: dir === "ccw" ? "#a78bfa" : "#fb923c" }} />
+                  <span className="text-white/50">Jejak busur</span>
+                </div>
+              </>
+            )}
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-yellow-400 inline-block" />
+              <span className="text-yellow-300">Pusat rotasi</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Panel kanan */}
+        <div className="flex-1 min-w-0 space-y-2 w-full">
+
+          {/* Tombol — di atas info */}
+          <div className="flex gap-2">
+            <button onClick={handlePutar} disabled={isAnimating}
+              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${isAnimating ? "opacity-50 cursor-not-allowed bg-slate-600" : dir === "ccw" ? "bg-violet-600 hover:bg-violet-500 text-white shadow-lg shadow-violet-500/30" : "bg-orange-500 hover:bg-orange-400 text-white shadow-lg shadow-orange-500/30"}`}
+            >{isAnimating ? "⏳ Memutar…" : "🔄 Putar!"}</button>
+            <button onClick={reset}
+              className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
+            >Reset</button>
+          </div>
+
+          {/* Bingkai info sudut */}
+          <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
+            <p className="text-yellow-300 font-bold text-sm">{angle}° {dirLabel}</p>
+            <p className="text-white/50">Titik: P({ptX}, {ptY})</p>
+            <p className="text-white/50">Pusat: {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
+            {isAnimating && <p className="text-emerald-400 font-semibold animate-pulse">⏳ Memutar perlahan…</p>}
+          </div>
+
+          {/* Hasil */}
+          {show && !isAnimating && (
+            <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-3 space-y-2">
+              <p className="text-xs font-bold text-violet-300 font-body uppercase">Hasil Rotasi Titik:</p>
+              <div className="flex items-center gap-2 text-sm font-body flex-wrap">
+                <span className="text-cyan-300 font-semibold">P({ptX}, {ptY})</span>
+                <span className="text-white/30 text-lg">→</span>
+                <span className="font-bold text-base" style={{ color: resultColor }}>P'({rx_}, {ry_})</span>
+              </div>
+              <p className="text-xs text-white/40 font-body">Jarak ke pusat: <span className="text-white/70">{Math.round(radius * 100) / 100} satuan</span> (tetap sama)</p>
+            </div>
+          )}
+
+          {/* Petunjuk */}
+          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5 w-full overflow-hidden">
+            <p className="text-violet-300 font-semibold">💡 Keterangan visual:</p>
+            <p>— <span className="text-cyan-400">Titik biru</span> = P asli (tidak bergerak)</p>
+            <p>— <span style={{ color: resultColor }}>Titik berwarna</span> = P' bayangan (bergerak saat putar)</p>
+            <p>— <span className="text-white/30">Lingkaran putih samar</span> = lintasan orbit titik</p>
+            <p>— Jarak titik ke pusat <strong className="text-white">selalu sama</strong> sebelum &amp; sesudah rotasi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Animasi Interaktif Rotasi ── */
 const ORIG_PTS: [number, number][] = [[1, 1], [4, 1], [1, 3]];
 const ORIG_LABELS = ["A(1,1)", "B(4,1)", "C(1,3)"];
@@ -488,7 +804,7 @@ const DiagramR180 = () => {
 
 /* ── Page ── */
 const RotasiPage = () => {
-  const [open, setOpen] = useState<string[]>(["intro", "animasi", "rumus", "contoh90", "contoh90cw", "contoh180", "rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["intro", "animasi-titik", "animasi", "rumus", "contoh90", "contoh90cw", "contoh180", "rangkuman"]);
   const toggle = (id: string) => { playPopSound(); setOpen(p => p.includes(id) ? p.filter(s => s !== id) : [...p, id]); };
 
   const Hdr = ({ id, icon, color, title }: { id: string; icon: React.ReactNode; color: string; title: string }) => (
@@ -537,7 +853,17 @@ const RotasiPage = () => {
             )}
           </div>
 
-          {/* ANIMASI INTERAKTIF */}
+          {/* ANIMASI INTERAKTIF — ROTASI TITIK */}
+          <div className="bg-card/80 backdrop-blur border border-violet-500/20 rounded-xl overflow-hidden">
+            <Hdr id="animasi-titik" icon={<span>📍</span>} color="#a78bfa" title="Animasi Interaktif — Rotasi Titik" />
+            {open.includes("animasi-titik") && (
+              <div className="px-5 pb-5">
+                <AnimasiRotasiTitik />
+              </div>
+            )}
+          </div>
+
+          {/* ANIMASI INTERAKTIF — ROTASI BANGUN DATAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Hdr id="animasi" icon={<span>🎮</span>} color="#34d399" title="Animasi Interaktif — Rotasi Bangun Datar" />
             {open.includes("animasi") && (
