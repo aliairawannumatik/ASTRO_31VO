@@ -618,27 +618,35 @@ const TranslasiPage = () => {
               </p>
             </div>
 
+            {/* Image before 4 Jenis */}
+            <div className="px-5 mb-4">
+              <img
+                src="/transformasi-geometri-space.png"
+                alt="Transformasi Geometri"
+                className="w-full rounded-xl object-cover"
+              />
+            </div>
+
             {/* 4 Jenis */}
             <div className="px-5 mb-5">
               <p className="text-[11px] font-body text-white/40 text-center mb-3 uppercase tracking-widest">4 Jenis Transformasi</p>
               <div className="grid grid-cols-2 gap-3">
                 <div className="relative bg-cyan-500/20 border-2 border-cyan-400/70 rounded-xl p-3 text-center shadow-lg shadow-cyan-500/10">
-                  <span className="absolute top-1.5 right-1.5 bg-cyan-400 text-[9px] text-black font-bold px-1.5 py-0.5 rounded-full leading-none">Sekarang</span>
                   <div className="text-2xl mb-1">➡️</div>
                   <p className="font-body font-bold text-cyan-300 text-sm">Translasi</p>
                   <p className="font-body text-[11px] text-white/50 mt-0.5">Pergeseran</p>
                 </div>
-                <div className="bg-emerald-500/10 border border-emerald-400/30 rounded-xl p-3 text-center">
+                <div className="relative bg-emerald-500/20 border-2 border-emerald-400/70 rounded-xl p-3 text-center shadow-lg shadow-emerald-500/10">
                   <div className="text-2xl mb-1">🪞</div>
                   <p className="font-body font-bold text-emerald-300 text-sm">Refleksi</p>
                   <p className="font-body text-[11px] text-white/50 mt-0.5">Pencerminan</p>
                 </div>
-                <div className="bg-orange-500/10 border border-orange-400/30 rounded-xl p-3 text-center">
+                <div className="relative bg-orange-500/20 border-2 border-orange-400/70 rounded-xl p-3 text-center shadow-lg shadow-orange-500/10">
                   <div className="text-2xl mb-1">🔄</div>
                   <p className="font-body font-bold text-orange-300 text-sm">Rotasi</p>
                   <p className="font-body text-[11px] text-white/50 mt-0.5">Perputaran</p>
                 </div>
-                <div className="bg-pink-500/10 border border-pink-400/30 rounded-xl p-3 text-center">
+                <div className="relative bg-pink-500/20 border-2 border-pink-400/70 rounded-xl p-3 text-center shadow-lg shadow-pink-500/10">
                   <div className="text-2xl mb-1">🔍</div>
                   <p className="font-body font-bold text-pink-300 text-sm">Dilatasi</p>
                   <p className="font-body text-[11px] text-white/50 mt-0.5">Penskalaan</p>
