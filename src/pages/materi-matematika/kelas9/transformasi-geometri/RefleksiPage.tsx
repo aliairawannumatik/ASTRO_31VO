@@ -299,7 +299,212 @@ function AnimasiRefleksiTitik() {
   );
 }
 
-/* ── Animasi 2 — Refleksi Bangun Datar (Segitiga) ── */
+/* ── Animasi 2 — Refleksi Garis x = k dan y = k ── */
+type ModeK = "x=k" | "y=k";
+
+function NumBtn({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button
+      onClick={() => { playPopSound(); onClick(); }}
+      className="w-7 h-7 rounded-md bg-slate-700/60 border border-slate-500/40 text-white/80 text-sm font-bold
+                 hover:bg-slate-600 active:scale-90 transition-all flex items-center justify-center select-none cursor-pointer"
+    >{label}</button>
+  );
+}
+
+function EditableVal({
+  label, value, min, max, color, onChange,
+}: { label: string; value: number; min: number; max: number; color: string; onChange: (v: number) => void }) {
+  const clamp = (v: number) => Math.max(min, Math.min(max, v));
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <span className="text-[10px] text-white/40 uppercase tracking-wider font-body">{label}</span>
+      <div className="flex items-center gap-1">
+        <NumBtn label="−" onClick={() => onChange(clamp(value - 1))} />
+        <span className="w-8 text-center font-mono text-sm font-bold" style={{ color }}>{value}</span>
+        <NumBtn label="+" onClick={() => onChange(clamp(value + 1))} />
+      </div>
+    </div>
+  );
+}
+
+function AnimasiRefleksiGarisK() {
+  const [mode, setMode] = useState<ModeK>("x=k");
+  const [ptX, setPtX] = useState(2);
+  const [ptY, setPtY] = useState(3);
+  const [k, setK]     = useState(1);
+  const [show, setShow] = useState(false);
+
+  const clamp5 = (v: number) => Math.max(-5, Math.min(5, v));
+
+  const rx = mode === "x=k" ? 2 * k - ptX : ptX;
+  const ry = mode === "x=k" ? ptY : 2 * k - ptY;
+
+  const accent  = mode === "x=k" ? "#f97316" : "#a78bfa";
+  const formula = mode === "x=k"
+    ? `(${ptX}, ${ptY}) → (2·${k}−${ptX}, ${ptY}) = (${rx}, ${ry})`
+    : `(${ptX}, ${ptY}) → (${ptX}, 2·${k}−${ptY}) = (${rx}, ${ry})`;
+
+  const reset = () => { setPtX(2); setPtY(3); setK(1); setShow(false); };
+
+  return (
+    <div className="space-y-3">
+      <div className="text-center">
+        <p className="font-bold text-sm font-body" style={{ color: accent }}>
+          📐 Animasi 2 — Refleksi Garis x = k dan y = k
+        </p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">
+          Atur titik A dan nilai k, lalu tampilkan bayangannya!
+        </p>
+      </div>
+
+      {/* Mode toggle */}
+      <div className="flex justify-center gap-2">
+        {(["x=k", "y=k"] as ModeK[]).map(m => (
+          <button
+            key={m}
+            onClick={() => { playPopSound(); setMode(m); setShow(false); }}
+            className={`px-4 py-1.5 rounded-xl text-xs font-bold font-body border transition-all cursor-pointer ${
+              mode === m ? "text-black scale-105" : "bg-slate-800/60 border-white/10 text-white/50 hover:text-white/80"
+            }`}
+            style={mode === m ? { background: accent, borderColor: accent } : {}}
+          >
+            Garis {m}
+          </button>
+        ))}
+      </div>
+
+      {/* Grid */}
+      <div className="w-full">
+        <Grid accent={accent}>
+          {/* Mirror line */}
+          {mode === "x=k" ? (
+            <>
+              <line
+                x1={px(k)} y1={4} x2={px(k)} y2={S - 4}
+                stroke={accent} strokeWidth="2" strokeDasharray="5,3"
+              />
+              <text
+                x={px(k) + 4} y={14}
+                fontSize="8" fill={accent} fontWeight="bold"
+              >x={k}</text>
+            </>
+          ) : (
+            <>
+              <line
+                x1={4} y1={py(k)} x2={S - 4} y2={py(k)}
+                stroke={accent} strokeWidth="2" strokeDasharray="5,3"
+              />
+              <text
+                x={S - 10} y={py(k) - 5}
+                fontSize="8" fill={accent} fontWeight="bold" textAnchor="end"
+              >y={k}</text>
+            </>
+          )}
+
+          {/* Dashed connector */}
+          {show && (
+            <DashLine x1={ptX} y1={ptY} x2={rx} y2={ry} color="rgba(255,255,255,0.25)" />
+          )}
+
+          {/* Point A */}
+          <Dot
+            x={ptX} y={ptY} color="#22d3ee"
+            label={`A(${ptX},${ptY})`}
+            anchor={ptX >= 0 ? "start" : "end"}
+          />
+
+          {/* Reflected point A' */}
+          {show && (
+            <>
+              <circle cx={px(rx)} cy={py(ry)} r={4} fill={accent} />
+              <text
+                x={px(rx) + (rx >= 0 ? 7 : -7)} y={py(ry) - 4}
+                fill={accent} fontSize="9" fontWeight="bold"
+                textAnchor={rx >= 0 ? "start" : "end"}
+              >A'({rx},{ry})</text>
+            </>
+          )}
+
+          {/* Midpoint marker on mirror line */}
+          {show && (
+            <circle
+              cx={mode === "x=k" ? px(k) : px((ptX + rx) / 2)}
+              cy={mode === "x=k" ? py((ptY + ry) / 2) : py(k)}
+              r={3} fill="white" fillOpacity="0.5"
+            />
+          )}
+        </Grid>
+      </div>
+
+      {/* Controls row */}
+      <div className="flex justify-center flex-wrap gap-4 bg-slate-800/50 rounded-xl px-4 py-3">
+        <EditableVal
+          label="x titik A" value={ptX} min={-4} max={4} color="#22d3ee"
+          onChange={v => { setPtX(clamp5(v)); setShow(false); }}
+        />
+        <EditableVal
+          label="y titik A" value={ptY} min={-4} max={4} color="#22d3ee"
+          onChange={v => { setPtY(clamp5(v)); setShow(false); }}
+        />
+        <div className="w-px bg-white/10 self-stretch" />
+        <EditableVal
+          label={`nilai k`} value={k} min={-4} max={4} color={accent}
+          onChange={v => { setK(clamp5(v)); setShow(false); }}
+        />
+      </div>
+
+      {/* Show / hide button */}
+      <div className="flex justify-center gap-3">
+        <button
+          onClick={() => { playPopSound(); setShow(v => !v); }}
+          className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95 border cursor-pointer ${
+            show
+              ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
+              : "border text-sm font-bold"
+          }`}
+          style={!show ? { background: `${accent}33`, borderColor: `${accent}88`, color: accent } : {}}
+        >
+          {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan A'"}
+        </button>
+        <button
+          onClick={() => { playPopSound(); reset(); }}
+          className="px-3 py-2 rounded-xl text-xs font-body border border-slate-500/40 bg-slate-700/40 text-slate-400 hover:bg-slate-600/60 active:scale-90 transition-all cursor-pointer"
+        >Reset</button>
+      </div>
+
+      {/* Status bar */}
+      <div className="bg-slate-800/60 rounded-lg px-3 py-2 text-center font-body min-h-[32px] flex items-center justify-center flex-wrap gap-1.5 text-[11px] sm:text-xs">
+        {show ? (
+          <>
+            <span className="text-cyan-300 font-bold">A({ptX},{ptY})</span>
+            <span className="text-white/40">→</span>
+            <span className="font-mono text-white/50">{formula}</span>
+            <span className="text-white/30">→</span>
+            <span className="font-bold" style={{ color: accent }}>A'({rx},{ry})</span>
+          </>
+        ) : (
+          <span className="text-white/30">
+            Atur titik A dan nilai k, lalu tekan Tampilkan Bayangan!
+          </span>
+        )}
+      </div>
+
+      {/* Info box */}
+      <div className="rounded-lg px-4 py-2.5 text-center border" style={{ background: `${accent}15`, borderColor: `${accent}40` }}>
+        <p className="text-xs font-body" style={{ color: accent }}>
+          {mode === "x=k" ? (
+            <>💡 Rumus: <strong>A(x, y) → A'(2k−x, y)</strong> · y tetap, x dicerminkan terhadap garis vertikal x = {k}</>
+          ) : (
+            <>💡 Rumus: <strong>A(x, y) → A'(x, 2k−y)</strong> · x tetap, y dicerminkan terhadap garis horizontal y = {k}</>
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Animasi 3 — Refleksi Bangun Datar (Segitiga) ── */
 type Vec2 = [number, number];
 const TRI_BASE: Vec2[] = [[1, 1], [3, 1], [2, 3]];
 const TRI_LABELS = ["A", "B", "C"];
@@ -334,7 +539,7 @@ function AnimasiRefleksiBangun() {
   return (
     <div className="space-y-3">
       <div className="text-center">
-        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 2 — Refleksi Bangun Datar</p>
+        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 3 — Refleksi Bangun Datar</p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan segitiga △ABC, pilih cermin, lalu tampilkan bayangannya!</p>
       </div>
 
@@ -495,6 +700,8 @@ const RefleksiPage = () => {
             {open.includes("animasi") && (
               <div className="px-4 pb-5 space-y-8">
                 <AnimasiRefleksiTitik />
+                <div className="border-t border-white/10" />
+                <AnimasiRefleksiGarisK />
                 <div className="border-t border-white/10" />
                 <AnimasiRefleksiBangun />
               </div>
