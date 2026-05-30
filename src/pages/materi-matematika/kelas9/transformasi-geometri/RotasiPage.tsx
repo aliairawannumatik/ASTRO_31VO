@@ -140,7 +140,7 @@ function AnimasiRotasi() {
   const accentColor = dir === "ccw" ? "#22d3ee" : "#fb923c";
   const resultColor = dir === "ccw" ? "#f472b6" : "#fb923c";
 
-  const easeInOut = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
   const handlePutar = () => {
     playPopSound();
@@ -151,7 +151,7 @@ function AnimasiRotasi() {
     const startTime = performance.now();
     const animate = (now: number) => {
       const t = Math.min((now - startTime) / ANIM_DURATION, 1);
-      const eased = easeInOut(t);
+      const eased = easeOut(t);
       setAnimAngle(eased * actualDeg);
       if (t < 1) {
         rafRef.current = requestAnimationFrame(animate);
@@ -177,7 +177,8 @@ function AnimasiRotasi() {
   }, []);
 
   const arcStart = 30;
-  const arcEnd = dir === "ccw" ? 30 + angle : 30 - angle;
+  const animatedAngleAbs = Math.abs(displayAngle);
+  const arcEnd = dir === "ccw" ? arcStart + animatedAngleAbs : arcStart - animatedAngleAbs;
   const arcR = sc * 2.6;
 
   return (
@@ -284,16 +285,18 @@ function AnimasiRotasi() {
 
             {/* Busur rotasi (arc arrow) */}
             <ArcArrow cx={ca} cy={cb} r={arcR} aStart={arcStart} aEnd={arcEnd} color="#facc15" />
-            <text
-              x={px(ca) + (dir === "ccw" ? -arcR - 10 : arcR + 10)}
-              y={py(cb) - arcR / 2}
-              fontSize="10"
-              fill="#fde68a"
-              textAnchor="middle"
-              fontWeight="bold"
-            >
-              {angle}°
-            </text>
+            {animatedAngleAbs > 2 && (
+              <text
+                x={px(ca) + (dir === "ccw" ? -arcR - 10 : arcR + 10)}
+                y={py(cb) - arcR / 2}
+                fontSize="11"
+                fill="#fde68a"
+                textAnchor="middle"
+                fontWeight="bold"
+              >
+                {Math.round(animatedAngleAbs)}°
+              </text>
+            )}
 
             {/* Segitiga asli */}
             <Poly pts={ORIG_PTS} color="#22d3ee" fill={showRotated ? "rgba(34,211,238,0.08)" : "rgba(34,211,238,0.18)"} label="△ABC" />
@@ -307,7 +310,7 @@ function AnimasiRotasi() {
                 <Poly
                   pts={currentPts}
                   color={resultColor}
-                  fill={`${resultColor}30`}
+                  fill={isAnimating ? `${resultColor}55` : `${resultColor}30`}
                   label={show && !isAnimating ? "△A'B'C'" : undefined}
                 />
                 {currentPts.map(([x, y], i) => (
