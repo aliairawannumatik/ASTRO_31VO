@@ -161,47 +161,54 @@ function AnimasiTitik() {
         <p className="text-white/50 text-[11px] font-body mt-0.5">Tekan tombol arah untuk menggeser titik A</p>
       </div>
 
-      <div className="flex justify-center">
-        <Grid accent="#22d3ee">
-          {/* Ghost origin */}
-          <Dot x={OX} y={OY} color="#ef4444" labelColor="#22d3ee" label={`A(${OX},${OY})`} ghost />
-          {/* Arrow */}
-          {moved && <Arrow x1={OX} y1={OY} x2={pos.x} y2={pos.y} color="#facc15" />}
-          {/* Vector label mid-arrow */}
-          {moved && (
-            <text
-              x={(px(OX) + px(pos.x)) / 2 + (dy !== 0 ? 12 : 0)}
-              y={(py(OY) + py(pos.y)) / 2 + (dx !== 0 ? -6 : 0)}
-              fill="#fde68a" fontSize="8" textAnchor="middle" fontWeight="bold"
-            >T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</text>
-          )}
-          {/* Current point */}
-          <Dot x={pos.x} y={pos.y} color="#ef4444" labelColor="#22d3ee" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
-        </Grid>
-      </div>
+      {/* Landscape: grid left (smaller) + controls right | Portrait: stacked */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-3">
+        {/* Grid — full width portrait, constrained in landscape */}
+        <div className="flex justify-center sm:w-[148px] sm:shrink-0">
+          <Grid accent="#22d3ee">
+            {/* Ghost origin */}
+            <Dot x={OX} y={OY} color="#ef4444" labelColor="#22d3ee" label={`A(${OX},${OY})`} ghost />
+            {/* Arrow */}
+            {moved && <Arrow x1={OX} y1={OY} x2={pos.x} y2={pos.y} color="#facc15" />}
+            {/* Vector label mid-arrow */}
+            {moved && (
+              <text
+                x={(px(OX) + px(pos.x)) / 2 + (dy !== 0 ? 12 : 0)}
+                y={(py(OY) + py(pos.y)) / 2 + (dx !== 0 ? -6 : 0)}
+                fill="#fde68a" fontSize="8" textAnchor="middle" fontWeight="bold"
+              >T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</text>
+            )}
+            {/* Current point */}
+            <Dot x={pos.x} y={pos.y} color="#ef4444" labelColor="#22d3ee" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
+          </Grid>
+        </div>
 
-      {/* Status bar — two rows on portrait, single row on landscape/desktop */}
-      <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex flex-col items-center justify-center gap-0.5 sm:flex-row sm:gap-2 sm:px-4 text-[10px] sm:text-xs">
-        {moved ? (
-          <>
-            <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
-              <span className="text-cyan-300 font-bold whitespace-nowrap">A({OX},{OY})</span>
-              <span className="text-white/40">→</span>
-              <span className="text-yellow-300 font-bold whitespace-nowrap">A'({pos.x},{pos.y})</span>
-              <span className="text-white/40">|</span>
-              <span className="text-yellow-200 whitespace-nowrap">T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</span>
-            </div>
-            {dirDesc && <span className="text-green-400 font-semibold whitespace-nowrap">{dirDesc}</span>}
-          </>
-        ) : (
-          <span className="text-white/30 whitespace-nowrap">Tekan ↑ ↓ ← → untuk menggeser titik!</span>
-        )}
-      </div>
+        {/* Right side: status bar + controls */}
+        <div className="flex flex-col gap-3 flex-1 min-w-0">
+          {/* Status bar */}
+          <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex flex-col items-center justify-center gap-0.5 text-[10px]">
+            {moved ? (
+              <>
+                <div className="flex items-center justify-center gap-1.5 flex-wrap">
+                  <span className="text-cyan-300 font-bold whitespace-nowrap">A({OX},{OY})</span>
+                  <span className="text-white/40">→</span>
+                  <span className="text-yellow-300 font-bold whitespace-nowrap">A'({pos.x},{pos.y})</span>
+                  <span className="text-white/40">|</span>
+                  <span className="text-yellow-200 whitespace-nowrap">T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</span>
+                </div>
+                {dirDesc && <span className="text-green-400 font-semibold whitespace-nowrap">{dirDesc}</span>}
+              </>
+            ) : (
+              <span className="text-white/30 whitespace-nowrap">Tekan ↑ ↓ ← → untuk menggeser titik!</span>
+            )}
+          </div>
 
-      {/* Controls — portrait: pad centered on top, legend below */}
-      <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-center sm:gap-6">
-        <DirPad onMove={move} onReset={() => { setPos({ x: OX, y: OY }); setLastDir(null); }} />
-        <ArahLegend />
+          {/* Controls — pad + legend side-by-side */}
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-3">
+            <DirPad onMove={move} onReset={() => { setPos({ x: OX, y: OY }); setLastDir(null); }} />
+            <ArahLegend />
+          </div>
+        </div>
       </div>
 
       {/* Concept note */}
@@ -251,62 +258,69 @@ function AnimasiSegitiga() {
         <p className="text-white/50 text-[11px] font-body mt-0.5">Tekan tombol arah untuk menggeser segitiga ABC</p>
       </div>
 
-      <div className="flex justify-center">
-        <Grid accent="#f472b6">
-          {/* Original ghost triangle */}
-          <Poly pts={TRI_BASE} color="#22d3ee" fill="rgba(34,211,238,0.08)" dashed />
-          {/* Ghost vertex labels */}
-          {TRI_BASE.map(([x, y], i) => (
-            <text key={i} x={px(x) + (i === 1 ? 6 : i === 0 ? -14 : -4)} y={py(y) + (i === 2 ? -5 : 10)}
-              fill="#22d3ee" fontSize="8" fillOpacity={0.45}>{TRI_LABELS[i]}({x},{y})</text>
-          ))}
-          {/* Arrows from each vertex */}
-          {moved && TRI_BASE.map(([x, y], i) => (
-            <Arrow key={i} x1={x} y1={y} x2={x + off.dx} y2={y + off.dy} color="#facc15" />
-          ))}
-          {/* Vector label (on middle arrow) */}
-          {moved && (() => {
-            const [mx, my] = TRI_BASE[2];
-            return (
-              <text
-                x={(px(mx) + px(mx + off.dx)) / 2 + (off.dy !== 0 ? 14 : 0)}
-                y={(py(my) + py(my + off.dy)) / 2 + (off.dx !== 0 ? -6 : 0)}
-                fill="#fde68a" fontSize="8" textAnchor="middle" fontWeight="bold"
-              >T({off.dx > 0 ? '+' : ''}{off.dx},{off.dy > 0 ? '+' : ''}{off.dy})</text>
-            );
-          })()}
-          {/* Current (translated) triangle */}
-          <Poly pts={current} color="#f472b6" fill="rgba(244,114,182,0.18)" label={moved ? "△A'B'C'" : "△ABC"} />
-          {/* Current vertex labels */}
-          {moved && current.map(([x, y], i) => (
-            <text key={i} x={px(x) + (i === 1 ? 6 : i === 0 ? -18 : -4)} y={py(y) + (i === 2 ? -5 : 10)}
-              fill="#f472b6" fontSize="8">{TRI_LABELS[i]}'({x},{y})</text>
-          ))}
-        </Grid>
-      </div>
+      {/* Landscape: grid left (smaller) + controls right | Portrait: stacked */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-3">
+        {/* Grid — full width portrait, constrained in landscape */}
+        <div className="flex justify-center sm:w-[148px] sm:shrink-0">
+          <Grid accent="#f472b6">
+            {/* Original ghost triangle */}
+            <Poly pts={TRI_BASE} color="#22d3ee" fill="rgba(34,211,238,0.08)" dashed />
+            {/* Ghost vertex labels */}
+            {TRI_BASE.map(([x, y], i) => (
+              <text key={i} x={px(x) + (i === 1 ? 6 : i === 0 ? -14 : -4)} y={py(y) + (i === 2 ? -5 : 10)}
+                fill="#22d3ee" fontSize="8" fillOpacity={0.45}>{TRI_LABELS[i]}({x},{y})</text>
+            ))}
+            {/* Arrows from each vertex */}
+            {moved && TRI_BASE.map(([x, y], i) => (
+              <Arrow key={i} x1={x} y1={y} x2={x + off.dx} y2={y + off.dy} color="#facc15" />
+            ))}
+            {/* Vector label (on middle arrow) */}
+            {moved && (() => {
+              const [mx, my] = TRI_BASE[2];
+              return (
+                <text
+                  x={(px(mx) + px(mx + off.dx)) / 2 + (off.dy !== 0 ? 14 : 0)}
+                  y={(py(my) + py(my + off.dy)) / 2 + (off.dx !== 0 ? -6 : 0)}
+                  fill="#fde68a" fontSize="8" textAnchor="middle" fontWeight="bold"
+                >T({off.dx > 0 ? '+' : ''}{off.dx},{off.dy > 0 ? '+' : ''}{off.dy})</text>
+              );
+            })()}
+            {/* Current (translated) triangle */}
+            <Poly pts={current} color="#f472b6" fill="rgba(244,114,182,0.18)" label={moved ? "△A'B'C'" : "△ABC"} />
+            {/* Current vertex labels */}
+            {moved && current.map(([x, y], i) => (
+              <text key={i} x={px(x) + (i === 1 ? 6 : i === 0 ? -18 : -4)} y={py(y) + (i === 2 ? -5 : 10)}
+                fill="#f472b6" fontSize="8">{TRI_LABELS[i]}'({x},{y})</text>
+            ))}
+          </Grid>
+        </div>
 
-      {/* Status — two rows on portrait, single row on landscape/desktop */}
-      <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex flex-col items-center justify-center gap-0.5 sm:flex-row sm:gap-2 sm:px-4 text-[10px] sm:text-xs">
-        {moved ? (
-          <>
-            <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
-              <span className="text-cyan-300 font-bold whitespace-nowrap">△ABC</span>
-              <span className="text-white/40">→</span>
-              <span className="text-pink-300 font-bold whitespace-nowrap">△A'B'C'</span>
-              <span className="text-white/40">|</span>
-              <span className="text-yellow-200 whitespace-nowrap">T({off.dx > 0 ? '+' : ''}{off.dx},{off.dy > 0 ? '+' : ''}{off.dy})</span>
-            </div>
-            {dirDesc && <span className="text-green-400 font-semibold whitespace-nowrap">{dirDesc}</span>}
-          </>
-        ) : (
-          <span className="text-white/30 whitespace-nowrap">Tekan ↑ ↓ ← → untuk menggeser segitiga!</span>
-        )}
-      </div>
+        {/* Right side: status bar + controls */}
+        <div className="flex flex-col gap-3 flex-1 min-w-0">
+          {/* Status bar */}
+          <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex flex-col items-center justify-center gap-0.5 text-[10px]">
+            {moved ? (
+              <>
+                <div className="flex items-center justify-center gap-1.5 flex-wrap">
+                  <span className="text-cyan-300 font-bold whitespace-nowrap">△ABC</span>
+                  <span className="text-white/40">→</span>
+                  <span className="text-pink-300 font-bold whitespace-nowrap">△A'B'C'</span>
+                  <span className="text-white/40">|</span>
+                  <span className="text-yellow-200 whitespace-nowrap">T({off.dx > 0 ? '+' : ''}{off.dx},{off.dy > 0 ? '+' : ''}{off.dy})</span>
+                </div>
+                {dirDesc && <span className="text-green-400 font-semibold whitespace-nowrap">{dirDesc}</span>}
+              </>
+            ) : (
+              <span className="text-white/30 whitespace-nowrap">Tekan ↑ ↓ ← → untuk menggeser segitiga!</span>
+            )}
+          </div>
 
-      {/* Controls — portrait: pad centered on top, legend below */}
-      <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-center sm:gap-6">
-        <DirPad onMove={move} onReset={() => { setOff({ dx: 0, dy: 0 }); setLastDir(null); }} />
-        <ArahLegend />
+          {/* Controls — pad + legend side-by-side */}
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-3">
+            <DirPad onMove={move} onReset={() => { setOff({ dx: 0, dy: 0 }); setLastDir(null); }} />
+            <ArahLegend />
+          </div>
+        </div>
       </div>
 
       {/* Concept note */}
