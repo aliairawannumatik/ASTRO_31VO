@@ -688,6 +688,14 @@ const TranslasiPage = () => {
                 <p className="text-cyan-300 font-body text-sm font-semibold">🔑 Kata Kunci:</p>
                 <p className="text-white/80 text-sm font-body mt-1">Translasi ditentukan oleh sebuah <strong className="text-yellow-300">vektor translasi</strong> <InlineMath math="\begin{pmatrix}a\\b\end{pmatrix}" /> yang menunjukkan berapa jauh bangun digeser ke kanan/kiri (a) dan ke atas/bawah (b).</p>
               </div>
+              <div>
+                <img
+                  src="/translasi-claw-machine.png"
+                  alt="Ilustrasi Translasi"
+                  className="w-full rounded-xl object-cover"
+                />
+                <p className="text-[10px] text-white/30 text-right mt-1 font-body">bing.com/images/create</p>
+              </div>
             </div>
           </div>
 
