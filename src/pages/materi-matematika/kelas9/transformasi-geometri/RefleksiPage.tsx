@@ -45,9 +45,23 @@ function Poly({ pts, color, fill, label }: { pts: [number, number][]; color: str
   return (
     <g>
       <polygon points={d} fill={fill} stroke={color} strokeWidth="1.5" />
-      {label && <text x={px(cx_)} y={py(cy_) + 4} textAnchor="middle" fill={color} fontSize="9" fontWeight="bold">{label}</text>}
+      {label && <text x={px(cx_)} y={py(cy_) + 3} textAnchor="middle" fill={color} fontSize="7" opacity="0.75">{label}</text>}
     </g>
   );
+}
+
+/* Compute smart label offset: pushes label away from triangle centroid */
+function vtxOffset(x: number, y: number, pts: [number,number][]) {
+  const cx = pts.reduce((s,[vx])=>s+vx,0)/pts.length;
+  const cy = pts.reduce((s,[,vy])=>s+vy,0)/pts.length;
+  const vx = x - cx, vy = y - cy;
+  const len = Math.sqrt(vx*vx+vy*vy) || 1;
+  const nx = vx/len, ny = vy/len;
+  return {
+    dx: nx * 12,
+    dy: -ny * 12,   // SVG y-axis is flipped
+    anchor: nx > 0.25 ? "start" : nx < -0.25 ? "end" : "middle",
+  };
 }
 
 function Dot({ x, y, color, label, anchor = "start" }: { x: number; y: number; color: string; label?: string; anchor?: string }) {
@@ -529,28 +543,32 @@ function AnimasiRefleksiBangun() {
           <Grid accent="#f472b6">
             <MirrorLine mirror={mirror} />
             <Poly pts={current} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
-            {current.map(([x, y], i) => (
-              <text
-                key={i}
-                x={px(x) + (i === 1 ? 6 : -4)} y={py(y) + (i === 2 ? -5 : 11)}
-                fill="#67e8f9" fontSize="8" fontWeight="bold"
-                textAnchor={i === 1 ? "start" : "end"}
-              >{TRI_LABELS[i]}({x},{y})</text>
-            ))}
+            {current.map(([x, y], i) => {
+              const { dx, dy, anchor } = vtxOffset(x, y, current);
+              return (
+                <text key={i}
+                  x={px(x) + dx} y={py(y) + dy}
+                  fill="#67e8f9" fontSize="8" fontWeight="bold"
+                  textAnchor={anchor}
+                >{TRI_LABELS[i]}({x},{y})</text>
+              );
+            })}
             {show && (
               <>
                 {current.map(([x, y], i) => (
                   <DashLine key={i} x1={x} y1={y} x2={reflected[i][0]} y2={reflected[i][1]} color="rgba(255,255,255,0.2)" />
                 ))}
                 <Poly pts={reflected} color={mc.color} fill={`${mc.color}22`} label="△A'B'C'" />
-                {reflected.map(([x, y], i) => (
-                  <text
-                    key={i}
-                    x={px(x) + (i === 1 ? 6 : -4)} y={py(y) + (i === 2 ? -5 : 11)}
-                    fill={mc.color} fontSize="8" fontWeight="bold"
-                    textAnchor={i === 1 ? "start" : "end"}
-                  >{TRI_LABELS[i]}'({x},{y})</text>
-                ))}
+                {reflected.map(([x, y], i) => {
+                  const { dx, dy, anchor } = vtxOffset(x, y, reflected);
+                  return (
+                    <text key={i}
+                      x={px(x) + dx} y={py(y) + dy}
+                      fill={mc.color} fontSize="8" fontWeight="bold"
+                      textAnchor={anchor}
+                    >{TRI_LABELS[i]}'({x},{y})</text>
+                  );
+                })}
               </>
             )}
           </Grid>
