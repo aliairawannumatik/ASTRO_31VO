@@ -635,6 +635,185 @@ function AnimasiRefleksiBangun() {
   );
 }
 
+/* ── Animasi 4 — Refleksi Bangun Datar terhadap Garis x = k dan y = k ── */
+function AnimasiRefleksiBangunGarisK() {
+  const [mode, setMode] = useState<ModeK>("x=k");
+  const [off, setOff]   = useState({ dx: 0, dy: 0 });
+  const [k, setK]       = useState(1);
+  const [show, setShow] = useState(false);
+
+  const clamp5 = (v: number) => Math.max(-5, Math.min(5, v));
+  const current: Vec2[] = TRI_BASE.map(([x, y]) => [x + off.dx, y + off.dy]);
+  const inRange = (pts: Vec2[]) => pts.every(([x, y]) => x >= -5 && x <= 5 && y >= -5 && y <= 5);
+
+  const move = (d: Dir4) => {
+    setShow(false);
+    setOff(o => {
+      const next =
+        d === "up"    ? { ...o, dy: o.dy + 1 } :
+        d === "down"  ? { ...o, dy: o.dy - 1 } :
+        d === "left"  ? { ...o, dx: o.dx - 1 } :
+                        { ...o, dx: o.dx + 1 };
+      const newPts: Vec2[] = TRI_BASE.map(([x, y]) => [x + next.dx, y + next.dy]);
+      return inRange(newPts) ? next : o;
+    });
+  };
+
+  const reset = () => { setOff({ dx: 0, dy: 0 }); setK(1); setShow(false); };
+
+  const reflected: Vec2[] = current.map(([x, y]) =>
+    mode === "x=k" ? [2 * k - x, y] : [x, 2 * k - y]
+  );
+
+  const accent = mode === "x=k" ? "#f97316" : "#a78bfa";
+
+  const ShowBtn = ({ small }: { small?: boolean }) => (
+    <button
+      onClick={() => { playPopSound(); setShow(v => !v); }}
+      className={`rounded-xl font-bold font-body transition-all active:scale-95 border cursor-pointer text-center ${
+        small ? "px-4 py-2 text-xs" : "px-5 py-2 text-sm"
+      } ${show
+        ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
+        : "border"
+      }`}
+      style={!show ? { background: `${accent}33`, borderColor: `${accent}88`, color: accent } : {}}
+    >
+      {show
+        ? (small ? "↺ Sembunyikan" : "↺ Sembunyikan Bayangan")
+        : (small ? "🪞 Tampilkan\nBayangan" : "🪞 Tampilkan Bayangan △A'B'C'")}
+    </button>
+  );
+
+  const KControl = () => (
+    <EditableVal
+      label="nilai k" value={k} min={-4} max={4} color={accent}
+      onChange={v => { setK(clamp5(v)); setShow(false); }}
+    />
+  );
+
+  return (
+    <div className="space-y-3">
+      <div className="text-center">
+        <p className="font-bold text-sm font-body" style={{ color: accent }}>
+          🔺 Animasi 4 — Refleksi Bangun Datar terhadap Garis x = k dan y = k
+        </p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">
+          Arahkan segitiga △ABC, atur nilai k, lalu tampilkan bayangannya!
+        </p>
+      </div>
+
+      {/* Mode toggle */}
+      <div className="flex justify-center gap-2">
+        {(["x=k", "y=k"] as ModeK[]).map(m => (
+          <button
+            key={m}
+            onClick={() => { playPopSound(); setMode(m); setShow(false); }}
+            className={`px-4 py-1.5 rounded-xl text-xs font-bold font-body border transition-all cursor-pointer ${
+              mode === m ? "text-black scale-105" : "bg-slate-800/60 border-white/10 text-white/50 hover:text-white/80"
+            }`}
+            style={mode === m ? { background: accent, borderColor: accent } : {}}
+          >
+            Garis {m}
+          </button>
+        ))}
+      </div>
+
+      {/* Grid + right column */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+        <div className="sm:flex-1 min-w-0">
+          <Grid accent={accent}>
+            {/* Mirror line */}
+            {mode === "x=k" ? (
+              <>
+                <line x1={px(k)} y1={4} x2={px(k)} y2={S - 4}
+                  stroke={accent} strokeWidth="2" strokeDasharray="5,3" />
+                <text x={px(k) + 4} y={14} fontSize="8" fill={accent} fontWeight="bold">x={k}</text>
+              </>
+            ) : (
+              <>
+                <line x1={4} y1={py(k)} x2={S - 4} y2={py(k)}
+                  stroke={accent} strokeWidth="2" strokeDasharray="5,3" />
+                <text x={S - 10} y={py(k) - 5} fontSize="8" fill={accent} fontWeight="bold" textAnchor="end">y={k}</text>
+              </>
+            )}
+            {/* Dashed connectors */}
+            {show && current.map(([x, y], i) => (
+              <DashLine key={i} x1={x} y1={y} x2={reflected[i][0]} y2={reflected[i][1]} color="rgba(255,255,255,0.2)" />
+            ))}
+            {/* Original triangle */}
+            <Poly pts={current} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
+            {current.map(([x, y], i) => {
+              const { dx, dy, anchor } = vtxOffset(x, y, current);
+              return (
+                <text key={i} x={px(x) + dx} y={py(y) + dy}
+                  fill="#67e8f9" fontSize="8" fontWeight="bold" textAnchor={anchor}
+                >{TRI_LABELS[i]}({x},{y})</text>
+              );
+            })}
+            {/* Reflected triangle */}
+            {show && (
+              <>
+                <Poly pts={reflected} color={accent} fill={`${accent}22`} label="△A'B'C'" />
+                {reflected.map(([x, y], i) => {
+                  const { dx, dy, anchor } = vtxOffset(x, y, reflected);
+                  return (
+                    <text key={i} x={px(x) + dx} y={py(y) + dy}
+                      fill={accent} fontSize="8" fontWeight="bold" textAnchor={anchor}
+                    >{TRI_LABELS[i]}'({x},{y})</text>
+                  );
+                })}
+              </>
+            )}
+          </Grid>
+        </div>
+
+        {/* Landscape right column */}
+        <div className="hidden sm:flex sm:shrink-0 sm:flex-col sm:items-center sm:gap-3">
+          <DirPad onMove={move} onReset={reset} />
+          <KControl />
+          <ShowBtn small />
+        </div>
+      </div>
+
+      {/* Status bar */}
+      <div className="bg-slate-800/60 rounded-lg px-3 py-2 text-center font-body min-h-[32px] flex items-center justify-center gap-1.5 flex-wrap text-[11px] sm:text-xs">
+        {show ? (
+          <>
+            {current.map(([x, y], i) => (
+              <span key={i} className="flex items-center gap-1">
+                <span className="text-cyan-300 font-bold">{TRI_LABELS[i]}({x},{y})</span>
+                <span className="text-white/40">→</span>
+                <span className="font-bold" style={{ color: accent }}>{TRI_LABELS[i]}'({reflected[i][0]},{reflected[i][1]})</span>
+                {i < 2 && <span className="text-white/20 mx-0.5">·</span>}
+              </span>
+            ))}
+          </>
+        ) : (
+          <span className="text-white/30">Arahkan segitiga dan atur k, lalu tampilkan bayangannya!</span>
+        )}
+      </div>
+
+      {/* Portrait controls */}
+      <div className="flex flex-col items-center gap-3 sm:hidden">
+        <DirPad onMove={move} onReset={reset} />
+        <KControl />
+        <ShowBtn />
+      </div>
+
+      {/* Info box */}
+      <div className="rounded-lg px-4 py-2.5 text-center border" style={{ background: `${accent}15`, borderColor: `${accent}40` }}>
+        <p className="text-xs font-body" style={{ color: accent }}>
+          {mode === "x=k" ? (
+            <>💡 Rumus: <strong>A(x, y) → A'(2k−x, y)</strong> · semua titik dicerminkan terhadap garis vertikal x = {k}</>
+          ) : (
+            <>💡 Rumus: <strong>A(x, y) → A'(x, 2k−y)</strong> · semua titik dicerminkan terhadap garis horizontal y = {k}</>
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 /* ── Static SVG diagrams ── */
 const DiagramSbX = () => (
   <Grid accent="#34d399">
@@ -703,6 +882,8 @@ const RefleksiPage = () => {
                 <AnimasiRefleksiBangun />
                 <div className="border-t border-white/10" />
                 <AnimasiRefleksiGarisK />
+                <div className="border-t border-white/10" />
+                <AnimasiRefleksiBangunGarisK />
               </div>
             )}
           </div>
