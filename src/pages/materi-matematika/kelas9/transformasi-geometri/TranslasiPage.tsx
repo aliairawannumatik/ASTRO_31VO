@@ -371,56 +371,36 @@ function DiagramTitikAnimated() {
           {/* Selalu tampil: titik asal A */}
           <Dot x={-3} y={2} color="#22d3ee" label="A(−3,2)" />
 
-          {/* ── Langkah 1: geser kanan 4 satuan ── */}
-          <line x1={aX} y1={aY} x2={mX - 4} y2={mY}
-            stroke="#facc15" strokeWidth="1.5" strokeDasharray="6 4"
-            style={ld(hLen, 0.9, 0)} />
-          {/* Kepala panah horizontal */}
-          <polygon points={`${mX},${mY} ${mX-4},${mY+3} ${mX-4},${mY-3}`}
-            fill="#facc15" style={op(0.8)} />
-          {/* Label "+4": dekat ujung kanan agar tidak bertabrakan label A */}
-          <text x={mX - 8} y={aY - 7} fontSize="7.5" fill="#fde68a"
-            textAnchor="end" fontWeight="bold" style={op(0.7)}>+4 →</text>
-
-          {/* Busur horizontal: 4 hop, masing-masing 1 satuan, muncul berurutan */}
+          {/* ── Langkah 1: 4 hop busur ke kanan, slowmotion ── */}
           {hArcs.map((d, i) => (
-            <path key={`ha${i}`} d={d} fill="none" stroke="#facc15" strokeWidth="1.5"
-              strokeDasharray="35" style={ld(35, 0.22, i * 0.22)} />
+            <path key={`ha${i}`} d={d} fill="none" stroke="#facc15" strokeWidth="1.8"
+              strokeDasharray="35" style={ld(35, 0.5, i * 0.42)} />
           ))}
-          {/* Label "a=4" setelah hop ke-4 selesai */}
+          {/* Label "+4 →" muncul setelah semua hop horizontal selesai */}
+          <text x={mX - 8} y={aY - 8} fontSize="7.5" fill="#fde68a"
+            textAnchor="end" fontWeight="bold" style={op(1.55, 0.4)}>+4 →</text>
           <text x={(aX + mX) / 2} y={aY + 27} fontSize="7" fill="#fde68a"
-            textAnchor="middle" style={op(0.9, 0.35)}>a = 4</text>
+            textAnchor="middle" style={op(1.6, 0.35)}>a = 4</text>
 
-          {/* ── Langkah 2: geser atas 2 satuan ── */}
-          <circle cx={mX} cy={mY} r={3} fill="#a78bfa" style={op(0.85, 0.3)} />
-          <line x1={mX} y1={mY} x2={a2X} y2={a2Y + 4}
-            stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="6 4"
-            style={ld(vLen, 0.7, 0.9)} />
-          {/* Kepala panah vertikal */}
-          <polygon points={`${a2X},${a2Y} ${a2X-3},${a2Y+4} ${a2X+3},${a2Y+4}`}
-            fill="#a78bfa" style={op(1.5)} />
-          {/* Label "↑+2": di KANAN garis vertikal, tidak bertabrakan label A' */}
-          <text x={a2X + 8} y={(mY + a2Y) / 2 + 3} fontSize="7.5" fill="#c4b5fd"
-            textAnchor="start" fontWeight="bold" style={op(1.3)}>↑ +2</text>
-
-          {/* Busur vertikal: 2 hop, masing-masing 1 satuan, muncul berurutan */}
+          {/* ── Langkah 2: 2 hop busur ke atas, mulai setelah langkah 1 selesai ── */}
+          {/* Titik pivot kecil di (1,2) */}
+          <circle cx={mX} cy={mY} r={3} fill="#a78bfa" style={op(1.65, 0.3)} />
           {vArcs.map((d, i) => (
-            <path key={`va${i}`} d={d} fill="none" stroke="#a78bfa" strokeWidth="1.5"
-              strokeDasharray="35" style={ld(35, 0.28, 0.9 + i * 0.28)} />
+            <path key={`va${i}`} d={d} fill="none" stroke="#a78bfa" strokeWidth="1.8"
+              strokeDasharray="35" style={ld(35, 0.5, 1.7 + i * 0.45)} />
           ))}
-          {/* Label "b=2" setelah hop ke-2 selesai */}
+          {/* Label "↑+2" muncul setelah hop vertikal selesai */}
+          <text x={a2X + 8} y={(mY + a2Y) / 2 + 3} fontSize="7.5" fill="#c4b5fd"
+            textAnchor="start" fontWeight="bold" style={op(2.5, 0.4)}>↑ +2</text>
           <text x={a2X + 22} y={(mY + a2Y) / 2 + 3} fontSize="7" fill="#c4b5fd"
-            textAnchor="start" style={op(1.5, 0.35)}>b = 2</text>
+            textAnchor="start" style={op(2.55, 0.35)}>b = 2</text>
 
           {/* ── A' muncul terakhir ── */}
-          <circle cx={a2X} cy={a2Y} r={5} fill="#f472b6" style={op(1.7, 0.5)} />
-          {/* Label A'(1,4): di KIRI titik agar tidak tabrak label ↑+2 di kanan */}
+          <circle cx={a2X} cy={a2Y} r={5} fill="#f472b6" style={op(2.65, 0.5)} />
           <text x={a2X - 7} y={a2Y - 6} fontSize="8" fill="#f472b6"
-            textAnchor="end" fontWeight="bold" style={op(1.7, 0.5)}>A'(1,4)</text>
-
-          {/* T(4,2): pojok kiri atas, jauh dari semua label lain */}
+            textAnchor="end" fontWeight="bold" style={op(2.65, 0.5)}>A'(1,4)</text>
           <text x={px(-4.8)} y={py(3.8)} fontSize="7.5" fill="#e879f9"
-            textAnchor="start" style={op(2.0, 0.4)}>T(4,2)</text>
+            textAnchor="start" style={op(2.8, 0.4)}>T(4,2)</text>
         </Grid>
 
       {/* Reveal / Reset button */}
