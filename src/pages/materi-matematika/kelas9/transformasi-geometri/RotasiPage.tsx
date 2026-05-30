@@ -334,7 +334,7 @@ function AnimasiRotasi() {
           </Grid>
 
           {/* Legenda warna di bawah grid */}
-          <div className="flex gap-4 mt-2 justify-center text-xs font-body">
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2 justify-center text-xs font-body">
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-0.5 rounded bg-cyan-400 inline-block" />
               <span className="text-cyan-300">Asli (△ABC)</span>
