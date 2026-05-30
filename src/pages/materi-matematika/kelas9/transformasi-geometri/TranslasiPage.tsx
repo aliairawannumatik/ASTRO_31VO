@@ -248,7 +248,7 @@ function AnimasiSegitiga() {
   return (
     <div className="space-y-3">
       <div className="text-center">
-        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 2 — Translasi Segitiga</p>
+        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 2 —<br className="sm:hidden" /> Translasi Bangun Datar</p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">Tekan tombol arah untuk menggeser segitiga ABC</p>
       </div>
 
@@ -286,24 +286,26 @@ function AnimasiSegitiga() {
         </Grid>
       </div>
 
-      {/* Status */}
-      <div className="bg-slate-800/60 rounded-lg px-4 py-2 text-center text-xs font-body min-h-[32px] flex items-center justify-center gap-2 flex-wrap">
+      {/* Status — two rows on portrait, single row on landscape/desktop */}
+      <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex flex-col items-center justify-center gap-0.5 sm:flex-row sm:gap-2 sm:px-4 text-[10px] sm:text-xs">
         {moved ? (
           <>
-            <span className="text-cyan-300 font-bold">△ABC</span>
-            <span className="text-white/40">→</span>
-            <span className="text-pink-300 font-bold">△A'B'C'</span>
-            <span className="text-white/40">|</span>
-            <span className="text-yellow-200">T({off.dx > 0 ? '+' : ''}{off.dx}, {off.dy > 0 ? '+' : ''}{off.dy})</span>
-            {dirDesc && <span className="text-green-400 font-semibold ml-1">{dirDesc}</span>}
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
+              <span className="text-cyan-300 font-bold whitespace-nowrap">△ABC</span>
+              <span className="text-white/40">→</span>
+              <span className="text-pink-300 font-bold whitespace-nowrap">△A'B'C'</span>
+              <span className="text-white/40">|</span>
+              <span className="text-yellow-200 whitespace-nowrap">T({off.dx > 0 ? '+' : ''}{off.dx},{off.dy > 0 ? '+' : ''}{off.dy})</span>
+            </div>
+            {dirDesc && <span className="text-green-400 font-semibold whitespace-nowrap">{dirDesc}</span>}
           </>
         ) : (
-          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser segitiga!</span>
+          <span className="text-white/30 whitespace-nowrap">Tekan ↑ ↓ ← → untuk menggeser segitiga!</span>
         )}
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center justify-center gap-6">
+      {/* Controls — portrait: pad centered on top, legend below */}
+      <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-center sm:gap-6">
         <DirPad onMove={move} onReset={() => { setOff({ dx: 0, dy: 0 }); setLastDir(null); }} />
         <ArahLegend />
       </div>
