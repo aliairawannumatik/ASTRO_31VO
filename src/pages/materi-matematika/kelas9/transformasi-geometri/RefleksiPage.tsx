@@ -1007,25 +1007,69 @@ const RefleksiPage = () => {
             </div>
           </div>
 
-          {/* CONTOH 2 - Sumbu Y */}
+          {/* CONTOH 2 - Garis x = k */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📌 Contoh 2: Refleksi terhadap Sumbu-y" />
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📌 Contoh 2: Pencerminan terhadap Garis x = 3" />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-violet-500/10 border border-violet-500/30 rounded-xl p-4">
-                <p className="text-sm font-semibold text-violet-300 font-body mb-2">Soal:</p>
-                <p className="text-sm text-white/80 font-body">Tentukan bayangan segitiga PQR dengan <InlineMath math="P(1,4), Q(3,4), R(2,2)" /> jika dicerminkan terhadap sumbu-y!</p>
+
+              {/* Soal */}
+              <div className="bg-violet-500/10 border border-violet-500/30 rounded-xl p-4 space-y-3">
+                <p className="text-sm font-semibold text-violet-300 font-body">Soal:</p>
+                <p className="text-sm text-white/80 font-body leading-relaxed">
+                  Hasil pencerminan titik <span className="text-cyan-300 font-bold">(8, 4)</span> terhadap garis <span className="text-yellow-300 font-bold">x = 3</span> adalah . . . .
+                </p>
+                <div className="space-y-1 pl-2">
+                  {[["A.", "(−8, 4)"], ["B.", "(−5, 4)"], ["C.", "(−4, 4)"], ["D.", "(−2, 4)"]].map(([huruf, pilihan]) => (
+                    <p key={huruf} className="text-sm font-body text-white/70">
+                      <span className="font-bold text-white/90 min-w-[20px] inline-block">{huruf}</span> {pilihan}
+                    </p>
+                  ))}
+                </div>
               </div>
-              <div className="flex justify-center"><DiagramSbY /></div>
-              <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
-                <p className="text-sm font-semibold text-violet-300 font-body">Penyelesaian (x dinegasikan):</p>
-                {[["P(1, 4)", "P'(−1, 4)"], ["Q(3, 4)", "Q'(−3, 4)"], ["R(2, 2)", "R'(−2, 2)"]].map(([dari, ke]) => (
-                  <div key={dari} className="flex items-center gap-3 text-sm font-body">
-                    <span className="text-cyan-300 min-w-[80px]">{dari}</span>
-                    <span className="text-white/40">→</span>
-                    <span className="text-pink-300 font-bold">{ke}</span>
+
+              {/* Pembahasan */}
+              <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                <p className="text-sm font-semibold text-violet-300 font-body">Pembahasan:</p>
+
+                <div className="bg-slate-700/50 rounded-lg px-3 py-2 text-center">
+                  <p className="text-xs text-white/50 font-body">Rumus refleksi terhadap garis x = k</p>
+                  <p className="text-sm font-bold text-yellow-300 font-mono mt-0.5">(x, y) → (2k − x, y)</p>
+                  <p className="text-xs text-white/40 font-body">y tetap, x dicerminkan terhadap garis vertikal x = k</p>
+                </div>
+
+                <div className="space-y-2 text-sm font-body">
+                  <p className="text-white/60">Diketahui: titik <span className="text-cyan-300 font-bold">(8, 4)</span>, garis cermin <span className="text-yellow-300 font-bold">x = 3</span> sehingga k = 3</p>
+                  <div className="bg-slate-700/40 rounded-lg p-3 space-y-1.5">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-white/50">x′</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">2k − x</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">2 × 3 − 8</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">6 − 8</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-emerald-300 font-bold">−2</span>
+                    </div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-white/50">y′</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">y</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-emerald-300 font-bold">4</span>
+                      <span className="text-white/30 text-xs">(y tetap)</span>
+                    </div>
                   </div>
-                ))}
+                  <p className="text-white/60">Jadi bayangan titik (8, 4) adalah <span className="text-emerald-300 font-bold">(−2, 4)</span></p>
+                </div>
+
+                <div className="bg-violet-500/15 border border-violet-400/40 rounded-xl px-4 py-3 text-center">
+                  <p className="text-violet-300 font-bold text-sm font-body">
+                    Jawaban: <span className="text-yellow-300 text-base">D. (−2, 4)</span>
+                  </p>
+                </div>
               </div>
+
             </div>
           </div>
 
