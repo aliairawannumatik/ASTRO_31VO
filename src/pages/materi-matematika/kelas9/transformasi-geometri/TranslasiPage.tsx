@@ -336,12 +336,21 @@ const DiagramKonsep = () => (
 function DiagramTitikAnimated() {
   const [revealed, setRevealed] = useState(false);
 
-  // Precompute SVG arrow coords (A(-3,2) → A'(1,4))
-  const ax1 = px(-3), ay1 = py(2), ax2 = px(1), ay2 = py(4);
-  const ddx = ax2 - ax1, ddy = ay2 - ay1;
-  const arrowLen = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
-  const ux = ddx / arrowLen, uy = ddy / arrowLen;
-  const ex = ax2 - ux * 4, ey = ay2 - uy * 4; // arrowhead base
+  // SVG coords — A(-3,2) → mid(1,2) → A'(1,4)
+  // Step 1 horizontal: A → mid | Step 2 vertical: mid → A'
+  const aX  = px(-3), aY  = py(2);   // A
+  const mX  = px(1),  mY  = py(2);   // intermediate (1,2)
+  const a2X = px(1),  a2Y = py(4);   // A'
+
+  const hLen = mX - aX;              // horizontal segment length ≈ 62.8px
+  const vLen = mY - a2Y;             // vertical segment length ≈ 31.4px (pos, going up)
+
+  // Busur (arc) paths
+  const arcH = `M ${aX},${aY + 14} Q ${(aX + mX) / 2},${aY + 26} ${mX},${aY + 14}`;
+  const arcV = `M ${a2X + 14},${mY} Q ${a2X + 26},${(mY + a2Y) / 2} ${a2X + 14},${a2Y}`;
+
+  const tr = (delay: number, dur = 0.4) =>
+    revealed ? `opacity ${dur}s ease ${delay}s` : 'none';
 
   return (
     <div className="space-y-3">
@@ -350,38 +359,74 @@ function DiagramTitikAnimated() {
           {/* Always visible: original point A */}
           <Dot x={-3} y={2} color="#22d3ee" label="A(−3,2)" />
 
-          {/* Animated arrow line — dashed, draws from A toward A' */}
+          {/* ── Langkah 1: geser kanan 4 satuan ── */}
           <line
-            x1={ax1} y1={ay1} x2={ex} y2={ey}
-            stroke="#a78bfa" strokeWidth="1.5"
-            strokeDasharray="6 4"
-            strokeDashoffset={revealed ? 0 : arrowLen}
-            style={{ transition: revealed ? 'stroke-dashoffset 1.4s ease-in-out' : 'none' }}
+            x1={aX} y1={aY} x2={mX - 4} y2={mY}
+            stroke="#facc15" strokeWidth="1.5" strokeDasharray="6 4"
+            strokeDashoffset={revealed ? 0 : hLen}
+            style={{ transition: revealed ? 'stroke-dashoffset 0.9s ease-in-out 0s' : 'none' }}
           />
-
-          {/* Arrowhead — fades in after line finishes */}
+          {/* Arrowhead horizontal */}
           <polygon
-            points={`${ax2},${ay2} ${ex - uy * 3},${ey + ux * 3} ${ex + uy * 3},${ey - ux * 3}`}
+            points={`${mX},${mY} ${mX - 4},${mY + 3} ${mX - 4},${mY - 3}`}
+            fill="#facc15"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(0.8) }}
+          />
+          {/* Label "+4 →" di atas segmen horizontal */}
+          <text x={(aX + mX) / 2} y={aY - 6} fontSize="7.5" fill="#fde68a" textAnchor="middle" fontWeight="bold"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(0.7) }}
+          >+4 →</text>
+
+          {/* Busur langkah horizontal */}
+          <path d={arcH} fill="none" stroke="#facc15" strokeWidth="1.2" strokeDasharray="3 2"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(0.9, 0.5) }}
+          />
+          <text x={(aX + mX) / 2} y={aY + 34} fontSize="7" fill="#fde68a" textAnchor="middle"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.0, 0.4) }}
+          >a = 4</text>
+
+          {/* ── Langkah 2: geser atas 2 satuan ── */}
+          {/* Titik perantara kecil di (1,2) */}
+          <circle cx={mX} cy={mY} r={3} fill="#a78bfa"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(0.85, 0.3) }}
+          />
+          <line
+            x1={mX} y1={mY} x2={a2X} y2={a2Y + 4}
+            stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="6 4"
+            strokeDashoffset={revealed ? 0 : vLen}
+            style={{ transition: revealed ? 'stroke-dashoffset 0.7s ease-in-out 0.9s' : 'none' }}
+          />
+          {/* Arrowhead vertical */}
+          <polygon
+            points={`${a2X},${a2Y} ${a2X - 3},${a2Y + 4} ${a2X + 3},${a2Y + 4}`}
             fill="#a78bfa"
-            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.4s ease 1.2s' : 'none' }}
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.5) }}
           />
+          {/* Label "↑ +2" kiri segmen vertikal */}
+          <text x={a2X - 10} y={(mY + a2Y) / 2} fontSize="7.5" fill="#c4b5fd" textAnchor="middle" fontWeight="bold"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.3) }}
+          >↑+2</text>
 
-          {/* T(4,2) label — appears with arrowhead */}
-          <text
-            x={px(-1.5)} y={py(2.8)} fontSize="8" fill="#c4b5fd" textAnchor="middle"
-            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.4s ease 1.2s' : 'none' }}
-          >T(4,2)</text>
-
-          {/* A' dot — appears last */}
-          <circle
-            cx={px(1)} cy={py(4)} r={5} fill="#f472b6"
-            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.5s ease 1.5s' : 'none' }}
+          {/* Busur langkah vertikal */}
+          <path d={arcV} fill="none" stroke="#a78bfa" strokeWidth="1.2" strokeDasharray="3 2"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.6, 0.5) }}
           />
-          {/* A' label */}
-          <text
-            x={px(1) + 7} y={py(4) - 5} fill="#f472b6" fontSize="8" fontWeight="bold"
-            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.5s ease 1.5s' : 'none' }}
+          <text x={a2X + 34} y={(mY + a2Y) / 2} fontSize="7" fill="#c4b5fd" textAnchor="middle"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.7, 0.4) }}
+          >b = 2</text>
+
+          {/* ── A' muncul terakhir ── */}
+          <circle cx={a2X} cy={a2Y} r={5} fill="#f472b6"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.6, 0.5) }}
+          />
+          <text x={a2X + 7} y={a2Y - 5} fill="#f472b6" fontSize="8" fontWeight="bold"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.6, 0.5) }}
           >A'(1,4)</text>
+
+          {/* T(4,2) label di tengah */}
+          <text x={px(-0.5)} y={py(3.5)} fontSize="8" fill="#e879f9" textAnchor="middle"
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.8, 0.4) }}
+          >T(4,2)</text>
         </Grid>
       </div>
 
