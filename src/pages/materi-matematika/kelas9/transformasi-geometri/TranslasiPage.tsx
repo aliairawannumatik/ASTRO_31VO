@@ -497,7 +497,7 @@ function DiagramBangunAnimated() {
         {VERTS.map(([vx, vy]) =>
           mkHArcs(vx, vy).map((d, i) => (
             <path key={`h${vx}${vy}${i}`} d={d} fill="none" stroke="#facc15" strokeWidth="1.2"
-              strokeDasharray="3 3" style={op(i * 0.38, 0.35)} />
+              style={op(i * 0.38, 0.35)} />
           ))
         )}
         {/* "a = −3" di bawah busur P */}
@@ -515,7 +515,7 @@ function DiagramBangunAnimated() {
         {VERTS.map(([vx, vy]) =>
           mkVArcs(vx, vy).map((d, j) => (
             <path key={`v${vx}${vy}${j}`} d={d} fill="none" stroke="#a78bfa" strokeWidth="1.2"
-              strokeDasharray="3 3" style={op(1.3 + j * 0.42, 0.35)} />
+              style={op(1.3 + j * 0.42, 0.35)} />
           ))
         )}
         {/* "b = −2" di kanan busur vertikal P */}
