@@ -385,7 +385,7 @@ function DiagramTitikAnimated() {
 
   return (
     <div className="space-y-3">
-      <div className="sm:max-w-[175px] sm:mx-auto">
+      <div className="sm:max-w-[210px] sm:mx-auto">
       <Grid accent="#a78bfa">
           {/* Selalu tampil: titik asal A — label di KIRI titik */}
           <Dot x={-3} y={2} color="#22d3ee" />
@@ -486,7 +486,7 @@ function DiagramBangunAnimated() {
 
   return (
     <div className="space-y-3">
-      <div className="sm:max-w-[175px] sm:mx-auto">
+      <div className="sm:max-w-[210px] sm:mx-auto">
       <Grid accent="#f472b6">
         {/* ── Always visible: original △PQR ── */}
         <polygon points={ptsStr([[1,1],[4,1],[2,4]])}
