@@ -350,11 +350,11 @@ function DiagramTitikAnimated() {
           {/* Always visible: original point A */}
           <Dot x={-3} y={2} color="#22d3ee" label="A(−3,2)" />
 
-          {/* Animated arrow line — draws from A toward A' */}
+          {/* Animated arrow line — dashed, draws from A toward A' */}
           <line
             x1={ax1} y1={ay1} x2={ex} y2={ey}
             stroke="#a78bfa" strokeWidth="1.5"
-            strokeDasharray={arrowLen}
+            strokeDasharray="6 4"
             strokeDashoffset={revealed ? 0 : arrowLen}
             style={{ transition: revealed ? 'stroke-dashoffset 1.4s ease-in-out' : 'none' }}
           />
