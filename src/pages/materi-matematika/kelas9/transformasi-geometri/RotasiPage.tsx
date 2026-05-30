@@ -15,7 +15,7 @@ const DEG = Math.PI / 180;
 
 function Grid({ children, accent = "#fb923c" }: { children?: React.ReactNode; accent?: string }) {
   return (
-    <svg width={S} height={S} className="rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
+    <svg viewBox={`0 0 ${S} ${S}`} className="w-full rounded-xl border bg-slate-900/70" style={{ maxWidth: S, aspectRatio: "1 / 1", borderColor: `${accent}33` }}>
       {ticks.map(t => (
         <g key={t}>
           <line x1={px(t)} y1={0} x2={px(t)} y2={S} stroke="#334155" strokeWidth="0.6" />
@@ -268,8 +268,8 @@ function AnimasiRotasi() {
       {/* Grid + info */}
       <div className="flex flex-col lg:flex-row gap-4 items-start">
 
-        {/* SVG Grid — diperbesar */}
-        <div className="flex-shrink-0 mx-auto lg:mx-0">
+        {/* SVG Grid — responsif */}
+        <div className="w-full max-w-[360px] mx-auto lg:mx-0 flex-shrink-0">
           <Grid accent={accentColor}>
 
             {/* Garis jari-jari dari pusat ke titik ASLI (selalu tampil saat animasi/hasil) */}
