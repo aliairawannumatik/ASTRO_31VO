@@ -596,6 +596,78 @@ const TranslasiPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
+          {/* ── TRANSFORMASI GEOMETRI OVERVIEW ── */}
+          <div className="bg-gradient-to-br from-indigo-950/80 via-purple-950/60 to-blue-950/80 border border-indigo-400/30 rounded-2xl overflow-hidden">
+            {/* Header */}
+            <div className="px-5 pt-6 pb-3 text-center">
+              <div className="text-4xl mb-2">🔷</div>
+              <h2 className="font-display text-lg font-bold text-indigo-300 mb-1">Transformasi Geometri</h2>
+              <p className="text-xs text-white/40 font-body uppercase tracking-widest">Kelas 9 SMP · Matematika</p>
+            </div>
+
+            {/* Divider */}
+            <div className="mx-5 border-t border-indigo-400/20 mb-4" />
+
+            {/* Definisi */}
+            <div className="mx-5 mb-5 bg-indigo-500/10 border border-indigo-400/25 rounded-xl p-4">
+              <p className="text-xs font-body font-bold text-indigo-300 uppercase tracking-wider mb-2">📖 Definisi</p>
+              <p className="text-sm font-body text-white/80 leading-relaxed">
+                <strong className="text-indigo-300">Transformasi geometri</strong> adalah suatu operasi yang
+                <strong className="text-white"> memindahkan, mencerminkan, memutar, atau mengubah ukuran</strong> bangun
+                di bidang koordinat mengikuti aturan tertentu — sehingga setiap titik punya bayangan baru.
+              </p>
+            </div>
+
+            {/* 4 Jenis */}
+            <div className="px-5 mb-5">
+              <p className="text-[11px] font-body text-white/40 text-center mb-3 uppercase tracking-widest">4 Jenis Transformasi</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative bg-cyan-500/20 border-2 border-cyan-400/70 rounded-xl p-3 text-center shadow-lg shadow-cyan-500/10">
+                  <span className="absolute top-1.5 right-1.5 bg-cyan-400 text-[9px] text-black font-bold px-1.5 py-0.5 rounded-full leading-none">Sekarang</span>
+                  <div className="text-2xl mb-1">➡️</div>
+                  <p className="font-body font-bold text-cyan-300 text-sm">Translasi</p>
+                  <p className="font-body text-[11px] text-white/50 mt-0.5">Pergeseran</p>
+                </div>
+                <div className="bg-emerald-500/10 border border-emerald-400/30 rounded-xl p-3 text-center">
+                  <div className="text-2xl mb-1">🪞</div>
+                  <p className="font-body font-bold text-emerald-300 text-sm">Refleksi</p>
+                  <p className="font-body text-[11px] text-white/50 mt-0.5">Pencerminan</p>
+                </div>
+                <div className="bg-orange-500/10 border border-orange-400/30 rounded-xl p-3 text-center">
+                  <div className="text-2xl mb-1">🔄</div>
+                  <p className="font-body font-bold text-orange-300 text-sm">Rotasi</p>
+                  <p className="font-body text-[11px] text-white/50 mt-0.5">Perputaran</p>
+                </div>
+                <div className="bg-pink-500/10 border border-pink-400/30 rounded-xl p-3 text-center">
+                  <div className="text-2xl mb-1">🔍</div>
+                  <p className="font-body font-bold text-pink-300 text-sm">Dilatasi</p>
+                  <p className="font-body text-[11px] text-white/50 mt-0.5">Penskalaan</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Konsep Penting */}
+            <div className="px-5 pb-5">
+              <p className="text-[11px] font-body text-white/40 text-center mb-3 uppercase tracking-widest">Konsep Penting</p>
+              <div className="space-y-2">
+                {([
+                  { icon: "📍", color: "text-yellow-300", bg: "bg-yellow-500/10 border-yellow-400/20", label: "Pra-bayangan (Pre-image)", desc: "Bangun awal sebelum ditransformasi" },
+                  { icon: "🎯", color: "text-cyan-300",   bg: "bg-cyan-500/10 border-cyan-400/20",   label: "Bayangan (Image)", desc: "Bangun hasil transformasi — titiknya diberi tanda ′ (aksen)" },
+                  { icon: "📐", color: "text-violet-300", bg: "bg-violet-500/10 border-violet-400/20", label: "Isometri", desc: "Transformasi yang mempertahankan ukuran & bentuk: Translasi, Refleksi, Rotasi" },
+                  { icon: "🔎", color: "text-pink-300",   bg: "bg-pink-500/10 border-pink-400/20",   label: "Non-Isometri", desc: "Transformasi yang mengubah ukuran: Dilatasi" },
+                ] as const).map(({ icon, color, bg, label, desc }) => (
+                  <div key={label} className={`flex items-start gap-3 border rounded-xl px-3 py-2.5 ${bg}`}>
+                    <span className="text-lg shrink-0 mt-0.5">{icon}</span>
+                    <div>
+                      <p className={`text-xs font-bold font-body ${color}`}>{label}</p>
+                      <p className="text-xs text-white/55 font-body mt-0.5">{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHdr icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title="🌟 Apa Itu Translasi?" />
