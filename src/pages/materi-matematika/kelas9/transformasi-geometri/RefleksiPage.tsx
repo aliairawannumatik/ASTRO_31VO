@@ -934,24 +934,16 @@ const RefleksiPage = () => {
             </div>
           </div>
 
-          {/* CONTOH 1 - Sumbu X */}
+          {/* CONTOH 1 - Soal Pilihan Ganda Sumbu Y */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#34d399" title="📌 Contoh 1: Refleksi terhadap Sumbu-x" />
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#34d399" title="📌 Contoh 1: Pencerminan terhadap Sumbu Y" />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
-                <p className="text-sm font-semibold text-emerald-300 font-body mb-2">Soal:</p>
-                <p className="text-sm text-white/80 font-body">Tentukan bayangan segitiga ABC dengan <InlineMath math="A(-4,1), B(-1,1), C(-2,3)" /> jika dicerminkan terhadap sumbu-x!</p>
-              </div>
-              <div className="flex justify-center"><DiagramSbX /></div>
-              <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
-                <p className="text-sm font-semibold text-emerald-300 font-body">Penyelesaian (y dinegasikan):</p>
-                {[["A(−4, 1)", "A'(−4, −1)"], ["B(−1, 1)", "B'(−1, −1)"], ["C(−2, 3)", "C'(−2, −3)"]].map(([dari, ke]) => (
-                  <div key={dari} className="flex items-center gap-3 text-sm font-body">
-                    <span className="text-cyan-300 min-w-[80px]">{dari}</span>
-                    <span className="text-white/40">→</span>
-                    <span className="text-pink-300 font-bold">{ke}</span>
-                  </div>
-                ))}
+              <div className="flex justify-center">
+                <img
+                  src="/soal-refleksi-sumbu-y.png"
+                  alt="Soal pencerminan terhadap sumbu Y"
+                  className="rounded-xl max-w-full bg-white p-4"
+                />
               </div>
             </div>
           </div>
