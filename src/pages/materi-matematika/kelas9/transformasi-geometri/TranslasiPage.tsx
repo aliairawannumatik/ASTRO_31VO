@@ -368,39 +368,43 @@ function DiagramTitikAnimated() {
   return (
     <div className="space-y-3">
       <Grid accent="#a78bfa">
-          {/* Selalu tampil: titik asal A */}
-          <Dot x={-3} y={2} color="#22d3ee" label="A(−3,2)" />
+          {/* Selalu tampil: titik asal A — label di KIRI titik */}
+          <Dot x={-3} y={2} color="#22d3ee" />
+          <text x={aX - 8} y={aY - 5} fontSize="8" fill="#22d3ee"
+            textAnchor="end" fontWeight="bold">A(−3,2)</text>
 
           {/* ── Langkah 1: 4 hop busur ke kanan, slowmotion ── */}
           {hArcs.map((d, i) => (
             <path key={`ha${i}`} d={d} fill="none" stroke="#facc15" strokeWidth="1.8"
               strokeDasharray="35" style={ld(35, 0.5, i * 0.42)} />
           ))}
-          {/* Label "+4 →" muncul setelah semua hop horizontal selesai */}
-          <text x={mX - 8} y={aY - 8} fontSize="7.5" fill="#fde68a"
-            textAnchor="end" fontWeight="bold" style={op(1.55, 0.4)}>+4 →</text>
-          <text x={(aX + mX) / 2} y={aY + 27} fontSize="7" fill="#fde68a"
+          {/* "+4" di bawah busur, tengah-tengah busur horizontal */}
+          <text x={(aX + mX) / 2} y={aY + 14} fontSize="7.5" fill="#fde68a"
+            textAnchor="middle" fontWeight="bold" style={op(1.55, 0.4)}>+4</text>
+          {/* "a = 4" sedikit di bawah "+4" */}
+          <text x={(aX + mX) / 2} y={aY + 22} fontSize="7" fill="#fde68a"
             textAnchor="middle" style={op(1.6, 0.35)}>a = 4</text>
 
           {/* ── Langkah 2: 2 hop busur ke atas, mulai setelah langkah 1 selesai ── */}
-          {/* Titik pivot kecil di (1,2) */}
           <circle cx={mX} cy={mY} r={3} fill="#a78bfa" style={op(1.65, 0.3)} />
           {vArcs.map((d, i) => (
             <path key={`va${i}`} d={d} fill="none" stroke="#a78bfa" strokeWidth="1.8"
               strokeDasharray="35" style={ld(35, 0.5, 1.7 + i * 0.45)} />
           ))}
-          {/* Label "↑+2" muncul setelah hop vertikal selesai */}
+          {/* "↑ +2" di tengah busur vertikal, "b = 2" di bawahnya */}
           <text x={a2X + 8} y={(mY + a2Y) / 2 + 3} fontSize="7.5" fill="#c4b5fd"
             textAnchor="start" fontWeight="bold" style={op(2.5, 0.4)}>↑ +2</text>
-          <text x={a2X + 22} y={(mY + a2Y) / 2 + 3} fontSize="7" fill="#c4b5fd"
+          <text x={a2X + 8} y={(mY + a2Y) / 2 + 13} fontSize="7" fill="#c4b5fd"
             textAnchor="start" style={op(2.55, 0.35)}>b = 2</text>
 
-          {/* ── A' muncul terakhir ── */}
+          {/* ── A' muncul terakhir — label di KANAN titik ── */}
           <circle cx={a2X} cy={a2Y} r={5} fill="#f472b6" style={op(2.65, 0.5)} />
-          <text x={a2X - 7} y={a2Y - 6} fontSize="8" fill="#f472b6"
-            textAnchor="end" fontWeight="bold" style={op(2.65, 0.5)}>A'(1,4)</text>
-          <text x={px(-4.8)} y={py(3.8)} fontSize="7.5" fill="#e879f9"
-            textAnchor="start" style={op(2.8, 0.4)}>T(4,2)</text>
+          <text x={a2X + 8} y={a2Y - 6} fontSize="8" fill="#f472b6"
+            textAnchor="start" fontWeight="bold" style={op(2.65, 0.5)}>A'(1,4)</text>
+
+          {/* T(4,2) — headline besar di pojok kiri atas */}
+          <text x={px(-4.8)} y={py(3.8)} fontSize="11" fill="#e879f9"
+            textAnchor="start" fontWeight="bold" style={op(2.8, 0.4)}>T(4,2)</text>
         </Grid>
 
       {/* Reveal / Reset button */}
