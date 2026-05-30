@@ -178,7 +178,7 @@ function AnimasiTitik() {
               >T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</text>
             )}
             {/* Current point */}
-            <Dot x={pos.x} y={pos.y} color="#ef4444" labelColor="#22d3ee" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
+            <Dot x={pos.x} y={pos.y} color="#ef4444" labelColor="#ef4444" label={moved ? `A'(${pos.x},${pos.y})` : `A(${pos.x},${pos.y})`} />
           </Grid>
         </div>
         {/* DirPad — portrait: hidden here (shown below); landscape: right of grid */}
