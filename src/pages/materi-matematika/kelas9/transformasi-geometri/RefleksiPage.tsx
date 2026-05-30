@@ -4,7 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
-import { InlineMath, BlockMath } from "react-katex";
+import { InlineMath } from "react-katex";
 
 /* ── SVG helpers ── */
 const S = 220, sc = S / 14, ox = S / 2, oy = S / 2;
@@ -14,7 +14,7 @@ const ticks = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
 
 function Grid({ children, accent = "#34d399" }: { children?: React.ReactNode; accent?: string }) {
   return (
-    <svg width={S} height={S} className="rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
+    <svg viewBox={`0 0 ${S} ${S}`} className="w-full rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
       {ticks.map(t => (
         <g key={t}>
           <line x1={px(t)} y1={0} x2={px(t)} y2={S} stroke="#334155" strokeWidth="0.5" />
@@ -50,20 +50,378 @@ function Poly({ pts, color, fill, label }: { pts: [number, number][]; color: str
   );
 }
 
-function Dot({ x, y, color, label }: { x: number; y: number; color: string; label?: string }) {
+function Dot({ x, y, color, label, anchor = "start" }: { x: number; y: number; color: string; label?: string; anchor?: string }) {
   return (
     <g>
       <circle cx={px(x)} cy={py(y)} r={4} fill={color} />
-      {label && <text x={px(x) + 6} y={py(y) - 4} fill={color} fontSize="9" fontWeight="bold">{label}</text>}
+      {label && <text x={px(x) + (anchor === "end" ? -7 : 7)} y={py(y) - 4} fill={color} fontSize="9" fontWeight="bold" textAnchor={anchor}>{label}</text>}
     </g>
   );
 }
 
 function DashLine({ x1, y1, x2, y2, color }: { x1: number; y1: number; x2: number; y2: number; color: string }) {
-  return <line x1={px(x1)} y1={py(y1)} x2={px(x2)} y2={py(y2)} stroke={color} strokeWidth="1.5" strokeDasharray="5,3" />;
+  return <line x1={px(x1)} y1={py(y1)} x2={px(x2)} y2={py(y2)} stroke={color} strokeWidth="1" strokeDasharray="4,2" />;
 }
 
-/* ── Diagrams ── */
+/* ── Mirror line types ── */
+type MirrorType = "sumbu-x" | "sumbu-y" | "y=x" | "y=-x" | "titik-o";
+
+const MIRRORS: { id: MirrorType; label: string; rule: string; color: string }[] = [
+  { id: "sumbu-x", label: "Sumbu X",  rule: "(x,y)→(x,−y)",   color: "#22d3ee" },
+  { id: "sumbu-y", label: "Sumbu Y",  rule: "(x,y)→(−x,y)",   color: "#f472b6" },
+  { id: "y=x",    label: "y = x",    rule: "(x,y)→(y,x)",     color: "#fbbf24" },
+  { id: "y=-x",   label: "y = −x",   rule: "(x,y)→(−y,−x)",  color: "#a78bfa" },
+  { id: "titik-o", label: "Titik O", rule: "(x,y)→(−x,−y)",  color: "#34d399" },
+];
+
+function reflectMath(x: number, y: number, m: MirrorType): [number, number] {
+  switch (m) {
+    case "sumbu-x": return [x, -y];
+    case "sumbu-y": return [-x, y];
+    case "y=x":     return [y, x];
+    case "y=-x":    return [-y, -x];
+    case "titik-o": return [-x, -y];
+  }
+}
+
+/* Render the dashed mirror line inside the 220px SVG */
+function MirrorLine({ mirror }: { mirror: MirrorType }) {
+  const m = MIRRORS.find(m => m.id === mirror)!;
+  const c = m.color;
+  const dash = "5,3";
+  const lw = "2";
+  switch (mirror) {
+    case "sumbu-x":
+      return (
+        <>
+          <line x1={4} y1={oy} x2={S-4} y2={oy} stroke={c} strokeWidth={lw} strokeDasharray={dash} />
+          <text x={S-10} y={oy-5} fontSize="8" fill={c} textAnchor="end" fontWeight="bold">Sumbu X</text>
+        </>
+      );
+    case "sumbu-y":
+      return (
+        <>
+          <line x1={ox} y1={4} x2={ox} y2={S-4} stroke={c} strokeWidth={lw} strokeDasharray={dash} />
+          <text x={ox+4} y={14} fontSize="8" fill={c} fontWeight="bold">Sumbu Y</text>
+        </>
+      );
+    case "y=x":
+      return (
+        <>
+          <line x1={px(-5)} y1={py(-5)} x2={px(5)} y2={py(5)} stroke={c} strokeWidth={lw} strokeDasharray={dash} />
+          <text x={px(4.2)} y={py(4.2)-5} fontSize="8" fill={c} textAnchor="middle" fontWeight="bold">y=x</text>
+        </>
+      );
+    case "y=-x":
+      return (
+        <>
+          <line x1={px(-5)} y1={py(5)} x2={px(5)} y2={py(-5)} stroke={c} strokeWidth={lw} strokeDasharray={dash} />
+          <text x={px(3.5)} y={py(-3.5)+14} fontSize="8" fill={c} textAnchor="middle" fontWeight="bold">y=−x</text>
+        </>
+      );
+    case "titik-o":
+      return (
+        <>
+          <circle cx={ox} cy={oy} r={8} fill={c} fillOpacity="0.2" stroke={c} strokeWidth="1.5" />
+          <circle cx={ox} cy={oy} r={3} fill={c} />
+          <text x={ox+10} y={oy-7} fontSize="8" fill={c} fontWeight="bold">O(0,0)</text>
+        </>
+      );
+  }
+}
+
+/* Compact mirror selector */
+function MirrorSelector({ value, onChange }: { value: MirrorType; onChange: (m: MirrorType) => void }) {
+  return (
+    <div className="w-full">
+      <p className="text-[10px] text-white/40 uppercase tracking-wider font-body mb-1.5 text-center">Pilih Cermin</p>
+      <div className="flex flex-wrap justify-center gap-1.5">
+        {MIRRORS.map(m => (
+          <button
+            key={m.id}
+            onClick={() => { playPopSound(); onChange(m.id); }}
+            className={`px-2.5 py-1 rounded-lg text-[11px] font-bold font-body border transition-all cursor-pointer ${
+              value === m.id
+                ? "text-black scale-105"
+                : "bg-slate-800/60 border-white/10 text-white/50 hover:text-white/80"
+            }`}
+            style={value === m.id ? { background: m.color, borderColor: m.color } : {}}
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
+      {(() => {
+        const m = MIRRORS.find(m => m.id === value)!;
+        return (
+          <p className="text-center mt-1.5 font-mono text-[11px]" style={{ color: m.color }}>
+            Aturan: {m.rule}
+          </p>
+        );
+      })()}
+    </div>
+  );
+}
+
+/* Direction pad (same style as TranslasiPage) */
+type Dir4 = "up" | "down" | "left" | "right";
+
+function DirPad({ onMove, onReset }: { onMove: (d: Dir4) => void; onReset: () => void }) {
+  const Btn = ({ d, label }: { d: Dir4 | null; label: string }) => (
+    <button
+      onClick={() => { playPopSound(); d ? onMove(d) : onReset(); }}
+      className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 font-bold text-base
+                 hover:bg-emerald-500/40 hover:border-emerald-300 active:scale-90 transition-all flex items-center justify-center select-none cursor-pointer"
+    >{label}</button>
+  );
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <div className="flex"><Btn d="up" label="↑" /></div>
+      <div className="flex gap-1">
+        <Btn d="left" label="←" />
+        <button
+          onClick={() => { playPopSound(); onReset(); }}
+          className="w-10 h-10 rounded-lg bg-slate-700/60 border border-slate-500/40 text-slate-300 text-sm
+                     hover:bg-slate-600 active:scale-90 transition-all flex items-center justify-center select-none cursor-pointer"
+        >↺</button>
+        <Btn d="right" label="→" />
+      </div>
+      <div className="flex"><Btn d="down" label="↓" /></div>
+    </div>
+  );
+}
+
+/* ── Animasi 1 — Refleksi Titik ── */
+function AnimasiRefleksiTitik() {
+  const OX = 3, OY = 2;
+  const [pos, setPos]       = useState({ x: OX, y: OY });
+  const [mirror, setMirror] = useState<MirrorType>("sumbu-x");
+  const [show, setShow]     = useState(false);
+
+  const move = (d: Dir4) => {
+    setShow(false);
+    setPos(p => {
+      if (d === "up"    && p.y < 5)  return { ...p, y: p.y + 1 };
+      if (d === "down"  && p.y > -5) return { ...p, y: p.y - 1 };
+      if (d === "left"  && p.x > -5) return { ...p, x: p.x - 1 };
+      if (d === "right" && p.x < 5)  return { ...p, x: p.x + 1 };
+      return p;
+    });
+  };
+
+  const reset = () => { setPos({ x: OX, y: OY }); setShow(false); };
+
+  const [rx, ry] = reflectMath(pos.x, pos.y, mirror);
+  const mc = MIRRORS.find(m => m.id === mirror)!;
+
+  return (
+    <div className="space-y-3">
+      <div className="text-center">
+        <p className="text-emerald-300 font-bold text-sm font-body">📍 Animasi 1 — Refleksi Titik</p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan titik A, pilih cermin, lalu tampilkan bayangannya!</p>
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+        <div className="sm:flex-1 min-w-0">
+          <Grid accent="#34d399">
+            <MirrorLine mirror={mirror} />
+            {/* Original point */}
+            <Dot x={pos.x} y={pos.y} color="#22d3ee"
+              label={`A(${pos.x},${pos.y})`}
+              anchor={pos.x >= 0 ? "start" : "end"} />
+            {/* Dashed connector + reflection */}
+            {show && (
+              <>
+                <DashLine x1={pos.x} y1={pos.y} x2={rx} y2={ry} color="rgba(255,255,255,0.25)" />
+                <circle cx={px(rx)} cy={py(ry)} r={4} fill={mc.color} />
+                <text
+                  x={px(rx) + (rx >= 0 ? 7 : -7)} y={py(ry) - 4}
+                  fill={mc.color} fontSize="9" fontWeight="bold"
+                  textAnchor={rx >= 0 ? "start" : "end"}
+                >A'({rx},{ry})</text>
+              </>
+            )}
+          </Grid>
+        </div>
+        <div className="hidden sm:flex sm:shrink-0 sm:items-center sm:justify-center">
+          <DirPad onMove={move} onReset={reset} />
+        </div>
+      </div>
+
+      {/* Status bar */}
+      <div className="bg-slate-800/60 rounded-lg px-3 py-2 text-center font-body min-h-[32px] flex items-center justify-center gap-2 flex-wrap text-[11px] sm:text-xs">
+        {show ? (
+          <>
+            <span className="text-cyan-300 font-bold">A({pos.x},{pos.y})</span>
+            <span className="text-white/40">→</span>
+            <span className="font-bold" style={{ color: mc.color }}>A'({rx},{ry})</span>
+            <span className="text-white/30">|</span>
+            <span className="font-mono" style={{ color: mc.color }}>{mc.rule}</span>
+          </>
+        ) : (
+          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser titik, lalu tampilkan bayangan!</span>
+        )}
+      </div>
+
+      {/* DirPad – portrait only */}
+      <div className="flex flex-col items-center gap-3 sm:hidden">
+        <DirPad onMove={move} onReset={reset} />
+      </div>
+
+      {/* Mirror selector */}
+      <MirrorSelector value={mirror} onChange={m => { setMirror(m); setShow(false); }} />
+
+      {/* Reveal button */}
+      <div className="flex justify-center">
+        <button
+          onClick={() => { playPopSound(); setShow(v => !v); }}
+          className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95 border cursor-pointer ${
+            show
+              ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
+              : "bg-emerald-500/20 border-emerald-400/50 text-emerald-200 hover:bg-emerald-500/40"
+          }`}
+        >
+          {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan A'"}
+        </button>
+      </div>
+
+      <div className="bg-emerald-950/40 border border-emerald-500/20 rounded-lg px-4 py-2.5 text-center">
+        <p className="text-emerald-300 text-xs font-body">
+          💡 Bayangan A' berjarak <strong>sama</strong> ke garis cermin seperti titik A — dan garis AA' <strong className="text-yellow-300">tegak lurus</strong> garis cermin!
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Animasi 2 — Refleksi Bangun Datar (Segitiga) ── */
+type Vec2 = [number, number];
+const TRI_BASE: Vec2[] = [[1, 1], [3, 1], [2, 3]];
+const TRI_LABELS = ["A", "B", "C"];
+
+function AnimasiRefleksiBangun() {
+  const [off, setOff]       = useState({ dx: 0, dy: 0 });
+  const [mirror, setMirror] = useState<MirrorType>("sumbu-y");
+  const [show, setShow]     = useState(false);
+
+  const current: Vec2[] = TRI_BASE.map(([x, y]) => [x + off.dx, y + off.dy]);
+
+  const inRange = (pts: Vec2[]) => pts.every(([x, y]) => x >= -5 && x <= 5 && y >= -5 && y <= 5);
+
+  const move = (d: Dir4) => {
+    setShow(false);
+    setOff(o => {
+      const next =
+        d === "up"    ? { ...o, dy: o.dy + 1 } :
+        d === "down"  ? { ...o, dy: o.dy - 1 } :
+        d === "left"  ? { ...o, dx: o.dx - 1 } :
+                        { ...o, dx: o.dx + 1 };
+      const newPts: Vec2[] = TRI_BASE.map(([x, y]) => [x + next.dx, y + next.dy]);
+      return inRange(newPts) ? next : o;
+    });
+  };
+
+  const reset = () => { setOff({ dx: 0, dy: 0 }); setShow(false); };
+
+  const reflected: Vec2[] = current.map(([x, y]) => reflectMath(x, y, mirror));
+  const mc = MIRRORS.find(m => m.id === mirror)!;
+
+  return (
+    <div className="space-y-3">
+      <div className="text-center">
+        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 2 — Refleksi Bangun Datar</p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan segitiga △ABC, pilih cermin, lalu tampilkan bayangannya!</p>
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+        <div className="sm:flex-1 min-w-0">
+          <Grid accent="#f472b6">
+            <MirrorLine mirror={mirror} />
+            {/* Original triangle */}
+            <Poly pts={current} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
+            {current.map(([x, y], i) => (
+              <text
+                key={i}
+                x={px(x) + (i === 1 ? 6 : -4)} y={py(y) + (i === 2 ? -5 : 11)}
+                fill="#67e8f9" fontSize="8" fontWeight="bold"
+                textAnchor={i === 1 ? "start" : "end"}
+              >{TRI_LABELS[i]}({x},{y})</text>
+            ))}
+            {/* Reflected triangle + dashed connectors */}
+            {show && (
+              <>
+                {current.map(([x, y], i) => (
+                  <DashLine key={i} x1={x} y1={y} x2={reflected[i][0]} y2={reflected[i][1]} color="rgba(255,255,255,0.2)" />
+                ))}
+                <Poly pts={reflected} color={mc.color} fill={`${mc.color}22`} label="△A'B'C'" />
+                {reflected.map(([x, y], i) => (
+                  <text
+                    key={i}
+                    x={px(x) + (i === 1 ? 6 : -4)} y={py(y) + (i === 2 ? -5 : 11)}
+                    fill={mc.color} fontSize="8" fontWeight="bold"
+                    textAnchor={i === 1 ? "start" : "end"}
+                  >{TRI_LABELS[i]}'({x},{y})</text>
+                ))}
+              </>
+            )}
+          </Grid>
+        </div>
+        <div className="hidden sm:flex sm:shrink-0 sm:items-center sm:justify-center">
+          <DirPad onMove={move} onReset={reset} />
+        </div>
+      </div>
+
+      {/* Status bar */}
+      <div className="bg-slate-800/60 rounded-lg px-3 py-2 text-center font-body min-h-[32px] flex items-center justify-center gap-1.5 flex-wrap text-[11px] sm:text-xs">
+        {show ? (
+          <>
+            {current.map(([x, y], i) => (
+              <span key={i} className="flex items-center gap-1">
+                <span className="text-cyan-300 font-bold">{TRI_LABELS[i]}({x},{y})</span>
+                <span className="text-white/40">→</span>
+                <span className="font-bold" style={{ color: mc.color }}>{TRI_LABELS[i]}'({reflected[i][0]},{reflected[i][1]})</span>
+                {i < 2 && <span className="text-white/20 mx-0.5">·</span>}
+              </span>
+            ))}
+          </>
+        ) : (
+          <span className="text-white/30">Arahkan segitiga lalu tampilkan bayangannya!</span>
+        )}
+      </div>
+
+      {/* DirPad – portrait only */}
+      <div className="flex flex-col items-center gap-3 sm:hidden">
+        <DirPad onMove={move} onReset={reset} />
+      </div>
+
+      {/* Mirror selector */}
+      <MirrorSelector value={mirror} onChange={m => { setMirror(m); setShow(false); }} />
+
+      {/* Reveal button */}
+      <div className="flex justify-center">
+        <button
+          onClick={() => { playPopSound(); setShow(v => !v); }}
+          className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95 border cursor-pointer ${
+            show
+              ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
+              : "bg-pink-500/20 border-pink-400/50 text-pink-200 hover:bg-pink-500/40"
+          }`}
+        >
+          {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan △A'B'C'"}
+        </button>
+      </div>
+
+      <div className="bg-pink-950/40 border border-pink-500/20 rounded-lg px-4 py-2.5 text-center">
+        <p className="text-pink-200 text-xs font-body">
+          💡 Semua titik dicerminkan dengan aturan yang <strong>sama</strong>.
+          Bentuk & ukuran segitiga <strong className="text-green-300">tetap</strong> — hanya posisi & orientasinya yang berubah!
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Static SVG diagrams ── */
 const DiagramSbX = () => (
   <Grid accent="#34d399">
     <line x1={0} y1={oy} x2={S} y2={oy} stroke="#facc15" strokeWidth="2.5" strokeDasharray="6,3" />
@@ -90,7 +448,7 @@ const DiagramSbY = () => (
 
 const DiagramDiag = () => (
   <Grid accent="#fb923c">
-    <line x1={0} y1={S} x2={S} y2={0} stroke="#facc15" strokeWidth="2" strokeDasharray="6,3" />
+    <line x1={px(-5)} y1={py(-5)} x2={px(5)} y2={py(5)} stroke="#facc15" strokeWidth="2" strokeDasharray="6,3" />
     <text x={px(3.5)} y={py(3.8)} fontSize="8" fill="#fde68a">y=x</text>
     <Poly pts={[[1, 1], [4, 1], [3, 3]]} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
     <Poly pts={[[1, 1], [1, 4], [3, 3]]} color="#fb923c" fill="rgba(251,146,60,0.15)" label="△A'B'C'" />
@@ -99,7 +457,7 @@ const DiagramDiag = () => (
 
 /* ── Page ── */
 const RefleksiPage = () => {
-  const [open, setOpen] = useState<string[]>(["intro", "rumus", "contoh1", "contoh2", "diag", "rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["animasi", "intro", "rumus", "contoh1", "contoh2", "diag", "rangkuman"]);
   const toggle = (id: string) => { playPopSound(); setOpen(p => p.includes(id) ? p.filter(s => s !== id) : [...p, id]); };
 
   const Hdr = ({ id, icon, color, title }: { id: string; icon: React.ReactNode; color: string; title: string }) => (
@@ -120,6 +478,18 @@ const RefleksiPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Transformasi Geometri · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ── ANIMASI INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-emerald-500/30 rounded-xl overflow-hidden">
+            <Hdr id="animasi" icon={<span>🎮</span>} color="#34d399" title="Animasi Interaktif — Refleksi Titik & Bangun Datar" />
+            {open.includes("animasi") && (
+              <div className="px-4 pb-5 space-y-8">
+                <AnimasiRefleksiTitik />
+                <div className="border-t border-white/10" />
+                <AnimasiRefleksiBangun />
+              </div>
+            )}
+          </div>
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
@@ -260,6 +630,7 @@ const RefleksiPage = () => {
                   ["Sumbu-y", "A(x, y) → A'(−x, y)"],
                   ["Garis y = x", "A(x, y) → A'(y, x)"],
                   ["Garis y = −x", "A(x, y) → A'(−y, −x)"],
+                  ["Titik O(0,0)", "A(x, y) → A'(−x, −y)"],
                   ["Sifat", "Bentuk & ukuran tetap, orientasi berbalik"],
                 ].map(([k, v]) => (
                   <div key={k} className="flex gap-3 items-start bg-slate-800/50 rounded-xl p-3">
