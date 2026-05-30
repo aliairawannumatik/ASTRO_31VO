@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -199,13 +199,378 @@ const DiagramDilatasiAB = () => (
 );
 
 /* ──────────────────────────────────────────────
+   SVG GRID HELPERS (sama gaya dengan RotasiPage)
+────────────────────────────────────────────── */
+const DS = 360, Dsc = DS / 14, Dox = DS / 2, Doy = DS / 2;
+const Dpx = (x: number) => Dox + x * Dsc;
+const Dpy = (y: number) => Doy - y * Dsc;
+const Dticks = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
+
+function DGrid({ children, accent = "#22d3ee" }: { children?: React.ReactNode; accent?: string }) {
+  return (
+    <svg viewBox={`0 0 ${DS} ${DS}`} className="w-full rounded-xl border bg-slate-900/70" style={{ maxWidth: DS, aspectRatio: "1/1", borderColor: `${accent}33` }}>
+      {Dticks.map(t => (
+        <g key={t}>
+          <line x1={Dpx(t)} y1={0} x2={Dpx(t)} y2={DS} stroke="#334155" strokeWidth="0.6" />
+          <line x1={0} y1={Dpy(t)} x2={DS} y2={Dpy(t)} stroke="#334155" strokeWidth="0.6" />
+        </g>
+      ))}
+      <line x1={0} y1={Doy} x2={DS} y2={Doy} stroke="#64748b" strokeWidth="1.4" />
+      <line x1={Dox} y1={0} x2={Dox} y2={DS} stroke="#64748b" strokeWidth="1.4" />
+      <polygon points={`${DS},${Doy} ${DS-7},${Doy-4} ${DS-7},${Doy+4}`} fill="#64748b" />
+      <polygon points={`${Dox},0 ${Dox-4},8 ${Dox+4},8`} fill="#64748b" />
+      {Dticks.map(t => (
+        <g key={t}>
+          <text x={Dpx(t)} y={Doy + 13} textAnchor="middle" fill="#64748b" fontSize="9">{t}</text>
+          <text x={Dox - 10} y={Dpy(t) + 4} textAnchor="middle" fill="#64748b" fontSize="9">{t}</text>
+        </g>
+      ))}
+      <text x={DS - 6} y={Doy - 5} fill="#94a3b8" fontSize="10">x</text>
+      <text x={Dox + 5} y={10} fill="#94a3b8" fontSize="10">y</text>
+      {children}
+    </svg>
+  );
+}
+
+function DPoly({ pts, color, fill, label }: { pts: [number, number][]; color: string; fill: string; label?: string }) {
+  const d = pts.map(([x, y]) => `${Dpx(x)},${Dpy(y)}`).join(" ");
+  const cx = pts.reduce((s, [x]) => s + x, 0) / pts.length;
+  const cy = pts.reduce((s, [, y]) => s + y, 0) / pts.length;
+  return (
+    <g>
+      <polygon points={d} fill={fill} stroke={color} strokeWidth="2" />
+      {label && <text x={Dpx(cx)} y={Dpy(cy) + 4} textAnchor="middle" fill={color} fontSize="11" fontWeight="bold">{label}</text>}
+    </g>
+  );
+}
+
+function DDot({ x, y, color, label }: { x: number; y: number; color: string; label: string }) {
+  return (
+    <g>
+      <circle cx={Dpx(x)} cy={Dpy(y)} r={5} fill={color} />
+      <text x={Dpx(x) + 8} y={Dpy(y) - 5} fill={color} fontSize="10" fontWeight="bold">{label}</text>
+    </g>
+  );
+}
+
+function DCenterMark({ x, y, color }: { x: number; y: number; color: string }) {
+  const cx = Dpx(x), cy = Dpy(y);
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={12} fill="none" stroke={color} strokeWidth="1.5" strokeDasharray="3,2" opacity="0.5" />
+      <circle cx={cx} cy={cy} r={6} fill={color} opacity="0.9" />
+      <line x1={cx-18} y1={cy} x2={cx+18} y2={cy} stroke={color} strokeWidth="1.5" opacity="0.7" />
+      <line x1={cx} y1={cy-18} x2={cx} y2={cy+18} stroke={color} strokeWidth="1.5" opacity="0.7" />
+    </g>
+  );
+}
+
+/* ── Animasi Interaktif Dilatasi ── */
+const D_ORIG: [number, number][] = [[1, 1], [3, 1], [1, 3]];
+const D_LABELS = ["A(1,1)", "B(3,1)", "C(1,3)"];
+const D_ANIM_MS = 1800;
+
+const K_PRESETS = [
+  { label: "½", value: 0.5 },
+  { label: "2", value: 2 },
+  { label: "3", value: 3 },
+  { label: "−1", value: -1 },
+  { label: "−2", value: -2 },
+];
+
+function dilatePt(x: number, y: number, a: number, b: number, k: number): [number, number] {
+  return [a + k * (x - a), b + k * (y - b)];
+}
+
+function kLabel(k: number) {
+  if (k > 1)        return { text: `k = ${k} — Diperbesar`, color: "#4ade80" };
+  if (k === 1)      return { text: `k = 1 — Tidak berubah`, color: "#94a3b8" };
+  if (k > 0)        return { text: `k = ${k} — Diperkecil`, color: "#facc15" };
+  if (k === -1)     return { text: `k = −1 — Dibalik (sama besar)`, color: "#fb923c" };
+  if (k > -1)       return { text: `k = ${k} — Diperkecil & Dibalik`, color: "#fb923c" };
+  return            { text: `k = ${k} — Diperbesar & Dibalik`, color: "#f87171" };
+}
+
+function AnimasiDilatasi() {
+  const [kPreset, setKPreset] = useState<number | "custom">(2);
+  const [inputK, setInputK] = useState("2");
+  const [centerType, setCenterType] = useState<"origin" | "custom">("origin");
+  const [inputA, setInputA] = useState("0");
+  const [inputB, setInputB] = useState("0");
+  const [show, setShow] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animT, setAnimT] = useState(0);   // 0..1
+  const rafRef = useRef<number | null>(null);
+
+  const k = kPreset === "custom" ? (parseFloat(inputK) || 1) : kPreset;
+  const ca = centerType === "origin" ? 0 : (parseFloat(inputA) || 0);
+  const cb = centerType === "origin" ? 0 : (parseFloat(inputB) || 0);
+
+  /* kAnim interpolates: 1 → k (shape grows/shrinks smoothly) */
+  const t = isAnimating ? animT : (show ? 1 : 0);
+  const kAnim = 1 + t * (k - 1);
+
+  const currentPts = D_ORIG.map(([x, y]) => dilatePt(x, y, ca, cb, kAnim) as [number, number]);
+  const targetPts  = D_ORIG.map(([x, y]) => dilatePt(x, y, ca, cb, k)    as [number, number]);
+  const showResult = show || isAnimating;
+
+  const { text: kText, color: kColor } = kLabel(k);
+
+  const resultColor = k >= 1 ? "#4ade80" : k > 0 ? "#facc15" : k > -1 ? "#fb923c" : "#f87171";
+  const accentColor = resultColor;
+
+  const easeOut = (v: number) => 1 - Math.pow(1 - v, 3);
+
+  const reset = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(false); setAnimT(0);
+  };
+
+  const handlePutar = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(true); setAnimT(0);
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const raw = Math.min((now - t0) / D_ANIM_MS, 1);
+      setAnimT(easeOut(raw));
+      if (raw < 1) { rafRef.current = requestAnimationFrame(tick); }
+      else { setAnimT(1); setIsAnimating(false); setShow(true); }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  const changeReset = (fn: () => void) => {
+    fn();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(false); setAnimT(0);
+  };
+
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
+  /* label textbox di atas SVG */
+  const boxFill = k > 1 ? "#16a34a" : k > 0 ? "#ca8a04" : k > -1 ? "#ea580c" : "#dc2626";
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="text-emerald-300 font-bold text-sm font-body">🔭 Animasi Interaktif — Dilatasi Bangun Datar</p>
+
+      {/* Pilih faktor k */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Faktor Skala k</p>
+        <div className="flex gap-2 flex-wrap">
+          {K_PRESETS.map(({ label, value }) => (
+            <button key={label}
+              onClick={() => changeReset(() => { setKPreset(value); setInputK(String(value)); })}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+                kPreset === value
+                  ? "bg-emerald-500 border-emerald-400 text-white shadow-lg shadow-emerald-500/30"
+                  : "bg-slate-700/60 border-slate-600 text-white/60 hover:border-emerald-500/50 hover:text-white/90"
+              }`}
+            >k = {label}</button>
+          ))}
+          <button
+            onClick={() => changeReset(() => setKPreset("custom"))}
+            className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+              kPreset === "custom"
+                ? "bg-violet-500 border-violet-400 text-white shadow-lg"
+                : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
+            }`}
+          >Lainnya…</button>
+        </div>
+        {kPreset === "custom" && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">k =</label>
+            <input
+              type="number" step="0.1" value={inputK}
+              onChange={e => changeReset(() => setInputK(e.target.value))}
+              className="w-20 bg-slate-700 border border-violet-500/50 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-violet-400"
+            />
+          </div>
+        )}
+        <p className="text-xs font-body font-semibold mt-1" style={{ color: kColor }}>{kText}</p>
+      </div>
+
+      {/* Pilih pusat */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Dilatasi</p>
+        <div className="flex gap-2">
+          {(["origin", "custom"] as const).map(c => (
+            <button key={c}
+              onClick={() => changeReset(() => setCenterType(c))}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+                centerType === c
+                  ? "bg-yellow-500/80 border-yellow-400 text-white shadow-md"
+                  : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
+              }`}
+            >{c === "origin" ? "O(0, 0)" : "Titik (a, b)"}</button>
+          ))}
+        </div>
+        {centerType === "custom" && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">a =</label>
+            <input type="number" value={inputA} onChange={e => changeReset(() => setInputA(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+            <label className="text-xs text-white/60 font-body">b =</label>
+            <input type="number" value={inputB} onChange={e => changeReset(() => setInputB(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+          </div>
+        )}
+      </div>
+
+      {/* Grid + Panel */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start w-full overflow-hidden">
+
+        {/* SVG Grid */}
+        <div className="w-full max-w-[360px] mx-auto lg:mx-0 flex-shrink-0">
+          <DGrid accent={accentColor}>
+
+            {/* Sinar dari pusat ke titik saat ini */}
+            {showResult && currentPts.map(([x, y], i) => (
+              <line key={i}
+                x1={Dpx(ca)} y1={Dpy(cb)}
+                x2={Dpx(x)}  y2={Dpy(y)}
+                stroke="#facc15" strokeWidth="1.2" strokeDasharray="5,4" opacity="0.55"
+              />
+            ))}
+
+            {/* Segitiga asli — memudar saat animasi berlangsung */}
+            <DPoly
+              pts={D_ORIG}
+              color="#22d3ee"
+              fill={showResult ? "rgba(34,211,238,0.06)" : "rgba(34,211,238,0.18)"}
+              label={showResult ? undefined : "△ABC"}
+            />
+            {!showResult && D_ORIG.map(([x, y], i) => (
+              <DDot key={i} x={x} y={y} color="#22d3ee" label={["A","B","C"][i]} />
+            ))}
+
+            {/* Segitiga animasi (membesar/mengecil saat bergerak) */}
+            {showResult && (
+              <g>
+                <DPoly
+                  pts={currentPts}
+                  color={resultColor}
+                  fill={isAnimating ? `${resultColor}44` : `${resultColor}28`}
+                  label={show && !isAnimating ? "△A'B'C'" : undefined}
+                />
+                {currentPts.map(([x, y], i) => (
+                  <DDot key={i} x={x} y={y} color={resultColor}
+                    label={show && !isAnimating ? ["A'","B'","C'"][i] : ""} />
+                ))}
+                {/* Titik asli tetap tampak kecil */}
+                {D_ORIG.map(([x, y], i) => (
+                  <circle key={i} cx={Dpx(x)} cy={Dpy(y)} r={3} fill="#22d3ee" opacity="0.4" />
+                ))}
+              </g>
+            )}
+
+            {/* Label k — textbox cerah atas tengah */}
+            {showResult && (() => {
+              const bx = DS / 2, by = 18, bw = 84, bh = 28;
+              return (
+                <g>
+                  <rect x={bx-bw/2} y={by-bh/2} width={bw} height={bh} rx={7} ry={7}
+                    fill={boxFill} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by+5} fontSize="14" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    k = {k}
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* Pusat dilatasi */}
+            <DCenterMark x={ca} y={cb} color="#facc15" />
+            <text x={Dpx(ca)+16} y={Dpy(cb)-14} fill="#facc15" fontSize="11" fontWeight="bold">
+              {centerType === "origin" ? "O(0,0)" : `P(${ca},${cb})`}
+            </text>
+
+          </DGrid>
+
+          {/* Legenda */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2 justify-center text-xs font-body">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-cyan-400 inline-block" />
+              <span className="text-cyan-300">Asli (△ABC)</span>
+            </div>
+            {showResult && (
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
+                <span style={{ color: resultColor }}>Bayangan (△A'B'C')</span>
+              </div>
+            )}
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-yellow-400 inline-block" />
+              <span className="text-yellow-300">Pusat & sinar</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Panel kanan */}
+        <div className="flex-1 min-w-0 space-y-2 w-full">
+
+          {/* Tombol */}
+          <div className="flex gap-2">
+            <button onClick={handlePutar} disabled={isAnimating}
+              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${
+                isAnimating
+                  ? "opacity-50 cursor-not-allowed bg-slate-600"
+                  : "bg-emerald-500 hover:bg-emerald-400 text-white shadow-lg shadow-emerald-500/30"
+              }`}
+            >{isAnimating ? "⏳ Mendilatasi…" : "🔭 Dilatasikan!"}</button>
+            <button onClick={reset}
+              className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
+            >Reset</button>
+          </div>
+
+          {/* Bingkai info */}
+          <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
+            <p className="font-bold text-sm" style={{ color: kColor }}>{kText}</p>
+            <p className="text-white/50">Pusat: {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
+            {isAnimating && <p className="text-emerald-400 font-semibold animate-pulse">⏳ Slow-motion dilatasi…</p>}
+          </div>
+
+          {/* Hasil */}
+          {show && !isAnimating && (
+            <div className="bg-slate-700/40 rounded-xl p-3 space-y-2">
+              <p className="text-xs font-bold text-white/60 font-body uppercase">Hasil Dilatasi:</p>
+              {D_ORIG.map(([x, y], i) => {
+                const [rx, ry] = targetPts[i];
+                const rx_ = Math.round(rx * 100) / 100;
+                const ry_ = Math.round(ry * 100) / 100;
+                return (
+                  <div key={i} className="flex items-center gap-2 text-sm font-body flex-wrap">
+                    <span className="text-cyan-300 min-w-[68px]">{D_LABELS[i]}</span>
+                    <span className="text-white/30">→</span>
+                    <span className="font-bold" style={{ color: resultColor }}>({rx_}, {ry_})</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Petunjuk */}
+          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5 w-full overflow-hidden">
+            <p className="text-emerald-300 font-semibold">💡 Keterangan visual:</p>
+            <p>— <span className="text-cyan-400">Segitiga biru</span> = △ABC asli</p>
+            <p>— <span style={{ color: resultColor }}>Segitiga berwarna</span> = △A'B'C' bayangan</p>
+            <p>— <span className="text-yellow-400">Garis kuning</span> = sinar dari pusat ke titik</p>
+            <p>— Animasi <strong className="text-white">slow-motion</strong>: bangun membesar/mengecil perlahan</p>
+            <p>— Rumus: <strong className="text-white/70">A'(a+k·(x−a), b+k·(y−b))</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
    MAIN PAGE COMPONENT
 ────────────────────────────────────────────── */
 
 const DilatasisPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
+    "intro", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
   ]);
 
   const toggleSection = (section: string) => {
@@ -276,6 +641,21 @@ const DilatasisPage = () => {
                     <strong className="text-yellow-300">Faktor Skala k</strong> (besar/kecilnya perubahan ukuran).
                   </p>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── ANIMASI INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-emerald-500/20 rounded-xl overflow-hidden">
+            <SectionHeader
+              id="animasi"
+              icon={<span>🔭</span>}
+              iconColor="#34d399"
+              label="Animasi Interaktif — Dilatasi Bangun Datar"
+            />
+            {expandedSections.includes("animasi") && (
+              <div className="px-5 pb-5">
+                <AnimasiDilatasi />
               </div>
             )}
           </div>
