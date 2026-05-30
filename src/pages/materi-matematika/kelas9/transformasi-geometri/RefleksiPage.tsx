@@ -938,13 +938,72 @@ const RefleksiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Hdr icon={<BookOpen className="w-5 h-5" />} color="#34d399" title="📌 Contoh 1: Pencerminan terhadap Sumbu Y" />
             <div className="px-5 pb-5 space-y-4">
-              <div className="flex justify-center">
-                <img
-                  src="/soal-refleksi-sumbu-y.png"
-                  alt="Soal pencerminan terhadap sumbu Y"
-                  className="rounded-xl max-w-full bg-white p-4"
-                />
+
+              {/* Soal */}
+              <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 space-y-2">
+                <p className="text-sm font-semibold text-emerald-300 font-body mb-3">Soal:</p>
+                {[
+                  ["(i)",   "A(3, −2)",   "A′(3, 2)"],
+                  ["(ii)",  "B(−1, 2)",   "B′(−1, −2)"],
+                  ["(iii)", "C(2, 3)",    "C′(−2, −3)"],
+                  ["(iv)",  "D(−3, −1)",  "D′(3, −1)"],
+                ].map(([num, dari, ke]) => (
+                  <div key={num} className="flex items-center gap-2 text-sm font-body text-white/80">
+                    <span className="text-white/40 min-w-[32px]">{num}</span>
+                    <span className="text-cyan-200">{dari}</span>
+                    <span className="text-white/40 mx-1">→</span>
+                    <span className="text-pink-200">{ke}</span>
+                  </div>
+                ))}
+                <p className="text-sm text-white/80 font-body mt-3 pt-3 border-t border-white/10">
+                  Contoh pencerminan terhadap sumbu <em>Y</em> yang benar adalah . . . .
+                </p>
+                <div className="grid grid-cols-2 gap-x-8 gap-y-1 mt-1">
+                  {[["A.", "(i)"], ["C.", "(iii)"], ["B.", "(ii)"], ["D.", "(iv)"]].map(([huruf, pilihan]) => (
+                    <p key={huruf} className="text-sm font-body text-white/70">
+                      <span className="font-bold text-white/90">{huruf}</span> {pilihan}
+                    </p>
+                  ))}
+                </div>
               </div>
+
+              {/* Pembahasan */}
+              <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                <p className="text-sm font-semibold text-emerald-300 font-body">Pembahasan:</p>
+                <div className="bg-slate-700/50 rounded-lg px-3 py-2 text-center">
+                  <p className="text-xs text-white/50 font-body">Rumus refleksi terhadap sumbu Y</p>
+                  <p className="text-sm font-bold text-yellow-300 font-mono mt-0.5">(x, y) → (−x, y)</p>
+                  <p className="text-xs text-white/40 font-body">x dinegasikan, y tetap</p>
+                </div>
+                <div className="space-y-2">
+                  {[
+                    { num: "(i)",   dari: "A(3, −2)",  seharusnya: "A′(−3, −2)", hasil: "A′(3, 2)",   benar: false, alasan: "y berubah, bukan refleksi sumbu Y" },
+                    { num: "(ii)",  dari: "B(−1, 2)",  seharusnya: "B′(1, 2)",   hasil: "B′(−1, −2)", benar: false, alasan: "x tidak berubah, y berubah → refleksi sumbu X" },
+                    { num: "(iii)", dari: "C(2, 3)",   seharusnya: "C′(−2, 3)",  hasil: "C′(−2, −3)", benar: false, alasan: "y ikut berubah → bukan refleksi sumbu Y" },
+                    { num: "(iv)",  dari: "D(−3, −1)", seharusnya: "D′(3, −1)",  hasil: "D′(3, −1)",  benar: true,  alasan: "−(−3) = 3, y tetap −1 ✓" },
+                  ].map(({ num, dari, seharusnya, hasil, benar, alasan }) => (
+                    <div key={num} className={`rounded-lg p-3 border text-sm font-body ${benar ? "bg-emerald-900/30 border-emerald-500/40" : "bg-red-900/20 border-red-500/20"}`}>
+                      <div className="flex items-start gap-2 flex-wrap">
+                        <span className="text-white/40 min-w-[32px] font-bold">{num}</span>
+                        <span className="text-cyan-300">{dari}</span>
+                        <span className="text-white/30">→ seharusnya</span>
+                        <span className="font-bold" style={{ color: benar ? "#34d399" : "#f87171" }}>{seharusnya}</span>
+                        <span className="text-white/30">| diberikan:</span>
+                        <span className="text-white/60">{hasil}</span>
+                        <span className="ml-1">{benar ? "✅" : "❌"}</span>
+                      </div>
+                      <p className="text-xs text-white/40 mt-1 ml-8">{alasan}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-emerald-500/15 border border-emerald-400/40 rounded-xl px-4 py-3 text-center mt-2">
+                  <p className="text-emerald-300 font-bold text-sm font-body">
+                    Jawaban: <span className="text-yellow-300 text-base">D. (iv)</span>
+                  </p>
+                  <p className="text-xs text-white/50 font-body mt-0.5">D(−3, −1) → D′(3, −1) mengikuti aturan (x, y) → (−x, y) dengan benar</p>
+                </div>
+              </div>
+
             </div>
           </div>
 
