@@ -330,12 +330,22 @@ function EditableVal({
 
 function AnimasiRefleksiGarisK() {
   const [mode, setMode] = useState<ModeK>("x=k");
-  const [ptX, setPtX] = useState(2);
-  const [ptY, setPtY] = useState(3);
-  const [k, setK]     = useState(1);
+  const [ptX, setPtX]   = useState(2);
+  const [ptY, setPtY]   = useState(3);
+  const [k, setK]       = useState(1);
   const [show, setShow] = useState(false);
 
   const clamp5 = (v: number) => Math.max(-5, Math.min(5, v));
+
+  const move = (d: Dir4) => {
+    setShow(false);
+    if (d === "up")    setPtY(p => p < 5  ? p + 1 : p);
+    if (d === "down")  setPtY(p => p > -5 ? p - 1 : p);
+    if (d === "left")  setPtX(p => p > -5 ? p - 1 : p);
+    if (d === "right") setPtX(p => p < 5  ? p + 1 : p);
+  };
+
+  const reset = () => { setPtX(2); setPtY(3); setK(1); setShow(false); };
 
   const rx = mode === "x=k" ? 2 * k - ptX : ptX;
   const ry = mode === "x=k" ? ptY : 2 * k - ptY;
@@ -345,7 +355,28 @@ function AnimasiRefleksiGarisK() {
     ? `(${ptX}, ${ptY}) → (2·${k}−${ptX}, ${ptY}) = (${rx}, ${ry})`
     : `(${ptX}, ${ptY}) → (${ptX}, 2·${k}−${ptY}) = (${rx}, ${ry})`;
 
-  const reset = () => { setPtX(2); setPtY(3); setK(1); setShow(false); };
+  const ShowBtn = ({ small }: { small?: boolean }) => (
+    <button
+      onClick={() => { playPopSound(); setShow(v => !v); }}
+      className={`rounded-xl font-bold font-body transition-all active:scale-95 border cursor-pointer text-center ${
+        small ? "px-4 py-2 text-xs" : "px-5 py-2 text-sm"
+      } ${
+        show
+          ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
+          : "border"
+      }`}
+      style={!show ? { background: `${accent}33`, borderColor: `${accent}88`, color: accent } : {}}
+    >
+      {show ? (small ? "↺ Sembunyikan" : "↺ Sembunyikan Bayangan") : (small ? "🪞 Tampilkan\nBayangan A'" : "🪞 Tampilkan Bayangan A'")}
+    </button>
+  );
+
+  const KControl = () => (
+    <EditableVal
+      label="nilai k" value={k} min={-4} max={4} color={accent}
+      onChange={v => { setK(clamp5(v)); setShow(false); }}
+    />
+  );
 
   return (
     <div className="space-y-3">
@@ -354,7 +385,7 @@ function AnimasiRefleksiGarisK() {
           📐 Animasi 2 — Refleksi Garis x = k dan y = k
         </p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">
-          Atur titik A dan nilai k, lalu tampilkan bayangannya!
+          Arahkan titik A, atur nilai k, lalu tampilkan bayangannya!
         </p>
       </div>
 
@@ -374,103 +405,48 @@ function AnimasiRefleksiGarisK() {
         ))}
       </div>
 
-      {/* Grid */}
-      <div className="w-full">
-        <Grid accent={accent}>
-          {/* Mirror line */}
-          {mode === "x=k" ? (
-            <>
-              <line
-                x1={px(k)} y1={4} x2={px(k)} y2={S - 4}
-                stroke={accent} strokeWidth="2" strokeDasharray="5,3"
-              />
-              <text
-                x={px(k) + 4} y={14}
-                fontSize="8" fill={accent} fontWeight="bold"
-              >x={k}</text>
-            </>
-          ) : (
-            <>
-              <line
-                x1={4} y1={py(k)} x2={S - 4} y2={py(k)}
-                stroke={accent} strokeWidth="2" strokeDasharray="5,3"
-              />
-              <text
-                x={S - 10} y={py(k) - 5}
-                fontSize="8" fill={accent} fontWeight="bold" textAnchor="end"
-              >y={k}</text>
-            </>
-          )}
+      {/* Grid + right column (landscape identical to Animasi 1) */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+        <div className="sm:flex-1 min-w-0">
+          <Grid accent={accent}>
+            {/* Mirror line */}
+            {mode === "x=k" ? (
+              <>
+                <line x1={px(k)} y1={4} x2={px(k)} y2={S - 4}
+                  stroke={accent} strokeWidth="2" strokeDasharray="5,3" />
+                <text x={px(k) + 4} y={14} fontSize="8" fill={accent} fontWeight="bold">x={k}</text>
+              </>
+            ) : (
+              <>
+                <line x1={4} y1={py(k)} x2={S - 4} y2={py(k)}
+                  stroke={accent} strokeWidth="2" strokeDasharray="5,3" />
+                <text x={S - 10} y={py(k) - 5} fontSize="8" fill={accent} fontWeight="bold" textAnchor="end">y={k}</text>
+              </>
+            )}
+            {show && <DashLine x1={ptX} y1={ptY} x2={rx} y2={ry} color="rgba(255,255,255,0.25)" />}
+            <Dot x={ptX} y={ptY} color="#22d3ee"
+              label={`A(${ptX},${ptY})`} anchor={ptX >= 0 ? "start" : "end"} />
+            {show && (
+              <>
+                <circle cx={px(rx)} cy={py(ry)} r={4} fill={accent} />
+                <text x={px(rx) + (rx >= 0 ? 7 : -7)} y={py(ry) - 4}
+                  fill={accent} fontSize="9" fontWeight="bold"
+                  textAnchor={rx >= 0 ? "start" : "end"}>A'({rx},{ry})</text>
+                <circle
+                  cx={mode === "x=k" ? px(k) : px((ptX + rx) / 2)}
+                  cy={mode === "x=k" ? py((ptY + ry) / 2) : py(k)}
+                  r={3} fill="white" fillOpacity="0.5" />
+              </>
+            )}
+          </Grid>
+        </div>
 
-          {/* Dashed connector */}
-          {show && (
-            <DashLine x1={ptX} y1={ptY} x2={rx} y2={ry} color="rgba(255,255,255,0.25)" />
-          )}
-
-          {/* Point A */}
-          <Dot
-            x={ptX} y={ptY} color="#22d3ee"
-            label={`A(${ptX},${ptY})`}
-            anchor={ptX >= 0 ? "start" : "end"}
-          />
-
-          {/* Reflected point A' */}
-          {show && (
-            <>
-              <circle cx={px(rx)} cy={py(ry)} r={4} fill={accent} />
-              <text
-                x={px(rx) + (rx >= 0 ? 7 : -7)} y={py(ry) - 4}
-                fill={accent} fontSize="9" fontWeight="bold"
-                textAnchor={rx >= 0 ? "start" : "end"}
-              >A'({rx},{ry})</text>
-            </>
-          )}
-
-          {/* Midpoint marker on mirror line */}
-          {show && (
-            <circle
-              cx={mode === "x=k" ? px(k) : px((ptX + rx) / 2)}
-              cy={mode === "x=k" ? py((ptY + ry) / 2) : py(k)}
-              r={3} fill="white" fillOpacity="0.5"
-            />
-          )}
-        </Grid>
-      </div>
-
-      {/* Controls row */}
-      <div className="flex justify-center flex-wrap gap-4 bg-slate-800/50 rounded-xl px-4 py-3">
-        <EditableVal
-          label="x titik A" value={ptX} min={-4} max={4} color="#22d3ee"
-          onChange={v => { setPtX(clamp5(v)); setShow(false); }}
-        />
-        <EditableVal
-          label="y titik A" value={ptY} min={-4} max={4} color="#22d3ee"
-          onChange={v => { setPtY(clamp5(v)); setShow(false); }}
-        />
-        <div className="w-px bg-white/10 self-stretch" />
-        <EditableVal
-          label={`nilai k`} value={k} min={-4} max={4} color={accent}
-          onChange={v => { setK(clamp5(v)); setShow(false); }}
-        />
-      </div>
-
-      {/* Show / hide button */}
-      <div className="flex justify-center gap-3">
-        <button
-          onClick={() => { playPopSound(); setShow(v => !v); }}
-          className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95 border cursor-pointer ${
-            show
-              ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
-              : "border text-sm font-bold"
-          }`}
-          style={!show ? { background: `${accent}33`, borderColor: `${accent}88`, color: accent } : {}}
-        >
-          {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan A'"}
-        </button>
-        <button
-          onClick={() => { playPopSound(); reset(); }}
-          className="px-3 py-2 rounded-xl text-xs font-body border border-slate-500/40 bg-slate-700/40 text-slate-400 hover:bg-slate-600/60 active:scale-90 transition-all cursor-pointer"
-        >Reset</button>
+        {/* Landscape right column */}
+        <div className="hidden sm:flex sm:shrink-0 sm:flex-col sm:items-center sm:gap-3">
+          <DirPad onMove={move} onReset={reset} />
+          <KControl />
+          <ShowBtn small />
+        </div>
       </div>
 
       {/* Status bar */}
@@ -484,10 +460,15 @@ function AnimasiRefleksiGarisK() {
             <span className="font-bold" style={{ color: accent }}>A'({rx},{ry})</span>
           </>
         ) : (
-          <span className="text-white/30">
-            Atur titik A dan nilai k, lalu tekan Tampilkan Bayangan!
-          </span>
+          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser titik, atur k, lalu tampilkan bayangan!</span>
         )}
+      </div>
+
+      {/* Portrait controls below grid */}
+      <div className="flex flex-col items-center gap-3 sm:hidden">
+        <DirPad onMove={move} onReset={reset} />
+        <KControl />
+        <ShowBtn />
       </div>
 
       {/* Info box */}
