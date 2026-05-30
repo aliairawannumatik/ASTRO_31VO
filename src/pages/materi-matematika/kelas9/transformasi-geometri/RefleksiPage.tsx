@@ -221,15 +221,13 @@ function AnimasiRefleksiTitik() {
         <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan titik A, pilih cermin, lalu tampilkan bayangannya!</p>
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
         <div className="sm:flex-1 min-w-0">
           <Grid accent="#34d399">
             <MirrorLine mirror={mirror} />
-            {/* Original point */}
             <Dot x={pos.x} y={pos.y} color="#22d3ee"
               label={`A(${pos.x},${pos.y})`}
               anchor={pos.x >= 0 ? "start" : "end"} />
-            {/* Dashed connector + reflection */}
             {show && (
               <>
                 <DashLine x1={pos.x} y1={pos.y} x2={rx} y2={ry} color="rgba(255,255,255,0.25)" />
@@ -243,8 +241,19 @@ function AnimasiRefleksiTitik() {
             )}
           </Grid>
         </div>
-        <div className="hidden sm:flex sm:shrink-0 sm:items-center sm:justify-center">
+        {/* Desktop: DirPad + button stacked in right column */}
+        <div className="hidden sm:flex sm:shrink-0 sm:flex-col sm:items-center sm:gap-3">
           <DirPad onMove={move} onReset={reset} />
+          <button
+            onClick={() => { playPopSound(); setShow(v => !v); }}
+            className={`px-4 py-2 rounded-xl text-xs font-bold font-body transition-all active:scale-95 border cursor-pointer text-center ${
+              show
+                ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
+                : "bg-emerald-500/20 border-emerald-400/50 text-emerald-200 hover:bg-emerald-500/40"
+            }`}
+          >
+            {show ? "↺ Sembunyikan" : "🪞 Tampilkan\nBayangan A'"}
+          </button>
         </div>
       </div>
 
@@ -263,16 +272,9 @@ function AnimasiRefleksiTitik() {
         )}
       </div>
 
-      {/* DirPad – portrait only */}
+      {/* Portrait: DirPad + button below grid */}
       <div className="flex flex-col items-center gap-3 sm:hidden">
         <DirPad onMove={move} onReset={reset} />
-      </div>
-
-      {/* Mirror selector */}
-      <MirrorSelector value={mirror} onChange={m => { setMirror(m); setShow(false); }} />
-
-      {/* Reveal button */}
-      <div className="flex justify-center">
         <button
           onClick={() => { playPopSound(); setShow(v => !v); }}
           className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95 border cursor-pointer ${
@@ -284,6 +286,9 @@ function AnimasiRefleksiTitik() {
           {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan A'"}
         </button>
       </div>
+
+      {/* Mirror selector */}
+      <MirrorSelector value={mirror} onChange={m => { setMirror(m); setShow(false); }} />
 
       <div className="bg-emerald-950/40 border border-emerald-500/20 rounded-lg px-4 py-2.5 text-center">
         <p className="text-emerald-300 text-xs font-body">
@@ -333,11 +338,10 @@ function AnimasiRefleksiBangun() {
         <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan segitiga △ABC, pilih cermin, lalu tampilkan bayangannya!</p>
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
         <div className="sm:flex-1 min-w-0">
           <Grid accent="#f472b6">
             <MirrorLine mirror={mirror} />
-            {/* Original triangle */}
             <Poly pts={current} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
             {current.map(([x, y], i) => (
               <text
@@ -347,7 +351,6 @@ function AnimasiRefleksiBangun() {
                 textAnchor={i === 1 ? "start" : "end"}
               >{TRI_LABELS[i]}({x},{y})</text>
             ))}
-            {/* Reflected triangle + dashed connectors */}
             {show && (
               <>
                 {current.map(([x, y], i) => (
@@ -366,8 +369,19 @@ function AnimasiRefleksiBangun() {
             )}
           </Grid>
         </div>
-        <div className="hidden sm:flex sm:shrink-0 sm:items-center sm:justify-center">
+        {/* Desktop: DirPad + button stacked in right column */}
+        <div className="hidden sm:flex sm:shrink-0 sm:flex-col sm:items-center sm:gap-3">
           <DirPad onMove={move} onReset={reset} />
+          <button
+            onClick={() => { playPopSound(); setShow(v => !v); }}
+            className={`px-4 py-2 rounded-xl text-xs font-bold font-body transition-all active:scale-95 border cursor-pointer text-center ${
+              show
+                ? "bg-slate-700/60 border-slate-500/40 text-slate-300 hover:bg-slate-600/80"
+                : "bg-pink-500/20 border-pink-400/50 text-pink-200 hover:bg-pink-500/40"
+            }`}
+          >
+            {show ? "↺ Sembunyikan" : "🪞 Tampilkan\nBayangan △A'B'C'"}
+          </button>
         </div>
       </div>
 
@@ -389,16 +403,9 @@ function AnimasiRefleksiBangun() {
         )}
       </div>
 
-      {/* DirPad – portrait only */}
+      {/* Portrait: DirPad + button below grid */}
       <div className="flex flex-col items-center gap-3 sm:hidden">
         <DirPad onMove={move} onReset={reset} />
-      </div>
-
-      {/* Mirror selector */}
-      <MirrorSelector value={mirror} onChange={m => { setMirror(m); setShow(false); }} />
-
-      {/* Reveal button */}
-      <div className="flex justify-center">
         <button
           onClick={() => { playPopSound(); setShow(v => !v); }}
           className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95 border cursor-pointer ${
@@ -410,6 +417,9 @@ function AnimasiRefleksiBangun() {
           {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan △A'B'C'"}
         </button>
       </div>
+
+      {/* Mirror selector */}
+      <MirrorSelector value={mirror} onChange={m => { setMirror(m); setShow(false); }} />
 
       <div className="bg-pink-950/40 border border-pink-500/20 rounded-lg px-4 py-2.5 text-center">
         <p className="text-pink-200 text-xs font-body">
