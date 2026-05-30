@@ -226,7 +226,7 @@ function AnimasiTitik() {
 
 /* ── Animasi 2: Geser Segitiga ── */
 type Vec2 = [number, number];
-const TRI_BASE: Vec2[] = [[-3, -1], [0, -1], [-1.5, 2]];
+const TRI_BASE: Vec2[] = [[-3, -1], [0, -1], [-2, 2]];
 const TRI_LABELS = ['A', 'B', 'C'];
 
 function AnimasiSegitiga() {
