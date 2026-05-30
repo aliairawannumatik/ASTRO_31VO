@@ -279,7 +279,7 @@ function AnimasiRotasi() {
 
             {/* Garis jari-jari dari pusat ke titik SEKARANG (bergerak saat animasi) — hijau */}
             {showRotated && currentPts.map(([x, y], i) => (
-              <RadiusLine key={`r-curr-${i}`} cx={ca} cy={cb} tx={x} ty={y} color="#4ade80" dashed={false} />
+              <RadiusLine key={`r-curr-${i}`} cx={ca} cy={cb} tx={x} ty={y} color="#4ade80" dashed />
             ))}
 
             {/* Busur rotasi (arc arrow) */}
