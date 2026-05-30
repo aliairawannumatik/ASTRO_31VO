@@ -449,6 +449,88 @@ function DiagramTitikAnimated() {
   );
 }
 
+/* ── Animated Diagram: Translasi Bangun Datar ── */
+function DiagramBangunAnimated() {
+  const [revealed, setRevealed] = useState(false);
+
+  const op = (delay: number, dur = 0.4): React.CSSProperties =>
+    ({ opacity: revealed ? 1 : 0, transition: revealed ? `opacity ${dur}s ease ${delay}s` : 'none' });
+
+  const ld = (len: number, dur: number, delay: number): React.CSSProperties =>
+    ({ opacity: revealed ? 1 : 0,
+       strokeDashoffset: revealed ? 0 : len,
+       transition: revealed
+         ? `opacity 0s, stroke-dashoffset ${dur}s ease-in-out ${delay}s`
+         : 'none' });
+
+  const ptsStr = (coords: [number,number][]) =>
+    coords.map(([x, y]) => `${px(x)},${py(y)}`).join(' ');
+
+  const arrLen = 57;
+
+  return (
+    <div className="space-y-3">
+      <Grid accent="#f472b6">
+        {/* ── Always visible: original △PQR ── */}
+        <polygon points={ptsStr([[1,1],[4,1],[2,4]])}
+          fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="1.5" />
+        <text x={px(2.3)} y={py(2)+4} fontSize="9" fill="#22d3ee" textAnchor="middle" fontWeight="bold">△PQR</text>
+        <text x={px(1)-4} y={py(1)+13} fontSize="8" fill="#22d3ee" textAnchor="end" fontWeight="bold">P(1,1)</text>
+        <text x={px(4)+4} y={py(1)+13} fontSize="8" fill="#22d3ee" textAnchor="start" fontWeight="bold">Q(4,1)</text>
+        <text x={px(2)+4} y={py(4)-5} fontSize="8" fill="#22d3ee" textAnchor="start" fontWeight="bold">R(2,4)</text>
+
+        {/* ── Step 1: Arrows animate in, staggered ── */}
+        {([[1,1,-2,-1],[4,1,1,-1],[2,4,-1,2]] as [number,number,number,number][]).map(([x1,y1,x2,y2], i) => (
+          <line key={i}
+            x1={px(x1)} y1={py(y1)} x2={px(x2)} y2={py(y2)}
+            stroke="#facc15" strokeWidth="1.8" strokeDasharray={arrLen}
+            style={ld(arrLen, 0.6, i * 0.45)} />
+        ))}
+
+        {/* ── T(−3,−2) bright text box — top-left ── */}
+        <rect x={px(-4.8) - 4} y={py(4.2) - 12} width={66} height={17} rx={4} ry={4}
+          fill="#facc15" style={op(1.4, 0.4)} />
+        <text x={px(-4.8)} y={py(4.2)} fontSize="11" fill="#1e1b4b"
+          textAnchor="start" fontWeight="bold" style={op(1.4, 0.4)}>T(−3,−2)</text>
+
+        {/* ── Step 2: Image dots + labels ── */}
+        <circle cx={px(-2)} cy={py(-1)} r={5} fill="#f472b6" style={op(1.8, 0.4)} />
+        <text x={px(-2)-7} y={py(-1)+13} fontSize="8" fill="#f472b6"
+          textAnchor="end" fontWeight="bold" style={op(1.8, 0.4)}>P'(−2,−1)</text>
+
+        <circle cx={px(1)} cy={py(-1)} r={5} fill="#f472b6" style={op(2.1, 0.4)} />
+        <text x={px(1)+4} y={py(-1)+13} fontSize="8" fill="#f472b6"
+          textAnchor="start" fontWeight="bold" style={op(2.1, 0.4)}>Q'(1,−1)</text>
+
+        <circle cx={px(-1)} cy={py(2)} r={5} fill="#f472b6" style={op(2.4, 0.4)} />
+        <text x={px(-1)-7} y={py(2)-5} fontSize="8" fill="#f472b6"
+          textAnchor="end" fontWeight="bold" style={op(2.4, 0.4)}>R'(−1,2)</text>
+
+        {/* ── Step 3: △P'Q'R' polygon + label ── */}
+        <polygon points={ptsStr([[-2,-1],[1,-1],[-1,2]])}
+          fill="rgba(244,114,182,0.18)" stroke="#f472b6" strokeWidth="1.5"
+          style={op(2.7, 0.5)} />
+        <text x={px(-0.67)} y={py(0)+4} fontSize="9" fill="#f472b6"
+          textAnchor="middle" fontWeight="bold" style={op(2.7, 0.5)}>△P'Q'R'</text>
+      </Grid>
+
+      {/* Reveal / Reset button */}
+      <div className="flex justify-center">
+        <button
+          onClick={() => { playPopSound(); setRevealed(r => !r); }}
+          className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95
+            ${revealed
+              ? 'bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600/80'
+              : 'bg-pink-500/20 border border-pink-400/50 text-pink-200 hover:bg-pink-500/40 hover:border-pink-300'
+            }`}
+        >
+          {revealed ? "↺ Reset" : "✨ Tampilkan Bayangan △P'Q'R'"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /* ── Static section header (no toggle) ── */
 function SectionHdr({ icon, color, title }: { icon: React.ReactNode; color: string; title: string }) {
   return (
@@ -589,18 +671,7 @@ const TranslasiPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="bg-slate-800/60 rounded-xl p-4">
-                <p className="text-xs text-white/60 font-body mb-3 text-center">Visualisasi</p>
-                <div className="flex justify-center">
-                  <Grid accent="#f472b6">
-                    <Poly pts={[[1,1],[4,1],[2,4]]} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△PQR" />
-                    <Poly pts={[[-2,-1],[1,-1],[-1,2]]} color="#f472b6" fill="rgba(244,114,182,0.15)" label="△P'Q'R'" />
-                    <Arrow x1={1} y1={1} x2={-2} y2={-1} color="#facc15" />
-                    <Arrow x1={4} y1={1} x2={1} y2={-1} color="#facc15" />
-                    <Arrow x1={2} y1={4} x2={-1} y2={2} color="#facc15" />
-                  </Grid>
-                </div>
-              </div>
+              <DiagramBangunAnimated />
             </div>
           </div>
 
