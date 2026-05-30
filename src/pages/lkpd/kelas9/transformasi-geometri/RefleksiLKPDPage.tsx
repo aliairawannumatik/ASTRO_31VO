@@ -5,6 +5,7 @@ import InteractiveLKPD, {
   SummaryCard,
 } from "@/components/InteractiveLKPD";
 import { LKPDGame } from "@/components/LKPDGameZone";
+import RefleksiDragAnimation from "@/components/RefleksiDragAnimation";
 
 const Grid = ({ children }: { children: React.ReactNode }) => (
   <g>
@@ -345,6 +346,7 @@ const RefleksiLKPDPage = () => (
     badgeText="LKPD · Kelas 9 · Bab Transformasi Geometri"
     title="Refleksi (Pencerminan) — Penemuan Terbimbing"
     intro="Sobat Numatik, ayo selami REFLEKSI 🪞! Kamu akan menemukan aturan pencerminan terhadap sumbu X, sumbu Y, garis y = x, y = −x, dan titik asal — sambil bermain seret kartu menyortir aturan!"
+    headerSlot={<RefleksiDragAnimation />}
     situations={situations}
     guidedIntro="Jawab berurutan. Pola pemetaan akan menuntunmu ke aturan tiap jenis refleksi."
     guidedItems={guidedItems}
