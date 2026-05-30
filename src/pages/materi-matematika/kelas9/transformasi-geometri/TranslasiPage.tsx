@@ -496,8 +496,8 @@ function DiagramBangunAnimated() {
         {/* ── Langkah 1: 3 hop busur ke kiri (semua vertex serentak) ── */}
         {VERTS.map(([vx, vy]) =>
           mkHArcs(vx, vy).map((d, i) => (
-            <path key={`h${vx}${vy}${i}`} d={d} fill="none" stroke="#facc15" strokeWidth="1.8"
-              strokeDasharray="30" style={ld(30, 0.45, i * 0.38)} />
+            <path key={`h${vx}${vy}${i}`} d={d} fill="none" stroke="#facc15" strokeWidth="1.2"
+              strokeDasharray="3 3" style={op(i * 0.38, 0.35)} />
           ))
         )}
         {/* "a = −3" di bawah busur P */}
@@ -514,8 +514,8 @@ function DiagramBangunAnimated() {
         {/* ── Langkah 2: 2 hop busur ke bawah ── */}
         {VERTS.map(([vx, vy]) =>
           mkVArcs(vx, vy).map((d, j) => (
-            <path key={`v${vx}${vy}${j}`} d={d} fill="none" stroke="#a78bfa" strokeWidth="1.8"
-              strokeDasharray="22" style={ld(22, 0.4, 1.3 + j * 0.42)} />
+            <path key={`v${vx}${vy}${j}`} d={d} fill="none" stroke="#a78bfa" strokeWidth="1.2"
+              strokeDasharray="3 3" style={op(1.3 + j * 0.42, 0.35)} />
           ))
         )}
         {/* "b = −2" di kanan busur vertikal P */}
