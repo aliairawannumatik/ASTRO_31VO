@@ -466,7 +466,21 @@ function DiagramBangunAnimated() {
   const ptsStr = (coords: [number,number][]) =>
     coords.map(([x, y]) => `${px(x)},${py(y)}`).join(' ');
 
-  const arrLen = 57;
+  // Translation T(-3,-2)
+  const A = -3, B = -2;
+  const VERTS: [number,number][] = [[1,1],[4,1],[2,4]];
+
+  // 3 horizontal arcs per vertex (going LEFT 3 steps, bowing DOWN like DiagramTitikAnimated)
+  const mkHArcs = (vx: number, vy: number) =>
+    [0,1,2].map(i =>
+      `M ${px(vx-i)},${py(vy)} Q ${px(vx-i-0.5)},${py(vy)+13} ${px(vx-i-1)},${py(vy)}`
+    );
+
+  // 2 vertical arcs per vertex (going DOWN 2 steps, bowing RIGHT like DiagramTitikAnimated)
+  const mkVArcs = (vx: number, vy: number) =>
+    [0,1].map(j =>
+      `M ${px(vx+A)},${py(vy-j)} Q ${px(vx+A)+13},${py(vy-j-0.5)} ${px(vx+A)},${py(vy-j-1)}`
+    );
 
   return (
     <div className="space-y-3">
@@ -479,39 +493,62 @@ function DiagramBangunAnimated() {
         <text x={px(4)+4} y={py(1)+13} fontSize="8" fill="#22d3ee" textAnchor="start" fontWeight="bold">Q(4,1)</text>
         <text x={px(2)+4} y={py(4)-5} fontSize="8" fill="#22d3ee" textAnchor="start" fontWeight="bold">R(2,4)</text>
 
-        {/* ── Step 1: Arrows animate in, staggered ── */}
-        {([[1,1,-2,-1],[4,1,1,-1],[2,4,-1,2]] as [number,number,number,number][]).map(([x1,y1,x2,y2], i) => (
-          <line key={i}
-            x1={px(x1)} y1={py(y1)} x2={px(x2)} y2={py(y2)}
-            stroke="#facc15" strokeWidth="1.8" strokeDasharray={arrLen}
-            style={ld(arrLen, 0.6, i * 0.45)} />
+        {/* ── Langkah 1: 3 hop busur ke kiri (semua vertex serentak) ── */}
+        {VERTS.map(([vx, vy]) =>
+          mkHArcs(vx, vy).map((d, i) => (
+            <path key={`h${vx}${vy}${i}`} d={d} fill="none" stroke="#facc15" strokeWidth="1.8"
+              strokeDasharray="30" style={ld(30, 0.45, i * 0.38)} />
+          ))
+        )}
+        {/* "a = −3" di bawah busur P */}
+        <text x={(px(1)+px(-2))/2} y={py(1)+18} fontSize="7.5" fill="#fde68a"
+          textAnchor="middle" fontWeight="bold" style={op(1.15, 0.4)}>−3</text>
+        <text x={(px(1)+px(-2))/2} y={py(1)+27} fontSize="7" fill="#fde68a"
+          textAnchor="middle" style={op(1.2, 0.35)}>a = −3</text>
+
+        {/* ── Titik elbow (posisi tengah setelah geser horizontal) ── */}
+        {VERTS.map(([vx, vy]) => (
+          <circle key={`m${vx}${vy}`} cx={px(vx+A)} cy={py(vy)} r={3} fill="#a78bfa" style={op(1.25, 0.3)} />
         ))}
 
-        {/* ── T(−3,−2) bright text box — top-left ── */}
-        <rect x={px(-4.8) - 4} y={py(4.2) - 12} width={66} height={17} rx={4} ry={4}
-          fill="#facc15" style={op(1.4, 0.4)} />
-        <text x={px(-4.8)} y={py(4.2)} fontSize="11" fill="#1e1b4b"
-          textAnchor="start" fontWeight="bold" style={op(1.4, 0.4)}>T(−3,−2)</text>
+        {/* ── Langkah 2: 2 hop busur ke bawah ── */}
+        {VERTS.map(([vx, vy]) =>
+          mkVArcs(vx, vy).map((d, j) => (
+            <path key={`v${vx}${vy}${j}`} d={d} fill="none" stroke="#a78bfa" strokeWidth="1.8"
+              strokeDasharray="22" style={ld(22, 0.4, 1.3 + j * 0.42)} />
+          ))
+        )}
+        {/* "b = −2" di kanan busur vertikal P */}
+        <text x={px(-2)+14} y={(py(1)+py(-1))/2+3} fontSize="7.5" fill="#c4b5fd"
+          textAnchor="start" fontWeight="bold" style={op(2.1, 0.4)}>↓ −2</text>
+        <text x={px(-2)+14} y={(py(1)+py(-1))/2+13} fontSize="7" fill="#c4b5fd"
+          textAnchor="start" style={op(2.15, 0.35)}>b = −2</text>
 
-        {/* ── Step 2: Image dots + labels ── */}
-        <circle cx={px(-2)} cy={py(-1)} r={5} fill="#f472b6" style={op(1.8, 0.4)} />
+        {/* ── Image dots + labels ── */}
+        <circle cx={px(-2)} cy={py(-1)} r={5} fill="#f472b6" style={op(2.3, 0.5)} />
         <text x={px(-2)-7} y={py(-1)+13} fontSize="8" fill="#f472b6"
-          textAnchor="end" fontWeight="bold" style={op(1.8, 0.4)}>P'(−2,−1)</text>
+          textAnchor="end" fontWeight="bold" style={op(2.3, 0.5)}>P'(−2,−1)</text>
 
-        <circle cx={px(1)} cy={py(-1)} r={5} fill="#f472b6" style={op(2.1, 0.4)} />
+        <circle cx={px(1)} cy={py(-1)} r={5} fill="#f472b6" style={op(2.3, 0.5)} />
         <text x={px(1)+4} y={py(-1)+13} fontSize="8" fill="#f472b6"
-          textAnchor="start" fontWeight="bold" style={op(2.1, 0.4)}>Q'(1,−1)</text>
+          textAnchor="start" fontWeight="bold" style={op(2.3, 0.5)}>Q'(1,−1)</text>
 
-        <circle cx={px(-1)} cy={py(2)} r={5} fill="#f472b6" style={op(2.4, 0.4)} />
+        <circle cx={px(-1)} cy={py(2)} r={5} fill="#f472b6" style={op(2.3, 0.5)} />
         <text x={px(-1)-7} y={py(2)-5} fontSize="8" fill="#f472b6"
-          textAnchor="end" fontWeight="bold" style={op(2.4, 0.4)}>R'(−1,2)</text>
+          textAnchor="end" fontWeight="bold" style={op(2.3, 0.5)}>R'(−1,2)</text>
 
-        {/* ── Step 3: △P'Q'R' polygon + label ── */}
+        {/* ── △P'Q'R' polygon + label ── */}
         <polygon points={ptsStr([[-2,-1],[1,-1],[-1,2]])}
           fill="rgba(244,114,182,0.18)" stroke="#f472b6" strokeWidth="1.5"
-          style={op(2.7, 0.5)} />
+          style={op(2.6, 0.5)} />
         <text x={px(-0.67)} y={py(0)+4} fontSize="9" fill="#f472b6"
-          textAnchor="middle" fontWeight="bold" style={op(2.7, 0.5)}>△P'Q'R'</text>
+          textAnchor="middle" fontWeight="bold" style={op(2.6, 0.5)}>△P'Q'R'</text>
+
+        {/* ── T(−3,−2) bright text box — top-left ── */}
+        <rect x={px(-4.8)-4} y={py(4.2)-12} width={66} height={17} rx={4} ry={4}
+          fill="#facc15" style={op(2.75, 0.4)} />
+        <text x={px(-4.8)} y={py(4.2)} fontSize="11" fill="#1e1b4b"
+          textAnchor="start" fontWeight="bold" style={op(2.75, 0.4)}>T(−3,−2)</text>
       </Grid>
 
       {/* Reveal / Reset button */}
