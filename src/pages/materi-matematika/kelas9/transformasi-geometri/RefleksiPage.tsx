@@ -1073,26 +1073,82 @@ const RefleksiPage = () => {
             </div>
           </div>
 
-          {/* CONTOH 3 - y = x */}
+          {/* CONTOH 3 - Refleksi Berantai */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#fb923c" title="📌 Contoh 3: Refleksi terhadap Garis y = x" />
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#fb923c" title="📌 Contoh 3: Refleksi Berantai (Sumbu Y lalu y = 5)" />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
-                <p className="text-sm font-semibold text-orange-300 font-body mb-2">Soal:</p>
-                <p className="text-sm text-white/80 font-body">Tentukan bayangan segitiga ABC dengan <InlineMath math="A(1,1), B(4,1), C(3,3)" /> jika dicerminkan terhadap garis <InlineMath math="y = x" />!</p>
+
+              {/* Soal */}
+              <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 space-y-2">
+                <p className="text-sm font-semibold text-orange-300 font-body">Soal:</p>
+                <p className="text-sm text-white/80 font-body leading-relaxed">
+                  Titik <span className="text-cyan-300 font-bold">B(6, 3)</span> mula-mula dicerminkan terhadap sumbu <em>Y</em>, selanjutnya dicerminkan terhadap garis <span className="text-yellow-300 font-bold">y = 5</span>. Bayangan terakhir titik <em>B</em> adalah . . . .
+                </p>
+                <div className="grid grid-cols-2 gap-x-8 gap-y-1 pt-1">
+                  {[["A.", "(−6, 3)"], ["C.", "(6, 8)"], ["B.", "(−6, 7)"], ["D.", "(6, 13)"]].map(([huruf, pilihan]) => (
+                    <p key={huruf} className="text-sm font-body text-white/70">
+                      <span className="font-bold text-white/90 min-w-[20px] inline-block">{huruf}</span> {pilihan}
+                    </p>
+                  ))}
+                </div>
               </div>
-              <div className="flex justify-center"><DiagramDiag /></div>
-              <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
-                <p className="text-sm font-semibold text-orange-300 font-body">Penyelesaian (x dan y ditukar):</p>
-                {[["A(1, 1)", "A'(1, 1)"], ["B(4, 1)", "B'(1, 4)"], ["C(3, 3)", "C'(3, 3)"]].map(([dari, ke]) => (
-                  <div key={dari} className="flex items-center gap-3 text-sm font-body">
-                    <span className="text-cyan-300 min-w-[80px]">{dari}</span>
-                    <span className="text-white/40">→</span>
-                    <span className="text-orange-300 font-bold">{ke}</span>
+
+              {/* Pembahasan */}
+              <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                <p className="text-sm font-semibold text-orange-300 font-body">Pembahasan:</p>
+
+                {/* Langkah 1 */}
+                <div className="space-y-1.5">
+                  <p className="text-xs font-bold text-yellow-300 font-body uppercase tracking-wide">Langkah 1 — Cerminkan terhadap Sumbu Y</p>
+                  <div className="bg-slate-700/50 rounded-lg px-3 py-2 text-xs text-white/50 font-body text-center">
+                    Rumus: <span className="text-yellow-200 font-mono">(x, y) → (−x, y)</span> · x dinegasikan, y tetap
                   </div>
-                ))}
-                <p className="text-xs text-white/50 font-body mt-2">Catatan: A dan C adalah titik tetap karena berada di garis y = x</p>
+                  <div className="flex items-center gap-2 text-sm font-body flex-wrap pl-1">
+                    <span className="text-cyan-300 font-bold">B(6, 3)</span>
+                    <span className="text-white/30">→</span>
+                    <span className="text-white/60">B′(−6, 3)</span>
+                  </div>
+                </div>
+
+                {/* Langkah 2 */}
+                <div className="space-y-1.5">
+                  <p className="text-xs font-bold text-yellow-300 font-body uppercase tracking-wide">Langkah 2 — Cerminkan B′(−6, 3) terhadap Garis y = 5</p>
+                  <div className="bg-slate-700/50 rounded-lg px-3 py-2 text-xs text-white/50 font-body text-center">
+                    Rumus: <span className="text-yellow-200 font-mono">(x, y) → (x, 2k − y)</span> · k = 5, x tetap
+                  </div>
+                  <div className="bg-slate-700/40 rounded-lg p-3 space-y-1.5 text-sm font-body">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-white/50">x″</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">x′</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-emerald-300 font-bold">−6</span>
+                      <span className="text-white/30 text-xs">(x tetap)</span>
+                    </div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-white/50">y″</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">2k − y′</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">2 × 5 − 3</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-white/70">10 − 3</span>
+                      <span className="text-white/30">=</span>
+                      <span className="text-emerald-300 font-bold">7</span>
+                    </div>
+                  </div>
+                  <p className="text-sm font-body text-white/60 pl-1">
+                    Bayangan terakhir: <span className="text-emerald-300 font-bold">B″(−6, 7)</span>
+                  </p>
+                </div>
+
+                <div className="bg-orange-500/15 border border-orange-400/40 rounded-xl px-4 py-3 text-center">
+                  <p className="text-orange-300 font-bold text-sm font-body">
+                    Jawaban: <span className="text-yellow-300 text-base">B. (−6, 7)</span>
+                  </p>
+                </div>
               </div>
+
             </div>
           </div>
 
