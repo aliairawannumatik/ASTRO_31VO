@@ -696,6 +696,32 @@ const TranslasiPage = () => {
                 />
                 <p className="text-[10px] text-white/30 text-right mt-1 font-body">bing.com/images/create</p>
               </div>
+              <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4 space-y-3">
+                <p className="text-cyan-300 font-body text-sm font-bold">🕹️ Mesin Capit & Konsep Translasi</p>
+                <p className="text-white/75 text-sm font-body leading-relaxed">
+                  Mesin capit (claw machine) adalah contoh nyata penerapan <strong className="text-cyan-300">translasi</strong> dalam kehidupan sehari-hari. Perhatikan cara kerja lengan capitnya:
+                </p>
+                <div className="space-y-2">
+                  {([
+                    ["➡️", "Geser Horizontal", "Pemain menekan tombol kiri/kanan → lengan capit bergerak sejajar sumbu-x sejauh a satuan, tanpa berubah ketinggian."],
+                    ["⬆️", "Geser Vertikal", "Pemain menekan tombol maju/mundur → lengan capit bergerak sejajar sumbu-y sejauh b satuan, tanpa berubah posisi horizontal."],
+                    ["⬇️", "Turun & Capit", "Setelah posisi pas, capit turun lurus ke bawah — gerak vertikal murni, sejajar sumbu-y negatif."],
+                  ] as const).map(([icon, judul, desc]) => (
+                    <div key={judul} className="flex items-start gap-3 bg-slate-900/50 rounded-lg px-3 py-2.5">
+                      <span className="text-lg shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="text-xs font-bold text-yellow-300 font-body">{judul}</p>
+                        <p className="text-xs text-white/60 font-body mt-0.5">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-cyan-950/50 border border-cyan-500/20 rounded-lg px-4 py-2.5">
+                  <p className="text-cyan-200 text-xs font-body leading-relaxed">
+                    💡 Setiap gerakan lengan capit memenuhi syarat translasi: <strong>bentuk tidak berubah, arah tetap lurus, dan setiap titik berpindah dengan jarak yang sama</strong>. Inilah mengapa mesin capit sering dijadikan analogi konsep translasi dalam matematika!
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
