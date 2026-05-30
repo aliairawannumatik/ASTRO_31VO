@@ -14,7 +14,7 @@ const ticks = [-5,-4,-3,-2,-1,1,2,3,4,5];
 
 function Grid({ children, accent = "#22d3ee" }: { children?: React.ReactNode; accent?: string }) {
   return (
-    <svg viewBox={`0 0 ${S} ${S}`} className="w-full sm:max-w-[70%] sm:mx-auto rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
+    <svg viewBox={`0 0 ${S} ${S}`} className="w-full sm:max-w-[58%] sm:mx-auto rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
       {ticks.map(t => (
         <g key={t}>
           <line x1={px(t)} y1={0} x2={px(t)} y2={S} stroke="#334155" strokeWidth="0.5" />
