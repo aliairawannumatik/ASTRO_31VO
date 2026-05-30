@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target } from "lucide-react";
@@ -7,7 +7,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
 
 /* ── SVG grid helpers ── */
-const S = 240, sc = S / 14, ox = S / 2, oy = S / 2;
+const S = 360, sc = S / 14, ox = S / 2, oy = S / 2;
 const px = (x: number) => ox + x * sc;
 const py = (y: number) => oy - y * sc;
 const ticks = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
@@ -18,22 +18,22 @@ function Grid({ children, accent = "#fb923c" }: { children?: React.ReactNode; ac
     <svg width={S} height={S} className="rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
       {ticks.map(t => (
         <g key={t}>
-          <line x1={px(t)} y1={0} x2={px(t)} y2={S} stroke="#334155" strokeWidth="0.5" />
-          <line x1={0} y1={py(t)} x2={S} y2={py(t)} stroke="#334155" strokeWidth="0.5" />
+          <line x1={px(t)} y1={0} x2={px(t)} y2={S} stroke="#334155" strokeWidth="0.6" />
+          <line x1={0} y1={py(t)} x2={S} y2={py(t)} stroke="#334155" strokeWidth="0.6" />
         </g>
       ))}
-      <line x1={0} y1={oy} x2={S} y2={oy} stroke="#64748b" strokeWidth="1.2" />
-      <line x1={ox} y1={0} x2={ox} y2={S} stroke="#64748b" strokeWidth="1.2" />
-      <polygon points={`${S},${oy} ${S - 6},${oy - 3} ${S - 6},${oy + 3}`} fill="#64748b" />
-      <polygon points={`${ox},0 ${ox - 3},6 ${ox + 3},6`} fill="#64748b" />
+      <line x1={0} y1={oy} x2={S} y2={oy} stroke="#64748b" strokeWidth="1.4" />
+      <line x1={ox} y1={0} x2={ox} y2={S} stroke="#64748b" strokeWidth="1.4" />
+      <polygon points={`${S},${oy} ${S - 7},${oy - 4} ${S - 7},${oy + 4}`} fill="#64748b" />
+      <polygon points={`${ox},0 ${ox - 4},8 ${ox + 4},8`} fill="#64748b" />
       {ticks.map(t => (
         <g key={t}>
-          <text x={px(t)} y={oy + 10} textAnchor="middle" fill="#64748b" fontSize="7">{t}</text>
-          <text x={ox - 8} y={py(t) + 3} textAnchor="middle" fill="#64748b" fontSize="7">{t}</text>
+          <text x={px(t)} y={oy + 13} textAnchor="middle" fill="#64748b" fontSize="9">{t}</text>
+          <text x={ox - 10} y={py(t) + 4} textAnchor="middle" fill="#64748b" fontSize="9">{t}</text>
         </g>
       ))}
-      <text x={S - 5} y={oy - 4} fill="#94a3b8" fontSize="8">x</text>
-      <text x={ox + 4} y={8} fill="#94a3b8" fontSize="8">y</text>
+      <text x={S - 6} y={oy - 5} fill="#94a3b8" fontSize="10">x</text>
+      <text x={ox + 5} y={10} fill="#94a3b8" fontSize="10">y</text>
       {children}
     </svg>
   );
@@ -45,8 +45,8 @@ function Poly({ pts, color, fill, label }: { pts: [number, number][]; color: str
   const cy_ = pts.reduce((s, [, y]) => s + y, 0) / pts.length;
   return (
     <g>
-      <polygon points={d} fill={fill} stroke={color} strokeWidth="1.5" />
-      {label && <text x={px(cx_)} y={py(cy_) + 4} textAnchor="middle" fill={color} fontSize="9" fontWeight="bold">{label}</text>}
+      <polygon points={d} fill={fill} stroke={color} strokeWidth="2" />
+      {label && <text x={px(cx_)} y={py(cy_) + 4} textAnchor="middle" fill={color} fontSize="11" fontWeight="bold">{label}</text>}
     </g>
   );
 }
@@ -54,9 +54,36 @@ function Poly({ pts, color, fill, label }: { pts: [number, number][]; color: str
 function Dot({ x, y, color, label }: { x: number; y: number; color: string; label: string }) {
   return (
     <g>
-      <circle cx={px(x)} cy={py(y)} r={4} fill={color} />
-      <text x={px(x) + 5} y={py(y) - 4} fill={color} fontSize="8" fontWeight="bold">{label}</text>
+      <circle cx={px(x)} cy={py(y)} r={5} fill={color} />
+      <text x={px(x) + 7} y={py(y) - 5} fill={color} fontSize="10" fontWeight="bold">{label}</text>
     </g>
+  );
+}
+
+/* Center crosshair — titik pusat rotasi yang jelas */
+function CenterMark({ x, y, color }: { x: number; y: number; color: string }) {
+  const cx = px(x), cy = py(y);
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={12} fill="none" stroke={color} strokeWidth="1.5" strokeDasharray="3,2" opacity="0.5" />
+      <circle cx={cx} cy={cy} r={6} fill={color} opacity="0.9" />
+      <line x1={cx - 18} y1={cy} x2={cx + 18} y2={cy} stroke={color} strokeWidth="1.5" opacity="0.7" />
+      <line x1={cx} y1={cy - 18} x2={cx} y2={cy + 18} stroke={color} strokeWidth="1.5" opacity="0.7" />
+    </g>
+  );
+}
+
+/* Garis dari pusat ke titik (jari-jari rotasi) */
+function RadiusLine({ cx, cy, tx, ty, color, dashed }: { cx: number; cy: number; tx: number; ty: number; color: string; dashed?: boolean }) {
+  return (
+    <line
+      x1={px(cx)} y1={py(cy)}
+      x2={px(tx)} y2={py(ty)}
+      stroke={color}
+      strokeWidth={dashed ? 1.2 : 2}
+      strokeDasharray={dashed ? "5,4" : "none"}
+      opacity={dashed ? 0.45 : 0.85}
+    />
   );
 }
 
@@ -69,8 +96,8 @@ function ArcArrow({ cx: acx, cy: acy, r, aStart, aEnd, color }: { cx: number; cy
   const sweep = aEnd > aStart ? 0 : 1;
   return (
     <g>
-      <path d={`M${x1},${y1} A${r},${r},0,${large},${sweep},${x2},${y2}`} fill="none" stroke={color} strokeWidth="1.5" strokeDasharray="4,2" />
-      <circle cx={x2} cy={y2} r={2.5} fill={color} />
+      <path d={`M${x1},${y1} A${r},${r},0,${large},${sweep},${x2},${y2}`} fill="none" stroke={color} strokeWidth="2" strokeDasharray="5,3" />
+      <circle cx={x2} cy={y2} r={3} fill={color} />
     </g>
   );
 }
@@ -87,6 +114,7 @@ function rotatePtAround(x: number, y: number, a: number, b: number, deg: number)
 /* ── Animasi Interaktif Rotasi ── */
 const ORIG_PTS: [number, number][] = [[1, 1], [4, 1], [1, 3]];
 const ORIG_LABELS = ["A(1,1)", "B(4,1)", "C(1,3)"];
+const ANIM_DURATION = 1800; // ms — slow motion
 
 function AnimasiRotasi() {
   const [angle, setAngle] = useState<90 | 180 | 270>(90);
@@ -95,20 +123,62 @@ function AnimasiRotasi() {
   const [inputA, setInputA] = useState("0");
   const [inputB, setInputB] = useState("0");
   const [show, setShow] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animAngle, setAnimAngle] = useState(0);
+  const rafRef = useRef<number | null>(null);
 
   const ca = centerType === "origin" ? 0 : parseFloat(inputA) || 0;
   const cb = centerType === "origin" ? 0 : parseFloat(inputB) || 0;
   const actualDeg = dir === "ccw" ? angle : -angle;
 
+  const displayAngle = isAnimating ? animAngle : (show ? actualDeg : 0);
+  const currentPts = ORIG_PTS.map(([x, y]) => rotatePtAround(x, y, ca, cb, displayAngle) as [number, number]);
   const rotated = ORIG_PTS.map(([x, y]) => rotatePtAround(x, y, ca, cb, actualDeg) as [number, number]);
+  const showRotated = show || isAnimating;
 
   const dirLabel = dir === "ccw" ? "berlawanan arah jarum jam" : "searah jarum jam";
+  const accentColor = dir === "ccw" ? "#22d3ee" : "#fb923c";
+  const resultColor = dir === "ccw" ? "#f472b6" : "#fb923c";
 
-  const handlePutar = () => { playPopSound(); setShow(true); };
-  const handleReset = () => { playPopSound(); setShow(false); };
+  const easeInOut = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-  const arcStart = dir === "ccw" ? 30 : 30;
+  const handlePutar = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false);
+    setIsAnimating(true);
+    setAnimAngle(0);
+    const startTime = performance.now();
+    const animate = (now: number) => {
+      const t = Math.min((now - startTime) / ANIM_DURATION, 1);
+      const eased = easeInOut(t);
+      setAnimAngle(eased * actualDeg);
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(animate);
+      } else {
+        setAnimAngle(actualDeg);
+        setIsAnimating(false);
+        setShow(true);
+      }
+    };
+    rafRef.current = requestAnimationFrame(animate);
+  };
+
+  const handleReset = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false);
+    setIsAnimating(false);
+    setAnimAngle(0);
+  };
+
+  useEffect(() => {
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  const arcStart = 30;
   const arcEnd = dir === "ccw" ? 30 + angle : 30 - angle;
+  const arcR = sc * 2.6;
 
   return (
     <div className="space-y-4 pt-2">
@@ -118,14 +188,13 @@ function AnimasiRotasi() {
       <div className="space-y-1.5">
         <p className="text-xs font-body text-white/50 uppercase tracking-wide">Sudut Rotasi</p>
         <div className="flex flex-col gap-2">
-          {/* Berlawanan arah jarum jam */}
           <div className="space-y-1">
             <p className="text-xs font-body text-emerald-400 font-semibold">Berlawanan arah jarum jam</p>
             <div className="flex gap-2 flex-wrap">
               {([90, 180, 270] as const).map(a => (
                 <button
                   key={`ccw-${a}`}
-                  onClick={() => { playPopSound(); setAngle(a); setDir("ccw"); setShow(false); }}
+                  onClick={() => { playPopSound(); setAngle(a); setDir("ccw"); setShow(false); setIsAnimating(false); if (rafRef.current) cancelAnimationFrame(rafRef.current); setAnimAngle(0); }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
                     angle === a && dir === "ccw"
                       ? "bg-emerald-500 border-emerald-400 text-white shadow-lg shadow-emerald-500/30"
@@ -137,14 +206,13 @@ function AnimasiRotasi() {
               ))}
             </div>
           </div>
-          {/* Searah jarum jam */}
           <div className="space-y-1">
             <p className="text-xs font-body text-orange-400 font-semibold">Searah jarum jam</p>
             <div className="flex gap-2 flex-wrap">
               {([90, 180, 270] as const).map(a => (
                 <button
                   key={`cw-${a}`}
-                  onClick={() => { playPopSound(); setAngle(a); setDir("cw"); setShow(false); }}
+                  onClick={() => { playPopSound(); setAngle(a); setDir("cw"); setShow(false); setIsAnimating(false); if (rafRef.current) cancelAnimationFrame(rafRef.current); setAnimAngle(0); }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
                     angle === a && dir === "cw"
                       ? "bg-orange-500 border-orange-400 text-white shadow-lg shadow-orange-500/30"
@@ -166,7 +234,7 @@ function AnimasiRotasi() {
           {(["origin", "custom"] as const).map(c => (
             <button
               key={c}
-              onClick={() => { playPopSound(); setCenterType(c); setShow(false); }}
+              onClick={() => { playPopSound(); setCenterType(c); setShow(false); setIsAnimating(false); if (rafRef.current) cancelAnimationFrame(rafRef.current); setAnimAngle(0); }}
               className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
                 centerType === c
                   ? "bg-yellow-500/80 border-yellow-400 text-white shadow-md"
@@ -183,14 +251,14 @@ function AnimasiRotasi() {
             <input
               type="number"
               value={inputA}
-              onChange={e => { setInputA(e.target.value); setShow(false); }}
+              onChange={e => { setInputA(e.target.value); setShow(false); setIsAnimating(false); if (rafRef.current) cancelAnimationFrame(rafRef.current); setAnimAngle(0); }}
               className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono"
             />
             <label className="text-xs text-white/60 font-body">b =</label>
             <input
               type="number"
               value={inputB}
-              onChange={e => { setInputB(e.target.value); setShow(false); }}
+              onChange={e => { setInputB(e.target.value); setShow(false); setIsAnimating(false); if (rafRef.current) cancelAnimationFrame(rafRef.current); setAnimAngle(0); }}
               className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono"
             />
           </div>
@@ -198,62 +266,111 @@ function AnimasiRotasi() {
       </div>
 
       {/* Grid + info */}
-      <div className="flex flex-col sm:flex-row gap-4 items-start justify-center">
-        <Grid accent={dir === "ccw" ? "#22d3ee" : "#fb923c"}>
-          {/* Pusat rotasi */}
-          <circle cx={px(ca)} cy={py(cb)} r={5} fill={dir === "ccw" ? "#22d3ee" : "#fb923c"} />
-          <text x={px(ca) + 6} y={py(cb) - 5} fill={dir === "ccw" ? "#22d3ee" : "#fb923c"} fontSize="8" fontWeight="bold">
-            {centerType === "origin" ? "O" : `(${ca},${cb})`}
-          </text>
+      <div className="flex flex-col lg:flex-row gap-4 items-start">
 
-          {/* Arc arrow */}
-          <ArcArrow cx={ca} cy={cb} r={36} aStart={arcStart} aEnd={arcEnd} color="#facc15" />
-          <text
-            x={px(ca) + (dir === "ccw" ? -30 : 30)}
-            y={py(cb) - 30}
-            fontSize="7"
-            fill="#fde68a"
-            textAnchor="middle"
-          >
-            {angle}°
-          </text>
+        {/* SVG Grid — diperbesar */}
+        <div className="flex-shrink-0 mx-auto lg:mx-0">
+          <Grid accent={accentColor}>
 
-          {/* Segitiga asli */}
-          <Poly pts={ORIG_PTS} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
-          {ORIG_PTS.map(([x, y], i) => (
-            <Dot key={i} x={x} y={y} color="#22d3ee" label={["A","B","C"][i]} />
-          ))}
+            {/* Garis jari-jari dari pusat ke titik ASLI (selalu tampil saat animasi/hasil) */}
+            {showRotated && ORIG_PTS.map(([x, y], i) => (
+              <RadiusLine key={`r-orig-${i}`} cx={ca} cy={cb} tx={x} ty={y} color="#22d3ee" dashed />
+            ))}
 
-          {/* Segitiga bayangan */}
-          {show && (
-            <g style={{ transition: "opacity 0.4s" }}>
-              <Poly pts={rotated} color={dir === "ccw" ? "#f472b6" : "#fb923c"} fill={dir === "ccw" ? "rgba(244,114,182,0.2)" : "rgba(251,146,60,0.2)"} label="△A'B'C'" />
-              {rotated.map(([x, y], i) => (
-                <Dot key={i} x={x} y={y} color={dir === "ccw" ? "#f472b6" : "#fb923c"} label={["A'","B'","C'"][i]} />
-              ))}
-            </g>
-          )}
-        </Grid>
+            {/* Garis jari-jari dari pusat ke titik SEKARANG (bergerak saat animasi) */}
+            {showRotated && currentPts.map(([x, y], i) => (
+              <RadiusLine key={`r-curr-${i}`} cx={ca} cy={cb} tx={x} ty={y} color={resultColor} dashed={false} />
+            ))}
+
+            {/* Busur rotasi (arc arrow) */}
+            <ArcArrow cx={ca} cy={cb} r={arcR} aStart={arcStart} aEnd={arcEnd} color="#facc15" />
+            <text
+              x={px(ca) + (dir === "ccw" ? -arcR - 10 : arcR + 10)}
+              y={py(cb) - arcR / 2}
+              fontSize="10"
+              fill="#fde68a"
+              textAnchor="middle"
+              fontWeight="bold"
+            >
+              {angle}°
+            </text>
+
+            {/* Segitiga asli */}
+            <Poly pts={ORIG_PTS} color="#22d3ee" fill={showRotated ? "rgba(34,211,238,0.08)" : "rgba(34,211,238,0.18)"} label="△ABC" />
+            {ORIG_PTS.map(([x, y], i) => (
+              <Dot key={i} x={x} y={y} color="#22d3ee" label={["A","B","C"][i]} />
+            ))}
+
+            {/* Segitiga bayangan (bergerak saat animasi) */}
+            {showRotated && (
+              <g>
+                <Poly
+                  pts={currentPts}
+                  color={resultColor}
+                  fill={`${resultColor}30`}
+                  label={show && !isAnimating ? "△A'B'C'" : undefined}
+                />
+                {currentPts.map(([x, y], i) => (
+                  <Dot key={i} x={x} y={y} color={resultColor} label={show && !isAnimating ? ["A'","B'","C'"][i] : ""} />
+                ))}
+              </g>
+            )}
+
+            {/* Titik pusat rotasi — paling atas supaya selalu terlihat */}
+            <CenterMark x={ca} y={cb} color="#facc15" />
+            <text
+              x={px(ca) + 16}
+              y={py(cb) - 14}
+              fill="#facc15"
+              fontSize="11"
+              fontWeight="bold"
+            >
+              {centerType === "origin" ? "O(0,0)" : `P(${ca},${cb})`}
+            </text>
+
+          </Grid>
+
+          {/* Legenda warna di bawah grid */}
+          <div className="flex gap-4 mt-2 justify-center text-xs font-body">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-cyan-400 inline-block" />
+              <span className="text-cyan-300">Asli (△ABC)</span>
+            </div>
+            {showRotated && (
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
+                <span style={{ color: resultColor }}>Bayangan (△A'B'C')</span>
+              </div>
+            )}
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-yellow-400 inline-block" />
+              <span className="text-yellow-300">Pusat rotasi</span>
+            </div>
+          </div>
+        </div>
 
         {/* Panel hasil */}
-        <div className="flex-1 min-w-0 space-y-2">
+        <div className="flex-1 min-w-0 space-y-2 w-full">
           <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
             <p className="text-yellow-300 font-bold text-sm">{angle}° {dirLabel}</p>
             <p className="text-white/50">Pusat: {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
+            {isAnimating && (
+              <p className="text-emerald-400 font-semibold animate-pulse">⏳ Memutar perlahan…</p>
+            )}
           </div>
 
-          {show && (
+          {show && !isAnimating && (
             <div className="bg-slate-700/40 rounded-xl p-3 space-y-2">
-              <p className="text-xs font-bold text-white/60 font-body uppercase">Hasil:</p>
+              <p className="text-xs font-bold text-white/60 font-body uppercase">Hasil Rotasi:</p>
               {ORIG_PTS.map(([x, y], i) => {
                 const [rx, ry] = rotated[i];
                 const rx_ = Math.round(rx * 100) / 100;
                 const ry_ = Math.round(ry * 100) / 100;
                 return (
                   <div key={i} className="flex items-center gap-2 text-sm font-body">
-                    <span className="text-cyan-300 min-w-[60px]">{ORIG_LABELS[i]}</span>
+                    <span className="text-cyan-300 min-w-[68px]">{ORIG_LABELS[i]}</span>
                     <span className="text-white/30">→</span>
-                    <span className={`font-bold ${dir === "ccw" ? "text-pink-300" : "text-orange-300"}`}>
+                    <span className="font-bold" style={{ color: resultColor }}>
                       ({rx_}, {ry_})
                     </span>
                   </div>
@@ -265,20 +382,32 @@ function AnimasiRotasi() {
           <div className="flex gap-2">
             <button
               onClick={handlePutar}
-              className={`flex-1 py-2 rounded-xl font-bold text-sm font-body transition-all ${
-                dir === "ccw"
-                  ? "bg-emerald-500 hover:bg-emerald-400 text-white"
-                  : "bg-orange-500 hover:bg-orange-400 text-white"
+              disabled={isAnimating}
+              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${
+                isAnimating
+                  ? "opacity-50 cursor-not-allowed bg-slate-600"
+                  : dir === "ccw"
+                  ? "bg-emerald-500 hover:bg-emerald-400 text-white shadow-lg shadow-emerald-500/30"
+                  : "bg-orange-500 hover:bg-orange-400 text-white shadow-lg shadow-orange-500/30"
               }`}
             >
-              🔄 Putar!
+              {isAnimating ? "⏳ Memutar…" : "🔄 Putar!"}
             </button>
             <button
               onClick={handleReset}
-              className="px-4 py-2 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
+              className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
             >
               Reset
             </button>
+          </div>
+
+          {/* Petunjuk */}
+          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1">
+            <p className="text-yellow-300 font-semibold text-xs">💡 Keterangan visual:</p>
+            <p>— Garis <span className="text-cyan-400">putus-putus biru</span> = jari-jari dari pusat ke titik asli</p>
+            <p>— Garis <span style={{ color: resultColor }}>penuh</span> = jari-jari dari pusat ke titik bayangan</p>
+            <p>— <span className="text-yellow-400">✦ kuning</span> = titik pusat rotasi (diam)</p>
+            <p>— Panjang jari-jari <strong className="text-white">selalu sama</strong> sebelum & sesudah rotasi</p>
           </div>
         </div>
       </div>
@@ -295,10 +424,10 @@ const DiagramR90 = () => {
     <Grid accent="#22d3ee">
       <Poly pts={origPts} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
       <Poly pts={r90} color="#f472b6" fill="rgba(244,114,182,0.15)" label="△A'B'C'" />
-      <ArcArrow cx={0} cy={0} r={40} aStart={0} aEnd={90} color="#facc15" />
-      <text x={px(0.5)} y={py(2.8)} fontSize="8" fill="#fde68a">90°</text>
-      <circle cx={ox} cy={oy} r={3} fill="#f97316" />
-      <text x={ox + 4} y={oy - 4} fontSize="9" fill="#f97316">O</text>
+      <ArcArrow cx={0} cy={0} r={58} aStart={0} aEnd={90} color="#facc15" />
+      <text x={px(0.6)} y={py(4)} fontSize="10" fill="#fde68a" fontWeight="bold">90°</text>
+      <CenterMark x={0} y={0} color="#f97316" />
+      <text x={ox + 18} y={oy - 16} fontSize="10" fill="#f97316" fontWeight="bold">O</text>
     </Grid>
   );
 };
@@ -309,10 +438,10 @@ const DiagramR90CW = () => {
     <Grid accent="#a78bfa">
       <Poly pts={origPts} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
       <Poly pts={r270} color="#a78bfa" fill="rgba(167,139,250,0.15)" label="△A'B'C'" />
-      <ArcArrow cx={0} cy={0} r={40} aStart={0} aEnd={-90} color="#facc15" />
-      <text x={px(2.5)} y={py(-2.5)} fontSize="8" fill="#fde68a">90°</text>
-      <circle cx={ox} cy={oy} r={3} fill="#f97316" />
-      <text x={ox + 4} y={oy - 4} fontSize="9" fill="#f97316">O</text>
+      <ArcArrow cx={0} cy={0} r={58} aStart={0} aEnd={-90} color="#facc15" />
+      <text x={px(3.5)} y={py(-3.5)} fontSize="10" fill="#fde68a" fontWeight="bold">90°</text>
+      <CenterMark x={0} y={0} color="#f97316" />
+      <text x={ox + 18} y={oy - 16} fontSize="10" fill="#f97316" fontWeight="bold">O</text>
     </Grid>
   );
 };
@@ -323,9 +452,9 @@ const DiagramR180 = () => {
     <Grid accent="#fb923c">
       <Poly pts={origPts} color="#22d3ee" fill="rgba(34,211,238,0.15)" label="△ABC" />
       <Poly pts={r180} color="#fb923c" fill="rgba(251,146,60,0.15)" label="△A'B'C'" />
-      <ArcArrow cx={0} cy={0} r={44} aStart={15} aEnd={165} color="#facc15" />
-      <text x={px(-0.3)} y={py(3.5)} fontSize="8" fill="#fde68a">180°</text>
-      <circle cx={ox} cy={oy} r={3} fill="#f97316" />
+      <ArcArrow cx={0} cy={0} r={64} aStart={15} aEnd={165} color="#facc15" />
+      <text x={px(-0.4)} y={py(5)} fontSize="10" fill="#fde68a" fontWeight="bold">180°</text>
+      <CenterMark x={0} y={0} color="#f97316" />
     </Grid>
   );
 };
@@ -517,8 +646,8 @@ const RotasiPage = () => {
                   ["Sifat", "Bentuk & ukuran tetap, jarak ke pusat tetap"],
                 ].map(([k, v]) => (
                   <div key={k} className="flex gap-3 items-start bg-slate-800/50 rounded-xl p-3">
-                    <span className="text-orange-400 font-bold text-sm font-body min-w-[140px]">{k}</span>
-                    <span className="text-white/80 text-sm font-body">{v}</span>
+                    <span className="text-orange-400 font-bold font-body text-xs min-w-[140px]">{k}</span>
+                    <span className="text-white/70 font-body text-xs">{v}</span>
                   </div>
                 ))}
               </div>
