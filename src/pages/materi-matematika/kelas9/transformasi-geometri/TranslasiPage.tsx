@@ -332,14 +332,75 @@ const DiagramKonsep = () => (
   </Grid>
 );
 
-const DiagramTitik = () => (
-  <Grid accent="#a78bfa">
-    <Dot x={-3} y={2} color="#22d3ee" label="A(−3,2)" />
-    <Dot x={1} y={4} color="#f472b6" label="A'(1,4)" />
-    <Arrow x1={-3} y1={2} x2={1} y2={4} color="#a78bfa" />
-    <text x={px(-1.5)} y={py(2.8)} fontSize="8" fill="#c4b5fd" textAnchor="middle">T(4,2)</text>
-  </Grid>
-);
+/* ── Animated Diagram: Translasi Titik ── */
+function DiagramTitikAnimated() {
+  const [revealed, setRevealed] = useState(false);
+
+  // Precompute SVG arrow coords (A(-3,2) → A'(1,4))
+  const ax1 = px(-3), ay1 = py(2), ax2 = px(1), ay2 = py(4);
+  const ddx = ax2 - ax1, ddy = ay2 - ay1;
+  const arrowLen = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
+  const ux = ddx / arrowLen, uy = ddy / arrowLen;
+  const ex = ax2 - ux * 4, ey = ay2 - uy * 4; // arrowhead base
+
+  return (
+    <div className="space-y-3">
+      <div className="flex justify-center">
+        <Grid accent="#a78bfa">
+          {/* Always visible: original point A */}
+          <Dot x={-3} y={2} color="#22d3ee" label="A(−3,2)" />
+
+          {/* Animated arrow line — draws from A toward A' */}
+          <line
+            x1={ax1} y1={ay1} x2={ex} y2={ey}
+            stroke="#a78bfa" strokeWidth="1.5"
+            strokeDasharray={arrowLen}
+            strokeDashoffset={revealed ? 0 : arrowLen}
+            style={{ transition: revealed ? 'stroke-dashoffset 1.4s ease-in-out' : 'none' }}
+          />
+
+          {/* Arrowhead — fades in after line finishes */}
+          <polygon
+            points={`${ax2},${ay2} ${ex - uy * 3},${ey + ux * 3} ${ex + uy * 3},${ey - ux * 3}`}
+            fill="#a78bfa"
+            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.4s ease 1.2s' : 'none' }}
+          />
+
+          {/* T(4,2) label — appears with arrowhead */}
+          <text
+            x={px(-1.5)} y={py(2.8)} fontSize="8" fill="#c4b5fd" textAnchor="middle"
+            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.4s ease 1.2s' : 'none' }}
+          >T(4,2)</text>
+
+          {/* A' dot — appears last */}
+          <circle
+            cx={px(1)} cy={py(4)} r={5} fill="#f472b6"
+            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.5s ease 1.5s' : 'none' }}
+          />
+          {/* A' label */}
+          <text
+            x={px(1) + 7} y={py(4) - 5} fill="#f472b6" fontSize="8" fontWeight="bold"
+            style={{ opacity: revealed ? 1 : 0, transition: revealed ? 'opacity 0.5s ease 1.5s' : 'none' }}
+          >A'(1,4)</text>
+        </Grid>
+      </div>
+
+      {/* Reveal / Reset button */}
+      <div className="flex justify-center">
+        <button
+          onClick={() => { playPopSound(); setRevealed(r => !r); }}
+          className={`px-5 py-2 rounded-xl text-sm font-bold font-body transition-all active:scale-95
+            ${revealed
+              ? 'bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600/80'
+              : 'bg-violet-500/20 border border-violet-400/50 text-violet-200 hover:bg-violet-500/40 hover:border-violet-300'
+            }`}
+        >
+          {revealed ? '↺ Reset' : "✨ Tampilkan Bayangan A'"}
+        </button>
+      </div>
+    </div>
+  );
+}
 
 /* ── Static section header (no toggle) ── */
 function SectionHdr({ icon, color, title }: { icon: React.ReactNode; color: string; title: string }) {
@@ -442,7 +503,7 @@ const TranslasiPage = () => {
                 <p className="text-sm font-semibold text-violet-300 font-body mb-2">Soal:</p>
                 <p className="text-sm text-white/80 font-body">Tentukan bayangan titik <InlineMath math="A(-3, 2)" /> oleh translasi <InlineMath math="T = \begin{pmatrix}4\\2\end{pmatrix}" /></p>
               </div>
-              <div className="flex justify-center"><DiagramTitik /></div>
+              <DiagramTitikAnimated />
               <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
                 <p className="text-sm font-semibold text-cyan-300 font-body">Penyelesaian:</p>
                 <div className="space-y-1 text-sm font-body text-white/80">
