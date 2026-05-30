@@ -501,7 +501,8 @@ function AnimasiRefleksiGarisK() {
 
 /* ── Animasi 3 — Refleksi Bangun Datar (Segitiga) ── */
 type Vec2 = [number, number];
-const TRI_BASE: Vec2[] = [[1, 1], [3, 1], [2, 3]];
+// Segitiga siku-siku: sudut siku-siku di A(1,1), sehingga bayangan jelas berbalik arah
+const TRI_BASE: Vec2[] = [[1, 1], [4, 1], [1, 3]];
 const TRI_LABELS = ["A", "B", "C"];
 
 function AnimasiRefleksiBangun() {
