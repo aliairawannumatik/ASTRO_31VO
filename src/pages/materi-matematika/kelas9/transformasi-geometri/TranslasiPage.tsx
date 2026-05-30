@@ -385,6 +385,7 @@ function DiagramTitikAnimated() {
 
   return (
     <div className="space-y-3">
+      <div className="sm:max-w-[175px] sm:mx-auto">
       <Grid accent="#a78bfa">
           {/* Selalu tampil: titik asal A — label di KIRI titik */}
           <Dot x={-3} y={2} color="#22d3ee" />
@@ -431,6 +432,7 @@ function DiagramTitikAnimated() {
           <text x={px(-4.8)} y={py(3.8)} fontSize="11" fill="#1e1b4b"
             textAnchor="start" fontWeight="bold" style={op(2.8, 0.4)}>T(4,2)</text>
         </Grid>
+      </div>
 
       {/* Reveal / Reset button */}
       <div className="flex justify-center">
@@ -484,6 +486,7 @@ function DiagramBangunAnimated() {
 
   return (
     <div className="space-y-3">
+      <div className="sm:max-w-[175px] sm:mx-auto">
       <Grid accent="#f472b6">
         {/* ── Always visible: original △PQR ── */}
         <polygon points={ptsStr([[1,1],[4,1],[2,4]])}
@@ -550,6 +553,7 @@ function DiagramBangunAnimated() {
         <text x={px(-4.8)} y={py(4.2)} fontSize="11" fill="#1e1b4b"
           textAnchor="start" fontWeight="bold" style={op(2.75, 0.4)}>T(−3,−2)</text>
       </Grid>
+      </div>
 
       {/* Reveal / Reset button */}
       <div className="flex justify-center">
