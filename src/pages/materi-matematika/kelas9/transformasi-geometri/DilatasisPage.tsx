@@ -291,6 +291,304 @@ function kLabel(k: number) {
   return            { text: `k = ${k} — Diperbesar & Dibalik`, color: "#f87171" };
 }
 
+/* ── Animasi Interaktif Dilatasi TITIK ── */
+function AnimasiDilatasiTitik() {
+  const [kPreset, setKPreset] = useState<number | "custom">(2);
+  const [inputK, setInputK] = useState("2");
+  const [centerType, setCenterType] = useState<"origin" | "custom">("origin");
+  const [inputA, setInputA] = useState("0");
+  const [inputB, setInputB] = useState("0");
+  const [inputPx, setInputPx] = useState("3");
+  const [inputPy, setInputPy] = useState("2");
+  const [show, setShow] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animT, setAnimT] = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  const k  = kPreset === "custom" ? (parseFloat(inputK) || 1) : kPreset;
+  const ca = centerType === "origin" ? 0 : (parseFloat(inputA) || 0);
+  const cb = centerType === "origin" ? 0 : (parseFloat(inputB) || 0);
+  const ptX = parseFloat(inputPx) || 3;
+  const ptY = parseFloat(inputPy) || 2;
+
+  const t = isAnimating ? animT : (show ? 1 : 0);
+  const kAnim = 1 + t * (k - 1);
+  const [curX, curY]: [number, number] = [ca + kAnim * (ptX - ca), cb + kAnim * (ptY - cb)];
+  const [resX, resY]: [number, number] = [ca + k * (ptX - ca), cb + k * (ptY - cb)];
+  const showResult = show || isAnimating;
+
+  const { text: kText, color: kColor } = kLabel(k);
+  const resultColor = k >= 1 ? "#4ade80" : k > 0 ? "#facc15" : k > -1 ? "#fb923c" : "#f87171";
+  const boxFill    = k > 1  ? "#16a34a" : k > 0 ? "#ca8a04" : k > -1 ? "#ea580c" : "#dc2626";
+
+  const easeOut = (v: number) => 1 - Math.pow(1 - v, 3);
+
+  const reset = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(false); setAnimT(0);
+  };
+
+  const handlePutar = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(true); setAnimT(0);
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const raw = Math.min((now - t0) / 1800, 1);
+      setAnimT(easeOut(raw));
+      if (raw < 1) { rafRef.current = requestAnimationFrame(tick); }
+      else { setAnimT(1); setIsAnimating(false); setShow(true); }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  const changeReset = (fn: () => void) => {
+    fn();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(false); setAnimT(0);
+  };
+
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
+  const rx_ = Math.round(resX * 100) / 100;
+  const ry_ = Math.round(resY * 100) / 100;
+
+  /* sinar dari pusat melewati P hingga P' (atau sebaliknya jika k < 0) */
+  const rayExtend = 6.5; // satuan koordinat
+  const dx = ptX - ca, dy = ptY - cb;
+  const len = Math.sqrt(dx * dx + dy * dy);
+  const rayEnd: [number, number] = len > 0
+    ? [ca + (dx / len) * rayExtend, cb + (dy / len) * rayExtend]
+    : [ca, cb];
+  const rayEndNeg: [number, number] = [ca - (dx / len) * rayExtend, cb - (dy / len) * rayExtend];
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="text-yellow-300 font-bold text-sm font-body">📍 Animasi Interaktif — Dilatasi Titik</p>
+
+      {/* Input titik P */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Titik yang Didilatasi</p>
+        <div className="flex items-center gap-3 flex-wrap">
+          <span className="text-sm font-bold font-body text-yellow-300">P =</span>
+          <span className="text-sm text-white/60 font-body">(</span>
+          <div className="flex items-center gap-1.5">
+            <label className="text-xs text-white/50 font-body">x =</label>
+            <input type="number" value={inputPx}
+              onChange={e => changeReset(() => setInputPx(e.target.value))}
+              className="w-16 bg-slate-700 border border-yellow-500/50 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-yellow-400"
+            />
+          </div>
+          <span className="text-white/40">,</span>
+          <div className="flex items-center gap-1.5">
+            <label className="text-xs text-white/50 font-body">y =</label>
+            <input type="number" value={inputPy}
+              onChange={e => changeReset(() => setInputPy(e.target.value))}
+              className="w-16 bg-slate-700 border border-yellow-500/50 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-yellow-400"
+            />
+          </div>
+          <span className="text-sm text-white/60 font-body">)</span>
+        </div>
+      </div>
+
+      {/* Pilih k */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Faktor Skala k</p>
+        <div className="flex gap-2 flex-wrap">
+          {K_PRESETS.map(({ label, value }) => (
+            <button key={label}
+              onClick={() => changeReset(() => { setKPreset(value); setInputK(String(value)); })}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+                kPreset === value
+                  ? "bg-yellow-500 border-yellow-400 text-white shadow-lg shadow-yellow-500/30"
+                  : "bg-slate-700/60 border-slate-600 text-white/60 hover:border-yellow-500/50 hover:text-white/90"
+              }`}
+            >k = {label}</button>
+          ))}
+          <button onClick={() => changeReset(() => setKPreset("custom"))}
+            className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+              kPreset === "custom"
+                ? "bg-violet-500 border-violet-400 text-white shadow-lg"
+                : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
+            }`}
+          >Lainnya…</button>
+        </div>
+        {kPreset === "custom" && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">k =</label>
+            <input type="number" step="0.1" value={inputK}
+              onChange={e => changeReset(() => setInputK(e.target.value))}
+              className="w-20 bg-slate-700 border border-violet-500/50 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-violet-400"
+            />
+          </div>
+        )}
+        <p className="text-xs font-body font-semibold mt-1" style={{ color: kColor }}>{kText}</p>
+      </div>
+
+      {/* Pilih pusat */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Dilatasi</p>
+        <div className="flex gap-2">
+          {(["origin", "custom"] as const).map(c => (
+            <button key={c}
+              onClick={() => changeReset(() => setCenterType(c))}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+                centerType === c
+                  ? "bg-yellow-500/80 border-yellow-400 text-white shadow-md"
+                  : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
+              }`}
+            >{c === "origin" ? "O(0, 0)" : "Titik (a, b)"}</button>
+          ))}
+        </div>
+        {centerType === "custom" && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">a =</label>
+            <input type="number" value={inputA} onChange={e => changeReset(() => setInputA(e.target.value))}
+              className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+            <label className="text-xs text-white/60 font-body">b =</label>
+            <input type="number" value={inputB} onChange={e => changeReset(() => setInputB(e.target.value))}
+              className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+          </div>
+        )}
+      </div>
+
+      {/* Grid + Panel */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start w-full overflow-hidden">
+
+        <div className="w-full max-w-[360px] mx-auto lg:mx-0 flex-shrink-0">
+          <DGrid accent={resultColor}>
+
+            {/* Sinar dari pusat (garis panjang menunjukkan arah dilatasi) */}
+            {len > 0 && (
+              <>
+                <line
+                  x1={Dpx(rayEnd[0])} y1={Dpy(rayEnd[1])}
+                  x2={Dpx(rayEndNeg[0])} y2={Dpy(rayEndNeg[1])}
+                  stroke="#facc15" strokeWidth="1" strokeDasharray="6,4" opacity="0.25"
+                />
+                {/* Sinar dari pusat ke P' saat ini (lebih terang, mengikuti animasi) */}
+                {showResult && (
+                  <line
+                    x1={Dpx(ca)} y1={Dpy(cb)}
+                    x2={Dpx(curX)} y2={Dpy(curY)}
+                    stroke="#facc15" strokeWidth="1.8" strokeDasharray="5,3" opacity="0.7"
+                  />
+                )}
+              </>
+            )}
+
+            {/* Label k — textbox cerah atas tengah */}
+            {showResult && (() => {
+              const bx = DS / 2, by = 18, bw = 80, bh = 28;
+              return (
+                <g>
+                  <rect x={bx-bw/2} y={by-bh/2} width={bw} height={bh} rx={7} ry={7}
+                    fill={boxFill} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by+5} fontSize="14" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    k = {k}
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* Titik P asli */}
+            <DDot x={ptX} y={ptY} color="#22d3ee" label={`P(${ptX},${ptY})`} />
+
+            {/* Titik P' (bergerak perlahan selama animasi) */}
+            {showResult && (
+              <g>
+                <circle cx={Dpx(curX)} cy={Dpy(curY)} r={8} fill={resultColor} opacity="0.9" />
+                <circle cx={Dpx(curX)} cy={Dpy(curY)} r={13} fill="none" stroke={resultColor} strokeWidth="1.5" opacity="0.45" />
+                {show && !isAnimating && (
+                  <text x={Dpx(curX) + 11} y={Dpy(curY) - 8} fill={resultColor} fontSize="10" fontWeight="bold">
+                    P'({rx_},{ry_})
+                  </text>
+                )}
+              </g>
+            )}
+
+            {/* Pusat dilatasi */}
+            <DCenterMark x={ca} y={cb} color="#facc15" />
+            <text x={Dpx(ca)+16} y={Dpy(cb)-14} fill="#facc15" fontSize="11" fontWeight="bold">
+              {centerType === "origin" ? "O(0,0)" : `P(${ca},${cb})`}
+            </text>
+
+          </DGrid>
+
+          {/* Legenda */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2 justify-center text-xs font-body">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-cyan-400 inline-block" />
+              <span className="text-cyan-300">Titik P asli</span>
+            </div>
+            {showResult && (
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
+                <span style={{ color: resultColor }}>Titik P' bayangan</span>
+              </div>
+            )}
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded bg-yellow-400 inline-block" />
+              <span className="text-yellow-300">Pusat & sinar</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Panel kanan */}
+        <div className="flex-1 min-w-0 space-y-2 w-full">
+
+          <div className="flex gap-2">
+            <button onClick={handlePutar} disabled={isAnimating}
+              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${
+                isAnimating
+                  ? "opacity-50 cursor-not-allowed bg-slate-600"
+                  : "bg-yellow-500 hover:bg-yellow-400 text-white shadow-lg shadow-yellow-500/30"
+              }`}
+            >{isAnimating ? "⏳ Mendilatasi…" : "🔭 Dilatasikan!"}</button>
+            <button onClick={reset}
+              className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
+            >Reset</button>
+          </div>
+
+          <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
+            <p className="font-bold text-sm" style={{ color: kColor }}>{kText}</p>
+            <p className="text-white/50">Titik: P({ptX}, {ptY})</p>
+            <p className="text-white/50">Pusat: {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
+            {isAnimating && <p className="text-yellow-400 font-semibold animate-pulse">⏳ Slow-motion dilatasi titik…</p>}
+          </div>
+
+          {show && !isAnimating && (
+            <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-3 space-y-2">
+              <p className="text-xs font-bold text-yellow-300 font-body uppercase">Hasil Dilatasi Titik:</p>
+              <div className="flex items-center gap-2 text-sm font-body flex-wrap">
+                <span className="text-cyan-300 font-semibold">P({ptX}, {ptY})</span>
+                <span className="text-white/30 text-lg">→</span>
+                <span className="font-bold text-base" style={{ color: resultColor }}>P'({rx_}, {ry_})</span>
+              </div>
+              <p className="text-xs text-white/40 font-body">
+                Rumus: <span className="text-white/70">x' = {ca} + {k}×({ptX}−{ca}) = {rx_}</span>
+              </p>
+              <p className="text-xs text-white/40 font-body">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span className="text-white/70">y' = {cb} + {k}×({ptY}−{cb}) = {ry_}</span>
+              </p>
+            </div>
+          )}
+
+          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5 w-full overflow-hidden">
+            <p className="text-yellow-300 font-semibold">💡 Keterangan visual:</p>
+            <p>— <span className="text-cyan-400">Titik biru</span> = P asli (tidak bergerak)</p>
+            <p>— <span style={{ color: resultColor }}>Titik berwarna</span> = P' bergerak perlahan ke posisi bayangan</p>
+            <p>— <span className="text-yellow-400">Garis kuning</span> = sinar dari pusat dilatasi</p>
+            <p>— Jarak ke pusat: <strong className="text-white/70">k × OP</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AnimasiDilatasi() {
   const [kPreset, setKPreset] = useState<number | "custom">(2);
   const [inputK, setInputK] = useState("2");
@@ -570,7 +868,7 @@ function AnimasiDilatasi() {
 const DilatasisPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
+    "intro", "animasi-titik", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
   ]);
 
   const toggleSection = (section: string) => {
@@ -645,7 +943,22 @@ const DilatasisPage = () => {
             )}
           </div>
 
-          {/* ── ANIMASI INTERAKTIF ── */}
+          {/* ── ANIMASI INTERAKTIF — DILATASI TITIK ── */}
+          <div className="bg-card/80 backdrop-blur border border-yellow-500/20 rounded-xl overflow-hidden">
+            <SectionHeader
+              id="animasi-titik"
+              icon={<span>📍</span>}
+              iconColor="#facc15"
+              label="Animasi Interaktif — Dilatasi Titik"
+            />
+            {expandedSections.includes("animasi-titik") && (
+              <div className="px-5 pb-5">
+                <AnimasiDilatasiTitik />
+              </div>
+            )}
+          </div>
+
+          {/* ── ANIMASI INTERAKTIF — DILATASI BANGUN DATAR ── */}
           <div className="bg-card/80 backdrop-blur border border-emerald-500/20 rounded-xl overflow-hidden">
             <SectionHeader
               id="animasi"
