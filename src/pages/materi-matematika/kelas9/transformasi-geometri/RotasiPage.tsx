@@ -283,20 +283,35 @@ function AnimasiRotasi() {
               <RadiusLine key={`r-curr-${i}`} cx={ca} cy={cb} tx={x} ty={y} color="#4ade80" dashed />
             ))}
 
-            {/* Busur rotasi (arc arrow) */}
-            <ArcArrow cx={ca} cy={cb} r={arcR} aStart={arcStart} aEnd={arcEnd} color="#facc15" />
-            {animatedAngleAbs > 2 && (
-              <text
-                x={px(ca) + (dir === "ccw" ? -arcR - 10 : arcR + 10)}
-                y={py(cb) - arcR / 2}
-                fontSize="11"
-                fill="#fde68a"
-                textAnchor="middle"
-                fontWeight="bold"
-              >
-                {Math.round(animatedAngleAbs)}°
-              </text>
-            )}
+            {/* Label sudut rotasi — textbox cerah di pojok atas */}
+            {animatedAngleAbs > 2 && (() => {
+              const labelText = `${Math.round(animatedAngleAbs)}°`;
+              const bx = S / 2, by = 18;
+              const bw = 72, bh = 28;
+              return (
+                <g>
+                  <rect
+                    x={bx - bw / 2} y={by - bh / 2}
+                    width={bw} height={bh}
+                    rx={7} ry={7}
+                    fill={dir === "ccw" ? "#10b981" : "#f97316"}
+                    stroke="#fff"
+                    strokeWidth="1.5"
+                    opacity="0.93"
+                  />
+                  <text
+                    x={bx}
+                    y={by + 5}
+                    fontSize="15"
+                    fill="#ffffff"
+                    textAnchor="middle"
+                    fontWeight="bold"
+                  >
+                    {labelText}
+                  </text>
+                </g>
+              );
+            })()}
 
             {/* Segitiga asli */}
             <Poly pts={ORIG_PTS} color="#22d3ee" fill={showRotated ? "rgba(34,211,238,0.08)" : "rgba(34,211,238,0.18)"} label="△ABC" />
