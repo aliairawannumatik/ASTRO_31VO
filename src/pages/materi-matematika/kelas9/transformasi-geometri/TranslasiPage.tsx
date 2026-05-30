@@ -376,22 +376,6 @@ const TranslasiPage = () => {
                 <p className="text-cyan-300 font-body text-sm font-semibold">🔑 Kata Kunci:</p>
                 <p className="text-white/80 text-sm font-body mt-1">Translasi ditentukan oleh sebuah <strong className="text-yellow-300">vektor translasi</strong> <InlineMath math="\begin{pmatrix}a\\b\end{pmatrix}" /> yang menunjukkan berapa jauh bangun digeser ke kanan/kiri (a) dan ke atas/bawah (b).</p>
               </div>
-              <div className="bg-slate-800/60 rounded-xl p-4">
-                <p className="text-white/60 text-xs font-body mb-3 text-center">Contoh: Segitiga ABC digeser oleh T(3, −3)</p>
-                <div className="flex justify-center"><DiagramKonsep /></div>
-                <div className="flex gap-4 justify-center mt-3">
-                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-sm bg-cyan-400/50 border border-cyan-400" /><span className="text-xs text-cyan-300 font-body">△ABC (asli)</span></div>
-                  <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-sm bg-pink-400/50 border border-pink-400" /><span className="text-xs text-pink-300 font-body">△A'B'C' (bayangan)</span></div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                {[["✅ Bentuk", "Tetap sama"], ["✅ Ukuran", "Tetap sama"], ["✅ Orientasi", "Tetap sama"], ["❌ Posisi", "Berubah"]].map(([k, v]) => (
-                  <div key={k} className="bg-slate-800/60 rounded-lg p-3 text-center">
-                    <p className="text-xs font-semibold text-white/60 font-body">{k}</p>
-                    <p className="text-sm font-bold text-white font-body">{v}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 
@@ -412,8 +396,18 @@ const TranslasiPage = () => {
               <AnimasiTitik />
             </div>
             <div className="mx-5 my-1 border-t border-white/10" />
-            <div className="px-5 pb-5 pt-3">
+            <div className="px-5 pb-4 pt-3">
               <AnimasiSegitiga />
+            </div>
+
+            {/* Sifat translasi */}
+            <div className="mx-5 mb-5 grid grid-cols-2 gap-3">
+              {[["✅ Bentuk", "Tetap sama"], ["✅ Ukuran", "Tetap sama"], ["✅ Orientasi", "Tetap sama"], ["❌ Posisi", "Berubah"]].map(([k, v]) => (
+                <div key={k} className="bg-slate-800/60 rounded-lg p-3 text-center">
+                  <p className="text-xs font-semibold text-white/60 font-body">{k}</p>
+                  <p className="text-sm font-bold text-white font-body">{v}</p>
+                </div>
+              ))}
             </div>
           </div>
 
