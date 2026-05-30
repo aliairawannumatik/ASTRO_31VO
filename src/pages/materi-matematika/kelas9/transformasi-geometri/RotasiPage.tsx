@@ -266,7 +266,7 @@ function AnimasiRotasi() {
       </div>
 
       {/* Grid + info */}
-      <div className="flex flex-col lg:flex-row gap-4 items-start">
+      <div className="flex flex-col lg:flex-row gap-4 items-start w-full overflow-hidden">
 
         {/* SVG Grid — responsif */}
         <div className="w-full max-w-[360px] mx-auto lg:mx-0 flex-shrink-0">
@@ -408,12 +408,12 @@ function AnimasiRotasi() {
           </div>
 
           {/* Petunjuk */}
-          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1">
-            <p className="text-yellow-300 font-semibold text-xs">💡 Keterangan visual:</p>
-            <p>— Garis <span className="text-cyan-400">putus-putus biru</span> = jari-jari dari pusat ke titik asli</p>
-            <p>— Garis <span style={{ color: resultColor }}>penuh</span> = jari-jari dari pusat ke titik bayangan</p>
-            <p>— <span className="text-yellow-400">✦ kuning</span> = titik pusat rotasi (diam)</p>
-            <p>— Panjang jari-jari <strong className="text-white">selalu sama</strong> sebelum & sesudah rotasi</p>
+          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5 w-full overflow-hidden">
+            <p className="text-yellow-300 font-semibold">💡 Keterangan visual:</p>
+            <p className="break-words">— Garis <span className="text-cyan-400">putus-putus biru</span> = jari-jari ke titik asli</p>
+            <p className="break-words">— Garis <span className="text-green-400">putus-putus hijau</span> = jari-jari ke titik bayangan</p>
+            <p className="break-words">— <span className="text-yellow-400">✦ kuning</span> = titik pusat rotasi (diam)</p>
+            <p className="break-words">— Panjang jari-jari <strong className="text-white">selalu sama</strong> sebelum &amp; sesudah rotasi</p>
           </div>
         </div>
       </div>
