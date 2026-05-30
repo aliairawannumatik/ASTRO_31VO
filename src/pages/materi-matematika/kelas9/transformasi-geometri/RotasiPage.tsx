@@ -277,9 +277,9 @@ function AnimasiRotasi() {
               <RadiusLine key={`r-orig-${i}`} cx={ca} cy={cb} tx={x} ty={y} color="#22d3ee" dashed />
             ))}
 
-            {/* Garis jari-jari dari pusat ke titik SEKARANG (bergerak saat animasi) */}
+            {/* Garis jari-jari dari pusat ke titik SEKARANG (bergerak saat animasi) — hijau */}
             {showRotated && currentPts.map(([x, y], i) => (
-              <RadiusLine key={`r-curr-${i}`} cx={ca} cy={cb} tx={x} ty={y} color={resultColor} dashed={false} />
+              <RadiusLine key={`r-curr-${i}`} cx={ca} cy={cb} tx={x} ty={y} color="#4ade80" dashed={false} />
             ))}
 
             {/* Busur rotasi (arc arrow) */}
@@ -337,10 +337,16 @@ function AnimasiRotasi() {
               <span className="text-cyan-300">Asli (△ABC)</span>
             </div>
             {showRotated && (
-              <div className="flex items-center gap-1.5">
-                <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
-                <span style={{ color: resultColor }}>Bayangan (△A'B'C')</span>
-              </div>
+              <>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-0.5 rounded inline-block bg-green-400" />
+                  <span className="text-green-400">Garis putar</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
+                  <span style={{ color: resultColor }}>Bayangan (△A'B'C')</span>
+                </div>
+              </>
             )}
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-0.5 rounded bg-yellow-400 inline-block" />
