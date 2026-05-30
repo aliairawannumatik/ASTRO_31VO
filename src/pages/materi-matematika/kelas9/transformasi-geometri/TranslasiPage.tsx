@@ -402,8 +402,15 @@ function DiagramTitikAnimated() {
           <text x={a2X + 8} y={a2Y - 6} fontSize="8" fill="#f472b6"
             textAnchor="start" fontWeight="bold" style={op(2.65, 0.5)}>A'(1,4)</text>
 
-          {/* T(4,2) — headline besar di pojok kiri atas */}
-          <text x={px(-4.8)} y={py(3.8)} fontSize="11" fill="#e879f9"
+          {/* T(4,2) — headline besar di pojok kiri atas, dengan text box cerah */}
+          <rect
+            x={px(-4.8) - 4} y={py(3.8) - 12}
+            width={52} height={17}
+            rx={4} ry={4}
+            fill="#facc15"
+            style={op(2.8, 0.4)}
+          />
+          <text x={px(-4.8)} y={py(3.8)} fontSize="11" fill="#1e1b4b"
             textAnchor="start" fontWeight="bold" style={op(2.8, 0.4)}>T(4,2)</text>
         </Grid>
 
