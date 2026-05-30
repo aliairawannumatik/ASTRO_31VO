@@ -382,7 +382,7 @@ function AnimasiRefleksiGarisK() {
     <div className="space-y-3">
       <div className="text-center">
         <p className="font-bold text-sm font-body" style={{ color: accent }}>
-          📐 Animasi 2 — Refleksi Garis x = k dan y = k
+          📐 Animasi 3 — Refleksi Garis x = k dan y = k
         </p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">
           Arahkan titik A, atur nilai k, lalu tampilkan bayangannya!
@@ -520,7 +520,7 @@ function AnimasiRefleksiBangun() {
   return (
     <div className="space-y-3">
       <div className="text-center">
-        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 3 — Refleksi Bangun Datar</p>
+        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 2 — Refleksi Bangun Datar</p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan segitiga △ABC, pilih cermin, lalu tampilkan bayangannya!</p>
       </div>
 
@@ -682,9 +682,9 @@ const RefleksiPage = () => {
               <div className="px-4 pb-5 space-y-8">
                 <AnimasiRefleksiTitik />
                 <div className="border-t border-white/10" />
-                <AnimasiRefleksiGarisK />
-                <div className="border-t border-white/10" />
                 <AnimasiRefleksiBangun />
+                <div className="border-t border-white/10" />
+                <AnimasiRefleksiGarisK />
               </div>
             )}
           </div>
