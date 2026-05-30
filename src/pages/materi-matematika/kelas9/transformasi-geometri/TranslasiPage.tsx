@@ -158,7 +158,7 @@ function AnimasiTitik() {
   return (
     <div className="space-y-3">
       <div className="text-center">
-        <p className="text-cyan-300 font-bold text-sm font-body">📍 Animasi 1 — Translasi Titik</p>
+        <p className="text-cyan-300 font-bold text-sm font-body">📍 Animasi 1 —<br className="sm:hidden" /> Translasi Titik</p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">Tekan tombol arah untuk menggeser titik A</p>
       </div>
 
@@ -181,15 +181,17 @@ function AnimasiTitik() {
         </Grid>
       </div>
 
-      {/* Status bar — single line, nowrap */}
-      <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex items-center justify-center gap-1.5 overflow-x-auto whitespace-nowrap text-[10px] sm:text-xs sm:gap-2 sm:px-4">
+      {/* Status bar — two rows on portrait, single row on landscape/desktop */}
+      <div className="bg-slate-800/60 rounded-lg px-2 py-2 text-center font-body min-h-[32px] flex flex-col items-center justify-center gap-0.5 sm:flex-row sm:gap-2 sm:px-4 text-[10px] sm:text-xs">
         {moved ? (
           <>
-            <span className="text-cyan-300 font-bold whitespace-nowrap">A({OX},{OY})</span>
-            <span className="text-white/40">→</span>
-            <span className="text-yellow-300 font-bold whitespace-nowrap">A'({pos.x},{pos.y})</span>
-            <span className="text-white/40">|</span>
-            <span className="text-yellow-200 whitespace-nowrap">T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</span>
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
+              <span className="text-cyan-300 font-bold whitespace-nowrap">A({OX},{OY})</span>
+              <span className="text-white/40">→</span>
+              <span className="text-yellow-300 font-bold whitespace-nowrap">A'({pos.x},{pos.y})</span>
+              <span className="text-white/40">|</span>
+              <span className="text-yellow-200 whitespace-nowrap">T({dx > 0 ? '+' : ''}{dx},{dy > 0 ? '+' : ''}{dy})</span>
+            </div>
             {dirDesc && <span className="text-green-400 font-semibold whitespace-nowrap">{dirDesc}</span>}
           </>
         ) : (
