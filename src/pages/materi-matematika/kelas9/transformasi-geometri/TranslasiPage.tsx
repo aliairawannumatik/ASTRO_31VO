@@ -625,6 +625,7 @@ const TranslasiPage = () => {
                 alt="Transformasi Geometri"
                 className="w-full rounded-xl object-cover"
               />
+              <p className="text-[10px] text-white/30 text-right mt-1 font-body">bing.com/images/create</p>
             </div>
 
             {/* 4 Jenis */}
