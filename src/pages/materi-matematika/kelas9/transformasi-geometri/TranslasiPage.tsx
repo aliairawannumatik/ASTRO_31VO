@@ -14,7 +14,7 @@ const ticks = [-5,-4,-3,-2,-1,1,2,3,4,5];
 
 function Grid({ children, accent = "#22d3ee" }: { children?: React.ReactNode; accent?: string }) {
   return (
-    <svg width={S} height={S} className="rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
+    <svg viewBox={`0 0 ${S} ${S}`} className="w-full rounded-xl border bg-slate-900/70" style={{ borderColor: `${accent}33` }}>
       {ticks.map(t => (
         <g key={t}>
           <line x1={px(t)} y1={0} x2={px(t)} y2={S} stroke="#334155" strokeWidth="0.5" />
@@ -354,8 +354,7 @@ function DiagramTitikAnimated() {
 
   return (
     <div className="space-y-3">
-      <div className="flex justify-center">
-        <Grid accent="#a78bfa">
+      <Grid accent="#a78bfa">
           {/* Always visible: original point A */}
           <Dot x={-3} y={2} color="#22d3ee" label="A(−3,2)" />
 
@@ -377,12 +376,13 @@ function DiagramTitikAnimated() {
             style={{ opacity: revealed ? 1 : 0, transition: tr(0.7) }}
           >+4 →</text>
 
-          {/* Busur langkah horizontal */}
-          <path d={arcH} fill="none" stroke="#facc15" strokeWidth="1.2" strokeDasharray="3 2"
-            style={{ opacity: revealed ? 1 : 0, transition: tr(0.9, 0.5) }}
+          {/* Busur langkah horizontal — solid, menggambar diri sendiri */}
+          <path d={arcH} fill="none" stroke="#facc15" strokeWidth="1.4"
+            strokeDasharray="100" strokeDashoffset={revealed ? 0 : 100}
+            style={{ transition: revealed ? 'stroke-dashoffset 0.55s ease-in-out 0.9s' : 'none' }}
           />
           <text x={(aX + mX) / 2} y={aY + 34} fontSize="7" fill="#fde68a" textAnchor="middle"
-            style={{ opacity: revealed ? 1 : 0, transition: tr(1.0, 0.4) }}
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.3, 0.4) }}
           >a = 4</text>
 
           {/* ── Langkah 2: geser atas 2 satuan ── */}
@@ -407,28 +407,28 @@ function DiagramTitikAnimated() {
             style={{ opacity: revealed ? 1 : 0, transition: tr(1.3) }}
           >↑+2</text>
 
-          {/* Busur langkah vertikal */}
-          <path d={arcV} fill="none" stroke="#a78bfa" strokeWidth="1.2" strokeDasharray="3 2"
-            style={{ opacity: revealed ? 1 : 0, transition: tr(1.6, 0.5) }}
+          {/* Busur langkah vertikal — solid, menggambar diri sendiri setelah langkah 2 */}
+          <path d={arcV} fill="none" stroke="#a78bfa" strokeWidth="1.4"
+            strokeDasharray="60" strokeDashoffset={revealed ? 0 : 60}
+            style={{ transition: revealed ? 'stroke-dashoffset 0.45s ease-in-out 1.65s' : 'none' }}
           />
           <text x={a2X + 34} y={(mY + a2Y) / 2} fontSize="7" fill="#c4b5fd" textAnchor="middle"
-            style={{ opacity: revealed ? 1 : 0, transition: tr(1.7, 0.4) }}
+            style={{ opacity: revealed ? 1 : 0, transition: tr(2.0, 0.4) }}
           >b = 2</text>
 
           {/* ── A' muncul terakhir ── */}
           <circle cx={a2X} cy={a2Y} r={5} fill="#f472b6"
-            style={{ opacity: revealed ? 1 : 0, transition: tr(1.6, 0.5) }}
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.7, 0.5) }}
           />
           <text x={a2X + 7} y={a2Y - 5} fill="#f472b6" fontSize="8" fontWeight="bold"
-            style={{ opacity: revealed ? 1 : 0, transition: tr(1.6, 0.5) }}
+            style={{ opacity: revealed ? 1 : 0, transition: tr(1.7, 0.5) }}
           >A'(1,4)</text>
 
           {/* T(4,2) label di tengah */}
           <text x={px(-0.5)} y={py(3.5)} fontSize="8" fill="#e879f9" textAnchor="middle"
-            style={{ opacity: revealed ? 1 : 0, transition: tr(1.8, 0.4) }}
+            style={{ opacity: revealed ? 1 : 0, transition: tr(2.0, 0.4) }}
           >T(4,2)</text>
         </Grid>
-      </div>
 
       {/* Reveal / Reset button */}
       <div className="flex justify-center">
