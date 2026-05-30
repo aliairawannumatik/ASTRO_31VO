@@ -375,6 +375,31 @@ function AnimasiRotasi() {
 
         {/* Panel hasil */}
         <div className="flex-1 min-w-0 space-y-2 w-full">
+
+          {/* Tombol Putar & Reset — di atas bingkai info */}
+          <div className="flex gap-2">
+            <button
+              onClick={handlePutar}
+              disabled={isAnimating}
+              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${
+                isAnimating
+                  ? "opacity-50 cursor-not-allowed bg-slate-600"
+                  : dir === "ccw"
+                  ? "bg-emerald-500 hover:bg-emerald-400 text-white shadow-lg shadow-emerald-500/30"
+                  : "bg-orange-500 hover:bg-orange-400 text-white shadow-lg shadow-orange-500/30"
+              }`}
+            >
+              {isAnimating ? "⏳ Memutar…" : "🔄 Putar!"}
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
+            >
+              Reset
+            </button>
+          </div>
+
+          {/* Bingkai info sudut */}
           <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
             <p className="text-yellow-300 font-bold text-sm">{angle}° {dirLabel}</p>
             <p className="text-white/50">Pusat: {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
@@ -402,28 +427,6 @@ function AnimasiRotasi() {
               })}
             </div>
           )}
-
-          <div className="flex gap-2">
-            <button
-              onClick={handlePutar}
-              disabled={isAnimating}
-              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${
-                isAnimating
-                  ? "opacity-50 cursor-not-allowed bg-slate-600"
-                  : dir === "ccw"
-                  ? "bg-emerald-500 hover:bg-emerald-400 text-white shadow-lg shadow-emerald-500/30"
-                  : "bg-orange-500 hover:bg-orange-400 text-white shadow-lg shadow-orange-500/30"
-              }`}
-            >
-              {isAnimating ? "⏳ Memutar…" : "🔄 Putar!"}
-            </button>
-            <button
-              onClick={handleReset}
-              className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
-            >
-              Reset
-            </button>
-          </div>
 
           {/* Petunjuk */}
           <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5 w-full overflow-hidden">
