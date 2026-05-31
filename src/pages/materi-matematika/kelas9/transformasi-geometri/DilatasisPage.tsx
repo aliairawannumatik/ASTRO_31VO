@@ -1007,20 +1007,23 @@ const DilatasisPage = () => {
             )}
           </div>
 
-          {/* ── GAMBAR KAMERA — DI ATAS ANIMASI DILATASI TITIK ── */}
+          {/* ── ILUSTRASI DILATASI ── */}
           <div className="rounded-xl overflow-hidden">
             <img
-              src="/kamera-dilatasi.jpg"
-              alt="Fotografer menggunakan lensa zoom — ilustrasi konsep dilatasi dalam kehidupan nyata"
+              src="/dilatasi-ilustrasi.jpg"
+              alt="Transformasi Geometri: Dilatasi — Skala Faktor k = 1.5, Pusat di Asal (0,0). Persegi PQRS didilatasi menjadi P'Q'R'S' dengan garis-garis sinar dari pusat O menunjukkan arah dan besar dilatasi."
               className="w-full rounded-xl object-cover"
             />
+            <p className="font-body text-xs text-white/60 text-center mt-2 px-2">
+              Ilustrasi dilatasi persegi PQRS dengan faktor skala <strong className="text-yellow-300">k = 1,5</strong> dan pusat di titik asal <strong className="text-yellow-300">O(0, 0)</strong>. Bayangan P'Q'R'S' (ungu) lebih besar dari bangun asli PQRS (biru). Garis kuning putus-putus menunjukkan sinar dari pusat dilatasi melewati setiap titik sudut.
+            </p>
             <a
-              href="https://iframerental.com/blog-cara-memotret"
+              href="https://www.quipper.com/id/blog/mapel/matematika/dilatasi-matematika/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
             >
-              iframerental.com/blog-cara-memotret
+              Sumber: quipper.com/id/blog/mapel/matematika/dilatasi-matematika
             </a>
           </div>
 
