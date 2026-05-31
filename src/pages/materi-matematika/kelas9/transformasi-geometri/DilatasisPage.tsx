@@ -1173,11 +1173,40 @@ const DilatasisPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
-                    <img
-                      src="/dilatasi-contoh3.png"
-                      alt="Diagram dilatasi segitiga PQR ke P'Q'R' dengan pusat O"
-                      className="w-full max-w-xs mx-auto rounded-lg"
-                    />
+                    {/* SVG diagram: △PQR → △P'Q'R', pusat O, k = 1/3 */}
+                    {/* Grid unit = 30px. O at pixel (20,285). Coords: P(0,9) Q(3,4) R(9,4) */}
+                    {/* k=1/3 → P'(0,3) Q'(1,4/3) R'(3,4/3)                                */}
+                    <svg viewBox="0 0 340 305" className="w-full max-w-xs mx-auto bg-white rounded-lg">
+                      {/* Grid */}
+                      {[0,1,2,3,4,5,6,7,8,9,10].map(i => (
+                        <line key={`v${i}`} x1={20+i*30} y1={15} x2={20+i*30} y2={285} stroke="#ccc" strokeWidth="0.7" />
+                      ))}
+                      {[0,1,2,3,4,5,6,7,8,9].map(i => (
+                        <line key={`h${i}`} x1={20} y1={15+i*30} x2={320} y2={15+i*30} stroke="#ccc" strokeWidth="0.7" />
+                      ))}
+                      {/* Border */}
+                      <rect x="20" y="15" width="300" height="270" fill="none" stroke="#aaa" strokeWidth="1" />
+                      {/* Dashed projection lines from O through each vertex pair */}
+                      <line x1={20} y1={285} x2={20} y2={15}   stroke="#888" strokeWidth="1" strokeDasharray="4,3" />
+                      <line x1={20} y1={285} x2={110} y2={165} stroke="#888" strokeWidth="1" strokeDasharray="4,3" />
+                      <line x1={20} y1={285} x2={290} y2={165} stroke="#888" strokeWidth="1" strokeDasharray="4,3" />
+                      {/* Large triangle PQR */}
+                      <polygon points="20,15 110,165 290,165" fill="rgba(130,130,130,0.20)" stroke="#333" strokeWidth="1.5" />
+                      {/* Small triangle P'Q'R' */}
+                      <polygon points="20,195 50,245 110,245" fill="rgba(130,130,130,0.20)" stroke="#333" strokeWidth="1.5" />
+                      {/* Vertex dots */}
+                      {([[20,15],[110,165],[290,165],[20,195],[50,245],[110,245],[20,285]] as [number,number][]).map(([x,y],i) => (
+                        <circle key={i} cx={x} cy={y} r={3} fill="#222" />
+                      ))}
+                      {/* Labels */}
+                      <text x={8}   y={13}  fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">P</text>
+                      <text x={114} y={163} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">Q</text>
+                      <text x={293} y={163} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">R</text>
+                      <text x={3}   y={197} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">P′</text>
+                      <text x={33}  y={261} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">Q′</text>
+                      <text x={113} y={261} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">R′</text>
+                      <text x={5}   y={300} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">O</text>
+                    </svg>
                     <p className="font-body text-sm text-white">
                       Faktor skala pada dilatasi <InlineMath math="\triangle PQR" /> ke{" "}
                       <InlineMath math="\triangle P'Q'R'" /> adalah . . . .
