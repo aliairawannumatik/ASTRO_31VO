@@ -1076,15 +1076,6 @@ const DilatasisPage = () => {
                   </div>
                 </div>
 
-                {/* Diagram */}
-                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
-                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 VISUALISASI PADA KOORDINAT:</p>
-                  <DiagramDilatasiOrigin />
-                  <p className="font-body text-xs text-white/50 text-center mt-2">
-                    Dilatasi pusat O(0,0) dengan k = 2. Semua koordinat dikalikan 2.
-                  </p>
-                </div>
-
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
                     <strong>Tips:</strong> Untuk dilatasi pusat O(0,0), cukup <em>kalikan semua koordinat dengan k</em>.
@@ -1419,15 +1410,6 @@ const DilatasisPage = () => {
                       Itulah arti dari <InlineMath math="(x - a)" /> dan <InlineMath math="(y - b)" /> pada rumus di atas.
                     </p>
                   </div>
-                </div>
-
-                {/* Diagram */}
-                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
-                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 VISUALISASI PADA KOORDINAT:</p>
-                  <DiagramDilatasiAB />
-                  <p className="font-body text-xs text-white/50 text-center mt-2">
-                    Dilatasi pusat P(1,1) dengan k = 1,5. Garis kuning menunjukkan arah dilatasi dari P.
-                  </p>
                 </div>
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
