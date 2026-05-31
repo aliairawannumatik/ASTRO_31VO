@@ -988,29 +988,38 @@ const RotasiPage = () => {
             )}
           </div>
 
-          {/* CONTOH 2: 90° searah */}
+          {/* CONTOH 2: mencari sudut rotasi */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr id="contoh90cw" icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📌 Contoh 2: Rotasi 90° Searah Jarum Jam" />
+            <Hdr id="contoh90cw" icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📌 Contoh 2: Mencari Sudut Rotasi" />
             {open.includes("contoh90cw") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-violet-500/10 border border-violet-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-violet-300 font-body mb-2">Soal:</p>
-                  <p className="text-sm text-white/80 font-body">Tentukan bayangan segitiga ABC dengan <InlineMath math="A(2,0), B(4,0), C(3,2)" /> yang dirotasikan 90° searah jarum jam terhadap O(0,0)!</p>
+                {/* Notasi rotasi */}
+                <div className="flex justify-center items-center gap-2 py-2 flex-wrap text-center">
+                  <InlineMath math="P(-5,\ 12) \xrightarrow{R[O,\ \alpha]} P'(5,\ -12)." />
                 </div>
-                <div className="flex justify-center"><DiagramR90CW /></div>
+                {/* Soal */}
+                <div className="bg-violet-500/10 border border-violet-500/30 rounded-xl p-4 space-y-3">
+                  <p className="text-sm text-white/80 font-body">
+                    Nilai <InlineMath math="\alpha" /> yang mungkin adalah . . . .
+                  </p>
+                  {/* Pilihan ganda 2 kolom */}
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm font-body text-white/80 pl-2">
+                    <div><span className="text-violet-300 font-semibold">A.</span> −90°</div>
+                    <div><span className="text-violet-300 font-semibold">C.</span> 180°</div>
+                    <div><span className="text-violet-300 font-semibold">B.</span> 90°</div>
+                    <div><span className="text-violet-300 font-semibold">D.</span> 270°</div>
+                  </div>
+                </div>
+                {/* Penyelesaian */}
                 <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
-                  <p className="text-sm font-semibold text-violet-300 font-body">Penyelesaian: <span className="font-mono text-yellow-200">(x, y) → (y, −x)</span></p>
-                  {[
-                    { dari: "A(2, 0)", ke: "A′(0, −2)" },
-                    { dari: "B(4, 0)", ke: "B′(0, −4)" },
-                    { dari: "C(3, 2)", ke: "C′(2, −3)" },
-                  ].map(({ dari, ke }) => (
-                    <div key={dari} className="flex items-center gap-3 text-sm font-body">
-                      <span className="text-violet-300 min-w-[80px]">{dari}</span>
-                      <span className="text-white/40">→</span>
-                      <span className="text-orange-300 font-bold">{ke}</span>
-                    </div>
-                  ))}
+                  <p className="text-sm font-semibold text-violet-300 font-body">Penyelesaian:</p>
+                  <p className="text-sm font-body text-white/80">Periksa setiap sudut rotasi terhadap <InlineMath math="P(-5,\ 12)" />:</p>
+                  <div className="space-y-1 text-sm font-body text-white/70 pl-2">
+                    <p>• 180°: <InlineMath math="(x, y) \to (-x, -y)" /> → <InlineMath math="(-5,12) \to (5,-12)" /> ✓</p>
+                  </div>
+                  <p className="text-sm font-body text-white/70 pt-1">
+                    Jawaban: <span className="text-green-400 font-bold">C. 180°</span>
+                  </p>
                 </div>
               </div>
             )}
