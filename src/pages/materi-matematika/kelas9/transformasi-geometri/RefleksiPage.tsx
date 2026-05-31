@@ -891,6 +891,45 @@ const RefleksiPage = () => {
                   https://rri.co.id/cek-fakta/1779334/alasan-mengapa-tulisan-ambulance-terbalik
                 </a>
               </div>
+              <div>
+                <img
+                  src="/cermin-refleksi.png"
+                  alt="Seseorang berdiri di depan cermin — jarak ke cermin sama dengan jarak bayangan"
+                  className="w-full rounded-xl object-cover"
+                />
+                <p className="text-[10px] text-white/30 text-right mt-1 font-body">gemini.google.com/app</p>
+              </div>
+
+              {/* Penjelasan kedua gambar */}
+              <div className="bg-slate-800/60 border border-emerald-500/20 rounded-xl p-4 space-y-3">
+                <p className="text-emerald-300 font-body text-sm font-bold">🪞 Refleksi dalam Kehidupan Nyata</p>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-3 bg-slate-900/50 rounded-lg px-3 py-2.5">
+                    <span className="text-lg shrink-0 mt-0.5">🚑</span>
+                    <div>
+                      <p className="text-xs font-bold text-yellow-300 font-body">Gambar 1 — Tulisan AMBULANCE Terbalik</p>
+                      <p className="text-xs text-white/60 font-body mt-0.5">
+                        Tulisan <strong className="text-white">AMBULANCE</strong> sengaja ditulis terbalik (seperti cerminan) di bagian depan kendaraan. Saat pengemudi lain melihatnya melalui <strong className="text-white">kaca spion</strong>, tulisan tersebut terpantul sehingga terbaca normal. Inilah konsep <strong className="text-emerald-300">refleksi terhadap sumbu vertikal</strong> — orientasi gambar berbalik, namun bentuk dan ukuran huruf tetap sama.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 bg-slate-900/50 rounded-lg px-3 py-2.5">
+                    <span className="text-lg shrink-0 mt-0.5">🧍</span>
+                    <div>
+                      <p className="text-xs font-bold text-yellow-300 font-body">Gambar 2 — Jarak ke Cermin = Jarak Bayangan</p>
+                      <p className="text-xs text-white/60 font-body mt-0.5">
+                        Seseorang berdiri sejauh <em>d</em> dari cermin, maka bayangannya pun tampak sejauh <em>d</em> di belakang cermin. Cermin berperan sebagai <strong className="text-white">sumbu pencerminan (garis cermin)</strong>. Ini menunjukkan sifat utama refleksi: <strong className="text-emerald-300">jarak titik ke garis cermin selalu sama dengan jarak bayangannya</strong>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-emerald-950/50 border border-emerald-500/20 rounded-lg px-4 py-2.5">
+                  <p className="text-emerald-200 text-xs font-body leading-relaxed">
+                    💡 Kedua gambar membuktikan dua sifat inti refleksi dalam transformasi geometri: <strong>(1) orientasi benda berbalik</strong> seperti terlihat di kaca spion ambulance, dan <strong>(2) jarak benda ke sumbu cermin sama dengan jarak bayangannya</strong> seperti pada orang yang berdiri di depan cermin.
+                  </p>
+                </div>
+              </div>
+
               <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
                 <p className="text-emerald-300 font-body text-sm font-semibold mb-2">🔑 Sifat-Sifat Refleksi:</p>
                 <ul className="space-y-1 text-sm text-white/80 font-body list-disc list-inside">
