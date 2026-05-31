@@ -836,6 +836,14 @@ const RotasiPage = () => {
                 </p>
                 <div>
                   <img
+                    src="/tata-surya-rotasi.jpg"
+                    alt="Planet-planet mengelilingi matahari — ilustrasi rotasi pada pusat tertentu"
+                    className="w-full rounded-xl object-cover"
+                  />
+                  <p className="text-[10px] text-white/30 text-right mt-1 font-body">gemini.google.com/app</p>
+                </div>
+                <div>
+                  <img
                     src="/pontiac-rotasi.jpeg"
                     alt="Ban roda mobil Pontiac GTO yang berputar — ilustrasi konsep rotasi"
                     className="w-full rounded-xl object-cover"
@@ -849,11 +857,29 @@ const RotasiPage = () => {
                     https://www.blackxperience.com/blackauto/autonews/pontiac-gto
                   </a>
                 </div>
-                <div className="bg-slate-800/60 border border-orange-500/20 rounded-xl p-4 space-y-2">
-                  <p className="text-orange-300 font-body text-sm font-bold">🔄 Ban Roda & Konsep Rotasi</p>
-                  <p className="text-white/70 text-xs font-body leading-relaxed">
-                    Ban roda kendaraan yang berputar adalah contoh nyata <strong className="text-orange-300">rotasi</strong> dalam kehidupan sehari-hari. Setiap titik pada tepi ban bergerak mengelilingi <strong className="text-white">titik pusat (sumbu roda)</strong> yang diam, dengan <strong className="text-white">jarak ke pusat yang selalu tetap</strong> dan sudut putaran yang terus bertambah. Bentuk dan ukuran ban tidak berubah — hanya posisi setiap titiknya yang berpindah mengikuti sudut rotasi, persis sesuai konsep transformasi rotasi dalam matematika.
-                  </p>
+                <div className="bg-slate-800/60 border border-orange-500/20 rounded-xl p-4 space-y-3">
+                  <p className="text-orange-300 font-body text-sm font-bold">🔄 Rotasi di Alam & Kehidupan Sehari-hari</p>
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-3 bg-slate-900/50 rounded-lg px-3 py-2.5">
+                      <span className="text-lg shrink-0 mt-0.5">🌍</span>
+                      <div>
+                        <p className="text-xs font-bold text-yellow-300 font-body">Planet Mengelilingi Matahari</p>
+                        <p className="text-xs text-white/60 font-body mt-0.5">Setiap planet bergerak mengelilingi <strong className="text-white">matahari sebagai titik pusat rotasi</strong>. Jarak planet ke matahari relatif tetap, dan seluruh pergerakannya membentuk lintasan melingkar — sebuah rotasi penuh dengan sudut 360°. Matahari adalah "titik O" yang diam, sementara planet adalah titik yang berputar di sekelilingnya.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 bg-slate-900/50 rounded-lg px-3 py-2.5">
+                      <span className="text-lg shrink-0 mt-0.5">🚗</span>
+                      <div>
+                        <p className="text-xs font-bold text-yellow-300 font-body">Ban Roda Kendaraan</p>
+                        <p className="text-xs text-white/60 font-body mt-0.5">Setiap titik pada tepi ban bergerak mengelilingi <strong className="text-white">sumbu roda sebagai titik pusat</strong> yang diam. Jarak setiap titik ke pusat selalu tetap, dan sudut putarannya terus bertambah seiring pergerakan kendaraan. Bentuk dan ukuran ban pun tidak berubah — hanya posisi tiap titiknya yang berputar.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-orange-950/50 border border-orange-500/20 rounded-lg px-4 py-2.5">
+                    <p className="text-orange-200 text-xs font-body leading-relaxed">
+                      💡 Keduanya membuktikan konsep inti rotasi: <strong>ada titik pusat yang diam</strong>, <strong>jarak ke pusat selalu tetap</strong>, dan <strong>benda bergerak membentuk lintasan melingkar</strong> sesuai sudut rotasi — persis seperti rumus transformasi rotasi dalam matematika!
+                    </p>
+                  </div>
                 </div>
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
                   <p className="text-orange-300 font-body text-sm font-semibold mb-2">🔑 Dua hal yang menentukan rotasi:</p>
