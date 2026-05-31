@@ -1345,6 +1345,18 @@ const DilatasisPage = () => {
                     Jadi rumus Sub-Bab 3 adalah rumus yang lebih umum.
                   </p>
                 </div>
+
+                {/* Ilustrasi dilatasi pusat P(a,b) */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-semibold text-slate-300 text-center">
+                    Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k
+                  </p>
+                  <img
+                    src="/dilatasi-pusat-ab.png"
+                    alt="Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k"
+                    className="w-full max-w-md mx-auto block rounded-xl object-cover"
+                  />
+                </div>
               </div>
             )}
           </div>
