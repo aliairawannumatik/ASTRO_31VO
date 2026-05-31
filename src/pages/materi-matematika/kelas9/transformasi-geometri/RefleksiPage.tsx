@@ -876,6 +876,21 @@ const RefleksiPage = () => {
               <p className="font-body text-sm text-white/80 leading-relaxed">
                 <strong className="text-emerald-300">Refleksi</strong> adalah transformasi yang mencerminkan setiap titik terhadap suatu garis yang disebut <strong className="text-yellow-300">sumbu pencerminan</strong> (garis cermin). Jarak titik dari garis cermin <strong className="text-white">tetap sama</strong>, hanya posisinya yang bercermin.
               </p>
+              <div>
+                <img
+                  src="/ambulance-refleksi.png"
+                  alt="Tulisan AMBULANCE terbalik di kaca spion"
+                  className="w-full rounded-xl object-cover"
+                />
+                <a
+                  href="https://rri.co.id/cek-fakta/1779334/alasan-mengapa-tulisan-ambulance-terbalik"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
+                >
+                  https://rri.co.id/cek-fakta/1779334/alasan-mengapa-tulisan-ambulance-terbalik
+                </a>
+              </div>
               <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
                 <p className="text-emerald-300 font-body text-sm font-semibold mb-2">🔑 Sifat-Sifat Refleksi:</p>
                 <ul className="space-y-1 text-sm text-white/80 font-body list-disc list-inside">
