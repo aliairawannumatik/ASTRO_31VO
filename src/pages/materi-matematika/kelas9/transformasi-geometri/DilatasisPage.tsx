@@ -1095,7 +1095,7 @@ const DilatasisPage = () => {
             <img
               src="/dilatasi-ilustrasi.jpg"
               alt="Transformasi Geometri: Dilatasi — Skala Faktor k = 1.5, Pusat di Asal (0,0). Persegi PQRS (biru) didilatasi menjadi P'Q'R'S' (ungu) dengan garis sinar kuning dari pusat O."
-              className="w-full rounded-xl object-cover"
+              className="w-1/2 max-w-xs mx-auto block rounded-xl object-cover"
             />
             <p className="font-body text-xs text-white/60 text-center mt-2 px-2">
               Ilustrasi dilatasi persegi PQRS dengan faktor skala <strong className="text-yellow-300">k = 1,5</strong> dan pusat di titik asal <strong className="text-yellow-300">O(0, 0)</strong>. Bayangan P'Q'R'S' (ungu) lebih besar dari bangun asli PQRS (biru). Garis kuning putus-putus menunjukkan sinar dari pusat dilatasi melewati setiap titik sudut.
