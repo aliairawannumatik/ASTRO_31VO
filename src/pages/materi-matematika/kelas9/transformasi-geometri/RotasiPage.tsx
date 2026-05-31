@@ -947,29 +947,42 @@ const RotasiPage = () => {
             )}
           </div>
 
-          {/* CONTOH 1: 90° berlawanan */}
+          {/* CONTOH 1: −90° */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr id="contoh90" icon={<BookOpen className="w-5 h-5" />} color="#22d3ee" title="📌 Contoh 1: Rotasi 90° Berlawanan Arah Jarum Jam" />
+            <Hdr id="contoh90" icon={<BookOpen className="w-5 h-5" />} color="#22d3ee" title="📌 Contoh 1: Rotasi −90°" />
             {open.includes("contoh90") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-cyan-300 font-body mb-2">Soal:</p>
-                  <p className="text-sm text-white/80 font-body">Tentukan bayangan segitiga ABC dengan <InlineMath math="A(2,0), B(4,0), C(3,2)" /> yang dirotasikan 90° berlawanan arah jarum jam terhadap O(0,0)!</p>
+                {/* Notasi rotasi */}
+                <div className="flex justify-center items-center gap-2 py-2">
+                  <InlineMath math="P(x,\ y) \xrightarrow{R[O,\ -90°]} P'(x',\ y')." />
                 </div>
-                <div className="flex justify-center"><DiagramR90 /></div>
+                <p className="text-sm text-white/80 font-body text-center">
+                  Diagram di atas menyatakan rotasi titik <InlineMath math="P" /> sejauh (−90°) dengan titik pusat <InlineMath math="O(0,\ 0)" />.
+                </p>
+                {/* Soal */}
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+                  <p className="text-sm text-white/80 font-body">
+                    <span className="font-bold text-white">78.</span> Jika <InlineMath math="P(3,\ -4)" />, koordinat titik <InlineMath math="P'" /> adalah . . . .
+                  </p>
+                  {/* Pilihan ganda 2 kolom */}
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm font-body text-white/80 pl-2">
+                    <div><span className="text-cyan-300 font-semibold">A.</span> (−4, −3)</div>
+                    <div><span className="text-cyan-300 font-semibold">C.</span> (4, 3)</div>
+                    <div><span className="text-cyan-300 font-semibold">B.</span> (−4, 3)</div>
+                    <div><span className="text-cyan-300 font-semibold">D.</span> (4, −3)</div>
+                  </div>
+                </div>
+                {/* Penyelesaian */}
                 <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
-                  <p className="text-sm font-semibold text-cyan-300 font-body">Penyelesaian: <span className="font-mono text-yellow-200">(x, y) → (−y, x)</span></p>
-                  {[
-                    { dari: "A(2, 0)", ke: "A′(0, 2)" },
-                    { dari: "B(4, 0)", ke: "B′(0, 4)" },
-                    { dari: "C(3, 2)", ke: "C′(−2, 3)" },
-                  ].map(({ dari, ke }) => (
-                    <div key={dari} className="flex items-center gap-3 text-sm font-body">
-                      <span className="text-cyan-300 min-w-[80px]">{dari}</span>
-                      <span className="text-white/40">→</span>
-                      <span className="text-pink-300 font-bold">{ke}</span>
-                    </div>
-                  ))}
+                  <p className="text-sm font-semibold text-cyan-300 font-body">Penyelesaian: <span className="font-mono text-yellow-200">(x, y) → (y, −x)</span></p>
+                  <div className="flex items-center gap-3 text-sm font-body">
+                    <InlineMath math="P(3,\ -4)" />
+                    <span className="text-white/40">→</span>
+                    <InlineMath math="P'(-4,\ -3)" />
+                  </div>
+                  <p className="text-sm font-body text-white/70 pt-1">
+                    Jawaban: <span className="text-green-400 font-bold">A. (−4, −3)</span>
+                  </p>
                 </div>
               </div>
             )}
