@@ -1395,28 +1395,90 @@ const DilatasisPage = () => {
                     <p className="font-body text-sm text-white">
                       Segitiga KLM dengan <InlineMath math="K(0, 0)" />, <InlineMath math="L(4, 0)" />,{" "}
                       <InlineMath math="M(0, 6)" /> didilatasi dengan pusat <InlineMath math="P(2, 3)" /> dan{" "}
-                      <InlineMath math="k = \dfrac{1}{2}" />. Tentukan koordinat K', L', M'!
+                      <InlineMath math="k = 3" />. Tentukan koordinat K', L', M'!
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p>Gunakan rumus dengan <InlineMath math="a=2,\ b=3,\ k=\frac{1}{2}" />:</p>
+                      <p>Gunakan rumus dengan <InlineMath math="a=2,\ b=3,\ k=3" />:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-3">
                         <div>
                           <p className="text-xs text-purple-300 font-semibold">Titik K(0,0):</p>
-                          <BlockMath math="K' = \left(2 + \tfrac{1}{2}(0-2),\ 3 + \tfrac{1}{2}(0-3)\right) = \left(1,\ \tfrac{3}{2}\right)" />
+                          <BlockMath math="K' = (2 + 3(0-2),\ 3 + 3(0-3)) = (-4,\ -6)" />
                         </div>
                         <div>
                           <p className="text-xs text-purple-300 font-semibold">Titik L(4,0):</p>
-                          <BlockMath math="L' = \left(2 + \tfrac{1}{2}(4-2),\ 3 + \tfrac{1}{2}(0-3)\right) = \left(3,\ \tfrac{3}{2}\right)" />
+                          <BlockMath math="L' = (2 + 3(4-2),\ 3 + 3(0-3)) = (8,\ -6)" />
                         </div>
                         <div>
                           <p className="text-xs text-purple-300 font-semibold">Titik M(0,6):</p>
-                          <BlockMath math="M' = \left(2 + \tfrac{1}{2}(0-2),\ 3 + \tfrac{1}{2}(6-3)\right) = \left(1,\ \tfrac{9}{2}\right)" />
+                          <BlockMath math="M' = (2 + 3(0-2),\ 3 + 3(6-3)) = (-4,\ 12)" />
                         </div>
                       </div>
-                      <p><strong className="text-yellow-300">K'(1, 1,5), L'(3, 1,5), M'(1, 4,5).</strong></p>
+                      <p><strong className="text-yellow-300">K'(−4, −6), L'(8, −6), M'(−4, 12).</strong></p>
+
+                      {/* SVG Diagram */}
+                      {/* px(x)=90+x*15, py(y)=210-y*15 | origin(90,210) */}
+                      {/* P(2,3)→(120,165) K(0,0)→(90,210) L(4,0)→(150,210) M(0,6)→(90,120) */}
+                      {/* K'(-4,-6)→(30,300) L'(8,-6)→(210,300) M'(-4,12)→(30,30) */}
+                      <svg viewBox="0 0 320 335" className="w-full max-w-xs mx-auto rounded-lg" style={{ background: "transparent" }}>
+                        {/* Grid — setiap 2 satuan */}
+                        {[-4,-2,0,2,4,6,8].map(x => (
+                          <line key={`vg${x}`} x1={90+x*15} y1={10} x2={90+x*15} y2={315} stroke="#1e3a5f" strokeWidth={x===0?"1.5":"0.6"} />
+                        ))}
+                        {[-6,-4,-2,0,2,4,6,8,10,12].map(y => (
+                          <line key={`hg${y}`} x1={10} y1={210-y*15} x2={310} y2={210-y*15} stroke="#1e3a5f" strokeWidth={y===0?"1.5":"0.6"} />
+                        ))}
+                        {/* Axes */}
+                        <line x1={10} y1={210} x2={310} y2={210} stroke="#475569" strokeWidth="1.5" />
+                        <line x1={90} y1={320} x2={90} y2={10} stroke="#475569" strokeWidth="1.5" />
+                        <polygon points="310,207 302,211 302,209" fill="#475569" />
+                        <polygon points="87,10 93,10 90,4" fill="#475569" />
+                        <text x={304} y={224} fontSize="9" fill="#94a3b8">x</text>
+                        <text x={94} y={16} fontSize="9" fill="#94a3b8">y</text>
+                        {/* Tick labels */}
+                        {[-4,-2,2,4,6,8].map(x => (
+                          <text key={`tx${x}`} x={90+x*15} y={222} textAnchor="middle" fontSize="7" fill="#64748b">{x}</text>
+                        ))}
+                        {[-6,-4,-2,2,4,6,8,10,12].map(y => (
+                          <text key={`ty${y}`} x={84} y={210-y*15+3} textAnchor="end" fontSize="7" fill="#64748b">{y}</text>
+                        ))}
+                        {/* Projection lines from P through original to image */}
+                        <line x1={120} y1={165} x2={30} y2={300} stroke="#facc15" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
+                        <line x1={120} y1={165} x2={210} y2={300} stroke="#facc15" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
+                        <line x1={120} y1={165} x2={30} y2={30} stroke="#facc15" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
+                        {/* Original △KLM (blue) */}
+                        <polygon points="90,210 150,210 90,120" fill="rgba(59,130,246,0.25)" stroke="#60a5fa" strokeWidth="2" />
+                        {/* Image △K'L'M' (green, dashed) */}
+                        <polygon points="30,300 210,300 30,30" fill="rgba(34,197,94,0.15)" stroke="#4ade80" strokeWidth="2" strokeDasharray="6,3" />
+                        {/* Vertex dots — original */}
+                        {([[90,210],[150,210],[90,120]] as [number,number][]).map(([x,y],i) => (
+                          <circle key={i} cx={x} cy={y} r={4} fill="#60a5fa" />
+                        ))}
+                        {/* Vertex dots — image */}
+                        {([[30,300],[210,300],[30,30]] as [number,number][]).map(([x,y],i) => (
+                          <circle key={`d${i}`} cx={x} cy={y} r={4} fill="#4ade80" />
+                        ))}
+                        {/* Center P */}
+                        <circle cx={120} cy={165} r={5} fill="#f97316" />
+                        {/* Labels — original */}
+                        <text x={82} y={224} fontSize="10" fontWeight="bold" fill="#93c5fd">K</text>
+                        <text x={154} y={224} fontSize="10" fontWeight="bold" fill="#93c5fd">L</text>
+                        <text x={82} y={116} fontSize="10" fontWeight="bold" fill="#93c5fd">M</text>
+                        {/* Labels — image */}
+                        <text x={14} y={308} fontSize="10" fontWeight="bold" fill="#86efac">K'</text>
+                        <text x={212} y={308} fontSize="10" fontWeight="bold" fill="#86efac">L'</text>
+                        <text x={14} y={28} fontSize="10" fontWeight="bold" fill="#86efac">M'</text>
+                        {/* Label P */}
+                        <text x={124} y={161} fontSize="10" fontWeight="bold" fill="#f97316">P</text>
+                        {/* Legend */}
+                        <rect x={148} y={110} width={155} height={44} rx="4" fill="#0f172a" fillOpacity="0.85" stroke="#334155" />
+                        <polygon points="156,122 168,122 156,132" fill="rgba(59,130,246,0.4)" stroke="#60a5fa" strokeWidth="1.5" />
+                        <text x={172} y={130} fontSize="8" fill="#93c5fd">△KLM (asli)</text>
+                        <polygon points="156,138 168,138 156,148" fill="rgba(34,197,94,0.2)" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" />
+                        <text x={172} y={146} fontSize="8" fill="#86efac">△K'L'M' (k=3)</text>
+                      </svg>
                     </div>
                   </div>
                 </div>
