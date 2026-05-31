@@ -1172,33 +1172,33 @@ const DilatasisPage = () => {
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <img
+                      src="/dilatasi-contoh3.png"
+                      alt="Diagram dilatasi segitiga PQR ke P'Q'R' dengan pusat O"
+                      className="w-full max-w-xs mx-auto rounded-lg"
+                    />
                     <p className="font-body text-sm text-white">
-                      Persegi ABCD dengan luas 36 cm² didilatasi dengan faktor skala <InlineMath math="k = -2" />.
-                      Tentukan luas persegi hasil dilatasi dan jelaskan apa yang terjadi pada posisinya!
+                      Faktor skala pada dilatasi <InlineMath math="\triangle PQR" /> ke{" "}
+                      <InlineMath math="\triangle P'Q'R'" /> adalah . . . .
                     </p>
+                    <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
+                      <p>A. &nbsp;<InlineMath math="\dfrac{1}{3}" /></p>
+                      <p>C. &nbsp;2</p>
+                      <p>B. &nbsp;<InlineMath math="\dfrac{1}{2}" /></p>
+                      <p>D. &nbsp;3</p>
+                    </div>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Cari panjang sisi persegi asal:</p>
+                      <p>Perhatikan diagram. Pusat dilatasi adalah titik <InlineMath math="O" />. Bandingkan jarak titik-titik sudut dari pusat <InlineMath math="O" />:</p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="L = s^2 \Rightarrow s = \sqrt{36} = 6 \text{ cm}" />
+                        <BlockMath math="k = \frac{OP'}{OP} = \frac{OQ'}{OQ} = \frac{OR'}{OR} = \frac{1}{3}" />
                       </div>
-                      <p><strong>Langkah 2:</strong> Hitung sisi hasil dilatasi:</p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="s' = |k| \times s = 2 \times 6 = 12 \text{ cm}" />
-                      </div>
-                      <p><strong>Langkah 3:</strong> Hitung luas hasil dilatasi:</p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="L' = s'^2 = 12^2 = 144 \text{ cm}^2" />
-                      </div>
-                      <p><strong>Langkah 4:</strong> Analisis faktor skala negatif:</p>
-                      <p>Karena <InlineMath math="k = -2" /> (negatif), bayangan persegi A'B'C'D' berada di <strong className="text-red-300">sisi berlawanan</strong> dari pusat dilatasi (posisi terbalik/rotasi 180°).</p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <p className="text-xs text-white/70">Hubungan luas: <InlineMath math="L' = k^2 \times L = 4 \times 36 = 144 \text{ cm}^2" /></p>
-                      </div>
-                      <p><strong className="text-primary">Luas = 144 cm², posisi bayangan terbalik terhadap pusat.</strong></p>
+                      <p><InlineMath math="\triangle P'Q'R'" /> lebih kecil dari <InlineMath math="\triangle PQR" />, sehingga <InlineMath math="0 &lt; k &lt; 1" /> (diperkecil).</p>
+                      <p><strong className="text-red-300">Jawaban: A. <InlineMath math="\dfrac{1}{3}" /></strong></p>
+                      <p className="text-white/60 text-xs">Karena 0 &lt; k &lt; 1, bangun hasil dilatasi lebih kecil dari bangun asalnya.</p>
                     </div>
                   </div>
                 </div>
