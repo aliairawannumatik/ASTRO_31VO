@@ -955,9 +955,6 @@ const DilatasisPage = () => {
                     <ul className="font-body text-sm text-white/80 space-y-1 list-disc list-inside">
                       <li>Bentuk bangun <strong>tidak berubah</strong> (tetap sebangun)</li>
                       <li>Ukuran berubah sesuai faktor skala <InlineMath math="k" /></li>
-                      <li>Jika <InlineMath math="|k| > 1" /> → bangun <strong className="text-green-300">diperbesar</strong></li>
-                      <li>Jika <InlineMath math="0 < |k| < 1" /> → bangun <strong className="text-yellow-300">diperkecil</strong></li>
-                      <li>Jika <InlineMath math="k < 0" /> → bangun diperbesar/diperkecil dan <strong className="text-red-300">dibalik arah</strong></li>
                     </ul>
                   </div>
                   <div className="bg-slate-900/60 rounded-lg p-3">
@@ -1176,36 +1173,40 @@ const DilatasisPage = () => {
                     {/* SVG diagram: △PQR → △P'Q'R', pusat O, k = 1/3 */}
                     {/* Grid unit = 30px. O at pixel (20,285). Coords: P(0,9) Q(3,4) R(9,4) */}
                     {/* k=1/3 → P'(0,3) Q'(1,4/3) R'(3,4/3)                                */}
-                    <svg viewBox="0 0 340 305" className="w-full max-w-xs mx-auto bg-white rounded-lg">
+                    <svg viewBox="0 0 340 305" className="w-full max-w-xs mx-auto rounded-lg" style={{ background: "transparent" }}>
                       {/* Grid */}
                       {[0,1,2,3,4,5,6,7,8,9,10].map(i => (
-                        <line key={`v${i}`} x1={20+i*30} y1={15} x2={20+i*30} y2={285} stroke="#ccc" strokeWidth="0.7" />
+                        <line key={`v${i}`} x1={20+i*30} y1={15} x2={20+i*30} y2={285} stroke="#334155" strokeWidth="0.7" />
                       ))}
                       {[0,1,2,3,4,5,6,7,8,9].map(i => (
-                        <line key={`h${i}`} x1={20} y1={15+i*30} x2={320} y2={15+i*30} stroke="#ccc" strokeWidth="0.7" />
+                        <line key={`h${i}`} x1={20} y1={15+i*30} x2={320} y2={15+i*30} stroke="#334155" strokeWidth="0.7" />
                       ))}
                       {/* Border */}
-                      <rect x="20" y="15" width="300" height="270" fill="none" stroke="#aaa" strokeWidth="1" />
+                      <rect x="20" y="15" width="300" height="270" fill="none" stroke="#475569" strokeWidth="1" />
                       {/* Dashed projection lines from O through each vertex pair */}
-                      <line x1={20} y1={285} x2={20} y2={15}   stroke="#888" strokeWidth="1" strokeDasharray="4,3" />
-                      <line x1={20} y1={285} x2={110} y2={165} stroke="#888" strokeWidth="1" strokeDasharray="4,3" />
-                      <line x1={20} y1={285} x2={290} y2={165} stroke="#888" strokeWidth="1" strokeDasharray="4,3" />
+                      <line x1={20} y1={285} x2={20} y2={15}   stroke="#facc15" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
+                      <line x1={20} y1={285} x2={110} y2={165} stroke="#facc15" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
+                      <line x1={20} y1={285} x2={290} y2={165} stroke="#facc15" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
                       {/* Large triangle PQR */}
-                      <polygon points="20,15 110,165 290,165" fill="rgba(130,130,130,0.20)" stroke="#333" strokeWidth="1.5" />
+                      <polygon points="20,15 110,165 290,165" fill="rgba(59,130,246,0.25)" stroke="#60a5fa" strokeWidth="1.8" />
                       {/* Small triangle P'Q'R' */}
-                      <polygon points="20,195 50,245 110,245" fill="rgba(130,130,130,0.20)" stroke="#333" strokeWidth="1.5" />
+                      <polygon points="20,195 50,245 110,245" fill="rgba(34,197,94,0.25)" stroke="#4ade80" strokeWidth="1.8" />
                       {/* Vertex dots */}
-                      {([[20,15],[110,165],[290,165],[20,195],[50,245],[110,245],[20,285]] as [number,number][]).map(([x,y],i) => (
-                        <circle key={i} cx={x} cy={y} r={3} fill="#222" />
+                      {([[20,15],[110,165],[290,165]] as [number,number][]).map(([x,y],i) => (
+                        <circle key={i} cx={x} cy={y} r={4} fill="#60a5fa" />
                       ))}
+                      {([[20,195],[50,245],[110,245]] as [number,number][]).map(([x,y],i) => (
+                        <circle key={`p${i}`} cx={x} cy={y} r={4} fill="#4ade80" />
+                      ))}
+                      <circle cx={20} cy={285} r={5} fill="#f97316" />
                       {/* Labels */}
-                      <text x={8}   y={13}  fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">P</text>
-                      <text x={114} y={163} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">Q</text>
-                      <text x={293} y={163} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">R</text>
-                      <text x={3}   y={197} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">P′</text>
-                      <text x={33}  y={261} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">Q′</text>
-                      <text x={113} y={261} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">R′</text>
-                      <text x={5}   y={300} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#000">O</text>
+                      <text x={8}   y={13}  fontSize="12" fontFamily="serif" fontWeight="bold" fill="#93c5fd">P</text>
+                      <text x={114} y={163} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#93c5fd">Q</text>
+                      <text x={293} y={163} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#93c5fd">R</text>
+                      <text x={3}   y={197} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#86efac">P′</text>
+                      <text x={33}  y={261} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#86efac">Q′</text>
+                      <text x={113} y={261} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#86efac">R′</text>
+                      <text x={5}   y={300} fontSize="12" fontFamily="serif" fontWeight="bold" fill="#f97316">O</text>
                     </svg>
                     <p className="font-body text-sm text-white">
                       Faktor skala pada dilatasi <InlineMath math="\triangle PQR" /> ke{" "}
