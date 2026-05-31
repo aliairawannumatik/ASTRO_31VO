@@ -965,6 +965,23 @@ const DilatasisPage = () => {
                   </div>
                 </div>
 
+                {/* Gambar kamera */}
+                <div className="rounded-xl overflow-hidden">
+                  <img
+                    src="/kamera-dilatasi.jpg"
+                    alt="Fotografer menggunakan lensa zoom — ilustrasi konsep dilatasi dalam kehidupan nyata"
+                    className="w-full rounded-xl object-cover"
+                  />
+                  <a
+                    href="https://iframerental.com/blog-cara-memotret"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
+                  >
+                    iframerental.com/blog-cara-memotret
+                  </a>
+                </div>
+
                 {/* Tabel faktor skala */}
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 overflow-x-auto">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">📊 TABEL FAKTOR SKALA:</p>
@@ -993,23 +1010,6 @@ const DilatasisPage = () => {
                 </div>
               </div>
             )}
-          </div>
-
-          {/* ── GAMBAR KAMERA — DI ATAS ANIMASI DILATASI TITIK ── */}
-          <div className="rounded-xl overflow-hidden">
-            <img
-              src="/kamera-dilatasi.jpg"
-              alt="Fotografer menggunakan lensa zoom — ilustrasi konsep dilatasi dalam kehidupan nyata"
-              className="w-full rounded-xl object-cover"
-            />
-            <a
-              href="https://iframerental.com/blog-cara-memotret"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
-            >
-              iframerental.com/blog-cara-memotret
-            </a>
           </div>
 
           {/* ── ANIMASI INTERAKTIF — DILATASI TITIK ── */}
