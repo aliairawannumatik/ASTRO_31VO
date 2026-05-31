@@ -982,6 +982,23 @@ const DilatasisPage = () => {
                   </a>
                 </div>
 
+                {/* Gambar troli */}
+                <div className="rounded-xl overflow-hidden">
+                  <img
+                    src="/troli-dilatasi.webp"
+                    alt="Troli belanja dan bayangannya — contoh dilatasi dalam kehidupan sehari-hari"
+                    className="w-full max-w-md mx-auto block rounded-xl object-cover"
+                  />
+                  <a
+                    href="https://kumparan.com/ragam-info/3-contoh-dilatasi-dalam-kehidupan-sehari-hari"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
+                  >
+                    kumparan.com/ragam-info/3-contoh-dilatasi-dalam-kehidupan-sehari-hari
+                  </a>
+                </div>
+
                 {/* Tabel faktor skala */}
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 overflow-x-auto">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">📊 TABEL FAKTOR SKALA:</p>
