@@ -930,53 +930,6 @@ const DilatasisPage = () => {
             )}
           </div>
 
-          {/* ── GAMBAR KAMERA — DI ATAS ANIMASI DILATASI TITIK ── */}
-          <div className="rounded-xl overflow-hidden">
-            <img
-              src="/kamera-dilatasi.jpg"
-              alt="Fotografer menggunakan lensa zoom — ilustrasi konsep dilatasi dalam kehidupan nyata"
-              className="w-full rounded-xl object-cover"
-            />
-            <a
-              href="https://iframerental.com/blog-cara-memotret"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
-            >
-              iframerental.com/blog-cara-memotret
-            </a>
-          </div>
-
-          {/* ── ANIMASI INTERAKTIF — DILATASI TITIK ── */}
-          <div className="bg-card/80 backdrop-blur border border-yellow-500/20 rounded-xl overflow-hidden">
-            <SectionHeader
-              id="animasi-titik"
-              icon={<span>📍</span>}
-              iconColor="#facc15"
-              label="Animasi Interaktif — Dilatasi Titik"
-            />
-            {expandedSections.includes("animasi-titik") && (
-              <div className="px-5 pb-5">
-                <AnimasiDilatasiTitik />
-              </div>
-            )}
-          </div>
-
-          {/* ── ANIMASI INTERAKTIF — DILATASI BANGUN DATAR ── */}
-          <div className="bg-card/80 backdrop-blur border border-emerald-500/20 rounded-xl overflow-hidden">
-            <SectionHeader
-              id="animasi"
-              icon={<span>🔭</span>}
-              iconColor="#34d399"
-              label="Animasi Interaktif — Dilatasi Bangun Datar"
-            />
-            {expandedSections.includes("animasi") && (
-              <div className="px-5 pb-5">
-                <AnimasiDilatasi />
-              </div>
-            )}
-          </div>
-
           {/* ═══════════════════════════════════════
               SUB-BAB 1: PENGERTIAN DILATASI
           ═══════════════════════════════════════ */}
@@ -1050,6 +1003,53 @@ const DilatasisPage = () => {
                     <strong>Tips:</strong> Nilai <InlineMath math="k" /> positif → posisi bayangan searah dengan titik asalnya (dilihat dari pusat dilatasi). Nilai <InlineMath math="k" /> negatif → bayangan ada di sisi berlawanan dari pusat dilatasi.
                   </p>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── GAMBAR KAMERA — DI ATAS ANIMASI DILATASI TITIK ── */}
+          <div className="rounded-xl overflow-hidden">
+            <img
+              src="/kamera-dilatasi.jpg"
+              alt="Fotografer menggunakan lensa zoom — ilustrasi konsep dilatasi dalam kehidupan nyata"
+              className="w-full rounded-xl object-cover"
+            />
+            <a
+              href="https://iframerental.com/blog-cara-memotret"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
+            >
+              iframerental.com/blog-cara-memotret
+            </a>
+          </div>
+
+          {/* ── ANIMASI INTERAKTIF — DILATASI TITIK ── */}
+          <div className="bg-card/80 backdrop-blur border border-yellow-500/20 rounded-xl overflow-hidden">
+            <SectionHeader
+              id="animasi-titik"
+              icon={<span>📍</span>}
+              iconColor="#facc15"
+              label="Animasi Interaktif — Dilatasi Titik"
+            />
+            {expandedSections.includes("animasi-titik") && (
+              <div className="px-5 pb-5">
+                <AnimasiDilatasiTitik />
+              </div>
+            )}
+          </div>
+
+          {/* ── ANIMASI INTERAKTIF — DILATASI BANGUN DATAR ── */}
+          <div className="bg-card/80 backdrop-blur border border-emerald-500/20 rounded-xl overflow-hidden">
+            <SectionHeader
+              id="animasi"
+              icon={<span>🔭</span>}
+              iconColor="#34d399"
+              label="Animasi Interaktif — Dilatasi Bangun Datar"
+            />
+            {expandedSections.includes("animasi") && (
+              <div className="px-5 pb-5">
+                <AnimasiDilatasi />
               </div>
             )}
           </div>
