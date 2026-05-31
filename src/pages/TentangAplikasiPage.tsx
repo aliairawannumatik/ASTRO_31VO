@@ -86,7 +86,7 @@ const TentangAplikasiPage = () => {
               <div className="flex-1">
                 <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">Versi Aplikasi</p>
                 <p className="font-display text-lg font-black text-white">
-                  NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.2</span>
+                  NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.3</span>
                 </p>
                 <p className="text-white/50 font-body text-xs mt-0.5">Pembaruan konten, fitur, dan tampilan antarmuka</p>
               </div>
@@ -102,8 +102,8 @@ const TentangAplikasiPage = () => {
         <div className="animate-slide-up mb-6" style={{ animationDelay: '0.38s' }}>
           <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
             <div className="rounded-2xl bg-[#0d0d2b] px-6 py-4 flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center shrink-0">
-                <span className="text-2xl">🔄</span>
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center shrink-0 overflow-hidden">
+                <img src="/logo-update.png" alt="Update" className="w-full h-full object-contain" />
               </div>
               <div className="flex-1">
                 <p className="font-display text-xs font-bold tracking-widest uppercase text-emerald-400 mb-0.5">Jadwal Pembaruan</p>
@@ -123,7 +123,7 @@ const TentangAplikasiPage = () => {
 
         <div className="text-center space-y-2 animate-slide-up" style={{ animationDelay: '0.40s' }}>
           <p className="text-white/40 font-body text-xs">
-            Edisi Ketiga · © 2026 NUMATIK. All rights reserved.
+            Edisi Keempat · © 2026 NUMATIK. All rights reserved.
           </p>
         </div>
 
