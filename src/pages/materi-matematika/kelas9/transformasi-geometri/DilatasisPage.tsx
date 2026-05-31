@@ -1116,7 +1116,7 @@ const DilatasisPage = () => {
               id="contoh1"
               icon={<Calculator className="w-5 h-5" />}
               iconColor="#60a5fa"
-              label="📝 Contoh Soal — Pengertian Dilatasi"
+              label="📝 Contoh Soal — Dilatasi Pusat O(0,0)"
             />
             {expandedSections.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-6">
