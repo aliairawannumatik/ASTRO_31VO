@@ -844,7 +844,7 @@ const RotasiPage = () => {
                 </div>
                 <div>
                   <img
-                    src="/pontiac-rotasi.jpeg"
+                    src="/pontiac-rotasi.png"
                     alt="Ban roda mobil Pontiac GTO yang berputar — ilustrasi konsep rotasi"
                     className="w-full rounded-xl object-cover"
                   />
