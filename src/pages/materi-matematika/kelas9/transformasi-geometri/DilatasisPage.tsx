@@ -1090,7 +1090,7 @@ const DilatasisPage = () => {
           {/* ── ILUSTRASI DILATASI ── */}
           <div className="rounded-xl overflow-hidden">
             <p className="font-body text-sm font-bold text-center text-white tracking-widest uppercase mb-2">
-              ILUSTRASI DILATASI
+              Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k
             </p>
             <img
               src="/dilatasi-ilustrasi.jpg"
