@@ -970,6 +970,9 @@ const DilatasisPage = () => {
 
                 {/* ── ILUSTRASI DILATASI ── */}
                 <div className="rounded-xl overflow-hidden">
+                  <p className="font-body text-sm font-bold text-center text-white tracking-widest uppercase mb-2">
+                    ILUSTRASI DILATASI
+                  </p>
                   <img
                     src="/dilatasi-ilustrasi.jpg"
                     alt="Transformasi Geometri: Dilatasi — Skala Faktor k = 1.5, Pusat di Asal (0,0). Persegi PQRS (biru) didilatasi menjadi P'Q'R'S' (ungu) dengan garis sinar kuning dari pusat O."
