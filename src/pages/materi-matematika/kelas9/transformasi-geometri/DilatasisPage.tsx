@@ -1092,7 +1092,10 @@ const DilatasisPage = () => {
                       <InlineMath math="A(3,\ 5)" />
                       <span className="inline-flex flex-col items-center mx-1">
                         <span className="text-[10px] text-white/70 leading-none mb-0.5">[(0, 0), 2]</span>
-                        <span className="text-white text-base leading-none">⟶</span>
+                        <span className="flex items-center text-white leading-none">
+                          <span className="inline-block h-px w-10 bg-white align-middle"></span>
+                          <span className="text-base leading-none -ml-0.5">▶</span>
+                        </span>
                       </span>
                       <InlineMath math="A'(x',\ y')" />
                     </div>
