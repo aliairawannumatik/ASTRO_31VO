@@ -991,14 +991,6 @@ const DilatasisPage = () => {
                   </a>
                 </div>
 
-                {/* Diagram Pengertian */}
-                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
-                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI DILATASI:</p>
-                  <DiagramPengertian />
-                  <p className="font-body text-xs text-white/50 text-center mt-2">
-                    △A'B'C' adalah hasil dilatasi △ABC dengan pusat O dan faktor skala k = 2
-                  </p>
-                </div>
 
                 {/* Tabel faktor skala */}
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 overflow-x-auto">
