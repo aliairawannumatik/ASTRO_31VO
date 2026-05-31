@@ -1281,18 +1281,6 @@ const DilatasisPage = () => {
             )}
           </div>
 
-          {/* Contoh Soal Sub-Bab 2 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader
-              id="contoh2"
-              icon={<Calculator className="w-5 h-5" />}
-              iconColor="#60a5fa"
-              label="📝 Contoh Soal — Dilatasi Pusat O(0,0)"
-            />
-            {expandedSections.includes("contoh2") && (
-              <div className="px-5 pb-5" />
-            )}
-          </div>
 
           {/* ═══════════════════════════════════════
               SUB-BAB 3: DILATASI PUSAT (a,b)
