@@ -970,7 +970,7 @@ const DilatasisPage = () => {
                   <img
                     src="/kamera-dilatasi.jpg"
                     alt="Fotografer menggunakan lensa zoom — ilustrasi konsep dilatasi dalam kehidupan nyata"
-                    className="w-full rounded-xl object-cover"
+                    className="w-3/4 max-w-sm mx-auto block rounded-xl object-cover"
                   />
                   <a
                     href="https://iframerental.com/blog-cara-memotret"
