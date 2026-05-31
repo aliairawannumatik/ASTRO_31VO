@@ -1030,24 +1030,37 @@ const RotasiPage = () => {
             <Hdr id="contoh180" icon={<BookOpen className="w-5 h-5" />} color="#fb923c" title="📌 Contoh 3: Rotasi 180°" />
             {open.includes("contoh180") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-orange-300 font-body mb-2">Soal:</p>
-                  <p className="text-sm text-white/80 font-body">Tentukan bayangan segitiga ABC dengan <InlineMath math="A(2,0), B(4,0), C(3,2)" /> yang dirotasikan 180° terhadap O(0,0)!</p>
+                {/* Soal */}
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 space-y-3">
+                  <p className="text-sm text-white/80 font-body leading-relaxed">
+                    Dilakukan rotasi berturut-turut terhadap titik <InlineMath math="(b,\ 12 - a)" /> sejauh 180° dan 90°. Jika koordinat bayangannya adalah <InlineMath math="(2a,\ -5)" />, nilai <InlineMath math="a + b" /> = . . . .
+                  </p>
+                  {/* Pilihan ganda 2 kolom */}
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm font-body text-white/80 pl-2">
+                    <div><span className="text-orange-300 font-semibold">A.</span> −1</div>
+                    <div><span className="text-orange-300 font-semibold">C.</span> 5</div>
+                    <div><span className="text-orange-300 font-semibold">B.</span> 1</div>
+                    <div><span className="text-orange-300 font-semibold">D.</span> 9</div>
+                  </div>
                 </div>
-                <div className="flex justify-center"><DiagramR180 /></div>
-                <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
-                  <p className="text-sm font-semibold text-orange-300 font-body">Penyelesaian: <span className="font-mono text-yellow-200">(x, y) → (−x, −y)</span></p>
-                  {[
-                    { dari: "A(2, 0)", ke: "A′(−2, 0)" },
-                    { dari: "B(4, 0)", ke: "B′(−4, 0)" },
-                    { dari: "C(3, 2)", ke: "C′(−3, −2)" },
-                  ].map(({ dari, ke }) => (
-                    <div key={dari} className="flex items-center gap-3 text-sm font-body">
-                      <span className="text-cyan-300 min-w-[80px]">{dari}</span>
-                      <span className="text-white/40">→</span>
-                      <span className="text-orange-300 font-bold">{ke}</span>
+                {/* Penyelesaian */}
+                <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                  <p className="text-sm font-semibold text-orange-300 font-body">Penyelesaian:</p>
+                  <div className="space-y-2 text-sm font-body text-white/80">
+                    <p className="font-semibold text-white/90">Langkah 1 — Rotasi 180°: <span className="font-mono text-yellow-200">(x, y) → (−x, −y)</span></p>
+                    <p className="pl-2"><InlineMath math="(b,\ 12-a) \to (-b,\ -(12-a)) = (-b,\ a-12)" /></p>
+                    <p className="font-semibold text-white/90 pt-1">Langkah 2 — Rotasi 90° (berlawanan arah jarum jam): <span className="font-mono text-yellow-200">(x, y) → (−y, x)</span></p>
+                    <p className="pl-2"><InlineMath math="(-b,\ a-12) \to (-(a-12),\ -b) = (12-a,\ -b)" /></p>
+                    <p className="font-semibold text-white/90 pt-1">Samakan dengan <InlineMath math="(2a,\ -5)" />:</p>
+                    <div className="pl-2 space-y-1">
+                      <p><InlineMath math="12 - a = 2a \Rightarrow a = 4" /></p>
+                      <p><InlineMath math="-b = -5 \Rightarrow b = 5" /></p>
+                      <p><InlineMath math="a + b = 4 + 5 = 9" /></p>
                     </div>
-                  ))}
+                  </div>
+                  <p className="text-sm font-body text-white/70 pt-1">
+                    Jawaban: <span className="text-green-400 font-bold">D. 9</span>
+                  </p>
                 </div>
               </div>
             )}
