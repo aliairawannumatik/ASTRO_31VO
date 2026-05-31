@@ -1130,24 +1130,38 @@ const DilatasisPage = () => {
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <div className="flex items-center gap-2 font-body text-sm text-white flex-wrap">
+                      <InlineMath math="Q(4,\ -6)" />
+                      <span className="inline-flex flex-col items-center mx-1">
+                        <span className="text-[10px] text-white/70 leading-none mb-0.5">[(0, 0), k]</span>
+                        <span className="flex items-center text-white leading-none">
+                          <span className="inline-block h-px w-10 bg-white align-middle"></span>
+                          <span className="text-base leading-none -ml-0.5">▶</span>
+                        </span>
+                      </span>
+                      <InlineMath math="Q'(-2,\ 3)" />
+                    </div>
                     <p className="font-body text-sm text-white">
-                      Sebuah segitiga memiliki sisi-sisi sepanjang 4 cm, 6 cm, dan 8 cm. Segitiga tersebut
-                      didilatasi dengan faktor skala <InlineMath math="k = \dfrac{1}{2}" />. Tentukan panjang
-                      sisi-sisi segitiga hasil dilatasi!
+                      Faktor dilatasi <InlineMath math="k" /> = . . . .
                     </p>
+                    <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
+                      <p>A. &nbsp;2</p>
+                      <p>C. &nbsp;<InlineMath math="-\dfrac{1}{2}" /></p>
+                      <p>B. &nbsp;<InlineMath math="\dfrac{1}{2}" /></p>
+                      <p>D. &nbsp;−2</p>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p>Setiap sisi dikalikan dengan faktor skala <InlineMath math="k = \dfrac{1}{2}" />:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="s_1' = \frac{1}{2} \times 4 = 2 \text{ cm}" />
-                        <BlockMath math="s_2' = \frac{1}{2} \times 6 = 3 \text{ cm}" />
-                        <BlockMath math="s_3' = \frac{1}{2} \times 8 = 4 \text{ cm}" />
+                      <p><strong>Gunakan rumus:</strong> <InlineMath math="Q'(kx,\ ky)" /></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <BlockMath math="kx = -2 \Rightarrow k \times 4 = -2 \Rightarrow k = -\frac{1}{2}" />
+                        <p className="text-xs text-white/60">Verifikasi: <InlineMath math="k \times (-6) = -\frac{1}{2} \times (-6) = 3\ \checkmark" /></p>
                       </div>
-                      <p><strong className="text-yellow-300">Sisi-sisi hasil dilatasi: 2 cm, 3 cm, dan 4 cm.</strong></p>
-                      <p className="text-white/60 text-xs">Karena 0 &lt; k &lt; 1, segitiga diperkecil menjadi setengah ukuran semula.</p>
+                      <p><strong className="text-yellow-300">Jawaban: C. <InlineMath math="-\dfrac{1}{2}" /></strong></p>
+                      <p className="text-white/60 text-xs">Nilai k negatif berarti bayangan berada di sisi berlawanan dari pusat dilatasi.</p>
                     </div>
                   </div>
                 </div>
