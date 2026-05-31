@@ -804,14 +804,12 @@ const DiagramR180 = () => {
 
 /* ── Page ── */
 const RotasiPage = () => {
-  const [open, setOpen] = useState<string[]>(["intro", "animasi-titik", "animasi", "rumus", "contoh90", "contoh90cw", "contoh180", "rangkuman"]);
-  const toggle = (id: string) => { playPopSound(); setOpen(p => p.includes(id) ? p.filter(s => s !== id) : [...p, id]); };
+  const open = ["intro", "animasi-titik", "animasi", "rumus", "contoh90", "contoh90cw", "contoh180", "rangkuman"];
 
   const Hdr = ({ id, icon, color, title }: { id: string; icon: React.ReactNode; color: string; title: string }) => (
-    <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+    <div className="w-full flex items-center px-5 py-4 text-left">
       <div className="flex items-center gap-3"><span style={{ color }}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
-      {open.includes(id) ? <ChevronUp className="w-5 h-5 text-orange-400" /> : <ChevronDown className="w-5 h-5 text-orange-400" />}
-    </button>
+    </div>
   );
 
   return (

@@ -867,32 +867,19 @@ function AnimasiDilatasi() {
 
 const DilatasisPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>([
+  const expandedSections = [
     "intro", "animasi-titik", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
-  ]);
-
-  const toggleSection = (section: string) => {
-    playPopSound();
-    setExpandedSections((prev) =>
-      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
-    );
-  };
+  ];
 
   const SectionHeader = ({
     id, icon, label, iconColor,
   }: { id: string; icon: React.ReactNode; label: string; iconColor: string }) => (
-    <button
-      onClick={() => toggleSection(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-    >
+    <div className="w-full flex items-center px-5 py-4 text-left">
       <div className="flex items-center gap-3">
         <span style={{ color: iconColor }}>{icon}</span>
         <span className="font-body font-semibold text-white">{label}</span>
       </div>
-      {expandedSections.includes(id)
-        ? <ChevronUp className="w-5 h-5 text-primary" />
-        : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
