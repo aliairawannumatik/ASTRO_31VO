@@ -943,6 +943,23 @@ const DilatasisPage = () => {
             )}
           </div>
 
+          {/* ── GAMBAR KAMERA — DI ATAS ANIMASI DILATASI TITIK ── */}
+          <div className="rounded-xl overflow-hidden">
+            <img
+              src="/kamera-dilatasi.jpg"
+              alt="Fotografer menggunakan lensa zoom — ilustrasi konsep dilatasi dalam kehidupan nyata"
+              className="w-full rounded-xl object-cover"
+            />
+            <a
+              href="https://iframerental.com/blog-cara-memotret"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
+            >
+              iframerental.com/blog-cara-memotret
+            </a>
+          </div>
+
           {/* ── ANIMASI INTERAKTIF — DILATASI TITIK ── */}
           <div className="bg-card/80 backdrop-blur border border-yellow-500/20 rounded-xl overflow-hidden">
             <SectionHeader
