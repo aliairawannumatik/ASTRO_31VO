@@ -1090,9 +1090,9 @@ const DilatasisPage = () => {
                     <p className="font-body text-sm text-white">Perhatikan diagram berikut.</p>
                     <div className="flex items-center gap-2 font-body text-sm text-white flex-wrap">
                       <InlineMath math="A(3,\ 5)" />
-                      <span className="flex items-center gap-1">
-                        <span className="border-t border-white/60 text-[10px] text-white/60 px-1">[(0, 0), 2]</span>
-                        <span className="text-white/80">⟶</span>
+                      <span className="inline-flex flex-col items-center mx-1">
+                        <span className="text-[10px] text-white/70 leading-none mb-0.5">[(0, 0), 2]</span>
+                        <span className="text-white text-base leading-none">⟶</span>
                       </span>
                       <InlineMath math="A'(x',\ y')" />
                     </div>
