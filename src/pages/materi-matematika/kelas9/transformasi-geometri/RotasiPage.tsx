@@ -834,6 +834,27 @@ const RotasiPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   <strong className="text-orange-300">Rotasi</strong> adalah transformasi yang memutar setiap titik sebesar sudut tertentu terhadap sebuah <strong className="text-yellow-300">titik pusat</strong>. Bentuk dan ukuran bangun <strong className="text-white">tidak berubah</strong>, hanya posisi dan orientasinya yang bergeser sesuai sudut putaran.
                 </p>
+                <div>
+                  <img
+                    src="/pontiac-rotasi.jpeg"
+                    alt="Ban roda mobil Pontiac GTO yang berputar — ilustrasi konsep rotasi"
+                    className="w-full rounded-xl object-cover"
+                  />
+                  <a
+                    href="https://www.blackxperience.com/blackauto/autonews/pontiac-gto"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-cyan-400/50 hover:text-cyan-300 text-right mt-1 font-body block transition-colors"
+                  >
+                    https://www.blackxperience.com/blackauto/autonews/pontiac-gto
+                  </a>
+                </div>
+                <div className="bg-slate-800/60 border border-orange-500/20 rounded-xl p-4 space-y-2">
+                  <p className="text-orange-300 font-body text-sm font-bold">🔄 Ban Roda & Konsep Rotasi</p>
+                  <p className="text-white/70 text-xs font-body leading-relaxed">
+                    Ban roda kendaraan yang berputar adalah contoh nyata <strong className="text-orange-300">rotasi</strong> dalam kehidupan sehari-hari. Setiap titik pada tepi ban bergerak mengelilingi <strong className="text-white">titik pusat (sumbu roda)</strong> yang diam, dengan <strong className="text-white">jarak ke pusat yang selalu tetap</strong> dan sudut putaran yang terus bertambah. Bentuk dan ukuran ban tidak berubah — hanya posisi setiap titiknya yang berpindah mengikuti sudut rotasi, persis sesuai konsep transformasi rotasi dalam matematika.
+                  </p>
+                </div>
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
                   <p className="text-orange-300 font-body text-sm font-semibold mb-2">🔑 Dua hal yang menentukan rotasi:</p>
                   <ul className="space-y-2 text-sm text-white/80 font-body">
