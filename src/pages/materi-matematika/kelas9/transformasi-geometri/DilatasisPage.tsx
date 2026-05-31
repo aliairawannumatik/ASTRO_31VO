@@ -1086,23 +1086,37 @@ const DilatasisPage = () => {
                     <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Perhatikan diagram berikut.</p>
+                    <div className="flex items-center gap-2 font-body text-sm text-white flex-wrap">
+                      <InlineMath math="A(3,\ 5)" />
+                      <span className="flex items-center gap-1">
+                        <span className="border-t border-white/60 text-[10px] text-white/60 px-1">[(0, 0), 2]</span>
+                        <span className="text-white/80">⟶</span>
+                      </span>
+                      <InlineMath math="A'(x',\ y')" />
+                    </div>
                     <p className="font-body text-sm text-white">
-                      Titik <InlineMath math="P" /> berjarak 5 cm dari pusat dilatasi <InlineMath math="O" />.
-                      Jika faktor skala <InlineMath math="k = 3" />, tentukan jarak titik <InlineMath math="P'" />{" "}
-                      (bayangan P) dari pusat dilatasi!
+                      Diagram di atas menunjukkan dilatasi titik <InlineMath math="A" /> dengan pusat di titik{" "}
+                      <InlineMath math="(0,\ 0)" /> sebesar 2 kali. Koordinat titik <InlineMath math="A'" /> adalah . . . .
                     </p>
+                    <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
+                      <p>A. &nbsp;(6, 5)</p>
+                      <p>C. &nbsp;(3, 10)</p>
+                      <p>B. &nbsp;(6, 10)</p>
+                      <p>D. &nbsp;(9, 10)</p>
+                    </div>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Diketahui:</strong> <InlineMath math="OP = 5 \text{ cm}" />, <InlineMath math="k = 3" /></p>
-                      <p><strong>Rumus jarak bayangan:</strong></p>
+                      <p><strong>Diketahui:</strong> <InlineMath math="A(3,\ 5)" />, pusat <InlineMath math="O(0,\ 0)" />, <InlineMath math="k = 2" /></p>
+                      <p><strong>Gunakan rumus dilatasi pusat O(0,0):</strong></p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="OP' = k \times OP = 3 \times 5 = 15 \text{ cm}" />
+                        <BlockMath math="A'(kx,\ ky) = A'(2 \times 3,\ 2 \times 5) = A'(6,\ 10)" />
                       </div>
-                      <p><strong className="text-green-300">Jarak P' dari pusat O = 15 cm.</strong></p>
-                      <p className="text-white/60 text-xs">Karena k = 3 &gt; 1, titik P diperbesar jaraknya 3 kali lipat.</p>
+                      <p><strong className="text-green-300">Jawaban: B. (6, 10)</strong></p>
+                      <p className="text-white/60 text-xs">Karena k = 2, semua koordinat dikalikan 2.</p>
                     </div>
                   </div>
                 </div>
