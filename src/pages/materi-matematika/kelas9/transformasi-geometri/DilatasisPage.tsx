@@ -1354,7 +1354,7 @@ const DilatasisPage = () => {
                   <img
                     src="/dilatasi-pusat-ab.png"
                     alt="Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k"
-                    className="w-full max-w-md mx-auto block rounded-xl object-cover"
+                    className="w-1/2 max-w-xs mx-auto block rounded-xl object-cover"
                   />
                 </div>
               </div>
