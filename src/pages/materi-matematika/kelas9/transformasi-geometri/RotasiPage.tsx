@@ -1071,10 +1071,13 @@ function AnimasiRotasiKurva() {
             <text x={px(imgVertX) + 5} y={py(2)} fill={accent} fontSize="9" fontWeight="bold">x={imgVertX}</text>
           )}
 
-          {/* Arc busur rotasi di sekitar pusat */}
-          {showingResult && animAngleAbs > 2 && (
-            <ArcArrow cx={ca} cy={cb} r={28} aStart={0} aEnd={displayAngle} color={accent} />
-          )}
+          {/* Arc busur rotasi di sekitar pusat — dari sudut garis asli ke sudut garis bayangan */}
+          {showingResult && animAngleAbs > 2 && (() => {
+            const lineAngleDeg = Math.atan(m) * (180 / Math.PI);
+            return (
+              <ArcArrow cx={ca} cy={cb} r={28} aStart={lineAngleDeg} aEnd={lineAngleDeg + displayAngle} color={accent} />
+            );
+          })()}
 
           {/* Badge sudut — kotak warna di tengah atas SVG */}
           {showingResult && animAngleAbs > 2 && (() => {
