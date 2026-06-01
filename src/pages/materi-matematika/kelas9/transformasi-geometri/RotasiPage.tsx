@@ -1054,103 +1054,172 @@ function AnimasiRotasiKurva() {
       </div>
 
       {/* Grid SVG */}
-      <div className="w-full max-w-[360px] mx-auto">
-        <Grid accent={accent}>
+      {(() => {
+        /* ── Anchor point: titik di garis asli yang dipakai untuk visualisasi jari-jari pusat ── */
+        const ARC_R_SVG = 42;
+        const r_math = ARC_R_SVG / sc;
+        const K = m * ca + c - cb;
+        const disc = r_math * r_math * (1 + m * m) - K * K;
+        let aStart = Math.atan(m) * (180 / Math.PI);
+        let anchorMathX = ca + r_math / Math.sqrt(1 + m * m);
+        let anchorMathY = m * anchorMathX + c;
+        if (isValid && disc >= 0) {
+          const u = (-m * K + Math.sqrt(disc)) / (1 + m * m);
+          const v = m * u + K;
+          aStart = Math.atan2(v, u) * (180 / Math.PI);
+          anchorMathX = ca + u;
+          anchorMathY = cb + v;
+        }
+        const [rotAnchorX, rotAnchorY] = rotatePtAround(anchorMathX, anchorMathY, ca, cb, displayAngle);
 
-          {/* Garis asli */}
-          {isValid && (
-            <line x1={px(-5)} y1={py(m * -5 + c)} x2={px(5)} y2={py(m * 5 + c)}
-              stroke="#22d3ee" strokeWidth="2.5" opacity={showingResult ? 0.45 : 1} />
-          )}
-          {isValid && !showingResult && (
-            <text x={px(2)} y={py(m * 2 + c) - 8} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
-          )}
+        return (
+        <div className="w-full max-w-[360px] mx-auto">
+          <Grid accent={accent}>
 
-          {/* Garis berputar (animasi & hasil) */}
-          {showingResult && isValid && animLine && (
-            <line
-              x1={px(-5)} y1={py(animLine.M * -5 + animLine.C)}
-              x2={px(5)}  y2={py(animLine.M * 5  + animLine.C)}
-              stroke={accent} strokeWidth="2.5"
-              strokeDasharray={show && !isAnimating ? '6,3' : 'none'}
-              opacity={0.9}
-            />
-          )}
-          {/* Label bayangan (hanya setelah animasi selesai) */}
-          {show && !isAnimating && isValid && !isVertical && animLine && (
-            <text x={px(-2)} y={py(animLine.M * -2 + animLine.C) - 8}
-              fill={accent} fontSize="9" fontWeight="bold">{fmtLineR(imgM, imgC)}</text>
-          )}
-          {/* Garis vertikal hasil (m=0 + 90°) */}
-          {show && !isAnimating && isValid && isVertical && (
-            <line x1={px(imgVertX)} y1={0} x2={px(imgVertX)} y2={S}
-              stroke={accent} strokeWidth="2.5" strokeDasharray="6,3" />
-          )}
-          {show && !isAnimating && isValid && isVertical && (
-            <text x={px(imgVertX) + 5} y={py(2)} fill={accent} fontSize="9" fontWeight="bold">x={imgVertX}</text>
-          )}
+            {/* Garis asli */}
+            {isValid && (
+              <line x1={px(-5)} y1={py(m * -5 + c)} x2={px(5)} y2={py(m * 5 + c)}
+                stroke="#22d3ee" strokeWidth="2.5" opacity={showingResult ? 0.45 : 1} />
+            )}
+            {isValid && !showingResult && (
+              <text x={px(2)} y={py(m * 2 + c) - 8} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
+            )}
 
-          {/* Arc busur rotasi — titik awal & akhir tepat menyentuh garis asli & bayangan */}
-          {showingResult && animAngleAbs > 2 && (() => {
-            const r_svg = 42;
-            const r_math = r_svg / sc;
-            // Cari titik potong lingkaran radius r dengan garis y=mx+c (coords geser dari pusat)
-            // Substitusi: v = m*u + K, u²+v²=r² → u²(1+m²)+2mKu+(K²-r²)=0
-            const K = m * ca + c - cb;
-            const disc = r_math * r_math * (1 + m * m) - K * K;
-            let aStart: number;
-            if (disc >= 0) {
-              // Pilih titik potong (u positif = sisi kanan dari pusat)
-              const u = (-m * K + Math.sqrt(disc)) / (1 + m * m);
-              const v = m * u + K;
-              aStart = Math.atan2(v, u) * (180 / Math.PI);
-            } else {
-              // Cadangan: gunakan sudut kemiringan garis
-              aStart = Math.atan(m) * (180 / Math.PI);
-            }
-            return (
-              <ArcArrow cx={ca} cy={cb} r={r_svg} aStart={aStart} aEnd={aStart + displayAngle} color={accent} />
-            );
-          })()}
+            {/* Garis berputar (animasi & hasil) */}
+            {showingResult && isValid && animLine && (
+              <line
+                x1={px(-5)} y1={py(animLine.M * -5 + animLine.C)}
+                x2={px(5)}  y2={py(animLine.M * 5  + animLine.C)}
+                stroke={accent} strokeWidth="2.5"
+                strokeDasharray={show && !isAnimating ? '6,3' : 'none'}
+                opacity={0.9}
+              />
+            )}
+            {/* Label bayangan (hanya setelah animasi selesai) */}
+            {show && !isAnimating && isValid && !isVertical && animLine && (
+              <text x={px(-2)} y={py(animLine.M * -2 + animLine.C) - 8}
+                fill={accent} fontSize="9" fontWeight="bold">{fmtLineR(imgM, imgC)}</text>
+            )}
+            {/* Garis vertikal hasil (m=0 + 90°) */}
+            {show && !isAnimating && isValid && isVertical && (
+              <line x1={px(imgVertX)} y1={0} x2={px(imgVertX)} y2={S}
+                stroke={accent} strokeWidth="2.5" strokeDasharray="6,3" />
+            )}
+            {show && !isAnimating && isValid && isVertical && (
+              <text x={px(imgVertX) + 5} y={py(2)} fill={accent} fontSize="9" fontWeight="bold">x={imgVertX}</text>
+            )}
 
-          {/* Badge sudut — kotak warna di tengah atas SVG */}
-          {showingResult && animAngleAbs > 2 && (() => {
-            const bx = S / 2, by = 18, bw = 76, bh = 28;
-            return (
+            {/* ── Peran Pusat Rotasi — jari-jari dari pusat ke titik pada garis ── */}
+            {showingResult && isValid && !isVertical && (
               <g>
-                <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
-                  fill={isPos90 ? '#7c3aed' : isNeg90 ? '#f97316' : '#db2777'}
-                  stroke="#fff" strokeWidth="1.5" opacity="0.95" />
-                <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
-                  {Math.round(animAngleAbs)}°
-                </text>
+                {/* Jari-jari ke titik asli (tetap diam) — putus-putus cyan */}
+                <line
+                  x1={px(ca)} y1={py(cb)}
+                  x2={px(anchorMathX)} y2={py(anchorMathY)}
+                  stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.6"
+                />
+                {/* Jari-jari ke titik berputar (bergerak) — accent */}
+                <line
+                  x1={px(ca)} y1={py(cb)}
+                  x2={px(rotAnchorX)} y2={py(rotAnchorY)}
+                  stroke={accent} strokeWidth="1.8" strokeDasharray="5,3" opacity="0.85"
+                />
+                {/* Titik jangkar di garis asli */}
+                <circle cx={px(anchorMathX)} cy={py(anchorMathY)} r={4} fill="#22d3ee" opacity="0.9" />
+                {/* Titik berputar — lebih besar, berdenyut saat animasi */}
+                <circle cx={px(rotAnchorX)} cy={py(rotAnchorY)} r={5} fill={accent} opacity="0.95" />
+                <circle cx={px(rotAnchorX)} cy={py(rotAnchorY)} r={9} fill="none"
+                  stroke={accent} strokeWidth="1.2" opacity={isAnimating ? 0.45 : 0.2} />
+                {/* Label "r" di tengah jari-jari berputar */}
+                {(() => {
+                  const midX = (px(ca) + px(rotAnchorX)) / 2;
+                  const midY = (py(cb) + py(rotAnchorY)) / 2;
+                  const dx = px(rotAnchorX) - px(ca);
+                  const dy = py(rotAnchorY) - py(cb);
+                  const perp = Math.atan2(dy, dx);
+                  const offset = 10;
+                  return (
+                    <text
+                      x={midX + offset * Math.cos(perp - Math.PI / 2)}
+                      y={midY + offset * Math.sin(perp - Math.PI / 2)}
+                      fill={accent} fontSize="9" fontWeight="bold" textAnchor="middle"
+                      opacity="0.85"
+                    >r</text>
+                  );
+                })()}
+                {/* Label "r" di tengah jari-jari asli */}
+                {show && !isAnimating && (() => {
+                  const midX = (px(ca) + px(anchorMathX)) / 2;
+                  const midY = (py(cb) + py(anchorMathY)) / 2;
+                  const dx = px(anchorMathX) - px(ca);
+                  const dy = py(anchorMathY) - py(cb);
+                  const perp = Math.atan2(dy, dx);
+                  const offset = 10;
+                  return (
+                    <text
+                      x={midX + offset * Math.cos(perp + Math.PI / 2)}
+                      y={midY + offset * Math.sin(perp + Math.PI / 2)}
+                      fill="#22d3ee" fontSize="9" fontWeight="bold" textAnchor="middle"
+                      opacity="0.65"
+                    >r</text>
+                  );
+                })()}
               </g>
-            );
-          })()}
+            )}
 
-          {/* Label garis asli (selama animasi tampilkan di bawah agar tidak tumpuk badge) */}
-          {showingResult && isValid && (
-            <text x={px(2)} y={py(m * 2 + c) + 14} fill="#22d3ee" fontSize="8" fontWeight="bold" opacity="0.6">{input}</text>
-          )}
+            {/* Arc busur rotasi — titik awal & akhir tepat menyentuh garis asli & bayangan */}
+            {showingResult && animAngleAbs > 2 && (
+              <ArcArrow cx={ca} cy={cb} r={ARC_R_SVG} aStart={aStart} aEnd={aStart + displayAngle} color={accent} />
+            )}
 
-          {/* Pusat rotasi */}
-          <CenterMark x={ca} y={cb} color="#facc15" />
-          <text x={px(ca) + 14} y={py(cb) - 12} fill="#facc15" fontSize="9" fontWeight="bold">{centerLabel}</text>
-        </Grid>
+            {/* Badge sudut — kotak warna di tengah atas SVG */}
+            {showingResult && animAngleAbs > 2 && (() => {
+              const bx = S / 2, by = 18, bw = 76, bh = 28;
+              return (
+                <g>
+                  <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
+                    fill={isPos90 ? '#7c3aed' : isNeg90 ? '#f97316' : '#db2777'}
+                    stroke="#fff" strokeWidth="1.5" opacity="0.95" />
+                  <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    {Math.round(animAngleAbs)}°
+                  </text>
+                </g>
+              );
+            })()}
 
-        {/* Legenda */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
-          <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
-          <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">Pusat rotasi</span></div>
-          {showingResult && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accent }} /><span style={{ color: accent }}>Bayangan ({rotLabel})</span></div>}
+            {/* Label garis asli (selama animasi tampilkan di bawah agar tidak tumpuk badge) */}
+            {showingResult && isValid && (
+              <text x={px(2)} y={py(m * 2 + c) + 14} fill="#22d3ee" fontSize="8" fontWeight="bold" opacity="0.6">{input}</text>
+            )}
+
+            {/* Pusat rotasi */}
+            <CenterMark x={ca} y={cb} color="#facc15" />
+            <text x={px(ca) + 14} y={py(cb) - 12} fill="#facc15" fontSize="9" fontWeight="bold">{centerLabel}</text>
+          </Grid>
+
+          {/* Legenda */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
+            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
+            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">Pusat rotasi</span></div>
+            {showingResult && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accent }} /><span style={{ color: accent }}>Bayangan ({rotLabel})</span></div>}
+            {showingResult && !isVertical && (
+              <div className="flex items-center gap-1.5">
+                <span className="w-4 h-0.5 bg-cyan-400 inline-block rounded opacity-50 border-dashed" style={{ borderTop: '1px dashed #22d3ee', height: 0 }} />
+                <span className="text-white/40">r = jarak ke pusat (tetap sama)</span>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+        );
+      })()}
 
       {/* Info selama animasi */}
       {isAnimating && (
         <div className="bg-slate-700/40 rounded-xl p-3 text-xs font-body space-y-1">
           <p className="font-bold animate-pulse" style={{ color: accent }}>⏳ Memutar perlahan…</p>
           <p className="text-white/50">Sudut saat ini: <span className="text-white font-semibold">{Math.round(animAngleAbs)}°</span></p>
+          <p className="text-yellow-300/80">📍 Pusat <span className="font-bold">{centerLabel}</span> tetap diam — semua titik berputar mengelilinginya</p>
+          <p className="text-cyan-300/70">📏 Jarak titik ke pusat <span className="font-bold text-white">selalu sama</span> (jari-jari r tidak berubah)</p>
         </div>
       )}
 
