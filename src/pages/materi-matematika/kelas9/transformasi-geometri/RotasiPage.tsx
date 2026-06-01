@@ -1071,11 +1071,26 @@ function AnimasiRotasiKurva() {
             <text x={px(imgVertX) + 5} y={py(2)} fill={accent} fontSize="9" fontWeight="bold">x={imgVertX}</text>
           )}
 
-          {/* Arc busur rotasi di sekitar pusat — dari sudut garis asli ke sudut garis bayangan */}
+          {/* Arc busur rotasi — titik awal & akhir tepat menyentuh garis asli & bayangan */}
           {showingResult && animAngleAbs > 2 && (() => {
-            const lineAngleDeg = Math.atan(m) * (180 / Math.PI);
+            const r_svg = 42;
+            const r_math = r_svg / sc;
+            // Cari titik potong lingkaran radius r dengan garis y=mx+c (coords geser dari pusat)
+            // Substitusi: v = m*u + K, u²+v²=r² → u²(1+m²)+2mKu+(K²-r²)=0
+            const K = m * ca + c - cb;
+            const disc = r_math * r_math * (1 + m * m) - K * K;
+            let aStart: number;
+            if (disc >= 0) {
+              // Pilih titik potong (u positif = sisi kanan dari pusat)
+              const u = (-m * K + Math.sqrt(disc)) / (1 + m * m);
+              const v = m * u + K;
+              aStart = Math.atan2(v, u) * (180 / Math.PI);
+            } else {
+              // Cadangan: gunakan sudut kemiringan garis
+              aStart = Math.atan(m) * (180 / Math.PI);
+            }
             return (
-              <ArcArrow cx={ca} cy={cb} r={28} aStart={lineAngleDeg} aEnd={lineAngleDeg + displayAngle} color={accent} />
+              <ArcArrow cx={ca} cy={cb} r={r_svg} aStart={aStart} aEnd={aStart + displayAngle} color={accent} />
             );
           })()}
 
