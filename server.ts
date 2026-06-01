@@ -18,12 +18,14 @@ app.post('/api/chat', async (req, res) => {
   try {
     const messages = req.body?.messages
 
-    if (!process.env.AI_INTEGRATIONS_GEMINI_API_KEY) {
+    const geminiApiKey = process.env.GEMINI_API_KEY || process.env.AI_INTEGRATIONS_GEMINI_API_KEY
+
+    if (!geminiApiKey) {
       return res.status(503).json({ error: 'Layanan AI belum dikonfigurasi di server.' })
     }
 
     const geminiOptions: ConstructorParameters<typeof GoogleGenAI>[0] = {
-      apiKey: process.env.AI_INTEGRATIONS_GEMINI_API_KEY,
+      apiKey: geminiApiKey,
     }
     if (process.env.AI_INTEGRATIONS_GEMINI_BASE_URL) {
       geminiOptions.httpOptions = {
