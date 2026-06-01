@@ -936,54 +936,38 @@ function AnimasiRefleksiKurva() {
   const reflected = isValid && parsed ? reflectLinearR(parsed.m, parsed.c, mirror) : null;
   const mc        = MIRRORS.find(m => m.id === mirror)!;
 
-  const rows = [
-    ['7','8','9','+','y'],
-    ['4','5','6','-','x'],
-    ['1','2','3','.','='],
-    ['0','CLR','⌫'],
-  ];
-
-  const handleKey = (k: string) => {
-    playPopSound(); setShow(false);
-    if (k === '⌫')  { setInput(p => p.slice(0, -1)); return; }
-    if (k === 'CLR') { setInput(''); return; }
-    setInput(p => p + k);
-  };
-
   return (
     <div className="space-y-4 pt-2">
       <p className="font-bold text-sm font-body" style={{ color: mc.color }}>🪞 Animasi Interaktif — Refleksi Kurva Linear</p>
 
       {/* Input */}
-      <div className="space-y-1">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y=mx+c atau ax+by=c)</p>
-        <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
-          <span>{input || <span className="text-white/30">ketik...</span>}</span>
-          <span className="animate-pulse text-cyan-400">|</span>
+      <div className="space-y-2">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
+        <input
+          type="text"
+          value={input}
+          onChange={e => { setInput(e.target.value.replace(/\s/g, '')); setShow(false); }}
+          placeholder="Contoh: y=2x+3 atau 2x-y=1"
+          className="w-full bg-slate-800 border border-slate-500 focus:border-violet-400 focus:outline-none rounded-lg px-4 py-2.5 font-mono text-white text-sm transition-colors"
+        />
+        <div className="bg-slate-800/60 border border-white/10 rounded-lg px-3 py-2 space-y-1">
+          <p className="text-[10px] text-white/40 font-body uppercase tracking-wider">📋 Petunjuk Format</p>
+          <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] font-mono">
+            <span className="text-cyan-300">y=2x+3</span>
+            <span className="text-white/30">·</span>
+            <span className="text-cyan-300">y=-x+1</span>
+            <span className="text-white/30">·</span>
+            <span className="text-cyan-300">y=3x</span>
+            <span className="text-white/30">·</span>
+            <span className="text-violet-300">2x+3y=6</span>
+            <span className="text-white/30">·</span>
+            <span className="text-violet-300">x-y=4</span>
+          </div>
+          <p className="text-[10px] text-white/30 font-body">Ketik langsung · tanpa spasi · gunakan keyboard laptop/HP</p>
         </div>
         {!isValid && input.length > 0 && (
-          <p className="text-[11px] text-red-400 font-body">Format: y=2x+3 · y=-x+1 · 2x+3y=6 · x-y=4</p>
+          <p className="text-[11px] text-red-400 font-body">⚠ Format tidak dikenali. Coba: y=2x+3 atau 2x-y=1</p>
         )}
-      </div>
-
-      {/* Keyboard */}
-      <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3 space-y-1.5">
-        <p className="text-[10px] text-white/30 font-body text-center uppercase tracking-wider mb-1">Keyboard</p>
-        {rows.map((row, ri) => (
-          <div key={ri} className="flex gap-1.5">
-            {row.map(k => (
-              <button key={k} onClick={() => handleKey(k)}
-                className={`flex-1 py-2 rounded-lg text-sm font-bold font-mono transition-all active:scale-90 select-none cursor-pointer
-                  ${k === '⌫'  ? 'bg-red-500/25 border border-red-500/50 text-red-300 hover:bg-red-500/45' :
-                    k === 'CLR' ? 'bg-slate-600/60 border border-slate-500 text-slate-300 hover:bg-slate-500/70' :
-                    ['x','y','=','+','-','.'].includes(k)
-                      ? 'bg-violet-500/20 border border-violet-500/40 text-violet-200 hover:bg-violet-500/40'
-                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/25'
-                  }`}
-              >{k}</button>
-            ))}
-          </div>
-        ))}
       </div>
 
       {/* Mirror selector */}
@@ -1081,19 +1065,6 @@ function AnimasiRefleksiKurvaK() {
   const reflected = isValid ? computeReflected() : null;
   const clampK = (v: number) => Math.max(-5, Math.min(5, v));
 
-  const rows = [
-    ['7','8','9','+','y'],
-    ['4','5','6','-','x'],
-    ['1','2','3','.','='],
-    ['0','CLR','⌫'],
-  ];
-  const handleKey = (key: string) => {
-    playPopSound(); setShow(false);
-    if (key === '⌫')  { setInput(p => p.slice(0, -1)); return; }
-    if (key === 'CLR') { setInput(''); return; }
-    setInput(p => p + key);
-  };
-
   return (
     <div className="space-y-4 pt-2">
       <p className="font-bold text-sm font-body" style={{ color }}>
@@ -1113,35 +1084,33 @@ function AnimasiRefleksiKurvaK() {
       </div>
 
       {/* Input garis */}
-      <div className="space-y-1">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y=mx+c atau ax+by=c)</p>
-        <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
-          <span>{input || <span className="text-white/30">ketik...</span>}</span>
-          <span className="animate-pulse text-cyan-400">|</span>
+      <div className="space-y-2">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
+        <input
+          type="text"
+          value={input}
+          onChange={e => { setInput(e.target.value.replace(/\s/g, '')); setShow(false); }}
+          placeholder="Contoh: y=2x+1 atau 2x-y=4"
+          className="w-full bg-slate-800 border border-slate-500 focus:border-orange-400 focus:outline-none rounded-lg px-4 py-2.5 font-mono text-white text-sm transition-colors"
+        />
+        <div className="bg-slate-800/60 border border-white/10 rounded-lg px-3 py-2 space-y-1">
+          <p className="text-[10px] text-white/40 font-body uppercase tracking-wider">📋 Petunjuk Format</p>
+          <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] font-mono">
+            <span className="text-cyan-300">y=2x+1</span>
+            <span className="text-white/30">·</span>
+            <span className="text-cyan-300">y=-3x+5</span>
+            <span className="text-white/30">·</span>
+            <span className="text-cyan-300">y=x</span>
+            <span className="text-white/30">·</span>
+            <span className="text-orange-300">2x+3y=6</span>
+            <span className="text-white/30">·</span>
+            <span className="text-orange-300">x-y=4</span>
+          </div>
+          <p className="text-[10px] text-white/30 font-body">Ketik langsung · tanpa spasi · gunakan keyboard laptop/HP</p>
         </div>
         {!isValid && input.length > 0 && (
-          <p className="text-[11px] text-red-400 font-body">Format: y=2x+1 · y=-3x+5 · 2x+3y=6 · x-y=4</p>
+          <p className="text-[11px] text-red-400 font-body">⚠ Format tidak dikenali. Coba: y=2x+1 atau 2x-y=4</p>
         )}
-      </div>
-
-      {/* Keyboard */}
-      <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3 space-y-1.5">
-        <p className="text-[10px] text-white/30 font-body text-center uppercase tracking-wider mb-1">Keyboard</p>
-        {rows.map((row, ri) => (
-          <div key={ri} className="flex gap-1.5">
-            {row.map(key => (
-              <button key={key} onClick={() => handleKey(key)}
-                className={`flex-1 py-2 rounded-lg text-sm font-bold font-mono transition-all active:scale-90 select-none cursor-pointer
-                  ${key === '⌫'  ? 'bg-red-500/25 border border-red-500/50 text-red-300 hover:bg-red-500/45' :
-                    key === 'CLR' ? 'bg-slate-600/60 border border-slate-500 text-slate-300 hover:bg-slate-500/70' :
-                    ['x','y','=','+','-','.'].includes(key)
-                      ? 'bg-orange-500/20 border border-orange-500/40 text-orange-200 hover:bg-orange-500/40'
-                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/25'
-                  }`}
-              >{key}</button>
-            ))}
-          </div>
-        ))}
       </div>
 
       {/* Nilai k */}
