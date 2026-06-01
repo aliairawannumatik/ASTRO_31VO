@@ -1635,26 +1635,40 @@ const RotasiPage = () => {
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded font-body">SEDANG</span>
                     <span className="font-body font-semibold text-white text-sm">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
                     <p className="font-body text-sm text-white">
-                      Garis <InlineMath math="y = x + 4" /> dirotasi <strong className="text-yellow-300">90° berlawanan arah jarum jam</strong> terhadap titik asal <InlineMath math="O(0,0)" />. Tentukan persamaan bayangan garis tersebut!
+                      Garis <InlineMath math="2x - y + 3 = 0" /> dirotasi <strong className="text-yellow-300">90° searah arah jarum jam</strong> terhadap pusat <InlineMath math="(1,\,-2)" />. Tentukan persamaan bayangan garis tersebut!
                     </p>
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm font-body text-white/80 pl-2 pt-1">
+                      <div><span className="text-yellow-300 font-semibold">A.</span> <InlineMath math="x + 2y - 4 = 0" /></div>
+                      <div><span className="text-yellow-300 font-semibold">C.</span> <InlineMath math="2x + y - 4 = 0" /></div>
+                      <div><span className="text-yellow-300 font-semibold">B.</span> <InlineMath math="x + 2y + 4 = 0" /></div>
+                      <div><span className="text-yellow-300 font-semibold">D.</span> <InlineMath math="x - 2y + 4 = 0" /></div>
+                    </div>
                   </div>
-                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-2">
+                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-3">
                     <p className="text-xs font-semibold text-yellow-400 font-body">PEMBAHASAN:</p>
-                    <p className="text-sm text-white/80 font-body">Rotasi 90° berlawanan arah jarum jam memetakan <InlineMath math="(x, y) \to (-y, x)" />. Inversnya:</p>
-                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                      <BlockMath math="x = y', \quad y = -x'" />
+                    <p className="text-sm text-white/80 font-body">
+                      Rotasi 90° searah jarum jam terhadap pusat <InlineMath math="(p,q) = (1,-2)" /> memetakan:
+                    </p>
+                    <div className="bg-slate-900/60 rounded-lg p-3">
+                      <BlockMath math="(x,y) \;\to\; \bigl(p+(y-q),\; q-(x-p)\bigr) = (y+3,\; -x-1)" />
                     </div>
-                    <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = x + 4" /> (di mana <InlineMath math="m = 1" />):</p>
+                    <p className="text-sm text-white/80 font-body">Cari inversnya (<InlineMath math="x,y" /> dalam <InlineMath math="x',y'" />):</p>
                     <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                      <BlockMath math="-x' = y' + 4" />
-                      <BlockMath math="y' = -x' - 4" />
+                      <BlockMath math="x' = y + 3 \;\Rightarrow\; y = x' - 3" />
+                      <BlockMath math="y' = -x - 1 \;\Rightarrow\; x = -y' - 1" />
                     </div>
-                    <p className="font-body font-bold text-yellow-300">✅ <strong>Bayangan:</strong> <InlineMath math="y = -x - 4" /></p>
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                      <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Catatan</p>
-                      <p className="text-xs text-white/60 font-body mt-1">Gradien berubah dari <InlineMath math="m = 1" /> menjadi <InlineMath math="-\frac{1}{1} = -1" />. Kedua garis saling tegak lurus (<InlineMath math="m_1 \times m_2 = 1 \times (-1) = -1" />).</p>
+                    <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="2x - y + 3 = 0" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="2(-y'-1) - (x'-3) + 3 = 0" />
+                      <BlockMath math="-2y' - 2 - x' + 3 + 3 = 0" />
+                      <BlockMath math="-x' - 2y' + 4 = 0 \;\implies\; \boxed{x' + 2y' - 4 = 0}" />
+                    </div>
+                    <p className="font-body font-bold text-yellow-300">✅ <strong>Bayangan:</strong> <InlineMath math="x + 2y - 4 = 0" /> &nbsp;→ Jawaban <strong>A</strong></p>
+                    <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                      <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi dengan titik</p>
+                      <p className="text-xs text-white/60 font-body">Ambil titik <InlineMath math="(0, 3)" /> di garis asli (cek: <InlineMath math="0-3+3=0" /> ✓). Rotasi 90° SAJ pusat <InlineMath math="(1,-2)" />: <InlineMath math="(0,3)\to(6,-1)" />. Cek bayangan: <InlineMath math="6+2(-1)-4=0" /> ✓</p>
                     </div>
                   </div>
                 </div>
@@ -1665,28 +1679,75 @@ const RotasiPage = () => {
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded font-body">SULIT</span>
                     <span className="font-body font-semibold text-white text-sm">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
                     <p className="font-body text-sm text-white">
-                      Bayangan suatu garis setelah dirotasi <strong className="text-red-300">180°</strong> terhadap <InlineMath math="O(0,0)" /> adalah <InlineMath math="y = -2x + 5" />. Tentukan persamaan <strong className="text-red-300">garis sebelum dirotasi</strong>!
+                      Garis <InlineMath math="y = 2x + 1" /> ditranslasi oleh <InlineMath math="T(3,\,-1)" />, kemudian dirotasi <strong className="text-red-300">90° berlawanan arah jarum jam</strong> terhadap <InlineMath math="O(0,0)" />. Tentukan persamaan bayangan akhir!
                     </p>
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm font-body text-white/80 pl-2 pt-1">
+                      <div><span className="text-red-300 font-semibold">A.</span> <InlineMath math="x + 2y - 6 = 0" /></div>
+                      <div><span className="text-red-300 font-semibold">C.</span> <InlineMath math="2x - y + 6 = 0" /></div>
+                      <div><span className="text-red-300 font-semibold">B.</span> <InlineMath math="x + 2y + 6 = 0" /></div>
+                      <div><span className="text-red-300 font-semibold">D.</span> <InlineMath math="x - 2y + 6 = 0" /></div>
+                    </div>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
                     <p className="text-xs font-semibold text-red-400 font-body">PEMBAHASAN:</p>
-                    <p className="text-sm text-white/80 font-body">
-                      Rotasi 180° memetakan garis asli <InlineMath math="y = mx + c" /> ke bayangan <InlineMath math="y = mx - c" />. Artinya jika bayangan diketahui <InlineMath math="y = -2x + 5" />, maka:
-                    </p>
-                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 text-sm font-body text-white/80">
-                      <BlockMath math="m = -2 \quad \text{dan} \quad -c = 5 \implies c = -5" />
+                    <p className="text-sm text-white/80 font-body font-semibold">Langkah 1 — Translasi <InlineMath math="T(3,-1)" />:</p>
+                    <p className="text-sm text-white/70 font-body">Invers translasi: <InlineMath math="x = x' - 3,\quad y = y' + 1" />. Substitusi ke <InlineMath math="y = 2x + 1" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="y' + 1 = 2(x' - 3) + 1" />
+                      <BlockMath math="y' = 2x' - 6" />
                     </div>
-                    <p className="text-sm text-white/80 font-body">Sehingga garis aslinya adalah:</p>
-                    <div className="bg-slate-900/60 rounded-lg p-3">
-                      <BlockMath math="y = -2x + (-5) = -2x - 5" />
+                    <p className="text-sm text-white/80 font-body font-semibold">Langkah 2 — Rotasi 90° berlawanan AJ terhadap O(0,0):</p>
+                    <p className="text-sm text-white/70 font-body">Pemetaan: <InlineMath math="(x,y)\to(-y,x)" />. Invers: <InlineMath math="x = y',\quad y = -x'" />. Substitusi ke <InlineMath math="y' = 2x' - 6" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="-x'' = 2y'' - 6" />
+                      <BlockMath math="x'' + 2y'' - 6 = 0" />
                     </div>
-                    <p className="font-body font-bold text-red-300">✅ <strong>Garis sebelum rotasi:</strong> <InlineMath math="y = -2x - 5" /></p>
+                    <p className="font-body font-bold text-red-300">✅ <strong>Bayangan akhir:</strong> <InlineMath math="x + 2y - 6 = 0" /> &nbsp;→ Jawaban <strong>A</strong></p>
                     <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
                       <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi</p>
-                      <p className="text-xs text-white/60 font-body">Rotasi 180° garis <InlineMath math="y = -2x - 5" />: substitusi <InlineMath math="x = -x',\; y = -y'" />:</p>
-                      <BlockMath math="-y' = -2(-x') - 5 = 2x' - 5 \implies y' = -2x' + 5 \checkmark" />
+                      <p className="text-xs text-white/60 font-body">Titik <InlineMath math="(0,1)" /> di garis asli → translasi: <InlineMath math="(3,0)" /> → rotasi 90° BAJ: <InlineMath math="(0,3)" />. Cek: <InlineMath math="0+2(3)-6=0" /> ✓</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SANGAT SULIT */}
+                <div className="border-l-4 border-purple-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2 py-1 rounded font-body">OLIMPIADE</span>
+                    <span className="font-body font-semibold text-white text-sm">Contoh 4</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Garis <InlineMath math="3x - y + 2 = 0" /> dicerminkan terhadap garis <InlineMath math="y = 1" />, kemudian dirotasi <strong className="text-purple-300">90° berlawanan arah jarum jam</strong> terhadap pusat <InlineMath math="(2,\,1)" />. Tentukan persamaan bayangan akhir!
+                    </p>
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm font-body text-white/80 pl-2 pt-1">
+                      <div><span className="text-purple-300 font-semibold">A.</span> <InlineMath math="x - 3y - 6 = 0" /></div>
+                      <div><span className="text-purple-300 font-semibold">C.</span> <InlineMath math="3x - y + 6 = 0" /></div>
+                      <div><span className="text-purple-300 font-semibold">B.</span> <InlineMath math="x + 3y + 6 = 0" /></div>
+                      <div><span className="text-purple-300 font-semibold">D.</span> <InlineMath math="x - 3y + 6 = 0" /></div>
+                    </div>
+                  </div>
+                  <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-4 space-y-3">
+                    <p className="text-xs font-semibold text-purple-300 font-body">PEMBAHASAN:</p>
+                    <p className="text-sm text-white/80 font-body font-semibold">Langkah 1 — Refleksi terhadap <InlineMath math="y = 1" />:</p>
+                    <p className="text-sm text-white/70 font-body">Cermin <InlineMath math="y = k" /> memetakan <InlineMath math="(x,y)\to(x,\, 2k-y)" />. Dengan <InlineMath math="k=1" />: <InlineMath math="(x,y)\to(x,\, 2-y)" />. Invers: <InlineMath math="x = x',\; y = 2 - y'" />. Substitusi ke <InlineMath math="3x - y + 2 = 0" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="3x' - (2 - y') + 2 = 0 \;\implies\; 3x' + y' = 0" />
+                    </div>
+                    <p className="text-sm text-white/80 font-body font-semibold">Langkah 2 — Rotasi 90° berlawanan AJ terhadap pusat <InlineMath math="(2,1)" />:</p>
+                    <p className="text-sm text-white/70 font-body">Pemetaan: <InlineMath math="(x,y)\to\bigl(2-(y-1),\;1+(x-2)\bigr)=(3-y,\;x-1)" />. Invers: <InlineMath math="x = y'' + 1,\quad y = 3 - x''" />. Substitusi ke <InlineMath math="3x + y = 0" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="3(y'' + 1) + (3 - x'') = 0" />
+                      <BlockMath math="3y'' + 3 + 3 - x'' = 0" />
+                      <BlockMath math="-x'' + 3y'' + 6 = 0 \;\implies\; \boxed{x'' - 3y'' - 6 = 0}" />
+                    </div>
+                    <p className="font-body font-bold text-purple-300">✅ <strong>Bayangan akhir:</strong> <InlineMath math="x - 3y - 6 = 0" /> &nbsp;→ Jawaban <strong>A</strong></p>
+                    <div className="bg-slate-900/50 rounded-lg p-3 space-y-2">
+                      <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi dengan titik</p>
+                      <p className="text-xs text-white/60 font-body">Titik <InlineMath math="(0,2)" /> di garis asli → refleksi <InlineMath math="y=1" />: <InlineMath math="(0,0)" /> → rotasi 90° BAJ pusat <InlineMath math="(2,1)" />: geser <InlineMath math="(-2,-1)" />, putar: <InlineMath math="(1,-2)" />, geser balik: <InlineMath math="(3,-1)" />.</p>
+                      <p className="text-xs text-white/60 font-body">Cek <InlineMath math="x-3y-6=0" />: <InlineMath math="3-3(-1)-6 = 3+3-6 = 0" /> ✓</p>
                     </div>
                   </div>
                 </div>
