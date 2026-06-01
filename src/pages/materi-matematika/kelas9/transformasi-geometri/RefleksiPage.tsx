@@ -1579,6 +1579,47 @@ const RefleksiPage = () => {
                   <p className="text-xs text-white/50 font-body mt-1">atau (aksen diabaikan):</p>
                   <BlockMath math="\boxed{y = -mx - c}" />
                 </div>
+                {/* Penurunan Rumus x=k dan y=k */}
+                <div className="bg-slate-800/60 rounded-xl p-4 space-y-4">
+                  <p className="text-xs font-semibold text-orange-400 font-body uppercase tracking-wide">Penurunan Rumus — Refleksi terhadap x = k dan y = k</p>
+
+                  {/* x=k */}
+                  <div className="space-y-2">
+                    <p className="text-sm font-bold text-orange-300 font-body">① Cermin x = k</p>
+                    <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="x = k" /> memetakan <InlineMath math="(x, y) \to (2k-x,\; y)" />, sehingga:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="x' = 2k - x \implies x = 2k - x'" />
+                      <BlockMath math="y' = y" />
+                    </div>
+                    <p className="text-sm text-white/80 font-body">Substitusikan ke <InlineMath math="y = mx + c" />:</p>
+                    <div className="bg-orange-950/50 border border-orange-500/30 rounded-xl p-4 text-center space-y-1">
+                      <BlockMath math="y' = m(2k - x') + c" />
+                      <BlockMath math="\boxed{y = -mx + (2mk + c)}" />
+                    </div>
+                  </div>
+
+                  {/* y=k */}
+                  <div className="space-y-2">
+                    <p className="text-sm font-bold text-pink-300 font-body">② Cermin y = k</p>
+                    <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="y = k" /> memetakan <InlineMath math="(x, y) \to (x,\; 2k-y)" />, sehingga:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="x' = x" />
+                      <BlockMath math="y' = 2k - y \implies y = 2k - y'" />
+                    </div>
+                    <p className="text-sm text-white/80 font-body">Substitusikan ke <InlineMath math="y = mx + c" />:</p>
+                    <div className="bg-pink-950/50 border border-pink-500/30 rounded-xl p-4 text-center space-y-1">
+                      <BlockMath math="2k - y' = mx' + c" />
+                      <BlockMath math="\boxed{y = -mx + (2k - c)}" />
+                    </div>
+                  </div>
+
+                  <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                    <p className="text-sm text-yellow-200 font-body">
+                      <strong>Perhatikan:</strong> Baik refleksi x=k maupun y=k menghasilkan gradien <InlineMath math="-m" /> (tanda berubah). Yang berbeda hanya nilai intersep-y-nya.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-sm text-yellow-200 font-body">
                     <strong>Catatan:</strong> Gradien <InlineMath math="m" /> <em>berubah tanda</em> setelah refleksi terhadap sumbu X. Intersep-y juga berubah tanda. Untuk cermin lain, lihat tabel di bawah.
@@ -1715,52 +1756,6 @@ const RefleksiPage = () => {
                     <p className="text-xs text-white/60 font-body">Cerminkan <InlineMath math="y = 4x + 5" /> terhadap sumbu Y → substitusi <InlineMath math="x = -x',\; y = y'" />:</p>
                     <BlockMath math="y' = 4(-x') + 5 = -4x' + 5 \checkmark" />
                   </div>
-                </div>
-              </div>
-
-              {/* Divider */}
-              <div className="border-t border-white/10 pt-2">
-                <p className="text-xs font-semibold text-white/40 font-body uppercase tracking-wider mb-4">Refleksi terhadap Garis x = k dan y = k</p>
-              </div>
-
-              {/* Penurunan Rumus x=k dan y=k */}
-              <div className="bg-slate-800/60 rounded-xl p-4 space-y-4">
-                <p className="text-xs font-semibold text-orange-400 font-body uppercase tracking-wide">Penurunan Rumus — Refleksi terhadap x = k dan y = k</p>
-
-                {/* x=k */}
-                <div className="space-y-2">
-                  <p className="text-sm font-bold text-orange-300 font-body">① Cermin x = k</p>
-                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="x = k" /> memetakan <InlineMath math="(x, y) \to (2k-x,\; y)" />, sehingga:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="x' = 2k - x \implies x = 2k - x'" />
-                    <BlockMath math="y' = y" />
-                  </div>
-                  <p className="text-sm text-white/80 font-body">Substitusikan ke <InlineMath math="y = mx + c" />:</p>
-                  <div className="bg-orange-950/50 border border-orange-500/30 rounded-xl p-4 text-center space-y-1">
-                    <BlockMath math="y' = m(2k - x') + c" />
-                    <BlockMath math="\boxed{y = -mx + (2mk + c)}" />
-                  </div>
-                </div>
-
-                {/* y=k */}
-                <div className="space-y-2">
-                  <p className="text-sm font-bold text-pink-300 font-body">② Cermin y = k</p>
-                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="y = k" /> memetakan <InlineMath math="(x, y) \to (x,\; 2k-y)" />, sehingga:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="x' = x" />
-                    <BlockMath math="y' = 2k - y \implies y = 2k - y'" />
-                  </div>
-                  <p className="text-sm text-white/80 font-body">Substitusikan ke <InlineMath math="y = mx + c" />:</p>
-                  <div className="bg-pink-950/50 border border-pink-500/30 rounded-xl p-4 text-center space-y-1">
-                    <BlockMath math="2k - y' = mx' + c" />
-                    <BlockMath math="\boxed{y = -mx + (2k - c)}" />
-                  </div>
-                </div>
-
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="text-sm text-yellow-200 font-body">
-                    <strong>Perhatikan:</strong> Baik refleksi x=k maupun y=k menghasilkan gradien <InlineMath math="-m" /> (tanda berubah). Yang berbeda hanya nilai intersep-y-nya.
-                  </p>
                 </div>
               </div>
 
