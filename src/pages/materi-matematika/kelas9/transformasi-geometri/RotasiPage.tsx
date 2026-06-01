@@ -833,7 +833,13 @@ function round2(n: number) { return Math.round(n * 100) / 100; }
 function AnimasiRotasiKurva() {
   const [input, setInput] = useState('y=2x+1');
   const [rotation, setRotation] = useState<'90ccw' | '90cw' | '180'>('90ccw');
+  const [centerType, setCenterType] = useState<'origin' | 'custom'>('origin');
+  const [inputA, setInputA] = useState('0');
+  const [inputB, setInputB] = useState('0');
   const [show, setShow] = useState(false);
+
+  const ca = centerType === 'origin' ? 0 : (parseFloat(inputA) || 0);
+  const cb = centerType === 'origin' ? 0 : (parseFloat(inputB) || 0);
 
   /* Auto-detect format: coba y=mx+c dulu, lalu ax+by=c */
   const parsedSlope = parseLinearR(input);
@@ -845,26 +851,40 @@ function AnimasiRotasiKurva() {
   const m = parsed?.m ?? 0;
   const c = parsed?.c ?? 0;
 
+  /* Rotasi kurva linear terhadap titik (ca, cb) */
   const isVertical = m === 0 && rotation !== '180';
   let imgM = 0, imgC = 0, imgVertX = 0;
   if (rotation === '180') {
-    imgM = m; imgC = round2(-c);
+    imgM = m;
+    imgC = round2(2 * cb - 2 * ca * m - c);
   } else if (rotation === '90ccw') {
-    if (m === 0) { imgVertX = round2(-c); }
-    else { imgM = round2(-1 / m); imgC = round2(-c / m); }
+    if (m === 0) { imgVertX = round2(ca + cb - c); }
+    else { imgM = round2(-1 / m); imgC = round2((ca * (1 - m) + cb * (m + 1) - c) / m); }
   } else {
-    if (m === 0) { imgVertX = round2(c); }
-    else { imgM = round2(-1 / m); imgC = round2(c / m); }
+    if (m === 0) { imgVertX = round2(ca + c - cb); }
+    else { imgM = round2(-1 / m); imgC = round2((ca * (1 + m) + cb * (m - 1) + c) / m); }
   }
 
-  const accent = rotation === '90ccw' ? '#a78bfa' : rotation === '90cw' ? '#fb923c' : '#f472b6';
-  const rotLabel = rotation === '90ccw' ? '90° Berlawanan AJ' : rotation === '90cw' ? '90° Searah AJ' : '180°';
+  const accent   = rotation === '90ccw' ? '#a78bfa' : rotation === '90cw' ? '#fb923c' : '#f472b6';
+  const rotLabel = rotation === '90ccw' ? '90° BAJ / 270° SAJ' : rotation === '90cw' ? '270° BAJ / 90° SAJ' : '180°';
+  const centerLabel = centerType === 'origin' ? 'O(0,0)' : `(${ca}, ${cb})`;
+
+  const changeAndReset = (fn: () => void) => { fn(); setShow(false); };
 
   const handleReset = () => {
     playPopSound(); setShow(false);
     setInput('y=2x+1');
     setRotation('90ccw');
+    setCenterType('origin');
+    setInputA('0');
+    setInputB('0');
   };
+
+  const ROT_OPTS = [
+    { val: '90ccw' as const, line1: '90° Berlawanan AJ', line2: '270° Searah AJ',      color: '#a78bfa' },
+    { val: '90cw'  as const, line1: '270° Berlawanan AJ', line2: '90° Searah AJ',       color: '#fb923c' },
+    { val: '180'   as const, line1: '180°',               line2: 'Berlawanan/Searah AJ', color: '#f472b6' },
+  ];
 
   return (
     <div className="space-y-4 pt-2">
@@ -874,16 +894,16 @@ function AnimasiRotasiKurva() {
       <div className="bg-slate-800/70 border border-cyan-500/25 rounded-xl p-3 space-y-2">
         <p className="text-[11px] font-bold text-cyan-300 font-body uppercase tracking-wider">📝 Petunjuk Pengetikan</p>
         <div className="grid grid-cols-1 gap-1.5 text-xs font-body">
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-2 flex-wrap">
             <span className="text-violet-400 font-bold font-mono shrink-0">Format 1</span>
-            <span className="text-white/60">y = mx + c</span>
-            <span className="text-white/30 mx-1">→</span>
+            <span className="text-white/60 shrink-0">y = mx + c</span>
+            <span className="text-white/30 shrink-0">→</span>
             <span className="text-white/80 font-mono">Ketik: <span className="text-violet-300">y=2x+1</span> atau <span className="text-violet-300">y=-3x+4</span></span>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-2 flex-wrap">
             <span className="text-orange-400 font-bold font-mono shrink-0">Format 2</span>
-            <span className="text-white/60">ax + by = c</span>
-            <span className="text-white/30 mx-1">→</span>
+            <span className="text-white/60 shrink-0">ax + by = c</span>
+            <span className="text-white/30 shrink-0">→</span>
             <span className="text-white/80 font-mono">Ketik: <span className="text-orange-300">2x+3y=6</span> atau <span className="text-orange-300">x-y=4</span></span>
           </div>
         </div>
@@ -915,16 +935,46 @@ function AnimasiRotasiKurva() {
         )}
       </div>
 
+      {/* Pusat Rotasi */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Rotasi</p>
+        <div className="flex gap-2">
+          {(['origin', 'custom'] as const).map(type => (
+            <button key={type}
+              onClick={() => changeAndReset(() => { playPopSound(); setCenterType(type); })}
+              className={`flex-1 py-2 rounded-xl text-xs font-bold font-body border transition-all ${centerType === type ? 'bg-yellow-500/80 border-yellow-400 text-black shadow-md' : 'bg-slate-800/60 border-white/10 text-white/60 hover:text-white/80'}`}
+            >{type === 'origin' ? 'O(0, 0)' : 'Titik (a, b)'}</button>
+          ))}
+        </div>
+        {centerType === 'custom' && (
+          <div className="flex items-center gap-3 pt-1 flex-wrap">
+            <label className="text-xs text-white/60 font-body">a =</label>
+            <input type="number" value={inputA}
+              onChange={e => changeAndReset(() => setInputA(e.target.value))}
+              className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-yellow-400" />
+            <label className="text-xs text-white/60 font-body">b =</label>
+            <input type="number" value={inputB}
+              onChange={e => changeAndReset(() => setInputB(e.target.value))}
+              className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-yellow-400" />
+          </div>
+        )}
+      </div>
+
       {/* Pilih rotasi */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Sudut Rotasi terhadap O(0,0)</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">
+          Sudut Rotasi terhadap <span className="text-yellow-300 font-bold">{centerLabel}</span>
+        </p>
         <div className="flex gap-2 flex-wrap">
-          {([['90ccw','90° Berlawanan AJ','#a78bfa'],['90cw','90° Searah AJ','#fb923c'],['180','180°','#f472b6']] as const).map(([val, label, color]) => (
+          {ROT_OPTS.map(({ val, line1, line2, color }) => (
             <button key={val}
               onClick={() => { playPopSound(); setRotation(val); setShow(false); }}
-              className={`flex-1 py-2 rounded-xl text-xs font-bold font-body border transition-all ${rotation === val ? 'text-black' : 'bg-slate-800/60 border-white/10 text-white/60 hover:text-white/80'}`}
+              className={`flex-1 py-2 px-1 rounded-xl text-center font-body border transition-all leading-tight ${rotation === val ? 'text-black' : 'bg-slate-800/60 border-white/10 text-white/60 hover:text-white/80'}`}
               style={rotation === val ? { background: color, borderColor: color } : {}}
-            >{label}</button>
+            >
+              <span className="block text-[11px] font-bold">{line1}</span>
+              <span className={`block text-[9px] font-semibold ${rotation === val ? 'text-black/70' : 'text-white/35'}`}>{line2}</span>
+            </button>
           ))}
         </div>
       </div>
@@ -961,9 +1011,13 @@ function AnimasiRotasiKurva() {
           {show && isValid && isVertical && (
             <text x={px(imgVertX) + 5} y={py(2)} fill={accent} fontSize="9" fontWeight="bold">x={imgVertX}</text>
           )}
+          {/* Pusat rotasi */}
+          <CenterMark x={ca} y={cb} color="#facc15" />
+          <text x={px(ca) + 14} y={py(cb) - 12} fill="#facc15" fontSize="9" fontWeight="bold">{centerLabel}</text>
         </Grid>
         <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
           <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
+          <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">Pusat rotasi</span></div>
           {show && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accent }} /><span style={{ color: accent }}>Bayangan ({rotLabel})</span></div>}
         </div>
       </div>
@@ -971,21 +1025,12 @@ function AnimasiRotasiKurva() {
       {/* Hasil */}
       {show && isValid && (
         <div className="rounded-xl p-4 space-y-1.5 border" style={{ background: `${accent}15`, borderColor: `${accent}40` }}>
-          <p className="text-xs font-semibold font-body uppercase tracking-wide" style={{ color: accent }}>HASIL ROTASI:</p>
+          <p className="text-xs font-semibold font-body uppercase tracking-wide" style={{ color: accent }}>HASIL ROTASI terhadap {centerLabel}:</p>
           <div className="flex items-center gap-2 text-sm font-body flex-wrap">
             <span className="text-cyan-300 font-bold">{input}</span>
             <span className="text-white/30 text-lg">→</span>
             <span className="font-bold" style={{ color: accent }}>
-              {isVertical
-                ? `x = ${imgVertX}`
-                : isStd && parsedStd
-                  ? fmtStdR(parsedStd.a, parsedStd.b_coef, (() => {
-                      if (rotation === '180') return -parsedStd.c_val;
-                      if (rotation === '90ccw') return -parsedStd.c_val / parsedStd.a * parsedStd.b_coef;
-                      return parsedStd.c_val / parsedStd.a * parsedStd.b_coef;
-                    })())
-                  : fmtLineR(imgM, imgC)
-              }
+              {isVertical ? `x = ${imgVertX}` : fmtLineR(imgM, imgC)}
             </span>
           </div>
           {isVertical && <p className="text-[11px] text-yellow-200 font-body">⚠️ Rotasi garis horizontal menghasilkan garis vertikal.</p>}
