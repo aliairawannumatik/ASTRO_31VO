@@ -877,6 +877,44 @@ function fmtLineR(m: number, c: number): string {
   return `y = ${ms}x${cp}`;
 }
 
+/* Parse ax + by = c → {m, c} in y=mx+c */
+function parseStandardR(eq: string): { m: number; c: number } | null {
+  const s = eq.replace(/\s/g, '').toLowerCase();
+  const eqIdx = s.indexOf('=');
+  if (eqIdx === -1) return null;
+  const lhs = s.slice(0, eqIdx);
+  const rhs = s.slice(eqIdx + 1);
+  if (!lhs || !rhs) return null;
+  const cVal = parseFloat(rhs);
+  if (isNaN(cVal)) return null;
+  let a = 0, b = 0;
+  const xMatch = lhs.match(/(^|[+-])(\d*\.?\d*)x/);
+  const yMatch = lhs.match(/(^|[+-])(\d*\.?\d*)y/);
+  if (!xMatch && !yMatch) return null;
+  if (xMatch) {
+    const sign = xMatch[1] === '-' ? -1 : 1;
+    const coef = xMatch[2];
+    a = sign * (coef === '' ? 1 : parseFloat(coef));
+    if (isNaN(a)) return null;
+  }
+  if (yMatch) {
+    const sign = yMatch[1] === '-' ? -1 : 1;
+    const coef = yMatch[2];
+    b = sign * (coef === '' ? 1 : parseFloat(coef));
+    if (isNaN(b)) return null;
+  }
+  if (b === 0) return null;
+  const m = -a / b;
+  const c = cVal / b;
+  if (!isFinite(m) || !isFinite(c)) return null;
+  return { m, c };
+}
+
+/* Try y=mx+c first, then ax+by=c */
+function parseEqR(eq: string): { m: number; c: number } | null {
+  return parseLinearR(eq) ?? parseStandardR(eq);
+}
+
 function reflectLinearR(m: number, c: number, mirror: MirrorType): { m: number; c: number } | null {
   switch (mirror) {
     case "sumbu-x": return { m: -m, c: -c };
@@ -1031,7 +1069,7 @@ function AnimasiRefleksiKurvaK() {
   const [input, setInput] = useState('y=2x+1');
   const [show, setShow]   = useState(false);
 
-  const parsed  = parseLinearR(input);
+  const parsed  = parseEqR(input);
   const isValid = parsed !== null;
   const color   = mode === 'x=k' ? '#f97316' : '#ec4899';
 
@@ -1076,13 +1114,13 @@ function AnimasiRefleksiKurvaK() {
 
       {/* Input garis */}
       <div className="space-y-1">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y = mx + c)</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y=mx+c atau ax+by=c)</p>
         <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
           <span>{input || <span className="text-white/30">ketik...</span>}</span>
           <span className="animate-pulse text-cyan-400">|</span>
         </div>
         {!isValid && input.length > 0 && (
-          <p className="text-[11px] text-red-400 font-body">Format: y=mx+c · Contoh: y=2x+1 · y=-3x+5</p>
+          <p className="text-[11px] text-red-400 font-body">Format: y=2x+1 · y=-3x+5 · 2x+3y=6 · x-y=4</p>
         )}
       </div>
 
