@@ -119,8 +119,8 @@ const InteractiveCylinder3D = () => {
     faces.push({
       avgZ,
       points: `${p_t0.x},${p_t0.y} ${p_t1.x},${p_t1.y} ${p_b1.x},${p_b1.y} ${p_b0.x},${p_b0.y}`,
-      fill: visible ? `hsl(200,95%,${lightness}%)` : `hsl(210,80%,12%)`,
-      stroke: "rgba(0,150,255,0.15)",
+      fill: visible ? `hsl(45,100%,${lightness}%)` : `hsl(38,80%,14%)`,
+      stroke: "rgba(200,140,0,0.15)",
     });
   }
 
@@ -132,14 +132,14 @@ const InteractiveCylinder3D = () => {
   faces.push({
     avgZ: topCapAvgZ,
     points: topVerts2D.map(p => `${p.x},${p.y}`).join(" "),
-    fill: topCapCenter3D.y < botCapCenter3D.y ? "#7dd3fc" : "#0284c7",
-    stroke: "#bae6fd",
+    fill: topCapCenter3D.y < botCapCenter3D.y ? "#fde68a" : "#92400e",
+    stroke: "#fef3c7",
   });
   faces.push({
     avgZ: botCapAvgZ,
     points: botVerts2D.map(p => `${p.x},${p.y}`).join(" "),
-    fill: botCapCenter3D.y > topCapCenter3D.y ? "#38bdf8" : "#0369a1",
-    stroke: "#7dd3fc",
+    fill: botCapCenter3D.y > topCapCenter3D.y ? "#fbbf24" : "#78350f",
+    stroke: "#fde68a",
   });
 
   faces.sort((a, b) => b.avgZ - a.avgZ);
