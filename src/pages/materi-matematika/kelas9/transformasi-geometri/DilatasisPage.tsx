@@ -861,6 +861,385 @@ function AnimasiDilatasi() {
   );
 }
 
+/* ─────────────────────────────────────────────────
+   ROTASI KURVA LINEAR — helpers + animasi component
+────────────────────────────────────────────────── */
+const RL_ANIM_MS = 2200;
+const RL_DEG = Math.PI / 180;
+type RLRotType = '90ccw' | '90cw' | '180';
+type RLLineRes = { isVertical: false; m: number; c: number } | { isVertical: true; vertX: number };
+
+function fmtLineRL(m: number, c: number): string {
+  const fmt = (v: number) => { const r = Math.round(v * 1000) / 1000; return Number.isInteger(r) ? String(r) : r.toString(); };
+  const rM = Math.round(m * 1000) / 1000, rC = Math.round(c * 1000) / 1000;
+  if (Math.abs(rM) < 1e-9) return `y = ${fmt(rC)}`;
+  const mStr = Math.abs(rM - 1) < 1e-9 ? '' : Math.abs(rM + 1) < 1e-9 ? '-' : `${fmt(rM)}`;
+  const mPart = `${mStr}x`;
+  if (Math.abs(rC) < 1e-9) return `y = ${mPart}`;
+  return `y = ${mPart}${rC > 0 ? ` + ${fmt(rC)}` : ` - ${fmt(Math.abs(rC))}`}`;
+}
+
+function rotatePtD(x: number, y: number, cx: number, cy: number, deg: number): [number, number] {
+  const r = deg * RL_DEG, tx = x - cx, ty = y - cy;
+  return [cx + tx * Math.cos(r) - ty * Math.sin(r), cy + tx * Math.sin(r) + ty * Math.cos(r)];
+}
+
+function computeRotatedLineD(m: number, c: number, ca: number, cb: number, thetaDeg: number): RLLineRes {
+  if (Math.abs(thetaDeg) < 1e-9) return { isVertical: false, m, c };
+  const theta = thetaDeg * RL_DEG;
+  const cosT = Math.cos(theta), sinT = Math.sin(theta);
+  const K = m * ca + c - cb;
+  const denom = cosT - m * sinT;
+  if (Math.abs(denom) < 1e-9) {
+    const numer = m * cosT + sinT;
+    return { isVertical: true, vertX: Math.abs(numer) > 1e-9 ? ca - K / numer : ca };
+  }
+  const M = (m * cosT + sinT) / denom;
+  return { isVertical: false, m: M, c: -M * ca + K / denom + cb };
+}
+
+function DRL_ArcArrow({ cx, cy, r, aStart, aEnd, color }: { cx: number; cy: number; r: number; aStart: number; aEnd: number; color: string }) {
+  const svgCx = Dpx(cx), svgCy = Dpy(cy);
+  const x1 = svgCx + r * Math.cos(aStart * RL_DEG), y1 = svgCy - r * Math.sin(aStart * RL_DEG);
+  const x2 = svgCx + r * Math.cos(aEnd * RL_DEG),   y2 = svgCy - r * Math.sin(aEnd * RL_DEG);
+  const large = Math.abs(aEnd - aStart) > 180 ? 1 : 0;
+  const sweep = aEnd > aStart ? 0 : 1;
+  return (
+    <g>
+      <path d={`M${x1},${y1} A${r},${r},0,${large},${sweep},${x2},${y2}`} fill="none" stroke={color} strokeWidth="2" strokeDasharray="5,3" />
+      <circle cx={x2} cy={y2} r={3} fill={color} />
+    </g>
+  );
+}
+
+function AnimasiRotasiKurvaLinearD() {
+  const [inputType, setInputType] = useState<'slope' | 'general'>('slope');
+  const [inputM, setInputM]   = useState('1');
+  const [inputC, setInputC]   = useState('2');
+  const [inputGA, setInputGA] = useState('1');
+  const [inputGB, setInputGB] = useState('-1');
+  const [inputGC, setInputGC] = useState('2');
+  const [rotType, setRotType]       = useState<RLRotType>('90ccw');
+  const [centerType, setCenterType] = useState<'origin' | 'custom'>('origin');
+  const [inputCa, setInputCa] = useState('0');
+  const [inputCb, setInputCb] = useState('0');
+  const [show, setShow]           = useState(false);
+  const [isAnimating, setIsAnim]  = useState(false);
+  const [animT, setAnimT]         = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  /* ── parse garis ── */
+  const parsed: { ok: boolean; m: number; c: number; isVertical: boolean; vertX?: number } | null = (() => {
+    if (inputType === 'slope') {
+      const m = parseFloat(inputM);
+      if (isNaN(m)) return null;
+      return { ok: true, m, c: parseFloat(inputC) || 0, isVertical: false };
+    }
+    const a = parseFloat(inputGA) || 0, b = parseFloat(inputGB) || 0, gc = parseFloat(inputGC) || 0;
+    if (a === 0 && b === 0) return null;
+    if (b === 0) return { ok: true, m: 0, c: 0, isVertical: true, vertX: -gc / a };
+    return { ok: true, m: -a / b, c: -gc / b, isVertical: false };
+  })();
+
+  const isValid = parsed?.ok === true;
+  const m       = isValid && !parsed!.isVertical ? parsed!.m : 0;
+  const lineC   = isValid && !parsed!.isVertical ? parsed!.c : 0;
+  const isVert  = isValid && parsed!.isVertical;
+  const vertX0  = isVert ? (parsed!.vertX ?? 0) : 0;
+
+  const ca = centerType === 'origin' ? 0 : (parseFloat(inputCa) || 0);
+  const cb = centerType === 'origin' ? 0 : (parseFloat(inputCb) || 0);
+
+  const targetAngle = rotType === '90ccw' ? 90 : rotType === '90cw' ? -90 : 180;
+  const easeOut = (v: number) => 1 - Math.pow(1 - v, 3);
+  const t = isAnimating ? animT : (show ? 1 : 0);
+  const displayAngle = easeOut(t) * targetAngle;
+  const animAngleAbs = Math.abs(displayAngle);
+  const showingResult = show || isAnimating;
+
+  const animLine   = isValid && !isVert && showingResult ? computeRotatedLineD(m, lineC, ca, cb, displayAngle)   : null;
+  const targetLine = isValid && !isVert                  ? computeRotatedLineD(m, lineC, ca, cb, targetAngle)   : null;
+
+  const accent  = rotType === '90ccw' ? '#a78bfa' : rotType === '90cw' ? '#fb923c' : '#f472b6';
+  const badgeClr = rotType === '90ccw' ? '#7c3aed' : rotType === '90cw' ? '#c2410c' : '#be185d';
+  const rotLabel = rotType === '90ccw' ? '90° BAJ' : rotType === '90cw' ? '90° SAJ' : '180°';
+
+  /* anchor point (circle-line intersection) for radius viz */
+  const ARC_R_SVG = 40;
+  const r_math = ARC_R_SVG / Dsc;
+  let aStart = isValid && !isVert ? Math.atan(m) * (180 / Math.PI) : 0;
+  let anchorX = ca + r_math / Math.sqrt(1 + m * m);
+  let anchorY  = m * anchorX + lineC;
+  if (isValid && !isVert) {
+    const K = m * ca + lineC - cb;
+    const disc = r_math * r_math * (1 + m * m) - K * K;
+    if (disc >= 0) {
+      const u = (-m * K + Math.sqrt(disc)) / (1 + m * m);
+      const v = m * u + K;
+      aStart = Math.atan2(v, u) * (180 / Math.PI);
+      anchorX = ca + u; anchorY = cb + v;
+    }
+  }
+  const [rotAX, rotAY] = rotatePtD(anchorX, anchorY, ca, cb, displayAngle);
+
+  const reset = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnim(false); setAnimT(0);
+  };
+  const handleRotate = () => {
+    if (!isValid) return;
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnim(true); setAnimT(0);
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const raw = Math.min((now - t0) / RL_ANIM_MS, 1);
+      setAnimT(raw);
+      if (raw < 1) { rafRef.current = requestAnimationFrame(tick); }
+      else { setAnimT(1); setIsAnim(false); setShow(true); }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+  const chg = (fn: () => void) => {
+    fn();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnim(false); setAnimT(0);
+  };
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
+  const inputLabel = inputType === 'slope'
+    ? `y = ${inputM}x ${parseFloat(inputC) >= 0 ? '+ ' : ''}${inputC}`
+    : `${inputGA}x + ${inputGB}y + ${inputGC} = 0`;
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="text-violet-300 font-bold text-sm font-body">📈 Animasi Interaktif — Rotasi Kurva Linear</p>
+
+      {/* Bentuk garis */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Bentuk Persamaan Garis</p>
+        <div className="flex gap-2 flex-wrap">
+          {(['slope', 'general'] as const).map(tp => (
+            <button key={tp} onClick={() => chg(() => setInputType(tp))}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold font-body transition-all border ${
+                inputType === tp ? 'bg-violet-500/80 border-violet-400 text-white' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
+              }`}
+            >{tp === 'slope' ? 'y = mx + c' : 'ax + by + c = 0'}</button>
+          ))}
+        </div>
+        {inputType === 'slope' ? (
+          <div className="flex items-center gap-2 flex-wrap pt-1">
+            <span className="text-xs text-white/60 font-body">y =</span>
+            <input type="number" step="0.5" value={inputM} onChange={e => chg(() => setInputM(e.target.value))}
+              className="w-16 bg-slate-700 border border-violet-500/50 rounded-lg px-2 py-1 text-xs text-white text-center font-mono focus:outline-none focus:border-violet-400" placeholder="m" />
+            <span className="text-xs text-white/60 font-body">x +</span>
+            <input type="number" step="0.5" value={inputC} onChange={e => chg(() => setInputC(e.target.value))}
+              className="w-16 bg-slate-700 border border-violet-500/50 rounded-lg px-2 py-1 text-xs text-white text-center font-mono focus:outline-none focus:border-violet-400" placeholder="c" />
+          </div>
+        ) : (
+          <div className="flex items-center gap-1.5 flex-wrap pt-1 text-xs text-white/60 font-body">
+            <input type="number" step="1" value={inputGA} onChange={e => chg(() => setInputGA(e.target.value))}
+              className="w-12 bg-slate-700 border border-slate-500 rounded-lg px-1 py-1 text-xs text-white text-center font-mono" placeholder="a" />
+            <span>x +</span>
+            <input type="number" step="1" value={inputGB} onChange={e => chg(() => setInputGB(e.target.value))}
+              className="w-12 bg-slate-700 border border-slate-500 rounded-lg px-1 py-1 text-xs text-white text-center font-mono" placeholder="b" />
+            <span>y +</span>
+            <input type="number" step="1" value={inputGC} onChange={e => chg(() => setInputGC(e.target.value))}
+              className="w-12 bg-slate-700 border border-slate-500 rounded-lg px-1 py-1 text-xs text-white text-center font-mono" placeholder="c" />
+            <span>= 0</span>
+          </div>
+        )}
+        {!isValid && <p className="text-xs text-red-400 font-body">Persamaan tidak valid — pastikan m atau a,b tidak nol sekaligus.</p>}
+      </div>
+
+      {/* Jenis rotasi */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Jenis Rotasi</p>
+        <div className="flex gap-2 flex-wrap">
+          {([['90ccw','90° BAJ','#7c3aed'], ['90cw','90° SAJ','#c2410c'], ['180','180°','#be185d']] as [RLRotType, string, string][]).map(([val, lbl, clr]) => (
+            <button key={val} onClick={() => chg(() => setRotType(val))}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold font-body transition-all border ${
+                rotType === val ? 'text-white shadow-lg' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
+              }`}
+              style={rotType === val ? { background: clr, borderColor: clr } : {}}
+            >{lbl}</button>
+          ))}
+        </div>
+      </div>
+
+      {/* Pusat rotasi */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Rotasi</p>
+        <div className="flex gap-2">
+          {(['origin', 'custom'] as const).map(c => (
+            <button key={c} onClick={() => chg(() => setCenterType(c))}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+                centerType === c ? 'bg-yellow-500/80 border-yellow-400 text-white shadow-md' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
+              }`}
+            >{c === 'origin' ? 'O(0, 0)' : 'Titik (a, b)'}</button>
+          ))}
+        </div>
+        {centerType === 'custom' && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">a =</label>
+            <input type="number" value={inputCa} onChange={e => chg(() => setInputCa(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+            <label className="text-xs text-white/60 font-body">b =</label>
+            <input type="number" value={inputCb} onChange={e => chg(() => setInputCb(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+          </div>
+        )}
+      </div>
+
+      {/* Grid + Panel */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start w-full">
+
+        {/* SVG Grid */}
+        <div className="w-full max-w-[360px] mx-auto lg:mx-0 flex-shrink-0">
+          <DGrid accent={accent}>
+            {/* Garis asli */}
+            {isValid && !isVert && (
+              <line x1={Dpx(-5)} y1={Dpy(m * -5 + lineC)} x2={Dpx(5)} y2={Dpy(m * 5 + lineC)}
+                stroke="#22d3ee" strokeWidth="2.5" opacity={showingResult ? 0.4 : 1} />
+            )}
+            {isValid && isVert && (
+              <line x1={Dpx(vertX0)} y1={0} x2={Dpx(vertX0)} y2={DS}
+                stroke="#22d3ee" strokeWidth="2.5" opacity={showingResult ? 0.4 : 1} />
+            )}
+            {isValid && !showingResult && !isVert && (
+              <text x={Dpx(2)} y={Dpy(m * 2 + lineC) - 8} fill="#22d3ee" fontSize="9" fontWeight="bold">{inputLabel}</text>
+            )}
+
+            {/* Garis berputar */}
+            {showingResult && isValid && animLine && (
+              animLine.isVertical ? (
+                <line x1={Dpx(animLine.vertX)} y1={0} x2={Dpx(animLine.vertX)} y2={DS}
+                  stroke={accent} strokeWidth="2.5" opacity={0.9} strokeDasharray={show && !isAnimating ? '6,3' : 'none'} />
+              ) : (
+                <line x1={Dpx(-5)} y1={Dpy(animLine.m * -5 + animLine.c)}
+                  x2={Dpx(5)}  y2={Dpy(animLine.m * 5  + animLine.c)}
+                  stroke={accent} strokeWidth="2.5" opacity={0.9}
+                  strokeDasharray={show && !isAnimating ? '6,3' : 'none'} />
+              )
+            )}
+
+            {/* Label bayangan */}
+            {show && !isAnimating && isValid && targetLine && !targetLine.isVertical && (
+              <text x={Dpx(-2)} y={Dpy(targetLine.m * -2 + targetLine.c) - 8}
+                fill={accent} fontSize="9" fontWeight="bold">
+                {fmtLineRL(Math.round(targetLine.m * 1000) / 1000, Math.round(targetLine.c * 1000) / 1000)}
+              </text>
+            )}
+            {show && !isAnimating && isValid && targetLine?.isVertical && (
+              <text x={Dpx(targetLine.vertX) + 5} y={Dpy(2)} fill={accent} fontSize="9" fontWeight="bold">
+                x = {Math.round(targetLine.vertX * 100) / 100}
+              </text>
+            )}
+
+            {/* Sinar label garis asli (selama animasi) */}
+            {showingResult && isValid && !isVert && (
+              <text x={Dpx(2)} y={Dpy(m * 2 + lineC) + 14} fill="#22d3ee" fontSize="8" fontWeight="bold" opacity="0.55">{inputLabel}</text>
+            )}
+
+            {/* Peran pusat: jari-jari */}
+            {showingResult && isValid && !isVert && (
+              <g>
+                <line x1={Dpx(ca)} y1={Dpy(cb)} x2={Dpx(anchorX)} y2={Dpy(anchorY)}
+                  stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="5,3" opacity="0.55" />
+                <line x1={Dpx(ca)} y1={Dpy(cb)} x2={Dpx(rotAX)} y2={Dpy(rotAY)}
+                  stroke={accent} strokeWidth="1.7" strokeDasharray="5,3" opacity="0.85" />
+                <circle cx={Dpx(anchorX)} cy={Dpy(anchorY)} r={4} fill="#22d3ee" opacity="0.9" />
+                <circle cx={Dpx(rotAX)} cy={Dpy(rotAY)} r={5} fill={accent} opacity="0.95" />
+                <circle cx={Dpx(rotAX)} cy={Dpy(rotAY)} r={9} fill="none" stroke={accent} strokeWidth="1.2" opacity={isAnimating ? 0.4 : 0.15} />
+              </g>
+            )}
+
+            {/* Busur rotasi */}
+            {showingResult && isValid && !isVert && animAngleAbs > 2 && (
+              <DRL_ArcArrow cx={ca} cy={cb} r={ARC_R_SVG} aStart={aStart} aEnd={aStart + displayAngle} color={accent} />
+            )}
+
+            {/* Badge sudut */}
+            {showingResult && animAngleAbs > 2 && (() => {
+              const bx = DS / 2, by = 18, bw = 80, bh = 28;
+              return (
+                <g>
+                  <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
+                    fill={badgeClr} stroke="#fff" strokeWidth="1.5" opacity="0.95" />
+                  <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    {Math.round(animAngleAbs)}°
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* Pusat rotasi */}
+            <DCenterMark x={ca} y={cb} color="#facc15" />
+            <text x={Dpx(ca) + 14} y={Dpy(cb) - 12} fill="#facc15" fontSize="9" fontWeight="bold">
+              {centerType === 'origin' ? 'O(0,0)' : `(${ca},${cb})`}
+            </text>
+          </DGrid>
+
+          {/* Legenda */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
+            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
+            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">Pusat rotasi</span></div>
+            {showingResult && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accent }} /><span style={{ color: accent }}>Bayangan ({rotLabel})</span></div>}
+          </div>
+        </div>
+
+        {/* Panel kanan */}
+        <div className="flex-1 min-w-0 space-y-2 w-full">
+          <div className="flex gap-2">
+            <button onClick={handleRotate} disabled={isAnimating || !isValid}
+              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${
+                isAnimating || !isValid ? 'opacity-50 cursor-not-allowed bg-slate-600 text-white' : 'text-white shadow-lg'
+              }`}
+              style={!isAnimating && isValid ? { background: accent, boxShadow: `0 4px 14px ${accent}55` } : {}}
+            >{isAnimating ? '⏳ Memutar…' : '🔄 Rotasikan!'}</button>
+            <button onClick={reset} className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all">Reset</button>
+          </div>
+
+          <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
+            <p className="font-bold text-sm" style={{ color: accent }}>{rotLabel}</p>
+            <p className="text-white/50">Pusat: {centerType === 'origin' ? 'O(0, 0)' : `(${ca}, ${cb})`}</p>
+            {isAnimating && <p className="animate-pulse font-semibold" style={{ color: accent }}>⏳ Slow-motion rotasi garis…</p>}
+            {isAnimating && (
+              <>
+                <p className="text-yellow-300/80">📍 Pusat tetap diam — semua titik berputar mengelilinginya</p>
+                <p className="text-cyan-300/70">📏 Jarak titik ke pusat <span className="text-white font-bold">selalu sama</span></p>
+              </>
+            )}
+          </div>
+
+          {show && !isAnimating && isValid && targetLine && (
+            <div className="bg-slate-700/40 rounded-xl p-3 space-y-2">
+              <p className="text-xs font-bold text-white/60 font-body uppercase">Hasil Rotasi:</p>
+              <div className="flex items-center gap-2 text-sm font-body flex-wrap">
+                <span className="text-cyan-300 font-mono text-xs">{inputLabel}</span>
+                <span className="text-white/30">→</span>
+                <span className="font-bold font-mono text-xs" style={{ color: accent }}>
+                  {targetLine.isVertical
+                    ? `x = ${Math.round(targetLine.vertX * 1000) / 1000}`
+                    : fmtLineRL(Math.round(targetLine.m * 1000) / 1000, Math.round(targetLine.c * 1000) / 1000)
+                  }
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5">
+            <p className="text-violet-300 font-semibold">💡 Cara pakai:</p>
+            <p>1. Masukkan persamaan garis</p>
+            <p>2. Pilih sudut &amp; arah rotasi</p>
+            <p>3. Pilih pusat O(0,0) atau titik (a,b)</p>
+            <p>4. Klik <strong className="text-white">🔄 Rotasikan!</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ──────────────────────────────────────────────
    MAIN PAGE COMPONENT
 ────────────────────────────────────────────── */
@@ -868,7 +1247,7 @@ function AnimasiDilatasi() {
 const DilatasisPage = () => {
   const navigate = useNavigate();
   const expandedSections = [
-    "intro", "animasi-titik", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
+    "intro", "animasi-titik", "animasi", "rotasi-kurva", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
   ];
 
   const SectionHeader = ({
@@ -1055,6 +1434,157 @@ const DilatasisPage = () => {
             {expandedSections.includes("animasi") && (
               <div className="px-5 pb-5">
                 <AnimasiDilatasi />
+              </div>
+            )}
+          </div>
+
+          {/* ── ROTASI PADA KURVA LINEAR ── */}
+          <div className="bg-card/80 backdrop-blur border border-violet-500/20 rounded-xl overflow-hidden">
+            <SectionHeader
+              id="rotasi-kurva"
+              icon={<span>📈</span>}
+              iconColor="#a78bfa"
+              label="📈 [Tambahan] Rotasi pada Kurva Linear"
+            />
+            {expandedSections.includes("rotasi-kurva") && (
+              <div className="px-5 pb-5 space-y-5">
+
+                {/* Pengantar */}
+                <p className="text-sm text-white/80 font-body leading-relaxed">
+                  Rotasi tidak hanya berlaku untuk titik dan bangun datar — ia juga dapat diterapkan pada <strong className="text-violet-300">persamaan garis lurus (kurva linear)</strong>. Prinsipnya: setiap titik pada garis ikut berputar sebesar sudut yang sama terhadap pusat rotasi.
+                </p>
+
+                {/* Rumus umum */}
+                <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                  <p className="text-xs font-semibold text-violet-300 font-body uppercase tracking-wide">Rumus — Rotasi Garis y = mx + c terhadap O(0,0)</p>
+                  <p className="text-sm text-white/70 font-body">Strategi: temukan <strong className="text-white">invers</strong> pemetaan rotasi, lalu substitusikan ke persamaan garis asli.</p>
+
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <p className="text-xs font-semibold text-violet-300 font-body">🔄 90° Berlawanan AJ: <InlineMath math="(x,y)\to(-y,x)" /></p>
+                    <p className="text-xs text-white/50 font-body">Invers: <InlineMath math="x = y',\; y = -x'" /></p>
+                    <BlockMath math="\boxed{y' = -\tfrac{1}{m}x' - \tfrac{c}{m}}" />
+                  </div>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <p className="text-xs font-semibold text-orange-300 font-body">🔄 90° Searah AJ: <InlineMath math="(x,y)\to(y,-x)" /></p>
+                    <p className="text-xs text-white/50 font-body">Invers: <InlineMath math="x = -y',\; y = x'" /></p>
+                    <BlockMath math="\boxed{y' = -\tfrac{1}{m}x' + \tfrac{c}{m}}" />
+                  </div>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <p className="text-xs font-semibold text-pink-300 font-body">🔄 180°: <InlineMath math="(x,y)\to(-x,-y)" /></p>
+                    <p className="text-xs text-white/50 font-body">Invers: <InlineMath math="x = -x',\; y = -y'" /></p>
+                    <BlockMath math="\boxed{y' = mx' - c}" />
+                  </div>
+
+                  <div className="bg-violet-950/40 border border-violet-500/20 rounded-lg p-3">
+                    <p className="text-xs font-semibold text-violet-300 font-body mb-1">💡 Rumus Umum — Pusat (a, b)</p>
+                    <p className="text-xs text-white/60 font-body">Untuk pusat <InlineMath math="(a,b)" />, gunakan metode invers dari rotasi terhadap titik selain asal:</p>
+                    <BlockMath math="x = a + \cos\theta\,(x'-a) + \sin\theta\,(y'-b)" />
+                    <BlockMath math="y = b - \sin\theta\,(x'-a) + \cos\theta\,(y'-b)" />
+                    <p className="text-xs text-white/50 font-body">Substitusikan ke <InlineMath math="y = mx + c" /> dan sederhanakan.</p>
+                  </div>
+                </div>
+
+                {/* Animasi Interaktif */}
+                <AnimasiRotasiKurvaLinearD />
+
+                {/* Contoh Soal */}
+                <p className="text-xs font-semibold text-white/40 font-body uppercase tracking-wider">Contoh Soal</p>
+
+                {/* MUDAH */}
+                <div className="border-l-4 border-green-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-body">MUDAH</span>
+                    <span className="font-body font-semibold text-white text-sm">Contoh 1</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">
+                      Garis <InlineMath math="y = x + 2" /> dirotasi <strong className="text-green-300">90° berlawanan arah jarum jam</strong> terhadap titik asal <InlineMath math="O(0,0)" />. Tentukan persamaan bayangan garis tersebut!
+                    </p>
+                  </div>
+                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-2">
+                    <p className="text-xs font-semibold text-green-400 font-body">PEMBAHASAN:</p>
+                    <p className="text-sm text-white/80 font-body">Rotasi 90° berlawanan AJ: <InlineMath math="(x,y)\to(-y,x)" />. Inversnya: <InlineMath math="x = y',\; y = -x'" />.</p>
+                    <p className="text-sm text-white/70 font-body">Substitusi ke <InlineMath math="y = x + 2" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="-x' = y' + 2 \;\implies\; y' = -x' - 2" />
+                    </div>
+                    <p className="font-body font-bold text-green-300">✅ <strong>Bayangan:</strong> <InlineMath math="y = -x - 2" /></p>
+                    <div className="bg-slate-900/50 rounded-lg p-3">
+                      <p className="text-xs text-white/50 font-body">Catatan: gradien berubah dari <InlineMath math="m=1" /> menjadi <InlineMath math="-\frac{1}{1}=-1" /> — kedua garis saling tegak lurus.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SEDANG */}
+                <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded font-body">SEDANG</span>
+                    <span className="font-body font-semibold text-white text-sm">Contoh 2</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Garis <InlineMath math="3x - y + 1 = 0" /> dirotasi <strong className="text-yellow-300">90° searah arah jarum jam</strong> terhadap titik asal <InlineMath math="O(0,0)" />. Tentukan persamaan bayangan garis tersebut!
+                    </p>
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm font-body text-white/80 pl-2">
+                      <div><span className="text-yellow-300 font-semibold">A.</span> <InlineMath math="x + 3y - 1 = 0" /></div>
+                      <div><span className="text-yellow-300 font-semibold">C.</span> <InlineMath math="x - 3y + 1 = 0" /></div>
+                      <div><span className="text-yellow-300 font-semibold">B.</span> <InlineMath math="x + 3y + 1 = 0" /></div>
+                      <div><span className="text-yellow-300 font-semibold">D.</span> <InlineMath math="3x + y - 1 = 0" /></div>
+                    </div>
+                  </div>
+                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-2">
+                    <p className="text-xs font-semibold text-yellow-400 font-body">PEMBAHASAN:</p>
+                    <p className="text-sm text-white/80 font-body">Ubah dulu ke bentuk <InlineMath math="y = mx + c" />: <InlineMath math="3x - y + 1 = 0 \Rightarrow y = 3x + 1" />, sehingga <InlineMath math="m = 3,\; c = 1" />.</p>
+                    <p className="text-sm text-white/80 font-body">Rotasi 90° SAJ: <InlineMath math="(x,y)\to(y,-x)" />. Inversnya: <InlineMath math="x = -y',\; y = x'" />. Substitusi ke <InlineMath math="y = 3x + 1" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="x' = 3(-y') + 1 \;\implies\; x' + 3y' - 1 = 0" />
+                    </div>
+                    <p className="font-body font-bold text-yellow-300">✅ <strong>Bayangan:</strong> <InlineMath math="x + 3y - 1 = 0" /> → Jawaban <strong>A</strong></p>
+                    <div className="bg-slate-900/50 rounded-lg p-3">
+                      <p className="text-xs text-white/50 font-body">Verifikasi: titik <InlineMath math="(0,1)" /> pada garis asli → rotasi 90° SAJ → <InlineMath math="(1,0)" />. Cek: <InlineMath math="1+3(0)-1=0" /> ✓</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SULIT */}
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded font-body">SULIT</span>
+                    <span className="font-body font-semibold text-white text-sm">Contoh 3</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Garis <InlineMath math="2x + y - 3 = 0" /> dirotasi <strong className="text-red-300">90° berlawanan arah jarum jam</strong> terhadap pusat <InlineMath math="(1,\,2)" />. Tentukan persamaan bayangan garis tersebut!
+                    </p>
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm font-body text-white/80 pl-2">
+                      <div><span className="text-red-300 font-semibold">A.</span> <InlineMath math="x - 2y + 2 = 0" /></div>
+                      <div><span className="text-red-300 font-semibold">C.</span> <InlineMath math="x + 2y - 2 = 0" /></div>
+                      <div><span className="text-red-300 font-semibold">B.</span> <InlineMath math="x - 2y - 2 = 0" /></div>
+                      <div><span className="text-red-300 font-semibold">D.</span> <InlineMath math="2x - y + 2 = 0" /></div>
+                    </div>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
+                    <p className="text-xs font-semibold text-red-400 font-body">PEMBAHASAN:</p>
+                    <p className="text-sm text-white/80 font-body">Ubah ke <InlineMath math="y = mx + c" />: <InlineMath math="y = -2x + 3" /> (<InlineMath math="m=-2,\;c=3" />). Pusat <InlineMath math="(a,b)=(1,2)" />.</p>
+                    <p className="text-sm text-white/80 font-body font-semibold">Langkah — gunakan rumus invers rotasi 90° BAJ terhadap pusat <InlineMath math="(a,b)" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 text-xs font-body text-white/70">
+                      <p>Invers 90° BAJ sekitar <InlineMath math="(1,2)" />: <InlineMath math="x = 1+(y'-2),\; y = 2-(x'-1)" /></p>
+                      <p>yaitu: <InlineMath math="x = y'-1,\quad y = 3-x'" /></p>
+                    </div>
+                    <p className="text-sm text-white/70 font-body">Substitusi ke <InlineMath math="y = -2x + 3" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="(3 - x') = -2(y' - 1) + 3" />
+                      <BlockMath math="3 - x' = -2y' + 2 + 3 = -2y' + 5" />
+                      <BlockMath math="-x' + 2y' - 2 = 0 \;\implies\; \boxed{x' - 2y' + 2 = 0}" />
+                    </div>
+                    <p className="font-body font-bold text-red-300">✅ <strong>Bayangan:</strong> <InlineMath math="x - 2y + 2 = 0" /> → Jawaban <strong>A</strong></p>
+                    <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                      <p className="text-xs font-semibold text-white/40 font-body uppercase tracking-wide">Verifikasi</p>
+                      <p className="text-xs text-white/50 font-body">Titik <InlineMath math="(1,1)" /> pada garis asli. Rotasi 90° BAJ sekitar <InlineMath math="(1,2)" />: geser <InlineMath math="(0,-1)" />, putar: <InlineMath math="(1,0)" />, geser balik: <InlineMath math="(2,2)" />. Cek: <InlineMath math="2-2(2)+2=0" /> ✓</p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
