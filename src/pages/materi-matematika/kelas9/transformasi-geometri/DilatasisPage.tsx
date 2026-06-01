@@ -2347,6 +2347,21 @@ const DilatasisPage = () => {
             )}
           </div>
 
+          {/* ── ANIMASI INTERAKTIF — DILATASI KURVA LINEAR ── */}
+          <div className="bg-card/80 backdrop-blur border border-orange-500/20 rounded-xl overflow-hidden">
+            <SectionHeader
+              id="animasi-kurva"
+              icon={<span>📈</span>}
+              iconColor="#fb923c"
+              label="Animasi Interaktif — Dilatasi Kurva Linear"
+            />
+            {expandedSections.includes("animasi-kurva") && (
+              <div className="px-5 pb-5">
+                <AnimasiDilatasiKurvaLinear />
+              </div>
+            )}
+          </div>
+
           {/* Contoh Soal Sub-Bab 4 — Kurva Linear */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader
@@ -2457,21 +2472,6 @@ const DilatasisPage = () => {
                   </div>
                 </div>
 
-              </div>
-            )}
-          </div>
-
-          {/* ── ANIMASI INTERAKTIF — DILATASI KURVA LINEAR ── */}
-          <div className="bg-card/80 backdrop-blur border border-orange-500/20 rounded-xl overflow-hidden">
-            <SectionHeader
-              id="animasi-kurva"
-              icon={<span>📈</span>}
-              iconColor="#fb923c"
-              label="Animasi Interaktif — Dilatasi Kurva Linear"
-            />
-            {expandedSections.includes("animasi-kurva") && (
-              <div className="px-5 pb-5">
-                <AnimasiDilatasiKurvaLinear />
               </div>
             )}
           </div>
