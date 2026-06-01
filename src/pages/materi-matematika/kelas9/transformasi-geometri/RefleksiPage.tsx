@@ -1616,6 +1616,9 @@ const RefleksiPage = () => {
               {/* Animasi Interaktif */}
               <AnimasiRefleksiKurva />
 
+              {/* Animasi x=k dan y=k */}
+              <AnimasiRefleksiKurvaK />
+
               {/* Contoh Soal */}
               <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wider">Contoh Soal</p>
 
@@ -1753,9 +1756,6 @@ const RefleksiPage = () => {
                   </p>
                 </div>
               </div>
-
-              {/* Animasi x=k dan y=k */}
-              <AnimasiRefleksiKurvaK />
 
               {/* Contoh 4 — x=k */}
               <div className="border-l-4 border-orange-500 pl-4 space-y-3">
