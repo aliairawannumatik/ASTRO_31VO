@@ -2247,7 +2247,7 @@ const DilatasisPage = () => {
               id="konsep-kurva"
               icon={<Target className="w-5 h-5" />}
               iconColor="#fb923c"
-              label="📘 Sub-Bab 4: Dilatasi pada Kurva (Linear)"
+              label="📈 [Tambahan] Dilatasi pada Kurva (Linear)"
             />
             {expandedSections.includes("konsep-kurva") && (
               <div className="px-5 pb-5 space-y-4">
@@ -2270,36 +2270,68 @@ const DilatasisPage = () => {
                 </div>
 
                 {/* Rumus Pusat O(0,0) */}
-                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
+                <div className="bg-slate-800/60 border border-blue-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-xs font-semibold text-blue-300">📐 RUMUS — Pusat O(0, 0):</p>
-                  <p className="font-body text-xs text-white/70">Jika garis <InlineMath math="y = mx + c" /> didilatasi dengan pusat <InlineMath math="O(0,0)" /> dan faktor skala <InlineMath math="k" />:</p>
-                  <div className="bg-slate-900/60 rounded p-3">
-                    <BlockMath math="y = mx + c \xrightarrow{[O,k]} y = mx + kc" />
+                  <p className="font-body text-xs text-white/70">Ambil titik sembarang <InlineMath math="(x, y)" /> pada garis, lalu dilatasi dengan pusat <InlineMath math="O(0,0)" /> dan faktor <InlineMath math="k" />:</p>
+
+                  {/* Langkah 1: pemetaan */}
+                  <div className="bg-slate-900/70 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-semibold text-blue-200">① Pemetaan dilatasi:</p>
+                    <BlockMath math="(x,\, y) \longrightarrow (x',\, y') \quad\text{dengan}\quad x' = kx,\quad y' = ky" />
                   </div>
-                  <p className="font-body text-xs text-white/60">Gradien <InlineMath math="m" /> tetap, intercept menjadi <InlineMath math="kc" />.</p>
+
+                  {/* Langkah 2: nyatakan x dan y */}
+                  <div className="bg-slate-900/70 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-semibold text-blue-200">② Nyatakan x dan y terhadap x' dan y':</p>
+                    <BlockMath math="x = \frac{x'}{k}, \qquad y = \frac{y'}{k}" />
+                  </div>
+
+                  {/* Langkah 3: substitusi */}
+                  <div className="bg-slate-900/70 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-semibold text-blue-200">③ Substitusi ke persamaan garis <InlineMath math="y = mx + c" />:</p>
+                    <BlockMath math="\frac{y'}{k} = m \cdot \frac{x'}{k} + c" />
+                    <BlockMath math="y' = mx' + kc" />
+                  </div>
+
+                  <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-blue-300 mb-1">✅ Hasil Bayangan:</p>
+                    <BlockMath math="\boxed{y = mx + kc}" />
+                    <p className="font-body text-xs text-white/60 mt-1">Gradien <InlineMath math="m" /> tetap, intercept menjadi <InlineMath math="kc" />.</p>
+                  </div>
                 </div>
 
                 {/* Rumus Pusat P(a,b) */}
-                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
+                <div className="bg-slate-800/60 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-xs font-semibold text-purple-300">📐 RUMUS — Pusat P(a, b):</p>
-                  <p className="font-body text-xs text-white/70">Jika garis <InlineMath math="y = mx + c" /> didilatasi dengan pusat <InlineMath math="P(a,b)" /> dan faktor skala <InlineMath math="k" />:</p>
-                  <div className="bg-slate-900/60 rounded p-3 space-y-2">
-                    <BlockMath math="y = mx + c \xrightarrow{[P(a,b),k]} y = mx + c'" />
-                    <BlockMath math="c' = kc + (k-1)(ma - b)" />
-                  </div>
-                  <p className="font-body text-xs text-white/60">Jika <InlineMath math="a=0, b=0" />, rumus ini menjadi <InlineMath math="c' = kc" /> — sama dengan pusat O(0,0).</p>
-                </div>
+                  <p className="font-body text-xs text-white/70">Ambil titik sembarang <InlineMath math="(x, y)" /> pada garis, lalu dilatasi dengan pusat <InlineMath math="P(a,b)" /> dan faktor <InlineMath math="k" />:</p>
 
-                {/* Derivasi singkat */}
-                <div className="bg-slate-800/40 rounded-lg p-4 space-y-2">
-                  <p className="font-body text-xs font-semibold text-slate-300">💡 Cara Menurunkan Rumus:</p>
-                  <p className="font-body text-xs text-white/70 leading-relaxed">
-                    Ambil sembarang titik <InlineMath math="(x, y)" /> pada garis. Setelah dilatasi dengan pusat <InlineMath math="P(a,b)" /> dan faktor <InlineMath math="k" />, titik baru adalah:
-                  </p>
-                  <div className="bg-slate-900/50 rounded p-2 space-y-1">
-                    <BlockMath math="x' = a + k(x-a),\quad y' = b + k(y-b)" />
+                  {/* Langkah 1: pemetaan */}
+                  <div className="bg-slate-900/70 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-semibold text-purple-200">① Pemetaan dilatasi:</p>
+                    <BlockMath math="(x,\, y) \longrightarrow (x',\, y')" />
+                    <BlockMath math="x' = a + k(x-a),\qquad y' = b + k(y-b)" />
                   </div>
-                  <p className="font-body text-xs text-white/70">Substitusi balik <InlineMath math="x = a + \frac{x'-a}{k}" /> dan <InlineMath math="y = b + \frac{y'-b}{k}" /> ke persamaan garis asal, didapat persamaan garis bayangan dengan gradien tetap <InlineMath math="m" /> dan intercept baru <InlineMath math="c' = kc + (k-1)(ma-b)" />.</p>
+
+                  {/* Langkah 2: nyatakan x dan y */}
+                  <div className="bg-slate-900/70 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-semibold text-purple-200">② Nyatakan x dan y terhadap x' dan y':</p>
+                    <BlockMath math="x = a + \frac{x'-a}{k}, \qquad y = b + \frac{y'-b}{k}" />
+                  </div>
+
+                  {/* Langkah 3: substitusi */}
+                  <div className="bg-slate-900/70 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-semibold text-purple-200">③ Substitusi ke persamaan garis <InlineMath math="y = mx + c" />:</p>
+                    <BlockMath math="b + \frac{y'-b}{k} = m\!\left(a + \frac{x'-a}{k}\right) + c" />
+                    <BlockMath math="\frac{y'-b}{k} = m \cdot \frac{x'-a}{k} + (ma - b + c)" />
+                    <BlockMath math="y' - b = m(x'-a) + k(ma - b + c)" />
+                    <BlockMath math="y' = mx' + \underbrace{kc + (k-1)(ma-b)}_{c'}" />
+                  </div>
+
+                  <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-purple-300 mb-1">✅ Hasil Bayangan:</p>
+                    <BlockMath math="\boxed{y = mx + c'}, \quad c' = kc + (k-1)(ma-b)" />
+                    <p className="font-body text-xs text-white/60 mt-1">Jika <InlineMath math="a=0, b=0" />, maka <InlineMath math="c' = kc" /> — sama dengan rumus pusat O(0,0).</p>
+                  </div>
                 </div>
 
                 {/* Untuk bentuk umum ax + by + c = 0 */}
