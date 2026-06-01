@@ -1241,6 +1241,343 @@ function AnimasiRotasiKurvaLinearD() {
 }
 
 /* ──────────────────────────────────────────────
+   DILATASI KURVA LINEAR — helpers + component
+────────────────────────────────────────────── */
+
+function computeDilatedLineIntercept(m: number, cLine: number, cx: number, cy: number, k: number): number {
+  return k * cLine + (k - 1) * (m * cx - cy);
+}
+
+function fmtLineDK(m: number, c: number): string {
+  const fmt = (v: number) => { const r = Math.round(v * 1000) / 1000; return Number.isInteger(r) ? String(r) : r.toString(); };
+  const rM = Math.round(m * 1000) / 1000;
+  const rC = Math.round(c * 1000) / 1000;
+  if (Math.abs(rM) < 1e-9 && Math.abs(rC) < 1e-9) return 'y = 0';
+  if (Math.abs(rM) < 1e-9) return `y = ${fmt(rC)}`;
+  const mStr = Math.abs(Math.abs(rM) - 1) < 1e-9 ? (rM < 0 ? '-' : '') : `${fmt(rM)}`;
+  const mPart = `${mStr}x`;
+  if (Math.abs(rC) < 1e-9) return `y = ${mPart}`;
+  return `y = ${mPart}${rC > 0 ? ` + ${fmt(rC)}` : ` − ${fmt(Math.abs(rC))}`}`;
+}
+
+function AnimasiDilatasiKurvaLinear() {
+  const [inputType, setInputType] = useState<'slope' | 'general'>('slope');
+  const [inputM,  setInputM]  = useState('1');
+  const [inputC,  setInputC]  = useState('2');
+  const [inputGA, setInputGA] = useState('1');
+  const [inputGB, setInputGB] = useState('-1');
+  const [inputGC, setInputGC] = useState('2');
+  const [kPreset, setKPreset] = useState<number | 'custom'>(2);
+  const [inputK,  setInputK]  = useState('2');
+  const [centerType, setCenterType] = useState<'origin' | 'custom'>('origin');
+  const [inputCx, setInputCx] = useState('0');
+  const [inputCy, setInputCy] = useState('0');
+  const [show,        setShow]     = useState(false);
+  const [isAnimating, setIsAnim]   = useState(false);
+  const [animT,       setAnimT]    = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  const k  = kPreset === 'custom' ? (parseFloat(inputK) || 1) : kPreset;
+  const cx = centerType === 'origin' ? 0 : (parseFloat(inputCx) || 0);
+  const cy = centerType === 'origin' ? 0 : (parseFloat(inputCy) || 0);
+
+  const parsed = (() => {
+    if (inputType === 'slope') {
+      const m = parseFloat(inputM);
+      if (isNaN(m)) return null;
+      return { m, cLine: parseFloat(inputC) || 0, isVertical: false };
+    }
+    const a = parseFloat(inputGA) || 0, b = parseFloat(inputGB) || 0, gc = parseFloat(inputGC) || 0;
+    if (a === 0 && b === 0) return null;
+    if (b === 0) return { m: 0, cLine: 0, isVertical: true, vertX: -gc / a };
+    return { m: -a / b, cLine: -gc / b, isVertical: false };
+  })();
+
+  const isValid  = parsed !== null;
+  const isVert   = isValid && parsed!.isVertical;
+  const m        = isValid && !isVert ? parsed!.m    : 0;
+  const cLine    = isValid && !isVert ? parsed!.cLine : 0;
+  const vertX0   = isValid && isVert ? (parsed as any).vertX : 0;
+
+  const targetC  = isValid && !isVert ? computeDilatedLineIntercept(m, cLine, cx, cy, k) : 0;
+  const targetVX = isValid && isVert  ? cx + k * (vertX0 - cx) : 0;
+
+  const t       = isAnimating ? animT : (show ? 1 : 0);
+  const animC   = cLine  + t * (targetC  - cLine);
+  const animVX  = vertX0 + t * (targetVX - vertX0);
+
+  const showingResult = show || isAnimating;
+
+  const accentColor = k >= 1 ? '#4ade80' : k > 0 ? '#facc15' : k > -1 ? '#fb923c' : '#f87171';
+  const boxFill     = k >  1 ? '#16a34a' : k > 0 ? '#ca8a04' : k > -1 ? '#ea580c' : '#dc2626';
+  const { text: kText, color: kColor } = kLabel(k);
+
+  const easeOut = (v: number) => 1 - Math.pow(1 - v, 3);
+
+  const reset = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnim(false); setAnimT(0);
+  };
+  const handleDilate = () => {
+    if (!isValid) return;
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnim(true); setAnimT(0);
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const raw = Math.min((now - t0) / 1800, 1);
+      setAnimT(easeOut(raw));
+      if (raw < 1) { rafRef.current = requestAnimationFrame(tick); }
+      else { setAnimT(1); setIsAnim(false); setShow(true); }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+  const chg = (fn: () => void) => {
+    fn();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnim(false); setAnimT(0);
+  };
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
+  const inputLabel = inputType === 'slope'
+    ? `y = ${inputM}x ${parseFloat(inputC) >= 0 ? '+ ' : ''}${inputC}`
+    : `${inputGA}x + ${inputGB}y + ${inputGC} = 0`;
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="text-orange-300 font-bold text-sm font-body">📈 Animasi Interaktif — Dilatasi Kurva Linear</p>
+
+      {/* Bentuk garis */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Bentuk Persamaan Garis</p>
+        <div className="flex gap-2 flex-wrap">
+          {(['slope', 'general'] as const).map(tp => (
+            <button key={tp} onClick={() => chg(() => setInputType(tp))}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold font-body transition-all border ${
+                inputType === tp ? 'bg-orange-500/80 border-orange-400 text-white' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
+              }`}
+            >{tp === 'slope' ? 'y = mx + c' : 'ax + by + c = 0'}</button>
+          ))}
+        </div>
+        {inputType === 'slope' ? (
+          <div className="flex items-center gap-2 flex-wrap pt-1">
+            <span className="text-xs text-white/60 font-body">y =</span>
+            <input type="number" step="0.5" value={inputM} onChange={e => chg(() => setInputM(e.target.value))}
+              className="w-16 bg-slate-700 border border-orange-500/50 rounded-lg px-2 py-1 text-xs text-white text-center font-mono focus:outline-none focus:border-orange-400" placeholder="m" />
+            <span className="text-xs text-white/60 font-body">x +</span>
+            <input type="number" step="0.5" value={inputC} onChange={e => chg(() => setInputC(e.target.value))}
+              className="w-16 bg-slate-700 border border-orange-500/50 rounded-lg px-2 py-1 text-xs text-white text-center font-mono focus:outline-none focus:border-orange-400" placeholder="c" />
+          </div>
+        ) : (
+          <div className="flex items-center gap-1.5 flex-wrap pt-1 text-xs text-white/60 font-body">
+            <input type="number" step="1" value={inputGA} onChange={e => chg(() => setInputGA(e.target.value))}
+              className="w-12 bg-slate-700 border border-slate-500 rounded-lg px-1 py-1 text-xs text-white text-center font-mono" placeholder="a" />
+            <span>x +</span>
+            <input type="number" step="1" value={inputGB} onChange={e => chg(() => setInputGB(e.target.value))}
+              className="w-12 bg-slate-700 border border-slate-500 rounded-lg px-1 py-1 text-xs text-white text-center font-mono" placeholder="b" />
+            <span>y +</span>
+            <input type="number" step="1" value={inputGC} onChange={e => chg(() => setInputGC(e.target.value))}
+              className="w-12 bg-slate-700 border border-slate-500 rounded-lg px-1 py-1 text-xs text-white text-center font-mono" placeholder="c" />
+            <span>= 0</span>
+          </div>
+        )}
+        {!isValid && <p className="text-xs text-red-400 font-body">Persamaan tidak valid.</p>}
+      </div>
+
+      {/* Faktor k */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Faktor Skala k</p>
+        <div className="flex gap-2 flex-wrap">
+          {K_PRESETS.map(({ label, value }) => (
+            <button key={label} onClick={() => chg(() => { setKPreset(value); setInputK(String(value)); })}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+                kPreset === value
+                  ? 'bg-orange-500 border-orange-400 text-white shadow-lg shadow-orange-500/30'
+                  : 'bg-slate-700/60 border-slate-600 text-white/60 hover:border-orange-500/50 hover:text-white/90'
+              }`}
+            >k = {label}</button>
+          ))}
+          <button onClick={() => chg(() => setKPreset('custom'))}
+            className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+              kPreset === 'custom' ? 'bg-violet-500 border-violet-400 text-white shadow-lg' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
+            }`}
+          >Lainnya…</button>
+        </div>
+        {kPreset === 'custom' && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">k =</label>
+            <input type="number" step="0.1" value={inputK} onChange={e => chg(() => setInputK(e.target.value))}
+              className="w-20 bg-slate-700 border border-violet-500/50 rounded-lg px-2 py-1 text-sm text-white text-center font-mono focus:outline-none focus:border-violet-400" />
+          </div>
+        )}
+        <p className="text-xs font-body font-semibold mt-1" style={{ color: kColor }}>{kText}</p>
+      </div>
+
+      {/* Pusat dilatasi */}
+      <div className="space-y-1.5">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Dilatasi</p>
+        <div className="flex gap-2">
+          {(['origin', 'custom'] as const).map(c => (
+            <button key={c} onClick={() => chg(() => setCenterType(c))}
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
+                centerType === c ? 'bg-yellow-500/80 border-yellow-400 text-white shadow-md' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
+              }`}
+            >{c === 'origin' ? 'O(0, 0)' : 'Titik (a, b)'}</button>
+          ))}
+        </div>
+        {centerType === 'custom' && (
+          <div className="flex items-center gap-3 pt-1">
+            <label className="text-xs text-white/60 font-body">a =</label>
+            <input type="number" value={inputCx} onChange={e => chg(() => setInputCx(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+            <label className="text-xs text-white/60 font-body">b =</label>
+            <input type="number" value={inputCy} onChange={e => chg(() => setInputCy(e.target.value))} className="w-16 bg-slate-700 border border-slate-500 rounded-lg px-2 py-1 text-sm text-white text-center font-mono" />
+          </div>
+        )}
+      </div>
+
+      {/* Grid + Panel */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start w-full">
+
+        {/* SVG Grid */}
+        <div className="w-full max-w-[360px] mx-auto lg:mx-0 flex-shrink-0">
+          <DGrid accent={accentColor}>
+
+            {/* Garis asli */}
+            {isValid && !isVert && (
+              <line x1={Dpx(-6)} y1={Dpy(m * -6 + cLine)} x2={Dpx(6)} y2={Dpy(m * 6 + cLine)}
+                stroke="#22d3ee" strokeWidth="2.5" opacity={showingResult ? 0.35 : 1} />
+            )}
+            {isValid && isVert && (
+              <line x1={Dpx(vertX0)} y1={0} x2={Dpx(vertX0)} y2={DS}
+                stroke="#22d3ee" strokeWidth="2.5" opacity={showingResult ? 0.35 : 1} />
+            )}
+            {isValid && !isVert && !showingResult && (
+              <text x={Dpx(2)} y={Dpy(m * 2 + cLine) - 8} fill="#22d3ee" fontSize="9" fontWeight="bold">{inputLabel}</text>
+            )}
+
+            {/* Garis dilatasi (animasi) */}
+            {showingResult && isValid && !isVert && (
+              <line x1={Dpx(-6)} y1={Dpy(m * -6 + animC)} x2={Dpx(6)} y2={Dpy(m * 6 + animC)}
+                stroke={accentColor} strokeWidth="2.5" opacity="0.95"
+                strokeDasharray={show && !isAnimating ? '6,3' : 'none'} />
+            )}
+            {showingResult && isValid && isVert && (
+              <line x1={Dpx(animVX)} y1={0} x2={Dpx(animVX)} y2={DS}
+                stroke={accentColor} strokeWidth="2.5" opacity="0.95"
+                strokeDasharray={show && !isAnimating ? '6,3' : 'none'} />
+            )}
+
+            {/* Label garis bayangan */}
+            {show && !isAnimating && isValid && !isVert && (
+              <text x={Dpx(-2)} y={Dpy(m * -2 + targetC) - 8} fill={accentColor} fontSize="9" fontWeight="bold">
+                {fmtLineDK(m, Math.round(targetC * 1000) / 1000)}
+              </text>
+            )}
+            {show && !isAnimating && isValid && isVert && (
+              <text x={Dpx(targetVX) + 5} y={Dpy(2)} fill={accentColor} fontSize="9" fontWeight="bold">
+                x = {Math.round(targetVX * 100) / 100}
+              </text>
+            )}
+            {showingResult && isValid && !isVert && (
+              <text x={Dpx(2)} y={Dpy(m * 2 + cLine) + 14} fill="#22d3ee" fontSize="8" opacity="0.5">{inputLabel}</text>
+            )}
+
+            {/* Sinar dari pusat ke perpotongan dg sumbu y (visualisasi intercept bergerak) */}
+            {showingResult && isValid && !isVert && (
+              <g>
+                <line x1={Dpx(cx)} y1={Dpy(cy)} x2={Dpx(0)} y2={Dpy(cLine)}
+                  stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="5,3" opacity="0.4" />
+                <line x1={Dpx(cx)} y1={Dpy(cy)} x2={Dpx(0)} y2={Dpy(animC)}
+                  stroke={accentColor} strokeWidth="1.7" strokeDasharray="5,3" opacity="0.8" />
+                <circle cx={Dpx(0)} cy={Dpy(cLine)} r={4} fill="#22d3ee" opacity="0.8" />
+                <circle cx={Dpx(0)} cy={Dpy(animC)} r={5} fill={accentColor} opacity="0.95" />
+              </g>
+            )}
+
+            {/* Badge k */}
+            {showingResult && (() => {
+              const bx = DS / 2, by = 18, bw = 80, bh = 28;
+              return (
+                <g>
+                  <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} fill={boxFill} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by + 5} fontSize="14" fill="#fff" textAnchor="middle" fontWeight="bold">k = {k}</text>
+                </g>
+              );
+            })()}
+
+            {/* Pusat dilatasi */}
+            <DCenterMark x={cx} y={cy} color="#facc15" />
+            <text x={Dpx(cx) + 14} y={Dpy(cy) - 12} fill="#facc15" fontSize="9" fontWeight="bold">
+              {centerType === 'origin' ? 'O(0,0)' : `(${cx},${cy})`}
+            </text>
+          </DGrid>
+
+          {/* Legenda */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
+            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
+            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">Pusat dilatasi</span></div>
+            {showingResult && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accentColor }} /><span style={{ color: accentColor }}>Bayangan</span></div>}
+          </div>
+        </div>
+
+        {/* Panel kanan */}
+        <div className="flex-1 min-w-0 space-y-2 w-full">
+          <div className="flex gap-2">
+            <button onClick={handleDilate} disabled={isAnimating || !isValid}
+              className={`flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all ${
+                isAnimating || !isValid ? 'opacity-50 cursor-not-allowed bg-slate-600 text-white' : 'text-white shadow-lg'
+              }`}
+              style={!isAnimating && isValid ? { background: '#f97316', boxShadow: '0 4px 14px #f9731655' } : {}}
+            >{isAnimating ? '⏳ Mendilatasi…' : '🔭 Dilatasikan!'}</button>
+            <button onClick={reset} className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all">Reset</button>
+          </div>
+
+          <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
+            <p className="font-bold text-sm" style={{ color: kColor }}>{kText}</p>
+            <p className="text-white/50">Pusat: {centerType === 'origin' ? 'O(0, 0)' : `(${cx}, ${cy})`}</p>
+            {isAnimating && <p className="animate-pulse font-semibold text-orange-300">⏳ Slow-motion dilatasi garis…</p>}
+          </div>
+
+          {show && !isAnimating && isValid && (
+            <div className="bg-slate-700/40 rounded-xl p-3 space-y-2">
+              <p className="text-xs font-bold text-white/60 font-body uppercase">Hasil Dilatasi:</p>
+              <div className="flex items-center gap-2 text-sm font-body flex-wrap">
+                <span className="text-cyan-300 font-mono text-xs">{inputLabel}</span>
+                <span className="text-white/30">→</span>
+                {!isVert
+                  ? <span className="font-bold font-mono text-xs" style={{ color: accentColor }}>{fmtLineDK(m, Math.round(targetC * 1000) / 1000)}</span>
+                  : <span className="font-bold font-mono text-xs" style={{ color: accentColor }}>x = {Math.round(targetVX * 1000) / 1000}</span>
+                }
+              </div>
+              {!isVert && (
+                <div className="bg-slate-800/60 rounded-lg p-2 text-xs font-body text-white/60 space-y-0.5">
+                  <p className="text-orange-300 font-semibold">Keterangan:</p>
+                  <p>• Gradien (m) = <span className="text-white">{Math.round(m * 1000) / 1000}</span> <span className="text-green-300">tidak berubah</span></p>
+                  <p>• c asli = <span className="text-cyan-300">{Math.round(cLine * 1000) / 1000}</span></p>
+                  <p>• c bayangan = k·c + (k−1)·(m·a − b)</p>
+                  <p>  = {k}·{Math.round(cLine * 1000) / 1000} + ({k}−1)·({Math.round(m * 1000) / 1000}·{cx} − {cy})</p>
+                  <p>  = <span style={{ color: accentColor }} className="font-bold">{Math.round(targetC * 1000) / 1000}</span></p>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5">
+            <p className="text-orange-300 font-semibold">💡 Cara pakai:</p>
+            <p>1. Masukkan persamaan garis</p>
+            <p>2. Pilih faktor skala k</p>
+            <p>3. Pilih pusat O(0,0) atau titik (a,b)</p>
+            <p>4. Klik <strong className="text-white">🔭 Dilatasikan!</strong></p>
+            <p className="text-orange-200/70 pt-1">⚡ Gradien selalu tetap — hanya intercept yang berubah!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
    MAIN PAGE COMPONENT
 ────────────────────────────────────────────── */
 
@@ -1248,6 +1585,7 @@ const DilatasisPage = () => {
   const navigate = useNavigate();
   const expandedSections = [
     "intro", "animasi-titik", "animasi", "rotasi-kurva", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
+    "konsep-kurva", "contoh-kurva", "animasi-kurva",
   ];
 
   const SectionHeader = ({
