@@ -1260,8 +1260,75 @@ function fmtLineDK(m: number, c: number): string {
   return `y = ${mPart}${rC > 0 ? ` + ${fmt(rC)}` : ` − ${fmt(Math.abs(rC))}`}`;
 }
 
+/* ── Parser persamaan garis dari teks bebas ── */
+function parseLineEq(raw: string): { m: number; cLine: number } | null {
+  const s = raw.trim().replace(/\s+/g, '').toLowerCase();
+  if (!s) return null;
+
+  /* Bentuk y = ... */
+  if (s.startsWith('y=')) {
+    const rhs = s.slice(2);
+    /* y = ax + b */
+    const r1 = rhs.match(/^([+-]?\d*\.?\d*)\*?x([+-]\d+\.?\d*)$/);
+    if (r1) {
+      let ms = r1[1]; if (!ms || ms === '+') ms = '1'; if (ms === '-') ms = '-1';
+      const mv = +ms; if (isNaN(mv)) return null;
+      return { m: mv, cLine: +r1[2] };
+    }
+    /* y = ax */
+    const r2 = rhs.match(/^([+-]?\d*\.?\d*)\*?x$/);
+    if (r2) {
+      let ms = r2[1]; if (!ms || ms === '+') ms = '1'; if (ms === '-') ms = '-1';
+      const mv = +ms; if (isNaN(mv)) return null;
+      return { m: mv, cLine: 0 };
+    }
+    /* y = number */
+    const r3 = rhs.match(/^([+-]?\d+\.?\d*)$/);
+    if (r3) return { m: 0, cLine: +r3[1] };
+    return null;
+  }
+
+  /* Bentuk ax + by = c  ATAU  ax + by + c = 0  ATAU  ax + by - c = 0 */
+  /* Normalisasi: pisahkan di tanda '=' terakhir */
+  const eqIdx = s.lastIndexOf('=');
+  if (eqIdx === -1) return null;
+  const lhs = s.slice(0, eqIdx);
+  const rhsStr = s.slice(eqIdx + 1);
+  const rhsVal = parseFloat(rhsStr);
+  if (isNaN(rhsVal)) return null;
+
+  /* Ekstrak koef x dan y dari sisi kiri */
+  const getCoef = (part: string, varCh: string): number => {
+    const re = new RegExp(`([+-]?\\d*\\.?\\d*)\\*?${varCh}`);
+    const m = part.match(re);
+    if (!m) return 0;
+    let ms = m[1]; if (!ms || ms === '+') ms = '1'; if (ms === '-') ms = '-1';
+    const v = +ms; return isNaN(v) ? 0 : v;
+  };
+
+  const a = getCoef(lhs, 'x');
+  const b = getCoef(lhs, 'y');
+
+  /* Jika ada konstanta di sisi kiri (bentuk ax+by+c=0 → rhs=0) */
+  /* Contoh: 3x+2y+6=0  →  lhs='3x+2y+6', rhs=0 */
+  /* Kita ambil bagian yang bukan x dan bukan y sebagai konstanta lhs */
+  let lhsConst = 0;
+  if (rhsVal === 0) {
+    const lhsNoXY = lhs
+      .replace(/[+-]?\d*\.?\d*\*?x/, '')
+      .replace(/[+-]?\d*\.?\d*\*?y/, '');
+    const cv = parseFloat(lhsNoXY);
+    if (!isNaN(cv)) lhsConst = cv;
+  }
+
+  /* ax + by + lhsConst = rhsVal  →  by = rhsVal - ax - lhsConst  →  y = (-a/b)x + (rhsVal-lhsConst)/b */
+  if (b === 0) return null; /* garis vertikal, skip */
+  return { m: -a / b, cLine: (rhsVal - lhsConst) / b };
+}
+
 function AnimasiDilatasiKurvaLinear() {
-  const [inputType, setInputType] = useState<'slope' | 'general'>('slope');
+  const [inputType, setInputType] = useState<'text' | 'slope' | 'general'>('text');
+  const [freeText,  setFreeText]  = useState('y = x + 2');
   const [inputM,  setInputM]  = useState('1');
   const [inputC,  setInputC]  = useState('2');
   const [inputGA, setInputGA] = useState('1');
@@ -1281,7 +1348,13 @@ function AnimasiDilatasiKurvaLinear() {
   const cx = centerType === 'origin' ? 0 : (parseFloat(inputCx) || 0);
   const cy = centerType === 'origin' ? 0 : (parseFloat(inputCy) || 0);
 
+  const textParsed = inputType === 'text' ? parseLineEq(freeText) : null;
+
   const parsed = (() => {
+    if (inputType === 'text') {
+      if (!textParsed) return null;
+      return { m: textParsed.m, cLine: textParsed.cLine, isVertical: false };
+    }
     if (inputType === 'slope') {
       const m = parseFloat(inputM);
       if (isNaN(m)) return null;
@@ -1340,17 +1413,60 @@ function AnimasiDilatasiKurvaLinear() {
   };
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
 
-  const inputLabel = inputType === 'slope'
-    ? `y = ${inputM}x ${parseFloat(inputC) >= 0 ? '+ ' : ''}${inputC}`
-    : `${inputGA}x + ${inputGB}y + ${inputGC} = 0`;
+  const inputLabel = inputType === 'text'
+    ? (textParsed ? fmtLineDK(textParsed.m, textParsed.cLine) : freeText)
+    : inputType === 'slope'
+      ? `y = ${inputM}x ${parseFloat(inputC) >= 0 ? '+ ' : ''}${inputC}`
+      : `${inputGA}x + ${inputGB}y + ${inputGC} = 0`;
 
   return (
     <div className="space-y-4 pt-2">
       <p className="text-orange-300 font-bold text-sm font-body">📈 Animasi Interaktif — Dilatasi Kurva Linear</p>
 
-      {/* Bentuk garis */}
+      {/* ── Input teks bebas ── */}
+      <div className="bg-slate-800/70 border border-orange-500/30 rounded-xl p-3 space-y-2">
+        <p className="text-xs font-body font-semibold text-orange-300">✏️ Ketik Persamaan Garis</p>
+        <input
+          type="text"
+          value={freeText}
+          onChange={e => chg(() => { setFreeText(e.target.value); setInputType('text'); })}
+          onFocus={() => chg(() => setInputType('text'))}
+          placeholder="Contoh: y = 2x + 3  atau  3x + 2y = 6"
+          className={`w-full bg-slate-900/80 border rounded-lg px-3 py-2 text-sm text-white font-mono focus:outline-none transition-all ${
+            inputType === 'text' && freeText
+              ? textParsed
+                ? 'border-green-500/70 focus:border-green-400'
+                : 'border-red-500/70 focus:border-red-400'
+              : 'border-slate-600 focus:border-orange-400'
+          }`}
+        />
+        {/* Hasil parse */}
+        {inputType === 'text' && freeText && (
+          textParsed ? (
+            <div className="flex items-center gap-2 text-xs font-body flex-wrap">
+              <span className="text-green-400">✅ Terbaca:</span>
+              <span className="font-mono text-white bg-green-500/10 border border-green-500/30 rounded px-2 py-0.5">
+                m = {Math.round(textParsed.m * 1000) / 1000}
+              </span>
+              <span className="font-mono text-white bg-green-500/10 border border-green-500/30 rounded px-2 py-0.5">
+                c = {Math.round(textParsed.cLine * 1000) / 1000}
+              </span>
+              <span className="text-green-300 font-semibold">→ {fmtLineDK(textParsed.m, textParsed.cLine)}</span>
+            </div>
+          ) : (
+            <p className="text-xs text-red-400 font-body">
+              ❌ Format tidak dikenali. Coba: <span className="font-mono">y = 2x + 3</span> atau <span className="font-mono">3x + 2y = 6</span> atau <span className="font-mono">2x - y + 1 = 0</span>
+            </p>
+          )
+        )}
+        <p className="text-xs text-white/40 font-body">
+          Mendukung: <span className="font-mono text-white/60">y = mx + c</span> · <span className="font-mono text-white/60">ax + by = c</span> · <span className="font-mono text-white/60">ax + by + c = 0</span>
+        </p>
+      </div>
+
+      {/* Bentuk garis (input angka manual) */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Bentuk Persamaan Garis</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">atau Input Manual</p>
         <div className="flex gap-2 flex-wrap">
           {(['slope', 'general'] as const).map(tp => (
             <button key={tp} onClick={() => chg(() => setInputType(tp))}
@@ -1360,7 +1476,7 @@ function AnimasiDilatasiKurvaLinear() {
             >{tp === 'slope' ? 'y = mx + c' : 'ax + by + c = 0'}</button>
           ))}
         </div>
-        {inputType === 'slope' ? (
+        {inputType === 'slope' && (
           <div className="flex items-center gap-2 flex-wrap pt-1">
             <span className="text-xs text-white/60 font-body">y =</span>
             <input type="number" step="0.5" value={inputM} onChange={e => chg(() => setInputM(e.target.value))}
@@ -1369,7 +1485,8 @@ function AnimasiDilatasiKurvaLinear() {
             <input type="number" step="0.5" value={inputC} onChange={e => chg(() => setInputC(e.target.value))}
               className="w-16 bg-slate-700 border border-orange-500/50 rounded-lg px-2 py-1 text-xs text-white text-center font-mono focus:outline-none focus:border-orange-400" placeholder="c" />
           </div>
-        ) : (
+        )}
+        {inputType === 'general' && (
           <div className="flex items-center gap-1.5 flex-wrap pt-1 text-xs text-white/60 font-body">
             <input type="number" step="1" value={inputGA} onChange={e => chg(() => setInputGA(e.target.value))}
               className="w-12 bg-slate-700 border border-slate-500 rounded-lg px-1 py-1 text-xs text-white text-center font-mono" placeholder="a" />
@@ -1382,7 +1499,9 @@ function AnimasiDilatasiKurvaLinear() {
             <span>= 0</span>
           </div>
         )}
-        {!isValid && <p className="text-xs text-red-400 font-body">Persamaan tidak valid.</p>}
+        {!isValid && (inputType === 'slope' || inputType === 'general') && (
+          <p className="text-xs text-red-400 font-body">Persamaan tidak valid.</p>
+        )}
       </div>
 
       {/* Faktor k */}
