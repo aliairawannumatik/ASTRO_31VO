@@ -2568,33 +2568,100 @@ const DilatasisPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
                     <p className="font-body text-sm text-white">
-                      Dilatasi dengan pusat <InlineMath math="P(-1, 2)" /> dan faktor skala <InlineMath math="k = -2" /> memetakan garis <InlineMath math="\ell" /> ke garis <InlineMath math="y = 4x + 10" />.
-                      Tentukan persamaan garis <InlineMath math="\ell" /> asal!
+                      Garis <InlineMath math="2x + y - 6 = 0" /> ditranslasikan oleh <InlineMath math="T(3,\,-2)" />, kemudian hasilnya didilatasi dengan pusat <InlineMath math="O(0,0)" /> dan faktor skala <InlineMath math="k = 2" />. Tentukan persamaan bayangan akhir garis tersebut!
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Diketahui:</strong> bayangan <InlineMath math="y = 4x + 10" />, <InlineMath math="a = -1,\ b = 2,\ k = -2" /></p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-3">
-                        <p className="text-xs text-red-300 font-semibold">Langkah 1 — Gradien garis asal:</p>
-                        <p className="text-xs text-white/70">Gradien tidak berubah oleh dilatasi, jadi:</p>
-                        <BlockMath math="m = 4" />
-                        <p className="text-xs text-red-300 font-semibold">Langkah 2 — Cari intercept asal dari intercept bayangan:</p>
-                        <p className="text-xs text-white/70">Rumus: <InlineMath math="c' = kc + (k-1)(ma - b)" /></p>
-                        <p className="text-xs text-white/70">Substitusi yang diketahui (<InlineMath math="c' = 10,\ k=-2,\ m=4,\ a=-1,\ b=2" />):</p>
-                        <BlockMath math="10 = -2c + (-2-1)(4 \times (-1) - 2)" />
-                        <BlockMath math="10 = -2c + (-3)(-4 - 2)" />
-                        <BlockMath math="10 = -2c + (-3)(-6)" />
-                        <BlockMath math="10 = -2c + 18" />
-                        <BlockMath math="-2c = -8 \Rightarrow c = 4" />
-                        <p className="text-xs text-red-300 font-semibold">Langkah 3 — Persamaan garis asal:</p>
-                        <BlockMath math="\ell : y = 4x + 4" />
+                    <div className="space-y-4 font-body text-sm text-white/80">
+                      <p><strong>Diketahui:</strong> garis <InlineMath math="2x + y - 6 = 0" />, translasi <InlineMath math="T(3,-2)" />, lalu dilatasi <InlineMath math="[O(0,0),\,k=2]" /></p>
+
+                      {/* Tahap 1 — Translasi */}
+                      <div className="border border-red-500/30 rounded-lg p-3 space-y-2">
+                        <p className="text-xs font-bold text-red-300">📐 Tahap 1 — Translasi <InlineMath math="T(3,\,-2)" /></p>
+                        <div className="bg-slate-900/60 rounded p-3 space-y-1">
+                          <p className="text-xs text-red-200">① Pemetaan translasi:</p>
+                          <BlockMath math="(x,\,y) \longrightarrow (x',\,y') \quad \text{dengan} \quad x' = x+3,\quad y' = y-2" />
+                          <p className="text-xs text-red-200">② Balik ke x dan y:</p>
+                          <BlockMath math="x = x' - 3, \qquad y = y' + 2" />
+                          <p className="text-xs text-red-200">③ Substitusi ke <InlineMath math="2x + y - 6 = 0" />:</p>
+                          <BlockMath math="2(x'-3) + (y'+2) - 6 = 0" />
+                          <BlockMath math="2x' - 6 + y' + 2 - 6 = 0" />
+                          <BlockMath math="2x' + y' - 10 = 0" />
+                        </div>
+                        <p className="text-xs text-white/50">Bayangan translasi: <InlineMath math="2x + y - 10 = 0" /></p>
                       </div>
-                      <p><strong className="text-red-300">Jawaban: <InlineMath math="\ell: y = 4x + 4" /></strong></p>
-                      <div className="bg-slate-900/50 rounded p-2 text-xs text-white/50">
-                        <p>Verifikasi: <InlineMath math="c' = (-2)(4) + (-3)(4 \times (-1) - 2) = -8 + (-3)(-6) = -8 + 18 = 10\ \checkmark" /></p>
+
+                      {/* Tahap 2 — Dilatasi */}
+                      <div className="border border-red-500/30 rounded-lg p-3 space-y-2">
+                        <p className="text-xs font-bold text-red-300">🔍 Tahap 2 — Dilatasi <InlineMath math="[O(0,0),\,k=2]" /></p>
+                        <div className="bg-slate-900/60 rounded p-3 space-y-1">
+                          <p className="text-xs text-red-200">① Pemetaan dilatasi:</p>
+                          <BlockMath math="(x,\,y) \longrightarrow (x'',\,y'') \quad \text{dengan} \quad x'' = 2x,\quad y'' = 2y" />
+                          <p className="text-xs text-red-200">② Balik ke x dan y:</p>
+                          <BlockMath math="x = \frac{x''}{2}, \qquad y = \frac{y''}{2}" />
+                          <p className="text-xs text-red-200">③ Substitusi ke bayangan translasi <InlineMath math="2x + y - 10 = 0" />:</p>
+                          <BlockMath math="2 \cdot \frac{x''}{2} + \frac{y''}{2} - 10 = 0" />
+                          <BlockMath math="x'' + \frac{y''}{2} - 10 = 0 \quad \times 2" />
+                          <BlockMath math="2x'' + y'' - 20 = 0" />
+                        </div>
                       </div>
+
+                      <p><strong className="text-red-300">Jawaban: <InlineMath math="2x + y - 20 = 0" /></strong></p>
+                      <p className="text-white/50 text-xs">Transformasi gabungan (translasi → dilatasi) diselesaikan bertahap; hasil tiap tahap digunakan sebagai input tahap berikutnya.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── EKSTRA ── */}
+                <div className="border-l-4 border-purple-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-purple-500/20 text-purple-400 text-xs font-bold px-2 py-1 rounded">EKSTRA</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Garis <InlineMath math="x - 2y + 4 = 0" /> ditranslasikan oleh <InlineMath math="T(-1,\,3)" />, kemudian hasilnya didilatasi dengan pusat <InlineMath math="P(2,\,-1)" /> dan faktor skala <InlineMath math="k = 3" />. Tentukan persamaan bayangan akhir garis tersebut!
+                    </p>
+                  </div>
+                  <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-purple-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-4 font-body text-sm text-white/80">
+                      <p><strong>Diketahui:</strong> garis <InlineMath math="x - 2y + 4 = 0" />, translasi <InlineMath math="T(-1,3)" />, lalu dilatasi <InlineMath math="[P(2,-1),\,k=3]" /></p>
+
+                      {/* Tahap 1 — Translasi */}
+                      <div className="border border-purple-500/30 rounded-lg p-3 space-y-2">
+                        <p className="text-xs font-bold text-purple-300">📐 Tahap 1 — Translasi <InlineMath math="T(-1,\,3)" /></p>
+                        <div className="bg-slate-900/60 rounded p-3 space-y-1">
+                          <p className="text-xs text-purple-200">① Pemetaan translasi:</p>
+                          <BlockMath math="(x,\,y) \longrightarrow (x',\,y') \quad \text{dengan} \quad x' = x-1,\quad y' = y+3" />
+                          <p className="text-xs text-purple-200">② Balik ke x dan y:</p>
+                          <BlockMath math="x = x' + 1, \qquad y = y' - 3" />
+                          <p className="text-xs text-purple-200">③ Substitusi ke <InlineMath math="x - 2y + 4 = 0" />:</p>
+                          <BlockMath math="(x'+1) - 2(y'-3) + 4 = 0" />
+                          <BlockMath math="x' + 1 - 2y' + 6 + 4 = 0" />
+                          <BlockMath math="x' - 2y' + 11 = 0" />
+                        </div>
+                        <p className="text-xs text-white/50">Bayangan translasi: <InlineMath math="x - 2y + 11 = 0" /></p>
+                      </div>
+
+                      {/* Tahap 2 — Dilatasi */}
+                      <div className="border border-purple-500/30 rounded-lg p-3 space-y-2">
+                        <p className="text-xs font-bold text-purple-300">🔍 Tahap 2 — Dilatasi <InlineMath math="[P(2,\,-1),\,k=3]" /></p>
+                        <div className="bg-slate-900/60 rounded p-3 space-y-1">
+                          <p className="text-xs text-purple-200">① Pemetaan dilatasi:</p>
+                          <BlockMath math="x'' = 2 + 3(x-2) = 3x - 4 \quad\Rightarrow\quad x = \frac{x''+4}{3}" />
+                          <BlockMath math="y'' = -1 + 3(y+1) = 3y + 2 \quad\Rightarrow\quad y = \frac{y''-2}{3}" />
+                          <p className="text-xs text-purple-200">② Substitusi ke bayangan translasi <InlineMath math="x - 2y + 11 = 0" />:</p>
+                          <BlockMath math="\frac{x''+4}{3} - 2 \cdot \frac{y''-2}{3} + 11 = 0" />
+                          <BlockMath math="\frac{x'' + 4 - 2y'' + 4}{3} + 11 = 0 \quad \times 3" />
+                          <BlockMath math="x'' - 2y'' + 8 + 33 = 0" />
+                          <BlockMath math="x'' - 2y'' + 41 = 0" />
+                        </div>
+                      </div>
+
+                      <p><strong className="text-purple-300">Jawaban: <InlineMath math="x - 2y + 41 = 0" /></strong></p>
+                      <p className="text-white/50 text-xs">Pusat dilatasi bukan <InlineMath math="O(0,0)" />, sehingga pemetaan tahap 2 memerlukan penggeseran relatif terhadap <InlineMath math="P(2,-1)" /> sebelum di-invers.</p>
                     </div>
                   </div>
                 </div>
