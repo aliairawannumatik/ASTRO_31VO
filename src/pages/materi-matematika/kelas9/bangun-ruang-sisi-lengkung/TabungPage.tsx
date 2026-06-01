@@ -8,28 +8,20 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
-   INTERACTIVE 3D CYLINDER — smooth cylindrical gradient shading
-   Uses SVG linearGradient for seamless highlight→body→shadow look.
-   Caps rendered as ellipses with radial gradients.
+   INTERACTIVE 3D CYLINDER — SVG painter's algorithm (solid, no gaps)
 ───────────────────────────────────────────────────────────── */
-const CYL_R = 68;
-const CYL_H = 136;
+const CYL_SEGS = 48;
+const CYL_R = 65;
+const CYL_H = 130;
+const CYL_PD = 500;
 const CYL_W = 320;
 const CYL_H_SVG = 300;
 const CYL_CX = CYL_W / 2;
 const CYL_CY = CYL_H_SVG / 2;
 
-/* Project a 3D point (already Y-axis-rotated) to 2D screen coords */
-function cylProject(x: number, y: number, z: number) {
-  const PD = 600;
-  const s = PD / (PD + z + 80);
-  return { sx: CYL_CX + x * s, sy: CYL_CY + y * s };
-}
-
-/* Rotate around Y axis (horizontal spin), then tilt around X axis */
-function cylTransform(x: number, y: number, z: number, rotX: number, rotY: number) {
-  const rxa = (rotX * Math.PI) / 180;
-  const rya = (rotY * Math.PI) / 180;
+function cylRotPt(x: number, y: number, z: number, rx: number, ry: number) {
+  const rxa = (rx * Math.PI) / 180;
+  const rya = (ry * Math.PI) / 180;
   const x1 = x * Math.cos(rya) + z * Math.sin(rya);
   const z1 = -x * Math.sin(rya) + z * Math.cos(rya);
   const y2 = y * Math.cos(rxa) - z1 * Math.sin(rxa);
@@ -37,54 +29,17 @@ function cylTransform(x: number, y: number, z: number, rotX: number, rotY: numbe
   return { x: x1, y: y2, z: z2 };
 }
 
-/* Build the projected ellipse path for a cap at world-Y = yOff */
-function buildCapEllipse(rotX: number, rotY: number, yOff: number, segs = 80) {
-  const pts = Array.from({ length: segs }, (_, i) => {
-    const a = (2 * Math.PI * i) / segs;
-    const p = cylTransform(Math.cos(a) * CYL_R, yOff, Math.sin(a) * CYL_R, rotX, rotY);
-    return cylProject(p.x, p.y, p.z);
-  });
-  const d = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.sx.toFixed(2)},${p.sy.toFixed(2)}`).join(" ") + " Z";
-  const center = cylTransform(0, yOff, 0, rotX, rotY);
-  const cp = cylProject(center.x, center.y, center.z);
-  const avgZ = pts.reduce((s, _, i) => {
-    const raw = cylTransform(Math.cos((2 * Math.PI * i) / segs) * CYL_R, yOff, Math.sin((2 * Math.PI * i) / segs) * CYL_R, rotX, rotY);
-    return s + raw.z;
-  }, 0) / segs;
-  return { d, cx: cp.sx, cy: cp.sy, avgZ };
-}
-
-/* Build the 4 tangent corners of the cylinder body silhouette (a parallelogram) */
-function buildBodySilhouette(rotX: number, rotY: number, segs = 80) {
-  const topPts = Array.from({ length: segs }, (_, i) => {
-    const a = (2 * Math.PI * i) / segs;
-    const p = cylTransform(Math.cos(a) * CYL_R, -CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
-    return { ...cylProject(p.x, p.y, p.z), z: p.z };
-  });
-  const botPts = Array.from({ length: segs }, (_, i) => {
-    const a = (2 * Math.PI * i) / segs;
-    const p = cylTransform(Math.cos(a) * CYL_R, CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
-    return { ...cylProject(p.x, p.y, p.z), z: p.z };
-  });
-
-  /* The 4 silhouette corners */
-  const topL = topPts.reduce((b, p) => p.sx < b.sx ? p : b, topPts[0]);
-  const topR = topPts.reduce((b, p) => p.sx > b.sx ? p : b, topPts[0]);
-  const botL = botPts.reduce((b, p) => p.sx < b.sx ? p : b, botPts[0]);
-  const botR = botPts.reduce((b, p) => p.sx > b.sx ? p : b, botPts[0]);
-
-  const allX = [...topPts, ...botPts].map(p => p.sx);
-  const minX = Math.min(...allX);
-  const maxX = Math.max(...allX);
-  return { topL, topR, botL, botR, minX, maxX };
+function cylProj(p: { x: number; y: number; z: number }) {
+  const s = CYL_PD / (CYL_PD + p.z + 100);
+  return { x: CYL_CX + p.x * s, y: CYL_CY + p.y * s };
 }
 
 const InteractiveCylinder3D = () => {
-  const [rotX, setRotX] = useState(-22);
+  const [rotX, setRotX] = useState(-25);
   const [rotY, setRotY] = useState(30);
   const [isDragging, setIsDragging] = useState(false);
   const [showNet, setShowNet] = useState(false);
-  const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -22, baseRotY: 30 });
+  const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -25, baseRotY: 30 });
 
   const onMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
@@ -93,7 +48,7 @@ const InteractiveCylinder3D = () => {
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragging) return;
     setRotY(dragRef.current.baseRotY + (e.clientX - dragRef.current.startX) * 0.5);
-    setRotX(dragRef.current.baseRotX - (e.clientY - dragRef.current.startY) * 0.5);
+    setRotX(dragRef.current.baseRotX + (e.clientY - dragRef.current.startY) * 0.5);
   }, [isDragging]);
   const onMouseUp = useCallback(() => setIsDragging(false), []);
   const onTouchStart = (e: React.TouchEvent) => {
@@ -105,7 +60,7 @@ const InteractiveCylinder3D = () => {
     if (!isDragging) return;
     const t = e.touches[0];
     setRotY(dragRef.current.baseRotY + (t.clientX - dragRef.current.startX) * 0.5);
-    setRotX(dragRef.current.baseRotX - (t.clientY - dragRef.current.startY) * 0.5);
+    setRotX(dragRef.current.baseRotX + (t.clientY - dragRef.current.startY) * 0.5);
   }, [isDragging]);
   const onTouchEnd = useCallback(() => setIsDragging(false), []);
 
@@ -127,7 +82,7 @@ const InteractiveCylinder3D = () => {
     let frameId: number;
     let lastTs = 0;
     const animate = (ts: number) => {
-      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.022);
+      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.025);
       lastTs = ts;
       frameId = requestAnimationFrame(animate);
     };
@@ -135,26 +90,62 @@ const InteractiveCylinder3D = () => {
     return () => cancelAnimationFrame(frameId);
   }, [isDragging, showNet]);
 
-  /* ── Build geometry ── */
-  const top = buildCapEllipse(rotX, rotY, -CYL_H / 2);
-  const bot = buildCapEllipse(rotX, rotY,  CYL_H / 2);
-  const { topL, topR, botL, botR, minX, maxX } = buildBodySilhouette(rotX, rotY);
+  const topVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
+    const a = (2 * Math.PI * i) / CYL_SEGS;
+    return cylRotPt(Math.cos(a) * CYL_R, -CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
+  });
+  const botVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
+    const a = (2 * Math.PI * i) / CYL_SEGS;
+    return cylRotPt(Math.cos(a) * CYL_R, CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
+  });
+  const topVerts2D = topVerts3D.map(cylProj);
+  const botVerts2D = botVerts3D.map(cylProj);
 
-  /* Body is a simple parallelogram between the 4 silhouette tangent corners */
-  const bodyPath = [
-    `M ${topL.sx.toFixed(2)},${topL.sy.toFixed(2)}`,
-    `L ${topR.sx.toFixed(2)},${topR.sy.toFixed(2)}`,
-    `L ${botR.sx.toFixed(2)},${botR.sy.toFixed(2)}`,
-    `L ${botL.sx.toFixed(2)},${botL.sy.toFixed(2)}`,
-    "Z",
-  ].join(" ");
+  type Face = { avgZ: number; points: string; fill: string; stroke: string };
+  const faces: Face[] = [];
 
-  /* Gradient spans the full width of the body */
-  const gradX1Pct = ((minX) / CYL_W * 100).toFixed(1) + "%";
-  const gradX2Pct = ((maxX) / CYL_W * 100).toFixed(1) + "%";
+  for (let i = 0; i < CYL_SEGS; i++) {
+    const ni = (i + 1) % CYL_SEGS;
+    const t0 = topVerts3D[i], t1 = topVerts3D[ni];
+    const b0 = botVerts3D[i], b1 = botVerts3D[ni];
+    const p_t0 = topVerts2D[i], p_t1 = topVerts2D[ni];
+    const p_b0 = botVerts2D[i], p_b1 = botVerts2D[ni];
+    const avgZ = (t0.z + t1.z + b0.z + b1.z) / 4;
+    const midAngle = (2 * Math.PI * (i + 0.5)) / CYL_SEGS;
+    const nx = Math.cos(midAngle), nz = Math.sin(midAngle);
+    const rotNx = nx * Math.cos((rotY * Math.PI) / 180) + nz * Math.sin((rotY * Math.PI) / 180);
+    const lightness = Math.round(44 + rotNx * 22);
+    const visible = rotNx > -0.15;
+    faces.push({
+      avgZ,
+      points: `${p_t0.x},${p_t0.y} ${p_t1.x},${p_t1.y} ${p_b1.x},${p_b1.y} ${p_b0.x},${p_b0.y}`,
+      fill: visible ? `hsl(207,88%,${lightness}%)` : `hsl(207,60%,18%)`,
+      stroke: "rgba(0,100,200,0.2)",
+    });
+  }
 
-  /* Determine which cap is on top visually */
-  const topCapIsUpper = top.cy < bot.cy;
+  const topCapAvgZ = topVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
+  const botCapAvgZ = botVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
+  const topCapCenter3D = cylRotPt(0, -CYL_H / 2, 0, rotX, rotY);
+  const botCapCenter3D = cylRotPt(0, CYL_H / 2, 0, rotX, rotY);
+
+  faces.push({
+    avgZ: topCapAvgZ,
+    points: topVerts2D.map(p => `${p.x},${p.y}`).join(" "),
+    fill: topCapCenter3D.y < botCapCenter3D.y ? "#38bdf8" : "#0369a1",
+    stroke: "#7dd3fc",
+  });
+  faces.push({
+    avgZ: botCapAvgZ,
+    points: botVerts2D.map(p => `${p.x},${p.y}`).join(" "),
+    fill: botCapCenter3D.y > topCapCenter3D.y ? "#0ea5e9" : "#075985",
+    stroke: "#38bdf8",
+  });
+
+  faces.sort((a, b) => b.avgZ - a.avgZ);
+
+  const topCenter2D = cylProj(topCapCenter3D);
+  const botCenter2D = cylProj(botCapCenter3D);
 
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
@@ -170,77 +161,11 @@ const InteractiveCylinder3D = () => {
           onMouseDown={onMouseDown}
           onTouchStart={onTouchStart}
         >
-          <defs>
-            {/* Smooth cylindrical gradient: bright highlight left → golden mid → dark shadow right */}
-            <linearGradient id="cylBodyGrad" x1={gradX1Pct} y1="0%" x2={gradX2Pct} y2="0%" gradientUnits="userSpaceOnUse">
-              <stop offset="0%"   stopColor="#fffde7" stopOpacity="0.95"/>
-              <stop offset="14%"  stopColor="#fff9c4" stopOpacity="1"/>
-              <stop offset="30%"  stopColor="#fdd835" stopOpacity="1"/>
-              <stop offset="52%"  stopColor="#f9a825" stopOpacity="1"/>
-              <stop offset="72%"  stopColor="#e65100" stopOpacity="1"/>
-              <stop offset="88%"  stopColor="#7f3000" stopOpacity="1"/>
-              <stop offset="100%" stopColor="#4a1800" stopOpacity="1"/>
-            </linearGradient>
-
-            {/* Ambient rim highlight overlay — left edge glow */}
-            <linearGradient id="cylRimGrad" x1={gradX1Pct} y1="0%" x2={gradX2Pct} y2="0%" gradientUnits="userSpaceOnUse">
-              <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.55"/>
-              <stop offset="18%"  stopColor="#ffffff" stopOpacity="0.0"/>
-              <stop offset="100%" stopColor="#000000" stopOpacity="0.0"/>
-            </linearGradient>
-
-            {/* Top cap: blue radial gradient */}
-            <radialGradient id="topCapGrad" cx="38%" cy="38%" r="62%" fx="30%" fy="30%">
-              <stop offset="0%"   stopColor="#b3e5fc"/>
-              <stop offset="45%"  stopColor="#29b6f6"/>
-              <stop offset="100%" stopColor="#0277bd"/>
-            </radialGradient>
-
-            {/* Bottom cap: golden-yellow radial gradient */}
-            <radialGradient id="botCapGrad" cx="38%" cy="38%" r="62%" fx="30%" fy="30%">
-              <stop offset="0%"   stopColor="#fff9c4"/>
-              <stop offset="45%"  stopColor="#fdd835"/>
-              <stop offset="100%" stopColor="#f57f17"/>
-            </radialGradient>
-
-            {/* Drop shadow filter */}
-            <filter id="cylShadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="4" dy="6" stdDeviation="6" floodColor="#000" floodOpacity="0.45"/>
-            </filter>
-          </defs>
-
-          {/* ── Render back cap first (painter's algorithm) ── */}
-          {top.avgZ > bot.avgZ && (
-            <path d={bot.d} fill="url(#botCapGrad)" stroke="#f9a825" strokeWidth="1.2" />
-          )}
-          {bot.avgZ > top.avgZ && (
-            <path d={top.d} fill="url(#topCapGrad)" stroke="#81d4fa" strokeWidth="1.2" />
-          )}
-
-          {/* ── Cylinder body with smooth gradient ── */}
-          <path d={bodyPath} fill="url(#cylBodyGrad)" stroke="none" filter="url(#cylShadow)" />
-          {/* Rim highlight overlay on top of body */}
-          <path d={bodyPath} fill="url(#cylRimGrad)" stroke="none" />
-
-          {/* ── Front cap (on top of body) ── */}
-          {top.avgZ <= bot.avgZ && (
-            <path d={top.d} fill="url(#topCapGrad)" stroke="#81d4fa" strokeWidth="1.5" />
-          )}
-          {bot.avgZ <= top.avgZ && (
-            <path d={bot.d} fill="url(#botCapGrad)" stroke="#f9a825" strokeWidth="1.5" />
-          )}
-
-          {/* ── Labels ── */}
-          <text x={top.cx} y={top.cy + 4} fill="#fff" fontSize="8.5" fontFamily="monospace"
-            fontWeight="bold" textAnchor="middle"
-            stroke="#0277bd" strokeWidth="2.5" strokeLinejoin="round" paintOrder="stroke">
-            TUTUP ATAS (r)
-          </text>
-          <text x={bot.cx} y={bot.cy + 4} fill="#fff" fontSize="8.5" fontFamily="monospace"
-            fontWeight="bold" textAnchor="middle"
-            stroke="#f57f17" strokeWidth="2.5" strokeLinejoin="round" paintOrder="stroke">
-            TUTUP BAWAH (r)
-          </text>
+          {faces.map((f, i) => (
+            <polygon key={i} points={f.points} fill={f.fill} stroke={f.stroke} strokeWidth="0.5" />
+          ))}
+          <text x={topCenter2D.x} y={topCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP ATAS (r)</text>
+          <text x={botCenter2D.x} y={botCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP BAWAH (r)</text>
         </svg>
       ) : (
         /* Jaring-jaring tabung */
