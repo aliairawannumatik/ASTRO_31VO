@@ -1697,68 +1697,6 @@ const RefleksiPage = () => {
                 </div>
               </div>
 
-              {/* Sedang */}
-              <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded font-body">SEDANG</span>
-                  <span className="font-body font-semibold text-white text-sm">Contoh 2</span>
-                </div>
-                <div className="bg-slate-800/50 rounded-lg p-4">
-                  <p className="font-body text-sm text-white">
-                    Garis <InlineMath math="y = 3x - 6" /> dicerminkan terhadap garis <strong className="text-yellow-300">y = x</strong>. Tentukan persamaan bayangan garis tersebut!
-                  </p>
-                </div>
-                <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-2">
-                  <p className="text-xs font-semibold text-yellow-400 font-body">PEMBAHASAN:</p>
-                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="y = x" /> memetakan <InlineMath math="(x, y) \to (y, x)" />, sehingga:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="x' = y \implies y = x'" />
-                    <BlockMath math="y' = x \implies x = y'" />
-                  </div>
-                  <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 3x - 6" />:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="x' = 3y' - 6" />
-                    <BlockMath math="3y' = x' + 6" />
-                    <BlockMath math="y' = \tfrac{1}{3}x' + 2" />
-                  </div>
-                  <p className="font-body font-bold text-yellow-300"><strong>Bayangan:</strong> <InlineMath math="y = \tfrac{1}{3}x + 2" /></p>
-                </div>
-              </div>
-
-              {/* Sulit */}
-              <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded font-body">SULIT</span>
-                  <span className="font-body font-semibold text-white text-sm">Contoh 3</span>
-                </div>
-                <div className="bg-slate-800/50 rounded-lg p-4">
-                  <p className="font-body text-sm text-white">
-                    Bayangan suatu garis setelah dicerminkan terhadap <strong className="text-red-300">sumbu Y</strong> adalah <InlineMath math="y = -4x + 5" />. Tentukan persamaan <strong className="text-red-300">garis sebelum mengalami refleksi</strong>!
-                  </p>
-                </div>
-                <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
-                  <p className="text-xs font-semibold text-red-400 font-body">PEMBAHASAN:</p>
-                  <p className="text-sm text-white/80 font-body">
-                    Refleksi sumbu Y memetakan <InlineMath math="(x, y) \to (-x, y)" />, sehingga jika <InlineMath math="(x, y)" /> adalah titik pada <strong className="text-white">garis asli</strong>, maka bayangannya <InlineMath math="(x', y') = (-x,\; y)" /> terletak pada garis bayangan.
-                  </p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="x' = -x \implies x = -x'" />
-                    <BlockMath math="y' = y" />
-                  </div>
-                  <p className="text-sm text-white/80 font-body">Substitusikan <InlineMath math="x' = -x" /> dan <InlineMath math="y' = y" /> ke persamaan bayangan <InlineMath math="y' = -4x' + 5" />:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="y = -4(-x) + 5" />
-                    <BlockMath math="y = 4x + 5" />
-                  </div>
-                  <p className="font-body font-bold text-red-300">✅ <strong>Garis Sebelum Refleksi:</strong> <InlineMath math="y = 4x + 5" /></p>
-                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
-                    <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi</p>
-                    <p className="text-xs text-white/60 font-body">Cerminkan <InlineMath math="y = 4x + 5" /> terhadap sumbu Y → substitusi <InlineMath math="x = -x',\; y = y'" />:</p>
-                    <BlockMath math="y' = 4(-x') + 5 = -4x' + 5 \checkmark" />
-                  </div>
-                </div>
-              </div>
-
               {/* Contoh 4 — x=k */}
               <div className="border-l-4 border-orange-500 pl-4 space-y-3">
                 <div className="flex items-center gap-2">
@@ -1791,33 +1729,65 @@ const RefleksiPage = () => {
                 </div>
               </div>
 
-              {/* Contoh 5 — y=k */}
+              {/* Contoh 5 — Translasi + Refleksi y=k */}
               <div className="border-l-4 border-pink-500 pl-4 space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="bg-pink-500/20 text-pink-400 text-xs font-bold px-2 py-1 rounded font-body">CERMIN y=k</span>
+                  <span className="bg-pink-500/20 text-pink-400 text-xs font-bold px-2 py-1 rounded font-body">TRANSLASI + CERMIN y=k</span>
                   <span className="font-body font-semibold text-white text-sm">Contoh 5</span>
                 </div>
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
-                    Garis <InlineMath math="y = 3x - 4" /> dicerminkan terhadap garis <strong className="text-pink-300">y = 2</strong>. Tentukan persamaan bayangan garis tersebut!
+                    Garis <InlineMath math="y = 2x + 1" /> ditranslasikan oleh <strong className="text-pink-300"><InlineMath math="T\binom{3}{-2}" /></strong>, kemudian bayangannya dicerminkan terhadap garis <strong className="text-pink-300"><InlineMath math="y = 3" /></strong>. Tentukan persamaan bayangan akhir!
                   </p>
                 </div>
-                <div className="bg-pink-500/5 border border-pink-500/20 rounded-lg p-4 space-y-2">
+                <div className="bg-pink-500/5 border border-pink-500/20 rounded-lg p-4 space-y-4">
                   <p className="text-xs font-semibold text-pink-400 font-body">PEMBAHASAN:</p>
-                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="y = 2" /> memetakan <InlineMath math="(x, y) \to (x,\; 4-y)" />, sehingga:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="x' = x" />
-                    <BlockMath math="y' = 4 - y \implies y = 4 - y'" />
+
+                  {/* Langkah 1 */}
+                  <div className="space-y-2">
+                    <p className="text-sm font-bold text-white/90 font-body">Langkah 1 — Translasi <InlineMath math="T\binom{3}{-2}" /></p>
+                    <p className="text-sm text-white/70 font-body">Translasi memetakan <InlineMath math="(x, y) \to (x+3,\; y-2)" />, sehingga:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="x_1 = x + 3 \implies x = x_1 - 3" />
+                      <BlockMath math="y_1 = y - 2 \implies y = y_1 + 2" />
+                    </div>
+                    <p className="text-sm text-white/70 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 2x + 1" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="(y_1 + 2) = 2(x_1 - 3) + 1" />
+                      <BlockMath math="y_1 + 2 = 2x_1 - 6 + 1" />
+                      <BlockMath math="y_1 = 2x_1 - 9" />
+                    </div>
+                    <p className="text-sm text-white/80 font-body">✦ <strong>Garis setelah translasi:</strong> <InlineMath math="y = 2x - 9" /></p>
                   </div>
-                  <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 3x - 4" />:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="4 - y' = 3x' - 4" />
-                    <BlockMath math="y' = -3x' + 8" />
+
+                  {/* Langkah 2 */}
+                  <div className="space-y-2">
+                    <p className="text-sm font-bold text-white/90 font-body">Langkah 2 — Refleksi terhadap <InlineMath math="y = 3" /></p>
+                    <p className="text-sm text-white/70 font-body">Refleksi terhadap <InlineMath math="y = 3" /> memetakan <InlineMath math="(x, y) \to (x,\; 6-y)" />, sehingga:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="x' = x_1" />
+                      <BlockMath math="y' = 6 - y_1 \implies y_1 = 6 - y'" />
+                    </div>
+                    <p className="text-sm text-white/70 font-body">Substitusikan ke <InlineMath math="y_1 = 2x_1 - 9" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="6 - y' = 2x' - 9" />
+                      <BlockMath math="y' = -2x' + 15" />
+                    </div>
                   </div>
-                  <p className="font-body font-bold text-pink-300"><strong>Bayangan:</strong> <InlineMath math="y = -3x + 8" /></p>
+
+                  <div className="bg-pink-950/50 border border-pink-500/30 rounded-xl p-4 text-center">
+                    <p className="text-xs text-white/50 font-body mb-1">Bayangan Akhir</p>
+                    <BlockMath math="\boxed{y = -2x + 15}" />
+                  </div>
+
                   <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
-                    <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi dengan rumus</p>
-                    <p className="text-xs text-white/60 font-body"><InlineMath math="m=-3,\; c=2k-c_0=2(2)-(-4)=4+4=8" /> ✓</p>
+                    <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi dengan rumus refleksi y=k</p>
+                    <p className="text-xs text-white/60 font-body">
+                      Garis setelah translasi: <InlineMath math="m=2,\; c=-9,\; k=3" />
+                    </p>
+                    <p className="text-xs text-white/60 font-body">
+                      <InlineMath math="y = -mx + (2k - c) = -2x + (6-(-9)) = -2x + 15" /> ✓
+                    </p>
                   </div>
                 </div>
               </div>
