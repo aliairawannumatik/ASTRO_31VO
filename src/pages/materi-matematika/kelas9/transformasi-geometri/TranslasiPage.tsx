@@ -597,48 +597,159 @@ function fmtLine(m: number, c: number): string {
   return `y = ${ms}x${cp}`;
 }
 
+/* ── Parse standard form ax + by = c ── */
+function parseStandard(eq: string): { m: number; c: number; a: number; b_coef: number; c_val: number } | null {
+  const s = eq.replace(/\s/g, '').toLowerCase();
+  const eqIdx = s.indexOf('=');
+  if (eqIdx === -1) return null;
+  const lhs = s.slice(0, eqIdx);
+  const rhs = s.slice(eqIdx + 1);
+  if (!lhs || !rhs) return null;
+  const c_val = parseFloat(rhs);
+  if (isNaN(c_val)) return null;
+
+  let a = 0, b_coef = 0;
+  const xMatch = lhs.match(/(^|[+-])(\d*\.?\d*)x/);
+  const yMatch = lhs.match(/(^|[+-])(\d*\.?\d*)y/);
+  if (!xMatch && !yMatch) return null;
+  if (xMatch) {
+    const sign = xMatch[1] === '-' ? -1 : 1;
+    const coef = xMatch[2];
+    a = sign * (coef === '' ? 1 : parseFloat(coef));
+    if (isNaN(a)) return null;
+  }
+  if (yMatch) {
+    const sign = yMatch[1] === '-' ? -1 : 1;
+    const coef = yMatch[2];
+    b_coef = sign * (coef === '' ? 1 : parseFloat(coef));
+    if (isNaN(b_coef)) return null;
+  }
+  if (b_coef === 0) return null;
+  const m = -a / b_coef;
+  const c = c_val / b_coef;
+  if (!isFinite(m) || !isFinite(c)) return null;
+  return { m, c, a, b_coef, c_val };
+}
+
+/* ── Format result in ax + by = c notation ── */
+function fmtStandard(a: number, b: number, c: number): string {
+  let res = '';
+  if (a !== 0) {
+    res += a === 1 ? 'x' : a === -1 ? '-x' : `${a}x`;
+  }
+  if (b !== 0) {
+    if (res === '') {
+      res += b === 1 ? 'y' : b === -1 ? '-y' : `${b}y`;
+    } else {
+      if (b === 1)       res += ' + y';
+      else if (b === -1) res += ' - y';
+      else if (b > 0)    res += ` + ${b}y`;
+      else               res += ` - ${Math.abs(b)}y`;
+    }
+  }
+  // Round c to avoid floating-point noise
+  const cRound = Math.round(c * 10000) / 10000;
+  res += ` = ${cRound}`;
+  return res;
+}
+
 /* ── Animasi Kurva Linear ── */
 function AnimasiKurva() {
-  const [input, setInput] = useState('y=2x+1');
+  const [formType, setFormType] = useState<'slope' | 'standard'>('slope');
+  const [inputSlope, setInputSlope] = useState('y=2x+1');
+  const [inputStd,   setInputStd]   = useState('2x+3y=6');
   const [inputA, setInputA] = useState('3');
   const [inputB, setInputB] = useState('2');
   const [show, setShow] = useState(false);
 
-  const a = parseFloat(inputA) || 0;
-  const b = parseFloat(inputB) || 0;
-  const parsed = parseLinear(input);
-  const isValid = parsed !== null;
-  const imgM = parsed?.m ?? 0;
-  const imgC = isValid && parsed ? (parsed.c - parsed.m * a + b) : 0;
+  const isStd = formType === 'standard';
+  const input    = isStd ? inputStd   : inputSlope;
+  const setInput = isStd ? setInputStd : setInputSlope;
+
+  const transA = parseFloat(inputA) || 0;
+  const transB = parseFloat(inputB) || 0;
+
+  const parsedSlope = isStd ? null : parseLinear(input);
+  const parsedStd   = isStd ? parseStandard(input) : null;
+  const parsed      = isStd ? parsedStd : parsedSlope;
+  const isValid     = parsed !== null;
+
+  const imgM  = parsed?.m ?? 0;
+  const imgC  = isValid && parsed ? (parsed.c - parsed.m * transA + transB) : 0;
+
+  // For standard form: c' = c + a·p + b·q  (a,b coefficients unchanged)
+  const newCval = (parsedStd && isValid)
+    ? parsedStd.c_val + parsedStd.a * transA + parsedStd.b_coef * transB
+    : 0;
 
   const handleKey = (k: string) => {
     playPopSound();
     setShow(false);
-    if (k === '⌫') { setInput(p => p.slice(0, -1)); return; }
+    if (k === '⌫')  { setInput(p => p.slice(0, -1)); return; }
     if (k === 'CLR') { setInput(''); return; }
     setInput(p => p + k);
   };
 
-  const rows = [
+  const rowsSlope = [
     ['7','8','9','+','y'],
     ['4','5','6','-','x'],
     ['1','2','3','.','='],
     ['0','CLR','⌫'],
   ];
+  const rowsStd = [
+    ['7','8','9','+','x'],
+    ['4','5','6','-','y'],
+    ['1','2','3','.','='],
+    ['0','CLR','⌫'],
+  ];
+  const rows = isStd ? rowsStd : rowsSlope;
+
+  const handleReset = () => {
+    playPopSound();
+    setShow(false);
+    if (isStd) { setInputStd('2x+3y=6'); } else { setInputSlope('y=2x+1'); }
+    setInputA('3');
+    setInputB('2');
+  };
+
+  const handleToggle = (t: 'slope' | 'standard') => {
+    playPopSound();
+    setShow(false);
+    setFormType(t);
+  };
 
   return (
     <div className="space-y-4 pt-2">
       <p className="text-emerald-300 font-bold text-sm font-body">📈 Animasi Interaktif — Translasi Kurva Linear</p>
 
+      {/* Form-type toggle */}
+      <div className="flex rounded-xl overflow-hidden border border-slate-600/50 bg-slate-800/50">
+        <button
+          onClick={() => handleToggle('slope')}
+          className={`flex-1 py-2 text-xs font-bold font-mono transition-all
+            ${!isStd ? 'bg-emerald-500/30 text-emerald-200 border-r border-emerald-500/40' : 'text-white/40 hover:text-white/70'}`}
+        >y = mx + c</button>
+        <button
+          onClick={() => handleToggle('standard')}
+          className={`flex-1 py-2 text-xs font-bold font-mono transition-all
+            ${isStd ? 'bg-violet-500/30 text-violet-200' : 'text-white/40 hover:text-white/70'}`}
+        >ax + by = c</button>
+      </div>
+
       {/* Display */}
       <div className="space-y-1">
         <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
-        <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
+        <div className={`bg-slate-800 border rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5
+          ${isStd ? 'border-violet-500/50' : 'border-slate-500'}`}>
           <span>{input || <span className="text-white/30">ketik...</span>}</span>
           <span className="animate-pulse text-cyan-400">|</span>
         </div>
         {!isValid && input.length > 0 && (
-          <p className="text-[11px] text-red-400 font-body">Format: y=mx+c &nbsp;·&nbsp; Contoh: y=2x+1 &nbsp;·&nbsp; y=-3x</p>
+          <p className="text-[11px] text-red-400 font-body">
+            {isStd
+              ? 'Format: ax+by=c · Contoh: 2x+3y=6 · x-y=4 · -x+2y=8'
+              : 'Format: y=mx+c · Contoh: y=2x+1 · y=-3x'}
+          </p>
         )}
       </div>
 
@@ -662,7 +773,7 @@ function AnimasiKurva() {
         ))}
       </div>
 
-      {/* a and b */}
+      {/* Translation vector a and b */}
       <div className="grid grid-cols-2 gap-3">
         {[['a (geser x)', inputA, setInputA], ['b (geser y)', inputB, setInputB]].map(([label, val, setter]) => (
           <div key={label as string} className="space-y-1">
@@ -681,7 +792,7 @@ function AnimasiKurva() {
           className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all bg-emerald-500 hover:bg-emerald-400 text-white disabled:opacity-40 disabled:cursor-not-allowed">
           ▶ Tampilkan Translasi
         </button>
-        <button onClick={() => { playPopSound(); setShow(false); setInput('y=2x+1'); setInputA('3'); setInputB('2'); }}
+        <button onClick={handleReset}
           className="px-4 py-2.5 rounded-xl font-bold text-sm font-body transition-all bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600">
           ↺
         </button>
@@ -690,51 +801,82 @@ function AnimasiKurva() {
       {/* Grid */}
       <div className="w-full max-w-[360px] mx-auto">
         <Grid accent="#4ade80">
-          {/* Original line */}
           {isValid && parsed && (
             <line x1={px(-5)} y1={py(parsed.m*-5+parsed.c)} x2={px(5)} y2={py(parsed.m*5+parsed.c)}
               stroke="#22d3ee" strokeWidth="2.5" />
           )}
-          {/* Translated line */}
           {show && isValid && (
             <line x1={px(-5)} y1={py(imgM*-5+imgC)} x2={px(5)} y2={py(imgM*5+imgC)}
               stroke="#4ade80" strokeWidth="2.5" strokeDasharray="6,3" />
           )}
-          {/* Translation arrow */}
-          {show && isValid && parsed && a === 0 && b !== 0 && (
-            <Arrow x1={0} y1={parsed.c} x2={0} y2={parsed.c + b} color="#facc15" />
+          {show && isValid && parsed && transA === 0 && transB !== 0 && (
+            <Arrow x1={0} y1={parsed.c} x2={0} y2={parsed.c + transB} color="#facc15" />
           )}
-          {show && isValid && parsed && a !== 0 && (
-            <Arrow x1={0} y1={parsed.c} x2={a} y2={parsed.c + b} color="#facc15" />
+          {show && isValid && parsed && transA !== 0 && (
+            <Arrow x1={0} y1={parsed.c} x2={transA} y2={parsed.c + transB} color="#facc15" />
           )}
-          {/* Line labels */}
           {isValid && parsed && (
             <text x={px(2)} y={py(parsed.m*2+parsed.c)-7} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
           )}
           {show && isValid && (
-            <text x={px(-1)} y={py(imgM*-1+imgC)-7} fill="#4ade80" fontSize="9" fontWeight="bold">{fmtLine(imgM, imgC)}</text>
+            <text x={px(-1)} y={py(imgM*-1+imgC)-7} fill="#4ade80" fontSize="9" fontWeight="bold">
+              {isStd && parsedStd
+                ? fmtStandard(parsedStd.a, parsedStd.b_coef, newCval)
+                : fmtLine(imgM, imgC)}
+            </text>
           )}
         </Grid>
         <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
           <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
           {show && <>
             <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-green-400 inline-block rounded" /><span className="text-green-300">Bayangan</span></div>
-            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-yellow-400 inline-block rounded" /><span className="text-yellow-300">Vektor T({a},{b})</span></div>
+            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-yellow-400 inline-block rounded" /><span className="text-yellow-300">Vektor T({transA},{transB})</span></div>
           </>}
         </div>
       </div>
 
-      {/* Result */}
-      {show && isValid && parsed && (
+      {/* Result — slope form */}
+      {show && isValid && !isStd && parsedSlope && (
         <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 space-y-1.5">
           <p className="text-xs font-semibold text-emerald-400 font-body">HASIL TRANSLASI:</p>
           <p className="text-sm font-body text-white/80">
-            <span className="text-cyan-300 font-bold">{input}</span> dengan T({a},{b}):
+            <span className="text-cyan-300 font-bold">{input}</span> dengan T({transA},{transB}):
           </p>
           <div className="bg-slate-900/60 rounded-lg p-3 text-sm font-body text-white/80 space-y-1">
-            <p>y′ = {parsed.m === 1 ? '' : parsed.m === -1 ? '−' : `${parsed.m}`}(x − {a}){parsed.c !== 0 ? ` ${parsed.c > 0 ? '+' : '−'} ${Math.abs(parsed.c)}` : ''}{b !== 0 ? ` ${b > 0 ? '+' : '−'} ${Math.abs(b)}` : ''}</p>
+            <p>y′ = {parsedSlope.m === 1 ? '' : parsedSlope.m === -1 ? '−' : `${parsedSlope.m}`}(x − {transA})
+              {parsedSlope.c !== 0 ? ` ${parsedSlope.c > 0 ? '+' : '−'} ${Math.abs(parsedSlope.c)}` : ''}
+              {transB !== 0 ? ` ${transB > 0 ? '+' : '−'} ${Math.abs(transB)}` : ''}</p>
           </div>
           <p className="font-body font-bold text-emerald-300 text-base">{fmtLine(imgM, imgC)}</p>
+        </div>
+      )}
+
+      {/* Result — standard form */}
+      {show && isValid && isStd && parsedStd && (
+        <div className="bg-violet-500/10 border border-violet-500/30 rounded-xl p-4 space-y-2">
+          <p className="text-xs font-semibold text-violet-300 font-body">HASIL TRANSLASI (bentuk ax + by = c):</p>
+          <p className="text-sm font-body text-white/80">
+            <span className="text-cyan-300 font-bold">{input}</span> dengan T({transA},{transB}):
+          </p>
+          <div className="bg-slate-900/60 rounded-lg p-3 text-sm font-body text-white/80 space-y-1.5">
+            <p className="text-[12px]">
+              <span className="text-white/50">Koefisien a, b tetap:</span>{' '}
+              a = {parsedStd.a}, b = {parsedStd.b_coef}
+            </p>
+            <p className="text-[12px]">
+              <span className="text-white/50">c baru = c + a·p + b·q</span>
+            </p>
+            <p className="text-[12px]">
+              c′ = {parsedStd.c_val} + ({parsedStd.a})·({transA}) + ({parsedStd.b_coef})·({transB})
+              {' '}= {Math.round(newCval * 10000) / 10000}
+            </p>
+          </div>
+          <p className="font-body font-bold text-violet-200 text-base">
+            {fmtStandard(parsedStd.a, parsedStd.b_coef, newCval)}
+          </p>
+          <p className="text-[11px] text-white/40 font-body">
+            Setara: {fmtLine(imgM, imgC)}
+          </p>
         </div>
       )}
     </div>
