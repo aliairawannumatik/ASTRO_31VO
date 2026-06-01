@@ -931,7 +931,7 @@ function AnimasiRefleksiKurva() {
   const [mirror, setMirror] = useState<MirrorType>('sumbu-x');
   const [show, setShow]     = useState(false);
 
-  const parsed    = parseLinearR(input);
+  const parsed    = parseEqR(input);
   const isValid   = parsed !== null;
   const reflected = isValid && parsed ? reflectLinearR(parsed.m, parsed.c, mirror) : null;
   const mc        = MIRRORS.find(m => m.id === mirror)!;
@@ -956,13 +956,13 @@ function AnimasiRefleksiKurva() {
 
       {/* Input */}
       <div className="space-y-1">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y = mx + c)</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y=mx+c atau ax+by=c)</p>
         <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
           <span>{input || <span className="text-white/30">ketik...</span>}</span>
           <span className="animate-pulse text-cyan-400">|</span>
         </div>
         {!isValid && input.length > 0 && (
-          <p className="text-[11px] text-red-400 font-body">Format: y=mx+c · Contoh: y=2x+3 · y=-x+1 · y=3x</p>
+          <p className="text-[11px] text-red-400 font-body">Format: y=2x+3 · y=-x+1 · 2x+3y=6 · x-y=4</p>
         )}
       </div>
 
