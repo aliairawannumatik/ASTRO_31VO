@@ -1100,6 +1100,18 @@ const DilatasisPage = () => {
                     <InlineMath math="A(-3, 2) \xrightarrow{k=2} A'(-6, 4)" />.
                   </p>
                 </div>
+
+                {/* Ilustrasi dilatasi pusat O(0,0) */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-semibold text-slate-300 text-center">
+                    Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k
+                  </p>
+                  <img
+                    src="/dilatasi-pusat-ab.png"
+                    alt="Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k"
+                    className="w-1/2 max-w-xs mx-auto block rounded-xl object-cover"
+                  />
+                </div>
               </div>
             )}
           </div>
@@ -1346,17 +1358,6 @@ const DilatasisPage = () => {
                   </p>
                 </div>
 
-                {/* Ilustrasi dilatasi pusat P(a,b) */}
-                <div className="space-y-2">
-                  <p className="font-body text-xs font-semibold text-slate-300 text-center">
-                    Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k
-                  </p>
-                  <img
-                    src="/dilatasi-pusat-ab.png"
-                    alt="Ilustrasi Dilatasi Pusat O(0,0) dengan Faktor Skala k"
-                    className="w-1/2 max-w-xs mx-auto block rounded-xl object-cover"
-                  />
-                </div>
               </div>
             )}
           </div>
