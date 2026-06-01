@@ -201,16 +201,15 @@ const DiagramDilatasiAB = () => (
 /* ──────────────────────────────────────────────
    SVG GRID HELPERS (sama gaya dengan RotasiPage)
 ────────────────────────────────────────────── */
-const DS = 360, Dsc = DS / 16, Dox = DS / 2, Doy = DS / 2;
+const DS = 360, Dsc = DS / 14, Dox = DS / 2, Doy = DS / 2;
 const Dpx = (x: number) => Dox + x * Dsc;
 const Dpy = (y: number) => Doy - y * Dsc;
-const DgridLines = [-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8];
-const Dticks = [-8,-6,-4,-2,2,4,6,8];
+const Dticks = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
 
 function DGrid({ children, accent = "#22d3ee" }: { children?: React.ReactNode; accent?: string }) {
   return (
     <svg viewBox={`0 0 ${DS} ${DS}`} className="w-full rounded-xl border bg-slate-900/70" style={{ maxWidth: DS, aspectRatio: "1/1", borderColor: `${accent}33` }}>
-      {DgridLines.map(t => (
+      {Dticks.map(t => (
         <g key={t}>
           <line x1={Dpx(t)} y1={0} x2={Dpx(t)} y2={DS} stroke="#334155" strokeWidth="0.6" />
           <line x1={0} y1={Dpy(t)} x2={DS} y2={Dpy(t)} stroke="#334155" strokeWidth="0.6" />
