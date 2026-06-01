@@ -1236,17 +1236,51 @@ const TranslasiPage = () => {
                 </div>
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
-                    Garis <InlineMath math="y = -3x + 4" /> ditranslasikan oleh <InlineMath math="T\begin{pmatrix}-2\\3\end{pmatrix}" />. Tentukan persamaan bayangan garis tersebut!
+                    Garis <InlineMath math="y = 2x + 1" /> ditranslasikan <strong className="text-yellow-300">dua kali berturut-turut</strong> oleh <InlineMath math="T_1\begin{pmatrix}3\\-2\end{pmatrix}" /> kemudian <InlineMath math="T_2\begin{pmatrix}-1\\4\end{pmatrix}" />. Tentukan persamaan bayangan akhir garis tersebut!
                   </p>
                 </div>
-                <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-2">
+                <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-4">
                   <p className="text-xs font-semibold text-yellow-400 font-body">PEMBAHASAN:</p>
-                  <p className="text-sm text-white/80 font-body">Diketahui: <InlineMath math="m=-3,\ c=4,\ a=-2,\ b=3" /></p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="y = -3(x - (-2)) + 4 + 3 = -3(x+2) + 7" />
-                    <BlockMath math="y = -3x - 6 + 7" />
+
+                  {/* Translasi 1 */}
+                  <div className="space-y-2">
+                    <p className="text-sm font-semibold text-yellow-300 font-body">🔁 Translasi ke-1: <InlineMath math="T_1\begin{pmatrix}3\\-2\end{pmatrix}" /></p>
+                    <p className="text-sm text-white/80 font-body">Setiap titik <InlineMath math="(x, y)" /> berpindah ke <InlineMath math="(x', y')" /> dengan:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="x' = x + 3 \implies x = x' - 3" />
+                      <BlockMath math="y' = y - 2 \implies y = y' + 2" />
+                    </div>
+                    <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 2x + 1" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="y' + 2 = 2(x' - 3) + 1" />
+                      <BlockMath math="y' + 2 = 2x' - 6 + 1" />
+                      <BlockMath math="y' + 2 = 2x' - 5" />
+                      <BlockMath math="y' = 2x' - 7" />
+                    </div>
+                    <p className="font-body text-sm text-yellow-200">Bayangan ke-1: <InlineMath math="y = 2x - 7" /></p>
                   </div>
-                  <p className="font-body font-bold text-yellow-300"><strong>Bayangan:</strong> <InlineMath math="y = -3x + 1" /></p>
+
+                  {/* Divider */}
+                  <div className="border-t border-yellow-500/20" />
+
+                  {/* Translasi 2 */}
+                  <div className="space-y-2">
+                    <p className="text-sm font-semibold text-yellow-300 font-body">🔁 Translasi ke-2: <InlineMath math="T_2\begin{pmatrix}-1\\4\end{pmatrix}" /></p>
+                    <p className="text-sm text-white/80 font-body">Sekarang garis <InlineMath math="y = 2x - 7" /> ditranslasikan. Setiap titik <InlineMath math="(x', y')" /> berpindah ke <InlineMath math="(x'', y'')" /> dengan:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="x'' = x' - 1 \implies x' = x'' + 1" />
+                      <BlockMath math="y'' = y' + 4 \implies y' = y'' - 4" />
+                    </div>
+                    <p className="text-sm text-white/80 font-body">Substitusikan ke bayangan ke-1 <InlineMath math="y = 2x - 7" />:</p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                      <BlockMath math="y'' - 4 = 2(x'' + 1) - 7" />
+                      <BlockMath math="y'' - 4 = 2x'' + 2 - 7" />
+                      <BlockMath math="y'' - 4 = 2x'' - 5" />
+                      <BlockMath math="y'' = 2x'' - 1" />
+                    </div>
+                  </div>
+
+                  <p className="font-body font-bold text-yellow-300">✅ <strong>Bayangan Akhir:</strong> <InlineMath math="y = 2x - 1" /></p>
                 </div>
               </div>
 
