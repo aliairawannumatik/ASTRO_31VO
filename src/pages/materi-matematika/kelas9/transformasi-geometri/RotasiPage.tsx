@@ -834,7 +834,7 @@ const KURVA_ANIM_DURATION = 1800;
 
 function AnimasiRotasiKurva() {
   const [input, setInput] = useState('y=2x+1');
-  const [rotation, setRotation] = useState<'90ccw' | '90cw' | '180'>('90ccw');
+  const [rotation, setRotation] = useState<'90ccw' | '270cw' | '270ccw' | '90cw' | '180ccw' | '180cw'>('90ccw');
   const [centerType, setCenterType] = useState<'origin' | 'custom'>('origin');
   const [inputA, setInputA] = useState('0');
   const [inputB, setInputB] = useState('0');
@@ -856,8 +856,13 @@ function AnimasiRotasiKurva() {
   const m = parsed?.m ?? 0;
   const c = parsed?.c ?? 0;
 
-  /* Target angle for each rotation type */
-  const actualDeg = rotation === '90ccw' ? 90 : rotation === '90cw' ? -90 : 180;
+  /* Kelompok ekivalen rotasi */
+  const isPos90 = rotation === '90ccw' || rotation === '270cw';
+  const isNeg90 = rotation === '270ccw' || rotation === '90cw';
+  const is180   = rotation === '180ccw' || rotation === '180cw';
+
+  /* Target angle — negatif = searah jarum jam */
+  const actualDeg = isPos90 ? 90 : isNeg90 ? -90 : rotation === '180cw' ? -180 : 180;
 
   /* General rotation of line y=mx+c around (ca,cb) by arbitrary deg — for animation */
   const rotateLineAt = (deg: number): { M: number; C: number } | null => {
@@ -871,12 +876,12 @@ function AnimasiRotasiKurva() {
     return { M, C };
   };
 
-  /* Final result (exact closed-form formulas) */
-  const isVertical = m === 0 && rotation !== '180';
+  /* Final result (exact closed-form formulas, berdasarkan kelas ekivalen) */
+  const isVertical = m === 0 && !is180;
   let imgM = 0, imgC = 0, imgVertX = 0;
-  if (rotation === '180') {
+  if (is180) {
     imgM = m; imgC = round2(2 * cb - 2 * ca * m - c);
-  } else if (rotation === '90ccw') {
+  } else if (isPos90) {
     if (m === 0) { imgVertX = round2(ca + cb - c); }
     else { imgM = round2(-1 / m); imgC = round2((ca * (1 - m) + cb * (m + 1) - c) / m); }
   } else {
@@ -884,8 +889,19 @@ function AnimasiRotasiKurva() {
     else { imgM = round2(-1 / m); imgC = round2((ca * (1 + m) + cb * (m - 1) + c) / m); }
   }
 
-  const accent      = rotation === '90ccw' ? '#a78bfa' : rotation === '90cw' ? '#fb923c' : '#f472b6';
-  const rotLabel    = rotation === '90ccw' ? '90° BAJ / 270° SAJ' : rotation === '90cw' ? '270° BAJ / 90° SAJ' : '180°';
+  const accent =
+    rotation === '90ccw'  ? '#a78bfa' :
+    rotation === '270cw'  ? '#818cf8' :
+    rotation === '270ccw' ? '#fb923c' :
+    rotation === '90cw'   ? '#f97316' :
+    rotation === '180ccw' ? '#f472b6' : '#ec4899';
+
+  const rotLabel =
+    rotation === '90ccw'  ? '90° BAJ' :
+    rotation === '270cw'  ? '270° SAJ' :
+    rotation === '270ccw' ? '270° BAJ' :
+    rotation === '90cw'   ? '90° SAJ' :
+    rotation === '180ccw' ? '180° BAJ' : '180° SAJ';
   const centerLabel = centerType === 'origin' ? 'O(0,0)' : `(${ca}, ${cb})`;
   const easeOut     = (t: number) => 1 - Math.pow(1 - t, 3);
 
@@ -925,9 +941,12 @@ function AnimasiRotasiKurva() {
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
 
   const ROT_OPTS = [
-    { val: '90ccw' as const, line1: '90° Berlawanan AJ', line2: '270° Searah AJ',       color: '#a78bfa' },
-    { val: '90cw'  as const, line1: '270° Berlawanan AJ', line2: '90° Searah AJ',        color: '#fb923c' },
-    { val: '180'   as const, line1: '180°',                line2: 'Berlawanan/Searah AJ', color: '#f472b6' },
+    { val: '90ccw'  as const, label: '90°',  sub: 'Berlawanan AJ', color: '#a78bfa' },
+    { val: '270cw'  as const, label: '270°', sub: 'Searah AJ',     color: '#818cf8' },
+    { val: '270ccw' as const, label: '270°', sub: 'Berlawanan AJ', color: '#fb923c' },
+    { val: '90cw'   as const, label: '90°',  sub: 'Searah AJ',     color: '#f97316' },
+    { val: '180ccw' as const, label: '180°', sub: 'Berlawanan AJ', color: '#f472b6' },
+    { val: '180cw'  as const, label: '180°', sub: 'Searah AJ',     color: '#ec4899' },
   ];
 
   return (
@@ -1009,15 +1028,15 @@ function AnimasiRotasiKurva() {
         <p className="text-xs font-body text-white/50 uppercase tracking-wide">
           Sudut Rotasi terhadap <span className="text-yellow-300 font-bold">{centerLabel}</span>
         </p>
-        <div className="flex gap-2 flex-wrap">
-          {ROT_OPTS.map(({ val, line1, line2, color }) => (
+        <div className="grid grid-cols-2 gap-2">
+          {ROT_OPTS.map(({ val, label, sub, color }) => (
             <button key={val}
               onClick={() => changeAndReset(() => { playPopSound(); setRotation(val); })}
-              className={`flex-1 py-2 px-1 rounded-xl text-center font-body border transition-all leading-tight ${rotation === val ? 'text-black' : 'bg-slate-800/60 border-white/10 text-white/60 hover:text-white/80'}`}
+              className={`py-2 px-2 rounded-xl text-center font-body border transition-all leading-tight ${rotation === val ? 'text-black shadow-lg' : 'bg-slate-800/60 border-white/10 text-white/60 hover:text-white/80'}`}
               style={rotation === val ? { background: color, borderColor: color } : {}}
             >
-              <span className="block text-[11px] font-bold">{line1}</span>
-              <span className={`block text-[9px] font-semibold ${rotation === val ? 'text-black/70' : 'text-white/35'}`}>{line2}</span>
+              <span className="block text-sm font-bold">{label}</span>
+              <span className={`block text-[10px] font-semibold ${rotation === val ? 'text-black/70' : 'text-white/35'}`}>{sub}</span>
             </button>
           ))}
         </div>
@@ -1100,7 +1119,7 @@ function AnimasiRotasiKurva() {
             return (
               <g>
                 <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
-                  fill={rotation === '90ccw' ? '#7c3aed' : rotation === '90cw' ? '#f97316' : '#db2777'}
+                  fill={isPos90 ? '#7c3aed' : isNeg90 ? '#f97316' : '#db2777'}
                   stroke="#fff" strokeWidth="1.5" opacity="0.95" />
                 <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
                   {Math.round(animAngleAbs)}°
