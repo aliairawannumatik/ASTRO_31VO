@@ -1021,7 +1021,7 @@ const TranslasiPage = () => {
 
           {/* TRANSLASI PADA KURVA LINEAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#4ade80" title="📈 Translasi pada Kurva Linear" />
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#4ade80" title="📈 [Tambahan] Translasi pada Kurva Linear" />
             <div className="px-5 pb-5 space-y-5">
 
               {/* Pengantar */}
@@ -1038,13 +1038,12 @@ const TranslasiPage = () => {
                   <BlockMath math="y' = y + b \implies y = y' - b" />
                 </div>
                 <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = mx + c" />:</p>
-                <div className="bg-green-950/50 border border-green-500/30 rounded-xl p-4 text-center">
+                <div className="bg-green-950/50 border border-green-500/30 rounded-xl p-4 text-center space-y-1">
                   <BlockMath math="y' - b = m(x' - a) + c" />
-                  <BlockMath math="\boxed{y' = m(x' - a) + c + b = mx' + (c - ma + b)}" />
-                </div>
-                <p className="text-sm text-white/80 font-body">Jadi bayangan garis <InlineMath math="y = mx + c" /> adalah:</p>
-                <div className="bg-cyan-950/60 border border-cyan-500/30 rounded-xl p-3 text-center">
-                  <BlockMath math="y = mx + (c - ma + b)" />
+                  <BlockMath math="y' = m(x' - a) + c + b" />
+                  <BlockMath math="\therefore\quad y' = mx' + (c - ma + b)" />
+                  <p className="text-xs text-white/50 font-body mt-1">atau (aksen diabaikan):</p>
+                  <BlockMath math="\boxed{y = mx + (c - ma + b)}" />
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-sm text-yellow-200 font-body">
