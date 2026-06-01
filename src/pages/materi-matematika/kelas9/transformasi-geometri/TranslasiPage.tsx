@@ -1068,9 +1068,16 @@ const TranslasiPage = () => {
                 </div>
                 <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-2">
                   <p className="text-xs font-semibold text-green-400 font-body">PEMBAHASAN:</p>
-                  <p className="text-sm text-white/80 font-body">Diketahui: <InlineMath math="m=2,\ c=0,\ a=3,\ b=1" /></p>
-                  <div className="bg-slate-900/60 rounded-lg p-3">
-                    <BlockMath math="y = 2(x - 3) + 0 + 1 = 2x - 6 + 1" />
+                  <p className="text-sm text-white/80 font-body">Translasi <InlineMath math="T\begin{pmatrix}3\\1\end{pmatrix}" /> menggeser setiap titik <InlineMath math="(x,y) \to (x', y')" /> dengan:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = x + 3 \implies x = x' - 3" />
+                    <BlockMath math="y' = y + 1 \implies y = y' - 1" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 2x" />:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="y' - 1 = 2(x' - 3)" />
+                    <BlockMath math="y' - 1 = 2x' - 6" />
+                    <BlockMath math="y' = 2x' - 5" />
                   </div>
                   <p className="font-body font-bold text-green-300"><strong>Bayangan:</strong> <InlineMath math="y = 2x - 5" /></p>
                 </div>
