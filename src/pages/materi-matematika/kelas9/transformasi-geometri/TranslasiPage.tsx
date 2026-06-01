@@ -1290,23 +1290,34 @@ const TranslasiPage = () => {
                 </div>
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
-                    Garis <InlineMath math="y = mx + 2" /> ditranslasikan oleh <InlineMath math="T\begin{pmatrix}1\\b\end{pmatrix}" /> menghasilkan bayangan <InlineMath math="y = 3x + 4" />. Tentukan nilai <InlineMath math="m" /> dan <InlineMath math="b" />!
+                    Bayangan suatu garis oleh translasi <InlineMath math="T\begin{pmatrix}2\\-3\end{pmatrix}" /> adalah <InlineMath math="3x - y + 5 = 0" />. Tentukan persamaan <strong className="text-red-300">garis aslinya</strong>!
                   </p>
                 </div>
-                <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-2">
+                <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
                   <p className="text-xs font-semibold text-red-400 font-body">PEMBAHASAN:</p>
-                  <p className="text-sm text-white/80 font-body"><strong>Langkah 1:</strong> Gradien tidak berubah, maka:</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3">
-                    <BlockMath math="m = 3" />
-                  </div>
-                  <p className="text-sm text-white/80 font-body"><strong>Langkah 2:</strong> Intersep bayangan = <InlineMath math="c - ma + b" />:</p>
+                  <p className="text-sm text-white/80 font-body">
+                    Translasi <InlineMath math="T\begin{pmatrix}2\\-3\end{pmatrix}" /> memetakan setiap titik asal <InlineMath math="(x, y)" /> ke bayangan <InlineMath math="(x', y')" /> dengan:
+                  </p>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="2 - 3(1) + b = 4" />
-                    <BlockMath math="-1 + b = 4 \implies b = 5" />
+                    <BlockMath math="x' = x + 2" />
+                    <BlockMath math="y' = y - 3" />
                   </div>
-                  <p className="font-body font-bold text-red-300"><strong>Jawaban:</strong> <InlineMath math="m = 3,\; b = 5" /></p>
-                  <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body text-white/60">
-                    Verifikasi: <InlineMath math="y = 3(x-1)+2+5 = 3x-3+7 = 3x+4" /> ✓
+                  <p className="text-sm text-white/80 font-body">
+                    Artinya, jika <InlineMath math="(x, y)" /> adalah titik pada <strong className="text-white">garis asli</strong>, maka bayangannya <InlineMath math="(x', y') = (x+2,\; y-3)" /> terletak pada garis bayangan <InlineMath math="3x' - y' + 5 = 0" />.
+                  </p>
+                  <p className="text-sm text-white/80 font-body">Substitusikan <InlineMath math="x' = x + 2" /> dan <InlineMath math="y' = y - 3" /> ke persamaan bayangan:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="3(x + 2) - (y - 3) + 5 = 0" />
+                    <BlockMath math="3x + 6 - y + 3 + 5 = 0" />
+                    <BlockMath math="3x - y + 14 = 0" />
+                  </div>
+                  <p className="font-body font-bold text-red-300">✅ <strong>Garis Asli:</strong> <InlineMath math="3x - y + 14 = 0" /></p>
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi</p>
+                    <p className="text-xs text-white/60 font-body">Translasikan <InlineMath math="3x - y + 14 = 0" /> dengan <InlineMath math="T\begin{pmatrix}2\\-3\end{pmatrix}" /> → substitusi <InlineMath math="x = x' - 2,\ y = y' + 3" />:</p>
+                    <BlockMath math="3(x'-2) - (y'+3) + 14 = 0" />
+                    <BlockMath math="3x' - 6 - y' - 3 + 14 = 0" />
+                    <BlockMath math="3x' - y' + 5 = 0 \checkmark" />
                   </div>
                 </div>
               </div>
