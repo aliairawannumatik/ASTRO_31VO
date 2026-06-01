@@ -1335,6 +1335,18 @@ const DilatasisPage = () => {
                   </p>
                 </div>
 
+                {/* Ilustrasi dilatasi pusat P(a,b) */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-semibold text-slate-300 text-center">
+                    Ilustrasi Dilatasi Pusat O(a,b) dengan Faktor Skala k
+                  </p>
+                  <img
+                    src="/dilatasi-pusat-ab2.png"
+                    alt="Ilustrasi Dilatasi Pusat O(a,b) dengan Faktor Skala k"
+                    className="w-1/2 max-w-xs mx-auto block rounded-xl object-cover"
+                  />
+                </div>
+
               </div>
             )}
           </div>
