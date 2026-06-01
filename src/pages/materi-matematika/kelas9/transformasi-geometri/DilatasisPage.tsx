@@ -2390,6 +2390,211 @@ const DilatasisPage = () => {
             )}
           </div>
 
+          {/* ═══════════════════════════════════════
+              SUB-BAB 4: DILATASI KURVA LINEAR
+          ═══════════════════════════════════════ */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader
+              id="konsep-kurva"
+              icon={<Target className="w-5 h-5" />}
+              iconColor="#fb923c"
+              label="📘 Sub-Bab 4: Dilatasi pada Kurva (Linear)"
+            />
+            {expandedSections.includes("konsep-kurva") && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-orange-300">🎯 Konsep Utama</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Dilatasi tidak hanya berlaku untuk titik dan bangun datar, tetapi juga untuk <strong className="text-orange-300">kurva (garis lurus)</strong>.
+                    Ketika sebuah garis lurus didilatasi, hasilnya tetap berupa garis lurus — namun posisinya bergeser tergantung pusat dan faktor skala.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-4">
+                    <p className="font-body text-xs font-semibold text-orange-300">📐 SIFAT PENTING:</p>
+                    <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+                      <p className="font-body text-sm text-green-300 font-bold">✅ Gradien (kemiringan) garis TIDAK berubah</p>
+                      <p className="font-body text-xs text-white/70 mt-1">Dilatasi hanya mengubah posisi (intercept), bukan kemiringan. Garis asli dan bayangannya selalu <strong>sejajar</strong>!</p>
+                    </div>
+                    <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+                      <p className="font-body text-sm text-yellow-300 font-bold">⚡ Intercept (konstanta) berubah sesuai rumus</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Rumus Pusat O(0,0) */}
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-xs font-semibold text-blue-300">📐 RUMUS — Pusat O(0, 0):</p>
+                  <p className="font-body text-xs text-white/70">Jika garis <InlineMath math="y = mx + c" /> didilatasi dengan pusat <InlineMath math="O(0,0)" /> dan faktor skala <InlineMath math="k" />:</p>
+                  <div className="bg-slate-900/60 rounded p-3">
+                    <BlockMath math="y = mx + c \xrightarrow{[O,k]} y = mx + kc" />
+                  </div>
+                  <p className="font-body text-xs text-white/60">Gradien <InlineMath math="m" /> tetap, intercept menjadi <InlineMath math="kc" />.</p>
+                </div>
+
+                {/* Rumus Pusat P(a,b) */}
+                <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-xs font-semibold text-purple-300">📐 RUMUS — Pusat P(a, b):</p>
+                  <p className="font-body text-xs text-white/70">Jika garis <InlineMath math="y = mx + c" /> didilatasi dengan pusat <InlineMath math="P(a,b)" /> dan faktor skala <InlineMath math="k" />:</p>
+                  <div className="bg-slate-900/60 rounded p-3 space-y-2">
+                    <BlockMath math="y = mx + c \xrightarrow{[P(a,b),k]} y = mx + c'" />
+                    <BlockMath math="c' = kc + (k-1)(ma - b)" />
+                  </div>
+                  <p className="font-body text-xs text-white/60">Jika <InlineMath math="a=0, b=0" />, rumus ini menjadi <InlineMath math="c' = kc" /> — sama dengan pusat O(0,0).</p>
+                </div>
+
+                {/* Derivasi singkat */}
+                <div className="bg-slate-800/40 rounded-lg p-4 space-y-2">
+                  <p className="font-body text-xs font-semibold text-slate-300">💡 Cara Menurunkan Rumus:</p>
+                  <p className="font-body text-xs text-white/70 leading-relaxed">
+                    Ambil sembarang titik <InlineMath math="(x, y)" /> pada garis. Setelah dilatasi dengan pusat <InlineMath math="P(a,b)" /> dan faktor <InlineMath math="k" />, titik baru adalah:
+                  </p>
+                  <div className="bg-slate-900/50 rounded p-2 space-y-1">
+                    <BlockMath math="x' = a + k(x-a),\quad y' = b + k(y-b)" />
+                  </div>
+                  <p className="font-body text-xs text-white/70">Substitusi balik <InlineMath math="x = a + \frac{x'-a}{k}" /> dan <InlineMath math="y = b + \frac{y'-b}{k}" /> ke persamaan garis asal, didapat persamaan garis bayangan dengan gradien tetap <InlineMath math="m" /> dan intercept baru <InlineMath math="c' = kc + (k-1)(ma-b)" />.</p>
+                </div>
+
+                {/* Untuk bentuk umum ax + by + c = 0 */}
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-2">
+                  <p className="font-body text-xs font-semibold text-orange-300">📝 Bentuk Umum ax + by + c = 0:</p>
+                  <p className="font-body text-xs text-white/70">Ubah dulu ke bentuk <InlineMath math="y = mx + c" /> (dengan <InlineMath math="b \neq 0" />):</p>
+                  <div className="bg-slate-900/50 rounded p-2">
+                    <BlockMath math="m = -\frac{a}{b},\quad c_{line} = -\frac{c}{b}" />
+                  </div>
+                  <p className="font-body text-xs text-white/70">Lalu terapkan rumus di atas. Hasil bisa dikembalikan ke bentuk <InlineMath math="ax + by + c = 0" /> jika diperlukan.</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Contoh Soal Sub-Bab 4 — Kurva Linear */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader
+              id="contoh-kurva"
+              icon={<Calculator className="w-5 h-5" />}
+              iconColor="#fb923c"
+              label="📝 Contoh Soal — Dilatasi Kurva Linear"
+            />
+            {expandedSections.includes("contoh-kurva") && (
+              <div className="px-5 pb-5 space-y-6">
+
+                {/* ── MUDAH ── */}
+                <div className="border-l-4 border-green-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
+                    <span className="font-body font-semibold text-white">Contoh 1</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Garis <InlineMath math="y = 2x + 3" /> didilatasi dengan pusat <InlineMath math="O(0,0)" /> dan faktor skala <InlineMath math="k = 2" />. Tentukan persamaan bayangan garis tersebut!
+                    </p>
+                  </div>
+                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Diketahui:</strong> <InlineMath math="y = 2x + 3" />, pusat <InlineMath math="O(0,0)" />, <InlineMath math="k = 2" /></p>
+                      <p>Gunakan rumus: gradien tetap, intercept dikalikan k.</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p className="text-xs text-green-300">Gradien bayangan:</p>
+                        <BlockMath math="m' = m = 2" />
+                        <p className="text-xs text-green-300">Intercept bayangan:</p>
+                        <BlockMath math="c' = k \cdot c = 2 \times 3 = 6" />
+                        <p className="text-xs text-green-300">Persamaan bayangan:</p>
+                        <BlockMath math="y = 2x + 6" />
+                      </div>
+                      <p><strong className="text-green-300">Jawaban: <InlineMath math="y = 2x + 6" /></strong></p>
+                      <p className="text-white/50 text-xs">Garis bayangan sejajar dengan garis asli (gradien sama), hanya intercept berubah dari 3 menjadi 6.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── SEDANG ── */}
+                <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
+                    <span className="font-body font-semibold text-white">Contoh 2</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Garis <InlineMath math="y = 3x - 4" /> didilatasi dengan pusat <InlineMath math="P(2, 1)" /> dan faktor skala <InlineMath math="k = 3" />. Tentukan persamaan bayangan garis tersebut!
+                    </p>
+                  </div>
+                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Diketahui:</strong> <InlineMath math="m = 3,\ c = -4,\ a = 2,\ b = 1,\ k = 3" /></p>
+                      <p>Gunakan rumus pusat P(a,b): <InlineMath math="c' = kc + (k-1)(ma - b)" /></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p className="text-xs text-yellow-300">Hitung <InlineMath math="ma - b" />:</p>
+                        <BlockMath math="ma - b = 3 \times 2 - 1 = 6 - 1 = 5" />
+                        <p className="text-xs text-yellow-300">Hitung intercept bayangan:</p>
+                        <BlockMath math="c' = 3 \times (-4) + (3-1) \times 5 = -12 + 10 = -2" />
+                        <p className="text-xs text-yellow-300">Persamaan bayangan (gradien tetap m = 3):</p>
+                        <BlockMath math="y = 3x - 2" />
+                      </div>
+                      <p><strong className="text-yellow-300">Jawaban: <InlineMath math="y = 3x - 2" /></strong></p>
+                      <p className="text-white/50 text-xs">Garis asli <InlineMath math="y=3x-4" /> dan bayangan <InlineMath math="y=3x-2" /> sejajar (gradien sama = 3), posisi bayangan lebih ke atas.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── SULIT ── */}
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="font-body font-semibold text-white">Contoh 3</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Dilatasi dengan pusat <InlineMath math="P(-1, 2)" /> dan faktor skala <InlineMath math="k = -2" /> memetakan garis <InlineMath math="\ell" /> ke garis <InlineMath math="y = 4x + 10" />.
+                      Tentukan persamaan garis <InlineMath math="\ell" /> asal!
+                    </p>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Diketahui:</strong> bayangan <InlineMath math="y = 4x + 10" />, <InlineMath math="a = -1,\ b = 2,\ k = -2" /></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-3">
+                        <p className="text-xs text-red-300 font-semibold">Langkah 1 — Gradien garis asal:</p>
+                        <p className="text-xs text-white/70">Gradien tidak berubah oleh dilatasi, jadi:</p>
+                        <BlockMath math="m = 4" />
+                        <p className="text-xs text-red-300 font-semibold">Langkah 2 — Cari intercept asal dari intercept bayangan:</p>
+                        <p className="text-xs text-white/70">Rumus: <InlineMath math="c' = kc + (k-1)(ma - b)" /></p>
+                        <p className="text-xs text-white/70">Substitusi yang diketahui (<InlineMath math="c' = 10,\ k=-2,\ m=4,\ a=-1,\ b=2" />):</p>
+                        <BlockMath math="10 = -2c + (-2-1)(4 \times (-1) - 2)" />
+                        <BlockMath math="10 = -2c + (-3)(-4 - 2)" />
+                        <BlockMath math="10 = -2c + (-3)(-6)" />
+                        <BlockMath math="10 = -2c + 18" />
+                        <BlockMath math="-2c = -8 \Rightarrow c = 4" />
+                        <p className="text-xs text-red-300 font-semibold">Langkah 3 — Persamaan garis asal:</p>
+                        <BlockMath math="\ell : y = 4x + 4" />
+                      </div>
+                      <p><strong className="text-red-300">Jawaban: <InlineMath math="\ell: y = 4x + 4" /></strong></p>
+                      <div className="bg-slate-900/50 rounded p-2 text-xs text-white/50">
+                        <p>Verifikasi: <InlineMath math="c' = (-2)(4) + (-3)(4 \times (-1) - 2) = -8 + (-3)(-6) = -8 + 18 = 10\ \checkmark" /></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            )}
+          </div>
+
+          {/* ── ANIMASI INTERAKTIF — DILATASI KURVA LINEAR ── */}
+          <div className="bg-card/80 backdrop-blur border border-orange-500/20 rounded-xl overflow-hidden">
+            <SectionHeader
+              id="animasi-kurva"
+              icon={<span>📈</span>}
+              iconColor="#fb923c"
+              label="Animasi Interaktif — Dilatasi Kurva Linear"
+            />
+            {expandedSections.includes("animasi-kurva") && (
+              <div className="px-5 pb-5">
+                <AnimasiDilatasiKurvaLinear />
+              </div>
+            )}
+          </div>
+
           {/* ── RANGKUMAN ── */}
           <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-5 space-y-3">
             <p className="font-body text-sm font-semibold text-cyan-300">🌟 Rangkuman Dilatasi</p>
@@ -2419,6 +2624,34 @@ const DilatasisPage = () => {
             <p className="font-body text-xs text-white/60">
               Ingat: rumus pusat <InlineMath math="P(a,b)" /> adalah rumus umum — substitusikan <InlineMath math="a=0, b=0" /> untuk mendapatkan rumus pusat <InlineMath math="O(0,0)" />.
             </p>
+            {/* Kurva Linear */}
+            <div className="border-t border-cyan-500/20 pt-3 space-y-2">
+              <p className="font-body text-xs font-semibold text-orange-300">📈 Dilatasi Kurva Linear <InlineMath math="y = mx + c" />:</p>
+              <div className="overflow-x-auto">
+                <table className="w-full font-body text-xs text-white/80">
+                  <thead>
+                    <tr className="border-b border-orange-500/20">
+                      <th className="text-left py-2 text-orange-300">Pusat</th>
+                      <th className="text-left py-2 text-orange-300">Gradien bayangan</th>
+                      <th className="text-left py-2 text-orange-300">Intercept bayangan c'</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-700">
+                    <tr>
+                      <td className="py-2 text-green-300"><InlineMath math="O(0,0)" /></td>
+                      <td className="py-2"><InlineMath math="m' = m" /></td>
+                      <td className="py-2"><InlineMath math="c' = kc" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 text-purple-300"><InlineMath math="P(a,b)" /></td>
+                      <td className="py-2"><InlineMath math="m' = m" /></td>
+                      <td className="py-2"><InlineMath math="c' = kc + (k-1)(ma-b)" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="font-body text-xs text-orange-200/70">⚡ Gradien selalu tetap — hanya intercept yang berubah. Garis asli dan bayangan selalu sejajar!</p>
+            </div>
           </div>
 
         </div>
