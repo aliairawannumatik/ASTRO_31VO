@@ -848,7 +848,7 @@ const TranslasiPage = () => {
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title="🌟 Apa Itu Translasi?" />
+            <SectionHdr icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title="A. 🌟 Apa Itu Translasi?" />
             <div className="px-5 pb-5 space-y-4">
               <p className="font-body text-sm text-white/80 leading-relaxed">
                 <strong className="text-cyan-300">Translasi</strong> adalah jenis transformasi yang memindahkan setiap titik pada suatu bangun ke posisi baru berdasarkan arah dan jarak tertentu, <strong className="text-white">tanpa mengubah bentuk, ukuran, maupun orientasi</strong> bangun tersebut.
@@ -928,7 +928,7 @@ const TranslasiPage = () => {
 
           {/* RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<Calculator className="w-5 h-5" />} color="#22d3ee" title="📐 Rumus Translasi" />
+            <SectionHdr icon={<Calculator className="w-5 h-5" />} color="#22d3ee" title="B. 📐 Rumus Translasi" />
             <div className="px-5 pb-5 space-y-4">
               <p className="text-sm text-white/80 font-body">Jika titik <InlineMath math="A(x, y)" /> ditranslasikan oleh vektor <InlineMath math="T = \begin{pmatrix}a\\b\end{pmatrix}" />, maka bayangan <InlineMath math="A'(x', y')" /> adalah:</p>
               <div className="bg-cyan-950/60 border border-cyan-500/40 rounded-xl p-5 text-center">
@@ -951,7 +951,7 @@ const TranslasiPage = () => {
 
           {/* CONTOH TITIK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📌 Contoh: Translasi Titik" />
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="C. 📌 Contoh: Translasi Titik" />
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-violet-500/10 border border-violet-500/30 rounded-xl p-4">
                 <p className="text-sm font-semibold text-violet-300 font-body mb-2">Soal:</p>
@@ -974,7 +974,7 @@ const TranslasiPage = () => {
 
           {/* CONTOH BANGUN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#f472b6" title="📐 Contoh: Translasi Bangun Datar" />
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#f472b6" title="D. 📐 Contoh: Translasi Bangun Datar" />
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-pink-500/10 border border-pink-500/30 rounded-xl p-4">
                 <p className="text-sm font-semibold text-pink-300 font-body mb-2">Soal:</p>
@@ -1002,7 +1002,7 @@ const TranslasiPage = () => {
 
           {/* VEKTOR KOMPOSISI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<Calculator className="w-5 h-5" />} color="#4ade80" title="🔗 Komposisi Translasi" />
+            <SectionHdr icon={<Calculator className="w-5 h-5" />} color="#4ade80" title="E. 🔗 Komposisi Translasi" />
             <div className="px-5 pb-5 space-y-4">
               <p className="text-sm text-white/80 font-body">Jika suatu titik dikenai dua translasi berturut-turut, kita bisa menggabungkan keduanya:</p>
               <div className="bg-green-950/50 border border-green-500/30 rounded-xl p-4">
@@ -1021,7 +1021,7 @@ const TranslasiPage = () => {
 
           {/* TRANSLASI PADA KURVA LINEAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#4ade80" title="📈 [Tambahan] Translasi pada Kurva Linear" />
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#4ade80" title="F. 📈 [Tambahan] Translasi pada Kurva Linear" />
             <div className="px-5 pb-5 space-y-5">
 
               {/* Pengantar */}
@@ -1144,7 +1144,7 @@ const TranslasiPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<Target className="w-5 h-5" />} color="#f97316" title="🎯 Rangkuman" />
+            <SectionHdr icon={<Target className="w-5 h-5" />} color="#f97316" title="G. 🎯 Rangkuman" />
             <div className="px-5 pb-5 space-y-3">
               {[
                 ["Definisi", "Memindahkan setiap titik sejauh dan searah vektor translasi T(a, b)"],
