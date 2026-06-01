@@ -831,19 +831,15 @@ function round2(n: number) { return Math.round(n * 100) / 100; }
 
 /* ── Animasi Interaktif Rotasi Kurva Linear ── */
 function AnimasiRotasiKurva() {
-  const [formType, setFormType] = useState<'slope' | 'standard'>('slope');
-  const [inputSlope, setInputSlope] = useState('y=2x+1');
-  const [inputStd, setInputStd] = useState('2x+3y=6');
+  const [input, setInput] = useState('y=2x+1');
   const [rotation, setRotation] = useState<'90ccw' | '90cw' | '180'>('90ccw');
   const [show, setShow] = useState(false);
 
-  const isStd = formType === 'standard';
-  const input    = isStd ? inputStd   : inputSlope;
-  const setInput = isStd ? setInputStd : setInputSlope;
-
-  const parsedSlope = isStd ? null : parseLinearR(input);
-  const parsedStd   = isStd ? parseStandardR(input) : null;
-  const parsed      = isStd ? parsedStd : parsedSlope;
+  /* Auto-detect format: coba y=mx+c dulu, lalu ax+by=c */
+  const parsedSlope = parseLinearR(input);
+  const parsedStd   = parsedSlope ? null : parseStandardR(input);
+  const parsed      = parsedSlope ?? parsedStd;
+  const isStd       = parsedStd !== null && parsedSlope === null;
   const isValid     = parsed !== null;
 
   const m = parsed?.m ?? 0;
@@ -864,34 +860,9 @@ function AnimasiRotasiKurva() {
   const accent = rotation === '90ccw' ? '#a78bfa' : rotation === '90cw' ? '#fb923c' : '#f472b6';
   const rotLabel = rotation === '90ccw' ? '90° Berlawanan AJ' : rotation === '90cw' ? '90° Searah AJ' : '180°';
 
-  const rowsSlope = [
-    ['7','8','9','+','y'],
-    ['4','5','6','-','x'],
-    ['1','2','3','.','='],
-    ['0','CLR','⌫'],
-  ];
-  const rowsStd = [
-    ['7','8','9','+','x'],
-    ['4','5','6','-','y'],
-    ['1','2','3','.','='],
-    ['0','CLR','⌫'],
-  ];
-  const rows = isStd ? rowsStd : rowsSlope;
-
-  const handleKey = (k: string) => {
-    playPopSound(); setShow(false);
-    if (k === '⌫') { setInput(p => p.slice(0, -1)); return; }
-    if (k === 'CLR') { setInput(''); return; }
-    setInput(p => p + k);
-  };
-
-  const handleToggle = (t: 'slope' | 'standard') => {
-    playPopSound(); setShow(false); setFormType(t);
-  };
-
   const handleReset = () => {
     playPopSound(); setShow(false);
-    if (isStd) setInputStd('2x+3y=6'); else setInputSlope('y=2x+1');
+    setInput('y=2x+1');
     setRotation('90ccw');
   };
 
@@ -899,48 +870,49 @@ function AnimasiRotasiKurva() {
     <div className="space-y-4 pt-2">
       <p className="font-bold text-sm font-body" style={{ color: accent }}>📐 Animasi Interaktif — Rotasi Kurva Linear</p>
 
-      {/* Toggle bentuk persamaan */}
-      <div className="flex rounded-xl overflow-hidden border border-slate-600/50 bg-slate-800/50">
-        <button onClick={() => handleToggle('slope')}
-          className={`flex-1 py-2 text-xs font-bold font-mono transition-all ${!isStd ? 'bg-violet-500/30 text-violet-200 border-r border-violet-500/40' : 'text-white/40 hover:text-white/70'}`}
-        >y = mx + c</button>
-        <button onClick={() => handleToggle('standard')}
-          className={`flex-1 py-2 text-xs font-bold font-mono transition-all ${isStd ? 'bg-orange-500/30 text-orange-200' : 'text-white/40 hover:text-white/70'}`}
-        >ax + by = c</button>
+      {/* Petunjuk pengetikan */}
+      <div className="bg-slate-800/70 border border-cyan-500/25 rounded-xl p-3 space-y-2">
+        <p className="text-[11px] font-bold text-cyan-300 font-body uppercase tracking-wider">📝 Petunjuk Pengetikan</p>
+        <div className="grid grid-cols-1 gap-1.5 text-xs font-body">
+          <div className="flex items-start gap-2">
+            <span className="text-violet-400 font-bold font-mono shrink-0">Format 1</span>
+            <span className="text-white/60">y = mx + c</span>
+            <span className="text-white/30 mx-1">→</span>
+            <span className="text-white/80 font-mono">Ketik: <span className="text-violet-300">y=2x+1</span> atau <span className="text-violet-300">y=-3x+4</span></span>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="text-orange-400 font-bold font-mono shrink-0">Format 2</span>
+            <span className="text-white/60">ax + by = c</span>
+            <span className="text-white/30 mx-1">→</span>
+            <span className="text-white/80 font-mono">Ketik: <span className="text-orange-300">2x+3y=6</span> atau <span className="text-orange-300">x-y=4</span></span>
+          </div>
+        </div>
+        <p className="text-[10px] text-white/35 font-body">Gunakan keyboard laptop/HP · Tidak ada spasi · Huruf kecil (x, y)</p>
       </div>
 
-      {/* Display / input persamaan */}
-      <div className="space-y-1">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
-        <div className={`bg-slate-800 border rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5 ${isStd ? 'border-orange-500/50' : 'border-slate-500'}`}>
-          <span>{input || <span className="text-white/30">ketik...</span>}</span>
-          <span className="animate-pulse text-cyan-400">|</span>
+      {/* Input persamaan — ketik langsung */}
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
+          {isValid && (
+            <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full ${isStd ? 'bg-orange-500/20 text-orange-300' : 'bg-violet-500/20 text-violet-300'}`}>
+              {isStd ? 'ax + by = c' : 'y = mx + c'}
+            </span>
+          )}
         </div>
+        <input
+          type="text"
+          value={input}
+          onChange={e => { setInput(e.target.value); setShow(false); }}
+          placeholder="Contoh: y=2x+1 atau 2x+3y=6"
+          className={`w-full bg-slate-800 border rounded-xl px-4 py-2.5 font-mono text-white text-sm focus:outline-none transition-all placeholder:text-white/25
+            ${isValid ? (isStd ? 'border-orange-500/60 focus:border-orange-400' : 'border-violet-500/60 focus:border-violet-400') : input.length > 0 ? 'border-red-500/60 focus:border-red-400' : 'border-slate-600 focus:border-cyan-500/60'}`}
+        />
         {!isValid && input.length > 0 && (
           <p className="text-[11px] text-red-400 font-body">
-            {isStd ? 'Format: ax+by=c · Contoh: 2x+3y=6 · x-y=4' : 'Format: y=mx+c · Contoh: y=2x+1 · y=-3x'}
+            ❌ Format tidak dikenali · Coba: <span className="font-mono">y=2x+1</span> atau <span className="font-mono">2x+3y=6</span>
           </p>
         )}
-      </div>
-
-      {/* Keyboard */}
-      <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3 space-y-1.5">
-        <p className="text-[10px] text-white/30 font-body text-center uppercase tracking-wider mb-1">Keyboard</p>
-        {rows.map((row, ri) => (
-          <div key={ri} className="flex gap-1.5">
-            {row.map(k => (
-              <button key={k} onClick={() => handleKey(k)}
-                className={`flex-1 py-2 rounded-lg text-sm font-bold font-mono transition-all active:scale-90 select-none
-                  ${k === '⌫'  ? 'bg-red-500/25 border border-red-500/50 text-red-300 hover:bg-red-500/45' :
-                    k === 'CLR' ? 'bg-slate-600/60 border border-slate-500 text-slate-300 hover:bg-slate-500/70' :
-                    ['x','y','=','+','-','.'].includes(k)
-                      ? 'bg-violet-500/20 border border-violet-500/40 text-violet-200 hover:bg-violet-500/40'
-                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/25'
-                  }`}
-              >{k}</button>
-            ))}
-          </div>
-        ))}
       </div>
 
       {/* Pilih rotasi */}
