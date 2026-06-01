@@ -830,6 +830,8 @@ function fmtStdR(a: number, b: number, c: number): string {
 function round2(n: number) { return Math.round(n * 100) / 100; }
 
 /* ── Animasi Interaktif Rotasi Kurva Linear ── */
+const KURVA_ANIM_DURATION = 1800;
+
 function AnimasiRotasiKurva() {
   const [input, setInput] = useState('y=2x+1');
   const [rotation, setRotation] = useState<'90ccw' | '90cw' | '180'>('90ccw');
@@ -837,6 +839,9 @@ function AnimasiRotasiKurva() {
   const [inputA, setInputA] = useState('0');
   const [inputB, setInputB] = useState('0');
   const [show, setShow] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animAngle, setAnimAngle] = useState(0);
+  const rafRef = useRef<number | null>(null);
 
   const ca = centerType === 'origin' ? 0 : (parseFloat(inputA) || 0);
   const cb = centerType === 'origin' ? 0 : (parseFloat(inputB) || 0);
@@ -851,12 +856,26 @@ function AnimasiRotasiKurva() {
   const m = parsed?.m ?? 0;
   const c = parsed?.c ?? 0;
 
-  /* Rotasi kurva linear terhadap titik (ca, cb) */
+  /* Target angle for each rotation type */
+  const actualDeg = rotation === '90ccw' ? 90 : rotation === '90cw' ? -90 : 180;
+
+  /* General rotation of line y=mx+c around (ca,cb) by arbitrary deg — for animation */
+  const rotateLineAt = (deg: number): { M: number; C: number } | null => {
+    const θ = deg * DEG;
+    const cosT = Math.cos(θ), sinT = Math.sin(θ);
+    const denom = cosT - m * sinT;
+    if (Math.abs(denom) < 0.06) return null; // near-vertical: skip this frame
+    const M = (m * cosT + sinT) / denom;
+    const C = cb - ca * M + (m * ca + c - cb) / denom;
+    if (!isFinite(M) || !isFinite(C) || Math.abs(M) > 200) return null;
+    return { M, C };
+  };
+
+  /* Final result (exact closed-form formulas) */
   const isVertical = m === 0 && rotation !== '180';
   let imgM = 0, imgC = 0, imgVertX = 0;
   if (rotation === '180') {
-    imgM = m;
-    imgC = round2(2 * cb - 2 * ca * m - c);
+    imgM = m; imgC = round2(2 * cb - 2 * ca * m - c);
   } else if (rotation === '90ccw') {
     if (m === 0) { imgVertX = round2(ca + cb - c); }
     else { imgM = round2(-1 / m); imgC = round2((ca * (1 - m) + cb * (m + 1) - c) / m); }
@@ -865,25 +884,50 @@ function AnimasiRotasiKurva() {
     else { imgM = round2(-1 / m); imgC = round2((ca * (1 + m) + cb * (m - 1) + c) / m); }
   }
 
-  const accent   = rotation === '90ccw' ? '#a78bfa' : rotation === '90cw' ? '#fb923c' : '#f472b6';
-  const rotLabel = rotation === '90ccw' ? '90° BAJ / 270° SAJ' : rotation === '90cw' ? '270° BAJ / 90° SAJ' : '180°';
+  const accent      = rotation === '90ccw' ? '#a78bfa' : rotation === '90cw' ? '#fb923c' : '#f472b6';
+  const rotLabel    = rotation === '90ccw' ? '90° BAJ / 270° SAJ' : rotation === '90cw' ? '270° BAJ / 90° SAJ' : '180°';
   const centerLabel = centerType === 'origin' ? 'O(0,0)' : `(${ca}, ${cb})`;
+  const easeOut     = (t: number) => 1 - Math.pow(1 - t, 3);
 
-  const changeAndReset = (fn: () => void) => { fn(); setShow(false); };
+  /* Current display angle: 0 at start, animAngle during animation, actualDeg after */
+  const displayAngle   = isAnimating ? animAngle : (show ? actualDeg : 0);
+  const animAngleAbs   = Math.abs(displayAngle);
+  const showingResult  = show || isAnimating;
+  const animLine       = showingResult && isValid && !isVertical ? rotateLineAt(displayAngle) : null;
 
-  const handleReset = () => {
-    playPopSound(); setShow(false);
-    setInput('y=2x+1');
-    setRotation('90ccw');
-    setCenterType('origin');
-    setInputA('0');
-    setInputB('0');
+  const handleTampilkan = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(true); setAnimAngle(0);
+    const startTime = performance.now();
+    const animate = (now: number) => {
+      const t = Math.min((now - startTime) / KURVA_ANIM_DURATION, 1);
+      setAnimAngle(easeOut(t) * actualDeg);
+      if (t < 1) { rafRef.current = requestAnimationFrame(animate); }
+      else { setAnimAngle(actualDeg); setIsAnimating(false); setShow(true); }
+    };
+    rafRef.current = requestAnimationFrame(animate);
   };
 
+  const changeAndReset = (fn: () => void) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    fn(); setShow(false); setIsAnimating(false); setAnimAngle(0);
+  };
+
+  const handleReset = () => {
+    playPopSound();
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setShow(false); setIsAnimating(false); setAnimAngle(0);
+    setInput('y=2x+1'); setRotation('90ccw');
+    setCenterType('origin'); setInputA('0'); setInputB('0');
+  };
+
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
   const ROT_OPTS = [
-    { val: '90ccw' as const, line1: '90° Berlawanan AJ', line2: '270° Searah AJ',      color: '#a78bfa' },
-    { val: '90cw'  as const, line1: '270° Berlawanan AJ', line2: '90° Searah AJ',       color: '#fb923c' },
-    { val: '180'   as const, line1: '180°',               line2: 'Berlawanan/Searah AJ', color: '#f472b6' },
+    { val: '90ccw' as const, line1: '90° Berlawanan AJ', line2: '270° Searah AJ',       color: '#a78bfa' },
+    { val: '90cw'  as const, line1: '270° Berlawanan AJ', line2: '90° Searah AJ',        color: '#fb923c' },
+    { val: '180'   as const, line1: '180°',                line2: 'Berlawanan/Searah AJ', color: '#f472b6' },
   ];
 
   return (
@@ -910,7 +954,7 @@ function AnimasiRotasiKurva() {
         <p className="text-[10px] text-white/35 font-body">Gunakan keyboard laptop/HP · Tidak ada spasi · Huruf kecil (x, y)</p>
       </div>
 
-      {/* Input persamaan — ketik langsung */}
+      {/* Input persamaan */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
           <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
@@ -923,7 +967,7 @@ function AnimasiRotasiKurva() {
         <input
           type="text"
           value={input}
-          onChange={e => { setInput(e.target.value); setShow(false); }}
+          onChange={e => changeAndReset(() => setInput(e.target.value))}
           placeholder="Contoh: y=2x+1 atau 2x+3y=6"
           className={`w-full bg-slate-800 border rounded-xl px-4 py-2.5 font-mono text-white text-sm focus:outline-none transition-all placeholder:text-white/25
             ${isValid ? (isStd ? 'border-orange-500/60 focus:border-orange-400' : 'border-violet-500/60 focus:border-violet-400') : input.length > 0 ? 'border-red-500/60 focus:border-red-400' : 'border-slate-600 focus:border-cyan-500/60'}`}
@@ -968,7 +1012,7 @@ function AnimasiRotasiKurva() {
         <div className="flex gap-2 flex-wrap">
           {ROT_OPTS.map(({ val, line1, line2, color }) => (
             <button key={val}
-              onClick={() => { playPopSound(); setRotation(val); setShow(false); }}
+              onClick={() => changeAndReset(() => { playPopSound(); setRotation(val); })}
               className={`flex-1 py-2 px-1 rounded-xl text-center font-body border transition-all leading-tight ${rotation === val ? 'text-black' : 'bg-slate-800/60 border-white/10 text-white/60 hover:text-white/80'}`}
               style={rotation === val ? { background: color, borderColor: color } : {}}
             >
@@ -981,49 +1025,100 @@ function AnimasiRotasiKurva() {
 
       {/* Action */}
       <div className="flex gap-2">
-        <button onClick={() => { playPopSound(); setShow(true); }} disabled={!isValid}
-          className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all text-black disabled:opacity-40 disabled:cursor-not-allowed"
-          style={{ background: accent }}
-        >▶ Tampilkan Bayangan</button>
-        <button onClick={handleReset}
-          className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600 transition-all"
+        <button onClick={handleTampilkan} disabled={!isValid || isAnimating}
+          className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all text-black disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{ background: isAnimating ? '#64748b' : accent }}
+        >{isAnimating ? '⏳ Memutar…' : '▶ Tampilkan Bayangan'}</button>
+        <button onClick={handleReset} disabled={isAnimating}
+          className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600 transition-all disabled:opacity-40"
         >↺</button>
       </div>
 
       {/* Grid SVG */}
       <div className="w-full max-w-[360px] mx-auto">
         <Grid accent={accent}>
+
+          {/* Garis asli */}
           {isValid && (
-            <line x1={px(-5)} y1={py(m * -5 + c)} x2={px(5)} y2={py(m * 5 + c)} stroke="#22d3ee" strokeWidth="2.5" />
+            <line x1={px(-5)} y1={py(m * -5 + c)} x2={px(5)} y2={py(m * 5 + c)}
+              stroke="#22d3ee" strokeWidth="2.5" opacity={showingResult ? 0.45 : 1} />
           )}
-          {isValid && (
+          {isValid && !showingResult && (
             <text x={px(2)} y={py(m * 2 + c) - 8} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
           )}
-          {show && isValid && !isVertical && (
-            <line x1={px(-5)} y1={py(imgM * -5 + imgC)} x2={px(5)} y2={py(imgM * 5 + imgC)} stroke={accent} strokeWidth="2.5" strokeDasharray="6,3" />
+
+          {/* Garis berputar (animasi & hasil) */}
+          {showingResult && isValid && animLine && (
+            <line
+              x1={px(-5)} y1={py(animLine.M * -5 + animLine.C)}
+              x2={px(5)}  y2={py(animLine.M * 5  + animLine.C)}
+              stroke={accent} strokeWidth="2.5"
+              strokeDasharray={show && !isAnimating ? '6,3' : 'none'}
+              opacity={0.9}
+            />
           )}
-          {show && isValid && !isVertical && (
-            <text x={px(-2)} y={py(imgM * -2 + imgC) - 8} fill={accent} fontSize="9" fontWeight="bold">{fmtLineR(imgM, imgC)}</text>
+          {/* Label bayangan (hanya setelah animasi selesai) */}
+          {show && !isAnimating && isValid && !isVertical && animLine && (
+            <text x={px(-2)} y={py(animLine.M * -2 + animLine.C) - 8}
+              fill={accent} fontSize="9" fontWeight="bold">{fmtLineR(imgM, imgC)}</text>
           )}
-          {show && isValid && isVertical && (
-            <line x1={px(imgVertX)} y1={0} x2={px(imgVertX)} y2={S} stroke={accent} strokeWidth="2.5" strokeDasharray="6,3" />
+          {/* Garis vertikal hasil (m=0 + 90°) */}
+          {show && !isAnimating && isValid && isVertical && (
+            <line x1={px(imgVertX)} y1={0} x2={px(imgVertX)} y2={S}
+              stroke={accent} strokeWidth="2.5" strokeDasharray="6,3" />
           )}
-          {show && isValid && isVertical && (
+          {show && !isAnimating && isValid && isVertical && (
             <text x={px(imgVertX) + 5} y={py(2)} fill={accent} fontSize="9" fontWeight="bold">x={imgVertX}</text>
           )}
+
+          {/* Arc busur rotasi di sekitar pusat */}
+          {showingResult && animAngleAbs > 2 && (
+            <ArcArrow cx={ca} cy={cb} r={28} aStart={0} aEnd={displayAngle} color={accent} />
+          )}
+
+          {/* Badge sudut — kotak warna di tengah atas SVG */}
+          {showingResult && animAngleAbs > 2 && (() => {
+            const bx = S / 2, by = 18, bw = 76, bh = 28;
+            return (
+              <g>
+                <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
+                  fill={rotation === '90ccw' ? '#7c3aed' : rotation === '90cw' ? '#f97316' : '#db2777'}
+                  stroke="#fff" strokeWidth="1.5" opacity="0.95" />
+                <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
+                  {Math.round(animAngleAbs)}°
+                </text>
+              </g>
+            );
+          })()}
+
+          {/* Label garis asli (selama animasi tampilkan di bawah agar tidak tumpuk badge) */}
+          {showingResult && isValid && (
+            <text x={px(2)} y={py(m * 2 + c) + 14} fill="#22d3ee" fontSize="8" fontWeight="bold" opacity="0.6">{input}</text>
+          )}
+
           {/* Pusat rotasi */}
           <CenterMark x={ca} y={cb} color="#facc15" />
           <text x={px(ca) + 14} y={py(cb) - 12} fill="#facc15" fontSize="9" fontWeight="bold">{centerLabel}</text>
         </Grid>
+
+        {/* Legenda */}
         <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
           <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
           <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">Pusat rotasi</span></div>
-          {show && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accent }} /><span style={{ color: accent }}>Bayangan ({rotLabel})</span></div>}
+          {showingResult && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accent }} /><span style={{ color: accent }}>Bayangan ({rotLabel})</span></div>}
         </div>
       </div>
 
+      {/* Info selama animasi */}
+      {isAnimating && (
+        <div className="bg-slate-700/40 rounded-xl p-3 text-xs font-body space-y-1">
+          <p className="font-bold animate-pulse" style={{ color: accent }}>⏳ Memutar perlahan…</p>
+          <p className="text-white/50">Sudut saat ini: <span className="text-white font-semibold">{Math.round(animAngleAbs)}°</span></p>
+        </div>
+      )}
+
       {/* Hasil */}
-      {show && isValid && (
+      {show && !isAnimating && isValid && (
         <div className="rounded-xl p-4 space-y-1.5 border" style={{ background: `${accent}15`, borderColor: `${accent}40` }}>
           <p className="text-xs font-semibold font-body uppercase tracking-wide" style={{ color: accent }}>HASIL ROTASI terhadap {centerLabel}:</p>
           <div className="flex items-center gap-2 text-sm font-body flex-wrap">
