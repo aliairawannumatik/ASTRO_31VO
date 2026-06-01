@@ -759,56 +759,186 @@ function AnimasiRotasi() {
 }
 
 /* ── Helpers for Kurva Linear section ── */
-function fmtKurva(m: number, c: number): string {
-  if (m === 0) return `${c}`;
-  const mPart = m === 1 ? 'x' : m === -1 ? '-x' : `${m}x`;
-  const cPart = c === 0 ? '' : c > 0 ? ` + ${c}` : ` - ${Math.abs(c)}`;
-  return `${mPart}${cPart}`;
+function parseLinearR(eq: string): { m: number; c: number } | null {
+  const s = eq.replace(/\s/g, '').toLowerCase();
+  if (!s.startsWith('y=')) return null;
+  const rhs = s.slice(2);
+  if (!rhs) return null;
+  if (/^-?\d+\.?\d*$/.test(rhs)) return { m: 0, c: parseFloat(rhs) };
+  const match = rhs.match(/^(-?\d*\.?\d*)x([+-]\d+\.?\d*)?$/);
+  if (match) {
+    const coef = match[1];
+    const m = coef === '' || coef === undefined ? 1 : coef === '-' ? -1 : parseFloat(coef);
+    const c = match[2] ? parseFloat(match[2]) : 0;
+    if (isNaN(m) || isNaN(c)) return null;
+    return { m, c };
+  }
+  return null;
+}
+
+function parseStandardR(eq: string): { m: number; c: number; a: number; b_coef: number; c_val: number } | null {
+  const s = eq.replace(/\s/g, '').toLowerCase();
+  const eqIdx = s.indexOf('=');
+  if (eqIdx === -1) return null;
+  const lhs = s.slice(0, eqIdx);
+  const rhs = s.slice(eqIdx + 1);
+  if (!lhs || !rhs) return null;
+  const c_val = parseFloat(rhs);
+  if (isNaN(c_val)) return null;
+  let a = 0, b_coef = 0;
+  const xMatch = lhs.match(/(^|[+-])(\d*\.?\d*)x/);
+  const yMatch = lhs.match(/(^|[+-])(\d*\.?\d*)y/);
+  if (!xMatch && !yMatch) return null;
+  if (xMatch) {
+    const sign = xMatch[1] === '-' ? -1 : 1;
+    a = sign * (xMatch[2] === '' ? 1 : parseFloat(xMatch[2]));
+    if (isNaN(a)) return null;
+  }
+  if (yMatch) {
+    const sign = yMatch[1] === '-' ? -1 : 1;
+    b_coef = sign * (yMatch[2] === '' ? 1 : parseFloat(yMatch[2]));
+    if (isNaN(b_coef)) return null;
+  }
+  if (b_coef === 0) return null;
+  const m = -a / b_coef;
+  const c = c_val / b_coef;
+  if (!isFinite(m) || !isFinite(c)) return null;
+  return { m, c, a, b_coef, c_val };
+}
+
+function fmtLineR(m: number, c: number): string {
+  if (m === 0) return `y = ${c}`;
+  const ms = m === 1 ? '' : m === -1 ? '-' : `${m}`;
+  const cp = c === 0 ? '' : c > 0 ? ` + ${c}` : ` - ${Math.abs(c)}`;
+  return `y = ${ms}x${cp}`;
+}
+
+function fmtStdR(a: number, b: number, c: number): string {
+  let res = '';
+  if (a !== 0) res += a === 1 ? 'x' : a === -1 ? '-x' : `${a}x`;
+  if (b !== 0) {
+    if (res === '') res += b === 1 ? 'y' : b === -1 ? '-y' : `${b}y`;
+    else if (b === 1) res += ' + y';
+    else if (b === -1) res += ' - y';
+    else if (b > 0) res += ` + ${b}y`;
+    else res += ` - ${Math.abs(b)}y`;
+  }
+  res += ` = ${Math.round(c * 10000) / 10000}`;
+  return res;
 }
 
 function round2(n: number) { return Math.round(n * 100) / 100; }
 
 /* ── Animasi Interaktif Rotasi Kurva Linear ── */
 function AnimasiRotasiKurva() {
-  const [inputM, setInputM] = useState('2');
-  const [inputC, setInputC] = useState('1');
+  const [formType, setFormType] = useState<'slope' | 'standard'>('slope');
+  const [inputSlope, setInputSlope] = useState('y=2x+1');
+  const [inputStd, setInputStd] = useState('2x+3y=6');
   const [rotation, setRotation] = useState<'90ccw' | '90cw' | '180'>('90ccw');
   const [show, setShow] = useState(false);
 
-  const m = parseFloat(inputM) || 0;
-  const c = parseFloat(inputC) || 0;
+  const isStd = formType === 'standard';
+  const input    = isStd ? inputStd   : inputSlope;
+  const setInput = isStd ? setInputStd : setInputSlope;
+
+  const parsedSlope = isStd ? null : parseLinearR(input);
+  const parsedStd   = isStd ? parseStandardR(input) : null;
+  const parsed      = isStd ? parsedStd : parsedSlope;
+  const isValid     = parsed !== null;
+
+  const m = parsed?.m ?? 0;
+  const c = parsed?.c ?? 0;
 
   const isVertical = m === 0 && rotation !== '180';
   let imgM = 0, imgC = 0, imgVertX = 0;
   if (rotation === '180') {
-    imgM = m; imgC = -c;
+    imgM = m; imgC = round2(-c);
   } else if (rotation === '90ccw') {
-    if (m === 0) { imgVertX = -c; }
+    if (m === 0) { imgVertX = round2(-c); }
     else { imgM = round2(-1 / m); imgC = round2(-c / m); }
   } else {
-    if (m === 0) { imgVertX = c; }
+    if (m === 0) { imgVertX = round2(c); }
     else { imgM = round2(-1 / m); imgC = round2(c / m); }
   }
 
   const accent = rotation === '90ccw' ? '#a78bfa' : rotation === '90cw' ? '#fb923c' : '#f472b6';
   const rotLabel = rotation === '90ccw' ? '90° Berlawanan AJ' : rotation === '90cw' ? '90° Searah AJ' : '180°';
 
-  const changeAndReset = (fn: () => void) => { fn(); setShow(false); };
+  const rowsSlope = [
+    ['7','8','9','+','y'],
+    ['4','5','6','-','x'],
+    ['1','2','3','.','='],
+    ['0','CLR','⌫'],
+  ];
+  const rowsStd = [
+    ['7','8','9','+','x'],
+    ['4','5','6','-','y'],
+    ['1','2','3','.','='],
+    ['0','CLR','⌫'],
+  ];
+  const rows = isStd ? rowsStd : rowsSlope;
+
+  const handleKey = (k: string) => {
+    playPopSound(); setShow(false);
+    if (k === '⌫') { setInput(p => p.slice(0, -1)); return; }
+    if (k === 'CLR') { setInput(''); return; }
+    setInput(p => p + k);
+  };
+
+  const handleToggle = (t: 'slope' | 'standard') => {
+    playPopSound(); setShow(false); setFormType(t);
+  };
+
+  const handleReset = () => {
+    playPopSound(); setShow(false);
+    if (isStd) setInputStd('2x+3y=6'); else setInputSlope('y=2x+1');
+    setRotation('90ccw');
+  };
 
   return (
     <div className="space-y-4 pt-2">
       <p className="font-bold text-sm font-body" style={{ color: accent }}>📐 Animasi Interaktif — Rotasi Kurva Linear</p>
 
-      {/* Input m dan c */}
-      <div className="grid grid-cols-2 gap-3">
-        {([['Gradien (m)', inputM, setInputM], ['Intersep-y (c)', inputC, setInputC]] as const).map(([label, val, setter]) => (
-          <div key={label} className="space-y-1">
-            <p className="text-xs font-body text-white/50">{label}</p>
-            <input
-              type="number" step="1" value={val}
-              onChange={e => changeAndReset(() => (setter as (v: string) => void)(e.target.value))}
-              className="w-full bg-slate-700 border border-slate-500 rounded-lg px-3 py-1.5 text-sm text-white text-center font-mono focus:outline-none focus:border-violet-400"
-            />
+      {/* Toggle bentuk persamaan */}
+      <div className="flex rounded-xl overflow-hidden border border-slate-600/50 bg-slate-800/50">
+        <button onClick={() => handleToggle('slope')}
+          className={`flex-1 py-2 text-xs font-bold font-mono transition-all ${!isStd ? 'bg-violet-500/30 text-violet-200 border-r border-violet-500/40' : 'text-white/40 hover:text-white/70'}`}
+        >y = mx + c</button>
+        <button onClick={() => handleToggle('standard')}
+          className={`flex-1 py-2 text-xs font-bold font-mono transition-all ${isStd ? 'bg-orange-500/30 text-orange-200' : 'text-white/40 hover:text-white/70'}`}
+        >ax + by = c</button>
+      </div>
+
+      {/* Display / input persamaan */}
+      <div className="space-y-1">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
+        <div className={`bg-slate-800 border rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5 ${isStd ? 'border-orange-500/50' : 'border-slate-500'}`}>
+          <span>{input || <span className="text-white/30">ketik...</span>}</span>
+          <span className="animate-pulse text-cyan-400">|</span>
+        </div>
+        {!isValid && input.length > 0 && (
+          <p className="text-[11px] text-red-400 font-body">
+            {isStd ? 'Format: ax+by=c · Contoh: 2x+3y=6 · x-y=4' : 'Format: y=mx+c · Contoh: y=2x+1 · y=-3x'}
+          </p>
+        )}
+      </div>
+
+      {/* Keyboard */}
+      <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3 space-y-1.5">
+        <p className="text-[10px] text-white/30 font-body text-center uppercase tracking-wider mb-1">Keyboard</p>
+        {rows.map((row, ri) => (
+          <div key={ri} className="flex gap-1.5">
+            {row.map(k => (
+              <button key={k} onClick={() => handleKey(k)}
+                className={`flex-1 py-2 rounded-lg text-sm font-bold font-mono transition-all active:scale-90 select-none
+                  ${k === '⌫'  ? 'bg-red-500/25 border border-red-500/50 text-red-300 hover:bg-red-500/45' :
+                    k === 'CLR' ? 'bg-slate-600/60 border border-slate-500 text-slate-300 hover:bg-slate-500/70' :
+                    ['x','y','=','+','-','.'].includes(k)
+                      ? 'bg-violet-500/20 border border-violet-500/40 text-violet-200 hover:bg-violet-500/40'
+                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/25'
+                  }`}
+              >{k}</button>
+            ))}
           </div>
         ))}
       </div>
@@ -817,9 +947,9 @@ function AnimasiRotasiKurva() {
       <div className="space-y-1.5">
         <p className="text-xs font-body text-white/50 uppercase tracking-wide">Sudut Rotasi terhadap O(0,0)</p>
         <div className="flex gap-2 flex-wrap">
-          {([['90ccw', '90° Berlawanan AJ', '#a78bfa'], ['90cw', '90° Searah AJ', '#fb923c'], ['180', '180°', '#f472b6']] as const).map(([val, label, color]) => (
+          {([['90ccw','90° Berlawanan AJ','#a78bfa'],['90cw','90° Searah AJ','#fb923c'],['180','180°','#f472b6']] as const).map(([val, label, color]) => (
             <button key={val}
-              onClick={() => changeAndReset(() => setRotation(val))}
+              onClick={() => { playPopSound(); setRotation(val); setShow(false); }}
               className={`flex-1 py-2 rounded-xl text-xs font-bold font-body border transition-all ${rotation === val ? 'text-black' : 'bg-slate-800/60 border-white/10 text-white/60 hover:text-white/80'}`}
               style={rotation === val ? { background: color, borderColor: color } : {}}
             >{label}</button>
@@ -829,13 +959,11 @@ function AnimasiRotasiKurva() {
 
       {/* Action */}
       <div className="flex gap-2">
-        <button
-          onClick={() => { playPopSound(); setShow(true); }}
-          className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all text-black"
+        <button onClick={() => { playPopSound(); setShow(true); }} disabled={!isValid}
+          className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all text-black disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ background: accent }}
         >▶ Tampilkan Bayangan</button>
-        <button
-          onClick={() => { playPopSound(); setShow(false); setInputM('2'); setInputC('1'); setRotation('90ccw'); }}
+        <button onClick={handleReset}
           className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600 transition-all"
         >↺</button>
       </div>
@@ -843,20 +971,22 @@ function AnimasiRotasiKurva() {
       {/* Grid SVG */}
       <div className="w-full max-w-[360px] mx-auto">
         <Grid accent={accent}>
-          {/* Garis asli */}
-          <line x1={px(-5)} y1={py(m * -5 + c)} x2={px(5)} y2={py(m * 5 + c)} stroke="#22d3ee" strokeWidth="2.5" />
-          <text x={px(2.5)} y={py(m * 2.5 + c) - 8} fill="#22d3ee" fontSize="9" fontWeight="bold">y={fmtKurva(m, c)}</text>
-          {/* Garis bayangan */}
-          {show && !isVertical && (
+          {isValid && (
+            <line x1={px(-5)} y1={py(m * -5 + c)} x2={px(5)} y2={py(m * 5 + c)} stroke="#22d3ee" strokeWidth="2.5" />
+          )}
+          {isValid && (
+            <text x={px(2)} y={py(m * 2 + c) - 8} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
+          )}
+          {show && isValid && !isVertical && (
             <line x1={px(-5)} y1={py(imgM * -5 + imgC)} x2={px(5)} y2={py(imgM * 5 + imgC)} stroke={accent} strokeWidth="2.5" strokeDasharray="6,3" />
           )}
-          {show && !isVertical && (
-            <text x={px(-3)} y={py(imgM * -3 + imgC) - 8} fill={accent} fontSize="9" fontWeight="bold">y={fmtKurva(imgM, imgC)}</text>
+          {show && isValid && !isVertical && (
+            <text x={px(-2)} y={py(imgM * -2 + imgC) - 8} fill={accent} fontSize="9" fontWeight="bold">{fmtLineR(imgM, imgC)}</text>
           )}
-          {show && isVertical && (
+          {show && isValid && isVertical && (
             <line x1={px(imgVertX)} y1={0} x2={px(imgVertX)} y2={S} stroke={accent} strokeWidth="2.5" strokeDasharray="6,3" />
           )}
-          {show && isVertical && (
+          {show && isValid && isVertical && (
             <text x={px(imgVertX) + 5} y={py(2)} fill={accent} fontSize="9" fontWeight="bold">x={imgVertX}</text>
           )}
         </Grid>
@@ -867,17 +997,26 @@ function AnimasiRotasiKurva() {
       </div>
 
       {/* Hasil */}
-      {show && (
+      {show && isValid && (
         <div className="rounded-xl p-4 space-y-1.5 border" style={{ background: `${accent}15`, borderColor: `${accent}40` }}>
           <p className="text-xs font-semibold font-body uppercase tracking-wide" style={{ color: accent }}>HASIL ROTASI:</p>
           <div className="flex items-center gap-2 text-sm font-body flex-wrap">
-            <span className="text-cyan-300 font-bold">y = {fmtKurva(m, c)}</span>
+            <span className="text-cyan-300 font-bold">{input}</span>
             <span className="text-white/30 text-lg">→</span>
             <span className="font-bold" style={{ color: accent }}>
-              {isVertical ? `x = ${imgVertX}` : `y = ${fmtKurva(imgM, imgC)}`}
+              {isVertical
+                ? `x = ${imgVertX}`
+                : isStd && parsedStd
+                  ? fmtStdR(parsedStd.a, parsedStd.b_coef, (() => {
+                      if (rotation === '180') return -parsedStd.c_val;
+                      if (rotation === '90ccw') return -parsedStd.c_val / parsedStd.a * parsedStd.b_coef;
+                      return parsedStd.c_val / parsedStd.a * parsedStd.b_coef;
+                    })())
+                  : fmtLineR(imgM, imgC)
+              }
             </span>
           </div>
-          {isVertical && <p className="text-[11px] text-yellow-200 font-body">⚠️ Rotasi garis horizontal menghasilkan garis vertikal (bukan bentuk y = mx + c).</p>}
+          {isVertical && <p className="text-[11px] text-yellow-200 font-body">⚠️ Rotasi garis horizontal menghasilkan garis vertikal.</p>}
         </div>
       )}
     </div>
