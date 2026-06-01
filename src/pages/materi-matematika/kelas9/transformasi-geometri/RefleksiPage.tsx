@@ -1022,6 +1022,175 @@ function AnimasiRefleksiKurva() {
   );
 }
 
+/* ── Animasi Refleksi Kurva pada x=k dan y=k ── */
+type ModeK2 = 'x=k' | 'y=k';
+
+function AnimasiRefleksiKurvaK() {
+  const [mode, setMode]   = useState<ModeK2>('x=k');
+  const [k, setK]         = useState(2);
+  const [input, setInput] = useState('y=2x+1');
+  const [show, setShow]   = useState(false);
+
+  const parsed  = parseLinearR(input);
+  const isValid = parsed !== null;
+  const color   = mode === 'x=k' ? '#f97316' : '#ec4899';
+
+  const computeReflected = (): { m: number; c: number } | null => {
+    if (!parsed) return null;
+    if (mode === 'x=k') return { m: -parsed.m, c: 2 * parsed.m * k + parsed.c };
+    return { m: -parsed.m, c: 2 * k - parsed.c };
+  };
+  const reflected = isValid ? computeReflected() : null;
+  const clampK = (v: number) => Math.max(-5, Math.min(5, v));
+
+  const rows = [
+    ['7','8','9','+','y'],
+    ['4','5','6','-','x'],
+    ['1','2','3','.','='],
+    ['0','CLR','⌫'],
+  ];
+  const handleKey = (key: string) => {
+    playPopSound(); setShow(false);
+    if (key === '⌫')  { setInput(p => p.slice(0, -1)); return; }
+    if (key === 'CLR') { setInput(''); return; }
+    setInput(p => p + key);
+  };
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="font-bold text-sm font-body" style={{ color }}>
+        📏 Animasi Interaktif — Refleksi terhadap {mode === 'x=k' ? 'x = k' : 'y = k'}
+      </p>
+
+      {/* Mode toggle */}
+      <div className="flex gap-2">
+        {(['x=k', 'y=k'] as ModeK2[]).map(m => (
+          <button key={m} onClick={() => { playPopSound(); setMode(m); setShow(false); }}
+            className={`flex-1 py-2 rounded-xl text-sm font-bold font-body border transition-all cursor-pointer
+              ${mode === m ? 'text-black' : 'bg-slate-800/60 border-white/10 text-white/50 hover:text-white/80'}`}
+            style={mode === m ? { background: color, borderColor: color } : {}}>
+            {m === 'x=k' ? 'Cermin x = k' : 'Cermin y = k'}
+          </button>
+        ))}
+      </div>
+
+      {/* Input garis */}
+      <div className="space-y-1">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y = mx + c)</p>
+        <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
+          <span>{input || <span className="text-white/30">ketik...</span>}</span>
+          <span className="animate-pulse text-cyan-400">|</span>
+        </div>
+        {!isValid && input.length > 0 && (
+          <p className="text-[11px] text-red-400 font-body">Format: y=mx+c · Contoh: y=2x+1 · y=-3x+5</p>
+        )}
+      </div>
+
+      {/* Keyboard */}
+      <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3 space-y-1.5">
+        <p className="text-[10px] text-white/30 font-body text-center uppercase tracking-wider mb-1">Keyboard</p>
+        {rows.map((row, ri) => (
+          <div key={ri} className="flex gap-1.5">
+            {row.map(key => (
+              <button key={key} onClick={() => handleKey(key)}
+                className={`flex-1 py-2 rounded-lg text-sm font-bold font-mono transition-all active:scale-90 select-none cursor-pointer
+                  ${key === '⌫'  ? 'bg-red-500/25 border border-red-500/50 text-red-300 hover:bg-red-500/45' :
+                    key === 'CLR' ? 'bg-slate-600/60 border border-slate-500 text-slate-300 hover:bg-slate-500/70' :
+                    ['x','y','=','+','-','.'].includes(key)
+                      ? 'bg-orange-500/20 border border-orange-500/40 text-orange-200 hover:bg-orange-500/40'
+                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/25'
+                  }`}
+              >{key}</button>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Nilai k */}
+      <div className="flex items-center justify-center gap-4 bg-slate-800/60 border border-slate-600/40 rounded-xl p-3">
+        <p className="text-sm font-body text-white/60">Nilai <InlineMath math="k" /> :</p>
+        <div className="flex items-center gap-2">
+          <button onClick={() => { playPopSound(); setK(p => clampK(p - 1)); setShow(false); }}
+            className="w-8 h-8 rounded-lg bg-slate-700 border border-slate-500 text-white font-bold hover:bg-slate-600 active:scale-90 transition-all cursor-pointer">−</button>
+          <span className="w-10 text-center font-mono font-bold text-lg" style={{ color }}>{k}</span>
+          <button onClick={() => { playPopSound(); setK(p => clampK(p + 1)); setShow(false); }}
+            className="w-8 h-8 rounded-lg bg-slate-700 border border-slate-500 text-white font-bold hover:bg-slate-600 active:scale-90 transition-all cursor-pointer">+</button>
+        </div>
+        <p className="text-sm font-mono text-white/50">{mode === 'x=k' ? `x = ${k}` : `y = ${k}`}</p>
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-2">
+        <button onClick={() => { playPopSound(); setShow(true); }} disabled={!isValid}
+          className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all text-black disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          style={{ background: isValid ? color : '#475569' }}>
+          🪞 Tampilkan Bayangan
+        </button>
+        <button onClick={() => { playPopSound(); setInput('y=2x+1'); setK(2); setShow(false); }}
+          className="px-4 py-2.5 rounded-xl font-bold text-sm font-body transition-all bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600 cursor-pointer">↺</button>
+      </div>
+
+      {/* Grid */}
+      <div className="w-full max-w-[360px] mx-auto">
+        <Grid accent={color}>
+          {mode === 'x=k' ? (
+            <>
+              <line x1={px(k)} y1={4} x2={px(k)} y2={S - 4} stroke={color} strokeWidth="2" strokeDasharray="5,3" />
+              <text x={px(k) + 4} y={14} fontSize="8" fill={color} fontWeight="bold">x={k}</text>
+            </>
+          ) : (
+            <>
+              <line x1={4} y1={py(k)} x2={S - 4} y2={py(k)} stroke={color} strokeWidth="2" strokeDasharray="5,3" />
+              <text x={S - 8} y={py(k) - 4} fontSize="8" fill={color} fontWeight="bold" textAnchor="end">y={k}</text>
+            </>
+          )}
+          {isValid && parsed && (
+            <line x1={px(-5)} y1={py(parsed.m * -5 + parsed.c)} x2={px(5)} y2={py(parsed.m * 5 + parsed.c)}
+              stroke="#22d3ee" strokeWidth="2.5" />
+          )}
+          {show && reflected && (
+            <line x1={px(-5)} y1={py(reflected.m * -5 + reflected.c)} x2={px(5)} y2={py(reflected.m * 5 + reflected.c)}
+              stroke={color} strokeWidth="2.5" strokeDasharray="6,3" />
+          )}
+          {isValid && parsed && (
+            <text x={px(2)} y={py(parsed.m * 2 + parsed.c) - 7} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
+          )}
+          {show && reflected && (
+            <text x={px(-2)} y={py(reflected.m * -2 + reflected.c) - 7} fontSize="9" fontWeight="bold" fill={color}>
+              {fmtLineR(reflected.m, reflected.c)}
+            </text>
+          )}
+        </Grid>
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
+          <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
+          {show && reflected && (
+            <div className="flex items-center gap-1.5">
+              <span className="w-4 h-0.5 inline-block rounded" style={{ background: color }} />
+              <span style={{ color }}>Bayangan</span>
+            </div>
+          )}
+          <div className="flex items-center gap-1.5">
+            <span className="w-4 h-0.5 inline-block rounded border-t-2 border-dashed" style={{ borderColor: color }} />
+            <span className="text-white/50">Cermin ({mode === 'x=k' ? `x=${k}` : `y=${k}`})</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Result */}
+      {show && isValid && reflected && (
+        <div className="rounded-xl p-4 space-y-1.5 border" style={{ background: `${color}18`, borderColor: `${color}44` }}>
+          <p className="text-xs font-semibold font-body uppercase tracking-wide" style={{ color }}>HASIL REFLEKSI:</p>
+          <p className="text-sm font-body text-white/80">
+            <span className="text-cyan-300 font-bold">{input}</span> dicerminkan terhadap{' '}
+            <span className="font-bold" style={{ color }}>{mode === 'x=k' ? `x = ${k}` : `y = ${k}`}</span>:
+          </p>
+          <p className="font-body font-bold text-base" style={{ color }}>{fmtLineR(reflected.m, reflected.c)}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const RefleksiPage = () => {
   const Hdr = ({ icon, color, title }: { icon: React.ReactNode; color: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4">
@@ -1043,7 +1212,7 @@ const RefleksiPage = () => {
 
           {/* INTRO — paling atas */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title="🌟 Apa Itu Refleksi?" />
+            <Hdr icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title="A. 🌟 Apa Itu Refleksi?" />
             <div className="px-5 pb-5 space-y-4">
               <p className="font-body text-sm text-white/80 leading-relaxed">
                 <strong className="text-emerald-300">Refleksi</strong> adalah transformasi yang mencerminkan setiap titik terhadap suatu garis yang disebut <strong className="text-yellow-300">sumbu pencerminan</strong> (garis cermin). Jarak titik dari garis cermin <strong className="text-white">tetap sama</strong>, hanya posisinya yang bercermin.
@@ -1124,7 +1293,7 @@ const RefleksiPage = () => {
 
           {/* ── ANIMASI INTERAKTIF ── */}
           <div className="bg-card/80 backdrop-blur border border-emerald-500/30 rounded-xl overflow-hidden">
-            <Hdr icon={<span>🎮</span>} color="#34d399" title="Animasi Interaktif — Refleksi Titik & Bangun Datar" />
+            <Hdr icon={<span>🎮</span>} color="#34d399" title="B. Animasi Interaktif — Refleksi Titik & Bangun Datar" />
             <div className="px-4 pb-5 space-y-8">
               <AnimasiRefleksiTitik />
               <div className="border-t border-white/10" />
@@ -1138,7 +1307,7 @@ const RefleksiPage = () => {
 
           {/* RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<Calculator className="w-5 h-5" />} color="#22d3ee" title="📐 Rumus Refleksi" />
+            <Hdr icon={<Calculator className="w-5 h-5" />} color="#22d3ee" title="C. 📐 Rumus Refleksi" />
             <div className="px-5 pb-5 space-y-4">
               <p className="text-sm text-white/70 font-body">Untuk titik <InlineMath math="A(x, y)" />, bayangannya <InlineMath math="A'(x', y')" /> tergantung pada garis cermin:</p>
               <div className="space-y-3">
@@ -1162,7 +1331,7 @@ const RefleksiPage = () => {
 
           {/* CONTOH 1 - Soal Pilihan Ganda Sumbu Y */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#34d399" title="📌 Contoh 1: Pencerminan terhadap Sumbu Y" />
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#34d399" title="D. 📌 Contoh 1: Pencerminan terhadap Sumbu Y" />
             <div className="px-5 pb-5 space-y-4">
 
               {/* Soal */}
@@ -1235,7 +1404,7 @@ const RefleksiPage = () => {
 
           {/* CONTOH 2 - Garis x = k */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📌 Contoh 2: Pencerminan terhadap Garis x = 3" />
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="E. 📌 Contoh 2: Pencerminan terhadap Garis x = 3" />
             <div className="px-5 pb-5 space-y-4">
 
               {/* Soal */}
@@ -1301,7 +1470,7 @@ const RefleksiPage = () => {
 
           {/* CONTOH 3 - Refleksi Berantai */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#fb923c" title="📌 Contoh 3: Refleksi Berantai (Sumbu Y lalu y = 5)" />
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#fb923c" title="F. 📌 Contoh 3: Refleksi Berantai (Sumbu Y lalu y = 5)" />
             <div className="px-5 pb-5 space-y-4">
 
               {/* Soal */}
@@ -1380,7 +1549,7 @@ const RefleksiPage = () => {
 
           {/* TAMBAHAN — Refleksi pada Kurva Linear */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📈 [Tambahan] Refleksi pada Kurva Linear" />
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="G. 📈 [Tambahan] Refleksi pada Kurva Linear" />
             <div className="px-5 pb-5 space-y-5">
 
               {/* Pengantar */}
@@ -1429,6 +1598,8 @@ const RefleksiPage = () => {
                         { cermin: "y = x",   sub: "x=y',\\; y=x'",   hasil: "y=\\tfrac{1}{m}x-\\tfrac{c}{m}", color: "#fbbf24" },
                         { cermin: "y = −x",  sub: "x=-y',\\; y=-x'", hasil: "y=\\tfrac{1}{m}x+\\tfrac{c}{m}", color: "#a78bfa" },
                         { cermin: "Titik O(0,0)", sub: "x=-x',\\; y=-y'", hasil: "y=mx-c",           color: "#34d399" },
+                        { cermin: "x = k", sub: "x'=2k-x,\\; y'=y", hasil: "y=-mx+(2mk+c)",  color: "#f97316" },
+                        { cermin: "y = k", sub: "x'=x,\\; y'=2k-y", hasil: "y=-mx+(2k-c)",   color: "#ec4899" },
                       ].map(row => (
                         <tr key={row.cermin} className="bg-slate-900/40 rounded-lg">
                           <td className="px-3 py-2 rounded-l-lg font-bold text-xs" style={{ color: row.color }}>{row.cermin}</td>
@@ -1537,12 +1708,124 @@ const RefleksiPage = () => {
                 </div>
               </div>
 
+              {/* Divider */}
+              <div className="border-t border-white/10 pt-2">
+                <p className="text-xs font-semibold text-white/40 font-body uppercase tracking-wider mb-4">Refleksi terhadap Garis x = k dan y = k</p>
+              </div>
+
+              {/* Penurunan Rumus x=k dan y=k */}
+              <div className="bg-slate-800/60 rounded-xl p-4 space-y-4">
+                <p className="text-xs font-semibold text-orange-400 font-body uppercase tracking-wide">Penurunan Rumus — Refleksi terhadap x = k dan y = k</p>
+
+                {/* x=k */}
+                <div className="space-y-2">
+                  <p className="text-sm font-bold text-orange-300 font-body">① Cermin x = k</p>
+                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="x = k" /> memetakan <InlineMath math="(x, y) \to (2k-x,\; y)" />, sehingga:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = 2k - x \implies x = 2k - x'" />
+                    <BlockMath math="y' = y" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan ke <InlineMath math="y = mx + c" />:</p>
+                  <div className="bg-orange-950/50 border border-orange-500/30 rounded-xl p-4 text-center space-y-1">
+                    <BlockMath math="y' = m(2k - x') + c" />
+                    <BlockMath math="\boxed{y = -mx + (2mk + c)}" />
+                  </div>
+                </div>
+
+                {/* y=k */}
+                <div className="space-y-2">
+                  <p className="text-sm font-bold text-pink-300 font-body">② Cermin y = k</p>
+                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="y = k" /> memetakan <InlineMath math="(x, y) \to (x,\; 2k-y)" />, sehingga:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = x" />
+                    <BlockMath math="y' = 2k - y \implies y = 2k - y'" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan ke <InlineMath math="y = mx + c" />:</p>
+                  <div className="bg-pink-950/50 border border-pink-500/30 rounded-xl p-4 text-center space-y-1">
+                    <BlockMath math="2k - y' = mx' + c" />
+                    <BlockMath math="\boxed{y = -mx + (2k - c)}" />
+                  </div>
+                </div>
+
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-sm text-yellow-200 font-body">
+                    <strong>Perhatikan:</strong> Baik refleksi x=k maupun y=k menghasilkan gradien <InlineMath math="-m" /> (tanda berubah). Yang berbeda hanya nilai intersep-y-nya.
+                  </p>
+                </div>
+              </div>
+
+              {/* Animasi x=k dan y=k */}
+              <AnimasiRefleksiKurvaK />
+
+              {/* Contoh 4 — x=k */}
+              <div className="border-l-4 border-orange-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-orange-500/20 text-orange-400 text-xs font-bold px-2 py-1 rounded font-body">CERMIN x=k</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 4</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Garis <InlineMath math="y = 2x + 1" /> dicerminkan terhadap garis <strong className="text-orange-300">x = 3</strong>. Tentukan persamaan bayangan garis tersebut!
+                  </p>
+                </div>
+                <div className="bg-orange-500/5 border border-orange-500/20 rounded-lg p-4 space-y-2">
+                  <p className="text-xs font-semibold text-orange-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="x = 3" /> memetakan <InlineMath math="(x, y) \to (6-x,\; y)" />, sehingga:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = 6 - x \implies x = 6 - x'" />
+                    <BlockMath math="y' = y" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 2x + 1" />:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="y' = 2(6 - x') + 1" />
+                    <BlockMath math="y' = 12 - 2x' + 1" />
+                    <BlockMath math="y' = -2x' + 13" />
+                  </div>
+                  <p className="font-body font-bold text-orange-300"><strong>Bayangan:</strong> <InlineMath math="y = -2x + 13" /></p>
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi dengan rumus</p>
+                    <p className="text-xs text-white/60 font-body"><InlineMath math="m=-2,\; c=2mk+c_0=2(2)(3)+1=13" /> ✓</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contoh 5 — y=k */}
+              <div className="border-l-4 border-pink-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-pink-500/20 text-pink-400 text-xs font-bold px-2 py-1 rounded font-body">CERMIN y=k</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 5</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Garis <InlineMath math="y = 3x - 4" /> dicerminkan terhadap garis <strong className="text-pink-300">y = 2</strong>. Tentukan persamaan bayangan garis tersebut!
+                  </p>
+                </div>
+                <div className="bg-pink-500/5 border border-pink-500/20 rounded-lg p-4 space-y-2">
+                  <p className="text-xs font-semibold text-pink-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="y = 2" /> memetakan <InlineMath math="(x, y) \to (x,\; 4-y)" />, sehingga:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = x" />
+                    <BlockMath math="y' = 4 - y \implies y = 4 - y'" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 3x - 4" />:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="4 - y' = 3x' - 4" />
+                    <BlockMath math="y' = -3x' + 8" />
+                  </div>
+                  <p className="font-body font-bold text-pink-300"><strong>Bayangan:</strong> <InlineMath math="y = -3x + 8" /></p>
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi dengan rumus</p>
+                    <p className="text-xs text-white/60 font-body"><InlineMath math="m=-3,\; c=2k-c_0=2(2)-(-4)=4+4=8" /> ✓</p>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<Target className="w-5 h-5" />} color="#f97316" title="🎯 Rangkuman" />
+            <Hdr icon={<Target className="w-5 h-5" />} color="#f97316" title="H. 🎯 Rangkuman" />
             <div className="px-5 pb-5 space-y-3">
               {[
                 ["Definisi", "Mencerminkan setiap titik terhadap garis cermin (sumbu)"],
