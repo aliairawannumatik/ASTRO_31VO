@@ -1290,7 +1290,7 @@ const TranslasiPage = () => {
                 </div>
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
-                    Bayangan suatu garis oleh translasi <InlineMath math="T\begin{pmatrix}2\\-3\end{pmatrix}" /> adalah <InlineMath math="3x - y + 5 = 0" />. Tentukan persamaan <strong className="text-red-300">garis aslinya</strong>!
+                    Bayangan suatu garis oleh translasi <InlineMath math="T\begin{pmatrix}2\\-3\end{pmatrix}" /> adalah <InlineMath math="3x - y + 5 = 0" />. Tentukan persamaan <strong className="text-red-300">garis sebelum mengalami translasi</strong>!
                   </p>
                 </div>
                 <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
@@ -1311,7 +1311,7 @@ const TranslasiPage = () => {
                     <BlockMath math="3x + 6 - y + 3 + 5 = 0" />
                     <BlockMath math="3x - y + 14 = 0" />
                   </div>
-                  <p className="font-body font-bold text-red-300">✅ <strong>Garis Asli:</strong> <InlineMath math="3x - y + 14 = 0" /></p>
+                  <p className="font-body font-bold text-red-300">✅ <strong>Garis Sebelum Translasi:</strong> <InlineMath math="3x - y + 14 = 0" /></p>
                   <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
                     <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi</p>
                     <p className="text-xs text-white/60 font-body">Translasikan <InlineMath math="3x - y + 14 = 0" /> dengan <InlineMath math="T\begin{pmatrix}2\\-3\end{pmatrix}" /> → substitusi <InlineMath math="x = x' - 2,\ y = y' + 3" />:</p>
