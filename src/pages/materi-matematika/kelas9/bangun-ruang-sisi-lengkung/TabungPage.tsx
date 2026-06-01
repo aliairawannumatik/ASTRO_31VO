@@ -82,7 +82,7 @@ const InteractiveCylinder3D = () => {
     let frameId: number;
     let lastTs = 0;
     const animate = (ts: number) => {
-      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.025);
+      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.07);
       lastTs = ts;
       frameId = requestAnimationFrame(animate);
     };
@@ -114,13 +114,13 @@ const InteractiveCylinder3D = () => {
     const midAngle = (2 * Math.PI * (i + 0.5)) / CYL_SEGS;
     const nx = Math.cos(midAngle), nz = Math.sin(midAngle);
     const rotNx = nx * Math.cos((rotY * Math.PI) / 180) + nz * Math.sin((rotY * Math.PI) / 180);
-    const lightness = Math.round(44 + rotNx * 22);
+    const lightness = Math.round(62 + rotNx * 38);
     const visible = rotNx > -0.15;
     faces.push({
       avgZ,
       points: `${p_t0.x},${p_t0.y} ${p_t1.x},${p_t1.y} ${p_b1.x},${p_b1.y} ${p_b0.x},${p_b0.y}`,
-      fill: visible ? `hsl(207,88%,${lightness}%)` : `hsl(207,60%,18%)`,
-      stroke: "rgba(0,100,200,0.2)",
+      fill: visible ? `hsl(200,95%,${lightness}%)` : `hsl(210,80%,12%)`,
+      stroke: "rgba(0,150,255,0.15)",
     });
   }
 
@@ -132,14 +132,14 @@ const InteractiveCylinder3D = () => {
   faces.push({
     avgZ: topCapAvgZ,
     points: topVerts2D.map(p => `${p.x},${p.y}`).join(" "),
-    fill: topCapCenter3D.y < botCapCenter3D.y ? "#38bdf8" : "#0369a1",
-    stroke: "#7dd3fc",
+    fill: topCapCenter3D.y < botCapCenter3D.y ? "#7dd3fc" : "#0284c7",
+    stroke: "#bae6fd",
   });
   faces.push({
     avgZ: botCapAvgZ,
     points: botVerts2D.map(p => `${p.x},${p.y}`).join(" "),
-    fill: botCapCenter3D.y > topCapCenter3D.y ? "#0ea5e9" : "#075985",
-    stroke: "#38bdf8",
+    fill: botCapCenter3D.y > topCapCenter3D.y ? "#38bdf8" : "#0369a1",
+    stroke: "#7dd3fc",
   });
 
   faces.sort((a, b) => b.avgZ - a.avgZ);
