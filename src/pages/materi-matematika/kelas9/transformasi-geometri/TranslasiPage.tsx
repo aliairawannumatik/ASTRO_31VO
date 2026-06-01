@@ -1091,17 +1091,9 @@ const TranslasiPage = () => {
             </div>
           </div>
 
-          {/* ANIMASI KURVA LINEAR */}
-          <div className="bg-card/80 backdrop-blur border border-emerald-500/20 rounded-xl overflow-hidden">
-            <SectionHdr icon={<Calculator className="w-5 h-5" />} color="#4ade80" title="C. 📈 Animasi Interaktif — Translasi Kurva Linear" />
-            <div className="px-5 pb-5">
-              <AnimasiKurva />
-            </div>
-          </div>
-
           {/* CONTOH TITIK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="D. 📌 Contoh: Translasi Titik" />
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="C. 📌 Contoh: Translasi Titik" />
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-violet-500/10 border border-violet-500/30 rounded-xl p-4">
                 <p className="text-sm font-semibold text-violet-300 font-body mb-2">Soal:</p>
@@ -1124,7 +1116,7 @@ const TranslasiPage = () => {
 
           {/* CONTOH BANGUN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#f472b6" title="E. 📐 Contoh: Translasi Bangun Datar" />
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#f472b6" title="D. 📐 Contoh: Translasi Bangun Datar" />
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-pink-500/10 border border-pink-500/30 rounded-xl p-4">
                 <p className="text-sm font-semibold text-pink-300 font-body mb-2">Soal:</p>
@@ -1152,7 +1144,7 @@ const TranslasiPage = () => {
 
           {/* VEKTOR KOMPOSISI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<Calculator className="w-5 h-5" />} color="#4ade80" title="F. 🔗 Komposisi Translasi" />
+            <SectionHdr icon={<Calculator className="w-5 h-5" />} color="#4ade80" title="E. 🔗 Komposisi Translasi" />
             <div className="px-5 pb-5 space-y-4">
               <p className="text-sm text-white/80 font-body">Jika suatu titik dikenai dua translasi berturut-turut, kita bisa menggabungkan keduanya:</p>
               <div className="bg-green-950/50 border border-green-500/30 rounded-xl p-4">
@@ -1171,7 +1163,7 @@ const TranslasiPage = () => {
 
           {/* TRANSLASI PADA KURVA LINEAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#4ade80" title="G. 📈 [Tambahan] Translasi pada Kurva Linear" />
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#4ade80" title="F. 📈 [Tambahan] Translasi pada Kurva Linear" />
             <div className="px-5 pb-5 space-y-5">
 
               {/* Pengantar */}
@@ -1201,6 +1193,9 @@ const TranslasiPage = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Animasi Interaktif Kurva Linear */}
+              <AnimasiKurva />
 
               {/* 3 Contoh Soal */}
               <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wider">Contoh Soal</p>
@@ -1290,7 +1285,7 @@ const TranslasiPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<Target className="w-5 h-5" />} color="#f97316" title="H. 🎯 Rangkuman" />
+            <SectionHdr icon={<Target className="w-5 h-5" />} color="#f97316" title="G. 🎯 Rangkuman" />
             <div className="px-5 pb-5 space-y-3">
               {[
                 ["Definisi", "Memindahkan setiap titik sejauh dan searah vektor translasi T(a, b)"],
