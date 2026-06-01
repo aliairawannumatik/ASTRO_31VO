@@ -2522,24 +2522,40 @@ const DilatasisPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
                     <p className="font-body text-sm text-white">
-                      Garis <InlineMath math="y = 3x - 4" /> didilatasi dengan pusat <InlineMath math="P(2, 1)" /> dan faktor skala <InlineMath math="k = 3" />. Tentukan persamaan bayangan garis tersebut!
+                      Garis <InlineMath math="3x - y - 4 = 0" /> didilatasi dengan pusat <InlineMath math="P(2, 1)" /> dan faktor skala <InlineMath math="k = 3" />. Tentukan persamaan bayangan garis tersebut!
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Diketahui:</strong> <InlineMath math="m = 3,\ c = -4,\ a = 2,\ b = 1,\ k = 3" /></p>
-                      <p>Gunakan rumus pusat P(a,b): <InlineMath math="c' = kc + (k-1)(ma - b)" /></p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p className="text-xs text-yellow-300">Hitung <InlineMath math="ma - b" />:</p>
-                        <BlockMath math="ma - b = 3 \times 2 - 1 = 6 - 1 = 5" />
-                        <p className="text-xs text-yellow-300">Hitung intercept bayangan:</p>
-                        <BlockMath math="c' = 3 \times (-4) + (3-1) \times 5 = -12 + 10 = -2" />
-                        <p className="text-xs text-yellow-300">Persamaan bayangan (gradien tetap m = 3):</p>
-                        <BlockMath math="y = 3x - 2" />
+                      <p><strong>Diketahui:</strong> garis <InlineMath math="3x - y - 4 = 0" />, pusat <InlineMath math="P(2,1)" />, <InlineMath math="k = 3" /></p>
+
+                      {/* Langkah 1 */}
+                      <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                        <p className="text-xs font-semibold text-yellow-300">① Pemetaan dilatasi <InlineMath math="[P(2,1),\, k=3]" />:</p>
+                        <BlockMath math="(x,\, y) \longrightarrow (x',\, y')" />
+                        <BlockMath math="x' = 2 + 3(x - 2) = 3x - 4" />
+                        <BlockMath math="y' = 1 + 3(y - 1) = 3y - 2" />
                       </div>
-                      <p><strong className="text-yellow-300">Jawaban: <InlineMath math="y = 3x - 2" /></strong></p>
-                      <p className="text-white/50 text-xs">Garis asli <InlineMath math="y=3x-4" /> dan bayangan <InlineMath math="y=3x-2" /> sejajar (gradien sama = 3), posisi bayangan lebih ke atas.</p>
+
+                      {/* Langkah 2 */}
+                      <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                        <p className="text-xs font-semibold text-yellow-300">② Nyatakan x dan y terhadap x' dan y':</p>
+                        <BlockMath math="x = \frac{x' + 4}{3}, \qquad y = \frac{y' + 2}{3}" />
+                      </div>
+
+                      {/* Langkah 3 */}
+                      <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                        <p className="text-xs font-semibold text-yellow-300">③ Substitusi ke persamaan garis <InlineMath math="3x - y - 4 = 0" />:</p>
+                        <BlockMath math="3 \cdot \frac{x'+4}{3} - \frac{y'+2}{3} - 4 = 0" />
+                        <BlockMath math="(x' + 4) - \frac{y'+2}{3} - 4 = 0" />
+                        <BlockMath math="x' - \frac{y'+2}{3} = 0 \quad \times 3" />
+                        <BlockMath math="3x' - (y' + 2) = 0" />
+                        <BlockMath math="3x' - y' - 2 = 0" />
+                      </div>
+
+                      <p><strong className="text-yellow-300">Jawaban: <InlineMath math="3x - y - 2 = 0" /></strong></p>
+                      <p className="text-white/50 text-xs">Kedua garis sejajar — gradien sama <InlineMath math="m = 3" />, hanya konstanta berubah dari <InlineMath math="-4" /> menjadi <InlineMath math="-2" />.</p>
                     </div>
                   </div>
                 </div>
