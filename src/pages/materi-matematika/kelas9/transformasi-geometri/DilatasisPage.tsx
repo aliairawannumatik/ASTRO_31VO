@@ -2487,17 +2487,29 @@ const DilatasisPage = () => {
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p><strong>Diketahui:</strong> <InlineMath math="y = 2x + 3" />, pusat <InlineMath math="O(0,0)" />, <InlineMath math="k = 2" /></p>
-                      <p>Gunakan rumus: gradien tetap, intercept dikalikan k.</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p className="text-xs text-green-300">Gradien bayangan:</p>
-                        <BlockMath math="m' = m = 2" />
-                        <p className="text-xs text-green-300">Intercept bayangan:</p>
-                        <BlockMath math="c' = k \cdot c = 2 \times 3 = 6" />
-                        <p className="text-xs text-green-300">Persamaan bayangan:</p>
-                        <BlockMath math="y = 2x + 6" />
+
+                      {/* Langkah 1 */}
+                      <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                        <p className="text-xs font-semibold text-green-300">① Pemetaan dilatasi <InlineMath math="[O(0,0),\, k=2]" />:</p>
+                        <BlockMath math="(x,\, y) \longrightarrow (x',\, y') \quad \text{dengan} \quad x' = 2x,\quad y' = 2y" />
                       </div>
+
+                      {/* Langkah 2 */}
+                      <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                        <p className="text-xs font-semibold text-green-300">② Nyatakan x dan y terhadap x' dan y':</p>
+                        <BlockMath math="x = \frac{x'}{2}, \qquad y = \frac{y'}{2}" />
+                      </div>
+
+                      {/* Langkah 3 */}
+                      <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                        <p className="text-xs font-semibold text-green-300">③ Substitusi ke persamaan garis <InlineMath math="y = 2x + 3" />:</p>
+                        <BlockMath math="\frac{y'}{2} = 2 \cdot \frac{x'}{2} + 3" />
+                        <BlockMath math="\frac{y'}{2} = x' + 3" />
+                        <BlockMath math="y' = 2x' + 6" />
+                      </div>
+
                       <p><strong className="text-green-300">Jawaban: <InlineMath math="y = 2x + 6" /></strong></p>
-                      <p className="text-white/50 text-xs">Garis bayangan sejajar dengan garis asli (gradien sama), hanya intercept berubah dari 3 menjadi 6.</p>
+                      <p className="text-white/50 text-xs">Gradien tetap <InlineMath math="m = 2" />, intercept berubah dari <InlineMath math="3" /> menjadi <InlineMath math="2 \times 3 = 6" />. Kedua garis sejajar.</p>
                     </div>
                   </div>
                 </div>
