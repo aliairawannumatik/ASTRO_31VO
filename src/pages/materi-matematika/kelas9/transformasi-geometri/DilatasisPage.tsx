@@ -2412,11 +2412,6 @@ const DilatasisPage = () => {
                     <BlockMath math="y' = mx' + kc" />
                   </div>
 
-                  <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
-                    <p className="font-body text-xs font-semibold text-blue-300 mb-1">✅ Hasil Bayangan:</p>
-                    <BlockMath math="\boxed{y = mx + kc}" />
-                    <p className="font-body text-xs text-white/60 mt-1">Gradien <InlineMath math="m" /> tetap, intercept menjadi <InlineMath math="kc" />.</p>
-                  </div>
                 </div>
 
                 {/* Rumus Pusat P(a,b) */}
@@ -2446,21 +2441,6 @@ const DilatasisPage = () => {
                     <BlockMath math="y' = mx' + \underbrace{kc + (k-1)(ma-b)}_{c'}" />
                   </div>
 
-                  <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
-                    <p className="font-body text-xs font-semibold text-purple-300 mb-1">✅ Hasil Bayangan:</p>
-                    <BlockMath math="\boxed{y = mx + c'}, \quad c' = kc + (k-1)(ma-b)" />
-                    <p className="font-body text-xs text-white/60 mt-1">Jika <InlineMath math="a=0, b=0" />, maka <InlineMath math="c' = kc" /> — sama dengan rumus pusat O(0,0).</p>
-                  </div>
-                </div>
-
-                {/* Untuk bentuk umum ax + by + c = 0 */}
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-2">
-                  <p className="font-body text-xs font-semibold text-orange-300">📝 Bentuk Umum ax + by + c = 0:</p>
-                  <p className="font-body text-xs text-white/70">Ubah dulu ke bentuk <InlineMath math="y = mx + c" /> (dengan <InlineMath math="b \neq 0" />):</p>
-                  <div className="bg-slate-900/50 rounded p-2">
-                    <BlockMath math="m = -\frac{a}{b},\quad c_{line} = -\frac{c}{b}" />
-                  </div>
-                  <p className="font-body text-xs text-white/70">Lalu terapkan rumus di atas. Hasil bisa dikembalikan ke bentuk <InlineMath math="ax + by + c = 0" /> jika diperlukan.</p>
                 </div>
               </div>
             )}
