@@ -4,7 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Calculator, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
-import { InlineMath } from "react-katex";
+import { InlineMath, BlockMath } from "react-katex";
 
 /* ── SVG helpers ── */
 const S = 220, sc = S / 14, ox = S / 2, oy = S / 2;
@@ -850,6 +850,178 @@ const DiagramDiag = () => (
 );
 
 /* ── Page ── */
+/* ── Parse linear y=mx+c ── */
+function parseLinearR(eq: string): { m: number; c: number } | null {
+  const s = eq.replace(/\s/g, '').toLowerCase();
+  if (!s.startsWith('y=')) return null;
+  const rhs = s.slice(2);
+  if (!rhs) return null;
+  if (/^-?\d+\.?\d*$/.test(rhs)) return { m: 0, c: parseFloat(rhs) };
+  const match = rhs.match(/^(-?\d*\.?\d*)x([+-]\d+\.?\d*)?$/);
+  if (!match) return null;
+  const coef = match[1];
+  const m = coef === '' || coef === undefined ? 1 : coef === '-' ? -1 : parseFloat(coef);
+  const c = match[2] ? parseFloat(match[2]) : 0;
+  if (isNaN(m) || isNaN(c)) return null;
+  return { m, c };
+}
+
+function fmtLineR(m: number, c: number): string {
+  const fmt = (v: number) => {
+    const r = Math.round(v * 1000) / 1000;
+    return Math.abs(r - Math.round(r)) < 0.0001 ? `${Math.round(r)}` : `${r}`;
+  };
+  if (m === 0) return `y = ${fmt(c)}`;
+  const ms = m === 1 ? '' : m === -1 ? '-' : `${fmt(m)}`;
+  const cp = c === 0 ? '' : c > 0 ? ` + ${fmt(c)}` : ` - ${fmt(Math.abs(c))}`;
+  return `y = ${ms}x${cp}`;
+}
+
+function reflectLinearR(m: number, c: number, mirror: MirrorType): { m: number; c: number } | null {
+  switch (mirror) {
+    case "sumbu-x": return { m: -m, c: -c };
+    case "sumbu-y": return { m: -m, c };
+    case "titik-o": return { m, c: -c };
+    case "y=x":  if (m === 0) return null; return { m: 1 / m, c: -c / m };
+    case "y=-x": if (m === 0) return null; return { m: 1 / m, c: c / m };
+  }
+}
+
+/* ── Animasi Refleksi Kurva Linear ── */
+function AnimasiRefleksiKurva() {
+  const [input, setInput]   = useState('y=2x+3');
+  const [mirror, setMirror] = useState<MirrorType>('sumbu-x');
+  const [show, setShow]     = useState(false);
+
+  const parsed    = parseLinearR(input);
+  const isValid   = parsed !== null;
+  const reflected = isValid && parsed ? reflectLinearR(parsed.m, parsed.c, mirror) : null;
+  const mc        = MIRRORS.find(m => m.id === mirror)!;
+
+  const rows = [
+    ['7','8','9','+','y'],
+    ['4','5','6','-','x'],
+    ['1','2','3','.','='],
+    ['0','CLR','⌫'],
+  ];
+
+  const handleKey = (k: string) => {
+    playPopSound(); setShow(false);
+    if (k === '⌫')  { setInput(p => p.slice(0, -1)); return; }
+    if (k === 'CLR') { setInput(''); return; }
+    setInput(p => p + k);
+  };
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="font-bold text-sm font-body" style={{ color: mc.color }}>🪞 Animasi Interaktif — Refleksi Kurva Linear</p>
+
+      {/* Input */}
+      <div className="space-y-1">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis (y = mx + c)</p>
+        <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
+          <span>{input || <span className="text-white/30">ketik...</span>}</span>
+          <span className="animate-pulse text-cyan-400">|</span>
+        </div>
+        {!isValid && input.length > 0 && (
+          <p className="text-[11px] text-red-400 font-body">Format: y=mx+c · Contoh: y=2x+3 · y=-x+1 · y=3x</p>
+        )}
+      </div>
+
+      {/* Keyboard */}
+      <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3 space-y-1.5">
+        <p className="text-[10px] text-white/30 font-body text-center uppercase tracking-wider mb-1">Keyboard</p>
+        {rows.map((row, ri) => (
+          <div key={ri} className="flex gap-1.5">
+            {row.map(k => (
+              <button key={k} onClick={() => handleKey(k)}
+                className={`flex-1 py-2 rounded-lg text-sm font-bold font-mono transition-all active:scale-90 select-none cursor-pointer
+                  ${k === '⌫'  ? 'bg-red-500/25 border border-red-500/50 text-red-300 hover:bg-red-500/45' :
+                    k === 'CLR' ? 'bg-slate-600/60 border border-slate-500 text-slate-300 hover:bg-slate-500/70' :
+                    ['x','y','=','+','-','.'].includes(k)
+                      ? 'bg-violet-500/20 border border-violet-500/40 text-violet-200 hover:bg-violet-500/40'
+                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/25'
+                  }`}
+              >{k}</button>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Mirror selector */}
+      <MirrorSelector value={mirror} onChange={m => { setMirror(m); setShow(false); }} />
+
+      {/* Action */}
+      <div className="flex gap-2">
+        <button onClick={() => { playPopSound(); setShow(true); }} disabled={!isValid}
+          className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all text-black disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          style={{ background: isValid ? mc.color : '#475569' }}>
+          🪞 Tampilkan Bayangan
+        </button>
+        <button onClick={() => { playPopSound(); setInput('y=2x+3'); setShow(false); }}
+          className="px-4 py-2.5 rounded-xl font-bold text-sm font-body transition-all bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600 cursor-pointer">
+          ↺
+        </button>
+      </div>
+
+      {/* Grid */}
+      <div className="w-full max-w-[360px] mx-auto">
+        <Grid accent="#a78bfa">
+          <MirrorLine mirror={mirror} />
+          {isValid && parsed && (
+            <line x1={px(-5)} y1={py(parsed.m * -5 + parsed.c)} x2={px(5)} y2={py(parsed.m * 5 + parsed.c)}
+              stroke="#22d3ee" strokeWidth="2.5" />
+          )}
+          {show && reflected && (
+            <line x1={px(-5)} y1={py(reflected.m * -5 + reflected.c)} x2={px(5)} y2={py(reflected.m * 5 + reflected.c)}
+              stroke={mc.color} strokeWidth="2.5" strokeDasharray="6,3" />
+          )}
+          {isValid && parsed && (
+            <text x={px(2)} y={py(parsed.m * 2 + parsed.c) - 7} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
+          )}
+          {show && reflected && (
+            <text x={px(-2.5)} y={py(reflected.m * -2.5 + reflected.c) - 7} fontSize="9" fontWeight="bold" fill={mc.color}>
+              {fmtLineR(reflected.m, reflected.c)}
+            </text>
+          )}
+          {show && isValid && parsed && !reflected && (
+            <text x={ox} y={16} fill="#fbbf24" fontSize="8" fontWeight="bold" textAnchor="middle">garis vertikal</text>
+          )}
+        </Grid>
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
+          <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
+          {show && reflected && (
+            <div className="flex items-center gap-1.5">
+              <span className="w-4 h-0.5 inline-block rounded" style={{ background: mc.color }} />
+              <span style={{ color: mc.color }}>Bayangan</span>
+            </div>
+          )}
+          <div className="flex items-center gap-1.5">
+            <span className="w-4 h-0.5 inline-block rounded border-t-2 border-dashed" style={{ borderColor: mc.color }} />
+            <span className="text-white/50">Cermin ({mc.label})</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Result */}
+      {show && isValid && parsed && (
+        <div className="rounded-xl p-4 space-y-1.5 border" style={{ background: `${mc.color}18`, borderColor: `${mc.color}44` }}>
+          <p className="text-xs font-semibold font-body uppercase tracking-wide" style={{ color: mc.color }}>HASIL REFLEKSI:</p>
+          <p className="text-sm font-body text-white/80">
+            <span className="text-cyan-300 font-bold">{input}</span> dicerminkan terhadap{' '}
+            <span className="font-bold" style={{ color: mc.color }}>{mc.label}</span>:
+          </p>
+          {reflected ? (
+            <p className="font-body font-bold text-base" style={{ color: mc.color }}>{fmtLineR(reflected.m, reflected.c)}</p>
+          ) : (
+            <p className="text-yellow-300 text-sm font-body">⚠️ Hasil berupa garis vertikal (tidak dapat ditulis y=mx+c)</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 const RefleksiPage = () => {
   const Hdr = ({ icon, color, title }: { icon: React.ReactNode; color: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4">
@@ -1200,6 +1372,168 @@ const RefleksiPage = () => {
                   <p className="text-orange-300 font-bold text-sm font-body">
                     Jawaban: <span className="text-yellow-300 text-base">B. (−6, 7)</span>
                   </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* TAMBAHAN — Refleksi pada Kurva Linear */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <Hdr icon={<BookOpen className="w-5 h-5" />} color="#a78bfa" title="📈 [Tambahan] Refleksi pada Kurva Linear" />
+            <div className="px-5 pb-5 space-y-5">
+
+              {/* Pengantar */}
+              <p className="text-sm text-white/80 font-body leading-relaxed">
+                Seperti pada titik dan bangun datar, refleksi juga dapat diterapkan pada <strong className="text-violet-300">persamaan garis (kurva linear)</strong>. Jika garis <InlineMath math="y = mx + c" /> dicerminkan, maka setiap titik <InlineMath math="(x, y)" /> pada garis tersebut berpindah ke bayangan <InlineMath math="(x', y')" /> sesuai aturan cermin yang dipilih. Kita substitusikan hubungan tersebut ke persamaan asli untuk menemukan persamaan bayangan.
+              </p>
+
+              {/* Penurunan Rumus — Contoh Sumbu X */}
+              <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                <p className="text-xs font-semibold text-violet-400 font-body uppercase tracking-wide">Penurunan Rumus — Contoh: Refleksi terhadap Sumbu X</p>
+                <p className="text-sm text-white/80 font-body">Refleksi sumbu X memetakan <InlineMath math="(x, y) \to (x, -y)" />, sehingga:</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <BlockMath math="x' = x \implies x = x'" />
+                  <BlockMath math="y' = -y \implies y = -y'" />
+                </div>
+                <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = mx + c" />:</p>
+                <div className="bg-violet-950/50 border border-violet-500/30 rounded-xl p-4 text-center space-y-1">
+                  <BlockMath math="-y' = mx' + c" />
+                  <BlockMath math="\therefore\quad y' = -mx' - c" />
+                  <p className="text-xs text-white/50 font-body mt-1">atau (aksen diabaikan):</p>
+                  <BlockMath math="\boxed{y = -mx - c}" />
+                </div>
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-sm text-yellow-200 font-body">
+                    <strong>Catatan:</strong> Gradien <InlineMath math="m" /> <em>berubah tanda</em> setelah refleksi terhadap sumbu X. Intersep-y juga berubah tanda. Untuk cermin lain, lihat tabel di bawah.
+                  </p>
+                </div>
+              </div>
+
+              {/* Tabel Ringkasan */}
+              <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                <p className="text-xs font-semibold text-violet-400 font-body uppercase tracking-wide">Tabel Refleksi Kurva Linear <InlineMath math="y = mx + c" /></p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs font-body border-separate" style={{ borderSpacing: '0 4px' }}>
+                    <thead>
+                      <tr>
+                        <th className="text-white/40 font-semibold text-left px-3 py-1">Cermin</th>
+                        <th className="text-white/40 font-semibold text-left px-3 py-1">Substitusi</th>
+                        <th className="text-white/40 font-semibold text-left px-3 py-1">Bayangan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { cermin: "Sumbu X",  sub: "x=x',\\; y=-y'",  hasil: "y=-mx-c",              color: "#22d3ee" },
+                        { cermin: "Sumbu Y",  sub: "x=-x',\\; y=y'",  hasil: "y=-mx+c",              color: "#f472b6" },
+                        { cermin: "y = x",   sub: "x=y',\\; y=x'",   hasil: "y=\\tfrac{1}{m}x-\\tfrac{c}{m}", color: "#fbbf24" },
+                        { cermin: "y = −x",  sub: "x=-y',\\; y=-x'", hasil: "y=\\tfrac{1}{m}x+\\tfrac{c}{m}", color: "#a78bfa" },
+                        { cermin: "Titik O(0,0)", sub: "x=-x',\\; y=-y'", hasil: "y=mx-c",           color: "#34d399" },
+                      ].map(row => (
+                        <tr key={row.cermin} className="bg-slate-900/40 rounded-lg">
+                          <td className="px-3 py-2 rounded-l-lg font-bold text-xs" style={{ color: row.color }}>{row.cermin}</td>
+                          <td className="px-3 py-2 text-white/60"><InlineMath math={row.sub} /></td>
+                          <td className="px-3 py-2 rounded-r-lg font-bold" style={{ color: row.color }}><InlineMath math={row.hasil} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-[11px] text-white/40 font-body">*) y=x dan y=−x: berlaku jika m ≠ 0 (jika m=0, hasilnya garis vertikal)</p>
+              </div>
+
+              {/* Animasi Interaktif */}
+              <AnimasiRefleksiKurva />
+
+              {/* Contoh Soal */}
+              <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wider">Contoh Soal</p>
+
+              {/* Mudah */}
+              <div className="border-l-4 border-green-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-body">MUDAH</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 1</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Garis <InlineMath math="y = 2x + 3" /> dicerminkan terhadap <strong className="text-green-300">sumbu X</strong>. Tentukan persamaan bayangan garis tersebut!
+                  </p>
+                </div>
+                <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-2">
+                  <p className="text-xs font-semibold text-green-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body">Refleksi sumbu X memetakan <InlineMath math="(x, y) \to (x', y')" /> dengan:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = x \implies x = x'" />
+                    <BlockMath math="y' = -y \implies y = -y'" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 2x + 3" />:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="-y' = 2x' + 3" />
+                    <BlockMath math="y' = -2x' - 3" />
+                  </div>
+                  <p className="font-body font-bold text-green-300"><strong>Bayangan:</strong> <InlineMath math="y = -2x - 3" /></p>
+                </div>
+              </div>
+
+              {/* Sedang */}
+              <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded font-body">SEDANG</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 2</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Garis <InlineMath math="y = 3x - 6" /> dicerminkan terhadap garis <strong className="text-yellow-300">y = x</strong>. Tentukan persamaan bayangan garis tersebut!
+                  </p>
+                </div>
+                <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-2">
+                  <p className="text-xs font-semibold text-yellow-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body">Refleksi terhadap <InlineMath math="y = x" /> memetakan <InlineMath math="(x, y) \to (y, x)" />, sehingga:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = y \implies y = x'" />
+                    <BlockMath math="y' = x \implies x = y'" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = 3x - 6" />:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = 3y' - 6" />
+                    <BlockMath math="3y' = x' + 6" />
+                    <BlockMath math="y' = \tfrac{1}{3}x' + 2" />
+                  </div>
+                  <p className="font-body font-bold text-yellow-300"><strong>Bayangan:</strong> <InlineMath math="y = \tfrac{1}{3}x + 2" /></p>
+                </div>
+              </div>
+
+              {/* Sulit */}
+              <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded font-body">SULIT</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 3</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Bayangan suatu garis setelah dicerminkan terhadap <strong className="text-red-300">sumbu Y</strong> adalah <InlineMath math="y = -4x + 5" />. Tentukan persamaan <strong className="text-red-300">garis sebelum mengalami refleksi</strong>!
+                  </p>
+                </div>
+                <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
+                  <p className="text-xs font-semibold text-red-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body">
+                    Refleksi sumbu Y memetakan <InlineMath math="(x, y) \to (-x, y)" />, sehingga jika <InlineMath math="(x, y)" /> adalah titik pada <strong className="text-white">garis asli</strong>, maka bayangannya <InlineMath math="(x', y') = (-x,\; y)" /> terletak pada garis bayangan.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="x' = -x \implies x = -x'" />
+                    <BlockMath math="y' = y" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body">Substitusikan <InlineMath math="x' = -x" /> dan <InlineMath math="y' = y" /> ke persamaan bayangan <InlineMath math="y' = -4x' + 5" />:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="y = -4(-x) + 5" />
+                    <BlockMath math="y = 4x + 5" />
+                  </div>
+                  <p className="font-body font-bold text-red-300">✅ <strong>Garis Sebelum Refleksi:</strong> <InlineMath math="y = 4x + 5" /></p>
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wide">Verifikasi</p>
+                    <p className="text-xs text-white/60 font-body">Cerminkan <InlineMath math="y = 4x + 5" /> terhadap sumbu Y → substitusi <InlineMath math="x = -x',\; y = y'" />:</p>
+                    <BlockMath math="y' = 4(-x') + 5 = -4x' + 5 \checkmark" />
+                  </div>
                 </div>
               </div>
 
