@@ -572,6 +572,175 @@ function DiagramBangunAnimated() {
   );
 }
 
+/* ── Parse linear equation y=mx+c ── */
+function parseLinear(eq: string): { m: number; c: number } | null {
+  const s = eq.replace(/\s/g, '').toLowerCase();
+  if (!s.startsWith('y=')) return null;
+  const rhs = s.slice(2);
+  if (!rhs) return null;
+  if (/^-?\d+\.?\d*$/.test(rhs)) return { m: 0, c: parseFloat(rhs) };
+  const match = rhs.match(/^(-?\d*\.?\d*)x([+-]\d+\.?\d*)?$/);
+  if (match) {
+    const coef = match[1];
+    let m = coef === '' || coef === undefined ? 1 : coef === '-' ? -1 : parseFloat(coef);
+    const c = match[2] ? parseFloat(match[2]) : 0;
+    if (isNaN(m) || isNaN(c)) return null;
+    return { m, c };
+  }
+  return null;
+}
+
+function fmtLine(m: number, c: number): string {
+  if (m === 0) return `y = ${c}`;
+  const ms = m === 1 ? '' : m === -1 ? '-' : `${m}`;
+  const cp = c === 0 ? '' : c > 0 ? ` + ${c}` : ` - ${Math.abs(c)}`;
+  return `y = ${ms}x${cp}`;
+}
+
+/* ── Animasi Kurva Linear ── */
+function AnimasiKurva() {
+  const [input, setInput] = useState('y=2x+1');
+  const [inputA, setInputA] = useState('3');
+  const [inputB, setInputB] = useState('2');
+  const [show, setShow] = useState(false);
+
+  const a = parseFloat(inputA) || 0;
+  const b = parseFloat(inputB) || 0;
+  const parsed = parseLinear(input);
+  const isValid = parsed !== null;
+  const imgM = parsed?.m ?? 0;
+  const imgC = isValid && parsed ? (parsed.c - parsed.m * a + b) : 0;
+
+  const handleKey = (k: string) => {
+    playPopSound();
+    setShow(false);
+    if (k === '⌫') { setInput(p => p.slice(0, -1)); return; }
+    if (k === 'CLR') { setInput(''); return; }
+    setInput(p => p + k);
+  };
+
+  const rows = [
+    ['7','8','9','+','y'],
+    ['4','5','6','-','x'],
+    ['1','2','3','.','='],
+    ['0','CLR','⌫'],
+  ];
+
+  return (
+    <div className="space-y-4 pt-2">
+      <p className="text-emerald-300 font-bold text-sm font-body">📈 Animasi Interaktif — Translasi Kurva Linear</p>
+
+      {/* Display */}
+      <div className="space-y-1">
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Persamaan Garis</p>
+        <div className="bg-slate-800 border border-slate-500 rounded-lg px-4 py-2.5 font-mono text-white text-sm min-h-[40px] flex items-center gap-0.5">
+          <span>{input || <span className="text-white/30">ketik...</span>}</span>
+          <span className="animate-pulse text-cyan-400">|</span>
+        </div>
+        {!isValid && input.length > 0 && (
+          <p className="text-[11px] text-red-400 font-body">Format: y=mx+c &nbsp;·&nbsp; Contoh: y=2x+1 &nbsp;·&nbsp; y=-3x</p>
+        )}
+      </div>
+
+      {/* Keyboard */}
+      <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3 space-y-1.5">
+        <p className="text-[10px] text-white/30 font-body text-center uppercase tracking-wider mb-1">Keyboard</p>
+        {rows.map((row, ri) => (
+          <div key={ri} className="flex gap-1.5">
+            {row.map(k => (
+              <button key={k} onClick={() => handleKey(k)}
+                className={`flex-1 py-2 rounded-lg text-sm font-bold font-mono transition-all active:scale-90 select-none
+                  ${k === '⌫'  ? 'bg-red-500/25 border border-red-500/50 text-red-300 hover:bg-red-500/45' :
+                    k === 'CLR' ? 'bg-slate-600/60 border border-slate-500 text-slate-300 hover:bg-slate-500/70' :
+                    ['x','y','=','+','-','.'].includes(k)
+                      ? 'bg-violet-500/20 border border-violet-500/40 text-violet-200 hover:bg-violet-500/40'
+                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/25'
+                  }`}
+              >{k}</button>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* a and b */}
+      <div className="grid grid-cols-2 gap-3">
+        {[['a (geser x)', inputA, setInputA], ['b (geser y)', inputB, setInputB]].map(([label, val, setter]) => (
+          <div key={label as string} className="space-y-1">
+            <p className="text-xs font-body text-white/50">Nilai {label as string}</p>
+            <input type="number" step="1" value={val as string}
+              onChange={e => { (setter as (v: string) => void)(e.target.value); setShow(false); }}
+              className="w-full bg-slate-700 border border-slate-500 rounded-lg px-3 py-1.5 text-sm text-white text-center font-mono focus:outline-none focus:border-cyan-400"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Action */}
+      <div className="flex gap-2">
+        <button onClick={() => { playPopSound(); setShow(true); }} disabled={!isValid}
+          className="flex-1 py-2.5 rounded-xl font-bold text-sm font-body transition-all bg-emerald-500 hover:bg-emerald-400 text-white disabled:opacity-40 disabled:cursor-not-allowed">
+          ▶ Tampilkan Translasi
+        </button>
+        <button onClick={() => { playPopSound(); setShow(false); setInput('y=2x+1'); setInputA('3'); setInputB('2'); }}
+          className="px-4 py-2.5 rounded-xl font-bold text-sm font-body transition-all bg-slate-700/60 border border-slate-500/40 text-slate-300 hover:bg-slate-600">
+          ↺
+        </button>
+      </div>
+
+      {/* Grid */}
+      <div className="w-full max-w-[360px] mx-auto">
+        <Grid accent="#4ade80">
+          {/* Original line */}
+          {isValid && parsed && (
+            <line x1={px(-5)} y1={py(parsed.m*-5+parsed.c)} x2={px(5)} y2={py(parsed.m*5+parsed.c)}
+              stroke="#22d3ee" strokeWidth="2.5" />
+          )}
+          {/* Translated line */}
+          {show && isValid && (
+            <line x1={px(-5)} y1={py(imgM*-5+imgC)} x2={px(5)} y2={py(imgM*5+imgC)}
+              stroke="#4ade80" strokeWidth="2.5" strokeDasharray="6,3" />
+          )}
+          {/* Translation arrow */}
+          {show && isValid && parsed && a === 0 && b !== 0 && (
+            <Arrow x1={0} y1={parsed.c} x2={0} y2={parsed.c + b} color="#facc15" />
+          )}
+          {show && isValid && parsed && a !== 0 && (
+            <Arrow x1={0} y1={parsed.c} x2={a} y2={parsed.c + b} color="#facc15" />
+          )}
+          {/* Line labels */}
+          {isValid && parsed && (
+            <text x={px(2)} y={py(parsed.m*2+parsed.c)-7} fill="#22d3ee" fontSize="9" fontWeight="bold">{input}</text>
+          )}
+          {show && isValid && (
+            <text x={px(-1)} y={py(imgM*-1+imgC)-7} fill="#4ade80" fontSize="9" fontWeight="bold">{fmtLine(imgM, imgC)}</text>
+          )}
+        </Grid>
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
+          <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
+          {show && <>
+            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-green-400 inline-block rounded" /><span className="text-green-300">Bayangan</span></div>
+            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-yellow-400 inline-block rounded" /><span className="text-yellow-300">Vektor T({a},{b})</span></div>
+          </>}
+        </div>
+      </div>
+
+      {/* Result */}
+      {show && isValid && parsed && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 space-y-1.5">
+          <p className="text-xs font-semibold text-emerald-400 font-body">HASIL TRANSLASI:</p>
+          <p className="text-sm font-body text-white/80">
+            <span className="text-cyan-300 font-bold">{input}</span> dengan T({a},{b}):
+          </p>
+          <div className="bg-slate-900/60 rounded-lg p-3 text-sm font-body text-white/80 space-y-1">
+            <p>y′ = {parsed.m === 1 ? '' : parsed.m === -1 ? '−' : `${parsed.m}`}(x − {a}){parsed.c !== 0 ? ` ${parsed.c > 0 ? '+' : '−'} ${Math.abs(parsed.c)}` : ''}{b !== 0 ? ` ${b > 0 ? '+' : '−'} ${Math.abs(b)}` : ''}</p>
+          </div>
+          <p className="font-body font-bold text-emerald-300 text-base">{fmtLine(imgM, imgC)}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ── Static section header (no toggle) ── */
 function SectionHdr({ icon, color, title }: { icon: React.ReactNode; color: string; title: string }) {
   return (
@@ -847,6 +1016,123 @@ const TranslasiPage = () => {
                   <p>Bayangan: <InlineMath math="A'(2+2,\; 3+3) = A'(4, 6)" /></p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* TRANSLASI PADA KURVA LINEAR */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHdr icon={<BookOpen className="w-5 h-5" />} color="#4ade80" title="📈 Translasi pada Kurva Linear" />
+            <div className="px-5 pb-5 space-y-5">
+
+              {/* Pengantar */}
+              <p className="text-sm text-white/80 font-body leading-relaxed">
+                Translasi tidak hanya berlaku untuk titik atau bangun datar — ia juga dapat diterapkan pada <strong className="text-green-300">persamaan garis (kurva linear)</strong>. Jika garis <InlineMath math="y = mx + c" /> ditranslasikan oleh vektor <InlineMath math="T\begin{pmatrix}a\\b\end{pmatrix}" />, maka setiap titik <InlineMath math="(x, y)" /> berpindah ke <InlineMath math="(x+a,\; y+b)" />.
+              </p>
+
+              {/* Penurunan rumus */}
+              <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                <p className="text-xs font-semibold text-green-400 font-body uppercase tracking-wide">Penurunan Rumus</p>
+                <p className="text-sm text-white/80 font-body">Misalkan titik asal <InlineMath math="(x, y)" /> berpindah ke <InlineMath math="(x', y')" /> dengan:</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <BlockMath math="x' = x + a \implies x = x' - a" />
+                  <BlockMath math="y' = y + b \implies y = y' - b" />
+                </div>
+                <p className="text-sm text-white/80 font-body">Substitusikan ke persamaan garis asli <InlineMath math="y = mx + c" />:</p>
+                <div className="bg-green-950/50 border border-green-500/30 rounded-xl p-4 text-center">
+                  <BlockMath math="y' - b = m(x' - a) + c" />
+                  <BlockMath math="\boxed{y' = m(x' - a) + c + b = mx' + (c - ma + b)}" />
+                </div>
+                <p className="text-sm text-white/80 font-body">Jadi bayangan garis <InlineMath math="y = mx + c" /> adalah:</p>
+                <div className="bg-cyan-950/60 border border-cyan-500/30 rounded-xl p-3 text-center">
+                  <BlockMath math="y = mx + (c - ma + b)" />
+                </div>
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="text-sm text-yellow-200 font-body">
+                    <strong>Catatan:</strong> Gradien <InlineMath math="m" /> <em>tidak berubah</em> setelah translasi — hanya konstanta (intersep-y) yang berubah.
+                  </p>
+                </div>
+              </div>
+
+              {/* 3 Contoh Soal */}
+              <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wider">Contoh Soal</p>
+
+              {/* Mudah */}
+              <div className="border-l-4 border-green-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-body">MUDAH</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 1</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Garis <InlineMath math="y = 2x" /> ditranslasikan oleh <InlineMath math="T\begin{pmatrix}3\\1\end{pmatrix}" />. Tentukan persamaan bayangan garis tersebut!
+                  </p>
+                </div>
+                <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-2">
+                  <p className="text-xs font-semibold text-green-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body">Diketahui: <InlineMath math="m=2,\ c=0,\ a=3,\ b=1" /></p>
+                  <div className="bg-slate-900/60 rounded-lg p-3">
+                    <BlockMath math="y = 2(x - 3) + 0 + 1 = 2x - 6 + 1" />
+                  </div>
+                  <p className="font-body font-bold text-green-300"><strong>Bayangan:</strong> <InlineMath math="y = 2x - 5" /></p>
+                </div>
+              </div>
+
+              {/* Sedang */}
+              <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded font-body">SEDANG</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 2</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Garis <InlineMath math="y = -3x + 4" /> ditranslasikan oleh <InlineMath math="T\begin{pmatrix}-2\\3\end{pmatrix}" />. Tentukan persamaan bayangan garis tersebut!
+                  </p>
+                </div>
+                <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-2">
+                  <p className="text-xs font-semibold text-yellow-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body">Diketahui: <InlineMath math="m=-3,\ c=4,\ a=-2,\ b=3" /></p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="y = -3(x - (-2)) + 4 + 3 = -3(x+2) + 7" />
+                    <BlockMath math="y = -3x - 6 + 7" />
+                  </div>
+                  <p className="font-body font-bold text-yellow-300"><strong>Bayangan:</strong> <InlineMath math="y = -3x + 1" /></p>
+                </div>
+              </div>
+
+              {/* Sulit */}
+              <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded font-body">SULIT</span>
+                  <span className="font-body font-semibold text-white text-sm">Contoh 3</span>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-4">
+                  <p className="font-body text-sm text-white">
+                    Garis <InlineMath math="y = mx + 2" /> ditranslasikan oleh <InlineMath math="T\begin{pmatrix}1\\b\end{pmatrix}" /> menghasilkan bayangan <InlineMath math="y = 3x + 4" />. Tentukan nilai <InlineMath math="m" /> dan <InlineMath math="b" />!
+                  </p>
+                </div>
+                <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-2">
+                  <p className="text-xs font-semibold text-red-400 font-body">PEMBAHASAN:</p>
+                  <p className="text-sm text-white/80 font-body"><strong>Langkah 1:</strong> Gradien tidak berubah, maka:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3">
+                    <BlockMath math="m = 3" />
+                  </div>
+                  <p className="text-sm text-white/80 font-body"><strong>Langkah 2:</strong> Intersep bayangan = <InlineMath math="c - ma + b" />:</p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                    <BlockMath math="2 - 3(1) + b = 4" />
+                    <BlockMath math="-1 + b = 4 \implies b = 5" />
+                  </div>
+                  <p className="font-body font-bold text-red-300"><strong>Jawaban:</strong> <InlineMath math="m = 3,\; b = 5" /></p>
+                  <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body text-white/60">
+                    Verifikasi: <InlineMath math="y = 3(x-1)+2+5 = 3x-3+7 = 3x+4" /> ✓
+                  </div>
+                </div>
+              </div>
+
+              {/* Animasi Interaktif */}
+              <div className="bg-card/60 border border-green-500/20 rounded-xl p-4">
+                <AnimasiKurva />
+              </div>
+
             </div>
           </div>
 
