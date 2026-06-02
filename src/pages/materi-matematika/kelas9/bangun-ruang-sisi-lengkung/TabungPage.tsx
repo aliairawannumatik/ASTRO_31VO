@@ -232,15 +232,22 @@ const SelimutAnimSVG = () => (
   <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto my-2" aria-label="Selimut tabung">
     <defs>
       <style>{`
-        @keyframes selGlow{0%,100%{fill-opacity:0.55;}50%{fill-opacity:0.05;}}
+        @keyframes selGlow{0%,100%{fill-opacity:0.55;stroke-opacity:1;filter:drop-shadow(0 0 6px #a855f7);}50%{fill-opacity:0.15;stroke-opacity:0.4;filter:drop-shadow(0 0 0 #a855f7);}}
         .sel-a{animation:selGlow 1.6s ease-in-out infinite;}
       `}</style>
     </defs>
-    <ellipse cx="140" cy="40" rx="80" ry="20" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="1.5"/>
-    <rect x="60" y="40" width="160" height="100" fill="#a855f7" className="sel-a"/>
-    <line x1="60" y1="40" x2="60" y2="140" stroke="#a855f7" strokeWidth="2"/>
-    <line x1="220" y1="40" x2="220" y2="140" stroke="#a855f7" strokeWidth="2"/>
-    <ellipse cx="140" cy="140" rx="80" ry="20" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="1.5"/>
+    {/* Tutup atas — diam, bukan selimut */}
+    <ellipse cx="140" cy="40" rx="80" ry="20" fill="rgba(168,85,247,0.08)" stroke="#a855f760" strokeWidth="1.2"/>
+    {/* SELIMUT — path mengikuti kurva elips atas & bawah */}
+    <path
+      d="M 60,40 A 80,20 0 0,1 220,40 L 220,140 A 80,20 0 0,0 60,140 Z"
+      fill="#a855f7"
+      stroke="#a855f7"
+      strokeWidth="2"
+      className="sel-a"
+    />
+    {/* Tutup bawah — diam */}
+    <ellipse cx="140" cy="140" rx="80" ry="20" fill="rgba(168,85,247,0.08)" stroke="#a855f760" strokeWidth="1.2"/>
     <text x="140" y="92" fill="#e9d5ff" fontSize="11" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT</text>
     <text x="140" y="108" fill="#c4b5fd" fontSize="10" fontFamily="monospace" textAnchor="middle">L = 2πr × t</text>
     <text x="140" y="165" fill="#a78bfa" fontSize="10" fontFamily="monospace" textAnchor="middle">Selimut = "kulit" tabung tanpa tutup</text>
