@@ -560,8 +560,13 @@ const CylinderNetAnimation = () => {
           </marker>
           <style>{`
             @keyframes netUnroll {
-              from { transform: perspective(400px) rotateY(-90deg); opacity:0; }
-              to   { transform: perspective(400px) rotateY(0deg);   opacity:1; }
+              0%   { transform: perspective(600px) scaleX(0.02) rotateY(-35deg); opacity:0; }
+              6%   { opacity: 1; }
+              30%  { transform: perspective(600px) scaleX(0.38) rotateY(-18deg); }
+              55%  { transform: perspective(600px) scaleX(0.72) rotateY(-8deg); }
+              78%  { transform: perspective(600px) scaleX(0.97) rotateY(-1.5deg); }
+              90%  { transform: perspective(600px) scaleX(1.015) rotateY(0.5deg); }
+              100% { transform: perspective(600px) scaleX(1)    rotateY(0deg);   opacity:1; }
             }
             @keyframes hingeCapTop {
               0%   { transform: perspective(320px) rotateX(-90deg); opacity:0.15; }
@@ -577,8 +582,10 @@ const CylinderNetAnimation = () => {
             }
             @keyframes netFadeIn { from{opacity:0} to{opacity:1} }
             @keyframes netUnrollClose {
-              from { transform: perspective(400px) rotateY(0deg);   opacity:1; }
-              to   { transform: perspective(400px) rotateY(-90deg); opacity:0; }
+              0%   { transform: perspective(600px) scaleX(1)    rotateY(0deg);   opacity:1; }
+              15%  { transform: perspective(600px) scaleX(0.98) rotateY(-2deg); }
+              60%  { transform: perspective(600px) scaleX(0.45) rotateY(-22deg); opacity:0.8; }
+              100% { transform: perspective(600px) scaleX(0.02) rotateY(-35deg); opacity:0; }
             }
             @keyframes hingeCapTopClose {
               0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
@@ -591,12 +598,12 @@ const CylinderNetAnimation = () => {
               100% { transform: perspective(320px) rotateX(-90deg); opacity:0.1; }
             }
             .net-unroll {
-              animation: netUnroll 1.3s cubic-bezier(0.22,0,0.1,1) both;
+              animation: netUnroll 2.6s cubic-bezier(0.16,1,0.3,1) both;
               transform-box:fill-box;
               transform-origin:left center;
             }
             .net-unroll-close {
-              animation: netUnrollClose 1.0s cubic-bezier(0.4,0,0.8,1) both;
+              animation: netUnrollClose 1.4s cubic-bezier(0.7,0,0.84,0) both;
               transform-box:fill-box;
               transform-origin:left center;
             }
@@ -620,7 +627,7 @@ const CylinderNetAnimation = () => {
               transform-box:fill-box;
               transform-origin:center top;
             }
-            .net-fadein { animation: netFadeIn 0.4s 1.1s ease both; }
+            .net-fadein { animation: netFadeIn 0.5s 2.1s ease both; }
           `}</style>
         </defs>
 
