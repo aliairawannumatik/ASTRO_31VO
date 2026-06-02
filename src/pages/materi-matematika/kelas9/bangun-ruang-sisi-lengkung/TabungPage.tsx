@@ -582,13 +582,13 @@ const CylinderNetAnimation = () => {
             }
             @keyframes hingeCapTopClose {
               0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
-              30%  { transform: perspective(320px) rotateX(6deg); }
-              100% { transform: perspective(320px) rotateX(-90deg); opacity:0.1; }
+              20%  { transform: perspective(320px) rotateX(-6deg); }
+              100% { transform: perspective(320px) rotateX(90deg);  opacity:0.1; }
             }
             @keyframes hingeCapBotClose {
               0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
-              30%  { transform: perspective(320px) rotateX(-6deg); }
-              100% { transform: perspective(320px) rotateX(90deg);  opacity:0.1; }
+              20%  { transform: perspective(320px) rotateX(6deg); }
+              100% { transform: perspective(320px) rotateX(-90deg); opacity:0.1; }
             }
             .net-unroll {
               animation: netUnroll 1.3s cubic-bezier(0.22,0,0.1,1) both;
