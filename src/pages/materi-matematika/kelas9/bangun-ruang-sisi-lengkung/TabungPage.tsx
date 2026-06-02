@@ -417,290 +417,227 @@ const WaterTabungAnimation = () => {
    CSS transform-box:fill-box + transform-origin:center center allows clean scale/translate.
 ───────────────────────────────────────────────────────────── */
 const CylinderNetAnimation = () => {
-  const [phase, setPhase] = useState(0);
-  const [seqStep, setSeqStep] = useState(-1);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [rotX, setRotX] = useState(-22);
+  const [rotY, setRotY] = useState(28);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef({ sx: 0, sy: 0, brx: -22, bry: 28 });
+  const hasDragged = useRef(false);
 
-  const TRANS     = "transform 1.35s cubic-bezier(0.4,0,0.2,1)";
-  const TRANS_SLW = "transform 1.55s cubic-bezier(0.4,0,0.2,1)";
-  const TRANS_OP  = "opacity 0.65s ease";
+  const [topOpen, setTopOpen] = useState(false);
+  const [botOpen, setBotOpen] = useState(false);
+  const [selOpen, setSelOpen] = useState(false);
+  const anyOpen = topOpen || botOpen || selOpen;
 
-  const TOP_ASM  = "translateY(60px) scaleX(1.346) scaleY(0.346)";
-  const BODY_ASM = "scaleX(0.556)";
-  const BOT_ASM  = "translateY(-60px) scaleX(1.346) scaleY(0.346)";
-
-  const topT  = phase >= 1 ? "" : TOP_ASM;
-  const bodyT = phase >= 2 ? "" : BODY_ASM;
-  const botT  = phase >= 3 ? "" : BOT_ASM;
-
-  const isAllOpen   = phase === 3;
-  const isAllClosed = phase === 0;
-
-  const lockAnim = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 1600);
+  const onMD = (e: React.MouseEvent) => {
+    hasDragged.current = false;
+    setIsDragging(true);
+    dragRef.current = { sx: e.clientX, sy: e.clientY, brx: rotX, bry: rotY };
   };
-
-  const openNextSeq = () => {
-    if (isAnimating || seqStep < 0 || seqStep > 2) return;
-    playPopSound();
-    lockAnim();
-    setPhase(seqStep + 1);
-    setSeqStep(seqStep < 2 ? seqStep + 1 : -1);
+  const onMM = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragRef.current.sx, dy = e.clientY - dragRef.current.sy;
+    if (Math.abs(dx) + Math.abs(dy) > 5) hasDragged.current = true;
+    setRotY(dragRef.current.bry + dx * 0.55);
+    setRotX(dragRef.current.brx + dy * 0.55);
+  }, [isDragging]);
+  const onMU = useCallback(() => setIsDragging(false), []);
+  const onTS = (e: React.TouchEvent) => {
+    hasDragged.current = false;
+    const t = e.touches[0];
+    setIsDragging(true);
+    dragRef.current = { sx: t.clientX, sy: t.clientY, brx: rotX, bry: rotY };
   };
+  const onTM = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    const dx = t.clientX - dragRef.current.sx, dy = t.clientY - dragRef.current.sy;
+    if (Math.abs(dx) + Math.abs(dy) > 5) hasDragged.current = true;
+    setRotY(dragRef.current.bry + dx * 0.55);
+    setRotX(dragRef.current.brx + dy * 0.55);
+  }, [isDragging]);
+  const onTE = useCallback(() => setIsDragging(false), []);
 
-  const bongkarBertahap = () => {
-    if (isAnimating) return;
-    playPopSound();
-    setPhase(0);
-    setSeqStep(0);
-  };
+  useEffect(() => {
+    window.addEventListener("mousemove", onMM);
+    window.addEventListener("mouseup", onMU);
+    window.addEventListener("touchmove", onTM, { passive: true });
+    window.addEventListener("touchend", onTE);
+    return () => {
+      window.removeEventListener("mousemove", onMM);
+      window.removeEventListener("mouseup", onMU);
+      window.removeEventListener("touchmove", onTM);
+      window.removeEventListener("touchend", onTE);
+    };
+  }, [onMM, onMU, onTM, onTE]);
 
-  const bongkarSemua = () => {
-    if (isAnimating || isAllOpen) return;
-    playPopSound();
-    lockAnim();
-    setPhase(3);
-    setSeqStep(-1);
-  };
+  useEffect(() => {
+    if (isDragging || anyOpen) return;
+    let frameId: number; let lastTs = 0;
+    const animate = (ts: number) => {
+      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.028);
+      lastTs = ts; frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isDragging, anyOpen]);
 
-  const satukanKembali = () => {
-    if (isAnimating || isAllClosed) return;
-    playPopSound();
-    lockAnim();
-    setPhase(0);
-    setSeqStep(-1);
-  };
-
-  const op = (cond: boolean): React.CSSProperties => ({
-    opacity: cond ? 1 : 0,
-    transition: TRANS_OP,
+  const topVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
+    const a = (2 * Math.PI * i) / CYL_SEGS;
+    return cylRotPt(Math.cos(a) * CYL_R, -CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
   });
-
-  const gStyle = (t: string, slow?: boolean): React.CSSProperties => ({
-    transform: t,
-    transition: slow ? TRANS_SLW : TRANS,
-    transformBox: "fill-box" as const,
-    transformOrigin: "center center",
+  const botVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
+    const a = (2 * Math.PI * i) / CYL_SEGS;
+    return cylRotPt(Math.cos(a) * CYL_R, CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
   });
+  const topVerts2D = topVerts3D.map(cylProj);
+  const botVerts2D = botVerts3D.map(cylProj);
 
-  const nextLabel =
-    seqStep === 0 ? "▶ Klik tutup atas (biru) untuk membuka" :
-    seqStep === 1 ? "▶ Klik selimut (ungu) untuk menggulung" :
-    seqStep === 2 ? "▶ Klik tutup bawah (hijau) untuk membuka" : "";
+  type XPanel = { avgZ: number; visible: boolean; fill: string; stroke: string; points: string };
+  const panels: XPanel[] = Array.from({ length: CYL_SEGS }, (_, i) => {
+    const ni = (i + 1) % CYL_SEGS;
+    const t0 = topVerts3D[i], t1 = topVerts3D[ni];
+    const b0 = botVerts3D[i], b1 = botVerts3D[ni];
+    const p_t0 = topVerts2D[i], p_t1 = topVerts2D[ni];
+    const p_b0 = botVerts2D[i], p_b1 = botVerts2D[ni];
+    const avgZ = (t0.z + t1.z + b0.z + b1.z) / 4;
+    const ex = p_t1.x - p_t0.x, ey = p_t1.y - p_t0.y;
+    const fx = p_b0.x - p_t0.x, fy = p_b0.y - p_t0.y;
+    const visible = (ex * fy - ey * fx) > 0;
+    const hue = Math.floor((i / CYL_SEGS) * 60) + 180;
+    return {
+      avgZ, visible,
+      fill: visible ? `hsla(${hue},80%,${selOpen ? 32 : 55}%,${selOpen ? 0.45 : 0.88})` : "rgba(100,150,200,0.06)",
+      stroke: visible ? (selOpen ? "#ffffff22" : "#ffffff55") : "#ffffff15",
+      points: `${p_t0.x},${p_t0.y} ${p_t1.x},${p_t1.y} ${p_b1.x},${p_b1.y} ${p_b0.x},${p_b0.y}`,
+    };
+  });
+  const sortedPanels = [...panels].sort((a, b) => b.avgZ - a.avgZ);
+
+  const topCapAvgZ = topVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
+  const botCapAvgZ = botVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
+  const topPolyPts = topVerts2D.map(p => `${p.x},${p.y}`).join(" ");
+  const botPolyPts = botVerts2D.map(p => `${p.x},${p.y}`).join(" ");
+  const topC = cylProj(cylRotPt(0, -CYL_H / 2, 0, rotX, rotY));
+  const botC = cylProj(cylRotPt(0,  CYL_H / 2, 0, rotX, rotY));
+  const topVisible = rotX < 10;
+  const botVisible = rotX > -60;
+
+  const TRANS = "transform 0.75s cubic-bezier(0.4,0,0.2,1)";
+
+  const tryToggle = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+    if (hasDragged.current) return;
+    playPopSound();
+    setter(v => !v);
+  };
+
+  const resetAll = () => { playPopSound(); setTopOpen(false); setBotOpen(false); setSelOpen(false); };
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
       <p className="text-white/60 text-xs text-center font-body">
-        Saksikan tabung dibongkar bertahap menjadi jaring-jaring datar · Klik bagian yang bercahaya
+        {anyOpen
+          ? "Klik bagian yang terbuka untuk menutup · Klik bagian lain untuk membuka"
+          : "Drag untuk memutar · Klik tutup atas, selimut, atau alas untuk membukanya"}
       </p>
 
-      <div className="mx-auto select-none" style={{ maxWidth: 420 }}>
-        <svg viewBox="0 0 400 385" width="100%" style={{ overflow: "visible" }}>
-          <defs>
-            <marker id="cylArrowPL" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto-start-reverse">
-              <path d="M5,0 L5,5 L0,2.5 z" fill="#a855f7" />
-            </marker>
-            <marker id="cylArrowPR" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto">
-              <path d="M0,0 L0,5 L5,2.5 z" fill="#a855f7" />
-            </marker>
-            <style>{`
-              @keyframes cylGlow {
-                0%,100% { opacity:1; }
-                50%      { opacity:0.35; }
-              }
-              .cyl-pulse { animation: cylGlow 1.1s ease-in-out infinite; }
-            `}</style>
-          </defs>
-
-          {/* ── Cylinder side lines — visible only in assembled state ── */}
-          <line x1="130" y1="120" x2="130" y2="240" stroke="#b45309" strokeWidth="2"
-            style={op(phase === 0)} />
-          <line x1="270" y1="120" x2="270" y2="240" stroke="#b45309" strokeWidth="2"
-            style={op(phase === 0)} />
-
-          {/* ── BODY (selimut) — scaleX from center when assembled ── */}
-          <g style={gStyle(bodyT, true)}
-            onClick={() => seqStep === 1 && !isAnimating && openNextSeq()}
-          >
-            <rect x="74" y="120" width="252" height="120"
-              fill="rgba(168,85,247,0.22)" stroke="#a855f7" strokeWidth="2.5" rx="2" />
-            {seqStep === 1 && (
-              <rect x="74" y="120" width="252" height="120"
-                fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth="2.5" rx="2"
-                className="cyl-pulse" style={{ cursor: "pointer" }} />
-            )}
-            <text x="200" y="178" textAnchor="middle" fill="#c4b5fd" fontSize="10"
-              fontFamily="monospace"
-              style={{ opacity: phase < 2 ? 0.7 : 0, transition: TRANS_OP }}>
-              selimut
-            </text>
-            <text x="200" y="170" textAnchor="middle" fill="#e9d5ff" fontSize="12"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }}>
-              SELIMUT TABUNG
-            </text>
-            <text x="200" y="188" textAnchor="middle" fill="#c4b5fd" fontSize="10"
-              fontFamily="monospace"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }}>
-              panjang = 2πr (keliling alas)
-            </text>
-          </g>
-
-          {/* Body dimension arrows — outside group so they stay unscaled ── */}
-          <g style={op(phase >= 2)}>
-            <line x1="80" y1="111" x2="320" y2="111" stroke="#a855f7" strokeWidth="1.5"
-              markerStart="url(#cylArrowPL)" markerEnd="url(#cylArrowPR)" />
-            <text x="200" y="109" textAnchor="middle" fill="#a855f7" fontSize="9" fontFamily="monospace">
-              2πr
-            </text>
-            <line x1="337" y1="122" x2="337" y2="238" stroke="#a855f7" strokeWidth="1.5" />
-            <line x1="331" y1="122" x2="343" y2="122" stroke="#a855f7" strokeWidth="1.5" />
-            <line x1="331" y1="238" x2="343" y2="238" stroke="#a855f7" strokeWidth="1.5" />
-            <text x="200" y="108" textAnchor="middle" fill="#a855f7" fontSize="0" fontFamily="monospace" />
-            <text x="352" y="183" textAnchor="middle" fill="#a855f7" fontSize="10"
-              fontFamily="monospace" fontWeight="700" transform="rotate(-90,352,183)">
-              t (tinggi)
-            </text>
-          </g>
-
-          {/* ── BOTTOM CIRCLE — rendered before top so top appears in front ── */}
-          <g style={gStyle(botT)}
-            onClick={() => seqStep === 2 && !isAnimating && openNextSeq()}
-          >
-            <ellipse cx="200" cy="300" rx="52" ry="52"
-              fill="rgba(134,239,172,0.25)" stroke="#86efac" strokeWidth="2.5" />
-            {seqStep === 2 && (
-              <ellipse cx="200" cy="300" rx="52" ry="52"
-                fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth="2.5"
-                className="cyl-pulse" style={{ cursor: "pointer" }} />
-            )}
-            <text x="200" y="296" textAnchor="middle" fill="#86efac" fontSize="11"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 3 ? 1 : 0, transition: TRANS_OP }}>
-              Tutup Bawah
-            </text>
-            <text x="200" y="312" textAnchor="middle" fill="#bbf7d0" fontSize="10"
-              fontFamily="monospace"
-              style={{ opacity: phase >= 3 ? 1 : 0, transition: TRANS_OP }}>
-              jari-jari = r
-            </text>
-            <circle cx="200" cy="300" r="3" fill="#f59e0b"
-              style={{ opacity: phase >= 3 ? 1 : 0, transition: TRANS_OP }} />
-            <line x1="200" y1="300" x2="248" y2="300" stroke="#f59e0b" strokeWidth="2"
-              style={{ opacity: phase >= 3 ? 1 : 0, transition: TRANS_OP }} />
-            <text x="226" y="297" textAnchor="middle" fill="#f59e0b" fontSize="10"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 3 ? 1 : 0, transition: TRANS_OP }}>
-              r
-            </text>
-          </g>
-
-          {/* ── TOP CIRCLE — rendered last so it appears on top ── */}
-          <g style={gStyle(topT)}
-            onClick={() => seqStep === 0 && !isAnimating && openNextSeq()}
-          >
-            <ellipse cx="200" cy="60" rx="52" ry="52"
-              fill="rgba(103,232,249,0.25)" stroke="#67e8f9" strokeWidth="2.5" />
-            {seqStep === 0 && (
-              <ellipse cx="200" cy="60" rx="52" ry="52"
-                fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth="2.5"
-                className="cyl-pulse" style={{ cursor: "pointer" }} />
-            )}
-            <text x="200" y="55" textAnchor="middle" fill="#67e8f9" fontSize="11"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }}>
-              Tutup Atas
-            </text>
-            <text x="200" y="70" textAnchor="middle" fill="#a5f3fc" fontSize="10"
-              fontFamily="monospace"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }}>
-              jari-jari = r
-            </text>
-            <circle cx="200" cy="60" r="3" fill="#f59e0b"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }} />
-            <line x1="200" y1="60" x2="248" y2="60" stroke="#f59e0b" strokeWidth="2"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }} />
-            <text x="226" y="57" textAnchor="middle" fill="#f59e0b" fontSize="10"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }}>
-              r
-            </text>
-          </g>
-
-          {/* ── Connecting dashes between parts (net state) ── */}
-          <line x1="148" y1="112" x2="148" y2="120" stroke="#67e8f9" strokeWidth="1.5" strokeDasharray="3,2"
-            style={op(phase >= 2)} />
-          <line x1="252" y1="112" x2="252" y2="120" stroke="#67e8f9" strokeWidth="1.5" strokeDasharray="3,2"
-            style={op(phase >= 2)} />
-          <line x1="148" y1="240" x2="148" y2="248" stroke="#86efac" strokeWidth="1.5" strokeDasharray="3,2"
-            style={op(phase >= 3)} />
-          <line x1="252" y1="240" x2="252" y2="248" stroke="#86efac" strokeWidth="1.5" strokeDasharray="3,2"
-            style={op(phase >= 3)} />
-
-          {/* ── Phase labels: assembled title vs net summary ── */}
-          <text x="200" y="95" textAnchor="middle" fill="#fbbf24" fontSize="11"
-            fontFamily="monospace" fontWeight="700"
-            style={op(isAllClosed && seqStep < 0)}>
-            Tabung 3D (klik tombol untuk membongkar)
-          </text>
-          <text x="200" y="376" textAnchor="middle" fill="#fbbf24" fontSize="10"
-            fontFamily="monospace" fontWeight="700"
-            style={op(isAllOpen)}>
-            ✓ Jaring-jaring = 2 Lingkaran + 1 Persegi Panjang
-          </text>
-          {seqStep >= 0 && (
-            <text x="200" y="376" textAnchor="middle" fill="#fbbf24" fontSize="10"
-              fontFamily="monospace" onClick={openNextSeq}
-              style={{ cursor: "pointer" }}>
-              {nextLabel}
-            </text>
+      <svg
+        viewBox={`0 0 ${CYL_W} ${CYL_H_SVG}`}
+        width="100%"
+        style={{ maxWidth: CYL_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMD}
+        onTouchStart={onTS}
+      >
+        {/* ── Selimut (body panels) — clickable ── */}
+        <g onClick={() => tryToggle(setSelOpen)} style={{ cursor: "pointer" }}>
+          {sortedPanels.map((p, i) =>
+            p.visible && <polygon key={i} points={p.points} fill={p.fill} stroke={p.stroke} strokeWidth="0.8" />
           )}
-        </svg>
-      </div>
+          {selOpen && <>
+            <text x={CYL_CX} y={CYL_CY - 6} fill="#e9d5ff" fontSize="10" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT</text>
+            <text x={CYL_CX} y={CYL_CY + 9} fill="#c4b5fd" fontSize="9"  fontFamily="monospace" textAnchor="middle">p = 2πr, l = t</text>
+          </>}
+        </g>
 
-      {/* Controls */}
-      <div className="flex flex-wrap gap-2 justify-center">
-        <button
-          onClick={bongkarBertahap}
-          disabled={isAnimating}
-          className="px-3 py-1.5 text-xs font-bold bg-cyan-900/60 border border-cyan-600 text-cyan-300 rounded-lg hover:bg-cyan-800/60 transition-colors cursor-pointer font-body disabled:opacity-40"
-        >
-          ▶ Bongkar Bertahap
-        </button>
-        <button
-          onClick={bongkarSemua}
-          disabled={isAnimating || isAllOpen}
-          className="px-3 py-1.5 text-xs font-bold bg-orange-900/60 border border-orange-600 text-orange-300 rounded-lg hover:bg-orange-800/60 transition-colors cursor-pointer font-body disabled:opacity-40"
-        >
-          ⊞ Bongkar Semua
-        </button>
-        <button
-          onClick={satukanKembali}
-          disabled={isAnimating || isAllClosed}
-          className="px-3 py-1.5 text-xs font-bold bg-violet-900/60 border border-violet-600 text-violet-300 rounded-lg hover:bg-violet-800/60 transition-colors cursor-pointer font-body disabled:opacity-40"
-        >
-          ⊟ Satukan Kembali
-        </button>
-      </div>
+        {/* ── Caps — z-sorted, each in separate clickable group with translateY ── */}
+        {topCapAvgZ > botCapAvgZ ? (
+          <>
+            <g onClick={(e) => { e.stopPropagation(); tryToggle(setBotOpen); }}
+              style={{ transform: botOpen ? "translateY(72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
+              {botVisible && <polygon points={botPolyPts} fill={botOpen ? "rgb(134,239,172)" : "rgb(99,102,241)"} stroke={botOpen ? "#bbf7d0" : "#a5b4fc"} strokeWidth="1.2" />}
+              {botOpen && <>
+                <text x={botC.x} y={botC.y - 10} fill="#86efac" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Alas ⭕</text>
+                <circle cx={botC.x} cy={botC.y} r="3" fill="#fbbf24" />
+                <line x1={botC.x} y1={botC.y} x2={botC.x + 26} y2={botC.y} stroke="#fbbf24" strokeWidth="1.5" />
+                <text x={botC.x + 15} y={botC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
+              </>}
+            </g>
+            <g onClick={(e) => { e.stopPropagation(); tryToggle(setTopOpen); }}
+              style={{ transform: topOpen ? "translateY(-72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
+              {topVisible && <polygon points={topPolyPts} fill={topOpen ? "rgb(103,232,249)" : "rgb(99,102,241)"} stroke={topOpen ? "#a5f3fc" : "#a5b4fc"} strokeWidth="1.2" />}
+              {topOpen && <>
+                <text x={topC.x} y={topC.y + 14} fill="#67e8f9" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Tutup Atas ⭕</text>
+                <circle cx={topC.x} cy={topC.y} r="3" fill="#fbbf24" />
+                <line x1={topC.x} y1={topC.y} x2={topC.x + 26} y2={topC.y} stroke="#fbbf24" strokeWidth="1.5" />
+                <text x={topC.x + 15} y={topC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
+              </>}
+            </g>
+          </>
+        ) : (
+          <>
+            <g onClick={(e) => { e.stopPropagation(); tryToggle(setTopOpen); }}
+              style={{ transform: topOpen ? "translateY(-72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
+              {topVisible && <polygon points={topPolyPts} fill={topOpen ? "rgb(103,232,249)" : "rgb(99,102,241)"} stroke={topOpen ? "#a5f3fc" : "#a5b4fc"} strokeWidth="1.2" />}
+              {topOpen && <>
+                <text x={topC.x} y={topC.y + 14} fill="#67e8f9" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Tutup Atas ⭕</text>
+                <circle cx={topC.x} cy={topC.y} r="3" fill="#fbbf24" />
+                <line x1={topC.x} y1={topC.y} x2={topC.x + 26} y2={topC.y} stroke="#fbbf24" strokeWidth="1.5" />
+                <text x={topC.x + 15} y={topC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
+              </>}
+            </g>
+            <g onClick={(e) => { e.stopPropagation(); tryToggle(setBotOpen); }}
+              style={{ transform: botOpen ? "translateY(72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
+              {botVisible && <polygon points={botPolyPts} fill={botOpen ? "rgb(134,239,172)" : "rgb(99,102,241)"} stroke={botOpen ? "#bbf7d0" : "#a5b4fc"} strokeWidth="1.2" />}
+              {botOpen && <>
+                <text x={botC.x} y={botC.y - 10} fill="#86efac" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Alas ⭕</text>
+                <circle cx={botC.x} cy={botC.y} r="3" fill="#fbbf24" />
+                <line x1={botC.x} y1={botC.y} x2={botC.x + 26} y2={botC.y} stroke="#fbbf24" strokeWidth="1.5" />
+                <text x={botC.x + 15} y={botC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
+              </>}
+            </g>
+          </>
+        )}
 
-      {/* Legend */}
+        {/* ── Ghost hidden body panels ── */}
+        {sortedPanels.map((p, i) =>
+          !p.visible && <polygon key={`g${i}`} points={p.points} fill="rgba(100,150,200,0.06)" stroke="#ffffff15" strokeWidth="0.5" />
+        )}
+
+        <text x="10" y={CYL_H_SVG - 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r={CYL_R}px  t={CYL_H}px</text>
+        <text x={CYL_W - 88} y={CYL_H_SVG - 12} fill="#22d3ee" fontSize="9" fontFamily="monospace">L=2πr²+2πrt</text>
+      </svg>
+
+      {/* Status badges */}
       <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
-        {[
-          { color: "#67e8f9", circle: true,  label: "Tutup Atas" },
-          { color: "#a855f7", circle: false, label: "Selimut" },
-          { color: "#86efac", circle: true,  label: "Tutup Bawah" },
-        ].map(({ color, circle, label }) => (
-          <div key={label} className="flex items-center gap-1">
-            <div className={`w-3 h-3 ${circle ? "rounded-full" : "rounded-sm"}`}
-              style={{ background: color }} />
-            <span className="text-white/50">{label}</span>
-          </div>
+        {([
+          { label: "⭕ Tutup Atas", open: topOpen, set: setTopOpen, on: "bg-cyan-900/60 border-cyan-500 text-cyan-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
+          { label: "🌀 Selimut",    open: selOpen, set: setSelOpen, on: "bg-purple-900/60 border-purple-500 text-purple-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
+          { label: "⭕ Alas",       open: botOpen, set: setBotOpen, on: "bg-green-900/60 border-green-500 text-green-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
+        ] as const).map(({ label, open, set, on, off }) => (
+          <span
+            key={label}
+            className={`px-2 py-1 rounded-full border cursor-pointer transition-colors ${open ? on : off}`}
+            onClick={() => { playPopSound(); set((v: boolean) => !v); }}
+          >
+            {label}{open ? " ✓" : ""}
+          </span>
         ))}
       </div>
-      <p className="text-white/25 text-[9px] text-center font-body">
-        Jaring-jaring tabung = 1 selimut (persegi panjang) + 2 lingkaran alas/tutup
-      </p>
+
+      {anyOpen && (
+        <button onClick={resetAll} className="w-full px-3 py-1.5 text-xs font-bold bg-slate-800/60 border border-slate-600 text-slate-300 rounded-lg hover:bg-slate-700/60 transition-colors cursor-pointer font-body">
+          ⊟ Satukan Kembali
+        </button>
+      )}
     </div>
   );
 };
