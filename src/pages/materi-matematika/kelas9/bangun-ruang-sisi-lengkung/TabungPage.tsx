@@ -38,7 +38,6 @@ const InteractiveCylinder3D = () => {
   const [rotX, setRotX] = useState(-25);
   const [rotY, setRotY] = useState(30);
   const [isDragging, setIsDragging] = useState(false);
-  const [showNet, setShowNet] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -25, baseRotY: 30 });
 
   const onMouseDown = (e: React.MouseEvent) => {
@@ -78,7 +77,7 @@ const InteractiveCylinder3D = () => {
   }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
 
   useEffect(() => {
-    if (isDragging || showNet) return;
+    if (isDragging) return;
     let frameId: number;
     let lastTs = 0;
     const animate = (ts: number) => {
@@ -88,7 +87,7 @@ const InteractiveCylinder3D = () => {
     };
     frameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frameId);
-  }, [isDragging, showNet]);
+  }, [isDragging]);
 
   const topVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
     const a = (2 * Math.PI * i) / CYL_SEGS;
@@ -150,84 +149,22 @@ const InteractiveCylinder3D = () => {
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar · Klik tombol untuk melihat jaring-jaring tabung
+        Drag untuk memutar tabung 3D
       </p>
 
-      {!showNet ? (
-        <svg
-          viewBox={`0 0 ${CYL_W} ${CYL_H_SVG}`}
-          width="100%"
-          style={{ maxWidth: CYL_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
-          onMouseDown={onMouseDown}
-          onTouchStart={onTouchStart}
-        >
-          {faces.map((f, i) => (
-            <polygon key={i} points={f.points} fill={f.fill} stroke={f.stroke} strokeWidth="0.5" />
-          ))}
-          <text x={topCenter2D.x} y={topCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP ATAS (r)</text>
-          <text x={botCenter2D.x} y={botCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP BAWAH (r)</text>
-        </svg>
-      ) : (
-        /* Jaring-jaring tabung */
-        <div className="flex items-center justify-center py-4">
-          <svg viewBox="0 0 340 240" width={340} height={240} className="max-w-full">
-            {/* Tutup atas (lingkaran) */}
-            <ellipse cx="60" cy="60" rx="50" ry="50"
-              fill="rgba(103,232,249,0.25)" stroke="#67e8f9" strokeWidth="2.5" strokeDasharray="6,3"/>
-            <text x="60" y="55" textAnchor="middle" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="700">Tutup Atas</text>
-            <text x="60" y="70" textAnchor="middle" fill="#a5f3fc" fontSize="9" fontFamily="monospace">⌀ = 2r</text>
-
-            {/* Selimut (persegi panjang) */}
-            <rect x="120" y="10" width="200" height="100"
-              fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="2.5"/>
-            <text x="220" y="58" textAnchor="middle" fill="#d8b4fe" fontSize="11" fontFamily="monospace" fontWeight="700">SELIMUT</text>
-            <text x="220" y="75" textAnchor="middle" fill="#c4b5fd" fontSize="10" fontFamily="monospace">p = 2πr</text>
-            {/* width arrow */}
-            <line x1="120" y1="5" x2="320" y2="5" stroke="#a855f7" strokeWidth="1.5" markerEnd="url(#arrow)" markerStart="url(#arrow)"/>
-            <text x="220" y="3" textAnchor="middle" fill="#a855f7" fontSize="9" fontFamily="monospace">keliling alas = 2πr</text>
-            {/* height arrow */}
-            <line x1="325" y1="10" x2="325" y2="110" stroke="#a855f7" strokeWidth="1.5"/>
-            <text x="334" y="60" textAnchor="middle" fill="#a855f7" fontSize="9" fontFamily="monospace" transform="rotate(90, 334, 60)">t</text>
-
-            {/* Tutup bawah (lingkaran) */}
-            <ellipse cx="60" cy="170" rx="50" ry="50"
-              fill="rgba(134,239,172,0.25)" stroke="#86efac" strokeWidth="2.5" strokeDasharray="6,3"/>
-            <text x="60" y="165" textAnchor="middle" fill="#86efac" fontSize="10" fontFamily="monospace" fontWeight="700">Tutup Bawah</text>
-            <text x="60" y="180" textAnchor="middle" fill="#bbf7d0" fontSize="9" fontFamily="monospace">⌀ = 2r</text>
-
-            {/* Labels */}
-            <text x="170" y="155" textAnchor="middle" fill="#fbbf24" fontSize="10" fontFamily="monospace">Jaring-jaring Tabung</text>
-            <text x="170" y="170" textAnchor="middle" fill="#fde68a" fontSize="9" fontFamily="monospace">= 2 Lingkaran + 1 Persegi Panjang</text>
-
-            <defs>
-              <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-                <path d="M0,0 L0,6 L6,3 z" fill="#a855f7"/>
-              </marker>
-            </defs>
-          </svg>
-        </div>
-      )}
-
-      <div className="flex flex-wrap gap-2 justify-center">
-        <button
-          onClick={() => { playPopSound(); setShowNet(false); }}
-          className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer font-body ${!showNet ? "bg-cyan-800/80 border-cyan-500 text-cyan-200" : "bg-slate-900/60 border-slate-600 text-slate-300 hover:bg-slate-800/60"}`}
-        >
-          🔵 Tabung 3D
-        </button>
-        <button
-          onClick={() => { playPopSound(); setShowNet(true); }}
-          className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer font-body ${showNet ? "bg-purple-800/80 border-purple-500 text-purple-200" : "bg-slate-900/60 border-slate-600 text-slate-300 hover:bg-slate-800/60"}`}
-        >
-          📐 Jaring-jaring
-        </button>
-      </div>
-
-      <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
-        <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full" style={{background:"#67e8f9"}}/><span className="text-white/50">Tutup Atas</span></div>
-        <div className="flex items-center gap-1"><div className="w-3 h-3 rounded" style={{background:"#a855f7"}}/><span className="text-white/50">Selimut</span></div>
-        <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full" style={{background:"#86efac"}}/><span className="text-white/50">Tutup Bawah</span></div>
-      </div>
+      <svg
+        viewBox={`0 0 ${CYL_W} ${CYL_H_SVG}`}
+        width="100%"
+        style={{ maxWidth: CYL_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+      >
+        {faces.map((f, i) => (
+          <polygon key={i} points={f.points} fill={f.fill} stroke={f.stroke} strokeWidth="0.5" />
+        ))}
+        <text x={topCenter2D.x} y={topCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP ATAS (r)</text>
+        <text x={botCenter2D.x} y={botCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP BAWAH (r)</text>
+      </svg>
     </div>
   );
 };
