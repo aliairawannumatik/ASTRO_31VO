@@ -560,13 +560,14 @@ const CylinderNetAnimation = () => {
           </marker>
           <style>{`
             @keyframes netUnroll {
-              0%   { transform: perspective(600px) scaleX(0.02) rotateY(-35deg); opacity:0; }
-              6%   { opacity: 1; }
-              30%  { transform: perspective(600px) scaleX(0.38) rotateY(-18deg); }
-              55%  { transform: perspective(600px) scaleX(0.72) rotateY(-8deg); }
-              78%  { transform: perspective(600px) scaleX(0.97) rotateY(-1.5deg); }
-              90%  { transform: perspective(600px) scaleX(1.015) rotateY(0.5deg); }
-              100% { transform: perspective(600px) scaleX(1)    rotateY(0deg);   opacity:1; }
+              0%   { clip-path: inset(5% 99% 5% 0% round 50%); opacity:0; }
+              5%   { opacity:1; }
+              18%  { clip-path: inset(3% 83% 3% 0% round 46%); }
+              38%  { clip-path: inset(1% 62% 1% 0% round 32%); }
+              60%  { clip-path: inset(0% 36% 0% 0% round 16%); }
+              80%  { clip-path: inset(0%  9% 0% 0% round  5%); }
+              92%  { clip-path: inset(0%  1% 0% 0% round  3px); }
+              100% { clip-path: inset(0%  0% 0% 0% round  3px); opacity:1; }
             }
             @keyframes hingeCapTop {
               0%   { transform: perspective(320px) rotateX(-90deg); opacity:0.15; }
@@ -582,10 +583,12 @@ const CylinderNetAnimation = () => {
             }
             @keyframes netFadeIn { from{opacity:0} to{opacity:1} }
             @keyframes netUnrollClose {
-              0%   { transform: perspective(600px) scaleX(1)    rotateY(0deg);   opacity:1; }
-              15%  { transform: perspective(600px) scaleX(0.98) rotateY(-2deg); }
-              60%  { transform: perspective(600px) scaleX(0.45) rotateY(-22deg); opacity:0.8; }
-              100% { transform: perspective(600px) scaleX(0.02) rotateY(-35deg); opacity:0; }
+              0%   { clip-path: inset(0%  0% 0% 0% round  3px); opacity:1; }
+              12%  { clip-path: inset(0%  8% 0% 0% round  5%); }
+              38%  { clip-path: inset(0% 35% 0% 0% round 16%); }
+              62%  { clip-path: inset(1% 62% 1% 0% round 32%); }
+              84%  { clip-path: inset(3% 84% 3% 0% round 46%); opacity:0.7; }
+              100% { clip-path: inset(5% 99% 5% 0% round 50%); opacity:0; }
             }
             @keyframes hingeCapTopClose {
               0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
@@ -598,14 +601,10 @@ const CylinderNetAnimation = () => {
               100% { transform: perspective(320px) rotateX(-90deg); opacity:0.1; }
             }
             .net-unroll {
-              animation: netUnroll 2.6s cubic-bezier(0.16,1,0.3,1) both;
-              transform-box:fill-box;
-              transform-origin:left center;
+              animation: netUnroll 2.8s cubic-bezier(0.16,1,0.3,1) both;
             }
             .net-unroll-close {
               animation: netUnrollClose 1.4s cubic-bezier(0.7,0,0.84,0) both;
-              transform-box:fill-box;
-              transform-origin:left center;
             }
             .hinge-top {
               animation: hingeCapTop 1.5s cubic-bezier(0.22,0,0.1,1) both;
@@ -627,7 +626,7 @@ const CylinderNetAnimation = () => {
               transform-box:fill-box;
               transform-origin:center top;
             }
-            .net-fadein { animation: netFadeIn 0.5s 2.1s ease both; }
+            .net-fadein { animation: netFadeIn 0.5s 2.3s ease both; }
           `}</style>
         </defs>
 
