@@ -565,9 +565,16 @@ const CylinderNetAnimation = () => {
           `}</style>
         </defs>
 
+        {/* ── Ghost hidden body panels — rendered FIRST (behind everything) ── */}
+        <g style={{ pointerEvents: "none" }}>
+          {sortedPanels.map((p, i) =>
+            !p.visible && <polygon key={`g${i}`} points={p.points} fill="rgba(100,150,200,0.06)" stroke="#ffffff15" strokeWidth="0.5" />
+          )}
+        </g>
+
         {/* ── SELIMUT (body panels) — click to unroll into rectangle ── */}
         <g onClick={() => tryToggle(setSelOpen)} style={{ cursor: "pointer" }}>
-          {/* 3D panels — fade out when selOpen */}
+          {/* 3D visible panels — fade out when selOpen */}
           <g style={{ opacity: selOpen ? 0.06 : 1, transition: "opacity 0.45s ease" }}>
             {sortedPanels.map((p, i) =>
               p.visible && <polygon key={i} points={p.points} fill={p.fill} stroke={p.stroke} strokeWidth="0.8" />
@@ -611,10 +618,15 @@ const CylinderNetAnimation = () => {
             ]
         ).map(({ key, open, set, pts, c, vis, dy, col, fillO, stroke, lbl }) => (
           <g key={key} onClick={(e) => { e.stopPropagation(); tryToggle(set); }} style={{ cursor: "pointer" }}>
-            {/* 3D ellipse polygon — fades out when open */}
-            {vis && (
-              <polygon points={pts} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2"
-                style={{ opacity: open ? 0 : 1, transition: "opacity 0.35s" }} />
+            {/* Invisible hitbox — always present so cap is always clickable */}
+            <ellipse cx={c.x} cy={c.y} rx={54} ry={18} fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
+            {/* 3D ellipse polygon — always rendered, opacity fades when open or not facing viewer */}
+            <polygon points={pts} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2"
+              style={{ opacity: open ? 0 : vis ? 1 : 0, transition: "opacity 0.35s" }} />
+            {/* Subtle glow ring when closed & facing viewer — hints it's clickable */}
+            {!open && vis && !anyOpen && (
+              <polygon points={pts} fill="none" stroke="rgba(165,180,252,0.4)" strokeWidth="2"
+                style={{ pointerEvents: "none" }} />
             )}
             {/* Flat circle — melebar saat open */}
             <circle cx={c.x} cy={c.y} r={52}
@@ -640,11 +652,6 @@ const CylinderNetAnimation = () => {
             )}
           </g>
         ))}
-
-        {/* ── Ghost hidden body panels ── */}
-        {sortedPanels.map((p, i) =>
-          !p.visible && <polygon key={`g${i}`} points={p.points} fill="rgba(100,150,200,0.06)" stroke="#ffffff15" strokeWidth="0.5" />
-        )}
 
         <text x="10" y={CYL_H_SVG - 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r={CYL_R}px  t={CYL_H}px</text>
         <text x={CYL_W - 88} y={CYL_H_SVG - 12} fill="#22d3ee" fontSize="9" fontFamily="monospace">L=2πr²+2πrt</text>
