@@ -709,6 +709,16 @@ const CylinderNetAnimation = () => {
                     style={{ pointerEvents: "none" }} />
                 )}
 
+                {/* Clickable overlay on net circle so pressing it closes the cap */}
+                {isOpen && (
+                  <circle
+                    cx={CYL_CX} cy={netCy} r={NET_R + 6}
+                    fill="transparent" stroke="none"
+                    style={{ cursor: "pointer", pointerEvents: "all" }}
+                    onClick={(e) => { e.stopPropagation(); tryToggle(open, set); }}
+                  />
+                )}
+
                 {/* Flat circle — shown while open or animating closed */}
                 {showFlat && (
                   <g
