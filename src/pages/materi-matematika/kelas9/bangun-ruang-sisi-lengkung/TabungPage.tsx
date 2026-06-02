@@ -556,12 +556,38 @@ const CylinderNetAnimation = () => {
           </marker>
           <style>{`
             @keyframes netUnroll {
-              from { transform: scaleX(0); opacity:0; }
-              to   { transform: scaleX(1); opacity:1; }
+              from { transform: perspective(400px) rotateY(-90deg); opacity:0; }
+              to   { transform: perspective(400px) rotateY(0deg);   opacity:1; }
+            }
+            @keyframes hingeCapTop {
+              0%   { transform: perspective(320px) rotateX(-90deg); opacity:0.15; }
+              60%  { transform: perspective(320px) rotateX(-12deg); opacity:1; }
+              80%  { transform: perspective(320px) rotateX(4deg); }
+              100% { transform: perspective(320px) rotateX(0deg); }
+            }
+            @keyframes hingeCapBot {
+              0%   { transform: perspective(320px) rotateX(90deg);  opacity:0.15; }
+              60%  { transform: perspective(320px) rotateX(12deg);  opacity:1; }
+              80%  { transform: perspective(320px) rotateX(-4deg); }
+              100% { transform: perspective(320px) rotateX(0deg); }
             }
             @keyframes netFadeIn { from{opacity:0} to{opacity:1} }
-            .net-unroll { animation: netUnroll 0.72s cubic-bezier(0.4,0,0.2,1) both; transform-box:fill-box; transform-origin:left center; }
-            .net-fadein { animation: netFadeIn 0.5s 0.5s ease both; }
+            .net-unroll {
+              animation: netUnroll 1.3s cubic-bezier(0.22,0,0.1,1) both;
+              transform-box:fill-box;
+              transform-origin:left center;
+            }
+            .hinge-top {
+              animation: hingeCapTop 1.5s cubic-bezier(0.22,0,0.1,1) both;
+              transform-box:fill-box;
+              transform-origin:center bottom;
+            }
+            .hinge-bot {
+              animation: hingeCapBot 1.5s cubic-bezier(0.22,0,0.1,1) both;
+              transform-box:fill-box;
+              transform-origin:center top;
+            }
+            .net-fadein { animation: netFadeIn 0.4s 1.1s ease both; }
           `}</style>
         </defs>
 
@@ -645,7 +671,7 @@ const CylinderNetAnimation = () => {
 
                 {/* Flat circle — fixed at net position attached to selimut edge */}
                 {open && (
-                  <g className="net-fadein" style={{ pointerEvents: "none" }}>
+                  <g className={isTop ? "hinge-top" : "hinge-bot"} style={{ pointerEvents: "none" }}>
                     {/* Dashed connecting line: circle edge → selimut rect edge */}
                     <line
                       x1={CYL_CX} y1={isTop ? selTop : selBot}
