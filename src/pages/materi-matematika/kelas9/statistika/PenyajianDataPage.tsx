@@ -7,8 +7,60 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
+const BAR_COLORS = [
+  { bg: "bg-blue-500",   text: "text-blue-300"   },
+  { bg: "bg-violet-500", text: "text-violet-300" },
+  { bg: "bg-green-500",  text: "text-green-300"  },
+  { bg: "bg-orange-500", text: "text-orange-300" },
+  { bg: "bg-pink-500",   text: "text-pink-300"   },
+  { bg: "bg-cyan-500",   text: "text-cyan-300"   },
+  { bg: "bg-amber-500",  text: "text-amber-300"  },
+  { bg: "bg-red-500",    text: "text-red-300"    },
+];
+
 const PenyajianDataPage = () => {
   const navigate = useNavigate();
+
+  /* ── Diagram Batang Interaktif state ── */
+  const [tableRows, setTableRows] = useState<{ id: number; label: string; value: string }[]>([
+    { id: 1, label: "Pramuka",  value: "24" },
+    { id: 2, label: "Musik",   value: "18" },
+    { id: 3, label: "Futsal",  value: "30" },
+    { id: 4, label: "Tari",    value: "12" },
+  ]);
+  const [rowCounter, setRowCounter] = useState(5);
+  const [chartVisible, setChartVisible]   = useState(false);
+  const [chartData, setChartData]         = useState<{ label: string; value: number }[]>([]);
+  const [chartAnimated, setChartAnimated] = useState(false);
+
+  const addRow = () => {
+    if (tableRows.length >= 10) return;
+    setTableRows(prev => [...prev, { id: rowCounter, label: "", value: "" }]);
+    setRowCounter(prev => prev + 1);
+  };
+  const removeRow = (id: number) => {
+    if (tableRows.length <= 2) return;
+    setTableRows(prev => prev.filter(r => r.id !== id));
+  };
+  const updateRow = (id: number, field: "label" | "value", val: string) => {
+    setTableRows(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r));
+  };
+  const convertToChart = () => {
+    const valid = tableRows
+      .filter(r => r.label.trim() && r.value.trim() && !isNaN(Number(r.value)) && Number(r.value) >= 0)
+      .map(r => ({ label: r.label.trim(), value: Number(r.value) }));
+    if (valid.length < 1) return;
+    setChartData(valid);
+    setChartVisible(true);
+    setChartAnimated(false);
+    setTimeout(() => setChartAnimated(true), 80);
+  };
+  const resetChart = () => {
+    setChartVisible(false);
+    setChartAnimated(false);
+    setChartData([]);
+  };
+
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro",
     "konsep1", "contoh1",
@@ -384,6 +436,175 @@ const PenyajianDataPage = () => {
                       <span className="text-blue-400 shrink-0">▸</span>
                       <p className="text-white/80"><strong className="text-blue-300">Judul</strong> → menjelaskan isi diagram</p>
                     </div>
+                  </div>
+                </div>
+
+                {/* ===== DIAGRAM BATANG INTERAKTIF ===== */}
+                <div className="bg-slate-800/70 border border-blue-500/30 rounded-xl overflow-hidden">
+                  <div className="bg-blue-900/50 px-4 py-3 flex items-center gap-2">
+                    <BarChart2 className="w-4 h-4 text-blue-400 shrink-0" />
+                    <p className="font-body text-sm font-bold text-blue-200">🛠️ Coba Sendiri — Buat Diagram Batang</p>
+                  </div>
+
+                  <div className="p-4 space-y-4">
+                    <p className="font-body text-xs text-white/55 leading-relaxed">
+                      Isi tabel dengan data kamu, tambah atau hapus baris sesuai kebutuhan, lalu klik <strong className="text-blue-300">Konversi ke Diagram Batang</strong> untuk melihat hasilnya secara animasi!
+                    </p>
+
+                    {/* Table */}
+                    <div className="rounded-lg overflow-hidden border border-slate-600/50">
+                      <div className="grid bg-blue-950/60" style={{ gridTemplateColumns: "1fr 120px 36px" }}>
+                        <div className="px-3 py-2 font-body text-xs font-bold text-blue-300 uppercase tracking-wide">Kategori / Label</div>
+                        <div className="px-3 py-2 font-body text-xs font-bold text-blue-300 uppercase tracking-wide">Nilai</div>
+                        <div />
+                      </div>
+                      <div className="divide-y divide-slate-700/40">
+                        {tableRows.map((row) => (
+                          <div key={row.id} className="grid items-center gap-2 px-2 py-1.5 bg-slate-900/30" style={{ gridTemplateColumns: "1fr 120px 36px" }}>
+                            <input
+                              type="text"
+                              value={row.label}
+                              onChange={(e) => updateRow(row.id, "label", e.target.value)}
+                              placeholder="Contoh: Pramuka"
+                              className="w-full bg-slate-800/60 border border-slate-600/50 rounded px-2 py-1.5 text-xs font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-blue-400/60 transition-colors"
+                            />
+                            <input
+                              type="number"
+                              value={row.value}
+                              onChange={(e) => updateRow(row.id, "value", e.target.value)}
+                              placeholder="0"
+                              min="0"
+                              className="w-full bg-slate-800/60 border border-slate-600/50 rounded px-2 py-1.5 text-xs font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-blue-400/60 transition-colors"
+                            />
+                            <button
+                              onClick={() => removeRow(row.id)}
+                              disabled={tableRows.length <= 2}
+                              className="w-8 h-8 flex items-center justify-center rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 disabled:opacity-25 disabled:cursor-not-allowed transition-colors text-sm font-bold"
+                            >✕</button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action buttons */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        onClick={addRow}
+                        disabled={tableRows.length >= 10}
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-700/60 border border-slate-500/40 text-white/75 text-xs font-body font-semibold hover:bg-slate-600/60 hover:border-slate-400/50 disabled:opacity-35 disabled:cursor-not-allowed transition-all"
+                      >
+                        ＋ Tambah Baris
+                        {tableRows.length >= 10 && <span className="text-white/30">(maks 10)</span>}
+                      </button>
+
+                      <button
+                        onClick={convertToChart}
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 border border-blue-500/50 text-white text-xs font-body font-bold hover:bg-blue-500 active:scale-95 transition-all shadow-lg shadow-blue-500/20"
+                      >
+                        <BarChart2 className="w-3.5 h-3.5" />
+                        Konversi ke Diagram Batang
+                      </button>
+
+                      {chartVisible && (
+                        <button
+                          onClick={resetChart}
+                          className="flex items-center gap-1 px-3 py-2 rounded-lg bg-slate-700/50 border border-slate-600/40 text-white/50 text-xs font-body hover:bg-slate-600/50 hover:text-white/70 transition-all"
+                        >↺ Reset</button>
+                      )}
+                    </div>
+
+                    {/* Animated Chart Result */}
+                    {chartVisible && chartData.length > 0 && (() => {
+                      const maxVal = Math.max(...chartData.map(d => d.value), 1);
+                      const total  = chartData.reduce((s, d) => s + d.value, 0);
+                      const biggest = chartData.reduce((a, b) => a.value >= b.value ? a : b);
+                      const smallest = chartData.reduce((a, b) => a.value <= b.value ? a : b);
+                      const ySteps = [maxVal, Math.round(maxVal * 0.75), Math.round(maxVal * 0.5), Math.round(maxVal * 0.25), 0];
+                      return (
+                        <div className="bg-slate-900/60 border border-blue-500/20 rounded-xl p-4 space-y-3">
+                          <p className="font-body text-xs font-bold text-blue-300 text-center uppercase tracking-wider">📊 Hasil Diagram Batang</p>
+
+                          {/* Chart canvas */}
+                          <div className="relative" style={{ height: "200px" }}>
+                            {/* Y-axis labels */}
+                            <div className="absolute left-0 top-0 bottom-6 flex flex-col justify-between" style={{ width: "30px" }}>
+                              {ySteps.map((v) => (
+                                <span key={v} className="font-body text-white/35 text-right pr-1 leading-none" style={{ fontSize: "9px" }}>{v}</span>
+                              ))}
+                            </div>
+                            {/* Grid lines */}
+                            <div className="absolute top-0 bottom-6 right-0" style={{ left: "32px" }}>
+                              {[0, 0.25, 0.5, 0.75, 1].map((r) => (
+                                <div key={r} className="absolute w-full border-t border-slate-700/40" style={{ top: `${r * 100}%` }} />
+                              ))}
+                            </div>
+                            {/* Bars */}
+                            <div className="absolute top-0 bottom-6 right-0 flex items-end gap-1.5 px-1" style={{ left: "34px" }}>
+                              {chartData.map((item, idx) => {
+                                const color = BAR_COLORS[idx % BAR_COLORS.length];
+                                const heightPct = (item.value / maxVal) * 100;
+                                return (
+                                  <div key={`${item.label}-${idx}`} className="flex flex-col items-center justify-end flex-1 h-full">
+                                    <span
+                                      className="font-body font-semibold text-white/80 mb-0.5"
+                                      style={{ fontSize: "10px", opacity: chartAnimated ? 1 : 0, transition: "opacity 0.4s ease 0.6s" }}
+                                    >{item.value}</span>
+                                    <div
+                                      className={`w-full ${color.bg} rounded-t-md`}
+                                      style={{
+                                        height: chartAnimated ? `${heightPct}%` : "0%",
+                                        transition: `height 0.65s cubic-bezier(0.34,1.56,0.64,1) ${0.05 * idx}s`,
+                                        minHeight: chartAnimated && item.value > 0 ? "4px" : "0px",
+                                      }}
+                                    />
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            {/* X-axis labels */}
+                            <div className="absolute bottom-0 right-0 flex" style={{ left: "34px", height: "22px" }}>
+                              {chartData.map((item, idx) => (
+                                <div key={`lbl-${idx}`} className="flex-1 flex items-end justify-center pb-0.5">
+                                  <span className="font-body text-white/50 text-center leading-tight" style={{ fontSize: "9px" }}>{item.label}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Color legend */}
+                          <div className="flex flex-wrap gap-2 justify-center pt-1">
+                            {chartData.map((item, idx) => {
+                              const color = BAR_COLORS[idx % BAR_COLORS.length];
+                              return (
+                                <div key={`leg-${idx}`} className="flex items-center gap-1 text-xs font-body text-white/55">
+                                  <div className={`w-2.5 h-2.5 rounded-sm ${color.bg} shrink-0`} />
+                                  <span>{item.label}: <strong className={color.text}>{item.value}</strong></span>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Stats row */}
+                          <div className="grid grid-cols-3 gap-2 pt-1">
+                            <div className="bg-blue-900/25 border border-blue-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>TERBESAR</p>
+                              <p className="font-body text-blue-300 font-bold text-sm mt-0.5">{biggest.value}</p>
+                              <p className="font-body text-white/40 leading-tight mt-0.5" style={{ fontSize: "9px" }}>{biggest.label}</p>
+                            </div>
+                            <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>TOTAL</p>
+                              <p className="font-body text-green-300 font-bold text-sm mt-0.5">{total}</p>
+                              <p className="font-body text-white/40 leading-tight mt-0.5" style={{ fontSize: "9px" }}>{chartData.length} data</p>
+                            </div>
+                            <div className="bg-orange-900/25 border border-orange-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>TERKECIL</p>
+                              <p className="font-body text-orange-300 font-bold text-sm mt-0.5">{smallest.value}</p>
+                              <p className="font-body text-white/40 leading-tight mt-0.5" style={{ fontSize: "9px" }}>{smallest.label}</p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
                 </div>
 
