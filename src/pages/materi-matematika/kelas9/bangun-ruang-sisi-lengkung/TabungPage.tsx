@@ -1209,39 +1209,6 @@ const TabungPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    {
-      title: "Pengantar",
-      icon: "🎯",
-      content: (
-        <div className="space-y-4 font-body">
-          <div className="bg-card/60 border border-border rounded-xl p-4 text-sm text-white/75 leading-relaxed">
-            <p>
-              Dari kaleng minuman di kulkas hingga tangki air di atap rumah — semua itu berbentuk{" "}
-              <strong className="text-cyan-300">tabung</strong>! Di sini kamu akan mempelajari semua
-              tentang tabung: unsur-unsurnya, cara membuka jaring-jaringnya, serta menghitung{" "}
-              <strong className="text-orange-300">luas permukaan</strong> dan{" "}
-              <strong className="text-blue-300">volume</strong>-nya secara lengkap.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {[
-              { icon: "⭕", label: "2 Sisi Lingkaran", color: "text-cyan-300" },
-              { icon: "🌀", label: "1 Selimut Lengkung", color: "text-orange-300" },
-              { icon: "📏", label: "Jari-jari (r)", color: "text-yellow-300" },
-              { icon: "📐", label: "Tinggi (t)", color: "text-green-300" },
-              { icon: "🎨", label: "L = 2πr² + 2πrt", color: "text-blue-300" },
-              { icon: "📦", label: "V = πr²t", color: "text-violet-300" },
-            ].map(({ icon, label, color }) => (
-              <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-1">
-                <span className="text-2xl">{icon}</span>
-                <span className={`text-xs font-semibold font-body text-center ${color}`}>{label}</span>
-              </div>
-            ))}
-          </div>
-          <InteractiveCylinder3D />
-        </div>
-      ),
-    },
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
     {
       title: "Contoh Soal — Luas Permukaan",
