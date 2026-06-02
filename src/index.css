@@ -792,6 +792,106 @@
 .theme-white .katex { color: #0f172a; }
 
 /* ════════════════════════════════════════════════
+   THEME WHITE — SVG ICONS, GRADIENTS & IMAGES
+   Extra fixes so nothing is invisible on pure white
+   ════════════════════════════════════════════════ */
+
+/* ── SVG fill/stroke white → dark navy (white fills are invisible on white bg) ── */
+.light-mode .fill-white   { fill: #0f172a !important; }
+.light-mode .stroke-white { stroke: #0f172a !important; }
+.theme-white .fill-white  { fill: #1e3a8a !important; }
+.theme-white .stroke-white { stroke: #1e3a8a !important; }
+
+/* ── Tailwind gradient via-white: completely invisible on white → readable slate ── */
+.light-mode .via-white { --tw-gradient-via: #94a3b8 var(--tw-gradient-via-position) !important; }
+.theme-white .via-white { --tw-gradient-via: #64748b var(--tw-gradient-via-position) !important; }
+
+/* ── from-white / to-white gradient stops → soft visible slate ── */
+.theme-white .from-white { --tw-gradient-from: #e2e8f0 var(--tw-gradient-from-position) !important; }
+.theme-white .to-white   { --tw-gradient-to:   #e2e8f0 var(--tw-gradient-to-position)   !important; }
+
+/* ── Light "from-*" gradient stops (300 level) → deep readable variants ── */
+.theme-white .from-cyan-300    { --tw-gradient-from: #075985 var(--tw-gradient-from-position) !important; }
+.theme-white .from-sky-300     { --tw-gradient-from: #075985 var(--tw-gradient-from-position) !important; }
+.theme-white .from-blue-300    { --tw-gradient-from: #1e3a8a var(--tw-gradient-from-position) !important; }
+.theme-white .from-indigo-300  { --tw-gradient-from: #312e81 var(--tw-gradient-from-position) !important; }
+.theme-white .from-violet-300  { --tw-gradient-from: #5b21b6 var(--tw-gradient-from-position) !important; }
+.theme-white .from-purple-300  { --tw-gradient-from: #6b21a8 var(--tw-gradient-from-position) !important; }
+.theme-white .from-fuchsia-300 { --tw-gradient-from: #701a75 var(--tw-gradient-from-position) !important; }
+.theme-white .from-pink-300    { --tw-gradient-from: #9d174d var(--tw-gradient-from-position) !important; }
+.theme-white .from-rose-300    { --tw-gradient-from: #9f1239 var(--tw-gradient-from-position) !important; }
+.theme-white .from-amber-300   { --tw-gradient-from: #92400e var(--tw-gradient-from-position) !important; }
+.theme-white .from-yellow-300  { --tw-gradient-from: #78350f var(--tw-gradient-from-position) !important; }
+.theme-white .from-orange-300  { --tw-gradient-from: #9a3412 var(--tw-gradient-from-position) !important; }
+.theme-white .from-red-300     { --tw-gradient-from: #991b1b var(--tw-gradient-from-position) !important; }
+.theme-white .from-emerald-300 { --tw-gradient-from: #047857 var(--tw-gradient-from-position) !important; }
+.theme-white .from-teal-300    { --tw-gradient-from: #115e59 var(--tw-gradient-from-position) !important; }
+.theme-white .from-green-300   { --tw-gradient-from: #15803d var(--tw-gradient-from-position) !important; }
+.theme-white .from-lime-300    { --tw-gradient-from: #3f6212 var(--tw-gradient-from-position) !important; }
+
+/* ── Light "via-*" gradient stops (200–300 level) → deep readable variants ── */
+.theme-white .via-cyan-200     { --tw-gradient-via: #0369a1 var(--tw-gradient-via-position) !important; }
+.theme-white .via-cyan-300     { --tw-gradient-via: #075985 var(--tw-gradient-via-position) !important; }
+.theme-white .via-blue-300     { --tw-gradient-via: #1e3a8a var(--tw-gradient-via-position) !important; }
+.theme-white .via-blue-200     { --tw-gradient-via: #1e40af var(--tw-gradient-via-position) !important; }
+.theme-white .via-violet-300   { --tw-gradient-via: #5b21b6 var(--tw-gradient-via-position) !important; }
+.theme-white .via-purple-200   { --tw-gradient-via: #6d28d9 var(--tw-gradient-via-position) !important; }
+.theme-white .via-purple-300   { --tw-gradient-via: #6b21a8 var(--tw-gradient-via-position) !important; }
+.theme-white .via-fuchsia-200  { --tw-gradient-via: #701a75 var(--tw-gradient-via-position) !important; }
+.theme-white .via-amber-200    { --tw-gradient-via: #92400e var(--tw-gradient-via-position) !important; }
+.theme-white .via-amber-300    { --tw-gradient-via: #92400e var(--tw-gradient-via-position) !important; }
+.theme-white .via-yellow-200   { --tw-gradient-via: #854d0e var(--tw-gradient-via-position) !important; }
+.theme-white .via-yellow-300   { --tw-gradient-via: #78350f var(--tw-gradient-via-position) !important; }
+.theme-white .via-orange-300   { --tw-gradient-via: #9a3412 var(--tw-gradient-via-position) !important; }
+.theme-white .via-green-300    { --tw-gradient-via: #15803d var(--tw-gradient-via-position) !important; }
+.theme-white .via-teal-300     { --tw-gradient-via: #115e59 var(--tw-gradient-via-position) !important; }
+
+/* ── Light "to-*" gradient stops (200–300 level) → deep readable variants ── */
+.theme-white .to-cyan-300      { --tw-gradient-to: #075985 var(--tw-gradient-to-position) !important; }
+.theme-white .to-sky-300       { --tw-gradient-to: #075985 var(--tw-gradient-to-position) !important; }
+.theme-white .to-blue-300      { --tw-gradient-to: #1e3a8a var(--tw-gradient-to-position) !important; }
+.theme-white .to-indigo-300    { --tw-gradient-to: #312e81 var(--tw-gradient-to-position) !important; }
+.theme-white .to-violet-300    { --tw-gradient-to: #5b21b6 var(--tw-gradient-to-position) !important; }
+.theme-white .to-purple-200    { --tw-gradient-to: #6d28d9 var(--tw-gradient-to-position) !important; }
+.theme-white .to-purple-300    { --tw-gradient-to: #6b21a8 var(--tw-gradient-to-position) !important; }
+.theme-white .to-fuchsia-300   { --tw-gradient-to: #701a75 var(--tw-gradient-to-position) !important; }
+.theme-white .to-pink-300      { --tw-gradient-to: #9d174d var(--tw-gradient-to-position) !important; }
+.theme-white .to-rose-300      { --tw-gradient-to: #9f1239 var(--tw-gradient-to-position) !important; }
+.theme-white .to-amber-300     { --tw-gradient-to: #92400e var(--tw-gradient-to-position) !important; }
+.theme-white .to-yellow-300    { --tw-gradient-to: #78350f var(--tw-gradient-to-position) !important; }
+.theme-white .to-orange-300    { --tw-gradient-to: #9a3412 var(--tw-gradient-to-position) !important; }
+.theme-white .to-green-300     { --tw-gradient-to: #15803d var(--tw-gradient-to-position) !important; }
+.theme-white .to-teal-300      { --tw-gradient-to: #115e59 var(--tw-gradient-to-position) !important; }
+.theme-white .to-emerald-300   { --tw-gradient-to: #047857 var(--tw-gradient-to-position) !important; }
+
+/* ── gradient-neon (used in QuizPage title): bright neon → dark readable ── */
+.light-mode .gradient-neon {
+  background-image: linear-gradient(to right, #0369a1, #6d28d9) !important;
+}
+.theme-white .gradient-neon {
+  background-image: linear-gradient(to right, #075985, #5b21b6) !important;
+}
+
+/* ── Images: boost contrast + saturation so they stay vivid and clear on pure white ── */
+.theme-white img {
+  filter: contrast(1.06) saturate(1.12);
+}
+
+/* ── Decorative star/particle dots that are bg-white: convert to tinted ── */
+.theme-white .bg-white {
+  background-color: #ffffff !important;
+}
+.theme-white .bg-white\/5,
+.theme-white .bg-white\/10,
+.theme-white .bg-white\/20 {
+  background-color: rgba(15,23,42,0.06) !important;
+}
+
+/* ── Remaining light-grade inline-colored text: 50/100 shades ── */
+.theme-white .text-white\/5  { color: rgba(15,23,42,0.05) !important; }
+.theme-white .text-white\/8  { color: rgba(15,23,42,0.08) !important; }
+
+/* ════════════════════════════════════════════════
    THEME OCEAN — LAUTAN BIRU — GLOBAL OVERRIDES
    (dark-base theme, but every accent is shifted to
     a cyan / sky / teal ocean palette so the entire
