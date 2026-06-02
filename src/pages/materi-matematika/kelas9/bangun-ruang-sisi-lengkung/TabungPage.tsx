@@ -232,22 +232,22 @@ const SelimutAnimSVG = () => (
   <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto my-2" aria-label="Selimut tabung">
     <defs>
       <style>{`
-        @keyframes selGlow{0%,100%{fill-opacity:0.55;stroke-opacity:1;filter:drop-shadow(0 0 6px #a855f7);}50%{fill-opacity:0.15;stroke-opacity:0.4;filter:drop-shadow(0 0 0 #a855f7);}}
+        @keyframes selGlow{0%,100%{fill-opacity:0.55;stroke-opacity:1;}50%{fill-opacity:0.12;stroke-opacity:0.3;}}
         .sel-a{animation:selGlow 1.6s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Tutup atas — diam, bukan selimut */}
-    <ellipse cx="140" cy="40" rx="80" ry="20" fill="rgba(168,85,247,0.08)" stroke="#a855f760" strokeWidth="1.2"/>
-    {/* SELIMUT — path mengikuti kurva elips atas & bawah */}
+    {/* SELIMUT — path mengikuti kurva elips atas & bawah, tanpa drop-shadow */}
     <path
       d="M 60,40 A 80,20 0 0,1 220,40 L 220,140 A 80,20 0 0,0 60,140 Z"
       fill="#a855f7"
       stroke="#a855f7"
-      strokeWidth="2"
+      strokeWidth="1.5"
       className="sel-a"
     />
-    {/* Tutup bawah — diam */}
-    <ellipse cx="140" cy="140" rx="80" ry="20" fill="rgba(168,85,247,0.08)" stroke="#a855f760" strokeWidth="1.2"/>
+    {/* Rim tutup atas — hanya busur atas (tidak overlap dengan selimut) */}
+    <path d="M 60,40 A 80,20 0 0,0 220,40" fill="none" stroke="#a855f740" strokeWidth="1.2"/>
+    {/* Rim tutup bawah — hanya busur bawah */}
+    <path d="M 60,140 A 80,20 0 0,1 220,140" fill="none" stroke="#a855f740" strokeWidth="1.2"/>
     <text x="140" y="92" fill="#e9d5ff" fontSize="11" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT</text>
     <text x="140" y="108" fill="#c4b5fd" fontSize="10" fontFamily="monospace" textAnchor="middle">L = 2πr × t</text>
     <text x="140" y="165" fill="#a78bfa" fontSize="10" fontFamily="monospace" textAnchor="middle">Selimut = "kulit" tabung tanpa tutup</text>
