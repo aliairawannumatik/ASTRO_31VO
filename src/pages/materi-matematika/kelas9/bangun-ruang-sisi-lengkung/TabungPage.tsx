@@ -959,71 +959,85 @@ const sections: Sec[] = [
           termasuk dua tutup lingkaran dan selimutnya.
         </p>
 
-        {/* ── Diagram: hasil pembongkaran tabung ── */}
+        {/* ── Diagram: hasil pembongkaran tabung (vertikal) ── */}
         <div className="rounded-xl overflow-hidden border border-purple-700/40">
-          <svg viewBox="0 0 400 195" style={{ width:"100%", display:"block" }} xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="195" fill="rgba(8,12,30,0.92)"/>
+          <svg viewBox="0 0 400 250" style={{ width:"100%", display:"block" }} xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="250" fill="rgba(8,12,30,0.92)"/>
 
-            {/* title */}
-            <text x="200" y="16" fill="#a78bfa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+            {/* TITLE */}
+            <text x="200" y="15" fill="#a78bfa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
               Tabung Dibongkar → Komponen Luas Permukaan
             </text>
 
-            {/* ── LEFT CIRCLE: tutup bawah, cx=50 cy=98 r=34 ── */}
-            <circle cx="50" cy="98" r="34" fill="rgba(99,102,241,0.42)" stroke="#818cf8" strokeWidth="1.8"/>
-            {/* r-line */}
-            <line x1="50" y1="98" x2="84" y2="98" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
-            <circle cx="50" cy="98" r="2.2" fill="#f59e0b"/>
-            <circle cx="84" cy="98" r="2.2" fill="#f59e0b"/>
-            <text x="67" y="93" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-            {/* label inside */}
-            <text x="50" y="99" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup</text>
-            <text x="50" y="109" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">bawah</text>
-            {/* area annotation below */}
-            <text x="50" y="151" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="middle">πr²</text>
+            {/* ══════════════════════════════════════
+                TOP CIRCLE — tutup atas
+                cx=200 cy=48 r=28
+            ══════════════════════════════════════ */}
+            <circle cx="200" cy="48" r="28" fill="rgba(99,102,241,0.42)" stroke="#818cf8" strokeWidth="1.8"/>
+            {/* r-line inside */}
+            <line x1="200" y1="48" x2="228" y2="48" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
+            <circle cx="200" cy="48" r="2" fill="#f59e0b"/>
+            <circle cx="228" cy="48" r="2" fill="#f59e0b"/>
+            <text x="214" y="44" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+            {/* label */}
+            <text x="200" y="51" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup atas</text>
+            {/* area annotation — right of circle */}
+            <text x="242" y="51" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="start">= πr²</text>
 
-            {/* ── PLUS ── */}
-            <text x="95" y="103" fill="#475569" fontSize="14" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
+            {/* "+" sign — left, between top circle and rect */}
+            <text x="28" y="83" fill="#64748b" fontSize="13" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
+            {/* dashed vertical connector */}
+            <line x1="200" y1="76" x2="200" y2="84" stroke="rgba(168,85,247,0.35)" strokeWidth="1" strokeDasharray="2,2"/>
 
-            {/* ── RECTANGLE: selimut, x=105 y=64 w=186 h=68 (cy=98) ── */}
-            <rect x="105" y="64" width="186" height="68" rx="4" fill="rgba(168,85,247,0.32)" stroke="#a855f7" strokeWidth="1.8"/>
-            {/* 2πr dim above */}
-            <line x1="105" y1="57" x2="291" y2="57" stroke="#a855f7" strokeWidth="1"/>
-            <line x1="105" y1="53" x2="105" y2="61" stroke="#a855f7" strokeWidth="1"/>
-            <line x1="291" y1="53" x2="291" y2="61" stroke="#a855f7" strokeWidth="1"/>
-            <text x="198" y="52" fill="#d8b4fe" fontSize="9.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle">← 2πr →</text>
-            {/* t dim right */}
-            <line x1="298" y1="64" x2="298" y2="132" stroke="#22c55e" strokeWidth="1.4"/>
-            <line x1="294" y1="64"  x2="302" y2="64"  stroke="#22c55e" strokeWidth="1.2"/>
-            <line x1="294" y1="132" x2="302" y2="132" stroke="#22c55e" strokeWidth="1.2"/>
-            <text x="309" y="102" fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">t</text>
-            {/* labels inside */}
-            <text x="198" y="94" fill="#e9d5ff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SELIMUT</text>
-            <text x="198" y="107" fill="#c4b5fd" fontSize="7.5" fontFamily="monospace" textAnchor="middle">(Persegi Panjang)</text>
-            {/* area below */}
-            <text x="198" y="151" fill="#a855f7" fontSize="9.5" fontFamily="monospace" textAnchor="middle">2πr · t</text>
+            {/* 2πr dimension — between top circle and rect */}
+            <line x1="106" y1="83" x2="294" y2="83" stroke="#a855f7" strokeWidth="1"/>
+            <line x1="106" y1="79" x2="106" y2="87" stroke="#a855f7" strokeWidth="1"/>
+            <line x1="294" y1="79" x2="294" y2="87" stroke="#a855f7" strokeWidth="1"/>
+            <text x="200" y="79" fill="#d8b4fe" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">← 2πr →</text>
 
-            {/* ── PLUS ── */}
-            <text x="320" y="103" fill="#475569" fontSize="14" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
+            {/* ══════════════════════════════════════
+                RECTANGLE — selimut
+                x=106 y=90 w=188 h=62
+            ══════════════════════════════════════ */}
+            <rect x="106" y="90" width="188" height="62" rx="4" fill="rgba(168,85,247,0.32)" stroke="#a855f7" strokeWidth="1.8"/>
+            {/* t dimension — right of rect */}
+            <line x1="302" y1="90"  x2="302" y2="152" stroke="#22c55e" strokeWidth="1.4"/>
+            <line x1="298" y1="90"  x2="306" y2="90"  stroke="#22c55e" strokeWidth="1.2"/>
+            <line x1="298" y1="152" x2="306" y2="152" stroke="#22c55e" strokeWidth="1.2"/>
+            <text x="314" y="125" fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">t</text>
+            {/* labels inside rect */}
+            <text x="200" y="117" fill="#e9d5ff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SELIMUT</text>
+            <text x="200" y="129" fill="#c4b5fd" fontSize="7.5" fontFamily="monospace" textAnchor="middle">(Persegi Panjang)</text>
+            {/* area annotation — right of rect */}
+            <text x="322" y="147" fill="#a855f7" fontSize="9.5" fontFamily="monospace" textAnchor="start">= 2πr·t</text>
 
-            {/* ── RIGHT CIRCLE: tutup atas, cx=358 cy=98 r=34 ── */}
-            <circle cx="358" cy="98" r="34" fill="rgba(99,102,241,0.42)" stroke="#818cf8" strokeWidth="1.8"/>
-            {/* r-line */}
-            <line x1="358" y1="98" x2="392" y2="98" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
-            <circle cx="358" cy="98" r="2.2" fill="#f59e0b"/>
-            <circle cx="392" cy="98" r="2.2" fill="#f59e0b"/>
-            <text x="375" y="93" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-            {/* label inside */}
-            <text x="358" y="99" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup</text>
-            <text x="358" y="109" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">atas</text>
-            {/* area annotation below */}
-            <text x="358" y="151" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="middle">πr²</text>
+            {/* "+" sign — left, between rect and bottom circle */}
+            <text x="28" y="170" fill="#64748b" fontSize="13" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
+            {/* dashed vertical connector */}
+            <line x1="200" y1="152" x2="200" y2="160" stroke="rgba(168,85,247,0.35)" strokeWidth="1" strokeDasharray="2,2"/>
 
-            {/* ── total formula bar ── */}
-            <rect x="22" y="162" width="356" height="24" rx="6"
-              fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.38)" strokeWidth="1"/>
-            <text x="200" y="179" fill="#fbbf24" fontSize="9.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
-              L = πr² + 2πrt + πr²  =  2πr² + 2πrt  =  2πr(r + t)
+            {/* ══════════════════════════════════════
+                BOTTOM CIRCLE — tutup bawah
+                cx=200 cy=188 r=28
+            ══════════════════════════════════════ */}
+            <circle cx="200" cy="188" r="28" fill="rgba(99,102,241,0.42)" stroke="#818cf8" strokeWidth="1.8"/>
+            {/* r-line inside */}
+            <line x1="200" y1="188" x2="228" y2="188" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
+            <circle cx="200" cy="188" r="2" fill="#f59e0b"/>
+            <circle cx="228" cy="188" r="2" fill="#f59e0b"/>
+            <text x="214" y="184" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+            {/* label */}
+            <text x="200" y="191" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup bawah</text>
+            {/* area annotation — right of circle */}
+            <text x="242" y="191" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="start">= πr²</text>
+
+            {/* ══════════════════════════════════════
+                TOTAL FORMULA BAR
+            ══════════════════════════════════════ */}
+            <rect x="20" y="226" width="360" height="18" rx="5"
+              fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.36)" strokeWidth="1"/>
+            <text x="200" y="239" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+              L = πr² + 2πrt + πr²  =  2πr² + 2πrt  =  2πr(r+t)
             </text>
           </svg>
         </div>
