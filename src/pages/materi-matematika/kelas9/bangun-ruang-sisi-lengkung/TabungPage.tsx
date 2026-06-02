@@ -423,10 +423,11 @@ const CylinderNetAnimation = () => {
   const dragRef = useRef({ sx: 0, sy: 0, brx: -22, bry: 28 });
   const hasDragged = useRef(false);
 
-  const [topOpen, setTopOpen] = useState(false);
-  const [botOpen, setBotOpen] = useState(false);
-  const [selOpen, setSelOpen] = useState(false);
-  const anyOpen = topOpen || botOpen || selOpen;
+  type OS = boolean | "closing";
+  const [topOpen, setTopOpen] = useState<OS>(false);
+  const [botOpen, setBotOpen] = useState<OS>(false);
+  const [selOpen, setSelOpen] = useState<OS>(false);
+  const anyOpen = topOpen !== false || botOpen !== false || selOpen !== false;
 
   const onMD = (e: React.MouseEvent) => {
     hasDragged.current = false;
@@ -522,15 +523,18 @@ const CylinderNetAnimation = () => {
   const topVisible = rotX < 10;
   const botVisible = rotX > -60;
 
-  const TRANS = "transform 0.75s cubic-bezier(0.4,0,0.2,1)";
-
-  const tryToggle = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
-    if (hasDragged.current) return;
+  const tryToggle = (state: OS, setter: React.Dispatch<React.SetStateAction<OS>>) => {
+    if (hasDragged.current || state === "closing") return;
     playPopSound();
-    setter(v => !v);
+    setter(state === false ? true : "closing");
   };
 
-  const resetAll = () => { playPopSound(); setTopOpen(false); setBotOpen(false); setSelOpen(false); };
+  const resetAll = () => {
+    playPopSound();
+    if (topOpen === true) setTopOpen("closing");
+    if (botOpen === true) setBotOpen("closing");
+    if (selOpen === true) setSelOpen("closing");
+  };
 
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
@@ -572,8 +576,27 @@ const CylinderNetAnimation = () => {
               100% { transform: perspective(320px) rotateX(0deg); }
             }
             @keyframes netFadeIn { from{opacity:0} to{opacity:1} }
+            @keyframes netUnrollClose {
+              from { transform: perspective(400px) rotateY(0deg);   opacity:1; }
+              to   { transform: perspective(400px) rotateY(-90deg); opacity:0; }
+            }
+            @keyframes hingeCapTopClose {
+              0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
+              30%  { transform: perspective(320px) rotateX(6deg); }
+              100% { transform: perspective(320px) rotateX(-90deg); opacity:0.1; }
+            }
+            @keyframes hingeCapBotClose {
+              0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
+              30%  { transform: perspective(320px) rotateX(-6deg); }
+              100% { transform: perspective(320px) rotateX(90deg);  opacity:0.1; }
+            }
             .net-unroll {
               animation: netUnroll 1.3s cubic-bezier(0.22,0,0.1,1) both;
+              transform-box:fill-box;
+              transform-origin:left center;
+            }
+            .net-unroll-close {
+              animation: netUnrollClose 1.0s cubic-bezier(0.4,0,0.8,1) both;
               transform-box:fill-box;
               transform-origin:left center;
             }
@@ -582,8 +605,18 @@ const CylinderNetAnimation = () => {
               transform-box:fill-box;
               transform-origin:center bottom;
             }
+            .hinge-top-close {
+              animation: hingeCapTopClose 1.1s cubic-bezier(0.4,0,0.8,1) both;
+              transform-box:fill-box;
+              transform-origin:center bottom;
+            }
             .hinge-bot {
               animation: hingeCapBot 1.5s cubic-bezier(0.22,0,0.1,1) both;
+              transform-box:fill-box;
+              transform-origin:center top;
+            }
+            .hinge-bot-close {
+              animation: hingeCapBotClose 1.1s cubic-bezier(0.4,0,0.8,1) both;
               transform-box:fill-box;
               transform-origin:center top;
             }
@@ -599,29 +632,31 @@ const CylinderNetAnimation = () => {
         </g>
 
         {/* ── SELIMUT (body panels) — click to unroll into rectangle ── */}
-        <g onClick={() => tryToggle(setSelOpen)} style={{ cursor: "pointer" }}>
-          {/* 3D visible panels — fade out when selOpen */}
-          <g style={{ opacity: selOpen ? 0.06 : 1, transition: "opacity 0.45s ease" }}>
+        <g onClick={() => tryToggle(selOpen, setSelOpen)} style={{ cursor: "pointer" }}>
+          {/* 3D visible panels — fade out when selOpen is true or closing */}
+          <g style={{ opacity: selOpen !== false ? 0.06 : 1, transition: "opacity 0.45s ease" }}>
             {sortedPanels.map((p, i) =>
               p.visible && <polygon key={i} points={p.points} fill={p.fill} stroke={p.stroke} strokeWidth="0.8" />
             )}
           </g>
 
-          {/* Unrolled rectangle — appears when selOpen */}
-          {selOpen && (() => {
+          {/* Unrolled rectangle — shown when open or closing */}
+          {selOpen !== false && (() => {
             const rx = CYL_CX - 118, ry = CYL_CY - CYL_H / 2, rw = 236, rh = CYL_H;
+            const isClosing = selOpen === "closing";
             return (
               <>
                 <rect x={rx} y={ry} width={rw} height={rh} rx={3}
                   fill="rgba(168,85,247,0.28)" stroke="#a855f7" strokeWidth="1.8"
-                  className="net-unroll" />
-                <g className="net-fadein">
+                  className={isClosing ? "net-unroll-close" : "net-unroll"}
+                  onAnimationEnd={isClosing ? () => setSelOpen(false) : undefined}
+                />
+                <g className={isClosing ? "" : "net-fadein"}
+                  style={{ opacity: isClosing ? 0 : undefined, transition: isClosing ? "opacity 0.2s" : undefined }}>
                   <text x={CYL_CX} y={CYL_CY - 2} fill="#e9d5ff" fontSize="10" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT TABUNG</text>
                   <text x={CYL_CX} y={CYL_CY + 13} fill="#c4b5fd" fontSize="9" fontFamily="monospace" textAnchor="middle">p = 2πr &nbsp; · &nbsp; l = t</text>
-                  {/* Width arrow */}
                   <line x1={rx} y1={ry - 13} x2={rx + rw} y2={ry - 13} stroke="#a855f7" strokeWidth="1" markerStart="url(#nArrL)" markerEnd="url(#nArrR)" />
                   <text x={CYL_CX} y={ry - 16} fill="#a855f7" fontSize="8" fontFamily="monospace" textAnchor="middle">2πr (keliling alas)</text>
-                  {/* Height dim */}
                   <line x1={rx + rw + 10} y1={ry}      x2={rx + rw + 10} y2={ry + rh} stroke="#a855f7" strokeWidth="1" />
                   <line x1={rx + rw + 5}  y1={ry}      x2={rx + rw + 15} y2={ry}      stroke="#a855f7" strokeWidth="1" />
                   <line x1={rx + rw + 5}  y1={ry + rh} x2={rx + rw + 15} y2={ry + rh} stroke="#a855f7" strokeWidth="1" />
@@ -657,41 +692,45 @@ const CylinderNetAnimation = () => {
 
           return caps.map(({ key, open, set, pts, c, vis, netCy, col, fillO, stroke, lbl }) => {
             const isTop = key === "top";
+            const isClosing = open === "closing";
+            const isOpen    = open === true;
+            const showFlat  = isOpen || isClosing;
+            const hingeOpenClass  = isTop ? "hinge-top"       : "hinge-bot";
+            const hingeCloseClass = isTop ? "hinge-top-close" : "hinge-bot-close";
             return (
-              <g key={key} onClick={(e) => { e.stopPropagation(); tryToggle(set); }} style={{ cursor: "pointer" }}>
+              <g key={key} onClick={(e) => { e.stopPropagation(); tryToggle(open, set); }} style={{ cursor: "pointer" }}>
                 {/* Invisible hitbox */}
                 <ellipse cx={c.x} cy={c.y} rx={54} ry={18} fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
-                {/* 3D ellipse polygon */}
+                {/* 3D ellipse polygon — hidden while open or closing, fades back in after close */}
                 <polygon points={pts} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2"
-                  style={{ opacity: open ? 0 : vis ? 1 : 0, transition: "opacity 0.35s" }} />
-                {!open && vis && !anyOpen && (
+                  style={{ opacity: showFlat ? 0 : vis ? 1 : 0, transition: "opacity 0.35s" }} />
+                {!showFlat && vis && !anyOpen && (
                   <polygon points={pts} fill="none" stroke="rgba(165,180,252,0.4)" strokeWidth="2"
                     style={{ pointerEvents: "none" }} />
                 )}
 
-                {/* Flat circle — fixed at net position attached to selimut edge */}
-                {open && (
-                  <g className={isTop ? "hinge-top" : "hinge-bot"} style={{ pointerEvents: "none" }}>
+                {/* Flat circle — shown while open or animating closed */}
+                {showFlat && (
+                  <g
+                    className={isClosing ? hingeCloseClass : hingeOpenClass}
+                    onAnimationEnd={isClosing ? () => set(false) : undefined}
+                    style={{ pointerEvents: "none" }}
+                  >
                     {/* Dashed connecting line: circle edge → selimut rect edge */}
                     <line
                       x1={CYL_CX} y1={isTop ? selTop : selBot}
                       x2={CYL_CX} y2={isTop ? netCy + NET_R : netCy - NET_R}
                       stroke={stroke} strokeWidth="1" strokeDasharray="3,2" opacity="0.5"
                     />
-                    {/* The flat circle */}
                     <circle cx={CYL_CX} cy={netCy} r={NET_R}
                       fill={fillO} stroke={stroke} strokeWidth="1.5" />
-                    {/* Radius line — horizontal through center */}
                     <circle cx={CYL_CX} cy={netCy} r="2.5" fill="#fbbf24" />
                     <line x1={CYL_CX} y1={netCy} x2={CYL_CX + NET_R} y2={netCy}
                       stroke="#fbbf24" strokeWidth="1.2" />
-                    {/* "r" label — outside the circle to the right, vertically centred */}
                     <text x={CYL_CX + NET_R + 7} y={netCy + 4}
                       fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
-                    {/* Main label — inside circle, upper half */}
                     <text x={CYL_CX} y={netCy - 10}
                       fill={col} fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">{lbl}</text>
-                    {/* Formula — inside circle, lower half */}
                     <text x={CYL_CX} y={netCy + 20}
                       fill={col} fontSize="8" fontFamily="monospace" textAnchor="middle">L = πr²</text>
                   </g>
@@ -708,16 +747,16 @@ const CylinderNetAnimation = () => {
       {/* Status badges */}
       <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
         {([
-          { label: "⭕ Tutup Atas", open: topOpen, set: setTopOpen, on: "bg-cyan-900/60 border-cyan-500 text-cyan-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
-          { label: "🌀 Selimut",    open: selOpen, set: setSelOpen, on: "bg-purple-900/60 border-purple-500 text-purple-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
-          { label: "⭕ Alas",       open: botOpen, set: setBotOpen, on: "bg-green-900/60 border-green-500 text-green-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
-        ] as const).map(({ label, open, set, on, off }) => (
+          { label: "⭕ Tutup Atas", state: topOpen, set: setTopOpen, on: "bg-cyan-900/60 border-cyan-500 text-cyan-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
+          { label: "🌀 Selimut",    state: selOpen, set: setSelOpen, on: "bg-purple-900/60 border-purple-500 text-purple-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
+          { label: "⭕ Alas",       state: botOpen, set: setBotOpen, on: "bg-green-900/60 border-green-500 text-green-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
+        ] as const).map(({ label, state, set, on, off }) => (
           <span
             key={label}
-            className={`px-2 py-1 rounded-full border cursor-pointer transition-colors ${open ? on : off}`}
-            onClick={() => { playPopSound(); set((v: boolean) => !v); }}
+            className={`px-2 py-1 rounded-full border cursor-pointer transition-colors ${state === true ? on : state === "closing" ? on + " opacity-50" : off}`}
+            onClick={() => tryToggle(state, set as React.Dispatch<React.SetStateAction<OS>>)}
           >
-            {label}{open ? " ✓" : ""}
+            {label}{state === true ? " ✓" : state === "closing" ? " ↩" : ""}
           </span>
         ))}
       </div>
