@@ -246,28 +246,36 @@ const UnsurBolaSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
-   BOLA PEEL ANIMATION
-   Bola utuh → 4 lingkaran terkelupas satu per satu (RAF-driven)
+   BOLA PEEL ANIMATION  v2 — slow-motion realistic peeling
+   Bola tetap terlihat; tiap kulit terkelupas sebagai elips tipis
+   (tampak miring saat lepas) lalu membentang menjadi lingkaran.
 ───────────────────────────────────────────────────────────── */
 const _bpEase  = (t: number) => 1 - Math.pow(1 - t, 3);
 const _bpLerp  = (a: number, b: number, t: number) => a + (b - a) * t;
 const _bpClamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
-const BP_SCX = 160; const BP_SCY = 110; const BP_SR = 56;
-const BP_CR  = 48;  const BP_DUR = 2200;
+/* Sphere geometry */
+const BP_SCX = 160; const BP_SCY = 112; const BP_SR = 56;
+/* Final circle size and total duration */
+const BP_CR  = 48;  const BP_DUR = 5500;
 
+/*
+ * px,py  = peel origin on sphere surface (where it detaches)
+ * tx,ty  = final resting position
+ * s,e    = global-progress window [0..1]
+ */
 const BP_CIRCLES = [
-  { fill: "rgba(34,211,238,0.78)",  stroke: "#22d3ee", tx: 72,  ty: 64,  s: 0.04, e: 0.40 },
-  { fill: "rgba(139,92,246,0.78)",  stroke: "#a78bfa", tx: 248, ty: 64,  s: 0.27, e: 0.62 },
-  { fill: "rgba(249,115,22,0.78)",  stroke: "#fb923c", tx: 72,  ty: 168, s: 0.49, e: 0.82 },
-  { fill: "rgba(34,197,94,0.78)",   stroke: "#4ade80", tx: 248, ty: 168, s: 0.68, e: 1.00 },
+  { fill:"rgba(34,211,238,0.82)",  stroke:"#22d3ee", px:160, py:62,  tx:72,  ty:66,  s:0.00, e:0.28 },
+  { fill:"rgba(139,92,246,0.82)",  stroke:"#a78bfa", px:208, py:100, tx:248, ty:66,  s:0.24, e:0.52 },
+  { fill:"rgba(249,115,22,0.82)",  stroke:"#fb923c", px:122, py:152, tx:72,  ty:168, s:0.48, e:0.76 },
+  { fill:"rgba(34,197,94,0.82)",   stroke:"#4ade80", px:198, py:152, tx:248, ty:168, s:0.72, e:1.00 },
 ];
 
 const BolaPeelAnimation = () => {
-  const [phase,    setPhase]    = useState<"idle" | "running" | "done">("idle");
+  const [phase,    setPhase]    = useState<"idle"|"running"|"done">("idle");
   const [progress, setProgress] = useState(0);
-  const rafRef  = useRef<number | null>(null);
-  const t0Ref   = useRef<number | null>(null);
+  const rafRef = useRef<number|null>(null);
+  const t0Ref  = useRef<number|null>(null);
 
   const doStart = () => {
     if (phase !== "idle") return;
@@ -293,141 +301,177 @@ const BolaPeelAnimation = () => {
   const isActive = phase !== "idle";
   const isDone   = phase === "done";
 
-  /* Sphere fades as circles appear */
-  const sphereOp    = _bpClamp(1 - progress * 1.8, 0, 1);
-  const sphereScale = _bpClamp(1 - progress * 0.55, 0.45, 1);
+  /* ── Sphere: stays visible until ¾ done, then fades gently ── */
+  const sphereOp = _bpClamp(1 - _bpClamp((progress - 0.60) / 0.28, 0, 1), 0, 1);
 
-  /* Per-circle interpolation */
+  /* ── Per-circle computed values ── */
   const circles = BP_CIRCLES.map(c => {
-    const localT = _bpClamp((progress - c.s) / (c.e - c.s), 0, 1);
-    const t      = _bpEase(localT);
-    return { ...c, cx: _bpLerp(BP_SCX, c.tx, t), cy: _bpLerp(BP_SCY, c.ty, t),
-             r: _bpLerp(0, BP_CR, t), op: t };
+    const raw = _bpClamp((progress - c.s) / (c.e - c.s), 0, 1); // 0..1 within slot
+
+    /* Position: peel-origin → target (ease-out) */
+    const posT = _bpEase(raw);
+    const cx   = _bpLerp(c.px, c.tx, posT);
+    const cy   = _bpLerp(c.py, c.ty, posT);
+
+    /* Shape: starts as a very flat ellipse (perspective of peeling off sphere)
+       ry goes from 0.05*r → full r as it "unfurls" mid-flight.
+       The flattening is delayed by 0.12 and completes by raw=0.72 */
+    const flatRaw = _bpClamp((raw - 0.12) / 0.58, 0, 1);
+    const ry      = _bpLerp(BP_CR * 0.05, BP_CR, _bpEase(flatRaw));
+
+    /* Opacity: quick fade-in at start */
+    const op = _bpClamp(raw / 0.10, 0, 1);
+
+    /* Label opacity: fades in once circle is nearly flat */
+    const labelOp = _bpClamp((raw - 0.72) / 0.22, 0, 1);
+
+    /* Peeled patch on sphere: bright spot that grows at peel origin */
+    const patchRaw = _bpClamp(raw / 0.18, 0, 1);
+    const patchR   = patchRaw * 22;
+    const patchOp  = patchRaw * 0.32;
+
+    return { ...c, cx, cy, rx: BP_CR, ry, op, labelOp, patchR, patchOp, raw };
   });
 
   return (
-    <div style={{ background:"rgba(8,12,30,0.90)", border:"1px solid rgba(139,92,246,0.45)",
+    <div style={{ background:"rgba(6,10,26,0.92)", border:"1px solid rgba(139,92,246,0.48)",
       borderRadius:14, padding:"12px 10px 10px", userSelect:"none" }}>
       <style>{`
         @keyframes bp-glow {
-          0%,100% { filter:drop-shadow(0 0 8px rgba(139,92,246,.55)); }
-          50%     { filter:drop-shadow(0 0 22px rgba(139,92,246,.95)); }
+          0%,100% { filter:drop-shadow(0 0 9px rgba(139,92,246,.50)); }
+          50%     { filter:drop-shadow(0 0 24px rgba(139,92,246,.92)); }
         }
         @keyframes bp-in {
-          from { opacity:0; transform:scale(.75); }
+          from { opacity:0; transform:scale(.78); }
           to   { opacity:1; transform:scale(1); }
         }
-        .bp-glow { animation:bp-glow 2.2s ease-in-out infinite; }
-        .bp-in   { animation:bp-in .35s ease-out both; }
+        .bp-glow { animation:bp-glow 2.4s ease-in-out infinite; }
+        .bp-in   { animation:bp-in .38s ease-out both; }
       `}</style>
 
       <p style={{ textAlign:"center", fontFamily:"monospace", fontSize:10, fontWeight:"bold",
         color:"#a78bfa", letterSpacing:".06em", textTransform:"uppercase", marginBottom:8 }}>
-        ✨ Animasi: Bola Dibongkar → 4 Lingkaran
+        ✨ Animasi Slow-Motion: Kulit Bola Terkelupas → 4 Lingkaran
       </p>
 
-      <svg viewBox="0 0 320 238" style={{ width:"100%", display:"block" }}
+      <svg viewBox="0 0 320 240" style={{ width:"100%", display:"block" }}
         xmlns="http://www.w3.org/2000/svg">
-
         <defs>
-          <radialGradient id="bp-sg" cx="33%" cy="28%" r="65%">
-            <stop offset="0%"   stopColor="#ddd6fe" stopOpacity=".95"/>
-            <stop offset="40%"  stopColor="#8b5cf6" stopOpacity=".88"/>
-            <stop offset="100%" stopColor="#3b0764" stopOpacity=".95"/>
+          {/* 3-D sphere gradient */}
+          <radialGradient id="bp-sg" cx="33%" cy="27%" r="65%">
+            <stop offset="0%"   stopColor="#e0d9ff" stopOpacity=".96"/>
+            <stop offset="35%"  stopColor="#8b5cf6" stopOpacity=".90"/>
+            <stop offset="100%" stopColor="#2e1065" stopOpacity=".96"/>
           </radialGradient>
-          <radialGradient id="bp-hi" cx="28%" cy="22%" r="38%">
-            <stop offset="0%"   stopColor="#fff" stopOpacity=".35"/>
+          {/* specular overlay */}
+          <radialGradient id="bp-hi" cx="29%" cy="22%" r="40%">
+            <stop offset="0%"   stopColor="#fff" stopOpacity=".38"/>
             <stop offset="100%" stopColor="#fff" stopOpacity="0"/>
           </radialGradient>
         </defs>
 
-        {/* ── SPHERE ── */}
+        {/* ══════════════ SPHERE (stays visible until ~60% progress) ══════════════ */}
         {sphereOp > 0.01 && (
-          <g style={{ opacity: sphereOp,
-            transform:`scale(${sphereScale})`,
-            transformOrigin:`${BP_SCX}px ${BP_SCY}px` }}>
+          <g style={{ opacity: sphereOp }}>
+            {/* body */}
             <circle cx={BP_SCX} cy={BP_SCY} r={BP_SR}
               fill="url(#bp-sg)" stroke="#a78bfa" strokeWidth="1.6"
               className={!isActive ? "bp-glow" : ""}/>
-            {/* specular highlight */}
+            {/* specular */}
             <circle cx={BP_SCX} cy={BP_SCY} r={BP_SR} fill="url(#bp-hi)"/>
-            {/* equator */}
-            <ellipse cx={BP_SCX} cy={BP_SCY} rx={BP_SR} ry={BP_SR*0.25}
-              fill="none" stroke="rgba(196,181,253,.30)" strokeWidth="1"/>
-            {/* meridian */}
-            <path d={`M${BP_SCX} ${BP_SCY-BP_SR} A${BP_SR*.27} ${BP_SR} 0 0 1 ${BP_SCX} ${BP_SCY+BP_SR}`}
-              fill="none" stroke="rgba(196,181,253,.30)" strokeWidth="1"/>
-            {/* r-label */}
-            <line x1={BP_SCX} y1={BP_SCY} x2={BP_SCX+BP_SR} y2={BP_SCY}
+            {/* equator latitude line */}
+            <ellipse cx={BP_SCX} cy={BP_SCY} rx={BP_SR} ry={BP_SR * 0.24}
+              fill="none" stroke="rgba(196,181,253,.28)" strokeWidth="1"/>
+            {/* prime meridian arc */}
+            <path d={`M${BP_SCX} ${BP_SCY - BP_SR} A${Math.round(BP_SR * 0.26)} ${BP_SR} 0 0 1 ${BP_SCX} ${BP_SCY + BP_SR}`}
+              fill="none" stroke="rgba(196,181,253,.28)" strokeWidth="1"/>
+            {/* radius label */}
+            <line x1={BP_SCX} y1={BP_SCY} x2={BP_SCX + BP_SR} y2={BP_SCY}
               stroke="#f59e0b" strokeWidth="1.3" strokeDasharray="3,2"/>
             <circle cx={BP_SCX} cy={BP_SCY} r="2" fill="#f59e0b"/>
-            <text x={BP_SCX+BP_SR*.5} y={BP_SCY-6}
+            <text x={BP_SCX + BP_SR * 0.5} y={BP_SCY - 7}
               fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+
+            {/* ── Peeled-patch indicators: bright spots where each section detached ── */}
+            {circles.map((c, i) => c.patchOp > 0.005 && (
+              <circle key={`patch-${i}`}
+                cx={c.px} cy={c.py} r={c.patchR}
+                fill={c.fill} opacity={c.patchOp}/>
+            ))}
+
             {/* idle hint */}
             {!isActive && (
-              <text x={BP_SCX} y={BP_SCY+BP_SR+14}
+              <text x={BP_SCX} y={BP_SCY + BP_SR + 16}
                 fill="#c4b5fd" fontSize="8.5" fontFamily="monospace" textAnchor="middle">
-                ← Bola Utuh (tekan tombol)
+                Bola Utuh — tekan tombol untuk membongkar kulitnya
               </text>
             )}
           </g>
         )}
 
-        {/* ── PEELING CIRCLES ── */}
+        {/* ══════════════ PEELING CIRCLES ══════════════
+            Rendered as ELLIPSES: rx=full, ry=thin→full
+            This gives the "curling off" / perspective effect. */}
         {circles.map((c, i) => c.op > 0.005 && (
           <g key={i} style={{ opacity: c.op }}>
-            <circle cx={c.cx} cy={c.cy} r={c.r}
-              fill={c.fill} stroke={c.stroke} strokeWidth="1.6"/>
-            {/* specular on each circle */}
-            <ellipse cx={c.cx - c.r*.22} cy={c.cy - c.r*.22} rx={c.r*.32} ry={c.r*.22}
-              fill="rgba(255,255,255,.18)" style={{ transform:`rotate(-25deg)`,
-              transformOrigin:`${c.cx}px ${c.cy}px` }}/>
-            {/* πr² label — appears when circle is mostly settled */}
-            {c.op > 0.55 && (
-              <text x={c.cx} y={c.cy+4}
+            {/* main peeling shape */}
+            <ellipse cx={c.cx} cy={c.cy} rx={c.rx} ry={c.ry}
+              fill={c.fill} stroke={c.stroke} strokeWidth={c.ry > 4 ? 1.6 : 0.8}/>
+            {/* specular sheen — only visible once partially round */}
+            {c.ry > 8 && (
+              <ellipse
+                cx={c.cx - BP_CR * 0.20} cy={c.cy - c.ry * 0.25}
+                rx={BP_CR * 0.28} ry={c.ry * 0.20}
+                fill="rgba(255,255,255,.22)"/>
+            )}
+            {/* "peeling edge" — thin bright arc at leading edge while in flight */}
+            {c.raw > 0.04 && c.raw < 0.88 && c.ry < BP_CR * 0.92 && (
+              <ellipse cx={c.cx} cy={c.cy} rx={c.rx + 1.5} ry={c.ry + 1.5}
+                fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1"
+                strokeDasharray="4,5"/>
+            )}
+            {/* πr² label — fades in as circle becomes round */}
+            {c.labelOp > 0.01 && (
+              <text x={c.cx} y={c.cy + 4}
                 fill="#fff" fontSize="10" fontFamily="monospace" fontWeight="bold"
-                textAnchor="middle" style={{ opacity: _bpClamp((c.op-0.55)/0.45,0,1) }}>
+                textAnchor="middle" style={{ opacity: c.labelOp }}>
                 πr²
               </text>
             )}
-            {/* circle number badge */}
+            {/* circle number — only when done */}
             {isDone && (
-              <text x={c.cx-c.r+11} y={c.cy-c.r+15}
+              <text x={c.cx - BP_CR + 11} y={c.cy - BP_CR + 15}
                 fill="rgba(255,255,255,.55)" fontSize="8" fontFamily="monospace"
                 fontWeight="bold" textAnchor="middle"
-                className="bp-in" style={{ animationDelay:`${i*0.08}s` }}>
-                {i+1}
+                className="bp-in" style={{ animationDelay:`${i * 0.09}s` }}>
+                {i + 1}
               </text>
             )}
           </g>
         ))}
 
-        {/* ── DONE: connecting arrows + formula ── */}
+        {/* ══════════════ DONE STATE: "+" connectors + formula ══════════════ */}
         {isDone && (
           <>
-            {/* between-column label */}
-            <text x="160" y="68" fill="#64748b" fontSize="18" fontFamily="monospace"
+            <text x="160" y="70"  fill="#475569" fontSize="16" fontFamily="monospace"
               textAnchor="middle" className="bp-in">+</text>
-            <text x="160" y="170" fill="#64748b" fontSize="18" fontFamily="monospace"
+            <text x="160" y="172" fill="#475569" fontSize="16" fontFamily="monospace"
               textAnchor="middle" className="bp-in">+</text>
-            <text x="72"  y="120" fill="#64748b" fontSize="18" fontFamily="monospace"
+            <text x="72"  y="122" fill="#475569" fontSize="16" fontFamily="monospace"
               textAnchor="middle" className="bp-in">+</text>
-            <text x="248" y="120" fill="#64748b" fontSize="18" fontFamily="monospace"
-              textAnchor="middle" className="bp-in" style={{ opacity:0 }}/>
-
             {/* formula bar */}
-            <rect x="28" y="220" width="264" height="14" rx="5"
-              fill="rgba(251,191,36,.09)" stroke="rgba(251,191,36,.38)" strokeWidth="1"
+            <rect x="26" y="222" width="268" height="14" rx="5"
+              fill="rgba(251,191,36,.09)" stroke="rgba(251,191,36,.40)" strokeWidth="1"
               className="bp-in"/>
-            <text x="160" y="231" fill="#fbbf24" fontSize="9.5" fontFamily="monospace"
+            <text x="160" y="233" fill="#fbbf24" fontSize="9.5" fontFamily="monospace"
               fontWeight="bold" textAnchor="middle" className="bp-in">
-              L = 4 × πr² = 4πr²
+              L = 4 × πr²  =  4πr²
             </text>
           </>
         )}
       </svg>
 
-      {/* ── buttons ── */}
+      {/* ── Buttons ── */}
       <div style={{ display:"flex", gap:8, justifyContent:"center", marginTop:10 }}>
         <button onClick={doStart} disabled={phase !== "idle"}
           style={{ padding:"6px 18px", borderRadius:8,
@@ -435,14 +479,12 @@ const BolaPeelAnimation = () => {
             background: phase==="idle" ? "rgba(124,58,237,.20)" : "transparent",
             color:"#c4b5fd", fontSize:12, fontWeight:"bold",
             cursor: phase!=="idle" ? "not-allowed" : "pointer",
-            opacity: phase!=="idle" ? .35 : 1,
-            fontFamily:"inherit", transition:"opacity .2s" }}>
-          🌐 Bongkar Kulit Bola
+            opacity: phase!=="idle" ? .35 : 1, fontFamily:"inherit", transition:"opacity .2s" }}>
+          🌐 Bongkar Kulit Bola (Slow)
         </button>
         <button onClick={doReset}
-          style={{ padding:"6px 18px", borderRadius:8,
-            border:"1px solid #475569", background:"transparent",
-            color:"#94a3b8", fontSize:12, fontWeight:"bold",
+          style={{ padding:"6px 18px", borderRadius:8, border:"1px solid #475569",
+            background:"transparent", color:"#94a3b8", fontSize:12, fontWeight:"bold",
             cursor:"pointer", fontFamily:"inherit" }}>
           ↺ Reset
         </button>
