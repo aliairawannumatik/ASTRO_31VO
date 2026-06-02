@@ -606,52 +606,74 @@ const CylinderNetAnimation = () => {
           })()}
         </g>
 
-        {/* ── CAPS — z-sorted, each melebar menjadi lingkaran flat ── */}
-        {(topCapAvgZ > botCapAvgZ
-          ? [
-              { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, dy:82, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
-              { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, dy:-82, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
-            ]
-          : [
-              { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, dy:-82, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
-              { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, dy:82, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
-            ]
-        ).map(({ key, open, set, pts, c, vis, dy, col, fillO, stroke, lbl }) => (
-          <g key={key} onClick={(e) => { e.stopPropagation(); tryToggle(set); }} style={{ cursor: "pointer" }}>
-            {/* Invisible hitbox — always present so cap is always clickable */}
-            <ellipse cx={c.x} cy={c.y} rx={54} ry={18} fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
-            {/* 3D ellipse polygon — always rendered, opacity fades when open or not facing viewer */}
-            <polygon points={pts} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2"
-              style={{ opacity: open ? 0 : vis ? 1 : 0, transition: "opacity 0.35s" }} />
-            {/* Subtle glow ring when closed & facing viewer — hints it's clickable */}
-            {!open && vis && !anyOpen && (
-              <polygon points={pts} fill="none" stroke="rgba(165,180,252,0.4)" strokeWidth="2"
-                style={{ pointerEvents: "none" }} />
-            )}
-            {/* Flat circle — melebar saat open */}
-            <circle cx={c.x} cy={c.y} r={52}
-              fill={fillO} stroke={stroke} strokeWidth="1.5"
-              style={{
-                transform: open ? `translateY(${dy}px) scale(1)` : "scale(0.06)",
-                transition: TRANS,
-                transformBox: "fill-box",
-                transformOrigin: "center center",
-                opacity: open ? 1 : 0,
-                pointerEvents: "none",
-              }}
-            />
-            {/* Labels & jari-jari — shown when open */}
-            {open && (
-              <>
-                <text x={c.x} y={c.y + dy - 4} fill={col} fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">{lbl}</text>
-                <text x={c.x} y={c.y + dy + 9}  fill={col} fontSize="8" fontFamily="monospace" textAnchor="middle">L = πr²</text>
-                <circle cx={c.x} cy={c.y + dy} r="2.5" fill="#fbbf24" />
-                <line x1={c.x} y1={c.y + dy} x2={c.x + 52} y2={c.y + dy} stroke="#fbbf24" strokeWidth="1.2" />
-                <text x={c.x + 33} y={c.y + dy - 4} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
-              </>
-            )}
-          </g>
-        ))}
+        {/* ── CAPS — z-sorted 3D polygons, flat circles attached to selimut rect edges ── */}
+        {/*
+          Selimut rect: x=CYL_CX-118  y=CYL_CY-CYL_H/2  w=236  h=CYL_H
+          topNetCy = (CYL_CY - CYL_H/2) - 52   → circle sits flush on top edge
+          botNetCy = (CYL_CY + CYL_H/2) + 52   → circle sits flush on bottom edge
+        */}
+        {(() => {
+          const NET_R   = 52;
+          const selTop  = CYL_CY - CYL_H / 2;
+          const selBot  = CYL_CY + CYL_H / 2;
+          const topNetCy = selTop - NET_R;
+          const botNetCy = selBot + NET_R;
+
+          const caps = topCapAvgZ > botCapAvgZ
+            ? [
+                { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, netCy:botNetCy, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
+                { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, netCy:topNetCy, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
+              ]
+            : [
+                { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, netCy:topNetCy, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
+                { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, netCy:botNetCy, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
+              ];
+
+          return caps.map(({ key, open, set, pts, c, vis, netCy, col, fillO, stroke, lbl }) => {
+            const isTop = key === "top";
+            return (
+              <g key={key} onClick={(e) => { e.stopPropagation(); tryToggle(set); }} style={{ cursor: "pointer" }}>
+                {/* Invisible hitbox */}
+                <ellipse cx={c.x} cy={c.y} rx={54} ry={18} fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
+                {/* 3D ellipse polygon */}
+                <polygon points={pts} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2"
+                  style={{ opacity: open ? 0 : vis ? 1 : 0, transition: "opacity 0.35s" }} />
+                {!open && vis && !anyOpen && (
+                  <polygon points={pts} fill="none" stroke="rgba(165,180,252,0.4)" strokeWidth="2"
+                    style={{ pointerEvents: "none" }} />
+                )}
+
+                {/* Flat circle — fixed at net position attached to selimut edge */}
+                {open && (
+                  <g className="net-fadein" style={{ pointerEvents: "none" }}>
+                    {/* Dashed connecting line: circle edge → selimut rect edge */}
+                    <line
+                      x1={CYL_CX} y1={isTop ? selTop : selBot}
+                      x2={CYL_CX} y2={isTop ? netCy + NET_R : netCy - NET_R}
+                      stroke={stroke} strokeWidth="1" strokeDasharray="3,2" opacity="0.5"
+                    />
+                    {/* The flat circle */}
+                    <circle cx={CYL_CX} cy={netCy} r={NET_R}
+                      fill={fillO} stroke={stroke} strokeWidth="1.5" />
+                    {/* Radius line — horizontal through center */}
+                    <circle cx={CYL_CX} cy={netCy} r="2.5" fill="#fbbf24" />
+                    <line x1={CYL_CX} y1={netCy} x2={CYL_CX + NET_R} y2={netCy}
+                      stroke="#fbbf24" strokeWidth="1.2" />
+                    {/* "r" label — outside the circle to the right, vertically centred */}
+                    <text x={CYL_CX + NET_R + 7} y={netCy + 4}
+                      fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
+                    {/* Main label — inside circle, upper half */}
+                    <text x={CYL_CX} y={netCy - 10}
+                      fill={col} fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">{lbl}</text>
+                    {/* Formula — inside circle, lower half */}
+                    <text x={CYL_CX} y={netCy + 20}
+                      fill={col} fontSize="8" fontFamily="monospace" textAnchor="middle">L = πr²</text>
+                  </g>
+                )}
+              </g>
+            );
+          });
+        })()}
 
         <text x="10" y={CYL_H_SVG - 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r={CYL_R}px  t={CYL_H}px</text>
         <text x={CYL_W - 88} y={CYL_H_SVG - 12} fill="#22d3ee" fontSize="9" fontFamily="monospace">L=2πr²+2πrt</text>
