@@ -246,32 +246,49 @@ const UnsurBolaSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
-   BOLA PEEL ANIMATION  v2 — slow-motion realistic peeling
-   Bola tetap terlihat; tiap kulit terkelupas sebagai elips tipis
-   (tampak miring saat lepas) lalu membentang menjadi lingkaran.
+   SPHERE FRUIT-CUT ANIMATION
+   Bola "dipotong seperti buah" menjadi 4 bagian → tiap bagian
+   bertransformasi menjadi lingkaran sempurna (πr²).
+
+   Phases:
+     0.00–0.20  Garis potong muncul (vertikal lalu horizontal)
+     0.20–0.52  4 potongan bergerak ke 4 sudut
+     0.52–0.87  Tiap potongan "mengembang" dari sektor 90° → lingkaran penuh
+     0.87–1.00  Label πr² & rumus muncul
 ───────────────────────────────────────────────────────────── */
-const _bpEase  = (t: number) => 1 - Math.pow(1 - t, 3);
-const _bpLerp  = (a: number, b: number, t: number) => a + (b - a) * t;
-const _bpClamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+const _scEaseOut    = (t: number) => 1 - Math.pow(1 - t, 3);
+const _scEaseInOut  = (t: number) => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+const _scClamp      = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+const _scLerp       = (a: number, b: number, t: number) => a + (b - a) * t;
 
-/* Sphere geometry */
-const BP_SCX = 160; const BP_SCY = 112; const BP_SR = 56;
-/* Final circle size and total duration */
-const BP_CR  = 48;  const BP_DUR = 5500;
+const SC_SCX = 160; const SC_SCY = 102; const SC_SR = 52;
+const SC_CR  = 50;  const SC_DUR = 7500;
 
-/*
- * px,py  = peel origin on sphere surface (where it detaches)
- * tx,ty  = final resting position
- * s,e    = global-progress window [0..1]
- */
-const BP_CIRCLES = [
-  { fill:"rgba(34,211,238,0.82)",  stroke:"#22d3ee", px:160, py:62,  tx:72,  ty:66,  s:0.00, e:0.28 },
-  { fill:"rgba(139,92,246,0.82)",  stroke:"#a78bfa", px:208, py:100, tx:248, ty:66,  s:0.24, e:0.52 },
-  { fill:"rgba(249,115,22,0.82)",  stroke:"#fb923c", px:122, py:152, tx:72,  ty:168, s:0.48, e:0.76 },
-  { fill:"rgba(34,197,94,0.82)",   stroke:"#4ade80", px:198, py:152, tx:248, ty:168, s:0.72, e:1.00 },
-];
+/* baseAngle: starting angle of the 90° sector for each quadrant (SVG CW, 0°=right) */
+const SC_PIECES = [
+  { id:"TL", color:"rgba(34,211,238,0.88)",  stroke:"#22d3ee", baseAngle:180, dx:-90, dy:-36 },
+  { id:"TR", color:"rgba(249,115,22,0.88)",  stroke:"#fb923c", baseAngle:270, dx: 90, dy:-36 },
+  { id:"BL", color:"rgba(139,92,246,0.88)",  stroke:"#a78bfa", baseAngle: 90, dx:-90, dy: 98 },
+  { id:"BR", color:"rgba(34,197,94,0.88)",   stroke:"#4ade80", baseAngle:  0, dx: 90, dy: 98 },
+] as const;
 
-const BolaPeelAnimation = () => {
+/* Build SVG path for a sector of given sweep (90→360).
+   When sweep≥360 draws a full circle via two semicircle arcs. */
+const _scSectorPath = (cx: number, cy: number, r: number, baseDeg: number, sweepDeg: number): string => {
+  if (sweepDeg >= 359.9) {
+    return `M ${cx - r} ${cy} A ${r} ${r} 0 1 1 ${cx + r} ${cy} A ${r} ${r} 0 1 1 ${cx - r} ${cy} Z`;
+  }
+  const sRad = (baseDeg * Math.PI) / 180;
+  const eRad = ((baseDeg + sweepDeg) * Math.PI) / 180;
+  const x1 = (cx + r * Math.cos(sRad)).toFixed(2);
+  const y1 = (cy + r * Math.sin(sRad)).toFixed(2);
+  const x2 = (cx + r * Math.cos(eRad)).toFixed(2);
+  const y2 = (cy + r * Math.sin(eRad)).toFixed(2);
+  const large = sweepDeg > 180 ? 1 : 0;
+  return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
+};
+
+const SphereFruitCutAnimation = () => {
   const [phase,    setPhase]    = useState<"idle"|"running"|"done">("idle");
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number|null>(null);
@@ -282,9 +299,9 @@ const BolaPeelAnimation = () => {
     setPhase("running"); t0Ref.current = null;
     const tick = (now: number) => {
       if (!t0Ref.current) t0Ref.current = now;
-      const raw = Math.min((now - t0Ref.current) / BP_DUR, 1);
+      const raw = Math.min((now - t0Ref.current) / SC_DUR, 1);
       setProgress(raw);
-      if (raw < 1) { rafRef.current = requestAnimationFrame(tick); }
+      if (raw < 1) rafRef.current = requestAnimationFrame(tick);
       else         { setProgress(1); setPhase("done"); }
     };
     rafRef.current = requestAnimationFrame(tick);
@@ -298,173 +315,202 @@ const BolaPeelAnimation = () => {
 
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
 
-  const isActive = phase !== "idle";
-  const isDone   = phase === "done";
+  const p = progress;
+  const isDone = phase === "done";
 
-  /* ── Sphere: stays visible until ¾ done, then fades gently ── */
-  const sphereOp = _bpClamp(1 - _bpClamp((progress - 0.60) / 0.28, 0, 1), 0, 1);
+  /* ── Sphere opacity: visible until pieces fully separate ── */
+  const sphereOp = _scClamp(1 - _scClamp((p - 0.38) / 0.20, 0, 1), 0, 1);
 
-  /* ── Per-circle computed values ── */
-  const circles = BP_CIRCLES.map(c => {
-    const raw = _bpClamp((progress - c.s) / (c.e - c.s), 0, 1); // 0..1 within slot
+  /* ── Cut line progress ── */
+  const cutV = _scEaseOut(_scClamp(p / 0.12, 0, 1));          // vertical first
+  const cutH = _scEaseOut(_scClamp((p - 0.08) / 0.14, 0, 1)); // horizontal 2nd
+  const cutLen = SC_SR * 2 + 8;
 
-    /* Position: peel-origin → target (ease-out) */
-    const posT = _bpEase(raw);
-    const cx   = _bpLerp(c.px, c.tx, posT);
-    const cy   = _bpLerp(c.py, c.ty, posT);
+  /* ── Per-piece computed values ── */
+  const pieces = SC_PIECES.map(pc => {
+    const tSep   = _scClamp((p - 0.20) / 0.32, 0, 1);
+    const tMorph = _scClamp((p - 0.52) / 0.35, 0, 1);
+    const tLabel = _scClamp((p - 0.87) / 0.13, 0, 1);
 
-    /* Shape: starts as a very flat ellipse (perspective of peeling off sphere)
-       ry goes from 0.05*r → full r as it "unfurls" mid-flight.
-       The flattening is delayed by 0.12 and completes by raw=0.72 */
-    const flatRaw = _bpClamp((raw - 0.12) / 0.58, 0, 1);
-    const ry      = _bpLerp(BP_CR * 0.05, BP_CR, _bpEase(flatRaw));
+    const cx    = SC_SCX + _scLerp(0, pc.dx, _scEaseOut(tSep));
+    const cy    = SC_SCY + _scLerp(0, pc.dy, _scEaseOut(tSep));
+    const sweep = _scLerp(90, 360, _scEaseInOut(tMorph));
 
-    /* Opacity: quick fade-in at start */
-    const op = _bpClamp(raw / 0.10, 0, 1);
+    /* Piece appears right when cutting starts */
+    const pieceOp = phase === "idle" ? 0 : _scClamp((p - 0.16) / 0.08, 0, 1);
 
-    /* Label opacity: fades in once circle is nearly flat */
-    const labelOp = _bpClamp((raw - 0.72) / 0.22, 0, 1);
-
-    /* Peeled patch on sphere: bright spot that grows at peel origin */
-    const patchRaw = _bpClamp(raw / 0.18, 0, 1);
-    const patchR   = patchRaw * 22;
-    const patchOp  = patchRaw * 0.32;
-
-    return { ...c, cx, cy, rx: BP_CR, ry, op, labelOp, patchR, patchOp, raw };
+    return { ...pc, cx, cy, sweep, pieceOp, labelOp: tLabel };
   });
 
   return (
-    <div style={{ background:"rgba(6,10,26,0.92)", border:"1px solid rgba(139,92,246,0.48)",
+    <div style={{ background:"rgba(4,8,22,0.94)", border:"1px solid rgba(34,197,94,0.38)",
       borderRadius:14, padding:"12px 10px 10px", userSelect:"none" }}>
       <style>{`
-        @keyframes bp-glow {
-          0%,100% { filter:drop-shadow(0 0 9px rgba(139,92,246,.50)); }
-          50%     { filter:drop-shadow(0 0 24px rgba(139,92,246,.92)); }
+        @keyframes sc-glow {
+          0%,100% { filter:drop-shadow(0 0 10px rgba(139,92,246,.55)); }
+          50%     { filter:drop-shadow(0 0 26px rgba(139,92,246,.95)); }
         }
-        @keyframes bp-in {
-          from { opacity:0; transform:scale(.78); }
+        @keyframes sc-knife {
+          0%,100% { opacity:.7; } 50% { opacity:1; }
+        }
+        @keyframes sc-in {
+          from { opacity:0; transform:scale(.75); }
           to   { opacity:1; transform:scale(1); }
         }
-        .bp-glow { animation:bp-glow 2.4s ease-in-out infinite; }
-        .bp-in   { animation:bp-in .38s ease-out both; }
+        .sc-glow  { animation:sc-glow  2.6s ease-in-out infinite; }
+        .sc-knife { animation:sc-knife 0.8s ease-in-out 3; }
+        .sc-in    { animation:sc-in .40s ease-out both; }
       `}</style>
 
       <p style={{ textAlign:"center", fontFamily:"monospace", fontSize:10, fontWeight:"bold",
-        color:"#a78bfa", letterSpacing:".06em", textTransform:"uppercase", marginBottom:8 }}>
-        ✨ Animasi Slow-Motion: Kulit Bola Terkelupas → 4 Lingkaran
+        color:"#4ade80", letterSpacing:".06em", textTransform:"uppercase", marginBottom:8 }}>
+        🍊 Animasi: Bola Dipotong seperti Buah → 4 Lingkaran Sempurna
       </p>
 
-      <svg viewBox="0 0 320 240" style={{ width:"100%", display:"block" }}
+      <svg viewBox="0 0 320 268" style={{ width:"100%", display:"block" }}
         xmlns="http://www.w3.org/2000/svg">
         <defs>
-          {/* 3-D sphere gradient */}
-          <radialGradient id="bp-sg" cx="33%" cy="27%" r="65%">
-            <stop offset="0%"   stopColor="#e0d9ff" stopOpacity=".96"/>
-            <stop offset="35%"  stopColor="#8b5cf6" stopOpacity=".90"/>
-            <stop offset="100%" stopColor="#2e1065" stopOpacity=".96"/>
+          <radialGradient id="sc-sg" cx="33%" cy="27%" r="65%">
+            <stop offset="0%"   stopColor="#e0d9ff" stopOpacity=".95"/>
+            <stop offset="35%"  stopColor="#8b5cf6" stopOpacity=".88"/>
+            <stop offset="100%" stopColor="#2e1065" stopOpacity=".97"/>
           </radialGradient>
-          {/* specular overlay */}
-          <radialGradient id="bp-hi" cx="29%" cy="22%" r="40%">
-            <stop offset="0%"   stopColor="#fff" stopOpacity=".38"/>
+          <radialGradient id="sc-hi" cx="29%" cy="22%" r="40%">
+            <stop offset="0%"   stopColor="#fff" stopOpacity=".40"/>
             <stop offset="100%" stopColor="#fff" stopOpacity="0"/>
           </radialGradient>
+          <clipPath id="sc-clip">
+            <circle cx={SC_SCX} cy={SC_SCY} r={SC_SR + 2}/>
+          </clipPath>
         </defs>
 
-        {/* ══════════════ SPHERE (stays visible until ~60% progress) ══════════════ */}
+        {/* ══════════════ SPHERE BODY ══════════════ */}
         {sphereOp > 0.01 && (
           <g style={{ opacity: sphereOp }}>
-            {/* body */}
-            <circle cx={BP_SCX} cy={BP_SCY} r={BP_SR}
-              fill="url(#bp-sg)" stroke="#a78bfa" strokeWidth="1.6"
-              className={!isActive ? "bp-glow" : ""}/>
-            {/* specular */}
-            <circle cx={BP_SCX} cy={BP_SCY} r={BP_SR} fill="url(#bp-hi)"/>
-            {/* equator latitude line */}
-            <ellipse cx={BP_SCX} cy={BP_SCY} rx={BP_SR} ry={BP_SR * 0.24}
-              fill="none" stroke="rgba(196,181,253,.28)" strokeWidth="1"/>
-            {/* prime meridian arc */}
-            <path d={`M${BP_SCX} ${BP_SCY - BP_SR} A${Math.round(BP_SR * 0.26)} ${BP_SR} 0 0 1 ${BP_SCX} ${BP_SCY + BP_SR}`}
-              fill="none" stroke="rgba(196,181,253,.28)" strokeWidth="1"/>
-            {/* radius label */}
-            <line x1={BP_SCX} y1={BP_SCY} x2={BP_SCX + BP_SR} y2={BP_SCY}
-              stroke="#f59e0b" strokeWidth="1.3" strokeDasharray="3,2"/>
-            <circle cx={BP_SCX} cy={BP_SCY} r="2" fill="#f59e0b"/>
-            <text x={BP_SCX + BP_SR * 0.5} y={BP_SCY - 7}
+            {/* Shadow */}
+            <ellipse cx={SC_SCX} cy={SC_SCY + SC_SR + 10} rx={SC_SR * 0.72} ry={9}
+              fill="rgba(0,0,0,0.35)"/>
+            {/* Main sphere */}
+            <circle cx={SC_SCX} cy={SC_SCY} r={SC_SR}
+              fill="url(#sc-sg)" stroke="#a78bfa" strokeWidth="1.8"
+              className={phase === "idle" ? "sc-glow" : ""}/>
+            {/* Specular */}
+            <circle cx={SC_SCX} cy={SC_SCY} r={SC_SR} fill="url(#sc-hi)"/>
+            {/* Equator */}
+            <ellipse cx={SC_SCX} cy={SC_SCY} rx={SC_SR} ry={SC_SR * 0.23}
+              fill="none" stroke="rgba(196,181,253,.30)" strokeWidth="1" strokeDasharray="5,4"/>
+            {/* Meridian */}
+            <path d={`M${SC_SCX} ${SC_SCY - SC_SR} A${Math.round(SC_SR*0.26)} ${SC_SR} 0 0 1 ${SC_SCX} ${SC_SCY + SC_SR}`}
+              fill="none" stroke="rgba(196,181,253,.25)" strokeWidth="1"/>
+            {/* r label */}
+            <line x1={SC_SCX} y1={SC_SCY} x2={SC_SCX + SC_SR} y2={SC_SCY}
+              stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
+            <circle cx={SC_SCX} cy={SC_SCY} r="2.5" fill="#f59e0b"/>
+            <text x={SC_SCX + SC_SR * 0.5} y={SC_SCY - 7}
               fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
 
-            {/* ── Peeled-patch indicators: bright spots where each section detached ── */}
-            {circles.map((c, i) => c.patchOp > 0.005 && (
-              <circle key={`patch-${i}`}
-                cx={c.px} cy={c.py} r={c.patchR}
-                fill={c.fill} opacity={c.patchOp}/>
-            ))}
+            {/* ── Cut lines clipped to sphere ── */}
+            {p > 0.01 && (
+              <g clipPath="url(#sc-clip)">
+                {/* Vertical knife line */}
+                <line x1={SC_SCX} y1={SC_SCY - SC_SR - 3} x2={SC_SCX} y2={SC_SCY + SC_SR + 3}
+                  stroke="#facc15" strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeDasharray={`${cutLen}`}
+                  strokeDashoffset={cutLen * (1 - cutV)}
+                  opacity={cutV > 0.02 ? 0.95 : 0}
+                  className={cutV > 0.05 && cutV < 0.98 ? "sc-knife" : ""}/>
+                {/* Horizontal knife line */}
+                <line x1={SC_SCX - SC_SR - 3} y1={SC_SCY} x2={SC_SCX + SC_SR + 3} y2={SC_SCY}
+                  stroke="#facc15" strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeDasharray={`${cutLen}`}
+                  strokeDashoffset={cutLen * (1 - cutH)}
+                  opacity={cutH > 0.02 ? 0.95 : 0}
+                  className={cutH > 0.05 && cutH < 0.98 ? "sc-knife" : ""}/>
+                {/* Glow at cross point */}
+                {p > 0.12 && p < 0.42 && (
+                  <circle cx={SC_SCX} cy={SC_SCY} r="5"
+                    fill="#facc15" opacity={0.55 * _scClamp((p - 0.12)/0.06, 0, 1)}/>
+                )}
+              </g>
+            )}
 
-            {/* idle hint */}
-            {!isActive && (
-              <text x={BP_SCX} y={BP_SCY + BP_SR + 16}
+            {/* Idle hint */}
+            {phase === "idle" && (
+              <text x={SC_SCX} y={SC_SCY + SC_SR + 20}
                 fill="#c4b5fd" fontSize="8.5" fontFamily="monospace" textAnchor="middle">
-                Bola Utuh — tekan tombol untuk membongkar kulitnya
+                Bola Utuh — tekan tombol untuk memotong
               </text>
             )}
           </g>
         )}
 
-        {/* ══════════════ PEELING CIRCLES ══════════════
-            Rendered as ELLIPSES: rx=full, ry=thin→full
-            This gives the "curling off" / perspective effect. */}
-        {circles.map((c, i) => c.op > 0.005 && (
-          <g key={i} style={{ opacity: c.op }}>
-            {/* main peeling shape */}
-            <ellipse cx={c.cx} cy={c.cy} rx={c.rx} ry={c.ry}
-              fill={c.fill} stroke={c.stroke} strokeWidth={c.ry > 4 ? 1.6 : 0.8}/>
-            {/* specular sheen — only visible once partially round */}
-            {c.ry > 8 && (
+        {/* ══════════════ 4 POTONGAN (SECTOR → CIRCLE) ══════════════ */}
+        {pieces.map((pc, i) => pc.pieceOp > 0.005 && (
+          <g key={pc.id} style={{ opacity: pc.pieceOp }}>
+            {/* Main sector/circle shape */}
+            <path
+              d={_scSectorPath(pc.cx, pc.cy, SC_CR, pc.baseAngle, pc.sweep)}
+              fill={pc.color}
+              stroke={pc.stroke}
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+            {/* Specular sheen on piece */}
+            {pc.sweep > 50 && (
               <ellipse
-                cx={c.cx - BP_CR * 0.20} cy={c.cy - c.ry * 0.25}
-                rx={BP_CR * 0.28} ry={c.ry * 0.20}
+                cx={pc.cx - SC_CR * 0.22} cy={pc.cy - SC_CR * (pc.sweep > 200 ? 0.28 : 0.12)}
+                rx={SC_CR * 0.25} ry={SC_CR * 0.18 * (pc.sweep / 360)}
                 fill="rgba(255,255,255,.22)"/>
             )}
-            {/* "peeling edge" — thin bright arc at leading edge while in flight */}
-            {c.raw > 0.04 && c.raw < 0.88 && c.ry < BP_CR * 0.92 && (
-              <ellipse cx={c.cx} cy={c.cy} rx={c.rx + 1.5} ry={c.ry + 1.5}
-                fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1"
-                strokeDasharray="4,5"/>
+            {/* Outer glow ring when fully circular */}
+            {pc.sweep > 340 && (
+              <circle cx={pc.cx} cy={pc.cy} r={SC_CR + 3}
+                fill="none" stroke={pc.stroke} strokeWidth="1"
+                opacity={_scClamp((pc.sweep - 340) / 20, 0, 1) * 0.55}/>
             )}
-            {/* πr² label — fades in as circle becomes round */}
-            {c.labelOp > 0.01 && (
-              <text x={c.cx} y={c.cy + 4}
-                fill="#fff" fontSize="10" fontFamily="monospace" fontWeight="bold"
-                textAnchor="middle" style={{ opacity: c.labelOp }}>
+            {/* πr² label */}
+            {pc.labelOp > 0.01 && (
+              <text x={pc.cx} y={pc.cy + 5}
+                fill="#fff" fontSize="11" fontFamily="monospace" fontWeight="bold"
+                textAnchor="middle" style={{ opacity: pc.labelOp }}>
                 πr²
               </text>
             )}
-            {/* circle number — only when done */}
+            {/* Circle number badge when done */}
             {isDone && (
-              <text x={c.cx - BP_CR + 11} y={c.cy - BP_CR + 15}
-                fill="rgba(255,255,255,.55)" fontSize="8" fontFamily="monospace"
-                fontWeight="bold" textAnchor="middle"
-                className="bp-in" style={{ animationDelay:`${i * 0.09}s` }}>
+              <text
+                x={pc.cx - SC_CR + 14} y={pc.cy - SC_CR + 16}
+                fill="rgba(255,255,255,.65)" fontSize="9" fontFamily="monospace" fontWeight="bold"
+                textAnchor="middle"
+                className="sc-in"
+                style={{ animationDelay:`${i * 0.08}s` }}>
                 {i + 1}
               </text>
             )}
           </g>
         ))}
 
-        {/* ══════════════ DONE STATE: "+" connectors + formula ══════════════ */}
+        {/* ══════════════ DONE: "+" connectors + formula ══════════════ */}
         {isDone && (
           <>
-            <text x="160" y="70"  fill="#475569" fontSize="16" fontFamily="monospace"
-              textAnchor="middle" className="bp-in">+</text>
-            <text x="160" y="172" fill="#475569" fontSize="16" fontFamily="monospace"
-              textAnchor="middle" className="bp-in">+</text>
-            <text x="72"  y="122" fill="#475569" fontSize="16" fontFamily="monospace"
-              textAnchor="middle" className="bp-in">+</text>
-            {/* formula bar */}
-            <rect x="26" y="222" width="268" height="14" rx="5"
-              fill="rgba(251,191,36,.09)" stroke="rgba(251,191,36,.40)" strokeWidth="1"
-              className="bp-in"/>
-            <text x="160" y="233" fill="#fbbf24" fontSize="9.5" fontFamily="monospace"
-              fontWeight="bold" textAnchor="middle" className="bp-in">
+            {/* + between TL and TR */}
+            <text x="160" y="75" fill="#475569" fontSize="18" fontFamily="monospace"
+              textAnchor="middle" className="sc-in">+</text>
+            {/* + between TL and BL */}
+            <text x="72"  y="145" fill="#475569" fontSize="18" fontFamily="monospace"
+              textAnchor="middle" className="sc-in" style={{ animationDelay:"0.08s" }}>+</text>
+            {/* + between BL and BR */}
+            <text x="160" y="210" fill="#475569" fontSize="18" fontFamily="monospace"
+              textAnchor="middle" className="sc-in" style={{ animationDelay:"0.16s" }}>+</text>
+            {/* Formula bar */}
+            <rect x="28" y="235" width="264" height="18" rx="6"
+              fill="rgba(251,191,36,.10)" stroke="rgba(251,191,36,.45)" strokeWidth="1.2"
+              className="sc-in" style={{ animationDelay:"0.22s" }}/>
+            <text x="160" y="248" fill="#fbbf24" fontSize="10.5" fontFamily="monospace"
+              fontWeight="bold" textAnchor="middle"
+              className="sc-in" style={{ animationDelay:"0.24s" }}>
               L = 4 × πr²  =  4πr²
             </text>
           </>
@@ -475,12 +521,12 @@ const BolaPeelAnimation = () => {
       <div style={{ display:"flex", gap:8, justifyContent:"center", marginTop:10 }}>
         <button onClick={doStart} disabled={phase !== "idle"}
           style={{ padding:"6px 18px", borderRadius:8,
-            border:"1px solid #7c3aed",
-            background: phase==="idle" ? "rgba(124,58,237,.20)" : "transparent",
-            color:"#c4b5fd", fontSize:12, fontWeight:"bold",
-            cursor: phase!=="idle" ? "not-allowed" : "pointer",
-            opacity: phase!=="idle" ? .35 : 1, fontFamily:"inherit", transition:"opacity .2s" }}>
-          🌐 Bongkar Kulit Bola (Slow)
+            border:"1px solid #16a34a",
+            background: phase === "idle" ? "rgba(22,163,74,.20)" : "transparent",
+            color:"#4ade80", fontSize:12, fontWeight:"bold",
+            cursor: phase !== "idle" ? "not-allowed" : "pointer",
+            opacity: phase !== "idle" ? .35 : 1, fontFamily:"inherit", transition:"opacity .2s" }}>
+          🍊 Potong Bola → 4 Lingkaran
         </button>
         <button onClick={doReset}
           style={{ padding:"6px 18px", borderRadius:8, border:"1px solid #475569",
@@ -863,7 +909,7 @@ const sections: Sec[] = [
           Fakta mengagumkan: luas permukaan bola tepat sama dengan luas{" "}
           <strong className="text-yellow-300">4 lingkaran</strong> dengan jari-jari yang sama!
         </p>
-        <BolaPeelAnimation />
+        <SphereFruitCutAnimation />
         <LuasBolaSVG />
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
           <p className="text-orange-300 font-semibold">📌 Penurunan Rumus:</p>
