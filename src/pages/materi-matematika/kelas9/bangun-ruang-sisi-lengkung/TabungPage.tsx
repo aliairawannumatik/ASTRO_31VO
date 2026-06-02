@@ -8,16 +8,16 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
-   INTERACTIVE 3D CYLINDER — SVG painter's algorithm (solid, no gaps)
+   3D CYLINDER SVG RENDERER — style mirrors InteractiveCone3D
 ───────────────────────────────────────────────────────────── */
-const CYL_SEGS = 48;
-const CYL_R = 65;
-const CYL_H = 130;
-const CYL_PD = 500;
+const CYL_SEGS = 28;
+const CYL_R = 58;
+const CYL_H = 115;
+const CYL_PD = 480;
 const CYL_W = 320;
-const CYL_H_SVG = 300;
+const CYL_H_SVG = 290;
 const CYL_CX = CYL_W / 2;
-const CYL_CY = CYL_H_SVG / 2;
+const CYL_CY = CYL_H_SVG / 2 + 10;
 
 function cylRotPt(x: number, y: number, z: number, rx: number, ry: number) {
   const rxa = (rx * Math.PI) / 180;
@@ -30,58 +30,58 @@ function cylRotPt(x: number, y: number, z: number, rx: number, ry: number) {
 }
 
 function cylProj(p: { x: number; y: number; z: number }) {
-  const s = CYL_PD / (CYL_PD + p.z + 100);
+  const s = CYL_PD / (CYL_PD + p.z + 80);
   return { x: CYL_CX + p.x * s, y: CYL_CY + p.y * s };
 }
 
 const InteractiveCylinder3D = () => {
-  const [rotX, setRotX] = useState(-25);
-  const [rotY, setRotY] = useState(30);
+  const [rotX, setRotX] = useState(-22);
+  const [rotY, setRotY] = useState(28);
   const [isDragging, setIsDragging] = useState(false);
-  const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -25, baseRotY: 30 });
+  const dragRef = useRef({ sx: 0, sy: 0, brx: -22, bry: 28 });
 
-  const onMouseDown = (e: React.MouseEvent) => {
+  const onMD = (e: React.MouseEvent) => {
     setIsDragging(true);
-    dragRef.current = { startX: e.clientX, startY: e.clientY, baseRotX: rotX, baseRotY: rotY };
+    dragRef.current = { sx: e.clientX, sy: e.clientY, brx: rotX, bry: rotY };
   };
-  const onMouseMove = useCallback((e: MouseEvent) => {
+  const onMM = useCallback((e: MouseEvent) => {
     if (!isDragging) return;
-    setRotY(dragRef.current.baseRotY + (e.clientX - dragRef.current.startX) * 0.5);
-    setRotX(dragRef.current.baseRotX + (e.clientY - dragRef.current.startY) * 0.5);
+    setRotY(dragRef.current.bry + (e.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.brx - (e.clientY - dragRef.current.sy) * 0.55);
   }, [isDragging]);
-  const onMouseUp = useCallback(() => setIsDragging(false), []);
-  const onTouchStart = (e: React.TouchEvent) => {
+  const onMU = useCallback(() => setIsDragging(false), []);
+  const onTS = (e: React.TouchEvent) => {
     const t = e.touches[0];
     setIsDragging(true);
-    dragRef.current = { startX: t.clientX, startY: t.clientY, baseRotX: rotX, baseRotY: rotY };
+    dragRef.current = { sx: t.clientX, sy: t.clientY, brx: rotX, bry: rotY };
   };
-  const onTouchMove = useCallback((e: TouchEvent) => {
+  const onTM = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
     const t = e.touches[0];
-    setRotY(dragRef.current.baseRotY + (t.clientX - dragRef.current.startX) * 0.5);
-    setRotX(dragRef.current.baseRotX + (t.clientY - dragRef.current.startY) * 0.5);
+    setRotY(dragRef.current.bry + (t.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.brx - (t.clientY - dragRef.current.sy) * 0.55);
   }, [isDragging]);
-  const onTouchEnd = useCallback(() => setIsDragging(false), []);
+  const onTE = useCallback(() => setIsDragging(false), []);
 
   useEffect(() => {
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchend", onTouchEnd);
+    window.addEventListener("mousemove", onMM);
+    window.addEventListener("mouseup", onMU);
+    window.addEventListener("touchmove", onTM, { passive: true });
+    window.addEventListener("touchend", onTE);
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("mousemove", onMM);
+      window.removeEventListener("mouseup", onMU);
+      window.removeEventListener("touchmove", onTM);
+      window.removeEventListener("touchend", onTE);
     };
-  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+  }, [onMM, onMU, onTM, onTE]);
 
   useEffect(() => {
     if (isDragging) return;
     let frameId: number;
     let lastTs = 0;
     const animate = (ts: number) => {
-      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.07);
+      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.028);
       lastTs = ts;
       frameId = requestAnimationFrame(animate);
     };
@@ -100,69 +100,78 @@ const InteractiveCylinder3D = () => {
   const topVerts2D = topVerts3D.map(cylProj);
   const botVerts2D = botVerts3D.map(cylProj);
 
-  type Face = { avgZ: number; points: string; fill: string; stroke: string };
-  const faces: Face[] = [];
-
-  for (let i = 0; i < CYL_SEGS; i++) {
+  type Panel = { avgZ: number; visible: boolean; fill: string; stroke: string; points: string };
+  const panels: Panel[] = Array.from({ length: CYL_SEGS }, (_, i) => {
     const ni = (i + 1) % CYL_SEGS;
     const t0 = topVerts3D[i], t1 = topVerts3D[ni];
     const b0 = botVerts3D[i], b1 = botVerts3D[ni];
     const p_t0 = topVerts2D[i], p_t1 = topVerts2D[ni];
     const p_b0 = botVerts2D[i], p_b1 = botVerts2D[ni];
     const avgZ = (t0.z + t1.z + b0.z + b1.z) / 4;
-    const midAngle = (2 * Math.PI * (i + 0.5)) / CYL_SEGS;
-    const nx = Math.cos(midAngle), nz = Math.sin(midAngle);
-    const rotNx = nx * Math.cos((rotY * Math.PI) / 180) + nz * Math.sin((rotY * Math.PI) / 180);
-    const lightness = Math.round(62 + rotNx * 38);
-    const visible = rotNx > -0.15;
-    faces.push({
+    const ex = p_t1.x - p_t0.x, ey = p_t1.y - p_t0.y;
+    const fx = p_b0.x - p_t0.x, fy = p_b0.y - p_t0.y;
+    const visible = (ex * fy - ey * fx) > 0;
+    const hue = Math.floor((i / CYL_SEGS) * 60) + 180;
+    return {
       avgZ,
+      visible,
+      fill: visible ? `hsla(${hue},80%,55%,0.88)` : `rgba(100,150,200,0.06)`,
+      stroke: visible ? "#ffffff55" : "#ffffff15",
       points: `${p_t0.x},${p_t0.y} ${p_t1.x},${p_t1.y} ${p_b1.x},${p_b1.y} ${p_b0.x},${p_b0.y}`,
-      fill: visible ? `hsl(45,100%,${lightness}%)` : `hsl(38,80%,14%)`,
-      stroke: "rgba(200,140,0,0.15)",
-    });
-  }
+    };
+  });
+
+  const sortedPanels = [...panels].sort((a, b) => b.avgZ - a.avgZ);
 
   const topCapAvgZ = topVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
   const botCapAvgZ = botVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
-  const topCapCenter3D = cylRotPt(0, -CYL_H / 2, 0, rotX, rotY);
-  const botCapCenter3D = cylRotPt(0, CYL_H / 2, 0, rotX, rotY);
-
-  faces.push({
-    avgZ: topCapAvgZ,
-    points: topVerts2D.map(p => `${p.x},${p.y}`).join(" "),
-    fill: topCapCenter3D.y < botCapCenter3D.y ? "#fde68a" : "#92400e",
-    stroke: "#fef3c7",
-  });
-  faces.push({
-    avgZ: botCapAvgZ,
-    points: botVerts2D.map(p => `${p.x},${p.y}`).join(" "),
-    fill: botCapCenter3D.y > topCapCenter3D.y ? "#fbbf24" : "#78350f",
-    stroke: "#fde68a",
-  });
-
-  faces.sort((a, b) => b.avgZ - a.avgZ);
-
-  const topCenter2D = cylProj(topCapCenter3D);
-  const botCenter2D = cylProj(botCapCenter3D);
+  const topPolyPoints = topVerts2D.map(p => `${p.x},${p.y}`).join(" ");
+  const botPolyPoints = botVerts2D.map(p => `${p.x},${p.y}`).join(" ");
+  const topVisible = rotX < 10;
+  const botVisible = rotX > -60;
 
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar tabung 3D
+        Drag untuk memutar · Klik dan geser untuk eksplorasi
       </p>
 
       <svg
         viewBox={`0 0 ${CYL_W} ${CYL_H_SVG}`}
         width="100%"
         style={{ maxWidth: CYL_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
-        onMouseDown={onMouseDown}
-        onTouchStart={onTouchStart}
+        onMouseDown={onMD}
+        onTouchStart={onTS}
       >
-        {faces.map((f, i) => (
-          <polygon key={i} points={f.points} fill={f.fill} stroke={f.stroke} strokeWidth="0.5" />
-        ))}
+        {sortedPanels.map((p, i) =>
+          p.visible && (
+            <polygon key={i} points={p.points} fill={p.fill} stroke={p.stroke} strokeWidth="0.8" />
+          )
+        )}
+        {topCapAvgZ > botCapAvgZ ? (
+          <>
+            {botVisible && <polygon points={botPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
+            {topVisible && <polygon points={topPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
+          </>
+        ) : (
+          <>
+            {topVisible && <polygon points={topPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
+            {botVisible && <polygon points={botPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
+          </>
+        )}
+        {sortedPanels.map((p, i) =>
+          !p.visible && (
+            <polygon key={`g${i}`} points={p.points} fill="rgba(100,150,200,0.06)" stroke="#ffffff15" strokeWidth="0.5" />
+          )
+        )}
+        <text x="10" y={CYL_H_SVG - 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r={CYL_R}px  t={CYL_H}px</text>
+        <text x={CYL_W - 88} y={CYL_H_SVG - 12} fill="#22d3ee" fontSize="9" fontFamily="monospace">L=2πr²+2πrt</text>
       </svg>
+
+      <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
+        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-sm inline-block" style={{ background: "hsl(180,80%,55%)" }}/><span className="text-white/50">Selimut</span></span>
+        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-sm inline-block bg-indigo-400"/><span className="text-white/50">Tutup Atas &amp; Bawah</span></span>
+      </div>
     </div>
   );
 };
