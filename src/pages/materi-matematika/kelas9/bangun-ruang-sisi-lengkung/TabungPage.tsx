@@ -162,8 +162,6 @@ const InteractiveCylinder3D = () => {
         {faces.map((f, i) => (
           <polygon key={i} points={f.points} fill={f.fill} stroke={f.stroke} strokeWidth="0.5" />
         ))}
-        <text x={topCenter2D.x} y={topCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP ATAS (r)</text>
-        <text x={botCenter2D.x} y={botCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP BAWAH (r)</text>
       </svg>
     </div>
   );
