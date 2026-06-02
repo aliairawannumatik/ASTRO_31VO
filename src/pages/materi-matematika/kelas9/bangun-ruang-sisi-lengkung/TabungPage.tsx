@@ -541,71 +541,105 @@ const CylinderNetAnimation = () => {
       </p>
 
       <svg
-        viewBox={`0 0 ${CYL_W} ${CYL_H_SVG}`}
+        viewBox={`0 -42 ${CYL_W} ${CYL_H_SVG + 84}`}
         width="100%"
         style={{ maxWidth: CYL_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
         onMouseDown={onMD}
         onTouchStart={onTS}
       >
-        {/* ── Selimut (body panels) — clickable ── */}
+        <defs>
+          <marker id="nArrL" markerWidth="4" markerHeight="4" refX="4" refY="2" orient="auto-start-reverse">
+            <path d="M4,0 L4,4 L0,2 z" fill="#a855f7"/>
+          </marker>
+          <marker id="nArrR" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
+            <path d="M0,0 L0,4 L4,2 z" fill="#a855f7"/>
+          </marker>
+          <style>{`
+            @keyframes netUnroll {
+              from { transform: scaleX(0); opacity:0; }
+              to   { transform: scaleX(1); opacity:1; }
+            }
+            @keyframes netFadeIn { from{opacity:0} to{opacity:1} }
+            .net-unroll { animation: netUnroll 0.72s cubic-bezier(0.4,0,0.2,1) both; transform-box:fill-box; transform-origin:left center; }
+            .net-fadein { animation: netFadeIn 0.5s 0.5s ease both; }
+          `}</style>
+        </defs>
+
+        {/* ── SELIMUT (body panels) — click to unroll into rectangle ── */}
         <g onClick={() => tryToggle(setSelOpen)} style={{ cursor: "pointer" }}>
-          {sortedPanels.map((p, i) =>
-            p.visible && <polygon key={i} points={p.points} fill={p.fill} stroke={p.stroke} strokeWidth="0.8" />
-          )}
-          {selOpen && <>
-            <text x={CYL_CX} y={CYL_CY - 6} fill="#e9d5ff" fontSize="10" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT</text>
-            <text x={CYL_CX} y={CYL_CY + 9} fill="#c4b5fd" fontSize="9"  fontFamily="monospace" textAnchor="middle">p = 2πr, l = t</text>
-          </>}
+          {/* 3D panels — fade out when selOpen */}
+          <g style={{ opacity: selOpen ? 0.06 : 1, transition: "opacity 0.45s ease" }}>
+            {sortedPanels.map((p, i) =>
+              p.visible && <polygon key={i} points={p.points} fill={p.fill} stroke={p.stroke} strokeWidth="0.8" />
+            )}
+          </g>
+
+          {/* Unrolled rectangle — appears when selOpen */}
+          {selOpen && (() => {
+            const rx = CYL_CX - 118, ry = CYL_CY - CYL_H / 2, rw = 236, rh = CYL_H;
+            return (
+              <>
+                <rect x={rx} y={ry} width={rw} height={rh} rx={3}
+                  fill="rgba(168,85,247,0.28)" stroke="#a855f7" strokeWidth="1.8"
+                  className="net-unroll" />
+                <g className="net-fadein">
+                  <text x={CYL_CX} y={CYL_CY - 2} fill="#e9d5ff" fontSize="10" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT TABUNG</text>
+                  <text x={CYL_CX} y={CYL_CY + 13} fill="#c4b5fd" fontSize="9" fontFamily="monospace" textAnchor="middle">p = 2πr &nbsp; · &nbsp; l = t</text>
+                  {/* Width arrow */}
+                  <line x1={rx} y1={ry - 13} x2={rx + rw} y2={ry - 13} stroke="#a855f7" strokeWidth="1" markerStart="url(#nArrL)" markerEnd="url(#nArrR)" />
+                  <text x={CYL_CX} y={ry - 16} fill="#a855f7" fontSize="8" fontFamily="monospace" textAnchor="middle">2πr (keliling alas)</text>
+                  {/* Height dim */}
+                  <line x1={rx + rw + 10} y1={ry}      x2={rx + rw + 10} y2={ry + rh} stroke="#a855f7" strokeWidth="1" />
+                  <line x1={rx + rw + 5}  y1={ry}      x2={rx + rw + 15} y2={ry}      stroke="#a855f7" strokeWidth="1" />
+                  <line x1={rx + rw + 5}  y1={ry + rh} x2={rx + rw + 15} y2={ry + rh} stroke="#a855f7" strokeWidth="1" />
+                  <text x={rx + rw + 20} y={CYL_CY + 4} fill="#a855f7" fontSize="9" fontFamily="monospace">t</text>
+                </g>
+              </>
+            );
+          })()}
         </g>
 
-        {/* ── Caps — z-sorted, each in separate clickable group with translateY ── */}
-        {topCapAvgZ > botCapAvgZ ? (
-          <>
-            <g onClick={(e) => { e.stopPropagation(); tryToggle(setBotOpen); }}
-              style={{ transform: botOpen ? "translateY(72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
-              {botVisible && <polygon points={botPolyPts} fill={botOpen ? "rgb(134,239,172)" : "rgb(99,102,241)"} stroke={botOpen ? "#bbf7d0" : "#a5b4fc"} strokeWidth="1.2" />}
-              {botOpen && <>
-                <text x={botC.x} y={botC.y - 10} fill="#86efac" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Alas ⭕</text>
-                <circle cx={botC.x} cy={botC.y} r="3" fill="#fbbf24" />
-                <line x1={botC.x} y1={botC.y} x2={botC.x + 26} y2={botC.y} stroke="#fbbf24" strokeWidth="1.5" />
-                <text x={botC.x + 15} y={botC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
-              </>}
-            </g>
-            <g onClick={(e) => { e.stopPropagation(); tryToggle(setTopOpen); }}
-              style={{ transform: topOpen ? "translateY(-72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
-              {topVisible && <polygon points={topPolyPts} fill={topOpen ? "rgb(103,232,249)" : "rgb(99,102,241)"} stroke={topOpen ? "#a5f3fc" : "#a5b4fc"} strokeWidth="1.2" />}
-              {topOpen && <>
-                <text x={topC.x} y={topC.y + 14} fill="#67e8f9" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Tutup Atas ⭕</text>
-                <circle cx={topC.x} cy={topC.y} r="3" fill="#fbbf24" />
-                <line x1={topC.x} y1={topC.y} x2={topC.x + 26} y2={topC.y} stroke="#fbbf24" strokeWidth="1.5" />
-                <text x={topC.x + 15} y={topC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
-              </>}
-            </g>
-          </>
-        ) : (
-          <>
-            <g onClick={(e) => { e.stopPropagation(); tryToggle(setTopOpen); }}
-              style={{ transform: topOpen ? "translateY(-72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
-              {topVisible && <polygon points={topPolyPts} fill={topOpen ? "rgb(103,232,249)" : "rgb(99,102,241)"} stroke={topOpen ? "#a5f3fc" : "#a5b4fc"} strokeWidth="1.2" />}
-              {topOpen && <>
-                <text x={topC.x} y={topC.y + 14} fill="#67e8f9" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Tutup Atas ⭕</text>
-                <circle cx={topC.x} cy={topC.y} r="3" fill="#fbbf24" />
-                <line x1={topC.x} y1={topC.y} x2={topC.x + 26} y2={topC.y} stroke="#fbbf24" strokeWidth="1.5" />
-                <text x={topC.x + 15} y={topC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
-              </>}
-            </g>
-            <g onClick={(e) => { e.stopPropagation(); tryToggle(setBotOpen); }}
-              style={{ transform: botOpen ? "translateY(72px)" : "translateY(0)", transition: TRANS, cursor: "pointer" }}>
-              {botVisible && <polygon points={botPolyPts} fill={botOpen ? "rgb(134,239,172)" : "rgb(99,102,241)"} stroke={botOpen ? "#bbf7d0" : "#a5b4fc"} strokeWidth="1.2" />}
-              {botOpen && <>
-                <text x={botC.x} y={botC.y - 10} fill="#86efac" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">Alas ⭕</text>
-                <circle cx={botC.x} cy={botC.y} r="3" fill="#fbbf24" />
-                <line x1={botC.x} y1={botC.y} x2={botC.x + 26} y2={botC.y} stroke="#fbbf24" strokeWidth="1.5" />
-                <text x={botC.x + 15} y={botC.y - 3} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
-              </>}
-            </g>
-          </>
-        )}
+        {/* ── CAPS — z-sorted, each melebar menjadi lingkaran flat ── */}
+        {(topCapAvgZ > botCapAvgZ
+          ? [
+              { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, dy:82, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
+              { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, dy:-82, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
+            ]
+          : [
+              { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, dy:-82, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
+              { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, dy:82, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
+            ]
+        ).map(({ key, open, set, pts, c, vis, dy, col, fillO, stroke, lbl }) => (
+          <g key={key} onClick={(e) => { e.stopPropagation(); tryToggle(set); }} style={{ cursor: "pointer" }}>
+            {/* 3D ellipse polygon — fades out when open */}
+            {vis && (
+              <polygon points={pts} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2"
+                style={{ opacity: open ? 0 : 1, transition: "opacity 0.35s" }} />
+            )}
+            {/* Flat circle — melebar saat open */}
+            <circle cx={c.x} cy={c.y} r={52}
+              fill={fillO} stroke={stroke} strokeWidth="1.5"
+              style={{
+                transform: open ? `translateY(${dy}px) scale(1)` : "scale(0.06)",
+                transition: TRANS,
+                transformBox: "fill-box",
+                transformOrigin: "center center",
+                opacity: open ? 1 : 0,
+                pointerEvents: "none",
+              }}
+            />
+            {/* Labels & jari-jari — shown when open */}
+            {open && (
+              <>
+                <text x={c.x} y={c.y + dy - 4} fill={col} fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">{lbl}</text>
+                <text x={c.x} y={c.y + dy + 9}  fill={col} fontSize="8" fontFamily="monospace" textAnchor="middle">L = πr²</text>
+                <circle cx={c.x} cy={c.y + dy} r="2.5" fill="#fbbf24" />
+                <line x1={c.x} y1={c.y + dy} x2={c.x + 52} y2={c.y + dy} stroke="#fbbf24" strokeWidth="1.2" />
+                <text x={c.x + 33} y={c.y + dy - 4} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
+              </>
+            )}
+          </g>
+        ))}
 
         {/* ── Ghost hidden body panels ── */}
         {sortedPanels.map((p, i) =>
