@@ -47,7 +47,7 @@ const InteractiveCylinder3D = () => {
   const onMM = useCallback((e: MouseEvent) => {
     if (!isDragging) return;
     setRotY(dragRef.current.bry + (e.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.brx - (e.clientY - dragRef.current.sy) * 0.55);
+    setRotX(dragRef.current.brx + (e.clientY - dragRef.current.sy) * 0.55);
   }, [isDragging]);
   const onMU = useCallback(() => setIsDragging(false), []);
   const onTS = (e: React.TouchEvent) => {
@@ -59,7 +59,7 @@ const InteractiveCylinder3D = () => {
     if (!isDragging) return;
     const t = e.touches[0];
     setRotY(dragRef.current.bry + (t.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.brx - (t.clientY - dragRef.current.sy) * 0.55);
+    setRotX(dragRef.current.brx + (t.clientY - dragRef.current.sy) * 0.55);
   }, [isDragging]);
   const onTE = useCallback(() => setIsDragging(false), []);
 
@@ -150,13 +150,13 @@ const InteractiveCylinder3D = () => {
         )}
         {topCapAvgZ > botCapAvgZ ? (
           <>
-            {botVisible && <polygon points={botPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
-            {topVisible && <polygon points={topPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
+            {botVisible && <polygon points={botPolyPoints} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2" />}
+            {topVisible && <polygon points={topPolyPoints} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2" />}
           </>
         ) : (
           <>
-            {topVisible && <polygon points={topPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
-            {botVisible && <polygon points={botPolyPoints} fill="rgba(99,102,241,0.75)" stroke="#a5b4fc" strokeWidth="1.2" />}
+            {topVisible && <polygon points={topPolyPoints} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2" />}
+            {botVisible && <polygon points={botPolyPoints} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2" />}
           </>
         )}
         {sortedPanels.map((p, i) =>
