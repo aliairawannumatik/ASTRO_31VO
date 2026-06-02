@@ -61,6 +61,38 @@ const PenyajianDataPage = () => {
     setChartData([]);
   };
 
+  /* ── Diagram Batang Daun Interaktif state ── */
+  const [stemInput, setStemInput]         = useState("62, 65, 68, 71, 73, 73, 75, 78, 78, 82, 85, 87, 88, 91, 95");
+  const [stemResult, setStemResult]       = useState<{ stem: number; leaves: number[] }[]>([]);
+  const [stemRaw, setStemRaw]             = useState<number[]>([]);
+  const [stemVisible, setStemVisible]     = useState(false);
+  const [stemAnimated, setStemAnimated]   = useState(false);
+  const [stemError, setStemError]         = useState("");
+
+  const buildStemLeaf = () => {
+    const parts = stemInput.split(/[,\s]+/).filter(Boolean);
+    if (parts.length < 2) { setStemError("Masukkan minimal 2 angka, dipisahkan koma."); return; }
+    if (parts.length > 30) { setStemError("Maksimal 30 angka."); return; }
+    const nums = parts.map(p => parseInt(p.trim(), 10));
+    if (nums.some(n => isNaN(n) || n < 0 || n > 999)) { setStemError("Semua angka harus valid dan berada di antara 0–999."); return; }
+    setStemError("");
+    const sorted = [...nums].sort((a, b) => a - b);
+    setStemRaw(sorted);
+    const map = new Map<number, number[]>();
+    for (const n of sorted) {
+      const s = Math.floor(n / 10), l = n % 10;
+      if (!map.has(s)) map.set(s, []);
+      map.get(s)!.push(l);
+    }
+    const result = Array.from(map.entries()).sort((a, b) => a[0] - b[0]).map(([stem, leaves]) => ({ stem, leaves }));
+    setStemResult(result);
+    setStemVisible(true);
+    setStemAnimated(false);
+    setTimeout(() => setStemAnimated(true), 80);
+  };
+  const resetStem = () => { setStemVisible(false); setStemAnimated(false); setStemResult([]); setStemRaw([]); };
+  const loadStemExample = () => { setStemInput("72, 65, 78, 83, 91, 65, 72, 88, 75, 90, 68, 77, 84, 92, 70"); setStemError(""); setStemVisible(false); setStemAnimated(false); };
+
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro",
     "konsep1", "contoh1",
@@ -222,6 +254,173 @@ const PenyajianDataPage = () => {
                     <strong>Cara membuat:</strong> (1) Urutkan data dari kecil ke besar. (2) Ambil digit puluhan sebagai batang. (3) Tulis digit satuan sebagai daun di sebelah kanan batangnya.
                   </p>
                 </div>
+
+                {/* ===== DIAGRAM BATANG DAUN INTERAKTIF ===== */}
+                <div className="bg-slate-800/70 border border-green-500/30 rounded-xl overflow-hidden">
+                  <div className="bg-green-900/50 px-4 py-3 flex items-center gap-2">
+                    <Target className="w-4 h-4 text-green-400 shrink-0" />
+                    <p className="font-body text-sm font-bold text-green-200">🛠️ Coba Sendiri — Buat Diagram Batang Daun</p>
+                  </div>
+
+                  <div className="p-4 space-y-4">
+                    <p className="font-body text-xs text-white/55 leading-relaxed">
+                      Masukkan data angka (0–999) dipisahkan koma, lalu klik <strong className="text-green-300">Buat Diagram</strong> untuk melihat animasi batang daun lengkap dengan statistiknya!
+                    </p>
+
+                    {/* Input */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <label className="font-body text-xs font-semibold text-green-300">Data angka (dipisah koma, maks 30):</label>
+                        <button
+                          onClick={loadStemExample}
+                          className="font-body text-xs text-green-400/60 hover:text-green-400 transition-colors underline underline-offset-2"
+                        >Ganti contoh ↗</button>
+                      </div>
+                      <input
+                        type="text"
+                        value={stemInput}
+                        onChange={(e) => { setStemInput(e.target.value); setStemError(""); setStemVisible(false); }}
+                        placeholder="Contoh: 72, 65, 78, 83, 91, 75, 90..."
+                        className="w-full bg-slate-800/60 border border-slate-600/50 rounded-lg px-3 py-2.5 text-sm font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-green-400/60 transition-colors"
+                      />
+                      {stemError && (
+                        <p className="font-body text-xs text-red-400">⚠ {stemError}</p>
+                      )}
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={buildStemLeaf}
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-green-600 border border-green-500/50 text-white text-xs font-body font-bold hover:bg-green-500 active:scale-95 transition-all shadow-lg shadow-green-500/20"
+                      >
+                        <Target className="w-3.5 h-3.5" />
+                        Buat Diagram Batang Daun
+                      </button>
+                      {stemVisible && (
+                        <button
+                          onClick={resetStem}
+                          className="flex items-center gap-1 px-3 py-2 rounded-lg bg-slate-700/50 border border-slate-600/40 text-white/50 text-xs font-body hover:bg-slate-600/50 hover:text-white/70 transition-all"
+                        >↺ Reset</button>
+                      )}
+                    </div>
+
+                    {/* Diagram Result */}
+                    {stemVisible && stemResult.length > 0 && (() => {
+                      const n = stemRaw.length;
+                      const minVal = stemRaw[0];
+                      const maxVal = stemRaw[n - 1];
+                      const medianVal = n % 2 === 1
+                        ? stemRaw[Math.floor(n / 2)]
+                        : (stemRaw[n / 2 - 1] + stemRaw[n / 2]) / 2;
+                      const freq = new Map<number, number>();
+                      for (const x of stemRaw) freq.set(x, (freq.get(x) || 0) + 1);
+                      const maxFreq = Math.max(...freq.values());
+                      const modes = [...freq.entries()].filter(([, f]) => f === maxFreq).map(([v]) => v).sort((a, b) => a - b);
+                      const modeStr = maxFreq === 1 ? "Tidak ada" : modes.join(" & ");
+
+                      let globalLeafIdx = 0;
+
+                      return (
+                        <div className="bg-slate-900/60 border border-green-500/20 rounded-xl p-4 space-y-4">
+                          <div className="flex items-center justify-between">
+                            <p className="font-body text-xs font-bold text-green-300 uppercase tracking-wider">🌿 Hasil Diagram Batang Daun</p>
+                            <span className="font-body text-xs text-white/35">{n} data · terurut</span>
+                          </div>
+
+                          {/* Sorted data preview */}
+                          <div className="bg-slate-800/50 rounded-lg px-3 py-2">
+                            <p className="font-body text-xs text-white/35 mb-1">Data terurut:</p>
+                            <p className="font-body text-xs text-white/70 leading-relaxed">{stemRaw.join(", ")}</p>
+                          </div>
+
+                          {/* Stem-and-leaf diagram */}
+                          <div className="bg-slate-900/80 rounded-xl overflow-hidden border border-green-500/15">
+                            {/* Header */}
+                            <div className="flex items-center gap-0 border-b border-slate-700/60">
+                              <div className="w-16 px-3 py-2 text-right font-body text-xs font-bold text-slate-400 uppercase tracking-wide shrink-0">Batang</div>
+                              <div className="w-px self-stretch bg-slate-600/60" />
+                              <div className="px-3 py-2 font-body text-xs font-bold text-slate-400 uppercase tracking-wide">Daun</div>
+                            </div>
+                            {/* Rows */}
+                            <div className="divide-y divide-slate-800/60">
+                              {stemResult.map((row, rowIdx) => {
+                                const rowDelay = rowIdx * 0.12;
+                                const localStart = globalLeafIdx;
+                                globalLeafIdx += row.leaves.length;
+                                return (
+                                  <div
+                                    key={row.stem}
+                                    className="flex items-center gap-0"
+                                    style={{
+                                      opacity: stemAnimated ? 1 : 0,
+                                      transform: stemAnimated ? "translateX(0)" : "translateX(-16px)",
+                                      transition: `opacity 0.4s ease ${rowDelay}s, transform 0.4s ease ${rowDelay}s`,
+                                    }}
+                                  >
+                                    <div className="w-16 px-3 py-2.5 text-right shrink-0">
+                                      <span className="font-mono font-bold text-cyan-300 text-sm">{row.stem}</span>
+                                    </div>
+                                    <div className="w-px self-stretch bg-slate-600/60" />
+                                    <div className="px-3 py-2.5 flex items-center gap-2 flex-wrap">
+                                      {row.leaves.map((leaf, leafIdx) => {
+                                        const globalIdx = localStart + leafIdx;
+                                        return (
+                                          <span
+                                            key={leafIdx}
+                                            className="font-mono text-green-300 font-semibold text-sm"
+                                            style={{
+                                              opacity: stemAnimated ? 1 : 0,
+                                              transition: `opacity 0.25s ease ${rowDelay + 0.1 + leafIdx * 0.06}s`,
+                                              display: "inline-block",
+                                            }}
+                                          >{leaf}</span>
+                                        );
+                                        void globalIdx;
+                                      })}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            {/* Footer legend */}
+                            <div className="border-t border-slate-700/60 px-3 py-2 flex items-center gap-4">
+                              <span className="font-body text-xs text-white/30">Kunci: Batang | Daun</span>
+                              <span className="font-body text-xs text-white/30">Contoh baris pertama: {stemResult[0].stem} | {stemResult[0].leaves[0]} → <strong className="text-white/50">{stemResult[0].stem * 10 + stemResult[0].leaves[0]}</strong></span>
+                            </div>
+                          </div>
+
+                          {/* Stats */}
+                          <div
+                            className="grid grid-cols-2 sm:grid-cols-4 gap-2"
+                            style={{
+                              opacity: stemAnimated ? 1 : 0,
+                              transition: `opacity 0.5s ease ${stemResult.length * 0.12 + 0.4}s`,
+                            }}
+                          >
+                            <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MINIMUM</p>
+                              <p className="font-body text-green-300 font-bold text-lg mt-0.5">{minVal}</p>
+                            </div>
+                            <div className="bg-red-900/25 border border-red-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MAKSIMUM</p>
+                              <p className="font-body text-red-300 font-bold text-lg mt-0.5">{maxVal}</p>
+                            </div>
+                            <div className="bg-yellow-900/25 border border-yellow-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MODUS</p>
+                              <p className="font-body text-yellow-300 font-bold text-sm mt-0.5 leading-tight">{modeStr}</p>
+                            </div>
+                            <div className="bg-blue-900/25 border border-blue-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MEDIAN</p>
+                              <p className="font-body text-blue-300 font-bold text-lg mt-0.5">{medianVal}</p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
