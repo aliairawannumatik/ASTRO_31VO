@@ -9,7 +9,7 @@ import { InlineMath, BlockMath } from "react-katex";
 
 /* ─── Animasi Interaktif Penentuan Median ─── */
 const MedianAnimator = () => {
-  const [screen, setScreen] = useState<"input" | "sort" | "median">("input");
+  const [screen, setScreen] = useState<"input" | "sort" | "sorted" | "median">("input");
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [original, setOriginal] = useState<number[]>([]);
@@ -79,6 +79,11 @@ const MedianAnimator = () => {
     setTimeout(() => { setIsSorting(false); setSortRevealed(true); playPopSound(); }, 1400);
   };
 
+  const goToSorted = () => {
+    playPopSound();
+    setScreen("sorted");
+  };
+
   const startMedianAnimation = () => {
     playPopSound();
     setElimStep(0);
@@ -87,11 +92,36 @@ const MedianAnimator = () => {
     setTimeout(() => setIsAnimating(true), 500);
   };
 
+  /* reusable chip row — data terurut (selalu tampil, tidak berubah) */
+  const SortedReferenceRow = ({ label }: { label: string }) => (
+    <div>
+      <p className="font-body text-xs text-purple-300/70 mb-2 uppercase tracking-wide font-semibold">{label}</p>
+      <div className="flex flex-wrap gap-1.5">
+        {sorted.map((v, i) => {
+          const isMedPos = isOdd ? i === medianIdx1 : i === medianIdx1 || i === medianIdx2;
+          return (
+            <div
+              key={i}
+              className={`rounded-lg px-2.5 py-1.5 text-center border ${
+                isMedPos
+                  ? "bg-purple-700/50 border-purple-400/60 ring-1 ring-purple-400/50"
+                  : "bg-slate-700/40 border-slate-600/40"
+              }`}
+            >
+              <p className={`font-bold text-xs font-body ${isMedPos ? "text-purple-200" : "text-white/60"}`}>{fmt(v)}</p>
+              <p className="text-white/25 text-[10px] font-body">ke-{i + 1}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
   /* ── Layar 1: Input ── */
   if (screen === "input") return (
     <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-4 space-y-4">
       <div className="flex items-center gap-2 mb-1">
-        <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 1 / 3</span>
+        <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 1 / 4</span>
         <p className="font-body text-sm font-bold text-purple-300">🔢 Input Data</p>
       </div>
       <p className="font-body text-xs text-white/55 leading-relaxed">
@@ -121,13 +151,12 @@ const MedianAnimator = () => {
     <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-4 space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 2 / 3</span>
+          <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 2 / 4</span>
           <p className="font-body text-sm font-bold text-purple-300">🔀 Urutkan Data</p>
         </div>
         <button onClick={goToInput} className="text-xs text-white/40 hover:text-white/70 font-body cursor-pointer transition-colors">← Kembali</button>
       </div>
 
-      {/* Data asli */}
       <div>
         <p className="font-body text-xs text-white/40 mb-2 uppercase tracking-wide font-semibold">Data asli (belum terurut):</p>
         <div className="flex flex-wrap gap-2">
@@ -170,126 +199,197 @@ const MedianAnimator = () => {
               ))}
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-lg p-3 text-center">
-            <p className="font-body text-xs text-white/50">
-              n = <strong className="text-white">{n}</strong> ({isOdd ? "ganjil" : "genap"}) → posisi median:{" "}
-              <strong className="text-purple-300">
-                {isOdd
-                  ? `urutan ke-${medianIdx1 + 1}`
-                  : `urutan ke-${medianIdx1 + 1} dan ke-${medianIdx2 + 1}`}
-              </strong>
-            </p>
-          </div>
           <button
-            onClick={startMedianAnimation}
+            onClick={goToSorted}
             className="w-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold font-body py-2.5 rounded-lg transition-colors cursor-pointer"
           >
-            🎯 Tentukan Median →
+            Lanjut → Lihat Data Terurut
           </button>
         </div>
       )}
     </div>
   );
 
-  /* ── Layar 3: Penentuan Median (Slow Motion) ── */
-  return (
+  /* ── Layar 3: Data Terurut (permanen) ── */
+  if (screen === "sorted") return (
     <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-4 space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 3 / 3</span>
-          <p className="font-body text-sm font-bold text-purple-300">🎯 Penentuan Median</p>
+          <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 3 / 4</span>
+          <p className="font-body text-sm font-bold text-purple-300">📋 Data Terurut</p>
         </div>
         <button
-          onClick={() => { playPopSound(); setScreen("sort"); setSortRevealed(true); setIsAnimating(false); }}
+          onClick={() => { playPopSound(); setScreen("sort"); setSortRevealed(true); }}
           className="text-xs text-white/40 hover:text-white/70 font-body cursor-pointer transition-colors"
         >
           ← Kembali
         </button>
       </div>
 
-      {!medianDone && (
-        <p className="font-body text-xs text-white/40 text-center">
-          {isAnimating
-            ? `⬅️ Menyingkirkan data dari ujung kiri & kanan... (${elimStep}/${maxElim}) ➡️`
-            : "Siap memulai animasi..."}
-        </p>
-      )}
-
-      {/* Chip data dengan animasi eliminasi */}
-      <div className="flex flex-wrap gap-2 justify-center">
-        {sorted.map((v, i) => {
-          const isElim = elimStep > 0 && (i < elimStep || i >= n - elimStep);
-          const isMid = medianDone && !isElim;
-          const isActiveLeft = !medianDone && isAnimating && i === elimStep - 1;
-          const isActiveRight = !medianDone && isAnimating && i === n - elimStep;
-          return (
+      {/* Chips terurut — ukuran penuh, label lengkap */}
+      <div>
+        <p className="font-body text-xs text-purple-300 mb-3 uppercase tracking-wide font-bold">Data terurut dari kecil ke besar:</p>
+        <div className="flex flex-wrap gap-2">
+          {sorted.map((v, i) => (
             <div
               key={i}
-              className={`rounded-lg px-3 py-2 text-center border transition-all duration-600 ${
-                isMid
-                  ? "bg-purple-700/70 border-purple-400 ring-2 ring-purple-400 scale-110 shadow-lg shadow-purple-500/40"
-                  : isElim
-                  ? "bg-slate-800/30 border-slate-700/30 opacity-20 scale-90"
-                  : isActiveLeft || isActiveRight
-                  ? "bg-red-900/40 border-red-500/60 scale-105"
-                  : "bg-slate-700/60 border-slate-500/50"
-              }`}
+              className="bg-purple-800/50 border border-purple-500/50 rounded-lg px-3 py-2 text-center"
+              style={{ transitionDelay: `${i * 50}ms` }}
             >
-              <p className={`font-bold text-sm font-body ${
-                isMid ? "text-purple-200" : isElim ? "text-white/30 line-through" : "text-white/80"
-              }`}>
-                {fmt(v)}
-              </p>
-              <p className={`text-xs font-body ${isMid ? "text-purple-400" : "text-white/30"}`}>
-                ke-{i + 1}
-              </p>
+              <p className="text-purple-200 font-bold text-sm font-body">{fmt(v)}</p>
+              <p className="text-purple-400/60 text-xs font-body">ke-{i + 1}</p>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
-      {/* Indikator panah */}
-      {isAnimating && !medianDone && (
-        <div className="flex justify-between text-xs font-body px-2">
-          <span className="text-red-400 font-bold">← singkirkan</span>
-          <span className="text-red-400 font-bold">singkirkan →</span>
+      {/* Info n dan posisi median */}
+      <div className="bg-slate-800/60 rounded-xl p-4 space-y-2">
+        <div className="grid grid-cols-3 gap-2 text-xs font-body text-center">
+          <div className="bg-slate-900/60 rounded-lg p-2.5">
+            <p className="text-white/40 mb-1">Banyak Data (n)</p>
+            <p className="text-white font-bold text-lg">{n}</p>
+          </div>
+          <div className="bg-slate-900/60 rounded-lg p-2.5">
+            <p className="text-white/40 mb-1">Jenis n</p>
+            <p className={`font-bold text-lg ${isOdd ? "text-purple-300" : "text-cyan-300"}`}>
+              {isOdd ? "Ganjil" : "Genap"}
+            </p>
+          </div>
+          <div className="bg-purple-900/40 border border-purple-500/30 rounded-lg p-2.5">
+            <p className="text-white/40 mb-1">Posisi Median</p>
+            <p className="text-purple-300 font-bold text-xs leading-tight">
+              {isOdd ? `ke-${medianIdx1 + 1}` : `ke-${medianIdx1+1} & ke-${medianIdx2+1}`}
+            </p>
+          </div>
         </div>
-      )}
+        <div className="bg-slate-900/50 rounded-lg p-3 text-center">
+          {isOdd ? (
+            <p className="font-body text-xs text-white/60">
+              n = {n} (ganjil) → posisi tengah = <strong className="text-purple-300">{`(${n}+1)/2 = ${medianIdx1+1}`}</strong> → nilai ke-{medianIdx1+1} = <strong className="text-purple-300">{fmt(sorted[medianIdx1])}</strong>
+            </p>
+          ) : (
+            <p className="font-body text-xs text-white/60">
+              n = {n} (genap) → dua nilai tengah = <strong className="text-purple-300">ke-{medianIdx1+1}</strong> dan <strong className="text-purple-300">ke-{medianIdx2+1}</strong> → rata-ratakan keduanya
+            </p>
+          )}
+        </div>
+      </div>
 
-      {/* Hasil */}
-      {medianDone && (
-        <div className="space-y-3">
-          <div className="bg-slate-900/70 rounded-lg p-3 text-center overflow-x-auto">
-            {isOdd ? (
-              <BlockMath math={`\\text{Me} = x_{\\left(\\frac{${n}+1}{2}\\right)} = x_{(${medianIdx1+1})} = ${fmt(sorted[medianIdx1])}`} />
-            ) : (
-              <BlockMath math={`\\text{Me} = \\frac{x_{(${medianIdx1+1})} + x_{(${medianIdx2+1})}}{2} = \\frac{${fmt(sorted[medianIdx1])} + ${fmt(sorted[medianIdx2])}}{2} = ${fmt(medianValue)}`} />
-            )}
-          </div>
-          <div className="grid grid-cols-3 gap-2 text-xs font-body text-center">
-            <div className="bg-slate-800/60 rounded-lg p-2">
-              <p className="text-white/40 mb-1">Banyak Data (n)</p>
-              <p className="text-white font-bold text-base">{n}</p>
-            </div>
-            <div className="bg-slate-800/60 rounded-lg p-2">
-              <p className="text-white/40 mb-1">Jenis n</p>
-              <p className={`font-bold text-base ${isOdd ? "text-purple-300" : "text-cyan-300"}`}>
-                {isOdd ? "Ganjil" : "Genap"}
-              </p>
-            </div>
-            <div className="bg-purple-900/50 border border-purple-500/40 rounded-lg p-2">
-              <p className="text-white/40 mb-1">Median (Me)</p>
-              <p className="text-purple-300 font-bold text-base">{fmt(medianValue)}</p>
-            </div>
-          </div>
-          <button
-            onClick={goToInput}
-            className="w-full bg-slate-700/60 hover:bg-slate-600/60 text-white text-sm font-bold font-body py-2 rounded-lg transition-colors cursor-pointer"
-          >
-            🔄 Coba Data Lain
-          </button>
+      <button
+        onClick={startMedianAnimation}
+        className="w-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold font-body py-2.5 rounded-lg transition-colors cursor-pointer"
+      >
+        🎯 Mulai Animasi Median →
+      </button>
+    </div>
+  );
+
+  /* ── Layar 4: Penentuan Median (Slow Motion) ── */
+  return (
+    <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 4 / 4</span>
+          <p className="font-body text-sm font-bold text-purple-300">🎯 Penentuan Median</p>
         </div>
-      )}
+        <button
+          onClick={() => { playPopSound(); setScreen("sorted"); setIsAnimating(false); }}
+          className="text-xs text-white/40 hover:text-white/70 font-body cursor-pointer transition-colors"
+        >
+          ← Kembali
+        </button>
+      </div>
+
+      {/* Baris referensi — data terurut SELALU tampil, tidak berubah */}
+      <div className="bg-slate-800/50 border border-slate-600/30 rounded-xl p-3">
+        <SortedReferenceRow label="📋 Data terurut (referensi):" />
+      </div>
+
+      <div className="border-t border-slate-700/50 pt-3 space-y-3">
+        {!medianDone && (
+          <p className="font-body text-xs text-white/40 text-center">
+            {isAnimating
+              ? `⬅️ Menyingkirkan data dari ujung kiri & kanan... (${elimStep}/${maxElim}) ➡️`
+              : "Siap memulai animasi..."}
+          </p>
+        )}
+
+        {/* Chip animasi eliminasi */}
+        <div className="flex flex-wrap gap-2 justify-center">
+          {sorted.map((v, i) => {
+            const isElim = elimStep > 0 && (i < elimStep || i >= n - elimStep);
+            const isMid = medianDone && !isElim;
+            const isActiveLeft = !medianDone && isAnimating && i === elimStep - 1;
+            const isActiveRight = !medianDone && isAnimating && i === n - elimStep;
+            return (
+              <div
+                key={i}
+                className={`rounded-lg px-3 py-2 text-center border transition-all duration-500 ${
+                  isMid
+                    ? "bg-purple-700/70 border-purple-400 ring-2 ring-purple-400 scale-110 shadow-lg shadow-purple-500/40"
+                    : isElim
+                    ? "bg-slate-800/30 border-slate-700/30 opacity-20 scale-90"
+                    : isActiveLeft || isActiveRight
+                    ? "bg-red-900/40 border-red-500/60 scale-105"
+                    : "bg-slate-700/60 border-slate-500/50"
+                }`}
+              >
+                <p className={`font-bold text-sm font-body ${
+                  isMid ? "text-purple-200" : isElim ? "text-white/30 line-through" : "text-white/80"
+                }`}>
+                  {fmt(v)}
+                </p>
+                <p className={`text-xs font-body ${isMid ? "text-purple-400" : "text-white/30"}`}>
+                  ke-{i + 1}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {isAnimating && !medianDone && (
+          <div className="flex justify-between text-xs font-body px-2">
+            <span className="text-red-400 font-bold">← singkirkan</span>
+            <span className="text-red-400 font-bold">singkirkan →</span>
+          </div>
+        )}
+
+        {/* Hasil */}
+        {medianDone && (
+          <div className="space-y-3">
+            <div className="bg-slate-900/70 rounded-lg p-3 text-center overflow-x-auto">
+              {isOdd ? (
+                <BlockMath math={`\\text{Me} = x_{\\left(\\frac{${n}+1}{2}\\right)} = x_{(${medianIdx1+1})} = ${fmt(sorted[medianIdx1])}`} />
+              ) : (
+                <BlockMath math={`\\text{Me} = \\frac{x_{(${medianIdx1+1})} + x_{(${medianIdx2+1})}}{2} = \\frac{${fmt(sorted[medianIdx1])} + ${fmt(sorted[medianIdx2])}}{2} = ${fmt(medianValue)}`} />
+              )}
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-xs font-body text-center">
+              <div className="bg-slate-800/60 rounded-lg p-2">
+                <p className="text-white/40 mb-1">Banyak Data (n)</p>
+                <p className="text-white font-bold text-base">{n}</p>
+              </div>
+              <div className="bg-slate-800/60 rounded-lg p-2">
+                <p className="text-white/40 mb-1">Jenis n</p>
+                <p className={`font-bold text-base ${isOdd ? "text-purple-300" : "text-cyan-300"}`}>
+                  {isOdd ? "Ganjil" : "Genap"}
+                </p>
+              </div>
+              <div className="bg-purple-900/50 border border-purple-500/40 rounded-lg p-2">
+                <p className="text-white/40 mb-1">Median (Me)</p>
+                <p className="text-purple-300 font-bold text-base">{fmt(medianValue)}</p>
+              </div>
+            </div>
+            <button
+              onClick={goToInput}
+              className="w-full bg-slate-700/60 hover:bg-slate-600/60 text-white text-sm font-bold font-body py-2 rounded-lg transition-colors cursor-pointer"
+            >
+              🔄 Coba Data Lain
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
