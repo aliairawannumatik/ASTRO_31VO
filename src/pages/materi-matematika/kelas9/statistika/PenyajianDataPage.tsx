@@ -333,7 +333,7 @@ const PenyajianDataPage = () => {
                           </div>
                         </div>
                         {/* Frequency table */}
-                        <div className="rounded-lg overflow-hidden border border-cyan-500/20">
+                        <div className="rounded-lg overflow-hidden border border-cyan-500/20 max-w-xs">
                           <div className="grid bg-cyan-950/60" style={{ gridTemplateColumns: "1fr 1fr" }}>
                             <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
                             <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
