@@ -18,6 +18,12 @@ const BAR_COLORS = [
   { bg: "bg-red-500",    text: "text-red-300"    },
 ];
 
+const PIE_COLORS = [
+  "#f97316","#a855f7","#22d3ee","#4ade80",
+  "#f43f5e","#fbbf24","#60a5fa","#e879f9",
+  "#10b981","#fb923c",
+];
+
 const PenyajianDataPage = () => {
   const navigate = useNavigate();
 
@@ -101,6 +107,50 @@ const PenyajianDataPage = () => {
     setLineChartAnimated(false);
     setLineChartData([]);
   };
+
+  /* ── Diagram Lingkaran Interaktif state ── */
+  const [pieRows, setPieRows] = useState<{ id: number; label: string; value: string }[]>([
+    { id: 1, label: "Pramuka",  value: "24" },
+    { id: 2, label: "Musik",    value: "18" },
+    { id: 3, label: "Futsal",   value: "30" },
+    { id: 4, label: "Tari",     value: "12" },
+    { id: 5, label: "Robotik",  value: "16" },
+  ]);
+  const [pieRowCounter, setPieRowCounter] = useState(6);
+  const [pieVisible, setPieVisible]       = useState(false);
+  const [pieData, setPieData]             = useState<{ label: string; value: number; pct: number; sudut: number }[]>([]);
+  const [pieAnimated, setPieAnimated]     = useState(false);
+  const [pieMode, setPieMode]             = useState<"persen" | "derajat">("persen");
+
+  const addPieRow = () => {
+    if (pieRows.length >= 10) return;
+    setPieRows(prev => [...prev, { id: pieRowCounter, label: "", value: "" }]);
+    setPieRowCounter(prev => prev + 1);
+  };
+  const removePieRow = (id: number) => {
+    if (pieRows.length <= 2) return;
+    setPieRows(prev => prev.filter(r => r.id !== id));
+  };
+  const updatePieRow = (id: number, field: "label" | "value", val: string) => {
+    setPieRows(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r));
+  };
+  const buildPieChart = () => {
+    const valid = pieRows
+      .filter(r => r.label.trim() && r.value.trim() && !isNaN(Number(r.value)) && Number(r.value) > 0)
+      .map(r => ({ label: r.label.trim(), value: Number(r.value) }));
+    if (valid.length < 2) return;
+    const total = valid.reduce((s, d) => s + d.value, 0);
+    const computed = valid.map(d => ({
+      ...d,
+      pct:   Math.round((d.value / total) * 1000) / 10,
+      sudut: Math.round((d.value / total) * 3600) / 10,
+    }));
+    setPieData(computed);
+    setPieVisible(true);
+    setPieAnimated(false);
+    setTimeout(() => setPieAnimated(true), 80);
+  };
+  const resetPie = () => { setPieVisible(false); setPieAnimated(false); setPieData([]); };
 
   /* ── Diagram Batang Daun Interaktif state ── */
   const [stemInput, setStemInput]         = useState("62, 65, 68, 71, 73, 73, 75, 78, 78, 82, 85, 87, 88, 91, 95");
@@ -1421,6 +1471,290 @@ const PenyajianDataPage = () => {
                         </div>
                       ))}
                     </div>
+                  </div>
+                </div>
+
+                {/* ===== DIAGRAM LINGKARAN INTERAKTIF ===== */}
+                <div className="bg-slate-800/70 border border-orange-500/30 rounded-xl overflow-hidden">
+                  <div className="bg-orange-900/50 px-4 py-3 flex items-center gap-2">
+                    <BarChart2 className="w-4 h-4 text-orange-400 shrink-0" />
+                    <p className="font-body text-sm font-bold text-orange-200">🛠️ Coba Sendiri — Buat Diagram Lingkaran</p>
+                  </div>
+
+                  <div className="p-4 space-y-4">
+                    <p className="font-body text-xs text-white/55 leading-relaxed">
+                      Isi tabel dengan kategori dan frekuensinya (nilai &gt; 0), tambah atau hapus baris sesuai kebutuhan, lalu klik{" "}
+                      <strong className="text-orange-300">Buat Diagram Lingkaran</strong>. Gunakan tombol{" "}
+                      <strong className="text-orange-300">% Persen</strong> dan <strong className="text-orange-300">° Derajat</strong> untuk beralih tampilan!
+                    </p>
+
+                    {/* Table */}
+                    <div className="rounded-lg overflow-hidden border border-slate-600/50">
+                      <div className="grid bg-orange-950/60" style={{ gridTemplateColumns: "1fr 120px 36px" }}>
+                        <div className="px-3 py-2 font-body text-xs font-bold text-orange-300 uppercase tracking-wide">Kategori / Label</div>
+                        <div className="px-3 py-2 font-body text-xs font-bold text-orange-300 uppercase tracking-wide">Frekuensi</div>
+                        <div />
+                      </div>
+                      <div className="divide-y divide-slate-700/40">
+                        {pieRows.map((row, idx) => (
+                          <div key={row.id} className="grid items-center gap-2 px-2 py-1.5 bg-slate-900/30" style={{ gridTemplateColumns: "1fr 120px 36px" }}>
+                            <div className="flex items-center gap-2">
+                              <div className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: PIE_COLORS[idx % PIE_COLORS.length] }} />
+                              <input
+                                type="text"
+                                value={row.label}
+                                onChange={(e) => updatePieRow(row.id, "label", e.target.value)}
+                                placeholder="Contoh: Pramuka"
+                                className="w-full bg-slate-800/60 border border-slate-600/50 rounded px-2 py-1.5 text-xs font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-orange-400/60 transition-colors"
+                              />
+                            </div>
+                            <input
+                              type="number"
+                              value={row.value}
+                              onChange={(e) => updatePieRow(row.id, "value", e.target.value)}
+                              placeholder="0"
+                              min="1"
+                              className="w-full bg-slate-800/60 border border-slate-600/50 rounded px-2 py-1.5 text-xs font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-orange-400/60 transition-colors"
+                            />
+                            <button
+                              onClick={() => removePieRow(row.id)}
+                              disabled={pieRows.length <= 2}
+                              className="w-8 h-8 flex items-center justify-center rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 disabled:opacity-25 disabled:cursor-not-allowed transition-colors text-sm font-bold"
+                            >✕</button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action buttons */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        onClick={addPieRow}
+                        disabled={pieRows.length >= 10}
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-700/60 border border-slate-500/40 text-white/75 text-xs font-body font-semibold hover:bg-slate-600/60 hover:border-slate-400/50 disabled:opacity-35 disabled:cursor-not-allowed transition-all"
+                      >
+                        ＋ Tambah Baris
+                        {pieRows.length >= 10 && <span className="text-white/30">(maks 10)</span>}
+                      </button>
+
+                      <button
+                        onClick={buildPieChart}
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-orange-600 border border-orange-500/50 text-white text-xs font-body font-bold hover:bg-orange-500 active:scale-95 transition-all shadow-lg shadow-orange-500/20"
+                      >
+                        <BarChart2 className="w-3.5 h-3.5" />
+                        Buat Diagram Lingkaran
+                      </button>
+
+                      {pieVisible && (
+                        <button
+                          onClick={resetPie}
+                          className="flex items-center gap-1 px-3 py-2 rounded-lg bg-slate-700/50 border border-slate-600/40 text-white/50 text-xs font-body hover:bg-slate-600/50 hover:text-white/70 transition-all"
+                        >↺ Reset</button>
+                      )}
+                    </div>
+
+                    {/* Animated Pie Chart Result */}
+                    {pieVisible && pieData.length >= 2 && (() => {
+                      const total = pieData.reduce((s, d) => s + d.value, 0);
+                      const CX = 100, CY = 100, R = 78, R_INNER = 34;
+
+                      // Build SVG arc paths
+                      let curAngle = -Math.PI / 2;
+                      const slices = pieData.map((d, i) => {
+                        const sweep  = (d.sudut / 360) * 2 * Math.PI;
+                        const start  = curAngle;
+                        const end    = curAngle + sweep;
+                        curAngle     = end;
+                        const mid    = start + sweep / 2;
+                        const large  = sweep > Math.PI ? 1 : 0;
+                        const x1 = CX + R * Math.cos(start);
+                        const y1 = CY + R * Math.sin(start);
+                        const x2 = CX + R * Math.cos(end);
+                        const y2 = CY + R * Math.sin(end);
+                        const lx = CX + (R * 0.67) * Math.cos(mid);
+                        const ly = CY + (R * 0.67) * Math.sin(mid);
+                        return {
+                          path: `M ${CX} ${CY} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${R} ${R} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`,
+                          color: PIE_COLORS[i % PIE_COLORS.length],
+                          lx, ly, sweep,
+                          ...d,
+                        };
+                      });
+
+                      return (
+                        <div className="bg-slate-900/60 border border-orange-500/20 rounded-xl p-4 space-y-4">
+
+                          {/* Unit toggle */}
+                          <div className="flex items-center justify-between">
+                            <p className="font-body text-xs font-bold text-orange-300 uppercase tracking-wider">🥧 Hasil Diagram Lingkaran</p>
+                            <div className="flex items-center gap-1 bg-slate-800/80 border border-slate-600/50 rounded-lg p-1">
+                              <button
+                                onClick={() => setPieMode("persen")}
+                                className={`px-3 py-1 rounded-md text-xs font-body font-bold transition-all ${
+                                  pieMode === "persen"
+                                    ? "bg-orange-500 text-white shadow"
+                                    : "text-white/40 hover:text-white/70"
+                                }`}
+                              >% Persen</button>
+                              <button
+                                onClick={() => setPieMode("derajat")}
+                                className={`px-3 py-1 rounded-md text-xs font-body font-bold transition-all ${
+                                  pieMode === "derajat"
+                                    ? "bg-violet-500 text-white shadow"
+                                    : "text-white/40 hover:text-white/70"
+                                }`}
+                              >° Derajat</button>
+                            </div>
+                          </div>
+
+                          {/* Chart + legend */}
+                          <div className="flex flex-col sm:flex-row items-center gap-5">
+
+                            {/* SVG Pie */}
+                            <div className="shrink-0">
+                              <svg viewBox="0 0 200 200" style={{ width: "180px", height: "180px" }}>
+                                {slices.map((s, i) => (
+                                  <path
+                                    key={i}
+                                    d={s.path}
+                                    fill={s.color}
+                                    stroke="#0f172a"
+                                    strokeWidth="1.2"
+                                    style={{
+                                      transformBox: "view-box" as React.CSSProperties["transformBox"],
+                                      transformOrigin: "50% 50%",
+                                      opacity: pieAnimated ? 0.88 : 0,
+                                      transform: pieAnimated ? "scale(1)" : "scale(0.3)",
+                                      transition: `opacity 0.35s ease ${i * 0.1}s, transform 0.45s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.1}s`,
+                                    }}
+                                  />
+                                ))}
+
+                                {/* Inner donut hole */}
+                                <circle
+                                  cx={CX} cy={CY} r={R_INNER}
+                                  fill="#0f172a"
+                                  style={{
+                                    opacity: pieAnimated ? 1 : 0,
+                                    transition: `opacity 0.3s ease ${pieData.length * 0.1 + 0.1}s`,
+                                  }}
+                                />
+
+                                {/* Center text */}
+                                <text
+                                  x={CX} y={CY - 5}
+                                  textAnchor="middle" fontSize="8" fontWeight="bold" fill="#fdba74"
+                                  style={{
+                                    opacity: pieAnimated ? 1 : 0,
+                                    transition: `opacity 0.3s ease ${pieData.length * 0.1 + 0.25}s`,
+                                  }}
+                                >TOTAL</text>
+                                <text
+                                  x={CX} y={CY + 7}
+                                  textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ffffff"
+                                  style={{
+                                    opacity: pieAnimated ? 1 : 0,
+                                    transition: `opacity 0.3s ease ${pieData.length * 0.1 + 0.3}s`,
+                                  }}
+                                >{total}</text>
+                                <text
+                                  x={CX} y={CY + 17}
+                                  textAnchor="middle" fontSize="7" fill="#94a3b8"
+                                  style={{
+                                    opacity: pieAnimated ? 1 : 0,
+                                    transition: `opacity 0.3s ease ${pieData.length * 0.1 + 0.35}s`,
+                                  }}
+                                >data</text>
+
+                                {/* Slice value labels (only show if sector is large enough) */}
+                                {slices.map((s, i) =>
+                                  s.sweep > 0.28 ? (
+                                    <text
+                                      key={`lbl-${i}`}
+                                      x={s.lx.toFixed(1)} y={(s.ly + 3).toFixed(1)}
+                                      textAnchor="middle" fontSize="8.5" fontWeight="bold"
+                                      fill="#ffffff"
+                                      style={{
+                                        opacity: pieAnimated ? 1 : 0,
+                                        transition: `opacity 0.3s ease ${i * 0.1 + 0.3}s`,
+                                      }}
+                                    >
+                                      {pieMode === "persen" ? `${s.pct}%` : `${s.sudut}°`}
+                                    </text>
+                                  ) : null
+                                )}
+                              </svg>
+                            </div>
+
+                            {/* Legend */}
+                            <div
+                              className="flex-1 w-full space-y-1.5"
+                              style={{
+                                opacity: pieAnimated ? 1 : 0,
+                                transition: `opacity 0.4s ease ${pieData.length * 0.1 + 0.2}s`,
+                              }}
+                            >
+                              {/* Header row */}
+                              <div className="grid text-xs font-body font-bold uppercase tracking-wide text-white/35 pb-1 border-b border-slate-700/50" style={{ gridTemplateColumns: "1fr 48px 52px 52px" }}>
+                                <span>Kategori</span>
+                                <span className="text-right">Freq</span>
+                                <span className={`text-right transition-colors ${pieMode === "persen" ? "text-orange-400" : "text-white/35"}`}>%</span>
+                                <span className={`text-right transition-colors ${pieMode === "derajat" ? "text-violet-400" : "text-white/35"}`}>°</span>
+                              </div>
+                              {slices.map((s, i) => (
+                                <div key={i} className="grid items-center gap-1" style={{ gridTemplateColumns: "1fr 48px 52px 52px" }}>
+                                  <div className="flex items-center gap-1.5 min-w-0">
+                                    <div className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: s.color }} />
+                                    <span className="font-body text-xs text-white/80 truncate">{s.label}</span>
+                                  </div>
+                                  <span className="font-body text-xs text-white/55 text-right">{s.value}</span>
+                                  <span
+                                    className="font-body text-xs font-bold text-right transition-all"
+                                    style={{
+                                      color: pieMode === "persen" ? "#fb923c" : "#94a3b8",
+                                      fontSize: pieMode === "persen" ? "12px" : "10px",
+                                    }}
+                                  >{s.pct}%</span>
+                                  <span
+                                    className="font-body text-xs font-bold text-right transition-all"
+                                    style={{
+                                      color: pieMode === "derajat" ? "#c084fc" : "#94a3b8",
+                                      fontSize: pieMode === "derajat" ? "12px" : "10px",
+                                    }}
+                                  >{s.sudut}°</span>
+                                </div>
+                              ))}
+                              {/* Totals row */}
+                              <div className="grid items-center gap-1 pt-1.5 border-t border-slate-700/50" style={{ gridTemplateColumns: "1fr 48px 52px 52px" }}>
+                                <span className="font-body text-xs font-bold text-white/60">TOTAL</span>
+                                <span className="font-body text-xs font-bold text-white/60 text-right">{total}</span>
+                                <span className="font-body text-xs font-bold text-orange-400/80 text-right">100%</span>
+                                <span className="font-body text-xs font-bold text-violet-400/80 text-right">360°</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Formula reminder */}
+                          <div
+                            className="grid grid-cols-2 gap-2"
+                            style={{
+                              opacity: pieAnimated ? 1 : 0,
+                              transition: `opacity 0.4s ease ${pieData.length * 0.1 + 0.5}s`,
+                            }}
+                          >
+                            <div className={`rounded-lg px-3 py-2 text-center border transition-all ${pieMode === "persen" ? "bg-orange-900/30 border-orange-500/40" : "bg-slate-800/40 border-slate-600/30"}`}>
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>RUMUS PERSEN</p>
+                              <p className="font-body text-orange-300 font-bold text-xs mt-0.5">(f / total) × 100%</p>
+                            </div>
+                            <div className={`rounded-lg px-3 py-2 text-center border transition-all ${pieMode === "derajat" ? "bg-violet-900/30 border-violet-500/40" : "bg-slate-800/40 border-slate-600/30"}`}>
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>RUMUS DERAJAT</p>
+                              <p className="font-body text-violet-300 font-bold text-xs mt-0.5">(f / total) × 360°</p>
+                            </div>
+                          </div>
+
+                        </div>
+                      );
+                    })()}
                   </div>
                 </div>
 
