@@ -61,6 +61,47 @@ const PenyajianDataPage = () => {
     setChartData([]);
   };
 
+  /* ── Diagram Garis Interaktif state ── */
+  const [lineRows, setLineRows] = useState<{ id: number; label: string; value: string }[]>([
+    { id: 1, label: "Jan", value: "65" },
+    { id: 2, label: "Feb", value: "72" },
+    { id: 3, label: "Mar", value: "68" },
+    { id: 4, label: "Apr", value: "80" },
+    { id: 5, label: "Mei", value: "85" },
+  ]);
+  const [lineRowCounter, setLineRowCounter] = useState(6);
+  const [lineChartVisible, setLineChartVisible] = useState(false);
+  const [lineChartData, setLineChartData] = useState<{ label: string; value: number }[]>([]);
+  const [lineChartAnimated, setLineChartAnimated] = useState(false);
+
+  const addLineRow = () => {
+    if (lineRows.length >= 12) return;
+    setLineRows(prev => [...prev, { id: lineRowCounter, label: "", value: "" }]);
+    setLineRowCounter(prev => prev + 1);
+  };
+  const removeLineRow = (id: number) => {
+    if (lineRows.length <= 2) return;
+    setLineRows(prev => prev.filter(r => r.id !== id));
+  };
+  const updateLineRow = (id: number, field: "label" | "value", val: string) => {
+    setLineRows(prev => prev.map(r => r.id === id ? { ...r, [field]: val } : r));
+  };
+  const convertToLineChart = () => {
+    const valid = lineRows
+      .filter(r => r.label.trim() && r.value.trim() && !isNaN(Number(r.value)))
+      .map(r => ({ label: r.label.trim(), value: Number(r.value) }));
+    if (valid.length < 2) return;
+    setLineChartData(valid);
+    setLineChartVisible(true);
+    setLineChartAnimated(false);
+    setTimeout(() => setLineChartAnimated(true), 80);
+  };
+  const resetLineChart = () => {
+    setLineChartVisible(false);
+    setLineChartAnimated(false);
+    setLineChartData([]);
+  };
+
   /* ── Diagram Batang Daun Interaktif state ── */
   const [stemInput, setStemInput]         = useState("62, 65, 68, 71, 73, 73, 75, 78, 78, 82, 85, 87, 88, 91, 95");
   const [stemResult, setStemResult]       = useState<{ stem: number; leaves: number[] }[]>([]);
@@ -980,6 +1021,232 @@ const PenyajianDataPage = () => {
                     <p>• <strong className="text-purple-300">Garis turun</strong> → data menurun</p>
                     <p>• <strong className="text-purple-300">Garis datar</strong> → data stabil/tetap</p>
                     <p>• Semakin curam garis → semakin besar perubahannya</p>
+                  </div>
+                </div>
+
+                {/* ===== DIAGRAM GARIS INTERAKTIF ===== */}
+                <div className="bg-slate-800/70 border border-purple-500/30 rounded-xl overflow-hidden">
+                  <div className="bg-purple-900/50 px-4 py-3 flex items-center gap-2">
+                    <BarChart2 className="w-4 h-4 text-purple-400 shrink-0" />
+                    <p className="font-body text-sm font-bold text-purple-200">🛠️ Coba Sendiri — Buat Diagram Garis</p>
+                  </div>
+
+                  <div className="p-4 space-y-4">
+                    <p className="font-body text-xs text-white/55 leading-relaxed">
+                      Isi tabel dengan data kamu — tambah atau hapus baris sesuai kebutuhan (minimal 2 baris), lalu klik{" "}
+                      <strong className="text-purple-300">Buat Diagram Garis</strong> untuk melihat hasilnya secara animasi!
+                    </p>
+
+                    {/* Table */}
+                    <div className="rounded-lg overflow-hidden border border-slate-600/50">
+                      <div className="grid bg-purple-950/60" style={{ gridTemplateColumns: "1fr 120px 36px" }}>
+                        <div className="px-3 py-2 font-body text-xs font-bold text-purple-300 uppercase tracking-wide">Label (waktu/kategori)</div>
+                        <div className="px-3 py-2 font-body text-xs font-bold text-purple-300 uppercase tracking-wide">Nilai</div>
+                        <div />
+                      </div>
+                      <div className="divide-y divide-slate-700/40">
+                        {lineRows.map((row) => (
+                          <div key={row.id} className="grid items-center gap-2 px-2 py-1.5 bg-slate-900/30" style={{ gridTemplateColumns: "1fr 120px 36px" }}>
+                            <input
+                              type="text"
+                              value={row.label}
+                              onChange={(e) => updateLineRow(row.id, "label", e.target.value)}
+                              placeholder="Contoh: Jan"
+                              className="w-full bg-slate-800/60 border border-slate-600/50 rounded px-2 py-1.5 text-xs font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-purple-400/60 transition-colors"
+                            />
+                            <input
+                              type="number"
+                              value={row.value}
+                              onChange={(e) => updateLineRow(row.id, "value", e.target.value)}
+                              placeholder="0"
+                              className="w-full bg-slate-800/60 border border-slate-600/50 rounded px-2 py-1.5 text-xs font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-purple-400/60 transition-colors"
+                            />
+                            <button
+                              onClick={() => removeLineRow(row.id)}
+                              disabled={lineRows.length <= 2}
+                              className="w-8 h-8 flex items-center justify-center rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 disabled:opacity-25 disabled:cursor-not-allowed transition-colors text-sm font-bold"
+                            >✕</button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action buttons */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        onClick={addLineRow}
+                        disabled={lineRows.length >= 12}
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-700/60 border border-slate-500/40 text-white/75 text-xs font-body font-semibold hover:bg-slate-600/60 hover:border-slate-400/50 disabled:opacity-35 disabled:cursor-not-allowed transition-all"
+                      >
+                        ＋ Tambah Baris
+                        {lineRows.length >= 12 && <span className="text-white/30">(maks 12)</span>}
+                      </button>
+
+                      <button
+                        onClick={convertToLineChart}
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-purple-600 border border-purple-500/50 text-white text-xs font-body font-bold hover:bg-purple-500 active:scale-95 transition-all shadow-lg shadow-purple-500/20"
+                      >
+                        <BarChart2 className="w-3.5 h-3.5" />
+                        Buat Diagram Garis
+                      </button>
+
+                      {lineChartVisible && (
+                        <button
+                          onClick={resetLineChart}
+                          className="flex items-center gap-1 px-3 py-2 rounded-lg bg-slate-700/50 border border-slate-600/40 text-white/50 text-xs font-body hover:bg-slate-600/50 hover:text-white/70 transition-all"
+                        >↺ Reset</button>
+                      )}
+                    </div>
+
+                    {/* Animated Line Chart Result */}
+                    {lineChartVisible && lineChartData.length >= 2 && (() => {
+                      const n = lineChartData.length;
+                      const vals = lineChartData.map(d => d.value);
+                      const minVal = Math.min(...vals);
+                      const maxVal = Math.max(...vals);
+                      const range = maxVal - minVal || 1;
+                      const total = vals.reduce((a, b) => a + b, 0);
+                      const avg = (total / n).toFixed(1);
+                      const maxPoint = lineChartData.reduce((a, b) => a.value >= b.value ? a : b);
+                      const minPoint = lineChartData.reduce((a, b) => a.value <= b.value ? a : b);
+                      const trendDiff = vals[n - 1] - vals[0];
+                      const trendLabel = trendDiff > 0 ? `📈 Naik +${trendDiff}` : trendDiff < 0 ? `📉 Turun ${trendDiff}` : "➡️ Stabil";
+                      const trendColor = trendDiff > 0 ? "text-green-400" : trendDiff < 0 ? "text-red-400" : "text-yellow-400";
+
+                      const SVG_W = 400, SVG_H = 170;
+                      const PAD_L = 38, PAD_R = 14, PAD_T = 16, PAD_B = 32;
+                      const CW = SVG_W - PAD_L - PAD_R;
+                      const CH = SVG_H - PAD_T - PAD_B;
+
+                      const px = (i: number) => PAD_L + (n === 1 ? CW / 2 : (i / (n - 1)) * CW);
+                      const py = (v: number) => PAD_T + (1 - (v - minVal) / range) * CH;
+
+                      const pointsStr = lineChartData.map((d, i) => `${px(i)},${py(d.value)}`).join(" ");
+                      const areaPoints = `${px(0)},${PAD_T + CH} ${pointsStr} ${px(n - 1)},${PAD_T + CH}`;
+
+                      const ySteps = 4;
+                      const yLabels = Array.from({ length: ySteps + 1 }, (_, i) =>
+                        Math.round(maxVal - (range * i) / ySteps)
+                      );
+
+                      return (
+                        <div className="bg-slate-900/60 border border-purple-500/20 rounded-xl p-4 space-y-3">
+                          <p className="font-body text-xs font-bold text-purple-300 text-center uppercase tracking-wider">📈 Hasil Diagram Garis</p>
+
+                          {/* SVG Chart */}
+                          <div className="w-full overflow-x-auto">
+                            <svg
+                              viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+                              className="w-full"
+                              style={{ minWidth: "260px", maxHeight: "200px" }}
+                            >
+                              {/* Grid + Y labels */}
+                              {yLabels.map((v, i) => {
+                                const y = PAD_T + (i / ySteps) * CH;
+                                return (
+                                  <g key={i}>
+                                    <line
+                                      x1={PAD_L} y1={y} x2={SVG_W - PAD_R} y2={y}
+                                      stroke={i === ySteps ? "#475569" : "#1e293b"}
+                                      strokeWidth={i === ySteps ? 1.5 : 1}
+                                      strokeDasharray={i > 0 && i < ySteps ? "4 3" : undefined}
+                                    />
+                                    <text x={PAD_L - 4} y={y + 3.5} textAnchor="end" fontSize="9" fill="#64748b">{v}</text>
+                                  </g>
+                                );
+                              })}
+
+                              {/* X labels */}
+                              {lineChartData.map((d, i) => (
+                                <text
+                                  key={`xl-${i}`}
+                                  x={px(i)} y={SVG_H - 6}
+                                  textAnchor="middle" fontSize="9" fill="#64748b"
+                                  style={{
+                                    opacity: lineChartAnimated ? 1 : 0,
+                                    transition: `opacity 0.3s ease ${0.2 + i * 0.05}s`,
+                                  }}
+                                >{d.label}</text>
+                              ))}
+
+                              {/* Area fill */}
+                              <polygon
+                                points={areaPoints}
+                                fill="rgba(168,85,247,0.07)"
+                                style={{
+                                  opacity: lineChartAnimated ? 1 : 0,
+                                  transition: "opacity 0.7s ease 1.0s",
+                                }}
+                              />
+
+                              {/* Animated line */}
+                              <polyline
+                                points={pointsStr}
+                                fill="none"
+                                stroke="#a855f7"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeDasharray="2000"
+                                style={{
+                                  strokeDashoffset: lineChartAnimated ? 0 : 2000,
+                                  transition: "stroke-dashoffset 1.1s cubic-bezier(0.25,0.46,0.45,0.94) 0.05s",
+                                }}
+                              />
+
+                              {/* Data points + value labels */}
+                              {lineChartData.map((d, i) => (
+                                <g
+                                  key={`pt-${i}`}
+                                  style={{
+                                    opacity: lineChartAnimated ? 1 : 0,
+                                    transition: `opacity 0.25s ease ${0.1 + i * 0.1}s`,
+                                  }}
+                                >
+                                  <circle cx={px(i)} cy={py(d.value)} r="5" fill="#a855f7" stroke="#0f172a" strokeWidth="1.5" />
+                                  <text
+                                    x={px(i)}
+                                    y={py(d.value) - 8}
+                                    textAnchor="middle"
+                                    fontSize="9"
+                                    fontWeight="bold"
+                                    fill="#e2e8f0"
+                                  >{d.value}</text>
+                                </g>
+                              ))}
+                            </svg>
+                          </div>
+
+                          {/* Stats row */}
+                          <div
+                            className="grid grid-cols-2 sm:grid-cols-4 gap-2"
+                            style={{
+                              opacity: lineChartAnimated ? 1 : 0,
+                              transition: "opacity 0.5s ease 1.3s",
+                            }}
+                          >
+                            <div className="bg-purple-900/25 border border-purple-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>TREN</p>
+                              <p className={`font-body font-bold text-xs mt-0.5 ${trendColor}`}>{trendLabel}</p>
+                            </div>
+                            <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>TERTINGGI</p>
+                              <p className="font-body text-green-300 font-bold text-sm mt-0.5">{maxPoint.value}</p>
+                              <p className="font-body text-white/35 leading-tight mt-0.5" style={{ fontSize: "9px" }}>{maxPoint.label}</p>
+                            </div>
+                            <div className="bg-blue-900/25 border border-blue-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>RATA-RATA</p>
+                              <p className="font-body text-blue-300 font-bold text-sm mt-0.5">{avg}</p>
+                            </div>
+                            <div className="bg-orange-900/25 border border-orange-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>TERENDAH</p>
+                              <p className="font-body text-orange-300 font-bold text-sm mt-0.5">{minPoint.value}</p>
+                              <p className="font-body text-white/35 leading-tight mt-0.5" style={{ fontSize: "9px" }}>{minPoint.label}</p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
                 </div>
 
