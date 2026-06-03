@@ -6,6 +6,14 @@ import { Database, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import imgSarden from "@assets/image_1780450794282.png";
+import imgBiskuit from "@assets/image_1780450814436.png";
+import imgIndomilk from "@assets/image_1780450845492.png";
+import imgDrum from "@assets/image_1780450861720.png";
+import imgBedug from "@assets/image_1780450884364.png";
+import imgTong from "@assets/image_1780450893223.png";
+import imgGelas from "@assets/image_1780450901986.png";
+import imgGedung from "@assets/image_1780450906978.png";
 
 /* ─────────────────────────────────────────────────────────────
    3D CYLINDER SVG RENDERER — style mirrors InteractiveCone3D
@@ -825,6 +833,35 @@ const sections: Sec[] = [
             <p>• Drum / Tabung gas</p>
           </div>
         </div>
+
+        {/* ── Foto Benda Berbentuk Tabung ── */}
+        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
+          <p className="text-cyan-300 font-bold text-sm text-center">📸 Benda Berbentuk Tabung di Kehidupan Sehari-hari</p>
+          <div className="grid grid-cols-4 gap-2">
+            {[
+              { src: imgSarden,   label: "Kaleng Sarden" },
+              { src: imgBiskuit,  label: "Kaleng Biskuit" },
+              { src: imgIndomilk, label: "Kaleng Susu" },
+              { src: imgDrum,     label: "Kendang" },
+              { src: imgBedug,    label: "Bedug" },
+              { src: imgTong,     label: "Tong / Drum" },
+              { src: imgGelas,    label: "Gelas Silindris" },
+              { src: imgGedung,   label: "Gedung Silindris" },
+            ].map(({ src, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1">
+                <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
+                  <img
+                    src={src}
+                    alt={label}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-[9px] text-white/60 text-center leading-tight font-body">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <InteractiveCylinder3D />
       </div>
     ),
