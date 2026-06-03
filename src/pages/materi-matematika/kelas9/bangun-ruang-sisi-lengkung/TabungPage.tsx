@@ -834,34 +834,6 @@ const sections: Sec[] = [
           </div>
         </div>
 
-        {/* ── Foto Benda Berbentuk Tabung ── */}
-        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
-          <p className="text-cyan-300 font-bold text-sm text-center">📸 Benda Berbentuk Tabung di Kehidupan Sehari-hari</p>
-          <div className="grid grid-cols-4 gap-2">
-            {[
-              { src: imgSarden,   label: "Kaleng Sarden" },
-              { src: imgBiskuit,  label: "Kaleng Biskuit" },
-              { src: imgIndomilk, label: "Kaleng Susu" },
-              { src: imgDrum,     label: "Kendang" },
-              { src: imgBedug,    label: "Bedug" },
-              { src: imgTong,     label: "Tong / Drum" },
-              { src: imgGelas,    label: "Gelas Silindris" },
-              { src: imgGedung,   label: "Gedung Silindris" },
-            ].map(({ src, label }) => (
-              <div key={label} className="flex flex-col items-center gap-1">
-                <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
-                  <img
-                    src={src}
-                    alt={label}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-[9px] text-white/60 text-center leading-tight font-body">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <InteractiveCylinder3D />
       </div>
     ),
@@ -1521,6 +1493,31 @@ const TabungPage = () => {
             ← Kembali ke Bangun Ruang Sisi Lengkung
           </button>
         </div>
+
+        {/* ── Foto Benda Berbentuk Tabung ── */}
+        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3 mt-6">
+          <p className="text-cyan-300 font-bold text-sm text-center">📸 Benda Berbentuk Tabung di Kehidupan Sehari-hari</p>
+          <div className="grid grid-cols-4 gap-2">
+            {[
+              { src: imgSarden,   label: "Kaleng Sarden" },
+              { src: imgBiskuit,  label: "Kaleng Biskuit" },
+              { src: imgIndomilk, label: "Kaleng Susu" },
+              { src: imgDrum,     label: "Kendang" },
+              { src: imgBedug,    label: "Bedug" },
+              { src: imgTong,     label: "Tong / Drum" },
+              { src: imgGelas,    label: "Gelas Silindris" },
+              { src: imgGedung,   label: "Gedung Silindris" },
+            ].map(({ src, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1">
+                <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
+                  <img src={src} alt={label} className="w-full h-full object-cover" />
+                </div>
+                <p className="text-[9px] text-white/60 text-center leading-tight font-body">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
