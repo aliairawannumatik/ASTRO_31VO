@@ -100,6 +100,166 @@ const MeanCalculator = () => {
   );
 };
 
+/* ─── Kalkulator Rata-rata Gabungan (Data Baru Masuk) ─── */
+const CombinedMeanCalculator = () => {
+  const [groups, setGroups] = useState([
+    { n: "", mean: "", label: "Kelompok Lama" },
+    { n: "", mean: "", label: "Kelompok Baru" },
+  ]);
+  const [result, setResult] = useState<{
+    groups: { n: number; mean: number; label: string }[];
+    totalN: number; totalSum: number; combinedMean: number;
+  } | null>(null);
+  const [error, setError] = useState("");
+
+  const updateGroup = (i: number, field: "n" | "mean", val: string) => {
+    setGroups(prev => prev.map((g, idx) => idx === i ? { ...g, [field]: val } : g));
+    setResult(null); setError("");
+  };
+
+  const addGroup = () => {
+    playPopSound();
+    setGroups(prev => [
+      ...prev.slice(0, -1),
+      { n: "", mean: "", label: `Kelompok ${prev.length}` },
+      { ...prev[prev.length - 1], label: "Kelompok Baru" },
+    ]);
+    setResult(null);
+  };
+
+  const removeGroup = (i: number) => {
+    if (groups.length <= 2) return;
+    playPopSound();
+    const next = groups.filter((_, idx) => idx !== i);
+    next[next.length - 1] = { ...next[next.length - 1], label: "Kelompok Baru" };
+    setGroups(next); setResult(null);
+  };
+
+  const calculate = () => {
+    playPopSound(); setError(""); setResult(null);
+    const parsed = groups.map(g => ({
+      n: parseFloat(g.n), mean: parseFloat(g.mean.replace(",", ".")), label: g.label,
+    }));
+    if (parsed.some(g => isNaN(g.n) || isNaN(g.mean))) {
+      setError("Pastikan semua kolom n dan rata-rata terisi dengan angka yang valid."); return;
+    }
+    if (parsed.some(g => g.n <= 0)) {
+      setError("Banyak data (n) harus lebih dari 0."); return;
+    }
+    const totalN = parsed.reduce((a, g) => a + g.n, 0);
+    const totalSum = parsed.reduce((a, g) => a + g.n * g.mean, 0);
+    setResult({ groups: parsed, totalN, totalSum, combinedMean: totalSum / totalN });
+  };
+
+  const fmt = (n: number) => Number.isInteger(n) ? n.toString() : parseFloat(n.toFixed(4)).toString();
+
+  const buildLatex = () => {
+    if (!result) return "";
+    const { groups: g, totalN, totalSum, combinedMean } = result;
+    const step1 = g.map(gr => `${fmt(gr.n)} \\times ${fmt(gr.mean)}`).join(" + ");
+    const step2 = g.map(gr => fmt(gr.n * gr.mean)).join(" + ");
+    return `\\bar{x}_{\\text{gab}} = \\frac{${step1}}{${fmt(totalN)}} = \\frac{${step2}}{${fmt(totalN)}} = \\frac{${fmt(totalSum)}}{${fmt(totalN)}} = ${fmt(combinedMean)}`;
+  };
+
+  const groupColors = [
+    { bg: "bg-cyan-900/25 border-cyan-500/30", label: "text-cyan-300", card: "bg-cyan-900/40 border-cyan-500/40", val: "text-cyan-300" },
+    { bg: "bg-green-900/25 border-green-500/30", label: "text-green-300", card: "bg-green-900/40 border-green-500/40", val: "text-green-300" },
+    { bg: "bg-purple-900/25 border-purple-500/30", label: "text-purple-300", card: "bg-purple-900/40 border-purple-500/40", val: "text-purple-300" },
+    { bg: "bg-orange-900/25 border-orange-500/30", label: "text-orange-300", card: "bg-orange-900/40 border-orange-500/40", val: "text-orange-300" },
+  ];
+  const colorOf = (i: number, key: keyof typeof groupColors[0]) => groupColors[Math.min(i, groupColors.length - 1)][key];
+
+  return (
+    <div className="bg-cyan-950/40 border border-cyan-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <p className="font-body text-sm font-bold text-cyan-300">🧮 Kalkulator Rata-rata Gabungan</p>
+        <button
+          onClick={addGroup}
+          className="text-xs font-body font-bold text-cyan-300 border border-cyan-500/40 bg-cyan-900/30 hover:bg-cyan-800/50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+        >
+          + Tambah Kelompok
+        </button>
+      </div>
+      <p className="font-body text-xs text-white/55">
+        Isi <strong className="text-cyan-300">n</strong> (banyak data) dan <strong className="text-cyan-300">x̄</strong> (rata-rata) tiap kelompok, lalu klik <strong className="text-cyan-300">Hitung</strong>.
+      </p>
+
+      <div className="space-y-3">
+        {groups.map((g, i) => (
+          <div key={i} className={`rounded-xl p-3 space-y-2 border ${colorOf(i, "bg")}`}>
+            <div className="flex items-center justify-between">
+              <p className={`font-body text-xs font-bold ${colorOf(i, "label")}`}>{g.label}</p>
+              {groups.length > 2 && i > 0 && i < groups.length - 1 && (
+                <button onClick={() => removeGroup(i)} className="text-red-400/60 hover:text-red-400 text-xs font-body cursor-pointer transition-colors">✕ Hapus</button>
+              )}
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="block font-body text-xs text-white/40 mb-1">n (banyak data)</label>
+                <input type="number" value={g.n} onChange={e => updateGroup(i, "n", e.target.value)}
+                  placeholder="Contoh: 30"
+                  className="w-full bg-slate-900/80 border border-slate-600 text-white text-sm font-body rounded-lg px-3 py-2 outline-none focus:border-cyan-500 placeholder:text-white/25" />
+              </div>
+              <div>
+                <label className="block font-body text-xs text-white/40 mb-1">x̄ (rata-rata)</label>
+                <input type="text" value={g.mean} onChange={e => updateGroup(i, "mean", e.target.value)}
+                  placeholder="Contoh: 75"
+                  className="w-full bg-slate-900/80 border border-slate-600 text-white text-sm font-body rounded-lg px-3 py-2 outline-none focus:border-cyan-500 placeholder:text-white/25" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button onClick={calculate}
+        className="w-full bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-bold font-body py-2.5 rounded-lg transition-colors cursor-pointer">
+        Hitung Rata-rata Gabungan
+      </button>
+
+      {error && <p className="text-red-400 text-xs font-body">⚠️ {error}</p>}
+
+      {result && (
+        <div className="space-y-3">
+          <div className="flex items-center justify-center flex-wrap gap-2">
+            {result.groups.flatMap((g, i) => [
+              i > 0 ? <span key={`sep-${i}`} className="text-white/40 text-base font-bold">+</span> : null,
+              <div key={`grp-${i}`} className={`border ${colorOf(i, "card")} rounded-xl p-2.5 text-center min-w-[90px]`}>
+                <p className={`text-xs font-body font-bold mb-0.5 ${colorOf(i, "val")}`}>{g.label}</p>
+                <p className="text-white/60 text-xs font-body">n={fmt(g.n)}, x̄={fmt(g.mean)}</p>
+                <p className="text-yellow-300 text-sm font-bold font-body mt-1">{fmt(g.n)}×{fmt(g.mean)} = {fmt(g.n * g.mean)}</p>
+              </div>,
+            ]).filter(Boolean)}
+            <span className="text-primary text-xl font-bold">=</span>
+            <div className="bg-yellow-900/50 border-2 border-yellow-500/60 rounded-xl px-4 py-2.5 text-center">
+              <p className="text-white/50 text-xs font-body">x̄ gabungan</p>
+              <p className="text-yellow-200 font-bold text-xl font-body">{fmt(result.combinedMean)}</p>
+            </div>
+          </div>
+
+          <div className="bg-slate-900/70 rounded-lg p-3 text-center overflow-x-auto">
+            <BlockMath math={buildLatex()} />
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 text-xs font-body text-center">
+            <div className="bg-slate-800/60 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Total Data (n)</p>
+              <p className="text-white font-bold text-base">{fmt(result.totalN)}</p>
+            </div>
+            <div className="bg-slate-800/60 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Jumlah (Σn·x̄)</p>
+              <p className="text-yellow-300 font-bold text-base">{fmt(result.totalSum)}</p>
+            </div>
+            <div className="bg-cyan-900/50 border border-cyan-500/40 rounded-lg p-2">
+              <p className="text-white/40 mb-1">x̄ Gabungan</p>
+              <p className="text-cyan-300 font-bold text-base">{fmt(result.combinedMean)}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const RataRataPage = () => {
   const navigate = useNavigate();
   const expandedSections = [
@@ -706,6 +866,8 @@ const RataRataPage = () => {
                     <strong>Perhatikan:</strong> Rata-rata gabungan <em>tidak sama dengan</em> rata-rata dari dua rata-rata (<InlineMath math="\frac{\bar{x}_1 + \bar{x}_2}{2}" />) kecuali <InlineMath math="n_1 = n_2" />. Selalu gunakan rumus dengan bobot <InlineMath math="n_1" /> dan <InlineMath math="n_2" />!
                   </p>
                 </div>
+
+                <CombinedMeanCalculator />
               </div>
             )}
           </div>
