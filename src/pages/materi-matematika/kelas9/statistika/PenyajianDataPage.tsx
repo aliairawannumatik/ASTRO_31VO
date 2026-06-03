@@ -268,271 +268,325 @@ const PenyajianDataPage = () => {
             )}
           </div>
 
-          {/* ===== SUB-BAB 1: DIAGRAM BATANG DAUN ===== */}
+          {/* ===== SUB-BAB 1: TABEL DISTRIBUSI FREKUENSI ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Diagram Batang Daun (Stem-and-Leaf)" />
-            {expandedSections.includes("konsep1") && (
+            <SectionHeader id="konsep5" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 1: Tabel Distribusi Frekuensi" />
+            {expandedSections.includes("konsep5") && (
               <div className="px-5 pb-5 space-y-4">
 
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    <strong className="text-green-300">Diagram batang daun</strong> adalah cara penyajian data yang unik — data angka dipisah menjadi dua bagian:
+                    <strong className="text-cyan-300">Tabel distribusi frekuensi</strong> adalah cara menyajikan data dengan menghitung <strong className="text-cyan-300">berapa kali setiap nilai muncul</strong> dalam kumpulan data. Nilai yang dihitung kemunculannya disebut <strong className="text-cyan-300">frekuensi</strong>.
                   </p>
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-green-900/40 border border-green-500/40 rounded-lg p-3 text-center">
-                      <p className="text-2xl font-bold text-green-300">BATANG</p>
-                      <p className="font-body text-xs text-white/70 mt-1">Digit depan (puluhan)</p>
-                      <p className="font-body text-xs text-green-400 mt-1">Ditulis di <strong>kiri</strong></p>
+                    <div className="bg-cyan-900/40 border border-cyan-500/40 rounded-lg p-3 text-center">
+                      <p className="text-xl font-bold text-cyan-300">NILAI</p>
+                      <p className="font-body text-xs text-white/70 mt-1">Data yang diamati</p>
+                      <p className="font-body text-xs text-cyan-400 mt-1">mis. 70, 75, 80 ...</p>
                     </div>
                     <div className="bg-teal-900/40 border border-teal-500/40 rounded-lg p-3 text-center">
-                      <p className="text-2xl font-bold text-teal-300">DAUN</p>
-                      <p className="font-body text-xs text-white/70 mt-1">Digit belakang (satuan)</p>
-                      <p className="font-body text-xs text-teal-400 mt-1">Ditulis di <strong>kanan</strong></p>
+                      <p className="text-xl font-bold text-teal-300">FREKUENSI</p>
+                      <p className="font-body text-xs text-white/70 mt-1">Berapa kali nilai itu muncul</p>
+                      <p className="font-body text-xs text-teal-400 mt-1">dihitung dari data mentah</p>
                     </div>
                   </div>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Kelebihan utama: data asli tetap terlihat, mudah menentukan nilai minimum, maksimum, median, dan modus secara langsung!
-                  </p>
-                </div>
-
-                {/* Contoh Diagram Batang Daun */}
-                <div className="bg-slate-800/60 border border-green-500/20 rounded-xl overflow-hidden">
-                  <div className="bg-green-800/30 px-4 py-2">
-                    <p className="font-body text-xs font-bold text-green-200 uppercase tracking-wide">📋 Contoh Diagram Batang Daun</p>
-                  </div>
-                  <div className="p-4">
-                    <p className="font-body text-xs text-white/60 mb-3">Data nilai ulangan 15 siswa: 62, 65, 68, 71, 73, 73, 75, 78, 78, 82, 85, 87, 88, 91, 95</p>
-                    <div className="bg-slate-900/70 rounded-lg p-4 font-mono text-sm">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-white/40 text-xs w-20 text-right shrink-0">Batang</span>
-                        <span className="text-white/40 text-xs mx-2">|</span>
-                        <span className="text-white/40 text-xs">Daun</span>
-                      </div>
-                      <div className="border-t border-slate-600/40 pt-2 space-y-1">
-                        <div className="flex items-center gap-2">
-                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">6</span>
-                          <span className="text-white/40 mx-2">|</span>
-                          <span className="text-green-300">2  5  8</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">7</span>
-                          <span className="text-white/40 mx-2">|</span>
-                          <span className="text-green-300">1  3  3  5  8  8</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">8</span>
-                          <span className="text-white/40 mx-2">|</span>
-                          <span className="text-green-300">2  5  7  8</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">9</span>
-                          <span className="text-white/40 mx-2">|</span>
-                          <span className="text-green-300">1  5</span>
+                  <div className="space-y-2">
+                    <p className="font-body text-xs font-bold text-cyan-300">📋 Cara Membuat Tabel Distribusi Frekuensi:</p>
+                    {[
+                      ["1", "Catat semua data mentah", "Kumpulkan seluruh data yang ada"],
+                      ["2", "Tentukan nilai-nilai berbeda", "Catat semua nilai unik yang muncul"],
+                      ["3", "Hitung kemunculan tiap nilai", "Berapa kali nilai itu ada dalam data?"],
+                      ["4", "Tulis dalam tabel", "Kolom Nilai | Kolom Frekuensi"],
+                    ].map(([no, judul, ket]) => (
+                      <div key={no} className="flex gap-3 items-start">
+                        <div className="bg-cyan-500/20 text-cyan-400 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0">{no}</div>
+                        <div>
+                          <p className="font-body text-xs font-semibold text-white">{judul}</p>
+                          <p className="font-body text-xs text-white/60">{ket}</p>
                         </div>
                       </div>
-                    </div>
-                    <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-body">
-                      <div className="bg-green-900/30 rounded p-2 text-center">
-                        <p className="text-white/50">Minimum</p>
-                        <p className="text-green-300 font-bold text-base">62</p>
-                      </div>
-                      <div className="bg-red-900/30 rounded p-2 text-center">
-                        <p className="text-white/50">Maksimum</p>
-                        <p className="text-red-300 font-bold text-base">95</p>
-                      </div>
-                      <div className="bg-yellow-900/30 rounded p-2 text-center">
-                        <p className="text-white/50">Modus</p>
-                        <p className="text-yellow-300 font-bold text-base">73 & 78</p>
-                      </div>
-                      <div className="bg-blue-900/30 rounded p-2 text-center">
-                        <p className="text-white/50">Median</p>
-                        <p className="text-blue-300 font-bold text-base">78</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Cara membuat:</strong> (1) Urutkan data dari kecil ke besar. (2) Ambil digit puluhan sebagai batang. (3) Tulis digit satuan sebagai daun di sebelah kanan batangnya.
-                  </p>
-                </div>
+                {/* Contoh: Distribusi Frekuensi Data Tunggal */}
+                {(() => {
+                  const contohData = [70, 70, 70, 70, 70, 75, 75, 75, 75, 80, 80, 80, 80, 80, 85, 85, 85, 90, 90, 95];
+                  const contohMap = new Map<number, number>();
+                  for (const n of contohData) contohMap.set(n, (contohMap.get(n) || 0) + 1);
+                  const contohFreq = Array.from(contohMap.entries()).sort((a, b) => a[0] - b[0]);
+                  const maxF = Math.max(...contohFreq.map(([, f]) => f));
+                  const BAR_COLS = ["#22d3ee","#4ade80","#a78bfa","#fb923c","#f472b6","#fbbf24"];
+                  return (
+                    <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl overflow-hidden">
+                      <div className="bg-cyan-800/30 px-4 py-2">
+                        <p className="font-body text-xs font-bold text-cyan-200 uppercase tracking-wide">📋 Contoh: Distribusi Frekuensi Nilai Ulangan 20 Siswa</p>
+                      </div>
+                      <div className="p-4 space-y-4">
+                        {/* Raw data */}
+                        <div>
+                          <p className="font-body text-xs text-white/50 mb-2">Data mentah (20 nilai):</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {contohData.map((v, i) => (
+                              <span key={i} className="bg-slate-700/60 border border-cyan-500/20 rounded px-2 py-1 font-mono text-xs text-cyan-300">{v}</span>
+                            ))}
+                          </div>
+                        </div>
+                        {/* Table + Chart side by side */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          {/* Frequency table */}
+                          <div>
+                            <p className="font-body text-xs font-bold text-cyan-300 mb-2">📊 Tabel Frekuensi:</p>
+                            <div className="rounded-lg overflow-hidden border border-cyan-500/20">
+                              <div className="grid bg-cyan-950/60" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
+                                <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
+                              </div>
+                              <div className="divide-y divide-slate-700/40">
+                                {contohFreq.map(([nilai, frek], i) => (
+                                  <div key={nilai} className="grid items-center" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                    <div className="px-3 py-2 flex items-center gap-2">
+                                      <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: BAR_COLS[i % BAR_COLS.length] }} />
+                                      <span className="font-mono text-xs text-white font-semibold">{nilai}</span>
+                                    </div>
+                                    <div className="px-3 py-2 text-center font-body text-xs font-bold text-green-300">{frek}</div>
+                                  </div>
+                                ))}
+                                <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                  <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
+                                  <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{contohData.length}</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {/* Frequency bar chart */}
+                          <div>
+                            <p className="font-body text-xs font-bold text-cyan-300 mb-2">📈 Diagram Frekuensi:</p>
+                            <div className="bg-slate-900/60 rounded-lg p-3 h-full flex flex-col justify-end" style={{ minHeight: "140px" }}>
+                              <div className="flex items-end gap-2 justify-around h-24">
+                                {contohFreq.map(([nilai, frek], i) => (
+                                  <div key={nilai} className="flex flex-col items-center gap-1 flex-1">
+                                    <span className="font-body text-xs font-bold" style={{ color: BAR_COLS[i % BAR_COLS.length] }}>{frek}</span>
+                                    <div
+                                      className="w-full rounded-t-sm transition-all"
+                                      style={{
+                                        height: `${(frek / maxF) * 72}px`,
+                                        backgroundColor: BAR_COLS[i % BAR_COLS.length],
+                                        opacity: 0.85,
+                                      }}
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="flex justify-around mt-1">
+                                {contohFreq.map(([nilai]) => (
+                                  <span key={nilai} className="font-mono text-white/50 text-center flex-1" style={{ fontSize: "10px" }}>{nilai}</span>
+                                ))}
+                              </div>
+                              <p className="font-body text-center mt-1" style={{ fontSize: "9px", color: "rgba(255,255,255,0.3)" }}>Nilai</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="bg-slate-900/50 rounded-lg p-3 font-body text-xs text-white/70 leading-relaxed">
+                          <strong className="text-cyan-300">Cara membaca:</strong> Nilai 80 muncul <strong className="text-green-300">5 kali</strong> → frekuensinya 5. Nilai 95 muncul <strong className="text-green-300">1 kali</strong> → frekuensinya 1. Jumlah seluruh frekuensi = <strong className="text-cyan-300">20</strong> (= banyak data).
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
 
-                {/* ===== DIAGRAM BATANG DAUN INTERAKTIF ===== */}
-                <div className="bg-slate-800/70 border border-green-500/30 rounded-xl overflow-hidden">
-                  <div className="bg-green-900/50 px-4 py-3 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-green-400 shrink-0" />
-                    <p className="font-body text-sm font-bold text-green-200">🛠️ Coba Sendiri — Buat Diagram Batang Daun</p>
+                {/* ===== ANIMASI INTERAKTIF ===== */}
+                <div className="bg-slate-800/70 border border-cyan-500/30 rounded-xl overflow-hidden">
+                  <div className="bg-cyan-900/50 px-4 py-3 flex items-center gap-2">
+                    <BarChart2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <p className="font-body text-sm font-bold text-cyan-200">🛠️ Coba Sendiri — Buat Tabel Distribusi Frekuensi</p>
                   </div>
 
                   <div className="p-4 space-y-4">
                     <p className="font-body text-xs text-white/55 leading-relaxed">
-                      Masukkan data angka (0–999) dipisahkan koma, lalu klik <strong className="text-green-300">Buat Diagram</strong> untuk melihat animasi batang daun lengkap dengan statistiknya!
+                      Ketikkan data angka (bilangan bulat 0–999) dipisahkan koma — maks 40 angka. Klik <strong className="text-cyan-300">Buat Tabel</strong> dan lihat tabel serta diagram frekuensi muncul dengan animasi!
                     </p>
 
-                    {/* Input */}
+                    {/* Input area */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <label className="font-body text-xs font-semibold text-green-300">Data angka (dipisah koma, maks 30):</label>
+                        <label className="font-body text-xs font-semibold text-cyan-300">Data mentah (dipisah koma, maks 40):</label>
                         <button
-                          onClick={loadStemExample}
-                          className="font-body text-xs text-green-400/60 hover:text-green-400 transition-colors underline underline-offset-2"
+                          onClick={loadFreqExample}
+                          className="font-body text-xs text-cyan-400/60 hover:text-cyan-400 transition-colors underline underline-offset-2"
                         >Ganti contoh ↗</button>
                       </div>
-                      <input
-                        type="text"
-                        value={stemInput}
-                        onChange={(e) => { setStemInput(e.target.value); setStemError(""); setStemVisible(false); }}
-                        placeholder="Contoh: 72, 65, 78, 83, 91, 75, 90..."
-                        className="w-full bg-slate-800/60 border border-slate-600/50 rounded-lg px-3 py-2.5 text-sm font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-green-400/60 transition-colors"
+                      {/* Data tokens preview */}
+                      {freqRawInput.trim() && (
+                        <div className="flex flex-wrap gap-1.5 max-h-20 overflow-y-auto bg-slate-900/40 rounded-lg p-2">
+                          {freqRawInput.split(/[,\s]+/).filter(Boolean).map((v, i) => (
+                            <span key={i} className="bg-cyan-500/15 border border-cyan-500/25 rounded px-1.5 py-0.5 font-mono text-xs text-cyan-200">{v}</span>
+                          ))}
+                        </div>
+                      )}
+                      <textarea
+                        value={freqRawInput}
+                        onChange={(e) => { setFreqRawInput(e.target.value); setFreqError(""); setFreqVisible(false); }}
+                        placeholder="Contoh: 70, 75, 80, 70, 85, 80, 75..."
+                        rows={2}
+                        className="w-full bg-slate-800/60 border border-slate-600/50 rounded-lg px-3 py-2.5 text-sm font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-cyan-400/60 transition-colors resize-none"
                       />
-                      {stemError && (
-                        <p className="font-body text-xs text-red-400">⚠ {stemError}</p>
+                      {freqError && (
+                        <p className="font-body text-xs text-red-400">⚠ {freqError}</p>
                       )}
                     </div>
 
                     {/* Buttons */}
                     <div className="flex flex-wrap gap-2">
                       <button
-                        onClick={buildStemLeaf}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-green-600 border border-green-500/50 text-white text-xs font-body font-bold hover:bg-green-500 active:scale-95 transition-all shadow-lg shadow-green-500/20"
+                        onClick={buildFreqTable}
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-600 border border-cyan-500/50 text-white text-xs font-body font-bold hover:bg-cyan-500 active:scale-95 transition-all shadow-lg shadow-cyan-500/20"
                       >
-                        <Target className="w-3.5 h-3.5" />
-                        Buat Diagram Batang Daun
+                        <BarChart2 className="w-3.5 h-3.5" />
+                        Buat Tabel &amp; Diagram
                       </button>
-                      {stemVisible && (
+                      {freqVisible && (
                         <button
-                          onClick={resetStem}
+                          onClick={resetFreqTable}
                           className="flex items-center gap-1 px-3 py-2 rounded-lg bg-slate-700/50 border border-slate-600/40 text-white/50 text-xs font-body hover:bg-slate-600/50 hover:text-white/70 transition-all"
                         >↺ Reset</button>
                       )}
                     </div>
 
-                    {/* Diagram Result */}
-                    {stemVisible && stemResult.length > 0 && (() => {
-                      const n = stemRaw.length;
-                      const minVal = stemRaw[0];
-                      const maxVal = stemRaw[n - 1];
-                      const medianVal = n % 2 === 1
-                        ? stemRaw[Math.floor(n / 2)]
-                        : (stemRaw[n / 2 - 1] + stemRaw[n / 2]) / 2;
-                      const freq = new Map<number, number>();
-                      for (const x of stemRaw) freq.set(x, (freq.get(x) || 0) + 1);
-                      const maxFreq = Math.max(...freq.values());
-                      const modes = [...freq.entries()].filter(([, f]) => f === maxFreq).map(([v]) => v).sort((a, b) => a - b);
-                      const modeStr = maxFreq === 1 ? "Tidak ada" : modes.join(" & ");
-
-                      let globalLeafIdx = 0;
+                    {/* Result */}
+                    {freqVisible && freqResult.length > 0 && (() => {
+                      const total = freqResult.reduce((s, r) => s + r.frek, 0);
+                      const maxFrek = Math.max(...freqResult.map(r => r.frek));
+                      const ANIM_COLORS = ["#22d3ee","#4ade80","#a78bfa","#fb923c","#f472b6","#fbbf24","#60a5fa","#34d399","#f87171","#e879f9"];
 
                       return (
-                        <div className="bg-slate-900/60 border border-green-500/20 rounded-xl p-4 space-y-4">
-                          <div className="flex items-center justify-between">
-                            <p className="font-body text-xs font-bold text-green-300 uppercase tracking-wider">🌿 Hasil Diagram Batang Daun</p>
-                            <span className="font-body text-xs text-white/35">{n} data · terurut</span>
+                        <div
+                          className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-4 space-y-4"
+                          style={{ opacity: freqAnimated ? 1 : 0, transition: "opacity 0.4s ease" }}
+                        >
+                          <div className="flex items-center justify-between flex-wrap gap-2">
+                            <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-wider">📊 Hasil Tabel Distribusi Frekuensi</p>
+                            <span className="font-body text-xs text-white/35">{total} data · {freqResult.length} nilai unik</span>
                           </div>
 
-                          {/* Sorted data preview */}
-                          <div className="bg-slate-800/50 rounded-lg px-3 py-2">
-                            <p className="font-body text-xs text-white/35 mb-1">Data terurut:</p>
-                            <p className="font-body text-xs text-white/70 leading-relaxed">{stemRaw.join(", ")}</p>
-                          </div>
-
-                          {/* Stem-and-leaf diagram */}
-                          <div className="bg-slate-900/80 rounded-xl overflow-hidden border border-green-500/15">
-                            {/* Header */}
-                            <div className="flex items-center gap-0 border-b border-slate-700/60">
-                              <div className="w-16 px-3 py-2 text-right font-body text-xs font-bold text-slate-400 uppercase tracking-wide shrink-0">Batang</div>
-                              <div className="w-px self-stretch bg-slate-600/60" />
-                              <div className="px-3 py-2 font-body text-xs font-bold text-slate-400 uppercase tracking-wide">Daun</div>
-                            </div>
-                            {/* Rows */}
-                            <div className="divide-y divide-slate-800/60">
-                              {stemResult.map((row, rowIdx) => {
-                                const rowDelay = rowIdx * 0.12;
-                                const localStart = globalLeafIdx;
-                                globalLeafIdx += row.leaves.length;
-                                return (
-                                  <div
-                                    key={row.stem}
-                                    className="flex items-center gap-0"
-                                    style={{
-                                      opacity: stemAnimated ? 1 : 0,
-                                      transform: stemAnimated ? "translateX(0)" : "translateX(-16px)",
-                                      transition: `opacity 0.4s ease ${rowDelay}s, transform 0.4s ease ${rowDelay}s`,
-                                    }}
-                                  >
-                                    <div className="w-16 px-3 py-2.5 text-right shrink-0">
-                                      <span className="font-mono font-bold text-cyan-300 text-sm">{row.stem}</span>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {/* Frequency Table */}
+                            <div>
+                              <div className="rounded-lg overflow-hidden border border-cyan-500/20">
+                                <div className="grid bg-cyan-950/70" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                  <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
+                                  <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
+                                </div>
+                                <div className="divide-y divide-slate-700/40">
+                                  {freqResult.map((row, i) => (
+                                    <div
+                                      key={row.nilai}
+                                      className="grid items-center"
+                                      style={{
+                                        gridTemplateColumns: "1fr 1fr",
+                                        opacity: freqAnimated ? 1 : 0,
+                                        transform: freqAnimated ? "translateX(0)" : "translateX(-10px)",
+                                        transition: `opacity 0.3s ease ${i * 0.07}s, transform 0.3s ease ${i * 0.07}s`,
+                                      }}
+                                    >
+                                      <div className="px-3 py-2 flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: ANIM_COLORS[i % ANIM_COLORS.length] }} />
+                                        <span className="font-mono text-xs text-white font-semibold">{row.nilai}</span>
+                                      </div>
+                                      <div className="px-3 py-2 flex items-center justify-center gap-2">
+                                        <span className="font-body text-xs font-bold text-green-300">{row.frek}</span>
+                                        {row.frek === maxFrek && (
+                                          <span className="text-yellow-400 text-xs">★</span>
+                                        )}
+                                      </div>
                                     </div>
-                                    <div className="w-px self-stretch bg-slate-600/60" />
-                                    <div className="px-3 py-2.5 flex items-center gap-2 flex-wrap">
-                                      {row.leaves.map((leaf, leafIdx) => {
-                                        const globalIdx = localStart + leafIdx;
-                                        return (
-                                          <span
-                                            key={leafIdx}
-                                            className="font-mono text-green-300 font-semibold text-sm"
-                                            style={{
-                                              opacity: stemAnimated ? 1 : 0,
-                                              transition: `opacity 0.25s ease ${rowDelay + 0.1 + leafIdx * 0.06}s`,
-                                              display: "inline-block",
-                                            }}
-                                          >{leaf}</span>
-                                        );
-                                        void globalIdx;
-                                      })}
-                                    </div>
+                                  ))}
+                                  <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                    <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
+                                    <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{total}</div>
                                   </div>
-                                );
-                              })}
+                                </div>
+                              </div>
                             </div>
-                            {/* Footer legend */}
-                            <div className="border-t border-slate-700/60 px-3 py-2 flex items-center gap-4">
-                              <span className="font-body text-xs text-white/30">Kunci: Batang | Daun</span>
-                              <span className="font-body text-xs text-white/30">Contoh baris pertama: {stemResult[0].stem} | {stemResult[0].leaves[0]} → <strong className="text-white/50">{stemResult[0].stem * 10 + stemResult[0].leaves[0]}</strong></span>
+
+                            {/* Animated Bar Chart */}
+                            <div className="flex flex-col">
+                              <p className="font-body text-xs font-bold text-cyan-300 mb-2">📈 Diagram Frekuensi:</p>
+                              <div className="flex-1 bg-slate-900/60 rounded-lg px-3 pt-3 pb-2 flex flex-col justify-end" style={{ minHeight: "130px" }}>
+                                <div className="flex items-end gap-1 justify-around" style={{ height: "80px" }}>
+                                  {freqResult.map((row, i) => (
+                                    <div key={row.nilai} className="flex flex-col items-center gap-0.5 flex-1">
+                                      <span
+                                        className="font-body font-bold"
+                                        style={{
+                                          fontSize: "10px",
+                                          color: ANIM_COLORS[i % ANIM_COLORS.length],
+                                          opacity: freqAnimated ? 1 : 0,
+                                          transition: `opacity 0.3s ease ${i * 0.08 + 0.3}s`,
+                                        }}
+                                      >{row.frek}</span>
+                                      <div
+                                        className="w-full rounded-t-sm"
+                                        style={{
+                                          backgroundColor: ANIM_COLORS[i % ANIM_COLORS.length],
+                                          height: freqAnimated ? `${(row.frek / maxFrek) * 68}px` : "0px",
+                                          transition: `height 0.5s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.08}s`,
+                                          opacity: 0.85,
+                                        }}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className="flex justify-around mt-1.5 border-t border-slate-700/50 pt-1">
+                                  {freqResult.map((row) => (
+                                    <span key={row.nilai} className="font-mono text-white/40 text-center flex-1" style={{ fontSize: "9px" }}>{row.nilai}</span>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
                           </div>
 
-                          {/* Stats */}
+                          {/* Stats summary */}
                           <div
-                            className="grid grid-cols-2 sm:grid-cols-4 gap-2"
+                            className="grid grid-cols-2 gap-2"
                             style={{
-                              opacity: stemAnimated ? 1 : 0,
-                              transition: `opacity 0.5s ease ${stemResult.length * 0.12 + 0.4}s`,
+                              opacity: freqAnimated ? 1 : 0,
+                              transition: `opacity 0.4s ease ${freqResult.length * 0.07 + 0.3}s`,
                             }}
                           >
-                            <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2.5 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MINIMUM</p>
-                              <p className="font-body text-green-300 font-bold text-lg mt-0.5">{minVal}</p>
+                            <div className="bg-cyan-900/25 border border-cyan-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>BANYAK DATA (n)</p>
+                              <p className="font-body text-cyan-300 font-bold text-sm mt-0.5">{total}</p>
                             </div>
-                            <div className="bg-red-900/25 border border-red-500/20 rounded-lg p-2.5 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MAKSIMUM</p>
-                              <p className="font-body text-red-300 font-bold text-lg mt-0.5">{maxVal}</p>
-                            </div>
-                            <div className="bg-yellow-900/25 border border-yellow-500/20 rounded-lg p-2.5 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MODUS</p>
-                              <p className="font-body text-yellow-300 font-bold text-sm mt-0.5 leading-tight">{modeStr}</p>
-                            </div>
-                            <div className="bg-blue-900/25 border border-blue-500/20 rounded-lg p-2.5 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MEDIAN</p>
-                              <p className="font-body text-blue-300 font-bold text-lg mt-0.5">{medianVal}</p>
+                            <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>NILAI UNIK</p>
+                              <p className="font-body text-green-300 font-bold text-sm mt-0.5">{freqResult.length}</p>
                             </div>
                           </div>
+
+                          <p className="font-body text-xs text-white/40 leading-relaxed">
+                            Jumlah seluruh frekuensi = banyaknya data = <strong className="text-cyan-300">{total}</strong>.
+                          </p>
                         </div>
                       );
                     })()}
                   </div>
                 </div>
 
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200">
+                    <strong>Ingat:</strong> Tabel distribusi frekuensi data tunggal mencatat berapa kali setiap nilai muncul. Jumlah semua frekuensi harus sama dengan banyaknya seluruh data (n). Semakin tinggi batang pada diagram, semakin sering nilai tersebut muncul!
+                  </p>
+                </div>
               </div>
             )}
           </div>
 
           {/* Contoh Soal Sub-Bab 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal — Diagram Batang Daun" />
-            {expandedSections.includes("contoh1") && (
+            <SectionHeader id="contoh5" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Tabel Distribusi Frekuensi" />
+            {expandedSections.includes("contoh5") && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -543,28 +597,27 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Buatlah diagram batang daun dari data berikut (nilai ulangan 10 siswa):<br />
-                      52, 58, 61, 64, 67, 70, 72, 75, 83, 89
+                      Perhatikan tabel distribusi frekuensi berikut:
                     </p>
+                    <div className="mt-2 overflow-x-auto">
+                      <table className="w-full text-xs font-body">
+                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1 text-left text-white/70">Kelas</th><th className="px-3 py-1 text-center text-white/70">Frekuensi</th></tr></thead>
+                        <tbody className="divide-y divide-slate-700/30">
+                          {[["40–49","4"],["50–59","8"],["60–69","12"],["70–79","6"]].map(([k,f]) => (
+                            <tr key={k}><td className="px-3 py-1 text-white">{k}</td><td className="px-3 py-1 text-center text-green-300">{f}</td></tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="font-body text-sm text-white mt-2">Tentukan: (a) Total frekuensi, (b) Titik tengah kelas 60–69.</p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Data sudah urut. Pisahkan puluhan (batang) dan satuan (daun).</p>
-                      <div className="bg-slate-900/60 rounded-lg p-4 font-mono text-sm">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-white/40 text-xs w-16 text-right shrink-0">Batang</span>
-                          <span className="text-white/40 mx-2">|</span>
-                          <span className="text-white/40 text-xs">Daun</span>
-                        </div>
-                        <div className="border-t border-slate-600/40 pt-1 space-y-1">
-                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">5</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">2  8</span></div>
-                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">6</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">1  4  7</span></div>
-                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">7</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">0  2  5</span></div>
-                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">8</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">3  9</span></div>
-                        </div>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p>(a) Total frekuensi = <InlineMath math="4 + 8 + 12 + 6 = \mathbf{30}" /></p>
+                        <p>(b) Titik tengah 60–69 = <InlineMath math="\frac{60+69}{2} = \frac{129}{2} = \mathbf{64,5}" /></p>
                       </div>
-                      <p><strong className="text-green-300">Min = 52, Maks = 89, Banyak data = 10 ✓</strong></p>
                     </div>
                   </div>
                 </div>
@@ -577,29 +630,52 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Dari diagram batang daun berikut, tentukan nilai minimum, maksimum, modus, dan median!
+                      Data berat badan (kg) 20 siswa: 45, 48, 50, 52, 53, 55, 56, 57, 58, 60, 61, 62, 63, 65, 66, 68, 70, 72, 75, 78.<br />
+                      Buat tabel distribusi frekuensi dengan 4 kelas, lalu hitung rata-ratanya!
                     </p>
-                    <div className="bg-slate-900/60 rounded-lg p-3 mt-2 font-mono text-sm">
-                      <div className="flex gap-2 text-white/40 text-xs mb-1"><span className="w-14 text-right">Batang</span><span className="mx-2">|</span><span>Daun</span></div>
-                      <div className="border-t border-slate-600/40 pt-1 space-y-1">
-                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">4</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">3  7  7</span></div>
-                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">5</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">0  2  5  5  8</span></div>
-                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">6</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">1  4  9</span></div>
-                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">7</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">2  6</span></div>
-                      </div>
-                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Data terurut: 43, 47, 47, 50, 52, 55, 55, 58, 61, 64, 69, 72, 76</p>
-                      <p>Banyak data = <strong>13</strong></p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>• Minimum = <span className="text-green-400 font-semibold">43</span></p>
-                        <p>• Maksimum = <span className="text-red-400 font-semibold">76</span></p>
-                        <p>• Modus = <span className="text-yellow-400 font-semibold">47 dan 55</span> (masing-masing muncul 2 kali)</p>
-                        <p>• Median = datum ke-<InlineMath math="\frac{13+1}{2} = 7" /> = <span className="text-blue-400 font-semibold">55</span></p>
+                        <p>Jangkauan: <InlineMath math="J = 78 - 45 = 33" /></p>
+                        <p>Panjang kelas: <InlineMath math="p = \lceil 33/4 \rceil = 9" /> → gunakan 9</p>
                       </div>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body mt-2">
+                          <thead><tr className="bg-slate-700/40">
+                            <th className="px-2 py-1 text-left text-cyan-300">Kelas</th>
+                            <th className="px-2 py-1 text-center text-white/70">f</th>
+                            <th className="px-2 py-1 text-center text-white/70">xᵢ</th>
+                            <th className="px-2 py-1 text-center text-white/70">f·xᵢ</th>
+                          </tr></thead>
+                          <tbody className="divide-y divide-slate-700/30">
+                            {[
+                              ["45 – 53","5","49","245"],
+                              ["54 – 62","8","58","464"],
+                              ["63 – 71","5","67","335"],
+                              ["72 – 80","2","76","152"],
+                            ].map(([k,f,xi,fxi]) => (
+                              <tr key={k}>
+                                <td className="px-2 py-1 text-white">{k}</td>
+                                <td className="px-2 py-1 text-center text-green-300">{f}</td>
+                                <td className="px-2 py-1 text-center text-yellow-300">{xi}</td>
+                                <td className="px-2 py-1 text-center text-cyan-300">{fxi}</td>
+                              </tr>
+                            ))}
+                            <tr className="border-t border-slate-500/50 font-bold">
+                              <td className="px-2 py-1 text-white">Total</td>
+                              <td className="px-2 py-1 text-center text-green-400">20</td>
+                              <td className="px-2 py-1"></td>
+                              <td className="px-2 py-1 text-center text-cyan-400">1.196</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\bar{x} = \frac{1196}{20} = 59{,}8 \text{ kg}" />
+                      </div>
+                      <p><strong className="text-primary">Rata-rata berat badan = 59,8 kg</strong></p>
                     </div>
                   </div>
                 </div>
@@ -612,51 +688,71 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Dua kelas, A dan B, mengikuti ujian matematika. Data nilai (sudah diurutkan):<br />
-                      Kelas A: 55, 60, 63, 65, 68, 70, 70, 72, 78, 80<br />
-                      Kelas B: 58, 61, 64, 66, 69, 71, 75, 77, 82, 85<br />
-                      Sajikan data ini dalam <strong>diagram batang daun berdampingan</strong> dan tentukan kelas mana yang memiliki rata-rata lebih tinggi!
+                      Dari tabel distribusi frekuensi berikut:
+                    </p>
+                    <div className="mt-2 overflow-x-auto">
+                      <table className="w-full text-xs font-body">
+                        <thead><tr className="bg-slate-700/40">
+                          <th className="px-2 py-1 text-left text-white/70">Kelas</th>
+                          <th className="px-2 py-1 text-center text-white/70">f</th>
+                        </tr></thead>
+                        <tbody className="divide-y divide-slate-700/30">
+                          {[["50–59","3"],["60–69","6"],["70–79","14"],["80–89","10"],["90–99","7"]].map(([k,f]) => (
+                            <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="font-body text-sm text-white mt-2">
+                      Tentukan: (a) Rata-rata data berkelompok, (b) Kelas modus, (c) Frekuensi kumulatif untuk kelas 70–79.
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Buat diagram batang daun berdampingan (daun A di kiri, batang di tengah, daun B di kanan):</p>
-                      <div className="bg-slate-900/60 rounded-lg p-4 font-mono text-xs overflow-x-auto">
-                        <div className="flex gap-1 text-white/40 mb-1 justify-center">
-                          <span className="w-20 text-right">Daun A</span>
-                          <span className="w-8 text-center">Batang</span>
-                          <span className="w-20">Daun B</span>
-                        </div>
-                        <div className="border-t border-slate-600/40 pt-1 space-y-1">
-                          <div className="flex gap-1 items-center justify-center">
-                            <span className="text-cyan-300 w-20 text-right">5</span>
-                            <span className="text-white/30 w-8 text-center font-bold">5</span>
-                            <span className="text-orange-300 w-20">8</span>
-                          </div>
-                          <div className="flex gap-1 items-center justify-center">
-                            <span className="text-cyan-300 w-20 text-right">8  5  3  0</span>
-                            <span className="text-white/30 w-8 text-center font-bold">6</span>
-                            <span className="text-orange-300 w-20">1  4  6  9</span>
-                          </div>
-                          <div className="flex gap-1 items-center justify-center">
-                            <span className="text-cyan-300 w-20 text-right">2  0  0</span>
-                            <span className="text-white/30 w-8 text-center font-bold">7</span>
-                            <span className="text-orange-300 w-20">1  5  7</span>
-                          </div>
-                          <div className="flex gap-1 items-center justify-center">
-                            <span className="text-cyan-300 w-20 text-right">8  0</span>
-                            <span className="text-white/30 w-8 text-center font-bold">8</span>
-                            <span className="text-orange-300 w-20">2  5</span>
-                          </div>
-                        </div>
+                      <p><strong>Langkah 1:</strong> Hitung titik tengah dan f·xᵢ:</p>
+                      <div className="bg-slate-900/50 rounded p-2 overflow-x-auto">
+                        <table className="w-full text-xs font-body">
+                          <thead><tr className="border-b border-slate-600/50">
+                            <th className="px-2 py-1 text-left text-white/50">Kelas</th>
+                            <th className="px-2 py-1 text-center text-white/50">f</th>
+                            <th className="px-2 py-1 text-center text-white/50">xᵢ</th>
+                            <th className="px-2 py-1 text-center text-white/50">f·xᵢ</th>
+                            <th className="px-2 py-1 text-center text-white/50">fk</th>
+                          </tr></thead>
+                          <tbody className="divide-y divide-slate-700/20">
+                            {[
+                              ["50–59","3","54,5","163,5","3"],
+                              ["60–69","6","64,5","387","9"],
+                              ["70–79","14","74,5","1043","23"],
+                              ["80–89","10","84,5","845","33"],
+                              ["90–99","7","94,5","661,5","40"],
+                            ].map(([k,f,xi,fxi,fk]) => (
+                              <tr key={k}>
+                                <td className="px-2 py-1 text-white">{k}</td>
+                                <td className="px-2 py-1 text-center text-green-300">{f}</td>
+                                <td className="px-2 py-1 text-center text-yellow-300">{xi}</td>
+                                <td className="px-2 py-1 text-center text-cyan-300">{fxi}</td>
+                                <td className="px-2 py-1 text-center text-purple-300">{fk}</td>
+                              </tr>
+                            ))}
+                            <tr className="border-t border-slate-500/50 font-bold">
+                              <td className="px-2 py-1 text-white">Total</td>
+                              <td className="px-2 py-1 text-center text-green-400">40</td>
+                              <td></td>
+                              <td className="px-2 py-1 text-center text-cyan-400">3.100</td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <p><strong>Langkah 2:</strong> Hitung rata-rata:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="\bar{x}_A = \frac{55+60+63+65+68+70+70+72+78+80}{10} = \frac{681}{10} = 68{,}1" />
-                        <BlockMath math="\bar{x}_B = \frac{58+61+64+66+69+71+75+77+82+85}{10} = \frac{708}{10} = 70{,}8" />
+                        <p><strong>(a)</strong> Rata-rata:</p>
+                        <BlockMath math="\bar{x} = \frac{3100}{40} = 77{,}5" />
+                        <p><strong>(b)</strong> Kelas modus = kelas dengan frekuensi tertinggi = <span className="text-red-400 font-semibold">70–79</span> (f = 14)</p>
+                        <p><strong>(c)</strong> Frekuensi kumulatif kelas 70–79 = <InlineMath math="3 + 6 + 14 = \mathbf{23}" /></p>
                       </div>
-                      <p><strong className="text-primary">Kelas B memiliki rata-rata lebih tinggi (70,8 &gt; 68,1)</strong></p>
+                      <p><strong className="text-primary">Rata-rata = 77,5; Kelas modus = 70–79; fk 70–79 = 23</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1897,325 +1993,271 @@ const PenyajianDataPage = () => {
             )}
           </div>
 
-          {/* ===== SUB-BAB 5: TABEL DISTRIBUSI FREKUENSI ===== */}
+          {/* ===== SUB-BAB 5: DIAGRAM BATANG DAUN ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep5" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 5: Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("konsep5") && (
+            <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 5: Diagram Batang Daun (Stem-and-Leaf)" />
+            {expandedSections.includes("konsep1") && (
               <div className="px-5 pb-5 space-y-4">
 
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🎯 Ringkasan Intisari</p>
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    <strong className="text-cyan-300">Tabel distribusi frekuensi</strong> adalah cara menyajikan data dengan menghitung <strong className="text-cyan-300">berapa kali setiap nilai muncul</strong> dalam kumpulan data. Nilai yang dihitung kemunculannya disebut <strong className="text-cyan-300">frekuensi</strong>.
+                    <strong className="text-green-300">Diagram batang daun</strong> adalah cara penyajian data yang unik — data angka dipisah menjadi dua bagian:
                   </p>
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-cyan-900/40 border border-cyan-500/40 rounded-lg p-3 text-center">
-                      <p className="text-xl font-bold text-cyan-300">NILAI</p>
-                      <p className="font-body text-xs text-white/70 mt-1">Data yang diamati</p>
-                      <p className="font-body text-xs text-cyan-400 mt-1">mis. 70, 75, 80 ...</p>
+                    <div className="bg-green-900/40 border border-green-500/40 rounded-lg p-3 text-center">
+                      <p className="text-2xl font-bold text-green-300">BATANG</p>
+                      <p className="font-body text-xs text-white/70 mt-1">Digit depan (puluhan)</p>
+                      <p className="font-body text-xs text-green-400 mt-1">Ditulis di <strong>kiri</strong></p>
                     </div>
                     <div className="bg-teal-900/40 border border-teal-500/40 rounded-lg p-3 text-center">
-                      <p className="text-xl font-bold text-teal-300">FREKUENSI</p>
-                      <p className="font-body text-xs text-white/70 mt-1">Berapa kali nilai itu muncul</p>
-                      <p className="font-body text-xs text-teal-400 mt-1">dihitung dari data mentah</p>
+                      <p className="text-2xl font-bold text-teal-300">DAUN</p>
+                      <p className="font-body text-xs text-white/70 mt-1">Digit belakang (satuan)</p>
+                      <p className="font-body text-xs text-teal-400 mt-1">Ditulis di <strong>kanan</strong></p>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <p className="font-body text-xs font-bold text-cyan-300">📋 Cara Membuat Tabel Distribusi Frekuensi:</p>
-                    {[
-                      ["1", "Catat semua data mentah", "Kumpulkan seluruh data yang ada"],
-                      ["2", "Tentukan nilai-nilai berbeda", "Catat semua nilai unik yang muncul"],
-                      ["3", "Hitung kemunculan tiap nilai", "Berapa kali nilai itu ada dalam data?"],
-                      ["4", "Tulis dalam tabel", "Kolom Nilai | Kolom Frekuensi"],
-                    ].map(([no, judul, ket]) => (
-                      <div key={no} className="flex gap-3 items-start">
-                        <div className="bg-cyan-500/20 text-cyan-400 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0">{no}</div>
-                        <div>
-                          <p className="font-body text-xs font-semibold text-white">{judul}</p>
-                          <p className="font-body text-xs text-white/60">{ket}</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Kelebihan utama: data asli tetap terlihat, mudah menentukan nilai minimum, maksimum, median, dan modus secara langsung!
+                  </p>
+                </div>
+
+                {/* Contoh Diagram Batang Daun */}
+                <div className="bg-slate-800/60 border border-green-500/20 rounded-xl overflow-hidden">
+                  <div className="bg-green-800/30 px-4 py-2">
+                    <p className="font-body text-xs font-bold text-green-200 uppercase tracking-wide">📋 Contoh Diagram Batang Daun</p>
+                  </div>
+                  <div className="p-4">
+                    <p className="font-body text-xs text-white/60 mb-3">Data nilai ulangan 15 siswa: 62, 65, 68, 71, 73, 73, 75, 78, 78, 82, 85, 87, 88, 91, 95</p>
+                    <div className="bg-slate-900/70 rounded-lg p-4 font-mono text-sm">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-white/40 text-xs w-20 text-right shrink-0">Batang</span>
+                        <span className="text-white/40 text-xs mx-2">|</span>
+                        <span className="text-white/40 text-xs">Daun</span>
+                      </div>
+                      <div className="border-t border-slate-600/40 pt-2 space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">6</span>
+                          <span className="text-white/40 mx-2">|</span>
+                          <span className="text-green-300">2  5  8</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">7</span>
+                          <span className="text-white/40 mx-2">|</span>
+                          <span className="text-green-300">1  3  3  5  8  8</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">8</span>
+                          <span className="text-white/40 mx-2">|</span>
+                          <span className="text-green-300">2  5  7  8</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-cyan-300 font-bold w-20 text-right shrink-0">9</span>
+                          <span className="text-white/40 mx-2">|</span>
+                          <span className="text-green-300">1  5</span>
                         </div>
                       </div>
-                    ))}
+                    </div>
+                    <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-body">
+                      <div className="bg-green-900/30 rounded p-2 text-center">
+                        <p className="text-white/50">Minimum</p>
+                        <p className="text-green-300 font-bold text-base">62</p>
+                      </div>
+                      <div className="bg-red-900/30 rounded p-2 text-center">
+                        <p className="text-white/50">Maksimum</p>
+                        <p className="text-red-300 font-bold text-base">95</p>
+                      </div>
+                      <div className="bg-yellow-900/30 rounded p-2 text-center">
+                        <p className="text-white/50">Modus</p>
+                        <p className="text-yellow-300 font-bold text-base">73 & 78</p>
+                      </div>
+                      <div className="bg-blue-900/30 rounded p-2 text-center">
+                        <p className="text-white/50">Median</p>
+                        <p className="text-blue-300 font-bold text-base">78</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Contoh: Distribusi Frekuensi Data Tunggal */}
-                {(() => {
-                  const contohData = [70, 70, 70, 70, 70, 75, 75, 75, 75, 80, 80, 80, 80, 80, 85, 85, 85, 90, 90, 95];
-                  const contohMap = new Map<number, number>();
-                  for (const n of contohData) contohMap.set(n, (contohMap.get(n) || 0) + 1);
-                  const contohFreq = Array.from(contohMap.entries()).sort((a, b) => a[0] - b[0]);
-                  const maxF = Math.max(...contohFreq.map(([, f]) => f));
-                  const BAR_COLS = ["#22d3ee","#4ade80","#a78bfa","#fb923c","#f472b6","#fbbf24"];
-                  return (
-                    <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl overflow-hidden">
-                      <div className="bg-cyan-800/30 px-4 py-2">
-                        <p className="font-body text-xs font-bold text-cyan-200 uppercase tracking-wide">📋 Contoh: Distribusi Frekuensi Nilai Ulangan 20 Siswa</p>
-                      </div>
-                      <div className="p-4 space-y-4">
-                        {/* Raw data */}
-                        <div>
-                          <p className="font-body text-xs text-white/50 mb-2">Data mentah (20 nilai):</p>
-                          <div className="flex flex-wrap gap-1.5">
-                            {contohData.map((v, i) => (
-                              <span key={i} className="bg-slate-700/60 border border-cyan-500/20 rounded px-2 py-1 font-mono text-xs text-cyan-300">{v}</span>
-                            ))}
-                          </div>
-                        </div>
-                        {/* Table + Chart side by side */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {/* Frequency table */}
-                          <div>
-                            <p className="font-body text-xs font-bold text-cyan-300 mb-2">📊 Tabel Frekuensi:</p>
-                            <div className="rounded-lg overflow-hidden border border-cyan-500/20">
-                              <div className="grid bg-cyan-950/60" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
-                                <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
-                              </div>
-                              <div className="divide-y divide-slate-700/40">
-                                {contohFreq.map(([nilai, frek], i) => (
-                                  <div key={nilai} className="grid items-center" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                    <div className="px-3 py-2 flex items-center gap-2">
-                                      <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: BAR_COLS[i % BAR_COLS.length] }} />
-                                      <span className="font-mono text-xs text-white font-semibold">{nilai}</span>
-                                    </div>
-                                    <div className="px-3 py-2 text-center font-body text-xs font-bold text-green-300">{frek}</div>
-                                  </div>
-                                ))}
-                                <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                  <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
-                                  <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{contohData.length}</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          {/* Frequency bar chart */}
-                          <div>
-                            <p className="font-body text-xs font-bold text-cyan-300 mb-2">📈 Diagram Frekuensi:</p>
-                            <div className="bg-slate-900/60 rounded-lg p-3 h-full flex flex-col justify-end" style={{ minHeight: "140px" }}>
-                              <div className="flex items-end gap-2 justify-around h-24">
-                                {contohFreq.map(([nilai, frek], i) => (
-                                  <div key={nilai} className="flex flex-col items-center gap-1 flex-1">
-                                    <span className="font-body text-xs font-bold" style={{ color: BAR_COLS[i % BAR_COLS.length] }}>{frek}</span>
-                                    <div
-                                      className="w-full rounded-t-sm transition-all"
-                                      style={{
-                                        height: `${(frek / maxF) * 72}px`,
-                                        backgroundColor: BAR_COLS[i % BAR_COLS.length],
-                                        opacity: 0.85,
-                                      }}
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                              <div className="flex justify-around mt-1">
-                                {contohFreq.map(([nilai]) => (
-                                  <span key={nilai} className="font-mono text-white/50 text-center flex-1" style={{ fontSize: "10px" }}>{nilai}</span>
-                                ))}
-                              </div>
-                              <p className="font-body text-center mt-1" style={{ fontSize: "9px", color: "rgba(255,255,255,0.3)" }}>Nilai</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="bg-slate-900/50 rounded-lg p-3 font-body text-xs text-white/70 leading-relaxed">
-                          <strong className="text-cyan-300">Cara membaca:</strong> Nilai 80 muncul <strong className="text-green-300">5 kali</strong> → frekuensinya 5. Nilai 95 muncul <strong className="text-green-300">1 kali</strong> → frekuensinya 1. Jumlah seluruh frekuensi = <strong className="text-cyan-300">20</strong> (= banyak data).
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })()}
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200">
+                    <strong>Cara membuat:</strong> (1) Urutkan data dari kecil ke besar. (2) Ambil digit puluhan sebagai batang. (3) Tulis digit satuan sebagai daun di sebelah kanan batangnya.
+                  </p>
+                </div>
 
-                {/* ===== ANIMASI INTERAKTIF ===== */}
-                <div className="bg-slate-800/70 border border-cyan-500/30 rounded-xl overflow-hidden">
-                  <div className="bg-cyan-900/50 px-4 py-3 flex items-center gap-2">
-                    <BarChart2 className="w-4 h-4 text-cyan-400 shrink-0" />
-                    <p className="font-body text-sm font-bold text-cyan-200">🛠️ Coba Sendiri — Buat Tabel Distribusi Frekuensi</p>
+                {/* ===== DIAGRAM BATANG DAUN INTERAKTIF ===== */}
+                <div className="bg-slate-800/70 border border-green-500/30 rounded-xl overflow-hidden">
+                  <div className="bg-green-900/50 px-4 py-3 flex items-center gap-2">
+                    <Target className="w-4 h-4 text-green-400 shrink-0" />
+                    <p className="font-body text-sm font-bold text-green-200">🛠️ Coba Sendiri — Buat Diagram Batang Daun</p>
                   </div>
 
                   <div className="p-4 space-y-4">
                     <p className="font-body text-xs text-white/55 leading-relaxed">
-                      Ketikkan data angka (bilangan bulat 0–999) dipisahkan koma — maks 40 angka. Klik <strong className="text-cyan-300">Buat Tabel</strong> dan lihat tabel serta diagram frekuensi muncul dengan animasi!
+                      Masukkan data angka (0–999) dipisahkan koma, lalu klik <strong className="text-green-300">Buat Diagram</strong> untuk melihat animasi batang daun lengkap dengan statistiknya!
                     </p>
 
-                    {/* Input area */}
+                    {/* Input */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <label className="font-body text-xs font-semibold text-cyan-300">Data mentah (dipisah koma, maks 40):</label>
+                        <label className="font-body text-xs font-semibold text-green-300">Data angka (dipisah koma, maks 30):</label>
                         <button
-                          onClick={loadFreqExample}
-                          className="font-body text-xs text-cyan-400/60 hover:text-cyan-400 transition-colors underline underline-offset-2"
+                          onClick={loadStemExample}
+                          className="font-body text-xs text-green-400/60 hover:text-green-400 transition-colors underline underline-offset-2"
                         >Ganti contoh ↗</button>
                       </div>
-                      {/* Data tokens preview */}
-                      {freqRawInput.trim() && (
-                        <div className="flex flex-wrap gap-1.5 max-h-20 overflow-y-auto bg-slate-900/40 rounded-lg p-2">
-                          {freqRawInput.split(/[,\s]+/).filter(Boolean).map((v, i) => (
-                            <span key={i} className="bg-cyan-500/15 border border-cyan-500/25 rounded px-1.5 py-0.5 font-mono text-xs text-cyan-200">{v}</span>
-                          ))}
-                        </div>
-                      )}
-                      <textarea
-                        value={freqRawInput}
-                        onChange={(e) => { setFreqRawInput(e.target.value); setFreqError(""); setFreqVisible(false); }}
-                        placeholder="Contoh: 70, 75, 80, 70, 85, 80, 75..."
-                        rows={2}
-                        className="w-full bg-slate-800/60 border border-slate-600/50 rounded-lg px-3 py-2.5 text-sm font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-cyan-400/60 transition-colors resize-none"
+                      <input
+                        type="text"
+                        value={stemInput}
+                        onChange={(e) => { setStemInput(e.target.value); setStemError(""); setStemVisible(false); }}
+                        placeholder="Contoh: 72, 65, 78, 83, 91, 75, 90..."
+                        className="w-full bg-slate-800/60 border border-slate-600/50 rounded-lg px-3 py-2.5 text-sm font-body text-white/90 placeholder-white/25 focus:outline-none focus:border-green-400/60 transition-colors"
                       />
-                      {freqError && (
-                        <p className="font-body text-xs text-red-400">⚠ {freqError}</p>
+                      {stemError && (
+                        <p className="font-body text-xs text-red-400">⚠ {stemError}</p>
                       )}
                     </div>
 
                     {/* Buttons */}
                     <div className="flex flex-wrap gap-2">
                       <button
-                        onClick={buildFreqTable}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-600 border border-cyan-500/50 text-white text-xs font-body font-bold hover:bg-cyan-500 active:scale-95 transition-all shadow-lg shadow-cyan-500/20"
+                        onClick={buildStemLeaf}
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-green-600 border border-green-500/50 text-white text-xs font-body font-bold hover:bg-green-500 active:scale-95 transition-all shadow-lg shadow-green-500/20"
                       >
-                        <BarChart2 className="w-3.5 h-3.5" />
-                        Buat Tabel &amp; Diagram
+                        <Target className="w-3.5 h-3.5" />
+                        Buat Diagram Batang Daun
                       </button>
-                      {freqVisible && (
+                      {stemVisible && (
                         <button
-                          onClick={resetFreqTable}
+                          onClick={resetStem}
                           className="flex items-center gap-1 px-3 py-2 rounded-lg bg-slate-700/50 border border-slate-600/40 text-white/50 text-xs font-body hover:bg-slate-600/50 hover:text-white/70 transition-all"
                         >↺ Reset</button>
                       )}
                     </div>
 
-                    {/* Result */}
-                    {freqVisible && freqResult.length > 0 && (() => {
-                      const total = freqResult.reduce((s, r) => s + r.frek, 0);
-                      const maxFrek = Math.max(...freqResult.map(r => r.frek));
-                      const ANIM_COLORS = ["#22d3ee","#4ade80","#a78bfa","#fb923c","#f472b6","#fbbf24","#60a5fa","#34d399","#f87171","#e879f9"];
+                    {/* Diagram Result */}
+                    {stemVisible && stemResult.length > 0 && (() => {
+                      const n = stemRaw.length;
+                      const minVal = stemRaw[0];
+                      const maxVal = stemRaw[n - 1];
+                      const medianVal = n % 2 === 1
+                        ? stemRaw[Math.floor(n / 2)]
+                        : (stemRaw[n / 2 - 1] + stemRaw[n / 2]) / 2;
+                      const freq = new Map<number, number>();
+                      for (const x of stemRaw) freq.set(x, (freq.get(x) || 0) + 1);
+                      const maxFreq = Math.max(...freq.values());
+                      const modes = [...freq.entries()].filter(([, f]) => f === maxFreq).map(([v]) => v).sort((a, b) => a - b);
+                      const modeStr = maxFreq === 1 ? "Tidak ada" : modes.join(" & ");
+
+                      let globalLeafIdx = 0;
 
                       return (
-                        <div
-                          className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-4 space-y-4"
-                          style={{ opacity: freqAnimated ? 1 : 0, transition: "opacity 0.4s ease" }}
-                        >
-                          <div className="flex items-center justify-between flex-wrap gap-2">
-                            <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-wider">📊 Hasil Tabel Distribusi Frekuensi</p>
-                            <span className="font-body text-xs text-white/35">{total} data · {freqResult.length} nilai unik</span>
+                        <div className="bg-slate-900/60 border border-green-500/20 rounded-xl p-4 space-y-4">
+                          <div className="flex items-center justify-between">
+                            <p className="font-body text-xs font-bold text-green-300 uppercase tracking-wider">🌿 Hasil Diagram Batang Daun</p>
+                            <span className="font-body text-xs text-white/35">{n} data · terurut</span>
                           </div>
 
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {/* Frequency Table */}
-                            <div>
-                              <div className="rounded-lg overflow-hidden border border-cyan-500/20">
-                                <div className="grid bg-cyan-950/70" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                  <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
-                                  <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
-                                </div>
-                                <div className="divide-y divide-slate-700/40">
-                                  {freqResult.map((row, i) => (
-                                    <div
-                                      key={row.nilai}
-                                      className="grid items-center"
-                                      style={{
-                                        gridTemplateColumns: "1fr 1fr",
-                                        opacity: freqAnimated ? 1 : 0,
-                                        transform: freqAnimated ? "translateX(0)" : "translateX(-10px)",
-                                        transition: `opacity 0.3s ease ${i * 0.07}s, transform 0.3s ease ${i * 0.07}s`,
-                                      }}
-                                    >
-                                      <div className="px-3 py-2 flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: ANIM_COLORS[i % ANIM_COLORS.length] }} />
-                                        <span className="font-mono text-xs text-white font-semibold">{row.nilai}</span>
-                                      </div>
-                                      <div className="px-3 py-2 flex items-center justify-center gap-2">
-                                        <span className="font-body text-xs font-bold text-green-300">{row.frek}</span>
-                                        {row.frek === maxFrek && (
-                                          <span className="text-yellow-400 text-xs">★</span>
-                                        )}
-                                      </div>
+                          {/* Sorted data preview */}
+                          <div className="bg-slate-800/50 rounded-lg px-3 py-2">
+                            <p className="font-body text-xs text-white/35 mb-1">Data terurut:</p>
+                            <p className="font-body text-xs text-white/70 leading-relaxed">{stemRaw.join(", ")}</p>
+                          </div>
+
+                          {/* Stem-and-leaf diagram */}
+                          <div className="bg-slate-900/80 rounded-xl overflow-hidden border border-green-500/15">
+                            {/* Header */}
+                            <div className="flex items-center gap-0 border-b border-slate-700/60">
+                              <div className="w-16 px-3 py-2 text-right font-body text-xs font-bold text-slate-400 uppercase tracking-wide shrink-0">Batang</div>
+                              <div className="w-px self-stretch bg-slate-600/60" />
+                              <div className="px-3 py-2 font-body text-xs font-bold text-slate-400 uppercase tracking-wide">Daun</div>
+                            </div>
+                            {/* Rows */}
+                            <div className="divide-y divide-slate-800/60">
+                              {stemResult.map((row, rowIdx) => {
+                                const rowDelay = rowIdx * 0.12;
+                                const localStart = globalLeafIdx;
+                                globalLeafIdx += row.leaves.length;
+                                return (
+                                  <div
+                                    key={row.stem}
+                                    className="flex items-center gap-0"
+                                    style={{
+                                      opacity: stemAnimated ? 1 : 0,
+                                      transform: stemAnimated ? "translateX(0)" : "translateX(-16px)",
+                                      transition: `opacity 0.4s ease ${rowDelay}s, transform 0.4s ease ${rowDelay}s`,
+                                    }}
+                                  >
+                                    <div className="w-16 px-3 py-2.5 text-right shrink-0">
+                                      <span className="font-mono font-bold text-cyan-300 text-sm">{row.stem}</span>
                                     </div>
-                                  ))}
-                                  <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                    <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
-                                    <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{total}</div>
+                                    <div className="w-px self-stretch bg-slate-600/60" />
+                                    <div className="px-3 py-2.5 flex items-center gap-2 flex-wrap">
+                                      {row.leaves.map((leaf, leafIdx) => {
+                                        const globalIdx = localStart + leafIdx;
+                                        return (
+                                          <span
+                                            key={leafIdx}
+                                            className="font-mono text-green-300 font-semibold text-sm"
+                                            style={{
+                                              opacity: stemAnimated ? 1 : 0,
+                                              transition: `opacity 0.25s ease ${rowDelay + 0.1 + leafIdx * 0.06}s`,
+                                              display: "inline-block",
+                                            }}
+                                          >{leaf}</span>
+                                        );
+                                        void globalIdx;
+                                      })}
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
+                                );
+                              })}
                             </div>
-
-                            {/* Animated Bar Chart */}
-                            <div className="flex flex-col">
-                              <p className="font-body text-xs font-bold text-cyan-300 mb-2">📈 Diagram Frekuensi:</p>
-                              <div className="flex-1 bg-slate-900/60 rounded-lg px-3 pt-3 pb-2 flex flex-col justify-end" style={{ minHeight: "130px" }}>
-                                <div className="flex items-end gap-1 justify-around" style={{ height: "80px" }}>
-                                  {freqResult.map((row, i) => (
-                                    <div key={row.nilai} className="flex flex-col items-center gap-0.5 flex-1">
-                                      <span
-                                        className="font-body font-bold"
-                                        style={{
-                                          fontSize: "10px",
-                                          color: ANIM_COLORS[i % ANIM_COLORS.length],
-                                          opacity: freqAnimated ? 1 : 0,
-                                          transition: `opacity 0.3s ease ${i * 0.08 + 0.3}s`,
-                                        }}
-                                      >{row.frek}</span>
-                                      <div
-                                        className="w-full rounded-t-sm"
-                                        style={{
-                                          backgroundColor: ANIM_COLORS[i % ANIM_COLORS.length],
-                                          height: freqAnimated ? `${(row.frek / maxFrek) * 68}px` : "0px",
-                                          transition: `height 0.5s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.08}s`,
-                                          opacity: 0.85,
-                                        }}
-                                      />
-                                    </div>
-                                  ))}
-                                </div>
-                                <div className="flex justify-around mt-1.5 border-t border-slate-700/50 pt-1">
-                                  {freqResult.map((row) => (
-                                    <span key={row.nilai} className="font-mono text-white/40 text-center flex-1" style={{ fontSize: "9px" }}>{row.nilai}</span>
-                                  ))}
-                                </div>
-                              </div>
+                            {/* Footer legend */}
+                            <div className="border-t border-slate-700/60 px-3 py-2 flex items-center gap-4">
+                              <span className="font-body text-xs text-white/30">Kunci: Batang | Daun</span>
+                              <span className="font-body text-xs text-white/30">Contoh baris pertama: {stemResult[0].stem} | {stemResult[0].leaves[0]} → <strong className="text-white/50">{stemResult[0].stem * 10 + stemResult[0].leaves[0]}</strong></span>
                             </div>
                           </div>
 
-                          {/* Stats summary */}
+                          {/* Stats */}
                           <div
-                            className="grid grid-cols-2 gap-2"
+                            className="grid grid-cols-2 sm:grid-cols-4 gap-2"
                             style={{
-                              opacity: freqAnimated ? 1 : 0,
-                              transition: `opacity 0.4s ease ${freqResult.length * 0.07 + 0.3}s`,
+                              opacity: stemAnimated ? 1 : 0,
+                              transition: `opacity 0.5s ease ${stemResult.length * 0.12 + 0.4}s`,
                             }}
                           >
-                            <div className="bg-cyan-900/25 border border-cyan-500/20 rounded-lg p-2 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>BANYAK DATA (n)</p>
-                              <p className="font-body text-cyan-300 font-bold text-sm mt-0.5">{total}</p>
+                            <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MINIMUM</p>
+                              <p className="font-body text-green-300 font-bold text-lg mt-0.5">{minVal}</p>
                             </div>
-                            <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>NILAI UNIK</p>
-                              <p className="font-body text-green-300 font-bold text-sm mt-0.5">{freqResult.length}</p>
+                            <div className="bg-red-900/25 border border-red-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MAKSIMUM</p>
+                              <p className="font-body text-red-300 font-bold text-lg mt-0.5">{maxVal}</p>
+                            </div>
+                            <div className="bg-yellow-900/25 border border-yellow-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MODUS</p>
+                              <p className="font-body text-yellow-300 font-bold text-sm mt-0.5 leading-tight">{modeStr}</p>
+                            </div>
+                            <div className="bg-blue-900/25 border border-blue-500/20 rounded-lg p-2.5 text-center">
+                              <p className="font-body text-white/40" style={{ fontSize: "10px" }}>MEDIAN</p>
+                              <p className="font-body text-blue-300 font-bold text-lg mt-0.5">{medianVal}</p>
                             </div>
                           </div>
-
-                          <p className="font-body text-xs text-white/40 leading-relaxed">
-                            Jumlah seluruh frekuensi = banyaknya data = <strong className="text-cyan-300">{total}</strong>.
-                          </p>
                         </div>
                       );
                     })()}
                   </div>
                 </div>
 
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Ingat:</strong> Tabel distribusi frekuensi data tunggal mencatat berapa kali setiap nilai muncul. Jumlah semua frekuensi harus sama dengan banyaknya seluruh data (n). Semakin tinggi batang pada diagram, semakin sering nilai tersebut muncul!
-                  </p>
-                </div>
               </div>
             )}
           </div>
 
           {/* Contoh Soal Sub-Bab 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh5" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("contoh5") && (
+            <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal — Diagram Batang Daun" />
+            {expandedSections.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -2226,27 +2268,28 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Perhatikan tabel distribusi frekuensi berikut:
+                      Buatlah diagram batang daun dari data berikut (nilai ulangan 10 siswa):<br />
+                      52, 58, 61, 64, 67, 70, 72, 75, 83, 89
                     </p>
-                    <div className="mt-2 overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1 text-left text-white/70">Kelas</th><th className="px-3 py-1 text-center text-white/70">Frekuensi</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["40–49","4"],["50–59","8"],["60–69","12"],["70–79","6"]].map(([k,f]) => (
-                            <tr key={k}><td className="px-3 py-1 text-white">{k}</td><td className="px-3 py-1 text-center text-green-300">{f}</td></tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    <p className="font-body text-sm text-white mt-2">Tentukan: (a) Total frekuensi, (b) Titik tengah kelas 60–69.</p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p>(a) Total frekuensi = <InlineMath math="4 + 8 + 12 + 6 = \mathbf{30}" /></p>
-                        <p>(b) Titik tengah 60–69 = <InlineMath math="\frac{60+69}{2} = \frac{129}{2} = \mathbf{64,5}" /></p>
+                      <p><strong>Langkah 1:</strong> Data sudah urut. Pisahkan puluhan (batang) dan satuan (daun).</p>
+                      <div className="bg-slate-900/60 rounded-lg p-4 font-mono text-sm">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-white/40 text-xs w-16 text-right shrink-0">Batang</span>
+                          <span className="text-white/40 mx-2">|</span>
+                          <span className="text-white/40 text-xs">Daun</span>
+                        </div>
+                        <div className="border-t border-slate-600/40 pt-1 space-y-1">
+                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">5</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">2  8</span></div>
+                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">6</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">1  4  7</span></div>
+                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">7</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">0  2  5</span></div>
+                          <div className="flex gap-2"><span className="text-cyan-300 font-bold w-16 text-right shrink-0">8</span><span className="text-white/30 mx-2">|</span><span className="text-green-300">3  9</span></div>
+                        </div>
                       </div>
+                      <p><strong className="text-green-300">Min = 52, Maks = 89, Banyak data = 10 ✓</strong></p>
                     </div>
                   </div>
                 </div>
@@ -2259,52 +2302,29 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Data berat badan (kg) 20 siswa: 45, 48, 50, 52, 53, 55, 56, 57, 58, 60, 61, 62, 63, 65, 66, 68, 70, 72, 75, 78.<br />
-                      Buat tabel distribusi frekuensi dengan 4 kelas, lalu hitung rata-ratanya!
+                      Dari diagram batang daun berikut, tentukan nilai minimum, maksimum, modus, dan median!
                     </p>
+                    <div className="bg-slate-900/60 rounded-lg p-3 mt-2 font-mono text-sm">
+                      <div className="flex gap-2 text-white/40 text-xs mb-1"><span className="w-14 text-right">Batang</span><span className="mx-2">|</span><span>Daun</span></div>
+                      <div className="border-t border-slate-600/40 pt-1 space-y-1">
+                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">4</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">3  7  7</span></div>
+                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">5</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">0  2  5  5  8</span></div>
+                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">6</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">1  4  9</span></div>
+                        <div className="flex gap-2"><span className="text-cyan-300 font-bold w-14 text-right">7</span><span className="text-white/30 mx-2">|</span><span className="text-yellow-300">2  6</span></div>
+                      </div>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
+                      <p>Data terurut: 43, 47, 47, 50, 52, 55, 55, 58, 61, 64, 69, 72, 76</p>
+                      <p>Banyak data = <strong>13</strong></p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>Jangkauan: <InlineMath math="J = 78 - 45 = 33" /></p>
-                        <p>Panjang kelas: <InlineMath math="p = \lceil 33/4 \rceil = 9" /> → gunakan 9</p>
+                        <p>• Minimum = <span className="text-green-400 font-semibold">43</span></p>
+                        <p>• Maksimum = <span className="text-red-400 font-semibold">76</span></p>
+                        <p>• Modus = <span className="text-yellow-400 font-semibold">47 dan 55</span> (masing-masing muncul 2 kali)</p>
+                        <p>• Median = datum ke-<InlineMath math="\frac{13+1}{2} = 7" /> = <span className="text-blue-400 font-semibold">55</span></p>
                       </div>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-xs font-body mt-2">
-                          <thead><tr className="bg-slate-700/40">
-                            <th className="px-2 py-1 text-left text-cyan-300">Kelas</th>
-                            <th className="px-2 py-1 text-center text-white/70">f</th>
-                            <th className="px-2 py-1 text-center text-white/70">xᵢ</th>
-                            <th className="px-2 py-1 text-center text-white/70">f·xᵢ</th>
-                          </tr></thead>
-                          <tbody className="divide-y divide-slate-700/30">
-                            {[
-                              ["45 – 53","5","49","245"],
-                              ["54 – 62","8","58","464"],
-                              ["63 – 71","5","67","335"],
-                              ["72 – 80","2","76","152"],
-                            ].map(([k,f,xi,fxi]) => (
-                              <tr key={k}>
-                                <td className="px-2 py-1 text-white">{k}</td>
-                                <td className="px-2 py-1 text-center text-green-300">{f}</td>
-                                <td className="px-2 py-1 text-center text-yellow-300">{xi}</td>
-                                <td className="px-2 py-1 text-center text-cyan-300">{fxi}</td>
-                              </tr>
-                            ))}
-                            <tr className="border-t border-slate-500/50 font-bold">
-                              <td className="px-2 py-1 text-white">Total</td>
-                              <td className="px-2 py-1 text-center text-green-400">20</td>
-                              <td className="px-2 py-1"></td>
-                              <td className="px-2 py-1 text-center text-cyan-400">1.196</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\bar{x} = \frac{1196}{20} = 59{,}8 \text{ kg}" />
-                      </div>
-                      <p><strong className="text-primary">Rata-rata berat badan = 59,8 kg</strong></p>
                     </div>
                   </div>
                 </div>
@@ -2317,71 +2337,51 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Dari tabel distribusi frekuensi berikut:
-                    </p>
-                    <div className="mt-2 overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40">
-                          <th className="px-2 py-1 text-left text-white/70">Kelas</th>
-                          <th className="px-2 py-1 text-center text-white/70">f</th>
-                        </tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["50–59","3"],["60–69","6"],["70–79","14"],["80–89","10"],["90–99","7"]].map(([k,f]) => (
-                            <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    <p className="font-body text-sm text-white mt-2">
-                      Tentukan: (a) Rata-rata data berkelompok, (b) Kelas modus, (c) Frekuensi kumulatif untuk kelas 70–79.
+                      Dua kelas, A dan B, mengikuti ujian matematika. Data nilai (sudah diurutkan):<br />
+                      Kelas A: 55, 60, 63, 65, 68, 70, 70, 72, 78, 80<br />
+                      Kelas B: 58, 61, 64, 66, 69, 71, 75, 77, 82, 85<br />
+                      Sajikan data ini dalam <strong>diagram batang daun berdampingan</strong> dan tentukan kelas mana yang memiliki rata-rata lebih tinggi!
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Hitung titik tengah dan f·xᵢ:</p>
-                      <div className="bg-slate-900/50 rounded p-2 overflow-x-auto">
-                        <table className="w-full text-xs font-body">
-                          <thead><tr className="border-b border-slate-600/50">
-                            <th className="px-2 py-1 text-left text-white/50">Kelas</th>
-                            <th className="px-2 py-1 text-center text-white/50">f</th>
-                            <th className="px-2 py-1 text-center text-white/50">xᵢ</th>
-                            <th className="px-2 py-1 text-center text-white/50">f·xᵢ</th>
-                            <th className="px-2 py-1 text-center text-white/50">fk</th>
-                          </tr></thead>
-                          <tbody className="divide-y divide-slate-700/20">
-                            {[
-                              ["50–59","3","54,5","163,5","3"],
-                              ["60–69","6","64,5","387","9"],
-                              ["70–79","14","74,5","1043","23"],
-                              ["80–89","10","84,5","845","33"],
-                              ["90–99","7","94,5","661,5","40"],
-                            ].map(([k,f,xi,fxi,fk]) => (
-                              <tr key={k}>
-                                <td className="px-2 py-1 text-white">{k}</td>
-                                <td className="px-2 py-1 text-center text-green-300">{f}</td>
-                                <td className="px-2 py-1 text-center text-yellow-300">{xi}</td>
-                                <td className="px-2 py-1 text-center text-cyan-300">{fxi}</td>
-                                <td className="px-2 py-1 text-center text-purple-300">{fk}</td>
-                              </tr>
-                            ))}
-                            <tr className="border-t border-slate-500/50 font-bold">
-                              <td className="px-2 py-1 text-white">Total</td>
-                              <td className="px-2 py-1 text-center text-green-400">40</td>
-                              <td></td>
-                              <td className="px-2 py-1 text-center text-cyan-400">3.100</td>
-                              <td></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                      <p><strong>Langkah 1:</strong> Buat diagram batang daun berdampingan (daun A di kiri, batang di tengah, daun B di kanan):</p>
+                      <div className="bg-slate-900/60 rounded-lg p-4 font-mono text-xs overflow-x-auto">
+                        <div className="flex gap-1 text-white/40 mb-1 justify-center">
+                          <span className="w-20 text-right">Daun A</span>
+                          <span className="w-8 text-center">Batang</span>
+                          <span className="w-20">Daun B</span>
+                        </div>
+                        <div className="border-t border-slate-600/40 pt-1 space-y-1">
+                          <div className="flex gap-1 items-center justify-center">
+                            <span className="text-cyan-300 w-20 text-right">5</span>
+                            <span className="text-white/30 w-8 text-center font-bold">5</span>
+                            <span className="text-orange-300 w-20">8</span>
+                          </div>
+                          <div className="flex gap-1 items-center justify-center">
+                            <span className="text-cyan-300 w-20 text-right">8  5  3  0</span>
+                            <span className="text-white/30 w-8 text-center font-bold">6</span>
+                            <span className="text-orange-300 w-20">1  4  6  9</span>
+                          </div>
+                          <div className="flex gap-1 items-center justify-center">
+                            <span className="text-cyan-300 w-20 text-right">2  0  0</span>
+                            <span className="text-white/30 w-8 text-center font-bold">7</span>
+                            <span className="text-orange-300 w-20">1  5  7</span>
+                          </div>
+                          <div className="flex gap-1 items-center justify-center">
+                            <span className="text-cyan-300 w-20 text-right">8  0</span>
+                            <span className="text-white/30 w-8 text-center font-bold">8</span>
+                            <span className="text-orange-300 w-20">2  5</span>
+                          </div>
+                        </div>
                       </div>
+                      <p><strong>Langkah 2:</strong> Hitung rata-rata:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p><strong>(a)</strong> Rata-rata:</p>
-                        <BlockMath math="\bar{x} = \frac{3100}{40} = 77{,}5" />
-                        <p><strong>(b)</strong> Kelas modus = kelas dengan frekuensi tertinggi = <span className="text-red-400 font-semibold">70–79</span> (f = 14)</p>
-                        <p><strong>(c)</strong> Frekuensi kumulatif kelas 70–79 = <InlineMath math="3 + 6 + 14 = \mathbf{23}" /></p>
+                        <BlockMath math="\bar{x}_A = \frac{55+60+63+65+68+70+70+72+78+80}{10} = \frac{681}{10} = 68{,}1" />
+                        <BlockMath math="\bar{x}_B = \frac{58+61+64+66+69+71+75+77+82+85}{10} = \frac{708}{10} = 70{,}8" />
                       </div>
-                      <p><strong className="text-primary">Rata-rata = 77,5; Kelas modus = 70–79; fk 70–79 = 23</strong></p>
+                      <p><strong className="text-primary">Kelas B memiliki rata-rata lebih tinggi (70,8 &gt; 68,1)</strong></p>
                     </div>
                   </div>
                 </div>
