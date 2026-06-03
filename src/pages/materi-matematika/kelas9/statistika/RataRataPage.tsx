@@ -2,14 +2,107 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, TrendingUp } from "lucide-react";
+import { BookOpen, Lightbulb, Calculator, Target, TrendingUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
+/* ─── Kalkulator Rata-rata Interaktif ─── */
+const MeanCalculator = () => {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState<{ values: number[]; sum: number; mean: number } | null>(null);
+  const [error, setError] = useState("");
+
+  const calculate = () => {
+    playPopSound();
+    setError("");
+    setResult(null);
+    const parts = input.split(",").map(s => s.trim()).filter(s => s !== "");
+    if (parts.length === 0) { setError("Masukkan minimal satu angka!"); return; }
+    const values = parts.map(p => parseFloat(p.replace(",", ".")));
+    if (values.some(isNaN)) { setError("Pastikan semua data adalah angka yang valid."); return; }
+    const sum = values.reduce((a, b) => a + b, 0);
+    setResult({ values, sum, mean: sum / values.length });
+  };
+
+  const fmt = (n: number) => Number.isInteger(n) ? n.toString() : parseFloat(n.toFixed(4)).toString();
+
+  const buildLatex = () => {
+    if (!result) return "";
+    const { values, sum, mean } = result;
+    const n = values.length;
+    let numerator: string;
+    if (n <= 8) {
+      numerator = values.map(fmt).join("+");
+    } else {
+      numerator = `${fmt(values[0])}+${fmt(values[1])}+\\cdots+${fmt(values[n-1])}`;
+    }
+    return `\\bar{x} = \\frac{${numerator}}{${n}} = \\frac{${fmt(sum)}}{${n}} = ${fmt(mean)}`;
+  };
+
+  return (
+    <div className="bg-green-950/40 border border-green-500/30 rounded-xl p-4 space-y-4">
+      <p className="font-body text-sm font-bold text-green-300">🧮 Kalkulator Rata-rata Data Tunggal</p>
+      <p className="font-body text-xs text-white/55">
+        Masukkan data/nilai dipisah <strong className="text-green-300">koma</strong>. Contoh: <span className="text-green-300 font-mono">70, 80, 90, 60, 75</span>
+      </p>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && calculate()}
+          placeholder="Contoh: 70, 80, 90, 60, 75"
+          className="flex-1 bg-slate-900/80 border border-slate-600 text-white text-sm font-body rounded-lg px-3 py-2 outline-none focus:border-green-500 placeholder:text-white/25"
+        />
+        <button
+          onClick={calculate}
+          className="bg-green-600 hover:bg-green-500 text-white text-sm font-bold font-body px-4 py-2 rounded-lg transition-colors cursor-pointer whitespace-nowrap"
+        >
+          Hitung
+        </button>
+      </div>
+      {error && <p className="text-red-400 text-xs font-body">⚠️ {error}</p>}
+      {result && (
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            {result.values.map((v, i) => (
+              <div key={i} className="bg-green-900/40 border border-green-500/40 rounded-lg px-3 py-1.5 text-center">
+                <p className="text-green-300 font-bold text-sm font-body">{fmt(v)}</p>
+              </div>
+            ))}
+            <span className="text-white/40 text-lg">→</span>
+            <div className="bg-cyan-900/50 border-2 border-cyan-500/60 rounded-lg px-4 py-1.5 text-center">
+              <p className="text-white/50 text-xs font-body">Rata-rata</p>
+              <p className="text-cyan-300 font-bold text-xl font-body">{fmt(result.mean)}</p>
+            </div>
+          </div>
+          <div className="bg-slate-900/70 rounded-lg p-3 text-center overflow-x-auto">
+            <BlockMath math={buildLatex()} />
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-xs font-body text-center">
+            <div className="bg-slate-800/60 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Banyak Data (n)</p>
+              <p className="text-white font-bold text-base">{result.values.length}</p>
+            </div>
+            <div className="bg-slate-800/60 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Jumlah (Σx)</p>
+              <p className="text-yellow-300 font-bold text-base">{fmt(result.sum)}</p>
+            </div>
+            <div className="bg-cyan-900/50 border border-cyan-500/40 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Rata-rata (x̄)</p>
+              <p className="text-cyan-300 font-bold text-base">{fmt(result.mean)}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const RataRataPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>([
+  const expandedSections = [
     "intro",
     "konsep1","contoh1",
     "konsep2","contoh2",
@@ -17,30 +110,17 @@ const RataRataPage = () => {
     "konsep4","contoh4",
     "konsep5","contoh5",
     "rangkuman",
-  ]);
-
-  const toggleSection = (section: string) => {
-    playPopSound();
-    setExpandedSections((prev) =>
-      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
-    );
-  };
+  ];
 
   const SectionHeader = ({
-    id, icon, iconColor, title,
+    id: _id, icon, iconColor, title,
   }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button
-      onClick={() => toggleSection(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-    >
+    <div className="w-full flex items-center px-5 py-4 border-b border-border/30">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
-        ? <ChevronUp className="w-5 h-5 text-primary" />
-        : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
@@ -134,6 +214,8 @@ const RataRataPage = () => {
                     <strong>Tips:</strong> Rata-rata sangat dipengaruhi oleh nilai ekstrem (sangat besar atau sangat kecil). Jika ada outlier, rata-rata bisa jadi tidak representatif. Dalam kasus itu, median lebih baik digunakan.
                   </p>
                 </div>
+
+                <MeanCalculator />
               </div>
             )}
           </div>
