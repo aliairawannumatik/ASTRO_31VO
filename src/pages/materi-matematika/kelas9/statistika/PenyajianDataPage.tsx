@@ -316,7 +316,6 @@ const PenyajianDataPage = () => {
                   const contohMap = new Map<number, number>();
                   for (const n of contohData) contohMap.set(n, (contohMap.get(n) || 0) + 1);
                   const contohFreq = Array.from(contohMap.entries()).sort((a, b) => a[0] - b[0]);
-                  const maxF = Math.max(...contohFreq.map(([, f]) => f));
                   const BAR_COLS = ["#22d3ee","#4ade80","#a78bfa","#fb923c","#f472b6","#fbbf24"];
                   return (
                     <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl overflow-hidden">
@@ -333,58 +332,25 @@ const PenyajianDataPage = () => {
                             ))}
                           </div>
                         </div>
-                        {/* Table + Chart side by side */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {/* Frequency table */}
-                          <div>
-                            <p className="font-body text-xs font-bold text-cyan-300 mb-2">📊 Tabel Frekuensi:</p>
-                            <div className="rounded-lg overflow-hidden border border-cyan-500/20">
-                              <div className="grid bg-cyan-950/60" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
-                                <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
-                              </div>
-                              <div className="divide-y divide-slate-700/40">
-                                {contohFreq.map(([nilai, frek], i) => (
-                                  <div key={nilai} className="grid items-center" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                    <div className="px-3 py-2 flex items-center gap-2">
-                                      <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: BAR_COLS[i % BAR_COLS.length] }} />
-                                      <span className="font-mono text-xs text-white font-semibold">{nilai}</span>
-                                    </div>
-                                    <div className="px-3 py-2 text-center font-body text-xs font-bold text-green-300">{frek}</div>
-                                  </div>
-                                ))}
-                                <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                  <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
-                                  <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{contohData.length}</div>
-                                </div>
-                              </div>
-                            </div>
+                        {/* Frequency table */}
+                        <div className="rounded-lg overflow-hidden border border-cyan-500/20">
+                          <div className="grid bg-cyan-950/60" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                            <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
+                            <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
                           </div>
-                          {/* Frequency bar chart */}
-                          <div>
-                            <p className="font-body text-xs font-bold text-cyan-300 mb-2">📈 Diagram Frekuensi:</p>
-                            <div className="bg-slate-900/60 rounded-lg p-3 h-full flex flex-col justify-end" style={{ minHeight: "140px" }}>
-                              <div className="flex items-end gap-2 justify-around h-24">
-                                {contohFreq.map(([nilai, frek], i) => (
-                                  <div key={nilai} className="flex flex-col items-center gap-1 flex-1">
-                                    <span className="font-body text-xs font-bold" style={{ color: BAR_COLS[i % BAR_COLS.length] }}>{frek}</span>
-                                    <div
-                                      className="w-full rounded-t-sm transition-all"
-                                      style={{
-                                        height: `${(frek / maxF) * 72}px`,
-                                        backgroundColor: BAR_COLS[i % BAR_COLS.length],
-                                        opacity: 0.85,
-                                      }}
-                                    />
-                                  </div>
-                                ))}
+                          <div className="divide-y divide-slate-700/40">
+                            {contohFreq.map(([nilai, frek], i) => (
+                              <div key={nilai} className="grid items-center" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                <div className="px-3 py-2 flex items-center gap-2">
+                                  <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: BAR_COLS[i % BAR_COLS.length] }} />
+                                  <span className="font-mono text-xs text-white font-semibold">{nilai}</span>
+                                </div>
+                                <div className="px-3 py-2 text-center font-body text-xs font-bold text-green-300">{frek}</div>
                               </div>
-                              <div className="flex justify-around mt-1">
-                                {contohFreq.map(([nilai]) => (
-                                  <span key={nilai} className="font-mono text-white/50 text-center flex-1" style={{ fontSize: "10px" }}>{nilai}</span>
-                                ))}
-                              </div>
-                              <p className="font-body text-center mt-1" style={{ fontSize: "9px", color: "rgba(255,255,255,0.3)" }}>Nilai</p>
+                            ))}
+                            <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                              <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
+                              <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{contohData.length}</div>
                             </div>
                           </div>
                         </div>
