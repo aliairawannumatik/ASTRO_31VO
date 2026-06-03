@@ -325,7 +325,7 @@ const PenyajianDataPage = () => {
                       <div className="p-4 space-y-4">
                         {/* Raw data */}
                         <div>
-                          <p className="font-body text-xs text-white/50 mb-2">Data mentah (20 nilai):</p>
+                          <p className="font-body text-xs text-white/50 mb-2">Diketahui nilai matematika 20 siswa SMP Internasional:</p>
                           <div className="flex flex-wrap gap-1.5">
                             {contohData.map((v, i) => (
                               <span key={i} className="bg-slate-700/60 border border-cyan-500/20 rounded px-2 py-1 font-mono text-xs text-cyan-300">{v}</span>
