@@ -436,79 +436,38 @@ const PenyajianDataPage = () => {
                             <span className="font-body text-xs text-white/35">{total} data · {freqResult.length} nilai unik</span>
                           </div>
 
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {/* Frequency Table */}
-                            <div>
-                              <div className="rounded-lg overflow-hidden border border-cyan-500/20">
-                                <div className="grid bg-cyan-950/70" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                  <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
-                                  <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
-                                </div>
-                                <div className="divide-y divide-slate-700/40">
-                                  {freqResult.map((row, i) => (
-                                    <div
-                                      key={row.nilai}
-                                      className="grid items-center"
-                                      style={{
-                                        gridTemplateColumns: "1fr 1fr",
-                                        opacity: freqAnimated ? 1 : 0,
-                                        transform: freqAnimated ? "translateX(0)" : "translateX(-10px)",
-                                        transition: `opacity 0.3s ease ${i * 0.07}s, transform 0.3s ease ${i * 0.07}s`,
-                                      }}
-                                    >
-                                      <div className="px-3 py-2 flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: ANIM_COLORS[i % ANIM_COLORS.length] }} />
-                                        <span className="font-mono text-xs text-white font-semibold">{row.nilai}</span>
-                                      </div>
-                                      <div className="px-3 py-2 flex items-center justify-center gap-2">
-                                        <span className="font-body text-xs font-bold text-green-300">{row.frek}</span>
-                                        {row.frek === maxFrek && (
-                                          <span className="text-yellow-400 text-xs">★</span>
-                                        )}
-                                      </div>
-                                    </div>
-                                  ))}
-                                  <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                                    <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
-                                    <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{total}</div>
+                          <div className="rounded-lg overflow-hidden border border-cyan-500/20 max-w-xs">
+                            <div className="grid bg-cyan-950/70" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                              <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300">Nilai</div>
+                              <div className="px-3 py-2 font-body text-xs font-bold text-cyan-300 text-center">Frekuensi (f)</div>
+                            </div>
+                            <div className="divide-y divide-slate-700/40">
+                              {freqResult.map((row, i) => (
+                                <div
+                                  key={row.nilai}
+                                  className="grid items-center"
+                                  style={{
+                                    gridTemplateColumns: "1fr 1fr",
+                                    opacity: freqAnimated ? 1 : 0,
+                                    transform: freqAnimated ? "translateX(0)" : "translateX(-10px)",
+                                    transition: `opacity 0.3s ease ${i * 0.07}s, transform 0.3s ease ${i * 0.07}s`,
+                                  }}
+                                >
+                                  <div className="px-3 py-2 flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: ANIM_COLORS[i % ANIM_COLORS.length] }} />
+                                    <span className="font-mono text-xs text-white font-semibold">{row.nilai}</span>
+                                  </div>
+                                  <div className="px-3 py-2 flex items-center justify-center gap-2">
+                                    <span className="font-body text-xs font-bold text-green-300">{row.frek}</span>
+                                    {row.frek === maxFrek && (
+                                      <span className="text-yellow-400 text-xs">★</span>
+                                    )}
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-
-                            {/* Animated Bar Chart */}
-                            <div className="flex flex-col">
-                              <p className="font-body text-xs font-bold text-cyan-300 mb-2">📈 Diagram Frekuensi:</p>
-                              <div className="flex-1 bg-slate-900/60 rounded-lg px-3 pt-3 pb-2 flex flex-col justify-end" style={{ minHeight: "130px" }}>
-                                <div className="flex items-end gap-1 justify-around" style={{ height: "80px" }}>
-                                  {freqResult.map((row, i) => (
-                                    <div key={row.nilai} className="flex flex-col items-center gap-0.5 flex-1">
-                                      <span
-                                        className="font-body font-bold"
-                                        style={{
-                                          fontSize: "10px",
-                                          color: ANIM_COLORS[i % ANIM_COLORS.length],
-                                          opacity: freqAnimated ? 1 : 0,
-                                          transition: `opacity 0.3s ease ${i * 0.08 + 0.3}s`,
-                                        }}
-                                      >{row.frek}</span>
-                                      <div
-                                        className="w-full rounded-t-sm"
-                                        style={{
-                                          backgroundColor: ANIM_COLORS[i % ANIM_COLORS.length],
-                                          height: freqAnimated ? `${(row.frek / maxFrek) * 68}px` : "0px",
-                                          transition: `height 0.5s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.08}s`,
-                                          opacity: 0.85,
-                                        }}
-                                      />
-                                    </div>
-                                  ))}
-                                </div>
-                                <div className="flex justify-around mt-1.5 border-t border-slate-700/50 pt-1">
-                                  {freqResult.map((row) => (
-                                    <span key={row.nilai} className="font-mono text-white/40 text-center flex-1" style={{ fontSize: "9px" }}>{row.nilai}</span>
-                                  ))}
-                                </div>
+                              ))}
+                              <div className="grid items-center bg-slate-700/30 border-t border-slate-500/50" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                <div className="px-3 py-2 font-body text-xs font-bold text-white">TOTAL</div>
+                                <div className="px-3 py-2 text-center font-body text-xs font-bold text-cyan-400">{total}</div>
                               </div>
                             </div>
                           </div>
