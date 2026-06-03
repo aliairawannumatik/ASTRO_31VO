@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, BarChart2 } from "lucide-react";
-import { playPopSound } from "@/hooks/useAudio";
+import { BookOpen, Lightbulb, Calculator, Target, BarChart2 } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -221,28 +220,15 @@ const PenyajianDataPage = () => {
     "rangkuman",
   ]);
 
-  const toggleSection = (section: string) => {
-    playPopSound();
-    setExpandedSections((prev) =>
-      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
-    );
-  };
-
   const SectionHeader = ({
-    id, icon, iconColor, title,
-  }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button
-      onClick={() => toggleSection(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-    >
+    icon, iconColor, title,
+  }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
-        ? <ChevronUp className="w-5 h-5 text-primary" />
-        : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
