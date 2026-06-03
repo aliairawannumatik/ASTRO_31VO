@@ -394,6 +394,326 @@ const MedianAnimator = () => {
   );
 };
 
+/* ─── Animasi Interaktif Modus Data Tunggal ─── */
+const ModusAnimator = () => {
+  const [screen, setScreen] = useState<"input" | "count" | "result">("input");
+  const [input, setInput] = useState("");
+  const [error, setError] = useState("");
+  const [data, setData] = useState<number[]>([]);
+  const [countStep, setCountStep] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [countDone, setCountDone] = useState(false);
+
+  const fmt = (v: number) =>
+    Number.isInteger(v) ? v.toString() : parseFloat(v.toFixed(2)).toString();
+
+  const n = data.length;
+  const uniqueVals = [...new Set(data)].sort((a, b) => a - b);
+
+  /* frekuensi berjalan sampai countStep */
+  const runningFreq: Record<string, number> = {};
+  for (let i = 0; i < countStep; i++) {
+    const k = fmt(data[i]);
+    runningFreq[k] = (runningFreq[k] || 0) + 1;
+  }
+
+  /* frekuensi lengkap */
+  const fullFreq: Record<string, number> = {};
+  for (const v of data) {
+    const k = fmt(v);
+    fullFreq[k] = (fullFreq[k] || 0) + 1;
+  }
+
+  const maxFreq = uniqueVals.length > 0 ? Math.max(...uniqueVals.map(v => fullFreq[fmt(v)] || 0)) : 0;
+  const modeVals = uniqueVals.filter(v => fullFreq[fmt(v)] === maxFreq);
+  const hasMode = modeVals.length < uniqueVals.length;
+  const modeType = !hasMode ? "Tidak Ada Modus"
+    : modeVals.length === 1 ? "Unimodal"
+    : modeVals.length === 2 ? "Bimodal"
+    : "Multimodal";
+
+  /* auto-step animasi hitung */
+  useEffect(() => {
+    if (!isAnimating) return;
+    if (countStep >= n) {
+      const t = setTimeout(() => { setCountDone(true); setIsAnimating(false); }, 500);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => {
+      setCountStep(prev => prev + 1);
+      playPopSound();
+    }, 650);
+    return () => clearTimeout(t);
+  }, [isAnimating, countStep, n]);
+
+  const goToInput = () => {
+    playPopSound();
+    setScreen("input");
+    setCountStep(0);
+    setIsAnimating(false);
+    setCountDone(false);
+  };
+
+  const handleSubmit = () => {
+    playPopSound();
+    setError("");
+    const parts = input.split(",").map(s => s.trim()).filter(s => s !== "");
+    if (parts.length < 3) { setError("Masukkan minimal 3 angka!"); return; }
+    if (parts.length > 15) { setError("Maksimal 15 angka agar animasi optimal."); return; }
+    const vals = parts.map(p => parseFloat(p.replace(",", ".")));
+    if (vals.some(isNaN)) { setError("Pastikan semua data adalah angka yang valid."); return; }
+    setData(vals);
+    setCountStep(0);
+    setCountDone(false);
+    setIsAnimating(false);
+    setScreen("count");
+  };
+
+  const startCounting = () => {
+    if (isAnimating) return;
+    playPopSound();
+    setCountStep(0);
+    setCountDone(false);
+    setTimeout(() => setIsAnimating(true), 300);
+  };
+
+  /* ── Layar 1: Input ── */
+  if (screen === "input") return (
+    <div className="bg-orange-950/40 border border-orange-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="bg-orange-500/20 text-orange-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 1 / 3</span>
+        <p className="font-body text-sm font-bold text-orange-300">🔢 Input Data</p>
+      </div>
+      <p className="font-body text-xs text-white/55 leading-relaxed">
+        Masukkan data angka dipisah <strong className="text-orange-300">koma</strong>. Boleh ada nilai yang berulang.
+        <br /><span className="text-white/35">Contoh: </span><span className="text-orange-300 font-mono">4, 7, 2, 7, 9, 7, 3, 5, 7</span>
+      </p>
+      <input
+        type="text"
+        value={input}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={e => e.key === "Enter" && handleSubmit()}
+        placeholder="4, 7, 2, 7, 9, 7, 3, 5, 7"
+        className="w-full bg-slate-900/80 border border-slate-600 text-white text-sm font-body rounded-lg px-3 py-2.5 outline-none focus:border-orange-500 placeholder:text-white/25"
+      />
+      {error && <p className="text-red-400 text-xs font-body">⚠️ {error}</p>}
+      <button
+        onClick={handleSubmit}
+        className="w-full bg-orange-600 hover:bg-orange-500 text-white text-sm font-bold font-body py-2.5 rounded-lg transition-colors cursor-pointer"
+      >
+        Lanjut → Hitung Frekuensi
+      </button>
+    </div>
+  );
+
+  /* ── Layar 2: Hitung Frekuensi (Slow Motion) ── */
+  if (screen === "count") return (
+    <div className="bg-orange-950/40 border border-orange-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="bg-orange-500/20 text-orange-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 2 / 3</span>
+          <p className="font-body text-sm font-bold text-orange-300">📊 Hitung Frekuensi</p>
+        </div>
+        <button onClick={goToInput} className="text-xs text-white/40 hover:text-white/70 font-body cursor-pointer transition-colors">← Kembali</button>
+      </div>
+
+      {/* Chips data — chip aktif menyala oranye */}
+      <div>
+        <p className="font-body text-xs text-white/40 mb-2 uppercase tracking-wide font-semibold">
+          Data ({n} nilai):
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {data.map((v, i) => {
+            const isPast = i < countStep;
+            const isCurrent = i === countStep - 1;
+            return (
+              <div
+                key={i}
+                className={`rounded-lg px-2.5 py-1.5 text-center border transition-all duration-300 ${
+                  isCurrent
+                    ? "bg-orange-600/70 border-orange-400 ring-2 ring-orange-400 scale-110 shadow-md shadow-orange-500/30"
+                    : isPast
+                    ? "bg-orange-900/30 border-orange-700/40"
+                    : "bg-slate-700/50 border-slate-600/40"
+                }`}
+              >
+                <p className={`font-bold text-sm font-body ${
+                  isCurrent ? "text-orange-200" : isPast ? "text-orange-300/60" : "text-white/50"
+                }`}>
+                  {fmt(v)}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Tabel frekuensi terbentuk secara real-time */}
+      <div>
+        <p className="font-body text-xs text-white/40 mb-2 uppercase tracking-wide font-semibold">Tabel frekuensi:</p>
+        <div className="space-y-1.5">
+          {uniqueVals.map(v => {
+            const k = fmt(v);
+            const freq = runningFreq[k] || 0;
+            return (
+              <div
+                key={k}
+                className={`flex items-center gap-2 rounded-lg px-3 py-2 border transition-all duration-300 ${
+                  freq > 0 ? "bg-orange-900/20 border-orange-700/30" : "bg-slate-800/30 border-slate-700/20 opacity-40"
+                }`}
+              >
+                <div className="w-8 text-center">
+                  <span className={`font-bold text-sm font-body ${freq > 0 ? "text-orange-300" : "text-white/30"}`}>
+                    {fmt(v)}
+                  </span>
+                </div>
+                <div className="flex gap-1 flex-1 flex-wrap min-h-[1.25rem]">
+                  {Array.from({ length: freq }).map((_, ti) => (
+                    <span key={ti} className="text-orange-400 text-base leading-none">●</span>
+                  ))}
+                </div>
+                <div className="w-6 text-center">
+                  <span className={`font-bold text-sm font-body ${freq > 0 ? "text-white" : "text-white/20"}`}>
+                    {freq > 0 ? freq : ""}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {!countDone ? (
+        <button
+          onClick={startCounting}
+          disabled={isAnimating}
+          className={`w-full text-sm font-bold font-body py-2.5 rounded-lg transition-all cursor-pointer ${
+            isAnimating ? "bg-orange-800/50 text-orange-400" : "bg-orange-600 hover:bg-orange-500 text-white"
+          }`}
+        >
+          {isAnimating ? `⏳ Menghitung... (${countStep}/${n})` : "▶ Mulai Hitung Frekuensi"}
+        </button>
+      ) : (
+        <button
+          onClick={() => { playPopSound(); setScreen("result"); }}
+          className="w-full bg-orange-600 hover:bg-orange-500 text-white text-sm font-bold font-body py-2.5 rounded-lg transition-colors cursor-pointer"
+        >
+          🏆 Lihat Modus →
+        </button>
+      )}
+    </div>
+  );
+
+  /* ── Layar 3: Hasil Modus ── */
+  return (
+    <div className="bg-orange-950/40 border border-orange-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="bg-orange-500/20 text-orange-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 3 / 3</span>
+          <p className="font-body text-sm font-bold text-orange-300">🏆 Modus Ditemukan!</p>
+        </div>
+        <button
+          onClick={() => { playPopSound(); setScreen("count"); }}
+          className="text-xs text-white/40 hover:text-white/70 font-body cursor-pointer transition-colors"
+        >
+          ← Kembali
+        </button>
+      </div>
+
+      {/* Bar chart frekuensi */}
+      <div>
+        <p className="font-body text-xs text-orange-300 mb-3 uppercase tracking-wide font-bold">📊 Grafik Frekuensi:</p>
+        <div className="space-y-2">
+          {uniqueVals.map(v => {
+            const k = fmt(v);
+            const freq = fullFreq[k];
+            const isMode = hasMode && freq === maxFreq;
+            const barPct = Math.round((freq / maxFreq) * 100);
+            return (
+              <div
+                key={k}
+                className={`rounded-lg p-2.5 border transition-all duration-500 ${
+                  isMode
+                    ? "bg-orange-900/40 border-orange-400/60 ring-1 ring-orange-400/40 shadow-md shadow-orange-500/20"
+                    : "bg-slate-800/40 border-slate-700/30"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-8 text-center font-bold text-sm font-body ${isMode ? "text-orange-300" : "text-white/60"}`}>
+                    {fmt(v)}
+                  </div>
+                  <div className="flex-1 bg-slate-900/60 rounded-full h-4 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-700 ${isMode ? "bg-orange-500" : "bg-slate-600"}`}
+                      style={{ width: `${barPct}%` }}
+                    />
+                  </div>
+                  <div className={`w-6 text-center font-bold text-sm font-body ${isMode ? "text-orange-300" : "text-white/50"}`}>
+                    {freq}×
+                  </div>
+                  {isMode && <span className="text-orange-400 text-xs font-bold">← MODUS</span>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Hasil & label tipe modus */}
+      <div className={`rounded-xl p-4 space-y-3 border ${
+        hasMode ? "bg-orange-900/30 border-orange-500/40" : "bg-slate-800/50 border-slate-600/40"
+      }`}>
+        <div className="flex items-center gap-2">
+          <span className={`text-xs font-bold px-2.5 py-1 rounded-full font-body ${
+            !hasMode ? "bg-slate-600/40 text-slate-300"
+            : modeVals.length === 1 ? "bg-orange-500/20 text-orange-300"
+            : modeVals.length === 2 ? "bg-yellow-500/20 text-yellow-300"
+            : "bg-red-500/20 text-red-300"
+          }`}>
+            {modeType}
+          </span>
+        </div>
+
+        {hasMode ? (
+          <div className="space-y-2">
+            <p className="font-body text-xs text-white/55">
+              Nilai yang muncul <strong className="text-orange-300">{maxFreq}×</strong> (terbanyak):
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {modeVals.map(v => (
+                <div
+                  key={fmt(v)}
+                  className="bg-orange-600/40 border-2 border-orange-400 ring-2 ring-orange-400/50 rounded-lg px-4 py-2 text-center shadow-lg shadow-orange-500/20"
+                >
+                  <p className="text-orange-200 font-bold text-xl font-body">{fmt(v)}</p>
+                  <p className="text-orange-400 text-xs font-body">{maxFreq}× muncul</p>
+                </div>
+              ))}
+            </div>
+            <div className="bg-slate-900/60 rounded-lg p-2.5 text-center">
+              <p className="font-body text-xs text-white/60">
+                <strong className="text-orange-300">Modus (Mo)</strong> ={" "}
+                <strong className="text-white">{modeVals.map(v => fmt(v)).join(" dan ")}</strong>
+              </p>
+            </div>
+          </div>
+        ) : (
+          <p className="font-body text-sm text-slate-400 text-center py-1">
+            Semua nilai muncul <strong className="text-white">{maxFreq}×</strong> — tidak ada nilai yang dominan.
+          </p>
+        )}
+      </div>
+
+      <button
+        onClick={goToInput}
+        className="w-full bg-slate-700/60 hover:bg-slate-600/60 text-white text-sm font-bold font-body py-2 rounded-lg transition-colors cursor-pointer"
+      >
+        🔄 Coba Data Lain
+      </button>
+    </div>
+  );
+};
+
 const MedianModusPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -1006,6 +1326,15 @@ const MedianModusPage = () => {
                   <p className="font-body text-sm text-yellow-200">
                     <strong>Tips:</strong> Cara paling mudah mencari modus data tunggal adalah membuat tabel frekuensi sederhana, lalu lihat nilai mana yang frekuensinya paling tinggi.
                   </p>
+                </div>
+
+                {/* Animasi Interaktif Modus */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-bold text-orange-300 uppercase tracking-wide">🎮 Coba Sendiri — Animasi Penentuan Modus</p>
+                  <p className="font-body text-xs text-white/45 leading-relaxed">
+                    Masukkan data kamu dan lihat proses penghitungan frekuensi secara visual — modus akan ditemukan otomatis!
+                  </p>
+                  <ModusAnimator />
                 </div>
               </div>
             )}
