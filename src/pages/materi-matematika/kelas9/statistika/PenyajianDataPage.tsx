@@ -2101,7 +2101,6 @@ const PenyajianDataPage = () => {
                     {freqVisible && freqResult.length > 0 && (() => {
                       const total = freqResult.reduce((s, r) => s + r.frek, 0);
                       const maxFrek = Math.max(...freqResult.map(r => r.frek));
-                      const modus = freqResult.filter(r => r.frek === maxFrek).map(r => r.nilai);
                       const ANIM_COLORS = ["#22d3ee","#4ade80","#a78bfa","#fb923c","#f472b6","#fbbf24","#60a5fa","#34d399","#f87171","#e879f9"];
 
                       return (
@@ -2193,20 +2192,15 @@ const PenyajianDataPage = () => {
 
                           {/* Stats summary */}
                           <div
-                            className="grid grid-cols-3 gap-2"
+                            className="grid grid-cols-2 gap-2"
                             style={{
                               opacity: freqAnimated ? 1 : 0,
                               transition: `opacity 0.4s ease ${freqResult.length * 0.07 + 0.3}s`,
                             }}
                           >
                             <div className="bg-cyan-900/25 border border-cyan-500/20 rounded-lg p-2 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>BANYAK DATA</p>
+                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>BANYAK DATA (n)</p>
                               <p className="font-body text-cyan-300 font-bold text-sm mt-0.5">{total}</p>
-                            </div>
-                            <div className="bg-yellow-900/25 border border-yellow-500/20 rounded-lg p-2 text-center">
-                              <p className="font-body text-white/40" style={{ fontSize: "9px" }}>MODUS ★</p>
-                              <p className="font-body text-yellow-300 font-bold text-xs mt-0.5">{modus.join(", ")}</p>
-                              <p className="font-body text-white/30 mt-0.5" style={{ fontSize: "9px" }}>f = {maxFrek}×</p>
                             </div>
                             <div className="bg-green-900/25 border border-green-500/20 rounded-lg p-2 text-center">
                               <p className="font-body text-white/40" style={{ fontSize: "9px" }}>NILAI UNIK</p>
@@ -2215,7 +2209,7 @@ const PenyajianDataPage = () => {
                           </div>
 
                           <p className="font-body text-xs text-white/40 leading-relaxed">
-                            ★ = nilai yang paling sering muncul (modus). Jumlah seluruh frekuensi = banyaknya data = <strong className="text-cyan-300">{total}</strong>.
+                            Jumlah seluruh frekuensi = banyaknya data = <strong className="text-cyan-300">{total}</strong>.
                           </p>
                         </div>
                       );
@@ -2225,7 +2219,7 @@ const PenyajianDataPage = () => {
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Ingat:</strong> Tabel distribusi frekuensi data tunggal mencatat berapa kali setiap nilai muncul. Jumlah semua frekuensi = banyak seluruh data (n). Nilai dengan frekuensi terbesar = <strong>modus</strong>!
+                    <strong>Ingat:</strong> Tabel distribusi frekuensi data tunggal mencatat berapa kali setiap nilai muncul. Jumlah semua frekuensi harus sama dengan banyaknya seluruh data (n). Semakin tinggi batang pada diagram, semakin sering nilai tersebut muncul!
                   </p>
                 </div>
               </div>
