@@ -7,6 +7,293 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
+/* ─── Animasi Interaktif Penentuan Median ─── */
+const MedianAnimator = () => {
+  const [screen, setScreen] = useState<"input" | "sort" | "median">("input");
+  const [input, setInput] = useState("");
+  const [error, setError] = useState("");
+  const [original, setOriginal] = useState<number[]>([]);
+  const [sorted, setSorted] = useState<number[]>([]);
+  const [isSorting, setIsSorting] = useState(false);
+  const [sortRevealed, setSortRevealed] = useState(false);
+  const [elimStep, setElimStep] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [medianDone, setMedianDone] = useState(false);
+
+  const n = sorted.length;
+  const maxElim = Math.floor(n / 2);
+  const isOdd = n % 2 === 1;
+  const medianIdx1 = isOdd ? Math.floor(n / 2) : n / 2 - 1;
+  const medianIdx2 = isOdd ? Math.floor(n / 2) : n / 2;
+  const medianValue = n > 0
+    ? (isOdd ? sorted[medianIdx1] : (sorted[medianIdx1] + sorted[medianIdx2]) / 2)
+    : 0;
+  const fmt = (v: number) =>
+    Number.isInteger(v) ? v.toString() : parseFloat(v.toFixed(2)).toString();
+
+  /* auto-step animasi eliminasi */
+  useEffect(() => {
+    if (!isAnimating) return;
+    if (elimStep >= maxElim) {
+      const t = setTimeout(() => { setMedianDone(true); setIsAnimating(false); }, 700);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => {
+      setElimStep(prev => prev + 1);
+      playPopSound();
+    }, 900);
+    return () => clearTimeout(t);
+  }, [isAnimating, elimStep, maxElim]);
+
+  const goToInput = () => {
+    playPopSound();
+    setScreen("input");
+    setIsSorting(false);
+    setSortRevealed(false);
+    setElimStep(0);
+    setIsAnimating(false);
+    setMedianDone(false);
+  };
+
+  const handleSubmit = () => {
+    playPopSound();
+    setError("");
+    const parts = input.split(",").map(s => s.trim()).filter(s => s !== "");
+    if (parts.length < 3) { setError("Masukkan minimal 3 angka!"); return; }
+    if (parts.length > 13) { setError("Maksimal 13 angka agar animasi optimal."); return; }
+    const vals = parts.map(p => parseFloat(p.replace(",", ".")));
+    if (vals.some(isNaN)) { setError("Pastikan semua data adalah angka yang valid."); return; }
+    setOriginal(vals);
+    setSorted([...vals].sort((a, b) => a - b));
+    setSortRevealed(false);
+    setElimStep(0);
+    setMedianDone(false);
+    setIsAnimating(false);
+    setScreen("sort");
+  };
+
+  const handleSort = () => {
+    if (isSorting || sortRevealed) return;
+    playPopSound();
+    setIsSorting(true);
+    setTimeout(() => { setIsSorting(false); setSortRevealed(true); playPopSound(); }, 1400);
+  };
+
+  const startMedianAnimation = () => {
+    playPopSound();
+    setElimStep(0);
+    setMedianDone(false);
+    setScreen("median");
+    setTimeout(() => setIsAnimating(true), 500);
+  };
+
+  /* ── Layar 1: Input ── */
+  if (screen === "input") return (
+    <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 1 / 3</span>
+        <p className="font-body text-sm font-bold text-purple-300">🔢 Input Data</p>
+      </div>
+      <p className="font-body text-xs text-white/55 leading-relaxed">
+        Masukkan data angka dipisah <strong className="text-purple-300">koma</strong>. Boleh ganjil atau genap.
+        <br /><span className="text-white/35">Contoh: </span><span className="text-purple-300 font-mono">9, 3, 7, 5, 11, 1, 13</span>
+      </p>
+      <input
+        type="text"
+        value={input}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={e => e.key === "Enter" && handleSubmit()}
+        placeholder="9, 3, 7, 5, 11, 1, 13"
+        className="w-full bg-slate-900/80 border border-slate-600 text-white text-sm font-body rounded-lg px-3 py-2.5 outline-none focus:border-purple-500 placeholder:text-white/25"
+      />
+      {error && <p className="text-red-400 text-xs font-body">⚠️ {error}</p>}
+      <button
+        onClick={handleSubmit}
+        className="w-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold font-body py-2.5 rounded-lg transition-colors cursor-pointer"
+      >
+        Lanjut → Lihat Data
+      </button>
+    </div>
+  );
+
+  /* ── Layar 2: Urutkan ── */
+  if (screen === "sort") return (
+    <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 2 / 3</span>
+          <p className="font-body text-sm font-bold text-purple-300">🔀 Urutkan Data</p>
+        </div>
+        <button onClick={goToInput} className="text-xs text-white/40 hover:text-white/70 font-body cursor-pointer transition-colors">← Kembali</button>
+      </div>
+
+      {/* Data asli */}
+      <div>
+        <p className="font-body text-xs text-white/40 mb-2 uppercase tracking-wide font-semibold">Data asli (belum terurut):</p>
+        <div className="flex flex-wrap gap-2">
+          {original.map((v, i) => (
+            <div
+              key={i}
+              className="bg-slate-700/60 border border-slate-500/50 rounded-lg px-3 py-2 text-center transition-all duration-500"
+              style={{ opacity: isSorting ? 0.25 : 1, transform: isSorting ? "scale(0.85)" : "scale(1)" }}
+            >
+              <p className="text-white/80 font-bold text-sm font-body">{fmt(v)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {!sortRevealed ? (
+        <button
+          onClick={handleSort}
+          disabled={isSorting}
+          className={`w-full text-sm font-bold font-body py-2.5 rounded-lg transition-all cursor-pointer ${
+            isSorting ? "bg-purple-800/50 text-purple-400" : "bg-purple-600 hover:bg-purple-500 text-white"
+          }`}
+        >
+          {isSorting ? "⏳ Sedang mengurutkan..." : "🔀 Urutkan dari Kecil ke Besar"}
+        </button>
+      ) : (
+        <div className="space-y-3">
+          <div>
+            <p className="font-body text-xs text-purple-300 mb-2 uppercase tracking-wide font-bold">✅ Data terurut:</p>
+            <div className="flex flex-wrap gap-2">
+              {sorted.map((v, i) => (
+                <div
+                  key={i}
+                  className="bg-purple-800/50 border border-purple-500/50 rounded-lg px-3 py-2 text-center transition-all duration-500"
+                  style={{ transitionDelay: `${i * 70}ms` }}
+                >
+                  <p className="text-purple-200 font-bold text-sm font-body">{fmt(v)}</p>
+                  <p className="text-purple-400/60 text-xs font-body">ke-{i + 1}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bg-slate-800/50 rounded-lg p-3 text-center">
+            <p className="font-body text-xs text-white/50">
+              n = <strong className="text-white">{n}</strong> ({isOdd ? "ganjil" : "genap"}) → posisi median:{" "}
+              <strong className="text-purple-300">
+                {isOdd
+                  ? `urutan ke-${medianIdx1 + 1}`
+                  : `urutan ke-${medianIdx1 + 1} dan ke-${medianIdx2 + 1}`}
+              </strong>
+            </p>
+          </div>
+          <button
+            onClick={startMedianAnimation}
+            className="w-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold font-body py-2.5 rounded-lg transition-colors cursor-pointer"
+          >
+            🎯 Tentukan Median →
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
+  /* ── Layar 3: Penentuan Median (Slow Motion) ── */
+  return (
+    <div className="bg-purple-950/40 border border-purple-500/30 rounded-xl p-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2.5 py-1 rounded-full font-body">Layar 3 / 3</span>
+          <p className="font-body text-sm font-bold text-purple-300">🎯 Penentuan Median</p>
+        </div>
+        <button
+          onClick={() => { playPopSound(); setScreen("sort"); setSortRevealed(true); setIsAnimating(false); }}
+          className="text-xs text-white/40 hover:text-white/70 font-body cursor-pointer transition-colors"
+        >
+          ← Kembali
+        </button>
+      </div>
+
+      {!medianDone && (
+        <p className="font-body text-xs text-white/40 text-center">
+          {isAnimating
+            ? `⬅️ Menyingkirkan data dari ujung kiri & kanan... (${elimStep}/${maxElim}) ➡️`
+            : "Siap memulai animasi..."}
+        </p>
+      )}
+
+      {/* Chip data dengan animasi eliminasi */}
+      <div className="flex flex-wrap gap-2 justify-center">
+        {sorted.map((v, i) => {
+          const isElim = elimStep > 0 && (i < elimStep || i >= n - elimStep);
+          const isMid = medianDone && !isElim;
+          const isActiveLeft = !medianDone && isAnimating && i === elimStep - 1;
+          const isActiveRight = !medianDone && isAnimating && i === n - elimStep;
+          return (
+            <div
+              key={i}
+              className={`rounded-lg px-3 py-2 text-center border transition-all duration-600 ${
+                isMid
+                  ? "bg-purple-700/70 border-purple-400 ring-2 ring-purple-400 scale-110 shadow-lg shadow-purple-500/40"
+                  : isElim
+                  ? "bg-slate-800/30 border-slate-700/30 opacity-20 scale-90"
+                  : isActiveLeft || isActiveRight
+                  ? "bg-red-900/40 border-red-500/60 scale-105"
+                  : "bg-slate-700/60 border-slate-500/50"
+              }`}
+            >
+              <p className={`font-bold text-sm font-body ${
+                isMid ? "text-purple-200" : isElim ? "text-white/30 line-through" : "text-white/80"
+              }`}>
+                {fmt(v)}
+              </p>
+              <p className={`text-xs font-body ${isMid ? "text-purple-400" : "text-white/30"}`}>
+                ke-{i + 1}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Indikator panah */}
+      {isAnimating && !medianDone && (
+        <div className="flex justify-between text-xs font-body px-2">
+          <span className="text-red-400 font-bold">← singkirkan</span>
+          <span className="text-red-400 font-bold">singkirkan →</span>
+        </div>
+      )}
+
+      {/* Hasil */}
+      {medianDone && (
+        <div className="space-y-3">
+          <div className="bg-slate-900/70 rounded-lg p-3 text-center overflow-x-auto">
+            {isOdd ? (
+              <BlockMath math={`\\text{Me} = x_{\\left(\\frac{${n}+1}{2}\\right)} = x_{(${medianIdx1+1})} = ${fmt(sorted[medianIdx1])}`} />
+            ) : (
+              <BlockMath math={`\\text{Me} = \\frac{x_{(${medianIdx1+1})} + x_{(${medianIdx2+1})}}{2} = \\frac{${fmt(sorted[medianIdx1])} + ${fmt(sorted[medianIdx2])}}{2} = ${fmt(medianValue)}`} />
+            )}
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-xs font-body text-center">
+            <div className="bg-slate-800/60 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Banyak Data (n)</p>
+              <p className="text-white font-bold text-base">{n}</p>
+            </div>
+            <div className="bg-slate-800/60 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Jenis n</p>
+              <p className={`font-bold text-base ${isOdd ? "text-purple-300" : "text-cyan-300"}`}>
+                {isOdd ? "Ganjil" : "Genap"}
+              </p>
+            </div>
+            <div className="bg-purple-900/50 border border-purple-500/40 rounded-lg p-2">
+              <p className="text-white/40 mb-1">Median (Me)</p>
+              <p className="text-purple-300 font-bold text-base">{fmt(medianValue)}</p>
+            </div>
+          </div>
+          <button
+            onClick={goToInput}
+            className="w-full bg-slate-700/60 hover:bg-slate-600/60 text-white text-sm font-bold font-body py-2 rounded-lg transition-colors cursor-pointer"
+          >
+            🔄 Coba Data Lain
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const MedianModusPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -131,6 +418,15 @@ const MedianModusPage = () => {
                   <p className="font-body text-sm text-yellow-200">
                     <strong>Langkah mencari median:</strong> (1) Urutkan data dari kecil ke besar. (2) Hitung banyak data (<InlineMath math="n" />). (3) Jika <InlineMath math="n" /> ganjil, median = data urutan ke-<InlineMath math="\frac{n+1}{2}" />.
                   </p>
+                </div>
+
+                {/* Animasi Interaktif */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-bold text-purple-300 uppercase tracking-wide">🎮 Coba Sendiri — Animasi Penentuan Median</p>
+                  <p className="font-body text-xs text-white/45 leading-relaxed">
+                    Masukkan data kamu sendiri dan lihat proses penentuan median secara visual, langkah demi langkah. Berlaku untuk n ganjil maupun genap!
+                  </p>
+                  <MedianAnimator />
                 </div>
               </div>
             )}
