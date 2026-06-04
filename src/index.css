@@ -120,7 +120,110 @@
   color: var(--text-secondary) !important;
 }
 
-/* 4. Override hardcoded dark slate backgrounds for light/white/forest themes */
+/* 4. Light/white theme: improve text contrast for pastel/gray colors */
+[data-theme="light"] .text-gray-300,
+[data-theme="light"] .text-gray-400,
+[data-theme="light"] .text-slate-300,
+[data-theme="light"] .text-slate-400,
+[data-theme="white"] .text-gray-300,
+[data-theme="white"] .text-gray-400,
+[data-theme="white"] .text-slate-300,
+[data-theme="white"] .text-slate-400 {
+  color: #4a4a6a !important;
+}
+
+[data-theme="light"] .text-blue-300,
+[data-theme="light"] .text-blue-400,
+[data-theme="white"] .text-blue-300,
+[data-theme="white"] .text-blue-400 {
+  color: #1d4ed8 !important;
+}
+
+[data-theme="light"] .text-purple-300,
+[data-theme="light"] .text-purple-400,
+[data-theme="white"] .text-purple-300,
+[data-theme="white"] .text-purple-400 {
+  color: #6d28d9 !important;
+}
+
+[data-theme="light"] .text-cyan-300,
+[data-theme="light"] .text-cyan-400,
+[data-theme="white"] .text-cyan-300,
+[data-theme="white"] .text-cyan-400 {
+  color: #0e7490 !important;
+}
+
+[data-theme="light"] .text-teal-300,
+[data-theme="light"] .text-teal-400,
+[data-theme="white"] .text-teal-300,
+[data-theme="white"] .text-teal-400 {
+  color: #0f766e !important;
+}
+
+[data-theme="light"] .text-green-300,
+[data-theme="light"] .text-green-400,
+[data-theme="white"] .text-green-300,
+[data-theme="white"] .text-green-400 {
+  color: #15803d !important;
+}
+
+[data-theme="light"] .text-yellow-300,
+[data-theme="light"] .text-yellow-400,
+[data-theme="white"] .text-yellow-300,
+[data-theme="white"] .text-yellow-400 {
+  color: #a16207 !important;
+}
+
+[data-theme="light"] .text-pink-300,
+[data-theme="light"] .text-pink-400,
+[data-theme="white"] .text-pink-300,
+[data-theme="white"] .text-pink-400 {
+  color: #be185d !important;
+}
+
+[data-theme="light"] .text-violet-300,
+[data-theme="light"] .text-violet-400,
+[data-theme="white"] .text-violet-300,
+[data-theme="white"] .text-violet-400 {
+  color: #5b21b6 !important;
+}
+
+[data-theme="light"] .text-orange-300,
+[data-theme="light"] .text-orange-400,
+[data-theme="white"] .text-orange-300,
+[data-theme="white"] .text-orange-400 {
+  color: #c2410c !important;
+}
+
+[data-theme="light"] .text-red-300,
+[data-theme="light"] .text-red-400,
+[data-theme="white"] .text-red-300,
+[data-theme="white"] .text-red-400 {
+  color: #b91c1c !important;
+}
+
+[data-theme="light"] .text-indigo-300,
+[data-theme="light"] .text-indigo-400,
+[data-theme="white"] .text-indigo-300,
+[data-theme="white"] .text-indigo-400 {
+  color: #3730a3 !important;
+}
+
+[data-theme="light"] .text-emerald-300,
+[data-theme="light"] .text-emerald-400,
+[data-theme="white"] .text-emerald-300,
+[data-theme="white"] .text-emerald-400 {
+  color: #065f46 !important;
+}
+
+[data-theme="light"] .text-rose-300,
+[data-theme="light"] .text-rose-400,
+[data-theme="white"] .text-rose-300,
+[data-theme="white"] .text-rose-400 {
+  color: #9f1239 !important;
+}
+
+/* 5. Override hardcoded dark slate backgrounds for light/white/forest themes */
 [data-theme="light"] .bg-slate-950\/80,
 [data-theme="white"] .bg-slate-950\/80,
 [data-theme="forest"] .bg-slate-950\/80,
