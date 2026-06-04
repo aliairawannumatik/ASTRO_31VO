@@ -76,9 +76,9 @@ const SvgSegitiga28 = () => (
   <svg viewBox="-30 0 210 170" width="170" height="150" className="my-3 mx-auto block">
     <polygon points="20,15 20,140 150,140" fill="none" stroke="#facc15" strokeWidth="2" />
     <rect x="20" y="120" width="20" height="20" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="-10" y="82" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
-    <text x="85" y="158" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
-    <text x="105" y="68" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
+    <text x="-10" y="82" fill="var(--icon-color)" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
+    <text x="85" y="158" fill="var(--icon-color)" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
+    <text x="105" y="68" fill="var(--icon-color)" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
   </svg>
 );
 

@@ -64,7 +64,7 @@ const GameSubtopicPage = ({
           <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
             {kelasLabel} · Math Game Arena
           </p>
-          <div className="mt-3 flex items-center justify-center gap-2 text-white/40 text-[11px] font-body">
+          <div className="mt-3 flex items-center justify-center gap-2 text-[11px] font-body" style={{ color: "var(--text-secondary)" }}>
             <span>☄️</span>
             <span>Tembak meteor yang benar · Kumpulkan bintang!</span>
           </div>

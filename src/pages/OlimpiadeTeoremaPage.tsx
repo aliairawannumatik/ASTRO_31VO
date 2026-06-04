@@ -198,9 +198,9 @@ const SegitigaABC182430SVG = () => {
         <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
         <circle cx={Cx} cy={Cy} r="3" fill="#22d3ee" />
         {/* Label titik sudut */}
-        <text x={Ax - 10} y={Ay + 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={Bx + 8} y={By + 12} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
-        <text x={Cx + 8} y={Cy + 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+        <text x={Ax - 10} y={Ay + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={Bx + 8} y={By + 12} fill="var(--icon-color)" fontSize="14" fontWeight="bold">B</text>
+        <text x={Cx + 8} y={Cy + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold">C</text>
         {/* Label sisi: AB = 24 cm (alas), BC = 18 cm (kanan), AC = ? (miring) */}
         <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">24 cm</text>
         <text x={Bx - 8} y={(By + Cy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">18 cm</text>
@@ -229,9 +229,9 @@ const SegitigaABD72425SVG = () => {
         <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
         <circle cx={Dx} cy={Dy} r="3" fill="#22d3ee" />
         {/* Label titik sudut */}
-        <text x={Ax - 10} y={Ay + 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={Bx + 8} y={By + 12} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
-        <text x={Dx + 8} y={Dy + 4} fill="#ffffff" fontSize="14" fontWeight="bold">D</text>
+        <text x={Ax - 10} y={Ay + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={Bx + 8} y={By + 12} fill="var(--icon-color)" fontSize="14" fontWeight="bold">B</text>
+        <text x={Dx + 8} y={Dy + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold">D</text>
         {/* Label sisi: AB = 24 cm (alas), BD = 7 cm (kanan), AD = ? (miring) */}
         <text x={(Ax + Bx) / 2} y={By + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">24 cm</text>
         <text x={Bx - 8} y={(By + Dy) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">7 cm</text>
@@ -267,10 +267,10 @@ const SegitigaCABD9_15_41_SVG = () => {
         <circle cx={Bx} cy={By} r="3" fill="#22d3ee" />
         <circle cx={Dx} cy={Dy} r="3" fill="#22d3ee" />
         {/* Label titik */}
-        <text x={Cx - 8} y={Cy + 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">C</text>
-        <text x={Ax - 6} y={Ay + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={Bx + 6} y={By + 16} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
-        <text x={Dx} y={Dy + 18} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
+        <text x={Cx - 8} y={Cy + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">C</text>
+        <text x={Ax - 6} y={Ay + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={Bx + 6} y={By + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold">B</text>
+        <text x={Dx} y={Dy + 18} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
         {/* Label sisi: CA = 9 (kiri), CB = 41 (miring atas), CD = 15 (di dalam) */}
         <text x={Cx - 6} y={(Cy + Ay) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="end">9</text>
         <text x={(Cx + Bx) / 2 + 8} y={(Cy + By) / 2 - 4} fill="#fbbf24" fontSize="13" fontWeight="bold">41</text>
@@ -313,11 +313,11 @@ const BangunABCDESVG = () => {
           <circle key={i} cx={p.x} cy={p.y} r="3" fill="#22d3ee" />
         ))}
         {/* Label titik */}
-        <text x={A.x - 8} y={A.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={B.x + 8} y={B.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
-        <text x={C.x + 8} y={C.y + 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
-        <text x={D.x} y={D.y - 8} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
-        <text x={E.x - 8} y={E.y + 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">E</text>
+        <text x={A.x - 8} y={A.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x + 8} y={B.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold">B</text>
+        <text x={C.x + 8} y={C.y + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x} y={D.y - 8} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
+        <text x={E.x - 8} y={E.y + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">E</text>
         {/* Label sisi */}
         <text x={(A.x + B.x) / 2} y={baseY + 18} fill="#fbbf24" fontSize="13" fontWeight="bold" textAnchor="middle">20 cm</text>
         <text x={B.x + 8} y={(B.y + C.y) / 2 + 4} fill="#fbbf24" fontSize="13" fontWeight="bold">9 cm</text>
@@ -532,12 +532,12 @@ const BangunABEFCDSVG = () => {
         ))}
 
         {/* Label titik */}
-        <text x={A.x - 8} y={A.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={B.x - 8} y={B.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">B</text>
-        <text x={C.x + 4} y={C.y + 18} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
-        <text x={D.x + 8} y={D.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold">D</text>
-        <text x={E.x + 8} y={E.y + 4} fill="#ffffff" fontSize="14" fontWeight="bold">E</text>
-        <text x={F.x - 4} y={F.y - 6} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">F</text>
+        <text x={A.x - 8} y={A.y + 5} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x - 8} y={B.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">B</text>
+        <text x={C.x + 4} y={C.y + 18} fill="var(--icon-color)" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x + 8} y={D.y + 5} fill="var(--icon-color)" fontSize="14" fontWeight="bold">D</text>
+        <text x={E.x + 8} y={E.y + 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold">E</text>
+        <text x={F.x - 4} y={F.y - 6} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">F</text>
       </svg>
     </div>
   );
@@ -668,10 +668,10 @@ const LayangLayangABCDSVG = () => {
         ))}
 
         {/* Label titik */}
-        <text x={B.x} y={B.y - 8} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">B</text>
-        <text x={D.x} y={D.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
-        <text x={A.x - 8} y={A.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={C.x + 8} y={C.y + 5} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
+        <text x={B.x} y={B.y - 8} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="middle">B</text>
+        <text x={D.x} y={D.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="middle">D</text>
+        <text x={A.x - 8} y={A.y + 5} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={C.x + 8} y={C.y + 5} fill="var(--icon-color)" fontSize="14" fontWeight="bold">C</text>
       </svg>
     </div>
   );
@@ -710,11 +710,11 @@ const JajargenjangABCDSVG = () => {
         ))}
 
         {/* Label titik */}
-        <text x={A.x - 6} y={A.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={B.x + 6} y={B.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
-        <text x={C.x + 6} y={C.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
-        <text x={D.x - 6} y={D.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">D</text>
-        <text x={E.x} y={E.y + 16} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">E</text>
+        <text x={A.x - 6} y={A.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x + 6} y={B.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold">B</text>
+        <text x={C.x + 6} y={C.y - 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x - 6} y={D.y - 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">D</text>
+        <text x={E.x} y={E.y + 16} fill="var(--icon-color)" fontSize="13" fontWeight="bold" textAnchor="middle">E</text>
 
         {/* Label sisi */}
         {/* 20 cm di atas DC */}
@@ -760,9 +760,9 @@ const SegitigaPQR30SVG = () => {
         ))}
 
         {/* Label titik */}
-        <text x={P.x - 6} y={P.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">P</text>
-        <text x={Q.x + 6} y={Q.y + 16} fill="#ffffff" fontSize="14" fontWeight="bold">Q</text>
-        <text x={R.x - 6} y={R.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">R</text>
+        <text x={P.x - 6} y={P.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">P</text>
+        <text x={Q.x + 6} y={Q.y + 16} fill="var(--icon-color)" fontSize="14" fontWeight="bold">Q</text>
+        <text x={R.x - 6} y={R.y - 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">R</text>
       </svg>
     </div>
   );
@@ -811,10 +811,10 @@ const SegitigaABCD30_45_SVG = () => {
         ))}
 
         {/* Label titik */}
-        <text x={A.x - 6} y={A.y + 6} fill="#ffffff" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
-        <text x={B.x + 6} y={B.y + 18} fill="#ffffff" fontSize="14" fontWeight="bold">B</text>
-        <text x={C.x + 6} y={C.y - 4} fill="#ffffff" fontSize="14" fontWeight="bold">C</text>
-        <text x={D.x} y={D.y + 18} fill="#ffffff" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
+        <text x={A.x - 6} y={A.y + 6} fill="var(--icon-color)" fontSize="14" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x + 6} y={B.y + 18} fill="var(--icon-color)" fontSize="14" fontWeight="bold">B</text>
+        <text x={C.x + 6} y={C.y - 4} fill="var(--icon-color)" fontSize="14" fontWeight="bold">C</text>
+        <text x={D.x} y={D.y + 18} fill="var(--icon-color)" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
       </svg>
     </div>
   );

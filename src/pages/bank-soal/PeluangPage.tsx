@@ -184,7 +184,7 @@ const MarbleBagSVG = ({ colors, counts, labels }: { colors: string[]; counts: nu
           const cx2 = xOffset + j * 22 + 14;
           marbles.push(<circle key={j} cx={cx2} cy={82} r="10" fill={color} stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>);
           if (counts[ci] > 6 && j === 5) marbles.push(
-            <text key="more" x={cx2} y={86} fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace">+{counts[ci]-5}</text>
+            <text key="more" x={cx2} y={86} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace">+{counts[ci]-5}</text>
           );
         }
         const lx = xOffset + Math.min(counts[ci], 6) * 11 + 2;
@@ -239,7 +239,7 @@ const SpinnerSVG = ({ sections }: { sections: { color: string; label: string; de
         <g key={i}>
           <path d={`M ${cx} ${cy} L ${a.x1} ${a.y1} A ${r} ${r} 0 ${a.largeArc} 1 ${a.x2} ${a.y2} Z`}
             fill={a.color} stroke="#1e293b" strokeWidth="1.5" opacity="0.85"/>
-          <text x={a.lx} y={a.ly+4} fill="#fff" fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{a.label}</text>
+          <text x={a.lx} y={a.ly+4} fill="var(--icon-color)" fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{a.label}</text>
         </g>
       ))}
       <circle cx={cx} cy={cy} r="5" fill="#1e293b" stroke="#94a3b8" strokeWidth="1.5"/>
@@ -285,11 +285,11 @@ const FrekHarapanSVG = ({ n, p, frek, label }: { n: number; p: string; frek: num
     <rect x="10" y="10" width="260" height="90" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155"/>
     <rect x="25" y="28" width="100" height="32" rx="4" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" strokeWidth="1.5"/>
     <text x="75" y="41" fill="#22d3ee" fontSize="8" textAnchor="middle" fontFamily="monospace">n (percobaan)</text>
-    <text x="75" y="55" fill="#fff" fontSize="12" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{n}</text>
+    <text x="75" y="55" fill="var(--icon-color)" fontSize="12" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{n}</text>
     <text x="140" y="46" fill="#64748b" fontSize="14" textAnchor="middle" fontFamily="monospace">×</text>
     <rect x="150" y="28" width="60" height="32" rx="4" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="1.5"/>
     <text x="180" y="41" fill="#c084fc" fontSize="8" textAnchor="middle" fontFamily="monospace">P(A)</text>
-    <text x="180" y="55" fill="#fff" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{p}</text>
+    <text x="180" y="55" fill="var(--icon-color)" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{p}</text>
     <text x="222" y="46" fill="#64748b" fontSize="14" textAnchor="middle" fontFamily="monospace">=</text>
     <rect x="232" y="28" width="42" height="32" rx="4" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="253" y="55" fill="#22c55e" fontSize="14" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{frek}</text>

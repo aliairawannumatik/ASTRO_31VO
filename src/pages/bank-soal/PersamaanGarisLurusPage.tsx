@@ -108,8 +108,8 @@ const TitikPotongSVG = ({ m, b }: { m: number; b: number }) => {
       <line x1="20" y1="110" x2="260" y2="110" stroke="#475569" strokeWidth="1"/>
       <line x1="140" y1="10" x2="140" y2="210" stroke="#475569" strokeWidth="1"/>
       <line x1={toSvgX(-4)} y1={toSvgY(m*(-4)+b)} x2={toSvgX(4)} y2={toSvgY(m*4+b)} stroke="#22d3ee" strokeWidth="2"/>
-      <circle cx={toSvgX(xInt)} cy={toSvgY(0)} r="5" fill="#fbbf24" stroke="#fff" strokeWidth="1"/>
-      <circle cx={toSvgX(0)} cy={toSvgY(b)} r="5" fill="#f472b6" stroke="#fff" strokeWidth="1"/>
+      <circle cx={toSvgX(xInt)} cy={toSvgY(0)} r="5" fill="#fbbf24" stroke="var(--icon-stroke)" strokeWidth="1"/>
+      <circle cx={toSvgX(0)} cy={toSvgY(b)} r="5" fill="#f472b6" stroke="var(--icon-stroke)" strokeWidth="1"/>
       <text x={toSvgX(xInt)+8} y={toSvgY(0)-8} fill="#fbbf24" fontSize="9" fontFamily="monospace">({xInt.toFixed(1)}, 0)</text>
       <text x={toSvgX(0)+8} y={toSvgY(b)-4} fill="#f472b6" fontSize="9" fontFamily="monospace">(0, {b})</text>
       <text x="30" y="25" fill="#94a3b8" fontSize="8" fontFamily="monospace">Titik potong sumbu-x: ({xInt.toFixed(1)}, 0)</text>
@@ -144,7 +144,7 @@ const TabelNilaiSVG = ({ values }: { values: { x: number; y: number }[] }) => (
     ))}
     <text x="20" y="58" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">y</text>
     {values.map((v, i) => (
-      <text key={i} x={50 + i * 45} y="58" fill="#fff" fontSize="10" fontFamily="monospace">{v.y === 999 ? "?" : v.y}</text>
+      <text key={i} x={50 + i * 45} y="58" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">{v.y === 999 ? "?" : v.y}</text>
     ))}
     <line x1="10" y1="35" x2="270" y2="35" stroke="#334155" strokeWidth="1"/>
   </svg>

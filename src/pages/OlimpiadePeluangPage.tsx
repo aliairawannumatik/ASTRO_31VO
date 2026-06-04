@@ -742,8 +742,8 @@ const DiagramKotakKartu = () => {
       <rect x="10" y="40" width="160" height="10" fill="#b45309"/>
       {cards.map((c) => (
         <g key={c.num}>
-          <rect x={c.x} y={c.y} width="30" height="32" rx="3" fill={c.fill} stroke="white" strokeWidth="1"/>
-          <text x={c.x + 15} y={c.y + 21} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{c.num}</text>
+          <rect x={c.x} y={c.y} width="30" height="32" rx="3" fill={c.fill} stroke="var(--icon-stroke)" strokeWidth="1"/>
+          <text x={c.x + 15} y={c.y + 21} textAnchor="middle" fill="var(--icon-color)" fontSize="11" fontWeight="bold">{c.num}</text>
         </g>
       ))}
       <rect x="195" y="65" width="72" height="75" rx="4" fill="#fef3c7" stroke="#d97706" strokeWidth="1.5"/>
@@ -866,11 +866,11 @@ const DiagramSurveiInvestasi = () => {
       ))}
       <line x1={33} y1={cB} x2={268} y2={cB} stroke="#6b7280" strokeWidth="1" />
       <rect x={x1 - bW / 2} y={y(336)} width={bW} height={(336 / maxV) * cH} fill="#c2410c" />
-      <text x={x1} y={y(168) + 3} textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">336</text>
+      <text x={x1} y={y(168) + 3} textAnchor="middle" fill="var(--icon-color)" fontSize="8" fontWeight="bold">336</text>
       <rect x={x1 - bW / 2} y={y(605)} width={bW} height={(269 / maxV) * cH} fill="#fbbf24" />
       <text x={x1} y={y(470) + 3} textAnchor="middle" fill="#1c1917" fontSize="8" fontWeight="bold">269</text>
       <rect x={x2 - bW / 2} y={y(264)} width={bW} height={(264 / maxV) * cH} fill="#c2410c" />
-      <text x={x2} y={y(132) + 3} textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">264</text>
+      <text x={x2} y={y(132) + 3} textAnchor="middle" fill="var(--icon-color)" fontSize="8" fontWeight="bold">264</text>
       <rect x={x2 - bW / 2} y={y(395)} width={bW} height={(131 / maxV) * cH} fill="#fbbf24" />
       <text x={x2} y={y(329) + 3} textAnchor="middle" fill="#1c1917" fontSize="8" fontWeight="bold">131</text>
       <text x={x1} y={cB + 11} textAnchor="middle" fill="#d1d5db" fontSize="8">Emas</text>

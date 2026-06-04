@@ -651,7 +651,7 @@ const DiagramLingkaran = () => {
             {paths.map((s,i)=>(
               <g key={i}>
                 <path d={s.path} fill={s.color} opacity="0.9" stroke="#0f172a" strokeWidth="1.5"/>
-                <text x={s.lx} y={s.ly} fontSize="8" fill="white" textAnchor="middle" fontWeight="bold">{s.angle}°</text>
+                <text x={s.lx} y={s.ly} fontSize="8" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">{s.angle}°</text>
               </g>
             ))}
           </svg>
@@ -662,7 +662,7 @@ const DiagramLingkaran = () => {
             {paths.map((s,i)=>(
               <g key={i}>
                 <path d={s.path} fill={s.color} opacity="0.9" stroke="#0f172a" strokeWidth="1.5"/>
-                <text x={s.lx} y={s.ly} fontSize="8" fill="white" textAnchor="middle" fontWeight="bold">{s.pct}%</text>
+                <text x={s.lx} y={s.ly} fontSize="8" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">{s.pct}%</text>
               </g>
             ))}
           </svg>

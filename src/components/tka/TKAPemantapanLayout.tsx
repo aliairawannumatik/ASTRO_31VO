@@ -164,7 +164,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                 boxShadow: "0 2px 12px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
                 border: "1px solid rgba(167,139,250,0.4)",
               } : {
-                color: "rgba(255,255,255,0.4)",
+                color: "var(--text-secondary)",
                 background: "transparent",
                 border: "1px solid transparent",
               }}
@@ -434,9 +434,9 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                             border: "1px solid rgba(167,139,250,0.4)",
                             boxShadow: "0 2px 10px rgba(99,102,241,0.3)",
                           } : {
-                            background: "rgba(255,255,255,0.05)",
-                            color: "rgba(255,255,255,0.25)",
-                            border: "1px solid rgba(255,255,255,0.08)",
+                            background: "var(--btn-bg)",
+                            color: "var(--text-secondary)",
+                            border: "1px solid var(--border)",
                             cursor: "not-allowed",
                           }}>
                           Cek Jawaban

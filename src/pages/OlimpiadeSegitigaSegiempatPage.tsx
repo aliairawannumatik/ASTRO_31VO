@@ -382,7 +382,7 @@ const BangunSoal2SegiSVG = () => {
   const points = "30,30 282,30 282,310 156,310 156,198 100,198 100,254 30,254";
   return (
     <svg viewBox="0 0 320 350" className="w-full max-w-[320px]" data-testid="svg-soal-segi-dasar-2">
-      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={points} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
       {/* Label 18 cm di atas */}
       <text x="156" y="22" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold">18 cm</text>
       {/* Label 20 cm di kanan */}
@@ -587,9 +587,9 @@ const BangunSoal6SegiSVG = () => {
   return (
     <svg viewBox="0 0 320 350" className="w-full max-w-[320px]" data-testid="svg-soal-segi-dasar-6">
       {/* Triangles & parallelogram */}
-      <polygon points={topTriangle} fill="white" stroke={stroke} strokeWidth="2" />
-      <polygon points={botTriangle} fill="white" stroke={stroke} strokeWidth="2" />
-      <polygon points={parallelogram} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={topTriangle} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
+      <polygon points={botTriangle} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
+      <polygon points={parallelogram} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
 
       {/* Dashed altitudes */}
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke={stroke} strokeWidth="1" strokeDasharray="4 3" />
@@ -672,9 +672,9 @@ const BangunSoal5SegiSVG = () => {
   return (
     <svg viewBox="0 0 290 200" className="w-full max-w-[320px]" data-testid="svg-soal-segi-dasar-5">
       {/* Jajar genjang AFEB */}
-      <polygon points={parallelogram} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={parallelogram} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
       {/* Belah ketupat BEDC */}
-      <polygon points={rhombus} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={rhombus} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
       {/* Tick marks */}
       {ticks.map((t, i) => (
         <line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} stroke={stroke} strokeWidth="1.5" />
@@ -699,7 +699,7 @@ const BangunSoal4SegiSVG = () => {
   const points = "50,30 190,30 190,65 85,65 85,170 190,170 190,205 85,205 85,310 190,310 190,345 50,345";
   return (
     <svg viewBox="0 0 230 380" className="w-full max-w-[260px]" data-testid="svg-soal-segi-dasar-4">
-      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={points} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
       {/* Garis putus-putus penanda tinggi 45 cm di sebelah kiri */}
       <line x1="42" y1="30" x2="42" y2="345" stroke={stroke} strokeWidth="1" strokeDasharray="4 4" />
       {/* Label "45 cm" rotasi -90 di sebelah kiri */}
@@ -723,7 +723,7 @@ const BangunSoal3SegiSVG = () => {
   const points = "40,30 190,30 190,130 150,130 150,190 110,190 110,250 70,250 70,310 40,310";
   return (
     <svg viewBox="0 0 240 340" className="w-full max-w-[260px]" data-testid="svg-soal-segi-dasar-3">
-      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={points} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
       {/* Label 15 cm di atas */}
       <text x="115" y="22" textAnchor="middle" fill={stroke} fontSize="13" fontWeight="bold">15 cm</text>
       {/* Label 10 cm di kanan-atas */}
@@ -756,7 +756,7 @@ const BangunSoal1SegiSVG = () => {
   const points = "20,20 100,20 100,60 140,60 140,20 180,20 180,60 220,60 220,20 300,20 300,160 260,160 260,220 20,220";
   return (
     <svg viewBox="0 0 320 240" className="w-full max-w-[300px]" data-testid="svg-soal-segi-dasar-1">
-      <polygon points={points} fill="white" stroke={stroke} strokeWidth="2" />
+      <polygon points={points} fill="var(--icon-color)" stroke={stroke} strokeWidth="2" />
       {/* label "4 cm" untuk segmen kiri-atas (20,20)-(100,20) panjang 4 cm */}
       <text x="60" y="14" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="bold">4 cm</text>
       {/* label "10 cm" untuk sisi kiri (20,20)-(20,220) panjang 10 cm */}

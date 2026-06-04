@@ -6,13 +6,12 @@ interface ThemeContextType {
   theme: Theme;
   isDark: boolean;
   setTheme: (t: Theme) => void;
-  toggleTheme: () => void; // kept for backward compat
+  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// "dark" and "ocean" use dark UI variable set; all others use light
-const DARK_THEMES: Theme[] = ["dark", "ocean"];
+const DARK_THEMES: Theme[] = ["dark", "ocean", "sunset"];
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
@@ -23,23 +22,21 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     localStorage.setItem("numatik-theme", theme);
-    // Apply CSS variable class
-    document.documentElement.classList.remove("light-mode", "theme-white", "theme-ocean", "theme-forest", "theme-sunset");
+
+    const root = document.documentElement;
+
+    // data-theme attribute — drives CSS variable blocks in index.css
+    root.setAttribute("data-theme", theme);
+
+    // Legacy class system — kept for backward compat with existing Tailwind conditionals
+    root.classList.remove("light-mode", "theme-white", "theme-ocean", "theme-forest", "theme-sunset");
     if (!DARK_THEMES.includes(theme)) {
-      document.documentElement.classList.add("light-mode");
+      root.classList.add("light-mode");
     }
-    if (theme === "white") {
-      document.documentElement.classList.add("theme-white");
-    }
-    if (theme === "ocean") {
-      document.documentElement.classList.add("theme-ocean");
-    }
-    if (theme === "forest") {
-      document.documentElement.classList.add("theme-forest");
-    }
-    if (theme === "sunset") {
-      document.documentElement.classList.add("theme-sunset");
-    }
+    if (theme === "white")  root.classList.add("theme-white");
+    if (theme === "ocean")  root.classList.add("theme-ocean");
+    if (theme === "forest") root.classList.add("theme-forest");
+    if (theme === "sunset") root.classList.add("theme-sunset");
   }, [theme]);
 
   const setTheme = (t: Theme) => setThemeState(t);

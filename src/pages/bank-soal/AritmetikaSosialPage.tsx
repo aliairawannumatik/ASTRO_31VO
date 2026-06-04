@@ -61,10 +61,10 @@ const UntungRugiSVG = ({ beli, jual, label }: { beli: number; jual: number; labe
       <rect x="10" y="15" width="260" height="80" rx="6" fill="rgba(0,0,0,0.2)" stroke="#334155" strokeWidth="1"/>
       <rect x="30" y="30" width="90" height="40" rx="4" fill="rgba(6,182,212,0.25)" stroke="#06b6d4" strokeWidth="1.5"/>
       <text x="75" y="47" fill="#22d3ee" fontSize="8" textAnchor="middle" fontFamily="monospace">Harga Beli</text>
-      <text x="75" y="61" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Rp{beli.toLocaleString("id-ID")}</text>
+      <text x="75" y="61" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Rp{beli.toLocaleString("id-ID")}</text>
       <rect x="160" y="30" width="90" height="40" rx="4" fill={untung ? "rgba(34,197,94,0.25)" : "rgba(239,68,68,0.25)"} stroke={color} strokeWidth="1.5"/>
       <text x="205" y="47" fill={color} fontSize="8" textAnchor="middle" fontFamily="monospace">Harga Jual</text>
-      <text x="205" y="61" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Rp{jual.toLocaleString("id-ID")}</text>
+      <text x="205" y="61" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Rp{jual.toLocaleString("id-ID")}</text>
       <text x="140" y="53" fill="#64748b" fontSize="16" textAnchor="middle" fontFamily="monospace">→</text>
       <text x="140" y="88" fill={color} fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{untung ? "UNTUNG" : "RUGI"} Rp{diff.toLocaleString("id-ID")} ({label})</text>
     </svg>
@@ -76,13 +76,13 @@ const BrutoNetoTaraSVG = ({ bruto, neto, tara }: { bruto: string; neto: string; 
     <rect x="10" y="10" width="240" height="100" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155" strokeWidth="1"/>
     <rect x="25" y="30" width="210" height="35" rx="4" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="130" y="42" fill="#fbbf24" fontSize="8" textAnchor="middle" fontFamily="monospace">BRUTO (Berat Kotor)</text>
-    <text x="130" y="57" fill="#fff" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{bruto}</text>
+    <text x="130" y="57" fill="var(--icon-color)" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{bruto}</text>
     <rect x="25" y="72" width="130" height="28" rx="4" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="90" y="83" fill="#22c55e" fontSize="8" textAnchor="middle" fontFamily="monospace">NETO (Berat Bersih)</text>
-    <text x="90" y="94" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{neto}</text>
+    <text x="90" y="94" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{neto}</text>
     <rect x="163" y="72" width="72" height="28" rx="4" fill="rgba(239,68,68,0.2)" stroke="#ef4444" strokeWidth="1.5"/>
     <text x="199" y="83" fill="#ef4444" fontSize="8" textAnchor="middle" fontFamily="monospace">TARA</text>
-    <text x="199" y="94" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{tara}</text>
+    <text x="199" y="94" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{tara}</text>
   </svg>
 );
 
@@ -91,13 +91,13 @@ const BungaSVG = ({ modal, persen, bulan, bunga }: { modal: string; persen: stri
     <rect x="10" y="10" width="250" height="90" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155" strokeWidth="1"/>
     <circle cx="55" cy="55" r="32" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" strokeWidth="1.5"/>
     <text x="55" y="48" fill="#22d3ee" fontSize="7" textAnchor="middle" fontFamily="monospace">Modal (M)</text>
-    <text x="55" y="61" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{modal}</text>
+    <text x="55" y="61" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{modal}</text>
     <circle cx="148" cy="55" r="22" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="148" y="48" fill="#fbbf24" fontSize="7" textAnchor="middle" fontFamily="monospace">p% × t</text>
-    <text x="148" y="61" fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace">{persen} × {bulan}</text>
+    <text x="148" y="61" fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace">{persen} × {bulan}</text>
     <circle cx="225" cy="55" r="28" fill="rgba(168,85,247,0.15)" stroke="#a855f7" strokeWidth="1.5"/>
     <text x="225" y="48" fill="#c084fc" fontSize="7" textAnchor="middle" fontFamily="monospace">Bunga</text>
-    <text x="225" y="61" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{bunga}</text>
+    <text x="225" y="61" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{bunga}</text>
     <text x="100" y="58" fill="#64748b" fontSize="12" textAnchor="middle" fontFamily="monospace">×</text>
     <text x="183" y="58" fill="#64748b" fontSize="12" textAnchor="middle" fontFamily="monospace">=</text>
     <text x="135" y="97" fill="#fde68a" fontSize="8" textAnchor="middle" fontFamily="monospace">Bunga = Modal × Persen × Waktu</text>
@@ -109,13 +109,13 @@ const DiskonSVG = ({ hargaAsal, diskon, hargaBayar }: { hargaAsal: string; disko
     <rect x="10" y="10" width="250" height="80" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155" strokeWidth="1"/>
     <rect x="25" y="28" width="80" height="40" rx="4" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" strokeWidth="1.5"/>
     <text x="65" y="44" fill="#22d3ee" fontSize="8" textAnchor="middle" fontFamily="monospace">Harga Asal</text>
-    <text x="65" y="58" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{hargaAsal}</text>
+    <text x="65" y="58" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{hargaAsal}</text>
     <rect x="118" y="28" width="60" height="40" rx="4" fill="rgba(239,68,68,0.2)" stroke="#ef4444" strokeWidth="1.5"/>
     <text x="148" y="44" fill="#f87171" fontSize="8" textAnchor="middle" fontFamily="monospace">Diskon</text>
-    <text x="148" y="58" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{diskon}</text>
+    <text x="148" y="58" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{diskon}</text>
     <rect x="192" y="28" width="68" height="40" rx="4" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="226" y="44" fill="#4ade80" fontSize="8" textAnchor="middle" fontFamily="monospace">Harga Bayar</text>
-    <text x="226" y="58" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{hargaBayar}</text>
+    <text x="226" y="58" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{hargaBayar}</text>
     <text x="110" y="53" fill="#64748b" fontSize="12" textAnchor="middle" fontFamily="monospace">−</text>
     <text x="185" y="53" fill="#64748b" fontSize="12" textAnchor="middle" fontFamily="monospace">=</text>
     <text x="135" y="90" fill="#fde68a" fontSize="7.5" textAnchor="middle" fontFamily="monospace">Harga Bayar = Harga Asal − Diskon</text>

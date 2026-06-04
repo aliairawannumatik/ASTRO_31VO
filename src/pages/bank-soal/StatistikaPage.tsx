@@ -93,7 +93,7 @@ const DiagramBatangNilai7SVG = () => {
         const bh=(f/maxF)*100; const x=38+i*41; const y=128-bh;
         return(<g key={i}>
           <rect x={x} y={y} width="28" height={bh} fill={color} fillOpacity="0.75" rx="3" stroke={color} strokeWidth="1"/>
-          <text x={x+14} y={y-3} fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace">{f}</text>
+          <text x={x+14} y={y-3} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace">{f}</text>
           <text x={x+14} y={141} fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">{val}</text>
         </g>);
       })}
@@ -170,7 +170,7 @@ const HistogramNilaiSVG = () => {
         const bw=40; const bh=(f/maxF)*90; const x=35+i*41; const y=120-bh;
         return(<g key={i}>
           <rect x={x} y={y} width={bw} height={bh} fill={color} fillOpacity="0.72" stroke="#0f172a" strokeWidth="1"/>
-          <text x={x+bw/2} y={y-3} fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace">{f}</text>
+          <text x={x+bw/2} y={y-3} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace">{f}</text>
           <text x={x+bw/2} y="132" fill="#94a3b8" fontSize="6.5" textAnchor="middle" fontFamily="monospace">{lo}–{hi}</text>
         </g>);
       })}
@@ -358,7 +358,7 @@ const DiagramBatangPenjualanSVG = () => {
         const bh=(f/maxF)*92; const x=40+i*50;
         return(<g key={i}>
           <rect x={x} y={120-bh} width="34" height={bh} fill={color} fillOpacity="0.75" rx="3"/>
-          <text x={x+17} y={120-bh-3} fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace">{f}</text>
+          <text x={x+17} y={120-bh-3} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace">{f}</text>
           <text x={x+17} y="132" fill="#94a3b8" fontSize="7.5" textAnchor="middle" fontFamily="monospace">{lbl}</text>
         </g>);
       })}
@@ -452,7 +452,7 @@ const DiagramBatangNilaiRaporSVG = () => {
         const bh=(val/maxV)*97; const x=40+i*43;
         return(<g key={i}>
           <rect x={x} y={125-bh} width="28" height={bh} fill={color} fillOpacity="0.75" rx="3"/>
-          <text x={x+14} y={125-bh-3} fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace">{val}</text>
+          <text x={x+14} y={125-bh-3} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace">{val}</text>
           <text x={x+14} y="137" fill="#94a3b8" fontSize="7.5" textAnchor="middle" fontFamily="monospace">{name}</text>
         </g>);
       })}

@@ -311,7 +311,7 @@ const TinggiPohonSVG = ({ tPohon, bayPohon, tOrang, bayOrang }: { tPohon: string
     <line x1="12" y1="158" x2="308" y2="158" stroke="#475569" strokeWidth="1.5"/>
     <line x1="65" y1="158" x2="65" y2="40" stroke="#22c55e" strokeWidth="3.5" strokeLinecap="round"/>
     <ellipse cx="65" cy="36" rx="22" ry="16" fill="rgba(34,197,94,0.35)" stroke="#22c55e" strokeWidth="1.5"/>
-    <text x="64" y="40" fill="#fff" fontSize="7" textAnchor="middle" fontFamily="monospace">{tPohon}</text>
+    <text x="64" y="40" fill="var(--icon-color)" fontSize="7" textAnchor="middle" fontFamily="monospace">{tPohon}</text>
     <line x1="65" y1="158" x2="175" y2="158" stroke="#fbbf24" strokeWidth="2.5"/>
     <text x="120" y="174" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="monospace">{bayPohon}</text>
     <line x1="220" y1="158" x2="220" y2="108" stroke="#f472b6" strokeWidth="3"/>

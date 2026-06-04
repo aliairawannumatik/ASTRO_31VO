@@ -111,7 +111,7 @@ const VennTigaSVG = ({ a, b, c, ab, bc, ac, abc }: { a: string; b: string; c: st
     {ab && <text x="150" y="72" fill="#4ade80" fontSize="7" textAnchor="middle" fontFamily="monospace">{ab}</text>}
     {bc && <text x="178" y="108" fill="#fb923c" fontSize="7" textAnchor="middle" fontFamily="monospace">{bc}</text>}
     {ac && <text x="122" y="108" fill="#f472b6" fontSize="7" textAnchor="middle" fontFamily="monospace">{ac}</text>}
-    {abc && <text x="150" y="97" fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{abc}</text>}
+    {abc && <text x="150" y="97" fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{abc}</text>}
   </svg>
 );
 
@@ -123,7 +123,7 @@ const KardinalitasSVG = ({ n, label, members }: { n: number; label: string; memb
     <text x="100" y="52" fill="#e2e8f0" fontSize="8" textAnchor="middle" fontFamily="monospace">= &#123; {members} &#125;</text>
     <rect x="200" y="20" width="65" height="55" rx="4" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="1.5"/>
     <text x="232" y="40" fill="#c084fc" fontSize="8" textAnchor="middle" fontFamily="monospace">n(A)</text>
-    <text x="232" y="58" fill="#fff" fontSize="16" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{n}</text>
+    <text x="232" y="58" fill="var(--icon-color)" fontSize="16" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{n}</text>
   </svg>
 );
 
@@ -132,10 +132,10 @@ const HimpunanNotasiSVG = ({ cara, contoh }: { cara: string; contoh: string }) =
     <rect x="5" y="5" width="290" height="90" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155" strokeWidth="1"/>
     <rect x="15" y="18" width="120" height="30" rx="4" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="75" y="30" fill="#fbbf24" fontSize="8" textAnchor="middle" fontFamily="monospace">Cara</text>
-    <text x="75" y="42" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{cara}</text>
+    <text x="75" y="42" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{cara}</text>
     <rect x="152" y="18" width="135" height="30" rx="4" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="219" y="30" fill="#4ade80" fontSize="8" textAnchor="middle" fontFamily="monospace">Contoh</text>
-    <text x="219" y="42" fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace">{contoh}</text>
+    <text x="219" y="42" fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace">{contoh}</text>
     <text x="148" y="82" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">Himpunan bilangan asli &lt; 5</text>
   </svg>
 );

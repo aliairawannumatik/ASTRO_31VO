@@ -192,27 +192,27 @@ const latihanDasar = [
       {/* "Diskon Toko" spanning header */}
       <text x="272" y="14" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Diskon Toko</text>
       {/* Column headers row 2 */}
-      <text x="32" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Barang</text>
-      <text x="105" y="28" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Harga</text>
-      <text x="105" y="39" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">(Rp)</text>
-      <text x="177" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Damai</text>
-      <text x="242" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Tentram</text>
-      <text x="305" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Rukun</text>
-      <text x="367" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Sentosa</text>
+      <text x="32" y="34" fill="var(--icon-color)" fontSize="9" fontWeight="bold" textAnchor="middle">Barang</text>
+      <text x="105" y="28" fill="var(--icon-color)" fontSize="9" fontWeight="bold" textAnchor="middle">Harga</text>
+      <text x="105" y="39" fill="var(--icon-color)" fontSize="9" fontWeight="bold" textAnchor="middle">(Rp)</text>
+      <text x="177" y="34" fill="var(--icon-color)" fontSize="9" fontWeight="bold" textAnchor="middle">Damai</text>
+      <text x="242" y="34" fill="var(--icon-color)" fontSize="9" fontWeight="bold" textAnchor="middle">Tentram</text>
+      <text x="305" y="34" fill="var(--icon-color)" fontSize="9" fontWeight="bold" textAnchor="middle">Rukun</text>
+      <text x="367" y="34" fill="var(--icon-color)" fontSize="9" fontWeight="bold" textAnchor="middle">Sentosa</text>
       {/* Row: Sepatu */}
       <text x="32" y="57" fill="#facc15" fontSize="9" textAnchor="middle">Sepatu</text>
-      <text x="105" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">140.000</text>
-      <text x="177" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
-      <text x="242" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
-      <text x="305" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
-      <text x="367" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">30%</text>
+      <text x="105" y="57" fill="var(--icon-color)" fontSize="9" textAnchor="middle">140.000</text>
+      <text x="177" y="57" fill="var(--icon-color)" fontSize="9" textAnchor="middle">20%</text>
+      <text x="242" y="57" fill="var(--icon-color)" fontSize="9" textAnchor="middle">25%</text>
+      <text x="305" y="57" fill="var(--icon-color)" fontSize="9" textAnchor="middle">15%</text>
+      <text x="367" y="57" fill="var(--icon-color)" fontSize="9" textAnchor="middle">30%</text>
       {/* Row: Kaos */}
       <text x="32" y="79" fill="#facc15" fontSize="9" textAnchor="middle">Kaos</text>
-      <text x="105" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">100.000</text>
-      <text x="177" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
-      <text x="242" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
-      <text x="305" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">30%</text>
-      <text x="367" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
+      <text x="105" y="79" fill="var(--icon-color)" fontSize="9" textAnchor="middle">100.000</text>
+      <text x="177" y="79" fill="var(--icon-color)" fontSize="9" textAnchor="middle">25%</text>
+      <text x="242" y="79" fill="var(--icon-color)" fontSize="9" textAnchor="middle">20%</text>
+      <text x="305" y="79" fill="var(--icon-color)" fontSize="9" textAnchor="middle">30%</text>
+      <text x="367" y="79" fill="var(--icon-color)" fontSize="9" textAnchor="middle">15%</text>
     </svg>
   ) , jawaban: "D", pembahasan: "Total bayar per toko (sepatu 140.000, kaos 100.000):\nDamai (20\\%, 25\\%): $112.000 + 75.000 = 187.000$\nTentram (25\\%, 20\\%): $105.000 + 80.000 = 185.000$\nRukun (15\\%, 30\\%): $119.000 + 70.000 = 189.000$\nSentosa (30\\%, 15\\%): $98.000 + 85.000 = 183.000$\nTermurah: Sentosa. Jawaban D." },
   { no: 10, soal: "Perhatikan tabel berikut! Jika Rani akan membeli 3 tas, 2 sendal dan 1 sepatu, maka uang yang harus dibayarkan adalah ...", options: ["A. Rp.360.000,00", "B. Rp.365.000,00", "C. Rp.370.000,00", "D. Rp.375.000,00"], svgQuestion: (
@@ -228,14 +228,14 @@ const latihanDasar = [
       <text x="142" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Harga</text>
       <text x="254" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Disc</text>
       <text x="37" y="37" fill="#facc15" fontSize="9" textAnchor="middle">Tas</text>
-      <text x="142" y="37" fill="#ffffff" fontSize="9" textAnchor="middle">Rp. 80.000,00</text>
-      <text x="254" y="37" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
+      <text x="142" y="37" fill="var(--icon-color)" fontSize="9" textAnchor="middle">Rp. 80.000,00</text>
+      <text x="254" y="37" fill="var(--icon-color)" fontSize="9" textAnchor="middle">15%</text>
       <text x="37" y="58" fill="#facc15" fontSize="9" textAnchor="middle">Sendal</text>
-      <text x="142" y="58" fill="#ffffff" fontSize="9" textAnchor="middle">Rp 50.000,00</text>
-      <text x="254" y="58" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
+      <text x="142" y="58" fill="var(--icon-color)" fontSize="9" textAnchor="middle">Rp 50.000,00</text>
+      <text x="254" y="58" fill="var(--icon-color)" fontSize="9" textAnchor="middle">25%</text>
       <text x="37" y="79" fill="#facc15" fontSize="9" textAnchor="middle">Sepatu</text>
-      <text x="142" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">Rp 120.000,00</text>
-      <text x="254" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
+      <text x="142" y="79" fill="var(--icon-color)" fontSize="9" textAnchor="middle">Rp 120.000,00</text>
+      <text x="254" y="79" fill="var(--icon-color)" fontSize="9" textAnchor="middle">20%</text>
     </svg>
   ) , jawaban: "D", pembahasan: "Tas: $80.000 \\times 0.85 = 68.000$, 3 tas = $204.000$.\nSendal: $50.000 \\times 0.75 = 37.500$, 2 sendal = $75.000$.\nSepatu: $120.000 \\times 0.8 = 96.000$.\nTotal = $204.000 + 75.000 + 96.000 = 375.000$. Jawaban D." },
   { no: 11, soal: "Seorang pedagang membeli satu karung beras dengan Bruto 50 kg dan Tara 2%. Harga pembelian karung beras tersebut adalah Rp5.000,00. Pedagang itu kemudian menjual beras tersebut secara eceran dengan harga Rp12.000,00 per kg (netto).\nBerapakah total uang yang diperoleh pedagang tersebut dari penjualan satu karung beras?", options: ["A. Rp600.000,00", "B. Rp588.000,00", "C. Rp583.000,00", "D. Rp88.000,00"] , jawaban: "B", pembahasan: "Tara = $2\\% \\times 50 = 1$ kg. Netto = $50 - 1 = 49$ kg.\nPenjualan = $49 \\times 12.000 = 588.000$. Jawaban B." },
@@ -264,7 +264,7 @@ const latihanOlimpiade = [
     <svg viewBox="0 0 110 52" width="110" height="52" className="my-2 block mx-auto">
       <rect x="0.5" y="0.5" width="109" height="51" fill="rgba(255,255,255,0.08)" stroke="#d1d5db" strokeWidth="1" rx="2"/>
       <line x1="1" y1="20" x2="109" y2="20" stroke="#d1d5db" strokeWidth="0.8"/>
-      <text x="55" y="14" fill="#ffffff" fontSize="10" fontWeight="bold" textAnchor="middle">Diskon</text>
+      <text x="55" y="14" fill="var(--icon-color)" fontSize="10" fontWeight="bold" textAnchor="middle">Diskon</text>
       <text x="55" y="38" fill="#facc15" fontSize="16" fontWeight="bold" textAnchor="middle">50% + 10%</text>
     </svg>
   ) , jawaban: "C", pembahasan: "Faktor pengurang harga setelah dua diskon: $0.5 \\times 0.9 = 0.45$.\nHarga awal = $\\dfrac{168.750}{0.45} = 375.000$. Jawaban C." },
@@ -290,16 +290,16 @@ const latihanOlimpiade = [
       <text x="200" y="39" fill="#facc15" fontSize="9" textAnchor="middle">D (40%)</text>
       <text x="280" y="39" fill="#facc15" fontSize="9" textAnchor="middle">A (38%)</text>
       <text x="360" y="39" fill="#facc15" fontSize="9" textAnchor="middle">A (42%)</text>
-      <text x="40"  y="61" fill="#ffffff" fontSize="9" textAnchor="middle">E (25%)</text>
-      <text x="120" y="61" fill="#ffffff" fontSize="9" textAnchor="middle">C (28%)</text>
-      <text x="200" y="61" fill="#ffffff" fontSize="9" textAnchor="middle">C (25%)</text>
-      <text x="280" y="61" fill="#ffffff" fontSize="9" textAnchor="middle">B (22%)</text>
-      <text x="360" y="61" fill="#ffffff" fontSize="9" textAnchor="middle">D (18%)</text>
-      <text x="40"  y="82" fill="#ffffff" fontSize="9" textAnchor="middle">D (18%)</text>
-      <text x="120" y="82" fill="#ffffff" fontSize="9" textAnchor="middle">B (18%)</text>
-      <text x="200" y="82" fill="#ffffff" fontSize="9" textAnchor="middle">E (15%)</text>
-      <text x="280" y="82" fill="#ffffff" fontSize="9" textAnchor="middle">C (21%)</text>
-      <text x="360" y="82" fill="#ffffff" fontSize="9" textAnchor="middle">E (15%)</text>
+      <text x="40"  y="61" fill="var(--icon-color)" fontSize="9" textAnchor="middle">E (25%)</text>
+      <text x="120" y="61" fill="var(--icon-color)" fontSize="9" textAnchor="middle">C (28%)</text>
+      <text x="200" y="61" fill="var(--icon-color)" fontSize="9" textAnchor="middle">C (25%)</text>
+      <text x="280" y="61" fill="var(--icon-color)" fontSize="9" textAnchor="middle">B (22%)</text>
+      <text x="360" y="61" fill="var(--icon-color)" fontSize="9" textAnchor="middle">D (18%)</text>
+      <text x="40"  y="82" fill="var(--icon-color)" fontSize="9" textAnchor="middle">D (18%)</text>
+      <text x="120" y="82" fill="var(--icon-color)" fontSize="9" textAnchor="middle">B (18%)</text>
+      <text x="200" y="82" fill="var(--icon-color)" fontSize="9" textAnchor="middle">E (15%)</text>
+      <text x="280" y="82" fill="var(--icon-color)" fontSize="9" textAnchor="middle">C (21%)</text>
+      <text x="360" y="82" fill="var(--icon-color)" fontSize="9" textAnchor="middle">E (15%)</text>
     </svg>
   ) , jawaban: "C", pembahasan: "Analisis tabel top-3 setiap tahun (asumsi semua perusahaan $\\geq 1\\%$, total = 100\\% per tahun):\n• 2010: B(35), E(25), D(18) ⇒ A,C masing-masing $\\leq 17\\%$, jadi E $>$ A, C, D.\n• 2011: A(30), C(28), B(18) ⇒ D, E $\\leq 17\\%$.\n• 2012: D(40), C(25), E(15) ⇒ A, B $< 15\\%$, jadi E $>$ A, B.\n• 2013: A(38), B(22), C(21) ⇒ D, E $\\leq 19\\%$.\n• 2014: A(42), D(18), E(15) ⇒ B, C $< 15\\%$, jadi E $>$ B, C.\nMembandingkan total 5 tahun, hanya A, B, C yang totalnya pasti lebih besar dari E.\nJawaban C = 3 perusahaan." },
 ];

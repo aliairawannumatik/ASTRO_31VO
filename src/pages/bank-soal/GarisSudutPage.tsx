@@ -359,13 +359,13 @@ const KonversiSVG = () => (
   <svg viewBox="0 0 280 90" className={svgClass}>
     <rect x="10" y="15" width="75" height="60" rx="6" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" strokeWidth="1.5"/>
     <text x="47" y="38" fill="#22d3ee" fontSize="9" textAnchor="middle" fontFamily="monospace">1 derajat</text>
-    <text x="47" y="54" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace">1°</text>
+    <text x="47" y="54" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace">1°</text>
     <rect x="105" y="15" width="80" height="60" rx="6" fill="rgba(168,85,247,0.15)" stroke="#a855f7" strokeWidth="1.5"/>
     <text x="145" y="38" fill="#c4b5fd" fontSize="9" textAnchor="middle" fontFamily="monospace">60 menit</text>
-    <text x="145" y="54" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace">60'</text>
+    <text x="145" y="54" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace">60'</text>
     <rect x="200" y="15" width="72" height="60" rx="6" fill="rgba(34,197,94,0.15)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="236" y="38" fill="#4ade80" fontSize="9" textAnchor="middle" fontFamily="monospace">3600 detik</text>
-    <text x="236" y="54" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace">3600''</text>
+    <text x="236" y="54" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace">3600''</text>
     <text x="96" y="47" fill="#64748b" fontSize="12" textAnchor="middle">=</text>
     <text x="194" y="47" fill="#64748b" fontSize="12" textAnchor="middle">=</text>
   </svg>
@@ -440,7 +440,7 @@ const JamSudutSVG = ({ jam = 3, note = "" }: { jam?: number; note?: string }) =>
       })}
       <line x1={cx} y1={cy} x2={ph.x} y2={ph.y} stroke="#fbbf24" strokeWidth="3" strokeLinecap="round"/>
       <line x1={cx} y1={cy} x2={pm.x} y2={pm.y} stroke="#94a3b8" strokeWidth="2" strokeLinecap="round"/>
-      <circle cx={cx} cy={cy} r="4" fill="#fff"/>
+      <circle cx={cx} cy={cy} r="4" fill="var(--icon-color)"/>
       {/* angle arc */}
       <path d={`M ${pt(cx,cy,22,90).x} ${pt(cx,cy,22,90).y} A 22 22 0 0 ${jamAngle > 90 ? 0 : 1} ${pt(cx,cy,22,jamAngle).x} ${pt(cx,cy,22,jamAngle).y}`}
         fill="none" stroke="#06b6d4" strokeWidth="1.5"/>

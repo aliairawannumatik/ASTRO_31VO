@@ -400,7 +400,7 @@ const OlimpiadeTransformasiPage = () => {
                           <text x="225" y="76" fill="#22d3ee" fontSize="12" fontWeight="bold">A(x, y)</text>
                           <circle cx="100" cy="40" r="5" fill="#f59e0b" />
                           <text x="50" y="36" fill="#f59e0b" fontSize="12" fontWeight="bold">A'(−y, x)</text>
-                          <circle cx="140" cy="120" r="4" fill="white" fillOpacity="0.6" />
+                          <circle cx="140" cy="120" r="4" fill="var(--icon-color)" fillOpacity="0.6" />
                         </svg>
                       </div>
                     )}
@@ -444,7 +444,7 @@ const OlimpiadeTransformasiPage = () => {
                           <line x1="40" y1="175" x2="205" y2="93" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeDasharray="4 3" />
                           {/* k label */}
                           <text x="160" y="140" textAnchor="middle" fill="#a78bfa" fontSize="12" fontWeight="bold">k = 2</text>
-                          <circle cx="40" cy="175" r="4" fill="white" fillOpacity="0.6" />
+                          <circle cx="40" cy="175" r="4" fill="var(--icon-color)" fillOpacity="0.6" />
                         </svg>
                       </div>
                     )}

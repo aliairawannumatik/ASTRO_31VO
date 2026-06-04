@@ -132,11 +132,11 @@ const SubmaterialGameVariantsChooserK9 = () => {
       <div className={`relative min-h-screen flex flex-col items-center justify-center ${isLight ? "gradient-snow" : "gradient-space"}`}>
         {isLight ? <Snowfall /> : <Starfield />}
         <div className="relative z-10 text-center px-6">
-          <h1 className="font-display text-2xl font-black text-white mb-2">Sub-materi tidak ditemukan</h1>
-          <p className="text-white/60 text-sm mb-6">Sub-materi ini belum tersedia di Math Game Arena.</p>
+          <h1 className="font-display text-2xl font-black mb-2" style={{ color: "var(--text-primary)" }}>Sub-materi tidak ditemukan</h1>
+          <p className="text-sm mb-6 font-body" style={{ color: "var(--text-secondary)" }}>Sub-materi ini belum tersedia di Math Game Arena.</p>
           <button
             onClick={() => navigate(-1)}
-            className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20 transition-colors"
+            className="rounded-full px-5 py-2 text-sm font-bold transition-colors" style={{ border: "1px solid var(--border)", background: "var(--btn-bg)", color: "var(--text-primary)" }}
           >
             ← Kembali
           </button>
@@ -164,7 +164,7 @@ const SubmaterialGameVariantsChooserK9 = () => {
           <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
             Kelas 9 · Math Game Arena
           </p>
-          <div className="mt-3 flex items-center justify-center gap-2 text-white/40 text-[11px] font-body">
+          <div className="mt-3 flex items-center justify-center gap-2 text-[11px] font-body" style={{ color: "var(--text-secondary)" }}>
             <span>🎮</span>
             <span>Pilih game favoritmu untuk berlatih {entry.label.toLowerCase()}!</span>
           </div>
@@ -235,9 +235,9 @@ const SubmaterialGameVariantsChooserK9 = () => {
                       </defs>
                       <path d="M26,26 L48,14 A22,22 0 1,0 48,38 Z" fill="url(#chs-k9-pac)"/>
                       <circle cx="32" cy="15" r="3" fill="#1a0a00"/>
-                      <circle cx="33" cy="14" r="1.2" fill="rgba(255,255,255,0.75)"/>
+                      <circle cx="33" cy="14" r="1.2" fill="var(--icon-color)"/>
                       <ellipse cx="16" cy="30" rx="5" ry="3.5" fill="rgba(255,120,60,0.35)"/>
-                      <path d="M31,22 L34,27 M37,19 L38,25 M43,16 L42,22" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.6"/>
+                      <path d="M31,22 L34,27 M37,19 L38,25 M43,16 L42,22" stroke="var(--icon-stroke)" strokeWidth="1.5" strokeLinecap="round" opacity="0.6"/>
                     </svg>
                   ) : (
                     <span className="text-4xl">{v.emoji}</span>
@@ -275,7 +275,7 @@ const SubmaterialGameVariantsChooserK9 = () => {
         <div className="mt-10 text-center">
           <button
             onClick={() => { playPopSound(); navigate(parentPath); }}
-            className="text-sm text-white/40 hover:text-cyan-400 transition-colors cursor-pointer font-body"
+            className="text-sm hover:text-cyan-400 transition-colors cursor-pointer font-body" style={{ color: "var(--text-secondary)" }}
           >
             ← Kembali ke {entry.parentLabel}
           </button>

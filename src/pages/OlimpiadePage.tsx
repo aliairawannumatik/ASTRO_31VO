@@ -153,7 +153,7 @@ const TrophySVG = () => (
     <rect x="18" y="52" width="28" height="5" fill="url(#tg1)" rx="2.5" />
     {/* Star on cup */}
     <path d="M32 16 l1.8 5.5 h5.8 l-4.7 3.4 1.8 5.5 L32 27l-4.7 3.4 1.8-5.5-4.7-3.4h5.8Z"
-      fill="#fff" fillOpacity="0.55" />
+      fill="var(--icon-color)" fillOpacity="0.55" />
   </svg>
 );
 

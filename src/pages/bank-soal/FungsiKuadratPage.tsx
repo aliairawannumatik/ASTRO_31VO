@@ -56,7 +56,7 @@ const FungsiKuadratUmumSVG = () => (
     <rect x="0" y="0" width="320" height="110" rx="6" fill="rgba(0,0,0,0.25)"/>
     <text x="160" y="17" fill="#c084fc" fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">FUNGSI KUADRAT — Bentuk Umum</text>
     <rect x="15" y="24" width="290" height="42" rx="6" fill="rgba(139,92,246,0.15)" stroke="#8b5cf6" strokeWidth="1.5"/>
-    <text x="160" y="44" fill="#fff" fontSize="13" textAnchor="middle" fontFamily="monospace" fontWeight="bold">f(x) = ax² + bx + c</text>
+    <text x="160" y="44" fill="var(--icon-color)" fontSize="13" textAnchor="middle" fontFamily="monospace" fontWeight="bold">f(x) = ax² + bx + c</text>
     <text x="160" y="58" fill="#a78bfa" fontSize="8" textAnchor="middle" fontFamily="monospace">a ≠ 0 · a, b, c ∈ ℝ · Derajat 2</text>
     <rect x="15" y="72" width="88" height="28" rx="4" fill="rgba(6,182,212,0.1)" stroke="#06b6d4" strokeWidth="1"/>
     <text x="59" y="84" fill="#67e8f9" fontSize="7.5" textAnchor="middle" fontFamily="monospace">a: koefisien x²</text>

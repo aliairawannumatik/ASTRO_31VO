@@ -62,7 +62,7 @@ const SPLDVSystemSVG = ({ eq1, eq2, sol }: { eq1: string; eq2: string; sol: stri
     <text x="25" y="75" fill="#c084fc" fontSize="10" fontFamily="monospace">{eq2}</text>
     <rect x="225" y="35" width="60" height="47" rx="4" fill="rgba(34,197,94,0.15)" stroke="#22c55e" strokeWidth="1"/>
     <text x="255" y="52" fill="#4ade80" fontSize="7" textAnchor="middle" fontFamily="monospace">Solusi</text>
-    <text x="255" y="68" fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{sol}</text>
+    <text x="255" y="68" fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{sol}</text>
     <text x="155" y="97" fill="#fde68a" fontSize="7.5" textAnchor="middle" fontFamily="monospace">SPLDV: dua persamaan, dua variabel</text>
   </svg>
 );
@@ -101,15 +101,15 @@ const SubstitusiSVG = ({ from, sub, result }: { from: string; sub: string; resul
     <rect x="10" y="10" width="280" height="80" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155" strokeWidth="1"/>
     <rect x="20" y="20" width="80" height="26" rx="4" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" strokeWidth="1.5"/>
     <text x="60" y="30" fill="#22d3ee" fontSize="7" textAnchor="middle" fontFamily="monospace">Dari Pers. (1)</text>
-    <text x="60" y="42" fill="#fff" fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{from}</text>
+    <text x="60" y="42" fill="var(--icon-color)" fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{from}</text>
     <text x="115" y="36" fill="#64748b" fontSize="14" textAnchor="middle" fontFamily="monospace">→</text>
     <rect x="130" y="20" width="90" height="26" rx="4" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="1.5"/>
     <text x="175" y="30" fill="#c084fc" fontSize="7" textAnchor="middle" fontFamily="monospace">Substitusi ke (2)</text>
-    <text x="175" y="42" fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{sub}</text>
+    <text x="175" y="42" fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{sub}</text>
     <text x="234" y="36" fill="#64748b" fontSize="14" textAnchor="middle" fontFamily="monospace">→</text>
     <rect x="245" y="20" width="45" height="26" rx="4" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="268" y="30" fill="#4ade80" fontSize="7" textAnchor="middle" fontFamily="monospace">Solusi</text>
-    <text x="268" y="42" fill="#fff" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{result}</text>
+    <text x="268" y="42" fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{result}</text>
     <text x="150" y="82" fill="#fde68a" fontSize="7.5" textAnchor="middle" fontFamily="monospace">Metode Substitusi: nyatakan satu var dari satu pers.</text>
   </svg>
 );
@@ -123,7 +123,7 @@ const EliminasiSVG = ({ top, bot, elim, val }: { top: string; bot: string; elim:
     <text x="20" y="67" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold">{elim}</text>
     <rect x="210" y="28" width="75" height="40" rx="4" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="248" y="42" fill="#4ade80" fontSize="7" textAnchor="middle" fontFamily="monospace">Diperoleh</text>
-    <text x="248" y="58" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{val}</text>
+    <text x="248" y="58" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{val}</text>
     <text x="150" y="95" fill="#fde68a" fontSize="7.5" textAnchor="middle" fontFamily="monospace">Metode Eliminasi: samakan koefisien</text>
   </svg>
 );
@@ -133,14 +133,14 @@ const KontekstualSPLDVSVG = ({ item1, item2, harga1, harga2, total }: { item1: s
     <rect x="10" y="10" width="280" height="100" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155" strokeWidth="1"/>
     <rect x="20" y="25" width="80" height="35" rx="4" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" strokeWidth="1.5"/>
     <text x="60" y="38" fill="#22d3ee" fontSize="8" textAnchor="middle" fontFamily="monospace">{item1}</text>
-    <text x="60" y="52" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{harga1}</text>
+    <text x="60" y="52" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{harga1}</text>
     <rect x="115" y="25" width="80" height="35" rx="4" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="1.5"/>
     <text x="155" y="38" fill="#c084fc" fontSize="8" textAnchor="middle" fontFamily="monospace">{item2}</text>
-    <text x="155" y="52" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{harga2}</text>
+    <text x="155" y="52" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{harga2}</text>
     <text x="210" y="45" fill="#64748b" fontSize="14" textAnchor="middle" fontFamily="monospace">=</text>
     <rect x="222" y="25" width="58" height="35" rx="4" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="251" y="38" fill="#fbbf24" fontSize="8" textAnchor="middle" fontFamily="monospace">Total</text>
-    <text x="251" y="52" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{total}</text>
+    <text x="251" y="52" fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{total}</text>
     <text x="150" y="82" fill="#94a3b8" fontSize="7.5" textAnchor="middle" fontFamily="monospace">Misal: x = harga {item1}, y = harga {item2}</text>
     <text x="150" y="97" fill="#fde68a" fontSize="7.5" textAnchor="middle" fontFamily="monospace">Buat dua persamaan → selesaikan SPLDV</text>
   </svg>

@@ -381,7 +381,7 @@ const Soal27SVG = () => {
         const rects: ReactNode[] = [];
         for (let r = 0; r < 2; r++)
           for (let c = 0; c < p.cols; c++)
-            rects.push(<rect key={`${r}-${c}`} x={x + c * sq} y={6 + r * sq} width={sq} height={sq} fill="#5b9ec9" stroke="white" strokeWidth="1.5" rx="1" />);
+            rects.push(<rect key={`${r}-${c}`} x={x + c * sq} y={6 + r * sq} width={sq} height={sq} fill="#5b9ec9" stroke="var(--icon-stroke)" strokeWidth="1.5" rx="1" />);
         return <g key={i}>{rects}</g>;
       })}
     </svg>

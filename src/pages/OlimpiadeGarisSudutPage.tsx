@@ -47,7 +47,7 @@ const SudutPosNegSVG = () => (
   <svg viewBox="0 0 340 195" className="w-full max-w-md mx-auto" style={{ background: "transparent" }}>
     <defs>
       <marker id="ah-gsv" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-        <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="#ffffff" />
+        <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="var(--icon-color)" />
       </marker>
       <marker id="ah-gsv-yellow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
         <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="#F0C040" />
@@ -56,9 +56,9 @@ const SudutPosNegSVG = () => (
 
     {/* ── LEFT: Sudut Positif ── */}
     {/* OA arm → right */}
-    <line x1="80" y1="120" x2="150" y2="120" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="80" y1="120" x2="150" y2="120" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* OB arm → upper-left (130°) */}
-    <line x1="80" y1="120" x2="40" y2="72" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="80" y1="120" x2="40" y2="72" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* Arc CCW from 0° to 130°: sweep-flag=0 */}
     <path d="M 116,120 A 36,36 0 0,0 56.9,92.4" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv-yellow)" />
     {/* Labels */}
@@ -70,13 +70,13 @@ const SudutPosNegSVG = () => (
     <text x="80"  y="170" fill="#38bdf8" fontSize="8.5" textAnchor="middle" opacity="0.85">berlawanan arah jarum jam</text>
 
     {/* Divider */}
-    <line x1="170" y1="10" x2="170" y2="185" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="4,4" opacity="0.35" />
+    <line x1="170" y1="10" x2="170" y2="185" stroke="var(--icon-stroke)" strokeWidth="0.5" strokeDasharray="4,4" opacity="0.35" />
 
     {/* ── RIGHT: Sudut Negatif ── */}
     {/* OA arm → right */}
-    <line x1="250" y1="80" x2="320" y2="80" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="250" y1="80" x2="320" y2="80" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* OB arm → lower-left (-130° = 230°) */}
-    <line x1="250" y1="80" x2="210" y2="128" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="250" y1="80" x2="210" y2="128" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* Arc CW from 0° to -130°: sweep-flag=1 */}
     <path d="M 286,80 A 36,36 0 0,1 226.9,107.6" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv-yellow)" />
     {/* Labels */}
@@ -314,10 +314,10 @@ const Soal1SVG = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     {/* Horizontal line passing through N – K – L */}
-    <line x1="20" y1="175" x2="400" y2="175" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="175" x2="400" y2="175" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Triangle sides KM and ML */}
-    <line x1="140" y1="175" x2="240" y2="35" stroke="#ffffff" strokeWidth="2" />
-    <line x1="240" y1="35"  x2="380" y2="175" stroke="#ffffff" strokeWidth="2" />
+    <line x1="140" y1="175" x2="240" y2="35" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="240" y1="35"  x2="380" y2="175" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* Angle arcs (small accents to show the 3 angles) */}
     {/* Angle at M (apex) — opens downward, ~50° */}
@@ -367,11 +367,11 @@ const Soal2SVG = () => (
   <svg viewBox="0 0 420 220" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <defs><ArrowDef id="ar-s2" /></defs>
     {/* Transversal c */}
-    <line x1="20" y1="120" x2="400" y2="120" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s2)" />
+    <line x1="20" y1="120" x2="400" y2="120" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s2)" />
     {/* Line a (left, ↗) */}
-    <line x1="60" y1="200" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s2)" />
+    <line x1="60" y1="200" x2="180" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s2)" />
     {/* Line b (right, ↗, parallel to a) */}
-    <line x1="220" y1="200" x2="340" y2="40" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s2)" />
+    <line x1="220" y1="200" x2="340" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s2)" />
 
     <text x="178" y="32" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">a</text>
     <text x="338" y="32" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">b</text>
@@ -399,10 +399,10 @@ const Soal2SVG = () => (
 // ── Soal 3: Two parallel horizontal lines (A, B) cut by transversal ──────────
 const Soal3SVG = () => (
   <svg viewBox="0 0 380 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <line x1="20" y1="80" x2="360" y2="80" stroke="#ffffff" strokeWidth="2" />
-    <line x1="20" y1="180" x2="360" y2="180" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="80" x2="360" y2="80" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="20" y1="180" x2="360" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Transversal — slope 220/160 = 1.375; at y=80 x≈164, at y=180 x≈236 */}
-    <line x1="120" y1="20" x2="280" y2="240" stroke="#ffffff" strokeWidth="2" />
+    <line x1="120" y1="20" x2="280" y2="240" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="80" y="60" fill="#38bdf8" fontSize="16" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
     <text x="80" y="160" fill="#38bdf8" fontSize="16" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
@@ -429,10 +429,10 @@ const Soal3SVG = () => (
 // ── Soal 4: Two parallel lines BD, EG; transversal AH; angles (3x)°, (x+40)° ─
 const Soal4SVG = () => (
   <svg viewBox="0 0 360 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <line x1="40" y1="100" x2="320" y2="100" stroke="#ffffff" strokeWidth="2" />
-    <line x1="40" y1="220" x2="320" y2="220" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="100" x2="320" y2="100" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="40" y1="220" x2="320" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Transversal AH near vertical, slight tilt */}
-    <line x1="160" y1="20" x2="200" y2="280" stroke="#ffffff" strokeWidth="2" />
+    <line x1="160" y1="20" x2="200" y2="280" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* C ≈ (172, 100), F ≈ (190, 220) on the transversal */}
     <text x="186" y="14" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
@@ -456,8 +456,8 @@ const Soal4SVG = () => (
 // ── Soal 5: Line C-B-A horizontal, ray BD up; angles (2x+5)°, (3x-25)° ───────
 const Soal5SVG = () => (
   <svg viewBox="0 0 380 200" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <line x1="20" y1="150" x2="360" y2="150" stroke="#ffffff" strokeWidth="2" />
-    <line x1="200" y1="150" x2="290" y2="40" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="150" x2="360" y2="150" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="200" y1="150" x2="290" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="20" y="170" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
     <text x="194" y="172" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
@@ -476,11 +476,11 @@ const Soal7SVG = () => (
   <svg viewBox="0 0 360 220" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <defs><ArrowDef id="ar-s7" /></defs>
     {/* Horizontal P-Q-extension */}
-    <line x1="40" y1="170" x2="340" y2="170" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s7)" />
+    <line x1="40" y1="170" x2="340" y2="170" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s7)" />
     {/* PR */}
-    <line x1="60" y1="170" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" />
+    <line x1="60" y1="170" x2="180" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* QR */}
-    <line x1="240" y1="170" x2="180" y2="40" stroke="#ffffff" strokeWidth="2" />
+    <line x1="240" y1="170" x2="180" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="44" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">P</text>
     <text x="232" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">Q</text>
@@ -499,11 +499,11 @@ const Soal7SVG = () => (
 const Soal8SVG = () => (
   <svg viewBox="0 0 380 220" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <defs><ArrowDef id="ar-s8" /></defs>
-    <line x1="20" y1="170" x2="360" y2="170" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s8)" />
+    <line x1="20" y1="170" x2="360" y2="170" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s8)" />
     {/* AC */}
-    <line x1="40" y1="170" x2="200" y2="40" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="170" x2="200" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* BC */}
-    <line x1="240" y1="170" x2="200" y2="40" stroke="#ffffff" strokeWidth="2" />
+    <line x1="240" y1="170" x2="200" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="32" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
     <text x="232" y="190" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
@@ -521,11 +521,11 @@ const Soal9SVG = () => (
   <svg viewBox="0 0 380 260" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <defs><ArrowDef id="ar-s9" /></defs>
     {/* A-B-D horizontal */}
-    <line x1="20" y1="220" x2="360" y2="220" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s9)" />
+    <line x1="20" y1="220" x2="360" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s9)" />
     {/* AC and CE collinear: A(40,220) -> C(160,80) -> E(200,33) */}
-    <line x1="40" y1="220" x2="200" y2="33" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="220" x2="200" y2="33" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* BC: B(220,220) -> C(160,80) */}
-    <line x1="220" y1="220" x2="160" y2="80" stroke="#ffffff" strokeWidth="2" />
+    <line x1="220" y1="220" x2="160" y2="80" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="32" y="240" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
     <text x="212" y="240" fill="#38bdf8" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
@@ -542,11 +542,11 @@ const Soal9SVG = () => (
 // ── Soal 13: Cyclic quadrilateral inscribed in a circle with α, β, δ, θ ──────
 const Soal13SVG = () => (
   <svg viewBox="0 0 280 280" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <circle cx="140" cy="140" r="110" stroke="#ffffff" strokeWidth="2" fill="none" />
+    <circle cx="140" cy="140" r="110" stroke="var(--icon-stroke)" strokeWidth="2" fill="none" />
     {/* Vertices on circle: α(left), θ(top-right), δ(right), β(bottom) */}
     {/* Polar angles: α≈180°, θ≈55°, δ≈340°, β≈260° */}
     {/* α: (30,140), θ: (203,50), δ: (243,178), β: (121,248) */}
-    <polygon points="30,140 203,50 243,178 121,248" fill="none" stroke="#ffffff" strokeWidth="2" />
+    <polygon points="30,140 203,50 243,178 121,248" fill="none" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* Arcs at each vertex — span between the two adjacent polygon edges */}
     {/* α(30,140): edges to θ(NE, -27.5°) and β(SE, 49.9°), interior opens east */}
@@ -625,10 +625,10 @@ const Soal14SVG = () => {
 const Soal15SVG = () => (
   <svg viewBox="0 0 380 265" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* l₁ and l₂ horizontal lines */}
-    <line x1="30"  y1="85"  x2="335" y2="85"  stroke="#ffffff" strokeWidth="2" />
-    <line x1="30"  y1="185" x2="335" y2="185" stroke="#ffffff" strokeWidth="2" />
+    <line x1="30"  y1="85"  x2="335" y2="85"  stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="30"  y1="185" x2="335" y2="185" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Transversal (slanted: lower-left → upper-right) */}
-    <line x1="212" y1="10"  x2="150" y2="250" stroke="#ffffff" strokeWidth="2" />
+    <line x1="212" y1="10"  x2="150" y2="250" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* Labels */}
     <text x="342" y="91"  fill="#fbbf24" fontSize="14" fontFamily="serif" fontStyle="italic">l₁</text>
@@ -665,8 +665,8 @@ const Soal15SVG = () => (
 // ── Soal 16: Two intersecting lines forming X with p, q, r, s ────────────────
 const Soal16SVG = () => (
   <svg viewBox="0 0 420 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <line x1="20" y1="60" x2="400" y2="180" stroke="#ffffff" strokeWidth="2" />
-    <line x1="20" y1="180" x2="400" y2="60" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="60" x2="400" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="20" y1="180" x2="400" y2="60" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* Center ≈ (210, 120) */}
     <circle cx="210" cy="120" r="3.5" fill="#ef4444" />
@@ -686,20 +686,20 @@ const Soal17SVG = () => {
   return (
     <svg viewBox="0 0 320 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
       {/* Hidden edges (DA, DC, DH dashed) */}
-      <line x1={D[0]} y1={D[1]} x2={A[0]} y2={A[1]} stroke="#ffffff" strokeWidth="1.5" strokeDasharray="5,4" />
-      <line x1={D[0]} y1={D[1]} x2={C[0]} y2={C[1]} stroke="#ffffff" strokeWidth="1.5" strokeDasharray="5,4" />
-      <line x1={D[0]} y1={D[1]} x2={H[0]} y2={H[1]} stroke="#ffffff" strokeWidth="1.5" strokeDasharray="5,4" />
+      <line x1={D[0]} y1={D[1]} x2={A[0]} y2={A[1]} stroke="var(--icon-stroke)" strokeWidth="1.5" strokeDasharray="5,4" />
+      <line x1={D[0]} y1={D[1]} x2={C[0]} y2={C[1]} stroke="var(--icon-stroke)" strokeWidth="1.5" strokeDasharray="5,4" />
+      <line x1={D[0]} y1={D[1]} x2={H[0]} y2={H[1]} stroke="var(--icon-stroke)" strokeWidth="1.5" strokeDasharray="5,4" />
 
       {/* Visible edges */}
-      <line x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={B[0]} y1={B[1]} x2={C[0]} y2={C[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={A[0]} y1={A[1]} x2={E[0]} y2={E[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={B[0]} y1={B[1]} x2={F[0]} y2={F[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={C[0]} y1={C[1]} x2={G[0]} y2={G[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={E[0]} y1={E[1]} x2={F[0]} y2={F[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={F[0]} y1={F[1]} x2={G[0]} y2={G[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={G[0]} y1={G[1]} x2={H[0]} y2={H[1]} stroke="#ffffff" strokeWidth="2" />
-      <line x1={H[0]} y1={H[1]} x2={E[0]} y2={E[1]} stroke="#ffffff" strokeWidth="2" />
+      <line x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={B[0]} y1={B[1]} x2={C[0]} y2={C[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={A[0]} y1={A[1]} x2={E[0]} y2={E[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={B[0]} y1={B[1]} x2={F[0]} y2={F[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={C[0]} y1={C[1]} x2={G[0]} y2={G[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={E[0]} y1={E[1]} x2={F[0]} y2={F[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={F[0]} y1={F[1]} x2={G[0]} y2={G[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={G[0]} y1={G[1]} x2={H[0]} y2={H[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
+      <line x1={H[0]} y1={H[1]} x2={E[0]} y2={E[1]} stroke="var(--icon-stroke)" strokeWidth="2" />
 
       {/* Diagonals BG, GE, EB highlighted */}
       <line x1={B[0]} y1={B[1]} x2={G[0]} y2={G[1]} stroke="#ef4444" strokeWidth="2.4" />
@@ -727,14 +727,14 @@ const Soal17SVG = () => {
 // Quadrant III(lower-left) : 2x — between diagonal-toward-A and horizontal-left
 const Soal18SVG = () => (
   <svg viewBox="0 0 380 240" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <line x1="20" y1="140" x2="360" y2="140" stroke="#ffffff" strokeWidth="2" />
-    <line x1="200" y1="20" x2="200" y2="220" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="140" x2="360" y2="140" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="200" y1="20" x2="200" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Diagonal A(lower-left) → B(upper-right) through O(200,140) */}
-    <line x1="40" y1="180" x2="360" y2="100" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="180" x2="360" y2="100" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* Right-angle marker in quadrant II (upper-left of O):
         vertical-up point (200,126) → left (186,126) → horizontal-left point (186,140) */}
-    <polyline points="200,126 186,126 186,140" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+    <polyline points="200,126 186,126 186,140" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" />
 
     {/* O label — slightly right and below intersection */}
     <text x="204" y="155" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">O</text>
@@ -821,20 +821,20 @@ const Soal19SVG = () => (
 const Soal20SVG = () => (
   <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* Top side AB */}
-    <line x1="60" y1="80" x2="360" y2="80" stroke="#ffffff" strokeWidth="2" />
+    <line x1="60" y1="80" x2="360" y2="80" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Bottom side DC */}
-    <line x1="40" y1="220" x2="320" y2="220" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="220" x2="320" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* AD */}
-    <line x1="60" y1="80" x2="40" y2="220" stroke="#ffffff" strokeWidth="2" />
+    <line x1="60" y1="80" x2="40" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* BC */}
-    <line x1="360" y1="80" x2="320" y2="220" stroke="#ffffff" strokeWidth="2" />
+    <line x1="360" y1="80" x2="320" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Inner triangle from A down to a point on DC */}
-    <line x1="60" y1="80" x2="180" y2="220" stroke="#ffffff" strokeWidth="2" />
+    <line x1="60" y1="80" x2="180" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Small ray going up from A creating x */}
-    <line x1="60" y1="80" x2="40" y2="20" stroke="#ffffff" strokeWidth="2" />
+    <line x1="60" y1="80" x2="40" y2="20" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* Right angle marker at A (between AB and the ray going up) */}
-    <polyline points="60,68 72,68 72,80" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+    <polyline points="60,68 72,68 72,80" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" />
 
     <text x="44" y="76" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
     <text x="364" y="76" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
@@ -854,14 +854,14 @@ const Soal20SVG = () => (
 const Soal21SVG = () => (
   <svg viewBox="0 0 400 290" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* Horizontal line: full width, Q at center-left */}
-    <line x1="20" y1="180" x2="375" y2="180" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="180" x2="375" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Vertical PQ: from P above down to Q */}
-    <line x1="200" y1="20" x2="200" y2="180" stroke="#ffffff" strokeWidth="2" />
+    <line x1="200" y1="20" x2="200" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Diagonal QS: exactly 32° above horizontal right — endpoint at Q+115·(cos32°,−sin32°) */}
-    <line x1="200" y1="180" x2="298" y2="119" stroke="#ffffff" strokeWidth="2" />
+    <line x1="200" y1="180" x2="298" y2="119" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* Right-angle marker at Q — upper-right (between QP-up and QR-right) */}
-    <polyline points="200,160 220,160 220,180" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+    <polyline points="200,160 220,160 220,180" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" />
 
     {/* Labels */}
     <text x="192" y="14" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
@@ -890,13 +890,13 @@ const Soal22SVG = () => (
   <svg viewBox="0 0 400 300" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <defs><ArrowDef id="ar-s22" /></defs>
     {/* Top horizontal l */}
-    <line x1="20" y1="80" x2="380" y2="80" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s22)" />
+    <line x1="20" y1="80" x2="380" y2="80" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s22)" />
     {/* Bottom horizontal m */}
-    <line x1="20" y1="240" x2="380" y2="240" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s22)" />
+    <line x1="20" y1="240" x2="380" y2="240" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s22)" />
     {/* Diagonal from upper-left going down-right, crossing both lines */}
-    <line x1="200" y1="20" x2="120" y2="290" stroke="#ffffff" strokeWidth="2" />
+    <line x1="200" y1="20" x2="120" y2="290" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Triangle: from (170, 130) on diagonal go to point on bottom line */}
-    <line x1="170" y1="130" x2="320" y2="240" stroke="#ffffff" strokeWidth="2" />
+    <line x1="170" y1="130" x2="320" y2="240" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="364" y="74" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">l</text>
     <text x="364" y="234" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">m</text>
@@ -925,11 +925,11 @@ const Soal22SVG = () => (
 const Soal23SVG = () => (
   <svg viewBox="0 0 380 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* AB horizontal */}
-    <line x1="40" y1="240" x2="340" y2="240" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="240" x2="340" y2="240" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* AD diagonal through C */}
-    <line x1="40" y1="240" x2="220" y2="20" stroke="#ffffff" strokeWidth="2" />
+    <line x1="40" y1="240" x2="220" y2="20" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* BC: B(300,240) -> C at intersection with AD ≈ (166,87) */}
-    <line x1="300" y1="240" x2="166" y2="87" stroke="#ffffff" strokeWidth="2" />
+    <line x1="300" y1="240" x2="166" y2="87" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="32" y="262" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
     <text x="304" y="262" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
@@ -952,11 +952,11 @@ const Soal23SVG = () => (
 const Soal24SVG = () => (
   <svg viewBox="0 0 440 360" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* Parallelogram S(40,180) - P(140,40) - Q(380,40) - R(280,180) */}
-    <polygon points="40,180 140,40 380,40 280,180" fill="none" stroke="#ffffff" strokeWidth="2" />
+    <polygon points="40,180 140,40 380,40 280,180" fill="none" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* PT line through U (on SR). U at (180,180). T at (220,320) */}
-    <line x1="140" y1="40" x2="220" y2="320" stroke="#ffffff" strokeWidth="2" />
+    <line x1="140" y1="40" x2="220" y2="320" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* QT line from Q to T */}
-    <line x1="380" y1="40" x2="220" y2="320" stroke="#ffffff" strokeWidth="2" />
+    <line x1="380" y1="40" x2="220" y2="320" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="22" y="194" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
     <text x="130" y="34" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
@@ -976,8 +976,8 @@ const Soal24SVG = () => (
 // ── Soal 25: Horizontal line with one ray going up; angles x (left) y (right) ──
 const Soal25SVG = () => (
   <svg viewBox="0 0 400 200" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    <line x1="20" y1="160" x2="380" y2="160" stroke="#ffffff" strokeWidth="2" />
-    <line x1="220" y1="160" x2="170" y2="40" stroke="#ffffff" strokeWidth="2" />
+    <line x1="20" y1="160" x2="380" y2="160" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="220" y1="160" x2="170" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* x arc: from left-horizontal (185,160) clockwise up to ray direction (207,128); r=35 */}
     <path d="M 185,160 A 35,35 0 0,1 207,128" fill="none" stroke="#38bdf8" strokeWidth="1.8" />
@@ -987,7 +987,7 @@ const Soal25SVG = () => (
     <path d="M 207,128 A 35,35 0 0,1 255,160" fill="none" stroke="#fbbf24" strokeWidth="1.8" />
     <text x="229" y="151" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">y</text>
 
-    <circle cx="220" cy="160" r="3" fill="#ffffff" />
+    <circle cx="220" cy="160" r="3" fill="var(--icon-color)" />
   </svg>
 );
 
@@ -997,17 +997,17 @@ const Soal26SVG = () => (
     <defs>
       <ArrowDef id="ar-s26-l" color="#ffffff" />
       <marker id="ar-s26-l-start" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
-        <path d="M 7 0 L 0 4 L 7 8 Z" fill="#ffffff" />
+        <path d="M 7 0 L 0 4 L 7 8 Z" fill="var(--icon-color)" />
       </marker>
     </defs>
     {/* Top line AD */}
-    <line x1="20" y1="60" x2="380" y2="60" stroke="#ffffff" strokeWidth="2" markerStart="url(#ar-s26-l-start)" markerEnd="url(#ar-s26-l)" />
+    <line x1="20" y1="60" x2="380" y2="60" stroke="var(--icon-stroke)" strokeWidth="2" markerStart="url(#ar-s26-l-start)" markerEnd="url(#ar-s26-l)" />
     {/* Bottom line EG */}
-    <line x1="20" y1="200" x2="380" y2="200" stroke="#ffffff" strokeWidth="2" markerStart="url(#ar-s26-l-start)" markerEnd="url(#ar-s26-l)" />
+    <line x1="20" y1="200" x2="380" y2="200" stroke="var(--icon-stroke)" strokeWidth="2" markerStart="url(#ar-s26-l-start)" markerEnd="url(#ar-s26-l)" />
     {/* B-F */}
-    <line x1="120" y1="60" x2="200" y2="200" stroke="#ffffff" strokeWidth="2" />
+    <line x1="120" y1="60" x2="200" y2="200" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* C-F */}
-    <line x1="280" y1="60" x2="200" y2="200" stroke="#ffffff" strokeWidth="2" />
+    <line x1="280" y1="60" x2="200" y2="200" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="20" y="50" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
     <text x="116" y="50" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
@@ -1027,11 +1027,11 @@ const Soal26SVG = () => (
 const Soal27SVG = () => (
   <svg viewBox="0 0 380 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <defs><ArrowDef id="ar-s27" /></defs>
-    <line x1="40" y1="40" x2="360" y2="40" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s27)" />
-    <line x1="40" y1="240" x2="360" y2="240" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s27)" />
+    <line x1="40" y1="40" x2="360" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s27)" />
+    <line x1="40" y1="240" x2="360" y2="240" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s27)" />
     {/* Zigzag: top point (90,40) -> middle vertex (240,140) -> bottom (90,240) */}
-    <line x1="90" y1="40" x2="240" y2="140" stroke="#ffffff" strokeWidth="2" />
-    <line x1="240" y1="140" x2="90" y2="240" stroke="#ffffff" strokeWidth="2" />
+    <line x1="90" y1="40" x2="240" y2="140" stroke="var(--icon-stroke)" strokeWidth="2" />
+    <line x1="240" y1="140" x2="90" y2="240" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     <text x="122" y="56" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>
     <text x="206" y="148" fill="#fbbf24" fontSize="13" fontFamily="serif"><tspan fontStyle="italic">a</tspan>°</text>
@@ -1048,13 +1048,13 @@ const Soal28SVG = () => (
   <svg viewBox="0 0 380 260" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     <defs><ArrowDef id="ar-s28" /></defs>
     {/* Top horizontal */}
-    <line x1="40" y1="60" x2="360" y2="60" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s28)" />
+    <line x1="40" y1="60" x2="360" y2="60" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s28)" />
     {/* Bottom horizontal */}
-    <line x1="40" y1="220" x2="360" y2="220" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ar-s28)" />
+    <line x1="40" y1="220" x2="360" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#ar-s28)" />
     {/* Long diagonal from lower-left up-right (passes from (60,220) up to (300,40)) */}
-    <line x1="60" y1="220" x2="300" y2="40" stroke="#ffffff" strokeWidth="2" />
+    <line x1="60" y1="220" x2="300" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Short top segment forming the small triangle: from (130, 60) down-right to apex (200, 130) */}
-    <line x1="130" y1="60" x2="200" y2="130" stroke="#ffffff" strokeWidth="2" />
+    <line x1="130" y1="60" x2="200" y2="130" stroke="var(--icon-stroke)" strokeWidth="2" />
 
     {/* 30° at top - moved right to clear short segment line */}
     <text x="156" y="78" fill="#fbbf24" fontSize="13" fontFamily="serif">30°</text>

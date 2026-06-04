@@ -73,10 +73,10 @@ const SifatPangkatSVG = ({ label, left, right, color }: { label: string; left: s
       <rect x="10" y="10" width="280" height="80" rx="6" fill="rgba(0,0,0,0.2)" stroke="#334155" strokeWidth="1"/>
       <text x="150" y="28" fill={c.text} fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{label}</text>
       <rect x="20" y="33" width="120" height="38" rx="5" fill={c.fill} stroke={c.stroke} strokeWidth="1.5"/>
-      <text x="80" y="57" fill="#fff" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{left}</text>
+      <text x="80" y="57" fill="var(--icon-color)" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{left}</text>
       <text x="155" y="57" fill="#64748b" fontSize="16" textAnchor="middle" fontFamily="monospace">=</text>
       <rect x="165" y="33" width="115" height="38" rx="5" fill={c.fill} stroke={c.stroke} strokeWidth="1.5"/>
-      <text x="222" y="57" fill="#fff" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{right}</text>
+      <text x="222" y="57" fill="var(--icon-color)" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{right}</text>
     </svg>
   );
 };

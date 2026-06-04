@@ -58,7 +58,7 @@ const SequenceSVG = ({ terms, label }: { terms: (string | number)[]; label: stri
     {terms.map((t, i) => (
       <g key={i}>
         <circle cx={20 + i * 52} cy="45" r="18" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" strokeWidth="1.5" />
-        <text x={20 + i * 52} y="49" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t}</text>
+        <text x={20 + i * 52} y="49" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t}</text>
         {i < terms.length - 1 && <text x={20 + i * 52 + 30} y="49" fill="#64748b" fontSize="14" textAnchor="middle" fontFamily="monospace">→</text>}
       </g>
     ))}
@@ -72,7 +72,7 @@ const ArithSVG = ({ a, b, terms }: { a: number; b: number; terms: number[] }) =>
     {terms.map((t, i) => (
       <g key={i}>
         <rect x={10 + i * 56} y="22" width="42" height="28" rx="4" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" strokeWidth="1.5" />
-        <text x={31 + i * 56} y="40" fill="#fff" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t}</text>
+        <text x={31 + i * 56} y="40" fill="var(--icon-color)" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t}</text>
         {i < terms.length - 1 && (
           <>
             <line x1={52 + i * 56} y1="36" x2={58 + i * 56} y2="36" stroke="#22c55e" strokeWidth="1.5" markerEnd="url(#arr2)" />
@@ -92,7 +92,7 @@ const GeomSVG = ({ a, r, terms }: { a: number; r: number; terms: number[] }) => 
     {terms.map((t, i) => (
       <g key={i}>
         <rect x={10 + i * 56} y="22" width="42" height="28" rx="4" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="1.5" />
-        <text x={31 + i * 56} y="40" fill="#fff" fontSize="11} " textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t}</text>
+        <text x={31 + i * 56} y="40" fill="var(--icon-color)" fontSize="11} " textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t}</text>
         {i < terms.length - 1 && (
           <>
             <line x1={52 + i * 56} y1="36" x2={58 + i * 56} y2="36" stroke="#f97316" strokeWidth="1.5" />
@@ -112,7 +112,7 @@ const TriangleSVG = () => (
     {[1,3,6,10,15].map((v, i) => (
       <g key={i}>
         <circle cx={20 + i * 52} cy="55" r="19" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5" />
-        <text x={20 + i * 52} y="59" fill="#fff" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{v}</text>
+        <text x={20 + i * 52} y="59" fill="var(--icon-color)" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{v}</text>
         <text x={20 + i * 52} y="88" fill="#94a3b8" fontSize="7" textAnchor="middle" fontFamily="monospace">n={i+1}</text>
         {i < 4 && <text x={20 + i * 52 + 28} y="59" fill="#64748b" fontSize="12" textAnchor="middle">→</text>}
       </g>
@@ -127,7 +127,7 @@ const FibonacciSVG = () => (
     {[1,1,2,3,5,8].map((v, i) => (
       <g key={i}>
         <circle cx={14 + i * 46} cy="44" r="16" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" strokeWidth="1.5" />
-        <text x={14 + i * 46} y="48" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{v}</text>
+        <text x={14 + i * 46} y="48" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{v}</text>
         {i < 5 && <text x={14 + i * 46 + 26} y="48" fill="#64748b" fontSize="11" textAnchor="middle">→</text>}
       </g>
     ))}

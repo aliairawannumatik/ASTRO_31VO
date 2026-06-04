@@ -3,6 +3,82 @@
 :root {
   --font-display: 'Orbitron';
   --font-body: 'Exo 2';
+
+  /* ── Numatik semantic tokens — dark/space default ── */
+  --bg-primary:     #0a0a1a;
+  --bg-secondary:   #12122a;
+  --bg-card:        #1a1a35;
+  --text-primary:   #ffffff;
+  --text-secondary: #a0a0c0;
+  --btn-bg:         #1e1e40;
+  --btn-hover:      #2a2a55;
+  --icon-color:     #ffffff;
+  --icon-stroke:    #ffffff;
+  --numatik-accent: #6c63ff;
+  --border:         rgba(255,255,255,0.12);
+  --shadow:         rgba(0,0,0,0.4);
+}
+
+/* Light themes */
+[data-theme="light"],
+[data-theme="white"] {
+  --bg-primary:     #f0f4ff;
+  --bg-secondary:   #e8ecf8;
+  --bg-card:        #ffffff;
+  --text-primary:   #1a1a2e;
+  --text-secondary: #4a4a6a;
+  --btn-bg:         #dde3f5;
+  --btn-hover:      #c8d0ea;
+  --icon-color:     #1a1a2e;
+  --icon-stroke:    #1a1a2e;
+  --numatik-accent: #4f46e5;
+  --border:         rgba(0,0,0,0.1);
+  --shadow:         rgba(0,0,0,0.1);
+}
+
+[data-theme="forest"] {
+  --bg-primary:     #f0fdf4;
+  --bg-secondary:   #dcfce7;
+  --bg-card:        #ffffff;
+  --text-primary:   #14532d;
+  --text-secondary: #166534;
+  --btn-bg:         #bbf7d0;
+  --btn-hover:      #86efac;
+  --icon-color:     #14532d;
+  --icon-stroke:    #14532d;
+  --numatik-accent: #16a34a;
+  --border:         rgba(0,0,0,0.1);
+  --shadow:         rgba(0,0,0,0.1);
+}
+
+[data-theme="ocean"] {
+  --bg-primary:     #0c2a4a;
+  --bg-secondary:   #0d3d62;
+  --bg-card:        #0e4a75;
+  --text-primary:   #e0f2fe;
+  --text-secondary: #7dd3fc;
+  --btn-bg:         #075985;
+  --btn-hover:      #0369a1;
+  --icon-color:     #e0f2fe;
+  --icon-stroke:    #e0f2fe;
+  --numatik-accent: #38bdf8;
+  --border:         rgba(125,211,252,0.15);
+  --shadow:         rgba(0,0,0,0.4);
+}
+
+[data-theme="sunset"] {
+  --bg-primary:     #1a0a2e;
+  --bg-secondary:   #2d1050;
+  --bg-card:        #3b1060;
+  --text-primary:   #fef3c7;
+  --text-secondary: #fcd34d;
+  --btn-bg:         #6b21a8;
+  --btn-hover:      #7c3aed;
+  --icon-color:     #fef3c7;
+  --icon-stroke:    #fef3c7;
+  --numatik-accent: #f97316;
+  --border:         rgba(251,191,36,0.15);
+  --shadow:         rgba(0,0,0,0.5);
 }
 
 @tailwind base;
@@ -267,6 +343,44 @@
 .animate-pulse-scale {
   animation: pulse-scale 1.5s ease-in-out infinite;
 }
+/* ── Numatik theme utility classes ──────────────────────────────────── */
+.btn-theme {
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.btn-theme:hover {
+  background: var(--btn-hover);
+}
+
+.card-theme {
+  background: var(--bg-card);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.text-theme-primary  { color: var(--text-primary); }
+.text-theme-secondary { color: var(--text-secondary); }
+.bg-theme-primary    { background: var(--bg-primary); }
+.bg-theme-secondary  { background: var(--bg-secondary); }
+.bg-theme-card       { background: var(--bg-card); }
+.border-theme        { border-color: var(--border); }
+
+/* SVG icon utility — apply to <svg> or its wrapper */
+.icon-theme,
+.icon-theme path,
+.icon-theme circle,
+.icon-theme rect,
+.icon-theme polygon,
+.icon-theme ellipse {
+  fill: var(--icon-color);
+}
+.icon-theme-stroke,
+.icon-theme-stroke path,
+.icon-theme-stroke line,
+.icon-theme-stroke polyline {
+  stroke: var(--icon-stroke);
+}
+
 
 @keyframes scale-in {
   0% { transform: scale(0.8); opacity: 0; }

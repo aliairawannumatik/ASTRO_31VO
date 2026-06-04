@@ -56,7 +56,7 @@ const RumusABCSVG = () => (
     <rect x="0" y="0" width="320" height="100" rx="6" fill="rgba(0,0,0,0.25)"/>
     <text x="160" y="20" fill="#c084fc" fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">RUMUS ABC — Persamaan Kuadrat</text>
     <rect x="15" y="27" width="290" height="50" rx="6" fill="rgba(139,92,246,0.15)" stroke="#8b5cf6" strokeWidth="1.5"/>
-    <text x="160" y="46" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace">ax² + bx + c = 0</text>
+    <text x="160" y="46" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace">ax² + bx + c = 0</text>
     <text x="42" y="65" fill="#a78bfa" fontSize="9" textAnchor="middle" fontFamily="monospace">x =</text>
     <text x="150" y="60" fill="#e2e8f0" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">−b ± √(b²−4ac)</text>
     <line x1="90" y1="68" x2="215" y2="68" stroke="#a78bfa" strokeWidth="1.2"/>
@@ -157,8 +157,8 @@ const MenyusunPKSVG = ({ r1, r2, hasil }: { r1: string; r2: string; hasil: strin
     <text x="155" y="16" fill="#c084fc" fontSize="8.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">Menyusun Persamaan Kuadrat</text>
     <rect x="10" y="22" width="80" height="50" rx="4" fill="rgba(6,182,212,0.12)" stroke="#06b6d4" strokeWidth="1.2"/>
     <text x="50" y="43" fill="#22d3ee" fontSize="8.5" textAnchor="middle" fontFamily="monospace">Akar:</text>
-    <text x="50" y="58" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">x₁={r1}</text>
-    <text x="50" y="68" fill="#fff" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">x₂={r2}</text>
+    <text x="50" y="58" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">x₁={r1}</text>
+    <text x="50" y="68" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">x₂={r2}</text>
     <text x="103" y="50" fill="#64748b" fontSize="14" textAnchor="middle" fontFamily="monospace">→</text>
     <rect x="115" y="22" width="185" height="50" rx="4" fill="rgba(139,92,246,0.12)" stroke="#8b5cf6" strokeWidth="1.2"/>
     <text x="207" y="37" fill="#a78bfa" fontSize="8" textAnchor="middle" fontFamily="monospace">(x−x₁)(x−x₂) = 0</text>

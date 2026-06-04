@@ -100,13 +100,13 @@ const DomainRangeSVG = ({ domain, kodomain, range }: { domain: string[]; kodomai
     <rect x="10" y="10" width="260" height="100" rx="6" fill="rgba(0,0,0,0.15)" stroke="#334155" strokeWidth="1"/>
     <rect x="20" y="25" width="70" height="70" rx="6" fill="rgba(6,182,212,0.12)" stroke="#06b6d4" strokeWidth="1.5"/>
     <text x="55" y="40" fill="#22d3ee" fontSize="8" textAnchor="middle" fontFamily="monospace">Domain</text>
-    {domain.map((d, i) => <text key={i} x="55" y={55 + i * 13} fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace">{d}</text>)}
+    {domain.map((d, i) => <text key={i} x="55" y={55 + i * 13} fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace">{d}</text>)}
     <rect x="105" y="25" width="70" height="70" rx="6" fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth="1.5"/>
     <text x="140" y="40" fill="#c084fc" fontSize="8" textAnchor="middle" fontFamily="monospace">Kodomain</text>
-    {kodomain.map((k, i) => <text key={i} x="140" y={55 + i * 13} fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace">{k}</text>)}
+    {kodomain.map((k, i) => <text key={i} x="140" y={55 + i * 13} fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace">{k}</text>)}
     <rect x="190" y="25" width="70" height="70" rx="6" fill="rgba(34,197,94,0.12)" stroke="#22c55e" strokeWidth="1.5"/>
     <text x="225" y="40" fill="#4ade80" fontSize="8" textAnchor="middle" fontFamily="monospace">Range</text>
-    {range.map((r, i) => <text key={i} x="225" y={55 + i * 13} fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace">{r}</text>)}
+    {range.map((r, i) => <text key={i} x="225" y={55 + i * 13} fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace">{r}</text>)}
   </svg>
 );
 

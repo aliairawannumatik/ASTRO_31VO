@@ -142,7 +142,7 @@ const VerifikasiSVG = ({ a, b, c, valid }: { a: number; b: number; c: number; va
   <svg viewBox="0 0 280 120" className="w-full max-w-sm mx-auto my-3 rounded-lg bg-slate-800/60 border border-slate-600 p-2">
     <rect x="15" y="20" width="240" height="80" rx="6" fill="rgba(0,0,0,0.2)" stroke="#334155" strokeWidth="1"/>
     <text x="140" y="45" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="monospace">{a}² + {b}² ?= {c}²</text>
-    <text x="140" y="68" fill="#fff" fontSize="11" textAnchor="middle" fontFamily="monospace">{a*a} + {b*b} = {a*a+b*b}  vs  {c*c}</text>
+    <text x="140" y="68" fill="var(--icon-color)" fontSize="11" textAnchor="middle" fontFamily="monospace">{a*a} + {b*b} = {a*a+b*b}  vs  {c*c}</text>
     <text x="140" y="90" fill={valid ? "#22c55e" : "#ef4444"} fontSize="12" textAnchor="middle" fontFamily="monospace" fontWeight="bold">
       {valid ? "✓ Segitiga Siku-siku" : "✗ Bukan Segitiga Siku-siku"}
     </text>

@@ -75,8 +75,8 @@ const BarRatioSVG = ({ a, b, labelA, labelB, color1, color2 }: { a: number; b: n
     <svg viewBox="0 0 240 80" className="w-full max-w-sm mx-auto my-3 rounded-lg bg-slate-800/60 border border-slate-600 p-2">
       <rect x="20" y="25" width={wA} height="25" fill={color1} rx="3" fillOpacity="0.8"/>
       <rect x={20 + wA} y="25" width={wB} height="25" fill={color2} rx="3" fillOpacity="0.8"/>
-      <text x={20 + wA / 2} y="40" fill="white" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{a}</text>
-      <text x={20 + wA + wB / 2} y="40" fill="white" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{b}</text>
+      <text x={20 + wA / 2} y="40" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{a}</text>
+      <text x={20 + wA + wB / 2} y="40" fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{b}</text>
       <text x={20 + wA / 2} y="62" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">{labelA}</text>
       <text x={20 + wA + wB / 2} y="62" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">{labelB}</text>
       <text x="130" y="16" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="monospace">Perbandingan {a}:{b}</text>
@@ -108,7 +108,7 @@ const PieRatioSVG = ({ parts, labels, colors }: { parts: number[]; labels: strin
       {slices.map((s, i) => (
         <g key={i}>
           <path d={s.d} fill={s.color} fillOpacity="0.85" stroke="#1e293b" strokeWidth="1.5"/>
-          <text x={s.lx} y={s.ly} fill="white" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{s.value}</text>
+          <text x={s.lx} y={s.ly} fill="var(--icon-color)" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{s.value}</text>
         </g>
       ))}
       {slices.map((s, i) => (
