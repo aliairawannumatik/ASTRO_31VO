@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Trendi
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import JangkauanAnimasi from "@/components/JangkauanAnimasi";
 
 const PenyebaranDataPage = () => {
   const navigate = useNavigate();
@@ -53,6 +54,8 @@ const PenyebaranDataPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">
           Kelas 9 · Statistika · Materi Matematika
         </p>
+
+        <JangkauanAnimasi />
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
