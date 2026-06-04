@@ -21,6 +21,14 @@ export interface FontOption {
 
 export const FONT_OPTIONS: FontOption[] = [
   {
+    key: "nunito",
+    label: "Nunito",
+    description: "Ramah & mudah dibaca",
+    displayFont: "'Nunito'",
+    bodyFont: "'Nunito'",
+    emoji: "😊",
+  },
+  {
     key: "space-classic",
     label: "Space Classic",
     description: "Font bawaan NUMATIK",
@@ -43,14 +51,6 @@ export const FONT_OPTIONS: FontOption[] = [
     displayFont: "'Poppins'",
     bodyFont: "'Poppins'",
     emoji: "✨",
-  },
-  {
-    key: "nunito",
-    label: "Nunito",
-    description: "Ramah & mudah dibaca",
-    displayFont: "'Nunito'",
-    bodyFont: "'Nunito'",
-    emoji: "😊",
   },
   {
     key: "rajdhani",
