@@ -8,9 +8,7 @@ export type FontKey =
   | "rajdhani"
   | "fredoka"
   | "quicksand"
-  | "inter"
-  | "rubik"
-  | "josefin";
+  | "inter";
 
 export interface FontOption {
   key: FontKey;
@@ -86,22 +84,6 @@ export const FONT_OPTIONS: FontOption[] = [
     bodyFont: "'Inter'",
     emoji: "📐",
   },
-  {
-    key: "rubik",
-    label: "Rubik",
-    description: "Bulat & bersahabat",
-    displayFont: "'Rubik'",
-    bodyFont: "'Rubik'",
-    emoji: "🟣",
-  },
-  {
-    key: "josefin",
-    label: "Josefin Sans",
-    description: "Geometris & stylish",
-    displayFont: "'Josefin Sans'",
-    bodyFont: "'Josefin Sans'",
-    emoji: "🎯",
-  },
 ];
 
 interface FontContextType {
@@ -115,7 +97,8 @@ const FontContext = createContext<FontContextType | undefined>(undefined);
 export const FontProvider = ({ children }: { children: ReactNode }) => {
   const [fontKey, setFontKey] = useState<FontKey>(() => {
     const saved = localStorage.getItem("numatik-font");
-    return (saved as FontKey) || "nunito";
+    const valid = FONT_OPTIONS.map(f => f.key);
+    return valid.includes(saved as FontKey) ? (saved as FontKey) : "nunito";
   });
 
   const currentFont = FONT_OPTIONS.find(f => f.key === fontKey) || FONT_OPTIONS[0];
