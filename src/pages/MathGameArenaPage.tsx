@@ -15,8 +15,7 @@ const kelasOptions = [
 const MathGameArenaPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const isLight = theme === "light" || theme === "white";
-  const isWhite = theme === "white";
+  const isLight = theme === "light";
 
   return (
     <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
@@ -27,7 +26,7 @@ const MathGameArenaPage = () => {
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
           MATH GAME ARENA
         </h1>
-        <p className={`text-sm text-center mb-8 font-body ${isWhite ? "text-gray-500" : "text-white/60"}`}>
+        <p className="text-white/60 text-sm text-center mb-8 font-body">
           Pilih kelas untuk bermain game matematika
         </p>
 
@@ -39,17 +38,17 @@ const MathGameArenaPage = () => {
                 playPopSound();
                 navigate(kelas.path);
               }}
-              className={`group flex items-center gap-4 bg-card/80 border border-border rounded-xl px-6 py-5
-                hover:border-primary/60 transition-all duration-300
-                cursor-pointer text-left animate-slide-up ${!isWhite ? "backdrop-blur" : ""}`}
+              className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-6 py-5
+                hover:border-accent/60 transition-all duration-300
+                cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.1}s` }}
             >
-              <GraduationCap className="w-8 h-8 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+              <GraduationCap className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />
               <div className="flex flex-col">
-                <span className={`font-display text-lg ${isWhite ? "text-gray-800" : "text-white"}`}>{kelas.label}</span>
-                <span className={`font-body text-xs ${isWhite ? "text-gray-400" : "text-white/50"}`}>{kelas.desc}</span>
+                <span className="font-display text-lg text-white">{kelas.label}</span>
+                <span className="font-body text-xs text-white/50">{kelas.desc}</span>
               </div>
-              <span className="ml-auto text-xs text-primary font-display font-bold">MAIN →</span>
+              <span className="ml-auto text-xs text-accent font-display">MAIN</span>
             </button>
           ))}
         </div>
