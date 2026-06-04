@@ -21,6 +21,7 @@ type ThemeDef = {
   activeBorder: string;    // Tailwind border class when active
   activeShadow: string;    // arbitrary shadow class when active
   activeDot: string;       // dot color class
+  ready: boolean;          // whether this theme is fully supported
 };
 
 const THEME_DEFS: ThemeDef[] = [
@@ -33,6 +34,7 @@ const THEME_DEFS: ThemeDef[] = [
     activeBorder: "border-violet-500",
     activeShadow: "shadow-[0_0_16px_rgba(139,92,246,0.4)]",
     activeDot: "bg-violet-400",
+    ready: true,
   },
   {
     id: "white",
@@ -43,6 +45,7 @@ const THEME_DEFS: ThemeDef[] = [
     activeBorder: "border-slate-400",
     activeShadow: "shadow-[0_0_16px_rgba(148,163,184,0.5)]",
     activeDot: "bg-slate-400",
+    ready: true,
   },
   {
     id: "ocean",
@@ -53,6 +56,7 @@ const THEME_DEFS: ThemeDef[] = [
     activeBorder: "border-cyan-500",
     activeShadow: "shadow-[0_0_16px_rgba(6,182,212,0.4)]",
     activeDot: "bg-cyan-400",
+    ready: false,
   },
   {
     id: "light",
@@ -63,6 +67,7 @@ const THEME_DEFS: ThemeDef[] = [
     activeBorder: "border-blue-500",
     activeShadow: "shadow-[0_0_16px_rgba(59,130,246,0.35)]",
     activeDot: "bg-blue-500",
+    ready: false,
   },
   {
     id: "forest",
@@ -73,6 +78,7 @@ const THEME_DEFS: ThemeDef[] = [
     activeBorder: "border-green-500",
     activeShadow: "shadow-[0_0_16px_rgba(34,197,94,0.4)]",
     activeDot: "bg-green-500",
+    ready: false,
   },
   {
     id: "sunset",
@@ -83,6 +89,7 @@ const THEME_DEFS: ThemeDef[] = [
     activeBorder: "border-orange-500",
     activeShadow: "shadow-[0_0_16px_rgba(249,115,22,0.45)]",
     activeDot: "bg-orange-400",
+    ready: false,
   },
 ];
 
@@ -316,6 +323,16 @@ const PengaturanPage = () => {
                       <p className={`font-display font-bold text-[10px] text-center leading-tight ${isDark ? "text-white/80" : "text-gray-700"}`}>
                         {td.name}
                       </p>
+                      {/* Ready / Not Ready badge */}
+                      <span className={`text-[8px] font-bold font-display px-1.5 py-0.5 rounded-full leading-none ${
+                        td.ready
+                          ? "bg-emerald-500/20 text-emerald-400 ring-1 ring-emerald-500/30"
+                          : isDark
+                            ? "bg-white/10 text-white/35 ring-1 ring-white/10"
+                            : "bg-gray-200 text-gray-400 ring-1 ring-gray-300"
+                      }`}>
+                        {td.ready ? "✓ Ready" : "Not Ready"}
+                      </span>
                       {isActive && (
                         <div className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full ${td.activeDot}`} />
                       )}
