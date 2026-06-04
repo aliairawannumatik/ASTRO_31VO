@@ -47,8 +47,8 @@ interface Slide {
 }
 
 const MockupFrame = ({ children, title, accentColor = "text-cyan-400" }: { children: React.ReactNode; title: string; accentColor?: string }) => (
-  <div className="relative w-full max-w-xs mx-auto rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-[#050d1a]" style={{ aspectRatio: "16/10" }}>
-    <div className="absolute top-0 left-0 right-0 h-7 bg-[#0a1628] border-b border-white/10 flex items-center px-3 gap-2">
+  <div className="relative w-full max-w-xs mx-auto rounded-xl overflow-hidden shadow-2xl" style={{ aspectRatio: "16/10", background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
+    <div className="absolute top-0 left-0 right-0 h-7 flex items-center px-3 gap-2" style={{ background: "var(--bg-card)", borderBottom: "1px solid var(--border)" }}>
       <div className="flex gap-1">
         <div className="w-2 h-2 rounded-full bg-red-500/70" />
         <div className="w-2 h-2 rounded-full bg-yellow-500/70" />

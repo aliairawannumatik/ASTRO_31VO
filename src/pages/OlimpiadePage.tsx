@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ── Route map ────────────────────────────────────────── */
 const routes: Record<string, string> = {
@@ -167,6 +168,8 @@ const StarChip = ({ color }: { color: string }) => (
 /* ── Page ─────────────────────────────────────────────── */
 const OlimpiadePage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isLight = ["light", "white", "forest"].includes(theme);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -218,19 +221,31 @@ const OlimpiadePage = () => {
         <div className="flex flex-col gap-5 animate-slide-up">
           {categories.map((cat, ci) => (
             <div key={cat.label}
-              className={`relative rounded-2xl overflow-hidden border ${cat.border}`}
-              style={{ animationDelay: `${ci * 0.06}s` }}>
-              {/* bg */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient}`} />
+              className={`relative rounded-2xl overflow-hidden ${isLight ? "" : `border ${cat.border}`}`}
+              style={{
+                animationDelay: `${ci * 0.06}s`,
+                ...(isLight ? { background: "var(--bg-card)", border: "1px solid var(--border)" } : {}),
+              }}>
+              {/* bg gradient — dark themes only */}
+              {!isLight && <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient}`} />}
 
               {/* Category header */}
-              <div className={`relative flex items-center gap-3 px-5 py-3.5 bg-gradient-to-r ${cat.headerGrad} border-b ${cat.border}`}>
+              <div
+                className={`relative flex items-center gap-3 px-5 py-3.5 ${isLight ? "" : `bg-gradient-to-r ${cat.headerGrad} border-b ${cat.border}`}`}
+                style={isLight ? { background: "var(--bg-secondary)", borderBottom: "1px solid var(--border)" } : {}}>
                 <span className="text-xl leading-none">{cat.emoji}</span>
                 <div className="flex-1">
-                  <p className="font-display text-sm font-bold text-white">{cat.label}</p>
-                  <p className="font-body text-[10px] text-white/40">{cat.topics.length} topik</p>
+                  <p className="font-display text-sm font-bold" style={{ color: "var(--text-primary)" }}>{cat.label}</p>
+                  <p className="font-body text-[10px]" style={{ color: "var(--text-secondary)" }}>{cat.topics.length} topik</p>
                 </div>
-                <StarChip color={cat.badge} />
+                {isLight ? (
+                  <span className="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full font-body"
+                    style={{ background: "var(--btn-bg)", color: "var(--text-primary)", border: "1px solid var(--border)" }}>
+                    ✦ MATERI & SOAL
+                  </span>
+                ) : (
+                  <StarChip color={cat.badge} />
+                )}
               </div>
 
               {/* Topic grid */}
@@ -244,28 +259,42 @@ const OlimpiadePage = () => {
                       disabled={!hasRoute}
                       className={`group flex items-center gap-3 rounded-xl px-4 py-3.5 text-left transition-all duration-200 shadow-md
                         ${hasRoute
-                          ? "bg-white/20 hover:bg-white/30 border border-white/40 hover:border-white/70 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
-                          : "bg-white/5 border border-white/10 cursor-not-allowed opacity-40"}`}
-                      style={{ animationDelay: `${(ci * 0.06) + (ti * 0.025)}s` }}
+                          ? isLight
+                            ? "cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                            : "bg-white/20 hover:bg-white/30 border border-white/40 hover:border-white/70 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                          : isLight
+                            ? "cursor-not-allowed opacity-40"
+                            : "bg-white/5 border border-white/10 cursor-not-allowed opacity-40"
+                        }`}
+                      style={{
+                        animationDelay: `${(ci * 0.06) + (ti * 0.025)}s`,
+                        ...(isLight ? { background: "var(--bg-secondary)", border: "1px solid var(--border)" } : {}),
+                      }}
                     >
                       {/* Colored left indicator */}
                       <div className={`w-1.5 h-9 rounded-full shrink-0 ${cat.bar} opacity-80 group-hover:opacity-100 transition-opacity`} />
 
                       {/* Emoji badge */}
-                      <div className="w-9 h-9 rounded-lg bg-black/40 border border-white/10 flex items-center justify-center shrink-0 text-base
-                        group-hover:scale-110 transition-transform">
+                      <div
+                        className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-base group-hover:scale-110 transition-transform"
+                        style={isLight
+                          ? { background: "var(--bg-primary)", border: "1px solid var(--border)" }
+                          : { background: "rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.1)" }
+                        }>
                         {topic.emoji}
                       </div>
 
                       {/* Name */}
-                      <span className="font-body text-sm text-white/90 group-hover:text-white leading-snug flex-1 transition-colors font-medium">
+                      <span className="font-body text-sm leading-snug flex-1 transition-colors font-medium"
+                        style={{ color: "var(--text-primary)" }}>
                         {topic.name}
                       </span>
 
                       {/* Arrow */}
                       {hasRoute && (
-                        <svg className="w-4 h-4 text-white/40 group-hover:text-white/80 shrink-0 transition-all group-hover:translate-x-1 duration-200"
-                          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <svg className="w-4 h-4 shrink-0 transition-all group-hover:translate-x-1 duration-200"
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+                          style={{ color: "var(--text-secondary)" }}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                       )}
