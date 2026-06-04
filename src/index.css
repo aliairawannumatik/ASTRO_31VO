@@ -25,15 +25,20 @@
   --bg-primary:     #f0f4ff;
   --bg-secondary:   #e8ecf8;
   --bg-card:        #ffffff;
-  --text-primary:   #1a1a2e;
-  --text-secondary: #4a4a6a;
+  --text-primary:   #0a0a1a;
+  --text-secondary: #2a2a4a;
+  --text-tertiary:  #444466;
   --btn-bg:         #dde3f5;
   --btn-hover:      #c8d0ea;
-  --icon-color:     #1a1a2e;
-  --icon-stroke:    #1a1a2e;
+  --icon-color:     #0a0a1a;
+  --icon-stroke:    #0a0a1a;
   --numatik-accent: #4f46e5;
   --border:         rgba(0,0,0,0.1);
   --shadow:         rgba(0,0,0,0.1);
+}
+
+[data-theme="white"] {
+  --btn-bg: #e8eeff;
 }
 
 [data-theme="forest"] {
@@ -83,12 +88,12 @@
 
 /* ── Theme-aware overrides for hardcoded legacy components ── */
 
-/* 1. Subtopic button gradient overlays: replace dark gradients for light/forest themes */
-[data-theme="light"] button > div.absolute.inset-0.backdrop-blur,
-[data-theme="white"] button > div.absolute.inset-0.backdrop-blur,
-[data-theme="forest"] button > div.absolute.inset-0.backdrop-blur {
-  background: var(--btn-bg) !important;
-  background-image: none !important;
+/* 1. Subtopic button plain overlays: soften dark overlays for light/forest themes.
+   NOTE: background-image NOT overridden so gradient buttons keep their colours. */
+[data-theme="light"] button > div.absolute.inset-0.backdrop-blur:not([style*="gradient"]),
+[data-theme="white"] button > div.absolute.inset-0.backdrop-blur:not([style*="gradient"]),
+[data-theme="forest"] button > div.absolute.inset-0.backdrop-blur:not([style*="gradient"]) {
+  background-color: var(--btn-bg) !important;
 }
 
 /* 2. Override hardcoded text-white class for non-dark themes */
@@ -129,7 +134,14 @@
 [data-theme="white"] .text-gray-400,
 [data-theme="white"] .text-slate-300,
 [data-theme="white"] .text-slate-400 {
-  color: #4a4a6a !important;
+  color: #2a2a4a !important;
+}
+
+[data-theme="light"] .text-gray-500,
+[data-theme="white"] .text-gray-500,
+[data-theme="light"] .text-slate-500,
+[data-theme="white"] .text-slate-500 {
+  color: #3a3a5a !important;
 }
 
 [data-theme="light"] .text-blue-300,
