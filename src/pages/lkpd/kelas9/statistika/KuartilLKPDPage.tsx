@@ -5,7 +5,6 @@ import InteractiveLKPD, {
   SummaryCard,
 } from "@/components/InteractiveLKPD";
 import { LKPDGame } from "@/components/LKPDGameZone";
-import KuartilInteraktifAnimasi from "@/components/KuartilInteraktifAnimasi";
 
 const situations: SituationCard[] = [
   {
@@ -326,7 +325,6 @@ const KuartilLKPDPage = () => (
     badgeText="LKPD · Kelas 9 · Bab Statistika"
     title="Kuartil — Penemuan Terbimbing"
     intro="Sobat Numatik, ayo selami KUARTIL 📐! Kamu akan menemukan Q₁ (25%), Q₂ (50% = median), dan Q₃ (75%) yang membagi data jadi 4 bagian sama — sambil bermain seret kartu mencocokkan istilah & menghitung kuartil!"
-    headerSlot={<KuartilInteraktifAnimasi />}
     situations={situations}
     guidedIntro="Jawab berurutan. Pelajari strategi belah median untuk menemukan Q₁ dan Q₃."
     guidedItems={guidedItems}
