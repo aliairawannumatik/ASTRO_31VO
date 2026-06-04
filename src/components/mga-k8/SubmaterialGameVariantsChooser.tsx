@@ -119,14 +119,10 @@ const VARIANTS: GameVariant[] = [
   },
 ];
 
-const dimGlow = (glow: string, alpha: number) =>
-  glow.replace(/[\d.]+\)$/, `${alpha})`);
-
 const SubmaterialGameVariantsChooserK8 = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const isLight = theme === "light" || theme === "white";
-  const isWhite = theme === "white";
+  const isLight = theme === "light";
   const { parentSlug, slug } = useParams<{ parentSlug: string; slug: string }>();
 
   const entry = parentSlug && slug ? getSubmaterialK8(parentSlug, slug) : undefined;
@@ -165,10 +161,10 @@ const SubmaterialGameVariantsChooserK8 = () => {
           <h1 className="font-display text-2xl md:text-3xl font-black text-primary text-glow-cyan mb-1">
             {entry.label}
           </h1>
-          <p className={`text-xs font-body tracking-widest uppercase ${isWhite ? "text-blue-500/70" : "text-cyan-400/60"}`}>
+          <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
             Kelas 8 · Math Game Arena
           </p>
-          <div className={`mt-3 flex items-center justify-center gap-2 text-[11px] font-body ${isWhite ? "text-gray-400" : "text-white/40"}`}>
+          <div className="mt-3 flex items-center justify-center gap-2 text-white/40 text-[11px] font-body">
             <span>🎮</span>
             <span>Pilih game favoritmu untuk berlatih {entry.label.toLowerCase()}!</span>
           </div>
@@ -185,55 +181,35 @@ const SubmaterialGameVariantsChooserK8 = () => {
                   transition-all duration-300 animate-slide-up cursor-pointer hover:scale-[1.015]"
                 style={{
                   animationDelay: `${i * 0.05}s`,
-                  boxShadow: isWhite
-                    ? `0 2px 14px ${dimGlow(v.glow, 0.18)}, 0 1px 4px rgba(0,0,0,0.06)`
-                    : `0 2px 20px rgba(0,0,0,0.4)`,
-                  background: isWhite ? "#ffffff" : undefined,
+                  boxShadow: `0 2px 20px rgba(0,0,0,0.4)`,
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.boxShadow = isWhite
-                    ? `0 4px 24px ${dimGlow(v.glow, 0.35)}, 0 2px 8px rgba(0,0,0,0.10)`
-                    : `0 4px 30px ${v.glow}, 0 2px 10px rgba(0,0,0,0.5)`;
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                    `0 4px 30px ${v.glow}, 0 2px 10px rgba(0,0,0,0.5)`;
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.boxShadow = isWhite
-                    ? `0 2px 14px ${dimGlow(v.glow, 0.18)}, 0 1px 4px rgba(0,0,0,0.06)`
-                    : `0 2px 20px rgba(0,0,0,0.4)`;
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                    `0 2px 20px rgba(0,0,0,0.4)`;
                 }}
               >
                 <div
                   className="absolute inset-0 transition-opacity duration-300"
-                  style={{ background: isWhite
-                    ? `linear-gradient(135deg, ${v.from}0d, ${v.to}0d)`
-                    : `linear-gradient(135deg, ${v.from}14, ${v.to}14)` }}
-                />
-                {!isWhite && (
-                  <div
-                    className="absolute inset-0 opacity-[0.10] group-hover:opacity-[0.18] transition-opacity duration-300"
-                    style={{ background: `linear-gradient(135deg, ${v.from}, ${v.to})` }}
-                  />
-                )}
-                <div
-                  className="absolute inset-0 rounded-2xl"
-                  style={{ border: isWhite ? `1.5px solid ${v.from}60` : "1px solid rgba(255,255,255,0.10)" }}
+                  style={{ background: `linear-gradient(135deg, ${v.from}14, ${v.to}14)` }}
                 />
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
-                  style={{ background: isWhite
-                    ? `linear-gradient(90deg, ${v.from}, ${v.to})`
-                    : `linear-gradient(90deg, transparent, ${v.from}, ${v.to}, transparent)`,
-                    opacity: isWhite ? 0.7 : 0.5 }}
+                  className="absolute inset-0 opacity-[0.10] group-hover:opacity-[0.18] transition-opacity duration-300"
+                  style={{ background: `linear-gradient(135deg, ${v.from}, ${v.to})` }}
                 />
-                <div className={`absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out ${isWhite ? "bg-gradient-to-r from-white/0 via-white/40 to-white/0" : "bg-gradient-to-r from-white/0 via-white/5 to-white/0"}`} />
+                <div className="absolute inset-0 border border-white/10 rounded-2xl" />
+                <div
+                  className="absolute top-0 left-0 right-0 h-px opacity-50"
+                  style={{ background: `linear-gradient(90deg, transparent, ${v.from}, ${v.to}, transparent)` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
 
                 <div
-                  className="relative flex-shrink-0 flex items-center justify-center w-20"
-                  style={{
-                    background: isWhite
-                      ? `linear-gradient(180deg, ${v.from}1a, ${v.to}1a)`
-                      : `linear-gradient(180deg, ${v.from}22, ${v.to}22)`,
-                    borderRight: isWhite ? `1.5px solid ${v.from}35` : "1px solid rgba(255,255,255,0.10)",
-                  }}
+                  className="relative flex-shrink-0 flex items-center justify-center w-20 border-r border-white/10"
+                  style={{ background: `linear-gradient(180deg, ${v.from}22, ${v.to}22)` }}
                 >
                   {v.variantSlug === "pesawat-tembak-meteor" ? (
                     <img
@@ -270,10 +246,10 @@ const SubmaterialGameVariantsChooserK8 = () => {
 
                 <div className="relative flex-1 flex items-center gap-3 px-4 py-4 min-w-0">
                   <div className="min-w-0 flex-1">
-                    <div className={`font-display text-sm font-bold leading-tight mb-1 ${isWhite ? "text-gray-800" : "text-white"}`}>
+                    <div className="font-display text-sm font-bold text-white leading-tight mb-1">
                       {v.name}
                     </div>
-                    <div className={`text-[11px] font-body leading-snug ${isWhite ? "text-gray-400" : "text-white/50"}`}>
+                    <div className="text-[11px] text-white/50 font-body leading-snug">
                       {v.description}
                     </div>
                   </div>
@@ -299,7 +275,7 @@ const SubmaterialGameVariantsChooserK8 = () => {
         <div className="mt-10 text-center">
           <button
             onClick={() => { playPopSound(); navigate(parentPath); }}
-            className={`text-sm transition-colors cursor-pointer font-body ${isWhite ? "text-gray-400 hover:text-blue-600" : "text-white/40 hover:text-cyan-400"}`}
+            className="text-sm text-white/40 hover:text-cyan-400 transition-colors cursor-pointer font-body"
           >
             ← Kembali ke {entry.parentLabel}
           </button>
