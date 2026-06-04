@@ -702,6 +702,7 @@ const PetunjukPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const isWhite = theme === "white";
   const [current, setCurrent] = useState(0);
   const total = slides.length;
 
@@ -728,7 +729,7 @@ const PetunjukPage = () => {
 
   return (
     <div className={`relative min-h-screen flex flex-col overflow-hidden ${isDark ? "gradient-space" : "gradient-snow"}`}>
-      {isDark ? <Starfield /> : <Snowfall />}
+      {isDark ? <Starfield /> : !isWhite && <Snowfall />}
       <PageNavigation />
 
       <div className="relative z-10 flex flex-col items-center justify-start pt-16 pb-6 px-4 min-h-screen">
