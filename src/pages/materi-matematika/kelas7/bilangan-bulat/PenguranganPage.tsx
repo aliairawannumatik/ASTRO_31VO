@@ -4,13 +4,16 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Sparkles, List } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 /* ── Garis Bilangan SVG statis (-5 sampai 5) ──────────────────────── */
-const NumberLineSVG = () => {
+const NumberLineSVG = ({ lightMode = false }: { lightMode?: boolean }) => {
   const nums = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
   const cx = (n: number) => 300 + n * 50;
+  const numFill = lightMode ? "var(--text-primary)" : "#FFE57F";
+  const labelFill = lightMode ? "var(--text-secondary)" : "#FFD700";
 
   return (
     <svg viewBox="0 0 620 88" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -25,8 +28,8 @@ const NumberLineSVG = () => {
       <line x1="14" y1="38" x2="606" y2="38"
         stroke="#FFD700" strokeWidth="2.5"
         markerEnd="url(#sub-arr-r)" markerStart="url(#sub-arr-l)" />
-      <text x="7"   y="43" fill="#FFD700" fontSize="15" fontFamily="monospace" textAnchor="middle">…</text>
-      <text x="613" y="43" fill="#FFD700" fontSize="15" fontFamily="monospace" textAnchor="middle">…</text>
+      <text x="7"   y="43" style={{ fill: labelFill }} fontSize="15" fontFamily="monospace" textAnchor="middle">…</text>
+      <text x="613" y="43" style={{ fill: labelFill }} fontSize="15" fontFamily="monospace" textAnchor="middle">…</text>
       {nums.map(n => {
         const x = cx(n);
         const isZero = n === 0;
@@ -35,13 +38,13 @@ const NumberLineSVG = () => {
             <line
               x1={x} y1={isZero ? 26 : 30}
               x2={x} y2={isZero ? 50 : 46}
-              stroke={isZero ? "var(--text-primary)" : "#FFD700"}
+              stroke="var(--text-primary)"
               strokeWidth={isZero ? 2.5 : 1.8}
             />
             <text
               x={x} y={66}
               textAnchor="middle"
-              fill={isZero ? "var(--text-primary)" : "#FFE57F"}
+              style={{ fill: isZero ? "var(--text-primary)" : numFill }}
               fontSize={isZero ? "14" : "12"}
               fontWeight={isZero ? "bold" : "normal"}
               fontFamily="monospace"
@@ -49,8 +52,8 @@ const NumberLineSVG = () => {
           </g>
         );
       })}
-      <text x="58"  y="83" fill="#FFD700" fontSize="10" fontFamily="sans-serif" opacity="0.65">← negatif</text>
-      <text x="475" y="83" fill="#FFD700" fontSize="10" fontFamily="sans-serif" opacity="0.65">positif →</text>
+      <text x="58"  y="83" style={{ fill: labelFill }} fontSize="10" fontFamily="sans-serif" opacity="0.65">← negatif</text>
+      <text x="475" y="83" style={{ fill: labelFill }} fontSize="10" fontFamily="sans-serif" opacity="0.65">positif →</text>
     </svg>
   );
 };
@@ -63,7 +66,7 @@ const NumberLineSVG = () => {
    Phase E (step 11)   : tampilkan hasil, jeda
    → loop
 ──────────────────────────────────────────────────────────────── */
-const SubtractionConceptSVG = () => {
+const SubtractionConceptSVG = ({ lightMode = false }: { lightMode?: boolean }) => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
@@ -122,10 +125,10 @@ const SubtractionConceptSVG = () => {
         </marker>
       </defs>
 
-      <text x="14" y="15" fill="#4ade80" fontSize="10" fontFamily="sans-serif" fontWeight="bold">KANAN →</text>
-      <text x="14" y="27" fill="#4ade80" fontSize="9"  fontFamily="sans-serif" opacity="0.8">(tambah positif)</text>
-      <text x="626" y="15" fill="#f87171" fontSize="10" fontFamily="sans-serif" fontWeight="bold" textAnchor="end">← KIRI</text>
-      <text x="626" y="27" fill="#f87171" fontSize="9"  fontFamily="sans-serif" opacity="0.8" textAnchor="end">(kurangi / tambah negatif)</text>
+      <text x="14" y="15" style={{ fill: lightMode ? "var(--text-secondary)" : "#4ade80" }} fontSize="10" fontFamily="sans-serif" fontWeight="bold">KANAN →</text>
+      <text x="14" y="27" style={{ fill: lightMode ? "var(--text-secondary)" : "#4ade80" }} fontSize="9"  fontFamily="sans-serif" opacity="0.8">(tambah positif)</text>
+      <text x="626" y="15" style={{ fill: lightMode ? "var(--text-secondary)" : "#f87171" }} fontSize="10" fontFamily="sans-serif" fontWeight="bold" textAnchor="end">← KIRI</text>
+      <text x="626" y="27" style={{ fill: lightMode ? "var(--text-secondary)" : "#f87171" }} fontSize="9"  fontFamily="sans-serif" opacity="0.8" textAnchor="end">(kurangi / tambah negatif)</text>
 
       {isPhaseRight && (
         <text x="320" y="22" textAnchor="middle" fill="#4ade8099" fontSize="11" fontFamily="sans-serif" fontWeight="bold">
@@ -155,7 +158,7 @@ const SubtractionConceptSVG = () => {
         const isRes     = showResult && n === 2;
         const isMid     = step >= 6 && n === 5;
         const tickColor = isRes ? "#67e8f9" : isMid ? "#86efac" : isZero ? "var(--text-primary)" : "#FFD700";
-        const txtColor  = isRes ? "#67e8f9" : isMid ? "#86efac" : isZero ? "var(--text-primary)" : "#FFE57F";
+        const txtColor  = isRes ? "#67e8f9" : isMid ? "#86efac" : isZero ? "var(--text-primary)" : (lightMode ? "var(--text-primary)" : "#FFE57F");
         const prominent = isZero || isRes || isMid;
         return (
           <g key={n}>
@@ -350,6 +353,8 @@ const NumberLineContoh1SVG = () => {
 
 const PenguranganBilanganBulatPage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const lightMode = ["light", "white", "forest"].includes(theme);
   const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh", "sifat", "kesimpulan"]);
 
   const toggleSection = (section: string) => {
@@ -455,16 +460,16 @@ const PenguranganBilanganBulatPage = () => {
                 </div>
 
                 <div className="bg-slate-900/60 rounded-xl p-4 border border-yellow-500/20">
-                  <p className="text-yellow-300/70 text-xs text-center mb-2 font-body">Garis Bilangan</p>
-                  <NumberLineSVG />
+                  <p className={`text-xs text-center mb-2 font-body ${lightMode ? "text-foreground/60" : "text-yellow-300/70"}`}>Garis Bilangan</p>
+                  <NumberLineSVG lightMode={lightMode} />
                 </div>
 
                 {/* ── Demo Animasi Konsep ── */}
                 <div className="bg-slate-900/60 rounded-xl p-3 border border-cyan-500/20">
-                  <p className="text-cyan-300/70 text-xs text-center mb-1 font-body">
+                  <p className={`text-xs text-center mb-1 font-body ${lightMode ? "text-foreground/60" : "text-cyan-300/70"}`}>
                     Demo: Pengurangan pada Garis Bilangan · 5 − 3 = 5 + (−3) = 2
                   </p>
-                  <SubtractionConceptSVG />
+                  <SubtractionConceptSVG lightMode={lightMode} />
                 </div>
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">

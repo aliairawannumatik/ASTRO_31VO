@@ -9,7 +9,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 const WelcomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const isLight = theme === "light";
+  const isLight = ["light", "white", "forest"].includes(theme);
 
   return (
     <div
@@ -48,8 +48,9 @@ const WelcomePage = () => {
         {/* Welcome text */}
         <p
           className={`font-display text-2xl sm:text-3xl font-bold tracking-widest mb-6 animate-fade-in ${
-            isLight ? "text-cyan-500" : "text-cyan-400"
+            isLight ? "" : "text-cyan-400"
           }`}
+          style={isLight ? { color: "var(--text-primary)" } : undefined}
         >
           Selamat Datang di Aplikasi
         </p>
@@ -71,8 +72,9 @@ const WelcomePage = () => {
         {/* Subtitle */}
         <p
           className={`font-display text-sm sm:text-base font-semibold mb-12 leading-relaxed ${
-            isLight ? "text-slate-400" : "text-cyan-300"
+            isLight ? "" : "text-cyan-300"
           }`}
+          style={isLight ? { color: "var(--text-primary)" } : undefined}
         >
           Numerasi Aktif dengan Teknologi<br />Informasi dan Komunikasi
         </p>
