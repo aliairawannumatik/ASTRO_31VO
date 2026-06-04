@@ -35,6 +35,16 @@ const THEME_DEFS: ThemeDef[] = [
     activeDot: "bg-violet-400",
   },
   {
+    id: "white",
+    emoji: "🤍",
+    name: "Putih Bersih",
+    desc: "Minimalis & polos 🕊️",
+    gradient: "linear-gradient(135deg,#ffffff,#f8fafc,#f1f5f9)",
+    activeBorder: "border-slate-400",
+    activeShadow: "shadow-[0_0_16px_rgba(148,163,184,0.5)]",
+    activeDot: "bg-slate-400",
+  },
+  {
     id: "ocean",
     emoji: "🌊",
     name: "Lautan Biru",
@@ -53,16 +63,6 @@ const THEME_DEFS: ThemeDef[] = [
     activeBorder: "border-blue-500",
     activeShadow: "shadow-[0_0_16px_rgba(59,130,246,0.35)]",
     activeDot: "bg-blue-500",
-  },
-  {
-    id: "white",
-    emoji: "🤍",
-    name: "Putih Bersih",
-    desc: "Minimalis & polos 🕊️",
-    gradient: "linear-gradient(135deg,#ffffff,#f8fafc,#f1f5f9)",
-    activeBorder: "border-slate-400",
-    activeShadow: "shadow-[0_0_16px_rgba(148,163,184,0.5)]",
-    activeDot: "bg-slate-400",
   },
   {
     id: "forest",
