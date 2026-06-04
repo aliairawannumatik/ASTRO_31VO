@@ -35,13 +35,13 @@ const NumberLineSVG = () => {
             <line
               x1={x} y1={isZero ? 26 : 30}
               x2={x} y2={isZero ? 50 : 46}
-              stroke={isZero ? "#FFFFFF" : "#FFD700"}
+              stroke={isZero ? "var(--text-primary)" : "#FFD700"}
               strokeWidth={isZero ? 2.5 : 1.8}
             />
             <text
               x={x} y={66}
               textAnchor="middle"
-              fill={isZero ? "#FFFFFF" : "#FFE57F"}
+              fill={isZero ? "var(--text-primary)" : "#FFE57F"}
               fontSize={isZero ? "14" : "12"}
               fontWeight={isZero ? "bold" : "normal"}
               fontFamily="monospace"
@@ -103,7 +103,7 @@ const SubtractionConceptSVG = () => {
     step === 11 ? "#67e8f9" :
     step >= 8   ? "#f87171" :
     step >= 1   ? "#4ade80" :
-    "#ffffff";
+    "var(--text-primary)";
 
   return (
     <svg viewBox="0 0 640 152" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -147,15 +147,15 @@ const SubtractionConceptSVG = () => {
         stroke="#FFD700" strokeWidth="2.5"
         markerEnd="url(#sc-ar)" markerStart="url(#sc-al)"/>
 
-      <circle cx={cx(0)} cy={yA} r="5" fill="#ffffff" opacity="0.9"/>
+      <circle cx={cx(0)} cy={yA} r="5" fill="var(--text-primary)" opacity="0.9"/>
 
       {nums.map(n => {
         const x         = cx(n);
         const isZero    = n === 0;
         const isRes     = showResult && n === 2;
         const isMid     = step >= 6 && n === 5;
-        const tickColor = isRes ? "#67e8f9" : isMid ? "#86efac" : isZero ? "#ffffff" : "#FFD700";
-        const txtColor  = isRes ? "#67e8f9" : isMid ? "#86efac" : isZero ? "#ffffff" : "#FFE57F";
+        const tickColor = isRes ? "#67e8f9" : isMid ? "#86efac" : isZero ? "var(--text-primary)" : "#FFD700";
+        const txtColor  = isRes ? "#67e8f9" : isMid ? "#86efac" : isZero ? "var(--text-primary)" : "#FFE57F";
         const prominent = isZero || isRes || isMid;
         return (
           <g key={n}>
@@ -284,11 +284,11 @@ const NumberLineContoh1SVG = () => {
         const isKey  = n === 2 || n === 6;
         const tickClr = n === 2 && showResult ? "#67e8f9"
                        : n === 6 && step >= 7  ? "#86efac"
-                       : isZero               ? "#ffffff"
+                       : isZero               ? "var(--text-primary)"
                        :                        "#FFD700";
         const txtClr  = n === 2 && showResult ? "#67e8f9"
                        : n === 6 && step >= 7  ? "#86efac"
-                       : isZero               ? "#ffffff"
+                       : isZero               ? "var(--text-primary)"
                        :                        "#FFE57F";
         return (
           <g key={n}>

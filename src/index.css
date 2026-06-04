@@ -99,16 +99,59 @@
 }
 
 /* 3. Override white/50 and similar opacity variants for light themes */
+[data-theme="light"] .text-white\/25,
+[data-theme="light"] .text-white\/30,
 [data-theme="light"] .text-white\/50,
+[data-theme="light"] .text-white\/60,
 [data-theme="light"] .text-white\/70,
 [data-theme="light"] .text-white\/80,
+[data-theme="white"] .text-white\/25,
+[data-theme="white"] .text-white\/30,
 [data-theme="white"] .text-white\/50,
+[data-theme="white"] .text-white\/60,
 [data-theme="white"] .text-white\/70,
 [data-theme="white"] .text-white\/80,
+[data-theme="forest"] .text-white\/25,
+[data-theme="forest"] .text-white\/30,
 [data-theme="forest"] .text-white\/50,
+[data-theme="forest"] .text-white\/60,
 [data-theme="forest"] .text-white\/70,
 [data-theme="forest"] .text-white\/80 {
   color: var(--text-secondary) !important;
+}
+
+/* 4. Override hardcoded dark slate backgrounds for light/white/forest themes */
+[data-theme="light"] .bg-slate-950\/80,
+[data-theme="white"] .bg-slate-950\/80,
+[data-theme="forest"] .bg-slate-950\/80,
+[data-theme="light"] .bg-slate-900\/80,
+[data-theme="white"] .bg-slate-900\/80,
+[data-theme="forest"] .bg-slate-900\/80,
+[data-theme="light"] .bg-slate-900\/60,
+[data-theme="white"] .bg-slate-900\/60,
+[data-theme="forest"] .bg-slate-900\/60,
+[data-theme="light"] .bg-slate-900\/50,
+[data-theme="white"] .bg-slate-900\/50,
+[data-theme="forest"] .bg-slate-900\/50,
+[data-theme="light"] .bg-slate-900\/40,
+[data-theme="white"] .bg-slate-900\/40,
+[data-theme="forest"] .bg-slate-900\/40,
+[data-theme="light"] .bg-slate-900\/30,
+[data-theme="white"] .bg-slate-900\/30,
+[data-theme="forest"] .bg-slate-900\/30,
+[data-theme="light"] .bg-slate-800\/60,
+[data-theme="white"] .bg-slate-800\/60,
+[data-theme="forest"] .bg-slate-800\/60,
+[data-theme="light"] .bg-slate-800\/50,
+[data-theme="white"] .bg-slate-800\/50,
+[data-theme="forest"] .bg-slate-800\/50,
+[data-theme="light"] .bg-slate-800\/40,
+[data-theme="white"] .bg-slate-800\/40,
+[data-theme="forest"] .bg-slate-800\/40,
+[data-theme="light"] .bg-slate-700\/60,
+[data-theme="white"] .bg-slate-700\/60,
+[data-theme="forest"] .bg-slate-700\/60 {
+  background-color: var(--bg-secondary) !important;
 }
 
 @tailwind base;

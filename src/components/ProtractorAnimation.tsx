@@ -117,7 +117,7 @@ function ProtractorBody({ angle }: { angle: number }) {
       })}
 
       {/* Center base notch */}
-      <rect x={-3} y={-3} width={6} height={6} fill="#1e293b" rx={1} />
+      <rect x={-3} y={-3} width={6} height={6} fill="var(--bg-secondary)" rx={1} />
       <circle cx={0} cy={0} r={2.5} fill="#facc15" />
 
       {/* 0 and 180 end markers */}
@@ -138,7 +138,7 @@ function ProtractorBody({ angle }: { angle: number }) {
 
       {/* Angle readout bubble */}
       <g transform={`translate(${midPt.x},${midPt.y})`}>
-        <rect x={-18} y={-9} width={36} height={18} rx={5} fill="rgba(15,23,42,0.85)" stroke="#facc15" strokeWidth={1} />
+        <rect x={-18} y={-9} width={36} height={18} rx={5} fill="var(--bg-card)" stroke="#facc15" strokeWidth={1} />
         <text textAnchor="middle" dominantBaseline="middle" fontSize="11" fill="#facc15" fontWeight="bold" fontFamily="monospace">
           {angle}°
         </text>

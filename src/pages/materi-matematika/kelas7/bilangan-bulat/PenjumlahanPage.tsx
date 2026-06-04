@@ -42,14 +42,14 @@ const NumberLineSVG = () => {
             <line
               x1={x} y1={isZero ? 26 : 30}
               x2={x} y2={isZero ? 50 : 46}
-              stroke={isZero ? "#FFFFFF" : "#FFD700"}
+              stroke={isZero ? "var(--text-primary)" : "#FFD700"}
               strokeWidth={isZero ? 2.5 : 1.8}
             />
             {/* Angka */}
             <text
               x={x} y={66}
               textAnchor="middle"
-              fill={isZero ? "#FFFFFF" : "#FFE57F"}
+              fill={isZero ? "var(--text-primary)" : "#FFE57F"}
               fontSize={isZero ? "14" : "12"}
               fontWeight={isZero ? "bold" : "normal"}
               fontFamily="monospace"
@@ -115,7 +115,7 @@ const DirectionDemoSVG = () => {
     step === 11 ? "#f87171" :
     step >= 7   ? "#f87171" :
     step >= 1   ? "#4ade80" :
-    "#ffffff";
+    "var(--text-primary)";
 
   return (
     <svg viewBox="0 0 640 152" width="100%" xmlns="http://www.w3.org/2000/svg">
