@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Settings, Volume2, VolumeX, Music2, Music4, Type, ChevronDown, Smartphone } from "lucide-react";
+import { Settings, Volume2, VolumeX, Music2, Music4, Type, ChevronDown } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme, Theme } from "@/contexts/ThemeContext";
 import { useSound } from "@/contexts/SoundContext";
@@ -150,31 +150,15 @@ const PengaturanPage = () => {
     musik: false,
     suara: false,
   });
-  const [vibrationOn, setVibrationOn] = useState<boolean>(() => {
-    const saved = localStorage.getItem("numatik-vibration");
-    return saved === null ? true : saved === "true";
-  });
-
   const toggleSection = useCallback((key: string) => {
     playPopSound();
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
   }, []);
 
-  const handleToggleVibration = useCallback(() => {
-    playPopSound();
-    setVibrationOn((prev) => {
-      const next = !prev;
-      localStorage.setItem("numatik-vibration", String(next));
-      if (next && navigator.vibrate) navigator.vibrate([30, 15, 60]);
-      return next;
-    });
-  }, []);
-
   const triggerShake = useCallback((id: string) => {
-    if (vibrationOn && navigator.vibrate) navigator.vibrate([40, 20, 40]);
     setShakingBtn(id);
     setTimeout(() => setShakingBtn(null), 400);
-  }, [vibrationOn]);
+  }, []);
 
   const handlePickTheme = (t: Theme) => {
     playPopSound();
@@ -720,45 +704,6 @@ const PengaturanPage = () => {
             </div>
           </div>
 
-        </div>
-
-        {/* ── GETAR / HAPTIC ── */}
-        <div className={`relative rounded-2xl overflow-hidden ${
-          isDark
-            ? "bg-gradient-to-br from-emerald-500/10 to-teal-500/5 border border-white/10 backdrop-blur-xl shadow-[0_4px_32px_rgba(16,185,129,0.10)]"
-            : "bg-white/92 backdrop-blur-xl border border-emerald-100/80 shadow-xl"
-        }`}>
-          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-emerald-400 to-teal-500 rounded-r-full" />
-          <div className="px-5 py-5 pl-6">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/30 flex-shrink-0">
-                <Smartphone className="w-[18px] h-[18px] text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
-                  Efek Getar
-                </h2>
-                <p className={`font-body text-[11px] ${
-                  vibrationOn
-                    ? isDark ? "text-emerald-300/80" : "text-emerald-600"
-                    : isDark ? "text-white/35" : "text-gray-400"
-                }`}>
-                  {vibrationOn ? "📳 Getar tombol aktif" : "📵 Getar dimatikan"}
-                </p>
-              </div>
-              <button
-                onClick={() => { handleToggleVibration(); triggerShake("vibration-toggle"); }}
-                className={`relative rounded-full transition-all duration-300 flex-shrink-0 ${shakingBtn === "vibration-toggle" ? "numatik-shake" : ""} ${
-                  vibrationOn
-                    ? "bg-gradient-to-r from-emerald-500 to-teal-500 shadow-[0_0_14px_rgba(16,185,129,0.5)]"
-                    : isDark ? "bg-white/15" : "bg-gray-300"
-                }`}
-                style={{ width: "52px", height: "28px" }}
-              >
-                <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${vibrationOn ? "translate-x-6" : "translate-x-0"}`} />
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Footer note */}
