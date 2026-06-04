@@ -88,15 +88,7 @@
 
 /* ── Theme-aware overrides for hardcoded legacy components ── */
 
-/* 1. Subtopic button plain overlays: soften dark overlays for light/forest themes.
-   NOTE: background-image NOT overridden so gradient buttons keep their colours. */
-[data-theme="light"] button > div.absolute.inset-0.backdrop-blur:not([style*="gradient"]),
-[data-theme="white"] button > div.absolute.inset-0.backdrop-blur:not([style*="gradient"]),
-[data-theme="forest"] button > div.absolute.inset-0.backdrop-blur:not([style*="gradient"]) {
-  background-color: var(--btn-bg) !important;
-}
-
-/* 2. Override hardcoded text-white class for non-dark themes */
+/* 1. Override hardcoded text-white class for non-dark themes */
 [data-theme="light"] .text-white,
 [data-theme="white"] .text-white,
 [data-theme="forest"] .text-white {
