@@ -201,33 +201,39 @@ const SubmaterialGameVariantsChooser = () => {
                     : `0 2px 20px rgba(0,0,0,0.4)`;
                 }}
               >
+                {/* White theme: bare hint of color so card stays clean */}
                 <div
                   className="absolute inset-0 transition-opacity duration-300"
                   style={{ background: isWhite
-                    ? `linear-gradient(135deg, ${v.from}22, ${v.to}22)`
+                    ? `linear-gradient(135deg, ${v.from}0d, ${v.to}0d)`
                     : `linear-gradient(135deg, ${v.from}14, ${v.to}14)` }}
                 />
-                <div
-                  className={`absolute inset-0 transition-opacity duration-300 ${isWhite ? "opacity-[0.18] group-hover:opacity-[0.28]" : "opacity-[0.10] group-hover:opacity-[0.18]"}`}
-                  style={{ background: `linear-gradient(135deg, ${v.from}, ${v.to})` }}
-                />
+                {!isWhite && (
+                  <div
+                    className="absolute inset-0 opacity-[0.10] group-hover:opacity-[0.18] transition-opacity duration-300"
+                    style={{ background: `linear-gradient(135deg, ${v.from}, ${v.to})` }}
+                  />
+                )}
                 <div
                   className="absolute inset-0 rounded-2xl"
-                  style={{ border: isWhite ? `1.5px solid ${v.from}55` : "1px solid rgba(255,255,255,0.10)" }}
+                  style={{ border: isWhite ? `1.5px solid ${v.from}60` : "1px solid rgba(255,255,255,0.10)" }}
                 />
                 <div
-                  className="absolute top-0 left-0 right-0 h-px opacity-50"
-                  style={{ background: `linear-gradient(90deg, transparent, ${v.from}, ${v.to}, transparent)` }}
+                  className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
+                  style={{ background: isWhite
+                    ? `linear-gradient(90deg, ${v.from}, ${v.to})`
+                    : `linear-gradient(90deg, transparent, ${v.from}, ${v.to}, transparent)`,
+                    opacity: isWhite ? 0.7 : 0.5 }}
                 />
-                <div className={`absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out ${isWhite ? "bg-gradient-to-r from-white/0 via-white/30 to-white/0" : "bg-gradient-to-r from-white/0 via-white/5 to-white/0"}`} />
+                <div className={`absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out ${isWhite ? "bg-gradient-to-r from-white/0 via-white/40 to-white/0" : "bg-gradient-to-r from-white/0 via-white/5 to-white/0"}`} />
 
                 <div
                   className="relative flex-shrink-0 flex items-center justify-center w-20"
                   style={{
                     background: isWhite
-                      ? `linear-gradient(180deg, ${v.from}30, ${v.to}30)`
+                      ? `linear-gradient(180deg, ${v.from}1a, ${v.to}1a)`
                       : `linear-gradient(180deg, ${v.from}22, ${v.to}22)`,
-                    borderRight: isWhite ? `1.5px solid ${v.from}40` : "1px solid rgba(255,255,255,0.10)",
+                    borderRight: isWhite ? `1.5px solid ${v.from}35` : "1px solid rgba(255,255,255,0.10)",
                   }}
                 >
                   {v.variantSlug === "pesawat-tembak-meteor" ? (
@@ -265,10 +271,10 @@ const SubmaterialGameVariantsChooser = () => {
 
                 <div className="relative flex-1 flex items-center gap-3 px-4 py-4 min-w-0">
                   <div className="min-w-0 flex-1">
-                    <div className={`font-display text-sm font-bold leading-tight mb-1 ${isWhite ? "text-gray-900" : "text-white"}`}>
+                    <div className={`font-display text-sm font-bold leading-tight mb-1 ${isWhite ? "text-gray-800" : "text-white"}`}>
                       {v.name}
                     </div>
-                    <div className={`text-[11px] font-body leading-snug ${isWhite ? "text-gray-500" : "text-white/50"}`}>
+                    <div className={`text-[11px] font-body leading-snug ${isWhite ? "text-gray-400" : "text-white/50"}`}>
                       {v.description}
                     </div>
                   </div>
