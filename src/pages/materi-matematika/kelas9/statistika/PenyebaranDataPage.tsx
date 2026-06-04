@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import JangkauanAnimasi from "@/components/JangkauanAnimasi";
+import JIKdanSKAnimasi from "@/components/JIKdanSKAnimasi";
 
 const PenyebaranDataPage = () => {
   const navigate = useNavigate();
@@ -56,6 +57,8 @@ const PenyebaranDataPage = () => {
         </p>
 
         <JangkauanAnimasi />
+
+        <JIKdanSKAnimasi />
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
