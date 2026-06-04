@@ -16,16 +16,16 @@ const situations: SituationCard[] = [
           <text x="140" y="28" fontSize="14" fontWeight="bold" fill="#a78bfa" textAnchor="middle">f(x) = ax² + bx + c</text>
           <text x="140" y="50" fontSize="10" fill="#fde68a" textAnchor="middle">a, b, c ∈ ℝ, a ≠ 0</text>
           <rect x="20" y="65" width="70" height="55" rx="8" fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="55" y="87" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">a</text>
+          <text x="55" y="87" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">a</text>
           <text x="55" y="105" fontSize="9" fill="#fde68a" textAnchor="middle">arah & lebar</text>
           <rect x="105" y="65" width="70" height="55" rx="8" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="140" y="87" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">b</text>
+          <text x="140" y="87" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">b</text>
           <text x="140" y="105" fontSize="9" fill="#fde68a" textAnchor="middle">posisi sumbu</text>
           <rect x="190" y="65" width="70" height="55" rx="8" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="225" y="87" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">c</text>
+          <text x="225" y="87" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">c</text>
           <text x="225" y="105" fontSize="9" fill="#fde68a" textAnchor="middle">titik potong y</text>
           <rect x="40" y="135" width="200" height="48" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="155" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Contoh: f(x) = 2x² − 4x + 3</text>
+          <text x="140" y="155" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Contoh: f(x) = 2x² − 4x + 3</text>
           <text x="140" y="175" fontSize="10" fill="#fde68a" textAnchor="middle">a=2, b=−4, c=3 — grafik PARABOLA</text>
         </svg>
       </div>

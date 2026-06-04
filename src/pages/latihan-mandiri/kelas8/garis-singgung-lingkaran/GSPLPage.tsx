@@ -56,13 +56,13 @@ const DiagramGSPLDuaLingkaran = ({
         transform={`rotate(${Math.atan2(ay - cy, ax - cx1) * 180 / Math.PI + 90}, ${ax}, ${ay})`} />
       <rect x={bx - 6} y={by - 1} width="6" height="6" fill="none" stroke="#facc15" strokeWidth="1.2"
         transform={`rotate(${Math.atan2(by - cy, bx - cx2) * 180 / Math.PI + 90}, ${bx}, ${by})`} />
-      <circle cx={cx1} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <circle cx={cx1} cy={cy} r={3.5} fill="#94a3b8" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx1 - 8} y={cy + 18} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">{labelP ?? "M"}</text>
-      <circle cx={cx2} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <circle cx={cx2} cy={cy} r={3.5} fill="#94a3b8" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx2 - 4} y={cy + 18} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">{labelQ ?? "N"}</text>
-      <circle cx={ax} cy={ay} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <circle cx={ax} cy={ay} r={3.5} fill="#34d399" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={ax - 16} y={ay - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">{labelA ?? "A"}</text>
-      <circle cx={bx} cy={by} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <circle cx={bx} cy={by} r={3.5} fill="#34d399" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={bx + 5} y={by - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">{labelB ?? "B"}</text>
       {labelPA && (
         <text x={cx1 - 22} y={cy - r1px / 2} fill={C} fontSize="10" fontWeight="bold" fontFamily="sans-serif">{labelPA}</text>
@@ -106,15 +106,15 @@ const DiagramBersinggungLuar = ({ size = 240 }: { size?: number }) => {
       <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#34d399" strokeWidth="2.2" />
       <line x1={ax2} y1={ay2} x2={bx2} y2={by2} stroke="#34d399" strokeWidth="2.2" />
       <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
-      <circle cx={tx} cy={ty} r={3} fill="#facc15" stroke="white" strokeWidth="1" />
+      <circle cx={tx} cy={ty} r={3} fill="#facc15" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={tx - 4} y={ty + 16} fill="#facc15" fontSize="9" fontFamily="sans-serif">titik singgung</text>
-      <circle cx={cx1} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <circle cx={cx1} cy={cy} r={3.5} fill="#94a3b8" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx1 - 8} y={cy + 17} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">P</text>
-      <circle cx={cx2} cy={cy} r={3.5} fill="#94a3b8" stroke="white" strokeWidth="1" />
+      <circle cx={cx2} cy={cy} r={3.5} fill="#94a3b8" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx2 - 4} y={cy + 17} fill="#94a3b8" fontSize="12" fontWeight="bold" fontFamily="serif">Q</text>
-      <circle cx={ax} cy={ay} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <circle cx={ax} cy={ay} r={3.5} fill="#34d399" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={ax - 16} y={ay - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">A</text>
-      <circle cx={bx} cy={by} r={3.5} fill="#34d399" stroke="white" strokeWidth="1" />
+      <circle cx={bx} cy={by} r={3.5} fill="#34d399" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={bx + 5} y={by - 5} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">B</text>
       <line x1={cx1} y1={cy} x2={ax} y2={ay} stroke="#60a5fa" strokeWidth="1.3" strokeDasharray="3,2" />
       <line x1={cx2} y1={cy} x2={bx} y2={by} stroke="#fb923c" strokeWidth="1.3" strokeDasharray="3,2" />
@@ -175,15 +175,15 @@ const DiagramGir = ({ size = 280 }: { size?: number }) => {
       <circle cx={cx2} cy={cy} r={r2} fill="rgba(56,189,248,0.18)" stroke={C} strokeWidth="1.5" />
       {gearTeeth(cx2, cy, r2, r2 + 5, toothCount2, "rgba(56,189,248,0.6)")}
       <circle cx={cx2} cy={cy} r={r2 * 0.35} fill="rgba(56,189,248,0.3)" stroke={C} strokeWidth="1.5" />
-      <circle cx={cx1} cy={cy} r={3.5} fill="#fb923c" stroke="white" strokeWidth="1" />
+      <circle cx={cx1} cy={cy} r={3.5} fill="#fb923c" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx1 - 6} y={cy + 18} fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="serif">Q₁</text>
-      <circle cx={cx2} cy={cy} r={3.5} fill={C} stroke="white" strokeWidth="1" />
+      <circle cx={cx2} cy={cy} r={3.5} fill={C} stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx2 - 6} y={cy + 18} fill={C} fontSize="11" fontWeight="bold" fontFamily="serif">Q₂</text>
       <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1" strokeDasharray="4,3" />
       <text x={(cx1 + cx2) / 2 - 10} y={cy + 12} fill="#94a3b8" fontSize="10" fontWeight="bold" fontFamily="sans-serif">d</text>
-      <circle cx={ax} cy={ay} r={4} fill="#34d399" stroke="white" strokeWidth="1.2" />
+      <circle cx={ax} cy={ay} r={4} fill="#34d399" stroke="var(--icon-stroke)" strokeWidth="1.2" />
       <text x={ax - 14} y={ay - 7} fill="#34d399" fontSize="12" fontWeight="bold" fontFamily="serif">A</text>
-      <circle cx={bx} cy={by} r={4} fill="#facc15" stroke="white" strokeWidth="1.2" />
+      <circle cx={bx} cy={by} r={4} fill="#facc15" stroke="var(--icon-stroke)" strokeWidth="1.2" />
       <text x={bx + 5} y={by - 7} fill="#facc15" fontSize="12" fontWeight="bold" fontFamily="serif">B</text>
     </svg>
   );

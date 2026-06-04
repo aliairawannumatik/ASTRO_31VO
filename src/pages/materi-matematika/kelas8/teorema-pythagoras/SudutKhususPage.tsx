@@ -16,7 +16,7 @@ const Sudut4545SVG = () => (
     {/* Triangle */}
     <polygon points="20,150 140,150 20,30" fill="rgba(168,85,247,0.2)" stroke="#a855f7" strokeWidth="2"/>
     {/* Right angle mark */}
-    <polyline points="20,130 40,130 40,150" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.8"/>
+    <polyline points="20,130 40,130 40,150" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.8"/>
     {/* Sides */}
     <line x1="20" y1="30" x2="20" y2="150" stroke="#3b82f6" strokeWidth="2.5" className="g45"/>
     <line x1="20" y1="150" x2="140" y2="150" stroke="#22c55e" strokeWidth="2.5" className="g45"/>
@@ -24,7 +24,7 @@ const Sudut4545SVG = () => (
     {/* Angle labels */}
     <text x="145" y="155" fill="#eab308" fontSize="10" fontFamily="monospace">45°</text>
     <text x="25" y="28" fill="#eab308" fontSize="10" fontFamily="monospace">45°</text>
-    <text x="44" y="148" fill="#fff" fontSize="9" fontFamily="monospace">90°</text>
+    <text x="44" y="148" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">90°</text>
     {/* Side labels */}
     <text x="6" y="95" fill="#60a5fa" fontSize="12" fontWeight="bold" textAnchor="middle">a</text>
     <text x="80" y="163" fill="#4ade80" fontSize="12" fontWeight="bold" textAnchor="middle">a</text>
@@ -44,7 +44,7 @@ const Sudut3060SVG = () => (
     {/* Triangle */}
     <polygon points="20,160 200,160 20,70" fill="rgba(34,197,94,0.15)" stroke="#22c55e" strokeWidth="2"/>
     {/* Right angle mark */}
-    <polyline points="20,140 40,140 40,160" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.8"/>
+    <polyline points="20,140 40,140 40,160" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.8"/>
     {/* Sides */}
     <line x1="20" y1="70" x2="20" y2="160" stroke="#3b82f6" strokeWidth="2.5" className="g30"/>
     <line x1="20" y1="160" x2="200" y2="160" stroke="#22c55e" strokeWidth="2.5" className="g30"/>
@@ -52,7 +52,7 @@ const Sudut3060SVG = () => (
     {/* Angle labels */}
     <text x="205" y="165" fill="#eab308" fontSize="10" fontFamily="monospace">30°</text>
     <text x="25" y="68" fill="#eab308" fontSize="10" fontFamily="monospace">60°</text>
-    <text x="44" y="158" fill="#fff" fontSize="9" fontFamily="monospace">90°</text>
+    <text x="44" y="158" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">90°</text>
     {/* Side labels */}
     <text x="7" y="118" fill="#60a5fa" fontSize="12" fontWeight="bold" textAnchor="middle">a</text>
     <text x="110" y="175" fill="#4ade80" fontSize="12" fontWeight="bold" textAnchor="middle">a√3</text>

@@ -17,14 +17,14 @@ const situations: SituationCard[] = [
           <rect x="30" y="38" width="220" height="100" rx="8" fill="#1e293b" stroke="#67e8f9" strokeWidth="2" />
           <text x="38" y="52" fontSize="9" fill="#67e8f9">S</text>
           <circle cx="100" cy="88" r="35" fill="#22d3ee" fillOpacity="0.45" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="100" y="92" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">A</text>
+          <text x="100" y="92" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">A</text>
           <text x="100" y="108" fontSize="9" fill="#fde68a" textAnchor="middle">{"{2,4,6}"}</text>
           <circle cx="180" cy="88" r="22" fill="#a78bfa" fillOpacity="0.45" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="180" y="92" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">B</text>
+          <text x="180" y="92" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">B</text>
           <text x="180" y="108" fontSize="9" fill="#fde68a" textAnchor="middle">{"{1}"}</text>
           <text x="140" y="155" fontSize="11" fill="#a7f3d0" textAnchor="middle">A ∩ B = ∅ → SALING LEPAS</text>
           <rect x="40" y="170" width="200" height="22" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="186" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">P(A∪B) = P(A) + P(B) = 3/6 + 1/6 = 4/6</text>
+          <text x="140" y="186" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">P(A∪B) = P(A) + P(B) = 3/6 + 1/6 = 4/6</text>
         </svg>
       </div>
     ),
@@ -40,15 +40,15 @@ const situations: SituationCard[] = [
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#fda4af" textAnchor="middle">{"Dadu: A = genap, B = mata > 3"}</text>
           <rect x="30" y="38" width="220" height="110" rx="8" fill="#1e293b" stroke="#fda4af" strokeWidth="2" />
           <circle cx="115" cy="92" r="40" fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="80" y="80" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">A</text>
+          <text x="80" y="80" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">A</text>
           <text x="80" y="100" fontSize="9" fill="#fde68a" textAnchor="middle">{"{2,4,6}"}</text>
           <circle cx="170" cy="92" r="40" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="200" y="80" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">B</text>
+          <text x="200" y="80" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">B</text>
           <text x="200" y="100" fontSize="9" fill="#fde68a" textAnchor="middle">{"{4,5,6}"}</text>
-          <text x="142" y="98" fontSize="9" fill="#fff" textAnchor="middle">{"{4,6}"}</text>
+          <text x="142" y="98" fontSize="9" fill="var(--icon-color)" textAnchor="middle">{"{4,6}"}</text>
           <text x="140" y="165" fontSize="10" fill="#fda4af" textAnchor="middle">A ∩ B = {"{4,6}"} ≠ ∅ → BERIRISAN</text>
           <rect x="20" y="178" width="240" height="18" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="191" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">P(A∪B) = P(A)+P(B)−P(A∩B) = 3/6+3/6−2/6 = 4/6</text>
+          <text x="140" y="191" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">P(A∪B) = P(A)+P(B)−P(A∩B) = 3/6+3/6−2/6 = 4/6</text>
         </svg>
       </div>
     ),
@@ -64,13 +64,13 @@ const situations: SituationCard[] = [
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">2 koin: P(A pada koin1 DAN A pada koin2)</text>
           <circle cx="80" cy="80" r="32" fill="#fbbf24" fillOpacity="0.45" stroke="#fde68a" strokeWidth="1.5" />
           <text x="80" y="86" fontSize="20" fontWeight="bold" fill="#1f2937" textAnchor="middle">A</text>
-          <text x="80" y="125" fontSize="10" fill="#fff" textAnchor="middle">P=1/2</text>
+          <text x="80" y="125" fontSize="10" fill="var(--icon-color)" textAnchor="middle">P=1/2</text>
           <text x="140" y="85" fontSize="22" fill="#67e8f9" textAnchor="middle">×</text>
           <circle cx="200" cy="80" r="32" fill="#fbbf24" fillOpacity="0.45" stroke="#fde68a" strokeWidth="1.5" />
           <text x="200" y="86" fontSize="20" fontWeight="bold" fill="#1f2937" textAnchor="middle">A</text>
-          <text x="200" y="125" fontSize="10" fill="#fff" textAnchor="middle">P=1/2</text>
+          <text x="200" y="125" fontSize="10" fill="var(--icon-color)" textAnchor="middle">P=1/2</text>
           <rect x="40" y="145" width="200" height="28" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="164" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">P(A∩B) = 1/2 × 1/2 = 1/4</text>
+          <text x="140" y="164" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">P(A∩B) = 1/2 × 1/2 = 1/4</text>
         </svg>
       </div>
     ),

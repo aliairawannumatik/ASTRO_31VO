@@ -16,11 +16,11 @@ const situations: SituationCard[] = [
           <text x="140" y="22" fontSize="13" fontWeight="bold" fill="#f0abfc" textAnchor="middle">PK: ax² + bx + c = 0</text>
           <text x="140" y="42" fontSize="10" fill="#fde68a" textAnchor="middle">Akar-akar: x₁ dan x₂</text>
           <rect x="20" y="55" width="240" height="32" rx="6" fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="140" y="77" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">x₁ + x₂ = −b/a</text>
+          <text x="140" y="77" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x₁ + x₂ = −b/a</text>
           <rect x="20" y="92" width="240" height="32" rx="6" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="140" y="114" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">x₁ · x₂ = c/a</text>
+          <text x="140" y="114" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x₁ · x₂ = c/a</text>
           <rect x="20" y="135" width="240" height="50" rx="8" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="140" y="155" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">PK BARU dengan akar α, β:</text>
+          <text x="140" y="155" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">PK BARU dengan akar α, β:</text>
           <text x="140" y="175" fontSize="13" fontWeight="bold" fill="#fde68a" textAnchor="middle">x² − (α+β)x + αβ = 0</text>
         </svg>
       </div>
@@ -37,15 +37,15 @@ const situations: SituationCard[] = [
           <text x="140" y="22" fontSize="12" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">PK lama: x² − 5x + 6 = 0 → x₁=2, x₂=3</text>
           <text x="140" y="42" fontSize="11" fill="#fde68a" textAnchor="middle">Susun PK BARU dengan akar (x₁+1) dan (x₂+1):</text>
           <rect x="20" y="55" width="240" height="22" rx="6" fill="#a7f3d0" fillOpacity="0.3" />
-          <text x="140" y="71" fontSize="10" fill="#fff" textAnchor="middle">α = x₁+1 = 3, β = x₂+1 = 4</text>
+          <text x="140" y="71" fontSize="10" fill="var(--icon-color)" textAnchor="middle">α = x₁+1 = 3, β = x₂+1 = 4</text>
           <rect x="20" y="82" width="240" height="22" rx="6" fill="#fde68a" fillOpacity="0.3" />
-          <text x="140" y="98" fontSize="10" fill="#fff" textAnchor="middle">α + β = 7</text>
+          <text x="140" y="98" fontSize="10" fill="var(--icon-color)" textAnchor="middle">α + β = 7</text>
           <rect x="20" y="109" width="240" height="22" rx="6" fill="#fde68a" fillOpacity="0.3" />
-          <text x="140" y="125" fontSize="10" fill="#fff" textAnchor="middle">α · β = 12</text>
+          <text x="140" y="125" fontSize="10" fill="var(--icon-color)" textAnchor="middle">α · β = 12</text>
           <rect x="20" y="136" width="240" height="35" rx="8" fill="#22d3ee" fillOpacity="0.45" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="140" y="160" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">x² − 7x + 12 = 0</text>
+          <text x="140" y="160" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x² − 7x + 12 = 0</text>
           <rect x="20" y="180" width="240" height="32" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="200" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">Tanpa cari akar baru → pakai Vieta!</text>
+          <text x="140" y="200" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Tanpa cari akar baru → pakai Vieta!</text>
         </svg>
       </div>
     ),

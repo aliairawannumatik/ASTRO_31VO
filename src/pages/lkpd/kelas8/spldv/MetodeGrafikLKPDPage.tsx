@@ -125,7 +125,7 @@ function GrafikSPLDV({ eq1, eq2, xp, yp, color1="rgb(34,211,238)", color2="rgb(5
       {/* line 2 */}
       <line x1={toSvg(pts2[0].x,pts2[0].y).sx} y1={toSvg(pts2[0].x,pts2[0].y).sy} x2={toSvg(pts2[1].x,pts2[1].y).sx} y2={toSvg(pts2[1].x,pts2[1].y).sy} stroke={color2} strokeWidth={2}/>
       {/* intersection */}
-      <circle cx={ix} cy={iy} r={6} fill="rgba(250,204,21,0.9)" stroke="white" strokeWidth={1.5}/>
+      <circle cx={ix} cy={iy} r={6} fill="rgba(250,204,21,0.9)" stroke="var(--icon-stroke)" strokeWidth={1.5}/>
       <text x={ix+8} y={iy-5} fill="rgb(250,204,21)" fontSize={11} fontWeight="bold">({xp},{yp})</text>
       {/* legend */}
       <line x1={14} y1={H-20} x2={34} y2={H-20} stroke={color1} strokeWidth={2}/>

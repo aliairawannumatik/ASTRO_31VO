@@ -13,7 +13,7 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-700/20 border border-emerald-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">7 data: 5, 7, 8, 6, 9, 4, 10</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">7 data: 5, 7, 8, 6, 9, 4, 10</text>
           <text x="140" y="45" fontSize="9" fill="#fde68a" textAnchor="middle">Urutkan dahulu!</text>
           {[4, 5, 6, 7, 8, 9, 10].map((n, i) => (
             <g key={i}>
@@ -23,7 +23,7 @@ const situations: SituationCard[] = [
                 stroke={i === 3 ? "#fde68a" : "#6ee7b7"}
                 strokeWidth="1.5"
               />
-              <text x={35 + i * 35} y={80} fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={35 + i * 35} y={80} fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="140" y="115" fontSize="10" fill="#fbbf24" textAnchor="middle">Data tengah (urutan ke-4) = 7</text>
@@ -42,7 +42,7 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-rose-500/20 to-fuchsia-700/20 border border-rose-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">8 data terurut: 4, 5, 6, 7, 8, 9, 10, 10</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">8 data terurut: 4, 5, 6, 7, 8, 9, 10, 10</text>
           {[4, 5, 6, 7, 8, 9, 10, 10].map((n, i) => (
             <g key={i}>
               <rect x={10 + i * 32} y={50} width={28} height={28} rx={5}
@@ -51,7 +51,7 @@ const situations: SituationCard[] = [
                 stroke="#c4b5fd"
                 strokeWidth="1.5"
               />
-              <text x={24 + i * 32} y={70} fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={24 + i * 32} y={70} fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="140" y="100" fontSize="10" fill="#fbbf24" textAnchor="middle">Data ke-4 = 7, ke-5 = 8</text>

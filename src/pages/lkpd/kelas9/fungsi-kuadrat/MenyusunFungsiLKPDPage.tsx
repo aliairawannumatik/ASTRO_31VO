@@ -15,15 +15,15 @@ const situations: SituationCard[] = [
           <rect width="280" height="240" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="12" fontWeight="bold" fill="#a78bfa" textAnchor="middle">3 Bentuk Fungsi Kuadrat</text>
           <rect x="20" y="36" width="240" height="55" rx="8" fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="140" y="56" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">A. Bentuk UMUM</text>
+          <text x="140" y="56" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">A. Bentuk UMUM</text>
           <text x="140" y="74" fontSize="12" fontWeight="bold" fill="#fde68a" textAnchor="middle">f(x) = ax² + bx + c</text>
           <text x="140" y="86" fontSize="9" fill="#a7f3d0" textAnchor="middle">→ butuh 3 titik sembarang</text>
           <rect x="20" y="96" width="240" height="55" rx="8" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="140" y="116" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">B. Bentuk PUNCAK / VERTEX</text>
+          <text x="140" y="116" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">B. Bentuk PUNCAK / VERTEX</text>
           <text x="140" y="134" fontSize="12" fontWeight="bold" fill="#fde68a" textAnchor="middle">{"f(x) = a(x − xₚ)² + yₚ"}</text>
           <text x="140" y="146" fontSize="9" fill="#a7f3d0" textAnchor="middle">→ jika tahu PUNCAK & 1 titik lain</text>
           <rect x="20" y="156" width="240" height="55" rx="8" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="140" y="176" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">C. Bentuk AKAR / FAKTOR</text>
+          <text x="140" y="176" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">C. Bentuk AKAR / FAKTOR</text>
           <text x="140" y="194" fontSize="12" fontWeight="bold" fill="#fde68a" textAnchor="middle">{"f(x) = a(x − x₁)(x − x₂)"}</text>
           <text x="140" y="206" fontSize="9" fill="#a7f3d0" textAnchor="middle">→ jika tahu 2 AKAR & 1 titik lain</text>
         </svg>
@@ -40,14 +40,14 @@ const situations: SituationCard[] = [
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">Tahu apa? → Gunakan bentuk:</text>
           <rect x="20" y="38" width="240" height="32" rx="6" fill="#22d3ee" fillOpacity="0.4" />
-          <text x="140" y="58" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">3 titik sembarang → BENTUK UMUM</text>
+          <text x="140" y="58" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">3 titik sembarang → BENTUK UMUM</text>
           <rect x="20" y="75" width="240" height="32" rx="6" fill="#a78bfa" fillOpacity="0.4" />
-          <text x="140" y="95" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Puncak + 1 titik → BENTUK PUNCAK</text>
+          <text x="140" y="95" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Puncak + 1 titik → BENTUK PUNCAK</text>
           <rect x="20" y="112" width="240" height="32" rx="6" fill="#fbbf24" fillOpacity="0.4" />
-          <text x="140" y="132" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">2 akar + 1 titik → BENTUK AKAR</text>
+          <text x="140" y="132" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">2 akar + 1 titik → BENTUK AKAR</text>
           <rect x="20" y="150" width="240" height="40" rx="8" fill="#34d399" fillOpacity="0.5" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="170" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Setelah dapat bentuknya:</text>
-          <text x="140" y="184" fontSize="10" fill="#fff" textAnchor="middle">Substitusi titik untuk cari konstanta a.</text>
+          <text x="140" y="170" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Setelah dapat bentuknya:</text>
+          <text x="140" y="184" fontSize="10" fill="var(--icon-color)" textAnchor="middle">Substitusi titik untuk cari konstanta a.</text>
         </svg>
       </div>
     ),

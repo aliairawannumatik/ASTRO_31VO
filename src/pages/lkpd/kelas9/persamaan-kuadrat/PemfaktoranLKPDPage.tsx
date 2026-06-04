@@ -16,13 +16,13 @@ const situations: SituationCard[] = [
           <text x="140" y="25" fontSize="13" fontWeight="bold" fill="#67e8f9" textAnchor="middle">x² + 5x + 6 = 0</text>
           <text x="140" y="50" fontSize="11" fill="#fde68a" textAnchor="middle">Cari p, q sehingga: p · q = 6 dan p + q = 5</text>
           <rect x="40" y="70" width="90" height="55" rx="8" fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="85" y="92" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">p = 2</text>
+          <text x="85" y="92" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">p = 2</text>
           <text x="85" y="112" fontSize="10" fill="#fde68a" textAnchor="middle">+ q = 3</text>
           <rect x="150" y="70" width="90" height="55" rx="8" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="195" y="92" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">2 × 3 = 6 ✓</text>
+          <text x="195" y="92" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">2 × 3 = 6 ✓</text>
           <text x="195" y="112" fontSize="10" fill="#fde68a" textAnchor="middle">2 + 3 = 5 ✓</text>
           <rect x="40" y="140" width="200" height="48" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="160" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"(x + 2)(x + 3) = 0"}</text>
+          <text x="140" y="160" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"(x + 2)(x + 3) = 0"}</text>
           <text x="140" y="180" fontSize="11" fontWeight="bold" fill="#fde68a" textAnchor="middle">x = −2 atau x = −3</text>
         </svg>
       </div>
@@ -40,13 +40,13 @@ const situations: SituationCard[] = [
           <text x="140" y="48" fontSize="10" fill="#fbbf24" textAnchor="middle">a·c = 2·3 = 6, b = 7</text>
           <text x="140" y="65" fontSize="10" fill="#fbbf24" textAnchor="middle">Cari p, q: p·q = 6, p+q = 7 → 6 dan 1</text>
           <rect x="20" y="80" width="240" height="22" rx="6" fill="#fbbf24" fillOpacity="0.35" />
-          <text x="140" y="96" fontSize="11" fill="#fff" textAnchor="middle">{"2x² + 6x + 1x + 3 = 0"}</text>
+          <text x="140" y="96" fontSize="11" fill="var(--icon-color)" textAnchor="middle">{"2x² + 6x + 1x + 3 = 0"}</text>
           <rect x="20" y="106" width="240" height="22" rx="6" fill="#fbbf24" fillOpacity="0.35" />
-          <text x="140" y="122" fontSize="11" fill="#fff" textAnchor="middle">{"2x(x + 3) + 1(x + 3) = 0"}</text>
+          <text x="140" y="122" fontSize="11" fill="var(--icon-color)" textAnchor="middle">{"2x(x + 3) + 1(x + 3) = 0"}</text>
           <rect x="20" y="132" width="240" height="22" rx="6" fill="#22d3ee" fillOpacity="0.45" />
-          <text x="140" y="148" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"(2x + 1)(x + 3) = 0"}</text>
+          <text x="140" y="148" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"(2x + 1)(x + 3) = 0"}</text>
           <rect x="40" y="165" width="200" height="40" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="190" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">x = −1/2 atau x = −3</text>
+          <text x="140" y="190" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x = −1/2 atau x = −3</text>
         </svg>
       </div>
     ),

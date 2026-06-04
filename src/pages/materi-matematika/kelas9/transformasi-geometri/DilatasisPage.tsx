@@ -484,8 +484,8 @@ function AnimasiDilatasiTitik() {
               return (
                 <g>
                   <rect x={bx-bw/2} y={by-bh/2} width={bw} height={bh} rx={7} ry={7}
-                    fill={boxFill} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
-                  <text x={bx} y={by+5} fontSize="14" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    fill={boxFill} stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by+5} fontSize="14" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">
                     k = {k}
                   </text>
                 </g>
@@ -768,8 +768,8 @@ function AnimasiDilatasi() {
               return (
                 <g>
                   <rect x={bx-bw/2} y={by-bh/2} width={bw} height={bh} rx={7} ry={7}
-                    fill={boxFill} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
-                  <text x={bx} y={by+5} fontSize="14" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    fill={boxFill} stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by+5} fontSize="14" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">
                     k = {k}
                   </text>
                 </g>
@@ -1164,8 +1164,8 @@ function AnimasiRotasiKurvaLinearD() {
               return (
                 <g>
                   <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
-                    fill={badgeClr} stroke="#fff" strokeWidth="1.5" opacity="0.95" />
-                  <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    fill={badgeClr} stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.95" />
+                  <text x={bx} y={by + 5} fontSize="15" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">
                     {Math.round(animAngleAbs)}°
                   </text>
                 </g>
@@ -1619,8 +1619,8 @@ function AnimasiDilatasiKurvaLinear() {
               const bx = DS / 2, by = 18, bw = 80, bh = 28;
               return (
                 <g>
-                  <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} fill={boxFill} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
-                  <text x={bx} y={by + 5} fontSize="14" fill="#fff" textAnchor="middle" fontWeight="bold">k = {k}</text>
+                  <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} fill={boxFill} stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by + 5} fontSize="14" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">k = {k}</text>
                 </g>
               );
             })()}

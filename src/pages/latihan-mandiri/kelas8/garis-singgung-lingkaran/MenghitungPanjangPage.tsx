@@ -9,14 +9,14 @@ import { Ruler } from "lucide-react";
 const SvgSatu = () => (
   <svg width="240" height="180" viewBox="0 0 240 180">
     <circle cx="90" cy="122" r="65" fill="none" stroke="#a78bfa" strokeWidth="2"/>
-    <circle cx="90" cy="122" r="3" fill="white"/>
+    <circle cx="90" cy="122" r="3" fill="var(--icon-color)"/>
     <circle cx="124" cy="70" r="3" fill="#fb923c"/>
     <circle cx="225" cy="122" r="3" fill="#fb923c"/>
     <line x1="225" y1="122" x2="124" y2="70" stroke="#fb923c" strokeWidth="1.8"/>
     <line x1="90" y1="122" x2="124" y2="70" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="4,3"/>
     <line x1="90" y1="122" x2="225" y2="122" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
-    <path d="M131,80 L127,87 L120,83" fill="none" stroke="white" strokeWidth="1.3"/>
-    <text x="77" y="142" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <path d="M131,80 L127,87 L120,83" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
+    <text x="77" y="142" fill="var(--icon-color)" fontSize="13" fontWeight="bold">O</text>
     <text x="114" y="60" fill="#fb923c" fontSize="13" fontWeight="bold">A</text>
     <text x="228" y="120" fill="#fb923c" fontSize="13" fontWeight="bold">P</text>
     <text x="93" y="90" fill="#c4b5fd" fontSize="10">OA = 15 cm</text>
@@ -27,14 +27,14 @@ const SvgSatu = () => (
 const SvgDua = () => (
   <svg width="240" height="180" viewBox="0 0 240 180">
     <circle cx="163" cy="112" r="60" fill="none" stroke="#34d399" strokeWidth="2"/>
-    <circle cx="163" cy="112" r="3" fill="white"/>
+    <circle cx="163" cy="112" r="3" fill="var(--icon-color)"/>
     <circle cx="130" cy="60" r="3" fill="#fb923c"/>
     <circle cx="25" cy="112" r="3" fill="#fbbf24"/>
     <line x1="25" y1="112" x2="130" y2="60" stroke="#fb923c" strokeWidth="1.8"/>
     <line x1="163" y1="112" x2="130" y2="60" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4,3"/>
     <line x1="25" y1="112" x2="163" y2="112" stroke="#34d399" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
-    <path d="M124,68 L118,64 L121,57" fill="none" stroke="white" strokeWidth="1.3"/>
-    <text x="149" y="132" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <path d="M124,68 L118,64 L121,57" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
+    <text x="149" y="132" fill="var(--icon-color)" fontSize="13" fontWeight="bold">O</text>
     <text x="130" y="52" fill="#fb923c" fontSize="13" fontWeight="bold">A</text>
     <text x="11" y="110" fill="#fbbf24" fontSize="13" fontWeight="bold">K</text>
     <text x="130" y="92" fill="#34d399" fontSize="10">OA = 30 cm</text>
@@ -49,13 +49,13 @@ const SvgTiga = () => (
     <polygon points="46,143 133,143 133,78 70,78" fill="rgba(124,58,237,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
     <circle cx="46" cy="143" r="3" fill="#fb923c"/>
     <circle cx="133" cy="143" r="3" fill="#fb923c"/>
-    <circle cx="133" cy="78" r="3" fill="white"/>
+    <circle cx="133" cy="78" r="3" fill="var(--icon-color)"/>
     <circle cx="70" cy="78" r="3" fill="#fb923c"/>
-    <path d="M125,143 L125,135 L133,135" fill="none" stroke="white" strokeWidth="1.3"/>
+    <path d="M125,143 L125,135 L133,135" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
     <line x1="46" y1="143" x2="133" y2="78" stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" opacity="0.7"/>
     <text x="30" y="158" fill="#fb923c" fontSize="13" fontWeight="bold">E</text>
     <text x="136" y="160" fill="#fb923c" fontSize="13" fontWeight="bold">C</text>
-    <text x="136" y="74" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="136" y="74" fill="var(--icon-color)" fontSize="13" fontWeight="bold">O</text>
     <text x="54" y="72" fill="#fb923c" fontSize="13" fontWeight="bold">D</text>
     <text x="72" y="158" fill="#e2e8f0" fontSize="10">EC = 16 cm</text>
     <text x="75" y="71" fill="#e2e8f0" fontSize="10">OD = 12 cm</text>
@@ -68,7 +68,7 @@ const SvgTiga = () => (
 const SvgEmpat = () => (
   <svg width="240" height="200" viewBox="0 0 240 200">
     <circle cx="178" cy="100" r="58" fill="none" stroke="#f472b6" strokeWidth="2"/>
-    <circle cx="178" cy="100" r="3" fill="white"/>
+    <circle cx="178" cy="100" r="3" fill="var(--icon-color)"/>
     <circle cx="153" cy="44" r="3" fill="#fb923c"/>
     <circle cx="153" cy="156" r="3" fill="#fb923c"/>
     <circle cx="28" cy="100" r="3" fill="#fbbf24"/>
@@ -77,10 +77,10 @@ const SvgEmpat = () => (
     <line x1="178" y1="100" x2="153" y2="44" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,3"/>
     <line x1="178" y1="100" x2="153" y2="156" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,3"/>
     <line x1="28" y1="100" x2="178" y2="100" stroke="#f472b6" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
-    <path d="M147,52 L141,47 L147,41" fill="none" stroke="white" strokeWidth="1.3"/>
-    <path d="M147,148 L141,153 L147,159" fill="none" stroke="white" strokeWidth="1.3"/>
+    <path d="M147,52 L141,47 L147,41" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
+    <path d="M147,148 L141,153 L147,159" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
     <text x="14" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">A</text>
-    <text x="182" y="118" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="182" y="118" fill="var(--icon-color)" fontSize="13" fontWeight="bold">O</text>
     <text x="156" y="38" fill="#fb923c" fontSize="13" fontWeight="bold">B</text>
     <text x="156" y="172" fill="#fb923c" fontSize="13" fontWeight="bold">C</text>
     <text x="148" y="86" fill="#f9a8d4" fontSize="10">OB=24</text>
@@ -91,7 +91,7 @@ const SvgEmpat = () => (
 const SvgLima = () => (
   <svg width="240" height="200" viewBox="0 0 240 200">
     <circle cx="162" cy="100" r="52" fill="none" stroke="#0ea5e9" strokeWidth="2"/>
-    <circle cx="162" cy="100" r="3" fill="white"/>
+    <circle cx="162" cy="100" r="3" fill="var(--icon-color)"/>
     <circle cx="139" cy="54" r="3" fill="#fb923c"/>
     <circle cx="139" cy="146" r="3" fill="#fb923c"/>
     <circle cx="44" cy="100" r="3" fill="#fbbf24"/>
@@ -101,10 +101,10 @@ const SvgLima = () => (
     <line x1="162" y1="100" x2="139" y2="146" stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="4,3"/>
     <line x1="44" y1="100" x2="162" y2="100" stroke="#0ea5e9" strokeWidth="1" strokeDasharray="3,3" opacity="0.4"/>
     <line x1="139" y1="54" x2="139" y2="146" stroke="#7dd3fc" strokeWidth="1.5" strokeDasharray="5,3"/>
-    <path d="M134,62 L129,57 L134,52" fill="none" stroke="white" strokeWidth="1.3"/>
-    <path d="M134,138 L129,143 L134,148" fill="none" stroke="white" strokeWidth="1.3"/>
+    <path d="M134,62 L129,57 L134,52" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
+    <path d="M134,138 L129,143 L134,148" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
     <text x="30" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">P</text>
-    <text x="166" y="118" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="166" y="118" fill="var(--icon-color)" fontSize="13" fontWeight="bold">O</text>
     <text x="143" y="48" fill="#fb923c" fontSize="13" fontWeight="bold">Q</text>
     <text x="143" y="160" fill="#fb923c" fontSize="13" fontWeight="bold">R</text>
     <text x="143" y="104" fill="#7dd3fc" fontSize="10">QR</text>
@@ -116,7 +116,7 @@ const SvgLima = () => (
 const SvgEnam = () => (
   <svg width="250" height="200" viewBox="0 0 250 200">
     <circle cx="112" cy="100" r="64" fill="none" stroke="#34d399" strokeWidth="2"/>
-    <circle cx="112" cy="100" r="3" fill="white"/>
+    <circle cx="112" cy="100" r="3" fill="var(--icon-color)"/>
     <circle cx="140" cy="44" r="3" fill="#fb923c"/>
     <circle cx="140" cy="156" r="3" fill="#fb923c"/>
     <circle cx="228" cy="100" r="3" fill="#fbbf24"/>
@@ -126,10 +126,10 @@ const SvgEnam = () => (
     <line x1="112" y1="100" x2="140" y2="156" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4,3"/>
     <line x1="228" y1="100" x2="112" y2="100" stroke="#34d399" strokeWidth="1" strokeDasharray="3,3" opacity="0.35"/>
     <line x1="140" y1="44" x2="140" y2="156" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3"/>
-    <path d="M134,52 L128,47 L134,41" fill="none" stroke="white" strokeWidth="1.3"/>
-    <path d="M134,148 L128,153 L134,159" fill="none" stroke="white" strokeWidth="1.3"/>
+    <path d="M134,52 L128,47 L134,41" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
+    <path d="M134,148 L128,153 L134,159" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.3"/>
     <text x="232" y="98" fill="#fbbf24" fontSize="13" fontWeight="bold">K</text>
-    <text x="96" y="120" fill="white" fontSize="13" fontWeight="bold">O</text>
+    <text x="96" y="120" fill="var(--icon-color)" fontSize="13" fontWeight="bold">O</text>
     <text x="144" y="38" fill="#fb923c" fontSize="13" fontWeight="bold">L</text>
     <text x="144" y="170" fill="#fb923c" fontSize="13" fontWeight="bold">M</text>
     <text x="144" y="104" fill="#a78bfa" fontSize="10">LM</text>
@@ -153,16 +153,16 @@ const SvgTujuh = () => {
   return (
     <svg width="250" height="200" viewBox="0 0 250 200">
       <circle cx={cx1} cy={cy} r={r1} fill="none" stroke="#fbbf24" strokeWidth="2"/>
-      <circle cx={cx1} cy={cy} r="3" fill="white"/>
+      <circle cx={cx1} cy={cy} r="3" fill="var(--icon-color)"/>
       <circle cx={cx2} cy={cy} r={r2} fill="none" stroke="#f97316" strokeWidth="2"/>
-      <circle cx={cx2} cy={cy} r="3" fill="white"/>
+      <circle cx={cx2} cy={cy} r="3" fill="var(--icon-color)"/>
       <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#34d399" strokeWidth="2"/>
       <line x1={ax} y1={2 * cy - ay} x2={bx} y2={2 * cy - by} stroke="#34d399" strokeWidth="2"/>
       <circle cx={ax} cy={ay} r="3" fill="#fb923c"/>
       <circle cx={bx} cy={by} r="3" fill="#fb923c"/>
       <circle cx={ax} cy={2 * cy - ay} r="3" fill="#fb923c"/>
       <circle cx={bx} cy={2 * cy - by} r="3" fill="#fb923c"/>
-      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="white" strokeWidth="1" strokeDasharray="4,3" opacity="0.35"/>
+      <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="var(--icon-stroke)" strokeWidth="1" strokeDasharray="4,3" opacity="0.35"/>
       <text x={ax - 2} y={ay - 7} fill="#fb923c" fontSize="12" fontWeight="bold">A</text>
       <text x={bx + 4} y={by - 7} fill="#fb923c" fontSize="12" fontWeight="bold">B</text>
       <text x={cx1 - 6} y={cy + 18} fill="#fbbf24" fontSize="10">r₁=7 cm</text>

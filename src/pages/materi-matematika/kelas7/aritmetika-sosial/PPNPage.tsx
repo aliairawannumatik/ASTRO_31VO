@@ -359,11 +359,11 @@ const PPNPage = () => {
                   <div className="rounded-xl p-4 space-y-2 animate-slide-up" style={{background: "rgba(251,191,36,0.07)", border: "1.5px solid rgba(251,191,36,0.35)"}}>
                     <p className="font-body text-xs font-bold text-amber-300">✅ Hasil Perhitungan:</p>
                     <div className="space-y-2">
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "rgba(0,0,0,0.3)"}}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "var(--bg-secondary)"}}>
                         <span className="font-body text-xs text-amber-200/60">Harga Asli (sebelum PPN)</span>
                         <span className="font-body text-sm font-bold text-white">{formatRupiah(kalcResult.asli)}</span>
                       </div>
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "rgba(0,0,0,0.3)"}}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "var(--bg-secondary)"}}>
                         <span className="font-body text-xs text-amber-200/60">Besar PPN ({persen}%)</span>
                         <span className="font-body text-sm font-bold text-orange-400">+{formatRupiah(kalcResult.ppn)}</span>
                       </div>
@@ -372,7 +372,7 @@ const PPNPage = () => {
                         <span className="font-body text-lg font-black text-amber-300">{formatRupiah(kalcResult.total)}</span>
                       </div>
                     </div>
-                    <div className="rounded-lg p-3" style={{background: "rgba(0,0,0,0.3)", border: "1px dashed rgba(251,191,36,0.2)"}}>
+                    <div className="rounded-lg p-3" style={{background: "var(--bg-secondary)", border: "1px dashed rgba(251,191,36,0.2)"}}>
                       <p className="font-body text-xs text-amber-300/60 text-center">
                         {mode === "tambah"
                           ? `Cara hitung: ${formatRupiah(kalcResult.asli)} × ${persen}% = ${formatRupiah(kalcResult.ppn)} (PPN) → Total = ${formatRupiah(kalcResult.total)}`

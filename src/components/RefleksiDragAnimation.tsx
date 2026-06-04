@@ -292,7 +292,7 @@ export default function RefleksiDragAnimation() {
                 {showReflection && (
                   <g>
                     <circle cx={toSX(spRx)} cy={toSY(spRy)} r={14} fill="#a78bfa" opacity="0.12" />
-                    <circle cx={toSX(spRx)} cy={toSY(spRy)} r={8} fill="#a78bfa" stroke="white" strokeWidth="2" opacity="0.9" />
+                    <circle cx={toSX(spRx)} cy={toSY(spRy)} r={8} fill="#a78bfa" stroke="var(--icon-stroke)" strokeWidth="2" opacity="0.9" />
                     <text
                       x={toSX(spRx) + (spRx >= 0 ? 14 : -14)}
                       y={toSY(spRy) - 10}
@@ -310,7 +310,7 @@ export default function RefleksiDragAnimation() {
                   {draggingId === "P" && <circle cx={toSX(singlePt.x)} cy={toSY(singlePt.y)} r={18} fill="#22d3ee" opacity="0.12" />}
                   <circle
                     cx={toSX(singlePt.x)} cy={toSY(singlePt.y)} r={draggingId === "P" ? 10 : 8}
-                    fill="#22d3ee" stroke="white" strokeWidth="2"
+                    fill="#22d3ee" stroke="var(--icon-stroke)" strokeWidth="2"
                     style={{ cursor: "grab" }}
                     onPointerDown={(e) => handlePointerDown(e, "P")}
                   />
@@ -344,7 +344,7 @@ export default function RefleksiDragAnimation() {
                     />
                     {triangleReflected.map(pt => (
                       <g key={`r-${pt.id}`}>
-                        <circle cx={toSX(pt.x)} cy={toSY(pt.y)} r={7} fill="#a78bfa" stroke="white" strokeWidth="1.5" opacity="0.85" />
+                        <circle cx={toSX(pt.x)} cy={toSY(pt.y)} r={7} fill="#a78bfa" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.85" />
                         <text
                           x={toSX(pt.x) + (pt.x >= 0 ? 13 : -13)}
                           y={toSY(pt.y) - 8}
@@ -369,14 +369,14 @@ export default function RefleksiDragAnimation() {
                     {draggingId === pt.id && <circle cx={toSX(pt.x)} cy={toSY(pt.y)} r={18} fill={pt.fill} opacity="0.12" />}
                     <circle
                       cx={toSX(pt.x)} cy={toSY(pt.y)} r={draggingId === pt.id ? 10 : 8}
-                      fill={pt.fill} stroke="white" strokeWidth="2"
+                      fill={pt.fill} stroke="var(--icon-stroke)" strokeWidth="2"
                       style={{ cursor: "grab" }}
                       onPointerDown={(e) => handlePointerDown(e, pt.id)}
                     />
                     <text
                       x={toSX(pt.x) + (pt.x >= 0 ? 14 : -14)}
                       y={toSY(pt.y) - 10}
-                      fill="white" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+                      fill="var(--icon-color)" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
                       textAnchor={pt.x >= 0 ? "start" : "end"}
                       style={{ pointerEvents: "none", userSelect: "none" }}
                     >

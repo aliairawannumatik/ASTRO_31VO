@@ -17,9 +17,9 @@ const situations: SituationCard[] = [
           <polygon points="60,110 130,110 130,40 60,40" fill="#22d3ee" fillOpacity="0.55" stroke="#22d3ee" strokeWidth="2" />
           <polygon points="60,40 90,20 160,20 130,40" fill="#67e8f9" fillOpacity="0.7" stroke="#22d3ee" strokeWidth="2" />
           <polygon points="130,40 160,20 160,90 130,110" fill="#0e7490" fillOpacity="0.7" stroke="#22d3ee" strokeWidth="2" />
-          <text x="95" y="80" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">s</text>
-          <text x="145" y="75" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">s</text>
-          <text x="110" y="32" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">s</text>
+          <text x="95" y="80" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">s</text>
+          <text x="145" y="75" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">s</text>
+          <text x="110" y="32" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">s</text>
         </svg>
       </div>
     ),

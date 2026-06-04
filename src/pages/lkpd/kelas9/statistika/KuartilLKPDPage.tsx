@@ -13,7 +13,7 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-violet-700/20 border border-cyan-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">11 data terurut: 2,3,4,5,6,7,8,9,10,11,12</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">11 data terurut: 2,3,4,5,6,7,8,9,10,11,12</text>
           {[2,3,4,5,6,7,8,9,10,11,12].map((n,i) => (
             <g key={i}>
               <rect x={10 + i * 24} y={50} width={20} height={28} rx={4}
@@ -22,7 +22,7 @@ const situations: SituationCard[] = [
                 stroke="#c4b5fd"
                 strokeWidth="1.5"
               />
-              <text x={20 + i * 24} y={70} fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={20 + i * 24} y={70} fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="58" y="98" fontSize="10" fill="#22d3ee" textAnchor="middle">Q₁=4</text>
@@ -44,15 +44,15 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-rose-500/20 to-amber-700/20 border border-rose-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">8 data: 4, 5, 6, 7, 8, 9, 10, 11</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">8 data: 4, 5, 6, 7, 8, 9, 10, 11</text>
           <text x="140" y="50" fontSize="10" fill="#fde68a" textAnchor="middle">Cari Q₂ dulu (median)</text>
           <text x="140" y="68" fontSize="10" fill="#fbbf24" textAnchor="middle">n=8 genap → Q₂ = (7+8)/2 = 7,5</text>
           <line x1="140" y1="80" x2="140" y2="100" stroke="#fbbf24" strokeWidth="2" strokeDasharray="3 2" />
           <rect x="20" y="105" width="105" height="35" rx="6" fill="#22d3ee" fillOpacity="0.3" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="73" y="125" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">Bawah: 4,5,6,7</text>
+          <text x="73" y="125" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Bawah: 4,5,6,7</text>
           <text x="73" y="138" fontSize="10" fontWeight="bold" fill="#22d3ee" textAnchor="middle">Q₁ = (5+6)/2 = 5,5</text>
           <rect x="155" y="105" width="105" height="35" rx="6" fill="#f472b6" fillOpacity="0.3" stroke="#f9a8d4" strokeWidth="1.5" />
-          <text x="208" y="125" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">Atas: 8,9,10,11</text>
+          <text x="208" y="125" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Atas: 8,9,10,11</text>
           <text x="208" y="138" fontSize="10" fontWeight="bold" fill="#f472b6" textAnchor="middle">Q₃ = (9+10)/2 = 9,5</text>
           <text x="140" y="170" fontSize="10" fontWeight="bold" fill="#34d399" textAnchor="middle">Strategi: belah dua → cari median tiap belahan</text>
         </svg>

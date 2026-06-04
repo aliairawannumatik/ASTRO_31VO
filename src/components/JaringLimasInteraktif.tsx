@@ -304,7 +304,7 @@ export default function JaringLimasInteraktif() {
                   <text
                     x={mx.toFixed(1)} y={my.toFixed(1)}
                     textAnchor="middle" dominantBaseline="middle"
-                    fill="white" fontSize="7.5" fontFamily="monospace" fontWeight="bold"
+                    fill="var(--icon-color)" fontSize="7.5" fontFamily="monospace" fontWeight="bold"
                     style={{ pointerEvents: "none", opacity: lAlpha }}>
                     {f.label}
                   </text>
@@ -321,7 +321,7 @@ export default function JaringLimasInteraktif() {
               <line key={`h${k}`}
                 x1={p0[0].toFixed(1)} y1={p0[1].toFixed(1)}
                 x2={p1[0].toFixed(1)} y2={p1[1].toFixed(1)}
-                stroke="white" strokeWidth={1.3}
+                stroke="var(--icon-stroke)" strokeWidth={1.3}
                 strokeDasharray="4,3" opacity={hingeAlpha}
               />
             );

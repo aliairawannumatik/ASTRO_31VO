@@ -14,10 +14,10 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 240 160" className="w-full">
           <rect width="240" height="160" fill="#0b1220" rx="8" />
           <rect x="40" y="40" width="80" height="80" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="2" />
-          <text x="80" y="85" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">L = 25</text>
+          <text x="80" y="85" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">L = 25</text>
           <text x="80" y="135" fontSize="11" fontWeight="bold" fill="#fbbf24" textAnchor="middle">sisi = √25 = 5</text>
           <rect x="150" y="55" width="60" height="60" fill="#22d3ee" fillOpacity="0.5" stroke="#67e8f9" strokeWidth="2" />
-          <text x="180" y="92" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">L = 12</text>
+          <text x="180" y="92" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">L = 12</text>
           <text x="180" y="135" fontSize="11" fontWeight="bold" fill="#fbbf24" textAnchor="middle">sisi = √12 = 2√3</text>
         </svg>
       </div>
@@ -32,8 +32,8 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 140" className="w-full">
           <rect width="280" height="140" fill="#0b1220" rx="8" />
           <text x="140" y="35" fontSize="14" fontWeight="bold" fill="#a78bfa" textAnchor="middle">Akar adalah KEBALIKAN pangkat!</text>
-          <text x="140" y="70" fontSize="13" fill="#fff" textAnchor="middle">5² = 25 ⟷ √25 = 5</text>
-          <text x="140" y="92" fontSize="13" fill="#fff" textAnchor="middle">3² = 9 ⟷ √9 = 3</text>
+          <text x="140" y="70" fontSize="13" fill="var(--icon-color)" textAnchor="middle">5² = 25 ⟷ √25 = 5</text>
+          <text x="140" y="92" fontSize="13" fill="var(--icon-color)" textAnchor="middle">3² = 9 ⟷ √9 = 3</text>
           <text x="140" y="118" fontSize="12" fill="#fbbf24" textAnchor="middle">√a = a^(1/2)</text>
         </svg>
       </div>

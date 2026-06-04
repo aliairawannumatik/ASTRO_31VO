@@ -30,7 +30,7 @@ const situations: SituationCard[] = [
             ))}
           </g>
           <text x="215" y="115" fontSize="9" fill="#f9a8d4" textAnchor="middle">2⁴ = 16</text>
-          <text x="120" y="30" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Setiap lipatan menggandakan jumlah lapisan!</text>
+          <text x="120" y="30" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Setiap lipatan menggandakan jumlah lapisan!</text>
         </svg>
       </div>
     ),
@@ -44,7 +44,7 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 240 160" className="w-full">
           <rect width="240" height="160" fill="#0b1220" rx="8" />
           <circle cx="40" cy="80" r="14" fill="#34d399" fillOpacity="0.7" stroke="#6ee7b7" />
-          <text x="40" y="84" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">1</text>
+          <text x="40" y="84" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">1</text>
           <text x="40" y="120" fontSize="9" fill="#6ee7b7" textAnchor="middle">3⁰=1</text>
           <g>{[0, 1, 2].map((i) => (
             <circle key={i} cx={80 + i * 22} cy="80" r="9" fill="#22d3ee" fillOpacity="0.7" stroke="#67e8f9" />

@@ -28,7 +28,7 @@ const RumusPanjangSVG = () => (
     <circle cx="80" cy="60" r="5" fill="#fbbf24"/>
     <text x="85" y="56" fill="#fbbf24" fontSize="12" fontFamily="monospace" fontWeight="bold">T</text>
     {/* Right angle at T */}
-    <polyline points="80,60 91,64 87,75" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.9"/>
+    <polyline points="80,60 91,64 87,75" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.9"/>
     {/* OT — radius */}
     <line x1="80" y1="120" x2="80" y2="60" stroke="#22c55e" strokeWidth="2.5"/>
     <text x="55" y="93" fill="#4ade80" fontSize="11" fontFamily="monospace" fontWeight="bold">r</text>
@@ -39,7 +39,7 @@ const RumusPanjangSVG = () => (
     <line x1="80" y1="60" x2="250" y2="120" stroke="#fbbf24" strokeWidth="3" className="tl"/>
     <text x="182" y="80" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">l (panjang singgung)</text>
     {/* Right angle label */}
-    <text x="95" y="72" fill="#fff" fontSize="9" fontFamily="monospace" opacity="0.8">90°</text>
+    <text x="95" y="72" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" opacity="0.8">90°</text>
     {/* Formula box */}
     <rect x="5" y="185" width="295" height="32" rx="8" fill="rgba(30,41,59,0.9)" stroke="#334155" strokeWidth="1"/>
     <text x="150" y="198" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">Teorema Pythagoras pada segitiga OTP siku-siku di T:</text>

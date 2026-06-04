@@ -22,7 +22,7 @@ const situations: SituationCard[] = [
           <text x="155" y="35" fontSize="11" fontWeight="bold" fill="#f0abfc">x = xₚ</text>
           <text x="155" y="48" fontSize="9" fill="#f0abfc">SUMBU SIMETRI</text>
           <rect x="20" y="195" width="240" height="20" rx="6" fill="#a78bfa" fillOpacity="0.4" />
-          <text x="140" y="210" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">xₚ = −b/(2a)</text>
+          <text x="140" y="210" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">xₚ = −b/(2a)</text>
         </svg>
       </div>
     ),
@@ -37,13 +37,13 @@ const situations: SituationCard[] = [
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="12" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">Titik Puncak (xₚ, yₚ)</text>
           <rect x="20" y="35" width="240" height="32" rx="6" fill="#22d3ee" fillOpacity="0.4" />
-          <text x="140" y="55" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">xₚ = −b/(2a)</text>
+          <text x="140" y="55" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">xₚ = −b/(2a)</text>
           <rect x="20" y="72" width="240" height="32" rx="6" fill="#a78bfa" fillOpacity="0.4" />
-          <text x="140" y="92" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">yₚ = f(xₚ) = −D/(4a)</text>
+          <text x="140" y="92" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">yₚ = f(xₚ) = −D/(4a)</text>
           <rect x="20" y="115" width="240" height="32" rx="6" fill="#fbbf24" fillOpacity="0.4" />
-          <text x="140" y="135" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"a > 0 → MIN, a < 0 → MAKS"}</text>
+          <text x="140" y="135" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"a > 0 → MIN, a < 0 → MAKS"}</text>
           <rect x="40" y="158" width="200" height="32" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="178" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">D = b² − 4ac (sama dgn PK)</text>
+          <text x="140" y="178" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">D = b² − 4ac (sama dgn PK)</text>
         </svg>
       </div>
     ),

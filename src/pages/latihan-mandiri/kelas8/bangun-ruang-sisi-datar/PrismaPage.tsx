@@ -79,12 +79,12 @@ const PrismaSegitigaSVG = ({ a = "a", b = "b", c = "c", t = "t" }: { a?: string;
       ))}
 
       {/* Label titik sudut */}
-      <text x={A[0]-12} y={A[1]+4}  fill="white" fontSize="11" fontFamily="monospace">A</text>
-      <text x={B[0]+3}  y={B[1]+4}  fill="white" fontSize="11" fontFamily="monospace">B</text>
-      <text x={C[0]-13} y={C[1]+4}  fill="white" fontSize="11" fontFamily="monospace">C</text>
-      <text x={D[0]-4}  y={D[1]+12} fill="white" fontSize="11" fontFamily="monospace">D</text>
-      <text x={E[0]+3}  y={E[1]+4}  fill="white" fontSize="11" fontFamily="monospace">E</text>
-      <text x={F[0]+3}  y={F[1]+4}  fill="white" fontSize="11" fontFamily="monospace">F</text>
+      <text x={A[0]-12} y={A[1]+4}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">A</text>
+      <text x={B[0]+3}  y={B[1]+4}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">B</text>
+      <text x={C[0]-13} y={C[1]+4}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">C</text>
+      <text x={D[0]-4}  y={D[1]+12} fill="var(--icon-color)" fontSize="11" fontFamily="monospace">D</text>
+      <text x={E[0]+3}  y={E[1]+4}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">E</text>
+      <text x={F[0]+3}  y={F[1]+4}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">F</text>
 
       {/* Label dimensi */}
       <text x={(A[0]+B[0])/2} y={A[1]+14} fill="#fbbf24" fontSize="10" textAnchor="middle">{a}</text>
@@ -146,12 +146,12 @@ const PrismaSikuSVG = () => {
       ))}
 
       {/* Label titik sudut */}
-      <text x={A[0]-13} y={A[1]+5}  fill="white" fontSize="11" fontFamily="monospace">A</text>
-      <text x={B[0]+3}  y={B[1]+5}  fill="white" fontSize="11" fontFamily="monospace">B</text>
-      <text x={C[0]-13} y={C[1]+4}  fill="white" fontSize="11" fontFamily="monospace">C</text>
-      <text x={D[0]+3}  y={D[1]+12} fill="white" fontSize="11" fontFamily="monospace">D</text>
-      <text x={E[0]+3}  y={E[1]+5}  fill="white" fontSize="11" fontFamily="monospace">E</text>
-      <text x={F[0]+3}  y={F[1]+4}  fill="white" fontSize="11" fontFamily="monospace">F</text>
+      <text x={A[0]-13} y={A[1]+5}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">A</text>
+      <text x={B[0]+3}  y={B[1]+5}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">B</text>
+      <text x={C[0]-13} y={C[1]+4}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">C</text>
+      <text x={D[0]+3}  y={D[1]+12} fill="var(--icon-color)" fontSize="11" fontFamily="monospace">D</text>
+      <text x={E[0]+3}  y={E[1]+5}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">E</text>
+      <text x={F[0]+3}  y={F[1]+4}  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">F</text>
 
       {/* Label dimensi */}
       <text x={(A[0]+B[0])/2} y={A[1]+14} fill="#fbbf24" fontSize="9" textAnchor="middle">alas (AB)</text>
@@ -251,14 +251,14 @@ const PrismaSegiempatSVG = () => {
       ))}
 
       {/* Label titik sudut — ABCD alas bawah, EFGH atap atas */}
-      <text x={A[0]-12} y={A[1]+5}  fill="white" fontSize="10" fontFamily="monospace">A</text>
-      <text x={B[0]+3}  y={B[1]+5}  fill="white" fontSize="10" fontFamily="monospace">B</text>
-      <text x={C[0]+3}  y={C[1]+5}  fill="white" fontSize="10" fontFamily="monospace">C</text>
-      <text x={D[0]-12} y={D[1]+10} fill="white" fontSize="10" fontFamily="monospace">D</text>
-      <text x={E[0]-12} y={E[1]+4}  fill="white" fontSize="10" fontFamily="monospace">E</text>
-      <text x={F[0]+3}  y={F[1]+4}  fill="white" fontSize="10" fontFamily="monospace">F</text>
-      <text x={G[0]+3}  y={G[1]+4}  fill="white" fontSize="10" fontFamily="monospace">G</text>
-      <text x={H[0]-12} y={H[1]+4}  fill="white" fontSize="10" fontFamily="monospace">H</text>
+      <text x={A[0]-12} y={A[1]+5}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+      <text x={B[0]+3}  y={B[1]+5}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+      <text x={C[0]+3}  y={C[1]+5}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+      <text x={D[0]-12} y={D[1]+10} fill="var(--icon-color)" fontSize="10" fontFamily="monospace">D</text>
+      <text x={E[0]-12} y={E[1]+4}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">E</text>
+      <text x={F[0]+3}  y={F[1]+4}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">F</text>
+      <text x={G[0]+3}  y={G[1]+4}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">G</text>
+      <text x={H[0]-12} y={H[1]+4}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">H</text>
 
       <text x="90" y="150" fill="#fbbf24" fontSize="10" textAnchor="middle">Prisma Segiempat (Balok)</text>
     </svg>

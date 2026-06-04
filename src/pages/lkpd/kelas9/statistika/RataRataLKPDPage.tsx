@@ -13,17 +13,17 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-violet-700/20 border border-cyan-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">5 nilai ulangan: 7, 8, 6, 9, 10</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">5 nilai ulangan: 7, 8, 6, 9, 10</text>
           {[7, 8, 6, 9, 10].map((n, i) => (
             <g key={i}>
               <rect x={30 + i * 50} y={50} width={40} height={40} rx={6} fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-              <text x={50 + i * 50} y={75} fontSize="14" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={50 + i * 50} y={75} fontSize="14" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="140" y="120" fontSize="11" fill="#fde68a" textAnchor="middle">Jumlah = 7+8+6+9+10 = 40</text>
           <text x="140" y="140" fontSize="11" fill="#fde68a" textAnchor="middle">Banyak data = 5</text>
           <rect x="60" y="155" width="160" height="32" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="178" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">Rata-rata = 40 ÷ 5 = 8</text>
+          <text x="140" y="178" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Rata-rata = 40 ÷ 5 = 8</text>
         </svg>
       </div>
     ),
@@ -37,13 +37,13 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <rect x="20" y="40" width="110" height="60" rx="8" fill="#f472b6" fillOpacity="0.35" stroke="#f9a8d4" strokeWidth="1.5" />
-          <text x="75" y="60" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">Kelas A</text>
-          <text x="75" y="78" fontSize="9" fill="#fff" textAnchor="middle">n₁ = 20</text>
-          <text x="75" y="92" fontSize="9" fill="#fff" textAnchor="middle">x̄₁ = 80</text>
+          <text x="75" y="60" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Kelas A</text>
+          <text x="75" y="78" fontSize="9" fill="var(--icon-color)" textAnchor="middle">n₁ = 20</text>
+          <text x="75" y="92" fontSize="9" fill="var(--icon-color)" textAnchor="middle">x̄₁ = 80</text>
           <rect x="150" y="40" width="110" height="60" rx="8" fill="#fbbf24" fillOpacity="0.35" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="205" y="60" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">Kelas B</text>
-          <text x="205" y="78" fontSize="9" fill="#fff" textAnchor="middle">n₂ = 30</text>
-          <text x="205" y="92" fontSize="9" fill="#fff" textAnchor="middle">x̄₂ = 70</text>
+          <text x="205" y="60" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Kelas B</text>
+          <text x="205" y="78" fontSize="9" fill="var(--icon-color)" textAnchor="middle">n₂ = 30</text>
+          <text x="205" y="92" fontSize="9" fill="var(--icon-color)" textAnchor="middle">x̄₂ = 70</text>
           <text x="140" y="125" fontSize="11" fill="#a7f3d0" textAnchor="middle">x̄_gab = (n₁·x̄₁ + n₂·x̄₂) / (n₁ + n₂)</text>
           <text x="140" y="145" fontSize="11" fill="#fde68a" textAnchor="middle">= (20·80 + 30·70) / (20 + 30)</text>
           <text x="140" y="165" fontSize="11" fill="#fde68a" textAnchor="middle">= (1600 + 2100) / 50 = 3700/50</text>

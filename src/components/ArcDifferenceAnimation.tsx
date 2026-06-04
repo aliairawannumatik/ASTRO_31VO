@@ -202,7 +202,7 @@ function ArcSVG({
             textAnchor="middle"
             fontSize="13"
             fontWeight="bold"
-            fill="white"
+            fill="var(--icon-color)"
           >
             {val}
           </text>

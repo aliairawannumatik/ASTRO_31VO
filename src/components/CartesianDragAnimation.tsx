@@ -118,7 +118,7 @@ export default function CartesianDragAnimation() {
           ref={svgRef}
           viewBox={`0 0 ${VIEW} ${VIEW}`}
           className="w-full rounded-xl border border-white/10 cursor-crosshair"
-          style={{ background: "rgba(2,6,23,0.85)", maxHeight: 360, touchAction: "none" }}
+          style={{ background: "var(--bg-card)", maxHeight: 360, touchAction: "none" }}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
@@ -200,14 +200,14 @@ export default function CartesianDragAnimation() {
                 {/* Point */}
                 <circle
                   cx={px} cy={py} r={isDragging ? 10 : 8}
-                  fill={pt.fill} stroke="white" strokeWidth="2"
+                  fill={pt.fill} stroke="var(--icon-stroke)" strokeWidth="2"
                   style={{ cursor: "grab", transition: isDragging ? "none" : "r 0.15s ease" }}
                   onPointerDown={(e) => handlePointDown(e, pt.id)}
                 />
                 {/* Label */}
                 <text
                   x={px + 13} y={py - 10}
-                  fill="white" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+                  fill="var(--icon-color)" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
                   style={{ pointerEvents: "none", userSelect: "none" }}
                 >
                   {pt.id}({pt.x},{pt.y})

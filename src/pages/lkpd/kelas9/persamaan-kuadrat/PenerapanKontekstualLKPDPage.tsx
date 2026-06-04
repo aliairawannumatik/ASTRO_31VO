@@ -16,13 +16,13 @@ const situations: SituationCard[] = [
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#fde68a" textAnchor="middle">Persegi panjang: panjang 5 m lebih dari lebar</text>
           <text x="140" y="38" fontSize="10" fill="#a7f3d0" textAnchor="middle">Luas = 84 m². Cari panjang & lebar.</text>
           <rect x="50" y="55" width="180" height="80" rx="6" fill="#fbbf24" fillOpacity="0.3" stroke="#fde68a" strokeWidth="2" />
-          <text x="140" y="100" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">L = (x + 5) × x = 84</text>
+          <text x="140" y="100" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">L = (x + 5) × x = 84</text>
           <text x="140" y="125" fontSize="10" fill="#fde68a" textAnchor="middle">x + 5</text>
           <text x="40" y="100" fontSize="10" fill="#fde68a" textAnchor="middle">x</text>
           <rect x="20" y="148" width="240" height="22" rx="6" fill="#22d3ee" fillOpacity="0.4" />
-          <text x="140" y="164" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">x² + 5x − 84 = 0 → (x − 7)(x + 12) = 0</text>
+          <text x="140" y="164" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x² + 5x − 84 = 0 → (x − 7)(x + 12) = 0</text>
           <rect x="20" y="174" width="240" height="22" rx="6" fill="#34d399" fillOpacity="0.45" />
-          <text x="140" y="190" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">x = 7 (lebar), panjang = 12 m</text>
+          <text x="140" y="190" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x = 7 (lebar), panjang = 12 m</text>
         </svg>
       </div>
     ),

@@ -15,15 +15,15 @@ const situations: SituationCard[] = [
           <rect width="280" height="240" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="12" fontWeight="bold" fill="#67e8f9" textAnchor="middle">f(x) = x² − 4x + 3</text>
           <rect x="20" y="34" width="240" height="20" rx="6" fill="#22d3ee" fillOpacity="0.3" />
-          <text x="140" y="48" fontSize="9" fill="#fff" textAnchor="middle">{"1️⃣ Arah: a > 0 → buka ATAS"}</text>
+          <text x="140" y="48" fontSize="9" fill="var(--icon-color)" textAnchor="middle">{"1️⃣ Arah: a > 0 → buka ATAS"}</text>
           <rect x="20" y="58" width="240" height="20" rx="6" fill="#a78bfa" fillOpacity="0.3" />
-          <text x="140" y="72" fontSize="9" fill="#fff" textAnchor="middle">2️⃣ TP sumbu-y: (0, 3)</text>
+          <text x="140" y="72" fontSize="9" fill="var(--icon-color)" textAnchor="middle">2️⃣ TP sumbu-y: (0, 3)</text>
           <rect x="20" y="82" width="240" height="20" rx="6" fill="#fbbf24" fillOpacity="0.3" />
-          <text x="140" y="96" fontSize="9" fill="#fff" textAnchor="middle">3️⃣ TP sumbu-x: x²−4x+3=0 → (1,0), (3,0)</text>
+          <text x="140" y="96" fontSize="9" fill="var(--icon-color)" textAnchor="middle">3️⃣ TP sumbu-x: x²−4x+3=0 → (1,0), (3,0)</text>
           <rect x="20" y="106" width="240" height="20" rx="6" fill="#f0abfc" fillOpacity="0.3" />
-          <text x="140" y="120" fontSize="9" fill="#fff" textAnchor="middle">4️⃣ Sumbu simetri: x = 2</text>
+          <text x="140" y="120" fontSize="9" fill="var(--icon-color)" textAnchor="middle">4️⃣ Sumbu simetri: x = 2</text>
           <rect x="20" y="130" width="240" height="20" rx="6" fill="#34d399" fillOpacity="0.4" />
-          <text x="140" y="144" fontSize="9" fill="#fff" textAnchor="middle">5️⃣ Puncak: P(2, −1)</text>
+          <text x="140" y="144" fontSize="9" fill="var(--icon-color)" textAnchor="middle">5️⃣ Puncak: P(2, −1)</text>
           <line x1="40" y1="195" x2="240" y2="195" stroke="#94a3b8" strokeWidth="1" />
           <line x1="140" y1="160" x2="140" y2="225" stroke="#f0abfc" strokeWidth="1" strokeDasharray="3 3" />
           <path d="M 70 175 Q 140 230 210 175" fill="none" stroke="#22d3ee" strokeWidth="2.5" />
@@ -45,24 +45,24 @@ const situations: SituationCard[] = [
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">Tabel titik bantu untuk f(x) = x² − 4x + 3</text>
           <rect x="20" y="35" width="240" height="22" rx="4" fill="#fbbf24" fillOpacity="0.4" />
-          <text x="60" y="50" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">x</text>
-          <text x="100" y="50" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">0</text>
-          <text x="135" y="50" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">1</text>
-          <text x="170" y="50" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">2</text>
-          <text x="205" y="50" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">3</text>
-          <text x="240" y="50" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">4</text>
+          <text x="60" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x</text>
+          <text x="100" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">0</text>
+          <text x="135" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">1</text>
+          <text x="170" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">2</text>
+          <text x="205" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">3</text>
+          <text x="240" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">4</text>
           <rect x="20" y="60" width="240" height="22" rx="4" fill="#a7f3d0" fillOpacity="0.4" />
-          <text x="60" y="75" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">f(x)</text>
-          <text x="100" y="75" fontSize="10" fill="#fff" textAnchor="middle">3</text>
-          <text x="135" y="75" fontSize="10" fill="#fff" textAnchor="middle">0</text>
+          <text x="60" y="75" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">f(x)</text>
+          <text x="100" y="75" fontSize="10" fill="var(--icon-color)" textAnchor="middle">3</text>
+          <text x="135" y="75" fontSize="10" fill="var(--icon-color)" textAnchor="middle">0</text>
           <text x="170" y="75" fontSize="10" fontWeight="bold" fill="#fde68a" textAnchor="middle">−1</text>
-          <text x="205" y="75" fontSize="10" fill="#fff" textAnchor="middle">0</text>
-          <text x="240" y="75" fontSize="10" fill="#fff" textAnchor="middle">3</text>
+          <text x="205" y="75" fontSize="10" fill="var(--icon-color)" textAnchor="middle">0</text>
+          <text x="240" y="75" fontSize="10" fill="var(--icon-color)" textAnchor="middle">3</text>
           <text x="140" y="100" fontSize="9" fill="#fde68a" textAnchor="middle">x = 2 → puncak (yₚ = −1)</text>
           <text x="140" y="115" fontSize="9" fill="#fde68a" textAnchor="middle">SIMETRIS terhadap x = 2</text>
           <rect x="20" y="130" width="240" height="55" rx="6" fill="#34d399" fillOpacity="0.4" />
-          <text x="140" y="155" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Tabel = peta titik. Plot → tarik kurva.</text>
-          <text x="140" y="172" fontSize="10" fill="#fff" textAnchor="middle">Periksa: SIMETRI di kedua sisi sumbu.</text>
+          <text x="140" y="155" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Tabel = peta titik. Plot → tarik kurva.</text>
+          <text x="140" y="172" fontSize="10" fill="var(--icon-color)" textAnchor="middle">Periksa: SIMETRI di kedua sisi sumbu.</text>
         </svg>
       </div>
     ),

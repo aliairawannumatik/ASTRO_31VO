@@ -108,14 +108,14 @@ const SpinnerDiagram = ({ sectors }: { sectors: { label: string; color: string; 
     const ty = cy + (r * 0.62) * Math.sin(midRad);
     paths.push(
       <path key={i} d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} Z`} fill={s.color} stroke="#0f172a" strokeWidth={2} />,
-      <text key={`t${i}`} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize={10} fontWeight="bold">{s.label}</text>
+      <text key={`t${i}`} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fill="var(--icon-color)" fontSize={10} fontWeight="bold">{s.label}</text>
     );
     currentAngle = end;
   });
   return (
     <svg viewBox="0 0 160 160" className="w-32 h-32 mx-auto">
       {paths}
-      <circle cx={cx} cy={cy} r={5} fill="white" />
+      <circle cx={cx} cy={cy} r={5} fill="var(--icon-color)" />
     </svg>
   );
 };

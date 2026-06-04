@@ -202,7 +202,7 @@ const RotatingGabungan3D = ({
               <polygon points={pts} fill={f.color} fillOpacity={1}
                 stroke="rgba(255,255,255,0.45)" strokeWidth={1.1} strokeLinejoin="round"/>
               {f.label && (
-                <text x={cx+mx} y={cy+my+3} fill="white" fontSize={6.5} fontFamily="monospace"
+                <text x={cx+mx} y={cy+my+3} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace"
                   fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
                   style={{ pointerEvents:"none" }}>{f.label}</text>
               )}
@@ -1033,7 +1033,7 @@ const JaringGabunganInteraktif = () => {
                 <polygon points={pts} fill={f.color} fillOpacity={0.88}
                   stroke="rgba(255,255,255,0.5)" strokeWidth={1.3} strokeLinejoin="round"/>
                 {f.label && (
-                  <text x={cx3+mx} y={cy3+my+3} fill="white" fontSize={8}
+                  <text x={cx3+mx} y={cy3+my+3} fill="var(--icon-color)" fontSize={8}
                     fontFamily="monospace" fontWeight="bold" textAnchor="middle"
                     dominantBaseline="middle" style={{ pointerEvents:"none" }}>{f.label}</text>
                 )}
@@ -1285,7 +1285,7 @@ const slides: Slide[] = [
                 <polygon points="10,70 80,70 80,20 10,20" fill="#6366f1" fillOpacity="0.7" stroke="#818cf8" strokeWidth="1.5"/>
                 <polygon points="80,20 110,5 110,55 80,70" fill="#4f46e5" fillOpacity="0.85" stroke="#818cf8" strokeWidth="1.5"/>
                 <polygon points="10,20 80,20 110,5 40,5" fill="#818cf8" fillOpacity="0.9" stroke="#a5b4fc" strokeWidth="1.5"/>
-                <text x="45" y="50" fill="white" fontSize="8" fontWeight="bold" textAnchor="middle">V utuh</text>
+                <text x="45" y="50" fill="var(--icon-color)" fontSize="8" fontWeight="bold" textAnchor="middle">V utuh</text>
                 <text x="45" y="82" fill="#818cf8" fontSize="7" textAnchor="middle">p × l × t</text>
               </svg>
               <span className="text-indigo-300 font-bold text-[10px]">Balok Utuh</span>
@@ -1297,7 +1297,7 @@ const slides: Slide[] = [
                 <polygon points="10,55 50,55 50,20 10,20" fill="#f43f5e" fillOpacity="0.7" stroke="#fb7185" strokeWidth="1.5"/>
                 <polygon points="50,20 70,10 70,45 50,55" fill="#e11d48" fillOpacity="0.85" stroke="#fb7185" strokeWidth="1.5"/>
                 <polygon points="10,20 50,20 70,10 30,10" fill="#fb7185" fillOpacity="0.9" stroke="#fda4af" strokeWidth="1.5"/>
-                <text x="35" y="40" fill="white" fontSize="7" fontWeight="bold" textAnchor="middle">V ambil</text>
+                <text x="35" y="40" fill="var(--icon-color)" fontSize="7" fontWeight="bold" textAnchor="middle">V ambil</text>
               </svg>
               <span className="text-rose-300 font-bold text-[10px]">Bagian Diambil</span>
             </div>
@@ -1311,7 +1311,7 @@ const slides: Slide[] = [
                 <polygon points="10,20 80,20 110,5 40,5" fill="#818cf8" fillOpacity="0.9" stroke="#a5b4fc" strokeWidth="1.5"/>
                 {/* Lubang/potongan */}
                 <polygon points="10,70 35,70 35,45 10,45" fill="#0f172a" fillOpacity="0.95" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="3,2"/>
-                <text x="55" y="50" fill="white" fontSize="7" fontWeight="bold" textAnchor="middle">V hasil</text>
+                <text x="55" y="50" fill="var(--icon-color)" fontSize="7" fontWeight="bold" textAnchor="middle">V hasil</text>
               </svg>
               <span className="text-green-300 font-bold text-[10px]">Hasil Gabungan</span>
             </div>

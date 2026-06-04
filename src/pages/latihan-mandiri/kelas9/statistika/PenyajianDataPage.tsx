@@ -69,8 +69,8 @@ const DiagramLingkaran = () => {
           <g key={i}>
             <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
               fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <text x={lx} y={ly - 3} fill="white" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
-            <text x={lx} y={ly + 8} fill="white" fontSize="8" textAnchor="middle">{seg.line2}</text>
+            <text x={lx} y={ly - 3} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="var(--icon-color)" fontSize="8" textAnchor="middle">{seg.line2}</text>
           </g>
         );
       })}
@@ -148,16 +148,16 @@ const DiagramGarisPanen = () => {
   return (
     <svg width="260" height="190" viewBox="0 0 260 190" className="mx-auto">
       <rect x="4" y="4" width="252" height="182" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
-      <line x1="42" y1="20" x2="42" y2="155" stroke="white" strokeWidth="1.5" />
-      <line x1="42" y1="155" x2="255" y2="155" stroke="white" strokeWidth="1.5" />
-      <line x1="255" y1="155" x2="261" y2="155" stroke="white" strokeWidth="2" markerEnd="url(#arrowX)" />
+      <line x1="42" y1="20" x2="42" y2="155" stroke="var(--icon-stroke)" strokeWidth="1.5" />
+      <line x1="42" y1="155" x2="255" y2="155" stroke="var(--icon-stroke)" strokeWidth="1.5" />
+      <line x1="255" y1="155" x2="261" y2="155" stroke="var(--icon-stroke)" strokeWidth="2" markerEnd="url(#arrowX)" />
       {yVals.map((v, i) => {
         const y = 155 - i * 27;
         return (
           <g key={v}>
-            <line x1="39" y1={y} x2="42" y2={y} stroke="white" strokeWidth="1" />
-            <text x="36" y={y + 4} fill="white" fontSize="8" textAnchor="end">{v}</text>
-            <line x1="42" y1={y} x2="250" y2={y} stroke="white" strokeWidth="0.4" strokeDasharray="3,3" opacity="0.4" />
+            <line x1="39" y1={y} x2="42" y2={y} stroke="var(--icon-stroke)" strokeWidth="1" />
+            <text x="36" y={y + 4} fill="var(--icon-color)" fontSize="8" textAnchor="end">{v}</text>
+            <line x1="42" y1={y} x2="250" y2={y} stroke="var(--icon-stroke)" strokeWidth="0.4" strokeDasharray="3,3" opacity="0.4" />
           </g>
         );
       })}
@@ -165,8 +165,8 @@ const DiagramGarisPanen = () => {
         const x = pts[i][0];
         return (
           <g key={yr}>
-            <line x1={x} y1="155" x2={x} y2="158" stroke="white" strokeWidth="1" />
-            <text x={x} y="172" fill="white" fontSize="7.5" textAnchor="middle" transform={`rotate(-45, ${x}, 172)`}>{yr}</text>
+            <line x1={x} y1="155" x2={x} y2="158" stroke="var(--icon-stroke)" strokeWidth="1" />
+            <text x={x} y="172" fill="var(--icon-color)" fontSize="7.5" textAnchor="middle" transform={`rotate(-45, ${x}, 172)`}>{yr}</text>
           </g>
         );
       })}
@@ -176,10 +176,10 @@ const DiagramGarisPanen = () => {
         return <line key={i} x1={px} y1={py} x2={x} y2={y} stroke="#22d3ee" strokeWidth="2" />;
       })}
       {pts.map(([x,y], i) => (
-        <circle key={i} cx={x} cy={y} r="3.5" fill="#22d3ee" stroke="white" strokeWidth="1" />
+        <circle key={i} cx={x} cy={y} r="3.5" fill="#22d3ee" stroke="var(--icon-stroke)" strokeWidth="1" />
       ))}
-      <text x="22" y="90" fill="white" fontSize="7" textAnchor="middle" transform="rotate(-90, 22, 90)">Hasil Panen Padi (ton)</text>
-      <text x="255" y="150" fill="white" fontSize="7.5" textAnchor="start">Tahun</text>
+      <text x="22" y="90" fill="var(--icon-color)" fontSize="7" textAnchor="middle" transform="rotate(-90, 22, 90)">Hasil Panen Padi (ton)</text>
+      <text x="255" y="150" fill="var(--icon-color)" fontSize="7.5" textAnchor="start">Tahun</text>
     </svg>
   );
 };
@@ -194,19 +194,19 @@ const TabelDistribusiIPA = () => {
       <rect x="2" y="2" width={totalW - 4} height={totalH - 4} rx="8" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
       <rect x="2" y="2" width={totalW - 4} height={headerH} rx="8" fill="#0d9488" fillOpacity="0.4" />
       <rect x="2" y="2" width={totalW - 4} height={headerH - 4} fill="#0d9488" fillOpacity="0.4" />
-      <text x={padX + col1W / 2} y={headerH / 2 + 5} fill="white" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai</text>
+      <text x={padX + col1W / 2} y={headerH / 2 + 5} fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai</text>
       <line x1={padX + col1W} y1="2" x2={padX + col1W} y2={totalH - 2} stroke="#2dd4bf" strokeWidth="1" />
-      <text x={padX + col1W + col2W / 2} y={headerH / 2 + 5} fill="white" fontSize="10" textAnchor="middle" fontWeight="bold">Frekuensi</text>
+      <text x={padX + col1W + col2W / 2} y={headerH / 2 + 5} fill="var(--icon-color)" fontSize="10" textAnchor="middle" fontWeight="bold">Frekuensi</text>
       <line x1="2" y1={headerH} x2={totalW - 2} y2={headerH} stroke="#2dd4bf" strokeWidth="1" />
       {rows.map(([val, freq], i) => {
         const y = headerH + i * rowH;
         const isEven = i % 2 === 0;
         return (
           <g key={i}>
-            {isEven && <rect x="3" y={y} width={totalW - 6} height={rowH} fill="white" fillOpacity="0.03" />}
+            {isEven && <rect x="3" y={y} width={totalW - 6} height={rowH} fill="var(--icon-color)" fillOpacity="0.03" />}
             <line x1="2" y1={y + rowH} x2={totalW - 2} y2={y + rowH} stroke="#2dd4bf" strokeWidth="0.5" opacity="0.4" />
-            <text x={padX + col1W / 2} y={y + rowH / 2 + 4} fill="white" fontSize="10" textAnchor="middle">{val}</text>
-            <text x={padX + col1W + col2W / 2} y={y + rowH / 2 + 4} fill="white" fontSize="10" textAnchor="middle">{freq}</text>
+            <text x={padX + col1W / 2} y={y + rowH / 2 + 4} fill="var(--icon-color)" fontSize="10" textAnchor="middle">{val}</text>
+            <text x={padX + col1W + col2W / 2} y={y + rowH / 2 + 4} fill="var(--icon-color)" fontSize="10" textAnchor="middle">{freq}</text>
           </g>
         );
       })}
@@ -289,8 +289,8 @@ const DiagramLingkaranPersen = () => {
           <g key={i}>
             <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
               fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <text x={lx} y={ly - 3} fill="white" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
-            <text x={lx} y={ly + 8} fill="white" fontSize="8" textAnchor="middle">{seg.line2}</text>
+            <text x={lx} y={ly - 3} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="var(--icon-color)" fontSize="8" textAnchor="middle">{seg.line2}</text>
           </g>
         );
       })}
@@ -325,8 +325,8 @@ const DiagramLingkaranDerajat = () => {
           <g key={i}>
             <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
               fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <text x={lx} y={ly - 3} fill="white" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
-            <text x={lx} y={ly + 8} fill="white" fontSize="8" textAnchor="middle">{seg.line2}</text>
+            <text x={lx} y={ly - 3} fill="var(--icon-color)" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="var(--icon-color)" fontSize="8" textAnchor="middle">{seg.line2}</text>
           </g>
         );
       })}

@@ -62,8 +62,8 @@ const DuaKaleng = ({ r = 40, size = 220 }: { r?: number; size?: number }) => {
       <path d={`M ${cx2} ${cy - r} A ${r} ${r} 0 1 1 ${cx2} ${cy + r}`} fill="none" stroke={beltColor} strokeWidth="2.5" />
       <circle cx={cx1} cy={cy} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="2" />
       <circle cx={cx2} cy={cy} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="2" />
-      <circle cx={cx1} cy={cy} r={3.5} fill={circleColor} stroke="white" strokeWidth="1" />
-      <circle cx={cx2} cy={cy} r={3.5} fill={circleColor} stroke="white" strokeWidth="1" />
+      <circle cx={cx1} cy={cy} r={3.5} fill={circleColor} stroke="var(--icon-stroke)" strokeWidth="1" />
+      <circle cx={cx2} cy={cy} r={3.5} fill={circleColor} stroke="var(--icon-stroke)" strokeWidth="1" />
       <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
       <text x={cx1 - 6} y={cy + 16} fill="#94a3b8" fontSize="11" fontWeight="bold" fontFamily="serif">O₁</text>
       <text x={cx2 - 6} y={cy + 16} fill="#94a3b8" fontSize="11" fontWeight="bold" fontFamily="serif">O₂</text>
@@ -93,7 +93,7 @@ const BarisanLingkaran = ({ n, r = 28, size = 280 }: { n: number; r?: number; si
       {centers.map((cx, i) => (
         <g key={i}>
           <circle cx={cx} cy={cy} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="1.8" />
-          <circle cx={cx} cy={cy} r={3} fill={circleColor} stroke="white" strokeWidth="0.8" />
+          <circle cx={cx} cy={cy} r={3} fill={circleColor} stroke="var(--icon-stroke)" strokeWidth="0.8" />
           {i < n - 1 && <line x1={cx} y1={cy} x2={cx + 2 * r} y2={cy} stroke="#94a3b8" strokeWidth="1" strokeDasharray="3,2" />}
         </g>
       ))}
@@ -143,7 +143,7 @@ const SegitigaLingkaran = ({ r = 40, size = 240 }: { r?: number; size?: number }
       {circles.map((c, i) => (
         <g key={i}>
           <circle cx={c.x} cy={c.y} r={r} fill={`${circleColor}18`} stroke={circleColor} strokeWidth="1.8" />
-          <circle cx={c.x} cy={c.y} r={3} fill={circleColor} stroke="white" strokeWidth="0.8" />
+          <circle cx={c.x} cy={c.y} r={3} fill={circleColor} stroke="var(--icon-stroke)" strokeWidth="0.8" />
         </g>
       ))}
       <text x={c1.x - 12} y={c1.y + 16} fill="#94a3b8" fontSize="10" fontFamily="serif">O₁</text>
@@ -276,9 +276,9 @@ const DuaPuliSabuk = ({ R = 46, r = 22, size = 280 }: { R?: number; r?: number; 
       <circle cx={cx2} cy={cy} r={r} fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="2" />
       <circle cx={cx2} cy={cy} r={r * 0.38} fill="rgba(251,146,60,0.25)" stroke="#fb923c" strokeWidth="1.5" />
       <line x1={cx1} y1={cy} x2={cx2} y2={cy} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,3" />
-      <circle cx={cx1} cy={cy} r={3.5} fill={VC} stroke="white" strokeWidth="1" />
+      <circle cx={cx1} cy={cy} r={3.5} fill={VC} stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx1 - 8} y={cy + 18} fill={VC} fontSize="11" fontWeight="bold" fontFamily="serif">O₁</text>
-      <circle cx={cx2} cy={cy} r={3.5} fill="#fb923c" stroke="white" strokeWidth="1" />
+      <circle cx={cx2} cy={cy} r={3.5} fill="#fb923c" stroke="var(--icon-stroke)" strokeWidth="1" />
       <text x={cx2 - 8} y={cy + 18} fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="serif">O₂</text>
       <text x={cx1 - 22} y={cy - R / 2} fill={VC} fontSize="10" fontWeight="bold" fontFamily="sans-serif">R</text>
       <text x={cx2 + 8} y={cy - r / 2} fill="#fb923c" fontSize="10" fontWeight="bold" fontFamily="sans-serif">r</text>

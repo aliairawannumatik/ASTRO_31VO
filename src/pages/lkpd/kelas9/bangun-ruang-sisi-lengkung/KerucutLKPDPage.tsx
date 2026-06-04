@@ -21,7 +21,7 @@ const situations: SituationCard[] = [
           <text x="125" y="185" fontSize="11" fill="#34d399" textAnchor="middle">r</text>
           <line x1="100" y1="30" x2="150" y2="170" stroke="#67e8f9" strokeWidth="1.5" />
           <text x="135" y="105" fontSize="11" fill="#67e8f9">s</text>
-          <text x="200" y="60" fontSize="10" fontWeight="bold" fill="#fff">Kerucut!</text>
+          <text x="200" y="60" fontSize="10" fontWeight="bold" fill="var(--icon-color)">Kerucut!</text>
           <text x="200" y="80" fontSize="9" fill="#fde68a">r = jari-jari alas</text>
           <text x="200" y="95" fontSize="9" fill="#fde68a">t = tinggi (tegak)</text>
           <text x="200" y="110" fontSize="9" fill="#fde68a">s = garis pelukis</text>
@@ -39,8 +39,8 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <path d="M 140 20 L 60 160 A 90 90 0 0 1 220 160 Z" fill="#a78bfa" fillOpacity="0.45" stroke="#c4b5fd" strokeWidth="2" />
-          <text x="140" y="100" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">Selimut</text>
-          <text x="140" y="115" fontSize="9" fill="#fff" textAnchor="middle">(JURING lingkaran)</text>
+          <text x="140" y="100" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Selimut</text>
+          <text x="140" y="115" fontSize="9" fill="var(--icon-color)" textAnchor="middle">(JURING lingkaran)</text>
           <line x1="140" y1="20" x2="60" y2="160" stroke="#fbbf24" strokeWidth="1.5" />
           <text x="92" y="98" fontSize="10" fill="#fbbf24">s</text>
           <text x="140" y="180" fontSize="11" fontWeight="bold" fill="#34d399" textAnchor="middle">Luas Selimut = πrs</text>

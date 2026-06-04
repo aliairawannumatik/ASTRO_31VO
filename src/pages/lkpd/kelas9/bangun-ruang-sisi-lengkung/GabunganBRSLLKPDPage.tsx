@@ -17,13 +17,13 @@ const situations: SituationCard[] = [
           <ellipse cx="140" cy="160" rx="40" ry="10" fill="#22d3ee" fillOpacity="0.5" stroke="#67e8f9" strokeWidth="2" />
           <ellipse cx="140" cy="60" rx="40" ry="10" fill="#22d3ee" fillOpacity="0.0" stroke="#67e8f9" strokeWidth="1" strokeDasharray="2 2" />
           <path d="M 100 60 A 40 40 0 0 1 180 60" fill="#34d399" fillOpacity="0.5" stroke="#6ee7b7" strokeWidth="2" />
-          <text x="200" y="50" fontSize="10" fontWeight="bold" fill="#fff">GABUNGAN!</text>
+          <text x="200" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)">GABUNGAN!</text>
           <text x="200" y="70" fontSize="9" fill="#a7f3d0">Tabung + ½ Bola di atas</text>
           <text x="200" y="100" fontSize="9" fill="#fde68a">V = V_tabung + V_½bola</text>
           <text x="200" y="115" fontSize="9" fill="#fde68a">L = L_selimut + L_alas</text>
           <text x="200" y="130" fontSize="9" fill="#fde68a">    + L_½bola (lengkungan)</text>
-          <text x="135" y="105" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">Tabung</text>
-          <text x="140" y="50" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">½ Bola</text>
+          <text x="135" y="105" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Tabung</text>
+          <text x="140" y="50" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">½ Bola</text>
         </svg>
       </div>
     ),
@@ -40,12 +40,12 @@ const situations: SituationCard[] = [
           <ellipse cx="140" cy="160" rx="40" ry="10" fill="#f472b6" fillOpacity="0.5" stroke="#f9a8d4" strokeWidth="2" />
           <ellipse cx="140" cy="100" rx="40" ry="10" fill="#f472b6" fillOpacity="0.0" stroke="#f9a8d4" strokeWidth="1" strokeDasharray="2 2" />
           <polygon points="140,30 100,100 180,100" fill="#fbbf24" fillOpacity="0.55" stroke="#fde68a" strokeWidth="2" />
-          <text x="200" y="50" fontSize="10" fontWeight="bold" fill="#fff">Tabung + Kerucut</text>
+          <text x="200" y="50" fontSize="10" fontWeight="bold" fill="var(--icon-color)">Tabung + Kerucut</text>
           <text x="200" y="70" fontSize="9" fill="#fde68a">V = V_tabung + V_kerucut</text>
           <text x="200" y="85" fontSize="9" fill="#fde68a">L = L_alas + L_selimut_t</text>
           <text x="200" y="100" fontSize="9" fill="#fde68a">    + L_selimut_k</text>
-          <text x="140" y="135" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">Tabung</text>
-          <text x="140" y="80" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">Kerucut</text>
+          <text x="140" y="135" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Tabung</text>
+          <text x="140" y="80" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Kerucut</text>
         </svg>
       </div>
     ),

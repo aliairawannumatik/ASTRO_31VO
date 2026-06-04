@@ -238,7 +238,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
       <div
         className="w-full max-w-lg rounded-lg px-4 py-3 text-center border transition-all duration-500"
         style={{
-          background: "rgba(15,23,42,0.8)",
+          background: "var(--bg-card)",
           borderColor: showFinal ? "rgba(234,179,8,0.6)" : "rgba(56,189,248,0.3)",
         }}
       >

@@ -433,11 +433,11 @@ const BungaTunggalPage = () => {
                   <div className="rounded-xl p-4 space-y-3 animate-slide-up" style={{background: "rgba(251,191,36,0.07)", border: "1.5px solid rgba(251,191,36,0.35)"}}>
                     <p className="font-body text-xs font-bold text-amber-300">✅ Hasil Perhitungan:</p>
                     <div className="space-y-2">
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "rgba(0,0,0,0.3)"}}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "var(--bg-secondary)"}}>
                         <span className="font-body text-xs text-amber-200/60">Modal Awal</span>
                         <span className="font-body text-sm font-bold text-white">{formatRupiah(parseFloat(modal.replace(/[^0-9.]/g, "")) || 0)}</span>
                       </div>
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "rgba(0,0,0,0.3)"}}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{background: "var(--bg-secondary)"}}>
                         <span className="font-body text-xs text-amber-200/60">Bunga yang Diperoleh</span>
                         <span className="font-body text-sm font-bold text-green-400">+{formatRupiah(kalcResult.bungaRp)}</span>
                       </div>
@@ -446,7 +446,7 @@ const BungaTunggalPage = () => {
                         <span className="font-body text-lg font-black text-amber-300">{formatRupiah(kalcResult.totalRp)}</span>
                       </div>
                     </div>
-                    <div className="rounded-lg p-3" style={{background: "rgba(0,0,0,0.3)", border: "1px dashed rgba(251,191,36,0.2)"}}>
+                    <div className="rounded-lg p-3" style={{background: "var(--bg-secondary)", border: "1px dashed rgba(251,191,36,0.2)"}}>
                       <p className="font-body text-xs text-amber-300/60 text-center">
                         Cara hitung: B = {formatRupiah(parseFloat(modal.replace(/[^0-9.]/g, "")) || 0)} × {kalcResult.waktuTahun} × {(bungaNum).toFixed(2)} = {formatRupiah(kalcResult.bungaRp)}
                       </p>

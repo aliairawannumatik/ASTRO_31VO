@@ -153,9 +153,9 @@ const InteractivePrisma3D = () => {
               return (
                 <g key={i}>
                   <polygon points={pts} fill={f.color} fillOpacity={0.85}
-                    stroke="white" strokeWidth={1.5} strokeLinejoin="round" />
+                    stroke="var(--icon-stroke)" strokeWidth={1.5} strokeLinejoin="round" />
                   <text x={cx + mx} y={cy + my + 3}
-                    fill="white" fontSize={9} fontFamily="monospace" fontWeight="bold"
+                    fill="var(--icon-color)" fontSize={9} fontFamily="monospace" fontWeight="bold"
                     textAnchor="middle" dominantBaseline="middle" style={{ pointerEvents: "none" }}>
                     {f.label}
                   </text>
@@ -315,7 +315,7 @@ const RotatingPrisma3D = ({ n, label, r = 38, h = 60 }: { n: number; label: stri
             <g key={i}>
               <polygon points={pts} fill={f.color} fillOpacity={1}
                 stroke="rgba(255,255,255,0.5)" strokeWidth={1.2} strokeLinejoin="round"/>
-              <text x={cx+mx} y={cy+my+3} fill="white" fontSize={7} fontFamily="monospace"
+              <text x={cx+mx} y={cy+my+3} fill="var(--icon-color)" fontSize={7} fontFamily="monospace"
                 fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
                 style={{ pointerEvents:"none" }}>{f.label}</text>
             </g>
@@ -390,32 +390,32 @@ const JaringPrismaSVGInner = ({
         <g key={i}>
           <rect x={r.x} y={r.y} width={r.w} height={r.h}
             fill={r.fill} fillOpacity={0.88} rx={3}
-            stroke="white" strokeWidth={1.5}
+            stroke="var(--icon-stroke)" strokeWidth={1.5}
             className={i === 0 ? animA : i === 1 ? animA : animA} />
           {r.label.split("\n").map((line, li) => (
             <text key={li} x={r.x + r.w / 2} y={r.y + r.h / 2 + (li - 0.4) * 10}
-              fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+              fill="var(--icon-color)" fontSize={8} fontFamily="monospace" fontWeight="bold"
               textAnchor="middle" dominantBaseline="middle">{line}</text>
           ))}
         </g>
       ))}
       {/* Alas triangle */}
       <polygon points={alasPts} fill="#ef4444" fillOpacity={0.88} rx={3}
-        stroke="white" strokeWidth={1.5} className={animB} />
+        stroke="var(--icon-stroke)" strokeWidth={1.5} className={animB} />
       <text x={ox + 1.5*sp} y={oy + th + hp + th*0.55}
-        fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+        fill="var(--icon-color)" fontSize={8} fontFamily="monospace" fontWeight="bold"
         textAnchor="middle">ALAS</text>
       <text x={ox + 1.5*sp} y={oy + th + hp + th*0.55 + 10}
-        fill="white" fontSize={7} fontFamily="monospace"
+        fill="var(--icon-color)" fontSize={7} fontFamily="monospace"
         textAnchor="middle">½×a×t△</text>
       {/* Tutup triangle */}
       <polygon points={tutupPts} fill="#eab308" fillOpacity={0.88}
-        stroke="white" strokeWidth={1.5} className={animC} />
+        stroke="var(--icon-stroke)" strokeWidth={1.5} className={animC} />
       <text x={ox + 1.5*sp} y={oy + th*0.45}
-        fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+        fill="var(--icon-color)" fontSize={8} fontFamily="monospace" fontWeight="bold"
         textAnchor="middle">TUTUP</text>
       <text x={ox + 1.5*sp} y={oy + th*0.45 + 10}
-        fill="white" fontSize={7} fontFamily="monospace"
+        fill="var(--icon-color)" fontSize={7} fontFamily="monospace"
         textAnchor="middle">½×a×t△</text>
       {/* Dimension labels */}
       <text x={ox + sp/2} y={oy + th - 5}
@@ -468,8 +468,8 @@ const RusukPrismaSVG = () => (
     <text x="230" y="142" fill="#facc15" fontSize="8" fontFamily="monospace">3 rusuk atas</text>
     <rect x="218" y="149" width="8" height="4" fill="#f97316"/>
     <text x="230" y="154" fill="#f97316" fontSize="8" fontFamily="monospace">3 rusuk tegak</text>
-    <text x="218" y="170" fill="#fff" fontSize="8" fontFamily="monospace">= 9 rusuk</text>
-    <text x="218" y="180" fill="#fff" fontSize="8" fontFamily="monospace">(3n, n=3)</text>
+    <text x="218" y="170" fill="var(--icon-color)" fontSize="8" fontFamily="monospace">= 9 rusuk</text>
+    <text x="218" y="180" fill="var(--icon-color)" fontSize="8" fontFamily="monospace">(3n, n=3)</text>
   </svg>
 );
 
@@ -494,14 +494,14 @@ const SisiPrismaSVG = () => (
     {/* Right face (rect) */}
     <polygon points="180,170 210,130 150,70 120,110" fill="#f97316" className="sp-b" fillOpacity="0.6"/>
     {/* Outlines */}
-    <polygon points="60,170 180,170 120,110" fill="none" stroke="#fff" strokeWidth="1.2"/>
-    <polygon points="90,130 210,130 150,70" fill="none" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="60" y1="170" x2="90" y2="130" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="180" y1="170" x2="210" y2="130" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="120" y1="110" x2="150" y2="70" stroke="#fff" strokeWidth="1.2"/>
-    <text x="220" y="170" fill="#fff" fontSize="8" fontFamily="monospace">5 sisi</text>
+    <polygon points="60,170 180,170 120,110" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <polygon points="90,130 210,130 150,70" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <line x1="60" y1="170" x2="90" y2="130" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <line x1="180" y1="170" x2="210" y2="130" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <line x1="120" y1="110" x2="150" y2="70" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <text x="220" y="170" fill="var(--icon-color)" fontSize="8" fontFamily="monospace">5 sisi</text>
     <text x="220" y="181" fill="#facc15" fontSize="8" fontFamily="monospace">n+2=5</text>
-    <text x="220" y="192" fill="#fff" fontSize="7" fontFamily="monospace">(2 △ + 3 □)</text>
+    <text x="220" y="192" fill="var(--icon-color)" fontSize="7" fontFamily="monospace">(2 △ + 3 □)</text>
   </svg>
 );
 
@@ -527,8 +527,8 @@ const TitikSudutPrismaSVG = () => (
         style={{ animationDelay: `${i*0.2}s` }}/>
     ))}
     <text x="220" y="170" fill="#facc15" fontSize="9" fontFamily="monospace">6 titik</text>
-    <text x="220" y="182" fill="#fff" fontSize="8" fontFamily="monospace">sudut</text>
-    <text x="220" y="194" fill="#fff" fontSize="8" fontFamily="monospace">(2n = 6)</text>
+    <text x="220" y="182" fill="var(--icon-color)" fontSize="8" fontFamily="monospace">sudut</text>
+    <text x="220" y="194" fill="var(--icon-color)" fontSize="8" fontFamily="monospace">(2n = 6)</text>
   </svg>
 );
 
@@ -582,34 +582,34 @@ const JaringSegiempatSVG = () => (
     {/* 4 rectangular side faces in a row */}
     {/* r1: KIRI (l×t) */}
     <rect x={50} y={95} width={45} height={50} fill="#3b82f6" fillOpacity={0.88} rx={3}
-      stroke="white" strokeWidth={1.5} className="jsq-a"/>
-    <text x={72.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">KIRI</text>
-    <text x={72.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">l×t</text>
+      stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsq-a"/>
+    <text x={72.5} y={117} fill="var(--icon-color)" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">KIRI</text>
+    <text x={72.5} y={127} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace" textAnchor="middle">l×t</text>
     {/* r2: DEPAN (p×t) */}
     <rect x={95} y={95} width={65} height={50} fill="#8b5cf6" fillOpacity={0.88} rx={3}
-      stroke="white" strokeWidth={1.5} className="jsq-a"/>
-    <text x={127.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">DEPAN</text>
-    <text x={127.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×t</text>
+      stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsq-a"/>
+    <text x={127.5} y={117} fill="var(--icon-color)" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">DEPAN</text>
+    <text x={127.5} y={127} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×t</text>
     {/* r3: KANAN (l×t) */}
     <rect x={160} y={95} width={45} height={50} fill="#22c55e" fillOpacity={0.88} rx={3}
-      stroke="white" strokeWidth={1.5} className="jsq-a"/>
-    <text x={182.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">KANAN</text>
-    <text x={182.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">l×t</text>
+      stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsq-a"/>
+    <text x={182.5} y={117} fill="var(--icon-color)" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">KANAN</text>
+    <text x={182.5} y={127} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace" textAnchor="middle">l×t</text>
     {/* r4: BELAKANG (p×t) */}
     <rect x={205} y={95} width={65} height={50} fill="#f97316" fillOpacity={0.88} rx={3}
-      stroke="white" strokeWidth={1.5} className="jsq-a"/>
-    <text x={237.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">BELAKANG</text>
-    <text x={237.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×t</text>
+      stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsq-a"/>
+    <text x={237.5} y={117} fill="var(--icon-color)" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">BELAKANG</text>
+    <text x={237.5} y={127} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×t</text>
     {/* ALAS (p×l) below r2 */}
     <rect x={95} y={145} width={65} height={45} fill="#ef4444" fillOpacity={0.88} rx={3}
-      stroke="white" strokeWidth={1.5} className="jsq-b"/>
-    <text x={127.5} y={164} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
-    <text x={127.5} y={174} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×l</text>
+      stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsq-b"/>
+    <text x={127.5} y={164} fill="var(--icon-color)" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+    <text x={127.5} y={174} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×l</text>
     {/* TUTUP (p×l) above r2 */}
     <rect x={95} y={50} width={65} height={45} fill="#eab308" fillOpacity={0.88} rx={3}
-      stroke="white" strokeWidth={1.5} className="jsq-c"/>
-    <text x={127.5} y={69} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
-    <text x={127.5} y={79} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×l</text>
+      stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsq-c"/>
+    <text x={127.5} y={69} fill="var(--icon-color)" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
+    <text x={127.5} y={79} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×l</text>
     {/* Dimension labels */}
     <text x={127.5} y={87} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">p</text>
     <text x={43} y={121} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
@@ -682,22 +682,22 @@ const JaringSegilimaSVG = () => {
       {rects.map((r, i) => (
         <g key={i}>
           <rect x={r.x} y={oy} width={sw} height={rh} fill={r.fill} fillOpacity={0.88}
-            stroke="white" strokeWidth={1.5} className="jsg-a"/>
-          <text x={r.x + sw / 2} y={oy + rh / 2 - 4} fill="white" fontSize={6.5}
+            stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsg-a"/>
+          <text x={r.x + sw / 2} y={oy + rh / 2 - 4} fill="var(--icon-color)" fontSize={6.5}
             fontFamily="monospace" fontWeight="bold" textAnchor="middle">{r.label}</text>
-          <text x={r.x + sw / 2} y={oy + rh / 2 + 7} fill="white" fontSize={6}
+          <text x={r.x + sw / 2} y={oy + rh / 2 + 7} fill="var(--icon-color)" fontSize={6}
             fontFamily="monospace" textAnchor="middle">a×t</text>
         </g>
       ))}
       {/* ALAS pentagon — flat top flush with rect 3 bottom edge */}
       <polygon points={penta(midX, alasCY, pr, alasStart)} fill="#ef4444" fillOpacity={0.88}
-        stroke="white" strokeWidth={1.5} className="jsg-b"/>
-      <text x={midX} y={alasCY + 6} fill="white" fontSize={7}
+        stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsg-b"/>
+      <text x={midX} y={alasCY + 6} fill="var(--icon-color)" fontSize={7}
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
       {/* TUTUP pentagon — flat bottom flush with rect 3 top edge */}
       <polygon points={penta(midX, tutupCY, pr, tutupStart)} fill="#eab308" fillOpacity={0.88}
-        stroke="white" strokeWidth={1.5} className="jsg-c"/>
-      <text x={midX} y={tutupCY + 4} fill="white" fontSize={7}
+        stroke="var(--icon-stroke)" strokeWidth={1.5} className="jsg-c"/>
+      <text x={midX} y={tutupCY + 4} fill="var(--icon-color)" fontSize={7}
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
       {/* Dimension labels */}
       <text x={startX + sw / 2} y={oy - 5} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">a</text>

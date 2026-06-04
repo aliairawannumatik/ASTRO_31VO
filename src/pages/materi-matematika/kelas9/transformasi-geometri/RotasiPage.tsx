@@ -318,8 +318,8 @@ function AnimasiRotasiTitik() {
               return (
                 <g>
                   <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
-                    fill={dir === "ccw" ? "#7c3aed" : "#f97316"} stroke="#fff" strokeWidth="1.5" opacity="0.93" />
-                  <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    fill={dir === "ccw" ? "#7c3aed" : "#f97316"} stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.93" />
+                  <text x={bx} y={by + 5} fontSize="15" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">
                     {Math.round(animatedAngleAbs)}°
                   </text>
                 </g>
@@ -611,7 +611,7 @@ function AnimasiRotasi() {
                     width={bw} height={bh}
                     rx={7} ry={7}
                     fill={dir === "ccw" ? "#10b981" : "#f97316"}
-                    stroke="#fff"
+                    stroke="var(--icon-stroke)"
                     strokeWidth="1.5"
                     opacity="0.93"
                   />
@@ -1179,8 +1179,8 @@ function AnimasiRotasiKurva() {
                 <g>
                   <rect x={bx - bw / 2} y={by - bh / 2} width={bw} height={bh} rx={7} ry={7}
                     fill={isPos90 ? '#7c3aed' : isNeg90 ? '#f97316' : '#db2777'}
-                    stroke="#fff" strokeWidth="1.5" opacity="0.95" />
-                  <text x={bx} y={by + 5} fontSize="15" fill="#fff" textAnchor="middle" fontWeight="bold">
+                    stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.95" />
+                  <text x={bx} y={by + 5} fontSize="15" fill="var(--icon-color)" textAnchor="middle" fontWeight="bold">
                     {Math.round(animAngleAbs)}°
                   </text>
                 </g>

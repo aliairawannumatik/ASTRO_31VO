@@ -15,14 +15,14 @@ const situations: SituationCard[] = [
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <text x="140" y="25" fontSize="13" fontWeight="bold" fill="#fde68a" textAnchor="middle">Bentuk Kuadrat Sempurna</text>
           <rect x="20" y="40" width="240" height="32" rx="6" fill="#fbbf24" fillOpacity="0.3" />
-          <text x="140" y="62" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">{"(x + p)² = x² + 2px + p²"}</text>
+          <text x="140" y="62" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"(x + p)² = x² + 2px + p²"}</text>
           <text x="140" y="92" fontSize="11" fill="#a7f3d0" textAnchor="middle">Contoh: Lengkapi x² + 6x menjadi …</text>
           <rect x="20" y="100" width="240" height="22" rx="6" fill="#a7f3d0" fillOpacity="0.3" />
-          <text x="140" y="116" fontSize="11" fill="#fff" textAnchor="middle">2p = 6 → p = 3 → p² = 9</text>
+          <text x="140" y="116" fontSize="11" fill="var(--icon-color)" textAnchor="middle">2p = 6 → p = 3 → p² = 9</text>
           <rect x="20" y="125" width="240" height="22" rx="6" fill="#22d3ee" fillOpacity="0.4" />
-          <text x="140" y="141" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"x² + 6x + 9 = (x + 3)²"}</text>
+          <text x="140" y="141" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"x² + 6x + 9 = (x + 3)²"}</text>
           <rect x="40" y="155" width="200" height="35" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="178" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Tambah (b/2)² → kuadrat sempurna!</text>
+          <text x="140" y="178" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Tambah (b/2)² → kuadrat sempurna!</text>
         </svg>
       </div>
     ),
@@ -37,19 +37,19 @@ const situations: SituationCard[] = [
           <rect width="280" height="240" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="12" fontWeight="bold" fill="#67e8f9" textAnchor="middle">Selesaikan x² + 6x + 5 = 0</text>
           <rect x="20" y="34" width="240" height="22" rx="6" fill="#22d3ee" fillOpacity="0.3" />
-          <text x="140" y="50" fontSize="10" fill="#fff" textAnchor="middle">1. Pindah konstanta: x² + 6x = −5</text>
+          <text x="140" y="50" fontSize="10" fill="var(--icon-color)" textAnchor="middle">1. Pindah konstanta: x² + 6x = −5</text>
           <rect x="20" y="60" width="240" height="22" rx="6" fill="#a78bfa" fillOpacity="0.3" />
-          <text x="140" y="76" fontSize="10" fill="#fff" textAnchor="middle">2. Setengah b: 6/2 = 3, kuadratkan: 9</text>
+          <text x="140" y="76" fontSize="10" fill="var(--icon-color)" textAnchor="middle">2. Setengah b: 6/2 = 3, kuadratkan: 9</text>
           <rect x="20" y="86" width="240" height="22" rx="6" fill="#fbbf24" fillOpacity="0.3" />
-          <text x="140" y="102" fontSize="10" fill="#fff" textAnchor="middle">3. Tambah 9 di kedua ruas: x² + 6x + 9 = 4</text>
+          <text x="140" y="102" fontSize="10" fill="var(--icon-color)" textAnchor="middle">3. Tambah 9 di kedua ruas: x² + 6x + 9 = 4</text>
           <rect x="20" y="112" width="240" height="22" rx="6" fill="#34d399" fillOpacity="0.4" />
-          <text x="140" y="128" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"4. (x + 3)² = 4"}</text>
+          <text x="140" y="128" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"4. (x + 3)² = 4"}</text>
           <rect x="20" y="138" width="240" height="22" rx="6" fill="#22d3ee" fillOpacity="0.4" />
-          <text x="140" y="154" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"5. x + 3 = ±2"}</text>
+          <text x="140" y="154" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"5. x + 3 = ±2"}</text>
           <rect x="20" y="164" width="240" height="22" rx="6" fill="#fbbf24" fillOpacity="0.4" />
-          <text x="140" y="180" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">6. x = −3 ± 2</text>
+          <text x="140" y="180" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">6. x = −3 ± 2</text>
           <rect x="20" y="190" width="240" height="40" rx="8" fill="#34d399" fillOpacity="0.5" stroke="#6ee7b7" strokeWidth="2" />
-          <text x="140" y="216" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">x = −1 atau x = −5</text>
+          <text x="140" y="216" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x = −1 atau x = −5</text>
         </svg>
       </div>
     ),

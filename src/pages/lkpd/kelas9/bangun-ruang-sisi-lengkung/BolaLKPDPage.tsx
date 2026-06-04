@@ -25,7 +25,7 @@ const situations: SituationCard[] = [
           <line x1="100" y1="100" x2="170" y2="100" stroke="#fbbf24" strokeWidth="1.5" />
           <text x="135" y="95" fontSize="11" fill="#fbbf24" textAnchor="middle">r</text>
           <circle cx="100" cy="100" r="3" fill="#fbbf24" />
-          <text x="200" y="60" fontSize="11" fontWeight="bold" fill="#fff">BOLA</text>
+          <text x="200" y="60" fontSize="11" fontWeight="bold" fill="var(--icon-color)">BOLA</text>
           <text x="200" y="80" fontSize="9" fill="#a7f3d0">Semua titik di permukaan</text>
           <text x="200" y="95" fontSize="9" fill="#a7f3d0">berjarak SAMA (= r) dari pusat.</text>
           <text x="200" y="125" fontSize="11" fontWeight="bold" fill="#34d399">L = 4πr²</text>
@@ -46,8 +46,8 @@ const situations: SituationCard[] = [
           <rect x="50" y="30" width="100" height="140" fill="#a78bfa" fillOpacity="0.2" stroke="#c4b5fd" strokeWidth="1.5" />
           <ellipse cx="100" cy="170" rx="50" ry="12" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
           <circle cx="100" cy="100" r="50" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="2" />
-          <text x="100" y="105" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">BOLA</text>
-          <text x="200" y="60" fontSize="10" fontWeight="bold" fill="#fff">Archimedes:</text>
+          <text x="100" y="105" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">BOLA</text>
+          <text x="200" y="60" fontSize="10" fontWeight="bold" fill="var(--icon-color)">Archimedes:</text>
           <text x="200" y="80" fontSize="9" fill="#fde68a">V_bola = ⅔ V_tabung</text>
           <text x="200" y="95" fontSize="9" fill="#fde68a">(tabung sealas & setinggi 2r)</text>
           <text x="200" y="125" fontSize="9" fill="#a7f3d0">V_tabung = πr² × 2r = 2πr³</text>

@@ -473,7 +473,7 @@ const SphereFruitCutAnimation = () => {
             {/* πr² label */}
             {pc.labelOp > 0.01 && (
               <text x={pc.cx} y={pc.cy + 5}
-                fill="#fff" fontSize="11" fontFamily="monospace" fontWeight="bold"
+                fill="var(--icon-color)" fontSize="11" fontFamily="monospace" fontWeight="bold"
                 textAnchor="middle" style={{ opacity: pc.labelOp }}>
                 πr²
               </text>
@@ -556,13 +556,13 @@ const LuasBolaSVG = () => (
     </defs>
     {/* 4 circles representing 4πr² */}
     <circle cx="68" cy="80" r="55" fill="url(#lb1)" className="lb" stroke="#22d3ee" strokeWidth="1.5"/>
-    <text x="68" y="84" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
+    <text x="68" y="84" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
     <circle cx="185" cy="80" r="55" fill="#8b5cf6" opacity="0.7" className="lb2" stroke="#a78bfa" strokeWidth="1.5"/>
-    <text x="185" y="84" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
+    <text x="185" y="84" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
     <circle cx="68" cy="170" r="55" fill="#f97316" opacity="0.65" className="lb3" stroke="#fb923c" strokeWidth="1.5"/>
-    <text x="68" y="174" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
+    <text x="68" y="174" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
     <circle cx="185" cy="170" r="55" fill="#22c55e" opacity="0.65" className="lb4" stroke="#4ade80" strokeWidth="1.5"/>
-    <text x="185" y="174" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
+    <text x="185" y="174" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">πr²</text>
     {/* Formula */}
     <text x="280" y="125" fill="#facc15" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">L =</text>
     <text x="300" y="140" fill="#facc15" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">4πr²</text>

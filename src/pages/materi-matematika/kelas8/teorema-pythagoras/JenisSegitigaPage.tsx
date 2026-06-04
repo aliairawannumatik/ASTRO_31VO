@@ -29,7 +29,7 @@ const TigaSegitigaSVG = () => (
 
     {/* Siku-siku (Right) */}
     <polygon points="205,130 130,130 130,60" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" strokeWidth="2" className="t2"/>
-    <polyline points="130,110 150,110 150,130" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.8"/>
+    <polyline points="130,110 150,110 150,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.8"/>
     <text x="167" y="148" fill="#60a5fa" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">SIKU-SIKU</text>
     <text x="167" y="158" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">a²+b² = c²</text>
     <text x="167" y="50" fill="#60a5fa" fontSize="8" textAnchor="middle" fontFamily="monospace">tepat 1 sudut =90°</text>

@@ -45,10 +45,10 @@ const PembuktianSVG = () => (
     <text x="155" y="47" fill="#eab308" fontSize="11" fontWeight="bold" className="lbl-anim">c</text>
 
     {/* Right angle marks */}
-    <rect x="20" y="10" width="8" height="8" fill="none" stroke="#fff" strokeWidth="1" opacity="0.5"/>
-    <rect x="172" y="10" width="8" height="8" fill="none" stroke="#fff" strokeWidth="1" opacity="0.5"/>
-    <rect x="172" y="162" width="8" height="8" fill="none" stroke="#fff" strokeWidth="1" opacity="0.5"/>
-    <rect x="20" y="162" width="8" height="8" fill="none" stroke="#fff" strokeWidth="1" opacity="0.5"/>
+    <rect x="20" y="10" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
+    <rect x="172" y="10" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
+    <rect x="172" y="162" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
+    <rect x="20" y="162" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
 
     {/* Right panel explanation */}
     <text x="210" y="30" fill="#94a3b8" fontSize="10" fontFamily="monospace">Luas persegi besar:</text>
@@ -82,7 +82,7 @@ const SegitigaSikuSVG = () => (
     {/* Side c (hypotenuse) */}
     <line x1="20" y1="20" x2="160" y2="130" stroke="#f97316" strokeWidth="3" className="side-c"/>
     {/* Right angle mark */}
-    <polyline points="20,110 40,110 40,130" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.7"/>
+    <polyline points="20,110 40,110 40,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.7"/>
     {/* Labels */}
     <text x="8" y="80" fill="#60a5fa" fontSize="14" fontWeight="bold">a</text>
     <text x="87" y="148" fill="#4ade80" fontSize="14" fontWeight="bold">b</text>
@@ -91,7 +91,7 @@ const SegitigaSikuSVG = () => (
     <text x="162" y="134" fill="#94a3b8" fontSize="9">B</text>
     <text x="8" y="134" fill="#94a3b8" fontSize="9">C</text>
     {/* 90° label */}
-    <text x="44" y="126" fill="#fff" fontSize="8" opacity="0.6">90°</text>
+    <text x="44" y="126" fill="var(--icon-color)" fontSize="8" opacity="0.6">90°</text>
   </svg>
 );
 

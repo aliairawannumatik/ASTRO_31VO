@@ -20,7 +20,7 @@ const TanggaSVG = () => (
     {/* Ladder */}
     <line x1="110" y1="160" x2="40" y2="50" stroke="#f97316" strokeWidth="3" className="tg"/>
     {/* Right angle mark */}
-    <polyline points="40,155 50,155 50,160" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.8"/>
+    <polyline points="40,155 50,155 50,160" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.8"/>
     {/* Dimension labels */}
     <text x="70" y="155" fill="#22c55e" fontSize="10" fontFamily="monospace" fontWeight="bold">b = ?</text>
     <text x="12" y="110" fill="#3b82f6" fontSize="10" fontFamily="monospace" fontWeight="bold">a = ?</text>
@@ -47,7 +47,7 @@ const DiagonalSVG = () => (
     <text x="8" y="83" fill="#94a3b8" fontSize="10" textAnchor="middle" fontFamily="monospace" transform="rotate(-90,8,83)">lebar (l)</text>
     <text x="118" y="100" fill="#fb923c" fontSize="10" fontFamily="monospace">d = √(p²+l²)</text>
     {/* Right angle */}
-    <polyline points="20,110 35,110 35,130" fill="none" stroke="#fff" strokeWidth="1.2" opacity="0.7"/>
+    <polyline points="20,110 35,110 35,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.7"/>
   </svg>
 );
 
@@ -82,7 +82,7 @@ const JarakTitikSVG = () => (
     <text x="193" y="93" fill="#60a5fa" fontSize="9" textAnchor="middle" fontFamily="monospace">vertikal</text>
     <text x="95" y="82" fill="#fb923c" fontSize="9" fontFamily="monospace">AB (jarak)</text>
     {/* Right angle */}
-    <polyline points="180,120 170,120 170,130" fill="none" stroke="#fff" strokeWidth="1.2" opacity="0.7"/>
+    <polyline points="180,120 170,120 170,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.7"/>
   </svg>
 );
 

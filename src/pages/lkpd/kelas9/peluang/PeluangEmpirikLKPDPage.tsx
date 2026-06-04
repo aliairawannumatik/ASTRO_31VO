@@ -15,15 +15,15 @@ const situations: SituationCard[] = [
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#fde68a" textAnchor="middle">100 lemparan koin → muncul Angka 47 kali</text>
           <rect x="30" y="60" width="100" height="80" rx="8" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="80" y="85" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Angka (A)</text>
-          <text x="80" y="108" fontSize="22" fontWeight="bold" fill="#fff" textAnchor="middle">47</text>
+          <text x="80" y="85" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Angka (A)</text>
+          <text x="80" y="108" fontSize="22" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">47</text>
           <text x="80" y="128" fontSize="10" fill="#fde68a" textAnchor="middle">muncul</text>
           <rect x="150" y="60" width="100" height="80" rx="8" fill="#9ca3af" fillOpacity="0.4" stroke="#e5e7eb" strokeWidth="1.5" />
-          <text x="200" y="85" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Gambar (G)</text>
-          <text x="200" y="108" fontSize="22" fontWeight="bold" fill="#fff" textAnchor="middle">53</text>
+          <text x="200" y="85" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Gambar (G)</text>
+          <text x="200" y="108" fontSize="22" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">53</text>
           <text x="200" y="128" fontSize="10" fill="#fde68a" textAnchor="middle">muncul</text>
           <rect x="40" y="158" width="200" height="32" rx="6" fill="#34d399" fillOpacity="0.4" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="180" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">fr(A) = 47/100 = 0,47</text>
+          <text x="140" y="180" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">fr(A) = 47/100 = 0,47</text>
         </svg>
       </div>
     ),

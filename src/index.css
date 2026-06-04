@@ -81,6 +81,36 @@
   --shadow:         rgba(0,0,0,0.5);
 }
 
+/* ── Theme-aware overrides for hardcoded legacy components ── */
+
+/* 1. Subtopic button gradient overlays: replace dark gradients for light/forest themes */
+[data-theme="light"] button > div.absolute.inset-0.backdrop-blur,
+[data-theme="white"] button > div.absolute.inset-0.backdrop-blur,
+[data-theme="forest"] button > div.absolute.inset-0.backdrop-blur {
+  background: var(--btn-bg) !important;
+  background-image: none !important;
+}
+
+/* 2. Override hardcoded text-white class for non-dark themes */
+[data-theme="light"] .text-white,
+[data-theme="white"] .text-white,
+[data-theme="forest"] .text-white {
+  color: var(--text-primary) !important;
+}
+
+/* 3. Override white/50 and similar opacity variants for light themes */
+[data-theme="light"] .text-white\/50,
+[data-theme="light"] .text-white\/70,
+[data-theme="light"] .text-white\/80,
+[data-theme="white"] .text-white\/50,
+[data-theme="white"] .text-white\/70,
+[data-theme="white"] .text-white\/80,
+[data-theme="forest"] .text-white\/50,
+[data-theme="forest"] .text-white\/70,
+[data-theme="forest"] .text-white\/80 {
+  color: var(--text-secondary) !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

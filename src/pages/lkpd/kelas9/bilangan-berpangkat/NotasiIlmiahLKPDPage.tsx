@@ -14,9 +14,9 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 160" className="w-full">
           <rect width="280" height="160" fill="#0b1220" rx="8" />
           <circle cx="50" cy="80" r="22" fill="#fbbf24" stroke="#fde68a" strokeWidth="2" />
-          <text x="50" y="84" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">☀️</text>
+          <text x="50" y="84" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">☀️</text>
           <circle cx="230" cy="80" r="11" fill="#22d3ee" stroke="#67e8f9" strokeWidth="2" />
-          <text x="230" y="84" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">🌍</text>
+          <text x="230" y="84" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">🌍</text>
           <line x1="72" y1="80" x2="219" y2="80" stroke="#fbbf24" strokeWidth="2" strokeDasharray="4 3" />
           <text x="145" y="55" fontSize="11" fontWeight="bold" fill="#fbbf24" textAnchor="middle">150.000.000 km</text>
           <text x="145" y="120" fontSize="13" fontWeight="bold" fill="#34d399" textAnchor="middle">= 1,5 × 10⁸ km</text>
@@ -34,7 +34,7 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 140" className="w-full">
           <rect width="280" height="140" fill="#0b1220" rx="8" />
           <ellipse cx="140" cy="70" rx="32" ry="20" fill="#34d399" fillOpacity="0.7" stroke="#6ee7b7" strokeWidth="2" />
-          <text x="140" y="74" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">🦠</text>
+          <text x="140" y="74" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">🦠</text>
           <text x="140" y="30" fontSize="11" fontWeight="bold" fill="#fbbf24" textAnchor="middle">0,000002 m</text>
           <text x="140" y="115" fontSize="13" fontWeight="bold" fill="#67e8f9" textAnchor="middle">= 2 × 10⁻⁶ m</text>
           <text x="140" y="132" fontSize="9" fill="#a7f3d0" textAnchor="middle">Pangkat NEGATIF untuk bilangan kecil!</text>

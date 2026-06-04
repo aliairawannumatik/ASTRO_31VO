@@ -19,13 +19,13 @@ const situations: SituationCard[] = [
               <rect x={20 + i * 42} y={45} width={36} height={36} rx={6}
                 fill={n % 2 === 0 ? "#34d399" : "#22d3ee"}
                 fillOpacity="0.45" stroke={n % 2 === 0 ? "#6ee7b7" : "#67e8f9"} strokeWidth="1.5" />
-              <text x={38 + i * 42} y={70} fontSize="16" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={38 + i * 42} y={70} fontSize="16" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="140" y="105" fontSize="11" fill="#fde68a" textAnchor="middle">A = {"{2, 4, 6}"} → n(A) = 3</text>
           <text x="140" y="125" fontSize="11" fill="#fde68a" textAnchor="middle">S = {"{1,2,3,4,5,6}"} → n(S) = 6</text>
           <rect x="50" y="145" width="180" height="40" rx="8" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="140" y="170" fontSize="14" fontWeight="bold" fill="#fff" textAnchor="middle">P(A) = 3/6 = 1/2</text>
+          <text x="140" y="170" fontSize="14" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">P(A) = 3/6 = 1/2</text>
         </svg>
       </div>
     ),
@@ -49,7 +49,7 @@ const situations: SituationCard[] = [
           <circle cx="250" cy="80" r="8" fill="#34d399" />
           <text x="250" y="105" fontSize="10" fontWeight="bold" fill="#34d399" textAnchor="middle">1</text>
           <text x="250" y="120" fontSize="9" fill="#a7f3d0" textAnchor="middle">pasti</text>
-          <text x="140" y="155" fontSize="11" fill="#fff" textAnchor="middle">0 ≤ P(A) ≤ 1</text>
+          <text x="140" y="155" fontSize="11" fill="var(--icon-color)" textAnchor="middle">0 ≤ P(A) ≤ 1</text>
           <text x="140" y="172" fontSize="10" fill="#67e8f9" textAnchor="middle">Semakin DEKAT 1 → semakin MUNGKIN terjadi!</text>
         </svg>
       </div>

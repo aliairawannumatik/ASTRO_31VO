@@ -449,7 +449,7 @@ function AnimasiRefleksiGarisK() {
                 <circle
                   cx={mode === "x=k" ? px(k) : px((ptX + rx) / 2)}
                   cy={mode === "x=k" ? py((ptY + ry) / 2) : py(k)}
-                  r={3} fill="white" fillOpacity="0.5" />
+                  r={3} fill="var(--icon-color)" fillOpacity="0.5" />
               </>
             )}
           </Grid>

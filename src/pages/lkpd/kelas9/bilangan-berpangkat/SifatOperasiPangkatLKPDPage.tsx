@@ -14,8 +14,8 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 140" className="w-full">
           <rect width="280" height="140" fill="#0b1220" rx="8" />
           <text x="140" y="30" fontSize="14" fontWeight="bold" fill="#a78bfa" textAnchor="middle">2³ × 2² = ?</text>
-          <text x="140" y="60" fontSize="12" fill="#fff" textAnchor="middle">(2 × 2 × 2) × (2 × 2)</text>
-          <text x="140" y="84" fontSize="12" fill="#fff" textAnchor="middle">= 2 × 2 × 2 × 2 × 2</text>
+          <text x="140" y="60" fontSize="12" fill="var(--icon-color)" textAnchor="middle">(2 × 2 × 2) × (2 × 2)</text>
+          <text x="140" y="84" fontSize="12" fill="var(--icon-color)" textAnchor="middle">= 2 × 2 × 2 × 2 × 2</text>
           <text x="140" y="110" fontSize="16" fontWeight="bold" fill="#fbbf24" textAnchor="middle">= 2⁵ = 32</text>
           <text x="140" y="130" fontSize="10" fill="#67e8f9" textAnchor="middle">3 + 2 = 5 → pangkat DIJUMLAHKAN!</text>
         </svg>
@@ -31,8 +31,8 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 140" className="w-full">
           <rect width="280" height="140" fill="#0b1220" rx="8" />
           <text x="140" y="30" fontSize="14" fontWeight="bold" fill="#34d399" textAnchor="middle">(2³)² = ?</text>
-          <text x="140" y="58" fontSize="12" fill="#fff" textAnchor="middle">= 2³ × 2³</text>
-          <text x="140" y="80" fontSize="12" fill="#fff" textAnchor="middle">= 2³⁺³</text>
+          <text x="140" y="58" fontSize="12" fill="var(--icon-color)" textAnchor="middle">= 2³ × 2³</text>
+          <text x="140" y="80" fontSize="12" fill="var(--icon-color)" textAnchor="middle">= 2³⁺³</text>
           <text x="140" y="106" fontSize="16" fontWeight="bold" fill="#fbbf24" textAnchor="middle">= 2⁶ = 64</text>
           <text x="140" y="128" fontSize="10" fill="#67e8f9" textAnchor="middle">3 × 2 = 6 → pangkat DIKALIKAN!</text>
         </svg>

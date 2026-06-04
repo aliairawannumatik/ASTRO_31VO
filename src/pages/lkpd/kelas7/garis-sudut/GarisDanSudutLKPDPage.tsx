@@ -52,7 +52,7 @@ const UnsurGarisVisual = () => (
       Titik
     </text>
     <circle cx={50} cy={32} r={4} fill="#22d3ee" />
-    <text x={56} y={36} fontSize={10} fill="#fff">
+    <text x={56} y={36} fontSize={10} fill="var(--icon-color)">
       A
     </text>
 
@@ -83,7 +83,7 @@ const UnsurGarisVisual = () => (
     <line x1={50} y1={140} x2={130} y2={140} stroke="#f472b6" strokeWidth={2.4} />
     <line x1={50} y1={140} x2={110} y2={108} stroke="#f472b6" strokeWidth={2.4} />
     <path d="M 70 140 A 20 20 0 0 0 80 122" fill="#f472b6" fillOpacity={0.3} stroke="#f472b6" />
-    <circle cx={50} cy={140} r={2.5} fill="#fff" />
+    <circle cx={50} cy={140} r={2.5} fill="var(--icon-color)" />
   </svg>
 );
 

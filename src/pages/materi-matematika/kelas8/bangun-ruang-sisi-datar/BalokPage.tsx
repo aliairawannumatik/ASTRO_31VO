@@ -135,7 +135,7 @@ const SimpleRotatingBalok = () => {
             <g key={i}>
               <polygon points={pts} fill={f.color} fillOpacity={1}
                 stroke="rgba(255,255,255,0.5)" strokeWidth={1.5} strokeLinejoin="round"/>
-              <text x={cx+mx} y={cy+my+3} fill="white" fontSize={8} fontFamily="monospace"
+              <text x={cx+mx} y={cy+my+3} fill="var(--icon-color)" fontSize={8} fontFamily="monospace"
                 fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
                 style={{ pointerEvents:"none" }}>
                 {f.label}
@@ -221,7 +221,7 @@ const FaceRect = ({
         userSelect: "none",
         boxShadow: isNext ? `0 0 18px ${color}` : `0 0 6px ${color}55`,
       }}>
-        <span style={{ color: "#fff", fontSize: 8, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
+        <span style={{ color: "var(--icon-color)", fontSize: 8, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
           {FACE_LABELS[face]}
         </span>
         {isNext ? (
@@ -391,7 +391,7 @@ const InteractiveBalok3D = () => {
                 userSelect: "none", cursor: "default", pointerEvents: "none",
                 boxShadow: `0 0 8px ${FACE_COLORS["back"]}66`,
               }}>
-                <span style={{ color: "#fff", fontSize: 8, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
+                <span style={{ color: "var(--icon-color)", fontSize: 8, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
                   {FACE_LABELS["back"]}
                 </span>
                 <span style={{ color: "rgba(255,255,255,0.7)", fontSize: 6, marginTop: 3, fontFamily: "monospace" }}>
@@ -817,9 +817,9 @@ const BalokNetSVG = ({ cells }: { cells: BalokCell[] }) => {
       {cells.map((c, i) => (
         <g key={i}>
           <rect x={c.x + 1} y={c.y + 1} width={c.w - 2} height={c.h - 2}
-            fill={c.color} fillOpacity={0.85} rx={2} stroke="white" strokeWidth={1.2} />
+            fill={c.color} fillOpacity={0.85} rx={2} stroke="var(--icon-stroke)" strokeWidth={1.2} />
           <text x={c.x + c.w / 2} y={c.y + c.h / 2 + 3}
-            fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold"
+            fill="var(--icon-color)" fontSize={7} fontFamily="monospace" fontWeight="bold"
             textAnchor="middle" dominantBaseline="middle">{c.label}</text>
         </g>
       ))}
@@ -884,7 +884,7 @@ const RusukBalokSVG = () => (
     <text x="232" y="167" fill="#f97316" fontSize="8" fontFamily="monospace">4 rusuk l</text>
     <rect x="220" y="174" width="8" height="4" fill="#facc15"/>
     <text x="232" y="179" fill="#facc15" fontSize="8" fontFamily="monospace">4 rusuk t</text>
-    <text x="220" y="195" fill="#fff" fontSize="8" fontFamily="monospace">= 12 rusuk</text>
+    <text x="220" y="195" fill="var(--icon-color)" fontSize="8" fontFamily="monospace">= 12 rusuk</text>
     {/* Vertex labels — ALAS (A B C D) */}
     <text x="13"  y="183" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
     <text x="173" y="183" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
@@ -921,12 +921,12 @@ const SisiBalokSVG = () => (
     <polygon points="30,70 70,30 70,130 30,170" fill="#22c55e" className="sb-b" fillOpacity="0.6"/>
     <polygon points="30,170 70,130 210,130 170,170" fill="#ef4444" className="sb-a"/>
     <polygon points="170,70 210,30 210,130 170,130" fill="#f97316" className="sb-c" fillOpacity="0.6"/>
-    <polygon points="30,70 170,70 170,170 30,170" fill="none" stroke="#fff" strokeWidth="1.2"/>
-    <polygon points="70,30 210,30 210,130 70,130" fill="none" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="30" y1="70" x2="70" y2="30" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="170" y1="70" x2="210" y2="30" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="30" y1="170" x2="70" y2="130" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="170" y1="170" x2="210" y2="130" stroke="#fff" strokeWidth="1.2"/>
+    <polygon points="30,70 170,70 170,170 30,170" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <polygon points="70,30 210,30 210,130 70,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <line x1="30" y1="70" x2="70" y2="30" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <line x1="170" y1="70" x2="210" y2="30" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <line x1="30" y1="170" x2="70" y2="130" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
+    <line x1="170" y1="170" x2="210" y2="130" stroke="var(--icon-stroke)" strokeWidth="1.2"/>
     {SISI_VERTS.map(([x,y,lbl,dx,dy]) => (
       <g key={lbl}>
         <circle cx={x} cy={y} r="3" fill="#facc15" opacity="0.95"/>
@@ -934,8 +934,8 @@ const SisiBalokSVG = () => (
           style={{ pointerEvents:"none" }}>{lbl}</text>
       </g>
     ))}
-    <text x="80" y="125" fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold">DEPAN</text>
-    <text x="220" y="185" fill="#fff" fontSize="9" fontFamily="monospace">6 sisi</text>
+    <text x="80" y="125" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" fontWeight="bold">DEPAN</text>
+    <text x="220" y="185" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">6 sisi</text>
     <text x="220" y="198" fill="#facc15" fontSize="9" fontFamily="monospace">3 pasang</text>
   </svg>
 );
@@ -1144,11 +1144,11 @@ const LuasSVG = () => {
         <g key={i}>
           <rect x={x} y={y} width={w} height={h}
             fill={fill} className={cls}
-            rx={3} stroke="white" strokeWidth={1.5}/>
+            rx={3} stroke="var(--icon-stroke)" strokeWidth={1.5}/>
           {label.split("\n").map((line, li) => (
             <text key={li}
               x={x + w / 2} y={y + h / 2 + (li - 0.4) * 9}
-              fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+              fill="var(--icon-color)" fontSize={8} fontFamily="monospace" fontWeight="bold"
               textAnchor="middle" dominantBaseline="middle">
               {line}
             </text>

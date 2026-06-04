@@ -137,7 +137,7 @@ const RotatingLimas3D = ({ n, label, r = 40, h = 65 }: { n: number; label: strin
             <g key={i}>
               <polygon points={pts} fill={f.color} fillOpacity={1}
                 stroke="rgba(255,255,255,0.5)" strokeWidth={1.2} strokeLinejoin="round"/>
-              <text x={cx+mx} y={cy+my+3} fill="white" fontSize={7} fontFamily="monospace"
+              <text x={cx+mx} y={cy+my+3} fill="var(--icon-color)" fontSize={7} fontFamily="monospace"
                 fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
                 style={{ pointerEvents:"none" }}>{f.label}</text>
             </g>
@@ -536,20 +536,20 @@ const InteractiveLimas = () => {
           /* Jaring-jaring Limas Segiempat */
           <svg viewBox="0 0 260 260" width="220" height="220" style={{ display: "block", margin: "auto" }}>
             {/* Alas (bawah) */}
-            <rect x="80" y="130" width="80" height="80" fill="#3b82f6" fillOpacity="0.85" stroke="white" strokeWidth="2" rx="2"/>
-            <text x="120" y="175" fill="white" fontSize="9" fontFamily="monospace" textAnchor="middle">ALAS</text>
+            <rect x="80" y="130" width="80" height="80" fill="#3b82f6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="2" rx="2"/>
+            <text x="120" y="175" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" textAnchor="middle">ALAS</text>
             {/* Segitiga atas */}
-            <polygon points="80,130 160,130 120,60" fill="#8b5cf6" fillOpacity="0.85" stroke="white" strokeWidth="2"/>
-            <text x="120" y="108" fill="white" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ atas</text>
+            <polygon points="80,130 160,130 120,60" fill="#8b5cf6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="2"/>
+            <text x="120" y="108" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ atas</text>
             {/* Segitiga bawah */}
-            <polygon points="80,210 160,210 120,275" fill="#22c55e" fillOpacity="0.85" stroke="white" strokeWidth="2"/>
-            <text x="120" y="246" fill="white" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ bawah</text>
+            <polygon points="80,210 160,210 120,275" fill="#22c55e" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="2"/>
+            <text x="120" y="246" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ bawah</text>
             {/* Segitiga kiri */}
-            <polygon points="80,130 80,210 15,170" fill="#f97316" fillOpacity="0.85" stroke="white" strokeWidth="2"/>
-            <text x="44" y="173" fill="white" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ kiri</text>
+            <polygon points="80,130 80,210 15,170" fill="#f97316" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="2"/>
+            <text x="44" y="173" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ kiri</text>
             {/* Segitiga kanan */}
-            <polygon points="160,130 160,210 225,170" fill="#eab308" fillOpacity="0.85" stroke="white" strokeWidth="2"/>
-            <text x="196" y="173" fill="white" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ kanan</text>
+            <polygon points="160,130 160,210 225,170" fill="#eab308" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="2"/>
+            <text x="196" y="173" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" textAnchor="middle">Δ kanan</text>
           </svg>
         ) : (
           /* 3D Limas */
@@ -574,7 +574,7 @@ const InteractiveLimas = () => {
               transform: "rotateX(90deg) translateZ(-45px)",
               display: "flex", alignItems: "center", justifyContent: "center",
             }}>
-              <span style={{ color: "#fff", fontSize: 8, fontWeight: 700, fontFamily: "monospace" }}>ALAS</span>
+              <span style={{ color: "var(--icon-color)", fontSize: 8, fontWeight: 700, fontFamily: "monospace" }}>ALAS</span>
             </div>
             {/* Front face (triangle) */}
             <div style={{
@@ -861,7 +861,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <line x1={T.x} y1={T.y} x2={A.x} y2={A.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
             <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
             {/* right angle mark at O between t and R */}
-            <path d={raMark(O.x, O.y, tu.x, tu.y, Ru.x, Ru.y, 9)} stroke="white" fill="none" strokeWidth="1.5" />
+            <path d={raMark(O.x, O.y, tu.x, tu.y, Ru.x, Ru.y, 9)} stroke="var(--icon-stroke)" fill="none" strokeWidth="1.5" />
             <circle cx={T.x} cy={T.y} r="4" fill="#facc15" />
             <circle cx={A.x} cy={A.y} r="3" fill="#e5e7eb" />
             <circle cx={B.x} cy={B.y} r="3" fill="#e5e7eb" />
@@ -911,7 +911,7 @@ const PythagorasLimasSegitigaDetailSVG = () => {
             <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
             <line x1={T.x} y1={T.y} x2={C.x} y2={C.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
             {/* right angle mark at O between t and r */}
-            <path d={raMark(O.x, O.y, tu.x, tu.y, ru.x, ru.y, 9)} stroke="white" fill="none" strokeWidth="1.5" />
+            <path d={raMark(O.x, O.y, tu.x, tu.y, ru.x, ru.y, 9)} stroke="var(--icon-stroke)" fill="none" strokeWidth="1.5" />
             <circle cx={T.x} cy={T.y} r="4" fill="#facc15" />
             <circle cx={A.x} cy={A.y} r="3" fill="#e5e7eb" />
             <circle cx={B.x} cy={B.y} r="3" fill="#e5e7eb" />
@@ -1039,7 +1039,7 @@ const PythagorasLimasSegiempatOverview = () => (
         {/* diagonal for context */}
         <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3" />
         {/* right angle mark at O: t is vertical, s/2 is horizontal */}
-        <path d="M 132 138 L 140 138 L 140 146" stroke="white" fill="none" strokeWidth="1.5" />
+        <path d="M 132 138 L 140 138 L 140 146" stroke="var(--icon-stroke)" fill="none" strokeWidth="1.5" />
         <circle cx="132" cy="42" r="4" fill="#facc15" />
         <circle cx="48" cy="166" r="3" fill="#e5e7eb" />
         <circle cx="162" cy="166" r="3" fill="#e5e7eb" />
@@ -1101,7 +1101,7 @@ const PythagorasLimasSegiempatDiagonalSVG = () => (
       {/* e: rusuk tegak T→A, orange */}
       <line x1="132" y1="42" x2="48" y2="166" stroke="#fb923c" strokeWidth="3" filter="url(#diagGlow)" />
       {/* right angle mark at O */}
-      <path d="M 132 136 L 124 138 L 124 146" stroke="white" fill="none" strokeWidth="1.6" />
+      <path d="M 132 136 L 124 138 L 124 146" stroke="var(--icon-stroke)" fill="none" strokeWidth="1.6" />
       <circle cx="132" cy="42" r="4" fill="#facc15" />
       <circle cx="48" cy="166" r="3.5" fill="#f472b6" />
       <circle cx="162" cy="166" r="3" fill="#e5e7eb" />
@@ -1139,14 +1139,14 @@ const LimasNetSegitigaSVG = () => (
         .lnet-b{animation:lnetB 2.2s ease-in-out infinite .55s;}
       `}</style>
     </defs>
-    <polygon points="130,92 78,168 182,168" fill="#3b82f6" stroke="white" strokeWidth="1.6" className="lnet-a" />
-    <polygon points="130,92 78,168 62,72" fill="#8b5cf6" stroke="white" strokeWidth="1.5" className="lnet-b" />
-    <polygon points="130,92 182,168 198,72" fill="#22c55e" stroke="white" strokeWidth="1.5" className="lnet-b" />
-    <polygon points="78,168 182,168 130,214" fill="#f97316" stroke="white" strokeWidth="1.5" className="lnet-b" />
-    <text x="130" y="145" fill="white" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
-    <text x="85" y="104" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 1</text>
-    <text x="176" y="104" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 2</text>
-    <text x="130" y="188" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 3</text>
+    <polygon points="130,92 78,168 182,168" fill="#3b82f6" stroke="var(--icon-stroke)" strokeWidth="1.6" className="lnet-a" />
+    <polygon points="130,92 78,168 62,72" fill="#8b5cf6" stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-b" />
+    <polygon points="130,92 182,168 198,72" fill="#22c55e" stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-b" />
+    <polygon points="78,168 182,168 130,214" fill="#f97316" stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-b" />
+    <text x="130" y="145" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+    <text x="85" y="104" fill="var(--icon-color)" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 1</text>
+    <text x="176" y="104" fill="var(--icon-color)" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 2</text>
+    <text x="130" y="188" fill="var(--icon-color)" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 3</text>
     <text x="130" y="24" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 3 × L△tegak</text>
   </svg>
 );
@@ -1161,16 +1161,16 @@ const LimasNetSegiempatSVG = () => (
         .lnet-d{animation:lnetD 2.2s ease-in-out infinite .55s;}
       `}</style>
     </defs>
-    <rect x="90" y="88" width="80" height="80" rx="3" fill="#3b82f6" stroke="white" strokeWidth="1.6" className="lnet-c" />
-    <polygon points="90,88 170,88 130,30" fill="#8b5cf6" stroke="white" strokeWidth="1.5" className="lnet-d" />
-    <polygon points="170,88 170,168 226,128" fill="#22c55e" stroke="white" strokeWidth="1.5" className="lnet-d" />
-    <polygon points="90,168 170,168 130,220" fill="#f97316" stroke="white" strokeWidth="1.5" className="lnet-d" />
-    <polygon points="90,88 90,168 34,128" fill="#ec4899" stroke="white" strokeWidth="1.5" className="lnet-d" />
-    <text x="130" y="132" fill="white" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
-    <text x="130" y="70" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 1</text>
-    <text x="188" y="130" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 2</text>
-    <text x="130" y="190" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 3</text>
-    <text x="72" y="130" fill="white" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 4</text>
+    <rect x="90" y="88" width="80" height="80" rx="3" fill="#3b82f6" stroke="var(--icon-stroke)" strokeWidth="1.6" className="lnet-c" />
+    <polygon points="90,88 170,88 130,30" fill="#8b5cf6" stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-d" />
+    <polygon points="170,88 170,168 226,128" fill="#22c55e" stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-d" />
+    <polygon points="90,168 170,168 130,220" fill="#f97316" stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-d" />
+    <polygon points="90,88 90,168 34,128" fill="#ec4899" stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-d" />
+    <text x="130" y="132" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+    <text x="130" y="70" fill="var(--icon-color)" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 1</text>
+    <text x="188" y="130" fill="var(--icon-color)" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 2</text>
+    <text x="130" y="190" fill="var(--icon-color)" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 3</text>
+    <text x="72" y="130" fill="var(--icon-color)" fontSize="7" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SISI 4</text>
     <text x="130" y="18" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 4 × L△tegak</text>
   </svg>
 );
@@ -1206,13 +1206,13 @@ const LimasNetSegilimaSVG = () => {
         const ty = my + (dy / len) * 48;
         return (
           <g key={i}>
-            <polygon points={`${x1.toFixed(1)},${y1.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)} ${tx.toFixed(1)},${ty.toFixed(1)}`} fill={colors[i]} stroke="white" strokeWidth="1.5" className="lnet-f" />
-            <text x={tx} y={ty + 3} fill="white" fontSize="6.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle">S{i + 1}</text>
+            <polygon points={`${x1.toFixed(1)},${y1.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)} ${tx.toFixed(1)},${ty.toFixed(1)}`} fill={colors[i]} stroke="var(--icon-stroke)" strokeWidth="1.5" className="lnet-f" />
+            <text x={tx} y={ty + 3} fill="var(--icon-color)" fontSize="6.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle">S{i + 1}</text>
           </g>
         );
       })}
-      <polygon points={pointString} fill="#3b82f6" stroke="white" strokeWidth="1.6" className="lnet-e" />
-      <text x="130" y="124" fill="white" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+      <polygon points={pointString} fill="#3b82f6" stroke="var(--icon-stroke)" strokeWidth="1.6" className="lnet-e" />
+      <text x="130" y="124" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
       <text x="130" y="20" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 5 × L△tegak</text>
     </svg>
   );
@@ -1313,11 +1313,11 @@ const NetLimasGallery = () => {
       desc: "Alas + 4 segitiga, puncak ke atas",
       svg: (
         <svg viewBox="0 0 120 120" width="90" height="90">
-          <rect x="35" y="55" width="50" height="50" fill="#3b82f6" fillOpacity="0.85" stroke="white" strokeWidth="1.5" rx="1"/>
-          <polygon points="35,55 85,55 60,15" fill="#8b5cf6" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="35,105 85,105 60,118" fill="#22c55e" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="35,55 35,105 5,80" fill="#f97316" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="85,55 85,105 115,80" fill="#eab308" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
+          <rect x="35" y="55" width="50" height="50" fill="#3b82f6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5" rx="1"/>
+          <polygon points="35,55 85,55 60,15" fill="#8b5cf6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="35,105 85,105 60,118" fill="#22c55e" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="35,55 35,105 5,80" fill="#f97316" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="85,55 85,105 115,80" fill="#eab308" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
         </svg>
       )
     },
@@ -1326,10 +1326,10 @@ const NetLimasGallery = () => {
       desc: "Alas segitiga + 3 segitiga",
       svg: (
         <svg viewBox="0 0 120 120" width="90" height="90">
-          <polygon points="60,45 95,95 25,95" fill="#3b82f6" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="60,45 25,95 5,50" fill="#8b5cf6" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="60,45 95,95 115,50" fill="#f97316" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="60,45 5,50 60,15" fill="#22c55e" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
+          <polygon points="60,45 95,95 25,95" fill="#3b82f6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="60,45 25,95 5,50" fill="#8b5cf6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="60,45 95,95 115,50" fill="#f97316" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="60,45 5,50 60,15" fill="#22c55e" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
         </svg>
       )
     },
@@ -1338,11 +1338,11 @@ const NetLimasGallery = () => {
       desc: "Segitiga mengelilingi alas",
       svg: (
         <svg viewBox="0 0 130 130" width="90" height="90">
-          <rect x="40" y="40" width="50" height="50" fill="#3b82f6" fillOpacity="0.85" stroke="white" strokeWidth="1.5" rx="1"/>
-          <polygon points="40,40 90,40 65,10" fill="#8b5cf6" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="40,90 90,90 65,118" fill="#22c55e" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="40,40 40,90 10,65" fill="#f97316" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
-          <polygon points="90,40 90,90 120,65" fill="#eab308" fillOpacity="0.85" stroke="white" strokeWidth="1.5"/>
+          <rect x="40" y="40" width="50" height="50" fill="#3b82f6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5" rx="1"/>
+          <polygon points="40,40 90,40 65,10" fill="#8b5cf6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="40,90 90,90 65,118" fill="#22c55e" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="40,40 40,90 10,65" fill="#f97316" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+          <polygon points="90,40 90,90 120,65" fill="#eab308" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
         </svg>
       )
     },

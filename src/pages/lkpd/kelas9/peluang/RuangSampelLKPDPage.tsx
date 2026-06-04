@@ -16,10 +16,10 @@ const situations: SituationCard[] = [
           <text x="140" y="25" fontSize="12" fontWeight="bold" fill="#fde68a" textAnchor="middle">Eksperimen: Lempar 1 Koin</text>
           <circle cx="90" cy="95" r="40" fill="#fbbf24" stroke="#fde68a" strokeWidth="2.5" />
           <text x="90" y="102" fontSize="22" fontWeight="bold" fill="#1f2937" textAnchor="middle">A</text>
-          <text x="90" y="150" fontSize="11" fill="#fff" textAnchor="middle">Angka (A)</text>
+          <text x="90" y="150" fontSize="11" fill="var(--icon-color)" textAnchor="middle">Angka (A)</text>
           <circle cx="190" cy="95" r="40" fill="#9ca3af" stroke="#e5e7eb" strokeWidth="2.5" />
           <text x="190" y="102" fontSize="22" fontWeight="bold" fill="#1f2937" textAnchor="middle">G</text>
-          <text x="190" y="150" fontSize="11" fill="#fff" textAnchor="middle">Gambar (G)</text>
+          <text x="190" y="150" fontSize="11" fill="var(--icon-color)" textAnchor="middle">Gambar (G)</text>
           <text x="140" y="180" fontSize="12" fontWeight="bold" fill="#34d399" textAnchor="middle">S = {"{ A , G }"} → n(S) = 2</text>
         </svg>
       </div>
@@ -37,12 +37,12 @@ const situations: SituationCard[] = [
           {[1, 2, 3, 4, 5, 6].map((n, i) => (
             <g key={n}>
               <rect x={20 + i * 42} y={55} width={36} height={36} rx={6} fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-              <text x={38 + i * 42} y={80} fontSize="16" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={38 + i * 42} y={80} fontSize="16" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="140" y="125" fontSize="11" fill="#fde68a" textAnchor="middle">Mata dadu = 1, 2, 3, 4, 5, 6</text>
           <rect x="50" y="145" width="180" height="40" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="170" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">S = {"{1,2,3,4,5,6}"} → n(S) = 6</text>
+          <text x="140" y="170" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">S = {"{1,2,3,4,5,6}"} → n(S) = 6</text>
         </svg>
       </div>
     ),
@@ -70,10 +70,10 @@ const situations: SituationCard[] = [
           <line x1="80" y1="127" x2="110" y2="160" stroke="#a7f3d0" strokeWidth="1.5" />
           <line x1="200" y1="127" x2="170" y2="160" stroke="#a7f3d0" strokeWidth="1.5" />
           <line x1="200" y1="127" x2="230" y2="160" stroke="#a7f3d0" strokeWidth="1.5" />
-          <text x="50" y="178" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">AA</text>
-          <text x="110" y="178" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">AG</text>
-          <text x="170" y="178" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">GA</text>
-          <text x="230" y="178" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">GG</text>
+          <text x="50" y="178" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">AA</text>
+          <text x="110" y="178" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">AG</text>
+          <text x="170" y="178" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">GA</text>
+          <text x="230" y="178" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">GG</text>
           <text x="140" y="208" fontSize="11" fontWeight="bold" fill="#34d399" textAnchor="middle">S = {"{AA, AG, GA, GG}"} → n(S) = 4</text>
         </svg>
       </div>

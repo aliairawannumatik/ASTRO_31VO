@@ -49,7 +49,7 @@ const situations: SituationCard[] = [
         <text x="178" y="76" fill="#cbd5e1" fontSize="10" fontWeight="bold">x</text>
         <text x="106" y="22" fill="#cbd5e1" fontSize="10" fontWeight="bold">y</text>
         <text x="92" y="92" fill="#94a3b8" fontSize="9">O</text>
-        <circle cx="140" cy="50" r="5" fill="#22d3ee" stroke="white" strokeWidth="1.5" />
+        <circle cx="140" cy="50" r="5" fill="#22d3ee" stroke="var(--icon-stroke)" strokeWidth="1.5" />
         <text x="146" y="46" fill="#22d3ee" fontSize="10" fontWeight="bold">P(4, 3)</text>
         <line x1="140" y1="50" x2="140" y2="80" stroke="#22d3ee" strokeWidth="1" strokeDasharray="3 2" />
         <line x1="140" y1="50" x2="100" y2="50" stroke="#22d3ee" strokeWidth="1" strokeDasharray="3 2" />

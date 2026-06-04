@@ -19,13 +19,13 @@ const situations: SituationCard[] = [
               <rect x={20 + i * 42} y={50} width={36} height={36} rx={6}
                 fill={n === 6 ? "#34d399" : "#ef4444"}
                 fillOpacity="0.45" stroke={n === 6 ? "#6ee7b7" : "#fca5a5"} strokeWidth="1.5" />
-              <text x={38 + i * 42} y={75} fontSize="16" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={38 + i * 42} y={75} fontSize="16" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="140" y="105" fontSize="11" fill="#a7f3d0" textAnchor="middle">A = {"{6}"} → P(A) = 1/6</text>
           <text x="140" y="125" fontSize="11" fill="#fca5a5" textAnchor="middle">Aᶜ = {"{1,2,3,4,5}"} → P(Aᶜ) = 5/6</text>
           <rect x="50" y="145" width="180" height="40" rx="8" fill="#fbbf24" fillOpacity="0.45" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="140" y="170" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">P(A) + P(Aᶜ) = 1/6 + 5/6 = 1</text>
+          <text x="140" y="170" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">P(A) + P(Aᶜ) = 1/6 + 5/6 = 1</text>
         </svg>
       </div>
     ),
@@ -42,13 +42,13 @@ const situations: SituationCard[] = [
           <rect x="40" y="40" width="200" height="100" rx="8" fill="#1e293b" stroke="#67e8f9" strokeWidth="2" />
           <text x="50" y="55" fontSize="10" fill="#67e8f9">S</text>
           <circle cx="115" cy="90" r="38" fill="#22d3ee" fillOpacity="0.45" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="115" y="95" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">A</text>
+          <text x="115" y="95" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">A</text>
           <text x="115" y="118" fontSize="9" fill="#fde68a" textAnchor="middle">P(A)</text>
           <text x="200" y="80" fontSize="11" fontWeight="bold" fill="#ef4444" textAnchor="middle">Aᶜ</text>
           <text x="200" y="100" fontSize="9" fill="#fda4af" textAnchor="middle">SISA</text>
           <text x="200" y="115" fontSize="9" fill="#fda4af" textAnchor="middle">P(Aᶜ)=1−P(A)</text>
           <rect x="40" y="155" width="200" height="22" rx="6" fill="#34d399" fillOpacity="0.4" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="171" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">P(Aᶜ) = 1 − P(A)</text>
+          <text x="140" y="171" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">P(Aᶜ) = 1 − P(A)</text>
         </svg>
       </div>
     ),

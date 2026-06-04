@@ -384,7 +384,7 @@ export default function JaringPrismaInteraktif() {
                   <text
                     x={mx.toFixed(1)} y={my.toFixed(1)}
                     textAnchor="middle" dominantBaseline="middle"
-                    fill="white" fontSize="7.5" fontFamily="monospace" fontWeight="bold"
+                    fill="var(--icon-color)" fontSize="7.5" fontFamily="monospace" fontWeight="bold"
                     style={{ pointerEvents: "none", opacity: lAlpha }}
                   >
                     {f.label}
@@ -396,7 +396,7 @@ export default function JaringPrismaInteraktif() {
 
           {/* Hinge indicator lines (dashed) */}
           {hingeAlpha > 0.01 && (
-            <g opacity={hingeAlpha} strokeDasharray="4,3" stroke="white" strokeWidth={1.2}>
+            <g opacity={hingeAlpha} strokeDasharray="4,3" stroke="var(--icon-stroke)" strokeWidth={1.2}>
               {/* Vertical hinges between rect faces */}
               {vertHinges.map(([p0, p1], i) => (
                 <line key={`vh${i}`}

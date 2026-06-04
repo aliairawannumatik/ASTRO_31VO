@@ -60,14 +60,14 @@ const CubeSVG = ({ s = "s", label = true, color: c = "#38bdf8", labels = DEFAULT
     ))}
     {/* Labels: positions match vertex order above */}
     {label && <>
-      <text x="20"  y="100" fill="white" fontSize="11" fontFamily="monospace">{labels[0]}</text>
-      <text x="112" y="100" fill="white" fontSize="11" fontFamily="monospace">{labels[1]}</text>
-      <text x="112" y="33"  fill="white" fontSize="11" fontFamily="monospace">{labels[2]}</text>
-      <text x="20"  y="33"  fill="white" fontSize="11" fontFamily="monospace">{labels[3]}</text>
-      <text x="58"  y="8"   fill="white" fontSize="11" fontFamily="monospace">{labels[4]}</text>
-      <text x="148" y="8"   fill="white" fontSize="11" fontFamily="monospace">{labels[5]}</text>
-      <text x="148" y="72"  fill="white" fontSize="11" fontFamily="monospace">{labels[6]}</text>
-      <text x="58"  y="72"  fill="white" fontSize="11" fontFamily="monospace">{labels[7]}</text>
+      <text x="20"  y="100" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[0]}</text>
+      <text x="112" y="100" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[1]}</text>
+      <text x="112" y="33"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[2]}</text>
+      <text x="20"  y="33"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[3]}</text>
+      <text x="58"  y="8"   fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[4]}</text>
+      <text x="148" y="8"   fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[5]}</text>
+      <text x="148" y="72"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[6]}</text>
+      <text x="58"  y="72"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{labels[7]}</text>
       <text x="66"  y="70"  fill={c} fontSize="10" fontFamily="monospace">{s}</text>
     </>}
   </svg>
@@ -134,14 +134,14 @@ const DiagonalBidangQ3SVG = () => {
         <circle key={i} cx={x} cy={y} r="2.5" fill={c} fillOpacity="0.9" />
       ))}
       {/* Labels */}
-      <text x="20"  y="100" fill="white" fontSize="11" fontFamily="monospace">{q3labels[0]}</text>
-      <text x="112" y="100" fill="white" fontSize="11" fontFamily="monospace">{q3labels[1]}</text>
-      <text x="112" y="33"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[2]}</text>
-      <text x="20"  y="33"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[3]}</text>
-      <text x="58"  y="8"   fill="white" fontSize="11" fontFamily="monospace">{q3labels[4]}</text>
-      <text x="148" y="8"   fill="white" fontSize="11" fontFamily="monospace">{q3labels[5]}</text>
-      <text x="148" y="72"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[6]}</text>
-      <text x="58"  y="72"  fill="white" fontSize="11" fontFamily="monospace">{q3labels[7]}</text>
+      <text x="20"  y="100" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[0]}</text>
+      <text x="112" y="100" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[1]}</text>
+      <text x="112" y="33"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[2]}</text>
+      <text x="20"  y="33"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[3]}</text>
+      <text x="58"  y="8"   fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[4]}</text>
+      <text x="148" y="8"   fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[5]}</text>
+      <text x="148" y="72"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[6]}</text>
+      <text x="58"  y="72"  fill="var(--icon-color)" fontSize="11" fontFamily="monospace">{q3labels[7]}</text>
       {/* Label bidang diagonal */}
       <text x="80" y="135" fill="#f59e0b" fontSize="9" textAnchor="middle" fontFamily="sans-serif">bidang diagonal ABGH</text>
     </svg>

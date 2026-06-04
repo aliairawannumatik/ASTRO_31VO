@@ -117,7 +117,7 @@ const SudutDalamSegitigaVisual = () => (
     <text x={150} y={104} fontSize={11} fontWeight={700} fill="#fb7185">b</text>
     <path d="M 102 32 A 12 12 0 0 0 118 32" fill="#34d399aa" />
     <text x={104} y={48} fontSize={11} fontWeight={700} fill="#34d399">c</text>
-    <text x={110} y={126} textAnchor="middle" fontSize={11} fontWeight={700} fill="#fff">a + b + c = 180°</text>
+    <text x={110} y={126} textAnchor="middle" fontSize={11} fontWeight={700} fill="var(--icon-color)">a + b + c = 180°</text>
   </svg>
 );
 
@@ -125,14 +125,14 @@ const RumusLuasKelilingVisual = () => (
   <svg viewBox="0 0 280 130" className="w-full h-auto">
     <rect x={20} y={20} width={100} height={70} fill="#facc1533" stroke="#facc15" strokeWidth={2.5} />
     <text x={70} y={108} textAnchor="middle" fontSize={10} fontWeight={700} fill="#facc15">Persegi Pjg</text>
-    <text x={70} y={120} textAnchor="middle" fontSize={9} fill="#fff">L = p × l</text>
+    <text x={70} y={120} textAnchor="middle" fontSize={9} fill="var(--icon-color)">L = p × l</text>
     <text x={70} y={15} textAnchor="middle" fontSize={9} fill="#facc15">p</text>
     <text x={14} y={58} textAnchor="middle" fontSize={9} fill="#facc15">l</text>
 
     <polygon points="170,90 260,90 215,25" fill="#22d3ee33" stroke="#22d3ee" strokeWidth={2.5} />
     <line x1={215} y1={25} x2={215} y2={90} stroke="#22d3ee" strokeDasharray="3 2" />
     <text x={215} y={108} textAnchor="middle" fontSize={10} fontWeight={700} fill="#22d3ee">Segitiga</text>
-    <text x={215} y={120} textAnchor="middle" fontSize={9} fill="#fff">L = ½ × a × t</text>
+    <text x={215} y={120} textAnchor="middle" fontSize={9} fill="var(--icon-color)">L = ½ × a × t</text>
     <text x={215} y={102} textAnchor="middle" fontSize={9} fill="#22d3ee">a</text>
     <text x={224} y={60} fontSize={9} fill="#22d3ee">t</text>
   </svg>

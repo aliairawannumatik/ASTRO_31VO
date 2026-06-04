@@ -21,7 +21,7 @@ const RumusVariasiSVG = () => (
     {/* Triangle 1: Cari c */}
     <g transform="translate(10,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" strokeWidth="1.5"/>
-      <polyline points="10,82 28,82 28,100" fill="none" stroke="#fff" strokeWidth="1.2" opacity="0.6"/>
+      <polyline points="10,82 28,82 28,100" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.6"/>
       <text x="8" y="15" fill="#60a5fa" fontSize="9" fontFamily="monospace">a=3</text>
       <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b=4</text>
       <text x="55" y="55" fill="#fb923c" fontSize="9" fontFamily="monospace" className="p1">c=?</text>
@@ -33,7 +33,7 @@ const RumusVariasiSVG = () => (
     {/* Triangle 2: Cari a */}
     <g transform="translate(125,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
-      <polyline points="10,82 28,82 28,100" fill="none" stroke="#fff" strokeWidth="1.2" opacity="0.6"/>
+      <polyline points="10,82 28,82 28,100" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.6"/>
       <text x="8" y="15" fill="#60a5fa" fontSize="9" fontFamily="monospace" className="p2">a=?</text>
       <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b=4</text>
       <text x="55" y="55" fill="#fb923c" fontSize="9" fontFamily="monospace">c=5</text>
@@ -45,7 +45,7 @@ const RumusVariasiSVG = () => (
     {/* Triangle 3: Cari b */}
     <g transform="translate(240,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(249,115,22,0.2)" stroke="#f97316" strokeWidth="1.5"/>
-      <polyline points="10,82 28,82 28,100" fill="none" stroke="#fff" strokeWidth="1.2" opacity="0.6"/>
+      <polyline points="10,82 28,82 28,100" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.6"/>
       <text x="8" y="15" fill="#60a5fa" fontSize="9" fontFamily="monospace">a=3</text>
       <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace" className="p3">b=?</text>
       <text x="55" y="55" fill="#fb923c" fontSize="9" fontFamily="monospace">c=5</text>

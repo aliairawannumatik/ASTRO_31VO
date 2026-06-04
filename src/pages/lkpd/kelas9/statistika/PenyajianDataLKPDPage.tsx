@@ -20,21 +20,21 @@ const situations: SituationCard[] = [
           <text x="15" y="100" fontSize="9" fill="#94a3b8">10</text>
           <text x="15" y="65" fontSize="9" fill="#94a3b8">15</text>
           <rect x="55" y="135" width="30" height="35" fill="#22d3ee" />
-          <text x="70" y="185" fontSize="9" fill="#fff" textAnchor="middle">6</text>
+          <text x="70" y="185" fontSize="9" fill="var(--icon-color)" textAnchor="middle">6</text>
           <rect x="95" y="100" width="30" height="70" fill="#a78bfa" />
-          <text x="110" y="185" fontSize="9" fill="#fff" textAnchor="middle">7</text>
+          <text x="110" y="185" fontSize="9" fill="var(--icon-color)" textAnchor="middle">7</text>
           <rect x="135" y="65" width="30" height="105" fill="#fbbf24" />
-          <text x="150" y="185" fontSize="9" fill="#fff" textAnchor="middle">8</text>
+          <text x="150" y="185" fontSize="9" fill="var(--icon-color)" textAnchor="middle">8</text>
           <rect x="175" y="100" width="30" height="70" fill="#34d399" />
-          <text x="190" y="185" fontSize="9" fill="#fff" textAnchor="middle">9</text>
+          <text x="190" y="185" fontSize="9" fill="var(--icon-color)" textAnchor="middle">9</text>
           <rect x="215" y="135" width="30" height="35" fill="#f472b6" />
-          <text x="230" y="185" fontSize="9" fill="#fff" textAnchor="middle">10</text>
-          <text x="140" y="20" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Diagram Batang Nilai</text>
+          <text x="230" y="185" fontSize="9" fill="var(--icon-color)" textAnchor="middle">10</text>
+          <text x="140" y="20" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Diagram Batang Nilai</text>
           <text x="70" y="148" fontSize="9" fontWeight="bold" fill="#0b1220" textAnchor="middle">5</text>
-          <text x="110" y="113" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">10</text>
+          <text x="110" y="113" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">10</text>
           <text x="150" y="78" fontSize="9" fontWeight="bold" fill="#0b1220" textAnchor="middle">15</text>
-          <text x="190" y="113" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">10</text>
-          <text x="230" y="148" fontSize="9" fontWeight="bold" fill="#fff" textAnchor="middle">5</text>
+          <text x="190" y="113" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">10</text>
+          <text x="230" y="148" fontSize="9" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">5</text>
         </svg>
       </div>
     ),
@@ -52,7 +52,7 @@ const situations: SituationCard[] = [
           <path d="M 100 100 L 152 130 A 60 60 0 0 1 70 152 Z" fill="#a78bfa" />
           <path d="M 100 100 L 70 152 A 60 60 0 0 1 48 130 Z" fill="#fbbf24" />
           <path d="M 100 100 L 48 130 A 60 60 0 0 1 100 40 Z" fill="#f472b6" />
-          <text x="200" y="50" fontSize="11" fontWeight="bold" fill="#fff">Hobi 60 siswa:</text>
+          <text x="200" y="50" fontSize="11" fontWeight="bold" fill="var(--icon-color)">Hobi 60 siswa:</text>
           <rect x="195" y="65" width="10" height="10" fill="#22d3ee" />
           <text x="210" y="74" fontSize="10" fill="#22d3ee">Olahraga 25%</text>
           <rect x="195" y="80" width="10" height="10" fill="#a78bfa" />

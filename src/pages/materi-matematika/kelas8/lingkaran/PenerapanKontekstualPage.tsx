@@ -74,7 +74,7 @@ const KolongSVG = () => (
     <text x="185" y="92" fill="#f87171" fontSize="10" fontFamily="monospace" fontWeight="bold">R=80</text>
     <line x1="150" y1="100" x2="150" y2="35" stroke="#fbbf24" strokeWidth="2" strokeDasharray="4 2"/>
     <text x="155" y="65" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">r=65</text>
-    <circle cx="150" cy="100" r="4" fill="#fff"/>
+    <circle cx="150" cy="100" r="4" fill="var(--icon-color)"/>
     <text x="150" y="185" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">L.air = π(R² - r²) — luas cincin pipa</text>
   </svg>
 );

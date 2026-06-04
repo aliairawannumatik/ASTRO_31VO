@@ -454,19 +454,19 @@ const PPhPage = () => {
                   <div className="rounded-xl p-4 space-y-2 animate-slide-up" style={{ background: "rgba(52,211,153,0.07)", border: "1.5px solid rgba(52,211,153,0.35)" }}>
                     <p className="font-body text-xs font-bold text-emerald-300">✅ Hasil Perhitungan (per Tahun):</p>
                     <div className="space-y-2">
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "rgba(0,0,0,0.3)" }}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "var(--bg-secondary)" }}>
                         <span className="font-body text-xs text-emerald-200/60">Penghasilan Bruto</span>
                         <span className="font-body text-sm font-bold text-white">{formatRupiah(kalcResult.bruto)}</span>
                       </div>
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "rgba(0,0,0,0.3)" }}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "var(--bg-secondary)" }}>
                         <span className="font-body text-xs text-emerald-200/60">PTKP (dikurangi)</span>
                         <span className="font-body text-sm font-bold text-orange-400">−{formatRupiah(kalcResult.ptkp)}</span>
                       </div>
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "rgba(0,0,0,0.3)" }}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "var(--bg-secondary)" }}>
                         <span className="font-body text-xs text-emerald-200/60">PKP (Penghasilan Kena Pajak)</span>
                         <span className="font-body text-sm font-bold text-yellow-300">{formatRupiah(kalcResult.pkp)}</span>
                       </div>
-                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "rgba(0,0,0,0.3)" }}>
+                      <div className="rounded-lg px-4 py-3 flex justify-between items-center" style={{ background: "var(--bg-secondary)" }}>
                         <span className="font-body text-xs text-emerald-200/60">Besar PPh ({tarifPPh}% × PKP)</span>
                         <span className="font-body text-sm font-bold text-red-400">−{formatRupiah(kalcResult.pph)}</span>
                       </div>
@@ -475,7 +475,7 @@ const PPhPage = () => {
                         <span className="font-body text-lg font-black text-emerald-300">{formatRupiah(kalcResult.bersih)}</span>
                       </div>
                     </div>
-                    <div className="rounded-lg p-3" style={{ background: "rgba(0,0,0,0.3)", border: "1px dashed rgba(52,211,153,0.2)" }}>
+                    <div className="rounded-lg p-3" style={{ background: "var(--bg-secondary)", border: "1px dashed rgba(52,211,153,0.2)" }}>
                       <p className="font-body text-xs text-emerald-300/60 text-center">
                         {kalcResult.pkp === 0
                           ? "PKP = 0 → Penghasilan di bawah/sama dengan PTKP → Bebas PPh sepenuhnya!"

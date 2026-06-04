@@ -37,7 +37,7 @@ const CubeUnfold = () => {
           <g>
             <rect x="165" y="135" width="70" height="70" rx="4"
               fill={faceColors[0] + "cc"} stroke="hsl(0,0%,80%)" strokeWidth="2" />
-            <text x="200" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+            <text x="200" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
               {labels[0]}
             </text>
           </g>
@@ -46,7 +46,7 @@ const CubeUnfold = () => {
           <g>
             <rect x="305" y="135" width="70" height="70" rx="4"
               fill={faceColors[1] + "cc"} stroke="hsl(0,0%,80%)" strokeWidth="2" />
-            <text x="340" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+            <text x="340" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
               {labels[1]}
             </text>
           </g>
@@ -60,7 +60,7 @@ const CubeUnfold = () => {
           }}>
             <rect x="165" y="60" width="70" height="70" rx="4"
               fill={faceColors[2] + "cc"} stroke="hsl(0,0%,80%)" strokeWidth="2" />
-            <text x="200" y="100" textAnchor="middle" fontSize="9" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+            <text x="200" y="100" textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
               {labels[2]}
             </text>
           </g>
@@ -69,7 +69,7 @@ const CubeUnfold = () => {
           {step === 0 && (
             <g onClick={() => setStep(1)} className="cursor-pointer">
               <rect x="145" y="25" width="110" height="28" rx="14" fill="hsl(230, 80%, 55%)" />
-              <text x="200" y="44" textAnchor="middle" fontSize="8" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+              <text x="200" y="44" textAnchor="middle" fontSize="8" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
                 {buttonLabels[0]}
               </text>
             </g>
@@ -84,7 +84,7 @@ const CubeUnfold = () => {
           }}>
             <rect x="90" y="135" width="70" height="70" rx="4"
               fill={faceColors[4] + "cc"} stroke="hsl(0,0%,80%)" strokeWidth="2" />
-            <text x="125" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+            <text x="125" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
               {labels[4]}
             </text>
           </g>
@@ -93,7 +93,7 @@ const CubeUnfold = () => {
           {step === 1 && (
             <g onClick={() => setStep(2)} className="cursor-pointer">
               <rect x="15" y="156" width="110" height="28" rx="14" fill="hsl(230, 80%, 55%)" />
-              <text x="70" y="175" textAnchor="middle" fontSize="8" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+              <text x="70" y="175" textAnchor="middle" fontSize="8" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
                 {buttonLabels[1]}
               </text>
             </g>
@@ -108,7 +108,7 @@ const CubeUnfold = () => {
           }}>
             <rect x="240" y="135" width="70" height="70" rx="4"
               fill={faceColors[5] + "cc"} stroke="hsl(0,0%,80%)" strokeWidth="2" />
-            <text x="275" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+            <text x="275" y="175" textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
               {labels[5]}
             </text>
           </g>
@@ -117,7 +117,7 @@ const CubeUnfold = () => {
           {step === 2 && (
             <g onClick={() => setStep(3)} className="cursor-pointer">
               <rect x="280" y="100" width="110" height="28" rx="14" fill="hsl(230, 80%, 55%)" />
-              <text x="335" y="119" textAnchor="middle" fontSize="8" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+              <text x="335" y="119" textAnchor="middle" fontSize="8" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
                 {buttonLabels[2]}
               </text>
             </g>
@@ -132,7 +132,7 @@ const CubeUnfold = () => {
           }}>
             <rect x="165" y="210" width="70" height="70" rx="4"
               fill={faceColors[3] + "cc"} stroke="hsl(0,0%,80%)" strokeWidth="2" />
-            <text x="200" y="250" textAnchor="middle" fontSize="9" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+            <text x="200" y="250" textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
               {labels[3]}
             </text>
           </g>
@@ -141,7 +141,7 @@ const CubeUnfold = () => {
           {step === 3 && (
             <g onClick={() => setStep(4)} className="cursor-pointer">
               <rect x="145" y="290" width="110" height="28" rx="14" fill="hsl(230, 80%, 55%)" />
-              <text x="200" y="309" textAnchor="middle" fontSize="8" fontWeight="bold" fill="white" fontFamily="Orbitron, sans-serif">
+              <text x="200" y="309" textAnchor="middle" fontSize="8" fontWeight="bold" fill="var(--icon-color)" fontFamily="Orbitron, sans-serif">
                 {buttonLabels[3]}
               </text>
             </g>

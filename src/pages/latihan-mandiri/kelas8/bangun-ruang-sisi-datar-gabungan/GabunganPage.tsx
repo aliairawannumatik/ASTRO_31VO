@@ -42,14 +42,14 @@ const BalokLimasSVG = ({
       <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
     {/* Label titik balok */}
-    <text x="12" y="175" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="153" y="175" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="181" y="154" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="38" y="154" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
-    <text x="10" y="98" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="153" y="98" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="181" y="78" fill="white" fontSize="10" fontFamily="monospace">G</text>
-    <text x="38" y="78" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+    <text x="12" y="175" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+    <text x="153" y="175" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+    <text x="181" y="154" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+    <text x="38" y="154" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="10" y="98" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">E</text>
+    <text x="153" y="98" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">F</text>
+    <text x="181" y="78" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">G</text>
+    <text x="38" y="78" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
 
     {/* ── LIMAS (merah) ── */}
     {/* Rusuk ke H tersembunyi */}
@@ -105,14 +105,14 @@ const KubusPrismaSVG = () => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
     {/* Label titik kubus (atas = alas prisma) */}
-    <text x="12" y="170" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="103" y="170" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="131" y="149" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="39" y="149" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
-    <text x="10" y="88" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="103" y="88" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="131" y="68" fill="white" fontSize="10" fontFamily="monospace">G</text>
-    <text x="39" y="68" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+    <text x="12" y="170" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+    <text x="103" y="170" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+    <text x="131" y="149" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+    <text x="39" y="149" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="10" y="88" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">E</text>
+    <text x="103" y="88" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">F</text>
+    <text x="131" y="68" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">G</text>
+    <text x="39" y="68" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
 
     {/* ── PRISMA SEGITIGA ATAP (kuning-amber) ── */}
     {/* P depan=(62,42), Q belakang=(90,22) */}
@@ -161,14 +161,14 @@ const DuaBalokSVG = () => (
     {([[15,175],[100,175],[122,159],[37,159],[15,118],[100,118],[122,102],[37,102]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    <text x="3" y="180" fill="white" fontSize="9" fontFamily="monospace">A</text>
-    <text x="103" y="180" fill="white" fontSize="9" fontFamily="monospace">B</text>
-    <text x="125" y="163" fill="white" fontSize="9" fontFamily="monospace">C</text>
-    <text x="24" y="163" fill="white" fontSize="9" fontFamily="monospace" opacity="0.6">D</text>
-    <text x="3" y="116" fill="white" fontSize="9" fontFamily="monospace">E</text>
-    <text x="87" y="115" fill="white" fontSize="9" fontFamily="monospace">F</text>
-    <text x="125" y="100" fill="white" fontSize="9" fontFamily="monospace">G</text>
-    <text x="24" y="100" fill="white" fontSize="9" fontFamily="monospace" opacity="0.6">H</text>
+    <text x="3" y="180" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">A</text>
+    <text x="103" y="180" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">B</text>
+    <text x="125" y="163" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">C</text>
+    <text x="24" y="163" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="3" y="116" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">E</text>
+    <text x="87" y="115" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">F</text>
+    <text x="125" y="100" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">G</text>
+    <text x="24" y="100" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" opacity="0.6">H</text>
 
     {/* ── BALOK 2 (merah muda, duduk di atas-kanan) ── */}
     {/* Rusuk tersembunyi balok 2 */}
@@ -223,14 +223,14 @@ const BalokLubanglSVG = () => (
     {([[20,165],[155,165],[183,145],[48,145],[20,95],[155,95],[183,75],[48,75]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    <text x="7" y="170" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="158" y="170" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="186" y="149" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="34" y="149" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
-    <text x="5" y="93" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="158" y="93" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="186" y="73" fill="white" fontSize="10" fontFamily="monospace">G</text>
-    <text x="34" y="73" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+    <text x="7" y="170" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+    <text x="158" y="170" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+    <text x="186" y="149" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+    <text x="34" y="149" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="5" y="93" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">E</text>
+    <text x="158" y="93" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">F</text>
+    <text x="186" y="73" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">G</text>
+    <text x="34" y="73" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
 
     {/* ── LIMAS (merah) ── */}
     <line x1="101" y1="30" x2="48" y2="75" stroke="#f43f5e" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.65"/>
@@ -272,14 +272,14 @@ const PrismaBalokSVG = () => (
     {([[15,165],[145,165],[172,146],[42,146],[15,105],[145,105],[172,86],[42,86]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    <text x="2" y="170" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="148" y="170" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="175" y="150" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="28" y="150" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
-    <text x="1" y="103" fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="148" y="103" fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="175" y="84" fill="white" fontSize="10" fontFamily="monospace">G</text>
-    <text x="28" y="84" fill="white" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
+    <text x="2" y="170" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+    <text x="148" y="170" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+    <text x="175" y="150" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+    <text x="28" y="150" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="1" y="103" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">E</text>
+    <text x="148" y="103" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">F</text>
+    <text x="175" y="84" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">G</text>
+    <text x="28" y="84" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.6">H</text>
 
     {/* ── PRISMA SEGITIGA ATAP (amber) ── */}
     {/* P depan=(80,50), Q belakang=(107,31) */}
@@ -350,12 +350,12 @@ const LimasTerbalikSVG = () => (
     {([[35,118],[158,118],[183,101],[60,101],[35,62],[158,62],[183,48],[60,48]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2" fill="#818cf8"/>
     ))}
-    <text x="23" y="122" fill="white" fontSize="9" fontFamily="monospace">A</text>
-    <text x="161" y="122" fill="white" fontSize="9" fontFamily="monospace">B</text>
-    <text x="186" y="105" fill="white" fontSize="9" fontFamily="monospace">C</text>
-    <text x="23" y="60" fill="white" fontSize="9" fontFamily="monospace">E</text>
-    <text x="161" y="60" fill="white" fontSize="9" fontFamily="monospace">F</text>
-    <text x="186" y="46" fill="white" fontSize="9" fontFamily="monospace">G</text>
+    <text x="23" y="122" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">A</text>
+    <text x="161" y="122" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">B</text>
+    <text x="186" y="105" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">C</text>
+    <text x="23" y="60" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">E</text>
+    <text x="161" y="60" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">F</text>
+    <text x="186" y="46" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">G</text>
     <text x="8" y="92" fill="#818cf8" fontSize="9" textAnchor="middle">t₁</text>
     {/* LIMAS TERBALIK (merah, apex ke bawah) */}
     {/* Base = bottom of balok: A(35,118) B(158,118) C(183,101) D(60,101) */}
@@ -396,10 +396,10 @@ const LimasTerpancungSVG = () => (
       <circle key={`t${i}`} cx={x} cy={y} r="2.5" fill="#a5b4fc"/>
     ))}
     {/* Label titik */}
-    <text x="9" y="183" fill="white" fontSize="9" fontFamily="monospace">A</text>
-    <text x="158" y="183" fill="white" fontSize="9" fontFamily="monospace">B</text>
-    <text x="181" y="164" fill="white" fontSize="9" fontFamily="monospace">C</text>
-    <text x="32" y="163" fill="white" fontSize="9" fontFamily="monospace" opacity="0.6">D</text>
+    <text x="9" y="183" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">A</text>
+    <text x="158" y="183" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">B</text>
+    <text x="181" y="164" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">C</text>
+    <text x="32" y="163" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" opacity="0.6">D</text>
     <text x="44" y="98" fill="#a5b4fc" fontSize="9" fontFamily="monospace">A'</text>
     <text x="144" y="98" fill="#a5b4fc" fontSize="9" fontFamily="monospace">B'</text>
     <text x="165" y="83" fill="#a5b4fc" fontSize="9" fontFamily="monospace">C'</text>
@@ -426,12 +426,12 @@ const KubusBerlobangSVG = () => (
     {([[25,162],[125,162],[150,144],[50,144],[25,82],[125,82],[150,64],[50,64]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2" fill="#818cf8"/>
     ))}
-    <text x="12" y="167" fill="white" fontSize="9" fontFamily="monospace">A</text>
-    <text x="128" y="167" fill="white" fontSize="9" fontFamily="monospace">B</text>
-    <text x="153" y="148" fill="white" fontSize="9" fontFamily="monospace">C</text>
-    <text x="12" y="80" fill="white" fontSize="9" fontFamily="monospace">E</text>
-    <text x="128" y="80" fill="white" fontSize="9" fontFamily="monospace">F</text>
-    <text x="153" y="62" fill="white" fontSize="9" fontFamily="monospace">G</text>
+    <text x="12" y="167" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">A</text>
+    <text x="128" y="167" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">B</text>
+    <text x="153" y="148" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">C</text>
+    <text x="12" y="80" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">E</text>
+    <text x="128" y="80" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">F</text>
+    <text x="153" y="62" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">G</text>
     {/* LUBANG LIMAS (merah, masuk dari alas atas) */}
     {/* Opening pada sisi atas: persegi kecil di tengah sisi atas */}
     {/* Top face center ≈ (87,73). Opening corners (30% of top face size) */}
@@ -459,7 +459,7 @@ const TigaBalokSVG = () => (
     <polygon points="20,175 110,175 110,129 20,129" fill="#6366f1" fillOpacity="0.32" stroke="#818cf8" strokeWidth="1.5"/>
     <polygon points="110,175 132,159 132,113 110,129" fill="#6366f1" fillOpacity="0.18" stroke="#818cf8" strokeWidth="1.5"/>
     <polygon points="20,129 110,129 132,113 42,113" fill="#6366f1" fillOpacity="0.38" stroke="#818cf8" strokeWidth="1.5"/>
-    <text x="6" y="174" fill="white" fontSize="8" fontFamily="monospace">Balok 1</text>
+    <text x="6" y="174" fill="var(--icon-color)" fontSize="8" fontFamily="monospace">Balok 1</text>
     <text x="140" y="147" fill="#818cf8" fontSize="8">9×9×6</text>
     {/* BALOK 2 (tengah, violet) */}
     <line x1="33" y1="129" x2="49" y2="117" stroke="#a78bfa" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5"/>
@@ -535,9 +535,9 @@ const PrismaLimasSegitSVG = () => (
     {([[20,115],[20,158],[58,137]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
     ))}
-    <text x="7" y="113" fill="white" fontSize="9" fontFamily="monospace">A</text>
-    <text x="7" y="163" fill="white" fontSize="9" fontFamily="monospace">B</text>
-    <text x="62" y="140" fill="white" fontSize="9" fontFamily="monospace">C</text>
+    <text x="7" y="113" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">A</text>
+    <text x="7" y="163" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">B</text>
+    <text x="62" y="140" fill="var(--icon-color)" fontSize="9" fontFamily="monospace">C</text>
     {/* Titik muka kanan */}
     {([[150,115],[150,158],[188,137]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#818cf8"/>
@@ -617,7 +617,7 @@ const KubusPotongSVG = () => (
     {/* Sudut belakang-kiri H(45,63) */}
     <polygon points="45,63 70,63 45,85" fill="#f43f5e" fillOpacity="0.45" stroke="#fb7185" strokeWidth="1.3"/>
     {/* Label */}
-    <text x="20" y="178" fill="white" fontSize="9">s = 10 cm</text>
+    <text x="20" y="178" fill="var(--icon-color)" fontSize="9">s = 10 cm</text>
     <text x="160" y="125" fill="#fb7185" fontSize="8">4 potongan</text>
     <text x="160" y="135" fill="#fb7185" fontSize="8">limas</text>
     <text x="130" y="208" fill="#818cf8" fontSize="8" textAnchor="middle">Kubus – 4 Limas (Dipotong di Sudut)</text>
@@ -665,7 +665,7 @@ const BipyramidSVG = () => (
     <polygon points="50,108 155,108 114,38" fill="#6366f1" fillOpacity="0.32" stroke="#818cf8" strokeWidth="1.8"/>
     <polygon points="155,108 178,90 114,38" fill="#6366f1" fillOpacity="0.22" stroke="#818cf8" strokeWidth="1.5"/>
     <circle cx="114" cy="38" r="3.5" fill="#818cf8"/>
-    <text x="108" y="30" fill="white" fontSize="10" fontFamily="monospace" fontWeight="bold">T₁</text>
+    <text x="108" y="30" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" fontWeight="bold">T₁</text>
     {/* Alas bersama (diperlihatkan sebagai garis) */}
     {([[50,108],[155,108],[178,90],[73,90]] as [number,number][]).map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#a5b4fc"/>

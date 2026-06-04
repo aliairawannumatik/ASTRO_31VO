@@ -14,10 +14,10 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <rect x="20" y="20" width="240" height="50" rx="8" fill="#22d3ee" fillOpacity="0.25" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="140" y="40" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">POPULASI: Seluruh siswa SMP X (450 siswa)</text>
+          <text x="140" y="40" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">POPULASI: Seluruh siswa SMP X (450 siswa)</text>
           <text x="140" y="58" fontSize="9" fill="#a7f3d0" textAnchor="middle">Semua individu yang ingin diteliti</text>
           <rect x="80" y="90" width="120" height="40" rx="8" fill="#fbbf24" fillOpacity="0.35" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="140" y="108" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">SAMPEL: 45 siswa</text>
+          <text x="140" y="108" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">SAMPEL: 45 siswa</text>
           <text x="140" y="122" fontSize="9" fill="#fde68a" textAnchor="middle">Bagian populasi yang diukur</text>
           <text x="140" y="155" fontSize="10" fill="#34d399" textAnchor="middle">Data tinggi badan: 150, 152, 148, 155, …</text>
           <text x="140" y="172" fontSize="9" fill="#a7f3d0" textAnchor="middle">→ DATA KUANTITATIF (angka, dapat diukur)</text>
@@ -33,15 +33,15 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-rose-500/20 to-fuchsia-700/20 border border-rose-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">"Apa warna favoritmu?"</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">"Apa warna favoritmu?"</text>
           <circle cx="60" cy="80" r="22" fill="#ef4444" />
-          <text x="60" y="84" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">Merah</text>
+          <text x="60" y="84" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Merah</text>
           <text x="60" y="115" fontSize="9" fill="#a7f3d0" textAnchor="middle">12</text>
           <circle cx="120" cy="80" r="22" fill="#3b82f6" />
-          <text x="120" y="84" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">Biru</text>
+          <text x="120" y="84" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Biru</text>
           <text x="120" y="115" fontSize="9" fill="#a7f3d0" textAnchor="middle">18</text>
           <circle cx="180" cy="80" r="22" fill="#22c55e" />
-          <text x="180" y="84" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">Hijau</text>
+          <text x="180" y="84" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Hijau</text>
           <text x="180" y="115" fontSize="9" fill="#a7f3d0" textAnchor="middle">8</text>
           <circle cx="240" cy="80" r="22" fill="#fbbf24" />
           <text x="240" y="84" fontSize="10" fontWeight="bold" fill="#0b1220" textAnchor="middle">Kuning</text>

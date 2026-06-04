@@ -15,14 +15,14 @@ const situations: SituationCard[] = [
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#fde68a" textAnchor="middle">Dadu dilempar 60 kali — berapa kali mata 6 muncul?</text>
           <rect x="20" y="50" width="115" height="60" rx="8" fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="78" y="70" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">P(mata 6)</text>
-          <text x="78" y="92" fontSize="16" fontWeight="bold" fill="#fff" textAnchor="middle">1/6</text>
+          <text x="78" y="70" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">P(mata 6)</text>
+          <text x="78" y="92" fontSize="16" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">1/6</text>
           <text x="142" y="85" fontSize="22" fill="#fbbf24" textAnchor="middle">×</text>
           <rect x="155" y="50" width="105" height="60" rx="8" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="207" y="70" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">n (banyak)</text>
-          <text x="207" y="92" fontSize="16" fontWeight="bold" fill="#fff" textAnchor="middle">60</text>
+          <text x="207" y="70" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">n (banyak)</text>
+          <text x="207" y="92" fontSize="16" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">60</text>
           <rect x="50" y="135" width="180" height="50" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="158" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Fh = P(A) × n</text>
+          <text x="140" y="158" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Fh = P(A) × n</text>
           <text x="140" y="178" fontSize="14" fontWeight="bold" fill="#fde68a" textAnchor="middle">= (1/6) × 60 = 10 kali</text>
         </svg>
       </div>
@@ -38,11 +38,11 @@ const situations: SituationCard[] = [
           <rect width="280" height="180" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">120 lemparan koin — berapa Angka diharapkan?</text>
           <rect x="40" y="50" width="200" height="35" rx="6" fill="#fbbf24" fillOpacity="0.45" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="140" y="73" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Fh(Angka) = (1/2) × 120 = 60</text>
+          <text x="140" y="73" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Fh(Angka) = (1/2) × 120 = 60</text>
           <text x="140" y="105" fontSize="10" fill="#67e8f9" textAnchor="middle">Hasil eksperimen: bisa jadi 58, 62, 65 …</text>
           <text x="140" y="120" fontSize="10" fill="#67e8f9" textAnchor="middle">Tidak harus PERSIS 60, tapi MENDEKATI.</text>
           <rect x="40" y="135" width="200" height="35" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="158" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Frekuensi HARAPAN ≠ Frekuensi SEBENARNYA</text>
+          <text x="140" y="158" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Frekuensi HARAPAN ≠ Frekuensi SEBENARNYA</text>
         </svg>
       </div>
     ),

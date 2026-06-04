@@ -50,12 +50,12 @@ function FractionCircle({ cx, cy, r, numerator, denominator, fillColor, dimColor
           key={i}
           d={slicePath(cx, cy, r, denominator, i)}
           fill={i < numerator ? fillColor : dimColor}
-          stroke="white"
+          stroke="var(--icon-stroke)"
           strokeWidth="1.5"
           style={{ transition: "fill 0.6s ease, d 0.6s ease" }}
         />
       ))}
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="white" strokeWidth="2" />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--icon-stroke)" strokeWidth="2" />
     </g>
   );
 }
@@ -205,7 +205,7 @@ export default function FractionCircleAnimation() {
           <g className={shakeActive && step === 1 ? "shake-anim" : ""}>
             <FractionCircle cx={CX1} cy={CY} r={R} numerator={num1Display} denominator={den1Display} fillColor={FILL1} dimColor={DIM1} />
           </g>
-          <text x={CX1} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="13" fontFamily="serif">
+          <text x={CX1} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="13" fontFamily="serif">
             {step >= 2 ? `${newN1}/${common}` : `${n1}/${d1}`}
           </text>
           {step >= 2 && !isAlreadySame && (
@@ -215,7 +215,7 @@ export default function FractionCircleAnimation() {
           )}
 
           {/* Operator */}
-          <text x="165" y={CY + 8} textAnchor="middle" fill="white" fontSize="28" fontWeight="bold" fontFamily="sans-serif">
+          <text x="165" y={CY + 8} textAnchor="middle" fill="var(--icon-color)" fontSize="28" fontWeight="bold" fontFamily="sans-serif">
             {op}
           </text>
 
@@ -223,7 +223,7 @@ export default function FractionCircleAnimation() {
           <g className={shakeActive && step === 1 ? "shake-anim" : ""} style={{ animationDelay: "0.1s" }}>
             <FractionCircle cx={CX2} cy={CY} r={R} numerator={num2Display} denominator={den2Display} fillColor={FILL2} dimColor={DIM2} />
           </g>
-          <text x={CX2} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="13" fontFamily="serif">
+          <text x={CX2} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="13" fontFamily="serif">
             {step >= 2 ? `${newN2}/${common}` : `${n2}/${d2}`}
           </text>
           {step >= 2 && !isAlreadySame && (
@@ -241,7 +241,7 @@ export default function FractionCircleAnimation() {
           {step >= 3 ? (
             <g className="pulse-anim">
               <FractionCircle cx={CX3} cy={CY} r={R} numerator={resNum} denominator={resDen} fillColor={FILL_RES} dimColor={DIM_RES} pulse />
-              <text x={CX3} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="13" fontFamily="serif">
+              <text x={CX3} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="13" fontFamily="serif">
                 {resNum}/{resDen}
                 {gcdRes > 1 ? ` = ${simplNum}/${simplDen}` : ""}
               </text>

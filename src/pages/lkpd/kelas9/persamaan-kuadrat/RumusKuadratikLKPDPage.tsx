@@ -16,10 +16,10 @@ const situations: SituationCard[] = [
           <text x="140" y="28" fontSize="13" fontWeight="bold" fill="#a78bfa" textAnchor="middle">PK: ax² + bx + c = 0</text>
           <text x="140" y="52" fontSize="10" fill="#fde68a" textAnchor="middle">Akar-akarnya:</text>
           <rect x="20" y="65" width="240" height="60" rx="10" fill="#22d3ee" fillOpacity="0.35" stroke="#67e8f9" strokeWidth="2" />
-          <text x="140" y="92" fontSize="18" fontWeight="bold" fill="#fff" textAnchor="middle">x = (−b ± √(b² − 4ac)) / 2a</text>
+          <text x="140" y="92" fontSize="18" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x = (−b ± √(b² − 4ac)) / 2a</text>
           <text x="140" y="113" fontSize="10" fill="#fde68a" textAnchor="middle">"plus-minus" → 2 akar</text>
           <rect x="40" y="140" width="200" height="48" rx="8" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="160" fontSize="11" fill="#fff" textAnchor="middle">D = b² − 4ac (DISKRIMINAN)</text>
+          <text x="140" y="160" fontSize="11" fill="var(--icon-color)" textAnchor="middle">D = b² − 4ac (DISKRIMINAN)</text>
           <text x="140" y="180" fontSize="11" fontWeight="bold" fill="#fde68a" textAnchor="middle">x = (−b ± √D) / 2a</text>
         </svg>
       </div>
@@ -35,18 +35,18 @@ const situations: SituationCard[] = [
           <rect width="280" height="220" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="12" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">x² − 5x + 6 = 0 (a=1, b=−5, c=6)</text>
           <rect x="20" y="38" width="240" height="22" rx="6" fill="#a7f3d0" fillOpacity="0.3" />
-          <text x="140" y="54" fontSize="10" fill="#fff" textAnchor="middle">D = (−5)² − 4(1)(6) = 25 − 24 = 1</text>
+          <text x="140" y="54" fontSize="10" fill="var(--icon-color)" textAnchor="middle">D = (−5)² − 4(1)(6) = 25 − 24 = 1</text>
           <rect x="20" y="65" width="240" height="22" rx="6" fill="#fde68a" fillOpacity="0.3" />
-          <text x="140" y="81" fontSize="10" fill="#fff" textAnchor="middle">x = (−(−5) ± √1) / 2(1) = (5 ± 1) / 2</text>
+          <text x="140" y="81" fontSize="10" fill="var(--icon-color)" textAnchor="middle">x = (−(−5) ± √1) / 2(1) = (5 ± 1) / 2</text>
           <rect x="20" y="92" width="240" height="22" rx="6" fill="#fbbf24" fillOpacity="0.4" />
-          <text x="140" y="108" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">x₁ = (5+1)/2 = 3, x₂ = (5−1)/2 = 2</text>
+          <text x="140" y="108" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x₁ = (5+1)/2 = 3, x₂ = (5−1)/2 = 2</text>
           <text x="140" y="135" fontSize="11" fontWeight="bold" fill="#22d3ee" textAnchor="middle">x² − 2x − 4 = 0 (a=1, b=−2, c=−4)</text>
           <rect x="20" y="148" width="240" height="22" rx="6" fill="#a7f3d0" fillOpacity="0.3" />
-          <text x="140" y="164" fontSize="10" fill="#fff" textAnchor="middle">D = 4 + 16 = 20 = 4·5</text>
+          <text x="140" y="164" fontSize="10" fill="var(--icon-color)" textAnchor="middle">D = 4 + 16 = 20 = 4·5</text>
           <rect x="20" y="175" width="240" height="22" rx="6" fill="#fde68a" fillOpacity="0.3" />
-          <text x="140" y="190" fontSize="10" fill="#fff" textAnchor="middle">x = (2 ± √20)/2 = (2 ± 2√5)/2</text>
+          <text x="140" y="190" fontSize="10" fill="var(--icon-color)" textAnchor="middle">x = (2 ± √20)/2 = (2 ± 2√5)/2</text>
           <rect x="20" y="200" width="240" height="18" rx="6" fill="#34d399" fillOpacity="0.4" />
-          <text x="140" y="213" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">x = 1 ± √5</text>
+          <text x="140" y="213" fontSize="10" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">x = 1 ± √5</text>
         </svg>
       </div>
     ),

@@ -20,7 +20,7 @@ const situations: SituationCard[] = [
           <text x="105" y="105" fontSize="11" fill="#fbbf24">t</text>
           <line x1="100" y1="40" x2="150" y2="40" stroke="#f472b6" strokeWidth="1.5" />
           <text x="125" y="35" fontSize="11" fill="#f472b6" textAnchor="middle">r</text>
-          <text x="200" y="60" fontSize="10" fontWeight="bold" fill="#fff">Kaleng = TABUNG!</text>
+          <text x="200" y="60" fontSize="10" fontWeight="bold" fill="var(--icon-color)">Kaleng = TABUNG!</text>
           <text x="200" y="80" fontSize="9" fill="#a7f3d0">2 lingkaran (atas-bawah)</text>
           <text x="200" y="95" fontSize="9" fill="#a7f3d0">+ 1 selimut (persegi panjang</text>
           <text x="200" y="110" fontSize="9" fill="#a7f3d0">yang dilengkungkan)</text>
@@ -37,11 +37,11 @@ const situations: SituationCard[] = [
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <circle cx="50" cy="40" r="20" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="2" />
-          <text x="50" y="44" fontSize="9" fill="#fff" textAnchor="middle">alas</text>
+          <text x="50" y="44" fontSize="9" fill="var(--icon-color)" textAnchor="middle">alas</text>
           <circle cx="50" cy="160" r="20" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="2" />
-          <text x="50" y="164" fontSize="9" fill="#fff" textAnchor="middle">tutup</text>
+          <text x="50" y="164" fontSize="9" fill="var(--icon-color)" textAnchor="middle">tutup</text>
           <rect x="100" y="60" width="160" height="80" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="2" />
-          <text x="180" y="105" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Selimut</text>
+          <text x="180" y="105" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Selimut</text>
           <text x="180" y="55" fontSize="10" fill="#fde68a" textAnchor="middle">panjang = keliling alas = 2πr</text>
           <text x="270" y="100" fontSize="10" fill="#fde68a" textAnchor="end">tinggi = t</text>
           <text x="180" y="160" fontSize="11" fontWeight="bold" fill="#34d399" textAnchor="middle">Luas selimut = 2πr × t</text>

@@ -15,16 +15,16 @@ const situations: SituationCard[] = [
           <rect width="280" height="220" fill="#0b1220" rx="8" />
           <text x="140" y="22" fontSize="12" fontWeight="bold" fill="#a78bfa" textAnchor="middle">D = b² − 4ac (DISKRIMINAN)</text>
           <rect x="20" y="38" width="240" height="40" rx="8" fill="#34d399" fillOpacity="0.4" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="58" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"D > 0  →  2 AKAR REAL berbeda"}</text>
+          <text x="140" y="58" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"D > 0  →  2 AKAR REAL berbeda"}</text>
           <text x="140" y="73" fontSize="9" fill="#fde68a" textAnchor="middle">parabola memotong sumbu-x di 2 titik</text>
           <rect x="20" y="86" width="240" height="40" rx="8" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="140" y="106" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">D = 0  →  AKAR KEMBAR (1 akar)</text>
+          <text x="140" y="106" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">D = 0  →  AKAR KEMBAR (1 akar)</text>
           <text x="140" y="121" fontSize="9" fill="#fbbf24" textAnchor="middle">parabola menyentuh sumbu-x di 1 titik</text>
           <rect x="20" y="134" width="240" height="40" rx="8" fill="#ef4444" fillOpacity="0.4" stroke="#fca5a5" strokeWidth="1.5" />
-          <text x="140" y="154" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"D < 0  →  TIDAK ADA AKAR REAL"}</text>
+          <text x="140" y="154" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"D < 0  →  TIDAK ADA AKAR REAL"}</text>
           <text x="140" y="169" fontSize="9" fill="#fca5a5" textAnchor="middle">parabola TIDAK memotong sumbu-x</text>
           <rect x="20" y="182" width="240" height="32" rx="6" fill="#22d3ee" fillOpacity="0.4" />
-          <text x="140" y="204" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">D = bilangan KUADRAT → akar RASIONAL</text>
+          <text x="140" y="204" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">D = bilangan KUADRAT → akar RASIONAL</text>
         </svg>
       </div>
     ),

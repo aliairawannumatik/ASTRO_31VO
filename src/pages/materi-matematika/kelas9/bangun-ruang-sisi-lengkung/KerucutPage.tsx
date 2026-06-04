@@ -320,11 +320,11 @@ const LuasKerucutSVG = () => (
     </defs>
     {/* Selimut (sector) */}
     <path d="M 100,90 L 15,200 A 105,105 0 0,1 185,200 Z" fill="#06b6d4" className="lk1" stroke="#22d3ee" strokeWidth="1.5"/>
-    <text x="97" y="165" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SELIMUT</text>
+    <text x="97" y="165" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SELIMUT</text>
     <text x="97" y="178" fill="#e0f2fe" fontSize="9" fontFamily="monospace" textAnchor="middle">πrs</text>
     {/* Alas (circle) */}
     <circle cx="265" cy="155" r="48" fill="#6366f1" className="lk2" stroke="#a5b4fc" strokeWidth="1.5"/>
-    <text x="265" y="158" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ALAS</text>
+    <text x="265" y="158" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ALAS</text>
     <text x="265" y="171" fill="#e0e7ff" fontSize="9" fontFamily="monospace" textAnchor="middle">πr²</text>
     {/* Formula */}
     <text x="170" y="28" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = πr² + πrs</text>

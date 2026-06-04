@@ -1485,7 +1485,7 @@ const PenyajianDataPage = () => {
                       {/* Mobil 10% = 36° */}
                       <path d="M100,100 L10,72.2 A90,90 0 0,1 100,10 Z" fill="#f43f5e" opacity="0.85" />
                       <circle cx="100" cy="100" r="35" fill="#1e293b" />
-                      <text x="100" y="95" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">DATA</text>
+                      <text x="100" y="95" textAnchor="middle" fill="var(--icon-color)" fontSize="10" fontWeight="bold">DATA</text>
                       <text x="100" y="110" textAnchor="middle" fill="#94a3b8" fontSize="8">TRANSPORTASI</text>
                     </svg>
                     {/* Legenda */}

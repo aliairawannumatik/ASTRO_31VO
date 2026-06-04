@@ -13,7 +13,7 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-violet-700/20 border border-cyan-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Data terurut: 4, 6, 7, 9, 10, 12, 15</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Data terurut: 4, 6, 7, 9, 10, 12, 15</text>
           {[4, 6, 7, 9, 10, 12, 15].map((n, i) => (
             <g key={i}>
               <rect x={25 + i * 35} y={50} width={28} height={30} rx={5}
@@ -22,7 +22,7 @@ const situations: SituationCard[] = [
                 stroke="#c4b5fd"
                 strokeWidth="1.5"
               />
-              <text x={39 + i * 35} y={71} fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">{n}</text>
+              <text x={39 + i * 35} y={71} fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{n}</text>
             </g>
           ))}
           <text x="39" y="100" fontSize="10" fill="#22d3ee" textAnchor="middle">MIN</text>
@@ -30,7 +30,7 @@ const situations: SituationCard[] = [
           <text x="140" y="125" fontSize="11" fill="#fde68a" textAnchor="middle">Jangkauan = Maks − Min</text>
           <text x="140" y="145" fontSize="11" fill="#fde68a" textAnchor="middle">= 15 − 4 = 11</text>
           <rect x="60" y="160" width="160" height="30" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="180" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">JANGKAUAN (Range) = 11</text>
+          <text x="140" y="180" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">JANGKAUAN (Range) = 11</text>
         </svg>
       </div>
     ),
@@ -43,7 +43,7 @@ const situations: SituationCard[] = [
       <div className="rounded-xl bg-gradient-to-br from-rose-500/20 to-amber-700/20 border border-rose-300/40 p-3">
         <svg viewBox="0 0 280 200" className="w-full">
           <rect width="280" height="200" fill="#0b1220" rx="8" />
-          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Data 4,6,7,9,10,12,15 → Q₁=6, Q₂=9, Q₃=12</text>
+          <text x="140" y="25" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Data 4,6,7,9,10,12,15 → Q₁=6, Q₂=9, Q₃=12</text>
           <line x1="20" y1="65" x2="260" y2="65" stroke="#94a3b8" strokeWidth="1" />
           <circle cx="50" cy="65" r="5" fill="#22d3ee" />
           <text x="50" y="55" fontSize="9" fill="#22d3ee" textAnchor="middle">Min=4</text>
@@ -57,9 +57,9 @@ const situations: SituationCard[] = [
           <line x1="100" y1="80" x2="220" y2="80" stroke="#fde68a" strokeWidth="2" />
           <text x="160" y="98" fontSize="10" fill="#fde68a" textAnchor="middle">JIK = Q₃ − Q₁ = 12 − 6 = 6</text>
           <rect x="40" y="110" width="200" height="30" rx="6" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="140" y="130" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Jangkauan Interkuartil = 6</text>
+          <text x="140" y="130" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Jangkauan Interkuartil = 6</text>
           <rect x="40" y="150" width="200" height="30" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="170" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">Simpangan Kuartil = ½ × JIK = 3</text>
+          <text x="140" y="170" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Simpangan Kuartil = ½ × JIK = 3</text>
         </svg>
       </div>
     ),

@@ -30,12 +30,12 @@ const TangentBasicSVG = () => (
     <circle cx="185" cy="100" r="5" fill="#fbbf24" className="tdot"/>
     <text x="190" y="94" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">T</text>
     {/* Right angle mark */}
-    <polyline points="185,100 185,88 173,88" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.8"/>
+    <polyline points="185,100 185,88 173,88" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.8"/>
     {/* Tangent line */}
     <line x1="185" y1="20" x2="185" y2="180" stroke="#fbbf24" strokeWidth="3" className="tang"/>
     <text x="196" y="35" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">garis singgung</text>
     {/* Right angle label */}
-    <text x="152" y="115" fill="#fff" fontSize="9" fontFamily="monospace" opacity="0.7">90°</text>
+    <text x="152" y="115" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" opacity="0.7">90°</text>
     {/* Secant line (for comparison) — dashed */}
     <line x1="50" y1="40" x2="220" y2="160" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5"/>
     <text x="225" y="165" fill="#94a3b8" fontSize="9" fontFamily="monospace" opacity="0.7">garis potong</text>
@@ -105,8 +105,8 @@ const SifatTegakLurusSVG = () => (
     <circle cx="170" cy="110" r="5" fill="#fbbf24"/>
     <text x="175" y="107" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">T</text>
     {/* Right angle mark */}
-    <polyline points="170,110 170,97 157,97" fill="none" stroke="#fff" strokeWidth="1.8" opacity="0.9"/>
-    <text x="145" y="128" fill="#fff" fontSize="10" fontFamily="monospace" opacity="0.8">90°</text>
+    <polyline points="170,110 170,97 157,97" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.8" opacity="0.9"/>
+    <text x="145" y="128" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" opacity="0.8">90°</text>
     {/* Tangent line */}
     <line x1="170" y1="30" x2="170" y2="190" stroke="#fbbf24" strokeWidth="3"/>
     {/* External point P */}

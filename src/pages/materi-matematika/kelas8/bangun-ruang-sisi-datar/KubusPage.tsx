@@ -379,7 +379,7 @@ const SimpleRotatableCube = () => {
               }}
             >
               <span style={{
-                color: "#fff",
+                color: "var(--icon-color)",
                 fontSize: 8,
                 fontWeight: 700,
                 letterSpacing: 1,
@@ -453,7 +453,7 @@ const FacePanel = ({
           boxShadow: isNext ? `0 0 20px ${color}` : `0 0 8px ${color}66`,
         }}
       >
-        <span style={{ color: "#fff", fontSize: 9, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
+        <span style={{ color: "var(--icon-color)", fontSize: 9, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
           {FACE_LABELS[face]}
         </span>
         {isNext ? (
@@ -461,7 +461,7 @@ const FacePanel = ({
             onClick={e => { e.stopPropagation(); onClickNext(); }}
             style={{
               marginTop: 5, background: "rgba(255,255,255,0.25)",
-              border: "1.5px solid white", borderRadius: 10, color: "#fff",
+              border: "1.5px solid var(--icon-stroke)", borderRadius: 10, color: "var(--icon-color)",
               fontSize: 7, fontWeight: 700, padding: "2px 7px",
               cursor: "pointer", letterSpacing: 0.5,
             }}
@@ -679,7 +679,7 @@ const InteractiveCube3D = () => {
                   pointerEvents: "none",
                 }}
               >
-                <span style={{ color: "#fff", fontSize: 9, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
+                <span style={{ color: "var(--icon-color)", fontSize: 9, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
                   {FACE_LABELS["back"]}
                 </span>
                 <span style={{ color: "rgba(255,255,255,0.7)", fontSize: 7, marginTop: 3, fontFamily: "monospace" }}>
@@ -853,7 +853,7 @@ const NetSVG = ({ cells }: { cells: [number, number][] }) => {
           x={(c - minC) * cs + 1.5} y={(r - minR) * cs + 1.5}
           width={cs - 3} height={cs - 3}
           fill={NET_COLORS[i]} rx={3} fillOpacity={0.9}
-          stroke="white" strokeWidth={1.5}
+          stroke="var(--icon-stroke)" strokeWidth={1.5}
         />
       ))}
     </svg>
@@ -993,7 +993,7 @@ const TitikSudutAnimSVG = () => (
     <text x="202" y="26" fill="#facc15" fontSize="10" fontFamily="monospace">G</text>
     <text x="202" y="142" fill="#facc15" fontSize="10" fontFamily="monospace">C</text>
     <text x="64" y="142" fill="#facc15" fontSize="10" fontFamily="monospace">D</text>
-    <text x="210" y="175" fill="#fff" fontSize="10" fontFamily="monospace">8 titik sudut</text>
+    <text x="210" y="175" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">8 titik sudut</text>
   </svg>
 );
 
@@ -1018,7 +1018,7 @@ const DiagonalBidangSVG = () => (
     <circle cx="40" cy="60" r="4" fill="#4ade80"/>
     <circle cx="160" cy="160" r="4" fill="#4ade80"/>
     <text x="62" y="120" fill="#4ade80" fontSize="10" fontFamily="monospace">d_b</text>
-    <text x="182" y="175" fill="#fff" fontSize="10" fontFamily="monospace">12 diagonal</text>
+    <text x="182" y="175" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">12 diagonal</text>
     <text x="182" y="188" fill="#4ade80" fontSize="10" fontFamily="monospace">s√2</text>
   </svg>
 );
@@ -1119,7 +1119,7 @@ const DiagonalRuangSVG = () => (
     <circle cx="40" cy="60" r="5" fill="#f87171"/>
     <circle cx="200" cy="130" r="5" fill="#f87171"/>
     <text x="95" y="100" fill="#f87171" fontSize="10" fontFamily="monospace">d_r</text>
-    <text x="182" y="175" fill="#fff" fontSize="10" fontFamily="monospace">4 diagonal</text>
+    <text x="182" y="175" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">4 diagonal</text>
     <text x="182" y="188" fill="#f87171" fontSize="10" fontFamily="monospace">s√3</text>
   </svg>
 );
@@ -1212,7 +1212,7 @@ const BidangDiagonalSVG = () => (
     <polygon points="40,60 200,30 200,130 40,160" fill="#a78bfa" className="bd-a"/>
     <polygon points="40,60 200,30 200,130 40,160" fill="none" stroke="#a78bfa" strokeWidth="2"/>
     <text x="95" y="105" fill="#a78bfa" fontSize="11" fontFamily="monospace" fontWeight="bold">EACG</text>
-    <text x="170" y="175" fill="#fff" fontSize="10" fontFamily="monospace">6 bidang</text>
+    <text x="170" y="175" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">6 bidang</text>
     <text x="170" y="188" fill="#a78bfa" fontSize="10" fontFamily="monospace">diagonal</text>
   </svg>
 );
@@ -1359,29 +1359,29 @@ const LuasPermukaanSVG = () => (
     </defs>
     {/* Cross net layout */}
     {/* Top */}
-    <rect x="122" y="10" width="70" height="70" fill="#eab308" className="lp1" rx="3" stroke="white" strokeWidth="1.5"/>
+    <rect x="122" y="10" width="70" height="70" fill="#eab308" className="lp1" rx="3" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
     <text x="157" y="44" fill="#000" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ATAS</text>
     <text x="157" y="59" fill="#000" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Left */}
-    <rect x="50" y="82" width="70" height="70" fill="#22c55e" className="lp2" rx="3" stroke="white" strokeWidth="1.5"/>
+    <rect x="50" y="82" width="70" height="70" fill="#22c55e" className="lp2" rx="3" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
     <text x="85" y="115" fill="#000" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">KIRI</text>
     <text x="85" y="130" fill="#000" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Front */}
-    <rect x="122" y="82" width="70" height="70" fill="#3b82f6" className="lp3" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="157" y="115" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">DEPAN</text>
-    <text x="157" y="130" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
+    <rect x="122" y="82" width="70" height="70" fill="#3b82f6" className="lp3" rx="3" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+    <text x="157" y="115" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">DEPAN</text>
+    <text x="157" y="130" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Right */}
-    <rect x="194" y="82" width="70" height="70" fill="#f97316" className="lp4" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="229" y="115" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">KANAN</text>
-    <text x="229" y="130" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
+    <rect x="194" y="82" width="70" height="70" fill="#f97316" className="lp4" rx="3" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+    <text x="229" y="115" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">KANAN</text>
+    <text x="229" y="130" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Back */}
-    <rect x="266" y="82" width="70" height="70" fill="#8b5cf6" className="lp5" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="301" y="115" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BELAK.</text>
-    <text x="301" y="130" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
+    <rect x="266" y="82" width="70" height="70" fill="#8b5cf6" className="lp5" rx="3" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+    <text x="301" y="115" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BELAK.</text>
+    <text x="301" y="130" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
     {/* Bottom */}
-    <rect x="122" y="154" width="70" height="70" fill="#ef4444" className="lp6" rx="3" stroke="white" strokeWidth="1.5"/>
-    <text x="157" y="187" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BAWAH</text>
-    <text x="157" y="202" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
+    <rect x="122" y="154" width="70" height="70" fill="#ef4444" className="lp6" rx="3" stroke="var(--icon-stroke)" strokeWidth="1.5"/>
+    <text x="157" y="187" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">BAWAH</text>
+    <text x="157" y="202" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = s²</text>
   </svg>
 );
 

@@ -79,7 +79,7 @@ const VennKardinalitas3 = () => (
       <text x="150" y="76" textAnchor="middle" fontSize="9" fill="#fde68a" fontFamily="monospace">A∩B</text>
       <text x="122" y="125" textAnchor="middle" fontSize="9" fill="#fca5a5" fontFamily="monospace">A∩C</text>
       <text x="178" y="125" textAnchor="middle" fontSize="9" fill="#6ee7b7" fontFamily="monospace">B∩C</text>
-      <text x="150" y="108" textAnchor="middle" fontSize="9" fill="#fff" fontFamily="monospace">A∩B∩C</text>
+      <text x="150" y="108" textAnchor="middle" fontSize="9" fill="var(--icon-color)" fontFamily="monospace">A∩B∩C</text>
     </svg>
   </div>
 );

@@ -156,7 +156,7 @@ function FactorTree({ tree, step }: { tree: TreeConfig; step: number }) {
                     x={node.x}
                     y={node.y + 5}
                     textAnchor="middle"
-                    fill="white"
+                    fill="var(--icon-color)"
                     fontSize="14"
                     fontWeight="bold"
                   >

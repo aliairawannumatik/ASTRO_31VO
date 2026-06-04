@@ -160,7 +160,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
               className="flex-1 font-display text-xs py-2.5 px-3 rounded-lg cursor-pointer transition-all duration-200 font-bold"
               style={activeTab === tab.key ? {
                 background: "linear-gradient(135deg, rgba(99,102,241,0.6), rgba(139,92,246,0.4))",
-                color: "white",
+                color: "var(--text-primary)",
                 boxShadow: "0 2px 12px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
                 border: "1px solid rgba(167,139,250,0.4)",
               } : {
@@ -430,7 +430,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                           className="font-display text-xs px-4 py-2 rounded-lg cursor-pointer transition-all duration-200 font-bold"
                           style={selected ? {
                             background: "linear-gradient(135deg, rgba(99,102,241,0.7), rgba(139,92,246,0.5))",
-                            color: "white",
+                            color: "var(--text-primary)",
                             border: "1px solid rgba(167,139,250,0.4)",
                             boxShadow: "0 2px 10px rgba(99,102,241,0.3)",
                           } : {

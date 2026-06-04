@@ -158,7 +158,7 @@ const questions: Q[] = [
         { x1: -4, y1: -8, x2: 2, y2: 4, color: "#f87171", label: "y=2x" },
         { x1: -4, y1: 4, x2: 4, y2: -4, color: "#60a5fa", label: "y=−x" },
       ],
-      pts: [{ x: 0, y: 0, label: "O", color: "white", labelPos: "br" }],
+      pts: [{ x: 0, y: 0, label: "O", color: "var(--text-primary)", labelPos: "br" }],
     },
     parts: [
       { label: "a.", text: "Tentukan gradien garis y = 2x." },

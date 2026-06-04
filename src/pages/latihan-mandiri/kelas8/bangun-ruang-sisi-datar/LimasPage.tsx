@@ -65,11 +65,11 @@ const LimasSegiempatSVG = ({
       <circle key={i} cx={x} cy={y} r="3" fill="#c084fc" />
     ))}
     {/* Labels */}
-    <text x="18" y="138" fill="white" fontSize="11" fontFamily="monospace">A</text>
-    <text x="132" y="138" fill="white" fontSize="11" fontFamily="monospace">B</text>
-    <text x="158" y="108" fill="white" fontSize="11" fontFamily="monospace">C</text>
-    <text x="44" y="105" fill="white" fontSize="11" fontFamily="monospace">D</text>
-    <text x="87" y="17" fill="white" fontSize="11" fontFamily="monospace">T</text>
+    <text x="18" y="138" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">A</text>
+    <text x="132" y="138" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">B</text>
+    <text x="158" y="108" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">C</text>
+    <text x="44" y="105" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">D</text>
+    <text x="87" y="17" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">T</text>
     {/* Dimension label */}
     <text x="80" y="148" fill="#c084fc" fontSize="10" textAnchor="middle">{s}</text>
     {!showHeight && <text x="155" y="75" fill="#c084fc" fontSize="10" textAnchor="middle">{t}</text>}
@@ -92,10 +92,10 @@ const LimasSegitigaSVG = () => (
     {[[20,125],[130,125],[75,90],[85,20]].map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="3" fill="#c084fc" />
     ))}
-    <text x="8" y="132" fill="white" fontSize="11" fontFamily="monospace">A</text>
-    <text x="133" y="132" fill="white" fontSize="11" fontFamily="monospace">B</text>
-    <text x="68" y="89" fill="white" fontSize="11" fontFamily="monospace">C</text>
-    <text x="82" y="15" fill="white" fontSize="11" fontFamily="monospace">T</text>
+    <text x="8" y="132" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">A</text>
+    <text x="133" y="132" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">B</text>
+    <text x="68" y="89" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">C</text>
+    <text x="82" y="15" fill="var(--icon-color)" fontSize="11" fontFamily="monospace">T</text>
     <text x="88" y="140" fill="#c084fc" fontSize="9" textAnchor="middle">Limas Segitiga</text>
   </svg>
 );
@@ -122,11 +122,11 @@ const LimasTinggiSVG = () => (
     {[[25,135],[130,135],[155,110],[50,110],[92,18]].map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#c084fc" />
     ))}
-    <text x="13" y="143" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="132" y="143" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="158" y="113" fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="39" y="110" fill="white" fontSize="10" fontFamily="monospace">D</text>
-    <text x="87" y="13" fill="white" fontSize="10" fontFamily="monospace">T</text>
+    <text x="13" y="143" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+    <text x="132" y="143" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+    <text x="158" y="113" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+    <text x="39" y="110" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">D</text>
+    <text x="87" y="13" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">T</text>
   </svg>
 );
 
@@ -174,7 +174,7 @@ const LimasSegiligaSVG = () => (
     {[[30,125],[95,135],[155,115],[140,85],[45,88],[92,15]].map(([x,y],i) => (
       <circle key={i} cx={x} cy={y} r="2.5" fill="#c084fc" />
     ))}
-    <text x="88" y="10" fill="white" fontSize="10" fontFamily="monospace">T</text>
+    <text x="88" y="10" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">T</text>
     <text x="92" y="148" fill="#c084fc" fontSize="9" textAnchor="middle">Limas Segilima</text>
   </svg>
 );

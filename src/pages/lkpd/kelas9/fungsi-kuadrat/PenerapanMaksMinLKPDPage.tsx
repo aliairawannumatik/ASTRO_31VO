@@ -38,12 +38,12 @@ const situations: SituationCard[] = [
           <text x="140" y="22" fontSize="11" fontWeight="bold" fill="#a7f3d0" textAnchor="middle">Kawat 40 m → persegi panjang</text>
           <text x="140" y="38" fontSize="10" fill="#fde68a" textAnchor="middle">2(p + l) = 40 → p + l = 20</text>
           <rect x="60" y="55" width="160" height="60" rx="4" fill="#34d399" fillOpacity="0.35" stroke="#6ee7b7" strokeWidth="2" />
-          <text x="140" y="92" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">L = p × l = (20 − l) × l</text>
+          <text x="140" y="92" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">L = p × l = (20 − l) × l</text>
           <text x="140" y="125" fontSize="10" fill="#fde68a" textAnchor="middle">L(l) = 20l − l² (FK!)</text>
           <rect x="20" y="138" width="240" height="22" rx="6" fill="#22d3ee" fillOpacity="0.4" />
-          <text x="140" y="154" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">{"a = −1 < 0 → ada MAKSIMUM"}</text>
+          <text x="140" y="154" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"a = −1 < 0 → ada MAKSIMUM"}</text>
           <rect x="20" y="165" width="240" height="22" rx="6" fill="#fbbf24" fillOpacity="0.4" />
-          <text x="140" y="181" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">l_opt = −20/(2·−1) = 10 → L = 100 m²</text>
+          <text x="140" y="181" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">l_opt = −20/(2·−1) = 10 → L = 100 m²</text>
         </svg>
       </div>
     ),

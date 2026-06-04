@@ -51,12 +51,12 @@ function FractionCircle({ cx, cy, r, numerator, denominator, fillColor, dimColor
           key={i}
           d={slicePath(cx, cy, r, denominator, i)}
           fill={i < numerator ? fillColor : dimColor}
-          stroke="white"
+          stroke="var(--icon-stroke)"
           strokeWidth="1.5"
           style={{ transition: "fill 0.5s ease" }}
         />
       ))}
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="white" strokeWidth="2" />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--icon-stroke)" strokeWidth="2" />
     </g>
   );
 }
@@ -214,7 +214,7 @@ export default function FractionDivisionAnimation() {
             numerator={n1} denominator={d1}
             fillColor={FILL1} dimColor={DIM1}
           />
-          <text x={CX1} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="13" fontFamily="serif">
+          <text x={CX1} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="13" fontFamily="serif">
             {n1}/{d1}
           </text>
           <text x={CX1} y={CY + R + 33} textAnchor="middle" fill="#e879f9" fontSize="10" fontFamily="serif">
@@ -240,7 +240,7 @@ export default function FractionDivisionAnimation() {
               glowColor={step === 1 ? "#f97316" : undefined}
             />
           </g>
-          <text x={CX2} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="13" fontFamily="serif">
+          <text x={CX2} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="13" fontFamily="serif">
             {circ2N}/{circ2D}
           </text>
 
@@ -277,7 +277,7 @@ export default function FractionDivisionAnimation() {
                 fillColor={FILL_RES} dimColor={DIM_RES}
                 glowColor="#a78bfa"
               />
-              <text x={CX3} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="12" fontFamily="serif">
+              <text x={CX3} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="12" fontFamily="serif">
                 {resNum}/{resDen}
               </text>
               {isSimplified && (

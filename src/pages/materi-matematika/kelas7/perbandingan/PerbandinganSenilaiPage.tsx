@@ -325,7 +325,7 @@ const PerbandinganSenilaiPage = () => {
                         <line x1="225" y1="35" x2="75" y2="105" stroke="#fb923c" strokeWidth="2.5" strokeDasharray="6 3" />
                         {/* Titik persilangan */}
                         <circle cx="150" cy="70" r="5" fill="#ffffff" fillOpacity="0.15" stroke="#ffffff" strokeOpacity="0.4" strokeWidth="1.5" />
-                        <text x="150" y="74" textAnchor="middle" fontSize="8" fill="white" fillOpacity="0.5">×</text>
+                        <text x="150" y="74" textAnchor="middle" fontSize="8" fill="var(--icon-color)" fillOpacity="0.5">×</text>
                       </svg>
 
                       {/* Kotak a₁ — kiri atas */}

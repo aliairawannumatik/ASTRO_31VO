@@ -397,7 +397,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
                 />
                 {/* T₁ label at centroid */}
                 <text x={cx} y={cy+4} textAnchor="middle"
-                  fill="white" fontSize="10" fontWeight="bold"
+                  fill="var(--icon-color)" fontSize="10" fontWeight="bold"
                   fontFamily="monospace" opacity="0.9"
                 >{["T₁","T₂","T₃","T₄"][i]}</text>
               </g>
@@ -443,7 +443,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
       <div
         className="w-full max-w-sm rounded-lg px-4 py-3 text-center border transition-all duration-500"
         style={{
-          background: "rgba(15,23,42,0.85)",
+          background: "var(--bg-card)",
           borderColor: step === 3 && animDone
             ? "rgba(34,197,94,0.6)"
             : step === 2

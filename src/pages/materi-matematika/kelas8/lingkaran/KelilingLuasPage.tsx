@@ -46,7 +46,7 @@ const AreaCompareSVG = () => (
         stroke={i%2===0?"#ef4444":"#fbbf24"} strokeWidth="1" className="sf"
         style={{animationDelay:`${i*0.1}s`}}/>
     ))}
-    <circle cx="150" cy="90" r="4" fill="#fff"/>
+    <circle cx="150" cy="90" r="4" fill="var(--icon-color)"/>
     <line x1="150" y1="90" x2="225" y2="90" stroke="#22c55e" strokeWidth="2" strokeDasharray="4 2"/>
     <text x="187" y="84" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold">r</text>
     <text x="150" y="172" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">L = π × r²  (luas semua juring = luas lingkaran)</text>

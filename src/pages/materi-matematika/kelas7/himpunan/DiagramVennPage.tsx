@@ -52,7 +52,7 @@ const VennUnion = () => (
     <circle cx="175" cy="80" r="52" fill="#7c3aed" stroke="#a78bfa" strokeWidth="2" fillOpacity="0.85" />
     <text x="80" y="82" textAnchor="middle" fontSize="13" fill="#bfdbfe" fontWeight="bold" fontFamily="sans-serif">A</text>
     <text x="200" y="82" textAnchor="middle" fontSize="13" fill="#ddd6fe" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="140" y="82" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="sans-serif">∪</text>
+    <text x="140" y="82" textAnchor="middle" fontSize="11" fill="var(--icon-color)" fontFamily="sans-serif">∪</text>
     <text x="230" y="148" textAnchor="middle" fontSize="10" fill="#475569" fontFamily="monospace">A ∪ B</text>
   </VennBase>
 );
@@ -67,7 +67,7 @@ const VennIntersection = () => (
     <circle cx="175" cy="80" r="52" fill="#10b981" stroke="none" fillOpacity="0.85" clipPath="url(#clipA)" />
     <text x="80" y="82" textAnchor="middle" fontSize="13" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
     <text x="200" y="82" textAnchor="middle" fontSize="13" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
-    <text x="140" y="82" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="sans-serif">∩</text>
+    <text x="140" y="82" textAnchor="middle" fontSize="11" fill="var(--icon-color)" fontFamily="sans-serif">∩</text>
     <text x="230" y="148" textAnchor="middle" fontSize="10" fill="#475569" fontFamily="monospace">A ∩ B</text>
   </VennBase>
 );
@@ -79,7 +79,7 @@ const VennDifferenceAB = () => (
     </clipPath>
     <circle cx="105" cy="80" r="52" fill="#f59e0b" stroke="#fbbf24" strokeWidth="2" fillOpacity="0.85" />
     <circle cx="175" cy="80" r="52" fill="#0f172a" stroke="#8b5cf6" strokeWidth="2" fillOpacity="0.95" />
-    <text x="80" y="82" textAnchor="middle" fontSize="13" fill="#fff" fontWeight="bold" fontFamily="sans-serif">A</text>
+    <text x="80" y="82" textAnchor="middle" fontSize="13" fill="var(--icon-color)" fontWeight="bold" fontFamily="sans-serif">A</text>
     <text x="200" y="82" textAnchor="middle" fontSize="13" fill="#c4b5fd" fontWeight="bold" fontFamily="sans-serif">B</text>
     <text x="230" y="148" textAnchor="middle" fontSize="10" fill="#475569" fontFamily="monospace">A − B</text>
   </VennBase>
@@ -90,7 +90,7 @@ const VennDifferenceBA = () => (
     <circle cx="105" cy="80" r="52" fill="#0f172a" stroke="#3b82f6" strokeWidth="2" fillOpacity="0.95" />
     <circle cx="175" cy="80" r="52" fill="#f43f5e" stroke="#fb7185" strokeWidth="2" fillOpacity="0.85" />
     <text x="80" y="82" textAnchor="middle" fontSize="13" fill="#93c5fd" fontWeight="bold" fontFamily="sans-serif">A</text>
-    <text x="200" y="82" textAnchor="middle" fontSize="13" fill="#fff" fontWeight="bold" fontFamily="sans-serif">B</text>
+    <text x="200" y="82" textAnchor="middle" fontSize="13" fill="var(--icon-color)" fontWeight="bold" fontFamily="sans-serif">B</text>
     <text x="230" y="148" textAnchor="middle" fontSize="10" fill="#475569" fontFamily="monospace">B − A</text>
   </VennBase>
 );

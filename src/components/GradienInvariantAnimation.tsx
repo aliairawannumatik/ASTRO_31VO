@@ -95,7 +95,7 @@ export default function GradienInvariantAnimation() {
           : "❌ Garis turun ke kanan bawah → gradien NEGATIF (−2/3)"}
       </div>
 
-      <div className="rounded-xl overflow-hidden" style={{ background: "rgba(8,16,32,0.92)" }}>
+      <div className="rounded-xl overflow-hidden" style={{ background: "var(--bg-card)" }}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%">
           {[1,2,3,4,5,6,7,8].map(v => (
             <g key={v}>

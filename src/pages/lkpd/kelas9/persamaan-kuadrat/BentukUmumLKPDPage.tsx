@@ -16,16 +16,16 @@ const situations: SituationCard[] = [
           <text x="140" y="28" fontSize="14" fontWeight="bold" fill="#a78bfa" textAnchor="middle">ax² + bx + c = 0</text>
           <text x="140" y="50" fontSize="10" fill="#fde68a" textAnchor="middle">a, b, c bilangan real, a ≠ 0</text>
           <rect x="20" y="70" width="70" height="60" rx="8" fill="#22d3ee" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5" />
-          <text x="55" y="92" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">a = 2</text>
+          <text x="55" y="92" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">a = 2</text>
           <text x="55" y="112" fontSize="9" fill="#fde68a" textAnchor="middle">koef. x²</text>
           <rect x="105" y="70" width="70" height="60" rx="8" fill="#a78bfa" fillOpacity="0.4" stroke="#c4b5fd" strokeWidth="1.5" />
-          <text x="140" y="92" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">b = -5</text>
+          <text x="140" y="92" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">b = -5</text>
           <text x="140" y="112" fontSize="9" fill="#fde68a" textAnchor="middle">koef. x</text>
           <rect x="190" y="70" width="70" height="60" rx="8" fill="#fbbf24" fillOpacity="0.4" stroke="#fde68a" strokeWidth="1.5" />
-          <text x="225" y="92" fontSize="11" fontWeight="bold" fill="#fff" textAnchor="middle">c = 3</text>
+          <text x="225" y="92" fontSize="11" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">c = 3</text>
           <text x="225" y="112" fontSize="9" fill="#fde68a" textAnchor="middle">konstanta</text>
           <rect x="40" y="150" width="200" height="32" rx="6" fill="#34d399" fillOpacity="0.45" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="172" fontSize="13" fontWeight="bold" fill="#fff" textAnchor="middle">Contoh: 2x² − 5x + 3 = 0</text>
+          <text x="140" y="172" fontSize="13" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">Contoh: 2x² − 5x + 3 = 0</text>
         </svg>
       </div>
     ),
@@ -40,13 +40,13 @@ const situations: SituationCard[] = [
           <rect width="280" height="200" fill="#0b1220" rx="8" />
           <text x="140" y="25" fontSize="11" fontWeight="bold" fill="#fda4af" textAnchor="middle">Mana yang BUKAN persamaan kuadrat?</text>
           <rect x="20" y="45" width="240" height="32" rx="6" fill="#34d399" fillOpacity="0.4" stroke="#6ee7b7" strokeWidth="1.5" />
-          <text x="140" y="67" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">{"✓ x² − 4x + 4 = 0  (PK)"}</text>
+          <text x="140" y="67" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"✓ x² − 4x + 4 = 0  (PK)"}</text>
           <rect x="20" y="82" width="240" height="32" rx="6" fill="#ef4444" fillOpacity="0.4" stroke="#fca5a5" strokeWidth="1.5" />
-          <text x="140" y="104" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">{"✗ 3x − 7 = 0  (linear, pangkat 1)"}</text>
+          <text x="140" y="104" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"✗ 3x − 7 = 0  (linear, pangkat 1)"}</text>
           <rect x="20" y="119" width="240" height="32" rx="6" fill="#ef4444" fillOpacity="0.4" stroke="#fca5a5" strokeWidth="1.5" />
-          <text x="140" y="141" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">{"✗ x³ + 2x² = 0  (kubik, pangkat 3)"}</text>
+          <text x="140" y="141" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"✗ x³ + 2x² = 0  (kubik, pangkat 3)"}</text>
           <rect x="20" y="156" width="240" height="32" rx="6" fill="#ef4444" fillOpacity="0.4" stroke="#fca5a5" strokeWidth="1.5" />
-          <text x="140" y="178" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">{"✗ 0x² + 3x − 1 = 0  (a = 0)"}</text>
+          <text x="140" y="178" fontSize="12" fontWeight="bold" fill="var(--icon-color)" textAnchor="middle">{"✗ 0x² + 3x − 1 = 0  (a = 0)"}</text>
         </svg>
       </div>
     ),

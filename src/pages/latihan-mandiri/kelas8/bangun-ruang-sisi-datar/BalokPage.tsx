@@ -42,14 +42,14 @@ const BalokSVG = ({ wide = false }: { wide?: boolean }) => {
       <line x1="15" y1={H+D} x2={D+15} y2={H+10} stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
       <line x1={D+15} y1={H+10} x2={W+D+15} y2={H+10} stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
       <line x1={D+15} y1={H+10} x2={D+15} y2="10" stroke="#34d399" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-      <text x="2"        y={H+D+4}  fill="white" fontSize="10" fontFamily="monospace">A</text>
-      <text x={W+17}     y={H+D+4}  fill="white" fontSize="10" fontFamily="monospace">B</text>
-      <text x={W+D+17}   y={H+12}   fill="white" fontSize="10" fontFamily="monospace">C</text>
-      <text x={D+16}     y={H+12}   fill="white" fontSize="10" fontFamily="monospace">D</text>
-      <text x="2"        y={D-2}    fill="white" fontSize="10" fontFamily="monospace">E</text>
-      <text x={W+17}     y={D-2}    fill="white" fontSize="10" fontFamily="monospace">F</text>
-      <text x={W+D+17}   y="8"      fill="white" fontSize="10" fontFamily="monospace">G</text>
-      <text x={D+16}     y="8"      fill="white" fontSize="10" fontFamily="monospace">H</text>
+      <text x="2"        y={H+D+4}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+      <text x={W+17}     y={H+D+4}  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+      <text x={W+D+17}   y={H+12}   fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+      <text x={D+16}     y={H+12}   fill="var(--icon-color)" fontSize="10" fontFamily="monospace">D</text>
+      <text x="2"        y={D-2}    fill="var(--icon-color)" fontSize="10" fontFamily="monospace">E</text>
+      <text x={W+17}     y={D-2}    fill="var(--icon-color)" fontSize="10" fontFamily="monospace">F</text>
+      <text x={W+D+17}   y="8"      fill="var(--icon-color)" fontSize="10" fontFamily="monospace">G</text>
+      <text x={D+16}     y="8"      fill="var(--icon-color)" fontSize="10" fontFamily="monospace">H</text>
     </svg>
   );
 };
@@ -91,14 +91,14 @@ const DiagonalBalokSVG = () => (
     <line x1="15" y1="105" x2="115" y2="45" stroke="#f472b6" strokeWidth="1.5" />
     <text x="70" y="125" fill="#f59e0b" fontSize="9" textAnchor="middle">diagonal ruang</text>
     <text x="50" y="80" fill="#f472b6" fontSize="9" textAnchor="middle">d sisi</text>
-    <text x="2"   y="110" fill="white" fontSize="10" fontFamily="monospace">A</text>
-    <text x="117" y="110" fill="white" fontSize="10" fontFamily="monospace">B</text>
-    <text x="152" y="77"  fill="white" fontSize="10" fontFamily="monospace">C</text>
-    <text x="42"  y="77"  fill="white" fontSize="10" fontFamily="monospace">D</text>
-    <text x="2"   y="43"  fill="white" fontSize="10" fontFamily="monospace">E</text>
-    <text x="117" y="43"  fill="white" fontSize="10" fontFamily="monospace">F</text>
-    <text x="152" y="13"  fill="white" fontSize="10" fontFamily="monospace">G</text>
-    <text x="42"  y="13"  fill="white" fontSize="10" fontFamily="monospace">H</text>
+    <text x="2"   y="110" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">A</text>
+    <text x="117" y="110" fill="var(--icon-color)" fontSize="10" fontFamily="monospace">B</text>
+    <text x="152" y="77"  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">C</text>
+    <text x="42"  y="77"  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">D</text>
+    <text x="2"   y="43"  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">E</text>
+    <text x="117" y="43"  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">F</text>
+    <text x="152" y="13"  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">G</text>
+    <text x="42"  y="13"  fill="var(--icon-color)" fontSize="10" fontFamily="monospace">H</text>
   </svg>
 );
 

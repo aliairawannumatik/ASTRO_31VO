@@ -50,12 +50,12 @@ function FractionCircle({ cx, cy, r, numerator, denominator, fillColor, dimColor
           key={i}
           d={slicePath(cx, cy, r, denominator, i)}
           fill={i < numerator ? fillColor : dimColor}
-          stroke="white"
+          stroke="var(--icon-stroke)"
           strokeWidth="1.5"
           style={{ transition: "fill 0.5s ease" }}
         />
       ))}
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="white" strokeWidth="2" />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--icon-stroke)" strokeWidth="2" />
     </g>
   );
 }
@@ -190,7 +190,7 @@ export default function FractionMultiplicationAnimation() {
             fillColor={FILL1} dimColor={DIM1}
             glowColor={step === 1 ? "#e879f9" : undefined}
           />
-          <text x={CX1} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="13" fontFamily="serif">
+          <text x={CX1} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="13" fontFamily="serif">
             {n1}/{d1}
           </text>
 
@@ -207,7 +207,7 @@ export default function FractionMultiplicationAnimation() {
           )}
 
           {/* × operator */}
-          <text x="160" y={CY + 8} textAnchor="middle" fill="white" fontSize="28" fontWeight="bold" fontFamily="sans-serif">×</text>
+          <text x="160" y={CY + 8} textAnchor="middle" fill="var(--icon-color)" fontSize="28" fontWeight="bold" fontFamily="sans-serif">×</text>
 
           {/* Circle 2 */}
           <FractionCircle
@@ -216,7 +216,7 @@ export default function FractionMultiplicationAnimation() {
             fillColor={FILL2} dimColor={DIM2}
             glowColor={step === 2 ? "#22d3ee" : undefined}
           />
-          <text x={CX2} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="13" fontFamily="serif">
+          <text x={CX2} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="13" fontFamily="serif">
             {n2}/{d2}
           </text>
 
@@ -248,7 +248,7 @@ export default function FractionMultiplicationAnimation() {
                 fillColor={FILL_RES} dimColor={DIM_RES}
                 glowColor="#a78bfa"
               />
-              <text x={CX3} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="12" fontFamily="serif">
+              <text x={CX3} y={CY + R + 18} textAnchor="middle" fill="var(--icon-color)" fontSize="12" fontFamily="serif">
                 {resNum}/{resDen}
               </text>
               {isSimplified && (
