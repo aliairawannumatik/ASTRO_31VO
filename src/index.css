@@ -10,7 +10,7 @@
   --bg-card:        #1a1a35;
   --text-primary:   #ffffff;
   --text-secondary: #a0a0c0;
-  --btn-bg:         #1e1e40;
+  --btn-bg:         #0f172a;
   --btn-hover:      #2a2a55;
   --icon-color:     #ffffff;
   --icon-stroke:    #ffffff;
@@ -28,8 +28,8 @@
   --text-primary:   #0a0a1a;
   --text-secondary: #2a2a4a;
   --text-tertiary:  #444466;
-  --btn-bg:         #dde3f5;
-  --btn-hover:      #c8d0ea;
+  --btn-bg:         #1e3a8a;
+  --btn-hover:      #1e40af;
   --icon-color:     #0a0a1a;
   --icon-stroke:    #0a0a1a;
   --numatik-accent: #4f46e5;
@@ -38,7 +38,7 @@
 }
 
 [data-theme="white"] {
-  --btn-bg: #e8eeff;
+  --btn-bg: #1e3a5f;
 }
 
 [data-theme="forest"] {
@@ -47,7 +47,7 @@
   --bg-card:        #ffffff;
   --text-primary:   #14532d;
   --text-secondary: #166534;
-  --btn-bg:         #bbf7d0;
+  --btn-bg:         #14532d;
   --btn-hover:      #86efac;
   --icon-color:     #14532d;
   --icon-stroke:    #14532d;
@@ -62,7 +62,7 @@
   --bg-card:        #0e4a75;
   --text-primary:   #e0f2fe;
   --text-secondary: #7dd3fc;
-  --btn-bg:         #075985;
+  --btn-bg:         #0c4a6e;
   --btn-hover:      #0369a1;
   --icon-color:     #e0f2fe;
   --icon-stroke:    #e0f2fe;
@@ -77,7 +77,7 @@
   --bg-card:        #3b1060;
   --text-primary:   #fef3c7;
   --text-secondary: #fcd34d;
-  --btn-bg:         #6b21a8;
+  --btn-bg:         #7c2d12;
   --btn-hover:      #7c3aed;
   --icon-color:     #fef3c7;
   --icon-stroke:    #fef3c7;

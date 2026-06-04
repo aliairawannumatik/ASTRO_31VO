@@ -85,7 +85,7 @@ const GameSubtopicPage = ({
                   ${isComingSoon ? "cursor-default opacity-70" : "cursor-pointer hover:scale-[1.015]"}`}
                 style={{
                   animationDelay: `${i * 0.05}s`,
-                  background: '#0f172a',
+                  background: 'var(--btn-bg)',
                   boxShadow: `0 2px 20px rgba(0,0,0,0.4)`,
                 }}
                 onMouseEnter={(e) => {
