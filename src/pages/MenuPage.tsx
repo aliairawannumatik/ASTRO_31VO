@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
+import { useTheme } from "@/contexts/ThemeContext";
 import {
   Info,
   BookMarked,
@@ -50,6 +51,8 @@ const menuItems = [
 
 const MenuPage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isWhite = theme === "white";
 
   const handleClick = (path: string) => {
     playPopSound();
@@ -74,11 +77,30 @@ const MenuPage = () => {
               className="water-btn group relative bg-card/80 backdrop-blur border border-border rounded-xl p-6 
                 hover:border-primary/60 hover:box-glow-cyan transition-all duration-300 
                 cursor-pointer text-left animate-slide-up"
-              style={{ animationDelay: `${i * 0.1}s` }}
+              style={{
+                animationDelay: `${i * 0.1}s`,
+                ...(isWhite && {
+                  background: "linear-gradient(to right, #2196f3, #00bcd4)",
+                  border: "none",
+                }),
+              }}
             >
-              <item.icon className="w-8 h-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-              <h3 className="font-display text-[11px] sm:text-base font-bold text-foreground mb-1 leading-tight">{item.label}</h3>
-              <p className="text-xs text-muted-foreground">{item.desc}</p>
+              <item.icon
+                className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform"
+                style={{ color: isWhite ? "#ffffff" : undefined }}
+              />
+              <h3
+                className="font-display text-[11px] sm:text-base font-bold mb-1 leading-tight"
+                style={{ color: isWhite ? "#ffffff" : undefined }}
+              >
+                {item.label}
+              </h3>
+              <p
+                className="text-xs"
+                style={{ color: isWhite ? "rgba(255,255,255,0.8)" : undefined }}
+              >
+                {item.desc}
+              </p>
             </button>
           ))}
         </div>
