@@ -2404,3 +2404,199 @@
 .numatik-underline {
   animation: numatik-underline-pulse 1.8s ease-in-out infinite;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   WHITE THEME FIXES — 7 components
+   All rules scoped to [data-theme="white"] — zero impact on
+   dark / light / ocean / forest / sunset themes.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. KALKULATOR SCIENTIFIC ── */
+
+/* Display screen */
+[data-theme="white"] .bg-gradient-to-b.from-cyan-900\/20.to-slate-900\/40 {
+  background: var(--bg-card) !important;
+  border-color: rgba(0,119,182,0.2) !important;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+[data-theme="white"] .bg-gradient-to-b.from-cyan-900\/20.to-slate-900\/40 .text-cyan-300\/90,
+[data-theme="white"] .bg-gradient-to-b.from-cyan-900\/20.to-slate-900\/40 .text-cyan-300\/80 {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .bg-gradient-to-b.from-cyan-900\/20.to-slate-900\/40 .text-white\/50 {
+  color: var(--text-secondary) !important;
+}
+[data-theme="white"] .bg-gradient-to-b.from-cyan-900\/20.to-slate-900\/40 .text-white {
+  color: var(--text-primary) !important;
+}
+
+/* History panel */
+[data-theme="white"] .bg-slate-900\/95 {
+  background: var(--bg-card) !important;
+  border-color: rgba(0,119,182,0.2) !important;
+}
+[data-theme="white"] .bg-slate-900\/95 .text-white\/40,
+[data-theme="white"] .bg-slate-900\/95 .text-white\/50 {
+  color: var(--text-secondary) !important;
+}
+
+/* Function / operator buttons (bg-slate-700/50, bg-slate-700/60) */
+[data-theme="white"] .bg-slate-700\/50 {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+[data-theme="white"] .bg-slate-700\/60 {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+[data-theme="white"] .hover\:bg-slate-600\/60:hover {
+  background: #d1d9ee !important;
+}
+/* Sub-labels on function buttons */
+[data-theme="white"] .bg-slate-700\/50 .text-purple-400,
+[data-theme="white"] .bg-slate-700\/60 .text-purple-400 {
+  color: #7c3aed !important;
+}
+[data-theme="white"] .bg-slate-700\/50 .text-amber-400,
+[data-theme="white"] .bg-slate-700\/60 .text-amber-400 {
+  color: #b45309 !important;
+}
+
+/* Angle/mode badge */
+[data-theme="white"] .bg-cyan-500\/30.text-cyan-400 {
+  background: rgba(0,119,182,0.15) !important;
+  color: #0077b6 !important;
+}
+[data-theme="white"] .bg-purple-500\/30.text-purple-400 {
+  background: rgba(124,58,237,0.12) !important;
+  color: #7c3aed !important;
+}
+
+/* ── 2. TENTANG APLIKASI — hardcoded #0d0d2b sections ── */
+[data-theme="white"] .bg-\[\#0d0d2b\] {
+  background: var(--bg-card) !important;
+  border: 1px solid rgba(0,119,182,0.12) !important;
+}
+[data-theme="white"] .bg-\[\#0d0d2b\] .text-white {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .bg-\[\#0d0d2b\] p.text-white,
+[data-theme="white"] .bg-\[\#0d0d2b\] p {
+  color: var(--text-primary) !important;
+}
+
+/* ── 3. BIOGRAFI — photo border + card text ── */
+[data-theme="white"] .border-primary\/40 {
+  border-color: rgba(0,119,182,0.4) !important;
+}
+/* White text inside Biografi card */
+[data-theme="white"] .bg-card\/80 p.text-white,
+[data-theme="white"] .bg-card\/80 .text-white {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .bg-card\/80 .text-white\/60 {
+  color: var(--text-secondary) !important;
+}
+
+/* ── 4. BANK SOAL — card buttons ── */
+/* bg-card/80 uses shadcn --card which may still be dark; override */
+[data-theme="white"] button.bg-card\/80 {
+  background: var(--bg-card) !important;
+  border-color: rgba(0,119,182,0.12) !important;
+}
+[data-theme="white"] .text-foreground {
+  color: var(--text-primary) !important;
+}
+
+/* ── 5. KUMPULAN RUMUS — search box + category cards + table ── */
+
+/* Search input */
+[data-theme="white"] input.bg-white\/5 {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(0,119,182,0.15) !important;
+}
+[data-theme="white"] input.bg-white\/5::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.6;
+}
+
+/* Category card (closed) — bg-white/[0.03] */
+[data-theme="white"] .bg-white\/\[0\.03\] {
+  background: var(--bg-secondary) !important;
+}
+[data-theme="white"] .hover\:bg-white\/\[0\.06\]:hover {
+  background: #d0d8ee !important;
+}
+
+/* Icon badge inside closed category card */
+[data-theme="white"] .bg-white\/5.border-white\/10 {
+  background: var(--bg-secondary) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+[data-theme="white"] .border-white\/10 {
+  border-color: rgba(0,0,0,0.08) !important;
+}
+
+/* Table inner wrapper */
+[data-theme="white"] .bg-black\/30 {
+  background: #f0f4fb !important;
+}
+[data-theme="white"] .bg-black\/30 .border-white\/10,
+[data-theme="white"] .bg-black\/30 .border-white\/5 {
+  border-color: rgba(0,0,0,0.07) !important;
+}
+
+/* Table row text */
+[data-theme="white"] .bg-black\/30 .text-white\/70,
+[data-theme="white"] .bg-black\/30 .text-white\/60,
+[data-theme="white"] .bg-black\/30 .text-white\/50 {
+  color: var(--text-secondary) !important;
+}
+
+/* Section banner text */
+[data-theme="white"] .text-white\/45,
+[data-theme="white"] .text-white\/50 {
+  color: var(--text-secondary) !important;
+}
+
+/* Filter pill (inactive) text */
+[data-theme="white"] .bg-white\/\[0\.03\] .text-white\/50,
+[data-theme="white"] .bg-white\/\[0\.03\] .text-white\/80 {
+  color: var(--text-primary) !important;
+}
+
+/* ── 6. TKA — text colours for topic items ── */
+/* (card backgrounds fixed in TSX via isWhite inline styles)  */
+[data-theme="white"] .text-white\/80 {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .text-white\/30 {
+  color: var(--text-secondary) !important;
+  opacity: 0.6;
+}
+
+/* InfoSection accordion (bg-white/5) */
+[data-theme="white"] .bg-white\/5.backdrop-blur {
+  background: var(--bg-secondary) !important;
+}
+[data-theme="white"] .bg-white\/5.backdrop-blur .text-white {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .bg-white\/5.backdrop-blur .text-white\/30 {
+  color: var(--text-secondary) !important;
+  opacity: 0.5;
+}
+
+/* ── General white-theme text overrides (nav links, footers, labels) ── */
+[data-theme="white"] .text-white\/40 {
+  color: var(--text-secondary) !important;
+  opacity: 0.7;
+}
+[data-theme="white"] .text-white\/55,
+[data-theme="white"] .text-white\/60,
+[data-theme="white"] .text-white\/70 {
+  color: var(--text-secondary) !important;
+}

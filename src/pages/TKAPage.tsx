@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const tips = [
   {
@@ -208,6 +209,8 @@ const SectionToggleHeader = ({
 
 const TKAPage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isWhite = theme === "white";
   const [infoOpen, setInfoOpen] = useState<string[]>([]);
   const [showTentang, setShowTentang] = useState(false);
   const [showPaket, setShowPaket] = useState(false);
@@ -439,14 +442,14 @@ const TKAPage = () => {
             {kelasList.map((kelas) => (
               <div key={kelas.label} className="rounded-2xl overflow-hidden"
                 style={{
-                  border: `1px solid ${kelas.headerBorder}`,
-                  boxShadow: `0 4px 24px ${kelas.glow}`,
-                  background: "rgba(10,10,30,0.7)",
+                  border: `1px solid ${isWhite ? "rgba(0,119,182,0.2)" : kelas.headerBorder}`,
+                  boxShadow: `0 4px 24px ${isWhite ? "rgba(0,119,182,0.08)" : kelas.glow}`,
+                  background: isWhite ? "var(--bg-card)" : "rgba(10,10,30,0.7)",
                 }}>
 
                 {/* Section header */}
                 <div className="flex items-center gap-4 px-4 py-3"
-                  style={{ background: kelas.headerBg, borderBottom: `1px solid ${kelas.headerBorder}` }}>
+                  style={{ background: isWhite ? "var(--bg-secondary)" : kelas.headerBg, borderBottom: `1px solid ${isWhite ? "rgba(0,119,182,0.15)" : kelas.headerBorder}` }}>
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 font-display font-black text-base"
                     style={{ background: kelas.iconBg, border: `1.5px solid ${kelas.headerBorder}`, color: kelas.accent }}>
                     {kelas.grade}
@@ -475,11 +478,11 @@ const TKAPage = () => {
                         className={`group flex items-center gap-3 w-full rounded-xl px-3 py-2.5 text-left transition-all duration-200
                           ${hasRoute ? "cursor-pointer hover:-translate-y-0.5 active:translate-y-0" : "cursor-not-allowed opacity-35"}`}
                         style={hasRoute ? {
-                          background: "rgba(255,255,255,0.04)",
-                          border: "1px solid rgba(255,255,255,0.07)",
+                          background: isWhite ? "var(--bg-secondary)" : "rgba(255,255,255,0.04)",
+                          border: isWhite ? "1px solid rgba(0,119,182,0.12)" : "1px solid rgba(255,255,255,0.07)",
                         } : {
-                          background: "rgba(255,255,255,0.02)",
-                          border: "1px solid rgba(255,255,255,0.04)",
+                          background: isWhite ? "rgba(0,0,0,0.03)" : "rgba(255,255,255,0.02)",
+                          border: isWhite ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.04)",
                         }}
                         onMouseEnter={e => {
                           if (hasRoute) {
@@ -499,7 +502,7 @@ const TKAPage = () => {
                           {ti + 1}
                         </span>
                         <span className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-sm"
-                          style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                          style={{ background: isWhite ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.3)", border: isWhite ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.06)" }}>
                           {topic.emoji}
                         </span>
                         <span className="flex-1 font-body text-sm font-medium leading-snug text-white/80 group-hover:text-white transition-colors">

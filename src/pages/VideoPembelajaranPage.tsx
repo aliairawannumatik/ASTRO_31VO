@@ -210,6 +210,7 @@ const KELAS_FILTERS = ["Semua", "Kelas 7", "Kelas 8", "Kelas 9"];
 const VideoPembelajaranPage = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const isWhite = theme === "white";
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [liked, setLiked] = useState(false);
@@ -261,7 +262,7 @@ const VideoPembelajaranPage = () => {
 
   return (
     <div className={`relative min-h-screen flex flex-col overflow-x-hidden ${d ? "gradient-space" : "gradient-snow"}`}>
-      {d ? <Starfield /> : <Snowfall />}
+      {isDark ? <Starfield /> : (!isWhite && <Snowfall />)}
       <PageNavigation />
 
       {/* ─── HERO BANNER ─── */}
