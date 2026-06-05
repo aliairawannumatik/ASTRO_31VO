@@ -179,11 +179,11 @@ const TKAModulPemantapanPage = () => {
         {/* ── Per-Kelas Sections ── */}
         <div className="flex flex-col gap-6">
           {kelasList.map((kelas, ki) => (
-            <div key={kelas.label} className="rounded-2xl overflow-hidden"
+            <div key={kelas.label} className={`rounded-2xl overflow-hidden${isWhite ? " kelas-blue-card" : ""}`}
               style={isWhite ? {
-                border: "1px solid var(--border)",
-                boxShadow: "0 4px 24px var(--shadow)",
-                background: "var(--bg-card)",
+                border: "1px solid rgba(33,150,243,0.4)",
+                boxShadow: "0 4px 32px rgba(33,150,243,0.2)",
+                background: "linear-gradient(to right, #2196f3, #00bcd4)",
               } : {
                 border: `1px solid ${kelas.headerBorder}`,
                 boxShadow: `0 4px 32px ${kelas.glow}`,
@@ -192,19 +192,21 @@ const TKAModulPemantapanPage = () => {
 
               {/* Section header */}
               <div className="flex items-center gap-4 px-5 py-4"
-                style={isWhite ? { background: "var(--bg-secondary)", borderBottom: "1px solid var(--border)" } : { background: kelas.headerBg, borderBottom: `1px solid ${kelas.headerBorder}` }}>
+                style={isWhite ? { background: "rgba(255,255,255,0.12)", borderBottom: "1px solid rgba(255,255,255,0.2)" } : { background: kelas.headerBg, borderBottom: `1px solid ${kelas.headerBorder}` }}>
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 font-display font-black text-lg"
-                  style={isWhite ? { background: "var(--bg-primary)", border: "1.5px solid var(--border)", color: "var(--text-secondary)" } : { background: `${kelas.iconBg}`, border: `1.5px solid ${kelas.headerBorder}`, color: kelas.accent }}>
+                  style={isWhite ? { background: "rgba(255,255,255,0.22)", border: "1.5px solid rgba(255,255,255,0.4)", color: "#ffffff" } : { background: `${kelas.iconBg}`, border: `1.5px solid ${kelas.headerBorder}`, color: kelas.accent }}>
                   {kelas.grade}
                 </div>
                 <div className="flex-1">
-                  <p className="font-display text-base font-bold text-white">{kelas.label}</p>
-                  <p className="font-body text-[11px]" style={isWhite ? { color: "var(--text-secondary)" } : { color: kelas.accent, opacity: 0.7 }}>
+                  <p className="font-display text-base font-bold" style={isWhite ? { color: "#ffffff" } : {}}>
+                    {kelas.label}
+                  </p>
+                  <p className="font-body text-[11px]" style={isWhite ? { color: "rgba(255,255,255,0.85)" } : { color: kelas.accent, opacity: 0.7 }}>
                     {kelas.topics.length} topik materi
                   </p>
                 </div>
                 <span className="font-body text-[9px] font-bold px-2.5 py-1 rounded-full tracking-widest uppercase"
-                  style={isWhite ? { background: "var(--bg-primary)", color: "var(--text-secondary)", border: "1px solid var(--border)" } : { background: kelas.badgeBg, color: kelas.badgeText, border: `1px solid ${kelas.headerBorder}` }}>
+                  style={isWhite ? { background: "rgba(255,255,255,0.18)", color: "#ffffff", border: "1px solid rgba(255,255,255,0.35)" } : { background: kelas.badgeBg, color: kelas.badgeText, border: `1px solid ${kelas.headerBorder}` }}>
                   ✦ MATERI & LATIHAN
                 </span>
               </div>
@@ -224,52 +226,53 @@ const TKAModulPemantapanPage = () => {
                           ? "cursor-pointer hover:-translate-y-0.5 active:translate-y-0"
                           : "cursor-not-allowed opacity-35"}`}
                       style={hasRoute ? (isWhite ? {
-                        background: "var(--bg-secondary)",
-                        border: "1px solid var(--border)",
+                        background: "rgba(255,255,255,0.12)",
+                        border: "1px solid rgba(255,255,255,0.22)",
                       } : {
                         background: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.07)",
                       }) : (isWhite ? {
-                        background: "var(--bg-primary)",
-                        border: "1px solid var(--border)",
+                        background: "rgba(255,255,255,0.06)",
+                        border: "1px solid rgba(255,255,255,0.1)",
                       } : {
                         background: "rgba(255,255,255,0.02)",
                         border: "1px solid rgba(255,255,255,0.04)",
                       })}
                       onMouseEnter={e => {
                         if (hasRoute) {
-                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "var(--bg-primary)" : `${kelas.iconBg}`;
-                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid var(--numatik-accent)" : `1px solid ${kelas.headerBorder}`;
+                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "rgba(255,255,255,0.25)" : `${kelas.iconBg}`;
+                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid rgba(255,255,255,0.45)" : `1px solid ${kelas.headerBorder}`;
                         }
                       }}
                       onMouseLeave={e => {
                         if (hasRoute) {
-                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "var(--bg-secondary)" : "rgba(255,255,255,0.04)";
-                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.07)";
+                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)";
+                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid rgba(255,255,255,0.22)" : "1px solid rgba(255,255,255,0.07)";
                         }
                       }}
                     >
                       {/* Number */}
                       <span className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center font-display font-bold text-[10px]"
-                        style={isWhite ? { background: "var(--bg-primary)", color: "var(--text-secondary)", border: "1px solid var(--border)" } : { background: kelas.iconBg, color: kelas.accent, border: `1px solid ${kelas.headerBorder}` }}>
+                        style={isWhite ? { background: "rgba(255,255,255,0.22)", color: "#ffffff", border: "1px solid rgba(255,255,255,0.35)" } : { background: kelas.iconBg, color: kelas.accent, border: `1px solid ${kelas.headerBorder}` }}>
                         {num}
                       </span>
 
                       {/* Emoji icon */}
                       <span className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm"
-                        style={isWhite ? { background: "var(--bg-secondary)", border: "1px solid var(--border)" } : { background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                        style={isWhite ? { background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" } : { background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
                         {topic.emoji}
                       </span>
 
                       {/* Name */}
-                      <span className="flex-1 font-body text-sm font-medium leading-snug text-white/80 group-hover:text-white transition-colors">
+                      <span className="flex-1 font-body text-sm font-medium leading-snug transition-colors"
+                        style={{ color: isWhite ? "#ffffff" : undefined }}>
                         {topic.name}
                       </span>
 
                       {/* Arrow */}
                       {hasRoute && (
                         <svg className="w-4 h-4 shrink-0 transition-all duration-200 group-hover:translate-x-1"
-                          style={{ color: kelas.accent, opacity: 0.5 }}
+                          style={isWhite ? { color: "rgba(255,255,255,0.7)" } : { color: kelas.accent, opacity: 0.5 }}
                           fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>

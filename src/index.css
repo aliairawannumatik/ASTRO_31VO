@@ -2757,14 +2757,16 @@
 [data-theme="white"] .text-emerald-400{ color: #059669 !important; }
 [data-theme="white"] .text-lime-300   { color: #3f6212 !important; }
 [data-theme="white"] .text-lime-400   { color: #65a30d !important; }
-[data-theme="white"] .text-yellow-100 { color: #854d0e !important; }
-[data-theme="white"] .text-yellow-200 { color: #854d0e !important; }
-[data-theme="white"] .text-yellow-300 { color: #854d0e !important; }
-[data-theme="white"] .text-yellow-400 { color: #ca8a04 !important; }
-[data-theme="white"] .text-amber-100  { color: #92400e !important; }
-[data-theme="white"] .text-amber-200  { color: #92400e !important; }
-[data-theme="white"] .text-amber-300  { color: #92400e !important; }
-[data-theme="white"] .text-amber-400  { color: #d97706 !important; }
+[data-theme="white"] .text-yellow-100 { color: #0077b6 !important; }
+[data-theme="white"] .text-yellow-200 { color: #0077b6 !important; }
+[data-theme="white"] .text-yellow-300 { color: #0077b6 !important; }
+[data-theme="white"] .text-yellow-400 { color: #0077b6 !important; }
+[data-theme="white"] .text-yellow-500 { color: #0077b6 !important; }
+[data-theme="white"] .text-amber-100  { color: #0077b6 !important; }
+[data-theme="white"] .text-amber-200  { color: #0077b6 !important; }
+[data-theme="white"] .text-amber-300  { color: #0077b6 !important; }
+[data-theme="white"] .text-amber-400  { color: #0077b6 !important; }
+[data-theme="white"] .text-amber-500  { color: #0077b6 !important; }
 [data-theme="white"] .text-orange-300 { color: #c2410c !important; }
 [data-theme="white"] .text-orange-200 { color: #9a3412 !important; }
 [data-theme="white"] .text-orange-400 { color: #ea580c !important; }
@@ -2899,3 +2901,171 @@
 [data-theme="white"] .border-cyan-300\/40    { border-color: rgba(8,145,178,0.35) !important; }
 [data-theme="white"] .border-blue-500\/30    { border-color: rgba(59,130,246,0.3) !important; }
 [data-theme="white"] .border-yellow-400\/30  { border-color: rgba(202,138,4,0.3) !important; }
+
+/* ══════════════════════════════════════════════════════════════════
+   WHITE THEME — BATCH 3 FIXES (per user instruction document)
+   1. Gray/slate/zinc text audit
+   2. bg-black/30 table headers → light blue
+   3. kelas-blue-card text exceptions (white on blue)
+   4. Olimpiade accordion → blue gradient header
+   5. Olimpiade latihan card → light background
+   6. Olimpiade pembahasan boxes → pastel
+   7. Ruang Guru tables and sections
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Gray/slate/zinc/neutral text → dark (text audit) ── */
+[data-theme="white"] .text-gray-100,
+[data-theme="white"] .text-gray-200,
+[data-theme="white"] .text-gray-300,
+[data-theme="white"] .text-slate-100,
+[data-theme="white"] .text-slate-200,
+[data-theme="white"] .text-zinc-100,
+[data-theme="white"] .text-zinc-200,
+[data-theme="white"] .text-zinc-300,
+[data-theme="white"] .text-neutral-100,
+[data-theme="white"] .text-neutral-200,
+[data-theme="white"] .text-neutral-300 {
+  color: #1a1a2e !important;
+}
+
+[data-theme="white"] .text-gray-400,
+[data-theme="white"] .text-slate-400,
+[data-theme="white"] .text-zinc-400,
+[data-theme="white"] .text-muted-foreground {
+  color: #3a3a5a !important;
+}
+
+/* ── 2. bg-black/30 table header rows → light blue ── */
+[data-theme="white"] .bg-black\/30 {
+  background: #e0f4ff !important;
+}
+[data-theme="white"] .bg-black\/30 .text-cyan-100 {
+  color: #0369a1 !important;
+}
+
+/* ── 3. kelas-blue-card — preserve white text on blue gradient ── */
+[data-theme="white"] .kelas-blue-card .text-white\/30,
+[data-theme="white"] .kelas-blue-card .text-white\/50 {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* ── 4. Olimpiade materi accordion items → blue gradient header ── */
+/* Target the outer accordion wrapper and make its direct button header blue */
+[data-theme="white"] .backdrop-blur.border.rounded-xl.overflow-hidden {
+  background: var(--bg-card) !important;
+  border-color: rgba(33,150,243,0.25) !important;
+  box-shadow: 0 2px 12px rgba(33,150,243,0.08) !important;
+}
+[data-theme="white"] .backdrop-blur.border.rounded-xl.overflow-hidden > button {
+  background: linear-gradient(to right, #2196f3, #00bcd4) !important;
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+[data-theme="white"] .backdrop-blur.border.rounded-xl.overflow-hidden > button .text-accent,
+[data-theme="white"] .backdrop-blur.border.rounded-xl.overflow-hidden > button .text-yellow-300,
+[data-theme="white"] .backdrop-blur.border.rounded-xl.overflow-hidden > button .text-primary {
+  color: #ffffff !important;
+}
+[data-theme="white"] .backdrop-blur.border.rounded-xl.overflow-hidden > button svg {
+  color: rgba(255,255,255,0.8) !important;
+}
+/* Accordion expanded content area stays white */
+[data-theme="white"] .backdrop-blur.border.rounded-xl.overflow-hidden > div {
+  background: var(--bg-card) !important;
+  border-top-color: rgba(33,150,243,0.15) !important;
+}
+
+/* ── 5. Olimpiade & TKA latihan card dark inline gradients → light ── */
+/* bg-card/40 and backdrop-blur-xl dark gradient cards */
+[data-theme="white"] .bg-card\/40 {
+  background: var(--bg-card) !important;
+}
+/* Broad rule: group+relative+backdrop-blur-xl (latihan cards) → override inline dark gradient */
+[data-theme="white"] .group.relative.rounded-2xl.overflow-hidden.backdrop-blur-xl {
+  background: var(--bg-card) !important;
+  border-color: rgba(33,150,243,0.2) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+}
+[data-theme="white"] .group.relative.rounded-2xl.overflow-hidden.backdrop-blur-xl .text-white\/90,
+[data-theme="white"] .group.relative.rounded-2xl.overflow-hidden.backdrop-blur-xl .text-white\/80 {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .group.relative.rounded-2xl.overflow-hidden.backdrop-blur-xl .text-white\/70,
+[data-theme="white"] .group.relative.rounded-2xl.overflow-hidden.backdrop-blur-xl .text-white\/60 {
+  color: var(--text-secondary) !important;
+}
+
+/* ── 6. Olimpiade pembahasan answer box ── */
+[data-theme="white"] .bg-emerald-950\/40 {
+  background: #dcfce7 !important;
+  border-color: rgba(34,197,94,0.5) !important;
+}
+[data-theme="white"] .bg-emerald-950\/40 .text-emerald-300 { color: #065f46 !important; }
+[data-theme="white"] .bg-emerald-950\/40 .text-emerald-50  { color: #14532d !important; }
+
+/* Pembahasan inline gradient boxes (violet, cyan, amber, rose) — override dark gradient */
+[data-theme="white"] .border-2.border-violet-400\/55 {
+  background: #f5f3ff !important;
+  border-color: rgba(139,92,246,0.4) !important;
+}
+[data-theme="white"] .border-2.border-violet-400\/55 .text-violet-300 { color: #5b21b6 !important; }
+[data-theme="white"] .border-2.border-violet-400\/55 .text-violet-50  { color: var(--text-primary) !important; }
+
+[data-theme="white"] .border-2.border-cyan-400\/55 {
+  background: #ecfeff !important;
+  border-color: rgba(34,211,238,0.4) !important;
+}
+[data-theme="white"] .border-2.border-cyan-400\/55 .text-cyan-300  { color: #155e75 !important; }
+[data-theme="white"] .border-2.border-cyan-400\/55 .text-cyan-50   { color: var(--text-primary) !important; }
+[data-theme="white"] .border-2.border-cyan-400\/55 .bg-cyan-400\/20 { background: rgba(8,145,178,0.15) !important; }
+[data-theme="white"] .border-2.border-cyan-400\/55 .text-cyan-300.font-bold { color: #155e75 !important; }
+
+[data-theme="white"] .border-2.border-amber-400\/55 {
+  background: #fffbeb !important;
+  border-color: rgba(245,158,11,0.4) !important;
+}
+[data-theme="white"] .border-2.border-amber-400\/55 .text-amber-300 { color: #0077b6 !important; }
+[data-theme="white"] .border-2.border-amber-400\/55 .text-amber-50  { color: var(--text-primary) !important; }
+
+[data-theme="white"] .border-2.border-rose-400\/55 {
+  background: #fff1f2 !important;
+  border-color: rgba(251,113,133,0.4) !important;
+}
+[data-theme="white"] .border-2.border-rose-400\/55 .text-rose-300  { color: #9f1239 !important; }
+[data-theme="white"] .border-2.border-rose-400\/55 .text-rose-50   { color: var(--text-primary) !important; }
+[data-theme="white"] .border-2.border-rose-400\/55 .text-rose-200  { color: #9f1239 !important; }
+
+/* ── 7. Ruang Guru — table headers, sections ── */
+/* Table border color */
+[data-theme="white"] .guru-editable .border-white\/10 {
+  border-color: #00b4d8 !important;
+}
+/* Input text in guru tables */
+[data-theme="white"] .guru-editable input,
+[data-theme="white"] .guru-editable textarea {
+  color: var(--text-primary) !important;
+}
+/* bg-card/85 sections in guru pages → light blue */
+[data-theme="white"] .guru-editable .bg-card\/85 {
+  background: #e0f4ff !important;
+  border-color: #00b4d8 !important;
+}
+/* Section heading text in guru tables */
+[data-theme="white"] .guru-editable h2.text-cyan-100 {
+  color: var(--text-primary) !important;
+}
+
+/* ── 8. Ruang Guru RPP & document card buttons → #e0f4ff + #00b4d8 border ── */
+[data-theme="white"] .bg-card\/80.backdrop-blur.border.border-border {
+  background: #e0f4ff !important;
+  border-color: #00b4d8 !important;
+}
+[data-theme="white"] .bg-card\/80.backdrop-blur.border.border-border .text-white {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .bg-card\/80.backdrop-blur.border.border-border .text-white\/40,
+[data-theme="white"] .bg-card\/80.backdrop-blur.border.border-border .text-white\/50 {
+  color: var(--text-secondary) !important;
+}
+
+/* ── 9. text-white/90 override ── */
+[data-theme="white"] .text-white\/90 { color: var(--text-primary) !important; }
