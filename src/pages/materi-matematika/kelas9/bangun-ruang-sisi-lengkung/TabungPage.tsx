@@ -172,8 +172,6 @@ const InteractiveCylinder3D = () => {
             <polygon key={`g${i}`} points={p.points} fill="rgba(100,150,200,0.06)" stroke="#ffffff15" strokeWidth="0.5" />
           )
         )}
-        <text x="10" y={CYL_H_SVG - 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r={CYL_R}px  t={CYL_H}px</text>
-        <text x={CYL_W - 88} y={CYL_H_SVG - 12} fill="#22d3ee" fontSize="9" fontFamily="monospace">L=2πr²+2πrt</text>
       </svg>
 
       <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
@@ -568,14 +566,13 @@ const CylinderNetAnimation = () => {
           </marker>
           <style>{`
             @keyframes netUnroll {
-              0%   { clip-path: inset(5% 99% 5% 0% round 50%); opacity:0; }
-              5%   { opacity:1; }
-              18%  { clip-path: inset(3% 83% 3% 0% round 46%); }
-              38%  { clip-path: inset(1% 62% 1% 0% round 32%); }
-              60%  { clip-path: inset(0% 36% 0% 0% round 16%); }
-              80%  { clip-path: inset(0%  9% 0% 0% round  5%); }
-              92%  { clip-path: inset(0%  1% 0% 0% round  3px); }
-              100% { clip-path: inset(0%  0% 0% 0% round  3px); opacity:1; }
+              0%   { clip-path: inset(5% 47% 5% 47% round 50%); opacity:0.3; }
+              10%  { opacity:1; }
+              30%  { clip-path: inset(2% 37% 2% 37% round 42%); }
+              55%  { clip-path: inset(0% 22% 0% 22% round 24%); }
+              75%  { clip-path: inset(0%  8% 0%  8% round 10%); }
+              90%  { clip-path: inset(0%  1% 0%  1% round  3px); }
+              100% { clip-path: inset(0%  0% 0%  0% round  3px); opacity:1; }
             }
             @keyframes hingeCapTop {
               0%   { transform: perspective(320px) rotateX(-90deg); opacity:0.15; }
@@ -591,12 +588,12 @@ const CylinderNetAnimation = () => {
             }
             @keyframes netFadeIn { from{opacity:0} to{opacity:1} }
             @keyframes netUnrollClose {
-              0%   { clip-path: inset(0%  0% 0% 0% round  3px); opacity:1; }
-              12%  { clip-path: inset(0%  8% 0% 0% round  5%); }
-              38%  { clip-path: inset(0% 35% 0% 0% round 16%); }
-              62%  { clip-path: inset(1% 62% 1% 0% round 32%); }
-              84%  { clip-path: inset(3% 84% 3% 0% round 46%); opacity:0.7; }
-              100% { clip-path: inset(5% 99% 5% 0% round 50%); opacity:0; }
+              0%   { clip-path: inset(0%  0% 0%  0% round  3px); opacity:1; }
+              15%  { clip-path: inset(0%  9% 0%  9% round 10%); }
+              40%  { clip-path: inset(0% 23% 0% 23% round 24%); }
+              65%  { clip-path: inset(2% 37% 2% 37% round 42%); }
+              85%  { clip-path: inset(5% 46% 5% 46% round 48%); opacity:0.4; }
+              100% { clip-path: inset(5% 47% 5% 47% round 50%); opacity:0; }
             }
             @keyframes hingeCapTopClose {
               0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
@@ -764,8 +761,6 @@ const CylinderNetAnimation = () => {
           });
         })()}
 
-        <text x="10" y={CYL_H_SVG - 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r={CYL_R}px  t={CYL_H}px</text>
-        <text x={CYL_W - 88} y={CYL_H_SVG - 12} fill="#22d3ee" fontSize="9" fontFamily="monospace">L=2πr²+2πrt</text>
       </svg>
 
       {/* Status badges */}
@@ -817,96 +812,30 @@ const sections: Sec[] = [
             besar) sebagai alas dan tutup, yang dihubungkan oleh sebuah permukaan melengkung yang disebut <strong className="text-purple-300">selimut tabung</strong>.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p className="text-yellow-400 font-bold text-sm">🏷️ Istilah Kunci:</p>
-            <p>• <strong className="text-amber-300">r</strong> = jari-jari alas/tutup</p>
-            <p>• <strong className="text-green-300">t</strong> = tinggi tabung</p>
-            <p>• <strong className="text-purple-300">d</strong> = diameter = 2r</p>
-            <p>• <strong className="text-pink-300">π</strong> ≈ 3,14 atau 22/7</p>
-          </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p className="text-cyan-400 font-bold text-sm">🌍 Contoh di Kehidupan:</p>
-            <p>• Kaleng susu / minuman</p>
-            <p>• Tangki air silindris</p>
-            <p>• Pipa besi / PVC</p>
-            <p>• Drum / Tabung gas</p>
-          </div>
-        </div>
-
         <InteractiveCylinder3D />
-      </div>
-    ),
-  },
-  {
-    title: "Unsur-unsur Tabung",
-    icon: "🔍",
-    content: (
-      <div className="space-y-5 font-body">
-        <p className="text-white/70 text-sm">
-          Tabung punya 3 bagian utama yang wajib kamu kuasai. Mari kita bedah satu per satu!
-        </p>
 
-        {/* Jari-jari */}
-        <div className="bg-amber-950/40 border border-amber-700/40 rounded-xl p-4 space-y-2">
-          <p className="text-amber-300 font-bold text-sm">1. Jari-jari (r) & Diameter (d)</p>
-          <p className="text-white/75 text-sm">
-            Jari-jari adalah jarak dari <strong>titik pusat</strong> ke <strong>tepi lingkaran</strong> alas/tutup.
-            Diameter adalah garis lurus yang melewati pusat dan menghubungkan dua titik tepi — nilainya <strong className="text-amber-300">dua kali jari-jari</strong>.
-          </p>
-          <JariJariAnimSVG />
-          <div className="bg-amber-950/60 border border-amber-700/30 rounded p-2 text-xs text-amber-200">
-            <InlineMath math="d = 2r \quad \text{atau} \quad r = \frac{d}{2}" />
+        {/* ── Foto Benda Berbentuk Tabung — hanya slide 1 ── */}
+        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
+          <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Tabung di Kehidupan Sehari-hari</p>
+          <div className="grid grid-cols-4 gap-2">
+            {[
+              { src: imgSarden,   label: "Kaleng Sarden" },
+              { src: imgBiskuit,  label: "Kaleng Biskuit" },
+              { src: imgIndomilk, label: "Kaleng Susu" },
+              { src: imgDrum,     label: "Kendang" },
+              { src: imgBedug,    label: "Bedug" },
+              { src: imgTong,     label: "Tong / Drum" },
+              { src: imgGelas,    label: "Gelas Silindris" },
+              { src: imgGedung,   label: "Gedung Silindris" },
+            ].map(({ src, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1">
+                <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
+                  <img src={src} alt={label} className="w-full h-full object-cover" />
+                </div>
+                <p className="text-[9px] text-white/60 text-center leading-tight font-body">{label}</p>
+              </div>
+            ))}
           </div>
-        </div>
-
-        {/* Tinggi */}
-        <div className="bg-green-950/40 border border-green-700/40 rounded-xl p-4 space-y-2">
-          <p className="text-green-300 font-bold text-sm">2. Tinggi Tabung (t)</p>
-          <p className="text-white/75 text-sm">
-            Tinggi tabung adalah jarak <strong>tegak lurus</strong> antara alas dan tutup tabung. Bayangkan seperti
-            mengukur tinggi sebuah kaleng dari dasar hingga ujung atasnya.
-          </p>
-          <TinggiAnimSVG />
-        </div>
-
-        {/* Selimut */}
-        <div className="bg-purple-950/40 border border-purple-700/40 rounded-xl p-4 space-y-2">
-          <p className="text-purple-300 font-bold text-sm">3. Selimut Tabung</p>
-          <p className="text-white/75 text-sm">
-            Selimut adalah <strong>permukaan melengkung</strong> yang membungkus sisi tabung (bukan bagian atas atau bawahnya).
-            Kalau kamu "buka gulungan" selimut tabung, kamu akan mendapatkan sebuah <strong className="text-purple-300">persegi panjang</strong>!
-          </p>
-          <SelimutAnimSVG />
-          <blockquote className="border-l-4 border-purple-500 pl-3 text-xs text-purple-200 italic">
-            Panjang persegi panjang = keliling lingkaran = 2πr, Lebarnya = tinggi tabung (t)
-          </blockquote>
-        </div>
-
-        {/* Ringkasan unsur */}
-        <div className="overflow-x-auto rounded-lg border border-slate-700">
-          <table className="w-full text-xs text-center">
-            <thead><tr className="bg-slate-800">
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Unsur</th>
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Simbol</th>
-              <th className="px-3 py-2 text-cyan-300">Keterangan</th>
-            </tr></thead>
-            <tbody>
-              {[
-                ["Jari-jari","r","Pusat ke tepi lingkaran alas/tutup"],
-                ["Diameter","d = 2r","Garis melalui pusat lingkaran"],
-                ["Tinggi","t","Jarak tegak lurus alas ke tutup"],
-                ["Selimut","Permukaan lengkung","Seperti persegi panjang yang digulung"],
-                ["Alas & Tutup","2 lingkaran","Kongruen (sama besar & bentuk)"],
-              ].map(([b,r,c],i)=>(
-                <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
-                  <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
-                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
-                  <td className="px-3 py-2 text-white/55 text-left">{c}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
     ),
@@ -987,22 +916,22 @@ const sections: Sec[] = [
             <line x1="200" y1="48" x2="228" y2="48" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
             <circle cx="200" cy="48" r="2" fill="#f59e0b"/>
             <circle cx="228" cy="48" r="2" fill="#f59e0b"/>
-            <text x="214" y="44" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-            {/* label */}
-            <text x="200" y="51" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup atas</text>
+            <text x="214" y="42" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+            {/* label — moved below r-line to avoid collision */}
+            <text x="200" y="60" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup atas</text>
             {/* area annotation — right of circle */}
             <text x="242" y="51" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="start">= πr²</text>
 
             {/* "+" sign — left, between top circle and rect */}
-            <text x="28" y="83" fill="#64748b" fontSize="13" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
+            <text x="28" y="86" fill="#64748b" fontSize="13" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
             {/* dashed vertical connector */}
-            <line x1="200" y1="76" x2="200" y2="84" stroke="rgba(168,85,247,0.35)" strokeWidth="1" strokeDasharray="2,2"/>
+            <line x1="200" y1="76" x2="200" y2="87" stroke="rgba(168,85,247,0.35)" strokeWidth="1" strokeDasharray="2,2"/>
 
-            {/* 2πr dimension — between top circle and rect */}
-            <line x1="106" y1="83" x2="294" y2="83" stroke="#a855f7" strokeWidth="1"/>
-            <line x1="106" y1="79" x2="106" y2="87" stroke="#a855f7" strokeWidth="1"/>
-            <line x1="294" y1="79" x2="294" y2="87" stroke="#a855f7" strokeWidth="1"/>
-            <text x="200" y="79" fill="#d8b4fe" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">← 2πr →</text>
+            {/* 2πr dimension — moved down to avoid overlap with circle */}
+            <line x1="106" y1="87" x2="294" y2="87" stroke="#a855f7" strokeWidth="1"/>
+            <line x1="106" y1="83" x2="106" y2="91" stroke="#a855f7" strokeWidth="1"/>
+            <line x1="294" y1="83" x2="294" y2="91" stroke="#a855f7" strokeWidth="1"/>
+            <text x="200" y="83" fill="#d8b4fe" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">← 2πr →</text>
 
             {/* ══════════════════════════════════════
                 RECTANGLE — selimut
@@ -1034,11 +963,11 @@ const sections: Sec[] = [
             <line x1="200" y1="188" x2="228" y2="188" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
             <circle cx="200" cy="188" r="2" fill="#f59e0b"/>
             <circle cx="228" cy="188" r="2" fill="#f59e0b"/>
-            <text x="214" y="184" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-            {/* label */}
-            <text x="200" y="191" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup bawah</text>
+            <text x="214" y="183" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+            {/* label — moved below circle to avoid collision with r */}
+            <text x="200" y="222" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup bawah</text>
             {/* area annotation — right of circle */}
-            <text x="242" y="191" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="start">= πr²</text>
+            <text x="242" y="195" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="start">= πr²</text>
 
             {/* ══════════════════════════════════════
                 TOTAL FORMULA BAR
@@ -1492,30 +1421,6 @@ const TabungPage = () => {
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
             ← Kembali ke Bangun Ruang Sisi Lengkung
           </button>
-        </div>
-
-        {/* ── Foto Benda Berbentuk Tabung ── */}
-        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3 mt-6">
-          <p className="text-cyan-300 font-bold text-sm text-center">📸 Benda Berbentuk Tabung di Kehidupan Sehari-hari</p>
-          <div className="grid grid-cols-4 gap-2">
-            {[
-              { src: imgSarden,   label: "Kaleng Sarden" },
-              { src: imgBiskuit,  label: "Kaleng Biskuit" },
-              { src: imgIndomilk, label: "Kaleng Susu" },
-              { src: imgDrum,     label: "Kendang" },
-              { src: imgBedug,    label: "Bedug" },
-              { src: imgTong,     label: "Tong / Drum" },
-              { src: imgGelas,    label: "Gelas Silindris" },
-              { src: imgGedung,   label: "Gedung Silindris" },
-            ].map(({ src, label }) => (
-              <div key={label} className="flex flex-col items-center gap-1">
-                <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
-                  <img src={src} alt={label} className="w-full h-full object-cover" />
-                </div>
-                <p className="text-[9px] text-white/60 text-center leading-tight font-body">{label}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
       </div>
