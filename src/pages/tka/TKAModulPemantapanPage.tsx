@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const routes: Record<string, string> = {
   "Bilangan Bulat": "/tka/modul-pemantapan/bilangan-bulat",
@@ -126,6 +127,8 @@ const kelasList: Kelas[] = [
 
 const TKAModulPemantapanPage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isWhite = theme === "white";
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const handleClick = (name: string) => {
@@ -143,15 +146,15 @@ const TKAModulPemantapanPage = () => {
         {/* ── Header ── */}
         <div className="flex flex-col items-center mb-10">
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 shadow-[0_0_32px_rgba(34,211,238,0.2)]"
-            style={{ background: "linear-gradient(135deg, rgba(34,211,238,0.15), rgba(99,102,241,0.1))", border: "1px solid rgba(34,211,238,0.3)" }}>
+            style={isWhite ? { background: "var(--bg-secondary)", border: "1px solid var(--border)" } : { background: "linear-gradient(135deg, rgba(34,211,238,0.15), rgba(99,102,241,0.1))", border: "1px solid rgba(34,211,238,0.3)" }}>
             <span className="text-3xl">📚</span>
           </div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-white text-center mb-1"
-            style={{ textShadow: "0 0 40px rgba(34,211,238,0.5)" }}>
+            style={isWhite ? {} : { textShadow: "0 0 40px rgba(34,211,238,0.5)" }}>
             MODUL PEMANTAPAN TKA
           </h1>
           <p className="font-display text-sm font-semibold text-center mb-4"
-            style={{ color: "#22d3ee", textShadow: "0 0 20px rgba(34,211,238,0.4)" }}>
+            style={isWhite ? { color: "var(--text-secondary)" } : { color: "#22d3ee", textShadow: "0 0 20px rgba(34,211,238,0.4)" }}>
             Oleh: Irawan Sutiawan, M.Pd
           </p>
           <p className="text-white/45 text-xs text-center font-body mb-5 max-w-sm">
@@ -165,7 +168,7 @@ const TKAModulPemantapanPage = () => {
               { v: "TKA", l: "Siap Ujian", c: "rgba(34,197,94,0.1)", bc: "rgba(34,197,94,0.3)", tc: "#86efac" },
             ].map(({ v, l, c, bc, tc }) => (
               <div key={l} className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full font-body"
-                style={{ background: c, border: `1px solid ${bc}`, color: tc }}>
+                style={isWhite ? { background: "var(--bg-secondary)", border: "1px solid var(--border)", color: "var(--text-secondary)" } : { background: c, border: `1px solid ${bc}`, color: tc }}>
                 <span className="text-sm">{v}</span>
                 <span className="opacity-70 font-normal">{l}</span>
               </div>
@@ -177,7 +180,11 @@ const TKAModulPemantapanPage = () => {
         <div className="flex flex-col gap-6">
           {kelasList.map((kelas, ki) => (
             <div key={kelas.label} className="rounded-2xl overflow-hidden"
-              style={{
+              style={isWhite ? {
+                border: "1px solid var(--border)",
+                boxShadow: "0 4px 24px var(--shadow)",
+                background: "var(--bg-card)",
+              } : {
                 border: `1px solid ${kelas.headerBorder}`,
                 boxShadow: `0 4px 32px ${kelas.glow}`,
                 background: "rgba(10,10,30,0.7)",
@@ -185,19 +192,19 @@ const TKAModulPemantapanPage = () => {
 
               {/* Section header */}
               <div className="flex items-center gap-4 px-5 py-4"
-                style={{ background: kelas.headerBg, borderBottom: `1px solid ${kelas.headerBorder}` }}>
+                style={isWhite ? { background: "var(--bg-secondary)", borderBottom: "1px solid var(--border)" } : { background: kelas.headerBg, borderBottom: `1px solid ${kelas.headerBorder}` }}>
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 font-display font-black text-lg"
-                  style={{ background: `${kelas.iconBg}`, border: `1.5px solid ${kelas.headerBorder}`, color: kelas.accent }}>
+                  style={isWhite ? { background: "var(--bg-primary)", border: "1.5px solid var(--border)", color: "var(--text-secondary)" } : { background: `${kelas.iconBg}`, border: `1.5px solid ${kelas.headerBorder}`, color: kelas.accent }}>
                   {kelas.grade}
                 </div>
                 <div className="flex-1">
                   <p className="font-display text-base font-bold text-white">{kelas.label}</p>
-                  <p className="font-body text-[11px]" style={{ color: kelas.accent, opacity: 0.7 }}>
+                  <p className="font-body text-[11px]" style={isWhite ? { color: "var(--text-secondary)" } : { color: kelas.accent, opacity: 0.7 }}>
                     {kelas.topics.length} topik materi
                   </p>
                 </div>
                 <span className="font-body text-[9px] font-bold px-2.5 py-1 rounded-full tracking-widest uppercase"
-                  style={{ background: kelas.badgeBg, color: kelas.badgeText, border: `1px solid ${kelas.headerBorder}` }}>
+                  style={isWhite ? { background: "var(--bg-primary)", color: "var(--text-secondary)", border: "1px solid var(--border)" } : { background: kelas.badgeBg, color: kelas.badgeText, border: `1px solid ${kelas.headerBorder}` }}>
                   ✦ MATERI & LATIHAN
                 </span>
               </div>
@@ -216,35 +223,41 @@ const TKAModulPemantapanPage = () => {
                         ${hasRoute
                           ? "cursor-pointer hover:-translate-y-0.5 active:translate-y-0"
                           : "cursor-not-allowed opacity-35"}`}
-                      style={hasRoute ? {
+                      style={hasRoute ? (isWhite ? {
+                        background: "var(--bg-secondary)",
+                        border: "1px solid var(--border)",
+                      } : {
                         background: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.07)",
+                      }) : (isWhite ? {
+                        background: "var(--bg-primary)",
+                        border: "1px solid var(--border)",
                       } : {
                         background: "rgba(255,255,255,0.02)",
                         border: "1px solid rgba(255,255,255,0.04)",
-                      }}
+                      })}
                       onMouseEnter={e => {
                         if (hasRoute) {
-                          (e.currentTarget as HTMLButtonElement).style.background = `${kelas.iconBg}`;
-                          (e.currentTarget as HTMLButtonElement).style.border = `1px solid ${kelas.headerBorder}`;
+                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "var(--bg-primary)" : `${kelas.iconBg}`;
+                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid var(--numatik-accent)" : `1px solid ${kelas.headerBorder}`;
                         }
                       }}
                       onMouseLeave={e => {
                         if (hasRoute) {
-                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)";
-                          (e.currentTarget as HTMLButtonElement).style.border = "1px solid rgba(255,255,255,0.07)";
+                          (e.currentTarget as HTMLButtonElement).style.background = isWhite ? "var(--bg-secondary)" : "rgba(255,255,255,0.04)";
+                          (e.currentTarget as HTMLButtonElement).style.border = isWhite ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.07)";
                         }
                       }}
                     >
                       {/* Number */}
                       <span className="shrink-0 w-6 h-6 rounded-md flex items-center justify-center font-display font-bold text-[10px]"
-                        style={{ background: kelas.iconBg, color: kelas.accent, border: `1px solid ${kelas.headerBorder}` }}>
+                        style={isWhite ? { background: "var(--bg-primary)", color: "var(--text-secondary)", border: "1px solid var(--border)" } : { background: kelas.iconBg, color: kelas.accent, border: `1px solid ${kelas.headerBorder}` }}>
                         {num}
                       </span>
 
                       {/* Emoji icon */}
                       <span className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm"
-                        style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                        style={isWhite ? { background: "var(--bg-secondary)", border: "1px solid var(--border)" } : { background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
                         {topic.emoji}
                       </span>
 
@@ -272,7 +285,7 @@ const TKAModulPemantapanPage = () => {
         {/* ── Footer note ── */}
         <div className="mt-8 flex flex-col items-center gap-3">
           <div className="w-full rounded-xl px-4 py-3 flex items-start gap-3"
-            style={{ background: "rgba(34,211,238,0.05)", border: "1px solid rgba(34,211,238,0.15)" }}>
+            style={isWhite ? { background: "var(--bg-secondary)", border: "1px solid var(--border)" } : { background: "rgba(34,211,238,0.05)", border: "1px solid rgba(34,211,238,0.15)" }}>
             <span className="text-base shrink-0">📘</span>
             <p className="font-body text-xs text-white/50 leading-relaxed">
               Setiap topik memuat <span className="text-cyan-300 font-semibold">ringkasan materi</span> dan{" "}
