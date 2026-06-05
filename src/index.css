@@ -1224,6 +1224,7 @@
   100% { background-position: 0% 50%; }
 }
 
+/* .water-btn — explicit class (MenuPage cards) */
 [data-theme="white"] .water-btn {
   background: linear-gradient(
     135deg,
@@ -1235,10 +1236,45 @@
   background-size: 300% 300% !important;
   animation: waterFlow 4s ease infinite !important;
 }
-
 [data-theme="white"] .water-btn,
 [data-theme="white"] .water-btn * {
   color: #ffffff !important;
+}
+[data-theme="white"] .water-btn svg,
+[data-theme="white"] .water-btn svg * {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* button.rounded-2xl.overflow-hidden — auto-covers ALL subtopic list pages
+   (MateriTopicPage, GameSubtopicPage, every latihan-mandiri page, etc.)
+   without editing each file individually */
+[data-theme="white"] button.rounded-2xl.overflow-hidden {
+  background: linear-gradient(
+    135deg,
+    #0077b6,
+    #00b4d8,
+    #48cae4,
+    #0096c7
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: waterFlow 4s ease infinite !important;
+}
+
+/* Hide the dark gradient overlay so water shows clean underneath */
+[data-theme="white"] button.rounded-2xl.overflow-hidden > div.absolute.inset-0.backdrop-blur {
+  opacity: 0 !important;
+}
+
+[data-theme="white"] button.rounded-2xl.overflow-hidden,
+[data-theme="white"] button.rounded-2xl.overflow-hidden * {
+  color: #ffffff !important;
+}
+
+[data-theme="white"] button.rounded-2xl.overflow-hidden svg,
+[data-theme="white"] button.rounded-2xl.overflow-hidden svg * {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 .theme-white .bg-white\/5,
 .theme-white .bg-white\/10,
