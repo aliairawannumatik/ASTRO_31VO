@@ -6,6 +6,12 @@ import { Circle, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucid
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import imgBolaSepak  from "@assets/image_1780702385381.png";
+import imgGlobe      from "@assets/image_1780702495642.png";
+import imgSemangka   from "@assets/image_1780702529187.png";
+import imgJeruk      from "@assets/image_1780702647131.png";
+import imgKelereng   from "@assets/image_1780702682181.png";
+import imgBowling    from "@assets/image_1780702856357.png";
 
 /* ─────────────────────────────────────────────────────────────
    INTERACTIVE 3D SPHERE — CSS gradient + SVG latitude/longitude
@@ -835,6 +841,28 @@ const sections: Sec[] = [
         <blockquote className="border-l-4 border-cyan-500 pl-3 text-cyan-200 text-xs italic">
           💡 <strong>Bola vs Tabung/Kerucut:</strong> Bola tidak punya alas datar sama sekali! Seluruh permukaannya adalah sisi lengkung.
         </blockquote>
+
+        {/* ── Foto Benda Berbentuk Bola — slide 2 ── */}
+        <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
+          <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Bola di Kehidupan Sehari-hari</p>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { src: imgBolaSepak, label: "Bola Sepak" },
+              { src: imgGlobe,     label: "Bola Dunia" },
+              { src: imgSemangka,  label: "Semangka" },
+              { src: imgJeruk,     label: "Buah Jeruk" },
+              { src: imgKelereng,  label: "Kelereng" },
+              { src: imgBowling,   label: "Bola Bowling" },
+            ].map(({ src, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1">
+                <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
+                  <img src={src} alt={label} className="w-full h-full object-cover" />
+                </div>
+                <p className="text-[9px] text-white/60 text-center leading-tight font-body">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     ),
   },
