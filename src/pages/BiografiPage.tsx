@@ -4,9 +4,12 @@ import PageNavigation from "@/components/PageNavigation";
 import { User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const BiografiPage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isWhite = theme === "white";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -132,7 +135,17 @@ const BiografiPage = () => {
                     <div className="w-3/4 h-12 bg-orange-500/20 rounded-full blur-2xl" />
                   </div>
                   <p className="relative font-display text-xl md:text-2xl font-black text-center tracking-widest uppercase"
-                    style={{ background: "linear-gradient(90deg, #fb923c, #fbbf24, #fef08a, #fbbf24, #fb923c)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 12px rgba(251,146,60,0.9)) drop-shadow(0 0 28px rgba(251,191,36,0.6))", letterSpacing: "0.12em" }}>
+                    style={isWhite ? {
+                      color: "#0a4f8a",
+                      letterSpacing: "0.12em",
+                    } : {
+                      background: "linear-gradient(90deg, #fb923c, #fbbf24, #fef08a, #fbbf24, #fb923c)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      filter: "drop-shadow(0 0 12px rgba(251,146,60,0.9)) drop-shadow(0 0 28px rgba(251,191,36,0.6))",
+                      letterSpacing: "0.12em",
+                    }}>
                     "Tergerak, Bergerak, dan Menggerakkan"
                   </p>
                 </div>

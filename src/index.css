@@ -3069,3 +3069,173 @@
 
 /* ── 9. text-white/90 override ── */
 [data-theme="white"] .text-white\/90 { color: var(--text-primary) !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   BATCH 4 — White theme fixes (4 remaining issues)
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. CapaianPembelajaranPage: bg-black/25 description boxes ── */
+[data-theme="white"] .bg-black\/25 {
+  background: rgba(255,255,255,0.75) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+[data-theme="white"] .text-white\/85 {
+  color: var(--text-primary) !important;
+}
+/* Article card borders & text in CP page */
+[data-theme="white"] .border-cyan-200\/30,
+[data-theme="white"] .border-violet-200\/30,
+[data-theme="white"] .border-emerald-200\/30,
+[data-theme="white"] .border-amber-200\/30,
+[data-theme="white"] .border-pink-200\/30 {
+  border-color: rgba(0,119,182,0.18) !important;
+}
+
+/* ── 2. MateriTopicPage (Buku Animasi): dark gradient card overlays ── */
+/* The absolute overlay div inside water-btn with dark -900 gradients */
+[data-theme="white"] .water-btn .absolute.inset-0.bg-gradient-to-br {
+  background: rgba(33,150,243,0.06) !important;
+}
+[data-theme="white"] .water-btn .absolute.inset-0.border.rounded-2xl {
+  border-color: rgba(33,150,243,0.2) !important;
+}
+/* Icon area inside water-btn cards */
+[data-theme="white"] .water-btn [class*="bg-blue-5"],
+[data-theme="white"] .water-btn [class*="bg-cyan-5"],
+[data-theme="white"] .water-btn [class*="bg-violet-5"],
+[data-theme="white"] .water-btn [class*="bg-sky-5"],
+[data-theme="white"] .water-btn [class*="bg-indigo-5"],
+[data-theme="white"] .water-btn [class*="bg-purple-5"],
+[data-theme="white"] .water-btn [class*="bg-teal-5"],
+[data-theme="white"] .water-btn [class*="bg-green-5"],
+[data-theme="white"] .water-btn [class*="bg-rose-5"],
+[data-theme="white"] .water-btn [class*="bg-orange-5"] {
+  background-color: rgba(33,150,243,0.1) !important;
+}
+/* Subtopic label text color on white bg */
+[data-theme="white"] .water-btn .text-white {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .water-btn [class*="text-blue-3"],
+[data-theme="white"] .water-btn [class*="text-cyan-3"],
+[data-theme="white"] .water-btn [class*="text-violet-3"],
+[data-theme="white"] .water-btn [class*="text-sky-3"],
+[data-theme="white"] .water-btn [class*="text-indigo-3"],
+[data-theme="white"] .water-btn [class*="text-purple-3"],
+[data-theme="white"] .water-btn [class*="text-teal-3"],
+[data-theme="white"] .water-btn [class*="text-green-3"],
+[data-theme="white"] .water-btn [class*="text-rose-3"],
+[data-theme="white"] .water-btn [class*="text-orange-3"] {
+  color: #0077b6 !important;
+}
+/* Sub-topik badge area in MateriTopicPage header */
+[data-theme="white"] .bg-white\/5 {
+  background: rgba(0,119,182,0.08) !important;
+}
+[data-theme="white"] .border-white\/10 {
+  border-color: rgba(0,119,182,0.2) !important;
+}
+[data-theme="white"] .text-white\/70 {
+  color: var(--text-secondary) !important;
+}
+
+/* ── 3. TKAPemantapanLayout: text + minor elements ── */
+/* Section headings & content text */
+[data-theme="white"] .tka-pemantapan .text-white\/30 {
+  color: rgba(0,0,0,0.35) !important;
+}
+[data-theme="white"] .tka-pemantapan .text-white\/90 {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .tka-pemantapan .text-white\/80 {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .tka-pemantapan .text-white\/60 {
+  color: var(--text-secondary) !important;
+}
+[data-theme="white"] .tka-pemantapan .text-white\/50 {
+  color: var(--text-secondary) !important;
+}
+[data-theme="white"] .tka-pemantapan .text-white\/40 {
+  color: var(--text-secondary) !important;
+}
+/* Large score number */
+[data-theme="white"] .tka-pemantapan .text-white {
+  color: var(--text-primary) !important;
+}
+/* Section badge text (light colors → dark versions) */
+[data-theme="white"] .tka-pemantapan .text-indigo-200 { color: #3730a3 !important; }
+[data-theme="white"] .tka-pemantapan .text-violet-200 { color: #5b21b6 !important; }
+[data-theme="white"] .tka-pemantapan .text-purple-200 { color: #6b21a8 !important; }
+[data-theme="white"] .tka-pemantapan .text-fuchsia-200 { color: #86198f !important; }
+[data-theme="white"] .tka-pemantapan .text-sky-200   { color: #075985 !important; }
+[data-theme="white"] .tka-pemantapan .text-teal-200  { color: #115e59 !important; }
+[data-theme="white"] .tka-pemantapan .text-emerald-200 { color: #065f46 !important; }
+/* Section badge backgrounds */
+[data-theme="white"] .tka-pemantapan .bg-indigo-500\/30  { background: rgba(99,102,241,0.1) !important; border-color: rgba(99,102,241,0.3) !important; }
+[data-theme="white"] .tka-pemantapan .bg-violet-500\/30  { background: rgba(139,92,246,0.1) !important; border-color: rgba(139,92,246,0.3) !important; }
+[data-theme="white"] .tka-pemantapan .bg-purple-500\/30  { background: rgba(168,85,247,0.1) !important; border-color: rgba(168,85,247,0.3) !important; }
+[data-theme="white"] .tka-pemantapan .bg-fuchsia-500\/30 { background: rgba(217,70,239,0.1) !important; border-color: rgba(217,70,239,0.3) !important; }
+[data-theme="white"] .tka-pemantapan .bg-sky-500\/30   { background: rgba(14,165,233,0.1) !important; border-color: rgba(14,165,233,0.3) !important; }
+[data-theme="white"] .tka-pemantapan .bg-teal-500\/30  { background: rgba(20,184,166,0.1) !important; border-color: rgba(20,184,166,0.3) !important; }
+[data-theme="white"] .tka-pemantapan .bg-emerald-500\/30 { background: rgba(16,185,129,0.1) !important; border-color: rgba(16,185,129,0.3) !important; }
+/* Dot indicators */
+[data-theme="white"] .tka-pemantapan .bg-indigo-400  { background: #6366f1 !important; }
+[data-theme="white"] .tka-pemantapan .bg-violet-400  { background: #8b5cf6 !important; }
+[data-theme="white"] .tka-pemantapan .bg-purple-400  { background: #a855f7 !important; }
+[data-theme="white"] .tka-pemantapan .bg-fuchsia-400 { background: #d946ef !important; }
+[data-theme="white"] .tka-pemantapan .bg-sky-400   { background: #38bdf8 !important; }
+[data-theme="white"] .tka-pemantapan .bg-teal-400  { background: #2dd4bf !important; }
+[data-theme="white"] .tka-pemantapan .bg-emerald-400 { background: #34d399 !important; }
+/* Inline-style purple/indigo boxes (score bar, hint bar) */
+[data-theme="white"] .tka-pemantapan [style*="rgba(99,102,241,0.1)"],
+[data-theme="white"] .tka-pemantapan [style*="rgba(99,102,241,0.06)"] {
+  background: #e0f4ff !important;
+  border-color: rgba(0,119,182,0.2) !important;
+}
+/* Formula box (amber inline gradient) stays as-is — visible on light bg */
+/* Violet-300 label on blue header = legible; no override needed */
+/* BookMarked icon box on header */
+[data-theme="white"] .tka-pemantapan [style*="rgba(99,102,241,0.4)"] {
+  background: rgba(255,255,255,0.25) !important;
+  border-color: rgba(255,255,255,0.4) !important;
+}
+/* "Modul Pemantapan TKA" text on blue header → white */
+[data-theme="white"] .tka-pemantapan .text-violet-400\/70 {
+  color: rgba(255,255,255,0.8) !important;
+}
+/* MateriTabs section border-top divider */
+[data-theme="white"] .tka-pemantapan .border-white\/5 {
+  border-color: rgba(0,0,0,0.08) !important;
+}
+/* Progress bar background */
+[data-theme="white"] .tka-pemantapan .bg-white\/10 {
+  background: rgba(0,0,0,0.1) !important;
+}
+/* Score percentage badge */
+[data-theme="white"] .tka-pemantapan [style*="rgba(139,92,246,0.2)"] {
+  background: rgba(33,150,243,0.1) !important;
+  border-color: rgba(33,150,243,0.3) !important;
+  color: #0077b6 !important;
+}
+/* Question number circle */
+[data-theme="white"] .tka-pemantapan [style*="rgba(99,102,241,0.4), rgba(139,92,246"] {
+  background: rgba(33,150,243,0.15) !important;
+  border-color: rgba(33,150,243,0.3) !important;
+  color: #0077b6 !important;
+}
+/* Check/Hide answer buttons */
+[data-theme="white"] .tka-pemantapan [style*="rgba(99,102,241,0.7)"] {
+  background: linear-gradient(to right, #2196f3, #00bcd4) !important;
+  color: #ffffff !important;
+  border-color: rgba(33,150,243,0.4) !important;
+}
+/* Option letter badge */
+[data-theme="white"] .tka-pemantapan [style*="rgba(255,255,255,0.08)"] {
+  background: rgba(0,0,0,0.06) !important;
+}
+
+/* ── 4. BiografiPage: orange glow behind "Tergerak" text → hide in white ── */
+[data-theme="white"] .bg-orange-500\/20 {
+  background: transparent !important;
+}

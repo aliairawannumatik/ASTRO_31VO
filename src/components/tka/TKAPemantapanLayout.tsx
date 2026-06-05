@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, CheckCircle2, XCircle, Lightbulb, ArrowLeft, BookMarked, PenLine } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
@@ -51,6 +52,8 @@ const optionLetters = ['A', 'B', 'C', 'D', 'E'];
 
 const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materiSections, latihanDasar }: Props) => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isWhite = theme === "white";
   const [activeTab, setActiveTab] = useState<"materi" | "dasar">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>(() =>
     Array.from({ length: materiSections.length }, (_, i) => i)
@@ -100,8 +103,8 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
   const answeredCount = revealedAnswers.size;
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #0f0c29 0%, #141428 40%, #1a0a2e 70%, #0d1117 100%)" }}>
+    <div className="relative min-h-screen flex flex-col items-center overflow-hidden tka-pemantapan"
+      style={isWhite ? { background: "var(--bg-primary)" } : { background: "linear-gradient(160deg, #0f0c29 0%, #141428 40%, #1a0a2e 70%, #0d1117 100%)" }}>
       <Starfield />
       <PageNavigation />
 
@@ -112,7 +115,10 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
           <div className="absolute inset-0 rounded-2xl blur-2xl opacity-30"
             style={{ background: "radial-gradient(ellipse at 50% 0%, #6366f1 0%, transparent 70%)" }} />
           <div className="relative rounded-2xl overflow-hidden border border-indigo-500/30"
-            style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)" }}>
+            style={isWhite ? {
+              background: "linear-gradient(to right, #2196f3, #00bcd4)",
+              borderColor: "rgba(33,150,243,0.4)",
+            } : { background: "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)" }}>
             <div className="absolute top-0 left-0 right-0 h-px"
               style={{ background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.6), transparent)" }} />
 
@@ -149,7 +155,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
 
         {/* ── Tab Switcher ── */}
         <div className="flex gap-2 mb-6 p-1 rounded-xl"
-          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          style={isWhite ? { background: "var(--bg-secondary)", border: "1px solid var(--border)" } : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
           {[
             { key: "materi" as const, label: "📘 Ringkasan Materi", icon: BookOpen },
             { key: "dasar" as const, label: "✏️ Latihan Soal", icon: PenLine },
@@ -158,12 +164,17 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
               key={tab.key}
               onClick={() => { playPopSound(); setActiveTab(tab.key); }}
               className="flex-1 font-display text-xs py-2.5 px-3 rounded-lg cursor-pointer transition-all duration-200 font-bold"
-              style={activeTab === tab.key ? {
+              style={activeTab === tab.key ? (isWhite ? {
+                background: "linear-gradient(to right, #2196f3, #00bcd4)",
+                color: "#ffffff",
+                boxShadow: "0 2px 12px rgba(33,150,243,0.3)",
+                border: "1px solid rgba(33,150,243,0.4)",
+              } : {
                 background: "linear-gradient(135deg, rgba(99,102,241,0.6), rgba(139,92,246,0.4))",
                 color: "var(--text-primary)",
                 boxShadow: "0 2px 12px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
                 border: "1px solid rgba(167,139,250,0.4)",
-              } : {
+              }) : {
                 color: "var(--text-secondary)",
                 background: "transparent",
                 border: "1px solid transparent",
@@ -182,7 +193,11 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
               const isOpen = expandedSections.includes(idx);
               return (
                 <div key={idx} className={`relative rounded-2xl overflow-hidden border transition-all duration-300 ${color.border}`}
-                  style={{
+                  style={isWhite ? {
+                    background: isOpen ? "#f0f4ff" : "var(--bg-secondary)",
+                    border: `1px solid ${isOpen ? "rgba(33,150,243,0.25)" : "rgba(0,0,0,0.08)"}`,
+                    boxShadow: isOpen ? "0 4px 12px rgba(33,150,243,0.08)" : "none",
+                  } : {
                     background: isOpen
                       ? `linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(15,12,41,0.95) 100%)`
                       : "rgba(255,255,255,0.03)",
@@ -302,7 +317,16 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
 
                 return (
                   <div key={soal.no} className="relative rounded-2xl overflow-hidden"
-                    style={{
+                    style={isWhite ? {
+                      background: "var(--bg-card)",
+                      border: isRevealed
+                        ? isCorrect
+                          ? "1px solid rgba(34,197,94,0.45)"
+                          : "1px solid rgba(239,68,68,0.45)"
+                        : selected
+                          ? "1px solid rgba(33,150,243,0.45)"
+                          : "1px solid rgba(0,0,0,0.08)",
+                    } : {
                       background: "linear-gradient(135deg, rgba(20,20,40,0.95) 0%, rgba(15,10,30,0.98) 100%)",
                       border: isRevealed
                         ? isCorrect
@@ -357,27 +381,43 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                           const isSelected = selected === letter;
                           const isThisCorrect = letter === soal.jawaban;
 
-                          let optStyle: React.CSSProperties = {
+                          let optStyle: React.CSSProperties = isWhite ? {
+                            background: "var(--bg-secondary)",
+                            border: "1px solid var(--border)",
+                            color: "var(--text-primary)",
+                          } : {
                             background: "rgba(255,255,255,0.04)",
                             border: "1px solid rgba(255,255,255,0.1)",
                             color: "rgba(255,255,255,0.7)",
                           };
                           if (isRevealed) {
                             if (isThisCorrect) {
-                              optStyle = {
+                              optStyle = isWhite ? {
+                                background: "#dcfce7",
+                                border: "1px solid rgba(34,197,94,0.5)",
+                                color: "#15803d",
+                              } : {
                                 background: "rgba(34,197,94,0.15)",
                                 border: "1px solid rgba(34,197,94,0.5)",
                                 color: "#86efac",
                               };
                             } else if (isSelected && !isThisCorrect) {
-                              optStyle = {
+                              optStyle = isWhite ? {
+                                background: "#fef2f2",
+                                border: "1px solid rgba(239,68,68,0.4)",
+                                color: "#dc2626",
+                              } : {
                                 background: "rgba(239,68,68,0.12)",
                                 border: "1px solid rgba(239,68,68,0.4)",
                                 color: "#fca5a5",
                               };
                             }
                           } else if (isSelected) {
-                            optStyle = {
+                            optStyle = isWhite ? {
+                              background: "#eff6ff",
+                              border: "1px solid rgba(33,150,243,0.5)",
+                              color: "#1d4ed8",
+                            } : {
                               background: "rgba(99,102,241,0.2)",
                               border: "1px solid rgba(99,102,241,0.6)",
                               color: "#c7d2fe",
