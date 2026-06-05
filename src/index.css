@@ -261,6 +261,141 @@
   background-color: var(--bg-secondary) !important;
 }
 
+/* ════════════════════════════════════════════════════════
+   WHITE THEME TARGETED FIXES
+   All rules below apply ONLY to [data-theme="white"]
+   ════════════════════════════════════════════════════════ */
+
+/* ── MASALAH 1: Menu Utama – animated water gradient on buttons ── */
+@keyframes waterFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+[data-theme="white"] .water-btn,
+[data-theme="white"] .menu-card {
+  background: linear-gradient(
+    135deg, #0077b6, #00b4d8, #48cae4, #0096c7
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: waterFlow 4s ease infinite !important;
+  border-color: transparent !important;
+}
+
+[data-theme="white"] .water-btn *,
+[data-theme="white"] .menu-card * {
+  color: #ffffff !important;
+}
+
+/* ── MASALAH 2: Kalkulator Scientific ── */
+
+/* Number buttons: 0-9, dot, Exp, Ans (bg-slate-800/80) */
+[data-theme="white"] .bg-slate-800\/80 {
+  background-color: #e0f4ff !important;
+  color: #0a0a1a !important;
+}
+[data-theme="white"] .bg-slate-800\/80 * {
+  color: #0a0a1a !important;
+}
+
+/* Operator buttons: +, −, ×, ÷ (bg-slate-700/70) */
+[data-theme="white"] .bg-slate-700\/70 {
+  background-color: #00b4d8 !important;
+  color: #ffffff !important;
+}
+[data-theme="white"] .bg-slate-700\/70 * {
+  color: #ffffff !important;
+}
+
+/* Calculator display screen */
+[data-theme="white"] .from-cyan-900\/20 {
+  background: #f0f9ff !important;
+  color: #0a0a1a !important;
+}
+[data-theme="white"] .from-cyan-900\/20 *:not(.bg-cyan-500\/30):not(.bg-purple-500\/30) {
+  color: #0a0a1a !important;
+}
+
+/* ── MASALAH 3: Bank Soal ── */
+
+/* Question card container (has inline style — !important overrides it) */
+[data-theme="white"] .bg-card\/40 {
+  background: var(--bg-card) !important;
+}
+
+/* Answer / statement option rows */
+[data-theme="white"] .bg-muted\/30 {
+  background-color: #e8f4fd !important;
+}
+[data-theme="white"] .bg-muted\/30 * {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .border-border\/30 {
+  border-color: #00b4d8 !important;
+}
+
+/* Explanation accordion area (inline-style gradient — !important overrides) */
+[data-theme="white"] .border-primary\/20 {
+  background: #f0faff !important;
+}
+
+/* ── MASALAH 4: LKPD content ── */
+
+/* LKPD cards and inner content blocks */
+[data-theme="white"] .bg-card\/80 {
+  background-color: var(--bg-card) !important;
+}
+[data-theme="white"] .border-white\/10 {
+  border-color: rgba(0, 119, 182, 0.2) !important;
+}
+
+/* ── MASALAH 5: NUMATIK AI ── */
+
+/* Header bar and input bar (hardcoded dark bg) */
+[data-theme="white"] .bg-\[\#080f22\]\/90 {
+  background-color: var(--bg-card) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+[data-theme="white"] .bg-\[\#080f22\]\/90 > * {
+  color: var(--text-primary) !important;
+}
+
+/* AI message bubbles */
+[data-theme="white"] .bg-\[\#0d1627\]\/95 {
+  background-color: #eef7ff !important;
+  border-color: rgba(0, 119, 182, 0.15) !important;
+}
+[data-theme="white"] .bg-\[\#0d1627\]\/95 * {
+  color: var(--text-primary) !important;
+}
+
+/* Input textarea box */
+[data-theme="white"] .bg-\[\#0d1627\] {
+  background-color: #f0f9ff !important;
+  border-color: rgba(0, 119, 182, 0.25) !important;
+}
+[data-theme="white"] .bg-\[\#0d1627\] textarea {
+  color: var(--text-primary) !important;
+}
+[data-theme="white"] .bg-\[\#0d1627\] textarea::placeholder {
+  color: #6b9ab8 !important;
+}
+
+/* Quick topic buttons */
+[data-theme="white"] .bg-white\/4 {
+  background-color: #e0f4ff !important;
+  border-color: #00b4d8 !important;
+}
+[data-theme="white"] .bg-white\/4 * {
+  color: #0077b6 !important;
+}
+[data-theme="white"] .border-white\/8 {
+  border-color: #00b4d8 !important;
+}
+
+/* ════════════════════════════════════════════════════════ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
