@@ -144,7 +144,7 @@ const InteractiveCone3D = () => {
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar · Klik tombol untuk melihat jaring-jaring
+        Drag untuk memutar · Klik dan geser untuk eksplorasi
       </p>
 
       {!showNet ? (
@@ -221,12 +221,6 @@ const InteractiveCone3D = () => {
           className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer font-body ${!showNet ? "bg-cyan-700/60 border-cyan-500 text-cyan-200" : "bg-slate-800/60 border-slate-600 text-slate-300 hover:bg-slate-700/60"}`}
         >
           🔺 Kerucut 3D
-        </button>
-        <button
-          onClick={() => { playPopSound(); setShowNet(true); setRotX(-22); setRotY(28); }}
-          className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer font-body ${showNet ? "bg-indigo-700/60 border-indigo-500 text-indigo-200" : "bg-slate-800/60 border-slate-600 text-slate-300 hover:bg-slate-700/60"}`}
-        >
-          📋 Jaring-jaring
         </button>
       </div>
 
@@ -309,28 +303,60 @@ const GarisPelukisSVG = () => (
   </svg>
 );
 
-const LuasKerucutSVG = () => (
-  <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto my-2" aria-label="Luas permukaan kerucut">
-    <defs>
-      <style>{`
-        @keyframes lkAnim{0%,100%{fill-opacity:0.75;}50%{fill-opacity:0.2;}}
-        .lk1{animation:lkAnim 2s ease-in-out infinite;}
-        .lk2{animation:lkAnim 2s ease-in-out infinite 0.7s;}
-      `}</style>
-    </defs>
-    {/* Selimut (sector) */}
-    <path d="M 100,90 L 15,200 A 105,105 0 0,1 185,200 Z" fill="#06b6d4" className="lk1" stroke="#22d3ee" strokeWidth="1.5"/>
-    <text x="97" y="165" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SELIMUT</text>
-    <text x="97" y="178" fill="#e0f2fe" fontSize="9" fontFamily="monospace" textAnchor="middle">πrs</text>
-    {/* Alas (circle) */}
-    <circle cx="265" cy="155" r="48" fill="#6366f1" className="lk2" stroke="#a5b4fc" strokeWidth="1.5"/>
-    <text x="265" y="158" fill="var(--icon-color)" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ALAS</text>
-    <text x="265" y="171" fill="#e0e7ff" fontSize="9" fontFamily="monospace" textAnchor="middle">πr²</text>
-    {/* Formula */}
-    <text x="170" y="28" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = πr² + πrs</text>
-    <text x="170" y="46" fill="#94a3b8" fontSize="10" fontFamily="monospace" textAnchor="middle">= πr(r + s)</text>
-  </svg>
-);
+const LuasKerucutSVG = () => {
+  /* Sector geometry: apex at (140,55), R=90, sector angle=150°
+     half-angle=75°, opening downward
+     x1=140+90·cos15°≈227, y1=55+90·sin15°≈78
+     x2=140+90·cos165°≈53, y2=78
+     arc bottom at (140, 145)                               */
+  const cx = 140, cy = 55, R = 90;
+  const x1 = cx + R * Math.cos(15 * Math.PI / 180);
+  const y1 = cy + R * Math.sin(15 * Math.PI / 180);
+  const x2 = cx + R * Math.cos(165 * Math.PI / 180);
+  const y2 = cy + R * Math.sin(165 * Math.PI / 180);
+  const midSx = (cx + x2) / 2 - 8; // midpoint of left arm for 's' label
+  const midSy = (cy + y2) / 2 - 2;
+
+  return (
+    <svg viewBox="0 0 280 270" className="w-full max-w-sm mx-auto my-2" aria-label="Luas permukaan kerucut">
+      <defs>
+        <style>{`
+          @keyframes lkAnim{0%,100%{fill-opacity:0.80;}50%{fill-opacity:0.25;}}
+          .lk1{animation:lkAnim 2s ease-in-out infinite;}
+          .lk2{animation:lkAnim 2s ease-in-out infinite 0.7s;}
+        `}</style>
+      </defs>
+
+      {/* ── Formula bar ── */}
+      <text x="140" y="18" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = πrs + πr²</text>
+      <text x="140" y="33" fill="#94a3b8" fontSize="10" fontFamily="monospace" textAnchor="middle">= πr(r + s)</text>
+
+      {/* ── SELIMUT — proper juring (sector) lingkaran ── */}
+      <path
+        d={`M ${cx},${cy} L ${x1.toFixed(1)},${y1.toFixed(1)} A ${R},${R} 0 0,1 ${x2.toFixed(1)},${y2.toFixed(1)} Z`}
+        fill="#06b6d4" className="lk1" stroke="#22d3ee" strokeWidth="1.8"
+      />
+      {/* apex dot */}
+      <circle cx={cx} cy={cy} r="3.5" fill="#facc15" opacity="0.9"/>
+      {/* s label on left arm */}
+      <text x={midSx} y={midSy} fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">s</text>
+      {/* SELIMUT labels — centroid at ≈y=100 */}
+      <text x={cx} y="100" fill="#ffffff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SELIMUT</text>
+      <text x={cx} y="114" fill="#e0f2fe" fontSize="9" fontFamily="monospace" textAnchor="middle">πrs</text>
+
+      {/* ── + sign between sector and alas ── */}
+      <text x={cx} y="164" fill="#64748b" fontSize="16" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
+
+      {/* ── ALAS — circle below sector ── */}
+      <circle cx={cx} cy="215" r="42" fill="#6366f1" className="lk2" stroke="#a5b4fc" strokeWidth="1.8"/>
+      {/* r line */}
+      <line x1={cx} y1="215" x2={cx + 42} y2="215" stroke="#facc15" strokeWidth="1.2" strokeDasharray="3,2"/>
+      <text x={cx + 21} y="210" fill="#facc15" fontSize="9" fontFamily="monospace" textAnchor="middle">r</text>
+      <text x={cx} y="218" fill="#ffffff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ALAS</text>
+      <text x={cx} y="231" fill="#e0e7ff" fontSize="9" fontFamily="monospace" textAnchor="middle">πr²</text>
+    </svg>
+  );
+};
 
 const VolumeKerucutSVG = () => (
   <svg viewBox="0 0 300 260" className="w-full max-w-sm mx-auto my-2" aria-label="Volume kerucut">
@@ -733,13 +759,11 @@ const ConeNetAnimation = () => {
       ctx.fillText('juring lingkaran', LX, APEX_Y + s / 2 + 6);
       ctx.fillText('r_juring = s', LX, APEX_Y + s / 2 + 18);
       ctx.fillText(`busur = 2πr`, LX, APEX_Y + s / 2 + 30);
-      ctx.fillText(`sudut ≈ ${Math.round((r / s) * 360)}°`, LX, APEX_Y + s / 2 + 42);
-
-      // Final success text — centered, yellow
+      // Final success text — above the alas, not colliding
       ctx.textAlign = 'center';
       ctx.fillStyle = ylw(la);
       ctx.font = 'bold 10px monospace';
-      ctx.fillText('✓ Jaring-jaring = SELIMUT + ALAS (menyatu)', CX, canvas.height - 8);
+      ctx.fillText('✓ Jaring-jaring = SELIMUT + ALAS', CX, APEX_Y + s - 14);
     }
 
     // Progress bar
