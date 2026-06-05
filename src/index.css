@@ -1216,6 +1216,30 @@
 .theme-white .bg-white {
   background-color: #ffffff !important;
 }
+
+/* ── Water-flow gradient buttons — white theme only ── */
+@keyframes waterFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+[data-theme="white"] .water-btn {
+  background: linear-gradient(
+    135deg,
+    #0077b6,
+    #00b4d8,
+    #48cae4,
+    #0096c7
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: waterFlow 4s ease infinite !important;
+}
+
+[data-theme="white"] .water-btn,
+[data-theme="white"] .water-btn * {
+  color: #ffffff !important;
+}
 .theme-white .bg-white\/5,
 .theme-white .bg-white\/10,
 .theme-white .bg-white\/20 {

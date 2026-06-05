@@ -64,7 +64,7 @@ const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel, 
                 key={subtopic.label}
                 onClick={() => { if (!isComingSoon) { playPopSound(); navigate(subtopic.path); } }}
                 disabled={isComingSoon}
-                className={`group relative rounded-2xl overflow-hidden text-left transition-all duration-300 animate-slide-up ${isComingSoon ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.01] cursor-pointer'}`}
+                className={`water-btn group relative rounded-2xl overflow-hidden text-left transition-all duration-300 animate-slide-up ${isComingSoon ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.01] cursor-pointer'}`}
                 style={{ animationDelay: `${i * 0.07}s`, background: 'var(--btn-bg)' }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} backdrop-blur`} />

@@ -71,7 +71,7 @@ const MenuPage = () => {
             <button
               key={item.path}
               onClick={() => handleClick(item.path)}
-              className="group relative bg-card/80 backdrop-blur border border-border rounded-xl p-6 
+              className="water-btn group relative bg-card/80 backdrop-blur border border-border rounded-xl p-6 
                 hover:border-primary/60 hover:box-glow-cyan transition-all duration-300 
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.1}s` }}

@@ -80,7 +80,7 @@ const GameSubtopicPage = ({
               <button
                 key={subtopic.name}
                 onClick={() => { playPopSound(); navigate(subtopic.path); }}
-                className={`group relative flex items-stretch overflow-hidden rounded-2xl text-left
+                className={`water-btn group relative flex items-stretch overflow-hidden rounded-2xl text-left
                   transition-all duration-300 animate-slide-up
                   ${isComingSoon ? "cursor-default opacity-70" : "cursor-pointer hover:scale-[1.015]"}`}
                 style={{
