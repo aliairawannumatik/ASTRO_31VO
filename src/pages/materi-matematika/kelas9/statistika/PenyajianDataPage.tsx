@@ -520,28 +520,54 @@ const PenyajianDataPage = () => {
                     <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
                     <p className="font-body text-sm text-white">
-                      Perhatikan tabel distribusi frekuensi berikut:
+                      Data nilai ulangan IPA 10 siswa: <strong className="text-cyan-300">70, 80, 75, 90, 80, 75, 70, 85, 90, 75</strong>.
                     </p>
-                    <div className="mt-2 overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1 text-left text-white/70">Kelas</th><th className="px-3 py-1 text-center text-white/70">Frekuensi</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["40–49","4"],["50–59","8"],["60–69","12"],["70–79","6"]].map(([k,f]) => (
-                            <tr key={k}><td className="px-3 py-1 text-white">{k}</td><td className="px-3 py-1 text-center text-green-300">{f}</td></tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    <p className="font-body text-sm text-white mt-2">Tentukan: (a) Total frekuensi, (b) Titik tengah kelas 60–69.</p>
+                    <p className="font-body text-sm text-white">
+                      Buat tabel distribusi frekuensi data tunggal, lalu tentukan:<br />
+                      (a) Total frekuensi &nbsp; (b) Modus (nilai yang paling sering muncul)
+                    </p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p>(a) Total frekuensi = <InlineMath math="4 + 8 + 12 + 6 = \mathbf{30}" /></p>
-                        <p>(b) Titik tengah 60–69 = <InlineMath math="\frac{60+69}{2} = \frac{129}{2} = \mathbf{64,5}" /></p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Urutkan data → 70, 70, 75, 75, 75, 80, 80, 85, 90, 90</p>
+                      <p><strong>Langkah 2:</strong> Hitung kemunculan tiap nilai:</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body">
+                          <thead>
+                            <tr className="bg-slate-700/40">
+                              <th className="px-3 py-1.5 text-left text-white/70">Nilai (x)</th>
+                              <th className="px-3 py-1.5 text-center text-white/70">Turus</th>
+                              <th className="px-3 py-1.5 text-center text-white/70">Frekuensi (f)</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-700/30">
+                            {[
+                              ["70","||","2"],
+                              ["75","|||","3"],
+                              ["80","||","2"],
+                              ["85","|","1"],
+                              ["90","||","2"],
+                            ].map(([x,t,f],i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : ""}>
+                                <td className="px-3 py-1.5 text-green-300 font-bold">{x}</td>
+                                <td className="px-3 py-1.5 text-center text-cyan-300 tracking-widest">{t}</td>
+                                <td className="px-3 py-1.5 text-center text-white font-bold">{f}</td>
+                              </tr>
+                            ))}
+                            <tr className="border-t border-slate-500/50 font-bold bg-slate-700/20">
+                              <td className="px-3 py-1.5 text-yellow-300">Jumlah</td>
+                              <td className="px-3 py-1.5 text-center">—</td>
+                              <td className="px-3 py-1.5 text-center text-yellow-300">10</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1.5">
+                        <p>(a) Total frekuensi = <InlineMath math="2 + 3 + 2 + 1 + 2 = \mathbf{10}" /> ✓ (sama dengan banyak data)</p>
+                        <p>(b) Modus = nilai dengan frekuensi terbanyak = <span className="text-green-400 font-bold">75</span> (muncul 3 kali)</p>
                       </div>
                     </div>
                   </div>
@@ -553,54 +579,61 @@ const PenyajianDataPage = () => {
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
                     <p className="font-body text-sm text-white">
-                      Data berat badan (kg) 20 siswa: 45, 48, 50, 52, 53, 55, 56, 57, 58, 60, 61, 62, 63, 65, 66, 68, 70, 72, 75, 78.<br />
-                      Buat tabel distribusi frekuensi dengan 4 kelas, lalu hitung rata-ratanya!
+                      Data banyaknya buku yang dibaca 20 siswa dalam satu bulan:
+                    </p>
+                    <p className="font-body text-sm text-cyan-300 font-semibold">
+                      2, 3, 1, 4, 2, 3, 5, 2, 1, 3, 4, 2, 3, 1, 5, 2, 4, 3, 2, 1
+                    </p>
+                    <p className="font-body text-sm text-white">
+                      Buat tabel distribusi frekuensi data tunggal, lalu tentukan:<br />
+                      (a) Modus &nbsp; (b) Persentase siswa yang membaca 3 buku
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>Jangkauan: <InlineMath math="J = 78 - 45 = 33" /></p>
-                        <p>Panjang kelas: <InlineMath math="p = \lceil 33/4 \rceil = 9" /> → gunakan 9</p>
-                      </div>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Hitung frekuensi tiap nilai (1 s.d. 5):</p>
                       <div className="overflow-x-auto">
-                        <table className="w-full text-xs font-body mt-2">
-                          <thead><tr className="bg-slate-700/40">
-                            <th className="px-2 py-1 text-left text-cyan-300">Kelas</th>
-                            <th className="px-2 py-1 text-center text-white/70">f</th>
-                            <th className="px-2 py-1 text-center text-white/70">xᵢ</th>
-                            <th className="px-2 py-1 text-center text-white/70">f·xᵢ</th>
-                          </tr></thead>
+                        <table className="w-full text-xs font-body">
+                          <thead>
+                            <tr className="bg-slate-700/40">
+                              <th className="px-2 py-1.5 text-left text-white/70">Buku (x)</th>
+                              <th className="px-2 py-1.5 text-center text-white/70">Turus</th>
+                              <th className="px-2 py-1.5 text-center text-white/70">f</th>
+                              <th className="px-2 py-1.5 text-center text-white/70">Persentase</th>
+                            </tr>
+                          </thead>
                           <tbody className="divide-y divide-slate-700/30">
                             {[
-                              ["45 – 53","5","49","245"],
-                              ["54 – 62","8","58","464"],
-                              ["63 – 71","5","67","335"],
-                              ["72 – 80","2","76","152"],
-                            ].map(([k,f,xi,fxi]) => (
-                              <tr key={k}>
-                                <td className="px-2 py-1 text-white">{k}</td>
-                                <td className="px-2 py-1 text-center text-green-300">{f}</td>
-                                <td className="px-2 py-1 text-center text-yellow-300">{xi}</td>
-                                <td className="px-2 py-1 text-center text-cyan-300">{fxi}</td>
+                              ["1","||||","4","20%"],
+                              ["2","|||| |","6","30%"],
+                              ["3","||||","5","25%"],
+                              ["4","|||","3","15%"],
+                              ["5","||","2","10%"],
+                            ].map(([x,t,f,pct],i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : ""}>
+                                <td className="px-2 py-1.5 text-yellow-300 font-bold">{x}</td>
+                                <td className="px-2 py-1.5 text-center text-cyan-300 tracking-widest text-xs">{t}</td>
+                                <td className="px-2 py-1.5 text-center text-white font-bold">{f}</td>
+                                <td className="px-2 py-1.5 text-center text-yellow-200">{pct}</td>
                               </tr>
                             ))}
-                            <tr className="border-t border-slate-500/50 font-bold">
-                              <td className="px-2 py-1 text-white">Total</td>
-                              <td className="px-2 py-1 text-center text-green-400">20</td>
-                              <td className="px-2 py-1"></td>
-                              <td className="px-2 py-1 text-center text-cyan-400">1.196</td>
+                            <tr className="border-t border-slate-500/50 font-bold bg-slate-700/20">
+                              <td className="px-2 py-1.5 text-yellow-300">Jumlah</td>
+                              <td className="px-2 py-1.5 text-center">—</td>
+                              <td className="px-2 py-1.5 text-center text-yellow-300">20</td>
+                              <td className="px-2 py-1.5 text-center text-yellow-300">100%</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\bar{x} = \frac{1196}{20} = 59{,}8 \text{ kg}" />
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1.5">
+                        <p>(a) Modus = nilai dengan frekuensi terbanyak = <span className="text-yellow-400 font-bold">2 buku</span> (f = 6)</p>
+                        <p>(b) Persentase siswa membaca 3 buku:</p>
+                        <BlockMath math="\frac{5}{20} \times 100\% = \mathbf{25\%}" />
                       </div>
-                      <p><strong className="text-primary">Rata-rata berat badan = 59,8 kg</strong></p>
                     </div>
                   </div>
                 </div>
@@ -611,73 +644,62 @@ const PenyajianDataPage = () => {
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
                     <p className="font-body text-sm text-white">
-                      Dari tabel distribusi frekuensi berikut:
+                      Data nilai ulangan matematika 25 siswa:
                     </p>
-                    <div className="mt-2 overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40">
-                          <th className="px-2 py-1 text-left text-white/70">Kelas</th>
-                          <th className="px-2 py-1 text-center text-white/70">f</th>
-                        </tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["50–59","3"],["60–69","6"],["70–79","14"],["80–89","10"],["90–99","7"]].map(([k,f]) => (
-                            <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    <p className="font-body text-sm text-white mt-2">
-                      Tentukan: (a) Rata-rata data berkelompok, (b) Kelas modus, (c) Frekuensi kumulatif untuk kelas 70–79.
+                    <p className="font-body text-sm text-cyan-300 font-semibold leading-relaxed">
+                      60, 70, 80, 90, 70, 80, 70, 60, 80, 90, 70, 80, 70, 60, 80, 90, 70, 80, 70, 60, 80, 70, 90, 80, 70
+                    </p>
+                    <p className="font-body text-sm text-white mt-1">
+                      Buat tabel distribusi frekuensi data tunggal lengkap dengan frekuensi kumulatif (fk), lalu tentukan:<br />
+                      (a) Persentase siswa yang mendapat nilai ≥ 80 &nbsp;
+                      (b) Banyak siswa yang mendapat nilai di bawah 80 &nbsp;
+                      (c) Modus
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Hitung titik tengah dan f·xᵢ:</p>
-                      <div className="bg-slate-900/50 rounded p-2 overflow-x-auto">
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Hitung frekuensi tiap nilai dan frekuensi kumulatif (fk = jumlah f dari atas s.d. baris tersebut):</p>
+                      <div className="overflow-x-auto">
                         <table className="w-full text-xs font-body">
-                          <thead><tr className="border-b border-slate-600/50">
-                            <th className="px-2 py-1 text-left text-white/50">Kelas</th>
-                            <th className="px-2 py-1 text-center text-white/50">f</th>
-                            <th className="px-2 py-1 text-center text-white/50">xᵢ</th>
-                            <th className="px-2 py-1 text-center text-white/50">f·xᵢ</th>
-                            <th className="px-2 py-1 text-center text-white/50">fk</th>
-                          </tr></thead>
-                          <tbody className="divide-y divide-slate-700/20">
+                          <thead>
+                            <tr className="bg-slate-700/40">
+                              <th className="px-2 py-1.5 text-left text-white/70">Nilai (x)</th>
+                              <th className="px-2 py-1.5 text-center text-white/70">Frekuensi (f)</th>
+                              <th className="px-2 py-1.5 text-center text-white/70">Frek. Kumulatif (fk)</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-700/30">
                             {[
-                              ["50–59","3","54,5","163,5","3"],
-                              ["60–69","6","64,5","387","9"],
-                              ["70–79","14","74,5","1043","23"],
-                              ["80–89","10","84,5","845","33"],
-                              ["90–99","7","94,5","661,5","40"],
-                            ].map(([k,f,xi,fxi,fk]) => (
-                              <tr key={k}>
-                                <td className="px-2 py-1 text-white">{k}</td>
-                                <td className="px-2 py-1 text-center text-green-300">{f}</td>
-                                <td className="px-2 py-1 text-center text-yellow-300">{xi}</td>
-                                <td className="px-2 py-1 text-center text-cyan-300">{fxi}</td>
-                                <td className="px-2 py-1 text-center text-purple-300">{fk}</td>
+                              ["60","4","4"],
+                              ["70","9","13"],
+                              ["80","8","21"],
+                              ["90","4","25"],
+                            ].map(([x,f,fk],i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : ""}>
+                                <td className="px-2 py-1.5 text-red-300 font-bold">{x}</td>
+                                <td className="px-2 py-1.5 text-center text-green-300 font-bold">{f}</td>
+                                <td className="px-2 py-1.5 text-center text-purple-300">{fk}</td>
                               </tr>
                             ))}
-                            <tr className="border-t border-slate-500/50 font-bold">
-                              <td className="px-2 py-1 text-white">Total</td>
-                              <td className="px-2 py-1 text-center text-green-400">40</td>
-                              <td></td>
-                              <td className="px-2 py-1 text-center text-cyan-400">3.100</td>
-                              <td></td>
+                            <tr className="border-t border-slate-500/50 font-bold bg-slate-700/20">
+                              <td className="px-2 py-1.5 text-yellow-300">Jumlah</td>
+                              <td className="px-2 py-1.5 text-center text-yellow-300">25</td>
+                              <td className="px-2 py-1.5 text-center text-slate-400">—</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p><strong>(a)</strong> Rata-rata:</p>
-                        <BlockMath math="\bar{x} = \frac{3100}{40} = 77{,}5" />
-                        <p><strong>(b)</strong> Kelas modus = kelas dengan frekuensi tertinggi = <span className="text-red-400 font-semibold">70–79</span> (f = 14)</p>
-                        <p><strong>(c)</strong> Frekuensi kumulatif kelas 70–79 = <InlineMath math="3 + 6 + 14 = \mathbf{23}" /></p>
+                        <p><strong>(a)</strong> Siswa nilai ≥ 80 = f(80) + f(90) = 8 + 4 = 12 siswa</p>
+                        <BlockMath math="\text{Persentase} = \frac{12}{25} \times 100\% = \mathbf{48\%}" />
+                        <p><strong>(b)</strong> Siswa nilai &lt; 80 = f(60) + f(70) = 4 + 9 = <span className="text-red-400 font-bold">13 siswa</span></p>
+                        <p className="text-xs text-white/50 italic">(atau: fk nilai 70 = 13 siswa)</p>
+                        <p><strong>(c)</strong> Modus = nilai dengan frekuensi terbanyak = <span className="text-red-400 font-bold">70</span> (f = 9)</p>
                       </div>
-                      <p><strong className="text-primary">Rata-rata = 77,5; Kelas modus = 70–79; fk 70–79 = 23</strong></p>
+                      <p><strong className="text-primary">48% siswa nilai ≥ 80; 13 siswa nilai &lt; 80; Modus = 70</strong></p>
                     </div>
                   </div>
                 </div>
