@@ -14,206 +14,70 @@ import imgKelereng   from "@assets/image_1780702682181.png";
 import imgBowling    from "@assets/image_1780702856357.png";
 
 /* ─────────────────────────────────────────────────────────────
-   INTERACTIVE 3D SPHERE — CSS gradient + SVG latitude/longitude
+   INTERACTIVE 3D SPHERE — clean diagram (r & d labels)
 ───────────────────────────────────────────────────────────── */
 const SPHERE_R = 90;
 const SVG_W = 300;
 const SVG_H = 300;
 
-const InteractiveSphere3D = () => {
-  const [spinY, setSpinY] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [showLabels, setShowLabels] = useState(true);
-  const dragRef = useRef({ sx: 0, base: 0 });
-
-  const onMD = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    dragRef.current = { sx: e.clientX, base: spinY };
-  };
-  const onMM = useCallback((e: MouseEvent) => {
-    if (!isDragging) return;
-    setSpinY(dragRef.current.base + (e.clientX - dragRef.current.sx) * 0.8);
-  }, [isDragging]);
-  const onMU = useCallback(() => setIsDragging(false), []);
-  const onTS = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    setIsDragging(true);
-    dragRef.current = { sx: t.clientX, base: spinY };
-  };
-  const onTM = useCallback((e: TouchEvent) => {
-    if (!isDragging) return;
-    setSpinY(dragRef.current.base + (e.touches[0].clientX - dragRef.current.sx) * 0.8);
-  }, [isDragging]);
-  const onTE = useCallback(() => setIsDragging(false), []);
-
-  useEffect(() => {
-    window.addEventListener("mousemove", onMM);
-    window.addEventListener("mouseup", onMU);
-    window.addEventListener("touchmove", onTM, { passive: true });
-    window.addEventListener("touchend", onTE);
-    return () => {
-      window.removeEventListener("mousemove", onMM);
-      window.removeEventListener("mouseup", onMU);
-      window.removeEventListener("touchmove", onTM);
-      window.removeEventListener("touchend", onTE);
-    };
-  }, [onMM, onMU, onTM, onTE]);
-
-  useEffect(() => {
-    if (isDragging) return;
-    let frameId: number;
-    let lastTs = 0;
-    const animate = (ts: number) => {
-      if (lastTs) setSpinY(prev => prev + (ts - lastTs) * 0.03);
-      lastTs = ts;
-      frameId = requestAnimationFrame(animate);
-    };
-    frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
-  }, [isDragging]);
-
-  const cx = SVG_W / 2;
-  const cy = SVG_H / 2;
-
-  const latLines = [-60, -30, 0, 30, 60];
-  const lonCount = 6;
-
-  return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
-      <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar bola · Klik tombol untuk menampilkan/menyembunyikan label
-      </p>
-
-      <svg
-        viewBox={`0 0 ${SVG_W} ${SVG_H}`}
-        width="100%"
-        style={{ maxWidth: SVG_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
-        onMouseDown={onMD}
-        onTouchStart={onTS}
-      >
-        <defs>
-          <radialGradient id="sphereGrad" cx="35%" cy="30%" r="65%">
-            <stop offset="0%" stopColor="#7dd3fc" stopOpacity="1"/>
-            <stop offset="40%" stopColor="#3b82f6" stopOpacity="0.95"/>
-            <stop offset="100%" stopColor="#1e3a5f" stopOpacity="0.95"/>
-          </radialGradient>
-          <radialGradient id="sphereShine" cx="30%" cy="28%" r="35%">
-            <stop offset="0%" stopColor="white" stopOpacity="0.35"/>
-            <stop offset="100%" stopColor="white" stopOpacity="0"/>
-          </radialGradient>
-          <clipPath id="sphereClip">
-            <circle cx={cx} cy={cy} r={SPHERE_R}/>
-          </clipPath>
-          <filter id="sphereShadow">
-            <feDropShadow dx="4" dy="6" stdDeviation="10" floodColor="#000" floodOpacity="0.5"/>
-          </filter>
-          <style>{`
-            @keyframes spherePulse{0%,100%{opacity:0.7;}50%{opacity:1;}}
-            .sp{animation:spherePulse 3s ease-in-out infinite;}
-          `}</style>
-        </defs>
-
-        {/* Shadow */}
-        <ellipse cx={cx} cy={cy + SPHERE_R + 12} rx={SPHERE_R * 0.75} ry={12} fill="rgba(0,0,0,0.35)"/>
-
-        {/* Main sphere body */}
-        <circle cx={cx} cy={cy} r={SPHERE_R} fill="url(#sphereGrad)" filter="url(#sphereShadow)"/>
-
-        {/* Latitude lines (clipped to sphere) */}
-        <g clipPath="url(#sphereClip)">
-          {latLines.map(latDeg => {
-            const latRad = (latDeg * Math.PI) / 180;
-            const ry = SPHERE_R * Math.cos(latRad);
-            const yOff = SPHERE_R * Math.sin(latRad);
-            return (
-              <ellipse
-                key={latDeg}
-                cx={cx}
-                cy={cy - yOff}
-                rx={ry}
-                ry={ry * 0.25}
-                fill="none"
-                stroke={latDeg === 0 ? "#facc15" : "#ffffff"}
-                strokeWidth={latDeg === 0 ? 1.8 : 0.9}
-                opacity={latDeg === 0 ? 0.8 : 0.35}
-                strokeDasharray={latDeg === 0 ? "none" : "4,3"}
-              />
-            );
-          })}
-
-          {/* Longitude lines */}
-          {Array.from({ length: lonCount }, (_, i) => {
-            const angle = ((i * 180) / lonCount + spinY) % 180;
-            const rad = (angle * Math.PI) / 180;
-            const rx = SPHERE_R * Math.abs(Math.sin(rad));
-            return (
-              <ellipse
-                key={i}
-                cx={cx}
-                cy={cy}
-                rx={rx < 2 ? 0 : rx}
-                ry={SPHERE_R}
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth={0.9}
-                opacity={0.3}
-                strokeDasharray="5,4"
-              />
-            );
-          })}
-        </g>
-
-        {/* Shine overlay */}
-        <circle cx={cx} cy={cy} r={SPHERE_R} fill="url(#sphereShine)"/>
-
-        {/* Sphere outline */}
-        <circle cx={cx} cy={cy} r={SPHERE_R} fill="none" stroke="#93c5fd" strokeWidth="1.5"/>
-
-        {showLabels && (
-          <g>
-            {/* Diameter line */}
-            <line x1={cx - SPHERE_R} y1={cy} x2={cx + SPHERE_R} y2={cy} stroke="#facc15" strokeWidth="2" strokeDasharray="6,4" opacity="0.9" className="sp"/>
-            <text x={cx} y={cy - 8} fill="#facc15" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 2r</text>
-
-            {/* Radius arrow */}
-            <line x1={cx} y1={cy} x2={cx + SPHERE_R} y2={cy} stroke="#f97316" strokeWidth="2.5"/>
-            <circle cx={cx} cy={cy} r="4" fill="#f97316"/>
-            <circle cx={cx + SPHERE_R} cy={cy} r="4" fill="#f97316"/>
-            <text x={cx + SPHERE_R / 2} y={cy + 16} fill="#f97316" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-
-            {/* Center label */}
-            <text x={cx - 10} y={cy + 4} fill="#e0e7ff" fontSize="9" fontFamily="monospace">O</text>
-
-            {/* Formula labels */}
-            <text x="8" y="24" fill="#22d3ee" fontSize="9" fontFamily="monospace">L = 4πr²</text>
-            <text x="8" y="38" fill="#a78bfa" fontSize="9" fontFamily="monospace">V = ⁴⁄₃πr³</text>
-          </g>
-        )}
-      </svg>
-
-      <div className="flex flex-wrap gap-2 justify-center">
-        <button
-          onClick={() => { playPopSound(); setShowLabels(v => !v); }}
-          className="px-3 py-1.5 text-xs font-bold bg-blue-900/60 border border-blue-600 text-blue-300 rounded-lg hover:bg-blue-800/60 transition-colors cursor-pointer font-body"
-        >
-          {showLabels ? "🔵 Sembunyikan Label" : "🔵 Tampilkan Label"}
-        </button>
-        <button
-          onClick={() => { playPopSound(); setSpinY(0); }}
-          className="px-3 py-1.5 text-xs font-bold bg-slate-800/60 border border-slate-600 text-slate-300 rounded-lg hover:bg-slate-700/60 transition-colors cursor-pointer font-body"
-        >
-          ↺ Reset Posisi
-        </button>
-      </div>
-
-      <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
-        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-yellow-400"/><span className="text-white/50">Khatulistiwa</span></span>
-        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-white opacity-40"/><span className="text-white/50">Lintang/Bujur</span></span>
-        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full inline-block bg-orange-400"/><span className="text-white/50">Jari-jari (r)</span></span>
-      </div>
+const InteractiveSphere3D = () => (
+  <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
+    <svg
+      viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+      width="100%"
+      style={{ maxWidth: SVG_W, display: "block", margin: "0 auto" }}
+    >
+      <defs>
+        <radialGradient id="sphereGrad" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stopColor="#7dd3fc" stopOpacity="1"/>
+          <stop offset="40%" stopColor="#3b82f6" stopOpacity="0.95"/>
+          <stop offset="100%" stopColor="#1e3a5f" stopOpacity="0.95"/>
+        </radialGradient>
+        <radialGradient id="sphereShine" cx="30%" cy="28%" r="35%">
+          <stop offset="0%" stopColor="white" stopOpacity="0.35"/>
+          <stop offset="100%" stopColor="white" stopOpacity="0"/>
+        </radialGradient>
+        <filter id="sphereShadow">
+          <feDropShadow dx="4" dy="6" stdDeviation="10" floodColor="#000" floodOpacity="0.5"/>
+        </filter>
+        <style>{`
+          @keyframes spherePulse{0%,100%{opacity:0.7;}50%{opacity:1;}}
+          .sp{animation:spherePulse 3s ease-in-out infinite;}
+        `}</style>
+      </defs>
+      <ellipse cx={SVG_W/2} cy={SVG_H/2 + SPHERE_R + 12} rx={SPHERE_R * 0.75} ry={12} fill="rgba(0,0,0,0.35)"/>
+      <circle cx={SVG_W/2} cy={SVG_H/2} r={SPHERE_R} fill="url(#sphereGrad)" filter="url(#sphereShadow)"/>
+      <circle cx={SVG_W/2} cy={SVG_H/2} r={SPHERE_R} fill="url(#sphereShine)"/>
+      <circle cx={SVG_W/2} cy={SVG_H/2} r={SPHERE_R} fill="none" stroke="#93c5fd" strokeWidth="1.5"/>
+      {/* Diameter line */}
+      <line x1={SVG_W/2 - SPHERE_R} y1={SVG_H/2} x2={SVG_W/2 + SPHERE_R} y2={SVG_H/2}
+        stroke="#facc15" strokeWidth="2" strokeDasharray="6,4" opacity="0.9" className="sp"/>
+      {/* Radius line */}
+      <line x1={SVG_W/2} y1={SVG_H/2} x2={SVG_W/2 + SPHERE_R} y2={SVG_H/2}
+        stroke="#f97316" strokeWidth="2.5"/>
+      <circle cx={SVG_W/2} cy={SVG_H/2} r="4" fill="#f97316"/>
+      <circle cx={SVG_W/2 + SPHERE_R} cy={SVG_H/2} r="4" fill="#f97316"/>
+      {/* Center O */}
+      <text x={SVG_W/2 - 13} y={SVG_H/2 + 4} fill="#e0e7ff" fontSize="9" fontFamily="monospace">O</text>
+      {/* d = diameter label */}
+      <text x={SVG_W/2} y={SVG_H/2 - 14} fill="#facc15" fontSize="11"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = diameter</text>
+      {/* r = jari-jari label */}
+      <text x={SVG_W/2 + SPHERE_R/2} y={SVG_H/2 + 19} fill="#f97316" fontSize="11"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">r = jari-jari</text>
+    </svg>
+    <div className="flex flex-wrap gap-3 justify-center text-[10px] font-body">
+      <span className="flex items-center gap-1.5">
+        <span className="inline-block w-6 h-0.5 bg-yellow-400 opacity-80"/>
+        <span className="text-white/55">d = diameter</span>
+      </span>
+      <span className="flex items-center gap-1.5">
+        <span className="w-2.5 h-2.5 rounded-full inline-block bg-orange-400"/>
+        <span className="text-white/55">r = jari-jari</span>
+      </span>
     </div>
-  );
-};
+  </div>
+);
 
 /* ─────────────────────────────────────────────────────────────
    ANIMATED SVGs — UNSUR-UNSUR BOLA
@@ -250,6 +114,254 @@ const UnsurBolaSVG = () => (
     <text x="150" y="243" fill="#94a3b8" fontSize="9" fontFamily="monospace" textAnchor="middle">Setiap titik pada permukaan berjarak r dari pusat O</text>
   </svg>
 );
+
+/* ─────────────────────────────────────────────────────────────
+   INTERACTIVE HALF-SPHERE (HEMISPHERE) — draggable
+───────────────────────────────────────────────────────────── */
+const HS_R = 85;
+const HS_W = 300;
+const HS_CX = 150;
+const HS_CY = 130;
+
+const InteractiveHalfSphere3D = () => {
+  const [spinY, setSpinY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef({ sx: 0, base: 0 });
+
+  const onMD = (e: React.MouseEvent) => { setIsDragging(true); dragRef.current = { sx: e.clientX, base: spinY }; };
+  const onMM = useCallback((e: MouseEvent) => { if (!isDragging) return; setSpinY(dragRef.current.base + (e.clientX - dragRef.current.sx) * 0.8); }, [isDragging]);
+  const onMU = useCallback(() => setIsDragging(false), []);
+  const onTS = (e: React.TouchEvent) => { const t = e.touches[0]; setIsDragging(true); dragRef.current = { sx: t.clientX, base: spinY }; };
+  const onTM = useCallback((e: TouchEvent) => { if (!isDragging) return; setSpinY(dragRef.current.base + (e.touches[0].clientX - dragRef.current.sx) * 0.8); }, [isDragging]);
+  const onTE = useCallback(() => setIsDragging(false), []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMM); window.addEventListener("mouseup", onMU);
+    window.addEventListener("touchmove", onTM, { passive: true }); window.addEventListener("touchend", onTE);
+    return () => { window.removeEventListener("mousemove", onMM); window.removeEventListener("mouseup", onMU); window.removeEventListener("touchmove", onTM); window.removeEventListener("touchend", onTE); };
+  }, [onMM, onMU, onTM, onTE]);
+
+  useEffect(() => {
+    if (isDragging) return;
+    let frameId: number; let lastTs = 0;
+    const animate = (ts: number) => { if (lastTs) setSpinY(prev => prev + (ts - lastTs) * 0.03); lastTs = ts; frameId = requestAnimationFrame(animate); };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isDragging]);
+
+  const lonCount = 5;
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
+      <p className="text-white/60 text-xs text-center font-body">Drag untuk memutar setengah bola</p>
+      <svg
+        viewBox={`0 0 ${HS_W} 200`}
+        width="100%"
+        style={{ maxWidth: HS_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMD}
+        onTouchStart={onTS}
+      >
+        <defs>
+          <radialGradient id="hsGrad" cx="35%" cy="25%" r="65%">
+            <stop offset="0%" stopColor="#7dd3fc" stopOpacity="1"/>
+            <stop offset="40%" stopColor="#3b82f6" stopOpacity="0.95"/>
+            <stop offset="100%" stopColor="#1e3a5f" stopOpacity="0.95"/>
+          </radialGradient>
+          <radialGradient id="hsShine" cx="30%" cy="22%" r="32%">
+            <stop offset="0%" stopColor="white" stopOpacity="0.35"/>
+            <stop offset="100%" stopColor="white" stopOpacity="0"/>
+          </radialGradient>
+          <clipPath id="hsHalfClip">
+            <rect x="0" y="0" width={HS_W} height={HS_CY}/>
+          </clipPath>
+          <filter id="hsShadow">
+            <feDropShadow dx="3" dy="5" stdDeviation="8" floodColor="#000" floodOpacity="0.45"/>
+          </filter>
+        </defs>
+
+        {/* Shadow below base */}
+        <ellipse cx={HS_CX} cy={HS_CY + 13} rx={HS_R * 0.80} ry={10} fill="rgba(0,0,0,0.30)"/>
+
+        {/* Dome — clipped to upper half */}
+        <g clipPath="url(#hsHalfClip)">
+          <circle cx={HS_CX} cy={HS_CY} r={HS_R} fill="url(#hsGrad)" filter="url(#hsShadow)"/>
+          {Array.from({ length: lonCount }, (_, i) => {
+            const angle = ((i * 180) / lonCount + spinY) % 180;
+            const rad = (angle * Math.PI) / 180;
+            const rx = HS_R * Math.abs(Math.sin(rad));
+            return (
+              <ellipse key={i} cx={HS_CX} cy={HS_CY} rx={rx < 2 ? 0 : rx} ry={HS_R}
+                fill="none" stroke="#ffffff" strokeWidth={0.8} opacity={0.22} strokeDasharray="5,4"/>
+            );
+          })}
+          <circle cx={HS_CX} cy={HS_CY} r={HS_R} fill="url(#hsShine)"/>
+          <circle cx={HS_CX} cy={HS_CY} r={HS_R} fill="none" stroke="#93c5fd" strokeWidth="1.5"/>
+        </g>
+
+        {/* Flat base ellipse */}
+        <ellipse cx={HS_CX} cy={HS_CY} rx={HS_R} ry={HS_R * 0.27}
+          fill="rgba(99,102,241,0.38)" stroke="#a5b4fc" strokeWidth="2"/>
+
+        {/* r line on base */}
+        <line x1={HS_CX} y1={HS_CY} x2={HS_CX + HS_R} y2={HS_CY} stroke="#f97316" strokeWidth="2"/>
+        <circle cx={HS_CX} cy={HS_CY} r="3.5" fill="#f97316"/>
+        <circle cx={HS_CX + HS_R} cy={HS_CY} r="3.5" fill="#f97316"/>
+        <text x={HS_CX + HS_R/2} y={HS_CY + 17} fill="#f97316" fontSize="10"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+
+        {/* Info labels */}
+        <text x="10" y="20" fill="#7dd3fc" fontSize="9" fontFamily="monospace">Setengah Bola (Hemisphere)</text>
+        <text x="10" y="34" fill="#c4b5fd" fontSize="9" fontFamily="monospace">Sisi lengkung = 2πr²</text>
+        <text x="10" y="48" fill="#4ade80" fontSize="9" fontFamily="monospace">Alas lingkaran = πr²</text>
+      </svg>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   HALF-SPHERE → 3 CIRCLES ANIMATION  (L = 3πr²)
+   Setengah bola dipecah: 2 lingkaran selimut + 1 lingkaran alas
+───────────────────────────────────────────────────────────── */
+const _hsLerp  = (a: number, b: number, t: number) => a + (b - a) * t;
+const _hsEase  = (t: number) => 1 - Math.pow(1 - t, 3);
+const _hsClamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+const HS3_DUR = 5000;
+const HS3_R   = 44;
+
+const HS3_CIRCLES = [
+  { label: "πr²", color: "rgba(34,211,238,0.85)",  stroke: "#22d3ee", tx: 68,  ty: 105, desc: "Selimut atas" },
+  { label: "πr²", color: "rgba(168,85,247,0.85)",  stroke: "#a78bfa", tx: 160, ty: 105, desc: "Selimut bawah" },
+  { label: "πr²", color: "rgba(74,222,128,0.85)",  stroke: "#4ade80", tx: 252, ty: 105, desc: "Alas lingkaran" },
+] as const;
+
+const HalfSphereTo3CirclesAnimation = () => {
+  const [phase, setPhase]       = useState<"idle"|"running"|"done">("idle");
+  const [progress, setProgress] = useState(0);
+  const rafRef = useRef<number|null>(null);
+  const t0Ref  = useRef<number|null>(null);
+
+  const doStart = () => {
+    if (phase !== "idle") return;
+    setPhase("running"); t0Ref.current = null;
+    const tick = (now: number) => {
+      if (!t0Ref.current) t0Ref.current = now;
+      const raw = Math.min((now - t0Ref.current) / HS3_DUR, 1);
+      setProgress(raw);
+      if (raw < 1) rafRef.current = requestAnimationFrame(tick);
+      else { setProgress(1); setPhase("done"); }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  const doReset = () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = null; t0Ref.current = null;
+    setPhase("idle"); setProgress(0);
+  };
+
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
+  const p = progress;
+  const isDone = phase === "done";
+
+  const domeOp    = _hsClamp(1 - _hsClamp((p - 0.28) / 0.26, 0, 1), 0, 1);
+  const tSep      = _hsEase(_hsClamp((p - 0.24) / 0.38, 0, 1));
+  const tMorph    = _hsEase(_hsClamp((p - 0.50) / 0.35, 0, 1));
+  const tLabel    = _hsClamp((p - 0.82) / 0.18, 0, 1);
+  const circleOp  = _hsClamp((p - 0.22) / 0.12, 0, 1);
+
+  return (
+    <div style={{ background:"rgba(4,8,22,0.94)", border:"1px solid rgba(74,222,128,0.35)", borderRadius:14, padding:"12px 10px 10px", userSelect:"none" }}>
+      <style>{`
+        @keyframes hs3-in { from{opacity:0;transform:scale(.75);} to{opacity:1;transform:scale(1);} }
+        .hs3-in { animation: hs3-in .4s ease-out both; }
+      `}</style>
+      <p style={{ textAlign:"center", fontFamily:"monospace", fontSize:10, fontWeight:"bold", color:"#4ade80", letterSpacing:".06em", textTransform:"uppercase", marginBottom:8 }}>
+        ½ Bola → 3 Lingkaran → L = 3πr²
+      </p>
+      <svg viewBox="0 0 320 220" style={{ width:"100%", display:"block" }}>
+        <defs>
+          <radialGradient id="hs3-dome" cx="35%" cy="25%" r="65%">
+            <stop offset="0%" stopColor="#7dd3fc"/>
+            <stop offset="40%" stopColor="#3b82f6"/>
+            <stop offset="100%" stopColor="#1e3a5f"/>
+          </radialGradient>
+          <clipPath id="hs3-clip">
+            <rect x="105" y="22" width="110" height="62"/>
+          </clipPath>
+        </defs>
+
+        {/* Hemisphere (fades out) */}
+        {domeOp > 0.01 && (
+          <g style={{ opacity: domeOp }}>
+            <g clipPath="url(#hs3-clip)">
+              <circle cx="160" cy="84" r="62" fill="url(#hs3-dome)" stroke="#93c5fd" strokeWidth="1.2"/>
+            </g>
+            <ellipse cx="160" cy="84" rx="62" ry="17" fill="rgba(99,102,241,0.40)" stroke="#a5b4fc" strokeWidth="1.5"/>
+            {phase === "idle" && (
+              <text x="160" y="115" fill="#c4b5fd" fontSize="8.5" fontFamily="monospace" textAnchor="middle">
+                ½ Bola — tekan tombol untuk memecah
+              </text>
+            )}
+          </g>
+        )}
+
+        {/* 3 circles */}
+        {phase !== "idle" && HS3_CIRCLES.map((c, i) => {
+          const cxCur = _hsLerp(160, c.tx, tSep);
+          const cyCur = _hsLerp(84,  c.ty, tSep);
+          const rCur  = _hsLerp(16,  HS3_R, tMorph);
+          return (
+            <g key={i} style={{ opacity: circleOp }}>
+              <circle cx={cxCur} cy={cyCur} r={rCur} fill={c.color} stroke={c.stroke} strokeWidth="1.5"/>
+              {tLabel > 0.01 && (
+                <text x={cxCur} y={cyCur + 4} fill="white" fontSize="10" fontFamily="monospace"
+                  fontWeight="bold" textAnchor="middle" style={{ opacity: tLabel }}>πr²</text>
+              )}
+              {isDone && (
+                <text x={cxCur} y={cyCur + HS3_R + 16} fill={c.stroke} fontSize="7.5"
+                  fontFamily="monospace" textAnchor="middle"
+                  className="hs3-in" style={{ animationDelay:`${i * 0.1}s` }}>{c.desc}</text>
+              )}
+            </g>
+          );
+        })}
+
+        {/* + signs and formula when done */}
+        {isDone && (
+          <>
+            <text x="114" y="109" fill="#475569" fontSize="16" fontFamily="monospace" textAnchor="middle" className="hs3-in">+</text>
+            <text x="206" y="109" fill="#475569" fontSize="16" fontFamily="monospace" textAnchor="middle" className="hs3-in" style={{ animationDelay:"0.1s" }}>+</text>
+            <rect x="28" y="163" width="264" height="18" rx="6" fill="rgba(74,222,128,.12)" stroke="rgba(74,222,128,.45)" strokeWidth="1.2" className="hs3-in" style={{ animationDelay:"0.2s" }}/>
+            <text x="160" y="176" fill="#4ade80" fontSize="10.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle" className="hs3-in" style={{ animationDelay:"0.22s" }}>
+              L = πr² + πr² + πr² = 3πr²
+            </text>
+            <text x="160" y="198" fill="#94a3b8" fontSize="8.5" fontFamily="monospace" textAnchor="middle" className="hs3-in" style={{ animationDelay:"0.3s" }}>
+              (Selimut lengkung: 2πr² + Alas: πr²)
+            </text>
+          </>
+        )}
+      </svg>
+
+      <div style={{ display:"flex", gap:8, justifyContent:"center", marginTop:10 }}>
+        <button onClick={doStart} disabled={phase !== "idle"}
+          style={{ padding:"6px 18px", borderRadius:8, border:"1px solid #16a34a",
+            background: phase === "idle" ? "rgba(22,163,74,.20)" : "transparent",
+            color:"#4ade80", fontSize:12, fontWeight:"bold",
+            cursor: phase !== "idle" ? "not-allowed" : "pointer",
+            opacity: phase !== "idle" ? .35 : 1, fontFamily:"inherit" }}>
+          🔵 Pecah ½ Bola → 3 Lingkaran
+        </button>
+        <button onClick={doReset}
+          style={{ padding:"6px 18px", borderRadius:8, border:"1px solid #475569",
+            background:"transparent", color:"#94a3b8", fontSize:12, fontWeight:"bold",
+            cursor:"pointer", fontFamily:"inherit" }}>
+          ↺ Reset
+        </button>
+      </div>
+    </div>
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    SPHERE FRUIT-CUT ANIMATION
@@ -868,17 +980,6 @@ const sections: Sec[] = [
             <li>• Diameter bola <InlineMath math="d = 2r" /></li>
           </ul>
         </div>
-        <div className="grid grid-cols-3 gap-2 text-center text-xs font-body">
-          {["Bola Basket","Gelembung Sabun","Planet Bumi"].map(item => (
-            <div key={item} className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-2">
-              <p className="text-white/60">{item}</p>
-            </div>
-          ))}
-        </div>
-        <blockquote className="border-l-4 border-cyan-500 pl-3 text-cyan-200 text-xs italic">
-          💡 <strong>Bola vs Tabung/Kerucut:</strong> Bola tidak punya alas datar sama sekali! Seluruh permukaannya adalah sisi lengkung.
-        </blockquote>
-
         {/* ── Foto Benda Berbentuk Bola — slide 2 ── */}
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
           <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Bola di Kehidupan Sehari-hari</p>
@@ -908,7 +1009,7 @@ const sections: Sec[] = [
     icon: "🔍",
     content: (
       <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
-        <InteractiveSphere3D />
+        <InteractiveHalfSphere3D />
         <UnsurBolaSVG />
         <div className="grid grid-cols-1 gap-3">
           <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-3 space-y-1">
@@ -975,7 +1076,7 @@ const sections: Sec[] = [
           <strong className="text-yellow-300">4 lingkaran</strong> dengan jari-jari yang sama!
         </p>
         <SphereFruitCutAnimation />
-        <LuasBolaSVG />
+        <HalfSphereTo3CirclesAnimation />
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
           <p className="text-orange-300 font-semibold">📌 Penurunan Rumus:</p>
           <div className="text-xs text-white/70 space-y-1">
@@ -1007,7 +1108,6 @@ const sections: Sec[] = [
           <strong className="text-blue-300">Volume bola</strong> menyatakan besarnya ruang yang ditempati oleh bola.
           Rumus volume bola pertama kali ditemukan oleh <strong className="text-yellow-300">Archimedes</strong> dari Yunani kuno!
         </p>
-        <VolumeBolaSVG />
         <div className="bg-slate-900/70 border border-violet-700/40 rounded-xl p-3">
           <p className="text-violet-300 font-semibold text-xs text-center mb-2 font-body">💧 Animasi Pengisian Air — Bola</p>
           <WaterBolaAnimation />
@@ -1025,7 +1125,6 @@ const sections: Sec[] = [
             <BlockMath math="\boxed{V = \frac{4}{3}\pi r^3}" />
           </div>
         </div>
-        <SeparasiBolaSegitigaSVG />
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs space-y-1">
           <p className="text-cyan-300 font-semibold">🚀 Hubungan dengan Tabung:</p>
           <p className="text-white/70">Bola yang masuk pas dalam tabung (r & t = 2r sama):</p>
@@ -1051,7 +1150,6 @@ const sections: Sec[] = [
               {[
                 ["Diameter","d = 2r","dua kali jari-jari"],
                 ["Keliling penampang","K = 2πr","lingkaran besar"],
-                ["Luas penampang","L = πr²","lingkaran besar"],
                 ["Luas permukaan","L = 4πr²","4 lingkaran"],
                 ["Luas ½ bola (lengkung)","L = 2πr²","setengah permukaan"],
                 ["Luas ½ bola (total)","L = 3πr²","+ alas lingkaran"],
@@ -1284,20 +1382,6 @@ const BolaPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    {
-      title: "Pengantar: Bola",
-      icon: "🌍",
-      content: (
-        <div className="space-y-4 font-body">
-          <p className="text-white/80 text-sm leading-relaxed">
-            Dari bola sepak di lapangan hingga planet-planet di galaksi — bola ada di mana-mana!
-            Pelajari keindahan simetri sempurna <strong className="text-cyan-300">bola</strong>: unsur-unsurnya,
-            cara menghitung <strong className="text-orange-300">luas permukaan</strong> dan{" "}
-            <strong className="text-blue-300">volume</strong>-nya menggunakan rumus penemuan Archimedes yang legendaris.
-          </p>
-        </div>
-      ),
-    },
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
     {
       title: "Contoh Soal — Luas Permukaan",
@@ -1342,21 +1426,29 @@ const BolaPage = () => {
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
 
-        <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
+        <div className="flex items-center justify-center gap-1.5 mb-5 flex-wrap">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => { playPopSound(); setCurrentSlide(i); }}
-              className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${i === currentSlide ? "bg-primary scale-125" : "bg-white/20 hover:bg-white/40"}`}
+              className={`rounded-full transition-all duration-300 cursor-pointer ${
+                i === currentSlide
+                  ? "w-6 h-2.5 bg-primary"
+                  : "w-2.5 h-2.5 bg-slate-600 hover:bg-slate-400"
+              }`}
             />
           ))}
         </div>
 
-        <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-6">
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50">
+        <div className="bg-card/80 backdrop-blur border border-border rounded-2xl overflow-hidden mb-6">
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
             <span className="text-2xl">{slide.icon}</span>
-            <h2 className="font-display text-sm font-semibold text-white">{slide.title}</h2>
-            <span className="ml-auto text-xs text-white/30 font-body">{currentSlide + 1}/{total}</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+                Slide {currentSlide + 1} / {total}
+              </p>
+              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+            </div>
           </div>
           <div className="px-5 py-5">{slide.content}</div>
         </div>
