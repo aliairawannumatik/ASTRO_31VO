@@ -859,6 +859,107 @@ const ConeNetAnimation = () => {
   );
 };
 
+/* Unsur kerucut — sisi / rusuk / titik sudut menyala bergantian */
+const KerucutUnsurCountSVG = () => (
+  <svg viewBox="0 0 280 215" className="w-full max-w-xs mx-auto my-2" aria-label="Sisi rusuk titik sudut kerucut">
+    <defs>
+      <style>{`
+        @keyframes ks1g{0%,5%{opacity:1;filter:drop-shadow(0 0 8px #a855f7);}24%,100%{opacity:0.12;filter:none;}}
+        @keyframes ks2g{0%,26%{opacity:0.12;filter:none;}31%,49%{opacity:1;filter:drop-shadow(0 0 8px #818cf8);}54%,100%{opacity:0.12;filter:none;}}
+        @keyframes kr1g{0%,55%{opacity:0.12;filter:none;}60%,76%{opacity:1;filter:drop-shadow(0 0 10px #f59e0b);}81%,100%{opacity:0.12;filter:none;}}
+        @keyframes kt1g{0%,81%{opacity:0.12;filter:none;}86%,97%{opacity:1;filter:drop-shadow(0 0 10px #facc15);}100%{opacity:0.12;filter:none;}}
+        @keyframes kla{0%,5%{opacity:1;}24%,100%{opacity:0;}}
+        @keyframes klb{0%,26%{opacity:0;}31%,49%{opacity:1;}54%,100%{opacity:0;}}
+        @keyframes klc{0%,55%{opacity:0;}60%,76%{opacity:1;}81%,100%{opacity:0;}}
+        @keyframes kld{0%,81%{opacity:0;}86%,97%{opacity:1;}100%{opacity:0;}}
+        .ks1a{animation:ks1g 5.5s ease-in-out infinite;}
+        .ks2a{animation:ks2g 5.5s ease-in-out infinite;}
+        .kr1a{animation:kr1g 5.5s ease-in-out infinite;}
+        .kt1a{animation:kt1g 5.5s ease-in-out infinite;}
+        .kla{animation:kla  5.5s ease-in-out infinite;}
+        .klb{animation:klb  5.5s ease-in-out infinite;}
+        .klc{animation:klc  5.5s ease-in-out infinite;}
+        .kld{animation:kld  5.5s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* SISI ① Selimut — ungu */}
+    <path d="M 140 28 L 75 158 A 65 16 0 0 1 205 158 Z" fill="rgba(168,85,247,0.40)" stroke="#a855f7" strokeWidth="2.5" className="ks1a"/>
+    {/* SISI ② Alas — indigo */}
+    <ellipse cx="140" cy="158" rx="65" ry="16" fill="rgba(99,102,241,0.42)" stroke="#818cf8" strokeWidth="2.5" className="ks2a"/>
+    {/* RUSUK ① keliling alas — amber */}
+    <ellipse cx="140" cy="158" rx="65" ry="16" fill="none" stroke="#f59e0b" strokeWidth="4" className="kr1a"/>
+    {/* TITIK SUDUT ① puncak — kuning */}
+    <circle cx="140" cy="28" r="8" fill="#facc15" className="kt1a"/>
+    {/* Outline statis */}
+    <path d="M 140 28 L 75 158" stroke="#334155" strokeWidth="1.2" fill="none"/>
+    <path d="M 140 28 L 205 158" stroke="#334155" strokeWidth="1.2" fill="none"/>
+    <ellipse cx="140" cy="158" rx="65" ry="16" fill="none" stroke="#1e293b" strokeWidth="0.8"/>
+    <circle cx="140" cy="28" r="3" fill="#475569"/>
+    {/* Label bergantian — satu posisi, muncul bergantian */}
+    <text x="140" y="193" fill="#e9d5ff" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="kla">SISI ① — Selimut (lengkung)</text>
+    <text x="140" y="193" fill="#a5b4fc" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="klb">SISI ② — Alas (datar)</text>
+    <text x="140" y="193" fill="#fcd34d" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="klc">RUSUK ① — Keliling alas</text>
+    <text x="140" y="193" fill="#fef08a" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="kld">TITIK SUDUT ① — Puncak</text>
+    {/* Ringkasan statis */}
+    <text x="140" y="209" fill="#475569" fontSize="8" fontFamily="monospace" textAnchor="middle">2 Sisi · 1 Rusuk · 1 Titik Sudut</text>
+  </svg>
+);
+
+/* Selimut kerucut dibuka → juring lingkaran */
+const SelimutJuringAnimSVG = () => (
+  <svg viewBox="0 0 315 175" className="w-full max-w-sm mx-auto my-2" aria-label="Selimut kerucut dibuka menjadi juring">
+    <defs>
+      <style>{`
+        @keyframes kjco{0%,35%{opacity:1;}55%,100%{opacity:0.28;}}
+        @keyframes kjin{0%,35%{opacity:0.12;}58%,100%{opacity:1;}}
+        @keyframes kjap{0%,100%{opacity:0.35;}47%,53%{opacity:1;}}
+        .kjco{animation:kjco 4.5s ease-in-out infinite;}
+        .kjin{animation:kjin 4.5s ease-in-out infinite;}
+        .kjap{animation:kjap 4.5s ease-in-out infinite;}
+      `}</style>
+    </defs>
+
+    {/* LEFT: mini kerucut — selimut disorot ungu */}
+    <g className="kjco">
+      <path d="M 58 18 L 18 128 A 40 11 0 0 1 98 128 Z" fill="rgba(168,85,247,0.40)" stroke="#a855f7" strokeWidth="1.8"/>
+      <ellipse cx="58" cy="128" rx="40" ry="11" fill="rgba(99,102,241,0.22)" stroke="#818cf8" strokeWidth="1.2"/>
+      <circle cx="58" cy="18" r="3" fill="#facc15"/>
+      {/* Garis pelukis s */}
+      <line x1="58" y1="18" x2="18" y2="128" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="3,2"/>
+      <text x="25" y="75" fill="#fcd34d" fontSize="8" fontFamily="monospace" fontWeight="700">s</text>
+      <text x="58" y="150" fill="#a78bfa" fontSize="7.5" fontFamily="monospace" textAnchor="middle">kerucut</text>
+    </g>
+
+    {/* Panah tengah */}
+    <g className="kjap">
+      <line x1="108" y1="73" x2="133" y2="73" stroke="#475569" strokeWidth="1.8"/>
+      <polygon points="131,69 139,73 131,77" fill="#475569"/>
+      <text x="124" y="86" fill="#64748b" fontSize="7" fontFamily="monospace" textAnchor="middle">dibuka</text>
+    </g>
+
+    {/* RIGHT: juring lingkaran */}
+    {/* Center (228,148), radius 72, arc dari -150° ke -30° (120° = sudut representatif) */}
+    {/* -150°: (228+72×cos(-150°), 148+72×sin(-150°)) = (228-62.35, 148-36) = (165.65, 112) */}
+    {/* -30°:  (228+72×cos(-30°),  148+72×sin(-30°))  = (228+62.35, 148-36) = (290.35, 112) */}
+    <g className="kjin">
+      <path d="M 228 148 L 165.6 112 A 72 72 0 0 1 290.4 112 Z" fill="rgba(168,85,247,0.28)" stroke="#a855f7" strokeWidth="2"/>
+      {/* Label radius: s */}
+      <text x="192" y="136" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
+      <text x="264" y="136" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
+      {/* Arc top midpoint: -90° → (228, 148-72) = (228, 76) */}
+      <text x="228" y="67" fill="#f59e0b" fontSize="10.5" fontFamily="monospace" textAnchor="middle" fontWeight="700">2πr</text>
+      <text x="228" y="78" fill="#fde68a" fontSize="7" fontFamily="monospace" textAnchor="middle">(busur = keliling alas)</text>
+      {/* Sudut θ */}
+      <path d="M 250 136 Q 228 118 206 136" fill="none" stroke="#22c55e" strokeWidth="1.4"/>
+      <text x="228" y="133" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ</text>
+      <text x="228" y="162" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ = (r ÷ s) × 360°</text>
+      {/* Label juring */}
+      <text x="228" y="102" fill="#e9d5ff" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">SELIMUT</text>
+      <text x="228" y="112" fill="#c4b5fd" fontSize="7" fontFamily="monospace" textAnchor="middle">= juring lingkaran</text>
+    </g>
+  </svg>
+);
+
 /* ─────────────────────────────────────────────────────────────
    SECTIONS
 ───────────────────────────────────────────────────────────── */
@@ -952,6 +1053,55 @@ const sections: Sec[] = [
             <p className="text-xs text-white/70">Bidang lengkung yang menghubungkan tepi alas ke puncak. Jika dibuka, berbentuk <strong>juring (sektor) lingkaran</strong> dengan jari-jari = <InlineMath math="s" />.</p>
           </div>
         </div>
+
+        {/* ── Sisi / Rusuk / Titik Sudut — animasi bergantian ── */}
+        <div className="bg-slate-900/70 border border-slate-700 rounded-xl overflow-hidden">
+          <div className="flex items-center gap-3 px-4 py-2 bg-slate-800/60">
+            <span className="text-lg">✨</span>
+            <div>
+              <p className="text-white font-bold text-sm">Sisi, Rusuk & Titik Sudut Kerucut</p>
+              <p className="text-white/50 text-xs">Setiap bagian menyala satu per satu</p>
+            </div>
+          </div>
+          <KerucutUnsurCountSVG />
+          <div className="px-4 pb-3 grid grid-cols-3 gap-2 text-center text-xs">
+            <div className="bg-purple-950/50 border border-purple-700/40 rounded-lg p-2">
+              <p className="text-purple-300 font-bold text-base">2</p>
+              <p className="text-white/60 text-[10px]">Sisi</p>
+              <p className="text-white/40 text-[9px]">selimut + alas</p>
+            </div>
+            <div className="bg-amber-950/50 border border-amber-700/40 rounded-lg p-2">
+              <p className="text-amber-300 font-bold text-base">1</p>
+              <p className="text-white/60 text-[10px]">Rusuk</p>
+              <p className="text-white/40 text-[9px]">keliling alas</p>
+            </div>
+            <div className="bg-yellow-950/50 border border-yellow-700/40 rounded-lg p-2">
+              <p className="text-yellow-300 font-bold text-base">1</p>
+              <p className="text-white/60 text-[10px]">Titik Sudut</p>
+              <p className="text-white/40 text-[9px]">puncak</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Selimut kerucut dibuka → juring ── */}
+        <div className="bg-purple-950/40 border border-purple-700/50 rounded-xl overflow-hidden">
+          <div className="flex items-center gap-3 px-4 py-2 bg-purple-900/40">
+            <span className="text-lg">🌀</span>
+            <div>
+              <p className="text-purple-300 font-bold text-sm">Selimut Kerucut → Juring Lingkaran</p>
+              <p className="text-purple-200/60 text-xs">Jika selimut dibuka dan diratakan</p>
+            </div>
+          </div>
+          <SelimutJuringAnimSVG />
+          <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
+            <p>• Selimut kerucut jika dibuka → berbentuk <strong className="text-purple-300">juring lingkaran</strong> dengan:</p>
+            <p className="pl-3">— jari-jari juring = <strong className="text-yellow-300">s</strong> (garis pelukis)</p>
+            <p className="pl-3">— panjang busur = <strong className="text-yellow-300">2πr</strong> (keliling alas)</p>
+            <p className="pl-3">— sudut juring <strong className="text-green-300">θ = (r ÷ s) × 360°</strong></p>
+            <p>• Luas selimut = luas juring = <strong className="text-yellow-300">πrs</strong></p>
+          </div>
+        </div>
+
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
