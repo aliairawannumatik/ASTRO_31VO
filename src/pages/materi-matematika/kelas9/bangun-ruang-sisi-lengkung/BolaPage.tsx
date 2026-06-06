@@ -858,6 +858,7 @@ const sections: Sec[] = [
           Jarak itu disebut <strong className="text-yellow-300">jari-jari (r)</strong>.
           Bola adalah bentuk paling sempurna di alam — dari buah jeruk, gelembung sabun, hingga planet-planet di antariksa!
         </p>
+        <InteractiveSphere3D />
         <div className="bg-cyan-950/60 border border-cyan-700/50 rounded-lg p-4 space-y-2">
           <p className="text-cyan-300 font-semibold">📌 Sifat-sifat Bola:</p>
           <ul className="space-y-1 text-xs text-white/75">
@@ -1294,7 +1295,6 @@ const BolaPage = () => {
             cara menghitung <strong className="text-orange-300">luas permukaan</strong> dan{" "}
             <strong className="text-blue-300">volume</strong>-nya menggunakan rumus penemuan Archimedes yang legendaris.
           </p>
-          <InteractiveSphere3D />
         </div>
       ),
     },
