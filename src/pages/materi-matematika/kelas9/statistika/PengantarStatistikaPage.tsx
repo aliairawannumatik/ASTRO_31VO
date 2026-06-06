@@ -487,37 +487,267 @@ const PengantarStatistikaPage = () => {
                 </div>
 
                 {/* Kartu Jenis Penyajian */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-4">
-                    <p className="text-2xl mb-1">📋</p>
-                    <p className="font-body text-sm font-bold text-cyan-300 mb-1">Tabel</p>
-                    <p className="font-body text-xs text-white/70">Data disusun dalam baris dan kolom. Cocok untuk data berjumlah banyak. Contoh: tabel nilai siswa, tabel distribusi frekuensi.</p>
+                <div className="flex flex-col gap-4">
+
+                  {/* 1. TABEL */}
+                  <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+                    <div>
+                      <p className="font-body text-sm font-bold text-cyan-300 mb-1">📋 Tabel Distribusi Frekuensi</p>
+                      <p className="font-body text-xs text-white/70">Data disusun dalam baris dan kolom. Cocok untuk data berjumlah banyak dan memudahkan pembacaan frekuensi tiap kelompok.</p>
+                    </div>
+                    <div className="overflow-x-auto rounded-lg border border-cyan-500/20">
+                      <table className="w-full text-xs font-body">
+                        <thead>
+                          <tr className="bg-cyan-800/40">
+                            <th className="px-3 py-2 text-cyan-200 font-bold text-center">Nilai</th>
+                            <th className="px-3 py-2 text-cyan-200 font-bold text-center">Turus</th>
+                            <th className="px-3 py-2 text-cyan-200 font-bold text-center">Frekuensi</th>
+                            <th className="px-3 py-2 text-cyan-200 font-bold text-center">Persentase</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-cyan-500/10">
+                          {[
+                            { nilai: "50 – 59", turus: "||", f: 2, pct: "6,7%" },
+                            { nilai: "60 – 69", turus: "||||", f: 5, pct: "16,7%" },
+                            { nilai: "70 – 79", turus: "|||| |||||", f: 10, pct: "33,3%" },
+                            { nilai: "80 – 89", turus: "|||| ||||", f: 9, pct: "30,0%" },
+                            { nilai: "90 – 99", turus: "||||", f: 4, pct: "13,3%" },
+                          ].map((row, i) => (
+                            <tr key={i} className={i % 2 === 0 ? "bg-cyan-900/20" : "bg-slate-900/30"}>
+                              <td className="px-3 py-2 text-white font-semibold text-center">{row.nilai}</td>
+                              <td className="px-3 py-2 text-cyan-300 text-center tracking-widest">{row.turus}</td>
+                              <td className="px-3 py-2 text-white text-center font-bold">{row.f}</td>
+                              <td className="px-3 py-2 text-cyan-200 text-center">{row.pct}</td>
+                            </tr>
+                          ))}
+                          <tr className="bg-cyan-700/30">
+                            <td className="px-3 py-2 text-cyan-200 font-bold text-center">Jumlah</td>
+                            <td className="px-3 py-2 text-center">—</td>
+                            <td className="px-3 py-2 text-yellow-300 font-bold text-center">30</td>
+                            <td className="px-3 py-2 text-yellow-300 font-bold text-center">100%</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="font-body text-xs text-cyan-400 italic">📌 Data: Nilai ulangan 30 siswa Kelas 9A</p>
                   </div>
-                  <div className="bg-gradient-to-br from-green-900/40 to-teal-900/40 border border-green-500/30 rounded-xl p-4">
-                    <p className="text-2xl mb-1">📊</p>
-                    <p className="font-body text-sm font-bold text-green-300 mb-1">Diagram Batang</p>
-                    <p className="font-body text-xs text-white/70">Batang-batang tegak atau mendatar untuk membandingkan beberapa kategori data. Tinggi batang = frekuensi/nilai.</p>
+
+                  {/* 2. DIAGRAM BATANG */}
+                  <div className="bg-gradient-to-br from-green-900/40 to-teal-900/40 border border-green-500/30 rounded-xl p-4 space-y-3">
+                    <div>
+                      <p className="font-body text-sm font-bold text-green-300 mb-1">📊 Diagram Batang</p>
+                      <p className="font-body text-xs text-white/70">Batang-batang tegak untuk membandingkan beberapa kategori. Tinggi batang menunjukkan frekuensi/nilai data.</p>
+                    </div>
+                    <svg viewBox="0 0 280 170" className="w-full" style={{ fontFamily: "inherit" }}>
+                      <rect width="280" height="170" fill="transparent" />
+                      {/* Grid lines */}
+                      {[0,3,6,9,12,15].map(v => {
+                        const y = 140 - (v / 16) * 110;
+                        return (
+                          <g key={v}>
+                            <line x1="38" y1={y} x2="268" y2={y} stroke="#22d3ee" strokeOpacity="0.15" strokeWidth="1" />
+                            <text x="34" y={y + 4} fontSize="8" fill="#67e8f9" textAnchor="end">{v}</text>
+                          </g>
+                        );
+                      })}
+                      {/* Bars */}
+                      {[
+                        { label: "Futsal", val: 15, color: "#22c55e" },
+                        { label: "Basket", val: 12, color: "#06b6d4" },
+                        { label: "Pramuka", val: 8,  color: "#f59e0b" },
+                        { label: "Tari",   val: 5,  color: "#ec4899" },
+                      ].map((d, i) => {
+                        const bw = 40, gap = 15, x = 50 + i * (bw + gap);
+                        const h = (d.val / 16) * 110;
+                        const y = 140 - h;
+                        return (
+                          <g key={i}>
+                            <rect x={x} y={y} width={bw} height={h} fill={d.color} fillOpacity="0.8" rx="3" />
+                            <text x={x + bw / 2} y={y - 4} fontSize="9" fill={d.color} textAnchor="middle" fontWeight="bold">{d.val}</text>
+                            <text x={x + bw / 2} y="158" fontSize="8" fill="#cbd5e1" textAnchor="middle">{d.label}</text>
+                          </g>
+                        );
+                      })}
+                      {/* Axes */}
+                      <line x1="38" y1="140" x2="268" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
+                      <line x1="38" y1="10" x2="38" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
+                      <text x="10" y="80" fontSize="8" fill="#94a3b8" textAnchor="middle" transform="rotate(-90,10,80)">Jumlah Siswa</text>
+                    </svg>
+                    <p className="font-body text-xs text-green-400 italic">📌 Data: Ekskul favorit 40 siswa Kelas 9B</p>
                   </div>
-                  <div className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-xl p-4">
-                    <p className="text-2xl mb-1">📈</p>
-                    <p className="font-body text-sm font-bold text-purple-300 mb-1">Diagram Garis</p>
-                    <p className="font-body text-xs text-white/70">Titik-titik yang dihubungkan garis. Ideal untuk data yang berubah seiring waktu (tren).</p>
+
+                  {/* 3. DIAGRAM GARIS */}
+                  <div className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-xl p-4 space-y-3">
+                    <div>
+                      <p className="font-body text-sm font-bold text-purple-300 mb-1">📈 Diagram Garis</p>
+                      <p className="font-body text-xs text-white/70">Titik-titik data dihubungkan garis. Ideal untuk menampilkan tren atau perubahan data dari waktu ke waktu.</p>
+                    </div>
+                    {(() => {
+                      const pts: [number, number][] = [[45,121],[90,86],[135,75],[180,62],[225,46],[265,25]];
+                      const labels = ["2019","2020","2021","2022","2023","2024"];
+                      const vals = [170, 196, 204, 213, 225, 240];
+                      const polyline = pts.map(p => p.join(",")).join(" ");
+                      const area = `M${pts[0][0]},140 ` + pts.map(p => `L${p[0]},${p[1]}`).join(" ") + ` L${pts[pts.length-1][0]},140 Z`;
+                      return (
+                        <svg viewBox="0 0 280 160" className="w-full">
+                          <rect width="280" height="160" fill="transparent" />
+                          {[170,190,210,230].map(v => {
+                            const y = 140 - ((v - 160) / 90) * 110;
+                            return (
+                              <g key={v}>
+                                <line x1="42" y1={y} x2="272" y2={y} stroke="#a855f7" strokeOpacity="0.15" strokeWidth="1" />
+                                <text x="38" y={y + 3} fontSize="8" fill="#c084fc" textAnchor="end">{v}</text>
+                              </g>
+                            );
+                          })}
+                          <defs>
+                            <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#a855f7" stopOpacity="0.4" />
+                              <stop offset="100%" stopColor="#a855f7" stopOpacity="0.02" />
+                            </linearGradient>
+                          </defs>
+                          <path d={area} fill="url(#lineGrad)" />
+                          <polyline points={polyline} fill="none" stroke="#a855f7" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+                          {pts.map(([x, y], i) => (
+                            <g key={i}>
+                              <circle cx={x} cy={y} r="5" fill="#a855f7" stroke="#1e1b4b" strokeWidth="1.5" />
+                              <text x={x} y={y - 9} fontSize="8" fill="#e879f9" textAnchor="middle" fontWeight="bold">{vals[i]}</text>
+                              <text x={x} y="153" fontSize="8" fill="#cbd5e1" textAnchor="middle">{labels[i]}</text>
+                            </g>
+                          ))}
+                          <line x1="42" y1="140" x2="272" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
+                          <line x1="42" y1="10" x2="42" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
+                          <text x="12" y="80" fontSize="8" fill="#94a3b8" textAnchor="middle" transform="rotate(-90,12,80)">Juta Pengguna</text>
+                        </svg>
+                      );
+                    })()}
+                    <p className="font-body text-xs text-purple-400 italic">📌 Data: Pertumbuhan pengguna internet Indonesia 2019–2024 (dalam juta)</p>
                   </div>
-                  <div className="bg-gradient-to-br from-orange-900/40 to-red-900/40 border border-orange-500/30 rounded-xl p-4">
-                    <p className="text-2xl mb-1">🥧</p>
-                    <p className="font-body text-sm font-bold text-orange-300 mb-1">Diagram Lingkaran</p>
-                    <p className="font-body text-xs text-white/70">Lingkaran dibagi jadi beberapa sektor. Ideal untuk menunjukkan proporsi/persentase tiap kategori.</p>
+
+                  {/* 4. DIAGRAM LINGKARAN */}
+                  <div className="bg-gradient-to-br from-orange-900/40 to-red-900/40 border border-orange-500/30 rounded-xl p-4 space-y-3">
+                    <div>
+                      <p className="font-body text-sm font-bold text-orange-300 mb-1">🥧 Diagram Lingkaran (Pie Chart)</p>
+                      <p className="font-body text-xs text-white/70">Lingkaran dibagi menjadi beberapa sektor. Ideal untuk menunjukkan proporsi atau persentase tiap kategori dari keseluruhan.</p>
+                    </div>
+                    <svg viewBox="0 0 280 160" className="w-full">
+                      <rect width="280" height="160" fill="transparent" />
+                      {/* Pie slices — cx=100, cy=80, r=68 */}
+                      {/* Olahraga 35% (126°): 0°→126° */}
+                      <path d="M100,80 L100,12 A68,68 0 0,1 155.6,137.2 Z" fill="#22c55e" fillOpacity="0.85" />
+                      {/* Seni 25% (90°): 126°→216° */}
+                      <path d="M100,80 L155.6,137.2 A68,68 0 0,1 44.9,137.5 Z" fill="#a855f7" fillOpacity="0.85" />
+                      {/* Sains 20% (72°): 216°→288° */}
+                      <path d="M100,80 L44.9,137.5 A68,68 0 0,1 53.3,38.1 Z" fill="#22d3ee" fillOpacity="0.85" />
+                      {/* Bahasa 15% (54°): 288°→342° */}
+                      <path d="M100,80 L53.3,38.1 A68,68 0 0,1 82.7,12.7 Z" fill="#f59e0b" fillOpacity="0.85" />
+                      {/* Lainnya 5% (18°): 342°→360° */}
+                      <path d="M100,80 L82.7,12.7 A68,68 0 0,1 100,12 Z" fill="#f43f5e" fillOpacity="0.85" />
+                      {/* Center circle */}
+                      <circle cx="100" cy="80" r="22" fill="#0f172a" />
+                      <text x="100" y="77" fontSize="8" fill="#e2e8f0" textAnchor="middle" fontWeight="bold">Total</text>
+                      <text x="100" y="88" fontSize="9" fill="#22d3ee" textAnchor="middle" fontWeight="bold">40 siswa</text>
+                      {/* Legend */}
+                      {[
+                        { color: "#22c55e", label: "Olahraga", pct: "35%" },
+                        { color: "#a855f7", label: "Seni",     pct: "25%" },
+                        { color: "#22d3ee", label: "Sains",    pct: "20%" },
+                        { color: "#f59e0b", label: "Bahasa",   pct: "15%" },
+                        { color: "#f43f5e", label: "Lainnya",  pct: "5%" },
+                      ].map((item, i) => (
+                        <g key={i}>
+                          <rect x="188" y={18 + i * 26} width="12" height="12" rx="2" fill={item.color} fillOpacity="0.85" />
+                          <text x="204" y={28 + i * 26} fontSize="9" fill="#e2e8f0">{item.label}</text>
+                          <text x="270" y={28 + i * 26} fontSize="9" fill={item.color} textAnchor="end" fontWeight="bold">{item.pct}</text>
+                        </g>
+                      ))}
+                    </svg>
+                    <p className="font-body text-xs text-orange-400 italic">📌 Data: Ekskul favorit 40 siswa Kelas 9C</p>
                   </div>
-                  <div className="bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-indigo-500/30 rounded-xl p-4">
-                    <p className="text-2xl mb-1">🌿</p>
-                    <p className="font-body text-sm font-bold text-indigo-300 mb-1">Diagram Batang Daun</p>
-                    <p className="font-body text-xs text-white/70">Mirip tabel, angka dipisah jadi "batang" (puluhan) dan "daun" (satuan). Bagus untuk data mentah.</p>
+
+                  {/* 5. DIAGRAM BATANG DAUN */}
+                  <div className="bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-indigo-500/30 rounded-xl p-4 space-y-3">
+                    <div>
+                      <p className="font-body text-sm font-bold text-indigo-300 mb-1">🌿 Diagram Batang Daun</p>
+                      <p className="font-body text-xs text-white/70">Angka dipisah menjadi "batang" (puluhan) dan "daun" (satuan). Mempertahankan data asli dan mudah membaca distribusinya.</p>
+                    </div>
+                    <div className="bg-slate-900/60 rounded-lg p-4">
+                      <p className="font-body text-xs text-indigo-300 font-bold mb-3 text-center">Nilai Ulangan 18 Siswa</p>
+                      <div className="font-mono text-sm">
+                        <div className="flex items-center gap-0 mb-1">
+                          <div className="w-24 text-right pr-3 text-indigo-300 font-bold border-r-2 border-indigo-500/50">Batang</div>
+                          <div className="pl-3 text-slate-400 text-xs italic">Daun</div>
+                        </div>
+                        {[
+                          { stem: "6", leaves: "2  5  8", color: "text-cyan-300" },
+                          { stem: "7", leaves: "0  2  4  4  6  8", color: "text-green-300" },
+                          { stem: "8", leaves: "0  2  4  5  6  8", color: "text-yellow-300" },
+                          { stem: "9", leaves: "0  2  5", color: "text-orange-300" },
+                        ].map((row, i) => (
+                          <div key={i} className="flex items-center gap-0 py-1.5 border-b border-slate-700/40 last:border-0">
+                            <div className={`w-24 text-right pr-3 font-bold text-lg border-r-2 border-indigo-500/50 ${row.color}`}>{row.stem}</div>
+                            <div className="pl-4 text-white tracking-widest font-mono text-sm">{row.leaves}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-body">
+                        <div className="bg-indigo-900/30 rounded p-2 text-center">
+                          <p className="text-indigo-300 font-bold">Min</p>
+                          <p className="text-white font-bold text-base">62</p>
+                        </div>
+                        <div className="bg-indigo-900/30 rounded p-2 text-center">
+                          <p className="text-indigo-300 font-bold">Max</p>
+                          <p className="text-white font-bold text-base">95</p>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="font-body text-xs text-indigo-400 italic">📌 Data: Nilai ulangan 18 siswa — batang = puluhan, daun = satuan</p>
                   </div>
-                  <div className="bg-gradient-to-br from-yellow-900/40 to-orange-900/40 border border-yellow-500/30 rounded-xl p-4">
-                    <p className="text-2xl mb-1">📉</p>
-                    <p className="font-body text-sm font-bold text-yellow-300 mb-1">Ogive / Histogram</p>
-                    <p className="font-body text-xs text-white/70">Grafik untuk data berkelompok. Histogram mirip diagram batang tanpa celah. Ogive adalah grafik frekuensi kumulatif.</p>
+
+                  {/* 6. HISTOGRAM */}
+                  <div className="bg-gradient-to-br from-yellow-900/40 to-orange-900/40 border border-yellow-500/30 rounded-xl p-4 space-y-3">
+                    <div>
+                      <p className="font-body text-sm font-bold text-yellow-300 mb-1">📉 Histogram</p>
+                      <p className="font-body text-xs text-white/70">Diagram batang untuk data berkelompok — batang saling berdempetan (tanpa celah). Menunjukkan distribusi frekuensi tiap kelas interval.</p>
+                    </div>
+                    <svg viewBox="0 0 280 170" className="w-full">
+                      <rect width="280" height="170" fill="transparent" />
+                      {[0,2,4,6,8,10].map(v => {
+                        const y = 140 - (v / 11) * 115;
+                        return (
+                          <g key={v}>
+                            <line x1="38" y1={y} x2="270" y2={y} stroke="#f59e0b" strokeOpacity="0.15" strokeWidth="1" />
+                            <text x="34" y={y + 3} fontSize="8" fill="#fcd34d" textAnchor="end">{v}</text>
+                          </g>
+                        );
+                      })}
+                      {[
+                        { label: "50–59", f: 2,  color: "#818cf8" },
+                        { label: "60–69", f: 5,  color: "#22d3ee" },
+                        { label: "70–79", f: 10, color: "#22c55e" },
+                        { label: "80–89", f: 9,  color: "#f59e0b" },
+                        { label: "90–99", f: 4,  color: "#f87171" },
+                      ].map((d, i) => {
+                        const bw = 46, x = 38 + i * bw;
+                        const h = (d.f / 11) * 115;
+                        const y = 140 - h;
+                        return (
+                          <g key={i}>
+                            <rect x={x} y={y} width={bw} height={h} fill={d.color} fillOpacity="0.75" />
+                            <rect x={x} y={y} width={bw} height={h} fill="none" stroke="#0f172a" strokeWidth="1" />
+                            <text x={x + bw / 2} y={y - 4} fontSize="9" fill={d.color} textAnchor="middle" fontWeight="bold">{d.f}</text>
+                            <text x={x + bw / 2} y="158" fontSize="7.5" fill="#cbd5e1" textAnchor="middle">{d.label}</text>
+                          </g>
+                        );
+                      })}
+                      <line x1="38" y1="140" x2="270" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
+                      <line x1="38" y1="10" x2="38" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
+                      <text x="10" y="80" fontSize="8" fill="#94a3b8" textAnchor="middle" transform="rotate(-90,10,80)">Frekuensi</text>
+                      <text x="154" y="170" fontSize="8" fill="#94a3b8" textAnchor="middle">Kelas Interval Nilai</text>
+                    </svg>
+                    <p className="font-body text-xs text-yellow-400 italic">📌 Data: Distribusi nilai 30 siswa — batang saling berdempetan (ciri khas histogram)</p>
                   </div>
+
                 </div>
 
                 {/* Panduan Pemilihan */}
