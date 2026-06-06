@@ -6,6 +6,7 @@ import { Database, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import imgSelimutSoal from "@assets/image_1780761230749.png";
 import imgSarden from "@assets/image_1780450794282.png";
 import imgBiskuit from "@assets/image_1780450814436.png";
 import imgIndomilk from "@assets/image_1780450845492.png";
@@ -1653,6 +1654,138 @@ const volExamples: Ex[] = [
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
+const unsurExamples: Ex[] = [
+  {
+    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-2">
+        <p>Ada berapa <strong className="text-green-300">sisi</strong>, <strong className="text-amber-300">rusuk</strong>, dan <strong className="text-sky-300">titik sudut</strong> pada sebuah tabung?</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <div className="grid grid-cols-3 gap-2 text-center text-xs">
+          <div className="bg-green-950/60 border border-green-700/40 rounded-lg p-3">
+            <p className="text-3xl font-bold text-green-300 mb-1">3</p>
+            <p className="text-green-200 font-bold">Sisi</p>
+            <p className="text-white/50 text-[10px] mt-1">Selimut + Alas + Tutup</p>
+          </div>
+          <div className="bg-amber-950/60 border border-amber-700/40 rounded-lg p-3">
+            <p className="text-3xl font-bold text-amber-300 mb-1">2</p>
+            <p className="text-amber-200 font-bold">Rusuk</p>
+            <p className="text-white/50 text-[10px] mt-1">Lingkaran atas &amp; bawah</p>
+          </div>
+          <div className="bg-sky-950/60 border border-sky-700/40 rounded-lg p-3">
+            <p className="text-3xl font-bold text-sky-300 mb-1">0</p>
+            <p className="text-sky-200 font-bold">Titik Sudut</p>
+            <p className="text-white/50 text-[10px] mt-1">Tidak ada sama sekali</p>
+          </div>
+        </div>
+        <div className="bg-green-950/60 border border-green-700/40 rounded p-3 text-xs">
+          <p className="text-green-300 font-semibold">✅ Jawaban: Sisi = <strong>3</strong>, Rusuk = <strong>2</strong>, Titik Sudut = <strong>0</strong></p>
+          <p className="text-white/60 mt-1">💡 Tabung tidak punya rusuk lurus maupun titik sudut — berbeda dengan kubus/balok!</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <p>Bentuk bangun dari <strong className="text-purple-300">selimut tabung</strong> adalah ….</p>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "Segi empat" },
+            { opt: "B", label: "Persegi panjang" },
+            { opt: "C", label: "Belah ketupat" },
+            { opt: "D", label: "Bidang lengkung" },
+          ].map(({ opt, label }) => (
+            <div key={opt} className="flex items-center gap-2 bg-slate-800/60 rounded-lg px-3 py-2">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-slate-700 text-white/70 font-bold text-xs shrink-0">{opt}</span>
+              <span className="text-white/80 text-xs">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "Segi empat", correct: false },
+            { opt: "B", label: "Persegi panjang", correct: true },
+            { opt: "C", label: "Belah ketupat", correct: false },
+            { opt: "D", label: "Bidang lengkung", correct: false },
+          ].map(({ opt, label, correct }) => (
+            <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 border ${correct ? "bg-green-950/60 border-green-600/60" : "bg-slate-800/40 border-slate-700/40 opacity-50"}`}>
+              <span className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs shrink-0 ${correct ? "bg-green-600 text-white" : "bg-slate-700 text-white/50"}`}>{opt}</span>
+              <span className={`text-xs font-semibold ${correct ? "text-green-300" : "text-white/50"}`}>{label} {correct && "✓"}</span>
+            </div>
+          ))}
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-1">
+          <p className="text-yellow-300 font-semibold">✅ Jawaban: B. Persegi Panjang</p>
+          <p className="text-white/70">Ketika selimut tabung "dibuka" dan diratakan, bentuknya adalah <strong className="text-purple-300">persegi panjang</strong> dengan panjang = 2πr (keliling lingkaran) dan lebar = t (tinggi tabung).</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <p>Perhatikan gambar selimut tabung berikut.</p>
+        <div className="rounded-lg overflow-hidden border border-slate-600 bg-white mx-auto max-w-xs">
+          <img src={imgSelimutSoal} alt="Selimut tabung: lebar 22 cm, tinggi t = 10 cm" className="w-full object-contain" />
+        </div>
+        <p>Jari-jari tabung yang terjadi adalah ….</p>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "3,5 cm" },
+            { opt: "B", label: "5 cm" },
+            { opt: "C", label: "7 cm" },
+            { opt: "D", label: "10 cm" },
+          ].map(({ opt, label }) => (
+            <div key={opt} className="flex items-center gap-2 bg-slate-800/60 rounded-lg px-3 py-2">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-slate-700 text-white/70 font-bold text-xs shrink-0">{opt}</span>
+              <span className="text-white/80 text-xs">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-yellow-400 font-semibold">Pembahasan:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+          <p className="text-white/70">Lebar selimut = keliling lingkaran alas = 22 cm</p>
+          <BlockMath math="2\pi r = 22" />
+          <BlockMath math="2 \times \frac{22}{7} \times r = 22" />
+          <BlockMath math="\frac{44}{7} \times r = 22" />
+          <BlockMath math="r = 22 \times \frac{7}{44} = \frac{154}{44} = 3{,}5 \text{ cm}" />
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "3,5 cm", correct: true },
+            { opt: "B", label: "5 cm", correct: false },
+            { opt: "C", label: "7 cm", correct: false },
+            { opt: "D", label: "10 cm", correct: false },
+          ].map(({ opt, label, correct }) => (
+            <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 border ${correct ? "bg-green-950/60 border-green-600/60" : "bg-slate-800/40 border-slate-700/40 opacity-50"}`}>
+              <span className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs shrink-0 ${correct ? "bg-green-600 text-white" : "bg-slate-700 text-white/50"}`}>{opt}</span>
+              <span className={`text-xs font-semibold ${correct ? "text-green-300" : "text-white/50"}`}>{label} {correct && "✓"}</span>
+            </div>
+          ))}
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs">
+          <p className="text-yellow-300 font-semibold">✅ Jawaban: A. 3,5 cm</p>
+          <p className="text-white/60 mt-1">Lebar persegi panjang selimut = keliling lingkaran = 2πr, sehingga r = 3,5 cm</p>
+        </div>
+      </div>
+    ),
+  },
+];
+
 const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
   const [show, setShow] = useState(false);
   return (
@@ -1684,6 +1817,16 @@ const TabungPage = () => {
 
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
+    {
+      title: "Contoh Soal — Unsur-unsur Tabung",
+      icon: "🏷️",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Uji pemahamanmu tentang unsur-unsur tabung</p>
+          {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix="SOAL"/>)}
+        </div>
+      ),
+    },
     {
       title: "Contoh Soal — Luas Permukaan",
       icon: "🎨",
