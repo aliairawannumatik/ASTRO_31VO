@@ -53,6 +53,7 @@ const MenuPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isWhite = theme === "white";
+  const isSpace = theme === "dark";
 
   const handleClick = (path: string) => {
     playPopSound();
@@ -85,7 +86,7 @@ const MenuPage = () => {
             >
               <item.icon
                 className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform"
-                style={{ color: isWhite ? "#ffffff" : undefined }}
+                style={{ color: isWhite ? "#ffffff" : isSpace ? "hsl(var(--primary))" : undefined }}
               />
               <h3
                 className="font-display text-[11px] sm:text-base font-bold mb-1 leading-tight"
@@ -95,7 +96,7 @@ const MenuPage = () => {
               </h3>
               <p
                 className="text-xs"
-                style={{ color: isWhite ? "rgba(255,255,255,0.8)" : undefined }}
+                style={{ color: isWhite ? "rgba(255,255,255,0.8)" : isSpace ? "hsl(var(--primary))" : undefined }}
               >
                 {item.desc}
               </p>
