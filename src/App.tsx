@@ -784,6 +784,7 @@ const RelasiFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8
 const PengertianRelasiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/PengertianRelasiPage"));
 const PengertianFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/PengertianFungsiPage"));
 const BanyakFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/BanyakFungsiPage"));
+const BukuAnimasiBanyakFungsiPage = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/BukuAnimasiBanyakFungsiPage"));
 const NotasiFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/NotasiFungsiPage"));
 const GrafikFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/GrafikFungsiPage"));
 const SPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/SPLDVPage"));
@@ -1610,6 +1611,7 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/buku-animasi-banyak-fungsi" element={<BukuAnimasiBanyakFungsiPage />} />
           <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/notasi-fungsi" element={<NotasiFungsiMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/spldv" element={<SPLDVMMK8Page />} />
