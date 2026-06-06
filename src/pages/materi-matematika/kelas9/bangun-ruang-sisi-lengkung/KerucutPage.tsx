@@ -1099,6 +1099,7 @@ const soalUnsur: {
 const UnsurSoalQuiz = () => {
   const [pilihan, setPilihan] = useState<Record<number, string>>({});
   const [selesai, setSelesai] = useState(false);
+  const [showPembahasan, setShowPembahasan] = useState<Record<number, boolean>>({});
 
   const skor = selesai
     ? soalUnsur.filter(s => pilihan[s.no] === s.jawaban).length
@@ -1113,12 +1114,21 @@ const UnsurSoalQuiz = () => {
   const handleSelesai = () => {
     playPopSound();
     setSelesai(true);
+    const allOpen: Record<number, boolean> = {};
+    soalUnsur.forEach(s => { allOpen[s.no] = true; });
+    setShowPembahasan(allOpen);
   };
 
   const handleUlang = () => {
     playPopSound();
     setPilihan({});
     setSelesai(false);
+    setShowPembahasan({});
+  };
+
+  const togglePembahasan = (no: number) => {
+    playPopSound();
+    setShowPembahasan(prev => ({ ...prev, [no]: !prev[no] }));
   };
 
   const semuaDijawab = soalUnsur.every(s => pilihan[s.no]);
@@ -1128,6 +1138,7 @@ const UnsurSoalQuiz = () => {
       {soalUnsur.map((s) => {
         const dipilih = pilihan[s.no];
         const benar = selesai && dipilih === s.jawaban;
+        const pembahasanOpen = !!showPembahasan[s.no];
 
         return (
           <div
@@ -1154,7 +1165,7 @@ const UnsurSoalQuiz = () => {
               </div>
             )}
 
-            {/* Pilihan ganda — layout 2 kolom seperti soal asli */}
+            {/* Pilihan ganda — layout 2 kolom */}
             <div className="grid grid-cols-2 gap-2">
               {s.pilihan.map((p) => {
                 const isSelected = dipilih === p.key;
@@ -1191,15 +1202,34 @@ const UnsurSoalQuiz = () => {
               })}
             </div>
 
-            {/* Pembahasan (muncul setelah selesai) */}
-            {selesai && (
-              <div className={`rounded-lg p-3 text-xs space-y-1 ${benar ? "bg-green-900/40" : "bg-amber-900/30 border border-amber-600/30"}`}>
-                <p className={`font-bold ${benar ? "text-green-300" : "text-amber-300"}`}>
-                  {benar ? "✅ Benar!" : `❌ Salah — Jawaban: ${s.jawaban}`}
-                </p>
-                <p className="text-white/70 leading-relaxed">{s.pembahasan}</p>
-              </div>
-            )}
+            {/* Toggle pembahasan — selalu tersedia */}
+            <div className="pt-1">
+              <button
+                onClick={() => togglePembahasan(s.no)}
+                className="flex items-center gap-1.5 text-xs font-semibold text-amber-400/80 hover:text-amber-300 transition-colors cursor-pointer"
+              >
+                <span>{pembahasanOpen ? "▲" : "▼"}</span>
+                <span>{pembahasanOpen ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}</span>
+              </button>
+
+              {pembahasanOpen && (
+                <div className={`mt-2 rounded-lg p-3 text-xs space-y-1.5 border ${
+                  selesai
+                    ? benar
+                      ? "bg-green-900/40 border-green-700/40"
+                      : "bg-amber-900/30 border-amber-600/30"
+                    : "bg-slate-700/40 border-slate-600/30"
+                }`}>
+                  {selesai && (
+                    <p className={`font-bold ${benar ? "text-green-300" : "text-red-300"}`}>
+                      {benar ? "✅ Benar!" : `❌ Jawaban yang benar: ${s.jawaban}`}
+                    </p>
+                  )}
+                  <p className="font-semibold text-amber-300">📖 Pembahasan:</p>
+                  <p className="text-white/75 leading-relaxed">{s.pembahasan}</p>
+                </div>
+              )}
+            </div>
           </div>
         );
       })}
@@ -1874,16 +1904,6 @@ const KerucutPage = () => {
 
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
-    {
-      title: "Contoh Soal — Garis Pelukis",
-      icon: "📐",
-      content: (
-        <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {gpExamples.map((ex, i) => <ExampleCard key={`g${i}`} ex={ex} idx={i} prefix="GP"/>)}
-        </div>
-      ),
-    },
     {
       title: "Soal — Unsur-unsur Kerucut",
       icon: "📝",
