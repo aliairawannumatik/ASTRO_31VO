@@ -12,6 +12,8 @@ import imgWafer     from "@assets/image_1780701492837.png";
 import imgTumpeng   from "@assets/image_1780701574690.png";
 import imgTopiUltah from "@assets/image_1780701763127.png";
 import imgCorong    from "@assets/image_1780701892436.png";
+import imgRusukKerucut from "@assets/image_1780763377789.png";
+import imgHubunganRST  from "@assets/image_1780763407378.png";
 
 /* ─────────────────────────────────────────────────────────────
    3D CONE SVG RENDERER — manual projection, painter's algorithm
@@ -969,6 +971,197 @@ const SelimutJuringAnimSVG = () => (
 ───────────────────────────────────────────────────────────── */
 type Sec = { title: string; icon: string; content: React.ReactNode };
 
+/* ─────────────────────────────────────────────────────────────
+   SLIDE 7 — SOAL UNSUR-UNSUR KERUCUT (INTERAKTIF)
+───────────────────────────────────────────────────────────── */
+const soalUnsur = [
+  {
+    no: 1,
+    soal: "Bentuk bangun dari selimut kerucut adalah ….",
+    gambar: null,
+    pilihan: [
+      { key: "A", text: "tembereng" },
+      { key: "B", text: "segitiga" },
+      { key: "C", text: "lingkaran" },
+      { key: "D", text: "juring lingkaran" },
+    ],
+    jawaban: "D",
+    pembahasan: "Selimut kerucut, jika dibuka (diratakan), berbentuk juring lingkaran (sektor lingkaran) dengan jari-jari = garis pelukis (s) dan panjang busur = keliling alas (2πr).",
+  },
+  {
+    no: 2,
+    soal: "Nomor yang menunjukkan rusuk pada kerucut berikut adalah ….",
+    gambar: imgRusukKerucut,
+    pilihan: [
+      { key: "A", text: "1" },
+      { key: "B", text: "2" },
+      { key: "C", text: "3" },
+      { key: "D", text: "4" },
+    ],
+    jawaban: "C",
+    pembahasan: "Rusuk kerucut adalah tepi/keliling alas (lingkaran alas), yaitu nomor 3. Nomor 1 = puncak, nomor 2 = garis pelukis/selimut, nomor 4 = alas.",
+  },
+  {
+    no: 3,
+    soal: "Diketahui sebuah kerucut dengan ukuran tinggi t, jari-jari r, dan garis pelukis s.\nHubungan r, s, dan t pada kerucut tersebut adalah ….",
+    gambar: imgHubunganRST,
+    pilihan: [
+      { key: "A", text: "r² = s² + t²" },
+      { key: "B", text: "t² – s² = r²" },
+      { key: "C", text: "r² = t² – s²" },
+      { key: "D", text: "s² = r² + t²" },
+    ],
+    jawaban: "D",
+    pembahasan: "Berdasarkan Teorema Pythagoras pada segitiga siku-siku yang dibentuk oleh t, r, dan s: s² = r² + t² (s adalah hipotenusa/garis pelukis).",
+  },
+];
+
+const UnsurSoalQuiz = () => {
+  const [pilihan, setPilihan] = useState<Record<number, string>>({});
+  const [selesai, setSelesai] = useState(false);
+
+  const skor = selesai
+    ? soalUnsur.filter(s => pilihan[s.no] === s.jawaban).length
+    : 0;
+
+  const handlePilih = (no: number, key: string) => {
+    if (selesai) return;
+    playPopSound();
+    setPilihan(prev => ({ ...prev, [no]: key }));
+  };
+
+  const handleSelesai = () => {
+    playPopSound();
+    setSelesai(true);
+  };
+
+  const handleUlang = () => {
+    playPopSound();
+    setPilihan({});
+    setSelesai(false);
+  };
+
+  const semuaDijawab = soalUnsur.every(s => pilihan[s.no]);
+
+  return (
+    <div className="space-y-6 font-body">
+      {soalUnsur.map((s) => {
+        const dipilih = pilihan[s.no];
+        const benar = selesai && dipilih === s.jawaban;
+
+        return (
+          <div
+            key={s.no}
+            className={`rounded-xl border p-4 space-y-3 transition-colors ${
+              selesai
+                ? benar
+                  ? "bg-green-950/40 border-green-600/50"
+                  : "bg-red-950/40 border-red-600/50"
+                : "bg-slate-800/60 border-slate-600/40"
+            }`}
+          >
+            {/* Nomor & soal */}
+            <p className="text-white/90 text-sm font-semibold leading-snug">
+              {s.no}. {s.soal.split("\n").map((line, i) => (
+                <span key={i}>{line}{i < s.soal.split("\n").length - 1 && <br />}</span>
+              ))}
+            </p>
+
+            {/* Gambar (jika ada) */}
+            {s.gambar && (
+              <div className="flex justify-center">
+                <img
+                  src={s.gambar}
+                  alt={`Soal ${s.no}`}
+                  className="max-h-48 rounded-lg border border-slate-600/40 bg-white/5 object-contain"
+                />
+              </div>
+            )}
+
+            {/* Pilihan ganda — layout 2 kolom seperti soal asli */}
+            <div className="grid grid-cols-2 gap-2">
+              {s.pilihan.map((p) => {
+                const isSelected = dipilih === p.key;
+                const isJawaban = p.key === s.jawaban;
+
+                let cls =
+                  "flex items-center gap-2 px-3 py-2 rounded-lg border text-xs cursor-pointer transition-all select-none ";
+
+                if (!selesai) {
+                  cls += isSelected
+                    ? "bg-cyan-700/50 border-cyan-400 text-cyan-100"
+                    : "bg-slate-700/40 border-slate-600 text-white/75 hover:bg-slate-600/50 hover:border-slate-400";
+                } else {
+                  if (isJawaban) {
+                    cls += "bg-green-800/60 border-green-500 text-green-200 font-bold";
+                  } else if (isSelected && !isJawaban) {
+                    cls += "bg-red-800/60 border-red-500 text-red-200 line-through opacity-70";
+                  } else {
+                    cls += "bg-slate-700/30 border-slate-600/40 text-white/40";
+                  }
+                }
+
+                return (
+                  <button key={p.key} className={cls} onClick={() => handlePilih(s.no, p.key)}>
+                    <span className={`w-5 h-5 flex-shrink-0 rounded-full border text-[10px] font-bold flex items-center justify-center
+                      ${selesai && isJawaban ? "border-green-400 text-green-300" :
+                        selesai && isSelected && !isJawaban ? "border-red-400 text-red-300" :
+                        isSelected ? "border-cyan-400 text-cyan-300" : "border-slate-500 text-slate-400"}`}>
+                      {p.key}
+                    </span>
+                    {p.text}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Pembahasan (muncul setelah selesai) */}
+            {selesai && (
+              <div className={`rounded-lg p-3 text-xs space-y-1 ${benar ? "bg-green-900/40" : "bg-amber-900/30 border border-amber-600/30"}`}>
+                <p className={`font-bold ${benar ? "text-green-300" : "text-amber-300"}`}>
+                  {benar ? "✅ Benar!" : `❌ Salah — Jawaban: ${s.jawaban}`}
+                </p>
+                <p className="text-white/70 leading-relaxed">{s.pembahasan}</p>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Tombol aksi */}
+      <div className="flex justify-center gap-3 pt-2">
+        {!selesai ? (
+          <button
+            onClick={handleSelesai}
+            disabled={!semuaDijawab}
+            className="px-6 py-2.5 text-sm font-bold bg-primary/20 border border-primary/50 text-primary rounded-xl hover:bg-primary/30 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            Periksa Jawaban ✓
+          </button>
+        ) : (
+          <div className="w-full space-y-3">
+            <div className="text-center bg-slate-800/70 border border-slate-600/40 rounded-xl p-4">
+              <p className="text-white/50 text-xs mb-1">Skor kamu</p>
+              <p className={`text-4xl font-bold font-display ${skor === soalUnsur.length ? "text-green-400" : skor >= 2 ? "text-yellow-400" : "text-red-400"}`}>
+                {skor} / {soalUnsur.length}
+              </p>
+              <p className="text-white/40 text-xs mt-1">
+                {skor === soalUnsur.length ? "🎉 Sempurna!" : skor >= 2 ? "👍 Bagus, terus semangat!" : "📚 Pelajari lagi unsur-unsur kerucut ya!"}
+              </p>
+            </div>
+            <button
+              onClick={handleUlang}
+              className="w-full py-2.5 text-sm font-bold bg-slate-700/60 border border-slate-500 text-white/80 rounded-xl hover:bg-slate-600/60 transition-colors cursor-pointer"
+            >
+              🔄 Ulangi Soal
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const sections: Sec[] = [
   {
     title: "Definisi Kerucut",
@@ -1280,6 +1473,22 @@ const sections: Sec[] = [
           <p className="text-white/70"><InlineMath math="V_{\text{kerucut}} = \frac{1}{3} \times V_{\text{tabung}}" /></p>
           <p className="text-white/70">Artinya, 3 kerucut = 1 tabung (dengan r dan t yang sama)!</p>
         </div>
+      </div>
+    ),
+  },
+  {
+    title: "Soal — Unsur-unsur Kerucut",
+    icon: "📝",
+    content: (
+      <div className="space-y-4">
+        <div className="flex items-center gap-3 bg-indigo-950/50 border border-indigo-700/40 rounded-xl px-4 py-3">
+          <span className="text-2xl">📝</span>
+          <div>
+            <p className="text-indigo-300 font-bold text-sm">Uji Pemahaman — Unsur-unsur Kerucut</p>
+            <p className="text-white/50 text-xs">Pilih jawaban yang paling tepat, lalu klik Periksa Jawaban</p>
+          </div>
+        </div>
+        <UnsurSoalQuiz />
       </div>
     ),
   },
