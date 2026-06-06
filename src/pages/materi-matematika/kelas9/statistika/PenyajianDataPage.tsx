@@ -573,77 +573,11 @@ const PenyajianDataPage = () => {
                   </div>
                 </div>
 
-                {/* Sulit */}
-                <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
-                    <span className="font-body font-semibold text-white">Contoh 3</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-sm text-white">
-                      Data nilai ulangan matematika 25 siswa:
-                    </p>
-                    <p className="font-body text-sm text-cyan-300 font-semibold leading-relaxed">
-                      60, 70, 80, 90, 70, 80, 70, 60, 80, 90, 70, 80, 70, 60, 80, 90, 70, 80, 70, 60, 80, 70, 90, 80, 70
-                    </p>
-                    <p className="font-body text-sm text-white mt-1">
-                      Buat tabel distribusi frekuensi data tunggal lengkap dengan frekuensi kumulatif (fk), lalu tentukan:<br />
-                      (a) Persentase siswa yang mendapat nilai ≥ 80 &nbsp;
-                      (b) Banyak siswa yang mendapat nilai di bawah 80 &nbsp;
-                      (c) Modus
-                    </p>
-                  </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Hitung frekuensi tiap nilai dan frekuensi kumulatif (fk = jumlah f dari atas s.d. baris tersebut):</p>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-xs font-body">
-                          <thead>
-                            <tr className="bg-slate-700/40">
-                              <th className="px-2 py-1.5 text-left text-white/70">Nilai (x)</th>
-                              <th className="px-2 py-1.5 text-center text-white/70">Frekuensi (f)</th>
-                              <th className="px-2 py-1.5 text-center text-white/70">Frek. Kumulatif (fk)</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-700/30">
-                            {[
-                              ["60","4","4"],
-                              ["70","9","13"],
-                              ["80","8","21"],
-                              ["90","4","25"],
-                            ].map(([x,f,fk],i) => (
-                              <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : ""}>
-                                <td className="px-2 py-1.5 text-red-300 font-bold">{x}</td>
-                                <td className="px-2 py-1.5 text-center text-green-300 font-bold">{f}</td>
-                                <td className="px-2 py-1.5 text-center text-purple-300">{fk}</td>
-                              </tr>
-                            ))}
-                            <tr className="border-t border-slate-500/50 font-bold bg-slate-700/20">
-                              <td className="px-2 py-1.5 text-yellow-300">Jumlah</td>
-                              <td className="px-2 py-1.5 text-center text-yellow-300">25</td>
-                              <td className="px-2 py-1.5 text-center text-slate-400">—</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p><strong>(a)</strong> Siswa nilai ≥ 80 = f(80) + f(90) = 8 + 4 = 12 siswa</p>
-                        <BlockMath math="\text{Persentase} = \frac{12}{25} \times 100\% = \mathbf{48\%}" />
-                        <p><strong>(b)</strong> Siswa nilai &lt; 80 = f(60) + f(70) = 4 + 9 = <span className="text-red-400 font-bold">13 siswa</span></p>
-                        <p className="text-xs text-white/50 italic">(atau: fk nilai 70 = 13 siswa)</p>
-                        <p><strong>(c)</strong> Modus = nilai dengan frekuensi terbanyak = <span className="text-red-400 font-bold">70</span> (f = 9)</p>
-                      </div>
-                      <p><strong className="text-primary">48% siswa nilai ≥ 80; 13 siswa nilai &lt; 80; Modus = 70</strong></p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Sedang 2 */}
+                {/* Sedang */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                    <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">
@@ -712,6 +646,72 @@ const PenyajianDataPage = () => {
                         <p>Total frekuensi = <InlineMath math="6 + 10 + 10 + 7 + 5 + 2 = \mathbf{40}" /> ✓ (sama dengan banyak data)</p>
                         <p>Nilai yang paling sering muncul (Modus) = <span className="text-yellow-400 font-bold">2 dan 3</span> (masing-masing f = 10)</p>
                       </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sulit */}
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="font-body font-semibold text-white">Contoh 3</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-sm text-white">
+                      Data nilai ulangan matematika 25 siswa:
+                    </p>
+                    <p className="font-body text-sm text-cyan-300 font-semibold leading-relaxed">
+                      60, 70, 80, 90, 70, 80, 70, 60, 80, 90, 70, 80, 70, 60, 80, 90, 70, 80, 70, 60, 80, 70, 90, 80, 70
+                    </p>
+                    <p className="font-body text-sm text-white mt-1">
+                      Buat tabel distribusi frekuensi data tunggal lengkap dengan frekuensi kumulatif (fk), lalu tentukan:<br />
+                      (a) Persentase siswa yang mendapat nilai ≥ 80 &nbsp;
+                      (b) Banyak siswa yang mendapat nilai di bawah 80 &nbsp;
+                      (c) Modus
+                    </p>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Hitung frekuensi tiap nilai dan frekuensi kumulatif (fk = jumlah f dari atas s.d. baris tersebut):</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body">
+                          <thead>
+                            <tr className="bg-slate-700/40">
+                              <th className="px-2 py-1.5 text-left text-white/70">Nilai (x)</th>
+                              <th className="px-2 py-1.5 text-center text-white/70">Frekuensi (f)</th>
+                              <th className="px-2 py-1.5 text-center text-white/70">Frek. Kumulatif (fk)</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-700/30">
+                            {[
+                              ["60","4","4"],
+                              ["70","9","13"],
+                              ["80","8","21"],
+                              ["90","4","25"],
+                            ].map(([x,f,fk],i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : ""}>
+                                <td className="px-2 py-1.5 text-red-300 font-bold">{x}</td>
+                                <td className="px-2 py-1.5 text-center text-green-300 font-bold">{f}</td>
+                                <td className="px-2 py-1.5 text-center text-purple-300">{fk}</td>
+                              </tr>
+                            ))}
+                            <tr className="border-t border-slate-500/50 font-bold bg-slate-700/20">
+                              <td className="px-2 py-1.5 text-yellow-300">Jumlah</td>
+                              <td className="px-2 py-1.5 text-center text-yellow-300">25</td>
+                              <td className="px-2 py-1.5 text-center text-slate-400">—</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p><strong>(a)</strong> Siswa nilai ≥ 80 = f(80) + f(90) = 8 + 4 = 12 siswa</p>
+                        <BlockMath math="\text{Persentase} = \frac{12}{25} \times 100\% = \mathbf{48\%}" />
+                        <p><strong>(b)</strong> Siswa nilai &lt; 80 = f(60) + f(70) = 4 + 9 = <span className="text-red-400 font-bold">13 siswa</span></p>
+                        <p className="text-xs text-white/50 italic">(atau: fk nilai 70 = 13 siswa)</p>
+                        <p><strong>(c)</strong> Modus = nilai dengan frekuensi terbanyak = <span className="text-red-400 font-bold">70</span> (f = 9)</p>
+                      </div>
+                      <p><strong className="text-primary">48% siswa nilai ≥ 80; 13 siswa nilai &lt; 80; Modus = 70</strong></p>
                     </div>
                   </div>
                 </div>
