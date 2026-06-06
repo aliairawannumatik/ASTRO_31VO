@@ -990,6 +990,48 @@ const PenyajianDataPage = () => {
                       Tentukan: (a) Hari dengan pengunjung terbanyak, (b) Total pengunjung seluruhnya.
                     </p>
                   </div>
+                  {/* Diagram Batang Contoh 1 */}
+                  <div className="bg-slate-900/70 border border-green-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3 text-center">📊 Diagram Batang — Pengunjung Perpustakaan</p>
+                    <svg viewBox="0 0 360 200" className="w-full max-w-sm mx-auto block" aria-label="Diagram batang pengunjung perpustakaan">
+                      {/* Gridlines */}
+                      {[0,20,40,60].map((v) => {
+                        const y = 160 - (v/60)*150;
+                        return (
+                          <g key={v}>
+                            <line x1="50" y1={y} x2="340" y2={y} stroke="#334155" strokeWidth="1" strokeDasharray="4 3" />
+                            <text x="44" y={y+4} textAnchor="end" fontSize="9" fill="#94a3b8">{v}</text>
+                          </g>
+                        );
+                      })}
+                      {/* Y-axis label */}
+                      <text x="12" y="90" textAnchor="middle" fontSize="9" fill="#64748b" transform="rotate(-90,12,90)">Pengunjung</text>
+                      {/* Axes */}
+                      <line x1="50" y1="10" x2="50" y2="160" stroke="#475569" strokeWidth="1.5" />
+                      <line x1="50" y1="160" x2="340" y2="160" stroke="#475569" strokeWidth="1.5" />
+                      {/* Bars */}
+                      {[
+                        { label:"Senin", val:40, x:63 },
+                        { label:"Selasa", val:55, x:117 },
+                        { label:"Rabu", val:30, x:171 },
+                        { label:"Kamis", val:60, x:225 },
+                        { label:"Jumat", val:45, x:279 },
+                      ].map(({ label, val, x }) => {
+                        const barH = (val/60)*150;
+                        const y = 160 - barH;
+                        const isMax = val === 60;
+                        return (
+                          <g key={label}>
+                            <rect x={x} y={y} width="38" height={barH} rx="3"
+                              fill={isMax ? "#22c55e" : "#16a34a"} opacity={isMax ? 1 : 0.7} />
+                            <text x={x+19} y={y-4} textAnchor="middle" fontSize="9" fill={isMax ? "#86efac" : "#4ade80"} fontWeight="bold">{val}</text>
+                            <text x={x+19} y="173" textAnchor="middle" fontSize="9" fill="#94a3b8">{label}</text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+                    <p className="font-body text-xs text-slate-500 text-center mt-1">Batang terhijau = pengunjung terbanyak</p>
+                  </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
@@ -1012,6 +1054,63 @@ const PenyajianDataPage = () => {
                     <p className="font-body text-sm text-white">
                       Data penjualan buku di toko "Pintar" dalam 4 bulan: Jan = 120, Feb = 95, Mar = 145, Apr = 110. Jika target penjualan per bulan adalah 115 buku, tentukan pada bulan mana target terpenuhi dan berapa buku di atas/bawah target?
                     </p>
+                  </div>
+                  {/* Diagram Batang Contoh 2 */}
+                  <div className="bg-slate-900/70 border border-yellow-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3 text-center">📊 Diagram Batang — Penjualan Buku + Garis Target</p>
+                    <svg viewBox="0 0 320 210" className="w-full max-w-sm mx-auto block" aria-label="Diagram batang penjualan buku">
+                      {/* Gridlines & Y labels */}
+                      {[0,50,100,150].map((v) => {
+                        const y = 160 - (v/160)*150;
+                        return (
+                          <g key={v}>
+                            <line x1="50" y1={y} x2="300" y2={y} stroke="#334155" strokeWidth="1" strokeDasharray="4 3" />
+                            <text x="44" y={y+4} textAnchor="end" fontSize="9" fill="#94a3b8">{v}</text>
+                          </g>
+                        );
+                      })}
+                      {/* Y-axis label */}
+                      <text x="12" y="90" textAnchor="middle" fontSize="9" fill="#64748b" transform="rotate(-90,12,90)">Buku</text>
+                      {/* Axes */}
+                      <line x1="50" y1="10" x2="50" y2="160" stroke="#475569" strokeWidth="1.5" />
+                      <line x1="50" y1="160" x2="300" y2="160" stroke="#475569" strokeWidth="1.5" />
+                      {/* Bars */}
+                      {[
+                        { label:"Jan", val:120, x:65 },
+                        { label:"Feb", val:95, x:125 },
+                        { label:"Mar", val:145, x:185 },
+                        { label:"Apr", val:110, x:245 },
+                      ].map(({ label, val, x }) => {
+                        const barH = (val/160)*150;
+                        const y = 160 - barH;
+                        const above = val >= 115;
+                        return (
+                          <g key={label}>
+                            <rect x={x} y={y} width="42" height={barH} rx="3"
+                              fill={above ? "#eab308" : "#b45309"} opacity={above ? 0.9 : 0.65} />
+                            <text x={x+21} y={y-4} textAnchor="middle" fontSize="9" fill={above ? "#fef08a" : "#fcd34d"} fontWeight="bold">{val}</text>
+                            <text x={x+21} y="173" textAnchor="middle" fontSize="9" fill="#94a3b8">{label}</text>
+                          </g>
+                        );
+                      })}
+                      {/* Target line at 115 */}
+                      {(() => {
+                        const ty = 160 - (115/160)*150;
+                        return (
+                          <g>
+                            <line x1="50" y1={ty} x2="300" y2={ty} stroke="#f87171" strokeWidth="1.5" strokeDasharray="6 3" />
+                            <text x="303" y={ty+4} fontSize="9" fill="#f87171" fontWeight="bold">115</text>
+                            <text x="175" y={ty-5} textAnchor="middle" fontSize="8" fill="#f87171">Target</text>
+                          </g>
+                        );
+                      })()}
+                      {/* Legend */}
+                      <rect x="60" y="185" width="10" height="8" rx="2" fill="#eab308" />
+                      <text x="74" y="193" fontSize="8" fill="#94a3b8">Target terpenuhi</text>
+                      <rect x="170" y="185" width="10" height="8" rx="2" fill="#b45309" opacity="0.65" />
+                      <text x="184" y="193" fontSize="8" fill="#94a3b8">Di bawah target</text>
+                    </svg>
+                    <p className="font-body text-xs text-slate-500 text-center mt-1">Garis merah = target 115 buku/bulan</p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
@@ -1039,6 +1138,61 @@ const PenyajianDataPage = () => {
                       Matematika: A=78, B=82 | IPA: A=85, B=79 | Bhs.Indo: A=88, B=90 | IPS: A=75, B=74<br />
                       Pada mata pelajaran apa saja Kelas A lebih unggul dibanding Kelas B?
                     </p>
+                  </div>
+                  {/* Diagram Batang Ganda Contoh 3 */}
+                  <div className="bg-slate-900/70 border border-red-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3 text-center">📊 Diagram Batang Ganda — Nilai Kelas A vs B</p>
+                    <svg viewBox="0 0 380 215" className="w-full max-w-md mx-auto block" aria-label="Diagram batang ganda nilai kelas A dan B">
+                      {/* Gridlines & Y labels (range 60–100) */}
+                      {[60,70,80,90,100].map((v) => {
+                        const y = 160 - ((v-60)/40)*150;
+                        return (
+                          <g key={v}>
+                            <line x1="54" y1={y} x2="355" y2={y} stroke="#334155" strokeWidth="1" strokeDasharray="4 3" />
+                            <text x="48" y={y+4} textAnchor="end" fontSize="9" fill="#94a3b8">{v}</text>
+                          </g>
+                        );
+                      })}
+                      {/* Y-axis label */}
+                      <text x="12" y="90" textAnchor="middle" fontSize="9" fill="#64748b" transform="rotate(-90,12,90)">Nilai</text>
+                      {/* Axes */}
+                      <line x1="54" y1="10" x2="54" y2="160" stroke="#475569" strokeWidth="1.5" />
+                      <line x1="54" y1="160" x2="355" y2="160" stroke="#475569" strokeWidth="1.5" />
+                      {/* Grouped bars */}
+                      {[
+                        { label:"Matematika", a:78, b:82, gx:64 },
+                        { label:"IPA",        a:85, b:79, gx:145 },
+                        { label:"Bhs.Indo",   a:88, b:90, gx:226 },
+                        { label:"IPS",        a:75, b:74, gx:307 },
+                      ].map(({ label, a, b, gx }) => {
+                        const hA = ((a-60)/40)*150;
+                        const hB = ((b-60)/40)*150;
+                        const yA = 160 - hA;
+                        const yB = 160 - hB;
+                        const aWins = a > b;
+                        return (
+                          <g key={label}>
+                            {/* Bar A */}
+                            <rect x={gx} y={yA} width="26" height={hA} rx="3"
+                              fill="#22d3ee" opacity={aWins ? 1 : 0.55} />
+                            <text x={gx+13} y={yA-4} textAnchor="middle" fontSize="8" fill="#67e8f9" fontWeight="bold">{a}</text>
+                            {/* Bar B */}
+                            <rect x={gx+29} y={yB} width="26" height={hB} rx="3"
+                              fill="#fb923c" opacity={!aWins ? 1 : 0.55} />
+                            <text x={gx+42} y={yB-4} textAnchor="middle" fontSize="8" fill="#fdba74" fontWeight="bold">{b}</text>
+                            {/* X label */}
+                            <text x={gx+27} y="174" textAnchor="middle" fontSize="8" fill="#94a3b8">{label}</text>
+                          </g>
+                        );
+                      })}
+                      {/* Legend */}
+                      <rect x="80" y="188" width="12" height="9" rx="2" fill="#22d3ee" />
+                      <text x="96" y="197" fontSize="9" fill="#94a3b8">Kelas A</text>
+                      <rect x="160" y="188" width="12" height="9" rx="2" fill="#fb923c" />
+                      <text x="176" y="197" fontSize="9" fill="#94a3b8">Kelas B</text>
+                      <text x="240" y="197" fontSize="8" fill="#64748b">Warna terang = unggul</text>
+                    </svg>
+                    <p className="font-body text-xs text-slate-500 text-center mt-1">Biru = Kelas A &nbsp;|&nbsp; Oranye = Kelas B &nbsp;|&nbsp; Warna lebih terang = lebih unggul</p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
