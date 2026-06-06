@@ -1539,6 +1539,50 @@ const PenyajianDataPage = () => {
                       Pada jam berapa suhu tertinggi terjadi, dan bagaimana trennya setelah itu?
                     </p>
                   </div>
+                  {/* Diagram Garis Contoh 1 */}
+                  <div className="bg-slate-900/70 border border-green-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3 text-center">📈 Diagram Garis — Suhu Udara per Jam</p>
+                    <svg viewBox="0 0 360 195" className="w-full max-w-sm mx-auto block" aria-label="Diagram garis suhu udara">
+                      {(() => {
+                        const data = [
+                          { label:"06.00", val:22 }, { label:"08.00", val:25 },
+                          { label:"10.00", val:28 }, { label:"12.00", val:32 },
+                          { label:"14.00", val:30 }, { label:"16.00", val:27 },
+                        ];
+                        const minV=20, maxV=34, L=55, R=340, T=10, B=160;
+                        const W=R-L, H=B-T;
+                        const step=W/(data.length-1);
+                        const xs=data.map((_,i)=>L+i*step);
+                        const ys=data.map(d=>B-((d.val-minV)/(maxV-minV))*H);
+                        const pts=xs.map((x,i)=>`${x},${ys[i]}`).join(" ");
+                        return (
+                          <>
+                            {[20,24,28,32].map(v=>{
+                              const y=B-((v-minV)/(maxV-minV))*H;
+                              return <g key={v}>
+                                <line x1={L} y1={y} x2={R} y2={y} stroke="#334155" strokeWidth="1" strokeDasharray="4 3"/>
+                                <text x={L-5} y={y+4} textAnchor="end" fontSize="9" fill="#94a3b8">{v}°</text>
+                              </g>;
+                            })}
+                            <text x="14" y="90" textAnchor="middle" fontSize="9" fill="#64748b" transform="rotate(-90,14,90)">Suhu (°C)</text>
+                            <line x1={L} y1={T} x2={L} y2={B} stroke="#475569" strokeWidth="1.5"/>
+                            <line x1={L} y1={B} x2={R} y2={B} stroke="#475569" strokeWidth="1.5"/>
+                            <polyline points={pts} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
+                            {data.map((d,i)=>(
+                              <g key={d.label}>
+                                <circle cx={xs[i]} cy={ys[i]} r={d.val===32?6:4}
+                                  fill={d.val===32?"#f87171":"#a78bfa"} stroke="#0f172a" strokeWidth="1.5"/>
+                                <text x={xs[i]} y={ys[i]-9} textAnchor="middle" fontSize="8"
+                                  fill={d.val===32?"#fca5a5":"#ddd6fe"} fontWeight={d.val===32?"bold":"normal"}>{d.val}°</text>
+                                <text x={xs[i]} y={B+13} textAnchor="middle" fontSize="8" fill="#94a3b8">{d.label}</text>
+                              </g>
+                            ))}
+                          </>
+                        );
+                      })()}
+                    </svg>
+                    <p className="font-body text-xs text-slate-500 text-center mt-1">Titik merah = suhu tertinggi (32°C pukul 12.00)</p>
+                  </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
@@ -1563,6 +1607,53 @@ const PenyajianDataPage = () => {
                       Penjualan minuman A (ml × 1000): Jan=80, Feb=95, Mar=90, Apr=110, Mei=105, Jun=120.<br />
                       Tentukan bulan dengan penjualan tertinggi dan terendah, serta identifikasi tren perubahan penjualan!
                     </p>
+                  </div>
+                  {/* Diagram Garis Contoh 2 */}
+                  <div className="bg-slate-900/70 border border-yellow-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3 text-center">📈 Diagram Garis — Penjualan Minuman A (×1000 ml)</p>
+                    <svg viewBox="0 0 360 195" className="w-full max-w-sm mx-auto block" aria-label="Diagram garis penjualan minuman">
+                      {(() => {
+                        const data = [
+                          { label:"Jan", val:80 }, { label:"Feb", val:95 },
+                          { label:"Mar", val:90 }, { label:"Apr", val:110 },
+                          { label:"Mei", val:105 }, { label:"Jun", val:120 },
+                        ];
+                        const minV=70, maxV=130, L=55, R=340, T=10, B=160;
+                        const W=R-L, H=B-T;
+                        const step=W/(data.length-1);
+                        const xs=data.map((_,i)=>L+i*step);
+                        const ys=data.map(d=>B-((d.val-minV)/(maxV-minV))*H);
+                        const pts=xs.map((x,i)=>`${x},${ys[i]}`).join(" ");
+                        return (
+                          <>
+                            {[70,90,110,130].map(v=>{
+                              const y=B-((v-minV)/(maxV-minV))*H;
+                              return <g key={v}>
+                                <line x1={L} y1={y} x2={R} y2={y} stroke="#334155" strokeWidth="1" strokeDasharray="4 3"/>
+                                <text x={L-5} y={y+4} textAnchor="end" fontSize="9" fill="#94a3b8">{v}</text>
+                              </g>;
+                            })}
+                            <text x="14" y="90" textAnchor="middle" fontSize="9" fill="#64748b" transform="rotate(-90,14,90)">×1000 ml</text>
+                            <line x1={L} y1={T} x2={L} y2={B} stroke="#475569" strokeWidth="1.5"/>
+                            <line x1={L} y1={B} x2={R} y2={B} stroke="#475569" strokeWidth="1.5"/>
+                            <polyline points={pts} fill="none" stroke="#eab308" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
+                            {data.map((d,i)=>{
+                              const isMax=d.val===120, isMin=d.val===80;
+                              return (
+                                <g key={d.label}>
+                                  <circle cx={xs[i]} cy={ys[i]} r={isMax||isMin?6:4}
+                                    fill={isMax?"#22c55e":isMin?"#f87171":"#eab308"} stroke="#0f172a" strokeWidth="1.5"/>
+                                  <text x={xs[i]} y={ys[i]-9} textAnchor="middle" fontSize="8"
+                                    fill={isMax?"#86efac":isMin?"#fca5a5":"#fef08a"} fontWeight={isMax||isMin?"bold":"normal"}>{d.val}</text>
+                                  <text x={xs[i]} y={B+13} textAnchor="middle" fontSize="8" fill="#94a3b8">{d.label}</text>
+                                </g>
+                              );
+                            })}
+                          </>
+                        );
+                      })()}
+                    </svg>
+                    <p className="font-body text-xs text-slate-500 text-center mt-1">Hijau = tertinggi (Jun) &nbsp;|&nbsp; Merah = terendah (Jan)</p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
@@ -1592,6 +1683,75 @@ const PenyajianDataPage = () => {
                       Q1: X=200, Y=150 | Q2: X=220, Y=180 | Q3: X=210, Y=220 | Q4: X=240, Y=260<br />
                       (a) Pada kuartal berapa Y mulai melampaui X? (b) Hitung selisih total penjualan X dan Y selama setahun!
                     </p>
+                  </div>
+                  {/* Diagram Garis Ganda Contoh 3 */}
+                  <div className="bg-slate-900/70 border border-red-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3 text-center">📈 Diagram Garis Ganda — Penjualan Produk X vs Y</p>
+                    <svg viewBox="0 0 360 210" className="w-full max-w-sm mx-auto block" aria-label="Diagram garis ganda produk X dan Y">
+                      {(() => {
+                        const dataX = [
+                          { label:"Q1", val:200 }, { label:"Q2", val:220 },
+                          { label:"Q3", val:210 }, { label:"Q4", val:240 },
+                        ];
+                        const dataY = [
+                          { label:"Q1", val:150 }, { label:"Q2", val:180 },
+                          { label:"Q3", val:220 }, { label:"Q4", val:260 },
+                        ];
+                        const minV=130, maxV=270, L=55, R=330, T=10, B=160;
+                        const W=R-L, H=B-T;
+                        const step=W/(dataX.length-1);
+                        const xs=dataX.map((_,i)=>L+i*step);
+                        const yOf=(v: number)=>B-((v-minV)/(maxV-minV))*H;
+                        const ysX=dataX.map(d=>yOf(d.val));
+                        const ysY=dataY.map(d=>yOf(d.val));
+                        const ptsX=xs.map((x,i)=>`${x},${ysX[i]}`).join(" ");
+                        const ptsY=xs.map((x,i)=>`${x},${ysY[i]}`).join(" ");
+                        return (
+                          <>
+                            {[140,170,200,230,260].map(v=>{
+                              const y=yOf(v);
+                              return <g key={v}>
+                                <line x1={L} y1={y} x2={R} y2={y} stroke="#334155" strokeWidth="1" strokeDasharray="4 3"/>
+                                <text x={L-5} y={y+4} textAnchor="end" fontSize="9" fill="#94a3b8">{v}</text>
+                              </g>;
+                            })}
+                            <text x="14" y="90" textAnchor="middle" fontSize="9" fill="#64748b" transform="rotate(-90,14,90)">Unit</text>
+                            <line x1={L} y1={T} x2={L} y2={B} stroke="#475569" strokeWidth="1.5"/>
+                            <line x1={L} y1={B} x2={R} y2={B} stroke="#475569" strokeWidth="1.5"/>
+                            {/* crossing area marker at Q3 */}
+                            <line x1={xs[2]} y1={T} x2={xs[2]} y2={B} stroke="#f87171" strokeWidth="1" strokeDasharray="3 3" opacity="0.5"/>
+                            <text x={xs[2]} y={T+8} textAnchor="middle" fontSize="8" fill="#f87171">Y melampaui X</text>
+                            {/* Line X (cyan) */}
+                            <polyline points={ptsX} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
+                            {/* Line Y (orange) */}
+                            <polyline points={ptsY} fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
+                            {/* Dots X */}
+                            {dataX.map((d,i)=>(
+                              <g key={`x${i}`}>
+                                <circle cx={xs[i]} cy={ysX[i]} r="4" fill="#22d3ee" stroke="#0f172a" strokeWidth="1.5"/>
+                                <text x={xs[i]-8} y={ysX[i]-8} textAnchor="middle" fontSize="8" fill="#67e8f9">{d.val}</text>
+                              </g>
+                            ))}
+                            {/* Dots Y */}
+                            {dataY.map((d,i)=>(
+                              <g key={`y${i}`}>
+                                <circle cx={xs[i]} cy={ysY[i]} r="4" fill="#fb923c" stroke="#0f172a" strokeWidth="1.5"/>
+                                <text x={xs[i]+8} y={ysY[i]-8} textAnchor="middle" fontSize="8" fill="#fdba74">{d.val}</text>
+                                <text x={xs[i]} y={B+13} textAnchor="middle" fontSize="8" fill="#94a3b8">{d.label}</text>
+                              </g>
+                            ))}
+                            {/* Legend */}
+                            <line x1="70" y1="185" x2="90" y2="185" stroke="#22d3ee" strokeWidth="2.5"/>
+                            <circle cx="80" cy="185" r="3" fill="#22d3ee"/>
+                            <text x="94" y="189" fontSize="9" fill="#94a3b8">Produk X</text>
+                            <line x1="175" y1="185" x2="195" y2="185" stroke="#fb923c" strokeWidth="2.5"/>
+                            <circle cx="185" cy="185" r="3" fill="#fb923c"/>
+                            <text x="199" y="189" fontSize="9" fill="#94a3b8">Produk Y</text>
+                          </>
+                        );
+                      })()}
+                    </svg>
+                    <p className="font-body text-xs text-slate-500 text-center mt-1">Garis putus merah = titik Y mulai melampaui X (Q3)</p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
