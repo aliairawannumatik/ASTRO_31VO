@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
+import { Pencil, X } from "lucide-react";
 
 const FUNCTIONS = [
   {
@@ -54,6 +55,50 @@ const FUNCTIONS = [
     color: "#4ade80", bg: "bg-green-500/20 border-green-500/40",
   },
 ];
+
+const CUSTOM_COLOR = "#fb923c";
+const CUSTOM_BG = "bg-orange-500/20 border-orange-500/40";
+
+const QUICK_PRESETS = [
+  { label: "4x − 7", value: "4x - 7" },
+  { label: "x² + 1", value: "x^2 + 1" },
+  { label: "2x² − x", value: "2x^2 - x" },
+  { label: "−3x + 6", value: "-3x + 6" },
+  { label: "x³", value: "x^3" },
+  { label: "x² + 3x − 4", value: "x^2 + 3x - 4" },
+];
+
+function sanitizeFormula(raw: string): boolean {
+  return /^[0-9x\s\+\-\*\/\^\(\)\.]+$/i.test(raw.trim());
+}
+
+function evalFormula(formula: string, x: number): number | null {
+  try {
+    if (!sanitizeFormula(formula)) return null;
+    let expr = formula.trim();
+    expr = expr.replace(/\^/g, "**");
+    expr = expr.replace(/(\d)(x)/gi, "$1*x");
+    expr = expr.replace(/(x)(\d)/gi, "x*$2");
+    expr = expr.replace(/(\))(x|\d)/gi, "$1*$2");
+    expr = expr.replace(/(x|\d)(\()/gi, "$1*$2");
+    // eslint-disable-next-line no-new-func
+    const result = new Function("x", `"use strict"; return (${expr});`)(x);
+    if (typeof result !== "number" || !isFinite(result)) return null;
+    return Math.round(result * 10000) / 10000;
+  } catch {
+    return null;
+  }
+}
+
+function buildCustomSteps(formula: string, x: number): { desc: string; expr: string }[] {
+  const substituted = formula.replace(/x/gi, `(${x})`);
+  const result = evalFormula(formula, x);
+  return [
+    { desc: "Rumus", expr: `f(x) = ${formula}` },
+    { desc: "Substitusi x", expr: `f(${x}) = ${substituted}` },
+    { desc: "Hasil", expr: `= ${result ?? "?"}`},
+  ];
+}
 
 type Phase = "idle" | "feeding" | "processing" | "outputting" | "done";
 const PRESETS = [-3, -2, -1, 0, 1, 2, 3, 5];
@@ -151,6 +196,10 @@ function Arrow({ color, active, vertical }: { color: string; active: boolean; ve
 
 export default function FunctionMachineAnimation() {
   const [fn, setFn] = useState(FUNCTIONS[0]);
+  const [isCustom, setIsCustom] = useState(false);
+  const [customFormula, setCustomFormula] = useState("2x^2 - 3x + 1");
+  const [customError, setCustomError] = useState<string | null>(null);
+
   const [inputVal, setInputVal] = useState("3");
   const [phase, setPhase] = useState<Phase>("idle");
   const [result, setResult] = useState<number | null>(null);
@@ -160,13 +209,36 @@ export default function FunctionMachineAnimation() {
   const clearTimers = () => { timerRefs.current.forEach(clearTimeout); timerRefs.current = []; };
   const addTimer = (cb: () => void, delay: number) => { timerRefs.current.push(setTimeout(cb, delay)); };
 
+  const activeColor = isCustom ? CUSTOM_COLOR : fn.color;
+  const activeBg    = isCustom ? CUSTOM_BG : fn.bg;
+
+  const x = parseInt(inputVal);
+  const xValid = !isNaN(x);
+
+  const customFormulaValid = isCustom
+    ? (customFormula.trim().length > 0 && sanitizeFormula(customFormula) && evalFormula(customFormula, 0) !== null)
+    : true;
+
+  const getSteps = () => {
+    if (!xValid) return [];
+    if (isCustom) return buildCustomSteps(customFormula, x);
+    return fn.steps(x);
+  };
+
+  const getResult = () => {
+    if (!xValid) return null;
+    if (isCustom) return evalFormula(customFormula, x);
+    return fn.fn(x);
+  };
+
+  const steps = getSteps();
+
   const run = () => {
-    const x = parseInt(inputVal);
-    if (isNaN(x)) return;
+    if (!xValid) return;
+    if (isCustom && !customFormulaValid) { setCustomError("Rumus tidak valid. Gunakan: angka, x, +, -, *, ^, ()"); return; }
     playPopSound();
     clearTimers();
-    const output = fn.fn(x);
-    const steps = fn.steps(x);
+    const output = getResult();
     setResult(null);
     setVisibleSteps(0);
     setPhase("feeding");
@@ -177,18 +249,68 @@ export default function FunctionMachineAnimation() {
   };
 
   const reset = () => { playPopSound(); clearTimers(); setPhase("idle"); setResult(null); setVisibleSteps(0); };
-  const handleFnChange = (f: typeof FUNCTIONS[0]) => { playPopSound(); clearTimers(); setFn(f); setPhase("idle"); setResult(null); setVisibleSteps(0); };
 
-  const x = parseInt(inputVal);
-  const xValid = !isNaN(x);
-  const steps = xValid ? fn.steps(x) : [];
+  const handleFnChange = (f: typeof FUNCTIONS[0]) => {
+    playPopSound(); clearTimers(); setFn(f); setIsCustom(false);
+    setPhase("idle"); setResult(null); setVisibleSteps(0);
+  };
+
+  const handleCustomSelect = () => {
+    playPopSound(); clearTimers(); setIsCustom(true);
+    setPhase("idle"); setResult(null); setVisibleSteps(0); setCustomError(null);
+  };
+
+  const handleCustomFormulaChange = (val: string) => {
+    setCustomFormula(val);
+    setCustomError(null);
+    reset();
+  };
+
   const isRunning = phase === "feeding" || phase === "processing" || phase === "outputting";
-
   const inputVisible = phase !== "processing" && phase !== "outputting" && phase !== "done";
   const outputVisible = phase === "done";
   const arrowLeftActive = phase === "feeding" || phase === "processing";
   const arrowRightActive = phase === "outputting" || phase === "done";
   const spinning = phase === "processing";
+
+  const machineLabel = isCustom ? `f(x) = ${customFormula}` : fn.label;
+
+  const MachineBox = ({ size }: { size: "sm" | "lg" }) => (
+    <div
+      className={`relative rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 ${size === "lg" ? "px-5 py-4 w-full max-w-[220px]" : "px-4 py-4 flex-shrink-0"}`}
+      style={{
+        width: size === "sm" ? 148 : undefined,
+        borderColor: activeColor,
+        background: `linear-gradient(135deg, #0f172a 0%, ${activeColor}1a 100%)`,
+        boxShadow: spinning
+          ? `0 0 32px ${activeColor}80, 0 0 64px ${activeColor}30`
+          : `0 0 12px ${activeColor}25`,
+      }}
+    >
+      <div className="flex items-center gap-1 mb-2" style={{ opacity: spinning ? 1 : 0.45 }}>
+        <GearSVG size={size === "lg" ? 28 : 26} speed={1.8} clockwise={true}  color={activeColor} spinning={spinning} />
+        <GearSVG size={size === "lg" ? 20 : 18} speed={1.2} clockwise={false} color={activeColor} spinning={spinning} />
+        <GearSVG size={size === "lg" ? 24 : 22} speed={1.5} clockwise={true}  color={activeColor} spinning={spinning} />
+      </div>
+      <div className="text-[9px] text-white/40 font-body uppercase tracking-wider mb-0.5">fungsi</div>
+      <div style={{ color: activeColor }} className={`font-mono font-bold text-center leading-tight ${size === "lg" ? "text-sm" : "text-xs"} max-w-[130px] break-all`}>
+        {isCustom
+          ? <span>f(x) = <span className="text-orange-300">{customFormula || "..."}</span></span>
+          : <InlineMath math={fn.latex} />
+        }
+      </div>
+      {spinning ? (
+        <div className="flex gap-1 mt-2">
+          {[0, 0.15, 0.3].map((d, i) => (
+            <div key={i} className={`rounded-full fma-glow ${size === "lg" ? "w-2 h-2" : "w-1.5 h-1.5"}`}
+              style={{ background: activeColor, animationDelay: `${d}s` }} />
+          ))}
+        </div>
+      ) : (
+        <div className="h-4" />
+      )}
+    </div>
+  );
 
   return (
     <div className="rounded-2xl overflow-hidden border border-violet-500/30 bg-gradient-to-br from-slate-900/90 to-violet-950/30 backdrop-blur">
@@ -210,14 +332,10 @@ export default function FunctionMachineAnimation() {
           0%, 100% { opacity: 0.6; }
           50%       { opacity: 1; }
         }
-        @keyframes fma-dot-bounce {
-          0%, 100% { transform: translateY(0); }
-          50%       { transform: translateY(-4px); }
-        }
-        .fma-ball-enter  { animation: fma-ball-enter 0.45s ease forwards; }
-        .fma-bounce-result { animation: fma-bounce-result 0.5s ease forwards; }
-        .fma-step-in { animation: fma-step-in 0.35s ease forwards; }
-        .fma-glow    { animation: fma-machine-glow 0.7s ease-in-out infinite; }
+        .fma-ball-enter      { animation: fma-ball-enter 0.45s ease forwards; }
+        .fma-bounce-result   { animation: fma-bounce-result 0.5s ease forwards; }
+        .fma-step-in         { animation: fma-step-in 0.35s ease forwards; }
+        .fma-glow            { animation: fma-machine-glow 0.7s ease-in-out infinite; }
       `}</style>
 
       {/* Header */}
@@ -233,7 +351,7 @@ export default function FunctionMachineAnimation() {
             key={f.id}
             onClick={() => handleFnChange(f)}
             className="text-xs px-2.5 py-1.5 rounded-full border font-mono font-semibold transition-all cursor-pointer"
-            style={fn.id === f.id
+            style={!isCustom && fn.id === f.id
               ? { borderColor: f.color, color: f.color, background: `${f.color}18`, borderWidth: 2 }
               : { background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.45)" }
             }
@@ -241,67 +359,85 @@ export default function FunctionMachineAnimation() {
             {f.label}
           </button>
         ))}
+        {/* Custom button */}
+        <button
+          onClick={handleCustomSelect}
+          className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-full border font-semibold transition-all cursor-pointer"
+          style={isCustom
+            ? { borderColor: CUSTOM_COLOR, color: CUSTOM_COLOR, background: `${CUSTOM_COLOR}18`, borderWidth: 2 }
+            : { background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.45)" }
+          }
+        >
+          <Pencil className="w-3 h-3" /> Buat Sendiri
+        </button>
       </div>
 
+      {/* Custom Formula Input Panel */}
+      {isCustom && (
+        <div className="mx-4 mb-3 bg-orange-900/20 border border-orange-500/30 rounded-xl p-3 space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-orange-300 text-xs font-bold font-mono shrink-0">f(x) =</span>
+            <input
+              type="text"
+              value={customFormula}
+              onChange={e => handleCustomFormulaChange(e.target.value)}
+              placeholder="contoh: 2x^2 - 3x + 1"
+              className="flex-1 bg-slate-900/60 border border-orange-500/30 rounded-lg px-3 py-1.5 text-sm font-mono text-orange-200 placeholder-white/20 outline-none focus:border-orange-400/60 focus:ring-1 focus:ring-orange-400/30 transition-all"
+              disabled={isRunning}
+            />
+            {customFormula && (
+              <button onClick={() => { handleCustomFormulaChange(""); reset(); }}
+                className="text-white/30 hover:text-white/60 transition-colors shrink-0">
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+          {customError && (
+            <p className="text-[11px] text-red-400 font-body">{customError}</p>
+          )}
+          {!customError && customFormula && !customFormulaValid && (
+            <p className="text-[11px] text-red-400 font-body">⚠️ Rumus tidak valid. Gunakan: angka, x, +, -, ^, ()</p>
+          )}
+          {!customError && customFormulaValid && customFormula && (
+            <p className="text-[11px] text-green-400 font-body">✅ Rumus valid — f(x) = {customFormula}</p>
+          )}
+          <div>
+            <p className="text-[10px] text-white/30 font-body mb-1.5 uppercase tracking-wider">Contoh cepat:</p>
+            <div className="flex flex-wrap gap-1.5">
+              {QUICK_PRESETS.map(p => (
+                <button key={p.value}
+                  onClick={() => { handleCustomFormulaChange(p.value); }}
+                  className="text-[11px] font-mono px-2 py-1 rounded-lg border border-orange-500/20 bg-orange-900/20 text-orange-300/70 hover:text-orange-200 hover:border-orange-400/40 hover:bg-orange-900/30 transition-all active:scale-95">
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <p className="text-[10px] text-white/25 font-body">
+            💡 Gunakan <code className="text-orange-300/60">x</code> sebagai variabel, <code className="text-orange-300/60">^</code> untuk pangkat (mis. <code className="text-orange-300/60">x^2</code>), tanda kurung <code className="text-orange-300/60">()</code> jika perlu.
+          </p>
+        </div>
+      )}
+
       {/* ===== MACHINE VISUAL ===== */}
-      {/* Mobile: vertical stack. Tablet/Desktop: horizontal row */}
       <div className="px-3 pb-3">
 
         {/* HORIZONTAL layout — sm and above */}
         <div className="hidden sm:flex items-center justify-center gap-0">
-          {/* Input */}
           <Ball
             value={xValid ? String(x) : "?"}
-            color={fn.color}
+            color={activeColor}
             visible={inputVisible}
             animClass={phase === "feeding" ? "fma-ball-enter" : ""}
             label="Input"
             sublabel="domain"
           />
-
-          {/* Arrow left */}
-          <Arrow color={fn.color} active={arrowLeftActive} />
-
-          {/* Machine */}
-          <div
-            className="relative rounded-2xl border-2 flex flex-col items-center justify-center px-4 py-4 flex-shrink-0 transition-all duration-300"
-            style={{
-              width: 148,
-              borderColor: fn.color,
-              background: `linear-gradient(135deg, #0f172a 0%, ${fn.color}1a 100%)`,
-              boxShadow: spinning
-                ? `0 0 32px ${fn.color}80, 0 0 64px ${fn.color}30`
-                : `0 0 12px ${fn.color}25`,
-            }}
-          >
-            <div className="flex items-center gap-1 mb-2" style={{ opacity: spinning ? 1 : 0.45 }}>
-              <GearSVG size={26} speed={1.8} clockwise={true}  color={fn.color} spinning={spinning} />
-              <GearSVG size={18} speed={1.2} clockwise={false} color={fn.color} spinning={spinning} />
-              <GearSVG size={22} speed={1.5} clockwise={true}  color={fn.color} spinning={spinning} />
-            </div>
-            <div className="text-[9px] text-white/40 font-body uppercase tracking-wider mb-0.5">fungsi</div>
-            <div style={{ color: fn.color }} className="font-mono text-xs font-bold">
-              <InlineMath math={fn.latex} />
-            </div>
-            {spinning ? (
-              <div className="flex gap-1 mt-2">
-                {[0, 0.15, 0.3].map((d, i) => (
-                  <div key={i} className="w-1.5 h-1.5 rounded-full fma-glow"
-                    style={{ background: fn.color, animationDelay: `${d}s` }} />
-                ))}
-              </div>
-            ) : (
-              <div className="h-4" />
-            )}
-          </div>
-
-          {/* Arrow right */}
-          <Arrow color={fn.color} active={arrowRightActive} />
-
-          {/* Output */}
+          <Arrow color={activeColor} active={arrowLeftActive} />
+          <MachineBox size="sm" />
+          <Arrow color={activeColor} active={arrowRightActive} />
           <Ball
             value={phase === "done" && result !== null ? String(result) : "?"}
-            color={fn.color}
+            color={activeColor}
             visible={outputVisible}
             animClass={phase === "done" ? "fma-bounce-result" : ""}
             label="Output"
@@ -311,58 +447,20 @@ export default function FunctionMachineAnimation() {
 
         {/* VERTICAL layout — mobile only */}
         <div className="flex sm:hidden flex-col items-center gap-0">
-          {/* Input */}
           <Ball
             value={xValid ? String(x) : "?"}
-            color={fn.color}
+            color={activeColor}
             visible={inputVisible}
             animClass={phase === "feeding" ? "fma-ball-enter" : ""}
             label="Input"
             sublabel="domain"
           />
-
-          {/* Arrow down */}
-          <Arrow color={fn.color} active={arrowLeftActive} vertical />
-
-          {/* Machine */}
-          <div
-            className="rounded-2xl border-2 flex flex-col items-center justify-center px-5 py-4 w-full max-w-[220px] transition-all duration-300"
-            style={{
-              borderColor: fn.color,
-              background: `linear-gradient(135deg, #0f172a 0%, ${fn.color}1a 100%)`,
-              boxShadow: spinning
-                ? `0 0 28px ${fn.color}80, 0 0 56px ${fn.color}30`
-                : `0 0 10px ${fn.color}25`,
-            }}
-          >
-            <div className="flex items-center gap-2 mb-2" style={{ opacity: spinning ? 1 : 0.45 }}>
-              <GearSVG size={28} speed={1.8} clockwise={true}  color={fn.color} spinning={spinning} />
-              <GearSVG size={20} speed={1.2} clockwise={false} color={fn.color} spinning={spinning} />
-              <GearSVG size={24} speed={1.5} clockwise={true}  color={fn.color} spinning={spinning} />
-            </div>
-            <div className="text-[9px] text-white/40 font-body uppercase tracking-wider mb-0.5">fungsi</div>
-            <div style={{ color: fn.color }} className="font-mono text-sm font-bold">
-              <InlineMath math={fn.latex} />
-            </div>
-            {spinning ? (
-              <div className="flex gap-1.5 mt-2">
-                {[0, 0.15, 0.3].map((d, i) => (
-                  <div key={i} className="w-2 h-2 rounded-full fma-glow"
-                    style={{ background: fn.color, animationDelay: `${d}s` }} />
-                ))}
-              </div>
-            ) : (
-              <div className="h-4" />
-            )}
-          </div>
-
-          {/* Arrow down */}
-          <Arrow color={fn.color} active={arrowRightActive} vertical />
-
-          {/* Output */}
+          <Arrow color={activeColor} active={arrowLeftActive} vertical />
+          <MachineBox size="lg" />
+          <Arrow color={activeColor} active={arrowRightActive} vertical />
           <Ball
             value={phase === "done" && result !== null ? String(result) : "?"}
-            color={fn.color}
+            color={activeColor}
             visible={outputVisible}
             animClass={phase === "done" ? "fma-bounce-result" : ""}
             label="Output"
@@ -373,16 +471,20 @@ export default function FunctionMachineAnimation() {
 
       {/* Step-by-step */}
       <div className="px-4 pb-3">
-        <div className={`rounded-xl border px-4 py-3 transition-all min-h-[72px] ${fn.bg}`}>
+        <div className={`rounded-xl border px-4 py-3 transition-all min-h-[72px] ${activeBg}`}>
           <p className="text-[10px] font-semibold text-white/50 uppercase tracking-wider mb-2 font-body">Langkah Pengerjaan</p>
           {visibleSteps === 0 && phase === "idle" && (
-            <p className="text-white/30 text-xs font-body italic">Masukkan nilai x dan tekan "Jalankan" untuk melihat proses...</p>
+            <p className="text-white/30 text-xs font-body italic">
+              {isCustom && !customFormulaValid
+                ? "Tulis rumus fungsi yang valid terlebih dahulu..."
+                : "Masukkan nilai x dan tekan \"Jalankan\" untuk melihat proses..."}
+            </p>
           )}
           {steps.slice(0, visibleSteps).map((step, i) => (
             <div key={i} className="fma-step-in flex items-center gap-3 mb-1.5" style={{ animationDelay: `${i * 0.05}s` }}>
               <span
                 className="text-[10px] font-bold px-2 py-0.5 rounded-full font-body flex-shrink-0"
-                style={{ background: `${fn.color}25`, color: fn.color }}
+                style={{ background: `${activeColor}25`, color: activeColor }}
               >
                 {step.desc}
               </span>
@@ -392,7 +494,7 @@ export default function FunctionMachineAnimation() {
           {phase === "done" && result !== null && (
             <div className="fma-bounce-result mt-2 flex items-center gap-2">
               <span className="text-lg">🎯</span>
-              <span className="font-mono font-bold text-base" style={{ color: fn.color }}>
+              <span className="font-mono font-bold text-base" style={{ color: activeColor }}>
                 f({x}) = {result}
               </span>
             </div>
@@ -415,9 +517,9 @@ export default function FunctionMachineAnimation() {
           </div>
           <button
             onClick={run}
-            disabled={!xValid || isRunning}
+            disabled={!xValid || isRunning || (isCustom && !customFormulaValid)}
             className="flex-1 min-w-[120px] py-2 rounded-xl font-display font-bold text-sm transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
-            style={{ background: `${fn.color}30`, border: `1px solid ${fn.color}60`, color: fn.color }}
+            style={{ background: `${activeColor}30`, border: `1px solid ${activeColor}60`, color: activeColor }}
           >
             {isRunning ? "⚙️ Memproses..." : "▶ Jalankan Mesin"}
           </button>
@@ -442,10 +544,10 @@ export default function FunctionMachineAnimation() {
               onClick={() => { setInputVal(String(v)); reset(); }}
               className="w-9 h-9 rounded-lg font-mono text-xs font-bold border transition-all cursor-pointer hover:scale-110 active:scale-95"
               style={{
-                background: inputVal === String(v) ? `${fn.color}25` : "rgba(255,255,255,0.05)",
-                borderColor: inputVal === String(v) ? fn.color : "rgba(255,255,255,0.1)",
-                color: inputVal === String(v) ? fn.color : "rgba(255,255,255,0.5)",
-                boxShadow: inputVal === String(v) ? `0 0 8px ${fn.color}40` : "none",
+                background: inputVal === String(v) ? `${activeColor}25` : "rgba(255,255,255,0.05)",
+                borderColor: inputVal === String(v) ? activeColor : "rgba(255,255,255,0.1)",
+                color: inputVal === String(v) ? activeColor : "rgba(255,255,255,0.5)",
+                boxShadow: inputVal === String(v) ? `0 0 8px ${activeColor}40` : "none",
               }}
             >
               {v}
