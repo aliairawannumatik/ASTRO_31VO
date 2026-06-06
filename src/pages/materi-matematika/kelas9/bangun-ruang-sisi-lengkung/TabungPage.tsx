@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import imgSelimutSoal from "@assets/image_1780761230749.png";
+import imgBakMandi from "@assets/image_1780761862129.png";
 import imgSarden from "@assets/image_1780450794282.png";
 import imgBiskuit from "@assets/image_1780450814436.png";
 import imgIndomilk from "@assets/image_1780450845492.png";
@@ -1658,38 +1659,70 @@ const volExamples: Ex[] = [
   {
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah pabrik minuman memproduksi kaleng silindris berisi <InlineMath math="330 \text{ mL}" /> (<InlineMath math="330 \text{ cm}^3" />) minuman.</p>
-        <p>Tinggi kaleng adalah <InlineMath math="11 \text{ cm}" />. Pabrik ingin membuat versi baru dengan <strong>diameter diperbesar 40%</strong> namun <strong>volume tetap 330 cm³</strong>.</p>
-        <p>Berapa tinggi kaleng baru yang harus dibuat? (π = 3,14, jawaban dalam 2 desimal)</p>
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <div className="flex justify-center">
+          <img src={imgBakMandi} alt="Bak mandi tabung" className="max-h-32 object-contain rounded" />
+        </div>
+        <p>Sebuah bak mandi terbuat dari drum plastik yang dipotong. Drum tersebut memiliki diameter <InlineMath math="60 \text{ cm}" />, tinggi <InlineMath math="42 \text{ cm}" />, dan berisi air dengan tinggi <strong className="text-red-300">seperempat</strong> dari tinggi tabung.</p>
+        <p>Jika bak tersebut akan diisi dari air keran dengan debit <strong className="text-yellow-300">1,08 liter/menit</strong>, maka waktu yang diperlukan mengisi bak hingga penuh adalah ….</p>
+        <p className="text-xs text-white/50">(gunakan π = <sup>22</sup>⁄<sub>7</sub> dan 1 liter = 1.000 cm³)</p>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "1 jam 2 menit 30 detik" },
+            { opt: "B", label: "1 jam 20 menit 30 detik" },
+            { opt: "C", label: "1 jam 22 menit 30 detik" },
+            { opt: "D", label: "1 jam 50 menit" },
+          ].map(({ opt, label }) => (
+            <div key={opt} className="flex items-center gap-2 bg-slate-800/60 rounded-lg px-3 py-2">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-slate-700 text-white/70 font-bold text-xs shrink-0">{opt}</span>
+              <span className="text-white/80 text-xs">{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Cari jari-jari kaleng lama:</p>
+        <p className="text-red-400 font-semibold">Langkah 1 — Identifikasi data:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <BlockMath math="V = \pi r^2 t \Rightarrow 330 = 3{,}14 \times r^2 \times 11" />
-          <BlockMath math="r^2 = \frac{330}{3{,}14 \times 11} = \frac{330}{34{,}54} \approx 9{,}554" />
-          <BlockMath math="r_{\text{lama}} \approx \sqrt{9{,}554} \approx 3{,}09 \text{ cm}" />
+          <p className="text-white/70">Diameter = 60 cm → <InlineMath math="r = 30 \text{ cm}" /></p>
+          <p className="text-white/70">Tinggi tabung = 42 cm</p>
+          <p className="text-white/70">Tinggi air awal = <InlineMath math="\frac{1}{4} \times 42 = 10{,}5 \text{ cm}" /></p>
+          <p className="text-white/70">Tinggi yang perlu diisi = <InlineMath math="42 - 10{,}5 = 31{,}5 \text{ cm}" /></p>
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Hitung jari-jari baru (diameter naik 40%):</p>
+        <p className="text-red-400 font-semibold">Langkah 2 — Hitung volume air yang perlu ditambah:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <BlockMath math="d_{\text{baru}} = d_{\text{lama}} \times 1{,}4 \Rightarrow r_{\text{baru}} = r_{\text{lama}} \times 1{,}4" />
-          <BlockMath math="r_{\text{baru}} = 3{,}09 \times 1{,}4 \approx 4{,}326 \text{ cm}" />
+          <BlockMath math="V = \pi r^2 t = \frac{22}{7} \times 30^2 \times 31{,}5" />
+          <BlockMath math="V = \frac{22}{7} \times 900 \times 31{,}5 = 22 \times 900 \times \frac{31{,}5}{7}" />
+          <BlockMath math="V = 22 \times 900 \times 4{,}5 = 22 \times 4.050" />
+          <BlockMath math="V = 89.100 \text{ cm}^3 = 89{,}1 \text{ liter}" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Hitung tinggi baru dengan volume sama:</p>
+        <p className="text-red-400 font-semibold">Langkah 3 — Hitung waktu pengisian:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <BlockMath math="V = \pi r_{\text{baru}}^2 \times t_{\text{baru}}" />
-          <BlockMath math="330 = 3{,}14 \times (4{,}326)^2 \times t_{\text{baru}}" />
-          <BlockMath math="330 = 3{,}14 \times 18{,}714 \times t_{\text{baru}}" />
-          <BlockMath math="330 = 58{,}76 \times t_{\text{baru}}" />
-          <BlockMath math="t_{\text{baru}} = \frac{330}{58{,}76} \approx 5{,}62 \text{ cm}" />
+          <BlockMath math="\text{Waktu} = \frac{89{,}1 \text{ liter}}{1{,}08 \text{ liter/menit}} = 82{,}5 \text{ menit}" />
         </div>
-        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-1">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Jari-jari baru ≈ <strong className="text-yellow-300">4,33 cm</strong></p>
-          <p className="text-white/80">• Tinggi kaleng baru ≈ <strong className="text-yellow-300">5,62 cm</strong></p>
-          <p className="text-cyan-300 mt-1">💡 Logis! Kaleng lebih lebar tapi lebih pendek, volume tetap sama.</p>
+        <p className="text-red-400 font-semibold">Langkah 4 — Konversi menit ke jam, menit, detik:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+          <p className="text-white/70">82,5 menit = <strong>60 menit + 22,5 menit</strong></p>
+          <p className="text-white/70">0,5 menit = 30 detik</p>
+          <p className="text-white/70">∴ Waktu = <strong className="text-green-300">1 jam 22 menit 30 detik</strong></p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "1 jam 2 menit 30 detik", correct: false },
+            { opt: "B", label: "1 jam 20 menit 30 detik", correct: false },
+            { opt: "C", label: "1 jam 22 menit 30 detik", correct: true },
+            { opt: "D", label: "1 jam 50 menit", correct: false },
+          ].map(({ opt, label, correct }) => (
+            <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 border ${correct ? "bg-green-950/60 border-green-600/60" : "bg-slate-800/40 border-slate-700/40 opacity-50"}`}>
+              <span className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs shrink-0 ${correct ? "bg-green-600 text-white" : "bg-slate-700 text-white/50"}`}>{opt}</span>
+              <span className={`text-xs font-semibold ${correct ? "text-green-300" : "text-white/50"}`}>{label} {correct && "✓"}</span>
+            </div>
+          ))}
+        </div>
+        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs">
+          <p className="text-red-300 font-semibold">✅ Jawaban: C. 1 jam 22 menit 30 detik</p>
+          <p className="text-white/60 mt-1">V = 89.100 cm³ = 89,1 liter → 89,1 ÷ 1,08 = 82,5 menit = 1 jam 22 menit 30 detik</p>
         </div>
       </div>
     ),
