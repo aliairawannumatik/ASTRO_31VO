@@ -213,7 +213,7 @@ const JariJariAnimSVG = () => (
 );
 
 const TinggiAnimSVG = () => (
-  <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto my-2" aria-label="Tinggi tabung">
+  <svg viewBox="0 0 280 196" className="w-full max-w-xs mx-auto my-2" aria-label="Tinggi tabung">
     <defs>
       <style>{`
         @keyframes tGlow{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 6px #22c55e);}50%{stroke-opacity:0.2;}}
@@ -230,7 +230,8 @@ const TinggiAnimSVG = () => (
     <line x1="28" y1="40" x2="42" y2="40" stroke="#22c55e" strokeWidth="2"/>
     <line x1="28" y1="140" x2="42" y2="140" stroke="#22c55e" strokeWidth="2"/>
     <text x="22" y="92" fill="#22c55e" fontSize="13" fontFamily="monospace" fontWeight="700" textAnchor="middle">t</text>
-    <text x="60" y="168" fill="#86efac" fontSize="10" fontFamily="monospace" textAnchor="start">t = tinggi tabung</text>
+    {/* Label below ellipse — tidak bertabrakan */}
+    <text x="140" y="185" fill="#86efac" fontSize="10" fontFamily="monospace" textAnchor="middle">t = tinggi tabung</text>
   </svg>
 );
 
@@ -257,6 +258,123 @@ const SelimutAnimSVG = () => (
     <text x="140" y="92" fill="#e9d5ff" fontSize="11" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT</text>
     <text x="140" y="108" fill="#c4b5fd" fontSize="10" fontFamily="monospace" textAnchor="middle">L = 2πr × t</text>
     <text x="140" y="165" fill="#a78bfa" fontSize="10" fontFamily="monospace" textAnchor="middle">Selimut = "kulit" tabung tanpa tutup</text>
+  </svg>
+);
+
+/* Selimut dibuka → persegi panjang */
+const SelimutRectAnimSVG = () => (
+  <svg viewBox="0 0 290 158" className="w-full max-w-sm mx-auto my-2" aria-label="Selimut tabung dibuka menjadi persegi panjang">
+    <defs>
+      <style>{`
+        @keyframes cylFadeOut{0%,35%{opacity:1;}55%,100%{opacity:0.28;}}
+        @keyframes rectFadeIn{0%,35%{opacity:0.15;}58%,100%{opacity:1;}}
+        @keyframes arrPulse{0%,100%{opacity:0.4;}47%,53%{opacity:1;}}
+        .cf{animation:cylFadeOut 4.2s ease-in-out infinite;}
+        .rf{animation:rectFadeIn  4.2s ease-in-out infinite;}
+        .ap{animation:arrPulse   4.2s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* LEFT: tabung dengan selimut */}
+    <g className="cf">
+      <ellipse cx="46" cy="34" rx="31" ry="9"  fill="rgba(168,85,247,0.32)" stroke="#a855f7" strokeWidth="1.5"/>
+      <line x1="15" y1="34" x2="15" y2="98" stroke="#7c3aed" strokeWidth="1.5"/>
+      <line x1="77" y1="34" x2="77" y2="98" stroke="#7c3aed" strokeWidth="1.5"/>
+      <rect x="15" y="34" width="62" height="64" fill="rgba(168,85,247,0.18)"/>
+      <ellipse cx="46" cy="98" rx="31" ry="9"  fill="rgba(168,85,247,0.42)" stroke="#a855f7" strokeWidth="1.5"/>
+      <text x="46" y="70" fill="#e9d5ff" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="700">SELIMUT</text>
+      <text x="46" y="118" fill="#a78bfa" fontSize="7" fontFamily="monospace" textAnchor="middle">tabung</text>
+    </g>
+    {/* Arrow */}
+    <g className="ap">
+      <line x1="90" y1="66" x2="112" y2="66" stroke="#64748b" strokeWidth="1.8"/>
+      <polygon points="110,62 118,66 110,70" fill="#64748b"/>
+      <text x="104" y="79" fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">dibuka</text>
+    </g>
+    {/* RIGHT: persegi panjang selimut */}
+    <g className="rf">
+      <rect x="126" y="28" width="122" height="76" fill="rgba(168,85,247,0.26)" stroke="#a855f7" strokeWidth="2" rx="2"/>
+      {/* Dimensi atas: 2πr */}
+      <line x1="126" y1="18" x2="248" y2="18" stroke="#f59e0b" strokeWidth="1.6"/>
+      <line x1="126" y1="13" x2="126" y2="23" stroke="#f59e0b" strokeWidth="1.6"/>
+      <line x1="248" y1="13" x2="248" y2="23" stroke="#f59e0b" strokeWidth="1.6"/>
+      <text x="187" y="14" fill="#f59e0b" fontSize="11" fontFamily="monospace" fontWeight="700" textAnchor="middle">2πr</text>
+      {/* Dimensi kanan: t */}
+      <line x1="256" y1="28" x2="256" y2="104" stroke="#22c55e" strokeWidth="1.6"/>
+      <line x1="251" y1="28"  x2="261" y2="28"  stroke="#22c55e" strokeWidth="1.6"/>
+      <line x1="251" y1="104" x2="261" y2="104" stroke="#22c55e" strokeWidth="1.6"/>
+      <text x="269" y="70" fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="700" textAnchor="start">t</text>
+      {/* Label dalam kotak */}
+      <text x="187" y="65" fill="#e9d5ff" fontSize="8"  fontFamily="monospace" textAnchor="middle" fontWeight="700">SELIMUT</text>
+      <text x="187" y="77" fill="#c4b5fd" fontSize="7.5" fontFamily="monospace" textAnchor="middle">= persegi panjang</text>
+      {/* Rumus */}
+      <text x="187" y="148" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">L = 2πr × t</text>
+    </g>
+  </svg>
+);
+
+/* Sisi tabung — tiga sisi menyala bergantian */
+const SisiAnimSVG = () => (
+  <svg viewBox="0 0 280 188" className="w-full max-w-xs mx-auto my-2" aria-label="Tiga sisi tabung">
+    <defs>
+      <style>{`
+        @keyframes gs1{0%,5%{opacity:1;filter:drop-shadow(0 0 9px #a855f7);}34%,100%{opacity:0.15;filter:none;}}
+        @keyframes gs2{0%,34%{opacity:0.15;filter:none;}39%,63%{opacity:1;filter:drop-shadow(0 0 9px #34d399);}68%,100%{opacity:0.15;filter:none;}}
+        @keyframes gs3{0%,68%{opacity:0.15;filter:none;}73%,95%{opacity:1;filter:drop-shadow(0 0 9px #818cf8);}100%{opacity:0.15;filter:none;}}
+        @keyframes gl1{0%,5%{opacity:1;}34%,100%{opacity:0.15;}}
+        @keyframes gl2{0%,34%{opacity:0.15;}39%,63%{opacity:1;}68%,100%{opacity:0.15;}}
+        @keyframes gl3{0%,68%{opacity:0.15;}73%,95%{opacity:1;}100%{opacity:0.15;}}
+        .s1g{animation:gs1 4.5s ease-in-out infinite;}
+        .s2g{animation:gs2 4.5s ease-in-out infinite;}
+        .s3g{animation:gs3 4.5s ease-in-out infinite;}
+        .l1g{animation:gl1 4.5s ease-in-out infinite;}
+        .l2g{animation:gl2 4.5s ease-in-out infinite;}
+        .l3g{animation:gl3 4.5s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* Outline diam tabung */}
+    <line x1="80" y1="62" x2="80"  y2="155" stroke="#1e293b" strokeWidth="1.4"/>
+    <line x1="200" y1="62" x2="200" y2="155" stroke="#1e293b" strokeWidth="1.4"/>
+    {/* SISI 1 — Selimut (ungu) */}
+    <rect x="80" y="62" width="120" height="93" fill="rgba(168,85,247,0.42)" stroke="#a855f7" strokeWidth="2.8" className="s1g"/>
+    {/* SISI 2 — Alas (hijau) */}
+    <ellipse cx="140" cy="155" rx="60" ry="16" fill="rgba(52,211,153,0.42)" stroke="#34d399" strokeWidth="2.8" className="s2g"/>
+    {/* SISI 3 — Tutup (indigo) */}
+    <ellipse cx="140" cy="62"  rx="60" ry="16" fill="rgba(99,102,241,0.52)" stroke="#818cf8" strokeWidth="2.8" className="s3g"/>
+    {/* Label menyala */}
+    <text x="140" y="112" fill="#e9d5ff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="l1g">① Selimut (lengkung)</text>
+    <text x="140" y="175" fill="#86efac" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="l2g">② Alas (lingkaran bawah)</text>
+    <text x="140" y="48"  fill="#a5b4fc" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="l3g">③ Tutup (lingkaran atas)</text>
+  </svg>
+);
+
+/* Rusuk tabung — dua rusuk menyala bergantian */
+const RusukAnimSVG = () => (
+  <svg viewBox="0 0 280 188" className="w-full max-w-xs mx-auto my-2" aria-label="Dua rusuk tabung">
+    <defs>
+      <style>{`
+        @keyframes rr1{0%,42%{stroke-opacity:1;filter:drop-shadow(0 0 9px #f59e0b);}52%,92%{stroke-opacity:0.15;filter:none;}100%{stroke-opacity:1;}}
+        @keyframes rr2{0%,42%{stroke-opacity:0.15;filter:none;}52%,92%{stroke-opacity:1;filter:drop-shadow(0 0 9px #38bdf8);}100%{stroke-opacity:0.15;}}
+        @keyframes rl1{0%,42%{opacity:1;}52%,100%{opacity:0.15;}}
+        @keyframes rl2{0%,48%{opacity:0.15;}52%,92%{opacity:1;}97%,100%{opacity:0.15;}}
+        .rr1g{animation:rr1 3.2s ease-in-out infinite;}
+        .rr2g{animation:rr2 3.2s ease-in-out infinite;}
+        .rl1g{animation:rl1 3.2s ease-in-out infinite;}
+        .rl2g{animation:rl2 3.2s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* Badan tabung (redup) */}
+    <line x1="80" y1="62" x2="80"  y2="155" stroke="#1e293b" strokeWidth="1.4"/>
+    <line x1="200" y1="62" x2="200" y2="155" stroke="#1e293b" strokeWidth="1.4"/>
+    <rect x="80" y="62" width="120" height="93" fill="rgba(8,145,178,0.07)" stroke="none"/>
+    <ellipse cx="140" cy="62"  rx="60" ry="16" fill="rgba(15,23,42,0.55)" stroke="#1e293b" strokeWidth="1"/>
+    <ellipse cx="140" cy="155" rx="60" ry="16" fill="rgba(15,23,42,0.55)" stroke="#1e293b" strokeWidth="1"/>
+    {/* RUSUK 1 — lingkaran atas (amber) */}
+    <ellipse cx="140" cy="62"  rx="60" ry="16" fill="none" stroke="#f59e0b" strokeWidth="4" className="rr1g"/>
+    {/* RUSUK 2 — lingkaran bawah (biru) */}
+    <ellipse cx="140" cy="155" rx="60" ry="16" fill="none" stroke="#38bdf8" strokeWidth="4" className="rr2g"/>
+    {/* Label */}
+    <text x="140" y="47"  fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="rl1g">① Rusuk atas (tepi tutup)</text>
+    <text x="140" y="178" fill="#7dd3fc" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="rl2g">② Rusuk bawah (tepi alas)</text>
   </svg>
 );
 
@@ -850,66 +968,117 @@ const sections: Sec[] = [
           Setiap unsur punya nama dan peran penting dalam rumus!
         </p>
 
-        {/* ── Labeled diagram ── */}
+        {/* ── Labeled diagram — diperbaiki ── */}
         <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4">
           <p className="text-cyan-300 font-bold text-xs text-center mb-3">📌 Diagram Unsur-Unsur Tabung</p>
-          <svg viewBox="0 0 320 230" className="w-full max-w-sm mx-auto block">
+          <svg viewBox="0 0 380 260" className="w-full max-w-sm mx-auto block">
             <defs>
               <style>{`
-                @keyframes blinkU{0%,100%{opacity:1;}50%{opacity:0.25;}}
-                .u-blink{animation:blinkU 2s ease-in-out infinite;}
+                @keyframes blinkU{0%,100%{opacity:1;}50%{opacity:0.22;}}
+                .u-blink{animation:blinkU 2.2s ease-in-out infinite;}
               `}</style>
             </defs>
-            {/* Cylinder body */}
-            <ellipse cx="140" cy="55"  rx="78" ry="20" fill="rgba(99,102,241,0.25)" stroke="#818cf8" strokeWidth="1.8"/>
-            <rect x="62" y="55" width="156" height="120" fill="rgba(8,145,178,0.1)" stroke="none"/>
-            <line x1="62"  y1="55"  x2="62"  y2="175" stroke="#0891b2" strokeWidth="1.8"/>
-            <line x1="218" y1="55"  x2="218" y2="175" stroke="#0891b2" strokeWidth="1.8"/>
-            <ellipse cx="140" cy="175" rx="78" ry="20" fill="rgba(99,102,241,0.25)" stroke="#818cf8" strokeWidth="1.8"/>
-            {/* Selimut highlight */}
-            <rect x="62" y="55" width="156" height="120" fill="rgba(168,85,247,0.12)" stroke="none"/>
 
-            {/* TUTUP label */}
-            <ellipse cx="140" cy="55" rx="78" ry="20" fill="rgba(99,102,241,0.35)" stroke="#a5b4fc" strokeWidth="2" className="u-blink"/>
-            <line x1="140" y1="35" x2="260" y2="18" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="3,2"/>
-            <text x="263" y="14" fill="#a5b4fc" fontSize="10" fontFamily="monospace" fontWeight="700">TUTUP</text>
-            <text x="263" y="24" fill="#a5b4fc" fontSize="8"  fontFamily="monospace">(Lingkaran atas)</text>
+            {/* === Badan tabung === */}
+            <rect x="92" y="70" width="146" height="118" fill="rgba(8,145,178,0.07)" stroke="none"/>
+            <rect x="92" y="70" width="146" height="118" fill="rgba(168,85,247,0.07)" stroke="none"/>
+            <line x1="92"  y1="70" x2="92"  y2="188" stroke="#0891b2" strokeWidth="1.8"/>
+            <line x1="238" y1="70" x2="238" y2="188" stroke="#0891b2" strokeWidth="1.8"/>
 
-            {/* ALAS label */}
-            <ellipse cx="140" cy="175" rx="78" ry="20" fill="rgba(52,211,153,0.25)" stroke="#34d399" strokeWidth="1.8" className="u-blink"/>
-            <line x1="140" y1="193" x2="260" y2="210" stroke="#34d399" strokeWidth="1.2" strokeDasharray="3,2"/>
-            <text x="263" y="206" fill="#34d399" fontSize="10" fontFamily="monospace" fontWeight="700">ALAS</text>
-            <text x="263" y="216" fill="#34d399" fontSize="8"  fontFamily="monospace">(Lingkaran bawah)</text>
+            {/* TUTUP — berkedip indigo */}
+            <ellipse cx="165" cy="70"  rx="73" ry="18" fill="rgba(99,102,241,0.30)" stroke="#818cf8" strokeWidth="1.8" className="u-blink"/>
+            {/* ALAS — berkedip hijau */}
+            <ellipse cx="165" cy="188" rx="73" ry="18" fill="rgba(52,211,153,0.20)" stroke="#34d399" strokeWidth="1.8" className="u-blink"/>
+            {/* Selimut tint */}
+            <rect x="92" y="70" width="146" height="118" fill="rgba(168,85,247,0.09)" stroke="none"/>
 
-            {/* SELIMUT label */}
-            <line x1="62" y1="115" x2="15" y2="115" stroke="#c084fc" strokeWidth="1.2" strokeDasharray="3,2"/>
-            <text x="5"  y="109" fill="#c084fc" fontSize="10" fontFamily="monospace" fontWeight="700" textAnchor="end">SELIMUT</text>
-            <text x="5"  y="121" fill="#c084fc" fontSize="8"  fontFamily="monospace" textAnchor="end">(permukaan</text>
-            <text x="5"  y="131" fill="#c084fc" fontSize="8"  fontFamily="monospace" textAnchor="end">lengkung)</text>
+            {/* === r — garis putus dari pusat ke tepi tutup === */}
+            <line x1="165" y1="70" x2="238" y2="70" stroke="#f59e0b" strokeWidth="2.5" strokeDasharray="5,3"/>
+            <circle cx="165" cy="70" r="3.5" fill="#f59e0b"/>
+            <circle cx="238" cy="70" r="3.5" fill="#f59e0b"/>
+            {/* Leader vertikal naik ke atas tabung → label di luar */}
+            <line x1="202" y1="70" x2="202" y2="46" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="3,2"/>
+            <text x="202" y="41" fill="#f59e0b" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">r</text>
+            <text x="242" y="74" fill="#fde68a" fontSize="7"  fontFamily="monospace" textAnchor="start">(jari-jari)</text>
 
-            {/* Jari-jari (r) */}
-            <line x1="140" y1="55" x2="218" y2="55" stroke="#f59e0b" strokeWidth="2.5" strokeDasharray="4,2"/>
-            <circle cx="140" cy="55" r="3.5" fill="#f59e0b"/>
-            <circle cx="218" cy="55" r="3.5" fill="#f59e0b"/>
-            <text x="172" y="48" fill="#f59e0b" fontSize="11" fontFamily="monospace" fontWeight="700" textAnchor="middle">r</text>
+            {/* === d — indikator di bawah elips bawah, mirip gaya panah t === */}
+            {/* Konektor dari elips bawah ke garis d */}
+            <line x1="92"  y1="196" x2="92"  y2="212" stroke="#fde68a" strokeWidth="1" strokeDasharray="2,2" opacity="0.55"/>
+            <line x1="238" y1="196" x2="238" y2="212" stroke="#fde68a" strokeWidth="1" strokeDasharray="2,2" opacity="0.55"/>
+            {/* Garis d dengan tick di ujung */}
+            <line x1="92"  y1="212" x2="238" y2="212" stroke="#fde68a" strokeWidth="1.8"/>
+            <line x1="92"  y1="207" x2="92"  y2="217" stroke="#fde68a" strokeWidth="1.8"/>
+            <line x1="238" y1="207" x2="238" y2="217" stroke="#fde68a" strokeWidth="1.8"/>
+            <text x="165" y="230" fill="#fde68a" fontSize="9" fontFamily="monospace" fontWeight="700" textAnchor="middle">d = 2r</text>
 
-            {/* Diameter (d) */}
-            <line x1="62" y1="175" x2="218" y2="175" stroke="#fde68a" strokeWidth="1.2" strokeDasharray="3,3" opacity="0.7"/>
-            <text x="140" y="200" fill="#fde68a" fontSize="9" fontFamily="monospace" textAnchor="middle">d = 2r</text>
+            {/* === t — panah vertikal di kanan === */}
+            <line x1="256" y1="70"  x2="256" y2="188" stroke="#22c55e" strokeWidth="2.2"/>
+            <line x1="250" y1="70"  x2="262" y2="70"  stroke="#22c55e" strokeWidth="2"/>
+            <line x1="250" y1="188" x2="262" y2="188" stroke="#22c55e" strokeWidth="2"/>
+            <text x="270" y="133" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">t</text>
+            <text x="270" y="147" fill="#86efac" fontSize="8"  fontFamily="monospace" textAnchor="middle">(tinggi)</text>
 
-            {/* Tinggi (t) arrow */}
-            <line x1="245" y1="55"  x2="245" y2="175" stroke="#22c55e" strokeWidth="2.2"/>
-            <line x1="239" y1="55"  x2="251" y2="55"  stroke="#22c55e" strokeWidth="2"/>
-            <line x1="239" y1="175" x2="251" y2="175" stroke="#22c55e" strokeWidth="2"/>
-            <text x="258" y="119" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">t</text>
-            <text x="258" y="131" fill="#86efac" fontSize="8"  fontFamily="monospace" textAnchor="middle">(tinggi)</text>
+            {/* === TUTUP label kanan atas === */}
+            <line x1="238" y1="63" x2="318" y2="38" stroke="#818cf8" strokeWidth="1.2" strokeDasharray="3,2"/>
+            <text x="320" y="34" fill="#818cf8" fontSize="9" fontFamily="monospace" fontWeight="700">TUTUP</text>
+            <text x="320" y="44" fill="#818cf8" fontSize="7" fontFamily="monospace">(atas)</text>
+
+            {/* === ALAS label kanan bawah === */}
+            <line x1="238" y1="194" x2="318" y2="218" stroke="#34d399" strokeWidth="1.2" strokeDasharray="3,2"/>
+            <text x="320" y="214" fill="#34d399" fontSize="9" fontFamily="monospace" fontWeight="700">ALAS</text>
+            <text x="320" y="224" fill="#34d399" fontSize="7" fontFamily="monospace">(bawah)</text>
+
+            {/* === SELIMUT label kiri === */}
+            <line x1="92" y1="129" x2="52" y2="129" stroke="#c084fc" strokeWidth="1.2" strokeDasharray="3,2"/>
+            <text x="50" y="123" fill="#c084fc" fontSize="9" fontFamily="monospace" fontWeight="700" textAnchor="end">SELIMUT</text>
+            <text x="50" y="134" fill="#c084fc" fontSize="7" fontFamily="monospace" textAnchor="end">(lengkung)</text>
           </svg>
         </div>
 
-        {/* ── Part cards ── */}
+        {/* ── Kartu-kartu unsur ── */}
         <div className="grid grid-cols-1 gap-3">
 
-          {/* Jari-jari */}
+          {/* ── SISI ── */}
+          <div className="bg-purple-950/40 border border-purple-600/60 rounded-xl overflow-hidden">
+            <div className="flex items-center gap-3 px-4 py-2 bg-purple-900/40">
+              <span className="text-lg">🔲</span>
+              <div>
+                <p className="text-purple-300 font-bold text-sm">Sisi Tabung — <span className="text-yellow-300">3 sisi</span></p>
+                <p className="text-purple-200/70 text-xs">Permukaan yang membungkus tabung</p>
+              </div>
+            </div>
+            <SisiAnimSVG />
+            <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
+              <p>① <strong className="text-purple-300">Selimut</strong> — permukaan lengkung (kulit tabung)</p>
+              <p>② <strong className="text-green-300">Alas</strong> — lingkaran di bagian bawah</p>
+              <p>③ <strong className="text-indigo-300">Tutup</strong> — lingkaran di bagian atas</p>
+              <div className="mt-2 bg-purple-900/40 rounded p-2 text-center font-mono text-purple-200">
+                Total sisi = <strong className="text-yellow-300">3</strong>
+              </div>
+            </div>
+          </div>
+
+          {/* ── RUSUK ── */}
+          <div className="bg-amber-950/40 border border-amber-600/60 rounded-xl overflow-hidden">
+            <div className="flex items-center gap-3 px-4 py-2 bg-amber-900/40">
+              <span className="text-lg">〇</span>
+              <div>
+                <p className="text-amber-300 font-bold text-sm">Rusuk Tabung — <span className="text-yellow-300">2 rusuk</span></p>
+                <p className="text-amber-200/70 text-xs">Tepi / batas pertemuan antar sisi</p>
+              </div>
+            </div>
+            <RusukAnimSVG />
+            <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
+              <p>① <strong className="text-amber-300">Rusuk atas</strong> — lingkaran tepi tutup</p>
+              <p>② <strong className="text-sky-300">Rusuk bawah</strong> — lingkaran tepi alas</p>
+              <p className="text-white/50 text-[11px]">💡 Tabung <strong>tidak punya rusuk lurus</strong> — berbeda dengan kubus/balok!</p>
+              <div className="mt-2 bg-amber-900/40 rounded p-2 text-center font-mono text-amber-200">
+                Total rusuk = <strong className="text-yellow-300">2</strong> &nbsp;|&nbsp; Titik sudut = <strong className="text-yellow-300">0</strong>
+              </div>
+            </div>
+          </div>
+
+          {/* ── JARI-JARI ── */}
           <div className="bg-amber-950/40 border border-amber-700/50 rounded-xl overflow-hidden">
             <div className="flex items-center gap-3 px-4 py-2 bg-amber-900/30">
               <span className="text-lg">📏</span>
@@ -921,12 +1090,17 @@ const sections: Sec[] = [
             <JariJariAnimSVG />
             <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
               <p>• Diukur dari <strong className="text-amber-300">titik pusat</strong> hingga tepi lingkaran.</p>
-              <p>• Bersama tinggi, jari-jari menentukan <strong>semua rumus tabung</strong>.</p>
-              <p>• Hubungan: <strong className="text-yellow-300">d = 2r</strong> &nbsp;→&nbsp; <strong className="text-yellow-300">r = d ÷ 2</strong></p>
+              <p>• Bersama tinggi, menentukan <strong>semua rumus tabung</strong>.</p>
+              <div className="flex items-center gap-2 mt-1">
+                <span>• Hubungan:</span>
+                <span className="text-yellow-300 font-mono">d = 2r</span>
+                <span className="text-white/40">→</span>
+                <InlineMath math="r = \dfrac{d}{2}" />
+              </div>
             </div>
           </div>
 
-          {/* Tinggi */}
+          {/* ── TINGGI ── */}
           <div className="bg-green-950/40 border border-green-700/50 rounded-xl overflow-hidden">
             <div className="flex items-center gap-3 px-4 py-2 bg-green-900/30">
               <span className="text-lg">📐</span>
@@ -942,7 +1116,7 @@ const sections: Sec[] = [
             </div>
           </div>
 
-          {/* Selimut */}
+          {/* ── SELIMUT ── */}
           <div className="bg-purple-950/40 border border-purple-700/50 rounded-xl overflow-hidden">
             <div className="flex items-center gap-3 px-4 py-2 bg-purple-900/30">
               <span className="text-lg">🌀</span>
@@ -952,52 +1126,57 @@ const sections: Sec[] = [
               </div>
             </div>
             <SelimutAnimSVG />
+            <p className="text-center text-purple-300 font-bold text-xs mt-1 px-4">↓ Jika dibuka dan diratakan:</p>
+            <SelimutRectAnimSVG />
             <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
-              <p>• Jika dibuka dan diratakan → berbentuk <strong className="text-purple-300">persegi panjang</strong>.</p>
-              <p>• Panjang = keliling lingkaran = <strong className="text-yellow-300">2πr</strong>, lebar = tinggi = <strong className="text-green-300">t</strong>.</p>
+              <p>• Dibuka → berbentuk <strong className="text-purple-300">persegi panjang</strong> dengan:</p>
+              <p className="pl-3">— panjang = keliling lingkaran = <strong className="text-yellow-300">2πr</strong></p>
+              <p className="pl-3">— lebar = tinggi tabung = <strong className="text-green-300">t</strong></p>
               <p>• Luas selimut = <strong className="text-yellow-300">2πr × t</strong></p>
             </div>
           </div>
 
-          {/* Alas & Tutup */}
+          {/* ── ALAS & TUTUP ── */}
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-indigo-950/40 border border-indigo-700/50 rounded-xl p-4 space-y-2">
               <p className="text-xl text-center">⭕</p>
               <p className="text-indigo-300 font-bold text-sm text-center">Alas</p>
-              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>bawah</strong> tabung</p>
-              <div className="bg-indigo-900/40 rounded p-2 text-center text-xs text-indigo-200 font-mono">
-                L<sub>alas</sub> = πr²
+              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>bawah</strong></p>
+              <div className="bg-indigo-900/40 rounded p-2 text-center text-xs text-indigo-200">
+                <InlineMath math="L_{alas} = \pi r^2" />
               </div>
             </div>
             <div className="bg-cyan-950/40 border border-cyan-700/50 rounded-xl p-4 space-y-2">
               <p className="text-xl text-center">⭕</p>
               <p className="text-cyan-300 font-bold text-sm text-center">Tutup</p>
-              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>atas</strong> tabung</p>
-              <div className="bg-cyan-900/40 rounded p-2 text-center text-xs text-cyan-200 font-mono">
-                L<sub>tutup</sub> = πr²
+              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>atas</strong></p>
+              <div className="bg-cyan-900/40 rounded p-2 text-center text-xs text-cyan-200">
+                <InlineMath math="L_{tutup} = \pi r^2" />
               </div>
             </div>
           </div>
         </div>
 
-        {/* ── Summary table ── */}
+        {/* ── Tabel ringkasan ── */}
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead>
               <tr className="bg-slate-800">
                 <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Unsur</th>
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Simbol</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Nilai / Simbol</th>
                 <th className="px-3 py-2 text-cyan-300 text-left">Keterangan</th>
               </tr>
             </thead>
             <tbody>
               {[
-                ["Jari-jari", "r", "Jarak pusat → tepi lingkaran alas/tutup"],
-                ["Diameter",  "d = 2r", "Garis tengah lingkaran"],
-                ["Tinggi",    "t", "Jarak tegak lurus alas ke tutup"],
-                ["Alas",      "πr²", "Lingkaran bawah tabung"],
-                ["Tutup",     "πr²", "Lingkaran atas tabung"],
-                ["Selimut",   "2πr × t", "Permukaan lengkung (kulit) tabung"],
+                ["Sisi",      "3",        "Selimut + Alas + Tutup"],
+                ["Rusuk",     "2",        "Lingkaran atas & bawah"],
+                ["Titik sudut","0",       "Tidak ada titik sudut"],
+                ["Jari-jari", "r",        "Pusat → tepi lingkaran"],
+                ["Diameter",  "d = 2r",   "Garis tengah lingkaran"],
+                ["Tinggi",    "t",        "Jarak tegak lurus alas ke tutup"],
+                ["Alas/Tutup","πr²",      "Luas tiap lingkaran"],
+                ["Selimut",   "2πr × t",  "Permukaan lengkung (kulit)"],
               ].map(([u, s, k], i) => (
                 <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{u}</td>
@@ -1010,8 +1189,8 @@ const sections: Sec[] = [
         </div>
 
         <blockquote className="border-l-4 border-cyan-500 pl-3 text-sm text-cyan-200">
-          <strong>💡 Kunci:</strong> Tabung hanya punya <strong>2 unsur ukuran utama</strong> — <strong className="text-amber-300">r (jari-jari)</strong> dan <strong className="text-green-300">t (tinggi)</strong>.
-          Semua rumus luas dan volume tabung berasal dari dua nilai ini!
+          <strong>💡 Kunci:</strong> Semua rumus tabung hanya butuh <strong className="text-amber-300">r</strong> dan <strong className="text-green-300">t</strong>.
+          Ingat: <strong>3 sisi, 2 rusuk, 0 titik sudut</strong>!
         </blockquote>
       </div>
     ),
