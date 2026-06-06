@@ -6,11 +6,12 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, BarChart2 } from "
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import GrafikSPLDVInteraktif from "@/components/GrafikSPLDVInteraktif";
 
 const MetodeGrafikPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "langkah", "contoh1", "rangkuman",
+    "lab", "intro", "langkah", "contoh1", "rangkuman",
   ]);
 
   const toggleSection = (section: string) => {
@@ -122,6 +123,21 @@ const MetodeGrafikPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ── LAB INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="lab" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
+              title="🖊️ Lab Interaktif: Gambar Garis & Temukan Solusi SPLDV" />
+            {expandedSections.includes("lab") && (
+              <div className="px-4 pb-5 space-y-3">
+                <p className="font-body text-xs text-white/55 leading-relaxed">
+                  Seret titik-titik ke posisi yang kamu inginkan untuk menentukan dua garis, lalu gambar kedua garis tersebut.
+                  <strong className="text-yellow-300"> Titik potong</strong> kedua garis adalah penyelesaian SPLDV!
+                </p>
+                <GrafikSPLDVInteraktif />
+              </div>
+            )}
+          </div>
 
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
