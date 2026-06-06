@@ -841,6 +841,182 @@ const sections: Sec[] = [
     ),
   },
   {
+    title: "Unsur-Unsur Tabung",
+    icon: "🏷️",
+    content: (
+      <div className="space-y-4 font-body">
+        <p className="text-white/80 text-sm leading-relaxed">
+          Sebelum menghitung luas dan volume, kita perlu mengenal bagian-bagian tabung terlebih dahulu.
+          Setiap unsur punya nama dan peran penting dalam rumus!
+        </p>
+
+        {/* ── Labeled diagram ── */}
+        <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4">
+          <p className="text-cyan-300 font-bold text-xs text-center mb-3">📌 Diagram Unsur-Unsur Tabung</p>
+          <svg viewBox="0 0 320 230" className="w-full max-w-sm mx-auto block">
+            <defs>
+              <style>{`
+                @keyframes blinkU{0%,100%{opacity:1;}50%{opacity:0.25;}}
+                .u-blink{animation:blinkU 2s ease-in-out infinite;}
+              `}</style>
+            </defs>
+            {/* Cylinder body */}
+            <ellipse cx="140" cy="55"  rx="78" ry="20" fill="rgba(99,102,241,0.25)" stroke="#818cf8" strokeWidth="1.8"/>
+            <rect x="62" y="55" width="156" height="120" fill="rgba(8,145,178,0.1)" stroke="none"/>
+            <line x1="62"  y1="55"  x2="62"  y2="175" stroke="#0891b2" strokeWidth="1.8"/>
+            <line x1="218" y1="55"  x2="218" y2="175" stroke="#0891b2" strokeWidth="1.8"/>
+            <ellipse cx="140" cy="175" rx="78" ry="20" fill="rgba(99,102,241,0.25)" stroke="#818cf8" strokeWidth="1.8"/>
+            {/* Selimut highlight */}
+            <rect x="62" y="55" width="156" height="120" fill="rgba(168,85,247,0.12)" stroke="none"/>
+
+            {/* TUTUP label */}
+            <ellipse cx="140" cy="55" rx="78" ry="20" fill="rgba(99,102,241,0.35)" stroke="#a5b4fc" strokeWidth="2" className="u-blink"/>
+            <line x1="140" y1="35" x2="260" y2="18" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="3,2"/>
+            <text x="263" y="14" fill="#a5b4fc" fontSize="10" fontFamily="monospace" fontWeight="700">TUTUP</text>
+            <text x="263" y="24" fill="#a5b4fc" fontSize="8"  fontFamily="monospace">(Lingkaran atas)</text>
+
+            {/* ALAS label */}
+            <ellipse cx="140" cy="175" rx="78" ry="20" fill="rgba(52,211,153,0.25)" stroke="#34d399" strokeWidth="1.8" className="u-blink"/>
+            <line x1="140" y1="193" x2="260" y2="210" stroke="#34d399" strokeWidth="1.2" strokeDasharray="3,2"/>
+            <text x="263" y="206" fill="#34d399" fontSize="10" fontFamily="monospace" fontWeight="700">ALAS</text>
+            <text x="263" y="216" fill="#34d399" fontSize="8"  fontFamily="monospace">(Lingkaran bawah)</text>
+
+            {/* SELIMUT label */}
+            <line x1="62" y1="115" x2="15" y2="115" stroke="#c084fc" strokeWidth="1.2" strokeDasharray="3,2"/>
+            <text x="5"  y="109" fill="#c084fc" fontSize="10" fontFamily="monospace" fontWeight="700" textAnchor="end">SELIMUT</text>
+            <text x="5"  y="121" fill="#c084fc" fontSize="8"  fontFamily="monospace" textAnchor="end">(permukaan</text>
+            <text x="5"  y="131" fill="#c084fc" fontSize="8"  fontFamily="monospace" textAnchor="end">lengkung)</text>
+
+            {/* Jari-jari (r) */}
+            <line x1="140" y1="55" x2="218" y2="55" stroke="#f59e0b" strokeWidth="2.5" strokeDasharray="4,2"/>
+            <circle cx="140" cy="55" r="3.5" fill="#f59e0b"/>
+            <circle cx="218" cy="55" r="3.5" fill="#f59e0b"/>
+            <text x="172" y="48" fill="#f59e0b" fontSize="11" fontFamily="monospace" fontWeight="700" textAnchor="middle">r</text>
+
+            {/* Diameter (d) */}
+            <line x1="62" y1="175" x2="218" y2="175" stroke="#fde68a" strokeWidth="1.2" strokeDasharray="3,3" opacity="0.7"/>
+            <text x="140" y="200" fill="#fde68a" fontSize="9" fontFamily="monospace" textAnchor="middle">d = 2r</text>
+
+            {/* Tinggi (t) arrow */}
+            <line x1="245" y1="55"  x2="245" y2="175" stroke="#22c55e" strokeWidth="2.2"/>
+            <line x1="239" y1="55"  x2="251" y2="55"  stroke="#22c55e" strokeWidth="2"/>
+            <line x1="239" y1="175" x2="251" y2="175" stroke="#22c55e" strokeWidth="2"/>
+            <text x="258" y="119" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">t</text>
+            <text x="258" y="131" fill="#86efac" fontSize="8"  fontFamily="monospace" textAnchor="middle">(tinggi)</text>
+          </svg>
+        </div>
+
+        {/* ── Part cards ── */}
+        <div className="grid grid-cols-1 gap-3">
+
+          {/* Jari-jari */}
+          <div className="bg-amber-950/40 border border-amber-700/50 rounded-xl overflow-hidden">
+            <div className="flex items-center gap-3 px-4 py-2 bg-amber-900/30">
+              <span className="text-lg">📏</span>
+              <div>
+                <p className="text-amber-300 font-bold text-sm">Jari-jari (r)</p>
+                <p className="text-amber-200/70 text-xs">Setengah diameter lingkaran alas/tutup</p>
+              </div>
+            </div>
+            <JariJariAnimSVG />
+            <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
+              <p>• Diukur dari <strong className="text-amber-300">titik pusat</strong> hingga tepi lingkaran.</p>
+              <p>• Bersama tinggi, jari-jari menentukan <strong>semua rumus tabung</strong>.</p>
+              <p>• Hubungan: <strong className="text-yellow-300">d = 2r</strong> &nbsp;→&nbsp; <strong className="text-yellow-300">r = d ÷ 2</strong></p>
+            </div>
+          </div>
+
+          {/* Tinggi */}
+          <div className="bg-green-950/40 border border-green-700/50 rounded-xl overflow-hidden">
+            <div className="flex items-center gap-3 px-4 py-2 bg-green-900/30">
+              <span className="text-lg">📐</span>
+              <div>
+                <p className="text-green-300 font-bold text-sm">Tinggi (t)</p>
+                <p className="text-green-200/70 text-xs">Jarak tegak lurus antara alas dan tutup</p>
+              </div>
+            </div>
+            <TinggiAnimSVG />
+            <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
+              <p>• Selalu <strong className="text-green-300">tegak lurus</strong> terhadap alas dan tutup.</p>
+              <p>• Digunakan di rumus luas selimut dan volume.</p>
+            </div>
+          </div>
+
+          {/* Selimut */}
+          <div className="bg-purple-950/40 border border-purple-700/50 rounded-xl overflow-hidden">
+            <div className="flex items-center gap-3 px-4 py-2 bg-purple-900/30">
+              <span className="text-lg">🌀</span>
+              <div>
+                <p className="text-purple-300 font-bold text-sm">Selimut Tabung</p>
+                <p className="text-purple-200/70 text-xs">Permukaan lengkung yang membungkus sisi tabung</p>
+              </div>
+            </div>
+            <SelimutAnimSVG />
+            <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
+              <p>• Jika dibuka dan diratakan → berbentuk <strong className="text-purple-300">persegi panjang</strong>.</p>
+              <p>• Panjang = keliling lingkaran = <strong className="text-yellow-300">2πr</strong>, lebar = tinggi = <strong className="text-green-300">t</strong>.</p>
+              <p>• Luas selimut = <strong className="text-yellow-300">2πr × t</strong></p>
+            </div>
+          </div>
+
+          {/* Alas & Tutup */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-indigo-950/40 border border-indigo-700/50 rounded-xl p-4 space-y-2">
+              <p className="text-xl text-center">⭕</p>
+              <p className="text-indigo-300 font-bold text-sm text-center">Alas</p>
+              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>bawah</strong> tabung</p>
+              <div className="bg-indigo-900/40 rounded p-2 text-center text-xs text-indigo-200 font-mono">
+                L<sub>alas</sub> = πr²
+              </div>
+            </div>
+            <div className="bg-cyan-950/40 border border-cyan-700/50 rounded-xl p-4 space-y-2">
+              <p className="text-xl text-center">⭕</p>
+              <p className="text-cyan-300 font-bold text-sm text-center">Tutup</p>
+              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>atas</strong> tabung</p>
+              <div className="bg-cyan-900/40 rounded p-2 text-center text-xs text-cyan-200 font-mono">
+                L<sub>tutup</sub> = πr²
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Summary table ── */}
+        <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <table className="w-full text-xs text-center">
+            <thead>
+              <tr className="bg-slate-800">
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Unsur</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Simbol</th>
+                <th className="px-3 py-2 text-cyan-300 text-left">Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Jari-jari", "r", "Jarak pusat → tepi lingkaran alas/tutup"],
+                ["Diameter",  "d = 2r", "Garis tengah lingkaran"],
+                ["Tinggi",    "t", "Jarak tegak lurus alas ke tutup"],
+                ["Alas",      "πr²", "Lingkaran bawah tabung"],
+                ["Tutup",     "πr²", "Lingkaran atas tabung"],
+                ["Selimut",   "2πr × t", "Permukaan lengkung (kulit) tabung"],
+              ].map(([u, s, k], i) => (
+                <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
+                  <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{u}</td>
+                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{s}</td>
+                  <td className="px-3 py-2 text-white/60 text-left">{k}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote className="border-l-4 border-cyan-500 pl-3 text-sm text-cyan-200">
+          <strong>💡 Kunci:</strong> Tabung hanya punya <strong>2 unsur ukuran utama</strong> — <strong className="text-amber-300">r (jari-jari)</strong> dan <strong className="text-green-300">t (tinggi)</strong>.
+          Semua rumus luas dan volume tabung berasal dari dua nilai ini!
+        </blockquote>
+      </div>
+    ),
+  },
+  {
     title: "Jaring-jaring Tabung",
     icon: "📐",
     content: (
