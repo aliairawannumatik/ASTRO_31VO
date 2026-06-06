@@ -1731,14 +1731,32 @@ const unsurExamples: Ex[] = [
     ),
   },
   {
-    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
         <p>Perhatikan gambar selimut tabung berikut.</p>
-        <div className="rounded-lg overflow-hidden border border-slate-600 bg-white mx-auto max-w-xs">
-          <img src={imgSelimutSoal} alt="Selimut tabung: lebar 22 cm, tinggi t = 10 cm" className="w-full object-contain" />
-        </div>
+
+        {/* SVG selimut tabung — persegi panjang dengan keterangan ukuran */}
+        <svg viewBox="0 0 320 180" className="w-full max-w-xs mx-auto block" aria-label="Selimut tabung: lebar 22 cm, tinggi t = 10 cm">
+          {/* Persegi panjang selimut */}
+          <rect x="30" y="20" width="230" height="120" fill="none" stroke="#e2e8f0" strokeWidth="2"/>
+
+          {/* Dimensi bawah: 22 cm */}
+          <line x1="30"  y1="158" x2="260" y2="158" stroke="#f59e0b" strokeWidth="1.5"/>
+          <line x1="30"  y1="152" x2="30"  y2="164" stroke="#f59e0b" strokeWidth="1.5"/>
+          <line x1="260" y1="152" x2="260" y2="164" stroke="#f59e0b" strokeWidth="1.5"/>
+          <text x="145" y="175" fill="#f59e0b" fontSize="13" fontFamily="monospace" fontWeight="700" textAnchor="middle">22 cm</text>
+
+          {/* Dimensi kanan: t = 10 cm */}
+          <line x1="278" y1="20"  x2="278" y2="140" stroke="#22c55e" strokeWidth="1.5"/>
+          <line x1="272" y1="20"  x2="284" y2="20"  stroke="#22c55e" strokeWidth="1.5"/>
+          <line x1="272" y1="140" x2="284" y2="140" stroke="#22c55e" strokeWidth="1.5"/>
+          <text x="296" y="85" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">t = 10 cm</text>
+          <text x="296" y="100" fill="#86efac" fontSize="9"  fontFamily="monospace" textAnchor="middle">(tinggi)</text>
+        </svg>
+
         <p>Jari-jari tabung yang terjadi adalah ….</p>
+        <p className="text-white/50 text-xs">(gunakan π = <sup>22</sup>⁄<sub>7</sub>)</p>
         <div className="grid grid-cols-2 gap-2 text-sm">
           {[
             { opt: "A", label: "3,5 cm" },
@@ -1756,7 +1774,7 @@ const unsurExamples: Ex[] = [
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">Pembahasan:</p>
+        <p className="text-red-400 font-semibold">Pembahasan:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
           <p className="text-white/70">Lebar selimut = keliling lingkaran alas = 22 cm</p>
           <BlockMath math="2\pi r = 22" />
@@ -1777,8 +1795,8 @@ const unsurExamples: Ex[] = [
             </div>
           ))}
         </div>
-        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs">
-          <p className="text-yellow-300 font-semibold">✅ Jawaban: A. 3,5 cm</p>
+        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs">
+          <p className="text-red-300 font-semibold">✅ Jawaban: A. 3,5 cm</p>
           <p className="text-white/60 mt-1">Lebar persegi panjang selimut = keliling lingkaran = 2πr, sehingga r = 3,5 cm</p>
         </div>
       </div>
