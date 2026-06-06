@@ -12,8 +12,6 @@ import imgWafer     from "@assets/image_1780701492837.png";
 import imgTumpeng   from "@assets/image_1780701574690.png";
 import imgTopiUltah from "@assets/image_1780701763127.png";
 import imgCorong    from "@assets/image_1780701892436.png";
-import imgRusukKerucut from "@assets/image_1780763377789.png";
-import imgHubunganRST  from "@assets/image_1780763407378.png";
 
 /* ─────────────────────────────────────────────────────────────
    3D CONE SVG RENDERER — manual projection, painter's algorithm
@@ -974,7 +972,89 @@ type Sec = { title: string; icon: string; content: React.ReactNode };
 /* ─────────────────────────────────────────────────────────────
    SLIDE 7 — SOAL UNSUR-UNSUR KERUCUT (INTERAKTIF)
 ───────────────────────────────────────────────────────────── */
-const soalUnsur = [
+/* ── SVG ilustrasi soal 2 — kerucut dengan label ①②③④ ── */
+const SoalRusukSVG = () => (
+  <svg viewBox="0 0 270 210" fill="none" xmlns="http://www.w3.org/2000/svg"
+    className="w-full max-w-xs mx-auto my-1" aria-label="Kerucut bernomor">
+    {/* slant lines */}
+    <line x1="118" y1="22" x2="42" y2="170" stroke="white" strokeWidth="1.6"/>
+    <line x1="118" y1="22" x2="194" y2="170" stroke="white" strokeWidth="1.6"/>
+    {/* base ellipse front */}
+    <path d="M42,170 A76,17 0 0,0 194,170" stroke="white" strokeWidth="1.6" fill="none"/>
+    {/* base ellipse back (dashed) */}
+    <path d="M42,170 A76,17 0 0,1 194,170" stroke="white" strokeWidth="1.2" strokeDasharray="5,3" fill="none" opacity="0.55"/>
+    {/* height dashed */}
+    <line x1="118" y1="22" x2="118" y2="170" stroke="white" strokeWidth="1" strokeDasharray="5,3" opacity="0.3"/>
+
+    {/* Arrow ① → puncak */}
+    <line x1="128" y1="24" x2="185" y2="14" stroke="white" strokeWidth="1.1"/>
+    <circle cx="197" cy="12" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
+    <text x="197" y="16.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">①</text>
+
+    {/* Arrow ② → garis pelukis (middle of right slant) */}
+    <line x1="163" y1="98" x2="210" y2="78" stroke="white" strokeWidth="1.1"/>
+    <circle cx="221" cy="73" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
+    <text x="221" y="77.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">②</text>
+
+    {/* Arrow ③ → rusuk (rim at base edge, right side) */}
+    <line x1="188" y1="167" x2="218" y2="152" stroke="white" strokeWidth="1.1"/>
+    <circle cx="229" cy="146" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
+    <text x="229" y="150.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">③</text>
+
+    {/* Arrow ④ → alas (below base ellipse center) */}
+    <line x1="118" y1="183" x2="160" y2="192" stroke="white" strokeWidth="1.1"/>
+    <circle cx="171" cy="195" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
+    <text x="171" y="199.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">④</text>
+  </svg>
+);
+
+/* ── SVG ilustrasi soal 3 — kerucut dengan label t, s, r ── */
+const SoalHubunganSVG = () => (
+  <svg viewBox="0 0 260 215" fill="none" xmlns="http://www.w3.org/2000/svg"
+    className="w-full max-w-xs mx-auto my-1" aria-label="Kerucut dengan t s r">
+    {/* Cone slant lines */}
+    <line x1="115" y1="24" x2="42" y2="175" stroke="white" strokeWidth="1.5"/>
+    <line x1="115" y1="24" x2="188" y2="175" stroke="white" strokeWidth="1.5"/>
+    {/* Base ellipse front */}
+    <path d="M42,175 A73,16 0 0,0 188,175" stroke="white" strokeWidth="1.5" fill="none"/>
+    {/* Base ellipse back (dashed) */}
+    <path d="M42,175 A73,16 0 0,1 188,175" stroke="white" strokeWidth="1.1" strokeDasharray="5,3" fill="none" opacity="0.5"/>
+
+    {/* Height t — dashed vertical */}
+    <line x1="115" y1="24" x2="115" y2="175" stroke="white" strokeWidth="1.5" strokeDasharray="6,4"/>
+    {/* t label */}
+    <text x="121" y="105" fill="white" fontSize="13" fontFamily="serif" fontStyle="italic">t</text>
+
+    {/* Radius r — horizontal at base */}
+    <line x1="115" y1="175" x2="188" y2="175" stroke="white" strokeWidth="1.5"/>
+    {/* r label */}
+    <text x="147" y="171" fill="white" fontSize="13" fontFamily="serif" fontStyle="italic">r</text>
+
+    {/* Slant s — from apex to base edge right */}
+    <line x1="115" y1="24" x2="188" y2="175" stroke="white" strokeWidth="1.5"/>
+    {/* s label */}
+    <text x="158" y="98" fill="white" fontSize="13" fontFamily="serif" fontStyle="italic">s</text>
+
+    {/* Right angle mark at base center */}
+    <polyline points="115,160 130,160 130,175" stroke="white" strokeWidth="1.2" fill="none"/>
+
+    {/* Labels top-right corner */}
+    <text x="200" y="28" fill="white" fontSize="10" fontFamily="serif" fontStyle="italic">s</text>
+    <text x="200" y="44" fill="white" fontSize="10" fontFamily="serif" fontStyle="italic">t</text>
+    {/* Small cone icon hint */}
+    <line x1="192" y1="20" x2="205" y2="20" stroke="white" strokeWidth="0.8" opacity="0.5"/>
+    <line x1="192" y1="36" x2="205" y2="36" stroke="white" strokeWidth="0.8" opacity="0.5"/>
+  </svg>
+);
+
+const soalUnsur: {
+  no: number;
+  soal: string;
+  gambar: React.ReactNode;
+  pilihan: { key: string; text: string }[];
+  jawaban: string;
+  pembahasan: string;
+}[] = [
   {
     no: 1,
     soal: "Bentuk bangun dari selimut kerucut adalah ….",
@@ -991,7 +1071,7 @@ const soalUnsur = [
   {
     no: 2,
     soal: "Nomor yang menunjukkan rusuk pada kerucut berikut adalah ….",
-    gambar: imgRusukKerucut,
+    gambar: <SoalRusukSVG />,
     pilihan: [
       { key: "A", text: "1" },
       { key: "B", text: "2" },
@@ -1004,7 +1084,7 @@ const soalUnsur = [
   {
     no: 3,
     soal: "Diketahui sebuah kerucut dengan ukuran tinggi t, jari-jari r, dan garis pelukis s.\nHubungan r, s, dan t pada kerucut tersebut adalah ….",
-    gambar: imgHubunganRST,
+    gambar: <SoalHubunganSVG />,
     pilihan: [
       { key: "A", text: "r² = s² + t²" },
       { key: "B", text: "t² – s² = r²" },
@@ -1067,14 +1147,10 @@ const UnsurSoalQuiz = () => {
               ))}
             </p>
 
-            {/* Gambar (jika ada) */}
+            {/* Gambar SVG (jika ada) */}
             {s.gambar && (
               <div className="flex justify-center">
-                <img
-                  src={s.gambar}
-                  alt={`Soal ${s.no}`}
-                  className="max-h-48 rounded-lg border border-slate-600/40 bg-white/5 object-contain"
-                />
+                {s.gambar}
               </div>
             )}
 
@@ -1477,22 +1553,6 @@ const sections: Sec[] = [
     ),
   },
   {
-    title: "Soal — Unsur-unsur Kerucut",
-    icon: "📝",
-    content: (
-      <div className="space-y-4">
-        <div className="flex items-center gap-3 bg-indigo-950/50 border border-indigo-700/40 rounded-xl px-4 py-3">
-          <span className="text-2xl">📝</span>
-          <div>
-            <p className="text-indigo-300 font-bold text-sm">Uji Pemahaman — Unsur-unsur Kerucut</p>
-            <p className="text-white/50 text-xs">Pilih jawaban yang paling tepat, lalu klik Periksa Jawaban</p>
-          </div>
-        </div>
-        <UnsurSoalQuiz />
-      </div>
-    ),
-  },
-  {
     title: "Kesimpulan — Rumus Lengkap Kerucut",
     icon: "📊",
     content: (
@@ -1821,6 +1881,22 @@ const KerucutPage = () => {
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
           {gpExamples.map((ex, i) => <ExampleCard key={`g${i}`} ex={ex} idx={i} prefix="GP"/>)}
+        </div>
+      ),
+    },
+    {
+      title: "Soal — Unsur-unsur Kerucut",
+      icon: "📝",
+      content: (
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 bg-indigo-950/50 border border-indigo-700/40 rounded-xl px-4 py-3">
+            <span className="text-2xl">📝</span>
+            <div>
+              <p className="text-indigo-300 font-bold text-sm">Uji Pemahaman — Unsur-unsur Kerucut</p>
+              <p className="text-white/50 text-xs">Pilih jawaban yang paling tepat, lalu klik Periksa Jawaban</p>
+            </div>
+          </div>
+          <UnsurSoalQuiz />
         </div>
       ),
     },
