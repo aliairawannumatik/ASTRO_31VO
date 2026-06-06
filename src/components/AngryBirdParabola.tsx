@@ -10,7 +10,8 @@ const GY = 348;           // ground Y in canvas
 const GRAVITY = 950;      // px/s² (downward in canvas)
 const PX_M = 22;          // pixels per meter
 const BIRD_R = 19;
-const MAX_DRAG = 62;
+const MAX_DRAG = 70;
+const POWER    = 10;
 
 // Slingshot
 const SL_X = 102, SL_FORK_Y = GY - 88;
@@ -182,7 +183,8 @@ const AngryBirdParabola: React.FC = () => {
     phase: "ready" as Phase,
     bx: REST_X, by: REST_Y,
     vx: 0, vy: 0,
-    lx: REST_X, ly: REST_Y,     // launch position
+    vx0: 0, vy0: 0, elapsed: 0,  // parametric physics
+    lx: REST_X, ly: REST_Y,       // launch position
     dragX: REST_X, dragY: REST_Y,
     dragging: false,
     trail: [] as {x:number;y:number}[],
@@ -258,7 +260,11 @@ const AngryBirdParabola: React.FC = () => {
     s.blocks.forEach(b=>{
       if(s.bx>b.x-BIRD_R && s.bx<b.x+b.w+BIRD_R && s.by>b.y-BIRD_R && s.by<b.y+b.h+BIRD_R){
         b.hp=Math.max(0,b.hp-1);
-        s.vx*=0.4; s.vy=-(Math.abs(s.vy)*0.3+s.vx*0.2);
+        const newVx = s.vx*0.4;
+        const newVy = -(Math.abs(s.vy)*0.3+newVx*0.2);
+        // restart parametric reference from collision point
+        s.lx=s.bx; s.ly=s.by; s.vx0=newVx; s.vy0=newVy; s.elapsed=0;
+        s.vx=newVx; s.vy=newVy;
         hit=true;
       }
     });
@@ -274,13 +280,15 @@ const AngryBirdParabola: React.FC = () => {
     if(!cv) return;
     const ctx=cv.getContext("2d")!;
 
-    /* ── Physics update ── */
+    /* ── Physics update (parametric — exact match with preview) ── */
     if(s.phase==="flying"){
-      s.bx+=s.vx*dt;
-      s.vy+=GRAVITY*dt;
-      s.by+=s.vy*dt;
+      s.elapsed+=dt;
+      s.bx = s.lx + s.vx0*s.elapsed;
+      s.by = s.ly + s.vy0*s.elapsed + 0.5*GRAVITY*s.elapsed*s.elapsed;
+      s.vx = s.vx0;
+      s.vy = s.vy0 + GRAVITY*s.elapsed;   // velocity for rotation angle only
       s.trail.push({x:s.bx,y:s.by});
-      if(s.trail.length>120) s.trail.shift();
+      if(s.trail.length>160) s.trail.shift();
 
       checkCollisions();
 
@@ -311,20 +319,34 @@ const AngryBirdParabola: React.FC = () => {
     ctx.clearRect(0,0,CW,CH);
     drawBackground(ctx);
 
-    // Parabola preview when aiming
+    // Parabola preview when aiming — exact parametric, extends to ground
     if(s.phase==="aiming"&&s.dragging){
       const dx=REST_X-s.dragX, dy=REST_Y-s.dragY;
-      const power=6.5;
-      const pvx=dx*power, pvy=dy*power;
-      ctx.setLineDash([5,7]); ctx.strokeStyle="rgba(255,255,100,0.55)"; ctx.lineWidth=2.5;
+      const pvx=dx*POWER, pvy=dy*POWER;
+      ctx.setLineDash([6,8]); ctx.strokeStyle="rgba(255,255,80,0.7)"; ctx.lineWidth=2.5;
       ctx.beginPath();
       let first=true;
-      for(let t=0;t<2;t+=0.04){
-        const px2=REST_X+pvx*t, py2=REST_Y+pvy*t+0.5*GRAVITY*t*t;
-        if(py2>GY) break;
+      for(let t=0;t<4;t+=0.016){
+        const px2=REST_X+pvx*t;
+        const py2=REST_Y+pvy*t+0.5*GRAVITY*t*t;
+        if(px2<0||px2>CW) break;
         if(first){ctx.moveTo(px2,py2);first=false;}else ctx.lineTo(px2,py2);
+        if(py2>=GY) break;   // stop exactly at ground
       }
       ctx.stroke(); ctx.setLineDash([]);
+
+      // landing marker
+      for(let t=0;t<4;t+=0.01){
+        const py2=REST_Y+pvy*t+0.5*GRAVITY*t*t;
+        if(py2>=GY){
+          const lx2=REST_X+pvx*t;
+          if(lx2>0&&lx2<CW){
+            ctx.beginPath(); ctx.arc(lx2,GY,5,0,Math.PI*2);
+            ctx.fillStyle="rgba(255,255,80,0.55)"; ctx.fill();
+          }
+          break;
+        }
+      }
     }
 
     // Trail
@@ -405,8 +427,7 @@ const AngryBirdParabola: React.FC = () => {
     // preview equation
     const dx=REST_X-clamped.x, dy=REST_Y-clamped.y;
     if(Math.sqrt(dx*dx+dy*dy)>8){
-      const power=6.5;
-      const res=calcEquation(dx*power,dy*power,REST_X,REST_Y);
+      const res=calcEquation(dx*POWER,dy*POWER,REST_X,REST_Y);
       if(res) setUi(u=>({...u,eq:{a:res.a,b:res.b,c:res.c},peak:res.peak,hint:"🔓 Lepaskan untuk meluncurkan!"}));
     }
   }
@@ -417,13 +438,13 @@ const AngryBirdParabola: React.FC = () => {
     const dx=REST_X-s.dragX, dy=REST_Y-s.dragY;
     const dist=Math.sqrt(dx*dx+dy*dy);
     if(dist<10){ s.phase="ready"; s.dragX=REST_X; s.dragY=REST_Y; return; }
-    const power=6.5;
-    s.vx=dx*power; s.vy=dy*power;
+    s.vx0=dx*POWER; s.vy0=dy*POWER; s.elapsed=0;
+    s.vx=s.vx0; s.vy=s.vy0;
     s.lx=REST_X; s.ly=REST_Y;
     s.bx=REST_X; s.by=REST_Y;
     s.phase="flying"; s.trail=[];
     playPopSound();
-    const res=calcEquation(s.vx,s.vy,s.lx,s.ly);
+    const res=calcEquation(s.vx0,s.vy0,s.lx,s.ly);
     if(res) setUi(u=>({...u,phase:"flying",shots:s.shots,eq:{a:res.a,b:res.b,c:res.c},peak:res.peak,
       hint:`Meluncur! a=${res.a}, b=${res.b.toFixed(2)}, c=${res.c.toFixed(1)}`}));
   }
@@ -439,8 +460,9 @@ const AngryBirdParabola: React.FC = () => {
     playPopSound();
     const lv=initLevel();
     const s=g.current;
-    Object.assign(s,{ phase:"ready",bx:REST_X,by:REST_Y,vx:0,vy:0,dragX:REST_X,dragY:REST_Y,
-      dragging:false,trail:[],stars:[],pigs:lv.pigs,blocks:lv.blocks,shots:5,score:0,happyTimer:0 });
+    Object.assign(s,{ phase:"ready",bx:REST_X,by:REST_Y,vx:0,vy:0,vx0:0,vy0:0,elapsed:0,
+      dragX:REST_X,dragY:REST_Y,dragging:false,trail:[],stars:[],pigs:lv.pigs,blocks:lv.blocks,
+      shots:5,score:0,happyTimer:0 });
     setUi({ phase:"ready",shots:5,score:0,eq:null,peak:null,hint:"🏹 Tarik burung ke belakang, lalu lepaskan!" });
   }
 
