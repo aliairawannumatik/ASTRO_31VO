@@ -1428,38 +1428,6 @@ const KerucutPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    {
-      title: "Pengantar",
-      icon: "🎯",
-      content: (
-        <div className="space-y-4 font-body">
-          <div className="bg-card/60 border border-border rounded-xl p-4 text-sm text-white/75 leading-relaxed">
-            <p>
-              Dari topi ulang tahun yang meriah hingga corong di dapur, kerucut ada di sekeliling kita!
-              Pelajari semua tentang <strong className="text-cyan-300">kerucut</strong> — unsur-unsurnya, cara menghitung{" "}
-              <strong className="text-yellow-300">garis pelukis</strong>, <strong className="text-orange-300">luas permukaan</strong>,
-              hingga <strong className="text-blue-300">volume</strong>-nya dengan metode yang mudah dan menyenangkan.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {[
-              { icon: "⭕", label: "1 Sisi Lingkaran", color: "text-cyan-300" },
-              { icon: "🌀", label: "1 Selimut Juring", color: "text-orange-300" },
-              { icon: "📏", label: "Jari-jari (r)", color: "text-yellow-300" },
-              { icon: "📐", label: "Tinggi (t)", color: "text-green-300" },
-              { icon: "🔺", label: "Garis Pelukis (s)", color: "text-red-300" },
-              { icon: "📦", label: "V = ⅓πr²t", color: "text-violet-300" },
-            ].map(({ icon, label, color }) => (
-              <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-1">
-                <span className="text-2xl">{icon}</span>
-                <span className={`text-xs font-semibold font-body text-center ${color}`}>{label}</span>
-              </div>
-            ))}
-          </div>
-          <InteractiveCone3D />
-        </div>
-      ),
-    },
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
     {
       title: "Contoh Soal — Garis Pelukis",
