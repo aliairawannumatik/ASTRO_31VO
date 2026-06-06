@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import heroImage from "@assets/image_1776224212212.png";
+import LabPercobaanEmpirik from "@/components/LabPercobaanEmpirik";
 
 const PeluangEmpirikPage = () => {
   const navigate = useNavigate();
@@ -200,6 +201,15 @@ const PeluangEmpirikPage = () => {
                       💡 Secara teori, peluang muncul Angka = 0,5. Dari percobaan ini diperoleh 0,575 — <strong>semakin banyak percobaan, nilainya akan makin mendekati 0,5</strong>.
                     </p>
                   </div>
+                </div>
+
+                {/* ── LABORATORIUM INTERAKTIF ── */}
+                <div className="space-y-2">
+                  <p className="font-body text-sm font-bold text-white">🧪 Coba Sendiri — Laboratorium Peluang Empirik</p>
+                  <p className="font-body text-xs text-white/50 leading-relaxed">
+                    Lempar koin atau dadu berkali-kali dan lihat bagaimana peluang empirik secara bertahap mendekati nilai teoritisnya. Inilah inti dari <strong className="text-cyan-300">Hukum Bilangan Besar</strong>!
+                  </p>
+                  <LabPercobaanEmpirik />
                 </div>
 
               </div>
