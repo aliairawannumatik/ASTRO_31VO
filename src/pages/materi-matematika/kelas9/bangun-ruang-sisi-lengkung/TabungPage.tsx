@@ -542,369 +542,333 @@ const WaterTabungAnimation = () => {
      Bottom circle: cx=200 cy=300 r=52 (net)  → assembled at cy=240, ellipse rx=70 ry=18
    CSS transform-box:fill-box + transform-origin:center center allows clean scale/translate.
 ───────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────
+   CYLINDER NET ANIMATION — canvas peeling, mirrors ConeNetAnimation
+   N=60 quad strips peel left→right: cylinder selimut → rectangle
+───────────────────────────────────────────────────────────── */
 const CylinderNetAnimation = () => {
-  const [rotX, setRotX] = useState(-22);
-  const [rotY, setRotY] = useState(28);
-  const [isDragging, setIsDragging] = useState(false);
-  const dragRef = useRef({ sx: 0, sy: 0, brx: -22, bry: 28 });
-  const hasDragged = useRef(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animFrameRef = useRef<number>(0);
+  const startTimeRef = useRef<number>(0);
+  const [animState, setAnimState] = useState<'idle' | 'playing' | 'done'>('idle');
 
-  type OS = boolean | "closing";
-  const [topOpen, setTopOpen] = useState<OS>(false);
-  const [botOpen, setBotOpen] = useState<OS>(false);
-  const [selOpen, setSelOpen] = useState<OS>(false);
-  const anyOpen = topOpen !== false || botOpen !== false || selOpen !== false;
+  const DURATION = 4800;
+  const r = 42, h = 100, N = 60;
+  const CX = 200, TOP_Y = 100, BOT_Y = 200, RY = 13;
+  const CAP_R = 38;
+  const RECT_W = 2 * Math.PI * r;
+  const RECT_L = CX - RECT_W / 2;
+  const TOP_CAP_CY = TOP_Y - CAP_R - 8;
+  const BOT_CAP_CY = BOT_Y + CAP_R + 8;
 
-  const onMD = (e: React.MouseEvent) => {
-    hasDragged.current = false;
-    setIsDragging(true);
-    dragRef.current = { sx: e.clientX, sy: e.clientY, brx: rotX, bry: rotY };
-  };
-  const onMM = useCallback((e: MouseEvent) => {
-    if (!isDragging) return;
-    const dx = e.clientX - dragRef.current.sx, dy = e.clientY - dragRef.current.sy;
-    if (Math.abs(dx) + Math.abs(dy) > 5) hasDragged.current = true;
-    setRotY(dragRef.current.bry + dx * 0.55);
-    setRotX(dragRef.current.brx + dy * 0.55);
-  }, [isDragging]);
-  const onMU = useCallback(() => setIsDragging(false), []);
-  const onTS = (e: React.TouchEvent) => {
-    hasDragged.current = false;
-    const t = e.touches[0];
-    setIsDragging(true);
-    dragRef.current = { sx: t.clientX, sy: t.clientY, brx: rotX, bry: rotY };
-  };
-  const onTM = useCallback((e: TouchEvent) => {
-    if (!isDragging) return;
-    const t = e.touches[0];
-    const dx = t.clientX - dragRef.current.sx, dy = t.clientY - dragRef.current.sy;
-    if (Math.abs(dx) + Math.abs(dy) > 5) hasDragged.current = true;
-    setRotY(dragRef.current.bry + dx * 0.55);
-    setRotX(dragRef.current.brx + dy * 0.55);
-  }, [isDragging]);
-  const onTE = useCallback(() => setIsDragging(false), []);
+  const drawFrame = useCallback((t: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
+    const easeIO = (x: number) =>
+      x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    const clamp = (x: number) => Math.max(0, Math.min(1, x));
+    const ylw = (a: number) => `rgba(250,204,21,${a})`;
+
+    const grd = ctx.createRadialGradient(CX, TOP_Y + h / 2, 10, CX, TOP_Y + h / 2, 200);
+    grd.addColorStop(0, 'rgba(168,85,247,0.07)');
+    grd.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    type QD = {
+      tl: [number,number]; tr: [number,number];
+      br: [number,number]; bl: [number,number];
+      alpha: number; hue: number; lum: number;
+      isFront: boolean; easeT: number;
+    };
+    const quads: QD[] = [];
+
+    for (let i = 0; i < N; i++) {
+      const a0 = (2 * Math.PI * i) / N;
+      const a1 = (2 * Math.PI * (i + 1)) / N;
+      const aMid = (a0 + a1) / 2;
+
+      const tlX3 = CX + r * Math.cos(a0), tlY3 = TOP_Y + RY * Math.sin(a0);
+      const trX3 = CX + r * Math.cos(a1), trY3 = TOP_Y + RY * Math.sin(a1);
+      const brX3 = CX + r * Math.cos(a1), brY3 = BOT_Y + RY * Math.sin(a1);
+      const blX3 = CX + r * Math.cos(a0), blY3 = BOT_Y + RY * Math.sin(a0);
+
+      const x0 = RECT_L + (RECT_W * i) / N;
+      const x1 = RECT_L + (RECT_W * (i + 1)) / N;
+
+      const tStart = (i / N) * 0.5;
+      const rawT = clamp((t - tStart) / 0.5);
+      const easeT = easeIO(rawT);
+
+      const tl: [number,number] = [lerp(tlX3, x0, easeT), lerp(tlY3, TOP_Y, easeT)];
+      const tr: [number,number] = [lerp(trX3, x1, easeT), lerp(trY3, TOP_Y, easeT)];
+      const br: [number,number] = [lerp(brX3, x1, easeT), lerp(brY3, BOT_Y, easeT)];
+      const bl: [number,number] = [lerp(blX3, x0, easeT), lerp(blY3, BOT_Y, easeT)];
+
+      const brightness = 0.25 + 0.75 * ((1 + Math.cos(aMid - Math.PI / 6)) / 2);
+      const isFront = Math.sin(aMid) <= 0;
+      const hue = 252 + (i / N) * 38;
+      const baseLum = 20 + brightness * 32;
+      const flatLum = 34;
+      let alpha: number;
+      if (easeT > 0.05) alpha = 0.9;
+      else if (isFront) alpha = 0.88;
+      else alpha = 0.07;
+
+      quads.push({ tl, tr, br, bl, alpha, hue, lum: lerp(baseLum, flatLum, easeT), isFront, easeT });
+    }
+
+    const drawQ = (qd: QD) => {
+      ctx.beginPath();
+      ctx.moveTo(qd.tl[0], qd.tl[1]);
+      ctx.lineTo(qd.tr[0], qd.tr[1]);
+      ctx.lineTo(qd.br[0], qd.br[1]);
+      ctx.lineTo(qd.bl[0], qd.bl[1]);
+      ctx.closePath();
+      ctx.fillStyle = `hsla(${qd.hue},72%,${qd.lum}%,${qd.alpha})`;
+      ctx.strokeStyle = `hsla(${qd.hue},72%,${Math.min(70, qd.lum + 20)}%,${qd.alpha * 0.35})`;
+      ctx.lineWidth = 0.5;
+      ctx.fill();
+      ctx.stroke();
+    };
+
+    quads.filter(q => !q.isFront && q.easeT < 0.05).forEach(drawQ);
+    quads.filter(q => q.isFront || q.easeT >= 0.05).forEach(drawQ);
+
+    // Cut-line flash at seam (right side of cylinder)
+    if (t < 0.20) {
+      const ca = 1 - t / 0.20;
+      ctx.strokeStyle = ylw(ca * 0.92);
+      ctx.lineWidth = 2.2;
+      ctx.setLineDash([5, 3]);
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = '#facc15';
+      ctx.beginPath();
+      ctx.moveTo(CX + r, TOP_Y);
+      ctx.lineTo(CX + r, BOT_Y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = ylw(ca * 0.85);
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('← garis potong', CX + r + 4, TOP_Y + h / 2);
+    }
+
+    // Assembled rims — fade out as peeling starts
+    if (t < 0.60) {
+      const ea = t < 0.25 ? 1 : 1 - clamp((t - 0.25) / 0.35);
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.ellipse(CX, TOP_Y, r, RY, 0, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(103,232,249,${0.22 * ea})`;
+      ctx.strokeStyle = `rgba(103,232,249,${ea * 0.82})`;
+      ctx.fill(); ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(CX, BOT_Y, r, RY, 0, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(134,239,172,${0.22 * ea})`;
+      ctx.strokeStyle = `rgba(134,239,172,${ea * 0.75})`;
+      ctx.fill(); ctx.stroke();
+    }
+
+    // Tutup atas — from ellipse at TOP_Y → circle at TOP_CAP_CY
+    if (t > 0.55) {
+      const capT = easeIO(clamp((t - 0.55) / 0.45));
+      const capY = lerp(TOP_Y, TOP_CAP_CY, capT);
+      const capRY2 = lerp(RY, CAP_R, capT);
+      ctx.beginPath();
+      ctx.ellipse(CX, capY, CAP_R, capRY2, 0, 0, 2 * Math.PI);
+      ctx.fillStyle = 'rgba(103,232,249,0.28)';
+      ctx.strokeStyle = `rgba(103,232,249,${0.5 + capT * 0.5})`;
+      ctx.lineWidth = 2; ctx.fill(); ctx.stroke();
+      if (capT > 0.5) {
+        const la = clamp((capT - 0.5) / 0.5);
+        ctx.fillStyle = ylw(la);
+        ctx.font = 'bold 10px monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText('TUTUP ATAS', CX + CAP_R + 8, capY - 2);
+        ctx.fillStyle = ylw(la * 0.75);
+        ctx.font = '8px monospace';
+        ctx.fillText('lingkaran, r', CX + CAP_R + 8, capY + 10);
+        if (la > 0.3) {
+          const la2 = clamp((la - 0.3) / 0.7);
+          ctx.strokeStyle = ylw(la2 * 0.9);
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(CX, capY); ctx.lineTo(CX + CAP_R, capY);
+          ctx.stroke();
+          ctx.fillStyle = ylw(la2);
+          ctx.font = 'bold 10px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('r', CX + CAP_R / 2, capY - 4);
+        }
+      }
+    }
+
+    // Tutup bawah — from ellipse at BOT_Y → circle at BOT_CAP_CY
+    if (t > 0.62) {
+      const capT = easeIO(clamp((t - 0.62) / 0.38));
+      const capY = lerp(BOT_Y, BOT_CAP_CY, capT);
+      const capRY2 = lerp(RY, CAP_R, capT);
+      ctx.beginPath();
+      ctx.ellipse(CX, capY, CAP_R, capRY2, 0, 0, 2 * Math.PI);
+      ctx.fillStyle = 'rgba(134,239,172,0.28)';
+      ctx.strokeStyle = `rgba(134,239,172,${0.5 + capT * 0.5})`;
+      ctx.lineWidth = 2; ctx.fill(); ctx.stroke();
+      if (capT > 0.5) {
+        const la = clamp((capT - 0.5) / 0.5);
+        ctx.fillStyle = ylw(la);
+        ctx.font = 'bold 10px monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText('TUTUP BAWAH', CX + CAP_R + 8, capY - 2);
+        ctx.fillStyle = ylw(la * 0.75);
+        ctx.font = '8px monospace';
+        ctx.fillText('lingkaran, r', CX + CAP_R + 8, capY + 10);
+        if (la > 0.3) {
+          const la2 = clamp((la - 0.3) / 0.7);
+          ctx.strokeStyle = ylw(la2 * 0.9);
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(CX, capY); ctx.lineTo(CX + CAP_R, capY);
+          ctx.stroke();
+          ctx.fillStyle = ylw(la2);
+          ctx.font = 'bold 10px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('r', CX + CAP_R / 2, capY - 4);
+        }
+      }
+    }
+
+    // End labels — all yellow
+    if (t > 0.80) {
+      const la = clamp((t - 0.80) / 0.20);
+
+      // Width arrow ← 2πr →
+      const arrY = TOP_Y - 20;
+      ctx.strokeStyle = ylw(la * 0.8);
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(RECT_L, arrY); ctx.lineTo(RECT_L + RECT_W, arrY);
+      ctx.moveTo(RECT_L, arrY - 4); ctx.lineTo(RECT_L, arrY + 4);
+      ctx.moveTo(RECT_L + RECT_W, arrY - 4); ctx.lineTo(RECT_L + RECT_W, arrY + 4);
+      ctx.stroke();
+      ctx.fillStyle = ylw(la);
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('← 2πr (keliling alas) →', CX, arrY - 4);
+
+      // Height t
+      const tX = RECT_L + RECT_W + 14;
+      ctx.strokeStyle = ylw(la * 0.8);
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(tX, TOP_Y); ctx.lineTo(tX, BOT_Y);
+      ctx.moveTo(tX - 4, TOP_Y); ctx.lineTo(tX + 4, TOP_Y);
+      ctx.moveTo(tX - 4, BOT_Y); ctx.lineTo(tX + 4, BOT_Y);
+      ctx.stroke();
+      ctx.fillStyle = ylw(la);
+      ctx.font = 'bold 12px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('t', tX + 7, TOP_Y + h / 2 + 4);
+
+      // SELIMUT label inside rectangle
+      ctx.fillStyle = ylw(la);
+      ctx.font = 'bold 12px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('SELIMUT', CX, TOP_Y + h / 2 - 8);
+      ctx.fillStyle = ylw(la * 0.75);
+      ctx.font = '8px monospace';
+      ctx.fillText('Persegi Panjang', CX, TOP_Y + h / 2 + 6);
+      ctx.fillText('p = 2πr  ·  l = t', CX, TOP_Y + h / 2 + 18);
+
+      // Success
+      ctx.fillStyle = ylw(la);
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('✓ Jaring-jaring = SELIMUT + TUTUP ATAS + TUTUP BAWAH', CX, canvas.height - 8);
+    }
+
+    // Progress bar
+    if (t > 0 && t < 1) {
+      const barY = canvas.height - 5;
+      ctx.fillStyle = 'rgba(71,85,105,0.45)';
+      ctx.fillRect(10, barY, canvas.width - 20, 3);
+      ctx.fillStyle = 'rgba(168,85,247,0.88)';
+      ctx.fillRect(10, barY, (canvas.width - 20) * t, 3);
+    }
+  }, [CX, TOP_Y, BOT_Y, RY, CAP_R, TOP_CAP_CY, BOT_CAP_CY, N, r, h, RECT_W, RECT_L]);
 
   useEffect(() => {
-    window.addEventListener("mousemove", onMM);
-    window.addEventListener("mouseup", onMU);
-    window.addEventListener("touchmove", onTM, { passive: true });
-    window.addEventListener("touchend", onTE);
-    return () => {
-      window.removeEventListener("mousemove", onMM);
-      window.removeEventListener("mouseup", onMU);
-      window.removeEventListener("touchmove", onTM);
-      window.removeEventListener("touchend", onTE);
+    drawFrame(0);
+    return () => cancelAnimationFrame(animFrameRef.current);
+  }, [drawFrame]);
+
+  const startAnimation = useCallback(() => {
+    if (animState === 'playing') return;
+    cancelAnimationFrame(animFrameRef.current);
+    setAnimState('playing');
+    startTimeRef.current = performance.now();
+    const loop = (now: number) => {
+      const t = Math.min(1, (now - startTimeRef.current) / DURATION);
+      drawFrame(t);
+      if (t < 1) animFrameRef.current = requestAnimationFrame(loop);
+      else setAnimState('done');
     };
-  }, [onMM, onMU, onTM, onTE]);
+    animFrameRef.current = requestAnimationFrame(loop);
+  }, [animState, drawFrame, DURATION]);
 
-  useEffect(() => {
-    if (isDragging || anyOpen) return;
-    let frameId: number; let lastTs = 0;
-    const animate = (ts: number) => {
-      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.028);
-      lastTs = ts; frameId = requestAnimationFrame(animate);
-    };
-    frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
-  }, [isDragging, anyOpen]);
-
-  const topVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
-    const a = (2 * Math.PI * i) / CYL_SEGS;
-    return cylRotPt(Math.cos(a) * CYL_R, -CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
-  });
-  const botVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
-    const a = (2 * Math.PI * i) / CYL_SEGS;
-    return cylRotPt(Math.cos(a) * CYL_R, CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
-  });
-  const topVerts2D = topVerts3D.map(cylProj);
-  const botVerts2D = botVerts3D.map(cylProj);
-
-  type XPanel = { avgZ: number; visible: boolean; fill: string; stroke: string; points: string };
-  const panels: XPanel[] = Array.from({ length: CYL_SEGS }, (_, i) => {
-    const ni = (i + 1) % CYL_SEGS;
-    const t0 = topVerts3D[i], t1 = topVerts3D[ni];
-    const b0 = botVerts3D[i], b1 = botVerts3D[ni];
-    const p_t0 = topVerts2D[i], p_t1 = topVerts2D[ni];
-    const p_b0 = botVerts2D[i], p_b1 = botVerts2D[ni];
-    const avgZ = (t0.z + t1.z + b0.z + b1.z) / 4;
-    const ex = p_t1.x - p_t0.x, ey = p_t1.y - p_t0.y;
-    const fx = p_b0.x - p_t0.x, fy = p_b0.y - p_t0.y;
-    const visible = (ex * fy - ey * fx) > 0;
-    const hue = Math.floor((i / CYL_SEGS) * 60) + 180;
-    return {
-      avgZ, visible,
-      fill: visible ? `hsla(${hue},80%,${selOpen ? 32 : 55}%,${selOpen ? 0.45 : 0.88})` : "rgba(100,150,200,0.06)",
-      stroke: visible ? (selOpen ? "#ffffff22" : "#ffffff55") : "#ffffff15",
-      points: `${p_t0.x},${p_t0.y} ${p_t1.x},${p_t1.y} ${p_b1.x},${p_b1.y} ${p_b0.x},${p_b0.y}`,
-    };
-  });
-  const sortedPanels = [...panels].sort((a, b) => b.avgZ - a.avgZ);
-
-  const topCapAvgZ = topVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
-  const botCapAvgZ = botVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
-  const topPolyPts = topVerts2D.map(p => `${p.x},${p.y}`).join(" ");
-  const botPolyPts = botVerts2D.map(p => `${p.x},${p.y}`).join(" ");
-  const topC = cylProj(cylRotPt(0, -CYL_H / 2, 0, rotX, rotY));
-  const botC = cylProj(cylRotPt(0,  CYL_H / 2, 0, rotX, rotY));
-  const topVisible = rotX < 10;
-  const botVisible = rotX > -60;
-
-  const tryToggle = (state: OS, setter: React.Dispatch<React.SetStateAction<OS>>) => {
-    if (hasDragged.current || state === "closing") return;
-    playPopSound();
-    setter(state === false ? true : "closing");
-  };
-
-  const resetAll = () => {
-    playPopSound();
-    if (topOpen === true) setTopOpen("closing");
-    if (botOpen === true) setBotOpen("closing");
-    if (selOpen === true) setSelOpen("closing");
-  };
+  const resetAnimation = useCallback(() => {
+    cancelAnimationFrame(animFrameRef.current);
+    setAnimState('idle');
+    drawFrame(0);
+  }, [drawFrame]);
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        {anyOpen
-          ? "Klik bagian yang terbuka untuk menutup · Klik bagian lain untuk membuka"
-          : "Drag untuk memutar · Klik tutup atas, selimut, atau alas untuk membukanya"}
+        Animasi <span className="text-purple-300 font-bold">slow motion</span> — selimut tabung dikupas lembaran demi lembaran menjadi persegi panjang
       </p>
-
-      <svg
-        viewBox={`0 -42 ${CYL_W} ${CYL_H_SVG + 84}`}
-        width="100%"
-        style={{ maxWidth: CYL_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
-        onMouseDown={onMD}
-        onTouchStart={onTS}
-      >
-        <defs>
-          <marker id="nArrL" markerWidth="4" markerHeight="4" refX="4" refY="2" orient="auto-start-reverse">
-            <path d="M4,0 L4,4 L0,2 z" fill="#a855f7"/>
-          </marker>
-          <marker id="nArrR" markerWidth="4" markerHeight="4" refX="0" refY="2" orient="auto">
-            <path d="M0,0 L0,4 L4,2 z" fill="#a855f7"/>
-          </marker>
-          <style>{`
-            @keyframes netUnroll {
-              0%   { clip-path: inset(5% 47% 5% 47% round 50%); opacity:0.3; }
-              10%  { opacity:1; }
-              30%  { clip-path: inset(2% 37% 2% 37% round 42%); }
-              55%  { clip-path: inset(0% 22% 0% 22% round 24%); }
-              75%  { clip-path: inset(0%  8% 0%  8% round 10%); }
-              90%  { clip-path: inset(0%  1% 0%  1% round  3px); }
-              100% { clip-path: inset(0%  0% 0%  0% round  3px); opacity:1; }
-            }
-            @keyframes hingeCapTop {
-              0%   { transform: perspective(320px) rotateX(-90deg); opacity:0.15; }
-              60%  { transform: perspective(320px) rotateX(-12deg); opacity:1; }
-              80%  { transform: perspective(320px) rotateX(4deg); }
-              100% { transform: perspective(320px) rotateX(0deg); }
-            }
-            @keyframes hingeCapBot {
-              0%   { transform: perspective(320px) rotateX(90deg);  opacity:0.15; }
-              60%  { transform: perspective(320px) rotateX(12deg);  opacity:1; }
-              80%  { transform: perspective(320px) rotateX(-4deg); }
-              100% { transform: perspective(320px) rotateX(0deg); }
-            }
-            @keyframes netFadeIn { from{opacity:0} to{opacity:1} }
-            @keyframes netUnrollClose {
-              0%   { clip-path: inset(0%  0% 0%  0% round  3px); opacity:1; }
-              15%  { clip-path: inset(0%  9% 0%  9% round 10%); }
-              40%  { clip-path: inset(0% 23% 0% 23% round 24%); }
-              65%  { clip-path: inset(2% 37% 2% 37% round 42%); }
-              85%  { clip-path: inset(5% 46% 5% 46% round 48%); opacity:0.4; }
-              100% { clip-path: inset(5% 47% 5% 47% round 50%); opacity:0; }
-            }
-            @keyframes hingeCapTopClose {
-              0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
-              20%  { transform: perspective(320px) rotateX(-6deg); }
-              100% { transform: perspective(320px) rotateX(90deg);  opacity:0.1; }
-            }
-            @keyframes hingeCapBotClose {
-              0%   { transform: perspective(320px) rotateX(0deg);   opacity:1; }
-              20%  { transform: perspective(320px) rotateX(6deg); }
-              100% { transform: perspective(320px) rotateX(-90deg); opacity:0.1; }
-            }
-            .net-unroll {
-              animation: netUnroll 2.8s cubic-bezier(0.16,1,0.3,1) both;
-            }
-            .net-unroll-close {
-              animation: netUnrollClose 1.4s cubic-bezier(0.7,0,0.84,0) both;
-            }
-            .hinge-top {
-              animation: hingeCapTop 1.5s cubic-bezier(0.22,0,0.1,1) both;
-              transform-box:fill-box;
-              transform-origin:center bottom;
-            }
-            .hinge-top-close {
-              animation: hingeCapTopClose 1.1s cubic-bezier(0.4,0,0.8,1) both;
-              transform-box:fill-box;
-              transform-origin:center bottom;
-            }
-            .hinge-bot {
-              animation: hingeCapBot 1.5s cubic-bezier(0.22,0,0.1,1) both;
-              transform-box:fill-box;
-              transform-origin:center top;
-            }
-            .hinge-bot-close {
-              animation: hingeCapBotClose 1.1s cubic-bezier(0.4,0,0.8,1) both;
-              transform-box:fill-box;
-              transform-origin:center top;
-            }
-            .net-fadein { animation: netFadeIn 0.5s 2.3s ease both; }
-          `}</style>
-        </defs>
-
-        {/* ── Ghost hidden body panels — rendered FIRST (behind everything) ── */}
-        <g style={{ pointerEvents: "none" }}>
-          {sortedPanels.map((p, i) =>
-            !p.visible && <polygon key={`g${i}`} points={p.points} fill="rgba(100,150,200,0.06)" stroke="#ffffff15" strokeWidth="0.5" />
-          )}
-        </g>
-
-        {/* ── SELIMUT (body panels) — click to unroll into rectangle ── */}
-        <g onClick={() => tryToggle(selOpen, setSelOpen)} style={{ cursor: "pointer" }}>
-          {/* 3D visible panels — fade out when selOpen is true or closing */}
-          <g style={{ opacity: selOpen !== false ? 0.06 : 1, transition: "opacity 0.45s ease" }}>
-            {sortedPanels.map((p, i) =>
-              p.visible && <polygon key={i} points={p.points} fill={p.fill} stroke={p.stroke} strokeWidth="0.8" />
-            )}
-          </g>
-
-          {/* Unrolled rectangle — shown when open or closing */}
-          {selOpen !== false && (() => {
-            const rx = CYL_CX - 118, ry = CYL_CY - CYL_H / 2, rw = 236, rh = CYL_H;
-            const isClosing = selOpen === "closing";
-            return (
-              <>
-                <rect x={rx} y={ry} width={rw} height={rh} rx={3}
-                  fill="rgba(168,85,247,0.28)" stroke="#a855f7" strokeWidth="1.8"
-                  className={isClosing ? "net-unroll-close" : "net-unroll"}
-                  onAnimationEnd={isClosing ? () => setSelOpen(false) : undefined}
-                />
-                <g className={isClosing ? "" : "net-fadein"}
-                  style={{ opacity: isClosing ? 0 : undefined, transition: isClosing ? "opacity 0.2s" : undefined }}>
-                  <text x={CYL_CX} y={CYL_CY - 2} fill="#e9d5ff" fontSize="10" fontFamily="monospace" fontWeight="700" textAnchor="middle">SELIMUT TABUNG</text>
-                  <text x={CYL_CX} y={CYL_CY + 13} fill="#c4b5fd" fontSize="9" fontFamily="monospace" textAnchor="middle">p = 2πr &nbsp; · &nbsp; l = t</text>
-                  <line x1={rx} y1={ry - 13} x2={rx + rw} y2={ry - 13} stroke="#a855f7" strokeWidth="1" markerStart="url(#nArrL)" markerEnd="url(#nArrR)" />
-                  <text x={CYL_CX} y={ry - 16} fill="#a855f7" fontSize="8" fontFamily="monospace" textAnchor="middle">2πr (keliling alas)</text>
-                  <line x1={rx + rw + 10} y1={ry}      x2={rx + rw + 10} y2={ry + rh} stroke="#a855f7" strokeWidth="1" />
-                  <line x1={rx + rw + 5}  y1={ry}      x2={rx + rw + 15} y2={ry}      stroke="#a855f7" strokeWidth="1" />
-                  <line x1={rx + rw + 5}  y1={ry + rh} x2={rx + rw + 15} y2={ry + rh} stroke="#a855f7" strokeWidth="1" />
-                  <text x={rx + rw + 20} y={CYL_CY + 4} fill="#a855f7" fontSize="9" fontFamily="monospace">t</text>
-                </g>
-              </>
-            );
-          })()}
-        </g>
-
-        {/* ── CAPS — z-sorted 3D polygons, flat circles attached to selimut rect edges ── */}
-        {/*
-          Selimut rect: x=CYL_CX-118  y=CYL_CY-CYL_H/2  w=236  h=CYL_H
-          topNetCy = (CYL_CY - CYL_H/2) - 52   → circle sits flush on top edge
-          botNetCy = (CYL_CY + CYL_H/2) + 52   → circle sits flush on bottom edge
-        */}
-        {(() => {
-          const NET_R   = 52;
-          const selTop  = CYL_CY - CYL_H / 2;
-          const selBot  = CYL_CY + CYL_H / 2;
-          const topNetCy = selTop - NET_R;
-          const botNetCy = selBot + NET_R;
-
-          const caps = topCapAvgZ > botCapAvgZ
-            ? [
-                { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, netCy:botNetCy, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
-                { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, netCy:topNetCy, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
-              ]
-            : [
-                { key:"top", open:topOpen, set:setTopOpen, pts:topPolyPts, c:topC, vis:topVisible, netCy:topNetCy, col:"#67e8f9", fillO:"rgba(103,232,249,0.30)", stroke:"#67e8f9", lbl:"Tutup Atas" },
-                { key:"bot", open:botOpen, set:setBotOpen, pts:botPolyPts, c:botC, vis:botVisible, netCy:botNetCy, col:"#86efac", fillO:"rgba(134,239,172,0.30)", stroke:"#86efac", lbl:"Alas (Tutup Bawah)" },
-              ];
-
-          return caps.map(({ key, open, set, pts, c, vis, netCy, col, fillO, stroke, lbl }) => {
-            const isTop = key === "top";
-            const isClosing = open === "closing";
-            const isOpen    = open === true;
-            const showFlat  = isOpen || isClosing;
-            const hingeOpenClass  = isTop ? "hinge-top"       : "hinge-bot";
-            const hingeCloseClass = isTop ? "hinge-top-close" : "hinge-bot-close";
-            return (
-              <g key={key} onClick={(e) => { e.stopPropagation(); tryToggle(open, set); }} style={{ cursor: "pointer" }}>
-                {/* Invisible hitbox */}
-                <ellipse cx={c.x} cy={c.y} rx={54} ry={18} fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
-                {/* 3D ellipse polygon — hidden while open or closing, fades back in after close */}
-                <polygon points={pts} fill="rgb(99,102,241)" stroke="#a5b4fc" strokeWidth="1.2"
-                  style={{ opacity: showFlat ? 0 : vis ? 1 : 0, transition: "opacity 0.35s" }} />
-                {!showFlat && vis && !anyOpen && (
-                  <polygon points={pts} fill="none" stroke="rgba(165,180,252,0.4)" strokeWidth="2"
-                    style={{ pointerEvents: "none" }} />
-                )}
-
-                {/* Clickable overlay on net circle so pressing it closes the cap */}
-                {isOpen && (
-                  <circle
-                    cx={CYL_CX} cy={netCy} r={NET_R + 6}
-                    fill="transparent" stroke="none"
-                    style={{ cursor: "pointer", pointerEvents: "all" }}
-                    onClick={(e) => { e.stopPropagation(); tryToggle(open, set); }}
-                  />
-                )}
-
-                {/* Flat circle — shown while open or animating closed */}
-                {showFlat && (
-                  <g
-                    className={isClosing ? hingeCloseClass : hingeOpenClass}
-                    onAnimationEnd={isClosing ? () => set(false) : undefined}
-                    style={{ pointerEvents: "none" }}
-                  >
-                    {/* Dashed connecting line: circle edge → selimut rect edge */}
-                    <line
-                      x1={CYL_CX} y1={isTop ? selTop : selBot}
-                      x2={CYL_CX} y2={isTop ? netCy + NET_R : netCy - NET_R}
-                      stroke={stroke} strokeWidth="1" strokeDasharray="3,2" opacity="0.5"
-                    />
-                    <circle cx={CYL_CX} cy={netCy} r={NET_R}
-                      fill={fillO} stroke={stroke} strokeWidth="1.5" />
-                    <circle cx={CYL_CX} cy={netCy} r="2.5" fill="#fbbf24" />
-                    <line x1={CYL_CX} y1={netCy} x2={CYL_CX + NET_R} y2={netCy}
-                      stroke="#fbbf24" strokeWidth="1.2" />
-                    <text x={CYL_CX + NET_R + 7} y={netCy + 4}
-                      fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="700">r</text>
-                    <text x={CYL_CX} y={netCy - 10}
-                      fill={col} fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">{lbl}</text>
-                    <text x={CYL_CX} y={netCy + 20}
-                      fill={col} fontSize="8" fontFamily="monospace" textAnchor="middle">L = πr²</text>
-                  </g>
-                )}
-              </g>
-            );
-          });
-        })()}
-
-      </svg>
-
-      {/* Status badges */}
-      <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
-        {([
-          { label: "⭕ Tutup Atas", state: topOpen, set: setTopOpen, on: "bg-cyan-900/60 border-cyan-500 text-cyan-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
-          { label: "🌀 Selimut",    state: selOpen, set: setSelOpen, on: "bg-purple-900/60 border-purple-500 text-purple-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
-          { label: "⭕ Alas",       state: botOpen, set: setBotOpen, on: "bg-green-900/60 border-green-500 text-green-300", off: "bg-slate-800/60 border-slate-600 text-slate-400" },
-        ] as const).map(({ label, state, set, on, off }) => (
-          <span
-            key={label}
-            className={`px-2 py-1 rounded-full border cursor-pointer transition-colors ${state === true ? on : state === "closing" ? on + " opacity-50" : off}`}
-            onClick={() => tryToggle(state, set as React.Dispatch<React.SetStateAction<OS>>)}
-          >
-            {label}{state === true ? " ✓" : state === "closing" ? " ↩" : ""}
+      <div style={{ maxWidth: 400, margin: '0 auto' }}>
+        <canvas
+          ref={canvasRef}
+          width={400}
+          height={310}
+          style={{ width: '100%', display: 'block', borderRadius: 10 }}
+        />
+      </div>
+      <div className="flex flex-wrap gap-2 justify-center">
+        <button
+          onClick={startAnimation}
+          disabled={animState === 'playing'}
+          className="px-4 py-2 text-sm font-bold bg-purple-700/60 border border-purple-500 text-purple-200 rounded-lg hover:bg-purple-600/60 transition-colors cursor-pointer font-body disabled:opacity-40"
+        >
+          {animState === 'idle' ? '▶ Mulai Animasi' : animState === 'playing' ? '⏳ Mengupas...' : '▶ Putar Ulang'}
+        </button>
+        <button
+          onClick={resetAnimation}
+          disabled={animState === 'idle'}
+          className="px-4 py-2 text-sm font-bold bg-slate-700/60 border border-slate-500 text-slate-200 rounded-lg hover:bg-slate-600/60 transition-colors cursor-pointer font-body disabled:opacity-40"
+        >
+          ↺ Reset
+        </button>
+      </div>
+      <div className="flex flex-wrap gap-3 justify-center text-[10px] font-body">
+        {[
+          { color: '#c084fc', label: 'Selimut (persegi panjang)' },
+          { color: '#67e8f9', label: 'Tutup Atas (lingkaran)' },
+          { color: '#86efac', label: 'Tutup Bawah (lingkaran)' },
+        ].map(({ color, label }) => (
+          <span key={label} className="flex items-center gap-1">
+            <span className="w-3 h-3 rounded-sm inline-block" style={{ background: color }} />
+            <span className="text-white/50">{label}</span>
           </span>
         ))}
       </div>
-
-      {anyOpen && (
-        <button onClick={resetAll} className="w-full px-3 py-1.5 text-xs font-bold bg-slate-800/60 border border-slate-600 text-slate-300 rounded-lg hover:bg-slate-700/60 transition-colors cursor-pointer font-body">
-          ⊟ Satukan Kembali
-        </button>
-      )}
     </div>
   );
 };
