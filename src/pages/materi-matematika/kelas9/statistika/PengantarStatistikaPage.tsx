@@ -1,44 +1,22 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Database } from "lucide-react";
-import { playPopSound } from "@/hooks/useAudio";
+import { BookOpen, Lightbulb, Calculator, Target, Database } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 const PengantarStatistikaPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro",
-    "konsep1", "contoh1",
-    "konsep2", "contoh2",
-    "konsep3", "contoh3",
-    "konsep4", "contoh4",
-  ]);
-
-  const toggleSection = (section: string) => {
-    playPopSound();
-    setExpandedSections((prev) =>
-      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
-    );
-  };
 
   const SectionHeader = ({
-    id, icon, iconColor, title,
-  }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button
-      onClick={() => toggleSection(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-    >
+    icon, iconColor, title,
+  }: { icon: React.ReactNode; iconColor?: string; title: string }) => (
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
-        ? <ChevronUp className="w-5 h-5 text-primary" />
-        : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
@@ -58,8 +36,7 @@ const PengantarStatistikaPage = () => {
 
           {/* ===== PENGANTAR ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Mengapa Statistika Penting?" />
-            {expandedSections.includes("intro") && (
+            <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Mengapa Statistika Penting?" />
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu ingin tahu nilai rata-rata teman sekelasmu, atau ingin mengetahui berapa banyak siswa yang suka olahraga tertentu. Nah, untuk menjawab pertanyaan seperti itu, kamu butuh ilmu yang bernama <strong className="text-cyan-300">statistika</strong>!
@@ -95,13 +72,11 @@ const PengantarStatistikaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ===== SUB-BAB 1: ISTILAH DASAR STATISTIKA ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Istilah Dasar dalam Statistika" />
-            {expandedSections.includes("konsep1") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Istilah Dasar dalam Statistika" />
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
@@ -237,13 +212,11 @@ const PengantarStatistikaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* Contoh Soal Sub-Bab 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal — Istilah Dasar Statistika" />
-            {expandedSections.includes("contoh1") && (
+            <SectionHeader icon={<Calculator className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal — Istilah Dasar Statistika" />
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -328,13 +301,11 @@ const PengantarStatistikaPage = () => {
                 </div>
 
               </div>
-            )}
           </div>
 
           {/* ===== SUB-BAB 2: JENIS-JENIS PENGUMPULAN DATA ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="📘 Sub-Bab 2: Cara-Cara Mengumpulkan Data" />
-            {expandedSections.includes("konsep2") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="📘 Sub-Bab 2: Cara-Cara Mengumpulkan Data" />
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-2">
@@ -413,13 +384,11 @@ const PengantarStatistikaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* Contoh Soal Sub-Bab 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title="📝 Contoh Soal — Pengumpulan Data" />
-            {expandedSections.includes("contoh2") && (
+            <SectionHeader icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title="📝 Contoh Soal — Pengumpulan Data" />
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -503,13 +472,11 @@ const PengantarStatistikaPage = () => {
                 </div>
 
               </div>
-            )}
           </div>
 
           {/* ===== SUB-BAB 3: JENIS-JENIS PENYAJIAN DATA ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep3" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 3: Cara-Cara Menyajikan Data" />
-            {expandedSections.includes("konsep3") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 3: Cara-Cara Menyajikan Data" />
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2">
@@ -598,13 +565,11 @@ const PengantarStatistikaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* Contoh Soal Sub-Bab 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Jenis Penyajian Data" />
-            {expandedSections.includes("contoh3") && (
+            <SectionHeader icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Jenis Penyajian Data" />
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -698,13 +663,11 @@ const PengantarStatistikaPage = () => {
                 </div>
 
               </div>
-            )}
           </div>
 
           {/* ===== RANGKUMAN ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep4" icon={<Database className="w-5 h-5" />} iconColor="text-yellow-400" title="🏁 Rangkuman Materi" />
-            {expandedSections.includes("konsep4") && (
+            <SectionHeader icon={<Database className="w-5 h-5" />} iconColor="text-yellow-400" title="🏁 Rangkuman Materi" />
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-cyan-500/20 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-bold text-cyan-300 text-center mb-3">⭐ Poin-Poin Kunci yang Harus Diingat</p>
@@ -723,14 +686,13 @@ const PengantarStatistikaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
         </div>
 
         <div className="mt-8 text-center">
           <button
-            onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/statistika"); }}
+            onClick={() => navigate("/materi-matematika/kelas-9/statistika")}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             ← Kembali ke Statistika
