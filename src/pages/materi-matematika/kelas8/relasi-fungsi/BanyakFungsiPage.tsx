@@ -13,16 +13,17 @@ import { InlineMath, BlockMath } from "react-katex";
 type Mode = "AtoB" | "BtoA";
 type Mapping = Record<string, string>;
 
-const DOMAIN_A = ["1", "2"];
-const CODOMAIN_B = ["a", "b", "c"];
+const ALL_DOM_LABELS  = ["1","2","3","4","5"];
+const ALL_COD_LABELS  = ["a","b","c","d","e"];
 const SVG_W = 300;
-const SVG_H = 260;
 const DOM_X = 68;
 const COD_X = 232;
 const NODE_R = 22;
 
-function nodePos(idx: number, total: number, x: number) {
-  const sp = (SVG_H - 40) / (total + 1);
+function svgH(dLen: number, cLen: number) { return Math.max(dLen, cLen) * 65 + 40; }
+
+function nodePos(idx: number, total: number, x: number, h: number) {
+  const sp = (h - 40) / (total + 1);
   return { x, y: 20 + sp * (idx + 1) };
 }
 
@@ -46,9 +47,9 @@ function mappingsEqual(a: Mapping, b: Mapping) {
   return keys.length === Object.keys(b).length && keys.every(k => a[k] === b[k]);
 }
 
-function getSVGCoords(e: React.MouseEvent | React.TouchEvent, svg: SVGSVGElement) {
+function getSVGCoords(e: React.MouseEvent | React.TouchEvent, svg: SVGSVGElement, h: number) {
   const rect = svg.getBoundingClientRect();
-  const sx = SVG_W / rect.width, sy = SVG_H / rect.height;
+  const sx = SVG_W / rect.width, sy = h / rect.height;
   if ("touches" in e) {
     const t = (e as React.TouchEvent).touches[0] || (e as React.TouchEvent).changedTouches[0];
     return { x: (t.clientX - rect.left) * sx, y: (t.clientY - rect.top) * sy };
@@ -56,6 +57,8 @@ function getSVGCoords(e: React.MouseEvent | React.TouchEvent, svg: SVGSVGElement
   const m = e as React.MouseEvent;
   return { x: (m.clientX - rect.left) * sx, y: (m.clientY - rect.top) * sy };
 }
+
+const SUPERSCRIPTS = ["⁰","¹","²","³","⁴","⁵"];
 
 const MiniDiag: React.FC<{ mapping: Mapping; domain: string[]; codomain: string[]; idx: number }> = ({ mapping, domain, codomain, idx }) => {
   const W = 110, H = 100, dx = 26, cx = 84, r = 10;
@@ -96,28 +99,58 @@ const MiniDiag: React.FC<{ mapping: Mapping; domain: string[]; codomain: string[
   );
 };
 
+const SizeButtons: React.FC<{ label: string; value: number; color: string; onChange: (n: number) => void }> = ({ label, value, color, onChange }) => (
+  <div className="flex items-center gap-1.5 flex-wrap">
+    <span className={`text-[10px] font-bold font-mono w-10 shrink-0 ${color}`}>{label}</span>
+    {[1,2,3,4,5].map(n => (
+      <button key={n} onClick={() => onChange(n)}
+        className={`w-7 h-7 rounded-lg text-[12px] font-bold font-mono transition-all active:scale-95 border ${
+          value === n
+            ? "bg-fuchsia-600/80 border-fuchsia-400/70 text-white ring-1 ring-fuchsia-400"
+            : "bg-slate-700/50 border-white/10 text-white/40 hover:bg-slate-600/60 hover:text-white/80"
+        }`}>
+        {n}
+      </button>
+    ))}
+    <span className="text-[10px] text-white/30 font-mono">anggota</span>
+  </div>
+);
+
 const DiagramInteraktifBanyakFungsi: React.FC = () => {
-  const [mode, setMode] = useState<Mode>("AtoB");
-  const [cur, setCur] = useState<Mapping>({});
+  const [domainSize, setDomainSize]     = useState(2);
+  const [codomainSize, setCodomainSize] = useState(3);
+  const [mode, setMode]   = useState<Mode>("AtoB");
+  const [cur, setCur]     = useState<Mapping>({});
   const [listAB, setListAB] = useState<Mapping[]>([]);
   const [listBA, setListBA] = useState<Mapping[]>([]);
-  const [drag, setDrag] = useState<{ from: string } | null>(null);
+  const [drag, setDrag]   = useState<{ from: string } | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [msg, setMsg] = useState<{ t: string; ok: boolean } | null>(null);
-  const [done, setDone] = useState(false);
+  const [msg, setMsg]     = useState<{ t: string; ok: boolean } | null>(null);
+  const [done, setDone]   = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const domain   = mode === "AtoB" ? DOMAIN_A : CODOMAIN_B;
-  const codomain = mode === "AtoB" ? CODOMAIN_B : DOMAIN_A;
-  const maxF     = mode === "AtoB" ? 9 : 8;
-  const list     = mode === "AtoB" ? listAB : listBA;
-  const setList  = mode === "AtoB" ? setListAB : setListBA;
+  const baseA = ALL_DOM_LABELS.slice(0, domainSize);
+  const baseB = ALL_COD_LABELS.slice(0, codomainSize);
 
-  const domPos = Object.fromEntries(domain.map((el, i) => [el, nodePos(i, domain.length, DOM_X)]));
-  const codPos = Object.fromEntries(codomain.map((el, i) => [el, nodePos(i, codomain.length, COD_X)]));
+  const domain   = mode === "AtoB" ? baseA : baseB;
+  const codomain = mode === "AtoB" ? baseB : baseA;
+  const nDom = domain.length;
+  const nCod = codomain.length;
+  const maxF = Math.pow(nCod, nDom);
+  const list    = mode === "AtoB" ? listAB : listBA;
+  const setList = mode === "AtoB" ? setListAB : setListBA;
+  const H = svgH(nDom, nCod);
+
+  const domPos = Object.fromEntries(domain.map((el, i) => [el, nodePos(i, nDom, DOM_X, H)]));
+  const codPos = Object.fromEntries(codomain.map((el, i) => [el, nodePos(i, nCod, COD_X, H)]));
 
   const isComplete = domain.every(el => cur[el] !== undefined);
   const isDup = isComplete && list.some(d => mappingsEqual(d, cur));
+
+  const resetAll = () => { setCur({}); setListAB([]); setListBA([]); setDone(false); setMsg(null); };
+
+  const changeDomainSize   = (n: number) => { setDomainSize(n);   resetAll(); };
+  const changeCodomainSize = (n: number) => { setCodomainSize(n); resetAll(); };
 
   useEffect(() => { if (!msg) return; const t = setTimeout(() => setMsg(null), 2500); return () => clearTimeout(t); }, [msg]);
 
@@ -129,28 +162,28 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
   const startDrag = useCallback((el: string, e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     setDrag({ from: el });
-    if (svgRef.current) setMouse(getSVGCoords(e, svgRef.current));
-  }, []);
+    if (svgRef.current) setMouse(getSVGCoords(e, svgRef.current, H));
+  }, [H]);
 
   const onMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     if (!drag || !svgRef.current) return;
     e.preventDefault();
-    setMouse(getSVGCoords(e, svgRef.current));
-  }, [drag]);
+    setMouse(getSVGCoords(e, svgRef.current, H));
+  }, [drag, H]);
 
   const onUp = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     if (!drag || !svgRef.current) return;
-    const pos = getSVGCoords(e, svgRef.current);
+    const pos = getSVGCoords(e, svgRef.current, H);
     const target = findCod(pos.x, pos.y);
     if (target) { playPopSound(); setCur(p => ({ ...p, [drag.from]: target })); }
     setDrag(null);
-  }, [drag, findCod]);
+  }, [drag, findCod, H]);
 
   const removeArrow = (el: string) => { playPopSound(); setCur(p => { const n = { ...p }; delete n[el]; return n; }); };
 
   const addFn = () => {
     if (!isComplete) { setMsg({ t: "Belum semua elemen domain dipasangkan!", ok: false }); return; }
-    if (isDup) { setMsg({ t: "Fungsi ini sudah ada! Coba kombinasi lain.", ok: false }); return; }
+    if (isDup)       { setMsg({ t: "Fungsi ini sudah ada! Coba kombinasi lain.", ok: false }); return; }
     playPopSound();
     const next = [...list, { ...cur }];
     (setList as React.Dispatch<React.SetStateAction<Mapping[]>>)(next);
@@ -160,9 +193,17 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
   };
 
   const dragFromPos = drag ? domPos[drag.from] : null;
+  const showPlaceholders = maxF <= 30;
+
+  const domLabel = mode === "AtoB" ? "A" : "B";
+  const codLabel = mode === "AtoB" ? "B" : "A";
+  const nDomSize = mode === "AtoB" ? domainSize : codomainSize;
+  const nCodSize = mode === "AtoB" ? codomainSize : domainSize;
 
   return (
     <div className="bg-fuchsia-900/20 border border-fuchsia-500/30 rounded-xl p-4 space-y-3">
+
+      {/* ── Judul + Ganti Mode ── */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <p className="font-body text-sm font-bold text-fuchsia-300">🎮 Buktikan Sendiri — Seret Panah!</p>
         <div className="flex items-center gap-1.5">
@@ -175,23 +216,39 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
         </div>
       </div>
 
-      {/* Progress */}
+      {/* ── Kontrol Ukuran Himpunan ── */}
+      <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
+        <p className="text-[10px] text-fuchsia-300/70 font-bold font-body mb-1">⚙️ Atur ukuran himpunan:</p>
+        <SizeButtons label="n(A)" value={domainSize}   color="text-cyan-400"   onChange={changeDomainSize} />
+        <SizeButtons label="n(B)" value={codomainSize} color="text-violet-400" onChange={changeCodomainSize} />
+        <div className="pt-2 border-t border-white/5 flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] text-white/40 font-body">Banyak fungsi {domLabel}→{codLabel} =</span>
+          <span className="text-[11px] font-mono text-white/50">n({codLabel})^n({domLabel}) =</span>
+          <span className="text-[13px] font-bold font-mono text-yellow-300">
+            {nCodSize}{SUPERSCRIPTS[nDomSize] ?? `^${nDomSize}`} = {maxF}
+          </span>
+          {maxF > 100 && <span className="text-[9px] text-orange-400/70 font-body">(banyak sekali!)</span>}
+        </div>
+      </div>
+
+      {/* ── Progress Bar ── */}
       <div className="flex items-center gap-2">
         <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-full transition-all duration-500" style={{ width: `${(list.length / maxF) * 100}%` }} />
+          <div className="h-full bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-full transition-all duration-500"
+            style={{ width: `${maxF > 0 ? (list.length / maxF) * 100 : 0}%` }} />
         </div>
         <span className="text-[11px] text-white/50 font-mono shrink-0">{list.length}/{maxF} fungsi</span>
         {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">🎉 Lengkap!</span>}
       </div>
 
-      {/* SVG Diagram */}
+      {/* ── SVG Diagram ── */}
       <div className="flex justify-center">
         <div className="bg-slate-900/60 rounded-xl border border-white/10 p-2 select-none w-full" style={{ maxWidth: SVG_W + 16 }}>
           <div className="flex justify-between px-4 mb-1 text-[10px] font-bold font-mono">
-            <span className="text-cyan-400">Domain ({mode==="AtoB"?"A":"B"})</span>
-            <span className="text-violet-400">Kodomain ({mode==="AtoB"?"B":"A"})</span>
+            <span className="text-cyan-400">Domain ({domLabel})</span>
+            <span className="text-violet-400">Kodomain ({codLabel})</span>
           </div>
-          <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${SVG_H}`} width="100%"
+          <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${H}`} width="100%"
             style={{ cursor: drag ? "crosshair" : "default", touchAction: "none" }}
             onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={() => setDrag(null)}
             onTouchMove={onMove} onTouchEnd={onUp}>
@@ -203,21 +260,18 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
                 <path d="M0,0 L8,3 L0,6 Z" fill="#fbbf24" />
               </marker>
             </defs>
-            <line x1={SVG_W/2} y1={8} x2={SVG_W/2} y2={SVG_H-8} stroke="rgba(255,255,255,0.05)" strokeWidth={1} strokeDasharray="4 3" />
+            <line x1={SVG_W/2} y1={8} x2={SVG_W/2} y2={H-8} stroke="rgba(255,255,255,0.05)" strokeWidth={1} strokeDasharray="4 3" />
 
-            {/* committed arrows */}
             {domain.map(el => {
               const target = cur[el]; if (!target) return null;
               return <path key={el} d={bezierPath(domPos[el], codPos[target])} fill="none" stroke="#f0abfc" strokeWidth={2.5} markerEnd="url(#ah2)" />;
             })}
 
-            {/* drag preview */}
             {drag && dragFromPos && (
               <path d={bezierPath(dragFromPos, mouse, NODE_R, 0)} fill="none" stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 3" markerEnd="url(#ahd2)" />
             )}
 
-            {/* codomain nodes */}
-            {codomain.map((el, i) => {
+            {codomain.map((el) => {
               const p = codPos[el];
               const hover = drag !== null && Math.hypot(mouse.x - p.x, mouse.y - p.y) < NODE_R + 10;
               return (
@@ -228,7 +282,6 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
               );
             })}
 
-            {/* domain nodes (draggable) */}
             {domain.map(el => {
               const p = domPos[el];
               const hasArr = cur[el] !== undefined;
@@ -249,19 +302,29 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
         </div>
       </div>
 
-      {/* Status + actions */}
+      {/* ── Status ── */}
       <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-body ${isComplete&&!isDup?"bg-green-900/30 border border-green-500/30 text-green-300":isDup?"bg-orange-900/30 border border-orange-500/30 text-orange-300":"bg-slate-800/50 border border-white/10 text-white/40"}`}>
         {isComplete && !isDup && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />}
         {isDup && <XCircle className="w-3.5 h-3.5 shrink-0" />}
         {!isComplete && <div className="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" />}
-        {isComplete && !isDup ? "✅ Fungsi valid! Setiap elemen domain punya tepat satu pasangan." : isDup ? "⚠️ Fungsi ini sudah ada! Coba kombinasi lain." : `Hubungkan ${domain.filter(el => !cur[el]).length} elemen domain yang tersisa.`}
+        {isComplete && !isDup
+          ? "✅ Fungsi valid! Setiap elemen domain punya tepat satu pasangan."
+          : isDup
+          ? "⚠️ Fungsi ini sudah ada! Coba kombinasi lain."
+          : `Hubungkan ${domain.filter(el => !cur[el]).length} elemen domain yang tersisa.`}
       </div>
 
       {msg && <div className={`text-center text-xs font-bold py-1.5 px-3 rounded-lg ${msg.ok?"bg-green-900/40 text-green-300 border border-green-500/30":"bg-red-900/40 text-red-300 border border-red-500/30"}`}>{msg.t}</div>}
 
+      {/* ── Tombol Aksi ── */}
       <div className="flex gap-2">
-        <button onClick={() => { playPopSound(); setCur({}); }} className="flex items-center gap-1 bg-slate-700/50 hover:bg-slate-600/60 border border-white/15 text-white/60 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
+        <button onClick={() => { playPopSound(); setCur({}); }}
+          className="flex items-center gap-1 bg-slate-700/50 hover:bg-slate-600/60 border border-white/15 text-white/60 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
           <RotateCcw className="w-3 h-3" /> Reset
+        </button>
+        <button onClick={() => { playPopSound(); resetAll(); }}
+          className="flex items-center gap-1 bg-slate-700/50 hover:bg-red-900/40 border border-white/15 hover:border-red-500/40 text-white/60 hover:text-red-300 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
+          <RotateCcw className="w-3 h-3" /> Reset Semua
         </button>
         <button onClick={addFn} disabled={!isComplete || isDup}
           className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-bold py-2 rounded-lg border transition-all active:scale-95 ${isComplete&&!isDup?"bg-fuchsia-600/80 hover:bg-fuchsia-500/90 border-fuchsia-400/60 text-white cursor-pointer":"bg-slate-800/40 border-white/10 text-white/20 cursor-not-allowed"}`}>
@@ -269,23 +332,30 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
         </button>
       </div>
 
-      {/* Mini diagram gallery */}
+      {/* ── Galeri Mini-Diagram ── */}
       {list.length > 0 && (
         <div>
           <p className="text-[11px] font-bold text-yellow-300 mb-2 flex items-center gap-1">
-            <Trophy className="w-3 h-3" /> Fungsi {mode==="AtoB"?"A→B":"B→A"} yang ditemukan ({list.length}/{maxF}):
+            <Trophy className="w-3 h-3" /> Fungsi {domLabel}→{codLabel} yang ditemukan ({list.length}/{maxF}):
           </p>
           <div className="flex flex-wrap gap-2">
             {list.map((m, i) => <MiniDiag key={i} mapping={m} domain={domain} codomain={codomain} idx={i} />)}
-            {Array.from({ length: maxF - list.length }).map((_, i) => (
+            {showPlaceholders && Array.from({ length: maxF - list.length }).map((_, i) => (
               <div key={i} className="w-[110px] h-[100px] rounded-lg border border-dashed border-white/10 bg-slate-900/30 flex items-center justify-center">
                 <span className="text-white/10 text-lg">?</span>
               </div>
             ))}
+            {!showPlaceholders && list.length < maxF && (
+              <div className="text-[10px] text-white/30 font-mono self-center px-2">
+                … masih {maxF - list.length} lagi
+              </div>
+            )}
           </div>
           {done && (
             <div className="mt-3 bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
-              <p className="text-green-300 font-bold text-xs">🎉 Terbukti! Banyak fungsi {mode==="AtoB"?"A→B = 3² = 9":"B→A = 2³ = 8"}</p>
+              <p className="text-green-300 font-bold text-xs">
+                🎉 Terbukti! Banyak fungsi {domLabel}→{codLabel} = {nCodSize}{SUPERSCRIPTS[nDomSize] ?? `^${nDomSize}`} = {maxF}
+              </p>
             </div>
           )}
         </div>
