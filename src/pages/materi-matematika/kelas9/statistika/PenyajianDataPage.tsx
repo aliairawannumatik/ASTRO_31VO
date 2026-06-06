@@ -1035,29 +1035,22 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Dari diagram batang ganda (dua kelompok), diketahui nilai rata-rata ulangan siswa Kelas A dan B per mata pelajaran:<br />
+                      Dari diagram batang ganda (dua kelompok), diketahui nilai ulangan siswa Kelas A dan B per mata pelajaran:<br />
                       Matematika: A=78, B=82 | IPA: A=85, B=79 | Bhs.Indo: A=88, B=90 | IPS: A=75, B=74<br />
-                      (a) Pada mata pelajaran apa Kelas A lebih unggul? (b) Hitung selisih rata-rata total kedua kelas!
+                      Pada mata pelajaran apa saja Kelas A lebih unggul dibanding Kelas B?
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>(a)</strong> Bandingkan A vs B per mata pelajaran:</p>
+                      <p>Bandingkan A vs B per mata pelajaran dari diagram:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1 text-xs">
                         <p>Matematika: A=78 vs B=82 → <span className="text-red-400">B unggul</span></p>
                         <p>IPA: A=85 vs B=79 → <span className="text-cyan-400">A unggul (+6)</span></p>
                         <p>Bhs.Indo: A=88 vs B=90 → <span className="text-red-400">B unggul</span></p>
                         <p>IPS: A=75 vs B=74 → <span className="text-cyan-400">A unggul (+1)</span></p>
                       </div>
-                      <p>→ Kelas A lebih unggul pada <strong className="text-cyan-300">IPA dan IPS</strong>.</p>
-                      <p><strong>(b)</strong> Rata-rata total:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="\bar{x}_A = \frac{78+85+88+75}{4} = \frac{326}{4} = 81{,}5" />
-                        <BlockMath math="\bar{x}_B = \frac{82+79+90+74}{4} = \frac{325}{4} = 81{,}25" />
-                        <p className="text-sm text-white/80">Selisih = <InlineMath math="81{,}5 - 81{,}25 = 0{,}25" /></p>
-                      </div>
-                      <p><strong className="text-primary">Rata-rata total Kelas A sedikit lebih tinggi (81,5 vs 81,25), selisih 0,25.</strong></p>
+                      <p><strong className="text-primary">Kelas A lebih unggul pada mata pelajaran IPA dan IPS.</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1414,25 +1407,21 @@ const PenyajianDataPage = () => {
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
                       Penjualan minuman A (ml × 1000): Jan=80, Feb=95, Mar=90, Apr=110, Mei=105, Jun=120.<br />
-                      Hitunglah rata-rata penjualan dan tentukan pada bulan mana penjualan di atas rata-rata!
+                      Tentukan bulan dengan penjualan tertinggi dan terendah, serta identifikasi tren perubahan penjualan!
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\bar{x} = \frac{80+95+90+110+105+120}{6} = \frac{600}{6} = 100" />
-                      </div>
-                      <p>Rata-rata = <strong>100</strong> (× 1000 ml)</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1 text-xs">
-                        <p>Jan: 80 &lt; 100 → di bawah rata-rata</p>
-                        <p>Feb: 95 &lt; 100 → di bawah rata-rata</p>
-                        <p>Mar: 90 &lt; 100 → di bawah rata-rata</p>
-                        <p>Apr: 110 &gt; 100 → <span className="text-yellow-400">di atas rata-rata ✓</span></p>
-                        <p>Mei: 105 &gt; 100 → <span className="text-yellow-400">di atas rata-rata ✓</span></p>
-                        <p>Jun: 120 &gt; 100 → <span className="text-yellow-400">di atas rata-rata ✓</span></p>
+                        <p>Jan: 80 | Feb: 95 (+15) | Mar: 90 (−5) | Apr: 110 (+20) | Mei: 105 (−5) | Jun: 120 (+15)</p>
                       </div>
-                      <p><strong className="text-primary">Penjualan di atas rata-rata terjadi pada bulan April, Mei, dan Juni.</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <p>• Penjualan <span className="text-green-400 font-semibold">tertinggi</span> → Juni (120 × 1000 ml)</p>
+                        <p>• Penjualan <span className="text-red-400 font-semibold">terendah</span> → Januari (80 × 1000 ml)</p>
+                        <p>• Tren umum: <span className="text-yellow-400">meningkat</span> dari Januari ke Juni, meski ada sedikit turun di Maret dan Mei</p>
+                      </div>
+                      <p><strong className="text-primary">Penjualan tertinggi di bulan Juni, terendah di Januari, dengan tren meningkat secara keseluruhan.</strong></p>
                     </div>
                   </div>
                 </div>
@@ -2291,7 +2280,7 @@ const PenyajianDataPage = () => {
                       Dua kelas, A dan B, mengikuti ujian matematika. Data nilai (sudah diurutkan):<br />
                       Kelas A: 55, 60, 63, 65, 68, 70, 70, 72, 78, 80<br />
                       Kelas B: 58, 61, 64, 66, 69, 71, 75, 77, 82, 85<br />
-                      Sajikan data ini dalam <strong>diagram batang daun berdampingan</strong> dan tentukan kelas mana yang memiliki rata-rata lebih tinggi!
+                      Sajikan data ini dalam <strong>diagram batang daun berdampingan</strong>!
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
@@ -2327,12 +2316,7 @@ const PenyajianDataPage = () => {
                           </div>
                         </div>
                       </div>
-                      <p><strong>Langkah 2:</strong> Hitung rata-rata:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="\bar{x}_A = \frac{55+60+63+65+68+70+70+72+78+80}{10} = \frac{681}{10} = 68{,}1" />
-                        <BlockMath math="\bar{x}_B = \frac{58+61+64+66+69+71+75+77+82+85}{10} = \frac{708}{10} = 70{,}8" />
-                      </div>
-                      <p><strong className="text-primary">Kelas B memiliki rata-rata lebih tinggi (70,8 &gt; 68,1)</strong></p>
+                      <p><strong className="text-primary">Diagram batang daun berdampingan berhasil dibuat. Nilai Kelas B secara umum lebih tinggi terlihat dari posisi daun yang lebih besar di setiap batang.</strong></p>
                     </div>
                   </div>
                 </div>
@@ -2352,7 +2336,7 @@ const PenyajianDataPage = () => {
                     { emoji: "📊", title: "Diagram Batang", desc: "Perbandingan kategori. Batang tegak/mendatar, tinggi = frekuensi.", color: "border-blue-500/40 bg-blue-900/20" },
                     { emoji: "📈", title: "Diagram Garis", desc: "Tren data dari waktu ke waktu. Titik dihubungkan garis.", color: "border-purple-500/40 bg-purple-900/20" },
                     { emoji: "🥧", title: "Diagram Lingkaran", desc: "Proporsi/persentase. Sudut = (f/total) × 360°.", color: "border-orange-500/40 bg-orange-900/20" },
-                    { emoji: "📋", title: "Tabel Distribusi", desc: "Data banyak dikelompokkan. Rata-rata = Σ(f·xᵢ)/Σf.", color: "border-cyan-500/40 bg-cyan-900/20" },
+                    { emoji: "📋", title: "Tabel Distribusi", desc: "Data banyak dikelompokkan berdasarkan nilai dan frekuensinya.", color: "border-cyan-500/40 bg-cyan-900/20" },
                   ].map(({ emoji, title, desc, color }) => (
                     <div key={title} className={`border ${color} rounded-xl p-3`}>
                       <p className="text-xl mb-1">{emoji}</p>
@@ -2363,7 +2347,7 @@ const PenyajianDataPage = () => {
                 </div>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-cyan-200">
-                    <strong>Kamu sudah menguasai Penyajian Data! 🎉</strong> Selanjutnya, lanjut ke materi Ukuran Pemusatan Data untuk belajar menghitung rata-rata dan median secara mendalam! 🚀
+                    <strong>Kamu sudah menguasai Penyajian Data! 🎉</strong> Selanjutnya, lanjut ke materi Ukuran Pemusatan Data untuk belajar menghitung median secara mendalam! 🚀
                   </p>
                 </div>
               </div>
