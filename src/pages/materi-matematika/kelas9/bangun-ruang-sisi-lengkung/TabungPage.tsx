@@ -1744,7 +1744,7 @@ const unsurExamples: Ex[] = [
         <p>Perhatikan gambar selimut tabung berikut.</p>
 
         {/* SVG selimut tabung — persegi panjang dengan keterangan ukuran */}
-        <svg viewBox="0 0 320 180" className="w-full max-w-xs mx-auto block" aria-label="Selimut tabung: lebar 22 cm, tinggi t = 10 cm">
+        <svg viewBox="0 0 400 180" className="w-full max-w-xs mx-auto block" aria-label="Selimut tabung: lebar 22 cm, tinggi t = 10 cm">
           {/* Persegi panjang selimut */}
           <rect x="30" y="20" width="230" height="120" fill="none" stroke="#e2e8f0" strokeWidth="2"/>
 
@@ -1758,8 +1758,8 @@ const unsurExamples: Ex[] = [
           <line x1="278" y1="20"  x2="278" y2="140" stroke="#22c55e" strokeWidth="1.5"/>
           <line x1="272" y1="20"  x2="284" y2="20"  stroke="#22c55e" strokeWidth="1.5"/>
           <line x1="272" y1="140" x2="284" y2="140" stroke="#22c55e" strokeWidth="1.5"/>
-          <text x="296" y="85" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">t = 10 cm</text>
-          <text x="296" y="100" fill="#86efac" fontSize="9"  fontFamily="monospace" textAnchor="middle">(tinggi)</text>
+          <text x="290" y="77" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="start">t = 10 cm</text>
+          <text x="290" y="93" fill="#86efac" fontSize="9"  fontFamily="monospace" textAnchor="start">(tinggi)</text>
         </svg>
 
         <p>Jari-jari tabung yang terjadi adalah ….</p>
