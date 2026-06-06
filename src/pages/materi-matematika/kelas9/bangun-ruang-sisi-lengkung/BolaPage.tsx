@@ -294,6 +294,14 @@ const _scSectorPath = (cx: number, cy: number, r: number, baseDeg: number, sweep
   return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
 };
 
+/* Per-piece 3D gradient data (focal point at outer corner = facing-light side) */
+const SC_3D = {
+  TL: { grad:"sc-g3d-TL", fx:-SC_SR*0.22, fy:-SC_SR*0.28, c0:"#cffafe", c1:"#22d3ee", c2:"#083344" },
+  TR: { grad:"sc-g3d-TR", fx: SC_SR*0.22, fy:-SC_SR*0.28, c0:"#fff7ed", c1:"#fb923c", c2:"#431407" },
+  BL: { grad:"sc-g3d-BL", fx:-SC_SR*0.22, fy: SC_SR*0.28, c0:"#f5f3ff", c1:"#a78bfa", c2:"#2e1065" },
+  BR: { grad:"sc-g3d-BR", fx: SC_SR*0.22, fy: SC_SR*0.28, c0:"#f0fdf4", c1:"#4ade80", c2:"#052e16" },
+} as const;
+
 const SphereFruitCutAnimation = () => {
   const [phase,    setPhase]    = useState<"idle"|"running"|"done">("idle");
   const [progress, setProgress] = useState(0);
@@ -324,193 +332,221 @@ const SphereFruitCutAnimation = () => {
   const p = progress;
   const isDone = phase === "done";
 
-  /* ── Sphere opacity: visible until pieces fully separate ── */
-  const sphereOp = _scClamp(1 - _scClamp((p - 0.38) / 0.20, 0, 1), 0, 1);
+  /* ── Sphere body fades out as pieces spread ── */
+  const sphereOp = _scClamp(1 - _scClamp((p - 0.36) / 0.20, 0, 1), 0, 1);
 
-  /* ── Cut line progress ── */
-  const cutV = _scEaseOut(_scClamp(p / 0.12, 0, 1));          // vertical first
-  const cutH = _scEaseOut(_scClamp((p - 0.08) / 0.14, 0, 1)); // horizontal 2nd
+  /* ── Cut lines ── */
+  const cutV   = _scEaseOut(_scClamp(p / 0.12, 0, 1));
+  const cutH   = _scEaseOut(_scClamp((p - 0.08) / 0.14, 0, 1));
   const cutLen = SC_SR * 2 + 8;
 
-  /* ── Per-piece computed values ── */
+  /* ── Per-piece values ── */
   const pieces = SC_PIECES.map(pc => {
+    const g3d = SC_3D[pc.id as keyof typeof SC_3D];
+
     const tSep   = _scClamp((p - 0.20) / 0.32, 0, 1);
-    const tMorph = _scClamp((p - 0.52) / 0.35, 0, 1);
-    const tLabel = _scClamp((p - 0.87) / 0.13, 0, 1);
+    const tMorph = _scClamp((p - 0.52) / 0.36, 0, 1);
+    const tLabel = _scClamp((p - 0.88) / 0.12, 0, 1);
+
+    /* cut faces appear after pieces separate, fade before morph ends */
+    const tFace  = _scClamp((p - 0.29) / 0.14, 0, 1)
+                 * _scClamp(1 - (p - 0.50) / 0.16, 0, 1);
 
     const cx    = SC_SCX + _scLerp(0, pc.dx, _scEaseOut(tSep));
     const cy    = SC_SCY + _scLerp(0, pc.dy, _scEaseOut(tSep));
     const sweep = _scLerp(90, 360, _scEaseInOut(tMorph));
 
-    /* Piece appears right when cutting starts */
     const pieceOp = phase === "idle" ? 0 : _scClamp((p - 0.16) / 0.08, 0, 1);
 
-    return { ...pc, cx, cy, sweep, pieceOp, labelOp: tLabel };
+    /* specular ellipse — outer-corner position, fades as circle completes */
+    const specX   = g3d.fx * 0.36;
+    const specY   = g3d.fy * 0.36;
+    const specOp  = _scClamp(1 - (sweep - 280) / 70, 0, 1);
+    const specRY  = SC_CR * 0.18 * Math.max(sweep / 360, 0.22);
+
+    return { ...pc, g3d, cx, cy, sweep, pieceOp, tFace, labelOp: tLabel, specX, specY, specOp, specRY };
   });
 
   return (
     <div style={{ background:"rgba(4,8,22,0.94)", border:"1px solid rgba(34,197,94,0.38)",
       borderRadius:14, padding:"12px 10px 10px", userSelect:"none" }}>
       <style>{`
-        @keyframes sc-glow {
-          0%,100% { filter:drop-shadow(0 0 10px rgba(139,92,246,.55)); }
-          50%     { filter:drop-shadow(0 0 26px rgba(139,92,246,.95)); }
-        }
-        @keyframes sc-knife {
-          0%,100% { opacity:.7; } 50% { opacity:1; }
-        }
-        @keyframes sc-in {
-          from { opacity:0; transform:scale(.75); }
-          to   { opacity:1; transform:scale(1); }
-        }
+        @keyframes sc-glow  { 0%,100%{filter:drop-shadow(0 0 10px rgba(139,92,246,.55));}
+                              50%    {filter:drop-shadow(0 0 26px rgba(139,92,246,.95));} }
+        @keyframes sc-knife { 0%,100%{opacity:.7;} 50%{opacity:1;} }
+        @keyframes sc-in    { from{opacity:0;transform:scale(.75);} to{opacity:1;transform:scale(1);} }
         .sc-glow  { animation:sc-glow  2.6s ease-in-out infinite; }
         .sc-knife { animation:sc-knife 0.8s ease-in-out 3; }
-        .sc-in    { animation:sc-in .40s ease-out both; }
+        .sc-in    { animation:sc-in   .40s ease-out both; }
       `}</style>
 
       <p style={{ textAlign:"center", fontFamily:"monospace", fontSize:10, fontWeight:"bold",
         color:"#4ade80", letterSpacing:".06em", textTransform:"uppercase", marginBottom:8 }}>
-        🍊 Animasi: Bola Dipotong seperti Buah → 4 Lingkaran Sempurna
+        🍊 Bola 3D Dipotong → 4 Potongan 3D → Dilebarkan → 4 Lingkaran
       </p>
 
       <svg viewBox="0 0 320 268" style={{ width:"100%", display:"block" }}
         xmlns="http://www.w3.org/2000/svg">
         <defs>
+          {/* Original sphere gradient */}
           <radialGradient id="sc-sg" cx="33%" cy="27%" r="65%">
             <stop offset="0%"   stopColor="#e0d9ff" stopOpacity=".95"/>
             <stop offset="35%"  stopColor="#8b5cf6" stopOpacity=".88"/>
             <stop offset="100%" stopColor="#2e1065" stopOpacity=".97"/>
           </radialGradient>
+          {/* Shared specular overlay */}
           <radialGradient id="sc-hi" cx="29%" cy="22%" r="40%">
             <stop offset="0%"   stopColor="#fff" stopOpacity=".40"/>
             <stop offset="100%" stopColor="#fff" stopOpacity="0"/>
           </radialGradient>
+
+          {/* 3D gradients for each piece — userSpaceOnUse so they stay pinned
+              when we use translate(cx,cy); coordinates are LOCAL to piece (0,0 = center) */}
+          {(Object.entries(SC_3D) as [string, typeof SC_3D.TL][]).map(([id, g]) => (
+            <radialGradient key={id} id={g.grad}
+              gradientUnits="userSpaceOnUse"
+              cx={g.fx} cy={g.fy} r={SC_SR * 1.15}>
+              <stop offset="0%"   stopColor={g.c0} stopOpacity=".96"/>
+              <stop offset="42%"  stopColor={g.c1} stopOpacity=".92"/>
+              <stop offset="100%" stopColor={g.c2} stopOpacity=".98"/>
+            </radialGradient>
+          ))}
+
+          {/* Clip for original sphere (for cut lines) */}
           <clipPath id="sc-clip">
             <circle cx={SC_SCX} cy={SC_SCY} r={SC_SR + 2}/>
           </clipPath>
         </defs>
 
-        {/* ══════════════ SPHERE BODY ══════════════ */}
+        {/* ══════════════ BOLA UTUH (fades out) ══════════════ */}
         {sphereOp > 0.01 && (
           <g style={{ opacity: sphereOp }}>
-            {/* Shadow */}
             <ellipse cx={SC_SCX} cy={SC_SCY + SC_SR + 10} rx={SC_SR * 0.72} ry={9}
               fill="rgba(0,0,0,0.35)"/>
-            {/* Main sphere */}
             <circle cx={SC_SCX} cy={SC_SCY} r={SC_SR}
               fill="url(#sc-sg)" stroke="#a78bfa" strokeWidth="1.8"
               className={phase === "idle" ? "sc-glow" : ""}/>
-            {/* Specular */}
             <circle cx={SC_SCX} cy={SC_SCY} r={SC_SR} fill="url(#sc-hi)"/>
-            {/* Equator */}
+            {/* Equator & meridian dashes */}
             <ellipse cx={SC_SCX} cy={SC_SCY} rx={SC_SR} ry={SC_SR * 0.23}
               fill="none" stroke="rgba(196,181,253,.30)" strokeWidth="1" strokeDasharray="5,4"/>
-            {/* Meridian */}
-            <path d={`M${SC_SCX} ${SC_SCY - SC_SR} A${Math.round(SC_SR*0.26)} ${SC_SR} 0 0 1 ${SC_SCX} ${SC_SCY + SC_SR}`}
+            <path d={`M${SC_SCX} ${SC_SCY-SC_SR} A${Math.round(SC_SR*0.26)} ${SC_SR} 0 0 1 ${SC_SCX} ${SC_SCY+SC_SR}`}
               fill="none" stroke="rgba(196,181,253,.25)" strokeWidth="1"/>
             {/* r label */}
             <line x1={SC_SCX} y1={SC_SCY} x2={SC_SCX + SC_SR} y2={SC_SCY}
               stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
             <circle cx={SC_SCX} cy={SC_SCY} r="2.5" fill="#f59e0b"/>
-            <text x={SC_SCX + SC_SR * 0.5} y={SC_SCY - 7}
+            <text x={SC_SCX + SC_SR*0.5} y={SC_SCY - 7}
               fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
 
-            {/* ── Cut lines clipped to sphere ── */}
+            {/* Garis pisau (animasi dashed line) */}
             {p > 0.01 && (
               <g clipPath="url(#sc-clip)">
-                {/* Vertical knife line */}
                 <line x1={SC_SCX} y1={SC_SCY - SC_SR - 3} x2={SC_SCX} y2={SC_SCY + SC_SR + 3}
-                  stroke="#facc15" strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray={`${cutLen}`}
-                  strokeDashoffset={cutLen * (1 - cutV)}
+                  stroke="#facc15" strokeWidth="3.5" strokeLinecap="round"
+                  strokeDasharray={`${cutLen}`} strokeDashoffset={cutLen * (1 - cutV)}
                   opacity={cutV > 0.02 ? 0.95 : 0}
                   className={cutV > 0.05 && cutV < 0.98 ? "sc-knife" : ""}/>
-                {/* Horizontal knife line */}
                 <line x1={SC_SCX - SC_SR - 3} y1={SC_SCY} x2={SC_SCX + SC_SR + 3} y2={SC_SCY}
-                  stroke="#facc15" strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray={`${cutLen}`}
-                  strokeDashoffset={cutLen * (1 - cutH)}
+                  stroke="#facc15" strokeWidth="3.5" strokeLinecap="round"
+                  strokeDasharray={`${cutLen}`} strokeDashoffset={cutLen * (1 - cutH)}
                   opacity={cutH > 0.02 ? 0.95 : 0}
                   className={cutH > 0.05 && cutH < 0.98 ? "sc-knife" : ""}/>
-                {/* Glow at cross point */}
                 {p > 0.12 && p < 0.42 && (
-                  <circle cx={SC_SCX} cy={SC_SCY} r="5"
+                  <circle cx={SC_SCX} cy={SC_SCY} r="6"
                     fill="#facc15" opacity={0.55 * _scClamp((p - 0.12)/0.06, 0, 1)}/>
                 )}
               </g>
             )}
 
-            {/* Idle hint */}
             {phase === "idle" && (
               <text x={SC_SCX} y={SC_SCY + SC_SR + 20}
                 fill="#c4b5fd" fontSize="8.5" fontFamily="monospace" textAnchor="middle">
-                Bola Utuh — tekan tombol untuk memotong
+                Bola 3D — tekan tombol untuk memotong
               </text>
             )}
           </g>
         )}
 
-        {/* ══════════════ 4 POTONGAN (SECTOR → CIRCLE) ══════════════ */}
+        {/* ══════════════ 4 POTONGAN BOLA 3D → LINGKARAN ══════════════ */}
         {pieces.map((pc, i) => pc.pieceOp > 0.005 && (
           <g key={pc.id} style={{ opacity: pc.pieceOp }}>
-            {/* Main sector/circle shape */}
-            <path
-              d={_scSectorPath(pc.cx, pc.cy, SC_CR, pc.baseAngle, pc.sweep)}
-              fill={pc.color}
-              stroke={pc.stroke}
-              strokeWidth="2"
-              strokeLinejoin="round"
-            />
-            {/* Specular sheen on piece */}
-            {pc.sweep > 50 && (
-              <ellipse
-                cx={pc.cx - SC_CR * 0.22} cy={pc.cy - SC_CR * (pc.sweep > 200 ? 0.28 : 0.12)}
-                rx={SC_CR * 0.25} ry={SC_CR * 0.18 * (pc.sweep / 360)}
-                fill="rgba(255,255,255,.22)"/>
-            )}
-            {/* Outer glow ring when fully circular */}
-            {pc.sweep > 340 && (
-              <circle cx={pc.cx} cy={pc.cy} r={SC_CR + 3}
-                fill="none" stroke={pc.stroke} strokeWidth="1"
-                opacity={_scClamp((pc.sweep - 340) / 20, 0, 1) * 0.55}/>
-            )}
-            {/* πr² label */}
-            {pc.labelOp > 0.01 && (
-              <text x={pc.cx} y={pc.cy + 5}
-                fill="var(--icon-color)" fontSize="11" fontFamily="monospace" fontWeight="bold"
-                textAnchor="middle" style={{ opacity: pc.labelOp }}>
-                πr²
-              </text>
-            )}
-            {/* Circle number badge when done */}
-            {isDone && (
-              <text
-                x={pc.cx - SC_CR + 14} y={pc.cy - SC_CR + 16}
-                fill="rgba(255,255,255,.65)" fontSize="9" fontFamily="monospace" fontWeight="bold"
-                textAnchor="middle"
-                className="sc-in"
-                style={{ animationDelay:`${i * 0.08}s` }}>
-                {i + 1}
-              </text>
-            )}
+            {/*  Semua koordinat dalam sistem lokal piece (0,0 = pusat piece)
+                 via translate — gradient userSpaceOnUse ikut terpusat di sini  */}
+            <g transform={`translate(${pc.cx},${pc.cy})`}>
+
+              {/* ── BIDANG POTONG HORIZONTAL (penampang silinder) ── */}
+              {pc.tFace > 0.005 && (
+                <ellipse cx={0} cy={0}
+                  rx={SC_SR * 0.86} ry={SC_SR * 0.20}
+                  fill={pc.color} fillOpacity={0.30}
+                  stroke="rgba(255,255,255,0.42)" strokeWidth="1"
+                  opacity={pc.tFace}/>
+              )}
+              {/* ── BIDANG POTONG VERTIKAL (edge-on, sangat tipis) ── */}
+              {pc.tFace > 0.005 && (
+                <ellipse cx={0} cy={0}
+                  rx={SC_SR * 0.13} ry={SC_SR * 0.86}
+                  fill={pc.color} fillOpacity={0.22}
+                  stroke="rgba(255,255,255,0.30)" strokeWidth="0.8"
+                  opacity={pc.tFace * 0.75}/>
+              )}
+
+              {/* ── BADAN 3D PIECE: sektor melebar 90° → 360° ── */}
+              <path
+                d={_scSectorPath(0, 0, SC_CR, pc.baseAngle, pc.sweep)}
+                fill={`url(#${pc.g3d.grad})`}
+                stroke={pc.stroke}
+                strokeWidth="1.8"
+                strokeLinejoin="round"
+              />
+
+              {/* ── SPECULAR SHEEN (titik cahaya di permukaan lengkung) ── */}
+              {pc.specOp > 0.02 && (
+                <ellipse
+                  cx={pc.specX} cy={pc.specY}
+                  rx={SC_CR * 0.26} ry={pc.specRY}
+                  fill="rgba(255,255,255,.38)"
+                  opacity={pc.specOp}/>
+              )}
+
+              {/* ── OUTLINE RING saat sudah jadi lingkaran penuh ── */}
+              {pc.sweep > 340 && (
+                <circle cx={0} cy={0} r={SC_CR + 3}
+                  fill="none" stroke={pc.stroke} strokeWidth="1.2"
+                  opacity={_scClamp((pc.sweep - 340) / 20, 0, 1) * 0.60}/>
+              )}
+
+              {/* ── LABEL πr² ── */}
+              {pc.labelOp > 0.01 && (
+                <text x={0} y={5}
+                  fill="var(--icon-color)" fontSize="11" fontFamily="monospace"
+                  fontWeight="bold" textAnchor="middle"
+                  style={{ opacity: pc.labelOp }}>πr²</text>
+              )}
+
+              {/* ── NOMOR lingkaran saat selesai ── */}
+              {isDone && (
+                <text x={-SC_CR + 14} y={-SC_CR + 16}
+                  fill="rgba(255,255,255,.65)" fontSize="9" fontFamily="monospace"
+                  fontWeight="bold" textAnchor="middle"
+                  className="sc-in" style={{ animationDelay:`${i * 0.08}s` }}>
+                  {i + 1}
+                </text>
+              )}
+            </g>
           </g>
         ))}
 
-        {/* ══════════════ DONE: "+" connectors + formula ══════════════ */}
+        {/* ══════════════ DONE: + connectors + formula ══════════════ */}
         {isDone && (
           <>
-            {/* + between TL and TR */}
-            <text x="160" y="75" fill="#475569" fontSize="18" fontFamily="monospace"
+            <text x="160" y="75"  fill="#475569" fontSize="18" fontFamily="monospace"
               textAnchor="middle" className="sc-in">+</text>
-            {/* + between TL and BL */}
             <text x="72"  y="145" fill="#475569" fontSize="18" fontFamily="monospace"
               textAnchor="middle" className="sc-in" style={{ animationDelay:"0.08s" }}>+</text>
-            {/* + between BL and BR */}
             <text x="160" y="210" fill="#475569" fontSize="18" fontFamily="monospace"
               textAnchor="middle" className="sc-in" style={{ animationDelay:"0.16s" }}>+</text>
-            {/* Formula bar */}
             <rect x="28" y="235" width="264" height="18" rx="6"
               fill="rgba(251,191,36,.10)" stroke="rgba(251,191,36,.45)" strokeWidth="1.2"
               className="sc-in" style={{ animationDelay:"0.22s" }}/>
@@ -532,7 +568,7 @@ const SphereFruitCutAnimation = () => {
             color:"#4ade80", fontSize:12, fontWeight:"bold",
             cursor: phase !== "idle" ? "not-allowed" : "pointer",
             opacity: phase !== "idle" ? .35 : 1, fontFamily:"inherit", transition:"opacity .2s" }}>
-          🍊 Potong Bola → 4 Lingkaran
+          🍊 Potong Bola 3D → 4 Lingkaran
         </button>
         <button onClick={doReset}
           style={{ padding:"6px 18px", borderRadius:8, border:"1px solid #475569",
