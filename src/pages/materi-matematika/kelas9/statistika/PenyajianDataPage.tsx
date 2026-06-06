@@ -2153,6 +2153,60 @@ const PenyajianDataPage = () => {
                       Tentukan jumlah siswa yang menyukai mangga dan besar sudut sektornya!
                     </p>
                   </div>
+                  {/* Diagram Lingkaran Contoh 1 */}
+                  <div className="bg-slate-900/70 border border-green-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3 text-center">🥧 Diagram Lingkaran — Buah Favorit 100 Siswa</p>
+                    <svg viewBox="0 0 380 200" className="w-full max-w-md mx-auto block" aria-label="Diagram lingkaran buah favorit">
+                      {(() => {
+                        const cx=115, cy=98, r=82;
+                        const slices = [
+                          { label:"Mangga", sub:"35% · 126°", pct:35, color:"#22c55e", highlight:true },
+                          { label:"Jeruk",  sub:"25% · 90°",  pct:25, color:"#f97316" },
+                          { label:"Apel",   sub:"20% · 72°",  pct:20, color:"#3b82f6" },
+                          { label:"Pisang", sub:"15% · 54°",  pct:15, color:"#eab308" },
+                          { label:"Lainnya",sub:"5% · 18°",   pct:5,  color:"#94a3b8" },
+                        ];
+                        let cum=0;
+                        const computed = slices.map(s=>{
+                          const s0=(cum/100)*360-90, s1=((cum+s.pct)/100)*360-90;
+                          cum+=s.pct;
+                          return {...s,s0,s1};
+                        });
+                        const toRad=(d: number)=>d*Math.PI/180;
+                        const arc=(s: typeof computed[0])=>{
+                          const a0=toRad(s.s0), a1=toRad(s.s1);
+                          const x1=cx+r*Math.cos(a0), y1=cy+r*Math.sin(a0);
+                          const x2=cx+r*Math.cos(a1), y2=cy+r*Math.sin(a1);
+                          const lg=(s.s1-s.s0)>180?1:0;
+                          return `M ${cx} ${cy} L ${x1.toFixed(1)} ${y1.toFixed(1)} A ${r} ${r} 0 ${lg} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z`;
+                        };
+                        return (
+                          <>
+                            {computed.map(s=>{
+                              const mid=toRad((s.s0+s.s1)/2);
+                              const lx=cx+r*0.63*Math.cos(mid), ly=cy+r*0.63*Math.sin(mid);
+                              return (
+                                <g key={s.label}>
+                                  <path d={arc(s)} fill={s.color} opacity={s.highlight?1:0.82} stroke="#0f172a" strokeWidth="1.5"/>
+                                  {s.pct>=10 && <text x={lx} y={ly+3} textAnchor="middle" fontSize="9" fill="white" fontWeight="bold">{s.pct}%</text>}
+                                </g>
+                              );
+                            })}
+                            {/* Legend */}
+                            {computed.map((s,i)=>(
+                              <g key={s.label+"leg"}>
+                                <rect x="215" y={14+i*33} width="12" height="12" rx="2" fill={s.color} opacity={s.highlight?1:0.82}/>
+                                <text x="232" y={24+i*33} fontSize="10" fill={s.highlight?"#86efac":"#cbd5e1"} fontWeight={s.highlight?"bold":"normal"}>{s.label}</text>
+                                <text x="232" y={36+i*33} fontSize="8" fill="#64748b">{s.sub}</text>
+                              </g>
+                            ))}
+                            {/* Highlighted slice label arrow */}
+                            <text x="115" y="190" textAnchor="middle" fontSize="8" fill="#4ade80">★ Mangga = 35 siswa, sudut 126°</text>
+                          </>
+                        );
+                      })()}
+                    </svg>
+                  </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
@@ -2176,6 +2230,59 @@ const PenyajianDataPage = () => {
                       Anggaran belanja bulanan sebuah keluarga adalah Rp 4.000.000. Pengeluaran: Makanan Rp 1.600.000, Pendidikan Rp 800.000, Transportasi Rp 600.000, Kesehatan Rp 400.000, Hiburan Rp 400.000, Tabungan sisanya.<br />
                       Tentukan persentase dan sudut sektor tabungan!
                     </p>
+                  </div>
+                  {/* Diagram Lingkaran Contoh 2 */}
+                  <div className="bg-slate-900/70 border border-yellow-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3 text-center">🥧 Diagram Lingkaran — Anggaran Belanja Bulanan</p>
+                    <svg viewBox="0 0 400 215" className="w-full max-w-md mx-auto block" aria-label="Diagram lingkaran anggaran belanja">
+                      {(() => {
+                        const cx=115, cy=103, r=85;
+                        const slices = [
+                          { label:"Makanan",     sub:"40% · Rp1,6jt", pct:40, color:"#ef4444" },
+                          { label:"Pendidikan",  sub:"20% · Rp800rb",  pct:20, color:"#3b82f6" },
+                          { label:"Transportasi",sub:"15% · Rp600rb",  pct:15, color:"#f97316" },
+                          { label:"Kesehatan",   sub:"10% · Rp400rb",  pct:10, color:"#22c55e" },
+                          { label:"Hiburan",     sub:"10% · Rp400rb",  pct:10, color:"#a855f7" },
+                          { label:"Tabungan",    sub:"5% · 18° ★",     pct:5,  color:"#eab308", highlight:true },
+                        ];
+                        let cum=0;
+                        const computed=slices.map(s=>{
+                          const s0=(cum/100)*360-90, s1=((cum+s.pct)/100)*360-90;
+                          cum+=s.pct;
+                          return {...s,s0,s1};
+                        });
+                        const toRad=(d: number)=>d*Math.PI/180;
+                        const arc=(s: typeof computed[0])=>{
+                          const a0=toRad(s.s0),a1=toRad(s.s1);
+                          const x1=cx+r*Math.cos(a0),y1=cy+r*Math.sin(a0);
+                          const x2=cx+r*Math.cos(a1),y2=cy+r*Math.sin(a1);
+                          const lg=(s.s1-s.s0)>180?1:0;
+                          return `M ${cx} ${cy} L ${x1.toFixed(1)} ${y1.toFixed(1)} A ${r} ${r} 0 ${lg} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z`;
+                        };
+                        return (
+                          <>
+                            {computed.map(s=>{
+                              const mid=toRad((s.s0+s.s1)/2);
+                              const lx=cx+r*0.64*Math.cos(mid),ly=cy+r*0.64*Math.sin(mid);
+                              return (
+                                <g key={s.label}>
+                                  <path d={arc(s)} fill={s.color} opacity={s.highlight?1:0.82} stroke="#0f172a" strokeWidth="1.5"/>
+                                  {s.pct>=12 && <text x={lx} y={ly+3} textAnchor="middle" fontSize="9" fill="white" fontWeight="bold">{s.pct}%</text>}
+                                </g>
+                              );
+                            })}
+                            {computed.map((s,i)=>(
+                              <g key={s.label+"leg"}>
+                                <rect x="220" y={8+i*33} width="12" height="12" rx="2" fill={s.color} opacity={s.highlight?1:0.82}/>
+                                <text x="237" y={18+i*33} fontSize="9.5" fill={s.highlight?"#fef08a":"#cbd5e1"} fontWeight={s.highlight?"bold":"normal"}>{s.label}</text>
+                                <text x="237" y={30+i*33} fontSize="8" fill="#64748b">{s.sub}</text>
+                              </g>
+                            ))}
+                            <text x="115" y="202" textAnchor="middle" fontSize="8" fill="#fbbf24">★ Tabungan = Rp200.000 = 5%, sudut 18°</text>
+                          </>
+                        );
+                      })()}
+                    </svg>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
@@ -2203,6 +2310,58 @@ const PenyajianDataPage = () => {
                       (a) Persentase dan jumlah siswa tiap kategori.<br />
                       (b) Verifikasi bahwa total sudut = 360°.
                     </p>
+                  </div>
+                  {/* Diagram Lingkaran Contoh 3 */}
+                  <div className="bg-slate-900/70 border border-red-500/20 rounded-xl p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3 text-center">🥧 Diagram Lingkaran — Pelajaran Favorit 300 Siswa</p>
+                    <svg viewBox="0 0 390 205" className="w-full max-w-md mx-auto block" aria-label="Diagram lingkaran pelajaran favorit">
+                      {(() => {
+                        const cx=112, cy=98, r=82;
+                        const slices = [
+                          { label:"Bhs.Indo",  sub:"108° · 30% · 90 siswa", deg:108, color:"#f97316" },
+                          { label:"Matematika",sub:"90° · 25% · 75 siswa",  deg:90,  color:"#22d3ee" },
+                          { label:"IPA",       sub:"72° · 20% · 60 siswa",  deg:72,  color:"#22c55e" },
+                          { label:"IPS",       sub:"54° · 15% · 45 siswa",  deg:54,  color:"#a855f7" },
+                          { label:"Seni",      sub:"36° · 10% · 30 siswa",  deg:36,  color:"#f43f5e" },
+                        ];
+                        let cumDeg=0;
+                        const computed=slices.map(s=>{
+                          const s0=cumDeg-90, s1=cumDeg+s.deg-90;
+                          cumDeg+=s.deg;
+                          return {...s, s0, s1, pct:Math.round(s.deg/360*100)};
+                        });
+                        const toRad=(d: number)=>d*Math.PI/180;
+                        const arc=(s: typeof computed[0])=>{
+                          const a0=toRad(s.s0),a1=toRad(s.s1);
+                          const x1=cx+r*Math.cos(a0),y1=cy+r*Math.sin(a0);
+                          const x2=cx+r*Math.cos(a1),y2=cy+r*Math.sin(a1);
+                          const lg=(s.s1-s.s0)>180?1:0;
+                          return `M ${cx} ${cy} L ${x1.toFixed(1)} ${y1.toFixed(1)} A ${r} ${r} 0 ${lg} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z`;
+                        };
+                        return (
+                          <>
+                            {computed.map(s=>{
+                              const mid=toRad((s.s0+s.s1)/2);
+                              const lx=cx+r*0.64*Math.cos(mid), ly=cy+r*0.64*Math.sin(mid);
+                              return (
+                                <g key={s.label}>
+                                  <path d={arc(s)} fill={s.color} opacity="0.88" stroke="#0f172a" strokeWidth="1.5"/>
+                                  {s.pct>=15 && <text x={lx} y={ly+3} textAnchor="middle" fontSize="9" fill="white" fontWeight="bold">{s.pct}%</text>}
+                                </g>
+                              );
+                            })}
+                            {computed.map((s,i)=>(
+                              <g key={s.label+"leg"}>
+                                <rect x="212" y={10+i*37} width="12" height="12" rx="2" fill={s.color} opacity="0.88"/>
+                                <text x="229" y={21+i*37} fontSize="9.5" fill="#e2e8f0" fontWeight="bold">{s.label}</text>
+                                <text x="229" y={33+i*37} fontSize="7.5" fill="#64748b">{s.sub}</text>
+                              </g>
+                            ))}
+                            <text x="112" y="196" textAnchor="middle" fontSize="7.5" fill="#64748b">Total: 90+72+108+54+36 = 360° ✓</text>
+                          </>
+                        );
+                      })()}
+                    </svg>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
