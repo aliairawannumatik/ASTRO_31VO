@@ -184,6 +184,28 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
         {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">🎉 Lengkap!</span>}
       </div>
 
+      {/* ── Koleksi fungsi (di atas diagram sebagai pembanding) ── */}
+      {list.length > 0 && (
+        <div className="bg-slate-900/50 border border-white/10 rounded-xl p-3">
+          <p className="text-[11px] font-bold text-yellow-300 mb-2 flex items-center gap-1">
+            <Trophy className="w-3 h-3" /> Fungsi {mode==="AtoB"?"A→B":"B→A"} yang sudah dibuat ({list.length}/{maxF}):
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {list.map((m, i) => <MiniDiag key={i} mapping={m} domain={domain} codomain={codomain} idx={i} />)}
+            {Array.from({ length: maxF - list.length }).map((_, i) => (
+              <div key={i} className="w-[110px] h-[100px] rounded-lg border border-dashed border-white/10 bg-slate-900/30 flex items-center justify-center">
+                <span className="text-white/10 text-lg">?</span>
+              </div>
+            ))}
+          </div>
+          {done && (
+            <div className="mt-2 bg-green-900/30 border border-green-500/30 rounded-lg p-2 text-center">
+              <p className="text-green-300 font-bold text-xs">🎉 Terbukti! Banyak fungsi {mode==="AtoB"?"A→B = 3² = 9":"B→A = 2³ = 8"}</p>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* SVG Diagram */}
       <div className="flex justify-center">
         <div className="bg-slate-900/60 rounded-xl border border-white/10 p-2 select-none w-full" style={{ maxWidth: SVG_W + 16 }}>
@@ -268,28 +290,6 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
           <Trophy className="w-3.5 h-3.5" /> Simpan ke Koleksi
         </button>
       </div>
-
-      {/* Mini diagram gallery */}
-      {list.length > 0 && (
-        <div>
-          <p className="text-[11px] font-bold text-yellow-300 mb-2 flex items-center gap-1">
-            <Trophy className="w-3 h-3" /> Fungsi {mode==="AtoB"?"A→B":"B→A"} yang ditemukan ({list.length}/{maxF}):
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {list.map((m, i) => <MiniDiag key={i} mapping={m} domain={domain} codomain={codomain} idx={i} />)}
-            {Array.from({ length: maxF - list.length }).map((_, i) => (
-              <div key={i} className="w-[110px] h-[100px] rounded-lg border border-dashed border-white/10 bg-slate-900/30 flex items-center justify-center">
-                <span className="text-white/10 text-lg">?</span>
-              </div>
-            ))}
-          </div>
-          {done && (
-            <div className="mt-3 bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
-              <p className="text-green-300 font-bold text-xs">🎉 Terbukti! Banyak fungsi {mode==="AtoB"?"A→B = 3² = 9":"B→A = 2³ = 8"}</p>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 };
