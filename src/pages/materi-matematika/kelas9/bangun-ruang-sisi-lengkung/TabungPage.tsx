@@ -1175,8 +1175,8 @@ const sections: Sec[] = [
                 ["Jari-jari", "r",        "Pusat → tepi lingkaran"],
                 ["Diameter",  "d = 2r",   "Garis tengah lingkaran"],
                 ["Tinggi",    "t",        "Jarak tegak lurus alas ke tutup"],
-                ["Alas/Tutup","πr²",      "Luas tiap lingkaran"],
-                ["Selimut",   "2πr × t",  "Permukaan lengkung (kulit)"],
+                ["Alas/Tutup","L alas = πr²",      "Luas tiap lingkaran"],
+                ["Selimut",   "L selimut = 2πrt",  "Permukaan lengkung (kulit)"],
               ].map(([u, s, k], i) => (
                 <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{u}</td>
