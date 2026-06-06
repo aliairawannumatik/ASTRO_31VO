@@ -704,6 +704,83 @@ const PenyajianDataPage = () => {
                   </div>
                 </div>
 
+                {/* Sedang 2 */}
+                <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">
+                      Data berikut adalah hasil pencatatan banyak anak dalam keluarga pada sebuah desa.
+                    </p>
+                    <div className="overflow-x-auto">
+                      <table className="font-body text-sm text-cyan-300 font-semibold border-collapse">
+                        <tbody>
+                          {[
+                            ["1","3","2","3","5","4","3","5","1","2"],
+                            ["4","2","2","3","1","6","5","2","1","3"],
+                            ["3","4","5","2","3","4","6","5","3","4"],
+                            ["2","4","2","3","2","4","1","2","3","1"],
+                          ].map((row, i) => (
+                            <tr key={i}>
+                              {row.map((val, j) => (
+                                <td key={j} className="px-3 py-1 text-center">{val}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="font-body text-sm text-white">
+                      <strong>a.</strong> Buatlah tabel distribusi frekuensinya!
+                    </p>
+                  </div>
+                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Tentukan nilai-nilai yang berbeda → 1, 2, 3, 4, 5, 6</p>
+                      <p><strong>Langkah 2:</strong> Hitung frekuensi kemunculan tiap nilai dari 40 data:</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body">
+                          <thead>
+                            <tr className="bg-slate-700/40">
+                              <th className="px-3 py-1.5 text-left text-white/70">Banyak Anak (x)</th>
+                              <th className="px-3 py-1.5 text-center text-white/70">Turus</th>
+                              <th className="px-3 py-1.5 text-center text-white/70">Frekuensi (f)</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-700/30">
+                            {[
+                              ["1","|||| |","6"],
+                              ["2","|||| ||||","10"],
+                              ["3","|||| ||||","10"],
+                              ["4","|||| ||","7"],
+                              ["5","||||","5"],
+                              ["6","||","2"],
+                            ].map(([x,t,f],i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : ""}>
+                                <td className="px-3 py-1.5 text-yellow-300 font-bold">{x}</td>
+                                <td className="px-3 py-1.5 text-center text-cyan-300 tracking-widest">{t}</td>
+                                <td className="px-3 py-1.5 text-center text-white font-bold">{f}</td>
+                              </tr>
+                            ))}
+                            <tr className="border-t border-slate-500/50 font-bold bg-slate-700/20">
+                              <td className="px-3 py-1.5 text-yellow-300">Jumlah</td>
+                              <td className="px-3 py-1.5 text-center">—</td>
+                              <td className="px-3 py-1.5 text-center text-yellow-300">40</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1.5">
+                        <p>Total frekuensi = <InlineMath math="6 + 10 + 10 + 7 + 5 + 2 = \mathbf{40}" /> ✓ (sama dengan banyak data)</p>
+                        <p>Nilai yang paling sering muncul (Modus) = <span className="text-yellow-400 font-bold">2 dan 3</span> (masing-masing f = 10)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
