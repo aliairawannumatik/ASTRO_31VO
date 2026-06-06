@@ -1472,22 +1472,29 @@ const luasExamples: Ex[] = [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah kaleng susu berbentuk tabung dengan jari-jari alas <InlineMath math="7 \text{ cm}" /> dan tinggi <InlineMath math="20 \text{ cm}" />.</p>
-        <p>Hitunglah luas permukaan kaleng tersebut! (gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+      <div className="text-sm text-white/85 font-body space-y-2">
+        <p>Sebuah tabung memiliki jari-jari alas <InlineMath math="7 \text{ cm}" /> dan tinggi <InlineMath math="10 \text{ cm}" />.</p>
+        <p>Hitunglah <strong className="text-purple-300">luas selimut</strong> tabung tersebut!</p>
+        <p className="text-xs text-white/50">(gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-green-400 font-semibold">Diketahui: <InlineMath math="r = 7 \text{ cm}, \; t = 20 \text{ cm}" /></p>
+        <div className="bg-slate-800/60 border border-slate-600/60 rounded p-3 text-xs space-y-1">
+          <p className="text-green-300 font-semibold mb-2">Diketahui:</p>
+          <p className="text-white/70">• Jari-jari: <InlineMath math="r = 7 \text{ cm}" /></p>
+          <p className="text-white/70">• Tinggi: <InlineMath math="t = 10 \text{ cm}" /></p>
+          <p className="text-white/70">• <InlineMath math="\pi = \frac{22}{7}" /></p>
+        </div>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
-          <BlockMath math="L = 2\pi r^2 + 2\pi r \cdot t" />
-          <BlockMath math="L = 2 \times \frac{22}{7} \times 7^2 + 2 \times \frac{22}{7} \times 7 \times 20" />
-          <BlockMath math="L = 2 \times \frac{22}{7} \times 49 + 2 \times 22 \times 20" />
-          <BlockMath math="L = 2 \times 154 + 880 = 308 + 880" />
+          <p className="text-white/60 mb-1">Gunakan rumus luas selimut tabung:</p>
+          <BlockMath math="L_{\text{selimut}} = 2\pi r t" />
+          <BlockMath math="L_{\text{selimut}} = 2 \times \frac{22}{7} \times 7 \times 10" />
+          <BlockMath math="L_{\text{selimut}} = 2 \times 22 \times 10" />
+          <BlockMath math="L_{\text{selimut}} = 440 \text{ cm}^2" />
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-          <p className="text-green-300 font-semibold">✅ Luas permukaan = <InlineMath math="1.188 \text{ cm}^2" /></p>
+          <p className="text-green-300 font-semibold">✅ Luas selimut tabung = <InlineMath math="440 \text{ cm}^2" /></p>
         </div>
       </div>
     ),
