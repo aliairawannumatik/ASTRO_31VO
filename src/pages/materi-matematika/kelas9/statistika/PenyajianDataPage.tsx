@@ -526,7 +526,7 @@ const PenyajianDataPage = () => {
                     </p>
                     <p className="font-body text-sm text-white">
                       Buat tabel distribusi frekuensi data tunggal, lalu tentukan:<br />
-                      (a) Total frekuensi &nbsp; (b) Modus (nilai yang paling sering muncul)
+                      (a) Total frekuensi &nbsp; (b) Nilai yang paling sering muncul dari tabel
                     </p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
@@ -567,7 +567,7 @@ const PenyajianDataPage = () => {
                       </div>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1.5">
                         <p>(a) Total frekuensi = <InlineMath math="2 + 3 + 2 + 1 + 2 = \mathbf{10}" /> ✓ (sama dengan banyak data)</p>
-                        <p>(b) Modus = nilai dengan frekuensi terbanyak = <span className="text-green-400 font-bold">75</span> (muncul 3 kali)</p>
+                        <p>(b) Nilai yang paling sering muncul = <span className="text-green-400 font-bold">75</span> (muncul 3 kali, frekuensi tertinggi)</p>
                       </div>
                     </div>
                   </div>
@@ -644,7 +644,6 @@ const PenyajianDataPage = () => {
                       </div>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1.5">
                         <p>Total frekuensi = <InlineMath math="6 + 10 + 10 + 7 + 5 + 2 = \mathbf{40}" /> ✓ (sama dengan banyak data)</p>
-                        <p>Nilai yang paling sering muncul (Modus) = <span className="text-yellow-400 font-bold">2 dan 3</span> (masing-masing f = 10)</p>
                       </div>
                     </div>
                   </div>
@@ -666,8 +665,7 @@ const PenyajianDataPage = () => {
                     <p className="font-body text-sm text-white mt-1">
                       Buat tabel distribusi frekuensi data tunggal lengkap dengan frekuensi kumulatif (fk), lalu tentukan:<br />
                       (a) Persentase siswa yang mendapat nilai ≥ 80 &nbsp;
-                      (b) Banyak siswa yang mendapat nilai di bawah 80 &nbsp;
-                      (c) Modus
+                      (b) Banyak siswa yang mendapat nilai di bawah 80
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
@@ -709,9 +707,8 @@ const PenyajianDataPage = () => {
                         <BlockMath math="\text{Persentase} = \frac{12}{25} \times 100\% = \mathbf{48\%}" />
                         <p><strong>(b)</strong> Siswa nilai &lt; 80 = f(60) + f(70) = 4 + 9 = <span className="text-red-400 font-bold">13 siswa</span></p>
                         <p className="text-xs text-white/50 italic">(atau: fk nilai 70 = 13 siswa)</p>
-                        <p><strong>(c)</strong> Modus = nilai dengan frekuensi terbanyak = <span className="text-red-400 font-bold">70</span> (f = 9)</p>
                       </div>
-                      <p><strong className="text-primary">48% siswa nilai ≥ 80; 13 siswa nilai &lt; 80; Modus = 70</strong></p>
+                      <p><strong className="text-primary">48% siswa nilai ≥ 80; 13 siswa nilai &lt; 80</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1976,7 +1973,7 @@ const PenyajianDataPage = () => {
                     </div>
                   </div>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Kelebihan utama: data asli tetap terlihat, mudah menentukan nilai minimum, maksimum, median, dan modus secara langsung!
+                    Kelebihan utama: data asli tetap terlihat, mudah menentukan nilai minimum, maksimum, dan median secara langsung!
                   </p>
                 </div>
 
@@ -2024,10 +2021,6 @@ const PenyajianDataPage = () => {
                       <div className="bg-red-900/30 rounded p-2 text-center">
                         <p className="text-white/50">Maksimum</p>
                         <p className="text-red-300 font-bold text-base">95</p>
-                      </div>
-                      <div className="bg-yellow-900/30 rounded p-2 text-center">
-                        <p className="text-white/50">Modus</p>
-                        <p className="text-yellow-300 font-bold text-base">73 & 78</p>
                       </div>
                       <div className="bg-blue-900/30 rounded p-2 text-center">
                         <p className="text-white/50">Median</p>
@@ -2261,7 +2254,7 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
-                      Dari diagram batang daun berikut, tentukan nilai minimum, maksimum, modus, dan median!
+                      Dari diagram batang daun berikut, tentukan nilai minimum, maksimum, dan median!
                     </p>
                     <div className="bg-slate-900/60 rounded-lg p-3 mt-2 font-mono text-sm">
                       <div className="flex gap-2 text-white/40 text-xs mb-1"><span className="w-14 text-right">Batang</span><span className="mx-2">|</span><span>Daun</span></div>
@@ -2281,7 +2274,6 @@ const PenyajianDataPage = () => {
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
                         <p>• Minimum = <span className="text-green-400 font-semibold">43</span></p>
                         <p>• Maksimum = <span className="text-red-400 font-semibold">76</span></p>
-                        <p>• Modus = <span className="text-yellow-400 font-semibold">47 dan 55</span> (masing-masing muncul 2 kali)</p>
                         <p>• Median = datum ke-<InlineMath math="\frac{13+1}{2} = 7" /> = <span className="text-blue-400 font-semibold">55</span></p>
                       </div>
                     </div>
@@ -2356,7 +2348,7 @@ const PenyajianDataPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
-                    { emoji: "🌿", title: "Batang Daun", desc: "Data mentah tetap terlihat. Mudah baca min, maks, median, modus.", color: "border-green-500/40 bg-green-900/20" },
+                    { emoji: "🌿", title: "Batang Daun", desc: "Data mentah tetap terlihat. Mudah baca min, maks, dan median.", color: "border-green-500/40 bg-green-900/20" },
                     { emoji: "📊", title: "Diagram Batang", desc: "Perbandingan kategori. Batang tegak/mendatar, tinggi = frekuensi.", color: "border-blue-500/40 bg-blue-900/20" },
                     { emoji: "📈", title: "Diagram Garis", desc: "Tren data dari waktu ke waktu. Titik dihubungkan garis.", color: "border-purple-500/40 bg-purple-900/20" },
                     { emoji: "🥧", title: "Diagram Lingkaran", desc: "Proporsi/persentase. Sudut = (f/total) × 360°.", color: "border-orange-500/40 bg-orange-900/20" },
@@ -2371,7 +2363,7 @@ const PenyajianDataPage = () => {
                 </div>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-cyan-200">
-                    <strong>Kamu sudah menguasai Penyajian Data! 🎉</strong> Selanjutnya, lanjut ke materi Ukuran Pemusatan Data untuk belajar menghitung rata-rata, median, dan modus secara mendalam! 🚀
+                    <strong>Kamu sudah menguasai Penyajian Data! 🎉</strong> Selanjutnya, lanjut ke materi Ukuran Pemusatan Data untuk belajar menghitung rata-rata dan median secara mendalam! 🚀
                   </p>
                 </div>
               </div>
