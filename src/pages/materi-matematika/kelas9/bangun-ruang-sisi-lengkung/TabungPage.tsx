@@ -1596,23 +1596,61 @@ const volExamples: Ex[] = [
   {
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah tangki air berbentuk tabung memiliki diameter <InlineMath math="1{,}4 \text{ m}" /> dan tinggi <InlineMath math="2 \text{ m}" />.</p>
-        <p>Jika tangki terisi penuh, berapa liter air yang tersimpan?</p>
-        <p className="text-xs text-white/50">(π = 22/7, dan 1 m³ = 1.000 liter)</p>
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <p>Sebuah drum minyak berbentuk tabung berjari-jari <InlineMath math="35 \text{ cm}" /> dan tinggi <InlineMath math="1{,}2 \text{ m}" />. Jika harga minyak <strong className="text-yellow-300">Rp3.200,00</strong> per liter, maka harga 1 drum minyak adalah ….</p>
+        <p className="text-xs text-white/50">(gunakan π = <sup>22</sup>⁄<sub>7</sub> dan 1 liter = 1.000 cm³)</p>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "Rp1.478.400,00" },
+            { opt: "B", label: "Rp1.479.200,00" },
+            { opt: "C", label: "Rp1.558.400,00" },
+            { opt: "D", label: "Rp1.594.400,00" },
+          ].map(({ opt, label }) => (
+            <div key={opt} className="flex items-center gap-2 bg-slate-800/60 rounded-lg px-3 py-2">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-slate-700 text-white/70 font-bold text-xs shrink-0">{opt}</span>
+              <span className="text-white/80 text-xs">{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     ),
     answer: (
-      <div className="space-y-2 text-sm font-body">
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
-          <p className="text-white/70">Cari jari-jari: <InlineMath math="r = \frac{1{,}4}{2} = 0{,}7 \text{ m}" /></p>
-          <BlockMath math="V = \pi r^2 \cdot t = \frac{22}{7} \times (0{,}7)^2 \times 2" />
-          <BlockMath math="V = \frac{22}{7} \times 0{,}49 \times 2 = \frac{22}{7} \times 0{,}98" />
-          <BlockMath math="V = \frac{22 \times 0{,}98}{7} = \frac{21{,}56}{7} = 3{,}08 \text{ m}^3" />
-          <BlockMath math="V = 3{,}08 \times 1.000 = 3.080 \text{ liter}" />
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-yellow-400 font-semibold">Langkah 1 — Samakan satuan tinggi ke cm:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
+          <BlockMath math="t = 1{,}2 \text{ m} = 120 \text{ cm}" />
         </div>
-        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-          <p className="text-yellow-300 font-semibold text-xs">✅ Tangki menampung <strong>3.080 liter</strong> air</p>
+        <p className="text-yellow-400 font-semibold">Langkah 2 — Hitung volume drum:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+          <BlockMath math="V = \pi r^2 t = \frac{22}{7} \times 35^2 \times 120" />
+          <BlockMath math="V = \frac{22}{7} \times 1.225 \times 120" />
+          <BlockMath math="V = 22 \times 175 \times 120" />
+          <BlockMath math="V = 462.000 \text{ cm}^3" />
+        </div>
+        <p className="text-yellow-400 font-semibold">Langkah 3 — Konversi ke liter:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
+          <BlockMath math="V = \frac{462.000}{1.000} = 462 \text{ liter}" />
+        </div>
+        <p className="text-yellow-400 font-semibold">Langkah 4 — Hitung harga minyak:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
+          <BlockMath math="\text{Harga} = 462 \times \text{Rp3.200,00} = \text{Rp1.478.400,00}" />
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          {[
+            { opt: "A", label: "Rp1.478.400,00", correct: true },
+            { opt: "B", label: "Rp1.479.200,00", correct: false },
+            { opt: "C", label: "Rp1.558.400,00", correct: false },
+            { opt: "D", label: "Rp1.594.400,00", correct: false },
+          ].map(({ opt, label, correct }) => (
+            <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 border ${correct ? "bg-green-950/60 border-green-600/60" : "bg-slate-800/40 border-slate-700/40 opacity-50"}`}>
+              <span className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs shrink-0 ${correct ? "bg-green-600 text-white" : "bg-slate-700 text-white/50"}`}>{opt}</span>
+              <span className={`text-xs font-semibold ${correct ? "text-green-300" : "text-white/50"}`}>{label} {correct && "✓"}</span>
+            </div>
+          ))}
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs">
+          <p className="text-yellow-300 font-semibold">✅ Jawaban: A. Rp1.478.400,00</p>
+          <p className="text-white/60 mt-1">Volume 462 liter × Rp3.200,00/liter = Rp1.478.400,00</p>
         </div>
       </div>
     ),
