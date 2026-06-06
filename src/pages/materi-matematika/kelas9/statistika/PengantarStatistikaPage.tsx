@@ -66,8 +66,28 @@ const PengantarStatistikaPage = () => {
                 </p>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-cyan-200 leading-relaxed">
-                    Statistika ada di mana-mana: laporan cuaca, hasil survei, hasil ujian nasional, grafik penjualan, hingga data vaksinasi. Menguasai statistika berarti kamu mampu membaca dan mengambil keputusan dari data secara cerdas! 📊🚀
+                    Statistika ada di mana-mana: laporan cuaca, hasil survei, hasil ujian nasional, grafik penjualan, <strong className="text-cyan-300">harga saham</strong>, hingga data vaksinasi. Menguasai statistika berarti kamu mampu membaca dan mengambil keputusan dari data secara cerdas! 📊🚀
                   </p>
+                </div>
+                <div className="rounded-xl overflow-hidden border border-slate-600/40 bg-slate-800/60">
+                  <img
+                    src="/harga-saham-bbca.jpeg"
+                    alt="Grafik Harga Saham BBCA (Bank Central Asia) — contoh nyata penggunaan statistika dalam dunia keuangan"
+                    className="w-full object-cover"
+                  />
+                  <div className="px-4 py-2 bg-slate-900/70">
+                    <p className="font-body text-xs text-slate-400 text-center leading-relaxed">
+                      📈 <strong className="text-slate-300">Grafik harga saham BBCA (Bank Central Asia)</strong> — contoh nyata data statistika di dunia keuangan.{" "}
+                      <a
+                        href="https://pintarsaham.id/harga-wajar-saham-bbca-update-kuartal-1-2024/#google_vignette"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cyan-400 underline hover:text-cyan-300 transition-colors"
+                      >
+                        Sumber: pintarsaham.id
+                      </a>
+                    </p>
+                  </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
