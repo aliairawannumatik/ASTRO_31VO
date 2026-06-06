@@ -6,10 +6,11 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Star }
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import AngryBirdParabola from "@/components/AngryBirdParabola";
 
 const PenerapanNilaiMaksMinPage = () => {
   const navigate = useNavigate();
-  const allSections = ["intro", "teori", "contoh"];
+  const allSections = ["intro", "game", "teori", "contoh"];
   const [expandedSections, setExpandedSections] = useState<string[]>(allSections);
 
   const toggleSection = (section: string) => {
@@ -121,6 +122,21 @@ const PenerapanNilaiMaksMinPage = () => {
                 <Box color="yellow">
                   <p className="font-body text-sm"><strong>💡 Strategi Utama:</strong> Nyatakan besaran yang ingin dioptimalkan sebagai fungsi kuadrat satu variabel, lalu cari titik puncaknya menggunakan <InlineMath math="x_p = -\dfrac{b}{2a}" />.</p>
                 </Box>
+              </div>
+            )}
+          </div>
+
+          {/* ANGRY BIRD GAME */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="game" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400"
+              title="🐦 Simulasi: Angry Math Bird — Lintasan Parabola!" />
+            {expandedSections.includes("game") && (
+              <div className="px-4 pb-5 space-y-3">
+                <p className="font-body text-xs text-white/60 leading-relaxed">
+                  Tarik burung pada ketapel dan lepaskan! Lintasannya mengikuti <strong className="text-orange-300">fungsi kuadrat h(x) = ax² + bx + c</strong>.
+                  Perhatikan bagaimana nilai <em>a</em>, <em>b</em>, <em>c</em> berubah tergantung sudut dan kekuatan lemparanmu.
+                </p>
+                <AngryBirdParabola />
               </div>
             )}
           </div>
