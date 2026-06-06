@@ -2731,6 +2731,157 @@ const DilatasisPage = () => {
 
         </div>
 
+          {/* RANGKUMAN, TIPS & KESIMPULAN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <div className="flex items-center gap-3 px-5 py-4 border-b border-border" style={{ borderLeftColor: "#f97316", borderLeftWidth: 4 }}>
+              <Target className="w-5 h-5 text-orange-400" />
+              <p className="font-body font-bold text-sm text-white">🎯 Rangkuman, Tips &amp; Kesimpulan</p>
+            </div>
+            <div className="px-5 pb-5 space-y-5">
+
+              {/* ── Rumus Kunci ── */}
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest">📐 Rumus Kunci Dilatasi</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-3">
+                    <p className="font-body text-xs text-cyan-400 font-bold mb-1.5">📌 Pusat O(0, 0)</p>
+                    <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-3 py-1.5 text-center">A(x,y) → A'(kx, ky)</p>
+                    <p className="font-body text-xs text-white/60 mt-1.5">k = faktor skala</p>
+                  </div>
+                  <div className="bg-gradient-to-br from-purple-900/50 to-indigo-900/50 border border-purple-500/30 rounded-xl p-3">
+                    <p className="font-body text-xs text-purple-400 font-bold mb-1.5">📌 Pusat P(a, b)</p>
+                    <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-2 py-1.5 text-center text-xs">x'=a+k(x−a), y'=b+k(y−b)</p>
+                    <p className="font-body text-xs text-white/60 mt-1.5">Geser-skala-balik</p>
+                  </div>
+                  <div className="bg-gradient-to-br from-green-900/50 to-teal-900/50 border border-green-500/30 rounded-xl p-3">
+                    <p className="font-body text-xs text-green-400 font-bold mb-2">📌 Jenis faktor skala k</p>
+                    <div className="space-y-1.5 font-body text-xs text-white/80">
+                      <div className="flex justify-between"><span className="text-green-300">k &gt; 1</span><span>Diperbesar, searah</span></div>
+                      <div className="flex justify-between"><span className="text-yellow-300">0 &lt; k &lt; 1</span><span>Diperkecil, searah</span></div>
+                      <div className="flex justify-between"><span className="text-rose-300">k &lt; 0</span><span>Berubah sisi + dibalik</span></div>
+                      <div className="flex justify-between"><span className="text-slate-400">k = 1</span><span>Identitas (sama)</span></div>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-500/30 rounded-xl p-3">
+                    <p className="font-body text-xs text-slate-300 font-bold mb-2">📌 Sifat-sifat Dilatasi</p>
+                    <div className="grid grid-cols-2 gap-2 text-center">
+                      {[
+                        { icon: "📐", label: "Bentuk", val: "Tetap" },
+                        { icon: "📏", label: "Ukuran", val: "Berubah" },
+                        { icon: "🔄", label: "Orientasi", val: "k>0: Tetap" },
+                        { icon: "⚖️", label: "Luas", val: "×k²" },
+                      ].map(item => (
+                        <div key={item.label} className="bg-slate-900/50 rounded-lg p-1.5">
+                          <p className="text-sm">{item.icon}</p>
+                          <p className="font-body text-xs text-white/60 leading-tight">{item.label}</p>
+                          <p className="font-body text-xs font-bold text-yellow-400 leading-tight">{item.val}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Tips & Trik ── */}
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">💡 Tips &amp; Trik</p>
+                <div className="space-y-2">
+                  {[
+                    {
+                      num: "1",
+                      color: "bg-cyan-500/10 border-cyan-500/30 text-cyan-300",
+                      title: "Luas bayangan = k² × luas asal",
+                      body: "Jika faktor skala k = 3, maka luas bangun bayangan = 9× luas asli. Sering muncul di soal HOTS — jangan lupa kuadratkan k!",
+                    },
+                    {
+                      num: "2",
+                      color: "bg-purple-500/10 border-purple-500/30 text-purple-300",
+                      title: "Dilatasi pusat P(a,b): geser-skala-balik",
+                      body: "Geser titik ke pusat O dulu: (x−a, y−b). Kalikan dengan k. Geser balik: tambah (a,b). Langkah ini berlaku untuk semua sudut dan pusat.",
+                    },
+                    {
+                      num: "3",
+                      color: "bg-green-500/10 border-green-500/30 text-green-300",
+                      title: "Gradien garis tidak berubah!",
+                      body: "Dilatasi selalu menghasilkan garis bayangan yang SEJAJAR dengan garis asli (gradien sama). Hanya intercept (c) yang berubah.",
+                    },
+                    {
+                      num: "4",
+                      color: "bg-rose-500/10 border-rose-500/30 text-rose-300",
+                      title: "k negatif: bayangan ada di sisi berlawanan",
+                      body: "Jika k = −2, bayangan berada di sisi berlawanan dari pusat dilatasi. Gunakan rumus yang sama — tanda negatif sudah otomatis mengurus posisinya.",
+                    },
+                    {
+                      num: "5",
+                      color: "bg-amber-500/10 border-amber-500/30 text-amber-300",
+                      title: "Komposisi dilatasi: kalikan faktor skala",
+                      body: "Dilatasi [O, k₁] lalu [O, k₂] = Dilatasi [O, k₁×k₂]. Kalikan saja kedua faktor skala untuk mendapatkan hasil komposisi.",
+                    },
+                  ].map(tip => (
+                    <div key={tip.num} className={`flex gap-3 items-start border rounded-xl p-3 ${tip.color.split(" ").slice(0,2).join(" ")}`}>
+                      <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border ${tip.color}`}>{tip.num}</span>
+                      <div>
+                        <p className={`font-body text-sm font-bold ${tip.color.split(" ")[2]}`}>{tip.title}</p>
+                        <p className="font-body text-xs text-white/70 mt-0.5">{tip.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Perbandingan 4 Transformasi ── */}
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-widest">🔍 Perbandingan 4 Transformasi Geometri</p>
+                <div className="overflow-x-auto rounded-xl border border-slate-600/30">
+                  <table className="w-full text-xs font-body">
+                    <thead>
+                      <tr className="bg-slate-700/50">
+                        <th className="px-3 py-2 text-left text-slate-200 font-bold">Transformasi</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Bentuk</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Ukuran</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Orientasi</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Isometri</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-700/30">
+                      {[
+                        { t: "Translasi ➡️",   bentuk: "✅", ukuran: "✅", orientasi: "Tetap",    iso: "✅" },
+                        { t: "Refleksi 🪞",    bentuk: "✅", ukuran: "✅", orientasi: "Berbalik",  iso: "✅" },
+                        { t: "Rotasi 🔄",      bentuk: "✅", ukuran: "✅", orientasi: "Berputar",  iso: "✅" },
+                        { t: "Dilatasi 🔍",    bentuk: "✅", ukuran: "❌", orientasi: "k>0: Tetap", iso: "❌" },
+                      ].map((row, i) => (
+                        <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-900/30"}>
+                          <td className="px-3 py-2 text-white font-semibold">{row.t}</td>
+                          <td className="px-3 py-2 text-center">{row.bentuk}</td>
+                          <td className="px-3 py-2 text-center">{row.ukuran}</td>
+                          <td className={`px-3 py-2 text-center ${row.orientasi === "Tetap" ? "text-green-400" : row.orientasi === "Berbalik" ? "text-rose-400" : row.orientasi === "Berputar" ? "text-purple-400" : "text-yellow-400"}`}>{row.orientasi}</td>
+                          <td className="px-3 py-2 text-center">{row.iso}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* ── Kesimpulan ── */}
+              <div className="bg-gradient-to-r from-cyan-900/40 via-blue-900/30 to-cyan-900/40 border border-cyan-500/30 rounded-2xl p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl">🏁</span>
+                  <p className="font-body text-sm font-bold text-cyan-300 uppercase tracking-wide">Kesimpulan</p>
+                </div>
+                <p className="font-body text-sm text-white/85 leading-relaxed">
+                  <strong className="text-cyan-300">Dilatasi</strong> adalah satu-satunya transformasi di antara keempat jenis yang <strong className="text-yellow-300">mengubah ukuran</strong> bangun. Faktor skala k menentukan segalanya: besar/kecil, arah, dan posisi bayangan. Dilatasi <em>bukan isometri</em> karena ukurannya berubah, tetapi bentuk tetap sama (sebangun). Kuasai rumus pusat O dan pusat P(a,b), serta ingat bahwa luas bayangan = <strong className="text-green-300">k² × luas asal</strong>!
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["Bukan isometri", "Bentuk tetap (sebangun)", "Luas × k²", "Gradien garis tetap"].map(tag => (
+                    <span key={tag} className="bg-cyan-500/20 border border-cyan-500/30 rounded-full px-3 py-0.5 text-xs font-body text-cyan-200">{tag}</span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/transformasi-geometri"); }}

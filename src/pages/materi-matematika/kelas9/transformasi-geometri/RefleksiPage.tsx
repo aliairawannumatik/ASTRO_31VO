@@ -1795,24 +1795,105 @@ const RefleksiPage = () => {
             </div>
           </div>
 
-          {/* RANGKUMAN */}
+          {/* RANGKUMAN, TIPS & KESIMPULAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<Target className="w-5 h-5" />} color="#f97316" title="H. 🎯 Rangkuman" />
-            <div className="px-5 pb-5 space-y-3">
-              {[
-                ["Definisi", "Mencerminkan setiap titik terhadap garis cermin (sumbu)"],
-                ["Sumbu-x", "A(x, y) → A'(x, −y)"],
-                ["Sumbu-y", "A(x, y) → A'(−x, y)"],
-                ["Garis y = x", "A(x, y) → A'(y, x)"],
-                ["Garis y = −x", "A(x, y) → A'(−y, −x)"],
-                ["Titik O(0,0)", "A(x, y) → A'(−x, −y)"],
-                ["Sifat", "Bentuk & ukuran tetap, orientasi berbalik"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex gap-3 items-start bg-slate-800/50 rounded-xl p-3">
-                  <span className="text-orange-400 font-bold text-sm font-body min-w-[90px]">{k}</span>
-                  <span className="text-white/80 text-sm font-body">{v}</span>
+            <Hdr icon={<Target className="w-5 h-5" />} color="#f97316" title="H. 🎯 Rangkuman, Tips & Kesimpulan" />
+            <div className="px-5 pb-5 space-y-5">
+
+              {/* ── Rumus Kunci ── */}
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-green-300 uppercase tracking-widest">📐 Rumus Kunci Refleksi</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    { cermin: "Sumbu-x", rumus: "A(x, y) → A'(x, −y)", color: "from-cyan-900/50 to-blue-900/50", border: "border-cyan-500/30", tc: "text-cyan-300" },
+                    { cermin: "Sumbu-y", rumus: "A(x, y) → A'(−x, y)", color: "from-green-900/50 to-teal-900/50", border: "border-green-500/30", tc: "text-green-300" },
+                    { cermin: "Garis y = x", rumus: "A(x, y) → A'(y, x)", color: "from-purple-900/50 to-pink-900/50", border: "border-purple-500/30", tc: "text-purple-300" },
+                    { cermin: "Garis y = −x", rumus: "A(x, y) → A'(−y, −x)", color: "from-rose-900/50 to-red-900/50", border: "border-rose-500/30", tc: "text-rose-300" },
+                    { cermin: "Titik O(0,0)", rumus: "A(x, y) → A'(−x, −y)", color: "from-orange-900/50 to-yellow-900/50", border: "border-orange-500/30", tc: "text-orange-300" },
+                    { cermin: "Garis x = h", rumus: "A(x, y) → A'(2h−x, y)", color: "from-indigo-900/50 to-blue-900/50", border: "border-indigo-500/30", tc: "text-indigo-300" },
+                  ].map(r => (
+                    <div key={r.cermin} className={`bg-gradient-to-br ${r.color} ${r.border} border rounded-xl p-3`}>
+                      <p className={`font-body text-xs font-bold ${r.tc} mb-1.5`}>🪞 {r.cermin}</p>
+                      <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-3 py-1.5 text-center">{r.rumus}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+                <div className="bg-green-900/30 border border-green-500/20 rounded-xl p-3">
+                  <p className="font-body text-xs text-green-400 font-bold mb-2">📌 Sifat-sifat Refleksi</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                    {[
+                      { icon: "📐", label: "Bentuk", val: "Tetap" },
+                      { icon: "📏", label: "Ukuran", val: "Tetap" },
+                      { icon: "🔄", label: "Orientasi", val: "Berbalik" },
+                      { icon: "↔️", label: "Jarak ke cermin", val: "Sama" },
+                    ].map(item => (
+                      <div key={item.label} className="bg-slate-900/50 rounded-lg p-2">
+                        <p className="text-base">{item.icon}</p>
+                        <p className="font-body text-xs text-white/60">{item.label}</p>
+                        <p className={`font-body text-xs font-bold ${item.val === "Tetap" || item.val === "Sama" ? "text-green-400" : "text-yellow-400"}`}>{item.val}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Tips & Trik ── */}
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">💡 Tips & Trik</p>
+                <div className="space-y-2">
+                  {[
+                    {
+                      num: "1",
+                      color: "bg-cyan-500/10 border-cyan-500/30 text-cyan-300",
+                      title: "Hafal pasangan tukar koordinat",
+                      body: "Sumbu-x → negasikan y. Sumbu-y → negasikan x. Garis y=x → tukar x dan y. Garis y=−x → tukar DAN negasikan keduanya.",
+                    },
+                    {
+                      num: "2",
+                      color: "bg-green-500/10 border-green-500/30 text-green-300",
+                      title: "Refleksi terhadap garis y = k atau x = h",
+                      body: "Gunakan rumus umum: y=k → A'(x, 2k−y); x=h → A'(2h−x, y). Substitusikan nilai k atau h langsung.",
+                    },
+                    {
+                      num: "3",
+                      color: "bg-purple-500/10 border-purple-500/30 text-purple-300",
+                      title: "Soal terbalik: cari titik asal",
+                      body: "Refleksi bersifat simetri — jika A' adalah bayangan A, maka A juga merupakan bayangan dari A'! Gunakan rumus yang sama untuk mencari balik.",
+                    },
+                    {
+                      num: "4",
+                      color: "bg-rose-500/10 border-rose-500/30 text-rose-300",
+                      title: "Refleksi garis ax + by + c = 0",
+                      body: "Substitusikan invers koordinat refleksi ke persamaan garis bayangan. Contoh: refleksi sumbu-x → ganti y dengan −y di persamaan bayangan.",
+                    },
+                  ].map(tip => (
+                    <div key={tip.num} className={`flex gap-3 items-start border rounded-xl p-3 ${tip.color.split(" ").slice(0,2).join(" ")}`}>
+                      <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border ${tip.color}`}>{tip.num}</span>
+                      <div>
+                        <p className={`font-body text-sm font-bold ${tip.color.split(" ")[2]}`}>{tip.title}</p>
+                        <p className="font-body text-xs text-white/70 mt-0.5">{tip.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Kesimpulan ── */}
+              <div className="bg-gradient-to-r from-green-900/40 via-teal-900/30 to-green-900/40 border border-green-500/30 rounded-2xl p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl">🏁</span>
+                  <p className="font-body text-sm font-bold text-green-300 uppercase tracking-wide">Kesimpulan</p>
+                </div>
+                <p className="font-body text-sm text-white/85 leading-relaxed">
+                  <strong className="text-green-300">Refleksi</strong> adalah transformasi yang mencerminkan titik terhadap suatu garis (cermin). Hasilnya seperti bayangan di cermin — bentuk dan ukuran sama persis, tetapi <strong className="text-yellow-300">orientasi berbalik</strong>. Kunci sukses refleksi: hafal rumus masing-masing sumbu cermin, dan ingat bahwa refleksi bersifat <strong className="text-cyan-300">simetri sempurna</strong> — jarak titik ke cermin sama sebelum dan sesudah transformasi!
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["Isometri ✅", "Orientasi berbalik", "6 jenis cermin", "Simetri sempurna"].map(tag => (
+                    <span key={tag} className="bg-green-500/20 border border-green-500/30 rounded-full px-3 py-0.5 text-xs font-body text-green-200">{tag}</span>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
 

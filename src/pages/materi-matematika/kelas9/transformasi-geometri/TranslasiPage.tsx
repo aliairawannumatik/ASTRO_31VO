@@ -1326,21 +1326,102 @@ const TranslasiPage = () => {
             </div>
           </div>
 
-          {/* RANGKUMAN */}
+          {/* RANGKUMAN, TIPS & KESIMPULAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHdr icon={<Target className="w-5 h-5" />} color="#f97316" title="G. 🎯 Rangkuman" />
-            <div className="px-5 pb-5 space-y-3">
-              {[
-                ["Definisi", "Memindahkan setiap titik sejauh dan searah vektor translasi T(a, b)"],
-                ["Rumus", "A(x, y) → A'(x + a, y + b)"],
-                ["Sifat", "Bentuk, ukuran, dan orientasi bangun tidak berubah"],
-                ["Komposisi", "Dua translasi dapat digabung: T = T₁ + T₂"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex gap-3 items-start bg-slate-800/50 rounded-xl p-3">
-                  <span className="text-orange-400 font-bold text-sm font-body min-w-[90px]">{k}</span>
-                  <span className="text-white/80 text-sm font-body">{v}</span>
+            <SectionHdr icon={<Target className="w-5 h-5" />} color="#f97316" title="G. 🎯 Rangkuman, Tips & Kesimpulan" />
+            <div className="px-5 pb-5 space-y-5">
+
+              {/* ── Rumus Kunci ── */}
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-orange-300 uppercase tracking-widest">📐 Rumus Kunci Translasi</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-4">
+                    <p className="font-body text-xs text-cyan-400 font-bold mb-2">📌 Titik tunggal</p>
+                    <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-3 py-2 text-center">A(x, y) → A'(x+a, y+b)</p>
+                    <p className="font-body text-xs text-white/60 mt-2">dengan vektor T(a, b)</p>
+                  </div>
+                  <div className="bg-gradient-to-br from-pink-900/50 to-purple-900/50 border border-pink-500/30 rounded-xl p-4">
+                    <p className="font-body text-xs text-pink-400 font-bold mb-2">📌 Komposisi dua translasi</p>
+                    <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-3 py-2 text-center">T = T₁(a₁,b₁) + T₂(a₂,b₂)</p>
+                    <p className="font-body text-xs text-white/60 mt-2">= T(a₁+a₂, b₁+b₂)</p>
+                  </div>
+                  <div className="bg-gradient-to-br from-green-900/50 to-teal-900/50 border border-green-500/30 rounded-xl p-4 sm:col-span-2">
+                    <p className="font-body text-xs text-green-400 font-bold mb-2">📌 Sifat-sifat Translasi</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                      {[
+                        { icon: "📐", label: "Bentuk", val: "Tetap" },
+                        { icon: "📏", label: "Ukuran", val: "Tetap" },
+                        { icon: "🔄", label: "Orientasi", val: "Tetap" },
+                        { icon: "➡️", label: "Posisi", val: "Berubah" },
+                      ].map(item => (
+                        <div key={item.label} className="bg-slate-900/50 rounded-lg p-2">
+                          <p className="text-lg">{item.icon}</p>
+                          <p className="font-body text-xs text-white/60">{item.label}</p>
+                          <p className={`font-body text-xs font-bold ${item.val === "Tetap" ? "text-green-400" : "text-yellow-400"}`}>{item.val}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* ── Tips & Trik ── */}
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">💡 Tips & Trik</p>
+                <div className="space-y-2">
+                  {[
+                    {
+                      num: "1",
+                      color: "bg-yellow-500/20 border-yellow-500/40 text-yellow-300",
+                      title: "Ingat tanda positif/negatif",
+                      body: "a > 0 → geser KANAN, a < 0 → geser KIRI. b > 0 → geser ATAS, b < 0 → geser BAWAH.",
+                    },
+                    {
+                      num: "2",
+                      color: "bg-cyan-500/20 border-cyan-500/40 text-cyan-300",
+                      title: "Soal balik: cari titik asal",
+                      body: "Jika diketahui bayangan A'(x', y') dan vektor T(a,b), maka titik asal: A(x'−a, y'−b). Kebalikan dari rumus biasa!",
+                    },
+                    {
+                      num: "3",
+                      color: "bg-green-500/20 border-green-500/40 text-green-300",
+                      title: "Translasi garis ax + by + c = 0",
+                      body: "Substitusi x = x'−a dan y = y'−b ke persamaan garis, lalu sederhanakan. Koefisien a dan b (gradien) tidak berubah!",
+                    },
+                    {
+                      num: "4",
+                      color: "bg-purple-500/20 border-purple-500/40 text-purple-300",
+                      title: "Komposisi translasi bisa dijumlah langsung",
+                      body: "T₁(3,−2) lalu T₂(−1,4) = T(3+(−1), −2+4) = T(2,2). Tidak perlu menghitung satu per satu!",
+                    },
+                  ].map(tip => (
+                    <div key={tip.num} className={`flex gap-3 items-start border rounded-xl p-3 ${tip.color.split(" ").slice(0,2).join(" ")}`}>
+                      <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border ${tip.color}`}>{tip.num}</span>
+                      <div>
+                        <p className={`font-body text-sm font-bold ${tip.color.split(" ")[2]}`}>{tip.title}</p>
+                        <p className="font-body text-xs text-white/70 mt-0.5">{tip.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Kesimpulan ── */}
+              <div className="bg-gradient-to-r from-orange-900/40 via-yellow-900/30 to-orange-900/40 border border-orange-500/30 rounded-2xl p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl">🏁</span>
+                  <p className="font-body text-sm font-bold text-orange-300 uppercase tracking-wide">Kesimpulan</p>
+                </div>
+                <p className="font-body text-sm text-white/85 leading-relaxed">
+                  <strong className="text-yellow-300">Translasi</strong> adalah transformasi paling sederhana — setiap titik dipindahkan dengan <strong className="text-cyan-300">jarak dan arah yang sama</strong> tanpa rotasi maupun perubahan ukuran. Kuncinya ada di vektor T(a, b): nilai <em>a</em> menentukan geser horizontal, nilai <em>b</em> menentukan geser vertikal. Kuasai tanda positif/negatifnya, dan kamu bisa menyelesaikan semua soal translasi dengan cepat!
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["Isometri ✅", "Posisi berubah", "Rumus: +a, +b", "Bisa dikomposisi"].map(tag => (
+                    <span key={tag} className="bg-orange-500/20 border border-orange-500/30 rounded-full px-3 py-0.5 text-xs font-body text-orange-200">{tag}</span>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
 
