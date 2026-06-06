@@ -230,11 +230,6 @@ const InteractiveCone3D = () => {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
-        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-sm inline-block" style={{ background: "hsl(180,80%,55%)" }}/><span className="text-white/50">Selimut</span></span>
-        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-sm inline-block bg-indigo-400"/><span className="text-white/50">Alas</span></span>
-        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full inline-block bg-yellow-400"/><span className="text-white/50">Puncak (T)</span></span>
-      </div>
     </div>
   );
 };
@@ -907,7 +902,7 @@ const KerucutUnsurCountSVG = () => (
 
 /* Selimut kerucut dibuka → juring lingkaran */
 const SelimutJuringAnimSVG = () => (
-  <svg viewBox="0 0 315 175" className="w-full max-w-sm mx-auto my-2" aria-label="Selimut kerucut dibuka menjadi juring">
+  <svg viewBox="0 0 315 195" className="w-full max-w-sm mx-auto my-2" aria-label="Selimut kerucut dibuka menjadi juring">
     <defs>
       <style>{`
         @keyframes kjco{0%,35%{opacity:1;}55%,100%{opacity:0.28;}}
@@ -938,24 +933,33 @@ const SelimutJuringAnimSVG = () => (
     </g>
 
     {/* RIGHT: juring lingkaran */}
-    {/* Center (228,148), radius 72, arc dari -150° ke -30° (120° = sudut representatif) */}
-    {/* -150°: (228+72×cos(-150°), 148+72×sin(-150°)) = (228-62.35, 148-36) = (165.65, 112) */}
-    {/* -30°:  (228+72×cos(-30°),  148+72×sin(-30°))  = (228+62.35, 148-36) = (290.35, 112) */}
+    {/* Center (228,158), radius 72, arc dari -150° ke -30° (120° = sudut representatif) */}
+    {/* top of arc: (228, 158-72) = (228, 86) */}
+    {/* left arm:  (228-62.35, 158-36) = (165.65, 122) */}
+    {/* right arm: (228+62.35, 158-36) = (290.35, 122) */}
     <g className="kjin">
-      <path d="M 228 148 L 165.6 112 A 72 72 0 0 1 290.4 112 Z" fill="rgba(168,85,247,0.28)" stroke="#a855f7" strokeWidth="2"/>
+      <path d="M 228 158 L 165.6 122 A 72 72 0 0 1 290.4 122 Z" fill="rgba(168,85,247,0.28)" stroke="#a855f7" strokeWidth="2"/>
       {/* Label radius: s */}
-      <text x="192" y="136" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
-      <text x="264" y="136" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
-      {/* Arc top midpoint: -90° → (228, 148-72) = (228, 76) */}
-      <text x="228" y="67" fill="#f59e0b" fontSize="10.5" fontFamily="monospace" textAnchor="middle" fontWeight="700">2πr</text>
-      <text x="228" y="78" fill="#fde68a" fontSize="7" fontFamily="monospace" textAnchor="middle">(busur = keliling alas)</text>
-      {/* Sudut θ */}
-      <path d="M 250 136 Q 228 118 206 136" fill="none" stroke="#22c55e" strokeWidth="1.4"/>
-      <text x="228" y="133" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ</text>
-      <text x="228" y="162" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ = (r ÷ s) × 360°</text>
+      <text x="191" y="146" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
+      <text x="265" y="146" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
+      {/* Arc label: busur = keliling alas — placed above the arc (arc top y=86) */}
+      <text x="228" y="46" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">busur = keliling alas</text>
+      {/* Arrow from label down toward arc */}
+      <line x1="228" y1="49" x2="228" y2="82" stroke="#fde68a" strokeWidth="1" strokeDasharray="3,2" markerEnd="url(#arrowY)"/>
+      <defs>
+        <marker id="arrowY" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
+          <polygon points="0 0, 5 2.5, 0 5" fill="#fde68a"/>
+        </marker>
+      </defs>
+      {/* 2πr label above arrow */}
+      <text x="228" y="60" fill="#f59e0b" fontSize="11" fontFamily="monospace" textAnchor="middle" fontWeight="700">2πr</text>
+      {/* Sudut θ — arc indicator near vertex, lower than arms */}
+      <path d="M 252 148 Q 228 130 204 148" fill="none" stroke="#22c55e" strokeWidth="1.4"/>
+      <text x="228" y="144" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ</text>
+      <text x="228" y="178" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ = (r ÷ s) × 360°</text>
       {/* Label juring */}
-      <text x="228" y="102" fill="#e9d5ff" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">SELIMUT</text>
-      <text x="228" y="112" fill="#c4b5fd" fontSize="7" fontFamily="monospace" textAnchor="middle">= juring lingkaran</text>
+      <text x="228" y="110" fill="#e9d5ff" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">SELIMUT</text>
+      <text x="228" y="120" fill="#c4b5fd" fontSize="7" fontFamily="monospace" textAnchor="middle">= juring lingkaran</text>
     </g>
   </svg>
 );
@@ -1099,6 +1103,28 @@ const sections: Sec[] = [
             <p className="pl-3">— panjang busur = <strong className="text-yellow-300">2πr</strong> (keliling alas)</p>
             <p className="pl-3">— sudut juring <strong className="text-green-300">θ = (r ÷ s) × 360°</strong></p>
             <p>• Luas selimut = luas juring = <strong className="text-yellow-300">πrs</strong></p>
+          </div>
+        </div>
+
+        {/* ── Kesimpulan: Sisi, Rusuk & Titik Sudut ── */}
+        <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-3">
+          <p className="text-white font-bold text-sm text-center">📋 Kesimpulan — Sisi, Rusuk &amp; Titik Sudut Kerucut</p>
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="bg-purple-950/60 border border-purple-700/50 rounded-xl p-3">
+              <p className="text-purple-300 font-bold text-3xl leading-tight">2</p>
+              <p className="text-white/80 text-xs font-semibold mt-1">Sisi</p>
+              <p className="text-white/45 text-[9px] mt-0.5">selimut + alas</p>
+            </div>
+            <div className="bg-amber-950/60 border border-amber-700/50 rounded-xl p-3">
+              <p className="text-amber-300 font-bold text-3xl leading-tight">1</p>
+              <p className="text-white/80 text-xs font-semibold mt-1">Rusuk</p>
+              <p className="text-white/45 text-[9px] mt-0.5">keliling alas</p>
+            </div>
+            <div className="bg-yellow-950/60 border border-yellow-700/50 rounded-xl p-3">
+              <p className="text-yellow-300 font-bold text-3xl leading-tight">1</p>
+              <p className="text-white/80 text-xs font-semibold mt-1">Titik Sudut</p>
+              <p className="text-white/45 text-[9px] mt-0.5">puncak (T)</p>
+            </div>
           </div>
         </div>
 
