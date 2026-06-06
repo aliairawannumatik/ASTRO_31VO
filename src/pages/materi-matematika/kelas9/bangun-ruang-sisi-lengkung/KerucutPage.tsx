@@ -976,35 +976,47 @@ type Sec = { title: string; icon: string; content: React.ReactNode };
 const SoalRusukSVG = () => (
   <svg viewBox="0 0 270 210" fill="none" xmlns="http://www.w3.org/2000/svg"
     className="w-full max-w-xs mx-auto my-1" aria-label="Kerucut bernomor">
+    <defs>
+      <radialGradient id="coneBodyGrad" cx="45%" cy="30%" r="70%">
+        <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.45"/>
+        <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.18"/>
+      </radialGradient>
+    </defs>
+    {/* cone fill */}
+    <polygon points="118,22 42,170 194,170" fill="url(#coneBodyGrad)"/>
+    {/* base ellipse fill */}
+    <ellipse cx="118" cy="170" rx="76" ry="17" fill="rgba(99,102,241,0.28)"/>
     {/* slant lines */}
-    <line x1="118" y1="22" x2="42" y2="170" stroke="white" strokeWidth="1.6"/>
-    <line x1="118" y1="22" x2="194" y2="170" stroke="white" strokeWidth="1.6"/>
+    <line x1="118" y1="22" x2="42" y2="170" stroke="#22d3ee" strokeWidth="1.8"/>
+    <line x1="118" y1="22" x2="194" y2="170" stroke="#22d3ee" strokeWidth="1.8"/>
     {/* base ellipse front */}
-    <path d="M42,170 A76,17 0 0,0 194,170" stroke="white" strokeWidth="1.6" fill="none"/>
+    <path d="M42,170 A76,17 0 0,0 194,170" stroke="#a5b4fc" strokeWidth="1.6" fill="none"/>
     {/* base ellipse back (dashed) */}
-    <path d="M42,170 A76,17 0 0,1 194,170" stroke="white" strokeWidth="1.2" strokeDasharray="5,3" fill="none" opacity="0.55"/>
+    <path d="M42,170 A76,17 0 0,1 194,170" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="5,3" fill="none" opacity="0.45"/>
     {/* height dashed */}
-    <line x1="118" y1="22" x2="118" y2="170" stroke="white" strokeWidth="1" strokeDasharray="5,3" opacity="0.3"/>
+    <line x1="118" y1="22" x2="118" y2="170" stroke="#f97316" strokeWidth="1.2" strokeDasharray="5,3" opacity="0.5"/>
+    {/* apex dot */}
+    <circle cx="118" cy="22" r="3.5" fill="#facc15" opacity="0.9"/>
 
     {/* Arrow ① → puncak */}
-    <line x1="128" y1="24" x2="185" y2="14" stroke="white" strokeWidth="1.1"/>
-    <circle cx="197" cy="12" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
-    <text x="197" y="16.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">①</text>
+    <line x1="128" y1="24" x2="185" y2="14" stroke="#facc15" strokeWidth="1.2"/>
+    <circle cx="197" cy="12" r="9" stroke="#facc15" strokeWidth="1.2" fill="rgba(250,204,21,0.15)"/>
+    <text x="197" y="16.5" textAnchor="middle" fill="#facc15" fontSize="10" fontFamily="serif">①</text>
 
     {/* Arrow ② → garis pelukis (middle of right slant) */}
-    <line x1="163" y1="98" x2="210" y2="78" stroke="white" strokeWidth="1.1"/>
-    <circle cx="221" cy="73" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
-    <text x="221" y="77.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">②</text>
+    <line x1="163" y1="98" x2="210" y2="78" stroke="#22d3ee" strokeWidth="1.2"/>
+    <circle cx="221" cy="73" r="9" stroke="#22d3ee" strokeWidth="1.2" fill="rgba(34,211,238,0.15)"/>
+    <text x="221" y="77.5" textAnchor="middle" fill="#22d3ee" fontSize="10" fontFamily="serif">②</text>
 
     {/* Arrow ③ → rusuk (rim at base edge, right side) */}
-    <line x1="188" y1="167" x2="218" y2="152" stroke="white" strokeWidth="1.1"/>
-    <circle cx="229" cy="146" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
-    <text x="229" y="150.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">③</text>
+    <line x1="188" y1="167" x2="218" y2="152" stroke="#4ade80" strokeWidth="1.2"/>
+    <circle cx="229" cy="146" r="9" stroke="#4ade80" strokeWidth="1.2" fill="rgba(74,222,128,0.15)"/>
+    <text x="229" y="150.5" textAnchor="middle" fill="#4ade80" fontSize="10" fontFamily="serif">③</text>
 
     {/* Arrow ④ → alas (below base ellipse center) */}
-    <line x1="118" y1="183" x2="160" y2="192" stroke="white" strokeWidth="1.1"/>
-    <circle cx="171" cy="195" r="9" stroke="white" strokeWidth="1.1" fill="none"/>
-    <text x="171" y="199.5" textAnchor="middle" fill="white" fontSize="10" fontFamily="serif">④</text>
+    <line x1="118" y1="183" x2="160" y2="192" stroke="#f87171" strokeWidth="1.2"/>
+    <circle cx="171" cy="195" r="9" stroke="#f87171" strokeWidth="1.2" fill="rgba(248,113,113,0.15)"/>
+    <text x="171" y="199.5" textAnchor="middle" fill="#f87171" fontSize="10" fontFamily="serif">④</text>
   </svg>
 );
 
@@ -1012,38 +1024,43 @@ const SoalRusukSVG = () => (
 const SoalHubunganSVG = () => (
   <svg viewBox="0 0 260 215" fill="none" xmlns="http://www.w3.org/2000/svg"
     className="w-full max-w-xs mx-auto my-1" aria-label="Kerucut dengan t s r">
+    <defs>
+      <radialGradient id="coneHubGrad" cx="45%" cy="30%" r="70%">
+        <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.40"/>
+        <stop offset="100%" stopColor="#0e7490" stopOpacity="0.15"/>
+      </radialGradient>
+    </defs>
+    {/* cone fill */}
+    <polygon points="115,24 42,175 188,175" fill="url(#coneHubGrad)"/>
+    {/* base ellipse fill */}
+    <ellipse cx="115" cy="175" rx="73" ry="16" fill="rgba(99,102,241,0.25)"/>
     {/* Cone slant lines */}
-    <line x1="115" y1="24" x2="42" y2="175" stroke="white" strokeWidth="1.5"/>
-    <line x1="115" y1="24" x2="188" y2="175" stroke="white" strokeWidth="1.5"/>
+    <line x1="115" y1="24" x2="42" y2="175" stroke="#22d3ee" strokeWidth="1.8"/>
+    <line x1="115" y1="24" x2="188" y2="175" stroke="#f87171" strokeWidth="2.2"/>
     {/* Base ellipse front */}
-    <path d="M42,175 A73,16 0 0,0 188,175" stroke="white" strokeWidth="1.5" fill="none"/>
+    <path d="M42,175 A73,16 0 0,0 188,175" stroke="#a5b4fc" strokeWidth="1.5" fill="none"/>
     {/* Base ellipse back (dashed) */}
-    <path d="M42,175 A73,16 0 0,1 188,175" stroke="white" strokeWidth="1.1" strokeDasharray="5,3" fill="none" opacity="0.5"/>
+    <path d="M42,175 A73,16 0 0,1 188,175" stroke="#a5b4fc" strokeWidth="1.1" strokeDasharray="5,3" fill="none" opacity="0.4"/>
+    {/* apex dot */}
+    <circle cx="115" cy="24" r="3.5" fill="#facc15" opacity="0.9"/>
 
     {/* Height t — dashed vertical */}
-    <line x1="115" y1="24" x2="115" y2="175" stroke="white" strokeWidth="1.5" strokeDasharray="6,4"/>
+    <line x1="115" y1="24" x2="115" y2="175" stroke="#f97316" strokeWidth="1.8" strokeDasharray="6,4"/>
     {/* t label */}
-    <text x="121" y="105" fill="white" fontSize="13" fontFamily="serif" fontStyle="italic">t</text>
+    <text x="121" y="105" fill="#f97316" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">t</text>
 
     {/* Radius r — horizontal at base */}
-    <line x1="115" y1="175" x2="188" y2="175" stroke="white" strokeWidth="1.5"/>
+    <line x1="115" y1="175" x2="188" y2="175" stroke="#4ade80" strokeWidth="2"/>
     {/* r label */}
-    <text x="147" y="171" fill="white" fontSize="13" fontFamily="serif" fontStyle="italic">r</text>
+    <text x="147" y="170" fill="#4ade80" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">r</text>
 
-    {/* Slant s — from apex to base edge right */}
-    <line x1="115" y1="24" x2="188" y2="175" stroke="white" strokeWidth="1.5"/>
+    {/* Slant s — from apex to base edge right (highlighted) */}
+    <line x1="115" y1="24" x2="188" y2="175" stroke="#f87171" strokeWidth="2.2"/>
     {/* s label */}
-    <text x="158" y="98" fill="white" fontSize="13" fontFamily="serif" fontStyle="italic">s</text>
+    <text x="160" y="97" fill="#f87171" fontSize="14" fontFamily="serif" fontStyle="italic" fontWeight="bold">s</text>
 
     {/* Right angle mark at base center */}
-    <polyline points="115,160 130,160 130,175" stroke="white" strokeWidth="1.2" fill="none"/>
-
-    {/* Labels top-right corner */}
-    <text x="200" y="28" fill="white" fontSize="10" fontFamily="serif" fontStyle="italic">s</text>
-    <text x="200" y="44" fill="white" fontSize="10" fontFamily="serif" fontStyle="italic">t</text>
-    {/* Small cone icon hint */}
-    <line x1="192" y1="20" x2="205" y2="20" stroke="white" strokeWidth="0.8" opacity="0.5"/>
-    <line x1="192" y1="36" x2="205" y2="36" stroke="white" strokeWidth="0.8" opacity="0.5"/>
+    <polyline points="115,160 130,160 130,175" stroke="#94a3b8" strokeWidth="1.3" fill="none"/>
   </svg>
 );
 
@@ -1057,19 +1074,6 @@ const soalUnsur: {
 }[] = [
   {
     no: 1,
-    soal: "Bentuk bangun dari selimut kerucut adalah ….",
-    gambar: null,
-    pilihan: [
-      { key: "A", text: "tembereng" },
-      { key: "B", text: "segitiga" },
-      { key: "C", text: "lingkaran" },
-      { key: "D", text: "juring lingkaran" },
-    ],
-    jawaban: "D",
-    pembahasan: "Selimut kerucut, jika dibuka (diratakan), berbentuk juring lingkaran (sektor lingkaran) dengan jari-jari = garis pelukis (s) dan panjang busur = keliling alas (2πr).",
-  },
-  {
-    no: 2,
     soal: "Nomor yang menunjukkan rusuk pada kerucut berikut adalah ….",
     gambar: <SoalRusukSVG />,
     pilihan: [
@@ -1080,6 +1084,19 @@ const soalUnsur: {
     ],
     jawaban: "C",
     pembahasan: "Rusuk kerucut adalah tepi/keliling alas (lingkaran alas), yaitu nomor 3. Nomor 1 = puncak, nomor 2 = garis pelukis/selimut, nomor 4 = alas.",
+  },
+  {
+    no: 2,
+    soal: "Bentuk bangun dari selimut kerucut adalah ….",
+    gambar: null,
+    pilihan: [
+      { key: "A", text: "tembereng" },
+      { key: "B", text: "segitiga" },
+      { key: "C", text: "lingkaran" },
+      { key: "D", text: "juring lingkaran" },
+    ],
+    jawaban: "D",
+    pembahasan: "Selimut kerucut, jika dibuka (diratakan), berbentuk juring lingkaran (sektor lingkaran) dengan jari-jari = garis pelukis (s) dan panjang busur = keliling alas (2πr).",
   },
   {
     no: 3,
