@@ -152,31 +152,80 @@ const PenyebaranDataPage = () => {
                 {/* Ilustrasi Visual Boxplot sederhana */}
                 <div className="bg-slate-800/60 border border-emerald-500/20 rounded-xl p-4 space-y-3">
                   <p className="font-body text-xs font-bold text-emerald-300 uppercase tracking-wide">📌 Visualisasi Lima Serangkai Data</p>
-                  <p className="font-body text-xs text-white/60 mb-2">Data: 2, 5, 7, 8, 9, 12, 14, 16, 18, 20</p>
-                  <div className="relative">
-                    <div className="flex items-center gap-0 justify-between text-xs font-bold mb-1 px-1">
-                      <span className="text-white/50">Min=2</span>
-                      <span className="text-green-300">Q₁=6</span>
-                      <span className="text-cyan-300">Q₂=10,5</span>
-                      <span className="text-orange-300">Q₃=15</span>
-                      <span className="text-white/50">Maks=20</span>
+                  <p className="font-body text-xs text-white/60 mb-3">Data: 2, 5, 7, 8, 9, 12, 14, 16, 18, 20</p>
+
+                  {/* ── Boxplot (skala 0–20) ── */}
+                  {/* Posisi berdasarkan nilai / 20 × 100%:
+                      Min=2 → 10%, Q₁=6 → 30%, Q₂=10.5 → 52.5%, Q₃=15 → 75%, Maks=20 → 100% */}
+                  <div className="relative" style={{ paddingTop: "28px", paddingBottom: "24px" }}>
+
+                    {/* Label lima serangkai — sejajar dengan posisi data */}
+                    <div className="absolute top-0 left-0 right-0 h-7 pointer-events-none">
+                      <span className="absolute text-[10px] font-bold text-white/60"
+                        style={{ left: "10%", transform: "translateX(-50%)" }}>Min=2</span>
+                      <span className="absolute text-[10px] font-bold text-green-300"
+                        style={{ left: "30%", transform: "translateX(-50%)" }}>Q₁=6</span>
+                      <span className="absolute text-[10px] font-bold text-cyan-300"
+                        style={{ left: "52.5%", transform: "translateX(-50%)" }}>Q₂=10,5</span>
+                      <span className="absolute text-[10px] font-bold text-orange-300"
+                        style={{ left: "75%", transform: "translateX(-50%)" }}>Q₃=15</span>
+                      <span className="absolute text-[10px] font-bold text-white/60"
+                        style={{ left: "100%", transform: "translateX(-50%)" }}>Maks=20</span>
                     </div>
-                    <div className="relative h-8 flex items-center">
-                      <div className="absolute inset-x-0 h-0.5 bg-slate-600"></div>
-                      <div className="absolute left-0 w-1 h-5 bg-white/40 rounded"></div>
-                      <div className="absolute" style={{ left: "22%", right: "64%", top: "25%", bottom: "25%" }}>
-                        <div className="h-full bg-green-700/40 border-2 border-green-400/60 rounded"></div>
-                      </div>
-                      <div className="absolute" style={{ left: "36%", right: "42%", top: "25%", bottom: "25%" }}>
-                        <div className="h-full bg-blue-700/40 border-2 border-blue-400/60 rounded"></div>
-                      </div>
-                      <div className="absolute" style={{ left: "58%", top: "25%", bottom: "25%", width: "2px" }}>
-                        <div className="h-full bg-cyan-400"></div>
-                      </div>
-                      <div className="absolute right-0 w-1 h-5 bg-white/40 rounded"></div>
+
+                    {/* Boxplot drawing area */}
+                    <div className="relative" style={{ height: "40px" }}>
+
+                      {/* Garis whisker kiri: Min → Q₁ */}
+                      <div className="absolute bg-slate-400"
+                        style={{ top: "50%", left: "10%", width: "20%", height: "2px", transform: "translateY(-50%)" }} />
+
+                      {/* Garis whisker kanan: Q₃ → Maks */}
+                      <div className="absolute bg-slate-400"
+                        style={{ top: "50%", left: "75%", width: "25%", height: "2px", transform: "translateY(-50%)" }} />
+
+                      {/* Kotak IQR: Q₁ → Q₃ */}
+                      <div className="absolute rounded border-2 border-blue-400/70 bg-blue-800/30"
+                        style={{ top: "10%", bottom: "10%", left: "30%", width: "45%" }} />
+
+                      {/* Garis median Q₂ */}
+                      <div className="absolute bg-cyan-400 rounded"
+                        style={{ top: "10%", bottom: "10%", left: "52.5%", width: "2px", transform: "translateX(-50%)" }} />
+
+                      {/* Tanda tegak di Min */}
+                      <div className="absolute bg-white/50 rounded"
+                        style={{ top: "20%", bottom: "20%", left: "10%", width: "2px", transform: "translateX(-50%)" }} />
+
+                      {/* Tanda tegak di Maks */}
+                      <div className="absolute bg-white/50 rounded"
+                        style={{ top: "20%", bottom: "20%", left: "100%", width: "2px", transform: "translateX(-50%)" }} />
                     </div>
-                    <div className="mt-1 flex justify-between text-xs text-white/30 px-1">
-                      <span>0</span><span>5</span><span>10</span><span>15</span><span>20</span>
+
+                    {/* Sumbu skala 0–5–10–15–20 */}
+                    <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+                      <div className="relative h-5">
+                        {[0, 5, 10, 15, 20].map((v) => (
+                          <span key={v}
+                            className="absolute text-[10px] text-white/30"
+                            style={{ left: `${(v / 20) * 100}%`, transform: "translateX(-50%)" }}>
+                            {v}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Keterangan warna */}
+                    <div className="flex flex-wrap gap-3 mt-1 pt-1">
+                      {[
+                        { cls: "bg-blue-500/50 border-blue-400/60",  label: "Kotak IQR (Q₁–Q₃)" },
+                        { cls: "bg-cyan-400",                        label: "Median (Q₂)" },
+                        { cls: "bg-slate-400",                       label: "Whisker (Min–Maks)" },
+                      ].map(({ cls, label }) => (
+                        <div key={label} className="flex items-center gap-1.5">
+                          <span className={`w-3 h-3 rounded border inline-block ${cls}`} />
+                          <span className="text-[10px] text-white/40">{label}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
