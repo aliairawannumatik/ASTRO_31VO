@@ -1550,9 +1550,42 @@ const luasExamples: Ex[] = [
   {
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah mangkok berbentuk setengah bola (belahan bola) dicat pada seluruh permukaannya (termasuk bagian datar alas).</p>
-        <p>Jika diameter mangkok adalah <InlineMath math="28 \text{ cm}" /> dan biaya cat adalah <InlineMath math="Rp\,5.000/\text{cm}^2" />, berapa total biaya pengecatan?</p>
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <p>Sebuah kubah masjid berbentuk <strong className="text-yellow-300">setengah bola</strong> dengan diameter <strong className="text-yellow-300">14 m</strong>. Seluruh permukaan luar kubah (sisi lengkung saja) akan dicat.</p>
+        <svg viewBox="0 0 240 180" className="w-56 h-44 mx-auto block">
+          <defs>
+            <radialGradient id="domeGrad" cx="40%" cy="30%" r="65%">
+              <stop offset="0%" stopColor="#fde68a"/>
+              <stop offset="100%" stopColor="#92400e"/>
+            </radialGradient>
+            <clipPath id="domeClip">
+              <rect x="0" y="0" width="240" height="105"/>
+            </clipPath>
+          </defs>
+          <rect x="20" y="105" width="200" height="55" rx="3" fill="#334155" stroke="#475569" strokeWidth="1"/>
+          <rect x="55" y="75" width="130" height="32" rx="2" fill="#475569" stroke="#64748b" strokeWidth="1"/>
+          <circle cx="120" cy="105" r="72" fill="url(#domeGrad)" stroke="#fbbf24" strokeWidth="1.5" clipPath="url(#domeClip)"/>
+          <ellipse cx="120" cy="105" rx="72" ry="14" fill="#1e293b" stroke="#fbbf24" strokeWidth="1.2"/>
+          <line x1="48" y1="105" x2="192" y2="105" stroke="#f97316" strokeWidth="1.5" strokeDasharray="5 3"/>
+          <text x="88" y="100" fill="#f97316" fontSize="11" fontWeight="bold">d = 14 m</text>
+          <line x1="120" y1="105" x2="120" y2="33" stroke="#c084fc" strokeWidth="1.5"/>
+          <text x="123" y="72" fill="#c084fc" fontSize="10">r = 7 m</text>
+          <circle cx="120" cy="105" r="3" fill="#f97316"/>
+          <rect x="30" y="115" width="30" height="43" rx="2" fill="#1e293b" stroke="#475569" strokeWidth="1"/>
+          <rect x="180" y="115" width="30" height="43" rx="2" fill="#1e293b" stroke="#475569" strokeWidth="1"/>
+          <rect x="100" y="120" width="40" height="38" rx="2" fill="#0f172a" stroke="#475569" strokeWidth="1"/>
+        </svg>
+        <div className="bg-slate-800/50 border border-slate-600/40 rounded-lg p-3 text-xs space-y-1 text-white/70">
+          <p>📋 <strong className="text-white/90">Informasi:</strong></p>
+          <p>• 1 kaleng cat dapat mengecat <strong className="text-cyan-300">4 m²</strong></p>
+          <p>• Harga 1 kaleng cat = <strong className="text-yellow-300">Rp 250.000</strong></p>
+        </div>
+        <p>Tentukan:</p>
+        <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
+          <li>a) Luas permukaan luar kubah yang dicat</li>
+          <li>b) Jumlah kaleng cat yang dibutuhkan</li>
+          <li>c) Total biaya pengecatan</li>
+        </ul>
         <p className="text-xs text-white/50">(Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
       </div>
     ),
@@ -1560,22 +1593,27 @@ const luasExamples: Ex[] = [
       <div className="space-y-3 text-sm font-body">
         <p className="text-red-400 font-semibold">Langkah 1 — Tentukan jari-jari:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="r = \frac{d}{2} = \frac{28}{2} = 14 \text{ cm}" />
+          <BlockMath math="r = \frac{d}{2} = \frac{14}{2} = 7 \text{ m}" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Hitung luas total setengah bola:</p>
+        <p className="text-red-400 font-semibold">Langkah 2 — Luas sisi lengkung setengah bola (bagian yang dicat):</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/70">Luas lengkung + luas alas lingkaran:</p>
-          <BlockMath math="L_{\text{total}} = 2\pi r^2 + \pi r^2 = 3\pi r^2" />
-          <BlockMath math="= 3 \times \frac{22}{7} \times 14^2 = 3 \times \frac{22}{7} \times 196 = 3 \times 22 \times 28 = 1.848 \text{ cm}^2" />
+          <p className="text-white/70">Hanya sisi lengkung, bukan alas (kubah menempel ke bangunan):</p>
+          <BlockMath math="L_{\text{lengkung}} = 2\pi r^2 = 2 \times \frac{22}{7} \times 7^2" />
+          <BlockMath math="= 2 \times \frac{22}{7} \times 49 = 2 \times 22 \times 7 = 308 \text{ m}^2" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Total biaya:</p>
+        <p className="text-red-400 font-semibold">Langkah 3 — Jumlah kaleng cat:</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="\text{Biaya} = 1.848 \times 5.000 = Rp\,9.240.000" />
+          <BlockMath math="\text{Kaleng} = \frac{L}{4} = \frac{308}{4} = 77 \text{ kaleng}" />
+        </div>
+        <p className="text-red-400 font-semibold">Langkah 4 — Total biaya:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="\text{Biaya} = 77 \times 250.000 = Rp\,19.250.000" />
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
           <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Luas total = <strong className="text-yellow-300">1.848 cm²</strong></p>
-          <p className="text-white/80">• Total biaya cat = <strong className="text-yellow-300">Rp 9.240.000</strong></p>
+          <p className="text-white/80">• Luas kubah yang dicat = <strong className="text-yellow-300">308 m²</strong></p>
+          <p className="text-white/80">• Jumlah kaleng = <strong className="text-yellow-300">77 kaleng</strong></p>
+          <p className="text-white/80">• Total biaya = <strong className="text-yellow-300">Rp 19.250.000</strong></p>
         </div>
       </div>
     ),
