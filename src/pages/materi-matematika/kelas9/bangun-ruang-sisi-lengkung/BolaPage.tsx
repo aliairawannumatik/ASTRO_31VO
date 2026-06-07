@@ -1126,7 +1126,7 @@ const sections: Sec[] = [
     content: (
       <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
         <InteractiveHalfSphere3D />
-        <UnsurBolaSVG />
+        <InteractiveSphere3D />
         <div className="grid grid-cols-1 gap-3">
           <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-3 space-y-1">
             <p className="text-orange-300 font-semibold">① Titik Pusat (O)</p>
