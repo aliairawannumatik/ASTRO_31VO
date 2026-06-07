@@ -1158,58 +1158,53 @@ const MedianModusPage = () => {
                   </div>
                 </div>
 
-                <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
-                    <span className="font-body font-semibold text-white">Contoh 3</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Terdapat 12 data terurut. Nilai terkecil 40, terbesar 95. Median = 68. Jika semua nilai di atas median dinaikkan 5, tentukan median yang baru!
-                    </p>
-                  </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><InlineMath math="n=12" /> (genap) → median = rata-rata data ke-6 dan ke-7.</p>
-                      <p>Median awal = 68 berarti: <InlineMath math="\frac{x_6 + x_7}{2} = 68 \implies x_6 + x_7 = 136" /></p>
-                      <p>Nilai di atas median = data ke-7 s.d. ke-12. Data ke-7 termasuk "di atas median" (nilai ke-7 ≥ nilai ke-6).</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p>Setelah data ke-7 s.d. ke-12 dinaikkan 5:</p>
-                        <p>• <InlineMath math="x_6" /> tetap (tidak berubah)</p>
-                        <p>• <InlineMath math="x_7" /> menjadi <InlineMath math="x_7 + 5" /></p>
-                        <BlockMath math="\text{Me}_{\text{baru}} = \frac{x_6 + (x_7+5)}{2} = \frac{x_6+x_7}{2} + \frac{5}{2} = 68 + 2{,}5 = 70{,}5" />
-                      </div>
-                      <p><strong className="text-primary">Median baru = 70,5</strong></p>
-                    </div>
-                  </div>
-                </div>
-
                 <div className="border-l-4 border-blue-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded">DIAGRAM BATANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                    <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white mb-3">
                       Diagram batang berikut menunjukkan banyak buku yang dibaca siswa kelas 9A selama satu bulan. Tentukan median data tersebut!
                     </p>
-                    {/* Diagram Batang */}
+                    {/* Diagram Batang dengan sumbu tegak & datar */}
                     <div className="bg-slate-900/60 rounded-xl p-4">
-                      <p className="font-body text-xs text-white/50 mb-3 text-center">Banyak Buku yang Dibaca Siswa Kelas 9A</p>
-                      <div className="flex items-end justify-center gap-4 h-32">
-                        {[{val:1,f:3},{val:2,f:5},{val:3,f:4},{val:4,f:6},{val:5,f:2}].map(({val,f}) => (
-                          <div key={val} className="flex flex-col items-center gap-1">
-                            <span className="font-body text-xs text-indigo-300 font-bold">{f}</span>
-                            <div
-                              className="w-10 bg-indigo-500/70 border border-indigo-400/60 rounded-t-md"
-                              style={{ height: `${f * 16}px` }}
-                            />
-                            <span className="font-body text-xs text-white/60">{val}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <p className="font-body text-xs text-white/40 text-center mt-2">Banyak Buku (judul)</p>
+                      <p className="font-body text-xs text-white/50 mb-2 text-center font-semibold">Banyak Buku yang Dibaca Siswa Kelas 9A</p>
+                      <svg viewBox="0 0 300 200" className="w-full max-w-xs mx-auto" aria-label="Diagram batang banyak buku">
+                        {/* Grid lines + Y-axis ticks */}
+                        {[0,1,2,3,4,5,6].map(v => {
+                          const y = 155 - v * (135/6);
+                          return (
+                            <g key={v}>
+                              <line x1="38" y1={y} x2="288" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
+                              <text x="33" y={y + 4} textAnchor="end" fontSize="9" fill="rgba(255,255,255,0.55)">{v}</text>
+                            </g>
+                          );
+                        })}
+                        {/* Sumbu tegak (Y) */}
+                        <line x1="38" y1="15" x2="38" y2="155" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        {/* Sumbu datar (X) */}
+                        <line x1="38" y1="155" x2="288" y2="155" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        {/* Batang */}
+                        {[{val:1,f:3},{val:2,f:5},{val:3,f:4},{val:4,f:6},{val:5,f:2}].map(({val,f},i) => {
+                          const slotW = 50;
+                          const barW = 34;
+                          const x = 38 + i * slotW + (slotW - barW) / 2;
+                          const barH = f * (135/6);
+                          const y = 155 - barH;
+                          return (
+                            <g key={val}>
+                              <rect x={x} y={y} width={barW} height={barH} fill="rgba(99,102,241,0.7)" stroke="rgba(129,140,248,0.8)" strokeWidth="1" rx="2"/>
+                              <text x={x + barW/2} y={y - 4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#a5b4fc">{f}</text>
+                              <text x={x + barW/2} y="169" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.65)">{val}</text>
+                            </g>
+                          );
+                        })}
+                        {/* Label sumbu datar */}
+                        <text x="163" y="188" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)">Banyak Buku (judul)</text>
+                        {/* Label sumbu tegak */}
+                        <text x="10" y="85" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)" transform="rotate(-90,10,85)">Frekuensi</text>
+                      </svg>
                     </div>
                   </div>
                   <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-4">
@@ -1243,6 +1238,33 @@ const MedianModusPage = () => {
                         <BlockMath math="\text{Me} = \frac{x_{(10)} + x_{(11)}}{2} = \frac{3 + 3}{2} = 3" />
                       </div>
                       <p><strong className="text-primary">Median = 3 buku</strong></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">
+                      Terdapat 12 data terurut. Nilai terkecil 40, terbesar 95. Median = 68. Jika semua nilai di atas median dinaikkan 5, tentukan median yang baru!
+                    </p>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p><InlineMath math="n=12" /> (genap) → median = rata-rata data ke-6 dan ke-7.</p>
+                      <p>Median awal = 68 berarti: <InlineMath math="\frac{x_6 + x_7}{2} = 68 \implies x_6 + x_7 = 136" /></p>
+                      <p>Nilai di atas median = data ke-7 s.d. ke-12. Data ke-7 termasuk "di atas median" (nilai ke-7 ≥ nilai ke-6).</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p>Setelah data ke-7 s.d. ke-12 dinaikkan 5:</p>
+                        <p>• <InlineMath math="x_6" /> tetap (tidak berubah)</p>
+                        <p>• <InlineMath math="x_7" /> menjadi <InlineMath math="x_7 + 5" /></p>
+                        <BlockMath math="\text{Me}_{\text{baru}} = \frac{x_6 + (x_7+5)}{2} = \frac{x_6+x_7}{2} + \frac{5}{2} = 68 + 2{,}5 = 70{,}5" />
+                      </div>
+                      <p><strong className="text-primary">Median baru = 70,5</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1402,55 +1424,58 @@ const MedianModusPage = () => {
                   </div>
                 </div>
 
-                <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
-                    <span className="font-body font-semibold text-white">Contoh 3</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Data: 5, 8, <InlineMath math="p" />, 8, 12, 5, 15, <InlineMath math="p" />, 8, 5. Jika modus data tersebut adalah 5, tentukan nilai <InlineMath math="p" /> yang mungkin, disertai penjelasan!
-                    </p>
-                  </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Frekuensi nilai yang sudah diketahui: 5 muncul 3×, 8 muncul 3×, 12 muncul 1×, 15 muncul 1×. Nilai <InlineMath math="p" /> muncul 2×.</p>
-                      <p>Agar modus = 5, maka frekuensi 5 (=3) harus <strong>lebih besar</strong> dari semua frekuensi lain.</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>• Nilai 8 sudah 3× → sama dengan 5. Agar 5 satu-satunya modus, nilai 8 tidak boleh bertambah. Jadi <InlineMath math="p \neq 8" />.</p>
-                        <p>• Nilai <InlineMath math="p" /> muncul 2×, sudah lebih kecil dari 3 → oke selama <InlineMath math="p \neq 5" /> dan <InlineMath math="p \neq 8" />.</p>
-                      </div>
-                      <p><strong className="text-primary">p bisa berupa nilai apapun kecuali 5 dan 8, misalnya p = 3, 7, 10, 11, dll.</strong></p>
-                      <p className="text-xs text-white/50">(Jika p=5, maka 5 muncul 5× → modus tetap 5 ✓. Jika p=8, maka 8 muncul 5× → modus menjadi 8, bukan 5 ✗)</p>
-                    </div>
-                  </div>
-                </div>
-
                 <div className="border-l-4 border-blue-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded">DIAGRAM BATANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                    <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white mb-3">
                       Diagram batang berikut menunjukkan nilai ulangan IPA siswa kelas 9C. Tentukan modus data tersebut!
                     </p>
+                    {/* Diagram Batang dengan sumbu tegak & datar */}
                     <div className="bg-slate-900/60 rounded-xl p-4">
-                      <p className="font-body text-xs text-white/50 mb-3 text-center">Nilai Ulangan IPA Kelas 9C</p>
-                      <div className="flex items-end justify-center gap-4 h-36">
-                        {[{val:6,f:3},{val:7,f:8},{val:8,f:8},{val:9,f:5},{val:10,f:1}].map(({val,f}) => (
-                          <div key={val} className="flex flex-col items-center gap-1">
-                            <span className="font-body text-xs text-orange-300 font-bold">{f}</span>
-                            <div
-                              className={`w-10 rounded-t-md border ${(f===8) ? "bg-orange-500/70 border-orange-400/80" : "bg-slate-600/60 border-slate-500/50"}`}
-                              style={{ height: `${f * 16}px` }}
-                            />
-                            <span className="font-body text-xs text-white/60">{val}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <p className="font-body text-xs text-white/40 text-center mt-2">Nilai</p>
+                      <p className="font-body text-xs text-white/50 mb-2 text-center font-semibold">Nilai Ulangan IPA Kelas 9C</p>
+                      <svg viewBox="0 0 320 210" className="w-full max-w-xs mx-auto" aria-label="Diagram batang nilai IPA">
+                        {/* Grid lines + Y-axis ticks: 0,2,4,6,8 */}
+                        {[0,2,4,6,8].map(v => {
+                          const y = 160 - v * (140/8);
+                          return (
+                            <g key={v}>
+                              <line x1="38" y1={y} x2="308" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
+                              <text x="33" y={y + 4} textAnchor="end" fontSize="9" fill="rgba(255,255,255,0.55)">{v}</text>
+                            </g>
+                          );
+                        })}
+                        {/* Sumbu tegak (Y) */}
+                        <line x1="38" y1="15" x2="38" y2="160" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        {/* Sumbu datar (X) */}
+                        <line x1="38" y1="160" x2="308" y2="160" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        {/* Batang */}
+                        {[{val:6,f:3},{val:7,f:8},{val:8,f:8},{val:9,f:5},{val:10,f:1}].map(({val,f},i) => {
+                          const slotW = 54;
+                          const barW = 36;
+                          const x = 38 + i * slotW + (slotW - barW) / 2;
+                          const barH = f * (140/8);
+                          const y = 160 - barH;
+                          const isModus = f === 8;
+                          return (
+                            <g key={val}>
+                              <rect x={x} y={y} width={barW} height={barH}
+                                fill={isModus ? "rgba(249,115,22,0.75)" : "rgba(100,116,139,0.6)"}
+                                stroke={isModus ? "rgba(251,146,60,0.9)" : "rgba(148,163,184,0.5)"}
+                                strokeWidth="1" rx="2"/>
+                              <text x={x + barW/2} y={y - 4} textAnchor="middle" fontSize="9" fontWeight="bold"
+                                fill={isModus ? "#fdba74" : "#94a3b8"}>{f}</text>
+                              <text x={x + barW/2} y="174" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.65)">{val}</text>
+                            </g>
+                          );
+                        })}
+                        {/* Label sumbu datar */}
+                        <text x="173" y="193" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)">Nilai</text>
+                        {/* Label sumbu tegak */}
+                        <text x="10" y="88" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)" transform="rotate(-90,10,88)">Frekuensi</text>
+                      </svg>
                     </div>
                   </div>
                   <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-4">
@@ -1483,6 +1508,31 @@ const MedianModusPage = () => {
                       </div>
                       <p>Nilai 7 dan 8 sama-sama memiliki frekuensi tertinggi (8 siswa).</p>
                       <p><strong className="text-primary">Modus = 7 dan 8 (data bimodal)</strong></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">
+                      Data: 5, 8, <InlineMath math="p" />, 8, 12, 5, 15, <InlineMath math="p" />, 8, 5. Jika modus data tersebut adalah 5, tentukan nilai <InlineMath math="p" /> yang mungkin, disertai penjelasan!
+                    </p>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p>Frekuensi nilai yang sudah diketahui: 5 muncul 3×, 8 muncul 3×, 12 muncul 1×, 15 muncul 1×. Nilai <InlineMath math="p" /> muncul 2×.</p>
+                      <p>Agar modus = 5, maka frekuensi 5 (=3) harus <strong>lebih besar</strong> dari semua frekuensi lain.</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <p>• Nilai 8 sudah 3× → sama dengan 5. Agar 5 satu-satunya modus, nilai 8 tidak boleh bertambah. Jadi <InlineMath math="p \neq 8" />.</p>
+                        <p>• Nilai <InlineMath math="p" /> muncul 2×, sudah lebih kecil dari 3 → oke selama <InlineMath math="p \neq 5" /> dan <InlineMath math="p \neq 8" />.</p>
+                      </div>
+                      <p><strong className="text-primary">p bisa berupa nilai apapun kecuali 5 dan 8, misalnya p = 3, 7, 10, 11, dll.</strong></p>
+                      <p className="text-xs text-white/50">(Jika p=5, maka 5 muncul 5× → modus tetap 5 ✓. Jika p=8, maka 8 muncul 5× → modus menjadi 8, bukan 5 ✗)</p>
                     </div>
                   </div>
                 </div>
