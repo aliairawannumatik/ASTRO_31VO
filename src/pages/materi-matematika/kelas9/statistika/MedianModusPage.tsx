@@ -969,7 +969,6 @@ const MedianModusPage = () => {
                         ].map(({val,f,cx,color}) => (
                           <g key={val}>
                             <rect x={cx-14} y={115-f*15} width="28" height={f*15} fill={color} fillOpacity="0.8" rx="2"/>
-                            <text x={cx} y={110-f*15} textAnchor="middle" fontSize="7" fill="white" fontWeight="bold">{f}</text>
                             <text x={cx} y="128" textAnchor="middle" fontSize="8" fill="#94a3b8">{val}</text>
                           </g>
                         ))}
