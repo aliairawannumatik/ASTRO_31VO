@@ -1218,7 +1218,6 @@ const sections: Sec[] = [
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
           <p className="text-orange-300 font-semibold">📌 Penurunan Rumus:</p>
           <div className="text-xs text-white/70 space-y-1">
-            <p>Melalui kalkulus integral, dapat dibuktikan bahwa:</p>
             <p>Luas permukaan bola = 4 × luas lingkaran = <InlineMath math="4 \times \pi r^2" /></p>
           </div>
           <div className="bg-slate-800/60 rounded p-3">
