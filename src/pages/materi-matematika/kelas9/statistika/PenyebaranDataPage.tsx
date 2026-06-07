@@ -37,10 +37,6 @@ const PenyebaranDataPage = () => {
           Kelas 9 · Statistika · Materi Matematika
         </p>
 
-        <JangkauanAnimasi />
-
-        <JIKdanSKAnimasi />
-
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* ── PENGANTAR ──────────────────────────────────────────── */}
@@ -123,6 +119,8 @@ const PenyebaranDataPage = () => {
                       </div>
                     </div>
 
+                    <JangkauanAnimasi />
+
                     {/* Jangkauan Interkuartil */}
                     <div className="bg-blue-900/30 border border-blue-500/30 rounded-xl p-4">
                       <div className="flex items-center gap-2 mb-2">
@@ -146,6 +144,8 @@ const PenyebaranDataPage = () => {
                         <p className="text-xs text-white/50 font-body">setengah dari JIK — disebut juga semi-interkuartil range</p>
                       </div>
                     </div>
+
+                    <JIKdanSKAnimasi />
                   </div>
                 </div>
 
