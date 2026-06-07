@@ -1153,6 +1153,29 @@ const sections: Sec[] = [
           </div>
         </div>
         <InteractiveHalfSphere3D />
+        <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-4 space-y-3">
+          <p className="text-cyan-300 font-semibold text-sm">📋 Kesimpulan Unsur-unsur Bola</p>
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 space-y-1">
+              <p className="text-3xl font-bold text-cyan-300">1</p>
+              <p className="text-xs text-white/70 font-body">Sisi</p>
+              <p className="text-[10px] text-cyan-400/70 font-body">(sisi lengkung)</p>
+            </div>
+            <div className="bg-slate-900/50 border border-slate-600/40 rounded-lg p-3 space-y-1">
+              <p className="text-3xl font-bold text-white/40">0</p>
+              <p className="text-xs text-white/70 font-body">Rusuk</p>
+              <p className="text-[10px] text-white/30 font-body">(tidak ada)</p>
+            </div>
+            <div className="bg-slate-900/50 border border-slate-600/40 rounded-lg p-3 space-y-1">
+              <p className="text-3xl font-bold text-white/40">0</p>
+              <p className="text-xs text-white/70 font-body">Titik Sudut</p>
+              <p className="text-[10px] text-white/30 font-body">(tidak ada)</p>
+            </div>
+          </div>
+          <p className="text-xs text-white/55 font-body text-center">
+            Bola adalah satu-satunya bangun ruang yang hanya memiliki <strong className="text-cyan-300">1 sisi</strong> tanpa rusuk maupun titik sudut sama sekali.
+          </p>
+        </div>
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
