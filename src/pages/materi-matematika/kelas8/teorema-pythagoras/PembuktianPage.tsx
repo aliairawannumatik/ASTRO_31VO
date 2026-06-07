@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import PythagorasDiscoveryAnimation from "@/components/PythagorasDiscoveryAnimation";
 import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
+import PythagorasStepProof from "@/components/PythagorasStepProof";
 
 /* ── SVG: Visual proof — four identical right triangles rearranged inside a square ── */
 const PembuktianSVG = () => (
@@ -126,6 +127,15 @@ const PembuktianPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Teorema Pythagoras · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* STEP-BY-STEP PROOF ANIMATION — paling atas */}
+          <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-2xl overflow-hidden p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🎯</span>
+              <span className="font-display text-sm font-bold text-cyan-300 tracking-wide">PEMBUKTIAN INTERAKTIF — STEP BY STEP</span>
+            </div>
+            <PythagorasStepProof />
+          </div>
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
