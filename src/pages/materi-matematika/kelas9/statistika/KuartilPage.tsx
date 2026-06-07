@@ -36,8 +36,6 @@ const KuartilPage = () => {
           Kelas 9 · Statistika · Materi Matematika
         </p>
 
-        <KuartilAnimasiMateri />
-
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* ── PENGANTAR ──────────────────────────────────────────── */}
@@ -99,69 +97,129 @@ const KuartilPage = () => {
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
+                  <p className="font-body text-sm font-semibold text-green-300">🎯 Cara Menentukan Kuartil Data Tunggal</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Untuk data tunggal yang sudah diurutkan, gunakan rumus <strong className="text-green-300">posisi letak kuartil</strong>. Nilai <InlineMath math="n" /> adalah banyaknya data.
+                    Cukup dengan <strong className="text-green-300">4 langkah mudah</strong> — urutkan data, cari <InlineMath math="Q_2" /> dahulu, lalu tentukan <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" /> sebagai median kaum bawah dan kaum atas.
                   </p>
-
-                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs text-white/50 text-center mb-2">Rumus Posisi Kuartil Data Tunggal</p>
-                    <div className="grid grid-cols-1 gap-3">
-                      {[
-                        { label: "Q₁ — Kuartil Bawah", formula: "Q_1 \\text{ berada pada posisi ke-} \\frac{1(n+1)}{4}", color: "border-green-500/40 text-green-300" },
-                        { label: "Q₂ — Kuartil Tengah (Median)", formula: "Q_2 \\text{ berada pada posisi ke-} \\frac{2(n+1)}{4}", color: "border-cyan-500/40 text-cyan-300" },
-                        { label: "Q₃ — Kuartil Atas", formula: "Q_3 \\text{ berada pada posisi ke-} \\frac{3(n+1)}{4}", color: "border-orange-500/40 text-orange-300" },
-                      ].map(({ label, formula, color }) => (
-                        <div key={label} className={`border ${color} rounded-lg p-3`}>
-                          <p className={`font-body text-xs font-bold mb-2 ${color.split(" ")[1]}`}>{label}</p>
-                          <div className="bg-slate-800/60 rounded p-2 text-center">
-                            <BlockMath math={formula} />
-                          </div>
+                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-2">
+                    {[
+                      { step: "1", title: "Urutkan data", desc: "Susun semua data dari nilai terkecil ke terbesar.", color: "border-slate-500/40 text-slate-300" },
+                      { step: "2", title: "Cari Q₂ terlebih dahulu", desc: "Q₂ = median seluruh data. Jika n ganjil → nilai ke-½(n+1). Jika n genap → rata-rata nilai ke-n/2 dan ke-(n/2+1).", color: "border-cyan-500/40 text-cyan-300" },
+                      { step: "3", title: "Bagi data menjadi dua kaum", desc: "Kaum Bawah = semua data di bawah Q₂. Kaum Atas = semua data di atas Q₂. (Jika n ganjil, nilai Q₂ tidak dimasukkan ke kaum manapun.)", color: "border-violet-500/40 text-violet-300" },
+                      { step: "4", title: "Cari Q₁ dan Q₃", desc: "Q₁ = median Kaum Bawah. Q₃ = median Kaum Atas.", color: "border-green-500/40 text-green-300" },
+                    ].map(({ step, title, desc, color }) => (
+                      <div key={step} className={`border ${color} rounded-lg p-3 flex items-start gap-3 bg-slate-800/40`}>
+                        <span className={`font-display font-bold text-sm min-w-[20px] ${color.split(" ")[1]}`}>{step}.</span>
+                        <div>
+                          <p className={`font-body text-xs font-bold ${color.split(" ")[1]}`}>{title}</p>
+                          <p className="font-body text-xs text-white/65 mt-1 leading-relaxed">{desc}</p>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-3">
-                    <p className="font-body text-xs text-green-200">
-                      <strong>Catatan:</strong> Jika posisi menghasilkan bilangan pecahan misal <InlineMath math="3{,}5" />, maka nilainya adalah rata-rata data ke-3 dan ke-4.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Ilustrasi Visual Data Tunggal */}
-                <div className="bg-slate-800/60 border border-green-500/20 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-green-300 uppercase tracking-wide">📌 Contoh Ilustrasi — Data 8 Nilai Siswa</p>
-                  <p className="font-body text-xs text-white/60">Data terurut: 4, 6, 7, 8, 9, 10, 11, 13 <span className="text-white/40">(n = 8)</span></p>
-                  <div className="flex items-center gap-1 justify-center flex-wrap">
-                    {["4","6","7","8","9","10","11","13"].map((v, i) => (
-                      <div key={i} className={`rounded-lg px-3 py-2 text-center border text-sm font-bold
-                        ${i === 1 ? "bg-green-700/60 border-green-400/80 text-white" : ""}
-                        ${i === 3 || i === 4 ? "bg-cyan-700/60 border-cyan-400/80 text-white" : ""}
-                        ${i === 5 ? "bg-orange-700/60 border-orange-400/80 text-white" : ""}
-                        ${![1,3,4,5].includes(i) ? "bg-slate-700/60 border-slate-500/40 text-white/60" : ""}`}>
-                        {v}
-                        {i === 1 && <div className="text-green-300 text-xs mt-1">Q₁</div>}
-                        {(i === 3 || i === 4) && <div className="text-cyan-300 text-xs mt-1">Q₂</div>}
-                        {i === 5 && <div className="text-orange-300 text-xs mt-1">Q₃</div>}
                       </div>
                     ))}
                   </div>
+                </div>
+
+                {/* Ilustrasi Visual — n ganjil */}
+                <div className="bg-slate-800/60 border border-green-500/20 rounded-xl p-4 space-y-3">
+                  <p className="font-body text-xs font-bold text-green-300 uppercase tracking-wide">📌 Ilustrasi A — Data n = 9 (Ganjil)</p>
+                  <p className="font-body text-xs text-white/60">Data terurut: 2, 4, 6, 8, <span className="text-cyan-300 font-bold">10</span>, 12, 14, 16, 18</p>
+
+                  {/* Langkah 2: Q2 */}
+                  <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-bold text-cyan-300 mb-2">Langkah 2 — Cari Q₂</p>
+                    <p className="font-body text-xs text-white/70">n = 9 (ganjil) → Q₂ = data ke-5 = <strong className="text-cyan-300">10</strong></p>
+                  </div>
+
+                  {/* Langkah 3: Split */}
+                  <div className="bg-violet-900/20 border border-violet-500/30 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-bold text-violet-300 mb-1">Langkah 3 — Bagi dua kaum (Q₂ tidak masuk keduanya)</p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex gap-1 flex-wrap">
+                        {["2","4","6","8"].map(v => (
+                          <div key={v} className="bg-green-900/50 border border-green-500/50 rounded-lg px-2.5 py-1.5 text-center">
+                            <p className="text-green-300 font-bold text-xs">{v}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="bg-cyan-700/60 border border-cyan-400/80 rounded-lg px-2.5 py-1.5 text-center">
+                        <p className="text-cyan-200 font-bold text-xs">10</p>
+                        <p className="text-cyan-400 text-[10px]">Q₂</p>
+                      </div>
+                      <div className="flex gap-1 flex-wrap">
+                        {["12","14","16","18"].map(v => (
+                          <div key={v} className="bg-orange-900/50 border border-orange-500/50 rounded-lg px-2.5 py-1.5 text-center">
+                            <p className="text-orange-300 font-bold text-xs">{v}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex gap-2 text-xs font-body mt-1">
+                      <span className="text-green-400 font-semibold">← Kaum Bawah (4 data)</span>
+                      <span className="text-orange-400 font-semibold ml-auto">Kaum Atas (4 data) →</span>
+                    </div>
+                  </div>
+
+                  {/* Langkah 4: Q1 Q3 */}
                   <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
-                    <BlockMath math="Q_1 \text{ pada posisi } \frac{1(8+1)}{4} = 2{,}25 \Rightarrow Q_1 = 6 + 0{,}25(7-6) = 6{,}25" />
-                    <BlockMath math="Q_2 \text{ pada posisi } \frac{2(8+1)}{4} = 4{,}5 \Rightarrow Q_2 = \frac{8+9}{2} = 8{,}5" />
-                    <BlockMath math="Q_3 \text{ pada posisi } \frac{3(8+1)}{4} = 6{,}75 \Rightarrow Q_3 = 10 + 0{,}75(11-10) = 10{,}75" />
+                    <BlockMath math="Q_1 = \text{median kaum bawah} = \frac{4+6}{2} = 5" />
+                    <BlockMath math="Q_2 = 10" />
+                    <BlockMath math="Q_3 = \text{median kaum atas} = \frac{14+16}{2} = 15" />
+                  </div>
+                </div>
+
+                {/* Ilustrasi Visual — n genap */}
+                <div className="bg-slate-800/60 border border-indigo-500/20 rounded-xl p-4 space-y-3">
+                  <p className="font-body text-xs font-bold text-indigo-300 uppercase tracking-wide">📌 Ilustrasi B — Data n = 8 (Genap)</p>
+                  <p className="font-body text-xs text-white/60">Data terurut: 4, 6, 7, <span className="text-cyan-300 font-bold">8</span>, <span className="text-cyan-300 font-bold">9</span>, 10, 11, 13</p>
+
+                  <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-bold text-cyan-300 mb-1">Langkah 2 — Cari Q₂</p>
+                    <p className="font-body text-xs text-white/70">n = 8 (genap) → Q₂ = rata-rata data ke-4 dan ke-5 = <InlineMath math="\frac{8+9}{2} = 8{,}5" /></p>
+                  </div>
+
+                  <div className="bg-violet-900/20 border border-violet-500/30 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-bold text-violet-300 mb-1">Langkah 3 — Bagi dua kaum (n genap → langsung belah di tengah)</p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex gap-1">
+                        {["4","6","7","8"].map(v => (
+                          <div key={v} className="bg-green-900/50 border border-green-500/50 rounded-lg px-2.5 py-1.5 text-center">
+                            <p className="text-green-300 font-bold text-xs">{v}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="border-l-2 border-cyan-500/60 self-stretch mx-1" />
+                      <div className="flex gap-1">
+                        {["9","10","11","13"].map(v => (
+                          <div key={v} className="bg-orange-900/50 border border-orange-500/50 rounded-lg px-2.5 py-1.5 text-center">
+                            <p className="text-orange-300 font-bold text-xs">{v}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex gap-2 text-xs font-body mt-1">
+                      <span className="text-green-400 font-semibold">← Kaum Bawah (4 data)</span>
+                      <span className="text-orange-400 font-semibold ml-auto">Kaum Atas (4 data) →</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <BlockMath math="Q_1 = \frac{6+7}{2} = 6{,}5" />
+                    <BlockMath math="Q_2 = 8{,}5" />
+                    <BlockMath math="Q_3 = \frac{10+11}{2} = 10{,}5" />
                   </div>
                 </div>
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Tips Interpolasi:</strong> Jika posisi = <InlineMath math="p{,}d" /> (misal 2,25), maka nilai kuartil = data ke-<InlineMath math="p" /> + <InlineMath math="d" /> × (data ke-<InlineMath math="(p+1)" /> − data ke-<InlineMath math="p" />).
+                    <strong>Kunci Ingat:</strong> Selalu cari <InlineMath math="Q_2" /> dulu → pisahkan menjadi Kaum Bawah dan Kaum Atas → cari median masing-masing kaum untuk mendapat <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />.
                   </p>
                 </div>
               </div>
             )}
           </div>
+
+          {/* ── KALKULATOR KUARTIL INTERAKTIF ───────────────────────── */}
+          <KuartilAnimasiMateri />
 
           {/* ── CONTOH SOAL SUB-BAB 1 ───────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
@@ -184,27 +242,50 @@ const KuartilPage = () => {
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong className="text-white">Langkah 1:</strong> Urutkan data dari terkecil ke terbesar.</p>
+                      <p><strong className="text-white">Langkah 1 — Urutkan data:</strong></p>
                       <div className="flex gap-2 flex-wrap">
                         {["3","4","5","6","7","7","8","9","10"].map((v, i) => (
-                          <div key={i} className="bg-slate-700/60 border border-green-500/30 rounded-lg px-3 py-1 text-green-300 font-bold text-sm">{v}</div>
+                          <div key={i} className={`rounded-lg px-3 py-2 text-center border font-bold text-sm
+                            ${i === 4 ? "bg-cyan-700/60 border-cyan-400/80 text-cyan-200" : "bg-slate-700/60 border-green-500/30 text-green-300"}`}>
+                            {v}
+                            {i === 4 && <div className="text-cyan-400 text-[10px] mt-0.5">Q₂</div>}
+                          </div>
                         ))}
                       </div>
-                      <p className="text-white/50 text-xs">n = 9</p>
-                      <p><strong className="text-white">Langkah 2:</strong> Hitung posisi kuartil.</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="Q_1 \text{ pada posisi ke-} \frac{1(9+1)}{4} = \frac{10}{4} = 2{,}5" />
-                        <p className="text-xs text-white/60">Posisi 2,5 → rata-rata data ke-2 dan ke-3</p>
-                        <BlockMath math="Q_1 = \frac{4 + 5}{2} = 4{,}5" />
-                      </div>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="Q_2 \text{ pada posisi ke-} \frac{2(9+1)}{4} = \frac{20}{4} = 5" />
-                        <p className="text-xs text-white/60">Posisi 5 → tepat pada data ke-5</p>
+                      <p className="text-white/50 text-xs">n = 9 (ganjil)</p>
+
+                      <p><strong className="text-white">Langkah 2 — Cari Q₂:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <p className="text-xs text-white/60 mb-1">n = 9 (ganjil) → Q₂ = data ke-5</p>
                         <BlockMath math="Q_2 = 7" />
                       </div>
+
+                      <p><strong className="text-white">Langkah 3 — Bagi dua kaum (Q₂ tidak masuk):</strong></p>
+                      <div className="flex flex-wrap items-center gap-2 bg-slate-900/50 rounded p-3">
+                        <div className="space-y-1">
+                          <p className="text-xs text-green-400 font-semibold">Kaum Bawah:</p>
+                          <div className="flex gap-1">
+                            {["3","4","5","6"].map(v => (
+                              <div key={v} className="bg-green-900/50 border border-green-500/40 rounded px-2 py-1 text-green-300 font-bold text-xs">{v}</div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="mx-2 text-cyan-400 font-bold text-xs">| Q₂=7 |</div>
+                        <div className="space-y-1">
+                          <p className="text-xs text-orange-400 font-semibold">Kaum Atas:</p>
+                          <div className="flex gap-1">
+                            {["7","8","9","10"].map(v => (
+                              <div key={v} className="bg-orange-900/50 border border-orange-500/40 rounded px-2 py-1 text-orange-300 font-bold text-xs">{v}</div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <p><strong className="text-white">Langkah 4 — Cari Q₁ dan Q₃:</strong></p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="Q_3 \text{ pada posisi ke-} \frac{3(9+1)}{4} = \frac{30}{4} = 7{,}5" />
-                        <p className="text-xs text-white/60">Posisi 7,5 → rata-rata data ke-7 dan ke-8</p>
+                        <p className="text-xs text-white/60">Q₁ = median kaum bawah {"{3, 4, 5, 6}"} → rata-rata data ke-2 dan ke-3</p>
+                        <BlockMath math="Q_1 = \frac{4 + 5}{2} = 4{,}5" />
+                        <p className="text-xs text-white/60">Q₃ = median kaum atas {"{7, 8, 9, 10}"} → rata-rata data ke-2 dan ke-3</p>
                         <BlockMath math="Q_3 = \frac{8 + 9}{2} = 8{,}5" />
                       </div>
                       <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-3">
@@ -223,32 +304,49 @@ const KuartilPage = () => {
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
                       Data berat badan (kg) 12 siswa: 45, 50, 52, 48, 60, 55, 47, 63, 58, 49, 54, 61.<br />
-                      Tentukan <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />!
+                      Tentukan <InlineMath math="Q_1" />, <InlineMath math="Q_2" />, dan <InlineMath math="Q_3" />!
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Urutkan data (n = 12):</p>
+                      <p><strong>Langkah 1 — Urutkan data (n = 12, genap):</strong></p>
                       <div className="flex gap-1 flex-wrap">
                         {["45","47","48","49","50","52","54","55","58","60","61","63"].map((v, i) => (
-                          <div key={i} className="bg-slate-700/60 border border-yellow-500/30 rounded-lg px-2 py-1 text-yellow-300 font-bold text-xs">{v}</div>
+                          <div key={i} className={`rounded-lg px-2 py-1 font-bold text-xs border
+                            ${i < 6 ? "bg-green-900/40 border-green-500/40 text-green-300" : "bg-orange-900/40 border-orange-500/40 text-orange-300"}`}>
+                            {v}
+                          </div>
                         ))}
                       </div>
-                      <p><strong>Langkah 2:</strong> Hitung posisi <InlineMath math="Q_1" />:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="\text{Posisi } Q_1 = \frac{1(12+1)}{4} = \frac{13}{4} = 3{,}25" />
-                        <p className="text-xs text-white/60">→ Data ke-3 = 48, data ke-4 = 49</p>
-                        <BlockMath math="Q_1 = 48 + 0{,}25 \times (49 - 48) = 48 + 0{,}25 = 48{,}25" />
+
+                      <p><strong>Langkah 2 — Cari Q₂:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <p className="text-xs text-white/60 mb-1">n = 12 (genap) → Q₂ = rata-rata data ke-6 dan ke-7</p>
+                        <BlockMath math="Q_2 = \frac{52 + 54}{2} = 53" />
                       </div>
-                      <p><strong>Langkah 3:</strong> Hitung posisi <InlineMath math="Q_3" />:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="\text{Posisi } Q_3 = \frac{3(12+1)}{4} = \frac{39}{4} = 9{,}75" />
-                        <p className="text-xs text-white/60">→ Data ke-9 = 58, data ke-10 = 60</p>
-                        <BlockMath math="Q_3 = 58 + 0{,}75 \times (60 - 58) = 58 + 1{,}5 = 59{,}5" />
+
+                      <p><strong>Langkah 3 — Bagi dua kaum (n genap → belah tepat di tengah):</strong></p>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2">
+                          <p className="text-green-400 font-bold mb-1">Kaum Bawah (6 data):</p>
+                          <p className="text-white/70">45, 47, 48, 49, 50, 52</p>
+                        </div>
+                        <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-2">
+                          <p className="text-orange-400 font-bold mb-1">Kaum Atas (6 data):</p>
+                          <p className="text-white/70">54, 55, 58, 60, 61, 63</p>
+                        </div>
+                      </div>
+
+                      <p><strong>Langkah 4 — Cari Q₁ dan Q₃:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p className="text-xs text-white/60">Q₁ = median kaum bawah {"{45,47,48,49,50,52}"} → rata-rata data ke-3 dan ke-4</p>
+                        <BlockMath math="Q_1 = \frac{48 + 49}{2} = 48{,}5" />
+                        <p className="text-xs text-white/60">Q₃ = median kaum atas {"{54,55,58,60,61,63}"} → rata-rata data ke-3 dan ke-4</p>
+                        <BlockMath math="Q_3 = \frac{58 + 60}{2} = 59" />
                       </div>
                       <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
-                        <p><strong className="text-yellow-300">Hasil: </strong><InlineMath math="Q_1 = 48{,}25" /> kg dan <InlineMath math="Q_3 = 59{,}5" /> kg</p>
+                        <p><strong className="text-yellow-300">Hasil: </strong><InlineMath math="Q_1 = 48{,}5" /> kg · <InlineMath math="Q_2 = 53" /> kg · <InlineMath math="Q_3 = 59" /> kg</p>
                       </div>
                     </div>
                   </div>
@@ -263,34 +361,71 @@ const KuartilPage = () => {
                   <div className="bg-slate-800/50 rounded-lg p-4">
                     <p className="font-body text-sm text-white">
                       Data nilai ujian 15 siswa: 72, 65, 80, 88, 74, 91, 69, 77, 83, 95, 70, 86, 78, 63, 82.<br />
-                      Jika nilai <InlineMath math="Q_1 = 70{,}5" /> dan <InlineMath math="Q_3 = 84{,}5" />, tentukan ada berapa siswa yang nilainya berada di antara <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />!
+                      Tentukan <InlineMath math="Q_1" />, <InlineMath math="Q_2" />, <InlineMath math="Q_3" />, lalu hitung berapa siswa yang nilainya berada di antara <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />!
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Urutkan data (n = 15):</p>
+                      <p><strong>Langkah 1 — Urutkan data (n = 15, ganjil):</strong></p>
                       <div className="flex gap-1 flex-wrap">
                         {["63","65","69","70","72","74","77","78","80","82","83","86","88","91","95"].map((v, i) => (
                           <div key={i} className={`rounded-lg px-2 py-1 font-bold text-xs border
-                            ${(parseFloat(v) > 70.5 && parseFloat(v) < 84.5) ? "bg-red-700/50 border-red-400/60 text-white" : "bg-slate-700/60 border-slate-500/40 text-white/50"}`}>
+                            ${i === 7 ? "bg-cyan-700/60 border-cyan-400/80 text-cyan-200" :
+                              i < 7 ? "bg-green-900/40 border-green-500/40 text-green-300" :
+                              "bg-orange-900/40 border-orange-500/40 text-orange-300"}`}>
                             {v}
+                            {i === 7 && <div className="text-cyan-400 text-[9px] mt-0.5">Q₂</div>}
                           </div>
                         ))}
                       </div>
-                      <p><strong>Langkah 2:</strong> Verifikasi kuartil.</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="\text{Posisi } Q_1 = \frac{1 \times 16}{4} = 4 \Rightarrow Q_1 = 70" />
-                        <p className="text-xs text-white/60">Catatan: Soal menyatakan <InlineMath math="Q_1 = 70{,}5" /> (menggunakan metode interpolasi berbeda — keduanya dapat diterima)</p>
-                        <BlockMath math="\text{Posisi } Q_3 = \frac{3 \times 16}{4} = 12 \Rightarrow Q_3 = 86" />
-                      </div>
-                      <p><strong>Langkah 3:</strong> Hitung siswa di antara <InlineMath math="Q_1 = 70{,}5" /> dan <InlineMath math="Q_3 = 84{,}5" />:</p>
+
+                      <p><strong>Langkah 2 — Cari Q₂:</strong></p>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <p className="text-sm">Data yang memenuhi <InlineMath math="70{,}5 < x < 84{,}5" />: <strong className="text-red-300">72, 74, 77, 78, 80, 82, 83</strong></p>
+                        <p className="text-xs text-white/60 mb-1">n = 15 (ganjil) → Q₂ = data ke-8</p>
+                        <BlockMath math="Q_2 = 78" />
+                      </div>
+
+                      <p><strong>Langkah 3 — Bagi dua kaum (Q₂ = 78 tidak masuk):</strong></p>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2">
+                          <p className="text-green-400 font-bold mb-1">Kaum Bawah (7 data):</p>
+                          <p className="text-white/70">63, 65, 69, 70, 72, 74, 77</p>
+                        </div>
+                        <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-2">
+                          <p className="text-orange-400 font-bold mb-1">Kaum Atas (7 data):</p>
+                          <p className="text-white/70">80, 82, 83, 86, 88, 91, 95</p>
+                        </div>
+                      </div>
+
+                      <p><strong>Langkah 4 — Cari Q₁ dan Q₃:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <p className="text-xs text-white/60">Q₁ = median kaum bawah (7 data, ganjil) → data ke-4</p>
+                        <BlockMath math="Q_1 = 70" />
+                        <p className="text-xs text-white/60">Q₃ = median kaum atas (7 data, ganjil) → data ke-4</p>
+                        <BlockMath math="Q_3 = 86" />
+                      </div>
+
+                      <p><strong>Langkah 5 — Hitung siswa di antara Q₁ dan Q₃:</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <p className="text-xs text-white/60">Cari data yang memenuhi <InlineMath math="70 < x < 86" />:</p>
+                        <div className="flex gap-1 flex-wrap mt-1">
+                          {["63","65","69","70","72","74","77","78","80","82","83","86","88","91","95"].map((v, i) => {
+                            const n = parseFloat(v);
+                            const inRange = n > 70 && n < 86;
+                            return (
+                              <div key={i} className={`rounded px-2 py-1 text-xs font-bold border
+                                ${inRange ? "bg-red-700/50 border-red-400/60 text-white" : "bg-slate-700/60 border-slate-500/40 text-white/40"}`}>
+                                {v}
+                              </div>
+                            );
+                          })}
+                        </div>
                         <BlockMath math="\text{Banyak siswa} = 7 \text{ orang}" />
                       </div>
                       <div className="bg-red-900/30 border border-red-500/30 rounded-lg p-3">
-                        <p><strong className="text-red-300">Jawaban: 7 siswa</strong> berada di antara <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />.</p>
+                        <p><strong className="text-red-300">Jawaban: </strong><InlineMath math="Q_1=70" /> · <InlineMath math="Q_2=78" /> · <InlineMath math="Q_3=86" /><br />
+                        <strong>7 siswa</strong> nilainya berada di antara <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />.</p>
                       </div>
                     </div>
                   </div>
@@ -402,18 +537,37 @@ const KuartilPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-sm text-white mb-2">Tabel distribusi frekuensi tunggal nilai ulangan harian 20 siswa:</p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1 text-left text-white/70">Nilai</th><th className="px-3 py-1 text-center text-white/70">Frekuensi</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["5","2"],["6","4"],["7","6"],["8","5"],["9","3"]].map(([v, f]) => (
-                            <tr key={v}><td className="px-3 py-1 text-white font-semibold">{v}</td><td className="px-3 py-1 text-center text-green-300">{f}</td></tr>
-                          ))}
-                        </tbody>
-                      </table>
+                    <p className="font-body text-sm text-white mb-3">Diagram batang berikut menunjukkan nilai ulangan harian 20 siswa. Tentukan <InlineMath math="Q_1" />, <InlineMath math="Q_2" />, dan <InlineMath math="Q_3" />!</p>
+                    <div className="bg-slate-900/60 rounded-xl p-4">
+                      <p className="font-body text-xs text-white/50 mb-2 text-center font-semibold">Nilai Ulangan Harian 20 Siswa</p>
+                      <svg viewBox="0 0 280 190" className="w-full max-w-xs mx-auto" aria-label="Diagram batang nilai ulangan">
+                        {[0,2,4,6].map(v => {
+                          const y = 148 - v * (128/6);
+                          return (
+                            <g key={v}>
+                              <line x1="32" y1={y} x2="272" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
+                              <text x="27" y={y+4} textAnchor="end" fontSize="9" fill="rgba(255,255,255,0.55)">{v}</text>
+                            </g>
+                          );
+                        })}
+                        <line x1="32" y1="15" x2="32" y2="148" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        <line x1="32" y1="148" x2="272" y2="148" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        {[{val:5,f:2},{val:6,f:4},{val:7,f:6},{val:8,f:5},{val:9,f:3}].map(({val,f},i) => {
+                          const slotW = 48; const barW = 32;
+                          const x = 32 + i*slotW + (slotW-barW)/2;
+                          const barH = f*(128/6); const y = 148-barH;
+                          return (
+                            <g key={val}>
+                              <rect x={x} y={y} width={barW} height={barH} fill="rgba(34,197,94,0.65)" stroke="rgba(74,222,128,0.8)" strokeWidth="1" rx="2"/>
+                              <text x={x+barW/2} y={y-4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#86efac">{f}</text>
+                              <text x={x+barW/2} y="162" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.65)">{val}</text>
+                            </g>
+                          );
+                        })}
+                        <text x="152" y="178" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)">Nilai</text>
+                        <text x="10" y="82" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)" transform="rotate(-90,10,82)">Frekuensi</text>
+                      </svg>
                     </div>
-                    <p className="font-body text-sm text-white mt-2">Tentukan <InlineMath math="Q_1" />, <InlineMath math="Q_2" />, dan <InlineMath math="Q_3" />!</p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
@@ -453,18 +607,37 @@ const KuartilPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-sm text-white mb-2">Data usia anggota klub robotika:</p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1 text-left text-white/70">Usia (tahun)</th><th className="px-3 py-1 text-center text-white/70">Frekuensi</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["13","3"],["14","7"],["15","12"],["16","10"],["17","8"]].map(([v, f]) => (
-                            <tr key={v}><td className="px-3 py-1 text-white">{v}</td><td className="px-3 py-1 text-center text-yellow-300">{f}</td></tr>
-                          ))}
-                        </tbody>
-                      </table>
+                    <p className="font-body text-sm text-white mb-3">Diagram batang berikut menunjukkan usia anggota klub robotika. Tentukan <InlineMath math="Q_3" /> dan interpretasikan maknanya!</p>
+                    <div className="bg-slate-900/60 rounded-xl p-4">
+                      <p className="font-body text-xs text-white/50 mb-2 text-center font-semibold">Usia Anggota Klub Robotika (40 anggota)</p>
+                      <svg viewBox="0 0 280 190" className="w-full max-w-xs mx-auto" aria-label="Diagram batang usia anggota">
+                        {[0,4,8,12].map(v => {
+                          const y = 148 - v*(128/12);
+                          return (
+                            <g key={v}>
+                              <line x1="32" y1={y} x2="272" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
+                              <text x="27" y={y+4} textAnchor="end" fontSize="9" fill="rgba(255,255,255,0.55)">{v}</text>
+                            </g>
+                          );
+                        })}
+                        <line x1="32" y1="15" x2="32" y2="148" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        <line x1="32" y1="148" x2="272" y2="148" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        {[{val:13,f:3},{val:14,f:7},{val:15,f:12},{val:16,f:10},{val:17,f:8}].map(({val,f},i) => {
+                          const slotW = 48; const barW = 32;
+                          const x = 32 + i*slotW + (slotW-barW)/2;
+                          const barH = f*(128/12); const y = 148-barH;
+                          return (
+                            <g key={val}>
+                              <rect x={x} y={y} width={barW} height={barH} fill="rgba(234,179,8,0.55)" stroke="rgba(253,224,71,0.8)" strokeWidth="1" rx="2"/>
+                              <text x={x+barW/2} y={y-4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#fde047">{f}</text>
+                              <text x={x+barW/2} y="162" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.65)">{val}</text>
+                            </g>
+                          );
+                        })}
+                        <text x="152" y="178" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)">Usia (tahun)</text>
+                        <text x="10" y="82" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.4)" transform="rotate(-90,10,82)">Frekuensi</text>
+                      </svg>
                     </div>
-                    <p className="font-body text-sm text-white mt-2">Tentukan <InlineMath math="Q_3" /> dan interpretasikan maknanya!</p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
@@ -505,22 +678,39 @@ const KuartilPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-sm text-white mb-2">
-                      Tabel distribusi frekuensi tunggal data waktu tempuh (menit) 50 siswa ke sekolah:
+                    <p className="font-body text-sm text-white mb-3">
+                      Diagram batang berikut menunjukkan waktu tempuh (menit) 50 siswa ke sekolah. Tentukan semua kuartil dan nyatakan: berapa persen siswa yang waktu tempuhnya antara <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />?
                     </p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1 text-left text-white/70">Waktu (menit)</th><th className="px-3 py-1 text-center text-white/70">Frekuensi</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["10","5"],["15","8"],["20","14"],["25","12"],["30","7"],["35","4"]].map(([v, f]) => (
-                            <tr key={v}><td className="px-3 py-1 text-white">{v}</td><td className="px-3 py-1 text-center text-red-300">{f}</td></tr>
-                          ))}
-                        </tbody>
-                      </table>
+                    <div className="bg-slate-900/60 rounded-xl p-4">
+                      <p className="font-body text-xs text-white/50 mb-2 text-center font-semibold">Waktu Tempuh 50 Siswa ke Sekolah</p>
+                      <svg viewBox="0 0 300 195" className="w-full max-w-sm mx-auto" aria-label="Diagram batang waktu tempuh">
+                        {[0,4,8,12,14].map(v => {
+                          const y = 148 - v*(128/14);
+                          return (
+                            <g key={v}>
+                              <line x1="34" y1={y} x2="290" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
+                              <text x="29" y={y+4} textAnchor="end" fontSize="8" fill="rgba(255,255,255,0.55)">{v}</text>
+                            </g>
+                          );
+                        })}
+                        <line x1="34" y1="15" x2="34" y2="148" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        <line x1="34" y1="148" x2="290" y2="148" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>
+                        {[{val:10,f:5},{val:15,f:8},{val:20,f:14},{val:25,f:12},{val:30,f:7},{val:35,f:4}].map(({val,f},i) => {
+                          const slotW = 43; const barW = 28;
+                          const x = 34 + i*slotW + (slotW-barW)/2;
+                          const barH = f*(128/14); const y = 148-barH;
+                          return (
+                            <g key={val}>
+                              <rect x={x} y={y} width={barW} height={barH} fill="rgba(239,68,68,0.55)" stroke="rgba(252,165,165,0.8)" strokeWidth="1" rx="2"/>
+                              <text x={x+barW/2} y={y-4} textAnchor="middle" fontSize="8" fontWeight="bold" fill="#fca5a5">{f}</text>
+                              <text x={x+barW/2} y="162" textAnchor="middle" fontSize="8" fill="rgba(255,255,255,0.65)">{val}</text>
+                            </g>
+                          );
+                        })}
+                        <text x="162" y="178" textAnchor="middle" fontSize="8" fill="rgba(255,255,255,0.4)">Waktu (menit)</text>
+                        <text x="10" y="82" textAnchor="middle" fontSize="8" fill="rgba(255,255,255,0.4)" transform="rotate(-90,10,82)">Frekuensi</text>
+                      </svg>
                     </div>
-                    <p className="font-body text-sm text-white mt-2">
-                      Tentukan semua kuartil dan nyatakan: berapa persen siswa yang waktu tempuhnya antara <InlineMath math="Q_1" /> dan <InlineMath math="Q_3" />?
-                    </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
@@ -579,8 +769,9 @@ const KuartilPage = () => {
                       title: "Data Tunggal", color: "border-green-500/40 bg-green-900/20",
                       points: [
                         "Urutkan data dari kecil ke besar.",
-                        "Posisi Qₖ = k(n+1)/4",
-                        "Jika pecahan → interpolasi antara dua data.",
+                        "Cari Q₂ (median seluruh data) terlebih dahulu.",
+                        "Bagi jadi Kaum Bawah dan Kaum Atas (tidak termasuk Q₂ jika n ganjil).",
+                        "Q₁ = median Kaum Bawah · Q₃ = median Kaum Atas.",
                       ]
                     },
                     {
