@@ -916,36 +916,11 @@ const MedianModusPage = () => {
                   </div>
                 </div>
 
-                <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
-                    <span className="font-body font-semibold text-white">Contoh 3</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Data terdiri dari 11 bilangan yang sudah terurut. Diketahui median = 45, dan semua data di bawah median adalah 20, 25, 28, 32, <InlineMath math="a" />. Jika rata-rata data di bawah median = 27, tentukan nilai <InlineMath math="a" />!
-                    </p>
-                  </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><InlineMath math="n=11" /> ganjil, median = data ke-6 = 45. Data di bawah median: posisi 1–5 = 20, 25, 28, 32, <InlineMath math="a" /></p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="\bar{x}_{\text{bawah}} = \frac{20+25+28+32+a}{5} = 27" />
-                        <BlockMath math="105 + a = 135" />
-                        <BlockMath math="a = 30" />
-                      </div>
-                      <p>Cek urutan: 20, 25, 28, 30, 32 ✓ (terurut naik, semua &lt; 45 ✓)</p>
-                      <p><strong className="text-primary">a = 30</strong></p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CONTOH 4 — Diagram Batang */}
+                {/* CONTOH 3 — Diagram Batang */}
                 <div className="border-l-4 border-orange-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-orange-500/20 text-orange-400 text-xs font-bold px-2 py-1 rounded">DIAGRAM</span>
-                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                    <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">Diagram batang berikut menunjukkan nilai ulangan harian siswa kelas 9A. Tentukan median nilai ulangan tersebut!</p>
@@ -1006,6 +981,32 @@ const MedianModusPage = () => {
                         <p className="text-xs text-purple-300 font-semibold">Data ke-8 s.d. ke-13 → Nilai <strong>8</strong> ← posisi ke-10 ada di sini!</p>
                       </div>
                       <p><strong className="text-primary">Median = 8</strong></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CONTOH 4 — SULIT */}
+                <div className="border-l-4 border-red-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white">
+                      Data terdiri dari 11 bilangan yang sudah terurut. Diketahui median = 45, dan semua data di bawah median adalah 20, 25, 28, 32, <InlineMath math="a" />. Jika rata-rata data di bawah median = 27, tentukan nilai <InlineMath math="a" />!
+                    </p>
+                  </div>
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-2 font-body text-sm text-white/80">
+                      <p><InlineMath math="n=11" /> ganjil, median = data ke-6 = 45. Data di bawah median: posisi 1–5 = 20, 25, 28, 32, <InlineMath math="a" /></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <BlockMath math="\bar{x}_{\text{bawah}} = \frac{20+25+28+32+a}{5} = 27" />
+                        <BlockMath math="105 + a = 135" />
+                        <BlockMath math="a = 30" />
+                      </div>
+                      <p>Cek urutan: 20, 25, 28, 30, 32 ✓ (terurut naik, semua &lt; 45 ✓)</p>
+                      <p><strong className="text-primary">a = 30</strong></p>
                     </div>
                   </div>
                 </div>
