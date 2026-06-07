@@ -167,8 +167,6 @@ const InteractiveSphere3D = () => {
             <circle cx={cx + SPHERE_R} cy={cy} r="4" fill="#f97316"/>
             <text x={cx + SPHERE_R / 2} y={cy + 16} fill="#f97316" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
             <text x={cx - 10} y={cy + 4} fill="#e0e7ff" fontSize="9" fontFamily="monospace">O</text>
-            <text x="8" y="24" fill="#22d3ee" fontSize="9" fontFamily="monospace">L = 4πr²</text>
-            <text x="8" y="38" fill="#a78bfa" fontSize="9" fontFamily="monospace">V = ⁴⁄₃πr³</text>
           </g>
         )}
       </svg>
