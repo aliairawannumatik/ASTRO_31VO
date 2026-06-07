@@ -1286,7 +1286,6 @@ const sections: Sec[] = [
             <tbody>
               {[
                 ["Diameter","d = 2r","dua kali jari-jari"],
-                ["Keliling penampang","K = 2πr","lingkaran besar"],
                 ["Luas permukaan","L = 4πr²","4 lingkaran"],
                 ["Luas ½ bola (lengkung)","L = 2πr²","setengah permukaan"],
                 ["Luas ½ bola (total)","L = 3πr²","+ alas lingkaran"],
