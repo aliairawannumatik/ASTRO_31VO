@@ -1314,6 +1314,189 @@ const sections: Sec[] = [
 ───────────────────────────────────────────────────────────── */
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
+const unsurExamples: Ex[] = [
+  {
+    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <p>Perhatikan gambar bola berikut. Jari-jari bola adalah <strong className="text-yellow-300">10 cm</strong>.</p>
+        <svg viewBox="0 0 200 200" className="w-44 h-44 mx-auto block">
+          <defs>
+            <radialGradient id="uq1grad" cx="38%" cy="35%" r="60%">
+              <stop offset="0%" stopColor="#93c5fd"/>
+              <stop offset="100%" stopColor="#1e3a8a"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="70" fill="url(#uq1grad)" stroke="#60a5fa" strokeWidth="1.5"/>
+          <ellipse cx="100" cy="100" rx="70" ry="18" fill="none" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5 3" opacity="0.7"/>
+          <line x1="100" y1="100" x2="170" y2="100" stroke="#f97316" strokeWidth="2"/>
+          <circle cx="100" cy="100" r="3" fill="#f97316"/>
+          <text x="130" y="95" fill="#f97316" fontSize="12" fontWeight="bold">r = 10 cm</text>
+          <text x="95" y="116" fill="#f97316" fontSize="10">O</text>
+        </svg>
+        <p>Tentukan:</p>
+        <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
+          <li>a) Panjang diameter bola</li>
+          <li>b) Berapa jumlah sisi bola?</li>
+          <li>c) Berapa jumlah rusuk bola?</li>
+          <li>d) Berapa jumlah titik sudut bola?</li>
+        </ul>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-green-400 font-semibold">(a) Diameter:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="d = 2r = 2 \times 10 = 20 \text{ cm}" />
+        </div>
+        <div className="grid grid-cols-3 gap-2 text-xs text-center">
+          <div className="bg-green-950/50 border border-green-700/40 rounded p-2 space-y-1">
+            <p className="text-green-300 font-bold text-base">1</p>
+            <p className="text-white/70">(b) Sisi</p>
+            <p className="text-white/40 text-[10px]">sisi lengkung</p>
+          </div>
+          <div className="bg-slate-900/50 border border-slate-600/40 rounded p-2 space-y-1">
+            <p className="text-white/40 font-bold text-base">0</p>
+            <p className="text-white/70">(c) Rusuk</p>
+            <p className="text-white/40 text-[10px]">tidak ada</p>
+          </div>
+          <div className="bg-slate-900/50 border border-slate-600/40 rounded p-2 space-y-1">
+            <p className="text-white/40 font-bold text-base">0</p>
+            <p className="text-white/70">(d) Titik Sudut</p>
+            <p className="text-white/40 text-[10px]">tidak ada</p>
+          </div>
+        </div>
+        <div className="bg-green-950/60 border border-green-700/40 rounded p-2 text-xs">
+          <p className="text-green-300 font-semibold">✅ d = 20 cm · Sisi = 1 · Rusuk = 0 · Titik Sudut = 0</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <p>Sebuah bola berdiameter <strong className="text-yellow-300">42 cm</strong> dipotong tepat melalui titik pusatnya sehingga terbentuk dua belahan bola (hemisphere).</p>
+        <svg viewBox="0 0 220 160" className="w-52 h-40 mx-auto block">
+          <defs>
+            <radialGradient id="uq2grad" cx="38%" cy="30%" r="60%">
+              <stop offset="0%" stopColor="#a78bfa"/>
+              <stop offset="100%" stopColor="#3b0764"/>
+            </radialGradient>
+            <clipPath id="uq2clip">
+              <rect x="0" y="0" width="220" height="100"/>
+            </clipPath>
+          </defs>
+          <circle cx="110" cy="90" r="65" fill="url(#uq2grad)" stroke="#a78bfa" strokeWidth="1.5" clipPath="url(#uq2clip)"/>
+          <ellipse cx="110" cy="90" rx="65" ry="16" fill="#1e1b4b" stroke="#a78bfa" strokeWidth="1.5"/>
+          <line x1="45" y1="90" x2="175" y2="90" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 3"/>
+          <circle cx="110" cy="90" r="3" fill="#fbbf24"/>
+          <text x="100" y="108" fill="#fbbf24" fontSize="10">O</text>
+          <text x="65" y="85" fill="#fbbf24" fontSize="11" fontWeight="bold">d = 42 cm</text>
+          <line x1="110" y1="90" x2="110" y2="25" stroke="#f97316" strokeWidth="1.5"/>
+          <text x="113" y="60" fill="#f97316" fontSize="10">r = ?</text>
+        </svg>
+        <p>Tentukan:</p>
+        <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
+          <li>a) Jari-jari belahan bola</li>
+          <li>b) Panjang garis tengah alas lingkaran belahan bola</li>
+          <li>c) Berapa jumlah sisi datar yang dimiliki belahan bola?</li>
+        </ul>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-yellow-400 font-semibold">(a) Jari-jari belahan bola:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="r = \frac{d}{2} = \frac{42}{2} = 21 \text{ cm}" />
+        </div>
+        <p className="text-yellow-400 font-semibold">(b) Garis tengah alas lingkaran:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <p className="text-white/70">Alas belahan bola berupa lingkaran dengan jari-jari = r bola.</p>
+          <BlockMath math="d_{\text{alas}} = 2r = 2 \times 21 = 42 \text{ cm}" />
+        </div>
+        <p className="text-yellow-400 font-semibold">(c) Jumlah sisi datar:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <p className="text-white/70">Belahan bola memiliki <strong className="text-cyan-300">1 sisi datar</strong> (berupa lingkaran di alasnya) dan <strong className="text-cyan-300">1 sisi lengkung</strong> di bagian atas.</p>
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs">
+          <p className="text-yellow-300 font-semibold">✅ r = 21 cm · d alas = 42 cm · Sisi datar = 1 lingkaran</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-3">
+        <p>Perhatikan gambar bola berikut.</p>
+        <svg viewBox="0 0 240 200" className="w-56 h-48 mx-auto block">
+          <defs>
+            <radialGradient id="uq3grad" cx="38%" cy="35%" r="60%">
+              <stop offset="0%" stopColor="#6ee7b7"/>
+              <stop offset="100%" stopColor="#065f46"/>
+            </radialGradient>
+          </defs>
+          <circle cx="120" cy="100" r="72" fill="url(#uq3grad)" stroke="#34d399" strokeWidth="1.5"/>
+          <ellipse cx="120" cy="100" rx="72" ry="18" fill="none" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5 3" opacity="0.6"/>
+          <line x1="48" y1="100" x2="192" y2="100" stroke="#f97316" strokeWidth="2"/>
+          <line x1="120" y1="100" x2="120" y2="28" stroke="#c084fc" strokeWidth="2"/>
+          <line x1="120" y1="100" x2="176" y2="143" stroke="#60a5fa" strokeWidth="2"/>
+          <circle cx="120" cy="100" r="4" fill="white"/>
+          <circle cx="48" cy="100" r="4" fill="#f97316"/>
+          <circle cx="192" cy="100" r="4" fill="#f97316"/>
+          <circle cx="120" cy="28" r="4" fill="#c084fc"/>
+          <circle cx="176" cy="143" r="4" fill="#60a5fa"/>
+          <text x="95" y="115" fill="white" fontSize="11" fontWeight="bold">O</text>
+          <text x="20" y="97" fill="#f97316" fontSize="10">A</text>
+          <text x="194" y="97" fill="#f97316" fontSize="10">B</text>
+          <text x="123" y="26" fill="#c084fc" fontSize="10">C</text>
+          <text x="179" y="156" fill="#60a5fa" fontSize="10">D</text>
+          <text x="78" y="90" fill="#f97316" fontSize="10" fontStyle="italic">50 cm</text>
+        </svg>
+        <p>Garis <strong className="text-orange-300">AB</strong> melewati pusat O dengan panjang <strong className="text-yellow-300">50 cm</strong>. Garis <strong className="text-purple-300">OC</strong> dan garis <strong className="text-blue-300">OD</strong> memiliki arah yang berbeda, masing-masing dari pusat ke permukaan bola.</p>
+        <p>Tentukan:</p>
+        <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
+          <li>a) Nama unsur bola yang diwakili garis AB</li>
+          <li>b) Nama unsur bola yang diwakili garis OC dan OD</li>
+          <li>c) Panjang OC dan OD</li>
+          <li>d) Apakah OC = OD? Jelaskan!</li>
+        </ul>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-red-400 font-semibold">(a) Garis AB:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <p className="text-white/80">Garis AB menghubungkan dua titik di permukaan bola dan <strong className="text-yellow-300">melewati pusat O</strong>.</p>
+          <p className="text-cyan-300 mt-1">→ Garis AB adalah <strong>Diameter (d)</strong> bola.</p>
+        </div>
+        <p className="text-red-400 font-semibold">(b) Garis OC dan OD:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <p className="text-white/80">Garis OC dan OD menghubungkan <strong className="text-yellow-300">pusat O ke titik di permukaan bola</strong>.</p>
+          <p className="text-cyan-300 mt-1">→ Garis OC dan OD adalah <strong>Jari-jari (r)</strong> bola.</p>
+        </div>
+        <p className="text-red-400 font-semibold">(c) Panjang OC dan OD:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="r = \frac{d}{2} = \frac{50}{2} = 25 \text{ cm}" />
+          <p className="text-cyan-300">OC = OD = <strong>25 cm</strong></p>
+        </div>
+        <p className="text-red-400 font-semibold">(d) Apakah OC = OD?</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <p className="text-white/80"><strong className="text-green-300">Ya, OC = OD</strong> meskipun arahnya berbeda.</p>
+          <p className="text-white/70 mt-1">Karena <strong className="text-yellow-300">semua jari-jari bola panjangnya sama</strong> — itulah sifat utama bola: setiap titik di permukaannya berjarak sama (= r) dari pusat O.</p>
+        </div>
+        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+          <p className="text-white/80">• AB = Diameter = <strong className="text-yellow-300">50 cm</strong></p>
+          <p className="text-white/80">• OC, OD = Jari-jari = <strong className="text-yellow-300">25 cm</strong></p>
+          <p className="text-white/80">• OC = OD karena semua jari-jari bola <strong className="text-cyan-300">selalu sama panjang</strong></p>
+        </div>
+      </div>
+    ),
+  },
+];
+
 const luasExamples: Ex[] = [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
@@ -1519,6 +1702,18 @@ const BolaPage = () => {
 
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
+    {
+      title: "Contoh Soal — Unsur-unsur Bola",
+      icon: "🔎",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <div className="flex flex-col gap-4">
+            {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix="UNSUR"/>)}
+          </div>
+        </div>
+      ),
+    },
     {
       title: "Contoh Soal — Luas Permukaan",
       icon: "🎨",
