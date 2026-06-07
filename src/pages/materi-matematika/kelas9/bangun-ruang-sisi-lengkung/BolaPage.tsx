@@ -1215,7 +1215,6 @@ const sections: Sec[] = [
           <strong className="text-yellow-300">4 lingkaran</strong> dengan jari-jari yang sama!
         </p>
         <SphereFruitCutAnimation />
-        <HalfSphereTo3CirclesAnimation />
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
           <p className="text-orange-300 font-semibold">📌 Penurunan Rumus:</p>
           <div className="text-xs text-white/70 space-y-1">
