@@ -14,70 +14,188 @@ import imgKelereng   from "@assets/image_1780702682181.png";
 import imgBowling    from "@assets/image_1780702856357.png";
 
 /* ─────────────────────────────────────────────────────────────
-   INTERACTIVE 3D SPHERE — clean diagram (r & d labels)
+   INTERACTIVE 3D SPHERE — CSS gradient + SVG latitude/longitude
 ───────────────────────────────────────────────────────────── */
 const SPHERE_R = 90;
 const SVG_W = 300;
 const SVG_H = 300;
 
-const InteractiveSphere3D = () => (
-  <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
-    <svg
-      viewBox={`0 0 ${SVG_W} ${SVG_H}`}
-      width="100%"
-      style={{ maxWidth: SVG_W, display: "block", margin: "0 auto" }}
-    >
-      <defs>
-        <radialGradient id="sphereGrad" cx="35%" cy="30%" r="65%">
-          <stop offset="0%" stopColor="#7dd3fc" stopOpacity="1"/>
-          <stop offset="40%" stopColor="#3b82f6" stopOpacity="0.95"/>
-          <stop offset="100%" stopColor="#1e3a5f" stopOpacity="0.95"/>
-        </radialGradient>
-        <radialGradient id="sphereShine" cx="30%" cy="28%" r="35%">
-          <stop offset="0%" stopColor="white" stopOpacity="0.35"/>
-          <stop offset="100%" stopColor="white" stopOpacity="0"/>
-        </radialGradient>
-        <filter id="sphereShadow">
-          <feDropShadow dx="4" dy="6" stdDeviation="10" floodColor="#000" floodOpacity="0.5"/>
-        </filter>
-        <style>{`
-          @keyframes spherePulse{0%,100%{opacity:0.7;}50%{opacity:1;}}
-          .sp{animation:spherePulse 3s ease-in-out infinite;}
-        `}</style>
-      </defs>
-      <ellipse cx={SVG_W/2} cy={SVG_H/2 + SPHERE_R + 12} rx={SPHERE_R * 0.75} ry={12} fill="rgba(0,0,0,0.35)"/>
-      <circle cx={SVG_W/2} cy={SVG_H/2} r={SPHERE_R} fill="url(#sphereGrad)" filter="url(#sphereShadow)"/>
-      <circle cx={SVG_W/2} cy={SVG_H/2} r={SPHERE_R} fill="url(#sphereShine)"/>
-      <circle cx={SVG_W/2} cy={SVG_H/2} r={SPHERE_R} fill="none" stroke="#93c5fd" strokeWidth="1.5"/>
-      {/* Diameter line */}
-      <line x1={SVG_W/2 - SPHERE_R} y1={SVG_H/2} x2={SVG_W/2 + SPHERE_R} y2={SVG_H/2}
-        stroke="#facc15" strokeWidth="2" strokeDasharray="6,4" opacity="0.9" className="sp"/>
-      {/* Radius line */}
-      <line x1={SVG_W/2} y1={SVG_H/2} x2={SVG_W/2 + SPHERE_R} y2={SVG_H/2}
-        stroke="#f97316" strokeWidth="2.5"/>
-      <circle cx={SVG_W/2} cy={SVG_H/2} r="4" fill="#f97316"/>
-      <circle cx={SVG_W/2 + SPHERE_R} cy={SVG_H/2} r="4" fill="#f97316"/>
-      {/* Center O */}
-      <text x={SVG_W/2 - 13} y={SVG_H/2 + 4} fill="#e0e7ff" fontSize="9" fontFamily="monospace">O</text>
-      {/* d = diameter label */}
-      <text x={SVG_W/2} y={SVG_H/2 - 14} fill="#facc15" fontSize="11"
-        fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = diameter</text>
-      {/* r = jari-jari label */}
-      <text x={SVG_W/2 + SPHERE_R/2} y={SVG_H/2 + 19} fill="#f97316" fontSize="11"
-        fontFamily="monospace" fontWeight="bold" textAnchor="middle">r = jari-jari</text>
-    </svg>
-    <div className="flex flex-wrap gap-3 justify-center text-[10px] font-body">
-      <span className="flex items-center gap-1.5">
-        <span className="inline-block w-6 h-0.5 bg-yellow-400 opacity-80"/>
-        <span className="text-white/55">d = diameter</span>
-      </span>
-      <span className="flex items-center gap-1.5">
-        <span className="w-2.5 h-2.5 rounded-full inline-block bg-orange-400"/>
-        <span className="text-white/55">r = jari-jari</span>
-      </span>
+const InteractiveSphere3D = () => {
+  const [spinY, setSpinY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [showLabels, setShowLabels] = useState(true);
+  const dragRef = useRef({ sx: 0, base: 0 });
+
+  const onMD = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    dragRef.current = { sx: e.clientX, base: spinY };
+  };
+  const onMM = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    setSpinY(dragRef.current.base + (e.clientX - dragRef.current.sx) * 0.8);
+  }, [isDragging]);
+  const onMU = useCallback(() => setIsDragging(false), []);
+  const onTS = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setIsDragging(true);
+    dragRef.current = { sx: t.clientX, base: spinY };
+  };
+  const onTM = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    setSpinY(dragRef.current.base + (e.touches[0].clientX - dragRef.current.sx) * 0.8);
+  }, [isDragging]);
+  const onTE = useCallback(() => setIsDragging(false), []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMM);
+    window.addEventListener("mouseup", onMU);
+    window.addEventListener("touchmove", onTM, { passive: true });
+    window.addEventListener("touchend", onTE);
+    return () => {
+      window.removeEventListener("mousemove", onMM);
+      window.removeEventListener("mouseup", onMU);
+      window.removeEventListener("touchmove", onTM);
+      window.removeEventListener("touchend", onTE);
+    };
+  }, [onMM, onMU, onTM, onTE]);
+
+  useEffect(() => {
+    if (isDragging) return;
+    let frameId: number;
+    let lastTs = 0;
+    const animate = (ts: number) => {
+      if (lastTs) setSpinY(prev => prev + (ts - lastTs) * 0.03);
+      lastTs = ts;
+      frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isDragging]);
+
+  const cx = SVG_W / 2;
+  const cy = SVG_H / 2;
+  const latLines = [-60, -30, 0, 30, 60];
+  const lonCount = 6;
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
+      <p className="text-white/60 text-xs text-center font-body">
+        Drag untuk memutar bola · Klik tombol untuk menampilkan/menyembunyikan label
+      </p>
+
+      <svg
+        viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+        width="100%"
+        style={{ maxWidth: SVG_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMD}
+        onTouchStart={onTS}
+      >
+        <defs>
+          <radialGradient id="sphereGrad" cx="35%" cy="30%" r="65%">
+            <stop offset="0%" stopColor="#7dd3fc" stopOpacity="1"/>
+            <stop offset="40%" stopColor="#3b82f6" stopOpacity="0.95"/>
+            <stop offset="100%" stopColor="#1e3a5f" stopOpacity="0.95"/>
+          </radialGradient>
+          <radialGradient id="sphereShine" cx="30%" cy="28%" r="35%">
+            <stop offset="0%" stopColor="white" stopOpacity="0.35"/>
+            <stop offset="100%" stopColor="white" stopOpacity="0"/>
+          </radialGradient>
+          <clipPath id="sphereClip">
+            <circle cx={cx} cy={cy} r={SPHERE_R}/>
+          </clipPath>
+          <filter id="sphereShadow">
+            <feDropShadow dx="4" dy="6" stdDeviation="10" floodColor="#000" floodOpacity="0.5"/>
+          </filter>
+          <style>{`
+            @keyframes spherePulse{0%,100%{opacity:0.7;}50%{opacity:1;}}
+            .sp{animation:spherePulse 3s ease-in-out infinite;}
+          `}</style>
+        </defs>
+
+        {/* Shadow */}
+        <ellipse cx={cx} cy={cy + SPHERE_R + 12} rx={SPHERE_R * 0.75} ry={12} fill="rgba(0,0,0,0.35)"/>
+        {/* Main sphere body */}
+        <circle cx={cx} cy={cy} r={SPHERE_R} fill="url(#sphereGrad)" filter="url(#sphereShadow)"/>
+
+        {/* Latitude & longitude lines */}
+        <g clipPath="url(#sphereClip)">
+          {latLines.map(latDeg => {
+            const latRad = (latDeg * Math.PI) / 180;
+            const ry = SPHERE_R * Math.cos(latRad);
+            const yOff = SPHERE_R * Math.sin(latRad);
+            return (
+              <ellipse
+                key={latDeg}
+                cx={cx} cy={cy - yOff}
+                rx={ry} ry={ry * 0.25}
+                fill="none"
+                stroke={latDeg === 0 ? "#facc15" : "#ffffff"}
+                strokeWidth={latDeg === 0 ? 1.8 : 0.9}
+                opacity={latDeg === 0 ? 0.8 : 0.35}
+                strokeDasharray={latDeg === 0 ? "none" : "4,3"}
+              />
+            );
+          })}
+          {Array.from({ length: lonCount }, (_, i) => {
+            const angle = ((i * 180) / lonCount + spinY) % 180;
+            const rad = (angle * Math.PI) / 180;
+            const rx = SPHERE_R * Math.abs(Math.sin(rad));
+            return (
+              <ellipse
+                key={i}
+                cx={cx} cy={cy}
+                rx={rx < 2 ? 0 : rx} ry={SPHERE_R}
+                fill="none" stroke="#ffffff"
+                strokeWidth={0.9} opacity={0.3} strokeDasharray="5,4"
+              />
+            );
+          })}
+        </g>
+
+        {/* Shine overlay */}
+        <circle cx={cx} cy={cy} r={SPHERE_R} fill="url(#sphereShine)"/>
+        {/* Sphere outline */}
+        <circle cx={cx} cy={cy} r={SPHERE_R} fill="none" stroke="#93c5fd" strokeWidth="1.5"/>
+
+        {showLabels && (
+          <g>
+            <line x1={cx - SPHERE_R} y1={cy} x2={cx + SPHERE_R} y2={cy}
+              stroke="#facc15" strokeWidth="2" strokeDasharray="6,4" opacity="0.9" className="sp"/>
+            <text x={cx} y={cy - 8} fill="#facc15" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 2r</text>
+            <line x1={cx} y1={cy} x2={cx + SPHERE_R} y2={cy} stroke="#f97316" strokeWidth="2.5"/>
+            <circle cx={cx} cy={cy} r="4" fill="#f97316"/>
+            <circle cx={cx + SPHERE_R} cy={cy} r="4" fill="#f97316"/>
+            <text x={cx + SPHERE_R / 2} y={cy + 16} fill="#f97316" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+            <text x={cx - 10} y={cy + 4} fill="#e0e7ff" fontSize="9" fontFamily="monospace">O</text>
+            <text x="8" y="24" fill="#22d3ee" fontSize="9" fontFamily="monospace">L = 4πr²</text>
+            <text x="8" y="38" fill="#a78bfa" fontSize="9" fontFamily="monospace">V = ⁴⁄₃πr³</text>
+          </g>
+        )}
+      </svg>
+
+      <div className="flex flex-wrap gap-2 justify-center">
+        <button
+          onClick={() => { playPopSound(); setShowLabels(v => !v); }}
+          className="px-3 py-1.5 text-xs font-bold bg-blue-900/60 border border-blue-600 text-blue-300 rounded-lg hover:bg-blue-800/60 transition-colors cursor-pointer font-body"
+        >
+          {showLabels ? "🔵 Sembunyikan Label" : "🔵 Tampilkan Label"}
+        </button>
+        <button
+          onClick={() => { playPopSound(); setSpinY(0); }}
+          className="px-3 py-1.5 text-xs font-bold bg-slate-800/60 border border-slate-600 text-slate-300 rounded-lg hover:bg-slate-700/60 transition-colors cursor-pointer font-body"
+        >
+          ↺ Reset Posisi
+        </button>
+      </div>
+
+      <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
+        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-yellow-400"/><span className="text-white/50">Khatulistiwa</span></span>
+        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-white opacity-40"/><span className="text-white/50">Lintang/Bujur</span></span>
+        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full inline-block bg-orange-400"/><span className="text-white/50">Jari-jari (r)</span></span>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    ANIMATED SVGs — UNSUR-UNSUR BOLA
