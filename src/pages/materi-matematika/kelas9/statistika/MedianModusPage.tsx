@@ -1118,19 +1118,42 @@ const MedianModusPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Nilai ujian 10 siswa: 72, 85, 60, 90, 78, 65, 88, 70, 55, 82. Tentukan median, kemudian tentukan berapa siswa yang nilainya di atas median!
+                    <p className="font-body text-sm text-white mb-3">
+                      Data nilai matematika 12 siswa disajikan dalam tabel distribusi frekuensi tunggal berikut. Tentukan median data tersebut!
                     </p>
+                    <div className="overflow-x-auto">
+                      <table className="text-xs font-body border-collapse">
+                        <thead>
+                          <tr className="bg-indigo-800/40">
+                            <td className="border border-indigo-500/40 px-3 py-2 text-indigo-300 font-bold text-center">Nilai</td>
+                            {[60,65,70,75,80,85].map(v => (
+                              <td key={v} className="border border-indigo-500/40 px-4 py-2 text-white font-bold text-center">{v}</td>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="bg-slate-700/30">
+                            <td className="border border-indigo-500/40 px-3 py-2 text-indigo-300 font-bold text-center">Frekuensi</td>
+                            {[1,2,3,3,2,1].map((f,i) => (
+                              <td key={i} className="border border-indigo-500/40 px-4 py-2 text-green-300 font-bold text-center">{f}</td>
+                            ))}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Urutkan: 55, 60, 65, 70, <strong className="text-indigo-300">72</strong>, <strong className="text-indigo-300">78</strong>, 82, 85, 88, 90</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <BlockMath math="\text{Me} = \frac{72+78}{2} = \frac{150}{2} = 75" />
-                        <p className="text-xs text-white/50">Nilai di atas 75: 78, 82, 85, 88, 90 → <span className="text-yellow-300 font-bold">5 siswa</span></p>
+                      <p><strong>Langkah 1:</strong> Hitung total data: <InlineMath math="n = 1+2+3+3+2+1 = 12" /> (genap)</p>
+                      <p><strong>Langkah 2:</strong> Susun data terurut dari tabel:<br />
+                        60, 65, 65, 70, 70, <strong className="text-indigo-300">70</strong>, <strong className="text-indigo-300">75</strong>, 75, 75, 80, 80, 85
+                      </p>
+                      <p><strong>Langkah 3:</strong> <InlineMath math="n=12" /> (genap) → dua nilai tengah = data ke-6 dan ke-7</p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\text{Me} = \frac{x_{(6)} + x_{(7)}}{2} = \frac{70 + 75}{2} = \frac{145}{2} = 72{,}5" />
                       </div>
-                      <p><strong className="text-primary">Median = 75; 5 siswa nilainya di atas median.</strong></p>
+                      <p><strong className="text-primary">Median = 72,5</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1162,190 +1185,64 @@ const MedianModusPage = () => {
                   </div>
                 </div>
 
-              </div>
-            )}
-          </div>
-
-          {/* SUB-BAB 3: MEDIAN PADA TABEL DISTRIBUSI FREKUENSI */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep3" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 3: Median pada Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("konsep3") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🎯 Ringkasan Intisari</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Untuk data berkelompok (tabel distribusi frekuensi), kita tidak bisa langsung melihat nilai aslinya. Kita gunakan <strong className="text-cyan-300">rumus interpolasi</strong> untuk memperkirakan posisi median di dalam kelas median.
-                  </p>
-                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs text-white/50 text-center mb-1">Rumus Median Data Berkelompok</p>
-                    <BlockMath math="\text{Me} = T_b + p \cdot \frac{\frac{n}{2} - F}{f}" />
-                    <div className="grid grid-cols-2 gap-2 text-xs font-body mt-2">
-                      <div className="bg-cyan-900/30 rounded p-2">
-                        <p className="text-cyan-300 font-bold"><InlineMath math="T_b" /></p>
-                        <p className="text-white/50">tepi bawah kelas median = batas bawah − 0,5</p>
-                      </div>
-                      <div className="bg-cyan-900/30 rounded p-2">
-                        <p className="text-cyan-300 font-bold"><InlineMath math="p" /></p>
-                        <p className="text-white/50">panjang kelas</p>
-                      </div>
-                      <div className="bg-cyan-900/30 rounded p-2">
-                        <p className="text-cyan-300 font-bold"><InlineMath math="n" /></p>
-                        <p className="text-white/50">total frekuensi (banyak data)</p>
-                      </div>
-                      <div className="bg-cyan-900/30 rounded p-2">
-                        <p className="text-cyan-300 font-bold"><InlineMath math="F" /></p>
-                        <p className="text-white/50">frekuensi kumulatif sebelum kelas median</p>
-                      </div>
-                      <div className="bg-cyan-900/30 rounded p-2 col-span-2">
-                        <p className="text-cyan-300 font-bold"><InlineMath math="f" /></p>
-                        <p className="text-white/50">frekuensi kelas median</p>
-                      </div>
-                    </div>
+                <div className="border-l-4 border-blue-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded">DIAGRAM BATANG</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
                   </div>
-                  <div className="bg-cyan-900/20 border border-cyan-500/20 rounded-lg p-3">
-                    <p className="font-body text-xs text-cyan-200">
-                      <strong>Kelas median</strong> adalah kelas yang memuat data ke-<InlineMath math="\frac{n}{2}" />, yaitu kelas pertama yang frekuensi kumulatifnya ≥ <InlineMath math="\frac{n}{2}" />.
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white mb-3">
+                      Diagram batang berikut menunjukkan banyak buku yang dibaca siswa kelas 9A selama satu bulan. Tentukan median data tersebut!
                     </p>
-                  </div>
-                </div>
-
-                {/* Contoh penerapan rumus */}
-                <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl overflow-hidden">
-                  <div className="bg-cyan-800/30 px-4 py-2">
-                    <p className="font-body text-xs font-bold text-cyan-200 uppercase tracking-wide">📋 Contoh Tabel: Nilai Ujian 40 Siswa</p>
-                  </div>
-                  <div className="p-3 overflow-x-auto">
-                    <table className="w-full text-xs font-body">
-                      <thead><tr className="bg-slate-700/40">
-                        <th className="px-2 py-2 text-left text-cyan-300 font-bold">Kelas</th>
-                        <th className="px-2 py-2 text-center text-white/70">f</th>
-                        <th className="px-2 py-2 text-center text-white/70">fk</th>
-                        <th className="px-2 py-2 text-center text-white/70">Keterangan</th>
-                      </tr></thead>
-                      <tbody className="divide-y divide-slate-700/30">
-                        {[
-                          ["50–59","4","4",""],
-                          ["60–69","8","12",""],
-                          ["70–79","14","26","← kelas median (fk ≥ 20)"],
-                          ["80–89","10","36",""],
-                          ["90–99","4","40",""],
-                        ].map(([k,f,fk,ket]) => (
-                          <tr key={k} className={ket ? "bg-cyan-900/20" : "hover:bg-slate-700/20"}>
-                            <td className="px-2 py-2 text-white font-semibold">{k}</td>
-                            <td className="px-2 py-2 text-center text-green-300">{f}</td>
-                            <td className="px-2 py-2 text-center text-purple-300">{fk}</td>
-                            <td className="px-2 py-2 text-cyan-400 text-xs">{ket}</td>
-                          </tr>
+                    {/* Diagram Batang */}
+                    <div className="bg-slate-900/60 rounded-xl p-4">
+                      <p className="font-body text-xs text-white/50 mb-3 text-center">Banyak Buku yang Dibaca Siswa Kelas 9A</p>
+                      <div className="flex items-end justify-center gap-4 h-32">
+                        {[{val:1,f:3},{val:2,f:5},{val:3,f:4},{val:4,f:6},{val:5,f:2}].map(({val,f}) => (
+                          <div key={val} className="flex flex-col items-center gap-1">
+                            <span className="font-body text-xs text-indigo-300 font-bold">{f}</span>
+                            <div
+                              className="w-10 bg-indigo-500/70 border border-indigo-400/60 rounded-t-md"
+                              style={{ height: `${f * 16}px` }}
+                            />
+                            <span className="font-body text-xs text-white/60">{val}</span>
+                          </div>
                         ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="px-4 pb-3">
-                    <p className="font-body text-xs text-white/50 mb-2">Kelas median = 70–79, <InlineMath math="T_b = 69{,}5" />, <InlineMath math="p=10" />, <InlineMath math="F=12" />, <InlineMath math="f=14" />, <InlineMath math="n=40" /></p>
-                    <div className="bg-slate-900/60 rounded-lg p-3">
-                      <BlockMath math="\text{Me} = 69{,}5 + 10 \cdot \frac{\frac{40}{2} - 12}{14} = 69{,}5 + 10 \cdot \frac{8}{14} \approx 69{,}5 + 5{,}71 \approx 75{,}21" />
+                      </div>
+                      <p className="font-body text-xs text-white/40 text-center mt-2">Banyak Buku (judul)</p>
                     </div>
                   </div>
-                </div>
-
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Langkah sistematis:</strong> (1) Buat kolom frekuensi kumulatif. (2) Cari kelas yang mengandung data ke-n/2. (3) Catat Tb, p, F, f dari kelas itu. (4) Substitusi ke rumus.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Contoh Soal Sub-Bab 3 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Median Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("contoh3") && (
-              <div className="px-5 pb-5 space-y-6">
-
-                <div className="border-l-4 border-green-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
-                    <span className="font-body font-semibold text-white">Contoh 1</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white mb-2">Hitunglah median dari tabel distribusi frekuensi berikut!</p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-2 py-1 text-left text-white/70">Kelas</th><th className="px-2 py-1 text-center text-white/70">f</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["40–49","3"],["50–59","7"],["60–69","10"],["70–79","8"],["80–89","2"]].map(([k,f]) => <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>)}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                  <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-blue-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>fk: 3, 10, 20, 28, 30 → <InlineMath math="n=30" />, data ke-15 masuk kelas <strong className="text-cyan-300">60–69</strong> (fk=20 ≥ 15)</p>
-                      <p><InlineMath math="T_b = 59{,}5" />, <InlineMath math="p = 10" />, <InlineMath math="F = 10" />, <InlineMath math="f = 10" /></p>
+                      <p><strong>Langkah 1:</strong> Baca data dari diagram batang:</p>
+                      <div className="overflow-x-auto">
+                        <table className="text-xs font-body border-collapse w-full max-w-sm">
+                          <thead>
+                            <tr className="bg-indigo-800/40">
+                              <td className="border border-indigo-500/40 px-3 py-2 text-indigo-300 font-bold text-center">Banyak Buku</td>
+                              {[1,2,3,4,5].map(v => <td key={v} className="border border-indigo-500/40 px-3 py-2 text-white font-bold text-center">{v}</td>)}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="bg-slate-700/30">
+                              <td className="border border-indigo-500/40 px-3 py-2 text-indigo-300 font-bold text-center">Frekuensi</td>
+                              {[3,5,4,6,2].map((f,i) => <td key={i} className="border border-indigo-500/40 px-3 py-2 text-green-300 font-bold text-center">{f}</td>)}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <p><strong>Langkah 2:</strong> Total data: <InlineMath math="n = 3+5+4+6+2 = 20" /> (genap)</p>
+                      <p><strong>Langkah 3:</strong> Cari posisi dua nilai tengah = ke-10 dan ke-11.</p>
+                      <div className="bg-slate-900/50 rounded p-3 text-xs space-y-1">
+                        <p>• Buku 1: posisi 1 – 3 (fk = 3)</p>
+                        <p>• Buku 2: posisi 4 – 8 (fk = 8)</p>
+                        <p>• Buku 3: posisi 9 – 12 (fk = 12) <span className="text-indigo-300">← ke-10 dan ke-11 ada di sini ✓</span></p>
+                      </div>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\text{Me} = 59{,}5 + 10 \cdot \frac{15-10}{10} = 59{,}5 + 5 = 64{,}5" />
+                        <BlockMath math="\text{Me} = \frac{x_{(10)} + x_{(11)}}{2} = \frac{3 + 3}{2} = 3" />
                       </div>
-                      <p><strong className="text-primary">Median = 64,5</strong></p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 2</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white mb-2">
-                      Tabel distribusi frekuensi tinggi badan 60 siswa (panjang kelas = 5 cm):
-                    </p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-2 py-1 text-left text-white/70">Tinggi (cm)</th><th className="px-2 py-1 text-center text-white/70">f</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["150–154","5"],["155–159","12"],["160–164","20"],["165–169","15"],["170–174","8"]].map(([k,f]) => <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>)}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>fk: 5, 17, 37, 52, 60. <InlineMath math="n=60" />, data ke-30 masuk kelas <strong className="text-cyan-300">160–164</strong> (fk=37 ≥ 30)</p>
-                      <p><InlineMath math="T_b = 159{,}5" />, <InlineMath math="p=5" />, <InlineMath math="F=17" />, <InlineMath math="f=20" /></p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\text{Me} = 159{,}5 + 5 \cdot \frac{30-17}{20} = 159{,}5 + 5 \cdot 0{,}65 = 159{,}5 + 3{,}25 = 162{,}75 \text{ cm}" />
-                      </div>
-                      <p><strong className="text-primary">Median ≈ 162,75 cm</strong></p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
-                    <span className="font-body font-semibold text-white">Contoh 3</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Tabel distribusi frekuensi data nilai ujian memiliki kelas 50–59, 60–69, 70–79, 80–89. Frekuensi: 4, <InlineMath math="a" />, 18, 8 dengan median = 72,5. Tentukan nilai <InlineMath math="a" />!
-                    </p>
-                  </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Kelas median = 70–79 (karena median 72,5 ada di sana).</p>
-                      <p><InlineMath math="T_b = 69{,}5" />, <InlineMath math="p=10" />, <InlineMath math="f=18" />, <InlineMath math="F = 4+a" />, <InlineMath math="n = 30+a" /></p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="72{,}5 = 69{,}5 + 10 \cdot \frac{\frac{30+a}{2} - (4+a)}{18}" />
-                        <BlockMath math="3 = 10 \cdot \frac{\frac{30+a}{2} - 4 - a}{18}" />
-                        <BlockMath math="3 \times 18 = 10 \left(\frac{30+a-8-2a}{2}\right)" />
-                        <BlockMath math="54 = 10 \cdot \frac{22-a}{2} = 5(22-a)" />
-                        <BlockMath math="10{,}8 = 22-a \implies a = 22 - 10{,}8 = 11{,}2 \approx 11" />
-                      </div>
-                      <p><strong className="text-primary">a = 11</strong></p>
+                      <p><strong className="text-primary">Median = 3 buku</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1463,19 +1360,44 @@ const MedianModusPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Data hobi 20 siswa: Membaca (6), Olahraga (8), Memasak (3), Menggambar (8), Musik (–). Jika total siswa 30 dan frekuensi Musik belum diketahui, tentukan modus data tersebut!
+                    <p className="font-body text-sm text-white mb-3">
+                      Data ukuran sepatu 20 siswa kelas 9B disajikan dalam tabel distribusi frekuensi tunggal berikut. Tentukan modus data tersebut!
                     </p>
+                    <div className="overflow-x-auto">
+                      <table className="text-xs font-body border-collapse">
+                        <thead>
+                          <tr className="bg-orange-800/40">
+                            <td className="border border-orange-500/40 px-3 py-2 text-orange-300 font-bold text-center">Ukuran Sepatu</td>
+                            {[37,38,39,40,41].map(v => (
+                              <td key={v} className="border border-orange-500/40 px-4 py-2 text-white font-bold text-center">{v}</td>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="bg-slate-700/30">
+                            <td className="border border-orange-500/40 px-3 py-2 text-orange-300 font-bold text-center">Frekuensi</td>
+                            {[2,5,7,4,2].map((f,i) => (
+                              <td key={i} className="border border-orange-500/40 px-4 py-2 text-green-300 font-bold text-center">{f}</td>
+                            ))}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>Musik = 30 − (6+8+3+8) = 30 − 25 = <strong>5</strong></p>
-                        <p>Frekuensi: Membaca=6, Olahraga=8, Memasak=3, Menggambar=8, Musik=5</p>
-                        <p className="text-yellow-400 mt-1">Olahraga dan Menggambar sama-sama tertinggi (8 siswa)</p>
+                      <p>Baca frekuensi dari tabel:</p>
+                      <div className="flex flex-wrap gap-3 text-xs">
+                        {[[37,2],[38,5],[39,7],[40,4],[41,2]].map(([v,f]) => (
+                          <div key={v} className={`rounded-lg px-3 py-2 text-center border ${f===7 ? "bg-orange-700/40 border-orange-400 ring-1 ring-orange-400" : "bg-slate-700/40 border-slate-600/40"}`}>
+                            <p className={`font-bold text-sm ${f===7 ? "text-orange-200" : "text-white/70"}`}>No. {v}</p>
+                            <p className={f===7 ? "text-orange-400" : "text-white/40"}>{f}×</p>
+                          </div>
+                        ))}
                       </div>
-                      <p><strong className="text-primary">Modus = Olahraga dan Menggambar (data bimodal)</strong></p>
+                      <p>Ukuran 39 memiliki frekuensi tertinggi (7 siswa).</p>
+                      <p><strong className="text-primary">Modus = 39</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1505,179 +1427,62 @@ const MedianModusPage = () => {
                   </div>
                 </div>
 
-              </div>
-            )}
-          </div>
-
-          {/* SUB-BAB 5: MODUS PADA TABEL DISTRIBUSI FREKUENSI */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="konsep5" icon={<Target className="w-5 h-5" />} iconColor="text-pink-400" title="📘 Sub-Bab 5: Modus pada Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("konsep5") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-pink-300">🎯 Ringkasan Intisari</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Untuk data berkelompok, kita tidak tahu persis nilai asli yang paling sering muncul. Kita gunakan <strong className="text-pink-300">rumus modus</strong> untuk memperkirakan nilai modus di dalam <strong className="text-pink-300">kelas modus</strong> (kelas dengan frekuensi terbesar).
-                  </p>
-                  <div className="bg-slate-900/60 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs text-white/50 text-center mb-1">Rumus Modus Data Berkelompok</p>
-                    <BlockMath math="\text{Mo} = T_b + p \cdot \frac{d_1}{d_1 + d_2}" />
-                    <div className="grid grid-cols-2 gap-2 text-xs font-body mt-2">
-                      <div className="bg-pink-900/30 rounded p-2">
-                        <p className="text-pink-300 font-bold"><InlineMath math="T_b" /></p>
-                        <p className="text-white/50">tepi bawah kelas modus = batas bawah − 0,5</p>
-                      </div>
-                      <div className="bg-pink-900/30 rounded p-2">
-                        <p className="text-pink-300 font-bold"><InlineMath math="p" /></p>
-                        <p className="text-white/50">panjang kelas</p>
-                      </div>
-                      <div className="bg-pink-900/30 rounded p-2">
-                        <p className="text-pink-300 font-bold"><InlineMath math="d_1" /></p>
-                        <p className="text-white/50">selisih frekuensi kelas modus dengan kelas sebelumnya</p>
-                      </div>
-                      <div className="bg-pink-900/30 rounded p-2">
-                        <p className="text-pink-300 font-bold"><InlineMath math="d_2" /></p>
-                        <p className="text-white/50">selisih frekuensi kelas modus dengan kelas sesudahnya</p>
-                      </div>
-                    </div>
+                <div className="border-l-4 border-blue-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded">DIAGRAM BATANG</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
                   </div>
-                </div>
-
-                {/* Contoh tabel modus */}
-                <div className="bg-slate-800/60 border border-pink-500/20 rounded-xl overflow-hidden">
-                  <div className="bg-pink-800/30 px-4 py-2">
-                    <p className="font-body text-xs font-bold text-pink-200 uppercase tracking-wide">📋 Contoh Penerapan Rumus Modus</p>
-                  </div>
-                  <div className="p-3 overflow-x-auto">
-                    <table className="w-full text-xs font-body">
-                      <thead><tr className="bg-slate-700/40">
-                        <th className="px-2 py-2 text-left text-pink-300 font-bold">Kelas</th>
-                        <th className="px-2 py-2 text-center text-white/70">f</th>
-                        <th className="px-2 py-2 text-center text-white/70">Keterangan</th>
-                      </tr></thead>
-                      <tbody className="divide-y divide-slate-700/30">
-                        {[
-                          ["50–59","4",""],
-                          ["60–69","8","← kelas sebelum modus (f=8)"],
-                          ["70–79","15","← KELAS MODUS (f terbesar)"],
-                          ["80–89","9","← kelas sesudah modus (f=9)"],
-                          ["90–99","4",""],
-                        ].map(([k,f,ket]) => (
-                          <tr key={k} className={ket.includes("MODUS") ? "bg-pink-900/20" : "hover:bg-slate-700/20"}>
-                            <td className="px-2 py-2 text-white font-semibold">{k}</td>
-                            <td className="px-2 py-2 text-center text-green-300">{f}</td>
-                            <td className="px-2 py-2 text-pink-400 text-xs">{ket}</td>
-                          </tr>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="font-body text-sm text-white mb-3">
+                      Diagram batang berikut menunjukkan nilai ulangan IPA siswa kelas 9C. Tentukan modus data tersebut!
+                    </p>
+                    <div className="bg-slate-900/60 rounded-xl p-4">
+                      <p className="font-body text-xs text-white/50 mb-3 text-center">Nilai Ulangan IPA Kelas 9C</p>
+                      <div className="flex items-end justify-center gap-4 h-36">
+                        {[{val:6,f:3},{val:7,f:8},{val:8,f:8},{val:9,f:5},{val:10,f:1}].map(({val,f}) => (
+                          <div key={val} className="flex flex-col items-center gap-1">
+                            <span className="font-body text-xs text-orange-300 font-bold">{f}</span>
+                            <div
+                              className={`w-10 rounded-t-md border ${(f===8) ? "bg-orange-500/70 border-orange-400/80" : "bg-slate-600/60 border-slate-500/50"}`}
+                              style={{ height: `${f * 16}px` }}
+                            />
+                            <span className="font-body text-xs text-white/60">{val}</span>
+                          </div>
                         ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="px-4 pb-3">
-                    <p className="font-body text-xs text-white/50 mb-2">
-                      <InlineMath math="T_b = 69{,}5" />, <InlineMath math="p = 10" />, <InlineMath math="d_1 = 15-8 = 7" />, <InlineMath math="d_2 = 15-9 = 6" />
-                    </p>
-                    <div className="bg-slate-900/60 rounded-lg p-3">
-                      <BlockMath math="\text{Mo} = 69{,}5 + 10 \cdot \frac{7}{7+6} = 69{,}5 + 10 \cdot \frac{7}{13} \approx 69{,}5 + 5{,}38 \approx 74{,}88" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm text-yellow-200">
-                    <strong>Penting:</strong> <InlineMath math="d_1" /> dan <InlineMath math="d_2" /> selalu positif (selisih, bukan pengurangan bertanda). Kelas modus = kelas dengan frekuensi tertinggi.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Contoh Soal Sub-Bab 5 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh5" icon={<Calculator className="w-5 h-5" />} iconColor="text-pink-400" title="📝 Contoh Soal — Modus Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("contoh5") && (
-              <div className="px-5 pb-5 space-y-6">
-
-                <div className="border-l-4 border-green-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
-                    <span className="font-body font-semibold text-white">Contoh 1</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white mb-2">Hitunglah modus dari tabel berikut!</p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-2 py-1 text-left text-white/70">Kelas</th><th className="px-2 py-1 text-center text-white/70">f</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["40–49","5"],["50–59","12"],["60–69","18"],["70–79","10"],["80–89","5"]].map(([k,f]) => <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>)}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Kelas modus = 60–69 (f=18, terbesar). <InlineMath math="d_1 = 18-12=6" />, <InlineMath math="d_2 = 18-10=8" /></p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\text{Mo} = 59{,}5 + 10 \cdot \frac{6}{6+8} = 59{,}5 + 10 \cdot \frac{6}{14} \approx 59{,}5 + 4{,}29 = 63{,}79" />
                       </div>
-                      <p><strong className="text-primary">Modus ≈ 63,79</strong></p>
+                      <p className="font-body text-xs text-white/40 text-center mt-2">Nilai</p>
                     </div>
                   </div>
-                </div>
-
-                <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 2</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white mb-2">
-                      Tabel distribusi frekuensi berat badan (kg) 50 siswa:
-                    </p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-2 py-1 text-left text-white/70">Berat (kg)</th><th className="px-2 py-1 text-center text-white/70">f</th></tr></thead>
-                        <tbody className="divide-y divide-slate-700/30">
-                          {[["45–49","4"],["50–54","11"],["55–59","20"],["60–64","10"],["65–69","5"]].map(([k,f]) => <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>)}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                  <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-blue-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Kelas modus = 55–59 (f=20). <InlineMath math="T_b = 54{,}5" />, <InlineMath math="p=5" />, <InlineMath math="d_1 = 20-11=9" />, <InlineMath math="d_2 = 20-10=10" /></p>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\text{Mo} = 54{,}5 + 5 \cdot \frac{9}{9+10} = 54{,}5 + 5 \cdot \frac{9}{19} \approx 54{,}5 + 2{,}37 = 56{,}87 \text{ kg}" />
+                      <p><strong>Langkah 1:</strong> Baca data dari diagram batang:</p>
+                      <div className="overflow-x-auto">
+                        <table className="text-xs font-body border-collapse w-full max-w-sm">
+                          <thead>
+                            <tr className="bg-orange-800/40">
+                              <td className="border border-orange-500/40 px-3 py-2 text-orange-300 font-bold text-center">Nilai</td>
+                              {[6,7,8,9,10].map(v => <td key={v} className="border border-orange-500/40 px-3 py-2 text-white font-bold text-center">{v}</td>)}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="bg-slate-700/30">
+                              <td className="border border-orange-500/40 px-3 py-2 text-orange-300 font-bold text-center">Frekuensi</td>
+                              {[3,8,8,5,1].map((f,i) => <td key={i} className="border border-orange-500/40 px-3 py-2 text-green-300 font-bold text-center">{f}</td>)}
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <p><strong className="text-primary">Modus ≈ 56,87 kg</strong></p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
-                    <span className="font-body font-semibold text-white">Contoh 3</span>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Dari tabel distribusi frekuensi, kelas modus adalah 70–79 dengan <InlineMath math="T_b = 69{,}5" /> dan <InlineMath math="p=10" />. Diketahui frekuensi kelas sebelumnya = 10 dan kelas sesudahnya = 8. Jika modus = 73, tentukan frekuensi kelas modus!
-                    </p>
-                  </div>
-                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Misalkan frekuensi kelas modus = <InlineMath math="f" />, maka <InlineMath math="d_1 = f-10" /> dan <InlineMath math="d_2 = f-8" /></p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="73 = 69{,}5 + 10 \cdot \frac{f-10}{(f-10)+(f-8)}" />
-                        <BlockMath math="3{,}5 = 10 \cdot \frac{f-10}{2f-18}" />
-                        <BlockMath math="3{,}5(2f-18) = 10(f-10)" />
-                        <BlockMath math="7f - 63 = 10f - 100" />
-                        <BlockMath math="37 = 3f \implies f = \frac{37}{3} \approx 12{,}3" />
+                      <p><strong>Langkah 2:</strong> Cari frekuensi terbesar.</p>
+                      <div className="bg-slate-900/50 rounded p-3 text-xs space-y-1">
+                        <p>• Nilai 6 → 3 siswa</p>
+                        <p>• Nilai 7 → <strong className="text-orange-300">8 siswa</strong> ← tertinggi bersama nilai 8</p>
+                        <p>• Nilai 8 → <strong className="text-orange-300">8 siswa</strong> ← tertinggi bersama nilai 7</p>
+                        <p>• Nilai 9 → 5 siswa</p>
+                        <p>• Nilai 10 → 1 siswa</p>
                       </div>
-                      <p>Dibulatkan ke bilangan bulat: <strong className="text-primary">f ≈ 12</strong></p>
-                      <p className="text-xs text-white/50">Verifikasi: Mo = 69,5 + 10 × (12−10)/((12−10)+(12−8)) = 69,5 + 10×2/6 ≈ 72,83 ≈ 73 ✓</p>
+                      <p>Nilai 7 dan 8 sama-sama memiliki frekuensi tertinggi (8 siswa).</p>
+                      <p><strong className="text-primary">Modus = 7 dan 8 (data bimodal)</strong></p>
                     </div>
                   </div>
                 </div>
