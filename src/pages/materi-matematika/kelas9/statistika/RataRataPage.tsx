@@ -339,8 +339,17 @@ const RataRataPage = () => {
                   <p className="font-body text-sm text-white/80 leading-relaxed">
                     <strong className="text-green-300">Rata-rata (mean)</strong> adalah nilai yang diperoleh dengan menjumlahkan seluruh data lalu membaginya dengan banyaknya data. Ini cara paling umum dipakai untuk merangkum sekumpulan data menjadi satu angka representatif.
                   </p>
-                  <div className="bg-slate-900/60 rounded-lg p-4 text-center space-y-2">
+                  <div className="bg-slate-900/60 rounded-lg p-4 text-center space-y-3">
                     <p className="font-body text-xs text-white/50 mb-1">Rumus Rata-rata Data Tunggal</p>
+                    <div className="bg-blue-900/30 border border-blue-500/40 rounded-lg px-4 py-2">
+                      <p className="font-body text-sm text-white">
+                        <span className="text-cyan-300 font-bold">Rata-rata</span>
+                        <span className="text-white/60"> = </span>
+                        <span className="text-yellow-300 font-bold">jumlah nilai (data)</span>
+                        <span className="text-white/60"> ÷ </span>
+                        <span className="text-green-300 font-bold">banyak nilai (data)</span>
+                      </p>
+                    </div>
                     <BlockMath math="\bar{x} = \frac{x_1 + x_2 + x_3 + \cdots + x_n}{n} = \frac{\sum_{i=1}^{n} x_i}{n}" />
                     <p className="font-body text-xs text-white/50">
                       <InlineMath math="\bar{x}" /> = rata-rata &nbsp;|&nbsp; <InlineMath math="x_i" /> = nilai data ke-<InlineMath math="i" /> &nbsp;|&nbsp; <InlineMath math="n" /> = banyak data
@@ -469,82 +478,74 @@ const RataRataPage = () => {
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-blue-300">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Ketika data disajikan dalam tabel distribusi frekuensi (data berkelompok), kita tidak bisa langsung menjumlahkan nilai aslinya. Sebagai gantinya, kita gunakan <strong className="text-blue-300">titik tengah tiap kelas</strong> sebagai representasi seluruh data dalam kelas tersebut.
+                    Ketika data disajikan dalam <strong className="text-blue-300">tabel distribusi frekuensi data tunggal</strong>, setiap baris menunjukkan satu nilai data (<InlineMath math="x_i" />) beserta berapa kali nilai itu muncul (frekuensinya). Untuk menghitung rata-rata, kalikan setiap nilai dengan frekuensinya, jumlahkan semuanya, lalu bagi dengan total frekuensi.
                   </p>
                   <div className="bg-slate-900/60 rounded-lg p-4 text-center space-y-2">
-                    <p className="font-body text-xs text-white/50 mb-1">Rumus Rata-rata Data Berkelompok</p>
+                    <p className="font-body text-xs text-white/50 mb-1">Rumus Rata-rata dari Tabel Distribusi Frekuensi</p>
                     <BlockMath math="\bar{x} = \frac{\sum f_i \cdot x_i}{\sum f_i}" />
                     <div className="grid grid-cols-3 gap-2 text-xs font-body mt-2">
                       <div className="bg-blue-900/30 rounded p-2 text-center">
                         <p className="text-blue-300 font-bold"><InlineMath math="f_i" /></p>
-                        <p className="text-white/50">frekuensi kelas ke-i</p>
+                        <p className="text-white/50">frekuensi nilai ke-i</p>
                       </div>
                       <div className="bg-blue-900/30 rounded p-2 text-center">
                         <p className="text-blue-300 font-bold"><InlineMath math="x_i" /></p>
-                        <p className="text-white/50">titik tengah kelas ke-i</p>
+                        <p className="text-white/50">nilai data ke-i</p>
                       </div>
                       <div className="bg-blue-900/30 rounded p-2 text-center">
                         <p className="text-blue-300 font-bold"><InlineMath math="\sum f_i" /></p>
-                        <p className="text-white/50">total frekuensi</p>
+                        <p className="text-white/50">total frekuensi (n)</p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-blue-900/20 border border-blue-500/20 rounded-lg p-3">
-                    <p className="font-body text-xs text-blue-200">
-                      <strong>Titik tengah kelas</strong> = <InlineMath math="\dfrac{\text{batas bawah} + \text{batas atas}}{2}" />
-                    </p>
-                  </div>
                 </div>
 
-                {/* Contoh tabel */}
+                {/* Contoh tabel tunggal */}
                 <div className="bg-slate-800/60 border border-blue-500/20 rounded-xl overflow-hidden">
                   <div className="bg-blue-800/30 px-4 py-2">
-                    <p className="font-body text-xs font-bold text-blue-200 uppercase tracking-wide">📋 Contoh Tabel Distribusi Frekuensi Nilai 40 Siswa</p>
+                    <p className="font-body text-xs font-bold text-blue-200 uppercase tracking-wide">📋 Contoh Tabel Distribusi Frekuensi Nilai Ulangan 40 Siswa</p>
                   </div>
                   <div className="p-3 overflow-x-auto">
                     <table className="w-full text-xs font-body">
                       <thead>
                         <tr className="bg-slate-700/40">
-                          <th className="px-2 py-2 text-left text-blue-300 font-bold">Kelas</th>
-                          <th className="px-2 py-2 text-center text-white/70">f</th>
-                          <th className="px-2 py-2 text-center text-white/70">xᵢ (titik tengah)</th>
-                          <th className="px-2 py-2 text-center text-white/70">f · xᵢ</th>
+                          <th className="px-2 py-2 text-left text-blue-300 font-bold">Nilai (xᵢ)</th>
+                          <th className="px-2 py-2 text-center text-white/70">Frekuensi (fᵢ)</th>
+                          <th className="px-2 py-2 text-center text-white/70">fᵢ · xᵢ</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-700/30">
                         {[
-                          ["50 – 59","4","54,5","218"],
-                          ["60 – 69","8","64,5","516"],
-                          ["70 – 79","14","74,5","1.043"],
-                          ["80 – 89","10","84,5","845"],
-                          ["90 – 99","4","94,5","378"],
-                        ].map(([k,f,xi,fxi]) => (
-                          <tr key={k} className="hover:bg-slate-700/20">
-                            <td className="px-2 py-2 text-white font-semibold">{k}</td>
+                          ["60","4","240"],
+                          ["70","8","560"],
+                          ["75","12","900"],
+                          ["80","10","800"],
+                          ["90","6","540"],
+                        ].map(([x,f,fx]) => (
+                          <tr key={x} className="hover:bg-slate-700/20">
+                            <td className="px-2 py-2 text-white font-semibold">{x}</td>
                             <td className="px-2 py-2 text-center text-green-300">{f}</td>
-                            <td className="px-2 py-2 text-center text-yellow-300">{xi}</td>
-                            <td className="px-2 py-2 text-center text-cyan-300">{fxi}</td>
+                            <td className="px-2 py-2 text-center text-cyan-300">{fx}</td>
                           </tr>
                         ))}
                         <tr className="bg-slate-700/30 border-t border-slate-500/50">
                           <td className="px-2 py-2 text-white font-bold">Total</td>
                           <td className="px-2 py-2 text-center text-green-400 font-bold">40</td>
-                          <td className="px-2 py-2 text-center">—</td>
-                          <td className="px-2 py-2 text-center text-cyan-400 font-bold">3.000</td>
+                          <td className="px-2 py-2 text-center text-cyan-400 font-bold">3.040</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <div className="px-4 pb-3">
                     <div className="bg-slate-900/60 rounded-lg p-3">
-                      <BlockMath math="\bar{x} = \frac{3000}{40} = 75" />
+                      <BlockMath math="\bar{x} = \frac{3040}{40} = 76" />
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Ingat:</strong> Hasil rata-rata data berkelompok adalah nilai <em>perkiraan</em>, bukan nilai pasti, karena kita menggunakan titik tengah sebagai representasi tiap kelas.
+                    <strong>Tips:</strong> Tabel distribusi frekuensi data tunggal cocok digunakan saat banyak nilai yang <em>sama</em> muncul berulang kali — lebih ringkas daripada menulis satu per satu!
                   </p>
                 </div>
               </div>
@@ -557,22 +558,55 @@ const RataRataPage = () => {
             {expandedSections.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-6">
 
+                {/* CONTOH 1 — Diagram Batang */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white mb-2">Dari tabel distribusi frekuensi berat badan berikut, hitunglah rata-ratanya!</p>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Tabel distribusi frekuensi nilai ulangan IPA 25 siswa disajikan seperti berikut. Hitunglah rata-ratanya!</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-xs font-body">
-                        <thead><tr className="bg-slate-700/40"><th className="px-2 py-1 text-left text-white/70">Berat (kg)</th><th className="px-2 py-1 text-center text-white/70">Frekuensi</th></tr></thead>
+                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1.5 text-left text-white/70">Nilai (xᵢ)</th><th className="px-3 py-1.5 text-center text-white/70">Frekuensi (fᵢ)</th></tr></thead>
                         <tbody className="divide-y divide-slate-700/30">
-                          {[["40–44","3"],["45–49","7"],["50–54","10"],["55–59","6"],["60–64","4"]].map(([k,f]) => (
-                            <tr key={k}><td className="px-2 py-1 text-white">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td></tr>
+                          {[["70","3"],["75","6"],["80","8"],["85","5"],["90","3"]].map(([x,f]) => (
+                            <tr key={x}><td className="px-3 py-1.5 text-white font-semibold">{x}</td><td className="px-3 py-1.5 text-center text-green-300">{f}</td></tr>
                           ))}
                         </tbody>
                       </table>
+                    </div>
+                    {/* Diagram Batang */}
+                    <div className="bg-slate-900/50 rounded-lg p-3">
+                      <p className="font-body text-xs text-white/50 text-center mb-2">📊 Diagram Batang Nilai Ulangan IPA</p>
+                      <svg viewBox="0 0 260 130" className="w-full max-h-36">
+                        {/* Grid lines */}
+                        {[0,2,4,6,8].map(v => (
+                          <g key={v}>
+                            <line x1="35" y1={105 - v*12} x2="250" y2={105 - v*12} stroke="#334155" strokeWidth="0.5"/>
+                            <text x="30" y={105 - v*12 + 3} textAnchor="end" fontSize="7" fill="#64748b">{v}</text>
+                          </g>
+                        ))}
+                        {/* Bars */}
+                        {[
+                          {x:"70",f:3,cx:60, color:"#ef4444"},
+                          {x:"75",f:6,cx:100,color:"#f59e0b"},
+                          {x:"80",f:8,cx:140,color:"#22c55e"},
+                          {x:"85",f:5,cx:180,color:"#3b82f6"},
+                          {x:"90",f:3,cx:220,color:"#a855f7"},
+                        ].map(({x,f,cx,color}) => (
+                          <g key={x}>
+                            <rect x={cx-14} y={105-f*12} width="28" height={f*12} fill={color} fillOpacity="0.8" rx="2"/>
+                            <text x={cx} y={100-f*12} textAnchor="middle" fontSize="7" fill="white" fontWeight="bold">{f}</text>
+                            <text x={cx} y="118" textAnchor="middle" fontSize="8" fill="#94a3b8">{x}</text>
+                          </g>
+                        ))}
+                        {/* Axes */}
+                        <line x1="35" y1="15" x2="35" y2="105" stroke="#475569" strokeWidth="1"/>
+                        <line x1="35" y1="105" x2="250" y2="105" stroke="#475569" strokeWidth="1"/>
+                        <text x="143" y="128" textAnchor="middle" fontSize="7" fill="#64748b">Nilai</text>
+                        <text x="12" y="65" textAnchor="middle" fontSize="7" fill="#64748b" transform="rotate(-90,12,65)">Frekuensi</text>
+                      </svg>
                     </div>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
@@ -580,76 +614,175 @@ const RataRataPage = () => {
                     <div className="space-y-2 font-body text-sm text-white/80">
                       <div className="overflow-x-auto">
                         <table className="w-full text-xs font-body">
-                          <thead><tr className="bg-slate-700/30"><th className="px-2 py-1 text-left text-white/50">Kelas</th><th className="px-2 py-1 text-center text-white/50">f</th><th className="px-2 py-1 text-center text-white/50">xᵢ</th><th className="px-2 py-1 text-center text-white/50">f·xᵢ</th></tr></thead>
+                          <thead><tr className="bg-slate-700/30"><th className="px-2 py-1 text-left text-white/50">Nilai (xᵢ)</th><th className="px-2 py-1 text-center text-white/50">fᵢ</th><th className="px-2 py-1 text-center text-white/50">fᵢ · xᵢ</th></tr></thead>
                           <tbody className="divide-y divide-slate-700/20">
-                            {[["40–44","3","42","126"],["45–49","7","47","329"],["50–54","10","52","520"],["55–59","6","57","342"],["60–64","4","62","248"]].map(([k,f,xi,fxi]) => (
-                              <tr key={k}><td className="px-2 py-1 text-white/70">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td><td className="px-2 py-1 text-center text-yellow-300">{xi}</td><td className="px-2 py-1 text-center text-cyan-300">{fxi}</td></tr>
+                            {[["70","3","210"],["75","6","450"],["80","8","640"],["85","5","425"],["90","3","270"]].map(([x,f,fx]) => (
+                              <tr key={x}><td className="px-2 py-1 text-white/70">{x}</td><td className="px-2 py-1 text-center text-green-300">{f}</td><td className="px-2 py-1 text-center text-cyan-300">{fx}</td></tr>
                             ))}
-                            <tr className="border-t border-slate-500/40 font-bold"><td className="px-2 py-1 text-white">Total</td><td className="px-2 py-1 text-center text-green-400">30</td><td></td><td className="px-2 py-1 text-center text-cyan-400">1.565</td></tr>
+                            <tr className="border-t border-slate-500/40 font-bold"><td className="px-2 py-1 text-white">Total</td><td className="px-2 py-1 text-center text-green-400">25</td><td className="px-2 py-1 text-center text-cyan-400">1.995</td></tr>
                           </tbody>
                         </table>
                       </div>
                       <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\bar{x} = \frac{1565}{30} \approx 52{,}17 \text{ kg}" />
+                        <BlockMath math="\bar{x} = \frac{1995}{25} = 79{,}8" />
                       </div>
-                      <p><strong className="text-primary">Rata-rata berat badan ≈ 52,17 kg</strong></p>
+                      <p><strong className="text-primary">Rata-rata nilai = 79,8</strong></p>
                     </div>
                   </div>
                 </div>
 
+                {/* CONTOH 2 — Diagram Garis */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Dari tabel distribusi frekuensi, diketahui <InlineMath math="\sum f_i \cdot x_i = 4.320" /> dan rata-ratanya adalah 72. Tentukan banyak data (<InlineMath math="n" />) yang digunakan!
-                    </p>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Data nilai ulangan Matematika 25 siswa disajikan dalam tabel berikut. Tentukan rata-rata nilai ulangan tersebut!</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs font-body">
+                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1.5 text-left text-white/70">Nilai (xᵢ)</th><th className="px-3 py-1.5 text-center text-white/70">Frekuensi (fᵢ)</th></tr></thead>
+                        <tbody className="divide-y divide-slate-700/30">
+                          {[["65","3"],["70","5"],["75","8"],["80","6"],["85","3"]].map(([x,f]) => (
+                            <tr key={x}><td className="px-3 py-1.5 text-white font-semibold">{x}</td><td className="px-3 py-1.5 text-center text-yellow-300">{f}</td></tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    {/* Diagram Garis */}
+                    <div className="bg-slate-900/50 rounded-lg p-3">
+                      <p className="font-body text-xs text-white/50 text-center mb-2">📈 Diagram Garis Nilai Ulangan Matematika</p>
+                      <svg viewBox="0 0 260 130" className="w-full max-h-36">
+                        {/* Grid lines */}
+                        {[0,2,4,6,8].map(v => (
+                          <g key={v}>
+                            <line x1="35" y1={105 - v*12} x2="250" y2={105 - v*12} stroke="#334155" strokeWidth="0.5"/>
+                            <text x="30" y={105 - v*12 + 3} textAnchor="end" fontSize="7" fill="#64748b">{v}</text>
+                          </g>
+                        ))}
+                        {/* Points and line */}
+                        {(() => {
+                          const pts: {x:number;f:number;cx:number}[] = [
+                            {x:65,f:3,cx:60},{x:70,f:5,cx:100},{x:75,f:8,cx:140},{x:80,f:6,cx:180},{x:85,f:3,cx:220}
+                          ];
+                          const points = pts.map(p => `${p.cx},${105-p.f*12}`).join(" ");
+                          return (
+                            <g>
+                              <polyline points={points} fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinejoin="round"/>
+                              {pts.map(({f,cx}) => (
+                                <g key={cx}>
+                                  <circle cx={cx} cy={105-f*12} r="4" fill="#f59e0b" stroke="#1e293b" strokeWidth="1.5"/>
+                                  <text x={cx} y={105-f*12-7} textAnchor="middle" fontSize="7" fill="#fbbf24" fontWeight="bold">{f}</text>
+                                </g>
+                              ))}
+                            </g>
+                          );
+                        })()}
+                        {/* X labels */}
+                        {[{x:"65",cx:60},{x:"70",cx:100},{x:"75",cx:140},{x:"80",cx:180},{x:"85",cx:220}].map(({x,cx}) => (
+                          <text key={x} x={cx} y="118" textAnchor="middle" fontSize="8" fill="#94a3b8">{x}</text>
+                        ))}
+                        {/* Axes */}
+                        <line x1="35" y1="15" x2="35" y2="105" stroke="#475569" strokeWidth="1"/>
+                        <line x1="35" y1="105" x2="250" y2="105" stroke="#475569" strokeWidth="1"/>
+                        <text x="143" y="128" textAnchor="middle" fontSize="7" fill="#64748b">Nilai</text>
+                        <text x="12" y="65" textAnchor="middle" fontSize="7" fill="#64748b" transform="rotate(-90,12,65)">Frekuensi</text>
+                      </svg>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Gunakan rumus rata-rata, lalu selesaikan untuk <InlineMath math="n" />:</p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <BlockMath math="\bar{x} = \frac{\sum f_i \cdot x_i}{n}" />
-                        <BlockMath math="72 = \frac{4320}{n}" />
-                        <BlockMath math="n = \frac{4320}{72} = 60" />
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body">
+                          <thead><tr className="bg-slate-700/30"><th className="px-2 py-1 text-left text-white/50">Nilai (xᵢ)</th><th className="px-2 py-1 text-center text-white/50">fᵢ</th><th className="px-2 py-1 text-center text-white/50">fᵢ · xᵢ</th></tr></thead>
+                          <tbody className="divide-y divide-slate-700/20">
+                            {[["65","3","195"],["70","5","350"],["75","8","600"],["80","6","480"],["85","3","255"]].map(([x,f,fx]) => (
+                              <tr key={x}><td className="px-2 py-1 text-white/70">{x}</td><td className="px-2 py-1 text-center text-yellow-300">{f}</td><td className="px-2 py-1 text-center text-cyan-300">{fx}</td></tr>
+                            ))}
+                            <tr className="border-t border-slate-500/40 font-bold"><td className="px-2 py-1 text-white">Total</td><td className="px-2 py-1 text-center text-yellow-400">25</td><td className="px-2 py-1 text-center text-cyan-400">1.880</td></tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <p><strong className="text-primary">Banyak data = 60</strong></p>
+                      <div className="bg-slate-900/50 rounded p-3">
+                        <BlockMath math="\bar{x} = \frac{1880}{25} = 75{,}2" />
+                      </div>
+                      <p><strong className="text-primary">Rata-rata nilai = 75,2</strong></p>
                     </div>
                   </div>
                 </div>
 
+                {/* CONTOH 3 — Diagram Lingkaran */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">
-                      Tabel distribusi frekuensi tinggi badan 50 siswa memiliki 5 kelas dengan panjang kelas 5 cm. Batas bawah kelas pertama adalah 150 cm. Frekuensi tiap kelas: 6, 12, 18, 10, 4. Hitunglah rata-rata tinggi badan!
+                      Tabel distribusi frekuensi nilai ujian IPS siswa disajikan berikut. Jika rata-rata nilai ujian adalah 79, tentukan nilai <InlineMath math="k" />!
                     </p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs font-body">
+                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1.5 text-left text-white/70">Nilai (xᵢ)</th><th className="px-3 py-1.5 text-center text-white/70">Frekuensi (fᵢ)</th></tr></thead>
+                        <tbody className="divide-y divide-slate-700/30">
+                          {[["70","4"],["75","8"],["80","k"],["85","6"],["90","2"]].map(([x,f]) => (
+                            <tr key={x}><td className="px-3 py-1.5 text-white font-semibold">{x}</td><td className="px-3 py-1.5 text-center text-red-300">{f}</td></tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Tentukan kelas dan titik tengahnya:</p>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-xs font-body">
-                          <thead><tr className="bg-slate-700/30"><th className="px-2 py-1 text-left text-white/50">Kelas</th><th className="px-2 py-1 text-center text-white/50">f</th><th className="px-2 py-1 text-center text-white/50">xᵢ</th><th className="px-2 py-1 text-center text-white/50">f·xᵢ</th></tr></thead>
-                          <tbody className="divide-y divide-slate-700/20">
-                            {[["150–154","6","152","912"],["155–159","12","157","1.884"],["160–164","18","162","2.916"],["165–169","10","167","1.670"],["170–174","4","172","688"]].map(([k,f,xi,fxi]) => (
-                              <tr key={k}><td className="px-2 py-1 text-white/70">{k}</td><td className="px-2 py-1 text-center text-green-300">{f}</td><td className="px-2 py-1 text-center text-yellow-300">{xi}</td><td className="px-2 py-1 text-center text-cyan-300">{fxi}</td></tr>
+                      <p><strong>Langkah 1:</strong> Susun persamaan rata-rata:</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
+                        <BlockMath math="\bar{x} = \frac{(70 \times 4)+(75 \times 8)+(80 \times k)+(85 \times 6)+(90 \times 2)}{4+8+k+6+2} = 79" />
+                        <BlockMath math="\frac{280+600+80k+510+180}{20+k} = 79" />
+                        <BlockMath math="\frac{1570+80k}{20+k} = 79" />
+                      </div>
+                      <p><strong>Langkah 2:</strong> Selesaikan persamaan:</p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <BlockMath math="1570 + 80k = 79(20+k) = 1580 + 79k" />
+                        <BlockMath math="80k - 79k = 1580 - 1570 \implies k = 10" />
+                      </div>
+                      <p><strong className="text-primary">k = 10 siswa &nbsp;|&nbsp; Total = 30 siswa</strong></p>
+                      {/* Diagram Lingkaran */}
+                      <div className="bg-slate-900/50 rounded-lg p-3 mt-2">
+                        <p className="font-body text-xs text-white/50 text-center mb-2">🥧 Diagram Lingkaran Distribusi Nilai (setelah k = 10)</p>
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                          <svg viewBox="0 0 200 200" className="w-36 h-36 flex-shrink-0">
+                            {/* Slice 1: 70 → 4/30 → 48° (0°→48°) */}
+                            <path d="M 100 100 L 100 15 A 85 85 0 0 1 163.2 43.1 Z" fill="#ef4444" fillOpacity="0.85"/>
+                            {/* Slice 2: 75 → 8/30 → 96° (48°→144°) */}
+                            <path d="M 100 100 L 163.2 43.1 A 85 85 0 0 1 150.0 168.8 Z" fill="#f59e0b" fillOpacity="0.85"/>
+                            {/* Slice 3: 80 → 10/30 → 120° (144°→264°) */}
+                            <path d="M 100 100 L 150.0 168.8 A 85 85 0 0 1 15.5 108.9 Z" fill="#22c55e" fillOpacity="0.85"/>
+                            {/* Slice 4: 85 → 6/30 → 72° (264°→336°) */}
+                            <path d="M 100 100 L 15.5 108.9 A 85 85 0 0 1 65.4 22.4 Z" fill="#3b82f6" fillOpacity="0.85"/>
+                            {/* Slice 5: 90 → 2/30 → 24° (336°→360°) */}
+                            <path d="M 100 100 L 65.4 22.4 A 85 85 0 0 1 100 15 Z" fill="#a855f7" fillOpacity="0.85"/>
+                            <circle cx="100" cy="100" r="30" fill="#0f172a"/>
+                            <text x="100" y="97" textAnchor="middle" fontSize="8" fill="#94a3b8">n=30</text>
+                            <text x="100" y="107" textAnchor="middle" fontSize="7" fill="#64748b">siswa</text>
+                          </svg>
+                          <div className="grid grid-cols-1 gap-1.5 text-xs font-body">
+                            {[
+                              {val:"70",f:4,pct:"13,3%",color:"bg-red-500"},
+                              {val:"75",f:8,pct:"26,7%",color:"bg-amber-500"},
+                              {val:"80",f:10,pct:"33,3%",color:"bg-green-500"},
+                              {val:"85",f:6,pct:"20,0%",color:"bg-blue-500"},
+                              {val:"90",f:2,pct:"6,7%",color:"bg-purple-500"},
+                            ].map(({val,f,pct,color}) => (
+                              <div key={val} className="flex items-center gap-2">
+                                <span className={`w-3 h-3 rounded-sm flex-shrink-0 ${color}`}/>
+                                <span className="text-white/70">Nilai <strong className="text-white">{val}</strong> — {f} siswa ({pct})</span>
+                              </div>
                             ))}
-                            <tr className="border-t border-slate-500/40 font-bold"><td className="px-2 py-1 text-white">Total</td><td className="px-2 py-1 text-center text-green-400">50</td><td></td><td className="px-2 py-1 text-center text-cyan-400">8.070</td></tr>
-                          </tbody>
-                        </table>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-slate-900/50 rounded p-3">
-                        <BlockMath math="\bar{x} = \frac{8070}{50} = 161{,}4 \text{ cm}" />
-                      </div>
-                      <p><strong className="text-primary">Rata-rata tinggi badan = 161,4 cm</strong></p>
                     </div>
                   </div>
                 </div>
