@@ -1125,7 +1125,6 @@ const sections: Sec[] = [
     icon: "🔍",
     content: (
       <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
-        <InteractiveHalfSphere3D />
         <InteractiveSphere3D />
         <div className="grid grid-cols-1 gap-3">
           <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-3 space-y-1">
@@ -1153,6 +1152,7 @@ const sections: Sec[] = [
             </ul>
           </div>
         </div>
+        <InteractiveHalfSphere3D />
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
