@@ -867,26 +867,51 @@ const MedianModusPage = () => {
                   </div>
                 </div>
 
+                {/* CONTOH 2 — Tabel Distribusi Frekuensi Data Tunggal */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
-                      Nilai ulangan 9 siswa: 75, 62, 88, 70, 95, 55, 80, 73, 68. Tentukan median dan bandingkan dengan rata-ratanya!
-                    </p>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Tabel distribusi frekuensi nilai ulangan Bahasa Indonesia disajikan berikut. Tentukan median nilainya!</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs font-body">
+                        <thead><tr className="bg-slate-700/40"><th className="px-3 py-1.5 text-left text-white/70">Nilai (xᵢ)</th><th className="px-3 py-1.5 text-center text-white/70">Frekuensi (fᵢ)</th></tr></thead>
+                        <tbody className="divide-y divide-slate-700/30">
+                          {[["70","2"],["75","4"],["80","5"],["85","3"],["90","1"]].map(([x,f]) => (
+                            <tr key={x}><td className="px-3 py-1.5 text-white font-semibold">{x}</td><td className="px-3 py-1.5 text-center text-yellow-300">{f}</td></tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
-                    <div className="space-y-2 font-body text-sm text-white/80">
-                      <p><strong>Langkah 1:</strong> Urutkan: 55, 62, 68, 70, <strong className="text-purple-300">73</strong>, 75, 80, 88, 95</p>
-                      <p><strong>Langkah 2:</strong> Posisi median = <InlineMath math="\frac{9+1}{2} = 5" /></p>
-                      <div className="bg-slate-900/50 rounded p-3 space-y-2">
-                        <p className="text-purple-300 font-semibold">Median = data ke-5 = <strong>73</strong></p>
-                        <BlockMath math="\bar{x} = \frac{55+62+68+70+73+75+80+88+95}{9} = \frac{666}{9} \approx 74" />
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Hitung total data <InlineMath math="n" /> dan buat frekuensi kumulatif:</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body">
+                          <thead><tr className="bg-slate-700/30"><th className="px-2 py-1 text-left text-white/50">Nilai (xᵢ)</th><th className="px-2 py-1 text-center text-white/50">fᵢ</th><th className="px-2 py-1 text-center text-white/50">Frekuensi Kumulatif</th></tr></thead>
+                          <tbody className="divide-y divide-slate-700/20">
+                            {[["70","2","2"],["75","4","6"],["80","5","11"],["85","3","14"],["90","1","15"]].map(([x,f,fk], i) => (
+                              <tr key={x} className={i===2 ? "bg-purple-900/30" : ""}>
+                                <td className={`px-2 py-1 font-semibold ${i===2 ? "text-purple-300" : "text-white/70"}`}>{x}</td>
+                                <td className="px-2 py-1 text-center text-yellow-300">{f}</td>
+                                <td className={`px-2 py-1 text-center font-bold ${i===2 ? "text-purple-300" : "text-white/60"}`}>{fk}</td>
+                              </tr>
+                            ))}
+                            <tr className="border-t border-slate-500/40 font-bold"><td className="px-2 py-1 text-white">Total</td><td className="px-2 py-1 text-center text-yellow-400">15</td><td></td></tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <p>Median (73) ≈ Rata-rata (74) — keduanya cukup dekat karena tidak ada nilai yang terlalu ekstrem.</p>
+                      <p><strong>Langkah 2:</strong> <InlineMath math="n = 15" /> (ganjil) → posisi median = <InlineMath math="\frac{15+1}{2} = 8" /></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <p className="text-xs text-white/50">Data ke-1 s.d. ke-2 → Nilai <strong className="text-white">70</strong></p>
+                        <p className="text-xs text-white/50">Data ke-3 s.d. ke-6 → Nilai <strong className="text-white">75</strong></p>
+                        <p className="text-xs text-purple-300 font-semibold">Data ke-7 s.d. ke-11 → Nilai <strong>80</strong> ← posisi ke-8 ada di sini!</p>
+                      </div>
+                      <p><strong className="text-primary">Median = 80</strong></p>
                     </div>
                   </div>
                 </div>
@@ -912,6 +937,76 @@ const MedianModusPage = () => {
                       </div>
                       <p>Cek urutan: 20, 25, 28, 30, 32 ✓ (terurut naik, semua &lt; 45 ✓)</p>
                       <p><strong className="text-primary">a = 30</strong></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CONTOH 4 — Diagram Batang */}
+                <div className="border-l-4 border-orange-500 pl-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-orange-500/20 text-orange-400 text-xs font-bold px-2 py-1 rounded">DIAGRAM</span>
+                    <span className="font-body font-semibold text-white">Contoh 4</span>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                    <p className="font-body text-sm text-white">Diagram batang berikut menunjukkan nilai ulangan harian siswa kelas 9A. Tentukan median nilai ulangan tersebut!</p>
+                    <div className="bg-slate-900/50 rounded-lg p-3">
+                      <p className="font-body text-xs text-white/50 text-center mb-2">📊 Diagram Batang Nilai Ulangan Kelas 9A</p>
+                      <svg viewBox="0 0 260 140" className="w-full max-h-40">
+                        {/* Grid lines & y-axis labels */}
+                        {[0,2,4,6].map(v => (
+                          <g key={v}>
+                            <line x1="35" y1={115 - v*15} x2="250" y2={115 - v*15} stroke="#334155" strokeWidth="0.5"/>
+                            <text x="30" y={115 - v*15 + 3} textAnchor="end" fontSize="7" fill="#64748b">{v}</text>
+                          </g>
+                        ))}
+                        {/* Bars */}
+                        {[
+                          {val:"6", f:2, cx:60,  color:"#ef4444"},
+                          {val:"7", f:5, cx:100, color:"#f59e0b"},
+                          {val:"8", f:6, cx:140, color:"#22c55e"},
+                          {val:"9", f:4, cx:180, color:"#3b82f6"},
+                          {val:"10",f:2, cx:220, color:"#a855f7"},
+                        ].map(({val,f,cx,color}) => (
+                          <g key={val}>
+                            <rect x={cx-14} y={115-f*15} width="28" height={f*15} fill={color} fillOpacity="0.8" rx="2"/>
+                            <text x={cx} y={110-f*15} textAnchor="middle" fontSize="7" fill="white" fontWeight="bold">{f}</text>
+                            <text x={cx} y="128" textAnchor="middle" fontSize="8" fill="#94a3b8">{val}</text>
+                          </g>
+                        ))}
+                        {/* Axes */}
+                        <line x1="35" y1="20" x2="35" y2="115" stroke="#475569" strokeWidth="1"/>
+                        <line x1="35" y1="115" x2="250" y2="115" stroke="#475569" strokeWidth="1"/>
+                        <text x="143" y="138" textAnchor="middle" fontSize="7" fill="#64748b">Nilai</text>
+                        <text x="12" y="72" textAnchor="middle" fontSize="7" fill="#64748b" transform="rotate(-90,12,72)">Frekuensi</text>
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="bg-orange-500/5 border border-orange-500/20 rounded-lg p-4">
+                    <p className="font-body text-xs font-semibold text-orange-400 mb-3">PEMBAHASAN:</p>
+                    <div className="space-y-3 font-body text-sm text-white/80">
+                      <p><strong>Langkah 1:</strong> Baca data dari diagram batang dan buat tabel frekuensi kumulatif:</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body">
+                          <thead><tr className="bg-slate-700/30"><th className="px-2 py-1 text-left text-white/50">Nilai</th><th className="px-2 py-1 text-center text-white/50">Frekuensi</th><th className="px-2 py-1 text-center text-white/50">Frekuensi Kumulatif</th></tr></thead>
+                          <tbody className="divide-y divide-slate-700/20">
+                            {[["6","2","2"],["7","5","7"],["8","6","13"],["9","4","17"],["10","2","19"]].map(([x,f,fk], i) => (
+                              <tr key={x} className={i===2 ? "bg-purple-900/30" : ""}>
+                                <td className={`px-2 py-1 font-semibold ${i===2 ? "text-purple-300" : "text-white/70"}`}>{x}</td>
+                                <td className="px-2 py-1 text-center text-orange-300">{f}</td>
+                                <td className={`px-2 py-1 text-center font-bold ${i===2 ? "text-purple-300" : "text-white/60"}`}>{fk}</td>
+                              </tr>
+                            ))}
+                            <tr className="border-t border-slate-500/40 font-bold"><td className="px-2 py-1 text-white">Total</td><td className="px-2 py-1 text-center text-orange-400">19</td><td></td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <p><strong>Langkah 2:</strong> <InlineMath math="n = 19" /> (ganjil) → posisi median = <InlineMath math="\frac{19+1}{2} = 10" /></p>
+                      <div className="bg-slate-900/50 rounded p-3 space-y-1">
+                        <p className="text-xs text-white/50">Data ke-1 s.d. ke-2 → Nilai <strong className="text-white">6</strong></p>
+                        <p className="text-xs text-white/50">Data ke-3 s.d. ke-7 → Nilai <strong className="text-white">7</strong></p>
+                        <p className="text-xs text-purple-300 font-semibold">Data ke-8 s.d. ke-13 → Nilai <strong>8</strong> ← posisi ke-10 ada di sini!</p>
+                      </div>
+                      <p><strong className="text-primary">Median = 8</strong></p>
                     </div>
                   </div>
                 </div>
