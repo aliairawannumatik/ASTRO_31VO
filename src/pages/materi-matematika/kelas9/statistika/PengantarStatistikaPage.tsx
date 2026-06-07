@@ -50,7 +50,7 @@ const PengantarStatistikaPage = () => {
                   <img
                     src="/harga-saham-bbca.jpeg"
                     alt="Grafik Harga Saham BBCA (Bank Central Asia) — contoh nyata penggunaan statistika dalam dunia keuangan"
-                    className="w-full object-cover max-h-44"
+                    className="w-full h-auto object-contain"
                   />
                   <div className="px-4 py-2 bg-slate-900/70">
                     <p className="font-body text-xs text-slate-400 text-center leading-relaxed">
