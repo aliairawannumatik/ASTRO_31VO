@@ -412,40 +412,67 @@ const PengertianPolaPage = () => {
 
           {/* CONTOH 2 POLA KHUSUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang (Fibonacci)" />
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang (Barisan Bertingkat)" />
             <div className="px-5 pb-5 space-y-4">
               <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
               <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
                 <p className="font-body text-sm font-semibold text-yellow-300 mb-2">📝 Soal</p>
-                <p className="font-body text-sm text-white/85">Barisan Fibonacci dimulai: 1, 1, 2, 3, 5, 8, 13, 21, ...<br />a) Tuliskan suku ke-11 dan ke-12.<br />b) Berapa hasil bagi suku ke-12 terhadap suku ke-11? Apa pola yang muncul?</p>
+                <p className="font-body text-sm text-white/85">
+                  Perhatikan barisan berikut: <strong>15, 24, 35, 48, 63, …</strong><br />
+                  Suku ke-14 dari barisan tersebut adalah …<br />
+                </p>
+                <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-body">
+                  {[["A","185"],["B","194"],["C","288"],["D","312"]].map(([opt, val]) => (
+                    <div key={opt} className={`border rounded-lg px-3 py-2 flex gap-2 items-center ${opt === "C" ? "bg-yellow-500/20 border-yellow-400/60 text-yellow-200 font-bold" : "bg-slate-800/40 border-white/10 text-white/60"}`}>
+                      <span className={`font-bold ${opt === "C" ? "text-yellow-300" : "text-white/40"}`}>{opt}.</span> {val}
+                      {opt === "C" && <span className="ml-auto text-yellow-400">✓</span>}
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                 <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
-                <div className="space-y-2 text-sm font-body">
+                <div className="space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-2">a) Lanjutkan barisan hingga suku ke-12:</p>
+                    <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Hitung selisih bertingkat:</p>
                     <div className="overflow-x-auto">
-                      <table className="w-full text-xs border-collapse">
-                        <thead><tr className="bg-teal-900/40"><th className="border border-white/10 px-2 py-1 text-teal-200">n</th><th className="border border-white/10 px-2 py-1 text-teal-200">Uₙ</th></tr></thead>
+                      <table className="text-xs border-collapse w-full">
                         <tbody>
-                          {[[1,1],[2,1],[3,2],[4,3],[5,5],[6,8],[7,13],[8,21],[9,34],[10,55],[11,89],[12,144]].map(([n, u]) => (
-                            <tr key={n} className={n >= 11 ? "bg-teal-900/30" : "bg-slate-800/20"}>
-                              <td className="border border-white/10 px-2 py-1 text-white/60 text-center">{n}</td>
-                              <td className="border border-white/10 px-2 py-1 text-center font-bold text-teal-200">{u}</td>
-                            </tr>
-                          ))}
+                          <tr>
+                            <td className="text-white/50 px-2 py-1 font-semibold">Barisan</td>
+                            {[15,24,35,48,63].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-yellow-200 font-bold">{v}</td>)}
+                          </tr>
+                          <tr>
+                            <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-1</td>
+                            {[9,11,13,15].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-cyan-300">{v}</td>)}
+                            <td />
+                          </tr>
+                          <tr>
+                            <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-2</td>
+                            {[2,2,2].map((v,i) => <td key={i} className="border border-white/10 px-3 py-1 text-center text-green-300 font-bold">{v}</td>)}
+                            <td /><td />
+                          </tr>
                         </tbody>
                       </table>
                     </div>
-                    <p className="text-white/70 mt-2"><InlineMath math="U_{11} = 89" />, <InlineMath math="U_{12} = 144" /></p>
+                    <p className="text-white/70 text-xs mt-2">Beda ke-2 konstan = <strong className="text-green-300">2</strong> → barisan kuadratik, rumus <InlineMath math="U_n = an^2 + bn + c" /></p>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-violet-300 font-semibold mb-1">b) Rasio suku berurutan:</p>
-                    <BlockMath math="\frac{U_{12}}{U_{11}} = \frac{144}{89} \approx 1{,}618" />
-                    <p className="text-white/70 text-xs mt-1">Nilai ini mendekati <strong className="text-yellow-300">Rasio Emas (Golden Ratio) φ ≈ 1,618!</strong> Semakin besar suku Fibonacci, rasio antar suku berurutan semakin mendekati φ.</p>
+                    <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Tentukan koefisien:</p>
+                    <BlockMath math="a = \frac{\text{beda ke-2}}{2} = \frac{2}{2} = 1" />
+                    <p className="text-white/70 mb-1">Susun persamaan dari <InlineMath math="U_1" /> dan <InlineMath math="U_2" />:</p>
+                    <BlockMath math="U_1: 1 + b + c = 15 \Rightarrow b + c = 14" />
+                    <BlockMath math="U_2: 4 + 2b + c = 24 \Rightarrow 2b + c = 20" />
+                    <p className="text-white/70 mb-1">Kurangkan persamaan pertama dari kedua:</p>
+                    <BlockMath math="b = 6,\quad c = 8" />
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Rumus umum & substitusi n = 14:</p>
+                    <BlockMath math="U_n = n^2 + 6n + 8" />
+                    <BlockMath math="U_{14} = 14^2 + 6(14) + 8 = 196 + 84 + 8 = 288" />
                   </div>
                   <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm font-bold text-cyan-300">✅ <InlineMath math="U_{11} = 89" />, <InlineMath math="U_{12} = 144" />, rasio ≈ 1,618 (Golden Ratio!)</p>
+                    <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: <strong className="text-yellow-300">C. 288</strong></p>
                   </div>
                 </div>
               </div>
@@ -454,66 +481,72 @@ const PengertianPolaPage = () => {
 
           {/* CONTOH 3 POLA KHUSUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit (Segitiga Pascal)" />
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit (Barisan Bertingkat)" />
             <div className="px-5 pb-5 space-y-4">
               <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
               <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                 <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
                 <p className="font-body text-sm text-white/85">
-                  a) Tuliskan baris ke-7 dari Segitiga Pascal (baris pertama = baris ke-1, bernilai "1").<br />
-                  b) Berapa jumlah semua bilangan pada baris ke-7?<br />
-                  c) Apa rumus jumlah bilangan pada baris ke-<InlineMath math="n" />?
+                  Perhatikan barisan berikut: <strong>4, 8, 14, 22, 32, …</strong><br />
+                  Tentukan suku ke-20 dari barisan tersebut!
                 </p>
               </div>
               <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                 <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                 <div className="space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-2">a) Baris ke-7 dari Segitiga Pascal:</p>
-                    <div className="flex flex-col items-center gap-1 my-2 font-mono text-xs">
-                      {[
-                        { baris: 1, values: [1] },
-                        { baris: 2, values: [1, 1] },
-                        { baris: 3, values: [1, 2, 1] },
-                        { baris: 4, values: [1, 3, 3, 1] },
-                        { baris: 5, values: [1, 4, 6, 4, 1] },
-                        { baris: 6, values: [1, 5, 10, 10, 5, 1] },
-                        { baris: 7, values: [1, 6, 15, 20, 15, 6, 1] },
-                      ].map(({ baris, values }) => (
-                        <div key={baris} className="flex gap-1 items-center">
-                          <span className="text-white/30 text-xs w-4 text-right mr-1">{baris}</span>
-                          {values.map((val, ci) => (
-                            <span key={ci} className={`${baris === 7 ? "bg-pink-700/60 border-pink-400/50 text-pink-100 font-bold" : "bg-slate-700/50 border-white/10 text-white/50"} border rounded px-1.5 py-0.5 min-w-[28px] text-center`}>{val}</span>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                    <p className="text-pink-300 font-semibold mt-1">Baris ke-7: <strong>1, 6, 15, 20, 15, 6, 1</strong></p>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-violet-300 font-semibold mb-1">b) Jumlah baris ke-7:</p>
-                    <BlockMath math="1 + 6 + 15 + 20 + 15 + 6 + 1 = 64" />
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-green-300 font-semibold mb-1">c) Pola jumlah per baris:</p>
+                    <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Hitung selisih bertingkat:</p>
                     <div className="overflow-x-auto">
-                      <table className="w-full text-xs border-collapse">
-                        <thead><tr className="bg-pink-900/40"><th className="border border-white/10 px-2 py-1 text-pink-200">Baris (n)</th><th className="border border-white/10 px-2 py-1 text-pink-200">Jumlah</th><th className="border border-white/10 px-2 py-1 text-pink-200">= 2^?</th></tr></thead>
+                      <table className="text-xs border-collapse w-full">
                         <tbody>
-                          {[[1,1,"2⁰"],[2,2,"2¹"],[3,4,"2²"],[4,8,"2³"],[5,16,"2⁴"],[6,32,"2⁵"],[7,64,"2⁶"]].map(([n, j, p]) => (
-                            <tr key={n} className={n === 7 ? "bg-pink-900/30" : "bg-slate-800/20"}>
-                              <td className="border border-white/10 px-2 py-1 text-center text-white/60">{n}</td>
-                              <td className="border border-white/10 px-2 py-1 text-center font-bold text-pink-200">{j}</td>
-                              <td className="border border-white/10 px-2 py-1 text-center text-green-300">{p}</td>
-                            </tr>
-                          ))}
+                          <tr>
+                            <td className="text-white/50 px-2 py-1 font-semibold">Barisan</td>
+                            {[4,8,14,22,32].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-red-200 font-bold">{v}</td>)}
+                          </tr>
+                          <tr>
+                            <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-1</td>
+                            {[4,6,8,10].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-cyan-300">{v}</td>)}
+                            <td />
+                          </tr>
+                          <tr>
+                            <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-2</td>
+                            {[2,2,2].map((v,i) => <td key={i} className="border border-white/10 px-3 py-1 text-center text-green-300 font-bold">{v}</td>)}
+                            <td /><td />
+                          </tr>
                         </tbody>
                       </table>
                     </div>
-                    <BlockMath math="\text{Jumlah baris ke-}n = 2^{n-1}" />
+                    <p className="text-white/70 text-xs mt-2">Beda ke-2 konstan = <strong className="text-green-300">2</strong> → barisan kuadratik, rumus <InlineMath math="U_n = an^2 + bn + c" /></p>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Tentukan koefisien:</p>
+                    <BlockMath math="a = \frac{\text{beda ke-2}}{2} = \frac{2}{2} = 1" />
+                    <p className="text-white/70 mb-1">Susun persamaan dari <InlineMath math="U_1" /> dan <InlineMath math="U_2" />:</p>
+                    <BlockMath math="U_1: 1 + b + c = 4 \Rightarrow b + c = 3" />
+                    <BlockMath math="U_2: 4 + 2b + c = 8 \Rightarrow 2b + c = 4" />
+                    <p className="text-white/70 mb-1">Kurangkan persamaan pertama dari kedua:</p>
+                    <BlockMath math="b = 1,\quad c = 2" />
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Verifikasi rumus:</p>
+                    <BlockMath math="U_n = n^2 + n + 2" />
+                    <div className="grid grid-cols-5 gap-1 mt-2">
+                      {[
+                        { n: 1, u: 4 }, { n: 2, u: 8 }, { n: 3, u: 14 }, { n: 4, u: 22 }, { n: 5, u: 32 },
+                      ].map(({ n, u }) => (
+                        <div key={n} className="bg-green-900/30 border border-green-500/20 rounded-lg p-2 text-center">
+                          <p className="text-white/40 text-xs">n={n}</p>
+                          <p className="text-green-300 font-bold text-xs">{u} ✓</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-orange-300 font-semibold mb-1">Langkah 4 — Substitusi n = 20:</p>
+                    <BlockMath math="U_{20} = 20^2 + 20 + 2 = 400 + 20 + 2 = 422" />
                   </div>
                   <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm font-bold text-cyan-300">✅ Baris ke-7: 1, 6, 15, 20, 15, 6, 1. Jumlah = 64 = <InlineMath math="2^6" />. Rumus: <InlineMath math="\text{Jumlah baris ke-}n = 2^{n-1}" /></p>
+                    <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: Suku ke-20 dari barisan 4, 8, 14, 22, 32, … adalah <strong className="text-yellow-300">422</strong>.</p>
                   </div>
                 </div>
               </div>
