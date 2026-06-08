@@ -772,7 +772,6 @@ const PemecahanMasalahHimpunanPage = lazy(() => import("./pages/materi-matematik
 // Materi Matematika - Kelas 8
 const PolaBilanganMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/PolaBilanganPage"));
 const PengertianPolaMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PengertianPolaPage"));
-const PolaKhususMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaKhususPage"));
 const PolaAritmetikaMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaAritmetikaPage"));
 const PolaGeometriMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaGeometriPage"));
 const KoordinatCartesiusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/KoordinatCartesiusPage"));
@@ -1599,7 +1598,7 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-7/himpunan/pemecahan-masalah" element={<PemecahanMasalahHimpunanPage />} />
           <Route path="/materi-matematika/kelas-8/pola-bilangan" element={<PolaBilanganMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/pola-bilangan/pengertian-pola" element={<PengertianPolaMMK8Page />} />
-          <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-khusus" element={<PengertianPolaMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMMK8Page />} />
