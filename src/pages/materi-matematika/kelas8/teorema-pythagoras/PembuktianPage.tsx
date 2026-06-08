@@ -127,6 +127,19 @@ const PembuktianPage = () => {
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Teorema Pythagoras · Materi Matematika</p>
 
+        {/* VIDEO YOUTUBE */}
+        <div className="w-full mb-4 rounded-2xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-900/30 bg-black">
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/vbG_YBTiN38?rel=0&modestbranding=1"
+              title="Pembuktian Teorema Pythagoras"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* WATER PROOF ANIMATION — paling atas */}
