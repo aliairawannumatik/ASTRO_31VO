@@ -56,6 +56,16 @@ const PengertianPolaPage = () => {
               <p className="font-body text-sm text-white/80 leading-relaxed">
                 Coba perhatikan lantai keramik bermotif, petikan dawai gitar, atau jadwal bus yang datang setiap 15 menit — semuanya punya <strong className="text-cyan-300">pola</strong>! Dalam matematika, pola bilangan adalah susunan angka-angka yang mengikuti <strong className="text-cyan-300">aturan tertentu</strong> yang bisa kita prediksi dan analisis.
               </p>
+              <figure className="flex flex-col items-center gap-2">
+                <img
+                  src="/batik-sidomukti.png"
+                  alt="Batik Sidomukti"
+                  className="w-full max-w-sm rounded-xl border border-cyan-500/30 shadow-lg object-cover"
+                />
+                <figcaption className="font-body text-xs text-white/50 italic text-center">
+                  Batik Sidomukti — salah satu contoh pola berulang dalam seni budaya Indonesia
+                </figcaption>
+              </figure>
               <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
                 <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">🔍 Contoh Pola Sederhana</p>
                 <div className="grid grid-cols-1 gap-2 text-xs font-body">
