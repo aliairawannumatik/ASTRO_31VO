@@ -128,16 +128,29 @@ const PembuktianPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Teorema Pythagoras · Materi Matematika</p>
 
         {/* VIDEO YOUTUBE */}
-        <div className="w-full mb-4 rounded-2xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-900/30 bg-black">
-          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/vbG_YBTiN38?rel=0&modestbranding=1"
-              title="Pembuktian Teorema Pythagoras"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+        <div className="w-full mb-4">
+          <div className="rounded-2xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-900/30 bg-black">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/vbG_YBTiN38?rel=0&modestbranding=1"
+                title="Pembuktian Teorema Pythagoras"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
           </div>
+          <p className="text-center text-white/50 text-xs mt-2 font-body">
+            oleh{" "}
+            <a
+              href="https://www.youtube.com/watch?v=vbG_YBTiN38"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
+            >
+              Elyarch Ltd
+            </a>
+          </p>
         </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
