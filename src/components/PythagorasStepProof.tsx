@@ -1,137 +1,143 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 
-// ─── Geometry: a=3, b=4, c=5, scale=36 px/unit ───────────────────────────────
-const A_PX = 108;   // a × 36
-const B_PX = 144;   // b × 36
-const S_PX = 252;   // (a+b) × 36
-const OX   = 64;    // big-square top-left x
-const OY   = 30;    // big-square top-left y
+// ─── Geometry: 3-4-5 triple, 40 px/unit ─────────────────────────────────────
+const SC = 40;
+const A  = 3 * SC;   // 120 px  (leg a)
+const B  = 4 * SC;   // 160 px  (leg b)
+const S  = 7 * SC;   // 280 px  (big square side = a+b)
+
+// Big square placed so it's centred in viewBox 420 × 360
+const OX = 70;
+const OY = 24;
 
 type Pt  = [number, number];
-type Tri = [Pt, Pt, Pt];
+type Tri = readonly [Pt, Pt, Pt];
 
-// Arrangement A: 4 triangles at corners → c² exposed in centre
+// ── Vertices where adjacent hypotenuses meet (inner tilted square) ──
+const C2: readonly Pt[] = [
+  [OX + B,     OY    ],
+  [OX + S,     OY + B],
+  [OX + A,     OY + S],
+  [OX,         OY + B],
+];
+const C2_CX = C2.reduce((s, p) => s + p[0], 0) / 4;
+const C2_CY = C2.reduce((s, p) => s + p[1], 0) / 4;
+
+// ── Arrangement A: 4 triangles at corners → c² exposed ──
 const POS_A: Tri[] = [
-  [[OX,         OY],        [OX+B_PX, OY],        [OX,         OY+A_PX]],
-  [[OX+S_PX,    OY],        [OX+S_PX, OY+B_PX],   [OX+B_PX,    OY]],
-  [[OX+S_PX,    OY+S_PX],   [OX+A_PX, OY+S_PX],   [OX+S_PX,    OY+B_PX]],
-  [[OX,         OY+S_PX],   [OX+A_PX, OY+S_PX],   [OX,         OY+B_PX]],
+  [[OX,     OY    ], [OX + B, OY    ], [OX,     OY + A]],
+  [[OX + S, OY    ], [OX + S, OY + B], [OX + B, OY    ]],
+  [[OX + S, OY + S], [OX + A, OY + S], [OX + S, OY + B]],
+  [[OX,     OY + S], [OX,     OY + B], [OX + A, OY + S]],
 ];
 
-// Arrangement B: 4 triangles form 2 rectangles → a² and b² exposed
+// ── Arrangement B: 2 rectangles → a² (top-left) + b² (bottom-right) exposed ──
 const POS_B: Tri[] = [
-  [[OX+A_PX,    OY],        [OX+S_PX, OY],         [OX+A_PX,    OY+A_PX]],
-  [[OX+S_PX,    OY+A_PX],   [OX+A_PX, OY+A_PX],    [OX+S_PX,    OY]],
-  [[OX+A_PX,    OY+S_PX],   [OX,      OY+S_PX],    [OX+A_PX,    OY+A_PX]],
-  [[OX,         OY+A_PX],   [OX+A_PX, OY+A_PX],    [OX,         OY+S_PX]],
+  [[OX + A, OY    ], [OX + S, OY    ], [OX + A, OY + A]],
+  [[OX + S, OY + A], [OX + A, OY + A], [OX + S, OY    ]],
+  [[OX,     OY + A], [OX,     OY + S], [OX + A, OY + A]],
+  [[OX + A, OY + S], [OX + A, OY + A], [OX,     OY + S]],
 ];
 
-// c² tilted inner square
-const C2_PTS: Pt[] = [
-  [OX+B_PX,  OY],
-  [OX+S_PX,  OY+B_PX],
-  [OX+A_PX,  OY+S_PX],
-  [OX,       OY+B_PX],
-];
-const C2_CX = C2_PTS.reduce((s, p) => s + p[0], 0) / 4;
-const C2_CY = C2_PTS.reduce((s, p) => s + p[1], 0) / 4;
+// ── Triangle colours ──
+const FILL   = ["#3b82f6", "#22c55e", "#f97316", "#a855f7"] as const;
+const STROKE = ["#93c5fd", "#86efac", "#fdba74", "#d8b4fe"] as const;
 
-const TRI_FILL   = ["#3b82f6", "#22c55e", "#f97316", "#a855f7"];
-const TRI_STROKE = ["#93c5fd", "#86efac", "#fdba74", "#d8b4fe"];
-
+// ── Helpers ──
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
-function ease(t: number) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2; }
+function ease(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
 function lerpTri(A: Tri, B: Tri, t: number): Pt[] {
   return A.map((v, i) => [lerp(v[0], B[i][0], t), lerp(v[1], B[i][1], t)] as Pt);
 }
-function svgPts(v: Pt[]) { return v.map(p => p.join(",")).join(" "); }
+function pts(v: Pt[]) { return v.map(p => p.join(",")).join(" "); }
 function cen(v: Pt[]): Pt {
-  return [v.reduce((s, p) => s + p[0], 0) / v.length, v.reduce((s, p) => s + p[1], 0) / v.length];
+  return [
+    v.reduce((s, p) => s + p[0], 0) / v.length,
+    v.reduce((s, p) => s + p[1], 0) / v.length,
+  ];
 }
 
-// ─── Step definitions ─────────────────────────────────────────────────────────
-interface StepMeta {
-  dot: string;
-  title: string;
-  desc: string;
-  color: string;
-}
+// ── Step metadata ──
+interface StepMeta { label: string; title: string; desc: string; color: string; }
 const STEPS: StepMeta[] = [
   {
-    dot: "1",
+    label: "1",
     title: "Segitiga Siku-Siku",
-    desc: "Segitiga siku-siku dengan kaki a = 3 dan b = 4, serta hipotenusa c = 5. Kita akan membuktikan secara visual bahwa a² + b² = c²!",
+    desc: "Segitiga siku-siku dengan kaki a = 3 dan b = 4, serta hipotenusa c = 5. Tujuan: buktikan secara visual bahwa a² + b² = c².",
     color: "#22d3ee",
   },
   {
-    dot: "2",
-    title: "Buat Persegi Besar (a+b)²",
-    desc: "Buat persegi besar bersisi (a + b) = 7. Luasnya = (a + b)² = 49 satuan². Persegi inilah yang menjadi \"arena\" pembuktian kita!",
+    label: "2",
+    title: "Persegi Besar (a+b)²",
+    desc: "Buat persegi besar dengan sisi (a + b) = 7. Luas persegi ini = (a + b)² = 49 satuan² — ini menjadi \"arena\" pembuktian kita!",
     color: "#818cf8",
   },
   {
-    dot: "3",
-    title: "Susun 4 Segitiga Identik",
-    desc: "Empat salinan segitiga siku-siku ditempatkan di sudut-sudut persegi besar. Perhatikan ruang kosong yang terbentuk di tengah!",
+    label: "3",
+    title: "Susun 4 Segitiga",
+    desc: "Empat salinan segitiga siku-siku ditempatkan di sudut-sudut persegi besar. Perhatikan ruang kosong berbentuk persegi miring di tengah.",
     color: "#c084fc",
   },
   {
-    dot: "4",
-    title: "Ruang Kosong Tengah = c²",
-    desc: "Setiap sisi ruang kosong adalah hipotenusa c dari segitiga. Jadi ruang kosong = persegi bersisi c, luasnya = c² = 25 satuan persegi!",
+    label: "4",
+    title: "Ruang Tengah = c²",
+    desc: "Setiap sisi ruang kosong di tengah adalah hipotenusa c. Artinya ruang itu adalah persegi bersisi c → luasnya = c² = 25 satuan²!",
     color: "#fbbf24",
   },
   {
-    dot: "5",
-    title: "Geser 4 Segitiga!",
-    desc: "Geser 4 segitiga ke posisi baru dalam persegi yang sama. Ruang kosong berubah menjadi dua persegi terpisah: a² = 9 dan b² = 16!",
+    label: "5",
+    title: "Geser Segitiga! ▶",
+    desc: "Empat segitiga digeser ke posisi baru di dalam persegi yang sama. Ruang kosong kini terpecah menjadi dua persegi: a² dan b²!",
     color: "#34d399",
   },
   {
-    dot: "6",
-    title: "a² + b² = c²  Terbukti! ✓",
-    desc: "Luas persegi besar tidak berubah. Dari dua cara menghitung: c² = a² + b²  ➜  25 = 9 + 16 = 25 ✓  Teorema Pythagoras terbukti secara visual!",
+    label: "6",
+    title: "a² + b² = c²  ✓",
+    desc: "Luas persegi besar tetap sama. Dengan dua cara menghitung: c² = a² + b²  →  25 = 9 + 16 = 25 ✓  Teorema Pythagoras TERBUKTI!",
     color: "#4ade80",
   },
 ];
 
-// ─── Component ────────────────────────────────────────────────────────────────
+const ANIM_DURATION = 1600;
+
+// ── Component ─────────────────────────────────────────────────────────────────
 const PythagorasStepProof: React.FC = () => {
-  const [step, setStep]       = useState(0);
-  const [animT, setAnimT]     = useState(0);
-  const [isAnim, setIsAnim]   = useState(false);
+  const [step,   setStep  ] = useState(0);
+  const [animT,  setAnimT ] = useState(0);
+  const [isAnim, setIsAnim] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(false);
 
-  const rafRef    = useRef<number | null>(null);
-  const startRef  = useRef<number | null>(null);
-  const isAnimRef = useRef(false);
-  const DURATION  = 1500;
+  const rafRef     = useRef<number | null>(null);
+  const startRef   = useRef<number | null>(null);
+  const isAnimRef  = useRef(false);
+  const autoTimRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
-
-  const stopAnim = useCallback(() => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    rafRef.current = null;
-    isAnimRef.current = false;
-    setIsAnim(false);
+  // Clean up on unmount
+  useEffect(() => () => {
+    if (rafRef.current)    cancelAnimationFrame(rafRef.current);
+    if (autoTimRef.current) clearTimeout(autoTimRef.current);
   }, []);
 
+  // ── Core animation loop ──
   const animLoop = useCallback((ts: number) => {
     if (!isAnimRef.current) return;
     if (startRef.current === null) startRef.current = ts;
     const elapsed  = ts - startRef.current;
-    const progress = Math.min(elapsed / DURATION, 1);
-    const newT     = ease(progress);
-    setAnimT(newT);
+    const progress = Math.min(elapsed / ANIM_DURATION, 1);
+    setAnimT(ease(progress));
     if (progress < 1) {
       rafRef.current = requestAnimationFrame(animLoop);
     } else {
       isAnimRef.current = false;
       setIsAnim(false);
-      setStep(5);   // auto-advance to final step
+      setStep(5);
     }
   }, []);
 
   const startAnim = useCallback(() => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
     setStep(4);
     setAnimT(0);
     startRef.current  = null;
@@ -140,6 +146,56 @@ const PythagorasStepProof: React.FC = () => {
     rafRef.current = requestAnimationFrame(animLoop);
   }, [animLoop]);
 
+  const stopAnim = useCallback(() => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current    = null;
+    isAnimRef.current = false;
+    setIsAnim(false);
+  }, []);
+
+  // ── Auto-play logic ──
+  const scheduleNext = useCallback((fromStep: number) => {
+    if (autoTimRef.current) clearTimeout(autoTimRef.current);
+    if (fromStep >= 5) { setAutoPlay(false); return; }
+    const delay = fromStep === 3 ? ANIM_DURATION + 200 : 2200;
+    autoTimRef.current = setTimeout(() => {
+      if (fromStep === 3) {
+        startAnim();
+      } else {
+        const next = fromStep + 1;
+        setStep(next);
+        scheduleNext(next);
+      }
+    }, delay);
+  }, [startAnim]);
+
+  // Watch step changes while auto-playing
+  useEffect(() => {
+    if (!autoPlay) return;
+    if (step === 5) { setAutoPlay(false); return; }
+    if (step !== 4) scheduleNext(step);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoPlay, step]);
+
+  // After animation finishes during auto-play, schedule step 5 display
+  useEffect(() => {
+    if (autoPlay && !isAnim && step === 5) setAutoPlay(false);
+  }, [autoPlay, isAnim, step]);
+
+  const toggleAutoPlay = () => {
+    if (autoPlay) {
+      setAutoPlay(false);
+      stopAnim();
+      if (autoTimRef.current) clearTimeout(autoTimRef.current);
+    } else {
+      stopAnim();
+      setStep(0);
+      setAnimT(0);
+      setAutoPlay(true);
+    }
+  };
+
+  // ── Navigation ──
   const goNext = () => {
     if (isAnim) return;
     if (step === 3) { startAnim(); }
@@ -152,368 +208,395 @@ const PythagorasStepProof: React.FC = () => {
     else if (step > 0) { setStep(s => s - 1); }
   };
 
-  const goReset = () => { stopAnim(); setStep(0); setAnimT(0); };
+  const goReset = () => {
+    stopAnim();
+    setAutoPlay(false);
+    if (autoTimRef.current) clearTimeout(autoTimRef.current);
+    setStep(0);
+    setAnimT(0);
+  };
 
   const jumpTo = (i: number) => {
     stopAnim();
-    if (i === 4) { setStep(3); setAnimT(0); }   // clicking animation dot → pre-anim state
+    setAutoPlay(false);
+    if (autoTimRef.current) clearTimeout(autoTimRef.current);
+    if (i === 4) { startAnim(); }
     else if (i === 5) { setStep(5); setAnimT(1); }
     else { setStep(i); setAnimT(0); }
   };
 
-  // Compute triangle vertices at current state
+  // ── Derived geometry ──
   const triVerts: Pt[][] = POS_A.map((posA, i) => {
-    if (step <= 3) return posA as unknown as Pt[];
+    if (step <= 3) return [...posA] as Pt[];
     if (step === 4) return lerpTri(posA, POS_B[i], animT);
-    return POS_B[i] as unknown as Pt[];
+    return [...POS_B[i]] as Pt[];
   });
 
-  // Visibility flags
   const showBigSq  = step >= 1;
-  const showT1     = step === 0;          // step 0: T1 only (intro triangle)
+  const showT0only = step === 0;
   const showAllTri = step >= 2;
   const showC2     = step >= 3;
-  const c2Alpha    = step < 4 ? 1 : step === 4 ? 1 - animT : 0;
-  const abAlpha    = step < 4 ? 0 : step === 4 ? animT     : 1;
+  const c2Opacity  = step < 4 ? 1 : step === 4 ? 1 - animT : 0;
+  const abOpacity  = step < 4 ? 0 : step === 4 ? animT     : 1;
   const showFinal  = step >= 5;
 
-  // Step indicator includes animation step (dot 4 active during anim)
-  const activeDot  = step;   // 0-5
-  const info = STEPS[Math.min(step, 5)];
+  const info     = STEPS[step <= 5 ? step : 5];
+  const activeDot = step;
 
-  // ─── Standalone intro triangle (step 0 only) — rendered larger via transform
-  // T1 vertices: (OX,OY), (OX+B_PX,OY), (OX,OY+A_PX)
-  // For step 0 we show only T1, same coordinates.
+  // ── SVG helpers ──
+  const RightAngle = ({ x, y, dir = "br" }: { x: number; y: number; dir?: string }) => {
+    const d = 11;
+    const pts: Record<string, string> = {
+      br: `${x},${y+d} ${x+d},${y+d} ${x+d},${y}`,
+      bl: `${x},${y+d} ${x-d},${y+d} ${x-d},${y}`,
+      tr: `${x},${y-d} ${x+d},${y-d} ${x+d},${y}`,
+      tl: `${x},${y-d} ${x-d},${y-d} ${x-d},${y}`,
+    };
+    return <polyline points={pts[dir]} fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"/>;
+  };
 
   return (
-    <div className="w-full flex flex-col items-center gap-3 mb-1">
+    <div className="w-full flex flex-col items-center gap-3">
 
-      {/* ── Step dots ───────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-2">
+      {/* ── Step dots ─────────────────────────────────────────────────────── */}
+      <div className="flex items-center gap-1.5">
         {STEPS.map((s, i) => (
           <button
             key={i}
             onClick={() => jumpTo(i)}
-            title={`Langkah ${i + 1}: ${s.title}`}
+            title={`Langkah ${s.label}: ${s.title}`}
             className="rounded-full transition-all duration-300 focus:outline-none"
             style={{
-              width:  i === activeDot ? 30 : 10,
-              height: 10,
+              width:      i === activeDot ? 32 : 10,
+              height:     10,
               background: i < activeDot
                 ? "rgba(100,116,139,0.55)"
                 : i === activeDot
                 ? info.color
                 : "rgba(71,85,105,0.35)",
+              boxShadow:  i === activeDot ? `0 0 8px ${info.color}88` : "none",
             }}
           />
         ))}
       </div>
 
-      {/* ── SVG canvas ──────────────────────────────────────────────────────── */}
+      {/* ── SVG Canvas ────────────────────────────────────────────────────── */}
       <div
-        className="w-full overflow-hidden rounded-2xl border bg-gradient-to-b from-slate-900 to-slate-950 shadow-2xl"
-        style={{ maxWidth: 400, borderColor: `${info.color}45` }}
+        className="w-full overflow-hidden rounded-2xl border shadow-2xl"
+        style={{
+          maxWidth: 420,
+          background: "linear-gradient(160deg,#0f172a 0%,#0d1728 100%)",
+          borderColor: `${info.color}40`,
+          boxShadow: `0 0 24px ${info.color}18`,
+        }}
       >
-        <svg
-          viewBox="0 0 390 302"
-          className="w-full"
-          aria-label="Pembuktian Teorema Pythagoras — Step by Step"
-        >
+        <svg viewBox="0 0 420 342" className="w-full" aria-label="Animasi Pembuktian Teorema Pythagoras">
           <defs>
-            <filter id="sp-glow-c2">
+            <filter id="glow-c">
               <feGaussianBlur stdDeviation="5" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
-            <filter id="sp-glow-sq">
+            <filter id="glow-sq">
               <feGaussianBlur stdDeviation="4" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
-            <filter id="sp-glow-eq">
-              <feGaussianBlur stdDeviation="6" result="b"/>
+            <filter id="glow-fin">
+              <feGaussianBlur stdDeviation="7" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
 
-          {/* ── Big outer square ── */}
+          {/* ── Big square ── */}
           {showBigSq && (
             <>
               <rect
-                x={OX} y={OY} width={S_PX} height={S_PX}
+                x={OX} y={OY} width={S} height={S}
                 fill="none"
-                stroke="rgba(148,163,184,0.55)"
+                stroke="rgba(148,163,184,0.45)"
                 strokeWidth="2"
-                strokeDasharray="9 5"
+                strokeDasharray="10 5"
               />
-              {/* (a+b) side label — top */}
-              <text
-                x={OX + S_PX / 2} y={OY - 9}
-                textAnchor="middle" fill="#64748b"
-                fontSize="11" fontFamily="monospace"
-              >(a+b) = 7</text>
-              {/* (a+b) side label — left */}
-              <text
-                x={OX - 22} y={OY + S_PX / 2 + 4}
-                textAnchor="middle" fill="#64748b"
-                fontSize="11" fontFamily="monospace"
-              >(a+b)</text>
+              <text x={OX + S / 2} y={OY - 10} textAnchor="middle"
+                fill="rgba(148,163,184,0.65)" fontSize="11" fontFamily="monospace">
+                sisi = a+b = 7
+              </text>
+              <text x={OX - 28} y={OY + S / 2 + 4} textAnchor="middle"
+                fill="rgba(148,163,184,0.55)" fontSize="11" fontFamily="monospace">
+                a+b
+              </text>
+              {/* Step 1: area label in center */}
+              {step === 1 && (
+                <>
+                  {[
+                    [OX,     OY    ],[OX + S, OY    ],
+                    [OX + S, OY + S],[OX,     OY + S],
+                  ].map(([cx, cy], i) => (
+                    <circle key={i} cx={cx} cy={cy} r="3.5" fill="rgba(148,163,184,0.7)"/>
+                  ))}
+                  <text x={OX + S / 2} y={OY + S / 2 - 10} textAnchor="middle"
+                    fill="rgba(148,163,184,0.5)" fontSize="20" fontWeight="bold" fontFamily="monospace">
+                    (a+b)²
+                  </text>
+                  <text x={OX + S / 2} y={OY + S / 2 + 14} textAnchor="middle"
+                    fill="rgba(148,163,184,0.4)" fontSize="13" fontFamily="monospace">
+                    = 49 satuan²
+                  </text>
+                </>
+              )}
+              {/* Step 2: hint text */}
+              {step === 2 && (
+                <text x={OX + S / 2} y={OY + S + 18} textAnchor="middle"
+                  fill="rgba(192,132,252,0.7)" fontSize="11" fontFamily="monospace">
+                  4 segitiga + ruang kosong = (a+b)²
+                </text>
+              )}
             </>
           )}
 
           {/* ── c² tilted inner square ── */}
-          {showC2 && c2Alpha > 0.02 && (
+          {showC2 && c2Opacity > 0.02 && (
             <>
               <polygon
-                points={svgPts(C2_PTS)}
-                fill={`rgba(251,191,36,${0.15 * c2Alpha})`}
-                stroke={`rgba(251,191,36,${c2Alpha})`}
+                points={pts([...C2] as Pt[])}
+                fill={`rgba(251,191,36,${0.12 * c2Opacity})`}
+                stroke={`rgba(251,191,36,${c2Opacity})`}
                 strokeWidth="2.5"
-                filter="url(#sp-glow-c2)"
+                filter="url(#glow-c)"
               />
-              {c2Alpha > 0.12 && (
+              {c2Opacity > 0.15 && (
                 <>
-                  <text
-                    x={C2_CX} y={C2_CY + 1}
-                    textAnchor="middle"
-                    fill={`rgba(253,230,138,${c2Alpha})`}
+                  <text x={C2_CX} y={C2_CY + 5} textAnchor="middle"
+                    fill={`rgba(253,230,138,${c2Opacity})`}
+                    fontSize="24" fontWeight="bold" fontFamily="monospace"
+                    filter="url(#glow-c)">
+                    c²
+                  </text>
+                  <text x={C2_CX} y={C2_CY + 22} textAnchor="middle"
+                    fill={`rgba(251,191,36,${c2Opacity * 0.8})`}
+                    fontSize="13" fontFamily="monospace">
+                    = 25
+                  </text>
+                  {/* c labels on each side of tilted square */}
+                  {step === 3 && ([
+                    { mx: (C2[3][0]+C2[0][0])/2-16, my: (C2[3][1]+C2[0][1])/2-2 },
+                    { mx: (C2[0][0]+C2[1][0])/2+16, my: (C2[0][1]+C2[1][1])/2-2 },
+                    { mx: (C2[1][0]+C2[2][0])/2+16, my: (C2[1][1]+C2[2][1])/2+5 },
+                    { mx: (C2[2][0]+C2[3][0])/2-16, my: (C2[2][1]+C2[3][1])/2+5 },
+                  ].map((m, i) => (
+                    <text key={i} x={m.mx} y={m.my} textAnchor="middle"
+                      fill={`rgba(251,191,36,${c2Opacity})`}
+                      fontSize="13" fontWeight="bold" fontFamily="monospace"
+                      filter="url(#glow-c)">
+                      c
+                    </text>
+                  )))}
+                </>
+              )}
+            </>
+          )}
+
+          {/* ── a² square (fades in) ── */}
+          {abOpacity > 0.02 && (
+            <>
+              <rect
+                x={OX} y={OY} width={A} height={A}
+                fill={`rgba(59,130,246,${0.2 * abOpacity})`}
+                stroke={`rgba(59,130,246,${abOpacity})`}
+                strokeWidth="2.5"
+                filter={abOpacity > 0.5 ? "url(#glow-sq)" : undefined}
+              />
+              {abOpacity > 0.25 && (
+                <>
+                  <text x={OX + A / 2} y={OY + A / 2 + 5} textAnchor="middle"
+                    fill={`rgba(147,197,253,${abOpacity})`}
                     fontSize="22" fontWeight="bold" fontFamily="monospace"
-                    filter="url(#sp-glow-c2)"
-                  >c²</text>
-                  <text
-                    x={C2_CX} y={C2_CY + 18}
-                    textAnchor="middle"
-                    fill={`rgba(251,191,36,${c2Alpha * 0.85})`}
-                    fontSize="12" fontFamily="monospace"
-                  >= 25</text>
+                    filter="url(#glow-sq)">
+                    a²
+                  </text>
+                  <text x={OX + A / 2} y={OY + A / 2 + 21} textAnchor="middle"
+                    fill={`rgba(147,197,253,${abOpacity * 0.8})`}
+                    fontSize="13" fontFamily="monospace">
+                    = 9
+                  </text>
                 </>
               )}
-              {/* "c" labels on each side of inner tilted square (step 3 only) */}
-              {step === 3 && ([
-                { mx: (C2_PTS[3][0]+C2_PTS[0][0])/2, my: (C2_PTS[3][1]+C2_PTS[0][1])/2, dx: -14, dy: -3 },
-                { mx: (C2_PTS[0][0]+C2_PTS[1][0])/2, my: (C2_PTS[0][1]+C2_PTS[1][1])/2, dx:  14, dy: -3 },
-                { mx: (C2_PTS[1][0]+C2_PTS[2][0])/2, my: (C2_PTS[1][1]+C2_PTS[2][1])/2, dx:  14, dy:  8 },
-                { mx: (C2_PTS[2][0]+C2_PTS[3][0])/2, my: (C2_PTS[2][1]+C2_PTS[3][1])/2, dx: -14, dy:  8 },
-              ].map((m, i) => (
-                <text key={i}
-                  x={m.mx + m.dx} y={m.my + m.dy}
-                  textAnchor="middle"
-                  fill="#fbbf24" fontSize="13" fontWeight="bold" fontFamily="monospace"
-                  filter="url(#sp-glow-c2)"
-                >c</text>
-              )))}
             </>
           )}
 
-          {/* ── a² square (fades in during animation) ── */}
-          {abAlpha > 0.02 && (
+          {/* ── b² square (fades in) ── */}
+          {abOpacity > 0.02 && (
             <>
               <rect
-                x={OX} y={OY} width={A_PX} height={A_PX}
-                fill={`rgba(59,130,246,${0.18 * abAlpha})`}
-                stroke={`rgba(59,130,246,${abAlpha})`}
+                x={OX + A} y={OY + A} width={B} height={B}
+                fill={`rgba(34,197,94,${0.2 * abOpacity})`}
+                stroke={`rgba(34,197,94,${abOpacity})`}
                 strokeWidth="2.5"
-                filter={abAlpha > 0.6 ? "url(#sp-glow-sq)" : undefined}
+                filter={abOpacity > 0.5 ? "url(#glow-sq)" : undefined}
               />
-              {abAlpha > 0.2 && (
+              {abOpacity > 0.25 && (
                 <>
-                  <text
-                    x={OX + A_PX/2} y={OY + A_PX/2 + 2}
-                    textAnchor="middle"
-                    fill={`rgba(147,197,253,${abAlpha})`}
-                    fontSize="20" fontWeight="bold" fontFamily="monospace"
-                    filter="url(#sp-glow-sq)"
-                  >a²</text>
-                  <text
-                    x={OX + A_PX/2} y={OY + A_PX/2 + 18}
-                    textAnchor="middle"
-                    fill={`rgba(147,197,253,${abAlpha * 0.8})`}
-                    fontSize="12" fontFamily="monospace"
-                  >= 9</text>
+                  <text x={OX + A + B / 2} y={OY + A + B / 2 + 5} textAnchor="middle"
+                    fill={`rgba(134,239,172,${abOpacity})`}
+                    fontSize="22" fontWeight="bold" fontFamily="monospace"
+                    filter="url(#glow-sq)">
+                    b²
+                  </text>
+                  <text x={OX + A + B / 2} y={OY + A + B / 2 + 21} textAnchor="middle"
+                    fill={`rgba(134,239,172,${abOpacity * 0.8})`}
+                    fontSize="13" fontFamily="monospace">
+                    = 16
+                  </text>
                 </>
               )}
             </>
           )}
 
-          {/* ── b² square (fades in during animation) ── */}
-          {abAlpha > 0.02 && (
-            <>
-              <rect
-                x={OX + A_PX} y={OY + A_PX} width={B_PX} height={B_PX}
-                fill={`rgba(34,197,94,${0.18 * abAlpha})`}
-                stroke={`rgba(34,197,94,${abAlpha})`}
-                strokeWidth="2.5"
-                filter={abAlpha > 0.6 ? "url(#sp-glow-sq)" : undefined}
-              />
-              {abAlpha > 0.2 && (
-                <>
-                  <text
-                    x={OX + A_PX + B_PX/2} y={OY + A_PX + B_PX/2 + 2}
-                    textAnchor="middle"
-                    fill={`rgba(134,239,172,${abAlpha})`}
-                    fontSize="20" fontWeight="bold" fontFamily="monospace"
-                    filter="url(#sp-glow-sq)"
-                  >b²</text>
-                  <text
-                    x={OX + A_PX + B_PX/2} y={OY + A_PX + B_PX/2 + 18}
-                    textAnchor="middle"
-                    fill={`rgba(134,239,172,${abAlpha * 0.8})`}
-                    fontSize="12" fontFamily="monospace"
-                  >= 16</text>
-                </>
-              )}
-            </>
-          )}
-
-          {/* ── 4 triangles ── */}
+          {/* ── 4 Triangles ── */}
           {triVerts.map((verts, i) => {
-            if (!showAllTri && !(showT1 && i === 0)) return null;
+            if (!showAllTri && !(showT0only && i === 0)) return null;
             const [cx, cy] = cen(verts);
             return (
               <g key={i}>
                 <polygon
-                  points={svgPts(verts)}
-                  fill={TRI_FILL[i]}
-                  fillOpacity="0.78"
-                  stroke={TRI_STROKE[i]}
-                  strokeWidth="1.8"
+                  points={pts(verts)}
+                  fill={FILL[i]}
+                  fillOpacity="0.80"
+                  stroke={STROKE[i]}
+                  strokeWidth="2"
                   strokeLinejoin="round"
                 />
                 {showAllTri && (
-                  <text
-                    x={cx} y={cy + 4}
-                    textAnchor="middle"
-                    fill="rgba(255,255,255,0.85)"
-                    fontSize="9" fontWeight="bold" fontFamily="monospace"
-                  >{["T₁","T₂","T₃","T₄"][i]}</text>
+                  <text x={cx} y={cy + 4} textAnchor="middle"
+                    fill="rgba(255,255,255,0.9)"
+                    fontSize="10" fontWeight="bold" fontFamily="monospace">
+                    {["T₁","T₂","T₃","T₄"][i]}
+                  </text>
                 )}
               </g>
             );
           })}
 
-          {/* ── Step 0: labels on the intro triangle T1 ── */}
-          {showT1 && (
-            <>
-              {/* Right-angle mark at corner (OX, OY) */}
-              <polyline
-                points={`${OX},${OY+14} ${OX+14},${OY+14} ${OX+14},${OY}`}
-                fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5"
-              />
-              <text x={OX+18} y={OY+A_PX-6} fill="rgba(255,255,255,0.35)" fontSize="8" fontFamily="monospace">90°</text>
-
-              {/* a — vertical leg label */}
-              <text x={OX-16} y={OY+A_PX/2+4} textAnchor="middle" fill="#93c5fd" fontSize="17" fontWeight="bold" fontFamily="monospace">a</text>
-              <text x={OX-16} y={OY+A_PX/2+20} textAnchor="middle" fill="#60a5fa" fontSize="10" fontFamily="monospace">=3</text>
-
-              {/* b — horizontal leg label */}
-              <text x={OX+B_PX/2} y={OY-14} textAnchor="middle" fill="#86efac" fontSize="17" fontWeight="bold" fontFamily="monospace">b</text>
-              <text x={OX+B_PX/2} y={OY-3} textAnchor="middle" fill="#4ade80" fontSize="10" fontFamily="monospace">=4</text>
-
-              {/* c — hypotenuse label (midpoint offset) */}
-              <text x={OX+B_PX/2+22} y={OY+A_PX/2-6} textAnchor="middle" fill="#fdba74" fontSize="17" fontWeight="bold" fontFamily="monospace">c</text>
-              <text x={OX+B_PX/2+22} y={OY+A_PX/2+10} textAnchor="middle" fill="#fb923c" fontSize="10" fontFamily="monospace">=5</text>
-
-              {/* Intro formula */}
-              <text x={205} y={188} textAnchor="middle" fill="rgba(251,191,36,0.55)" fontSize="14" fontWeight="bold" fontFamily="monospace">
-                Buktikan: a² + b² = c²
-              </text>
-              <text x={205} y={208} textAnchor="middle" fill="rgba(251,191,36,0.35)" fontSize="11" fontFamily="monospace">
-                Tekan "Selanjutnya" untuk mulai →
-              </text>
-            </>
-          )}
-
-          {/* ── Step 1: emphasise the big square area ── */}
-          {step === 1 && (
-            <>
-              {/* Corner marks */}
-              {([[OX,OY],[OX+S_PX,OY],[OX+S_PX,OY+S_PX],[OX,OY+S_PX]] as Pt[]).map(([x,y],i)=>(
-                <circle key={i} cx={x} cy={y} r="3" fill="rgba(148,163,184,0.7)"/>
-              ))}
-              {/* Area label */}
-              <text x={OX+S_PX/2} y={OY+S_PX/2-8} textAnchor="middle" fill="rgba(148,163,184,0.5)" fontSize="18" fontWeight="bold" fontFamily="monospace">(a+b)²</text>
-              <text x={OX+S_PX/2} y={OY+S_PX/2+12} textAnchor="middle" fill="rgba(148,163,184,0.4)" fontSize="13" fontFamily="monospace">= 49 satuan²</text>
-            </>
-          )}
-
-          {/* ── Step 2: hint that triangles fill the square ── */}
-          {step === 2 && (
-            <text x={OX+S_PX/2} y={OY+S_PX+20} textAnchor="middle" fill="rgba(192,132,252,0.7)" fontSize="11" fontFamily="monospace">
-              4 segitiga + ruang kosong = (a+b)²
-            </text>
-          )}
+          {/* ── Step 0: intro triangle labels ── */}
+          {showT0only && (() => {
+            const [p0, p1, p2] = POS_A[0];
+            return (
+              <>
+                <RightAngle x={p0[0]} y={p0[1]} dir="br"/>
+                <text x={p0[0] - 8} y={p0[1] + 12} fill="rgba(255,255,255,0.3)"
+                  fontSize="8" fontFamily="monospace">90°</text>
+                {/* a label — left side */}
+                <text x={p0[0] - 18} y={(p0[1] + p2[1]) / 2 + 4} textAnchor="middle"
+                  fill="#93c5fd" fontSize="18" fontWeight="bold" fontFamily="monospace">a</text>
+                <text x={p0[0] - 18} y={(p0[1] + p2[1]) / 2 + 20} textAnchor="middle"
+                  fill="#60a5fa" fontSize="11" fontFamily="monospace">=3</text>
+                {/* b label — top side */}
+                <text x={(p0[0] + p1[0]) / 2} y={p0[1] - 16} textAnchor="middle"
+                  fill="#86efac" fontSize="18" fontWeight="bold" fontFamily="monospace">b</text>
+                <text x={(p0[0] + p1[0]) / 2} y={p0[1] - 4} textAnchor="middle"
+                  fill="#4ade80" fontSize="11" fontFamily="monospace">=4</text>
+                {/* c label — hypotenuse */}
+                <text x={(p1[0] + p2[0]) / 2 + 22} y={(p1[1] + p2[1]) / 2 - 4} textAnchor="middle"
+                  fill="#fdba74" fontSize="18" fontWeight="bold" fontFamily="monospace">c</text>
+                <text x={(p1[0] + p2[0]) / 2 + 22} y={(p1[1] + p2[1]) / 2 + 12} textAnchor="middle"
+                  fill="#fb923c" fontSize="11" fontFamily="monospace">=5</text>
+                {/* Prompt */}
+                <text x={210} y={210} textAnchor="middle"
+                  fill="rgba(251,191,36,0.5)" fontSize="13" fontWeight="bold" fontFamily="monospace">
+                  Buktikan: a² + b² = c²
+                </text>
+                <text x={210} y={230} textAnchor="middle"
+                  fill="rgba(251,191,36,0.35)" fontSize="11" fontFamily="monospace">
+                  ▶ Tekan Selanjutnya atau Putar Otomatis
+                </text>
+              </>
+            );
+          })()}
 
           {/* ── Final equation banner ── */}
           {showFinal && (
             <g>
-              <rect
-                x={54} y={270} width={280} height={24}
-                rx="7"
-                fill="rgba(15,23,42,0.95)"
-                stroke="rgba(74,222,128,0.9)"
+              <rect x={60} y={300} width={300} height={26} rx="8"
+                fill="rgba(10,20,40,0.97)"
+                stroke="rgba(74,222,128,0.95)"
                 strokeWidth="1.5"
-                filter="url(#sp-glow-eq)"
+                filter="url(#glow-fin)"
               />
-              <text
-                x={194} y={286}
-                textAnchor="middle"
+              <text x={210} y={317} textAnchor="middle"
                 fill="#86efac" fontSize="12" fontWeight="bold" fontFamily="monospace"
-                filter="url(#sp-glow-eq)"
-              >a² + b² = c²  ➜  9 + 16 = 25  ✓  Terbukti!</text>
+                filter="url(#glow-fin)">
+                a² + b² = c²  →  9 + 16 = 25  ✓  TERBUKTI!
+              </text>
             </g>
           )}
         </svg>
       </div>
 
-      {/* ── Info card ───────────────────────────────────────────────────────── */}
+      {/* ── Info card ─────────────────────────────────────────────────────── */}
       <div
         className="w-full rounded-xl px-4 py-3 border transition-all duration-500"
         style={{
-          maxWidth: 400,
-          background: "rgba(15,23,42,0.82)",
-          borderColor: `${info.color}45`,
+          maxWidth: 420,
+          background: "rgba(15,23,42,0.85)",
+          borderColor: `${info.color}40`,
         }}
       >
-        <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-2 mb-1.5">
           <span
             className="text-[10px] font-black px-2 py-0.5 rounded-full font-mono"
-            style={{ background: `${info.color}25`, color: info.color }}
+            style={{ background: `${info.color}20`, color: info.color }}
           >
-            LANGKAH {info.dot}/6
+            LANGKAH {info.label} / 6
           </span>
-          <span className="text-xs font-bold" style={{ color: info.color }}>{info.title}</span>
+          <span className="text-xs font-bold" style={{ color: info.color }}>
+            {info.title}
+          </span>
         </div>
         <p className="text-xs text-white/70 font-body leading-relaxed">{info.desc}</p>
       </div>
 
-      {/* ── Navigation buttons ───────────────────────────────────────────────── */}
-      <div className="flex gap-3 items-center">
+      {/* ── Controls ──────────────────────────────────────────────────────── */}
+      <div className="flex gap-2 items-center flex-wrap justify-center">
+        {/* Auto-play toggle */}
+        <button
+          onClick={toggleAutoPlay}
+          className="px-4 py-2 rounded-full text-xs font-bold transition-all duration-200"
+          style={{
+            background: autoPlay ? "rgba(251,191,36,0.25)" : "rgba(251,191,36,0.12)",
+            border: `1.5px solid rgba(251,191,36,${autoPlay ? 0.9 : 0.5})`,
+            color: "#fbbf24",
+          }}
+        >
+          {autoPlay ? "⏹ Stop" : "▶ Putar Otomatis"}
+        </button>
+
         {/* Prev */}
         <button
           onClick={goPrev}
-          disabled={step === 0}
-          className="px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+          disabled={step === 0 || (isAnim)}
+          className="px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
           style={{
             background: "rgba(71,85,105,0.25)",
             border: "1.5px solid rgba(100,116,139,0.5)",
             color: "#94a3b8",
           }}
         >
-          ← Sebelumnya
+          ← Kembali
         </button>
 
-        {/* Next / Animate / Reset */}
+        {/* Next / Reset */}
         {step < 5 ? (
           <button
             onClick={goNext}
             disabled={isAnim}
-            className="px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             style={{
-              background: `${info.color}22`,
+              background: `${info.color}20`,
               border: `1.5px solid ${info.color}`,
               color: info.color,
             }}
           >
             {isAnim
-              ? "⏳ Menggeser segitiga…"
+              ? "⏳ Menggeser…"
               : step === 3
               ? "▶ Geser Segitiga!"
               : "Selanjutnya →"}
@@ -521,14 +604,14 @@ const PythagorasStepProof: React.FC = () => {
         ) : (
           <button
             onClick={goReset}
-            className="px-5 py-2 rounded-full text-sm font-bold transition-all duration-200"
+            className="px-5 py-2 rounded-full text-xs font-bold transition-all duration-200"
             style={{
-              background: "rgba(74,222,128,0.2)",
+              background: "rgba(74,222,128,0.18)",
               border: "1.5px solid rgba(74,222,128,0.85)",
               color: "#4ade80",
             }}
           >
-            🔄 Ulangi dari Awal
+            🔄 Ulangi
           </button>
         )}
       </div>
