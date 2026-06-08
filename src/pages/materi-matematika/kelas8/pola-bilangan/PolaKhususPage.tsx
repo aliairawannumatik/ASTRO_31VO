@@ -282,19 +282,41 @@ const PolaKhususPage = () => {
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-green-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">Suku ke berapa dari pola bilangan persegi yang nilainya <strong>144</strong>?</p>
+                  <p className="font-body text-sm text-white/85">
+                    Perhatikan barisan bilangan berikut: <strong>1, 4, 9, 16, ...</strong><br />
+                    Tentukan suku ke-12 dari barisan tersebut!
+                  </p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-1">Rumus pola persegi:</p>
+                      <p className="text-cyan-300 font-semibold mb-2">Identifikasi pola:</p>
+                      <div className="overflow-x-auto mb-2">
+                        <table className="text-xs border-collapse">
+                          <thead>
+                            <tr className="bg-green-900/40">
+                              <th className="border border-green-500/30 px-3 py-1 text-green-200">n</th>
+                              {[1,2,3,4,12].map(n => <th key={n} className="border border-green-500/30 px-3 py-1 text-green-200">{n}</th>)}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="bg-slate-800/30">
+                              <td className="border border-white/10 px-3 py-1 text-white/60">Uₙ</td>
+                              {[1,4,9,16,"?"].map((v, i) => <td key={i} className={`border border-white/10 px-3 py-1 text-center font-bold ${v === "?" ? "text-yellow-300" : "text-green-200"}`}>{v}</td>)}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <p className="text-white/70 mb-1">Setiap suku merupakan kuadrat dari nomor sukunya:</p>
+                      <BlockMath math="1 = 1^2,\quad 4 = 2^2,\quad 9 = 3^2,\quad 16 = 4^2" />
+                      <p className="text-cyan-300 font-semibold mb-1">Rumus suku ke-n:</p>
                       <BlockMath math="U_n = n^2" />
-                      <p className="text-white/70">Kita mencari <InlineMath math="n" /> sehingga <InlineMath math="U_n = 144" />:</p>
-                      <BlockMath math="n^2 = 144 \Rightarrow n = \sqrt{144} = 12" />
+                      <p className="text-cyan-300 font-semibold mb-1">Substitusi n = 12:</p>
+                      <BlockMath math="U_{12} = 12^2 = 144" />
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: Suku ke-<strong>12</strong> dari pola persegi adalah 144.</p>
+                      <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: Suku ke-12 dari barisan 1, 4, 9, 16, ... adalah <strong>144</strong>.</p>
                     </div>
                   </div>
                 </div>
