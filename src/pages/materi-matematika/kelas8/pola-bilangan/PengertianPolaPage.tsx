@@ -137,32 +137,6 @@ const PengertianPolaPage = () => {
             </div>
           </div>
 
-          {/* RANGKUMAN BAGIAN 1 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pengertian Pola & Barisan" />
-            <div className="px-5 pb-5 space-y-3">
-              <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
-                {[
-                  ["Pola Bilangan", "Susunan angka yang mengikuti aturan tertentu"],
-                  ["Suku", "Setiap anggota/elemen dalam barisan"],
-                  ["Barisan", "Deretan suku yang berurutan berdasarkan aturan"],
-                  ["Deret", "Hasil penjumlahan suku-suku dalam suatu barisan"],
-                  ["Cara menemukan pola", "Cek selisih → cek rasio → cek hubungan dengan n"],
-                  ["Rumus suku ke-n", "Ekspresi matematika Uₙ = f(n) yang berlaku untuk semua suku"],
-                ].map(([term, def]) => (
-                  <div key={term} className="flex gap-2">
-                    <span className="text-cyan-400 shrink-0">▸</span>
-                    <p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {def}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-xs text-yellow-200">
-                  <strong>💡 Tip:</strong> Selalu uji rumus yang kamu temukan dengan minimal 3 suku pertama. Jika cocok, rumusmu sudah benar!
-                </p>
-              </div>
-            </div>
-          </div>
 
           {/* ── BAGIAN 2: POLA-POLA KHUSUS ── */}
           <div className="bg-violet-500/10 border border-violet-500/40 rounded-xl px-4 py-2 mt-2">
@@ -514,10 +488,25 @@ const PengertianPolaPage = () => {
             </div>
           </div>
 
-          {/* RANGKUMAN POLA KHUSUS */}
+          {/* RANGKUMAN GABUNGAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola-Pola Khusus" />
-            <div className="px-5 pb-5 space-y-3">
+            <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pengertian Pola, Barisan Bilangan & Pola-Pola Khusus" />
+            <div className="px-5 pb-5 space-y-4">
+              <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
+                {[
+                  ["Pola Bilangan", "Susunan angka yang mengikuti aturan tertentu"],
+                  ["Suku", "Setiap anggota/elemen dalam barisan"],
+                  ["Barisan", "Deretan suku yang berurutan berdasarkan aturan"],
+                  ["Deret", "Hasil penjumlahan suku-suku dalam suatu barisan"],
+                  ["Cara menemukan pola", "Cek selisih → cek rasio → cek hubungan dengan n"],
+                  ["Rumus suku ke-n", "Ekspresi matematika Uₙ = f(n) yang berlaku untuk semua suku"],
+                ].map(([term, def]) => (
+                  <div key={term} className="flex gap-2">
+                    <span className="text-cyan-400 shrink-0">▸</span>
+                    <p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {def}</p>
+                  </div>
+                ))}
+              </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs font-body border-collapse">
                   <thead>
@@ -545,6 +534,11 @@ const PengertianPolaPage = () => {
                     ))}
                   </tbody>
                 </table>
+              </div>
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                <p className="font-body text-xs text-yellow-200">
+                  <strong>💡 Tip:</strong> Selalu uji rumus yang kamu temukan dengan minimal 3 suku pertama. Jika cocok, rumusmu sudah benar!
+                </p>
               </div>
             </div>
           </div>
