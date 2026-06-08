@@ -45,7 +45,7 @@ const PengertianPolaPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          PENGERTIAN POLA, BARISAN BILANGAN dan POLA-POLA KHUSUS
+          PENGERTIAN POLA, BARISAN BILANGAN DAN POLA-POLA KHUSUS
         </h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Temukan Aturan Tersembunyi di Balik Deretan Angka!
