@@ -8,7 +8,6 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import PythagorasDiscoveryAnimation from "@/components/PythagorasDiscoveryAnimation";
 import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
-import PythagorasStepProof from "@/components/PythagorasStepProof";
 import PythagorasWaterProof from "@/components/PythagorasWaterProof";
 
 /* ── SVG: Visual proof — four identical right triangles rearranged inside a square ── */
@@ -160,14 +159,6 @@ const PembuktianPage = () => {
             <PythagorasWaterProof />
           </div>
 
-          {/* STEP-BY-STEP PROOF ANIMATION */}
-          <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-2xl overflow-hidden p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg">🎯</span>
-              <span className="font-display text-sm font-bold text-cyan-300 tracking-wide">PEMBUKTIAN INTERAKTIF — STEP BY STEP</span>
-            </div>
-            <PythagorasStepProof />
-          </div>
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
