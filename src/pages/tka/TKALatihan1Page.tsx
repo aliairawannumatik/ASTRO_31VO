@@ -1195,7 +1195,7 @@ const TKALatihan1Page = () => {
                 </p>
                 <div className="flex justify-center mb-3">
                   <img
-                    src="/grafik-scatter-q22-paket4.png"
+                    src="/grafik-koordinat-q24-paket5.png"
                     alt="Grafik koordinat kartesius dengan titik-titik A, B, C, D, dan E"
                     className="max-w-xs w-full rounded-lg"
                   />
@@ -1388,7 +1388,7 @@ const TKALatihan1Page = () => {
                 </p>
                 <div className="flex justify-center mb-3">
                   <img
-                    src="/diagram-batang-q26-paket4.png"
+                    src="/diagram-batang-buah-q27-paket5.png"
                     alt="Diagram batang data penjualan buah (kg) di Toko Segar Jaya selama satu minggu"
                     className="max-w-xs w-full rounded-lg"
                   />
