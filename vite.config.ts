@@ -1,7 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import { visualizer } from "rollup-plugin-visualizer";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
@@ -23,19 +22,6 @@ export default defineConfig({
 
   plugins: [
     react(),
-
-    // Image optimization — active on build
-    ViteImageOptimizer({
-      includePublic: true,
-      logStats: !IS_DEV,
-      ansiColors: true,
-      png:  { quality: 82 },
-      jpeg: { quality: 82 },
-      jpg:  { quality: 82 },
-      webp: { lossless: false, quality: 82, effort: 4, smartSubsample: true },
-      cache: true,
-      cacheLocation: "node_modules/.cache/vite-plugin-image-optimizer",
-    }),
 
     // Bundle visualizer — only in dev builds, writes stats.html in project root
     IS_DEV &&
