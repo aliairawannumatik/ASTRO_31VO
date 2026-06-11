@@ -1,0 +1,74 @@
+Halo! Aplikasi Numatik React + Capacitor, 6 tema.
+App pakai ThemeContext dengan useTheme hook.
+HANYA perbaiki tema "white". Tema lain jangan disentuh.
+
+Ada 6 komponen yang masih punya background/warna 
+gelap di tema white:
+
+1. TENTANG APLIKASI:
+   Teks berwarna emas/kuning tidak terbaca di 
+   background putih.
+   Cari AboutPage/TentangPage.
+   Di tema white, teks emas/kuning (gold, #ffd700, 
+   yellow, amber) ganti ke #1a1a2e atau biru gelap.
+   Tambahkan di index.css:
+   [data-theme="white"] .text-yellow-400,
+   [data-theme="white"] .text-amber-400,
+   [data-theme="white"] .text-yellow-300 {
+     color: #0077b6 !important;
+   }
+
+2. TES KEMAMPUAN AKADEMIK (TKA):
+   Konten terdalam (ringkasan materi, soal latihan) 
+   masih hitam gelap.
+   Cari TKAPage/AkademikPage dan semua child 
+   component-nya.
+   Di tema white:
+   - Semua container/card gelap → background: var(--bg-card)
+   - Teks → var(--text-primary)
+   Gunakan useTheme() dan tambahkan kondisi isWhite 
+   pada inline style atau className.
+
+3. OLIMPIADE MATEMATIKA:
+   Bagian materi di dalam olimpiade masih hitam.
+   Cari OlimpiadePage dan child component materi.
+   Di tema white semua background gelap → var(--bg-card)
+   Teks → var(--text-primary)
+
+4. LKPD:
+   Bingkai/border gelap masih muncul di konten 
+   terdalam LKPD.
+   Cari LKPDPage dan semua child component-nya.
+   Di tema white:
+   - Border gelap → border: 1px solid var(--border)
+   - Background bingkai → var(--bg-card)
+   - Teks → var(--text-primary)
+
+5. BUKU ANIMASI MATEMATIKA:
+   Background bingkai gelap dan area animasi 
+   masih gelap.
+   Cari AnimasiPage/BookPage dan komponen animasi 
+   di dalamnya.
+   Di tema white:
+   - Container animasi → background: var(--bg-card)
+   - Bingkai/frame → border: 1px solid var(--border)
+   - Background SVG animasi → var(--bg-card)
+   - Teks dalam animasi → var(--text-primary)
+
+6. RUANG UNTUK GURU:
+   Sebagian background masih gelap.
+   Cari GuruPage/TeacherPage.
+   Di tema white semua section/card gelap → 
+   background: var(--bg-card)
+   Teks → var(--text-primary)
+
+ATURAN PENTING:
+- Gunakan useTheme() hook yang sudah ada untuk 
+  deteksi tema secara reaktif
+- Untuk CSS class Tailwind yang susah di-override,
+  gunakan inline style dengan kondisi isWhite
+- Untuk background hardcode di SVG animasi,
+  tambahkan kondisi: 
+  fill={isWhite ? "var(--bg-card)" : "aslinya"}
+- Tema dark, light, forest, ocean, sunset 
+  TIDAK BOLEH berubah sama sekali
