@@ -6,12 +6,6 @@ import { Triangle, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
-import imgCaping    from "@assets/image_1780701179640.png";
-import imgCone      from "@assets/image_1780701419978.png";
-import imgWafer     from "@assets/image_1780701492837.png";
-import imgTumpeng   from "@assets/image_1780701574690.png";
-import imgTopiUltah from "@assets/image_1780701763127.png";
-import imgCorong    from "@assets/image_1780701892436.png";
 
 /* ─────────────────────────────────────────────────────────────
    3D CONE SVG RENDERER — manual projection, painter's algorithm
@@ -1319,12 +1313,12 @@ const sections: Sec[] = [
           <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Kerucut di Kehidupan Sehari-hari</p>
           <div className="grid grid-cols-3 gap-2">
             {[
-              { src: imgCaping,    label: "Caping" },
-              { src: imgCone,      label: "Rambu Lalu Lintas" },
-              { src: imgWafer,     label: "Wafer Es Krim" },
-              { src: imgTumpeng,   label: "Nasi Tumpeng" },
-              { src: imgTopiUltah, label: "Topi Ulang Tahun" },
-              { src: imgCorong,    label: "Corong" },
+              { src: "/images/image_1780701179640.png",    label: "Caping" },
+              { src: "/images/image_1780701419978.png",      label: "Rambu Lalu Lintas" },
+              { src: "/images/image_1780701492837.png",     label: "Wafer Es Krim" },
+              { src: "/images/image_1780701574690.png",   label: "Nasi Tumpeng" },
+              { src: "/images/image_1780701763127.png", label: "Topi Ulang Tahun" },
+              { src: "/images/image_1780701892436.png",    label: "Corong" },
             ].map(({ src, label }) => (
               <div key={label} className="flex flex-col items-center gap-1">
                 <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">

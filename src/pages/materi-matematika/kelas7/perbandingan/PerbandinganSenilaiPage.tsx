@@ -6,8 +6,6 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, AlertT
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import imgSenilai from "@assets/image_1775451452551.png";
-import imgBangunan from "@assets/image_1775451578472.png";
 
 const SenilaiAnimasi = () => {
   const [v1, setV1] = useState(4);
@@ -202,7 +200,7 @@ const PerbandinganSenilaiPage = () => {
                     <p className="font-body text-xs text-green-200 mb-3">Contoh: Bensin ↑ → Jarak tempuh ↑</p>
                     <div className="rounded-lg overflow-hidden border border-green-500/20">
                       <img
-                        src={imgSenilai}
+                        src={"/images/image_1775451452551.png"}
                         alt="Ilustrasi bensin dan jarak tempuh"
                         className="w-full h-auto object-contain"
                       />
@@ -234,7 +232,7 @@ const PerbandinganSenilaiPage = () => {
                     <p className="font-body text-xs text-red-200 mb-3">Contoh: Pekerja ↑ → Waktu selesai ↓</p>
                     <div className="rounded-lg overflow-hidden border border-red-500/20">
                       <img
-                        src={imgBangunan}
+                        src={"/images/image_1775451578472.png"}
                         alt="Ilustrasi pekerja bangunan"
                         className="w-full h-auto object-contain"
                       />

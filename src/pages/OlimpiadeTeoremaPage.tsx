@@ -9,17 +9,6 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { teoremaPythagorasDasarPembahasan } from "@/data/pembahasan/teoremaPythagorasDasar";
 import { teoremaPythagorasOlimpiadePembahasan } from "@/data/pembahasan/teoremaPythagorasOlimpiade";
-import bangunABCDESoal7Img from "@assets/image_1777785078317.png";
-import layangKapalSoal18Img from "@assets/image_1777205277003.png";
-import bangunABCDSoalOlim20Img from "@assets/image_1777785299399.png";
-import pentagonSoal21Img from "@assets/image_1777785419675.png";
-import LayangLayangABCDSoalOlim23Img from "@assets/image_1777785419675.png";
-import segitigaABCD30_45_Soal29Img from "@assets/image_1777787261364.png";
-import persegiPanjangABCDSoalOlim1Img from "@assets/image_1777975339863.png";
-import bangunABCDSoalOlim4Img from "@assets/Gemini_Generated_Image_f8jg1rf8jg1rf8jg_1777975526537.png";
-import bangunABCDSoalOlim5Img from "@assets/Gemini_Generated_Image_65hwer65hwer65hw_1777975526536.png";
-import segitigaABCSoalOlim6Img from "@assets/Gemini_Generated_Image_rgyow7rgyow7rgyo_1777975526535.png";
-import trapesiumABCDSoalOlim10Img from "@assets/Gemini_Generated_Image_ot4vzot4vzot4vzo_1777975526535.png";
 
 // SVG: Segitiga siku-siku Pythagoras dengan sisi a (alas), b (tegak), c (miring)
 const PythagorasSegitigaSVG = () => {
@@ -1127,7 +1116,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={layangKapalSoal18Img}
+                        src={"/images/image_1777205277003.png"}
                         alt="Layang-layang menarik kapal pada sudut 45° dan ketinggian 150 m"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-18"
@@ -1149,7 +1138,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={bangunABCDSoalOlim20Img}
+                        src={"/images/image_1777785299399.png"}
                         alt="Bangun gabungan soal olimpiade nomor 20"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-20"
@@ -1171,7 +1160,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={pentagonSoal21Img}
+                        src={"/images/image_1777785419675.png"}
                         alt="Pentagon dengan sisi 16 cm, 12 cm, 5 cm dan 3 cm soal nomor 21"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-21"
@@ -1193,7 +1182,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={segitigaABCD30_45_Soal29Img}
+                        src={"/images/image_1777787261364.png"}
                         alt="Segitiga ABCD dengan sudut 30°, 45° dan tinggi 5 cm soal nomor 29"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-29"
@@ -1225,7 +1214,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 7 && (
                   <div className="flex justify-center my-3">
                     <img
-                      src={bangunABCDESoal7Img}
+                      src={"/images/image_1777785078317.png"}
                       alt="Bangun ABCDE soal nomor 7"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-dasar-7"
@@ -1269,7 +1258,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={persegiPanjangABCDSoalOlim1Img}
+                        src={"/images/image_1777975339863.png"}
                         alt="Persegi panjang ABCD dengan titik P di dalamnya soal olimpiade nomor 1"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-olim-1"
@@ -1289,7 +1278,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={bangunABCDSoalOlim4Img}
+                        src={"/images/Gemini_Generated_Image_f8jg1rf8jg1rf8jg_1777975526537.png"}
                         alt="Bangun ABCD dengan titik B, C, D, A soal olimpiade nomor 4"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-olim-4"
@@ -1309,7 +1298,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={bangunABCDSoalOlim5Img}
+                        src={"/images/Gemini_Generated_Image_65hwer65hwer65hw_1777975526536.png"}
                         alt="Bangun ABCD dengan titik A, B, C, D soal olimpiade nomor 5"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-olim-5"
@@ -1332,7 +1321,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 23 && (
                   <div className="flex justify-center my-3">
                     <img
-                      src={LayangLayangABCDSoalOlim23Img}
+                      src={"/images/image_1777785419675.png"}
                       alt="Layang-layang ABCD soal olimpiade nomor 23"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-23"
@@ -1342,7 +1331,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 6 && (
                   <div className="flex justify-center my-3">
                     <img
-                      src={segitigaABCSoalOlim6Img}
+                      src={"/images/Gemini_Generated_Image_rgyow7rgyow7rgyo_1777975526535.png"}
                       alt="Segitiga ABC dengan sisi AB 50 km dan BC 120 km, titik D di tengah AC, soal olimpiade nomor 6"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-6"
@@ -1352,7 +1341,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 10 && (
                   <div className="flex justify-center my-3">
                     <img
-                      src={trapesiumABCDSoalOlim10Img}
+                      src={"/images/Gemini_Generated_Image_ot4vzot4vzot4vzo_1777975526535.png"}
                       alt="Trapesium ABCD dengan AB sejajar CD soal olimpiade nomor 10"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-10"

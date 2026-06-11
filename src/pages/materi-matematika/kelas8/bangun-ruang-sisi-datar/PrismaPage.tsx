@@ -10,12 +10,6 @@ import RusukTigaPrismaAnimation from "@/components/RusukTigaPrismaAnimation";
 import SisiTigaPrismaAnimation from "@/components/SisiTigaPrismaAnimation";
 import TitikSudutTigaPrismaAnimation from "@/components/TitikSudutTigaPrismaAnimation";
 import JaringPrismaInteraktif from "@/components/JaringPrismaInteraktif";
-import prismaExBoxStool from "@assets/image_1776843419238.png";
-import prismaExTenda from "@assets/image_1776843450997.png";
-import prismaExLemari from "@assets/image_1776843468055.png";
-import prismaExKotakTisu from "@assets/image_1776843489367.png";
-import prismaExToblerone from "@assets/image_1776843581521.png";
-import prismaExHelloPanda from "@assets/image_1776843677763.png";
 
 /* ─────────────────────────────────────────────────────────────
    SVG-BASED 3D INTERACTIVE PRISMA — rotate & net view
@@ -1801,12 +1795,12 @@ const slides: Slide[] = [
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
-              { src: prismaExBoxStool, caption: "Box Stool (Prisma Trapesium)" },
-              { src: prismaExTenda, caption: "Tenda (Prisma Segitiga)" },
-              { src: prismaExLemari, caption: "Lemari (Prisma Segiempat)" },
-              { src: prismaExKotakTisu, caption: "Kotak Tisu (Prisma Segiempat)" },
-              { src: prismaExToblerone, caption: "Toblerone (Prisma Segitiga)" },
-              { src: prismaExHelloPanda, caption: "Hello Panda (Prisma Segienam)" },
+              { src: "/images/image_1776843419238.png", caption: "Box Stool (Prisma Trapesium)" },
+              { src: "/images/image_1776843450997.png", caption: "Tenda (Prisma Segitiga)" },
+              { src: "/images/image_1776843468055.png", caption: "Lemari (Prisma Segiempat)" },
+              { src: "/images/image_1776843489367.png", caption: "Kotak Tisu (Prisma Segiempat)" },
+              { src: "/images/image_1776843581521.png", caption: "Toblerone (Prisma Segitiga)" },
+              { src: "/images/image_1776843677763.png", caption: "Hello Panda (Prisma Segienam)" },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-lg p-2 flex flex-col items-center">
                 <div className="w-full h-24 flex items-center justify-center overflow-hidden">

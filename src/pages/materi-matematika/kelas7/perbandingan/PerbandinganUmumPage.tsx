@@ -6,7 +6,6 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Star, 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import imgPerbandingan from "@assets/image_1775450115091.png";
 
 const PerbandinganUmumPage = () => {
   const navigate = useNavigate();
@@ -54,7 +53,7 @@ const PerbandinganUmumPage = () => {
                 </p>
                 <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg">
                   <img
-                    src={imgPerbandingan}
+                    src={"/images/image_1775450115091.png"}
                     alt="Ilustrasi perbandingan berat badan dua siswa di gym"
                     className="w-full h-auto object-contain"
                   />

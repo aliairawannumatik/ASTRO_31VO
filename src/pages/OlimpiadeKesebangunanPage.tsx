@@ -6,76 +6,45 @@ import { Trophy, ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import kesDasarImg3 from "@assets/3_1778336124010.png";
-import kesDasarImg4 from "@assets/4_1778336124010.png";
-import kesDasarImg6 from "@assets/6_1778336124010.png";
-import kesDasarImg7 from "@assets/7_1778336124009.png";
-import kesDasarImg8 from "@assets/8_1778336124009.png";
-import kesDasarImg9 from "@assets/9_1778336124004.png";
-import kesDasarImg10 from "@assets/10_1778336124009.png";
-import kesDasarImg11 from "@assets/11_1778336124007.png";
-import kesDasarImg12 from "@assets/12_1778336124008.png";
-import kesDasarImg13 from "@assets/13_1778336124007.png";
-import kesDasarImg15 from "@assets/15_1778336124006.png";
-import kesDasarImg16 from "@assets/16_1778336124007.png";
-import kesDasarImg17 from "@assets/17_1778336124006.png";
-import kesDasarImg18 from "@assets/18_1778336124005.png";
-import kesDasarImg21 from "@assets/21_1778336124004.png";
-import kesDasarImg22 from "@assets/22_1778336124005.png";
-import kesDasarImg1i from "@assets/Gemini_Generated_Image_ei9ifzei9ifzei9i_1778334487098.png";
-import kesDasarImg1ii from "@assets/Gemini_Generated_Image_jtpzlcjtpzlcjtpz_1778334487099.png";
-import kesDasarImg1iii from "@assets/Gemini_Generated_Image_2aindm2aindm2ain_1778334487100.png";
-import kesDasarImg1iv from "@assets/hghg_1778334636982.png";
-import kesOlimpiadeImg2 from "@assets/2_1778338050020.png";
-import kesOlimpiadeImg3 from "@assets/3_1778338050023.png";
-import kesOlimpiadeImg4 from "@assets/4_1778338050022.png";
-import kesOlimpiadeImg7 from "@assets/7_1778338050019.png";
-import kesOlimpiadeImg8 from "@assets/8_1778338050019.png";
-import kesOlimpiadeImg9 from "@assets/9_1778338050020.png";
-import kesOlimpiadeImg11 from "@assets/11_1778338050018.png";
-import kesOlimpiadeImg13 from "@assets/13_1778338050021.png";
-import kesOlimpiadeImg14 from "@assets/14_1778338050018.png";
-import kesOlimpiadeImg16 from "@assets/16_1778338050021.png";
-import kesOlimpiadeImg17 from "@assets/17_1778338050017.png";
 
 const kesOlimpiadeImages: Record<number, string> = {
-  2: kesOlimpiadeImg2,
-  3: kesOlimpiadeImg3,
-  4: kesOlimpiadeImg4,
-  7: kesOlimpiadeImg7,
-  8: kesOlimpiadeImg8,
-  9: kesOlimpiadeImg9,
-  11: kesOlimpiadeImg11,
-  13: kesOlimpiadeImg13,
-  14: kesOlimpiadeImg14,
-  16: kesOlimpiadeImg16,
-  17: kesOlimpiadeImg17,
+  2: "/images/2_1778338050020.png",
+  3: "/images/3_1778338050023.png",
+  4: "/images/4_1778338050022.png",
+  7: "/images/7_1778338050019.png",
+  8: "/images/8_1778338050019.png",
+  9: "/images/9_1778338050020.png",
+  11: "/images/11_1778338050018.png",
+  13: "/images/13_1778338050021.png",
+  14: "/images/14_1778338050018.png",
+  16: "/images/16_1778338050021.png",
+  17: "/images/17_1778338050017.png",
 };
 
 const kesDasarImages: Record<number, string> = {
-  3: kesDasarImg3,
-  4: kesDasarImg4,
-  6: kesDasarImg6,
-  7: kesDasarImg7,
-  8: kesDasarImg8,
-  9: kesDasarImg9,
-  10: kesDasarImg10,
-  11: kesDasarImg11,
-  12: kesDasarImg12,
-  13: kesDasarImg13,
-  15: kesDasarImg15,
-  16: kesDasarImg16,
-  17: kesDasarImg17,
-  18: kesDasarImg18,
-  21: kesDasarImg21,
-  22: kesDasarImg22,
+  3: "/images/3_1778336124010.png",
+  4: "/images/4_1778336124010.png",
+  6: "/images/6_1778336124010.png",
+  7: "/images/7_1778336124009.png",
+  8: "/images/8_1778336124009.png",
+  9: "/images/9_1778336124004.png",
+  10: "/images/10_1778336124009.png",
+  11: "/images/11_1778336124007.png",
+  12: "/images/12_1778336124008.png",
+  13: "/images/13_1778336124007.png",
+  15: "/images/15_1778336124006.png",
+  16: "/images/16_1778336124007.png",
+  17: "/images/17_1778336124006.png",
+  18: "/images/18_1778336124005.png",
+  21: "/images/21_1778336124004.png",
+  22: "/images/22_1778336124005.png",
 };
 
 const kesDasarSoal1Images: { label: string; src: string }[] = [
-  { label: "(i)", src: kesDasarImg1i },
-  { label: "(ii)", src: kesDasarImg1ii },
-  { label: "(iii)", src: kesDasarImg1iii },
-  { label: "(iv)", src: kesDasarImg1iv },
+  { label: "(i)", src: "/images/Gemini_Generated_Image_ei9ifzei9ifzei9i_1778334487098.png" },
+  { label: "(ii)", src: "/images/Gemini_Generated_Image_jtpzlcjtpzlcjtpz_1778334487099.png" },
+  { label: "(iii)", src: "/images/Gemini_Generated_Image_2aindm2aindm2ain_1778334487100.png" },
+  { label: "(iv)", src: "/images/hghg_1778334636982.png" },
 ];
 
 const renderWithLatex = (text: string) => {

@@ -9,9 +9,6 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { polaBilanganDasarPembahasan } from "@/data/pembahasan/polaBilanganDasar";
 import { polaBilanganOlimpiadePembahasan } from "@/data/pembahasan/polaBilanganOlimpiade";
-import imgSukuKenImg from "@assets/image_1777194887222.png";
-import imgPolaBuilatan from "@assets/image_1777194992479.png";
-import imgPolaSegilima from "@assets/image_1777195046863.png";
 
 // Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
@@ -645,7 +642,7 @@ const OlimpiadePolaBilanganPage = () => {
                           <div className="text-xs text-yellow-400 font-semibold uppercase tracking-widest mb-1">Ilustrasi Barisan</div>
                           <div className="bg-white rounded-xl p-3 shadow-lg max-w-sm w-full flex justify-center">
                             <img
-                              src={imgSukuKenImg}
+                              src={"/images/image_1777194887222.png"}
                               alt="Ilustrasi barisan U1, U2, U3,... dengan pola selisih"
                               className="max-w-full h-auto object-contain"
                             />

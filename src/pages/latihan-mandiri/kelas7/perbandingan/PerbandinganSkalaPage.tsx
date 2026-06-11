@@ -3,7 +3,6 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
-import denahRumahImg from "@assets/image_1777478280088.png";
 
 const PerbandinganSkalaPage = () => {
   const navigate = useNavigate();
@@ -114,7 +113,7 @@ const PerbandinganSkalaPage = () => {
                 <p className="mb-3">Perhatikan denah sebuah rumah berikut!</p>
                 <div className="mb-3 flex justify-center">
                   <img
-                    src={denahRumahImg}
+                    src={"/images/image_1777478280088.png"}
                     alt="Denah rumah"
                     className="max-w-full md:max-w-md rounded-lg border border-border shadow-lg"
                   />

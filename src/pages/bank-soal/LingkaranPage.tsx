@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import gambarUnsurLingkaran from "@assets/image_1777796182226.png";
 
 const MathText = ({ text, className = "" }: { text: string; className?: string }) => {
   const elements = useMemo(() => {
@@ -212,7 +211,7 @@ const TableVisual = ({ headers, rows }: { headers: string[]; rows: string[][] })
 const visualMap: Record<string, React.ReactNode> = {
   "gambar-unsur-lingkaran": (
     <img
-      src={gambarUnsurLingkaran}
+      src={"/images/image_1777796182226.png"}
       alt="Unsur-unsur lingkaran"
       className="w-full max-w-sm mx-auto my-3 rounded-lg border border-slate-600 bg-white p-1"
     />

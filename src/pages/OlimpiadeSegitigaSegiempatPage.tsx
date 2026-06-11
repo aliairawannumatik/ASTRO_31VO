@@ -9,10 +9,6 @@ import { InlineMath, BlockMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { segitigaSegiempatDasarPembahasan } from "@/data/pembahasan/segitigaSegiempatDasar";
 import { segitigaSegiempatOlimpiadePembahasan } from "@/data/pembahasan/segitigaSegiempatOlimpiade";
-import bangunSoal1DasarImg from "@assets/Gemini_Generated_Image_vhhsq3vhhsq3vhhs_1777975910347.png";
-import bangunSoal2DasarImg from "@assets/image_1777975962884.png";
-import pentagramOlim1Img from "@assets/image_1777978368698.png";
-import bangunOlim2Img from "@assets/image_1777980101180.png";
 
 const OlimpiadeSoal1Pentagram = () => (
   <svg
@@ -35,8 +31,8 @@ const OlimpiadeSoal1Pentagram = () => (
 );
 
 const olimpiadeFigures: Record<number, JSX.Element> = {
-  1: <img src={pentagramOlim1Img} alt="Gambar bintang pentagram soal olimpiade no. 1" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
-  2: <img src={bangunOlim2Img} alt="Gambar bangun soal olimpiade no. 2" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  1: <img src={"/images/image_1777978368698.png"} alt="Gambar bintang pentagram soal olimpiade no. 1" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  2: <img src={"/images/image_1777980101180.png"} alt="Gambar bangun soal olimpiade no. 2" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
 };
 
 // Helper function to render text with LaTeX
@@ -948,7 +944,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
                         <img
-                          src={bangunSoal1DasarImg}
+                          src={"/images/Gemini_Generated_Image_vhhsq3vhhsq3vhhs_1777975910347.png"}
                           alt="Soal No. 1 - Keliling bangun"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -966,7 +962,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src={bangunSoal2DasarImg}
+                          src={"/images/image_1777975962884.png"}
                           alt="Soal No. 2 - Keliling bangun"
                           className="max-w-full max-h-56 object-contain"
                         />

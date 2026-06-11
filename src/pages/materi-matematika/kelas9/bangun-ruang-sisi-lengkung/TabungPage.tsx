@@ -6,16 +6,6 @@ import { Database, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
-import imgSelimutSoal from "@assets/image_1780761230749.png";
-import imgBakMandi from "@assets/image_1780761862129.png";
-import imgSarden from "@assets/image_1780450794282.png";
-import imgBiskuit from "@assets/image_1780450814436.png";
-import imgIndomilk from "@assets/image_1780450845492.png";
-import imgDrum from "@assets/image_1780450861720.png";
-import imgBedug from "@assets/image_1780450884364.png";
-import imgTong from "@assets/image_1780450893223.png";
-import imgGelas from "@assets/image_1780450901986.png";
-import imgGedung from "@assets/image_1780450906978.png";
 
 /* ─────────────────────────────────────────────────────────────
    3D CYLINDER SVG RENDERER — style mirrors InteractiveCone3D
@@ -903,14 +893,14 @@ const sections: Sec[] = [
           <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Tabung di Kehidupan Sehari-hari</p>
           <div className="grid grid-cols-4 gap-2">
             {[
-              { src: imgSarden,   label: "Kaleng Sarden" },
-              { src: imgBiskuit,  label: "Kaleng Biskuit" },
-              { src: imgIndomilk, label: "Kaleng Susu" },
-              { src: imgDrum,     label: "Kendang" },
-              { src: imgBedug,    label: "Bedug" },
-              { src: imgTong,     label: "Tong / Drum" },
-              { src: imgGelas,    label: "Gelas Silindris" },
-              { src: imgGedung,   label: "Gedung Silindris" },
+              { src: "/images/image_1780450794282.png",   label: "Kaleng Sarden" },
+              { src: "/images/image_1780450814436.png",  label: "Kaleng Biskuit" },
+              { src: "/images/image_1780450845492.png", label: "Kaleng Susu" },
+              { src: "/images/image_1780450861720.png",     label: "Kendang" },
+              { src: "/images/image_1780450884364.png",    label: "Bedug" },
+              { src: "/images/image_1780450893223.png",     label: "Tong / Drum" },
+              { src: "/images/image_1780450901986.png",    label: "Gelas Silindris" },
+              { src: "/images/image_1780450906978.png",   label: "Gedung Silindris" },
             ].map(({ src, label }) => (
               <div key={label} className="flex flex-col items-center gap-1">
                 <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
@@ -1625,7 +1615,7 @@ const volExamples: Ex[] = [
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
         <div className="flex justify-center">
-          <img src={imgBakMandi} alt="Bak mandi tabung" className="max-h-32 object-contain rounded" />
+          <img src={"/images/image_1780761862129.png"} alt="Bak mandi tabung" className="max-h-32 object-contain rounded" />
         </div>
         <p>Sebuah bak mandi terbuat dari drum plastik yang dipotong. Drum tersebut memiliki diameter <InlineMath math="60 \text{ cm}" />, tinggi <InlineMath math="42 \text{ cm}" />, dan berisi air dengan tinggi <strong className="text-red-300">seperempat</strong> dari tinggi tabung.</p>
         <p>Jika bak tersebut akan diisi dari air keran dengan debit <strong className="text-yellow-300">1,08 liter/menit</strong>, maka waktu yang diperlukan mengisi bak hingga penuh adalah ….</p>

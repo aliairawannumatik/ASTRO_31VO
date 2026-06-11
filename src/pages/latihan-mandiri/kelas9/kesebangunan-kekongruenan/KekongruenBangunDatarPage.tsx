@@ -3,33 +3,28 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { CheckSquare } from "lucide-react";
-import imgQ1 from "@assets/Gemini_Generated_Image_i78ewni78ewni78e_(1)_1779360375566.png";
-import imgQ2 from "@assets/Gemini_Generated_Image_ngxre9ngxre9ngxr_(1)_1779360148381.png";
-import imgQ4 from "@assets/image_1779360180879.png";
-import imgQ5 from "@assets/Gemini_Generated_Image_wd58awd58awd58aw_(1)_1779360225111.png";
-import imgQ6 from "@assets/image_1779360254264.png";
 
 type Q = { n: number; title: string; content: string; diagram?: React.ReactNode; options: { label: string; text: string }[] };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const SvgQ1 = () => (
-  <img src={imgQ1} alt="Diagram Soal 1 - Kekongruenan" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
+  <img src={"/images/Gemini_Generated_Image_i78ewni78ewni78e_(1)_1779360375566.png"} alt="Diagram Soal 1 - Kekongruenan" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ84 = () => (
-  <img src={imgQ2} alt="Diagram Soal 2 - Banyak Segitiga Kongruen" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
+  <img src={"/images/Gemini_Generated_Image_ngxre9ngxre9ngxr_(1)_1779360148381.png"} alt="Diagram Soal 2 - Banyak Segitiga Kongruen" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ86 = () => (
-  <img src={imgQ4} alt="Diagram Soal 4 - Segitiga Sama Kaki Garis Bagi" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
+  <img src={"/images/image_1779360180879.png"} alt="Diagram Soal 4 - Segitiga Sama Kaki Garis Bagi" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ88 = () => (
-  <img src={imgQ5} alt="Diagram Soal 5 - Garis Sejajar Kekongruenan" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
+  <img src={"/images/Gemini_Generated_Image_wd58awd58awd58aw_(1)_1779360225111.png"} alt="Diagram Soal 5 - Garis Sejajar Kekongruenan" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const SvgQ89 = () => (
-  <img src={imgQ6} alt="Diagram Soal 6 - Segitiga Sama Kaki Garis Tinggi" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
+  <img src={"/images/image_1779360254264.png"} alt="Diagram Soal 6 - Segitiga Sama Kaki Garis Tinggi" style={{maxWidth:'100%', maxHeight:280, borderRadius:12, background:'#f5f0e8'}} />
 );
 
 const questions: Q[] = [

@@ -6,7 +6,6 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Map } 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import imgSkala from "@assets/image_1775455799668.png";
 
 const SkalaPage = () => {
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ const SkalaPage = () => {
 
         <div className="rounded-xl overflow-hidden mb-4 border border-white/10 shadow-lg animate-slide-up">
           <img
-            src={imgSkala}
+            src={"/images/image_1775455799668.png"}
             alt="Ilustrasi skala denah dan bangunan"
             className="w-full h-auto object-contain"
           />

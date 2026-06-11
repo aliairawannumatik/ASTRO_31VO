@@ -2,7 +2,6 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FlaskConical, RotateCcw, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
 import { InlineMath } from "react-katex";
-import coinImg from "@assets/koin_fix_1776223721630.png";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─── DICE FACE (SVG dots) ─────────────────────────────── */
@@ -41,7 +40,7 @@ const CoinFace = ({ side, size = 96 }: { side: "angka" | "gambar"; size?: number
     className="rounded-full overflow-hidden border-2 border-yellow-400/60 shadow-lg shadow-yellow-900/40 shrink-0"
   >
     <img
-      src={coinImg}
+      src={"/images/koin_fix_1776223721630.png"}
       alt={side === "angka" ? "Angka" : "Gambar"}
       style={{
         width: size * 2,

@@ -3,22 +3,6 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
-import imgA from "@assets/a_1774838179561.png";
-import imgB from "@assets/b_1774838179562.png";
-import imgC from "@assets/c_1774838179562.png";
-import imgD from "@assets/d_1774838179563.png";
-import imgE from "@assets/e_1774838179563.png";
-import imgF from "@assets/f_1774838179564.png";
-import img2 from "@assets/no_2_1774838544613.png";
-import img3 from "@assets/no_3_1774838544614.png";
-import img4 from "@assets/no_4_1774838544614.png";
-import img5 from "@assets/no_5_1774838544615.png";
-import img6 from "@assets/no_6_1774838544615.png";
-import img8 from "@assets/no_8_1774838544616.png";
-import img10 from "@assets/no_10_1774838544616.png";
-import img11 from "@assets/no_11_1774838544616.png";
-import img12 from "@assets/no_12_1774838544617.png";
-import img13 from "@assets/no_13_1774838544618.png";
 
 const SudutPelurusPenyikuBertolakPage = () => {
   const navigate = useNavigate();
@@ -45,7 +29,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">a)</span>
               <div>
                 <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 37°. Tentukan nilai x!</p>
-                <img src={imgA} alt="Soal a" className="mt-3 w-full max-w-xs block" />
+                <img src={"/images/a_1774838179561.png"} alt="Soal a" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
 
@@ -54,7 +38,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">b)</span>
               <div>
                 <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 127°. Tentukan nilai y!</p>
-                <img src={imgB} alt="Soal b" className="mt-3 w-full max-w-xs block" />
+                <img src={"/images/b_1774838179562.png"} alt="Soal b" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
 
@@ -63,7 +47,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">c)</span>
               <div>
                 <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 140°. Tentukan nilai z!</p>
-                <img src={imgC} alt="Soal c" className="mt-3 w-full max-w-xs block" />
+                <img src={"/images/c_1774838179562.png"} alt="Soal c" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
 
@@ -72,7 +56,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">d)</span>
               <div>
                 <p>Sudut a°, 50°, dan 20° terletak pada satu garis lurus. Tentukan nilai a!</p>
-                <img src={imgD} alt="Soal d" className="mt-3 w-full max-w-xs block" />
+                <img src={"/images/d_1774838179563.png"} alt="Soal d" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
 
@@ -81,7 +65,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">e)</span>
               <div>
                 <p>Sudut 50° dan sudut b° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai b!</p>
-                <img src={imgE} alt="Soal e" className="mt-3 w-full max-w-xs block" />
+                <img src={"/images/e_1774838179563.png"} alt="Soal e" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
 
@@ -90,7 +74,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">f)</span>
               <div>
                 <p>Sudut c° dan sudut 80° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai c!</p>
-                <img src={imgF} alt="Soal f" className="mt-3 w-full max-w-xs block" />
+                <img src={"/images/f_1774838179564.png"} alt="Soal f" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
           </div>
@@ -121,7 +105,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">2.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Titik D adalah titik tengah. Garis-garis dari titik D menuju A, B, C, dan F membentuk sudut-sudut di sekitar titik D. Diketahui besar ∠ADB = ∠BDC. Jika besar ∠ADB = besar ∠BDC = 40°, besar ∠CDF adalah …</p>
-                <img src={img2} alt="Soal 2" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_2_1774838544613.png"} alt="Soal 2" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 40°</p>
                   <p>B. 80°</p>
@@ -136,7 +120,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">3.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Titik A, B, C, D, E membentuk konfigurasi sudut di mana ∠CAE adalah sudut siku-siku dan besar ∠BAC = 40°. Besar ∠DAE = (4x + 10)°. Nilai x adalah …</p>
-                <img src={img3} alt="Soal 3" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_3_1774838544614.png"} alt="Soal 3" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 7,5</p>
                   <p>B. 10</p>
@@ -151,7 +135,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">4.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut. Pada gambar terdapat sudut x° dan sudut 20° yang terbentuk di antara dua garis. Sudut siku-siku (90°) terdapat pada gambar tersebut. Nilai x adalah …</p>
-                <img src={img4} alt="Soal 4" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_4_1774838544614.png"} alt="Soal 4" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 70°</p>
                   <p>B. 80°</p>
@@ -166,7 +150,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">5.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar berikut! Dari gambar diketahui besar ∠SQR = 32°. Besar penyiku ∠SQR adalah ...</p>
-                <img src={img5} alt="Soal 5" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_5_1774838544615.png"} alt="Soal 5" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 90°</p>
                   <p>B. 32°</p>
@@ -181,7 +165,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">6.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar. Diketahui besar ∠CBD = (2x + 5)° dan ∠ABD = (3x – 25)°. Sudut CBD dan ABD saling berpelurus. Besar pelurus sudut CBD adalah ...</p>
-                <img src={img6} alt="Soal 6" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_6_1774838544615.png"} alt="Soal 6" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 82°</p>
                   <p>B. 85°</p>
@@ -210,7 +194,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">8.</span>
               <div>
                 <p className="mb-2">Dari gambar berikut, diketahui sudut x dan sudut y saling berpelurus dengan perbandingan x : y = 2 : 7. Besar sudut x adalah ...</p>
-                <img src={img8} alt="Soal 8" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_8_1774838544616.png"} alt="Soal 8" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 120°</p>
                   <p>B. 60°</p>
@@ -239,7 +223,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">10.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar. Titik O adalah titik potong dua garis. Sudut-sudut yang terbentuk di sekitar O diketahui nilainya. Besar sudut AOB adalah ...</p>
-                <img src={img10} alt="Soal 10" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_10_1774838544616.png"} alt="Soal 10" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 70°</p>
                   <p>B. 120°</p>
@@ -254,7 +238,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">11.</span>
               <div>
                 <p className="mb-2">Empat sudut terbentuk oleh dua garis berpotongan dan diberi nama p°, q°, r°, s° (berurutan). Bila diketahui q° = 45°, maka nilai p, s, dan r berturut-turut adalah ...</p>
-                <img src={img11} alt="Soal 11" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_11_1774838544616.png"} alt="Soal 11" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. p = 135° ; s = 45° ; r = 135°</p>
                   <p>B. p = 130° ; s = 45° ; r = 130°</p>
@@ -269,7 +253,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">12.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar di bawah ini. Dari gambar diketahui dua garis berpotongan membentuk sudut-sudut yang dinyatakan dalam variabel a. Tentukan nilai a!</p>
-                <img src={img12} alt="Soal 12" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_12_1774838544617.png"} alt="Soal 12" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 45</p>
                   <p>B. 49</p>
@@ -284,7 +268,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
               <span className="font-semibold text-accent shrink-0">13.</span>
               <div>
                 <p className="mb-2">Perhatikan gambar di bawah ini. Dua garis berpotongan di titik E membentuk sudut-sudut C, E, D dengan nilai tertentu yang diketahui dari gambar. Berapakah besar sudut CED?</p>
-                <img src={img13} alt="Soal 13" className="my-3 w-full max-w-xs block" />
+                <img src={"/images/no_13_1774838544618.png"} alt="Soal 13" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
                   <p>A. 73°</p>
                   <p>B. 107°</p>

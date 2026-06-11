@@ -6,20 +6,14 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
-import imgBB2 from "@assets/2_1778368609760.png";
-import imgBB33 from "@assets/33_1778368609761.png";
-import imgBB40 from "@assets/40_1778368609761.png";
-import imgBB45 from "@assets/45_1778368609760.png";
-import imgBB54 from "@assets/54_1778368609759.png";
-import imgBB56 from "@assets/56_1778368609762.png";
 
 const bilBulatOlimpiadeImages: Record<number, string> = {
-  8: imgBB2,
-  33: imgBB33,
-  40: imgBB40,
-  45: imgBB45,
-  54: imgBB54,
-  56: imgBB56,
+  8: "/images/2_1778368609760.png",
+  33: "/images/33_1778368609761.png",
+  40: "/images/40_1778368609761.png",
+  45: "/images/45_1778368609760.png",
+  54: "/images/54_1778368609759.png",
+  56: "/images/56_1778368609762.png",
 };
 
 // Helper function to render text with LaTeX

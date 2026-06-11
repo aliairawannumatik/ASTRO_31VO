@@ -21,16 +21,6 @@ import gambar12 from "@/assets/Gambar_12_Sudut_Saling_sepihak_1773289509182.png"
 import gambar13 from "@/assets/Gambar_13_Jumlah_sudut_pada_segitiga_1773289509182.png";
 import gambar14 from "@/assets/Gambar_14_Sudut-sudut_pada_segitiga_1773289509182.png";
 import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.png";
-import gambarSoal19 from "@assets/image_1777593919772.png";
-import gambarSoal20 from "@assets/g_1777646456179.png";
-import gambarSoal21 from "@assets/image_1777674744629.png";
-import gambarSoal24 from "@assets/image_1777675316904.png";
-import gambarOlimpiade1 from "@assets/image_1777677600584.png";
-import gambarOlimpiade2 from "@assets/image_1777686601334.png";
-import gambarOlimpiade4 from "@assets/image_1777686713928.png";
-import gambarOlimpiade5 from "@assets/image_1777687009906.png";
-import gambarOlimpiade6 from "@assets/image_1777687942709.png";
-import gambarOlimpiade7 from "@assets/image_1777688265821.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -1208,21 +1198,21 @@ const latihanDasar: {
   {
     no: 19,
     soal: "Perhatikan gambar berikut!\n\nJika besar $\\angle a = 35°$ dan $\\angle b = 45°$ maka jumlah besar sudut x dan y adalah ...",
-    image: <img src={gambarSoal19} alt="Gambar Soal 19" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
+    image: <img src={"/images/image_1777593919772.png"} alt="Gambar Soal 19" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
     imageCaption: "Gambar Soal 19",
     options: ["A. $285°$", "B. $300°$", "C. $315°$", "D. $330°$"]
   },
   {
     no: 20,
     soal: "Perhatikan gambar berikut!\n\nJika diketahui AB sejajar CD, maka nilai x adalah ...",
-    image: <img src={gambarSoal20} alt="Gambar Soal 20" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
+    image: <img src={"/images/g_1777646456179.png"} alt="Gambar Soal 20" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
     imageCaption: "Gambar Soal 20",
     options: ["A. $15°$", "B. $30°$", "C. $40°$", "D. $45°$"]
   },
   {
     no: 21,
     soal: "Perhatikan gambar berikut!\n\nBesar penyiku $\\angle SQR$ adalah ...",
-    image: <img src={gambarSoal21} alt="Gambar Soal 21" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
+    image: <img src={"/images/image_1777674744629.png"} alt="Gambar Soal 21" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
     imageCaption: "Gambar Soal 21",
     options: ["A. $9°$", "B. $32°$", "C. $48°$", "D. $58°$"]
   },
@@ -1243,7 +1233,7 @@ const latihanDasar: {
   {
     no: 24,
     soal: "Perhatikan gambar di bawah ini.\n\nDiketahui sudut SPT $= 83°$ dan sudut PQT $= 41°$. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
-    image: <img src={gambarSoal24} alt="Soal 24" className="w-full max-w-md mx-auto" />,
+    image: <img src={"/images/image_1777675316904.png"} alt="Soal 24" className="w-full max-w-md mx-auto" />,
     imageCaption: "Gambar Soal 24",
     options: ["A. $41°$", "B. $82°$", "C. $124°$", "D. $139°$"]
   },
@@ -1281,13 +1271,13 @@ const latihanOlimpiade = [
   {
     no: 1,
     soal: "OSN Matematika 2003 Tingkat Kota\n\nPada gambar disamping, ABCD adalah persegi dan ABE adalah segitiga sama sisi. Besar sudut DAE adalah ...",
-    image: gambarOlimpiade1,
+    image: "/images/image_1777677600584.png",
     options: ["A. $15°$", "B. $30°$", "C. $45°$", "D. $60°$", "E. $75°$"]
   },
   {
     no: 2,
     soal: "OSN Matematika 2004 Tingkat Kota\n\nPada gambar berikut, garis PQ dan garis RS sejajar, demikian juga garis PS dan QT sejajar. Nilai x sama dengan ...",
-    image: gambarOlimpiade2,
+    image: "/images/image_1777686601334.png",
     options: []
   },
   {
@@ -1299,25 +1289,25 @@ const latihanOlimpiade = [
   {
     no: 4,
     soal: "OSN Matematika 2007 Tingkat Kota\n\nPerhatikan gambar berikut.\n\nNilai dari $a + b + c + d + e + f + g + h + i$ adalah ...",
-    image: gambarOlimpiade4,
+    image: "/images/image_1777686713928.png",
     options: ["A. 360", "B. 540", "C. 720", "D. 900", "E. 1.260"]
   },
   {
     no: 5,
     soal: "OSN Matematika 2008 Tingkat Kota\n\nPerhatikan gambar berikut.\n\nSegitiga PQR merupakan segitiga sama sisi. Jika $\\angle SPQ = 20°$ dan $\\angle TQR = 35°$, maka $\\angle SUT = ...$",
-    image: gambarOlimpiade5,
+    image: "/images/image_1777687009906.png",
     options: ["A. $135°$", "B. $130°$", "C. $125°$", "D. $105°$", "E. $95°$"]
   },
   {
     no: 6,
     soal: "OSN Matematika 2014 Tingkat Kota\n\nDiketahui garis $L_1$ sejajar garis $L_2$ dan garis $L_3$ sejajar garis $L_4$.\n\nBesar sudut $y - x$ adalah ...",
-    image: gambarOlimpiade6,
+    image: "/images/image_1777687942709.png",
     options: ["A. $0°$", "B. $10°$", "C. $30°$", "D. $50°$"]
   },
   {
     no: 7,
     soal: "OSN Matematika 2018 Tingkat Kota\n\nNilai sudut x dan y pada gambar berikut adalah ...",
-    image: gambarOlimpiade7,
+    image: "/images/image_1777688265821.png",
     options: [
       "A. $x = 74°$; $y = 104°$",
       "B. $x = 37°$; $y = 104°$",

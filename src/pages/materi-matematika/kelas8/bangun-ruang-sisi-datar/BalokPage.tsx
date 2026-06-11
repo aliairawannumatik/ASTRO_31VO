@@ -6,14 +6,6 @@ import { BookOpen, ChevronDown, ChevronUp, Box } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
-import batuBataImg from "@assets/image_1776495090791.png";
-import bukuImg from "@assets/image_1776495176110.png";
-import kulkasImg from "@assets/image_1776495260274.png";
-import kasurImg from "@assets/image_1776495365955.png";
-import kardusImg from "@assets/image_1776495417623.png";
-import smartphoneImg from "@assets/image_1776495514155.png";
-import lemariImg from "@assets/image_1776495591763.png";
-import akuariumImg from "@assets/image_1776495641319.png";
 
 /* ─────────────────────────────────────────────────────────────
    SVG 3D MATH UTILITIES
@@ -157,14 +149,14 @@ const SimpleRotatingBalok = () => {
 };
 
 const balokObjectExamples = [
-  { src: batuBataImg, label: "Batu Bata" },
-  { src: bukuImg, label: "Buku Tulis" },
-  { src: kulkasImg, label: "Kulkas" },
-  { src: kasurImg, label: "Kasur" },
-  { src: kardusImg, label: "Kardus" },
-  { src: smartphoneImg, label: "Smartphone" },
-  { src: lemariImg, label: "Lemari" },
-  { src: akuariumImg, label: "Akuarium" },
+  { src: "/images/image_1776495090791.png", label: "Batu Bata" },
+  { src: "/images/image_1776495176110.png", label: "Buku Tulis" },
+  { src: "/images/image_1776495260274.png", label: "Kulkas" },
+  { src: "/images/image_1776495365955.png", label: "Kasur" },
+  { src: "/images/image_1776495417623.png", label: "Kardus" },
+  { src: "/images/image_1776495514155.png", label: "Smartphone" },
+  { src: "/images/image_1776495591763.png", label: "Lemari" },
+  { src: "/images/image_1776495641319.png", label: "Akuarium" },
 ];
 
 /* ─────────────────────────────────────────────────────────────

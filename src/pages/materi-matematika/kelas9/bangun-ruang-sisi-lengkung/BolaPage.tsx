@@ -6,12 +6,6 @@ import { Circle, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucid
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
-import imgBolaSepak  from "@assets/image_1780702385381.png";
-import imgGlobe      from "@assets/image_1780702495642.png";
-import imgSemangka   from "@assets/image_1780702529187.png";
-import imgJeruk      from "@assets/image_1780702647131.png";
-import imgKelereng   from "@assets/image_1780702682181.png";
-import imgBowling    from "@assets/image_1780702856357.png";
 
 /* ─────────────────────────────────────────────────────────────
    INTERACTIVE 3D SPHERE — CSS gradient + SVG latitude/longitude
@@ -1101,12 +1095,12 @@ const sections: Sec[] = [
           <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Bola di Kehidupan Sehari-hari</p>
           <div className="grid grid-cols-3 gap-2">
             {[
-              { src: imgBolaSepak, label: "Bola Sepak" },
-              { src: imgGlobe,     label: "Bola Dunia" },
-              { src: imgSemangka,  label: "Semangka" },
-              { src: imgJeruk,     label: "Buah Jeruk" },
-              { src: imgKelereng,  label: "Kelereng" },
-              { src: imgBowling,   label: "Bola Bowling" },
+              { src: "/images/image_1780702385381.png", label: "Bola Sepak" },
+              { src: "/images/image_1780702495642.png",     label: "Bola Dunia" },
+              { src: "/images/image_1780702529187.png",  label: "Semangka" },
+              { src: "/images/image_1780702647131.png",     label: "Buah Jeruk" },
+              { src: "/images/image_1780702682181.png",  label: "Kelereng" },
+              { src: "/images/image_1780702856357.png",   label: "Bola Bowling" },
             ].map(({ src, label }) => (
               <div key={label} className="flex flex-col items-center gap-1">
                 <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">

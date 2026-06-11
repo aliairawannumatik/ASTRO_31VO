@@ -9,12 +9,6 @@ import { InlineMath } from 'react-katex';
 import PembahasanCard from "@/components/PembahasanCard";
 import { bangunRuangSisiDatarDasarPembahasan } from "@/data/pembahasan/bangunRuangSisiDatarDasar";
 import { bangunRuangSisiDatarOlimpiadePembahasan } from "@/data/pembahasan/bangunRuangSisiDatarOlimpiade";
-import olimpiadeImg12 from "@assets/image_1777741187388.png";
-import olimpiadeImg14 from "@assets/image_1777741593708.png";
-import olimpiadeImg16 from "@assets/Picture1_1777742388394_nobg.png";
-import olimpiadeImg20 from "@assets/image_1777742649812.png";
-import olimpiadeImg21 from "@assets/image_1777742747271.png";
-import olimpiadeImg22 from "@assets/image_1777742885061.png";
 
 const M = ({ math }: { math: string }) => <InlineMath math={math} />;
 
@@ -566,12 +560,12 @@ const dasarOptionImages: Record<number, Record<string, string>> = {
 };
 
 const olimpiadeImages: Record<number, string> = {
-  12: olimpiadeImg12,
-  14: olimpiadeImg14,
-  16: olimpiadeImg16,
-  20: olimpiadeImg20,
-  21: olimpiadeImg21,
-  22: olimpiadeImg22,
+  12: "/images/image_1777741187388.png",
+  14: "/images/image_1777741593708.png",
+  16: "/images/Picture1_1777742388394_nobg.png",
+  20: "/images/image_1777742649812.png",
+  21: "/images/image_1777742747271.png",
+  22: "/images/image_1777742885061.png",
 };
 
 /* ─────────────────────────────────────────────────────────

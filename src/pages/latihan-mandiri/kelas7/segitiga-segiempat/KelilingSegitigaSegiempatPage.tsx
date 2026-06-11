@@ -5,17 +5,6 @@ import { BookOpen, ChevronLeft } from "lucide-react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
-import img1a from "@assets/1a_1774935683575.png";
-import img1b from "@assets/1b_1774935683576.png";
-import img1c from "@assets/1c_1774935683576.png";
-import img2a from "@assets/2a_1774935683577.png";
-import img2b from "@assets/2b_1774935683577.png";
-import img3  from "@assets/3_1774935683577.png";
-import img4a from "@assets/4a_1774935683578.png";
-import img4b from "@assets/4b_1774935683578.png";
-import img4c from "@assets/4c_1774935683579.png";
-import img4d from "@assets/4d_1774935683579.png";
-import img5  from "@assets/5_1774935683579.png";
 
 /* ─────────────────────────────────────────────
    IMAGE DIAGRAMS
@@ -25,15 +14,15 @@ const DiagramQ1 = () => (
   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">a.</span>
-      <img src={img1a} alt="Segitiga a soal 1" className="w-full max-w-[220px] mx-auto rounded-lg" />
+      <img src={"/images/1a_1774935683575.png"} alt="Segitiga a soal 1" className="w-full max-w-[220px] mx-auto rounded-lg" />
     </div>
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">b.</span>
-      <img src={img1b} alt="Segitiga b soal 1" className="w-full max-w-[220px] mx-auto rounded-lg" />
+      <img src={"/images/1b_1774935683576.png"} alt="Segitiga b soal 1" className="w-full max-w-[220px] mx-auto rounded-lg" />
     </div>
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">c.</span>
-      <img src={img1c} alt="Segitiga c soal 1" className="w-full max-w-[220px] mx-auto rounded-lg" />
+      <img src={"/images/1c_1774935683576.png"} alt="Segitiga c soal 1" className="w-full max-w-[220px] mx-auto rounded-lg" />
     </div>
   </div>
 );
@@ -42,42 +31,42 @@ const DiagramQ2 = () => (
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">a.</span>
-      <img src={img2a} alt="Segitiga a soal 2" className="w-full max-w-[260px] mx-auto rounded-lg" />
+      <img src={"/images/2a_1774935683577.png"} alt="Segitiga a soal 2" className="w-full max-w-[260px] mx-auto rounded-lg" />
     </div>
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">b.</span>
-      <img src={img2b} alt="Segitiga b soal 2" className="w-full max-w-[260px] mx-auto rounded-lg" />
+      <img src={"/images/2b_1774935683577.png"} alt="Segitiga b soal 2" className="w-full max-w-[260px] mx-auto rounded-lg" />
     </div>
   </div>
 );
 
 const DiagramQ3 = () => (
-  <img src={img3} alt="Segitiga ABC soal 3" className="w-full max-w-sm mx-auto my-4 rounded-lg" />
+  <img src={"/images/3_1774935683577.png"} alt="Segitiga ABC soal 3" className="w-full max-w-sm mx-auto my-4 rounded-lg" />
 );
 
 const DiagramQ4 = () => (
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">a.</span>
-      <img src={img4a} alt="Bangun a soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
+      <img src={"/images/4a_1774935683578.png"} alt="Bangun a soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
     </div>
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">b.</span>
-      <img src={img4b} alt="Bangun b soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
+      <img src={"/images/4b_1774935683578.png"} alt="Bangun b soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
     </div>
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">c.</span>
-      <img src={img4c} alt="Bangun c soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
+      <img src={"/images/4c_1774935683579.png"} alt="Bangun c soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
     </div>
     <div className="flex flex-col items-center gap-1">
       <span className="text-accent font-semibold text-sm">d.</span>
-      <img src={img4d} alt="Bangun d soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
+      <img src={"/images/4d_1774935683579.png"} alt="Bangun d soal 4" className="w-full max-w-[240px] mx-auto rounded-lg" />
     </div>
   </div>
 );
 
 const DiagramQ5 = () => (
-  <img src={img5} alt="Belah ketupat ABCD soal 5" className="w-full max-w-xs mx-auto my-4 rounded-lg" />
+  <img src={"/images/5_1774935683579.png"} alt="Belah ketupat ABCD soal 5" className="w-full max-w-xs mx-auto my-4 rounded-lg" />
 );
 
 /* Q6: Trapezoid ABCD — DC=10 cm (top), AB=16 cm (bottom), AD=8 cm, BC=6 cm */

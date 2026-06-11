@@ -6,7 +6,6 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical } fro
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import heroImage from "@assets/image_1776224212212.png";
 import LabPercobaanEmpirik from "@/components/LabPercobaanEmpirik";
 
 const PeluangEmpirikPage = () => {
@@ -60,7 +59,7 @@ const PeluangEmpirikPage = () => {
         </p>
 
         <div className="flex justify-center mb-6">
-          <img src={heroImage} alt="Melempar koin – ilustrasi peluang empirik" className="w-40 rounded-xl shadow-lg shadow-cyan-900/30 border border-cyan-500/20" />
+          <img src={"/images/image_1776224212212.png"} alt="Melempar koin – ilustrasi peluang empirik" className="w-40 rounded-xl shadow-lg shadow-cyan-900/30 border border-cyan-500/20" />
         </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">

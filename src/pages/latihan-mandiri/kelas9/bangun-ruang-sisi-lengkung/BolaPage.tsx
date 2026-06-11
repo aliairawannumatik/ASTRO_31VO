@@ -5,8 +5,6 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import banduImg from "@assets/image_1779541316981.png";
-import tabungBolaImg from "@assets/image_1779541340534.png";
 
 type OptionKey = "A" | "B" | "C" | "D";
 type Cat = "unsur" | "lp" | "vol" | "app";
@@ -613,7 +611,7 @@ const mcQuestions: QMC[] = [
   {
     n: 33, title: "Volume Bandul – Kerucut + Setengah Bola", cat: "app",
     content: "Sebuah bandul terdiri dari kerucut dan belahan bola. Jika diameter bola 14 cm dan garis pelukis kerucut 25 cm, volume bandul tersebut adalah … (π = 22/7)",
-    diagram: <img src={banduImg} alt="Bandul kerucut dan setengah bola" className="mx-auto max-h-44 object-contain rounded-lg" />,
+    diagram: <img src={"/images/image_1779541316981.png"} alt="Bandul kerucut dan setengah bola" className="mx-auto max-h-44 object-contain rounded-lg" />,
     options: [
       { key: "A", text: "132,6 cm³" },
       { key: "B", text: "1.232,0 cm³" },
@@ -627,7 +625,7 @@ const mcQuestions: QMC[] = [
     content: "Perhatikan gambar! Diketahui sebuah benda gabungan tabung dan setengah bola. Jika diameter tabung 20 cm dan tinggi tabung 25 cm, luas seluruh permukaan benda tersebut adalah … (π = 3,14)",
     diagram: (
       <div className="flex flex-col items-center gap-2">
-        <img src={tabungBolaImg} alt="Tabung dan setengah bola" className="mx-auto max-h-40 object-contain rounded-lg bg-white/10 p-1" />
+        <img src={"/images/image_1779541340534.png"} alt="Tabung dan setengah bola" className="mx-auto max-h-40 object-contain rounded-lg bg-white/10 p-1" />
       </div>
     ),
     options: [

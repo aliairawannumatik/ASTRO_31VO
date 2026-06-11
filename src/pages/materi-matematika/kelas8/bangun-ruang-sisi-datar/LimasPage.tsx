@@ -7,12 +7,6 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import JaringLimasInteraktif from "@/components/JaringLimasInteraktif";
-import limasExRubikPyramid from "@assets/image_1776844211789.png";
-import limasExSantanKelapa from "@assets/image_1776844253335.png";
-import limasExBakcangKetan from "@assets/image_1776844303292.png";
-import limasExLouvre from "@assets/image_1776844334711.png";
-import limasExPiramidaMesir from "@assets/image_1776844359975.png";
-import limasExTendaPramuka from "@assets/image_1776844428389.png";
 
 /* ─────────────────────────────────────────────────────────────
    SVG 3D MATH UTILITIES
@@ -2112,12 +2106,12 @@ const slides: Slide[] = [
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
-              { src: limasExRubikPyramid, caption: "Rubik Pyramid (Limas Segitiga)" },
-              { src: limasExSantanKelapa, caption: "Kemasan Santan (Limas Segitiga)" },
-              { src: limasExBakcangKetan, caption: "Bakcang Ketan (Limas Segitiga)" },
-              { src: limasExLouvre, caption: "Piramida Louvre (Limas Segiempat)" },
-              { src: limasExPiramidaMesir, caption: "Piramida Mesir (Limas Segiempat)" },
-              { src: limasExTendaPramuka, caption: "Tenda Pramuka (Limas Segiempat)" },
+              { src: "/images/image_1776844211789.png", caption: "Rubik Pyramid (Limas Segitiga)" },
+              { src: "/images/image_1776844253335.png", caption: "Kemasan Santan (Limas Segitiga)" },
+              { src: "/images/image_1776844303292.png", caption: "Bakcang Ketan (Limas Segitiga)" },
+              { src: "/images/image_1776844334711.png", caption: "Piramida Louvre (Limas Segiempat)" },
+              { src: "/images/image_1776844359975.png", caption: "Piramida Mesir (Limas Segiempat)" },
+              { src: "/images/image_1776844428389.png", caption: "Tenda Pramuka (Limas Segiempat)" },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-lg p-2 flex flex-col items-center">
                 <div className="w-full h-24 flex items-center justify-center overflow-hidden">

@@ -1,6 +1,4 @@
 import { useState } from "react";
-import jualBeliImg from "@assets/image_1775640587265.png";
-import berasImg from "@assets/image_1775640978525.png";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -564,7 +562,7 @@ const JualBeliUntungRugiPage = () => {
                 Bayangkan kamu membeli sepasang sepatu seharga Rp150.000, lalu menjualnya ke temanmu Rp180.000. Apakah kamu untung atau rugi? Dari warung kelontong, toko online, hingga perusahaan besar — semua transaksi jual beli selalu berpusat pada dua angka kunci:
               </p>
               <figure>
-                <img src={jualBeliImg} alt="Ilustrasi Jual Beli" className="w-full rounded-xl object-cover" />
+                <img src={"/images/image_1775640587265.png"} alt="Ilustrasi Jual Beli" className="w-full rounded-xl object-cover" />
                 <figcaption className="font-body text-xs text-white/50 text-center mt-2">
                   <a href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">https://www.bing.com/images/create</a>
                 </figcaption>
@@ -810,7 +808,7 @@ const JualBeliUntungRugiPage = () => {
                   </p>
                 </div>
                 <figure>
-                  <img src={berasImg} alt="Pedagang beras di pasar" className="w-full rounded-xl object-cover" />
+                  <img src={"/images/image_1775640978525.png"} alt="Pedagang beras di pasar" className="w-full rounded-xl object-cover" />
                   <figcaption className="font-body text-xs text-white/50 text-center mt-2">
                     <a href="https://infoburuh.com/wp-content/uploads/2022/12/Harga_Beras_Indonesia_Disebut_Bank_Dunia_Paling_Mahal_di_Asia_Tenggara.jpg" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/80">sumber gambar</a>
                   </figcaption>

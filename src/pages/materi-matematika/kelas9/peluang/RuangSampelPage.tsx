@@ -6,10 +6,6 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers } from "luc
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import heroImage from "@assets/image_1776223164069.png";
-import coinImage from "@assets/koin_fix_1776223721630.png";
-import diceImage from "@assets/image_1776223510131.png";
-import cardImage from "@assets/image_1776224003366.png";
 
 const RuangSampelPage = () => {
   const navigate = useNavigate();
@@ -66,7 +62,7 @@ const RuangSampelPage = () => {
 
         <div className="mb-6 rounded-xl overflow-hidden border border-cyan-500/20 shadow-lg shadow-cyan-900/30 mx-auto w-40">
           <img
-            src={heroImage}
+            src={"/images/image_1776223164069.png"}
             alt="Melempar koin – ilustrasi ruang sampel"
             className="w-full object-cover"
           />
@@ -153,7 +149,7 @@ const RuangSampelPage = () => {
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🪙 a. Uang Koin</p>
                   <div className="flex justify-center">
-                    <img src={coinImage} alt="Uang koin Rp1.000" className="w-44 rounded-lg" />
+                    <img src={"/images/koin_fix_1776223721630.png"} alt="Uang koin Rp1.000" className="w-44 rounded-lg" />
                   </div>
                   <div className="flex gap-3 justify-center">
                     {[
@@ -178,7 +174,7 @@ const RuangSampelPage = () => {
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🎲 b. Dadu Bermuka Enam</p>
                   <div className="flex justify-center">
-                    <img src={diceImage} alt="Dadu bermuka enam" className="w-60 rounded-lg" />
+                    <img src={"/images/image_1776223510131.png"} alt="Dadu bermuka enam" className="w-60 rounded-lg" />
                   </div>
                   <div className="flex gap-2 justify-center flex-wrap">
                     {[1, 2, 3, 4, 5, 6].map((n) => (
@@ -227,7 +223,7 @@ const RuangSampelPage = () => {
                 <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🃏 c. Kartu Bridge</p>
                   <div className="flex justify-center">
-                    <img src={cardImage} alt="Simbol kartu bridge" className="w-44 rounded-lg" />
+                    <img src={"/images/image_1776224003366.png"} alt="Simbol kartu bridge" className="w-44 rounded-lg" />
                   </div>
                   <p className="font-body text-xs text-white/70 leading-relaxed">
                     Satu set kartu bridge terdiri dari <strong className="text-white">52 kartu</strong> yang dibagi menjadi 4 jenis (suit), masing-masing berisi 13 kartu bernomor A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K.
