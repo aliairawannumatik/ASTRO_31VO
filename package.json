@@ -15,8 +15,7 @@
     "build:analyze": "vite build --mode development",
     "start": "NODE_ENV=production node --loader tsx/esm server.ts",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "compress:images": "node scripts/compress-images.mjs"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@google/genai": "^1.52.0",
@@ -90,7 +89,6 @@
     "globals": "^15.15.0",
     "postcss": "^8.5.15",
     "rollup-plugin-visualizer": "^6.0.11",
-    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.19",
     "terser": "^5.48.0",
     "tsx": "^4.22.4",
