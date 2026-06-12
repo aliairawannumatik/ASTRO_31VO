@@ -65,8 +65,19 @@ const PolaAritmetikaPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Kamu pergi ke toko kue dan membeli: 1 kue hari Senin, 3 kue hari Selasa, 5 kue hari Rabu, 7 kue hari Kamis... Sadar tidak? Setiap harinya jumlah kue bertambah 2! Inilah inti dari <strong className="text-cyan-300">pola aritmetika</strong> — barisan bilangan dengan <strong className="text-cyan-300">beda (selisih) yang sama</strong> antar suku berurutan.
+                  Pernahkah kamu memperhatikan susunan kursi di bioskop atau teater? Baris pertama mungkin berisi <strong className="text-cyan-300">10 kursi</strong>, baris kedua <strong className="text-cyan-300">13 kursi</strong>, baris ketiga <strong className="text-cyan-300">16 kursi</strong>, dan seterusnya. Setiap baris bertambah <strong className="text-yellow-300">3 kursi</strong> secara konsisten! Inilah contoh nyata dari <strong className="text-cyan-300">pola aritmetika</strong> — barisan bilangan dengan <strong className="text-cyan-300">beda (selisih) yang sama</strong> antar suku berurutan. Dengan rumus pola aritmetika, pengelola gedung bisa langsung menghitung jumlah kursi di baris manapun tanpa menghitung satu per satu.
                 </p>
+
+                <figure className="flex flex-col items-center gap-2">
+                  <img
+                    src="/bioskop-aritmetika.png"
+                    alt="Kursi bioskop/teater membentuk pola aritmetika"
+                    className="w-full max-w-sm rounded-xl border border-cyan-500/30 shadow-lg object-cover"
+                  />
+                  <figcaption className="font-body text-xs text-white/50 italic text-center">
+                    🎬 Susunan kursi bioskop — setiap baris bertambah sejumlah kursi yang sama, membentuk barisan aritmetika!
+                  </figcaption>
+                </figure>
 
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
                   <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">🔑 Komponen Utama Barisan Aritmetika</p>
