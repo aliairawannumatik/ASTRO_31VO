@@ -519,8 +519,17 @@ const PolaGeometriPage = () => {
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-cyan-300 font-semibold mb-1">Cara Rumus:</p>
                       <p className="text-white/70"><InlineMath math="a = 2" />, <InlineMath math="r = 3" />, <InlineMath math="n = 7" /></p>
                       <BlockMath math="S_7 = \frac{2(3^7 - 1)}{3 - 1} = \frac{2(2187 - 1)}{2} = 2186" />
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-violet-300 font-semibold mb-2">✏️ Cara Alternatif — Penjumlahan Manual:</p>
+                      <p className="text-white/70 text-xs mb-2">Daftar 7 suku pertama: 2, 6, 18, 54, 162, 486, 1458</p>
+                      <BlockMath math="S_7 = 2 + 6 + 18 + 54 + 162 + 486 + 1458" />
+                      <BlockMath math="= (2+6) + (18+54) + (162+486) + 1458" />
+                      <BlockMath math="= 8 + 72 + 648 + 1458 = 2186" />
+                      <p className="text-white/50 text-xs mt-1">Cara manual cocok untuk suku sedikit, rumus lebih efisien untuk banyak suku. Keduanya memberi hasil yang sama ✓</p>
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
                       <p className="font-body text-sm font-bold text-cyan-300">✅ <InlineMath math="S_7 = 2186" /></p>
@@ -539,21 +548,31 @@ const PolaGeometriPage = () => {
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-yellow-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">Jumlah 4 suku pertama barisan geometri adalah 15 dan rasionya 2. Tentukan suku pertama dan suku ke-6!</p>
+                  <p className="font-body text-sm text-white/85">Diketahui suatu barisan geometri dengan <InlineMath math="U_3 = 18" /> dan <InlineMath math="U_5 = 162" />. Tentukan jumlah 6 suku pertama barisan tersebut!</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-white/70">Diketahui: <InlineMath math="S_4 = 15" />, <InlineMath math="r = 2" />, <InlineMath math="n = 4" /></p>
-                      <BlockMath math="15 = \frac{a(2^4 - 1)}{2 - 1} = a \times 15 \Rightarrow a = 1" />
+                      <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Cari rasio (r):</p>
+                      <p className="text-white/70 text-xs mb-1">Gunakan perbandingan <InlineMath math="U_5" /> dan <InlineMath math="U_3" />:</p>
+                      <BlockMath math="\frac{U_5}{U_3} = \frac{a \cdot r^4}{a \cdot r^2} = r^2 = \frac{162}{18} = 9" />
+                      <BlockMath math="r^2 = 9 \Rightarrow r = 3" />
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">Suku ke-6:</p>
-                      <BlockMath math="U_6 = 1 \cdot 2^5 = 32" />
+                      <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Cari suku pertama (a):</p>
+                      <BlockMath math="U_3 = a \cdot r^2 = a \cdot 9 = 18 \Rightarrow a = 2" />
+                      <p className="text-white/60 text-xs mt-1">Barisan: 2, 6, 18, 54, 162, 486, …</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-green-300 font-semibold mb-1">Langkah 3 — Hitung S₆:</p>
+                      <BlockMath math="S_6 = \frac{a(r^6 - 1)}{r - 1} = \frac{2(3^6 - 1)}{3 - 1} = \frac{2(729 - 1)}{2} = 728" />
+                    </div>
+                    <div className="bg-slate-800/40 border border-white/10 rounded-lg p-2 text-xs font-body">
+                      <p className="text-white/55">Verifikasi manual: 2 + 6 + 18 + 54 + 162 + 486 = <strong className="text-yellow-300">728</strong> ✓</p>
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ <InlineMath math="a = 1" />, <InlineMath math="U_6 = 32" /></p>
+                      <p className="font-body text-sm font-bold text-cyan-300">✅ Jumlah 6 suku pertama = <strong>728</strong></p>
                     </div>
                   </div>
                 </div>
@@ -569,26 +588,33 @@ const PolaGeometriPage = () => {
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">Diketahui <InlineMath math="S_n = 3(2^n) - 3" />. Tentukan <InlineMath math="U_1" />, <InlineMath math="U_2" />, <InlineMath math="U_3" />, dan buktikan bahwa itu barisan geometri. Berapa rasionya?</p>
+                  <p className="font-body text-sm text-white/85">Sebuah benang dipotong menjadi <strong>5 bagian</strong> yang panjangnya membentuk barisan geometri. Panjang benang <strong>terpendek 4 cm</strong> dan panjang benang <strong>terpanjang 64 cm</strong>. Tentukan panjang benang mula-mula sebelum dipotong!</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Gunakan hubungan <InlineMath math="U_n = S_n - S_{n-1}" />:</p>
-                      <BlockMath math="S_1 = 3(2^1) - 3 = 6 - 3 = 3 \Rightarrow U_1 = 3" />
-                      <BlockMath math="S_2 = 3(2^2) - 3 = 12 - 3 = 9" />
-                      <BlockMath math="U_2 = S_2 - S_1 = 9 - 3 = 6" />
-                      <BlockMath math="S_3 = 3(2^3) - 3 = 24 - 3 = 21" />
-                      <BlockMath math="U_3 = S_3 - S_2 = 21 - 9 = 12" />
+                      <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Identifikasi:</p>
+                      <p className="text-white/70 text-xs mb-1">5 potongan → barisan geometri dengan <InlineMath math="n = 5" />.</p>
+                      <p className="text-white/70">Benang terpendek = <InlineMath math="U_1 = a = 4" /></p>
+                      <p className="text-white/70">Benang terpanjang = <InlineMath math="U_5 = 64" /></p>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Cek rasio:</p>
-                      <BlockMath math="\frac{U_2}{U_1} = \frac{6}{3} = 2 \quad \text{dan} \quad \frac{U_3}{U_2} = \frac{12}{6} = 2" />
-                      <p className="text-white/70 text-xs mt-1">Rasio tetap = 2 → terbukti barisan geometri!</p>
+                      <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Cari rasio (r):</p>
+                      <BlockMath math="U_5 = a \cdot r^4 \Rightarrow 64 = 4 \cdot r^4" />
+                      <BlockMath math="r^4 = \frac{64}{4} = 16 \Rightarrow r = 2" />
+                      <p className="text-white/60 text-xs mt-1">Barisan potongan: 4, 8, 16, 32, 64 (cm)</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-green-300 font-semibold mb-1">Langkah 3 — Hitung panjang benang mula-mula (S₅):</p>
+                      <p className="text-white/70 text-xs mb-1">Panjang benang mula-mula = jumlah semua potongan = <InlineMath math="S_5" /></p>
+                      <BlockMath math="S_5 = \frac{a(r^5 - 1)}{r - 1} = \frac{4(2^5 - 1)}{2 - 1} = \frac{4 \times 31}{1} = 124 \text{ cm}" />
+                    </div>
+                    <div className="bg-slate-800/40 border border-white/10 rounded-lg p-2 text-xs font-body">
+                      <p className="text-white/55">Verifikasi manual: 4 + 8 + 16 + 32 + 64 = <strong className="text-yellow-300">124 cm</strong> ✓</p>
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ <InlineMath math="U_1 = 3,\ U_2 = 6,\ U_3 = 12" />. Barisan geometri dengan <InlineMath math="r = 2" /></p>
+                      <p className="font-body text-sm font-bold text-cyan-300">✅ Panjang benang mula-mula = <strong>124 cm</strong></p>
                     </div>
                   </div>
                 </div>
