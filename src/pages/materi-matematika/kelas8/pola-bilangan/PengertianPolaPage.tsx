@@ -358,6 +358,7 @@ const PengertianPolaPage = () => {
                     { n: 2,  label: "1×2", rows: 1, cols: 2 },
                     { n: 6,  label: "2×3", rows: 2, cols: 3 },
                     { n: 12, label: "3×4", rows: 3, cols: 4 },
+                    { n: 20, label: "4×5", rows: 4, cols: 5 },
                   ].map(({ n, label, rows, cols }) => (
                     <div key={n} className="text-center">
                       <div className="inline-flex flex-col gap-0.5 mb-1">
@@ -414,7 +415,7 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-pink-300">Pola Segitiga Pascal</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Setiap bilangan = jumlah dua bilangan di atasnya. Baris dimulai dan diakhiri angka 1.</p>
-                <div className="flex flex-col gap-1.5 my-3 font-mono text-xs">
+                <div className="flex flex-col items-center gap-1.5 my-3 font-mono text-xs">
                   {[
                     { row: [1],                  sum: 1,  expanded: "1",               power: "2⁰" },
                     { row: [1, 1],               sum: 2,  expanded: "1+1",             power: "2¹" },
@@ -423,8 +424,8 @@ const PengertianPolaPage = () => {
                     { row: [1, 4, 6, 4, 1],      sum: 16, expanded: "1+4+6+4+1",       power: "2⁴" },
                     { row: [1, 5, 10, 10, 5, 1], sum: 32, expanded: "1+5+10+10+5+1",   power: "2⁵" },
                   ].map(({ row, sum, expanded, power }, ri) => (
-                    <div key={ri} className="space-y-0.5">
-                      <div className="flex items-center gap-1.5 flex-wrap">
+                    <div key={ri} className="flex flex-col items-center gap-0.5">
+                      <div className="flex items-center gap-2">
                         <div className="flex gap-1">
                           {row.map((val, ci) => (
                             <span key={ci} className="bg-pink-700/50 border border-pink-400/40 text-pink-200 font-bold rounded px-1.5 py-0.5 min-w-[22px] text-center text-xs">{val}</span>
@@ -435,7 +436,7 @@ const PengertianPolaPage = () => {
                         <span className="text-white/30 text-[10px]">=</span>
                         <span className="text-amber-300 font-mono text-xs font-bold">{power}</span>
                       </div>
-                      <p className="font-mono text-[10px] text-pink-300/55 pl-0.5">= {expanded}</p>
+                      <p className="font-mono text-[10px] text-pink-300/55">= {expanded}</p>
                     </div>
                   ))}
                 </div>
@@ -455,42 +456,12 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-teal-300">Pola Fibonacci</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Setiap suku = jumlah dua suku sebelumnya. Dimulai dari 1, 1.</p>
-                <div className="flex gap-1 flex-wrap mb-1">
+                <div className="flex gap-1 flex-wrap mb-2">
                   {[1,1,2,3,5,8,13,21,34,55].map((n, i) => (
                     <span key={i} className="bg-teal-700/50 border border-teal-400/40 text-teal-200 text-xs font-bold px-2 py-1 rounded-lg">{n}</span>
                   ))}
                   <span className="text-white/40 self-center">...</span>
                 </div>
-                {/* Busur Fibonacci: angka ke-n = jumlah dua suku sebelumnya */}
-                <svg viewBox="0 0 218 82" className="w-full mb-2">
-                  {[1,1,2,3,5,8].map((n, i) => {
-                    const x = 18 + i * 36;
-                    return (
-                      <g key={i}>
-                        <rect x={x-12} y={10} width={24} height={18} rx="4" fill="rgba(20,184,166,0.25)" stroke="#5eead4" strokeWidth="1"/>
-                        <text x={x} y={23} textAnchor="middle" fill="#ccfbf1" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
-                      </g>
-                    );
-                  })}
-                  <text x={207} y={23} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
-                  {/* Alternating-depth arcs: dari suku[i] + suku[i+1] → suku[i+2] */}
-                  {[
-                    { i: 0, label: "1+1=2", deep: true },
-                    { i: 1, label: "1+2=3", deep: false },
-                    { i: 2, label: "2+3=5", deep: true },
-                    { i: 3, label: "3+5=8", deep: false },
-                  ].map(({ i, label, deep }) => {
-                    const x1 = 18 + i * 36; const x2 = 18 + (i+2) * 36; const mx = (x1+x2)/2;
-                    const cy = deep ? 65 : 48; const ly = deep ? 78 : 55;
-                    const color = deep ? "#5eead4" : "#34d399";
-                    return (
-                      <g key={i}>
-                        <path d={`M ${x1},28 Q ${mx},${cy} ${x2},28`} fill="none" stroke={color} strokeWidth="1.4" strokeDasharray="4,2"/>
-                        <text x={mx} y={ly} textAnchor="middle" fill={color} fontSize="9" fontFamily="monospace">{label}</text>
-                      </g>
-                    );
-                  })}
-                </svg>
                 <BlockMath math="U_n = U_{n-1} + U_{n-2} \quad (U_1 = U_2 = 1)" />
                 <p className="font-body text-xs text-white/60 mt-1">🌿 Muncul di alam: kelopak bunga, cangkang nautilus, susunan biji bunga matahari!</p>
               </div>
@@ -565,17 +536,9 @@ const PengertianPolaPage = () => {
               <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
                 <p className="font-body text-sm font-semibold text-yellow-300 mb-2">📝 Soal</p>
                 <p className="font-body text-sm text-white/85">
-                  Perhatikan barisan berikut: <strong>15, 24, 35, 48, 63, …</strong><br />
-                  Suku ke-14 dari barisan tersebut adalah …<br />
+                  Perhatikan barisan berikut: <strong>6, 12, 20, 30, …</strong><br />
+                  Tentukan suku ke-15 dari barisan tersebut!
                 </p>
-                <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-body">
-                  {[["A","185"],["B","194"],["C","288"],["D","312"]].map(([opt, val]) => (
-                    <div key={opt} className={`border rounded-lg px-3 py-2 flex gap-2 items-center ${opt === "C" ? "bg-yellow-500/20 border-yellow-400/60 text-yellow-200 font-bold" : "bg-slate-800/40 border-white/10 text-white/60"}`}>
-                      <span className={`font-bold ${opt === "C" ? "text-yellow-300" : "text-white/40"}`}>{opt}.</span> {val}
-                      {opt === "C" && <span className="ml-auto text-yellow-400">✓</span>}
-                    </div>
-                  ))}
-                </div>
               </div>
               <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                 <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
@@ -587,39 +550,40 @@ const PengertianPolaPage = () => {
                         <tbody>
                           <tr>
                             <td className="text-white/50 px-2 py-1 font-semibold">Barisan</td>
-                            {[15,24,35,48,63].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-yellow-200 font-bold">{v}</td>)}
+                            {[6,12,20,30].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-yellow-200 font-bold">{v}</td>)}
                           </tr>
                           <tr>
                             <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-1</td>
-                            {[9,11,13,15].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-cyan-300">{v}</td>)}
+                            {[6,8,10].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-cyan-300">{v}</td>)}
                             <td />
                           </tr>
                           <tr>
                             <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-2</td>
-                            {[2,2,2].map((v,i) => <td key={i} className="border border-white/10 px-3 py-1 text-center text-green-300 font-bold">{v}</td>)}
+                            {[2,2].map((v,i) => <td key={i} className="border border-white/10 px-3 py-1 text-center text-green-300 font-bold">{v}</td>)}
                             <td /><td />
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                    <p className="text-white/70 text-xs mt-2">Beda ke-2 konstan = <strong className="text-green-300">2</strong> → barisan kuadratik, rumus <InlineMath math="U_n = an^2 + bn + c" /></p>
+                    <p className="text-white/70 text-xs mt-2">Beda ke-2 konstan = <strong className="text-green-300">2</strong> → barisan kuadratik, <InlineMath math="U_n = an^2 + bn + c" /></p>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Tentukan koefisien:</p>
                     <BlockMath math="a = \frac{\text{beda ke-2}}{2} = \frac{2}{2} = 1" />
                     <p className="text-white/70 mb-1">Susun persamaan dari <InlineMath math="U_1" /> dan <InlineMath math="U_2" />:</p>
-                    <BlockMath math="U_1: 1 + b + c = 15 \Rightarrow b + c = 14" />
-                    <BlockMath math="U_2: 4 + 2b + c = 24 \Rightarrow 2b + c = 20" />
+                    <BlockMath math="U_1: 1 + b + c = 6 \Rightarrow b + c = 5" />
+                    <BlockMath math="U_2: 4 + 2b + c = 12 \Rightarrow 2b + c = 8" />
                     <p className="text-white/70 mb-1">Kurangkan persamaan pertama dari kedua:</p>
-                    <BlockMath math="b = 6,\quad c = 8" />
+                    <BlockMath math="b = 3,\quad c = 2" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Rumus umum & substitusi n = 14:</p>
-                    <BlockMath math="U_n = n^2 + 6n + 8" />
-                    <BlockMath math="U_{14} = 14^2 + 6(14) + 8 = 196 + 84 + 8 = 288" />
+                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Rumus umum & substitusi n = 15:</p>
+                    <BlockMath math="U_n = n^2 + 3n + 2 = (n+1)(n+2)" />
+                    <BlockMath math="U_{15} = 15^2 + 3(15) + 2 = 225 + 45 + 2 = 272" />
+                    <p className="text-white/70 text-xs mt-1">Cara cepat: <InlineMath math="U_{15} = 16 \times 17 = 272" /></p>
                   </div>
                   <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: <strong className="text-yellow-300">C. 288</strong></p>
+                    <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: Suku ke-15 dari barisan 6, 12, 20, 30, … adalah <strong className="text-yellow-300">272</strong>.</p>
                   </div>
                 </div>
               </div>
@@ -628,58 +592,85 @@ const PengertianPolaPage = () => {
 
           {/* CONTOH 3 POLA KHUSUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit (Barisan Bertingkat)" />
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit (Pola Gambar)" />
             <div className="px-5 pb-5 space-y-4">
               <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
               <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                 <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
-                <p className="font-body text-sm text-white/85">
-                  Perhatikan barisan berikut: <strong>4, 8, 14, 22, 32, …</strong><br />
-                  Tentukan suku ke-20 dari barisan tersebut!
+                <p className="font-body text-sm text-white/85 mb-3">
+                  Perhatikan pola susunan lingkaran berikut. Tentukan <strong>banyaknya lingkaran pada Pola ke-20</strong>!
                 </p>
+                {/* Gambar ulang pola lingkaran */}
+                <div className="flex gap-5 flex-wrap justify-center items-end">
+                  {[
+                    { pola: 1, rows: 1, cols: 3 },
+                    { pola: 2, rows: 2, cols: 4 },
+                    { pola: 3, rows: 3, cols: 5 },
+                  ].map(({ pola, rows, cols }) => (
+                    <div key={pola} className="text-center">
+                      <div className="inline-flex flex-col gap-0.5 mb-1">
+                        {Array.from({ length: rows }).map((_, ri) => (
+                          <div key={ri} className="flex gap-0.5">
+                            {Array.from({ length: cols }).map((_, ci) => (
+                              <div key={ci} className="w-4 h-4 rounded-full border-2 border-red-300/70 bg-red-950/60" />
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-red-200 text-xs font-bold">{rows * cols} lingkaran</p>
+                      <p className="text-red-400 text-[10px]">Pola ke-{pola}</p>
+                    </div>
+                  ))}
+                  <span className="text-white/40 self-center text-lg">...</span>
+                </div>
               </div>
               <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                 <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                 <div className="space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Hitung selisih bertingkat:</p>
+                    <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Amati susunan dan hitung selisih bertingkat:</p>
+                    <p className="text-white/70 text-xs mb-2">
+                      Pola ke-1: <strong className="text-red-300">1 baris × 3 kolom = 3</strong> &nbsp;·&nbsp;
+                      Pola ke-2: <strong className="text-red-300">2 baris × 4 kolom = 8</strong> &nbsp;·&nbsp;
+                      Pola ke-3: <strong className="text-red-300">3 baris × 5 kolom = 15</strong>
+                    </p>
                     <div className="overflow-x-auto">
                       <table className="text-xs border-collapse w-full">
                         <tbody>
                           <tr>
                             <td className="text-white/50 px-2 py-1 font-semibold">Barisan</td>
-                            {[4,8,14,22,32].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-red-200 font-bold">{v}</td>)}
+                            {[3,8,15,24].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-red-200 font-bold">{v}</td>)}
                           </tr>
                           <tr>
                             <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-1</td>
-                            {[4,6,8,10].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-cyan-300">{v}</td>)}
+                            {[5,7,9].map(v => <td key={v} className="border border-white/10 px-3 py-1 text-center text-cyan-300">{v}</td>)}
                             <td />
                           </tr>
                           <tr>
                             <td className="text-white/50 px-2 py-1 font-semibold">Beda ke-2</td>
-                            {[2,2,2].map((v,i) => <td key={i} className="border border-white/10 px-3 py-1 text-center text-green-300 font-bold">{v}</td>)}
+                            {[2,2].map((v,i) => <td key={i} className="border border-white/10 px-3 py-1 text-center text-green-300 font-bold">{v}</td>)}
                             <td /><td />
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                    <p className="text-white/70 text-xs mt-2">Beda ke-2 konstan = <strong className="text-green-300">2</strong> → barisan kuadratik, rumus <InlineMath math="U_n = an^2 + bn + c" /></p>
+                    <p className="text-white/70 text-xs mt-2">Beda ke-2 konstan = <strong className="text-green-300">2</strong> → barisan kuadratik, <InlineMath math="U_n = an^2 + bn + c" /></p>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Tentukan koefisien:</p>
                     <BlockMath math="a = \frac{\text{beda ke-2}}{2} = \frac{2}{2} = 1" />
                     <p className="text-white/70 mb-1">Susun persamaan dari <InlineMath math="U_1" /> dan <InlineMath math="U_2" />:</p>
-                    <BlockMath math="U_1: 1 + b + c = 4 \Rightarrow b + c = 3" />
+                    <BlockMath math="U_1: 1 + b + c = 3 \Rightarrow b + c = 2" />
                     <BlockMath math="U_2: 4 + 2b + c = 8 \Rightarrow 2b + c = 4" />
                     <p className="text-white/70 mb-1">Kurangkan persamaan pertama dari kedua:</p>
-                    <BlockMath math="b = 1,\quad c = 2" />
+                    <BlockMath math="b = 2,\quad c = 0" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Verifikasi rumus:</p>
-                    <BlockMath math="U_n = n^2 + n + 2" />
-                    <div className="grid grid-cols-5 gap-1 mt-2">
+                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Rumus umum & verifikasi:</p>
+                    <BlockMath math="U_n = n^2 + 2n = n(n+2)" />
+                    <div className="grid grid-cols-4 gap-1 mt-2">
                       {[
-                        { n: 1, u: 4 }, { n: 2, u: 8 }, { n: 3, u: 14 }, { n: 4, u: 22 }, { n: 5, u: 32 },
+                        { n: 1, u: 3 }, { n: 2, u: 8 }, { n: 3, u: 15 }, { n: 4, u: 24 },
                       ].map(({ n, u }) => (
                         <div key={n} className="bg-green-900/30 border border-green-500/20 rounded-lg p-2 text-center">
                           <p className="text-white/40 text-xs">n={n}</p>
@@ -690,10 +681,11 @@ const PengertianPolaPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-orange-300 font-semibold mb-1">Langkah 4 — Substitusi n = 20:</p>
-                    <BlockMath math="U_{20} = 20^2 + 20 + 2 = 400 + 20 + 2 = 422" />
+                    <BlockMath math="U_{20} = 20^2 + 2(20) = 400 + 40 = 440" />
+                    <p className="text-white/70 text-xs mt-1">Cara cepat: <InlineMath math="U_{20} = 20 \times 22 = 440" /></p>
                   </div>
                   <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: Suku ke-20 dari barisan 4, 8, 14, 22, 32, … adalah <strong className="text-yellow-300">422</strong>.</p>
+                    <p className="font-body text-sm font-bold text-cyan-300">✅ Jawaban: Banyak lingkaran pada Pola ke-20 adalah <strong className="text-yellow-300">440 lingkaran</strong>.</p>
                   </div>
                 </div>
               </div>
