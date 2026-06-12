@@ -8,11 +8,11 @@
     "*.scss"
   ],
   "scripts": {
-    "dev": "tsx watch server.ts & vite --port 5000",
-    "server": "tsx watch server.ts",
-    "build": "NODE_ENV=production vite build",
-    "build:dev": "vite build --mode development",
-    "build:analyze": "vite build --mode development",
+    "dev": "npx tsx watch server.ts & npx vite --port 5000",
+    "server": "npx tsx watch server.ts",
+    "build": "NODE_ENV=production npx vite build",
+    "build:dev": "npx vite build --mode development",
+    "build:analyze": "npx vite build --mode development",
     "start": "NODE_ENV=production node --loader tsx/esm server.ts",
     "lint": "eslint .",
     "preview": "vite preview"
