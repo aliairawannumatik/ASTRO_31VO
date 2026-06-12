@@ -54,7 +54,7 @@ const PengertianPolaPage = () => {
             <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Pola — Keteraturan yang Ada di Mana-mana" />
             <div className="px-5 pb-5 space-y-4">
               <p className="font-body text-sm text-white/80 leading-relaxed">
-                Coba perhatikan lantai keramik bermotif, petikan dawai gitar, atau jadwal bus yang datang setiap 15 menit — semuanya punya <strong className="text-cyan-300">pola</strong>! Dalam matematika, pola bilangan adalah susunan angka-angka yang mengikuti <strong className="text-cyan-300">aturan tertentu</strong> yang bisa kita prediksi dan analisis.
+                Coba perhatikan lantai keramik bermotif, petikan dawai gitar, atau jadwal bus yang datang setiap 15 menit — semuanya punya <strong className="text-cyan-300">pola</strong>! Bahkan <strong className="text-yellow-300">motif batik</strong> — warisan seni budaya Indonesia yang kaya — pun merupakan contoh nyata dari pola: setiap motif tercipta dari pengulangan bentuk yang mengikuti aturan tertentu. Dalam matematika, pola bilangan adalah susunan angka-angka yang mengikuti <strong className="text-cyan-300">aturan tertentu</strong> yang bisa kita prediksi dan analisis.
               </p>
               <figure className="flex flex-col items-center gap-2">
                 <img
@@ -63,22 +63,100 @@ const PengertianPolaPage = () => {
                   className="w-full max-w-sm rounded-xl border border-cyan-500/30 shadow-lg object-cover"
                 />
                 <figcaption className="font-body text-xs text-white/50 italic text-center">
-                  Batik Sidomukti — salah satu contoh pola berulang dalam seni budaya Indonesia
+                  Batik Sidomukti 🇮🇩 — motif batik adalah pola berulang, bukti bahwa seni budaya Indonesia pun penuh matematika!
                 </figcaption>
               </figure>
               <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
                 <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">🔍 Contoh Pola Sederhana</p>
-                <div className="grid grid-cols-1 gap-2 text-xs font-body">
-                  {[
-                    { pola: "2, 4, 6, 8, 10, ...", aturan: "Tambah 2 setiap suku", color: "bg-cyan-900/40 border-cyan-500/30 text-cyan-200" },
-                    { pola: "1, 4, 9, 16, 25, ...", aturan: "Bilangan kuadrat (1², 2², 3², ...)", color: "bg-violet-900/40 border-violet-500/30 text-violet-200" },
-                    { pola: "3, 6, 12, 24, 48, ...", aturan: "Dikali 2 setiap suku", color: "bg-green-900/40 border-green-500/30 text-green-200" },
-                  ].map(({ pola, aturan, color }) => (
-                    <div key={pola} className={`border ${color} rounded-lg px-3 py-2 flex justify-between items-center`}>
-                      <span className="font-bold tracking-widest">{pola}</span>
-                      <span className="text-white/50 text-right ml-2">→ {aturan}</span>
+                <div className="grid grid-cols-1 gap-3 text-xs font-body">
+
+                  {/* Contoh 1: Tambah 2 */}
+                  <div className="border bg-cyan-900/40 border-cyan-500/30 rounded-lg px-3 py-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-bold text-cyan-200 tracking-widest">2, 4, 6, 8, 10, ...</span>
+                      <span className="text-white/50 ml-2">→ Tambah 2</span>
                     </div>
-                  ))}
+                    <svg viewBox="0 0 248 52" className="w-full">
+                      {[2,4,6,8,10].map((n, i) => {
+                        const x = 24 + i * 48;
+                        return (
+                          <g key={i}>
+                            <rect x={x-14} y={28} width={28} height={18} rx="3" fill="rgba(8,145,178,0.3)" stroke="#22d3ee" strokeWidth="0.9"/>
+                            <text x={x} y={41} textAnchor="middle" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
+                          </g>
+                        );
+                      })}
+                      <text x={236} y={41} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
+                      {[0,1,2,3].map(i => {
+                        const x1 = 24 + i * 48 + 14; const x2 = 24 + (i+1)*48 - 14; const mx = (x1+x2)/2;
+                        return (
+                          <g key={i}>
+                            <path d={`M ${x1},28 Q ${mx},10 ${x2},28`} fill="none" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="3,2"/>
+                            <text x={mx} y={7} textAnchor="middle" fill="#22d3ee" fontSize="9" fontFamily="monospace" fontWeight="bold">+2</text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+                  </div>
+
+                  {/* Contoh 2: Bilangan kuadrat */}
+                  <div className="border bg-violet-900/40 border-violet-500/30 rounded-lg px-3 py-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-bold text-violet-200 tracking-widest">1, 4, 9, 16, 25, ...</span>
+                      <span className="text-white/50 ml-2">→ Bilangan kuadrat</span>
+                    </div>
+                    <svg viewBox="0 0 248 52" className="w-full">
+                      {[1,4,9,16,25].map((n, i) => {
+                        const x = 24 + i * 48;
+                        return (
+                          <g key={i}>
+                            <rect x={x-15} y={28} width={30} height={18} rx="3" fill="rgba(109,40,217,0.3)" stroke="#a855f7" strokeWidth="0.9"/>
+                            <text x={x} y={41} textAnchor="middle" fill="#e9d5ff" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
+                          </g>
+                        );
+                      })}
+                      <text x={236} y={41} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
+                      {["+3","+5","+7","+9"].map((d, i) => {
+                        const x1 = 24 + i * 48 + 15; const x2 = 24 + (i+1)*48 - 15; const mx = (x1+x2)/2;
+                        return (
+                          <g key={i}>
+                            <path d={`M ${x1},28 Q ${mx},10 ${x2},28`} fill="none" stroke="#a855f7" strokeWidth="1.4" strokeDasharray="3,2"/>
+                            <text x={mx} y={7} textAnchor="middle" fill="#a855f7" fontSize="9" fontFamily="monospace" fontWeight="bold">{d}</text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+                  </div>
+
+                  {/* Contoh 3: Dikali 2 */}
+                  <div className="border bg-green-900/40 border-green-500/30 rounded-lg px-3 py-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-bold text-green-200 tracking-widest">3, 6, 12, 24, 48, ...</span>
+                      <span className="text-white/50 ml-2">→ Dikali 2</span>
+                    </div>
+                    <svg viewBox="0 0 248 52" className="w-full">
+                      {[3,6,12,24,48].map((n, i) => {
+                        const x = 24 + i * 48;
+                        return (
+                          <g key={i}>
+                            <rect x={x-15} y={28} width={30} height={18} rx="3" fill="rgba(22,101,52,0.3)" stroke="#4ade80" strokeWidth="0.9"/>
+                            <text x={x} y={41} textAnchor="middle" fill="#bbf7d0" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
+                          </g>
+                        );
+                      })}
+                      <text x={236} y={41} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
+                      {[0,1,2,3].map(i => {
+                        const x1 = 24 + i * 48 + 15; const x2 = 24 + (i+1)*48 - 15; const mx = (x1+x2)/2;
+                        return (
+                          <g key={i}>
+                            <path d={`M ${x1},28 Q ${mx},10 ${x2},28`} fill="none" stroke="#4ade80" strokeWidth="1.4" strokeDasharray="3,2"/>
+                            <text x={mx} y={7} textAnchor="middle" fill="#4ade80" fontSize="9" fontFamily="monospace" fontWeight="bold">×2</text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+                  </div>
+
                 </div>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
@@ -129,10 +207,10 @@ const PengertianPolaPage = () => {
                 <p className="font-body text-sm font-bold text-white">🔎 Cara Menemukan Aturan Pola</p>
                 <div className="space-y-2 text-sm font-body">
                   {[
-                    { step: "1", label: "Hitung selisih antar suku berurutan", desc: "Jika selisihnya tetap → Pola Aritmetika", color: "border-cyan-500/30 bg-cyan-900/10" },
-                    { step: "2", label: "Hitung rasio antar suku berurutan", desc: "Jika rasionya tetap → Pola Geometri", color: "border-green-500/30 bg-green-900/10" },
-                    { step: "3", label: "Cari hubungan dengan nomor suku (n)", desc: "Apakah Uₙ = n², n(n+1), 2ⁿ, dll?", color: "border-violet-500/30 bg-violet-900/10" },
-                    { step: "4", label: "Uji rumus yang ditemukan", desc: "Masukkan n = 1, 2, 3 — apakah hasilnya cocok?", color: "border-orange-500/30 bg-orange-900/10" },
+                    { step: "1", label: "Amati apakah selisih antar suku sama", desc: "Cek: 4−2=2, 6−4=2, 8−6=2 → setiap suku bertambah 2", color: "border-cyan-500/30 bg-cyan-900/10" },
+                    { step: "2", label: "Amati apakah setiap suku dikali angka yang sama", desc: "Cek: 6÷3=2, 12÷6=2, 24÷12=2 → setiap suku dikali 2", color: "border-green-500/30 bg-green-900/10" },
+                    { step: "3", label: "Lihat hubungan nilai suku dengan posisinya", desc: "Suku ke-1, ke-2, ke-3... apakah ada pola n², n(n+1), atau 2ⁿ?", color: "border-violet-500/30 bg-violet-900/10" },
+                    { step: "4", label: "Uji aturan yang kamu temukan", desc: "Cek dengan n=1, 2, 3 — hasil harus cocok dengan barisan", color: "border-orange-500/30 bg-orange-900/10" },
                   ].map(({ step, label, desc, color }) => (
                     <div key={step} className={`border ${color} rounded-lg p-2 flex gap-3`}>
                       <span className="font-display font-bold text-white bg-white/10 rounded-full w-6 h-6 flex items-center justify-center shrink-0 text-sm">{step}</span>
@@ -182,12 +260,27 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-cyan-300">Pola Bilangan Genap</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Bilangan yang habis dibagi 2.</p>
-                <div className="flex gap-1 flex-wrap mb-2">
-                  {[2,4,6,8,10].map(n => (
-                    <span key={n} className="bg-cyan-700/50 border border-cyan-400/40 text-cyan-200 text-xs font-bold px-2 py-1 rounded-lg">{n}</span>
-                  ))}
-                  <span className="text-white/40 self-center">...</span>
-                </div>
+                <svg viewBox="0 0 248 58" className="w-full mb-2">
+                  {[2,4,6,8,10].map((n, i) => {
+                    const x = 24 + i * 48;
+                    return (
+                      <g key={i}>
+                        <rect x={x-14} y={32} width={28} height={18} rx="4" fill="rgba(8,145,178,0.3)" stroke="#22d3ee" strokeWidth="1"/>
+                        <text x={x} y={45} textAnchor="middle" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
+                      </g>
+                    );
+                  })}
+                  <text x={236} y={45} fill="rgba(255,255,255,0.35)" fontSize="13" fontFamily="monospace">…</text>
+                  {[0,1,2,3].map(i => {
+                    const x1 = 24 + i * 48 + 14; const x2 = 24 + (i+1)*48 - 14; const mx = (x1+x2)/2;
+                    return (
+                      <g key={i}>
+                        <path d={`M ${x1},32 Q ${mx},12 ${x2},32`} fill="none" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="3,2"/>
+                        <text x={mx} y={9} textAnchor="middle" fill="#22d3ee" fontSize="10" fontFamily="monospace" fontWeight="bold">+2</text>
+                      </g>
+                    );
+                  })}
+                </svg>
                 <BlockMath math="U_n = 2n \quad (n = 1, 2, 3, \ldots)" />
               </div>
 
@@ -198,12 +291,27 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-orange-300">Pola Bilangan Ganjil</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Bilangan yang tidak habis dibagi 2.</p>
-                <div className="flex gap-1 flex-wrap mb-2">
-                  {[1,3,5,7,9].map(n => (
-                    <span key={n} className="bg-orange-700/50 border border-orange-400/40 text-orange-200 text-xs font-bold px-2 py-1 rounded-lg">{n}</span>
-                  ))}
-                  <span className="text-white/40 self-center">...</span>
-                </div>
+                <svg viewBox="0 0 248 58" className="w-full mb-2">
+                  {[1,3,5,7,9].map((n, i) => {
+                    const x = 24 + i * 48;
+                    return (
+                      <g key={i}>
+                        <rect x={x-14} y={32} width={28} height={18} rx="4" fill="rgba(194,65,12,0.3)" stroke="#f97316" strokeWidth="1"/>
+                        <text x={x} y={45} textAnchor="middle" fill="#fed7aa" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
+                      </g>
+                    );
+                  })}
+                  <text x={236} y={45} fill="rgba(255,255,255,0.35)" fontSize="13" fontFamily="monospace">…</text>
+                  {[0,1,2,3].map(i => {
+                    const x1 = 24 + i * 48 + 14; const x2 = 24 + (i+1)*48 - 14; const mx = (x1+x2)/2;
+                    return (
+                      <g key={i}>
+                        <path d={`M ${x1},32 Q ${mx},12 ${x2},32`} fill="none" stroke="#f97316" strokeWidth="1.5" strokeDasharray="3,2"/>
+                        <text x={mx} y={9} textAnchor="middle" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="bold">+2</text>
+                      </g>
+                    );
+                  })}
+                </svg>
                 <BlockMath math="U_n = 2n - 1 \quad (n = 1, 2, 3, \ldots)" />
               </div>
 
@@ -216,19 +324,21 @@ const PengertianPolaPage = () => {
                 <p className="font-body text-xs text-white/70 mb-2">Bilangan kuadrat — bisa disusun membentuk persegi.</p>
                 <div className="flex gap-3 flex-wrap mb-2 items-end">
                   {[
-                    { n: 1, dots: [[1]] },
-                    { n: 4, dots: [[1,1],[1,1]] },
-                    { n: 9, dots: [[1,1,1],[1,1,1],[1,1,1]] },
-                  ].map(({ n, dots }) => (
+                    { n: 1,  label: "1²", dots: [[1]] },
+                    { n: 4,  label: "2²", dots: [[1,1],[1,1]] },
+                    { n: 9,  label: "3²", dots: [[1,1,1],[1,1,1],[1,1,1]] },
+                    { n: 16, label: "4²", dots: [[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1]] },
+                  ].map(({ n, label, dots }) => (
                     <div key={n} className="text-center">
                       <div className="inline-flex flex-col gap-0.5 mb-1">
                         {dots.map((row, ri) => (
                           <div key={ri} className="flex gap-0.5">
-                            {row.map((_, ci) => <div key={ci} className="w-3 h-3 rounded-sm bg-violet-400" />)}
+                            {row.map((_, ci) => <div key={ci} className="w-2.5 h-2.5 rounded-sm bg-violet-400" />)}
                           </div>
                         ))}
                       </div>
                       <p className="text-violet-200 text-xs font-bold">{n}</p>
+                      <p className="text-violet-400 text-[10px] font-mono">{label}</p>
                     </div>
                   ))}
                   <span className="text-white/40 self-center text-lg">...</span>
@@ -245,10 +355,10 @@ const PengertianPolaPage = () => {
                 <p className="font-body text-xs text-white/70 mb-2">Titik-titik yang membentuk persegi panjang dengan sisi <InlineMath math="n" /> dan <InlineMath math="n+1" />.</p>
                 <div className="flex gap-3 flex-wrap mb-2 items-end">
                   {[
-                    { n: 2, rows: 1, cols: 2 },
-                    { n: 6, rows: 2, cols: 3 },
-                    { n: 12, rows: 3, cols: 4 },
-                  ].map(({ n, rows, cols }) => (
+                    { n: 2,  label: "1×2", rows: 1, cols: 2 },
+                    { n: 6,  label: "2×3", rows: 2, cols: 3 },
+                    { n: 12, label: "3×4", rows: 3, cols: 4 },
+                  ].map(({ n, label, rows, cols }) => (
                     <div key={n} className="text-center">
                       <div className="inline-flex flex-col gap-0.5 mb-1">
                         {Array.from({ length: rows }).map((_, ri) => (
@@ -258,6 +368,7 @@ const PengertianPolaPage = () => {
                         ))}
                       </div>
                       <p className="text-green-200 text-xs font-bold">{n}</p>
+                      <p className="text-green-400 text-[10px] font-mono">{label}</p>
                     </div>
                   ))}
                   <span className="text-white/40 self-center text-lg">...</span>
@@ -274,11 +385,11 @@ const PengertianPolaPage = () => {
                 <p className="font-body text-xs text-white/70 mb-2">Titik-titik yang disusun membentuk segitiga sama sisi.</p>
                 <div className="flex gap-4 flex-wrap mb-2 items-end">
                   {[
-                    { n: 1, rows: [1] },
-                    { n: 3, rows: [1, 2] },
-                    { n: 6, rows: [1, 2, 3] },
-                    { n: 10, rows: [1, 2, 3, 4] },
-                  ].map(({ n, rows }) => (
+                    { n: 1,  label: "1×2÷2", rows: [1] },
+                    { n: 3,  label: "2×3÷2", rows: [1, 2] },
+                    { n: 6,  label: "3×4÷2", rows: [1, 2, 3] },
+                    { n: 10, label: "4×5÷2", rows: [1, 2, 3, 4] },
+                  ].map(({ n, label, rows }) => (
                     <div key={n} className="text-center">
                       <div className="inline-flex flex-col items-center gap-0.5 mb-1">
                         {rows.map((count, ri) => (
@@ -288,6 +399,7 @@ const PengertianPolaPage = () => {
                         ))}
                       </div>
                       <p className="text-yellow-200 text-xs font-bold">{n}</p>
+                      <p className="text-yellow-500 text-[10px] font-mono">{label}</p>
                     </div>
                   ))}
                   <span className="text-white/40 self-center text-lg">...</span>
@@ -302,23 +414,28 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-pink-300">Pola Segitiga Pascal</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Setiap bilangan = jumlah dua bilangan di atasnya. Baris dimulai dan diakhiri angka 1.</p>
-                <div className="flex flex-col items-center gap-1 my-3 font-mono text-xs">
+                <div className="flex flex-col gap-1.5 my-3 font-mono text-xs">
                   {[
-                    { row: [1],                sum: 1  },
-                    { row: [1, 1],             sum: 2  },
-                    { row: [1, 2, 1],          sum: 4  },
-                    { row: [1, 3, 3, 1],       sum: 8  },
-                    { row: [1, 4, 6, 4, 1],    sum: 16 },
-                    { row: [1, 5, 10, 10, 5, 1], sum: 32 },
-                  ].map(({ row, sum }, ri) => (
-                    <div key={ri} className="flex items-center gap-2">
-                      <div className="flex gap-1">
-                        {row.map((val, ci) => (
-                          <span key={ci} className="bg-pink-700/50 border border-pink-400/40 text-pink-200 font-bold rounded px-1.5 py-0.5 min-w-[24px] text-center">{val}</span>
-                        ))}
+                    { row: [1],                  sum: 1,  expanded: "1",               power: "2⁰" },
+                    { row: [1, 1],               sum: 2,  expanded: "1+1",             power: "2¹" },
+                    { row: [1, 2, 1],            sum: 4,  expanded: "1+2+1",           power: "2²" },
+                    { row: [1, 3, 3, 1],         sum: 8,  expanded: "1+3+3+1",         power: "2³" },
+                    { row: [1, 4, 6, 4, 1],      sum: 16, expanded: "1+4+6+4+1",       power: "2⁴" },
+                    { row: [1, 5, 10, 10, 5, 1], sum: 32, expanded: "1+5+10+10+5+1",   power: "2⁵" },
+                  ].map(({ row, sum, expanded, power }, ri) => (
+                    <div key={ri} className="space-y-0.5">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <div className="flex gap-1">
+                          {row.map((val, ci) => (
+                            <span key={ci} className="bg-pink-700/50 border border-pink-400/40 text-pink-200 font-bold rounded px-1.5 py-0.5 min-w-[22px] text-center text-xs">{val}</span>
+                          ))}
+                        </div>
+                        <span className="text-white/30 text-[10px]">→</span>
+                        <span className="text-pink-100 font-bold text-xs">{sum}</span>
+                        <span className="text-white/30 text-[10px]">=</span>
+                        <span className="text-amber-300 font-mono text-xs font-bold">{power}</span>
                       </div>
-                      <span className="text-white/30 text-xs">→</span>
-                      <span className="bg-pink-500/20 border border-pink-400/50 text-pink-100 font-bold rounded px-1.5 py-0.5 min-w-[28px] text-center">{sum}</span>
+                      <p className="font-mono text-[10px] text-pink-300/55 pl-0.5">= {expanded}</p>
                     </div>
                   ))}
                 </div>
@@ -338,12 +455,42 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-teal-300">Pola Fibonacci</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Setiap suku = jumlah dua suku sebelumnya. Dimulai dari 1, 1.</p>
-                <div className="flex gap-1 flex-wrap mb-2">
+                <div className="flex gap-1 flex-wrap mb-1">
                   {[1,1,2,3,5,8,13,21,34,55].map((n, i) => (
                     <span key={i} className="bg-teal-700/50 border border-teal-400/40 text-teal-200 text-xs font-bold px-2 py-1 rounded-lg">{n}</span>
                   ))}
                   <span className="text-white/40 self-center">...</span>
                 </div>
+                {/* Busur Fibonacci: angka ke-n = jumlah dua suku sebelumnya */}
+                <svg viewBox="0 0 218 82" className="w-full mb-2">
+                  {[1,1,2,3,5,8].map((n, i) => {
+                    const x = 18 + i * 36;
+                    return (
+                      <g key={i}>
+                        <rect x={x-12} y={10} width={24} height={18} rx="4" fill="rgba(20,184,166,0.25)" stroke="#5eead4" strokeWidth="1"/>
+                        <text x={x} y={23} textAnchor="middle" fill="#ccfbf1" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
+                      </g>
+                    );
+                  })}
+                  <text x={207} y={23} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
+                  {/* Alternating-depth arcs: dari suku[i] + suku[i+1] → suku[i+2] */}
+                  {[
+                    { i: 0, label: "1+1=2", deep: true },
+                    { i: 1, label: "1+2=3", deep: false },
+                    { i: 2, label: "2+3=5", deep: true },
+                    { i: 3, label: "3+5=8", deep: false },
+                  ].map(({ i, label, deep }) => {
+                    const x1 = 18 + i * 36; const x2 = 18 + (i+2) * 36; const mx = (x1+x2)/2;
+                    const cy = deep ? 65 : 48; const ly = deep ? 78 : 55;
+                    const color = deep ? "#5eead4" : "#34d399";
+                    return (
+                      <g key={i}>
+                        <path d={`M ${x1},28 Q ${mx},${cy} ${x2},28`} fill="none" stroke={color} strokeWidth="1.4" strokeDasharray="4,2"/>
+                        <text x={mx} y={ly} textAnchor="middle" fill={color} fontSize="9" fontFamily="monospace">{label}</text>
+                      </g>
+                    );
+                  })}
+                </svg>
                 <BlockMath math="U_n = U_{n-1} + U_{n-2} \quad (U_1 = U_2 = 1)" />
                 <p className="font-body text-xs text-white/60 mt-1">🌿 Muncul di alam: kelopak bunga, cangkang nautilus, susunan biji bunga matahari!</p>
               </div>
