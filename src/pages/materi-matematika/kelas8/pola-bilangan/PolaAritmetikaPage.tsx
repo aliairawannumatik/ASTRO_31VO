@@ -568,64 +568,6 @@ const PolaAritmetikaPage = () => {
               </div>
           </div>
 
-          {/* ══ BAGIAN 3: APLIKASI ══ */}
-          <div className="bg-orange-500/10 border border-orange-500/40 rounded-xl px-4 py-2">
-            <p className="font-display text-sm font-bold text-orange-300 text-center">🌍 BAGIAN 3 — APLIKASI POLA ARITMETIKA KONTEKSTUAL</p>
-          </div>
-
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-orange-400" title="🌍 Pola Aritmetika dalam Kehidupan Nyata" />
-              <div className="px-5 pb-5 space-y-3">
-                <p className="font-body text-sm text-white/80">Pola aritmetika bukan hanya soal ujian — ia hadir di sekitar kita setiap hari!</p>
-                <div className="grid grid-cols-1 gap-2 text-xs font-body">
-                  {[
-                    { icon: "🪑", contoh: "Kursi di gedung bioskop: baris 1 ada 15 kursi, baris 2 ada 17, baris 3 ada 19..." },
-                    { icon: "💰", contoh: "Tabungan: menabung Rp10.000 di bulan 1, Rp12.000 di bulan 2, Rp14.000 di bulan 3..." },
-                    { icon: "🏗️", contoh: "Tumpukan batu bata: baris bawah 30 batu, tiap baris berkurang 3 batu ke atas" },
-                    { icon: "⏰", contoh: "Jadwal bus setiap 15 menit, denda yang bertambah tetap tiap hari, dll." },
-                  ].map(({ icon, contoh }) => (
-                    <div key={icon} className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-2 flex gap-2">
-                      <span className="text-lg shrink-0">{icon}</span>
-                      <p className="text-white/70">{contoh}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-          </div>
-
-          {/* CONTOH 1C */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="✏️ Soal Aplikasi — Gedung Bioskop" />
-              <div className="px-5 pb-5 space-y-4">
-                <Badge label="KONTEKSTUAL" color="bg-orange-700/60 text-orange-200" />
-                <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-orange-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">
-                    Sebuah gedung bioskop memiliki 12 baris kursi. Baris pertama berisi 20 kursi. Setiap baris berikutnya bertambah 4 kursi dari baris sebelumnya.<br />
-                    a) Berapa banyak kursi di baris ke-12?<br />
-                    b) Berapa total kursi di seluruh gedung?
-                  </p>
-                </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
-                  <div className="space-y-2 text-sm font-body">
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-white/70 mb-1">Barisan aritmetika: <InlineMath math="a = 20" />, <InlineMath math="b = 4" />, <InlineMath math="n = 12" /></p>
-                      <p className="text-cyan-300 font-semibold">a) Kursi baris ke-12:</p>
-                      <BlockMath math="U_{12} = 20 + (12-1) \times 4 = 20 + 44 = 64 \text{ kursi}" />
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">b) Total kursi:</p>
-                      <BlockMath math="S_{12} = \frac{12}{2}(20 + 64) = 6 \times 84 = 504 \text{ kursi}" />
-                    </div>
-                    <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ Baris ke-12: <strong>64 kursi</strong>. Total: <strong>504 kursi</strong></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola Aritmetika" />
