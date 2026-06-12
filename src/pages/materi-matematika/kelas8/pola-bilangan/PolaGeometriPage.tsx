@@ -190,14 +190,77 @@ const PolaGeometriPage = () => {
                 </div>
 
                 {/* Penurunan rumus */}
-                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-1 text-sm font-body">
-                  <p className="text-white/70 font-semibold mb-2">💡 Mengapa pangkatnya (n-1)?</p>
-                  <div className="space-y-1 text-xs text-white/70">
-                    <p><InlineMath math="U_1 = a" /> (dikali r sebanyak 0 kali)</p>
-                    <p><InlineMath math="U_2 = a \cdot r" /> (dikali r sebanyak 1 kali)</p>
-                    <p><InlineMath math="U_3 = a \cdot r^2" /> (dikali r sebanyak 2 kali)</p>
-                    <p><InlineMath math="U_4 = a \cdot r^3" /> (dikali r sebanyak 3 kali)</p>
-                    <p className="text-violet-300 font-semibold mt-2"><InlineMath math="U_n = a \cdot r^{n-1}" /> ← suku ke-n dikali r sebanyak (n-1) kali</p>
+                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-4 text-sm font-body">
+                  <p className="text-white/80 font-semibold">💡 Dari mana rumus <InlineMath math="U_n = a \cdot r^{n-1}" /> berasal?</p>
+
+                  {/* Tabel pola */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs border-collapse">
+                      <thead>
+                        <tr>
+                          <th className="border border-violet-500/30 bg-violet-900/50 px-3 py-2 text-violet-200 text-center font-bold">Suku ke-</th>
+                          <th className="border border-pink-500/30 bg-pink-900/50 px-3 py-2 text-pink-200 text-center font-bold">Nilai Suku</th>
+                          <th className="border border-green-500/30 bg-green-900/50 px-3 py-2 text-green-200 text-center font-bold">Berapa kali kali <InlineMath math="r" />?</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { n: "1", latex: "a",              kali: "0 kali", hi: false },
+                          { n: "2", latex: "a \\cdot r",     kali: "1 kali", hi: false },
+                          { n: "3", latex: "a \\cdot r^2",   kali: "2 kali", hi: false },
+                          { n: "4", latex: "a \\cdot r^3",   kali: "3 kali", hi: false },
+                          { n: "⋮",  latex: null,             kali: "⋮",      hi: false },
+                          { n: "n", latex: "a \\cdot r^{n-1}", kali: "(n−1) kali", hi: true },
+                        ].map(({ n, latex, kali, hi }, i) => (
+                          <tr key={i} className={hi ? "bg-violet-900/40" : i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
+                            <td className={`border border-white/10 px-3 py-2 text-center font-bold font-mono ${hi ? "text-violet-300" : "text-violet-300"}`}>{n}</td>
+                            <td className={`border border-white/10 px-3 py-2 text-center font-mono ${hi ? "text-yellow-300 font-bold" : "text-white/80"}`}>
+                              {latex ? <InlineMath math={latex} /> : "⋮"}
+                            </td>
+                            <td className={`border border-white/10 px-3 py-2 text-center ${hi ? "text-green-300 font-bold" : "text-white/50"}`}>{kali}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Penjelasan pola */}
+                  <div className="bg-slate-800/60 border border-violet-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-white/70 text-xs font-semibold">🔍 Perhatikan polanya:</p>
+                    <div className="space-y-1 text-xs text-white/60 leading-relaxed">
+                      <p>• Suku ke-<strong className="text-violet-300">1</strong> &nbsp;= <InlineMath math="a" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ kali <InlineMath math="r" /> sebanyak <strong className="text-green-300">0</strong> kali</p>
+                      <p>• Suku ke-<strong className="text-violet-300">2</strong> &nbsp;= <InlineMath math="a \cdot r" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ kali <InlineMath math="r" /> sebanyak <strong className="text-green-300">1</strong> kali</p>
+                      <p>• Suku ke-<strong className="text-violet-300">3</strong> &nbsp;= <InlineMath math="a \cdot r^2" /> &nbsp;&nbsp;&nbsp;→ kali <InlineMath math="r" /> sebanyak <strong className="text-green-300">2</strong> kali</p>
+                      <p>• Suku ke-<strong className="text-violet-300">4</strong> &nbsp;= <InlineMath math="a \cdot r^3" /> &nbsp;&nbsp;&nbsp;→ kali <InlineMath math="r" /> sebanyak <strong className="text-green-300">3</strong> kali</p>
+                      <p className="text-violet-300 font-semibold pt-1">
+                        • Suku ke-<strong className="text-violet-300">n</strong> = <InlineMath math="a \cdot r^{n-1}" /> → kali <InlineMath math="r" /> sebanyak <strong className="text-green-300">(n−1)</strong> kali
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Kesimpulan rumus */}
+                  <div className="bg-violet-500/10 border border-violet-500/40 rounded-lg p-3 text-center">
+                    <p className="text-xs text-white/60 mb-1">Kesimpulan — Rumus Umum Suku ke-n:</p>
+                    <BlockMath math="\boxed{U_n = a \cdot r^{n-1}}" />
+                    <p className="text-xs text-violet-300 mt-1">karena setiap suku ke-<InlineMath math="n" /> mengalikan <InlineMath math="r" /> sebanyak <InlineMath math="(n-1)" /> kali dari suku pertama <InlineMath math="a" /></p>
+                  </div>
+
+                  {/* Cara menggunakan */}
+                  <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-bold text-yellow-300">📌 Cara Menggunakan Rumus Ini</p>
+                    <p className="font-body text-xs text-white/75 leading-relaxed">
+                      Rumus <InlineMath math="U_n = a \cdot r^{n-1}" /> dapat digunakan untuk <strong className="text-yellow-200">menentukan nilai suku manapun</strong> dalam suatu barisan geometri — suku ke-5, ke-20, bahkan ke-100 — tanpa perlu mengalikan berulang-ulang, <strong className="text-violet-300">asalkan</strong> dua hal berikut diketahui:
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 mt-1">
+                      <div className="bg-violet-900/40 border border-violet-500/30 rounded-lg px-3 py-2 text-center">
+                        <p className="font-mono font-bold text-violet-300 text-sm">a</p>
+                        <p className="text-white/60 text-xs mt-0.5">Suku pertama barisan</p>
+                      </div>
+                      <div className="bg-pink-900/40 border border-pink-500/30 rounded-lg px-3 py-2 text-center">
+                        <p className="font-mono font-bold text-pink-300 text-sm">r</p>
+                        <p className="text-white/60 text-xs mt-0.5">Rasio (perbandingan) tetap antar suku</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
