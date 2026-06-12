@@ -71,7 +71,7 @@ const PolaGeometriPage = () => {
                     Pernahkah kamu membayangkan betapa cepatnya bakteri berkembang biak? Satu bakteri dapat <strong className="text-cyan-300">membelah diri menjadi 2</strong> setiap beberapa menit sekali secara konsisten. Artinya, dari 1 bakteri → menjadi 2 → lalu 4 → kemudian 8 → 16 → dan seterusnya.
                   </p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Pola ini membentuk barisan: <strong className="text-violet-300">1, 2, 4, 8, 16, 32, …</strong> — setiap suku diperoleh dengan <strong className="text-violet-300">mengalikan 2</strong> dari suku sebelumnya. Inilah contoh sempurna <strong className="text-violet-300">pola geometri</strong> dengan rasio <em>r</em> = 2.
+                    Pola ini membentuk barisan: <strong className="text-violet-300">1, 2, 4, 8, 16, 32, …</strong> — setiap suku diperoleh dengan <strong className="text-violet-300">mengalikan 2</strong> dari suku sebelumnya. Inilah contoh sempurna <strong className="text-violet-300">barisan geometri</strong> dengan rasio <em>r</em> = 2.
                   </p>
                   <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
                     <p className="font-body text-xs font-bold text-yellow-300 uppercase">⚡ Geometri vs Aritmetika</p>
@@ -175,7 +175,7 @@ const PolaGeometriPage = () => {
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-violet-300 mb-2">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">
-                    Pola geometri memiliki <strong className="text-violet-300">rasio (r) yang tetap</strong>. Rumus suku ke-n memungkinkan kita langsung menemukan suku manapun — bahkan suku ke-100 — tanpa perlu mengalikan berulang-ulang.
+                    Barisan geometri memiliki <strong className="text-violet-300">rasio (r) yang tetap</strong>. Rumus suku ke-n memungkinkan kita langsung menemukan suku manapun — bahkan suku ke-100 — tanpa perlu mengalikan berulang-ulang.
                   </p>
                 </div>
 
@@ -649,7 +649,7 @@ const PolaGeometriPage = () => {
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-yellow-200">
-                    <strong>🚀 Tip Terakhir:</strong> Pola geometri tumbuh jauh lebih cepat dari aritmetika. Dengan <InlineMath math="r = 2" />, suku ke-30 sudah mencapai <InlineMath math="a \times 2^{29}" /> yang nilainya lebih dari 500 juta kali suku pertama! Inilah mengapa "kekuatan bunga berbunga" di dunia keuangan sangat dahsyat.
+                    <strong>🚀 Tip Terakhir:</strong> Barisan geometri tumbuh jauh lebih cepat dari aritmetika. Dengan <InlineMath math="r = 2" />, suku ke-30 sudah mencapai <InlineMath math="a \times 2^{29}" /> yang nilainya lebih dari 500 juta kali suku pertama! Inilah mengapa "kekuatan bunga berbunga" di dunia keuangan sangat dahsyat.
                   </p>
                 </div>
               </div>
