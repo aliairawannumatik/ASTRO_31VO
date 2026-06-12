@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -6,6 +6,76 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, TrendingUp } from 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+
+/* ── Animated Arc Panel for a single arithmetic sequence ── */
+function ArithmeticArcPanel({
+  label, terms, a, b, arcColor, labelColor, bgClass, textClass,
+}: {
+  label: string; terms: number[]; a: number; b: number;
+  arcColor: string; labelColor: string; bgClass: string; textClass: string;
+}) {
+  const [visibleArcs, setVisibleArcs] = useState(0);
+  const count = terms.length;
+  const boxW = 44; const gap = 26;
+  const totalW = count * boxW + (count - 1) * gap;
+  const svgW = totalW + 20; const svgH = 90;
+  const boxY = svgH - 36;
+  const centers = terms.map((_, i) => 10 + i * (boxW + gap) + boxW / 2);
+  const diffs = terms.slice(1).map((v, i) => v - terms[i]);
+  const arcs = diffs.map((d, i) => {
+    const x1 = centers[i]; const x2 = centers[i + 1];
+    const cx = (x1 + x2) / 2; const arcH = 26;
+    return { x1, x2, cx, cy: boxY - arcH, label: d >= 0 ? `+${d}` : `${d}` };
+  });
+
+  useEffect(() => {
+    setVisibleArcs(0);
+    let i = 0;
+    const timer = setInterval(() => { i++; setVisibleArcs(i); if (i >= arcs.length) clearInterval(timer); }, 350);
+    return () => clearInterval(timer);
+  }, [arcs.length]);
+
+  return (
+    <div className={`rounded-xl border p-4 ${bgClass}`}>
+      <p className={`font-body text-xs font-bold uppercase tracking-wider mb-1 ${textClass}`}>{label}</p>
+      <p className="font-body text-xs text-white/60 mb-3">
+        <span className={`font-mono font-bold ${textClass}`}>a = {a}</span>
+        <span className="mx-2 text-white/30">|</span>
+        <span className={`font-mono font-bold ${textClass}`}>b = {b}</span>
+      </p>
+      <div className="overflow-x-auto">
+        <svg viewBox={`0 0 ${svgW} ${svgH}`} width="100%" style={{ maxWidth: svgW, display: "block", margin: "0 auto" }}>
+          <style>{`@keyframes arcGlow{from{stroke-dashoffset:300;stroke-dasharray:300;opacity:0}to{stroke-dashoffset:0;stroke-dasharray:300;opacity:1}}`}</style>
+          {arcs.slice(0, visibleArcs).map((arc, i) => (
+            <g key={i}>
+              <path
+                d={`M ${arc.x1} ${boxY} Q ${arc.cx} ${arc.cy} ${arc.x2} ${boxY}`}
+                fill="none" stroke={arcColor} strokeWidth="2.2"
+                style={{ filter: `drop-shadow(0 0 5px ${arcColor}aa)`, animation: "arcGlow 0.4s ease-out" }}
+              />
+              <text x={arc.cx} y={arc.cy - 5} textAnchor="middle" fontSize="11" fontWeight="bold"
+                fill={labelColor} style={{ filter: `drop-shadow(0 0 4px ${arcColor})` }}>
+                {arc.label}
+              </text>
+            </g>
+          ))}
+          {terms.map((val, i) => (
+            <g key={i}>
+              <rect x={centers[i] - boxW / 2} y={boxY} width={boxW} height={30} rx={6}
+                fill={arcColor + "22"} stroke={arcColor + "99"} strokeWidth="1.5" />
+              <text x={centers[i]} y={boxY + 20} textAnchor="middle" fontSize="13" fontWeight="bold" fill={labelColor}>
+                {val}
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
+      <p className={`text-center text-xs font-bold font-body mt-2`} style={{ color: labelColor }}>
+        Beda tetap = {b > 0 ? `+${b}` : b} (setiap suku {b > 0 ? "bertambah" : "berkurang"} {Math.abs(b)})
+      </p>
+    </div>
+  );
+}
 
 const PolaAritmetikaPage = () => {
   const navigate = useNavigate();
@@ -112,6 +182,29 @@ const PolaAritmetikaPage = () => {
                   <p className="font-body text-sm text-white/80">
                     Pola aritmetika memiliki <strong className="text-cyan-300">beda (b) yang tetap</strong> antara suku-suku berurutan. Rumus suku ke-n memungkinkan kita langsung menemukan nilai suku manapun tanpa harus menghitung satu per satu.
                   </p>
+                </div>
+
+                {/* ── Contoh animasi busur ── */}
+                <div className="space-y-3">
+                  <p className="font-body text-xs font-bold text-white/70 uppercase tracking-widest">✨ Contoh Pola Aritmetika</p>
+                  <ArithmeticArcPanel
+                    label="Barisan Naik: 1, 3, 5, 7, 9, ..."
+                    terms={[1, 3, 5, 7, 9]}
+                    a={1} b={2}
+                    arcColor="#22d3ee"
+                    labelColor="#a5f3fc"
+                    bgClass="bg-cyan-900/40 border-cyan-500/50"
+                    textClass="text-cyan-300"
+                  />
+                  <ArithmeticArcPanel
+                    label="Barisan Turun: 8, 6, 4, 2, 0, ..."
+                    terms={[8, 6, 4, 2, 0]}
+                    a={8} b={-2}
+                    arcColor="#f97316"
+                    labelColor="#fed7aa"
+                    bgClass="bg-orange-900/40 border-orange-500/50"
+                    textClass="text-orange-300"
+                  />
                 </div>
 
                 <div className="bg-slate-800/50 border border-cyan-500/30 rounded-xl p-4 text-center">
