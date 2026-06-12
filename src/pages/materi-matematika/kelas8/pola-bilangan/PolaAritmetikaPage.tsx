@@ -121,13 +121,13 @@ const PolaAritmetikaPage = () => {
             <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Barisan Aritmetika?" />
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Pernahkah kamu memperhatikan susunan kursi di bioskop atau teater? Baris pertama mungkin berisi <strong className="text-cyan-300">10 kursi</strong>, baris kedua <strong className="text-cyan-300">13 kursi</strong>, baris ketiga <strong className="text-cyan-300">16 kursi</strong>, dan seterusnya. Setiap baris bertambah <strong className="text-yellow-300">3 kursi</strong> secara konsisten! Inilah contoh nyata dari <strong className="text-cyan-300">pola aritmetika</strong> — barisan bilangan dengan <strong className="text-cyan-300">beda (selisih) yang sama</strong> antar suku berurutan. Dengan rumus pola aritmetika, pengelola gedung bisa langsung menghitung jumlah kursi di baris manapun tanpa menghitung satu per satu.
+                  Pernahkah kamu memperhatikan susunan kursi di bioskop atau teater? Baris pertama mungkin berisi <strong className="text-cyan-300">10 kursi</strong>, baris kedua <strong className="text-cyan-300">13 kursi</strong>, baris ketiga <strong className="text-cyan-300">16 kursi</strong>, dan seterusnya. Setiap baris bertambah <strong className="text-yellow-300">3 kursi</strong> secara konsisten! Inilah contoh nyata dari <strong className="text-cyan-300">barisan aritmetika</strong> — barisan bilangan dengan <strong className="text-cyan-300">beda (selisih) yang sama</strong> antar suku berurutan. Dengan rumus barisan aritmetika, pengelola gedung bisa langsung menghitung jumlah kursi di baris manapun tanpa menghitung satu per satu.
                 </p>
 
                 <figure className="flex flex-col items-center gap-2">
                   <img
                     src="/bioskop-aritmetika.png"
-                    alt="Kursi bioskop/teater membentuk pola aritmetika"
+                    alt="Kursi bioskop/teater membentuk barisan aritmetika"
                     className="w-full max-w-sm rounded-xl border border-cyan-500/30 shadow-lg object-cover"
                   />
                   <figcaption className="font-body text-xs text-white/50 italic text-center">
@@ -164,7 +164,7 @@ const PolaAritmetikaPage = () => {
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80">
-                    Pola aritmetika memiliki <strong className="text-cyan-300">beda (b) yang tetap</strong> antara suku-suku berurutan. Rumus suku ke-n memungkinkan kita langsung menemukan nilai suku manapun tanpa harus menghitung satu per satu.
+                    Barisan aritmetika memiliki <strong className="text-cyan-300">beda (b) yang tetap</strong> antara suku-suku berurutan. Rumus suku ke-n memungkinkan kita langsung menemukan nilai suku manapun tanpa harus menghitung satu per satu.
                   </p>
                 </div>
 
