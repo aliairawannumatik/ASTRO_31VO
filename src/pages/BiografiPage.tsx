@@ -192,6 +192,9 @@ const BiografiPage = () => {
                   Terima kasih yang sebesar-besarnya saya haturkan kepada <strong className="text-cyan-300">Bapak Wandri, S.Pd., Gr.</strong> — sosok rekan sekaligus guru yang dengan penuh dedikasi, kesabaran, dan keikhlasan telah membuka cakrawala pengetahuan di bidang <strong className="text-accent">Teknologi Informasi dan Komunikasi</strong>.
                 </p>
                 <p className="text-white/80 font-body text-sm leading-relaxed text-justify">
+                  Beliau adalah sosok yang dengan sabar mengajarkan <strong className="text-cyan-300">coding</strong> dari nol, sekaligus membantu dalam menyusun dan membangun <strong className="text-accent">kerangka awal aplikasi NUMATIK</strong> — fondasi yang hingga kini menjadi tulang punggung aplikasi ini.
+                </p>
+                <p className="text-white/80 font-body text-sm leading-relaxed text-justify">
                   Ilmu, wawasan, dan semangat yang Bapak bagikan menjadi fondasi nyata lahirnya aplikasi <strong className="text-primary">NUMATIK</strong> ini.
                 </p>
                 <p className="text-white/70 font-body text-sm leading-relaxed text-justify italic">
@@ -229,7 +232,6 @@ const BiografiPage = () => {
                   <p className="text-emerald-300 font-body text-[10px] font-bold tracking-widest uppercase">Keluarga · Motivator · Kolaborator</p>
                 </div>
                 <h3 className="font-display text-xl font-black text-white text-center drop-shadow-[0_0_10px_rgba(16,185,129,0.6)]">Tim MGMP Matematika</h3>
-                <p className="text-white/50 font-body text-xs mt-0.5 text-center">SMPN 28 Bandung · Kota Bandung</p>
                 <div className="w-full mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {[{ nama: "Bapak Mohamad Kosasih, S.Pd" },{ nama: "Ibu Maya Rahmawati, S.Pd" },{ nama: "Ibu Dini Haerani, S.Pd" },{ nama: "Ibu Yulia Eka Rachmayunita, S.Pd" }].map((p) => (
                     <div key={p.nama} className="flex items-center gap-2.5 bg-emerald-500/8 border border-emerald-400/20 rounded-xl px-3 py-2">
@@ -274,8 +276,8 @@ const BiografiPage = () => {
               <div className="relative z-10 space-y-5">
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
-                    { nama: "Ibu Nurti Istila Ratnasari, S.Pd", peran: "Rekan & Pendukung", foto: "/nurti-foto.jpeg" },
-                    { nama: "Bapak Aldi Muhammad Lukman, S.Pd", peran: "Rekan & Pendukung", foto: "/aldi-foto.jpeg" },
+                    { nama: "Ibu Nurti Istila Ratnasari, S.Pd", peran: "Guru IPA / Rekan & Pendukung", foto: "/nurti-foto.jpeg" },
+                    { nama: "Bapak Aldi Muhammad Lukman, S.Pd", peran: "Guru IPA / Rekan & Pendukung", foto: "/aldi-foto.jpeg" },
                   ].map((orang) => (
                     <div key={orang.nama} className="flex flex-col items-center bg-white/5 border border-white/10 rounded-2xl px-5 py-4 min-w-[140px]">
                       <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-rose-400/50 mb-2">
