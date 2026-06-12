@@ -57,6 +57,7 @@ const InteractiveCylinder3D = () => {
   };
   const onTM = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
+    e.preventDefault();
     const t = e.touches[0];
     setRotY(dragRef.current.bry + (t.clientX - dragRef.current.sx) * 0.55);
     setRotX(dragRef.current.brx + (t.clientY - dragRef.current.sy) * 0.55);
@@ -66,7 +67,7 @@ const InteractiveCylinder3D = () => {
   useEffect(() => {
     window.addEventListener("mousemove", onMM);
     window.addEventListener("mouseup", onMU);
-    window.addEventListener("touchmove", onTM, { passive: true });
+    window.addEventListener("touchmove", onTM, { passive: false });
     window.addEventListener("touchend", onTE);
     return () => {
       window.removeEventListener("mousemove", onMM);

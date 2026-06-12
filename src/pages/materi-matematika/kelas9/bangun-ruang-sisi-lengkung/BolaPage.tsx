@@ -36,6 +36,7 @@ const InteractiveSphere3D = () => {
   };
   const onTM = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
+    e.preventDefault();
     setSpinY(dragRef.current.base + (e.touches[0].clientX - dragRef.current.sx) * 0.8);
   }, [isDragging]);
   const onTE = useCallback(() => setIsDragging(false), []);
@@ -43,7 +44,7 @@ const InteractiveSphere3D = () => {
   useEffect(() => {
     window.addEventListener("mousemove", onMM);
     window.addEventListener("mouseup", onMU);
-    window.addEventListener("touchmove", onTM, { passive: true });
+    window.addEventListener("touchmove", onTM, { passive: false });
     window.addEventListener("touchend", onTE);
     return () => {
       window.removeEventListener("mousemove", onMM);
@@ -242,12 +243,12 @@ const InteractiveHalfSphere3D = () => {
   const onMM = useCallback((e: MouseEvent) => { if (!isDragging) return; setSpinY(dragRef.current.base + (e.clientX - dragRef.current.sx) * 0.8); }, [isDragging]);
   const onMU = useCallback(() => setIsDragging(false), []);
   const onTS = (e: React.TouchEvent) => { const t = e.touches[0]; setIsDragging(true); dragRef.current = { sx: t.clientX, base: spinY }; };
-  const onTM = useCallback((e: TouchEvent) => { if (!isDragging) return; setSpinY(dragRef.current.base + (e.touches[0].clientX - dragRef.current.sx) * 0.8); }, [isDragging]);
+  const onTM = useCallback((e: TouchEvent) => { if (!isDragging) return; e.preventDefault(); setSpinY(dragRef.current.base + (e.touches[0].clientX - dragRef.current.sx) * 0.8); }, [isDragging]);
   const onTE = useCallback(() => setIsDragging(false), []);
 
   useEffect(() => {
     window.addEventListener("mousemove", onMM); window.addEventListener("mouseup", onMU);
-    window.addEventListener("touchmove", onTM, { passive: true }); window.addEventListener("touchend", onTE);
+    window.addEventListener("touchmove", onTM, { passive: false }); window.addEventListener("touchend", onTE);
     return () => { window.removeEventListener("mousemove", onMM); window.removeEventListener("mouseup", onMU); window.removeEventListener("touchmove", onTM); window.removeEventListener("touchend", onTE); };
   }, [onMM, onMU, onTM, onTE]);
 
