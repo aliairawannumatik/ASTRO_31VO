@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, TrendingUp } from "lucide-react";
+import { BookOpen, Lightbulb, Target, TrendingUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -79,29 +79,16 @@ function ArithmeticArcPanel({
 
 const PolaAritmetikaPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "rumus", "contoh1a", "contoh2a", "contoh3a",
-    "jumlah", "contoh1b", "contoh2b", "contoh3b",
-    "aplikasi", "contoh1c", "rangkuman",
-  ]);
 
-  const toggleSection = (section: string) => {
-    playPopSound();
-    setExpandedSections((prev) =>
-      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
-    );
-  };
-
-  const SectionHeader = ({ id, icon, iconColor, title }: {
-    id: string; icon: React.ReactNode; iconColor?: string; title: string;
+  const SectionHeader = ({ icon, iconColor, title }: {
+    icon: React.ReactNode; iconColor?: string; title: string;
   }) => (
-    <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   const Badge = ({ label, color }: { label: string; color: string }) => (
@@ -131,8 +118,7 @@ const PolaAritmetikaPage = () => {
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Pola Aritmetika?" />
-            {expandedSections.includes("intro") && (
+            <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Pola Aritmetika?" />
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernahkah kamu memperhatikan susunan kursi di bioskop atau teater? Baris pertama mungkin berisi <strong className="text-cyan-300">10 kursi</strong>, baris kedua <strong className="text-cyan-300">13 kursi</strong>, baris ketiga <strong className="text-cyan-300">16 kursi</strong>, dan seterusnya. Setiap baris bertambah <strong className="text-yellow-300">3 kursi</strong> secara konsisten! Inilah contoh nyata dari <strong className="text-cyan-300">pola aritmetika</strong> — barisan bilangan dengan <strong className="text-cyan-300">beda (selisih) yang sama</strong> antar suku berurutan. Dengan rumus pola aritmetika, pengelola gedung bisa langsung menghitung jumlah kursi di baris manapun tanpa menghitung satu per satu.
@@ -169,13 +155,11 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rumus" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Rumus Suku Ke-n" />
-            {expandedSections.includes("rumus") && (
+            <SectionHeader icon={<TrendingUp className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Rumus Suku Ke-n" />
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -295,13 +279,11 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 1A */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1a" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Suku ke-n)" />
-            {expandedSections.includes("contoh1a") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Suku ke-n)" />
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -321,13 +303,11 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 2A */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2a" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang (Suku ke-n)" />
-            {expandedSections.includes("contoh2a") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang (Suku ke-n)" />
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -357,46 +337,48 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 3A */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3a" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit (Suku ke-n)" />
-            {expandedSections.includes("contoh3a") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit (Suku ke-n)" />
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">Tiga bilangan membentuk barisan aritmetika. Jumlah ketiganya adalah 33 dan hasil kali ketiganya adalah 935. Tentukan ketiga bilangan tersebut!</p>
+                  <p className="font-body text-sm text-white/85">
+                    Sebuah bioskop memiliki susunan kursi seperti barisan aritmetika. Diketahui baris ke-10 berisi <strong className="text-yellow-300">36 kursi</strong>, dan setiap baris bertambah <strong className="text-cyan-300">2 kursi</strong> dari baris sebelumnya.<br /><br />
+                    a) Berapa banyak kursi di baris pertama?<br />
+                    b) Berapa banyak kursi di baris ke-25?
+                  </p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Misalkan tiga suku aritmetika:</p>
-                      <p className="text-white/70">Trick: tulis sebagai <InlineMath math="(a-b),\ a,\ (a+b)" /> agar penjumlahannya elegan.</p>
-                      <BlockMath math="(a-b) + a + (a+b) = 33 \Rightarrow 3a = 33 \Rightarrow a = 11" />
+                      <p className="text-cyan-300 font-semibold mb-2">Identifikasi — apa yang diketahui:</p>
+                      <p className="text-white/70">Beda setiap baris: <InlineMath math="b = 2" /></p>
+                      <p className="text-white/70">Baris ke-10 berisi 36 kursi: <InlineMath math="U_{10} = 36" /></p>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Gunakan hasil kali:</p>
-                      <BlockMath math="(a-b) \cdot a \cdot (a+b) = 935" />
-                      <BlockMath math="(11-b) \cdot 11 \cdot (11+b) = 935" />
-                      <BlockMath math="11(121 - b^2) = 935" />
-                      <BlockMath math="121 - b^2 = 85 \Rightarrow b^2 = 36 \Rightarrow b = 6" />
+                      <p className="text-violet-300 font-semibold mb-1">a) Cari suku pertama <InlineMath math="a" />:</p>
+                      <BlockMath math="U_{10} = a + (10-1) \times b" />
+                      <BlockMath math="36 = a + 9 \times 2" />
+                      <BlockMath math="36 = a + 18 \Rightarrow a = 18" />
+                      <p className="text-white/70 text-xs mt-1">Jadi baris pertama berisi <strong className="text-yellow-300">18 kursi</strong>.</p>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-green-300 font-semibold mb-1">Langkah 3 — Ketiga bilangan:</p>
-                      <BlockMath math="(11-6),\ 11,\ (11+6) \Rightarrow 5,\ 11,\ 17" />
+                      <p className="text-green-300 font-semibold mb-1">b) Hitung baris ke-25 <InlineMath math="U_{25}" />:</p>
+                      <BlockMath math="U_{25} = 18 + (25-1) \times 2" />
+                      <BlockMath math="U_{25} = 18 + 24 \times 2 = 18 + 48 = 66" />
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ Tiga bilangan: <strong>5, 11, 17</strong></p>
-                      <p className="text-white/60 text-xs mt-1">Cek: 5+11+17 = 33 ✓, 5×11×17 = 935 ✓</p>
+                      <p className="font-body text-sm font-bold text-cyan-300">✅ Baris pertama: <strong>18 kursi</strong>. Baris ke-25: <strong>66 kursi</strong></p>
+                      <p className="text-white/60 text-xs mt-1">Cek: <InlineMath math="U_{10} = 18 + 9 \times 2 = 36" /> ✓</p>
                     </div>
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ══ BAGIAN 2: JUMLAH KE-N ══ */}
@@ -405,8 +387,7 @@ const PolaAritmetikaPage = () => {
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="jumlah" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-green-400" title="📘 Rumus Jumlah Suku" />
-            {expandedSections.includes("jumlah") && (
+            <SectionHeader icon={<TrendingUp className="w-5 h-5" />} iconColor="text-green-400" title="📘 Rumus Jumlah Suku" />
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-green-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -425,13 +406,11 @@ const PolaAritmetikaPage = () => {
                   <p className="text-white/70 text-xs">Carl Friedrich Gauss (umur 9 tahun) diminta guru menjumlahkan 1 sampai 100. Ia cepat menjawab 5.050! Rahasianya: pasangkan suku pertama (1) dengan terakhir (100) = 101, ada 50 pasang, jadi 50 × 101 = 5.050. Inilah ide di balik rumus <InlineMath math="S_n" />!</p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 1B */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1b" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Jumlah Suku)" />
-            {expandedSections.includes("contoh1b") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Jumlah Suku)" />
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -452,13 +431,11 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 2B */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2b" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang (Jumlah Suku)" />
-            {expandedSections.includes("contoh2b") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang (Jumlah Suku)" />
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -487,13 +464,11 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 3B */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3b" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit (Jumlah Suku)" />
-            {expandedSections.includes("contoh3b") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit (Jumlah Suku)" />
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -519,7 +494,6 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ══ BAGIAN 3: APLIKASI ══ */}
@@ -528,8 +502,7 @@ const PolaAritmetikaPage = () => {
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="aplikasi" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-orange-400" title="🌍 Pola Aritmetika dalam Kehidupan Nyata" />
-            {expandedSections.includes("aplikasi") && (
+            <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-orange-400" title="🌍 Pola Aritmetika dalam Kehidupan Nyata" />
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/80">Pola aritmetika bukan hanya soal ujian — ia hadir di sekitar kita setiap hari!</p>
                 <div className="grid grid-cols-1 gap-2 text-xs font-body">
@@ -546,13 +519,11 @@ const PolaAritmetikaPage = () => {
                   ))}
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 1C */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1c" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="✏️ Soal Aplikasi — Gedung Bioskop" />
-            {expandedSections.includes("contoh1c") && (
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="✏️ Soal Aplikasi — Gedung Bioskop" />
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="KONTEKSTUAL" color="bg-orange-700/60 text-orange-200" />
                 <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4">
@@ -581,13 +552,11 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola Aritmetika" />
-            {expandedSections.includes("rangkuman") && (
+            <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola Aritmetika" />
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-slate-800/50 border border-cyan-500/20 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="grid grid-cols-1 gap-3">
@@ -606,7 +575,6 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
         </div>
