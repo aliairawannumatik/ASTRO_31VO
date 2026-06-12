@@ -25,7 +25,7 @@ const PerbandinganCampuranPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          PERBANDINGAN CAMPURAN
+          PERBANDINGAN CAMPURAN (PENGAYAAN)
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">
           Kelas 7 - Perbandingan - Materi Matematika

@@ -5,7 +5,7 @@ const subtopics = [
   { label: "PERBANDINGAN BERTINGKAT", path: "/materi-matematika/kelas-7/perbandingan/bertingkat", icon: "📶" },
   { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/materi-matematika/kelas-7/perbandingan/senilai", icon: "🔄" },
   { label: "SKALA", path: "/materi-matematika/kelas-7/perbandingan/skala", icon: "🗺️" },
-  { label: "PERBANDINGAN CAMPURAN", path: "/materi-matematika/kelas-7/perbandingan/campuran", icon: "🔀" },
+  { label: "PERBANDINGAN CAMPURAN (PENGAYAAN)", path: "/materi-matematika/kelas-7/perbandingan/campuran", icon: "🔀" },
 ];
 
 const PerbandinganPage = () => (
