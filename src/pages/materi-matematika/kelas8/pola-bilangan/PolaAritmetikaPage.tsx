@@ -395,6 +395,78 @@ const PolaAritmetikaPage = () => {
                     Jumlah <InlineMath math="n" /> suku pertama barisan aritmetika (dilambangkan <InlineMath math="S_n" />) dapat dihitung menggunakan dua rumus yang ekuivalen — pilih yang paling efisien sesuai informasi yang diketahui.
                   </p>
                 </div>
+                {/* ── Penurunan Rumus Sn ── */}
+                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-4 text-sm font-body">
+                  <p className="text-white/80 font-semibold">💡 Dari mana rumus <InlineMath math="S_n" /> berasal?</p>
+
+                  {/* Langkah 1 */}
+                  <div className="bg-slate-800/60 border border-green-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-green-300 font-semibold text-xs uppercase tracking-wide">Langkah 1 — Tulis barisan maju dan mundur</p>
+                    <p className="text-white/70 text-xs leading-relaxed">
+                      Misalkan <InlineMath math="S_n" /> adalah jumlah <InlineMath math="n" /> suku pertama. Kita tulis dua kali — maju dan mundur:
+                    </p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs border-collapse mt-1">
+                        <tbody>
+                          <tr className="bg-cyan-900/30">
+                            <td className="border border-white/10 px-2 py-1.5 text-cyan-300 font-bold text-center whitespace-nowrap"><InlineMath math="S_n" /> (maju)</td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="= a" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="+ (a+b)" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="+ \cdots" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="+ U_n" /></td>
+                          </tr>
+                          <tr className="bg-orange-900/30">
+                            <td className="border border-white/10 px-2 py-1.5 text-orange-300 font-bold text-center whitespace-nowrap"><InlineMath math="S_n" /> (mundur)</td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="= U_n" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="+ (U_n - b)" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="+ \cdots" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="+ a" /></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Langkah 2 */}
+                  <div className="bg-slate-800/60 border border-violet-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-violet-300 font-semibold text-xs uppercase tracking-wide">Langkah 2 — Jumlahkan baris maju + mundur</p>
+                    <p className="text-white/70 text-xs">Setiap kolom berpasangan menghasilkan nilai yang sama: <InlineMath math="a + U_n" /></p>
+                    <div className="bg-violet-900/30 border border-violet-500/30 rounded-lg p-2 text-center">
+                      <BlockMath math="2S_n = \underbrace{(a + U_n) + (a + U_n) + \cdots + (a + U_n)}_{n \text{ pasang}}" />
+                      <BlockMath math="2S_n = n \times (a + U_n)" />
+                    </div>
+                  </div>
+
+                  {/* Langkah 3 */}
+                  <div className="bg-slate-800/60 border border-yellow-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-yellow-300 font-semibold text-xs uppercase tracking-wide">Langkah 3 — Bagi kedua ruas dengan 2</p>
+                    <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2 text-center">
+                      <BlockMath math="\boxed{S_n = \frac{n}{2}(a + U_n)}" />
+                    </div>
+                    <p className="text-white/60 text-xs">Karena <InlineMath math="U_n = a + (n-1)b" />, kita substitusikan:</p>
+                    <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2 text-center">
+                      <BlockMath math="\boxed{S_n = \frac{n}{2}\left[2a + (n-1)b\right]}" />
+                    </div>
+                  </div>
+
+                  {/* Visual: Pasangan Gauss */}
+                  <div className="bg-slate-800/40 border border-white/10 rounded-lg p-3 space-y-2">
+                    <p className="text-yellow-300 font-semibold text-xs">🧠 Ide Gauss — Lihat pasangannya!</p>
+                    <p className="text-white/60 text-xs">Contoh: jumlah 1 + 2 + 3 + 4 + 5 (a=1, b=1, n=5, Uₙ=5)</p>
+                    <div className="flex items-center justify-center gap-1 flex-wrap mt-1">
+                      {[1,2,3,4,5].map((v, i) => (
+                        <div key={i} className="flex flex-col items-center">
+                          <span className="text-xs text-white/40">{i < 2 ? "↕" : i === 2 ? "" : "↕"}</span>
+                          <span className={`font-mono font-bold text-sm px-2 py-1 rounded ${i === 0 || i === 4 ? "bg-cyan-700/60 text-cyan-200" : i === 1 || i === 3 ? "bg-violet-700/60 text-violet-200" : "bg-slate-700/60 text-white/70"}`}>{v}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-white/50 text-xs text-center mt-1">
+                      1+5 = <strong className="text-cyan-300">6</strong>, &nbsp; 2+4 = <strong className="text-violet-300">6</strong>, &nbsp; 3 di tengah → <InlineMath math="2S_5 = 5 \times 6 = 30 \Rightarrow S_5 = 15" />
+                    </p>
+                  </div>
+                </div>
+
                 <div className="bg-slate-800/50 border border-green-500/30 rounded-xl p-4 space-y-3 text-center">
                   <p className="font-body text-xs text-white/60">Rumus 1 (jika diketahui a, b, n):</p>
                   <BlockMath math="\boxed{S_n = \frac{n}{2}\left[2a + (n-1)b\right]}" />
