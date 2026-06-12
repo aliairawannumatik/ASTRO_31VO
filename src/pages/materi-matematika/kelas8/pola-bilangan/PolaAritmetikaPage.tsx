@@ -272,6 +272,27 @@ const PolaAritmetikaPage = () => {
                     <BlockMath math="\boxed{U_n = a + (n - 1) \cdot b}" />
                     <p className="text-xs text-cyan-300 mt-1">karena setiap suku ke-<InlineMath math="n" /> menambahkan <InlineMath math="b" /> sebanyak <InlineMath math="(n-1)" /> kali dari suku pertama <InlineMath math="a" /></p>
                   </div>
+
+                  {/* Deskripsi penggunaan rumus */}
+                  <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 space-y-2">
+                    <p className="font-body text-xs font-bold text-yellow-300">📌 Cara Menggunakan Rumus Ini</p>
+                    <p className="font-body text-xs text-white/75 leading-relaxed">
+                      Rumus <InlineMath math="U_n = a + (n-1) \cdot b" /> dapat digunakan untuk <strong className="text-yellow-200">menentukan nilai suku manapun</strong> dalam suatu barisan aritmetika — suku ke-5, ke-20, bahkan ke-100 — tanpa perlu menghitung satu per satu, <strong className="text-cyan-300">asalkan</strong> dua hal berikut diketahui:
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 mt-1">
+                      <div className="bg-cyan-900/40 border border-cyan-500/30 rounded-lg px-3 py-2 text-center">
+                        <p className="font-mono font-bold text-cyan-300 text-sm">a</p>
+                        <p className="text-white/60 text-xs mt-0.5">Suku pertama barisan</p>
+                      </div>
+                      <div className="bg-green-900/40 border border-green-500/30 rounded-lg px-3 py-2 text-center">
+                        <p className="font-mono font-bold text-green-300 text-sm">b</p>
+                        <p className="text-white/60 text-xs mt-0.5">Beda (selisih tetap) antar suku</p>
+                      </div>
+                    </div>
+                    <p className="font-body text-xs text-white/55 leading-relaxed pt-1">
+                      Jika <InlineMath math="a" /> dan <InlineMath math="b" /> sudah diketahui, cukup substitusikan nilai <InlineMath math="n" /> (nomor suku yang dicari) ke dalam rumus, dan kamu langsung mendapatkan jawabannya! ✨
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
