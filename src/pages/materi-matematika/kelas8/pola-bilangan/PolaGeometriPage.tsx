@@ -622,69 +622,6 @@ const PolaGeometriPage = () => {
             )}
           </div>
 
-          {/* ══ BAGIAN 3: APLIKASI ══ */}
-          <div className="bg-orange-500/10 border border-orange-500/40 rounded-xl px-4 py-2">
-            <p className="font-display text-sm font-bold text-orange-300 text-center">🌍 BAGIAN 3 — APLIKASI POLA GEOMETRI KONTEKSTUAL</p>
-          </div>
-
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="aplikasi" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-orange-400" title="🌍 Pola Geometri dalam Kehidupan Nyata" />
-            {expandedSections.includes("aplikasi") && (
-              <div className="px-5 pb-5 space-y-3">
-                <p className="font-body text-sm text-white/80">Geometri adalah pola pertumbuhan alam — ia ada di mana-mana!</p>
-                <div className="grid grid-cols-1 gap-2 text-xs font-body">
-                  {[
-                    { icon: "🦠", contoh: "Pertumbuhan bakteri: 1 sel membelah jadi 2, lalu 4, 8, 16... setiap jam" },
-                    { icon: "💹", contoh: "Bunga majemuk: uang Rp1.000.000 dengan bunga 10%/tahun → 1.000.000 × 1,1ⁿ" },
-                    { icon: "☢️", contoh: "Peluruhan radioaktif: massa bahan berkurang separuh setiap periode waktu tertentu" },
-                    { icon: "🖨️", contoh: "Kertas dilipat 42 kali ketebalannya akan melewati jarak Bumi-Bulan!" },
-                  ].map(({ icon, contoh }) => (
-                    <div key={icon} className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-2 flex gap-2">
-                      <span className="text-lg shrink-0">{icon}</span>
-                      <p className="text-white/70">{contoh}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* CONTOH 1C */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1c" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="✏️ Soal Aplikasi — Pertumbuhan Bakteri" />
-            {expandedSections.includes("contoh1c") && (
-              <div className="px-5 pb-5 space-y-4">
-                <Badge label="KONTEKSTUAL" color="bg-orange-700/60 text-orange-200" />
-                <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-orange-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">
-                    Sebuah koloni bakteri berjumlah 500 sel pada pukul 08.00. Setiap jam, jumlahnya berlipat tiga.<br />
-                    a) Berapa jumlah bakteri pada pukul 14.00 (6 jam kemudian)?<br />
-                    b) Berapa total bakteri yang telah ada sejak pukul 08.00 hingga 14.00 (termasuk jam 08.00)?
-                  </p>
-                </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
-                  <div className="space-y-2 text-sm font-body">
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-white/70">Barisan geometri: <InlineMath math="a = 500" />, <InlineMath math="r = 3" /></p>
-                      <p className="text-white/60 text-xs mt-1">Pukul 08.00 = suku ke-1, pukul 14.00 = suku ke-7 (6 jam kemudian)</p>
-                      <p className="text-cyan-300 font-semibold mt-2">a) Jumlah bakteri pukul 14.00:</p>
-                      <BlockMath math="U_7 = 500 \times 3^{7-1} = 500 \times 3^6 = 500 \times 729 = 364.500 \text{ sel}" />
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">b) Total bakteri 7 jam (suku 1 s.d. 7):</p>
-                      <BlockMath math="S_7 = \frac{500(3^7 - 1)}{3 - 1} = \frac{500(2187 - 1)}{2} = \frac{500 \times 2186}{2} = 546.500 \text{ sel}" />
-                    </div>
-                    <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ Pukul 14.00: <strong>364.500 sel</strong>. Total: <strong>546.500 sel</strong></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola Geometri" />
