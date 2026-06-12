@@ -20,7 +20,7 @@ const subtopics = [
     desc: "Pola, barisan bilangan, suku ke-n, bertingkat, Segitiga Pascal, bilangan segitiga, persegi, kubik",
   },
   {
-    label: "POLA ARITMETIKA",
+    label: "BARISAN DAN DERET ARITMETIKA",
     path: "/latihan-mandiri/kelas-8/pola-bilangan/pola-aritmetika",
     soal: 13,
     icon: TrendingUp,
@@ -34,7 +34,7 @@ const subtopics = [
     desc: "Un = a+(n-1)b, jumlah deret, aplikasi kontekstual",
   },
   {
-    label: "POLA GEOMETRI",
+    label: "BARISAN DAN DERET GEOMETRI",
     path: "/latihan-mandiri/kelas-8/pola-bilangan/pola-geometri",
     soal: 12,
     icon: Zap,

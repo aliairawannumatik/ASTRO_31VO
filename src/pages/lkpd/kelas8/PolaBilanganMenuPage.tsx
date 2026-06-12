@@ -3,8 +3,8 @@ import MateriTopicPage from "@/components/MateriTopicPage";
 const subtopics = [
   { label: "PENGERTIAN POLA DAN BARISAN BILANGAN", path: "/lkpd/kelas-8/pola-bilangan/lkpd", icon: "📝" },
   { label: "POLA-POLA KHUSUS", path: "/lkpd/kelas-8/pola-bilangan/lkpd", icon: "⭐" },
-  { label: "POLA ARITMETIKA", path: "/lkpd/kelas-8/pola-bilangan/lkpd", icon: "➕" },
-  { label: "POLA GEOMETRI", path: "/lkpd/kelas-8/pola-bilangan/lkpd", icon: "📐" },
+  { label: "BARISAN DAN DERET ARITMETIKA", path: "/lkpd/kelas-8/pola-bilangan/lkpd", icon: "➕" },
+  { label: "BARISAN DAN DERET GEOMETRI", path: "/lkpd/kelas-8/pola-bilangan/lkpd", icon: "📐" },
 ];
 
 const PolaBilanganMenuPage = () => (

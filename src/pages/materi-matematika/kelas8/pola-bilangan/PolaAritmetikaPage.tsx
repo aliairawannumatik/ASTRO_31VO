@@ -102,7 +102,7 @@ const PolaAritmetikaPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          POLA ARITMETIKA
+          BARISAN DAN DERET ARITMETIKA
         </h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Barisan dengan Selisih Tetap — Paling Sering Muncul di Ujian!
@@ -113,12 +113,12 @@ const PolaAritmetikaPage = () => {
 
           {/* ══ BAGIAN 1: SUKU KE-N ══ */}
           <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-xl px-4 py-2">
-            <p className="font-display text-sm font-bold text-cyan-300 text-center">📐 BAGIAN 1 — SUKU KE-N POLA ARITMETIKA</p>
+            <p className="font-display text-sm font-bold text-cyan-300 text-center">📐 BAGIAN 1 — SUKU KE-N BARISAN ARITMETIKA</p>
           </div>
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Pola Aritmetika?" />
+            <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Barisan Aritmetika?" />
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernahkah kamu memperhatikan susunan kursi di bioskop atau teater? Baris pertama mungkin berisi <strong className="text-cyan-300">10 kursi</strong>, baris kedua <strong className="text-cyan-300">13 kursi</strong>, baris ketiga <strong className="text-cyan-300">16 kursi</strong>, dan seterusnya. Setiap baris bertambah <strong className="text-yellow-300">3 kursi</strong> secara konsisten! Inilah contoh nyata dari <strong className="text-cyan-300">pola aritmetika</strong> — barisan bilangan dengan <strong className="text-cyan-300">beda (selisih) yang sama</strong> antar suku berurutan. Dengan rumus pola aritmetika, pengelola gedung bisa langsung menghitung jumlah kursi di baris manapun tanpa menghitung satu per satu.
@@ -170,7 +170,7 @@ const PolaAritmetikaPage = () => {
 
                 {/* ── Contoh animasi busur ── */}
                 <div className="space-y-3">
-                  <p className="font-body text-xs font-bold text-white/70 uppercase tracking-widest">✨ Contoh Pola Aritmetika</p>
+                  <p className="font-body text-xs font-bold text-white/70 uppercase tracking-widest">✨ Contoh Barisan Aritmetika</p>
                   <ArithmeticArcPanel
                     label="Barisan Naik: 1, 3, 5, 7, 9, ..."
                     terms={[1, 3, 5, 7, 9]}
@@ -383,7 +383,7 @@ const PolaAritmetikaPage = () => {
 
           {/* ══ BAGIAN 2: JUMLAH KE-N ══ */}
           <div className="bg-green-500/10 border border-green-500/40 rounded-xl px-4 py-2">
-            <p className="font-display text-sm font-bold text-green-300 text-center">∑ BAGIAN 2 — JUMLAH HINGGA SUKU KE-N POLA ARITMETIKA</p>
+            <p className="font-display text-sm font-bold text-green-300 text-center">∑ BAGIAN 2 — DERET ARITMETIKA</p>
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
@@ -606,7 +606,7 @@ const PolaAritmetikaPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola Aritmetika" />
+            <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Barisan dan Deret Aritmetika" />
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-slate-800/50 border border-cyan-500/20 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="grid grid-cols-1 gap-3">

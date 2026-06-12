@@ -45,7 +45,7 @@ const PolaGeometriPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          POLA GEOMETRI
+          BARISAN DAN DERET GEOMETRI
         </h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Barisan dengan Rasio Tetap — Pertumbuhan Dahsyat!
@@ -56,12 +56,12 @@ const PolaGeometriPage = () => {
 
           {/* ══ BAGIAN 1: SUKU KE-N ══ */}
           <div className="bg-violet-500/10 border border-violet-500/40 rounded-xl px-4 py-2">
-            <p className="font-display text-sm font-bold text-violet-300 text-center">📐 BAGIAN 1 — SUKU KE-N POLA GEOMETRI</p>
+            <p className="font-display text-sm font-bold text-violet-300 text-center">📐 BAGIAN 1 — SUKU KE-N BARISAN GEOMETRI</p>
           </div>
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Pola Geometri?" />
+            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Barisan Geometri?" />
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 {/* BAKTERI */}
@@ -377,7 +377,7 @@ const PolaGeometriPage = () => {
 
           {/* ══ BAGIAN 2: JUMLAH KE-N ══ */}
           <div className="bg-green-500/10 border border-green-500/40 rounded-xl px-4 py-2">
-            <p className="font-display text-sm font-bold text-green-300 text-center">∑ BAGIAN 2 — JUMLAH HINGGA SUKU KE-N POLA GEOMETRI</p>
+            <p className="font-display text-sm font-bold text-green-300 text-center">∑ BAGIAN 2 — DERET GEOMETRI</p>
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
@@ -624,7 +624,7 @@ const PolaGeometriPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola Geometri" />
+            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Barisan dan Deret Geometri" />
             {expandedSections.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-slate-800/50 border border-violet-500/20 rounded-xl p-4 space-y-3 text-sm font-body">

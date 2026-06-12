@@ -144,7 +144,7 @@ const PolaGeometriPage = () => {
             <Zap className="w-7 h-7 text-orange-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-orange-300 text-center mb-1" style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
-            POLA GEOMETRI
+            BARISAN DAN DERET GEOMETRI
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">

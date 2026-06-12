@@ -67,6 +67,6 @@ const POLA_GEOMETRI: BaseQ[] = [
 export const POLA_BILANGAN: SubmaterialEntryK8[] = [
   { slug: "pengertian-pola", label: "PENGERTIAN POLA & BARISAN BILANGAN", emoji: "🔢", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(PENGERTIAN_POLA) },
   { slug: "pola-khusus", label: "POLA-POLA KHUSUS", emoji: "✨", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(POLA_KHUSUS) },
-  { slug: "pola-aritmetika", label: "POLA ARITMETIKA", emoji: "➕", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(POLA_ARITMETIKA) },
-  { slug: "pola-geometri", label: "POLA GEOMETRI", emoji: "✖️", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(POLA_GEOMETRI) },
+  { slug: "pola-aritmetika", label: "BARISAN DAN DERET ARITMETIKA", emoji: "➕", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(POLA_ARITMETIKA) },
+  { slug: "pola-geometri", label: "BARISAN DAN DERET GEOMETRI", emoji: "✖️", parentSlug: PARENT_SLUG, parentLabel: PARENT_LABEL, questions: expandPool(POLA_GEOMETRI) },
 ];

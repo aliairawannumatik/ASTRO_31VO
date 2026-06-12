@@ -31,7 +31,7 @@ const questions = [
 const PolaGeometriGamePage = () => (
   <MeteorShootingGame
     questions={questions}
-    topicLabel="POLA GEOMETRI"
+    topicLabel="BARISAN DAN DERET GEOMETRI"
     backPath="/math-game-arena/kelas-8/pola-bilangan"
     backLabel="Kembali ke Pola Bilangan"
   />
