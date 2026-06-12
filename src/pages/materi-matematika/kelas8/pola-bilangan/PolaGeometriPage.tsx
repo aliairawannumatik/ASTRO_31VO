@@ -65,6 +65,37 @@ const PolaGeometriPage = () => {
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 {/* BAKTERI */}
+                <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-1">🦠 Fenomena Nyata: Pembelahan Bakteri</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Pernahkah kamu membayangkan betapa cepatnya bakteri berkembang biak? Satu bakteri dapat <strong className="text-cyan-300">membelah diri menjadi 2</strong> setiap beberapa menit sekali secara konsisten. Artinya, dari 1 bakteri → menjadi 2 → lalu 4 → kemudian 8 → 16 → dan seterusnya.
+                  </p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Pola ini membentuk barisan: <strong className="text-violet-300">1, 2, 4, 8, 16, 32, …</strong> — setiap suku diperoleh dengan <strong className="text-violet-300">mengalikan 2</strong> dari suku sebelumnya. Inilah contoh sempurna <strong className="text-violet-300">pola geometri</strong> dengan rasio <em>r</em> = 2.
+                  </p>
+                  <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
+                    <p className="font-body text-xs font-bold text-yellow-300 uppercase">⚡ Geometri vs Aritmetika</p>
+                    <div className="grid grid-cols-2 gap-2 text-xs font-body">
+                      <div className="bg-cyan-900/40 border border-cyan-500/30 rounded-lg p-2 text-center">
+                        <p className="text-cyan-300 font-bold mb-1">Aritmetika</p>
+                        <p className="text-white/70">Setiap suku <strong className="text-cyan-200">ditambah</strong> beda (b) tetap</p>
+                        <p className="text-white/50 mt-1">2, 5, 8, 11, … <span className="text-cyan-400">(+3)</span></p>
+                      </div>
+                      <div className="bg-violet-900/40 border border-violet-500/30 rounded-lg p-2 text-center">
+                        <p className="text-violet-300 font-bold mb-1">Geometri</p>
+                        <p className="text-white/70">Setiap suku <strong className="text-violet-200">dikalikan</strong> rasio (r) tetap</p>
+                        <p className="text-white/50 mt-1">1, 2, 4, 8, … <span className="text-violet-400">(×2)</span></p>
+                      </div>
+                    </div>
+                    <p className="font-body text-xs text-white/60 text-center pt-1">
+                      Pembelahan bakteri → setiap menit <strong className="text-violet-300">dikalikan 2</strong>, bukan ditambah 2 → itulah mengapa jumlahnya tumbuh <strong className="text-yellow-300">jauh lebih cepat!</strong>
+                    </p>
+                  </div>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Dengan rumus barisan geometri, kita bisa <strong className="text-yellow-300">memperkirakan</strong> jumlah bakteri kapan saja tanpa menghitung satu per satu. Setelah 10 kali pembelahan → <strong className="text-yellow-300">2¹⁰ = 1.024 bakteri</strong>. Setelah 20 kali pembelahan → lebih dari <strong className="text-yellow-300">satu juta!</strong>
+                  </p>
+                </div>
+
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl overflow-hidden">
                   <img
                     src="/bakteri-pola-geometri.png"
@@ -84,19 +115,6 @@ const PolaGeometriPage = () => {
                       </a>
                     </p>
                   </div>
-                </div>
-
-                <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-1">🦠 Fenomena Nyata: Pembelahan Bakteri</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Pernahkah kamu membayangkan betapa cepatnya bakteri berkembang biak? Satu bakteri dapat <strong className="text-cyan-300">membelah diri menjadi 2</strong> setiap beberapa menit sekali secara konsisten. Artinya, dari 1 bakteri → menjadi 2 → lalu 4 → kemudian 8 → 16 → dan seterusnya.
-                  </p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Pola ini membentuk barisan: <strong className="text-violet-300">1, 2, 4, 8, 16, 32, …</strong> — setiap suku diperoleh dengan <strong className="text-violet-300">mengalikan 2</strong> dari suku sebelumnya. Inilah contoh sempurna <strong className="text-violet-300">pola geometri</strong> dengan rasio <em>r</em> = 2.
-                  </p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Dengan rumus barisan geometri, kita bisa <strong className="text-yellow-300">memperkirakan</strong> jumlah bakteri kapan saja tanpa harus menghitung satu per satu. Misalnya, setelah 10 kali pembelahan, jumlah bakteri sudah mencapai <strong className="text-yellow-300">2¹⁰ = 1.024 bakteri</strong>! Setelah 20 kali pembelahan? Lebih dari satu juta!
-                  </p>
                 </div>
 
                 <div className="bg-slate-800/60 border border-violet-500/20 rounded-xl p-4">
