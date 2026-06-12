@@ -64,10 +64,6 @@ const PolaGeometriPage = () => {
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Pola Geometri?" />
             {expandedSections.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Bayangkan sehelai kertas dilipat dua, lalu dilipat dua lagi, lagi, dan lagi. Ketebalan kertas berlipat ganda setiap kali dilipat — itu pola geometri! <strong className="text-violet-300">Pola geometri</strong> adalah barisan bilangan dengan <strong className="text-violet-300">rasio (perbandingan) tetap</strong> antara suku-suku berurutan. Berbeda dengan aritmetika (menambah), geometri <em>mengalikan!</em>
-                </p>
-
                 {/* BAKTERI */}
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl overflow-hidden">
                   <img
