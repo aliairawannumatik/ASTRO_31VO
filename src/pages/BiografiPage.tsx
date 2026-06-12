@@ -46,6 +46,7 @@ const BiografiPage = () => {
               <p className="text-primary font-display text-xs mb-1">Follow My Medsos :</p>
               <div className="space-y-2 mt-2">
                 <p className="font-body text-sm text-white">Instagram : @irawansutiawan.one</p>
+                <p className="font-body text-sm text-white">Instagram : @numatik_official</p>
                 <p className="font-body text-sm text-white">Youtube : @Pojok_Matematika</p>
                 <p className="font-body text-sm text-white">Tiktok : Pojok_Matematika</p>
               </div>
