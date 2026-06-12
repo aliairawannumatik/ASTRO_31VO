@@ -545,23 +545,59 @@ const PolaAritmetikaPage = () => {
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">Jumlah suku ke-3 hingga ke-7 dari barisan aritmetika 2, 5, 8, 11, ... adalah berapa?</p>
+                  <p className="font-body text-sm text-white/85">Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya. Jika ada 15 tumpukan batu bata (dari atas sampai bawah), berapa banyak batu bata seluruhnya?</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-white/70"><InlineMath math="a = 2" />, <InlineMath math="b = 3" /></p>
-                      <p className="text-cyan-300 font-semibold mt-2">Strategi: Jumlah suku ke-3 s.d. ke-7 = <InlineMath math="S_7 - S_2" /></p>
-                      <BlockMath math="S_7 = \frac{7}{2}[2(2) + 6(3)] = \frac{7}{2}[4 + 18] = \frac{7}{2}(22) = 77" />
-                      <BlockMath math="S_2 = \frac{2}{2}[2(2) + 1(3)] = 1 \times 7 = 7" />
-                      <BlockMath math="\text{Jumlah} = S_7 - S_2 = 77 - 7 = 70" />
+                      <p className="text-white/70 mb-2">Identifikasi barisan: <InlineMath math="8, 10, 12, \ldots" /></p>
+                      <p className="text-white/70"><InlineMath math="a = 8" /> (batu bata tumpukan pertama/paling atas), <InlineMath math="b = 2" /> (beda), <InlineMath math="n = 15" /></p>
+                      <p className="text-cyan-300 font-semibold mt-2">Gunakan rumus jumlah <InlineMath math="n" /> suku pertama:</p>
+                      <BlockMath math="S_n = \frac{n}{2}[2a + (n-1)b]" />
+                      <BlockMath math="S_{15} = \frac{15}{2}[2(8) + (15-1)(2)]" />
+                      <BlockMath math="S_{15} = \frac{15}{2}[16 + 28] = \frac{15}{2} \times 44 = 15 \times 22 = 330" />
                     </div>
                     <div className="bg-slate-800/40 border border-white/10 rounded-lg p-2 text-xs font-body">
-                      <p className="text-white/60">Verifikasi: <InlineMath math="U_3 + U_4 + U_5 + U_6 + U_7 = 8 + 11 + 14 + 17 + 20 = 70" /> ✓</p>
+                      <p className="text-white/60">Cek: suku ke-15 = <InlineMath math="U_{15} = 8 + 14 \times 2 = 36" />. Cara cepat: <InlineMath math="S_{15} = \frac{15}{2}(8 + 36) = \frac{15}{2}(44) = 330" /> ✓</p>
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ Jumlah suku ke-3 hingga ke-7 = <strong>70</strong></p>
+                      <p className="font-body text-sm font-bold text-cyan-300">✅ Total batu bata seluruhnya = <strong>330 buah</strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          {/* CONTOH 4 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="✏️ Contoh 4 — Sulit (Jumlah Suku)" />
+              <div className="px-5 pb-5 space-y-4">
+                <Badge label="SULIT" color="bg-purple-700/60 text-purple-200" />
+                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm text-white/85">Jumlah bilangan kelipatan 4 yang terletak di antara 200 dan 400 adalah…</p>
+                </div>
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
+                  <div className="space-y-2 text-sm font-body">
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-white/70 mb-2">Kelipatan 4 di antara 200 dan 400 (tidak termasuk 200 dan 400):</p>
+                      <p className="text-white/70 mb-2"><InlineMath math="204, 208, 212, \ldots, 396" /></p>
+                      <p className="text-white/70">Maka: <InlineMath math="a = 204" />, <InlineMath math="b = 4" />, <InlineMath math="U_n = 396" /></p>
+                      <p className="text-cyan-300 font-semibold mt-2">Langkah 1 — Cari banyaknya suku (<InlineMath math="n" />):</p>
+                      <BlockMath math="U_n = a + (n-1)b" />
+                      <BlockMath math="396 = 204 + (n-1) \times 4" />
+                      <BlockMath math="192 = (n-1) \times 4 \implies n - 1 = 48 \implies n = 49" />
+                      <p className="text-cyan-300 font-semibold mt-2">Langkah 2 — Hitung jumlah 49 suku:</p>
+                      <BlockMath math="S_{49} = \frac{n}{2}(a + U_n) = \frac{49}{2}(204 + 396)" />
+                      <BlockMath math="S_{49} = \frac{49}{2} \times 600 = 49 \times 300 = 14.700" />
+                    </div>
+                    <div className="bg-slate-800/40 border border-white/10 rounded-lg p-2 text-xs font-body">
+                      <p className="text-white/60">Catatan: ada 49 bilangan kelipatan 4 di antara 200 dan 400, dari 204 hingga 396.</p>
+                    </div>
+                    <div className="bg-purple-500/10 border border-purple-500/40 rounded-lg p-3">
+                      <p className="font-body text-sm font-bold text-purple-300">✅ Jumlah kelipatan 4 antara 200 dan 400 = <strong>14.700</strong></p>
                     </div>
                   </div>
                 </div>
