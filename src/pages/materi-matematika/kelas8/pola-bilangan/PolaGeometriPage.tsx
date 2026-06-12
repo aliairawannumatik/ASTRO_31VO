@@ -342,33 +342,32 @@ const PolaGeometriPage = () => {
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
-                  <p className="font-body text-sm text-white/85">Tiga bilangan membentuk barisan geometri. Jumlah ketiganya adalah 14 dan hasil kali ketiganya adalah 64. Tentukan ketiga bilangan tersebut!</p>
+                  <p className="font-body text-sm text-white/85">Sebuah bakteri membelah diri menjadi 2 setiap 15 menit secara konsisten. Jika mula-mula terdapat <strong>3 bakteri</strong>, tentukan banyak bakteri setelah <strong>2 jam</strong>!</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Misalkan tiga suku geometri:</p>
-                      <p className="text-white/70">Trick: tulis sebagai <InlineMath math="\frac{a}{r},\ a,\ ar" /> agar perkaliannya elegan.</p>
-                      <BlockMath math="\frac{a}{r} \cdot a \cdot ar = a^3 = 64 \Rightarrow a = 4" />
+                      <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Ubah satuan waktu & tentukan suku ke-berapa:</p>
+                      <p className="text-white/70 text-sm">2 jam = 120 menit. Pembelahan terjadi setiap 15 menit, maka:</p>
+                      <BlockMath math="\text{Banyak pembelahan} = \frac{120}{15} = 8 \text{ kali}" />
+                      <p className="text-white/70 text-sm mt-1">Kondisi mula-mula (sebelum pembelahan) = suku ke-<strong className="text-violet-300">1</strong>, sehingga setelah 8 kali pembelahan = suku ke-<strong className="text-violet-300">9</strong>.</p>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Gunakan penjumlahan:</p>
-                      <BlockMath math="\frac{a}{r} + a + ar = 14" />
-                      <BlockMath math="\frac{4}{r} + 4 + 4r = 14" />
-                      <BlockMath math="\frac{4}{r} + 4r = 10" />
-                      <p className="text-white/60 text-xs">Kalikan dengan r:</p>
-                      <BlockMath math="4 + 4r^2 = 10r \Rightarrow 4r^2 - 10r + 4 = 0 \Rightarrow 2r^2 - 5r + 2 = 0" />
-                      <BlockMath math="(2r - 1)(r - 2) = 0 \Rightarrow r = \frac{1}{2} \text{ atau } r = 2" />
+                      <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Identifikasi barisan geometri:</p>
+                      <p className="text-white/70"><InlineMath math="a = 3" /> (jumlah bakteri mula-mula), <InlineMath math="r = 2" /> (setiap interval membelah jadi 2), <InlineMath math="n = 9" /></p>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-green-300 font-semibold mb-1">Langkah 3 — Ketiga bilangan:</p>
-                      <p className="text-white/70 text-xs">Jika <InlineMath math="r = 2" />: <InlineMath math="\frac{4}{2},\ 4,\ 4 \times 2 = 2,\ 4,\ 8" /></p>
-                      <p className="text-white/70 text-xs">Jika <InlineMath math="r = \frac{1}{2}" />: <InlineMath math="8,\ 4,\ 2" /> (urutan terbalik)</p>
+                      <p className="text-green-300 font-semibold mb-1">Langkah 3 — Terapkan rumus:</p>
+                      <BlockMath math="U_n = a \cdot r^{n-1}" />
+                      <BlockMath math="U_9 = 3 \cdot 2^{9-1} = 3 \cdot 2^8 = 3 \cdot 256 = 768" />
+                    </div>
+                    <div className="bg-slate-800/40 border border-white/10 rounded-lg p-2 text-xs font-body">
+                      <p className="text-white/55">Verifikasi pola: 3 → 6 → 12 → 24 → 48 → 96 → 192 → 384 → <strong className="text-yellow-300">768</strong> ✓</p>
+                      <p className="text-white/55 mt-1">(mula-mula → +15' → +30' → +45' → +60' → +75' → +90' → +105' → +120')</p>
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-cyan-300">✅ Ketiga bilangan: <strong>2, 4, 8</strong> (atau 8, 4, 2)</p>
-                      <p className="text-white/60 text-xs mt-1">Cek: 2+4+8 = 14 ✓, 2×4×8 = 64 ✓</p>
+                      <p className="font-body text-sm font-bold text-cyan-300">✅ Banyak bakteri setelah 2 jam = <strong>768 bakteri</strong></p>
                     </div>
                   </div>
                 </div>
