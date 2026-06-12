@@ -217,15 +217,60 @@ const PolaAritmetikaPage = () => {
                   </div>
                 </div>
 
-                {/* Visualisasi penurunan rumus */}
-                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-1 text-sm font-body">
-                  <p className="text-white/70 font-semibold mb-2">💡 Mengapa rumusnya seperti itu?</p>
-                  <div className="space-y-1 text-xs text-white/70">
-                    <p><InlineMath math="U_1 = a" /></p>
-                    <p><InlineMath math="U_2 = a + b" /></p>
-                    <p><InlineMath math="U_3 = a + b + b = a + 2b" /></p>
-                    <p><InlineMath math="U_4 = a + 3b" /></p>
-                    <p className="text-cyan-300 font-semibold mt-2"><InlineMath math="U_n = a + (n-1)b" /> ← pola: suku ke-n menambah b sebanyak (n-1) kali</p>
+                {/* Penurunan rumus visual */}
+                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-4 text-sm font-body">
+                  <p className="text-white/80 font-semibold">💡 Dari mana rumus <InlineMath math="U_n = a + (n-1)b" /> berasal?</p>
+
+                  {/* Tabel pola */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs border-collapse">
+                      <thead>
+                        <tr>
+                          <th className="border border-violet-500/30 bg-violet-900/50 px-3 py-2 text-violet-200 text-center font-bold">Suku ke-</th>
+                          <th className="border border-cyan-500/30 bg-cyan-900/50 px-3 py-2 text-cyan-200 text-center font-bold">Nilai Suku</th>
+                          <th className="border border-green-500/30 bg-green-900/50 px-3 py-2 text-green-200 text-center font-bold">Berapa kali tambah <InlineMath math="b" />?</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { n: "1", val: "a",          latex: "a",              kali: "0 kali", hi: false },
+                          { n: "2", val: "a + b",      latex: "a + b",          kali: "1 kali", hi: false },
+                          { n: "3", val: "a + 2b",     latex: "a + 2b",         kali: "2 kali", hi: false },
+                          { n: "4", val: "a + 3b",     latex: "a + 3b",         kali: "3 kali", hi: false },
+                          { n: "⋮",  val: "⋮",          latex: null,             kali: "⋮",      hi: false },
+                          { n: "n", val: "a + (n−1)b", latex: "a + (n-1)b",    kali: "(n−1) kali", hi: true },
+                        ].map(({ n, val, latex, kali, hi }, i) => (
+                          <tr key={i} className={hi ? "bg-cyan-900/40" : i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
+                            <td className={`border border-white/10 px-3 py-2 text-center font-bold font-mono ${hi ? "text-cyan-300" : "text-violet-300"}`}>{n}</td>
+                            <td className={`border border-white/10 px-3 py-2 text-center font-mono ${hi ? "text-yellow-300 font-bold" : "text-white/80"}`}>
+                              {latex ? <InlineMath math={latex} /> : val}
+                            </td>
+                            <td className={`border border-white/10 px-3 py-2 text-center ${hi ? "text-green-300 font-bold" : "text-white/50"}`}>{kali}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Penjelasan pola */}
+                  <div className="bg-slate-800/60 border border-cyan-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-white/70 text-xs font-semibold">🔍 Perhatikan polanya:</p>
+                    <div className="space-y-1 text-xs text-white/60 leading-relaxed">
+                      <p>• Suku ke-<strong className="text-violet-300">1</strong> &nbsp;= <InlineMath math="a" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ tambah <InlineMath math="b" /> sebanyak <strong className="text-green-300">0</strong> kali</p>
+                      <p>• Suku ke-<strong className="text-violet-300">2</strong> &nbsp;= <InlineMath math="a + b" /> &nbsp;&nbsp;→ tambah <InlineMath math="b" /> sebanyak <strong className="text-green-300">1</strong> kali</p>
+                      <p>• Suku ke-<strong className="text-violet-300">3</strong> &nbsp;= <InlineMath math="a + 2b" /> → tambah <InlineMath math="b" /> sebanyak <strong className="text-green-300">2</strong> kali</p>
+                      <p>• Suku ke-<strong className="text-violet-300">4</strong> &nbsp;= <InlineMath math="a + 3b" /> → tambah <InlineMath math="b" /> sebanyak <strong className="text-green-300">3</strong> kali</p>
+                      <p className="text-cyan-300 font-semibold pt-1">
+                        • Suku ke-<strong className="text-violet-300">n</strong> = <InlineMath math="a + (n-1)b" /> → tambah <InlineMath math="b" /> sebanyak <strong className="text-green-300">(n−1)</strong> kali
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Kesimpulan rumus */}
+                  <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3 text-center">
+                    <p className="text-xs text-white/60 mb-1">Kesimpulan — Rumus Umum Suku ke-n:</p>
+                    <BlockMath math="\boxed{U_n = a + (n - 1) \cdot b}" />
+                    <p className="text-xs text-cyan-300 mt-1">karena setiap suku ke-<InlineMath math="n" /> menambahkan <InlineMath math="b" /> sebanyak <InlineMath math="(n-1)" /> kali dari suku pertama <InlineMath math="a" /></p>
                   </div>
                 </div>
               </div>
