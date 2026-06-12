@@ -399,6 +399,108 @@ const PolaGeometriPage = () => {
                   </div>
                   <p className="text-white/50 text-xs">Gunakan bentuk pertama jika <InlineMath math="r > 1" />, bentuk kedua jika <InlineMath math="r < 1" /> (agar penyebut positif)</p>
                 </div>
+
+                {/* ── Penurunan Rumus Sn Geometri ── */}
+                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-4 text-sm font-body">
+                  <p className="text-white/80 font-semibold">💡 Dari mana rumus <InlineMath math="S_n" /> geometri berasal?</p>
+
+                  {/* Langkah 1 */}
+                  <div className="bg-slate-800/60 border border-green-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-green-300 font-semibold text-xs uppercase tracking-wide">Langkah 1 — Tulis Sₙ secara lengkap</p>
+                    <p className="text-white/70 text-xs leading-relaxed">
+                      Misalkan <InlineMath math="S_n" /> adalah jumlah <InlineMath math="n" /> suku pertama barisan geometri dengan suku pertama <InlineMath math="a" /> dan rasio <InlineMath math="r" />:
+                    </p>
+                    <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-2 text-center">
+                      <BlockMath math="S_n = a + ar + ar^2 + ar^3 + \cdots + ar^{n-1} \quad \cdots (1)" />
+                    </div>
+                  </div>
+
+                  {/* Langkah 2 */}
+                  <div className="bg-slate-800/60 border border-violet-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-violet-300 font-semibold text-xs uppercase tracking-wide">Langkah 2 — Kalikan persamaan (1) dengan <InlineMath math="r" /></p>
+                    <p className="text-white/70 text-xs leading-relaxed">
+                      Kalikan kedua ruas dengan <InlineMath math="r" />, sehingga setiap suku bergeser satu pangkat:
+                    </p>
+                    <div className="bg-violet-900/20 border border-violet-500/20 rounded-lg p-2 text-center">
+                      <BlockMath math="r \cdot S_n = ar + ar^2 + ar^3 + \cdots + ar^{n-1} + ar^n \quad \cdots (2)" />
+                    </div>
+                  </div>
+
+                  {/* Langkah 3 */}
+                  <div className="bg-slate-800/60 border border-yellow-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-yellow-300 font-semibold text-xs uppercase tracking-wide">Langkah 3 — Kurangi persamaan (1) − (2)</p>
+                    <p className="text-white/70 text-xs leading-relaxed">
+                      Hampir semua suku di tengah saling menghilangkan — yang tersisa hanya suku pertama dan suku terakhir:
+                    </p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs border-collapse mt-1">
+                        <tbody>
+                          <tr className="bg-green-900/30">
+                            <td className="border border-white/10 px-2 py-1.5 text-green-300 font-bold text-center whitespace-nowrap"><InlineMath math="S_n" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="= a" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/50"><InlineMath math="+ ar" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/50"><InlineMath math="+ \cdots" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/50"><InlineMath math="+ ar^{n-1}" /></td>
+                          </tr>
+                          <tr className="bg-violet-900/30">
+                            <td className="border border-white/10 px-2 py-1.5 text-violet-300 font-bold text-center whitespace-nowrap"><InlineMath math="r \cdot S_n" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/50"><InlineMath math="= ar" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/50"><InlineMath math="+ \cdots" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/50"><InlineMath math="+ ar^{n-1}" /></td>
+                            <td className="border border-white/10 px-2 py-1.5 text-center text-white/80"><InlineMath math="+ ar^n" /></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="text-white/60 text-xs mt-1">Suku-suku yang dicoret saling menghilangkan, sehingga:</p>
+                    <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2 text-center">
+                      <BlockMath math="S_n - r \cdot S_n = a - ar^n" />
+                      <BlockMath math="S_n(1 - r) = a(1 - r^n)" />
+                    </div>
+                  </div>
+
+                  {/* Langkah 4 */}
+                  <div className="bg-slate-800/60 border border-cyan-500/20 rounded-lg p-3 space-y-2">
+                    <p className="text-cyan-300 font-semibold text-xs uppercase tracking-wide">Langkah 4 — Bagi kedua ruas dengan <InlineMath math="(1 - r)" /></p>
+                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-2 text-center">
+                      <BlockMath math="\boxed{S_n = \frac{a(1 - r^n)}{1 - r}}" />
+                    </div>
+                    <p className="text-white/60 text-xs">Untuk <InlineMath math="r > 1" />, kalikan pembilang dan penyebut dengan <InlineMath math="-1" /> agar penyebut positif:</p>
+                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-2 text-center">
+                      <BlockMath math="\boxed{S_n = \frac{a(r^n - 1)}{r - 1}}" />
+                    </div>
+                  </div>
+
+                  {/* Kasus khusus r = 1 */}
+                  <div className="bg-slate-800/40 border border-white/10 rounded-lg p-3 space-y-1">
+                    <p className="text-yellow-300 font-semibold text-xs">⚠️ Kasus Khusus: <InlineMath math="r = 1" /></p>
+                    <p className="text-white/60 text-xs leading-relaxed">
+                      Jika <InlineMath math="r = 1" />, semua suku bernilai sama (<InlineMath math="a, a, a, \ldots" />), sehingga penyebut <InlineMath math="(1-r) = 0" /> — rumus di atas tidak berlaku. Gantinya:
+                    </p>
+                    <div className="bg-yellow-900/20 border border-yellow-500/20 rounded-lg p-2 text-center">
+                      <BlockMath math="S_n = n \cdot a \quad (r = 1)" />
+                    </div>
+                  </div>
+
+                  {/* Ringkasan pilih rumus */}
+                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-bold text-green-300 mb-2">📌 Pilih rumus yang tepat:</p>
+                    <div className="grid grid-cols-1 gap-2 text-xs font-body">
+                      <div className="bg-slate-800/60 rounded-lg px-3 py-2 flex justify-between items-center">
+                        <span className="text-white/70">Jika <InlineMath math="r > 1" /></span>
+                        <span className="text-green-300 font-mono"><InlineMath math="S_n = \dfrac{a(r^n-1)}{r-1}" /></span>
+                      </div>
+                      <div className="bg-slate-800/60 rounded-lg px-3 py-2 flex justify-between items-center">
+                        <span className="text-white/70">Jika <InlineMath math="r < 1" /> (<InlineMath math="r \neq 0" />)</span>
+                        <span className="text-cyan-300 font-mono"><InlineMath math="S_n = \dfrac{a(1-r^n)}{1-r}" /></span>
+                      </div>
+                      <div className="bg-slate-800/60 rounded-lg px-3 py-2 flex justify-between items-center">
+                        <span className="text-white/70">Jika <InlineMath math="r = 1" /></span>
+                        <span className="text-yellow-300 font-mono"><InlineMath math="S_n = n \cdot a" /></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>
