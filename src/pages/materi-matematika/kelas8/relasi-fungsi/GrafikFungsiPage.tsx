@@ -43,8 +43,15 @@ const GrafikFungsiPage = () => {
   );
 
   const PilihanGanda = ({
-    soal, opsi, kunci, pembahasan, autoShow = false
-  }: { soal: string; opsi: { kode: string; teks: string }[]; kunci: string; pembahasan: string; autoShow?: boolean }) => {
+    soal, opsi, kunci, pembahasan, pembahasanSteps, autoShow = false
+  }: {
+    soal: string;
+    opsi: { kode: string; teks: string }[];
+    kunci: string;
+    pembahasan?: string;
+    pembahasanSteps?: string[];
+    autoShow?: boolean;
+  }) => {
     const dipilih = autoShow ? kunci : jawaban[soal];
     const sudahJawab = autoShow || !!dipilih;
     return (
@@ -70,8 +77,20 @@ const GrafikFungsiPage = () => {
           );
         })}
         {sudahJawab && (
-          <div className="rounded-lg p-3 text-xs font-body mt-1 bg-green-900/20 border border-green-500/40 text-green-200">
-            <strong>💡 Pembahasan:</strong> {pembahasan}
+          <div className="rounded-lg p-3 text-xs font-body mt-1 bg-green-900/20 border border-green-500/40 text-green-200 space-y-1">
+            <p className="font-bold text-green-300 mb-2">💡 Pembahasan:</p>
+            {pembahasanSteps ? (
+              <ol className="space-y-1.5 list-none">
+                {pembahasanSteps.map((step, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="shrink-0 w-5 h-5 rounded-full bg-green-700/60 text-green-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
+                    <span className="leading-relaxed">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p>{pembahasan}</p>
+            )}
           </div>
         )}
         {!sudahJawab && (
@@ -303,7 +322,13 @@ const GrafikFungsiPage = () => {
                     { kode: "D", teks: "Rp 1.750,00" },
                   ]}
                   kunci="A"
-                  pembahasan="Dari grafik, fungsinya adalah f(x) = 0,05x (untung = 5% dari modal). Dengan modal x = 25 (ribu), maka untung = 0,05 × 25 = 1,25 (ribu) = Rp 1.250,00. Bisa juga dibaca langsung dari grafik: tarik garis vertikal dari x=25 ke garis grafik, lalu tarik horizontal ke sumbu-y → hasilnya 1,25 (ribu Rp)."
+                  pembahasanSteps={[
+                    "Cari nilai x = 25 pada sumbu-x grafik.",
+                    "Tarik garis vertikal ke atas dari x = 25 hingga menyentuh garis grafik.",
+                    "Dari titik pertemuan itu, tarik garis horizontal ke kiri menuju sumbu-y.",
+                    "Nilai yang terbaca pada sumbu-y = 1,25 (ribuan Rp).",
+                    "Jadi, untung = 1,25 × Rp 1.000 = Rp 1.250,00 ✓",
+                  ]}
                 />
               </div>
             )}
@@ -399,7 +424,16 @@ const GrafikFungsiPage = () => {
                     { kode: "D", teks: "Rp 25.000,00" },
                   ]}
                   kunci="C"
-                  pembahasan="Dari grafik, pola tarif mengikuti fungsi f(x) = 3x + 7 (dalam ribuan rupiah), dengan 7 = tarif dasar dan 3 = tarif per km. Untuk jarak x = 5 km: f(5) = 3 × 5 + 7 = 15 + 7 = 22 (ribu) = Rp 22.000,00. Nilai ini juga dapat dibaca dari grafik dengan menarik garis dari x = 5 ke atas sampai mengenai garis, lalu ke kiri menuju sumbu-y."
+                  pembahasanSteps={[
+                    "Baca dua titik dari grafik: (2, 13) dan (4, 19).",
+                    "Misalkan rumus fungsi: f(x) = ax + b.",
+                    "Substitusi titik (2, 13): 2a + b = 13  … (1)",
+                    "Substitusi titik (4, 19): 4a + b = 19  … (2)",
+                    "Kurangi (1) dari (2): 2a = 6  →  a = 3.",
+                    "Substitusi a = 3 ke (1): 2(3) + b = 13  →  b = 7.",
+                    "Rumus fungsi: f(x) = 3x + 7.",
+                    "Hitung: f(5) = 3(5) + 7 = 15 + 7 = 22 (ribuan) = Rp 22.000,00 ✓",
+                  ]}
                 />
               </div>
             )}
@@ -475,7 +509,15 @@ const GrafikFungsiPage = () => {
                     { kode: "D", teks: "f(x) = 4x – 2" },
                   ]}
                   kunci="C"
-                  pembahasan="Dari grafik, garis memotong sumbu-y di titik (0, −1) sehingga konstanta c = −1. Garis juga melalui titik (1, 2). Gradien = (2 − (−1)) / (1 − 0) = 3/1 = 3. Jadi rumus fungsinya f(x) = 3x − 1. Verifikasi: f(1) = 3(1) − 1 = 2 ✓."
+                  pembahasanSteps={[
+                    "Misalkan rumus fungsi: f(x) = ax + b.",
+                    "Dari grafik, garis memotong sumbu-y di titik (0, −1)  →  f(0) = −1.",
+                    "Substitusi ke rumus: a(0) + b = −1  →  b = −1.",
+                    "Dari grafik, garis melalui titik (1, 2)  →  f(1) = 2.",
+                    "Substitusi ke rumus: a(1) + (−1) = 2  →  a = 3.",
+                    "Jadi rumus fungsinya: f(x) = 3x − 1.",
+                    "Verifikasi: f(1) = 3(1) − 1 = 2 ✓",
+                  ]}
                 />
                 {/* Cara menentukan rumus */}
                 <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-4 space-y-3">
