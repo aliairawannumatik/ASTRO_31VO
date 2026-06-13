@@ -141,67 +141,90 @@ const GrafikFungsiPage = () => {
                     </div>
                   </div>
                 </div>
-                {/* Illustrasi cara baca grafik */}
+                {/* Ilustrasi 1: f(x) = x + 2 */}
                 <div className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-cyan-300 mb-3 text-center">Ilustrasi: Grafik f(x) = 2x + 1</p>
-                  <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto">
-                    {/* Grid */}
+                  <p className="font-body text-xs font-bold text-cyan-300 mb-1 text-center">Ilustrasi 1: Grafik f(x) = x + 2</p>
+                  <p className="font-body text-xs text-white/40 mb-3 text-center">Dari x = 3 → f(3) = 3 + 2 = 5</p>
+                  <svg viewBox="0 0 260 200" className="w-full max-w-xs mx-auto">
+                    {/* Grid: x 0-4 (45px/unit), y 0-6 (25.83px/unit) */}
+                    {[1,2,3,4].map(v => (
+                      <line key={"gx"+v} x1={40+v*45} y1={20} x2={40+v*45} y2={175} stroke="#1e293b" strokeWidth="1" />
+                    ))}
                     {[1,2,3,4,5,6].map(v => (
-                      <g key={v}>
-                        <line x1={40 + v*30} y1={20} x2={40 + v*30} y2={175} stroke="#1e293b" strokeWidth="1" />
-                        <line x1={40} y1={175 - v*25} x2={220} y2={175 - v*25} stroke="#1e293b" strokeWidth="1" />
-                      </g>
+                      <line key={"gy"+v} x1={40} y1={175-v*25.83} x2={225} y2={175-v*25.83} stroke="#1e293b" strokeWidth="1" />
                     ))}
                     {/* Axes */}
-                    <line x1={40} y1={20} x2={40} y2={180} stroke="#64748b" strokeWidth="1.5" />
-                    <line x1={35} y1={175} x2={225} y2={175} stroke="#64748b" strokeWidth="1.5" />
-                    {/* Axis labels */}
-                    <text x={228} y={179} fill="#94a3b8" fontSize="9">x</text>
-                    <text x={44} y={16} fill="#94a3b8" fontSize="9">y</text>
-                    {/* Tick labels x */}
-                    {[1,2,3,4,5].map(v => (
-                      <text key={v} x={40+v*30-3} y={188} fill="#475569" fontSize="8">{v}</text>
+                    <line x1={40} y1={15} x2={40} y2={180} stroke="#475569" strokeWidth="1.5" />
+                    <line x1={35} y1={175} x2={230} y2={175} stroke="#475569" strokeWidth="1.5" />
+                    <polygon points="230,172 230,178 237,175" fill="#475569" />
+                    <polygon points="37,15 43,15 40,8" fill="#475569" />
+                    <text x={240} y={179} fill="#94a3b8" fontSize="9">x</text>
+                    <text x={44} y={13} fill="#94a3b8" fontSize="9">y</text>
+                    {/* X ticks: 1,2,3,4 */}
+                    {[1,2,3,4].map(v => (
+                      <text key={v} x={40+v*45-3} y={189} fill="#64748b" fontSize="8">{v}</text>
                     ))}
-                    {/* Tick labels y */}
+                    <text x={33} y={189} fill="#64748b" fontSize="8">0</text>
+                    {/* Y ticks: 1–6 */}
                     {[1,2,3,4,5,6].map(v => (
-                      <text key={v} x={24} y={175-v*25+3} fill="#475569" fontSize="8">{v*2-1 === 1 ? "1" : v*2+1-2}</text>
+                      <text key={v} x={28} y={175-v*25.83+3} fill="#64748b" fontSize="8">{v}</text>
                     ))}
-                    {/* Origin label */}
-                    <text x={29} y={188} fill="#475569" fontSize="8">0</text>
-                    {/* Line f(x)=2x+1: at x=0,y=1; x=5,y=11 but clip to view */}
-                    {/* f(0)=1 → (40, 175-25=150); f(3)=7 → (130, 175-3*25=100); f(4)=9 → (160, 85+... */}
-                    {/* Scale: 30px per x unit, 25px per y unit offset from 0 */}
-                    {/* y=0 at 175, y=1 at 150, etc. But f(0)=1 so start at (40, 150) */}
-                    <line
-                      x1={40} y1={175 - 1*25}
-                      x2={40 + 5*30} y2={175 - 11*25 + 10*25}
-                      stroke="#22d3ee" strokeWidth="2"
-                    />
-                    {/* Better: f(x)=2x+1, scale x:30, y:18; y=0 at 175 */}
-                    {/* Actually let me recalculate: range 0-6 on y (0-6), 0-5 on x */}
-                    {/* y pixel = 175 - y_val * (175-20)/6 = 175 - y_val*25.8 */}
-                    {/* x pixel = 40 + x_val * (220-40)/5 = 40 + x_val*36 */}
-                    {/* f(0)=1: (40, 175-25.8=149); f(1)=3: (76, 175-77.5=97.5); f(2)=5: (112,175-129=46) -- too high */}
-                    {/* Let me use simpler scale: x 0-6, y 0-14 */}
-                    {/* Use plotted: (0,1),(1,3),(2,5),(3,7) -- just show the line */}
-                    {/* Dashed guide lines for reading */}
-                    {/* Show: x=2, f(2)=5 */}
-                    {/* x=2: pixel x = 40+2*36=112; y=5: pixel y = 175-5*25.8 */}
-                    {/* Let me just hardcode nice values */}
-                    {/* Scale: x 0-4 range, y 0-9 range; plot area 40-220 x, 20-175 y */}
-                    {/* px per x unit: 180/4=45; py per y unit: 155/9=17.2 */}
-                    {/* f(x)=2x+1: (0,1) → (40, 175-17.2=157.8); (4,9) → (220, 175-9*17.2=20.2) */}
-                    <line x1={40} y1={158} x2={220} y2={20} stroke="#22d3ee" strokeWidth="2.5" />
-                    {/* Guide for x=2, f(2)=5 */}
-                    {/* x=2: px=40+2*45=130; y=5: py=175-5*17.2=89 */}
-                    <line x1={130} y1={175} x2={130} y2={89} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="4,3" />
-                    <line x1={40} y1={89} x2={130} y2={89} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="4,3" />
-                    <circle cx={130} cy={89} r="5" fill="#fb923c" />
-                    <text x={133} y={86} fill="#fb923c" fontSize="9" fontWeight="bold">(2, 5)</text>
-                    <text x={126} y={188} fill="#fb923c" fontSize="8">2</text>
-                    <text x={22} y={92} fill="#fb923c" fontSize="8">5</text>
+                    {/* Line: f(0)=2 → (40,123), f(4)=6 → (220,20) */}
+                    <line x1={40} y1={123} x2={220} y2={20} stroke="#22d3ee" strokeWidth="2.5" />
+                    {/* Guide: x=3, f(3)=5 → x_px=175, y_px=46 */}
+                    <line x1={175} y1={175} x2={175} y2={46} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
+                    <line x1={40} y1={46} x2={175} y2={46} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
+                    <circle cx={175} cy={46} r="5" fill="#fb923c" stroke="#fdba74" strokeWidth="1.5" />
+                    <text x={179} y={43} fill="#fb923c" fontSize="9" fontWeight="bold">(3, 5)</text>
+                    <text x={170} y={189} fill="#fb923c" fontSize="8" fontWeight="bold">3</text>
+                    <text x={20} y={49} fill="#fb923c" fontSize="8" fontWeight="bold">5</text>
+                    {/* y-intercept dot */}
+                    <circle cx={40} cy={123} r="4" fill="#22d3ee" opacity="0.7" />
+                    <text x={44} y={120} fill="#94a3b8" fontSize="8">(0,2)</text>
                   </svg>
-                  <p className="text-xs text-white/40 text-center mt-2">Dari x = 2 → tarik ke atas → ke kiri → diperoleh f(2) = 5</p>
+                </div>
+
+                {/* Ilustrasi 2: f(x) = 2x */}
+                <div className="bg-slate-900/60 border border-violet-500/20 rounded-xl p-4">
+                  <p className="font-body text-xs font-bold text-violet-300 mb-1 text-center">Ilustrasi 2: Grafik f(x) = 2x</p>
+                  <p className="font-body text-xs text-white/40 mb-3 text-center">Dari x = 2 → f(2) = 2 × 2 = 4</p>
+                  <svg viewBox="0 0 260 200" className="w-full max-w-xs mx-auto">
+                    {/* Grid: x 0-3 (60px/unit), y 0-6 (25.83px/unit) */}
+                    {[1,2,3].map(v => (
+                      <line key={"gx"+v} x1={40+v*60} y1={20} x2={40+v*60} y2={175} stroke="#1e293b" strokeWidth="1" />
+                    ))}
+                    {[1,2,3,4,5,6].map(v => (
+                      <line key={"gy"+v} x1={40} y1={175-v*25.83} x2={225} y2={175-v*25.83} stroke="#1e293b" strokeWidth="1" />
+                    ))}
+                    {/* Axes */}
+                    <line x1={40} y1={15} x2={40} y2={180} stroke="#475569" strokeWidth="1.5" />
+                    <line x1={35} y1={175} x2={230} y2={175} stroke="#475569" strokeWidth="1.5" />
+                    <polygon points="230,172 230,178 237,175" fill="#475569" />
+                    <polygon points="37,15 43,15 40,8" fill="#475569" />
+                    <text x={240} y={179} fill="#94a3b8" fontSize="9">x</text>
+                    <text x={44} y={13} fill="#94a3b8" fontSize="9">y</text>
+                    {/* X ticks: 1,2,3 */}
+                    {[1,2,3].map(v => (
+                      <text key={v} x={40+v*60-3} y={189} fill="#64748b" fontSize="8">{v}</text>
+                    ))}
+                    <text x={33} y={189} fill="#64748b" fontSize="8">0</text>
+                    {/* Y ticks: 2,4,6 */}
+                    {[2,4,6].map(v => (
+                      <text key={v} x={28} y={175-v*25.83+3} fill="#64748b" fontSize="8">{v}</text>
+                    ))}
+                    {/* Line: f(0)=0 → (40,175), f(3)=6 → (220,20) */}
+                    <line x1={40} y1={175} x2={220} y2={20} stroke="#a78bfa" strokeWidth="2.5" />
+                    {/* Guide: x=2, f(2)=4 → x_px=160, y_px=72 */}
+                    <line x1={160} y1={175} x2={160} y2={72} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
+                    <line x1={40} y1={72} x2={160} y2={72} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
+                    <circle cx={160} cy={72} r="5" fill="#fb923c" stroke="#fdba74" strokeWidth="1.5" />
+                    <text x={164} y={69} fill="#fb923c" fontSize="9" fontWeight="bold">(2, 4)</text>
+                    <text x={155} y={189} fill="#fb923c" fontSize="8" fontWeight="bold">2</text>
+                    <text x={20} y={75} fill="#fb923c" fontSize="8" fontWeight="bold">4</text>
+                    {/* Origin dot */}
+                    <circle cx={40} cy={175} r="4" fill="#a78bfa" opacity="0.7" />
+                    <text x={44} y={172} fill="#94a3b8" fontSize="8">(0,0)</text>
+                  </svg>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-yellow-200">
