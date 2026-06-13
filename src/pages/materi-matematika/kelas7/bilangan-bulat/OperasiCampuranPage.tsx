@@ -564,6 +564,114 @@ const OperasiCampuranBilanganBulatPage = () => {
             )}
           </div>
 
+
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">🔀 RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Operasi Hitung Campuran Bilangan Bulat — Kelas 7</p>
+            </div>
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Hierarki Prioritas */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">1</span>
+                  Hierarki Prioritas — Urutan Wajib!
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { nomor: "1", label: "Kurung  ( )", desc: "Kerjakan SEMUA yang ada dalam kurung terlebih dahulu, dari dalam ke luar.", color: "from-red-900/70 to-red-800/30 border-red-500/50 text-red-200", badge: "bg-red-500" },
+                    { nomor: "2", label: "Pangkat / Akar", desc: "Setelah kurung selesai, kerjakan pemangkatan dan penarikan akar.", color: "from-orange-900/70 to-orange-800/30 border-orange-500/50 text-orange-200", badge: "bg-orange-500" },
+                    { nomor: "3", label: "× dan ÷  (kiri ke kanan)", desc: "Perkalian dan pembagian memiliki prioritas yang sama. Kerjakan dari kiri ke kanan.", color: "from-yellow-900/70 to-yellow-800/30 border-yellow-500/50 text-yellow-200", badge: "bg-yellow-500" },
+                    { nomor: "4", label: "+ dan −  (kiri ke kanan)", desc: "Penjumlahan dan pengurangan dikerjakan terakhir, dari kiri ke kanan.", color: "from-green-900/70 to-green-800/30 border-green-500/50 text-green-200", badge: "bg-green-500" },
+                  ].map(({ nomor, label, desc, color, badge }) => (
+                    <div key={nomor} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <span className={`${badge} text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5`}>{nomor}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold">{label}</p>
+                        <p className="font-body text-xs text-white/65 mt-0.5">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-gradient-to-r from-amber-900/50 to-yellow-900/30 border border-amber-500/40 rounded-xl px-4 py-3 text-center">
+                  <p className="font-body text-xs font-bold text-yellow-200">🧠 Mnemonik untuk diingat:</p>
+                  <p className="font-body text-sm text-white font-bold mt-1">"<span className="text-red-300">K</span>urung — <span className="text-orange-300">P</span>angkat — <span className="text-yellow-300">K</span>ali/<span className="text-yellow-300">B</span>agi — <span className="text-green-300">T</span>ambah/<span className="text-green-300">K</span>urang"</p>
+                  <p className="font-body text-xs text-white/50 mt-1">Ingat: KP-KB-TK atau "Kurung Pangkat — Kali Bagi — Tambah Kurang"</p>
+                </div>
+              </div>
+
+              {/* Contoh Cepat */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-amber-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-amber-500/30 border border-amber-500 flex items-center justify-center text-[10px]">2</span>
+                  Contoh Penerapan Prioritas
+                </p>
+                <div className="bg-slate-800/60 border border-amber-500/30 rounded-xl p-4 space-y-3">
+                  {[
+                    { soal: "3 + 2 × 4", langkah: "= 3 + (2 × 4) = 3 + 8 = 11", salah: "Bukan (3+2)×4 = 20 ✗", color: "text-yellow-300" },
+                    { soal: "(−5 + 3) × (−2)", langkah: "= (−2) × (−2) = 4", salah: "Kurung dikerjakan dulu ✓", color: "text-green-300" },
+                    { soal: "20 ÷ (−4) − 3 × 2", langkah: "= (−5) − 6 = −11", salah: "× dan ÷ dulu, baru −", color: "text-cyan-300" },
+                  ].map(({ soal, langkah, salah, color }) => (
+                    <div key={soal} className="flex gap-3">
+                      <p className={`font-mono text-xs font-bold ${color} shrink-0 min-w-[120px]`}>{soal}</p>
+                      <div>
+                        <p className="font-mono text-xs text-white/80">{langkah}</p>
+                        <p className="font-body text-[11px] text-white/40 italic">{salah}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-orange-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-orange-500/30 border border-orange-500 flex items-center justify-center text-[10px]">3</span>
+                  Tips &amp; Trik Jitu Operasi Campuran
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "📝", tip: "Tandai langkah pengerjaan sebelum menghitung", detail: "Baca soal dulu, lingkari atau garis bawahi mana yang dikerjakan pertama. Jangan langsung menghitung!", color: "bg-yellow-900/30 border-yellow-500/30" },
+                    { icon: "🔍", tip: "Waspada jebakan prioritas kiri-ke-kanan", detail: "12 ÷ 3 × 2 = (12÷3)×2 = 8, BUKAN 12÷(3×2) = 2. × dan ÷ dikerjakan dari kiri ke kanan!", color: "bg-orange-900/30 border-orange-500/30" },
+                    { icon: "🎯", tip: "Kurung beranak — kerjakan dari dalam", detail: "Jika ada kurung bersarang seperti [(2+3)×4], kerjakan kurung paling dalam dulu: (2+3)=5, lalu 5×4=20.", color: "bg-red-900/30 border-red-500/30" },
+                    { icon: "✅", tip: "Verifikasi dengan substitusi bertahap", detail: "Tulis setiap langkah secara terpisah. Jika ada kesalahan, kamu bisa langsung tahu di langkah mana terjadi.", color: "bg-green-900/30 border-green-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-yellow-500/20 via-amber-500/15 to-orange-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🎓</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Operasi campuran bukan soal menghitung cepat, tapi soal{" "}
+                  <strong className="text-yellow-300">mengikuti aturan urutan yang tepat</strong>. Selalu ingat hierarki:{" "}
+                  <strong className="text-red-300">Kurung</strong> →{" "}
+                  <strong className="text-orange-300">Pangkat</strong> →{" "}
+                  <strong className="text-yellow-300">× dan ÷</strong> →{" "}
+                  <strong className="text-green-300">+ dan −</strong>. Siapapun yang mengikuti aturan ini{" "}
+                  <strong className="text-cyan-300">tidak akan pernah salah</strong>!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Kurung Dulu", "Pangkat/Akar", "× dan ÷ = Sederajat", "+ dan − = Sederajat", "Kiri ke Kanan"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🏆 Kamu telah menguasai semua operasi dasar bilangan bulat!</p>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         <div className="mt-8 text-center">

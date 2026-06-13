@@ -658,6 +658,103 @@ const KPKFPBPage = () => {
           </div>
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-pink-600 via-rose-500 to-red-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">🔢 RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">KPK dan FPB — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            {/* Definisi & Perbedaan */}
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-pink-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-pink-500/30 border border-pink-500 flex items-center justify-center text-[10px]">1</span>
+                Definisi &amp; Perbedaan KPK dan FPB
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                <div className="bg-gradient-to-r from-green-900/70 to-green-800/30 border border-green-500/50 rounded-xl px-4 py-3">
+                  <p className="font-body text-xs font-bold text-green-300">KPK — Kelipatan Persekutuan Terkecil</p>
+                  <p className="font-body text-xs text-white/65 mt-1">Bilangan terkecil yang habis dibagi oleh semua bilangan yang dicari. Hasil KPK selalu ≥ bilangan terbesar.</p>
+                  <p className="font-mono text-xs text-green-200 mt-1">KPK(12, 18) = 36</p>
+                </div>
+                <div className="bg-gradient-to-r from-orange-900/70 to-orange-800/30 border border-orange-500/50 rounded-xl px-4 py-3">
+                  <p className="font-body text-xs font-bold text-orange-300">FPB — Faktor Persekutuan Terbesar</p>
+                  <p className="font-body text-xs text-white/65 mt-1">Bilangan terbesar yang dapat membagi habis semua bilangan yang dicari. Hasil FPB selalu ≤ bilangan terkecil.</p>
+                  <p className="font-mono text-xs text-orange-200 mt-1">FPB(12, 18) = 6</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Metode Faktorisasi Prima */}
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-rose-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-rose-500/30 border border-rose-500 flex items-center justify-center text-[10px]">2</span>
+                Metode Faktorisasi Prima — Paling Andal!
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "Langkah 1: Buat Pohon Faktor", desc: "Urai setiap bilangan menjadi faktor prima dengan cara membagi berulang kali dengan bilangan prima (2, 3, 5, 7, ...).", color: "from-pink-900/60 to-pink-800/20 border-pink-500/40 text-pink-200" },
+                  { label: "Langkah 2: Tulis sebagai Perkalian Prima", desc: "Contoh: 12 = 2² × 3 dan 18 = 2 × 3²", color: "from-rose-900/60 to-rose-800/20 border-rose-500/40 text-rose-200" },
+                  { label: "Untuk KPK: Ambil pangkat TERTINGGI", desc: "KPK(12, 18): dari 2² dan 2¹ → ambil 2². Dari 3¹ dan 3² → ambil 3². Jadi KPK = 2² × 3² = 4 × 9 = 36", color: "from-green-900/60 to-green-800/20 border-green-500/40 text-green-200" },
+                  { label: "Untuk FPB: Ambil pangkat TERENDAH", desc: "FPB(12, 18): dari 2² dan 2¹ → ambil 2¹. Dari 3¹ dan 3² → ambil 3¹. Jadi FPB = 2¹ × 3¹ = 2 × 3 = 6", color: "from-orange-900/60 to-orange-800/20 border-orange-500/40 text-orange-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div>
+                      <p className="font-body text-xs font-bold">{label}</p>
+                      <p className="font-body text-xs text-white/65 mt-0.5">{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tips & Trik */}
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">3</span>
+                Tips &amp; Trik Jitu KPK &amp; FPB
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "🎯", tip: "Kunci identifikasi soal cerita", detail: "Kata 'bersama lagi', 'bertepatan', 'berulang' → pakai KPK. Kata 'maksimal', 'sebanyak-banyaknya', 'merata', 'dibagi rata' → pakai FPB.", color: "bg-pink-900/30 border-pink-500/30" },
+                  { icon: "⚡", tip: "Cara cepat FPB dengan algoritma Euclid", detail: "FPB(a, b): bagi a dengan b, ambil sisanya. Ulangi sampai sisa = 0. FPB adalah pembagi terakhir. Contoh: FPB(48, 18): 48 = 2×18 + 12; 18 = 1×12 + 6; 12 = 2×6 + 0 → FPB = 6!", color: "bg-orange-900/30 border-orange-500/30" },
+                  { icon: "🔗", tip: "Hubungan KPK dan FPB", detail: "KPK(a, b) × FPB(a, b) = a × b. Berguna untuk mencari salah satu jika yang lain diketahui!", color: "bg-green-900/30 border-green-500/30" },
+                  { icon: "📊", tip: "Bilangan prima kecil yang wajib hafal", detail: "2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47. Hafal ini dan pohon faktor akan jauh lebih cepat dibuat!", color: "bg-cyan-900/30 border-cyan-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div>
+                      <p className="font-body text-xs font-bold text-white">{tip}</p>
+                      <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Kesimpulan */}
+            <div className="bg-gradient-to-br from-pink-500/20 via-rose-500/15 to-red-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🌺</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                KPK dan FPB adalah alat matematika yang sangat berguna dalam kehidupan nyata — dari menjadwalkan pertemuan hingga membagi hadiah secara merata. Kuncinya:{" "}
+                <strong className="text-green-300">KPK = pangkat tertinggi</strong> dan{" "}
+                <strong className="text-orange-300">FPB = pangkat terendah</strong> dari faktorisasi prima. Dan ingat hubungan ajaib:{" "}
+                <strong className="text-yellow-300">KPK × FPB = a × b</strong>!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["Faktorisasi Prima", "KPK = Pangkat Tertinggi", "FPB = Pangkat Terendah", "KPK×FPB = a×b", "Algoritma Euclid"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🎓 Selamat! Kamu telah menyelesaikan seluruh materi Bilangan Bulat Kelas 7!</p>
+            </div>
+
+          </div>
+        </div>
+
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-7/bilangan-bulat"); }}

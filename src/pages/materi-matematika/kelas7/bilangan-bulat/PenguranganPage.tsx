@@ -946,6 +946,83 @@ const PenguranganBilanganBulatPage = () => {
             </div>
           </div>
 
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">➖ RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Pengurangan Bilangan Bulat — Kelas 7</p>
+            </div>
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Konsep Utama */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-orange-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-orange-500/30 border border-orange-500 flex items-center justify-center text-[10px]">1</span>
+                  Aturan Pengurangan Bilangan Bulat
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { label: "Kunci Utama: a − b = a + (−b)", desc: "Setiap pengurangan dapat diubah menjadi penjumlahan dengan lawan dari bilangan pengurang.", color: "from-orange-900/70 to-orange-800/30 border-orange-500/50 text-orange-200" },
+                    { label: "(+) − (+): kurangi positif", desc: "Jika positif lebih besar → hasil positif. Jika negatif lebih besar → hasil negatif. Contoh: 5 − 8 = 5 + (−8) = −3", color: "from-cyan-900/70 to-cyan-800/30 border-cyan-500/50 text-cyan-200" },
+                    { label: "(−) − (−): kurangi negatif", desc: "Mengurangi negatif = menambah positif. Contoh: (−5) − (−3) = (−5) + 3 = −2", color: "from-green-900/70 to-green-800/30 border-green-500/50 text-green-200" },
+                    { label: "Pengurangan TIDAK Komutatif", desc: "a − b ≠ b − a (umumnya). Urutan sangat penting! Contoh: 7 − 3 = 4, tetapi 3 − 7 = −4", color: "from-red-900/70 to-red-800/30 border-red-500/50 text-red-200" },
+                    { label: "Garis Bilangan: Pengurangan = Mundur", desc: "Mengurang bilangan positif = langkah ke kiri. Mengurang bilangan negatif = langkah ke kanan.", color: "from-violet-900/70 to-violet-800/30 border-violet-500/50 text-violet-200" },
+                  ].map(({ label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                      <div>
+                        <p className="font-mono text-xs font-bold">{label}</p>
+                        <p className="font-body text-xs text-white/65 mt-0.5">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                  Tips &amp; Trik Jitu Pengurangan
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "🔄", tip: "Selalu ubah pengurangan → penjumlahan", detail: "Ubah a − b menjadi a + (−b) terlebih dahulu, lalu gunakan aturan penjumlahan. Ini strategi paling aman!", color: "bg-orange-900/30 border-orange-500/30" },
+                    { icon: "⚠️", tip: "Hati-hati dengan dua tanda negatif", detail: "a − (−b) = a + b. Dua tanda minus berturut-turut menjadi plus! Contoh: 5 − (−3) = 5 + 3 = 8.", color: "bg-red-900/30 border-red-500/30" },
+                    { icon: "🎯", tip: "Cek tanda hasil dengan nilai mutlak", detail: "Hitung nilai mutlak kedua bilangan, kurangi yang lebih kecil dari yang lebih besar, lalu ambil tanda dari bilangan yang nilai mutlaknya lebih besar.", color: "bg-yellow-900/30 border-yellow-500/30" },
+                    { icon: "✅", tip: "Verifikasi dengan penjumlahan balik", detail: "Jika a − b = c, maka c + b harus = a. Gunakan ini untuk memeriksa jawabanmu!", color: "bg-green-900/30 border-green-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-orange-500/20 via-red-500/15 to-pink-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🏆</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Pengurangan bilangan bulat sebenarnya{" "}
+                  <strong className="text-orange-300">adalah penjumlahan yang tersamarkan</strong>! Cukup ingat satu rumus ajaib:{" "}
+                  <strong className="text-yellow-300">a − b = a + (−b)</strong>. Ubah semua pengurangan menjadi penjumlahan, dan kamu tidak perlu menghafal aturan baru sama sekali!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["a − b = a + (−b)", "Dua Minus = Plus", "Tidak Komutatif", "Garis Bilangan", "Nilai Mutlak"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Siap lanjut ke Perkalian Bilangan Bulat!</p>
+              </div>
+
+            </div>
+          </div>
+
           {/* Back Navigation */}
           <button
             onClick={() => {

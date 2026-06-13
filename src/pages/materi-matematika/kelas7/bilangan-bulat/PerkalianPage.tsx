@@ -1088,6 +1088,108 @@ const PerkalianBilanganBulatPage = () => {
             )}
           </div>
 
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-600 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">✖️ RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Perkalian Bilangan Bulat — Kelas 7</p>
+            </div>
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Tabel Aturan Tanda */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500 flex items-center justify-center text-[10px]">1</span>
+                  Aturan Tanda Perkalian — Hafal Ini!
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { kiri: "(+) × (+)", kanan: "= (+)", contoh: "4 × 3 = 12", color: "bg-green-900/50 border-green-500/40 text-green-200" },
+                    { kiri: "(−) × (−)", kanan: "= (+)", contoh: "(−4) × (−3) = 12", color: "bg-cyan-900/50 border-cyan-500/40 text-cyan-200" },
+                    { kiri: "(+) × (−)", kanan: "= (−)", contoh: "4 × (−3) = −12", color: "bg-red-900/50 border-red-500/40 text-red-200" },
+                    { kiri: "(−) × (+)", kanan: "= (−)", contoh: "(−4) × 3 = −12", color: "bg-orange-900/50 border-orange-500/40 text-orange-200" },
+                  ].map(({ kiri, kanan, contoh, color }) => (
+                    <div key={kiri} className={`${color} border rounded-xl px-3 py-2`}>
+                      <p className="font-mono text-xs font-bold">{kiri} {kanan}</p>
+                      <p className="font-body text-[11px] text-white/55 mt-0.5">{contoh}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-gradient-to-r from-violet-900/50 to-purple-900/30 border border-violet-500/40 rounded-xl px-4 py-3 text-center mt-1">
+                  <p className="font-body text-xs font-bold text-violet-200">🔑 Rumus Cepat:</p>
+                  <p className="font-body text-sm text-white/80 mt-1">Tanda <strong className="text-green-300">SAMA</strong> → hasil <strong className="text-green-300">POSITIF</strong> &nbsp;|&nbsp; Tanda <strong className="text-red-300">BERBEDA</strong> → hasil <strong className="text-red-300">NEGATIF</strong></p>
+                </div>
+              </div>
+
+              {/* Sifat-Sifat */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-fuchsia-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-fuchsia-500/30 border border-fuchsia-500 flex items-center justify-center text-[10px]">2</span>
+                  Sifat-Sifat Perkalian Bilangan Bulat
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { sifat: "Komutatif", rumus: "a × b = b × a", contoh: "3 × (−5) = (−5) × 3 = −15", color: "from-violet-900/50 to-violet-800/20 border-violet-500/40 text-violet-200" },
+                    { sifat: "Asosiatif", rumus: "(a × b) × c = a × (b × c)", contoh: "(2 × 3) × (−4) = 2 × (3 × (−4)) = −24", color: "from-purple-900/50 to-purple-800/20 border-purple-500/40 text-purple-200" },
+                    { sifat: "Distributif", rumus: "a × (b + c) = a × b + a × c", contoh: "3 × (4 + (−2)) = 3×4 + 3×(−2) = 6", color: "from-fuchsia-900/50 to-fuchsia-800/20 border-fuchsia-500/40 text-fuchsia-200" },
+                    { sifat: "Identitas", rumus: "a × 1 = 1 × a = a", contoh: "(−7) × 1 = −7", color: "from-pink-900/50 to-pink-800/20 border-pink-500/40 text-pink-200" },
+                    { sifat: "Nol", rumus: "a × 0 = 0 × a = 0", contoh: "(−100) × 0 = 0", color: "from-slate-800/70 to-slate-700/30 border-slate-500/40 text-slate-200" },
+                  ].map(({ sifat, rumus, contoh, color }) => (
+                    <div key={sifat} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-2.5 flex gap-3 items-start`}>
+                      <div className="min-w-[90px]">
+                        <p className="font-body text-xs font-bold">{sifat}</p>
+                        <p className="font-mono text-[10px] text-white/50">{rumus}</p>
+                      </div>
+                      <p className="font-body text-xs text-white/60 border-l border-white/10 pl-3">{contoh}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">3</span>
+                  Tips &amp; Trik Jitu Perkalian
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "🔑", tip: "Tanda sama = positif, tanda beda = negatif", detail: "Ini adalah satu-satunya aturan tanda yang perlu kamu hafal. Semua variasi kasus tercakup oleh aturan sederhana ini!", color: "bg-violet-900/30 border-violet-500/30" },
+                    { icon: "📊", tip: "Hitung tanda negatif dalam perkalian berantai", detail: "Jumlah tanda negatif genap → hasil positif. Jumlah ganjil → hasil negatif. Contoh: (−2)×(−3)×(−4) = 3 negatif (ganjil) → hasil negatif.", color: "bg-purple-900/30 border-purple-500/30" },
+                    { icon: "⚡", tip: "Pecah perkalian besar dengan distributif", detail: "Hitung 7 × (−18) dengan cara 7 × (−20 + 2) = 7×(−20) + 7×2 = −140 + 14 = −126. Lebih mudah!", color: "bg-fuchsia-900/30 border-fuchsia-500/30" },
+                    { icon: "✅", tip: "Cek dengan perkalian terbalik", detail: "Jika a × b = c, maka c ÷ b harus = a. Gunakan ini untuk verifikasi jawaban perkalianmu.", color: "bg-green-900/30 border-green-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-violet-500/20 via-purple-500/15 to-fuchsia-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">⭐</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Perkalian bilangan bulat hanya punya{" "}
+                  <strong className="text-violet-300">satu aturan emas</strong>: tanda sama menghasilkan positif, tanda berbeda menghasilkan negatif. Dengan sifat{" "}
+                  <strong className="text-yellow-300">komutatif, asosiatif, dan distributif</strong>, perkalian bilangan bulat sebesar apapun bisa diselesaikan dengan cepat dan sistematis!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Tanda Sama = +", "Tanda Beda = −", "Genap Negatif = +", "Komutatif", "Distributif"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Selanjutnya: Pembagian Bilangan Bulat!</p>
+              </div>
+
+            </div>
+          </div>
+
           {/* Tombol Navigasi */}
           <div className="flex justify-between mt-6">
             <button

@@ -1034,6 +1034,83 @@ const PenjumlahanBilanganBulatPage = () => {
               dan hasilnya akan muncul <strong className="text-primary">15</strong>.
             </p>
           </div>
+
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">➕ RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Penjumlahan Bilangan Bulat — Kelas 7</p>
+            </div>
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Konsep Utama */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-500/30 border border-cyan-500 flex items-center justify-center text-[10px]">1</span>
+                  Aturan Penjumlahan Bilangan Bulat
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { label: "(+) + (+) = (+)", desc: "Dua bilangan positif dijumlah → hasilnya positif. Contoh: 8 + 5 = 13", color: "from-cyan-900/70 to-cyan-800/30 border-cyan-500/50 text-cyan-200" },
+                    { label: "(−) + (−) = (−)", desc: "Dua bilangan negatif dijumlah → hasilnya negatif. Contoh: (−8) + (−5) = −13", color: "from-red-900/70 to-red-800/30 border-red-500/50 text-red-200" },
+                    { label: "(+) + (−) atau (−) + (+)", desc: "Berbeda tanda → kurangi nilai mutlaknya, ambil tanda yang nilainya lebih besar. Contoh: 8 + (−5) = 3", color: "from-yellow-900/70 to-yellow-800/30 border-yellow-500/50 text-yellow-200" },
+                    { label: "Sifat Komutatif", desc: "a + b = b + a. Urutan tidak mempengaruhi hasil penjumlahan.", color: "from-green-900/70 to-green-800/30 border-green-500/50 text-green-200" },
+                    { label: "Sifat Asosiatif", desc: "(a + b) + c = a + (b + c). Pengelompokan tidak mempengaruhi hasil.", color: "from-violet-900/70 to-violet-800/30 border-violet-500/50 text-violet-200" },
+                  ].map(({ label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                      <div>
+                        <p className="font-mono text-xs font-bold">{label}</p>
+                        <p className="font-body text-xs text-white/65 mt-0.5">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                  Tips &amp; Trik Jitu Penjumlahan
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "🎯", tip: "Bayangkan garis bilangan", detail: "Bilangan positif = langkah ke kanan. Bilangan negatif = langkah ke kiri. Mulai dari 0, jalan sesuai aturan!", color: "bg-cyan-900/30 border-cyan-500/30" },
+                    { icon: "⚡", tip: "Tanda sama → jumlahkan, tanda beda → kurangkan", detail: "Ini adalah rumus cepat untuk menentukan operasi yang harus dilakukan sebelum menentukan tandanya.", color: "bg-yellow-900/30 border-yellow-500/30" },
+                    { icon: "🔢", tip: "Gunakan nilai mutlak (|  |) untuk menghitung", detail: "Nilai mutlak mengabaikan tanda. Hitung besar angkanya dulu, baru tentukan tanda di akhir berdasarkan bilangan yang lebih besar nilai mutlaknya.", color: "bg-green-900/30 border-green-500/30" },
+                    { icon: "🧮", tip: "Substitusi ke soal untuk verifikasi", detail: "Setelah mendapat jawaban, substitusi kembali ke soal aslinya. Jika cocok, jawabanmu benar!", color: "bg-violet-900/30 border-violet-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-cyan-500/20 via-blue-500/15 to-indigo-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🌟</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Penjumlahan bilangan bulat adalah fondasi dari semua operasi matematika. Kunci utamanya adalah{" "}
+                  <strong className="text-cyan-300">memahami tanda</strong>: sama tanda berarti jumlahkan, beda tanda berarti kurangi. Dengan memahami garis bilangan, kamu bisa{" "}
+                  <strong className="text-yellow-300">memvisualisasikan setiap operasi</strong> dan tidak akan pernah salah lagi!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Tanda Sama = Jumlah", "Tanda Beda = Kurang", "Nilai Mutlak", "Garis Bilangan", "Komutatif & Asosiatif"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke Pengurangan untuk melengkapi pemahamanmu!</p>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         <div className="mt-8 text-center">

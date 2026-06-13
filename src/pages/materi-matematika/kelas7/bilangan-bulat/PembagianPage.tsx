@@ -675,6 +675,107 @@ const PembagianBilanganBulatPage = () => {
           </div>
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-green-500 via-teal-500 to-cyan-600 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">➗ RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Pembagian Bilangan Bulat — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            {/* Aturan Tanda */}
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-green-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-green-500/30 border border-green-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Tanda Pembagian — Sama Seperti Perkalian!
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { kiri: "(+) ÷ (+)", kanan: "= (+)", contoh: "12 ÷ 3 = 4", color: "bg-green-900/50 border-green-500/40 text-green-200" },
+                  { kiri: "(−) ÷ (−)", kanan: "= (+)", contoh: "(−12) ÷ (−3) = 4", color: "bg-cyan-900/50 border-cyan-500/40 text-cyan-200" },
+                  { kiri: "(+) ÷ (−)", kanan: "= (−)", contoh: "12 ÷ (−3) = −4", color: "bg-red-900/50 border-red-500/40 text-red-200" },
+                  { kiri: "(−) ÷ (+)", kanan: "= (−)", contoh: "(−12) ÷ 3 = −4", color: "bg-orange-900/50 border-orange-500/40 text-orange-200" },
+                ].map(({ kiri, kanan, contoh, color }) => (
+                  <div key={kiri} className={`${color} border rounded-xl px-3 py-2`}>
+                    <p className="font-mono text-xs font-bold">{kiri} {kanan}</p>
+                    <p className="font-body text-[11px] text-white/55 mt-0.5">{contoh}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-gradient-to-r from-green-900/50 to-teal-900/30 border border-green-500/40 rounded-xl px-4 py-3 text-center">
+                <p className="font-body text-xs font-bold text-green-200">🔑 Aturan Emas — Sama dengan Perkalian:</p>
+                <p className="font-body text-sm text-white/80 mt-1">Tanda <strong className="text-green-300">SAMA</strong> → hasil <strong className="text-green-300">POSITIF</strong> &nbsp;|&nbsp; Tanda <strong className="text-red-300">BERBEDA</strong> → hasil <strong className="text-red-300">NEGATIF</strong></p>
+              </div>
+            </div>
+
+            {/* Sifat & Aturan Penting */}
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-teal-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-teal-500/30 border border-teal-500 flex items-center justify-center text-[10px]">2</span>
+                Sifat &amp; Aturan Penting Pembagian
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { sifat: "Pembagian dengan 0 tidak terdefinisi", detail: "a ÷ 0 = tidak terdefinisi. Tidak ada bilangan apapun yang dikalikan 0 menghasilkan a (kecuali a = 0 yang hasilnya tak tentu).", color: "from-red-900/50 to-red-800/20 border-red-500/40 text-red-200" },
+                  { sifat: "0 dibagi bilangan apapun = 0", detail: "0 ÷ a = 0 (untuk a ≠ 0). Contoh: 0 ÷ (−7) = 0", color: "from-slate-800/70 to-slate-700/30 border-slate-500/40 text-slate-200" },
+                  { sifat: "Pembagian TIDAK Komutatif", detail: "a ÷ b ≠ b ÷ a (umumnya). Urutan sangat penting! 12 ÷ 3 = 4, tetapi 3 ÷ 12 = 0,25", color: "from-orange-900/50 to-orange-800/20 border-orange-500/40 text-orange-200" },
+                  { sifat: "Pembagian = Kebalikan Perkalian", detail: "a ÷ b = c berarti c × b = a. Gunakan ini untuk verifikasi jawaban!", color: "from-green-900/50 to-green-800/20 border-green-500/40 text-green-200" },
+                ].map(({ sifat, detail, color }) => (
+                  <div key={sifat} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div>
+                      <p className="font-body text-xs font-bold">{sifat}</p>
+                      <p className="font-body text-xs text-white/60 mt-0.5">{detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tips & Trik */}
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">3</span>
+                Tips &amp; Trik Jitu Pembagian
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "🎯", tip: "Tentukan tanda dulu, hitung nilai mutlak kemudian", detail: "Pisahkan masalah tanda dan masalah nilai. Tanda: sama = positif, beda = negatif. Nilai: abaikan tanda, bagi saja.", color: "bg-green-900/30 border-green-500/30" },
+                  { icon: "✅", tip: "Verifikasi dengan perkalian balik", detail: "Jika −36 ÷ 4 = −9, cek: (−9) × 4 = −36 ✓. Kalau tidak cocok, ada yang salah!", color: "bg-teal-900/30 border-teal-500/30" },
+                  { icon: "⚠️", tip: "Waspada: pembagi 0 = jebakan!", detail: "Soal ujian sering memancing jawaban yang melibatkan pembagi 0. Ingat: pembagian dengan 0 selalu TIDAK TERDEFINISI!", color: "bg-red-900/30 border-red-500/30" },
+                  { icon: "🧮", tip: "Ubah ke perkalian jika perlu", detail: "Kesulitan membagi? Ubah a ÷ b = a × (1/b). Berguna terutama jika pembaginya besar atau pecahan.", color: "bg-cyan-900/30 border-cyan-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div>
+                      <p className="font-body text-xs font-bold text-white">{tip}</p>
+                      <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Kesimpulan */}
+            <div className="bg-gradient-to-br from-green-500/20 via-teal-500/15 to-cyan-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🌿</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Pembagian bilangan bulat adalah{" "}
+                <strong className="text-green-300">kebalikan dari perkalian</strong>, dan aturan tandanya persis sama. Ingat:{" "}
+                <strong className="text-yellow-300">tanda sama = positif, tanda beda = negatif</strong>, dan jangan pernah membagi dengan nol! Dengan memahami pembagian, kamu telah melengkapi keempat operasi dasar bilangan bulat!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["Tanda Sama = +", "Tanda Beda = −", "÷ 0 Tidak Terdefinisi", "Kebalikan Perkalian", "Verifikasi"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke Operasi Campuran — gabungan semua operasi!</p>
+            </div>
+
+          </div>
+        </div>
+
         {/* Navigation */}
         <div className="mt-8 flex justify-center">
           <button
