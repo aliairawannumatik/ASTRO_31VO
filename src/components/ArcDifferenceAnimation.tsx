@@ -134,7 +134,7 @@ function ArcSVG({
     return { x1, x2, cx, cy, label: typeof d === "number" ? (d >= 0 ? `+${d}` : `${d}`) : d };
   });
 
-  const [visibleArcs, setVisibleArcs] = useState(animate ? 0 : arcs.length);
+  const [visibleArcs, setVisibleArcs] = useState(0);
 
   useEffect(() => {
     if (!animate) { setVisibleArcs(arcs.length); return; }
@@ -144,7 +144,7 @@ function ArcSVG({
       i++;
       setVisibleArcs(i);
       if (i >= arcs.length) clearInterval(timer);
-    }, 300);
+    }, 650);
     return () => clearInterval(timer);
   }, [animate, arcs.length]);
 
@@ -165,8 +165,8 @@ function ArcSVG({
               strokeWidth="2"
               strokeDasharray="none"
               style={{
-                filter: `drop-shadow(0 0 4px ${arcColor}88)`,
-                animation: animate ? `arcDraw 0.35s ease-out` : "none",
+                filter: `drop-shadow(0 0 6px ${arcColor}cc)`,
+                animation: `arcDraw 0.9s cubic-bezier(0.22,1,0.36,1) both`,
               }}
             />
             <text
@@ -176,7 +176,7 @@ function ArcSVG({
               fontSize="10"
               fontWeight="bold"
               fill={labelColor}
-              style={{ textShadow: `0 0 6px ${arcColor}` }}
+              style={{ textShadow: `0 0 8px ${arcColor}`, animation: `labelFadeIn 0.5s ease-out 0.55s both` }}
             >
               {arc.label}
             </text>
@@ -252,16 +252,33 @@ export function ArcPatternPanel({
 }) {
   const [animKey, setAnimKey] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
   const diffs = getDifferences(terms);
 
   const handlePlay = () => {
+    setHasPlayed(true);
     setAnimKey((k) => k + 1);
     setPlaying(true);
-    setTimeout(() => setPlaying(false), diffs.length * 320 + 500);
+    setTimeout(() => setPlaying(false), diffs.length * 680 + 700);
   };
 
   return (
     <div className="mt-3 space-y-2">
+      <style>{`
+        @keyframes arcDraw {
+          from { stroke-dashoffset: 300; stroke-dasharray: 300; opacity: 0; }
+          to   { stroke-dashoffset: 0;   stroke-dasharray: 300; opacity: 1; }
+        }
+        @keyframes labelFadeIn {
+          from { opacity: 0; transform: translateY(-5px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes badgePop {
+          from { opacity: 0; transform: scale(0.7) translateY(4px); }
+          to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+      `}</style>
+
       <div className="flex justify-center">
         <button
           onClick={handlePlay}
@@ -273,44 +290,62 @@ export function ArcPatternPanel({
             color: labelColor,
           }}
         >
-          {playing ? "⏳ Animasi berjalan..." : "▶ Putar Animasi Busur"}
+          {playing
+            ? "⏳ Animasi berjalan..."
+            : hasPlayed
+            ? "▶ Ulangi Animasi"
+            : "▶ Putar Animasi Busur"}
         </button>
       </div>
-      <div className="overflow-x-auto pb-1">
-        <ArcSVG
-          key={animKey}
-          terms={terms}
-          diffs={diffs}
-          arcColor={arcColor}
-          labelColor={labelColor}
-          animate={animKey > 0}
-          isFibonacci={isFibonacci}
-        />
-      </div>
-      {diffLabel && (
-        <div className="text-center text-xs font-bold font-body" style={{ color: labelColor }}>
-          {diffLabel}
-        </div>
+
+      {hasPlayed && (
+        <>
+          <div className="overflow-x-auto pb-1">
+            <ArcSVG
+              key={animKey}
+              terms={terms}
+              diffs={diffs}
+              arcColor={arcColor}
+              labelColor={labelColor}
+              animate={true}
+              isFibonacci={isFibonacci}
+            />
+          </div>
+          {diffLabel && (
+            <div
+              className="text-center text-xs font-bold font-body"
+              style={{ color: labelColor, animation: "labelFadeIn 0.6s ease-out 0.3s both" }}
+            >
+              {diffLabel}
+            </div>
+          )}
+          {note && (
+            <div
+              className="text-center text-xs text-white/60 font-body"
+              style={{ animation: "labelFadeIn 0.6s ease-out 0.5s both" }}
+            >
+              {note}
+            </div>
+          )}
+          <div className="flex flex-wrap gap-1.5 justify-center">
+            {diffs.map((d, i) => (
+              <span
+                key={i}
+                className="text-xs font-bold px-2 py-0.5 rounded"
+                style={{
+                  background: arcColor + "22",
+                  border: `1px solid ${arcColor}66`,
+                  color: labelColor,
+                  animation: `badgePop 0.4s cubic-bezier(0.34,1.56,0.64,1) ${0.4 + i * 0.12}s both`,
+                }}
+              >
+                {`U${sub(i + 1)}→U${sub(i + 2)}: `}
+                {typeof d === "number" ? (d >= 0 ? `+${d}` : `${d}`) : d}
+              </span>
+            ))}
+          </div>
+        </>
       )}
-      {note && (
-        <div className="text-center text-xs text-white/60 font-body">{note}</div>
-      )}
-      <div className="flex flex-wrap gap-1.5 justify-center">
-        {diffs.map((d, i) => (
-          <span
-            key={i}
-            className="text-xs font-bold px-2 py-0.5 rounded"
-            style={{
-              background: arcColor + "22",
-              border: `1px solid ${arcColor}66`,
-              color: labelColor,
-            }}
-          >
-            {`U${sub(i + 1)}→U${sub(i + 2)}: `}
-            {typeof d === "number" ? (d >= 0 ? `+${d}` : `${d}`) : d}
-          </span>
-        ))}
-      </div>
     </div>
   );
 }
