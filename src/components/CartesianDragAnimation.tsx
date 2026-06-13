@@ -160,14 +160,17 @@ export default function CartesianDragAnimation() {
           <text x={O + 18} y={O + 22} fill="rgba(74,222,128,0.35)" fontSize="11" fontWeight="bold" fontFamily="sans-serif">IV</text>
 
           {/* Tick marks & numbers */}
-          {ticks.filter(v => v % 2 === 0).map(v => (
-            <g key={v}>
-              <line x1={toSVGX(v)} y1={O - 3} x2={toSVGX(v)} y2={O + 3} stroke="rgba(255,255,255,0.4)" strokeWidth="1" />
-              <text x={toSVGX(v)} y={O + 13} fill="rgba(255,255,255,0.35)" fontSize="8" textAnchor="middle" fontFamily="monospace">{v}</text>
-              <line x1={O - 3} y1={toSVGY(v)} x2={O + 3} y2={toSVGY(v)} stroke="rgba(255,255,255,0.4)" strokeWidth="1" />
-              <text x={O - 10} y={toSVGY(v) + 3} fill="rgba(255,255,255,0.35)" fontSize="8" textAnchor="middle" fontFamily="monospace">{v}</text>
-            </g>
-          ))}
+          {ticks.map(v => {
+            const isEven = v % 2 === 0;
+            return (
+              <g key={v}>
+                <line x1={toSVGX(v)} y1={O - (isEven ? 4 : 2.5)} x2={toSVGX(v)} y2={O + (isEven ? 4 : 2.5)} stroke={isEven ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.25)"} strokeWidth="1" />
+                <text x={toSVGX(v)} y={O + 13} fill={isEven ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.22)"} fontSize={isEven ? 8 : 7} textAnchor="middle" fontFamily="monospace">{v}</text>
+                <line x1={O - (isEven ? 4 : 2.5)} y1={toSVGY(v)} x2={O + (isEven ? 4 : 2.5)} y2={toSVGY(v)} stroke={isEven ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.25)"} strokeWidth="1" />
+                <text x={O - 12} y={toSVGY(v) + 3} fill={isEven ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.22)"} fontSize={isEven ? 8 : 7} textAnchor="middle" fontFamily="monospace">{v}</text>
+              </g>
+            );
+          })}
 
           {/* Projection dashed lines for active point */}
           {(() => {

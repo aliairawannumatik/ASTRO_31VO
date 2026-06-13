@@ -113,9 +113,6 @@ const UnsurUnsurCartesiusPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* Draggable Cartesian Animation */}
-          <CartesianDragAnimation />
-
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Dari GPS ke Matematika — Koordinat Ada di Mana-mana!" />
@@ -124,6 +121,19 @@ const UnsurUnsurCartesiusPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Saat kamu share lokasi ke teman lewat Google Maps, kamu sebenarnya sedang berbagi dua angka: garis lintang dan garis bujur. Itulah konsep <strong className="text-cyan-300">koordinat</strong>! Dalam matematika, kita menggunakan <strong className="text-cyan-300">Diagram Kartesius</strong> — sebuah sistem peta angka yang diciptakan filsuf Prancis René Descartes — untuk menentukan posisi setiap titik di bidang datar secara tepat dan jelas.
                 </p>
+                <div className="flex flex-col items-center gap-2">
+                  <img
+                    src="/koordinat-maps.png"
+                    alt="Koordinat GPS pada smartphone"
+                    className="rounded-xl w-full max-w-xs border border-cyan-500/30 shadow-lg"
+                  />
+                  <p className="text-[11px] text-white/45 font-body text-center">
+                    Koordinat di smartphone — prinsipnya persis sama dengan Diagram Kartesius!{" "}
+                    <a href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:text-cyan-300">
+                      Sumber gambar
+                    </a>
+                  </p>
+                </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
                     <strong>Fakta keren:</strong> Nama "Cartesius" berasal dari nama Latin René Descartes (Renatus Kartesius). Menurut cerita, ide sistem koordinat ini muncul saat ia berbaring di tempat tidur dan mengamati seekor lalat di langit-langit kamar. Ia berpikir: bagaimana cara menentukan posisi lalat itu secara tepat? 🪰
@@ -145,11 +155,8 @@ const UnsurUnsurCartesiusPage = () => {
                   </p>
                 </div>
 
-                {/* Visual diagram */}
-                <div className="bg-slate-800/70 border border-cyan-500/20 rounded-xl p-4 flex flex-col items-center gap-3">
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase">🗺️ Diagram Kartesius — Bidang Koordinat</p>
-                  <CoordGrid />
-                </div>
+                {/* Interactive Cartesian */}
+                <CartesianDragAnimation />
 
                 {/* Komponen */}
                 <div className="space-y-2 text-sm font-body">
@@ -306,7 +313,7 @@ const UnsurUnsurCartesiusPage = () => {
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
                   <p className="font-body text-sm text-white/85">
-                    Titik <InlineMath math="P(a^2 - 9,\ 2a + 4)" /> berada di sumbu-y (bukan di titik asal). Tentukan semua kemungkinan nilai <InlineMath math="a" /> dan koordinat titik <InlineMath math="P" />!
+                    Titik <InlineMath math="P(3a - 9,\ 2a + 4)" /> berada di sumbu-y (bukan di titik asal). Tentukan nilai <InlineMath math="a" /> dan koordinat titik <InlineMath math="P" />!
                   </p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
@@ -315,18 +322,17 @@ const UnsurUnsurCartesiusPage = () => {
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <p className="text-white/70 mb-1">Titik di sumbu-y → absis = 0, tapi ordinat ≠ 0:</p>
                       <p className="text-cyan-300 font-semibold">Syarat absis = 0:</p>
-                      <BlockMath math="a^2 - 9 = 0 \Rightarrow a^2 = 9 \Rightarrow a = 3 \text{ atau } a = -3" />
+                      <BlockMath math="3a - 9 = 0 \Rightarrow 3a = 9 \Rightarrow a = 3" />
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">Cek ordinat untuk setiap nilai a:</p>
-                      <p className="text-white/70">Jika <InlineMath math="a = 3" />: ordinat <InlineMath math="= 2(3) + 4 = 10 \neq 0" /> ✓</p>
-                      <p className="text-white/70 mt-1">Jika <InlineMath math="a = -3" />: ordinat <InlineMath math="= 2(-3) + 4 = -2 \neq 0" /> ✓</p>
-                      <p className="text-white/50 text-xs mt-2">(Keduanya bukan titik asal, jadi keduanya valid)</p>
+                      <p className="text-violet-300 font-semibold mb-1">Cek ordinat dengan <InlineMath math="a = 3" />:</p>
+                      <BlockMath math="\text{ordinat} = 2(3) + 4 = 6 + 4 = 10 \neq 0 \quad \checkmark" />
+                      <p className="text-white/50 text-xs mt-1">(Ordinat ≠ 0, jadi titik memang di sumbu-y, bukan di titik asal)</p>
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3 space-y-1">
-                      <p className="text-cyan-300 text-sm font-bold">✅ Dua kemungkinan:</p>
-                      <p className="text-white/80 text-xs">• Jika <InlineMath math="a = 3" /> → <InlineMath math="P(0, 10)" /> (di sumbu-y, positif)</p>
-                      <p className="text-white/80 text-xs">• Jika <InlineMath math="a = -3" /> → <InlineMath math="P(0, -2)" /> (di sumbu-y, negatif)</p>
+                      <p className="text-cyan-300 text-sm font-bold">✅ <InlineMath math="a = 3" />, sehingga <InlineMath math="P(0,\ 10)" /></p>
+                      <p className="text-white/60 text-xs">Cek: absis <InlineMath math="= 3(3) - 9 = 0" /> ✓ · ordinat <InlineMath math="= 2(3) + 4 = 10" /> ✓</p>
+                      <p className="text-white/60 text-xs">Titik P berada di sumbu-y, bagian positif.</p>
                     </div>
                   </div>
                 </div>
