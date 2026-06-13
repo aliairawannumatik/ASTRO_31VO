@@ -345,6 +345,30 @@ const PengertianRelasiPage = () => {
                   </div>
                 </div>
 
+                {/* Kesimpulan Domain, Kodomain, Range */}
+                <div className="bg-slate-800/60 border border-white/10 rounded-xl p-4 space-y-3">
+                  <p className="font-body text-sm font-bold text-white">📌 Dari ketiga penyajian di atas, kita dapat mengidentifikasi:</p>
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-3 bg-cyan-900/20 border border-cyan-500/25 rounded-lg px-3 py-2.5">
+                      <span className="font-body text-xs font-bold text-cyan-400 min-w-[90px]">Domain (A)</span>
+                      <span className="font-body text-xs text-white/80">= {"{"} Enzo, Justin, Arham, Faiz {"}"}</span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-violet-900/20 border border-violet-500/25 rounded-lg px-3 py-2.5">
+                      <span className="font-body text-xs font-bold text-violet-400 min-w-[90px]">Kodomain (B)</span>
+                      <span className="font-body text-xs text-white/80">= {"{"} Badminton, Basket, Futsal, Renang, Voly {"}"}</span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-green-900/20 border border-green-500/25 rounded-lg px-3 py-2.5">
+                      <span className="font-body text-xs font-bold text-green-400 min-w-[90px]">Range</span>
+                      <span className="font-body text-xs text-white/80">= {"{"} Badminton, Basket, Futsal, Renang, Voly {"}"}</span>
+                    </div>
+                  </div>
+                  <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg px-3 py-2">
+                    <p className="font-body text-xs text-orange-200">
+                      <strong>⚠️ Perhatikan:</strong> Faiz adalah anggota <strong>domain</strong> tetapi tidak memiliki pasangan di kodomain — ia tidak muncul dalam himpunan pasangan berurutan maupun diagram. Range = Kodomain karena semua ekskul ada yang mengikuti.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-yellow-200">
                     <strong>💡 Tips:</strong> Diagram panah paling mudah untuk memahami konsep, sedangkan grafik Kartesius berguna untuk visualisasi pola relasi.
