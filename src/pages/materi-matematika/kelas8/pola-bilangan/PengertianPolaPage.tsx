@@ -348,6 +348,38 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-pink-300">Pola Segitiga Pascal</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Setiap bilangan = jumlah dua bilangan di atasnya. Baris dimulai dan diakhiri angka 1.</p>
+                <div className="flex flex-col items-center gap-1.5 my-3 font-mono text-xs">
+                  {[
+                    { row: [1],                  sum: 1,  expanded: "1",             power: "2⁰" },
+                    { row: [1, 1],               sum: 2,  expanded: "1+1",           power: "2¹" },
+                    { row: [1, 2, 1],            sum: 4,  expanded: "1+2+1",         power: "2²" },
+                    { row: [1, 3, 3, 1],         sum: 8,  expanded: "1+3+3+1",       power: "2³" },
+                    { row: [1, 4, 6, 4, 1],      sum: 16, expanded: "1+4+6+4+1",     power: "2⁴" },
+                    { row: [1, 5, 10, 10, 5, 1], sum: 32, expanded: "1+5+10+10+5+1", power: "2⁵" },
+                  ].map(({ row, sum, expanded, power }, ri) => (
+                    <div key={ri} className="flex flex-col items-center gap-0.5">
+                      <div className="flex items-center gap-2">
+                        <div className="flex gap-1">
+                          {row.map((val, ci) => (
+                            <span key={ci} className="bg-pink-700/50 border border-pink-400/40 text-pink-200 font-bold rounded px-1.5 py-0.5 min-w-[22px] text-center text-xs">{val}</span>
+                          ))}
+                        </div>
+                        <span className="text-white/30 text-[10px]">→</span>
+                        <span className="text-pink-100 font-bold text-xs">{sum}</span>
+                        <span className="text-white/30 text-[10px]">=</span>
+                        <span className="text-amber-300 font-mono text-xs font-bold">{power}</span>
+                      </div>
+                      <p className="font-mono text-[10px] text-pink-300/55">= {expanded}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mb-3 space-y-1">
+                  <p className="font-body text-xs text-white/70">Jumlah bilangan pada setiap baris: <strong className="text-pink-300">1, 2, 4, 8, 16, 32, ...</strong></p>
+                  <p className="font-body text-xs text-white/70">Setiap baris, jumlahnya <strong className="text-pink-300">berlipat ganda (×2)</strong> dari baris sebelumnya.</p>
+                  <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-2 mt-2">
+                    <BlockMath math="\text{Jumlah baris ke-}n = 2^{n-1}" />
+                  </div>
+                </div>
                 <ArcPatternPanel
                   terms={[1, 2, 4, 8, 16, 32]}
                   arcColor="#f472b6"

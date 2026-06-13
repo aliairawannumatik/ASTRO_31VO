@@ -137,7 +137,7 @@ function ArcSVG({
   const [visibleArcs, setVisibleArcs] = useState(0);
 
   useEffect(() => {
-    if (!animate) { setVisibleArcs(arcs.length); return; }
+    if (!animate) { return; }
     setVisibleArcs(0);
     let i = 0;
     const timer = setInterval(() => {
@@ -298,19 +298,20 @@ export function ArcPatternPanel({
         </button>
       </div>
 
+      <div className="overflow-x-auto pb-1">
+        <ArcSVG
+          key={animKey}
+          terms={terms}
+          diffs={diffs}
+          arcColor={arcColor}
+          labelColor={labelColor}
+          animate={hasPlayed}
+          isFibonacci={isFibonacci}
+        />
+      </div>
+
       {hasPlayed && (
         <>
-          <div className="overflow-x-auto pb-1">
-            <ArcSVG
-              key={animKey}
-              terms={terms}
-              diffs={diffs}
-              arcColor={arcColor}
-              labelColor={labelColor}
-              animate={true}
-              isFibonacci={isFibonacci}
-            />
-          </div>
           {diffLabel && (
             <div
               className="text-center text-xs font-bold font-body"
