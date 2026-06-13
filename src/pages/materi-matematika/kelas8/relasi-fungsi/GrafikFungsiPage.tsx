@@ -264,8 +264,8 @@ const GrafikFungsiPage = () => {
                       <polygon points="62,15 68,15 65,8" fill="#475569" />
                       {/* Axis titles */}
                       <text x={283} y={179} fill="#94a3b8" fontSize="9">Modal</text>
-                      <text x={2} y={18} fill="#94a3b8" fontSize="8">Untung</text>
-                      <text x={9} y={27} fill="#94a3b8" fontSize="8">(Rp)</text>
+                      <text x={2} y={9} fill="#94a3b8" fontSize="8">Untung</text>
+                      <text x={9} y={17} fill="#94a3b8" fontSize="8">(Rp)</text>
                       {/* X labels: 10,20,30,40,50 (in thousands) */}
                       {[10,20,30,40,50].map((v,i) => (
                         <text key={v} x={65+(i+1)*40-7} y={190} fill="#64748b" fontSize="8">{v}</text>
