@@ -342,8 +342,8 @@ const GrafikFungsiPage = () => {
                           <text key={v} x={58} y={yPx + 3} fill="#94a3b8" fontSize="9" textAnchor="end">{v}</text>
                         );
                       })}
-                      {/* "30 Ribuan" label at top-left of y-axis */}
-                      <text x={72} y={16} fill="#cbd5e1" fontSize="8.5" fontWeight="bold">30 Ribuan</text>
+                      {/* "(dalam ribuan)" label at top-left of y-axis */}
+                      <text x={72} y={16} fill="#94a3b8" fontSize="8">(dalam ribuan)</text>
                       {/* X labels: 2, 4, 6 */}
                       {[2,4,6].map((v) => {
                         const xPx = 70 + v * 25;
@@ -365,13 +365,13 @@ const GrafikFungsiPage = () => {
                         fill="none" stroke="#3b82f6" strokeWidth="2"
                       />
                       {/* Diamond markers */}
-                      {[[120,121,13],[170,87,19],[220,53,25]].map(([cx,cy,label]) => (
+                      {([[120,121,13,-1],[170,87,19,-1],[220,53,25,-1]] as [number,number,number,number][]).map(([cx,cy,label]) => (
                         <g key={cx}>
                           <polygon
                             points={`${cx},${cy-6} ${cx+6},${cy} ${cx},${cy+6} ${cx-6},${cy}`}
-                            fill="#3b82f6" stroke="white" strokeWidth="1"
+                            fill="#3b82f6" stroke="#e2e8f0" strokeWidth="1"
                           />
-                          <text x={cx+8} y={cy-4} fill="#1e3a5f" fontSize="9" fontWeight="bold">{label}</text>
+                          <text x={cx+9} y={cy+4} fill="#f1f5f9" fontSize="10" fontWeight="bold">{label}</text>
                         </g>
                       ))}
                       {/* Legend */}
