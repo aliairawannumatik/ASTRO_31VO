@@ -1020,10 +1020,6 @@ const PengertianFungsiPage = () => {
                           <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
                           {/* D-shape: half-ellipse opening to the right — x = y(5-y) style */}
                           <path d="M 12,108 C 38,108 118,93 140,60 C 156,32 120,12 12,12" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
-                          {/* vertical line showing double intersection */}
-                          <line x1="100" y1="10" x2="100" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
-                          <circle cx="100" cy="30" r="3" fill="#fbbf24"/>
-                          <circle cx="100" cy="90" r="3" fill="#fbbf24"/>
                         </svg>
                       ),
                     },
@@ -1108,10 +1104,6 @@ const PengertianFungsiPage = () => {
                           <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
                           {/* double-S wave: starts top of y-axis, bumps right twice, ends at origin — like x=sin(y) */}
                           <path d="M 10,10 C 10,14 55,14 98,28 C 130,38 12,52 10,60 C 8,68 55,68 98,82 C 128,92 12,106 10,110" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
-                          {/* vertical line at x=72 showing double intersection */}
-                          <line x1="72" y1="10" x2="72" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
-                          <circle cx="72" cy="22" r="3" fill="#fbbf24"/>
-                          <circle cx="72" cy="74" r="3" fill="#fbbf24"/>
                         </svg>
                       ),
                     },
