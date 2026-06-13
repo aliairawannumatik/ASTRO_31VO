@@ -6,6 +6,7 @@ import { BookOpen, Lightbulb, Calculator, Target, TrendingUp } from "lucide-reac
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 /* ─── Kalkulator Rata-rata Interaktif ─── */
 const MeanCalculator = () => {
@@ -1253,6 +1254,77 @@ const RataRataPage = () => {
           </div>
 
         </div>
+
+        <RangkumanSection
+          gradientFrom="from-green-900"
+          gradientVia="via-emerald-900"
+          gradientTo="to-teal-900"
+          borderColor="border-green-500/40"
+          accentColor="text-green-300"
+          headerIcon="📐"
+          judul="Rangkuman — Rata-Rata (Mean)"
+          subjudul="Ukuran pemusatan paling populer di dunia — satu angka yang merangkum seluruh data!"
+          ringkasan={[
+            {
+              emoji: "➕",
+              judul: "Rata-Rata Data Tunggal",
+              isi: "Jumlahkan semua nilai lalu bagi dengan banyak data (n). Setiap nilai berpengaruh terhadap hasil rata-rata — termasuk nilai terbesar dan terkecil!",
+              bg: "bg-green-900/50",
+              border: "border-green-500/40",
+              textColor: "text-green-200",
+            },
+            {
+              emoji: "📋",
+              judul: "Rata-Rata dari Tabel Frekuensi",
+              isi: "Kalikan setiap nilai (xi) dengan frekuensinya (fi), jumlahkan hasilnya, lalu bagi total frekuensi. Rumus: x-bar = Sigma(fi.xi) / Sigma(fi).",
+              bg: "bg-emerald-900/50",
+              border: "border-emerald-500/40",
+              textColor: "text-emerald-200",
+            },
+            {
+              emoji: "🔄",
+              judul: "Sifat Transformasi Linear",
+              isi: "Jika yi = axi + b, maka rata-rata y = a.(rata-rata x) + b. Rata-rata mengikuti transformasi linear secara langsung!",
+              bg: "bg-teal-900/50",
+              border: "border-teal-500/40",
+              textColor: "text-teal-200",
+            },
+            {
+              emoji: "➕",
+              judul: "Menambah Satu Data Baru",
+              isi: "Rata-rata baru = (rata-rata lama x n + data baru) / (n+1). Cukup gunakan rumus ini tanpa mengulangi perhitungan dari awal!",
+              bg: "bg-cyan-900/50",
+              border: "border-cyan-500/40",
+              textColor: "text-cyan-200",
+            },
+          ]}
+          rumus={[
+            {
+              label: "Rata-Rata Data Tunggal",
+              rumus: "\\bar{x} = \\frac{\\sum_{i=1}^{n} x_i}{n}",
+              bg: "bg-green-900/60",
+              border: "border-green-400/40",
+              labelColor: "text-green-300",
+            },
+            {
+              label: "Rata-Rata dari Tabel Frekuensi",
+              rumus: "\\bar{x} = \\frac{\\sum f_i \\cdot x_i}{\\sum f_i}",
+              bg: "bg-emerald-900/60",
+              border: "border-emerald-400/40",
+              labelColor: "text-emerald-300",
+            },
+          ]}
+          tips={[
+            { emoji: "💡", teks: "Rata-rata sangat sensitif terhadap outlier (nilai ekstrem). Satu nilai yang jauh berbeda dapat menarik rata-rata jauh dari nilai 'wajar'. Cek selalu nilai terbesar dan terkecil!" },
+            { emoji: "🔄", teks: "Transformasi linear: jika y = 3x - 4, maka rata-rata y = 3.(rata-rata x) - 4. Sangat berguna untuk penyederhanaan perhitungan!" },
+            { emoji: "🎯", teks: "Cek hasil: Sigma(fi.xi) harus masuk akal. Cara verifikasi: rata-rata harus berada di antara nilai terkecil dan terbesar data." },
+            { emoji: "📊", teks: "Rata-rata digunakan di rapor sekolah, statistik olahraga (rata-rata gol/poin), analisis ekonomi (pendapatan per kapita), dan hampir semua bidang ilmu." },
+          ]}
+          kesimpulan="Rata-rata adalah jembatan antara data individual dan gambaran keseluruhan. Satu angka yang merangkum ribuan nilai — digunakan di rapor, laporan bisnis, riset ilmiah, hingga kecerdasan buatan. Kuasai rata-rata, kamu kuasai bahasa angka dunia!"
+          kesimpulanBg="bg-gradient-to-r from-green-900/80 to-emerald-900/80"
+          kesimpulanBorder="border-green-400/50"
+          kesimpulanTextColor="text-green-100"
+        />
 
         <div className="mt-8 text-center">
           <button

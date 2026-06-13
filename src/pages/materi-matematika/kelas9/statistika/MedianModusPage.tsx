@@ -6,6 +6,7 @@ import { BookOpen, Lightbulb, Calculator, Target, BarChart2 } from "lucide-react
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 /* ─── Animasi Interaktif Penentuan Median ─── */
 const MedianAnimator = () => {
@@ -1626,6 +1627,77 @@ const MedianModusPage = () => {
           </div>
 
         </div>
+
+        <RangkumanSection
+          gradientFrom="from-purple-900"
+          gradientVia="via-violet-900"
+          gradientTo="to-indigo-900"
+          borderColor="border-purple-500/40"
+          accentColor="text-purple-300"
+          headerIcon="📍"
+          judul="Rangkuman — Median & Modus"
+          subjudul="Dua alternatif rata-rata yang lebih kuat saat data memiliki nilai ekstrem!"
+          ringkasan={[
+            {
+              emoji: "⬆️",
+              judul: "Median Data Ganjil",
+              isi: "Urutkan data, lalu ambil nilai tepat di posisi tengah. Posisi tengah = (n+1)/2. Contoh: n=7, posisi median = data ke-4 setelah diurutkan.",
+              bg: "bg-purple-900/50",
+              border: "border-purple-500/40",
+              textColor: "text-purple-200",
+            },
+            {
+              emoji: "🔀",
+              judul: "Median Data Genap",
+              isi: "Tidak ada satu nilai tepat di tengah. Median = rata-rata dua nilai tengah. Posisi = data ke-(n/2) dan data ke-(n/2 + 1) setelah diurutkan.",
+              bg: "bg-violet-900/50",
+              border: "border-violet-500/40",
+              textColor: "text-violet-200",
+            },
+            {
+              emoji: "👑",
+              judul: "Modus",
+              isi: "Nilai yang paling sering muncul (frekuensi tertinggi). Data bisa punya: 0 modus (semua sama), 1 modus (unimodal), 2 modus (bimodal), atau lebih (multimodal).",
+              bg: "bg-indigo-900/50",
+              border: "border-indigo-500/40",
+              textColor: "text-indigo-200",
+            },
+            {
+              emoji: "⚖️",
+              judul: "Perbandingan Ketiganya",
+              isi: "Mean terpengaruh outlier. Median tahan outlier. Modus paling mudah dicari. Distribusi normal: Mean = Median = Modus. Gunakan sesuai karakteristik data!",
+              bg: "bg-fuchsia-900/50",
+              border: "border-fuchsia-500/40",
+              textColor: "text-fuchsia-200",
+            },
+          ]}
+          rumus={[
+            {
+              label: "Median — n Ganjil",
+              rumus: "\\text{Me} = x_{\\left(\\frac{n+1}{2}\\right)}",
+              bg: "bg-purple-900/60",
+              border: "border-purple-400/40",
+              labelColor: "text-purple-300",
+            },
+            {
+              label: "Median — n Genap",
+              rumus: "\\text{Me} = \\frac{x_{\\left(\\frac{n}{2}\\right)} + x_{\\left(\\frac{n}{2}+1\\right)}}{2}",
+              bg: "bg-violet-900/60",
+              border: "border-violet-400/40",
+              labelColor: "text-violet-300",
+            },
+          ]}
+          tips={[
+            { emoji: "⚠️", teks: "WAJIB urutkan data dari terkecil ke terbesar SEBELUM mencari median! Median yang dicari dari data tidak terurut akan menghasilkan jawaban salah." },
+            { emoji: "🎯", teks: "Modus tidak memerlukan pengurutan — cukup temukan nilai yang paling sering muncul. Jika ada dua nilai sama-sama paling sering, keduanya adalah modus." },
+            { emoji: "🛡️", teks: "Median tidak terpengaruh outlier. Contoh: data gaji 10 karyawan dengan 1 bos bergaji sangat tinggi — gunakan median bukan mean agar lebih adil!" },
+            { emoji: "💡", teks: "Distribusi data: jika Mean > Median > Modus, data miring ke kanan (positif). Jika Mean < Median < Modus, data miring ke kiri (negatif)." },
+          ]}
+          kesimpulan="Median dan Modus adalah pasangan sempurna rata-rata yang tahan terhadap nilai ekstrem. Median dipakai di statistik pendapatan nasional dan survei perumahan. Modus dipakai untuk analisis preferensi konsumen, tren fashion, dan hasil pemilihan umum. Tiga ukuran, satu tujuan: memahami pusat data!"
+          kesimpulanBg="bg-gradient-to-r from-purple-900/80 to-violet-900/80"
+          kesimpulanBorder="border-purple-400/50"
+          kesimpulanTextColor="text-purple-100"
+        />
 
         <div className="mt-8 text-center">
           <button

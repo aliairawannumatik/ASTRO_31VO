@@ -5,6 +5,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Calculator, Target, BarChart2 } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const BAR_COLORS = [
   { bg: "bg-blue-500",   text: "text-blue-300"   },
@@ -2828,6 +2829,77 @@ const PenyajianDataPage = () => {
           </div>
 
         </div>
+
+        <RangkumanSection
+          gradientFrom="from-blue-900"
+          gradientVia="via-indigo-900"
+          gradientTo="to-violet-900"
+          borderColor="border-blue-500/40"
+          accentColor="text-blue-300"
+          headerIcon="📈"
+          judul="Rangkuman — Penyajian Data"
+          subjudul="Lima bentuk penyajian data — ubah angka mentah menjadi visualisasi yang powerful!"
+          ringkasan={[
+            {
+              emoji: "📋",
+              judul: "Tabel Distribusi Frekuensi",
+              isi: "Hitung berapa kali setiap nilai muncul (frekuensi). Wajib: jumlah semua frekuensi = n (total data). Gunakan frekuensi kumulatif untuk pertanyaan 'berapa yang kurang dari x?'",
+              bg: "bg-blue-900/50",
+              border: "border-blue-500/40",
+              textColor: "text-blue-200",
+            },
+            {
+              emoji: "📊",
+              judul: "Diagram Batang & Garis",
+              isi: "Batang: membandingkan nilai antar kategori. Tinggi batang = frekuensi. Garis: menampilkan tren/perubahan data dari waktu ke waktu.",
+              bg: "bg-indigo-900/50",
+              border: "border-indigo-500/40",
+              textColor: "text-indigo-200",
+            },
+            {
+              emoji: "🥧",
+              judul: "Diagram Lingkaran",
+              isi: "Menampilkan proporsi/persentase bagian dari keseluruhan. Sudut = (f/n) x 360 derajat. Persentase = (f/n) x 100%. Total semua sudut = 360 derajat.",
+              bg: "bg-violet-900/50",
+              border: "border-violet-500/40",
+              textColor: "text-violet-200",
+            },
+            {
+              emoji: "🌿",
+              judul: "Diagram Batang Daun",
+              isi: "Mempertahankan nilai asli data sekaligus menampilkan distribusi. Bagian | memisahkan puluhan (batang) dengan satuan (daun). Sangat berguna untuk data berukuran sedang.",
+              bg: "bg-purple-900/50",
+              border: "border-purple-500/40",
+              textColor: "text-purple-200",
+            },
+          ]}
+          rumus={[
+            {
+              label: "Sudut Diagram Lingkaran",
+              rumus: "\\text{Sudut} = \\frac{f}{n} \\times 360°",
+              bg: "bg-blue-900/60",
+              border: "border-blue-400/40",
+              labelColor: "text-blue-300",
+            },
+            {
+              label: "Persentase Frekuensi",
+              rumus: "\\text{Persentase} = \\frac{f}{n} \\times 100\\%",
+              bg: "bg-indigo-900/60",
+              border: "border-indigo-400/40",
+              labelColor: "text-indigo-300",
+            },
+          ]}
+          tips={[
+            { emoji: "✅", teks: "Cek wajib: jumlah semua frekuensi harus sama dengan banyak data (n). Jika tidak sama, ada kesalahan penghitungan!" },
+            { emoji: "🎯", teks: "Pilih diagram batang untuk membandingkan kategori, garis untuk tren waktu, lingkaran untuk persentase, batang daun untuk melihat nilai asli." },
+            { emoji: "🔢", teks: "Frekuensi kumulatif (fk): jumlahkan frekuensi dari baris pertama hingga baris tersebut. Berguna untuk mencari median dan kuartil dari tabel." },
+            { emoji: "💡", teks: "Diagram yang baik langsung menyampaikan informasi tanpa pembaca perlu berpikir keras. Pilih bentuk yang paling sesuai dengan jenis dan tujuan datamu." },
+          ]}
+          kesimpulan="Penyajian data yang tepat mengubah tumpukan angka menjadi informasi visual yang langsung dipahami. Inilah skill yang digunakan jurnalis, analis data, ilmuwan, dan manajer bisnis setiap hari. Data tanpa penyajian hanya angka — data dengan penyajian yang baik adalah cerita!"
+          kesimpulanBg="bg-gradient-to-r from-blue-900/80 to-indigo-900/80"
+          kesimpulanBorder="border-blue-400/50"
+          kesimpulanTextColor="text-blue-100"
+        />
 
         <div className="mt-8 text-center">
           <button

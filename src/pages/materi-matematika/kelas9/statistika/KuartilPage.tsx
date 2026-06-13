@@ -5,6 +5,7 @@ import { BookOpen, Lightbulb, Calculator, Target, BarChart2 } from "lucide-react
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 import KuartilAnimasiMateri from "@/components/KuartilAnimasiMateri";
 
 const KuartilPage = () => {
@@ -805,6 +806,77 @@ const KuartilPage = () => {
               </div>
             )}
           </div>
+
+          <RangkumanSection
+            gradientFrom="from-violet-900"
+            gradientVia="via-purple-900"
+            gradientTo="to-fuchsia-900"
+            borderColor="border-violet-500/40"
+            accentColor="text-violet-300"
+            headerIcon="🎯"
+            judul="Rangkuman — Kuartil"
+            subjudul="Membagi data menjadi 4 bagian sama besar — kunci analisis distribusi data!"
+            ringkasan={[
+              {
+                emoji: "1️⃣",
+                judul: "Q1 — Kuartil Bawah",
+                isi: "Membagi 25% data terbawah. Q1 = median dari 'kaum bawah' (data di bawah Q2). Artinya 25% data berada di bawah nilai Q1.",
+                bg: "bg-violet-900/50",
+                border: "border-violet-500/40",
+                textColor: "text-violet-200",
+              },
+              {
+                emoji: "2️⃣",
+                judul: "Q2 — Kuartil Tengah (Median)",
+                isi: "Q2 adalah median seluruh data. Membagi data menjadi dua kelompok sama besar. 50% data di bawah Q2, 50% di atas Q2.",
+                bg: "bg-purple-900/50",
+                border: "border-purple-500/40",
+                textColor: "text-purple-200",
+              },
+              {
+                emoji: "3️⃣",
+                judul: "Q3 — Kuartil Atas",
+                isi: "Membagi 25% data teratas. Q3 = median dari 'kaum atas' (data di atas Q2). Artinya 75% data berada di bawah nilai Q3.",
+                bg: "bg-fuchsia-900/50",
+                border: "border-fuchsia-500/40",
+                textColor: "text-fuchsia-200",
+              },
+              {
+                emoji: "📏",
+                judul: "JIK — Jangkauan Antar Kuartil",
+                isi: "JIK = Q3 - Q1. Mengukur rentang 50% data bagian tengah. Tidak terpengaruh nilai ekstrem (outlier) sehingga lebih andal dari jangkauan biasa.",
+                bg: "bg-pink-900/50",
+                border: "border-pink-500/40",
+                textColor: "text-pink-200",
+              },
+            ]}
+            rumus={[
+              {
+                label: "Jangkauan Antar Kuartil",
+                rumus: "\\text{JIK} = Q_3 - Q_1",
+                bg: "bg-violet-900/60",
+                border: "border-violet-400/40",
+                labelColor: "text-violet-300",
+              },
+              {
+                label: "Q2 = Median seluruh data",
+                rumus: "Q_1 < Q_2 < Q_3",
+                bg: "bg-purple-900/60",
+                border: "border-purple-400/40",
+                labelColor: "text-purple-300",
+              },
+            ]}
+            tips={[
+              { emoji: "🔑", teks: "Langkah wajib: (1) Urutkan data dari terkecil, (2) Cari Q2 dahulu, (3) Pisah menjadi kaum bawah dan kaum atas, (4) Cari median masing-masing kaum." },
+              { emoji: "⚠️", teks: "Untuk data genap: Q2 = rata-rata dua nilai tengah. Kaum bawah dan kaum atas tidak menyertakan nilai Q2 dalam pencariannya." },
+              { emoji: "🛡️", teks: "JIK tidak terpengaruh outlier — berbeda dengan jangkauan total (xmaks - xmin). Gunakan JIK saat data memiliki nilai ekstrem." },
+              { emoji: "💡", teks: "Q2 = Median. Jangan lupa ini! Sering muncul di soal ujian: 'cari Q2' = 'cari median'. Jawaban sama persis." },
+            ]}
+            kesimpulan="Kuartil membagi data menjadi 4 kelompok yang sama besar dan menjadi dasar Box Plot — alat visualisasi statistik yang digunakan di seluruh dunia. Kuartil sangat berguna untuk mendeteksi outlier, menganalisis distribusi data, dan membandingkan dua kelompok data di bidang medis, keuangan, dan machine learning!"
+            kesimpulanBg="bg-gradient-to-r from-violet-900/80 to-purple-900/80"
+            kesimpulanBorder="border-violet-400/50"
+            kesimpulanTextColor="text-violet-100"
+          />
 
           <div className="mt-4 text-center">
             <button

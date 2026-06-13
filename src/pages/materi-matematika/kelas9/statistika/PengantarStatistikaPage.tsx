@@ -4,6 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Calculator, Target, Database } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const PengantarStatistikaPage = () => {
   const navigate = useNavigate();
@@ -928,6 +929,77 @@ const PengantarStatistikaPage = () => {
           </div>
 
         </div>
+
+        <RangkumanSection
+          gradientFrom="from-teal-900"
+          gradientVia="via-cyan-900"
+          gradientTo="to-sky-900"
+          borderColor="border-teal-500/40"
+          accentColor="text-teal-300"
+          headerIcon="📊"
+          judul="Rangkuman — Pengantar Statistika"
+          subjudul="Konsep dasar ilmu pengolahan data yang mengubah angka menjadi informasi!"
+          ringkasan={[
+            {
+              emoji: "📚",
+              judul: "Statistika vs Statistik",
+              isi: "Statistika = ilmu yang mempelajari data. Statistik = nilai/angka hasil pengolahan data (contoh: rata-rata, median). Satu ilmu, satu angka!",
+              bg: "bg-teal-900/50",
+              border: "border-teal-500/40",
+              textColor: "text-teal-200",
+            },
+            {
+              emoji: "👥",
+              judul: "Populasi vs Sampel",
+              isi: "Populasi = seluruh objek penelitian. Sampel = sebagian populasi yang dipilih mewakili keseluruhan. Sensus = ambil seluruh populasi.",
+              bg: "bg-cyan-900/50",
+              border: "border-cyan-500/40",
+              textColor: "text-cyan-200",
+            },
+            {
+              emoji: "🔢",
+              judul: "Jenis Data",
+              isi: "Kualitatif = data kategori/kualitas (warna, nama, jenis). Kuantitatif = data angka yang bisa dihitung. Diskrit = bulat. Kontinu = bisa desimal.",
+              bg: "bg-sky-900/50",
+              border: "border-sky-500/40",
+              textColor: "text-sky-200",
+            },
+            {
+              emoji: "🗂️",
+              judul: "Pengumpulan Data",
+              isi: "Cara: wawancara, angket/kuesioner, observasi, dokumentasi. Pilih metode sesuai tujuan dan sumber data yang tersedia.",
+              bg: "bg-indigo-900/50",
+              border: "border-indigo-500/40",
+              textColor: "text-indigo-200",
+            },
+          ]}
+          rumus={[
+            {
+              label: "Rumus Rata-Rata (preview)",
+              rumus: "\\bar{x} = \\frac{\\sum x_i}{n}",
+              bg: "bg-teal-900/60",
+              border: "border-teal-400/40",
+              labelColor: "text-teal-300",
+            },
+            {
+              label: "Sampel dari Populasi",
+              rumus: "\\text{Sampel} = \\frac{\\%}{100} \\times \\text{Populasi}",
+              bg: "bg-cyan-900/60",
+              border: "border-cyan-400/40",
+              labelColor: "text-cyan-300",
+            },
+          ]}
+          tips={[
+            { emoji: "💡", teks: "Cara mudah bedakan data: Tanya diri sendiri 'Apakah bisa dirata-rata?' Jika ya = kuantitatif. Jika tidak masuk akal (misal rata-rata golongan darah?) = kualitatif." },
+            { emoji: "🎯", teks: "Sampel yang baik harus representatif (mewakili populasi) dan diambil secara acak agar tidak bias." },
+            { emoji: "📊", teks: "Pilih penyajian sesuai tujuan: batang untuk perbandingan, garis untuk tren, lingkaran untuk proporsi, tabel untuk data detail." },
+            { emoji: "🔍", teks: "Statistika digunakan di mana-mana: riset medis, survei politik, analisis bisnis, kecerdasan buatan, dan sains olahraga." },
+          ]}
+          kesimpulan="Statistika adalah ilmu yang mengubah data mentah menjadi informasi berharga. Mulai dari memahami istilah, jenis data, cara mengumpulkan, hingga cara menyajikan — semua langkah ini membentuk fondasi analisis data modern yang digunakan di setiap bidang ilmu!"
+          kesimpulanBg="bg-gradient-to-r from-teal-900/80 to-cyan-900/80"
+          kesimpulanBorder="border-teal-400/50"
+          kesimpulanTextColor="text-teal-100"
+        />
 
         <div className="mt-8 text-center">
           <button

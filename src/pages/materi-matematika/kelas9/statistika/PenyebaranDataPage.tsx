@@ -5,6 +5,7 @@ import { BookOpen, Lightbulb, Calculator, Target, TrendingUp } from "lucide-reac
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 import JangkauanAnimasi from "@/components/JangkauanAnimasi";
 import JIKdanSKAnimasi from "@/components/JIKdanSKAnimasi";
 
@@ -714,6 +715,77 @@ const PenyebaranDataPage = () => {
               </div>
             )}
           </div>
+
+          <RangkumanSection
+            gradientFrom="from-orange-900"
+            gradientVia="via-amber-900"
+            gradientTo="to-yellow-900"
+            borderColor="border-orange-500/40"
+            accentColor="text-orange-300"
+            headerIcon="📡"
+            judul="Rangkuman — Ukuran Penyebaran Data"
+            subjudul="Mengukur seberapa tersebar atau mengelompok data — pelengkap ukuran pemusatan!"
+            ringkasan={[
+              {
+                emoji: "📏",
+                judul: "Jangkauan (J)",
+                isi: "J = nilai terbesar - nilai terkecil. Sangat mudah dihitung, tapi sangat sensitif terhadap outlier. Satu nilai ekstrem bisa membuat J sangat besar.",
+                bg: "bg-orange-900/50",
+                border: "border-orange-500/40",
+                textColor: "text-orange-200",
+              },
+              {
+                emoji: "🔲",
+                judul: "JIK — Jangkauan Antar Kuartil",
+                isi: "JIK = Q3 - Q1. Mengukur rentang 50% data bagian tengah. Tidak terpengaruh outlier sehingga lebih robust (tahan). Selalu hitung Q1 dan Q3 dulu.",
+                bg: "bg-amber-900/50",
+                border: "border-amber-500/40",
+                textColor: "text-amber-200",
+              },
+              {
+                emoji: "⚖️",
+                judul: "Simpangan Kuartil (Qd)",
+                isi: "Qd = JIK / 2 = (Q3 - Q1) / 2. Rata-rata jarak dari Q1 ke Q2 dan dari Q2 ke Q3. Mengukur variabilitas data bagian tengah secara simetris.",
+                bg: "bg-yellow-900/50",
+                border: "border-yellow-600/40",
+                textColor: "text-yellow-200",
+              },
+              {
+                emoji: "📊",
+                judul: "Interpretasi Penyebaran",
+                isi: "Nilai penyebaran kecil = data berkelompok dekat (konsisten). Nilai besar = data tersebar jauh (variatif). Dua dataset bisa punya mean sama tapi penyebaran berbeda!",
+                bg: "bg-red-900/50",
+                border: "border-red-500/40",
+                textColor: "text-red-200",
+              },
+            ]}
+            rumus={[
+              {
+                label: "Jangkauan",
+                rumus: "J = x_{\\text{maks}} - x_{\\text{min}}",
+                bg: "bg-orange-900/60",
+                border: "border-orange-400/40",
+                labelColor: "text-orange-300",
+              },
+              {
+                label: "JIK dan Simpangan Kuartil",
+                rumus: "\\text{JIK} = Q_3 - Q_1 \\quad;\\quad Q_d = \\frac{Q_3 - Q_1}{2}",
+                bg: "bg-amber-900/60",
+                border: "border-amber-400/40",
+                labelColor: "text-amber-300",
+              },
+            ]}
+            tips={[
+              { emoji: "⚠️", teks: "Jangkauan sangat sensitif terhadap outlier. Jika ada data ekstrem, J bisa sangat besar dan tidak merepresentasikan penyebaran data secara umum." },
+              { emoji: "🛡️", teks: "JIK dan Qd lebih robust (tahan outlier) daripada Jangkauan. Gunakan JIK/Qd saat data memiliki nilai ekstrem atau distribusi tidak simetris." },
+              { emoji: "🔍", teks: "Cek selalu: Q1 < Q2 < Q3. Jika tidak, ada kesalahan dalam pengurutan atau penentuan kuartil. Ini adalah syarat mutlak yang harus terpenuhi!" },
+              { emoji: "💡", teks: "Hubungan penting: Qd = JIK/2. Jika tahu salah satu, langsung bisa hitung yang lain. Jika soal memberi Qd = 8, maka JIK = 16." },
+            ]}
+            kesimpulan="Ukuran penyebaran melengkapi ukuran pemusatan — dua dataset bisa punya rata-rata yang sama tapi penyebaran yang sangat berbeda. Data dengan penyebaran kecil lebih konsisten dan dapat diandalkan. Ini adalah kunci analisis risiko di dunia keuangan, kontrol kualitas industri, dan penelitian ilmiah!"
+            kesimpulanBg="bg-gradient-to-r from-orange-900/80 to-amber-900/80"
+            kesimpulanBorder="border-orange-400/50"
+            kesimpulanTextColor="text-orange-100"
+          />
 
           <div className="mt-4 text-center">
             <button
