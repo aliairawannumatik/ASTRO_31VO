@@ -2,11 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, Lightbulb, Target, Layers, Sparkles, Activity } from "lucide-react";
+import { BookOpen, Lightbulb, Target, Layers, Sparkles } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import ArcDifferenceAnimation from "@/components/ArcDifferenceAnimation";
+import { ArcPatternPanel } from "@/components/ArcDifferenceAnimation";
 
 const SectionHeader = ({ icon, iconColor, title }: {
   icon: React.ReactNode; iconColor?: string; title: string;
@@ -281,6 +281,13 @@ const PengertianPolaPage = () => {
                     );
                   })}
                 </svg>
+                <ArcPatternPanel
+                  terms={[2, 4, 6, 8, 10, 12]}
+                  arcColor="#22d3ee"
+                  labelColor="#a5f3fc"
+                  getDifferences={(t) => t.slice(1).map((v, i) => v - t[i])}
+                  diffLabel="Beda tetap +2"
+                />
                 <BlockMath math="U_n = 2n \quad (n = 1, 2, 3, \ldots)" />
               </div>
 
@@ -312,6 +319,13 @@ const PengertianPolaPage = () => {
                     );
                   })}
                 </svg>
+                <ArcPatternPanel
+                  terms={[1, 3, 5, 7, 9, 11]}
+                  arcColor="#fb923c"
+                  labelColor="#fed7aa"
+                  getDifferences={(t) => t.slice(1).map((v, i) => v - t[i])}
+                  diffLabel="Beda tetap +2"
+                />
                 <BlockMath math="U_n = 2n - 1 \quad (n = 1, 2, 3, \ldots)" />
               </div>
 
@@ -343,6 +357,14 @@ const PengertianPolaPage = () => {
                   ))}
                   <span className="text-white/40 self-center text-lg">...</span>
                 </div>
+                <ArcPatternPanel
+                  terms={[1, 4, 9, 16, 25, 36]}
+                  arcColor="#a78bfa"
+                  labelColor="#ddd6fe"
+                  getDifferences={(t) => t.slice(1).map((v, i) => v - t[i])}
+                  diffLabel="Beda bertambah +2 setiap kali"
+                  note="Beda: +3, +5, +7, +9, +11 → bilangan ganjil!"
+                />
                 <BlockMath math="U_n = n^2 \quad \Rightarrow \quad 1, 4, 9, 16, 25, \ldots" />
               </div>
 
@@ -374,6 +396,14 @@ const PengertianPolaPage = () => {
                   ))}
                   <span className="text-white/40 self-center text-lg">...</span>
                 </div>
+                <ArcPatternPanel
+                  terms={[2, 6, 12, 20, 30, 42]}
+                  arcColor="#4ade80"
+                  labelColor="#bbf7d0"
+                  getDifferences={(t) => t.slice(1).map((v, i) => v - t[i])}
+                  diffLabel="Beda bertambah +2 setiap kali"
+                  note="Beda: +4, +6, +8, +10, +12 → bilangan genap!"
+                />
                 <BlockMath math="U_n = n(n+1) \quad \Rightarrow \quad 2, 6, 12, 20, 30, \ldots" />
               </div>
 
@@ -405,6 +435,14 @@ const PengertianPolaPage = () => {
                   ))}
                   <span className="text-white/40 self-center text-lg">...</span>
                 </div>
+                <ArcPatternPanel
+                  terms={[1, 3, 6, 10, 15, 21]}
+                  arcColor="#facc15"
+                  labelColor="#fef08a"
+                  getDifferences={(t) => t.slice(1).map((v, i) => v - t[i])}
+                  diffLabel="Beda bertambah +1 setiap kali"
+                  note="Beda: +2, +3, +4, +5, +6 → bilangan asli!"
+                />
                 <BlockMath math="U_n = \frac{n(n+1)}{2} \quad \Rightarrow \quad 1, 3, 6, 10, 15, \ldots" />
               </div>
 
@@ -447,6 +485,14 @@ const PengertianPolaPage = () => {
                     <BlockMath math="\text{Jumlah baris ke-}n = 2^{n-1}" />
                   </div>
                 </div>
+                <ArcPatternPanel
+                  terms={[1, 2, 4, 8, 16, 32]}
+                  arcColor="#f472b6"
+                  labelColor="#fbcfe8"
+                  getDifferences={(t) => t.slice(1).map((v, i) => v - t[i])}
+                  diffLabel="Beda selalu ×2 (berlipat ganda)"
+                  note={<>Beda: +1, +2, +4, +8, +16 → jumlah baris ke-n = <InlineMath math="2^{n-1}" /></>}
+                />
               </div>
 
               {/* 7. Fibonacci */}
@@ -464,19 +510,16 @@ const PengertianPolaPage = () => {
                 </div>
                 <BlockMath math="U_n = U_{n-1} + U_{n-2} \quad (U_1 = U_2 = 1)" />
                 <p className="font-body text-xs text-white/60 mt-1">🌿 Muncul di alam: kelopak bunga, cangkang nautilus, susunan biji bunga matahari!</p>
+                <ArcPatternPanel
+                  terms={[1, 1, 2, 3, 5, 8, 13]}
+                  arcColor="#2dd4bf"
+                  labelColor="#99f6e4"
+                  getDifferences={(t) => t.slice(1).map((v, i) => v - t[i])}
+                  note="Setiap suku = jumlah dua suku sebelumnya"
+                  isFibonacci={true}
+                />
               </div>
 
-            </div>
-          </div>
-
-          {/* ANIMASI BUSUR BEDA */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<Activity className="w-5 h-5" />} iconColor="text-cyan-400" title="🌀 Animasi Busur Beda — Visualisasi Selisih Setiap Pola" />
-            <div className="px-5 pb-5 space-y-3">
-              <p className="font-body text-sm text-white/70 leading-relaxed">
-                Pilih sebuah pola di bawah lalu perhatikan <strong className="text-cyan-300">busur melengkung</strong> yang menunjukkan <strong className="text-cyan-300">beda (selisih)</strong> antara dua suku yang berurutan. Busur muncul satu per satu dari kiri ke kanan — amati polanya!
-              </p>
-              <ArcDifferenceAnimation />
             </div>
           </div>
 

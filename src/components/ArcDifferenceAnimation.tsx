@@ -233,6 +233,88 @@ function ArcSVG({
 const sub = (n: number) =>
   String(n).split("").map((d) => "₀₁₂₃₄₅₆₇₈₉"[+d]).join("");
 
+export function ArcPatternPanel({
+  terms,
+  getDifferences,
+  arcColor,
+  labelColor,
+  diffLabel,
+  note,
+  isFibonacci,
+}: {
+  terms: number[];
+  getDifferences: (terms: number[]) => (number | string)[];
+  arcColor: string;
+  labelColor: string;
+  diffLabel?: string;
+  note?: React.ReactNode;
+  isFibonacci?: boolean;
+}) {
+  const [animKey, setAnimKey] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const diffs = getDifferences(terms);
+
+  const handlePlay = () => {
+    setAnimKey((k) => k + 1);
+    setPlaying(true);
+    setTimeout(() => setPlaying(false), diffs.length * 320 + 500);
+  };
+
+  return (
+    <div className="mt-3 space-y-2">
+      <div className="flex justify-center">
+        <button
+          onClick={handlePlay}
+          disabled={playing}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold font-body border transition-all duration-200 active:scale-95 disabled:opacity-60"
+          style={{
+            background: arcColor + "22",
+            borderColor: arcColor + "66",
+            color: labelColor,
+          }}
+        >
+          {playing ? "⏳ Animasi berjalan..." : "▶ Putar Animasi Busur"}
+        </button>
+      </div>
+      <div className="overflow-x-auto pb-1">
+        <ArcSVG
+          key={animKey}
+          terms={terms}
+          diffs={diffs}
+          arcColor={arcColor}
+          labelColor={labelColor}
+          animate={animKey > 0}
+          isFibonacci={isFibonacci}
+        />
+      </div>
+      {diffLabel && (
+        <div className="text-center text-xs font-bold font-body" style={{ color: labelColor }}>
+          {diffLabel}
+        </div>
+      )}
+      {note && (
+        <div className="text-center text-xs text-white/60 font-body">{note}</div>
+      )}
+      <div className="flex flex-wrap gap-1.5 justify-center">
+        {diffs.map((d, i) => (
+          <span
+            key={i}
+            className="text-xs font-bold px-2 py-0.5 rounded"
+            style={{
+              background: arcColor + "22",
+              border: `1px solid ${arcColor}66`,
+              color: labelColor,
+            }}
+          >
+            {`U${sub(i + 1)}→U${sub(i + 2)}: `}
+            {typeof d === "number" ? (d >= 0 ? `+${d}` : `${d}`) : d}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ArcDifferenceAnimation() {
   const [selected, setSelected] = useState(0);
   const [animKey, setAnimKey] = useState(0);
