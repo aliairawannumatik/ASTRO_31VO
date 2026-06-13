@@ -229,40 +229,207 @@ const DefinisiSPLDVPage = () => {
                   </div>
                 </div>
 
-                {/* Jenis Solusi SPLDV */}
-                <div className="space-y-2">
+                {/* Jenis Solusi SPLDV — SVG Illustrations */}
+                <div className="space-y-3">
                   <p className="font-body text-sm font-bold text-white">🔢 Tiga Kemungkinan Solusi SPLDV</p>
-                  <div className="space-y-2">
-                    {[
-                      {
-                        jenis: "Tepat satu solusi",
-                        icon: "🎯",
-                        desc: "Dua garis berpotongan di satu titik — SPLDV memiliki penyelesaian tunggal (x, y).",
-                        color: "bg-green-900/30 border-green-500/30 text-green-300",
-                        syarat: "Gradien kedua garis berbeda",
-                      },
-                      {
-                        jenis: "Tak hingga solusi",
-                        icon: "♾️",
-                        desc: "Dua garis saling berimpit (persamaan sebenarnya sama) — setiap titik di garis adalah solusi.",
-                        color: "bg-yellow-900/30 border-yellow-500/30 text-yellow-300",
-                        syarat: "Kedua persamaan setara",
-                      },
-                      {
-                        jenis: "Tidak ada solusi",
-                        icon: "🚫",
-                        desc: "Dua garis sejajar (tidak pernah berpotongan) — tidak ada pasangan (x, y) yang memenuhi keduanya.",
-                        color: "bg-red-900/30 border-red-500/30 text-red-300",
-                        syarat: "Gradien sama, tetapi konstanta berbeda",
-                      },
-                    ].map(({ jenis, icon, desc, color, syarat }) => (
-                      <div key={jenis} className={`border ${color} rounded-xl p-3`}>
-                        <p className="font-display text-sm font-bold mb-1">{icon} {jenis}</p>
-                        <p className="font-body text-xs text-white/70 mb-1">{desc}</p>
-                        <p className="font-body text-xs text-white/40">Syarat: {syarat}</p>
+
+                  {/* ── KASUS 1: BERPOTONGAN ── */}
+                  <div className="bg-gradient-to-br from-emerald-950/80 to-green-900/40 border border-emerald-500/50 rounded-2xl overflow-hidden">
+                    <div className="px-4 pt-3 pb-1 flex items-center gap-2">
+                      <span className="text-2xl">🎯</span>
+                      <div>
+                        <p className="font-display text-sm font-bold text-emerald-300">Tepat Satu Solusi</p>
+                        <p className="font-body text-[11px] text-white/50">Dua garis berpotongan di satu titik</p>
                       </div>
-                    ))}
+                    </div>
+                    <div className="px-3 py-1">
+                      <svg viewBox="0 0 280 190" className="w-full rounded-xl" style={{background:"linear-gradient(135deg,#052e16cc,#14532dcc)"}}>
+                        <defs>
+                          <radialGradient id="dot1" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stopColor="#fef08a" stopOpacity="1"/>
+                            <stop offset="100%" stopColor="#eab308" stopOpacity="0"/>
+                          </radialGradient>
+                          <filter id="glow1">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                          </filter>
+                        </defs>
+                        {/* Grid */}
+                        {[-4,-3,-2,-1,1,2,3,4].map(k => (
+                          <line key={`vg1-${k}`} x1={140+k*25} y1={5} x2={140+k*25} y2={185} stroke="#ffffff" strokeOpacity="0.07" strokeWidth="1"/>
+                        ))}
+                        {[-3,-2,-1,1,2,3].map(k => (
+                          <line key={`hg1-${k}`} x1={5} y1={95-k*25} x2={275} y2={95-k*25} stroke="#ffffff" strokeOpacity="0.07" strokeWidth="1"/>
+                        ))}
+                        {/* Axes */}
+                        <line x1="5" y1="95" x2="275" y2="95" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1.5"/>
+                        <line x1="140" y1="5" x2="140" y2="185" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1.5"/>
+                        {/* Axis arrows */}
+                        <polygon points="275,95 268,91 268,99" fill="#ffffff" fillOpacity="0.25"/>
+                        <polygon points="140,5 136,12 144,12" fill="#ffffff" fillOpacity="0.25"/>
+                        {/* Line 1: y = x  (cyan) */}
+                        <line x1="15" y1="220" x2="235" y2="-30" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
+                        <line x1="15" y1="220" x2="235" y2="-30" stroke="#67e8f9" strokeWidth="1.5" strokeLinecap="round"/>
+                        {/* Line 2: y = -x + 3  (rose) */}
+                        <line x1="15" y1="-5" x2="265" y2="170" stroke="#fb7185" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
+                        <line x1="15" y1="-5" x2="265" y2="170" stroke="#fda4af" strokeWidth="1.5" strokeLinecap="round"/>
+                        {/* Intersection: x=1.5, y=1.5  → svg=(177.5, 57.5) */}
+                        <circle cx="177.5" cy="57.5" r="10" fill="url(#dot1)" opacity="0.6"/>
+                        <circle cx="177.5" cy="57.5" r="5" fill="#fef08a" filter="url(#glow1)"/>
+                        <circle cx="177.5" cy="57.5" r="3.5" fill="#ffffff"/>
+                        {/* Dashed guide lines to intersection */}
+                        <line x1="177.5" y1="57.5" x2="177.5" y2="95" stroke="#fef08a" strokeWidth="1" strokeDasharray="3,3" strokeOpacity="0.6"/>
+                        <line x1="140" y1="57.5" x2="177.5" y2="57.5" stroke="#fef08a" strokeWidth="1" strokeDasharray="3,3" strokeOpacity="0.6"/>
+                        {/* Intersection label */}
+                        <rect x="185" y="42" width="75" height="22" rx="5" fill="#1a2e1a" fillOpacity="0.85"/>
+                        <text x="222" y="57" textAnchor="middle" fill="#fef08a" fontSize="11" fontFamily="monospace" fontWeight="bold">Titik Potong</text>
+                        {/* Axis labels */}
+                        <text x="269" y="109" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">x</text>
+                        <text x="144" y="14" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">y</text>
+                        {/* Line labels */}
+                        <text x="220" y="28" fill="#67e8f9" fontSize="10" fontFamily="monospace">y = x</text>
+                        <text x="20" y="22" fill="#fda4af" fontSize="10" fontFamily="monospace">y = -x+3</text>
+                      </svg>
+                    </div>
+                    <div className="px-4 pb-3 pt-1 space-y-1">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-body bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 rounded-full px-2.5 py-0.5">
+                          <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block"/>y = x
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-[11px] font-body bg-rose-500/15 border border-rose-500/30 text-rose-300 rounded-full px-2.5 py-0.5">
+                          <span className="w-2 h-2 rounded-full bg-rose-400 inline-block"/>y = −x + 3
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-[11px] font-body bg-yellow-500/15 border border-yellow-500/30 text-yellow-300 rounded-full px-2.5 py-0.5">
+                          <span className="w-2 h-2 rounded-full bg-yellow-300 inline-block"/>Titik potong (1,5 ; 1,5)
+                        </span>
+                      </div>
+                      <p className="font-body text-[11px] text-white/55">Gradien berbeda → garis pasti berpotongan → ada <strong className="text-emerald-300">tepat satu solusi</strong> (x, y).</p>
+                    </div>
                   </div>
+
+                  {/* ── KASUS 2: BERIMPIT ── */}
+                  <div className="bg-gradient-to-br from-yellow-950/80 to-amber-900/30 border border-yellow-500/50 rounded-2xl overflow-hidden">
+                    <div className="px-4 pt-3 pb-1 flex items-center gap-2">
+                      <span className="text-2xl">♾️</span>
+                      <div>
+                        <p className="font-display text-sm font-bold text-yellow-300">Tak Hingga Solusi</p>
+                        <p className="font-body text-[11px] text-white/50">Dua garis saling berimpit (sama persis)</p>
+                      </div>
+                    </div>
+                    <div className="px-3 py-1">
+                      <svg viewBox="0 0 280 190" className="w-full rounded-xl" style={{background:"linear-gradient(135deg,#1c1400cc,#2d2000cc)"}}>
+                        <defs>
+                          <filter id="glow2">
+                            <feGaussianBlur stdDeviation="4" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                          </filter>
+                        </defs>
+                        {/* Grid */}
+                        {[-4,-3,-2,-1,1,2,3,4].map(k => (
+                          <line key={`vg2-${k}`} x1={140+k*25} y1={5} x2={140+k*25} y2={185} stroke="#ffffff" strokeOpacity="0.07" strokeWidth="1"/>
+                        ))}
+                        {[-3,-2,-1,1,2,3].map(k => (
+                          <line key={`hg2-${k}`} x1={5} y1={95-k*25} x2={275} y2={95-k*25} stroke="#ffffff" strokeOpacity="0.07" strokeWidth="1"/>
+                        ))}
+                        {/* Axes */}
+                        <line x1="5" y1="95" x2="275" y2="95" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1.5"/>
+                        <line x1="140" y1="5" x2="140" y2="185" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1.5"/>
+                        <polygon points="275,95 268,91 268,99" fill="#ffffff" fillOpacity="0.25"/>
+                        <polygon points="140,5 136,12 144,12" fill="#ffffff" fillOpacity="0.25"/>
+                        {/* Line glow (fat) - represents berimpit */}
+                        <line x1="10" y1="143" x2="270" y2="47" stroke="#fbbf24" strokeWidth="10" strokeLinecap="round" strokeOpacity="0.18" filter="url(#glow2)"/>
+                        {/* Line 1: y = 0.5x + 1  (amber) */}
+                        <line x1="10" y1="143" x2="270" y2="47" stroke="#fcd34d" strokeWidth="3" strokeLinecap="round" strokeOpacity="0.9"/>
+                        {/* Line 2: same, violet on top */}
+                        <line x1="10" y1="143" x2="270" y2="47" stroke="#c084fc" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.85" strokeDasharray="6,5"/>
+                        {/* "Berimpit" label in center */}
+                        <rect x="90" y="72" width="100" height="22" rx="6" fill="#1c1400" fillOpacity="0.9"/>
+                        <text x="140" y="87" textAnchor="middle" fill="#fcd34d" fontSize="11" fontFamily="monospace" fontWeight="bold">● Garis Berimpit</text>
+                        {/* Infinity dots along line */}
+                        {[40,80,120,160,200,240].map((cx, i) => {
+                          const cy = 143 - (cx-10)*(96/260);
+                          return <circle key={i} cx={cx} cy={cy} r="3" fill="#fef3c7" fillOpacity="0.7"/>;
+                        })}
+                        <text x="269" y="109" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">x</text>
+                        <text x="144" y="14" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">y</text>
+                        <text x="15" y="170" fill="#fcd34d" fontSize="10" fontFamily="monospace">y = 0,5x+1</text>
+                        <text x="155" y="42" fill="#c084fc" fontSize="10" fontFamily="monospace">y = 0,5x+1</text>
+                      </svg>
+                    </div>
+                    <div className="px-4 pb-3 pt-1 space-y-1">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-body bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded-full px-2.5 py-0.5">
+                          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block"/>y = 0,5x + 1
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-[11px] font-body bg-violet-500/15 border border-violet-500/30 text-violet-300 rounded-full px-2.5 py-0.5">
+                          <span className="w-2 h-2 rounded-full bg-violet-400 inline-block"/>y = 0,5x + 1 (sama!)
+                        </span>
+                      </div>
+                      <p className="font-body text-[11px] text-white/55">Kedua persamaan setara → garis berimpit → <strong className="text-yellow-300">semua titik di garis adalah solusi</strong>.</p>
+                    </div>
+                  </div>
+
+                  {/* ── KASUS 3: SEJAJAR ── */}
+                  <div className="bg-gradient-to-br from-red-950/80 to-rose-900/30 border border-red-500/50 rounded-2xl overflow-hidden">
+                    <div className="px-4 pt-3 pb-1 flex items-center gap-2">
+                      <span className="text-2xl">🚫</span>
+                      <div>
+                        <p className="font-display text-sm font-bold text-red-300">Tidak Ada Solusi</p>
+                        <p className="font-body text-[11px] text-white/50">Dua garis sejajar, tidak pernah bertemu</p>
+                      </div>
+                    </div>
+                    <div className="px-3 py-1">
+                      <svg viewBox="0 0 280 190" className="w-full rounded-xl" style={{background:"linear-gradient(135deg,#2d0a0acc,#1c0505cc)"}}>
+                        <defs>
+                          <filter id="glow3">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                          </filter>
+                        </defs>
+                        {/* Grid */}
+                        {[-4,-3,-2,-1,1,2,3,4].map(k => (
+                          <line key={`vg3-${k}`} x1={140+k*25} y1={5} x2={140+k*25} y2={185} stroke="#ffffff" strokeOpacity="0.07" strokeWidth="1"/>
+                        ))}
+                        {[-3,-2,-1,1,2,3].map(k => (
+                          <line key={`hg3-${k}`} x1={5} y1={95-k*25} x2={275} y2={95-k*25} stroke="#ffffff" strokeOpacity="0.07" strokeWidth="1"/>
+                        ))}
+                        {/* Axes */}
+                        <line x1="5" y1="95" x2="275" y2="95" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1.5"/>
+                        <line x1="140" y1="5" x2="140" y2="185" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1.5"/>
+                        <polygon points="275,95 268,91 268,99" fill="#ffffff" fillOpacity="0.25"/>
+                        <polygon points="140,5 136,12 144,12" fill="#ffffff" fillOpacity="0.25"/>
+                        {/* Line 1: y = x + 2.5  (orange)  → svg: at x=-5,y=-2.5:(15,157.5) at x=2,y=4.5:(190,7.5) */}
+                        <line x1="15" y1="157.5" x2="195" y2="2.5" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow3)" strokeOpacity="0.8"/>
+                        <line x1="15" y1="157.5" x2="195" y2="2.5" stroke="#fdba74" strokeWidth="1.8" strokeLinecap="round"/>
+                        {/* Line 2: y = x - 1.5  (red)   → svg: at x=-1.5,y=-3:(102.5,170) at x=4.5,y=3:(252.5,20) */}
+                        <line x1="95" y1="182.5" x2="265" y2="7.5" stroke="#f87171" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow3)" strokeOpacity="0.8"/>
+                        <line x1="95" y1="182.5" x2="265" y2="7.5" stroke="#fca5a5" strokeWidth="1.8" strokeLinecap="round"/>
+                        {/* Parallel gap indicator */}
+                        <line x1="130" y1="60" x2="155" y2="60" stroke="#ffffff" strokeOpacity="0.5" strokeWidth="1" markerEnd="url(#arrow)"/>
+                        {/* "Sejajar" label */}
+                        <rect x="82" y="85" width="116" height="22" rx="6" fill="#1c0505" fillOpacity="0.9"/>
+                        <text x="140" y="100" textAnchor="middle" fill="#f87171" fontSize="11" fontFamily="monospace" fontWeight="bold">⟺ Garis Sejajar</text>
+                        {/* No intersection cross mark */}
+                        <text x="200" y="75" fill="#ef4444" fontSize="18" fontFamily="monospace" fontWeight="bold" opacity="0.7">∅</text>
+                        <text x="269" y="109" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">x</text>
+                        <text x="144" y="14" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">y</text>
+                        <text x="16" y="180" fill="#fdba74" fontSize="10" fontFamily="monospace">y = x+2,5</text>
+                        <text x="196" y="20" fill="#fca5a5" fontSize="10" fontFamily="monospace">y = x−1,5</text>
+                      </svg>
+                    </div>
+                    <div className="px-4 pb-3 pt-1 space-y-1">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-body bg-orange-500/15 border border-orange-500/30 text-orange-300 rounded-full px-2.5 py-0.5">
+                          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block"/>y = x + 2,5
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-[11px] font-body bg-red-500/15 border border-red-500/30 text-red-300 rounded-full px-2.5 py-0.5">
+                          <span className="w-2 h-2 rounded-full bg-red-400 inline-block"/>y = x − 1,5
+                        </span>
+                      </div>
+                      <p className="font-body text-[11px] text-white/55">Gradien sama, konstanta berbeda → garis sejajar → <strong className="text-red-300">tidak ada solusi</strong> (∅).</p>
+                    </div>
+                  </div>
+
                 </div>
 
                 {/* Verifikasi solusi */}
