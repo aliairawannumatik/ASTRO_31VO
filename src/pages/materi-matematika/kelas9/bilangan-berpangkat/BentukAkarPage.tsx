@@ -930,6 +930,37 @@ const BentukAkarPage = () => {
             </div>
           </div>
 
+          {/* Kesimpulan */}
+          <div className="bg-gradient-to-br from-green-500/15 to-teal-500/15 border border-green-400/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-green-500/25 to-teal-500/25 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">🎓</span>
+              <div>
+                <p className="font-display text-base font-bold text-green-300 leading-tight">Kesimpulan</p>
+                <p className="font-body text-xs text-green-200/70">Akar bukan misteri — kini kamu pegang kuncinya!</p>
+              </div>
+            </div>
+            <div className="px-5 py-5 space-y-4 font-body text-sm text-white/85">
+              <p>Selamat! Kamu telah menjelajahi dunia <strong className="text-green-300">bentuk akar</strong> dari yang paling dasar hingga teknik rasionalisasi tingkat lanjut yang sering muncul di soal UNBK dan olimpiade.</p>
+              <div className="grid grid-cols-1 gap-2">
+                <div className="flex items-center gap-2 bg-green-500/10 rounded-lg px-3 py-2">
+                  <span className="text-green-400">⭐</span>
+                  <span>Kamu tahu bahwa <InlineMath math="\sqrt{a} = a^{1/2}" /> — akar adalah pangkat pecahan yang menyamar</span>
+                </div>
+                <div className="flex items-center gap-2 bg-cyan-500/10 rounded-lg px-3 py-2">
+                  <span className="text-cyan-400">⭐</span>
+                  <span>Kamu bisa menyederhanakan, menjumlah, mengalikan, dan merasionalkan bentuk akar</span>
+                </div>
+                <div className="flex items-center gap-2 bg-teal-500/10 rounded-lg px-3 py-2">
+                  <span className="text-teal-400">⭐</span>
+                  <span>Kamu memahami konsep sekawan untuk menghilangkan akar dari penyebut pecahan</span>
+                </div>
+              </div>
+              <p className="text-center text-green-300 font-semibold text-sm pt-1">
+                🌟 Bentuk akar adalah pintu menuju geometri dan trigonometri yang lebih dalam — kamu sudah siap! 🌟
+              </p>
+            </div>
+          </div>
+
           {/* Tombol Kembali */}
           <div className="mt-4 text-center">
             <button

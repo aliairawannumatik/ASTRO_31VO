@@ -704,6 +704,37 @@ const NotasiIlmiahPage = () => {
             </div>
           </div>
 
+          {/* Kesimpulan */}
+          <div className="bg-gradient-to-br from-blue-500/15 to-indigo-500/15 border border-blue-400/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-500/25 to-indigo-500/25 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">🎓</span>
+              <div>
+                <p className="font-display text-base font-bold text-blue-300 leading-tight">Kesimpulan</p>
+                <p className="font-body text-xs text-blue-200/70">Bahasa para ilmuwan kini ada di tanganmu!</p>
+              </div>
+            </div>
+            <div className="px-5 py-5 space-y-4 font-body text-sm text-white/85">
+              <p>Hebat! Kamu kini bisa berbicara dalam <strong className="text-blue-300">bahasa para ilmuwan dan astronom</strong>. Notasi ilmiah adalah cara paling efisien untuk menuliskan bilangan yang terlalu besar atau terlalu kecil untuk ditulis biasa.</p>
+              <div className="grid grid-cols-1 gap-2">
+                <div className="flex items-center gap-2 bg-blue-500/10 rounded-lg px-3 py-2">
+                  <span className="text-blue-400">⭐</span>
+                  <span>Kamu bisa mengubah bilangan besar/kecil ke bentuk <InlineMath math="a \times 10^n" /> dengan tepat</span>
+                </div>
+                <div className="flex items-center gap-2 bg-indigo-500/10 rounded-lg px-3 py-2">
+                  <span className="text-indigo-400">⭐</span>
+                  <span>Kamu menguasai operasi perkalian, pembagian, penjumlahan, dan pengurangan notasi ilmiah</span>
+                </div>
+                <div className="flex items-center gap-2 bg-purple-500/10 rounded-lg px-3 py-2">
+                  <span className="text-purple-400">⭐</span>
+                  <span>Kamu bisa membandingkan besaran astronomi dan ilmu pengetahuan dengan percaya diri</span>
+                </div>
+              </div>
+              <p className="text-center text-blue-300 font-semibold text-sm pt-1">
+                🌟 Dari massa elektron hingga jarak bintang — notasi ilmiah membuat segalanya terukur. Kamu luar biasa! 🌟
+              </p>
+            </div>
+          </div>
+
           {/* Tombol Kembali */}
           <div className="mt-4 text-center">
             <button

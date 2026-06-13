@@ -770,6 +770,37 @@ const SifatSifatOperasiPage = () => {
             </div>
           </div>
 
+          {/* Kesimpulan */}
+          <div className="bg-gradient-to-br from-purple-500/15 to-pink-500/15 border border-purple-400/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-purple-500/25 to-pink-500/25 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">🎓</span>
+              <div>
+                <p className="font-display text-base font-bold text-purple-300 leading-tight">Kesimpulan</p>
+                <p className="font-body text-xs text-purple-200/70">Sembilan sifat, satu kuasa penuh!</p>
+              </div>
+            </div>
+            <div className="px-5 py-5 space-y-4 font-body text-sm text-white/85">
+              <p>Luar biasa! Kamu baru saja menguasai <strong className="text-purple-300">9 sifat operasi bilangan berpangkat</strong> — senjata paling ampuh untuk menyederhanakan ekspresi aljabar dan memecahkan soal-soal tingkat olimpiade.</p>
+              <div className="grid grid-cols-1 gap-2">
+                <div className="flex items-center gap-2 bg-purple-500/10 rounded-lg px-3 py-2">
+                  <span className="text-purple-400">⭐</span>
+                  <span>Kamu menguasai aturan <em>jumlah</em>, <em>kurang</em>, dan <em>kali</em> eksponen sesuai operasinya</span>
+                </div>
+                <div className="flex items-center gap-2 bg-orange-500/10 rounded-lg px-3 py-2">
+                  <span className="text-orange-400">⭐</span>
+                  <span>Kamu bisa mengubah pangkat negatif menjadi pecahan positif dan sebaliknya</span>
+                </div>
+                <div className="flex items-center gap-2 bg-pink-500/10 rounded-lg px-3 py-2">
+                  <span className="text-pink-400">⭐</span>
+                  <span>Kamu memahami hubungan antara pangkat pecahan dan bentuk akar</span>
+                </div>
+              </div>
+              <p className="text-center text-purple-300 font-semibold text-sm pt-1">
+                🌟 Dengan 9 sifat ini, tak ada ekspresi pangkat yang tak bisa kamu taklukkan! 🌟
+              </p>
+            </div>
+          </div>
+
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bilangan-berpangkat"); }}

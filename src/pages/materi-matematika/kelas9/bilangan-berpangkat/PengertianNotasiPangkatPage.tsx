@@ -998,6 +998,37 @@ const PengertianNotasiPangkatPage = () => {
             </div>
           </div>
 
+          {/* Kesimpulan */}
+          <div className="bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 border border-emerald-400/40 rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-emerald-500/25 to-cyan-500/25 px-5 py-4 flex items-center gap-3">
+              <span className="text-2xl">🎓</span>
+              <div>
+                <p className="font-display text-base font-bold text-emerald-300 leading-tight">Kesimpulan</p>
+                <p className="font-body text-xs text-emerald-200/70">Apa yang sudah kamu kuasai hari ini?</p>
+              </div>
+            </div>
+            <div className="px-5 py-5 space-y-4 font-body text-sm text-white/85">
+              <p>Hari ini kamu telah menyelami <strong className="text-cyan-300">fondasi bilangan berpangkat</strong> — bahasa matematika yang digunakan para ilmuwan untuk mengekspresikan bilangan raksasa dan superkecil dengan elegan.</p>
+              <div className="grid grid-cols-1 gap-2">
+                <div className="flex items-center gap-2 bg-emerald-500/10 rounded-lg px-3 py-2">
+                  <span className="text-emerald-400">⭐</span>
+                  <span>Kamu tahu bahwa <InlineMath math="a^n" /> berarti perkalian berulang, bukan "<InlineMath math="a" /> dikali <InlineMath math="n" />"</span>
+                </div>
+                <div className="flex items-center gap-2 bg-cyan-500/10 rounded-lg px-3 py-2">
+                  <span className="text-cyan-400">⭐</span>
+                  <span>Kamu bisa membedakan <InlineMath math="(-a)^n" /> dan <InlineMath math="-a^n" /> — jebakan yang sering mengecoh!</span>
+                </div>
+                <div className="flex items-center gap-2 bg-teal-500/10 rounded-lg px-3 py-2">
+                  <span className="text-teal-400">⭐</span>
+                  <span>Kamu memahami aturan tanda: pangkat genap → positif, pangkat ganjil → negatif</span>
+                </div>
+              </div>
+              <p className="text-center text-emerald-300 font-semibold text-sm pt-1">
+                🌟 Fondasi yang kuat dimulai dari sini. Lanjutkan ke Sifat-Sifat Operasi untuk menjadi ahli sejati! 🌟
+              </p>
+            </div>
+          </div>
+
         </div>
 
         <div className="mt-8 text-center">
