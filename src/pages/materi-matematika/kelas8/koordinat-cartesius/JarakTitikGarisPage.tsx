@@ -166,6 +166,31 @@ const JarakTitikGarisPage = () => {
                   </p>
                 </div>
 
+                {/* MANFAAT */}
+                <div className="bg-slate-800/60 border border-emerald-500/25 rounded-xl p-4 space-y-3">
+                  <p className="font-mono font-bold text-emerald-300 text-sm">🌍 Manfaat &amp; Penerapan Nyata</p>
+                  <div className="grid grid-cols-1 gap-2">
+                    {[
+                      { icon: "🛰️", title: "Navigasi & GPS", desc: "Menghitung seberapa jauh posisi kendaraan/kapal dari jalur yang seharusnya, untuk deteksi penyimpangan arah." },
+                      { icon: "🤖", title: "Robotika & Otomasi", desc: "Robot atau drone menjaga jarak aman dari dinding/objek dengan menghitung jarak ke garis batas (line-following robot)." },
+                      { icon: "🏗️", title: "Desain & Konstruksi", desc: "Menentukan jarak minimum bangunan dari jalan, sungai, atau batas tanah (garis sempadan)." },
+                      { icon: "👁️", title: "Computer Vision / Deteksi Tepi", desc: "Mengukur seberapa 'lurus' suatu objek dengan menghitung deviasi titik-titik dari garis ideal — misal cek kelurusan rel kereta, pipa." },
+                      { icon: "⚽", title: "Olahraga", desc: "Offside di sepak bola (jarak pemain ke garis), atau jarak bola ke garis lapangan." },
+                      { icon: "📈", title: "Optimasi / Statistik", desc: "Regresi linear menggunakan jarak titik data ke garis (least squares) untuk mengukur error/kesalahan prediksi." },
+                      { icon: "🗺️", title: "Pemetaan & GIS", desc: "Menghitung jarak suatu lokasi ke jalan, sungai, atau batas wilayah untuk analisis tata ruang." },
+                      { icon: "🦺", title: "Keselamatan Kerja", desc: "Menjaga jarak aman pekerja/alat berat dari kabel listrik (digambarkan sebagai garis)." },
+                    ].map(({ icon, title, desc }) => (
+                      <div key={title} className="flex gap-3 items-start bg-emerald-900/20 border border-emerald-500/15 rounded-lg px-3 py-2.5">
+                        <span className="text-lg leading-none mt-0.5 shrink-0">{icon}</span>
+                        <div>
+                          <p className="font-body font-bold text-emerald-300 text-xs">{title}</p>
+                          <p className="font-body text-white/60 text-xs mt-0.5 leading-relaxed">{desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Kasus garis tegak/datar */}
                 <div className="space-y-2 text-xs font-body">
                   <p className="font-bold text-white text-sm">Kasus Khusus (Garis Horizontal/Vertikal):</p>
