@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Ruler } from "luci
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import JarakDuaTitikInteraktif from "@/components/JarakDuaTitikInteraktif";
 
 const JarakTitikGarisPage = () => {
   const navigate = useNavigate();
@@ -153,6 +154,13 @@ const JarakTitikGarisPage = () => {
                   <p className="text-white/60">Selisih x (<InlineMath math="\Delta x = x_2 - x_1" />) = sisi horizontal segitiga</p>
                   <p className="text-white/60">Selisih y (<InlineMath math="\Delta y = y_2 - y_1" />) = sisi vertikal segitiga</p>
                   <p className="text-white/60">Jarak AB = hipotenusa = <InlineMath math="\sqrt{(\Delta x)^2 + (\Delta y)^2}" /></p>
+                </div>
+
+                {/* ANIMASI INTERAKTIF JARAK DUA TITIK */}
+                <div className="bg-slate-800/60 border border-cyan-500/25 rounded-xl p-4 space-y-3">
+                  <p className="text-cyan-300 font-mono font-bold text-sm">🎮 Animasi Interaktif — Seret Titik A dan B</p>
+                  <p className="text-white/50 text-xs font-body">Geser titik A dan B — rumus, nilai x₁, y₁, x₂, y₂, dan jarak otomatis diperbarui!</p>
+                  <JarakDuaTitikInteraktif />
                 </div>
               </div>
             )}
