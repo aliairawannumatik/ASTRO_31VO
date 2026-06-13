@@ -217,7 +217,7 @@ const GrafikFungsiPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-rose-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(251,113,133,0.7)' }}>
-            GRAFIK FUNGSI
+            GRAFIK FUNGSI (PENGAYAAN)
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">

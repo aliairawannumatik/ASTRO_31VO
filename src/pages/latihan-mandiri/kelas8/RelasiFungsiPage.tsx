@@ -58,7 +58,7 @@ const subtopics = [
     desc: "Notasi f(x), menghitung nilai fungsi, menentukan rumus, mencari parameter",
   },
   {
-    label: "GRAFIK FUNGSI",
+    label: "GRAFIK FUNGSI (PENGAYAAN)",
     path: "/latihan-mandiri/kelas-8/relasi-dan-fungsi/grafik-fungsi",
     soal: 16,
     icon: TrendingUp,

@@ -5,7 +5,7 @@ const subtopics = [
   { label: "PENGERTIAN FUNGSI DAN PENYAJIANNYA", path: "/lkpd/kelas-8/relasi-dan-fungsi/lkpd", icon: "📈" },
   { label: "MENENTUKAN BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU", path: "/lkpd/kelas-8/relasi-dan-fungsi/lkpd", icon: "🔢" },
   { label: "NOTASI DAN RUMUS FUNGSI", path: "/lkpd/kelas-8/relasi-dan-fungsi/lkpd", icon: "📝" },
-  { label: "GRAFIK FUNGSI", path: "/lkpd/kelas-8/relasi-dan-fungsi/lkpd", icon: "📊" },
+  { label: "GRAFIK FUNGSI (PENGAYAAN)", path: "/lkpd/kelas-8/relasi-dan-fungsi/lkpd", icon: "📊" },
 ];
 
 const RelasiFungsiMenuPage = () => (

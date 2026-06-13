@@ -5,7 +5,7 @@ const subtopics = [
   { name: "PENGERTIAN FUNGSI DAN PENYAJIANNYA", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/pengertian-fungsi" },
   { name: "MENENTUKAN BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/banyak-fungsi" },
   { name: "NOTASI DAN RUMUS FUNGSI", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/notasi-rumus" },
-  { name: "GRAFIK FUNGSI", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/grafik-fungsi" },
+  { name: "GRAFIK FUNGSI (PENGAYAAN)", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/grafik-fungsi" },
 ];
 
 const RelasiFungsiPage = () => (

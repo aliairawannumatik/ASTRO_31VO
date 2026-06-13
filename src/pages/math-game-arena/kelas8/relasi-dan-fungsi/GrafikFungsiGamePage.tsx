@@ -31,7 +31,7 @@ const questions = [
 const GrafikFungsiGamePage = () => (
   <MeteorShootingGame
     questions={questions}
-    topicLabel="GRAFIK FUNGSI"
+    topicLabel="GRAFIK FUNGSI (PENGAYAAN)"
     backPath="/math-game-arena/kelas-8/relasi-dan-fungsi"
     backLabel="Kembali ke Relasi dan Fungsi"
   />

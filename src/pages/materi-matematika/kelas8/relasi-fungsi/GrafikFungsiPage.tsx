@@ -76,7 +76,7 @@ const GrafikFungsiPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <TrendingUp className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          GRAFIK FUNGSI
+          GRAFIK FUNGSI (PENGAYAAN)
         </h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Visualisasikan Fungsi dalam Bidang Koordinat!
