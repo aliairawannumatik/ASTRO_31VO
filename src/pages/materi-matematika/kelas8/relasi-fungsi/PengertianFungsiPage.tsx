@@ -11,8 +11,11 @@ import DiskMillMachine from "@/components/DiskMillMachine";
 const PengertianFungsiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "contoh4", "rangkuman",
   ]);
+  const [soal4Answers, setSoal4Answers] = useState<Record<number,"fungsi"|"bukan">>({});
+  const [soal4Checked, setSoal4Checked] = useState(false);
+  const soal4Correct: Record<number,"fungsi"|"bukan"> = {1:"fungsi",2:"fungsi",3:"bukan",4:"fungsi",5:"bukan"};
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -584,6 +587,237 @@ const PengertianFungsiPage = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* SOAL 4 — Diagram Panah Interaktif */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="✏️ Contoh 4 — Identifikasi dari Diagram Panah" />
+            {expandedSections.includes("contoh4") && (
+              <div className="px-5 pb-5 space-y-4">
+                <Badge label="SEDANG" color="bg-purple-700/60 text-purple-200" />
+                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                    Perhatikan lima diagram panah berikut. Untuk setiap diagram, tentukan apakah relasi tersebut merupakan <strong className="text-green-300">Fungsi</strong> atau <strong className="text-red-300">Bukan Fungsi</strong>!
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {/* ── Diagram 1 — FUNGSI: p→1, q→2, r→3 (bijeksi) ── */}
+                  {([
+                    {
+                      n: 1,
+                      title: "Diagram 1",
+                      svg: (
+                        <svg width="100%" viewBox="0 0 175 158">
+                          <defs><marker id="arr-d1" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
+                          <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
+                          <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
+                          <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">p</text>
+                          <text x="46" y="82" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">q</text>
+                          <text x="46" y="121" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">r</text>
+                          <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
+                          <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
+                          <text x="129" y="43" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
+                          <text x="129" y="82" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
+                          <text x="129" y="121" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                          <path d="M61,39 C88,39 97,39 113,39" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d1)"/>
+                          <path d="M61,78 C88,78 97,78 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d1)"/>
+                          <path d="M61,117 C88,117 97,117 113,117" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d1)"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      n: 2,
+                      title: "Diagram 2",
+                      svg: (
+                        <svg width="100%" viewBox="0 0 175 158">
+                          <defs><marker id="arr-d2" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
+                          <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
+                          <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
+                          <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">a</text>
+                          <text x="46" y="82" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">b</text>
+                          <text x="46" y="121" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">c</text>
+                          <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
+                          <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
+                          <text x="129" y="43" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
+                          <text x="129" y="82" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
+                          <text x="129" y="121" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                          <path d="M61,39 C85,39 97,68 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d2)"/>
+                          <path d="M61,78 C88,78 97,78 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d2)"/>
+                          <path d="M61,117 C88,117 97,117 113,117" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d2)"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      n: 3,
+                      title: "Diagram 3",
+                      svg: (
+                        <svg width="100%" viewBox="0 0 175 158">
+                          <defs>
+                            <marker id="arr-d3g" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker>
+                            <marker id="arr-d3r" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#ef4444"/></marker>
+                          </defs>
+                          <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
+                          <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
+                          <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">a</text>
+                          <text x="46" y="82" textAnchor="middle" fill="#fca5a5" fontSize="11" fontWeight="bold">b</text>
+                          <text x="46" y="121" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">c</text>
+                          <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
+                          <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
+                          <text x="129" y="43" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
+                          <text x="129" y="82" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
+                          <text x="129" y="121" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                          <path d="M61,39 C88,39 97,39 113,39" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d3g)"/>
+                          <path d="M61,78 C84,65 100,50 113,39" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeDasharray="5,3" markerEnd="url(#arr-d3r)"/>
+                          <path d="M61,78 C84,92 100,108 113,117" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeDasharray="5,3" markerEnd="url(#arr-d3r)"/>
+                          <path d="M61,117 C85,117 97,88 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d3g)"/>
+                          <text x="87" y="72" textAnchor="middle" fill="#ef4444" fontSize="7.5" fontWeight="bold">2 panah!</text>
+                        </svg>
+                      ),
+                    },
+                    {
+                      n: 4,
+                      title: "Diagram 4",
+                      svg: (
+                        <svg width="100%" viewBox="0 0 175 170">
+                          <defs><marker id="arr-d4" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
+                          <ellipse cx="46" cy="88" rx="36" ry="68" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
+                          <text x="46" y="13" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
+                          <text x="46" y="48" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">p</text>
+                          <text x="46" y="90" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">q</text>
+                          <text x="46" y="134" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">r</text>
+                          <ellipse cx="129" cy="84" rx="36" ry="72" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
+                          <text x="129" y="7" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
+                          <text x="129" y="31" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
+                          <text x="129" y="66" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
+                          <text x="129" y="103" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                          <text x="129" y="140" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">4</text>
+                          <path d="M61,44 C86,44 100,56 113,62" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d4)"/>
+                          <path d="M61,86 C86,72 100,38 113,27" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d4)"/>
+                          <path d="M61,130 C86,130 100,106 113,99" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d4)"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      n: 5,
+                      title: "Diagram 5",
+                      svg: (
+                        <svg width="100%" viewBox="0 0 175 170">
+                          <defs><marker id="arr-d5" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
+                          <ellipse cx="46" cy="85" rx="36" ry="72" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
+                          <text x="46" y="7" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
+                          <text x="46" y="31" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">a</text>
+                          <text x="46" y="66" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">b</text>
+                          <text x="46" y="103" textAnchor="middle" fill="#fed7aa" fontSize="11" fontWeight="bold">c</text>
+                          <text x="46" y="140" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">d</text>
+                          <ellipse cx="129" cy="88" rx="36" ry="68" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
+                          <text x="129" y="13" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
+                          <text x="129" y="48" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
+                          <text x="129" y="90" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
+                          <text x="129" y="134" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                          <path d="M61,27 C86,27 100,80 113,86" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
+                          <path d="M61,62 C86,55 100,50 113,44" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
+                          <path d="M61,136 C86,136 100,132 113,130" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
+                          <path d="M61,99 C78,99 96,99 104,99" fill="none" stroke="#f97316" strokeWidth="1.4" strokeDasharray="4,3" opacity="0.8"/>
+                          <text x="108" y="96" fill="#f97316" fontSize="9" fontWeight="bold">?</text>
+                          <text x="46" y="160" textAnchor="middle" fill="#f97316" fontSize="7" fontWeight="bold">tak berpasangan!</text>
+                        </svg>
+                      ),
+                    },
+                  ] as {n:number; title:string; svg:React.ReactNode}[]).map(({ n, title, svg }) => {
+                    const chosen = soal4Answers[n];
+                    const isCorrect = soal4Correct[n];
+                    const studentCorrect = soal4Checked && chosen === isCorrect;
+                    const studentWrong   = soal4Checked && chosen !== undefined && chosen !== isCorrect;
+                    const borderCls = soal4Checked
+                      ? (studentCorrect ? "border-green-500/60 bg-green-900/15" : "border-red-500/60 bg-red-900/15")
+                      : (chosen ? "border-purple-500/50 bg-purple-900/10" : "border-white/10 bg-slate-800/40");
+                    return (
+                      <div key={n} className={`border rounded-xl p-2.5 transition-all ${borderCls} ${n === 5 ? "col-span-2" : ""}`}>
+                        <p className="font-body text-[11px] font-bold text-white/60 text-center mb-1">{title}</p>
+                        <div className="flex justify-center">{svg}</div>
+                        {!soal4Checked && (
+                          <div className="flex gap-1.5 mt-2">
+                            <button
+                              onClick={() => setSoal4Answers(prev => ({ ...prev, [n]: "fungsi" }))}
+                              className={`flex-1 text-[11px] font-bold py-1.5 rounded-lg border transition-all font-body ${chosen === "fungsi" ? "bg-green-600/50 border-green-400/60 text-green-200" : "bg-slate-700/50 border-white/10 text-white/50 hover:border-green-500/40 hover:text-green-300"}`}
+                            >✅ Fungsi</button>
+                            <button
+                              onClick={() => setSoal4Answers(prev => ({ ...prev, [n]: "bukan" }))}
+                              className={`flex-1 text-[11px] font-bold py-1.5 rounded-lg border transition-all font-body ${chosen === "bukan" ? "bg-red-600/50 border-red-400/60 text-red-200" : "bg-slate-700/50 border-white/10 text-white/50 hover:border-red-500/40 hover:text-red-300"}`}
+                            >❌ Bukan</button>
+                          </div>
+                        )}
+                        {soal4Checked && (
+                          <div className={`mt-2 rounded-lg px-2 py-1.5 text-center text-[11px] font-bold font-body ${studentCorrect ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`}>
+                            {studentCorrect ? "✓ Benar!" : `✗ Salah — ${isCorrect === "fungsi" ? "Ini FUNGSI" : "Ini BUKAN FUNGSI"}`}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Cek Jawaban button */}
+                {!soal4Checked && (
+                  <button
+                    disabled={Object.keys(soal4Answers).length < 5}
+                    onClick={() => setSoal4Checked(true)}
+                    className="w-full py-2.5 rounded-xl font-body font-bold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-purple-600/70 hover:bg-purple-500/80 border border-purple-400/50 text-white"
+                  >
+                    {Object.keys(soal4Answers).length < 5
+                      ? `Pilih semua jawaban dulu (${Object.keys(soal4Answers).length}/5)`
+                      : "🔍 Cek Jawaban"}
+                  </button>
+                )}
+
+                {/* Hasil + Pembahasan */}
+                {soal4Checked && (
+                  <div className="space-y-3">
+                    {/* Score */}
+                    <div className={`rounded-xl p-4 border text-center ${[1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length === 5 ? "bg-green-900/20 border-green-500/40" : "bg-yellow-900/20 border-yellow-500/40"}`}>
+                      <p className="font-body text-lg font-bold text-white">
+                        Nilai: <span className="text-green-300">{[1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length}</span>
+                        <span className="text-white/40">/5</span>
+                      </p>
+                      <p className="font-body text-xs text-white/50 mt-1">
+                        {[1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length === 5
+                          ? "🎉 Sempurna! Kamu paham syarat fungsi dengan baik."
+                          : [1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length >= 3
+                          ? "👍 Bagus! Review kembali diagram yang salah."
+                          : "📖 Coba pelajari lagi syarat fungsi ya!"}
+                      </p>
+                    </div>
+
+                    {/* Penjelasan per diagram */}
+                    <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
+                      <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
+                      {[
+                        { n: 1, status: "FUNGSI ✅", color: "text-green-300", penj: "Setiap anggota domain (p, q, r) memiliki tepat satu panah ke kodomain. p→1, q→2, r→3. Semua syarat fungsi terpenuhi." },
+                        { n: 2, status: "FUNGSI ✅", color: "text-green-300", penj: "a→2 dan b→2 boleh saja (banyak ke satu = fungsi). Yang penting setiap domain punya tepat satu panah. a, b, c masing-masing punya 1 panah ✓" },
+                        { n: 3, status: "BUKAN FUNGSI ❌", color: "text-red-300", penj: "Anggota b memiliki DUA panah: b→1 dan b→3. Ini melanggar syarat fungsi — setiap domain hanya boleh punya satu pasangan!" },
+                        { n: 4, status: "FUNGSI ✅", color: "text-green-300", penj: "p→2, q→1, r→3. Setiap domain (p,q,r) memiliki tepat satu pasangan di kodomain. Kodomain boleh punya anggota yang tidak berpasangan (elemen 4 tidak dipetakan). Tetap fungsi ✓" },
+                        { n: 5, status: "BUKAN FUNGSI ❌", color: "text-red-300", penj: "Anggota c tidak memiliki panah ke kodomain (tidak berpasangan). Ini melanggar syarat fungsi — semua anggota domain wajib punya pasangan!" },
+                      ].map(({ n, status, color, penj }) => (
+                        <div key={n} className="flex gap-2">
+                          <span className="bg-white/10 rounded px-2 py-0.5 text-xs font-bold text-white shrink-0 self-start mt-0.5">D{n}</span>
+                          <div>
+                            <span className={`text-xs font-bold ${color}`}>{status}</span>
+                            <p className="text-xs text-white/60 mt-0.5">{penj}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => { setSoal4Answers({}); setSoal4Checked(false); }}
+                      className="w-full py-2 rounded-xl font-body text-sm text-white/40 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all"
+                    >↺ Ulangi Soal</button>
+                  </div>
+                )}
               </div>
             )}
           </div>
