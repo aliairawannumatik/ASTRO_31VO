@@ -593,15 +593,15 @@ export default function DiskMillMachine() {
           <div className="flex flex-col items-center gap-1 w-full max-w-[260px]">
             <span className="text-[9px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-0.5 w-full"
-              style={{ borderColor: selected.warna, background: `linear-gradient(135deg, ${selected.bgFrom}, ${selected.bgTo})`, boxShadow: `0 0 12px ${selected.warna}30` }}>
-              <div className="relative" style={{ filter: `drop-shadow(0 0 8px ${selected.warna}70)` }}>
+              style={{ borderColor: selected.warnaShine, background: `${selected.warnaGelap}cc`, boxShadow: `0 0 20px ${selected.warna}80` }}>
+              <div className="relative" style={{ filter: `drop-shadow(0 0 8px ${selected.warnaShine}80)` }}>
                 <div className={spinning ? "dmm-shake" : ""}>
                   <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine} sz={90}/>
                 </div>
                 <GrainFalling color={selected.warna} active={feeding}/>
               </div>
               <p className="text-sm font-bold font-body" style={{ color: selected.warnaShine }}>{selected.nama}</p>
-              <p className="text-[10px] font-body" style={{ color: `${selected.warna}bb` }}>Bahan Mentah</p>
+              <p className="text-[10px] font-body" style={{ color: selected.warnaShine, opacity: 0.7 }}>Bahan Mentah</p>
             </div>
           </div>
 
@@ -639,25 +639,23 @@ export default function DiskMillMachine() {
           {/* Range card */}
           <div className="flex flex-col items-center gap-1 w-full max-w-[260px]">
             <span className="text-[9px] font-body uppercase tracking-widest font-bold"
-              style={{ color: done ? selected.warnaTepung : "#4a5060" }}>Range</span>
+              style={{ color: done ? selected.warnaTepung : `${selected.warnaTepung}80` }}>Range</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-0.5 w-full transition-all duration-500"
               style={{
-                borderColor: done ? selected.warnaGelap : "#2a3040",
-                background: done
-                  ? `linear-gradient(135deg, ${selected.bgFrom}dd, ${selected.bgTo}dd)`
-                  : "rgba(15,20,30,0.5)",
-                boxShadow: done ? `0 0 14px ${selected.warnaTepung}30` : "none",
+                borderColor: done ? selected.warnaShine : `${selected.warnaGelap}99`,
+                background: done ? `${selected.warnaGelap}cc` : `${selected.warnaGelap}55`,
+                boxShadow: done ? `0 0 22px ${selected.warnaTepung}80` : `0 0 12px ${selected.warna}40`,
               }}>
-              <div className="relative" style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaTepung}80)` : "none" }}>
-                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.2 }}>
+              <div className="relative" style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaShine}80)` : "none" }}>
+                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.3 }}>
                   <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done} sz={90}/>
                 </div>
                 <TepungJatuh color={selected.warnaTepung} active={spinning}/>
               </div>
-              <p className="text-sm font-bold font-body" style={{ color: done ? selected.warnaTepung : "#4a5060" }}>
+              <p className="text-sm font-bold font-body" style={{ color: done ? selected.warnaShine : `${selected.warnaShine}99` }}>
                 {selected.produk}
               </p>
-              <p className="text-[10px] font-body" style={{ color: done ? "rgba(255,255,255,0.5)" : "#3a4050" }}>
+              <p className="text-[10px] font-body" style={{ color: done ? "rgba(255,255,255,0.7)" : `${selected.warnaShine}77` }}>
                 {done ? selected.produkDesc : "Belum diolah"}
               </p>
             </div>
@@ -671,16 +669,16 @@ export default function DiskMillMachine() {
           <div className="flex flex-col items-center gap-1 min-w-[130px]">
             <span className="text-[10px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-1 w-full"
-              style={{ borderColor: selected.warna, background: `linear-gradient(135deg, ${selected.bgFrom}, ${selected.bgTo})`, boxShadow: `0 0 14px ${selected.warna}35` }}>
+              style={{ borderColor: selected.warnaShine, background: `${selected.warnaGelap}cc`, boxShadow: `0 0 20px ${selected.warna}80` }}>
               <div className="relative flex items-center justify-center"
-                style={{ filter: `drop-shadow(0 0 8px ${selected.warna}70)` }}>
+                style={{ filter: `drop-shadow(0 0 8px ${selected.warnaShine}80)` }}>
                 <div className={spinning ? "dmm-shake" : ""}>
                   <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine}/>
                 </div>
                 <GrainFalling color={selected.warna} active={feeding}/>
               </div>
               <p className="text-xs font-bold font-body" style={{ color: selected.warnaShine }}>{selected.nama}</p>
-              <p className="text-[10px] font-body" style={{ color: `${selected.warna}bb` }}>Bahan Mentah</p>
+              <p className="text-[10px] font-body" style={{ color: selected.warnaShine, opacity: 0.7 }}>Bahan Mentah</p>
             </div>
           </div>
 
@@ -722,26 +720,24 @@ export default function DiskMillMachine() {
           {/* RANGE — flour bag */}
           <div className="flex flex-col items-center gap-1 min-w-[130px]">
             <span className="text-[10px] font-body uppercase tracking-widest font-bold"
-              style={{ color: done ? selected.warnaTepung : `${selected.warnaTepung}55` }}>Range</span>
+              style={{ color: done ? selected.warnaTepung : `${selected.warnaTepung}80` }}>Range</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-1 w-full transition-all duration-500"
               style={{
-                borderColor: done ? selected.warnaGelap : `${selected.warnaGelap}50`,
-                background: done
-                  ? `linear-gradient(135deg, ${selected.bgFrom}ee, ${selected.bgTo}ee)`
-                  : `linear-gradient(135deg, ${selected.bgFrom}44, ${selected.bgTo}44)`,
-                boxShadow: done ? `0 0 16px ${selected.warnaTepung}40` : `0 0 6px ${selected.warna}15`,
+                borderColor: done ? selected.warnaShine : `${selected.warnaGelap}99`,
+                background: done ? `${selected.warnaGelap}cc` : `${selected.warnaGelap}55`,
+                boxShadow: done ? `0 0 22px ${selected.warnaTepung}80` : `0 0 12px ${selected.warna}40`,
               }}>
               <div className="relative flex items-center justify-center"
-                style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaTepung}80)` : `drop-shadow(0 0 4px ${selected.warna}30)` }}>
-                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.18 }}>
+                style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaShine}80)` : "none" }}>
+                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.3 }}>
                   <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done}/>
                 </div>
                 <TepungJatuh color={selected.warnaTepung} active={spinning}/>
               </div>
-              <p className="text-xs font-bold font-body" style={{ color: done ? selected.warnaTepung : `${selected.warnaTepung}50` }}>
+              <p className="text-xs font-bold font-body" style={{ color: done ? selected.warnaShine : `${selected.warnaShine}99` }}>
                 {selected.produk}
               </p>
-              <p className="text-[10px] font-body" style={{ color: done ? "rgba(255,255,255,0.5)" : `${selected.warna}60` }}>
+              <p className="text-[10px] font-body" style={{ color: done ? "rgba(255,255,255,0.7)" : `${selected.warnaShine}77` }}>
                 {done ? selected.produkDesc : "Belum diolah"}
               </p>
             </div>
