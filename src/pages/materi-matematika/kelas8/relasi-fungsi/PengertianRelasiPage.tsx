@@ -104,6 +104,85 @@ const PengertianRelasiPage = () => {
             )}
           </div>
 
+          {/* DATA KONTEKS */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="data" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📋 Data: Siswa dan Ekstrakulikuler" />
+            {true && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  Perhatikan data berikut. Di sebuah sekolah, terdapat daftar siswa dan ekstrakulikuler yang mereka ikuti. Data ini akan kita gunakan untuk memahami cara-cara menyajikan relasi.
+                </p>
+
+                {/* Dua Himpunan */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-3">
+                    <p className="font-body text-xs font-bold text-cyan-300 mb-2 text-center">🎓 Himpunan A — Siswa</p>
+                    <div className="space-y-1.5">
+                      {["Enzo", "Justin", "Arham", "Faiz"].map(n => (
+                        <div key={n} className="text-center font-body text-sm font-semibold text-cyan-100">{n}</div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-3">
+                    <p className="font-body text-xs font-bold text-violet-300 mb-2 text-center">🏅 Himpunan B — Ekskul</p>
+                    <div className="space-y-1.5">
+                      {["Badminton", "Basket", "Futsal", "Renang", "Voly"].map(n => (
+                        <div key={n} className="text-center font-body text-xs font-semibold text-violet-100">{n}</div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Relasi "mengikuti" */}
+                <div className="bg-slate-800/60 border border-yellow-500/20 rounded-xl p-4">
+                  <p className="font-body text-xs font-bold text-yellow-300 mb-3">🔗 Relasi: "mengikuti ekstrakulikuler"</p>
+                  <div className="space-y-2">
+                    {[
+                      { siswa: "Enzo",   ekskul: ["Badminton", "Basket", "Futsal"], color: "text-cyan-300" },
+                      { siswa: "Justin", ekskul: ["Basket", "Renang"],              color: "text-green-300" },
+                      { siswa: "Arham",  ekskul: ["Voly", "Futsal"],                color: "text-orange-300" },
+                      { siswa: "Faiz",   ekskul: [],                                color: "text-red-300" },
+                    ].map(({ siswa, ekskul, color }) => (
+                      <div key={siswa} className="flex items-start gap-3 text-xs font-body">
+                        <span className={`font-bold min-w-[48px] ${color}`}>{siswa}</span>
+                        <span className="text-yellow-400 font-bold">→</span>
+                        <span className="text-white/70">
+                          {ekskul.length > 0
+                            ? ekskul.join(", ")
+                            : <span className="text-white/30 italic">tidak mengikuti ekstrakulikuler apapun</span>
+                          }
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Identifikasi Domain, Kodomain, Range */}
+                <div className="grid grid-cols-1 gap-2 text-xs font-body">
+                  <div className="bg-cyan-900/20 border border-cyan-500/20 rounded-lg px-3 py-2">
+                    <span className="text-cyan-400 font-bold">Domain (A) = </span>
+                    <span className="text-white/80">{"{"}Enzo, Justin, Arham, Faiz{"}"}</span>
+                  </div>
+                  <div className="bg-violet-900/20 border border-violet-500/20 rounded-lg px-3 py-2">
+                    <span className="text-violet-400 font-bold">Kodomain (B) = </span>
+                    <span className="text-white/80">{"{"}Badminton, Basket, Futsal, Renang, Voly{"}"}</span>
+                  </div>
+                  <div className="bg-green-900/20 border border-green-500/20 rounded-lg px-3 py-2">
+                    <span className="text-green-400 font-bold">Range = </span>
+                    <span className="text-white/80">{"{"}Badminton, Basket, Futsal, Renang, Voly{"}"}</span>
+                    <span className="text-white/40 ml-1 italic">(semua ekskul ada yang mengikuti)</span>
+                  </div>
+                </div>
+
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
+                  <p className="font-body text-xs text-orange-200">
+                    <strong>📌 Catatan:</strong> Faiz tidak mengikuti ekstrakulikuler apapun, sehingga ia tidak memiliki pasangan di himpunan B. Namun Faiz tetap termasuk anggota domain karena ia adalah anggota himpunan A.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* CARA PENYAJIAN RELASI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="penyajian" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="🗂️ Cara Menyajikan Relasi" />
