@@ -364,27 +364,6 @@ const NotasiFungsiPage = () => {
                   </div>
                 </div>
 
-                {/* Sub-soal c */}
-                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">📝 Soal c (Lebih Menantang)</p>
-                  <p className="font-body text-sm text-white/85 leading-relaxed">
-                    Diketahui fungsi <InlineMath math="h(x) = 2x^2 - 8" />. Jika bayangan dari <InlineMath math="x" /> adalah <InlineMath math="10" />, tentukan nilai <InlineMath math="x" />!
-                  </p>
-                </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Penyelesaian c</p>
-                  <p className="font-body text-xs text-white/60">Bayangan 10 berarti h(x) = 10:</p>
-                  <BlockMath math="h(x) = 10" />
-                  <BlockMath math="2x^2 - 8 = 10" />
-                  <BlockMath math="2x^2 = 18" />
-                  <BlockMath math="x^2 = 9" />
-                  <BlockMath math="x = \pm 3" />
-                  <div className="bg-purple-500/10 border border-purple-500/40 rounded-lg p-3 mt-2">
-                    <p className="font-body text-sm font-bold text-purple-300">✅ Nilai x = 3 atau x = −3</p>
-                    <p className="font-body text-xs text-white/50 mt-1">Verifikasi: h(3) = 2(9) − 8 = 10 ✓ dan h(−3) = 2(9) − 8 = 10 ✓</p>
-                  </div>
-                </div>
-
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-yellow-200">
                     <strong>💡 Ingat:</strong> "Bayangan dari x adalah k" sama artinya dengan f(x) = k. Tinggal substitusi dan selesaikan persamaannya untuk mencari x!
