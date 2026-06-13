@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import JarakDuaTitikInteraktif from "@/components/JarakDuaTitikInteraktif";
+import { JarakGarisHorizontal, JarakGarisVertikal, JarakGarisMiring } from "@/components/JarakTitikKeGarisInteraktif";
 
 const JarakTitikGarisPage = () => {
   const navigate = useNavigate();
@@ -203,24 +204,37 @@ const JarakTitikGarisPage = () => {
                 </div>
 
                 {/* Kasus garis tegak/datar */}
-                <div className="space-y-2 text-xs font-body">
-                  <p className="font-bold text-white text-sm">Kasus Khusus (Garis Horizontal/Vertikal):</p>
-                  <div className="grid grid-cols-1 gap-2">
+                <div className="space-y-6 text-xs font-body">
+                  <p className="font-bold text-white text-sm">Kasus Khusus (Garis Horizontal / Vertikal / Miring):</p>
+
+                  {/* ── Horizontal ── */}
+                  <div className="space-y-3">
                     <div className="bg-slate-800/50 border border-cyan-500/30 rounded-lg p-3">
                       <p className="text-cyan-300 font-semibold mb-1">Garis horizontal <InlineMath math="y = k" />:</p>
                       <BlockMath math="d = |y_P - k|" />
                       <p className="text-white/60">Jarak titik P(a, b) ke garis y = k adalah |b − k|</p>
                     </div>
+                    <JarakGarisHorizontal />
+                  </div>
+
+                  {/* ── Vertikal ── */}
+                  <div className="space-y-3">
                     <div className="bg-slate-800/50 border border-green-500/30 rounded-lg p-3">
                       <p className="text-green-300 font-semibold mb-1">Garis vertikal <InlineMath math="x = k" />:</p>
                       <BlockMath math="d = |x_P - k|" />
                       <p className="text-white/60">Jarak titik P(a, b) ke garis x = k adalah |a − k|</p>
                     </div>
+                    <JarakGarisVertikal />
+                  </div>
+
+                  {/* ── Miring ── */}
+                  <div className="space-y-3">
                     <div className="bg-slate-800/50 border border-violet-500/30 rounded-lg p-3">
                       <p className="text-violet-300 font-semibold mb-1">Garis miring <InlineMath math="ax + by + c = 0" />:</p>
                       <BlockMath math="d = \frac{|ax_P + by_P + c|}{\sqrt{a^2 + b^2}}" />
                       <p className="text-white/60">Masukkan koordinat P ke persamaan garis, bagi dengan panjang vektor normal</p>
                     </div>
+                    <JarakGarisMiring />
                   </div>
                 </div>
               </div>
