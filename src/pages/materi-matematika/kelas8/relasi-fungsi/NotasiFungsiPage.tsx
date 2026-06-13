@@ -11,7 +11,7 @@ import FunctionMachineAnimation from "@/components/FunctionMachineAnimation";
 const NotasiFungsiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "notasi", "operasi", "komposisi", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "notasi", "operasi", "komposisi", "contoh1", "contoh2", "contoh3", "contoh4", "rangkuman",
   ]);
 
   const toggleSection = (section: string) => {
@@ -307,6 +307,88 @@ const NotasiFungsiPage = () => {
                       <p className="font-body text-sm font-bold text-red-300">✅ p = 3, q = 2, f(x) = 3x + 2, dan x = 9 saat f(x) = 29</p>
                     </div>
                   </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* CONTOH 4 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="✏️ Contoh 4 — Mencari Nilai x dari Bayangan" />
+            {true && (
+              <div className="px-5 pb-5 space-y-4">
+                <Badge label="TANTANGAN" color="bg-purple-700/60 text-purple-200" />
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+                  <p className="font-body text-xs text-purple-200 leading-relaxed">
+                    <strong>🎯 Konsep:</strong> Jika diketahui fungsi f(x) dan <em>bayangan</em> (nilai f(x)), kita bisa mencari nilai x dengan menyelesaikan persamaan. Bayangan = hasil keluaran dari fungsi.
+                  </p>
+                </div>
+
+                {/* Sub-soal a */}
+                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">📝 Soal a</p>
+                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                    Diketahui fungsi <InlineMath math="f(x) = 4x - 6" />. Jika bayangan dari <InlineMath math="x" /> adalah <InlineMath math="18" />, tentukan nilai <InlineMath math="x" />!
+                  </p>
+                </div>
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Penyelesaian a</p>
+                  <p className="font-body text-xs text-white/60">Bayangan dari x adalah 18, artinya f(x) = 18. Kita substitusikan ke rumus fungsi:</p>
+                  <BlockMath math="f(x) = 18" />
+                  <BlockMath math="4x - 6 = 18" />
+                  <BlockMath math="4x = 18 + 6 = 24" />
+                  <BlockMath math="x = \frac{24}{4} = 6" />
+                  <div className="bg-purple-500/10 border border-purple-500/40 rounded-lg p-3 mt-2">
+                    <p className="font-body text-sm font-bold text-purple-300">✅ Nilai x = 6</p>
+                    <p className="font-body text-xs text-white/50 mt-1">Verifikasi: f(6) = 4(6) − 6 = 24 − 6 = 18 ✓</p>
+                  </div>
+                </div>
+
+                {/* Sub-soal b */}
+                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">📝 Soal b</p>
+                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                    Diketahui fungsi <InlineMath math="g(x) = 3x + 5" />. Bayangan dari <InlineMath math="x" /> oleh fungsi <InlineMath math="g" /> adalah <InlineMath math="-7" />. Tentukan nilai <InlineMath math="x" />!
+                  </p>
+                </div>
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Penyelesaian b</p>
+                  <p className="font-body text-xs text-white/60">Bayangan −7 berarti g(x) = −7:</p>
+                  <BlockMath math="g(x) = -7" />
+                  <BlockMath math="3x + 5 = -7" />
+                  <BlockMath math="3x = -7 - 5 = -12" />
+                  <BlockMath math="x = \frac{-12}{3} = -4" />
+                  <div className="bg-purple-500/10 border border-purple-500/40 rounded-lg p-3 mt-2">
+                    <p className="font-body text-sm font-bold text-purple-300">✅ Nilai x = −4</p>
+                    <p className="font-body text-xs text-white/50 mt-1">Verifikasi: g(−4) = 3(−4) + 5 = −12 + 5 = −7 ✓</p>
+                  </div>
+                </div>
+
+                {/* Sub-soal c */}
+                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">📝 Soal c (Lebih Menantang)</p>
+                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                    Diketahui fungsi <InlineMath math="h(x) = 2x^2 - 8" />. Jika bayangan dari <InlineMath math="x" /> adalah <InlineMath math="10" />, tentukan nilai <InlineMath math="x" />!
+                  </p>
+                </div>
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Penyelesaian c</p>
+                  <p className="font-body text-xs text-white/60">Bayangan 10 berarti h(x) = 10:</p>
+                  <BlockMath math="h(x) = 10" />
+                  <BlockMath math="2x^2 - 8 = 10" />
+                  <BlockMath math="2x^2 = 18" />
+                  <BlockMath math="x^2 = 9" />
+                  <BlockMath math="x = \pm 3" />
+                  <div className="bg-purple-500/10 border border-purple-500/40 rounded-lg p-3 mt-2">
+                    <p className="font-body text-sm font-bold text-purple-300">✅ Nilai x = 3 atau x = −3</p>
+                    <p className="font-body text-xs text-white/50 mt-1">Verifikasi: h(3) = 2(9) − 8 = 10 ✓ dan h(−3) = 2(9) − 8 = 10 ✓</p>
+                  </div>
+                </div>
+
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="font-body text-xs text-yellow-200">
+                    <strong>💡 Ingat:</strong> "Bayangan dari x adalah k" sama artinya dengan f(x) = k. Tinggal substitusi dan selesaikan persamaannya untuk mencari x!
+                  </p>
                 </div>
               </div>
             )}
