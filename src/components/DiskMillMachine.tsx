@@ -508,82 +508,80 @@ export default function DiskMillMachine() {
       {/* MAIN VISUAL AREA */}
       <div className="px-3 py-3">
 
-        {/* ── PORTRAIT / MOBILE — vertical stack ── */}
-        <div className="flex sm:hidden flex-col items-center gap-1">
-          {/* top row: domain label | mesin label | range label */}
-          <div className="w-full flex justify-between px-2 mb-1">
-            <span className="text-[9px] text-white/40 font-body uppercase tracking-widest">Domain</span>
-            <span className="text-[9px] text-white/40 font-body uppercase tracking-widest">Mesin</span>
-            <span className="text-[9px] text-white/40 font-body uppercase tracking-widest">Range</span>
-          </div>
+        {/* ── PORTRAIT / MOBILE — vertical stack: Domain ↓ Mesin ↓ Range ── */}
+        <div className="flex sm:hidden flex-col items-center gap-1 w-full">
 
-          {/* middle row: grain → machine → bag side-by-side, scaled to fit */}
-          <div className="flex items-center justify-center gap-1 w-full">
-            {/* Domain grain */}
-            <div className="flex flex-col items-center gap-0.5 shrink-0">
-              <div className="relative" style={{ filter: `drop-shadow(0 0 6px ${selected.warna}50)` }}>
+          {/* Domain card */}
+          <div className="flex flex-col items-center gap-1 w-full max-w-[260px]">
+            <span className="text-[9px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
+            <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-0.5 w-full"
+              style={{ borderColor: selected.warna, background: `linear-gradient(135deg, ${selected.bgFrom}, ${selected.bgTo})`, boxShadow: `0 0 12px ${selected.warna}30` }}>
+              <div className="relative" style={{ filter: `drop-shadow(0 0 8px ${selected.warna}70)` }}>
                 <div className={spinning ? "dmm-shake" : ""}>
-                  <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine} sz={78}/>
+                  <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine} sz={90}/>
                 </div>
                 <GrainFalling color={selected.warna} active={feeding}/>
               </div>
-              <div className="bg-slate-800/60 border rounded-lg px-1.5 py-0.5 text-center" style={{ borderColor: `${selected.warna}40` }}>
-                <p className="text-[10px] font-bold font-body leading-tight" style={{ color: selected.warnaShine }}>{selected.nama}</p>
-                <p className="text-[9px] text-white/35 font-body">Domain</p>
-              </div>
+              <p className="text-sm font-bold font-body" style={{ color: selected.warnaShine }}>{selected.nama}</p>
+              <p className="text-[10px] font-body" style={{ color: `${selected.warna}bb` }}>Bahan Mentah</p>
             </div>
+          </div>
 
-            {/* Arrow in (horizontal) */}
-            <div className="shrink-0">
-              <svg width="22" height="16" viewBox="0 0 40 24">
-                <line x1="2" y1="12" x2="30" y2="12" stroke={isRunning||done ? selected.warna : "#3a4050"}
-                  strokeWidth="2.5" strokeDasharray="5,3">
-                  {(isRunning||done) && <animate attributeName="stroke-dashoffset" values="24;0" dur="0.4s" repeatCount="indefinite"/>}
-                </line>
-                <polygon points="30,7 40,12 30,17" fill={isRunning||done ? selected.warna : "#3a4050"}/>
-              </svg>
+          {/* Arrow down (domain → mesin) */}
+          <svg width="24" height="36" viewBox="0 0 24 36">
+            <line x1="12" y1="2" x2="12" y2="26" stroke={isRunning||done ? selected.warna : "#3a4050"}
+              strokeWidth="2.5" strokeDasharray="5,3">
+              {(isRunning||done) && <animate attributeName="stroke-dashoffset" values="24;0" dur="0.4s" repeatCount="indefinite"/>}
+            </line>
+            <polygon points="6,24 12,36 18,24" fill={isRunning||done ? selected.warna : "#3a4050"}/>
+          </svg>
+
+          {/* Machine */}
+          <div className="flex flex-col items-center gap-0.5">
+            <span className="text-[9px] text-white/40 font-body uppercase tracking-widest">Mesin Penepung</span>
+            <div className={spinning ? "dmm-shine" : ""}>
+              <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna} size="sm"/>
             </div>
-
-            {/* Machine — xs on mobile */}
-            <div className="flex flex-col items-center shrink-0">
-              <div className={spinning ? "dmm-shine" : ""}>
-                <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna} size="xs"/>
-              </div>
-              <div className={`h-4 flex items-center ${isRunning ? "opacity-100" : "opacity-0"}`}>
-                <span className="text-[8px] font-body font-bold" style={{ color: selected.warnaShine }}>
-                  {feeding ? "⬇ memasukkan..." : "⚙ menggiling..."}
-                </span>
-              </div>
+            <div className={`h-5 flex items-center transition-opacity duration-300 ${isRunning ? "opacity-100" : "opacity-0"}`}>
+              <span className="text-[9px] font-body font-bold" style={{ color: selected.warnaShine }}>
+                {feeding ? "⬇ memasukkan..." : "⚙ menggiling..."}
+              </span>
             </div>
+          </div>
 
-            {/* Arrow out (horizontal) */}
-            <div className="shrink-0">
-              <svg width="22" height="16" viewBox="0 0 40 24">
-                <line x1="2" y1="12" x2="30" y2="12" stroke={done ? selected.warnaTepung : "#3a4050"}
-                  strokeWidth="2.5" strokeDasharray="5,3">
-                  {done && <animate attributeName="stroke-dashoffset" values="24;0" dur="0.4s" repeatCount="indefinite"/>}
-                </line>
-                <polygon points="30,7 40,12 30,17" fill={done ? selected.warnaTepung : "#3a4050"}/>
-              </svg>
-            </div>
+          {/* Arrow down (mesin → range) */}
+          <svg width="24" height="36" viewBox="0 0 24 36">
+            <line x1="12" y1="2" x2="12" y2="26" stroke={done ? selected.warnaTepung : "#3a4050"}
+              strokeWidth="2.5" strokeDasharray="5,3">
+              {done && <animate attributeName="stroke-dashoffset" values="24;0" dur="0.4s" repeatCount="indefinite"/>}
+            </line>
+            <polygon points="6,24 12,36 18,24" fill={done ? selected.warnaTepung : "#3a4050"}/>
+          </svg>
 
-            {/* Range flour bag */}
-            <div className="flex flex-col items-center gap-0.5 shrink-0">
-              <div className="relative" style={{ filter: done ? `drop-shadow(0 0 8px ${selected.warnaTepung}70)` : "none" }}>
+          {/* Range card */}
+          <div className="flex flex-col items-center gap-1 w-full max-w-[260px]">
+            <span className="text-[9px] font-body uppercase tracking-widest font-bold"
+              style={{ color: done ? selected.warnaTepung : "#4a5060" }}>Range</span>
+            <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-0.5 w-full transition-all duration-500"
+              style={{
+                borderColor: done ? selected.warnaGelap : "#2a3040",
+                background: done
+                  ? `linear-gradient(135deg, ${selected.bgFrom}dd, ${selected.bgTo}dd)`
+                  : "rgba(15,20,30,0.5)",
+                boxShadow: done ? `0 0 14px ${selected.warnaTepung}30` : "none",
+              }}>
+              <div className="relative" style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaTepung}80)` : "none" }}>
                 <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.2 }}>
-                  <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done} sz={78}/>
+                  <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done} sz={90}/>
                 </div>
                 <TepungJatuh color={selected.warnaTepung} active={spinning}/>
               </div>
-              <div className={`border rounded-lg px-1.5 py-0.5 text-center transition-all duration-500 ${done ? "bg-slate-800/70" : "bg-slate-900/40"}`}
-                style={{ borderColor: done ? `${selected.warnaGelap}60` : "#2a3040" }}>
-                <p className="text-[10px] font-bold font-body leading-tight" style={{ color: done ? selected.warnaTepung : "#4a5060" }}>
-                  {selected.produk}
-                </p>
-                <p className="text-[9px] font-body" style={{ color: done ? "rgba(255,255,255,0.45)" : "#3a4050" }}>
-                  {done ? selected.produkDesc : "Belum diolah"}
-                </p>
-              </div>
+              <p className="text-sm font-bold font-body" style={{ color: done ? selected.warnaTepung : "#4a5060" }}>
+                {selected.produk}
+              </p>
+              <p className="text-[10px] font-body" style={{ color: done ? "rgba(255,255,255,0.5)" : "#3a4050" }}>
+                {done ? selected.produkDesc : "Belum diolah"}
+              </p>
             </div>
           </div>
         </div>
@@ -592,18 +590,19 @@ export default function DiskMillMachine() {
         <div className="hidden sm:flex items-center justify-center gap-0 gap-x-2">
 
           {/* DOMAIN — grain */}
-          <div className="flex flex-col items-center gap-1 min-w-[120px]">
-            <span className="text-[10px] text-white/40 font-body uppercase tracking-widest">Domain</span>
-            <div className="relative flex items-center justify-center"
-              style={{ filter: `drop-shadow(0 0 8px ${selected.warna}60)` }}>
-              <div className={spinning ? "dmm-shake" : ""}>
-                <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine}/>
+          <div className="flex flex-col items-center gap-1 min-w-[130px]">
+            <span className="text-[10px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
+            <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-1 w-full"
+              style={{ borderColor: selected.warna, background: `linear-gradient(135deg, ${selected.bgFrom}, ${selected.bgTo})`, boxShadow: `0 0 14px ${selected.warna}35` }}>
+              <div className="relative flex items-center justify-center"
+                style={{ filter: `drop-shadow(0 0 8px ${selected.warna}70)` }}>
+                <div className={spinning ? "dmm-shake" : ""}>
+                  <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine}/>
+                </div>
+                <GrainFalling color={selected.warna} active={feeding}/>
               </div>
-              <GrainFalling color={selected.warna} active={feeding}/>
-            </div>
-            <div className="bg-slate-800/60 border rounded-lg px-2 py-1 text-center" style={{ borderColor: `${selected.warna}40` }}>
               <p className="text-xs font-bold font-body" style={{ color: selected.warnaShine }}>{selected.nama}</p>
-              <p className="text-[10px] text-white/40 font-body">Bahan Mentah</p>
+              <p className="text-[10px] font-body" style={{ color: `${selected.warna}bb` }}>Bahan Mentah</p>
             </div>
           </div>
 
@@ -643,17 +642,24 @@ export default function DiskMillMachine() {
           </div>
 
           {/* RANGE — flour bag */}
-          <div className="flex flex-col items-center gap-1 min-w-[120px]">
-            <span className="text-[10px] text-white/40 font-body uppercase tracking-widest">Range</span>
-            <div className="relative flex items-center justify-center"
-              style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaTepung}80)` : "none" }}>
-              <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.2 }}>
-                <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done}/>
+          <div className="flex flex-col items-center gap-1 min-w-[130px]">
+            <span className="text-[10px] font-body uppercase tracking-widest font-bold"
+              style={{ color: done ? selected.warnaTepung : "#4a5060" }}>Range</span>
+            <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-1 w-full transition-all duration-500"
+              style={{
+                borderColor: done ? selected.warnaGelap : "#2a3040",
+                background: done
+                  ? `linear-gradient(135deg, ${selected.bgFrom}dd, ${selected.bgTo}dd)`
+                  : "rgba(15,20,30,0.5)",
+                boxShadow: done ? `0 0 14px ${selected.warnaTepung}35` : "none",
+              }}>
+              <div className="relative flex items-center justify-center"
+                style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaTepung}80)` : "none" }}>
+                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.2 }}>
+                  <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done}/>
+                </div>
+                <TepungJatuh color={selected.warnaTepung} active={spinning}/>
               </div>
-              <TepungJatuh color={selected.warnaTepung} active={spinning}/>
-            </div>
-            <div className={`border rounded-lg px-2 py-1 text-center transition-all duration-500 ${done ? "bg-slate-800/70" : "bg-slate-900/40"}`}
-              style={{ borderColor: done ? `${selected.warnaGelap}60` : "#2a3040" }}>
               <p className="text-xs font-bold font-body" style={{ color: done ? selected.warnaTepung : "#4a5060" }}>
                 {selected.produk}
               </p>
