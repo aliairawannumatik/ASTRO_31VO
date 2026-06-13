@@ -383,7 +383,6 @@ const GrafikFungsiPage = () => {
                       <line x1={70} y1={70} x2={195} y2={70} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" />
                       <circle cx={195} cy={70} r="5" fill="#f97316" stroke="#fdba74" strokeWidth="1.5" />
                       <text x={192} y={210} fill="#f97316" fontSize="9" fontWeight="bold" textAnchor="middle">5</text>
-                      <text x={60} y={73} fill="#f97316" fontSize="9" fontWeight="bold" textAnchor="end">22</text>
                     </svg>
                     <p className="text-xs text-center text-slate-400 mt-1 font-body">Grafik tarif taksi berdasarkan jarak tempuh</p>
                   </div>
